@@ -31,20 +31,6 @@ name|RelNode
 import|;
 end_import
 
-begin_import
-import|import
-name|com
-operator|.
-name|google
-operator|.
-name|common
-operator|.
-name|base
-operator|.
-name|Function
-import|;
-end_import
-
 begin_comment
 comment|/**  * RelMetadataProvider defines an interface for obtaining metadata about  * relational expressions. This interface is weakly-typed and is not intended to  * be called directly in most contexts; instead, use a strongly-typed facade  * such as {@link RelMetadataQuery}.  *  *<p>For background and motivation, see<a  * href="http://wiki.eigenbase.org/RelationalExpressionMetadata">wiki</a>.  */
 end_comment
@@ -56,11 +42,14 @@ name|RelMetadataProvider
 block|{
 comment|//~ Methods ----------------------------------------------------------------
 comment|/**    * Retrieves metadata of a particular type and for a particular sub-class    * of relational expression.    *    *<p>The object returned is a function. It can be applied to a relational    * expression of the given type to create a metadata object.</p>    *    *<p>For example, you might call</p>    *    *<blockquote><pre>    * RelMetadataProvider provider;    * LogicalFilter filter;    * RexNode predicate;    * Function&lt;RelNode, Metadata&gt; function =    *   provider.apply(LogicalFilter.class, Selectivity.class};    * Selectivity selectivity = function.apply(filter);    * Double d = selectivity.selectivity(predicate);    *</pre></blockquote>    *    * @param relClass Type of relational expression    * @param metadataClass Type of metadata    * @return Function that will field a metadata instance; or null if this    *     provider cannot supply metadata of this type    */
-name|Function
-argument_list|<
-name|RelNode
-argument_list|,
+parameter_list|<
+name|M
+extends|extends
 name|Metadata
+parameter_list|>
+name|UnboundMetadata
+argument_list|<
+name|M
 argument_list|>
 name|apply
 parameter_list|(
@@ -76,7 +65,7 @@ name|Class
 argument_list|<
 name|?
 extends|extends
-name|Metadata
+name|M
 argument_list|>
 name|metadataClass
 parameter_list|)

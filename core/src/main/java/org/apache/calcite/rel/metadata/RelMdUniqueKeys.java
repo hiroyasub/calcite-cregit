@@ -342,12 +342,15 @@ parameter_list|(
 name|Filter
 name|rel
 parameter_list|,
+name|RelMetadataQuery
+name|mq
+parameter_list|,
 name|boolean
 name|ignoreNulls
 parameter_list|)
 block|{
 return|return
-name|RelMetadataQuery
+name|mq
 operator|.
 name|getUniqueKeys
 argument_list|(
@@ -370,12 +373,15 @@ parameter_list|(
 name|Sort
 name|rel
 parameter_list|,
+name|RelMetadataQuery
+name|mq
+parameter_list|,
 name|boolean
 name|ignoreNulls
 parameter_list|)
 block|{
 return|return
-name|RelMetadataQuery
+name|mq
 operator|.
 name|getUniqueKeys
 argument_list|(
@@ -398,12 +404,15 @@ parameter_list|(
 name|Correlate
 name|rel
 parameter_list|,
+name|RelMetadataQuery
+name|mq
+parameter_list|,
 name|boolean
 name|ignoreNulls
 parameter_list|)
 block|{
 return|return
-name|RelMetadataQuery
+name|mq
 operator|.
 name|getUniqueKeys
 argument_list|(
@@ -426,6 +435,9 @@ parameter_list|(
 name|Project
 name|rel
 parameter_list|,
+name|RelMetadataQuery
+name|mq
+parameter_list|,
 name|boolean
 name|ignoreNulls
 parameter_list|)
@@ -437,6 +449,7 @@ comment|// info from the child of a project when the mapping is f(a) => a.
 comment|//
 comment|// Further more, the unique bitset coming from the child needs
 comment|// to be mapped to match the output of the project.
+specifier|final
 name|Map
 argument_list|<
 name|Integer
@@ -450,6 +463,7 @@ name|HashMap
 argument_list|<>
 argument_list|()
 decl_stmt|;
+specifier|final
 name|List
 argument_list|<
 name|RexNode
@@ -461,6 +475,7 @@ operator|.
 name|getProjects
 argument_list|()
 decl_stmt|;
+specifier|final
 name|Set
 argument_list|<
 name|ImmutableBitSet
@@ -547,7 +562,7 @@ name|ImmutableBitSet
 argument_list|>
 name|childUniqueKeySet
 init|=
-name|RelMetadataQuery
+name|mq
 operator|.
 name|getUniqueKeys
 argument_list|(
@@ -665,6 +680,9 @@ parameter_list|(
 name|Join
 name|rel
 parameter_list|,
+name|RelMetadataQuery
+name|mq
+parameter_list|,
 name|boolean
 name|ignoreNulls
 parameter_list|)
@@ -695,6 +713,7 @@ comment|// NOTE zfong 12/18/06 - If the number of tables in a join is large,
 comment|// the number of combinations of unique key sets will explode.  If
 comment|// that is undesirable, use RelMetadataQuery.areColumnsUnique() as
 comment|// an alternative way of getting unique key information.
+specifier|final
 name|Set
 argument_list|<
 name|ImmutableBitSet
@@ -706,13 +725,14 @@ name|HashSet
 argument_list|<>
 argument_list|()
 decl_stmt|;
+specifier|final
 name|Set
 argument_list|<
 name|ImmutableBitSet
 argument_list|>
 name|leftSet
 init|=
-name|RelMetadataQuery
+name|mq
 operator|.
 name|getUniqueKeys
 argument_list|(
@@ -729,13 +749,14 @@ name|rightSet
 init|=
 literal|null
 decl_stmt|;
+specifier|final
 name|Set
 argument_list|<
 name|ImmutableBitSet
 argument_list|>
 name|tmpRightSet
 init|=
-name|RelMetadataQuery
+name|mq
 operator|.
 name|getUniqueKeys
 argument_list|(
@@ -867,10 +888,11 @@ argument_list|()
 decl_stmt|;
 comment|// determine if either or both the LHS and RHS are unique on the
 comment|// equijoin columns
+specifier|final
 name|Boolean
 name|leftUnique
 init|=
-name|RelMetadataQuery
+name|mq
 operator|.
 name|areColumnsUnique
 argument_list|(
@@ -884,10 +906,11 @@ argument_list|,
 name|ignoreNulls
 argument_list|)
 decl_stmt|;
+specifier|final
 name|Boolean
 name|rightUnique
 init|=
-name|RelMetadataQuery
+name|mq
 operator|.
 name|areColumnsUnique
 argument_list|(
@@ -991,6 +1014,9 @@ parameter_list|(
 name|SemiJoin
 name|rel
 parameter_list|,
+name|RelMetadataQuery
+name|mq
+parameter_list|,
 name|boolean
 name|ignoreNulls
 parameter_list|)
@@ -998,7 +1024,7 @@ block|{
 comment|// only return the unique keys from the LHS since a semijoin only
 comment|// returns the LHS
 return|return
-name|RelMetadataQuery
+name|mq
 operator|.
 name|getUniqueKeys
 argument_list|(
@@ -1020,6 +1046,9 @@ name|getUniqueKeys
 parameter_list|(
 name|Aggregate
 name|rel
+parameter_list|,
+name|RelMetadataQuery
+name|mq
 parameter_list|,
 name|boolean
 name|ignoreNulls
@@ -1047,6 +1076,9 @@ name|getUniqueKeys
 parameter_list|(
 name|SetOp
 name|rel
+parameter_list|,
+name|RelMetadataQuery
+name|mq
 parameter_list|,
 name|boolean
 name|ignoreNulls
@@ -1097,6 +1129,9 @@ name|getUniqueKeys
 parameter_list|(
 name|RelNode
 name|rel
+parameter_list|,
+name|RelMetadataQuery
+name|mq
 parameter_list|,
 name|boolean
 name|ignoreNulls

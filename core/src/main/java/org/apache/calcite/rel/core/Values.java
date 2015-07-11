@@ -437,7 +437,7 @@ block|}
 block|}
 decl_stmt|;
 comment|//~ Instance fields --------------------------------------------------------
-specifier|protected
+specifier|public
 specifier|final
 name|ImmutableList
 argument_list|<
@@ -682,7 +682,8 @@ return|return
 literal|true
 return|;
 block|}
-comment|// implement RelNode
+annotation|@
+name|Override
 specifier|protected
 name|RelDataType
 name|deriveRowType
@@ -692,19 +693,23 @@ return|return
 name|rowType
 return|;
 block|}
-comment|// implement RelNode
+annotation|@
+name|Override
 specifier|public
 name|RelOptCost
 name|computeSelfCost
 parameter_list|(
 name|RelOptPlanner
 name|planner
+parameter_list|,
+name|RelMetadataQuery
+name|mq
 parameter_list|)
 block|{
 name|double
 name|dRows
 init|=
-name|RelMetadataQuery
+name|mq
 operator|.
 name|getRowCount
 argument_list|(
@@ -741,8 +746,11 @@ block|}
 comment|// implement RelNode
 specifier|public
 name|double
-name|getRows
-parameter_list|()
+name|estimateRowCount
+parameter_list|(
+name|RelMetadataQuery
+name|mq
+parameter_list|)
 block|{
 return|return
 name|tuples

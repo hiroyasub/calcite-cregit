@@ -351,7 +351,35 @@ name|calcite
 operator|.
 name|util
 operator|.
+name|Bug
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|util
+operator|.
 name|ImmutableBitSet
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|util
+operator|.
+name|Util
 import|;
 end_import
 
@@ -1005,6 +1033,15 @@ name|getGroupSet
 argument_list|()
 decl_stmt|;
 specifier|final
+name|RelMetadataQuery
+name|mq
+init|=
+name|RelMetadataQuery
+operator|.
+name|instance
+argument_list|()
+decl_stmt|;
+specifier|final
 name|ImmutableBitSet
 name|keyColumns
 init|=
@@ -1012,7 +1049,7 @@ name|keyColumns
 argument_list|(
 name|aggregateColumns
 argument_list|,
-name|RelMetadataQuery
+name|mq
 operator|.
 name|getPulledUpPredicates
 argument_list|(
@@ -1307,13 +1344,22 @@ comment|// aggregate the inputs before the join, because there will not be
 comment|// any functions experiencing a cartesian product effect.
 comment|//
 comment|// But finding out whether the input is already unique requires a call
-comment|// to areColumnsUnique that currently (until [CALCITE-794] "Detect
-comment|// cycles when computing statistics" is fixed) places a heavy load on
+comment|// to areColumnsUnique that currently (until [CALCITE-1048] "Make
+comment|// metadata more robust" is fixed) places a heavy load on
 comment|// the metadata system.
 comment|//
 comment|// So we choose to imagine the the input is already unique, which is
 comment|// untrue but harmless.
 comment|//
+name|Util
+operator|.
+name|discard
+argument_list|(
+name|Bug
+operator|.
+name|CALCITE_1048_FIXED
+argument_list|)
+expr_stmt|;
 name|unique
 operator|=
 literal|true
@@ -1325,7 +1371,7 @@ specifier|final
 name|Boolean
 name|unique0
 init|=
-name|RelMetadataQuery
+name|mq
 operator|.
 name|areColumnsUnique
 argument_list|(

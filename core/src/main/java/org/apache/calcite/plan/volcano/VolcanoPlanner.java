@@ -4806,7 +4806,7 @@ init|=
 literal|0
 decl_stmt|;
 specifier|final
-name|HashSet
+name|Set
 argument_list|<
 name|RelSubset
 argument_list|>
@@ -4958,7 +4958,7 @@ name|injectImportanceBoost
 parameter_list|()
 block|{
 specifier|final
-name|HashSet
+name|Set
 argument_list|<
 name|RelSubset
 argument_list|>
@@ -5247,6 +5247,15 @@ name|void
 name|validate
 parameter_list|()
 block|{
+specifier|final
+name|RelMetadataQuery
+name|mq
+init|=
+name|RelMetadataQuery
+operator|.
+name|instance
+argument_list|()
+decl_stmt|;
 for|for
 control|(
 name|RelSet
@@ -5331,6 +5340,8 @@ init|=
 name|getCost
 argument_list|(
 name|rel
+argument_list|,
+name|mq
 argument_list|)
 decl_stmt|;
 if|if
@@ -5544,6 +5555,9 @@ name|getCost
 parameter_list|(
 name|RelNode
 name|rel
+parameter_list|,
+name|RelMetadataQuery
+name|mq
 parameter_list|)
 block|{
 assert|assert
@@ -5600,7 +5614,7 @@ block|}
 name|RelOptCost
 name|cost
 init|=
-name|RelMetadataQuery
+name|mq
 operator|.
 name|getNonCumulativeCost
 argument_list|(
@@ -5647,6 +5661,8 @@ argument_list|(
 name|getCost
 argument_list|(
 name|input
+argument_list|,
+name|mq
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -6411,6 +6427,15 @@ name|PrintWriter
 name|pw
 parameter_list|)
 block|{
+specifier|final
+name|RelMetadataQuery
+name|mq
+init|=
+name|RelMetadataQuery
+operator|.
+name|instance
+argument_list|()
+decl_stmt|;
 name|pw
 operator|.
 name|println
@@ -6804,7 +6829,7 @@ name|print
 argument_list|(
 literal|", rowcount="
 operator|+
-name|RelMetadataQuery
+name|mq
 operator|.
 name|getRowCount
 argument_list|(
@@ -6821,6 +6846,8 @@ operator|+
 name|getCost
 argument_list|(
 name|rel
+argument_list|,
+name|mq
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -7890,6 +7917,11 @@ operator|.
 name|INSTANCE
 argument_list|)
 decl_stmt|;
+assert|assert
+name|convention
+operator|!=
+literal|null
+assert|;
 if|if
 condition|(
 operator|!
@@ -8721,11 +8753,22 @@ comment|// a subset with a single rel of cost 99 which thinks its best cost is
 comment|// 100. We think this happens because the back-links to parents are
 comment|// not established. So, give the subset another change to figure out
 comment|// its cost.
+specifier|final
+name|RelMetadataQuery
+name|mq
+init|=
+name|RelMetadataQuery
+operator|.
+name|instance
+argument_list|()
+decl_stmt|;
 name|subset
 operator|.
 name|propagateCostImprovements
 argument_list|(
 name|this
+argument_list|,
+name|mq
 argument_list|,
 name|rel
 argument_list|,

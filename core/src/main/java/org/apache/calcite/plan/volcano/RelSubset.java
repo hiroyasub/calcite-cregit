@@ -512,6 +512,15 @@ operator|.
 name|makeInfiniteCost
 argument_list|()
 expr_stmt|;
+specifier|final
+name|RelMetadataQuery
+name|mq
+init|=
+name|RelMetadataQuery
+operator|.
+name|instance
+argument_list|()
+decl_stmt|;
 for|for
 control|(
 name|RelNode
@@ -530,6 +539,8 @@ operator|.
 name|getCost
 argument_list|(
 name|rel
+argument_list|,
+name|mq
 argument_list|)
 decl_stmt|;
 if|if
@@ -564,6 +575,17 @@ return|;
 block|}
 specifier|public
 name|RelNode
+name|getOriginal
+parameter_list|()
+block|{
+return|return
+name|set
+operator|.
+name|rel
+return|;
+block|}
+specifier|public
+name|RelNode
 name|copy
 parameter_list|(
 name|RelTraitSet
@@ -588,6 +610,9 @@ name|computeSelfCost
 parameter_list|(
 name|RelOptPlanner
 name|planner
+parameter_list|,
+name|RelMetadataQuery
+name|mq
 parameter_list|)
 block|{
 return|return
@@ -602,8 +627,11 @@ return|;
 block|}
 specifier|public
 name|double
-name|getRows
-parameter_list|()
+name|estimateRowCount
+parameter_list|(
+name|RelMetadataQuery
+name|mq
+parameter_list|)
 block|{
 if|if
 condition|(
@@ -613,7 +641,7 @@ literal|null
 condition|)
 block|{
 return|return
-name|RelMetadataQuery
+name|mq
 operator|.
 name|getRowCount
 argument_list|(
@@ -624,7 +652,7 @@ block|}
 else|else
 block|{
 return|return
-name|RelMetadataQuery
+name|mq
 operator|.
 name|getRowCount
 argument_list|(
@@ -789,9 +817,7 @@ name|list
 init|=
 operator|new
 name|LinkedHashSet
-argument_list|<
-name|RelNode
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 for|for
@@ -869,9 +895,7 @@ name|list
 init|=
 operator|new
 name|LinkedHashSet
-argument_list|<
-name|RelSubset
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 for|for
@@ -981,9 +1005,7 @@ name|list
 init|=
 operator|new
 name|LinkedHashSet
-argument_list|<
-name|RelNode
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 name|parentLoop
@@ -1318,12 +1340,15 @@ return|return
 name|cheapest
 return|;
 block|}
-comment|/**    * Checks whether a relexp has made its subset cheaper, and if it so,    * recursively checks whether that subset's parents have gotten cheaper.    *    * @param planner   Planner    * @param rel       Relational expression whose cost has improved    * @param activeSet Set of active subsets, for cycle detection    */
+comment|/**    * Checks whether a relexp has made its subset cheaper, and if it so,    * recursively checks whether that subset's parents have gotten cheaper.    *    * @param planner   Planner    * @param mq        Metadata query    * @param rel       Relational expression whose cost has improved    * @param activeSet Set of active subsets, for cycle detection    */
 name|void
 name|propagateCostImprovements
 parameter_list|(
 name|VolcanoPlanner
 name|planner
+parameter_list|,
+name|RelMetadataQuery
+name|mq
 parameter_list|,
 name|RelNode
 name|rel
@@ -1366,6 +1391,8 @@ name|propagateCostImprovements0
 argument_list|(
 name|planner
 argument_list|,
+name|mq
+argument_list|,
 name|rel
 argument_list|,
 name|activeSet
@@ -1379,6 +1406,9 @@ name|propagateCostImprovements0
 parameter_list|(
 name|VolcanoPlanner
 name|planner
+parameter_list|,
+name|RelMetadataQuery
+name|mq
 parameter_list|,
 name|RelNode
 name|rel
@@ -1429,6 +1459,8 @@ operator|.
 name|getCost
 argument_list|(
 name|rel
+argument_list|,
+name|mq
 argument_list|)
 decl_stmt|;
 if|if
@@ -1515,6 +1547,8 @@ operator|.
 name|propagateCostImprovements
 argument_list|(
 name|planner
+argument_list|,
+name|mq
 argument_list|,
 name|parent
 argument_list|,
@@ -1729,9 +1763,7 @@ name|list
 init|=
 operator|new
 name|ArrayList
-argument_list|<
-name|RelNode
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 for|for
@@ -1989,9 +2021,7 @@ name|inputs
 init|=
 operator|new
 name|ArrayList
-argument_list|<
-name|RelNode
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 for|for

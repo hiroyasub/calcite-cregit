@@ -32,41 +32,34 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Source of metadata about relational expressions.  *  *<p>The metadata is typically various kinds of statistics used to estimate  * costs.</p>  *  *<p>Each kind of metadata has an interface that extends {@link Metadata} and  * has a method. Some examples: {@link BuiltInMetadata.Selectivity},  * {@link BuiltInMetadata.ColumnUniqueness}.</p>  */
+comment|/**  * Metadata that needs to be bound to a {@link RelNode} and  * {@link RelMetadataQuery} before it can be used.  *  * @param<M> Metadata type  */
 end_comment
 
 begin_interface
 specifier|public
 interface|interface
-name|MetadataFactory
-block|{
-comment|/** Returns a metadata interface to get a particular kind of metadata    * from a particular relational expression. Returns null if that kind of    * metadata is not available.    *    * @param<M> Metadata type    *    * @param rel Relational expression    * @param mq Metadata query    * @param metadataClazz Metadata class    * @return Metadata bound to {@code rel} and {@code query}    */
+name|UnboundMetadata
 parameter_list|<
 name|M
 extends|extends
 name|Metadata
 parameter_list|>
+block|{
 name|M
-name|query
+name|bind
 parameter_list|(
 name|RelNode
 name|rel
 parameter_list|,
 name|RelMetadataQuery
 name|mq
-parameter_list|,
-name|Class
-argument_list|<
-name|M
-argument_list|>
-name|metadataClazz
 parameter_list|)
 function_decl|;
 block|}
 end_interface
 
 begin_comment
-comment|// End MetadataFactory.java
+comment|// End UnboundMetadata.java
 end_comment
 
 end_unit

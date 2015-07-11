@@ -1218,12 +1218,23 @@ comment|// See if the join keys are unique.  Because the keys are
 comment|// part of an equality join condition, nulls are filtered out
 comment|// by the join.  So, it's ok if there are nulls in the join
 comment|// keys.
+specifier|final
+name|RelMetadataQuery
+name|mq
+init|=
+name|RelMetadataQuery
+operator|.
+name|instance
+argument_list|()
+decl_stmt|;
 if|if
 condition|(
 name|RelMdUtil
 operator|.
 name|areColumnsDefinitelyUniqueWhenNullsFiltered
 argument_list|(
+name|mq
+argument_list|,
 name|multiJoin
 operator|.
 name|getJoinFactor
@@ -1674,6 +1685,7 @@ name|keySet
 argument_list|()
 control|)
 block|{
+specifier|final
 name|int
 name|factor2
 init|=
@@ -1834,6 +1846,15 @@ return|return
 name|returnList
 return|;
 block|}
+specifier|final
+name|RelMetadataQuery
+name|mq
+init|=
+name|RelMetadataQuery
+operator|.
+name|instance
+argument_list|()
+decl_stmt|;
 for|for
 control|(
 name|int
@@ -1890,7 +1911,7 @@ specifier|final
 name|RelOptTable
 name|table
 init|=
-name|RelMetadataQuery
+name|mq
 operator|.
 name|getTableOrigin
 argument_list|(
@@ -2133,9 +2154,20 @@ name|adjustments
 argument_list|)
 argument_list|)
 expr_stmt|;
+specifier|final
+name|RelMetadataQuery
+name|mq
+init|=
+name|RelMetadataQuery
+operator|.
+name|instance
+argument_list|()
+decl_stmt|;
 return|return
 name|areSelfJoinKeysUnique
 argument_list|(
+name|mq
+argument_list|,
 name|leftRel
 argument_list|,
 name|rightRel
@@ -2174,6 +2206,7 @@ name|ArrayList
 argument_list|<>
 argument_list|()
 decl_stmt|;
+specifier|final
 name|List
 argument_list|<
 name|String
@@ -2773,8 +2806,16 @@ return|;
 block|}
 else|else
 block|{
-return|return
+specifier|final
 name|RelMetadataQuery
+name|mq
+init|=
+name|semiJoinOpt
+operator|.
+name|mq
+decl_stmt|;
+return|return
+name|mq
 operator|.
 name|getDistinctRowCount
 argument_list|(
@@ -2943,6 +2984,7 @@ name|joinTree
 init|=
 literal|null
 decl_stmt|;
+specifier|final
 name|int
 name|nJoinFactors
 init|=
@@ -2951,6 +2993,7 @@ operator|.
 name|getNumJoinFactors
 argument_list|()
 decl_stmt|;
+specifier|final
 name|BitSet
 name|factorsToAdd
 init|=
@@ -2963,6 +3006,7 @@ argument_list|,
 name|nJoinFactors
 argument_list|)
 decl_stmt|;
+specifier|final
 name|BitSet
 name|factorsAdded
 init|=
@@ -3566,6 +3610,14 @@ name|boolean
 name|selfJoin
 parameter_list|)
 block|{
+specifier|final
+name|RelMetadataQuery
+name|mq
+init|=
+name|semiJoinOpt
+operator|.
+name|mq
+decl_stmt|;
 comment|// if the factor corresponds to the null generating factor in an outer
 comment|// join that can be removed, then create a replacement join
 if|if
@@ -3754,7 +3806,7 @@ condition|)
 block|{
 name|costPushDown
 operator|=
-name|RelMetadataQuery
+name|mq
 operator|.
 name|getCumulativeCost
 argument_list|(
@@ -3774,7 +3826,7 @@ condition|)
 block|{
 name|costTop
 operator|=
-name|RelMetadataQuery
+name|mq
 operator|.
 name|getCumulativeCost
 argument_list|(
@@ -4966,6 +5018,7 @@ argument_list|>
 name|origFields
 parameter_list|)
 block|{
+specifier|final
 name|List
 argument_list|<
 name|Integer
@@ -6675,10 +6728,20 @@ argument_list|()
 argument_list|)
 return|;
 block|}
+specifier|final
+name|RelMetadataQuery
+name|mq
+init|=
+name|RelMetadataQuery
+operator|.
+name|instance
+argument_list|()
+decl_stmt|;
+specifier|final
 name|Double
 name|leftRowCount
 init|=
-name|RelMetadataQuery
+name|mq
 operator|.
 name|getRowCount
 argument_list|(
@@ -6688,10 +6751,11 @@ name|getJoinTree
 argument_list|()
 argument_list|)
 decl_stmt|;
+specifier|final
 name|Double
 name|rightRowCount
 init|=
-name|RelMetadataQuery
+name|mq
 operator|.
 name|getRowCount
 argument_list|(
@@ -7119,10 +7183,19 @@ return|;
 block|}
 comment|// Make sure the join is between the same simple factor
 specifier|final
+name|RelMetadataQuery
+name|mq
+init|=
+name|RelMetadataQuery
+operator|.
+name|instance
+argument_list|()
+decl_stmt|;
+specifier|final
 name|RelOptTable
 name|leftTable
 init|=
-name|RelMetadataQuery
+name|mq
 operator|.
 name|getTableOrigin
 argument_list|(
@@ -7144,7 +7217,7 @@ specifier|final
 name|RelOptTable
 name|rightTable
 init|=
-name|RelMetadataQuery
+name|mq
 operator|.
 name|getTableOrigin
 argument_list|(
@@ -7187,6 +7260,8 @@ comment|// Determine if the join keys are identical and unique
 return|return
 name|areSelfJoinKeysUnique
 argument_list|(
+name|mq
+argument_list|,
 name|left
 argument_list|,
 name|right
@@ -7198,12 +7273,15 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-comment|/**    * Determines if the equality portion of a self-join condition is between    * identical keys that are unique.    *    * @param leftRel left side of the join    * @param rightRel right side of the join    * @param joinFilters the join condition    *    * @return true if the equality join keys are the same and unique    */
+comment|/**    * Determines if the equality portion of a self-join condition is between    * identical keys that are unique.    *    * @param mq Metadata query    * @param leftRel left side of the join    * @param rightRel right side of the join    * @param joinFilters the join condition    *    * @return true if the equality join keys are the same and unique    */
 specifier|private
 specifier|static
 name|boolean
 name|areSelfJoinKeysUnique
 parameter_list|(
+name|RelMetadataQuery
+name|mq
+parameter_list|,
 name|RelNode
 name|leftRel
 parameter_list|,
@@ -7246,7 +7324,7 @@ specifier|final
 name|RelColumnOrigin
 name|leftOrigin
 init|=
-name|RelMetadataQuery
+name|mq
 operator|.
 name|getColumnOrigin
 argument_list|(
@@ -7272,7 +7350,7 @@ specifier|final
 name|RelColumnOrigin
 name|rightOrigin
 init|=
-name|RelMetadataQuery
+name|mq
 operator|.
 name|getColumnOrigin
 argument_list|(
@@ -7321,6 +7399,8 @@ name|RelMdUtil
 operator|.
 name|areColumnsDefinitelyUniqueWhenNullsFiltered
 argument_list|(
+name|mq
+argument_list|,
 name|leftRel
 argument_list|,
 name|joinInfo

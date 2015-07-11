@@ -233,13 +233,16 @@ name|getPercentageOriginalRows
 parameter_list|(
 name|Aggregate
 name|rel
+parameter_list|,
+name|RelMetadataQuery
+name|mq
 parameter_list|)
 block|{
 comment|// REVIEW jvs 28-Mar-2006: The assumption here seems to be that
 comment|// aggregation does not apply any filtering, so it does not modify the
 comment|// percentage.  That's very much oversimplified.
 return|return
-name|RelMetadataQuery
+name|mq
 operator|.
 name|getPercentageOriginalRows
 argument_list|(
@@ -256,6 +259,9 @@ name|getPercentageOriginalRows
 parameter_list|(
 name|Union
 name|rel
+parameter_list|,
+name|RelMetadataQuery
+name|mq
 parameter_list|)
 block|{
 name|double
@@ -290,7 +296,7 @@ block|{
 name|double
 name|rowCount
 init|=
-name|RelMetadataQuery
+name|mq
 operator|.
 name|getRowCount
 argument_list|(
@@ -300,7 +306,7 @@ decl_stmt|;
 name|double
 name|percentage
 init|=
-name|RelMetadataQuery
+name|mq
 operator|.
 name|getPercentageOriginalRows
 argument_list|(
@@ -341,6 +347,9 @@ name|getPercentageOriginalRows
 parameter_list|(
 name|Join
 name|rel
+parameter_list|,
+name|RelMetadataQuery
+name|mq
 parameter_list|)
 block|{
 comment|// Assume any single-table filter conditions have already
@@ -351,7 +360,7 @@ comment|// REVIEW jvs 28-Mar-2006:  need any special casing for SemiJoin?
 name|double
 name|left
 init|=
-name|RelMetadataQuery
+name|mq
 operator|.
 name|getPercentageOriginalRows
 argument_list|(
@@ -364,7 +373,7 @@ decl_stmt|;
 name|double
 name|right
 init|=
-name|RelMetadataQuery
+name|mq
 operator|.
 name|getPercentageOriginalRows
 argument_list|(
@@ -387,6 +396,9 @@ name|getPercentageOriginalRows
 parameter_list|(
 name|RelNode
 name|rel
+parameter_list|,
+name|RelMetadataQuery
+name|mq
 parameter_list|)
 block|{
 if|if
@@ -441,7 +453,7 @@ decl_stmt|;
 name|Double
 name|childPercentage
 init|=
-name|RelMetadataQuery
+name|mq
 operator|.
 name|getPercentageOriginalRows
 argument_list|(
@@ -467,14 +479,14 @@ name|relPercentage
 init|=
 name|quotientForPercentage
 argument_list|(
-name|RelMetadataQuery
+name|mq
 operator|.
 name|getRowCount
 argument_list|(
 name|rel
 argument_list|)
 argument_list|,
-name|RelMetadataQuery
+name|mq
 operator|.
 name|getRowCount
 argument_list|(
@@ -534,12 +546,15 @@ name|getCumulativeCost
 parameter_list|(
 name|RelNode
 name|rel
+parameter_list|,
+name|RelMetadataQuery
+name|mq
 parameter_list|)
 block|{
 name|RelOptCost
 name|cost
 init|=
-name|RelMetadataQuery
+name|mq
 operator|.
 name|getNonCumulativeCost
 argument_list|(
@@ -571,7 +586,7 @@ name|cost
 operator|.
 name|plus
 argument_list|(
-name|RelMetadataQuery
+name|mq
 operator|.
 name|getCumulativeCost
 argument_list|(
@@ -590,10 +605,13 @@ name|getCumulativeCost
 parameter_list|(
 name|EnumerableInterpreter
 name|rel
+parameter_list|,
+name|RelMetadataQuery
+name|mq
 parameter_list|)
 block|{
 return|return
-name|RelMetadataQuery
+name|mq
 operator|.
 name|getNonCumulativeCost
 argument_list|(
@@ -608,6 +626,9 @@ name|getNonCumulativeCost
 parameter_list|(
 name|RelNode
 name|rel
+parameter_list|,
+name|RelMetadataQuery
+name|mq
 parameter_list|)
 block|{
 return|return
@@ -622,6 +643,8 @@ argument_list|()
 operator|.
 name|getPlanner
 argument_list|()
+argument_list|,
+name|mq
 argument_list|)
 return|;
 block|}

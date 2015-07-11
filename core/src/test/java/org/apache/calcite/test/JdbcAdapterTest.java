@@ -787,21 +787,21 @@ name|explainContains
 argument_list|(
 literal|"PLAN=JdbcToEnumerableConverter\n"
 operator|+
-literal|"  JdbcProject(EMPNO=[$2], ENAME=[$3], DNAME=[$1], GRADE=[$6])\n"
+literal|"  JdbcProject(EMPNO=[$3], ENAME=[$4], DNAME=[$8], GRADE=[$0])\n"
 operator|+
-literal|"    JdbcJoin(condition=[=($5, $0)], joinType=[inner])\n"
+literal|"    JdbcJoin(condition=[AND(>($5, $1),<($5, $2))], joinType=[inner])\n"
 operator|+
-literal|"      JdbcProject(DEPTNO=[$0], DNAME=[$1])\n"
+literal|"      JdbcTableScan(table=[[SCOTT, SALGRADE]])\n"
 operator|+
-literal|"        JdbcTableScan(table=[[SCOTT, DEPT]])\n"
-operator|+
-literal|"      JdbcJoin(condition=[AND(>($2, $5),<($2, $6))], joinType=[inner])\n"
+literal|"      JdbcJoin(condition=[=($3, $4)], joinType=[inner])\n"
 operator|+
 literal|"        JdbcProject(EMPNO=[$0], ENAME=[$1], SAL=[$5], DEPTNO=[$7])\n"
 operator|+
 literal|"          JdbcTableScan(table=[[SCOTT, EMP]])\n"
 operator|+
-literal|"        JdbcTableScan(table=[[SCOTT, SALGRADE]])"
+literal|"        JdbcProject(DEPTNO=[$0], DNAME=[$1])\n"
+operator|+
+literal|"          JdbcTableScan(table=[[SCOTT, DEPT]])"
 argument_list|)
 operator|.
 name|runs
@@ -822,25 +822,21 @@ argument_list|)
 operator|.
 name|planHasSql
 argument_list|(
-literal|"SELECT \"t0\".\"EMPNO\", \"t0\".\"ENAME\", "
+literal|"SELECT \"t\".\"EMPNO\", \"t\".\"ENAME\", "
 operator|+
-literal|"\"t\".\"DNAME\", \"SALGRADE\".\"GRADE\"\n"
+literal|"\"t0\".\"DNAME\", \"SALGRADE\".\"GRADE\"\n"
 operator|+
-literal|"FROM (SELECT \"DEPTNO\", \"DNAME\"\n"
-operator|+
-literal|"FROM \"SCOTT\".\"DEPT\") AS \"t\"\n"
+literal|"FROM \"SCOTT\".\"SALGRADE\"\n"
 operator|+
 literal|"INNER JOIN ((SELECT \"EMPNO\", \"ENAME\", \"SAL\", \"DEPTNO\"\n"
 operator|+
-literal|"FROM \"SCOTT\".\"EMP\") AS \"t0\"\n"
+literal|"FROM \"SCOTT\".\"EMP\") AS \"t\"\n"
 operator|+
-literal|"INNER JOIN \"SCOTT\".\"SALGRADE\" "
+literal|"INNER JOIN (SELECT \"DEPTNO\", \"DNAME\"\n"
 operator|+
-literal|"ON \"t0\".\"SAL\"> \"SALGRADE\".\"LOSAL\" "
+literal|"FROM \"SCOTT\".\"DEPT\") AS \"t0\" ON \"t\".\"DEPTNO\" = \"t0\".\"DEPTNO\")"
 operator|+
-literal|"AND \"t0\".\"SAL\"< \"SALGRADE\".\"HISAL\") "
-operator|+
-literal|"ON \"t\".\"DEPTNO\" = \"t0\".\"DEPTNO\""
+literal|" ON \"SALGRADE\".\"LOSAL\"< \"t\".\"SAL\" AND \"SALGRADE\".\"HISAL\"> \"t\".\"SAL\""
 argument_list|)
 expr_stmt|;
 block|}

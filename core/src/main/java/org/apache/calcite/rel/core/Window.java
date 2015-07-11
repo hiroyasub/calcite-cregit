@@ -934,12 +934,17 @@ return|return
 name|constants
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelOptCost
 name|computeSelfCost
 parameter_list|(
 name|RelOptPlanner
 name|planner
+parameter_list|,
+name|RelMetadataQuery
+name|mq
 parameter_list|)
 block|{
 comment|// Cost is proportional to the number of rows and the number of
@@ -952,7 +957,7 @@ specifier|final
 name|double
 name|rowsIn
 init|=
-name|RelMetadataQuery
+name|mq
 operator|.
 name|getRowCount
 argument_list|(

@@ -616,9 +616,7 @@ name|newInputs
 init|=
 operator|new
 name|ArrayList
-argument_list|<
-name|RelNode
-argument_list|>
+argument_list|<>
 argument_list|(
 name|inputs
 argument_list|)
@@ -649,10 +647,13 @@ annotation|@
 name|Override
 specifier|public
 name|double
-name|getRows
-parameter_list|()
+name|estimateRowCount
+parameter_list|(
+name|RelMetadataQuery
+name|mq
+parameter_list|)
 block|{
-comment|// Calculate result as the sum of the input rowcount estimates,
+comment|// Calculate result as the sum of the input row count estimates,
 comment|// assuming there are any, otherwise use the superclass default.  So
 comment|// for a no-input UDX, behave like an AbstractRelNode; for a one-input
 comment|// UDX, behave like a SingleRel; for a multi-input UDX, behave like
@@ -670,8 +671,10 @@ block|{
 return|return
 name|super
 operator|.
-name|getRows
-argument_list|()
+name|estimateRowCount
+argument_list|(
+name|mq
+argument_list|)
 return|;
 block|}
 name|double
@@ -690,7 +693,7 @@ block|{
 name|Double
 name|d
 init|=
-name|RelMetadataQuery
+name|mq
 operator|.
 name|getRowCount
 argument_list|(

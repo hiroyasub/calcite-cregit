@@ -178,12 +178,15 @@ annotation|@
 name|Override
 specifier|public
 name|double
-name|getRows
-parameter_list|()
+name|estimateRowCount
+parameter_list|(
+name|RelMetadataQuery
+name|mq
+parameter_list|)
 block|{
 comment|// Not necessarily correct, but a better default than AbstractRelNode's 1.0
 return|return
-name|RelMetadataQuery
+name|mq
 operator|.
 name|getRowCount
 argument_list|(

@@ -253,6 +253,9 @@ name|computeSelfCost
 parameter_list|(
 name|RelOptPlanner
 name|planner
+parameter_list|,
+name|RelMetadataQuery
+name|mq
 parameter_list|)
 block|{
 comment|// HepRelMetadataProvider is supposed to intercept this
@@ -271,11 +274,14 @@ annotation|@
 name|Override
 specifier|public
 name|double
-name|getRows
-parameter_list|()
+name|estimateRowCount
+parameter_list|(
+name|RelMetadataQuery
+name|mq
+parameter_list|)
 block|{
 return|return
-name|RelMetadataQuery
+name|mq
 operator|.
 name|getRowCount
 argument_list|(

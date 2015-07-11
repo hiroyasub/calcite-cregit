@@ -471,6 +471,20 @@ name|google
 operator|.
 name|common
 operator|.
+name|base
+operator|.
+name|Preconditions
+import|;
+end_import
+
+begin_import
+import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
 name|collect
 operator|.
 name|ImmutableList
@@ -535,20 +549,6 @@ end_import
 
 begin_import
 import|import
-name|com
-operator|.
-name|google
-operator|.
-name|common
-operator|.
-name|collect
-operator|.
-name|Sets
-import|;
-end_import
-
-begin_import
-import|import
 name|java
 operator|.
 name|util
@@ -607,6 +607,16 @@ name|SortedSet
 import|;
 end_import
 
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|TreeSet
+import|;
+end_import
+
 begin_comment
 comment|/**  * RelMdCollation supplies a default implementation of  * {@link org.apache.calcite.rel.metadata.RelMetadataQuery#collations}  * for the standard logical algebra.  */
 end_comment
@@ -644,7 +654,7 @@ parameter_list|()
 block|{
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|/** Fallback method to deduce collations for any relational expression not    * handled by a more specific method.    *    *<p>{@link org.apache.calcite.rel.core.Union},    * {@link org.apache.calcite.rel.core.Intersect},    * {@link org.apache.calcite.rel.core.Minus},    * {@link org.apache.calcite.rel.core.Join},    * {@link org.apache.calcite.rel.core.SemiJoin},    * {@link org.apache.calcite.rel.core.Correlate}    * do not in general return sorted results    * (but implementations using particular algorithms may).    *    * @param rel Relational expression    * @return Relational expression's collations    */
+comment|/** Catch-all implementation for    * {@link BuiltInMetadata.Collation#collations()},    * invoked using reflection, for any relational expression not    * handled by a more specific method.    *    *<p>{@link org.apache.calcite.rel.core.Union},    * {@link org.apache.calcite.rel.core.Intersect},    * {@link org.apache.calcite.rel.core.Minus},    * {@link org.apache.calcite.rel.core.Join},    * {@link org.apache.calcite.rel.core.SemiJoin},    * {@link org.apache.calcite.rel.core.Correlate}    * do not in general return sorted results    * (but implementations using particular algorithms may).    *    * @param rel Relational expression    * @return Relational expression's collations    *    * @see org.apache.calcite.rel.metadata.RelMetadataQuery#collations(RelNode)    */
 specifier|public
 name|ImmutableList
 argument_list|<
@@ -654,6 +664,9 @@ name|collations
 parameter_list|(
 name|RelNode
 name|rel
+parameter_list|,
+name|RelMetadataQuery
+name|mq
 parameter_list|)
 block|{
 return|return
@@ -672,6 +685,9 @@ name|collations
 parameter_list|(
 name|Window
 name|rel
+parameter_list|,
+name|RelMetadataQuery
+name|mq
 parameter_list|)
 block|{
 return|return
@@ -681,6 +697,8 @@ name|copyOf
 argument_list|(
 name|window
 argument_list|(
+name|mq
+argument_list|,
 name|rel
 operator|.
 name|getInput
@@ -702,10 +720,13 @@ name|collations
 parameter_list|(
 name|Filter
 name|rel
+parameter_list|,
+name|RelMetadataQuery
+name|mq
 parameter_list|)
 block|{
 return|return
-name|RelMetadataQuery
+name|mq
 operator|.
 name|collations
 argument_list|(
@@ -725,6 +746,9 @@ name|collations
 parameter_list|(
 name|TableScan
 name|scan
+parameter_list|,
+name|RelMetadataQuery
+name|mq
 parameter_list|)
 block|{
 return|return
@@ -751,6 +775,9 @@ name|collations
 parameter_list|(
 name|EnumerableMergeJoin
 name|join
+parameter_list|,
+name|RelMetadataQuery
+name|mq
 parameter_list|)
 block|{
 comment|// In general a join is not sorted. But a merge join preserves the sort
@@ -764,6 +791,8 @@ name|RelMdCollation
 operator|.
 name|mergeJoin
 argument_list|(
+name|mq
+argument_list|,
 name|join
 operator|.
 name|getLeft
@@ -796,6 +825,9 @@ name|collations
 parameter_list|(
 name|Sort
 name|sort
+parameter_list|,
+name|RelMetadataQuery
+name|mq
 parameter_list|)
 block|{
 return|return
@@ -824,6 +856,9 @@ name|collations
 parameter_list|(
 name|SortExchange
 name|sort
+parameter_list|,
+name|RelMetadataQuery
+name|mq
 parameter_list|)
 block|{
 return|return
@@ -852,6 +887,9 @@ name|collations
 parameter_list|(
 name|Project
 name|project
+parameter_list|,
+name|RelMetadataQuery
+name|mq
 parameter_list|)
 block|{
 return|return
@@ -861,6 +899,8 @@ name|copyOf
 argument_list|(
 name|project
 argument_list|(
+name|mq
+argument_list|,
 name|project
 operator|.
 name|getInput
@@ -883,6 +923,9 @@ name|collations
 parameter_list|(
 name|Values
 name|values
+parameter_list|,
+name|RelMetadataQuery
+name|mq
 parameter_list|)
 block|{
 return|return
@@ -892,6 +935,8 @@ name|copyOf
 argument_list|(
 name|values
 argument_list|(
+name|mq
+argument_list|,
 name|values
 operator|.
 name|getRowType
@@ -914,10 +959,13 @@ name|collations
 parameter_list|(
 name|HepRelVertex
 name|rel
+parameter_list|,
+name|RelMetadataQuery
+name|mq
 parameter_list|)
 block|{
 return|return
-name|RelMetadataQuery
+name|mq
 operator|.
 name|collations
 argument_list|(
@@ -937,12 +985,19 @@ name|collations
 parameter_list|(
 name|RelSubset
 name|rel
+parameter_list|,
+name|RelMetadataQuery
+name|mq
 parameter_list|)
 block|{
 return|return
 name|ImmutableList
 operator|.
 name|copyOf
+argument_list|(
+name|Preconditions
+operator|.
+name|checkNotNull
 argument_list|(
 name|rel
 operator|.
@@ -954,6 +1009,7 @@ argument_list|(
 name|RelCollationTraitDef
 operator|.
 name|INSTANCE
+argument_list|)
 argument_list|)
 argument_list|)
 return|;
@@ -1010,12 +1066,15 @@ name|RelCollation
 argument_list|>
 name|filter
 parameter_list|(
+name|RelMetadataQuery
+name|mq
+parameter_list|,
 name|RelNode
 name|input
 parameter_list|)
 block|{
 return|return
-name|RelMetadataQuery
+name|mq
 operator|.
 name|collations
 argument_list|(
@@ -1032,12 +1091,15 @@ name|RelCollation
 argument_list|>
 name|limit
 parameter_list|(
+name|RelMetadataQuery
+name|mq
+parameter_list|,
 name|RelNode
 name|input
 parameter_list|)
 block|{
 return|return
-name|RelMetadataQuery
+name|mq
 operator|.
 name|collations
 argument_list|(
@@ -1054,6 +1116,9 @@ name|RelCollation
 argument_list|>
 name|calc
 parameter_list|(
+name|RelMetadataQuery
+name|mq
+parameter_list|,
 name|RelNode
 name|input
 parameter_list|,
@@ -1066,7 +1131,7 @@ name|program
 operator|.
 name|getCollations
 argument_list|(
-name|RelMetadataQuery
+name|mq
 operator|.
 name|collations
 argument_list|(
@@ -1084,6 +1149,9 @@ name|RelCollation
 argument_list|>
 name|project
 parameter_list|(
+name|RelMetadataQuery
+name|mq
+parameter_list|,
 name|RelNode
 name|input
 parameter_list|,
@@ -1103,9 +1171,9 @@ name|RelCollation
 argument_list|>
 name|collations
 init|=
-name|Sets
-operator|.
-name|newTreeSet
+operator|new
+name|TreeSet
+argument_list|<>
 argument_list|()
 decl_stmt|;
 specifier|final
@@ -1115,7 +1183,7 @@ name|RelCollation
 argument_list|>
 name|inputCollations
 init|=
-name|RelMetadataQuery
+name|mq
 operator|.
 name|collations
 argument_list|(
@@ -1285,9 +1353,9 @@ name|RelFieldCollation
 argument_list|>
 name|fieldCollations
 init|=
-name|Lists
-operator|.
-name|newArrayList
+operator|new
+name|ArrayList
+argument_list|<>
 argument_list|()
 decl_stmt|;
 name|loop
@@ -1516,6 +1584,9 @@ name|RelCollation
 argument_list|>
 name|window
 parameter_list|(
+name|RelMetadataQuery
+name|mq
+parameter_list|,
 name|RelNode
 name|input
 parameter_list|,
@@ -1529,7 +1600,7 @@ name|groups
 parameter_list|)
 block|{
 return|return
-name|RelMetadataQuery
+name|mq
 operator|.
 name|collations
 argument_list|(
@@ -1546,6 +1617,9 @@ name|RelCollation
 argument_list|>
 name|values
 parameter_list|(
+name|RelMetadataQuery
+name|mq
+parameter_list|,
 name|RelDataType
 name|rowType
 parameter_list|,
@@ -1559,6 +1633,14 @@ argument_list|>
 name|tuples
 parameter_list|)
 block|{
+name|Util
+operator|.
+name|discard
+argument_list|(
+name|mq
+argument_list|)
+expr_stmt|;
+comment|// for future use
 specifier|final
 name|List
 argument_list|<
@@ -1986,6 +2068,9 @@ name|RelCollation
 argument_list|>
 name|mergeJoin
 parameter_list|(
+name|RelMetadataQuery
+name|mq
+parameter_list|,
 name|RelNode
 name|left
 parameter_list|,
@@ -2020,7 +2105,7 @@ name|RelCollation
 argument_list|>
 name|leftCollations
 init|=
-name|RelMetadataQuery
+name|mq
 operator|.
 name|collations
 argument_list|(
@@ -2053,7 +2138,7 @@ name|RelCollation
 argument_list|>
 name|rightCollations
 init|=
-name|RelMetadataQuery
+name|mq
 operator|.
 name|collations
 argument_list|(

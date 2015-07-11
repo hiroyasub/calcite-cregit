@@ -25,7 +25,7 @@ interface|interface
 name|RelOptCost
 block|{
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**    * @return number of rows processed; this should not be confused with the    * row count produced by a relational expression    * ({@link org.apache.calcite.rel.RelNode#getRows})    */
+comment|/**    * @return number of rows processed; this should not be confused with the    * row count produced by a relational expression    * ({@link org.apache.calcite.rel.RelNode#estimateRowCount})    */
 name|double
 name|getRows
 parameter_list|()

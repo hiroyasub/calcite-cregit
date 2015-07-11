@@ -95,32 +95,38 @@ parameter_list|()
 block|{
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|/** Catch-all implementation for    * {@link org.apache.calcite.rel.metadata.BuiltInMetadata.Memory#memory()},    * invoked using reflection.    *    * @see org.apache.calcite.rel.metadata.RelMetadataQuery#memory    */
+comment|/** Catch-all implementation for    * {@link BuiltInMetadata.Memory#memory()},    * invoked using reflection.    *    * @see org.apache.calcite.rel.metadata.RelMetadataQuery#memory    */
 specifier|public
 name|Double
 name|memory
 parameter_list|(
 name|RelNode
 name|rel
+parameter_list|,
+name|RelMetadataQuery
+name|mq
 parameter_list|)
 block|{
 return|return
 literal|null
 return|;
 block|}
-comment|/** Catch-all implementation for    * {@link org.apache.calcite.rel.metadata.BuiltInMetadata.Memory#cumulativeMemoryWithinPhase()},    * invoked using reflection.    *    * @see org.apache.calcite.rel.metadata.RelMetadataQuery#memory    */
+comment|/** Catch-all implementation for    * {@link BuiltInMetadata.Memory#cumulativeMemoryWithinPhase()},    * invoked using reflection.    *    * @see org.apache.calcite.rel.metadata.RelMetadataQuery#memory    */
 specifier|public
 name|Double
 name|cumulativeMemoryWithinPhase
 parameter_list|(
 name|RelNode
 name|rel
+parameter_list|,
+name|RelMetadataQuery
+name|mq
 parameter_list|)
 block|{
 name|Double
 name|nullable
 init|=
-name|RelMetadataQuery
+name|mq
 operator|.
 name|memory
 argument_list|(
@@ -141,7 +147,7 @@ block|}
 name|Boolean
 name|isPhaseTransition
 init|=
-name|RelMetadataQuery
+name|mq
 operator|.
 name|isPhaseTransition
 argument_list|(
@@ -183,7 +189,7 @@ control|)
 block|{
 name|nullable
 operator|=
-name|RelMetadataQuery
+name|mq
 operator|.
 name|cumulativeMemoryWithinPhase
 argument_list|(
@@ -211,20 +217,23 @@ return|return
 name|d
 return|;
 block|}
-comment|/** Catch-all implementation for    * {@link org.apache.calcite.rel.metadata.BuiltInMetadata.Memory#cumulativeMemoryWithinPhaseSplit()},    * invoked using reflection.    *    * @see org.apache.calcite.rel.metadata.RelMetadataQuery#cumulativeMemoryWithinPhaseSplit    */
+comment|/** Catch-all implementation for    * {@link BuiltInMetadata.Memory#cumulativeMemoryWithinPhaseSplit()},    * invoked using reflection.    *    * @see org.apache.calcite.rel.metadata.RelMetadataQuery#cumulativeMemoryWithinPhaseSplit    */
 specifier|public
 name|Double
 name|cumulativeMemoryWithinPhaseSplit
 parameter_list|(
 name|RelNode
 name|rel
+parameter_list|,
+name|RelMetadataQuery
+name|mq
 parameter_list|)
 block|{
 specifier|final
 name|Double
 name|memoryWithinPhase
 init|=
-name|RelMetadataQuery
+name|mq
 operator|.
 name|cumulativeMemoryWithinPhase
 argument_list|(
@@ -235,7 +244,7 @@ specifier|final
 name|Integer
 name|splitCount
 init|=
-name|RelMetadataQuery
+name|mq
 operator|.
 name|splitCount
 argument_list|(

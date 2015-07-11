@@ -157,6 +157,22 @@ name|calcite
 operator|.
 name|rel
 operator|.
+name|metadata
+operator|.
+name|RelMetadataQuery
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
 name|type
 operator|.
 name|RelDataType
@@ -474,6 +490,9 @@ name|computeSelfCost
 parameter_list|(
 name|RelOptPlanner
 name|planner
+parameter_list|,
+name|RelMetadataQuery
+name|mq
 parameter_list|)
 block|{
 comment|// REVIEW jvs 8-Jan-2006:  what is supposed to be here

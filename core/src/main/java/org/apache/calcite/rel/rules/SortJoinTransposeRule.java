@@ -211,6 +211,22 @@ name|RelMdUtil
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|metadata
+operator|.
+name|RelMetadataQuery
+import|;
+end_import
+
 begin_comment
 comment|/**  * Planner rule that pushes a {@link org.apache.calcite.rel.core.Sort} past a  * {@link org.apache.calcite.rel.core.Join}.  *  *<p>At the moment, we only consider left/right outer joins.  * However, an extension for full outer joins for this rule could be envisioned.  * Special attention should be paid to null values for correctness issues.  */
 end_comment
@@ -495,6 +511,15 @@ specifier|final
 name|RelNode
 name|newRightInput
 decl_stmt|;
+specifier|final
+name|RelMetadataQuery
+name|mq
+init|=
+name|RelMetadataQuery
+operator|.
+name|instance
+argument_list|()
+decl_stmt|;
 if|if
 condition|(
 name|join
@@ -515,6 +540,8 @@ name|RelMdUtil
 operator|.
 name|checkInputForCollationAndLimit
 argument_list|(
+name|mq
+argument_list|,
 name|join
 operator|.
 name|getLeft
@@ -618,6 +645,8 @@ name|RelMdUtil
 operator|.
 name|checkInputForCollationAndLimit
 argument_list|(
+name|mq
+argument_list|,
 name|join
 operator|.
 name|getRight

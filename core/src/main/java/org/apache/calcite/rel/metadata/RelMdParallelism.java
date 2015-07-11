@@ -137,13 +137,16 @@ parameter_list|()
 block|{
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|/** Catch-all implementation for    * {@link org.apache.calcite.rel.metadata.BuiltInMetadata.Parallelism#isPhaseTransition()},    * invoked using reflection.    *    * @see org.apache.calcite.rel.metadata.RelMetadataQuery#isPhaseTransition    */
+comment|/** Catch-all implementation for    * {@link BuiltInMetadata.Parallelism#isPhaseTransition()},    * invoked using reflection.    *    * @see org.apache.calcite.rel.metadata.RelMetadataQuery#isPhaseTransition    */
 specifier|public
 name|Boolean
 name|isPhaseTransition
 parameter_list|(
 name|RelNode
 name|rel
+parameter_list|,
+name|RelMetadataQuery
+name|mq
 parameter_list|)
 block|{
 return|return
@@ -156,6 +159,9 @@ name|isPhaseTransition
 parameter_list|(
 name|TableScan
 name|rel
+parameter_list|,
+name|RelMetadataQuery
+name|mq
 parameter_list|)
 block|{
 return|return
@@ -168,6 +174,9 @@ name|isPhaseTransition
 parameter_list|(
 name|Values
 name|rel
+parameter_list|,
+name|RelMetadataQuery
+name|mq
 parameter_list|)
 block|{
 return|return
@@ -180,19 +189,25 @@ name|isPhaseTransition
 parameter_list|(
 name|Exchange
 name|rel
+parameter_list|,
+name|RelMetadataQuery
+name|mq
 parameter_list|)
 block|{
 return|return
 literal|true
 return|;
 block|}
-comment|/** Catch-all implementation for    * {@link org.apache.calcite.rel.metadata.BuiltInMetadata.Parallelism#splitCount()},    * invoked using reflection.    *    * @see org.apache.calcite.rel.metadata.RelMetadataQuery#splitCount    */
+comment|/** Catch-all implementation for    * {@link BuiltInMetadata.Parallelism#splitCount()},    * invoked using reflection.    *    * @see org.apache.calcite.rel.metadata.RelMetadataQuery#splitCount    */
 specifier|public
 name|Integer
 name|splitCount
 parameter_list|(
 name|RelNode
 name|rel
+parameter_list|,
+name|RelMetadataQuery
+name|mq
 parameter_list|)
 block|{
 return|return

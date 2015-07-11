@@ -214,14 +214,17 @@ name|values
 init|=
 operator|new
 name|ArrayList
-argument_list|<
-name|Pair
-argument_list|<
-name|String
-argument_list|,
-name|Object
-argument_list|>
-argument_list|>
+argument_list|<>
+argument_list|()
+decl_stmt|;
+specifier|protected
+specifier|final
+name|RelMetadataQuery
+name|mq
+init|=
+name|RelMetadataQuery
+operator|.
+name|instance
 argument_list|()
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
@@ -310,7 +313,7 @@ decl_stmt|;
 if|if
 condition|(
 operator|!
-name|RelMetadataQuery
+name|mq
 operator|.
 name|isVisibleInExplain
 argument_list|(
@@ -497,7 +500,7 @@ argument_list|)
 operator|.
 name|append
 argument_list|(
-name|RelMetadataQuery
+name|mq
 operator|.
 name|getRowCount
 argument_list|(
@@ -512,7 +515,7 @@ argument_list|)
 operator|.
 name|append
 argument_list|(
-name|RelMetadataQuery
+name|mq
 operator|.
 name|getCumulativeCost
 argument_list|(

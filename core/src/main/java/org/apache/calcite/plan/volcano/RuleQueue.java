@@ -81,6 +81,22 @@ name|apache
 operator|.
 name|calcite
 operator|.
+name|rel
+operator|.
+name|metadata
+operator|.
+name|RelMetadataQuery
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
 name|util
 operator|.
 name|ChunkList
@@ -1466,6 +1482,15 @@ expr_stmt|;
 block|}
 else|else
 block|{
+specifier|final
+name|RelMetadataQuery
+name|mq
+init|=
+name|RelMetadataQuery
+operator|.
+name|instance
+argument_list|()
+decl_stmt|;
 comment|// The importance of a subset is the max of its importance to its
 comment|// parents
 name|importance
@@ -1491,6 +1516,8 @@ name|childImportance
 init|=
 name|computeImportanceOfChild
 argument_list|(
+name|mq
+argument_list|,
 name|subset
 argument_list|,
 name|parent
@@ -2238,6 +2265,9 @@ specifier|private
 name|double
 name|computeImportanceOfChild
 parameter_list|(
+name|RelMetadataQuery
+name|mq
+parameter_list|,
 name|RelSubset
 name|child
 parameter_list|,
@@ -2265,6 +2295,8 @@ operator|.
 name|getCost
 argument_list|(
 name|child
+argument_list|,
+name|mq
 argument_list|)
 argument_list|)
 decl_stmt|;
@@ -2279,6 +2311,8 @@ operator|.
 name|getCost
 argument_list|(
 name|parent
+argument_list|,
+name|mq
 argument_list|)
 argument_list|)
 decl_stmt|;
@@ -2655,9 +2689,7 @@ name|list
 init|=
 operator|new
 name|ChunkList
-argument_list|<
-name|VolcanoRuleMatch
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 comment|/**      * A set of rule-match names contained in {@link #list}. Allows fast      * detection of duplicate rule-matches.      */

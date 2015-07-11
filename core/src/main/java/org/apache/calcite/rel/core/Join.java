@@ -833,13 +833,16 @@ name|computeSelfCost
 parameter_list|(
 name|RelOptPlanner
 name|planner
+parameter_list|,
+name|RelMetadataQuery
+name|mq
 parameter_list|)
 block|{
 comment|// REVIEW jvs 9-Apr-2006:  Just for now...
 name|double
 name|rowCount
 init|=
-name|RelMetadataQuery
+name|mq
 operator|.
 name|getRowCount
 argument_list|(
@@ -862,7 +865,7 @@ literal|0
 argument_list|)
 return|;
 block|}
-comment|/** @deprecated Use {@link RelMdUtil#getJoinRowCount(Join, RexNode)}. */
+comment|/** @deprecated Use {@link RelMdUtil#getJoinRowCount(RelMetadataQuery, Join, RexNode)}. */
 annotation|@
 name|Deprecated
 comment|// to be removed before 2.0
@@ -878,6 +881,15 @@ name|RexNode
 name|condition
 parameter_list|)
 block|{
+specifier|final
+name|RelMetadataQuery
+name|mq
+init|=
+name|RelMetadataQuery
+operator|.
+name|instance
+argument_list|()
+decl_stmt|;
 return|return
 name|Util
 operator|.
@@ -887,6 +899,8 @@ name|RelMdUtil
 operator|.
 name|getJoinRowCount
 argument_list|(
+name|mq
+argument_list|,
 name|joinRel
 argument_list|,
 name|condition
@@ -900,8 +914,11 @@ annotation|@
 name|Override
 specifier|public
 name|double
-name|getRows
-parameter_list|()
+name|estimateRowCount
+parameter_list|(
+name|RelMetadataQuery
+name|mq
+parameter_list|)
 block|{
 return|return
 name|Util
@@ -912,6 +929,8 @@ name|RelMdUtil
 operator|.
 name|getJoinRowCount
 argument_list|(
+name|mq
+argument_list|,
 name|this
 argument_list|,
 name|condition

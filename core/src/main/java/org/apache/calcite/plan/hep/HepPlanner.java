@@ -781,11 +781,7 @@ name|mapDigestToVertex
 operator|=
 operator|new
 name|HashMap
-argument_list|<
-name|String
-argument_list|,
-name|HepRelVertex
-argument_list|>
+argument_list|<>
 argument_list|()
 expr_stmt|;
 name|graph
@@ -801,9 +797,7 @@ name|allRules
 operator|=
 operator|new
 name|LinkedHashSet
-argument_list|<
-name|RelOptRule
-argument_list|>
+argument_list|<>
 argument_list|()
 expr_stmt|;
 name|this
@@ -1317,9 +1311,7 @@ name|ruleSet
 operator|=
 operator|new
 name|LinkedHashSet
-argument_list|<
-name|RelOptRule
-argument_list|>
+argument_list|<>
 argument_list|()
 expr_stmt|;
 for|for
@@ -1454,9 +1446,7 @@ name|ruleSet
 operator|=
 operator|new
 name|LinkedHashSet
-argument_list|<
-name|RelOptRule
-argument_list|>
+argument_list|<>
 argument_list|()
 expr_stmt|;
 for|for
@@ -1579,9 +1569,7 @@ name|ruleSet
 operator|=
 operator|new
 name|LinkedHashSet
-argument_list|<
-name|RelOptRule
-argument_list|>
+argument_list|<>
 argument_list|()
 expr_stmt|;
 for|for
@@ -2061,9 +2049,7 @@ name|list
 init|=
 operator|new
 name|ArrayList
-argument_list|<
-name|HepRelVertex
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 for|for
@@ -2214,9 +2200,7 @@ name|parents
 operator|=
 operator|new
 name|ArrayList
-argument_list|<
-name|RelNode
-argument_list|>
+argument_list|<>
 argument_list|()
 expr_stmt|;
 for|for
@@ -2239,6 +2223,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+specifier|final
 name|List
 argument_list|<
 name|RelNode
@@ -2247,11 +2232,10 @@ name|bindings
 init|=
 operator|new
 name|ArrayList
-argument_list|<
-name|RelNode
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
+specifier|final
 name|Map
 argument_list|<
 name|RelNode
@@ -2265,14 +2249,7 @@ name|nodeChildren
 init|=
 operator|new
 name|HashMap
-argument_list|<
-name|RelNode
-argument_list|,
-name|List
-argument_list|<
-name|RelNode
-argument_list|>
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 name|boolean
@@ -2497,6 +2474,7 @@ name|HepRelVertex
 name|vertex
 parameter_list|)
 block|{
+specifier|final
 name|List
 argument_list|<
 name|HepRelVertex
@@ -2505,11 +2483,10 @@ name|parents
 init|=
 operator|new
 name|ArrayList
-argument_list|<
-name|HepRelVertex
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
+specifier|final
 name|List
 argument_list|<
 name|HepRelVertex
@@ -2745,6 +2722,7 @@ literal|false
 return|;
 block|}
 block|}
+specifier|final
 name|List
 argument_list|<
 name|RelNode
@@ -2753,9 +2731,7 @@ name|children
 init|=
 operator|new
 name|ArrayList
-argument_list|<
-name|RelNode
-argument_list|>
+argument_list|<>
 argument_list|(
 name|childRels
 operator|.
@@ -2947,6 +2923,15 @@ name|bestCost
 init|=
 literal|null
 decl_stmt|;
+specifier|final
+name|RelMetadataQuery
+name|mq
+init|=
+name|RelMetadataQuery
+operator|.
+name|instance
+argument_list|()
+decl_stmt|;
 for|for
 control|(
 name|RelNode
@@ -2964,6 +2949,8 @@ init|=
 name|getCost
 argument_list|(
 name|rel
+argument_list|,
+name|mq
 argument_list|)
 decl_stmt|;
 if|if
@@ -2992,7 +2979,7 @@ name|thisCost
 operator|+
 literal|" and rowcount="
 operator|+
-name|RelMetadataQuery
+name|mq
 operator|.
 name|getRowCount
 argument_list|(
@@ -3045,6 +3032,7 @@ comment|// parents.  We'll need this later during contraction so that
 comment|// we only update the existing parents, not the new parents
 comment|// (otherwise loops can result).  Also take care of filtering
 comment|// out parents by traits in case we're dealing with a converter rule.
+specifier|final
 name|List
 argument_list|<
 name|HepRelVertex
@@ -3060,6 +3048,7 @@ argument_list|,
 name|vertex
 argument_list|)
 decl_stmt|;
+specifier|final
 name|List
 argument_list|<
 name|HepRelVertex
@@ -3068,9 +3057,7 @@ name|parents
 init|=
 operator|new
 name|ArrayList
-argument_list|<
-name|HepRelVertex
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 for|for
@@ -3314,6 +3301,7 @@ return|;
 block|}
 comment|// Recursively add children, replacing this rel's inputs
 comment|// with corresponding child vertices.
+specifier|final
 name|List
 argument_list|<
 name|RelNode
@@ -3325,6 +3313,7 @@ operator|.
 name|getInputs
 argument_list|()
 decl_stmt|;
+specifier|final
 name|List
 argument_list|<
 name|RelNode
@@ -3333,9 +3322,7 @@ name|newInputs
 init|=
 operator|new
 name|ArrayList
-argument_list|<
-name|RelNode
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 for|for
@@ -3915,6 +3902,7 @@ literal|"collecting garbage"
 argument_list|)
 expr_stmt|;
 comment|// Yer basic mark-and-sweep.
+specifier|final
 name|Set
 argument_list|<
 name|HepRelVertex
@@ -3923,9 +3911,7 @@ name|rootSet
 init|=
 operator|new
 name|HashSet
-argument_list|<
-name|HepRelVertex
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 if|if
@@ -3972,6 +3958,7 @@ block|{
 comment|// Everything is reachable:  no garbage to collect.
 return|return;
 block|}
+specifier|final
 name|Set
 argument_list|<
 name|HepRelVertex
@@ -3980,9 +3967,7 @@ name|sweepSet
 init|=
 operator|new
 name|HashSet
-argument_list|<
-name|HepRelVertex
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 for|for
@@ -4118,6 +4103,7 @@ name|assertNoCycles
 parameter_list|()
 block|{
 comment|// Verify that the graph is acyclic.
+specifier|final
 name|CycleDetector
 argument_list|<
 name|HepRelVertex
@@ -4128,11 +4114,7 @@ name|cycleDetector
 init|=
 operator|new
 name|CycleDetector
-argument_list|<
-name|HepRelVertex
-argument_list|,
-name|DefaultEdge
-argument_list|>
+argument_list|<>
 argument_list|(
 name|graph
 argument_list|)
@@ -4192,6 +4174,15 @@ block|}
 name|assertNoCycles
 argument_list|()
 expr_stmt|;
+specifier|final
+name|RelMetadataQuery
+name|mq
+init|=
+name|RelMetadataQuery
+operator|.
+name|instance
+argument_list|()
+decl_stmt|;
 specifier|final
 name|StringBuilder
 name|sb
@@ -4261,7 +4252,7 @@ argument_list|)
 operator|.
 name|append
 argument_list|(
-name|RelMetadataQuery
+name|mq
 operator|.
 name|getRowCount
 argument_list|(
@@ -4279,6 +4270,8 @@ argument_list|(
 name|getCost
 argument_list|(
 name|rel
+argument_list|,
+name|mq
 argument_list|)
 argument_list|)
 operator|.

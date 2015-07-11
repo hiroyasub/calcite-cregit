@@ -588,9 +588,7 @@ name|allJoinFilters
 operator|=
 operator|new
 name|ArrayList
-argument_list|<
-name|RexNode
-argument_list|>
+argument_list|<>
 argument_list|(
 name|joinFilters
 argument_list|)
@@ -851,20 +849,14 @@ name|removableOuterJoinFactors
 operator|=
 operator|new
 name|HashSet
-argument_list|<
-name|Integer
-argument_list|>
+argument_list|<>
 argument_list|()
 expr_stmt|;
 name|removableSelfJoinPairs
 operator|=
 operator|new
 name|HashMap
-argument_list|<
-name|Integer
-argument_list|,
-name|RemovableSelfJoin
-argument_list|>
+argument_list|<>
 argument_list|()
 expr_stmt|;
 block|}
@@ -2052,6 +2044,7 @@ block|}
 comment|// Compute a column mapping such that if a column from the right
 comment|// factor is also referenced in the left factor, we will map the
 comment|// right reference to the left to avoid redundant references.
+specifier|final
 name|Map
 argument_list|<
 name|Integer
@@ -2062,15 +2055,12 @@ name|columnMapping
 init|=
 operator|new
 name|HashMap
-argument_list|<
-name|Integer
-argument_list|,
-name|Integer
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 comment|// First, locate the originating column for all simple column
 comment|// references in the left factor.
+specifier|final
 name|RelNode
 name|left
 init|=
@@ -2079,6 +2069,16 @@ argument_list|(
 name|leftFactor
 argument_list|)
 decl_stmt|;
+specifier|final
+name|RelMetadataQuery
+name|mq
+init|=
+name|RelMetadataQuery
+operator|.
+name|instance
+argument_list|()
+decl_stmt|;
+specifier|final
 name|Map
 argument_list|<
 name|Integer
@@ -2089,11 +2089,7 @@ name|leftFactorColMapping
 init|=
 operator|new
 name|HashMap
-argument_list|<
-name|Integer
-argument_list|,
-name|Integer
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 for|for
@@ -2117,10 +2113,11 @@ name|i
 operator|++
 control|)
 block|{
+specifier|final
 name|RelColumnOrigin
 name|colOrigin
 init|=
-name|RelMetadataQuery
+name|mq
 operator|.
 name|getColumnOrigin
 argument_list|(
@@ -2187,7 +2184,7 @@ specifier|final
 name|RelColumnOrigin
 name|colOrigin
 init|=
-name|RelMetadataQuery
+name|mq
 operator|.
 name|getColumnOrigin
 argument_list|(

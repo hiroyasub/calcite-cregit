@@ -115,6 +115,20 @@ name|common
 operator|.
 name|collect
 operator|.
+name|ImmutableList
+import|;
+end_import
+
+begin_import
+import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|collect
+operator|.
 name|Iterables
 import|;
 end_import
@@ -126,16 +140,6 @@ operator|.
 name|util
 operator|.
 name|Arrays
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|Collections
 import|;
 end_import
 
@@ -270,11 +274,7 @@ name|mapDescToRule
 init|=
 operator|new
 name|HashMap
-argument_list|<
-name|String
-argument_list|,
-name|RelOptRule
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 specifier|protected
@@ -294,11 +294,6 @@ specifier|private
 name|CancelFlag
 name|cancelFlag
 decl_stmt|;
-annotation|@
-name|SuppressWarnings
-argument_list|(
-literal|"unchecked"
-argument_list|)
 specifier|private
 specifier|final
 name|Set
@@ -314,14 +309,7 @@ name|classes
 init|=
 operator|new
 name|HashSet
-argument_list|<
-name|Class
-argument_list|<
-name|?
-extends|extends
-name|RelNode
-argument_list|>
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 specifier|private
@@ -334,9 +322,7 @@ name|traits
 init|=
 operator|new
 name|HashSet
-argument_list|<
-name|RelTrait
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 comment|/** External context. Never null. */
@@ -448,7 +434,6 @@ return|return
 name|costFactory
 return|;
 block|}
-comment|// implement RelOptPlanner
 specifier|public
 name|void
 name|setCancelFlag
@@ -653,7 +638,6 @@ name|description
 argument_list|)
 return|;
 block|}
-comment|// implement RelOptPlanner
 specifier|public
 name|void
 name|setRuleDescExclusionFilter
@@ -695,7 +679,6 @@ name|matches
 argument_list|()
 return|;
 block|}
-comment|// implement RelOptPlanner
 specifier|public
 name|RelOptPlanner
 name|chooseDelegate
@@ -738,7 +721,6 @@ return|return
 literal|null
 return|;
 block|}
-comment|// implement RelOptPlanner
 specifier|public
 name|void
 name|registerSchema
@@ -748,7 +730,6 @@ name|schema
 parameter_list|)
 block|{
 block|}
-comment|// implement RelOptPlanner
 specifier|public
 name|long
 name|getRelMetadataTimestamp
@@ -871,7 +852,26 @@ name|createEmpty
 argument_list|()
 return|;
 block|}
-comment|// implement RelOptPlanner
+specifier|public
+name|RelOptCost
+name|getCost
+parameter_list|(
+name|RelNode
+name|rel
+parameter_list|,
+name|RelMetadataQuery
+name|mq
+parameter_list|)
+block|{
+return|return
+name|mq
+operator|.
+name|getCumulativeCost
+argument_list|(
+name|rel
+argument_list|)
+return|;
+block|}
 specifier|public
 name|RelOptCost
 name|getCost
@@ -880,16 +880,24 @@ name|RelNode
 name|rel
 parameter_list|)
 block|{
-return|return
+specifier|final
+name|RelMetadataQuery
+name|mq
+init|=
 name|RelMetadataQuery
 operator|.
-name|getCumulativeCost
+name|instance
+argument_list|()
+decl_stmt|;
+return|return
+name|getCost
 argument_list|(
 name|rel
+argument_list|,
+name|mq
 argument_list|)
 return|;
 block|}
-comment|// implement RelOptPlanner
 specifier|public
 name|void
 name|addListener
@@ -920,7 +928,6 @@ name|newListener
 argument_list|)
 expr_stmt|;
 block|}
-comment|// implement RelOptPlanner
 specifier|public
 name|void
 name|registerMetadataProviders
@@ -933,7 +940,6 @@ name|list
 parameter_list|)
 block|{
 block|}
-comment|// implement RelOptPlanner
 specifier|public
 name|boolean
 name|addRelTraitDef
@@ -946,7 +952,6 @@ return|return
 literal|false
 return|;
 block|}
-comment|// implement RelOptPlanner
 specifier|public
 name|void
 name|clearRelTraitDefs
@@ -962,9 +967,9 @@ name|getRelTraitDefs
 parameter_list|()
 block|{
 return|return
-name|Collections
+name|ImmutableList
 operator|.
-name|emptyList
+name|of
 argument_list|()
 return|;
 block|}

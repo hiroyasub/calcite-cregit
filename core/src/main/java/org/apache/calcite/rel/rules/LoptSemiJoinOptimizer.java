@@ -395,10 +395,20 @@ init|=
 literal|10
 decl_stmt|;
 comment|//~ Instance fields --------------------------------------------------------
-comment|/**    * RexBuilder for constructing new RexNodes    */
 specifier|private
+specifier|final
 name|RexBuilder
 name|rexBuilder
+decl_stmt|;
+comment|/** Not thread-safe. But should be OK, because an optimizer is only used    * from within one thread.*/
+specifier|final
+name|RelMetadataQuery
+name|mq
+init|=
+name|RelMetadataQuery
+operator|.
+name|instance
+argument_list|()
 decl_stmt|;
 comment|/**    * Semijoins corresponding to each join factor, if they are going to be    * filtered by semijoins. Otherwise, the entry is the original join factor.    */
 specifier|private
@@ -1607,7 +1617,7 @@ specifier|final
 name|RelColumnOrigin
 name|colOrigin
 init|=
-name|RelMetadataQuery
+name|mq
 operator|.
 name|getColumnOrigin
 argument_list|(
@@ -2368,6 +2378,7 @@ name|getRightKeys
 argument_list|()
 argument_list|)
 decl_stmt|;
+specifier|final
 name|double
 name|selectivity
 init|=
@@ -2375,6 +2386,8 @@ name|RelMdUtil
 operator|.
 name|computeSemiJoinSelectivity
 argument_list|(
+name|mq
+argument_list|,
 name|factRel
 argument_list|,
 name|dimRel
@@ -2393,10 +2406,11 @@ return|return
 literal|0
 return|;
 block|}
+specifier|final
 name|RelOptCost
 name|factCost
 init|=
-name|RelMetadataQuery
+name|mq
 operator|.
 name|getCumulativeCost
 argument_list|(
@@ -2450,6 +2464,8 @@ name|RelMdUtil
 operator|.
 name|areColumnsDefinitelyUniqueWhenNullsFiltered
 argument_list|(
+name|mq
+argument_list|,
 name|dimRel
 argument_list|,
 name|dimCols
@@ -2468,16 +2484,18 @@ block|}
 comment|// compute the cost of doing an extra scan on the dimension table,
 comment|// including the distinct sort on top of the scan; if the dimension
 comment|// columns are already unique, no need to add on the dup removal cost
+specifier|final
 name|Double
 name|dimSortCost
 init|=
-name|RelMetadataQuery
+name|mq
 operator|.
 name|getRowCount
 argument_list|(
 name|dimRel
 argument_list|)
 decl_stmt|;
+specifier|final
 name|Double
 name|dupRemCost
 init|=
@@ -2487,10 +2505,11 @@ literal|0
 else|:
 name|dimSortCost
 decl_stmt|;
+specifier|final
 name|RelOptCost
 name|dimCost
 init|=
-name|RelMetadataQuery
+name|mq
 operator|.
 name|getCumulativeCost
 argument_list|(
@@ -2598,6 +2617,7 @@ name|getRightKeys
 argument_list|()
 argument_list|)
 decl_stmt|;
+specifier|final
 name|RelNode
 name|dimRel
 init|=
@@ -2615,6 +2635,8 @@ name|RelMdUtil
 operator|.
 name|areColumnsDefinitelyUniqueWhenNullsFiltered
 argument_list|(
+name|mq
+argument_list|,
 name|dimRel
 argument_list|,
 name|dimKeys
@@ -2936,7 +2958,7 @@ index|]
 return|;
 block|}
 comment|//~ Inner Classes ----------------------------------------------------------
-comment|/** . */
+comment|/** Compares factors. */
 specifier|private
 class|class
 name|FactorCostComparator
@@ -2960,7 +2982,7 @@ block|{
 name|RelOptCost
 name|c1
 init|=
-name|RelMetadataQuery
+name|mq
 operator|.
 name|getCumulativeCost
 argument_list|(
@@ -2973,7 +2995,7 @@ decl_stmt|;
 name|RelOptCost
 name|c2
 init|=
-name|RelMetadataQuery
+name|mq
 operator|.
 name|getCumulativeCost
 argument_list|(

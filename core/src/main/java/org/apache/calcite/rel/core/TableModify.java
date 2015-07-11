@@ -264,7 +264,7 @@ block|,
 name|DELETE
 block|,
 name|MERGE
-block|;   }
+block|}
 comment|//~ Instance fields --------------------------------------------------------
 comment|/**    * The connection to the optimizing session.    */
 specifier|protected
@@ -732,20 +732,24 @@ name|flattened
 argument_list|)
 return|;
 block|}
-comment|// implement RelNode
+annotation|@
+name|Override
 specifier|public
 name|RelOptCost
 name|computeSelfCost
 parameter_list|(
 name|RelOptPlanner
 name|planner
+parameter_list|,
+name|RelMetadataQuery
+name|mq
 parameter_list|)
 block|{
 comment|// REVIEW jvs 21-Apr-2006:  Just for now...
 name|double
 name|rowCount
 init|=
-name|RelMetadataQuery
+name|mq
 operator|.
 name|getRowCount
 argument_list|(

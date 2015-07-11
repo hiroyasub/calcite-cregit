@@ -127,6 +127,22 @@ name|calcite
 operator|.
 name|rel
 operator|.
+name|metadata
+operator|.
+name|RelMetadataQuery
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
 name|type
 operator|.
 name|RelDataType
@@ -432,6 +448,9 @@ name|computeSelfCost
 parameter_list|(
 name|RelOptPlanner
 name|planner
+parameter_list|,
+name|RelMetadataQuery
+name|mq
 parameter_list|)
 block|{
 comment|// REVIEW jvs 9-Apr-2006:  Just for now...
@@ -449,8 +468,11 @@ annotation|@
 name|Override
 specifier|public
 name|double
-name|getRows
-parameter_list|()
+name|estimateRowCount
+parameter_list|(
+name|RelMetadataQuery
+name|mq
+parameter_list|)
 block|{
 return|return
 name|Util
@@ -461,6 +483,8 @@ name|RelMdUtil
 operator|.
 name|getSemiJoinRowCount
 argument_list|(
+name|mq
+argument_list|,
 name|left
 argument_list|,
 name|right

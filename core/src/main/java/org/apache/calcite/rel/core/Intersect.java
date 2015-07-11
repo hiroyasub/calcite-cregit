@@ -179,8 +179,11 @@ annotation|@
 name|Override
 specifier|public
 name|double
-name|getRows
-parameter_list|()
+name|estimateRowCount
+parameter_list|(
+name|RelMetadataQuery
+name|mq
+parameter_list|)
 block|{
 comment|// REVIEW jvs 30-May-2005:  I just pulled this out of a hat.
 name|double
@@ -206,7 +209,7 @@ name|min
 argument_list|(
 name|dRows
 argument_list|,
-name|RelMetadataQuery
+name|mq
 operator|.
 name|getRowCount
 argument_list|(

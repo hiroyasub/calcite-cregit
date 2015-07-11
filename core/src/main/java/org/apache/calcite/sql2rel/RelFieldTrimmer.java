@@ -785,16 +785,6 @@ name|java
 operator|.
 name|util
 operator|.
-name|HashMap
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
 name|LinkedHashSet
 import|;
 end_import
@@ -806,16 +796,6 @@ operator|.
 name|util
 operator|.
 name|List
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|Map
 import|;
 end_import
 
@@ -868,20 +848,6 @@ specifier|private
 specifier|final
 name|RelBuilder
 name|relBuilder
-decl_stmt|;
-specifier|private
-name|Map
-argument_list|<
-name|RelNode
-argument_list|,
-name|Mapping
-argument_list|>
-name|map
-init|=
-operator|new
-name|HashMap
-argument_list|<>
-argument_list|()
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
 comment|/**    * Creates a RelFieldTrimmer.    *    * @param validator Validator    */
@@ -1174,13 +1140,22 @@ argument_list|()
 decl_stmt|;
 comment|// Fields that define the collation cannot be discarded.
 specifier|final
+name|RelMetadataQuery
+name|mq
+init|=
+name|RelMetadataQuery
+operator|.
+name|instance
+argument_list|()
+decl_stmt|;
+specifier|final
 name|ImmutableList
 argument_list|<
 name|RelCollation
 argument_list|>
 name|collations
 init|=
-name|RelMetadataQuery
+name|mq
 operator|.
 name|collations
 argument_list|(
@@ -1713,15 +1688,6 @@ name|Mapping
 name|mapping
 parameter_list|)
 block|{
-name|map
-operator|.
-name|put
-argument_list|(
-name|r
-argument_list|,
-name|mapping
-argument_list|)
-expr_stmt|;
 specifier|final
 name|RexBuilder
 name|rexBuilder
@@ -1730,12 +1696,6 @@ name|relBuilder
 operator|.
 name|getRexBuilder
 argument_list|()
-decl_stmt|;
-specifier|final
-name|RelNode
-name|r0
-init|=
-name|r
 decl_stmt|;
 for|for
 control|(
@@ -2026,15 +1986,6 @@ init|=
 name|project
 operator|.
 name|getInput
-argument_list|()
-decl_stmt|;
-specifier|final
-name|RelDataType
-name|inputRowType
-init|=
-name|input
-operator|.
-name|getRowType
 argument_list|()
 decl_stmt|;
 comment|// Which fields are required from the input?

@@ -520,6 +520,15 @@ name|builder
 argument_list|()
 decl_stmt|;
 specifier|final
+name|RelMetadataQuery
+name|mq
+init|=
+name|RelMetadataQuery
+operator|.
+name|instance
+argument_list|()
+decl_stmt|;
+specifier|final
 name|LoptMultiJoin
 name|multiJoin
 init|=
@@ -578,7 +587,7 @@ decl_stmt|;
 name|double
 name|cost
 init|=
-name|RelMetadataQuery
+name|mq
 operator|.
 name|getRowCount
 argument_list|(

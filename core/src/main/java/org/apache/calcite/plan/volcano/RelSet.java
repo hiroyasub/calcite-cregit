@@ -125,6 +125,22 @@ name|apache
 operator|.
 name|calcite
 operator|.
+name|rel
+operator|.
+name|metadata
+operator|.
+name|RelMetadataQuery
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
 name|util
 operator|.
 name|trace
@@ -949,6 +965,7 @@ block|{
 return|return;
 block|}
 comment|// Make sure the cost changes as a result of merging are propagated.
+specifier|final
 name|Set
 argument_list|<
 name|RelSubset
@@ -958,6 +975,15 @@ init|=
 operator|new
 name|HashSet
 argument_list|<>
+argument_list|()
+decl_stmt|;
+specifier|final
+name|RelMetadataQuery
+name|mq
+init|=
+name|RelMetadataQuery
+operator|.
+name|instance
 argument_list|()
 decl_stmt|;
 for|for
@@ -985,6 +1011,8 @@ operator|.
 name|propagateCostImprovements
 argument_list|(
 name|planner
+argument_list|,
+name|mq
 argument_list|,
 name|parentRel
 argument_list|,

@@ -515,6 +515,22 @@ name|calcite
 operator|.
 name|rel
 operator|.
+name|metadata
+operator|.
+name|RelMetadataQuery
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
 name|rules
 operator|.
 name|FilterCorrelateRule
@@ -8191,6 +8207,15 @@ return|return;
 block|}
 comment|// The join filters out the nulls.  So, it's ok if there are
 comment|// nulls in the join keys.
+specifier|final
+name|RelMetadataQuery
+name|mq
+init|=
+name|RelMetadataQuery
+operator|.
+name|instance
+argument_list|()
+decl_stmt|;
 if|if
 condition|(
 operator|!
@@ -8198,6 +8223,8 @@ name|RelMdUtil
 operator|.
 name|areColumnsDefinitelyUniqueWhenNullsFiltered
 argument_list|(
+name|mq
+argument_list|,
 name|right
 argument_list|,
 name|rightJoinKeys
@@ -9045,6 +9072,15 @@ return|return;
 block|}
 comment|// The join filters out the nulls.  So, it's ok if there are
 comment|// nulls in the join keys.
+specifier|final
+name|RelMetadataQuery
+name|mq
+init|=
+name|RelMetadataQuery
+operator|.
+name|instance
+argument_list|()
+decl_stmt|;
 if|if
 condition|(
 operator|!
@@ -9052,6 +9088,8 @@ name|RelMdUtil
 operator|.
 name|areColumnsDefinitelyUniqueWhenNullsFiltered
 argument_list|(
+name|mq
+argument_list|,
 name|left
 argument_list|,
 name|correlatedInputRefJoinKeys
@@ -9220,6 +9258,15 @@ decl_stmt|;
 comment|// leftInputRel contains unique keys
 comment|// i.e. each row is distinct and can group by on all the left
 comment|// fields
+specifier|final
+name|RelMetadataQuery
+name|mq
+init|=
+name|RelMetadataQuery
+operator|.
+name|instance
+argument_list|()
+decl_stmt|;
 if|if
 condition|(
 operator|!
@@ -9227,6 +9274,8 @@ name|RelMdUtil
 operator|.
 name|areColumnsDefinitelyUnique
 argument_list|(
+name|mq
+argument_list|,
 name|left
 argument_list|,
 name|allCols

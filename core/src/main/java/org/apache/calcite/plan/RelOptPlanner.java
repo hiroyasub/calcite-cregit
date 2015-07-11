@@ -314,7 +314,21 @@ name|RelOptCostFactory
 name|getCostFactory
 parameter_list|()
 function_decl|;
-comment|/**    * Computes the cost of a RelNode. In most cases, this just dispatches to    * {@link RelMetadataQuery#getCumulativeCost}.    *    * @param rel expression of interest    * @return estimated cost    */
+comment|/**    * Computes the cost of a RelNode. In most cases, this just dispatches to    * {@link RelMetadataQuery#getCumulativeCost}.    *    * @param rel Relational expression of interest    * @param mq Metadata query    * @return estimated cost    */
+name|RelOptCost
+name|getCost
+parameter_list|(
+name|RelNode
+name|rel
+parameter_list|,
+name|RelMetadataQuery
+name|mq
+parameter_list|)
+function_decl|;
+comment|/**    * @deprecated Use {@link #getCost(RelNode, RelMetadataQuery)}    * or, better, call {@link RelMetadataQuery#getCumulativeCost(RelNode)}.    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 name|RelOptCost
 name|getCost
 parameter_list|(

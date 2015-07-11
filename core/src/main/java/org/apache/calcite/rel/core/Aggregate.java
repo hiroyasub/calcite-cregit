@@ -1167,8 +1167,11 @@ annotation|@
 name|Override
 specifier|public
 name|double
-name|getRows
-parameter_list|()
+name|estimateRowCount
+parameter_list|(
+name|RelMetadataQuery
+name|mq
+parameter_list|)
 block|{
 comment|// Assume that each sort column has 50% of the value count.
 comment|// Therefore one sort column has .5 * rowCount,
@@ -1201,8 +1204,10 @@ name|rowCount
 init|=
 name|super
 operator|.
-name|getRows
-argument_list|()
+name|estimateRowCount
+argument_list|(
+name|mq
+argument_list|)
 decl_stmt|;
 name|rowCount
 operator|*=
@@ -1230,6 +1235,9 @@ name|computeSelfCost
 parameter_list|(
 name|RelOptPlanner
 name|planner
+parameter_list|,
+name|RelMetadataQuery
+name|mq
 parameter_list|)
 block|{
 comment|// REVIEW jvs 24-Aug-2008:  This is bogus, but no more bogus
@@ -1237,7 +1245,7 @@ comment|// than what's currently in Join.
 name|double
 name|rowCount
 init|=
-name|RelMetadataQuery
+name|mq
 operator|.
 name|getRowCount
 argument_list|(

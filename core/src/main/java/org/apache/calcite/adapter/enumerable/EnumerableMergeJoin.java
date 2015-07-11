@@ -612,6 +612,15 @@ argument_list|)
 condition|)
 block|{
 specifier|final
+name|RelMetadataQuery
+name|mq
+init|=
+name|RelMetadataQuery
+operator|.
+name|instance
+argument_list|()
+decl_stmt|;
+specifier|final
 name|List
 argument_list|<
 name|RelCollation
@@ -622,6 +631,8 @@ name|RelMdCollation
 operator|.
 name|mergeJoin
 argument_list|(
+name|mq
+argument_list|,
 name|left
 argument_list|,
 name|right
@@ -773,6 +784,9 @@ name|computeSelfCost
 parameter_list|(
 name|RelOptPlanner
 name|planner
+parameter_list|,
+name|RelMetadataQuery
+name|mq
 parameter_list|)
 block|{
 comment|// We assume that the inputs are sorted. The price of sorting them has
@@ -784,8 +798,10 @@ name|rightRowCount
 init|=
 name|right
 operator|.
-name|getRows
-argument_list|()
+name|estimateRowCount
+argument_list|(
+name|mq
+argument_list|)
 decl_stmt|;
 specifier|final
 name|double
@@ -793,14 +809,16 @@ name|leftRowCount
 init|=
 name|left
 operator|.
-name|getRows
-argument_list|()
+name|estimateRowCount
+argument_list|(
+name|mq
+argument_list|)
 decl_stmt|;
 specifier|final
 name|double
 name|rowCount
 init|=
-name|RelMetadataQuery
+name|mq
 operator|.
 name|getRowCount
 argument_list|(

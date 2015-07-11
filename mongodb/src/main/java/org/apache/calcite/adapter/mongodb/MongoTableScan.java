@@ -141,6 +141,22 @@ name|calcite
 operator|.
 name|rel
 operator|.
+name|metadata
+operator|.
+name|RelMetadataQuery
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
 name|type
 operator|.
 name|RelDataType
@@ -287,6 +303,9 @@ name|computeSelfCost
 parameter_list|(
 name|RelOptPlanner
 name|planner
+parameter_list|,
+name|RelMetadataQuery
+name|mq
 parameter_list|)
 block|{
 comment|// scans with a small project list are cheaper
@@ -316,6 +335,8 @@ operator|.
 name|computeSelfCost
 argument_list|(
 name|planner
+argument_list|,
+name|mq
 argument_list|)
 operator|.
 name|multiplyBy

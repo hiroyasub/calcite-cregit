@@ -96,13 +96,16 @@ parameter_list|()
 block|{
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|// Catch-all rule when none of the others apply.
+comment|/** Catch-all implementation for    * {@link BuiltInMetadata.ExplainVisibility#isVisibleInExplain(SqlExplainLevel)},    * invoked using reflection.    *    * @see org.apache.calcite.rel.metadata.RelMetadataQuery#isVisibleInExplain(RelNode, SqlExplainLevel)    */
 specifier|public
 name|Boolean
 name|isVisibleInExplain
 parameter_list|(
 name|RelNode
 name|rel
+parameter_list|,
+name|RelMetadataQuery
+name|mq
 parameter_list|,
 name|SqlExplainLevel
 name|explainLevel

@@ -717,7 +717,7 @@ name|Expressions
 operator|.
 name|newArrayInit
 argument_list|(
-name|Object
+name|Comparable
 operator|.
 name|class
 argument_list|,

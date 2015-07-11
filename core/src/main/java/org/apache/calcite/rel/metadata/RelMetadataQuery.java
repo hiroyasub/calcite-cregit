@@ -187,6 +187,16 @@ name|java
 operator|.
 name|util
 operator|.
+name|HashSet
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
 name|List
 import|;
 end_import
@@ -202,7 +212,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * RelMetadataQuery provides a strongly-typed facade on top of  * {@link RelMetadataProvider} for the set of relational expression metadata  * queries defined as standard within Calcite. The Javadoc on these methods  * serves as their primary specification.  *  *<p>To add a new standard query<code>Xyz</code> to this interface, follow  * these steps:  *  *<ol>  *<li>Add a static method<code>getXyz</code> specification to this class.  *<li>Add unit tests to {@code org.apache.calcite.test.RelMetadataTest}.  *<li>Write a new provider class<code>RelMdXyz</code> in this package. Follow  * the pattern from an existing class such as {@link RelMdColumnOrigins},  * overloading on all of the logical relational expressions to which the query  * applies.  *<li>Add a {@code SOURCE} static member, similar to  *     {@link RelMdColumnOrigins#SOURCE}.  *<li>Register the {@code SOURCE} object in {@link DefaultRelMetadataProvider}.  *<li>Get unit tests working.  *</ol>  *  *<p>Because relational expression metadata is extensible, extension projects  * can define similar facades in order to specify access to custom metadata.  * Please do not add queries here (nor on {@link RelNode}) which lack meaning  * outside of your extension.  *  *<p>Besides adding new metadata queries, extension projects may need to add  * custom providers for the standard queries in order to handle additional  * relational expressions (either logical or physical). In either case, the  * process is the same: write a reflective provider and chain it on to an  * instance of {@link DefaultRelMetadataProvider}, prepending it to the default  * providers. Then supply that instance to the planner via the appropriate  * plugin mechanism.  */
+comment|/**  * RelMetadataQuery provides a strongly-typed facade on top of  * {@link RelMetadataProvider} for the set of relational expression metadata  * queries defined as standard within Calcite. The Javadoc on these methods  * serves as their primary specification.  *  *<p>To add a new standard query<code>Xyz</code> to this interface, follow  * these steps:  *  *<ol>  *<li>Add a static method<code>getXyz</code> specification to this class.  *<li>Add unit tests to {@code org.apache.calcite.test.RelMetadataTest}.  *<li>Write a new provider class<code>RelMdXyz</code> in this package. Follow  * the pattern from an existing class such as {@link RelMdColumnOrigins},  * overloading on all of the logical relational expressions to which the query  * applies.  *<li>Add a {@code SOURCE} static member, similar to  *     {@link RelMdColumnOrigins#SOURCE}.  *<li>Register the {@code SOURCE} object in {@link DefaultRelMetadataProvider}.  *<li>Get unit tests working.  *</ol>  *  *<p>Because relational expression metadata is extensible, extension projects  * can define similar facades in order to specify access to custom metadata.  * Please do not add queries here (nor on {@link RelNode}) which lack meaning  * outside of your extension.  *  *<p>Besides adding new metadata queries, extension projects may need to add  * custom providers for the standard queries in order to handle additional  * relational expressions (either logical or physical). In either case, the  * process is the same: write a reflective provider and chain it on to an  * instance of {@link DefaultRelMetadataProvider}, pre-pending it to the default  * providers. Then supply that instance to the planner via the appropriate  * plugin mechanism.  */
 end_comment
 
 begin_class
@@ -211,10 +221,37 @@ specifier|abstract
 class|class
 name|RelMetadataQuery
 block|{
+comment|/** Set of active metadata queries. */
+specifier|public
+specifier|final
+name|Set
+argument_list|<
+name|List
+argument_list|>
+name|set
+init|=
+operator|new
+name|HashSet
+argument_list|<>
+argument_list|()
+decl_stmt|;
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**    * Returns the    * {@link BuiltInMetadata.RowCount#getRowCount()}    * statistic.    *    * @param rel the relational expression    * @return estimated row count, or null if no reliable estimate can be    * determined    */
+comment|/**    * Returns an instance of RelMetadataQuery. It ensures that cycles do not    * occur while computing metadata.    */
 specifier|public
 specifier|static
+name|RelMetadataQuery
+name|instance
+parameter_list|()
+block|{
+return|return
+operator|new
+name|RelMetadataQuery
+argument_list|()
+block|{     }
+return|;
+block|}
+comment|/**    * Returns the    * {@link BuiltInMetadata.RowCount#getRowCount()}    * statistic.    *    * @param rel the relational expression    * @return estimated row count, or null if no reliable estimate can be    * determined    */
+specifier|public
 name|Double
 name|getRowCount
 parameter_list|(
@@ -237,6 +274,8 @@ operator|.
 name|RowCount
 operator|.
 name|class
+argument_list|,
+name|this
 argument_list|)
 decl_stmt|;
 name|Double
@@ -256,7 +295,6 @@ return|;
 block|}
 comment|/**    * Returns the    * {@link BuiltInMetadata.MaxRowCount#getMaxRowCount()}    * statistic.    *    * @param rel the relational expression    * @return max row count    */
 specifier|public
-specifier|static
 name|Double
 name|getMaxRowCount
 parameter_list|(
@@ -279,6 +317,8 @@ operator|.
 name|MaxRowCount
 operator|.
 name|class
+argument_list|,
+name|this
 argument_list|)
 decl_stmt|;
 return|return
@@ -290,7 +330,6 @@ return|;
 block|}
 comment|/**    * Returns the    * {@link BuiltInMetadata.CumulativeCost#getCumulativeCost()}    * statistic.    *    * @param rel the relational expression    * @return estimated cost, or null if no reliable estimate can be determined    */
 specifier|public
-specifier|static
 name|RelOptCost
 name|getCumulativeCost
 parameter_list|(
@@ -313,6 +352,8 @@ operator|.
 name|CumulativeCost
 operator|.
 name|class
+argument_list|,
+name|this
 argument_list|)
 decl_stmt|;
 return|return
@@ -324,7 +365,6 @@ return|;
 block|}
 comment|/**    * Returns the    * {@link BuiltInMetadata.NonCumulativeCost#getNonCumulativeCost()}    * statistic.    *    * @param rel the relational expression    * @return estimated cost, or null if no reliable estimate can be determined    */
 specifier|public
-specifier|static
 name|RelOptCost
 name|getNonCumulativeCost
 parameter_list|(
@@ -347,6 +387,8 @@ operator|.
 name|NonCumulativeCost
 operator|.
 name|class
+argument_list|,
+name|this
 argument_list|)
 decl_stmt|;
 return|return
@@ -358,7 +400,6 @@ return|;
 block|}
 comment|/**    * Returns the    * {@link BuiltInMetadata.PercentageOriginalRows#getPercentageOriginalRows()}    * statistic.    *    * @param rel the relational expression    * @return estimated percentage (between 0.0 and 1.0), or null if no    * reliable estimate can be determined    */
 specifier|public
-specifier|static
 name|Double
 name|getPercentageOriginalRows
 parameter_list|(
@@ -381,6 +422,8 @@ operator|.
 name|PercentageOriginalRows
 operator|.
 name|class
+argument_list|,
+name|this
 argument_list|)
 decl_stmt|;
 name|Double
@@ -405,7 +448,6 @@ return|;
 block|}
 comment|/**    * Returns the    * {@link BuiltInMetadata.ColumnOrigin#getColumnOrigins(int)}    * statistic.    *    * @param rel           the relational expression    * @param column 0-based ordinal for output column of interest    * @return set of origin columns, or null if this information cannot be    * determined (whereas empty set indicates definitely no origin columns at    * all)    */
 specifier|public
-specifier|static
 name|Set
 argument_list|<
 name|RelColumnOrigin
@@ -434,6 +476,8 @@ operator|.
 name|ColumnOrigin
 operator|.
 name|class
+argument_list|,
+name|this
 argument_list|)
 decl_stmt|;
 return|return
@@ -447,7 +491,6 @@ return|;
 block|}
 comment|/**    * Determines the origin of a column, provided the column maps to a single    * column that isn't derived.    *    * @see #getColumnOrigins(org.apache.calcite.rel.RelNode, int)    *    * @param rel the RelNode of the column    * @param column the offset of the column whose origin we are trying to    * determine    *    * @return the origin of a column provided it's a simple column; otherwise,    * returns null    */
 specifier|public
-specifier|static
 name|RelColumnOrigin
 name|getColumnOrigin
 parameter_list|(
@@ -514,7 +557,6 @@ return|;
 block|}
 comment|/**    * Determines the origin of a {@link RelNode}, provided it maps to a single    * table, optionally with filtering and projection.    *    * @param rel the RelNode    *    * @return the table, if the RelNode is a simple table; otherwise null    */
 specifier|public
-specifier|static
 name|RelOptTable
 name|getTableOrigin
 parameter_list|(
@@ -570,9 +612,8 @@ name|getOriginTable
 argument_list|()
 return|;
 block|}
-comment|/**    * Returns the    * {@link BuiltInMetadata.Selectivity#getSelectivity(RexNode)}    * statistic.    *    * @param rel       the relational expression    * @param predicate predicate whose selectivity is to be estimated against    *                  rel's output    * @return estimated selectivity (between 0.0 and 1.0), or null if no    * reliable estimate can be determined    */
+comment|/**    * Returns the    * {@link BuiltInMetadata.Selectivity#getSelectivity(RexNode)}    * statistic.    *    * @param rel       the relational expression    * @param predicate predicate whose selectivity is to be estimated against    *                  {@code rel}'s output    * @return estimated selectivity (between 0.0 and 1.0), or null if no    * reliable estimate can be determined    */
 specifier|public
-specifier|static
 name|Double
 name|getSelectivity
 parameter_list|(
@@ -598,6 +639,8 @@ operator|.
 name|Selectivity
 operator|.
 name|class
+argument_list|,
+name|this
 argument_list|)
 decl_stmt|;
 name|Double
@@ -624,7 +667,6 @@ return|;
 block|}
 comment|/**    * Returns the    * {@link BuiltInMetadata.UniqueKeys#getUniqueKeys(boolean)}    * statistic.    *    * @param rel the relational expression    * @return set of keys, or null if this information cannot be determined    * (whereas empty set indicates definitely no keys at all)    */
 specifier|public
-specifier|static
 name|Set
 argument_list|<
 name|ImmutableBitSet
@@ -650,6 +692,8 @@ operator|.
 name|UniqueKeys
 operator|.
 name|class
+argument_list|,
+name|this
 argument_list|)
 decl_stmt|;
 return|return
@@ -661,9 +705,8 @@ literal|false
 argument_list|)
 return|;
 block|}
-comment|/**    * Returns the    * {@link BuiltInMetadata.UniqueKeys#getUniqueKeys(boolean)}    * statistic.    *    * @param rel         the relational expression    * @param ignoreNulls if true, ignore null values when determining    *                    whether the keys are unique    * @return set of keys, or null if this information cannot be determined    * (whereas empty set indicates definitely no keys at all)    */
+comment|/**    * Returns the    * {@link BuiltInMetadata.UniqueKeys#getUniqueKeys(boolean)}    * statistic.    *    * @param rel         the relational expression    * @param ignoreNulls if true, ignore null values when determining    *                    whether the keys are unique    *    * @return set of keys, or null if this information cannot be determined    * (whereas empty set indicates definitely no keys at all)    */
 specifier|public
-specifier|static
 name|Set
 argument_list|<
 name|ImmutableBitSet
@@ -692,6 +735,8 @@ operator|.
 name|UniqueKeys
 operator|.
 name|class
+argument_list|,
+name|this
 argument_list|)
 decl_stmt|;
 return|return
@@ -703,9 +748,8 @@ name|ignoreNulls
 argument_list|)
 return|;
 block|}
-comment|/**    * Returns whether the rows of a given relational expression are distinct.    * This is derived by applying the    * {@link BuiltInMetadata.ColumnUniqueness#areColumnsUnique(org.apache.calcite.util.ImmutableBitSet, boolean)}    * statistic over all columns.    *    * @param rel     the relational expression    * @return true or false depending on whether the rows are unique, or    * null if not enough information is available to make that determination    */
+comment|/**    * Returns whether the rows of a given relational expression are distinct.    * This is derived by applying the    * {@link BuiltInMetadata.ColumnUniqueness#areColumnsUnique(org.apache.calcite.util.ImmutableBitSet, boolean)}    * statistic over all columns.    *    * @param rel     the relational expression    *    * @return true or false depending on whether the rows are unique, or    * null if not enough information is available to make that determination    */
 specifier|public
-specifier|static
 name|Boolean
 name|areRowsUnique
 parameter_list|(
@@ -728,6 +772,8 @@ operator|.
 name|ColumnUniqueness
 operator|.
 name|class
+argument_list|,
+name|this
 argument_list|)
 decl_stmt|;
 specifier|final
@@ -758,9 +804,8 @@ literal|false
 argument_list|)
 return|;
 block|}
-comment|/**    * Returns the    * {@link BuiltInMetadata.ColumnUniqueness#areColumnsUnique(org.apache.calcite.util.ImmutableBitSet, boolean)}    * statistic.    *    * @param rel     the relational expression    * @param columns column mask representing the subset of columns for which    *                uniqueness will be determined    * @return true or false depending on whether the columns are unique, or    * null if not enough information is available to make that determination    */
+comment|/**    * Returns the    * {@link BuiltInMetadata.ColumnUniqueness#areColumnsUnique(ImmutableBitSet, boolean)}    * statistic.    *    * @param rel     the relational expression    * @param columns column mask representing the subset of columns for which    *                uniqueness will be determined    *    * @return true or false depending on whether the columns are unique, or    * null if not enough information is available to make that determination    */
 specifier|public
-specifier|static
 name|Boolean
 name|areColumnsUnique
 parameter_list|(
@@ -786,6 +831,8 @@ operator|.
 name|ColumnUniqueness
 operator|.
 name|class
+argument_list|,
+name|this
 argument_list|)
 decl_stmt|;
 return|return
@@ -799,9 +846,8 @@ literal|false
 argument_list|)
 return|;
 block|}
-comment|/**    * Returns the    * {@link BuiltInMetadata.ColumnUniqueness#areColumnsUnique(org.apache.calcite.util.ImmutableBitSet, boolean)}    * statistic.    *    * @param rel         the relational expression    * @param columns     column mask representing the subset of columns for which    *                    uniqueness will be determined    * @param ignoreNulls if true, ignore null values when determining column    *                    uniqueness    * @return true or false depending on whether the columns are unique, or    * null if not enough information is available to make that determination    */
+comment|/**    * Returns the    * {@link BuiltInMetadata.ColumnUniqueness#areColumnsUnique(ImmutableBitSet, boolean)}    * statistic.    *    * @param rel         the relational expression    * @param columns     column mask representing the subset of columns for which    *                    uniqueness will be determined    * @param ignoreNulls if true, ignore null values when determining column    *                    uniqueness    * @return true or false depending on whether the columns are unique, or    * null if not enough information is available to make that determination    */
 specifier|public
-specifier|static
 name|Boolean
 name|areColumnsUnique
 parameter_list|(
@@ -830,6 +876,8 @@ operator|.
 name|ColumnUniqueness
 operator|.
 name|class
+argument_list|,
+name|this
 argument_list|)
 decl_stmt|;
 return|return
@@ -843,9 +891,8 @@ name|ignoreNulls
 argument_list|)
 return|;
 block|}
-comment|/**    * Returns the    * {@link org.apache.calcite.rel.metadata.BuiltInMetadata.Collation#collations()}    * statistic.    *    * @param rel         the relational expression    * @return List of sorted column combinations, or    * null if not enough information is available to make that determination    */
+comment|/**    * Returns the    * {@link BuiltInMetadata.Collation#collations()}    * statistic.    *    * @param rel         the relational expression    * @return List of sorted column combinations, or    * null if not enough information is available to make that determination    */
 specifier|public
-specifier|static
 name|ImmutableList
 argument_list|<
 name|RelCollation
@@ -871,6 +918,8 @@ operator|.
 name|Collation
 operator|.
 name|class
+argument_list|,
+name|this
 argument_list|)
 decl_stmt|;
 return|return
@@ -880,9 +929,8 @@ name|collations
 argument_list|()
 return|;
 block|}
-comment|/**    * Returns the    * {@link org.apache.calcite.rel.metadata.BuiltInMetadata.Distribution#distribution()}    * statistic.    *    * @param rel         the relational expression    * @return List of sorted column combinations, or    * null if not enough information is available to make that determination    */
+comment|/**    * Returns the    * {@link BuiltInMetadata.Distribution#distribution()}    * statistic.    *    * @param rel         the relational expression    * @return List of sorted column combinations, or    * null if not enough information is available to make that determination    */
 specifier|public
-specifier|static
 name|RelDistribution
 name|distribution
 parameter_list|(
@@ -905,6 +953,8 @@ operator|.
 name|Distribution
 operator|.
 name|class
+argument_list|,
+name|this
 argument_list|)
 decl_stmt|;
 return|return
@@ -914,9 +964,8 @@ name|distribution
 argument_list|()
 return|;
 block|}
-comment|/**    * Returns the    * {@link BuiltInMetadata.PopulationSize#getPopulationSize(org.apache.calcite.util.ImmutableBitSet)}    * statistic.    *    * @param rel      the relational expression    * @param groupKey column mask representing the subset of columns for which    *                 the row count will be determined    * @return distinct row count for the given groupKey, or null if no reliable    * estimate can be determined    *    */
+comment|/**    * Returns the    * {@link BuiltInMetadata.PopulationSize#getPopulationSize(ImmutableBitSet)}    * statistic.    *    * @param rel      the relational expression    * @param groupKey column mask representing the subset of columns for which    *                 the row count will be determined    * @return distinct row count for the given groupKey, or null if no reliable    * estimate can be determined    *    */
 specifier|public
-specifier|static
 name|Double
 name|getPopulationSize
 parameter_list|(
@@ -942,6 +991,8 @@ operator|.
 name|PopulationSize
 operator|.
 name|class
+argument_list|,
+name|this
 argument_list|)
 decl_stmt|;
 name|Double
@@ -961,9 +1012,8 @@ name|result
 argument_list|)
 return|;
 block|}
-comment|/**    * Returns the    * {@link org.apache.calcite.rel.metadata.BuiltInMetadata.Size#averageRowSize()}    * statistic.    *    * @param rel      the relational expression    * @return average size of a row, in bytes, or null if not known      */
+comment|/**    * Returns the    * {@link BuiltInMetadata.Size#averageRowSize()}    * statistic.    *    * @param rel      the relational expression    * @return average size of a row, in bytes, or null if not known      */
 specifier|public
-specifier|static
 name|Double
 name|getAverageRowSize
 parameter_list|(
@@ -986,6 +1036,8 @@ operator|.
 name|Size
 operator|.
 name|class
+argument_list|,
+name|this
 argument_list|)
 decl_stmt|;
 return|return
@@ -995,9 +1047,8 @@ name|averageRowSize
 argument_list|()
 return|;
 block|}
-comment|/**    * Returns the    * {@link org.apache.calcite.rel.metadata.BuiltInMetadata.Size#averageColumnSizes()}    * statistic.    *    * @param rel      the relational expression    * @return a list containing, for each column, the average size of a column    * value, in bytes. Each value or the entire list may be null if the    * metadata is not available    */
+comment|/**    * Returns the    * {@link BuiltInMetadata.Size#averageColumnSizes()}    * statistic.    *    * @param rel      the relational expression    * @return a list containing, for each column, the average size of a column    * value, in bytes. Each value or the entire list may be null if the    * metadata is not available    */
 specifier|public
-specifier|static
 name|List
 argument_list|<
 name|Double
@@ -1023,6 +1074,8 @@ operator|.
 name|Size
 operator|.
 name|class
+argument_list|,
+name|this
 argument_list|)
 decl_stmt|;
 return|return
@@ -1034,7 +1087,6 @@ return|;
 block|}
 comment|/** As {@link #getAverageColumnSizes(org.apache.calcite.rel.RelNode)} but    * never returns a null list, only ever a list of nulls. */
 specifier|public
-specifier|static
 name|List
 argument_list|<
 name|Double
@@ -1060,6 +1112,8 @@ operator|.
 name|Size
 operator|.
 name|class
+argument_list|,
+name|this
 argument_list|)
 decl_stmt|;
 specifier|final
@@ -1100,9 +1154,8 @@ else|:
 name|averageColumnSizes
 return|;
 block|}
-comment|/**    * Returns the    * {@link org.apache.calcite.rel.metadata.BuiltInMetadata.Parallelism#isPhaseTransition()}    * statistic.    *    * @param rel      the relational expression    * @return whether each physical operator implementing this relational    * expression belongs to a different process than its inputs, or null if not    * known    */
+comment|/**    * Returns the    * {@link BuiltInMetadata.Parallelism#isPhaseTransition()}    * statistic.    *    * @param rel      the relational expression    * @return whether each physical operator implementing this relational    * expression belongs to a different process than its inputs, or null if not    * known    */
 specifier|public
-specifier|static
 name|Boolean
 name|isPhaseTransition
 parameter_list|(
@@ -1125,6 +1178,8 @@ operator|.
 name|Parallelism
 operator|.
 name|class
+argument_list|,
+name|this
 argument_list|)
 decl_stmt|;
 return|return
@@ -1134,9 +1189,8 @@ name|isPhaseTransition
 argument_list|()
 return|;
 block|}
-comment|/**    * Returns the    * {@link org.apache.calcite.rel.metadata.BuiltInMetadata.Parallelism#splitCount()}    * statistic.    *    * @param rel      the relational expression    * @return the number of distinct splits of the data, or null if not known    */
+comment|/**    * Returns the    * {@link BuiltInMetadata.Parallelism#splitCount()}    * statistic.    *    * @param rel      the relational expression    * @return the number of distinct splits of the data, or null if not known    */
 specifier|public
-specifier|static
 name|Integer
 name|splitCount
 parameter_list|(
@@ -1159,6 +1213,8 @@ operator|.
 name|Parallelism
 operator|.
 name|class
+argument_list|,
+name|this
 argument_list|)
 decl_stmt|;
 return|return
@@ -1168,9 +1224,8 @@ name|splitCount
 argument_list|()
 return|;
 block|}
-comment|/**    * Returns the    * {@link org.apache.calcite.rel.metadata.BuiltInMetadata.Memory#memory()}    * statistic.    *    * @param rel      the relational expression    * @return the expected amount of memory, in bytes, required by a physical    * operator implementing this relational expression, across all splits,    * or null if not known    */
+comment|/**    * Returns the    * {@link BuiltInMetadata.Memory#memory()}    * statistic.    *    * @param rel      the relational expression    * @return the expected amount of memory, in bytes, required by a physical    * operator implementing this relational expression, across all splits,    * or null if not known    */
 specifier|public
-specifier|static
 name|Double
 name|memory
 parameter_list|(
@@ -1193,6 +1248,8 @@ operator|.
 name|Memory
 operator|.
 name|class
+argument_list|,
+name|this
 argument_list|)
 decl_stmt|;
 return|return
@@ -1202,9 +1259,8 @@ name|memory
 argument_list|()
 return|;
 block|}
-comment|/**    * Returns the    * {@link org.apache.calcite.rel.metadata.BuiltInMetadata.Memory#cumulativeMemoryWithinPhase()}    * statistic.    *    * @param rel      the relational expression    * @return the cumulative amount of memory, in bytes, required by the    * physical operator implementing this relational expression, and all other    * operators within the same phase, across all splits, or null if not known    */
+comment|/**    * Returns the    * {@link BuiltInMetadata.Memory#cumulativeMemoryWithinPhase()}    * statistic.    *    * @param rel      the relational expression    * @return the cumulative amount of memory, in bytes, required by the    * physical operator implementing this relational expression, and all other    * operators within the same phase, across all splits, or null if not known    */
 specifier|public
-specifier|static
 name|Double
 name|cumulativeMemoryWithinPhase
 parameter_list|(
@@ -1227,6 +1283,8 @@ operator|.
 name|Memory
 operator|.
 name|class
+argument_list|,
+name|this
 argument_list|)
 decl_stmt|;
 return|return
@@ -1236,9 +1294,8 @@ name|cumulativeMemoryWithinPhase
 argument_list|()
 return|;
 block|}
-comment|/**    * Returns the    * {@link org.apache.calcite.rel.metadata.BuiltInMetadata.Memory#cumulativeMemoryWithinPhaseSplit()}    * statistic.    *    * @param rel      the relational expression    * @return the expected cumulative amount of memory, in bytes, required by    * the physical operator implementing this relational expression, and all    * operators within the same phase, within each split, or null if not known    */
+comment|/**    * Returns the    * {@link BuiltInMetadata.Memory#cumulativeMemoryWithinPhaseSplit()}    * statistic.    *    * @param rel      the relational expression    * @return the expected cumulative amount of memory, in bytes, required by    * the physical operator implementing this relational expression, and all    * operators within the same phase, within each split, or null if not known    */
 specifier|public
-specifier|static
 name|Double
 name|cumulativeMemoryWithinPhaseSplit
 parameter_list|(
@@ -1261,6 +1318,8 @@ operator|.
 name|Memory
 operator|.
 name|class
+argument_list|,
+name|this
 argument_list|)
 decl_stmt|;
 return|return
@@ -1270,9 +1329,8 @@ name|cumulativeMemoryWithinPhaseSplit
 argument_list|()
 return|;
 block|}
-comment|/**    * Returns the    * {@link BuiltInMetadata.DistinctRowCount#getDistinctRowCount(org.apache.calcite.util.ImmutableBitSet, org.apache.calcite.rex.RexNode)}    * statistic.    *    * @param rel       the relational expression    * @param groupKey  column mask representing group by columns    * @param predicate pre-filtered predicates    * @return distinct row count for groupKey, filtered by predicate, or null    * if no reliable estimate can be determined    */
+comment|/**    * Returns the    * {@link BuiltInMetadata.DistinctRowCount#getDistinctRowCount(ImmutableBitSet, RexNode)}    * statistic.    *    * @param rel       the relational expression    * @param groupKey  column mask representing group by columns    * @param predicate pre-filtered predicates    * @return distinct row count for groupKey, filtered by predicate, or null    * if no reliable estimate can be determined    */
 specifier|public
-specifier|static
 name|Double
 name|getDistinctRowCount
 parameter_list|(
@@ -1301,6 +1359,8 @@ operator|.
 name|DistinctRowCount
 operator|.
 name|class
+argument_list|,
+name|this
 argument_list|)
 decl_stmt|;
 name|Double
@@ -1322,9 +1382,8 @@ name|result
 argument_list|)
 return|;
 block|}
-comment|/**    * Returns the    * {@link org.apache.calcite.rel.metadata.BuiltInMetadata.Predicates#getPredicates()}    * statistic.    *    * @param rel the relational expression    * @return Predicates that can be pulled above this RelNode    */
+comment|/**    * Returns the    * {@link BuiltInMetadata.Predicates#getPredicates()}    * statistic.    *    * @param rel the relational expression    * @return Predicates that can be pulled above this RelNode    */
 specifier|public
-specifier|static
 name|RelOptPredicateList
 name|getPulledUpPredicates
 parameter_list|(
@@ -1347,6 +1406,8 @@ operator|.
 name|Predicates
 operator|.
 name|class
+argument_list|,
+name|this
 argument_list|)
 decl_stmt|;
 return|return
@@ -1358,7 +1419,6 @@ return|;
 block|}
 comment|/**    * Returns the    * {@link BuiltInMetadata.ExplainVisibility#isVisibleInExplain(SqlExplainLevel)}    * statistic.    *    * @param rel          the relational expression    * @param explainLevel level of detail    * @return true for visible, false for invisible; if no metadata is available,    * defaults to true    */
 specifier|public
-specifier|static
 name|boolean
 name|isVisibleInExplain
 parameter_list|(
@@ -1384,6 +1444,8 @@ operator|.
 name|ExplainVisibility
 operator|.
 name|class
+argument_list|,
+name|this
 argument_list|)
 decl_stmt|;
 name|Boolean

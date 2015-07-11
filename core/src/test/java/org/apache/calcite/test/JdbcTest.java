@@ -13362,9 +13362,9 @@ argument_list|)
 operator|.
 name|explainContains
 argument_list|(
-literal|""
+literal|"PLAN="
 operator|+
-literal|"PLAN=EnumerableCalc(expr#0..23=[{inputs}], store_id=[$t0], grocery_sqft=[$t16])\n"
+literal|"EnumerableCalc(expr#0..23=[{inputs}], store_id=[$t0], grocery_sqft=[$t16])\n"
 operator|+
 literal|"  EnumerableLimit(fetch=[5])\n"
 operator|+
@@ -18206,20 +18206,20 @@ name|v
 condition|)
 block|{
 case|case
-literal|"calcite794"
-case|:
-return|return
-name|Bug
-operator|.
-name|CALCITE_794_FIXED
-return|;
-case|case
 literal|"calcite1045"
 case|:
 return|return
 name|Bug
 operator|.
 name|CALCITE_1045_FIXED
+return|;
+case|case
+literal|"calcite1048"
+case|:
+return|return
+name|Bug
+operator|.
+name|CALCITE_1048_FIXED
 return|;
 block|}
 return|return

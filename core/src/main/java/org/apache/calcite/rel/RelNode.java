@@ -333,7 +333,18 @@ argument_list|>
 name|getInputs
 parameter_list|()
 function_decl|;
-comment|/**    * Returns an estimate of the number of rows this relational expression will    * return.    *    *<p>NOTE jvs 29-Mar-2006: Don't call this method directly. Instead, use    * {@link RelMetadataQuery#getRowCount}, which gives plugins a chance to    * override the rel's default ideas about row count.    *    * @return Estimate of the number of rows this relational expression will    *   return    */
+comment|/**    * Returns an estimate of the number of rows this relational expression will    * return.    *    *<p>NOTE jvs 29-Mar-2006: Don't call this method directly. Instead, use    * {@link RelMetadataQuery#getRowCount}, which gives plugins a chance to    * override the rel's default ideas about row count.    *    * @param mq Metadata query    * @return Estimate of the number of rows this relational expression will    *   return    */
+name|double
+name|estimateRowCount
+parameter_list|(
+name|RelMetadataQuery
+name|mq
+parameter_list|)
+function_decl|;
+comment|/**    * @deprecated Call {@link RelMetadataQuery#getRowCount(RelNode)};    * if you wish to override the default row count formula, override the    * {@link #estimateRowCount(RelMetadataQuery)} method.    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 name|double
 name|getRows
 parameter_list|()
@@ -387,7 +398,21 @@ name|RelVisitor
 name|visitor
 parameter_list|)
 function_decl|;
-comment|/**    * Returns the cost of this plan (not including children). The base    * implementation throws an error; derived classes should override.    *    *<p>NOTE jvs 29-Mar-2006: Don't call this method directly. Instead, use    * {@link RelMetadataQuery#getNonCumulativeCost}, which gives plugins a    * chance to override the rel's default ideas about cost.    *    * @param planner Planner for cost calculation    * @return Cost of this plan (not including children)    */
+comment|/**    * Returns the cost of this plan (not including children). The base    * implementation throws an error; derived classes should override.    *    *<p>NOTE jvs 29-Mar-2006: Don't call this method directly. Instead, use    * {@link RelMetadataQuery#getNonCumulativeCost}, which gives plugins a    * chance to override the rel's default ideas about cost.    *    * @param planner Planner for cost calculation    * @param mq Metadata query    * @return Cost of this plan (not including children)    */
+name|RelOptCost
+name|computeSelfCost
+parameter_list|(
+name|RelOptPlanner
+name|planner
+parameter_list|,
+name|RelMetadataQuery
+name|mq
+parameter_list|)
+function_decl|;
+comment|/**    * @deprecated Call {@link RelMetadataQuery#getNonCumulativeCost(RelNode)};    * if you wish to override the default cost formula, override the    * {@link #computeSelfCost(RelOptPlanner, RelMetadataQuery)} method.    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 name|RelOptCost
 name|computeSelfCost
 parameter_list|(
@@ -395,7 +420,7 @@ name|RelOptPlanner
 name|planner
 parameter_list|)
 function_decl|;
-comment|/**    * Returns a metadata interface.    *    * @param metadataClass Metadata interface    * @param<M> Type of metadata being requested    * @return Metadata object that supplies the desired metadata (never null,    *     although if the information is not present the metadata object may    *     return null from all methods)    */
+comment|/**    * Returns a metadata interface.    *    * @param<M> Type of metadata being requested    * @param metadataClass Metadata interface    * @param mq Metadata query    *    * @return Metadata object that supplies the desired metadata (never null,    *     although if the information is not present the metadata object may    *     return null from all methods)    */
 parameter_list|<
 name|M
 extends|extends
@@ -409,6 +434,9 @@ argument_list|<
 name|M
 argument_list|>
 name|metadataClass
+parameter_list|,
+name|RelMetadataQuery
+name|mq
 parameter_list|)
 function_decl|;
 comment|/**    * Describes the inputs and attributes of this relational expression.    * Each node should call {@code super.explain}, then call the    * {@link org.apache.calcite.rel.externalize.RelWriterImpl#input(String, RelNode)}    * and    * {@link org.apache.calcite.rel.externalize.RelWriterImpl#item(String, Object)}    * methods for each input and attribute.    *    * @param pw Plan writer    */

@@ -496,13 +496,16 @@ parameter_list|()
 block|{
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|/** Catch-all implementation for    * {@link org.apache.calcite.rel.metadata.BuiltInMetadata.Size#averageRowSize()},    * invoked using reflection.    *    * @see org.apache.calcite.rel.metadata.RelMetadataQuery#getAverageRowSize    */
+comment|/** Catch-all implementation for    * {@link BuiltInMetadata.Size#averageRowSize()},    * invoked using reflection.    *    * @see org.apache.calcite.rel.metadata.RelMetadataQuery#getAverageRowSize    */
 specifier|public
 name|Double
 name|averageRowSize
 parameter_list|(
 name|RelNode
 name|rel
+parameter_list|,
+name|RelMetadataQuery
+name|mq
 parameter_list|)
 block|{
 specifier|final
@@ -512,7 +515,7 @@ name|Double
 argument_list|>
 name|averageColumnSizes
 init|=
-name|RelMetadataQuery
+name|mq
 operator|.
 name|getAverageColumnSizes
 argument_list|(
@@ -603,7 +606,7 @@ return|return
 name|d
 return|;
 block|}
-comment|/** Catch-all implementation for    * {@link org.apache.calcite.rel.metadata.BuiltInMetadata.Size#averageColumnSizes()},    * invoked using reflection.    *    * @see org.apache.calcite.rel.metadata.RelMetadataQuery#getAverageColumnSizes    */
+comment|/** Catch-all implementation for    * {@link BuiltInMetadata.Size#averageColumnSizes()},    * invoked using reflection.    *    * @see org.apache.calcite.rel.metadata.RelMetadataQuery#getAverageColumnSizes    */
 specifier|public
 name|List
 argument_list|<
@@ -613,6 +616,9 @@ name|averageColumnSizes
 parameter_list|(
 name|RelNode
 name|rel
+parameter_list|,
+name|RelMetadataQuery
+name|mq
 parameter_list|)
 block|{
 return|return
@@ -629,10 +635,13 @@ name|averageColumnSizes
 parameter_list|(
 name|Filter
 name|rel
+parameter_list|,
+name|RelMetadataQuery
+name|mq
 parameter_list|)
 block|{
 return|return
-name|RelMetadataQuery
+name|mq
 operator|.
 name|getAverageColumnSizes
 argument_list|(
@@ -652,10 +661,13 @@ name|averageColumnSizes
 parameter_list|(
 name|Sort
 name|rel
+parameter_list|,
+name|RelMetadataQuery
+name|mq
 parameter_list|)
 block|{
 return|return
-name|RelMetadataQuery
+name|mq
 operator|.
 name|getAverageColumnSizes
 argument_list|(
@@ -675,10 +687,13 @@ name|averageColumnSizes
 parameter_list|(
 name|Exchange
 name|rel
+parameter_list|,
+name|RelMetadataQuery
+name|mq
 parameter_list|)
 block|{
 return|return
-name|RelMetadataQuery
+name|mq
 operator|.
 name|getAverageColumnSizes
 argument_list|(
@@ -698,6 +713,9 @@ name|averageColumnSizes
 parameter_list|(
 name|Project
 name|rel
+parameter_list|,
+name|RelMetadataQuery
+name|mq
 parameter_list|)
 block|{
 specifier|final
@@ -707,7 +725,7 @@ name|Double
 argument_list|>
 name|inputColumnSizes
 init|=
-name|RelMetadataQuery
+name|mq
 operator|.
 name|getAverageColumnSizesNotNull
 argument_list|(
@@ -771,6 +789,9 @@ name|averageColumnSizes
 parameter_list|(
 name|Values
 name|rel
+parameter_list|,
+name|RelMetadataQuery
+name|mq
 parameter_list|)
 block|{
 specifier|final
@@ -931,6 +952,9 @@ name|averageColumnSizes
 parameter_list|(
 name|TableScan
 name|rel
+parameter_list|,
+name|RelMetadataQuery
+name|mq
 parameter_list|)
 block|{
 specifier|final
@@ -1000,6 +1024,9 @@ name|averageColumnSizes
 parameter_list|(
 name|Aggregate
 name|rel
+parameter_list|,
+name|RelMetadataQuery
+name|mq
 parameter_list|)
 block|{
 specifier|final
@@ -1009,7 +1036,7 @@ name|Double
 argument_list|>
 name|inputColumnSizes
 init|=
-name|RelMetadataQuery
+name|mq
 operator|.
 name|getAverageColumnSizesNotNull
 argument_list|(
@@ -1097,12 +1124,17 @@ name|averageColumnSizes
 parameter_list|(
 name|SemiJoin
 name|rel
+parameter_list|,
+name|RelMetadataQuery
+name|mq
 parameter_list|)
 block|{
 return|return
 name|averageJoinColumnSizes
 argument_list|(
 name|rel
+argument_list|,
+name|mq
 argument_list|,
 literal|true
 argument_list|)
@@ -1117,12 +1149,17 @@ name|averageColumnSizes
 parameter_list|(
 name|Join
 name|rel
+parameter_list|,
+name|RelMetadataQuery
+name|mq
 parameter_list|)
 block|{
 return|return
 name|averageJoinColumnSizes
 argument_list|(
 name|rel
+argument_list|,
+name|mq
 argument_list|,
 literal|false
 argument_list|)
@@ -1137,6 +1174,9 @@ name|averageJoinColumnSizes
 parameter_list|(
 name|Join
 name|rel
+parameter_list|,
+name|RelMetadataQuery
+name|mq
 parameter_list|,
 name|boolean
 name|semijoin
@@ -1167,7 +1207,7 @@ name|Double
 argument_list|>
 name|lefts
 init|=
-name|RelMetadataQuery
+name|mq
 operator|.
 name|getAverageColumnSizes
 argument_list|(
@@ -1185,7 +1225,7 @@ name|semijoin
 condition|?
 literal|null
 else|:
-name|RelMetadataQuery
+name|mq
 operator|.
 name|getAverageColumnSizes
 argument_list|(
@@ -1315,10 +1355,13 @@ name|averageColumnSizes
 parameter_list|(
 name|Intersect
 name|rel
+parameter_list|,
+name|RelMetadataQuery
+name|mq
 parameter_list|)
 block|{
 return|return
-name|RelMetadataQuery
+name|mq
 operator|.
 name|getAverageColumnSizes
 argument_list|(
@@ -1340,10 +1383,13 @@ name|averageColumnSizes
 parameter_list|(
 name|Minus
 name|rel
+parameter_list|,
+name|RelMetadataQuery
+name|mq
 parameter_list|)
 block|{
 return|return
-name|RelMetadataQuery
+name|mq
 operator|.
 name|getAverageColumnSizes
 argument_list|(
@@ -1365,6 +1411,9 @@ name|averageColumnSizes
 parameter_list|(
 name|Union
 name|rel
+parameter_list|,
+name|RelMetadataQuery
+name|mq
 parameter_list|)
 block|{
 specifier|final
@@ -1411,7 +1460,7 @@ name|Double
 argument_list|>
 name|inputSizes
 init|=
-name|RelMetadataQuery
+name|mq
 operator|.
 name|getAverageColumnSizes
 argument_list|(

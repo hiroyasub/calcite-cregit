@@ -263,20 +263,20 @@ name|RowCount
 extends|extends
 name|Metadata
 block|{
-comment|/**      * Estimates the number of rows which will be returned by a relational      * expression. The default implementation for this query asks the rel itself      * via {@link RelNode#getRows}, but metadata providers can override this      * with their own cost models.      *      * @return estimated row count, or null if no reliable estimate can be      * determined      */
+comment|/**      * Estimates the number of rows which will be returned by a relational      * expression. The default implementation for this query asks the rel itself      * via {@link RelNode#estimateRowCount}, but metadata providers can override this      * with their own cost models.      *      * @return estimated row count, or null if no reliable estimate can be      * determined      */
 name|Double
 name|getRowCount
 parameter_list|()
 function_decl|;
 block|}
-comment|/** Metadata about the max number of rows returned by a relational expression. */
+comment|/** Metadata about the maximum number of rows returned by a relational    * expression. */
 specifier|public
 interface|interface
 name|MaxRowCount
 extends|extends
 name|Metadata
 block|{
-comment|/**      * Estimates the max number of rows which will be returned by a relational      * expression. The default implementation for this query returns Double.POSITIVE_INFINITY,      * but metadata providers can override this with their own cost models.      *      * @return estimated max row count      */
+comment|/**      * Estimates the max number of rows which will be returned by a relational      * expression.      *      *<p>The default implementation for this query returns      * {@link Double#POSITIVE_INFINITY},      * but metadata providers can override this with their own cost models.      *      * @return upper bound on the number of rows returned      */
 name|Double
 name|getMaxRowCount
 parameter_list|()
@@ -455,7 +455,7 @@ name|Double
 name|memory
 parameter_list|()
 function_decl|;
-comment|/** Returns the cumulative amount of memory, in bytes, required by the      * physical operator implementing this relational expression, and all other      * operators within the same phase, across all splits.      *      * @see org.apache.calcite.rel.metadata.BuiltInMetadata.Parallelism#splitCount()      */
+comment|/** Returns the cumulative amount of memory, in bytes, required by the      * physical operator implementing this relational expression, and all other      * operators within the same phase, across all splits.      *      * @see Parallelism#splitCount()      */
 name|Double
 name|cumulativeMemoryWithinPhase
 parameter_list|()
