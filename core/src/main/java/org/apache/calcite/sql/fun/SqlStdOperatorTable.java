@@ -780,8 +780,9 @@ literal|true
 argument_list|,
 name|ReturnTypes
 operator|.
-name|BOOLEAN_NULLABLE
+name|ARG0_NULLABLE
 argument_list|,
+comment|// more efficient than BOOLEAN_NULLABLE
 name|InferTypes
 operator|.
 name|BOOLEAN
@@ -1468,8 +1469,9 @@ literal|true
 argument_list|,
 name|ReturnTypes
 operator|.
-name|BOOLEAN_NULLABLE
+name|ARG0_NULLABLE
 argument_list|,
+comment|// more efficient than BOOLEAN_NULLABLE
 name|InferTypes
 operator|.
 name|BOOLEAN
@@ -2055,7 +2057,7 @@ literal|30
 argument_list|,
 name|ReturnTypes
 operator|.
-name|BOOLEAN_NULLABLE
+name|ARG0
 argument_list|,
 name|InferTypes
 operator|.
