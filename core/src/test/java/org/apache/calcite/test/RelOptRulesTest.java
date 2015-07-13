@@ -1481,6 +1481,24 @@ literal|"where dept1.c1> 'c' and (dept1.c2> 30 or dept1.c1< 'z')"
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-799">[CALCITE-799],    * Incorrect result for {@code HAVING count(*)> 1}</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testPushFilterPastAggThree
+parameter_list|()
+block|{
+name|checkPlanning
+argument_list|(
+name|FilterAggregateTransposeRule
+operator|.
+name|INSTANCE
+argument_list|,
+literal|"select deptno from emp group by deptno having count(*)> 1"
+argument_list|)
+expr_stmt|;
+block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-448">[CALCITE-448],    * FilterIntoJoinRule creates filters containing invalid RexInputRef</a>. */
 annotation|@
 name|Test
