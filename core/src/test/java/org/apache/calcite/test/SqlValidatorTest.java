@@ -9888,6 +9888,74 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testOverInPartitionBy
+parameter_list|()
+block|{
+name|winSql
+argument_list|(
+literal|"select sum(deptno) over ^(partition by sum(deptno) \n"
+operator|+
+literal|"over(order by deptno))^ from emp"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"PARTITION BY expression should not contain OVER clause"
+argument_list|)
+expr_stmt|;
+name|winSql
+argument_list|(
+literal|"select sum(deptno) over w \n"
+operator|+
+literal|"from emp \n"
+operator|+
+literal|"window w as ^(partition by sum(deptno) over(order by deptno))^"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"PARTITION BY expression should not contain OVER clause"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testOverInOrderBy
+parameter_list|()
+block|{
+name|winSql
+argument_list|(
+literal|"select sum(deptno) over ^(order by sum(deptno) \n"
+operator|+
+literal|"over(order by deptno))^ from emp"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"ORDER BY expression should not contain OVER clause"
+argument_list|)
+expr_stmt|;
+name|winSql
+argument_list|(
+literal|"select sum(deptno) over w \n"
+operator|+
+literal|"from emp \n"
+operator|+
+literal|"window w as ^(order by sum(deptno) over(order by deptno))^"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"ORDER BY expression should not contain OVER clause"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testWindowFunctions
 parameter_list|()
 block|{
@@ -10050,6 +10118,42 @@ argument_list|)
 operator|.
 name|ok
 argument_list|()
+expr_stmt|;
+name|winExp
+argument_list|(
+literal|"row_number() over (partition by deptno)"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|winExp
+argument_list|(
+literal|"row_number() over ()"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|winExp
+argument_list|(
+literal|"row_number() over (order by deptno ^rows^ 2 preceding)"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"ROW/RANGE not allowed with RANK or DENSE_RANK functions"
+argument_list|)
+expr_stmt|;
+name|winExp
+argument_list|(
+literal|"row_number() over (order by deptno ^range^ 2 preceding)"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"ROW/RANGE not allowed with RANK or DENSE_RANK functions"
+argument_list|)
 expr_stmt|;
 comment|// rank function type
 if|if
@@ -11036,11 +11140,13 @@ expr_stmt|;
 comment|// syntax rule 7
 name|win
 argument_list|(
-literal|"window w as (order by rank() over (order by sal))"
+literal|"window w as ^(order by rank() over (order by sal))^"
 argument_list|)
 operator|.
-name|ok
-argument_list|()
+name|fails
+argument_list|(
+literal|"ORDER BY expression should not contain OVER clause"
+argument_list|)
 expr_stmt|;
 comment|// ------------------------------------
 comment|// ---- window frame between tests ----

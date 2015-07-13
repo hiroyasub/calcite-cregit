@@ -2594,6 +2594,8 @@ operator|new
 name|SqlRankFunction
 argument_list|(
 literal|"CUME_DIST"
+argument_list|,
+literal|true
 argument_list|)
 decl_stmt|;
 comment|/**    *<code>DENSE_RANK</code> Window function.    */
@@ -2607,6 +2609,8 @@ operator|new
 name|SqlRankFunction
 argument_list|(
 literal|"DENSE_RANK"
+argument_list|,
+literal|true
 argument_list|)
 decl_stmt|;
 comment|/**    *<code>PERCENT_RANK</code> Window function.    */
@@ -2620,6 +2624,8 @@ operator|new
 name|SqlRankFunction
 argument_list|(
 literal|"PERCENT_RANK"
+argument_list|,
+literal|true
 argument_list|)
 decl_stmt|;
 comment|/**    *<code>RANK</code> Window function.    */
@@ -2633,6 +2639,8 @@ operator|new
 name|SqlRankFunction
 argument_list|(
 literal|"RANK"
+argument_list|,
+literal|true
 argument_list|)
 decl_stmt|;
 comment|/**    *<code>ROW_NUMBER</code> Window function.    */
@@ -2646,6 +2654,8 @@ operator|new
 name|SqlRankFunction
 argument_list|(
 literal|"ROW_NUMBER"
+argument_list|,
+literal|false
 argument_list|)
 decl_stmt|;
 comment|//-------------------------------------------------------------

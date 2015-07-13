@@ -1585,6 +1585,30 @@ function_decl|;
 annotation|@
 name|BaseMessage
 argument_list|(
+literal|"PARTITION BY expression should not contain OVER clause"
+argument_list|)
+name|ExInst
+argument_list|<
+name|SqlValidatorException
+argument_list|>
+name|partitionbyShouldNotContainOver
+parameter_list|()
+function_decl|;
+annotation|@
+name|BaseMessage
+argument_list|(
+literal|"ORDER BY expression should not contain OVER clause"
+argument_list|)
+name|ExInst
+argument_list|<
+name|SqlValidatorException
+argument_list|>
+name|orderbyShouldNotContainOver
+parameter_list|()
+function_decl|;
+annotation|@
+name|BaseMessage
+argument_list|(
 literal|"UNBOUNDED FOLLOWING cannot be specified for the lower frame boundary"
 argument_list|)
 name|ExInst
