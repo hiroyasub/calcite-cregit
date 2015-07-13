@@ -851,7 +851,12 @@ name|RelDataType
 argument_list|>
 name|flattenedTypes
 init|=
-name|getTypeArray
+operator|new
+name|ArrayList
+argument_list|<>
+argument_list|()
+decl_stmt|;
+name|getTypeList
 argument_list|(
 name|ImmutableList
 operator|.
@@ -859,8 +864,10 @@ name|copyOf
 argument_list|(
 name|types
 argument_list|)
+argument_list|,
+name|flattenedTypes
 argument_list|)
-decl_stmt|;
+expr_stmt|;
 return|return
 name|canonize
 argument_list|(
@@ -869,7 +876,7 @@ name|RelCrossType
 argument_list|(
 name|flattenedTypes
 argument_list|,
-name|getFieldArray
+name|getFieldList
 argument_list|(
 name|flattenedTypes
 argument_list|)
@@ -1808,14 +1815,14 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/**    * Returns an array of the fields in an array of types.    */
+comment|/**    * Returns a list of the fields in a list of types.    */
 specifier|private
 specifier|static
 name|List
 argument_list|<
 name|RelDataTypeField
 argument_list|>
-name|getFieldArray
+name|getFieldList
 parameter_list|(
 name|List
 argument_list|<
@@ -1824,7 +1831,8 @@ argument_list|>
 name|types
 parameter_list|)
 block|{
-name|ArrayList
+specifier|final
+name|List
 argument_list|<
 name|RelDataTypeField
 argument_list|>
@@ -1832,9 +1840,7 @@ name|fieldList
 init|=
 operator|new
 name|ArrayList
-argument_list|<
-name|RelDataTypeField
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 for|for
@@ -1857,52 +1863,13 @@ return|return
 name|fieldList
 return|;
 block|}
-comment|/**    * Returns an array of all atomic types in an array.    */
-specifier|private
-specifier|static
-name|List
-argument_list|<
-name|RelDataType
-argument_list|>
-name|getTypeArray
-parameter_list|(
-name|List
-argument_list|<
-name|RelDataType
-argument_list|>
-name|types
-parameter_list|)
-block|{
-name|List
-argument_list|<
-name|RelDataType
-argument_list|>
-name|flatTypes
-init|=
-operator|new
-name|ArrayList
-argument_list|<
-name|RelDataType
-argument_list|>
-argument_list|()
-decl_stmt|;
-name|getTypeArray
-argument_list|(
-name|types
-argument_list|,
-name|flatTypes
-argument_list|)
-expr_stmt|;
-return|return
-name|flatTypes
-return|;
-block|}
+comment|/**    * Returns a list of all atomic types in a list.    */
 specifier|private
 specifier|static
 name|void
-name|getTypeArray
+name|getTypeList
 parameter_list|(
-name|List
+name|ImmutableList
 argument_list|<
 name|RelDataType
 argument_list|>
@@ -1930,7 +1897,7 @@ operator|instanceof
 name|RelCrossType
 condition|)
 block|{
-name|getTypeArray
+name|getTypeList
 argument_list|(
 operator|(
 operator|(
@@ -1957,7 +1924,7 @@ expr_stmt|;
 block|}
 block|}
 block|}
-comment|/**    * Adds all fields in<code>type</code> to<code>fieldList</code>.    */
+comment|/**    * Adds all fields in<code>type</code> to<code>fieldList</code>,    * renumbering the fields (if necessary) to ensure that their index    * matches their position in the list.    */
 specifier|private
 specifier|static
 name|void
@@ -1966,7 +1933,7 @@ parameter_list|(
 name|RelDataType
 name|type
 parameter_list|,
-name|ArrayList
+name|List
 argument_list|<
 name|RelDataTypeField
 argument_list|>
@@ -2029,6 +1996,41 @@ range|:
 name|fields
 control|)
 block|{
+if|if
+condition|(
+name|field
+operator|.
+name|getIndex
+argument_list|()
+operator|!=
+name|fieldList
+operator|.
+name|size
+argument_list|()
+condition|)
+block|{
+name|field
+operator|=
+operator|new
+name|RelDataTypeFieldImpl
+argument_list|(
+name|field
+operator|.
+name|getName
+argument_list|()
+argument_list|,
+name|fieldList
+operator|.
+name|size
+argument_list|()
+argument_list|,
+name|field
+operator|.
+name|getType
+argument_list|()
+argument_list|)
+expr_stmt|;
+block|}
 name|fieldList
 operator|.
 name|add
@@ -2074,9 +2076,7 @@ name|list
 init|=
 operator|new
 name|ArrayList
-argument_list|<
-name|RelDataTypeFieldImpl
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 for|for
@@ -2149,7 +2149,7 @@ return|return
 name|list
 return|;
 block|}
-comment|/**    * implement RelDataTypeFactory with SQL 2003 compliant behavior. Let p1, s1    * be the precision and scale of the first operand Let p2, s2 be the    * precision and scale of the second operand Let p, s be the precision and    * scale of the result, Then the result type is a decimal with:    *    *<ul>    *<li>p = p1 + p2</li>    *<li>s = s1 + s2</li>    *</ul>    *    * p and s are capped at their maximum values    *    * @sql.2003 Part 2 Section 6.26    */
+comment|/**    * {@inheritDoc}    *    *<p>Implement RelDataTypeFactory with SQL 2003 compliant behavior. Let p1,    * s1 be the precision and scale of the first operand Let p2, s2 be the    * precision and scale of the second operand Let p, s be the precision and    * scale of the result, Then the result type is a decimal with:    *    *<ul>    *<li>p = p1 + p2</li>    *<li>s = s1 + s2</li>    *</ul>    *    * p and s are capped at their maximum values    *    * @sql.2003 Part 2 Section 6.26    */
 specifier|public
 name|RelDataType
 name|createDecimalProduct

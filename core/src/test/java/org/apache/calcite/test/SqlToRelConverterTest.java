@@ -447,6 +447,30 @@ literal|"${plan}"
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-801">[CALCITE-801]    * NullPointerException using USING on table alias with column    * aliases</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testValuesUsing
+parameter_list|()
+block|{
+name|check
+argument_list|(
+literal|"select d.deptno, min(e.empid) as empid\n"
+operator|+
+literal|"from (values (100, 'Bill', 1)) as e(empid, name, deptno)\n"
+operator|+
+literal|"join (values (1, 'LeaderShip')) as d(deptno, name)\n"
+operator|+
+literal|"  using (deptno)\n"
+operator|+
+literal|"group by d.deptno"
+argument_list|,
+literal|"${plan}"
+argument_list|)
+expr_stmt|;
+block|}
 annotation|@
 name|Test
 specifier|public
@@ -3135,7 +3159,7 @@ literal|"select deptno\n"
 operator|+
 literal|"from EMP\n"
 operator|+
-literal|"where deptno> (select deptno \n"
+literal|"where deptno> (select deptno\n"
 operator|+
 literal|"from EMP order by deptno limit 1)"
 argument_list|)
@@ -3179,13 +3203,13 @@ parameter_list|()
 block|{
 name|sql
 argument_list|(
-literal|"select deptno \n"
+literal|"select deptno\n"
 operator|+
-literal|"from emp \n"
+literal|"from emp\n"
 operator|+
-literal|"group by deptno \n"
+literal|"group by deptno\n"
 operator|+
-literal|"having sum(case when deptno in (1, 2) then 0 else 1 end) + \n"
+literal|"having sum(case when deptno in (1, 2) then 0 else 1 end) +\n"
 operator|+
 literal|"sum(case when deptno in (3, 4) then 0 else 1 end)> 10"
 argument_list|)
@@ -3206,21 +3230,21 @@ parameter_list|()
 block|{
 name|sql
 argument_list|(
-literal|"select sal \n"
+literal|"select sal\n"
 operator|+
-literal|"from emp \n"
+literal|"from emp\n"
 operator|+
-literal|"group by sal \n"
+literal|"group by sal\n"
 operator|+
-literal|"having sal in \n"
+literal|"having sal in (\n"
 operator|+
-literal|"(select deptno \n"
+literal|"  select deptno\n"
 operator|+
-literal|"from dept \n"
+literal|"  from dept\n"
 operator|+
-literal|"group by deptno \n"
+literal|"  group by deptno\n"
 operator|+
-literal|"having sum(deptno)> 0)"
+literal|"  having sum(deptno)> 0)"
 argument_list|)
 operator|.
 name|convertsTo

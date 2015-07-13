@@ -111,11 +111,6 @@ argument_list|)
 expr_stmt|;
 assert|assert
 name|types
-operator|!=
-literal|null
-assert|;
-assert|assert
-name|types
 operator|.
 name|size
 argument_list|()
