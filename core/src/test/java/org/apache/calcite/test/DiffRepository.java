@@ -23,6 +23,22 @@ name|apache
 operator|.
 name|calcite
 operator|.
+name|avatica
+operator|.
+name|util
+operator|.
+name|Spaces
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
 name|util
 operator|.
 name|Util
@@ -227,7 +243,27 @@ name|java
 operator|.
 name|util
 operator|.
+name|ArrayList
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
 name|HashMap
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|List
 import|;
 end_import
 
@@ -278,7 +314,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * A collection of resources used by tests.  *  *<p>Loads files containing test input and output into memory. If there are  * differences, writes out a log file containing the actual output.  *  *<p>Typical usage is as follows. A testcase class defines a method  *  *<blockquote><pre><code>  *  * package com.acme.test;  *  * public class MyTest extends TestCase {  *     public DiffRepository getDiffRepos() {  *         return DiffRepository.lookup(MyTest.class);  *     }  *  *&#64;Test public void testToUpper() {  *          getDiffRepos().assertEquals("${result}", "${string}");  *     }  *  *&#64;Test public void testToLower() {  *          getDiffRepos().assertEquals("Multi-line\nstring", "${string}");  *     }  * }  *</code></pre></blockquote>  *  *<p>There is an accompanying reference file named after the class,  *<code>src/test/resources/com/acme/test/MyTest.xml</code>:</p>  *  *<blockquote><pre><code>  *  *&lt;Root&gt;  *&lt;TestCase name="testToUpper"&gt;  *&lt;Resource name="string"&gt;  *&lt;![CDATA[String to be converted to upper case]]&gt;  *&lt;/Resource&gt;  *&lt;Resource name="result"&gt;  *&lt;![CDATA[STRING TO BE CONVERTED TO UPPER CASE]]&gt;  *&lt;/Resource&gt;  *&lt;/TestCase&gt;  *&lt;TestCase name="testToLower"&gt;  *&lt;Resource name="result"&gt;  *&lt;![CDATA[multi-line  * string]]&gt;  *&lt;/Resource&gt;  *&lt;/TestCase&gt;  *&lt;/Root&gt;  *  *</code></pre></blockquote>  *  *<p>If any of the testcases fails, a log file is generated, called  *<code>target/surefire/com/acme/test/MyTest.xml</code>, containing the actual  * output.</p>  *  *<p>(Maven sometimes removes this file; if it is not present, run maven with  * an extra {@code -X} flag.  * See<a href="http://jira.codehaus.org/browse/SUREFIRE-846">SUREFIRE-846</a>  * for details.)</p>  *  *<p>The log  * file is otherwise identical to the reference log, so once the log file has  * been verified, it can simply be copied over to become the new reference  * log:</p>  *  *<blockquote><code>cp target/surefire/com/acme/test/MyTest.xml  * src/test/resources/com/acme/test/MyTest.xml</code></blockquote>  *  *<p>If a resource or testcase does not exist,<code>DiffRepository</code>  * creates them in the log file. Because DiffRepository is so forgiving, it is  * very easy to create new tests and testcases.</p>  *  *<p>The {@link #lookup} method ensures that all test cases share the same  * instance of the repository. This is important more than one one test case  * fails. The shared instance ensures that the generated  *<code>target/surefire/com/acme/test/MyTest.xml</code>  * file contains the actual for<em>both</em> test cases.  */
+comment|/**  * A collection of resources used by tests.  *  *<p>Loads files containing test input and output into memory. If there are  * differences, writes out a log file containing the actual output.  *  *<p>Typical usage is as follows. A test case class defines a method  *  *<blockquote><pre><code>  *  * package com.acme.test;  *  * public class MyTest extends TestCase {  *   public DiffRepository getDiffRepos() {  *     return DiffRepository.lookup(MyTest.class);  *   }  *  *&#64;Test public void testToUpper() {  *     getDiffRepos().assertEquals("${result}", "${string}");  *   }  *  *&#64;Test public void testToLower() {  *     getDiffRepos().assertEquals("Multi-line\nstring", "${string}");  *   }  * }  *</code></pre></blockquote>  *  *<p>There is an accompanying reference file named after the class,  *<code>src/test/resources/com/acme/test/MyTest.xml</code>:</p>  *  *<blockquote><pre><code>  *  *&lt;Root&gt;  *&lt;TestCase name="testToUpper"&gt;  *&lt;Resource name="string"&gt;  *&lt;![CDATA[String to be converted to upper case]]&gt;  *&lt;/Resource&gt;  *&lt;Resource name="result"&gt;  *&lt;![CDATA[STRING TO BE CONVERTED TO UPPER CASE]]&gt;  *&lt;/Resource&gt;  *&lt;/TestCase&gt;  *&lt;TestCase name="testToLower"&gt;  *&lt;Resource name="result"&gt;  *&lt;![CDATA[multi-line  * string]]&gt;  *&lt;/Resource&gt;  *&lt;/TestCase&gt;  *&lt;/Root&gt;  *  *</code></pre></blockquote>  *  *<p>If any of the test cases fails, a log file is generated, called  *<code>target/surefire/com/acme/test/MyTest.xml</code>, containing the actual  * output.</p>  *  *<p>(Maven sometimes removes this file; if it is not present, run maven with  * an extra {@code -X} flag.  * See<a href="http://jira.codehaus.org/browse/SUREFIRE-846">SUREFIRE-846</a>  * for details.)</p>  *  *<p>The log  * file is otherwise identical to the reference log, so once the log file has  * been verified, it can simply be copied over to become the new reference  * log:</p>  *  *<blockquote><code>cp target/surefire/com/acme/test/MyTest.xml  * src/test/resources/com/acme/test/MyTest.xml</code></blockquote>  *  *<p>If a resource or test case does not exist,<code>DiffRepository</code>  * creates them in the log file. Because DiffRepository is so forgiving, it is  * very easy to create new tests and test cases.</p>  *  *<p>The {@link #lookup} method ensures that all test cases share the same  * instance of the repository. This is important more than one one test case  * fails. The shared instance ensures that the generated  *<code>target/surefire/com/acme/test/MyTest.xml</code>  * file contains the actual for<em>both</em> test cases.  */
 end_comment
 
 begin_class
@@ -336,7 +372,7 @@ name|RESOURCE_NAME_ATTR
 init|=
 literal|"name"
 decl_stmt|;
-comment|/**    * Holds one diff-repository per class. It is necessary for all testcases in    * the same class to share the same diff-repository: if the repos gets    * loaded once per testcase, then only one diff is recorded.    */
+comment|/**    * Holds one diff-repository per class. It is necessary for all test cases in    * the same class to share the same diff-repository: if the repository gets    * loaded once per test case, then only one diff is recorded.    */
 specifier|private
 specifier|static
 specifier|final
@@ -346,22 +382,23 @@ name|Class
 argument_list|,
 name|DiffRepository
 argument_list|>
-name|MAP_CLASS_TO_REPOS
+name|MAP_CLASS_TO_REPOSITORY
 init|=
 operator|new
 name|HashMap
-argument_list|<
-name|Class
-argument_list|,
-name|DiffRepository
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 comment|//~ Instance fields --------------------------------------------------------
 specifier|private
 specifier|final
 name|DiffRepository
-name|baseRepos
+name|baseRepository
+decl_stmt|;
+specifier|private
+specifier|final
+name|int
+name|indent
 decl_stmt|;
 specifier|private
 name|Document
@@ -383,7 +420,7 @@ name|Filter
 name|filter
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**    * Creates a DiffRepository.    *    * @param refFile   Reference file    * @param logFile   Log file    * @param baseRepos Parent repository or null    * @param filter    Filter or null    */
+comment|/**    * Creates a DiffRepository.    *    * @param refFile   Reference file    * @param logFile   Log file    * @param baseRepository Parent repository or null    * @param filter    Filter or null    */
 specifier|private
 name|DiffRepository
 parameter_list|(
@@ -394,7 +431,7 @@ name|File
 name|logFile
 parameter_list|,
 name|DiffRepository
-name|baseRepos
+name|baseRepository
 parameter_list|,
 name|Filter
 name|filter
@@ -402,9 +439,9 @@ parameter_list|)
 block|{
 name|this
 operator|.
-name|baseRepos
+name|baseRepository
 operator|=
-name|baseRepos
+name|baseRepository
 expr_stmt|;
 name|this
 operator|.
@@ -552,22 +589,7 @@ block|}
 catch|catch
 parameter_list|(
 name|ParserConfigurationException
-name|e
-parameter_list|)
-block|{
-throw|throw
-name|Util
-operator|.
-name|newInternal
-argument_list|(
-name|e
-argument_list|,
-literal|"error while creating xml parser"
-argument_list|)
-throw|;
-block|}
-catch|catch
-parameter_list|(
+decl||
 name|SAXException
 name|e
 parameter_list|)
@@ -583,6 +605,42 @@ literal|"error while creating xml parser"
 argument_list|)
 throw|;
 block|}
+name|indent
+operator|=
+name|logFile
+operator|.
+name|getPath
+argument_list|()
+operator|.
+name|contains
+argument_list|(
+literal|"RelOptRulesTest"
+argument_list|)
+operator|||
+name|logFile
+operator|.
+name|getPath
+argument_list|()
+operator|.
+name|contains
+argument_list|(
+literal|"SqlToRelConverterTest"
+argument_list|)
+operator|||
+name|logFile
+operator|.
+name|getPath
+argument_list|()
+operator|.
+name|contains
+argument_list|(
+literal|"SqlLimitsTest"
+argument_list|)
+condition|?
+literal|4
+else|:
+literal|2
+expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
 specifier|private
@@ -796,11 +854,11 @@ argument_list|)
 decl_stmt|;
 if|if
 condition|(
-name|baseRepos
+name|baseRepository
 operator|==
 literal|null
 operator|||
-name|baseRepos
+name|baseRepository
 operator|.
 name|get
 argument_list|(
@@ -825,7 +883,7 @@ name|text
 return|;
 block|}
 block|}
-comment|/**    * Sets the value of a given resource of the current testcase.    *    * @param resourceName Name of the resource, e.g. "sql"    * @param value        Value of the resource    */
+comment|/**    * Sets the value of a given resource of the current test case.    *    * @param resourceName Name of the resource, e.g. "sql"    * @param value        Value of the resource    */
 specifier|public
 specifier|synchronized
 name|void
@@ -916,7 +974,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**    * Returns a given resource from a given testcase.    *    * @param testCaseName Name of test case, e.g. "testFoo"    * @param resourceName Name of resource, e.g. "sql", "plan"    * @return The value of the resource, or null if not found    */
+comment|/**    * Returns a given resource from a given test case.    *    * @param testCaseName Name of test case, e.g. "testFoo"    * @param resourceName Name of resource, e.g. "sql", "plan"    * @return The value of the resource, or null if not found    */
 specifier|private
 specifier|synchronized
 name|String
@@ -949,13 +1007,13 @@ condition|)
 block|{
 if|if
 condition|(
-name|baseRepos
+name|baseRepository
 operator|!=
 literal|null
 condition|)
 block|{
 return|return
-name|baseRepos
+name|baseRepository
 operator|.
 name|get
 argument_list|(
@@ -1225,13 +1283,13 @@ condition|(
 name|checkOverride
 operator|&&
 operator|(
-name|baseRepos
+name|baseRepository
 operator|!=
 literal|null
 operator|)
 operator|&&
 operator|(
-name|baseRepos
+name|baseRepository
 operator|.
 name|getTestCaseElement
 argument_list|(
@@ -1267,7 +1325,7 @@ name|testCaseName
 operator|+
 literal|"' overrides a "
 operator|+
-literal|"testcase in the base repository, but does "
+literal|"test case in the base repository, but does "
 operator|+
 literal|"not specify 'overrides=true'"
 argument_list|)
@@ -1283,7 +1341,7 @@ return|return
 literal|null
 return|;
 block|}
-comment|/**    * Returns the name of the current testcase by looking up the call stack for    * a method whose name starts with "test", for example "testFoo".    *    * @param fail Whether to fail if no method is found    * @return Name of current testcase, or null if not found    */
+comment|/**    * Returns the name of the current test case by looking up the call stack for    * a method whose name starts with "test", for example "testFoo".    *    * @param fail Whether to fail if no method is found    * @return Name of current test case, or null if not found    */
 specifier|private
 name|String
 name|getCurrentTestCaseName
@@ -1298,7 +1356,7 @@ comment|// with test. Perhaps just require them to pass in getName() from the
 comment|// calling TestCase's setUp method and store it in a thread-local,
 comment|// failing here if they forgot?
 comment|// Clever, this. Dump the stack and look up it for a method which
-comment|// looks like a testcase name, e.g. "testFoo".
+comment|// looks like a test case name, e.g. "testFoo".
 specifier|final
 name|StackTraceElement
 index|[]
@@ -1364,7 +1422,7 @@ throw|throw
 operator|new
 name|RuntimeException
 argument_list|(
-literal|"no testcase on current callstack"
+literal|"no test case on current call stack"
 argument_list|)
 throw|;
 block|}
@@ -1432,7 +1490,7 @@ literal|"reference file does not contain resource '"
 operator|+
 name|expected
 operator|+
-literal|"' for testcase '"
+literal|"' for test case '"
 operator|+
 name|testCaseName
 operator|+
@@ -1486,6 +1544,13 @@ argument_list|,
 name|expected2Canonical
 argument_list|,
 name|actualCanonical
+argument_list|)
+expr_stmt|;
+name|amend
+argument_list|(
+name|expected
+argument_list|,
+name|actual
 argument_list|)
 expr_stmt|;
 block|}
@@ -1575,6 +1640,8 @@ argument_list|(
 name|testCaseElement
 argument_list|,
 name|resourceName
+argument_list|,
+literal|true
 argument_list|)
 decl_stmt|;
 if|if
@@ -1691,6 +1758,8 @@ argument_list|(
 name|doc
 argument_list|,
 name|w
+argument_list|,
+name|indent
 argument_list|)
 expr_stmt|;
 block|}
@@ -1743,7 +1812,7 @@ block|}
 block|}
 block|}
 block|}
-comment|/**    * Returns a given resource from a given testcase.    *    * @param testCaseElement The enclosing TestCase element, e.g.<code>    *&lt;TestCase name="testFoo"&gt;</code>.    * @param resourceName    Name of resource, e.g. "sql", "plan"    * @return The value of the resource, or null if not found    */
+comment|/**    * Returns a given resource from a given test case.    *    * @param testCaseElement The enclosing TestCase element, e.g.<code>    *&lt;TestCase name="testFoo"&gt;</code>.    * @param resourceName    Name of resource, e.g. "sql", "plan"    * @return The value of the resource, or null if not found    */
 specifier|private
 specifier|static
 name|Element
@@ -1756,6 +1825,33 @@ name|String
 name|resourceName
 parameter_list|)
 block|{
+return|return
+name|getResourceElement
+argument_list|(
+name|testCaseElement
+argument_list|,
+name|resourceName
+argument_list|,
+literal|false
+argument_list|)
+return|;
+block|}
+comment|/**    * Returns a given resource from a given test case.    *    * @param testCaseElement The enclosing TestCase element, e.g.<code>    *&lt;TestCase name="testFoo"&gt;</code>.    * @param resourceName    Name of resource, e.g. "sql", "plan"    * @param killYoungerSiblings Whether to remove resources with the same    *                        name and the same parent that are eclipsed    * @return The value of the resource, or null if not found    */
+specifier|private
+specifier|static
+name|Element
+name|getResourceElement
+parameter_list|(
+name|Element
+name|testCaseElement
+parameter_list|,
+name|String
+name|resourceName
+parameter_list|,
+name|boolean
+name|killYoungerSiblings
+parameter_list|)
+block|{
 specifier|final
 name|NodeList
 name|childNodes
@@ -1763,6 +1859,23 @@ init|=
 name|testCaseElement
 operator|.
 name|getChildNodes
+argument_list|()
+decl_stmt|;
+name|Element
+name|found
+init|=
+literal|null
+decl_stmt|;
+specifier|final
+name|List
+argument_list|<
+name|Node
+argument_list|>
+name|kills
+init|=
+operator|new
+name|ArrayList
+argument_list|<>
 argument_list|()
 decl_stmt|;
 for|for
@@ -1823,16 +1936,54 @@ argument_list|)
 argument_list|)
 condition|)
 block|{
-return|return
+if|if
+condition|(
+name|found
+operator|==
+literal|null
+condition|)
+block|{
+name|found
+operator|=
 operator|(
 name|Element
 operator|)
 name|child
-return|;
+expr_stmt|;
 block|}
+if|else if
+condition|(
+name|killYoungerSiblings
+condition|)
+block|{
+name|kills
+operator|.
+name|add
+argument_list|(
+name|child
+argument_list|)
+expr_stmt|;
+block|}
+block|}
+block|}
+for|for
+control|(
+name|Node
+name|kill
+range|:
+name|kills
+control|)
+block|{
+name|testCaseElement
+operator|.
+name|removeChild
+argument_list|(
+name|kill
+argument_list|)
+expr_stmt|;
 block|}
 return|return
-literal|null
+name|found
 return|;
 block|}
 specifier|private
@@ -1888,6 +2039,9 @@ name|doc
 parameter_list|,
 name|Writer
 name|w
+parameter_list|,
+name|int
+name|indent
 parameter_list|)
 block|{
 specifier|final
@@ -1911,7 +2065,12 @@ name|out
 operator|.
 name|setIndentString
 argument_list|(
-literal|"    "
+name|Spaces
+operator|.
+name|of
+argument_list|(
+name|indent
+argument_list|)
 argument_list|)
 expr_stmt|;
 name|writeNode
@@ -2366,7 +2525,7 @@ return|return
 literal|true
 return|;
 block|}
-comment|/**    * Finds the repository instance for a given class, with no base    * repository or filter.    *    * @param clazz Testcase class    * @return The diff repository shared between testcases in this class.    */
+comment|/**    * Finds the repository instance for a given class, with no base    * repository or filter.    *    * @param clazz Test case class    * @return The diff repository shared between test cases in this class.    */
 specifier|public
 specifier|static
 name|DiffRepository
@@ -2385,7 +2544,7 @@ literal|null
 argument_list|)
 return|;
 block|}
-comment|/**    * Finds the repository instance for a given class and inheriting from    * a given repository.    *    * @param clazz     Testcase class    * @param baseRepos Base class of test class    * @return The diff repository shared between testcases in this class.    */
+comment|/**    * Finds the repository instance for a given class and inheriting from    * a given repository.    *    * @param clazz     Test case class    * @param baseRepository Base class of test class    * @return The diff repository shared between test cases in this class.    */
 specifier|public
 specifier|static
 name|DiffRepository
@@ -2395,7 +2554,7 @@ name|Class
 name|clazz
 parameter_list|,
 name|DiffRepository
-name|baseRepos
+name|baseRepository
 parameter_list|)
 block|{
 return|return
@@ -2403,13 +2562,13 @@ name|lookup
 argument_list|(
 name|clazz
 argument_list|,
-name|baseRepos
+name|baseRepository
 argument_list|,
 literal|null
 argument_list|)
 return|;
 block|}
-comment|/**    * Finds the repository instance for a given class.    *    *<p>It is important that all testcases in a class share the same    * repository instance. This ensures that, if two or more testcases fail,    * the log file will contains the actual results of both testcases.    *    *<p>The<code>baseRepos</code> parameter is useful if the test is an    * extension to a previous test. If the test class has a base class which    * also has a repository, specify the repository here. DiffRepository will    * look for resources in the base class if it cannot find them in this    * repository. If test resources from testcases in the base class are    * missing or incorrect, it will not write them to the log file -- you    * probably need to fix the base test.    *    *<p>Use the<code>filter</code> parameter if you expect the test to    * return results slightly different than in the repository. This happens    * if the behavior of a derived test is slightly different than a base    * test. If you do not specify a filter, no filtering will happen.    *    * @param clazz     Testcase class    * @param baseRepos Base repository    * @param filter    Filters each string returned by the repository    * @return The diff repository shared between testcases in this class.    */
+comment|/**    * Finds the repository instance for a given class.    *    *<p>It is important that all test cases in a class share the same    * repository instance. This ensures that, if two or more test cases fail,    * the log file will contains the actual results of both test cases.    *    *<p>The<code>baseRepository</code> parameter is useful if the test is an    * extension to a previous test. If the test class has a base class which    * also has a repository, specify the repository here. DiffRepository will    * look for resources in the base class if it cannot find them in this    * repository. If test resources from test cases in the base class are    * missing or incorrect, it will not write them to the log file -- you    * probably need to fix the base test.    *    *<p>Use the<code>filter</code> parameter if you expect the test to    * return results slightly different than in the repository. This happens    * if the behavior of a derived test is slightly different than a base    * test. If you do not specify a filter, no filtering will happen.    *    * @param clazz     Test case class    * @param baseRepository Base repository    * @param filter    Filters each string returned by the repository    * @return The diff repository shared between test cases in this class.    */
 specifier|public
 specifier|static
 specifier|synchronized
@@ -2420,16 +2579,16 @@ name|Class
 name|clazz
 parameter_list|,
 name|DiffRepository
-name|baseRepos
+name|baseRepository
 parameter_list|,
 name|Filter
 name|filter
 parameter_list|)
 block|{
 name|DiffRepository
-name|diffRepos
+name|diffRepository
 init|=
-name|MAP_CLASS_TO_REPOS
+name|MAP_CLASS_TO_REPOSITORY
 operator|.
 name|get
 argument_list|(
@@ -2438,7 +2597,7 @@ argument_list|)
 decl_stmt|;
 if|if
 condition|(
-name|diffRepos
+name|diffRepository
 operator|==
 literal|null
 condition|)
@@ -2474,7 +2633,7 @@ literal|"surefire"
 argument_list|)
 argument_list|)
 decl_stmt|;
-name|diffRepos
+name|diffRepository
 operator|=
 operator|new
 name|DiffRepository
@@ -2483,23 +2642,23 @@ name|refFile
 argument_list|,
 name|logFile
 argument_list|,
-name|baseRepos
+name|baseRepository
 argument_list|,
 name|filter
 argument_list|)
 expr_stmt|;
-name|MAP_CLASS_TO_REPOS
+name|MAP_CLASS_TO_REPOSITORY
 operator|.
 name|put
 argument_list|(
 name|clazz
 argument_list|,
-name|diffRepos
+name|diffRepository
 argument_list|)
 expr_stmt|;
 block|}
 return|return
-name|diffRepos
+name|diffRepository
 return|;
 block|}
 comment|/**    * Callback to filter strings before returning them.    */

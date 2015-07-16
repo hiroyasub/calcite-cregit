@@ -2964,7 +2964,7 @@ parameter_list|()
 block|{
 name|sql
 argument_list|(
-literal|"SELECT empno, EXPR$2, COUNT(empno) FROM (SELECT empno, deptno AS EXPR$2 "
+literal|"SELECT empno, EXPR$2, COUNT(empno) FROM (SELECT empno, deptno AS EXPR$2\n"
 operator|+
 literal|"FROM emp) GROUP BY empno, EXPR$2"
 argument_list|)
