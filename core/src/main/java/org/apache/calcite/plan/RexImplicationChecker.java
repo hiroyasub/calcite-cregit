@@ -268,7 +268,7 @@ import|;
 end_import
 
 begin_comment
-comment|/** Checks if Condition X logically implies Condition Y  *  *<p>(x> 10) implies (x> 5)</p>  *  *<p>(y = 10) implies (y< 30 AND x> 30)</p>  */
+comment|/**  * Checks whether one condition logically implies another.  *  *<p>If A&rArr; B, whenever A is true, B will be true also.  *  *<p>For example:  *<ul>  *<li>(x&gt; 10)&rArr; (x&gt; 5)  *<li>(y = 10)&rArr; (y&lt; 30 OR x&gt; 30)  *</ul>  */
 end_comment
 
 begin_class
@@ -282,7 +282,7 @@ name|builder
 decl_stmt|;
 specifier|final
 name|RexExecutorImpl
-name|rexImpl
+name|executor
 decl_stmt|;
 specifier|final
 name|RelDataType
@@ -295,7 +295,7 @@ name|RexBuilder
 name|builder
 parameter_list|,
 name|RexExecutorImpl
-name|rexImpl
+name|executor
 parameter_list|,
 name|RelDataType
 name|rowType
@@ -309,9 +309,9 @@ name|builder
 expr_stmt|;
 name|this
 operator|.
-name|rexImpl
+name|executor
 operator|=
-name|rexImpl
+name|executor
 expr_stmt|;
 name|this
 operator|.
@@ -320,7 +320,7 @@ operator|=
 name|rowType
 expr_stmt|;
 block|}
-comment|/**    * Checks if condition first implies (=>) condition second    * This reduces to SAT problem which is NP-Complete    * When func says first => second then it is definitely true    * It cannot prove if first doesnot imply second.    * @param first first condition    * @param second second condition    * @return true if it can prove first => second, otherwise false i.e.,    * it doesn't know if implication holds .    */
+comment|/**    * Checks if condition first implies (&rArr;) condition second.    *    *<p>This reduces to SAT problem which is NP-Complete.    * When this method says first implies second then it is definitely true.    * But it cannot prove that first does not imply second.    *    * @param first first condition    * @param second second condition    * @return true if it can prove first&rArr; second; otherwise false i.e.,    * it doesn't know if implication holds    */
 specifier|public
 name|boolean
 name|implies
@@ -407,7 +407,7 @@ return|return
 literal|true
 return|;
 block|}
-comment|/** Decompose DNF into List of Conjunctions      *      * (x> 10 AND y> 30) OR (z> 90) will be converted to      * list of 2 conditions:      * 1. (x> 10 AND y> 30)      * 2. (z> 90)      *      */
+comment|/** Decomposes DNF into List of Conjunctions.      *      *<p>For example,      * {@code x> 10 AND y> 30) OR (z> 90)}      * will be converted to      * list of 2 conditions:      *      *<ul>      *<li>(x> 10 AND y> 30)</li>      *<li>z> 90</li>      *</ul>      */
 name|List
 argument_list|<
 name|RexNode
@@ -451,10 +451,10 @@ name|isAlwaysFalse
 argument_list|()
 condition|)
 block|{
-comment|//Check if f implies atleast
+comment|// Check if f implies at least
 comment|// one of the conjunctions in list secondDnfs
 name|boolean
-name|implyOneConjuntion
+name|implyOneConjunction
 init|=
 literal|false
 decl_stmt|;
@@ -489,20 +489,19 @@ condition|)
 block|{
 comment|// Satisfies one of the condition, so lets
 comment|// move to next conjunction in firstDnfs
-name|implyOneConjuntion
+name|implyOneConjunction
 operator|=
 literal|true
 expr_stmt|;
 break|break;
 block|}
 block|}
-comment|//end of inner loop
-comment|// If f couldnot imply even one conjunction in
+comment|// If f could not imply even one conjunction in
 comment|// secondDnfs, then final implication may be false
 if|if
 condition|(
 operator|!
-name|implyOneConjuntion
+name|implyOneConjunction
 condition|)
 block|{
 return|return
@@ -511,12 +510,11 @@ return|;
 block|}
 block|}
 block|}
-comment|//end of outer loop
 return|return
 literal|true
 return|;
 block|}
-comment|/** Checks if Conjunction first => Conjunction second**/
+comment|/** Returns whether first implies second (both are conjunctions). */
 specifier|private
 name|boolean
 name|impliesConjunction
@@ -528,15 +526,17 @@ name|RexNode
 name|second
 parameter_list|)
 block|{
+specifier|final
 name|InputUsageFinder
-name|firstUsgFinder
+name|firstUsageFinder
 init|=
 operator|new
 name|InputUsageFinder
 argument_list|()
 decl_stmt|;
+specifier|final
 name|InputUsageFinder
-name|secondUsgFinder
+name|secondUsageFinder
 init|=
 operator|new
 name|InputUsageFinder
@@ -546,7 +546,7 @@ name|RexUtil
 operator|.
 name|apply
 argument_list|(
-name|firstUsgFinder
+name|firstUsageFinder
 argument_list|,
 operator|new
 name|ArrayList
@@ -562,7 +562,7 @@ name|RexUtil
 operator|.
 name|apply
 argument_list|(
-name|secondUsgFinder
+name|secondUsageFinder
 argument_list|,
 operator|new
 name|ArrayList
@@ -580,9 +580,9 @@ condition|(
 operator|!
 name|checkSupport
 argument_list|(
-name|firstUsgFinder
+name|firstUsageFinder
 argument_list|,
-name|secondUsgFinder
+name|secondUsageFinder
 argument_list|)
 condition|)
 block|{
@@ -599,7 +599,7 @@ argument_list|,
 name|RexNode
 argument_list|>
 argument_list|>
-name|usgList
+name|usageList
 init|=
 operator|new
 name|ArrayList
@@ -623,7 +623,7 @@ argument_list|>
 argument_list|>
 name|entry
 range|:
-name|firstUsgFinder
+name|firstUsageFinder
 operator|.
 name|usageMap
 operator|.
@@ -632,26 +632,27 @@ argument_list|()
 control|)
 block|{
 specifier|final
-name|List
-argument_list|<
 name|Pair
 argument_list|<
 name|SqlOperator
 argument_list|,
 name|RexNode
 argument_list|>
-argument_list|>
-name|list
+name|pair
 init|=
 name|entry
 operator|.
 name|getValue
 argument_list|()
 operator|.
-name|getUsageList
-argument_list|()
+name|usageList
+operator|.
+name|get
+argument_list|(
+literal|0
+argument_list|)
 decl_stmt|;
-name|usgList
+name|usageList
 operator|.
 name|add
 argument_list|(
@@ -664,12 +665,7 @@ operator|.
 name|getKey
 argument_list|()
 argument_list|,
-name|list
-operator|.
-name|get
-argument_list|(
-literal|0
-argument_list|)
+name|pair
 operator|.
 name|getValue
 argument_list|()
@@ -677,18 +673,26 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/* Get the literals from first conjunction and execute second conjunction using them      * E.g., for x>30 => x> 10,      * we will replace x by 30 in second expression and execute it i.e., 30>10      * If it's true then we infer implication.      */
+comment|// Get the literals from first conjunction and executes second conjunction
+comment|// using them.
+comment|//
+comment|// E.g., for
+comment|//   x> 30&rArr; x> 10,
+comment|// we will replace x by 30 in second expression and execute it i.e.,
+comment|//   30> 10
+comment|//
+comment|// If it's true then we infer implication.
 specifier|final
 name|DataContext
 name|dataValues
 init|=
 name|VisitorDataContext
 operator|.
-name|getDataContext
+name|of
 argument_list|(
 name|rowType
 argument_list|,
-name|usgList
+name|usageList
 argument_list|)
 decl_stmt|;
 if|if
@@ -719,7 +723,7 @@ specifier|final
 name|RexExecutable
 name|exec
 init|=
-name|rexImpl
+name|executor
 operator|.
 name|getExecutable
 argument_list|(
@@ -790,18 +794,19 @@ literal|0
 index|]
 return|;
 block|}
-comment|/**    * Looks at the usage of variables in first and second conjunction to decide    * if this kind of expression is currently supported for proving first => second.    * 1. Variables should be used only once in both the conjunction against    *    given set of operations only:>,<,<=,>=,=,!=    * 2. All the variables used in second condition should be used even in the first.    * 3. If operator used for variable in first is op1 and op2 for second, then we support    *    these combination for conjunction (op1, op2) then op1, op2 belongs to    *    one of the following sets:    *    a. (<,<=) X (<,<=) , X represents cartesian product    *    b. (>/>=) X (>,>=)    *    c. (=) X (>,>=,<,<=,=,!=)    *    d. (!=, =)    * @return true, if input usage pattern is supported. Otherwise, false.    */
+comment|/**    * Looks at the usage of variables in first and second conjunction to decide    * whether this kind of expression is currently supported for proving first    * implies second.    *    *<ol>    *<li>Variables should be used only once in both the conjunction against    * given set of operations only:>,<,<=,>=, =, !=    *    *<li>All the variables used in second condition should be used even in the    * first.    *    *<li>If operator used for variable in first is op1 and op2 for second, then    * we support these combination for conjunction (op1, op2) then op1, op2    * belongs to one of the following sets:    *    *<ul>    *<li>(<,<=) X (<,<=)<i>note: X represents cartesian product</i>    *<li>(> />=) X (>,>=)    *<li>(=) X (>,>=,<,<=, =, !=)    *<li>(!=, =)    *</ul>    *</ol>    *    * @return whether input usage pattern is supported    */
 specifier|private
 name|boolean
 name|checkSupport
 parameter_list|(
 name|InputUsageFinder
-name|firstUsgFinder
+name|firstUsageFinder
 parameter_list|,
 name|InputUsageFinder
-name|secondUsgFinder
+name|secondUsageFinder
 parameter_list|)
 block|{
+specifier|final
 name|Map
 argument_list|<
 name|RexInputRef
@@ -813,12 +818,13 @@ argument_list|,
 name|RexNode
 argument_list|>
 argument_list|>
-name|firstUsgMap
+name|firstUsageMap
 init|=
-name|firstUsgFinder
+name|firstUsageFinder
 operator|.
 name|usageMap
 decl_stmt|;
+specifier|final
 name|Map
 argument_list|<
 name|RexInputRef
@@ -830,9 +836,9 @@ argument_list|,
 name|RexNode
 argument_list|>
 argument_list|>
-name|secondUsgMap
+name|secondUsageMap
 init|=
-name|secondUsgFinder
+name|secondUsageFinder
 operator|.
 name|usageMap
 decl_stmt|;
@@ -853,7 +859,7 @@ argument_list|>
 argument_list|>
 name|entry
 range|:
-name|firstUsgMap
+name|firstUsageMap
 operator|.
 name|entrySet
 argument_list|()
@@ -893,7 +899,7 @@ argument_list|>
 argument_list|>
 name|entry
 range|:
-name|secondUsgMap
+name|secondUsageMap
 operator|.
 name|entrySet
 argument_list|()
@@ -917,15 +923,13 @@ if|if
 condition|(
 name|secondUsage
 operator|.
-name|getUsageCount
-argument_list|()
+name|usageCount
 operator|>
 literal|1
 operator|||
 name|secondUsage
 operator|.
-name|getUsageList
-argument_list|()
+name|usageList
 operator|.
 name|size
 argument_list|()
@@ -946,7 +950,7 @@ name|RexNode
 argument_list|>
 name|firstUsage
 init|=
-name|firstUsgMap
+name|firstUsageMap
 operator|.
 name|get
 argument_list|(
@@ -964,8 +968,7 @@ literal|null
 operator|||
 name|firstUsage
 operator|.
-name|getUsageList
-argument_list|()
+name|usageList
 operator|.
 name|size
 argument_list|()
@@ -988,8 +991,7 @@ name|fUse
 init|=
 name|firstUsage
 operator|.
-name|getUsageList
-argument_list|()
+name|usageList
 operator|.
 name|get
 argument_list|(
@@ -1007,8 +1009,7 @@ name|sUse
 init|=
 name|secondUsage
 operator|.
-name|getUsageList
-argument_list|()
+name|usageList
 operator|.
 name|get
 argument_list|(
@@ -1017,7 +1018,7 @@ argument_list|)
 decl_stmt|;
 specifier|final
 name|SqlKind
-name|fkind
+name|fKind
 init|=
 name|fUse
 operator|.
@@ -1029,7 +1030,7 @@ argument_list|()
 decl_stmt|;
 if|if
 condition|(
-name|fkind
+name|fKind
 operator|!=
 name|SqlKind
 operator|.
@@ -1057,7 +1058,7 @@ if|if
 condition|(
 operator|!
 operator|(
-name|fkind
+name|fKind
 operator|==
 name|SqlKind
 operator|.
@@ -1066,7 +1067,7 @@ operator|)
 operator|&&
 operator|!
 operator|(
-name|fkind
+name|fKind
 operator|==
 name|SqlKind
 operator|.
@@ -1089,7 +1090,7 @@ if|if
 condition|(
 operator|!
 operator|(
-name|fkind
+name|fKind
 operator|==
 name|SqlKind
 operator|.
@@ -1098,7 +1099,7 @@ operator|)
 operator|&&
 operator|!
 operator|(
-name|fkind
+name|fKind
 operator|==
 name|SqlKind
 operator|.
@@ -1133,47 +1134,17 @@ name|RexNode
 name|second
 parameter_list|)
 block|{
-if|if
-condition|(
-name|first
-operator|==
-literal|null
-operator|||
-name|second
-operator|==
-literal|null
-condition|)
-block|{
 return|return
-literal|false
-return|;
-block|}
-if|if
-condition|(
-operator|!
-operator|(
 name|first
 operator|instanceof
 name|RexCall
-operator|)
-operator|||
-operator|!
-operator|(
+operator|&&
 name|second
 operator|instanceof
 name|RexCall
-operator|)
-condition|)
-block|{
-return|return
-literal|false
 return|;
 block|}
-return|return
-literal|true
-return|;
-block|}
-comment|/**    * Visitor which builds a Usage Map of inputs used by an expression.    * E.g: for x>10 AND y< 20 AND x =40, Usage Map would look like:    * key:x value: {(>,10),(=,40), usageCount = 2}    * key:y value: {(>,20),usageCount=1}    */
+comment|/**    * Visitor that builds a usage map of inputs used by an expression.    *    *<p>E.g: for x> 10 AND y< 20 AND x = 40, usage map is as follows:    *<ul>    *<li>key: x value: {(>, 10),(=, 40), usageCount = 2}    *<li>key: y value: {(>, 20), usageCount = 1}    *</ul>    */
 specifier|private
 specifier|static
 class|class
@@ -1237,8 +1208,8 @@ argument_list|)
 decl_stmt|;
 name|inputRefUse
 operator|.
-name|incrUsage
-argument_list|()
+name|usageCount
+operator|++
 expr_stmt|;
 return|return
 literal|null
@@ -1437,15 +1408,13 @@ name|RelOptUtil
 operator|.
 name|op
 argument_list|(
-name|RelOptUtil
-operator|.
-name|reverse
-argument_list|(
 name|op
 operator|.
 name|getKind
 argument_list|()
-argument_list|)
+operator|.
+name|reverse
+argument_list|()
 argument_list|,
 name|op
 argument_list|)
@@ -1524,6 +1493,7 @@ name|RexNode
 name|literal
 parameter_list|)
 block|{
+specifier|final
 name|InputRefUsage
 argument_list|<
 name|SqlOperator
@@ -1556,8 +1526,7 @@ argument_list|)
 decl_stmt|;
 name|inputRefUse
 operator|.
-name|getUsageList
-argument_list|()
+name|usageList
 operator|.
 name|add
 argument_list|(
@@ -1622,7 +1591,7 @@ name|inputRefUse
 return|;
 block|}
 block|}
-comment|/**    * DataStructure to store usage of InputRefs in expression    */
+comment|/**    * Usage of a {@link RexInputRef} in an expression.    */
 specifier|private
 specifier|static
 class|class
@@ -1648,14 +1617,7 @@ name|usageList
 init|=
 operator|new
 name|ArrayList
-argument_list|<
-name|Pair
-argument_list|<
-name|T1
-argument_list|,
-name|T2
-argument_list|>
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 specifier|private
@@ -1664,49 +1626,13 @@ name|usageCount
 init|=
 literal|0
 decl_stmt|;
-specifier|public
-name|InputRefUsage
-parameter_list|()
-block|{
-block|}
-specifier|public
-name|int
-name|getUsageCount
-parameter_list|()
-block|{
-return|return
-name|usageCount
-return|;
-block|}
-specifier|public
-name|void
-name|incrUsage
-parameter_list|()
-block|{
-name|usageCount
-operator|++
-expr_stmt|;
-block|}
-specifier|public
-name|List
-argument_list|<
-name|Pair
-argument_list|<
-name|T1
-argument_list|,
-name|T2
-argument_list|>
-argument_list|>
-name|getUsageList
-parameter_list|()
-block|{
-return|return
-name|usageList
-return|;
-block|}
 block|}
 block|}
 end_class
+
+begin_comment
+comment|// End RexImplicationChecker.java
+end_comment
 
 end_unit
 

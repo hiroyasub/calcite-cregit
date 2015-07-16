@@ -1546,13 +1546,6 @@ argument_list|,
 name|actualCanonical
 argument_list|)
 expr_stmt|;
-name|amend
-argument_list|(
-name|expected
-argument_list|,
-name|actual
-argument_list|)
-expr_stmt|;
 block|}
 catch|catch
 parameter_list|(

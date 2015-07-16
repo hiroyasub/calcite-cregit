@@ -374,7 +374,7 @@ block|}
 specifier|public
 specifier|static
 name|DataContext
-name|getDataContext
+name|of
 parameter_list|(
 name|RelNode
 name|targetRel
@@ -384,7 +384,7 @@ name|queryRel
 parameter_list|)
 block|{
 return|return
-name|getDataContext
+name|of
 argument_list|(
 name|targetRel
 operator|.
@@ -401,7 +401,7 @@ block|}
 specifier|public
 specifier|static
 name|DataContext
-name|getDataContext
+name|of
 parameter_list|(
 name|RelDataType
 name|rowType
@@ -410,6 +410,7 @@ name|RexNode
 name|rex
 parameter_list|)
 block|{
+specifier|final
 name|int
 name|size
 init|=
@@ -421,6 +422,7 @@ operator|.
 name|size
 argument_list|()
 decl_stmt|;
+specifier|final
 name|Object
 index|[]
 name|values
@@ -431,6 +433,7 @@ index|[
 name|size
 index|]
 decl_stmt|;
+specifier|final
 name|List
 argument_list|<
 name|RexNode
@@ -475,8 +478,6 @@ argument_list|<
 name|Integer
 argument_list|,
 name|?
-extends|extends
-name|Object
 argument_list|>
 name|value
 init|=
@@ -530,7 +531,7 @@ block|}
 specifier|public
 specifier|static
 name|DataContext
-name|getDataContext
+name|of
 parameter_list|(
 name|RelDataType
 name|rowType
@@ -544,9 +545,10 @@ argument_list|,
 name|RexNode
 argument_list|>
 argument_list|>
-name|usgList
+name|usageList
 parameter_list|)
 block|{
+specifier|final
 name|int
 name|size
 init|=
@@ -558,6 +560,7 @@ operator|.
 name|size
 argument_list|()
 decl_stmt|;
+specifier|final
 name|Object
 index|[]
 name|values
@@ -578,7 +581,7 @@ name|RexNode
 argument_list|>
 name|elem
 range|:
-name|usgList
+name|usageList
 control|)
 block|{
 name|Pair
@@ -586,8 +589,6 @@ argument_list|<
 name|Integer
 argument_list|,
 name|?
-extends|extends
-name|Object
 argument_list|>
 name|value
 init|=
@@ -649,8 +650,6 @@ argument_list|<
 name|Integer
 argument_list|,
 name|?
-extends|extends
-name|Object
 argument_list|>
 name|getValue
 parameter_list|(
@@ -686,7 +685,8 @@ operator|instanceof
 name|RexLiteral
 condition|)
 block|{
-name|Integer
+specifier|final
+name|int
 name|index
 init|=
 operator|(
@@ -739,13 +739,13 @@ operator|instanceof
 name|BigDecimal
 condition|)
 block|{
-specifier|final
-name|Integer
-name|intValue
-init|=
-operator|new
-name|Integer
+return|return
+name|Pair
+operator|.
+name|of
 argument_list|(
+name|index
+argument_list|,
 operator|(
 operator|(
 name|BigDecimal
@@ -755,16 +755,6 @@ operator|)
 operator|.
 name|intValue
 argument_list|()
-argument_list|)
-decl_stmt|;
-return|return
-name|Pair
-operator|.
-name|of
-argument_list|(
-name|index
-argument_list|,
-name|intValue
 argument_list|)
 return|;
 block|}
@@ -785,9 +775,6 @@ name|of
 argument_list|(
 name|index
 argument_list|,
-operator|new
-name|Double
-argument_list|(
 operator|(
 operator|(
 name|BigDecimal
@@ -797,7 +784,6 @@ operator|)
 operator|.
 name|doubleValue
 argument_list|()
-argument_list|)
 argument_list|)
 return|;
 block|}
@@ -818,9 +804,6 @@ name|of
 argument_list|(
 name|index
 argument_list|,
-operator|new
-name|Float
-argument_list|(
 operator|(
 operator|(
 name|BigDecimal
@@ -830,7 +813,6 @@ operator|)
 operator|.
 name|floatValue
 argument_list|()
-argument_list|)
 argument_list|)
 return|;
 block|}
@@ -851,9 +833,6 @@ name|of
 argument_list|(
 name|index
 argument_list|,
-operator|new
-name|Long
-argument_list|(
 operator|(
 operator|(
 name|BigDecimal
@@ -863,7 +842,6 @@ operator|)
 operator|.
 name|longValue
 argument_list|()
-argument_list|)
 argument_list|)
 return|;
 block|}
@@ -884,9 +862,6 @@ name|of
 argument_list|(
 name|index
 argument_list|,
-operator|new
-name|Short
-argument_list|(
 operator|(
 operator|(
 name|BigDecimal
@@ -896,7 +871,6 @@ operator|)
 operator|.
 name|shortValue
 argument_list|()
-argument_list|)
 argument_list|)
 return|;
 block|}
@@ -917,9 +891,9 @@ name|of
 argument_list|(
 name|index
 argument_list|,
-operator|new
-name|Short
-argument_list|(
+operator|(
+name|short
+operator|)
 operator|(
 operator|(
 name|BigDecimal
@@ -929,7 +903,6 @@ operator|)
 operator|.
 name|byteValue
 argument_list|()
-argument_list|)
 argument_list|)
 return|;
 block|}
@@ -1047,7 +1020,7 @@ operator|instanceof
 name|NlsString
 condition|)
 block|{
-comment|// TODO: Support coallation. Not supported in {@link #NlsString} compare too.
+comment|// TODO: Support collation. Not supported in NlsString compare too.
 specifier|final
 name|NlsString
 name|nl
@@ -1057,12 +1030,13 @@ name|NlsString
 operator|)
 name|value
 decl_stmt|;
-name|Character
-name|c
-init|=
-operator|new
-name|Character
+return|return
+name|Pair
+operator|.
+name|of
 argument_list|(
+name|index
+argument_list|,
 name|nl
 operator|.
 name|getValue
@@ -1073,20 +1047,10 @@ argument_list|(
 literal|0
 argument_list|)
 argument_list|)
-decl_stmt|;
-return|return
-name|Pair
-operator|.
-name|of
-argument_list|(
-name|index
-argument_list|,
-name|c
-argument_list|)
 return|;
 block|}
 default|default:
-comment|//TODO: Support few more supported cases
+comment|// TODO: Support few more supported cases
 return|return
 name|Pair
 operator|.
@@ -1165,6 +1129,10 @@ return|;
 block|}
 block|}
 end_class
+
+begin_comment
+comment|// End VisitorDataContext.java
+end_comment
 
 end_unit
 
