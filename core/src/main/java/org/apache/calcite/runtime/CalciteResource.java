@@ -1717,7 +1717,7 @@ function_decl|;
 annotation|@
 name|BaseMessage
 argument_list|(
-literal|"ROW/RANGE not allowed with RANK or DENSE_RANK functions"
+literal|"ROW/RANGE not allowed with RANK, DENSE_RANK or ROW_NUMBER functions"
 argument_list|)
 name|ExInst
 argument_list|<

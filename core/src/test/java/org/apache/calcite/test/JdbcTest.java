@@ -15459,6 +15459,8 @@ literal|" \"empid\",\n"
 operator|+
 literal|" \"commission\",\n"
 operator|+
+literal|" row_number() over (partition by \"deptno\") as r,\n"
+operator|+
 literal|" row_number() over (partition by \"deptno\" order by \"commission\" desc nulls first) as rcnf,\n"
 operator|+
 literal|" row_number() over (partition by \"deptno\" order by \"commission\" desc nulls last) as rcnl,\n"
@@ -15472,18 +15474,18 @@ argument_list|)
 operator|.
 name|typeIs
 argument_list|(
-literal|"[deptno INTEGER NOT NULL, empid INTEGER NOT NULL, commission INTEGER, RCNF INTEGER NOT NULL, RCNL INTEGER NOT NULL, R INTEGER NOT NULL, RD INTEGER NOT NULL]"
+literal|"[deptno INTEGER NOT NULL, empid INTEGER NOT NULL, commission INTEGER, R INTEGER NOT NULL, RCNF INTEGER NOT NULL, RCNL INTEGER NOT NULL, R INTEGER NOT NULL, RD INTEGER NOT NULL]"
 argument_list|)
 operator|.
 name|returnsUnordered
 argument_list|(
-literal|"deptno=10; empid=100; commission=1000; RCNF=2; RCNL=1; R=1; RD=3"
+literal|"deptno=10; empid=100; commission=1000; R=1; RCNF=2; RCNL=1; R=1; RD=3"
 argument_list|,
-literal|"deptno=10; empid=110; commission=250; RCNF=3; RCNL=2; R=2; RD=2"
+literal|"deptno=10; empid=110; commission=250; R=3; RCNF=3; RCNL=2; R=2; RD=2"
 argument_list|,
-literal|"deptno=10; empid=150; commission=null; RCNF=1; RCNL=3; R=3; RD=1"
+literal|"deptno=10; empid=150; commission=null; R=2; RCNF=1; RCNL=3; R=3; RD=1"
 argument_list|,
-literal|"deptno=20; empid=200; commission=500; RCNF=1; RCNL=1; R=1; RD=1"
+literal|"deptno=20; empid=200; commission=500; R=1; RCNF=1; RCNL=1; R=1; RD=1"
 argument_list|)
 expr_stmt|;
 block|}
@@ -17180,6 +17182,62 @@ name|outFile
 argument_list|)
 decl_stmt|;
 specifier|final
+name|Function
+argument_list|<
+name|String
+argument_list|,
+name|Object
+argument_list|>
+name|env
+init|=
+operator|new
+name|Function
+argument_list|<
+name|String
+argument_list|,
+name|Object
+argument_list|>
+argument_list|()
+block|{
+specifier|public
+name|Object
+name|apply
+parameter_list|(
+name|String
+name|varName
+parameter_list|)
+block|{
+if|if
+condition|(
+name|varName
+operator|.
+name|equals
+argument_list|(
+literal|"jdk18"
+argument_list|)
+condition|)
+block|{
+return|return
+name|System
+operator|.
+name|getProperty
+argument_list|(
+literal|"java.version"
+argument_list|)
+operator|.
+name|startsWith
+argument_list|(
+literal|"1.8"
+argument_list|)
+return|;
+block|}
+return|return
+literal|null
+return|;
+block|}
+block|}
+decl_stmt|;
+specifier|final
 name|Quidem
 name|quidem
 init|=
@@ -17189,6 +17247,8 @@ argument_list|(
 name|bufferedReader
 argument_list|,
 name|writer
+argument_list|,
+name|env
 argument_list|)
 decl_stmt|;
 name|quidem

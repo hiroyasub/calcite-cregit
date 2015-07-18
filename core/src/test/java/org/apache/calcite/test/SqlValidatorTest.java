@@ -550,6 +550,14 @@ name|STR_SET_OP_INCONSISTENT
 init|=
 literal|"Set operator cannot combine streaming and non-streaming inputs"
 decl_stmt|;
+specifier|private
+specifier|static
+specifier|final
+name|String
+name|ROW_RANGE_NOT_ALLOWED_WITH_RANK
+init|=
+literal|"ROW/RANGE not allowed with RANK, DENSE_RANK or ROW_NUMBER functions"
+decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
 specifier|public
 name|SqlValidatorTest
@@ -10142,7 +10150,7 @@ argument_list|)
 operator|.
 name|fails
 argument_list|(
-literal|"ROW/RANGE not allowed with RANK or DENSE_RANK functions"
+name|ROW_RANGE_NOT_ALLOWED_WITH_RANK
 argument_list|)
 expr_stmt|;
 name|winExp
@@ -10152,7 +10160,7 @@ argument_list|)
 operator|.
 name|fails
 argument_list|(
-literal|"ROW/RANGE not allowed with RANK or DENSE_RANK functions"
+name|ROW_RANGE_NOT_ALLOWED_WITH_RANK
 argument_list|)
 expr_stmt|;
 comment|// rank function type
@@ -10261,7 +10269,7 @@ argument_list|)
 operator|.
 name|fails
 argument_list|(
-literal|"ROW/RANGE not allowed with RANK or DENSE_RANK functions"
+name|ROW_RANGE_NOT_ALLOWED_WITH_RANK
 argument_list|)
 expr_stmt|;
 name|winSql
@@ -10271,7 +10279,7 @@ argument_list|)
 operator|.
 name|fails
 argument_list|(
-literal|"ROW/RANGE not allowed with RANK or DENSE_RANK functions"
+name|ROW_RANGE_NOT_ALLOWED_WITH_RANK
 argument_list|)
 expr_stmt|;
 if|if
@@ -10303,7 +10311,7 @@ argument_list|)
 operator|.
 name|fails
 argument_list|(
-literal|"ROW/RANGE not allowed with RANK or DENSE_RANK functions"
+name|ROW_RANGE_NOT_ALLOWED_WITH_RANK
 argument_list|)
 expr_stmt|;
 name|winSql
@@ -10356,7 +10364,7 @@ argument_list|)
 operator|.
 name|fails
 argument_list|(
-literal|"ROW/RANGE not allowed with RANK or DENSE_RANK functions"
+name|ROW_RANGE_NOT_ALLOWED_WITH_RANK
 argument_list|)
 expr_stmt|;
 name|winSql
@@ -10394,7 +10402,7 @@ argument_list|)
 operator|.
 name|fails
 argument_list|(
-literal|"ROW/RANGE not allowed with RANK or DENSE_RANK functions"
+name|ROW_RANGE_NOT_ALLOWED_WITH_RANK
 argument_list|)
 expr_stmt|;
 name|winSql
@@ -10404,7 +10412,7 @@ argument_list|)
 operator|.
 name|fails
 argument_list|(
-literal|"ROW/RANGE not allowed with RANK or DENSE_RANK functions"
+name|ROW_RANGE_NOT_ALLOWED_WITH_RANK
 argument_list|)
 expr_stmt|;
 if|if
