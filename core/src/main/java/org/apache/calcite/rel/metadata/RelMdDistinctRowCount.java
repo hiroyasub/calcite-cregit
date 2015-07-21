@@ -1092,7 +1092,7 @@ name|modifiedPred
 operator|=
 name|RelOptUtil
 operator|.
-name|pushFilterPastProject
+name|pushPastProject
 argument_list|(
 name|childPred
 argument_list|,

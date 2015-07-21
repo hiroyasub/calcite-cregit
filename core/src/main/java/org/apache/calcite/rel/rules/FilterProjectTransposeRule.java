@@ -363,7 +363,7 @@ name|newCondition
 init|=
 name|RelOptUtil
 operator|.
-name|pushFilterPastProject
+name|pushPastProject
 argument_list|(
 name|filter
 operator|.
