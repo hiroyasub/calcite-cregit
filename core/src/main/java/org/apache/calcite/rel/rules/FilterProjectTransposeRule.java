@@ -359,15 +359,20 @@ return|return;
 block|}
 if|if
 condition|(
+name|RexUtil
+operator|.
+name|containsCorrelation
+argument_list|(
 name|filter
 operator|.
-name|hasCorrelation
+name|getCondition
 argument_list|()
+argument_list|)
 condition|)
 block|{
 comment|// If there is a correlation condition anywhere in the filter, don't
 comment|// push this filter past project since in some cases it can prevent a
-comment|// Correlate from being decorrelated
+comment|// Correlate from being de-correlated.
 return|return;
 block|}
 comment|// convert the filter to one that references the child of the project

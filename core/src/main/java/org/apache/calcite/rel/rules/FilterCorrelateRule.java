@@ -181,6 +181,20 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|util
+operator|.
+name|Util
+import|;
+end_import
+
+begin_import
+import|import
 name|com
 operator|.
 name|google
@@ -189,7 +203,7 @@ name|common
 operator|.
 name|collect
 operator|.
-name|Lists
+name|ImmutableList
 import|;
 end_import
 
@@ -214,7 +228,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Planner rule that pushes filters above Correlate node into the children of the Correlate.  */
+comment|/**  * Planner rule that pushes a {@link Filter} above a {@link Correlate} into the  * inputs of the Correlate.  */
 end_comment
 
 begin_class
@@ -248,13 +262,6 @@ name|RelFactories
 operator|.
 name|FilterFactory
 name|filterFactory
-decl_stmt|;
-specifier|private
-specifier|final
-name|RelFactories
-operator|.
-name|ProjectFactory
-name|projectFactory
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
 comment|/**    * Creates a FilterCorrelateRule with an explicit root operand and    * factories.    */
@@ -302,12 +309,14 @@ name|filterFactory
 operator|=
 name|filterFactory
 expr_stmt|;
-name|this
+name|Util
 operator|.
+name|discard
+argument_list|(
 name|projectFactory
-operator|=
-name|projectFactory
+argument_list|)
 expr_stmt|;
+comment|// for future use
 block|}
 comment|//~ Methods ----------------------------------------------------------------
 specifier|public
@@ -318,6 +327,7 @@ name|RelOptRuleCall
 name|call
 parameter_list|)
 block|{
+specifier|final
 name|Filter
 name|filter
 init|=
@@ -328,6 +338,7 @@ argument_list|(
 literal|0
 argument_list|)
 decl_stmt|;
+specifier|final
 name|Correlate
 name|corr
 init|=
@@ -338,15 +349,6 @@ argument_list|(
 literal|1
 argument_list|)
 decl_stmt|;
-if|if
-condition|(
-name|filter
-operator|==
-literal|null
-condition|)
-block|{
-return|return;
-block|}
 specifier|final
 name|List
 argument_list|<
@@ -354,10 +356,6 @@ name|RexNode
 argument_list|>
 name|aboveFilters
 init|=
-name|filter
-operator|!=
-literal|null
-condition|?
 name|RelOptUtil
 operator|.
 name|conjunctions
@@ -367,15 +365,8 @@ operator|.
 name|getCondition
 argument_list|()
 argument_list|)
-else|:
-name|Lists
-operator|.
-expr|<
-name|RexNode
-operator|>
-name|newArrayList
-argument_list|()
 decl_stmt|;
+specifier|final
 name|List
 argument_list|<
 name|RexNode
@@ -384,11 +375,10 @@ name|leftFilters
 init|=
 operator|new
 name|ArrayList
-argument_list|<
-name|RexNode
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
+specifier|final
 name|List
 argument_list|<
 name|RexNode
@@ -397,9 +387,7 @@ name|rightFilters
 init|=
 operator|new
 name|ArrayList
-argument_list|<
-name|RexNode
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 comment|// Try to push down above filters. These are typically where clause
@@ -466,8 +454,8 @@ block|{
 comment|// no filters got pushed
 return|return;
 block|}
-comment|// create FilterRels on top of the children if any filters were
-comment|// pushed to them
+comment|// Create Filters on top of the children if any filters were
+comment|// pushed to them.
 specifier|final
 name|RexBuilder
 name|rexBuilder
@@ -514,32 +502,7 @@ argument_list|,
 name|filterFactory
 argument_list|)
 decl_stmt|;
-comment|// create the new LogicalCorrelate rel
-name|List
-argument_list|<
-name|RelNode
-argument_list|>
-name|corrInputs
-init|=
-name|Lists
-operator|.
-name|newArrayList
-argument_list|()
-decl_stmt|;
-name|corrInputs
-operator|.
-name|add
-argument_list|(
-name|leftRel
-argument_list|)
-expr_stmt|;
-name|corrInputs
-operator|.
-name|add
-argument_list|(
-name|rightRel
-argument_list|)
-expr_stmt|;
+comment|// Create the new Correlate
 name|RelNode
 name|newCorrRel
 init|=
@@ -552,7 +515,14 @@ operator|.
 name|getTraitSet
 argument_list|()
 argument_list|,
-name|corrInputs
+name|ImmutableList
+operator|.
+name|of
+argument_list|(
+name|leftRel
+argument_list|,
+name|rightRel
+argument_list|)
 argument_list|)
 decl_stmt|;
 name|call
@@ -611,7 +581,7 @@ name|rightRel
 argument_list|)
 expr_stmt|;
 block|}
-comment|// create a LogicalFilter on top of the join if needed
+comment|// Create a Filter on top of the join if needed
 name|RelNode
 name|newRel
 init|=

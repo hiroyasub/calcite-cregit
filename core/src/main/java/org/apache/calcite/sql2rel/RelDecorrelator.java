@@ -451,22 +451,6 @@ name|rel
 operator|.
 name|rules
 operator|.
-name|FilterAggregateTransposeRule
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|rel
-operator|.
-name|rules
-operator|.
 name|FilterCorrelateRule
 import|;
 end_import
@@ -500,22 +484,6 @@ operator|.
 name|rules
 operator|.
 name|FilterProjectTransposeRule
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|rel
-operator|.
-name|rules
-operator|.
-name|ProjectMergeRule
 import|;
 end_import
 
@@ -1687,6 +1655,7 @@ argument_list|)
 condition|)
 block|{
 comment|// has been rewritten; apply rules post-decorrelation
+specifier|final
 name|HepProgram
 name|program2
 init|=
@@ -1712,6 +1681,7 @@ operator|.
 name|build
 argument_list|()
 decl_stmt|;
+specifier|final
 name|HepPlanner
 name|planner2
 init|=
@@ -1720,8 +1690,9 @@ argument_list|(
 name|program2
 argument_list|)
 decl_stmt|;
+specifier|final
 name|RelNode
-name|newroot
+name|newRoot
 init|=
 name|mapOldToNewRel
 operator|.
@@ -1730,33 +1701,23 @@ argument_list|(
 name|root
 argument_list|)
 decl_stmt|;
-comment|// planner.setRoot(newroot);
 name|planner2
 operator|.
 name|setRoot
 argument_list|(
-name|newroot
+name|newRoot
 argument_list|)
 expr_stmt|;
-comment|// newroot = planner.findBestExp();
-name|newroot
-operator|=
+return|return
 name|planner2
 operator|.
 name|findBestExp
 argument_list|()
-expr_stmt|;
-return|return
-name|newroot
 return|;
 block|}
-else|else
-block|{
-comment|// not rewritten
 return|return
 name|root
 return|;
-block|}
 block|}
 specifier|private
 name|Function2
