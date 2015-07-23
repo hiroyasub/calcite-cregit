@@ -2471,6 +2471,36 @@ name|operand
 argument_list|)
 return|;
 block|}
+comment|/** Creates a call to the AVG aggregate function. */
+specifier|public
+name|AggCall
+name|avg
+parameter_list|(
+name|boolean
+name|distinct
+parameter_list|,
+name|String
+name|alias
+parameter_list|,
+name|RexNode
+name|operand
+parameter_list|)
+block|{
+return|return
+name|aggregateCall
+argument_list|(
+name|SqlStdOperatorTable
+operator|.
+name|AVG
+argument_list|,
+name|distinct
+argument_list|,
+name|alias
+argument_list|,
+name|operand
+argument_list|)
+return|;
+block|}
 comment|/** Creates a call to the MIN aggregate function. */
 specifier|public
 name|AggCall
