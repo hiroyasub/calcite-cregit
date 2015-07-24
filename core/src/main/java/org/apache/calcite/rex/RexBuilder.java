@@ -3562,6 +3562,9 @@ operator|.
 name|unscaledValue
 argument_list|()
 operator|.
+name|abs
+argument_list|()
+operator|.
 name|toString
 argument_list|()
 operator|.
@@ -3578,9 +3581,9 @@ name|SqlTypeName
 operator|.
 name|DECIMAL
 argument_list|,
-name|scale
-argument_list|,
 name|precision
+argument_list|,
+name|scale
 argument_list|)
 expr_stmt|;
 block|}
