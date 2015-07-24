@@ -1601,6 +1601,28 @@ argument_list|(
 literal|"1 between cast(null as integer) and 1"
 argument_list|)
 expr_stmt|;
+name|tester
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"x'0A00015A' between x'0A000130' and x'0A0001B0'"
+argument_list|,
+name|Boolean
+operator|.
+name|TRUE
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"x'0A00015A' between x'0A0001A0' and x'0A0001B0'"
+argument_list|,
+name|Boolean
+operator|.
+name|FALSE
+argument_list|)
+expr_stmt|;
 block|}
 annotation|@
 name|Test
@@ -1691,6 +1713,28 @@ operator|.
 name|checkBoolean
 argument_list|(
 literal|"1.5e0 not between 2e0 and 3e0"
+argument_list|,
+name|Boolean
+operator|.
+name|TRUE
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"x'0A00015A' not between x'0A000130' and x'0A0001B0'"
+argument_list|,
+name|Boolean
+operator|.
+name|FALSE
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"x'0A00015A' not between x'0A0001A0' and x'0A0001B0'"
 argument_list|,
 name|Boolean
 operator|.
@@ -7922,6 +7966,17 @@ argument_list|,
 literal|null
 argument_list|)
 expr_stmt|;
+name|tester
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"x'0A000130'>x'0A0001B0'"
+argument_list|,
+name|Boolean
+operator|.
+name|FALSE
+argument_list|)
+expr_stmt|;
 block|}
 annotation|@
 name|Test
@@ -8540,6 +8595,28 @@ operator|.
 name|checkNull
 argument_list|(
 literal|"cast(null as real)>=999"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"x'0A000130'>=x'0A0001B0'"
+argument_list|,
+name|Boolean
+operator|.
+name|FALSE
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"x'0A0001B0'>=x'0A0001B0'"
+argument_list|,
+name|Boolean
+operator|.
+name|TRUE
 argument_list|)
 expr_stmt|;
 block|}
@@ -9263,6 +9340,17 @@ argument_list|(
 literal|"cast(null as integer)<1.32"
 argument_list|)
 expr_stmt|;
+name|tester
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"x'0A000130'<x'0A0001B0'"
+argument_list|,
+name|Boolean
+operator|.
+name|TRUE
+argument_list|)
+expr_stmt|;
 block|}
 annotation|@
 name|Test
@@ -9600,6 +9688,28 @@ operator|.
 name|checkNull
 argument_list|(
 literal|"cast(null as integer)<=1.32"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"x'0A000130'<=x'0A0001B0'"
+argument_list|,
+name|Boolean
+operator|.
+name|TRUE
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"x'0A0001B0'<=x'0A0001B0'"
+argument_list|,
+name|Boolean
+operator|.
+name|TRUE
 argument_list|)
 expr_stmt|;
 block|}
