@@ -857,7 +857,7 @@ operator|.
 name|Frame
 name|firstFrame
 parameter_list|,
-name|int
+name|long
 name|updateCount
 parameter_list|)
 block|{

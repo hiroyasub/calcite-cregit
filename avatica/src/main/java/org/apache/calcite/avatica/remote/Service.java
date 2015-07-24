@@ -1091,7 +1091,7 @@ name|firstFrame
 decl_stmt|;
 specifier|public
 specifier|final
-name|int
+name|long
 name|updateCount
 decl_stmt|;
 annotation|@
@@ -1148,7 +1148,7 @@ name|JsonProperty
 argument_list|(
 literal|"updateCount"
 argument_list|)
-name|int
+name|long
 name|updateCount
 parameter_list|)
 block|{
@@ -1190,7 +1190,7 @@ name|updateCount
 expr_stmt|;
 block|}
 block|}
-comment|/** Request for    * {@link org.apache.calcite.avatica.Meta#prepareAndExecute(Meta.StatementHandle, String, int, Meta.PrepareCallback)}. */
+comment|/** Request for    * {@link Meta#prepareAndExecute(Meta.StatementHandle, String, long, Meta.PrepareCallback)}. */
 class|class
 name|PrepareAndExecuteRequest
 extends|extends
@@ -1208,7 +1208,7 @@ name|sql
 decl_stmt|;
 specifier|public
 specifier|final
-name|int
+name|long
 name|maxRowCount
 decl_stmt|;
 specifier|public
@@ -1250,7 +1250,7 @@ name|JsonProperty
 argument_list|(
 literal|"maxRowCount"
 argument_list|)
-name|int
+name|long
 name|maxRowCount
 parameter_list|)
 block|{
@@ -1337,7 +1337,7 @@ name|results
 expr_stmt|;
 block|}
 block|}
-comment|/** Request for    * {@link org.apache.calcite.avatica.Meta#prepare(org.apache.calcite.avatica.Meta.ConnectionHandle, String, int)}. */
+comment|/** Request for    * {@link Meta#prepare(Meta.ConnectionHandle, String, long)}. */
 class|class
 name|PrepareRequest
 extends|extends
@@ -1355,7 +1355,7 @@ name|sql
 decl_stmt|;
 specifier|public
 specifier|final
-name|int
+name|long
 name|maxRowCount
 decl_stmt|;
 annotation|@
@@ -1384,7 +1384,7 @@ name|JsonProperty
 argument_list|(
 literal|"maxRowCount"
 argument_list|)
-name|int
+name|long
 name|maxRowCount
 parameter_list|)
 block|{
@@ -1463,7 +1463,7 @@ name|statement
 expr_stmt|;
 block|}
 block|}
-comment|/** Request for    * {@link org.apache.calcite.avatica.Meta#fetch(Meta.StatementHandle, List, int, int)}. */
+comment|/** Request for    * {@link Meta#fetch(Meta.StatementHandle, List, long, int)}. */
 class|class
 name|FetchRequest
 extends|extends
@@ -1481,7 +1481,7 @@ name|statementId
 decl_stmt|;
 specifier|public
 specifier|final
-name|int
+name|long
 name|offset
 decl_stmt|;
 comment|/** Maximum number of rows to be returned in the frame. Negative means no      * limit. */
@@ -1536,7 +1536,7 @@ name|JsonProperty
 argument_list|(
 literal|"offset"
 argument_list|)
-name|int
+name|long
 name|offset
 parameter_list|,
 annotation|@

@@ -3698,7 +3698,7 @@ parameter_list|,
 name|Type
 name|elementType
 parameter_list|,
-name|int
+name|long
 name|maxRowCount
 parameter_list|)
 block|{
@@ -3741,7 +3741,7 @@ parameter_list|,
 name|Type
 name|elementType
 parameter_list|,
-name|int
+name|long
 name|maxRowCount
 parameter_list|)
 block|{
@@ -4143,7 +4143,7 @@ parameter_list|,
 name|Type
 name|elementType
 parameter_list|,
-name|int
+name|long
 name|maxRowCount
 parameter_list|,
 name|CalciteCatalogReader
@@ -4740,9 +4740,7 @@ decl_stmt|;
 return|return
 operator|new
 name|CalciteSignature
-argument_list|<
-name|T
-argument_list|>
+argument_list|<>
 argument_list|(
 name|sql
 argument_list|,

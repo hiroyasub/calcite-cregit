@@ -600,7 +600,7 @@ parameter_list|,
 name|Type
 name|elementType
 parameter_list|,
-name|int
+name|long
 name|maxRowCount
 parameter_list|)
 function_decl|;
@@ -1250,7 +1250,7 @@ name|rowType
 decl_stmt|;
 specifier|private
 specifier|final
-name|int
+name|long
 name|maxRowCount
 decl_stmt|;
 specifier|private
@@ -1295,7 +1295,7 @@ operator|.
 name|CursorFactory
 name|cursorFactory
 parameter_list|,
-name|int
+name|long
 name|maxRowCount
 parameter_list|,
 name|Bindable

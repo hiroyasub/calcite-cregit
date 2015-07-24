@@ -195,7 +195,7 @@ argument_list|,
 name|firstFrame
 argument_list|,
 operator|-
-literal|1
+literal|1L
 argument_list|)
 expr_stmt|;
 block|}
@@ -244,7 +244,7 @@ parameter_list|,
 name|ResultSet
 name|resultSet
 parameter_list|,
-name|int
+name|long
 name|maxRowCount
 parameter_list|)
 block|{
@@ -295,6 +295,9 @@ operator|)
 condition|?
 literal|100
 else|:
+operator|(
+name|int
+operator|)
 name|maxRowCount
 decl_stmt|;
 specifier|final
@@ -368,7 +371,7 @@ parameter_list|(
 name|ResultSet
 name|resultSet
 parameter_list|,
-name|int
+name|long
 name|offset
 parameter_list|,
 name|int
@@ -460,10 +463,6 @@ init|=
 name|fetchMaxRowCount
 operator|==
 literal|0
-condition|?
-literal|true
-else|:
-literal|false
 decl_stmt|;
 for|for
 control|(

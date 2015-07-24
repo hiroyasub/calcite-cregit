@@ -3202,7 +3202,7 @@ parameter_list|,
 name|String
 name|sql
 parameter_list|,
-name|int
+name|long
 name|maxRowCount
 parameter_list|)
 block|{
@@ -3277,7 +3277,7 @@ parameter_list|,
 name|String
 name|sql
 parameter_list|,
-name|int
+name|long
 name|maxRowCount
 parameter_list|,
 name|PrepareCallback
@@ -3435,7 +3435,7 @@ name|TypedValue
 argument_list|>
 name|parameterValues
 parameter_list|,
-name|int
+name|long
 name|offset
 parameter_list|,
 name|int
@@ -3973,7 +3973,7 @@ name|iterator
 decl_stmt|;
 specifier|private
 specifier|final
-name|int
+name|long
 name|limit
 decl_stmt|;
 name|int
@@ -3990,7 +3990,7 @@ name|E
 argument_list|>
 name|iterator
 parameter_list|,
-name|int
+name|long
 name|limit
 parameter_list|)
 block|{
@@ -4023,7 +4023,7 @@ name|E
 argument_list|>
 name|iterator
 parameter_list|,
-name|int
+name|long
 name|limit
 parameter_list|)
 block|{

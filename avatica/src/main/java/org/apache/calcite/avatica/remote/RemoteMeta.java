@@ -949,7 +949,7 @@ parameter_list|,
 name|String
 name|sql
 parameter_list|,
-name|int
+name|long
 name|maxRowCount
 parameter_list|)
 block|{
@@ -1006,7 +1006,7 @@ parameter_list|,
 name|String
 name|sql
 parameter_list|,
-name|int
+name|long
 name|maxRowCount
 parameter_list|,
 name|PrepareCallback
@@ -1200,7 +1200,7 @@ name|TypedValue
 argument_list|>
 name|parameterValues
 parameter_list|,
-name|int
+name|long
 name|offset
 parameter_list|,
 name|int

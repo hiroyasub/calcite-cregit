@@ -608,7 +608,7 @@ name|String
 operator|.
 name|class
 argument_list|,
-name|int
+name|long
 operator|.
 name|class
 argument_list|)

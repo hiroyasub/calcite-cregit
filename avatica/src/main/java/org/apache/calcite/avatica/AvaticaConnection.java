@@ -1914,7 +1914,7 @@ parameter_list|,
 name|String
 name|sql
 parameter_list|,
-name|int
+name|long
 name|maxRowCount
 parameter_list|)
 throws|throws
@@ -2012,7 +2012,7 @@ operator|.
 name|Frame
 name|firstFrame
 parameter_list|,
-name|int
+name|long
 name|updateCount
 parameter_list|)
 throws|throws

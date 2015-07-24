@@ -616,7 +616,7 @@ parameter_list|,
 name|String
 name|sql
 parameter_list|,
-name|int
+name|long
 name|maxRowCount
 parameter_list|)
 function_decl|;
@@ -630,7 +630,7 @@ parameter_list|,
 name|String
 name|sql
 parameter_list|,
-name|int
+name|long
 name|maxRowCount
 parameter_list|,
 name|PrepareCallback
@@ -650,7 +650,7 @@ name|TypedValue
 argument_list|>
 name|parameterValues
 parameter_list|,
-name|int
+name|long
 name|offset
 parameter_list|,
 name|int
@@ -1050,9 +1050,12 @@ name|signature
 decl_stmt|;
 specifier|public
 specifier|final
-name|int
+name|long
 name|updateCount
 decl_stmt|;
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|protected
 name|MetaResultSet
 parameter_list|(
@@ -1072,6 +1075,47 @@ name|Frame
 name|firstFrame
 parameter_list|,
 name|int
+name|updateCount
+parameter_list|)
+block|{
+name|this
+argument_list|(
+name|connectionId
+argument_list|,
+name|statementId
+argument_list|,
+name|ownStatement
+argument_list|,
+name|signature
+argument_list|,
+name|firstFrame
+argument_list|,
+operator|(
+name|long
+operator|)
+name|updateCount
+argument_list|)
+expr_stmt|;
+block|}
+specifier|protected
+name|MetaResultSet
+parameter_list|(
+name|String
+name|connectionId
+parameter_list|,
+name|int
+name|statementId
+parameter_list|,
+name|boolean
+name|ownStatement
+parameter_list|,
+name|Signature
+name|signature
+parameter_list|,
+name|Frame
+name|firstFrame
+parameter_list|,
+name|long
 name|updateCount
 parameter_list|)
 block|{
@@ -1154,7 +1198,7 @@ argument_list|,
 name|firstFrame
 argument_list|,
 operator|-
-literal|1
+literal|1L
 argument_list|)
 return|;
 block|}
@@ -1169,7 +1213,7 @@ parameter_list|,
 name|int
 name|statementId
 parameter_list|,
-name|int
+name|long
 name|updateCount
 parameter_list|)
 block|{
@@ -2066,7 +2110,7 @@ decl_stmt|;
 comment|/** Zero-based offset of first row. */
 specifier|public
 specifier|final
-name|int
+name|long
 name|offset
 decl_stmt|;
 comment|/** Whether this is definitely the last frame of rows.      * If true, there are no more rows.      * If false, there may or may not be more rows. */
@@ -2087,7 +2131,7 @@ decl_stmt|;
 specifier|public
 name|Frame
 parameter_list|(
-name|int
+name|long
 name|offset
 parameter_list|,
 name|boolean
@@ -2462,7 +2506,7 @@ parameter_list|,
 name|Frame
 name|firstFrame
 parameter_list|,
-name|int
+name|long
 name|updateCount
 parameter_list|)
 throws|throws

@@ -1189,7 +1189,7 @@ operator|.
 name|Context
 name|prepareContext
 parameter_list|,
-name|int
+name|long
 name|maxRowCount
 parameter_list|)
 block|{
