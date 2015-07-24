@@ -92,6 +92,24 @@ argument_list|,
 literal|false
 argument_list|)
 block|,
+comment|/** Lexical policy similar to MySQL with ANSI_QUOTES option enabled. (To be    * precise: MySQL on Windows; MySQL on Linux uses case-sensitive matching,    * like the Linux file system.) The case of identifiers is preserved whether    * or not they quoted; after which, identifiers are matched    * case-insensitively. Double quotes allow identifiers to contain    * non-alphanumeric characters. */
+name|MYSQL_ANSI
+argument_list|(
+name|Quoting
+operator|.
+name|DOUBLE_QUOTE
+argument_list|,
+name|Casing
+operator|.
+name|UNCHANGED
+argument_list|,
+name|Casing
+operator|.
+name|UNCHANGED
+argument_list|,
+literal|false
+argument_list|)
+block|,
 comment|/** Lexical policy similar to Microsoft SQL Server.    * The case of identifiers is preserved whether or not they are quoted;    * after which, identifiers are matched case-insensitively.    * Brackets allow identifiers to contain non-alphanumeric characters. */
 name|SQL_SERVER
 argument_list|(
