@@ -9233,6 +9233,16 @@ name|newRight
 argument_list|)
 expr_stmt|;
 block|}
+name|registerSubqueries
+argument_list|(
+name|joinScope
+argument_list|,
+name|join
+operator|.
+name|getCondition
+argument_list|()
+argument_list|)
+expr_stmt|;
 specifier|final
 name|JoinNamespace
 name|joinNamespace

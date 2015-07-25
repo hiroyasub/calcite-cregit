@@ -171,6 +171,29 @@ argument_list|>
 name|visitor
 parameter_list|)
 function_decl|;
+comment|/**    * Accepts a visitor with a payload, dispatching to the right overloaded    * {@link RexBiVisitor#visitInputRef(RexInputRef, Object)} visitXxx} method.    */
+specifier|public
+specifier|abstract
+parameter_list|<
+name|R
+parameter_list|,
+name|P
+parameter_list|>
+name|R
+name|accept
+parameter_list|(
+name|RexBiVisitor
+argument_list|<
+name|R
+argument_list|,
+name|P
+argument_list|>
+name|visitor
+parameter_list|,
+name|P
+name|arg
+parameter_list|)
+function_decl|;
 block|}
 end_class
 

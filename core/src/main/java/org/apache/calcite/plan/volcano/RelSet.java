@@ -109,6 +109,22 @@ name|apache
 operator|.
 name|calcite
 operator|.
+name|rel
+operator|.
+name|core
+operator|.
+name|CorrelationId
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
 name|util
 operator|.
 name|trace
@@ -213,9 +229,7 @@ name|rels
 init|=
 operator|new
 name|ArrayList
-argument_list|<
-name|RelNode
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 comment|/**    * Relational expressions that have a subset in this set as a child. This    * is a multi-set. If multiple relational expressions in this set have the    * same parent, there will be multiple entries.    */
@@ -228,9 +242,7 @@ name|parents
 init|=
 operator|new
 name|ArrayList
-argument_list|<
-name|RelNode
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 specifier|final
@@ -242,9 +254,7 @@ name|subsets
 init|=
 operator|new
 name|ArrayList
-argument_list|<
-name|RelSubset
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 comment|/**    * List of {@link AbstractConverter} objects which have not yet been    * satisfied.    */
@@ -257,9 +267,7 @@ name|abstractConverters
 init|=
 operator|new
 name|ArrayList
-argument_list|<
-name|AbstractConverter
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 comment|/**    * Set to the superseding set when this is found to be equivalent to another    * set.    */
@@ -269,19 +277,19 @@ decl_stmt|;
 name|RelNode
 name|rel
 decl_stmt|;
-comment|/**    * Names of variables which are set by relational expressions in this set    * and available for use by parent and child expressions.    */
+comment|/**    * Variables that are set by relational expressions in this set    * and available for use by parent and child expressions.    */
 specifier|final
 name|Set
 argument_list|<
-name|String
+name|CorrelationId
 argument_list|>
 name|variablesPropagated
 decl_stmt|;
-comment|/**    * Names of variables which are used by relational expressions in this set.    */
+comment|/**    * Variables that are used by relational expressions in this set.    */
 specifier|final
 name|Set
 argument_list|<
-name|String
+name|CorrelationId
 argument_list|>
 name|variablesUsed
 decl_stmt|;
@@ -301,13 +309,13 @@ name|id
 parameter_list|,
 name|Set
 argument_list|<
-name|String
+name|CorrelationId
 argument_list|>
 name|variablesPropagated
 parameter_list|,
 name|Set
 argument_list|<
-name|String
+name|CorrelationId
 argument_list|>
 name|variablesUsed
 parameter_list|)
@@ -949,9 +957,7 @@ name|activeSet
 init|=
 operator|new
 name|HashSet
-argument_list|<
-name|RelSubset
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 for|for

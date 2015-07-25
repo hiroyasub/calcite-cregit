@@ -133,6 +133,22 @@ name|calcite
 operator|.
 name|rel
 operator|.
+name|core
+operator|.
+name|CorrelationId
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
 name|type
 operator|.
 name|RelDataType
@@ -1836,7 +1852,7 @@ return|return
 name|constantNull
 return|;
 block|}
-comment|/**    * Creates an expression referencing a correlation variable.    *    * @param type Type of variable    * @param name Name of variable    * @return Correlation variable    */
+comment|/**    * Creates an expression referencing a correlation variable.    *    * @param id Name of variable    * @param type Type of variable    * @return Correlation variable    */
 specifier|public
 name|RexNode
 name|makeCorrel
@@ -1844,15 +1860,15 @@ parameter_list|(
 name|RelDataType
 name|type
 parameter_list|,
-name|String
-name|name
+name|CorrelationId
+name|id
 parameter_list|)
 block|{
 return|return
 operator|new
 name|RexCorrelVariable
 argument_list|(
-name|name
+name|id
 argument_list|,
 name|type
 argument_list|)

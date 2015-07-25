@@ -209,6 +209,15 @@ name|CALCITE_794_FIXED
 init|=
 literal|false
 decl_stmt|;
+comment|/** Whether    *<a href="https://issues.apache.org/jira/browse/CALCITE-1045">[CALCITE-1045]    * Decorrelate sub-queries in Project and Join</a> is fixed. */
+specifier|public
+specifier|static
+specifier|final
+name|boolean
+name|CALCITE_1045_FIXED
+init|=
+literal|false
+decl_stmt|;
 comment|/**    * Use this to flag temporary code.    */
 specifier|public
 specifier|static

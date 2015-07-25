@@ -161,22 +161,6 @@ name|linq4j
 operator|.
 name|tree
 operator|.
-name|Expression
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|linq4j
-operator|.
-name|tree
-operator|.
 name|Expressions
 import|;
 end_import
@@ -1026,13 +1010,6 @@ literal|null
 argument_list|,
 name|LINQ4J_AS_ENUMERABLE_METHOD
 argument_list|,
-name|Arrays
-operator|.
-expr|<
-name|Expression
-operator|>
-name|asList
-argument_list|(
 name|Expressions
 operator|.
 name|constant
@@ -1044,7 +1021,6 @@ name|HrSchema
 argument_list|()
 operator|.
 name|emps
-argument_list|)
 argument_list|)
 argument_list|)
 argument_list|,
@@ -2782,12 +2758,82 @@ name|query
 argument_list|(
 literal|"select count(*) as c from \"s\".\"everyTypes\"\n"
 operator|+
+literal|"where \"wrapperBoolean\" is true"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"C=0\n"
+argument_list|)
+expr_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"select count(*) as c from \"s\".\"everyTypes\"\n"
+operator|+
 literal|"where \"wrapperBoolean\" is not true"
 argument_list|)
 operator|.
 name|returns
 argument_list|(
 literal|"C=2\n"
+argument_list|)
+expr_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"select count(*) as c from \"s\".\"everyTypes\"\n"
+operator|+
+literal|"where \"wrapperBoolean\" is false"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"C=1\n"
+argument_list|)
+expr_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"select count(*) as c from \"s\".\"everyTypes\"\n"
+operator|+
+literal|"where \"wrapperBoolean\" is not false"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"C=1\n"
+argument_list|)
+expr_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"select count(*) as c from \"s\".\"everyTypes\"\n"
+operator|+
+literal|"where \"wrapperBoolean\" is null"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"C=1\n"
+argument_list|)
+expr_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"select count(*) as c from \"s\".\"everyTypes\"\n"
+operator|+
+literal|"where \"wrapperBoolean\" is not null"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"C=1\n"
 argument_list|)
 expr_stmt|;
 name|with

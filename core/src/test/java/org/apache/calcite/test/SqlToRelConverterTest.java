@@ -443,6 +443,72 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testJoinOnInSubQuery
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select * from emp left join dept\n"
+operator|+
+literal|"on emp.empno = 1\n"
+operator|+
+literal|"or dept.deptno in (select deptno from emp where empno> 5)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|expand
+argument_list|(
+literal|false
+argument_list|)
+operator|.
+name|convertsTo
+argument_list|(
+literal|"${plan}"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testJoinOnExists
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select * from emp left join dept\n"
+operator|+
+literal|"on emp.empno = 1\n"
+operator|+
+literal|"or exists (select deptno from emp where empno> dept.deptno + 5)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|expand
+argument_list|(
+literal|false
+argument_list|)
+operator|.
+name|convertsTo
+argument_list|(
+literal|"${plan}"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testJoinUsing
 parameter_list|()
 block|{
@@ -1145,12 +1211,13 @@ literal|"select \"e\" from (\n"
 operator|+
 literal|"select empno as \"e\", deptno as d, 1 as \"e\" from EMP)"
 decl_stmt|;
-name|tester
-operator|.
-name|assertConvertsTo
+name|sql
 argument_list|(
 name|sql
-argument_list|,
+argument_list|)
+operator|.
+name|convertsTo
+argument_list|(
 literal|"${plan}"
 argument_list|)
 expr_stmt|;
@@ -1692,15 +1759,10 @@ name|void
 name|testWithInsideWhereExists
 parameter_list|()
 block|{
-name|tester
-operator|.
-name|withDecorrelation
-argument_list|(
-literal|false
-argument_list|)
-operator|.
-name|assertConvertsTo
-argument_list|(
+specifier|final
+name|String
+name|sql
+init|=
 literal|"select * from emp\n"
 operator|+
 literal|"where exists (\n"
@@ -1708,7 +1770,59 @@ operator|+
 literal|"  with dept2 as (select * from dept where dept.deptno>= emp.deptno)\n"
 operator|+
 literal|"  select 1 from dept2 where deptno<= emp.deptno)"
-argument_list|,
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|decorrelate
+argument_list|(
+literal|false
+argument_list|)
+operator|.
+name|convertsTo
+argument_list|(
+literal|"${plan}"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testWithInsideWhereExistsRex
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select * from emp\n"
+operator|+
+literal|"where exists (\n"
+operator|+
+literal|"  with dept2 as (select * from dept where dept.deptno>= emp.deptno)\n"
+operator|+
+literal|"  select 1 from dept2 where deptno<= emp.deptno)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|decorrelate
+argument_list|(
+literal|false
+argument_list|)
+operator|.
+name|expand
+argument_list|(
+literal|false
+argument_list|)
+operator|.
+name|convertsTo
+argument_list|(
 literal|"${plan}"
 argument_list|)
 expr_stmt|;
@@ -1720,15 +1834,10 @@ name|void
 name|testWithInsideWhereExistsDecorrelate
 parameter_list|()
 block|{
-name|tester
-operator|.
-name|withDecorrelation
-argument_list|(
-literal|true
-argument_list|)
-operator|.
-name|assertConvertsTo
-argument_list|(
+specifier|final
+name|String
+name|sql
+init|=
 literal|"select * from emp\n"
 operator|+
 literal|"where exists (\n"
@@ -1736,7 +1845,59 @@ operator|+
 literal|"  with dept2 as (select * from dept where dept.deptno>= emp.deptno)\n"
 operator|+
 literal|"  select 1 from dept2 where deptno<= emp.deptno)"
-argument_list|,
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|decorrelate
+argument_list|(
+literal|true
+argument_list|)
+operator|.
+name|convertsTo
+argument_list|(
+literal|"${plan}"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testWithInsideWhereExistsDecorrelateRex
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select * from emp\n"
+operator|+
+literal|"where exists (\n"
+operator|+
+literal|"  with dept2 as (select * from dept where dept.deptno>= emp.deptno)\n"
+operator|+
+literal|"  select 1 from dept2 where deptno<= emp.deptno)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|decorrelate
+argument_list|(
+literal|true
+argument_list|)
+operator|.
+name|expand
+argument_list|(
+literal|false
+argument_list|)
+operator|.
+name|convertsTo
+argument_list|(
 literal|"${plan}"
 argument_list|)
 expr_stmt|;
@@ -1748,8 +1909,10 @@ name|void
 name|testWithInsideScalarSubquery
 parameter_list|()
 block|{
-name|check
-argument_list|(
+specifier|final
+name|String
+name|sql
+init|=
 literal|"select (\n"
 operator|+
 literal|" with dept2 as (select * from dept where deptno> 10)"
@@ -1757,7 +1920,49 @@ operator|+
 literal|" select count(*) from dept2) as c\n"
 operator|+
 literal|"from emp"
-argument_list|,
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|convertsTo
+argument_list|(
+literal|"${plan}"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testWithInsideScalarSubqueryRex
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select (\n"
+operator|+
+literal|" with dept2 as (select * from dept where deptno> 10)"
+operator|+
+literal|" select count(*) from dept2) as c\n"
+operator|+
+literal|"from emp"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|expand
+argument_list|(
+literal|false
+argument_list|)
+operator|.
+name|convertsTo
+argument_list|(
 literal|"${plan}"
 argument_list|)
 expr_stmt|;
@@ -2053,10 +2258,36 @@ name|void
 name|testMultisetOfColumns
 parameter_list|()
 block|{
-name|check
+name|sql
 argument_list|(
 literal|"select 'abc',multiset[deptno,sal] from emp"
-argument_list|,
+argument_list|)
+operator|.
+name|expand
+argument_list|(
+literal|true
+argument_list|)
+operator|.
+name|convertsTo
+argument_list|(
+literal|"${plan}"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testMultisetOfColumnsRex
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"select 'abc',multiset[deptno,sal] from emp"
+argument_list|)
+operator|.
+name|convertsTo
+argument_list|(
 literal|"${plan}"
 argument_list|)
 expr_stmt|;
@@ -2068,16 +2299,56 @@ name|void
 name|testCorrelationJoin
 parameter_list|()
 block|{
-name|check
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *,\n"
+operator|+
+literal|"  multiset(select * from emp where deptno=dept.deptno) as empset\n"
+operator|+
+literal|"from dept"
+decl_stmt|;
+name|sql
 argument_list|(
-literal|"select *,"
+name|sql
+argument_list|)
+operator|.
+name|convertsTo
+argument_list|(
+literal|"${plan}"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testCorrelationJoinRex
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *,\n"
 operator|+
-literal|"         multiset(select * from emp where deptno=dept.deptno) "
+literal|"  multiset(select * from emp where deptno=dept.deptno) as empset\n"
 operator|+
-literal|"               as empset"
-operator|+
-literal|"      from dept"
-argument_list|,
+literal|"from dept"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|expand
+argument_list|(
+literal|false
+argument_list|)
+operator|.
+name|convertsTo
+argument_list|(
 literal|"${plan}"
 argument_list|)
 expr_stmt|;
@@ -2123,9 +2394,47 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testNotExistsCorrelated
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select * from emp where not exists (\n"
+operator|+
+literal|"  select 1 from dept where emp.deptno=dept.deptno)"
+decl_stmt|;
+name|tester
+operator|.
+name|withDecorrelation
+argument_list|(
+literal|false
+argument_list|)
+operator|.
+name|assertConvertsTo
+argument_list|(
+name|sql
+argument_list|,
+literal|"${plan}"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testExistsCorrelatedDecorrelate
 parameter_list|()
 block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select*from emp where exists (\n"
+operator|+
+literal|"  select 1 from dept where emp.deptno=dept.deptno)"
+decl_stmt|;
 name|tester
 operator|.
 name|withDecorrelation
@@ -2135,7 +2444,42 @@ argument_list|)
 operator|.
 name|assertConvertsTo
 argument_list|(
-literal|"select*from emp where exists (select 1 from dept where emp.deptno=dept.deptno)"
+name|sql
+argument_list|,
+literal|"${plan}"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testExistsCorrelatedDecorrelateRex
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select*from emp where exists (\n"
+operator|+
+literal|"  select 1 from dept where emp.deptno=dept.deptno)"
+decl_stmt|;
+name|tester
+operator|.
+name|withDecorrelation
+argument_list|(
+literal|true
+argument_list|)
+operator|.
+name|withExpand
+argument_list|(
+literal|false
+argument_list|)
+operator|.
+name|assertConvertsTo
+argument_list|(
+name|sql
 argument_list|,
 literal|"${plan}"
 argument_list|)
@@ -2148,19 +2492,26 @@ name|void
 name|testExistsCorrelatedLimit
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select*from emp where exists (\n"
+operator|+
+literal|"  select 1 from dept where emp.deptno=dept.deptno limit 1)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
 operator|.
-name|withDecorrelation
+name|decorrelate
 argument_list|(
 literal|false
 argument_list|)
 operator|.
-name|assertConvertsTo
+name|convertsTo
 argument_list|(
-literal|"select*from emp where exists (\n"
-operator|+
-literal|"  select 1 from dept where emp.deptno=dept.deptno limit 1)"
-argument_list|,
 literal|"${plan}"
 argument_list|)
 expr_stmt|;
@@ -2172,19 +2523,67 @@ name|void
 name|testExistsCorrelatedLimitDecorrelate
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select*from emp where exists (\n"
+operator|+
+literal|"  select 1 from dept where emp.deptno=dept.deptno limit 1)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
 operator|.
-name|withDecorrelation
+name|decorrelate
 argument_list|(
 literal|true
 argument_list|)
 operator|.
-name|assertConvertsTo
+name|expand
 argument_list|(
+literal|true
+argument_list|)
+operator|.
+name|convertsTo
+argument_list|(
+literal|"${plan}"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testExistsCorrelatedLimitDecorrelateRex
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
 literal|"select*from emp where exists (\n"
 operator|+
 literal|"  select 1 from dept where emp.deptno=dept.deptno limit 1)"
-argument_list|,
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|decorrelate
+argument_list|(
+literal|true
+argument_list|)
+operator|.
+name|expand
+argument_list|(
+literal|false
+argument_list|)
+operator|.
+name|convertsTo
+argument_list|(
 literal|"${plan}"
 argument_list|)
 expr_stmt|;
@@ -2233,12 +2632,83 @@ name|void
 name|testInUncorrelatedSubquery
 parameter_list|()
 block|{
-name|check
-argument_list|(
+specifier|final
+name|String
+name|sql
+init|=
 literal|"select empno from emp where deptno in"
 operator|+
 literal|" (select deptno from dept)"
-argument_list|,
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|convertsTo
+argument_list|(
+literal|"${plan}"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testInUncorrelatedSubqueryRex
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select empno from emp where deptno in"
+operator|+
+literal|" (select deptno from dept)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|expand
+argument_list|(
+literal|false
+argument_list|)
+operator|.
+name|convertsTo
+argument_list|(
+literal|"${plan}"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testCompositeInUncorrelatedSubqueryRex
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select empno from emp where (empno, deptno) in"
+operator|+
+literal|" (select deptno - 10, deptno from dept)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|expand
+argument_list|(
+literal|false
+argument_list|)
+operator|.
+name|convertsTo
+argument_list|(
 literal|"${plan}"
 argument_list|)
 expr_stmt|;
@@ -2250,12 +2720,87 @@ name|void
 name|testNotInUncorrelatedSubquery
 parameter_list|()
 block|{
-name|check
-argument_list|(
+specifier|final
+name|String
+name|sql
+init|=
 literal|"select empno from emp where deptno not in"
 operator|+
 literal|" (select deptno from dept)"
-argument_list|,
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|convertsTo
+argument_list|(
+literal|"${plan}"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testNotInUncorrelatedSubqueryRex
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select empno from emp where deptno not in"
+operator|+
+literal|" (select deptno from dept)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|expand
+argument_list|(
+literal|false
+argument_list|)
+operator|.
+name|convertsTo
+argument_list|(
+literal|"${plan}"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testWhereInCorrelated
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select empno from emp as e\n"
+operator|+
+literal|"join dept as d using (deptno)\n"
+operator|+
+literal|"where e.sal in (\n"
+operator|+
+literal|"  select e2.sal from emp as e2 where e2.deptno> e.deptno)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|expand
+argument_list|(
+literal|false
+argument_list|)
+operator|.
+name|convertsTo
+argument_list|(
 literal|"${plan}"
 argument_list|)
 expr_stmt|;
@@ -2270,14 +2815,203 @@ block|{
 comment|// In the SELECT clause, the value of IN remains in 3-valued logic
 comment|// -- it's not forced into 2-valued by the "... IS TRUE" wrapper as in the
 comment|// WHERE clause -- so the translation is more complicated.
-name|check
-argument_list|(
+specifier|final
+name|String
+name|sql
+init|=
 literal|"select name, deptno in (\n"
 operator|+
 literal|"  select case when true then deptno else null end from emp)\n"
 operator|+
 literal|"from dept"
-argument_list|,
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|convertsTo
+argument_list|(
+literal|"${plan}"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testInUncorrelatedSubqueryInSelectRex
+parameter_list|()
+block|{
+comment|// In the SELECT clause, the value of IN remains in 3-valued logic
+comment|// -- it's not forced into 2-valued by the "... IS TRUE" wrapper as in the
+comment|// WHERE clause -- so the translation is more complicated.
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select name, deptno in (\n"
+operator|+
+literal|"  select case when true then deptno else null end from emp)\n"
+operator|+
+literal|"from dept"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|expand
+argument_list|(
+literal|false
+argument_list|)
+operator|.
+name|convertsTo
+argument_list|(
+literal|"${plan}"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testInUncorrelatedSubqueryInHavingRex
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select sum(sal) as s\n"
+operator|+
+literal|"from emp\n"
+operator|+
+literal|"group by deptno\n"
+operator|+
+literal|"having count(*)> 2\n"
+operator|+
+literal|"and deptno in (\n"
+operator|+
+literal|"  select case when true then deptno else null end from emp)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|expand
+argument_list|(
+literal|false
+argument_list|)
+operator|.
+name|convertsTo
+argument_list|(
+literal|"${plan}"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testUncorrelatedScalarSubqueryInOrderRex
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select ename\n"
+operator|+
+literal|"from emp\n"
+operator|+
+literal|"order by (select case when true then deptno else null end from emp) desc,\n"
+operator|+
+literal|"  ename"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|expand
+argument_list|(
+literal|false
+argument_list|)
+operator|.
+name|convertsTo
+argument_list|(
+literal|"${plan}"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testUncorrelatedScalarSubqueryInGroupOrderRex
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select sum(sal) as s\n"
+operator|+
+literal|"from emp\n"
+operator|+
+literal|"group by deptno\n"
+operator|+
+literal|"order by (select case when true then deptno else null end from emp) desc,\n"
+operator|+
+literal|"  count(*)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|expand
+argument_list|(
+literal|false
+argument_list|)
+operator|.
+name|convertsTo
+argument_list|(
+literal|"${plan}"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testUncorrelatedScalarSubqueryInAggregateRex
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select sum((select min(deptno) from emp)) as s\n"
+operator|+
+literal|"from emp\n"
+operator|+
+literal|"group by deptno\n"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|expand
+argument_list|(
+literal|false
+argument_list|)
+operator|.
+name|convertsTo
+argument_list|(
 literal|"${plan}"
 argument_list|)
 expr_stmt|;
@@ -2290,14 +3024,56 @@ name|void
 name|testNotInUncorrelatedSubqueryInSelect
 parameter_list|()
 block|{
-name|check
-argument_list|(
+specifier|final
+name|String
+name|sql
+init|=
 literal|"select empno, deptno not in (\n"
 operator|+
 literal|"  select case when true then deptno else null end from dept)\n"
 operator|+
 literal|"from emp"
-argument_list|,
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|convertsTo
+argument_list|(
+literal|"${plan}"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testNotInUncorrelatedSubqueryInSelectRex
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select empno, deptno not in (\n"
+operator|+
+literal|"  select case when true then deptno else null end from dept)\n"
+operator|+
+literal|"from emp"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|expand
+argument_list|(
+literal|false
+argument_list|)
+operator|.
+name|convertsTo
+argument_list|(
 literal|"${plan}"
 argument_list|)
 expr_stmt|;
@@ -2310,14 +3086,56 @@ name|void
 name|testNotInUncorrelatedSubqueryInSelectNotNull
 parameter_list|()
 block|{
-name|check
-argument_list|(
+specifier|final
+name|String
+name|sql
+init|=
 literal|"select empno, deptno not in (\n"
 operator|+
 literal|"  select deptno from dept)\n"
 operator|+
 literal|"from emp"
-argument_list|,
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|convertsTo
+argument_list|(
+literal|"${plan}"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testNotInUncorrelatedSubqueryInSelectNotNullRex
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select empno, deptno not in (\n"
+operator|+
+literal|"  select deptno from dept)\n"
+operator|+
+literal|"from emp"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|expand
+argument_list|(
+literal|false
+argument_list|)
+operator|.
+name|convertsTo
+argument_list|(
 literal|"${plan}"
 argument_list|)
 expr_stmt|;
@@ -2329,10 +3147,53 @@ name|void
 name|testUnnestSelect
 parameter_list|()
 block|{
-name|check
-argument_list|(
+specifier|final
+name|String
+name|sql
+init|=
 literal|"select*from unnest(select multiset[deptno] from dept)"
-argument_list|,
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|expand
+argument_list|(
+literal|true
+argument_list|)
+operator|.
+name|convertsTo
+argument_list|(
+literal|"${plan}"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testUnnestSelectRex
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select*from unnest(select multiset[deptno] from dept)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|expand
+argument_list|(
+literal|false
+argument_list|)
+operator|.
+name|convertsTo
+argument_list|(
 literal|"${plan}"
 argument_list|)
 expr_stmt|;
@@ -2344,10 +3205,48 @@ name|void
 name|testJoinUnnest
 parameter_list|()
 block|{
-name|check
-argument_list|(
+specifier|final
+name|String
+name|sql
+init|=
 literal|"select*from dept as d, unnest(multiset[d.deptno * 2])"
-argument_list|,
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|convertsTo
+argument_list|(
+literal|"${plan}"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testJoinUnnestRex
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select*from dept as d, unnest(multiset[d.deptno * 2])"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|expand
+argument_list|(
+literal|false
+argument_list|)
+operator|.
+name|convertsTo
+argument_list|(
 literal|"${plan}"
 argument_list|)
 expr_stmt|;
@@ -2381,6 +3280,49 @@ name|void
 name|testLateralDecorrelate
 parameter_list|()
 block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select * from emp,\n"
+operator|+
+literal|" LATERAL (select * from dept where emp.deptno=dept.deptno)"
+decl_stmt|;
+name|tester
+operator|.
+name|withDecorrelation
+argument_list|(
+literal|true
+argument_list|)
+operator|.
+name|withExpand
+argument_list|(
+literal|true
+argument_list|)
+operator|.
+name|assertConvertsTo
+argument_list|(
+name|sql
+argument_list|,
+literal|"${plan}"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testLateralDecorrelateRex
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select * from emp,\n"
+operator|+
+literal|" LATERAL (select * from dept where emp.deptno=dept.deptno)"
+decl_stmt|;
 name|tester
 operator|.
 name|withDecorrelation
@@ -2390,7 +3332,7 @@ argument_list|)
 operator|.
 name|assertConvertsTo
 argument_list|(
-literal|"select * from emp, LATERAL (select * from dept where emp.deptno=dept.deptno)"
+name|sql
 argument_list|,
 literal|"${plan}"
 argument_list|)
@@ -2431,6 +3373,61 @@ name|void
 name|testNestedCorrelationsDecorrelated
 parameter_list|()
 block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"from (select 2+deptno d2, 3+deptno d3 from emp) e\n"
+operator|+
+literal|" where exists (select 1 from (select deptno+1 d1 from dept) d\n"
+operator|+
+literal|" where d1=e.d2 and exists (select 2 from (select deptno+4 d4, deptno+5 d5, deptno+6 d6 from dept)\n"
+operator|+
+literal|" where d4=d.d1 and d5=d.d1 and d6=e.d3))"
+decl_stmt|;
+name|tester
+operator|.
+name|withDecorrelation
+argument_list|(
+literal|true
+argument_list|)
+operator|.
+name|withExpand
+argument_list|(
+literal|true
+argument_list|)
+operator|.
+name|assertConvertsTo
+argument_list|(
+name|sql
+argument_list|,
+literal|"${plan}"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testNestedCorrelationsDecorrelatedRex
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"from (select 2+deptno d2, 3+deptno d3 from emp) e\n"
+operator|+
+literal|" where exists (select 1 from (select deptno+1 d1 from dept) d\n"
+operator|+
+literal|" where d1=e.d2 and exists (select 2 from (select deptno+4 d4, deptno+5 d5, deptno+6 d6 from dept)\n"
+operator|+
+literal|" where d4=d.d1 and d5=d.d1 and d6=e.d3))"
+decl_stmt|;
 name|tester
 operator|.
 name|withDecorrelation
@@ -2440,13 +3437,7 @@ argument_list|)
 operator|.
 name|assertConvertsTo
 argument_list|(
-literal|"select * from (select 2+deptno d2, 3+deptno d3 from emp) e\n"
-operator|+
-literal|" where exists (select 1 from (select deptno+1 d1 from dept) d\n"
-operator|+
-literal|" where d1=e.d2 and exists (select 2 from (select deptno+4 d4, deptno+5 d5, deptno+6 d6 from dept)\n"
-operator|+
-literal|" where d4=d.d1 and d5=d.d1 and d6=e.d3))"
+name|sql
 argument_list|,
 literal|"${plan}"
 argument_list|)
@@ -3706,6 +4697,18 @@ name|void
 name|testCorrelationScalarAggAndFilter
 parameter_list|()
 block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"SELECT e1.empno\n"
+operator|+
+literal|"FROM emp e1, dept d1 where e1.deptno = d1.deptno\n"
+operator|+
+literal|"and e1.deptno< 10 and d1.deptno< 15\n"
+operator|+
+literal|"and e1.sal> (select avg(sal) from emp e2 where e1.empno = e2.empno)"
+decl_stmt|;
 name|tester
 operator|.
 name|withDecorrelation
@@ -3713,13 +4716,53 @@ argument_list|(
 literal|true
 argument_list|)
 operator|.
+name|withExpand
+argument_list|(
+literal|true
+argument_list|)
+operator|.
 name|assertConvertsTo
 argument_list|(
-literal|"SELECT e1.empno FROM emp e1, dept d1 where e1.deptno = d1.deptno\n"
+name|sql
+argument_list|,
+literal|"${plan}"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testCorrelationScalarAggAndFilterRex
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"SELECT e1.empno\n"
+operator|+
+literal|"FROM emp e1, dept d1 where e1.deptno = d1.deptno\n"
 operator|+
 literal|"and e1.deptno< 10 and d1.deptno< 15\n"
 operator|+
 literal|"and e1.sal> (select avg(sal) from emp e2 where e1.empno = e2.empno)"
+decl_stmt|;
+name|tester
+operator|.
+name|withDecorrelation
+argument_list|(
+literal|true
+argument_list|)
+operator|.
+name|withExpand
+argument_list|(
+literal|false
+argument_list|)
+operator|.
+name|assertConvertsTo
+argument_list|(
+name|sql
 argument_list|,
 literal|"${plan}"
 argument_list|)
@@ -3733,6 +4776,57 @@ name|void
 name|testCorrelationExistsAndFilter
 parameter_list|()
 block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"SELECT e1.empno\n"
+operator|+
+literal|"FROM emp e1, dept d1 where e1.deptno = d1.deptno\n"
+operator|+
+literal|"and e1.deptno< 10 and d1.deptno< 15\n"
+operator|+
+literal|"and exists (select * from emp e2 where e1.empno = e2.empno)"
+decl_stmt|;
+name|tester
+operator|.
+name|withDecorrelation
+argument_list|(
+literal|true
+argument_list|)
+operator|.
+name|withExpand
+argument_list|(
+literal|true
+argument_list|)
+operator|.
+name|assertConvertsTo
+argument_list|(
+name|sql
+argument_list|,
+literal|"${plan}"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testCorrelationExistsAndFilterRex
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"SELECT e1.empno\n"
+operator|+
+literal|"FROM emp e1, dept d1 where e1.deptno = d1.deptno\n"
+operator|+
+literal|"and e1.deptno< 10 and d1.deptno< 15\n"
+operator|+
+literal|"and exists (select * from emp e2 where e1.empno = e2.empno)"
+decl_stmt|;
 name|tester
 operator|.
 name|withDecorrelation
@@ -3742,11 +4836,7 @@ argument_list|)
 operator|.
 name|assertConvertsTo
 argument_list|(
-literal|"SELECT e1.empno FROM emp e1, dept d1 where e1.deptno = d1.deptno\n"
-operator|+
-literal|"and e1.deptno< 10 and d1.deptno< 15\n"
-operator|+
-literal|"and exists (select * from emp e2 where e1.empno = e2.empno)"
+name|sql
 argument_list|,
 literal|"${plan}"
 argument_list|)
@@ -3844,6 +4934,16 @@ specifier|final
 name|String
 name|sql
 decl_stmt|;
+specifier|private
+specifier|final
+name|boolean
+name|expand
+decl_stmt|;
+specifier|private
+specifier|final
+name|boolean
+name|decorrelate
+decl_stmt|;
 name|Sql
 parameter_list|(
 name|String
@@ -3851,10 +4951,44 @@ name|sql
 parameter_list|)
 block|{
 name|this
+argument_list|(
+name|sql
+argument_list|,
+literal|true
+argument_list|,
+literal|true
+argument_list|)
+expr_stmt|;
+block|}
+name|Sql
+parameter_list|(
+name|String
+name|sql
+parameter_list|,
+name|boolean
+name|expand
+parameter_list|,
+name|boolean
+name|decorrelate
+parameter_list|)
+block|{
+name|this
 operator|.
 name|sql
 operator|=
 name|sql
+expr_stmt|;
+name|this
+operator|.
+name|expand
+operator|=
+name|expand
+expr_stmt|;
+name|this
+operator|.
+name|decorrelate
+operator|=
+name|decorrelate
 expr_stmt|;
 block|}
 specifier|public
@@ -3878,13 +5012,65 @@ parameter_list|)
 block|{
 name|tester
 operator|.
+name|withExpand
+argument_list|(
+name|expand
+argument_list|)
+operator|.
+name|withDecorrelation
+argument_list|(
+name|decorrelate
+argument_list|)
+operator|.
 name|assertConvertsTo
 argument_list|(
 name|sql
 argument_list|,
 name|plan
+argument_list|,
+literal|false
 argument_list|)
 expr_stmt|;
+block|}
+specifier|public
+name|Sql
+name|expand
+parameter_list|(
+name|boolean
+name|expand
+parameter_list|)
+block|{
+return|return
+operator|new
+name|Sql
+argument_list|(
+name|sql
+argument_list|,
+name|expand
+argument_list|,
+name|decorrelate
+argument_list|)
+return|;
+block|}
+specifier|public
+name|Sql
+name|decorrelate
+parameter_list|(
+name|boolean
+name|decorrelate
+parameter_list|)
+block|{
+return|return
+operator|new
+name|Sql
+argument_list|(
+name|sql
+argument_list|,
+name|expand
+argument_list|,
+name|decorrelate
+argument_list|)
+return|;
 block|}
 block|}
 block|}

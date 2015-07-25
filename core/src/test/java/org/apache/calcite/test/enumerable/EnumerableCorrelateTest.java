@@ -105,19 +105,23 @@ argument_list|)
 operator|.
 name|explainContains
 argument_list|(
-literal|"EnumerableCalc(expr#0..4=[{inputs}], empid=[$t0], name=[$t2])\n"
+literal|""
 operator|+
-literal|"  EnumerableSemiJoin(condition=[=($1, $5)], joinType=[inner])\n"
+literal|"EnumerableCalc(expr#0..2=[{inputs}], empid=[$t0], name=[$t2])\n"
 operator|+
-literal|"    EnumerableTableScan(table=[[s, emps]])\n"
+literal|"  EnumerableSemiJoin(condition=[=($1, $3)], joinType=[inner])\n"
 operator|+
-literal|"    EnumerableCalc(expr#0..4=[{inputs}], expr#5=[true], deptno0=[$t0], $f0=[$t5])\n"
+literal|"    EnumerableCalc(expr#0..4=[{inputs}], proj#0..2=[{exprs}])\n"
 operator|+
-literal|"      EnumerableJoin(condition=[=($0, $1)], joinType=[inner])\n"
+literal|"      EnumerableTableScan(table=[[s, emps]])\n"
 operator|+
-literal|"        EnumerableAggregate(group=[{1}])\n"
+literal|"    EnumerableJoin(condition=[=($0, $1)], joinType=[inner])\n"
 operator|+
-literal|"          EnumerableTableScan(table=[[s, emps]])\n"
+literal|"      EnumerableAggregate(group=[{1}])\n"
+operator|+
+literal|"        EnumerableTableScan(table=[[s, emps]])\n"
+operator|+
+literal|"      EnumerableCalc(expr#0..3=[{inputs}], deptno=[$t0])\n"
 operator|+
 literal|"        EnumerableTableScan(table=[[s, depts]])"
 argument_list|)
@@ -157,15 +161,17 @@ argument_list|)
 operator|.
 name|explainContains
 argument_list|(
-literal|"EnumerableCalc(expr#0..5=[{inputs}], expr#6=[IS NOT NULL($t5)], empid=[$t0], name=[$t2], $condition=[$t6])\n"
+literal|""
 operator|+
-literal|"  EnumerableCorrelate(correlation=[$cor0], joinType=[LEFT], requiredColumns=[{1}])\n"
+literal|"EnumerableCalc(expr#0..5=[{inputs}], empid=[$t0], name=[$t2])\n"
+operator|+
+literal|"  EnumerableCorrelate(correlation=[$cor0], joinType=[INNER], requiredColumns=[{1}])\n"
 operator|+
 literal|"    EnumerableTableScan(table=[[s, emps]])\n"
 operator|+
-literal|"    EnumerableAggregate(group=[{}], agg#0=[MIN($0)])\n"
+literal|"    EnumerableAggregate(group=[{0}])\n"
 operator|+
-literal|"      EnumerableCalc(expr#0..3=[{inputs}], expr#4=[true], expr#5=[$cor0], expr#6=[$t5.deptno], expr#7=[=($t0, $t6)], $f0=[$t4], $condition=[$t7])\n"
+literal|"      EnumerableCalc(expr#0..3=[{inputs}], expr#4=[true], expr#5=[$cor0], expr#6=[$t5.deptno], expr#7=[=($t0, $t6)], i=[$t4], $condition=[$t7])\n"
 operator|+
 literal|"        EnumerableTableScan(table=[[s, depts]])"
 argument_list|)

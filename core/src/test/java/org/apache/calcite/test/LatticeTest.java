@@ -891,9 +891,11 @@ name|CalciteAssert
 operator|.
 name|checkRel
 argument_list|(
+literal|""
+operator|+
 literal|"LogicalAggregate(group=[{}], EXPR$0=[COUNT()])\n"
 operator|+
-literal|"  LogicalProject(DUMMY=[0])\n"
+literal|"  LogicalProject($f0=[0])\n"
 operator|+
 literal|"    StarTableScan(table=[[adhoc, star]])\n"
 argument_list|,
@@ -1529,6 +1531,54 @@ name|void
 name|testJG
 parameter_list|()
 block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|""
+operator|+
+literal|"SELECT \"s\".\"unit_sales\", \"p\".\"recyclable_package\", \"t\".\"the_day\", \"t\".\"the_year\", \"t\".\"quarter\", \"pc\".\"product_family\", COUNT(*) AS \"m0\", SUM(\"s\".\"store_sales\") AS \"m1\", SUM(\"s\".\"unit_sales\") AS \"m2\"\n"
+operator|+
+literal|"FROM \"foodmart\".\"sales_fact_1997\" AS \"s\"\n"
+operator|+
+literal|"JOIN \"foodmart\".\"product\" AS \"p\" ON \"s\".\"product_id\" = \"p\".\"product_id\"\n"
+operator|+
+literal|"JOIN \"foodmart\".\"time_by_day\" AS \"t\" ON \"s\".\"time_id\" = \"t\".\"time_id\"\n"
+operator|+
+literal|"JOIN \"foodmart\".\"product_class\" AS \"pc\" ON \"p\".\"product_class_id\" = \"pc\".\"product_class_id\"\n"
+operator|+
+literal|"GROUP BY \"s\".\"unit_sales\", \"p\".\"recyclable_package\", \"t\".\"the_day\", \"t\".\"the_year\", \"t\".\"quarter\", \"pc\".\"product_family\""
+decl_stmt|;
+specifier|final
+name|String
+name|explain
+init|=
+literal|"JdbcToEnumerableConverter\n"
+operator|+
+literal|"  JdbcAggregate(group=[{3, 6, 8, 9, 10, 12}], m0=[COUNT()], m1=[$SUM0($2)], m2=[$SUM0($3)])\n"
+operator|+
+literal|"    JdbcJoin(condition=[=($4, $11)], joinType=[inner])\n"
+operator|+
+literal|"      JdbcJoin(condition=[=($1, $7)], joinType=[inner])\n"
+operator|+
+literal|"        JdbcJoin(condition=[=($0, $5)], joinType=[inner])\n"
+operator|+
+literal|"          JdbcProject(product_id=[$0], time_id=[$1], store_sales=[$5], unit_sales=[$7])\n"
+operator|+
+literal|"            JdbcTableScan(table=[[foodmart, sales_fact_1997]])\n"
+operator|+
+literal|"          JdbcProject(product_class_id=[$0], product_id=[$1], recyclable_package=[$8])\n"
+operator|+
+literal|"            JdbcTableScan(table=[[foodmart, product]])\n"
+operator|+
+literal|"        JdbcProject(time_id=[$0], the_day=[$2], the_year=[$4], quarter=[$8])\n"
+operator|+
+literal|"          JdbcTableScan(table=[[foodmart, time_by_day]])\n"
+operator|+
+literal|"      JdbcProject(product_class_id=[$0], product_family=[$4])\n"
+operator|+
+literal|"        JdbcTableScan(table=[[foodmart, product_class]])"
+decl_stmt|;
 name|CalciteAssert
 operator|.
 name|that
@@ -1545,38 +1595,12 @@ argument_list|)
 operator|.
 name|query
 argument_list|(
-literal|"SELECT \"s\".\"unit_sales\", \"p\".\"recyclable_package\", \"t\".\"the_day\", \"t\".\"the_year\", \"t\".\"quarter\", \"pc\".\"product_family\", COUNT(*) AS \"m0\", SUM(\"s\".\"store_sales\") AS \"m1\", SUM(\"s\".\"unit_sales\") AS \"m2\"\n"
-operator|+
-literal|"FROM \"foodmart\".\"sales_fact_1997\" AS \"s\"\n"
-operator|+
-literal|"JOIN \"foodmart\".\"product\" AS \"p\" ON \"s\".\"product_id\" = \"p\".\"product_id\"\n"
-operator|+
-literal|"JOIN \"foodmart\".\"time_by_day\" AS \"t\" ON \"s\".\"time_id\" = \"t\".\"time_id\"\n"
-operator|+
-literal|"JOIN \"foodmart\".\"product_class\" AS \"pc\" ON \"p\".\"product_class_id\" = \"pc\".\"product_class_id\"\n"
-operator|+
-literal|"GROUP BY \"s\".\"unit_sales\", \"p\".\"recyclable_package\", \"t\".\"the_day\", \"t\".\"the_year\", \"t\".\"quarter\", \"pc\".\"product_family\""
+name|sql
 argument_list|)
 operator|.
 name|explainContains
 argument_list|(
-literal|"JdbcToEnumerableConverter\n"
-operator|+
-literal|"  JdbcAggregate(group=[{7, 16, 25, 27, 31, 37}], m0=[COUNT()], m1=[$SUM0($5)], m2=[$SUM0($7)])\n"
-operator|+
-literal|"    JdbcJoin(condition=[=($8, $33)], joinType=[inner])\n"
-operator|+
-literal|"      JdbcJoin(condition=[=($1, $23)], joinType=[inner])\n"
-operator|+
-literal|"        JdbcJoin(condition=[=($0, $9)], joinType=[inner])\n"
-operator|+
-literal|"          JdbcTableScan(table=[[foodmart, sales_fact_1997]])\n"
-operator|+
-literal|"          JdbcTableScan(table=[[foodmart, product]])\n"
-operator|+
-literal|"        JdbcTableScan(table=[[foodmart, time_by_day]])\n"
-operator|+
-literal|"      JdbcTableScan(table=[[foodmart, product_class]])"
+name|explain
 argument_list|)
 expr_stmt|;
 block|}

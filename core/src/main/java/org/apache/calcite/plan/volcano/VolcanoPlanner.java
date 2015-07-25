@@ -8389,7 +8389,7 @@ argument_list|)
 argument_list|,
 name|rel
 operator|.
-name|getVariablesStopped
+name|getVariablesSet
 argument_list|()
 argument_list|)
 argument_list|,

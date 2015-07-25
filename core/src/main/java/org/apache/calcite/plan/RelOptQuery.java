@@ -39,6 +39,22 @@ name|calcite
 operator|.
 name|rel
 operator|.
+name|core
+operator|.
+name|CorrelationId
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
 name|type
 operator|.
 name|RelDataTypeFactory
@@ -110,7 +126,9 @@ specifier|final
 name|String
 name|CORREL_PREFIX
 init|=
-literal|"$cor"
+name|CorrelationId
+operator|.
+name|CORREL_PREFIX
 decl_stmt|;
 comment|//~ Instance fields --------------------------------------------------------
 comment|/**    * Maps name of correlating variable (e.g. "$cor3") to the {@link RelNode}    * which implements it.    */

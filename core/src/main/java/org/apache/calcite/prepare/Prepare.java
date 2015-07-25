@@ -743,7 +743,7 @@ argument_list|(
 literal|false
 argument_list|)
 decl_stmt|;
-comment|/** Temporary, while CALCITE-816 is under development.    *    * @see org.apache.calcite.util.Util#deprecated(Object, boolean) */
+comment|/** Temporary, until    *<a href="https://issues.apache.org/jira/browse/CALCITE-1045">[CALCITE-1045]    * Decorrelate sub-queries in Project and Join</a> is fixed.    *    *<p>The default is false, meaning do not expand queries during sql-to-rel,    * but a few tests override and set it to true. After CALCITE-1045    * is fixed, remove those overrides and use false everywhere. */
 specifier|public
 specifier|static
 specifier|final
@@ -1253,6 +1253,16 @@ argument_list|,
 name|catalogReader
 argument_list|)
 decl_stmt|;
+name|sqlToRelConverter
+operator|.
+name|setExpand
+argument_list|(
+name|THREAD_EXPAND
+operator|.
+name|get
+argument_list|()
+argument_list|)
+expr_stmt|;
 name|SqlExplain
 name|sqlExplain
 init|=
@@ -1824,6 +1834,16 @@ name|root
 operator|.
 name|rel
 argument_list|)
+argument_list|)
+expr_stmt|;
+name|converter
+operator|.
+name|setExpand
+argument_list|(
+name|THREAD_EXPAND
+operator|.
+name|get
+argument_list|()
 argument_list|)
 expr_stmt|;
 specifier|final

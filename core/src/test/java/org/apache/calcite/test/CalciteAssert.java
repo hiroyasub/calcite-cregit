@@ -1081,7 +1081,7 @@ parameter_list|(
 name|String
 name|property
 parameter_list|,
-name|String
+name|Object
 name|value
 parameter_list|)
 block|{
@@ -4495,7 +4495,7 @@ parameter_list|(
 name|String
 name|property
 parameter_list|,
-name|String
+name|Object
 name|value
 parameter_list|)
 block|{
@@ -5288,7 +5288,7 @@ parameter_list|(
 name|String
 name|property
 parameter_list|,
-name|String
+name|Object
 name|value
 parameter_list|)
 block|{
@@ -5887,7 +5887,7 @@ parameter_list|(
 name|String
 name|property
 parameter_list|,
-name|String
+name|Object
 name|value
 parameter_list|)
 block|{
@@ -5922,6 +5922,9 @@ argument_list|(
 name|property
 argument_list|,
 name|value
+operator|.
+name|toString
+argument_list|()
 argument_list|)
 expr_stmt|;
 return|return

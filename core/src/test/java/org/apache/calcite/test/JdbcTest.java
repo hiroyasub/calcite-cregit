@@ -12393,19 +12393,17 @@ literal|""
 operator|+
 literal|"LogicalProject(deptno=[$0], name=[$1], employees=[$2], location=[$3])\n"
 operator|+
-literal|"  LogicalJoin(condition=[=($0, $4)], joinType=[inner])\n"
+literal|"  LogicalFilter(condition=[IN($0, {\n"
 operator|+
-literal|"    EnumerableTableScan(table=[[hr, depts]])\n"
+literal|"LogicalProject(deptno=[$1])\n"
 operator|+
-literal|"    LogicalAggregate(group=[{0}])\n"
+literal|"  LogicalFilter(condition=[<($0, 150)])\n"
 operator|+
-literal|"      LogicalProject(deptno=[$1])\n"
+literal|"    EnumerableTableScan(table=[[hr, emps]])\n"
 operator|+
-literal|"        LogicalFilter(condition=[<($0, 150)])\n"
+literal|"})])\n"
 operator|+
-literal|"          LogicalProject(empid=[$0], deptno=[$1])\n"
-operator|+
-literal|"            EnumerableTableScan(table=[[hr, emps]])"
+literal|"    EnumerableTableScan(table=[[hr, depts]])"
 argument_list|)
 operator|.
 name|explainContains
@@ -14175,21 +14173,6 @@ name|push
 argument_list|(
 literal|true
 argument_list|)
-init|;
-specifier|final
-name|TryThreadLocal
-operator|.
-name|Memo
-name|memo
-init|=
-name|Prepare
-operator|.
-name|THREAD_EXPAND
-operator|.
-name|push
-argument_list|(
-literal|true
-argument_list|)
 init|)
 block|{
 name|CalciteAssert
@@ -14206,17 +14189,13 @@ name|convertContains
 argument_list|(
 literal|"LogicalAggregate(group=[{}], C=[COUNT()])\n"
 operator|+
-literal|"  LogicalProject(DUMMY=[0])\n"
+literal|"  LogicalProject($f0=[0])\n"
 operator|+
 literal|"    LogicalJoin(condition=[true], joinType=[inner])\n"
 operator|+
-literal|"      LogicalProject(DUMMY=[0])\n"
+literal|"      EnumerableTableScan(table=[[hr, emps]])\n"
 operator|+
-literal|"        EnumerableTableScan(table=[[hr, emps]])\n"
-operator|+
-literal|"      LogicalProject(DUMMY=[0])\n"
-operator|+
-literal|"        EnumerableTableScan(table=[[hr, depts]])"
+literal|"      EnumerableTableScan(table=[[hr, depts]])"
 argument_list|)
 expr_stmt|;
 block|}
@@ -16164,8 +16143,10 @@ comment|// if there is no partition, that means the whole table.
 comment|// Rows are deemed "equal to" the current row per the ORDER BY clause.
 comment|// If there is no ORDER BY clause, CURRENT ROW has the same effect as
 comment|// UNBOUNDED FOLLOWING; that is, no filtering effect at all.
-name|checkOuter
-argument_list|(
+specifier|final
+name|String
+name|sql
+init|=
 literal|"select *,\n"
 operator|+
 literal|" count(*) over (partition by deptno) as m1,\n"
@@ -16175,7 +16156,14 @@ operator|+
 literal|" count(*) over () as m3\n"
 operator|+
 literal|"from emp"
-argument_list|,
+decl_stmt|;
+name|withEmpDept
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
 literal|"ENAME=Adam ; DEPTNO=50; GENDER=M; M1=2; M2=1; M3=9"
 argument_list|,
 literal|"ENAME=Alice; DEPTNO=30; GENDER=F; M1=2; M2=1; M3=9"
@@ -16277,30 +16265,8 @@ name|push
 argument_list|(
 literal|true
 argument_list|)
-init|;
-specifier|final
-name|TryThreadLocal
-operator|.
-name|Memo
-name|memo
-init|=
-name|Prepare
-operator|.
-name|THREAD_EXPAND
-operator|.
-name|push
-argument_list|(
-literal|true
-argument_list|)
 init|)
 block|{
-name|Util
-operator|.
-name|discard
-argument_list|(
-name|memo
-argument_list|)
-expr_stmt|;
 comment|// The correct plan has a project on a filter on a project on a scan.
 name|CalciteAssert
 operator|.
@@ -16954,12 +16920,26 @@ parameter_list|()
 block|{
 comment|// RHS is empty, therefore returns all rows from emp, including the one
 comment|// with deptno = NULL.
-name|checkOuter
-argument_list|(
+specifier|final
+name|String
+name|sql
+init|=
 literal|"select deptno from emp where deptno not in (\n"
 operator|+
 literal|"select deptno from dept where deptno = -1)"
-argument_list|,
+decl_stmt|;
+name|withEmpDept
+argument_list|(
+name|sql
+argument_list|)
+comment|//        .explainContains("EnumerableCalc(expr#0..2=[{inputs}], "
+comment|//            + "expr#3=[IS NOT NULL($t2)], expr#4=[true], "
+comment|//            + "expr#5=[IS NULL($t0)], expr#6=[null], expr#7=[false], "
+comment|//            + "expr#8=[CASE($t3, $t4, $t5, $t6, $t7)], expr#9=[NOT($t8)], "
+comment|//            + "EXPR$1=[$t0], $condition=[$t9])")
+operator|.
+name|returnsUnordered
+argument_list|(
 literal|"DEPTNO=null"
 argument_list|,
 literal|"DEPTNO=10"
@@ -16988,12 +16968,21 @@ name|testNotInQuery
 parameter_list|()
 block|{
 comment|// None of the rows from RHS is NULL.
-name|checkOuter
-argument_list|(
+specifier|final
+name|String
+name|sql
+init|=
 literal|"select deptno from emp where deptno not in (\n"
 operator|+
 literal|"select deptno from dept)"
-argument_list|,
+decl_stmt|;
+name|withEmpDept
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
 literal|"DEPTNO=50"
 argument_list|,
 literal|"DEPTNO=50"
@@ -17011,11 +17000,22 @@ parameter_list|()
 block|{
 comment|// There is a NULL on the RHS, and '10 not in (20, null)' yields unknown
 comment|// (similarly for every other value of deptno), so no rows are returned.
-name|checkOuter
-argument_list|(
+specifier|final
+name|String
+name|sql
+init|=
 literal|"select deptno from emp where deptno not in (\n"
 operator|+
 literal|"select deptno from emp)"
+decl_stmt|;
+name|withEmpDept
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|returnsCount
+argument_list|(
+literal|0
 argument_list|)
 expr_stmt|;
 block|}
@@ -17110,6 +17110,34 @@ name|void
 name|testExistsCorrelated
 parameter_list|()
 block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select*from \"hr\".\"emps\" where exists (\n"
+operator|+
+literal|" select 1 from \"hr\".\"depts\"\n"
+operator|+
+literal|" where \"emps\".\"deptno\"=\"depts\".\"deptno\")"
+decl_stmt|;
+specifier|final
+name|String
+name|plan
+init|=
+literal|""
+operator|+
+literal|"LogicalProject(empid=[$0], deptno=[$1], name=[$2], salary=[$3], commission=[$4])\n"
+operator|+
+literal|"  LogicalFilter(condition=[EXISTS({\n"
+operator|+
+literal|"LogicalFilter(condition=[=($cor0.deptno, $0)])\n"
+operator|+
+literal|"  EnumerableTableScan(table=[[hr, depts]])\n"
+operator|+
+literal|"})], variablesSet=[[$cor0]])\n"
+operator|+
+literal|"    EnumerableTableScan(table=[[hr, emps]])\n"
+decl_stmt|;
 name|CalciteAssert
 operator|.
 name|hr
@@ -17117,11 +17145,12 @@ argument_list|()
 operator|.
 name|query
 argument_list|(
-literal|"select*from \"hr\".\"emps\" where exists (\n"
-operator|+
-literal|" select 1 from \"hr\".\"depts\"\n"
-operator|+
-literal|" where \"emps\".\"deptno\"=\"depts\".\"deptno\")"
+name|sql
+argument_list|)
+operator|.
+name|convertContains
+argument_list|(
+name|plan
 argument_list|)
 operator|.
 name|returnsUnordered
@@ -17141,6 +17170,108 @@ name|void
 name|testNotExistsCorrelated
 parameter_list|()
 block|{
+specifier|final
+name|String
+name|plan
+init|=
+literal|"PLAN="
+operator|+
+literal|"EnumerableCalc(expr#0..5=[{inputs}], expr#6=[IS NOT NULL($t5)], expr#7=[true], expr#8=[false], expr#9=[CASE($t6, $t7, $t8)], expr#10=[NOT($t9)], proj#0..4=[{exprs}], $condition=[$t10])\n"
+operator|+
+literal|"  EnumerableCorrelate(correlation=[$cor0], joinType=[LEFT], requiredColumns=[{1}])\n"
+operator|+
+literal|"    EnumerableTableScan(table=[[hr, emps]])\n"
+operator|+
+literal|"    EnumerableAggregate(group=[{0}])\n"
+operator|+
+literal|"      EnumerableCalc(expr#0..3=[{inputs}], expr#4=[true], expr#5=[$cor0], expr#6=[$t5.deptno], expr#7=[=($t6, $t0)], i=[$t4], $condition=[$t7])\n"
+operator|+
+literal|"        EnumerableTableScan(table=[[hr, depts]])\n"
+decl_stmt|;
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select * from \"hr\".\"emps\" where not exists (\n"
+operator|+
+literal|" select 1 from \"hr\".\"depts\"\n"
+operator|+
+literal|" where \"emps\".\"deptno\"=\"depts\".\"deptno\")"
+decl_stmt|;
+name|CalciteAssert
+operator|.
+name|hr
+argument_list|()
+operator|.
+name|with
+argument_list|(
+literal|"forceDecorrelate"
+argument_list|,
+literal|false
+argument_list|)
+operator|.
+name|query
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+name|plan
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"empid=200; deptno=20; name=Eric; salary=8000.0; commission=500"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Manual expansion of EXISTS in {@link #testNotExistsCorrelated()}. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testNotExistsCorrelated2
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select * from \"hr\".\"emps\" as e left join lateral (\n"
+operator|+
+literal|" select distinct true as i\n"
+operator|+
+literal|" from \"hr\".\"depts\"\n"
+operator|+
+literal|" where e.\"deptno\"=\"depts\".\"deptno\") on true"
+decl_stmt|;
+specifier|final
+name|String
+name|explain
+init|=
+literal|""
+operator|+
+literal|"EnumerableCalc(expr#0..6=[{inputs}], proj#0..4=[{exprs}], I=[$t6])\n"
+operator|+
+literal|"  EnumerableJoin(condition=[=($1, $5)], joinType=[left])\n"
+operator|+
+literal|"    EnumerableTableScan(table=[[hr, emps]])\n"
+operator|+
+literal|"    EnumerableCalc(expr#0=[{inputs}], expr#1=[true], proj#0..1=[{exprs}])\n"
+operator|+
+literal|"      EnumerableAggregate(group=[{0}])\n"
+operator|+
+literal|"        EnumerableJoin(condition=[=($0, $1)], joinType=[inner])\n"
+operator|+
+literal|"          EnumerableAggregate(group=[{1}])\n"
+operator|+
+literal|"            EnumerableTableScan(table=[[hr, emps]])\n"
+operator|+
+literal|"          EnumerableCalc(expr#0..3=[{inputs}], deptno=[$t0])\n"
+operator|+
+literal|"            EnumerableTableScan(table=[[hr, depts]])"
+decl_stmt|;
 name|CalciteAssert
 operator|.
 name|hr
@@ -17148,16 +17279,23 @@ argument_list|()
 operator|.
 name|query
 argument_list|(
-literal|"select * from \"hr\".\"emps\" where not exists (\n"
-operator|+
-literal|" select 1 from \"hr\".\"depts\"\n"
-operator|+
-literal|" where \"emps\".\"deptno\"=\"depts\".\"deptno\")"
+name|sql
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+name|explain
 argument_list|)
 operator|.
 name|returnsUnordered
 argument_list|(
-literal|"empid=200; deptno=20; name=Eric; salary=8000.0; commission=500"
+literal|"empid=100; deptno=10; name=Bill; salary=10000.0; commission=1000; I=true"
+argument_list|,
+literal|"empid=110; deptno=10; name=Theodore; salary=11500.0; commission=250; I=true"
+argument_list|,
+literal|"empid=150; deptno=10; name=Sebastian; salary=7000.0; commission=null; I=true"
+argument_list|,
+literal|"empid=200; deptno=20; name=Eric; salary=8000.0; commission=500; I=null"
 argument_list|)
 expr_stmt|;
 block|}
@@ -17249,6 +17387,24 @@ name|void
 name|testScalarSubQuery
 parameter_list|()
 block|{
+try|try
+init|(
+specifier|final
+name|TryThreadLocal
+operator|.
+name|Memo
+name|ignored
+init|=
+name|Prepare
+operator|.
+name|THREAD_EXPAND
+operator|.
+name|push
+argument_list|(
+literal|true
+argument_list|)
+init|)
+block|{
 name|CalciteAssert
 operator|.
 name|hr
@@ -17276,6 +17432,7 @@ argument_list|,
 literal|"empid=200; deptno=20; DNAME=null"
 argument_list|)
 expr_stmt|;
+block|}
 block|}
 annotation|@
 name|Ignore
@@ -17448,10 +17605,19 @@ name|void
 name|testVariousOuter
 parameter_list|()
 block|{
-name|checkOuter
-argument_list|(
+specifier|final
+name|String
+name|sql
+init|=
 literal|"select * from emp join dept on emp.deptno = dept.deptno"
-argument_list|,
+decl_stmt|;
+name|withEmpDept
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
 literal|"ENAME=Alice; DEPTNO=30; GENDER=F; DEPTNO0=30; DNAME=Engineering"
 argument_list|,
 literal|"ENAME=Bob  ; DEPTNO=10; GENDER=M; DEPTNO0=10; DNAME=Sales      "
@@ -17465,15 +17631,13 @@ argument_list|)
 expr_stmt|;
 block|}
 specifier|private
-name|void
-name|checkOuter
+name|CalciteAssert
+operator|.
+name|AssertQuery
+name|withEmpDept
 parameter_list|(
 name|String
 name|sql
-parameter_list|,
-name|String
-modifier|...
-name|lines
 parameter_list|)
 block|{
 comment|// Append a 'WITH' clause that supplies EMP and DEPT tables like this:
@@ -17495,6 +17659,7 @@ comment|// insert into dept values (10, 'Sales');
 comment|// insert into dept values (20, 'Marketing');
 comment|// insert into dept values (30, 'Engineering');
 comment|// insert into dept values (40, 'Empty');
+return|return
 name|CalciteAssert
 operator|.
 name|that
@@ -17536,12 +17701,7 @@ literal|"    (40, 'Empty'))\n"
 operator|+
 name|sql
 argument_list|)
-operator|.
-name|returnsUnordered
-argument_list|(
-name|lines
-argument_list|)
-expr_stmt|;
+return|;
 block|}
 comment|/** Runs the dummy script, which is checked in empty but which you may    * use as scratch space during development. */
 comment|// Do not add '@Ignore'; just remember not to commit changes to dummy.iq
@@ -17564,11 +17724,11 @@ name|ignored
 init|=
 name|Prepare
 operator|.
-name|THREAD_TRIM
+name|THREAD_EXPAND
 operator|.
 name|push
 argument_list|(
-literal|false
+literal|true
 argument_list|)
 init|)
 block|{
@@ -17662,11 +17822,30 @@ comment|// There are formatting differences (e.g. "4.000" vs "4") when using
 comment|// Oracle as the JDBC data source.
 return|return;
 block|}
+try|try
+init|(
+specifier|final
+name|TryThreadLocal
+operator|.
+name|Memo
+name|ignored
+init|=
+name|Prepare
+operator|.
+name|THREAD_EXPAND
+operator|.
+name|push
+argument_list|(
+literal|true
+argument_list|)
+init|)
+block|{
 name|checkRun
 argument_list|(
 literal|"sql/misc.iq"
 argument_list|)
 expr_stmt|;
+block|}
 block|}
 annotation|@
 name|Test
@@ -17707,11 +17886,30 @@ parameter_list|()
 throws|throws
 name|Exception
 block|{
+try|try
+init|(
+specifier|final
+name|TryThreadLocal
+operator|.
+name|Memo
+name|ignored
+init|=
+name|Prepare
+operator|.
+name|THREAD_EXPAND
+operator|.
+name|push
+argument_list|(
+literal|true
+argument_list|)
+init|)
+block|{
 name|checkRun
 argument_list|(
 literal|"sql/scalar.iq"
 argument_list|)
 expr_stmt|;
+block|}
 block|}
 annotation|@
 name|Test
@@ -18010,6 +18208,14 @@ return|return
 name|Bug
 operator|.
 name|CALCITE_794_FIXED
+return|;
+case|case
+literal|"calcite1045"
+case|:
+return|return
+name|Bug
+operator|.
+name|CALCITE_1045_FIXED
 return|;
 block|}
 return|return
@@ -18535,6 +18741,24 @@ name|void
 name|testScalarSubQueryInCase
 parameter_list|()
 block|{
+try|try
+init|(
+specifier|final
+name|TryThreadLocal
+operator|.
+name|Memo
+name|ignored
+init|=
+name|Prepare
+operator|.
+name|THREAD_EXPAND
+operator|.
+name|push
+argument_list|(
+literal|true
+argument_list|)
+init|)
+block|{
 name|CalciteAssert
 operator|.
 name|hr
@@ -18570,6 +18794,7 @@ argument_list|,
 literal|"name=Theodore; DEPTNAME=Sales"
 argument_list|)
 expr_stmt|;
+block|}
 block|}
 annotation|@
 name|Test

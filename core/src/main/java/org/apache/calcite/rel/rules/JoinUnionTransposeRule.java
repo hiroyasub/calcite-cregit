@@ -368,7 +368,7 @@ condition|(
 operator|!
 name|join
 operator|.
-name|getVariablesStopped
+name|getVariablesSet
 argument_list|()
 operator|.
 name|isEmpty

@@ -123,6 +123,22 @@ name|calcite
 operator|.
 name|rel
 operator|.
+name|core
+operator|.
+name|CorrelationId
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
 name|metadata
 operator|.
 name|Metadata
@@ -322,12 +338,23 @@ name|double
 name|getRows
 parameter_list|()
 function_decl|;
-comment|/**    * Returns the names of variables which are set in this relational    * expression but also used and therefore not available to parents of this    * relational expression.    *<p>Note: only {@link org.apache.calcite.rel.core.Correlate} should set    * variables</p>    *    * @return Names of variables which are set in this relational    *   expression    */
+comment|/**    * Returns the names of variables that are set in this relational    * expression but also used and therefore not available to parents of this    * relational expression.    *    *<p>Note: only {@link org.apache.calcite.rel.core.Correlate} should set    * variables.    *    *<p>Note: {@link #getVariablesSet()} is equivalent but returns    * {@link CorrelationId} rather than their names. It is preferable except for    * calling old methods that require a set of strings.    *    * @return Names of variables which are set in this relational    *   expression    *    * @deprecated Use {@link #getVariablesSet()}    * and {@link CorrelationId#names(Set)}    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 name|Set
 argument_list|<
 name|String
 argument_list|>
 name|getVariablesStopped
+parameter_list|()
+function_decl|;
+comment|/**    * Returns the variables that are set in this relational    * expression but also used and therefore not available to parents of this    * relational expression.    *    *<p>Note: only {@link org.apache.calcite.rel.core.Correlate} should set    * variables.    *    * @return Names of variables which are set in this relational    *   expression    */
+name|Set
+argument_list|<
+name|CorrelationId
+argument_list|>
+name|getVariablesSet
 parameter_list|()
 function_decl|;
 comment|/**    * Collects variables known to be used by this expression or its    * descendants. By default, no such information is available and must be    * derived by analyzing sub-expressions, but some optimizer implementations    * may insert special expressions which remember such information.    *    * @param variableSet receives variables used    */
@@ -336,7 +363,7 @@ name|collectVariablesUsed
 parameter_list|(
 name|Set
 argument_list|<
-name|String
+name|CorrelationId
 argument_list|>
 name|variableSet
 parameter_list|)
@@ -347,7 +374,7 @@ name|collectVariablesSet
 parameter_list|(
 name|Set
 argument_list|<
-name|String
+name|CorrelationId
 argument_list|>
 name|variableSet
 parameter_list|)

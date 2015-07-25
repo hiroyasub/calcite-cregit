@@ -39,6 +39,22 @@ name|calcite
 operator|.
 name|rel
 operator|.
+name|core
+operator|.
+name|CorrelationId
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
 name|metadata
 operator|.
 name|DefaultRelMetadataProvider
@@ -555,15 +571,19 @@ return|;
 block|}
 comment|/**    * Constructs a new id for a correlating variable. It is unique within the    * whole query.    */
 specifier|public
-name|int
+name|CorrelationId
 name|createCorrel
 parameter_list|()
 block|{
 return|return
+operator|new
+name|CorrelationId
+argument_list|(
 name|nextCorrel
 operator|.
 name|getAndIncrement
 argument_list|()
+argument_list|)
 return|;
 block|}
 comment|/** Returns the default trait set for this cluster. */

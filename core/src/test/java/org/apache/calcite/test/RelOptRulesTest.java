@@ -1001,6 +1001,22 @@ name|rel
 operator|.
 name|rules
 operator|.
+name|SubQueryRemoveRule
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|rules
+operator|.
 name|TableScanRule
 import|;
 end_import
@@ -1266,7 +1282,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Unit test for rules in {@code org.apache.calcite.rel} and subpackages.  *  *<p>As input, the test supplies a SQL statement and a single rule; the SQL is  * translated into relational algebra and then fed into a  * {@link org.apache.calcite.plan.hep.HepPlanner}. The planner fires the rule on  * every  * pattern match in a depth-first left-to-right preorder traversal of the tree  * for as long as the rule continues to succeed in applying its transform. (For  * rules which call transformTo more than once, only the last result is used.)  * The plan before and after "optimization" is diffed against a .ref file using  * {@link DiffRepository}.  *  *<p>Procedure for adding a new test case:  *  *<ol>  *<li>Add a new public test method for your rule, following the existing  * examples. You'll have to come up with an SQL statement to which your rule  * will apply in a meaningful way. See {@link SqlToRelTestBase} class comments  * for details on the schema.  *  *<li>Run the test. It should fail. Inspect the output in  * {@code target/surefire/.../RelOptRulesTest.xml}.  * (If you are running using maven and this file does not exist, add a  * {@code -X} flag to the maven command line.)  *  *<li>Verify that the "planBefore" is the correct  * translation of your SQL, and that it contains the pattern on which your rule  * is supposed to fire. If all is well, replace  * {@code src/test/resources/.../RelOptRulesTest.xml} and  * with the new {@code target/surefire/.../RelOptRulesTest.xml}.  *  *<li>Run the test again. It should fail again, but this time it should contain  * a "planAfter" entry for your rule. Verify that your rule applied its  * transformation correctly, and then update the  * {@code src/test/resources/.../RelOptRulesTest.xml} file again.  *  *<li>Run the test one last time; this time it should pass.  *</ol>  */
+comment|/**  * Unit test for rules in {@code org.apache.calcite.rel} and subpackages.  *  *<p>As input, the test supplies a SQL statement and a single rule; the SQL is  * translated into relational algebra and then fed into a  * {@link org.apache.calcite.plan.hep.HepPlanner}. The planner fires the rule on  * every  * pattern match in a depth-first left-to-right pre-order traversal of the tree  * for as long as the rule continues to succeed in applying its transform. (For  * rules which call transformTo more than once, only the last result is used.)  * The plan before and after "optimization" is diffed against a .ref file using  * {@link DiffRepository}.  *  *<p>Procedure for adding a new test case:  *  *<ol>  *<li>Add a new public test method for your rule, following the existing  * examples. You'll have to come up with an SQL statement to which your rule  * will apply in a meaningful way. See {@link SqlToRelTestBase} class comments  * for details on the schema.  *  *<li>Run the test. It should fail. Inspect the output in  * {@code target/surefire/.../RelOptRulesTest.xml}.  * (If you are running using maven and this file does not exist, add a  * {@code -X} flag to the maven command line.)  *  *<li>Verify that the "planBefore" is the correct  * translation of your SQL, and that it contains the pattern on which your rule  * is supposed to fire. If all is well, replace  * {@code src/test/resources/.../RelOptRulesTest.xml} and  * with the new {@code target/surefire/.../RelOptRulesTest.xml}.  *  *<li>Run the test again. It should fail again, but this time it should contain  * a "planAfter" entry for your rule. Verify that your rule applied its  * transformation correctly, and then update the  * {@code src/test/resources/.../RelOptRulesTest.xml} file again.  *  *<li>Run the test one last time; this time it should pass.  *</ol>  */
 end_comment
 
 begin_class
@@ -8661,6 +8677,8 @@ argument_list|()
 argument_list|,
 literal|true
 argument_list|,
+literal|true
+argument_list|,
 literal|false
 argument_list|,
 literal|null
@@ -8943,6 +8961,584 @@ argument_list|)
 argument_list|,
 name|sql
 argument_list|)
+expr_stmt|;
+block|}
+specifier|private
+name|Sql
+name|checkSubQuery
+parameter_list|(
+name|String
+name|sql
+parameter_list|)
+block|{
+specifier|final
+name|HepProgram
+name|program
+init|=
+operator|new
+name|HepProgramBuilder
+argument_list|()
+operator|.
+name|addRuleInstance
+argument_list|(
+name|SubQueryRemoveRule
+operator|.
+name|PROJECT
+argument_list|)
+operator|.
+name|addRuleInstance
+argument_list|(
+name|SubQueryRemoveRule
+operator|.
+name|FILTER
+argument_list|)
+operator|.
+name|addRuleInstance
+argument_list|(
+name|SubQueryRemoveRule
+operator|.
+name|JOIN
+argument_list|)
+operator|.
+name|build
+argument_list|()
+decl_stmt|;
+return|return
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|with
+argument_list|(
+operator|new
+name|HepPlanner
+argument_list|(
+name|program
+argument_list|)
+argument_list|)
+operator|.
+name|expand
+argument_list|(
+literal|false
+argument_list|)
+return|;
+block|}
+comment|/** Tests expanding a sub-query, specifically an uncorrelated scalar    * sub-query in a project (SELECT clause). */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testExpandProjectScalar
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select empno,\n"
+operator|+
+literal|"  (select deptno from sales.emp where empno< 20) as d\n"
+operator|+
+literal|"from sales.emp"
+decl_stmt|;
+name|checkSubQuery
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|check
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testExpandProjectIn
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select empno,\n"
+operator|+
+literal|"  deptno in (select deptno from sales.emp where empno< 20) as d\n"
+operator|+
+literal|"from sales.emp"
+decl_stmt|;
+name|checkSubQuery
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|check
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testExpandProjectInNullable
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"with e2 as (\n"
+operator|+
+literal|"  select empno, case when true then deptno else null end as deptno\n"
+operator|+
+literal|"  from sales.emp)\n"
+operator|+
+literal|"select empno,\n"
+operator|+
+literal|"  deptno in (select deptno from e2 where empno< 20) as d\n"
+operator|+
+literal|"from e2"
+decl_stmt|;
+name|checkSubQuery
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|check
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testExpandProjectInComposite
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select empno, (empno, deptno) in (\n"
+operator|+
+literal|"    select empno, deptno from sales.emp where empno< 20) as d\n"
+operator|+
+literal|"from sales.emp"
+decl_stmt|;
+name|checkSubQuery
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|check
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testExpandProjectExists
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select empno,\n"
+operator|+
+literal|"  exists (select deptno from sales.emp where empno< 20) as d\n"
+operator|+
+literal|"from sales.emp"
+decl_stmt|;
+name|checkSubQuery
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|check
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testExpandFilterScalar
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select empno\n"
+operator|+
+literal|"from sales.emp\n"
+operator|+
+literal|"where (select deptno from sales.emp where empno< 20)\n"
+operator|+
+literal|"< (select deptno from sales.emp where empno> 100)\n"
+operator|+
+literal|"or emp.sal< 100"
+decl_stmt|;
+name|checkSubQuery
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|check
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testExpandFilterIn
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select empno\n"
+operator|+
+literal|"from sales.emp\n"
+operator|+
+literal|"where deptno in (select deptno from sales.emp where empno< 20)\n"
+operator|+
+literal|"or emp.sal< 100"
+decl_stmt|;
+name|checkSubQuery
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|check
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testExpandFilterInComposite
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select empno\n"
+operator|+
+literal|"from sales.emp\n"
+operator|+
+literal|"where (empno, deptno) in (\n"
+operator|+
+literal|"  select empno, deptno from sales.emp where empno< 20)\n"
+operator|+
+literal|"or emp.sal< 100"
+decl_stmt|;
+name|checkSubQuery
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|check
+argument_list|()
+expr_stmt|;
+block|}
+comment|/** An IN filter that requires full 3-value logic (true, false, unknown). */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testExpandFilterIn3Value
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select empno\n"
+operator|+
+literal|"from sales.emp\n"
+operator|+
+literal|"where empno\n"
+operator|+
+literal|"< case deptno in (select case when true then deptno else null end\n"
+operator|+
+literal|"                   from sales.emp where empno< 20)\n"
+operator|+
+literal|"   when true then 10\n"
+operator|+
+literal|"   when false then 20\n"
+operator|+
+literal|"   else 30\n"
+operator|+
+literal|"   end"
+decl_stmt|;
+name|checkSubQuery
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|check
+argument_list|()
+expr_stmt|;
+block|}
+comment|/** An EXISTS filter that can be converted into true/false. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testExpandFilterExists
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select empno\n"
+operator|+
+literal|"from sales.emp\n"
+operator|+
+literal|"where exists (select deptno from sales.emp where empno< 20)\n"
+operator|+
+literal|"or emp.sal< 100"
+decl_stmt|;
+name|checkSubQuery
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|check
+argument_list|()
+expr_stmt|;
+block|}
+comment|/** An EXISTS filter that can be converted into a semi-join. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testExpandFilterExistsSimple
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select empno\n"
+operator|+
+literal|"from sales.emp\n"
+operator|+
+literal|"where exists (select deptno from sales.emp where empno< 20)"
+decl_stmt|;
+name|checkSubQuery
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|check
+argument_list|()
+expr_stmt|;
+block|}
+comment|/** An EXISTS filter that can be converted into a semi-join. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testExpandFilterExistsSimpleAnd
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select empno\n"
+operator|+
+literal|"from sales.emp\n"
+operator|+
+literal|"where exists (select deptno from sales.emp where empno< 20)\n"
+operator|+
+literal|"and emp.sal< 100"
+decl_stmt|;
+name|checkSubQuery
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|check
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testExpandJoinScalar
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select empno\n"
+operator|+
+literal|"from sales.emp left join sales.dept\n"
+operator|+
+literal|"on (select deptno from sales.emp where empno< 20)\n"
+operator|+
+literal|"< (select deptno from sales.emp where empno> 100)"
+decl_stmt|;
+name|checkSubQuery
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|check
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testExpandJoinIn
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select empno\n"
+operator|+
+literal|"from sales.emp left join sales.dept\n"
+operator|+
+literal|"on emp.deptno in (select deptno from sales.emp where empno< 20)"
+decl_stmt|;
+name|checkSubQuery
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|check
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testExpandJoinInComposite
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select empno\n"
+operator|+
+literal|"from sales.emp left join sales.dept\n"
+operator|+
+literal|"on (emp.empno, dept.deptno) in (\n"
+operator|+
+literal|"  select empno, deptno from sales.emp where empno< 20)"
+decl_stmt|;
+name|checkSubQuery
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|check
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testExpandJoinExists
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select empno\n"
+operator|+
+literal|"from sales.emp left join sales.dept\n"
+operator|+
+literal|"on exists (select deptno from sales.emp where empno< 20)"
+decl_stmt|;
+name|checkSubQuery
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|check
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testWhereInCorrelated
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select empno from emp as e\n"
+operator|+
+literal|"join dept as d using (deptno)\n"
+operator|+
+literal|"where e.sal in (\n"
+operator|+
+literal|"  select e2.sal from emp as e2 where e2.deptno> e.deptno)"
+decl_stmt|;
+name|checkSubQuery
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|check
+argument_list|()
 expr_stmt|;
 block|}
 block|}

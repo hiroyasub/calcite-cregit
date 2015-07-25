@@ -16,15 +16,17 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * Visitor pattern for traversing a tree of {@link RexNode} objects.  *  * @see org.apache.calcite.util.Glossary#VISITOR_PATTERN  * @see RexShuttle  * @see RexVisitorImpl  *  * @param<R> Return type  */
+comment|/**  * Visitor pattern for traversing a tree of {@link RexNode} objects  * and passing a payload to each.  *  * @see RexVisitor  *  * @param<R> Return type  * @param<P> Payload type  */
 end_comment
 
 begin_interface
 specifier|public
 interface|interface
-name|RexVisitor
+name|RexBiVisitor
 parameter_list|<
 name|R
+parameter_list|,
+name|P
 parameter_list|>
 block|{
 comment|//~ Methods ----------------------------------------------------------------
@@ -33,6 +35,9 @@ name|visitInputRef
 parameter_list|(
 name|RexInputRef
 name|inputRef
+parameter_list|,
+name|P
+name|arg
 parameter_list|)
 function_decl|;
 name|R
@@ -40,6 +45,9 @@ name|visitLocalRef
 parameter_list|(
 name|RexLocalRef
 name|localRef
+parameter_list|,
+name|P
+name|arg
 parameter_list|)
 function_decl|;
 name|R
@@ -47,6 +55,9 @@ name|visitLiteral
 parameter_list|(
 name|RexLiteral
 name|literal
+parameter_list|,
+name|P
+name|arg
 parameter_list|)
 function_decl|;
 name|R
@@ -54,6 +65,9 @@ name|visitCall
 parameter_list|(
 name|RexCall
 name|call
+parameter_list|,
+name|P
+name|arg
 parameter_list|)
 function_decl|;
 name|R
@@ -61,6 +75,9 @@ name|visitOver
 parameter_list|(
 name|RexOver
 name|over
+parameter_list|,
+name|P
+name|arg
 parameter_list|)
 function_decl|;
 name|R
@@ -68,6 +85,9 @@ name|visitCorrelVariable
 parameter_list|(
 name|RexCorrelVariable
 name|correlVariable
+parameter_list|,
+name|P
+name|arg
 parameter_list|)
 function_decl|;
 name|R
@@ -75,6 +95,9 @@ name|visitDynamicParam
 parameter_list|(
 name|RexDynamicParam
 name|dynamicParam
+parameter_list|,
+name|P
+name|arg
 parameter_list|)
 function_decl|;
 name|R
@@ -82,6 +105,9 @@ name|visitRangeRef
 parameter_list|(
 name|RexRangeRef
 name|rangeRef
+parameter_list|,
+name|P
+name|arg
 parameter_list|)
 function_decl|;
 name|R
@@ -89,6 +115,9 @@ name|visitFieldAccess
 parameter_list|(
 name|RexFieldAccess
 name|fieldAccess
+parameter_list|,
+name|P
+name|arg
 parameter_list|)
 function_decl|;
 name|R
@@ -96,13 +125,16 @@ name|visitSubQuery
 parameter_list|(
 name|RexSubQuery
 name|subQuery
+parameter_list|,
+name|P
+name|arg
 parameter_list|)
 function_decl|;
 block|}
 end_interface
 
 begin_comment
-comment|// End RexVisitor.java
+comment|// End RexBiVisitor.java
 end_comment
 
 end_unit
