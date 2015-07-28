@@ -422,6 +422,106 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testScan
+parameter_list|()
+block|{
+name|CalciteAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|withMaterializations
+argument_list|(
+literal|"{\n"
+operator|+
+literal|"  version: '1.0',\n"
+operator|+
+literal|"  defaultSchema: 'SCOTT_CLONE',\n"
+operator|+
+literal|"  schemas: [ {\n"
+operator|+
+literal|"    name: 'SCOTT_CLONE',\n"
+operator|+
+literal|"    type: 'custom',\n"
+operator|+
+literal|"    factory: 'org.apache.calcite.adapter.clone.CloneSchema$Factory',\n"
+operator|+
+literal|"    operand: {\n"
+operator|+
+literal|"      jdbcDriver: '"
+operator|+
+name|JdbcTest
+operator|.
+name|SCOTT
+operator|.
+name|driver
+operator|+
+literal|"',\n"
+operator|+
+literal|"      jdbcUser: '"
+operator|+
+name|JdbcTest
+operator|.
+name|SCOTT
+operator|.
+name|username
+operator|+
+literal|"',\n"
+operator|+
+literal|"      jdbcPassword: '"
+operator|+
+name|JdbcTest
+operator|.
+name|SCOTT
+operator|.
+name|password
+operator|+
+literal|"',\n"
+operator|+
+literal|"      jdbcUrl: '"
+operator|+
+name|JdbcTest
+operator|.
+name|SCOTT
+operator|.
+name|url
+operator|+
+literal|"',\n"
+operator|+
+literal|"      jdbcSchema: 'SCOTT'\n"
+operator|+
+literal|"   } } ]\n"
+operator|+
+literal|"}"
+argument_list|,
+literal|"m0"
+argument_list|,
+literal|"select empno, deptno from emp order by deptno"
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select empno, deptno from emp"
+argument_list|)
+operator|.
+name|enableMaterializations
+argument_list|(
+literal|true
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+literal|"EnumerableTableScan(table=[[SCOTT_CLONE, m0]])"
+argument_list|)
+operator|.
+name|sameResultWithMaterializationsDisabled
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testFilter
 parameter_list|()
 block|{

@@ -704,6 +704,10 @@ argument_list|<>
 argument_list|()
 decl_stmt|;
 specifier|protected
+name|boolean
+name|ordered
+decl_stmt|;
+specifier|protected
 name|RelDataType
 name|parameterRowType
 decl_stmt|;
@@ -1329,6 +1333,19 @@ literal|"end sql2rel"
 argument_list|)
 expr_stmt|;
 block|}
+comment|// A query can have 0 collations and still be ordered (if it is ordered
+comment|// on a non-projected expression). But otherwise,
+comment|// ordered == !collations.isEmpty().
+name|ordered
+operator|=
+operator|!
+name|SqlToRelConverter
+operator|.
+name|isUnordered
+argument_list|(
+name|sqlQuery
+argument_list|)
+expr_stmt|;
 assert|assert
 name|collations
 operator|.
@@ -1818,6 +1835,8 @@ name|converter
 operator|.
 name|trimUnusedFields
 argument_list|(
+name|ordered
+argument_list|,
 name|rootRel
 argument_list|)
 return|;

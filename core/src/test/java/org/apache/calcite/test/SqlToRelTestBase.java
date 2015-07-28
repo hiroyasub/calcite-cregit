@@ -2117,6 +2117,8 @@ name|converter
 operator|.
 name|trimUnusedFields
 argument_list|(
+literal|false
+argument_list|,
 name|rel
 argument_list|)
 expr_stmt|;

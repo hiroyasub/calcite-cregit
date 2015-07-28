@@ -149,20 +149,6 @@ end_import
 
 begin_import
 import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|util
-operator|.
-name|Util
-import|;
-end_import
-
-begin_import
-import|import
 name|java
 operator|.
 name|util
@@ -284,15 +270,16 @@ name|planner
 parameter_list|)
 block|{
 comment|// HepRelMetadataProvider is supposed to intercept this
-comment|// and redirect to the real rels.
-throw|throw
-name|Util
+comment|// and redirect to the real rels. But sometimes it doesn't.
+return|return
+name|planner
 operator|.
-name|newInternal
-argument_list|(
-literal|"should never get here"
-argument_list|)
-throw|;
+name|getCostFactory
+argument_list|()
+operator|.
+name|makeTinyCost
+argument_list|()
+return|;
 block|}
 annotation|@
 name|Override

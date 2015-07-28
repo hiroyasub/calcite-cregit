@@ -1202,7 +1202,6 @@ name|this
 argument_list|)
 decl_stmt|;
 comment|// Aggregates with more aggregate functions cost a bit more
-specifier|final
 name|float
 name|multiplier
 init|=
@@ -1218,6 +1217,38 @@ argument_list|()
 operator|*
 literal|0.125f
 decl_stmt|;
+for|for
+control|(
+name|AggregateCall
+name|aggCall
+range|:
+name|aggCalls
+control|)
+block|{
+if|if
+condition|(
+name|aggCall
+operator|.
+name|getAggregation
+argument_list|()
+operator|.
+name|getName
+argument_list|()
+operator|.
+name|equals
+argument_list|(
+literal|"SUM"
+argument_list|)
+condition|)
+block|{
+comment|// Pretend that SUM costs a little bit more than $SUM0,
+comment|// to make things deterministic.
+name|multiplier
+operator|+=
+literal|0.0125f
+expr_stmt|;
+block|}
+block|}
 return|return
 name|planner
 operator|.
