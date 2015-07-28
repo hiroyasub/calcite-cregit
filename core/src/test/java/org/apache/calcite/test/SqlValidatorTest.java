@@ -9892,6 +9892,57 @@ argument_list|)
 expr_stmt|;
 comment|// Test specified collation, window clause syntax rule 4,5.
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-820">[CALCITE-820]    * Validate that window functions have OVER clause</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testWindowFunctionsWithoutOver
+parameter_list|()
+block|{
+name|winSql
+argument_list|(
+literal|"select sum(empno) \n"
+operator|+
+literal|"from emp \n"
+operator|+
+literal|"group by deptno \n"
+operator|+
+literal|"order by ^row_number()^"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"OVER clause is necessary for window functions"
+argument_list|)
+expr_stmt|;
+name|winSql
+argument_list|(
+literal|"select ^rank()^ \n"
+operator|+
+literal|"from emp"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"OVER clause is necessary for window functions"
+argument_list|)
+expr_stmt|;
+name|winSql
+argument_list|(
+literal|"select cume_dist() over w , ^rank()^\n"
+operator|+
+literal|"from emp \n"
+operator|+
+literal|"window w as (partition by deptno order by deptno)"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"OVER clause is necessary for window functions"
+argument_list|)
+expr_stmt|;
+block|}
 annotation|@
 name|Test
 specifier|public
@@ -10176,11 +10227,13 @@ condition|)
 block|{
 name|winExp
 argument_list|(
-literal|"dense_rank()"
+literal|"^dense_rank()^"
 argument_list|)
 operator|.
-name|ok
-argument_list|()
+name|fails
+argument_list|(
+literal|"OVER clause is necessary for window functions"
+argument_list|)
 expr_stmt|;
 block|}
 else|else

@@ -257,6 +257,8 @@ name|super
 argument_list|(
 literal|"COUNT"
 argument_list|,
+literal|null
+argument_list|,
 name|SqlKind
 operator|.
 name|OTHER_FUNCTION
@@ -282,6 +284,10 @@ argument_list|,
 name|SqlFunctionCategory
 operator|.
 name|NUMERIC
+argument_list|,
+literal|false
+argument_list|,
+literal|false
 argument_list|)
 expr_stmt|;
 block|}

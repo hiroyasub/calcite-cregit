@@ -117,11 +117,6 @@ block|{
 comment|//~ Instance fields --------------------------------------------------------
 specifier|private
 specifier|final
-name|boolean
-name|requiresOrder
-decl_stmt|;
-specifier|private
-specifier|final
 name|RelDataType
 name|type
 init|=
@@ -142,6 +137,8 @@ name|super
 argument_list|(
 name|name
 argument_list|,
+literal|null
+argument_list|,
 name|SqlKind
 operator|.
 name|OTHER_FUNCTION
@@ -159,27 +156,14 @@ argument_list|,
 name|SqlFunctionCategory
 operator|.
 name|NUMERIC
+argument_list|,
+name|requiresOrder
+argument_list|,
+literal|true
 argument_list|)
-expr_stmt|;
-name|this
-operator|.
-name|requiresOrder
-operator|=
-name|requiresOrder
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-annotation|@
-name|Override
-specifier|public
-name|boolean
-name|requiresOrder
-parameter_list|()
-block|{
-return|return
-name|requiresOrder
-return|;
-block|}
 annotation|@
 name|Override
 specifier|public

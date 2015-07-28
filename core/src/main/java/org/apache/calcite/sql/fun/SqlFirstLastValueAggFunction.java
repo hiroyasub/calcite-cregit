@@ -190,6 +190,8 @@ literal|"FIRST_VALUE"
 else|:
 literal|"LAST_VALUE"
 argument_list|,
+literal|null
+argument_list|,
 name|SqlKind
 operator|.
 name|OTHER_FUNCTION
@@ -207,24 +209,14 @@ argument_list|,
 name|SqlFunctionCategory
 operator|.
 name|NUMERIC
+argument_list|,
+literal|false
+argument_list|,
+literal|true
 argument_list|)
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-annotation|@
-name|Override
-specifier|public
-name|boolean
-name|requiresOrder
-parameter_list|()
-block|{
-comment|// Allow the user to shoot herself into the foot by using first_value
-comment|// and/or last_value without order by. This will result in undefined
-comment|// behaviour, however lots of databases allow that.
-return|return
-literal|false
-return|;
-block|}
 specifier|public
 name|List
 argument_list|<

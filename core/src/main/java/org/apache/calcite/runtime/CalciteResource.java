@@ -1189,6 +1189,18 @@ function_decl|;
 annotation|@
 name|BaseMessage
 argument_list|(
+literal|"OVER clause is necessary for window functions"
+argument_list|)
+name|ExInst
+argument_list|<
+name|SqlValidatorException
+argument_list|>
+name|absentOverClause
+parameter_list|()
+function_decl|;
+annotation|@
+name|BaseMessage
+argument_list|(
 literal|"Window ''{0}'' not found"
 argument_list|)
 name|ExInst

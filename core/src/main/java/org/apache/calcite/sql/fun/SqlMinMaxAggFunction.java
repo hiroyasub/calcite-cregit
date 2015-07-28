@@ -250,6 +250,8 @@ literal|"MIN"
 else|:
 literal|"MAX"
 argument_list|,
+literal|null
+argument_list|,
 name|SqlKind
 operator|.
 name|OTHER_FUNCTION
@@ -267,6 +269,10 @@ argument_list|,
 name|SqlFunctionCategory
 operator|.
 name|SYSTEM
+argument_list|,
+literal|false
+argument_list|,
+literal|false
 argument_list|)
 expr_stmt|;
 name|this
