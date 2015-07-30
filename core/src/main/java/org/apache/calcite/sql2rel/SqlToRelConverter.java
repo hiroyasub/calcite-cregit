@@ -2237,6 +2237,15 @@ argument_list|(
 literal|2L
 argument_list|)
 decl_stmt|;
+comment|/** Size of the smallest IN list that will be converted to a semijoin to a    * static table. */
+specifier|public
+specifier|static
+specifier|final
+name|int
+name|IN_SUBQUERY_THRESHOLD
+init|=
+literal|20
+decl_stmt|;
 comment|//~ Instance fields --------------------------------------------------------
 specifier|protected
 specifier|final
@@ -5440,6 +5449,26 @@ name|Logic
 operator|.
 name|TRUE_FALSE_UNKNOWN
 decl_stmt|;
+specifier|final
+name|RelDataType
+name|targetRowType
+init|=
+name|SqlTypeUtil
+operator|.
+name|promoteToRowType
+argument_list|(
+name|typeFactory
+argument_list|,
+name|validator
+operator|.
+name|getValidatedNodeType
+argument_list|(
+name|leftKeyNode
+argument_list|)
+argument_list|,
+literal|null
+argument_list|)
+decl_stmt|;
 name|converted
 operator|=
 name|convertExists
@@ -5457,6 +5486,8 @@ operator|.
 name|logic
 argument_list|,
 name|outerJoin
+argument_list|,
+name|targetRowType
 argument_list|)
 expr_stmt|;
 if|if
@@ -5745,6 +5776,8 @@ operator|.
 name|logic
 argument_list|,
 literal|true
+argument_list|,
+literal|null
 argument_list|)
 expr_stmt|;
 assert|assert
@@ -5830,6 +5863,8 @@ operator|.
 name|logic
 argument_list|,
 literal|true
+argument_list|,
+literal|null
 argument_list|)
 expr_stmt|;
 assert|assert
@@ -5909,6 +5944,8 @@ operator|.
 name|logic
 argument_list|,
 literal|true
+argument_list|,
+literal|null
 argument_list|)
 expr_stmt|;
 assert|assert
@@ -7117,14 +7154,14 @@ return|return
 name|result
 return|;
 block|}
-comment|/**    * Gets the list size threshold under which {@link #convertInToOr} is used.    * Lists of this size or greater will instead be converted to use a join    * against an inline table    * ({@link org.apache.calcite.rel.logical.LogicalValues}) rather than a    * predicate. A threshold of 0 forces usage of an inline table in all cases; a    * threshold of Integer.MAX_VALUE forces usage of OR in all cases    *    * @return threshold, default 20    */
+comment|/**    * Gets the list size threshold under which {@link #convertInToOr} is used.    * Lists of this size or greater will instead be converted to use a join    * against an inline table    * ({@link org.apache.calcite.rel.logical.LogicalValues}) rather than a    * predicate. A threshold of 0 forces usage of an inline table in all cases; a    * threshold of Integer.MAX_VALUE forces usage of OR in all cases    *    * @return threshold, default {@link #IN_SUBQUERY_THRESHOLD}    */
 specifier|protected
 name|int
 name|getInSubqueryThreshold
 parameter_list|()
 block|{
 return|return
-literal|20
+name|IN_SUBQUERY_THRESHOLD
 return|;
 block|}
 comment|/**    * Converts an EXISTS or IN predicate into a join. For EXISTS, the subquery    * produces an indicator variable, and the result is a relational expression    * which outer joins that indicator to the original query. After performing    * the outer join, the condition will be TRUE if the EXISTS condition holds,    * NULL otherwise.    *    * @param seek           A query, for example 'select * from emp' or    *                       'values (1,2,3)' or '('Foo', 34)'.    * @param subqueryType   Whether sub-query is IN, EXISTS or scalar    * @param logic Whether the answer needs to be in full 3-valued logic (TRUE,    *     FALSE, UNKNOWN) will be required, or whether we can accept an    *     approximation (say representing UNKNOWN as FALSE)    * @param needsOuterJoin Whether an outer join is needed    * @return join expression    * @pre extraExpr == null || extraName != null    */
@@ -7152,6 +7189,9 @@ name|logic
 parameter_list|,
 name|boolean
 name|needsOuterJoin
+parameter_list|,
+name|RelDataType
+name|targetDataType
 parameter_list|)
 block|{
 specifier|final
@@ -7195,6 +7235,8 @@ argument_list|(
 name|seekBb
 argument_list|,
 name|seek
+argument_list|,
+name|targetDataType
 argument_list|)
 decl_stmt|;
 return|return
@@ -7221,6 +7263,9 @@ name|bb
 parameter_list|,
 name|SqlNode
 name|seek
+parameter_list|,
+name|RelDataType
+name|targetRowType
 parameter_list|)
 block|{
 comment|// NOTE: Once we start accepting single-row queries as row constructors,
@@ -7255,7 +7300,7 @@ argument_list|()
 argument_list|,
 literal|false
 argument_list|,
-literal|null
+name|targetRowType
 argument_list|)
 return|;
 block|}
@@ -15760,6 +15805,8 @@ argument_list|(
 name|usedBb
 argument_list|,
 name|list
+argument_list|,
+literal|null
 argument_list|)
 expr_stmt|;
 block|}
