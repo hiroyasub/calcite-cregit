@@ -427,22 +427,6 @@ name|rel
 operator|.
 name|rules
 operator|.
-name|ProjectRemoveRule
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|rel
-operator|.
-name|rules
-operator|.
 name|ProjectToWindowRule
 import|;
 end_import
@@ -11510,7 +11494,7 @@ if|if
 condition|(
 name|optimize
 operator|&&
-name|ProjectRemoveRule
+name|RexUtil
 operator|.
 name|isIdentity
 argument_list|(
@@ -12630,6 +12614,11 @@ operator|.
 name|getFieldCount
 argument_list|()
 decl_stmt|;
+comment|// You cannot push a 'get' because field names might change.
+comment|//
+comment|// Pushing sub-queries is OK in principle (if they don't reference both
+comment|// sides of the join via correlating variables) but we'd rather not do it
+comment|// yet.
 if|if
 condition|(
 operator|!

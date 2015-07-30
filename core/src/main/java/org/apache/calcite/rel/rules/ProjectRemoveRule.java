@@ -358,6 +358,8 @@ name|project
 parameter_list|)
 block|{
 return|return
+name|RexUtil
+operator|.
 name|isIdentity
 argument_list|(
 name|project
@@ -375,6 +377,9 @@ argument_list|()
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Deprecated
+comment|// to be removed before 1.5
 specifier|public
 specifier|static
 name|boolean
@@ -393,25 +398,13 @@ name|childRowType
 parameter_list|)
 block|{
 return|return
-name|childRowType
-operator|.
-name|getFieldCount
-argument_list|()
-operator|==
-name|exps
-operator|.
-name|size
-argument_list|()
-operator|&&
 name|RexUtil
 operator|.
-name|containIdentity
+name|isIdentity
 argument_list|(
 name|exps
 argument_list|,
 name|childRowType
-argument_list|,
-literal|false
 argument_list|)
 return|;
 block|}
