@@ -6041,13 +6041,13 @@ name|assertEquals
 argument_list|(
 literal|"{\n"
 operator|+
-literal|"  foo: 1,\n"
+literal|"  \"foo\": 1,\n"
 operator|+
-literal|"  baz: true,\n"
+literal|"  \"baz\": true,\n"
 operator|+
-literal|"  bar: \"can't\",\n"
+literal|"  \"bar\": \"can't\",\n"
 operator|+
-literal|"  list: [\n"
+literal|"  \"list\": [\n"
 operator|+
 literal|"    2,\n"
 operator|+
@@ -6061,7 +6061,7 @@ literal|"    null\n"
 operator|+
 literal|"  ],\n"
 operator|+
-literal|"  nullValue: null\n"
+literal|"  \"nullValue\": null\n"
 operator|+
 literal|"}"
 argument_list|,

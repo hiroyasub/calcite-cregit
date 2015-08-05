@@ -382,15 +382,15 @@ name|XX
 init|=
 literal|"{\n"
 operator|+
-literal|"  rels: [\n"
+literal|"  \"rels\": [\n"
 operator|+
 literal|"    {\n"
 operator|+
-literal|"      id: \"0\",\n"
+literal|"      \"id\": \"0\",\n"
 operator|+
-literal|"      relOp: \"LogicalTableScan\",\n"
+literal|"      \"relOp\": \"LogicalTableScan\",\n"
 operator|+
-literal|"      table: [\n"
+literal|"      \"table\": [\n"
 operator|+
 literal|"        \"hr\",\n"
 operator|+
@@ -398,25 +398,25 @@ literal|"        \"emps\"\n"
 operator|+
 literal|"      ],\n"
 operator|+
-literal|"      inputs: []\n"
+literal|"      \"inputs\": []\n"
 operator|+
 literal|"    },\n"
 operator|+
 literal|"    {\n"
 operator|+
-literal|"      id: \"1\",\n"
+literal|"      \"id\": \"1\",\n"
 operator|+
-literal|"      relOp: \"LogicalFilter\",\n"
+literal|"      \"relOp\": \"LogicalFilter\",\n"
 operator|+
-literal|"      condition: {\n"
+literal|"      \"condition\": {\n"
 operator|+
-literal|"        op: \"=\",\n"
+literal|"        \"op\": \"=\",\n"
 operator|+
-literal|"        operands: [\n"
+literal|"        \"operands\": [\n"
 operator|+
 literal|"          {\n"
 operator|+
-literal|"            input: 1\n"
+literal|"            \"input\": 1\n"
 operator|+
 literal|"          },\n"
 operator|+
@@ -430,33 +430,33 @@ literal|"    },\n"
 operator|+
 literal|"    {\n"
 operator|+
-literal|"      id: \"2\",\n"
+literal|"      \"id\": \"2\",\n"
 operator|+
-literal|"      relOp: \"LogicalAggregate\",\n"
+literal|"      \"relOp\": \"LogicalAggregate\",\n"
 operator|+
-literal|"      group: [\n"
+literal|"      \"group\": [\n"
 operator|+
 literal|"        0\n"
 operator|+
 literal|"      ],\n"
 operator|+
-literal|"      aggs: [\n"
+literal|"      \"aggs\": [\n"
 operator|+
 literal|"        {\n"
 operator|+
-literal|"          agg: \"COUNT\",\n"
+literal|"          \"agg\": \"COUNT\",\n"
 operator|+
-literal|"          type: {\n"
+literal|"          \"type\": {\n"
 operator|+
-literal|"            type: \"BIGINT\",\n"
+literal|"            \"type\": \"BIGINT\",\n"
 operator|+
-literal|"            nullable: false\n"
+literal|"            \"nullable\": false\n"
 operator|+
 literal|"          },\n"
 operator|+
-literal|"          distinct: true,\n"
+literal|"          \"distinct\": true,\n"
 operator|+
-literal|"          operands: [\n"
+literal|"          \"operands\": [\n"
 operator|+
 literal|"            1\n"
 operator|+
@@ -466,19 +466,19 @@ literal|"        },\n"
 operator|+
 literal|"        {\n"
 operator|+
-literal|"          agg: \"COUNT\",\n"
+literal|"          \"agg\": \"COUNT\",\n"
 operator|+
-literal|"          type: {\n"
+literal|"          \"type\": {\n"
 operator|+
-literal|"            type: \"BIGINT\",\n"
+literal|"            \"type\": \"BIGINT\",\n"
 operator|+
-literal|"            nullable: false\n"
+literal|"            \"nullable\": false\n"
 operator|+
 literal|"          },\n"
 operator|+
-literal|"          distinct: false,\n"
+literal|"          \"distinct\": false,\n"
 operator|+
-literal|"          operands: []\n"
+literal|"          \"operands\": []\n"
 operator|+
 literal|"        }\n"
 operator|+

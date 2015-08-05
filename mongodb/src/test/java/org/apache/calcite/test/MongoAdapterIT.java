@@ -1156,9 +1156,9 @@ name|mongoChecker
 argument_list|(
 literal|"{\n"
 operator|+
-literal|"  $match: {\n"
+literal|"  \"$match\": {\n"
 operator|+
-literal|"    state: \"OK\"\n"
+literal|"    \"state\": \"OK\"\n"
 operator|+
 literal|"  }\n"
 operator|+
@@ -1230,9 +1230,9 @@ name|mongoChecker
 argument_list|(
 literal|"{\n"
 operator|+
-literal|"  $match: {\n"
+literal|"  \"$match\": {\n"
 operator|+
-literal|"    warehouse_state_province: \"CA\"\n"
+literal|"    \"warehouse_state_province\": \"CA\"\n"
 operator|+
 literal|"  }\n"
 operator|+
@@ -1301,55 +1301,55 @@ name|mongoChecker
 argument_list|(
 literal|"{\n"
 operator|+
-literal|"  $match: {\n"
+literal|"  \"$match\": {\n"
 operator|+
-literal|"    $or: [\n"
+literal|"    \"$or\": [\n"
 operator|+
 literal|"      {\n"
 operator|+
-literal|"        store_name: \"Store 1\"\n"
+literal|"        \"store_name\": \"Store 1\"\n"
 operator|+
 literal|"      },\n"
 operator|+
 literal|"      {\n"
 operator|+
-literal|"        store_name: \"Store 10\"\n"
+literal|"        \"store_name\": \"Store 10\"\n"
 operator|+
 literal|"      },\n"
 operator|+
 literal|"      {\n"
 operator|+
-literal|"        store_name: \"Store 11\"\n"
+literal|"        \"store_name\": \"Store 11\"\n"
 operator|+
 literal|"      },\n"
 operator|+
 literal|"      {\n"
 operator|+
-literal|"        store_name: \"Store 15\"\n"
+literal|"        \"store_name\": \"Store 15\"\n"
 operator|+
 literal|"      },\n"
 operator|+
 literal|"      {\n"
 operator|+
-literal|"        store_name: \"Store 16\"\n"
+literal|"        \"store_name\": \"Store 16\"\n"
 operator|+
 literal|"      },\n"
 operator|+
 literal|"      {\n"
 operator|+
-literal|"        store_name: \"Store 24\"\n"
+literal|"        \"store_name\": \"Store 24\"\n"
 operator|+
 literal|"      },\n"
 operator|+
 literal|"      {\n"
 operator|+
-literal|"        store_name: \"Store 3\"\n"
+literal|"        \"store_name\": \"Store 3\"\n"
 operator|+
 literal|"      },\n"
 operator|+
 literal|"      {\n"
 operator|+
-literal|"        store_name: \"Store 7\"\n"
+literal|"        \"store_name\": \"Store 7\"\n"
 operator|+
 literal|"      }\n"
 operator|+
@@ -1827,11 +1827,11 @@ literal|"{$project: {STATE: '$_id', C: '$C'}}"
 argument_list|,
 literal|"{\n"
 operator|+
-literal|"  $match: {\n"
+literal|"  \"$match\": {\n"
 operator|+
-literal|"    C: {\n"
+literal|"    \"C\": {\n"
 operator|+
-literal|"      $gt: 1500\n"
+literal|"      \"$gt\": 1500\n"
 operator|+
 literal|"    }\n"
 operator|+
@@ -2079,19 +2079,19 @@ name|mongoChecker
 argument_list|(
 literal|"{\n"
 operator|+
-literal|"  $match: {\n"
+literal|"  \"$match\": {\n"
 operator|+
-literal|"    $or: [\n"
+literal|"    \"$or\": [\n"
 operator|+
 literal|"      {\n"
 operator|+
-literal|"        state: \"CA\"\n"
+literal|"        \"state\": \"CA\"\n"
 operator|+
 literal|"      },\n"
 operator|+
 literal|"      {\n"
 operator|+
-literal|"        state: \"TX\"\n"
+literal|"        \"state\": \"TX\"\n"
 operator|+
 literal|"      }\n"
 operator|+
