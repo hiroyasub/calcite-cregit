@@ -3854,9 +3854,11 @@ block|}
 name|RuntimeException
 name|exception
 init|=
-operator|new
-name|RuntimeException
-argument_list|()
+name|Util
+operator|.
+name|FoundOne
+operator|.
+name|NULL
 decl_stmt|;
 for|for
 control|(
