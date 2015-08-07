@@ -1106,6 +1106,8 @@ operator|(
 name|Join
 operator|)
 name|newJoinRel
+argument_list|,
+name|projectFactory
 argument_list|)
 expr_stmt|;
 block|}
