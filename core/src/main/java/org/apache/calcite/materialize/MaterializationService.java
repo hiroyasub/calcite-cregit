@@ -2134,6 +2134,11 @@ operator|.
 name|rowType
 argument_list|)
 argument_list|,
+name|calciteSignature
+operator|.
+name|getCollationList
+argument_list|()
+argument_list|,
 name|Lists
 operator|.
 name|transform
