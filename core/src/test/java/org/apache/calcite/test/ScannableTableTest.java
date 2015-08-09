@@ -1476,6 +1476,11 @@ literal|"i=6; k=1943\n"
 argument_list|)
 argument_list|)
 expr_stmt|;
+name|resultSet
+operator|.
+name|close
+argument_list|()
+expr_stmt|;
 name|assertThat
 argument_list|(
 name|buf
@@ -1911,19 +1916,6 @@ argument_list|)
 decl_stmt|;
 name|assertThat
 argument_list|(
-name|buf
-operator|.
-name|toString
-argument_list|()
-argument_list|,
-name|equalTo
-argument_list|(
-literal|"returnCount=4, projects=[2]"
-argument_list|)
-argument_list|)
-expr_stmt|;
-name|assertThat
-argument_list|(
 name|CalciteAssert
 operator|.
 name|toString
@@ -1934,6 +1926,26 @@ argument_list|,
 name|equalTo
 argument_list|(
 literal|"k=1942\nk=1943\n"
+argument_list|)
+argument_list|)
+expr_stmt|;
+comment|// have to iterate (CalciteAssert.toString) and then close the result set b/c it is backed by
+comment|// an enumerable that only populates the info buffer (buf) on close
+name|resultSet
+operator|.
+name|close
+argument_list|()
+expr_stmt|;
+name|assertThat
+argument_list|(
+name|buf
+operator|.
+name|toString
+argument_list|()
+argument_list|,
+name|equalTo
+argument_list|(
+literal|"returnCount=4, projects=[2]"
 argument_list|)
 argument_list|)
 expr_stmt|;

@@ -15,6 +15,20 @@ name|interpreter
 package|;
 end_package
 
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|linq4j
+operator|.
+name|Enumerable
+import|;
+end_import
+
 begin_comment
 comment|/**  * Sink to which to send rows.  *  *<p>Corresponds to an output of a relational expression.  */
 end_comment
@@ -36,6 +50,18 @@ function_decl|;
 name|void
 name|end
 parameter_list|()
+throws|throws
+name|InterruptedException
+function_decl|;
+name|void
+name|setSourceEnumerable
+parameter_list|(
+name|Enumerable
+argument_list|<
+name|Row
+argument_list|>
+name|enumerable
+parameter_list|)
 throws|throws
 name|InterruptedException
 function_decl|;
