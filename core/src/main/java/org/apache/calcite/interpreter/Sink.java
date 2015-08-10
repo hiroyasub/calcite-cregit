@@ -53,6 +53,9 @@ parameter_list|()
 throws|throws
 name|InterruptedException
 function_decl|;
+comment|/** This method is temporary. It will be removed without notice. */
+annotation|@
+name|Deprecated
 name|void
 name|setSourceEnumerable
 parameter_list|(

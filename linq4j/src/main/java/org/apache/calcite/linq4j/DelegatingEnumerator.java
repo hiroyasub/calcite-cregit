@@ -16,7 +16,7 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * Simple enumerator that just delegates all calls to the passed enumerator  * @param<T> type of value to return, as passed from the delegate enumerator  */
+comment|/**  * Simple enumerator that just delegates all calls to the passed enumerator.  *  * @param<T> type of value to return, as passed from the delegate enumerator  */
 end_comment
 
 begin_class
@@ -32,7 +32,8 @@ argument_list|<
 name|T
 argument_list|>
 block|{
-specifier|private
+specifier|protected
+specifier|final
 name|Enumerator
 argument_list|<
 name|T

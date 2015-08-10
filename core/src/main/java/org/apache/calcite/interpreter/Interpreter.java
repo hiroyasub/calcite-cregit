@@ -1885,9 +1885,7 @@ name|queue
 init|=
 operator|new
 name|ArrayDeque
-argument_list|<
-name|Row
-argument_list|>
+argument_list|<>
 argument_list|(
 literal|1
 argument_list|)
@@ -1988,7 +1986,7 @@ name|sink
 expr_stmt|;
 block|}
 block|}
-comment|/**    * A sink that just proxies for an {@link org.apache.calcite.linq4j.Enumerable}. As such, its    * not really a "sink" but instead just a thin layer for the {@link EnumerableProxySource} to    * get an enumerator.    *<p>    * It can be little bit slower than the {@link Interpreter.ListSink} when trying to iterate    * over the elements of the enumerable, unless the enumerable is backed by an in-memory cache    * of the rows.    *</p>    */
+comment|/**    * A sink that just proxies for an {@link org.apache.calcite.linq4j.Enumerable}. As such, its    * not really a "sink" but instead just a thin layer for the {@link EnumerableProxySource} to    * get an enumerator.    *    *<p>It can be little bit slower than the {@link Interpreter.ListSink} when trying to iterate    * over the elements of the enumerable, unless the enumerable is backed by an in-memory cache    * of the rows.    */
 specifier|private
 specifier|static
 class|class
@@ -2019,9 +2017,9 @@ throw|throw
 operator|new
 name|UnsupportedOperationException
 argument_list|(
-literal|"Row are only added through the enumerable passed "
+literal|"Rows are only added through the "
 operator|+
-literal|"in through #setSourceEnumerable()!"
+literal|"enumerable passed in through #setSourceEnumerable()!"
 argument_list|)
 throw|;
 block|}
@@ -2057,7 +2055,7 @@ name|enumerable
 expr_stmt|;
 block|}
 block|}
-comment|/**    * A {@link Source} that is just backed by an {@link Enumerator}. The {@link Enumerator} is closed    * when it is finished or by calling {@link #close()}    */
+comment|/**    * A {@link Source} that is just backed by an {@link Enumerator}. The {@link Enumerator} is closed    * when it is finished or by calling {@link #close()}.    */
 specifier|private
 specifier|static
 class|class
@@ -2119,9 +2117,7 @@ name|enumerator
 operator|!=
 literal|null
 operator|:
-literal|"Sink did not set enumerable before source was asked for "
-operator|+
-literal|"a row!"
+literal|"Sink did not set enumerable before source was asked for a row!"
 assert|;
 block|}
 if|if
@@ -2255,6 +2251,7 @@ throws|throws
 name|InterruptedException
 block|{
 comment|// just copy over the source into the local list
+specifier|final
 name|Enumerator
 argument_list|<
 name|Row
@@ -2266,12 +2263,8 @@ operator|.
 name|enumerator
 argument_list|()
 decl_stmt|;
-name|Row
-name|row
-decl_stmt|;
 while|while
 condition|(
-operator|!
 name|enumerator
 operator|.
 name|moveNext

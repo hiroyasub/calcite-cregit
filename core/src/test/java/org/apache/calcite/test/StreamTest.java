@@ -515,7 +515,7 @@ literal|"'\n"
 operator|+
 literal|"       } ]\n"
 operator|+
-literal|"     }\n"
+literal|"     }"
 return|;
 block|}
 specifier|public
@@ -551,6 +551,8 @@ name|InfiniteOrdersStreamTableFactory
 operator|.
 name|class
 argument_list|)
+operator|+
+literal|"\n"
 operator|+
 literal|"   ]\n"
 operator|+
@@ -877,7 +879,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Regression test for CALCITE-809    */
+comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-809">[CALCITE-809]    * TableScan does not support large/infinite scans</a>.    */
 annotation|@
 name|Test
 specifier|public
@@ -1544,6 +1546,10 @@ name|ROW_GENERATOR
 init|=
 operator|new
 name|Function0
+argument_list|<
+name|Object
+index|[]
+argument_list|>
 argument_list|()
 block|{
 specifier|private
@@ -1658,8 +1664,6 @@ index|[]
 argument_list|>
 argument_list|()
 block|{
-annotation|@
-name|Override
 specifier|public
 name|boolean
 name|hasNext
@@ -1669,8 +1673,6 @@ return|return
 literal|true
 return|;
 block|}
-annotation|@
-name|Override
 specifier|public
 name|Object
 index|[]
@@ -1683,6 +1685,17 @@ operator|.
 name|apply
 argument_list|()
 return|;
+block|}
+specifier|public
+name|void
+name|remove
+parameter_list|()
+block|{
+throw|throw
+operator|new
+name|UnsupportedOperationException
+argument_list|()
+throw|;
 block|}
 block|}
 return|;
