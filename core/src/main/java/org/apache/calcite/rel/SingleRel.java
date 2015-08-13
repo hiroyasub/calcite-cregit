@@ -112,7 +112,7 @@ extends|extends
 name|AbstractRelNode
 block|{
 comment|//~ Instance fields --------------------------------------------------------
-specifier|private
+specifier|protected
 name|RelNode
 name|input
 decl_stmt|;

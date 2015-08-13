@@ -143,6 +143,9 @@ argument_list|)
 argument_list|)
 decl_stmt|;
 comment|/**    * A collation that cannot be replicated by applying a sort. The only    * implementation choice is to apply operations that preserve order.    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 specifier|static
 specifier|final

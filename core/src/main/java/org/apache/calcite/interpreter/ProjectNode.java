@@ -32,7 +32,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Interpreter node that implements a  * {@link org.apache.calcite.rel.logical.LogicalFilter}.  */
+comment|/**  * Interpreter node that implements a  * {@link org.apache.calcite.rel.core.Project}.  */
 end_comment
 
 begin_class

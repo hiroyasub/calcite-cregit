@@ -2198,15 +2198,13 @@ literal|"order by emps.deptno) "
 operator|+
 literal|"order by deptno"
 argument_list|,
-literal|"EnumerableProject(empid=[$0])\n"
+literal|"EnumerableProject(empid=[$0], deptno=[$1])\n"
 operator|+
-literal|"  EnumerableProject(empid=[$0], deptno=[$1])\n"
+literal|"  EnumerableSort(sort0=[$1], dir0=[ASC])\n"
 operator|+
-literal|"    EnumerableSort(sort0=[$1], dir0=[ASC])\n"
+literal|"    EnumerableProject(empid=[$0], deptno=[$1], name=[$2], salary=[$3], commission=[$4])\n"
 operator|+
-literal|"      EnumerableProject(empid=[$0], deptno=[$1], name=[$2], salary=[$3], commission=[$4])\n"
-operator|+
-literal|"        EnumerableTableScan(table=[[hr, emps]])\n"
+literal|"      EnumerableTableScan(table=[[hr, emps]])\n"
 argument_list|)
 expr_stmt|;
 block|}
@@ -2232,15 +2230,13 @@ literal|"order by emps.deptno) "
 operator|+
 literal|"order by deptno"
 argument_list|,
-literal|"EnumerableProject(EXPR$0=[$0])\n"
+literal|"EnumerableProject(EXPR$0=[+($0, $1)], deptno=[$1])\n"
 operator|+
-literal|"  EnumerableProject(EXPR$0=[+($0, $1)], deptno=[$1])\n"
+literal|"  EnumerableSort(sort0=[$1], dir0=[ASC])\n"
 operator|+
-literal|"    EnumerableSort(sort0=[$1], dir0=[ASC])\n"
+literal|"    EnumerableProject(empid=[$0], deptno=[$1])\n"
 operator|+
-literal|"      EnumerableProject(empid=[$0], deptno=[$1])\n"
-operator|+
-literal|"        EnumerableTableScan(table=[[hr, emps]])\n"
+literal|"      EnumerableTableScan(table=[[hr, emps]])\n"
 argument_list|)
 expr_stmt|;
 block|}
@@ -2581,17 +2577,15 @@ argument_list|)
 argument_list|,
 name|equalTo
 argument_list|(
-literal|"EnumerableProject(empid=[$0])\n"
+literal|"EnumerableSort(sort0=[$1], dir0=[ASC])\n"
 operator|+
-literal|"  EnumerableSort(sort0=[$1], dir0=[ASC])\n"
+literal|"  EnumerableProject(empid=[$0], deptno=[$1])\n"
 operator|+
-literal|"    EnumerableProject(empid=[$0], deptno=[$1])\n"
+literal|"    EnumerableSort(sort0=[$1], dir0=[ASC])\n"
 operator|+
-literal|"      EnumerableSort(sort0=[$1], dir0=[ASC])\n"
+literal|"      EnumerableProject(empid=[$0], deptno=[$1], name=[$2], salary=[$3], commission=[$4])\n"
 operator|+
-literal|"        EnumerableProject(empid=[$0], deptno=[$1], name=[$2], salary=[$3], commission=[$4])\n"
-operator|+
-literal|"          EnumerableTableScan(table=[[hr, emps]])\n"
+literal|"        EnumerableTableScan(table=[[hr, emps]])\n"
 argument_list|)
 argument_list|)
 expr_stmt|;

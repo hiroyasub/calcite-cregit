@@ -31,6 +31,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|util
+operator|.
+name|mapping
+operator|.
+name|Mappings
+import|;
+end_import
+
+begin_import
+import|import
 name|com
 operator|.
 name|google
@@ -1206,7 +1222,7 @@ block|}
 block|}
 return|;
 block|}
-comment|/** Returns the identity list [0, ..., count - 1]. */
+comment|/** Returns the identity list [0, ..., count - 1].    *    * @see Mappings#isIdentity(List, int)    */
 specifier|public
 specifier|static
 name|ImmutableIntList

@@ -217,6 +217,22 @@ name|calcite
 operator|.
 name|rel
 operator|.
+name|core
+operator|.
+name|Calc
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
 name|metadata
 operator|.
 name|ChainedRelMetadataProvider
@@ -679,16 +695,6 @@ name|java
 operator|.
 name|util
 operator|.
-name|Collection
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
 name|List
 import|;
 end_import
@@ -804,7 +810,7 @@ operator|.
 name|INSTANCE
 argument_list|)
 decl_stmt|;
-comment|/** Program that converts filters and projects to calcs. */
+comment|/** Program that converts filters and projects to {@link Calc}s. */
 specifier|public
 specifier|static
 specifier|final
@@ -1074,8 +1080,10 @@ specifier|static
 name|Program
 name|ofRules
 parameter_list|(
-name|Collection
+name|Iterable
 argument_list|<
+name|?
+extends|extends
 name|RelOptRule
 argument_list|>
 name|rules
@@ -1123,8 +1131,10 @@ specifier|static
 name|Program
 name|hep
 parameter_list|(
-name|ImmutableList
+name|Iterable
 argument_list|<
+name|?
+extends|extends
 name|RelOptRule
 argument_list|>
 name|rules
@@ -1310,8 +1320,10 @@ name|Program
 name|heuristicJoinOrder
 parameter_list|(
 specifier|final
-name|Collection
+name|Iterable
 argument_list|<
+name|?
+extends|extends
 name|RelOptRule
 argument_list|>
 name|rules

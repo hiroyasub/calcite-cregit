@@ -3833,7 +3833,9 @@ name|tempLinks
 argument_list|,
 name|parsed
 operator|.
-name|relNode
+name|root
+operator|.
+name|rel
 argument_list|)
 expr_stmt|;
 comment|// Get aliases.

@@ -296,7 +296,7 @@ name|flags
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Creates a LogicalProject, specifying row type rather than field names. */
+comment|/** Creates an EnumerableProject, specifying row type rather than field    * names. */
 specifier|public
 specifier|static
 name|EnumerableProject

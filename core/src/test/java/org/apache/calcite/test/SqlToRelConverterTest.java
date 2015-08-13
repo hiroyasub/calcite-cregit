@@ -2808,6 +2808,8 @@ name|convertSqlToRel
 argument_list|(
 name|sql
 argument_list|)
+operator|.
+name|rel
 decl_stmt|;
 name|StringWriter
 name|sw

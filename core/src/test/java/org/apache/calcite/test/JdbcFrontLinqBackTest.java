@@ -438,7 +438,9 @@ argument_list|)
 operator|.
 name|explainContains
 argument_list|(
-literal|"EnumerableCalc(expr#0..1=[{inputs}], expr#2=[UPPER($t1)], UN=[$t2], deptno=[$t0])\n"
+literal|""
+operator|+
+literal|"EnumerableCalc(expr#0..1=[{inputs}], expr#2=[UPPER($t1)], UN=[$t2], deptno=[$t0], name=[$t1])\n"
 operator|+
 literal|"  EnumerableSort(sort0=[$0], sort1=[$1], dir0=[ASC], dir1=[DESC])\n"
 operator|+
@@ -711,11 +713,7 @@ name|employees
 init|=
 operator|new
 name|ArrayList
-argument_list|<
-name|JdbcTest
-operator|.
-name|Employee
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 name|CalciteAssert
@@ -1130,11 +1128,7 @@ name|employees
 init|=
 operator|new
 name|ArrayList
-argument_list|<
-name|JdbcTest
-operator|.
-name|Employee
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 name|CalciteAssert
@@ -1229,11 +1223,7 @@ name|employees
 init|=
 operator|new
 name|ArrayList
-argument_list|<
-name|JdbcTest
-operator|.
-name|Employee
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 name|CalciteAssert

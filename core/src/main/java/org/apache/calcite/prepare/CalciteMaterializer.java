@@ -643,6 +643,8 @@ literal|true
 argument_list|,
 literal|true
 argument_list|)
+operator|.
+name|rel
 expr_stmt|;
 comment|// Identify and substitute a StarTable in queryRel.
 comment|//

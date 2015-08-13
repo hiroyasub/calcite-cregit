@@ -53,6 +53,20 @@ name|calcite
 operator|.
 name|rel
 operator|.
+name|RelRoot
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
 name|type
 operator|.
 name|RelDataTypeFactory
@@ -119,6 +133,19 @@ throws|throws
 name|ValidationException
 function_decl|;
 comment|/**    * Converts a SQL parse tree into a tree of relational expressions.    *    *<p>You must call {@link #validate(org.apache.calcite.sql.SqlNode)} first.    *    * @param sql The root node of the SQL parse tree.    * @return The root node of the newly generated RelNode tree.    * @throws org.apache.calcite.tools.RelConversionException if the node    * cannot be converted or has not been validated    */
+name|RelRoot
+name|rel
+parameter_list|(
+name|SqlNode
+name|sql
+parameter_list|)
+throws|throws
+name|RelConversionException
+function_decl|;
+comment|/** @deprecated Use {@link #rel}. */
+annotation|@
+name|Deprecated
+comment|// to removed before 2.0
 name|RelNode
 name|convert
 parameter_list|(

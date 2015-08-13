@@ -1453,6 +1453,9 @@ operator|+
 name|i
 argument_list|)
 argument_list|,
+operator|-
+literal|1
+argument_list|,
 name|groupCount
 argument_list|,
 name|input
@@ -1532,6 +1535,9 @@ argument_list|,
 literal|false
 argument_list|,
 name|newArgs
+argument_list|,
+operator|-
+literal|1
 argument_list|,
 name|groupCount
 argument_list|,

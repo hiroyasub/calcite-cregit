@@ -12602,15 +12602,11 @@ argument_list|)
 operator|.
 name|explainContains
 argument_list|(
-literal|""
+literal|"EnumerableSort(sort0=[$5], dir0=[ASC])\n"
 operator|+
-literal|"EnumerableCalc(expr#0..5=[{inputs}], proj#0..4=[{exprs}])\n"
+literal|"  EnumerableCalc(expr#0..4=[{inputs}], expr#5=[-($t0)], proj#0..5=[{exprs}])\n"
 operator|+
-literal|"  EnumerableSort(sort0=[$5], dir0=[ASC])\n"
-operator|+
-literal|"    EnumerableCalc(expr#0..4=[{inputs}], expr#5=[-($t0)], proj#0..5=[{exprs}])\n"
-operator|+
-literal|"      EnumerableTableScan(table=[[hr, emps]])"
+literal|"    EnumerableTableScan(table=[[hr, emps]])"
 argument_list|)
 operator|.
 name|returns
