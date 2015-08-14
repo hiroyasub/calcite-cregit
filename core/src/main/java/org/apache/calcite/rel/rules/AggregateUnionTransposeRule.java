@@ -446,16 +446,7 @@ name|SUPPORTED_AGGREGATES
 init|=
 operator|new
 name|IdentityHashMap
-argument_list|<
-name|Class
-argument_list|<
-name|?
-extends|extends
-name|SqlAggFunction
-argument_list|>
-argument_list|,
-name|Boolean
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 static|static
@@ -685,6 +676,7 @@ init|=
 literal|false
 decl_stmt|;
 comment|// create corresponding aggregates on top of each union child
+specifier|final
 name|List
 argument_list|<
 name|RelNode
@@ -693,9 +685,7 @@ name|newUnionInputs
 init|=
 operator|new
 name|ArrayList
-argument_list|<
-name|RelNode
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 for|for
@@ -991,6 +981,9 @@ name|ord
 operator|.
 name|i
 argument_list|)
+argument_list|,
+operator|-
+literal|1
 argument_list|,
 name|groupCount
 argument_list|,

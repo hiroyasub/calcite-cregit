@@ -1201,6 +1201,22 @@ operator|.
 name|PROJECT
 argument_list|)
 expr_stmt|;
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select\n"
+operator|+
+literal|" count(*) over(partition by empno order by sal) as count1,\n"
+operator|+
+literal|" count(*) over(partition by deptno order by sal) as count2,\n"
+operator|+
+literal|" sum(deptno) over(partition by empno order by sal) as sum1,\n"
+operator|+
+literal|" sum(deptno) over(partition by deptno order by sal) as sum2\n"
+operator|+
+literal|"from emp"
+decl_stmt|;
 name|checkPlanning
 argument_list|(
 name|tester
@@ -1209,15 +1225,7 @@ name|preProgram
 argument_list|,
 name|hepPlanner
 argument_list|,
-literal|"select count(*) over(partition by empno order by sal) as count1,\n"
-operator|+
-literal|"count(*) over(partition by deptno order by sal) as count2, \n"
-operator|+
-literal|"sum(deptno) over(partition by empno order by sal) as sum1, \n"
-operator|+
-literal|"sum(deptno) over(partition by deptno order by sal) as sum2 \n"
-operator|+
-literal|"from emp"
+name|sql
 argument_list|)
 expr_stmt|;
 block|}
@@ -5691,6 +5699,19 @@ name|Test
 specifier|public
 name|void
 name|testPushSumCountStarGroupingSetsThroughUnion
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+name|basePushAggThroughUnion
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testPushCountFilterThroughUnion
 parameter_list|()
 throws|throws
 name|Exception
