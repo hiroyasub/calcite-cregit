@@ -3208,6 +3208,13 @@ operator|.
 name|clear
 argument_list|()
 expr_stmt|;
+name|this
+operator|.
+name|ruleNames
+operator|.
+name|clear
+argument_list|()
+expr_stmt|;
 block|}
 specifier|public
 name|boolean
