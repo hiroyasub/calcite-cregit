@@ -19656,6 +19656,11 @@ argument_list|()
 decl_stmt|;
 if|if
 condition|(
+name|window
+operator|==
+literal|null
+operator|&&
+operator|(
 name|op
 operator|.
 name|isAggregator
@@ -19669,6 +19674,7 @@ operator|==
 name|SqlKind
 operator|.
 name|FILTER
+operator|)
 condition|)
 block|{
 return|return
