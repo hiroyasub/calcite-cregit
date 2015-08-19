@@ -791,6 +791,8 @@ parameter_list|(
 specifier|final
 name|Iterable
 argument_list|<
+name|?
+extends|extends
 name|K
 argument_list|>
 name|ks
@@ -798,6 +800,8 @@ parameter_list|,
 specifier|final
 name|Iterable
 argument_list|<
+name|?
+extends|extends
 name|V
 argument_list|>
 name|vs
@@ -832,6 +836,8 @@ block|{
 specifier|final
 name|Iterator
 argument_list|<
+name|?
+extends|extends
 name|K
 argument_list|>
 name|kIterator
@@ -844,6 +850,8 @@ decl_stmt|;
 specifier|final
 name|Iterator
 argument_list|<
+name|?
+extends|extends
 name|V
 argument_list|>
 name|vIterator

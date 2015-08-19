@@ -3496,7 +3496,7 @@ literal|false
 return|;
 block|}
 comment|/** Pushes predicates into a CASE.    *    *<p>We have a loose definition of 'predicate': any boolean expression will    * do, except CASE. For example '(CASE ...) = 5' or '(CASE ...) IS NULL'.    */
-specifier|protected
+specifier|public
 specifier|static
 name|RexCall
 name|pushPredicateIntoCase
