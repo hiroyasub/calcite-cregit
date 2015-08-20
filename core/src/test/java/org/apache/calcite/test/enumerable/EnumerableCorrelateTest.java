@@ -107,11 +107,11 @@ name|explainContains
 argument_list|(
 literal|"EnumerableCalc(expr#0..4=[{inputs}], empid=[$t0], name=[$t2])\n"
 operator|+
-literal|"  EnumerableSemiJoin(condition=[=($1, $6)], joinType=[inner])\n"
+literal|"  EnumerableSemiJoin(condition=[=($1, $5)], joinType=[inner])\n"
 operator|+
 literal|"    EnumerableTableScan(table=[[s, emps]])\n"
 operator|+
-literal|"    EnumerableCalc(expr#0..4=[{inputs}], expr#5=[true], $f0=[$t5], deptno0=[$t0])\n"
+literal|"    EnumerableCalc(expr#0..4=[{inputs}], expr#5=[true], deptno0=[$t0], $f0=[$t5])\n"
 operator|+
 literal|"      EnumerableJoin(condition=[=($0, $1)], joinType=[inner])\n"
 operator|+

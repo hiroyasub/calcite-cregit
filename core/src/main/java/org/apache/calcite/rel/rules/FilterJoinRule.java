@@ -1088,29 +1088,6 @@ argument_list|,
 name|projectFactory
 argument_list|)
 expr_stmt|;
-comment|// Push expression in join condition into Project below Join.
-if|if
-condition|(
-name|newJoinRel
-operator|instanceof
-name|Join
-condition|)
-block|{
-name|newJoinRel
-operator|=
-name|RelOptUtil
-operator|.
-name|pushDownJoinConditions
-argument_list|(
-operator|(
-name|Join
-operator|)
-name|newJoinRel
-argument_list|,
-name|projectFactory
-argument_list|)
-expr_stmt|;
-block|}
 comment|// create a FilterRel on top of the join if needed
 name|RelNode
 name|newRel
