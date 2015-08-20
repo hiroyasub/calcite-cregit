@@ -359,6 +359,56 @@ name|GROUPING_ID
 block|,
 comment|/** The internal {@code GROUP_ID()} function. */
 name|GROUP_ID
+block|,
+comment|// DDL and session control statements follow. The list is not exhaustive: feel
+comment|// free to add more.
+comment|/** {@code COMMIT} session control statement. */
+name|COMMIT
+block|,
+comment|/** {@code ROLLBACK} session control statement. */
+name|ROLLBACK
+block|,
+comment|/** {@code ALTER SESSION} DDL statement. */
+name|ALTER_SESSION
+block|,
+comment|/** {@code CREATE TABLE} DDL statement. */
+name|CREATE_TABLE
+block|,
+comment|/** {@code ALTER TABLE} DDL statement. */
+name|ALTER_TABLE
+block|,
+comment|/** {@code DROP TABLE} DDL statement. */
+name|DROP_TABLE
+block|,
+comment|/** {@code CREATE VIEW} DDL statement. */
+name|CREATE_VIEW
+block|,
+comment|/** {@code ALTER VIEW} DDL statement. */
+name|ALTER_VIEW
+block|,
+comment|/** {@code DROP VIEW} DDL statement. */
+name|DROP_VIEW
+block|,
+comment|/** {@code CREATE SEQUENCE} DDL statement. */
+name|CREATE_SEQUENCE
+block|,
+comment|/** {@code ALTER SEQUENCE} DDL statement. */
+name|ALTER_SEQUENCE
+block|,
+comment|/** {@code DROP SEQUENCE} DDL statement. */
+name|DROP_SEQUENCE
+block|,
+comment|/** {@code CREATE INDEX} DDL statement. */
+name|CREATE_INDEX
+block|,
+comment|/** {@code ALTER INDEX} DDL statement. */
+name|ALTER_INDEX
+block|,
+comment|/** {@code DROP INDEX} DDL statement. */
+name|DROP_INDEX
+block|,
+comment|/** DDL statement not handled above.    *    *<p><b>Note to other projects</b>: If you are extending Calcite's SQL parser    * and have your own object types you no doubt want to define CREATE and DROP    * commands for them. Use OTHER_DDL in the short term, but we are happy to add    * new enum values for your object types. Just ask!    */
+name|OTHER_DDL
 block|;
 comment|//~ Static fields/initializers ---------------------------------------------
 comment|// Most of the static fields are categories, aggregating several kinds into
@@ -479,6 +529,51 @@ argument_list|,
 name|PROCEDURE_CALL
 argument_list|)
 decl_stmt|;
+comment|/**    * Category consisting of all DDL operators.    */
+specifier|public
+specifier|static
+specifier|final
+name|EnumSet
+argument_list|<
+name|SqlKind
+argument_list|>
+name|DDL
+init|=
+name|EnumSet
+operator|.
+name|of
+argument_list|(
+name|COMMIT
+argument_list|,
+name|ROLLBACK
+argument_list|,
+name|ALTER_SESSION
+argument_list|,
+name|CREATE_TABLE
+argument_list|,
+name|ALTER_TABLE
+argument_list|,
+name|DROP_TABLE
+argument_list|,
+name|CREATE_VIEW
+argument_list|,
+name|ALTER_VIEW
+argument_list|,
+name|DROP_VIEW
+argument_list|,
+name|CREATE_SEQUENCE
+argument_list|,
+name|ALTER_SEQUENCE
+argument_list|,
+name|DROP_SEQUENCE
+argument_list|,
+name|CREATE_INDEX
+argument_list|,
+name|ALTER_INDEX
+argument_list|,
+name|DROP_INDEX
+argument_list|)
+decl_stmt|;
 comment|/**    * Category consisting of query node types.    *    *<p>Consists of:    * {@link #SELECT},    * {@link #EXCEPT},    * {@link #INTERSECT},    * {@link #UNION},    * {@link #VALUES},    * {@link #ORDER_BY},    * {@link #EXPLICIT_TABLE}.    */
 specifier|public
 specifier|static
@@ -510,21 +605,23 @@ argument_list|,
 name|EXPLICIT_TABLE
 argument_list|)
 decl_stmt|;
-comment|/**    * Category of all SQL statement types.    *    *<p>Consists of all types in {@link #QUERY} and {@link #DML}.    */
+comment|/**    * Category of all SQL statement types.    *    *<p>Consists of all types in {@link #QUERY}, {@link #DML} and {@link #DDL}.    */
 specifier|public
 specifier|static
 specifier|final
-name|Set
+name|EnumSet
 argument_list|<
 name|SqlKind
 argument_list|>
 name|TOP_LEVEL
 init|=
-name|plus
+name|concat
 argument_list|(
 name|QUERY
 argument_list|,
 name|DML
+argument_list|,
+name|DDL
 argument_list|)
 decl_stmt|;
 comment|/**    * Category consisting of regular and special functions.    *    *<p>Consists of regular functions {@link #OTHER_FUNCTION} and special    * functions {@link #ROW}, {@link #TRIM}, {@link #CAST}, {@link #JDBC_FN}.    */
@@ -644,6 +741,8 @@ name|this
 argument_list|)
 return|;
 block|}
+annotation|@
+name|SafeVarargs
 specifier|private
 specifier|static
 parameter_list|<
@@ -658,7 +757,7 @@ name|EnumSet
 argument_list|<
 name|E
 argument_list|>
-name|plus
+name|concat
 parameter_list|(
 name|EnumSet
 argument_list|<
@@ -670,7 +769,8 @@ name|EnumSet
 argument_list|<
 name|E
 argument_list|>
-name|set1
+modifier|...
+name|sets
 parameter_list|)
 block|{
 name|EnumSet
@@ -684,13 +784,25 @@ operator|.
 name|clone
 argument_list|()
 decl_stmt|;
+for|for
+control|(
+name|EnumSet
+argument_list|<
+name|E
+argument_list|>
+name|s
+range|:
+name|sets
+control|)
+block|{
 name|set
 operator|.
 name|addAll
 argument_list|(
-name|set1
+name|s
 argument_list|)
 expr_stmt|;
+block|}
 return|return
 name|set
 return|;

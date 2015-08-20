@@ -355,6 +355,20 @@ name|calcite
 operator|.
 name|sql
 operator|.
+name|SqlKind
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
 name|SqlNode
 import|;
 end_import
@@ -588,6 +602,17 @@ name|context
 parameter_list|,
 name|String
 name|sql
+parameter_list|)
+function_decl|;
+comment|/** Executes a DDL statement.    *    *<p>The statement identified itself as DDL in the    * {@link org.apache.calcite.jdbc.CalcitePrepare.ParseResult#kind} field. */
+name|void
+name|executeDdl
+parameter_list|(
+name|Context
+name|context
+parameter_list|,
+name|SqlNode
+name|node
 parameter_list|)
 function_decl|;
 comment|/** Analyzes a view.    *    * @param context Context    * @param sql View SQL    * @param fail Whether to fail (and throw a descriptive error message) if the    *             view is not modifiable    * @return Result of analyzing the view    */
@@ -1094,6 +1119,19 @@ operator|.
 name|getTypeFactory
 argument_list|()
 expr_stmt|;
+block|}
+comment|/** Returns the kind of statement.      *      *<p>Possibilities include:      *      *<ul>      *<li>Queries: usually {@link SqlKind#SELECT}, but      *   other query operators such as {@link SqlKind#UNION} and      *   {@link SqlKind#ORDER_BY} are possible      *<li>DML statements: {@link SqlKind#INSERT}, {@link SqlKind#UPDATE} etc.      *<li>Session control statements: {@link SqlKind#COMMIT}      *<li>DDL statements: {@link SqlKind#CREATE_TABLE},      *   {@link SqlKind#DROP_INDEX}      *</ul>      *      * @return Kind of statement, never null      */
+specifier|public
+name|SqlKind
+name|kind
+parameter_list|()
+block|{
+return|return
+name|sqlNode
+operator|.
+name|getKind
+argument_list|()
+return|;
 block|}
 block|}
 comment|/** The result of parsing and validating a SQL query and converting it to    * relational algebra. */
