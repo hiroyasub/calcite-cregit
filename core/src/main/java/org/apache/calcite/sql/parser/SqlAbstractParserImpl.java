@@ -830,6 +830,10 @@ specifier|protected
 name|int
 name|nDynamicParams
 decl_stmt|;
+specifier|protected
+name|String
+name|originalSql
+decl_stmt|;
 comment|//~ Methods ----------------------------------------------------------------
 comment|/**    * @return immutable set of all reserved words defined by SQL-92    * @sql.92 Section 5.2    */
 specifier|public
@@ -1059,6 +1063,32 @@ name|int
 name|identifierMaxLength
 parameter_list|)
 function_decl|;
+comment|/**    * Sets the SQL text that is being parsed.    */
+specifier|public
+name|void
+name|setOriginalSql
+parameter_list|(
+name|String
+name|originalSql
+parameter_list|)
+block|{
+name|this
+operator|.
+name|originalSql
+operator|=
+name|originalSql
+expr_stmt|;
+block|}
+comment|/**    * Returns the SQL text.    */
+specifier|public
+name|String
+name|getOriginalSql
+parameter_list|()
+block|{
+return|return
+name|originalSql
+return|;
+block|}
 comment|/**    * Change parser state.    *    * @param stateName new state.    */
 specifier|public
 specifier|abstract

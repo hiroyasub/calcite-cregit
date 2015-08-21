@@ -189,6 +189,13 @@ name|parser
 expr_stmt|;
 name|parser
 operator|.
+name|setOriginalSql
+argument_list|(
+name|s
+argument_list|)
+expr_stmt|;
+name|parser
+operator|.
 name|setTabSize
 argument_list|(
 literal|1
