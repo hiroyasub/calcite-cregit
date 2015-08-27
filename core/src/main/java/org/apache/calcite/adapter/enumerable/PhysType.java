@@ -151,6 +151,22 @@ name|int
 name|field
 parameter_list|)
 function_decl|;
+comment|/** Returns the physical type of a field. */
+name|PhysType
+name|field
+parameter_list|(
+name|int
+name|ordinal
+parameter_list|)
+function_decl|;
+comment|/** Returns the physical type of a given field's component type. */
+name|PhysType
+name|component
+parameter_list|(
+name|int
+name|field
+parameter_list|)
+function_decl|;
 comment|/** Returns the SQL row type. */
 name|RelDataType
 name|getRowType

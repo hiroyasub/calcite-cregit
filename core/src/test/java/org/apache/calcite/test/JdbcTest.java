@@ -10558,11 +10558,6 @@ argument_list|)
 expr_stmt|;
 block|}
 annotation|@
-name|Ignore
-argument_list|(
-literal|"unnest does not apply to array. should it?"
-argument_list|)
-annotation|@
 name|Test
 specifier|public
 name|void
@@ -10581,7 +10576,34 @@ argument_list|)
 operator|.
 name|returnsUnordered
 argument_list|(
-literal|"xx"
+literal|"EXPR$0=1"
+argument_list|,
+literal|"EXPR$0=2"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testUnnestArrayWithOrdinality
+parameter_list|()
+block|{
+name|CalciteAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|query
+argument_list|(
+literal|"select*from unnest(array[10,20]) with ordinality as t(i, o)"
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"I=10; O=1"
+argument_list|,
+literal|"I=20; O=2"
 argument_list|)
 expr_stmt|;
 block|}

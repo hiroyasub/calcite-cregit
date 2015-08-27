@@ -2752,12 +2752,27 @@ comment|/**    * The<code>UNNEST</code> operator.    */
 specifier|public
 specifier|static
 specifier|final
-name|SqlSpecialOperator
+name|SqlUnnestOperator
 name|UNNEST
 init|=
 operator|new
 name|SqlUnnestOperator
-argument_list|()
+argument_list|(
+literal|false
+argument_list|)
+decl_stmt|;
+comment|/**    * The<code>UNNEST WITH ORDINALITY</code> operator.    */
+specifier|public
+specifier|static
+specifier|final
+name|SqlUnnestOperator
+name|UNNEST_WITH_ORDINALITY
+init|=
+operator|new
+name|SqlUnnestOperator
+argument_list|(
+literal|true
+argument_list|)
 decl_stmt|;
 comment|/**    * The<code>LATERAL</code> operator.    */
 specifier|public

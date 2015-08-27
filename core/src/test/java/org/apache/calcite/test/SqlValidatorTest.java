@@ -12172,7 +12172,7 @@ argument_list|)
 expr_stmt|;
 name|checkFails
 argument_list|(
-literal|"select 1 from dept as d(^a^, b, c)"
+literal|"select 1 from dept as d(^a, b, c^)"
 argument_list|,
 literal|"(?s).*List of column aliases must have same degree as table; "
 operator|+
@@ -17557,6 +17557,199 @@ argument_list|(
 literal|"select ^c1^ from unnest(multiset(select name from dept)) as t(c)"
 argument_list|,
 literal|"Column 'C1' not found in any table"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testUnnestArray
+parameter_list|()
+block|{
+name|checkColumnType
+argument_list|(
+literal|"select*from unnest(array[1])"
+argument_list|,
+literal|"INTEGER NOT NULL"
+argument_list|)
+expr_stmt|;
+name|checkColumnType
+argument_list|(
+literal|"select*from unnest(array[1, 2])"
+argument_list|,
+literal|"INTEGER NOT NULL"
+argument_list|)
+expr_stmt|;
+name|checkColumnType
+argument_list|(
+literal|"select*from unnest(array[321.3, 2.33])"
+argument_list|,
+literal|"DECIMAL(5, 2) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|checkColumnType
+argument_list|(
+literal|"select*from unnest(array[321.3, 4.23e0])"
+argument_list|,
+literal|"DOUBLE NOT NULL"
+argument_list|)
+expr_stmt|;
+name|checkColumnType
+argument_list|(
+literal|"select*from unnest(array[43.2e1, cast(null as decimal(4,2))])"
+argument_list|,
+literal|"DOUBLE"
+argument_list|)
+expr_stmt|;
+name|checkColumnType
+argument_list|(
+literal|"select*from unnest(array[1, 2.3, 1])"
+argument_list|,
+literal|"DECIMAL(11, 1) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|checkColumnType
+argument_list|(
+literal|"select*from unnest(array['1','22','333'])"
+argument_list|,
+literal|"CHAR(3) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|checkColumnType
+argument_list|(
+literal|"select*from unnest(array['1','22','333','22'])"
+argument_list|,
+literal|"CHAR(3) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|checkFails
+argument_list|(
+literal|"select*from ^unnest(1)^"
+argument_list|,
+literal|"(?s).*Cannot apply 'UNNEST' to arguments of type 'UNNEST.<INTEGER>.'.*"
+argument_list|)
+expr_stmt|;
+name|check
+argument_list|(
+literal|"select*from unnest(array(select*from dept))"
+argument_list|)
+expr_stmt|;
+name|check
+argument_list|(
+literal|"select c from unnest(array(select deptno from dept)) as t(c)"
+argument_list|)
+expr_stmt|;
+name|checkFails
+argument_list|(
+literal|"select c from unnest(array(select * from dept)) as t(^c^)"
+argument_list|,
+literal|"List of column aliases must have same degree as table; table has 2 columns \\('DEPTNO', 'NAME'\\), whereas alias list has 1 columns"
+argument_list|)
+expr_stmt|;
+name|checkFails
+argument_list|(
+literal|"select ^c1^ from unnest(array(select name from dept)) as t(c)"
+argument_list|,
+literal|"Column 'C1' not found in any table"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testUnnestWithOrdinality
+parameter_list|()
+block|{
+name|checkResultType
+argument_list|(
+literal|"select*from unnest(array[1, 2]) with ordinality"
+argument_list|,
+literal|"RecordType(INTEGER NOT NULL EXPR$0, INTEGER NOT NULL ORDINALITY) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|checkResultType
+argument_list|(
+literal|"select*from unnest(array[43.2e1, cast(null as decimal(4,2))]) with ordinality"
+argument_list|,
+literal|"RecordType(DOUBLE EXPR$0, INTEGER NOT NULL ORDINALITY) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|checkFails
+argument_list|(
+literal|"select*from ^unnest(1) with ordinality^"
+argument_list|,
+literal|"(?s).*Cannot apply 'UNNEST' to arguments of type 'UNNEST.<INTEGER>.'.*"
+argument_list|)
+expr_stmt|;
+name|check
+argument_list|(
+literal|"select deptno\n"
+operator|+
+literal|"from unnest(array(select*from dept)) with ordinality\n"
+operator|+
+literal|"where ordinality< 5"
+argument_list|)
+expr_stmt|;
+name|checkFails
+argument_list|(
+literal|"select c from unnest(\n"
+operator|+
+literal|"  array(select deptno from dept)) with ordinality as t(^c^)"
+argument_list|,
+literal|"List of column aliases must have same degree as table; table has 2 "
+operator|+
+literal|"columns \\('DEPTNO', 'ORDINALITY'\\), "
+operator|+
+literal|"whereas alias list has 1 columns"
+argument_list|)
+expr_stmt|;
+name|check
+argument_list|(
+literal|"select c from unnest(\n"
+operator|+
+literal|"  array(select deptno from dept)) with ordinality as t(c, d)"
+argument_list|)
+expr_stmt|;
+name|checkFails
+argument_list|(
+literal|"select c from unnest(\n"
+operator|+
+literal|"  array(select deptno from dept)) with ordinality as t(^c, d, e^)"
+argument_list|,
+literal|"List of column aliases must have same degree as table; table has 2 "
+operator|+
+literal|"columns \\('DEPTNO', 'ORDINALITY'\\), "
+operator|+
+literal|"whereas alias list has 3 columns"
+argument_list|)
+expr_stmt|;
+name|checkFails
+argument_list|(
+literal|"select c\n"
+operator|+
+literal|"from unnest(array(select * from dept)) with ordinality as t(^c, d, e, f^)"
+argument_list|,
+literal|"List of column aliases must have same degree as table; table has 3 "
+operator|+
+literal|"columns \\('DEPTNO', 'NAME', 'ORDINALITY'\\), "
+operator|+
+literal|"whereas alias list has 4 columns"
+argument_list|)
+expr_stmt|;
+name|checkFails
+argument_list|(
+literal|"select ^name^ from unnest(array(select name from dept)) with ordinality as t(c, o)"
+argument_list|,
+literal|"Column 'NAME' not found in any table"
+argument_list|)
+expr_stmt|;
+name|checkFails
+argument_list|(
+literal|"select ^ordinality^ from unnest(array(select name from dept)) with ordinality as t(c, o)"
+argument_list|,
+literal|"Column 'ORDINALITY' not found in any table"
 argument_list|)
 expr_stmt|;
 block|}

@@ -13703,6 +13703,60 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testUnnestWithOrdinality
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"select * from unnest(x) with ordinality"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+literal|"SELECT *\n"
+operator|+
+literal|"FROM (UNNEST(`X`) WITH ORDINALITY)"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select*from unnest(x) with ordinality AS T"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+literal|"SELECT *\n"
+operator|+
+literal|"FROM (UNNEST(`X`) WITH ORDINALITY) AS `T`"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select*from unnest(x) with ordinality AS T(c, o)"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+literal|"SELECT *\n"
+operator|+
+literal|"FROM (UNNEST(`X`) WITH ORDINALITY) AS `T` (`C`, `O`)"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select*from unnest(x) as T ^with^ ordinality"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"(?s)Encountered \"with\" at .*"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testParensInFrom
 parameter_list|()
 block|{

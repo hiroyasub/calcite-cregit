@@ -577,7 +577,8 @@ name|writer
 operator|.
 name|keyword
 argument_list|(
-literal|"MULTISET"
+name|getName
+argument_list|()
 argument_list|)
 expr_stmt|;
 specifier|final

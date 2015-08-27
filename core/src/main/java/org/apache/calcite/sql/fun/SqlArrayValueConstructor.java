@@ -78,7 +78,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Definition of the SQL:2003 standard ARRAY constructor,<code>MULTISET  * [&lt;expr&gt;, ...]</code>.  */
+comment|/**  * Definition of the SQL:2003 standard ARRAY constructor,<code>ARRAY  * [&lt;expr&gt;, ...]</code>.  */
 end_comment
 
 begin_class

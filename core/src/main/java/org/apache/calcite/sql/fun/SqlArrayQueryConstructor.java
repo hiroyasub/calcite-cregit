@@ -53,7 +53,7 @@ literal|"ARRAY"
 argument_list|,
 name|SqlKind
 operator|.
-name|MAP_QUERY_CONSTRUCTOR
+name|ARRAY_QUERY_CONSTRUCTOR
 argument_list|)
 expr_stmt|;
 block|}
