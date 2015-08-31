@@ -1659,7 +1659,7 @@ return|return
 name|family
 return|;
 block|}
-comment|/**    * Gets the SqlTypeName corresponding to a JDBC type.    *    * @param jdbcType the JDBC type of interest    * @return corresponding SqlTypeName    */
+comment|/**    * Gets the SqlTypeName corresponding to a JDBC type.    *    * @param jdbcType the JDBC type of interest    * @return corresponding SqlTypeName, or null if the type is not known    */
 specifier|public
 specifier|static
 name|SqlTypeName

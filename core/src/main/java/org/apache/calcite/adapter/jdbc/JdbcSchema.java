@@ -1594,14 +1594,25 @@ name|String
 name|typeString
 parameter_list|)
 block|{
+comment|// Fall back to ANY if type is unknown
+specifier|final
 name|SqlTypeName
 name|sqlTypeName
 init|=
+name|Util
+operator|.
+name|first
+argument_list|(
 name|SqlTypeName
 operator|.
 name|getNameForJdbcType
 argument_list|(
 name|dataType
+argument_list|)
+argument_list|,
+name|SqlTypeName
+operator|.
+name|ANY
 argument_list|)
 decl_stmt|;
 switch|switch
