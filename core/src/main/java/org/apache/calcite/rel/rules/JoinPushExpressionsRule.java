@@ -155,6 +155,7 @@ operator|.
 name|ProjectFactory
 name|projectFactory
 decl_stmt|;
+comment|/** Creates a JoinPushExpressionsRule. */
 specifier|public
 name|JoinPushExpressionsRule
 parameter_list|(
@@ -277,6 +278,10 @@ expr_stmt|;
 block|}
 block|}
 end_class
+
+begin_comment
+comment|// End JoinPushExpressionsRule.java
+end_comment
 
 end_unit
 
