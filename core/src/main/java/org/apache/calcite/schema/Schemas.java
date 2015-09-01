@@ -2212,9 +2212,14 @@ name|prepareSql
 argument_list|(
 name|context
 argument_list|,
+name|CalcitePrepare
+operator|.
+name|Query
+operator|.
+name|of
+argument_list|(
 name|sql
-argument_list|,
-literal|null
+argument_list|)
 argument_list|,
 name|Object
 index|[]

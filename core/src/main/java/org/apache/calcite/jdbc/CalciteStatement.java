@@ -170,11 +170,11 @@ operator|.
 name|class
 condition|)
 block|{
-comment|//noinspection unchecked
 return|return
-operator|(
-name|T
-operator|)
+name|iface
+operator|.
+name|cast
+argument_list|(
 name|getConnection
 argument_list|()
 operator|.
@@ -183,6 +183,7 @@ operator|.
 name|getStatement
 argument_list|(
 name|handle
+argument_list|)
 argument_list|)
 return|;
 block|}
