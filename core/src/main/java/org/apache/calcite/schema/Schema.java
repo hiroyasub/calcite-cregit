@@ -142,32 +142,68 @@ comment|/** Table type. */
 enum|enum
 name|TableType
 block|{
-comment|/** A regular table. */
+comment|/** A regular table.      *      *<p>Used by PostgreSQL, MySQL and others. */
 name|TABLE
 block|,
-comment|/** A relation whose contents are calculated by evaluating a SQL      * expression. */
+comment|/** A relation whose contents are calculated by evaluating a SQL      * expression.      *      *<p>Used by PostgreSQL and others. */
 name|VIEW
 block|,
-comment|/** A table maintained by the system. Data dictionary tables, such as the      * "TABLES" and "COLUMNS" table in the "metamodel" schema, examples of      * system tables. */
-name|SYSTEM_TABLE
+comment|/** Foreign table.      *      *<p>Used by PostgreSQL. */
+name|FOREIGN_TABLE
 block|,
-comment|/** A table that is only visible to one connection. */
-name|LOCAL_TEMPORARY
+comment|/** Materialized view.      *      *<p>Used by PostgreSQL. */
+name|MATERIALIZED_VIEW
 block|,
-comment|/** A structure, similar to a view, that is the basis for auto-generated      * materializations. It is either a single table or a collection of tables      * that are joined via many-to-one relationships from a central hub table.      * It is not available for queries, but is just used as an intermediate      * structure during query planning. */
-name|STAR
-block|,
-comment|/** Index table.      *      *<p>Used by Apache Phoenix. */
+comment|/** Index table.      *      *<p>Used by Apache Phoenix, PostgreSQL. */
 name|INDEX
 block|,
 comment|/** Join table.      *      *<p>Used by Apache Phoenix. */
 name|JOIN
 block|,
-comment|/** Sequence table.      *      *<p>Used by Apache Phoenix, and others. Must have a single BIGINT column      * called "$seq". */
+comment|/** Sequence table.      *      *<p>Used by Apache Phoenix, PostgreSQL and others.      * In Phoenix, must have a single BIGINT column called "$seq". */
 name|SEQUENCE
+block|,
+comment|/** A structure, similar to a view, that is the basis for auto-generated      * materializations. It is either a single table or a collection of tables      * that are joined via many-to-one relationships from a central hub table.      * It is not available for queries, but is just used as an intermediate      * structure during query planning. */
+name|STAR
 block|,
 comment|/** Stream. */
 name|STREAM
+block|,
+comment|/** Type.      *      *<p>Used by PostgreSQL. */
+name|TYPE
+block|,
+comment|/** A table maintained by the system. Data dictionary tables, such as the      * "TABLES" and "COLUMNS" table in the "metamodel" schema, examples of      * system tables.      *      *<p>Used by PostgreSQL, MySQL and others. */
+name|SYSTEM_TABLE
+block|,
+comment|/** System view.      *      *<p>Used by PostgreSQL, MySQL. */
+name|SYSTEM_VIEW
+block|,
+comment|/** System index.      *      *<p>Used by PostgreSQL. */
+name|SYSTEM_INDEX
+block|,
+comment|/** System TOAST index.      *      *<p>Used by PostgreSQL. */
+name|SYSTEM_TOAST_INDEX
+block|,
+comment|/** System TOAST table.      *      *<p>Used by PostgreSQL. */
+name|SYSTEM_TOAST_TABLE
+block|,
+comment|/** Temporary index.      *      *<p>Used by PostgreSQL. */
+name|TEMPORARY_INDEX
+block|,
+comment|/** Temporary sequence.      *      *<p>Used by PostgreSQL. */
+name|TEMPORARY_SEQUENCE
+block|,
+comment|/** Temporary table.      *      *<p>Used by PostgreSQL. */
+name|TEMPORARY_TABLE
+block|,
+comment|/** Temporary view.      *      *<p>Used by PostgreSQL. */
+name|TEMPORARY_VIEW
+block|,
+comment|/** A table that is only visible to one connection.      *      *<p>Used by PostgreSQL, MySQL. */
+name|LOCAL_TEMPORARY
+block|,
+comment|/** Table type not known to Calcite.      *      *<p>If you get one of these, please fix the problem by adding an enum      * value. */
+name|OTHER
 block|,   }
 block|}
 end_interface
