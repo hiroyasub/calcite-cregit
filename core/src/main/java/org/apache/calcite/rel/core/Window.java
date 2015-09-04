@@ -427,13 +427,13 @@ name|groups
 decl_stmt|;
 specifier|public
 specifier|final
-name|List
+name|ImmutableList
 argument_list|<
 name|RexLiteral
 argument_list|>
 name|constants
 decl_stmt|;
-comment|/**    * Creates a window relational expression.    *    * @param cluster Cluster    * @param child   Input relational expression    * @param constants List of constants that are additional inputs    * @param rowType Output row type    * @param groups Windows    */
+comment|/**    * Creates a window relational expression.    *    * @param cluster Cluster    * @param traitSet Trait set    * @param input   Input relational expression    * @param constants List of constants that are additional inputs    * @param rowType Output row type    * @param groups Windows    */
 specifier|public
 name|Window
 parameter_list|(
@@ -441,10 +441,10 @@ name|RelOptCluster
 name|cluster
 parameter_list|,
 name|RelTraitSet
-name|traits
+name|traitSet
 parameter_list|,
 name|RelNode
-name|child
+name|input
 parameter_list|,
 name|List
 argument_list|<
@@ -466,9 +466,9 @@ name|super
 argument_list|(
 name|cluster
 argument_list|,
-name|traits
+name|traitSet
 argument_list|,
-name|child
+name|input
 argument_list|)
 expr_stmt|;
 name|this

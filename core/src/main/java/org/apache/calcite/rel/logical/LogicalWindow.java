@@ -467,7 +467,7 @@ name|LogicalWindow
 extends|extends
 name|Window
 block|{
-comment|/**    * Creates a LogicalWindow.    *    * @param cluster Cluster    * @param child   Input relational expression    * @param constants List of constants that are additional inputs    * @param rowType Output row type    * @param groups Windows    */
+comment|/**    * Creates a LogicalWindow.    *    *<p>Use {@link #create} unless you know what you're doing.    *    * @param cluster Cluster    * @param traitSet Trait set    * @param input   Input relational expression    * @param constants List of constants that are additional inputs    * @param rowType Output row type    * @param groups Window groups    */
 specifier|public
 name|LogicalWindow
 parameter_list|(
@@ -475,10 +475,10 @@ name|RelOptCluster
 name|cluster
 parameter_list|,
 name|RelTraitSet
-name|traits
+name|traitSet
 parameter_list|,
 name|RelNode
-name|child
+name|input
 parameter_list|,
 name|List
 argument_list|<
@@ -500,9 +500,9 @@ name|super
 argument_list|(
 name|cluster
 argument_list|,
-name|traits
+name|traitSet
 argument_list|,
-name|child
+name|input
 argument_list|,
 name|constants
 argument_list|,
@@ -550,7 +550,56 @@ name|groups
 argument_list|)
 return|;
 block|}
-comment|/**    * Creates a LogicalWindow.    */
+comment|/**    * Creates a LogicalWindow.    *    * @param input   Input relational expression    * @param traitSet Trait set    * @param constants List of constants that are additional inputs    * @param rowType Output row type    * @param groups Window groups    */
+specifier|public
+specifier|static
+name|LogicalWindow
+name|create
+parameter_list|(
+name|RelTraitSet
+name|traitSet
+parameter_list|,
+name|RelNode
+name|input
+parameter_list|,
+name|List
+argument_list|<
+name|RexLiteral
+argument_list|>
+name|constants
+parameter_list|,
+name|RelDataType
+name|rowType
+parameter_list|,
+name|List
+argument_list|<
+name|Group
+argument_list|>
+name|groups
+parameter_list|)
+block|{
+return|return
+operator|new
+name|LogicalWindow
+argument_list|(
+name|input
+operator|.
+name|getCluster
+argument_list|()
+argument_list|,
+name|traitSet
+argument_list|,
+name|input
+argument_list|,
+name|constants
+argument_list|,
+name|rowType
+argument_list|,
+name|groups
+argument_list|)
+return|;
+block|}
+comment|/**    * Creates a LogicalWindow by parsing a {@link RexProgram}.    */
 specifier|public
 specifier|static
 name|RelNode
@@ -618,11 +667,7 @@ name|constantPool
 init|=
 operator|new
 name|HashMap
-argument_list|<
-name|RexLiteral
-argument_list|,
-name|RexInputRef
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 specifier|final
@@ -634,9 +679,7 @@ name|constants
 init|=
 operator|new
 name|ArrayList
-argument_list|<
-name|RexLiteral
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 comment|// Identify constants in the expression tree and replace them with
@@ -810,13 +853,7 @@ name|aggMap
 init|=
 operator|new
 name|HashMap
-argument_list|<
-name|RexOver
-argument_list|,
-name|Window
-operator|.
-name|RexWinAggCall
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 name|List
@@ -827,9 +864,7 @@ name|groups
 init|=
 operator|new
 name|ArrayList
-argument_list|<
-name|Group
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 for|for
@@ -874,9 +909,7 @@ name|aggCalls
 init|=
 operator|new
 name|ArrayList
-argument_list|<
-name|RexWinAggCall
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 for|for
@@ -1028,13 +1061,10 @@ name|flattenedAggCallList
 init|=
 operator|new
 name|ArrayList
-argument_list|<
-name|Window
-operator|.
-name|RexWinAggCall
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
+specifier|final
 name|List
 argument_list|<
 name|Map
@@ -1080,6 +1110,7 @@ name|size
 argument_list|()
 decl_stmt|;
 comment|// Use better field names for agg calls that are projected.
+specifier|final
 name|Map
 argument_list|<
 name|Integer
@@ -1090,11 +1121,7 @@ name|fieldNames
 init|=
 operator|new
 name|HashMap
-argument_list|<
-name|Integer
-argument_list|,
-name|String
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 for|for
@@ -1462,14 +1489,14 @@ return|;
 block|}
 block|}
 decl_stmt|;
+specifier|final
 name|LogicalWindow
 name|window
 init|=
-operator|new
 name|LogicalWindow
+operator|.
+name|create
 argument_list|(
-name|cluster
-argument_list|,
 name|traitSet
 argument_list|,
 name|child
