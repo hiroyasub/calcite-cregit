@@ -12686,11 +12686,7 @@ literal|"Table 'SALES.BAD' not found"
 argument_list|)
 expr_stmt|;
 block|}
-annotation|@
-name|Ignore
-argument_list|(
-literal|"does not work yet"
-argument_list|)
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-881">[CALCITE-881]    * Allow schema.table.column references in GROUP BY</a>. */
 annotation|@
 name|Test
 specifier|public
@@ -12706,7 +12702,22 @@ operator|.
 name|ok
 argument_list|()
 expr_stmt|;
-comment|// TODO:
+name|sql
+argument_list|(
+literal|"select deptno from sales.emp group by sales.emp.deptno"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select deptno + 1 from sales.emp group by sales.emp.deptno"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
 block|}
 annotation|@
 name|Test
@@ -16358,21 +16369,28 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testGroupByCorrelatedColumnFails
+name|testGroupByCorrelatedColumn
 parameter_list|()
 block|{
-comment|// -- this is not sql 2003 standard
-comment|// -- see sql2003 part2,  7.9
-name|checkFails
-argument_list|(
+comment|// This is not sql 2003 standard; see sql2003 part2,  7.9
+comment|// But the extension seems harmless.
+specifier|final
+name|String
+name|sql
+init|=
 literal|"select count(*)\n"
 operator|+
 literal|"from emp\n"
 operator|+
-literal|"where exists (select count(*) from dept group by ^emp^.empno)"
-argument_list|,
-literal|"Table 'EMP' not found"
+literal|"where exists (select count(*) from dept group by emp.empno)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
 argument_list|)
+operator|.
+name|ok
+argument_list|()
 expr_stmt|;
 block|}
 annotation|@

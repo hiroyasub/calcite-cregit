@@ -352,6 +352,11 @@ argument_list|(
 name|scope
 argument_list|)
 decl_stmt|;
+assert|assert
+name|selectScope
+operator|!=
+literal|null
+assert|;
 specifier|final
 name|SqlSelect
 name|select
@@ -477,6 +482,11 @@ if|if
 condition|(
 operator|!
 name|aggregatingSelectScope
+operator|.
+name|resolved
+operator|.
+name|get
+argument_list|()
 operator|.
 name|isGroupingExpr
 argument_list|(

@@ -12158,8 +12158,8 @@ comment|// register the group exprs
 comment|// build a map to remember the projections from the top scope to the
 comment|// output of the current root.
 comment|//
-comment|// Currently farrago allows expressions, not just column references in
-comment|// group by list. This is not SQL 2003 compliant.
+comment|// Calcite allows expressions, not just column references in
+comment|// group by list. This is not SQL 2003 compliant, but hey.
 specifier|final
 name|AggregatingSelectScope
 name|scope
@@ -12168,12 +12168,25 @@ name|aggConverter
 operator|.
 name|aggregatingSelectScope
 decl_stmt|;
+specifier|final
+name|AggregatingSelectScope
+operator|.
+name|Resolved
+name|r
+init|=
+name|scope
+operator|.
+name|resolved
+operator|.
+name|get
+argument_list|()
+decl_stmt|;
 for|for
 control|(
 name|SqlNode
 name|groupExpr
 range|:
-name|scope
+name|r
 operator|.
 name|groupExprList
 control|)
@@ -12307,13 +12320,13 @@ comment|// at all.  The rest of the system doesn't like 0-tuples, so we
 comment|// select a dummy constant here.
 name|preExprs
 operator|=
-name|Collections
+name|ImmutableList
 operator|.
-name|singletonList
-argument_list|(
-operator|(
+expr|<
 name|RexNode
-operator|)
+operator|>
+name|of
+argument_list|(
 name|rexBuilder
 operator|.
 name|makeExactLiteral
@@ -12373,7 +12386,7 @@ name|bb
 operator|.
 name|root
 argument_list|,
-name|scope
+name|r
 operator|.
 name|groupExprProjection
 argument_list|)
@@ -12423,17 +12436,15 @@ name|createAggregate
 argument_list|(
 name|bb
 argument_list|,
-name|aggConverter
-operator|.
-name|aggregatingSelectScope
+name|r
 operator|.
 name|indicator
 argument_list|,
-name|scope
+name|r
 operator|.
 name|groupSet
 argument_list|,
-name|scope
+name|r
 operator|.
 name|groupSets
 argument_list|,
@@ -12543,7 +12554,7 @@ name|i
 operator|<
 name|groupCount
 operator|&&
-name|scope
+name|r
 operator|.
 name|isNullable
 argument_list|(
@@ -12679,7 +12690,7 @@ name|bb
 operator|.
 name|root
 argument_list|,
-name|scope
+name|r
 operator|.
 name|groupExprProjection
 argument_list|)
@@ -20970,6 +20981,19 @@ argument_list|()
 argument_list|)
 argument_list|)
 decl_stmt|;
+specifier|final
+name|AggregatingSelectScope
+operator|.
+name|Resolved
+name|r
+init|=
+name|aggregatingSelectScope
+operator|.
+name|resolved
+operator|.
+name|get
+argument_list|()
+decl_stmt|;
 name|RexNode
 name|rex
 init|=
@@ -20984,7 +21008,7 @@ operator|.
 name|size
 argument_list|()
 argument_list|,
-name|aggregatingSelectScope
+name|r
 operator|.
 name|indicator
 argument_list|,
@@ -21189,6 +21213,11 @@ if|if
 condition|(
 operator|!
 name|aggregatingSelectScope
+operator|.
+name|resolved
+operator|.
+name|get
+argument_list|()
 operator|.
 name|indicator
 condition|)
@@ -21416,6 +21445,19 @@ name|int
 name|shift
 parameter_list|)
 block|{
+specifier|final
+name|AggregatingSelectScope
+operator|.
+name|Resolved
+name|r
+init|=
+name|aggregatingSelectScope
+operator|.
+name|resolved
+operator|.
+name|get
+argument_list|()
+decl_stmt|;
 name|RexNode
 name|node
 init|=
@@ -21435,7 +21477,7 @@ name|bb
 operator|.
 name|root
 argument_list|,
-name|aggregatingSelectScope
+name|r
 operator|.
 name|groupExprList
 operator|.

@@ -942,6 +942,39 @@ name|getType
 argument_list|()
 expr_stmt|;
 block|}
+if|if
+condition|(
+name|i
+operator|>
+literal|1
+condition|)
+block|{
+comment|// Simplify overqualified identifiers.
+comment|// For example, schema.emp.deptno becomes emp.deptno.
+comment|//
+comment|// It is safe to convert schema.emp or database.schema.emp to emp
+comment|// because it would not have resolved if the FROM item had an alias. The
+comment|// following query is invalid:
+comment|//   SELECT schema.emp.deptno FROM schema.emp AS e
+name|identifier
+operator|=
+name|identifier
+operator|.
+name|getComponent
+argument_list|(
+name|i
+operator|-
+literal|1
+argument_list|,
+name|identifier
+operator|.
+name|names
+operator|.
+name|size
+argument_list|()
+argument_list|)
+expr_stmt|;
+block|}
 return|return
 name|SqlQualified
 operator|.
