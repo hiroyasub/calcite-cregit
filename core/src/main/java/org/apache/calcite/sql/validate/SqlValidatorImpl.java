@@ -1037,6 +1037,16 @@ name|java
 operator|.
 name|util
 operator|.
+name|ArrayDeque
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
 name|ArrayList
 import|;
 end_import
@@ -1078,6 +1088,16 @@ operator|.
 name|util
 operator|.
 name|Collections
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Deque
 import|;
 end_import
 
@@ -1158,16 +1178,6 @@ operator|.
 name|util
 operator|.
 name|Set
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|Stack
 import|;
 end_import
 
@@ -1333,11 +1343,7 @@ name|idPositions
 init|=
 operator|new
 name|HashMap
-argument_list|<
-name|String
-argument_list|,
-name|IdInfo
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 comment|/**    * Maps {@link SqlNode query node} objects to the {@link SqlValidatorScope}    * scope created from them}.    */
@@ -1353,11 +1359,7 @@ name|scopes
 init|=
 operator|new
 name|IdentityHashMap
-argument_list|<
-name|SqlNode
-argument_list|,
-name|SqlValidatorScope
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 comment|/**    * Maps a {@link SqlSelect} node to the scope used by its WHERE and HAVING    * clauses.    */
@@ -1373,11 +1375,7 @@ name|whereScopes
 init|=
 operator|new
 name|IdentityHashMap
-argument_list|<
-name|SqlSelect
-argument_list|,
-name|SqlValidatorScope
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 comment|/**    * Maps a {@link SqlSelect} node to the scope used by its SELECT and HAVING    * clauses.    */
@@ -1393,11 +1391,7 @@ name|selectScopes
 init|=
 operator|new
 name|IdentityHashMap
-argument_list|<
-name|SqlSelect
-argument_list|,
-name|SqlValidatorScope
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 comment|/**    * Maps a {@link SqlSelect} node to the scope used by its ORDER BY clause.    */
@@ -1413,11 +1407,7 @@ name|orderScopes
 init|=
 operator|new
 name|IdentityHashMap
-argument_list|<
-name|SqlSelect
-argument_list|,
-name|SqlValidatorScope
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 comment|/**    * Maps a {@link SqlSelect} node that is the argument to a CURSOR    * constructor to the scope of the result of that select node    */
@@ -1433,11 +1423,7 @@ name|cursorScopes
 init|=
 operator|new
 name|IdentityHashMap
-argument_list|<
-name|SqlSelect
-argument_list|,
-name|SqlValidatorScope
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 comment|/**    * Maps a {@link SqlNode node} to the    * {@link SqlValidatorNamespace namespace} which describes what columns they    * contain.    */
@@ -1453,11 +1439,7 @@ name|namespaces
 init|=
 operator|new
 name|IdentityHashMap
-argument_list|<
-name|SqlNode
-argument_list|,
-name|SqlValidatorNamespace
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 comment|/**    * Set of select expressions used as cursor definitions. In standard SQL,    * only the top-level SELECT is a cursor; Calcite extends this with    * cursors as inputs to table functions.    */
@@ -1477,17 +1459,15 @@ decl_stmt|;
 comment|/**    * Stack of objects that maintain information about function calls. A stack    * is needed to handle nested function calls. The function call currently    * being validated is at the top of the stack.    */
 specifier|protected
 specifier|final
-name|Stack
+name|Deque
 argument_list|<
 name|FunctionParamInfo
 argument_list|>
 name|functionCallStack
 init|=
 operator|new
-name|Stack
-argument_list|<
-name|FunctionParamInfo
-argument_list|>
+name|ArrayDeque
+argument_list|<>
 argument_list|()
 decl_stmt|;
 specifier|private
@@ -1522,11 +1502,7 @@ name|nodeToTypeMap
 init|=
 operator|new
 name|IdentityHashMap
-argument_list|<
-name|SqlNode
-argument_list|,
-name|RelDataType
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 specifier|private
@@ -1556,11 +1532,7 @@ name|originalExprs
 init|=
 operator|new
 name|HashMap
-argument_list|<
-name|SqlNode
-argument_list|,
-name|SqlNode
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 comment|// REVIEW jvs 30-June-2006: subclasses may override shouldExpandIdentifiers
@@ -1760,6 +1732,7 @@ name|boolean
 name|includeSystemVars
 parameter_list|)
 block|{
+specifier|final
 name|List
 argument_list|<
 name|SqlNode
@@ -1768,11 +1741,10 @@ name|list
 init|=
 operator|new
 name|ArrayList
-argument_list|<
-name|SqlNode
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
+specifier|final
 name|List
 argument_list|<
 name|Map
@@ -1788,16 +1760,7 @@ name|types
 init|=
 operator|new
 name|ArrayList
-argument_list|<
-name|Map
-operator|.
-name|Entry
-argument_list|<
-name|String
-argument_list|,
-name|RelDataType
-argument_list|>
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 for|for
@@ -3209,6 +3172,7 @@ argument_list|()
 argument_list|)
 condition|)
 block|{
+specifier|final
 name|List
 argument_list|<
 name|SqlMoniker
@@ -3217,9 +3181,7 @@ name|objNames
 init|=
 operator|new
 name|ArrayList
-argument_list|<
-name|SqlMoniker
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 name|SqlValidatorUtil
@@ -3748,6 +3710,7 @@ argument_list|>
 name|result
 parameter_list|)
 block|{
+specifier|final
 name|List
 argument_list|<
 name|SqlMoniker
@@ -3756,9 +3719,7 @@ name|objNames
 init|=
 operator|new
 name|ArrayList
-argument_list|<
-name|SqlMoniker
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 name|SqlValidatorUtil
@@ -6854,6 +6815,7 @@ argument_list|()
 operator|>=
 literal|1
 assert|;
+specifier|final
 name|List
 argument_list|<
 name|RelDataType
@@ -6862,9 +6824,7 @@ name|rowTypes
 init|=
 operator|new
 name|ArrayList
-argument_list|<
-name|RelDataType
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 for|for
@@ -6905,9 +6865,7 @@ name|aliasList
 init|=
 operator|new
 name|ArrayList
-argument_list|<
-name|String
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 specifier|final
@@ -6919,9 +6877,7 @@ name|typeList
 init|=
 operator|new
 name|ArrayList
-argument_list|<
-name|RelDataType
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 for|for
@@ -15926,16 +15882,7 @@ name|types
 init|=
 operator|new
 name|ArrayList
-argument_list|<
-name|Map
-operator|.
-name|Entry
-argument_list|<
-name|String
-argument_list|,
-name|RelDataType
-argument_list|>
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 if|if
@@ -15978,6 +15925,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+specifier|final
 name|Set
 argument_list|<
 name|Integer
@@ -15986,9 +15934,7 @@ name|assignedFields
 init|=
 operator|new
 name|HashSet
-argument_list|<
-name|Integer
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 for|for
@@ -18380,7 +18326,7 @@ argument_list|)
 return|;
 block|}
 specifier|final
-name|ArrayList
+name|List
 argument_list|<
 name|List
 argument_list|<
@@ -18391,12 +18337,7 @@ name|list
 init|=
 operator|new
 name|ArrayList
-argument_list|<
-name|List
-argument_list|<
-name|String
-argument_list|>
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 for|for
@@ -18636,9 +18577,7 @@ name|types
 init|=
 operator|new
 name|ArrayList
-argument_list|<
-name|RelDataType
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 name|sqlQuery
@@ -20218,22 +20157,14 @@ name|cursorPosToSelectMap
 operator|=
 operator|new
 name|HashMap
-argument_list|<
-name|Integer
-argument_list|,
-name|SqlSelect
-argument_list|>
+argument_list|<>
 argument_list|()
 expr_stmt|;
 name|columnListParamToParentCursorMap
 operator|=
 operator|new
 name|HashMap
-argument_list|<
-name|String
-argument_list|,
-name|String
-argument_list|>
+argument_list|<>
 argument_list|()
 expr_stmt|;
 block|}

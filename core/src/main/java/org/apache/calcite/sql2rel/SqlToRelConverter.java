@@ -2141,6 +2141,16 @@ name|java
 operator|.
 name|util
 operator|.
+name|ArrayDeque
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
 name|ArrayList
 import|;
 end_import
@@ -2162,6 +2172,16 @@ operator|.
 name|util
 operator|.
 name|Collections
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Deque
 import|;
 end_import
 
@@ -2212,16 +2232,6 @@ operator|.
 name|util
 operator|.
 name|Set
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|Stack
 import|;
 end_import
 
@@ -2463,14 +2473,14 @@ decl_stmt|;
 comment|/**    * Stack of names of datasets requested by the<code>    * TABLE(SAMPLE(&lt;datasetName&gt;,&lt;query&gt;))</code> construct.    */
 specifier|private
 specifier|final
-name|Stack
+name|Deque
 argument_list|<
 name|String
 argument_list|>
 name|datasetStack
 init|=
 operator|new
-name|Stack
+name|ArrayDeque
 argument_list|<>
 argument_list|()
 decl_stmt|;

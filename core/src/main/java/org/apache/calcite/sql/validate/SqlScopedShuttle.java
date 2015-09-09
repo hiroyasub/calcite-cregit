@@ -83,7 +83,17 @@ name|java
 operator|.
 name|util
 operator|.
-name|Stack
+name|ArrayDeque
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Deque
 import|;
 end_import
 
@@ -102,17 +112,15 @@ block|{
 comment|//~ Instance fields --------------------------------------------------------
 specifier|private
 specifier|final
-name|Stack
+name|Deque
 argument_list|<
 name|SqlValidatorScope
 argument_list|>
 name|scopes
 init|=
 operator|new
-name|Stack
-argument_list|<
-name|SqlValidatorScope
-argument_list|>
+name|ArrayDeque
+argument_list|<>
 argument_list|()
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
