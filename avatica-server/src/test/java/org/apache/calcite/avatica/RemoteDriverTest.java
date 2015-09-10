@@ -4199,6 +4199,13 @@ operator|)
 name|conn1
 argument_list|)
 decl_stmt|;
+comment|// Other tests being run might leave connections in the cache.
+comment|// The lock guards against more connections being cached during the test.
+name|connectionMap
+operator|.
+name|invalidateAll
+argument_list|()
+expr_stmt|;
 name|assertEquals
 argument_list|(
 literal|"connection cache should start empty"
