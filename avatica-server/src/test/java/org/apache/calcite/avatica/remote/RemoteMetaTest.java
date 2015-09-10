@@ -69,7 +69,7 @@ name|calcite
 operator|.
 name|avatica
 operator|.
-name|Meta
+name|ConnectionSpec
 import|;
 end_import
 
@@ -83,7 +83,7 @@ name|calcite
 operator|.
 name|avatica
 operator|.
-name|RemoteDriverTest
+name|Meta
 import|;
 end_import
 
@@ -345,13 +345,9 @@ block|{
 specifier|private
 specifier|static
 specifier|final
-name|RemoteDriverTest
-operator|.
 name|ConnectionSpec
 name|CONNECTION_SPEC
 init|=
-name|RemoteDriverTest
-operator|.
 name|ConnectionSpec
 operator|.
 name|HSQLDB
@@ -715,6 +711,14 @@ parameter_list|()
 throws|throws
 name|Exception
 block|{
+name|ConnectionSpec
+operator|.
+name|getDatabaseLock
+argument_list|()
+operator|.
+name|lock
+argument_list|()
+expr_stmt|;
 try|try
 init|(
 name|AvaticaConnection
@@ -816,6 +820,17 @@ name|close
 argument_list|()
 expr_stmt|;
 block|}
+finally|finally
+block|{
+name|ConnectionSpec
+operator|.
+name|getDatabaseLock
+argument_list|()
+operator|.
+name|unlock
+argument_list|()
+expr_stmt|;
+block|}
 block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-780">[CALCITE-780]    * HTTP error 413 when sending a long string to the Avatica server</a>. */
 annotation|@
@@ -826,6 +841,16 @@ name|testRemoteExecuteVeryLargeQuery
 parameter_list|()
 throws|throws
 name|Exception
+block|{
+name|ConnectionSpec
+operator|.
+name|getDatabaseLock
+argument_list|()
+operator|.
+name|lock
+argument_list|()
+expr_stmt|;
+try|try
 block|{
 comment|// Before the bug was fixed, a value over 7998 caused an HTTP 413.
 comment|// 16K bytes, I guess.
@@ -849,6 +874,18 @@ argument_list|(
 literal|240000
 argument_list|)
 expr_stmt|;
+block|}
+finally|finally
+block|{
+name|ConnectionSpec
+operator|.
+name|getDatabaseLock
+argument_list|()
+operator|.
+name|unlock
+argument_list|()
+expr_stmt|;
+block|}
 block|}
 specifier|private
 name|void
@@ -1046,6 +1083,14 @@ parameter_list|()
 throws|throws
 name|Exception
 block|{
+name|ConnectionSpec
+operator|.
+name|getDatabaseLock
+argument_list|()
+operator|.
+name|lock
+argument_list|()
+expr_stmt|;
 try|try
 init|(
 name|AvaticaConnection
@@ -1282,6 +1327,17 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
+block|}
+finally|finally
+block|{
+name|ConnectionSpec
+operator|.
+name|getDatabaseLock
+argument_list|()
+operator|.
+name|unlock
+argument_list|()
+expr_stmt|;
 block|}
 block|}
 block|}
