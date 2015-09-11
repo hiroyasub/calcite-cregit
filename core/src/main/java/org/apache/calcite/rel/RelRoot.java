@@ -386,6 +386,37 @@ name|EMPTY
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
+specifier|public
+name|String
+name|toString
+parameter_list|()
+block|{
+return|return
+literal|"Root {kind: "
+operator|+
+name|kind
+operator|+
+literal|", rel: "
+operator|+
+name|rel
+operator|+
+literal|", rowType: "
+operator|+
+name|validatedRowType
+operator|+
+literal|", fields: "
+operator|+
+name|fields
+operator|+
+literal|", collation: "
+operator|+
+name|collation
+operator|+
+literal|"}"
+return|;
+block|}
 comment|/** Creates a copy of this RelRoot, assigning a {@link RelNode}. */
 specifier|public
 name|RelRoot

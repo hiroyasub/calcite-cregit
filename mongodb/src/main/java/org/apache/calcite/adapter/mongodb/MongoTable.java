@@ -271,6 +271,20 @@ begin_import
 import|import
 name|com
 operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|collect
+operator|.
+name|Lists
+import|;
+end_import
+
+begin_import
+import|import
+name|com
+operator|.
 name|mongodb
 operator|.
 name|AggregationOptions
@@ -524,9 +538,7 @@ block|{
 return|return
 operator|new
 name|MongoQueryable
-argument_list|<
-name|T
-argument_list|>
+argument_list|<>
 argument_list|(
 name|queryProvider
 argument_list|,
@@ -766,9 +778,7 @@ name|list
 init|=
 operator|new
 name|ArrayList
-argument_list|<
-name|DBObject
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 specifier|final
@@ -959,21 +969,16 @@ argument_list|()
 decl_stmt|;
 comment|// Warning - this can result in a very large ArrayList!
 comment|// but you should know your data and aggregate accordingly
-name|ArrayList
+specifier|final
+name|List
 argument_list|<
 name|DBObject
 argument_list|>
 name|resultAsArrayList
 init|=
-operator|new
-name|ArrayList
-argument_list|<
-name|DBObject
-argument_list|>
-argument_list|(
-name|Util
+name|Lists
 operator|.
-name|toList
+name|newArrayList
 argument_list|(
 name|mongoDb
 operator|.
@@ -987,7 +992,6 @@ argument_list|(
 name|list
 argument_list|,
 name|options
-argument_list|)
 argument_list|)
 argument_list|)
 decl_stmt|;

@@ -445,6 +445,18 @@ begin_import
 import|import
 name|java
 operator|.
+name|lang
+operator|.
+name|reflect
+operator|.
+name|Modifier
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
 name|math
 operator|.
 name|BigDecimal
@@ -1518,9 +1530,7 @@ name|set
 init|=
 operator|new
 name|HashSet
-argument_list|<
-name|T
-argument_list|>
+argument_list|<>
 argument_list|(
 name|set1
 argument_list|)
@@ -2091,9 +2101,14 @@ control|)
 block|{
 if|if
 condition|(
+name|Modifier
+operator|.
 name|isStatic
 argument_list|(
 name|field
+operator|.
+name|getModifiers
+argument_list|()
 argument_list|)
 condition|)
 block|{
@@ -2247,10 +2262,6 @@ argument_list|(
 literal|"null"
 argument_list|)
 expr_stmt|;
-block|}
-else|else
-block|{
-comment|//pw.print("");
 block|}
 block|}
 else|else
@@ -2747,6 +2758,9 @@ argument_list|()
 return|;
 block|}
 comment|/**    * Creates a file-protocol URL for the given file.    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 specifier|static
 name|URL
@@ -2853,6 +2867,9 @@ argument_list|)
 return|;
 block|}
 comment|/**    * Gets a timestamp string for use in file names. The generated timestamp    * string reflects the current time.    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 specifier|static
 name|String
@@ -3221,6 +3238,9 @@ argument_list|)
 return|;
 block|}
 comment|/**    * Materializes the results of a {@link java.util.Iterator} as a    * {@link java.util.List}.    *    * @param iter iterator to materialize    * @return materialized list    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 specifier|static
 parameter_list|<
@@ -3247,9 +3267,7 @@ name|list
 init|=
 operator|new
 name|ArrayList
-argument_list|<
-name|T
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 while|while
@@ -3273,43 +3291,6 @@ expr_stmt|;
 block|}
 return|return
 name|list
-return|;
-block|}
-specifier|static
-name|boolean
-name|isStatic
-parameter_list|(
-name|java
-operator|.
-name|lang
-operator|.
-name|reflect
-operator|.
-name|Member
-name|member
-parameter_list|)
-block|{
-name|int
-name|modifiers
-init|=
-name|member
-operator|.
-name|getModifiers
-argument_list|()
-decl_stmt|;
-return|return
-name|java
-operator|.
-name|lang
-operator|.
-name|reflect
-operator|.
-name|Modifier
-operator|.
-name|isStatic
-argument_list|(
-name|modifiers
-argument_list|)
 return|;
 block|}
 comment|/**    * @return true if s==null or if s.length()==0    */
@@ -3616,6 +3597,9 @@ name|ae
 return|;
 block|}
 comment|/**    * Retrieves messages in a exception and writes them to a string. In the    * string returned, each message will appear on a different line.    *    * @return a non-null string containing all messages of the exception    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 specifier|static
 name|String
@@ -3711,7 +3695,10 @@ name|toString
 argument_list|()
 return|;
 block|}
-comment|/**    * Returns the stack trace of a throwable. Called from native code.    *    * @param t Throwable    * @return Stack trace    */
+comment|/**    * Returns the stack trace of a throwable. Called from native code.    *    * @param t Throwable    * @return Stack trace    *    * @deprecated Use {@link com.google.common.base.Throwables#getStackTraceAsString(Throwable)}    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 specifier|static
 name|String
@@ -3979,6 +3966,9 @@ literal|false
 return|;
 block|}
 comment|/**    * Reads all remaining contents from a {@link java.io.Reader} and returns    * them as a string.    *    * @param reader reader to read from    * @return reader contents as string    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 specifier|static
 name|String
@@ -4053,6 +4043,9 @@ argument_list|()
 return|;
 block|}
 comment|/**    * Closes a Jar, ignoring any I/O exception. This should only be    * used in finally blocks when it's necessary to avoid throwing an exception    * which might mask a real exception.    *    * @param jar jar to close    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 specifier|static
 name|void
@@ -4088,6 +4081,9 @@ comment|// intentionally suppressed
 block|}
 block|}
 comment|/**    * Closes an InputStream, ignoring any I/O exception. This should only be    * used in finally blocks when it's necessary to avoid throwing an exception    * which might mask a real exception.    *    * @param stream stream to close    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 specifier|static
 name|void
@@ -4123,6 +4119,9 @@ comment|// intentionally suppressed
 block|}
 block|}
 comment|/**    * Closes an OutputStream, ignoring any I/O exception. This should only be    * used in finally blocks when it's necessary to avoid throwing an exception    * which might mask a real exception. If you want to make sure that data has    * been successfully flushed, do NOT use this anywhere else; use    * stream.close() instead.    *    * @param stream stream to close    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 specifier|static
 name|void
@@ -4158,6 +4157,9 @@ comment|// intentionally suppressed
 block|}
 block|}
 comment|/**    * Closes a Reader, ignoring any I/O exception. This should only be used in    * finally blocks when it's necessary to avoid throwing an exception which    * might mask a real exception.    *    * @param reader reader to close    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 specifier|static
 name|void
@@ -4193,6 +4195,9 @@ comment|// intentionally suppressed
 block|}
 block|}
 comment|/**    * Closes a Writer, ignoring any I/O exception. This should only be used in    * finally blocks when it's necessary to avoid throwing an exception which    * might mask a real exception. If you want to make sure that data has been    * successfully flushed, do NOT use this anywhere else; use writer.close()    * instead.    *    * @param writer writer to close    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 specifier|static
 name|void
@@ -4228,6 +4233,9 @@ comment|// intentionally suppressed
 block|}
 block|}
 comment|/**    * Closes a Statement, ignoring any SQL exception. This should only be used    * in finally blocks when it's necessary to avoid throwing an exception    * which might mask a real exception.    *    * @param stmt stmt to close    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 specifier|static
 name|void
@@ -4263,6 +4271,9 @@ comment|// intentionally suppressed
 block|}
 block|}
 comment|/**    * Closes a Connection, ignoring any SQL exception. This should only be used    * in finally blocks when it's necessary to avoid throwing an exception    * which might mask a real exception.    *    * @param connection connection to close    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 specifier|static
 name|void
@@ -4298,6 +4309,9 @@ comment|// intentionally suppressed
 block|}
 block|}
 comment|/**    * Trims trailing spaces from a string.    *    * @param s string to be trimmed    * @return trimmed string    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 specifier|static
 name|String
@@ -4382,6 +4396,9 @@ literal|""
 return|;
 block|}
 comment|/**    * Pads a string with spaces up to a given length.    *    * @param s   string to be padded    * @param len desired length    * @return padded string    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 specifier|static
 name|String
@@ -5539,6 +5556,9 @@ throw|;
 block|}
 block|}
 comment|/**    * Runs an external application.    *    * @param cmdarray  command and arguments, see {@link ProcessBuilder}    * @param logger    if not null, command and exit status will be logged    * @param appInput  if not null, data will be copied to application's stdin    * @param appOutput if not null, data will be captured from application's    *                  stdout and stderr    * @return application process exit value    * @throws IOException    * @throws InterruptedException    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 specifier|static
 name|int
@@ -5579,6 +5599,9 @@ argument_list|)
 return|;
 block|}
 comment|/**    * Constructs a {@link ProcessBuilder} to run an external application.    *    * @param cmdarray command and arguments.    * @return a ProcessBuilder.    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 specifier|static
 name|ProcessBuilder
@@ -6095,8 +6118,6 @@ specifier|final
 name|Iterable
 argument_list|<
 name|?
-extends|extends
-name|Object
 argument_list|>
 name|iterable
 parameter_list|,
@@ -6127,9 +6148,7 @@ block|{
 return|return
 operator|new
 name|Filterator
-argument_list|<
-name|E
-argument_list|>
+argument_list|<>
 argument_list|(
 name|iterable
 operator|.
@@ -6195,9 +6214,7 @@ block|{
 return|return
 operator|new
 name|Filterator
-argument_list|<
-name|E
-argument_list|>
+argument_list|<>
 argument_list|(
 name|collection
 operator|.
@@ -6230,28 +6247,14 @@ name|s
 init|=
 literal|0
 decl_stmt|;
-name|Iterator
-argument_list|<
+for|for
+control|(
 name|E
-argument_list|>
-name|iter
-init|=
-name|iterator
-argument_list|()
-decl_stmt|;
-while|while
-condition|(
-name|iter
-operator|.
-name|hasNext
-argument_list|()
-condition|)
+name|e
+range|:
+name|this
+control|)
 block|{
-name|iter
-operator|.
-name|next
-argument_list|()
-expr_stmt|;
 name|s
 operator|++
 expr_stmt|;
@@ -6303,9 +6306,7 @@ name|result
 init|=
 operator|new
 name|ArrayList
-argument_list|<
-name|E
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 for|for
@@ -6360,6 +6361,7 @@ name|Properties
 name|properties
 parameter_list|)
 block|{
+comment|//noinspection unchecked
 return|return
 operator|(
 name|Map
@@ -6405,11 +6407,7 @@ name|map
 init|=
 operator|new
 name|LinkedHashMap
-argument_list|<
-name|K
-argument_list|,
-name|V
-argument_list|>
+argument_list|<>
 argument_list|(
 literal|1
 operator|+
@@ -7528,11 +7526,7 @@ name|set
 init|=
 operator|new
 name|HashMap
-argument_list|<
-name|E
-argument_list|,
-name|Object
-argument_list|>
+argument_list|<>
 argument_list|(
 name|size
 argument_list|)
@@ -8762,6 +8756,11 @@ name|Object
 name|node
 decl_stmt|;
 comment|/** Singleton instance. Can be used if you don't care about node. */
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"ThrowableInstanceNeverThrown"
+argument_list|)
 specifier|public
 specifier|static
 specifier|final
