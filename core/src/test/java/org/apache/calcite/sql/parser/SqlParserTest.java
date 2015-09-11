@@ -14502,19 +14502,6 @@ literal|"SYSTEM"
 argument_list|)
 argument_list|)
 expr_stmt|;
-name|assertThat
-argument_list|(
-name|opt
-operator|.
-name|getName
-argument_list|()
-argument_list|,
-name|equalTo
-argument_list|(
-literal|"SCHEMA"
-argument_list|)
-argument_list|)
-expr_stmt|;
 name|SqlPrettyWriter
 name|writer
 init|=
@@ -14526,6 +14513,34 @@ operator|.
 name|CALCITE
 argument_list|)
 decl_stmt|;
+name|assertThat
+argument_list|(
+name|writer
+operator|.
+name|format
+argument_list|(
+name|opt
+operator|.
+name|getName
+argument_list|()
+argument_list|)
+argument_list|,
+name|equalTo
+argument_list|(
+literal|"\"SCHEMA\""
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|writer
+operator|=
+operator|new
+name|SqlPrettyWriter
+argument_list|(
+name|SqlDialect
+operator|.
+name|CALCITE
+argument_list|)
+expr_stmt|;
 name|assertThat
 argument_list|(
 name|writer
@@ -14609,6 +14624,153 @@ argument_list|(
 literal|"alter system set baz = foo"
 argument_list|,
 literal|"ALTER SYSTEM SET `BAZ` = `FOO`"
+argument_list|)
+expr_stmt|;
+name|check
+argument_list|(
+literal|"alter system set \"a\".\"number\" = 1"
+argument_list|,
+literal|"ALTER SYSTEM SET `a`.`number` = 1"
+argument_list|)
+expr_stmt|;
+name|check
+argument_list|(
+literal|"set approx = -12.3450"
+argument_list|,
+literal|"SET `APPROX` = -12.3450"
+argument_list|)
+expr_stmt|;
+name|node
+operator|=
+name|SqlParser
+operator|.
+name|create
+argument_list|(
+literal|"reset schema"
+argument_list|)
+operator|.
+name|parseStmt
+argument_list|()
+expr_stmt|;
+name|opt
+operator|=
+operator|(
+name|SqlSetOption
+operator|)
+name|node
+expr_stmt|;
+name|assertThat
+argument_list|(
+name|opt
+operator|.
+name|getScope
+argument_list|()
+argument_list|,
+name|equalTo
+argument_list|(
+literal|null
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|writer
+operator|=
+operator|new
+name|SqlPrettyWriter
+argument_list|(
+name|SqlDialect
+operator|.
+name|CALCITE
+argument_list|)
+expr_stmt|;
+name|assertThat
+argument_list|(
+name|writer
+operator|.
+name|format
+argument_list|(
+name|opt
+operator|.
+name|getName
+argument_list|()
+argument_list|)
+argument_list|,
+name|equalTo
+argument_list|(
+literal|"\"SCHEMA\""
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|assertThat
+argument_list|(
+name|opt
+operator|.
+name|getValue
+argument_list|()
+argument_list|,
+name|equalTo
+argument_list|(
+literal|null
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|writer
+operator|=
+operator|new
+name|SqlPrettyWriter
+argument_list|(
+name|SqlDialect
+operator|.
+name|CALCITE
+argument_list|)
+expr_stmt|;
+name|assertThat
+argument_list|(
+name|writer
+operator|.
+name|format
+argument_list|(
+name|opt
+argument_list|)
+argument_list|,
+name|equalTo
+argument_list|(
+literal|"RESET \"SCHEMA\""
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|check
+argument_list|(
+literal|"alter system RESET flag"
+argument_list|,
+literal|"ALTER SYSTEM RESET `FLAG`"
+argument_list|)
+expr_stmt|;
+name|check
+argument_list|(
+literal|"reset onOff"
+argument_list|,
+literal|"RESET `ONOFF`"
+argument_list|)
+expr_stmt|;
+name|check
+argument_list|(
+literal|"reset \"this\".\"is\".\"sparta\""
+argument_list|,
+literal|"RESET `this`.`is`.`sparta`"
+argument_list|)
+expr_stmt|;
+name|check
+argument_list|(
+literal|"alter system reset all"
+argument_list|,
+literal|"ALTER SYSTEM RESET `ALL`"
+argument_list|)
+expr_stmt|;
+name|check
+argument_list|(
+literal|"reset all"
+argument_list|,
+literal|"RESET `ALL`"
 argument_list|)
 expr_stmt|;
 comment|// expressions not allowed
