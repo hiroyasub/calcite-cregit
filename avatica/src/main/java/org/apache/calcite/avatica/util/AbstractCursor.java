@@ -3047,6 +3047,30 @@ index|[]
 name|getBytes
 parameter_list|()
 block|{
+comment|// JSON sends this as a base64-enc string, protobuf can do binary.
+name|Object
+name|obj
+init|=
+name|getObject
+argument_list|()
+decl_stmt|;
+if|if
+condition|(
+name|obj
+operator|instanceof
+name|byte
+index|[]
+condition|)
+block|{
+comment|// If we already have bytes, just send them back.
+return|return
+operator|(
+name|byte
+index|[]
+operator|)
+name|obj
+return|;
+block|}
 specifier|final
 name|String
 name|string

@@ -177,6 +177,25 @@ name|getString
 argument_list|()
 return|;
 block|}
+specifier|public
+name|String
+name|serialization
+parameter_list|()
+block|{
+return|return
+name|BuiltInConnectionProperty
+operator|.
+name|SERIALIZATION
+operator|.
+name|wrap
+argument_list|(
+name|properties
+argument_list|)
+operator|.
+name|getString
+argument_list|()
+return|;
+block|}
 comment|/** Converts a {@link Properties} object containing (name, value)    * pairs into a map whose keys are    * {@link org.apache.calcite.avatica.InternalProperty} objects.    *    *<p>Matching is case-insensitive. Throws if a property is not known.    * If a property occurs more than once, takes the last occurrence.</p>    *    * @param properties Properties    * @return Map    * @throws RuntimeException if a property is not known    */
 specifier|public
 specifier|static

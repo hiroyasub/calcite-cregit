@@ -18,18 +18,21 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * API for text request-response calls to an Avatica server.  */
+comment|/**  * API for text request-response calls to an Avatica server.  *  * @param<T> The type this handler accepts and returns  */
 end_comment
 
 begin_interface
 specifier|public
 interface|interface
 name|Handler
+parameter_list|<
+name|T
+parameter_list|>
 block|{
-name|String
+name|T
 name|apply
 parameter_list|(
-name|String
+name|T
 name|request
 parameter_list|)
 function_decl|;

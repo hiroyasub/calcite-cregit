@@ -143,6 +143,20 @@ literal|null
 argument_list|,
 literal|false
 argument_list|)
+block|,
+comment|/** Serialization used over remote connections */
+name|SERIALIZATION
+argument_list|(
+literal|"serialization"
+argument_list|,
+name|Type
+operator|.
+name|STRING
+argument_list|,
+literal|"json"
+argument_list|,
+literal|false
+argument_list|)
 block|;
 specifier|private
 specifier|final

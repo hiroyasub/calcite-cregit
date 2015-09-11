@@ -58,6 +58,10 @@ name|String
 name|url
 parameter_list|()
 function_decl|;
+name|String
+name|serialization
+parameter_list|()
+function_decl|;
 block|}
 end_interface
 
