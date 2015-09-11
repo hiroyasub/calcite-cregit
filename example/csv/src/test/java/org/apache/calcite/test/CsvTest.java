@@ -693,9 +693,9 @@ literal|" CHAR_LENGTH(CAST(_MAP['title'] AS VARCHAR(30))) as len\n"
 operator|+
 literal|" from \"archers\""
 argument_list|,
-literal|"ID=19990101; TITLE=Washday blues.; LEN=14"
+literal|"ID=19990101; TITLE=Tractor trouble.; LEN=16"
 argument_list|,
-literal|"ID=19990103; TITLE=Daniel creates a drama.; LEN=23"
+literal|"ID=19990103; TITLE=Charlie's surprise.; LEN=19"
 argument_list|)
 expr_stmt|;
 block|}
