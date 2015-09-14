@@ -1714,12 +1714,7 @@ name|TResult
 parameter_list|>
 name|Queryable
 argument_list|<
-name|Grouping
-argument_list|<
-name|TKey
-argument_list|,
 name|TResult
-argument_list|>
 argument_list|>
 name|groupByK
 parameter_list|(
@@ -1754,7 +1749,7 @@ argument_list|,
 name|TResult
 argument_list|>
 argument_list|>
-name|elementSelector
+name|resultSelector
 parameter_list|)
 block|{
 throw|throw
