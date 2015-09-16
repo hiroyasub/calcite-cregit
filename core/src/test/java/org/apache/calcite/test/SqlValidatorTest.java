@@ -16254,6 +16254,49 @@ literal|"select localtime, deptno + 3 from emp group by deptno"
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-886">[CALCITE-886]    * System functions in GROUP BY clause</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testGroupBySystemFunction
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"select CURRENT_USER from emp group by CURRENT_USER"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select CURRENT_USER from emp group by rollup(CURRENT_USER)"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select CURRENT_USER from emp group by rollup(CURRENT_USER, ^x^)"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Column 'X' not found in any table"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select CURRENT_USER from emp group by deptno"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
 annotation|@
 name|Test
 specifier|public

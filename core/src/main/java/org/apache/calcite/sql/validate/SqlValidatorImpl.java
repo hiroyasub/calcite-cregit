@@ -14835,7 +14835,35 @@ argument_list|,
 name|groupList
 argument_list|)
 expr_stmt|;
+comment|// Nodes in the GROUP BY clause are expressions except if they are calls
+comment|// to the GROUPING SETS, ROLLUP or CUBE operators; this operators are not
+comment|// expressions, because they do not have a type.
+for|for
+control|(
+name|SqlNode
+name|node
+range|:
 name|groupList
+control|)
+block|{
+switch|switch
+condition|(
+name|node
+operator|.
+name|getKind
+argument_list|()
+condition|)
+block|{
+case|case
+name|GROUPING_SETS
+case|:
+case|case
+name|ROLLUP
+case|:
+case|case
+name|CUBE
+case|:
+name|node
 operator|.
 name|validate
 argument_list|(
@@ -14844,6 +14872,19 @@ argument_list|,
 name|groupScope
 argument_list|)
 expr_stmt|;
+break|break;
+default|default:
+name|node
+operator|.
+name|validateExpr
+argument_list|(
+name|this
+argument_list|,
+name|groupScope
+argument_list|)
+expr_stmt|;
+block|}
+block|}
 comment|// Derive the type of each GROUP BY item. We don't need the type, but
 comment|// it resolves functions, and that is necessary for deducing
 comment|// monotonicity.
