@@ -1840,6 +1840,8 @@ name|setOperand
 argument_list|(
 name|partitionListNew
 argument_list|,
+name|that
+operator|.
 name|partitionList
 argument_list|,
 name|validator
