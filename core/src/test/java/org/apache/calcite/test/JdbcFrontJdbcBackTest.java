@@ -682,11 +682,11 @@ operator|+
 literal|"and \"time_id\"< 400"
 argument_list|)
 operator|.
-name|returns
+name|returns2
 argument_list|(
-literal|"c0=11.4000\n"
+literal|"c0=11.4\n"
 operator|+
-literal|"c0=8.5500\n"
+literal|"c0=8.55\n"
 argument_list|)
 expr_stmt|;
 block|}

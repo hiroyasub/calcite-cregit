@@ -496,13 +496,13 @@ operator|+
 literal|"order by c.\"state_province\""
 argument_list|)
 operator|.
-name|returns
+name|returns2
 argument_list|(
-literal|"EXPR$0=24442; state_province=CA; S=74748.0000\n"
+literal|"EXPR$0=24442; state_province=CA; S=74748\n"
 operator|+
-literal|"EXPR$0=21611; state_province=OR; S=67659.0000\n"
+literal|"EXPR$0=21611; state_province=OR; S=67659\n"
 operator|+
-literal|"EXPR$0=40784; state_province=WA; S=124366.0000\n"
+literal|"EXPR$0=40784; state_province=WA; S=124366\n"
 argument_list|)
 expr_stmt|;
 block|}

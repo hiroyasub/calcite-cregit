@@ -2051,8 +2051,10 @@ literal|"       type: 'jdbc',\n"
 operator|+
 literal|"       name: 'foodmart',\n"
 operator|+
-literal|"       jdbcDriver: '"
+literal|"       jdbcDriver: "
 operator|+
+name|q
+argument_list|(
 name|CalciteAssert
 operator|.
 name|DB
@@ -2060,11 +2062,14 @@ operator|.
 name|foodmart
 operator|.
 name|driver
+argument_list|)
 operator|+
-literal|"',\n"
+literal|",\n"
 operator|+
-literal|"       jdbcUser: '"
+literal|"       jdbcUser: "
 operator|+
+name|q
+argument_list|(
 name|CalciteAssert
 operator|.
 name|DB
@@ -2072,11 +2077,14 @@ operator|.
 name|foodmart
 operator|.
 name|username
+argument_list|)
 operator|+
-literal|"',\n"
+literal|",\n"
 operator|+
-literal|"       jdbcPassword: '"
+literal|"       jdbcPassword: "
 operator|+
+name|q
+argument_list|(
 name|CalciteAssert
 operator|.
 name|DB
@@ -2084,11 +2092,14 @@ operator|.
 name|foodmart
 operator|.
 name|password
+argument_list|)
 operator|+
-literal|"',\n"
+literal|",\n"
 operator|+
-literal|"       jdbcUrl: '"
+literal|"       jdbcUrl: "
 operator|+
+name|q
+argument_list|(
 name|CalciteAssert
 operator|.
 name|DB
@@ -2096,12 +2107,39 @@ operator|.
 name|foodmart
 operator|.
 name|url
+argument_list|)
 operator|+
-literal|"',\n"
+literal|",\n"
 operator|+
-literal|"       jdbcCatalog: null,\n"
+literal|"       jdbcCatalog: "
 operator|+
-literal|"       jdbcSchema: 'foodmart'\n"
+name|q
+argument_list|(
+name|CalciteAssert
+operator|.
+name|DB
+operator|.
+name|foodmart
+operator|.
+name|catalog
+argument_list|)
+operator|+
+literal|",\n"
+operator|+
+literal|"       jdbcSchema: "
+operator|+
+name|q
+argument_list|(
+name|CalciteAssert
+operator|.
+name|DB
+operator|.
+name|foodmart
+operator|.
+name|schema
+argument_list|)
+operator|+
+literal|"\n"
 operator|+
 literal|"     }\n"
 decl_stmt|;
@@ -2162,41 +2200,71 @@ literal|"       type: 'jdbc',\n"
 operator|+
 literal|"       name: 'SCOTT',\n"
 operator|+
-literal|"       jdbcDriver: '"
+literal|"       jdbcDriver: "
 operator|+
+name|q
+argument_list|(
 name|SCOTT
 operator|.
 name|driver
+argument_list|)
 operator|+
-literal|"',\n"
+literal|",\n"
 operator|+
-literal|"       jdbcUser: '"
+literal|"       jdbcUser: "
 operator|+
+name|q
+argument_list|(
 name|SCOTT
 operator|.
 name|username
+argument_list|)
 operator|+
-literal|"',\n"
+literal|",\n"
 operator|+
-literal|"       jdbcPassword: '"
+literal|"       jdbcPassword: "
 operator|+
+name|q
+argument_list|(
 name|SCOTT
 operator|.
 name|password
+argument_list|)
 operator|+
-literal|"',\n"
+literal|",\n"
 operator|+
-literal|"       jdbcUrl: '"
+literal|"       jdbcUrl: "
 operator|+
+name|q
+argument_list|(
 name|SCOTT
 operator|.
 name|url
+argument_list|)
 operator|+
-literal|"',\n"
+literal|",\n"
 operator|+
-literal|"       jdbcCatalog: null,\n"
+literal|"       jdbcCatalog: "
 operator|+
-literal|"       jdbcSchema: 'SCOTT'\n"
+name|q
+argument_list|(
+name|SCOTT
+operator|.
+name|catalog
+argument_list|)
+operator|+
+literal|",\n"
+operator|+
+literal|"       jdbcSchema: "
+operator|+
+name|q
+argument_list|(
+name|SCOTT
+operator|.
+name|schema
+argument_list|)
+operator|+
+literal|"\n"
 operator|+
 literal|"     }\n"
 decl_stmt|;
@@ -2308,6 +2376,29 @@ literal|"(8,1,4))\n"
 operator|+
 literal|" as t(rn,val,expected)"
 decl_stmt|;
+specifier|private
+specifier|static
+name|String
+name|q
+parameter_list|(
+name|String
+name|s
+parameter_list|)
+block|{
+return|return
+name|s
+operator|==
+literal|null
+condition|?
+literal|"null"
+else|:
+literal|"'"
+operator|+
+name|s
+operator|+
+literal|"'"
+return|;
+block|}
 specifier|public
 specifier|static
 name|List
@@ -8609,7 +8700,20 @@ operator|+
 literal|"  and \"gender\" = 'F')"
 argument_list|)
 operator|.
-name|returns
+name|enable
+argument_list|(
+name|CalciteAssert
+operator|.
+name|DB
+operator|!=
+name|CalciteAssert
+operator|.
+name|DatabaseInstance
+operator|.
+name|ORACLE
+argument_list|)
+operator|.
+name|returns2
 argument_list|(
 literal|"C=1\n"
 argument_list|)
@@ -11470,9 +11574,9 @@ argument_list|(
 literal|"select \"hire_date\", \"end_date\", \"birth_date\" from \"foodmart\".\"employee\" where \"employee_id\" = 1"
 argument_list|)
 operator|.
-name|returns
+name|returns2
 argument_list|(
-literal|"hire_date=1994-12-01 00:00:00; end_date=null; birth_date=1961-08-26\n"
+literal|"hire_date=1994-12-01; end_date=null; birth_date=1961-08-26\n"
 argument_list|)
 expr_stmt|;
 block|}
@@ -12321,6 +12425,19 @@ operator|.
 name|query
 argument_list|(
 name|s
+argument_list|)
+operator|.
+name|enable
+argument_list|(
+name|CalciteAssert
+operator|.
+name|DB
+operator|!=
+name|CalciteAssert
+operator|.
+name|DatabaseInstance
+operator|.
+name|ORACLE
 argument_list|)
 operator|.
 name|explainContains
@@ -16410,6 +16527,19 @@ operator|+
 literal|"where \"lname\" = 'this string is longer than 30 characters'"
 argument_list|)
 operator|.
+name|enable
+argument_list|(
+name|CalciteAssert
+operator|.
+name|DB
+operator|!=
+name|CalciteAssert
+operator|.
+name|DatabaseInstance
+operator|.
+name|ORACLE
+argument_list|)
+operator|.
 name|returns
 argument_list|(
 literal|"C=0\n"
@@ -16427,6 +16557,19 @@ argument_list|(
 literal|"select count(*) as c from \"customer\" "
 operator|+
 literal|"where cast(\"customer_id\" as char(20)) = 'this string is longer than 30 characters'"
+argument_list|)
+operator|.
+name|enable
+argument_list|(
+name|CalciteAssert
+operator|.
+name|DB
+operator|!=
+name|CalciteAssert
+operator|.
+name|DatabaseInstance
+operator|.
+name|ORACLE
 argument_list|)
 operator|.
 name|returns
@@ -17177,6 +17320,20 @@ parameter_list|()
 throws|throws
 name|Exception
 block|{
+switch|switch
+condition|(
+name|CalciteAssert
+operator|.
+name|DB
+condition|)
+block|{
+case|case
+name|ORACLE
+case|:
+comment|// There are formatting differences (e.g. "4.000" vs "4") when using
+comment|// Oracle as the JDBC data source.
+return|return;
+block|}
 name|checkRun
 argument_list|(
 literal|"sql/misc.oq"
@@ -22573,7 +22730,7 @@ argument_list|(
 literal|"select min(\"date\") mindate from \"foodmart\".\"currency\""
 argument_list|)
 operator|.
-name|returns
+name|returns2
 argument_list|(
 literal|"MINDATE=1997-01-01\n"
 argument_list|)
