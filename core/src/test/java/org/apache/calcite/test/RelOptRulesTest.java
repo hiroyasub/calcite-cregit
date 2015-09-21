@@ -7545,7 +7545,9 @@ literal|"  min(sal) as min_sal, min(e.deptno) as min_deptno,\n"
 operator|+
 literal|"  sum(sal) + 1 as sum_sal_plus, max(sal) as max_sal,\n"
 operator|+
-literal|"  sum(sal) as sum_sal_2, count(sal) as count_sal\n"
+literal|"  sum(sal) as sum_sal_2, count(sal) as count_sal,\n"
+operator|+
+literal|"  count(mgr) as count_mgr\n"
 operator|+
 literal|"from sales.emp as e\n"
 operator|+
