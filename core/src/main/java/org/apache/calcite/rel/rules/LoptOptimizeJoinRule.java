@@ -161,22 +161,6 @@ name|rel
 operator|.
 name|core
 operator|.
-name|Project
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|rel
-operator|.
-name|core
-operator|.
 name|RelFactories
 import|;
 end_import
@@ -387,6 +371,34 @@ name|apache
 operator|.
 name|calcite
 operator|.
+name|tools
+operator|.
+name|RelBuilder
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|tools
+operator|.
+name|RelBuilderFactory
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
 name|util
 operator|.
 name|BitSets
@@ -448,20 +460,6 @@ operator|.
 name|mapping
 operator|.
 name|IntPair
-import|;
-end_import
-
-begin_import
-import|import
-name|com
-operator|.
-name|google
-operator|.
-name|common
-operator|.
-name|collect
-operator|.
-name|ImmutableSet
 import|;
 end_import
 
@@ -591,39 +589,38 @@ name|LoptOptimizeJoinRule
 argument_list|(
 name|RelFactories
 operator|.
-name|DEFAULT_JOIN_FACTORY
-argument_list|,
-name|RelFactories
-operator|.
-name|DEFAULT_PROJECT_FACTORY
-argument_list|,
-name|RelFactories
-operator|.
-name|DEFAULT_FILTER_FACTORY
+name|LOGICAL_BUILDER
 argument_list|)
 decl_stmt|;
-specifier|private
-specifier|final
-name|RelFactories
-operator|.
-name|JoinFactory
-name|joinFactory
-decl_stmt|;
-specifier|private
-specifier|final
-name|RelFactories
-operator|.
-name|ProjectFactory
-name|projectFactory
-decl_stmt|;
-specifier|private
-specifier|final
-name|RelFactories
-operator|.
-name|FilterFactory
-name|filterFactory
-decl_stmt|;
 comment|/** Creates a LoptOptimizeJoinRule. */
+specifier|public
+name|LoptOptimizeJoinRule
+parameter_list|(
+name|RelBuilderFactory
+name|relBuilderFactory
+parameter_list|)
+block|{
+name|super
+argument_list|(
+name|operand
+argument_list|(
+name|MultiJoin
+operator|.
+name|class
+argument_list|,
+name|any
+argument_list|()
+argument_list|)
+argument_list|,
+name|relBuilderFactory
+argument_list|,
+literal|null
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 name|LoptOptimizeJoinRule
 parameter_list|(
@@ -643,40 +640,22 @@ name|FilterFactory
 name|filterFactory
 parameter_list|)
 block|{
-name|super
+name|this
 argument_list|(
-name|operand
-argument_list|(
-name|MultiJoin
+name|RelBuilder
 operator|.
-name|class
+name|proto
+argument_list|(
+name|joinFactory
 argument_list|,
-name|any
-argument_list|()
+name|projectFactory
+argument_list|,
+name|filterFactory
 argument_list|)
 argument_list|)
-expr_stmt|;
-name|this
-operator|.
-name|joinFactory
-operator|=
-name|joinFactory
-expr_stmt|;
-name|this
-operator|.
-name|projectFactory
-operator|=
-name|projectFactory
-expr_stmt|;
-name|this
-operator|.
-name|filterFactory
-operator|=
-name|filterFactory
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|// implement RelOptRule
 specifier|public
 name|void
 name|onMatch
@@ -797,6 +776,11 @@ argument_list|)
 expr_stmt|;
 name|findBestOrderings
 argument_list|(
+name|call
+operator|.
+name|builder
+argument_list|()
+argument_list|,
 name|multiJoin
 argument_list|,
 name|semiJoinOpt
@@ -814,6 +798,7 @@ name|LoptMultiJoin
 name|multiJoin
 parameter_list|)
 block|{
+specifier|final
 name|List
 argument_list|<
 name|Integer
@@ -822,9 +807,7 @@ name|removalCandidates
 init|=
 operator|new
 name|ArrayList
-argument_list|<
-name|Integer
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 for|for
@@ -873,6 +856,7 @@ name|isEmpty
 argument_list|()
 condition|)
 block|{
+specifier|final
 name|Set
 argument_list|<
 name|Integer
@@ -881,9 +865,7 @@ name|retryCandidates
 init|=
 operator|new
 name|HashSet
-argument_list|<
-name|Integer
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 name|outerForLoop
@@ -941,6 +923,7 @@ argument_list|(
 name|factIdx
 argument_list|)
 decl_stmt|;
+specifier|final
 name|List
 argument_list|<
 name|RexNode
@@ -949,9 +932,7 @@ name|ojFilters
 init|=
 operator|new
 name|ArrayList
-argument_list|<
-name|RexNode
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 name|RelOptUtil
@@ -1490,6 +1471,7 @@ decl_stmt|;
 comment|// See if a simple factor is repeated and therefore potentially is
 comment|// part of a self-join.  Restrict each factor to at most one
 comment|// self-join.
+specifier|final
 name|List
 argument_list|<
 name|RelOptTable
@@ -1498,11 +1480,10 @@ name|repeatedTables
 init|=
 operator|new
 name|ArrayList
-argument_list|<
-name|RelOptTable
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
+specifier|final
 name|TreeSet
 argument_list|<
 name|Integer
@@ -1511,9 +1492,7 @@ name|sortedFactors
 init|=
 operator|new
 name|TreeSet
-argument_list|<
-name|Integer
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 name|sortedFactors
@@ -1526,6 +1505,7 @@ name|keySet
 argument_list|()
 argument_list|)
 expr_stmt|;
+specifier|final
 name|Map
 argument_list|<
 name|Integer
@@ -1536,11 +1516,7 @@ name|selfJoinPairs
 init|=
 operator|new
 name|HashMap
-argument_list|<
-name|Integer
-argument_list|,
-name|Integer
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 name|Integer
@@ -1708,6 +1684,7 @@ argument_list|(
 name|factor1
 argument_list|)
 decl_stmt|;
+specifier|final
 name|List
 argument_list|<
 name|RexNode
@@ -1716,9 +1693,7 @@ name|selfJoinFilters
 init|=
 operator|new
 name|ArrayList
-argument_list|<
-name|RexNode
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 for|for
@@ -1826,6 +1801,7 @@ name|LoptMultiJoin
 name|multiJoin
 parameter_list|)
 block|{
+specifier|final
 name|Map
 argument_list|<
 name|Integer
@@ -1836,11 +1812,7 @@ name|returnList
 init|=
 operator|new
 name|HashMap
-argument_list|<
-name|Integer
-argument_list|,
-name|RelOptTable
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 comment|// Loop through all join factors and locate the ones where each
@@ -2177,6 +2149,9 @@ specifier|private
 name|void
 name|findBestOrderings
 parameter_list|(
+name|RelBuilder
+name|relBuilder
+parameter_list|,
 name|LoptMultiJoin
 name|multiJoin
 parameter_list|,
@@ -2187,6 +2162,7 @@ name|RelOptRuleCall
 name|call
 parameter_list|)
 block|{
+specifier|final
 name|List
 argument_list|<
 name|RelNode
@@ -2195,9 +2171,7 @@ name|plans
 init|=
 operator|new
 name|ArrayList
-argument_list|<
-name|RelNode
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 name|List
@@ -2254,6 +2228,8 @@ name|joinTree
 init|=
 name|createOrdering
 argument_list|(
+name|relBuilder
+argument_list|,
 name|multiJoin
 argument_list|,
 name|semiJoinOpt
@@ -2275,6 +2251,11 @@ name|newProject
 init|=
 name|createTopProject
 argument_list|(
+name|call
+operator|.
+name|builder
+argument_list|()
+argument_list|,
 name|multiJoin
 argument_list|,
 name|joinTree
@@ -2317,6 +2298,9 @@ specifier|private
 name|RelNode
 name|createTopProject
 parameter_list|(
+name|RelBuilder
+name|relBuilder
+parameter_list|,
 name|LoptMultiJoin
 name|multiJoin
 parameter_list|,
@@ -2390,6 +2374,7 @@ argument_list|()
 decl_stmt|;
 comment|// create a mapping from each factor to its field offset in the join
 comment|// ordering
+specifier|final
 name|Map
 argument_list|<
 name|Integer
@@ -2400,11 +2385,7 @@ name|factorToOffsetMap
 init|=
 operator|new
 name|HashMap
-argument_list|<
-name|Integer
-argument_list|,
-name|Integer
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 for|for
@@ -2596,26 +2577,25 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-name|Project
-name|newProject
-init|=
-operator|(
-name|Project
-operator|)
-name|projectFactory
+name|relBuilder
 operator|.
-name|createProject
+name|push
 argument_list|(
 name|joinTree
 operator|.
 name|getJoinTree
 argument_list|()
-argument_list|,
+argument_list|)
+expr_stmt|;
+name|relBuilder
+operator|.
+name|project
+argument_list|(
 name|newProjExprs
 argument_list|,
 name|fieldNames
 argument_list|)
-decl_stmt|;
+expr_stmt|;
 comment|// Place the post-join filter (if it exists) on top of the final
 comment|// projection.
 name|RexNode
@@ -2636,23 +2616,20 @@ operator|!=
 literal|null
 condition|)
 block|{
-return|return
-name|filterFactory
+name|relBuilder
 operator|.
-name|createFilter
+name|filter
 argument_list|(
-name|newProject
-argument_list|,
 name|postJoinFilter
 argument_list|)
-return|;
+expr_stmt|;
 block|}
-else|else
-block|{
 return|return
-name|newProject
+name|relBuilder
+operator|.
+name|build
+argument_list|()
 return|;
-block|}
 block|}
 comment|/**    * Computes the cardinality of the join columns from a particular factor,    * when that factor is joined with another join tree.    *    * @param multiJoin join factors being optimized    * @param semiJoinOpt optimal semijoins chosen for each factor    * @param joinTree the join tree that the factor is being joined with    * @param filters possible join filters to select from    * @param factor the factor being added    *    * @return computed cardinality    */
 specifier|private
@@ -2948,6 +2925,9 @@ specifier|private
 name|LoptJoinTree
 name|createOrdering
 parameter_list|(
+name|RelBuilder
+name|relBuilder
+parameter_list|,
 name|LoptMultiJoin
 name|multiJoin
 parameter_list|,
@@ -2992,6 +2972,7 @@ argument_list|(
 name|nJoinFactors
 argument_list|)
 decl_stmt|;
+specifier|final
 name|List
 argument_list|<
 name|RexNode
@@ -3000,9 +2981,7 @@ name|filtersToAdd
 init|=
 operator|new
 name|ArrayList
-argument_list|<
-name|RexNode
-argument_list|>
+argument_list|<>
 argument_list|(
 name|multiJoin
 operator|.
@@ -3165,6 +3144,8 @@ name|joinTree
 operator|=
 name|addFactorToTree
 argument_list|(
+name|relBuilder
+argument_list|,
 name|multiJoin
 argument_list|,
 name|semiJoinOpt
@@ -3557,6 +3538,9 @@ specifier|private
 name|LoptJoinTree
 name|addFactorToTree
 parameter_list|(
+name|RelBuilder
+name|relBuilder
+parameter_list|,
 name|LoptMultiJoin
 name|multiJoin
 parameter_list|,
@@ -3597,6 +3581,8 @@ block|{
 return|return
 name|createReplacementJoin
 argument_list|(
+name|relBuilder
+argument_list|,
 name|multiJoin
 argument_list|,
 name|semiJoinOpt
@@ -3637,6 +3623,8 @@ block|{
 return|return
 name|createReplacementSemiJoin
 argument_list|(
+name|relBuilder
+argument_list|,
 name|multiJoin
 argument_list|,
 name|semiJoinOpt
@@ -3678,6 +3666,7 @@ comment|// original list to pass into addToTop().  However, if no tree was
 comment|// created by addToTop() because the factor being added is part of
 comment|// a self-join, then pass the original filter list so the added
 comment|// filters will still be removed from the list.
+specifier|final
 name|List
 argument_list|<
 name|RexNode
@@ -3686,9 +3675,7 @@ name|tmpFilters
 init|=
 operator|new
 name|ArrayList
-argument_list|<
-name|RexNode
-argument_list|>
+argument_list|<>
 argument_list|(
 name|filtersToAdd
 argument_list|)
@@ -3698,6 +3685,8 @@ name|topTree
 init|=
 name|addToTop
 argument_list|(
+name|relBuilder
+argument_list|,
 name|multiJoin
 argument_list|,
 name|semiJoinOpt
@@ -3716,6 +3705,8 @@ name|pushDownTree
 init|=
 name|pushDownFactor
 argument_list|(
+name|relBuilder
+argument_list|,
 name|multiJoin
 argument_list|,
 name|semiJoinOpt
@@ -3960,6 +3951,9 @@ specifier|private
 name|LoptJoinTree
 name|pushDownFactor
 parameter_list|(
+name|RelBuilder
+name|relBuilder
+parameter_list|,
 name|LoptMultiJoin
 name|multiJoin
 parameter_list|,
@@ -4247,6 +4241,8 @@ name|subTree
 operator|=
 name|addFactorToTree
 argument_list|(
+name|relBuilder
+argument_list|,
 name|multiJoin
 argument_list|,
 name|semiJoinOpt
@@ -4402,6 +4398,8 @@ comment|// create the new join tree with the factor pushed down
 return|return
 name|createJoinSubtree
 argument_list|(
+name|relBuilder
+argument_list|,
 name|multiJoin
 argument_list|,
 name|left
@@ -4425,6 +4423,9 @@ specifier|private
 name|LoptJoinTree
 name|addToTop
 parameter_list|(
+name|RelBuilder
+name|relBuilder
+parameter_list|,
 name|LoptMultiJoin
 name|multiJoin
 parameter_list|,
@@ -4602,6 +4603,8 @@ block|}
 return|return
 name|createJoinSubtree
 argument_list|(
+name|relBuilder
+argument_list|,
 name|multiJoin
 argument_list|,
 name|joinTree
@@ -4971,9 +4974,7 @@ name|newJoinOrder
 init|=
 operator|new
 name|ArrayList
-argument_list|<
-name|Integer
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 name|left
@@ -5474,6 +5475,9 @@ specifier|private
 name|LoptJoinTree
 name|createReplacementSemiJoin
 parameter_list|(
+name|RelBuilder
+name|relBuilder
+parameter_list|,
 name|LoptMultiJoin
 name|multiJoin
 parameter_list|,
@@ -5675,6 +5679,8 @@ block|}
 return|return
 name|createReplacementJoin
 argument_list|(
+name|relBuilder
+argument_list|,
 name|multiJoin
 argument_list|,
 name|semiJoinOpt
@@ -5698,6 +5704,9 @@ specifier|private
 name|LoptJoinTree
 name|createReplacementJoin
 parameter_list|(
+name|RelBuilder
+name|relBuilder
+parameter_list|,
 name|LoptMultiJoin
 name|multiJoin
 parameter_list|,
@@ -6059,18 +6068,17 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-name|Project
-name|projRel
-init|=
-operator|(
-name|Project
-operator|)
-name|projectFactory
+name|relBuilder
 operator|.
-name|createProject
+name|push
 argument_list|(
 name|currJoinRel
-argument_list|,
+argument_list|)
+expr_stmt|;
+name|relBuilder
+operator|.
+name|project
+argument_list|(
 name|Pair
 operator|.
 name|left
@@ -6085,7 +6093,7 @@ argument_list|(
 name|projects
 argument_list|)
 argument_list|)
-decl_stmt|;
+expr_stmt|;
 comment|// remove the join conditions corresponding to the join we're removing;
 comment|// we don't actually need to use them, but we need to remove them
 comment|// from the list since they're no longer needed
@@ -6123,11 +6131,6 @@ expr_stmt|;
 comment|// Filters referencing factors other than leftIdx and factorToAdd
 comment|// still do need to be applied.  So, add them into a separate
 comment|// LogicalFilter placed on top off the projection created above.
-name|RelNode
-name|topRelNode
-init|=
-name|projRel
-decl_stmt|;
 if|if
 condition|(
 name|leftIdx
@@ -6135,11 +6138,9 @@ operator|>=
 literal|0
 condition|)
 block|{
-name|topRelNode
-operator|=
 name|addAdditionalFilters
 argument_list|(
-name|topRelNode
+name|relBuilder
 argument_list|,
 name|multiJoin
 argument_list|,
@@ -6160,7 +6161,10 @@ return|return
 operator|new
 name|LoptJoinTree
 argument_list|(
-name|topRelNode
+name|relBuilder
+operator|.
+name|build
+argument_list|()
 argument_list|,
 name|currJoinTree
 operator|.
@@ -6179,6 +6183,9 @@ specifier|private
 name|LoptJoinTree
 name|createJoinSubtree
 parameter_list|(
+name|RelBuilder
+name|relBuilder
+parameter_list|,
 name|LoptMultiJoin
 name|multiJoin
 parameter_list|,
@@ -6390,38 +6397,31 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-name|RelNode
-name|joinTree
-init|=
-name|joinFactory
+name|relBuilder
 operator|.
-name|createJoin
+name|push
 argument_list|(
 name|left
 operator|.
 name|getJoinTree
 argument_list|()
-argument_list|,
+argument_list|)
+operator|.
+name|push
+argument_list|(
 name|right
 operator|.
 name|getJoinTree
 argument_list|()
-argument_list|,
-name|condition
-argument_list|,
+argument_list|)
+operator|.
+name|join
+argument_list|(
 name|joinType
 argument_list|,
-name|ImmutableSet
-operator|.
-expr|<
-name|String
-operator|>
-name|of
-argument_list|()
-argument_list|,
-literal|true
+name|condition
 argument_list|)
-decl_stmt|;
+expr_stmt|;
 comment|// if this is a left or right outer join, and additional filters can
 comment|// be applied to the resulting join, then they need to be applied
 comment|// as a filter on top of the outer join result
@@ -6448,11 +6448,9 @@ assert|assert
 operator|!
 name|selfJoin
 assert|;
-name|joinTree
-operator|=
 name|addAdditionalFilters
 argument_list|(
-name|joinTree
+name|relBuilder
 argument_list|,
 name|multiJoin
 argument_list|,
@@ -6468,7 +6466,10 @@ return|return
 operator|new
 name|LoptJoinTree
 argument_list|(
-name|joinTree
+name|relBuilder
+operator|.
+name|build
+argument_list|()
 argument_list|,
 name|left
 operator|.
@@ -6484,13 +6485,13 @@ name|selfJoin
 argument_list|)
 return|;
 block|}
-comment|/**    * Determines whether any additional filters are applicable to a jointree.    * If there are any, creates a filter node on top of the join tree with the    * additional filters.    *    * @param joinTree current join tree    * @param multiJoin join factors being optimized    * @param left left side of join tree    * @param right right side of join tree    * @param filtersToAdd remaining filters    *    * @return a filter node if additional filters are found; otherwise, returns    * original joinTree    */
+comment|/**    * Determines whether any additional filters are applicable to a join tree.    * If there are any, creates a filter node on top of the join tree with the    * additional filters.    *    * @param relBuilder Builder holding current join tree    * @param multiJoin join factors being optimized    * @param left left side of join tree    * @param right right side of join tree    * @param filtersToAdd remaining filters    */
 specifier|private
-name|RelNode
+name|void
 name|addAdditionalFilters
 parameter_list|(
-name|RelNode
-name|joinTree
+name|RelBuilder
+name|relBuilder
 parameter_list|,
 name|LoptMultiJoin
 name|multiJoin
@@ -6529,17 +6530,12 @@ argument_list|)
 decl_stmt|;
 if|if
 condition|(
+operator|!
 name|filterCond
 operator|.
 name|isAlwaysTrue
 argument_list|()
 condition|)
-block|{
-return|return
-name|joinTree
-return|;
-block|}
-else|else
 block|{
 comment|// adjust the filter to reflect the outer join output
 name|int
@@ -6603,7 +6599,10 @@ operator|.
 name|getMultiJoinFields
 argument_list|()
 argument_list|,
-name|joinTree
+name|relBuilder
+operator|.
+name|peek
+argument_list|()
 operator|.
 name|getRowType
 argument_list|()
@@ -6615,17 +6614,14 @@ name|adjustments
 argument_list|)
 argument_list|)
 expr_stmt|;
-block|}
-return|return
-name|filterFactory
+name|relBuilder
 operator|.
-name|createFilter
+name|filter
 argument_list|(
-name|joinTree
-argument_list|,
 name|filterCond
 argument_list|)
-return|;
+expr_stmt|;
+block|}
 block|}
 block|}
 comment|/**    * Swaps the operands to a join, so the smaller input is on the right. Or,    * if this is a removable self-join, swap so the factor that should be    * preserved when the self-join is removed is put on the left.    *    * @param multiJoin join factors being optimized    * @param left left side of join tree    * @param right right hand side of join tree    * @param selfJoin true if the join is a removable self-join    *    * @return true if swapping should be done    */
@@ -6953,6 +6949,7 @@ name|needAdjustment
 init|=
 literal|false
 decl_stmt|;
+specifier|final
 name|List
 argument_list|<
 name|Integer
@@ -6961,9 +6958,7 @@ name|joinOrder
 init|=
 operator|new
 name|ArrayList
-argument_list|<
-name|Integer
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 name|joinTree

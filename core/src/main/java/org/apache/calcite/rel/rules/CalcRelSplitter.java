@@ -299,6 +299,20 @@ name|apache
 operator|.
 name|calcite
 operator|.
+name|tools
+operator|.
+name|RelBuilder
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
 name|util
 operator|.
 name|IntList
@@ -530,6 +544,11 @@ specifier|final
 name|RelNode
 name|child
 decl_stmt|;
+specifier|protected
+specifier|final
+name|RelBuilder
+name|relBuilder
+decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
 comment|/**    * Constructs a CalcRelSplitter.    *    * @param calc     Calc to split    * @param relTypes Array of rel types, e.g. {Java, Fennel}. Must be    *                 distinct.    */
 name|CalcRelSplitter
@@ -537,11 +556,20 @@ parameter_list|(
 name|Calc
 name|calc
 parameter_list|,
+name|RelBuilder
+name|relBuilder
+parameter_list|,
 name|RelType
 index|[]
 name|relTypes
 parameter_list|)
 block|{
+name|this
+operator|.
+name|relBuilder
+operator|=
+name|relBuilder
+expr_stmt|;
 for|for
 control|(
 name|int
@@ -1175,6 +1203,8 @@ argument_list|(
 name|cluster
 argument_list|,
 name|traits
+argument_list|,
+name|relBuilder
 argument_list|,
 name|rel
 argument_list|,
@@ -2029,11 +2059,7 @@ name|iter
 init|=
 operator|new
 name|TopologicalOrderIterator
-argument_list|<
-name|Integer
-argument_list|,
-name|DefaultEdge
-argument_list|>
+argument_list|<>
 argument_list|(
 name|graph
 argument_list|)
@@ -2047,9 +2073,7 @@ name|permutation
 init|=
 operator|new
 name|ArrayList
-argument_list|<
-name|Integer
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 while|while
@@ -2223,9 +2247,7 @@ name|exprs
 init|=
 operator|new
 name|ArrayList
-argument_list|<
-name|RexNode
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 comment|// exprInverseOrdinals describes where an expression in allExprs comes
@@ -2444,9 +2466,7 @@ name|projectRefs
 init|=
 operator|new
 name|ArrayList
-argument_list|<
-name|RexLocalRef
-argument_list|>
+argument_list|<>
 argument_list|(
 name|projectExprOrdinals
 operator|.
@@ -2462,9 +2482,7 @@ name|fieldNames
 init|=
 operator|new
 name|ArrayList
-argument_list|<
-name|String
-argument_list|>
+argument_list|<>
 argument_list|(
 name|projectExprOrdinals
 operator|.
@@ -3199,10 +3217,13 @@ name|RelOptCluster
 name|cluster
 parameter_list|,
 name|RelTraitSet
-name|traits
+name|traitSet
+parameter_list|,
+name|RelBuilder
+name|relBuilder
 parameter_list|,
 name|RelNode
-name|child
+name|input
 parameter_list|,
 name|RexProgram
 name|program
@@ -3213,7 +3234,7 @@ name|LogicalCalc
 operator|.
 name|create
 argument_list|(
-name|child
+name|input
 argument_list|,
 name|program
 argument_list|)
@@ -3509,6 +3530,11 @@ name|CannotImplement
 extends|extends
 name|RuntimeException
 block|{
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"ThrowableInstanceNeverThrown"
+argument_list|)
 specifier|static
 specifier|final
 name|CannotImplement

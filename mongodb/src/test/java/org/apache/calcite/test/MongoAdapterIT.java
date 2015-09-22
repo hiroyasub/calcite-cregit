@@ -2167,11 +2167,11 @@ name|queryContains
 argument_list|(
 name|mongoChecker
 argument_list|(
-literal|"{$project: {STATE: '$state', CITY: '$city'}}"
+literal|"{$project: {CITY: '$city', STATE: '$state'}}"
 argument_list|,
-literal|"{$group: {_id: {STATE: '$STATE', CITY: '$CITY'}}}"
+literal|"{$group: {_id: {CITY: '$CITY', STATE: '$STATE'}}}"
 argument_list|,
-literal|"{$project: {_id: 0, STATE: '$_id.STATE', CITY: '$_id.CITY'}}"
+literal|"{$project: {_id: 0, CITY: '$_id.CITY', STATE: '$_id.STATE'}}"
 argument_list|,
 literal|"{$group: {_id: '$STATE', CDC: {$sum: {$cond: [ {$eq: ['CITY', null]}, 0, 1]}}}}"
 argument_list|,

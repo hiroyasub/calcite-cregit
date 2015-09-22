@@ -53,20 +53,6 @@ name|apache
 operator|.
 name|calcite
 operator|.
-name|plan
-operator|.
-name|RelOptUtil
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
 name|rel
 operator|.
 name|RelNode
@@ -102,6 +88,22 @@ operator|.
 name|core
 operator|.
 name|JoinRelType
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|core
+operator|.
+name|RelFactories
 import|;
 end_import
 
@@ -263,6 +265,34 @@ name|apache
 operator|.
 name|calcite
 operator|.
+name|tools
+operator|.
+name|RelBuilder
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|tools
+operator|.
+name|RelBuilderFactory
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
 name|util
 operator|.
 name|ImmutableIntList
@@ -322,13 +352,20 @@ name|INSTANCE
 init|=
 operator|new
 name|SemiJoinProjectTransposeRule
-argument_list|()
+argument_list|(
+name|RelFactories
+operator|.
+name|LOGICAL_BUILDER
+argument_list|)
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
 comment|/**    * Creates a SemiJoinProjectTransposeRule.    */
 specifier|private
 name|SemiJoinProjectTransposeRule
-parameter_list|()
+parameter_list|(
+name|RelBuilderFactory
+name|relBuilderFactory
+parameter_list|)
 block|{
 name|super
 argument_list|(
@@ -351,6 +388,10 @@ argument_list|()
 argument_list|)
 argument_list|)
 argument_list|)
+argument_list|,
+name|relBuilderFactory
+argument_list|,
+literal|null
 argument_list|)
 expr_stmt|;
 block|}
@@ -383,9 +424,9 @@ argument_list|(
 literal|1
 argument_list|)
 decl_stmt|;
-comment|// convert the LHS semijoin keys to reference the child projection
+comment|// Convert the LHS semi-join keys to reference the child projection
 comment|// expression; all projection expressions must be RexInputRefs,
-comment|// otherwise, we wouldn't have created this semijoin
+comment|// otherwise, we wouldn't have created this semi-join.
 specifier|final
 name|List
 argument_list|<
@@ -501,15 +542,26 @@ decl_stmt|;
 comment|// Create the new projection.  Note that the projection expressions
 comment|// are the same as the original because they only reference the LHS
 comment|// of the semijoin and the semijoin only projects out the LHS
-name|RelNode
-name|newProject
+specifier|final
+name|RelBuilder
+name|relBuilder
 init|=
-name|RelOptUtil
+name|call
 operator|.
-name|createProject
+name|builder
+argument_list|()
+decl_stmt|;
+name|relBuilder
+operator|.
+name|push
 argument_list|(
 name|newSemiJoin
-argument_list|,
+argument_list|)
+expr_stmt|;
+name|relBuilder
+operator|.
+name|project
+argument_list|(
 name|projExprs
 argument_list|,
 name|project
@@ -520,12 +572,15 @@ operator|.
 name|getFieldNames
 argument_list|()
 argument_list|)
-decl_stmt|;
+expr_stmt|;
 name|call
 operator|.
 name|transformTo
 argument_list|(
-name|newProject
+name|relBuilder
+operator|.
+name|build
+argument_list|()
 argument_list|)
 expr_stmt|;
 block|}

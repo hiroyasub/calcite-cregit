@@ -758,7 +758,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|tesJoin3TablesPlan
+name|testJoin3TablesPlan
 parameter_list|()
 block|{
 name|CalciteAssert

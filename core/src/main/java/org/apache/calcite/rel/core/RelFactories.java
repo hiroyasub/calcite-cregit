@@ -357,6 +357,20 @@ name|apache
 operator|.
 name|calcite
 operator|.
+name|tools
+operator|.
+name|RelBuilderFactory
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
 name|util
 operator|.
 name|ImmutableBitSet
@@ -496,14 +510,12 @@ operator|new
 name|TableScanFactoryImpl
 argument_list|()
 decl_stmt|;
-comment|/** Creates a {@link RelBuilder} that will create logical relational    * expressions for everything.    */
+comment|/** A {@link RelBuilderFactory} that creates a {@link RelBuilder} that will    * create logical relational expressions for everything. */
 specifier|public
 specifier|static
 specifier|final
-name|RelBuilder
-operator|.
-name|ProtoRelBuilder
-name|DEFAULT_PROTO
+name|RelBuilderFactory
+name|LOGICAL_BUILDER
 init|=
 name|RelBuilder
 operator|.

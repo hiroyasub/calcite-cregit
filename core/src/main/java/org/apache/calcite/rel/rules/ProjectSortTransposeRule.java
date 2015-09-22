@@ -71,7 +71,7 @@ name|rel
 operator|.
 name|core
 operator|.
-name|Sort
+name|Project
 import|;
 end_import
 
@@ -85,9 +85,9 @@ name|calcite
 operator|.
 name|rel
 operator|.
-name|logical
+name|core
 operator|.
-name|LogicalProject
+name|Sort
 import|;
 end_import
 
@@ -106,7 +106,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Planner rule that pushes  * a {@link org.apache.calcite.rel.logical.LogicalProject}  * past a {@link org.apache.calcite.rel.core.Sort}.  *  * @see org.apache.calcite.rel.rules.SortProjectTransposeRule  */
+comment|/**  * Planner rule that pushes  * a {@link org.apache.calcite.rel.core.Project}  * past a {@link org.apache.calcite.rel.core.Sort}.  *  * @see org.apache.calcite.rel.rules.SortProjectTransposeRule  */
 end_comment
 
 begin_class
@@ -136,7 +136,7 @@ name|super
 argument_list|(
 name|operand
 argument_list|(
-name|LogicalProject
+name|Project
 operator|.
 name|class
 argument_list|,
@@ -162,7 +162,8 @@ name|RelOptRuleCall
 name|call
 parameter_list|)
 block|{
-name|LogicalProject
+specifier|final
+name|Project
 name|project
 init|=
 name|call
@@ -172,6 +173,7 @@ argument_list|(
 literal|0
 argument_list|)
 decl_stmt|;
+specifier|final
 name|Sort
 name|sort
 init|=

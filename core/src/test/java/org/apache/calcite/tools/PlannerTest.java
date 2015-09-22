@@ -3433,15 +3433,13 @@ literal|"    EnumerableJoin(condition=[=($0, $2)], joinType=[inner])\n"
 operator|+
 literal|"      EnumerableTableScan(table=[[hr, dependents]])\n"
 operator|+
-literal|"      EnumerableProject(empid=[$0], deptno=[$1], name=[$2], salary=[$3], commission=[$4], deptno0=[$5], name0=[$6], employees=[$7], x=[$8], y=[$9])\n"
+literal|"      EnumerableJoin(condition=[=($1, $5)], joinType=[left])\n"
 operator|+
-literal|"        EnumerableJoin(condition=[=($1, $5)], joinType=[left])\n"
+literal|"        EnumerableTableScan(table=[[hr, emps]])\n"
 operator|+
-literal|"          EnumerableTableScan(table=[[hr, emps]])\n"
+literal|"        EnumerableProject(deptno=[$0], name=[$1], employees=[$2], x=[$3.x], y=[$3.y])\n"
 operator|+
-literal|"          EnumerableProject(deptno=[$0], name=[$1], employees=[$2], x=[$3.x], y=[$3.y])\n"
-operator|+
-literal|"            EnumerableTableScan(table=[[hr, depts]])"
+literal|"          EnumerableTableScan(table=[[hr, depts]])"
 argument_list|)
 expr_stmt|;
 block|}
@@ -3509,15 +3507,13 @@ literal|"    EnumerableJoin(condition=[=($0, $2)], joinType=[left])\n"
 operator|+
 literal|"      EnumerableTableScan(table=[[hr, dependents]])\n"
 operator|+
-literal|"      EnumerableProject(empid=[$0], deptno=[$1], name=[$2], salary=[$3], commission=[$4], deptno0=[$5], name0=[$6], employees=[$7], x=[$8], y=[$9])\n"
+literal|"      EnumerableJoin(condition=[=($1, $5)], joinType=[inner])\n"
 operator|+
-literal|"        EnumerableJoin(condition=[=($1, $5)], joinType=[inner])\n"
+literal|"        EnumerableTableScan(table=[[hr, emps]])\n"
 operator|+
-literal|"          EnumerableTableScan(table=[[hr, emps]])\n"
+literal|"        EnumerableProject(deptno=[$0], name=[$1], employees=[$2], x=[$3.x], y=[$3.y])\n"
 operator|+
-literal|"          EnumerableProject(deptno=[$0], name=[$1], employees=[$2], x=[$3.x], y=[$3.y])\n"
-operator|+
-literal|"            EnumerableTableScan(table=[[hr, depts]])"
+literal|"          EnumerableTableScan(table=[[hr, depts]])"
 argument_list|)
 expr_stmt|;
 block|}

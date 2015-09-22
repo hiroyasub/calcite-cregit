@@ -141,6 +141,22 @@ name|rel
 operator|.
 name|core
 operator|.
+name|Project
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|core
+operator|.
 name|Sort
 import|;
 end_import
@@ -230,7 +246,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Planner rule that pushes  * a {@link org.apache.calcite.rel.core.Sort}  * past a {@link org.apache.calcite.rel.logical.LogicalProject}.  *  * @see org.apache.calcite.rel.rules.ProjectSortTransposeRule  */
+comment|/**  * Planner rule that pushes  * a {@link org.apache.calcite.rel.core.Sort}  * past a {@link org.apache.calcite.rel.core.Project}.  *  * @see org.apache.calcite.rel.rules.ProjectSortTransposeRule  */
 end_comment
 
 begin_class
@@ -278,7 +294,6 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|// implement RelOptRule
 specifier|public
 name|void
 name|onMatch
@@ -299,7 +314,7 @@ literal|0
 argument_list|)
 decl_stmt|;
 specifier|final
-name|LogicalProject
+name|Project
 name|project
 init|=
 name|call

@@ -164,7 +164,7 @@ name|o
 argument_list|)
 return|;
 block|}
-comment|/** Returns a context that wraps an array of objects. */
+comment|/** Returns a context that wraps an array of objects, ignoring any nulls. */
 specifier|public
 specifier|static
 name|Context
@@ -195,6 +195,13 @@ range|:
 name|os
 control|)
 block|{
+if|if
+condition|(
+name|o
+operator|!=
+literal|null
+condition|)
+block|{
 name|contexts
 operator|.
 name|add
@@ -205,6 +212,7 @@ name|o
 argument_list|)
 argument_list|)
 expr_stmt|;
+block|}
 block|}
 return|return
 name|chain

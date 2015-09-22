@@ -510,19 +510,16 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Creates a {@link org.apache.calcite.tools.RelBuilder} to be used by    * code within the call. The {@code protoBuilder} argument contains policies    * such as what implementation of {@link Filter} to create. */
+comment|/** Creates a {@link org.apache.calcite.tools.RelBuilder} to be used by    * code within the call. The {@link RelOptRule#relBuilderFactory} argument contains policies    * such as what implementation of {@link Filter} to create. */
 specifier|public
 name|RelBuilder
 name|builder
-parameter_list|(
-name|RelBuilder
-operator|.
-name|ProtoRelBuilder
-name|protoBuilder
-parameter_list|)
+parameter_list|()
 block|{
 return|return
-name|protoBuilder
+name|rule
+operator|.
+name|relBuilderFactory
 operator|.
 name|create
 argument_list|(

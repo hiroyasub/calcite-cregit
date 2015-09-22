@@ -240,7 +240,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Planner rule that pushes a {@link org.apache.calcite.rel.core.Sort} past a  * {@link org.apache.calcite.rel.core.Join}. At the moment, we only consider  * left/right outer joins.  * However, an extesion for full outer joins for this rule could be envision.  * Special attention should be paid to null values for correctness issues.  */
+comment|/**  * Planner rule that pushes a {@link org.apache.calcite.rel.core.Sort} past a  * {@link org.apache.calcite.rel.core.Join}.  *  *<p>At the moment, we only consider left/right outer joins.  * However, an extension for full outer joins for this rule could be envisioned.  * Special attention should be paid to null values for correctness issues.  */
 end_comment
 
 begin_class
@@ -866,21 +866,17 @@ argument_list|(
 name|fetch
 argument_list|)
 decl_stmt|;
-specifier|final
-name|Double
-name|offsetLimit
-init|=
-operator|new
-name|Double
-argument_list|(
-name|offsetVal
-operator|+
-name|limit
-argument_list|)
-decl_stmt|;
 if|if
 condition|(
-name|offsetLimit
+operator|(
+name|double
+operator|)
+name|offsetVal
+operator|+
+operator|(
+name|double
+operator|)
+name|limit
 operator|<
 name|rowCount
 condition|)
@@ -899,6 +895,10 @@ return|;
 block|}
 block|}
 end_class
+
+begin_comment
+comment|// End SortJoinTransposeRule.java
+end_comment
 
 end_unit
 
