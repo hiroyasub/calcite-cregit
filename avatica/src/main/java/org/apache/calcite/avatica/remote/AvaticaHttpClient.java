@@ -17,93 +17,30 @@ name|remote
 package|;
 end_package
 
-begin_import
-import|import
-name|java
-operator|.
-name|nio
-operator|.
-name|charset
-operator|.
-name|StandardCharsets
-import|;
-end_import
-
 begin_comment
-comment|/**  * Implementation of {@link org.apache.calcite.avatica.remote.Service}  * that translates requests into JSON and sends them to a remote server,  * usually an HTTP server.  */
+comment|/**  * An interface which defines how requests are sent to the Avatica server.  */
 end_comment
 
-begin_class
+begin_interface
 specifier|public
-class|class
-name|RemoteService
-extends|extends
-name|JsonService
-block|{
-specifier|private
-specifier|final
+interface|interface
 name|AvaticaHttpClient
-name|client
-decl_stmt|;
-specifier|public
-name|RemoteService
-parameter_list|(
-name|AvaticaHttpClient
-name|client
-parameter_list|)
 block|{
-name|this
-operator|.
-name|client
-operator|=
-name|client
-expr_stmt|;
-block|}
-annotation|@
-name|Override
-specifier|public
-name|String
-name|apply
-parameter_list|(
-name|String
-name|request
-parameter_list|)
-block|{
+comment|/**    * Sends a serialized request to the Avatica server.    *    * @param request The serialized request.    * @return The serialized response.    */
 name|byte
 index|[]
-name|response
-init|=
-name|client
-operator|.
 name|send
-argument_list|(
+parameter_list|(
+name|byte
+index|[]
 name|request
-operator|.
-name|getBytes
-argument_list|(
-name|StandardCharsets
-operator|.
-name|UTF_8
-argument_list|)
-argument_list|)
-decl_stmt|;
-return|return
-operator|new
-name|String
-argument_list|(
-name|response
-argument_list|,
-name|StandardCharsets
-operator|.
-name|UTF_8
-argument_list|)
-return|;
+parameter_list|)
+function_decl|;
 block|}
-block|}
-end_class
+end_interface
 
 begin_comment
-comment|// End RemoteService.java
+comment|// End AvaticaHttpClient.java
 end_comment
 
 end_unit

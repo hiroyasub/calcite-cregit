@@ -143,12 +143,15 @@ parameter_list|)
 throws|throws
 name|SQLException
 function_decl|;
-comment|/**    * Creates a result set. You will then need to call    * {@link AvaticaResultSet#execute()} on it.    *    * @param statement Statement    * @param signature Prepared statement    * @param timeZone Time zone    * @param firstFrame Frame containing the first (or perhaps only) rows in the    *                   result, or null if an execute/fetch is required    * @return Result set    */
+comment|/**    * Creates a result set. You will then need to call    * {@link AvaticaResultSet#execute()} on it.    *    * @param statement Statement    * @param state The state used to create this result set    * @param signature Prepared statement    * @param timeZone Time zone    * @param firstFrame Frame containing the first (or perhaps only) rows in the    *                   result, or null if an execute/fetch is required    * @return Result set    */
 name|AvaticaResultSet
 name|newResultSet
 parameter_list|(
 name|AvaticaStatement
 name|statement
+parameter_list|,
+name|QueryState
+name|state
 parameter_list|,
 name|Meta
 operator|.

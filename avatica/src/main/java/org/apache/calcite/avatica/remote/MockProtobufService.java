@@ -788,8 +788,6 @@ name|MockProtobufService
 argument_list|(
 name|connection
 operator|.
-name|handle
-operator|.
 name|id
 argument_list|)
 return|;

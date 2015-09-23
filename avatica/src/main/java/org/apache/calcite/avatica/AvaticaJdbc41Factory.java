@@ -324,6 +324,9 @@ parameter_list|(
 name|AvaticaStatement
 name|statement
 parameter_list|,
+name|QueryState
+name|state
+parameter_list|,
 name|Meta
 operator|.
 name|Signature
@@ -354,6 +357,8 @@ operator|new
 name|AvaticaResultSet
 argument_list|(
 name|statement
+argument_list|,
+name|state
 argument_list|,
 name|signature
 argument_list|,

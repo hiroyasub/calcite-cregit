@@ -233,6 +233,16 @@ name|java
 operator|.
 name|sql
 operator|.
+name|ResultSet
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|sql
+operator|.
 name|SQLException
 import|;
 end_import
@@ -781,7 +791,10 @@ argument_list|>
 name|createIterable
 parameter_list|(
 name|StatementHandle
-name|handle
+name|stmt
+parameter_list|,
+name|QueryState
+name|state
 parameter_list|,
 name|Signature
 name|signature
@@ -826,6 +839,8 @@ parameter_list|,
 name|PrepareCallback
 name|callback
 parameter_list|)
+throws|throws
+name|NoSuchStatementException
 function_decl|;
 comment|/** Returns a frame of rows.    *    *<p>The frame describes whether there may be another frame. If there is not    * another frame, the current iteration is done when we have finished the    * rows in the this frame.    *    *<p>The default implementation always returns null.    *    * @param h Statement handle    * @param offset Zero-based offset of first row in the requested frame    * @param fetchMaxRowCount Maximum number of rows to return; negative means    * no limit    * @return Frame, or null if there are no more    */
 name|Frame
@@ -840,6 +855,10 @@ parameter_list|,
 name|int
 name|fetchMaxRowCount
 parameter_list|)
+throws|throws
+name|NoSuchStatementException
+throws|,
+name|MissingResultsException
 function_decl|;
 comment|/** Executes a prepared statement.    *    * @param h Statement handle    * @param parameterValues A list of parameter values; may be empty, not null    * @param maxRowCount Maximum number of rows to return; negative means    * no limit    * @return Frame, or null if there are no more    */
 name|ExecuteResult
@@ -857,6 +876,8 @@ parameter_list|,
 name|long
 name|maxRowCount
 parameter_list|)
+throws|throws
+name|NoSuchStatementException
 function_decl|;
 comment|/** Called during the creation of a statement to allocate a new handle.    *    * @param ch Connection handle    */
 name|StatementHandle
@@ -897,6 +918,22 @@ parameter_list|(
 name|ConnectionHandle
 name|ch
 parameter_list|)
+function_decl|;
+comment|/**    * Re-set the {@link ResultSet} on a Statement. Not a JDBC method.    * @return True if there are results to fetch after resetting to the given offset. False otherwise    */
+name|boolean
+name|syncResults
+parameter_list|(
+name|StatementHandle
+name|sh
+parameter_list|,
+name|QueryState
+name|state
+parameter_list|,
+name|long
+name|offset
+parameter_list|)
+throws|throws
+name|NoSuchStatementException
 function_decl|;
 comment|/** Sync client and server view of connection properties.    *    *<p>Note: this interface is considered "experimental" and may undergo further changes as this    * functionality is extended to other aspects of state management for    * {@link java.sql.Connection}, {@link java.sql.Statement}, and {@link java.sql.ResultSet}.</p>    */
 name|ConnectionProperties

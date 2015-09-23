@@ -305,6 +305,11 @@ name|statement
 decl_stmt|;
 specifier|protected
 specifier|final
+name|QueryState
+name|state
+decl_stmt|;
+specifier|protected
+specifier|final
 name|Meta
 operator|.
 name|Signature
@@ -394,6 +399,9 @@ parameter_list|(
 name|AvaticaStatement
 name|statement
 parameter_list|,
+name|QueryState
+name|state
+parameter_list|,
 name|Meta
 operator|.
 name|Signature
@@ -416,6 +424,12 @@ operator|.
 name|statement
 operator|=
 name|statement
+expr_stmt|;
+name|this
+operator|.
+name|state
+operator|=
+name|state
 expr_stmt|;
 name|this
 operator|.
@@ -752,6 +766,8 @@ argument_list|(
 name|statement
 operator|.
 name|handle
+argument_list|,
+name|state
 argument_list|,
 name|signature
 argument_list|,

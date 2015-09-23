@@ -286,6 +286,8 @@ name|super
 argument_list|(
 name|statement
 argument_list|,
+literal|null
+argument_list|,
 name|calciteSignature
 argument_list|,
 name|resultSetMetaData

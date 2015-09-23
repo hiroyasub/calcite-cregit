@@ -176,8 +176,6 @@ name|connectionId
 init|=
 name|connection
 operator|.
-name|handle
-operator|.
 name|id
 decl_stmt|;
 specifier|final

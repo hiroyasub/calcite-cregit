@@ -279,6 +279,16 @@ name|org
 operator|.
 name|junit
 operator|.
+name|Ignore
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|junit
+operator|.
 name|Test
 import|;
 end_import
@@ -2215,6 +2225,11 @@ expr_stmt|;
 block|}
 block|}
 annotation|@
+name|Ignore
+argument_list|(
+literal|"[CALCITE-942] AvaticaConnection should fail-fast when closed."
+argument_list|)
+annotation|@
 name|Test
 specifier|public
 name|void
@@ -2263,7 +2278,7 @@ expr_stmt|;
 block|}
 catch|catch
 parameter_list|(
-name|RuntimeException
+name|SQLException
 name|e
 parameter_list|)
 block|{
@@ -2276,7 +2291,7 @@ argument_list|()
 argument_list|,
 name|containsString
 argument_list|(
-literal|"Connection not found: invalid id, closed, or expired"
+literal|"Connection is closed"
 argument_list|)
 argument_list|)
 expr_stmt|;

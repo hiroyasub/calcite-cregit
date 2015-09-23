@@ -424,6 +424,26 @@ argument_list|)
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
+specifier|public
+name|SyncResultsResponse
+name|apply
+parameter_list|(
+name|SyncResultsRequest
+name|request
+parameter_list|)
+block|{
+return|return
+operator|(
+name|SyncResultsResponse
+operator|)
+name|_apply
+argument_list|(
+name|request
+argument_list|)
+return|;
+block|}
 comment|/**    * Determines whether the given message has the field, denoted by the provided number, set.    *    * @param msg The protobuf message    * @param desc The descriptor for the message    * @param fieldNum The identifier for the field    * @return True if the message contains the field, false otherwise    */
 specifier|public
 specifier|static
