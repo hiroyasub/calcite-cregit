@@ -8205,6 +8205,52 @@ block|{
 comment|// not possible
 block|}
 block|}
+comment|/** Returns the value of a system property as a boolean.    *    *<p>For example, the property "foo" is considered true if you supply    * {@code -Dfoo} or {@code -Dfoo=true} or {@code -Dfoo=TRUE},    * false if you omit the flag or supply {@code -Dfoo=false}.    *    * @param property Property name    * @return Whether property is true    */
+specifier|public
+specifier|static
+name|boolean
+name|getBooleanProperty
+parameter_list|(
+name|String
+name|property
+parameter_list|)
+block|{
+specifier|final
+name|String
+name|v
+init|=
+name|System
+operator|.
+name|getProperties
+argument_list|()
+operator|.
+name|getProperty
+argument_list|(
+name|property
+argument_list|)
+decl_stmt|;
+return|return
+name|v
+operator|!=
+literal|null
+operator|&&
+operator|(
+literal|""
+operator|.
+name|equals
+argument_list|(
+name|v
+argument_list|)
+operator|||
+literal|"true"
+operator|.
+name|equalsIgnoreCase
+argument_list|(
+name|v
+argument_list|)
+operator|)
+return|;
+block|}
 comment|//~ Inner Classes ----------------------------------------------------------
 comment|/**    * Exception used to interrupt a tree walk of any kind.    */
 specifier|public
