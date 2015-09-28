@@ -12617,11 +12617,9 @@ literal|""
 operator|+
 literal|"LogicalProject(deptno=[$0], name=[$1], employees=[$2], location=[$3])\n"
 operator|+
-literal|"  LogicalJoin(condition=[=($4, $5)], joinType=[inner])\n"
+literal|"  LogicalJoin(condition=[=($0, $4)], joinType=[inner])\n"
 operator|+
-literal|"    LogicalProject($f0=[$0], $f1=[$1], $f2=[$2], $f3=[$3], $f4=[$0])\n"
-operator|+
-literal|"      EnumerableTableScan(table=[[hr, depts]])\n"
+literal|"    EnumerableTableScan(table=[[hr, depts]])\n"
 operator|+
 literal|"    LogicalAggregate(group=[{0}])\n"
 operator|+
@@ -12638,17 +12636,13 @@ name|explainContains
 argument_list|(
 literal|""
 operator|+
-literal|"EnumerableCalc(expr#0..4=[{inputs}], proj#0..3=[{exprs}])\n"
+literal|"EnumerableSemiJoin(condition=[=($0, $5)], joinType=[inner])\n"
 operator|+
-literal|"  EnumerableSemiJoin(condition=[=($4, $6)], joinType=[inner])\n"
+literal|"  EnumerableTableScan(table=[[hr, depts]])\n"
 operator|+
-literal|"    EnumerableCalc(expr#0..3=[{inputs}], proj#0..3=[{exprs}], $f4=[$t0])\n"
+literal|"  EnumerableCalc(expr#0..4=[{inputs}], expr#5=[150], expr#6=[<($t0, $t5)], proj#0..4=[{exprs}], $condition=[$t6])\n"
 operator|+
-literal|"      EnumerableTableScan(table=[[hr, depts]])\n"
-operator|+
-literal|"    EnumerableCalc(expr#0..4=[{inputs}], expr#5=[150], expr#6=[<($t0, $t5)], proj#0..4=[{exprs}], $condition=[$t6])\n"
-operator|+
-literal|"      EnumerableTableScan(table=[[hr, emps]])"
+literal|"    EnumerableTableScan(table=[[hr, emps]])"
 argument_list|)
 operator|.
 name|returnsUnordered
