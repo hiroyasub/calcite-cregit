@@ -142,10 +142,10 @@ comment|/** Table type. */
 enum|enum
 name|TableType
 block|{
-comment|/** A regular table.      *      *<p>Used by PostgreSQL, MySQL and others. */
+comment|/** A regular table.      *      *<p>Used by DB2, MySQL, PostgreSQL and others. */
 name|TABLE
 block|,
-comment|/** A relation whose contents are calculated by evaluating a SQL      * expression.      *      *<p>Used by PostgreSQL and others. */
+comment|/** A relation whose contents are calculated by evaluating a SQL      * expression.      *      *<p>Used by DB2, PostgreSQL and others. */
 name|VIEW
 block|,
 comment|/** Foreign table.      *      *<p>Used by PostgreSQL. */
@@ -160,7 +160,7 @@ block|,
 comment|/** Join table.      *      *<p>Used by Apache Phoenix. */
 name|JOIN
 block|,
-comment|/** Sequence table.      *      *<p>Used by Apache Phoenix, PostgreSQL and others.      * In Phoenix, must have a single BIGINT column called "$seq". */
+comment|/** Sequence table.      *      *<p>Used by Apache Phoenix, Oracle, PostgreSQL and others.      * In Phoenix, must have a single BIGINT column called "$seq". */
 name|SEQUENCE
 block|,
 comment|/** A structure, similar to a view, that is the basis for auto-generated      * materializations. It is either a single table or a collection of tables      * that are joined via many-to-one relationships from a central hub table.      * It is not available for queries, but is just used as an intermediate      * structure during query planning. */
@@ -172,7 +172,7 @@ block|,
 comment|/** Type.      *      *<p>Used by PostgreSQL. */
 name|TYPE
 block|,
-comment|/** A table maintained by the system. Data dictionary tables, such as the      * "TABLES" and "COLUMNS" table in the "metamodel" schema, examples of      * system tables.      *      *<p>Used by PostgreSQL, MySQL and others. */
+comment|/** A table maintained by the system. Data dictionary tables, such as the      * "TABLES" and "COLUMNS" table in the "metamodel" schema, examples of      * system tables.      *      *<p>Specified by the JDBC standard and used by DB2, MySQL, Oracle,      * PostgreSQL and others. */
 name|SYSTEM_TABLE
 block|,
 comment|/** System view.      *      *<p>Used by PostgreSQL, MySQL. */
@@ -199,8 +199,44 @@ block|,
 comment|/** Temporary view.      *      *<p>Used by PostgreSQL. */
 name|TEMPORARY_VIEW
 block|,
-comment|/** A table that is only visible to one connection.      *      *<p>Used by PostgreSQL, MySQL. */
+comment|/** A table that is only visible to one connection.      *      *<p>Specified by the JDBC standard and used by PostgreSQL, MySQL. */
 name|LOCAL_TEMPORARY
+block|,
+comment|/** A synonym.      *      *<p>Used by DB2, Oracle. */
+name|SYNONYM
+block|,
+comment|/** An alias.      *      *<p>Specified by the JDBC standard. */
+name|ALIAS
+block|,
+comment|/** A global temporary table.      *      *<p>Specified by the JDBC standard. */
+name|GLOBAL_TEMPORARY
+block|,
+comment|/** An accel-only table.      *      *<p>Used by DB2.      */
+name|ACCEL_ONLY_TABLE
+block|,
+comment|/** An auxiliary table.      *      *<p>Used by DB2.      */
+name|AUXILIARY_TABLE
+block|,
+comment|/** A global temporary table.      *      *<p>Used by DB2.      */
+name|GLOBAL_TEMPORARY_TABLE
+block|,
+comment|/** A hierarchy table.      *      *<p>Used by DB2.      */
+name|HIERARCHY_TABLE
+block|,
+comment|/** An inoperative view.      *      *<p>Used by DB2.      */
+name|INOPERATIVE_VIEW
+block|,
+comment|/** A materialized query table.      *      *<p>Used by DB2.      */
+name|MATERIALIZED_QUERY_TABLE
+block|,
+comment|/** A nickname.      *      *<p>Used by DB2.      */
+name|NICKNAME
+block|,
+comment|/** A typed table.      *      *<p>Used by DB2.      */
+name|TYPED_TABLE
+block|,
+comment|/** A typed view.      *      *<p>Used by DB2.      */
+name|TYPED_VIEW
 block|,
 comment|/** Table type not known to Calcite.      *      *<p>If you get one of these, please fix the problem by adding an enum      * value. */
 name|OTHER
