@@ -148,7 +148,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Implementation of {@link Meta} for the remote driver.  */
+comment|/**  * Implementation of {@link org.apache.calcite.avatica.Meta} for the remote  * driver.  */
 end_comment
 
 begin_class
