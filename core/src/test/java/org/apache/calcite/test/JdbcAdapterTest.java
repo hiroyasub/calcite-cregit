@@ -1044,6 +1044,55 @@ literal|"WHERE CAST(\"DEPTNO\" AS INTEGER) = 20) AS \"t1\" ON \"t\".\"DEPTNO\" =
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-893">[CALCITE-893]    * Theta join in JdbcAdapter</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testJoinPlan
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"SELECT T1.\"brand_name\"\n"
+operator|+
+literal|"FROM \"foodmart\".\"product\" AS T1\n"
+operator|+
+literal|" INNER JOIN \"foodmart\".\"product_class\" AS T2\n"
+operator|+
+literal|" ON T1.\"product_class_id\" = T2.\"product_class_id\"\n"
+operator|+
+literal|"WHERE T2.\"product_department\" = 'Frozen Foods'\n"
+operator|+
+literal|" OR T2.\"product_department\" = 'Baking Goods'\n"
+operator|+
+literal|" AND T1.\"brand_name\"<> 'King'"
+decl_stmt|;
+name|CalciteAssert
+operator|.
+name|model
+argument_list|(
+name|JdbcTest
+operator|.
+name|FOODMART_MODEL
+argument_list|)
+operator|.
+name|query
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|runs
+argument_list|()
+operator|.
+name|returnsCount
+argument_list|(
+literal|275
+argument_list|)
+expr_stmt|;
+block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-657">[CALCITE-657]    * NullPointerException when executing JdbcAggregate implement method</a>. */
 annotation|@
 name|Test
