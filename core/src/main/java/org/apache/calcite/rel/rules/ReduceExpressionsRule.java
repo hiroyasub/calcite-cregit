@@ -3136,6 +3136,8 @@ name|getType
 argument_list|()
 argument_list|,
 name|replacement
+argument_list|,
+literal|true
 argument_list|)
 expr_stmt|;
 block|}
