@@ -12016,6 +12016,25 @@ literal|"Unknown identifier 'EMPNO'"
 argument_list|)
 expr_stmt|;
 block|}
+comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-546">[CALCITE-546]    * Allow table, column and field called '*'</a>.    */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testStarIdentifier
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"SELECT * FROM (VALUES (0, 0)) AS T(A, \"*\")"
+argument_list|)
+operator|.
+name|type
+argument_list|(
+literal|"RecordType(INTEGER NOT NULL A, INTEGER NOT NULL *) NOT NULL"
+argument_list|)
+expr_stmt|;
+block|}
 annotation|@
 name|Test
 specifier|public
@@ -12055,7 +12074,7 @@ literal|"Unknown identifier 'E'"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Parser allows "*" in FROM clause because "*" can occur in any identifier.    * But validator must not.    *    *<p>See also    *<a href="https://issues.apache.org/jira/browse/CALCITE-546">[CALCITE-546]    * Allow table, column and field called '*'</a> (not yet fixed).    */
+comment|/**    * Parser allows "*" in FROM clause because "*" can occur in any identifier.    * But validator must not.    *    * @see #testStarIdentifier()    */
 annotation|@
 name|Test
 specifier|public

@@ -1022,6 +1022,22 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testFakeStar
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"SELECT * FROM (VALUES (0, 0)) AS T(A, \"*\")"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testSelectDistinct
 parameter_list|()
 block|{

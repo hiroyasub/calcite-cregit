@@ -876,11 +876,10 @@ name|Collections
 operator|.
 name|singletonList
 argument_list|(
-operator|new
 name|SqlIdentifier
+operator|.
+name|star
 argument_list|(
-literal|"*"
-argument_list|,
 name|SqlParserPos
 operator|.
 name|ZERO
