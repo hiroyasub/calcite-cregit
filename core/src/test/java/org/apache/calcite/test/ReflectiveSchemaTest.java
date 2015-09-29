@@ -2791,7 +2791,7 @@ literal|"C=1\n"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-119">CALCITE-119</a>,    * "Comparing a Java type long with a SQL type INTEGER gives wrong answer". */
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-119">[CALCITE-119]    * Comparing a Java type long with a SQL type INTEGER gives wrong    * answer</a>. */
 annotation|@
 name|Test
 specifier|public
@@ -3218,7 +3218,7 @@ literal|"C=null\n"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-580">CALCITE-580</a>,    * "Average aggregation on an Integer column throws ClassCastException". */
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-580">[CALCITE-580]    * Average aggregation on an Integer column throws ClassCastException</a>. */
 annotation|@
 name|Test
 specifier|public

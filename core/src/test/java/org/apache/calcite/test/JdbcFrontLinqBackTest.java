@@ -638,7 +638,7 @@ literal|"Column 'EMPID' not found in any table"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-9">CALCITE-9</a>,    * "RexToLixTranslator not incrementing local variable name counter". */
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-9">[CALCITE-9]    * RexToLixTranslator not incrementing local variable name counter</a>. */
 annotation|@
 name|Test
 specifier|public

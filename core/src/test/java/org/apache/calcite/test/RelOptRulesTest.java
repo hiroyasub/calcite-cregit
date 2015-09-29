@@ -1807,7 +1807,7 @@ name|basePushFilterPastAggWithGroupingSets
 argument_list|()
 expr_stmt|;
 block|}
-comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-434">[CALCITE-434],    * FilterAggregateTransposeRule loses conditions that cannot be pushed</a>. */
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-434">[CALCITE-434]    * FilterAggregateTransposeRule loses conditions that cannot be pushed</a>. */
 annotation|@
 name|Test
 specifier|public
@@ -1831,7 +1831,7 @@ literal|"where dept1.c1> 'c' and (dept1.c2> 30 or dept1.c1< 'z')"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-799">[CALCITE-799],    * Incorrect result for {@code HAVING count(*)> 1}</a>. */
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-799">[CALCITE-799]    * Incorrect result for {@code HAVING count(*)> 1}</a>. */
 annotation|@
 name|Test
 specifier|public
@@ -1849,7 +1849,7 @@ literal|"select deptno from emp group by deptno having count(*)> 1"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-448">[CALCITE-448],    * FilterIntoJoinRule creates filters containing invalid RexInputRef</a>. */
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-448">[CALCITE-448]    * FilterIntoJoinRule creates filters containing invalid RexInputRef</a>. */
 annotation|@
 name|Test
 specifier|public
@@ -2204,7 +2204,7 @@ literal|"  and emp.sal> 100)"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-438">[CALCITE-438],    * Push predicates through SemiJoin</a>. */
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-438">[CALCITE-438]    * Push predicates through SemiJoin</a>. */
 annotation|@
 name|Test
 specifier|public
@@ -2294,7 +2294,7 @@ literal|"  ))R where R.deptno<=10 "
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-571">[CALCITE-571],    * ReduceExpressionsRule tries to reduce SemiJoin condition to non-equi    * condition</a>. */
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-571">[CALCITE-571]    * ReduceExpressionsRule tries to reduce SemiJoin condition to non-equi    * condition</a>. */
 annotation|@
 name|Test
 specifier|public
@@ -3771,7 +3771,7 @@ literal|" where d.deptno=(7+8) and d.deptno=(8+7) and d.deptno=coalesce(2,null)"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-570">[CALCITE-570],    * ReduceExpressionsRule throws "duplicate key" exception</a>. */
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-570">[CALCITE-570]    * ReduceExpressionsRule throws "duplicate key" exception</a>. */
 annotation|@
 name|Test
 specifier|public
@@ -3872,7 +3872,7 @@ literal|"select p1 is not distinct from p0 from (values (2, cast(null as integer
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-902">[CALCITE-902],    * Match nullability when reducing expressions in a Project</a>. */
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-902">[CALCITE-902]    * Match nullability when reducing expressions in a Project</a>. */
 annotation|@
 name|Test
 specifier|public
@@ -4183,7 +4183,7 @@ literal|"select * from (values (1,2)) where 1 + 2> 3 + CAST(NULL AS INTEGER)"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-566">[CALCITE-566],    * ReduceExpressionsRule requires planner to have an Executor</a>. */
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-566">[CALCITE-566]    * ReduceExpressionsRule requires planner to have an Executor</a>. */
 annotation|@
 name|Test
 specifier|public
@@ -6960,7 +6960,7 @@ name|transitiveInference
 argument_list|()
 expr_stmt|;
 block|}
-comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-443">[CALCITE-443],    * getPredicates from a union is not correct</a>. */
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-443">[CALCITE-443]    * getPredicates from a union is not correct</a>. */
 annotation|@
 name|Test
 specifier|public
@@ -7277,7 +7277,7 @@ literal|"where r< 2"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-841">[CALCITE-841],    * Redundant windows when window function arguments are expressions</a>. */
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-841">[CALCITE-841]    * Redundant windows when window function arguments are expressions</a>. */
 annotation|@
 name|Test
 specifier|public
@@ -7356,7 +7356,7 @@ name|sql
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-888">[CALCITE-888],    * Overlay window loses PARTITION BY list</a>. */
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-888">[CALCITE-888]    * Overlay window loses PARTITION BY list</a>. */
 annotation|@
 name|Test
 specifier|public

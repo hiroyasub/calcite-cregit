@@ -2660,7 +2660,7 @@ expr_stmt|;
 block|}
 block|}
 block|}
-comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-286">CALCITE-286</a>,    * "Error casting MongoDB date". */
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-286">[CALCITE-286]    * Error casting MongoDB date</a>. */
 annotation|@
 name|Test
 specifier|public

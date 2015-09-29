@@ -886,7 +886,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Tests that validation (specifically, inferring the result of adding    * two DECIMAL(19, 0) values together) happens differently with a type system    * that allows a larger maximum precision for decimals.    *    *<p>Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-413">CALCITE-413</a>,    * "Add RelDataTypeSystem plugin, allowing different max precision of a    * DECIMAL".    *    *<p>Also tests the plugin system, by specifying implementations of a    * plugin interface with public and private constructors. */
+comment|/** Tests that validation (specifically, inferring the result of adding    * two DECIMAL(19, 0) values together) happens differently with a type system    * that allows a larger maximum precision for decimals.    *    *<p>Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-413">[CALCITE-413]    * Add RelDataTypeSystem plugin, allowing different max precision of a    * DECIMAL</a>.    *    *<p>Also tests the plugin system, by specifying implementations of a    * plugin interface with public and private constructors. */
 annotation|@
 name|Test
 specifier|public
@@ -1073,7 +1073,7 @@ block|}
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Tests that the validator expands identifiers by default.    *    *<p>Test case for    * [<a href="https://issues.apache.org/jira/browse/CALCITE-593">CALCITE-593</a>]    * "Validator in Frameworks should expand identifiers".    */
+comment|/** Tests that the validator expands identifiers by default.    *    *<p>Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-593">[CALCITE-593]    * Validator in Frameworks should expand identifiers</a>.    */
 annotation|@
 name|Test
 specifier|public

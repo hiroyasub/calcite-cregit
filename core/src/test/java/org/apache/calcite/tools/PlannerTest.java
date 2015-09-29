@@ -1871,7 +1871,7 @@ literal|"[OR(<($1, 10),>($0, 2))]"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-443">[CALCITE-443],    * getPredicates from a union is not correct</a>. */
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-443">[CALCITE-443]    * getPredicates from a union is not correct</a>. */
 annotation|@
 name|Test
 specifier|public
@@ -3407,7 +3407,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-435">CALCITE-435</a>,    * "LoptOptimizeJoinRule incorrectly re-orders outer joins".    *    *<p>Checks the    * {@link org.apache.calcite.rel.rules.LoptOptimizeJoinRule} on a query with a    * left outer join.    *    *<p>Specifically, tests that a relation (dependents) in an inner join    * cannot be pushed into an outer join (emps left join depts).    */
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-435">[CALCITE-435]    * LoptOptimizeJoinRule incorrectly re-orders outer joins</a>.    *    *<p>Checks the    * {@link org.apache.calcite.rel.rules.LoptOptimizeJoinRule} on a query with a    * left outer join.    *    *<p>Specifically, tests that a relation (dependents) in an inner join    * cannot be pushed into an outer join (emps left join depts).    */
 annotation|@
 name|Test
 specifier|public
@@ -4646,7 +4646,7 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-569">[CALCITE-569],    * ArrayIndexOutOfBoundsException when deducing collation</a>. */
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-569">[CALCITE-569]    * ArrayIndexOutOfBoundsException when deducing collation</a>. */
 annotation|@
 name|Test
 specifier|public
