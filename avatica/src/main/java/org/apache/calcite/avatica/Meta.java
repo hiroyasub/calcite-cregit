@@ -1386,6 +1386,20 @@ assert|assert
 name|updateCount
 operator|>=
 literal|0
+operator|:
+literal|"Meta.count("
+operator|+
+name|connectionId
+operator|+
+literal|", "
+operator|+
+name|statementId
+operator|+
+literal|", "
+operator|+
+name|updateCount
+operator|+
+literal|")"
 assert|;
 return|return
 operator|new

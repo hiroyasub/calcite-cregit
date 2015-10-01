@@ -405,6 +405,20 @@ name|TimeUnit
 import|;
 end_import
 
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|concurrent
+operator|.
+name|atomic
+operator|.
+name|AtomicInteger
+import|;
+end_import
+
 begin_comment
 comment|/** Implementation of {@link Meta} upon an existing JDBC data source. */
 end_comment
@@ -446,6 +460,16 @@ init|=
 name|Calendar
 operator|.
 name|getInstance
+argument_list|()
+decl_stmt|;
+comment|/** Generates ids for statements. The ids are unique across all connections    * created by this JdbcMeta. */
+specifier|private
+specifier|final
+name|AtomicInteger
+name|statementIdGenerator
+init|=
+operator|new
+name|AtomicInteger
 argument_list|()
 decl_stmt|;
 comment|/** Configurable connection cache settings. */
@@ -3328,12 +3352,10 @@ specifier|final
 name|int
 name|id
 init|=
-name|System
+name|statementIdGenerator
 operator|.
-name|identityHashCode
-argument_list|(
-name|statement
-argument_list|)
+name|getAndIncrement
+argument_list|()
 decl_stmt|;
 name|statementCache
 operator|.
@@ -3914,12 +3936,10 @@ specifier|final
 name|int
 name|id
 init|=
-name|System
+name|statementIdGenerator
 operator|.
-name|identityHashCode
-argument_list|(
-name|statement
-argument_list|)
+name|getAndIncrement
+argument_list|()
 decl_stmt|;
 name|statementCache
 operator|.
