@@ -6981,6 +6981,11 @@ name|int
 name|index
 parameter_list|)
 function_decl|;
+comment|/**      *<code>optional bool has_type_list = 6;</code>      *      *<pre>      * Having an empty type_list is distinct from a null type_list      *</pre>      */
+name|boolean
+name|getHasTypeList
+parameter_list|()
+function_decl|;
 block|}
 comment|/**    * Protobuf type {@code TablesRequest}    *    *<pre>    * Request for Request for Meta#getTables(String, org.apache.calcite.avatica.Meta.Pat,    *   org.apache.calcite.avatica.Meta.Pat, java.util.List)    *</pre>    */
 specifier|public
@@ -7049,6 +7054,10 @@ operator|.
 name|LazyStringArrayList
 operator|.
 name|EMPTY
+expr_stmt|;
+name|hasTypeList_
+operator|=
+literal|false
 expr_stmt|;
 block|}
 annotation|@
@@ -7301,6 +7310,19 @@ name|add
 argument_list|(
 name|bs
 argument_list|)
+expr_stmt|;
+break|break;
+block|}
+case|case
+literal|48
+case|:
+block|{
+name|hasTypeList_
+operator|=
+name|input
+operator|.
+name|readBool
+argument_list|()
 expr_stmt|;
 break|break;
 block|}
@@ -8259,6 +8281,28 @@ name|index
 argument_list|)
 return|;
 block|}
+specifier|public
+specifier|static
+specifier|final
+name|int
+name|HAS_TYPE_LIST_FIELD_NUMBER
+init|=
+literal|6
+decl_stmt|;
+specifier|private
+name|boolean
+name|hasTypeList_
+decl_stmt|;
+comment|/**      *<code>optional bool has_type_list = 6;</code>      *      *<pre>      * Having an empty type_list is distinct from a null type_list      *</pre>      */
+specifier|public
+name|boolean
+name|getHasTypeList
+parameter_list|()
+block|{
+return|return
+name|hasTypeList_
+return|;
+block|}
 specifier|private
 name|byte
 name|memoizedIsInitialized
@@ -8419,6 +8463,23 @@ name|getByteString
 argument_list|(
 name|i
 argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+if|if
+condition|(
+name|hasTypeList_
+operator|!=
+literal|false
+condition|)
+block|{
+name|output
+operator|.
+name|writeBool
+argument_list|(
+literal|6
+argument_list|,
+name|hasTypeList_
 argument_list|)
 expr_stmt|;
 block|}
@@ -8599,6 +8660,31 @@ argument_list|()
 operator|.
 name|size
 argument_list|()
+expr_stmt|;
+block|}
+if|if
+condition|(
+name|hasTypeList_
+operator|!=
+literal|false
+condition|)
+block|{
+name|size
+operator|+=
+name|com
+operator|.
+name|google
+operator|.
+name|protobuf
+operator|.
+name|CodedOutputStream
+operator|.
+name|computeBoolSize
+argument_list|(
+literal|6
+argument_list|,
+name|hasTypeList_
+argument_list|)
 expr_stmt|;
 block|}
 name|memoizedSerializedSize
@@ -9410,6 +9496,10 @@ operator|~
 literal|0x00000008
 operator|)
 expr_stmt|;
+name|hasTypeList_
+operator|=
+literal|false
+expr_stmt|;
 return|return
 name|this
 return|;
@@ -9647,6 +9737,12 @@ operator|.
 name|typeList_
 operator|=
 name|typeList_
+expr_stmt|;
+name|result
+operator|.
+name|hasTypeList_
+operator|=
+name|hasTypeList_
 expr_stmt|;
 name|result
 operator|.
@@ -9892,6 +9988,25 @@ expr_stmt|;
 block|}
 name|onChanged
 argument_list|()
+expr_stmt|;
+block|}
+if|if
+condition|(
+name|other
+operator|.
+name|getHasTypeList
+argument_list|()
+operator|!=
+literal|false
+condition|)
+block|{
+name|setHasTypeList
+argument_list|(
+name|other
+operator|.
+name|getHasTypeList
+argument_list|()
+argument_list|)
 expr_stmt|;
 block|}
 name|onChanged
@@ -11231,6 +11346,57 @@ name|add
 argument_list|(
 name|value
 argument_list|)
+expr_stmt|;
+name|onChanged
+argument_list|()
+expr_stmt|;
+return|return
+name|this
+return|;
+block|}
+specifier|private
+name|boolean
+name|hasTypeList_
+decl_stmt|;
+comment|/**        *<code>optional bool has_type_list = 6;</code>        *        *<pre>        * Having an empty type_list is distinct from a null type_list        *</pre>        */
+specifier|public
+name|boolean
+name|getHasTypeList
+parameter_list|()
+block|{
+return|return
+name|hasTypeList_
+return|;
+block|}
+comment|/**        *<code>optional bool has_type_list = 6;</code>        *        *<pre>        * Having an empty type_list is distinct from a null type_list        *</pre>        */
+specifier|public
+name|Builder
+name|setHasTypeList
+parameter_list|(
+name|boolean
+name|value
+parameter_list|)
+block|{
+name|hasTypeList_
+operator|=
+name|value
+expr_stmt|;
+name|onChanged
+argument_list|()
+expr_stmt|;
+return|return
+name|this
+return|;
+block|}
+comment|/**        *<code>optional bool has_type_list = 6;</code>        *        *<pre>        * Having an empty type_list is distinct from a null type_list        *</pre>        */
+specifier|public
+name|Builder
+name|clearHasTypeList
+parameter_list|()
+block|{
+name|hasTypeList_
+operator|=
+literal|false
 expr_stmt|;
 name|onChanged
 argument_list|()
@@ -42642,53 +42808,55 @@ literal|"gsRequest\"\031\n\027DatabasePropertyRequest\"9\n\016"
 operator|+
 literal|"SchemasRequest\022\017\n\007catalog\030\001 \001(\t\022\026\n\016schem"
 operator|+
-literal|"a_pattern\030\002 \001(\t\"g\n\rTablesRequest\022\017\n\007cata"
+literal|"a_pattern\030\002 \001(\t\"~\n\rTablesRequest\022\017\n\007cata"
 operator|+
 literal|"log\030\001 \001(\t\022\026\n\016schema_pattern\030\002 \001(\t\022\032\n\022tab"
 operator|+
 literal|"le_name_pattern\030\003 \001(\t\022\021\n\ttype_list\030\004 \003(\t"
 operator|+
-literal|"\"\023\n\021TableTypesRequest\"r\n\016ColumnsRequest\022"
+literal|"\022\025\n\rhas_type_list\030\006 \001(\010\"\023\n\021TableTypesReq"
 operator|+
-literal|"\017\n\007catalog\030\001 \001(\t\022\026\n\016schema_pattern\030\002 \001(\t"
+literal|"uest\"r\n\016ColumnsRequest\022\017\n\007catalog\030\001 \001(\t\022"
 operator|+
-literal|"\022\032\n\022table_name_pattern\030\003 \001(\t\022\033\n\023column_n"
+literal|"\026\n\016schema_pattern\030\002 \001(\t\022\032\n\022table_name_pa"
 operator|+
-literal|"ame_pattern\030\004 \001(\t\"\021\n\017TypeInfoRequest\"k\n\030"
+literal|"ttern\030\003 \001(\t\022\033\n\023column_name_pattern\030\004 \001(\t"
 block|,
-literal|"PrepareAndExecuteRequest\022\025\n\rconnection_i"
+literal|"\"\021\n\017TypeInfoRequest\"k\n\030PrepareAndExecute"
 operator|+
-literal|"d\030\001 \001(\t\022\013\n\003sql\030\002 \001(\t\022\025\n\rmax_row_count\030\003 "
+literal|"Request\022\025\n\rconnection_id\030\001 \001(\t\022\013\n\003sql\030\002 "
 operator|+
-literal|"\001(\004\022\024\n\014statement_id\030\004 \001(\r\"K\n\016PrepareRequ"
+literal|"\001(\t\022\025\n\rmax_row_count\030\003 \001(\004\022\024\n\014statement_"
 operator|+
-literal|"est\022\025\n\rconnection_id\030\001 \001(\t\022\013\n\003sql\030\002 \001(\t\022"
+literal|"id\030\004 \001(\r\"K\n\016PrepareRequest\022\025\n\rconnection"
 operator|+
-literal|"\025\n\rmax_row_count\030\003 \001(\004\"\255\001\n\014FetchRequest\022"
+literal|"_id\030\001 \001(\t\022\013\n\003sql\030\002 \001(\t\022\025\n\rmax_row_count\030"
 operator|+
-literal|"\025\n\rconnection_id\030\001 \001(\t\022\024\n\014statement_id\030\002"
+literal|"\003 \001(\004\"\255\001\n\014FetchRequest\022\025\n\rconnection_id\030"
 operator|+
-literal|" \001(\r\022\016\n\006offset\030\003 \001(\004\022\033\n\023fetch_max_row_co"
+literal|"\001 \001(\t\022\024\n\014statement_id\030\002 \001(\r\022\016\n\006offset\030\003 "
 operator|+
-literal|"unt\030\004 \001(\r\022%\n\020parameter_values\030\005 \003(\0132\013.Ty"
+literal|"\001(\004\022\033\n\023fetch_max_row_count\030\004 \001(\r\022%\n\020para"
 operator|+
-literal|"pedValue\022\034\n\024has_parameter_values\030\006 \001(\010\"/"
+literal|"meter_values\030\005 \003(\0132\013.TypedValue\022\034\n\024has_p"
 operator|+
-literal|"\n\026CreateStatementRequest\022\025\n\rconnection_i"
+literal|"arameter_values\030\006 \001(\010\"/\n\026CreateStatement"
 block|,
-literal|"d\030\001 \001(\t\"D\n\025CloseStatementRequest\022\025\n\rconn"
+literal|"Request\022\025\n\rconnection_id\030\001 \001(\t\"D\n\025CloseS"
 operator|+
-literal|"ection_id\030\001 \001(\t\022\024\n\014statement_id\030\002 \001(\r\"/\n"
+literal|"tatementRequest\022\025\n\rconnection_id\030\001 \001(\t\022\024"
 operator|+
-literal|"\026CloseConnectionRequest\022\025\n\rconnection_id"
+literal|"\n\014statement_id\030\002 \001(\r\"/\n\026CloseConnectionR"
 operator|+
-literal|"\030\001 \001(\t\"Y\n\025ConnectionSyncRequest\022\025\n\rconne"
+literal|"equest\022\025\n\rconnection_id\030\001 \001(\t\"Y\n\025Connect"
 operator|+
-literal|"ction_id\030\001 \001(\t\022)\n\nconn_props\030\002 \001(\0132\025.Con"
+literal|"ionSyncRequest\022\025\n\rconnection_id\030\001 \001(\t\022)\n"
 operator|+
-literal|"nectionPropertiesB\"\n org.apache.calcite."
+literal|"\nconn_props\030\002 \001(\0132\025.ConnectionProperties"
 operator|+
-literal|"avatica.protob\006proto3"
+literal|"B\"\n org.apache.calcite.avatica.protob\006pr"
+operator|+
+literal|"oto3"
 block|}
 decl_stmt|;
 name|com
@@ -42956,6 +43124,8 @@ block|,
 literal|"TableNamePattern"
 block|,
 literal|"TypeList"
+block|,
+literal|"HasTypeList"
 block|, }
 argument_list|)
 expr_stmt|;
