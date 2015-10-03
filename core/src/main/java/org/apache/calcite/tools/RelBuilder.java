@@ -6072,6 +6072,33 @@ return|return
 name|this
 return|;
 block|}
+comment|/** Creates a {@link Values} with a specified row type and    * zero rows.    *    * @param rowType Row type    */
+specifier|public
+name|RelBuilder
+name|values
+parameter_list|(
+name|RelDataType
+name|rowType
+parameter_list|)
+block|{
+return|return
+name|values
+argument_list|(
+name|rowType
+argument_list|,
+name|ImmutableList
+operator|.
+expr|<
+name|ImmutableList
+argument_list|<
+name|RexLiteral
+argument_list|>
+operator|>
+name|of
+argument_list|()
+argument_list|)
+return|;
+block|}
 comment|/** Creates a limit without a sort. */
 specifier|public
 name|RelBuilder
