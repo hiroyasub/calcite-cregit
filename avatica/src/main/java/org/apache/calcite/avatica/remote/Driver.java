@@ -386,6 +386,8 @@ name|service
 init|=
 name|createService
 argument_list|(
+name|connection
+argument_list|,
 name|config
 argument_list|)
 decl_stmt|;
@@ -403,17 +405,13 @@ specifier|private
 name|Service
 name|createService
 parameter_list|(
+name|AvaticaConnection
+name|connection
+parameter_list|,
 name|ConnectionConfig
 name|config
 parameter_list|)
 block|{
-comment|// Exploit that none of the factory implementations currently rely
-comment|// on connection being there.
-name|AvaticaConnection
-name|connection
-init|=
-literal|null
-decl_stmt|;
 specifier|final
 name|Service
 operator|.
@@ -620,6 +618,8 @@ name|service
 init|=
 name|createService
 argument_list|(
+name|conn
+argument_list|,
 name|config
 argument_list|)
 decl_stmt|;

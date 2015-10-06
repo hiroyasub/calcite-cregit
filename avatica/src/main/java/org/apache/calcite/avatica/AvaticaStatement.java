@@ -525,7 +525,7 @@ name|helper
 operator|.
 name|createException
 argument_list|(
-literal|"error while executing SQL \""
+literal|"Error while executing SQL \""
 operator|+
 name|sql
 operator|+
@@ -633,7 +633,7 @@ name|helper
 operator|.
 name|createException
 argument_list|(
-literal|"error while executing SQL \""
+literal|"Error while executing SQL \""
 operator|+
 name|sql
 operator|+

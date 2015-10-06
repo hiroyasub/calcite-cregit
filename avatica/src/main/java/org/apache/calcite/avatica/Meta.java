@@ -307,6 +307,16 @@ name|Objects
 import|;
 end_import
 
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Properties
+import|;
+end_import
+
 begin_comment
 comment|/**  * Command handler for getting various metadata. Should be implemented by each  * driver.  *  *<p>Also holds other abstract methods that are not related to metadata  * that each provider must implement. This is not ideal.</p>  */
 end_comment

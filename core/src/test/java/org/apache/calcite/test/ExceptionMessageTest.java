@@ -471,7 +471,7 @@ argument_list|()
 argument_list|,
 name|equalTo
 argument_list|(
-literal|"error while executing SQL \"select * from \"badEntries\"\": "
+literal|"Error while executing SQL \"select * from \"badEntries\"\": "
 operator|+
 literal|"Can't iterate over badEntries"
 argument_list|)
@@ -514,7 +514,7 @@ argument_list|()
 argument_list|,
 name|equalTo
 argument_list|(
-literal|"error while executing SQL \"invalid sql\": parse failed: "
+literal|"Error while executing SQL \"invalid sql\": parse failed: "
 operator|+
 literal|"Non-query expression encountered in illegal context"
 argument_list|)
