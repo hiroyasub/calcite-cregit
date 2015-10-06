@@ -17661,9 +17661,16 @@ argument_list|(
 literal|"select collect(multiset[3]) from emp"
 argument_list|)
 expr_stmt|;
-comment|// todo. COLLECT is an aggregate function. test that validator only can
-comment|// take set operators in its select list once aggregation support is
-comment|// complete
+name|sql
+argument_list|(
+literal|"select collect(multiset[3]), ^deptno^ from emp"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Expression 'DEPTNO' is not being grouped"
+argument_list|)
+expr_stmt|;
 block|}
 annotation|@
 name|Test

@@ -1013,6 +1013,22 @@ return|;
 block|}
 block|}
 decl_stmt|;
+comment|/**    * Returns a multiset type.    *    *<p>For example, given<code>INTEGER</code>, returns    *<code>INTEGER MULTISET</code>.    */
+specifier|public
+specifier|static
+specifier|final
+name|SqlReturnTypeInference
+name|TO_MULTISET
+init|=
+name|cascade
+argument_list|(
+name|ARG0
+argument_list|,
+name|SqlTypeTransforms
+operator|.
+name|TO_MULTISET
+argument_list|)
+decl_stmt|;
 comment|/**    * Returns the element type of a multiset    */
 specifier|public
 specifier|static

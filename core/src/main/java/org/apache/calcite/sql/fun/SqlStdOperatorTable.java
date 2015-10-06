@@ -4128,11 +4128,11 @@ comment|/**    * The COLLECT operator. Multiset aggregator function.    */
 specifier|public
 specifier|static
 specifier|final
-name|SqlFunction
+name|SqlAggFunction
 name|COLLECT
 init|=
 operator|new
-name|SqlFunction
+name|SqlAggFunction
 argument_list|(
 literal|"COLLECT"
 argument_list|,
@@ -4142,7 +4142,7 @@ name|OTHER_FUNCTION
 argument_list|,
 name|ReturnTypes
 operator|.
-name|ARG0
+name|TO_MULTISET
 argument_list|,
 literal|null
 argument_list|,
@@ -4154,6 +4154,7 @@ name|SqlFunctionCategory
 operator|.
 name|SYSTEM
 argument_list|)
+block|{       }
 decl_stmt|;
 comment|/**    * The FUSION operator. Multiset aggregator function.    */
 specifier|public
