@@ -698,6 +698,10 @@ name|RelBuilderTest
 operator|.
 name|class
 block|,
+name|PigRelBuilderTest
+operator|.
+name|class
+block|,
 name|RexImplicationCheckerTest
 operator|.
 name|class
