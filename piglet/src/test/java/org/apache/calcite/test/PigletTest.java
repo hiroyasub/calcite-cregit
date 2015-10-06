@@ -479,7 +479,7 @@ block|}
 annotation|@
 name|Ignore
 argument_list|(
-literal|"COLLECT not implemented"
+literal|"only collect first column, should collect a struct"
 argument_list|)
 annotation|@
 name|Test
@@ -984,6 +984,44 @@ name|String
 name|expected
 init|=
 literal|"LogicalValues(tuples=[[{ 1, 'a' }, { 2, 'b' }]])\n"
+decl_stmt|;
+name|pig
+argument_list|(
+name|s
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testValuesNested
+parameter_list|()
+throws|throws
+name|ParseException
+block|{
+specifier|final
+name|String
+name|s
+init|=
+literal|"A = VALUES (1, {('a', true), ('b', false)}),\n"
+operator|+
+literal|" (2, {})\n"
+operator|+
+literal|"AS (x: int, y: bag {tuple(a: string, b: boolean)});\n"
+operator|+
+literal|"DUMP A;"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"LogicalValues(tuples=[[{ 1, [['a', true], ['b', false]] }, { 2, [] }]])\n"
 decl_stmt|;
 name|pig
 argument_list|(
