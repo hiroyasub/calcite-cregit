@@ -6959,6 +6959,21 @@ operator|)
 name|LIST_AS_ENUMERABLE
 return|;
 block|}
+specifier|public
+specifier|static
+name|Object
+index|[]
+name|array
+parameter_list|(
+name|Object
+modifier|...
+name|args
+parameter_list|)
+block|{
+return|return
+name|args
+return|;
+block|}
 block|}
 end_class
 

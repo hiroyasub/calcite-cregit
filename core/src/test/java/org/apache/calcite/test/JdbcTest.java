@@ -10789,7 +10789,7 @@ argument_list|)
 operator|.
 name|returnsUnordered
 argument_list|(
-literal|"A=[[10, 100], [20, 200], [10, 150], [10, 110]]"
+literal|"A=[{10, 100}, {20, 200}, {10, 150}, {10, 110}]"
 argument_list|)
 expr_stmt|;
 block|}
@@ -10816,7 +10816,7 @@ argument_list|)
 operator|.
 name|returnsUnordered
 argument_list|(
-literal|"A=[10, 20, 10, 10]"
+literal|"A=[{10}, {20}, {10}, {10}]"
 argument_list|)
 expr_stmt|;
 block|}
@@ -10914,9 +10914,9 @@ argument_list|)
 operator|.
 name|returnsUnordered
 argument_list|(
-literal|"EXPR$0=Employee [empid: 100, deptno: 10, name: Bill]"
+literal|"empid=100; deptno=10; name=Bill; salary=10000.0; commission=1000"
 argument_list|,
-literal|"EXPR$0=Employee [empid: 150, deptno: 10, name: Sebastian]"
+literal|"empid=150; deptno=10; name=Sebastian; salary=7000.0; commission=null"
 argument_list|)
 expr_stmt|;
 block|}
@@ -10950,7 +10950,7 @@ argument_list|)
 operator|.
 name|returnsUnordered
 argument_list|(
-literal|"EXPR$0=Employee [empid: 200, deptno: 20, name: Eric]"
+literal|"EXPR$0={200, 20, Eric, 8000.0, 500}"
 argument_list|,
 literal|"EXPR$0=null"
 argument_list|)
@@ -10977,11 +10977,11 @@ argument_list|)
 operator|.
 name|returnsUnordered
 argument_list|(
-literal|"empid=100; deptno=10; name=Bill; salary=10000.0; commission=1000; deptno0=10; name0=Sales; employees=[Employee [empid: 100, deptno: 10, name: Bill], Employee [empid: 150, deptno: 10, name: Sebastian]]; location=Location [x: -122, y: 38]"
+literal|"empid=100; deptno=10; name=Bill; salary=10000.0; commission=1000; deptno0=10; name0=Sales; employees=[{100, 10, Bill, 10000.0, 1000}, {150, 10, Sebastian, 7000.0, null}]; location={-122, 38}"
 argument_list|,
-literal|"empid=110; deptno=10; name=Theodore; salary=11500.0; commission=250; deptno0=10; name0=Sales; employees=[Employee [empid: 100, deptno: 10, name: Bill], Employee [empid: 150, deptno: 10, name: Sebastian]]; location=Location [x: -122, y: 38]"
+literal|"empid=110; deptno=10; name=Theodore; salary=11500.0; commission=250; deptno0=10; name0=Sales; employees=[{100, 10, Bill, 10000.0, 1000}, {150, 10, Sebastian, 7000.0, null}]; location={-122, 38}"
 argument_list|,
-literal|"empid=150; deptno=10; name=Sebastian; salary=7000.0; commission=null; deptno0=10; name0=Sales; employees=[Employee [empid: 100, deptno: 10, name: Bill], Employee [empid: 150, deptno: 10, name: Sebastian]]; location=Location [x: -122, y: 38]"
+literal|"empid=150; deptno=10; name=Sebastian; salary=7000.0; commission=null; deptno0=10; name0=Sales; employees=[{100, 10, Bill, 10000.0, 1000}, {150, 10, Sebastian, 7000.0, null}]; location={-122, 38}"
 argument_list|)
 expr_stmt|;
 block|}
@@ -12257,13 +12257,13 @@ argument_list|)
 operator|.
 name|returnsUnordered
 argument_list|(
-literal|"empid=100; deptno=10; name=Bill; salary=10000.0; commission=1000; deptno0=30; name0=Marketing; employees=[]; location=Location [x: 0, y: 52]"
+literal|"empid=100; deptno=10; name=Bill; salary=10000.0; commission=1000; deptno0=30; name0=Marketing; employees=[]; location={0, 52}"
 argument_list|,
-literal|"empid=100; deptno=10; name=Bill; salary=10000.0; commission=1000; deptno0=40; name0=HR; employees=[Employee [empid: 200, deptno: 20, name: Eric]]; location=null"
+literal|"empid=100; deptno=10; name=Bill; salary=10000.0; commission=1000; deptno0=40; name0=HR; employees=[{200, 20, Eric, 8000.0, 500}]; location=null"
 argument_list|,
-literal|"empid=110; deptno=10; name=Theodore; salary=11500.0; commission=250; deptno0=30; name0=Marketing; employees=[]; location=Location [x: 0, y: 52]"
+literal|"empid=110; deptno=10; name=Theodore; salary=11500.0; commission=250; deptno0=30; name0=Marketing; employees=[]; location={0, 52}"
 argument_list|,
-literal|"empid=110; deptno=10; name=Theodore; salary=11500.0; commission=250; deptno0=40; name0=HR; employees=[Employee [empid: 200, deptno: 20, name: Eric]]; location=null"
+literal|"empid=110; deptno=10; name=Theodore; salary=11500.0; commission=250; deptno0=40; name0=HR; employees=[{200, 20, Eric, 8000.0, 500}]; location=null"
 argument_list|)
 expr_stmt|;
 block|}
@@ -12647,7 +12647,7 @@ argument_list|)
 operator|.
 name|returnsUnordered
 argument_list|(
-literal|"deptno=10; name=Sales; employees=[Employee [empid: 100, deptno: 10, name: Bill], Employee [empid: 150, deptno: 10, name: Sebastian]]; location=Location [x: -122, y: 38]"
+literal|"deptno=10; name=Sales; employees=[{100, 10, Bill, 10000.0, 1000}, {150, 10, Sebastian, 7000.0, null}]; location={-122, 38}"
 argument_list|)
 expr_stmt|;
 block|}
@@ -16466,15 +16466,13 @@ argument_list|(
 literal|"select \"deptno\", \"employees\"[1] as e from \"hr\".\"depts\"\n"
 argument_list|)
 operator|.
-name|returns
+name|returnsUnordered
 argument_list|(
-literal|""
-operator|+
-literal|"deptno=10; E=Employee [empid: 100, deptno: 10, name: Bill]\n"
-operator|+
-literal|"deptno=30; E=null\n"
-operator|+
-literal|"deptno=40; E=Employee [empid: 200, deptno: 20, name: Eric]\n"
+literal|"deptno=10; E={100, 10, Bill, 10000.0, 1000}"
+argument_list|,
+literal|"deptno=30; E=null"
+argument_list|,
+literal|"deptno=40; E={200, 20, Eric, 8000.0, 500}"
 argument_list|)
 expr_stmt|;
 block|}
@@ -26797,6 +26795,25 @@ specifier|final
 name|String
 name|name
 decl_stmt|;
+annotation|@
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|adapter
+operator|.
+name|java
+operator|.
+name|Array
+argument_list|(
+name|component
+operator|=
+name|Employee
+operator|.
+name|class
+argument_list|)
 specifier|public
 specifier|final
 name|List

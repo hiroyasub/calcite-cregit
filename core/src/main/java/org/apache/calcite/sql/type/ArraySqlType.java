@@ -49,6 +49,20 @@ name|RelDataTypeFamily
 import|;
 end_import
 
+begin_import
+import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|base
+operator|.
+name|Preconditions
+import|;
+end_import
+
 begin_comment
 comment|/**  * SQL array type.  */
 end_comment
@@ -89,16 +103,16 @@ argument_list|,
 literal|null
 argument_list|)
 expr_stmt|;
-assert|assert
-name|elementType
-operator|!=
-literal|null
-assert|;
 name|this
 operator|.
 name|elementType
 operator|=
+name|Preconditions
+operator|.
+name|checkNotNull
+argument_list|(
 name|elementType
+argument_list|)
 expr_stmt|;
 name|computeDigest
 argument_list|()

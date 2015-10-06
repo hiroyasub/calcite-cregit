@@ -264,7 +264,9 @@ literal|0
 argument_list|,
 name|child
 argument_list|,
-name|pref
+name|Prefer
+operator|.
+name|ARRAY
 argument_list|)
 decl_stmt|;
 specifier|final
@@ -283,9 +285,9 @@ argument_list|,
 name|getRowType
 argument_list|()
 argument_list|,
-name|result
+name|JavaRowFormat
 operator|.
-name|format
+name|LIST
 argument_list|)
 decl_stmt|;
 comment|// final Enumerable<Employee> child =<<child adapter>>;

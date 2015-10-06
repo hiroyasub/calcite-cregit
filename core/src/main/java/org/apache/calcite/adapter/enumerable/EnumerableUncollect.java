@@ -308,9 +308,9 @@ argument_list|,
 name|getRowType
 argument_list|()
 argument_list|,
-name|result
+name|JavaRowFormat
 operator|.
-name|format
+name|LIST
 argument_list|)
 decl_stmt|;
 specifier|final

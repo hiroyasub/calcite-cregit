@@ -1635,6 +1635,21 @@ decl_stmt|;
 if|if
 condition|(
 name|type
+operator|.
+name|isNullable
+argument_list|()
+operator|==
+name|nullable
+condition|)
+block|{
+name|newType
+operator|=
+name|type
+expr_stmt|;
+block|}
+if|else if
+condition|(
+name|type
 operator|instanceof
 name|RelRecordType
 condition|)
