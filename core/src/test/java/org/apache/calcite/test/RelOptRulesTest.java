@@ -945,6 +945,22 @@ name|rel
 operator|.
 name|rules
 operator|.
+name|SortUnionTransposeRule
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|rules
+operator|.
 name|TableScanRule
 import|;
 end_import
@@ -2110,6 +2126,60 @@ operator|+
 literal|"left join dept b on b.deptno> 10\n"
 operator|+
 literal|"right join dept c on b.deptno> 10\n"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-889">[CALCITE-889]    * Implement SortUnionTransposeRule</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSortUnionTranspose
+parameter_list|()
+block|{
+specifier|final
+name|HepProgram
+name|program
+init|=
+name|HepProgram
+operator|.
+name|builder
+argument_list|()
+operator|.
+name|addRuleInstance
+argument_list|(
+name|ProjectSetOpTransposeRule
+operator|.
+name|INSTANCE
+argument_list|)
+operator|.
+name|addRuleInstance
+argument_list|(
+name|SortUnionTransposeRule
+operator|.
+name|INSTANCE
+argument_list|)
+operator|.
+name|build
+argument_list|()
+decl_stmt|;
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select a.name from dept a\n"
+operator|+
+literal|"union all\n"
+operator|+
+literal|"select b.name from dept b\n"
+operator|+
+literal|"order by name limit 10"
+decl_stmt|;
+name|checkPlanning
+argument_list|(
+name|program
+argument_list|,
+name|sql
 argument_list|)
 expr_stmt|;
 block|}
