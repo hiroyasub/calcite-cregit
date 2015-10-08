@@ -168,7 +168,7 @@ import|;
 end_import
 
 begin_comment
-comment|/** Unit test for {@link org.apache.calcite.adapter.tpch.TpchSchema}.  *  *<p>Because the TPC-H data generator takes time and memory to instantiate,  * tests that read data (that is, most tests) only run  * if {@code -Dcalcite.test.slow=true} is specified on the command-line.  * (See {@link org.apache.calcite.test.CalciteAssert#ENABLE_SLOW}.)</p> */
+comment|/** Unit test for {@link org.apache.calcite.adapter.tpch.TpchSchema}.  *  *<p>Because the TPC-H data generator takes time and memory to instantiate,  * tests that read data (that is, most tests) only run  * if {@code -Dcalcite.test.slow} is specified on the command-line.  * (See {@link org.apache.calcite.test.CalciteAssert#ENABLE_SLOW}.)</p> */
 end_comment
 
 begin_class

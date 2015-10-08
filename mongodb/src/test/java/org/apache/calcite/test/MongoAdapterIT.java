@@ -393,18 +393,13 @@ specifier|final
 name|boolean
 name|ENABLED
 init|=
-name|Boolean
+name|Util
 operator|.
-name|valueOf
-argument_list|(
-name|System
-operator|.
-name|getProperty
+name|getBooleanProperty
 argument_list|(
 literal|"calcite.test.mongodb"
 argument_list|,
-literal|"true"
-argument_list|)
+literal|true
 argument_list|)
 decl_stmt|;
 comment|/** Whether to run this test. */

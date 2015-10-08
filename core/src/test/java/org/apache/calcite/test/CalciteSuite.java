@@ -797,7 +797,7 @@ operator|.
 name|class
 block|,
 comment|// system tests and benchmarks (very slow, but usually only run if
-comment|// '-Dcalcite.test.slow=true' is specified)
+comment|// '-Dcalcite.test.slow' is specified)
 name|FoodmartTest
 operator|.
 name|class

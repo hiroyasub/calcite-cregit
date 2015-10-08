@@ -17,6 +17,20 @@ end_package
 
 begin_import
 import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|util
+operator|.
+name|Util
+import|;
+end_import
+
+begin_import
+import|import
 name|com
 operator|.
 name|google
@@ -222,16 +236,16 @@ name|SPLUNK_PASSWORD
 init|=
 literal|"changeme"
 decl_stmt|;
-comment|/** Whether to run Splunk tests. Disabled by default, because we do not expect    * Splunk to be installed and populated data set. To enable,    * specify {@code -Dcalcite.test.splunk=true} on the Java command line. */
+comment|/** Whether to run Splunk tests. Disabled by default, because we do not expect    * Splunk to be installed and populated data set. To enable,    * specify {@code -Dcalcite.test.splunk} on the Java command line. */
 specifier|public
 specifier|static
 specifier|final
 name|boolean
 name|ENABLED
 init|=
-name|Boolean
+name|Util
 operator|.
-name|getBoolean
+name|getBooleanProperty
 argument_list|(
 literal|"calcite.test.splunk"
 argument_list|)
@@ -834,9 +848,7 @@ name|actual
 init|=
 operator|new
 name|HashSet
-argument_list|<
-name|String
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 try|try
