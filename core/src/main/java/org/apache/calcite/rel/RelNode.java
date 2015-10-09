@@ -258,7 +258,10 @@ name|String
 name|getCorrelVariable
 parameter_list|()
 function_decl|;
-comment|/**    * Returns whether the same value will not come out twice. Default value is    *<code>false</code>, derived classes should override.    *    * @return Whether the same value will not come out twice    */
+comment|/**    * Returns whether the same value will not come out twice. Default value is    *<code>false</code>, derived classes should override.    *    * @return Whether the same value will not come out twice    *    * @deprecated Use {@link RelMetadataQuery#areRowsUnique(RelNode)}    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 name|boolean
 name|isDistinct
 parameter_list|()
@@ -450,7 +453,10 @@ name|RelOptPlanner
 name|planner
 parameter_list|)
 function_decl|;
-comment|/**    * Returns whether the result of this relational expression is uniquely    * identified by this columns with the given ordinals.    *    *<p>For example, if this relational expression is a LogicalTableScan to    * T(A, B, C, D) whose key is (A, B), then isKey([0, 1]) yields true,    * and isKey([0]) and isKey([0, 2]) yields false.</p>    *    * @param columns Ordinals of key columns    * @return Whether the given columns are a key or a superset of a key    */
+comment|/**    * Returns whether the result of this relational expression is uniquely    * identified by this columns with the given ordinals.    *    *<p>For example, if this relational expression is a LogicalTableScan to    * T(A, B, C, D) whose key is (A, B), then isKey([0, 1]) yields true,    * and isKey([0]) and isKey([0, 2]) yields false.</p>    *    * @param columns Ordinals of key columns    * @return Whether the given columns are a key or a superset of a key    *    * @deprecated Use {@link RelMetadataQuery#areColumnsUnique(RelNode, ImmutableBitSet)}    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 name|boolean
 name|isKey
 parameter_list|(

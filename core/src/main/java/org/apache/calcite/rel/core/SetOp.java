@@ -161,20 +161,6 @@ end_import
 
 begin_import
 import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|util
-operator|.
-name|ImmutableBitSet
-import|;
-end_import
-
-begin_import
-import|import
 name|com
 operator|.
 name|google
@@ -475,36 +461,6 @@ expr_stmt|;
 name|recomputeDigest
 argument_list|()
 expr_stmt|;
-block|}
-annotation|@
-name|Override
-specifier|public
-name|boolean
-name|isKey
-parameter_list|(
-name|ImmutableBitSet
-name|columns
-parameter_list|)
-block|{
-comment|// If not ALL then the rows are distinct.
-comment|// Therefore the set of all columns is a key.
-return|return
-operator|!
-name|all
-operator|&&
-name|columns
-operator|.
-name|nextClearBit
-argument_list|(
-literal|0
-argument_list|)
-operator|>=
-name|getRowType
-argument_list|()
-operator|.
-name|getFieldCount
-argument_list|()
-return|;
 block|}
 annotation|@
 name|Override

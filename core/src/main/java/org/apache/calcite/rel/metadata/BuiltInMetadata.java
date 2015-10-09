@@ -196,7 +196,7 @@ name|UniqueKeys
 extends|extends
 name|Metadata
 block|{
-comment|/**      * Determines the set of unique minimal keys for this expression. A key is      * represented as an {@link org.apache.calcite.util.ImmutableBitSet}, where      * each bit position represents a 0-based output column ordinal.      *      *<p>Note that {@link RelNode#isDistinct} should return {@code true} if and      * only if at least one key is known.</p>      *      *<p>Nulls can be ignored if the relational expression has filtered out      * null values.      *      * @param ignoreNulls if true, ignore null values when determining      *                    whether the keys are unique      * @return set of keys, or null if this information cannot be determined      * (whereas empty set indicates definitely no keys at all)      */
+comment|/**      * Determines the set of unique minimal keys for this expression. A key is      * represented as an {@link org.apache.calcite.util.ImmutableBitSet}, where      * each bit position represents a 0-based output column ordinal.      *      *<p>Nulls can be ignored if the relational expression has filtered out      * null values.      *      * @param ignoreNulls if true, ignore null values when determining      *                    whether the keys are unique      * @return set of keys, or null if this information cannot be determined      * (whereas empty set indicates definitely no keys at all)      */
 name|Set
 argument_list|<
 name|ImmutableBitSet
@@ -215,7 +215,7 @@ name|ColumnUniqueness
 extends|extends
 name|Metadata
 block|{
-comment|/**      * Determines whether a specified set of columns from a specified relational      * expression are unique.      *      *<p>Nulls can be ignored if the relational expression has filtered out      * null values.</p>      *      * @param columns column mask representing the subset of columns for which      *                uniqueness will be determined      * @param ignoreNulls if true, ignore null values when determining column      *                    uniqueness      * @return whether the columns are unique, or      * null if not enough information is available to make that determination      */
+comment|/**      * Determines whether a specified set of columns from a specified relational      * expression are unique.      *      *<p>For example, if the relational expression is a {@code TableScan} to      * T(A, B, C, D) whose key is (A, B), then:      *<ul>      *<li>{@code areColumnsUnique([0, 1])} yields true,      *<li>{@code areColumnsUnique([0])} yields false,      *<li>{@code areColumnsUnique([0, 2])} yields false.      *</ul>      *      *<p>Nulls can be ignored if the relational expression has filtered out      * null values.      *      * @param columns column mask representing the subset of columns for which      *                uniqueness will be determined      * @param ignoreNulls if true, ignore null values when determining column      *                    uniqueness      * @return whether the columns are unique, or      * null if not enough information is available to make that determination      */
 name|Boolean
 name|areColumnsUnique
 parameter_list|(

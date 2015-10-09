@@ -884,17 +884,6 @@ argument_list|>
 name|aggCalls
 parameter_list|)
 function_decl|;
-comment|// implement RelNode
-specifier|public
-name|boolean
-name|isDistinct
-parameter_list|()
-block|{
-comment|// we never return duplicate rows
-return|return
-literal|true
-return|;
-block|}
 comment|/**    * Returns a list of calls to aggregate functions.    *    * @return list of calls to aggregate functions    */
 specifier|public
 name|List

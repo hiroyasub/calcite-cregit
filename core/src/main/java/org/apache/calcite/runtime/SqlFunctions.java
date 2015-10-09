@@ -6657,6 +6657,44 @@ operator|&&
 name|b
 return|;
 block|}
+comment|/** NULL&rarr; FALSE, FALSE&rarr; TRUE, TRUE&rarr; FALSE. */
+specifier|public
+specifier|static
+name|boolean
+name|isFalse
+parameter_list|(
+name|Boolean
+name|b
+parameter_list|)
+block|{
+return|return
+name|b
+operator|!=
+literal|null
+operator|&&
+operator|!
+name|b
+return|;
+block|}
+comment|/** NULL&rarr; TRUE, FALSE&rarr; TRUE, TRUE&rarr; FALSE. */
+specifier|public
+specifier|static
+name|boolean
+name|isNotTrue
+parameter_list|(
+name|Boolean
+name|b
+parameter_list|)
+block|{
+return|return
+name|b
+operator|==
+literal|null
+operator|||
+operator|!
+name|b
+return|;
+block|}
 comment|/** NULL&rarr; TRUE, FALSE&rarr; FALSE, TRUE&rarr; TRUE. */
 specifier|public
 specifier|static
