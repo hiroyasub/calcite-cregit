@@ -237,6 +237,7 @@ argument_list|,
 literal|null
 argument_list|)
 argument_list|,
+comment|// ownStatement=false just to avoid the extra close statement call.
 operator|new
 name|ResultSetResponse
 argument_list|(
@@ -244,7 +245,7 @@ literal|null
 argument_list|,
 literal|1
 argument_list|,
-literal|true
+literal|false
 argument_list|,
 literal|null
 argument_list|,
@@ -284,6 +285,7 @@ name|emptyList
 argument_list|()
 argument_list|)
 argument_list|,
+comment|// ownStatement=false just to avoid the extra close statement call.
 operator|new
 name|ResultSetResponse
 argument_list|(
@@ -291,7 +293,7 @@ literal|null
 argument_list|,
 literal|150
 argument_list|,
-literal|true
+literal|false
 argument_list|,
 literal|null
 argument_list|,
