@@ -767,8 +767,6 @@ literal|"' not found"
 argument_list|)
 throw|;
 block|}
-comment|// Must look for TableMacro before ScalarFunction. Both have an "eval"
-comment|// method.
 specifier|final
 name|TableFunction
 name|tableFunction
@@ -778,6 +776,15 @@ operator|.
 name|create
 argument_list|(
 name|clazz
+argument_list|,
+name|Util
+operator|.
+name|first
+argument_list|(
+name|methodName
+argument_list|,
+literal|"eval"
+argument_list|)
 argument_list|)
 decl_stmt|;
 if|if
@@ -798,6 +805,8 @@ argument_list|)
 expr_stmt|;
 return|return;
 block|}
+comment|// Must look for TableMacro before ScalarFunction. Both have an "eval"
+comment|// method.
 specifier|final
 name|TableMacro
 name|macro

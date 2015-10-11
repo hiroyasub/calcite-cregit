@@ -454,6 +454,8 @@ argument_list|(
 name|getCluster
 argument_list|()
 argument_list|,
+name|traitSet
+argument_list|,
 name|inputs
 argument_list|,
 name|rexCall
