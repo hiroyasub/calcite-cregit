@@ -87,6 +87,20 @@ name|AbstractService
 implements|implements
 name|Service
 block|{
+comment|/**    * Represents the serialization of the data over a transport.    */
+enum|enum
+name|SerializationType
+block|{
+name|JSON
+block|,
+name|PROTOBUF
+block|}
+comment|/**    * @return The manner in which the data is serialized.    */
+specifier|abstract
+name|SerializationType
+name|getSerializationType
+parameter_list|()
+function_decl|;
 comment|/** Modifies a signature, changing the representation of numeric columns    * within it. This deals with the fact that JSON transmits a small long value,    * or a float which is a whole number, as an integer. Thus the accessors need    * be prepared to accept any numeric type. */
 name|Meta
 operator|.
@@ -265,6 +279,15 @@ name|Types
 operator|.
 name|BINARY
 case|:
+switch|switch
+condition|(
+name|getSerializationType
+argument_list|()
+condition|)
+block|{
+case|case
+name|JSON
+case|:
 return|return
 name|column
 operator|.
@@ -277,6 +300,21 @@ operator|.
 name|STRING
 argument_list|)
 return|;
+case|case
+name|PROTOBUF
+case|:
+return|return
+name|column
+return|;
+default|default:
+throw|throw
+operator|new
+name|IllegalStateException
+argument_list|(
+literal|"Unhadled case statement"
+argument_list|)
+throw|;
+block|}
 case|case
 name|Types
 operator|.
