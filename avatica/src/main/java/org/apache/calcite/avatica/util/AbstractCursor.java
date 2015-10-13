@@ -2879,7 +2879,6 @@ return|;
 block|}
 block|}
 comment|/**    * Accessor that assumes that the underlying value is a {@link Number};    * corresponds to {@link java.sql.Types#NUMERIC}.    *    *<p>This is useful when numbers have been translated over JSON. JSON    * converts a 0L (0 long) value to the string "0" and back to 0 (0 int).    * So you cannot be sure that the source and target type are the same.    */
-specifier|private
 specifier|static
 class|class
 name|NumberAccessor
@@ -2953,13 +2952,25 @@ return|return
 literal|null
 return|;
 block|}
-return|return
+name|BigDecimal
+name|decimal
+init|=
 name|AvaticaSite
 operator|.
 name|toBigDecimal
 argument_list|(
 name|n
 argument_list|)
+decl_stmt|;
+if|if
+condition|(
+literal|0
+operator|!=
+name|scale
+condition|)
+block|{
+return|return
+name|decimal
 operator|.
 name|setScale
 argument_list|(
@@ -2969,6 +2980,10 @@ name|BigDecimal
 operator|.
 name|ROUND_UNNECESSARY
 argument_list|)
+return|;
+block|}
+return|return
+name|decimal
 return|;
 block|}
 specifier|public
