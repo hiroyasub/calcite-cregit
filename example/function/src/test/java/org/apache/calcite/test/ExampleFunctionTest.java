@@ -245,6 +245,35 @@ operator|.
 name|class
 argument_list|)
 decl_stmt|;
+specifier|public
+specifier|static
+specifier|final
+name|Method
+name|SOLVE_METHOD
+init|=
+name|Types
+operator|.
+name|lookupMethod
+argument_list|(
+name|MazeTable
+operator|.
+name|class
+argument_list|,
+literal|"solve"
+argument_list|,
+name|int
+operator|.
+name|class
+argument_list|,
+name|int
+operator|.
+name|class
+argument_list|,
+name|int
+operator|.
+name|class
+argument_list|)
+decl_stmt|;
 comment|/** Unit test for {@link MazeTable}. */
 annotation|@
 name|Test
@@ -252,6 +281,89 @@ specifier|public
 name|void
 name|testMazeTableFunction
 parameter_list|()
+throws|throws
+name|SQLException
+throws|,
+name|ClassNotFoundException
+block|{
+specifier|final
+name|String
+name|maze
+init|=
+literal|""
+operator|+
+literal|"+--+--+--+--+--+\n"
+operator|+
+literal|"|        |     |\n"
+operator|+
+literal|"+--+  +--+--+  +\n"
+operator|+
+literal|"|     |  |     |\n"
+operator|+
+literal|"+  +--+  +--+  +\n"
+operator|+
+literal|"|              |\n"
+operator|+
+literal|"+--+--+--+--+--+\n"
+decl_stmt|;
+name|checkMazeTableFunction
+argument_list|(
+literal|false
+argument_list|,
+name|maze
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Unit test for {@link MazeTable}. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testMazeTableFunctionWithSolution
+parameter_list|()
+throws|throws
+name|SQLException
+throws|,
+name|ClassNotFoundException
+block|{
+specifier|final
+name|String
+name|maze
+init|=
+literal|""
+operator|+
+literal|"+--+--+--+--+--+\n"
+operator|+
+literal|"|*  *    |     |\n"
+operator|+
+literal|"+--+  +--+--+  +\n"
+operator|+
+literal|"|*  * |  |     |\n"
+operator|+
+literal|"+  +--+  +--+  +\n"
+operator|+
+literal|"|*  *  *  *  * |\n"
+operator|+
+literal|"+--+--+--+--+--+\n"
+decl_stmt|;
+name|checkMazeTableFunction
+argument_list|(
+literal|true
+argument_list|,
+name|maze
+argument_list|)
+expr_stmt|;
+block|}
+specifier|public
+name|void
+name|checkMazeTableFunction
+parameter_list|(
+name|Boolean
+name|solution
+parameter_list|,
+name|String
+name|maze
+parameter_list|)
 throws|throws
 name|SQLException
 throws|,
@@ -321,6 +433,51 @@ argument_list|,
 name|table
 argument_list|)
 expr_stmt|;
+specifier|final
+name|TableFunction
+name|table2
+init|=
+name|TableFunctionImpl
+operator|.
+name|create
+argument_list|(
+name|SOLVE_METHOD
+argument_list|)
+decl_stmt|;
+name|schema
+operator|.
+name|add
+argument_list|(
+literal|"Solve"
+argument_list|,
+name|table2
+argument_list|)
+expr_stmt|;
+specifier|final
+name|String
+name|sql
+decl_stmt|;
+if|if
+condition|(
+name|solution
+condition|)
+block|{
+name|sql
+operator|=
+literal|"select *\n"
+operator|+
+literal|"from table(\"s\".\"Solve\"(5, 3, 1)) as t(s)"
+expr_stmt|;
+block|}
+else|else
+block|{
+name|sql
+operator|=
+literal|"select *\n"
+operator|+
+literal|"from table(\"s\".\"Maze\"(5, 3, 1)) as t(s)"
+expr_stmt|;
+block|}
 name|ResultSet
 name|resultSet
 init|=
@@ -331,9 +488,7 @@ argument_list|()
 operator|.
 name|executeQuery
 argument_list|(
-literal|"select *\n"
-operator|+
-literal|"from table(\"s\".\"Maze\"(5, 3, 1)) as t(s)"
+name|sql
 argument_list|)
 decl_stmt|;
 specifier|final
@@ -370,26 +525,6 @@ literal|"\n"
 argument_list|)
 expr_stmt|;
 block|}
-specifier|final
-name|String
-name|maze
-init|=
-literal|""
-operator|+
-literal|"+--+--+--+--+--+\n"
-operator|+
-literal|"|        |     |\n"
-operator|+
-literal|"+--+  +--+--+  +\n"
-operator|+
-literal|"|     |  |     |\n"
-operator|+
-literal|"+  +--+  +--+  +\n"
-operator|+
-literal|"|              |\n"
-operator|+
-literal|"+--+--+--+--+--+\n"
-decl_stmt|;
 name|assertThat
 argument_list|(
 name|b
