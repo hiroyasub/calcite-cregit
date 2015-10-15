@@ -296,7 +296,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Basic implementation of {@link Meta}.  *  *<p>Each sub-class must implement the two remaining abstract methods,  * {@link #prepare} and  * {@link #prepareAndExecute}.  * It should also override metadata methods such as {@link #getCatalogs()} and  * {@link #getTables} for the element types for which it has instances; the  * default metadata methods return empty collections.  */
+comment|/**  * Basic implementation of {@link Meta}.  *  *<p>Each sub-class must implement the two remaining abstract methods,  * {@link #prepare} and  * {@link #prepareAndExecute}.  * It should also override metadata methods such as {@link #getCatalogs(Meta.ConnectionHandle)} and  * {@link #getTables} for the element types for which it has instances; the  * default metadata methods return empty collections.  */
 end_comment
 
 begin_class
@@ -1110,6 +1110,26 @@ name|style
 argument_list|)
 throw|;
 block|}
+block|}
+annotation|@
+name|Override
+specifier|public
+name|void
+name|openConnection
+parameter_list|(
+name|ConnectionHandle
+name|ch
+parameter_list|,
+name|Map
+argument_list|<
+name|String
+argument_list|,
+name|String
+argument_list|>
+name|info
+parameter_list|)
+block|{
+comment|// dummy implementation, connection is already created at this point
 block|}
 annotation|@
 name|Override
@@ -2711,7 +2731,10 @@ argument_list|,
 name|Object
 argument_list|>
 name|getDatabaseProperties
-parameter_list|()
+parameter_list|(
+name|ConnectionHandle
+name|ch
+parameter_list|)
 block|{
 return|return
 name|Collections
@@ -2724,6 +2747,9 @@ specifier|public
 name|MetaResultSet
 name|getTables
 parameter_list|(
+name|ConnectionHandle
+name|ch
+parameter_list|,
 name|String
 name|catalog
 parameter_list|,
@@ -2753,6 +2779,9 @@ specifier|public
 name|MetaResultSet
 name|getColumns
 parameter_list|(
+name|ConnectionHandle
+name|ch
+parameter_list|,
 name|String
 name|catalog
 parameter_list|,
@@ -2779,6 +2808,9 @@ specifier|public
 name|MetaResultSet
 name|getSchemas
 parameter_list|(
+name|ConnectionHandle
+name|ch
+parameter_list|,
 name|String
 name|catalog
 parameter_list|,
@@ -2798,7 +2830,10 @@ block|}
 specifier|public
 name|MetaResultSet
 name|getCatalogs
-parameter_list|()
+parameter_list|(
+name|ConnectionHandle
+name|ch
+parameter_list|)
 block|{
 return|return
 name|createEmptyResultSet
@@ -2812,7 +2847,10 @@ block|}
 specifier|public
 name|MetaResultSet
 name|getTableTypes
-parameter_list|()
+parameter_list|(
+name|ConnectionHandle
+name|ch
+parameter_list|)
 block|{
 return|return
 name|createEmptyResultSet
@@ -2827,6 +2865,9 @@ specifier|public
 name|MetaResultSet
 name|getProcedures
 parameter_list|(
+name|ConnectionHandle
+name|ch
+parameter_list|,
 name|String
 name|catalog
 parameter_list|,
@@ -2850,6 +2891,9 @@ specifier|public
 name|MetaResultSet
 name|getProcedureColumns
 parameter_list|(
+name|ConnectionHandle
+name|ch
+parameter_list|,
 name|String
 name|catalog
 parameter_list|,
@@ -2876,6 +2920,9 @@ specifier|public
 name|MetaResultSet
 name|getColumnPrivileges
 parameter_list|(
+name|ConnectionHandle
+name|ch
+parameter_list|,
 name|String
 name|catalog
 parameter_list|,
@@ -2902,6 +2949,9 @@ specifier|public
 name|MetaResultSet
 name|getTablePrivileges
 parameter_list|(
+name|ConnectionHandle
+name|ch
+parameter_list|,
 name|String
 name|catalog
 parameter_list|,
@@ -2925,6 +2975,9 @@ specifier|public
 name|MetaResultSet
 name|getBestRowIdentifier
 parameter_list|(
+name|ConnectionHandle
+name|ch
+parameter_list|,
 name|String
 name|catalog
 parameter_list|,
@@ -2954,6 +3007,9 @@ specifier|public
 name|MetaResultSet
 name|getVersionColumns
 parameter_list|(
+name|ConnectionHandle
+name|ch
+parameter_list|,
 name|String
 name|catalog
 parameter_list|,
@@ -2977,6 +3033,9 @@ specifier|public
 name|MetaResultSet
 name|getPrimaryKeys
 parameter_list|(
+name|ConnectionHandle
+name|ch
+parameter_list|,
 name|String
 name|catalog
 parameter_list|,
@@ -3000,6 +3059,9 @@ specifier|public
 name|MetaResultSet
 name|getImportedKeys
 parameter_list|(
+name|ConnectionHandle
+name|ch
+parameter_list|,
 name|String
 name|catalog
 parameter_list|,
@@ -3023,6 +3085,9 @@ specifier|public
 name|MetaResultSet
 name|getExportedKeys
 parameter_list|(
+name|ConnectionHandle
+name|ch
+parameter_list|,
 name|String
 name|catalog
 parameter_list|,
@@ -3046,6 +3111,9 @@ specifier|public
 name|MetaResultSet
 name|getCrossReference
 parameter_list|(
+name|ConnectionHandle
+name|ch
+parameter_list|,
 name|String
 name|parentCatalog
 parameter_list|,
@@ -3077,7 +3145,10 @@ block|}
 specifier|public
 name|MetaResultSet
 name|getTypeInfo
-parameter_list|()
+parameter_list|(
+name|ConnectionHandle
+name|ch
+parameter_list|)
 block|{
 return|return
 name|createEmptyResultSet
@@ -3092,6 +3163,9 @@ specifier|public
 name|MetaResultSet
 name|getIndexInfo
 parameter_list|(
+name|ConnectionHandle
+name|ch
+parameter_list|,
 name|String
 name|catalog
 parameter_list|,
@@ -3121,6 +3195,9 @@ specifier|public
 name|MetaResultSet
 name|getUDTs
 parameter_list|(
+name|ConnectionHandle
+name|ch
+parameter_list|,
 name|String
 name|catalog
 parameter_list|,
@@ -3148,6 +3225,9 @@ specifier|public
 name|MetaResultSet
 name|getSuperTypes
 parameter_list|(
+name|ConnectionHandle
+name|ch
+parameter_list|,
 name|String
 name|catalog
 parameter_list|,
@@ -3171,6 +3251,9 @@ specifier|public
 name|MetaResultSet
 name|getSuperTables
 parameter_list|(
+name|ConnectionHandle
+name|ch
+parameter_list|,
 name|String
 name|catalog
 parameter_list|,
@@ -3194,6 +3277,9 @@ specifier|public
 name|MetaResultSet
 name|getAttributes
 parameter_list|(
+name|ConnectionHandle
+name|ch
+parameter_list|,
 name|String
 name|catalog
 parameter_list|,
@@ -3219,7 +3305,10 @@ block|}
 specifier|public
 name|MetaResultSet
 name|getClientInfoProperties
-parameter_list|()
+parameter_list|(
+name|ConnectionHandle
+name|ch
+parameter_list|)
 block|{
 return|return
 name|createEmptyResultSet
@@ -3234,6 +3323,9 @@ specifier|public
 name|MetaResultSet
 name|getFunctions
 parameter_list|(
+name|ConnectionHandle
+name|ch
+parameter_list|,
 name|String
 name|catalog
 parameter_list|,
@@ -3257,6 +3349,9 @@ specifier|public
 name|MetaResultSet
 name|getFunctionColumns
 parameter_list|(
+name|ConnectionHandle
+name|ch
+parameter_list|,
 name|String
 name|catalog
 parameter_list|,
@@ -3283,6 +3378,9 @@ specifier|public
 name|MetaResultSet
 name|getPseudoColumns
 parameter_list|(
+name|ConnectionHandle
+name|ch
+parameter_list|,
 name|String
 name|catalog
 parameter_list|,

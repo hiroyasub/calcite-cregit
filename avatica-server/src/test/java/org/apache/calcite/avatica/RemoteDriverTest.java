@@ -159,6 +159,18 @@ end_import
 
 begin_import
 import|import
+name|net
+operator|.
+name|jcip
+operator|.
+name|annotations
+operator|.
+name|NotThreadSafe
+import|;
+end_import
+
+begin_import
+import|import
 name|org
 operator|.
 name|junit
@@ -551,6 +563,9 @@ name|Parameterized
 operator|.
 name|class
 argument_list|)
+annotation|@
+name|NotThreadSafe
+comment|// for testConnectionIsolation
 specifier|public
 class|class
 name|RemoteDriverTest
@@ -1071,12 +1086,8 @@ specifier|final
 name|Connection
 name|connection
 init|=
-name|DriverManager
-operator|.
-name|getConnection
-argument_list|(
-literal|"jdbc:avatica:remote:"
-argument_list|)
+name|getLocalConnection
+argument_list|()
 decl_stmt|;
 name|assertThat
 argument_list|(
@@ -4560,24 +4571,6 @@ argument_list|()
 expr_stmt|;
 try|try
 block|{
-specifier|final
-name|String
-name|sql
-init|=
-literal|"select * from (values (1, 'a'))"
-decl_stmt|;
-name|Connection
-name|conn1
-init|=
-name|getLocalConnection
-argument_list|()
-decl_stmt|;
-name|Connection
-name|conn2
-init|=
-name|getLocalConnection
-argument_list|()
-decl_stmt|;
 name|Cache
 argument_list|<
 name|String
@@ -4594,7 +4587,8 @@ argument_list|(
 operator|(
 name|AvaticaConnection
 operator|)
-name|conn1
+name|getLocalConnection
+argument_list|()
 argument_list|)
 decl_stmt|;
 comment|// Other tests being run might leave connections in the cache.
@@ -4604,11 +4598,41 @@ operator|.
 name|invalidateAll
 argument_list|()
 expr_stmt|;
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select * from (values (1, 'a'))"
+decl_stmt|;
 name|assertEquals
 argument_list|(
 literal|"connection cache should start empty"
 argument_list|,
 literal|0
+argument_list|,
+name|connectionMap
+operator|.
+name|size
+argument_list|()
+argument_list|)
+expr_stmt|;
+name|Connection
+name|conn1
+init|=
+name|getLocalConnection
+argument_list|()
+decl_stmt|;
+name|Connection
+name|conn2
+init|=
+name|getLocalConnection
+argument_list|()
+decl_stmt|;
+name|assertEquals
+argument_list|(
+literal|"we now have two connections open"
+argument_list|,
+literal|2
 argument_list|,
 name|connectionMap
 operator|.
@@ -4628,9 +4652,9 @@ argument_list|)
 decl_stmt|;
 name|assertEquals
 argument_list|(
-literal|"statement creation implicitly creates a connection server-side"
+literal|"creating a statement does not cause new connection"
 argument_list|,
-literal|1
+literal|2
 argument_list|,
 name|connectionMap
 operator|.
@@ -4650,7 +4674,7 @@ argument_list|)
 decl_stmt|;
 name|assertEquals
 argument_list|(
-literal|"statement creation implicitly creates a connection server-side"
+literal|"creating a statement does not cause new connection"
 argument_list|,
 literal|2
 argument_list|,

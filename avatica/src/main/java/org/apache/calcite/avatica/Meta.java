@@ -324,12 +324,18 @@ argument_list|,
 name|Object
 argument_list|>
 name|getDatabaseProperties
-parameter_list|()
+parameter_list|(
+name|ConnectionHandle
+name|ch
+parameter_list|)
 function_decl|;
 comment|/** Per {@link DatabaseMetaData#getTables(String, String, String, String[])}. */
 name|MetaResultSet
 name|getTables
 parameter_list|(
+name|ConnectionHandle
+name|ch
+parameter_list|,
 name|String
 name|catalog
 parameter_list|,
@@ -350,6 +356,9 @@ comment|/** Per {@link DatabaseMetaData#getColumns(String, String, String, Strin
 name|MetaResultSet
 name|getColumns
 parameter_list|(
+name|ConnectionHandle
+name|ch
+parameter_list|,
 name|String
 name|catalog
 parameter_list|,
@@ -366,6 +375,9 @@ function_decl|;
 name|MetaResultSet
 name|getSchemas
 parameter_list|(
+name|ConnectionHandle
+name|ch
+parameter_list|,
 name|String
 name|catalog
 parameter_list|,
@@ -376,17 +388,26 @@ function_decl|;
 comment|/** Per {@link DatabaseMetaData#getCatalogs()}. */
 name|MetaResultSet
 name|getCatalogs
-parameter_list|()
+parameter_list|(
+name|ConnectionHandle
+name|ch
+parameter_list|)
 function_decl|;
 comment|/** Per {@link DatabaseMetaData#getTableTypes()}. */
 name|MetaResultSet
 name|getTableTypes
-parameter_list|()
+parameter_list|(
+name|ConnectionHandle
+name|ch
+parameter_list|)
 function_decl|;
 comment|/** Per {@link DatabaseMetaData#getProcedures(String, String, String)}. */
 name|MetaResultSet
 name|getProcedures
 parameter_list|(
+name|ConnectionHandle
+name|ch
+parameter_list|,
 name|String
 name|catalog
 parameter_list|,
@@ -401,6 +422,9 @@ comment|/** Per {@link DatabaseMetaData#getProcedureColumns(String, String, Stri
 name|MetaResultSet
 name|getProcedureColumns
 parameter_list|(
+name|ConnectionHandle
+name|ch
+parameter_list|,
 name|String
 name|catalog
 parameter_list|,
@@ -418,6 +442,9 @@ comment|/** Per {@link DatabaseMetaData#getColumnPrivileges(String, String, Stri
 name|MetaResultSet
 name|getColumnPrivileges
 parameter_list|(
+name|ConnectionHandle
+name|ch
+parameter_list|,
 name|String
 name|catalog
 parameter_list|,
@@ -435,6 +462,9 @@ comment|/** Per {@link DatabaseMetaData#getTablePrivileges(String, String, Strin
 name|MetaResultSet
 name|getTablePrivileges
 parameter_list|(
+name|ConnectionHandle
+name|ch
+parameter_list|,
 name|String
 name|catalog
 parameter_list|,
@@ -449,6 +479,9 @@ comment|/** Per    * {@link DatabaseMetaData#getBestRowIdentifier(String, String
 name|MetaResultSet
 name|getBestRowIdentifier
 parameter_list|(
+name|ConnectionHandle
+name|ch
+parameter_list|,
 name|String
 name|catalog
 parameter_list|,
@@ -469,6 +502,9 @@ comment|/** Per {@link DatabaseMetaData#getVersionColumns(String, String, String
 name|MetaResultSet
 name|getVersionColumns
 parameter_list|(
+name|ConnectionHandle
+name|ch
+parameter_list|,
 name|String
 name|catalog
 parameter_list|,
@@ -483,6 +519,9 @@ comment|/** Per {@link DatabaseMetaData#getPrimaryKeys(String, String, String)}.
 name|MetaResultSet
 name|getPrimaryKeys
 parameter_list|(
+name|ConnectionHandle
+name|ch
+parameter_list|,
 name|String
 name|catalog
 parameter_list|,
@@ -497,6 +536,9 @@ comment|/** Per {@link DatabaseMetaData#getImportedKeys(String, String, String)}
 name|MetaResultSet
 name|getImportedKeys
 parameter_list|(
+name|ConnectionHandle
+name|ch
+parameter_list|,
 name|String
 name|catalog
 parameter_list|,
@@ -511,6 +553,9 @@ comment|/** Per {@link DatabaseMetaData#getExportedKeys(String, String, String)}
 name|MetaResultSet
 name|getExportedKeys
 parameter_list|(
+name|ConnectionHandle
+name|ch
+parameter_list|,
 name|String
 name|catalog
 parameter_list|,
@@ -525,6 +570,9 @@ comment|/** Per    * {@link DatabaseMetaData#getCrossReference(String, String, S
 name|MetaResultSet
 name|getCrossReference
 parameter_list|(
+name|ConnectionHandle
+name|ch
+parameter_list|,
 name|String
 name|parentCatalog
 parameter_list|,
@@ -547,12 +595,18 @@ function_decl|;
 comment|/** Per {@link DatabaseMetaData#getTypeInfo()}. */
 name|MetaResultSet
 name|getTypeInfo
-parameter_list|()
+parameter_list|(
+name|ConnectionHandle
+name|ch
+parameter_list|)
 function_decl|;
 comment|/** Per {@link DatabaseMetaData#getIndexInfo(String, String, String, boolean, boolean)}. */
 name|MetaResultSet
 name|getIndexInfo
 parameter_list|(
+name|ConnectionHandle
+name|ch
+parameter_list|,
 name|String
 name|catalog
 parameter_list|,
@@ -573,6 +627,9 @@ comment|/** Per {@link DatabaseMetaData#getUDTs(String, String, String, int[])}.
 name|MetaResultSet
 name|getUDTs
 parameter_list|(
+name|ConnectionHandle
+name|ch
+parameter_list|,
 name|String
 name|catalog
 parameter_list|,
@@ -591,6 +648,9 @@ comment|/** Per {@link DatabaseMetaData#getSuperTypes(String, String, String)}. 
 name|MetaResultSet
 name|getSuperTypes
 parameter_list|(
+name|ConnectionHandle
+name|ch
+parameter_list|,
 name|String
 name|catalog
 parameter_list|,
@@ -605,6 +665,9 @@ comment|/** Per {@link DatabaseMetaData#getSuperTables(String, String, String)}.
 name|MetaResultSet
 name|getSuperTables
 parameter_list|(
+name|ConnectionHandle
+name|ch
+parameter_list|,
 name|String
 name|catalog
 parameter_list|,
@@ -619,6 +682,9 @@ comment|/** Per {@link DatabaseMetaData#getAttributes(String, String, String, St
 name|MetaResultSet
 name|getAttributes
 parameter_list|(
+name|ConnectionHandle
+name|ch
+parameter_list|,
 name|String
 name|catalog
 parameter_list|,
@@ -635,12 +701,18 @@ function_decl|;
 comment|/** Per {@link DatabaseMetaData#getClientInfoProperties()}. */
 name|MetaResultSet
 name|getClientInfoProperties
-parameter_list|()
+parameter_list|(
+name|ConnectionHandle
+name|ch
+parameter_list|)
 function_decl|;
 comment|/** Per {@link DatabaseMetaData#getFunctions(String, String, String)}. */
 name|MetaResultSet
 name|getFunctions
 parameter_list|(
+name|ConnectionHandle
+name|ch
+parameter_list|,
 name|String
 name|catalog
 parameter_list|,
@@ -655,6 +727,9 @@ comment|/** Per {@link DatabaseMetaData#getFunctionColumns(String, String, Strin
 name|MetaResultSet
 name|getFunctionColumns
 parameter_list|(
+name|ConnectionHandle
+name|ch
+parameter_list|,
 name|String
 name|catalog
 parameter_list|,
@@ -672,6 +747,9 @@ comment|/** Per {@link DatabaseMetaData#getPseudoColumns(String, String, String,
 name|MetaResultSet
 name|getPseudoColumns
 parameter_list|(
+name|ConnectionHandle
+name|ch
+parameter_list|,
 name|String
 name|catalog
 parameter_list|,
@@ -786,7 +864,23 @@ name|StatementHandle
 name|h
 parameter_list|)
 function_decl|;
-comment|/** Closes a connection. */
+comment|/**    * Opens (creates) a connection. The client allocates its own connection ID which the server is    * then made aware of through the {@link ConnectionHandle}. The Map {@code info} argument is    * analogous to the {@link Properties} typically passed to a "normal" JDBC Driver. Avatica    * specific properties should not be included -- only properties for the underlying driver.    *    * @param ch A ConnectionHandle encapsulates information about the connection to be opened    *    as provided by the client.    * @param info A Map corresponding to the Properties typically passed to a JDBC Driver.    */
+name|void
+name|openConnection
+parameter_list|(
+name|ConnectionHandle
+name|ch
+parameter_list|,
+name|Map
+argument_list|<
+name|String
+argument_list|,
+name|String
+argument_list|>
+name|info
+parameter_list|)
+function_decl|;
+comment|/** Closes a connection */
 name|void
 name|closeConnection
 parameter_list|(
@@ -883,7 +977,7 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/** Database property.    *    *<p>Values exist for methods, such as    * {@link DatabaseMetaData#getSQLKeywords()}, which always return the same    * value at all times and across connections.    *    * @see #getDatabaseProperties()    */
+comment|/** Database property.    *    *<p>Values exist for methods, such as    * {@link DatabaseMetaData#getSQLKeywords()}, which always return the same    * value at all times and across connections.    *    * @see #getDatabaseProperties(Meta.ConnectionHandle)    */
 enum|enum
 name|DatabaseProperty
 block|{
@@ -1038,6 +1132,9 @@ parameter_list|(
 name|Meta
 name|meta
 parameter_list|,
+name|ConnectionHandle
+name|ch
+parameter_list|,
 name|Class
 argument_list|<
 name|T
@@ -1051,7 +1148,9 @@ argument_list|(
 name|meta
 operator|.
 name|getDatabaseProperties
-argument_list|()
+argument_list|(
+name|ch
+argument_list|)
 argument_list|,
 name|aClass
 argument_list|)

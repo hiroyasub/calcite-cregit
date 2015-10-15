@@ -184,7 +184,8 @@ name|valueType
 argument_list|)
 return|;
 block|}
-specifier|private
+comment|/**    * Serializes the provided object as JSON.    *    * @param response The object to serialize.    * @return A JSON string.    */
+specifier|public
 parameter_list|<
 name|T
 parameter_list|>

@@ -1615,7 +1615,10 @@ argument_list|,
 name|Object
 argument_list|>
 name|getDatabaseProperties
-parameter_list|()
+parameter_list|(
+name|ConnectionHandle
+name|ch
+parameter_list|)
 block|{
 specifier|final
 name|ImmutableMap
@@ -1787,6 +1790,9 @@ specifier|public
 name|MetaResultSet
 name|getTables
 parameter_list|(
+name|ConnectionHandle
+name|ch
+parameter_list|,
 name|String
 name|catalog
 parameter_list|,
@@ -1960,7 +1966,10 @@ block|}
 specifier|public
 name|MetaResultSet
 name|getTypeInfo
-parameter_list|()
+parameter_list|(
+name|ConnectionHandle
+name|ch
+parameter_list|)
 block|{
 return|return
 name|createResultSet
@@ -2014,6 +2023,9 @@ specifier|public
 name|MetaResultSet
 name|getColumns
 parameter_list|(
+name|ConnectionHandle
+name|ch
+parameter_list|,
 name|String
 name|catalog
 parameter_list|,
@@ -3064,6 +3076,9 @@ specifier|public
 name|MetaResultSet
 name|getSchemas
 parameter_list|(
+name|ConnectionHandle
+name|ch
+parameter_list|,
 name|String
 name|catalog
 parameter_list|,
@@ -3109,7 +3124,10 @@ block|}
 specifier|public
 name|MetaResultSet
 name|getCatalogs
-parameter_list|()
+parameter_list|(
+name|ConnectionHandle
+name|ch
+parameter_list|)
 block|{
 return|return
 name|createResultSet
@@ -3128,7 +3146,10 @@ block|}
 specifier|public
 name|MetaResultSet
 name|getTableTypes
-parameter_list|()
+parameter_list|(
+name|ConnectionHandle
+name|ch
+parameter_list|)
 block|{
 return|return
 name|createResultSet

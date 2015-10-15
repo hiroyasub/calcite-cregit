@@ -405,6 +405,18 @@ name|hamcrest
 operator|.
 name|CoreMatchers
 operator|.
+name|containsString
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|hamcrest
+operator|.
+name|CoreMatchers
+operator|.
 name|is
 import|;
 end_import
@@ -454,6 +466,18 @@ operator|.
 name|Assert
 operator|.
 name|assertTrue
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|Assert
+operator|.
+name|fail
 import|;
 end_import
 
@@ -1924,6 +1948,242 @@ argument_list|()
 operator|.
 name|unlock
 argument_list|()
+expr_stmt|;
+block|}
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testOpenConnectionWithProperties
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+comment|// This tests that username and password are used for creating a connection on the
+comment|// server. If this was not the case, it would succeed.
+try|try
+block|{
+name|DriverManager
+operator|.
+name|getConnection
+argument_list|(
+name|url
+argument_list|,
+literal|"john"
+argument_list|,
+literal|"doe"
+argument_list|)
+expr_stmt|;
+name|fail
+argument_list|(
+literal|"expected exception"
+argument_list|)
+expr_stmt|;
+block|}
+catch|catch
+parameter_list|(
+name|RuntimeException
+name|e
+parameter_list|)
+block|{
+name|assertEquals
+argument_list|(
+literal|"Remote driver error:"
+operator|+
+literal|" java.sql.SQLInvalidAuthorizationSpecException: invalid authorization specification"
+operator|+
+literal|" - not found: john"
+operator|+
+literal|" -> invalid authorization specification - not found: john"
+operator|+
+literal|" -> invalid authorization specification - not found: john"
+argument_list|,
+name|e
+operator|.
+name|getMessage
+argument_list|()
+argument_list|)
+expr_stmt|;
+block|}
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testRemoteConnectionsAreDifferent
+parameter_list|()
+throws|throws
+name|SQLException
+block|{
+name|Connection
+name|conn1
+init|=
+name|DriverManager
+operator|.
+name|getConnection
+argument_list|(
+name|url
+argument_list|)
+decl_stmt|;
+name|Statement
+name|stmt
+init|=
+name|conn1
+operator|.
+name|createStatement
+argument_list|()
+decl_stmt|;
+name|stmt
+operator|.
+name|execute
+argument_list|(
+literal|"DECLARE LOCAL TEMPORARY TABLE"
+operator|+
+literal|" buffer (id INTEGER PRIMARY KEY, textdata VARCHAR(100))"
+argument_list|)
+expr_stmt|;
+name|stmt
+operator|.
+name|execute
+argument_list|(
+literal|"insert into buffer(id, textdata) values(1, 'abc')"
+argument_list|)
+expr_stmt|;
+name|stmt
+operator|.
+name|executeQuery
+argument_list|(
+literal|"select * from buffer"
+argument_list|)
+expr_stmt|;
+comment|// The local temporary table is local to the connection above, and should
+comment|// not be visible on another connection
+name|Connection
+name|conn2
+init|=
+name|DriverManager
+operator|.
+name|getConnection
+argument_list|(
+name|url
+argument_list|)
+decl_stmt|;
+name|Statement
+name|stmt2
+init|=
+name|conn2
+operator|.
+name|createStatement
+argument_list|()
+decl_stmt|;
+try|try
+block|{
+name|stmt2
+operator|.
+name|executeQuery
+argument_list|(
+literal|"select * from buffer"
+argument_list|)
+expr_stmt|;
+name|fail
+argument_list|(
+literal|"expected exception"
+argument_list|)
+expr_stmt|;
+block|}
+catch|catch
+parameter_list|(
+name|Exception
+name|e
+parameter_list|)
+block|{
+name|assertEquals
+argument_list|(
+literal|"Remote driver error: java.sql.SQLSyntaxErrorException: user lacks privilege"
+operator|+
+literal|" or object not found: BUFFER -> user lacks privilege or object not found: BUFFER"
+operator|+
+literal|" -> user lacks privilege or object not found: BUFFER"
+argument_list|,
+name|e
+operator|.
+name|getCause
+argument_list|()
+operator|.
+name|getMessage
+argument_list|()
+argument_list|)
+expr_stmt|;
+block|}
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testRemoteConnectionClosing
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+name|AvaticaConnection
+name|conn
+init|=
+operator|(
+name|AvaticaConnection
+operator|)
+name|DriverManager
+operator|.
+name|getConnection
+argument_list|(
+name|url
+argument_list|)
+decl_stmt|;
+comment|// Verify connection is usable
+name|conn
+operator|.
+name|createStatement
+argument_list|()
+expr_stmt|;
+name|conn
+operator|.
+name|close
+argument_list|()
+expr_stmt|;
+comment|// After closing the connection, it should not be usable anymore
+try|try
+block|{
+name|conn
+operator|.
+name|createStatement
+argument_list|()
+expr_stmt|;
+name|fail
+argument_list|(
+literal|"expected exception"
+argument_list|)
+expr_stmt|;
+block|}
+catch|catch
+parameter_list|(
+name|RuntimeException
+name|e
+parameter_list|)
+block|{
+name|assertThat
+argument_list|(
+name|e
+operator|.
+name|getMessage
+argument_list|()
+argument_list|,
+name|containsString
+argument_list|(
+literal|"Remote driver error:"
+operator|+
+literal|" Connection not found: invalid id, closed, or expired"
+argument_list|)
+argument_list|)
 expr_stmt|;
 block|}
 block|}

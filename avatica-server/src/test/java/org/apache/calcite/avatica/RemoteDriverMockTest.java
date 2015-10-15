@@ -528,12 +528,8 @@ specifier|final
 name|Connection
 name|connection
 init|=
-name|DriverManager
-operator|.
-name|getConnection
-argument_list|(
-literal|"jdbc:avatica:remote:"
-argument_list|)
+name|getMockConnection
+argument_list|()
 decl_stmt|;
 name|assertThat
 argument_list|(
