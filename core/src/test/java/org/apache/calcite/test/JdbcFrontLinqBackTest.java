@@ -770,8 +770,6 @@ argument_list|)
 expr_stmt|;
 block|}
 annotation|@
-name|Ignore
-annotation|@
 name|Test
 specifier|public
 name|void
@@ -821,9 +819,9 @@ argument_list|(
 literal|"insert into \"foo\".\"bar\" select * from \"hr\".\"emps\""
 argument_list|)
 operator|.
-name|returns
+name|updates
 argument_list|(
-literal|"ROWCOUNT=4\n"
+literal|4
 argument_list|)
 expr_stmt|;
 name|with
@@ -847,9 +845,9 @@ operator|+
 literal|"select * from \"hr\".\"emps\" where \"deptno\" = 10"
 argument_list|)
 operator|.
-name|returns
+name|updates
 argument_list|(
-literal|"ROWCOUNT=3\n"
+literal|3
 argument_list|)
 expr_stmt|;
 name|with
@@ -1288,8 +1286,6 @@ block|}
 return|;
 block|}
 annotation|@
-name|Ignore
-annotation|@
 name|Test
 specifier|public
 name|void
@@ -1327,9 +1323,9 @@ argument_list|(
 literal|"insert into \"foo\".\"bar\" values (1, 1, 'second', 2, 2)"
 argument_list|)
 operator|.
-name|returns
+name|updates
 argument_list|(
-literal|"ROWCOUNT=1\n"
+literal|1
 argument_list|)
 expr_stmt|;
 name|with
@@ -1341,9 +1337,9 @@ operator|+
 literal|"values (1, 3, 'third', 0, 3), (1, 4, 'fourth', 0, 4), (1, 5, 'fifth ', 0, 3)"
 argument_list|)
 operator|.
-name|returns
+name|updates
 argument_list|(
-literal|"ROWCOUNT=3\n"
+literal|3
 argument_list|)
 expr_stmt|;
 name|with
@@ -1365,9 +1361,9 @@ argument_list|(
 literal|"insert into \"foo\".\"bar\" values (1, 6, null, 0, null)"
 argument_list|)
 operator|.
-name|returns
+name|updates
 argument_list|(
-literal|"ROWCOUNT=1\n"
+literal|1
 argument_list|)
 expr_stmt|;
 name|with
