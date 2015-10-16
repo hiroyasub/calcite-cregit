@@ -251,6 +251,40 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testIntervalLiteralYearToMonth
+parameter_list|()
+block|{
+name|check
+argument_list|(
+literal|"select cast(empno as Integer) * (INTERVAL '1-1' YEAR TO MONTH)\n"
+operator|+
+literal|"from emp"
+argument_list|,
+literal|"${plan}"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testIntervalLiteralHourToMinute
+parameter_list|()
+block|{
+name|check
+argument_list|(
+literal|"select cast(empno as Integer) * (INTERVAL '1:1' HOUR TO MINUTE)\n"
+operator|+
+literal|"from emp"
+argument_list|,
+literal|"${plan}"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testAliasList
 parameter_list|()
 block|{
