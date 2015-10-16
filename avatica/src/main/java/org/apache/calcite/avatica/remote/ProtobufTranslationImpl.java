@@ -718,7 +718,8 @@ name|RequestTranslator
 argument_list|(
 name|CatalogsRequest
 operator|.
-name|PARSER
+name|parser
+argument_list|()
 argument_list|,
 operator|new
 name|Service
@@ -744,7 +745,8 @@ name|RequestTranslator
 argument_list|(
 name|OpenConnectionRequest
 operator|.
-name|PARSER
+name|parser
+argument_list|()
 argument_list|,
 operator|new
 name|Service
@@ -770,7 +772,8 @@ name|RequestTranslator
 argument_list|(
 name|CloseConnectionRequest
 operator|.
-name|PARSER
+name|parser
+argument_list|()
 argument_list|,
 operator|new
 name|Service
@@ -796,7 +799,8 @@ name|RequestTranslator
 argument_list|(
 name|CloseStatementRequest
 operator|.
-name|PARSER
+name|parser
+argument_list|()
 argument_list|,
 operator|new
 name|Service
@@ -822,7 +826,8 @@ name|RequestTranslator
 argument_list|(
 name|ColumnsRequest
 operator|.
-name|PARSER
+name|parser
+argument_list|()
 argument_list|,
 operator|new
 name|Service
@@ -848,7 +853,8 @@ name|RequestTranslator
 argument_list|(
 name|ConnectionSyncRequest
 operator|.
-name|PARSER
+name|parser
+argument_list|()
 argument_list|,
 operator|new
 name|Service
@@ -874,7 +880,8 @@ name|RequestTranslator
 argument_list|(
 name|CreateStatementRequest
 operator|.
-name|PARSER
+name|parser
+argument_list|()
 argument_list|,
 operator|new
 name|Service
@@ -900,7 +907,8 @@ name|RequestTranslator
 argument_list|(
 name|DatabasePropertyRequest
 operator|.
-name|PARSER
+name|parser
+argument_list|()
 argument_list|,
 operator|new
 name|Service
@@ -926,7 +934,8 @@ name|RequestTranslator
 argument_list|(
 name|FetchRequest
 operator|.
-name|PARSER
+name|parser
+argument_list|()
 argument_list|,
 operator|new
 name|Service
@@ -952,7 +961,8 @@ name|RequestTranslator
 argument_list|(
 name|PrepareAndExecuteRequest
 operator|.
-name|PARSER
+name|parser
+argument_list|()
 argument_list|,
 operator|new
 name|Service
@@ -978,7 +988,8 @@ name|RequestTranslator
 argument_list|(
 name|PrepareRequest
 operator|.
-name|PARSER
+name|parser
+argument_list|()
 argument_list|,
 operator|new
 name|Service
@@ -1004,7 +1015,8 @@ name|RequestTranslator
 argument_list|(
 name|SchemasRequest
 operator|.
-name|PARSER
+name|parser
+argument_list|()
 argument_list|,
 operator|new
 name|Service
@@ -1030,7 +1042,8 @@ name|RequestTranslator
 argument_list|(
 name|TablesRequest
 operator|.
-name|PARSER
+name|parser
+argument_list|()
 argument_list|,
 operator|new
 name|Service
@@ -1056,7 +1069,8 @@ name|RequestTranslator
 argument_list|(
 name|TableTypesRequest
 operator|.
-name|PARSER
+name|parser
+argument_list|()
 argument_list|,
 operator|new
 name|Service
@@ -1082,7 +1096,8 @@ name|RequestTranslator
 argument_list|(
 name|TypeInfoRequest
 operator|.
-name|PARSER
+name|parser
+argument_list|()
 argument_list|,
 operator|new
 name|Service
@@ -1108,7 +1123,8 @@ name|RequestTranslator
 argument_list|(
 name|ExecuteRequest
 operator|.
-name|PARSER
+name|parser
+argument_list|()
 argument_list|,
 operator|new
 name|Service
@@ -1156,7 +1172,8 @@ name|ResponseTranslator
 argument_list|(
 name|OpenConnectionResponse
 operator|.
-name|PARSER
+name|parser
+argument_list|()
 argument_list|,
 operator|new
 name|Service
@@ -1182,7 +1199,8 @@ name|ResponseTranslator
 argument_list|(
 name|CloseConnectionResponse
 operator|.
-name|PARSER
+name|parser
+argument_list|()
 argument_list|,
 operator|new
 name|Service
@@ -1208,7 +1226,8 @@ name|ResponseTranslator
 argument_list|(
 name|CloseStatementResponse
 operator|.
-name|PARSER
+name|parser
+argument_list|()
 argument_list|,
 operator|new
 name|Service
@@ -1234,7 +1253,8 @@ name|ResponseTranslator
 argument_list|(
 name|ConnectionSyncResponse
 operator|.
-name|PARSER
+name|parser
+argument_list|()
 argument_list|,
 operator|new
 name|Service
@@ -1260,7 +1280,8 @@ name|ResponseTranslator
 argument_list|(
 name|CreateStatementResponse
 operator|.
-name|PARSER
+name|parser
+argument_list|()
 argument_list|,
 operator|new
 name|Service
@@ -1286,7 +1307,8 @@ name|ResponseTranslator
 argument_list|(
 name|DatabasePropertyResponse
 operator|.
-name|PARSER
+name|parser
+argument_list|()
 argument_list|,
 operator|new
 name|Service
@@ -1312,7 +1334,8 @@ name|ResponseTranslator
 argument_list|(
 name|ExecuteResponse
 operator|.
-name|PARSER
+name|parser
+argument_list|()
 argument_list|,
 operator|new
 name|Service
@@ -1338,7 +1361,8 @@ name|ResponseTranslator
 argument_list|(
 name|FetchResponse
 operator|.
-name|PARSER
+name|parser
+argument_list|()
 argument_list|,
 operator|new
 name|Service
@@ -1364,7 +1388,8 @@ name|ResponseTranslator
 argument_list|(
 name|PrepareResponse
 operator|.
-name|PARSER
+name|parser
+argument_list|()
 argument_list|,
 operator|new
 name|Service
@@ -1390,7 +1415,8 @@ name|ResponseTranslator
 argument_list|(
 name|ResultSetResponse
 operator|.
-name|PARSER
+name|parser
+argument_list|()
 argument_list|,
 operator|new
 name|Service
@@ -1416,7 +1442,8 @@ name|ResponseTranslator
 argument_list|(
 name|ErrorResponse
 operator|.
-name|PARSER
+name|parser
+argument_list|()
 argument_list|,
 operator|new
 name|Service

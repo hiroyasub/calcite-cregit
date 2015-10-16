@@ -1694,9 +1694,6 @@ name|columns
 init|=
 name|Arrays
 operator|.
-expr|<
-name|ColumnMetaData
-operator|>
 name|asList
 argument_list|(
 name|MetaImpl
