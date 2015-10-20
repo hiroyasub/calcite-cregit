@@ -256,6 +256,8 @@ block|{
 try|try
 block|{
 return|return
+name|finagle
+argument_list|(
 name|decode
 argument_list|(
 name|apply
@@ -269,6 +271,7 @@ argument_list|,
 name|ResultSetResponse
 operator|.
 name|class
+argument_list|)
 argument_list|)
 return|;
 block|}
@@ -297,6 +300,8 @@ block|{
 try|try
 block|{
 return|return
+name|finagle
+argument_list|(
 name|decode
 argument_list|(
 name|apply
@@ -310,6 +315,7 @@ argument_list|,
 name|ResultSetResponse
 operator|.
 name|class
+argument_list|)
 argument_list|)
 return|;
 block|}
@@ -338,6 +344,8 @@ block|{
 try|try
 block|{
 return|return
+name|finagle
+argument_list|(
 name|decode
 argument_list|(
 name|apply
@@ -351,6 +359,7 @@ argument_list|,
 name|ResultSetResponse
 operator|.
 name|class
+argument_list|)
 argument_list|)
 return|;
 block|}
@@ -379,6 +388,8 @@ block|{
 try|try
 block|{
 return|return
+name|finagle
+argument_list|(
 name|decode
 argument_list|(
 name|apply
@@ -392,6 +403,7 @@ argument_list|,
 name|ResultSetResponse
 operator|.
 name|class
+argument_list|)
 argument_list|)
 return|;
 block|}
@@ -420,6 +432,8 @@ block|{
 try|try
 block|{
 return|return
+name|finagle
+argument_list|(
 name|decode
 argument_list|(
 name|apply
@@ -433,6 +447,7 @@ argument_list|,
 name|ResultSetResponse
 operator|.
 name|class
+argument_list|)
 argument_list|)
 return|;
 block|}
@@ -461,6 +476,8 @@ block|{
 try|try
 block|{
 return|return
+name|finagle
+argument_list|(
 name|decode
 argument_list|(
 name|apply
@@ -474,6 +491,7 @@ argument_list|,
 name|ResultSetResponse
 operator|.
 name|class
+argument_list|)
 argument_list|)
 return|;
 block|}
