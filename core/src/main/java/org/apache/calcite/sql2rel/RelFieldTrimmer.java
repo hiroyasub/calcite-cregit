@@ -4181,6 +4181,8 @@ name|mapping
 operator|.
 name|set
 argument_list|(
+name|j
+argument_list|,
 name|groupCount
 operator|+
 name|indicatorCount
@@ -4189,8 +4191,6 @@ name|newAggCallList
 operator|.
 name|size
 argument_list|()
-argument_list|,
-name|j
 argument_list|)
 expr_stmt|;
 name|newAggCallList
