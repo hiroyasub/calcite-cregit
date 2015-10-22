@@ -2794,6 +2794,21 @@ name|String
 name|tableName
 parameter_list|)
 function_decl|;
+annotation|@
+name|BaseMessage
+argument_list|(
+literal|"Table ''{0}'' not found"
+argument_list|)
+name|ExInst
+argument_list|<
+name|CalciteException
+argument_list|>
+name|tableNotFound
+parameter_list|(
+name|String
+name|tableName
+parameter_list|)
+function_decl|;
 block|}
 end_interface
 

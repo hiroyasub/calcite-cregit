@@ -643,6 +643,136 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testScanInvalidTable
+parameter_list|()
+block|{
+comment|// Equivalent SQL:
+comment|//   SELECT *
+comment|//   FROM zzz
+try|try
+block|{
+specifier|final
+name|RelNode
+name|root
+init|=
+name|RelBuilder
+operator|.
+name|create
+argument_list|(
+name|config
+argument_list|()
+operator|.
+name|build
+argument_list|()
+argument_list|)
+operator|.
+name|scan
+argument_list|(
+literal|"ZZZ"
+argument_list|)
+comment|// this relation does not exist
+operator|.
+name|build
+argument_list|()
+decl_stmt|;
+name|fail
+argument_list|(
+literal|"expected error, got "
+operator|+
+name|root
+argument_list|)
+expr_stmt|;
+block|}
+catch|catch
+parameter_list|(
+name|Exception
+name|e
+parameter_list|)
+block|{
+name|assertThat
+argument_list|(
+name|e
+operator|.
+name|getMessage
+argument_list|()
+argument_list|,
+name|is
+argument_list|(
+literal|"Table 'ZZZ' not found"
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testScanValidTableWrongCase
+parameter_list|()
+block|{
+comment|// Equivalent SQL:
+comment|//   SELECT *
+comment|//   FROM "emp"
+try|try
+block|{
+specifier|final
+name|RelNode
+name|root
+init|=
+name|RelBuilder
+operator|.
+name|create
+argument_list|(
+name|config
+argument_list|()
+operator|.
+name|build
+argument_list|()
+argument_list|)
+operator|.
+name|scan
+argument_list|(
+literal|"emp"
+argument_list|)
+comment|// the table is named 'EMP', not 'emp'
+operator|.
+name|build
+argument_list|()
+decl_stmt|;
+name|fail
+argument_list|(
+literal|"Expected error (table names are case-sensitive), but got "
+operator|+
+name|root
+argument_list|)
+expr_stmt|;
+block|}
+catch|catch
+parameter_list|(
+name|Exception
+name|e
+parameter_list|)
+block|{
+name|assertThat
+argument_list|(
+name|e
+operator|.
+name|getMessage
+argument_list|()
+argument_list|,
+name|is
+argument_list|(
+literal|"Table 'emp' not found"
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testScanFilterTrue
 parameter_list|()
 block|{
