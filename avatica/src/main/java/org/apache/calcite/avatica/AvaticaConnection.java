@@ -2476,7 +2476,9 @@ argument_list|(
 name|h
 argument_list|)
 decl_stmt|;
-return|return
+name|ResultSet
+name|resultSet
+init|=
 name|executeQueryInternal
 argument_list|(
 name|statement
@@ -2492,6 +2494,25 @@ name|metaResultSet
 operator|.
 name|firstFrame
 argument_list|)
+decl_stmt|;
+if|if
+condition|(
+name|metaResultSet
+operator|.
+name|ownStatement
+condition|)
+block|{
+name|resultSet
+operator|.
+name|getStatement
+argument_list|()
+operator|.
+name|closeOnCompletion
+argument_list|()
+expr_stmt|;
+block|}
+return|return
+name|resultSet
 return|;
 block|}
 comment|/** Creates a statement wrapper around an existing handle. */
