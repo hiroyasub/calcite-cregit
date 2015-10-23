@@ -1925,9 +1925,7 @@ literal|"EnumerableCalc(expr#0..1=[{inputs}], C=[$t1])\n"
 operator|+
 literal|"  EnumerableAggregate(group=[{0}], C=[COUNT($1)])\n"
 operator|+
-literal|"    EnumerableCalc(expr#0..4=[{inputs}], proj#0..1=[{exprs}])\n"
-operator|+
-literal|"      EnumerableTableScan(table=[[adhoc, m{27, 31}]])"
+literal|"    EnumerableTableScan(table=[[adhoc, m{27, 31}]])"
 argument_list|)
 operator|.
 name|returnsUnordered
