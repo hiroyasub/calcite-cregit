@@ -3894,6 +3894,67 @@ literal|" where d.deptno=7 and d.deptno=8"
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-935">[CALCITE-935]    * Improve how ReduceExpressionsRule handles duplicate constraints</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testReduceConstantsDup2
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+name|HepProgram
+name|program
+init|=
+operator|new
+name|HepProgramBuilder
+argument_list|()
+operator|.
+name|addRuleInstance
+argument_list|(
+name|ReduceExpressionsRule
+operator|.
+name|PROJECT_INSTANCE
+argument_list|)
+operator|.
+name|addRuleInstance
+argument_list|(
+name|ReduceExpressionsRule
+operator|.
+name|FILTER_INSTANCE
+argument_list|)
+operator|.
+name|addRuleInstance
+argument_list|(
+name|ReduceExpressionsRule
+operator|.
+name|JOIN_INSTANCE
+argument_list|)
+operator|.
+name|build
+argument_list|()
+decl_stmt|;
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"from emp\n"
+operator|+
+literal|"where deptno=7 and deptno=8\n"
+operator|+
+literal|"and empno = 10 and mgr is null and empno = 10"
+decl_stmt|;
+name|checkPlanning
+argument_list|(
+name|program
+argument_list|,
+name|sql
+argument_list|)
+expr_stmt|;
+block|}
 annotation|@
 name|Test
 specifier|public
