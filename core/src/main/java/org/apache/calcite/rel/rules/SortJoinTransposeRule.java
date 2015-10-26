@@ -69,6 +69,20 @@ name|calcite
 operator|.
 name|rel
 operator|.
+name|RelCollationTraitDef
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
 name|RelCollations
 import|;
 end_import
@@ -567,6 +581,12 @@ specifier|final
 name|RelCollation
 name|rightCollation
 init|=
+name|RelCollationTraitDef
+operator|.
+name|INSTANCE
+operator|.
+name|canonize
+argument_list|(
 name|RelCollations
 operator|.
 name|shift
@@ -587,6 +607,7 @@ argument_list|()
 operator|.
 name|getFieldCount
 argument_list|()
+argument_list|)
 argument_list|)
 decl_stmt|;
 comment|// If the input is already sorted and we are not reducing the number of tuples,
@@ -633,6 +654,11 @@ name|sort
 operator|.
 name|getTraitSet
 argument_list|()
+operator|.
+name|replace
+argument_list|(
+name|rightCollation
+argument_list|)
 argument_list|,
 name|join
 operator|.
