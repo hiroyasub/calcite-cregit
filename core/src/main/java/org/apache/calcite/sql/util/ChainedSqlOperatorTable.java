@@ -89,6 +89,20 @@ end_import
 
 begin_import
 import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|collect
+operator|.
+name|ImmutableList
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -143,8 +157,37 @@ name|this
 operator|.
 name|tableList
 operator|=
+name|ImmutableList
+operator|.
+name|copyOf
+argument_list|(
 name|tableList
+argument_list|)
 expr_stmt|;
+block|}
+comment|/** Creates a {@code ChainedSqlOperatorTable}. */
+specifier|public
+specifier|static
+name|SqlOperatorTable
+name|of
+parameter_list|(
+name|SqlOperatorTable
+modifier|...
+name|tables
+parameter_list|)
+block|{
+return|return
+operator|new
+name|ChainedSqlOperatorTable
+argument_list|(
+name|ImmutableList
+operator|.
+name|copyOf
+argument_list|(
+name|tables
+argument_list|)
+argument_list|)
+return|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
 comment|/**    * Adds an underlying table. The order in which tables are added is    * significant; tables added earlier have higher lookup precedence. A table    * is not added if it is already on the list.    *    * @param table table to add    */
@@ -219,7 +262,6 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|// implement SqlOperatorTable
 specifier|public
 name|List
 argument_list|<
@@ -236,9 +278,7 @@ name|list
 init|=
 operator|new
 name|ArrayList
-argument_list|<
-name|SqlOperator
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 for|for

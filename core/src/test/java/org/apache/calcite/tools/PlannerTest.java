@@ -1379,10 +1379,7 @@ decl_stmt|;
 name|SqlOperatorTable
 name|opTab
 init|=
-operator|new
 name|ChainedSqlOperatorTable
-argument_list|(
-name|ImmutableList
 operator|.
 name|of
 argument_list|(
@@ -1401,7 +1398,6 @@ argument_list|(
 operator|new
 name|MyCountAggFunction
 argument_list|()
-argument_list|)
 argument_list|)
 argument_list|)
 argument_list|)
