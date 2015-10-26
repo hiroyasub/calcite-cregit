@@ -501,15 +501,10 @@ block|{
 name|ImmutableBitSet
 name|groupKey
 init|=
-name|ImmutableBitSet
-operator|.
-name|range
-argument_list|(
 name|rel
 operator|.
-name|getGroupCount
+name|getGroupSet
 argument_list|()
-argument_list|)
 decl_stmt|;
 comment|// rowcount is the cardinality of the group by columns
 name|Double
