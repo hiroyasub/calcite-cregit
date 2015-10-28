@@ -233,9 +233,6 @@ name|callBinding
 argument_list|,
 name|callBinding
 operator|.
-name|getCall
-argument_list|()
-operator|.
 name|operand
 argument_list|(
 literal|1
@@ -271,9 +268,6 @@ argument_list|()
 argument_list|,
 name|callBinding
 operator|.
-name|getCall
-argument_list|()
-operator|.
 name|operand
 argument_list|(
 literal|1
@@ -296,9 +290,6 @@ name|getScope
 argument_list|()
 argument_list|,
 name|callBinding
-operator|.
-name|getCall
-argument_list|()
 operator|.
 name|operand
 argument_list|(

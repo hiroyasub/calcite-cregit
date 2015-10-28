@@ -2086,6 +2086,117 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testFunctionNamedArgument
+parameter_list|()
+block|{
+name|checkExp
+argument_list|(
+literal|"foo(x => 1)"
+argument_list|,
+literal|"`FOO`(`X` => 1)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"foo(x => 1, \"y\" => 'a', z => x<= y)"
+argument_list|,
+literal|"`FOO`(`X` => 1, `y` => 'a', `Z` => (`X`<= `Y`))"
+argument_list|)
+expr_stmt|;
+name|checkExpFails
+argument_list|(
+literal|"foo(x.y ^=>^ 1)"
+argument_list|,
+literal|"(?s).*Encountered \"=>\" at .*"
+argument_list|)
+expr_stmt|;
+name|checkExpFails
+argument_list|(
+literal|"foo(a => 1, x.y ^=>^ 2, c => 3)"
+argument_list|,
+literal|"(?s).*Encountered \"=>\" at .*"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testFunctionDefaultArgument
+parameter_list|()
+block|{
+name|checkExp
+argument_list|(
+literal|"foo(1, DEFAULT, default, 'default', \"default\", 3)"
+argument_list|,
+literal|"`FOO`(1, DEFAULT, DEFAULT, 'default', `default`, 3)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"foo(DEFAULT)"
+argument_list|,
+literal|"`FOO`(DEFAULT)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"foo(x => 1, DEFAULT)"
+argument_list|,
+literal|"`FOO`(`X` => 1, DEFAULT)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"foo(y => DEFAULT, x => 1)"
+argument_list|,
+literal|"`FOO`(`Y` => DEFAULT, `X` => 1)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"foo(x => 1, y => DEFAULT)"
+argument_list|,
+literal|"`FOO`(`X` => 1, `Y` => DEFAULT)"
+argument_list|)
+expr_stmt|;
+name|check
+argument_list|(
+literal|"select sum(DISTINCT DEFAULT) from t group by x"
+argument_list|,
+literal|"SELECT SUM(DISTINCT DEFAULT)\n"
+operator|+
+literal|"FROM `T`\n"
+operator|+
+literal|"GROUP BY `X`"
+argument_list|)
+expr_stmt|;
+name|checkExpFails
+argument_list|(
+literal|"foo(x ^+^ DEFAULT)"
+argument_list|,
+literal|"(?s).*Encountered \"\\+ DEFAULT\" at .*"
+argument_list|)
+expr_stmt|;
+name|checkExpFails
+argument_list|(
+literal|"foo(0, x ^+^ DEFAULT + y)"
+argument_list|,
+literal|"(?s).*Encountered \"\\+ DEFAULT\" at .*"
+argument_list|)
+expr_stmt|;
+name|checkExpFails
+argument_list|(
+literal|"foo(0, DEFAULT ^+^ y)"
+argument_list|,
+literal|"(?s).*Encountered \"\\+\" at .*"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testAggregateFilter
 parameter_list|()
 block|{

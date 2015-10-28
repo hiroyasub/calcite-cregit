@@ -449,6 +449,22 @@ name|calcite
 operator|.
 name|linq4j
 operator|.
+name|function
+operator|.
+name|Parameter
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|linq4j
+operator|.
 name|tree
 operator|.
 name|Types
@@ -8498,7 +8514,7 @@ literal|"c0=Store 11; c1=1997; m0=55058.7900\n"
 block|,
 literal|"select \"customer\".\"yearly_income\" as \"c0\","
 operator|+
-literal|" \"customer\".\"education\" as \"c1\" \n"
+literal|" \"customer\".\"education\" as \"c1\"\n"
 operator|+
 literal|"from \"customer\" as \"customer\",\n"
 operator|+
@@ -9638,7 +9654,7 @@ literal|0
 condition|?
 literal|"\nfrom "
 else|:
-literal|",\n "
+literal|",\n"
 argument_list|)
 operator|.
 name|append
@@ -20066,6 +20082,40 @@ literal|"         },\n"
 operator|+
 literal|"         {\n"
 operator|+
+literal|"           name: 'MY_LEFT',\n"
+operator|+
+literal|"           className: '"
+operator|+
+name|MyLeftFunction
+operator|.
+name|class
+operator|.
+name|getName
+argument_list|()
+operator|+
+literal|"'\n"
+operator|+
+literal|"         },\n"
+operator|+
+literal|"         {\n"
+operator|+
+literal|"           name: 'ABCDE',\n"
+operator|+
+literal|"           className: '"
+operator|+
+name|MyAbcdeFunction
+operator|.
+name|class
+operator|.
+name|getName
+argument_list|()
+operator|+
+literal|"'\n"
+operator|+
+literal|"         },\n"
+operator|+
+literal|"         {\n"
+operator|+
 literal|"           name: 'MY_STR',\n"
 operator|+
 literal|"           className: '"
@@ -20698,6 +20748,366 @@ operator|.
 name|returns
 argument_list|(
 literal|"P0=0; P1=1; P2=2\n"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Tests passing parameters to user-defined function by name. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testUdfArgumentName
+parameter_list|()
+block|{
+specifier|final
+name|CalciteAssert
+operator|.
+name|AssertThat
+name|with
+init|=
+name|withUdf
+argument_list|()
+decl_stmt|;
+comment|// arguments in physical order
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"values (\"adhoc\".my_left(\"s\" => 'hello', \"n\" => 3))"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"EXPR$0=hel\n"
+argument_list|)
+expr_stmt|;
+comment|// arguments in reverse order
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"values (\"adhoc\".my_left(\"n\" => 3, \"s\" => 'hello'))"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"EXPR$0=hel\n"
+argument_list|)
+expr_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"values (\"adhoc\".my_left(\"n\" => 1 + 2, \"s\" => 'hello'))"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"EXPR$0=hel\n"
+argument_list|)
+expr_stmt|;
+comment|// duplicate argument names
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"values (\"adhoc\".my_left(\"n\" => 3, \"n\" => 2, \"s\" => 'hello'))"
+argument_list|)
+operator|.
+name|throws_
+argument_list|(
+literal|"Duplicate argument name 'n'\n"
+argument_list|)
+expr_stmt|;
+comment|// invalid argument names
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"values (\"adhoc\".my_left(\"n\" => 3, \"m\" => 2, \"s\" => 'h'))"
+argument_list|)
+operator|.
+name|throws_
+argument_list|(
+literal|"No match found for function signature "
+operator|+
+literal|"MY_LEFT(n =><NUMERIC>, m =><NUMERIC>, s =><CHARACTER>)\n"
+argument_list|)
+expr_stmt|;
+comment|// missing arguments
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"values (\"adhoc\".my_left(\"n\" => 3))"
+argument_list|)
+operator|.
+name|throws_
+argument_list|(
+literal|"No match found for function signature MY_LEFT(n =><NUMERIC>)\n"
+argument_list|)
+expr_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"values (\"adhoc\".my_left(\"s\" => 'hello'))"
+argument_list|)
+operator|.
+name|throws_
+argument_list|(
+literal|"No match found for function signature MY_LEFT(s =><CHARACTER>)\n"
+argument_list|)
+expr_stmt|;
+comment|// arguments of wrong type
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"values (\"adhoc\".my_left(\"n\" => 'hello', \"s\" => 'x'))"
+argument_list|)
+operator|.
+name|throws_
+argument_list|(
+literal|"No match found for function signature "
+operator|+
+literal|"MY_LEFT(n =><CHARACTER>, s =><CHARACTER>)\n"
+argument_list|)
+expr_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"values (\"adhoc\".my_left(\"n\" => 1, \"s\" => 0))"
+argument_list|)
+operator|.
+name|throws_
+argument_list|(
+literal|"No match found for function signature "
+operator|+
+literal|"MY_LEFT(n =><NUMERIC>, s =><NUMERIC>)\n"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Tests calling a user-defined function some of whose parameters are    * optional. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testUdfArgumentOptional
+parameter_list|()
+block|{
+specifier|final
+name|CalciteAssert
+operator|.
+name|AssertThat
+name|with
+init|=
+name|withUdf
+argument_list|()
+decl_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"values (\"adhoc\".abcde(a=>1,b=>2,c=>3,d=>4,e=>5))"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"EXPR$0={a: 1, b: 2, c: 3, d: 4, e: 5}\n"
+argument_list|)
+expr_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"values (\"adhoc\".abcde(1,2,3,4,CAST(NULL AS INTEGER)))"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"EXPR$0={a: 1, b: 2, c: 3, d: 4, e: null}\n"
+argument_list|)
+expr_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"values (\"adhoc\".abcde(a=>1,b=>2,c=>3,d=>4))"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"EXPR$0={a: 1, b: 2, c: 3, d: 4, e: null}\n"
+argument_list|)
+expr_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"values (\"adhoc\".abcde(a=>1,b=>2,c=>3))"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"EXPR$0={a: 1, b: 2, c: 3, d: null, e: null}\n"
+argument_list|)
+expr_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"values (\"adhoc\".abcde(a=>1,e=>5,c=>3))"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"EXPR$0={a: 1, b: null, c: 3, d: null, e: 5}\n"
+argument_list|)
+expr_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"values (\"adhoc\".abcde(1,2,3))"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"EXPR$0={a: 1, b: 2, c: 3, d: null, e: null}\n"
+argument_list|)
+expr_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"values (\"adhoc\".abcde(1,2,3,4))"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"EXPR$0={a: 1, b: 2, c: 3, d: 4, e: null}\n"
+argument_list|)
+expr_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"values (\"adhoc\".abcde(1,2,3,4,5))"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"EXPR$0={a: 1, b: 2, c: 3, d: 4, e: 5}\n"
+argument_list|)
+expr_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"values (\"adhoc\".abcde(1,2))"
+argument_list|)
+operator|.
+name|throws_
+argument_list|(
+literal|"No match found for function signature ABCDE(<NUMERIC>,<NUMERIC>)"
+argument_list|)
+expr_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"values (\"adhoc\".abcde(1,DEFAULT,3))"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"EXPR$0={a: 1, b: null, c: 3, d: null, e: null}\n"
+argument_list|)
+expr_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"values (\"adhoc\".abcde(1,DEFAULT,'abcde'))"
+argument_list|)
+operator|.
+name|throws_
+argument_list|(
+literal|"No match found for function signature ABCDE(<NUMERIC>,<ANY>,<CHARACTER>)"
+argument_list|)
+expr_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"values (\"adhoc\".abcde(true))"
+argument_list|)
+operator|.
+name|throws_
+argument_list|(
+literal|"No match found for function signature ABCDE(<BOOLEAN>)"
+argument_list|)
+expr_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"values (\"adhoc\".abcde(true,DEFAULT))"
+argument_list|)
+operator|.
+name|throws_
+argument_list|(
+literal|"No match found for function signature ABCDE(<BOOLEAN>,<ANY>)"
+argument_list|)
+expr_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"values (\"adhoc\".abcde(1,DEFAULT,3,DEFAULT))"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"EXPR$0={a: 1, b: null, c: 3, d: null, e: null}\n"
+argument_list|)
+expr_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"values (\"adhoc\".abcde(1,2,DEFAULT))"
+argument_list|)
+operator|.
+name|throws_
+argument_list|(
+literal|"DEFAULT is only allowed for optional parameters"
+argument_list|)
+expr_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"values (\"adhoc\".abcde(a=>1,b=>2,c=>DEFAULT))"
+argument_list|)
+operator|.
+name|throws_
+argument_list|(
+literal|"DEFAULT is only allowed for optional parameters"
+argument_list|)
+expr_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"values (\"adhoc\".abcde(a=>1,b=>DEFAULT,c=>3))"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"EXPR$0={a: 1, b: null, c: 3, d: null, e: null}\n"
 argument_list|)
 expr_stmt|;
 block|}
@@ -24663,13 +25073,13 @@ argument_list|)
 operator|.
 name|query
 argument_list|(
-literal|"select DID \n"
+literal|"select DID\n"
 operator|+
-literal|"from (select deptid as did \n"
+literal|"from (select deptid as did\n"
 operator|+
 literal|"         FROM\n"
 operator|+
-literal|"            ( values (1), (2) ) as T1(deptid) \n"
+literal|"            ( values (1), (2) ) as T1(deptid)\n"
 operator|+
 literal|"         ) "
 argument_list|)
@@ -25852,7 +26262,7 @@ name|with
 operator|.
 name|query
 argument_list|(
-literal|"select DID from (select DEPTID as did FROM \n "
+literal|"select DID from (select DEPTID as did FROM\n"
 operator|+
 literal|"     ( values (1), (2) ) as T1(deptid) ) "
 argument_list|)
@@ -25868,7 +26278,7 @@ name|with
 operator|.
 name|query
 argument_list|(
-literal|"select x.DID from (select DEPTID as did FROM \n "
+literal|"select x.DID from (select DEPTID as did FROM\n"
 operator|+
 literal|"     ( values (1), (2) ) as T1(deptid) ) X"
 argument_list|)
@@ -25910,7 +26320,7 @@ name|with
 operator|.
 name|query
 argument_list|(
-literal|"select DID from (select deptid as did FROM \n "
+literal|"select DID from (select deptid as did FROM\n"
 operator|+
 literal|"     ( values (1), (2) ) as T1(deptid) ) "
 argument_list|)
@@ -25926,7 +26336,7 @@ name|with
 operator|.
 name|query
 argument_list|(
-literal|"select x.DID from (select deptid as did FROM \n "
+literal|"select x.DID from (select deptid as did FROM\n"
 operator|+
 literal|"     ( values (1), (2) ) as T1(deptid) ) X "
 argument_list|)
@@ -25942,7 +26352,7 @@ name|with
 operator|.
 name|query
 argument_list|(
-literal|"select X.DID from (select deptid as did FROM \n "
+literal|"select X.DID from (select deptid as did FROM\n"
 operator|+
 literal|"     ( values (1), (2) ) as T1(deptid) ) X "
 argument_list|)
@@ -25958,7 +26368,7 @@ name|with
 operator|.
 name|query
 argument_list|(
-literal|"select X.DID2 from (select deptid as did FROM \n "
+literal|"select X.DID2 from (select deptid as did FROM\n"
 operator|+
 literal|"     ( values (1), (2) ) as T1(deptid) ) X (DID2)"
 argument_list|)
@@ -25974,7 +26384,7 @@ name|with
 operator|.
 name|query
 argument_list|(
-literal|"select X.DID2 from (select deptid as did FROM \n "
+literal|"select X.DID2 from (select deptid as did FROM\n"
 operator|+
 literal|"     ( values (1), (2) ) as T1(deptid) ) X (DID2)"
 argument_list|)
@@ -26016,7 +26426,7 @@ name|with
 operator|.
 name|query
 argument_list|(
-literal|"select `DID` from (select deptid as did FROM \n "
+literal|"select `DID` from (select deptid as did FROM\n"
 operator|+
 literal|"     ( values (1), (2) ) as T1(deptid) ) "
 argument_list|)
@@ -26032,7 +26442,7 @@ name|with
 operator|.
 name|query
 argument_list|(
-literal|"select `x`.`DID` from (select deptid as did FROM \n "
+literal|"select `x`.`DID` from (select deptid as did FROM\n"
 operator|+
 literal|"     ( values (1), (2) ) as T1(deptid) ) X "
 argument_list|)
@@ -26048,7 +26458,7 @@ name|with
 operator|.
 name|query
 argument_list|(
-literal|"select `X`.`DID` from (select deptid as did FROM \n "
+literal|"select `X`.`DID` from (select deptid as did FROM\n"
 operator|+
 literal|"     ( values (1), (2) ) as T1(deptid) ) X "
 argument_list|)
@@ -26064,7 +26474,7 @@ name|with
 operator|.
 name|query
 argument_list|(
-literal|"select `X`.`DID2` from (select deptid as did FROM \n "
+literal|"select `X`.`DID2` from (select deptid as did FROM\n"
 operator|+
 literal|"     ( values (1), (2) ) as T1(deptid) ) X (DID2)"
 argument_list|)
@@ -26080,7 +26490,7 @@ name|with
 operator|.
 name|query
 argument_list|(
-literal|"select `X`.`DID2` from (select deptid as did FROM \n "
+literal|"select `X`.`DID2` from (select deptid as did FROM\n"
 operator|+
 literal|"     ( values (1), (2) ) as T1(deptid) ) X (DID2)"
 argument_list|)
@@ -26114,7 +26524,7 @@ argument_list|)
 operator|.
 name|query
 argument_list|(
-literal|"select DID from (select deptid as did FROM \n "
+literal|"select DID from (select deptid as did FROM\n"
 operator|+
 literal|"     ( values (1), (2) ) as T1(deptid) ) "
 argument_list|)
@@ -26148,7 +26558,7 @@ argument_list|)
 operator|.
 name|query
 argument_list|(
-literal|"select [DID] from (select deptid as did FROM \n "
+literal|"select [DID] from (select deptid as did FROM\n"
 operator|+
 literal|"     ( values (1), (2) ) as T1([deptid]) ) "
 argument_list|)
@@ -28588,7 +28998,7 @@ argument_list|()
 block|}
 decl_stmt|;
 block|}
-comment|/** Example of a UDF with a non-static {@code eval} method. */
+comment|/** Example of a UDF with a non-static {@code eval} method,    * and named parameters. */
 specifier|public
 specifier|static
 class|class
@@ -28598,9 +29008,23 @@ specifier|public
 name|int
 name|eval
 parameter_list|(
+annotation|@
+name|Parameter
+argument_list|(
+name|name
+operator|=
+literal|"x"
+argument_list|)
 name|int
 name|x
 parameter_list|,
+annotation|@
+name|Parameter
+argument_list|(
+name|name
+operator|=
+literal|"y"
+argument_list|)
 name|int
 name|y
 parameter_list|)
@@ -28609,6 +29033,155 @@ return|return
 name|x
 operator|+
 name|y
+return|;
+block|}
+block|}
+comment|/** Example of a UDF with named parameters. */
+specifier|public
+specifier|static
+class|class
+name|MyLeftFunction
+block|{
+specifier|public
+name|String
+name|eval
+parameter_list|(
+annotation|@
+name|Parameter
+argument_list|(
+name|name
+operator|=
+literal|"s"
+argument_list|)
+name|String
+name|s
+parameter_list|,
+annotation|@
+name|Parameter
+argument_list|(
+name|name
+operator|=
+literal|"n"
+argument_list|)
+name|int
+name|n
+parameter_list|)
+block|{
+return|return
+name|s
+operator|.
+name|substring
+argument_list|(
+literal|0
+argument_list|,
+name|n
+argument_list|)
+return|;
+block|}
+block|}
+comment|/** Example of a UDF with named parameters, some of them optional. */
+specifier|public
+specifier|static
+class|class
+name|MyAbcdeFunction
+block|{
+specifier|public
+name|String
+name|eval
+parameter_list|(
+annotation|@
+name|Parameter
+argument_list|(
+name|name
+operator|=
+literal|"A"
+argument_list|,
+name|optional
+operator|=
+literal|false
+argument_list|)
+name|Integer
+name|a
+parameter_list|,
+annotation|@
+name|Parameter
+argument_list|(
+name|name
+operator|=
+literal|"B"
+argument_list|,
+name|optional
+operator|=
+literal|true
+argument_list|)
+name|Integer
+name|b
+parameter_list|,
+annotation|@
+name|Parameter
+argument_list|(
+name|name
+operator|=
+literal|"C"
+argument_list|,
+name|optional
+operator|=
+literal|false
+argument_list|)
+name|Integer
+name|c
+parameter_list|,
+annotation|@
+name|Parameter
+argument_list|(
+name|name
+operator|=
+literal|"D"
+argument_list|,
+name|optional
+operator|=
+literal|true
+argument_list|)
+name|Integer
+name|d
+parameter_list|,
+annotation|@
+name|Parameter
+argument_list|(
+name|name
+operator|=
+literal|"E"
+argument_list|,
+name|optional
+operator|=
+literal|true
+argument_list|)
+name|Integer
+name|e
+parameter_list|)
+block|{
+return|return
+literal|"{a: "
+operator|+
+name|a
+operator|+
+literal|", b: "
+operator|+
+name|b
+operator|+
+literal|", c: "
+operator|+
+name|c
+operator|+
+literal|", d: "
+operator|+
+name|d
+operator|+
+literal|", e: "
+operator|+
+name|e
+operator|+
+literal|"}"
 return|;
 block|}
 block|}
@@ -28623,6 +29196,13 @@ specifier|static
 name|String
 name|eval
 parameter_list|(
+annotation|@
+name|Parameter
+argument_list|(
+name|name
+operator|=
+literal|"o"
+argument_list|)
 name|Object
 name|o
 parameter_list|)

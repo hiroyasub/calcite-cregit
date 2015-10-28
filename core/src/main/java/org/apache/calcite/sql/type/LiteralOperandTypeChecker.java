@@ -151,6 +151,18 @@ block|}
 comment|//~ Methods ----------------------------------------------------------------
 specifier|public
 name|boolean
+name|isOptional
+parameter_list|(
+name|int
+name|i
+parameter_list|)
+block|{
+return|return
+literal|false
+return|;
+block|}
+specifier|public
+name|boolean
 name|checkSingleOperandType
 parameter_list|(
 name|SqlCallBinding
@@ -292,9 +304,6 @@ argument_list|(
 name|callBinding
 argument_list|,
 name|callBinding
-operator|.
-name|getCall
-argument_list|()
 operator|.
 name|operand
 argument_list|(

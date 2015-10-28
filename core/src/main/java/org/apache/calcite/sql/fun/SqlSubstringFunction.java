@@ -556,14 +556,6 @@ name|boolean
 name|throwOnFailure
 parameter_list|)
 block|{
-name|SqlCall
-name|call
-init|=
-name|callBinding
-operator|.
-name|getCall
-argument_list|()
-decl_stmt|;
 name|SqlValidator
 name|validator
 init|=
@@ -587,9 +579,9 @@ name|SqlNode
 argument_list|>
 name|operands
 init|=
-name|call
+name|callBinding
 operator|.
-name|getOperandList
+name|operands
 argument_list|()
 decl_stmt|;
 name|int

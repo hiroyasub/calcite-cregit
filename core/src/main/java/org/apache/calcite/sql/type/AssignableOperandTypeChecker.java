@@ -161,8 +161,16 @@ name|RelDataType
 argument_list|>
 name|paramTypes
 decl_stmt|;
+specifier|private
+specifier|final
+name|ImmutableList
+argument_list|<
+name|String
+argument_list|>
+name|paramNames
+decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**    * Instantiates this strategy with a specific set of parameter types.    *    * @param paramTypes parameter types for operands; index in this array    *                   corresponds to operand number    */
+comment|/**    * Instantiates this strategy with a specific set of parameter types.    *    * @param paramTypes parameter types for operands; index in this array    *                   corresponds to operand number    * @param paramNames parameter names, or null    */
 specifier|public
 name|AssignableOperandTypeChecker
 parameter_list|(
@@ -171,6 +179,12 @@ argument_list|<
 name|RelDataType
 argument_list|>
 name|paramTypes
+parameter_list|,
+name|List
+argument_list|<
+name|String
+argument_list|>
+name|paramNames
 parameter_list|)
 block|{
 name|this
@@ -184,8 +198,37 @@ argument_list|(
 name|paramTypes
 argument_list|)
 expr_stmt|;
+name|this
+operator|.
+name|paramNames
+operator|=
+name|paramNames
+operator|==
+literal|null
+condition|?
+literal|null
+else|:
+name|ImmutableList
+operator|.
+name|copyOf
+argument_list|(
+name|paramNames
+argument_list|)
+expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
+specifier|public
+name|boolean
+name|isOptional
+parameter_list|(
+name|int
+name|i
+parameter_list|)
+block|{
+return|return
+literal|false
+return|;
+block|}
 specifier|public
 name|SqlOperandCountRange
 name|getOperandCountRange
@@ -214,6 +257,8 @@ name|boolean
 name|throwOnFailure
 parameter_list|)
 block|{
+comment|// Do not use callBinding.operands(). We have not resolved to a function
+comment|// yet, therefore we do not know the ordered parameter names.
 specifier|final
 name|List
 argument_list|<
@@ -370,6 +415,33 @@ operator|.
 name|append
 argument_list|(
 literal|", "
+argument_list|)
+expr_stmt|;
+block|}
+if|if
+condition|(
+name|paramNames
+operator|!=
+literal|null
+condition|)
+block|{
+name|sb
+operator|.
+name|append
+argument_list|(
+name|paramNames
+operator|.
+name|get
+argument_list|(
+name|paramType
+operator|.
+name|i
+argument_list|)
+argument_list|)
+operator|.
+name|append
+argument_list|(
+literal|" => "
 argument_list|)
 expr_stmt|;
 block|}

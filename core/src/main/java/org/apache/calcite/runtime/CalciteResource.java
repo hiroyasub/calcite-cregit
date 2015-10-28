@@ -1819,6 +1819,45 @@ function_decl|;
 annotation|@
 name|BaseMessage
 argument_list|(
+literal|"Some but not all arguments are named"
+argument_list|)
+name|ExInst
+argument_list|<
+name|SqlValidatorException
+argument_list|>
+name|someButNotAllArgumentsAreNamed
+parameter_list|()
+function_decl|;
+annotation|@
+name|BaseMessage
+argument_list|(
+literal|"Duplicate argument name ''{0}''"
+argument_list|)
+name|ExInst
+argument_list|<
+name|SqlValidatorException
+argument_list|>
+name|duplicateArgumentName
+parameter_list|(
+name|String
+name|name
+parameter_list|)
+function_decl|;
+annotation|@
+name|BaseMessage
+argument_list|(
+literal|"DEFAULT is only allowed for optional parameters"
+argument_list|)
+name|ExInst
+argument_list|<
+name|SqlValidatorException
+argument_list|>
+name|defaultForOptionalParameter
+parameter_list|()
+function_decl|;
+annotation|@
+name|BaseMessage
+argument_list|(
 literal|"Not allowed to perform {0} on {1}"
 argument_list|)
 name|ExInst

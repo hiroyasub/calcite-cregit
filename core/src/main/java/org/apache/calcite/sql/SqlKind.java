@@ -113,6 +113,12 @@ block|,
 comment|/**    * AS operator    */
 name|AS
 block|,
+comment|/**    * ARGUMENT_ASSIGNMENT operator, {@code =>}    */
+name|ARGUMENT_ASSIGNMENT
+block|,
+comment|/**    * DEFAULT operator    */
+name|DEFAULT
+block|,
 comment|/**    * OVER operator    */
 name|OVER
 block|,
@@ -453,6 +459,10 @@ operator|.
 name|of
 argument_list|(
 name|AS
+argument_list|,
+name|ARGUMENT_ASSIGNMENT
+argument_list|,
+name|DEFAULT
 argument_list|,
 name|DESCENDING
 argument_list|,

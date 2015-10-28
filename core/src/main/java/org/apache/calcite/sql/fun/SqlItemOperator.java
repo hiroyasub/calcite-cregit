@@ -561,9 +561,6 @@ name|left
 init|=
 name|callBinding
 operator|.
-name|getCall
-argument_list|()
-operator|.
 name|operand
 argument_list|(
 literal|0
@@ -574,9 +571,6 @@ name|SqlNode
 name|right
 init|=
 name|callBinding
-operator|.
-name|getCall
-argument_list|()
 operator|.
 name|operand
 argument_list|(

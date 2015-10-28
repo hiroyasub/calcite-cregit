@@ -166,10 +166,7 @@ name|operand
 range|:
 name|callBinding
 operator|.
-name|getCall
-argument_list|()
-operator|.
-name|getOperandList
+name|operands
 argument_list|()
 control|)
 block|{

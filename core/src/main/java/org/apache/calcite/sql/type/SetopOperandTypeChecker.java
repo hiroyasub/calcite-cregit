@@ -199,6 +199,18 @@ block|{
 comment|//~ Methods ----------------------------------------------------------------
 specifier|public
 name|boolean
+name|isOptional
+parameter_list|(
+name|int
+name|i
+parameter_list|)
+block|{
+return|return
+literal|false
+return|;
+block|}
+specifier|public
+name|boolean
 name|checkOperandTypes
 parameter_list|(
 name|SqlCallBinding
@@ -358,9 +370,6 @@ name|node
 init|=
 name|callBinding
 operator|.
-name|getCall
-argument_list|()
-operator|.
 name|operand
 argument_list|(
 name|i
@@ -518,9 +527,6 @@ operator|.
 name|getSelectListItem
 argument_list|(
 name|callBinding
-operator|.
-name|getCall
-argument_list|()
 operator|.
 name|operand
 argument_list|(

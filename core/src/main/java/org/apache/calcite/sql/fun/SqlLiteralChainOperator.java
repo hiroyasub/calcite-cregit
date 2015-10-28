@@ -464,21 +464,6 @@ literal|true
 return|;
 comment|// nothing to compare
 block|}
-specifier|final
-name|List
-argument_list|<
-name|SqlNode
-argument_list|>
-name|operandList
-init|=
-name|callBinding
-operator|.
-name|getCall
-argument_list|()
-operator|.
-name|getOperandList
-argument_list|()
-decl_stmt|;
 name|RelDataType
 name|firstType
 init|=
@@ -496,7 +481,10 @@ name|Ord
 operator|.
 name|zip
 argument_list|(
-name|operandList
+name|callBinding
+operator|.
+name|operands
+argument_list|()
 argument_list|)
 control|)
 block|{

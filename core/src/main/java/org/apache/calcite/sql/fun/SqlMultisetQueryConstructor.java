@@ -436,10 +436,7 @@ argument_list|()
 argument_list|,
 name|callBinding
 operator|.
-name|getCall
-argument_list|()
-operator|.
-name|getOperandList
+name|operands
 argument_list|()
 argument_list|)
 decl_stmt|;

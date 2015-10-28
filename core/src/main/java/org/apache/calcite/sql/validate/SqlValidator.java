@@ -893,7 +893,7 @@ argument_list|>
 name|argTypes
 parameter_list|)
 function_decl|;
-comment|/**    * Handles a call to a function which cannot be resolved. Returns a an    * appropriately descriptive error, which caller must throw.    *    * @param call               Call    * @param unresolvedFunction Overloaded function which is the target of the    *                           call    * @param argTypes           Types of arguments    */
+comment|/**    * Handles a call to a function which cannot be resolved. Returns a an    * appropriately descriptive error, which caller must throw.    *    * @param call               Call    * @param unresolvedFunction Overloaded function which is the target of the    *                           call    * @param argTypes           Types of arguments    * @param argNames           Names of arguments, or null if call by position    */
 name|CalciteException
 name|handleUnresolvedFunction
 parameter_list|(
@@ -908,6 +908,12 @@ argument_list|<
 name|RelDataType
 argument_list|>
 name|argTypes
+parameter_list|,
+name|List
+argument_list|<
+name|String
+argument_list|>
+name|argNames
 parameter_list|)
 function_decl|;
 comment|/**    * Expands an expression in the ORDER BY clause into an expression with the    * same semantics as expressions in the SELECT clause.    *    *<p>This is made necessary by a couple of dialect 'features':    *    *<ul>    *<li><b>ordinal expressions</b>: In "SELECT x, y FROM t ORDER BY 2", the    * expression "2" is shorthand for the 2nd item in the select clause, namely    * "y".    *<li><b>alias references</b>: In "SELECT x AS a, y FROM t ORDER BY a", the    * expression "a" is shorthand for the item in the select clause whose alias    * is "a"    *</ul>    *    * @param select    Select statement which contains ORDER BY    * @param orderExpr Expression in the ORDER BY clause.    * @return Expression translated into SELECT clause semantics    */

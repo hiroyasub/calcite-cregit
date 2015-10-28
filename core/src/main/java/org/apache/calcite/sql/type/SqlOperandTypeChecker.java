@@ -101,6 +101,14 @@ name|Consistency
 name|getConsistency
 parameter_list|()
 function_decl|;
+comment|/** Returns whether the {@code i}th operand is optional. */
+name|boolean
+name|isOptional
+parameter_list|(
+name|int
+name|i
+parameter_list|)
+function_decl|;
 comment|/** Strategy used to make arguments consistent. */
 enum|enum
 name|Consistency

@@ -818,6 +818,28 @@ operator|new
 name|SqlAsOperator
 argument_list|()
 decl_stmt|;
+comment|/**    *<code>ARGUMENT_ASSIGNMENT</code> operator (<code>=&lt;</code>)    * assigns an argument to a function call to a particular named parameter.    */
+specifier|public
+specifier|static
+specifier|final
+name|SqlSpecialOperator
+name|ARGUMENT_ASSIGNMENT
+init|=
+operator|new
+name|SqlArgumentAssignmentOperator
+argument_list|()
+decl_stmt|;
+comment|/**    *<code>DEFAULT</code> operator indicates that an argument to a function call    * is to take its default value..    */
+specifier|public
+specifier|static
+specifier|final
+name|SqlSpecialOperator
+name|DEFAULT
+init|=
+operator|new
+name|SqlDefaultOperator
+argument_list|()
+decl_stmt|;
 comment|/**<code>FILTER</code> operator filters which rows are included in an    *  aggregate function. */
 specifier|public
 specifier|static
