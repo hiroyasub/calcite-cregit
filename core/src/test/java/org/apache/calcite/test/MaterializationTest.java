@@ -2739,6 +2739,39 @@ name|q
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-891">[CALCITE-891]    * TableScan without Project cannot be substituted by any projected    * materialization</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testJoinMaterialization2
+parameter_list|()
+block|{
+name|String
+name|q
+init|=
+literal|"select *\n"
+operator|+
+literal|"from \"emps\"\n"
+operator|+
+literal|"join \"depts\" using (\"deptno\")"
+decl_stmt|;
+specifier|final
+name|String
+name|m
+init|=
+literal|"select \"deptno\", \"empid\", \"name\",\n"
+operator|+
+literal|"\"salary\", \"commission\" from \"emps\""
+decl_stmt|;
+name|checkMaterialize
+argument_list|(
+name|m
+argument_list|,
+name|q
+argument_list|)
+expr_stmt|;
+block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-761">[CALCITE-761]    * Pre-populated materializations</a>. */
 annotation|@
 name|Test
