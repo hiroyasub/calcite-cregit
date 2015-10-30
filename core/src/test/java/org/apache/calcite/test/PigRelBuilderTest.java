@@ -75,6 +75,20 @@ begin_import
 import|import
 name|org
 operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|util
+operator|.
+name|Util
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
 name|junit
 operator|.
 name|Test
@@ -130,6 +144,29 @@ name|config
 argument_list|()
 return|;
 block|}
+comment|/** Converts a relational expression to a sting with linux line-endings. */
+specifier|private
+name|String
+name|str
+parameter_list|(
+name|RelNode
+name|r
+parameter_list|)
+block|{
+return|return
+name|Util
+operator|.
+name|toLinux
+argument_list|(
+name|RelOptUtil
+operator|.
+name|toString
+argument_list|(
+name|r
+argument_list|)
+argument_list|)
+return|;
+block|}
 annotation|@
 name|Test
 specifier|public
@@ -171,9 +208,7 @@ argument_list|()
 decl_stmt|;
 name|assertThat
 argument_list|(
-name|RelOptUtil
-operator|.
-name|toString
+name|str
 argument_list|(
 name|root
 argument_list|)
@@ -268,9 +303,7 @@ literal|"  LogicalTableScan(table=[[scott, EMP]])\n"
 decl_stmt|;
 name|assertThat
 argument_list|(
-name|RelOptUtil
-operator|.
-name|toString
+name|str
 argument_list|(
 name|root
 argument_list|)
@@ -341,20 +374,24 @@ operator|.
 name|build
 argument_list|()
 decl_stmt|;
+specifier|final
+name|String
+name|plan
+init|=
+literal|"LogicalFilter(condition=[IS NOT NULL($3)])\n"
+operator|+
+literal|"  LogicalTableScan(table=[[scott, EMP]])\n"
+decl_stmt|;
 name|assertThat
 argument_list|(
-name|RelOptUtil
-operator|.
-name|toString
+name|str
 argument_list|(
 name|root
 argument_list|)
 argument_list|,
 name|is
 argument_list|(
-literal|"LogicalFilter(condition=[IS NOT NULL($3)])\n"
-operator|+
-literal|"  LogicalTableScan(table=[[scott, EMP]])\n"
+name|plan
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -447,9 +484,7 @@ literal|"    LogicalTableScan(table=[[scott, EMP]])\n"
 decl_stmt|;
 name|assertThat
 argument_list|(
-name|RelOptUtil
-operator|.
-name|toString
+name|str
 argument_list|(
 name|root
 argument_list|)
@@ -554,9 +589,7 @@ literal|"      LogicalTableScan(table=[[scott, DEPT]])\n"
 decl_stmt|;
 name|assertThat
 argument_list|(
-name|RelOptUtil
-operator|.
-name|toString
+name|str
 argument_list|(
 name|root
 argument_list|)
@@ -646,9 +679,7 @@ argument_list|()
 decl_stmt|;
 name|assertThat
 argument_list|(
-name|RelOptUtil
-operator|.
-name|toString
+name|str
 argument_list|(
 name|root
 argument_list|)
