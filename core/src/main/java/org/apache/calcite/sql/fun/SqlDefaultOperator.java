@@ -203,7 +203,7 @@ parameter_list|)
 block|{
 name|writer
 operator|.
-name|sep
+name|keyword
 argument_list|(
 name|getName
 argument_list|()

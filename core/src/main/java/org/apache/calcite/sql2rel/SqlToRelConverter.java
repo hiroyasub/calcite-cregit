@@ -10463,6 +10463,27 @@ argument_list|)
 expr_stmt|;
 comment|// Expand table macro if possible. It's more efficient than
 comment|// LogicalTableFunctionScan.
+specifier|final
+name|SqlCallBinding
+name|callBinding
+init|=
+operator|new
+name|SqlCallBinding
+argument_list|(
+name|bb
+operator|.
+name|scope
+operator|.
+name|getValidator
+argument_list|()
+argument_list|,
+name|bb
+operator|.
+name|scope
+argument_list|,
+name|call
+argument_list|)
+decl_stmt|;
 if|if
 condition|(
 name|operator
@@ -10489,9 +10510,9 @@ name|getTable
 argument_list|(
 name|typeFactory
 argument_list|,
-name|call
+name|callBinding
 operator|.
-name|getOperandList
+name|operands
 argument_list|()
 argument_list|)
 decl_stmt|;
@@ -10565,9 +10586,9 @@ name|getElementType
 argument_list|(
 name|typeFactory
 argument_list|,
-name|call
+name|callBinding
 operator|.
-name|getOperandList
+name|operands
 argument_list|()
 argument_list|)
 expr_stmt|;
