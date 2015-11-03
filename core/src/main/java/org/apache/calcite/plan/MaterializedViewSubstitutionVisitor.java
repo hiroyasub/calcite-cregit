@@ -175,7 +175,10 @@ argument_list|)
 expr_stmt|;
 block|}
 specifier|public
+name|List
+argument_list|<
 name|RelNode
+argument_list|>
 name|go
 parameter_list|(
 name|RelNode
