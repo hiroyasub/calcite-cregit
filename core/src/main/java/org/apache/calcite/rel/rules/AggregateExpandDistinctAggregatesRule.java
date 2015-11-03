@@ -1155,6 +1155,10 @@ name|groupSet
 argument_list|,
 name|aggregate
 operator|.
+name|indicator
+argument_list|,
+name|aggregate
+operator|.
 name|getGroupSets
 argument_list|()
 argument_list|)
@@ -1444,6 +1448,13 @@ operator|.
 name|groupKey
 argument_list|(
 name|fullGroupSet
+argument_list|,
+name|groupSets
+operator|.
+name|size
+argument_list|()
+operator|>
+literal|1
 argument_list|,
 name|groupSets
 argument_list|)
@@ -2186,6 +2197,10 @@ operator|.
 name|getGroupSet
 argument_list|()
 argument_list|)
+argument_list|,
+name|aggregate
+operator|.
+name|indicator
 argument_list|,
 name|remap
 argument_list|(

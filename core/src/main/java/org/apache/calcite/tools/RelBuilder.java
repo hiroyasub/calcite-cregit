@@ -3154,6 +3154,8 @@ argument_list|(
 name|nodes
 argument_list|)
 argument_list|,
+literal|false
+argument_list|,
 literal|null
 argument_list|,
 literal|null
@@ -3172,6 +3174,9 @@ extends|extends
 name|RexNode
 argument_list|>
 name|nodes
+parameter_list|,
+name|boolean
+name|indicator
 parameter_list|,
 name|Iterable
 argument_list|<
@@ -3241,6 +3246,8 @@ argument_list|(
 name|nodes
 argument_list|)
 argument_list|,
+name|indicator
+argument_list|,
 name|builder
 operator|.
 name|build
@@ -3307,6 +3314,9 @@ name|groupKey
 parameter_list|(
 name|ImmutableBitSet
 name|groupSet
+parameter_list|,
+name|boolean
+name|indicator
 parameter_list|,
 name|ImmutableList
 argument_list|<
@@ -3440,6 +3450,8 @@ return|return
 name|groupKey
 argument_list|(
 name|nodes
+argument_list|,
+name|indicator
 argument_list|,
 name|nodeLists
 argument_list|)
@@ -4780,12 +4792,9 @@ name|createAggregate
 argument_list|(
 name|r
 argument_list|,
-name|groupSets
+name|groupKey_
 operator|.
-name|size
-argument_list|()
-operator|>
-literal|1
+name|indicator
 argument_list|,
 name|groupSet
 argument_list|,
@@ -7399,6 +7408,10 @@ argument_list|>
 name|nodes
 decl_stmt|;
 specifier|final
+name|boolean
+name|indicator
+decl_stmt|;
+specifier|final
 name|ImmutableList
 argument_list|<
 name|ImmutableList
@@ -7419,6 +7432,9 @@ argument_list|<
 name|RexNode
 argument_list|>
 name|nodes
+parameter_list|,
+name|boolean
+name|indicator
 parameter_list|,
 name|ImmutableList
 argument_list|<
@@ -7443,6 +7459,12 @@ name|checkNotNull
 argument_list|(
 name|nodes
 argument_list|)
+expr_stmt|;
+name|this
+operator|.
+name|indicator
+operator|=
+name|indicator
 expr_stmt|;
 name|this
 operator|.
@@ -7507,6 +7529,8 @@ operator|new
 name|GroupKeyImpl
 argument_list|(
 name|nodes
+argument_list|,
+name|indicator
 argument_list|,
 name|nodeLists
 argument_list|,

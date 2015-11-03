@@ -2454,6 +2454,10 @@ argument_list|()
 argument_list|,
 name|oldAggregate
 operator|.
+name|indicator
+argument_list|,
+name|oldAggregate
+operator|.
 name|getGroupSets
 argument_list|()
 argument_list|)

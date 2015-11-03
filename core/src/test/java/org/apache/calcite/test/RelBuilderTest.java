@@ -2388,6 +2388,8 @@ argument_list|(
 literal|7
 argument_list|)
 argument_list|,
+literal|true
+argument_list|,
 name|ImmutableList
 operator|.
 name|of
@@ -2519,6 +2521,8 @@ argument_list|(
 literal|17
 argument_list|)
 argument_list|,
+literal|false
+argument_list|,
 literal|null
 argument_list|)
 argument_list|)
@@ -2601,6 +2605,8 @@ name|of
 argument_list|(
 literal|7
 argument_list|)
+argument_list|,
+literal|true
 argument_list|,
 name|ImmutableList
 operator|.
@@ -2699,6 +2705,8 @@ literal|7
 argument_list|,
 literal|6
 argument_list|)
+argument_list|,
+literal|true
 argument_list|,
 name|ImmutableList
 operator|.
