@@ -120,6 +120,17 @@ name|SqlTypeName
 name|typeName
 parameter_list|)
 function_decl|;
+comment|/**    * Returns the return type of SUM aggregate function inferred from its    * argument type.    */
+name|RelDataType
+name|deriveSumType
+parameter_list|(
+name|RelDataTypeFactory
+name|typeFactory
+parameter_list|,
+name|RelDataType
+name|argumentType
+parameter_list|)
+function_decl|;
 block|}
 end_interface
 

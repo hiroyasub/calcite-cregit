@@ -204,7 +204,7 @@ name|OTHER_FUNCTION
 argument_list|,
 name|ReturnTypes
 operator|.
-name|ARG0
+name|AGG_SUM_EMPTY_IS_ZERO
 argument_list|,
 literal|null
 argument_list|,

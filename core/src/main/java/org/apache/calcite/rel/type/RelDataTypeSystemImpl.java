@@ -484,6 +484,21 @@ return|return
 literal|0
 return|;
 block|}
+specifier|public
+name|RelDataType
+name|deriveSumType
+parameter_list|(
+name|RelDataTypeFactory
+name|typeFactory
+parameter_list|,
+name|RelDataType
+name|argumentType
+parameter_list|)
+block|{
+return|return
+name|argumentType
+return|;
+block|}
 block|}
 end_class
 
