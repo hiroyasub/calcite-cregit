@@ -6220,6 +6220,124 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+comment|/**    * Unit test for    * {@link org.apache.calcite.rel.metadata.RelMdPredicates#getPredicates(Aggregate)}.    */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testPullUpPredicatesFromAggregation
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select a, max(b) from (\n"
+operator|+
+literal|"  select 1 as a, 2 as b from emp)subq\n"
+operator|+
+literal|"group by a"
+decl_stmt|;
+specifier|final
+name|Aggregate
+name|rel
+init|=
+operator|(
+name|Aggregate
+operator|)
+name|convertSql
+argument_list|(
+name|sql
+argument_list|)
+decl_stmt|;
+name|RelOptPredicateList
+name|inputSet
+init|=
+name|RelMetadataQuery
+operator|.
+name|getPulledUpPredicates
+argument_list|(
+name|rel
+argument_list|)
+decl_stmt|;
+name|ImmutableList
+argument_list|<
+name|RexNode
+argument_list|>
+name|pulledUpPredicates
+init|=
+name|inputSet
+operator|.
+name|pulledUpPredicates
+decl_stmt|;
+name|assertThat
+argument_list|(
+name|pulledUpPredicates
+operator|.
+name|toString
+argument_list|()
+argument_list|,
+name|is
+argument_list|(
+literal|"[=($0, 1)]"
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testPullUpPredicatesFromProject
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select deptno, mgr, x, 'y' as y from (\n"
+operator|+
+literal|"  select deptno, mgr, cast(null as integer) as x\n"
+operator|+
+literal|"  from emp\n"
+operator|+
+literal|"  where mgr is null and deptno< 10)"
+decl_stmt|;
+specifier|final
+name|RelNode
+name|rel
+init|=
+name|convertSql
+argument_list|(
+name|sql
+argument_list|)
+decl_stmt|;
+name|RelOptPredicateList
+name|list
+init|=
+name|RelMetadataQuery
+operator|.
+name|getPulledUpPredicates
+argument_list|(
+name|rel
+argument_list|)
+decl_stmt|;
+name|assertThat
+argument_list|(
+name|list
+operator|.
+name|pulledUpPredicates
+operator|.
+name|toString
+argument_list|()
+argument_list|,
+name|is
+argument_list|(
+literal|"[IS NULL($1),<($0, 10), IS NULL($2), =($3, 'y')]"
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
 comment|/** Custom metadata interface. */
 specifier|public
 interface|interface
