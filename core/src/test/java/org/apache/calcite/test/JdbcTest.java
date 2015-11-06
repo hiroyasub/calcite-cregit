@@ -21169,7 +21169,7 @@ argument_list|)
 operator|.
 name|throws_
 argument_list|(
-literal|"Duplicate argument name 'n'\n"
+literal|"Duplicate argument name 'n'"
 argument_list|)
 expr_stmt|;
 comment|// invalid argument names
@@ -21184,7 +21184,7 @@ name|throws_
 argument_list|(
 literal|"No match found for function signature "
 operator|+
-literal|"MY_LEFT(n =><NUMERIC>, m =><NUMERIC>, s =><CHARACTER>)\n"
+literal|"MY_LEFT(n =><NUMERIC>, m =><NUMERIC>, s =><CHARACTER>)"
 argument_list|)
 expr_stmt|;
 comment|// missing arguments
@@ -21197,7 +21197,7 @@ argument_list|)
 operator|.
 name|throws_
 argument_list|(
-literal|"No match found for function signature MY_LEFT(n =><NUMERIC>)\n"
+literal|"No match found for function signature MY_LEFT(n =><NUMERIC>)"
 argument_list|)
 expr_stmt|;
 name|with
@@ -21209,7 +21209,7 @@ argument_list|)
 operator|.
 name|throws_
 argument_list|(
-literal|"No match found for function signature MY_LEFT(s =><CHARACTER>)\n"
+literal|"No match found for function signature MY_LEFT(s =><CHARACTER>)"
 argument_list|)
 expr_stmt|;
 comment|// arguments of wrong type
@@ -21224,7 +21224,7 @@ name|throws_
 argument_list|(
 literal|"No match found for function signature "
 operator|+
-literal|"MY_LEFT(n =><CHARACTER>, s =><CHARACTER>)\n"
+literal|"MY_LEFT(n =><CHARACTER>, s =><CHARACTER>)"
 argument_list|)
 expr_stmt|;
 name|with
@@ -21238,7 +21238,7 @@ name|throws_
 argument_list|(
 literal|"No match found for function signature "
 operator|+
-literal|"MY_LEFT(n =><NUMERIC>, s =><NUMERIC>)\n"
+literal|"MY_LEFT(n =><NUMERIC>, s =><NUMERIC>)"
 argument_list|)
 expr_stmt|;
 block|}
