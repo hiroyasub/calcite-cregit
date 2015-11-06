@@ -543,6 +543,16 @@ if|if
 condition|(
 name|hasAssignment
 argument_list|()
+operator|&&
+operator|!
+operator|(
+name|call
+operator|.
+name|getOperator
+argument_list|()
+operator|instanceof
+name|SqlUnresolvedFunction
+operator|)
 condition|)
 block|{
 return|return
