@@ -121,6 +121,20 @@ name|calcite
 operator|.
 name|util
 operator|.
+name|Litmus
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|util
+operator|.
 name|Util
 import|;
 end_import
@@ -347,8 +361,8 @@ parameter_list|(
 name|int
 name|count
 parameter_list|,
-name|boolean
-name|fail
+name|Litmus
+name|litmus
 parameter_list|)
 block|{
 if|if
@@ -358,10 +372,11 @@ operator|!=
 literal|1
 condition|)
 block|{
-assert|assert
-operator|!
+return|return
+name|litmus
+operator|.
 name|fail
-operator|:
+argument_list|(
 literal|"wrong operand count "
 operator|+
 name|count
@@ -369,13 +384,14 @@ operator|+
 literal|" for "
 operator|+
 name|this
-assert|;
-return|return
-literal|false
+argument_list|)
 return|;
 block|}
 return|return
-literal|true
+name|litmus
+operator|.
+name|succeed
+argument_list|()
 return|;
 block|}
 block|}

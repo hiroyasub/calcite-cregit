@@ -225,6 +225,20 @@ name|calcite
 operator|.
 name|util
 operator|.
+name|Litmus
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|util
+operator|.
 name|Util
 import|;
 end_import
@@ -2017,7 +2031,7 @@ return|return
 literal|false
 return|;
 block|}
-comment|/**    * Overridden method to specifically check only the right subtree of a window    * definition.    *    * @param node The SqlWindow to compare to "this" window    * @param fail Whether to throw if not equal    * @return boolean true if all nodes in the subtree are equal    */
+comment|/**    * Overridden method to specifically check only the right subtree of a window    * definition.    *    * @param node The SqlWindow to compare to "this" window    * @param litmus What to do if an error is detected (nodes are not equal)    *    * @return boolean true if all nodes in the subtree are equal    */
 annotation|@
 name|Override
 specifier|public
@@ -2027,8 +2041,8 @@ parameter_list|(
 name|SqlNode
 name|node
 parameter_list|,
-name|boolean
-name|fail
+name|Litmus
+name|litmus
 parameter_list|)
 block|{
 comment|// This is the difference over super.equalsDeep.  It skips
@@ -2070,7 +2084,7 @@ name|getOperandList
 argument_list|()
 argument_list|)
 argument_list|,
-name|fail
+name|litmus
 argument_list|)
 return|;
 block|}

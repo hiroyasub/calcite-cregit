@@ -205,6 +205,20 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|util
+operator|.
+name|Litmus
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -412,7 +426,17 @@ name|String
 name|getRelTypeName
 parameter_list|()
 function_decl|;
-comment|/**    * Returns whether this relational expression is valid.    *    *<p>If assertions are enabled, this method is typically called with<code>    * fail</code> =<code>true</code>, as follows:    *    *<blockquote>    *<pre>assert rel.isValid(true)</pre>    *</blockquote>    *    * This signals that the method can throw an {@link AssertionError} if it is    * not valid.    *    * @param fail Whether to fail if invalid    * @return Whether relational expression is valid    * @throws AssertionError if this relational expression is invalid and    *                        fail=true and assertions are enabled    */
+comment|/**    * Returns whether this relational expression is valid.    *    *<p>If assertions are enabled, this method is typically called with<code>    * litmus</code> =<code>THROW</code>, as follows:    *    *<blockquote>    *<pre>assert rel.isValid(Litmus.THROW)</pre>    *</blockquote>    *    *<p>This signals that the method can throw an {@link AssertionError} if it    * is not valid.    *    * @param litmus What to do if invalid    * @return Whether relational expression is valid    * @throws AssertionError if this relational expression is invalid and    *                        litmus is THROW    */
+name|boolean
+name|isValid
+parameter_list|(
+name|Litmus
+name|litmus
+parameter_list|)
+function_decl|;
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 name|boolean
 name|isValid
 parameter_list|(

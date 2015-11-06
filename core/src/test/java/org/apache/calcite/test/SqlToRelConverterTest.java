@@ -97,6 +97,20 @@ name|calcite
 operator|.
 name|util
 operator|.
+name|Litmus
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|util
+operator|.
 name|TestUtil
 import|;
 end_import
@@ -3729,7 +3743,7 @@ literal|"${plan}"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Visitor that checks that every {@link RelNode} in a tree is valid.    *    * @see RelNode#isValid(boolean)    */
+comment|/**    * Visitor that checks that every {@link RelNode} in a tree is valid.    *    * @see RelNode#isValid(org.apache.calcite.util.Litmus)    */
 specifier|public
 specifier|static
 class|class
@@ -3761,7 +3775,9 @@ name|node
 operator|.
 name|isValid
 argument_list|(
-literal|true
+name|Litmus
+operator|.
+name|THROW
 argument_list|)
 condition|)
 block|{

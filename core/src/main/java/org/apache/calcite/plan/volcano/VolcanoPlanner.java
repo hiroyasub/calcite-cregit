@@ -775,6 +775,20 @@ name|calcite
 operator|.
 name|util
 operator|.
+name|Litmus
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|util
+operator|.
 name|Pair
 import|;
 end_import
@@ -1405,9 +1419,7 @@ name|allSets
 init|=
 operator|new
 name|ArrayList
-argument_list|<
-name|RelSet
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 comment|/**    * Canonical map from {@link String digest} to the unique    * {@link RelNode relational expression} with that digest.    *    *<p>Row type is part of the key for the rare occasion that similar    * expressions have different types, e.g. variants of    * {@code Project(child=rel#1, a=null)} where a is a null INTEGER or a    * null VARCHAR(10).    */
@@ -1428,16 +1440,7 @@ name|mapDigestToRel
 init|=
 operator|new
 name|HashMap
-argument_list|<
-name|Pair
-argument_list|<
-name|String
-argument_list|,
-name|RelDataType
-argument_list|>
-argument_list|,
-name|RelNode
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 comment|/**    * Map each registered expression ({@link RelNode}) to its equivalence set    * ({@link RelSubset}).    *    *<p>We use an {@link IdentityHashMap} to simplify the process of merging    * {@link RelSet} objects. Most {@link RelNode} objects are identified by    * their digest, which involves the set that their child relational    * expressions belong to. If those children belong to the same set, we have    * to be careful, otherwise it gets incestuous.</p>    */
@@ -1453,11 +1456,7 @@ name|mapRel2Subset
 init|=
 operator|new
 name|IdentityHashMap
-argument_list|<
-name|RelNode
-argument_list|,
-name|RelSubset
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 comment|/**    * The importance of relational expressions.    *    *<p>The map contains only RelNodes whose importance has been overridden    * using {@link RelOptPlanner#setImportance(RelNode, double)}. Other    * RelNodes are presumed to have 'normal' importance.    *    *<p>If a RelNode has 0 importance, all {@link RelOptRuleCall}s using it    * are ignored, and future RelOptRuleCalls are not queued up.    */
@@ -1472,11 +1471,7 @@ name|relImportances
 init|=
 operator|new
 name|HashMap
-argument_list|<
-name|RelNode
-argument_list|,
-name|Double
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 comment|/**    * List of all schemas which have been registered.    */
@@ -1490,9 +1485,7 @@ name|registeredSchemas
 init|=
 operator|new
 name|HashSet
-argument_list|<
-name|RelOptSchema
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 comment|/**    * Holds rule calls waiting to be fired.    */
@@ -1517,9 +1510,7 @@ name|traitDefs
 init|=
 operator|new
 name|ArrayList
-argument_list|<
-name|RelTraitDef
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 comment|/**    * Set of all registered rules.    */
@@ -1533,9 +1524,7 @@ name|ruleSet
 init|=
 operator|new
 name|HashSet
-argument_list|<
-name|RelOptRule
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 specifier|private
@@ -1610,11 +1599,7 @@ name|provenanceMap
 init|=
 operator|new
 name|HashMap
-argument_list|<
-name|RelNode
-argument_list|,
-name|Provenance
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 specifier|private
@@ -1627,9 +1612,7 @@ name|ruleCallStack
 init|=
 operator|new
 name|ArrayList
-argument_list|<
-name|VolcanoRuleCall
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 comment|/** Zero cost, according to {@link #costFactory}. Not necessarily a    * {@link org.apache.calcite.plan.volcano.VolcanoCost}. */
@@ -2914,9 +2897,7 @@ name|usedTables
 init|=
 operator|new
 name|LinkedHashSet
-argument_list|<
-name|RelOptTable
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 operator|new
@@ -4443,9 +4424,7 @@ name|nodes
 init|=
 operator|new
 name|ArrayList
-argument_list|<
-name|RelNode
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 operator|new
@@ -4502,9 +4481,7 @@ name|visited
 init|=
 operator|new
 name|HashSet
-argument_list|<
-name|RelNode
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 for|for
@@ -4828,6 +4805,7 @@ name|depth
 init|=
 literal|0
 decl_stmt|;
+specifier|final
 name|HashSet
 argument_list|<
 name|RelSubset
@@ -4836,9 +4814,7 @@ name|visitedSubsets
 init|=
 operator|new
 name|HashSet
-argument_list|<
-name|RelSubset
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 specifier|public
@@ -4981,6 +4957,7 @@ name|void
 name|injectImportanceBoost
 parameter_list|()
 block|{
+specifier|final
 name|HashSet
 argument_list|<
 name|RelSubset
@@ -4989,9 +4966,7 @@ name|requireBoost
 init|=
 operator|new
 name|HashSet
-argument_list|<
-name|RelSubset
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 name|SUBSET_LOOP
@@ -5139,7 +5114,9 @@ operator|.
 name|getRowType
 argument_list|()
 argument_list|,
-literal|true
+name|Litmus
+operator|.
+name|THROW
 argument_list|)
 assert|;
 name|set
@@ -8059,9 +8036,6 @@ name|rule
 argument_list|,
 name|ImmutableList
 operator|.
-expr|<
-name|RelNode
-operator|>
 name|copyOf
 argument_list|(
 name|ruleCall
@@ -8145,7 +8119,9 @@ operator|.
 name|getRowType
 argument_list|()
 argument_list|,
-literal|true
+name|Litmus
+operator|.
+name|THROW
 argument_list|)
 assert|;
 name|RelSet

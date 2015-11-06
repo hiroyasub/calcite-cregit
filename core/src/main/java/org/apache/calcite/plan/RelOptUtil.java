@@ -865,6 +865,20 @@ name|calcite
 operator|.
 name|util
 operator|.
+name|Litmus
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|util
+operator|.
 name|Pair
 import|;
 end_import
@@ -7483,7 +7497,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/**    * Returns whether two types are equal using '='.    *    * @param desc1 Description of first type    * @param type1 First type    * @param desc2 Description of second type    * @param type2 Second type    * @param fail  Whether to assert if they are not equal    * @return Whether the types are equal    */
+comment|/**    * Returns whether two types are equal using '='.    *    * @param desc1 Description of first type    * @param type1 First type    * @param desc2 Description of second type    * @param type2 Second type    * @param litmus What to do if an error is detected (types are not equal)    * @return Whether the types are equal    */
 specifier|public
 specifier|static
 name|boolean
@@ -7503,8 +7517,8 @@ parameter_list|,
 name|RelDataType
 name|type2
 parameter_list|,
-name|boolean
-name|fail
+name|Litmus
+name|litmus
 parameter_list|)
 block|{
 comment|// if any one of the types is ANY return true
@@ -7530,7 +7544,10 @@ name|ANY
 condition|)
 block|{
 return|return
-literal|true
+name|litmus
+operator|.
+name|succeed
+argument_list|()
 return|;
 block|}
 if|if
@@ -7540,10 +7557,11 @@ operator|!=
 name|type2
 condition|)
 block|{
-assert|assert
-operator|!
+return|return
+name|litmus
+operator|.
 name|fail
-operator|:
+argument_list|(
 literal|"type mismatch:\n"
 operator|+
 name|desc1
@@ -7565,16 +7583,17 @@ name|type2
 operator|.
 name|getFullTypeString
 argument_list|()
-assert|;
-return|return
-literal|false
+argument_list|)
 return|;
 block|}
 return|return
-literal|true
+name|litmus
+operator|.
+name|succeed
+argument_list|()
 return|;
 block|}
-comment|/**    * Returns whether two types are equal using    * {@link #areRowTypesEqual(RelDataType, RelDataType, boolean)}. Both types    * must not be null.    *    * @param desc1 Description of role of first type    * @param type1 First type    * @param desc2 Description of role of second type    * @param type2 Second type    * @param fail  Whether to assert if they are not equal    * @return Whether the types are equal    */
+comment|/**    * Returns whether two types are equal using    * {@link #areRowTypesEqual(RelDataType, RelDataType, boolean)}. Both types    * must not be null.    *    * @param desc1 Description of role of first type    * @param type1 First type    * @param desc2 Description of role of second type    * @param type2 Second type    * @param litmus Whether to assert if they are not equal    * @return Whether the types are equal    */
 specifier|public
 specifier|static
 name|boolean
@@ -7594,8 +7613,8 @@ parameter_list|,
 name|RelDataType
 name|type2
 parameter_list|,
-name|boolean
-name|fail
+name|Litmus
+name|litmus
 parameter_list|)
 block|{
 if|if
@@ -7611,14 +7630,10 @@ literal|false
 argument_list|)
 condition|)
 block|{
-if|if
-condition|(
+return|return
+name|litmus
+operator|.
 name|fail
-condition|)
-block|{
-throw|throw
-operator|new
-name|AssertionError
 argument_list|(
 literal|"Type mismatch:\n"
 operator|+
@@ -7642,14 +7657,13 @@ operator|.
 name|getFullTypeString
 argument_list|()
 argument_list|)
-throw|;
-block|}
-return|return
-literal|false
 return|;
 block|}
 return|return
-literal|true
+name|litmus
+operator|.
+name|succeed
+argument_list|()
 return|;
 block|}
 comment|/** Returns whether two relational expressions have the same row-type. */
@@ -7670,8 +7684,8 @@ parameter_list|,
 name|RelNode
 name|rel1
 parameter_list|,
-name|boolean
-name|fail
+name|Litmus
+name|litmus
 parameter_list|)
 block|{
 comment|// TODO: change 'equal' to 'eq', which is stronger.
@@ -7692,7 +7706,7 @@ operator|.
 name|getRowType
 argument_list|()
 argument_list|,
-name|fail
+name|litmus
 argument_list|)
 return|;
 block|}
@@ -10893,7 +10907,9 @@ literal|"replace"
 argument_list|,
 name|replace
 argument_list|,
-literal|true
+name|Litmus
+operator|.
+name|THROW
 argument_list|)
 assert|;
 if|if

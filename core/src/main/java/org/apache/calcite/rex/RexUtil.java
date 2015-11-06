@@ -279,6 +279,20 @@ name|calcite
 operator|.
 name|util
 operator|.
+name|Litmus
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|util
+operator|.
 name|Pair
 import|;
 end_import
@@ -2069,7 +2083,7 @@ comment|/**    * Returns whether an array of expressions has any common sub-expr
 specifier|public
 specifier|static
 name|boolean
-name|containCommonExprs
+name|containNoCommonExprs
 parameter_list|(
 name|List
 argument_list|<
@@ -2077,8 +2091,8 @@ name|RexNode
 argument_list|>
 name|exprs
 parameter_list|,
-name|boolean
-name|fail
+name|Litmus
+name|litmus
 parameter_list|)
 block|{
 specifier|final
@@ -2126,24 +2140,28 @@ argument_list|,
 literal|null
 argument_list|)
 expr_stmt|;
-assert|assert
-operator|!
+return|return
+name|litmus
+operator|.
 name|fail
-assert|;
-return|return
-literal|true
+argument_list|(
+literal|null
+argument_list|)
 return|;
 block|}
 block|}
 return|return
-literal|false
+name|litmus
+operator|.
+name|succeed
+argument_list|()
 return|;
 block|}
-comment|/**    * Returns whether an array of expressions contains a forward reference.    * That is, if expression #i contains a {@link RexInputRef} referencing    * field i or greater.    *    * @param exprs        Array of expressions    * @param inputRowType Input row type    * @param fail         Whether to assert if there is a forward reference    * @return Whether there is a forward reference    */
+comment|/**    * Returns whether an array of expressions contains no forward references.    * That is, if expression #i contains a {@link RexInputRef} referencing    * field i or greater.    *    * @param exprs        Array of expressions    * @param inputRowType Input row type    * @param litmus       What to do if an error is detected (there is a    *                     forward reference)    *    * @return Whether there is a forward reference    */
 specifier|public
 specifier|static
 name|boolean
-name|containForwardRefs
+name|containNoForwardRefs
 parameter_list|(
 name|List
 argument_list|<
@@ -2154,8 +2172,8 @@ parameter_list|,
 name|RelDataType
 name|inputRowType
 parameter_list|,
-name|boolean
-name|fail
+name|Litmus
+name|litmus
 parameter_list|)
 block|{
 specifier|final
@@ -2231,27 +2249,29 @@ argument_list|,
 literal|null
 argument_list|)
 expr_stmt|;
-assert|assert
-operator|!
+return|return
+name|litmus
+operator|.
 name|fail
-operator|:
+argument_list|(
 literal|"illegal forward reference in "
 operator|+
 name|expr
-assert|;
-return|return
-literal|true
+argument_list|)
 return|;
 block|}
 block|}
 return|return
-literal|false
+name|litmus
+operator|.
+name|succeed
+argument_list|()
 return|;
 block|}
-comment|/**    * Returns whether an array of exp contains aggregate function calls whose    * arguments are not {@link RexInputRef}.s    *    * @param exprs Expressions    * @param fail  Whether to assert if there is such a function call    */
+comment|/**    * Returns whether an array of exp contains no aggregate function calls whose    * arguments are not {@link RexInputRef}s.    *    * @param exprs Expressions    * @param litmus  Whether to assert if there is such a function call    */
 specifier|static
 name|boolean
-name|containNonTrivialAggs
+name|containNoNonTrivialAggs
 parameter_list|(
 name|List
 argument_list|<
@@ -2259,8 +2279,8 @@ name|RexNode
 argument_list|>
 name|exprs
 parameter_list|,
-name|boolean
-name|fail
+name|Litmus
+name|litmus
 parameter_list|)
 block|{
 for|for
@@ -2323,16 +2343,15 @@ name|RexLiteral
 operator|)
 condition|)
 block|{
-assert|assert
-operator|!
+return|return
+name|litmus
+operator|.
 name|fail
-operator|:
+argument_list|(
 literal|"contains non trivial agg: "
 operator|+
 name|operand
-assert|;
-return|return
-literal|true
+argument_list|)
 return|;
 block|}
 block|}
@@ -2340,7 +2359,10 @@ block|}
 block|}
 block|}
 return|return
-literal|false
+name|litmus
+operator|.
+name|succeed
+argument_list|()
 return|;
 block|}
 comment|/**    * Returns whether a list of expressions contains complex expressions, that    * is, a call whose arguments are not {@link RexVariable} (or a subtype such    * as {@link RexInputRef}) or {@link RexLiteral}.    */
@@ -2602,7 +2624,7 @@ name|build
 argument_list|()
 return|;
 block|}
-comment|/**    * Returns whether the type of an array of expressions is compatible with a    * struct type.    *    * @param exprs Array of expressions    * @param type  Type    * @param fail  Whether to fail if there is a mismatch    * @return Whether every expression has the same type as the corresponding    * member of the struct type    * @see RelOptUtil#eq(String, RelDataType, String, RelDataType, boolean)    */
+comment|/**    * Returns whether the type of an array of expressions is compatible with a    * struct type.    *    * @param exprs Array of expressions    * @param type  Type    * @param litmus What to do if an error is detected (there is a mismatch)    *    * @return Whether every expression has the same type as the corresponding    * member of the struct type    *    * @see RelOptUtil#eq(String, RelDataType, String, RelDataType, org.apache.calcite.util.Litmus)    */
 specifier|public
 specifier|static
 name|boolean
@@ -2617,8 +2639,8 @@ parameter_list|,
 name|RelDataType
 name|type
 parameter_list|,
-name|boolean
-name|fail
+name|Litmus
+name|litmus
 parameter_list|)
 block|{
 specifier|final
@@ -2646,14 +2668,13 @@ name|size
 argument_list|()
 condition|)
 block|{
-assert|assert
-operator|!
-name|fail
-operator|:
-literal|"rowtype mismatches expressions"
-assert|;
 return|return
-literal|false
+name|litmus
+operator|.
+name|fail
+argument_list|(
+literal|"rowtype mismatches expressions"
+argument_list|)
 return|;
 block|}
 for|for
@@ -2717,17 +2738,25 @@ literal|"type2"
 argument_list|,
 name|fieldType
 argument_list|,
-name|fail
+name|litmus
 argument_list|)
 condition|)
 block|{
 return|return
-literal|false
+name|litmus
+operator|.
+name|fail
+argument_list|(
+literal|null
+argument_list|)
 return|;
 block|}
 block|}
 return|return
-literal|true
+name|litmus
+operator|.
+name|succeed
+argument_list|()
 return|;
 block|}
 comment|/**    * Creates a key for {@link RexNode} which is the same as another key of    * another RexNode only if the two have both the same type and textual    * representation. For example, "10" integer and "10" bigint result in    * different keys.    */
@@ -2782,8 +2811,8 @@ parameter_list|,
 name|RelDataType
 name|rowType
 parameter_list|,
-name|boolean
-name|fail
+name|Litmus
+name|litmus
 parameter_list|)
 block|{
 specifier|final
@@ -2811,14 +2840,13 @@ name|size
 argument_list|()
 condition|)
 block|{
-assert|assert
-operator|!
-name|fail
-operator|:
-literal|"exprs/rowType length mismatch"
-assert|;
 return|return
-literal|false
+name|litmus
+operator|.
+name|fail
+argument_list|(
+literal|"exprs/rowType length mismatch"
+argument_list|)
 return|;
 block|}
 for|for
@@ -2854,18 +2882,17 @@ name|RexInputRef
 operator|)
 condition|)
 block|{
-assert|assert
-operator|!
+return|return
+name|litmus
+operator|.
 name|fail
-operator|:
+argument_list|(
 literal|"expr["
 operator|+
 name|i
 operator|+
 literal|"] is not a RexInputRef"
-assert|;
-return|return
-literal|false
+argument_list|)
 return|;
 block|}
 name|RexInputRef
@@ -2891,10 +2918,11 @@ operator|!=
 name|i
 condition|)
 block|{
-assert|assert
-operator|!
+return|return
+name|litmus
+operator|.
 name|fail
-operator|:
+argument_list|(
 literal|"expr["
 operator|+
 name|i
@@ -2905,9 +2933,7 @@ name|inputRef
 operator|.
 name|getIndex
 argument_list|()
-assert|;
-return|return
-literal|false
+argument_list|)
 return|;
 block|}
 if|if
@@ -2941,17 +2967,25 @@ operator|.
 name|getType
 argument_list|()
 argument_list|,
-name|fail
+name|litmus
 argument_list|)
 condition|)
 block|{
 return|return
-literal|false
+name|litmus
+operator|.
+name|fail
+argument_list|(
+literal|null
+argument_list|)
 return|;
 block|}
 block|}
 return|return
-literal|true
+name|litmus
+operator|.
+name|succeed
+argument_list|()
 return|;
 block|}
 comment|/** Returns whether a list of expressions projects the incoming fields. */
@@ -2989,7 +3023,9 @@ name|exps
 argument_list|,
 name|inputRowType
 argument_list|,
-literal|false
+name|Litmus
+operator|.
+name|IGNORE
 argument_list|)
 return|;
 block|}

@@ -311,6 +311,20 @@ name|calcite
 operator|.
 name|util
 operator|.
+name|Litmus
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|util
+operator|.
 name|Pair
 import|;
 end_import
@@ -1384,7 +1398,9 @@ operator|.
 name|getType
 argument_list|()
 argument_list|,
-literal|true
+name|Litmus
+operator|.
+name|THROW
 argument_list|)
 assert|;
 comment|// Find the index of the aggCall among all partitions of all
@@ -1441,7 +1457,9 @@ operator|.
 name|getType
 argument_list|()
 argument_list|,
-literal|true
+name|Litmus
+operator|.
+name|THROW
 argument_list|)
 assert|;
 return|return

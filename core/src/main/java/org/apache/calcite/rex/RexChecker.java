@@ -63,6 +63,20 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|util
+operator|.
+name|Litmus
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -88,8 +102,8 @@ block|{
 comment|//~ Instance fields --------------------------------------------------------
 specifier|protected
 specifier|final
-name|boolean
-name|fail
+name|Litmus
+name|litmus
 decl_stmt|;
 specifier|protected
 specifier|final
@@ -104,7 +118,7 @@ name|int
 name|failCount
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**    * Creates a RexChecker with a given input row type.    *    *<p>If<code>fail</code> is true, the checker will throw an    * {@link AssertionError} if an invalid node is found and assertions are    * enabled.    *    *<p>Otherwise, each method returns whether its part of the tree is valid.    *    * @param inputRowType Input row type    * @param fail Whether to throw an {@link AssertionError} if an    *                     invalid node is detected    */
+comment|/**    * Creates a RexChecker with a given input row type.    *    *<p>If<code>fail</code> is true, the checker will throw an    * {@link AssertionError} if an invalid node is found and assertions are    * enabled.    *    *<p>Otherwise, each method returns whether its part of the tree is valid.    *    * @param inputRowType Input row type    * @param litmus What to do if an invalid node is detected    */
 specifier|public
 name|RexChecker
 parameter_list|(
@@ -112,8 +126,8 @@ specifier|final
 name|RelDataType
 name|inputRowType
 parameter_list|,
-name|boolean
-name|fail
+name|Litmus
+name|litmus
 parameter_list|)
 block|{
 name|this
@@ -125,11 +139,11 @@ argument_list|(
 name|inputRowType
 argument_list|)
 argument_list|,
-name|fail
+name|litmus
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Creates a RexChecker with a given set of input fields.    *    *<p>If<code>fail</code> is true, the checker will throw an    * {@link AssertionError} if an invalid node is found and assertions are    * enabled.    *    *<p>Otherwise, each method returns whether its part of the tree is valid.    *    * @param inputTypeList Input row type    * @param fail Whether to throw an {@link AssertionError} if an    *                      invalid node is detected    */
+comment|/**    * Creates a RexChecker with a given set of input fields.    *    *<p>If<code>fail</code> is true, the checker will throw an    * {@link AssertionError} if an invalid node is found and assertions are    * enabled.    *    *<p>Otherwise, each method returns whether its part of the tree is valid.    *    * @param inputTypeList Input row type    * @param litmus What to do if an error is detected    */
 specifier|public
 name|RexChecker
 parameter_list|(
@@ -139,8 +153,8 @@ name|RelDataType
 argument_list|>
 name|inputTypeList
 parameter_list|,
-name|boolean
-name|fail
+name|Litmus
+name|litmus
 parameter_list|)
 block|{
 name|super
@@ -156,9 +170,9 @@ name|inputTypeList
 expr_stmt|;
 name|this
 operator|.
-name|fail
+name|litmus
 operator|=
-name|fail
+name|litmus
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
@@ -207,10 +221,14 @@ argument_list|()
 operator|)
 condition|)
 block|{
-assert|assert
-operator|!
+operator|++
+name|failCount
+expr_stmt|;
+return|return
+name|litmus
+operator|.
 name|fail
-operator|:
+argument_list|(
 literal|"RexInputRef index "
 operator|+
 name|index
@@ -225,12 +243,7 @@ argument_list|()
 operator|-
 literal|1
 operator|)
-assert|;
-operator|++
-name|failCount
-expr_stmt|;
-return|return
-literal|false
+argument_list|)
 return|;
 block|}
 if|if
@@ -265,23 +278,27 @@ argument_list|(
 name|index
 argument_list|)
 argument_list|,
-name|fail
+name|litmus
 argument_list|)
 condition|)
 block|{
-assert|assert
-operator|!
-name|fail
-assert|;
 operator|++
 name|failCount
 expr_stmt|;
 return|return
-literal|false
+name|litmus
+operator|.
+name|fail
+argument_list|(
+literal|null
+argument_list|)
 return|;
 block|}
 return|return
-literal|true
+name|litmus
+operator|.
+name|succeed
+argument_list|()
 return|;
 block|}
 specifier|public
@@ -292,17 +309,16 @@ name|RexLocalRef
 name|ref
 parameter_list|)
 block|{
-assert|assert
-operator|!
-name|fail
-operator|:
-literal|"RexLocalRef illegal outside program"
-assert|;
 operator|++
 name|failCount
 expr_stmt|;
 return|return
-literal|false
+name|litmus
+operator|.
+name|fail
+argument_list|(
+literal|"RexLocalRef illegal outside program"
+argument_list|)
 return|;
 block|}
 specifier|public
@@ -345,12 +361,20 @@ name|valid
 condition|)
 block|{
 return|return
-literal|false
+name|litmus
+operator|.
+name|fail
+argument_list|(
+literal|null
+argument_list|)
 return|;
 block|}
 block|}
 return|return
-literal|true
+name|litmus
+operator|.
+name|succeed
+argument_list|()
 return|;
 block|}
 specifier|public
@@ -425,15 +449,16 @@ argument_list|()
 operator|)
 condition|)
 block|{
-assert|assert
-operator|!
-name|fail
-assert|;
 operator|++
 name|failCount
 expr_stmt|;
 return|return
-literal|false
+name|litmus
+operator|.
+name|fail
+argument_list|(
+literal|null
+argument_list|)
 return|;
 block|}
 specifier|final
@@ -471,23 +496,27 @@ operator|.
 name|getType
 argument_list|()
 argument_list|,
-name|fail
+name|litmus
 argument_list|)
 condition|)
 block|{
-assert|assert
-operator|!
-name|fail
-assert|;
 operator|++
 name|failCount
 expr_stmt|;
 return|return
-literal|false
+name|litmus
+operator|.
+name|fail
+argument_list|(
+literal|null
+argument_list|)
 return|;
 block|}
 return|return
-literal|true
+name|litmus
+operator|.
+name|succeed
+argument_list|()
 return|;
 block|}
 comment|/**    * Returns whether an expression is valid.    */

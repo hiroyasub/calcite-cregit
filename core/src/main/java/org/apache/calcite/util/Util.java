@@ -4395,7 +4395,7 @@ return|return
 literal|""
 return|;
 block|}
-comment|/**    * Pads a string with spaces up to a given length.    *    * @param s   string to be padded    * @param len desired length    * @return padded string    */
+comment|/**    * Pads a string with spaces up to a given length.    *    * @param s   string to be padded    * @param len desired length    * @return padded string    *    * @deprecated Use {@link Spaces#padRight(String, int)}    */
 annotation|@
 name|Deprecated
 comment|// to be removed before 2.0

@@ -75,6 +75,20 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|util
+operator|.
+name|Litmus
+import|;
+end_import
+
+begin_import
+import|import
 name|com
 operator|.
 name|google
@@ -219,7 +233,9 @@ operator|.
 name|size
 argument_list|()
 argument_list|,
-literal|true
+name|Litmus
+operator|.
+name|THROW
 argument_list|)
 operator|:
 name|this

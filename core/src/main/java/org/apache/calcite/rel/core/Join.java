@@ -263,6 +263,20 @@ name|calcite
 operator|.
 name|util
 operator|.
+name|Litmus
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|util
+operator|.
 name|Util
 import|;
 end_import
@@ -547,8 +561,8 @@ specifier|public
 name|boolean
 name|isValid_
 parameter_list|(
-name|boolean
-name|fail
+name|Litmus
+name|litmus
 parameter_list|)
 block|{
 if|if
@@ -558,7 +572,7 @@ name|super
 operator|.
 name|isValid
 argument_list|(
-name|fail
+name|litmus
 argument_list|)
 condition|)
 block|{
@@ -597,14 +611,13 @@ name|getFieldCount
 argument_list|()
 condition|)
 block|{
-assert|assert
-operator|!
-name|fail
-operator|:
-literal|"field count mismatch"
-assert|;
 return|return
-literal|false
+name|litmus
+operator|.
+name|fail
+argument_list|(
+literal|"field count mismatch"
+argument_list|)
 return|;
 block|}
 if|if
@@ -629,19 +642,18 @@ operator|.
 name|BOOLEAN
 condition|)
 block|{
-assert|assert
-operator|!
+return|return
+name|litmus
+operator|.
 name|fail
-operator|:
+argument_list|(
 literal|"condition must be boolean: "
 operator|+
 name|condition
 operator|.
 name|getType
 argument_list|()
-assert|;
-return|return
-literal|false
+argument_list|)
 return|;
 block|}
 comment|// The input to the condition is a row type consisting of system
@@ -696,7 +708,7 @@ operator|.
 name|build
 argument_list|()
 argument_list|,
-name|fail
+name|litmus
 argument_list|)
 decl_stmt|;
 name|condition
@@ -716,10 +728,11 @@ operator|>
 literal|0
 condition|)
 block|{
-assert|assert
-operator|!
+return|return
+name|litmus
+operator|.
 name|fail
-operator|:
+argument_list|(
 name|checker
 operator|.
 name|getFailureCount
@@ -728,14 +741,15 @@ operator|+
 literal|" failures in condition "
 operator|+
 name|condition
-assert|;
-return|return
-literal|false
+argument_list|)
 return|;
 block|}
 block|}
 return|return
-literal|true
+name|litmus
+operator|.
+name|succeed
+argument_list|()
 return|;
 block|}
 annotation|@
