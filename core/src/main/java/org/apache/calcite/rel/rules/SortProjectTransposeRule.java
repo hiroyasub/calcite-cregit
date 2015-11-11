@@ -272,9 +272,14 @@ argument_list|,
 name|LogicalProject
 operator|.
 name|class
+argument_list|,
+literal|null
 argument_list|)
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 name|SortProjectTransposeRule
 parameter_list|(
@@ -295,6 +300,40 @@ argument_list|>
 name|projectClass
 parameter_list|)
 block|{
+name|this
+argument_list|(
+name|sortClass
+argument_list|,
+name|projectClass
+argument_list|,
+literal|null
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Creates a SortProjectTransposeRule.*/
+specifier|public
+name|SortProjectTransposeRule
+parameter_list|(
+name|Class
+argument_list|<
+name|?
+extends|extends
+name|Sort
+argument_list|>
+name|sortClass
+parameter_list|,
+name|Class
+argument_list|<
+name|?
+extends|extends
+name|Project
+argument_list|>
+name|projectClass
+parameter_list|,
+name|String
+name|description
+parameter_list|)
+block|{
 name|super
 argument_list|(
 name|operand
@@ -309,6 +348,8 @@ name|any
 argument_list|()
 argument_list|)
 argument_list|)
+argument_list|,
+name|description
 argument_list|)
 expr_stmt|;
 block|}
