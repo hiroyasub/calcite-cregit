@@ -505,6 +505,24 @@ name|sb
 operator|.
 name|append
 argument_list|(
+name|curr
+operator|.
+name|getClass
+argument_list|()
+operator|.
+name|getSimpleName
+argument_list|()
+argument_list|)
+operator|.
+name|append
+argument_list|(
+literal|": "
+argument_list|)
+expr_stmt|;
+name|sb
+operator|.
+name|append
+argument_list|(
 literal|null
 operator|==
 name|message

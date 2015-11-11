@@ -451,6 +451,18 @@ name|hamcrest
 operator|.
 name|CoreMatchers
 operator|.
+name|containsString
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|hamcrest
+operator|.
+name|CoreMatchers
+operator|.
 name|equalTo
 import|;
 end_import
@@ -4963,7 +4975,7 @@ operator|.
 name|getMessage
 argument_list|()
 argument_list|,
-name|equalTo
+name|containsString
 argument_list|(
 literal|"exception while executing query: unbound parameter"
 argument_list|)

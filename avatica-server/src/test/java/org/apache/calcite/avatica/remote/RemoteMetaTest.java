@@ -2035,15 +2035,17 @@ parameter_list|)
 block|{
 name|assertEquals
 argument_list|(
-literal|"Remote driver error: "
+literal|"Remote driver error: RuntimeException: "
 operator|+
 literal|"java.sql.SQLInvalidAuthorizationSpecException: invalid authorization specification"
 operator|+
 literal|" - not found: john"
 operator|+
-literal|" -> invalid authorization specification - not found: john"
+literal|" -> SQLInvalidAuthorizationSpecException: invalid authorization specification - "
 operator|+
-literal|" -> invalid authorization specification - not found: john"
+literal|"not found: john"
+operator|+
+literal|" -> HsqlException: invalid authorization specification - not found: john"
 argument_list|,
 name|e
 operator|.
@@ -2148,7 +2150,13 @@ name|assertEquals
 argument_list|(
 literal|"Error -1 (00000) : Error while executing SQL \"select * from buffer\": "
 operator|+
-literal|"Remote driver error: user lacks privilege or object not found: BUFFER"
+literal|"Remote driver error: RuntimeException: java.sql.SQLSyntaxErrorException: "
+operator|+
+literal|"user lacks privilege or object not found: BUFFER -> "
+operator|+
+literal|"SQLSyntaxErrorException: user lacks privilege or object not found: BUFFER -> "
+operator|+
+literal|"HsqlException: user lacks privilege or object not found: BUFFER"
 argument_list|,
 name|e
 operator|.

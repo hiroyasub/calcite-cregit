@@ -3969,7 +3969,6 @@ argument_list|)
 throw|;
 block|}
 block|}
-specifier|private
 name|RuntimeException
 name|propagate
 parameter_list|(
@@ -4012,9 +4011,6 @@ operator|new
 name|RuntimeException
 argument_list|(
 name|e
-operator|.
-name|getMessage
-argument_list|()
 argument_list|)
 throw|;
 block|}
