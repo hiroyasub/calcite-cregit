@@ -118,7 +118,7 @@ block|{
 return|return
 name|BuiltInConnectionProperty
 operator|.
-name|TIMEZONE
+name|TIME_ZONE
 operator|.
 name|wrap
 argument_list|(

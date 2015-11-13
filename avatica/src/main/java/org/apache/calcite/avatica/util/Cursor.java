@@ -222,7 +222,7 @@ name|Cursor
 extends|extends
 name|Closeable
 block|{
-comment|/**    * Creates a list of accessors, one per column.    *    *    * @param types List of column types, per {@link java.sql.Types}.    * @param localCalendar Calendar in local timezone    * @param factory Factory that creates sub-ResultSets when needed    * @return List of column accessors    */
+comment|/**    * Creates a list of accessors, one per column.    *    *    * @param types List of column types, per {@link java.sql.Types}.    * @param localCalendar Calendar in local time zone    * @param factory Factory that creates sub-ResultSets when needed    * @return List of column accessors    */
 name|List
 argument_list|<
 name|Accessor

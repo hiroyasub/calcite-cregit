@@ -155,5 +155,9 @@ block|}
 block|}
 end_class
 
+begin_comment
+comment|// End JdbcMetaTest.java
+end_comment
+
 end_unit
 

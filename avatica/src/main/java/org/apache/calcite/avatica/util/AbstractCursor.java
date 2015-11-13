@@ -1328,7 +1328,7 @@ argument_list|(
 name|calendar
 argument_list|)
 expr_stmt|;
-comment|// timezone shift doesn't make sense
+comment|// time zone shift doesn't make sense
 return|return
 name|DateTimeUtils
 operator|.

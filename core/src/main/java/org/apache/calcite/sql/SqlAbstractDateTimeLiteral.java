@@ -260,7 +260,7 @@ operator|)
 name|value
 return|;
 block|}
-comment|/**    * Returns timezone component of this literal. Technically, a sql date    * doesn't come with a tz, but time and ts inherit this, and the calendar    * object has one, so it seems harmless.    *    * @return timezone    */
+comment|/**    * Returns time zone component of this literal. Technically, a SQL date    * doesn't come with a tz, but time and ts inherit this, and the calendar    * object has one, so it seems harmless.    *    * @return time zone    */
 specifier|public
 name|TimeZone
 name|getTimeZone
@@ -269,12 +269,12 @@ block|{
 assert|assert
 name|hasTimeZone
 operator|:
-literal|"Attempt to get timezone on Literal date: "
+literal|"Attempt to get time zone on Literal date: "
 operator|+
 name|getCal
 argument_list|()
 operator|+
-literal|", which has no timezone"
+literal|", which has no time zone"
 assert|;
 return|return
 name|getCal

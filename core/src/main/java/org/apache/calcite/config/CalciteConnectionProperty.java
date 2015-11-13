@@ -258,10 +258,10 @@ argument_list|,
 literal|false
 argument_list|)
 block|,
-comment|/** Timezone, for example 'gmt-3'. Default is the JVM's time zone. */
-name|TIMEZONE
+comment|/** Time zone, for example 'gmt-3'. Default is the JVM's time zone. */
+name|TIME_ZONE
 argument_list|(
-literal|"timezone"
+literal|"timeZone"
 argument_list|,
 name|Type
 operator|.
@@ -331,17 +331,25 @@ name|CalciteConnectionProperty
 argument_list|>
 name|NAME_TO_PROPS
 decl_stmt|;
+comment|/** Deprecated; use {@link #TIME_ZONE}. */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
+specifier|public
+specifier|static
+specifier|final
+name|CalciteConnectionProperty
+name|TIMEZONE
+init|=
+name|TIME_ZONE
+decl_stmt|;
 static|static
 block|{
 name|NAME_TO_PROPS
 operator|=
 operator|new
 name|HashMap
-argument_list|<
-name|String
-argument_list|,
-name|CalciteConnectionProperty
-argument_list|>
+argument_list|<>
 argument_list|()
 expr_stmt|;
 for|for

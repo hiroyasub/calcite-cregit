@@ -40,24 +40,29 @@ specifier|public
 interface|interface
 name|ConnectionConfig
 block|{
+comment|/** @see BuiltInConnectionProperty#SCHEMA */
 name|String
 name|schema
 parameter_list|()
 function_decl|;
+comment|/** @see BuiltInConnectionProperty#TIME_ZONE */
 name|String
 name|timeZone
 parameter_list|()
 function_decl|;
+comment|/** @see BuiltInConnectionProperty#FACTORY */
 name|Service
 operator|.
 name|Factory
 name|factory
 parameter_list|()
 function_decl|;
+comment|/** @see BuiltInConnectionProperty#URL */
 name|String
 name|url
 parameter_list|()
 function_decl|;
+comment|/** @see BuiltInConnectionProperty#SERIALIZATION */
 name|String
 name|serialization
 parameter_list|()
