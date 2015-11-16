@@ -260,11 +260,11 @@ name|NullDirection
 operator|.
 name|FIRST
 else|:
-name|RelFieldCollation
+name|getDirection
+argument_list|()
 operator|.
-name|NullDirection
-operator|.
-name|UNSPECIFIED
+name|defaultNullDirection
+argument_list|()
 return|;
 block|}
 block|}

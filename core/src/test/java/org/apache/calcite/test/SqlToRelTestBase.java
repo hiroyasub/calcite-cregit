@@ -990,9 +990,7 @@ name|newNames
 init|=
 operator|new
 name|ArrayList
-argument_list|<
-name|String
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 name|int
@@ -1075,9 +1073,7 @@ name|collationList
 init|=
 operator|new
 name|ArrayList
-argument_list|<
-name|RelCollation
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 comment|// Deduce which fields the table is sorted on.
@@ -1161,12 +1157,6 @@ argument_list|(
 name|i
 argument_list|,
 name|direction
-argument_list|,
-name|RelFieldCollation
-operator|.
-name|NullDirection
-operator|.
-name|UNSPECIFIED
 argument_list|)
 argument_list|)
 argument_list|)
@@ -1233,9 +1223,7 @@ name|list
 init|=
 operator|new
 name|ArrayList
-argument_list|<
-name|String
-argument_list|>
+argument_list|<>
 argument_list|(
 name|super
 operator|.
@@ -2334,16 +2322,11 @@ argument_list|(
 name|sql
 argument_list|)
 decl_stmt|;
-name|SqlNode
-name|sqlNode
-init|=
+return|return
 name|parser
 operator|.
 name|parseQuery
 argument_list|()
-decl_stmt|;
-return|return
-name|sqlNode
 return|;
 block|}
 specifier|public

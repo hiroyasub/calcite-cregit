@@ -144,6 +144,22 @@ argument_list|,
 literal|false
 argument_list|)
 block|,
+comment|/** How NULL values should be sorted if neither NULLS FIRST nor NULLS LAST are    * specified. The defult, HIGH, sorts NULL values the same as Oracle. */
+name|DEFAULT_NULL_COLLATION
+argument_list|(
+literal|"defaultNullCollation"
+argument_list|,
+name|Type
+operator|.
+name|ENUM
+argument_list|,
+name|NullCollation
+operator|.
+name|HIGH
+argument_list|,
+literal|true
+argument_list|)
+block|,
 comment|/** URI of the model. */
 name|MODEL
 argument_list|(

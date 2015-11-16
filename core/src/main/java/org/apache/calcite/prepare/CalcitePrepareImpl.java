@@ -4792,6 +4792,16 @@ argument_list|(
 literal|true
 argument_list|)
 expr_stmt|;
+name|validator
+operator|.
+name|setDefaultNullCollation
+argument_list|(
+name|config
+operator|.
+name|defaultNullCollation
+argument_list|()
+argument_list|)
+expr_stmt|;
 specifier|final
 name|List
 argument_list|<

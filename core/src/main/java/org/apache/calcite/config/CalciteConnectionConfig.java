@@ -87,6 +87,11 @@ name|boolean
 name|createMaterializations
 parameter_list|()
 function_decl|;
+comment|/** @see CalciteConnectionProperty#DEFAULT_NULL_COLLATION */
+name|NullCollation
+name|defaultNullCollation
+parameter_list|()
+function_decl|;
 comment|/** @see CalciteConnectionProperty#MODEL */
 name|String
 name|model

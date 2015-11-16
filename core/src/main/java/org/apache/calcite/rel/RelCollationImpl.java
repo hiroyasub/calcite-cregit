@@ -615,11 +615,12 @@ name|e
 operator|.
 name|nullDirection
 operator|!=
-name|RelFieldCollation
+name|e
 operator|.
-name|NullDirection
+name|direction
 operator|.
-name|UNSPECIFIED
+name|defaultNullDirection
+argument_list|()
 condition|)
 block|{
 name|sb

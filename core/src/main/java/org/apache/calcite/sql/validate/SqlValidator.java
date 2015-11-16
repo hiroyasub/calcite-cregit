@@ -25,6 +25,20 @@ name|apache
 operator|.
 name|calcite
 operator|.
+name|config
+operator|.
+name|NullCollation
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
 name|rel
 operator|.
 name|type
@@ -855,6 +869,19 @@ function_decl|;
 comment|/**    * @return whether column reference expansion is enabled    */
 name|boolean
 name|getColumnReferenceExpansion
+parameter_list|()
+function_decl|;
+comment|/** Sets how NULL values should be collated if an ORDER BY item does not    * contain NULLS FIRST or NULLS LAST. */
+name|void
+name|setDefaultNullCollation
+parameter_list|(
+name|NullCollation
+name|nullCollation
+parameter_list|)
+function_decl|;
+comment|/** Returns how NULL values should be collated if an ORDER BY item does not    * contain NULLS FIRST or NULLS LAST. */
+name|NullCollation
+name|getDefaultNullCollation
 parameter_list|()
 function_decl|;
 comment|/**    * Returns expansion of identifiers.    *    * @return whether this validator should expand identifiers    */
