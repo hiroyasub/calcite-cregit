@@ -3118,6 +3118,149 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testDelete
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"delete from emp"
+argument_list|)
+operator|.
+name|convertsTo
+argument_list|(
+literal|"${plan}"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testDeleteWhere
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"delete from emp where deptno = 10"
+argument_list|)
+operator|.
+name|convertsTo
+argument_list|(
+literal|"${plan}"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testUpdate
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"update emp set empno = empno + 1"
+argument_list|)
+operator|.
+name|convertsTo
+argument_list|(
+literal|"${plan}"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testUpdateSubQuery
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"update emp\n"
+operator|+
+literal|"set empno = (\n"
+operator|+
+literal|"  select min(empno) from emp as e where e.deptno = emp.deptno)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|convertsTo
+argument_list|(
+literal|"${plan}"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testUpdateWhere
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"update emp set empno = empno + 1 where deptno = 10"
+argument_list|)
+operator|.
+name|convertsTo
+argument_list|(
+literal|"${plan}"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Ignore
+argument_list|(
+literal|"CALCITE-985"
+argument_list|)
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testMerge
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"merge into emp as target\n"
+operator|+
+literal|"using (select * from emp where deptno = 30) as source\n"
+operator|+
+literal|"on target.empno = source.empno\n"
+operator|+
+literal|"when matched then\n"
+operator|+
+literal|"  update set sal = sal + source.sal\n"
+operator|+
+literal|"when not matched then\n"
+operator|+
+literal|"  insert (empno, deptno, sal)\n"
+operator|+
+literal|"  values (source.empno, source.deptno, source.sal)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|convertsTo
+argument_list|(
+literal|"${plan}"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testSelectView
 parameter_list|()
 block|{
