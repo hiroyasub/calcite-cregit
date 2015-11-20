@@ -690,6 +690,10 @@ operator|.
 name|class
 block|,
 comment|// slow tests (above 1s)
+name|UdfTest
+operator|.
+name|class
+block|,
 name|PlannerTest
 operator|.
 name|class
