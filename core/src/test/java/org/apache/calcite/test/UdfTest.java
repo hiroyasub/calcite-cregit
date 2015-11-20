@@ -460,6 +460,25 @@ literal|"',\n"
 operator|+
 literal|"           methodName: '*'\n"
 operator|+
+literal|"         },\n"
+operator|+
+literal|"         {\n"
+operator|+
+literal|"           className: '"
+operator|+
+name|Smalls
+operator|.
+name|AllTypesFunction
+operator|.
+name|class
+operator|.
+name|getName
+argument_list|()
+operator|+
+literal|"',\n"
+operator|+
+literal|"           methodName: '*'\n"
+operator|+
 literal|"         }\n"
 operator|+
 literal|"       ]\n"
@@ -2303,6 +2322,132 @@ operator|.
 name|returns
 argument_list|(
 name|res
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-986">[CALCITE-986]    * User-defined function with Date or Timestamp parameters</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testDate
+parameter_list|()
+block|{
+specifier|final
+name|CalciteAssert
+operator|.
+name|AssertThat
+name|with
+init|=
+name|withUdf
+argument_list|()
+decl_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"values \"adhoc\".\"dateFun\"(DATE '1970-01-01')"
+argument_list|)
+operator|.
+name|returnsValue
+argument_list|(
+literal|"0"
+argument_list|)
+expr_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"values \"adhoc\".\"dateFun\"(DATE '1970-01-02')"
+argument_list|)
+operator|.
+name|returnsValue
+argument_list|(
+literal|"86400000"
+argument_list|)
+expr_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"values \"adhoc\".\"dateFun\"(cast(null as date))"
+argument_list|)
+operator|.
+name|returnsValue
+argument_list|(
+literal|"-1"
+argument_list|)
+expr_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"values \"adhoc\".\"timeFun\"(TIME '00:00:00')"
+argument_list|)
+operator|.
+name|returnsValue
+argument_list|(
+literal|"0"
+argument_list|)
+expr_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"values \"adhoc\".\"timeFun\"(TIME '00:01:30')"
+argument_list|)
+operator|.
+name|returnsValue
+argument_list|(
+literal|"90000"
+argument_list|)
+expr_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"values \"adhoc\".\"timeFun\"(cast(null as time))"
+argument_list|)
+operator|.
+name|returnsValue
+argument_list|(
+literal|"-1"
+argument_list|)
+expr_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"values \"adhoc\".\"timestampFun\"(TIMESTAMP '1970-01-01 00:00:00')"
+argument_list|)
+operator|.
+name|returnsValue
+argument_list|(
+literal|"0"
+argument_list|)
+expr_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"values \"adhoc\".\"timestampFun\"(TIMESTAMP '1970-01-02 00:01:30')"
+argument_list|)
+operator|.
+name|returnsValue
+argument_list|(
+literal|"86490000"
+argument_list|)
+expr_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"values \"adhoc\".\"timestampFun\"(cast(null as timestamp))"
+argument_list|)
+operator|.
+name|returnsValue
+argument_list|(
+literal|"-1"
 argument_list|)
 expr_stmt|;
 block|}
