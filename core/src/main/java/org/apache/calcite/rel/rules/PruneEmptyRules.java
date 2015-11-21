@@ -411,6 +411,11 @@ argument_list|(
 name|union
 argument_list|)
 decl_stmt|;
+assert|assert
+name|childRels
+operator|!=
+literal|null
+assert|;
 specifier|final
 name|List
 argument_list|<
@@ -420,9 +425,7 @@ name|newChildRels
 init|=
 operator|new
 name|ArrayList
-argument_list|<
-name|RelNode
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 for|for

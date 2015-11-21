@@ -2848,6 +2848,21 @@ name|String
 name|tableName
 parameter_list|)
 function_decl|;
+annotation|@
+name|BaseMessage
+argument_list|(
+literal|"Cannot stream results of a query with no streaming inputs: ''{0}''. At least one input should be convertable to a stream."
+argument_list|)
+name|ExInst
+argument_list|<
+name|SqlValidatorException
+argument_list|>
+name|cannotStreamResultsForNonStreamingInputs
+parameter_list|(
+name|String
+name|inputs
+parameter_list|)
+function_decl|;
 block|}
 end_interface
 

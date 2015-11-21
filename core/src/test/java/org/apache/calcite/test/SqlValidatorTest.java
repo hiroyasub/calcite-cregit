@@ -622,6 +622,23 @@ operator|+
 literal|"' to relation"
 return|;
 block|}
+specifier|private
+specifier|static
+name|String
+name|cannotStreamResultsForNonStreamingInputs
+parameter_list|(
+name|String
+name|inputs
+parameter_list|)
+block|{
+return|return
+literal|"Cannot stream results of a query with no streaming inputs: '"
+operator|+
+name|inputs
+operator|+
+literal|"'. At least one input should be convertable to a stream."
+return|;
+block|}
 annotation|@
 name|Test
 specifier|public
@@ -20500,6 +20517,41 @@ argument_list|)
 operator|.
 name|ok
 argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testStreamJoin
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"select stream \n"
+operator|+
+literal|"orders.rowtime as rowtime, orders.orderId as orderId, products.supplierId as supplierId \n"
+operator|+
+literal|"from orders join products on orders.productId = products.productId"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"^select stream *\n"
+operator|+
+literal|"from products join suppliers on products.supplierId = suppliers.supplierId^"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+name|cannotStreamResultsForNonStreamingInputs
+argument_list|(
+literal|"PRODUCTS, SUPPLIERS"
+argument_list|)
+argument_list|)
 expr_stmt|;
 block|}
 annotation|@

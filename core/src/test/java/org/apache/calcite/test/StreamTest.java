@@ -466,6 +466,14 @@ name|INFINITE_STREAM_SCHEMA_NAME
 init|=
 literal|"INFINITE_STREAMS"
 decl_stmt|;
+specifier|public
+specifier|static
+specifier|final
+name|String
+name|STREAMJOINS_SCHEMA_NAME
+init|=
+literal|"STREAMJOINS"
+decl_stmt|;
 specifier|private
 specifier|static
 name|String
@@ -518,6 +526,70 @@ operator|+
 literal|"     }"
 return|;
 block|}
+specifier|private
+specifier|static
+specifier|final
+name|String
+name|STREAM_JOINS_MODEL
+init|=
+literal|"{\n"
+operator|+
+literal|"  version: '1.0',\n"
+operator|+
+literal|"  defaultSchema: 'STREAMJOINS',\n"
+operator|+
+literal|"   schemas: [\n"
+operator|+
+literal|"     {\n"
+operator|+
+literal|"       name: 'STREAMJOINS',\n"
+operator|+
+literal|"       tables: [ {\n"
+operator|+
+literal|"         type: 'custom',\n"
+operator|+
+literal|"         name: 'ORDERS',\n"
+operator|+
+literal|"         stream: {\n"
+operator|+
+literal|"           stream: true\n"
+operator|+
+literal|"         },\n"
+operator|+
+literal|"         factory: '"
+operator|+
+name|OrdersStreamTableFactory
+operator|.
+name|class
+operator|.
+name|getName
+argument_list|()
+operator|+
+literal|"'\n"
+operator|+
+literal|"       }, \n"
+operator|+
+literal|"       {\n"
+operator|+
+literal|"         type: 'custom',\n"
+operator|+
+literal|"         name: 'PRODUCTS',\n"
+operator|+
+literal|"         factory: '"
+operator|+
+name|ProductsTableFactory
+operator|.
+name|class
+operator|.
+name|getName
+argument_list|()
+operator|+
+literal|"'\n"
+operator|+
+literal|"       }]\n"
+operator|+
+literal|"     }]}"
+decl_stmt|;
 specifier|public
 specifier|static
 specifier|final
@@ -919,6 +991,81 @@ operator|.
 name|returnsCount
 argument_list|(
 literal|100
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testStreamToRelaitonJoin
+parameter_list|()
+block|{
+name|CalciteAssert
+operator|.
+name|model
+argument_list|(
+name|STREAM_JOINS_MODEL
+argument_list|)
+operator|.
+name|withDefaultSchema
+argument_list|(
+name|STREAMJOINS_SCHEMA_NAME
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select stream "
+operator|+
+literal|"orders.rowtime as rowtime, orders.id as orderId, products.supplier as supplierId "
+operator|+
+literal|"from orders join products on orders.product = products.id"
+argument_list|)
+operator|.
+name|convertContains
+argument_list|(
+literal|"LogicalDelta\n"
+operator|+
+literal|"  LogicalProject(ROWTIME=[$0], ORDERID=[$1], SUPPLIERID=[$5])\n"
+operator|+
+literal|"    LogicalProject(ROWTIME=[$0], ID=[$1], PRODUCT=[$2], UNITS=[$3], ID0=[$5], SUPPLIER=[$6])\n"
+operator|+
+literal|"      LogicalJoin(condition=[=($4, $5)], joinType=[inner])\n"
+operator|+
+literal|"        LogicalProject(ROWTIME=[$0], ID=[$1], PRODUCT=[$2], UNITS=[$3], PRODUCT4=[CAST($2):VARCHAR(32) CHARACTER SET \"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$primary\" NOT NULL])\n"
+operator|+
+literal|"          LogicalTableScan(table=[[STREAMJOINS, ORDERS]])\n"
+operator|+
+literal|"        LogicalTableScan(table=[[STREAMJOINS, PRODUCTS]])\n"
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+literal|""
+operator|+
+literal|"EnumerableJoin(condition=[=($4, $5)], joinType=[inner])\n"
+operator|+
+literal|"    EnumerableCalc(expr#0..3=[{inputs}], expr#4=[CAST($t2):VARCHAR(32) CHARACTER SET \"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$primary\" NOT NULL], proj#0..4=[{exprs}])\n"
+operator|+
+literal|"      EnumerableInterpreter\n"
+operator|+
+literal|"        BindableTableScan(table=[[]])\n"
+operator|+
+literal|"    EnumerableInterpreter\n"
+operator|+
+literal|"      BindableTableScan(table=[[STREAMJOINS, PRODUCTS]])"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+name|startsWith
+argument_list|(
+literal|"ROWTIME=2015-02-15 10:15:00; ORDERID=1; SUPPLIERID=1"
+argument_list|,
+literal|"ROWTIME=2015-02-15 10:24:15; ORDERID=2; SUPPLIERID=0"
+argument_list|,
+literal|"ROWTIME=2015-02-15 10:24:45; ORDERID=3; SUPPLIERID=1"
+argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
@@ -1708,6 +1855,263 @@ parameter_list|()
 block|{
 return|return
 name|this
+return|;
+block|}
+block|}
+comment|/**    * Mocks simple relation to use for stream joining test.    */
+specifier|public
+specifier|static
+class|class
+name|ProductsTableFactory
+implements|implements
+name|TableFactory
+argument_list|<
+name|Table
+argument_list|>
+block|{
+specifier|public
+name|ProductsTableFactory
+parameter_list|()
+block|{
+block|}
+annotation|@
+name|Override
+specifier|public
+name|Table
+name|create
+parameter_list|(
+name|SchemaPlus
+name|schema
+parameter_list|,
+name|String
+name|name
+parameter_list|,
+name|Map
+argument_list|<
+name|String
+argument_list|,
+name|Object
+argument_list|>
+name|operand
+parameter_list|,
+name|RelDataType
+name|rowType
+parameter_list|)
+block|{
+specifier|final
+name|ImmutableList
+argument_list|<
+name|Object
+index|[]
+argument_list|>
+name|rows
+init|=
+name|ImmutableList
+operator|.
+name|of
+argument_list|(
+operator|new
+name|Object
+index|[]
+block|{
+literal|"paint"
+block|,
+literal|1
+block|}
+argument_list|,
+operator|new
+name|Object
+index|[]
+block|{
+literal|"paper"
+block|,
+literal|0
+block|}
+argument_list|,
+operator|new
+name|Object
+index|[]
+block|{
+literal|"brush"
+block|,
+literal|1
+block|}
+argument_list|)
+decl_stmt|;
+return|return
+operator|new
+name|ProductsTable
+argument_list|(
+name|rows
+argument_list|)
+return|;
+block|}
+block|}
+comment|/**    * Table representing the PRODUCTS relation    */
+specifier|public
+specifier|static
+class|class
+name|ProductsTable
+implements|implements
+name|ScannableTable
+block|{
+specifier|private
+specifier|final
+name|ImmutableList
+argument_list|<
+name|Object
+index|[]
+argument_list|>
+name|rows
+decl_stmt|;
+specifier|public
+name|ProductsTable
+parameter_list|(
+name|ImmutableList
+argument_list|<
+name|Object
+index|[]
+argument_list|>
+name|rows
+parameter_list|)
+block|{
+name|this
+operator|.
+name|rows
+operator|=
+name|rows
+expr_stmt|;
+block|}
+specifier|private
+specifier|final
+name|RelProtoDataType
+name|protoRowType
+init|=
+operator|new
+name|RelProtoDataType
+argument_list|()
+block|{
+specifier|public
+name|RelDataType
+name|apply
+parameter_list|(
+name|RelDataTypeFactory
+name|a0
+parameter_list|)
+block|{
+return|return
+name|a0
+operator|.
+name|builder
+argument_list|()
+operator|.
+name|add
+argument_list|(
+literal|"ID"
+argument_list|,
+name|SqlTypeName
+operator|.
+name|VARCHAR
+argument_list|,
+literal|32
+argument_list|)
+operator|.
+name|add
+argument_list|(
+literal|"SUPPLIER"
+argument_list|,
+name|SqlTypeName
+operator|.
+name|INTEGER
+argument_list|)
+operator|.
+name|build
+argument_list|()
+return|;
+block|}
+block|}
+decl_stmt|;
+annotation|@
+name|Override
+specifier|public
+name|Enumerable
+argument_list|<
+name|Object
+index|[]
+argument_list|>
+name|scan
+parameter_list|(
+name|DataContext
+name|root
+parameter_list|)
+block|{
+return|return
+name|Linq4j
+operator|.
+name|asEnumerable
+argument_list|(
+name|rows
+argument_list|)
+return|;
+block|}
+annotation|@
+name|Override
+specifier|public
+name|RelDataType
+name|getRowType
+parameter_list|(
+name|RelDataTypeFactory
+name|typeFactory
+parameter_list|)
+block|{
+return|return
+name|protoRowType
+operator|.
+name|apply
+argument_list|(
+name|typeFactory
+argument_list|)
+return|;
+block|}
+annotation|@
+name|Override
+specifier|public
+name|Statistic
+name|getStatistic
+parameter_list|()
+block|{
+return|return
+name|Statistics
+operator|.
+name|of
+argument_list|(
+literal|200d
+argument_list|,
+name|ImmutableList
+operator|.
+expr|<
+name|ImmutableBitSet
+operator|>
+name|of
+argument_list|()
+argument_list|)
+return|;
+block|}
+annotation|@
+name|Override
+specifier|public
+name|Schema
+operator|.
+name|TableType
+name|getJdbcTableType
+parameter_list|()
+block|{
+return|return
+name|Schema
+operator|.
+name|TableType
+operator|.
+name|TABLE
 return|;
 block|}
 block|}
