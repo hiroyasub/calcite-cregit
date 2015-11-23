@@ -6123,9 +6123,7 @@ name|exprList
 operator|.
 name|set
 argument_list|(
-name|expr
-operator|.
-name|i
+name|target
 argument_list|,
 name|rexBuilder
 operator|.
@@ -6142,7 +6140,9 @@ name|RexInputRef
 operator|.
 name|of
 argument_list|(
-name|target
+name|expr
+operator|.
+name|i
 argument_list|,
 name|input
 operator|.

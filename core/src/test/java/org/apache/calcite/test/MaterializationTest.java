@@ -1176,6 +1176,178 @@ name|HR_MODEL
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-988">[CALCITE-988]    * FilterToProjectUnifyRule.invert(MutableRel, MutableRel, MutableProject)    * works incorrectly</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testFilterQueryOnProjectView8
+parameter_list|()
+block|{
+try|try
+block|{
+name|Prepare
+operator|.
+name|THREAD_TRIM
+operator|.
+name|set
+argument_list|(
+literal|true
+argument_list|)
+expr_stmt|;
+name|MaterializationService
+operator|.
+name|setThreadLocal
+argument_list|()
+expr_stmt|;
+specifier|final
+name|String
+name|m
+init|=
+literal|"select \"salary\", \"commission\",\n"
+operator|+
+literal|"\"deptno\", \"empid\", \"name\" from \"emps\""
+decl_stmt|;
+specifier|final
+name|String
+name|v
+init|=
+literal|"select * from \"emps\" where \"salary\" is null"
+decl_stmt|;
+specifier|final
+name|String
+name|q
+init|=
+literal|"select * from V where \"commission\" is null"
+decl_stmt|;
+specifier|final
+name|JsonBuilder
+name|builder
+init|=
+operator|new
+name|JsonBuilder
+argument_list|()
+decl_stmt|;
+specifier|final
+name|String
+name|model
+init|=
+literal|"{\n"
+operator|+
+literal|"  version: '1.0',\n"
+operator|+
+literal|"  defaultSchema: 'hr',\n"
+operator|+
+literal|"  schemas: [\n"
+operator|+
+literal|"    {\n"
+operator|+
+literal|"      materializations: [\n"
+operator|+
+literal|"        {\n"
+operator|+
+literal|"          table: 'm0',\n"
+operator|+
+literal|"          view: 'm0v',\n"
+operator|+
+literal|"          sql: "
+operator|+
+name|builder
+operator|.
+name|toJsonString
+argument_list|(
+name|m
+argument_list|)
+operator|+
+literal|"        }\n"
+operator|+
+literal|"      ],\n"
+operator|+
+literal|"      tables: [\n"
+operator|+
+literal|"        {\n"
+operator|+
+literal|"          name: 'V',\n"
+operator|+
+literal|"          type: 'view',\n"
+operator|+
+literal|"          sql: "
+operator|+
+name|builder
+operator|.
+name|toJsonString
+argument_list|(
+name|v
+argument_list|)
+operator|+
+literal|"\n"
+operator|+
+literal|"        }\n"
+operator|+
+literal|"      ],\n"
+operator|+
+literal|"      type: 'custom',\n"
+operator|+
+literal|"      name: 'hr',\n"
+operator|+
+literal|"      factory: 'org.apache.calcite.adapter.java.ReflectiveSchema$Factory',\n"
+operator|+
+literal|"      operand: {\n"
+operator|+
+literal|"        class: 'org.apache.calcite.test.JdbcTest$HrSchema'\n"
+operator|+
+literal|"      }\n"
+operator|+
+literal|"    }\n"
+operator|+
+literal|"  ]\n"
+operator|+
+literal|"}\n"
+decl_stmt|;
+name|CalciteAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|withModel
+argument_list|(
+name|model
+argument_list|)
+operator|.
+name|query
+argument_list|(
+name|q
+argument_list|)
+operator|.
+name|enableMaterializations
+argument_list|(
+literal|true
+argument_list|)
+operator|.
+name|explainMatches
+argument_list|(
+literal|""
+argument_list|,
+name|CONTAINS_M0
+argument_list|)
+operator|.
+name|sameResultWithMaterializationsDisabled
+argument_list|()
+expr_stmt|;
+block|}
+finally|finally
+block|{
+name|Prepare
+operator|.
+name|THREAD_TRIM
+operator|.
+name|set
+argument_list|(
+literal|false
+argument_list|)
+expr_stmt|;
+block|}
+block|}
 annotation|@
 name|Test
 specifier|public
