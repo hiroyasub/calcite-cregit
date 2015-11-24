@@ -9120,6 +9120,8 @@ name|getOperand0
 argument_list|()
 argument_list|,
 name|rels
+argument_list|,
+name|nodeInputs
 argument_list|)
 decl_stmt|;
 name|volcanoPlanner
