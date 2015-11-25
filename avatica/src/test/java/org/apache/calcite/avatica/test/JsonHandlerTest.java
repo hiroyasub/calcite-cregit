@@ -524,6 +524,17 @@ return|return
 literal|null
 return|;
 block|}
+annotation|@
+name|Override
+specifier|public
+name|void
+name|setRpcMetadata
+parameter_list|(
+name|RpcMetadataResponse
+name|metadata
+parameter_list|)
+block|{
+block|}
 block|}
 comment|/**    * Instrumented subclass of {@link org.apache.calcite.avatica.test.JsonHandlerTest.NoopService}    * that checks the parameter values passed to the "execute" request.    *    *<p>Note: parameter values for "fetch" request deprecated.    */
 specifier|public
@@ -660,6 +671,8 @@ name|EMPTY
 argument_list|,
 operator|-
 literal|1L
+argument_list|,
+literal|null
 argument_list|)
 decl_stmt|;
 return|return
@@ -676,6 +689,8 @@ name|resultSetResponse
 argument_list|)
 argument_list|,
 literal|false
+argument_list|,
+literal|null
 argument_list|)
 return|;
 block|}

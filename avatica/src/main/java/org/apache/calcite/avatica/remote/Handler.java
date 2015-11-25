@@ -19,6 +19,24 @@ end_package
 
 begin_import
 import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|avatica
+operator|.
+name|remote
+operator|.
+name|Service
+operator|.
+name|RpcMetadataResponse
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -139,6 +157,14 @@ name|apply
 parameter_list|(
 name|T
 name|request
+parameter_list|)
+function_decl|;
+comment|/**    * Sets some general server information to return to the client in all responses.    *    * @param metadata Server-wide information    */
+name|void
+name|setRpcMetadata
+parameter_list|(
+name|RpcMetadataResponse
+name|metadata
 parameter_list|)
 function_decl|;
 block|}

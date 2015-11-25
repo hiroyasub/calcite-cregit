@@ -87,6 +87,12 @@ name|AbstractService
 implements|implements
 name|Service
 block|{
+specifier|private
+name|RpcMetadataResponse
+name|rpcMetadata
+init|=
+literal|null
+decl_stmt|;
 comment|/**    * Represents the serialization of the data over a transport.    */
 enum|enum
 name|SerializationType
@@ -381,6 +387,8 @@ operator|new
 name|PrepareResponse
 argument_list|(
 name|statement
+argument_list|,
+name|rpcMetadata
 argument_list|)
 return|;
 block|}
@@ -531,6 +539,8 @@ argument_list|,
 name|r
 operator|.
 name|updateCount
+argument_list|,
+name|rpcMetadata
 argument_list|)
 return|;
 block|}
@@ -626,8 +636,28 @@ argument_list|,
 name|r
 operator|.
 name|missingStatement
+argument_list|,
+name|rpcMetadata
 argument_list|)
 return|;
+block|}
+annotation|@
+name|Override
+specifier|public
+name|void
+name|setRpcMetadata
+parameter_list|(
+name|RpcMetadataResponse
+name|metadata
+parameter_list|)
+block|{
+comment|// OK if this is null
+name|this
+operator|.
+name|rpcMetadata
+operator|=
+name|metadata
+expr_stmt|;
 block|}
 block|}
 end_class

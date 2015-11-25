@@ -103,6 +103,16 @@ name|List
 import|;
 end_import
 
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+import|;
+end_import
+
 begin_comment
 comment|/**  * Implementation of {@link Service} that talks to a local {@link Meta}.  */
 end_comment
@@ -118,6 +128,10 @@ specifier|final
 name|Meta
 name|meta
 decl_stmt|;
+specifier|private
+name|RpcMetadataResponse
+name|serverLevelRpcMetadata
+decl_stmt|;
 specifier|public
 name|LocalService
 parameter_list|(
@@ -130,6 +144,28 @@ operator|.
 name|meta
 operator|=
 name|meta
+expr_stmt|;
+block|}
+annotation|@
+name|Override
+specifier|public
+name|void
+name|setRpcMetadata
+parameter_list|(
+name|RpcMetadataResponse
+name|serverLevelRpcMetadata
+parameter_list|)
+block|{
+name|this
+operator|.
+name|serverLevelRpcMetadata
+operator|=
+name|Objects
+operator|.
+name|requireNonNull
+argument_list|(
+name|serverLevelRpcMetadata
+argument_list|)
 expr_stmt|;
 block|}
 specifier|private
@@ -243,6 +279,8 @@ argument_list|,
 name|resultSet
 operator|.
 name|updateCount
+argument_list|,
+name|serverLevelRpcMetadata
 argument_list|)
 return|;
 block|}
@@ -511,6 +549,8 @@ argument_list|,
 name|frame
 argument_list|,
 name|updateCount
+argument_list|,
+name|serverLevelRpcMetadata
 argument_list|)
 return|;
 block|}
@@ -1018,6 +1058,8 @@ operator|new
 name|PrepareResponse
 argument_list|(
 name|h
+argument_list|,
+name|serverLevelRpcMetadata
 argument_list|)
 return|;
 block|}
@@ -1174,6 +1216,8 @@ argument_list|(
 name|results
 argument_list|,
 literal|false
+argument_list|,
+name|serverLevelRpcMetadata
 argument_list|)
 return|;
 block|}
@@ -1191,6 +1235,8 @@ argument_list|(
 literal|null
 argument_list|,
 literal|true
+argument_list|,
+name|serverLevelRpcMetadata
 argument_list|)
 return|;
 block|}
@@ -1257,6 +1303,8 @@ argument_list|,
 literal|false
 argument_list|,
 literal|false
+argument_list|,
+name|serverLevelRpcMetadata
 argument_list|)
 return|;
 block|}
@@ -1278,6 +1326,8 @@ argument_list|,
 literal|true
 argument_list|,
 literal|true
+argument_list|,
+name|serverLevelRpcMetadata
 argument_list|)
 return|;
 block|}
@@ -1296,6 +1346,8 @@ argument_list|,
 literal|false
 argument_list|,
 literal|true
+argument_list|,
+name|serverLevelRpcMetadata
 argument_list|)
 return|;
 block|}
@@ -1375,6 +1427,8 @@ argument_list|(
 name|results
 argument_list|,
 literal|false
+argument_list|,
+name|serverLevelRpcMetadata
 argument_list|)
 return|;
 block|}
@@ -1391,6 +1445,8 @@ argument_list|(
 literal|null
 argument_list|,
 literal|true
+argument_list|,
+name|serverLevelRpcMetadata
 argument_list|)
 return|;
 block|}
@@ -1443,6 +1499,8 @@ argument_list|,
 name|h
 operator|.
 name|id
+argument_list|,
+name|serverLevelRpcMetadata
 argument_list|)
 return|;
 block|}
@@ -1486,7 +1544,9 @@ expr_stmt|;
 return|return
 operator|new
 name|CloseStatementResponse
-argument_list|()
+argument_list|(
+name|serverLevelRpcMetadata
+argument_list|)
 return|;
 block|}
 specifier|public
@@ -1527,7 +1587,9 @@ expr_stmt|;
 return|return
 operator|new
 name|OpenConnectionResponse
-argument_list|()
+argument_list|(
+name|serverLevelRpcMetadata
+argument_list|)
 return|;
 block|}
 specifier|public
@@ -1564,7 +1626,9 @@ expr_stmt|;
 return|return
 operator|new
 name|CloseConnectionResponse
-argument_list|()
+argument_list|(
+name|serverLevelRpcMetadata
+argument_list|)
 return|;
 block|}
 specifier|public
@@ -1613,6 +1677,8 @@ operator|new
 name|ConnectionSyncResponse
 argument_list|(
 name|connProps
+argument_list|,
+name|serverLevelRpcMetadata
 argument_list|)
 return|;
 block|}
@@ -1650,6 +1716,8 @@ name|getDatabaseProperties
 argument_list|(
 name|ch
 argument_list|)
+argument_list|,
+name|serverLevelRpcMetadata
 argument_list|)
 return|;
 block|}
@@ -1710,6 +1778,8 @@ name|offset
 argument_list|)
 argument_list|,
 literal|false
+argument_list|,
+name|serverLevelRpcMetadata
 argument_list|)
 expr_stmt|;
 block|}
@@ -1728,6 +1798,8 @@ argument_list|(
 literal|false
 argument_list|,
 literal|true
+argument_list|,
+name|serverLevelRpcMetadata
 argument_list|)
 expr_stmt|;
 block|}

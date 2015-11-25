@@ -115,6 +115,12 @@ name|stacktrace
 init|=
 literal|"My Stack Trace"
 decl_stmt|;
+specifier|final
+name|String
+name|server
+init|=
+literal|"localhost:8765"
+decl_stmt|;
 name|AvaticaSqlException
 name|e
 init|=
@@ -133,6 +139,8 @@ name|asList
 argument_list|(
 name|stacktrace
 argument_list|)
+argument_list|,
+name|server
 argument_list|)
 decl_stmt|;
 name|assertTrue
@@ -194,6 +202,16 @@ name|get
 argument_list|(
 literal|0
 argument_list|)
+argument_list|)
+expr_stmt|;
+name|assertEquals
+argument_list|(
+name|server
+argument_list|,
+name|e
+operator|.
+name|getRemoteServer
+argument_list|()
 argument_list|)
 expr_stmt|;
 block|}

@@ -96,7 +96,7 @@ name|JSON
 case|:
 return|return
 operator|new
-name|AvaticaHandler
+name|AvaticaJsonHandler
 argument_list|(
 name|service
 argument_list|)

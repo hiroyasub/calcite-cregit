@@ -97,7 +97,12 @@ name|String
 argument_list|>
 name|stackTraces
 decl_stmt|;
-comment|/**    * Construct the Exception with information from the server.    *    * @param errorMessage A human-readable error message.    * @param errorCode An integer corresponding to a known error.    * @param stackTraces Server-side stacktrace.    */
+specifier|private
+specifier|final
+name|String
+name|remoteServer
+decl_stmt|;
+comment|/**    * Construct the Exception with information from the server.    *    * @param errorMessage A human-readable error message.    * @param errorCode An integer corresponding to a known error.    * @param stackTraces Server-side stacktrace.    * @param remoteServer The host:port where the Avatica server is located    */
 specifier|public
 name|AvaticaSqlException
 parameter_list|(
@@ -115,6 +120,9 @@ argument_list|<
 name|String
 argument_list|>
 name|stackTraces
+parameter_list|,
+name|String
+name|remoteServer
 parameter_list|)
 block|{
 name|super
@@ -153,6 +161,12 @@ argument_list|(
 name|stackTraces
 argument_list|)
 expr_stmt|;
+name|this
+operator|.
+name|remoteServer
+operator|=
+name|remoteServer
+expr_stmt|;
 block|}
 specifier|public
 name|String
@@ -174,6 +188,16 @@ parameter_list|()
 block|{
 return|return
 name|stackTraces
+return|;
+block|}
+comment|/**    * @return The host:port for the remote Avatica server. May be null.    */
+specifier|public
+name|String
+name|getRemoteServer
+parameter_list|()
+block|{
+return|return
+name|remoteServer
 return|;
 block|}
 comment|// printStackTrace() will get redirected to printStackTrace(PrintStream), don't need to override.

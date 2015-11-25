@@ -129,7 +129,7 @@ name|avatica
 operator|.
 name|server
 operator|.
-name|AvaticaHandler
+name|AvaticaJsonHandler
 import|;
 end_import
 
@@ -1090,7 +1090,7 @@ parameter_list|)
 block|{
 return|return
 operator|new
-name|AvaticaHandler
+name|AvaticaJsonHandler
 argument_list|(
 name|service
 argument_list|)
