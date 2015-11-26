@@ -7239,9 +7239,9 @@ specifier|final
 name|String
 name|sql
 init|=
-literal|"select deptno, mgr, x, 'y' as y from (\n"
+literal|"select deptno, mgr, x, 'y' as y, z from (\n"
 operator|+
-literal|"  select deptno, mgr, cast(null as integer) as x\n"
+literal|"  select deptno, mgr, cast(null as integer) as x, cast('1' as int) as z\n"
 operator|+
 literal|"  from emp\n"
 operator|+
@@ -7277,7 +7277,7 @@ argument_list|()
 argument_list|,
 name|is
 argument_list|(
-literal|"[IS NULL($1),<($0, 10), IS NULL($2), =($3, 'y')]"
+literal|"[IS NULL($1),<($0, 10), IS NULL($2), =($4, CAST('1'):INTEGER NOT NULL), =($3, 'y')]"
 argument_list|)
 argument_list|)
 expr_stmt|;
