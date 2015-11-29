@@ -2940,7 +2940,7 @@ name|rowCount
 init|=
 name|RelMetadataQuery
 operator|.
-name|getRowCount
+name|getMaxRowCount
 argument_list|(
 name|input
 argument_list|)

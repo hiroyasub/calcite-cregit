@@ -269,6 +269,19 @@ name|getRowCount
 parameter_list|()
 function_decl|;
 block|}
+comment|/** Metadata about the max number of rows returned by a relational expression. */
+specifier|public
+interface|interface
+name|MaxRowCount
+extends|extends
+name|Metadata
+block|{
+comment|/**      * Estimates the max number of rows which will be returned by a relational      * expression. The default implementation for this query returns Double.POSITIVE_INFINITY,      * but metadata providers can override this with their own cost models.      *      * @return estimated max row count      */
+name|Double
+name|getMaxRowCount
+parameter_list|()
+function_decl|;
+block|}
 comment|/** Metadata about the number of distinct rows returned by a set of columns    * in a relational expression. */
 specifier|public
 interface|interface
