@@ -2299,7 +2299,7 @@ name|sql
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-987">[CALCITE-987]    * Implement SortUnionTransposeRule</a>. */
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-987">[CALCITE-987]    * Push limit 0 will result in an infinite loop</a>. */
 annotation|@
 name|Test
 specifier|public
@@ -5065,6 +5065,8 @@ argument_list|,
 name|t
 argument_list|,
 literal|false
+argument_list|,
+literal|100
 argument_list|)
 decl_stmt|;
 name|table

@@ -1316,6 +1316,8 @@ argument_list|,
 literal|"EMP"
 argument_list|,
 literal|false
+argument_list|,
+literal|14
 argument_list|)
 decl_stmt|;
 name|empTable
@@ -1419,6 +1421,8 @@ argument_list|,
 literal|"DEPT"
 argument_list|,
 literal|false
+argument_list|,
+literal|4
 argument_list|)
 decl_stmt|;
 name|deptTable
@@ -1459,6 +1463,8 @@ argument_list|,
 literal|"BONUS"
 argument_list|,
 literal|false
+argument_list|,
+literal|0
 argument_list|)
 decl_stmt|;
 name|bonusTable
@@ -1517,6 +1523,8 @@ argument_list|,
 literal|"SALGRADE"
 argument_list|,
 literal|false
+argument_list|,
+literal|5
 argument_list|)
 decl_stmt|;
 name|salgradeTable
@@ -1566,6 +1574,8 @@ argument_list|,
 literal|"EMP_ADDRESS"
 argument_list|,
 literal|false
+argument_list|,
+literal|26
 argument_list|)
 decl_stmt|;
 name|contactAddressTable
@@ -1630,6 +1640,8 @@ argument_list|,
 literal|"CONTACT"
 argument_list|,
 literal|false
+argument_list|,
+literal|1000
 argument_list|)
 decl_stmt|;
 name|contactTable
@@ -1697,6 +1709,8 @@ argument_list|,
 literal|"ACCOUNT"
 argument_list|,
 literal|false
+argument_list|,
+literal|457
 argument_list|)
 decl_stmt|;
 name|accountTable
@@ -1746,6 +1760,10 @@ argument_list|,
 literal|"ORDERS"
 argument_list|,
 literal|true
+argument_list|,
+name|Double
+operator|.
+name|POSITIVE_INFINITY
 argument_list|)
 decl_stmt|;
 name|ordersStream
@@ -1802,6 +1820,10 @@ argument_list|,
 literal|"SHIPMENTS"
 argument_list|,
 literal|true
+argument_list|,
+name|Double
+operator|.
+name|POSITIVE_INFINITY
 argument_list|)
 decl_stmt|;
 name|shipmentsStream
@@ -1858,6 +1880,8 @@ argument_list|,
 literal|"EMP_20"
 argument_list|,
 literal|false
+argument_list|,
+literal|600
 argument_list|)
 block|{
 specifier|private
@@ -3547,6 +3571,11 @@ name|stream
 decl_stmt|;
 specifier|private
 specifier|final
+name|double
+name|rowCount
+decl_stmt|;
+specifier|private
+specifier|final
 name|List
 argument_list|<
 name|Map
@@ -3614,6 +3643,9 @@ name|name
 parameter_list|,
 name|boolean
 name|stream
+parameter_list|,
+name|double
+name|rowCount
 parameter_list|)
 block|{
 name|this
@@ -3627,6 +3659,12 @@ operator|.
 name|stream
 operator|=
 name|stream
+expr_stmt|;
+name|this
+operator|.
+name|rowCount
+operator|=
+name|rowCount
 expr_stmt|;
 name|this
 operator|.
@@ -3660,6 +3698,9 @@ name|name
 parameter_list|,
 name|boolean
 name|stream
+parameter_list|,
+name|double
+name|rowCount
 parameter_list|)
 block|{
 name|MockTable
@@ -3682,6 +3723,8 @@ argument_list|,
 name|name
 argument_list|,
 name|stream
+argument_list|,
+name|rowCount
 argument_list|)
 decl_stmt|;
 name|schema
@@ -3862,7 +3905,7 @@ name|getRowCount
 parameter_list|()
 block|{
 return|return
-literal|0
+name|rowCount
 return|;
 block|}
 specifier|public
@@ -4148,6 +4191,8 @@ literal|2
 argument_list|)
 argument_list|,
 name|stream
+argument_list|,
+name|rowCount
 argument_list|)
 decl_stmt|;
 name|table

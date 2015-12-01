@@ -254,7 +254,7 @@ name|result
 argument_list|)
 return|;
 block|}
-comment|/**    * Returns the    * {@link BuiltInMetadata.RowCount#getRowCount()}    * statistic.    *    * @param rel the relational expression    * @return max row count    */
+comment|/**    * Returns the    * {@link BuiltInMetadata.MaxRowCount#getMaxRowCount()}    * statistic.    *    * @param rel the relational expression    * @return max row count    */
 specifier|public
 specifier|static
 name|Double

@@ -113,7 +113,7 @@ name|rel
 operator|.
 name|metadata
 operator|.
-name|RelMetadataQuery
+name|RelMdUtil
 import|;
 end_import
 
@@ -171,9 +171,9 @@ name|apache
 operator|.
 name|calcite
 operator|.
-name|rex
+name|util
 operator|.
-name|RexUtil
+name|ImmutableIntList
 import|;
 end_import
 
@@ -187,7 +187,7 @@ name|calcite
 operator|.
 name|util
 operator|.
-name|ImmutableIntList
+name|Util
 import|;
 end_import
 
@@ -452,20 +452,25 @@ name|double
 name|getRows
 parameter_list|()
 block|{
-comment|// TODO:  correlation factor
 return|return
-name|RelMetadataQuery
+name|Util
 operator|.
-name|getRowCount
+name|first
+argument_list|(
+name|RelMdUtil
+operator|.
+name|getSemiJoinRowCount
 argument_list|(
 name|left
-argument_list|)
-operator|*
-name|RexUtil
-operator|.
-name|getSelectivity
-argument_list|(
+argument_list|,
+name|right
+argument_list|,
+name|joinType
+argument_list|,
 name|condition
+argument_list|)
+argument_list|,
+literal|1D
 argument_list|)
 return|;
 block|}

@@ -127,6 +127,22 @@ name|rel
 operator|.
 name|metadata
 operator|.
+name|RelMdUtil
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|metadata
+operator|.
 name|RelMetadataQuery
 import|;
 end_import
@@ -234,6 +250,20 @@ operator|.
 name|type
 operator|.
 name|SqlTypeName
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|util
+operator|.
+name|Util
 import|;
 end_import
 
@@ -441,6 +471,8 @@ name|condition
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelNode
 name|accept
@@ -706,7 +738,8 @@ return|return
 literal|true
 return|;
 block|}
-comment|// implement RelNode
+annotation|@
+name|Override
 specifier|public
 name|RelOptCost
 name|computeSelfCost
@@ -742,6 +775,10 @@ literal|0
 argument_list|)
 return|;
 block|}
+comment|/** @deprecated Use {@link RelMdUtil#getJoinRowCount(Join, RexNode)}. */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 specifier|static
 name|double
@@ -754,58 +791,51 @@ name|RexNode
 name|condition
 parameter_list|)
 block|{
-name|double
-name|product
-init|=
-name|RelMetadataQuery
-operator|.
-name|getRowCount
-argument_list|(
-name|joinRel
-operator|.
-name|getLeft
-argument_list|()
-argument_list|)
-operator|*
-name|RelMetadataQuery
-operator|.
-name|getRowCount
-argument_list|(
-name|joinRel
-operator|.
-name|getRight
-argument_list|()
-argument_list|)
-decl_stmt|;
-comment|// TODO:  correlation factor
 return|return
-name|product
-operator|*
-name|RelMetadataQuery
+name|Util
 operator|.
-name|getSelectivity
+name|first
+argument_list|(
+name|RelMdUtil
+operator|.
+name|getJoinRowCount
 argument_list|(
 name|joinRel
 argument_list|,
 name|condition
 argument_list|)
+argument_list|,
+literal|1D
+argument_list|)
 return|;
 block|}
-comment|// implement RelNode
+annotation|@
+name|Override
 specifier|public
 name|double
 name|getRows
 parameter_list|()
 block|{
 return|return
-name|estimateJoinedRows
+name|Util
+operator|.
+name|first
+argument_list|(
+name|RelMdUtil
+operator|.
+name|getJoinRowCount
 argument_list|(
 name|this
 argument_list|,
 name|condition
 argument_list|)
+argument_list|,
+literal|1D
+argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|Set
 argument_list|<
@@ -818,6 +848,8 @@ return|return
 name|variablesStopped
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelWriter
 name|explainTerms
@@ -870,6 +902,8 @@ argument_list|()
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
 specifier|protected
 name|RelDataType
 name|deriveRowType
@@ -1111,11 +1145,10 @@ name|nameList
 init|=
 operator|new
 name|ArrayList
-argument_list|<
-name|String
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
+specifier|final
 name|List
 argument_list|<
 name|RelDataType
@@ -1124,15 +1157,14 @@ name|typeList
 init|=
 operator|new
 name|ArrayList
-argument_list|<
-name|RelDataType
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 comment|// use a hashset to keep track of the field names; this is needed
 comment|// to ensure that the contains() call to check for name uniqueness
 comment|// runs in constant time; otherwise, if the number of fields is large,
 comment|// doing a contains() on a list can be expensive
+specifier|final
 name|HashSet
 argument_list|<
 name|String
@@ -1141,9 +1173,7 @@ name|uniqueNameList
 init|=
 operator|new
 name|HashSet
-argument_list|<
-name|String
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 name|addFields

@@ -921,16 +921,9 @@ name|ENABLE_SLOW
 init|=
 name|Util
 operator|.
-name|first
-argument_list|(
-name|Boolean
-operator|.
-name|getBoolean
+name|getBooleanProperty
 argument_list|(
 literal|"calcite.test.slow"
-argument_list|)
-argument_list|,
-literal|false
 argument_list|)
 decl_stmt|;
 specifier|private

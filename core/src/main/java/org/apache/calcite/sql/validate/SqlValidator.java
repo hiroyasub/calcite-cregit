@@ -422,16 +422,9 @@ name|STRICT
 init|=
 name|Util
 operator|.
-name|first
-argument_list|(
-name|Boolean
-operator|.
-name|getBoolean
+name|getBooleanProperty
 argument_list|(
 literal|"calcite.strict.sql"
-argument_list|)
-argument_list|,
-literal|false
 argument_list|)
 decl_stmt|;
 comment|//~ Methods ----------------------------------------------------------------
@@ -765,7 +758,7 @@ name|RelDataType
 name|getUnknownType
 parameter_list|()
 function_decl|;
-comment|/**    * Returns the appropriate scope for validating a particular clause of a    * SELECT statement.    *    *<p>Consider</p>    *    *<blockquote><pre><code>SELECT *    * FROM foo    * WHERE EXISTS (    *    SELECT deptno AS x    *    FROM emp    *       JOIN dept ON emp.deptno = dept.deptno    *    WHERE emp.deptno = 5    *    GROUP BY deptno    *    ORDER BY x)</code></pre></blockquote>    *    *<p>What objects can be seen in each part of the sub-query?</p>    *    *<ul>    *<li>In FROM ({@link #getFromScope} , you can only see 'foo'.    *    *<li>In WHERE ({@link #getWhereScope}), GROUP BY ({@link #getGroupScope}),    * SELECT ({@link #getSelectScope}), and the ON clause of the JOIN    * ({@link #getJoinScope}) you can see 'emp', 'dept', and 'foo'.    *    *<li>In ORDER BY ({@link #getOrderScope}), you can see the column alias 'x';    * and tables 'emp', 'dept', and 'foo'.    *    *</ul>    *    * @param select SELECT statement    * @return naming scope for SELECT statement    */
+comment|/**    * Returns the appropriate scope for validating a particular clause of a    * SELECT statement.    *    *<p>Consider</p>    *    *<blockquote><pre><code>SELECT *    * FROM foo    * WHERE EXISTS (    *    SELECT deptno AS x    *    FROM emp    *       JOIN dept ON emp.deptno = dept.deptno    *    WHERE emp.deptno = 5    *    GROUP BY deptno    *    ORDER BY x)</code></pre></blockquote>    *    *<p>What objects can be seen in each part of the sub-query?</p>    *    *<ul>    *<li>In FROM ({@link #getFromScope} , you can only see 'foo'.    *    *<li>In WHERE ({@link #getWhereScope}), GROUP BY ({@link #getGroupScope}),    * SELECT ({@code getSelectScope}), and the ON clause of the JOIN    * ({@link #getJoinScope}) you can see 'emp', 'dept', and 'foo'.    *    *<li>In ORDER BY ({@link #getOrderScope}), you can see the column alias 'x';    * and tables 'emp', 'dept', and 'foo'.    *    *</ul>    *    * @param select SELECT statement    * @return naming scope for SELECT statement    */
 name|SqlValidatorScope
 name|getSelectScope
 parameter_list|(
