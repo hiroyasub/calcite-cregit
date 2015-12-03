@@ -1247,22 +1247,6 @@ name|rel
 operator|.
 name|type
 operator|.
-name|RelDataTypeFactoryImpl
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|rel
-operator|.
-name|type
-operator|.
 name|RelDataTypeField
 import|;
 end_import
@@ -5924,6 +5908,7 @@ name|getPrecision
 argument_list|()
 return|;
 block|}
+comment|/** Returns the type name in string form. Does not include precision, scale    * or whether nulls are allowed. Example: "DECIMAL" not "DECIMAL(7, 2)";    * "INTEGER" not "JavaType(int)". */
 specifier|private
 specifier|static
 name|String
@@ -5933,6 +5918,7 @@ name|RelDataType
 name|type
 parameter_list|)
 block|{
+specifier|final
 name|SqlTypeName
 name|sqlTypeName
 init|=
@@ -5941,23 +5927,6 @@ operator|.
 name|getSqlTypeName
 argument_list|()
 decl_stmt|;
-if|if
-condition|(
-name|type
-operator|instanceof
-name|RelDataTypeFactoryImpl
-operator|.
-name|JavaType
-condition|)
-block|{
-comment|// We'd rather print "INTEGER" than "JavaType(int)".
-return|return
-name|sqlTypeName
-operator|.
-name|getName
-argument_list|()
-return|;
-block|}
 switch|switch
 condition|(
 name|sqlTypeName
@@ -5988,14 +5957,33 @@ argument_list|,
 literal|'_'
 argument_list|)
 return|;
-default|default:
+case|case
+name|ARRAY
+case|:
+case|case
+name|MULTISET
+case|:
+case|case
+name|MAP
+case|:
+case|case
+name|ROW
+case|:
 return|return
 name|type
 operator|.
 name|toString
 argument_list|()
 return|;
-comment|// e.g. "VARCHAR(10)", "INTEGER ARRAY"
+comment|// e.g. "INTEGER ARRAY"
+default|default:
+return|return
+name|sqlTypeName
+operator|.
+name|getName
+argument_list|()
+return|;
+comment|// e.g. "DECIMAL"
 block|}
 block|}
 specifier|protected
