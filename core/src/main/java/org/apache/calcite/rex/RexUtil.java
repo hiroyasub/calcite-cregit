@@ -1229,7 +1229,6 @@ literal|false
 return|;
 block|}
 comment|/**    * Walks over an expression and determines whether it is constant.    */
-specifier|private
 specifier|static
 class|class
 name|ConstantFinder
@@ -1304,6 +1303,8 @@ name|RexCorrelVariable
 name|correlVariable
 parameter_list|)
 block|{
+comment|// Correlating variables change when there is an internal restart.
+comment|// Not good enough for our purposes.
 return|return
 literal|false
 return|;
@@ -1316,6 +1317,8 @@ name|RexDynamicParam
 name|dynamicParam
 parameter_list|)
 block|{
+comment|// Dynamic parameters are constant WITHIN AN EXECUTION, so that's
+comment|// good enough.
 return|return
 literal|true
 return|;
@@ -1386,7 +1389,7 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/**    * Returns whether node is made up of constants.    *    * @param node to inspect    * @return true if node is made up of constants, false otherwise    */
+comment|/**    * Returns whether node is made up of constants.    *    * @param node Node to inspect    * @return true if node is made up of constants, false otherwise    */
 specifier|public
 specifier|static
 name|boolean
@@ -1407,7 +1410,7 @@ name|INSTANCE
 argument_list|)
 return|;
 block|}
-comment|/**    * Returns whether a given node contains a RexCall with a specified operator    *    * @param operator to look for    * @param node     a RexNode tree    */
+comment|/**    * Returns whether a given node contains a RexCall with a specified operator    *    * @param operator Operator to look for    * @param node     a RexNode tree    */
 specifier|public
 specifier|static
 name|RexCall
