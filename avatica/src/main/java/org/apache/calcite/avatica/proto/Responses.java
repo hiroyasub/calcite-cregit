@@ -45165,6 +45165,11 @@ name|int
 name|index
 parameter_list|)
 function_decl|;
+comment|/**      *<code>optional bool has_exceptions = 7;</code>      *      *<pre>      * are there stacktraces contained?      *</pre>      */
+name|boolean
+name|getHasExceptions
+parameter_list|()
+function_decl|;
 comment|/**      *<code>optional string error_message = 2;</code>      *      *<pre>      * human readable description      *</pre>      */
 name|java
 operator|.
@@ -45330,6 +45335,10 @@ operator|.
 name|LazyStringArrayList
 operator|.
 name|EMPTY
+expr_stmt|;
+name|hasExceptions_
+operator|=
+literal|false
 expr_stmt|;
 name|errorMessage_
 operator|=
@@ -45670,6 +45679,19 @@ expr_stmt|;
 block|}
 break|break;
 block|}
+case|case
+literal|56
+case|:
+block|{
+name|hasExceptions_
+operator|=
+name|input
+operator|.
+name|readBool
+argument_list|()
+expr_stmt|;
+break|break;
+block|}
 block|}
 block|}
 block|}
@@ -45954,6 +45976,28 @@ name|getByteString
 argument_list|(
 name|index
 argument_list|)
+return|;
+block|}
+specifier|public
+specifier|static
+specifier|final
+name|int
+name|HAS_EXCEPTIONS_FIELD_NUMBER
+init|=
+literal|7
+decl_stmt|;
+specifier|private
+name|boolean
+name|hasExceptions_
+decl_stmt|;
+comment|/**      *<code>optional bool has_exceptions = 7;</code>      *      *<pre>      * are there stacktraces contained?      *</pre>      */
+specifier|public
+name|boolean
+name|getHasExceptions
+parameter_list|()
+block|{
+return|return
+name|hasExceptions_
 return|;
 block|}
 specifier|public
@@ -46780,6 +46824,23 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
+if|if
+condition|(
+name|hasExceptions_
+operator|!=
+literal|false
+condition|)
+block|{
+name|output
+operator|.
+name|writeBool
+argument_list|(
+literal|7
+argument_list|,
+name|hasExceptions_
+argument_list|)
+expr_stmt|;
+block|}
 block|}
 specifier|public
 name|int
@@ -47003,6 +47064,31 @@ literal|6
 argument_list|,
 name|getMetadata
 argument_list|()
+argument_list|)
+expr_stmt|;
+block|}
+if|if
+condition|(
+name|hasExceptions_
+operator|!=
+literal|false
+condition|)
+block|{
+name|size
+operator|+=
+name|com
+operator|.
+name|google
+operator|.
+name|protobuf
+operator|.
+name|CodedOutputStream
+operator|.
+name|computeBoolSize
+argument_list|(
+literal|7
+argument_list|,
+name|hasExceptions_
 argument_list|)
 expr_stmt|;
 block|}
@@ -47818,6 +47904,10 @@ operator|~
 literal|0x00000001
 operator|)
 expr_stmt|;
+name|hasExceptions_
+operator|=
+literal|false
+expr_stmt|;
 name|errorMessage_
 operator|=
 literal|""
@@ -48079,6 +48169,12 @@ name|exceptions_
 expr_stmt|;
 name|result
 operator|.
+name|hasExceptions_
+operator|=
+name|hasExceptions_
+expr_stmt|;
+name|result
+operator|.
 name|errorMessage_
 operator|=
 name|errorMessage_
@@ -48305,6 +48401,25 @@ expr_stmt|;
 block|}
 name|onChanged
 argument_list|()
+expr_stmt|;
+block|}
+if|if
+condition|(
+name|other
+operator|.
+name|getHasExceptions
+argument_list|()
+operator|!=
+literal|false
+condition|)
+block|{
+name|setHasExceptions
+argument_list|(
+name|other
+operator|.
+name|getHasExceptions
+argument_list|()
+argument_list|)
 expr_stmt|;
 block|}
 if|if
@@ -48895,6 +49010,57 @@ name|add
 argument_list|(
 name|value
 argument_list|)
+expr_stmt|;
+name|onChanged
+argument_list|()
+expr_stmt|;
+return|return
+name|this
+return|;
+block|}
+specifier|private
+name|boolean
+name|hasExceptions_
+decl_stmt|;
+comment|/**        *<code>optional bool has_exceptions = 7;</code>        *        *<pre>        * are there stacktraces contained?        *</pre>        */
+specifier|public
+name|boolean
+name|getHasExceptions
+parameter_list|()
+block|{
+return|return
+name|hasExceptions_
+return|;
+block|}
+comment|/**        *<code>optional bool has_exceptions = 7;</code>        *        *<pre>        * are there stacktraces contained?        *</pre>        */
+specifier|public
+name|Builder
+name|setHasExceptions
+parameter_list|(
+name|boolean
+name|value
+parameter_list|)
+block|{
+name|hasExceptions_
+operator|=
+name|value
+expr_stmt|;
+name|onChanged
+argument_list|()
+expr_stmt|;
+return|return
+name|this
+return|;
+block|}
+comment|/**        *<code>optional bool has_exceptions = 7;</code>        *        *<pre>        * are there stacktraces contained?        *</pre>        */
+specifier|public
+name|Builder
+name|clearHasExceptions
+parameter_list|()
+block|{
+name|hasExceptions_
+operator|=
+literal|false
 expr_stmt|;
 name|onChanged
 argument_list|()
@@ -56837,23 +57003,25 @@ literal|"yResponse\022\'\n\005props\030\001 \003(\0132\030.DatabasePrope"
 operator|+
 literal|"rtyElement\022\036\n\010metadata\030\002 \001(\0132\014.RpcMetada"
 operator|+
-literal|"ta\"\236\001\n\rErrorResponse\022\022\n\nexceptions\030\001 \003(\t"
+literal|"ta\"\266\001\n\rErrorResponse\022\022\n\nexceptions\030\001 \003(\t"
 block|,
-literal|"\022\025\n\rerror_message\030\002 \001(\t\022\033\n\010severity\030\003 \001("
+literal|"\022\026\n\016has_exceptions\030\007 \001(\010\022\025\n\rerror_messag"
 operator|+
-literal|"\0162\t.Severity\022\022\n\nerror_code\030\004 \001(\r\022\021\n\tsql_"
+literal|"e\030\002 \001(\t\022\033\n\010severity\030\003 \001(\0162\t.Severity\022\022\n\n"
 operator|+
-literal|"state\030\005 \001(\t\022\036\n\010metadata\030\006 \001(\0132\014.RpcMetad"
+literal|"error_code\030\004 \001(\r\022\021\n\tsql_state\030\005 \001(\t\022\036\n\010m"
 operator|+
-literal|"ata\"f\n\023SyncResultsResponse\022\031\n\021missing_st"
+literal|"etadata\030\006 \001(\0132\014.RpcMetadata\"f\n\023SyncResul"
 operator|+
-literal|"atement\030\001 \001(\010\022\024\n\014more_results\030\002 \001(\010\022\036\n\010m"
+literal|"tsResponse\022\031\n\021missing_statement\030\001 \001(\010\022\024\n"
 operator|+
-literal|"etadata\030\003 \001(\0132\014.RpcMetadata\"%\n\013RpcMetada"
+literal|"\014more_results\030\002 \001(\010\022\036\n\010metadata\030\003 \001(\0132\014."
 operator|+
-literal|"ta\022\026\n\016server_address\030\001 \001(\tB\"\n org.apache"
+literal|"RpcMetadata\"%\n\013RpcMetadata\022\026\n\016server_add"
 operator|+
-literal|".calcite.avatica.protob\006proto3"
+literal|"ress\030\001 \001(\tB\"\n org.apache.calcite.avatica"
+operator|+
+literal|".protob\006proto3"
 block|}
 decl_stmt|;
 name|com
@@ -57473,6 +57641,8 @@ name|String
 index|[]
 block|{
 literal|"Exceptions"
+block|,
+literal|"HasExceptions"
 block|,
 literal|"ErrorMessage"
 block|,
