@@ -552,11 +552,15 @@ name|isEmpty
 argument_list|()
 condition|)
 block|{
+comment|// Aggregate with no GROUP BY always returns 1 row (even on empty table).
 return|return
 literal|1D
 return|;
 block|}
-return|return
+specifier|final
+name|Double
+name|rowCount
+init|=
 name|RelMetadataQuery
 operator|.
 name|getMaxRowCount
@@ -566,6 +570,20 @@ operator|.
 name|getInput
 argument_list|()
 argument_list|)
+decl_stmt|;
+if|if
+condition|(
+name|rowCount
+operator|==
+literal|null
+condition|)
+block|{
+return|return
+literal|null
+return|;
+block|}
+return|return
+name|rowCount
 operator|*
 name|rel
 operator|.
