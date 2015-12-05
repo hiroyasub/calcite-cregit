@@ -2851,7 +2851,7 @@ function_decl|;
 annotation|@
 name|BaseMessage
 argument_list|(
-literal|"Cannot stream results of a query with no streaming inputs: ''{0}''. At least one input should be convertable to a stream."
+literal|"Cannot stream results of a query with no streaming inputs: ''{0}''. At least one input should be convertible to a stream"
 argument_list|)
 name|ExInst
 argument_list|<

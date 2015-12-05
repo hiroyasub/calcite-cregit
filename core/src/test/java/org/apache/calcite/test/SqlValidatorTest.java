@@ -636,7 +636,7 @@ literal|"Cannot stream results of a query with no streaming inputs: '"
 operator|+
 name|inputs
 operator|+
-literal|"'. At least one input should be convertable to a stream."
+literal|"'. At least one input should be convertible to a stream"
 return|;
 block|}
 annotation|@

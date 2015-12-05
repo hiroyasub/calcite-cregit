@@ -470,9 +470,9 @@ specifier|public
 specifier|static
 specifier|final
 name|String
-name|STREAMJOINS_SCHEMA_NAME
+name|STREAM_JOINS_SCHEMA_NAME
 init|=
-literal|"STREAMJOINS"
+literal|"STREAM_JOINS"
 decl_stmt|;
 specifier|private
 specifier|static
@@ -536,13 +536,13 @@ literal|"{\n"
 operator|+
 literal|"  version: '1.0',\n"
 operator|+
-literal|"  defaultSchema: 'STREAMJOINS',\n"
+literal|"  defaultSchema: 'STREAM_JOINS',\n"
 operator|+
 literal|"   schemas: [\n"
 operator|+
 literal|"     {\n"
 operator|+
-literal|"       name: 'STREAMJOINS',\n"
+literal|"       name: 'STREAM_JOINS',\n"
 operator|+
 literal|"       tables: [ {\n"
 operator|+
@@ -998,7 +998,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testStreamToRelaitonJoin
+name|testStreamToRelationJoin
 parameter_list|()
 block|{
 name|CalciteAssert
@@ -1010,7 +1010,7 @@ argument_list|)
 operator|.
 name|withDefaultSchema
 argument_list|(
-name|STREAMJOINS_SCHEMA_NAME
+name|STREAM_JOINS_SCHEMA_NAME
 argument_list|)
 operator|.
 name|query
@@ -1034,16 +1034,18 @@ literal|"      LogicalJoin(condition=[=($4, $5)], joinType=[inner])\n"
 operator|+
 literal|"        LogicalProject(ROWTIME=[$0], ID=[$1], PRODUCT=[$2], UNITS=[$3], PRODUCT4=[CAST($2):VARCHAR(32) CHARACTER SET \"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$primary\" NOT NULL])\n"
 operator|+
-literal|"          LogicalTableScan(table=[[STREAMJOINS, ORDERS]])\n"
+literal|"          LogicalTableScan(table=[[STREAM_JOINS, ORDERS]])\n"
 operator|+
-literal|"        LogicalTableScan(table=[[STREAMJOINS, PRODUCTS]])\n"
+literal|"        LogicalTableScan(table=[[STREAM_JOINS, PRODUCTS]])\n"
 argument_list|)
 operator|.
 name|explainContains
 argument_list|(
 literal|""
 operator|+
-literal|"EnumerableJoin(condition=[=($4, $5)], joinType=[inner])\n"
+literal|"EnumerableCalc(expr#0..6=[{inputs}], proj#0..1=[{exprs}], SUPPLIERID=[$t6])\n"
+operator|+
+literal|"  EnumerableJoin(condition=[=($4, $5)], joinType=[inner])\n"
 operator|+
 literal|"    EnumerableCalc(expr#0..3=[{inputs}], expr#4=[CAST($t2):VARCHAR(32) CHARACTER SET \"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$primary\" NOT NULL], proj#0..4=[{exprs}])\n"
 operator|+
@@ -1053,7 +1055,7 @@ literal|"        BindableTableScan(table=[[]])\n"
 operator|+
 literal|"    EnumerableInterpreter\n"
 operator|+
-literal|"      BindableTableScan(table=[[STREAMJOINS, PRODUCTS]])"
+literal|"      BindableTableScan(table=[[STREAM_JOINS, PRODUCTS]])"
 argument_list|)
 operator|.
 name|returns
@@ -1399,20 +1401,12 @@ name|rowType
 parameter_list|)
 block|{
 specifier|final
-name|ImmutableList
-argument_list|<
 name|Object
 index|[]
-argument_list|>
+index|[]
 name|rows
 init|=
-name|ImmutableList
-operator|.
-name|of
-argument_list|(
-operator|new
-name|Object
-index|[]
+block|{
 block|{
 name|ts
 argument_list|(
@@ -1429,10 +1423,7 @@ literal|"paint"
 block|,
 literal|10
 block|}
-argument_list|,
-operator|new
-name|Object
-index|[]
+block|,
 block|{
 name|ts
 argument_list|(
@@ -1449,10 +1440,7 @@ literal|"paper"
 block|,
 literal|5
 block|}
-argument_list|,
-operator|new
-name|Object
-index|[]
+block|,
 block|{
 name|ts
 argument_list|(
@@ -1469,10 +1457,7 @@ literal|"brush"
 block|,
 literal|12
 block|}
-argument_list|,
-operator|new
-name|Object
-index|[]
+block|,
 block|{
 name|ts
 argument_list|(
@@ -1489,10 +1474,7 @@ literal|"paint"
 block|,
 literal|3
 block|}
-argument_list|,
-operator|new
-name|Object
-index|[]
+block|,
 block|{
 name|ts
 argument_list|(
@@ -1509,13 +1491,18 @@ literal|"paint"
 block|,
 literal|3
 block|}
-argument_list|)
+block|}
 decl_stmt|;
 return|return
 operator|new
 name|OrdersTable
 argument_list|(
+name|ImmutableList
+operator|.
+name|copyOf
+argument_list|(
 name|rows
+argument_list|)
 argument_list|)
 return|;
 block|}
@@ -1846,8 +1833,6 @@ block|}
 argument_list|)
 return|;
 block|}
-annotation|@
-name|Override
 specifier|public
 name|Table
 name|stream
@@ -1858,7 +1843,7 @@ name|this
 return|;
 block|}
 block|}
-comment|/**    * Mocks simple relation to use for stream joining test.    */
+comment|/**    * Mocks a simple relation to use for stream joining test.    */
 specifier|public
 specifier|static
 class|class
@@ -1869,13 +1854,6 @@ argument_list|<
 name|Table
 argument_list|>
 block|{
-specifier|public
-name|ProductsTableFactory
-parameter_list|()
-block|{
-block|}
-annotation|@
-name|Override
 specifier|public
 name|Table
 name|create
@@ -1899,55 +1877,46 @@ name|rowType
 parameter_list|)
 block|{
 specifier|final
-name|ImmutableList
-argument_list|<
 name|Object
 index|[]
-argument_list|>
+index|[]
 name|rows
 init|=
-name|ImmutableList
-operator|.
-name|of
-argument_list|(
-operator|new
-name|Object
-index|[]
+block|{
 block|{
 literal|"paint"
 block|,
 literal|1
 block|}
-argument_list|,
-operator|new
-name|Object
-index|[]
+block|,
 block|{
 literal|"paper"
 block|,
 literal|0
 block|}
-argument_list|,
-operator|new
-name|Object
-index|[]
+block|,
 block|{
 literal|"brush"
 block|,
 literal|1
 block|}
-argument_list|)
+block|}
 decl_stmt|;
 return|return
 operator|new
 name|ProductsTable
 argument_list|(
+name|ImmutableList
+operator|.
+name|copyOf
+argument_list|(
 name|rows
+argument_list|)
 argument_list|)
 return|;
 block|}
 block|}
-comment|/**    * Table representing the PRODUCTS relation    */
+comment|/**    * Table representing the PRODUCTS relation.    */
 specifier|public
 specifier|static
 class|class
@@ -2031,8 +2000,6 @@ return|;
 block|}
 block|}
 decl_stmt|;
-annotation|@
-name|Override
 specifier|public
 name|Enumerable
 argument_list|<
@@ -2054,8 +2021,6 @@ name|rows
 argument_list|)
 return|;
 block|}
-annotation|@
-name|Override
 specifier|public
 name|RelDataType
 name|getRowType
@@ -2073,8 +2038,6 @@ name|typeFactory
 argument_list|)
 return|;
 block|}
-annotation|@
-name|Override
 specifier|public
 name|Statistic
 name|getStatistic
@@ -2097,8 +2060,6 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-annotation|@
-name|Override
 specifier|public
 name|Schema
 operator|.

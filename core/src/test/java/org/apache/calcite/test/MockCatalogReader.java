@@ -1871,6 +1871,8 @@ argument_list|,
 literal|"PRODUCTS"
 argument_list|,
 literal|false
+argument_list|,
+literal|200D
 argument_list|)
 decl_stmt|;
 name|productsTable
@@ -1920,6 +1922,8 @@ argument_list|,
 literal|"SUPPLIERS"
 argument_list|,
 literal|false
+argument_list|,
+literal|10D
 argument_list|)
 decl_stmt|;
 name|suppliersTable
