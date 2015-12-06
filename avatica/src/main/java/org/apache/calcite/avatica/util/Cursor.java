@@ -37,16 +37,6 @@ name|java
 operator|.
 name|io
 operator|.
-name|Closeable
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|io
-operator|.
 name|InputStream
 import|;
 end_import
@@ -220,7 +210,7 @@ specifier|public
 interface|interface
 name|Cursor
 extends|extends
-name|Closeable
+name|AutoCloseable
 block|{
 comment|/**    * Creates a list of accessors, one per column.    *    *    * @param types List of column types, per {@link java.sql.Types}.    * @param localCalendar Calendar in local time zone    * @param factory Factory that creates sub-ResultSets when needed    * @return List of column accessors    */
 name|List

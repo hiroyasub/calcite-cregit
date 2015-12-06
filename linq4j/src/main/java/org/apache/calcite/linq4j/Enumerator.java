@@ -15,16 +15,6 @@ name|linq4j
 package|;
 end_package
 
-begin_import
-import|import
-name|java
-operator|.
-name|io
-operator|.
-name|Closeable
-import|;
-end_import
-
 begin_comment
 comment|/**  * Supports a simple iteration over a collection.  *  *<p>Analogous to LINQ's System.Collections.Enumerator. Unlike LINQ, if the  * underlying collection has been modified it is only optional that an  * implementation of the Enumerator interface detects it and throws a  * {@link java.util.ConcurrentModificationException}.</p>  *  * @param<T> Element type  */
 end_comment
@@ -37,7 +27,7 @@ parameter_list|<
 name|T
 parameter_list|>
 extends|extends
-name|Closeable
+name|AutoCloseable
 block|{
 comment|/**    * Gets the current element in the collection.    *    *<p>After an enumerator is created or after the {@link #reset} method is    * called, the {@link #moveNext} method must be called to advance the    * enumerator to the first element of the collection before reading the    * value of the {@code current} property; otherwise, {@code current} is    * undefined.</p>    *    *<p>This method also throws {@link java.util.NoSuchElementException} if    * the last call to {@code moveNext} returned {@code false}, which indicates    * the end of the collection.</p>    *    *<p>This method does not move the position of the enumerator, and    * consecutive calls to {@code current} return the same object until either    * {@code moveNext} or {@code reset} is called.</p>    *    *<p>An enumerator remains valid as long as the collection remains    * unchanged. If changes are made to the collection, such as adding,    * modifying, or deleting elements, the enumerator is irrecoverably    * invalidated. The next call to {@code moveNext} or {@code reset} may,    * at the discretion of the implementation, throw a    * {@link java.util.ConcurrentModificationException}. If the collection is    * modified between {@code moveNext} and {@code current}, {@code current}    * returns the element that it is set to, even if the enumerator is already    * invalidated.    *    * @return Current element    * @throws java.util.ConcurrentModificationException    *          if collection has    *          been modified    * @throws java.util.NoSuchElementException    *          if {@code moveToNext} has not    *          been called, has not been called since the most recent call to    *          {@code reset}, or returned false    */
 name|T

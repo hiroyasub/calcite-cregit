@@ -143,16 +143,6 @@ begin_import
 import|import
 name|java
 operator|.
-name|io
-operator|.
-name|Closeable
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
 name|sql
 operator|.
 name|ResultSet
@@ -168,7 +158,7 @@ specifier|public
 interface|interface
 name|SqlTester
 extends|extends
-name|Closeable
+name|AutoCloseable
 extends|,
 name|SqlValidatorTestCase
 operator|.
