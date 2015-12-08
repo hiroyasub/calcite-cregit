@@ -1106,9 +1106,7 @@ name|aliasSet
 init|=
 operator|new
 name|LinkedHashSet
-argument_list|<
-name|String
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 specifier|private
@@ -1279,14 +1277,7 @@ name|list
 init|=
 operator|new
 name|ArrayList
-argument_list|<
-name|Pair
-argument_list|<
-name|String
-argument_list|,
-name|RelDataType
-argument_list|>
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 name|list
@@ -2883,6 +2874,12 @@ name|fieldCollation
 operator|.
 name|getDirection
 argument_list|()
+argument_list|,
+name|RelFieldCollation
+operator|.
+name|NullDirection
+operator|.
+name|UNSPECIFIED
 argument_list|)
 expr_stmt|;
 block|}
@@ -5430,6 +5427,22 @@ name|node
 argument_list|)
 expr_stmt|;
 block|}
+if|if
+condition|(
+name|collation
+operator|.
+name|nullDirection
+operator|!=
+name|dialect
+operator|.
+name|defaultNullDirection
+argument_list|(
+name|collation
+operator|.
+name|direction
+argument_list|)
+condition|)
+block|{
 switch|switch
 condition|(
 name|collation
@@ -5471,6 +5484,7 @@ name|node
 argument_list|)
 expr_stmt|;
 break|break;
+block|}
 block|}
 return|return
 name|node
@@ -5994,8 +6008,6 @@ name|size
 argument_list|()
 argument_list|)
 block|{
-annotation|@
-name|Override
 specifier|public
 name|SqlNode
 name|field
@@ -6521,6 +6533,10 @@ name|OFFSET
 block|}
 block|}
 end_class
+
+begin_comment
+comment|// End RelToSqlConverter.java
+end_comment
 
 end_unit
 
