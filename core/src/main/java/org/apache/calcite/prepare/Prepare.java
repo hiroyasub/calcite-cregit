@@ -1960,6 +1960,17 @@ argument_list|>
 name|names
 parameter_list|)
 function_decl|;
+name|ThreadLocal
+argument_list|<
+name|CatalogReader
+argument_list|>
+name|THREAD_LOCAL
+init|=
+operator|new
+name|ThreadLocal
+argument_list|<>
+argument_list|()
+decl_stmt|;
 block|}
 comment|/** Definition of a table, for the purposes of the validator and planner. */
 specifier|public

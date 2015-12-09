@@ -739,6 +739,21 @@ function_decl|;
 annotation|@
 name|BaseMessage
 argument_list|(
+literal|"Table ''{0}'' is not a sequence"
+argument_list|)
+name|ExInst
+argument_list|<
+name|SqlValidatorException
+argument_list|>
+name|notASequence
+parameter_list|(
+name|String
+name|a0
+parameter_list|)
+function_decl|;
+annotation|@
+name|BaseMessage
+argument_list|(
 literal|"Column ''{0}'' not found in any table"
 argument_list|)
 name|ExInst

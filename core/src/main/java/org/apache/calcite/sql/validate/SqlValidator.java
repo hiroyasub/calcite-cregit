@@ -1027,6 +1027,16 @@ name|SqlWithItem
 name|withItem
 parameter_list|)
 function_decl|;
+name|void
+name|validateSequenceValue
+parameter_list|(
+name|SqlValidatorScope
+name|scope
+parameter_list|,
+name|SqlIdentifier
+name|id
+parameter_list|)
+function_decl|;
 name|SqlValidatorScope
 name|getWithScope
 parameter_list|(
