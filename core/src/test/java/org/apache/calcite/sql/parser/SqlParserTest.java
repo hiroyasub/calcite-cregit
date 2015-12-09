@@ -4454,6 +4454,15 @@ operator|+
 literal|"WHERE (`A`> `B`)"
 argument_list|)
 expr_stmt|;
+name|check
+argument_list|(
+literal|"select 1 from t\n--select"
+argument_list|,
+literal|"SELECT 1\n"
+operator|+
+literal|"FROM `T`"
+argument_list|)
+expr_stmt|;
 block|}
 annotation|@
 name|Test
