@@ -268,6 +268,27 @@ name|IllegalArgumentException
 argument_list|()
 throw|;
 block|}
+comment|// Double-checked locking, but safe because CopyOnWriteArrayList.array
+comment|// is marked volatile, and size() uses array.length.
+synchronized|synchronized
+init|(
+name|this
+init|)
+block|{
+specifier|final
+name|int
+name|size
+init|=
+name|size
+argument_list|()
+decl_stmt|;
+if|if
+condition|(
+name|index
+operator|>=
+name|size
+condition|)
+block|{
 name|addAll
 argument_list|(
 name|fromTo
@@ -275,7 +296,6 @@ argument_list|(
 name|prefix
 argument_list|,
 name|size
-argument_list|()
 argument_list|,
 name|Math
 operator|.
@@ -286,13 +306,14 @@ operator|+
 literal|1
 argument_list|,
 name|size
-argument_list|()
 operator|*
 literal|2
 argument_list|)
 argument_list|)
 argument_list|)
 expr_stmt|;
+block|}
+block|}
 block|}
 block|}
 block|}
