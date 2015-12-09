@@ -179,16 +179,6 @@ name|org
 operator|.
 name|junit
 operator|.
-name|Ignore
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|junit
-operator|.
 name|Test
 import|;
 end_import
@@ -211,7 +201,7 @@ name|hamcrest
 operator|.
 name|CoreMatchers
 operator|.
-name|equalTo
+name|is
 import|;
 end_import
 
@@ -268,7 +258,10 @@ name|String
 name|query
 parameter_list|,
 name|String
-name|expectedQeury
+name|expectedQuery
+parameter_list|,
+name|SqlDialect
+name|dialect
 parameter_list|)
 block|{
 try|try
@@ -312,9 +305,7 @@ init|=
 operator|new
 name|RelToSqlConverter
 argument_list|(
-name|SqlDialect
-operator|.
-name|CALCITE
+name|dialect
 argument_list|)
 decl_stmt|;
 specifier|final
@@ -339,17 +330,15 @@ name|sqlNode
 operator|.
 name|toSqlString
 argument_list|(
-name|SqlDialect
-operator|.
-name|CALCITE
+name|dialect
 argument_list|)
 operator|.
 name|getSql
 argument_list|()
 argument_list|,
-name|equalTo
+name|is
 argument_list|(
-name|expectedQeury
+name|expectedQuery
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -373,6 +362,34 @@ literal|false
 argument_list|)
 expr_stmt|;
 block|}
+block|}
+specifier|private
+name|void
+name|checkRel2Sql
+parameter_list|(
+name|Planner
+name|planner
+parameter_list|,
+name|String
+name|query
+parameter_list|,
+name|String
+name|expectedQuery
+parameter_list|)
+block|{
+name|checkRel2Sql
+argument_list|(
+name|planner
+argument_list|,
+name|query
+argument_list|,
+name|expectedQuery
+argument_list|,
+name|SqlDialect
+operator|.
+name|CALCITE
+argument_list|)
+expr_stmt|;
 block|}
 specifier|private
 name|Planner
@@ -981,8 +998,6 @@ argument_list|)
 expr_stmt|;
 block|}
 annotation|@
-name|Ignore
-annotation|@
 name|Test
 specifier|public
 name|void
@@ -1002,11 +1017,118 @@ name|logicalPlanner
 argument_list|,
 name|query
 argument_list|,
+literal|"SELECT product_id\n"
+operator|+
+literal|"FROM foodmart.product\n"
+operator|+
+literal|"LIMIT 100\nOFFSET 10"
+argument_list|,
+name|SqlDialect
+operator|.
+name|DatabaseProduct
+operator|.
+name|HIVE
+operator|.
+name|getDialect
+argument_list|()
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSelectQueryWithLimitClauseWithoutOrder
+parameter_list|()
+block|{
+name|String
+name|query
+init|=
+literal|"select \"product_id\"  from \"product\" limit 100 offset 10"
+decl_stmt|;
+name|checkRel2Sql
+argument_list|(
+name|this
+operator|.
+name|logicalPlanner
+argument_list|,
+name|query
+argument_list|,
 literal|"SELECT \"product_id\"\n"
 operator|+
 literal|"FROM \"foodmart\".\"product\"\n"
 operator|+
-literal|"LIMIT 100 OFFSET 10"
+literal|"OFFSET 10 ROWS\n"
+operator|+
+literal|"FETCH NEXT 100 ROWS ONLY"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSelectQueryWithLimitOffsetClause
+parameter_list|()
+block|{
+name|String
+name|query
+init|=
+literal|"select \"product_id\"  from \"product\" order by \"net_weight\" asc"
+operator|+
+literal|" limit 100 offset 10"
+decl_stmt|;
+name|checkRel2Sql
+argument_list|(
+name|this
+operator|.
+name|logicalPlanner
+argument_list|,
+name|query
+argument_list|,
+literal|"SELECT \"product_id\", \"net_weight\"\n"
+operator|+
+literal|"FROM \"foodmart\".\"product\"\n"
+operator|+
+literal|"ORDER BY \"net_weight\"\n"
+operator|+
+literal|"OFFSET 10 ROWS\n"
+operator|+
+literal|"FETCH NEXT 100 ROWS ONLY"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSelectQueryWithFetchOffsetClause
+parameter_list|()
+block|{
+name|String
+name|query
+init|=
+literal|"select \"product_id\"  from \"product\" order by \"product_id\""
+operator|+
+literal|" offset 10 rows fetch next 100 rows only"
+decl_stmt|;
+name|checkRel2Sql
+argument_list|(
+name|this
+operator|.
+name|logicalPlanner
+argument_list|,
+name|query
+argument_list|,
+literal|"SELECT \"product_id\"\n"
+operator|+
+literal|"FROM \"foodmart\".\"product\"\n"
+operator|+
+literal|"ORDER BY \"product_id\"\n"
+operator|+
+literal|"OFFSET 10 ROWS\n"
+operator|+
+literal|"FETCH NEXT 100 ROWS ONLY"
 argument_list|)
 expr_stmt|;
 block|}
