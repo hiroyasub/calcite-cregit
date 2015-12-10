@@ -508,7 +508,7 @@ block|}
 end_class
 
 begin_comment
-comment|// End AvaticaHandler.java
+comment|// End AvaticaJsonHandler.java
 end_comment
 
 end_unit

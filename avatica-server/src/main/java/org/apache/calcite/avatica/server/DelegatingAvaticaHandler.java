@@ -160,7 +160,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * An AvaticaHandler implementation which delegates to a provided Jetty Handler instance.  *  * This implementation provides a no-op implementation for  * {@link #setServerRpcMetadata(RpcMetadataResponse)}.  */
+comment|/**  * An AvaticaHandler implementation that delegates to a provided Jetty Handler instance.  *  *<p>This implementation provides a no-op implementation for  * {@link #setServerRpcMetadata(RpcMetadataResponse)}.  */
 end_comment
 
 begin_class
@@ -461,6 +461,10 @@ expr_stmt|;
 block|}
 block|}
 end_class
+
+begin_comment
+comment|// End DelegatingAvaticaHandler.java
+end_comment
 
 end_unit
 

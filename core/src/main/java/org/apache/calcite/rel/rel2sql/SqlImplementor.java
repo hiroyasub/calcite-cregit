@@ -2780,7 +2780,7 @@ name|int
 name|ordinal
 parameter_list|)
 function_decl|;
-comment|/** Converts an expression from {@link RexNode} to {@link SqlNode}      * format. */
+comment|/** Converts an expression from {@link RexNode} to {@link SqlNode}      * format.      *      * @param program Required only if {@code rex} contains {@link RexLocalRef}      * @param rex Expression to convert      */
 specifier|public
 name|SqlNode
 name|toSql
