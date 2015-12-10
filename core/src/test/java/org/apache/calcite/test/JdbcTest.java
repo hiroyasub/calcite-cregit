@@ -16455,6 +16455,117 @@ literal|"empid=100; deptno=10; name=Bill; salary=10000.0; commission=1000\n"
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Tests CALCITE-980: Not (C='a' or C='b') causes NPE */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testWhereOrAndNullable
+parameter_list|()
+block|{
+comment|/* Generates the following code:        public boolean moveNext() {          while (inputEnumerator.moveNext()) {            final Object[] current = (Object[]) inputEnumerator.current();            final String inp0_ = current[0] == null ? (String) null : current[0].toString();            final String inp1_ = current[1] == null ? (String) null : current[1].toString();            if (inp0_ != null&& org.apache.calcite.runtime.SqlFunctions.eq(inp0_, "a")&& (inp1_ != null&& org.apache.calcite.runtime.SqlFunctions.eq(inp1_, "b"))                || inp0_ != null&& org.apache.calcite.runtime.SqlFunctions.eq(inp0_, "b")&& (inp1_ != null&& org.apache.calcite.runtime.SqlFunctions.eq(inp1_, "c"))) {              return true;            }          }          return false;        }      */
+name|CalciteAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|CalciteAssert
+operator|.
+name|Config
+operator|.
+name|REGULAR
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"with tst(c) as (values('a'),('b'),('c'),(cast(null as varchar)))"
+operator|+
+literal|" select u.c u, v.c v from tst u, tst v where ((u.c = 'a' and v.c = 'b') or (u.c = 'b' and v.c = 'c'))"
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"U=a; V=b"
+argument_list|,
+literal|"U=b; V=c"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Tests CALCITE-980: different flavors of boolean logic */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testBooleansInWhere
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+name|checkRun
+argument_list|(
+literal|"sql/conditions.oq"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Tests CALCITE-980: different flavors of boolean logic */
+annotation|@
+name|Ignore
+argument_list|(
+literal|"Fails with org.codehaus.commons.compiler.CompileException: Line 16, Column 112:"
+operator|+
+literal|" Cannot compare types \"int\" and \"java.lang.String\"\n"
+argument_list|)
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testComparingIntAndString
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+comment|// if (((...test.ReflectiveSchemaTest.IntAndString) inputEnumerator.current()).id == "T")
+name|CalciteAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|withSchema
+argument_list|(
+literal|"s"
+argument_list|,
+operator|new
+name|ReflectiveSchema
+argument_list|(
+operator|new
+name|ReflectiveSchemaTest
+operator|.
+name|CatchallSchema
+argument_list|()
+argument_list|)
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select a.\"value\", b.\"value\"\n"
+operator|+
+literal|"  from \"bools\" a\n"
+operator|+
+literal|"     , \"bools\" b\n"
+operator|+
+literal|" where b.\"value\" = 'T'\n"
+operator|+
+literal|" order by 1, 2"
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"should fail with 'not a number' sql error while converting text to number"
+argument_list|)
+expr_stmt|;
+block|}
 comment|/** Tests the LIKE operator. */
 annotation|@
 name|Test
