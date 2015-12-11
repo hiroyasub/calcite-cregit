@@ -935,6 +935,22 @@ parameter_list|)
 throws|throws
 name|NoSuchStatementException
 function_decl|;
+comment|/**    * Makes all changes since the last commit/rollback permanent. Analogy to    * {@link Connection#commit()}.    *    * @param ch A reference to the real JDBC Connection.    */
+name|void
+name|commit
+parameter_list|(
+name|ConnectionHandle
+name|ch
+parameter_list|)
+function_decl|;
+comment|/**    * Undoes all changes since the last commit/rollback. Analogy to    * {@link Connection#rollback()};    *    * @param ch A reference to the real JDBC Connection.    */
+name|void
+name|rollback
+parameter_list|(
+name|ConnectionHandle
+name|ch
+parameter_list|)
+function_decl|;
 comment|/** Sync client and server view of connection properties.    *    *<p>Note: this interface is considered "experimental" and may undergo further changes as this    * functionality is extended to other aspects of state management for    * {@link java.sql.Connection}, {@link java.sql.Statement}, and {@link java.sql.ResultSet}.</p>    */
 name|ConnectionProperties
 name|connectionSync
