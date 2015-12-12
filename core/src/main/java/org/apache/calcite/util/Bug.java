@@ -200,6 +200,15 @@ name|CALCITE_673_FIXED
 init|=
 literal|false
 decl_stmt|;
+comment|/** Whether    *<a href="https://issues.apache.org/jira/browse/CALCITE-794">[CALCITE-794]    * Detect cycles when computing statistics</a> is fixed. */
+specifier|public
+specifier|static
+specifier|final
+name|boolean
+name|CALCITE_794_FIXED
+init|=
+literal|false
+decl_stmt|;
 comment|/**    * Use this to flag temporary code.    */
 specifier|public
 specifier|static

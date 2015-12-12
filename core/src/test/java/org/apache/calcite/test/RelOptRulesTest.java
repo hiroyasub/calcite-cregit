@@ -329,6 +329,22 @@ name|rel
 operator|.
 name|rules
 operator|.
+name|AggregateConstantKeyRule
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|rules
+operator|.
 name|AggregateExpandDistinctAggregatesRule
 import|;
 end_import
@@ -2628,7 +2644,7 @@ name|sql
 init|=
 literal|"select e1.sal\n"
 operator|+
-literal|" from (select * from emp where deptno = 200) as e1\n"
+literal|"from (select * from emp where deptno = 200) as e1\n"
 operator|+
 literal|"where e1.deptno in (\n"
 operator|+
@@ -8783,6 +8799,158 @@ name|tester
 argument_list|,
 name|preProgram
 argument_list|,
+operator|new
+name|HepPlanner
+argument_list|(
+name|program
+argument_list|)
+argument_list|,
+name|sql
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1023">[CALCITE-1023]    * Planner rule that removes Aggregate keys that are constant</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testAggregateConstantKeyRule
+parameter_list|()
+block|{
+specifier|final
+name|HepProgram
+name|program
+init|=
+operator|new
+name|HepProgramBuilder
+argument_list|()
+operator|.
+name|addRuleInstance
+argument_list|(
+name|AggregateConstantKeyRule
+operator|.
+name|INSTANCE
+argument_list|)
+operator|.
+name|build
+argument_list|()
+decl_stmt|;
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select count(*) as c\n"
+operator|+
+literal|"from sales.emp\n"
+operator|+
+literal|"where deptno = 10\n"
+operator|+
+literal|"group by deptno, sal"
+decl_stmt|;
+name|checkPlanning
+argument_list|(
+operator|new
+name|HepPlanner
+argument_list|(
+name|program
+argument_list|)
+argument_list|,
+name|sql
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Tests {@link AggregateConstantKeyRule} where reduction is not possible    * because "deptno" is the only key. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testAggregateConstantKeyRule2
+parameter_list|()
+block|{
+specifier|final
+name|HepProgram
+name|program
+init|=
+operator|new
+name|HepProgramBuilder
+argument_list|()
+operator|.
+name|addRuleInstance
+argument_list|(
+name|AggregateConstantKeyRule
+operator|.
+name|INSTANCE
+argument_list|)
+operator|.
+name|build
+argument_list|()
+decl_stmt|;
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select count(*) as c\n"
+operator|+
+literal|"from sales.emp\n"
+operator|+
+literal|"where deptno = 10\n"
+operator|+
+literal|"group by deptno"
+decl_stmt|;
+name|checkPlanUnchanged
+argument_list|(
+operator|new
+name|HepPlanner
+argument_list|(
+name|program
+argument_list|)
+argument_list|,
+name|sql
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Tests {@link AggregateConstantKeyRule} where both keys are constants but    * only one can be removed. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testAggregateConstantKeyRule3
+parameter_list|()
+block|{
+specifier|final
+name|HepProgram
+name|program
+init|=
+operator|new
+name|HepProgramBuilder
+argument_list|()
+operator|.
+name|addRuleInstance
+argument_list|(
+name|AggregateConstantKeyRule
+operator|.
+name|INSTANCE
+argument_list|)
+operator|.
+name|build
+argument_list|()
+decl_stmt|;
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select job\n"
+operator|+
+literal|"from sales.emp\n"
+operator|+
+literal|"where sal is null and job = 'Clerk'\n"
+operator|+
+literal|"group by sal, job\n"
+operator|+
+literal|"having count(*)> 3"
+decl_stmt|;
+name|checkPlanning
+argument_list|(
 operator|new
 name|HepPlanner
 argument_list|(
