@@ -13325,6 +13325,8 @@ argument_list|)
 operator|.
 name|explainContains
 argument_list|(
+literal|""
+operator|+
 literal|"PLAN=EnumerableCalc(expr#0..23=[{inputs}], store_id=[$t0], grocery_sqft=[$t16])\n"
 operator|+
 literal|"  EnumerableLimit(fetch=[5])\n"
@@ -16507,7 +16509,7 @@ name|Exception
 block|{
 name|checkRun
 argument_list|(
-literal|"sql/conditions.oq"
+literal|"sql/conditions.iq"
 argument_list|)
 expr_stmt|;
 block|}
@@ -17395,7 +17397,7 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/** Runs the dummy script, which is checked in empty but which you may    * use as scratch space during development. */
-comment|// Do not add '@Ignore'; just remember not to commit changes to dummy.oq
+comment|// Do not add '@Ignore'; just remember not to commit changes to dummy.iq
 annotation|@
 name|Test
 specifier|public
@@ -17407,7 +17409,7 @@ name|Exception
 block|{
 name|checkRun
 argument_list|(
-literal|"sql/dummy.oq"
+literal|"sql/dummy.iq"
 argument_list|)
 expr_stmt|;
 block|}
@@ -17422,7 +17424,7 @@ name|Exception
 block|{
 name|checkRun
 argument_list|(
-literal|"sql/agg.oq"
+literal|"sql/agg.iq"
 argument_list|)
 expr_stmt|;
 block|}
@@ -17437,7 +17439,7 @@ name|Exception
 block|{
 name|checkRun
 argument_list|(
-literal|"sql/join.oq"
+literal|"sql/join.iq"
 argument_list|)
 expr_stmt|;
 block|}
@@ -17452,7 +17454,7 @@ name|Exception
 block|{
 name|checkRun
 argument_list|(
-literal|"sql/outer.oq"
+literal|"sql/outer.iq"
 argument_list|)
 expr_stmt|;
 block|}
@@ -17467,7 +17469,7 @@ name|Exception
 block|{
 name|checkRun
 argument_list|(
-literal|"sql/winagg.oq"
+literal|"sql/winagg.iq"
 argument_list|)
 expr_stmt|;
 block|}
@@ -17496,7 +17498,7 @@ return|return;
 block|}
 name|checkRun
 argument_list|(
-literal|"sql/misc.oq"
+literal|"sql/misc.iq"
 argument_list|)
 expr_stmt|;
 block|}
@@ -17511,7 +17513,7 @@ name|Exception
 block|{
 name|checkRun
 argument_list|(
-literal|"sql/sequence.oq"
+literal|"sql/sequence.iq"
 argument_list|)
 expr_stmt|;
 block|}
@@ -17526,7 +17528,7 @@ name|Exception
 block|{
 name|checkRun
 argument_list|(
-literal|"sql/sort.oq"
+literal|"sql/sort.iq"
 argument_list|)
 expr_stmt|;
 block|}
@@ -17541,7 +17543,7 @@ name|Exception
 block|{
 name|checkRun
 argument_list|(
-literal|"sql/scalar.oq"
+literal|"sql/scalar.iq"
 argument_list|)
 expr_stmt|;
 block|}
@@ -17556,7 +17558,7 @@ name|Exception
 block|{
 name|checkRun
 argument_list|(
-literal|"sql/subquery.oq"
+literal|"sql/subquery.iq"
 argument_list|)
 expr_stmt|;
 block|}
@@ -17588,7 +17590,7 @@ literal|"/"
 argument_list|)
 condition|)
 block|{
-comment|// e.g. path = "/tmp/foo.oq"
+comment|// e.g. path = "/tmp/foo.iq"
 name|inFile
 operator|=
 operator|new
@@ -17610,8 +17612,8 @@ expr_stmt|;
 block|}
 else|else
 block|{
-comment|// e.g. path = "sql/outer.oq"
-comment|// inUrl = "file:/home/fred/calcite/core/target/test-classes/sql/outer.oq"
+comment|// e.g. path = "sql/outer.iq"
+comment|// inUrl = "file:/home/fred/calcite/core/target/test-classes/sql/outer.iq"
 specifier|final
 name|URL
 name|inUrl

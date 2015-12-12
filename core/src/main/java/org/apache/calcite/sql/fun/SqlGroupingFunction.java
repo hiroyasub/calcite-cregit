@@ -78,7 +78,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * The {@code GROUPING} function.  *  *<p>This function is defined in the SQL standard.  *  *<p>Some examples are in {@code agg.oq}.  */
+comment|/**  * The {@code GROUPING} function.  *  *<p>This function is defined in the SQL standard.  *  *<p>Some examples are in {@code agg.iq}.  */
 end_comment
 
 begin_class
