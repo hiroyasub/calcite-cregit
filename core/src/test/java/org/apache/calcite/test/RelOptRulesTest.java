@@ -1639,6 +1639,16 @@ operator|.
 name|build
 argument_list|()
 decl_stmt|;
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"from dept left join emp using (deptno)\n"
+operator|+
+literal|"where emp.deptno is not null and emp.sal> 100"
+decl_stmt|;
 name|checkPlanning
 argument_list|(
 name|tester
@@ -1661,13 +1671,7 @@ argument_list|(
 name|program
 argument_list|)
 argument_list|,
-literal|"select * from dept where exists (\n"
-operator|+
-literal|"  select * from emp\n"
-operator|+
-literal|"  where emp.deptno = dept.deptno\n"
-operator|+
-literal|"  and emp.sal> 100)"
+name|sql
 argument_list|)
 expr_stmt|;
 block|}
@@ -1800,7 +1804,10 @@ block|}
 specifier|private
 name|void
 name|basePushFilterPastAggWithGroupingSets
-parameter_list|()
+parameter_list|(
+name|boolean
+name|unchanged
+parameter_list|)
 throws|throws
 name|Exception
 block|{
@@ -1862,6 +1869,8 @@ name|program
 argument_list|)
 argument_list|,
 literal|"${sql}"
+argument_list|,
+name|unchanged
 argument_list|)
 expr_stmt|;
 block|}
@@ -1875,7 +1884,9 @@ throws|throws
 name|Exception
 block|{
 name|basePushFilterPastAggWithGroupingSets
-argument_list|()
+argument_list|(
+literal|true
+argument_list|)
 expr_stmt|;
 block|}
 annotation|@
@@ -1888,7 +1899,9 @@ throws|throws
 name|Exception
 block|{
 name|basePushFilterPastAggWithGroupingSets
-argument_list|()
+argument_list|(
+literal|false
+argument_list|)
 expr_stmt|;
 block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-434">[CALCITE-434]    * FilterAggregateTransposeRule loses conditions that cannot be pushed</a>. */
@@ -1923,13 +1936,42 @@ name|void
 name|testPushFilterPastAggThree
 parameter_list|()
 block|{
-name|checkPlanning
+specifier|final
+name|HepProgram
+name|program
+init|=
+name|HepProgram
+operator|.
+name|builder
+argument_list|()
+operator|.
+name|addRuleInstance
 argument_list|(
 name|FilterAggregateTransposeRule
 operator|.
 name|INSTANCE
+argument_list|)
+operator|.
+name|build
+argument_list|()
+decl_stmt|;
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select deptno from emp\n"
+operator|+
+literal|"group by deptno having count(*)> 1"
+decl_stmt|;
+name|checkPlanUnchanged
+argument_list|(
+operator|new
+name|HepPlanner
+argument_list|(
+name|program
+argument_list|)
 argument_list|,
-literal|"select deptno from emp group by deptno having count(*)> 1"
+name|sql
 argument_list|)
 expr_stmt|;
 block|}
@@ -2580,6 +2622,18 @@ operator|.
 name|build
 argument_list|()
 decl_stmt|;
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select e1.sal\n"
+operator|+
+literal|" from (select * from emp where deptno = 200) as e1\n"
+operator|+
+literal|"where e1.deptno in (\n"
+operator|+
+literal|"  select e2.deptno from emp e2 where e2.sal = 100)"
+decl_stmt|;
 name|checkPlanning
 argument_list|(
 name|tester
@@ -2602,11 +2656,9 @@ argument_list|(
 name|program
 argument_list|)
 argument_list|,
-literal|"select e1.sal from (select * from emp where deptno = 200) as e1\n"
-operator|+
-literal|"where e1.deptno in (\n"
-operator|+
-literal|"  select e2.deptno from emp e2 where e2.sal = 100)"
+name|sql
+argument_list|,
+literal|true
 argument_list|)
 expr_stmt|;
 block|}
@@ -4052,15 +4104,25 @@ operator|.
 name|build
 argument_list|()
 decl_stmt|;
-name|checkPlanning
-argument_list|(
-name|program
-argument_list|,
+specifier|final
+name|String
+name|sql
+init|=
 literal|"select d.deptno"
 operator|+
 literal|" from dept d"
 operator|+
 literal|" where d.deptno=7 and d.deptno=8"
+decl_stmt|;
+name|checkPlanUnchanged
+argument_list|(
+operator|new
+name|HepPlanner
+argument_list|(
+name|program
+argument_list|)
+argument_list|,
+name|sql
 argument_list|)
 expr_stmt|;
 block|}
@@ -4533,11 +4595,21 @@ literal|null
 argument_list|)
 expr_stmt|;
 comment|// Rule should not fire, but there should be no NPE
-name|checkPlanning
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select * from (values (1,2)) where 1 + 2> 3 + CAST(NULL AS INTEGER)"
+decl_stmt|;
+name|checkPlanUnchanged
+argument_list|(
+operator|new
+name|HepPlanner
 argument_list|(
 name|program
+argument_list|)
 argument_list|,
-literal|"select * from (values (1,2)) where 1 + 2> 3 + CAST(NULL AS INTEGER)"
+name|sql
 argument_list|)
 expr_stmt|;
 block|}
@@ -7528,9 +7600,13 @@ literal|"  from emp) e1\n"
 operator|+
 literal|"where r< 2"
 decl_stmt|;
-name|checkPlanning
+name|checkPlanUnchanged
+argument_list|(
+operator|new
+name|HepPlanner
 argument_list|(
 name|program
+argument_list|)
 argument_list|,
 name|sql
 argument_list|)
@@ -7562,10 +7638,10 @@ operator|.
 name|build
 argument_list|()
 decl_stmt|;
-name|checkPlanning
-argument_list|(
-name|program
-argument_list|,
+specifier|final
+name|String
+name|sql
+init|=
 literal|"select e1.ename, r\n"
 operator|+
 literal|"from (\n"
@@ -7577,6 +7653,16 @@ operator|+
 literal|"  from emp) e1\n"
 operator|+
 literal|"where r< 2"
+decl_stmt|;
+name|checkPlanUnchanged
+argument_list|(
+operator|new
+name|HepPlanner
+argument_list|(
+name|program
+argument_list|)
+argument_list|,
+name|sql
 argument_list|)
 expr_stmt|;
 block|}
@@ -7954,6 +8040,8 @@ name|program
 argument_list|)
 argument_list|,
 name|sql
+argument_list|,
+literal|true
 argument_list|)
 expr_stmt|;
 block|}
@@ -8548,6 +8636,8 @@ name|program
 argument_list|)
 argument_list|,
 name|sql
+argument_list|,
+literal|true
 argument_list|)
 expr_stmt|;
 block|}
