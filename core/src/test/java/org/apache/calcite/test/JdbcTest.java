@@ -16570,6 +16570,67 @@ literal|"should fail with 'not a number' sql error while converting text to numb
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1015">[CALCITE-1015]    * OFFSET 0 causes AssertionError</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testTrivialSort
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select a.\"value\", b.\"value\"\n"
+operator|+
+literal|"  from \"bools\" a\n"
+operator|+
+literal|"     , \"bools\" b\n"
+operator|+
+literal|" offset 0"
+decl_stmt|;
+name|CalciteAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|withSchema
+argument_list|(
+literal|"s"
+argument_list|,
+operator|new
+name|ReflectiveSchema
+argument_list|(
+operator|new
+name|ReflectiveSchemaTest
+operator|.
+name|CatchallSchema
+argument_list|()
+argument_list|)
+argument_list|)
+operator|.
+name|query
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"value=T; value=T"
+argument_list|,
+literal|"value=T; value=F"
+argument_list|,
+literal|"value=T; value=null"
+argument_list|,
+literal|"value=F; value=T"
+argument_list|,
+literal|"value=F; value=F"
+argument_list|,
+literal|"value=F; value=null"
+argument_list|)
+expr_stmt|;
+block|}
 comment|/** Tests the LIKE operator. */
 annotation|@
 name|Test

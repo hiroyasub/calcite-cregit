@@ -2964,6 +2964,23 @@ literal|true
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testOffset0
+parameter_list|()
+block|{
+name|tester
+operator|.
+name|assertConvertsTo
+argument_list|(
+literal|"select * from emp offset 0"
+argument_list|,
+literal|"${plan}"
+argument_list|)
+expr_stmt|;
+block|}
 comment|/**    * Test group-by CASE expression involving a non-query IN    */
 annotation|@
 name|Test

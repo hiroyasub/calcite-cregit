@@ -6675,6 +6675,27 @@ argument_list|(
 name|fetch
 argument_list|)
 decl_stmt|;
+if|if
+condition|(
+name|offsetNode
+operator|==
+literal|null
+operator|&&
+name|fetchNode
+operator|==
+literal|null
+operator|&&
+name|fieldCollations
+operator|.
+name|isEmpty
+argument_list|()
+condition|)
+block|{
+return|return
+name|this
+return|;
+comment|// sort is trivial
+block|}
 specifier|final
 name|boolean
 name|addedFields
