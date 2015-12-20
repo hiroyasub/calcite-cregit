@@ -25,22 +25,6 @@ name|calcite
 operator|.
 name|avatica
 operator|.
-name|AvaticaConnection
-operator|.
-name|CallableWithoutException
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|avatica
-operator|.
 name|Meta
 operator|.
 name|MetaResultSet
@@ -608,7 +592,7 @@ name|info
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Computes the number of retries    * {@link #executeInternal(String)} should retry before failing. */
+comment|/** Computes the number of retries    * {@link #executeQueryInternal(AvaticaStatement, Meta.Signature, Meta.Frame, QueryState)}    * should retry before failing. */
 name|long
 name|getNumStatementRetries
 parameter_list|(

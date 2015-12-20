@@ -3966,7 +3966,7 @@ argument_list|()
 throw|;
 block|}
 block|}
-comment|/** Iterable that yields an iterator over rows coming from a sequence of    * {@link Frame}s. */
+comment|/** Iterable that yields an iterator over rows coming from a sequence of    * {@link Meta.Frame}s. */
 specifier|private
 class|class
 name|FetchIterable
@@ -4066,7 +4066,7 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/** Iterator over rows coming from a sequence of {@link Frame}s. */
+comment|/** Iterator over rows coming from a sequence of {@link Meta.Frame}s. */
 specifier|private
 class|class
 name|FetchIterator

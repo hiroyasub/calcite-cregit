@@ -1498,7 +1498,7 @@ name|v
 argument_list|)
 return|;
 block|}
-comment|/** Implementation of {@link Accessor}. */
+comment|/** Implementation of {@link Cursor.Accessor}. */
 specifier|static
 class|class
 name|AccessorImpl

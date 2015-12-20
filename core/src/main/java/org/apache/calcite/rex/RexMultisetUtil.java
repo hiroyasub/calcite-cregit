@@ -382,7 +382,7 @@ literal|true
 argument_list|)
 return|;
 block|}
-comment|/**    * Returns true if call is call to<code>CAST</code> and the to/from cast    * types are of multiset types    */
+comment|/**    * Returns true if {@code call} is a call to<code>CAST</code> and the to/from    * cast types are of multiset types.    */
 specifier|public
 specifier|static
 name|boolean
@@ -392,26 +392,17 @@ name|RexCall
 name|call
 parameter_list|)
 block|{
-if|if
+switch|switch
 condition|(
-operator|!
 name|call
 operator|.
-name|getOperator
+name|getKind
 argument_list|()
-operator|.
-name|equals
-argument_list|(
-name|SqlStdOperatorTable
-operator|.
-name|CAST
-argument_list|)
 condition|)
 block|{
-return|return
-literal|false
-return|;
-block|}
+case|case
+name|CAST
+case|:
 return|return
 name|call
 operator|.
@@ -425,6 +416,11 @@ name|SqlTypeName
 operator|.
 name|MULTISET
 return|;
+default|default:
+return|return
+literal|false
+return|;
+block|}
 block|}
 comment|/**    * Returns a reference to the first found multiset call or null if none was    * found    */
 specifier|public
@@ -569,7 +565,7 @@ name|firstOne
 return|;
 block|}
 comment|//~ Inner Classes ----------------------------------------------------------
-comment|/**    * A RexShuttle that traverse all RexNode and counts total number of    * RexCalls traversed and number of multiset calls traversed.    *    *<p>totalCount>= multisetCount always holds true.    */
+comment|/**    * A RexShuttle that traverse all RexNode and counts total number of    * RexCalls traversed and number of multiset calls traversed.    *    *<p>totalCount&ge; multisetCount always holds true.    */
 specifier|private
 specifier|static
 class|class

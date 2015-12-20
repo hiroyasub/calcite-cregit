@@ -1095,7 +1095,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**    * Setup equivalence Sets for each position. If i& j are equivalent then    * they will have the same equivalence Set. The algorithm computes the    * closure relation at each position for the position wrt to positions    * greater than it. Once a closure is computed for a position, the closure    * Set is set on all its descendants. So the closure computation bubbles up    * from lower positions and the final equivalence Set is propagated down    * from the lowest element in the Set.    */
+comment|/**    * Setup equivalence Sets for each position. If i and j are equivalent then    * they will have the same equivalence Set. The algorithm computes the    * closure relation at each position for the position wrt to positions    * greater than it. Once a closure is computed for a position, the closure    * Set is set on all its descendants. So the closure computation bubbles up    * from lower positions and the final equivalence Set is propagated down    * from the lowest element in the Set.    */
 specifier|private
 specifier|static
 class|class

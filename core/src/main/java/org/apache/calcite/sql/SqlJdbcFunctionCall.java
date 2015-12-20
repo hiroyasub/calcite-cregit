@@ -1053,7 +1053,7 @@ name|argCount
 block|}
 expr_stmt|;
 block|}
-comment|/**      * Creates a MakeCall strategy object with reordering of operands.      *      *<p>The reordering is specified by an int array where the value of      * element at position<code>i</code> indicates to which element in a      * new SqlNode[] array the operand goes.      *      * @param operator Operator      * @param order    Order      * @pre order != null      * @pre order[i]< order.length      * @pre order.length> 0      * @pre argCounts == order.length      */
+comment|/**      * Creates a MakeCall strategy object with reordering of operands.      *      *<p>The reordering is specified by an int array where the value of      * element at position<code>i</code> indicates to which element in a      * new SqlNode[] array the operand goes.      *      * @param operator Operator      * @param order    Order      * @pre order != null      * @pre order[i]&lt; order.length      * @pre order.length&gt; 0      * @pre argCounts == order.length      */
 name|MakeCall
 parameter_list|(
 name|SqlOperator

@@ -1866,7 +1866,7 @@ name|EMPTY
 argument_list|)
 return|;
 block|}
-comment|/**    * Utility to infer predicates from one side of the join that apply on the    * other side.    *    *<p>Contract is:<ul>    *    *<li>initialize with a {@link org.apache.calcite.rel.core.Join} and    * optional predicates applicable on its left and right subtrees.    *    *<li>you can    * then ask it for equivalentPredicate(s) given a predicate.    *    *</ul>    *    *<p>So for:    *<ol>    *<li>'<code>R1(x) join R2(y) on x = y</code>' a call for    * equivalentPredicates on '<code>x> 7</code>' will return '    *<code>[y> 7]</code>'    *<li>'<code>R1(x) join R2(y) on x = y join R3(z) on y = z</code>' a call for    * equivalentPredicates on the second join '<code>x> 7</code>' will return '    *<code>[y> 7, z> 7]</code>'    *</ol>    */
+comment|/**    * Utility to infer predicates from one side of the join that apply on the    * other side.    *    *<p>Contract is:<ul>    *    *<li>initialize with a {@link org.apache.calcite.rel.core.Join} and    * optional predicates applicable on its left and right subtrees.    *    *<li>you can    * then ask it for equivalentPredicate(s) given a predicate.    *    *</ul>    *    *<p>So for:    *<ol>    *<li>'<code>R1(x) join R2(y) on x = y</code>' a call for    * equivalentPredicates on '<code>x&gt; 7</code>' will return '    *<code>[y&gt; 7]</code>'    *<li>'<code>R1(x) join R2(y) on x = y join R3(z) on y = z</code>' a call for    * equivalentPredicates on the second join '<code>x&gt; 7</code>' will return    *</ol>    */
 specifier|static
 class|class
 name|JoinConditionBasedPredicateInference
@@ -3334,7 +3334,7 @@ literal|null
 return|;
 block|}
 block|}
-comment|/**      * Given an expression returns all the possible substitutions.      *      *<p>For example, for an expression 'a + b + c' and the following      * equivalences:<pre>      * a : {a, b}      * b : {a, b}      * c : {c, e}      *</pre>      *      *<p>The following Mappings will be returned:      *<pre>      * {a->a, b->a, c->c}      * {a->a, b->a, c->e}      * {a->a, b->b, c->c}      * {a->a, b->b, c->e}      * {a->b, b->a, c->c}      * {a->b, b->a, c->e}      * {a->b, b->b, c->c}      * {a->b, b->b, c->e}      *</pre>      *      *<p>which imply the following inferences:      *<pre>      * a + a + c      * a + a + e      * a + b + c      * a + b + e      * b + a + c      * b + a + e      * b + b + c      * b + b + e      *</pre>      */
+comment|/**      * Given an expression returns all the possible substitutions.      *      *<p>For example, for an expression 'a + b + c' and the following      * equivalences:<pre>      * a : {a, b}      * b : {a, b}      * c : {c, e}      *</pre>      *      *<p>The following Mappings will be returned:      *<pre>      * {a&rarr; a, b&rarr; a, c&rarr; c}      * {a&rarr; a, b&rarr; a, c&rarr; e}      * {a&rarr; a, b&rarr; b, c&rarr; c}      * {a&rarr; a, b&rarr; b, c&rarr; e}      * {a&rarr; b, b&rarr; a, c&rarr; c}      * {a&rarr; b, b&rarr; a, c&rarr; e}      * {a&rarr; b, b&rarr; b, c&rarr; c}      * {a&rarr; b, b&rarr; b, c&rarr; e}      *</pre>      *      *<p>which imply the following inferences:      *<pre>      * a + a + c      * a + a + e      * a + b + c      * a + b + e      * b + a + c      * b + a + e      * b + b + c      * b + b + e      *</pre>      */
 class|class
 name|ExprsItr
 implements|implements

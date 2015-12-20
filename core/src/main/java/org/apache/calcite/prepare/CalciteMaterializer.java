@@ -508,7 +508,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Context for populating a {@link Materialization}.  */
+comment|/**  * Context for populating a {@link Prepare.Materialization}.  */
 end_comment
 
 begin_class

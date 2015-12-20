@@ -213,7 +213,7 @@ return|return
 name|props
 return|;
 block|}
-comment|/**    * Reads "name=value;" or "name=value<EOF>".    *    * @throws SQLException error parsing value    */
+comment|/**    * Reads "name=value;" or "name=value&lt;EOF&gt;".    *    * @throws SQLException error parsing value    */
 name|void
 name|parsePair
 parameter_list|(
@@ -426,7 +426,7 @@ block|}
 block|}
 block|}
 block|}
-comment|/**    * Reads "value;" or "value<EOF>"    *    * @throws SQLException if find an unterminated quoted value    */
+comment|/**    * Reads "value;" or "value&lt;EOF&gt;"    *    * @throws SQLException if find an unterminated quoted value    */
 name|String
 name|parseValue
 parameter_list|()

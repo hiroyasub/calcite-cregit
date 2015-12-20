@@ -3960,7 +3960,7 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/**    * Expander that rewrites floor(decimal) expressions:    *    *<pre>    * if (value< 0)    *     (value-0.99...)/(10^scale)    * else    *     value/(10^scale)    *</pre>    */
+comment|/**    * Expander that rewrites floor(decimal) expressions:    *    *<pre>    * if (value&lt; 0)    *     (value - 0.99...) / (10^scale)    * else    *     value / (10 ^ scale)    *</pre>    */
 specifier|private
 class|class
 name|FloorExpander
@@ -4154,7 +4154,7 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/**    * Expander that rewrites ceiling(decimal) expressions:    *    *<pre>    * if (value> 0)    *     (value+0.99...)/(10^scale)    * else    *     value/(10^scale)    *</pre>    */
+comment|/**    * Expander that rewrites ceiling(decimal) expressions:    *    *<pre>    * if (value&gt; 0)    *     (value + 0.99...) / (10 ^ scale)    * else    *     value / (10 ^ scale)    *</pre>    */
 specifier|private
 class|class
 name|CeilExpander

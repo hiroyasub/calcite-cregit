@@ -2986,7 +2986,7 @@ return|return
 name|substitutions
 return|;
 block|}
-comment|/**    * Represents a replacement action: before => after.    */
+comment|/**    * Represents a replacement action: before&rarr; after.    */
 specifier|private
 specifier|static
 class|class
