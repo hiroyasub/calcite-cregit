@@ -860,7 +860,7 @@ name|NoSuchStatementException
 throws|,
 name|MissingResultsException
 function_decl|;
-comment|/** Executes a prepared statement.    *    * @param h Statement handle    * @param parameterValues A list of parameter values; may be empty, not null    * @param maxRowCount Maximum number of rows to return; negative means    * no limit    * @return Frame, or null if there are no more    */
+comment|/** Executes a prepared statement.    *    * @param h Statement handle    * @param parameterValues A list of parameter values; may be empty, not null    * @param maxRowCount Maximum number of rows to return; negative means    * no limit    * @return Execute result    */
 name|ExecuteResult
 name|execute
 parameter_list|(
