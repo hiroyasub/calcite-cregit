@@ -174,7 +174,7 @@ literal|"Expected:\n"
 operator|+
 name|expected
 operator|+
-literal|"\nActual:\n "
+literal|"\nActual:\n"
 operator|+
 name|actual
 operator|+
