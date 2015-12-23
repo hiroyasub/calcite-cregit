@@ -221,6 +221,18 @@ begin_import
 import|import static
 name|org
 operator|.
+name|hamcrest
+operator|.
+name|CoreMatchers
+operator|.
+name|notNullValue
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
 name|junit
 operator|.
 name|Assert
@@ -575,11 +587,12 @@ name|findBestExp
 argument_list|()
 expr_stmt|;
 block|}
-name|assertTrue
+name|assertThat
 argument_list|(
 name|relBefore
-operator|!=
-literal|null
+argument_list|,
+name|notNullValue
+argument_list|()
 argument_list|)
 expr_stmt|;
 name|String
@@ -603,6 +616,13 @@ argument_list|,
 literal|"${planBefore}"
 argument_list|,
 name|planBefore
+argument_list|)
+expr_stmt|;
+name|SqlToRelTestBase
+operator|.
+name|assertValid
+argument_list|(
+name|relBefore
 argument_list|)
 expr_stmt|;
 name|planner
@@ -682,6 +702,13 @@ argument_list|)
 throw|;
 block|}
 block|}
+name|SqlToRelTestBase
+operator|.
+name|assertValid
+argument_list|(
+name|relAfter
+argument_list|)
+expr_stmt|;
 block|}
 block|}
 end_class

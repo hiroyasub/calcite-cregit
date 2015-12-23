@@ -1255,7 +1255,10 @@ name|RelOptUtil
 operator|.
 name|getFieldTypeList
 argument_list|(
-name|newJoinRel
+name|relBuilder
+operator|.
+name|peek
+argument_list|()
 operator|.
 name|getRowType
 argument_list|()
