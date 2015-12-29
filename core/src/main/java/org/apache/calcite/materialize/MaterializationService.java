@@ -1026,6 +1026,8 @@ argument_list|,
 name|viewSql
 argument_list|,
 name|rowType
+argument_list|,
+name|viewSchemaPath
 argument_list|)
 decl_stmt|;
 name|actor
@@ -1938,6 +1940,10 @@ argument_list|,
 name|materialization
 operator|.
 name|sql
+argument_list|,
+name|materialization
+operator|.
+name|viewSchemaPath
 argument_list|)
 argument_list|)
 expr_stmt|;

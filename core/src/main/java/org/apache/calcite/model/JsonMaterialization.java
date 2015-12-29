@@ -15,6 +15,16 @@ name|model
 package|;
 end_package
 
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|List
+import|;
+end_import
+
 begin_comment
 comment|/**  * Element that describes how a table is a materialization of a query.  *  *<p>Occurs within {@link JsonSchema#materializations}.  *  * @see JsonRoot Description of schema elements  */
 end_comment
@@ -36,6 +46,13 @@ comment|/** SQL query that defines the materialization.    *    *<p>Must be a st
 specifier|public
 name|Object
 name|sql
+decl_stmt|;
+specifier|public
+name|List
+argument_list|<
+name|String
+argument_list|>
+name|viewSchemaPath
 decl_stmt|;
 specifier|public
 name|void

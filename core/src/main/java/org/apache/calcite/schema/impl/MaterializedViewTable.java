@@ -531,6 +531,17 @@ argument_list|,
 name|viewSql
 argument_list|,
 name|viewSchemaPath
+operator|!=
+literal|null
+condition|?
+name|viewSchemaPath
+else|:
+name|schema
+operator|.
+name|path
+argument_list|(
+literal|null
+argument_list|)
 argument_list|,
 name|Boolean
 operator|.

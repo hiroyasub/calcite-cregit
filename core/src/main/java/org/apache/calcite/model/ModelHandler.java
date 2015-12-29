@@ -1864,7 +1864,9 @@ operator|.
 name|getSql
 argument_list|()
 argument_list|,
-literal|null
+name|jsonMaterialization
+operator|.
+name|viewSchemaPath
 argument_list|,
 name|jsonMaterialization
 operator|.

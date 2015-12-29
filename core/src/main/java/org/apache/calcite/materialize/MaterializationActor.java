@@ -214,6 +214,13 @@ specifier|final
 name|RelDataType
 name|rowType
 decl_stmt|;
+specifier|final
+name|List
+argument_list|<
+name|String
+argument_list|>
+name|viewSchemaPath
+decl_stmt|;
 comment|/** Creates a materialization.      *      * @param key  Unique identifier of this materialization      * @param materializedTable Table that currently materializes the query.      *                          That is, executing "select * from table" will      *                          give the same results as executing the query.      *                          May be null when the materialization is created;      *                          materialization service will change the value as      * @param sql  Query that is materialized      * @param rowType Row type      */
 name|Materialization
 parameter_list|(
@@ -233,6 +240,12 @@ name|sql
 parameter_list|,
 name|RelDataType
 name|rowType
+parameter_list|,
+name|List
+argument_list|<
+name|String
+argument_list|>
+name|viewSchemaPath
 parameter_list|)
 block|{
 name|this
@@ -282,6 +295,12 @@ operator|.
 name|rowType
 operator|=
 name|rowType
+expr_stmt|;
+name|this
+operator|.
+name|viewSchemaPath
+operator|=
+name|viewSchemaPath
 expr_stmt|;
 block|}
 block|}
