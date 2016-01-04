@@ -366,6 +366,73 @@ block|,
 comment|/** The internal {@code GROUP_ID()} function. */
 name|GROUP_ID
 block|,
+comment|// Aggregate functions
+comment|/** The {@code COUNT} aggregate function. */
+name|COUNT
+block|,
+comment|/** The {@code SUM} aggregate function. */
+name|SUM
+block|,
+comment|/** The {@code SUM0} aggregate function. */
+name|SUM0
+block|,
+comment|/** The {@code MIN} aggregate function. */
+name|MIN
+block|,
+comment|/** The {@code MAX} aggregate function. */
+name|MAX
+block|,
+comment|/** The {@code LEAD} aggregate function. */
+name|LEAD
+block|,
+comment|/** The {@code LAG} aggregate function. */
+name|LAG
+block|,
+comment|/** The {@code FIRST_VALUE} aggregate function. */
+name|FIRST_VALUE
+block|,
+comment|/** The {@code LAST_VALUE} aggregate function. */
+name|LAST_VALUE
+block|,
+comment|/** The {@code COVAR_POP} aggregate function. */
+name|COVAR_POP
+block|,
+comment|/** The {@code COVAR_SAMP} aggregate function. */
+name|COVAR_SAMP
+block|,
+comment|/** The {@code REGR_SXX} aggregate function. */
+name|REGR_SXX
+block|,
+comment|/** The {@code REGR_SYY} aggregate function. */
+name|REGR_SYY
+block|,
+comment|/** The {@code AVG} aggregate function. */
+name|AVG
+block|,
+comment|/** The {@code STDDEV_POP} aggregate function. */
+name|STDDEV_POP
+block|,
+comment|/** The {@code STDDEV_SAMP} aggregate function. */
+name|STDDEV_SAMP
+block|,
+comment|/** The {@code VAR_POP} aggregate function. */
+name|VAR_POP
+block|,
+comment|/** The {@code VAR_SAMP} aggregate function. */
+name|VAR_SAMP
+block|,
+comment|/** The {@code NTILE} aggregate function. */
+name|NTILE
+block|,
+comment|/** The {@code COLLECT} aggregate function. */
+name|COLLECT
+block|,
+comment|/** The {@code FUSION} aggregate function. */
+name|FUSION
+block|,
+comment|/** The {@code SINGLE_VALUE} aggregate function. */
+name|SINGLE_VALUE
+block|,
 comment|// DDL and session control statements follow. The list is not exhaustive: feel
 comment|// free to add more.
 comment|/** {@code COMMIT} session control statement. */
@@ -440,7 +507,66 @@ argument_list|,
 name|EXCEPT
 argument_list|)
 decl_stmt|;
-comment|/**    * Category consisting of all expression operators.    *    *<p>A node is an expression if it is NOT one of the following:    * {@link #AS},    * {@link #DESCENDING},    * {@link #SELECT},    * {@link #JOIN},    * {@link #OTHER_FUNCTION},    * {@link #CAST},    * {@link #TRIM},    * {@link #LITERAL_CHAIN},    * {@link #JDBC_FN},    * {@link #PRECEDING},    * {@link #FOLLOWING},    * {@link #ORDER_BY},    * {@link #COLLECTION_TABLE},    * {@link #TABLESAMPLE}.    */
+comment|/**    * Category consisting of all built-in aggregate functions.    */
+specifier|public
+specifier|static
+specifier|final
+name|EnumSet
+argument_list|<
+name|SqlKind
+argument_list|>
+name|AGGREGATE
+init|=
+name|EnumSet
+operator|.
+name|of
+argument_list|(
+name|COUNT
+argument_list|,
+name|SUM
+argument_list|,
+name|SUM0
+argument_list|,
+name|MIN
+argument_list|,
+name|MAX
+argument_list|,
+name|LEAD
+argument_list|,
+name|LAG
+argument_list|,
+name|FIRST_VALUE
+argument_list|,
+name|LAST_VALUE
+argument_list|,
+name|COVAR_POP
+argument_list|,
+name|COVAR_SAMP
+argument_list|,
+name|REGR_SXX
+argument_list|,
+name|REGR_SYY
+argument_list|,
+name|AVG
+argument_list|,
+name|STDDEV_POP
+argument_list|,
+name|STDDEV_SAMP
+argument_list|,
+name|VAR_POP
+argument_list|,
+name|VAR_SAMP
+argument_list|,
+name|NTILE
+argument_list|,
+name|COLLECT
+argument_list|,
+name|FUSION
+argument_list|,
+name|SINGLE_VALUE
+argument_list|)
+decl_stmt|;
+comment|/**    * Category consisting of all expression operators.    *    *<p>A node is an expression if it is NOT one of the following:    * {@link #AS},    * {@link #ARGUMENT_ASSIGNMENT},    * {@link #DEFAULT},    * {@link #DESCENDING},    * {@link #SELECT},    * {@link #JOIN},    * {@link #OTHER_FUNCTION},    * {@link #CAST},    * {@link #TRIM},    * {@link #LITERAL_CHAIN},    * {@link #JDBC_FN},    * {@link #PRECEDING},    * {@link #FOLLOWING},    * {@link #ORDER_BY},    * {@link #COLLECTION_TABLE},    * {@link #TABLESAMPLE},    * or an aggregate function.    */
 specifier|public
 specifier|static
 specifier|final
@@ -453,6 +579,8 @@ init|=
 name|EnumSet
 operator|.
 name|complementOf
+argument_list|(
+name|concat
 argument_list|(
 name|EnumSet
 operator|.
@@ -511,6 +639,9 @@ argument_list|,
 name|WITH
 argument_list|,
 name|WITH_ITEM
+argument_list|)
+argument_list|,
+name|AGGREGATE
 argument_list|)
 argument_list|)
 decl_stmt|;

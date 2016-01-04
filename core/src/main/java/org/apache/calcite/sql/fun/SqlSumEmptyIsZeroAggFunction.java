@@ -200,7 +200,7 @@ literal|null
 argument_list|,
 name|SqlKind
 operator|.
-name|OTHER_FUNCTION
+name|SUM0
 argument_list|,
 name|ReturnTypes
 operator|.

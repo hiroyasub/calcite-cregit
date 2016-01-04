@@ -173,6 +173,9 @@ extends|extends
 name|SqlAggFunction
 block|{
 comment|//~ Instance fields --------------------------------------------------------
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|private
 specifier|final
 name|RelDataType
@@ -194,7 +197,7 @@ literal|null
 argument_list|,
 name|SqlKind
 operator|.
-name|OTHER_FUNCTION
+name|SUM
 argument_list|,
 name|ReturnTypes
 operator|.
@@ -243,6 +246,9 @@ name|type
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 name|RelDataType
 name|getType

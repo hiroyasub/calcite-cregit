@@ -25,22 +25,6 @@ name|apache
 operator|.
 name|calcite
 operator|.
-name|rel
-operator|.
-name|type
-operator|.
-name|RelDataType
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
 name|sql
 operator|.
 name|SqlAggFunction
@@ -506,20 +490,6 @@ operator|.
 name|validate
 operator|.
 name|SqlModality
-import|;
-end_import
-
-begin_import
-import|import
-name|com
-operator|.
-name|google
-operator|.
-name|common
-operator|.
-name|collect
-operator|.
-name|ImmutableList
 import|;
 end_import
 
@@ -2164,19 +2134,9 @@ init|=
 operator|new
 name|SqlMinMaxAggFunction
 argument_list|(
-name|ImmutableList
+name|SqlKind
 operator|.
-expr|<
-name|RelDataType
-operator|>
-name|of
-argument_list|()
-argument_list|,
-literal|true
-argument_list|,
-name|SqlMinMaxAggFunction
-operator|.
-name|MINMAX_COMPARABLE
+name|MIN
 argument_list|)
 decl_stmt|;
 comment|/**    *<code>MAX</code> aggregate function.    */
@@ -2189,19 +2149,9 @@ init|=
 operator|new
 name|SqlMinMaxAggFunction
 argument_list|(
-name|ImmutableList
+name|SqlKind
 operator|.
-expr|<
-name|RelDataType
-operator|>
-name|of
-argument_list|()
-argument_list|,
-literal|false
-argument_list|,
-name|SqlMinMaxAggFunction
-operator|.
-name|MINMAX_COMPARABLE
+name|MAX
 argument_list|)
 decl_stmt|;
 comment|/**    *<code>LAST_VALUE</code> aggregate function.    */
@@ -2214,7 +2164,9 @@ init|=
 operator|new
 name|SqlFirstLastValueAggFunction
 argument_list|(
-literal|false
+name|SqlKind
+operator|.
+name|LAST_VALUE
 argument_list|)
 decl_stmt|;
 comment|/**    *<code>FIRST_VALUE</code> aggregate function.    */
@@ -2227,7 +2179,9 @@ init|=
 operator|new
 name|SqlFirstLastValueAggFunction
 argument_list|(
-literal|true
+name|SqlKind
+operator|.
+name|FIRST_VALUE
 argument_list|)
 decl_stmt|;
 comment|/**    *<code>LEAD</code> aggregate function.    */
@@ -2240,7 +2194,9 @@ init|=
 operator|new
 name|SqlLeadLagAggFunction
 argument_list|(
-literal|true
+name|SqlKind
+operator|.
+name|LEAD
 argument_list|)
 decl_stmt|;
 comment|/**    *<code>LAG</code> aggregate function.    */
@@ -2253,7 +2209,9 @@ init|=
 operator|new
 name|SqlLeadLagAggFunction
 argument_list|(
-literal|false
+name|SqlKind
+operator|.
+name|LAG
 argument_list|)
 decl_stmt|;
 comment|/**    *<code>NTILE</code> aggregate function.    */
@@ -2290,11 +2248,7 @@ init|=
 operator|new
 name|SqlAvgAggFunction
 argument_list|(
-literal|null
-argument_list|,
-name|SqlAvgAggFunction
-operator|.
-name|Subtype
+name|SqlKind
 operator|.
 name|AVG
 argument_list|)
@@ -2309,11 +2263,7 @@ init|=
 operator|new
 name|SqlAvgAggFunction
 argument_list|(
-literal|null
-argument_list|,
-name|SqlAvgAggFunction
-operator|.
-name|Subtype
+name|SqlKind
 operator|.
 name|STDDEV_POP
 argument_list|)
@@ -2328,11 +2278,7 @@ init|=
 operator|new
 name|SqlCovarAggFunction
 argument_list|(
-literal|null
-argument_list|,
-name|SqlCovarAggFunction
-operator|.
-name|Subtype
+name|SqlKind
 operator|.
 name|REGR_SXX
 argument_list|)
@@ -2347,11 +2293,7 @@ init|=
 operator|new
 name|SqlCovarAggFunction
 argument_list|(
-literal|null
-argument_list|,
-name|SqlCovarAggFunction
-operator|.
-name|Subtype
+name|SqlKind
 operator|.
 name|REGR_SYY
 argument_list|)
@@ -2366,11 +2308,7 @@ init|=
 operator|new
 name|SqlCovarAggFunction
 argument_list|(
-literal|null
-argument_list|,
-name|SqlCovarAggFunction
-operator|.
-name|Subtype
+name|SqlKind
 operator|.
 name|COVAR_POP
 argument_list|)
@@ -2385,11 +2323,7 @@ init|=
 operator|new
 name|SqlCovarAggFunction
 argument_list|(
-literal|null
-argument_list|,
-name|SqlCovarAggFunction
-operator|.
-name|Subtype
+name|SqlKind
 operator|.
 name|COVAR_SAMP
 argument_list|)
@@ -2404,11 +2338,7 @@ init|=
 operator|new
 name|SqlAvgAggFunction
 argument_list|(
-literal|null
-argument_list|,
-name|SqlAvgAggFunction
-operator|.
-name|Subtype
+name|SqlKind
 operator|.
 name|STDDEV_SAMP
 argument_list|)
@@ -2423,11 +2353,7 @@ init|=
 operator|new
 name|SqlAvgAggFunction
 argument_list|(
-literal|null
-argument_list|,
-name|SqlAvgAggFunction
-operator|.
-name|Subtype
+name|SqlKind
 operator|.
 name|VAR_POP
 argument_list|)
@@ -2442,11 +2368,7 @@ init|=
 operator|new
 name|SqlAvgAggFunction
 argument_list|(
-literal|null
-argument_list|,
-name|SqlAvgAggFunction
-operator|.
-name|Subtype
+name|SqlKind
 operator|.
 name|VAR_SAMP
 argument_list|)
@@ -4158,9 +4080,11 @@ name|SqlAggFunction
 argument_list|(
 literal|"COLLECT"
 argument_list|,
+literal|null
+argument_list|,
 name|SqlKind
 operator|.
-name|OTHER_FUNCTION
+name|COLLECT
 argument_list|,
 name|ReturnTypes
 operator|.
@@ -4175,6 +4099,10 @@ argument_list|,
 name|SqlFunctionCategory
 operator|.
 name|SYSTEM
+argument_list|,
+literal|false
+argument_list|,
+literal|false
 argument_list|)
 block|{       }
 decl_stmt|;
@@ -4186,13 +4114,15 @@ name|SqlFunction
 name|FUSION
 init|=
 operator|new
-name|SqlFunction
+name|SqlAggFunction
 argument_list|(
 literal|"FUSION"
 argument_list|,
+literal|null
+argument_list|,
 name|SqlKind
 operator|.
-name|OTHER_FUNCTION
+name|FUSION
 argument_list|,
 name|ReturnTypes
 operator|.
@@ -4207,7 +4137,12 @@ argument_list|,
 name|SqlFunctionCategory
 operator|.
 name|SYSTEM
+argument_list|,
+literal|false
+argument_list|,
+literal|false
 argument_list|)
+block|{       }
 decl_stmt|;
 comment|/**    * The sequence next value function:<code>NEXT VALUE FOR sequence</code>    */
 specifier|public

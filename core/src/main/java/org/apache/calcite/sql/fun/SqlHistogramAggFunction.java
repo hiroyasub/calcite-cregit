@@ -148,7 +148,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  *<code>HistogramAgg</code> is base operator which supports the Histogram  * MIN/MAX aggregatoin functions. which returns the sum of the values which go  * into it. It has precisely one argument of numeric type (<code>int</code>,  *<code>long</code>,<code>float</code>,<code>double</code>) results are  * retrived with (<code>HistogramMin</code>) and (<code>HistogramMax</code>)  */
+comment|/**  *<code>HISTOGRAM</code> is the base operator that supports the Histogram  * MIN/MAX aggregate functions. It returns the sum of the values which go  * into it. It has precisely one argument of numeric type (<code>int</code>,  *<code>long</code>,<code>float</code>,<code>double</code>); results are  * retrieved using (<code>HistogramMin</code>) and (<code>HistogramMax</code>).  */
 end_comment
 
 begin_class
@@ -159,6 +159,9 @@ extends|extends
 name|SqlAggFunction
 block|{
 comment|//~ Instance fields --------------------------------------------------------
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|private
 specifier|final
 name|RelDataType
@@ -229,6 +232,9 @@ name|type
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 name|RelDataType
 name|getType

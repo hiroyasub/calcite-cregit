@@ -261,7 +261,7 @@ literal|null
 argument_list|,
 name|SqlKind
 operator|.
-name|OTHER_FUNCTION
+name|COUNT
 argument_list|,
 name|ReturnTypes
 operator|.
