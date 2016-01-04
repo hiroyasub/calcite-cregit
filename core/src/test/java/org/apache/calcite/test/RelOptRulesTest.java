@@ -329,22 +329,6 @@ name|rel
 operator|.
 name|rules
 operator|.
-name|AggregateConstantKeyRule
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|rel
-operator|.
-name|rules
-operator|.
 name|AggregateExpandDistinctAggregatesRule
 import|;
 end_import
@@ -8827,9 +8811,9 @@ argument_list|()
 operator|.
 name|addRuleInstance
 argument_list|(
-name|AggregateConstantKeyRule
+name|AggregateProjectPullUpConstantsRule
 operator|.
-name|INSTANCE
+name|INSTANCE2
 argument_list|)
 operator|.
 name|build
@@ -8859,7 +8843,7 @@ name|sql
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Tests {@link AggregateConstantKeyRule} where reduction is not possible    * because "deptno" is the only key. */
+comment|/** Tests {@link AggregateProjectPullUpConstantsRule} where reduction is not    * possible because "deptno" is the only key. */
 annotation|@
 name|Test
 specifier|public
@@ -8877,9 +8861,9 @@ argument_list|()
 operator|.
 name|addRuleInstance
 argument_list|(
-name|AggregateConstantKeyRule
+name|AggregateProjectPullUpConstantsRule
 operator|.
-name|INSTANCE
+name|INSTANCE2
 argument_list|)
 operator|.
 name|build
@@ -8909,7 +8893,7 @@ name|sql
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Tests {@link AggregateConstantKeyRule} where both keys are constants but    * only one can be removed. */
+comment|/** Tests {@link AggregateProjectPullUpConstantsRule} where both keys are    * constants but only one can be removed. */
 annotation|@
 name|Test
 specifier|public
@@ -8927,9 +8911,9 @@ argument_list|()
 operator|.
 name|addRuleInstance
 argument_list|(
-name|AggregateConstantKeyRule
+name|AggregateProjectPullUpConstantsRule
 operator|.
-name|INSTANCE
+name|INSTANCE2
 argument_list|)
 operator|.
 name|build
