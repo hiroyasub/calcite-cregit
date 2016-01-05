@@ -1690,6 +1690,12 @@ name|assertEquals
 argument_list|(
 name|expected
 argument_list|,
+name|resultString
+operator|==
+literal|null
+condition|?
+literal|null
+else|:
 name|Util
 operator|.
 name|toLinux

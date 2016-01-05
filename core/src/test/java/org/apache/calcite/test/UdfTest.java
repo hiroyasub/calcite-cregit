@@ -409,6 +409,25 @@ literal|"           className: '"
 operator|+
 name|Smalls
 operator|.
+name|CountArgs1NullableFunction
+operator|.
+name|class
+operator|.
+name|getName
+argument_list|()
+operator|+
+literal|"'\n"
+operator|+
+literal|"         },\n"
+operator|+
+literal|"         {\n"
+operator|+
+literal|"           name: 'COUNT_ARGS',\n"
+operator|+
+literal|"           className: '"
+operator|+
+name|Smalls
+operator|.
 name|CountArgs2Function
 operator|.
 name|class
@@ -1032,6 +1051,39 @@ operator|.
 name|returns
 argument_list|(
 literal|"P0=0; P1=1; P2=2\n"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testUdfOverloadedNullable
+parameter_list|()
+block|{
+specifier|final
+name|CalciteAssert
+operator|.
+name|AssertThat
+name|with
+init|=
+name|withUdf
+argument_list|()
+decl_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"values (\"adhoc\".count_args(),\n"
+operator|+
+literal|" \"adhoc\".count_args(cast(null as smallint)),\n"
+operator|+
+literal|" \"adhoc\".count_args(0, 0))"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"EXPR$0=0; EXPR$1=-1; EXPR$2=2\n"
 argument_list|)
 expr_stmt|;
 block|}
@@ -2448,6 +2500,204 @@ operator|.
 name|returnsValue
 argument_list|(
 literal|"-1"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1041">[CALCITE-1041]    * User-defined function returns DATE or TIMESTAMP value</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testReturnDate
+parameter_list|()
+block|{
+specifier|final
+name|CalciteAssert
+operator|.
+name|AssertThat
+name|with
+init|=
+name|withUdf
+argument_list|()
+decl_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"values \"adhoc\".\"toDateFun\"(0)"
+argument_list|)
+operator|.
+name|returnsValue
+argument_list|(
+literal|"1970-01-01"
+argument_list|)
+expr_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"values \"adhoc\".\"toDateFun\"(1)"
+argument_list|)
+operator|.
+name|returnsValue
+argument_list|(
+literal|"1970-01-02"
+argument_list|)
+expr_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"values \"adhoc\".\"toDateFun\"(cast(null as bigint))"
+argument_list|)
+operator|.
+name|returnsValue
+argument_list|(
+literal|null
+argument_list|)
+expr_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"values \"adhoc\".\"toTimeFun\"(0)"
+argument_list|)
+operator|.
+name|returnsValue
+argument_list|(
+literal|"00:00:00"
+argument_list|)
+expr_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"values \"adhoc\".\"toTimeFun\"(90000)"
+argument_list|)
+operator|.
+name|returnsValue
+argument_list|(
+literal|"00:01:30"
+argument_list|)
+expr_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"values \"adhoc\".\"toTimeFun\"(cast(null as bigint))"
+argument_list|)
+operator|.
+name|returnsValue
+argument_list|(
+literal|null
+argument_list|)
+expr_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"values \"adhoc\".\"toTimestampFun\"(0)"
+argument_list|)
+operator|.
+name|returnsValue
+argument_list|(
+literal|"1970-01-01 00:00:00"
+argument_list|)
+expr_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"values \"adhoc\".\"toTimestampFun\"(86490000)"
+argument_list|)
+operator|.
+name|returnsValue
+argument_list|(
+literal|"1970-01-02 00:01:30"
+argument_list|)
+expr_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"values \"adhoc\".\"toTimestampFun\"(cast(null as bigint))"
+argument_list|)
+operator|.
+name|returnsValue
+argument_list|(
+literal|null
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1041">[CALCITE-1041]    * User-defined function returns DATE or TIMESTAMP value</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testReturnDate2
+parameter_list|()
+block|{
+specifier|final
+name|CalciteAssert
+operator|.
+name|AssertThat
+name|with
+init|=
+name|withUdf
+argument_list|()
+decl_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"select * from (values 0) as t(c)\n"
+operator|+
+literal|"where \"adhoc\".\"toTimestampFun\"(c) in (\n"
+operator|+
+literal|"  cast('1970-01-01 00:00:00' as timestamp),\n"
+operator|+
+literal|"  cast('1997-02-01 00:00:00' as timestamp))"
+argument_list|)
+operator|.
+name|returnsValue
+argument_list|(
+literal|"0"
+argument_list|)
+expr_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"select * from (values 0) as t(c)\n"
+operator|+
+literal|"where \"adhoc\".\"toTimestampFun\"(c) in (\n"
+operator|+
+literal|"  timestamp '1970-01-01 00:00:00',\n"
+operator|+
+literal|"  timestamp '1997-02-01 00:00:00')"
+argument_list|)
+operator|.
+name|returnsValue
+argument_list|(
+literal|"0"
+argument_list|)
+expr_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"select * from (values 0) as t(c)\n"
+operator|+
+literal|"where \"adhoc\".\"toTimestampFun\"(c) in (\n"
+operator|+
+literal|"  '1970-01-01 00:00:00',\n"
+operator|+
+literal|"  '1997-02-01 00:00:00')"
+argument_list|)
+operator|.
+name|returnsValue
+argument_list|(
+literal|"0"
 argument_list|)
 expr_stmt|;
 block|}

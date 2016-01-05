@@ -2193,11 +2193,13 @@ operator|&&
 operator|!
 name|SqlTypeUtil
 operator|.
-name|canAssignFrom
+name|canCastFrom
 argument_list|(
 name|paramType
 argument_list|,
 name|argType
+argument_list|,
+literal|false
 argument_list|)
 condition|)
 block|{

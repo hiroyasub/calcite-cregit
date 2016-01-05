@@ -52,6 +52,10 @@ name|Utilities
 parameter_list|()
 block|{
 block|}
+comment|/** @deprecated Use {@link java.util.Objects#equals}. */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 specifier|static
 name|boolean

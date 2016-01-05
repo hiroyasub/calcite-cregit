@@ -5237,6 +5237,7 @@ name|class
 argument_list|)
 return|;
 block|}
+comment|/** Converts the Java type used for UDF parameters of SQL DATE type    * ({@link java.sql.Date}) to internal representation (int).    *    *<p>Converse of {@link #internalToDate(int)}. */
 specifier|public
 specifier|static
 name|int
@@ -5368,6 +5369,7 @@ name|LOCAL_TZ
 argument_list|)
 return|;
 block|}
+comment|/** Converts the Java type used for UDF parameters of SQL TIME type    * ({@link java.sql.Time}) to internal representation (int).    *    *<p>Converse of {@link #internalToTime(int)}. */
 specifier|public
 specifier|static
 name|int
@@ -5516,6 +5518,7 @@ name|class
 argument_list|)
 return|;
 block|}
+comment|/** Converts the Java type used for UDF parameters of SQL TIMESTAMP type    * ({@link java.sql.Timestamp}) to internal representation (long).    *    *<p>Converse of {@link #internalToTimestamp(long)}. */
 specifier|public
 specifier|static
 name|long
@@ -6059,9 +6062,19 @@ name|Date
 name|internalToDate
 parameter_list|(
 name|int
-name|x
+name|v
 parameter_list|)
 block|{
+specifier|final
+name|long
+name|t
+init|=
+name|v
+operator|*
+name|DateTimeUtils
+operator|.
+name|MILLIS_PER_DAY
+decl_stmt|;
 return|return
 operator|new
 name|java
@@ -6070,11 +6083,14 @@ name|sql
 operator|.
 name|Date
 argument_list|(
-name|x
-operator|*
-name|DateTimeUtils
+name|t
+operator|-
+name|LOCAL_TZ
 operator|.
-name|MILLIS_PER_DAY
+name|getOffset
+argument_list|(
+name|t
+argument_list|)
 argument_list|)
 return|;
 block|}
@@ -6089,11 +6105,11 @@ name|Date
 name|internalToDate
 parameter_list|(
 name|Integer
-name|x
+name|v
 parameter_list|)
 block|{
 return|return
-name|x
+name|v
 operator|==
 literal|null
 condition|?
@@ -6101,7 +6117,7 @@ literal|null
 else|:
 name|internalToDate
 argument_list|(
-name|x
+name|v
 operator|.
 name|intValue
 argument_list|()
@@ -6119,7 +6135,7 @@ name|Time
 name|internalToTime
 parameter_list|(
 name|int
-name|x
+name|v
 parameter_list|)
 block|{
 return|return
@@ -6130,7 +6146,14 @@ name|sql
 operator|.
 name|Time
 argument_list|(
-name|x
+name|v
+operator|-
+name|LOCAL_TZ
+operator|.
+name|getOffset
+argument_list|(
+name|v
+argument_list|)
 argument_list|)
 return|;
 block|}
@@ -6144,11 +6167,11 @@ name|Time
 name|internalToTime
 parameter_list|(
 name|Integer
-name|x
+name|v
 parameter_list|)
 block|{
 return|return
-name|x
+name|v
 operator|==
 literal|null
 condition|?
@@ -6156,7 +6179,7 @@ literal|null
 else|:
 name|internalToTime
 argument_list|(
-name|x
+name|v
 operator|.
 name|intValue
 argument_list|()
@@ -6174,7 +6197,7 @@ name|Timestamp
 name|internalToTimestamp
 parameter_list|(
 name|long
-name|x
+name|v
 parameter_list|)
 block|{
 return|return
@@ -6185,7 +6208,14 @@ name|sql
 operator|.
 name|Timestamp
 argument_list|(
-name|x
+name|v
+operator|-
+name|LOCAL_TZ
+operator|.
+name|getOffset
+argument_list|(
+name|v
+argument_list|)
 argument_list|)
 return|;
 block|}
@@ -6199,11 +6229,11 @@ name|Timestamp
 name|internalToTimestamp
 parameter_list|(
 name|Long
-name|x
+name|v
 parameter_list|)
 block|{
 return|return
-name|x
+name|v
 operator|==
 literal|null
 condition|?
@@ -6211,7 +6241,7 @@ literal|null
 else|:
 name|internalToTimestamp
 argument_list|(
-name|x
+name|v
 operator|.
 name|longValue
 argument_list|()

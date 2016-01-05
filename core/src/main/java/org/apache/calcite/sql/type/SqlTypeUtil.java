@@ -2277,6 +2277,9 @@ throw|;
 block|}
 block|}
 comment|/**    * @return true if type has a representation as a Java primitive (ignoring    * nullability)    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 specifier|static
 name|boolean
@@ -2347,6 +2350,9 @@ return|;
 block|}
 block|}
 comment|/**    * @return class name of the wrapper for the primitive data type.    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 specifier|static
 name|String
@@ -2398,6 +2404,7 @@ return|return
 literal|"Boolean"
 return|;
 default|default:
+comment|//noinspection deprecation
 return|return
 name|getNumericJavaClassName
 argument_list|(
@@ -2407,6 +2414,9 @@ return|;
 block|}
 block|}
 comment|/**    * @return class name of the numeric data type.    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 specifier|static
 name|String
