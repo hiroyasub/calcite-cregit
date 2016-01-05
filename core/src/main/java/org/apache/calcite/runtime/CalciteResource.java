@@ -2866,6 +2866,18 @@ function_decl|;
 annotation|@
 name|BaseMessage
 argument_list|(
+literal|"FILTER expression must be of type BOOLEAN"
+argument_list|)
+name|ExInst
+argument_list|<
+name|CalciteException
+argument_list|>
+name|filterMustBeBoolean
+parameter_list|()
+function_decl|;
+annotation|@
+name|BaseMessage
+argument_list|(
 literal|"Cannot stream results of a query with no streaming inputs: ''{0}''. At least one input should be convertible to a stream"
 argument_list|)
 name|ExInst

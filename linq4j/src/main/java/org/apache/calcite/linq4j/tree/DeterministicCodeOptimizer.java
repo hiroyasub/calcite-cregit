@@ -51,6 +51,20 @@ end_import
 
 begin_import
 import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|collect
+operator|.
+name|ImmutableSet
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|lang
@@ -99,27 +113,7 @@ name|java
 operator|.
 name|util
 operator|.
-name|Arrays
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
 name|HashMap
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|HashSet
 import|;
 end_import
 
@@ -199,11 +193,7 @@ name|constants
 init|=
 operator|new
 name|IdentityHashMap
-argument_list|<
-name|Expression
-argument_list|,
-name|Boolean
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 comment|/**    * The map that de-duplicates expressions, so the same expressions may reuse    * the same final static fields.    */
@@ -219,11 +209,7 @@ name|dedup
 init|=
 operator|new
 name|HashMap
-argument_list|<
-name|Expression
-argument_list|,
-name|ParameterExpression
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 comment|/**    * The map of all the added final static fields. Allows to identify if the    * name is occupied or not.    */
@@ -239,11 +225,7 @@ name|fieldsByName
 init|=
 operator|new
 name|HashMap
-argument_list|<
-name|String
-argument_list|,
-name|ParameterExpression
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 comment|// Pre-compiled patterns for generation names for the final static fields
@@ -295,18 +277,12 @@ name|Class
 argument_list|>
 name|DETERMINISTIC_CLASSES
 init|=
-operator|new
-name|HashSet
-argument_list|<
-name|Class
-argument_list|>
-argument_list|(
-name|Arrays
+name|ImmutableSet
 operator|.
 expr|<
 name|Class
 operator|>
-name|asList
+name|of
 argument_list|(
 name|Byte
 operator|.
@@ -343,7 +319,6 @@ argument_list|,
 name|Math
 operator|.
 name|class
-argument_list|)
 argument_list|)
 decl_stmt|;
 comment|/**    * Creates a child optimizer.    * Typically a child is created for each class declaration,    * so each optimizer collects fields for exactly one class.    *    * @param parent parent optimizer    */
@@ -1343,6 +1318,16 @@ operator|.
 name|contains
 argument_list|(
 name|klass
+argument_list|)
+operator|||
+name|klass
+operator|.
+name|getCanonicalName
+argument_list|()
+operator|.
+name|equals
+argument_list|(
+literal|"org.apache.calcite.avatica.util.DateTimeUtils"
 argument_list|)
 operator|||
 name|klass
