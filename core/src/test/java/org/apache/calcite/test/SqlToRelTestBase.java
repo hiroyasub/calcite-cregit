@@ -2236,7 +2236,7 @@ name|converter
 operator|.
 name|trimUnusedFields
 argument_list|(
-literal|false
+literal|true
 argument_list|,
 name|root
 operator|.

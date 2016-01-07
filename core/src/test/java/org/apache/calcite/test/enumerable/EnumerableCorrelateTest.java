@@ -163,11 +163,13 @@ name|explainContains
 argument_list|(
 literal|""
 operator|+
-literal|"EnumerableCalc(expr#0..5=[{inputs}], empid=[$t0], name=[$t2])\n"
+literal|"EnumerableCalc(expr#0..3=[{inputs}], empid=[$t0], name=[$t2])\n"
 operator|+
 literal|"  EnumerableCorrelate(correlation=[$cor0], joinType=[INNER], requiredColumns=[{1}])\n"
 operator|+
-literal|"    EnumerableTableScan(table=[[s, emps]])\n"
+literal|"    EnumerableCalc(expr#0..4=[{inputs}], proj#0..2=[{exprs}])\n"
+operator|+
+literal|"      EnumerableTableScan(table=[[s, emps]])\n"
 operator|+
 literal|"    EnumerableAggregate(group=[{0}])\n"
 operator|+

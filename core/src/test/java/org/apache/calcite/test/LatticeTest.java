@@ -895,7 +895,7 @@ literal|""
 operator|+
 literal|"LogicalAggregate(group=[{}], EXPR$0=[COUNT()])\n"
 operator|+
-literal|"  LogicalProject($f0=[0])\n"
+literal|"  LogicalProject(DUMMY=[0])\n"
 operator|+
 literal|"    StarTableScan(table=[[adhoc, star]])\n"
 argument_list|,

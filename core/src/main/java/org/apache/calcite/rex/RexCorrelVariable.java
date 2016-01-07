@@ -61,6 +61,20 @@ name|SqlKind
 import|;
 end_import
 
+begin_import
+import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|base
+operator|.
+name|Preconditions
+import|;
+end_import
+
 begin_comment
 comment|/**  * Reference to the current row of a correlating relational expression.  *  *<p>Correlating variables are introduced when performing nested loop joins.  * Each row is received from one side of the join, a correlating variable is  * assigned a value, and the other side of the join is restarted.</p>  */
 end_comment
@@ -101,7 +115,12 @@ name|this
 operator|.
 name|id
 operator|=
+name|Preconditions
+operator|.
+name|checkNotNull
+argument_list|(
 name|id
+argument_list|)
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
