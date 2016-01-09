@@ -10,6 +10,8 @@ operator|.
 name|apache
 operator|.
 name|calcite
+operator|.
+name|benchmarks
 package|;
 end_package
 
@@ -67,7 +69,7 @@ name|jmh
 operator|.
 name|annotations
 operator|.
-name|BenchmarkMode
+name|Benchmark
 import|;
 end_import
 
@@ -81,7 +83,7 @@ name|jmh
 operator|.
 name|annotations
 operator|.
-name|GenerateMicroBenchmark
+name|BenchmarkMode
 import|;
 end_import
 
@@ -550,7 +552,7 @@ block|}
 block|}
 block|}
 annotation|@
-name|GenerateMicroBenchmark
+name|Benchmark
 specifier|public
 name|String
 name|prepareBindExecute
@@ -648,7 +650,7 @@ name|ename
 return|;
 block|}
 annotation|@
-name|GenerateMicroBenchmark
+name|Benchmark
 specifier|public
 name|String
 name|bindExecute
@@ -727,7 +729,7 @@ name|ename
 return|;
 block|}
 annotation|@
-name|GenerateMicroBenchmark
+name|Benchmark
 specifier|public
 name|String
 name|executeQuery
@@ -812,7 +814,7 @@ name|ename
 return|;
 block|}
 annotation|@
-name|GenerateMicroBenchmark
+name|Benchmark
 specifier|public
 name|String
 name|forEach
