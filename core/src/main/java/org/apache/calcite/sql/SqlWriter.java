@@ -108,6 +108,12 @@ block|,
 comment|/**      * FROM clause (containing various kinds of JOIN).      */
 name|FROM_LIST
 block|,
+comment|/**      * Pair-wise join.      */
+name|JOIN
+argument_list|(
+literal|false
+argument_list|)
+block|,
 comment|/**      * WHERE clause.      */
 name|WHERE_LIST
 block|,
