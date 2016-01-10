@@ -131,6 +131,23 @@ argument_list|(
 literal|60
 argument_list|)
 argument_list|)
+block|,
+comment|/** Unlike the other units, MILLISECOND may not be the unit of a SQL interval.    * Still, it is convenient to use it internally, when converting to and from    * UNIX timestamps. */
+name|MILLISECOND
+argument_list|(
+literal|false
+argument_list|,
+literal|'.'
+argument_list|,
+literal|1
+argument_list|,
+name|BigDecimal
+operator|.
+name|valueOf
+argument_list|(
+literal|1
+argument_list|)
+argument_list|)
 block|;
 specifier|public
 specifier|final
