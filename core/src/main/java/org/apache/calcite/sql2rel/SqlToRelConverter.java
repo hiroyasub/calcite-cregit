@@ -8543,6 +8543,13 @@ name|isExactNumeric
 argument_list|(
 name|type
 argument_list|)
+operator|&&
+name|SqlTypeUtil
+operator|.
+name|hasScale
+argument_list|(
+name|type
+argument_list|)
 condition|)
 block|{
 name|BigDecimal

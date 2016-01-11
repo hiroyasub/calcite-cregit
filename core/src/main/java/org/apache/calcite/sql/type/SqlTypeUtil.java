@@ -1652,6 +1652,27 @@ literal|false
 return|;
 block|}
 block|}
+comment|/** Returns whether a type's scale is set. */
+specifier|public
+specifier|static
+name|boolean
+name|hasScale
+parameter_list|(
+name|RelDataType
+name|type
+parameter_list|)
+block|{
+return|return
+name|type
+operator|.
+name|getScale
+argument_list|()
+operator|!=
+name|Integer
+operator|.
+name|MIN_VALUE
+return|;
+block|}
 comment|/**    * Returns the maximum value of an integral type, as a long value    */
 specifier|public
 specifier|static

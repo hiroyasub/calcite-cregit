@@ -1629,6 +1629,48 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1051">[CALCITE-1051]    * Underflow exception due to scaling IN clause literals</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testInToSemiJoinWithoutCast
+parameter_list|()
+throws|throws
+name|SQLException
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"SELECT e.name\n"
+operator|+
+literal|"FROM emps AS e\n"
+operator|+
+literal|"WHERE e.empno in "
+operator|+
+name|range
+argument_list|(
+literal|130
+argument_list|,
+name|SqlToRelConverter
+operator|.
+name|IN_SUBQUERY_THRESHOLD
+argument_list|)
+decl_stmt|;
+name|checkSql
+argument_list|(
+name|sql
+argument_list|,
+literal|"smart"
+argument_list|,
+name|expect
+argument_list|(
+literal|"NAME=Alice"
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
 specifier|private
 name|String
 name|range
