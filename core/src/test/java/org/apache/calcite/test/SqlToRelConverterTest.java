@@ -1906,7 +1906,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testWithInsideScalarSubquery
+name|testWithInsideScalarSubQuery
 parameter_list|()
 block|{
 specifier|final
@@ -1936,7 +1936,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testWithInsideScalarSubqueryRex
+name|testWithInsideScalarSubQueryRex
 parameter_list|()
 block|{
 specifier|final
@@ -2174,7 +2174,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testUnnestSubquery
+name|testUnnestSubQuery
 parameter_list|()
 block|{
 name|check
@@ -2225,7 +2225,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testMultisetSubquery
+name|testMultisetSubQuery
 parameter_list|()
 block|{
 name|check
@@ -2652,7 +2652,7 @@ name|void
 name|testInValueListLong
 parameter_list|()
 block|{
-comment|// Go over the default threshold of 20 to force a subquery.
+comment|// Go over the default threshold of 20 to force a subQuery.
 name|check
 argument_list|(
 literal|"select empno from emp where deptno in"
@@ -2671,7 +2671,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testInUncorrelatedSubquery
+name|testInUncorrelatedSubQuery
 parameter_list|()
 block|{
 specifier|final
@@ -2697,7 +2697,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testInUncorrelatedSubqueryRex
+name|testInUncorrelatedSubQueryRex
 parameter_list|()
 block|{
 specifier|final
@@ -2728,7 +2728,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testCompositeInUncorrelatedSubqueryRex
+name|testCompositeInUncorrelatedSubQueryRex
 parameter_list|()
 block|{
 specifier|final
@@ -2759,7 +2759,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testNotInUncorrelatedSubquery
+name|testNotInUncorrelatedSubQuery
 parameter_list|()
 block|{
 specifier|final
@@ -2785,7 +2785,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testNotInUncorrelatedSubqueryRex
+name|testNotInUncorrelatedSubQueryRex
 parameter_list|()
 block|{
 specifier|final
@@ -2851,7 +2851,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testInUncorrelatedSubqueryInSelect
+name|testInUncorrelatedSubQueryInSelect
 parameter_list|()
 block|{
 comment|// In the SELECT clause, the value of IN remains in 3-valued logic
@@ -2882,7 +2882,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testInUncorrelatedSubqueryInSelectRex
+name|testInUncorrelatedSubQueryInSelectRex
 parameter_list|()
 block|{
 comment|// In the SELECT clause, the value of IN remains in 3-valued logic
@@ -2918,7 +2918,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testInUncorrelatedSubqueryInHavingRex
+name|testInUncorrelatedSubQueryInHavingRex
 parameter_list|()
 block|{
 specifier|final
@@ -2957,7 +2957,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testUncorrelatedScalarSubqueryInOrderRex
+name|testUncorrelatedScalarSubQueryInOrderRex
 parameter_list|()
 block|{
 specifier|final
@@ -2992,7 +2992,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testUncorrelatedScalarSubqueryInGroupOrderRex
+name|testUncorrelatedScalarSubQueryInGroupOrderRex
 parameter_list|()
 block|{
 specifier|final
@@ -3029,7 +3029,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testUncorrelatedScalarSubqueryInAggregateRex
+name|testUncorrelatedScalarSubQueryInAggregateRex
 parameter_list|()
 block|{
 specifier|final
@@ -3058,12 +3058,12 @@ literal|"${plan}"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Plan should be as {@link #testInUncorrelatedSubqueryInSelect}, but with    * an extra NOT. Both queries require 3-valued logic. */
+comment|/** Plan should be as {@link #testInUncorrelatedSubQueryInSelect}, but with    * an extra NOT. Both queries require 3-valued logic. */
 annotation|@
 name|Test
 specifier|public
 name|void
-name|testNotInUncorrelatedSubqueryInSelect
+name|testNotInUncorrelatedSubQueryInSelect
 parameter_list|()
 block|{
 specifier|final
@@ -3091,7 +3091,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testNotInUncorrelatedSubqueryInSelectRex
+name|testNotInUncorrelatedSubQueryInSelectRex
 parameter_list|()
 block|{
 specifier|final
@@ -3125,7 +3125,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testNotInUncorrelatedSubqueryInSelectNotNull
+name|testNotInUncorrelatedSubQueryInSelectNotNull
 parameter_list|()
 block|{
 specifier|final
@@ -3153,7 +3153,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testNotInUncorrelatedSubqueryInSelectNotNullRex
+name|testNotInUncorrelatedSubQueryInSelectNotNullRex
 parameter_list|()
 block|{
 specifier|final
@@ -3573,10 +3573,10 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testUnionSubquery
+name|testUnionSubQuery
 parameter_list|()
 block|{
-comment|// union of subquery, inside from list, also values
+comment|// union of subQuery, inside from list, also values
 name|check
 argument_list|(
 literal|"select deptno from emp as emp0 cross join\n"
@@ -4069,7 +4069,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testGroupByCaseSubquery
+name|testGroupByCaseSubQuery
 parameter_list|()
 block|{
 name|sql
@@ -4092,7 +4092,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testAggCaseSubquery
+name|testAggCaseSubQuery
 parameter_list|()
 block|{
 name|sql
@@ -4131,7 +4131,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testAggScalarSubquery
+name|testAggScalarSubQuery
 parameter_list|()
 block|{
 name|sql
@@ -4145,26 +4145,67 @@ literal|"${plan}"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Test aggregate function on a CASE expression involving IN with a    * sub-query */
-annotation|@
-name|Ignore
-argument_list|(
-literal|"[CALCITE-551] Sub-query inside aggregate function"
-argument_list|)
+comment|/** Test aggregate function on a CASE expression involving IN with a    * sub-query.    *    *<p>Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-551">[CALCITE-551]    * Sub-query inside aggregate function</a>.    */
 annotation|@
 name|Test
 specifier|public
 name|void
-name|testAggCaseInSubquery
+name|testAggCaseInSubQuery
 parameter_list|()
 block|{
+specifier|final
+name|String
 name|sql
-argument_list|(
+init|=
 literal|"SELECT SUM(\n"
 operator|+
 literal|"  CASE WHEN deptno IN (SELECT deptno FROM dept) THEN 1 ELSE 0 END)\n"
 operator|+
 literal|"FROM emp"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|expand
+argument_list|(
+literal|false
+argument_list|)
+operator|.
+name|convertsTo
+argument_list|(
+literal|"${plan}"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testCorrelatedSubQueryInAggregate
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"SELECT SUM(\n"
+operator|+
+literal|"  (select char_length(name) from dept\n"
+operator|+
+literal|"   where dept.deptno = emp.empno))\n"
+operator|+
+literal|"FROM emp"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|expand
+argument_list|(
+literal|false
 argument_list|)
 operator|.
 name|convertsTo
@@ -4399,7 +4440,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testSubqueryAggreFunctionFollowedBySimpleOperation
+name|testSubQueryAggregateFunctionFollowedBySimpleOperation
 parameter_list|()
 block|{
 name|sql
@@ -4422,7 +4463,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testSubqueryValues
+name|testSubQueryValues
 parameter_list|()
 block|{
 name|sql
@@ -4445,7 +4486,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testSubqueryLimitOne
+name|testSubQueryLimitOne
 parameter_list|()
 block|{
 name|sql
@@ -4470,7 +4511,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testIdenticalExpressionInSubquery
+name|testIdenticalExpressionInSubQuery
 parameter_list|()
 block|{
 name|sql
@@ -4520,7 +4561,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testHavingInSubqueryWithAggrFunction
+name|testHavingInSubQueryWithAggrFunction
 parameter_list|()
 block|{
 name|sql
@@ -4702,12 +4743,12 @@ literal|"${plan}"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-770">[CALCITE-770]    * variant involving join with subquery that contains window function and    * GROUP BY</a>.    */
+comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-770">[CALCITE-770]    * variant involving join with subQuery that contains window function and    * GROUP BY</a>.    */
 annotation|@
 name|Test
 specifier|public
 name|void
-name|testWindowAggInSubqueryJoin
+name|testWindowAggInSubQueryJoin
 parameter_list|()
 block|{
 name|sql
@@ -4731,7 +4772,7 @@ literal|"${plan}"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Test case (correlated scalar aggregate subquery) for    *<a href="https://issues.apache.org/jira/browse/CALCITE-714">[CALCITE-714]    * When de-correlating, push join condition into subquery</a>.    */
+comment|/**    * Test case (correlated scalar aggregate subQuery) for    *<a href="https://issues.apache.org/jira/browse/CALCITE-714">[CALCITE-714]    * When de-correlating, push join condition into subQuery</a>.    */
 annotation|@
 name|Test
 specifier|public
@@ -4810,7 +4851,7 @@ literal|"${plan}"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Test case (correlated EXISTS subquery) for    *<a href="https://issues.apache.org/jira/browse/CALCITE-714">[CALCITE-714]    * When de-correlating, push join condition into subquery</a>.    */
+comment|/**    * Test case (correlated EXISTS subQuery) for    *<a href="https://issues.apache.org/jira/browse/CALCITE-714">[CALCITE-714]    * When de-correlating, push join condition into subQuery</a>.    */
 annotation|@
 name|Test
 specifier|public
@@ -4884,7 +4925,7 @@ literal|"${plan}"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Test case (correlated NOT EXISTS subquery) for    *<a href="https://issues.apache.org/jira/browse/CALCITE-714">[CALCITE-714]    * When de-correlating, push join condition into subquery</a>.    */
+comment|/**    * Test case (correlated NOT EXISTS subQuery) for    *<a href="https://issues.apache.org/jira/browse/CALCITE-714">[CALCITE-714]    * When de-correlating, push join condition into subQuery</a>.    */
 annotation|@
 name|Test
 specifier|public
