@@ -297,16 +297,6 @@ name|java
 operator|.
 name|util
 operator|.
-name|HashMap
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
 name|List
 import|;
 end_import
@@ -331,6 +321,30 @@ name|Set
 import|;
 end_import
 
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|concurrent
+operator|.
+name|ConcurrentHashMap
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|concurrent
+operator|.
+name|ConcurrentMap
+import|;
+end_import
+
 begin_comment
 comment|/**  * Implementation of the {@link RelMetadataProvider} interface that dispatches  * metadata methods to methods on a given object via reflection.  *  *<p>The methods on the target object must be public and non-static, and have  * the same signature as the implemented metadata method except for an  * additional first parameter of type {@link RelNode} or a sub-class. That  * parameter gives this provider an indication of that relational expressions it  * can handle.</p>  *  *<p>For an example, see {@link RelMdColumnOrigins#SOURCE}.  */
 end_comment
@@ -347,7 +361,7 @@ block|{
 comment|//~ Instance fields --------------------------------------------------------
 specifier|private
 specifier|final
-name|Map
+name|ConcurrentMap
 argument_list|<
 name|Class
 argument_list|<
@@ -373,7 +387,7 @@ comment|/**    * Creates a ReflectiveRelMetadataProvider.    *    * @param map M
 specifier|protected
 name|ReflectiveRelMetadataProvider
 parameter_list|(
-name|Map
+name|ConcurrentMap
 argument_list|<
 name|Class
 argument_list|<
@@ -677,8 +691,12 @@ expr_stmt|;
 block|}
 block|}
 block|}
+comment|// This needs to be a councurrent map since RelMetadataProvider are cached in static
+comment|// fields, thus the map is subject to concurrent modifications later.
+comment|// See map.put in org.apache.calcite.rel.metadata.ReflectiveRelMetadataProvider.apply(
+comment|// java.lang.Class<? extends org.apache.calcite.rel.RelNode>)
 specifier|final
-name|Map
+name|ConcurrentMap
 argument_list|<
 name|Class
 argument_list|<
@@ -690,7 +708,7 @@ argument_list|>
 name|methodsMap
 init|=
 operator|new
-name|HashMap
+name|ConcurrentHashMap
 argument_list|<>
 argument_list|()
 decl_stmt|;
