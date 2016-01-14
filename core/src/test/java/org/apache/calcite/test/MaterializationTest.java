@@ -1211,7 +1211,7 @@ specifier|final
 name|String
 name|v
 init|=
-literal|"select * from \"emps\" where \"salary\" is null"
+literal|"select * from \"emps\" where \"name\" is null"
 decl_stmt|;
 specifier|final
 name|String

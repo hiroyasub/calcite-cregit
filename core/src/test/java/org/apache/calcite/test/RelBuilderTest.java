@@ -1104,6 +1104,10 @@ comment|// Equivalent SQL:
 comment|//   SELECT *
 comment|//   FROM emp
 comment|//   WHERE deptno = 20 OR deptno = 20
+comment|// simplifies to
+comment|//   SELECT *
+comment|//   FROM emp
+comment|//   WHERE deptno = 20
 specifier|final
 name|RelBuilder
 name|builder
@@ -1202,6 +1206,194 @@ argument_list|(
 literal|"LogicalFilter(condition=[>($7, 20)])\n"
 operator|+
 literal|"  LogicalTableScan(table=[[scott, EMP]])\n"
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testScanFilterAndFalse
+parameter_list|()
+block|{
+comment|// Equivalent SQL:
+comment|//   SELECT *
+comment|//   FROM emp
+comment|//   WHERE deptno = 20 AND FALSE
+comment|// simplifies to
+comment|//   VALUES
+specifier|final
+name|RelBuilder
+name|builder
+init|=
+name|RelBuilder
+operator|.
+name|create
+argument_list|(
+name|config
+argument_list|()
+operator|.
+name|build
+argument_list|()
+argument_list|)
+decl_stmt|;
+name|RelNode
+name|root
+init|=
+name|builder
+operator|.
+name|scan
+argument_list|(
+literal|"EMP"
+argument_list|)
+operator|.
+name|filter
+argument_list|(
+name|builder
+operator|.
+name|call
+argument_list|(
+name|SqlStdOperatorTable
+operator|.
+name|GREATER_THAN
+argument_list|,
+name|builder
+operator|.
+name|field
+argument_list|(
+literal|"DEPTNO"
+argument_list|)
+argument_list|,
+name|builder
+operator|.
+name|literal
+argument_list|(
+literal|20
+argument_list|)
+argument_list|)
+argument_list|,
+name|builder
+operator|.
+name|literal
+argument_list|(
+literal|false
+argument_list|)
+argument_list|)
+operator|.
+name|build
+argument_list|()
+decl_stmt|;
+specifier|final
+name|String
+name|plan
+init|=
+literal|"LogicalValues(tuples=[[]])\n"
+decl_stmt|;
+name|assertThat
+argument_list|(
+name|str
+argument_list|(
+name|root
+argument_list|)
+argument_list|,
+name|is
+argument_list|(
+name|plan
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testScanFilterAndTrue
+parameter_list|()
+block|{
+comment|// Equivalent SQL:
+comment|//   SELECT *
+comment|//   FROM emp
+comment|//   WHERE deptno = 20 AND TRUE
+specifier|final
+name|RelBuilder
+name|builder
+init|=
+name|RelBuilder
+operator|.
+name|create
+argument_list|(
+name|config
+argument_list|()
+operator|.
+name|build
+argument_list|()
+argument_list|)
+decl_stmt|;
+name|RelNode
+name|root
+init|=
+name|builder
+operator|.
+name|scan
+argument_list|(
+literal|"EMP"
+argument_list|)
+operator|.
+name|filter
+argument_list|(
+name|builder
+operator|.
+name|call
+argument_list|(
+name|SqlStdOperatorTable
+operator|.
+name|GREATER_THAN
+argument_list|,
+name|builder
+operator|.
+name|field
+argument_list|(
+literal|"DEPTNO"
+argument_list|)
+argument_list|,
+name|builder
+operator|.
+name|literal
+argument_list|(
+literal|20
+argument_list|)
+argument_list|)
+argument_list|,
+name|builder
+operator|.
+name|literal
+argument_list|(
+literal|true
+argument_list|)
+argument_list|)
+operator|.
+name|build
+argument_list|()
+decl_stmt|;
+specifier|final
+name|String
+name|plan
+init|=
+literal|"LogicalFilter(condition=[>($7, 20)])\n"
+operator|+
+literal|"  LogicalTableScan(table=[[scott, EMP]])\n"
+decl_stmt|;
+name|assertThat
+argument_list|(
+name|str
+argument_list|(
+name|root
+argument_list|)
+argument_list|,
+name|is
+argument_list|(
+name|plan
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -1634,7 +1826,7 @@ name|builder
 operator|.
 name|literal
 argument_list|(
-literal|false
+literal|null
 argument_list|)
 argument_list|,
 name|builder
@@ -1811,9 +2003,9 @@ name|is
 argument_list|(
 literal|"LogicalProject(DEPTNO=[$7], COMM=[CAST($6):SMALLINT NOT NULL],"
 operator|+
-literal|" $f2=[OR(=($7, 20), AND(false, =($7, 10), IS NULL($6),"
+literal|" $f2=[OR(=($7, 20), AND(null, =($7, 10), IS NULL($6),"
 operator|+
-literal|" NOT(IS NOT NULL($7))), =($7, 30))], n2=[IS NULL($2)],"
+literal|" IS NULL($7)), =($7, 30))], n2=[IS NULL($2)],"
 operator|+
 literal|" nn2=[IS NOT NULL($3)], $f5=[20], COMM6=[$6], C=[$6])\n"
 operator|+
@@ -4166,7 +4358,9 @@ block|{
 comment|// Equivalent SQL:
 comment|//   SELECT *
 comment|//   FROM emp
-comment|//   LEFT JOIN dept ON emp.deptno = dept.deptno AND emp.empno = 123
+comment|//   LEFT JOIN dept ON emp.deptno = dept.deptno
+comment|//     AND emp.empno = 123
+comment|//     AND dept.deptno IS NOT NULL
 specifier|final
 name|RelBuilder
 name|builder
@@ -4260,11 +4454,32 @@ argument_list|(
 literal|123
 argument_list|)
 argument_list|)
+argument_list|,
+name|builder
+operator|.
+name|call
+argument_list|(
+name|SqlStdOperatorTable
+operator|.
+name|IS_NOT_NULL
+argument_list|,
+name|builder
+operator|.
+name|field
+argument_list|(
+literal|2
+argument_list|,
+literal|1
+argument_list|,
+literal|"DEPTNO"
+argument_list|)
+argument_list|)
 argument_list|)
 operator|.
 name|build
 argument_list|()
 decl_stmt|;
+comment|// Note that "dept.deptno IS NOT NULL" has been simplified away.
 specifier|final
 name|String
 name|expected
