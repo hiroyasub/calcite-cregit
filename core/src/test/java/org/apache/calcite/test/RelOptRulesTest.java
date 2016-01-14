@@ -9541,6 +9541,36 @@ name|check
 argument_list|()
 expr_stmt|;
 block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testExpandWhereComparisonCorrelated
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select empno\n"
+operator|+
+literal|"from sales.emp as e\n"
+operator|+
+literal|"where sal = (\n"
+operator|+
+literal|"  select max(sal) from sales.emp e2 where e2.empno = e.empno)"
+decl_stmt|;
+name|checkSubQuery
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|check
+argument_list|()
+expr_stmt|;
+block|}
 block|}
 end_class
 
