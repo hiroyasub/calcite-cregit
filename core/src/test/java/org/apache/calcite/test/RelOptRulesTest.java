@@ -2125,6 +2125,18 @@ operator|.
 name|build
 argument_list|()
 decl_stmt|;
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select a.name\n"
+operator|+
+literal|"from dept a\n"
+operator|+
+literal|"left join dept b on b.deptno> 10\n"
+operator|+
+literal|"right join dept c on b.deptno> 10\n"
+decl_stmt|;
 name|checkPlanning
 argument_list|(
 name|tester
@@ -2137,13 +2149,7 @@ argument_list|(
 name|program
 argument_list|)
 argument_list|,
-literal|"select a.name\n"
-operator|+
-literal|"from dept a\n"
-operator|+
-literal|"left join dept b on b.deptno> 10\n"
-operator|+
-literal|"right join dept c on b.deptno> 10\n"
+name|sql
 argument_list|)
 expr_stmt|;
 block|}
@@ -2227,6 +2233,18 @@ operator|.
 name|build
 argument_list|()
 decl_stmt|;
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select a.name\n"
+operator|+
+literal|"from dept a\n"
+operator|+
+literal|"left join dept b on b.deptno> 10\n"
+operator|+
+literal|"right join dept c on b.deptno> 10\n"
+decl_stmt|;
 name|checkPlanning
 argument_list|(
 name|tester
@@ -2239,13 +2257,7 @@ argument_list|(
 name|program
 argument_list|)
 argument_list|,
-literal|"select a.name\n"
-operator|+
-literal|"from dept a\n"
-operator|+
-literal|"left join dept b on b.deptno> 10\n"
-operator|+
-literal|"right join dept c on b.deptno> 10\n"
+name|sql
 argument_list|)
 expr_stmt|;
 block|}
@@ -5943,6 +5955,177 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testEmptyAggregate
+parameter_list|()
+block|{
+name|HepProgram
+name|preProgram
+init|=
+name|HepProgram
+operator|.
+name|builder
+argument_list|()
+operator|.
+name|addRuleInstance
+argument_list|(
+name|ReduceExpressionsRule
+operator|.
+name|FILTER_INSTANCE
+argument_list|)
+operator|.
+name|addRuleInstance
+argument_list|(
+name|PruneEmptyRules
+operator|.
+name|PROJECT_INSTANCE
+argument_list|)
+operator|.
+name|build
+argument_list|()
+decl_stmt|;
+name|HepProgram
+name|program
+init|=
+operator|new
+name|HepProgramBuilder
+argument_list|()
+operator|.
+name|addRuleInstance
+argument_list|(
+name|ReduceExpressionsRule
+operator|.
+name|FILTER_INSTANCE
+argument_list|)
+operator|.
+name|addRuleInstance
+argument_list|(
+name|PruneEmptyRules
+operator|.
+name|PROJECT_INSTANCE
+argument_list|)
+operator|.
+name|addRuleInstance
+argument_list|(
+name|PruneEmptyRules
+operator|.
+name|AGGREGATE_INSTANCE
+argument_list|)
+operator|.
+name|addRuleInstance
+argument_list|(
+name|PruneEmptyRules
+operator|.
+name|PROJECT_INSTANCE
+argument_list|)
+operator|.
+name|build
+argument_list|()
+decl_stmt|;
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select sum(empno) from emp where false group by deptno"
+decl_stmt|;
+name|checkPlanning
+argument_list|(
+name|tester
+argument_list|,
+name|preProgram
+argument_list|,
+operator|new
+name|HepPlanner
+argument_list|(
+name|program
+argument_list|)
+argument_list|,
+name|sql
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testEmptyAggregateEmptyKey
+parameter_list|()
+block|{
+name|HepProgram
+name|preProgram
+init|=
+name|HepProgram
+operator|.
+name|builder
+argument_list|()
+operator|.
+name|addRuleInstance
+argument_list|(
+name|ReduceExpressionsRule
+operator|.
+name|FILTER_INSTANCE
+argument_list|)
+operator|.
+name|addRuleInstance
+argument_list|(
+name|PruneEmptyRules
+operator|.
+name|PROJECT_INSTANCE
+argument_list|)
+operator|.
+name|build
+argument_list|()
+decl_stmt|;
+name|HepProgram
+name|program
+init|=
+operator|new
+name|HepProgramBuilder
+argument_list|()
+operator|.
+name|addRuleInstance
+argument_list|(
+name|PruneEmptyRules
+operator|.
+name|AGGREGATE_INSTANCE
+argument_list|)
+operator|.
+name|build
+argument_list|()
+decl_stmt|;
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select sum(empno) from emp where false"
+decl_stmt|;
+specifier|final
+name|boolean
+name|unchanged
+init|=
+literal|true
+decl_stmt|;
+name|checkPlanning
+argument_list|(
+name|tester
+argument_list|,
+name|preProgram
+argument_list|,
+operator|new
+name|HepPlanner
+argument_list|(
+name|program
+argument_list|)
+argument_list|,
+name|sql
+argument_list|,
+name|unchanged
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testReduceCasts
 parameter_list|()
 throws|throws
@@ -6459,6 +6642,20 @@ operator|.
 name|build
 argument_list|()
 decl_stmt|;
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select empno, sal, deptno from ("
+operator|+
+literal|"  select empno, sal, deptno"
+operator|+
+literal|"  from emp"
+operator|+
+literal|"  where sal> 5000)"
+operator|+
+literal|"group by empno, sal, deptno"
+decl_stmt|;
 name|checkPlanning
 argument_list|(
 name|tester
@@ -6471,15 +6668,7 @@ argument_list|(
 name|program
 argument_list|)
 argument_list|,
-literal|"select empno, sal, deptno from ("
-operator|+
-literal|"  select empno, sal, deptno"
-operator|+
-literal|"  from emp"
-operator|+
-literal|"  where sal> 5000)"
-operator|+
-literal|"group by empno, sal, deptno"
+name|sql
 argument_list|)
 expr_stmt|;
 block|}
@@ -6535,6 +6724,20 @@ operator|.
 name|build
 argument_list|()
 decl_stmt|;
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select empno, sal, deptno from ("
+operator|+
+literal|"  select empno, sal, deptno"
+operator|+
+literal|"  from emp"
+operator|+
+literal|"  where sal> 5000)"
+operator|+
+literal|"group by rollup(empno, sal, deptno)"
+decl_stmt|;
 name|checkPlanning
 argument_list|(
 name|tester
@@ -6547,15 +6750,7 @@ argument_list|(
 name|program
 argument_list|)
 argument_list|,
-literal|"select empno, sal, deptno from ("
-operator|+
-literal|"  select empno, sal, deptno"
-operator|+
-literal|"  from emp"
-operator|+
-literal|"  where sal> 5000)"
-operator|+
-literal|"group by rollup(empno, sal, deptno)"
+name|sql
 argument_list|)
 expr_stmt|;
 block|}
@@ -6853,6 +7048,7 @@ init|=
 name|getDiffRepos
 argument_list|()
 decl_stmt|;
+specifier|final
 name|String
 name|sql
 init|=
@@ -6865,6 +7061,7 @@ argument_list|,
 literal|"${sql}"
 argument_list|)
 decl_stmt|;
+specifier|final
 name|HepProgram
 name|program
 init|=
@@ -6903,6 +7100,7 @@ operator|.
 name|build
 argument_list|()
 decl_stmt|;
+specifier|final
 name|HepPlanner
 name|planner
 init|=
@@ -7096,6 +7294,7 @@ operator|.
 name|build
 argument_list|()
 decl_stmt|;
+specifier|final
 name|HepPlanner
 name|planner2
 init|=
