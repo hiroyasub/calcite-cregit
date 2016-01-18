@@ -485,6 +485,14 @@ static|static
 block|{
 try|try
 block|{
+comment|// Force DriverManager initialization before we hit AlternatingDriver->Driver.<clinit>
+comment|// Otherwise Driver.<clinit> -> DriverManager.registerDriver -> scan service provider files
+comment|// causes a deadlock; see [CALCITE-1060]
+name|DriverManager
+operator|.
+name|getDrivers
+argument_list|()
+expr_stmt|;
 name|DriverManager
 operator|.
 name|registerDriver
