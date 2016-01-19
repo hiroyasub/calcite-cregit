@@ -20828,6 +20828,106 @@ argument_list|(
 literal|"PLAN=EnumerableValues(tuples=[[{ 1, 'ab' }]])\n\n"
 argument_list|)
 expr_stmt|;
+specifier|final
+name|String
+name|expectedXml
+init|=
+literal|"PLAN=<RelNode type=\"EnumerableValues\">\n"
+operator|+
+literal|"\t<Property name=\"tuples\">\n"
+operator|+
+literal|"\t\t[{ 1,&#39;ab&#39; }]\t</Property>\n"
+operator|+
+literal|"\t<Inputs/>\n"
+operator|+
+literal|"</RelNode>\n"
+operator|+
+literal|"\n"
+decl_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"explain plan as xml for values (1, 'ab')"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+name|expectedXml
+argument_list|)
+expr_stmt|;
+specifier|final
+name|String
+name|expectedJson
+init|=
+literal|"PLAN={\n"
+operator|+
+literal|"  \"rels\": [\n"
+operator|+
+literal|"    {\n"
+operator|+
+literal|"      \"id\": \"0\",\n"
+operator|+
+literal|"      \"relOp\": \"org.apache.calcite.adapter.enumerable.EnumerableValues\",\n"
+operator|+
+literal|"      \"type\": [\n"
+operator|+
+literal|"        {\n"
+operator|+
+literal|"          \"type\": \"INTEGER\",\n"
+operator|+
+literal|"          \"nullable\": false,\n"
+operator|+
+literal|"          \"name\": \"EXPR$0\"\n"
+operator|+
+literal|"        },\n"
+operator|+
+literal|"        {\n"
+operator|+
+literal|"          \"type\": \"CHAR\",\n"
+operator|+
+literal|"          \"nullable\": false,\n"
+operator|+
+literal|"          \"precision\": 2,\n"
+operator|+
+literal|"          \"name\": \"EXPR$1\"\n"
+operator|+
+literal|"        }\n"
+operator|+
+literal|"      ],\n"
+operator|+
+literal|"      \"tuples\": [\n"
+operator|+
+literal|"        [\n"
+operator|+
+literal|"          1,\n"
+operator|+
+literal|"          \"ab\"\n"
+operator|+
+literal|"        ]\n"
+operator|+
+literal|"      ],\n"
+operator|+
+literal|"      \"inputs\": []\n"
+operator|+
+literal|"    }\n"
+operator|+
+literal|"  ]\n"
+operator|+
+literal|"}\n"
+decl_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"explain plan as json for values (1, 'ab')"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+name|expectedJson
+argument_list|)
+expr_stmt|;
 name|with
 operator|.
 name|query

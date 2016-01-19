@@ -10912,15 +10912,104 @@ name|void
 name|testExplain
 parameter_list|()
 block|{
-name|check
-argument_list|(
+specifier|final
+name|String
+name|sql
+init|=
 literal|"explain plan for select * from emps"
-argument_list|,
-literal|"EXPLAIN PLAN INCLUDING ATTRIBUTES WITH IMPLEMENTATION FOR\n"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"EXPLAIN PLAN"
+operator|+
+literal|" INCLUDING ATTRIBUTES WITH IMPLEMENTATION FOR\n"
 operator|+
 literal|"SELECT *\n"
 operator|+
 literal|"FROM `EMPS`"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testExplainAsXml
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"explain plan as xml for select * from emps"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"EXPLAIN PLAN"
+operator|+
+literal|" INCLUDING ATTRIBUTES WITH IMPLEMENTATION AS XML FOR\n"
+operator|+
+literal|"SELECT *\n"
+operator|+
+literal|"FROM `EMPS`"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testExplainAsJson
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"explain plan as json for select * from emps"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"EXPLAIN PLAN"
+operator|+
+literal|" INCLUDING ATTRIBUTES WITH IMPLEMENTATION AS JSON FOR\n"
+operator|+
+literal|"SELECT *\n"
+operator|+
+literal|"FROM `EMPS`"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
 argument_list|)
 expr_stmt|;
 block|}

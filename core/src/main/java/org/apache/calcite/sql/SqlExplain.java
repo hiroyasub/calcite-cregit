@@ -184,7 +184,7 @@ name|SqlLiteral
 name|depth
 decl_stmt|;
 name|SqlLiteral
-name|asXml
+name|format
 decl_stmt|;
 specifier|private
 specifier|final
@@ -208,7 +208,7 @@ name|SqlLiteral
 name|depth
 parameter_list|,
 name|SqlLiteral
-name|asXml
+name|format
 parameter_list|,
 name|int
 name|dynamicParameterCount
@@ -239,9 +239,9 @@ name|depth
 expr_stmt|;
 name|this
 operator|.
-name|asXml
+name|format
 operator|=
-name|asXml
+name|format
 expr_stmt|;
 name|this
 operator|.
@@ -292,7 +292,7 @@ name|detailLevel
 argument_list|,
 name|depth
 argument_list|,
-name|asXml
+name|format
 argument_list|)
 return|;
 block|}
@@ -347,7 +347,7 @@ break|break;
 case|case
 literal|3
 case|:
-name|asXml
+name|format
 operator|=
 operator|(
 name|SqlLiteral
@@ -449,17 +449,54 @@ operator|.
 name|TYPE
 return|;
 block|}
-comment|/**    * Returns whether result is to be in XML format.    */
+comment|/**    * Returns the desired output format.    */
+specifier|public
+name|SqlExplainFormat
+name|getFormat
+parameter_list|()
+block|{
+return|return
+name|format
+operator|.
+name|symbolValue
+argument_list|(
+name|SqlExplainFormat
+operator|.
+name|class
+argument_list|)
+return|;
+block|}
+comment|/**    * Returns whether result is to be in XML format.    *    * @deprecated Use {@link #getFormat()}    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 name|boolean
 name|isXml
 parameter_list|()
 block|{
 return|return
-name|asXml
-operator|.
-name|booleanValue
+name|getFormat
 argument_list|()
+operator|==
+name|SqlExplainFormat
+operator|.
+name|XML
+return|;
+block|}
+comment|/**    * Returns whether result is to be in JSON format.    */
+specifier|public
+name|boolean
+name|isJson
+parameter_list|()
+block|{
+return|return
+name|getFormat
+argument_list|()
+operator|==
+name|SqlExplainFormat
+operator|.
+name|XML
 return|;
 block|}
 annotation|@
@@ -571,12 +608,15 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
-if|if
+switch|switch
 condition|(
-name|isXml
+name|getFormat
 argument_list|()
 condition|)
 block|{
+case|case
+name|XML
+case|:
 name|writer
 operator|.
 name|keyword
@@ -584,6 +624,19 @@ argument_list|(
 literal|"AS XML"
 argument_list|)
 expr_stmt|;
+break|break;
+case|case
+name|JSON
+case|:
+name|writer
+operator|.
+name|keyword
+argument_list|(
+literal|"AS JSON"
+argument_list|)
+expr_stmt|;
+break|break;
+default|default:
 block|}
 name|writer
 operator|.
