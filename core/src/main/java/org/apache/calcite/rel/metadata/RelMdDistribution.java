@@ -349,6 +349,13 @@ begin_class
 specifier|public
 class|class
 name|RelMdDistribution
+implements|implements
+name|MetadataHandler
+argument_list|<
+name|BuiltInMetadata
+operator|.
+name|Distribution
+argument_list|>
 block|{
 specifier|public
 specifier|static
@@ -378,6 +385,24 @@ parameter_list|()
 block|{
 block|}
 comment|//~ Methods ----------------------------------------------------------------
+specifier|public
+name|MetadataDef
+argument_list|<
+name|BuiltInMetadata
+operator|.
+name|Distribution
+argument_list|>
+name|getDef
+parameter_list|()
+block|{
+return|return
+name|BuiltInMetadata
+operator|.
+name|Distribution
+operator|.
+name|DEF
+return|;
+block|}
 comment|/** Fallback method to deduce distribution for any relational expression not    * handled by a more specific method.    *    * @param rel Relational expression    * @return Relational expression's distribution    */
 specifier|public
 name|RelDistribution

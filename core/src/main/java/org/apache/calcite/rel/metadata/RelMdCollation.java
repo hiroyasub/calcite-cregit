@@ -625,6 +625,13 @@ begin_class
 specifier|public
 class|class
 name|RelMdCollation
+implements|implements
+name|MetadataHandler
+argument_list|<
+name|BuiltInMetadata
+operator|.
+name|Collation
+argument_list|>
 block|{
 specifier|public
 specifier|static
@@ -654,6 +661,24 @@ parameter_list|()
 block|{
 block|}
 comment|//~ Methods ----------------------------------------------------------------
+specifier|public
+name|MetadataDef
+argument_list|<
+name|BuiltInMetadata
+operator|.
+name|Collation
+argument_list|>
+name|getDef
+parameter_list|()
+block|{
+return|return
+name|BuiltInMetadata
+operator|.
+name|Collation
+operator|.
+name|DEF
+return|;
+block|}
 comment|/** Catch-all implementation for    * {@link BuiltInMetadata.Collation#collations()},    * invoked using reflection, for any relational expression not    * handled by a more specific method.    *    *<p>{@link org.apache.calcite.rel.core.Union},    * {@link org.apache.calcite.rel.core.Intersect},    * {@link org.apache.calcite.rel.core.Minus},    * {@link org.apache.calcite.rel.core.Join},    * {@link org.apache.calcite.rel.core.SemiJoin},    * {@link org.apache.calcite.rel.core.Correlate}    * do not in general return sorted results    * (but implementations using particular algorithms may).    *    * @param rel Relational expression    * @return Relational expression's collations    *    * @see org.apache.calcite.rel.metadata.RelMetadataQuery#collations(RelNode)    */
 specifier|public
 name|ImmutableList

@@ -18,73 +18,31 @@ package|;
 end_package
 
 begin_comment
-comment|/** Placeholder for null values. */
+comment|/**  * Marker interface for a handler of metadata.  *  * @param<M> Kind of metadata  */
 end_comment
 
-begin_enum
+begin_interface
 specifier|public
-enum|enum
-name|NullSentinel
+interface|interface
+name|MetadataHandler
+parameter_list|<
+name|M
+extends|extends
+name|Metadata
+parameter_list|>
 block|{
-comment|/** Placeholder for a null value. */
-name|INSTANCE
-block|,
-comment|/** Placeholder that means that a request for metadata is already active,    * therefore this request forms a cycle. */
-name|ACTIVE
-block|;
-specifier|public
-specifier|static
-name|Comparable
-name|mask
-parameter_list|(
-name|Comparable
-name|value
-parameter_list|)
-block|{
-if|if
-condition|(
-name|value
-operator|==
-literal|null
-condition|)
-block|{
-return|return
-name|INSTANCE
-return|;
+name|MetadataDef
+argument_list|<
+name|M
+argument_list|>
+name|getDef
+parameter_list|()
+function_decl|;
 block|}
-return|return
-name|value
-return|;
-block|}
-specifier|public
-specifier|static
-name|Object
-name|mask
-parameter_list|(
-name|Object
-name|value
-parameter_list|)
-block|{
-if|if
-condition|(
-name|value
-operator|==
-literal|null
-condition|)
-block|{
-return|return
-name|INSTANCE
-return|;
-block|}
-return|return
-name|value
-return|;
-block|}
-block|}
-end_enum
+end_interface
 
 begin_comment
-comment|// End NullSentinel.java
+comment|// End MetadataHandler.java
 end_comment
 
 end_unit

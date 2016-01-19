@@ -493,6 +493,22 @@ name|rel
 operator|.
 name|metadata
 operator|.
+name|JaninoRelMetadataProvider
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|metadata
+operator|.
 name|RelMetadataProvider
 import|;
 end_import
@@ -1769,6 +1785,12 @@ name|RelNode
 name|rel
 parameter_list|)
 block|{
+comment|// We're registered all the rules, and therefore RelNode classes,
+comment|// we're interested in, and have not yet started calling metadata providers.
+comment|// So now is a good time to tell the metadata layer what to expect.
+name|registerMetadataRels
+argument_list|()
+expr_stmt|;
 name|this
 operator|.
 name|root
@@ -4180,6 +4202,25 @@ block|}
 return|return
 name|cheapest
 return|;
+block|}
+comment|/** Informs {@link JaninoRelMetadataProvider} about the different kinds of    * {@link RelNode} that we will be dealing with. It will reduce the number    * of times that we need to re-generate the provider. */
+specifier|private
+name|void
+name|registerMetadataRels
+parameter_list|()
+block|{
+name|JaninoRelMetadataProvider
+operator|.
+name|DEFAULT
+operator|.
+name|register
+argument_list|(
+name|classOperands
+operator|.
+name|keySet
+argument_list|()
+argument_list|)
+expr_stmt|;
 block|}
 comment|/** Ensures that the subset that is the root relational expression contains    * converters to all other subsets in its equivalence set.    *    *<p>Thus the planner tries to find cheap implementations of those other    * subsets, which can then be converted to the root. This is the only place    * in the plan where explicit converters are required; elsewhere, a consumer    * will be asking for the result in a particular convention, but the root has    * no consumers. */
 name|void

@@ -907,9 +907,9 @@ name|CALC_PROGRAM
 init|=
 name|calc
 argument_list|(
-operator|new
 name|DefaultRelMetadataProvider
-argument_list|()
+operator|.
+name|INSTANCE
 argument_list|)
 decl_stmt|;
 comment|/** Program that expands sub-queries. */
@@ -921,9 +921,9 @@ name|SUB_QUERY_PROGRAM
 init|=
 name|subquery
 argument_list|(
-operator|new
 name|DefaultRelMetadataProvider
-argument_list|()
+operator|.
+name|INSTANCE
 argument_list|)
 decl_stmt|;
 specifier|public
@@ -1529,9 +1529,9 @@ name|hep
 argument_list|,
 literal|false
 argument_list|,
-operator|new
 name|DefaultRelMetadataProvider
-argument_list|()
+operator|.
+name|INSTANCE
 argument_list|)
 decl_stmt|;
 comment|// Create a program that contains a rule to expand a MultiJoin
@@ -1728,9 +1728,9 @@ block|{
 return|return
 name|standard
 argument_list|(
-operator|new
 name|DefaultRelMetadataProvider
-argument_list|()
+operator|.
+name|INSTANCE
 argument_list|)
 return|;
 block|}

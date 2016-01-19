@@ -31,8 +31,30 @@ name|RelNode
 import|;
 end_import
 
+begin_import
+import|import
+name|java
+operator|.
+name|lang
+operator|.
+name|reflect
+operator|.
+name|Method
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Map
+import|;
+end_import
+
 begin_comment
-comment|/**  * RelMetadataProvider defines an interface for obtaining metadata about  * relational expressions. This interface is weakly-typed and is not intended to  * be called directly in most contexts; instead, use a strongly-typed facade  * such as {@link RelMetadataQuery}.  *  *<p>For background and motivation, see<a  * href="http://wiki.eigenbase.org/RelationalExpressionMetadata">wiki</a>.  */
+comment|/**  * RelMetadataProvider defines an interface for obtaining metadata about  * relational expressions. This interface is weakly-typed and is not intended to  * be called directly in most contexts; instead, use a strongly-typed facade  * such as {@link RelMetadataQuery}.  *  *<p>For background and motivation, see<a  * href="http://wiki.eigenbase.org/RelationalExpressionMetadata">wiki</a>.  *  *<p>If your provider is not a singleton, we recommend that you implement  * {@link Object#equals(Object)} and {@link Object#hashCode()} methods. This  * makes the cache of {@link JaninoRelMetadataProvider} more effective.  */
 end_comment
 
 begin_interface
@@ -68,6 +90,29 @@ extends|extends
 name|M
 argument_list|>
 name|metadataClass
+parameter_list|)
+function_decl|;
+parameter_list|<
+name|M
+extends|extends
+name|Metadata
+parameter_list|>
+name|Map
+argument_list|<
+name|Method
+argument_list|,
+name|MetadataHandler
+argument_list|<
+name|M
+argument_list|>
+argument_list|>
+name|handlers
+parameter_list|(
+name|MetadataDef
+argument_list|<
+name|M
+argument_list|>
+name|def
 parameter_list|)
 function_decl|;
 block|}

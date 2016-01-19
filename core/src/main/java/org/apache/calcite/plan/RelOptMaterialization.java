@@ -1359,9 +1359,9 @@ argument_list|)
 argument_list|,
 literal|false
 argument_list|,
-operator|new
 name|DefaultRelMetadataProvider
-argument_list|()
+operator|.
+name|INSTANCE
 argument_list|)
 decl_stmt|;
 return|return
@@ -1676,9 +1676,9 @@ argument_list|)
 argument_list|,
 literal|false
 argument_list|,
-operator|new
 name|DefaultRelMetadataProvider
-argument_list|()
+operator|.
+name|INSTANCE
 argument_list|)
 decl_stmt|;
 if|if

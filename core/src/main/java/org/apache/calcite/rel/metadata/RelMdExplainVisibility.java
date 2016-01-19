@@ -67,6 +67,13 @@ begin_class
 specifier|public
 class|class
 name|RelMdExplainVisibility
+implements|implements
+name|MetadataHandler
+argument_list|<
+name|BuiltInMetadata
+operator|.
+name|ExplainVisibility
+argument_list|>
 block|{
 specifier|public
 specifier|static
@@ -96,6 +103,24 @@ parameter_list|()
 block|{
 block|}
 comment|//~ Methods ----------------------------------------------------------------
+specifier|public
+name|MetadataDef
+argument_list|<
+name|BuiltInMetadata
+operator|.
+name|ExplainVisibility
+argument_list|>
+name|getDef
+parameter_list|()
+block|{
+return|return
+name|BuiltInMetadata
+operator|.
+name|ExplainVisibility
+operator|.
+name|DEF
+return|;
+block|}
 comment|/** Catch-all implementation for    * {@link BuiltInMetadata.ExplainVisibility#isVisibleInExplain(SqlExplainLevel)},    * invoked using reflection.    *    * @see org.apache.calcite.rel.metadata.RelMetadataQuery#isVisibleInExplain(RelNode, SqlExplainLevel)    */
 specifier|public
 name|Boolean

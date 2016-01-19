@@ -42,9 +42,19 @@ name|DefaultRelMetadataProvider
 extends|extends
 name|ChainedRelMetadataProvider
 block|{
-comment|//~ Constructors -----------------------------------------------------------
-comment|/**    * Creates a new default provider. This provider defines "catch-all"    * handlers for generic RelNodes, so it should always be given lowest    * priority when chaining.    */
 specifier|public
+specifier|static
+specifier|final
+name|DefaultRelMetadataProvider
+name|INSTANCE
+init|=
+operator|new
+name|DefaultRelMetadataProvider
+argument_list|()
+decl_stmt|;
+comment|//~ Constructors -----------------------------------------------------------
+comment|/**    * Creates a new default provider. This provider defines "catch-all"    * handlers for generic RelNodes, so it should always be given lowest    * priority when chaining.    *    *<p>Use this constructor only from a sub-class. Otherwise use the singleton    * instance, {@link #INSTANCE}.    */
+specifier|protected
 name|DefaultRelMetadataProvider
 parameter_list|()
 block|{

@@ -445,6 +445,13 @@ begin_class
 specifier|public
 class|class
 name|RelMdSize
+implements|implements
+name|MetadataHandler
+argument_list|<
+name|BuiltInMetadata
+operator|.
+name|Size
+argument_list|>
 block|{
 comment|/** Source for    * {@link org.apache.calcite.rel.metadata.BuiltInMetadata.Size}. */
 specifier|public
@@ -496,6 +503,24 @@ parameter_list|()
 block|{
 block|}
 comment|//~ Methods ----------------------------------------------------------------
+specifier|public
+name|MetadataDef
+argument_list|<
+name|BuiltInMetadata
+operator|.
+name|Size
+argument_list|>
+name|getDef
+parameter_list|()
+block|{
+return|return
+name|BuiltInMetadata
+operator|.
+name|Size
+operator|.
+name|DEF
+return|;
+block|}
 comment|/** Catch-all implementation for    * {@link BuiltInMetadata.Size#averageRowSize()},    * invoked using reflection.    *    * @see org.apache.calcite.rel.metadata.RelMetadataQuery#getAverageRowSize    */
 specifier|public
 name|Double

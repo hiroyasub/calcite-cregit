@@ -375,9 +375,9 @@ comment|// set up a default rel metadata provider,
 comment|// giving the planner first crack at everything
 name|setMetadataProvider
 argument_list|(
-operator|new
 name|DefaultRelMetadataProvider
-argument_list|()
+operator|.
+name|INSTANCE
 argument_list|)
 expr_stmt|;
 name|this

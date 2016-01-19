@@ -375,6 +375,13 @@ begin_class
 specifier|public
 class|class
 name|RelMdRowCount
+implements|implements
+name|MetadataHandler
+argument_list|<
+name|BuiltInMetadata
+operator|.
+name|RowCount
+argument_list|>
 block|{
 specifier|public
 specifier|static
@@ -398,6 +405,24 @@ argument_list|()
 argument_list|)
 decl_stmt|;
 comment|//~ Methods ----------------------------------------------------------------
+specifier|public
+name|MetadataDef
+argument_list|<
+name|BuiltInMetadata
+operator|.
+name|RowCount
+argument_list|>
+name|getDef
+parameter_list|()
+block|{
+return|return
+name|BuiltInMetadata
+operator|.
+name|RowCount
+operator|.
+name|DEF
+return|;
+block|}
 comment|/** Catch-all implementation for    * {@link BuiltInMetadata.RowCount#getRowCount()},    * invoked using reflection.    *    * @see org.apache.calcite.rel.metadata.RelMetadataQuery#getRowCount(RelNode)    */
 specifier|public
 name|Double

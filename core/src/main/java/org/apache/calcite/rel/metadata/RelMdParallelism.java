@@ -101,6 +101,13 @@ begin_class
 specifier|public
 class|class
 name|RelMdParallelism
+implements|implements
+name|MetadataHandler
+argument_list|<
+name|BuiltInMetadata
+operator|.
+name|Parallelism
+argument_list|>
 block|{
 comment|/** Source for    * {@link org.apache.calcite.rel.metadata.BuiltInMetadata.Parallelism}. */
 specifier|public
@@ -137,6 +144,24 @@ parameter_list|()
 block|{
 block|}
 comment|//~ Methods ----------------------------------------------------------------
+specifier|public
+name|MetadataDef
+argument_list|<
+name|BuiltInMetadata
+operator|.
+name|Parallelism
+argument_list|>
+name|getDef
+parameter_list|()
+block|{
+return|return
+name|BuiltInMetadata
+operator|.
+name|Parallelism
+operator|.
+name|DEF
+return|;
+block|}
 comment|/** Catch-all implementation for    * {@link BuiltInMetadata.Parallelism#isPhaseTransition()},    * invoked using reflection.    *    * @see org.apache.calcite.rel.metadata.RelMetadataQuery#isPhaseTransition    */
 specifier|public
 name|Boolean
