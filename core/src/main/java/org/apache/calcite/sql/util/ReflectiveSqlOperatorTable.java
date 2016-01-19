@@ -716,6 +716,9 @@ name|op
 operator|.
 name|getName
 argument_list|()
+operator|.
+name|toUpperCase
+argument_list|()
 argument_list|,
 name|op
 argument_list|)
@@ -824,6 +827,9 @@ argument_list|(
 name|function
 operator|.
 name|getName
+argument_list|()
+operator|.
+name|toUpperCase
 argument_list|()
 argument_list|,
 name|function

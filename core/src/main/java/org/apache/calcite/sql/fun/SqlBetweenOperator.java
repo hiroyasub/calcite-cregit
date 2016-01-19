@@ -726,6 +726,27 @@ return|return
 literal|"{1} {0} {2} AND {3}"
 return|;
 block|}
+annotation|@
+name|Override
+specifier|public
+name|String
+name|getName
+parameter_list|()
+block|{
+return|return
+name|super
+operator|.
+name|getName
+argument_list|()
+operator|+
+literal|" "
+operator|+
+name|flag
+operator|.
+name|name
+argument_list|()
+return|;
+block|}
 specifier|public
 name|void
 name|unparse
@@ -781,6 +802,8 @@ name|writer
 operator|.
 name|sep
 argument_list|(
+name|super
+operator|.
 name|getName
 argument_list|()
 argument_list|)

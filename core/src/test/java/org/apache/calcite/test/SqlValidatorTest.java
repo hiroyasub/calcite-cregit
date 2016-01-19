@@ -2267,7 +2267,7 @@ name|checkWholeExpFails
 argument_list|(
 literal|"date '2012-02-03' between 2 and 3"
 argument_list|,
-literal|"(?s).*Cannot apply 'BETWEEN' to arguments of type.*"
+literal|"(?s).*Cannot apply 'BETWEEN ASYMMETRIC' to arguments of type.*"
 argument_list|)
 expr_stmt|;
 block|}
