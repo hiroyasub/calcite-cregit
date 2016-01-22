@@ -67,6 +67,11 @@ name|HTTP_INTERNAL_SERVER_ERROR
 init|=
 literal|500
 decl_stmt|;
+name|String
+name|HANDLER_SERIALIZATION_METRICS_NAME
+init|=
+literal|"Handler.Serialization"
+decl_stmt|;
 comment|/**    * Struct that encapsulates the context of the result of a request to Avatica.    */
 specifier|public
 class|class
