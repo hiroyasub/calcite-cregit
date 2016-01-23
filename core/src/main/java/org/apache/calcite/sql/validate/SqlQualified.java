@@ -139,6 +139,28 @@ operator|=
 name|identifier
 expr_stmt|;
 block|}
+annotation|@
+name|Override
+specifier|public
+name|String
+name|toString
+parameter_list|()
+block|{
+return|return
+literal|"{id: "
+operator|+
+name|identifier
+operator|.
+name|toString
+argument_list|()
+operator|+
+literal|", prefix: "
+operator|+
+name|prefixLength
+operator|+
+literal|"}"
+return|;
+block|}
 specifier|public
 specifier|static
 name|SqlQualified

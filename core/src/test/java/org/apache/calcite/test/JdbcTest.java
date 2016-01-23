@@ -17438,22 +17438,32 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-annotation|@
-name|Ignore
-argument_list|(
-literal|"CALCITE-559 Correlated subquery will hit exception in Calcite"
-argument_list|)
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-559">[CALCITE-559]    * Correlated scalar subquery in WHERE gives error</a>. */
 annotation|@
 name|Test
 specifier|public
 name|void
-name|testJoinCorreScalarSubQ
+name|testJoinCorrelatedScalarSubquery
 parameter_list|()
 throws|throws
-name|ClassNotFoundException
-throws|,
 name|SQLException
 block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select e.employee_id, d.department_id "
+operator|+
+literal|" from employee e, department d "
+operator|+
+literal|" where e.department_id = d.department_id "
+operator|+
+literal|" and e.salary> (select avg(e2.salary) "
+operator|+
+literal|"                 from employee e2 "
+operator|+
+literal|"                 where e2.store_id = e.store_id)"
+decl_stmt|;
 name|CalciteAssert
 operator|.
 name|that
@@ -17477,22 +17487,12 @@ argument_list|)
 operator|.
 name|query
 argument_list|(
-literal|"select e.employee_id, d.department_id "
-operator|+
-literal|" from employee e, department d "
-operator|+
-literal|" where e.department_id = d.department_id and "
-operator|+
-literal|"       e.salary> (select avg(e2.salary) "
-operator|+
-literal|"                       from employee e2 "
-operator|+
-literal|" where e2.store_id = e.store_id)"
+name|sql
 argument_list|)
 operator|.
 name|returnsCount
 argument_list|(
-literal|0
+literal|599
 argument_list|)
 expr_stmt|;
 block|}
