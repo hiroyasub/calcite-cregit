@@ -599,7 +599,9 @@ argument_list|(
 name|factory
 operator|.
 name|createOperatorTable
-argument_list|()
+argument_list|(
+name|factory
+argument_list|)
 argument_list|,
 operator|new
 name|MockCatalogReader

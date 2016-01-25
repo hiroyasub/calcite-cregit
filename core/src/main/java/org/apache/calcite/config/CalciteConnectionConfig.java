@@ -92,6 +92,23 @@ name|NullCollation
 name|defaultNullCollation
 parameter_list|()
 function_decl|;
+comment|/** @see CalciteConnectionProperty#FUN */
+parameter_list|<
+name|T
+parameter_list|>
+name|T
+name|fun
+parameter_list|(
+name|Class
+argument_list|<
+name|T
+argument_list|>
+name|operatorTableClass
+parameter_list|,
+name|T
+name|defaultOperatorTable
+parameter_list|)
+function_decl|;
 comment|/** @see CalciteConnectionProperty#MODEL */
 name|String
 name|model

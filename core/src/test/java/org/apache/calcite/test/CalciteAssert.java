@@ -1009,7 +1009,7 @@ name|utc
 argument_list|)
 expr_stmt|;
 block|}
-specifier|private
+specifier|public
 specifier|static
 specifier|final
 name|ConnectionFactory

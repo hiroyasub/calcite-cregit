@@ -103,6 +103,20 @@ name|calcite
 operator|.
 name|sql
 operator|.
+name|SqlOperatorTable
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
 name|validate
 operator|.
 name|SqlConformance
@@ -122,6 +136,20 @@ operator|.
 name|validate
 operator|.
 name|SqlMonotonicity
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|test
+operator|.
+name|CalciteAssert
 import|;
 end_import
 
@@ -226,6 +254,24 @@ name|withConformance
 parameter_list|(
 name|SqlConformance
 name|conformance
+parameter_list|)
+function_decl|;
+comment|/** Returns a tester that gets connections from a given factory. */
+name|SqlTester
+name|withConnectionFactory
+parameter_list|(
+name|CalciteAssert
+operator|.
+name|ConnectionFactory
+name|connectionFactory
+parameter_list|)
+function_decl|;
+comment|/** Returns a tester that uses a given operator table. */
+name|SqlTester
+name|withOperatorTable
+parameter_list|(
+name|SqlOperatorTable
+name|operatorTable
 parameter_list|)
 function_decl|;
 comment|/**    * Tests that a scalar SQL expression returns the expected result and the    * expected type. For example,    *    *<blockquote>    *<pre>checkScalar("1.1 + 2.9", "4.0", "DECIMAL(2, 1) NOT NULL");</pre>    *</blockquote>    *    * @param expression Scalar expression    * @param result     Expected result    * @param resultType Expected result type    */

@@ -3183,9 +3183,9 @@ specifier|final
 name|SqlFunction
 name|TRIM
 init|=
-operator|new
 name|SqlTrimFunction
-argument_list|()
+operator|.
+name|INSTANCE
 decl_stmt|;
 specifier|public
 specifier|static

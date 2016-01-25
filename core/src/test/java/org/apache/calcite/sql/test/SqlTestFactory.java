@@ -106,7 +106,10 @@ name|SqlTestFactory
 block|{
 name|SqlOperatorTable
 name|createOperatorTable
-parameter_list|()
+parameter_list|(
+name|SqlTestFactory
+name|factory
+parameter_list|)
 function_decl|;
 name|SqlParser
 name|createParser

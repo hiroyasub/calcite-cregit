@@ -144,7 +144,7 @@ argument_list|,
 literal|false
 argument_list|)
 block|,
-comment|/** How NULL values should be sorted if neither NULLS FIRST nor NULLS LAST are    * specified. The defult, HIGH, sorts NULL values the same as Oracle. */
+comment|/** How NULL values should be sorted if neither NULLS FIRST nor NULLS LAST are    * specified. The default, HIGH, sorts NULL values the same as Oracle. */
 name|DEFAULT_NULL_COLLATION
 argument_list|(
 literal|"defaultNullCollation"
@@ -188,6 +188,20 @@ operator|.
 name|ORACLE
 argument_list|,
 literal|false
+argument_list|)
+block|,
+comment|/** Collection of built-in functions and operators. Valid values include    * "standard" and "oracle". */
+name|FUN
+argument_list|(
+literal|"fun"
+argument_list|,
+name|Type
+operator|.
+name|STRING
+argument_list|,
+literal|"standard"
+argument_list|,
+literal|true
 argument_list|)
 block|,
 comment|/** How identifiers are quoted.    *  If not specified, value from {@link #LEX} is used. */

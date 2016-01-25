@@ -200,6 +200,24 @@ block|,
 comment|/**    * A "CASE" expression.    */
 name|CASE
 block|,
+comment|/**    * The "NULLIF" operator.    */
+name|NULLIF
+block|,
+comment|/**    * The "COALESCE" operator.    */
+name|COALESCE
+block|,
+comment|/**    * The "DECODE" function (Oracle).    */
+name|DECODE
+block|,
+comment|/**    * The "NVL" function (Oracle).    */
+name|NVL
+block|,
+comment|/**    * The "GREATEST" function (Oracle).    */
+name|GREATEST
+block|,
+comment|/**    * The "LEAST" function (Oracle).    */
+name|LEAST
+block|,
 comment|// prefix operators
 comment|/**    * The logical "NOT" operator.    */
 name|NOT
@@ -301,6 +319,12 @@ name|CEIL
 block|,
 comment|/**    * The "TRIM" function.    */
 name|TRIM
+block|,
+comment|/**    * The "LTRIM" function (Oracle).    */
+name|LTRIM
+block|,
+comment|/**    * The "RTRIM" function (Oracle).    */
+name|RTRIM
 block|,
 comment|/**    * Call to a function using JDBC function syntax.    */
 name|JDBC_FN
@@ -799,6 +823,10 @@ argument_list|,
 name|ROW
 argument_list|,
 name|TRIM
+argument_list|,
+name|LTRIM
+argument_list|,
+name|RTRIM
 argument_list|,
 name|CAST
 argument_list|,
