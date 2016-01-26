@@ -13721,7 +13721,9 @@ argument_list|(
 name|selectItem
 argument_list|)
 argument_list|,
-literal|false
+name|Litmus
+operator|.
+name|IGNORE
 argument_list|)
 condition|)
 block|{
@@ -13757,7 +13759,9 @@ name|equalsDeep
 argument_list|(
 name|extraExpr
 argument_list|,
-literal|false
+name|Litmus
+operator|.
+name|IGNORE
 argument_list|)
 condition|)
 block|{
@@ -19487,7 +19491,9 @@ name|subQuery
 operator|.
 name|node
 argument_list|,
-literal|false
+name|Litmus
+operator|.
+name|IGNORE
 argument_list|)
 condition|)
 block|{
@@ -19533,7 +19539,9 @@ name|subQuery
 operator|.
 name|node
 argument_list|,
-literal|false
+name|Litmus
+operator|.
+name|IGNORE
 argument_list|)
 condition|)
 block|{
@@ -22117,7 +22125,9 @@ name|equalsDeep
 argument_list|(
 name|groupExpr
 argument_list|,
-literal|false
+name|Litmus
+operator|.
+name|IGNORE
 argument_list|)
 condition|)
 block|{

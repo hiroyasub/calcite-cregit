@@ -347,6 +347,20 @@ name|calcite
 operator|.
 name|util
 operator|.
+name|Litmus
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|util
+operator|.
 name|Util
 import|;
 end_import
@@ -1100,6 +1114,7 @@ name|Suggester
 name|suggester
 parameter_list|)
 block|{
+specifier|final
 name|Set
 argument_list|<
 name|String
@@ -1108,9 +1123,7 @@ name|used
 init|=
 operator|new
 name|LinkedHashSet
-argument_list|<
-name|String
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 name|int
@@ -1163,9 +1176,7 @@ name|nameList
 else|:
 operator|new
 name|ArrayList
-argument_list|<
-name|String
-argument_list|>
+argument_list|<>
 argument_list|(
 name|used
 argument_list|)
@@ -1500,6 +1511,7 @@ name|RelDataType
 name|rightRowType
 parameter_list|)
 block|{
+specifier|final
 name|List
 argument_list|<
 name|String
@@ -1508,9 +1520,7 @@ name|naturalColumnNames
 init|=
 operator|new
 name|ArrayList
-argument_list|<
-name|String
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 specifier|final
@@ -1623,9 +1633,7 @@ name|fields
 init|=
 operator|new
 name|ArrayList
-argument_list|<
-name|RelDataTypeField
-argument_list|>
+argument_list|<>
 argument_list|(
 name|columnNameList
 operator|.
@@ -2493,7 +2501,9 @@ name|equalsDeep
 argument_list|(
 name|expr
 argument_list|,
-literal|false
+name|Litmus
+operator|.
+name|IGNORE
 argument_list|)
 condition|)
 block|{
@@ -2866,6 +2876,9 @@ return|;
 block|}
 comment|//~ Inner Classes ----------------------------------------------------------
 comment|/**    * Walks over an expression, copying every node, and fully-qualifying every    * identifier.    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 specifier|static
 class|class

@@ -113,20 +113,6 @@ name|calcite
 operator|.
 name|util
 operator|.
-name|Stacks
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|util
-operator|.
 name|Util
 import|;
 end_import
@@ -215,6 +201,16 @@ name|java
 operator|.
 name|util
 operator|.
+name|ArrayDeque
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
 name|ArrayList
 import|;
 end_import
@@ -256,6 +252,16 @@ operator|.
 name|util
 operator|.
 name|Comparator
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Deque
 import|;
 end_import
 
@@ -412,11 +418,7 @@ name|subsetImportances
 init|=
 operator|new
 name|HashMap
-argument_list|<
-name|RelSubset
-argument_list|,
-name|Double
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 comment|/**    * The set of RelSubsets whose importance is currently in an artificially    * raised state. Typically this only includes RelSubsets which have only    * logical RelNodes.    */
@@ -429,9 +431,7 @@ name|boostedSubsets
 init|=
 operator|new
 name|HashSet
-argument_list|<
-name|RelSubset
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 comment|/**    * Map of {@link VolcanoPlannerPhase} to a list of rule-matches. Initially,    * there is an empty {@link PhaseMatchList} for each planner phase. As the    * planner invokes {@link #addMatch(VolcanoRuleMatch)} the rule-match is    * added to the appropriate PhaseMatchList(s). As the planner completes    * phases, the matching entry is removed from this list to avoid unused    * work.    */
@@ -446,11 +446,7 @@ name|matchListMap
 init|=
 operator|new
 name|EnumMap
-argument_list|<
-name|VolcanoPlannerPhase
-argument_list|,
-name|PhaseMatchList
-argument_list|>
+argument_list|<>
 argument_list|(
 name|VolcanoPlannerPhase
 operator|.
@@ -520,14 +516,7 @@ name|phaseRuleMapping
 operator|=
 operator|new
 name|EnumMap
-argument_list|<
-name|VolcanoPlannerPhase
-argument_list|,
-name|Set
-argument_list|<
-name|String
-argument_list|>
-argument_list|>
+argument_list|<>
 argument_list|(
 name|VolcanoPlannerPhase
 operator|.
@@ -843,7 +832,8 @@ literal|")"
 argument_list|)
 expr_stmt|;
 block|}
-name|ArrayList
+specifier|final
+name|List
 argument_list|<
 name|RelSubset
 argument_list|>
@@ -851,11 +841,10 @@ name|boostRemovals
 init|=
 operator|new
 name|ArrayList
-argument_list|<
-name|RelSubset
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
+specifier|final
 name|Iterator
 argument_list|<
 name|RelSubset
@@ -2106,17 +2095,15 @@ comment|//   Project(A, X = X + 0 + 0)
 comment|//   Project(A, X = X + 0 + 0 + 0)
 comment|// also in the same subset. They are valid but useless.
 specifier|final
-name|List
+name|Deque
 argument_list|<
 name|RelSubset
 argument_list|>
 name|subsets
 init|=
 operator|new
-name|ArrayList
-argument_list|<
-name|RelSubset
-argument_list|>
+name|ArrayDeque
+argument_list|<>
 argument_list|()
 decl_stmt|;
 try|try
@@ -2159,7 +2146,7 @@ specifier|private
 name|void
 name|checkDuplicateSubsets
 parameter_list|(
-name|List
+name|Deque
 argument_list|<
 name|RelSubset
 argument_list|>
@@ -2219,12 +2206,10 @@ name|isEmpty
 argument_list|()
 condition|)
 block|{
-name|Stacks
+name|subsets
 operator|.
 name|push
 argument_list|(
-name|subsets
-argument_list|,
 name|subset
 argument_list|)
 expr_stmt|;
@@ -2249,15 +2234,20 @@ name|rels
 argument_list|)
 expr_stmt|;
 block|}
-name|Stacks
+specifier|final
+name|RelSubset
+name|x
+init|=
+name|subsets
 operator|.
 name|pop
-argument_list|(
-name|subsets
-argument_list|,
+argument_list|()
+decl_stmt|;
+assert|assert
+name|x
+operator|==
 name|subset
-argument_list|)
-expr_stmt|;
+assert|;
 block|}
 block|}
 comment|/**    * Returns the importance of a child to a parent. This is defined by the    * importance of the parent, pro-rated by the cost of the child. For    * example, if the parent has importance = 0.8 and cost 100, then a child    * with cost 50 will have importance 0.4, and a child with cost 25 will have    * importance 0.2.    */
@@ -2702,9 +2692,7 @@ name|names
 init|=
 operator|new
 name|HashSet
-argument_list|<
-name|String
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 comment|/**      * Multi-map of RelSubset to VolcanoRuleMatches. Used to      * {@link VolcanoRuleMatch#clearCachedImportance() clear} the rule-match's      * cached importance when the importance of a related RelSubset is modified      * (e.g., due to invocation of      * {@link RuleQueue#boostImportance(Collection, double)}).      */

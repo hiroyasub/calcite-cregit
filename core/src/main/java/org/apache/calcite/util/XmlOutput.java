@@ -85,6 +85,16 @@ name|java
 operator|.
 name|util
 operator|.
+name|ArrayDeque
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
 name|ArrayList
 import|;
 end_import
@@ -105,7 +115,7 @@ name|java
 operator|.
 name|util
 operator|.
-name|List
+name|Deque
 import|;
 end_import
 
@@ -128,17 +138,15 @@ decl_stmt|;
 comment|// The tagStack is maintained to check that tags are balanced.
 specifier|private
 specifier|final
-name|List
+name|Deque
 argument_list|<
 name|String
 argument_list|>
 name|tagStack
 init|=
 operator|new
-name|ArrayList
-argument_list|<
-name|String
-argument_list|>
+name|ArrayDeque
+argument_list|<>
 argument_list|()
 decl_stmt|;
 comment|// The class maintains an indentation level to improve output quality.
@@ -537,12 +545,10 @@ operator|.
 name|flush
 argument_list|()
 expr_stmt|;
-name|Stacks
+name|tagStack
 operator|.
 name|push
 argument_list|(
-name|tagStack
-argument_list|,
 name|tagName
 argument_list|)
 expr_stmt|;
@@ -626,15 +632,22 @@ name|tagName
 parameter_list|)
 block|{
 comment|// Check that the end tag matches the corresponding start tag
-name|Stacks
+name|String
+name|x
+init|=
+name|tagStack
 operator|.
 name|pop
+argument_list|()
+decl_stmt|;
+assert|assert
+name|x
+operator|.
+name|equals
 argument_list|(
-name|tagStack
-argument_list|,
 name|tagName
 argument_list|)
-expr_stmt|;
+assert|;
 comment|// Lower the indent and display the end tag
 name|indent
 operator|--

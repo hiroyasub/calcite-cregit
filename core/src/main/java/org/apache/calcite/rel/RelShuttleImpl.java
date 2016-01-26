@@ -239,15 +239,11 @@ end_import
 
 begin_import
 import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
+name|java
 operator|.
 name|util
 operator|.
-name|Stacks
+name|ArrayDeque
 import|;
 end_import
 
@@ -258,6 +254,16 @@ operator|.
 name|util
 operator|.
 name|ArrayList
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Deque
 import|;
 end_import
 
@@ -284,17 +290,15 @@ name|RelShuttle
 block|{
 specifier|protected
 specifier|final
-name|List
+name|Deque
 argument_list|<
 name|RelNode
 argument_list|>
 name|stack
 init|=
 operator|new
-name|ArrayList
-argument_list|<
-name|RelNode
-argument_list|>
+name|ArrayDeque
+argument_list|<>
 argument_list|()
 decl_stmt|;
 comment|/**    * Visits a particular child of a parent.    */
@@ -312,12 +316,10 @@ name|RelNode
 name|child
 parameter_list|)
 block|{
-name|Stacks
+name|stack
 operator|.
 name|push
 argument_list|(
-name|stack
-argument_list|,
 name|parent
 argument_list|)
 expr_stmt|;
@@ -349,9 +351,7 @@ name|newInputs
 init|=
 operator|new
 name|ArrayList
-argument_list|<
-name|RelNode
-argument_list|>
+argument_list|<>
 argument_list|(
 name|parent
 operator|.
@@ -388,14 +388,10 @@ return|;
 block|}
 finally|finally
 block|{
-name|Stacks
+name|stack
 operator|.
 name|pop
-argument_list|(
-name|stack
-argument_list|,
-name|parent
-argument_list|)
+argument_list|()
 expr_stmt|;
 block|}
 block|}

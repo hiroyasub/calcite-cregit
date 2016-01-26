@@ -61,7 +61,7 @@ name|java
 operator|.
 name|util
 operator|.
-name|ArrayList
+name|ArrayDeque
 import|;
 end_import
 
@@ -71,7 +71,7 @@ name|java
 operator|.
 name|util
 operator|.
-name|List
+name|Deque
 import|;
 end_import
 
@@ -190,17 +190,15 @@ name|needIndent
 decl_stmt|;
 specifier|private
 specifier|final
-name|List
+name|Deque
 argument_list|<
 name|Character
 argument_list|>
 name|quoteStack
 init|=
 operator|new
-name|ArrayList
-argument_list|<
-name|Character
-argument_list|>
+name|ArrayDeque
+argument_list|<>
 argument_list|()
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
@@ -350,12 +348,10 @@ argument_list|(
 name|quoteChar
 argument_list|)
 expr_stmt|;
-name|Stacks
+name|quoteStack
 operator|.
 name|push
 argument_list|(
-name|quoteStack
-argument_list|,
 name|quoteChar
 argument_list|)
 expr_stmt|;
@@ -370,15 +366,20 @@ parameter_list|)
 throws|throws
 name|IOException
 block|{
-name|Stacks
+specifier|final
+name|Character
+name|pop
+init|=
+name|quoteStack
 operator|.
 name|pop
-argument_list|(
-name|quoteStack
-argument_list|,
+argument_list|()
+decl_stmt|;
+assert|assert
+name|pop
+operator|==
 name|quoteChar
-argument_list|)
-expr_stmt|;
+assert|;
 name|writeQuote
 argument_list|(
 name|quoteChar

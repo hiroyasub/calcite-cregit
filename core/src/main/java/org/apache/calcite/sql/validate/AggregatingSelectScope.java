@@ -133,6 +133,20 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|util
+operator|.
+name|Litmus
+import|;
+end_import
+
+begin_import
+import|import
 name|com
 operator|.
 name|google
@@ -781,7 +795,9 @@ name|equalsDeep
 argument_list|(
 name|node
 argument_list|,
-literal|false
+name|Litmus
+operator|.
+name|IGNORE
 argument_list|)
 condition|)
 block|{
@@ -1190,7 +1206,9 @@ name|groupExpr
 operator|.
 name|e
 argument_list|,
-literal|false
+name|Litmus
+operator|.
+name|IGNORE
 argument_list|)
 condition|)
 block|{

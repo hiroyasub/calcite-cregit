@@ -139,6 +139,30 @@ begin_import
 import|import
 name|org
 operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|util
+operator|.
+name|Litmus
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|junit
+operator|.
+name|Ignore
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
 name|junit
 operator|.
 name|Test
@@ -395,7 +419,9 @@ name|equalsDeep
 argument_list|(
 name|node2
 argument_list|,
-literal|true
+name|Litmus
+operator|.
+name|THROW
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -543,7 +569,9 @@ name|equalsDeep
 argument_list|(
 name|valuesCall2
 argument_list|,
-literal|true
+name|Litmus
+operator|.
+name|THROW
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -1025,10 +1053,16 @@ literal|"${formatted}"
 argument_list|)
 expr_stmt|;
 block|}
-comment|// test disabled because default SQL parser cannot parse DDL
+annotation|@
+name|Ignore
+argument_list|(
+literal|"default SQL parser cannot parse DDL"
+argument_list|)
+annotation|@
+name|Test
 specifier|public
 name|void
-name|_testExplain
+name|testExplain
 parameter_list|()
 block|{
 name|assertPrintsTo
@@ -1223,7 +1257,7 @@ literal|"union select * from w "
 operator|+
 literal|"order by a, b"
 argument_list|,
-comment|// todo: SELECT should not be indended from UNION, like this:
+comment|// todo: SELECT should not be indented from UNION, like this:
 comment|// UNION
 comment|//     SELECT *
 comment|//     FROM `W`

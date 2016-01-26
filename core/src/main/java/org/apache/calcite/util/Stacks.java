@@ -30,6 +30,9 @@ comment|/**  * Utilities to make vanilla lists look like stacks.  */
 end_comment
 
 begin_class
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 class|class
 name|Stacks
