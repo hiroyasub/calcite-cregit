@@ -69,6 +69,20 @@ name|calcite
 operator|.
 name|avatica
 operator|.
+name|AvaticaUtils
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|avatica
+operator|.
 name|ConnectionPropertiesImpl
 import|;
 end_import
@@ -1816,15 +1830,17 @@ parameter_list|()
 throws|throws
 name|Exception
 block|{
-name|System
+specifier|final
+name|String
+name|t
+init|=
+name|AvaticaUtils
 operator|.
-name|out
-operator|.
-name|println
+name|unique
 argument_list|(
-name|url
+literal|"TEST_TABLE2"
 argument_list|)
-expr_stmt|;
+decl_stmt|;
 name|AvaticaConnection
 name|conn
 init|=
@@ -1846,6 +1862,21 @@ operator|.
 name|createStatement
 argument_list|()
 decl_stmt|;
+specifier|final
+name|String
+name|create
+init|=
+name|String
+operator|.
+name|format
+argument_list|(
+literal|"create table if not exists %s ("
+operator|+
+literal|"  id int not null, msg varchar(255) not null)"
+argument_list|,
+name|t
+argument_list|)
+decl_stmt|;
 name|int
 name|status
 init|=
@@ -1853,9 +1884,7 @@ name|statement
 operator|.
 name|executeUpdate
 argument_list|(
-literal|"create table if not exists "
-operator|+
-literal|"TEST_TABLE2 (id int not null, msg varchar(255) not null)"
+name|create
 argument_list|)
 decl_stmt|;
 name|assertEquals
@@ -1872,16 +1901,18 @@ operator|.
 name|createStatement
 argument_list|()
 expr_stmt|;
-name|status
-operator|=
-name|statement
+specifier|final
+name|String
+name|update
+init|=
+name|String
 operator|.
-name|executeUpdate
+name|format
 argument_list|(
-literal|"insert into TEST_TABLE2 values ("
-operator|+
-literal|"'"
-operator|+
+literal|"insert into %s values ('%d', '%s')"
+argument_list|,
+name|t
+argument_list|,
 name|RANDOM
 operator|.
 name|nextInt
@@ -1890,15 +1921,20 @@ name|Integer
 operator|.
 name|MAX_VALUE
 argument_list|)
-operator|+
-literal|"', '"
-operator|+
+argument_list|,
 name|UUID
 operator|.
 name|randomUUID
 argument_list|()
-operator|+
-literal|"')"
+argument_list|)
+decl_stmt|;
+name|status
+operator|=
+name|statement
+operator|.
+name|executeUpdate
+argument_list|(
+name|update
 argument_list|)
 expr_stmt|;
 name|assertEquals

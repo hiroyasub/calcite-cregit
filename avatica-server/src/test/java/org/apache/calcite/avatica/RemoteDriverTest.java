@@ -1847,19 +1847,44 @@ name|Exception
 block|{
 specifier|final
 name|String
+name|t
+init|=
+name|AvaticaUtils
+operator|.
+name|unique
+argument_list|(
+literal|"TEST_TABLE2"
+argument_list|)
+decl_stmt|;
+specifier|final
+name|String
 name|create
 init|=
-literal|"create table if not exists TEST_TABLE2 ("
+name|String
+operator|.
+name|format
+argument_list|(
+literal|"create table if not exists %s ("
 operator|+
 literal|"id int not null, "
 operator|+
 literal|"msg varchar(3) not null)"
+argument_list|,
+name|t
+argument_list|)
 decl_stmt|;
 specifier|final
 name|String
 name|insert
 init|=
-literal|"insert into TEST_TABLE2 values(1, 'foo')"
+name|String
+operator|.
+name|format
+argument_list|(
+literal|"insert into %s values(1, 'foo')"
+argument_list|,
+name|t
+argument_list|)
 decl_stmt|;
 name|Connection
 name|connection
@@ -2944,31 +2969,70 @@ argument_list|()
 expr_stmt|;
 specifier|final
 name|String
+name|t
+init|=
+name|AvaticaUtils
+operator|.
+name|unique
+argument_list|(
+literal|"TEST_TABLE"
+argument_list|)
+decl_stmt|;
+specifier|final
+name|String
 name|drop
 init|=
-literal|"drop table TEST_TABLE if exists"
+name|String
+operator|.
+name|format
+argument_list|(
+literal|"drop table %s if exists"
+argument_list|,
+name|t
+argument_list|)
 decl_stmt|;
 specifier|final
 name|String
 name|create
 init|=
-literal|"create table TEST_TABLE("
+name|String
+operator|.
+name|format
+argument_list|(
+literal|"create table %s("
 operator|+
 literal|"id int not null, "
 operator|+
 literal|"msg varchar(3) not null)"
+argument_list|,
+name|t
+argument_list|)
 decl_stmt|;
 specifier|final
 name|String
 name|insert
 init|=
-literal|"insert into TEST_TABLE values(1, 'foo')"
+name|String
+operator|.
+name|format
+argument_list|(
+literal|"insert into %s values(1, 'foo')"
+argument_list|,
+name|t
+argument_list|)
 decl_stmt|;
 specifier|final
 name|String
 name|update
 init|=
-literal|"update TEST_TABLE set msg='bar' where id=1"
+name|String
+operator|.
+name|format
+argument_list|(
+literal|"update %s set msg='bar' where id=1"
+argument_list|,
+name|t
+argument_list|)
 decl_stmt|;
 try|try
 init|(
