@@ -609,6 +609,16 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|slf4j
+operator|.
+name|Logger
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|lang
@@ -636,30 +646,6 @@ operator|.
 name|util
 operator|.
 name|List
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|logging
-operator|.
-name|Level
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|logging
-operator|.
-name|Logger
 import|;
 end_import
 
@@ -1024,24 +1010,12 @@ argument_list|,
 name|desiredTraits
 argument_list|)
 decl_stmt|;
-if|if
-condition|(
 name|LOGGER
 operator|.
-name|isLoggable
+name|debug
 argument_list|(
-name|Level
-operator|.
-name|FINE
-argument_list|)
-condition|)
-block|{
-name|LOGGER
-operator|.
-name|fine
-argument_list|(
-literal|"Plan after physical tweaks: "
-operator|+
+literal|"Plan after physical tweaks: {}"
+argument_list|,
 name|RelOptUtil
 operator|.
 name|toString
@@ -1054,7 +1028,6 @@ name|ALL_ATTRIBUTES
 argument_list|)
 argument_list|)
 expr_stmt|;
-block|}
 return|return
 name|root
 operator|.

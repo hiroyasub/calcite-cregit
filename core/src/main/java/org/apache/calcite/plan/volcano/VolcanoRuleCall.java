@@ -207,18 +207,6 @@ name|Map
 import|;
 end_import
 
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|logging
-operator|.
-name|Level
-import|;
-end_import
-
 begin_comment
 comment|/**  *<code>VolcanoRuleCall</code> implements the {@link RelOptRuleCall} interface  * for VolcanoPlanner.  */
 end_comment
@@ -356,31 +344,31 @@ if|if
 condition|(
 name|LOGGER
 operator|.
-name|isLoggable
-argument_list|(
-name|Level
-operator|.
-name|FINE
-argument_list|)
+name|isDebugEnabled
+argument_list|()
 condition|)
 block|{
 name|LOGGER
 operator|.
-name|fine
+name|debug
 argument_list|(
-literal|"Transform to: rel#"
+literal|"Transform to: rel#{}"
 operator|+
 name|rel
 operator|.
 name|getId
 argument_list|()
 operator|+
-literal|" via "
-operator|+
+literal|" via {}{}"
+argument_list|,
+name|rel
+operator|.
+name|getId
+argument_list|()
+argument_list|,
 name|getRule
 argument_list|()
-operator|+
-operator|(
+argument_list|,
 name|equiv
 operator|.
 name|isEmpty
@@ -391,7 +379,6 @@ else|:
 literal|" with equivalences "
 operator|+
 name|equiv
-operator|)
 argument_list|)
 expr_stmt|;
 if|if
@@ -446,12 +433,8 @@ if|if
 condition|(
 name|LOGGER
 operator|.
-name|isLoggable
-argument_list|(
-name|Level
-operator|.
-name|FINEST
-argument_list|)
+name|isTraceEnabled
+argument_list|()
 condition|)
 block|{
 comment|// Cannot call RelNode.toString() yet, because rel has not
@@ -475,28 +458,22 @@ argument_list|()
 decl_stmt|;
 name|LOGGER
 operator|.
-name|finest
+name|trace
 argument_list|(
-literal|"call#"
-operator|+
+literal|"call#{}: Rule {} arguments {} created {}"
+argument_list|,
 name|id
-operator|+
-literal|": Rule "
-operator|+
+argument_list|,
 name|getRule
 argument_list|()
-operator|+
-literal|" arguments "
-operator|+
+argument_list|,
 name|Arrays
 operator|.
 name|toString
 argument_list|(
 name|rels
 argument_list|)
-operator|+
-literal|" created "
-operator|+
+argument_list|,
 name|relDesc
 argument_list|)
 expr_stmt|;
@@ -685,33 +662,16 @@ argument_list|()
 argument_list|)
 condition|)
 block|{
-if|if
-condition|(
 name|LOGGER
 operator|.
-name|isLoggable
+name|debug
 argument_list|(
-name|Level
-operator|.
-name|FINE
-argument_list|)
-condition|)
-block|{
-name|LOGGER
-operator|.
-name|fine
-argument_list|(
-literal|"Rule ["
-operator|+
+literal|"Rule [{}] not fired due to exclusion filter"
+argument_list|,
 name|getRule
 argument_list|()
-operator|+
-literal|"] not fired"
-operator|+
-literal|" due to exclusion filter"
 argument_list|)
 expr_stmt|;
-block|}
 return|return;
 block|}
 for|for
@@ -756,41 +716,20 @@ operator|==
 literal|null
 condition|)
 block|{
-if|if
-condition|(
 name|LOGGER
 operator|.
-name|isLoggable
+name|debug
 argument_list|(
-name|Level
-operator|.
-name|FINE
-argument_list|)
-condition|)
-block|{
-name|LOGGER
-operator|.
-name|fine
-argument_list|(
-literal|"Rule ["
-operator|+
+literal|"Rule [{}] not fired because operand #{} ({}) has no subset"
+argument_list|,
 name|getRule
 argument_list|()
-operator|+
-literal|"] not fired because"
-operator|+
-literal|" operand #"
-operator|+
+argument_list|,
 name|i
-operator|+
-literal|" ("
-operator|+
+argument_list|,
 name|rel
-operator|+
-literal|") has no subset"
 argument_list|)
 expr_stmt|;
-block|}
 return|return;
 block|}
 if|if
@@ -804,41 +743,20 @@ operator|!=
 literal|null
 condition|)
 block|{
-if|if
-condition|(
 name|LOGGER
 operator|.
-name|isLoggable
+name|debug
 argument_list|(
-name|Level
-operator|.
-name|FINE
-argument_list|)
-condition|)
-block|{
-name|LOGGER
-operator|.
-name|fine
-argument_list|(
-literal|"Rule ["
-operator|+
+literal|"Rule [{}] not fired because operand #{} ({}) belongs to obsolete set"
+argument_list|,
 name|getRule
 argument_list|()
-operator|+
-literal|"] not fired because"
-operator|+
-literal|" operand #"
-operator|+
+argument_list|,
 name|i
-operator|+
-literal|" ("
-operator|+
+argument_list|,
 name|rel
-operator|+
-literal|") belongs to obsolete set"
 argument_list|)
 expr_stmt|;
-block|}
 return|return;
 block|}
 specifier|final
@@ -869,41 +787,20 @@ literal|0d
 operator|)
 condition|)
 block|{
-if|if
-condition|(
 name|LOGGER
 operator|.
-name|isLoggable
+name|debug
 argument_list|(
-name|Level
-operator|.
-name|FINE
-argument_list|)
-condition|)
-block|{
-name|LOGGER
-operator|.
-name|fine
-argument_list|(
-literal|"Rule ["
-operator|+
+literal|"Rule [{}] not fired because operand #{} ({}) has importance=0"
+argument_list|,
 name|getRule
 argument_list|()
-operator|+
-literal|"] not fired because"
-operator|+
-literal|" operand #"
-operator|+
+argument_list|,
 name|i
-operator|+
-literal|" ("
-operator|+
+argument_list|,
 name|rel
-operator|+
-literal|") has importance=0"
 argument_list|)
 expr_stmt|;
-block|}
 return|return;
 block|}
 block|}
@@ -911,29 +808,21 @@ if|if
 condition|(
 name|LOGGER
 operator|.
-name|isLoggable
-argument_list|(
-name|Level
-operator|.
-name|FINE
-argument_list|)
+name|isDebugEnabled
+argument_list|()
 condition|)
 block|{
 name|LOGGER
 operator|.
-name|fine
+name|debug
 argument_list|(
-literal|"call#"
-operator|+
+literal|"call#{}: Apply rule [{}] to {}"
+argument_list|,
 name|id
-operator|+
-literal|": Apply rule ["
-operator|+
+argument_list|,
 name|getRule
 argument_list|()
-operator|+
-literal|"] to "
-operator|+
+argument_list|,
 name|Arrays
 operator|.
 name|toString
@@ -988,12 +877,8 @@ if|if
 condition|(
 name|LOGGER
 operator|.
-name|isLoggable
-argument_list|(
-name|Level
-operator|.
-name|FINE
-argument_list|)
+name|isDebugEnabled
+argument_list|()
 condition|)
 block|{
 name|this
@@ -1018,12 +903,8 @@ if|if
 condition|(
 name|LOGGER
 operator|.
-name|isLoggable
-argument_list|(
-name|Level
-operator|.
-name|FINE
-argument_list|)
+name|isDebugEnabled
+argument_list|()
 condition|)
 block|{
 if|if
@@ -1036,13 +917,11 @@ condition|)
 block|{
 name|LOGGER
 operator|.
-name|fine
+name|debug
 argument_list|(
-literal|"call#"
-operator|+
+literal|"call#{} generated 0 successors."
+argument_list|,
 name|id
-operator|+
-literal|" generated 0 successors."
 argument_list|)
 expr_stmt|;
 block|}
@@ -1050,21 +929,17 @@ else|else
 block|{
 name|LOGGER
 operator|.
-name|fine
+name|debug
 argument_list|(
-literal|"call#"
-operator|+
+literal|"call#{} generated {} successors: {}"
+argument_list|,
 name|id
-operator|+
-literal|" generated "
-operator|+
+argument_list|,
 name|generatedRelList
 operator|.
 name|size
 argument_list|()
-operator|+
-literal|" successors: "
-operator|+
+argument_list|,
 name|generatedRelList
 argument_list|)
 expr_stmt|;

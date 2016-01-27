@@ -153,6 +153,16 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|slf4j
+operator|.
+name|LoggerFactory
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|io
@@ -275,18 +285,6 @@ name|Set
 import|;
 end_import
 
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|logging
-operator|.
-name|Logger
-import|;
-end_import
-
 begin_comment
 comment|/**  * Pretty printer for SQL statements.  *  *<p>There are several options to control the format.  *  *<table>  *<caption>Formatting options</caption>  *<tr>  *<th>Option</th>  *<th>Description</th>  *<th>Default</th>  *</tr>  *<tr>  *<td>{@link #setSelectListItemsOnSeparateLines SelectListItemsOnSeparateLines}  *</td>  *<td>Whether each item in the select clause is on its own line</td>  *<td>false</td>  *</tr>  *<tr>  *<td>{@link #setCaseClausesOnNewLines CaseClausesOnNewLines}</td>  *<td>Whether the WHEN, THEN and ELSE clauses of a CASE expression appear at  * the start of a new line.</td>  *<td>false</td>  *</tr>  *<tr>  *<td>{@link #setIndentation Indentation}</td>  *<td>Number of spaces to indent</td>  *<td>4</td>  *</tr>  *<tr>  *<td>{@link #setKeywordsLowerCase KeywordsLowerCase}</td>  *<td>Whether to print keywords (SELECT, AS, etc.) in lower-case.</td>  *<td>false</td>  *</tr>  *<tr>  *<td>{@link #isAlwaysUseParentheses ParenthesizeAllExprs}</td>  *<td>Whether to enclose all expressions in parentheses, even if the operator  * has high enough precedence that the parentheses are not required.  *  *<p>For example, the parentheses are required in the expression<code>(a + b)  * c</code> because the '*' operator has higher precedence than the '+'  * operator, and so without the parentheses, the expression would be equivalent  * to<code>a + (b * c)</code>. The fully-parenthesized expression,<code>((a +  * b) * c)</code> is unambiguous even if you don't know the precedence of every  * operator.</td>  *<td></td>  *</tr>  *<tr>  *<td>{@link #setQuoteAllIdentifiers QuoteAllIdentifiers}</td>  *<td>Whether to quote all identifiers, even those which would be correct  * according to the rules of the {@link SqlDialect} if quotation marks were  * omitted.</td>  *<td>true</td>  *</tr>  *<tr>  *<td>{@link #setSelectListItemsOnSeparateLines SelectListItemsOnSeparateLines}  *</td>  *<td>Whether each item in the select clause is on its own line.</td>  *<td>false</td>  *</tr>  *<tr>  *<td>{@link #setSubqueryStyle SubqueryStyle}</td>  *<td>Style for formatting sub-queries. Values are:  * {@link org.apache.calcite.sql.SqlWriter.SubqueryStyle#HYDE Hyde},  * {@link org.apache.calcite.sql.SqlWriter.SubqueryStyle#BLACK Black}.</td>  *  *<td>{@link org.apache.calcite.sql.SqlWriter.SubqueryStyle#HYDE Hyde}</td>  *</tr>  *<tr>  *<td>{@link #setLineLength LineLength}</td>  *<td>Set the desired maximum length for lines (to look nice in editors,  * printouts, etc.).</td>  *<td>0</td>  *</tr>  *</table>  */
 end_comment
@@ -308,7 +306,7 @@ init|=
 operator|new
 name|CalciteLogger
 argument_list|(
-name|Logger
+name|LoggerFactory
 operator|.
 name|getLogger
 argument_list|(
@@ -2630,14 +2628,12 @@ expr_stmt|;
 block|}
 name|LOGGER
 operator|.
-name|finest
+name|trace
 argument_list|(
-literal|"Token is '"
-operator|+
+literal|"Token is '{}'; result is {}"
+argument_list|,
 name|s
-operator|+
-literal|"'; result is "
-operator|+
+argument_list|,
 name|result
 argument_list|)
 expr_stmt|;

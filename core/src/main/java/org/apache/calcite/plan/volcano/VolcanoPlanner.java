@@ -1245,18 +1245,6 @@ name|java
 operator|.
 name|util
 operator|.
-name|logging
-operator|.
-name|Level
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
 name|regex
 operator|.
 name|Matcher
@@ -4019,49 +4007,28 @@ name|injectImportanceBoost
 argument_list|()
 expr_stmt|;
 block|}
-if|if
-condition|(
 name|LOGGER
 operator|.
-name|isLoggable
+name|debug
 argument_list|(
-name|Level
-operator|.
-name|FINE
-argument_list|)
-condition|)
-block|{
-name|LOGGER
-operator|.
-name|fine
-argument_list|(
-literal|"PLANNER = "
-operator|+
+literal|"PLANNER = {}; TICK = {}/{}; PHASE = {}; COST = {}"
+argument_list|,
 name|this
-operator|+
-literal|"; TICK = "
-operator|+
+argument_list|,
 name|cumulativeTicks
-operator|+
-literal|"/"
-operator|+
+argument_list|,
 name|tick
-operator|+
-literal|"; PHASE = "
-operator|+
+argument_list|,
 name|phase
 operator|.
 name|toString
 argument_list|()
-operator|+
-literal|"; COST = "
-operator|+
+argument_list|,
 name|root
 operator|.
 name|bestCost
 argument_list|)
 expr_stmt|;
-block|}
 name|VolcanoRuleMatch
 name|match
 init|=
@@ -4119,12 +4086,8 @@ if|if
 condition|(
 name|LOGGER
 operator|.
-name|isLoggable
-argument_list|(
-name|Level
-operator|.
-name|FINER
-argument_list|)
+name|isTraceEnabled
+argument_list|()
 condition|)
 block|{
 name|StringWriter
@@ -4156,7 +4119,7 @@ argument_list|()
 expr_stmt|;
 name|LOGGER
 operator|.
-name|finer
+name|trace
 argument_list|(
 name|sw
 operator|.
@@ -4179,20 +4142,16 @@ if|if
 condition|(
 name|LOGGER
 operator|.
-name|isLoggable
-argument_list|(
-name|Level
-operator|.
-name|FINE
-argument_list|)
+name|isDebugEnabled
+argument_list|()
 condition|)
 block|{
 name|LOGGER
 operator|.
-name|fine
+name|debug
 argument_list|(
-literal|"Cheapest plan:\n"
-operator|+
+literal|"Cheapest plan:\n{}"
+argument_list|,
 name|RelOptUtil
 operator|.
 name|toString
@@ -4207,10 +4166,10 @@ argument_list|)
 expr_stmt|;
 name|LOGGER
 operator|.
-name|fine
+name|debug
 argument_list|(
-literal|"Provenance:\n"
-operator|+
+literal|"Provenance:\n{}"
+argument_list|,
 name|provenance
 argument_list|(
 name|cheapest
@@ -5114,12 +5073,8 @@ if|if
 condition|(
 name|LOGGER
 operator|.
-name|isLoggable
-argument_list|(
-name|Level
-operator|.
-name|FINE
-argument_list|)
+name|isDebugEnabled
+argument_list|()
 condition|)
 block|{
 name|validate
@@ -6937,24 +6892,18 @@ argument_list|()
 decl_stmt|;
 name|LOGGER
 operator|.
-name|finer
+name|trace
 argument_list|(
-literal|"Rename #"
-operator|+
+literal|"Rename #{} from '{}' to '{}'"
+argument_list|,
 name|rel
 operator|.
 name|getId
 argument_list|()
-operator|+
-literal|" from '"
-operator|+
+argument_list|,
 name|oldDigest
-operator|+
-literal|"' to '"
-operator|+
+argument_list|,
 name|newDigest
-operator|+
-literal|"'"
 argument_list|)
 expr_stmt|;
 specifier|final
@@ -7000,17 +6949,15 @@ comment|// There's already an equivalent with the same name, and we
 comment|// just knocked it out. Put it back, and forget about 'rel'.
 name|LOGGER
 operator|.
-name|finer
+name|trace
 argument_list|(
-literal|"After renaming rel#"
-operator|+
+literal|"After renaming rel#{} it is now equivalent to rel#{}"
+argument_list|,
 name|rel
 operator|.
 name|getId
 argument_list|()
-operator|+
-literal|", it is now equivalent to rel#"
-operator|+
+argument_list|,
 name|equivRel
 operator|.
 name|getId
@@ -8137,38 +8084,23 @@ operator|!=
 literal|null
 condition|)
 block|{
-if|if
-condition|(
 name|LOGGER
 operator|.
-name|isLoggable
+name|trace
 argument_list|(
-name|Level
-operator|.
-name|FINER
-argument_list|)
-condition|)
-block|{
-name|LOGGER
-operator|.
-name|finer
-argument_list|(
-literal|"Register: rel#"
-operator|+
+literal|"Register: rel#{} is equivalent to {}"
+argument_list|,
 name|rel
 operator|.
 name|getId
 argument_list|()
-operator|+
-literal|" is equivalent to "
-operator|+
+argument_list|,
 name|equivExp
 operator|.
 name|getDescription
 argument_list|()
 argument_list|)
 expr_stmt|;
-block|}
 return|return
 name|registerSubset
 argument_list|(
@@ -8236,40 +8168,23 @@ literal|null
 operator|)
 condition|)
 block|{
-if|if
-condition|(
 name|LOGGER
 operator|.
-name|isLoggable
+name|trace
 argument_list|(
-name|Level
-operator|.
-name|FINER
-argument_list|)
-condition|)
-block|{
-name|LOGGER
-operator|.
-name|finer
-argument_list|(
-literal|"Register #"
-operator|+
+literal|"Register #{} {} (and merge sets, because it is a conversion)"
+argument_list|,
 name|rel
 operator|.
 name|getId
 argument_list|()
-operator|+
-literal|" "
-operator|+
+argument_list|,
 name|rel
 operator|.
 name|getDigest
 argument_list|()
-operator|+
-literal|" (and merge sets, because it is a conversion)"
 argument_list|)
 expr_stmt|;
-block|}
 name|merge
 argument_list|(
 name|set
@@ -8484,38 +8399,23 @@ operator|.
 name|getDigest
 argument_list|()
 assert|;
-if|if
-condition|(
 name|LOGGER
 operator|.
-name|isLoggable
+name|trace
 argument_list|(
-name|Level
-operator|.
-name|FINER
-argument_list|)
-condition|)
-block|{
-name|LOGGER
-operator|.
-name|finer
-argument_list|(
-literal|"Register "
-operator|+
+literal|"Register {} in {}"
+argument_list|,
 name|rel
 operator|.
 name|getDescription
 argument_list|()
-operator|+
-literal|" in "
-operator|+
+argument_list|,
 name|subset
 operator|.
 name|getDescription
 argument_list|()
 argument_list|)
 expr_stmt|;
-block|}
 comment|// This relational expression may have been registered while we
 comment|// recursively registered its children. If this is the case, we're done.
 if|if
@@ -8788,20 +8688,16 @@ condition|)
 block|{
 name|LOGGER
 operator|.
-name|finer
+name|trace
 argument_list|(
-literal|"Register #"
-operator|+
+literal|"Register #{} {}, and merge sets"
+argument_list|,
 name|subset
 operator|.
 name|getId
 argument_list|()
-operator|+
-literal|" "
-operator|+
+argument_list|,
 name|subset
-operator|+
-literal|", and merge sets"
 argument_list|)
 expr_stmt|;
 name|merge

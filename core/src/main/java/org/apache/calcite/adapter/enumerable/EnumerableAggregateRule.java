@@ -225,7 +225,7 @@ name|EnumerableRules
 operator|.
 name|LOGGER
 operator|.
-name|fine
+name|debug
 argument_list|(
 name|e
 operator|.

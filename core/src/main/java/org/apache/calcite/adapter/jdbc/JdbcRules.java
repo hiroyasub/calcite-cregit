@@ -893,6 +893,16 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|slf4j
+operator|.
+name|Logger
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -918,18 +928,6 @@ operator|.
 name|util
 operator|.
 name|Set
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|logging
-operator|.
-name|Logger
 import|;
 end_import
 
@@ -1393,7 +1391,7 @@ parameter_list|)
 block|{
 name|LOGGER
 operator|.
-name|fine
+name|debug
 argument_list|(
 name|e
 operator|.
@@ -2813,7 +2811,7 @@ parameter_list|)
 block|{
 name|LOGGER
 operator|.
-name|fine
+name|debug
 argument_list|(
 name|e
 operator|.

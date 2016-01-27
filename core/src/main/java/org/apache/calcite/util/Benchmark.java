@@ -33,11 +33,21 @@ end_import
 
 begin_import
 import|import
-name|java
+name|org
 operator|.
-name|text
+name|slf4j
 operator|.
-name|MessageFormat
+name|Logger
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|slf4j
+operator|.
+name|LoggerFactory
 import|;
 end_import
 
@@ -71,30 +81,6 @@ name|List
 import|;
 end_import
 
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|logging
-operator|.
-name|Level
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|logging
-operator|.
-name|Logger
-import|;
-end_import
-
 begin_comment
 comment|/**  * Helps to run benchmarks by running the same task repeatedly and averaging  * the running times.  */
 end_comment
@@ -111,16 +97,13 @@ specifier|final
 name|Logger
 name|LOGGER
 init|=
-name|Logger
+name|LoggerFactory
 operator|.
 name|getLogger
 argument_list|(
 name|Benchmark
 operator|.
 name|class
-operator|.
-name|getCanonicalName
-argument_list|()
 argument_list|)
 decl_stmt|;
 specifier|private
@@ -194,12 +177,8 @@ block|{
 return|return
 name|LOGGER
 operator|.
-name|isLoggable
-argument_list|(
-name|Level
-operator|.
-name|FINE
-argument_list|)
+name|isDebugEnabled
+argument_list|()
 return|;
 block|}
 specifier|static
@@ -232,15 +211,13 @@ name|t0
 decl_stmt|;
 name|LOGGER
 operator|.
-name|finer
+name|debug
 argument_list|(
+literal|"{} took {} nanos"
+argument_list|,
 name|desc
-operator|+
-literal|" took "
-operator|+
+argument_list|,
 name|duration
-operator|+
-literal|" nanos"
 argument_list|)
 expr_stmt|;
 return|return
@@ -366,12 +343,8 @@ condition|(
 operator|!
 name|LOGGER
 operator|.
-name|isLoggable
-argument_list|(
-name|Level
-operator|.
-name|FINE
-argument_list|)
+name|isDebugEnabled
+argument_list|()
 condition|)
 block|{
 return|return;
@@ -554,18 +527,13 @@ condition|)
 block|{
 name|LOGGER
 operator|.
-name|fine
+name|debug
 argument_list|(
-name|MessageFormat
-operator|.
-name|format
-argument_list|(
-literal|"{0}: {1}"
+literal|"{}: {}"
 argument_list|,
 name|desc
 argument_list|,
 literal|"no runs"
-argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
@@ -573,13 +541,9 @@ else|else
 block|{
 name|LOGGER
 operator|.
-name|fine
+name|debug
 argument_list|(
-name|MessageFormat
-operator|.
-name|format
-argument_list|(
-literal|"{0}: {1} first; {2} +- {3}; {4} min; {5} max; {6} nanos"
+literal|"{}: {} first; {} +- {}; {} min; {} max; {} nanos"
 argument_list|,
 name|desc
 argument_list|,
@@ -609,7 +573,6 @@ name|coreDurations
 argument_list|)
 argument_list|,
 name|durationsString
-argument_list|)
 argument_list|)
 expr_stmt|;
 block|}

@@ -723,6 +723,26 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|slf4j
+operator|.
+name|Logger
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|slf4j
+operator|.
+name|LoggerFactory
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -821,18 +841,6 @@ name|Set
 import|;
 end_import
 
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|logging
-operator|.
-name|Logger
-import|;
-end_import
-
 begin_comment
 comment|/**  * State for generating a SQL statement.  */
 end_comment
@@ -849,16 +857,13 @@ specifier|final
 name|Logger
 name|LOGGER
 init|=
-name|Logger
+name|LoggerFactory
 operator|.
 name|getLogger
 argument_list|(
 name|SqlImplementor
 operator|.
 name|class
-operator|.
-name|getName
-argument_list|()
 argument_list|)
 decl_stmt|;
 specifier|public
@@ -1266,10 +1271,10 @@ break|break;
 default|default:
 name|LOGGER
 operator|.
-name|fine
+name|debug
 argument_list|(
-literal|"SINGLE_VALUE rewrite not supported for "
-operator|+
+literal|"SINGLE_VALUE rewrite not supported for {}"
+argument_list|,
 name|sqlDialect
 operator|.
 name|getDatabaseProduct
@@ -1361,13 +1366,11 @@ argument_list|)
 decl_stmt|;
 name|LOGGER
 operator|.
-name|fine
+name|debug
 argument_list|(
-literal|"SINGLE_VALUE rewritten into ["
-operator|+
+literal|"SINGLE_VALUE rewritten into [{}]"
+argument_list|,
 name|caseExpr
-operator|+
-literal|"]"
 argument_list|)
 expr_stmt|;
 return|return

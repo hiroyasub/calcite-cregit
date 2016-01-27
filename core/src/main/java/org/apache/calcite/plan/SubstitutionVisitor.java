@@ -877,6 +877,16 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|slf4j
+operator|.
+name|Logger
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -942,30 +952,6 @@ operator|.
 name|util
 operator|.
 name|Set
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|logging
-operator|.
-name|Level
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|logging
-operator|.
-name|Logger
 import|;
 end_import
 
@@ -5821,44 +5807,19 @@ name|RexShuttle
 name|shuttle
 parameter_list|)
 block|{
-if|if
-condition|(
 name|LOGGER
 operator|.
-name|isLoggable
+name|trace
 argument_list|(
-name|Level
-operator|.
-name|FINER
-argument_list|)
-condition|)
-block|{
-name|LOGGER
-operator|.
-name|finer
-argument_list|(
-literal|"SubstitutionVisitor: invert:\n"
-operator|+
-literal|"projects: "
-operator|+
+literal|"SubstitutionVisitor: invert:\nprojects: {}\ninput: {}\nproject: {}\n"
+argument_list|,
 name|namedProjects
-operator|+
-literal|"\n"
-operator|+
-literal|"input: "
-operator|+
+argument_list|,
 name|input
-operator|+
-literal|"\n"
-operator|+
-literal|"project: "
-operator|+
+argument_list|,
 name|shuttle
-operator|+
-literal|"\n"
 argument_list|)
 expr_stmt|;
-block|}
 specifier|final
 name|List
 argument_list|<
@@ -6006,44 +5967,19 @@ name|MutableProject
 name|project
 parameter_list|)
 block|{
-if|if
-condition|(
 name|LOGGER
 operator|.
-name|isLoggable
+name|trace
 argument_list|(
-name|Level
-operator|.
-name|FINER
-argument_list|)
-condition|)
-block|{
-name|LOGGER
-operator|.
-name|finer
-argument_list|(
-literal|"SubstitutionVisitor: invert:\n"
-operator|+
-literal|"model: "
-operator|+
+literal|"SubstitutionVisitor: invert:\nmodel: {}\ninput: {}\nproject: {}\n"
+argument_list|,
 name|model
-operator|+
-literal|"\n"
-operator|+
-literal|"input: "
-operator|+
+argument_list|,
 name|input
-operator|+
-literal|"\n"
-operator|+
-literal|"project: "
-operator|+
+argument_list|,
 name|project
-operator|+
-literal|"\n"
 argument_list|)
 expr_stmt|;
-block|}
 specifier|final
 name|List
 argument_list|<

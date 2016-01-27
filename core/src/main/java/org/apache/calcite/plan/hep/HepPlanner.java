@@ -567,18 +567,6 @@ name|Set
 import|;
 end_import
 
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|logging
-operator|.
-name|Level
-import|;
-end_import
-
 begin_comment
 comment|/**  * HepPlanner is a heuristic implementation of the {@link RelOptPlanner}  * interface.  */
 end_comment
@@ -1077,30 +1065,17 @@ name|MatchLimit
 name|instruction
 parameter_list|)
 block|{
-if|if
-condition|(
 name|LOGGER
 operator|.
-name|isLoggable
+name|trace
 argument_list|(
-name|Level
-operator|.
-name|FINEST
-argument_list|)
-condition|)
-block|{
-name|LOGGER
-operator|.
-name|finest
-argument_list|(
-literal|"Setting match limit to "
-operator|+
+literal|"Setting match limit to {}"
+argument_list|,
 name|instruction
 operator|.
 name|limit
 argument_list|)
 expr_stmt|;
-block|}
 name|currentProgram
 operator|.
 name|matchLimit
@@ -1119,30 +1094,17 @@ name|MatchOrder
 name|instruction
 parameter_list|)
 block|{
-if|if
-condition|(
 name|LOGGER
 operator|.
-name|isLoggable
+name|trace
 argument_list|(
-name|Level
-operator|.
-name|FINEST
-argument_list|)
-condition|)
-block|{
-name|LOGGER
-operator|.
-name|finest
-argument_list|(
-literal|"Setting match limit to "
-operator|+
+literal|"Setting match limit to {}"
+argument_list|,
 name|instruction
 operator|.
 name|order
 argument_list|)
 expr_stmt|;
-block|}
 name|currentProgram
 operator|.
 name|matchOrder
@@ -1196,36 +1158,21 @@ operator|.
 name|ruleDescription
 argument_list|)
 expr_stmt|;
-if|if
-condition|(
 name|LOGGER
 operator|.
-name|isLoggable
+name|trace
 argument_list|(
-name|Level
-operator|.
-name|FINEST
-argument_list|)
-condition|)
-block|{
-name|LOGGER
-operator|.
-name|finest
-argument_list|(
-literal|"Looking up rule with description "
-operator|+
+literal|"Looking up rule with description {}, found {}"
+argument_list|,
 name|instruction
 operator|.
 name|ruleDescription
-operator|+
-literal|", found "
-operator|+
+argument_list|,
 name|instruction
 operator|.
 name|rule
 argument_list|)
 expr_stmt|;
-block|}
 block|}
 if|if
 condition|(
@@ -1272,30 +1219,17 @@ condition|)
 block|{
 return|return;
 block|}
-if|if
-condition|(
 name|LOGGER
 operator|.
-name|isLoggable
+name|trace
 argument_list|(
-name|Level
-operator|.
-name|FINEST
-argument_list|)
-condition|)
-block|{
-name|LOGGER
-operator|.
-name|finest
-argument_list|(
-literal|"Applying rule class "
-operator|+
+literal|"Applying rule class {}"
+argument_list|,
 name|instruction
 operator|.
 name|ruleClass
 argument_list|)
 expr_stmt|;
-block|}
 if|if
 condition|(
 name|instruction
@@ -1624,7 +1558,7 @@ parameter_list|)
 block|{
 name|LOGGER
 operator|.
-name|finest
+name|trace
 argument_list|(
 literal|"Entering subprogram"
 argument_list|)
@@ -1660,7 +1594,7 @@ block|}
 block|}
 name|LOGGER
 operator|.
-name|finest
+name|trace
 argument_list|(
 literal|"Leaving subprogram"
 argument_list|)
@@ -1692,7 +1626,7 @@ name|endGroup
 expr_stmt|;
 name|LOGGER
 operator|.
-name|finest
+name|trace
 argument_list|(
 literal|"Entering group"
 argument_list|)
@@ -1737,7 +1671,7 @@ argument_list|)
 expr_stmt|;
 name|LOGGER
 operator|.
-name|finest
+name|trace
 argument_list|(
 literal|"Leaving group"
 argument_list|)
@@ -1786,28 +1720,15 @@ argument_list|)
 expr_stmt|;
 return|return;
 block|}
-if|if
-condition|(
 name|LOGGER
 operator|.
-name|isLoggable
+name|trace
 argument_list|(
-name|Level
-operator|.
-name|FINEST
-argument_list|)
-condition|)
-block|{
-name|LOGGER
-operator|.
-name|finest
-argument_list|(
-literal|"Applying rule set "
-operator|+
+literal|"Applying rule set {}"
+argument_list|,
 name|rules
 argument_list|)
 expr_stmt|;
-block|}
 name|boolean
 name|fullRestartAfterTransformation
 init|=
@@ -2957,28 +2878,21 @@ if|if
 condition|(
 name|LOGGER
 operator|.
-name|isLoggable
-argument_list|(
-name|Level
-operator|.
-name|FINER
-argument_list|)
+name|isTraceEnabled
+argument_list|()
 condition|)
 block|{
+comment|// Keep in the isTraceEnabled for the getRowCount method call
 name|LOGGER
 operator|.
-name|finer
+name|trace
 argument_list|(
-literal|"considering "
-operator|+
+literal|"considering {} with cumulative cost={} and rowcount={}"
+argument_list|,
 name|rel
-operator|+
-literal|" with cumulative cost="
-operator|+
+argument_list|,
 name|thisCost
-operator|+
-literal|" and rowcount="
-operator|+
+argument_list|,
 name|mq
 operator|.
 name|getRowCount
@@ -3896,7 +3810,7 @@ name|nTransformations
 expr_stmt|;
 name|LOGGER
 operator|.
-name|finest
+name|trace
 argument_list|(
 literal|"collecting garbage"
 argument_list|)
@@ -4161,12 +4075,8 @@ condition|(
 operator|!
 name|LOGGER
 operator|.
-name|isLoggable
-argument_list|(
-name|Level
-operator|.
-name|FINER
-argument_list|)
+name|isTraceEnabled
+argument_list|()
 condition|)
 block|{
 return|return;
@@ -4290,7 +4200,7 @@ argument_list|)
 expr_stmt|;
 name|LOGGER
 operator|.
-name|finer
+name|trace
 argument_list|(
 name|sb
 operator|.

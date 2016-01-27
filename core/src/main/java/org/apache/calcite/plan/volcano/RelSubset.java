@@ -295,6 +295,16 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|slf4j
+operator|.
+name|Logger
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|io
@@ -370,30 +380,6 @@ operator|.
 name|util
 operator|.
 name|Set
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|logging
-operator|.
-name|Level
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|logging
-operator|.
-name|Logger
 import|;
 end_import
 
@@ -1439,10 +1425,10 @@ comment|// means that the graph is cyclic, and therefore the cost of this
 comment|// relational expression - not this subset - must be infinite.
 name|LOGGER
 operator|.
-name|finer
+name|trace
 argument_list|(
-literal|"cyclic: "
-operator|+
+literal|"cyclic: {}"
+argument_list|,
 name|this
 argument_list|)
 expr_stmt|;
@@ -1473,36 +1459,19 @@ name|bestCost
 argument_list|)
 condition|)
 block|{
-if|if
-condition|(
 name|LOGGER
 operator|.
-name|isLoggable
+name|trace
 argument_list|(
-name|Level
-operator|.
-name|FINER
-argument_list|)
-condition|)
-block|{
-name|LOGGER
-operator|.
-name|finer
-argument_list|(
-literal|"Subset cost improved: subset ["
-operator|+
+literal|"Subset cost improved: subset [{}] cost was {} now {}"
+argument_list|,
 name|this
-operator|+
-literal|"] cost was "
-operator|+
+argument_list|,
 name|bestCost
-operator|+
-literal|" now "
-operator|+
+argument_list|,
 name|cost
 argument_list|)
 expr_stmt|;
-block|}
 name|bestCost
 operator|=
 name|cost
@@ -1937,15 +1906,15 @@ argument_list|)
 decl_stmt|;
 name|LOGGER
 operator|.
-name|throwing
+name|trace
 argument_list|(
+literal|"Caught exception in class={}, method=visit"
+argument_list|,
 name|getClass
 argument_list|()
 operator|.
 name|getName
 argument_list|()
-argument_list|,
-literal|"visit"
 argument_list|,
 name|e
 argument_list|)

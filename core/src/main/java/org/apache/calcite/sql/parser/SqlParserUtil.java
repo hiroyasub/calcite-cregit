@@ -249,6 +249,16 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|slf4j
+operator|.
+name|Logger
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|math
@@ -316,30 +326,6 @@ operator|.
 name|util
 operator|.
 name|StringTokenizer
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|logging
-operator|.
-name|Level
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|logging
-operator|.
-name|Logger
 import|;
 end_import
 
@@ -2705,28 +2691,15 @@ argument_list|>
 name|list
 parameter_list|)
 block|{
-if|if
-condition|(
 name|LOGGER
 operator|.
-name|isLoggable
+name|trace
 argument_list|(
-name|Level
-operator|.
-name|FINER
-argument_list|)
-condition|)
-block|{
-name|LOGGER
-operator|.
-name|finer
-argument_list|(
-literal|"Attempting to reduce "
-operator|+
+literal|"Attempting to reduce {}"
+argument_list|,
 name|list
 argument_list|)
 expr_stmt|;
-block|}
 specifier|final
 name|SqlNode
 name|node
@@ -2744,28 +2717,15 @@ operator|.
 name|OTHER
 argument_list|)
 decl_stmt|;
-if|if
-condition|(
 name|LOGGER
 operator|.
-name|isLoggable
+name|debug
 argument_list|(
-name|Level
-operator|.
-name|FINE
-argument_list|)
-condition|)
-block|{
-name|LOGGER
-operator|.
-name|fine
-argument_list|(
-literal|"Reduced "
-operator|+
+literal|"Reduced {}"
+argument_list|,
 name|node
 argument_list|)
 expr_stmt|;
-block|}
 return|return
 name|node
 return|;
@@ -3161,28 +3121,15 @@ argument_list|,
 name|rightExp
 argument_list|)
 decl_stmt|;
-if|if
-condition|(
 name|LOGGER
 operator|.
-name|isLoggable
+name|debug
 argument_list|(
-name|Level
-operator|.
-name|FINE
-argument_list|)
-condition|)
-block|{
-name|LOGGER
-operator|.
-name|fine
-argument_list|(
-literal|"Reduced infix: "
-operator|+
+literal|"Reduced infix: {}"
+argument_list|,
 name|newExp
 argument_list|)
 expr_stmt|;
-block|}
 comment|// Replace elements {i - 1, i, i + 1} with the new
 comment|// expression.
 name|replaceSublist
@@ -3321,28 +3268,15 @@ argument_list|,
 name|leftExp
 argument_list|)
 decl_stmt|;
-if|if
-condition|(
 name|LOGGER
 operator|.
-name|isLoggable
+name|debug
 argument_list|(
-name|Level
-operator|.
-name|FINE
-argument_list|)
-condition|)
-block|{
-name|LOGGER
-operator|.
-name|fine
-argument_list|(
-literal|"Reduced postfix: "
-operator|+
+literal|"Reduced postfix: {}"
+argument_list|,
 name|newExp
 argument_list|)
 expr_stmt|;
-block|}
 comment|// Replace elements {i - 1, i} with the new expression.
 name|list
 operator|.
@@ -3587,24 +3521,12 @@ argument_list|,
 name|list
 argument_list|)
 expr_stmt|;
-if|if
-condition|(
 name|LOGGER
 operator|.
-name|isLoggable
+name|debug
 argument_list|(
-name|Level
-operator|.
-name|FINE
-argument_list|)
-condition|)
-block|{
-name|LOGGER
-operator|.
-name|fine
-argument_list|(
-literal|"Reduced special op: "
-operator|+
+literal|"Reduced special op: {}"
+argument_list|,
 name|list
 operator|.
 name|get
@@ -3613,7 +3535,6 @@ name|i
 argument_list|)
 argument_list|)
 expr_stmt|;
-block|}
 break|break;
 block|}
 name|i

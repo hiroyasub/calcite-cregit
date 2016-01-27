@@ -1187,6 +1187,16 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|slf4j
+operator|.
+name|Logger
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|math
@@ -1332,30 +1342,6 @@ operator|.
 name|util
 operator|.
 name|TreeSet
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|logging
-operator|.
-name|Level
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|logging
-operator|.
-name|Logger
 import|;
 end_import
 
@@ -1593,17 +1579,13 @@ if|if
 condition|(
 name|SQL2REL_LOGGER
 operator|.
-name|isLoggable
-argument_list|(
-name|Level
-operator|.
-name|FINE
-argument_list|)
+name|isDebugEnabled
+argument_list|()
 condition|)
 block|{
 name|SQL2REL_LOGGER
 operator|.
-name|fine
+name|debug
 argument_list|(
 name|RelOptUtil
 operator|.
@@ -8201,15 +8183,15 @@ condition|)
 block|{
 name|SQL2REL_LOGGER
 operator|.
-name|fine
+name|debug
 argument_list|(
+literal|"{} are not unique keys for {}"
+argument_list|,
 name|rightJoinKeys
 operator|.
 name|toString
 argument_list|()
-operator|+
-literal|"are not unique keys for "
-operator|+
+argument_list|,
 name|right
 operator|.
 name|toString
@@ -9066,15 +9048,15 @@ condition|)
 block|{
 name|SQL2REL_LOGGER
 operator|.
-name|fine
+name|debug
 argument_list|(
+literal|"{} are not unique keys for {}"
+argument_list|,
 name|correlatedJoinKeys
 operator|.
 name|toString
 argument_list|()
-operator|+
-literal|"are not unique keys for "
-operator|+
+argument_list|,
 name|left
 operator|.
 name|toString
@@ -9252,10 +9234,10 @@ condition|)
 block|{
 name|SQL2REL_LOGGER
 operator|.
-name|fine
+name|debug
 argument_list|(
-literal|"There are no unique keys for "
-operator|+
+literal|"There are no unique keys for {}"
+argument_list|,
 name|left
 argument_list|)
 expr_stmt|;

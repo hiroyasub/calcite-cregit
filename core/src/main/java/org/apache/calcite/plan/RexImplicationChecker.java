@@ -273,6 +273,16 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|slf4j
+operator|.
+name|LoggerFactory
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -321,18 +331,6 @@ name|Set
 import|;
 end_import
 
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|logging
-operator|.
-name|Logger
-import|;
-end_import
-
 begin_comment
 comment|/**  * Checks whether one condition logically implies another.  *  *<p>If A&rArr; B, whenever A is true, B will be true also.  *  *<p>For example:  *<ul>  *<li>(x&gt; 10)&rArr; (x&gt; 5)  *<li>(y = 10)&rArr; (y&lt; 30 OR x&gt; 30)  *</ul>  */
 end_comment
@@ -351,16 +349,13 @@ init|=
 operator|new
 name|CalciteLogger
 argument_list|(
-name|Logger
+name|LoggerFactory
 operator|.
 name|getLogger
 argument_list|(
 name|RexImplicationChecker
 operator|.
 name|class
-operator|.
-name|getName
-argument_list|()
 argument_list|)
 argument_list|)
 decl_stmt|;
@@ -438,17 +433,15 @@ return|;
 block|}
 name|LOGGER
 operator|.
-name|fine
+name|debug
 argument_list|(
-literal|"Checking if "
-operator|+
+literal|"Checking if {} => {}"
+argument_list|,
 name|first
 operator|.
 name|toString
 argument_list|()
-operator|+
-literal|" => "
-operator|+
+argument_list|,
 name|second
 operator|.
 name|toString
@@ -613,12 +606,12 @@ condition|)
 block|{
 name|LOGGER
 operator|.
-name|fine
+name|debug
 argument_list|(
+literal|"{} doesnot imply {}"
+argument_list|,
 name|first
-operator|+
-literal|" doesnot imply "
-operator|+
+argument_list|,
 name|second
 argument_list|)
 expr_stmt|;
@@ -630,12 +623,12 @@ block|}
 block|}
 name|LOGGER
 operator|.
-name|fine
+name|debug
 argument_list|(
+literal|"{} implies {}"
+argument_list|,
 name|first
-operator|+
-literal|" implies "
-operator|+
+argument_list|,
 name|second
 argument_list|)
 expr_stmt|;
@@ -717,17 +710,13 @@ condition|)
 block|{
 name|LOGGER
 operator|.
-name|warning
+name|warn
 argument_list|(
-literal|"Support for checking "
-operator|+
+literal|"Support for checking {} => {} is not there"
+argument_list|,
 name|first
-operator|+
-literal|" => "
-operator|+
+argument_list|,
 name|second
-operator|+
-literal|" is not there"
 argument_list|)
 expr_stmt|;
 return|return
@@ -1021,14 +1010,12 @@ comment|// TODO: CheckSupport should not allow this exception to be thrown
 comment|// Need to monitor it and handle all the cases raising them.
 name|LOGGER
 operator|.
-name|warning
+name|warn
 argument_list|(
-literal|"Exception thrown while checking if => "
-operator|+
+literal|"Exception thrown while checking if => {}: {}"
+argument_list|,
 name|second
-operator|+
-literal|": "
-operator|+
+argument_list|,
 name|e
 operator|.
 name|getMessage

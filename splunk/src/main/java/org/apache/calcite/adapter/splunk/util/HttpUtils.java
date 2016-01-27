@@ -21,6 +21,16 @@ end_package
 
 begin_import
 import|import
+name|org
+operator|.
+name|slf4j
+operator|.
+name|Logger
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|io
@@ -116,30 +126,6 @@ operator|.
 name|util
 operator|.
 name|Map
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|logging
-operator|.
-name|Level
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|logging
-operator|.
-name|Logger
 import|;
 end_import
 
@@ -824,28 +810,14 @@ operator|.
 name|close
 argument_list|()
 expr_stmt|;
-if|if
-condition|(
 name|LOGGER
 operator|.
-name|isLoggable
+name|debug
 argument_list|(
-name|Level
-operator|.
-name|FINE
-argument_list|)
-condition|)
-block|{
-name|LOGGER
-operator|.
-name|fine
-argument_list|(
-literal|"url: "
-operator|+
+literal|"url: {}, data: {}"
+argument_list|,
 name|url
-operator|+
-literal|", data: "
-operator|+
+argument_list|,
 name|String
 operator|.
 name|valueOf
@@ -854,7 +826,6 @@ name|data
 argument_list|)
 argument_list|)
 expr_stmt|;
-block|}
 return|return
 name|in
 return|;

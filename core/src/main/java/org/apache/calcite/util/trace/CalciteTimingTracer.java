@@ -19,35 +19,21 @@ end_package
 
 begin_import
 import|import
+name|org
+operator|.
+name|slf4j
+operator|.
+name|Logger
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|text
 operator|.
 name|DecimalFormat
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|logging
-operator|.
-name|Level
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|logging
-operator|.
-name|Logger
 import|;
 end_import
 
@@ -100,12 +86,8 @@ condition|(
 operator|!
 name|logger
 operator|.
-name|isLoggable
-argument_list|(
-name|Level
-operator|.
-name|FINE
-argument_list|)
+name|isDebugEnabled
+argument_list|()
 condition|)
 block|{
 name|this
@@ -134,11 +116,11 @@ argument_list|()
 expr_stmt|;
 name|logger
 operator|.
-name|fine
+name|debug
 argument_list|(
+literal|"{}:  elapsed nanos=0"
+argument_list|,
 name|startEvent
-operator|+
-literal|":  elapsed nanos=0"
 argument_list|)
 expr_stmt|;
 block|}
@@ -182,12 +164,12 @@ name|newNanoTime
 expr_stmt|;
 name|logger
 operator|.
-name|fine
+name|debug
 argument_list|(
+literal|"{}:  elapsed nanos={}"
+argument_list|,
 name|event
-operator|+
-literal|":  elapsed nanos="
-operator|+
+argument_list|,
 name|DECIMAL_FORMAT
 operator|.
 name|format

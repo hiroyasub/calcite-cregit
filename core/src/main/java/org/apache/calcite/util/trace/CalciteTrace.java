@@ -93,6 +93,26 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|slf4j
+operator|.
+name|Logger
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|slf4j
+operator|.
+name|LoggerFactory
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|io
@@ -101,32 +121,8 @@ name|File
 import|;
 end_import
 
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|logging
-operator|.
-name|Level
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|logging
-operator|.
-name|Logger
-import|;
-end_import
-
 begin_comment
-comment|/**  * Contains all of the {@link java.util.logging.Logger tracers} used within  * org.apache.calcite class libraries.  *  *<h3>Note to developers</h3>  *  *<p>Please ensure that every tracer used in org.apache.calcite is added to  * this class as a<em>public static final</em> member called<code>  *<i>component</i>Tracer</code>. For example, {@link #getPlannerTracer} is the  * tracer used by all classes which take part in the query planning process.  *  *<p>The javadoc in this file is the primary source of information on what  * tracers are available, so the javadoc against each tracer member must be an  * up-to-date description of what that tracer does. Be sure to describe what  * {@link Level tracing level} is required to obtain each category of tracing.  *  *<p>In the class where the tracer is used, create a<em>private</em> (or  * perhaps<em>protected</em>)<em>static final</em> member called<code>  * tracer</code>.  */
+comment|/**  * Contains all of the {@link org.slf4j.Logger tracers} used within  * org.apache.calcite class libraries.  *  *<h3>Note to developers</h3>  *  *<p>Please ensure that every tracer used in org.apache.calcite is added to  * this class as a<em>public static final</em> member called<code>  *<i>component</i>Tracer</code>. For example, {@link #getPlannerTracer} is the  * tracer used by all classes which take part in the query planning process.  *  *<p>The javadoc in this file is the primary source of information on what  * tracers are available, so the javadoc against each tracer member must be an  * up-to-date description of what that tracer does.  *  *<p>In the class where the tracer is used, create a<em>private</em> (or  * perhaps<em>protected</em>)<em>static final</em> member called<code>  * tracer</code>.  */
 end_comment
 
 begin_class
@@ -136,7 +132,7 @@ class|class
 name|CalciteTrace
 block|{
 comment|//~ Static fields/initializers ---------------------------------------------
-comment|/**    * The "org.apache.calcite.sql.parser" tracer reports parser events in    * {@link org.apache.calcite.sql.parser.SqlParser} and other classes (at level    * {@link Level#FINE} or higher).    */
+comment|/**    * The "org.apache.calcite.sql.parser" tracer reports parser events in    * {@link org.apache.calcite.sql.parser.SqlParser} and other classes at DEBUG.    */
 specifier|public
 specifier|static
 specifier|final
@@ -200,7 +196,7 @@ block|}
 block|}
 decl_stmt|;
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**    * The "org.apache.calcite.plan.RelOptPlanner" tracer prints the query    * optimization process.    *    *<p>Levels:    *    *<ul>    *<li>{@link Level#FINE} prints rules as they fire;    *<li>{@link Level#FINER} prints and validates the whole expression pool    * and rule queue as each rule fires;    *<li>{@link Level#FINEST} prints finer details like rule importances.    *</ul>    */
+comment|/**    * The "org.apache.calcite.plan.RelOptPlanner" tracer prints the query    * optimization process.    *    *<p>Levels:    *    *<ul>    *<li>{@link Logger#debug(String)} (formerly FINE) prints rules as they fire;    *<li>{@link Logger#trace(String)} (formerly FINER) prints and validates the whole expression    * pool and rule queue as each rule fires;    *<li>{@link Logger#trace(String)} (formerly FINEST) also prints finer details like rule    * importances.    *</ul>    */
 specifier|public
 specifier|static
 name|Logger
@@ -208,7 +204,7 @@ name|getPlannerTracer
 parameter_list|()
 block|{
 return|return
-name|Logger
+name|LoggerFactory
 operator|.
 name|getLogger
 argument_list|(
@@ -221,7 +217,7 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-comment|/**    * The "org.apache.calcite.prepare.Prepare" tracer prints the generated    * program at level {@link java.util.logging.Level#FINE} or higher.    */
+comment|/**    * The "org.apache.calcite.prepare.Prepare" tracer prints the generated    * program at DEBUG (formerly, FINE)  or higher.    */
 specifier|public
 specifier|static
 name|Logger
@@ -229,7 +225,7 @@ name|getStatementTracer
 parameter_list|()
 block|{
 return|return
-name|Logger
+name|LoggerFactory
 operator|.
 name|getLogger
 argument_list|(
@@ -242,7 +238,7 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-comment|/**    * The "org.apache.calcite.rel.RelImplementorImpl" tracer reports when    * expressions are bound to variables ({@link Level#FINE})    */
+comment|/**    * The "org.apache.calcite.rel.RelImplementorImpl" tracer reports when    * expressions are bound to variables (DEBUG, formerly FINE)    */
 specifier|public
 specifier|static
 name|Logger
@@ -250,16 +246,13 @@ name|getRelImplementorTracer
 parameter_list|()
 block|{
 return|return
-name|Logger
+name|LoggerFactory
 operator|.
 name|getLogger
 argument_list|(
 name|RelImplementor
 operator|.
 name|class
-operator|.
-name|getName
-argument_list|()
 argument_list|)
 return|;
 block|}
@@ -271,7 +264,7 @@ name|getSqlTimingTracer
 parameter_list|()
 block|{
 return|return
-name|Logger
+name|LoggerFactory
 operator|.
 name|getLogger
 argument_list|(
@@ -287,7 +280,7 @@ name|getParserTracer
 parameter_list|()
 block|{
 return|return
-name|Logger
+name|LoggerFactory
 operator|.
 name|getLogger
 argument_list|(
@@ -303,7 +296,7 @@ name|getSqlToRelTracer
 parameter_list|()
 block|{
 return|return
-name|Logger
+name|LoggerFactory
 operator|.
 name|getLogger
 argument_list|(

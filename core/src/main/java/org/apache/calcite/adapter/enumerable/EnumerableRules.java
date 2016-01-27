@@ -49,11 +49,9 @@ end_import
 
 begin_import
 import|import
-name|java
+name|org
 operator|.
-name|util
-operator|.
-name|logging
+name|slf4j
 operator|.
 name|Logger
 import|;

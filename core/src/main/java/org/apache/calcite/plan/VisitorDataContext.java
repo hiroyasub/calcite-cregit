@@ -249,6 +249,16 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|slf4j
+operator|.
+name|LoggerFactory
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|math
@@ -287,18 +297,6 @@ name|List
 import|;
 end_import
 
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|logging
-operator|.
-name|Logger
-import|;
-end_import
-
 begin_comment
 comment|/**  * DataContext for evaluating an RexExpression  */
 end_comment
@@ -319,7 +317,7 @@ init|=
 operator|new
 name|CalciteLogger
 argument_list|(
-name|Logger
+name|LoggerFactory
 operator|.
 name|getLogger
 argument_list|(
@@ -664,21 +662,19 @@ condition|)
 block|{
 name|LOGGER
 operator|.
-name|warning
+name|warn
 argument_list|(
+literal|"{} is not handled for {} for checking implication"
+argument_list|,
 name|elem
 operator|.
 name|getKey
 argument_list|()
-operator|+
-literal|" is not handled for "
-operator|+
+argument_list|,
 name|elem
 operator|.
 name|getValue
 argument_list|()
-operator|+
-literal|" for checking implication"
 argument_list|)
 expr_stmt|;
 return|return
@@ -802,14 +798,14 @@ condition|)
 block|{
 name|LOGGER
 operator|.
-name|warning
+name|warn
 argument_list|(
+literal|"{} returned null SqlTypeName"
+argument_list|,
 name|inputRef
 operator|.
 name|toString
 argument_list|()
-operator|+
-literal|" returned null SqlTypeName"
 argument_list|)
 expr_stmt|;
 return|return
@@ -1178,21 +1174,19 @@ default|default:
 comment|//TODO: Support few more supported cases
 name|LOGGER
 operator|.
-name|warning
+name|warn
 argument_list|(
+literal|"{} for value of class {} is being handled in default way"
+argument_list|,
 name|type
 operator|.
 name|getSqlTypeName
 argument_list|()
-operator|+
-literal|" for value of class "
-operator|+
+argument_list|,
 name|value
 operator|.
 name|getClass
 argument_list|()
-operator|+
-literal|" is being handled in default way"
 argument_list|)
 expr_stmt|;
 if|if

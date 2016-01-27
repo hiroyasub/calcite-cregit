@@ -165,6 +165,16 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|slf4j
+operator|.
+name|Logger
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -200,18 +210,6 @@ operator|.
 name|util
 operator|.
 name|Set
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|logging
-operator|.
-name|Logger
 import|;
 end_import
 
@@ -781,16 +779,14 @@ literal|null
 assert|;
 name|LOGGER
 operator|.
-name|finer
+name|trace
 argument_list|(
-literal|"Merge set#"
-operator|+
+literal|"Merge set#{} into set#{}"
+argument_list|,
 name|otherSet
 operator|.
 name|id
-operator|+
-literal|" into set#"
-operator|+
+argument_list|,
 name|id
 argument_list|)
 expr_stmt|;

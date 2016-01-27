@@ -17,13 +17,21 @@ end_package
 
 begin_import
 import|import
-name|java
+name|org
 operator|.
-name|util
-operator|.
-name|logging
+name|slf4j
 operator|.
 name|Logger
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|slf4j
+operator|.
+name|LoggerFactory
 import|;
 end_import
 
@@ -67,16 +75,13 @@ specifier|final
 name|Logger
 name|LOGGER
 init|=
-name|Logger
+name|LoggerFactory
 operator|.
 name|getLogger
 argument_list|(
 name|CalciteException
 operator|.
 name|class
-operator|.
-name|getName
-argument_list|()
 argument_list|)
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
@@ -102,18 +107,16 @@ comment|// TODO: Force the caller to pass in a Logger as a trace argument for
 comment|// better context.  Need to extend ResGen for this.
 name|LOGGER
 operator|.
-name|throwing
+name|trace
 argument_list|(
 literal|"CalciteException"
-argument_list|,
-literal|"constructor"
 argument_list|,
 name|this
 argument_list|)
 expr_stmt|;
 name|LOGGER
 operator|.
-name|severe
+name|error
 argument_list|(
 name|toString
 argument_list|()

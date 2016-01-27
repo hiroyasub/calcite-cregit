@@ -359,6 +359,16 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|slf4j
+operator|.
+name|Logger
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -394,18 +404,6 @@ operator|.
 name|util
 operator|.
 name|Set
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|logging
-operator|.
-name|Logger
 import|;
 end_import
 
@@ -663,7 +661,7 @@ parameter_list|)
 block|{
 name|LOGGER
 operator|.
-name|fine
+name|debug
 argument_list|(
 name|description
 argument_list|)
@@ -866,10 +864,10 @@ argument_list|()
 decl_stmt|;
 name|LOGGER
 operator|.
-name|fine
+name|debug
 argument_list|(
-literal|"fieldNames: "
-operator|+
+literal|"fieldNames: {}"
+argument_list|,
 name|getFieldsString
 argument_list|(
 name|topRow
@@ -940,10 +938,10 @@ expr_stmt|;
 block|}
 name|LOGGER
 operator|.
-name|fine
+name|debug
 argument_list|(
-literal|"pre transformTo fieldNames: "
-operator|+
+literal|"pre transformTo fieldNames: {}"
+argument_list|,
 name|getFieldsString
 argument_list|(
 name|topRow
@@ -1227,10 +1225,10 @@ condition|)
 block|{
 name|LOGGER
 operator|.
-name|fine
+name|debug
 argument_list|(
-literal|"topProj: "
-operator|+
+literal|"topProj: {}"
+argument_list|,
 name|String
 operator|.
 name|valueOf
@@ -1486,10 +1484,10 @@ argument_list|)
 decl_stmt|;
 name|LOGGER
 operator|.
-name|fine
+name|debug
 argument_list|(
-literal|"end of appendSearchString fieldNames: "
-operator|+
+literal|"end of appendSearchString fieldNames: {}"
+argument_list|,
 name|rel
 operator|.
 name|getRowType

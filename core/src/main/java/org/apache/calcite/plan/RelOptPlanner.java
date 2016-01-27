@@ -137,11 +137,11 @@ end_import
 
 begin_import
 import|import
-name|java
+name|org
 operator|.
-name|util
+name|slf4j
 operator|.
-name|List
+name|Logger
 import|;
 end_import
 
@@ -151,9 +151,7 @@ name|java
 operator|.
 name|util
 operator|.
-name|logging
-operator|.
-name|Logger
+name|List
 import|;
 end_import
 

@@ -395,6 +395,16 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|slf4j
+operator|.
+name|Logger
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|io
@@ -450,30 +460,6 @@ operator|.
 name|util
 operator|.
 name|Set
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|logging
-operator|.
-name|Level
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|logging
-operator|.
-name|Logger
 import|;
 end_import
 
@@ -597,28 +583,15 @@ name|desc
 operator|=
 name|digest
 expr_stmt|;
-if|if
-condition|(
 name|LOGGER
 operator|.
-name|isLoggable
+name|trace
 argument_list|(
-name|Level
-operator|.
-name|FINEST
-argument_list|)
-condition|)
-block|{
-name|LOGGER
-operator|.
-name|finest
-argument_list|(
-literal|"new "
-operator|+
+literal|"new {}"
+argument_list|,
 name|digest
 argument_list|)
 expr_stmt|;
-block|}
 block|}
 comment|//~ Methods ----------------------------------------------------------------
 specifier|public

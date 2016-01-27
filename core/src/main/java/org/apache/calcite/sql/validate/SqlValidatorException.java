@@ -33,13 +33,21 @@ end_import
 
 begin_import
 import|import
-name|java
+name|org
 operator|.
-name|util
-operator|.
-name|logging
+name|slf4j
 operator|.
 name|Logger
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|slf4j
+operator|.
+name|LoggerFactory
 import|;
 end_import
 
@@ -75,7 +83,7 @@ specifier|final
 name|Logger
 name|LOGGER
 init|=
-name|Logger
+name|LoggerFactory
 operator|.
 name|getLogger
 argument_list|(
@@ -112,18 +120,16 @@ expr_stmt|;
 comment|// TODO: see note in CalciteException constructor
 name|LOGGER
 operator|.
-name|throwing
+name|trace
 argument_list|(
 literal|"SqlValidatorException"
-argument_list|,
-literal|"constructor"
 argument_list|,
 name|this
 argument_list|)
 expr_stmt|;
 name|LOGGER
 operator|.
-name|severe
+name|error
 argument_list|(
 name|toString
 argument_list|()

@@ -199,18 +199,6 @@ name|java
 operator|.
 name|util
 operator|.
-name|logging
-operator|.
-name|Level
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
 name|regex
 operator|.
 name|Pattern
@@ -1044,74 +1032,48 @@ argument_list|()
 argument_list|)
 condition|)
 block|{
-if|if
-condition|(
 name|LOGGER
 operator|.
-name|isLoggable
+name|debug
 argument_list|(
-name|Level
-operator|.
-name|FINE
-argument_list|)
-condition|)
-block|{
-name|LOGGER
-operator|.
-name|fine
-argument_list|(
-literal|"call#"
-operator|+
+literal|"call#{}: Rule [{}] not fired due to exclusion filter"
+argument_list|,
 name|ruleCall
 operator|.
 name|id
-operator|+
-literal|": Rule ["
-operator|+
+argument_list|,
 name|ruleCall
 operator|.
 name|getRule
 argument_list|()
-operator|+
-literal|"] not fired"
-operator|+
-literal|" due to exclusion filter"
 argument_list|)
 expr_stmt|;
-block|}
 return|return;
 block|}
 if|if
 condition|(
 name|LOGGER
 operator|.
-name|isLoggable
-argument_list|(
-name|Level
-operator|.
-name|FINE
-argument_list|)
+name|isDebugEnabled
+argument_list|()
 condition|)
 block|{
+comment|// Leave this wrapped in a conditional to prevent unnecessarily calling Arrays.toString(...)
 name|LOGGER
 operator|.
-name|fine
+name|debug
 argument_list|(
-literal|"call#"
-operator|+
+literal|"call#{}: Apply rule [{}] to {}"
+argument_list|,
 name|ruleCall
 operator|.
 name|id
-operator|+
-literal|": Apply rule ["
-operator|+
+argument_list|,
 name|ruleCall
 operator|.
 name|getRule
 argument_list|()
-operator|+
-literal|"] to "
-operator|+
+argument_list|,
 name|Arrays
 operator|.
 name|toString
@@ -1233,33 +1195,25 @@ name|before
 operator|&&
 name|LOGGER
 operator|.
-name|isLoggable
-argument_list|(
-name|Level
-operator|.
-name|FINE
-argument_list|)
+name|isDebugEnabled
+argument_list|()
 condition|)
 block|{
 name|LOGGER
 operator|.
-name|fine
+name|debug
 argument_list|(
-literal|"call#"
-operator|+
+literal|"call#{}: Rule {} arguments {} produced {}"
+argument_list|,
 name|ruleCall
 operator|.
 name|id
-operator|+
-literal|": Rule "
-operator|+
+argument_list|,
 name|ruleCall
 operator|.
 name|getRule
 argument_list|()
-operator|+
-literal|" arguments "
-operator|+
+argument_list|,
 name|Arrays
 operator|.
 name|toString
@@ -1268,9 +1222,7 @@ name|ruleCall
 operator|.
 name|rels
 argument_list|)
-operator|+
-literal|" produced "
-operator|+
+argument_list|,
 name|newRel
 argument_list|)
 expr_stmt|;
@@ -1319,28 +1271,15 @@ name|RelNode
 name|rel
 parameter_list|)
 block|{
-if|if
-condition|(
 name|LOGGER
 operator|.
-name|isLoggable
+name|debug
 argument_list|(
-name|Level
-operator|.
-name|FINE
-argument_list|)
-condition|)
-block|{
-name|LOGGER
-operator|.
-name|fine
-argument_list|(
-literal|"For final plan, using "
-operator|+
+literal|"For final plan, using {}"
+argument_list|,
 name|rel
 argument_list|)
 expr_stmt|;
-block|}
 if|if
 condition|(
 name|listener

@@ -203,34 +203,6 @@ end_import
 
 begin_import
 import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|commons
-operator|.
-name|logging
-operator|.
-name|Log
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|commons
-operator|.
-name|logging
-operator|.
-name|LogFactory
-import|;
-end_import
-
-begin_import
-import|import
 name|com
 operator|.
 name|google
@@ -282,6 +254,26 @@ operator|.
 name|cache
 operator|.
 name|RemovalNotification
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|slf4j
+operator|.
+name|Logger
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|slf4j
+operator|.
+name|LoggerFactory
 import|;
 end_import
 
@@ -507,12 +499,12 @@ block|{
 specifier|private
 specifier|static
 specifier|final
-name|Log
+name|Logger
 name|LOG
 init|=
-name|LogFactory
+name|LoggerFactory
 operator|.
-name|getLog
+name|getLogger
 argument_list|(
 name|JdbcMeta
 operator|.
@@ -863,27 +855,18 @@ operator|.
 name|build
 argument_list|()
 expr_stmt|;
-if|if
-condition|(
-name|LOG
-operator|.
-name|isDebugEnabled
-argument_list|()
-condition|)
-block|{
 name|LOG
 operator|.
 name|debug
 argument_list|(
-literal|"instantiated connection cache: "
-operator|+
+literal|"instantiated connection cache: {}"
+argument_list|,
 name|connectionCache
 operator|.
 name|stats
 argument_list|()
 argument_list|)
 expr_stmt|;
-block|}
 name|concurrencyLevel
 operator|=
 name|Integer
@@ -1055,27 +1038,18 @@ operator|.
 name|build
 argument_list|()
 expr_stmt|;
-if|if
-condition|(
-name|LOG
-operator|.
-name|isDebugEnabled
-argument_list|()
-condition|)
-block|{
 name|LOG
 operator|.
 name|debug
 argument_list|(
-literal|"instantiated statement cache: "
-operator|+
+literal|"instantiated statement cache: {}"
+argument_list|,
 name|statementCache
 operator|.
 name|stats
 argument_list|()
 argument_list|)
 expr_stmt|;
-block|}
 block|}
 comment|/**    * Converts from JDBC metadata to Avatica columns.    */
 specifier|protected
@@ -2573,40 +2547,23 @@ name|boolean
 name|nullable
 parameter_list|)
 block|{
-if|if
-condition|(
-name|LOG
-operator|.
-name|isTraceEnabled
-argument_list|()
-condition|)
-block|{
 name|LOG
 operator|.
 name|trace
 argument_list|(
-literal|"getBestRowIdentifier catalog:"
-operator|+
+literal|"getBestRowIdentifier catalog:{} schema:{} table:{} scope:{} nullable:{}"
+argument_list|,
 name|catalog
-operator|+
-literal|" schema:"
-operator|+
+argument_list|,
 name|schema
-operator|+
-literal|" table:"
-operator|+
+argument_list|,
 name|table
-operator|+
-literal|" scope:"
-operator|+
+argument_list|,
 name|scope
-operator|+
-literal|" nullable:"
-operator|+
+argument_list|,
 name|nullable
 argument_list|)
 expr_stmt|;
-block|}
 try|try
 block|{
 specifier|final
@@ -2691,32 +2648,19 @@ name|String
 name|table
 parameter_list|)
 block|{
-if|if
-condition|(
-name|LOG
-operator|.
-name|isTraceEnabled
-argument_list|()
-condition|)
-block|{
 name|LOG
 operator|.
 name|trace
 argument_list|(
-literal|"getVersionColumns catalog:"
-operator|+
+literal|"getVersionColumns catalog:{} schema:{} table:{}"
+argument_list|,
 name|catalog
-operator|+
-literal|" schema:"
-operator|+
+argument_list|,
 name|schema
-operator|+
-literal|" table:"
-operator|+
+argument_list|,
 name|table
 argument_list|)
 expr_stmt|;
-block|}
 try|try
 block|{
 specifier|final
@@ -2797,32 +2741,19 @@ name|String
 name|table
 parameter_list|)
 block|{
-if|if
-condition|(
-name|LOG
-operator|.
-name|isTraceEnabled
-argument_list|()
-condition|)
-block|{
 name|LOG
 operator|.
 name|trace
 argument_list|(
-literal|"getPrimaryKeys catalog:"
-operator|+
+literal|"getPrimaryKeys catalog:{} schema:{} table:{}"
+argument_list|,
 name|catalog
-operator|+
-literal|" schema:"
-operator|+
+argument_list|,
 name|schema
-operator|+
-literal|" table:"
-operator|+
+argument_list|,
 name|table
 argument_list|)
 expr_stmt|;
-block|}
 try|try
 block|{
 specifier|final
@@ -3375,24 +3306,15 @@ argument_list|,
 literal|null
 argument_list|)
 decl_stmt|;
-if|if
-condition|(
-name|LOG
-operator|.
-name|isTraceEnabled
-argument_list|()
-condition|)
-block|{
 name|LOG
 operator|.
 name|trace
 argument_list|(
-literal|"created statement "
-operator|+
+literal|"created statement {}"
+argument_list|,
 name|h
 argument_list|)
 expr_stmt|;
-block|}
 return|return
 name|h
 return|;
@@ -3450,31 +3372,22 @@ name|LOG
 operator|.
 name|debug
 argument_list|(
-literal|"client requested close unknown statement "
-operator|+
+literal|"client requested close unknown statement {}"
+argument_list|,
 name|h
 argument_list|)
 expr_stmt|;
 return|return;
 block|}
-if|if
-condition|(
-name|LOG
-operator|.
-name|isTraceEnabled
-argument_list|()
-condition|)
-block|{
 name|LOG
 operator|.
 name|trace
 argument_list|(
-literal|"closing statement "
-operator|+
+literal|"closing statement {}"
+argument_list|,
 name|h
 argument_list|)
 expr_stmt|;
-block|}
 try|try
 block|{
 name|ResultSet
@@ -3693,31 +3606,22 @@ name|LOG
 operator|.
 name|debug
 argument_list|(
-literal|"client requested close unknown connection "
-operator|+
+literal|"client requested close unknown connection {}"
+argument_list|,
 name|ch
 argument_list|)
 expr_stmt|;
 return|return;
 block|}
-if|if
-condition|(
-name|LOG
-operator|.
-name|isTraceEnabled
-argument_list|()
-condition|)
-block|{
 name|LOG
 operator|.
 name|trace
 argument_list|(
-literal|"closing connection "
-operator|+
+literal|"closing connection {}"
+argument_list|,
 name|ch
 argument_list|)
 expr_stmt|;
-block|}
 try|try
 block|{
 name|conn
@@ -3884,24 +3788,15 @@ name|ConnectionProperties
 name|connProps
 parameter_list|)
 block|{
-if|if
-condition|(
-name|LOG
-operator|.
-name|isTraceEnabled
-argument_list|()
-condition|)
-block|{
 name|LOG
 operator|.
 name|trace
 argument_list|(
-literal|"syncing properties for connection "
-operator|+
+literal|"syncing properties for connection {}"
+argument_list|,
 name|ch
 argument_list|)
 expr_stmt|;
-block|}
 try|try
 block|{
 name|Connection
@@ -4147,24 +4042,15 @@ name|statementType
 argument_list|)
 argument_list|)
 decl_stmt|;
-if|if
-condition|(
-name|LOG
-operator|.
-name|isTraceEnabled
-argument_list|()
-condition|)
-block|{
 name|LOG
 operator|.
 name|trace
 argument_list|(
-literal|"prepared statement "
-operator|+
+literal|"prepared statement {}"
+argument_list|,
 name|h
 argument_list|)
 expr_stmt|;
-block|}
 return|return
 name|h
 return|;
@@ -4381,24 +4267,15 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-if|if
-condition|(
-name|LOG
-operator|.
-name|isTraceEnabled
-argument_list|()
-condition|)
-block|{
 name|LOG
 operator|.
 name|trace
 argument_list|(
-literal|"prepAndExec statement "
-operator|+
+literal|"prepAndExec statement {}"
+argument_list|,
 name|h
 argument_list|)
 expr_stmt|;
-block|}
 comment|// TODO: review client to ensure statementId is updated when appropriate
 return|return
 operator|new
@@ -4564,32 +4441,19 @@ name|NoSuchStatementException
 throws|,
 name|MissingResultsException
 block|{
-if|if
-condition|(
-name|LOG
-operator|.
-name|isTraceEnabled
-argument_list|()
-condition|)
-block|{
 name|LOG
 operator|.
 name|trace
 argument_list|(
-literal|"fetching "
-operator|+
+literal|"fetching {} offset:{} fetchMaxRowCount:{}"
+argument_list|,
 name|h
-operator|+
-literal|" offset:"
-operator|+
+argument_list|,
 name|offset
-operator|+
-literal|" fetchMaxRowCount:"
-operator|+
+argument_list|,
 name|fetchMaxRowCount
 argument_list|)
 expr_stmt|;
-block|}
 try|try
 block|{
 specifier|final
@@ -5432,31 +5296,20 @@ operator|.
 name|getValue
 argument_list|()
 decl_stmt|;
-if|if
-condition|(
-name|LOG
-operator|.
-name|isDebugEnabled
-argument_list|()
-condition|)
-block|{
 name|LOG
 operator|.
 name|debug
 argument_list|(
-literal|"Expiring connection "
-operator|+
+literal|"Expiring connection {} because {}"
+argument_list|,
 name|connectionId
-operator|+
-literal|" because "
-operator|+
+argument_list|,
 name|notification
 operator|.
 name|getCause
 argument_list|()
 argument_list|)
 expr_stmt|;
-block|}
 try|try
 block|{
 if|if
@@ -5483,8 +5336,8 @@ name|LOG
 operator|.
 name|info
 argument_list|(
-literal|"Exception thrown while expiring connection "
-operator|+
+literal|"Exception thrown while expiring connection {}"
+argument_list|,
 name|connectionId
 argument_list|,
 name|t
@@ -5544,31 +5397,20 @@ block|{
 comment|// log/throw?
 return|return;
 block|}
-if|if
-condition|(
-name|LOG
-operator|.
-name|isDebugEnabled
-argument_list|()
-condition|)
-block|{
 name|LOG
 operator|.
 name|debug
 argument_list|(
-literal|"Expiring statement "
-operator|+
+literal|"Expiring statement {} because {}"
+argument_list|,
 name|stmtId
-operator|+
-literal|" because "
-operator|+
+argument_list|,
 name|notification
 operator|.
 name|getCause
 argument_list|()
 argument_list|)
 expr_stmt|;
-block|}
 try|try
 block|{
 if|if
@@ -5618,9 +5460,11 @@ name|LOG
 operator|.
 name|info
 argument_list|(
-literal|"Exception thrown while expiring statement "
-operator|+
+literal|"Exception thrown while expiring statement {}"
+argument_list|,
 name|stmtId
+argument_list|,
+name|t
 argument_list|)
 expr_stmt|;
 block|}

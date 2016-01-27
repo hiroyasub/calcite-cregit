@@ -177,6 +177,16 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|slf4j
+operator|.
+name|Logger
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|io
@@ -332,30 +342,6 @@ operator|.
 name|util
 operator|.
 name|Set
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|logging
-operator|.
-name|Level
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|logging
-operator|.
-name|Logger
 import|;
 end_import
 
@@ -804,34 +790,17 @@ name|double
 name|factor
 parameter_list|)
 block|{
-if|if
-condition|(
 name|LOGGER
 operator|.
-name|isLoggable
+name|trace
 argument_list|(
-name|Level
-operator|.
-name|FINER
-argument_list|)
-condition|)
-block|{
-name|LOGGER
-operator|.
-name|finer
-argument_list|(
-literal|"boostImportance("
-operator|+
+literal|"boostImportance({}, {})"
+argument_list|,
 name|factor
-operator|+
-literal|", "
-operator|+
+argument_list|,
 name|subsets
-operator|+
-literal|")"
 argument_list|)
 expr_stmt|;
-block|}
 specifier|final
 name|List
 argument_list|<
@@ -1382,35 +1351,22 @@ block|{
 continue|continue;
 block|}
 block|}
-if|if
-condition|(
 name|LOGGER
 operator|.
-name|isLoggable
+name|trace
 argument_list|(
-name|Level
-operator|.
-name|FINEST
-argument_list|)
-condition|)
-block|{
-name|LOGGER
-operator|.
-name|finest
-argument_list|(
+literal|"{} Rule-match queued: {}"
+argument_list|,
 name|matchList
 operator|.
 name|phase
 operator|.
 name|toString
 argument_list|()
-operator|+
-literal|" Rule-match queued: "
-operator|+
+argument_list|,
 name|matchName
 argument_list|)
 expr_stmt|;
-block|}
 name|matchList
 operator|.
 name|list
@@ -1525,32 +1481,17 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-if|if
-condition|(
 name|LOGGER
 operator|.
-name|isLoggable
+name|trace
 argument_list|(
-name|Level
-operator|.
-name|FINEST
-argument_list|)
-condition|)
-block|{
-name|LOGGER
-operator|.
-name|finest
-argument_list|(
-literal|"Importance of ["
-operator|+
+literal|"Importance of [{}] is {}"
+argument_list|,
 name|subset
-operator|+
-literal|"] is "
-operator|+
+argument_list|,
 name|importance
 argument_list|)
 expr_stmt|;
-block|}
 return|return
 name|importance
 return|;
@@ -1564,12 +1505,8 @@ if|if
 condition|(
 name|LOGGER
 operator|.
-name|isLoggable
-argument_list|(
-name|Level
-operator|.
-name|FINER
-argument_list|)
+name|isTraceEnabled
+argument_list|()
 condition|)
 block|{
 name|StringWriter
@@ -1600,7 +1537,7 @@ argument_list|()
 expr_stmt|;
 name|LOGGER
 operator|.
-name|finer
+name|trace
 argument_list|(
 name|sw
 operator|.
@@ -1780,12 +1717,8 @@ if|if
 condition|(
 name|LOGGER
 operator|.
-name|isLoggable
-argument_list|(
-name|Level
-operator|.
-name|FINEST
-argument_list|)
+name|isTraceEnabled
+argument_list|()
 condition|)
 block|{
 name|Collections
@@ -1868,7 +1801,7 @@ expr_stmt|;
 block|}
 name|LOGGER
 operator|.
-name|finest
+name|trace
 argument_list|(
 name|b
 operator|.
@@ -1954,28 +1887,15 @@ name|match
 argument_list|)
 condition|)
 block|{
-if|if
-condition|(
 name|LOGGER
 operator|.
-name|isLoggable
+name|debug
 argument_list|(
-name|Level
-operator|.
-name|FINE
-argument_list|)
-condition|)
-block|{
-name|LOGGER
-operator|.
-name|fine
-argument_list|(
-literal|"Skip match: "
-operator|+
+literal|"Skip match: {}"
+argument_list|,
 name|match
 argument_list|)
 expr_stmt|;
-block|}
 block|}
 else|else
 block|{
@@ -2011,28 +1931,15 @@ argument_list|,
 name|match
 argument_list|)
 expr_stmt|;
-if|if
-condition|(
 name|LOGGER
 operator|.
-name|isLoggable
+name|debug
 argument_list|(
-name|Level
-operator|.
-name|FINE
-argument_list|)
-condition|)
-block|{
-name|LOGGER
-operator|.
-name|fine
-argument_list|(
-literal|"Pop match: "
-operator|+
+literal|"Pop match: {}"
+argument_list|,
 name|match
 argument_list|)
 expr_stmt|;
-block|}
 return|return
 name|match
 return|;
@@ -2334,50 +2241,27 @@ name|parentImportance
 operator|*
 name|alpha
 decl_stmt|;
-if|if
-condition|(
 name|LOGGER
 operator|.
-name|isLoggable
+name|trace
 argument_list|(
-name|Level
-operator|.
-name|FINEST
-argument_list|)
-condition|)
-block|{
-name|LOGGER
-operator|.
-name|finest
-argument_list|(
-literal|"Importance of ["
+literal|"Importance of [{}] to its parent [{}] is {} (parent importance={}, child cost={},"
 operator|+
+literal|" parent cost={})"
+argument_list|,
 name|child
-operator|+
-literal|"] to its parent ["
-operator|+
+argument_list|,
 name|parent
-operator|+
-literal|"] is "
-operator|+
+argument_list|,
 name|importance
-operator|+
-literal|" (parent importance="
-operator|+
+argument_list|,
 name|parentImportance
-operator|+
-literal|", child cost="
-operator|+
+argument_list|,
 name|childCost
-operator|+
-literal|", parent cost="
-operator|+
+argument_list|,
 name|parentCost
-operator|+
-literal|")"
 argument_list|)
 expr_stmt|;
-block|}
 return|return
 name|importance
 return|;
