@@ -47,15 +47,11 @@ end_import
 
 begin_import
 import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
+name|java
 operator|.
 name|util
 operator|.
-name|Util
+name|List
 import|;
 end_import
 
@@ -65,7 +61,7 @@ name|java
 operator|.
 name|util
 operator|.
-name|List
+name|Objects
 import|;
 end_import
 
@@ -203,14 +199,11 @@ name|hashCode
 parameter_list|()
 block|{
 return|return
-name|Util
+name|Objects
 operator|.
 name|hash
 argument_list|(
 name|type
-operator|.
-name|hashCode
-argument_list|()
 argument_list|,
 name|index
 argument_list|)

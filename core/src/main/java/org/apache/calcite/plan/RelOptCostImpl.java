@@ -23,9 +23,9 @@ name|apache
 operator|.
 name|calcite
 operator|.
-name|util
+name|runtime
 operator|.
-name|Util
+name|Utilities
 import|;
 end_import
 
@@ -163,7 +163,7 @@ name|hashCode
 parameter_list|()
 block|{
 return|return
-name|Util
+name|Utilities
 operator|.
 name|hashCode
 argument_list|(

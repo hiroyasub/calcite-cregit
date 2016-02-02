@@ -19,6 +19,20 @@ end_package
 
 begin_import
 import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|runtime
+operator|.
+name|Utilities
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -172,17 +186,14 @@ name|hashCode
 parameter_list|()
 block|{
 return|return
-name|this
+name|Utilities
 operator|.
+name|hash
+argument_list|(
 name|source
-operator|^
-operator|(
-name|this
-operator|.
+argument_list|,
 name|target
-operator|<<
-literal|4
-operator|)
+argument_list|)
 return|;
 block|}
 comment|/**    * Converts two lists into a list of {@link IntPair}s,    * whose length is the lesser of the lengths of the    * source lists.    *    * @param lefts Left list    * @param rights Right list    * @return List of pairs    */

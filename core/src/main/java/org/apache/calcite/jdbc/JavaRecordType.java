@@ -71,6 +71,16 @@ name|List
 import|;
 end_import
 
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+import|;
+end_import
+
 begin_comment
 comment|/**  * Record type based on a Java class. The fields of the type are the fields  * of the class.  *  *<p><strong>NOTE: This class is experimental and subject to  * change/removal without notice</strong>.</p>  */
 end_comment
@@ -169,15 +179,14 @@ name|hashCode
 parameter_list|()
 block|{
 return|return
+name|Objects
+operator|.
+name|hash
+argument_list|(
 name|fieldList
-operator|.
-name|hashCode
-argument_list|()
-operator|^
+argument_list|,
 name|clazz
-operator|.
-name|hashCode
-argument_list|()
+argument_list|)
 return|;
 block|}
 block|}

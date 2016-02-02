@@ -121,6 +121,16 @@ name|Map
 import|;
 end_import
 
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+import|;
+end_import
+
 begin_comment
 comment|/**  * Actor that manages the state of materializations in the system.  */
 end_comment
@@ -428,17 +438,9 @@ name|hashCode
 parameter_list|()
 block|{
 return|return
-name|com
-operator|.
-name|google
-operator|.
-name|common
-operator|.
-name|base
-operator|.
 name|Objects
 operator|.
-name|hashCode
+name|hash
 argument_list|(
 name|sql
 argument_list|,

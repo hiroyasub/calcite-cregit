@@ -197,20 +197,6 @@ name|google
 operator|.
 name|common
 operator|.
-name|base
-operator|.
-name|Objects
-import|;
-end_import
-
-begin_import
-import|import
-name|com
-operator|.
-name|google
-operator|.
-name|common
-operator|.
 name|cache
 operator|.
 name|CacheBuilder
@@ -601,6 +587,16 @@ name|java
 operator|.
 name|util
 operator|.
+name|Arrays
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
 name|Collection
 import|;
 end_import
@@ -692,6 +688,16 @@ operator|.
 name|util
 operator|.
 name|Map
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
 import|;
 end_import
 
@@ -1268,7 +1274,10 @@ return|return
 literal|true
 return|;
 block|}
-comment|/**    * Combines two integers into a hash code.    */
+comment|/**    * Combines two integers into a hash code.    *    * @deprecated Use {@link Objects#hash(Object...)}    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 specifier|static
 name|int
@@ -1291,7 +1300,10 @@ operator|^
 name|j
 return|;
 block|}
-comment|/**    * Computes a hash code from an existing hash code and an object (which may    * be null).    */
+comment|/**    * Computes a hash code from an existing hash code and an object (which may    * be null).    *    * @deprecated Use {@link Objects#hash(Object...)}    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 specifier|static
 name|int
@@ -1334,7 +1346,10 @@ operator|^
 name|k
 return|;
 block|}
-comment|/**    * Computes a hash code from an existing hash code and an array of objects    * (which may be null).    */
+comment|/**    * Computes a hash code from an existing hash code and an array of objects    * (which may be null).    *    * @deprecated Use {@link Objects#hash(Object...)}    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 specifier|static
 name|int
@@ -1348,77 +1363,21 @@ index|[]
 name|a
 parameter_list|)
 block|{
-comment|// The hashcode for a null array and an empty array should be different
-comment|// than h, so use magic numbers.
-if|if
-condition|(
-name|a
-operator|==
-literal|null
-condition|)
-block|{
 return|return
-name|hash
-argument_list|(
 name|h
-argument_list|,
-literal|19690429
-argument_list|)
-return|;
-block|}
-if|if
-condition|(
-name|a
+operator|^
+name|Arrays
 operator|.
-name|length
-operator|==
-literal|0
-condition|)
-block|{
-return|return
-name|hash
+name|hashCode
 argument_list|(
-name|h
-argument_list|,
-literal|19690721
+name|a
 argument_list|)
 return|;
 block|}
-for|for
-control|(
-name|int
-name|i
-init|=
-literal|0
-init|;
-name|i
-operator|<
-name|a
-operator|.
-name|length
-condition|;
-name|i
-operator|++
-control|)
-block|{
-name|h
-operator|=
-name|hash
-argument_list|(
-name|h
-argument_list|,
-name|a
-index|[
-name|i
-index|]
-argument_list|)
-expr_stmt|;
-block|}
-return|return
-name|h
-return|;
-block|}
-comment|/** Computes the hash code of a {@code double} value. Equivalent to    * {@link Double}{@code .hashCode(double)}, but that method was only    * introduced in JDK 1.8.    *    * @param v Value    * @return Hash code    */
+comment|/** Computes the hash code of a {@code double} value. Equivalent to    * {@link Double}{@code .hashCode(double)}, but that method was only    * introduced in JDK 1.8.    *    * @param v Value    * @return Hash code    *    * @deprecated Use {@link org.apache.calcite.runtime.Utilities#hashCode(double)}    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 specifier|static
 name|int
@@ -7478,7 +7437,7 @@ if|if
 condition|(
 name|Objects
 operator|.
-name|equal
+name|equals
 argument_list|(
 name|e
 argument_list|,
@@ -7739,7 +7698,7 @@ condition|(
 operator|!
 name|Objects
 operator|.
-name|equal
+name|equals
 argument_list|(
 name|list0
 operator|.

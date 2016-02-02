@@ -37,23 +37,19 @@ name|google
 operator|.
 name|common
 operator|.
-name|base
+name|collect
 operator|.
-name|Objects
+name|ImmutableList
 import|;
 end_import
 
 begin_import
 import|import
-name|com
+name|java
 operator|.
-name|google
+name|util
 operator|.
-name|common
-operator|.
-name|collect
-operator|.
-name|ImmutableList
+name|Objects
 import|;
 end_import
 
@@ -134,7 +130,7 @@ block|{
 return|return
 name|Objects
 operator|.
-name|hashCode
+name|hash
 argument_list|(
 name|lattice
 argument_list|,

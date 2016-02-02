@@ -99,6 +99,16 @@ name|List
 import|;
 end_import
 
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+import|;
+end_import
+
 begin_comment
 comment|/**  * A generic implementation of {@link SqlMoniker}.  */
 end_comment
@@ -240,14 +250,11 @@ name|hashCode
 parameter_list|()
 block|{
 return|return
-name|Util
+name|Objects
 operator|.
 name|hash
 argument_list|(
 name|type
-operator|.
-name|ordinal
-argument_list|()
 argument_list|,
 name|names
 argument_list|)

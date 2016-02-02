@@ -17,6 +17,16 @@ name|tree
 package|;
 end_package
 
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+import|;
+end_import
+
 begin_comment
 comment|/**  * Used to represent the target of a {@link GotoStatement}.  */
 end_comment
@@ -132,16 +142,12 @@ name|hashCode
 parameter_list|()
 block|{
 return|return
-name|name
-operator|!=
-literal|null
-condition|?
-name|name
+name|Objects
 operator|.
 name|hashCode
-argument_list|()
-else|:
-literal|0
+argument_list|(
+name|name
+argument_list|)
 return|;
 block|}
 block|}

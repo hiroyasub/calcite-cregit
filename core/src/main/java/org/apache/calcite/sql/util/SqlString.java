@@ -109,6 +109,10 @@ parameter_list|)
 block|{
 return|return
 name|obj
+operator|==
+name|this
+operator|||
+name|obj
 operator|instanceof
 name|SqlString
 operator|&&

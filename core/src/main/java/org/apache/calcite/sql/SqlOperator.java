@@ -270,6 +270,16 @@ import|;
 end_import
 
 begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+import|;
+end_import
+
+begin_import
 import|import static
 name|org
 operator|.
@@ -1025,22 +1035,22 @@ name|testName
 argument_list|)
 return|;
 block|}
-comment|// override Object
+annotation|@
+name|Override
 specifier|public
 name|int
 name|hashCode
 parameter_list|()
 block|{
 return|return
+name|Objects
+operator|.
+name|hash
+argument_list|(
 name|kind
-operator|.
-name|hashCode
-argument_list|()
-operator|+
+argument_list|,
 name|name
-operator|.
-name|hashCode
-argument_list|()
+argument_list|)
 return|;
 block|}
 comment|/**    * Validates a call to this operator.    *    *<p>This method should not perform type-derivation or perform validation    * related related to types. That is done later, by    * {@link #deriveType(SqlValidator, SqlValidatorScope, SqlCall)}. This method    * should focus on structural validation.    *    *<p>A typical implementation of this method first validates the operands,    * then performs some operator-specific logic. The default implementation    * just validates the operands.    *    *<p>This method is the default implementation of {@link SqlCall#validate};    * but note that some sub-classes of {@link SqlCall} never call this method.    *    * @param call         the call to this operator    * @param validator    the active validator    * @param scope        validator scope    * @param operandScope validator scope in which to validate operands to this    *                     call; usually equal to scope, but not always because    *                     some operators introduce new scopes    * @see SqlNode#validateExpr(SqlValidator, SqlValidatorScope)    * @see #deriveType(SqlValidator, SqlValidatorScope, SqlCall)    */

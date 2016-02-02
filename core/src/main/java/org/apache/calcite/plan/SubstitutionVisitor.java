@@ -745,20 +745,6 @@ name|common
 operator|.
 name|base
 operator|.
-name|Objects
-import|;
-end_import
-
-begin_import
-import|import
-name|com
-operator|.
-name|google
-operator|.
-name|common
-operator|.
-name|base
-operator|.
 name|Preconditions
 import|;
 end_import
@@ -942,6 +928,16 @@ operator|.
 name|util
 operator|.
 name|Map
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
 import|;
 end_import
 
@@ -8651,7 +8647,7 @@ block|{
 return|return
 name|Objects
 operator|.
-name|hashCode
+name|hash
 argument_list|(
 name|input
 argument_list|,
@@ -8890,7 +8886,7 @@ block|{
 return|return
 name|Objects
 operator|.
-name|hashCode
+name|hash
 argument_list|(
 name|input
 argument_list|,
@@ -9198,7 +9194,7 @@ block|{
 return|return
 name|Objects
 operator|.
-name|hashCode
+name|hash
 argument_list|(
 name|input
 argument_list|,
@@ -9448,7 +9444,7 @@ argument_list|)
 operator|&&
 name|Objects
 operator|.
-name|equal
+name|equals
 argument_list|(
 name|offset
 argument_list|,
@@ -9464,7 +9460,7 @@ argument_list|)
 operator|&&
 name|Objects
 operator|.
-name|equal
+name|equals
 argument_list|(
 name|fetch
 argument_list|,
@@ -9503,7 +9499,7 @@ block|{
 return|return
 name|Objects
 operator|.
-name|hashCode
+name|hash
 argument_list|(
 name|input
 argument_list|,
@@ -9871,7 +9867,7 @@ block|{
 return|return
 name|Objects
 operator|.
-name|hashCode
+name|hash
 argument_list|(
 name|type
 argument_list|,
@@ -10415,7 +10411,7 @@ block|{
 return|return
 name|Objects
 operator|.
-name|hashCode
+name|hash
 argument_list|(
 name|left
 argument_list|,
