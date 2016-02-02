@@ -315,7 +315,7 @@ name|FastDateFormat
 operator|.
 name|getInstance
 argument_list|(
-literal|"hh:mm:ss"
+literal|"HH:mm:ss"
 argument_list|,
 name|gmt
 argument_list|)
@@ -326,7 +326,7 @@ name|FastDateFormat
 operator|.
 name|getInstance
 argument_list|(
-literal|"yyyy-MM-dd hh:mm:ss"
+literal|"yyyy-MM-dd HH:mm:ss"
 argument_list|,
 name|gmt
 argument_list|)
@@ -556,9 +556,7 @@ name|types
 init|=
 operator|new
 name|ArrayList
-argument_list|<
-name|RelDataType
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 specifier|final
@@ -570,9 +568,7 @@ name|names
 init|=
 operator|new
 name|ArrayList
-argument_list|<
-name|String
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 name|CSVReader
