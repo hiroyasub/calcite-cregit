@@ -19405,12 +19405,9 @@ block|}
 decl_stmt|;
 if|if
 condition|(
-operator|!
 name|enable
 condition|)
 block|{
-return|return;
-block|}
 comment|// verified on Oracle 10g
 name|tester
 operator|.
@@ -19452,6 +19449,7 @@ argument_list|,
 literal|0d
 argument_list|)
 expr_stmt|;
+block|}
 comment|// with one value
 name|tester
 operator|.
@@ -19564,12 +19562,9 @@ block|}
 decl_stmt|;
 if|if
 condition|(
-operator|!
 name|enable
 condition|)
 block|{
-return|return;
-block|}
 comment|// verified on Oracle 10g
 name|tester
 operator|.
@@ -19611,6 +19606,7 @@ argument_list|,
 literal|0d
 argument_list|)
 expr_stmt|;
+block|}
 comment|// with one value
 name|tester
 operator|.

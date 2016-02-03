@@ -149,7 +149,7 @@ operator|+
 name|values
 return|;
 block|}
-comment|/** {@inheritDoc}    *    *<p>Computes hash code consistent with {@link Map.Entry#hashCode()}. */
+comment|/** {@inheritDoc}    *    *<p>Computes hash code consistent with    * {@link java.util.Map.Entry#hashCode()}. */
 annotation|@
 name|Override
 specifier|public
