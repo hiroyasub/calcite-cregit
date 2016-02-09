@@ -889,8 +889,8 @@ name|litmus
 operator|.
 name|fail
 argument_list|(
-literal|"not a constant: "
-operator|+
+literal|"not a constant: {}"
+argument_list|,
 name|o1
 argument_list|)
 return|;
@@ -961,8 +961,8 @@ name|litmus
 operator|.
 name|fail
 argument_list|(
-literal|"not a constant: "
-operator|+
+literal|"not a constant: {}"
+argument_list|,
 name|entry
 operator|.
 name|getKey
@@ -989,8 +989,8 @@ name|litmus
 operator|.
 name|fail
 argument_list|(
-literal|"not a constant: "
-operator|+
+literal|"not a constant: {}"
+argument_list|,
 name|entry
 operator|.
 name|getValue
@@ -1013,8 +1013,8 @@ name|litmus
 operator|.
 name|fail
 argument_list|(
-literal|"not a constant: "
-operator|+
+literal|"not a constant: {}"
+argument_list|,
 name|o
 argument_list|)
 return|;

@@ -531,10 +531,10 @@ name|litmus
 operator|.
 name|fail
 argument_list|(
+literal|"{} != {}"
+argument_list|,
 name|this
-operator|+
-literal|"!="
-operator|+
+argument_list|,
 name|node
 argument_list|)
 return|;

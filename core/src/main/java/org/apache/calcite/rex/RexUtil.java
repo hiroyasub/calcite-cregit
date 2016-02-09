@@ -2314,8 +2314,8 @@ name|litmus
 operator|.
 name|fail
 argument_list|(
-literal|"illegal forward reference in "
-operator|+
+literal|"illegal forward reference in {}"
+argument_list|,
 name|expr
 argument_list|)
 return|;
@@ -2408,8 +2408,8 @@ name|litmus
 operator|.
 name|fail
 argument_list|(
-literal|"contains non trivial agg: "
-operator|+
+literal|"contains non trivial agg: {}"
+argument_list|,
 name|operand
 argument_list|)
 return|;
@@ -2947,11 +2947,9 @@ name|litmus
 operator|.
 name|fail
 argument_list|(
-literal|"expr["
-operator|+
+literal|"expr[{}] is not a RexInputRef"
+argument_list|,
 name|i
-operator|+
-literal|"] is not a RexInputRef"
 argument_list|)
 return|;
 block|}
@@ -2983,12 +2981,10 @@ name|litmus
 operator|.
 name|fail
 argument_list|(
-literal|"expr["
-operator|+
+literal|"expr[{}] has ordinal {}"
+argument_list|,
 name|i
-operator|+
-literal|"] has ordinal "
-operator|+
+argument_list|,
 name|inputRef
 operator|.
 name|getIndex

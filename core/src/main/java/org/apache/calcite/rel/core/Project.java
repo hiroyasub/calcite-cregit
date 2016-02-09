@@ -928,13 +928,13 @@ name|litmus
 operator|.
 name|fail
 argument_list|(
+literal|"{} failures in expression {}"
+argument_list|,
 name|checker
 operator|.
 name|getFailureCount
 argument_list|()
-operator|+
-literal|" failures in expression "
-operator|+
+argument_list|,
 name|exp
 argument_list|)
 return|;
@@ -959,8 +959,8 @@ name|litmus
 operator|.
 name|fail
 argument_list|(
-literal|"field names not distinct: "
-operator|+
+literal|"field names not distinct: {}"
+argument_list|,
 name|rowType
 argument_list|)
 return|;
@@ -1024,8 +1024,8 @@ name|litmus
 operator|.
 name|fail
 argument_list|(
-literal|"duplicate expressions: "
-operator|+
+literal|"duplicate expressions: {}"
+argument_list|,
 name|exps
 argument_list|)
 return|;

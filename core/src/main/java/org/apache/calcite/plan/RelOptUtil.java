@@ -1746,8 +1746,8 @@ name|litmus
 operator|.
 name|fail
 argument_list|(
-literal|"contains "
-operator|+
+literal|"contains {}"
+argument_list|,
 name|correlationId
 argument_list|)
 return|;
@@ -7697,23 +7697,17 @@ name|litmus
 operator|.
 name|fail
 argument_list|(
-literal|"type mismatch:\n"
-operator|+
+literal|"type mismatch:\n{}:\n{}\n{}:\n{}"
+argument_list|,
 name|desc1
-operator|+
-literal|":\n"
-operator|+
+argument_list|,
 name|type1
 operator|.
 name|getFullTypeString
 argument_list|()
-operator|+
-literal|"\n"
-operator|+
+argument_list|,
 name|desc2
-operator|+
-literal|":\n"
-operator|+
+argument_list|,
 name|type2
 operator|.
 name|getFullTypeString
@@ -7770,23 +7764,17 @@ name|litmus
 operator|.
 name|fail
 argument_list|(
-literal|"Type mismatch:\n"
-operator|+
+literal|"Type mismatch:\n{}:\n{}\n{}:\n{}"
+argument_list|,
 name|desc1
-operator|+
-literal|":\n"
-operator|+
+argument_list|,
 name|type1
 operator|.
 name|getFullTypeString
 argument_list|()
-operator|+
-literal|"\n"
-operator|+
+argument_list|,
 name|desc2
-operator|+
-literal|":\n"
-operator|+
+argument_list|,
 name|type2
 operator|.
 name|getFullTypeString

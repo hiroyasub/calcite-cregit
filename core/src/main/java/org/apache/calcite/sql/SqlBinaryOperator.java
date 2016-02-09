@@ -957,12 +957,10 @@ name|litmus
 operator|.
 name|fail
 argument_list|(
-literal|"wrong operand count "
-operator|+
+literal|"wrong operand count {} for {}"
+argument_list|,
 name|count
-operator|+
-literal|" for "
-operator|+
+argument_list|,
 name|this
 argument_list|)
 return|;

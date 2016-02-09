@@ -6592,12 +6592,10 @@ name|ret
 operator|.
 name|fail
 argument_list|(
-literal|"out of range; value: "
-operator|+
+literal|"out of range; value: {}, limit: {}"
+argument_list|,
 name|value
-operator|+
-literal|", limit: "
-operator|+
+argument_list|,
 name|limit
 argument_list|)
 return|;

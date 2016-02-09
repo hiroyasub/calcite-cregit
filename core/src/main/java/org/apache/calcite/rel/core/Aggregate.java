@@ -1752,6 +1752,8 @@ name|getFieldNames
 argument_list|()
 argument_list|)
 argument_list|,
+literal|"distinct field names: {}"
+argument_list|,
 name|getRowType
 argument_list|()
 argument_list|)

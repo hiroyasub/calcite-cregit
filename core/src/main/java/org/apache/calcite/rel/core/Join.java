@@ -720,8 +720,8 @@ name|litmus
 operator|.
 name|fail
 argument_list|(
-literal|"condition must be boolean: "
-operator|+
+literal|"condition must be boolean: {}"
+argument_list|,
 name|condition
 operator|.
 name|getType

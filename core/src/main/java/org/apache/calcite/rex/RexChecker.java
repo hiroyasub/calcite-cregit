@@ -229,20 +229,16 @@ name|litmus
 operator|.
 name|fail
 argument_list|(
-literal|"RexInputRef index "
-operator|+
+literal|"RexInputRef index {} out of range 0..{}"
+argument_list|,
 name|index
-operator|+
-literal|" out of range 0.."
-operator|+
-operator|(
+argument_list|,
 name|inputTypeList
 operator|.
 name|size
 argument_list|()
 operator|-
 literal|1
-operator|)
 argument_list|)
 return|;
 block|}

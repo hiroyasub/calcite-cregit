@@ -3055,24 +3055,26 @@ name|string
 argument_list|)
 condition|)
 block|{
+specifier|final
+name|String
+name|message
+init|=
+literal|"Program is not normalized:\n"
+operator|+
+literal|"program:    {}\n"
+operator|+
+literal|"normalized: {}\n"
+decl_stmt|;
 return|return
 name|litmus
 operator|.
 name|fail
 argument_list|(
-literal|"Program is not normalized:\n"
-operator|+
-literal|"program:    "
-operator|+
+name|message
+argument_list|,
 name|string
-operator|+
-literal|"\n"
-operator|+
-literal|"normalized: "
-operator|+
+argument_list|,
 name|normalized
-operator|+
-literal|"\n"
 argument_list|)
 return|;
 block|}
