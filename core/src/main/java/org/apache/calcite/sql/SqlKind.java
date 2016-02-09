@@ -433,6 +433,21 @@ block|,
 comment|/** The {@code SINGLE_VALUE} aggregate function. */
 name|SINGLE_VALUE
 block|,
+comment|/** The {@code ROW_NUMBER} window function. */
+name|ROW_NUMBER
+block|,
+comment|/** The {@code RANK} window function. */
+name|RANK
+block|,
+comment|/** The {@code PERCENT_RANK} window function. */
+name|PERCENT_RANK
+block|,
+comment|/** The {@code DENSE_RANK} window function. */
+name|DENSE_RANK
+block|,
+comment|/** The {@code ROW_NUMBER} window function. */
+name|CUME_DIST
+block|,
 comment|// DDL and session control statements follow. The list is not exhaustive: feel
 comment|// free to add more.
 comment|/** {@code COMMIT} session control statement. */

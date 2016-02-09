@@ -2583,7 +2583,7 @@ decl_stmt|;
 comment|//-------------------------------------------------------------
 comment|// WINDOW Rank Functions
 comment|//-------------------------------------------------------------
-comment|/**    *<code>CUME_DIST</code> Window function.    */
+comment|/**    *<code>CUME_DIST</code> window function.    */
 specifier|public
 specifier|static
 specifier|final
@@ -2593,12 +2593,14 @@ init|=
 operator|new
 name|SqlRankFunction
 argument_list|(
-literal|"CUME_DIST"
-argument_list|,
 literal|true
+argument_list|,
+name|SqlKind
+operator|.
+name|CUME_DIST
 argument_list|)
 decl_stmt|;
-comment|/**    *<code>DENSE_RANK</code> Window function.    */
+comment|/**    *<code>DENSE_RANK</code> window function.    */
 specifier|public
 specifier|static
 specifier|final
@@ -2608,12 +2610,14 @@ init|=
 operator|new
 name|SqlRankFunction
 argument_list|(
-literal|"DENSE_RANK"
-argument_list|,
 literal|true
+argument_list|,
+name|SqlKind
+operator|.
+name|DENSE_RANK
 argument_list|)
 decl_stmt|;
-comment|/**    *<code>PERCENT_RANK</code> Window function.    */
+comment|/**    *<code>PERCENT_RANK</code> window function.    */
 specifier|public
 specifier|static
 specifier|final
@@ -2623,12 +2627,14 @@ init|=
 operator|new
 name|SqlRankFunction
 argument_list|(
-literal|"PERCENT_RANK"
-argument_list|,
 literal|true
+argument_list|,
+name|SqlKind
+operator|.
+name|PERCENT_RANK
 argument_list|)
 decl_stmt|;
-comment|/**    *<code>RANK</code> Window function.    */
+comment|/**    *<code>RANK</code> window function.    */
 specifier|public
 specifier|static
 specifier|final
@@ -2638,12 +2644,14 @@ init|=
 operator|new
 name|SqlRankFunction
 argument_list|(
-literal|"RANK"
-argument_list|,
 literal|true
+argument_list|,
+name|SqlKind
+operator|.
+name|RANK
 argument_list|)
 decl_stmt|;
-comment|/**    *<code>ROW_NUMBER</code> Window function.    */
+comment|/**    *<code>ROW_NUMBER</code> window function.    */
 specifier|public
 specifier|static
 specifier|final
@@ -2653,9 +2661,11 @@ init|=
 operator|new
 name|SqlRankFunction
 argument_list|(
-literal|"ROW_NUMBER"
-argument_list|,
 literal|false
+argument_list|,
+name|SqlKind
+operator|.
+name|ROW_NUMBER
 argument_list|)
 decl_stmt|;
 comment|//-------------------------------------------------------------
