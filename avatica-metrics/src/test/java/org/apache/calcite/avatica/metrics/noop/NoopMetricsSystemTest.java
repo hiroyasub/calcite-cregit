@@ -261,6 +261,23 @@ operator|.
 name|close
 argument_list|()
 expr_stmt|;
+name|Context
+name|contextTwo
+init|=
+name|timer
+operator|.
+name|start
+argument_list|()
+decl_stmt|;
+name|assertTrue
+argument_list|(
+literal|"Timer's context should be a singleton"
+argument_list|,
+name|context
+operator|==
+name|contextTwo
+argument_list|)
+expr_stmt|;
 name|Meter
 name|meter
 init|=
