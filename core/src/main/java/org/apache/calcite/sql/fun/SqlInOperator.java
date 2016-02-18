@@ -393,7 +393,7 @@ name|SqlKind
 operator|.
 name|IN
 argument_list|,
-literal|30
+literal|32
 argument_list|,
 literal|true
 argument_list|,

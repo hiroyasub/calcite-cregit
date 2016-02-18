@@ -5041,6 +5041,182 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testLessThanAssociativity
+parameter_list|()
+block|{
+name|checkExp
+argument_list|(
+literal|"NOT a = b"
+argument_list|,
+literal|"(NOT (`A` = `B`))"
+argument_list|)
+expr_stmt|;
+comment|// comparison operators are left-associative
+name|checkExp
+argument_list|(
+literal|"x< y< z"
+argument_list|,
+literal|"((`X`< `Y`)< `Z`)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"x< y<= z = a"
+argument_list|,
+literal|"(((`X`< `Y`)<= `Z`) = `A`)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"a = x< y<= z = a"
+argument_list|,
+literal|"((((`A` = `X`)< `Y`)<= `Z`) = `A`)"
+argument_list|)
+expr_stmt|;
+comment|// IS NULL has lower precedence than comparison
+name|checkExp
+argument_list|(
+literal|"a = x is null"
+argument_list|,
+literal|"((`A` = `X`) IS NULL)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"a = x is not null"
+argument_list|,
+literal|"((`A` = `X`) IS NOT NULL)"
+argument_list|)
+expr_stmt|;
+comment|// BETWEEN, IN, LIKE have higher precedence than comparison
+name|checkExp
+argument_list|(
+literal|"a = x between y = b and z = c"
+argument_list|,
+literal|"((`A` = (`X` BETWEEN ASYMMETRIC (`Y` = `B`) AND `Z`)) = `C`)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"a = x like y = b"
+argument_list|,
+literal|"((`A` = (`X` LIKE `Y`)) = `B`)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"a = x not like y = b"
+argument_list|,
+literal|"((`A` = (`X` NOT LIKE `Y`)) = `B`)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"a = x similar to y = b"
+argument_list|,
+literal|"((`A` = (`X` SIMILAR TO `Y`)) = `B`)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"a = x not similar to y = b"
+argument_list|,
+literal|"((`A` = (`X` NOT SIMILAR TO `Y`)) = `B`)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"a = x not in (y, z) = b"
+argument_list|,
+literal|"((`A` = (`X` NOT IN (`Y`, `Z`))) = `B`)"
+argument_list|)
+expr_stmt|;
+comment|// LIKE has higher precedence than IS NULL
+name|checkExp
+argument_list|(
+literal|"a like b is null"
+argument_list|,
+literal|"((`A` LIKE `B`) IS NULL)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"a not like b is not null"
+argument_list|,
+literal|"((`A` NOT LIKE `B`) IS NOT NULL)"
+argument_list|)
+expr_stmt|;
+comment|// = has higher precedence than NOT
+name|checkExp
+argument_list|(
+literal|"NOT a = b"
+argument_list|,
+literal|"(NOT (`A` = `B`))"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"NOT a = NOT b"
+argument_list|,
+literal|"(NOT (`A` = (NOT `B`)))"
+argument_list|)
+expr_stmt|;
+comment|// IS NULL has higher precedence than NOT
+name|checkExp
+argument_list|(
+literal|"NOT a IS NULL"
+argument_list|,
+literal|"(NOT (`A` IS NULL))"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"NOT a = b IS NOT NULL"
+argument_list|,
+literal|"(NOT ((`A` = `B`) IS NOT NULL))"
+argument_list|)
+expr_stmt|;
+comment|// NOT has higher precedence than AND, which  has higher precedence than OR
+name|checkExp
+argument_list|(
+literal|"NOT a AND NOT b"
+argument_list|,
+literal|"((NOT `A`) AND (NOT `B`))"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"NOT a OR NOT b"
+argument_list|,
+literal|"((NOT `A`) OR (NOT `B`))"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"NOT a = b AND NOT c = d OR NOT e = f"
+argument_list|,
+literal|"(((NOT (`A` = `B`)) AND (NOT (`C` = `D`))) OR (NOT (`E` = `F`)))"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"NOT a = b OR NOT c = d AND NOT e = f"
+argument_list|,
+literal|"((NOT (`A` = `B`)) OR ((NOT (`C` = `D`)) AND (NOT (`E` = `F`))))"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"NOT NOT a = b OR NOT NOT c = d"
+argument_list|,
+literal|"((NOT (NOT (`A` = `B`))) OR (NOT (NOT (`C` = `D`))))"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testIsBooleans
 parameter_list|()
 block|{
@@ -5076,11 +5252,11 @@ literal|"SELECT *\n"
 operator|+
 literal|"FROM `T`\n"
 operator|+
-literal|"WHERE ((NOT FALSE) IS "
+literal|"WHERE (NOT (FALSE IS "
 operator|+
 name|inOut
 operator|+
-literal|")"
+literal|"))"
 argument_list|)
 expr_stmt|;
 name|check
@@ -5128,7 +5304,7 @@ literal|"SELECT 1\n"
 operator|+
 literal|"FROM `T`\n"
 operator|+
-literal|"WHERE ((NOT TRUE) IS UNKNOWN)"
+literal|"WHERE (NOT (TRUE IS UNKNOWN))"
 argument_list|)
 expr_stmt|;
 name|check
@@ -5145,15 +5321,37 @@ literal|"WHERE ((((((((`X` IS UNKNOWN) IS NOT UNKNOWN) IS FALSE) IS NOT FALSE) I
 argument_list|)
 expr_stmt|;
 comment|// combine IS postfix operators with infix (AND) and prefix (NOT) ops
-name|check
-argument_list|(
-literal|"select * from t where x is unknown is false and x is unknown is true or not y is unknown is not null"
-argument_list|,
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select * from t "
+operator|+
+literal|"where x is unknown is false "
+operator|+
+literal|"and x is unknown is true "
+operator|+
+literal|"or not y is unknown is not null"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
 literal|"SELECT *\n"
 operator|+
 literal|"FROM `T`\n"
 operator|+
-literal|"WHERE ((((`X` IS UNKNOWN) IS FALSE) AND ((`X` IS UNKNOWN) IS TRUE)) OR (((NOT `Y`) IS UNKNOWN) IS NOT NULL))"
+literal|"WHERE ((((`X` IS UNKNOWN) IS FALSE)"
+operator|+
+literal|" AND ((`X` IS UNKNOWN) IS TRUE))"
+operator|+
+literal|" OR (NOT ((`Y` IS UNKNOWN) IS NOT NULL)))"
+decl_stmt|;
+name|check
+argument_list|(
+name|sql
+argument_list|,
+name|expected
 argument_list|)
 expr_stmt|;
 block|}
@@ -5335,12 +5533,12 @@ argument_list|,
 literal|"VALUES (ROW(((`A` BETWEEN ASYMMETRIC `B` AND (`C` + 2)) OR (`D` AND `E`))))"
 argument_list|)
 expr_stmt|;
-comment|// '=' and BETWEEN have same precedence, and are left-assoc
+comment|// '=' has slightly lower precedence than BETWEEN; both are left-assoc
 name|check
 argument_list|(
 literal|"values x = a between b and c = d = e"
 argument_list|,
-literal|"VALUES (ROW(((((`X` = `A`) BETWEEN ASYMMETRIC `B` AND `C`) = `D`) = `E`)))"
+literal|"VALUES (ROW((((`X` = (`A` BETWEEN ASYMMETRIC `B` AND `C`)) = `D`) = `E`)))"
 argument_list|)
 expr_stmt|;
 comment|// AND doesn't match BETWEEN if it's between parentheses!
@@ -6243,7 +6441,7 @@ name|check
 argument_list|(
 literal|"values a = b like c = d"
 argument_list|,
-literal|"VALUES (ROW(((`A` = `B`) LIKE (`C` = `D`))))"
+literal|"VALUES (ROW(((`A` = (`B` LIKE `C`)) = `D`)))"
 argument_list|)
 expr_stmt|;
 comment|// Nested LIKE
@@ -6387,7 +6585,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testArthimeticOperators
+name|testArithmeticOperators
 parameter_list|()
 block|{
 name|checkExp
@@ -6429,7 +6627,7 @@ name|checkExp
 argument_list|(
 literal|"log10(- -.2  )"
 argument_list|,
-literal|"LOG10((- -0.2))"
+literal|"LOG10(0.2)"
 argument_list|)
 expr_stmt|;
 block|}
@@ -9065,7 +9263,7 @@ literal|"values (- -1\n"
 operator|+
 literal|")"
 argument_list|,
-literal|"VALUES (ROW((- -1)))"
+literal|"VALUES (ROW(1))"
 argument_list|)
 expr_stmt|;
 name|check
@@ -9077,7 +9275,7 @@ argument_list|,
 literal|"VALUES (ROW(2))"
 argument_list|)
 expr_stmt|;
-comment|// end of multiline commment without start
+comment|// end of multiline comment without start
 if|if
 condition|(
 name|Bug
@@ -9240,7 +9438,7 @@ name|checkExp
 argument_list|(
 literal|"- -1"
 argument_list|,
-literal|"(- -1)"
+literal|"1"
 argument_list|)
 expr_stmt|;
 name|checkExp
@@ -9495,10 +9693,26 @@ name|checkExp
 argument_list|(
 literal|"- - 1"
 argument_list|,
-literal|"(- -1)"
+literal|"1"
 argument_list|)
 expr_stmt|;
-comment|// two prefices
+comment|// special case for unary minus
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testPrecedence2b
+parameter_list|()
+block|{
+name|checkExp
+argument_list|(
+literal|"not not 1"
+argument_list|,
+literal|"(NOT (NOT 1))"
+argument_list|)
+expr_stmt|;
+comment|// two prefixes
 block|}
 annotation|@
 name|Test
@@ -10621,7 +10835,7 @@ argument_list|)
 expr_stmt|;
 name|checkFails
 argument_list|(
-literal|"call p(^cursor^(select * from emps))"
+literal|"call list(^cursor^(select * from emps))"
 argument_list|,
 literal|"CURSOR expression encountered in illegal context"
 argument_list|)
@@ -21616,30 +21830,15 @@ name|SqlParseException
 name|e
 parameter_list|)
 block|{
-name|e
-operator|.
-name|printStackTrace
-argument_list|()
-expr_stmt|;
-name|String
-name|message
-init|=
-literal|"Received error while parsing SQL '"
-operator|+
-name|sql
-operator|+
-literal|"'; error is:\n"
-operator|+
-name|e
-operator|.
-name|toString
-argument_list|()
-decl_stmt|;
 throw|throw
 operator|new
-name|AssertionError
+name|RuntimeException
 argument_list|(
-name|message
+literal|"Error while parsing SQL: "
+operator|+
+name|sql
+argument_list|,
+name|e
 argument_list|)
 throw|;
 block|}
@@ -21741,25 +21940,13 @@ name|SqlParseException
 name|e
 parameter_list|)
 block|{
-name|String
-name|message
-init|=
-literal|"Received error while parsing SQL '"
-operator|+
-name|sql
-operator|+
-literal|"'; error is:\n"
-operator|+
-name|e
-operator|.
-name|toString
-argument_list|()
-decl_stmt|;
 throw|throw
 operator|new
 name|RuntimeException
 argument_list|(
-name|message
+literal|"Error while parsing expression: "
+operator|+
+name|sql
 argument_list|,
 name|e
 argument_list|)

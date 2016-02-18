@@ -197,7 +197,7 @@ name|kind
 argument_list|,
 name|leftPrec
 argument_list|(
-literal|0
+name|prec
 argument_list|,
 literal|true
 argument_list|)

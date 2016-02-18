@@ -131,6 +131,20 @@ name|calcite
 operator|.
 name|sql
 operator|.
+name|SqlSpecialOperator
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
 name|fun
 operator|.
 name|OracleSqlOperatorTable
@@ -323,6 +337,20 @@ end_import
 
 begin_import
 import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|collect
+operator|.
+name|Ordering
+import|;
+end_import
+
+begin_import
+import|import
 name|org
 operator|.
 name|junit
@@ -390,6 +418,16 @@ operator|.
 name|util
 operator|.
 name|Arrays
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Comparator
 import|;
 end_import
 
@@ -21255,6 +21293,556 @@ expr_stmt|;
 break|break;
 block|}
 block|}
+block|}
+specifier|private
+specifier|static
+name|int
+name|prec
+parameter_list|(
+name|SqlOperator
+name|op
+parameter_list|)
+block|{
+return|return
+name|Math
+operator|.
+name|max
+argument_list|(
+name|op
+operator|.
+name|getLeftPrec
+argument_list|()
+argument_list|,
+name|op
+operator|.
+name|getRightPrec
+argument_list|()
+argument_list|)
+return|;
+block|}
+comment|/** Tests that operators, sorted by precedence, are in a sane order. Each    * operator has a {@link SqlOperator#getLeftPrec() left} and    * {@link SqlOperator#getRightPrec()} right} precedence, but we would like    * the order to remain the same even if we tweak particular operators'    * precedences. If you need to update the expected output, you might also    * need to change    *<a href="http://calcite.apache.org/docs/reference.html#operator-precedence">    * the documentation</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testOperatorsSortedByPrecedence
+parameter_list|()
+block|{
+specifier|final
+name|StringBuilder
+name|b
+init|=
+operator|new
+name|StringBuilder
+argument_list|()
+decl_stmt|;
+specifier|final
+name|Comparator
+argument_list|<
+name|SqlOperator
+argument_list|>
+name|comparator
+init|=
+operator|new
+name|Comparator
+argument_list|<
+name|SqlOperator
+argument_list|>
+argument_list|()
+block|{
+specifier|public
+name|int
+name|compare
+parameter_list|(
+name|SqlOperator
+name|o1
+parameter_list|,
+name|SqlOperator
+name|o2
+parameter_list|)
+block|{
+name|int
+name|c
+init|=
+name|Integer
+operator|.
+name|compare
+argument_list|(
+name|prec
+argument_list|(
+name|o1
+argument_list|)
+argument_list|,
+name|prec
+argument_list|(
+name|o2
+argument_list|)
+argument_list|)
+decl_stmt|;
+if|if
+condition|(
+name|c
+operator|!=
+literal|0
+condition|)
+block|{
+return|return
+operator|-
+name|c
+return|;
+block|}
+name|c
+operator|=
+name|o1
+operator|.
+name|getName
+argument_list|()
+operator|.
+name|compareTo
+argument_list|(
+name|o2
+operator|.
+name|getName
+argument_list|()
+argument_list|)
+expr_stmt|;
+if|if
+condition|(
+name|c
+operator|!=
+literal|0
+condition|)
+block|{
+return|return
+name|c
+return|;
+block|}
+return|return
+name|o1
+operator|.
+name|getSyntax
+argument_list|()
+operator|.
+name|compareTo
+argument_list|(
+name|o2
+operator|.
+name|getSyntax
+argument_list|()
+argument_list|)
+return|;
+block|}
+block|}
+decl_stmt|;
+specifier|final
+name|List
+argument_list|<
+name|SqlOperator
+argument_list|>
+name|operators
+init|=
+name|SqlStdOperatorTable
+operator|.
+name|instance
+argument_list|()
+operator|.
+name|getOperatorList
+argument_list|()
+decl_stmt|;
+name|int
+name|p
+init|=
+operator|-
+literal|1
+decl_stmt|;
+for|for
+control|(
+name|SqlOperator
+name|op
+range|:
+name|Ordering
+operator|.
+name|from
+argument_list|(
+name|comparator
+argument_list|)
+operator|.
+name|sortedCopy
+argument_list|(
+name|operators
+argument_list|)
+control|)
+block|{
+specifier|final
+name|String
+name|type
+decl_stmt|;
+switch|switch
+condition|(
+name|op
+operator|.
+name|getSyntax
+argument_list|()
+condition|)
+block|{
+case|case
+name|FUNCTION
+case|:
+case|case
+name|FUNCTION_ID
+case|:
+case|case
+name|FUNCTION_STAR
+case|:
+case|case
+name|INTERNAL
+case|:
+continue|continue;
+case|case
+name|PREFIX
+case|:
+name|type
+operator|=
+literal|"pre"
+expr_stmt|;
+break|break;
+case|case
+name|POSTFIX
+case|:
+name|type
+operator|=
+literal|"post"
+expr_stmt|;
+break|break;
+case|case
+name|BINARY
+case|:
+if|if
+condition|(
+name|op
+operator|.
+name|getLeftPrec
+argument_list|()
+operator|<
+name|op
+operator|.
+name|getRightPrec
+argument_list|()
+condition|)
+block|{
+name|type
+operator|=
+literal|"left"
+expr_stmt|;
+block|}
+else|else
+block|{
+name|type
+operator|=
+literal|"right"
+expr_stmt|;
+block|}
+break|break;
+default|default:
+if|if
+condition|(
+name|op
+operator|instanceof
+name|SqlSpecialOperator
+condition|)
+block|{
+name|type
+operator|=
+literal|"-"
+expr_stmt|;
+block|}
+else|else
+block|{
+continue|continue;
+block|}
+block|}
+if|if
+condition|(
+name|prec
+argument_list|(
+name|op
+argument_list|)
+operator|!=
+name|p
+condition|)
+block|{
+name|b
+operator|.
+name|append
+argument_list|(
+literal|'\n'
+argument_list|)
+expr_stmt|;
+name|p
+operator|=
+name|prec
+argument_list|(
+name|op
+argument_list|)
+expr_stmt|;
+block|}
+name|b
+operator|.
+name|append
+argument_list|(
+name|op
+operator|.
+name|getName
+argument_list|()
+argument_list|)
+operator|.
+name|append
+argument_list|(
+literal|' '
+argument_list|)
+operator|.
+name|append
+argument_list|(
+name|type
+argument_list|)
+operator|.
+name|append
+argument_list|(
+literal|'\n'
+argument_list|)
+expr_stmt|;
+block|}
+specifier|final
+name|String
+name|expected
+init|=
+literal|"\n"
+operator|+
+literal|"ARRAY -\n"
+operator|+
+literal|"ARRAY -\n"
+operator|+
+literal|"COLUMN_LIST -\n"
+operator|+
+literal|"CURSOR -\n"
+operator|+
+literal|"LATERAL -\n"
+operator|+
+literal|"MAP -\n"
+operator|+
+literal|"MAP -\n"
+operator|+
+literal|"MULTISET -\n"
+operator|+
+literal|"MULTISET -\n"
+operator|+
+literal|"ROW -\n"
+operator|+
+literal|"TABLE -\n"
+operator|+
+literal|"UNNEST -\n"
+operator|+
+literal|"\n"
+operator|+
+literal|"CURRENT_VALUE -\n"
+operator|+
+literal|"DEFAULT -\n"
+operator|+
+literal|"ITEM -\n"
+operator|+
+literal|"NEXT_VALUE -\n"
+operator|+
+literal|"\n"
+operator|+
+literal|"$LiteralChain -\n"
+operator|+
+literal|"+ pre\n"
+operator|+
+literal|"- pre\n"
+operator|+
+literal|". left\n"
+operator|+
+literal|"\n"
+operator|+
+literal|"* left\n"
+operator|+
+literal|"/ left\n"
+operator|+
+literal|"/INT left\n"
+operator|+
+literal|"|| left\n"
+operator|+
+literal|"\n"
+operator|+
+literal|"+ left\n"
+operator|+
+literal|"- left\n"
+operator|+
+literal|"- -\n"
+operator|+
+literal|"DATETIME_PLUS -\n"
+operator|+
+literal|"EXISTS pre\n"
+operator|+
+literal|"\n"
+operator|+
+literal|"BETWEEN ASYMMETRIC -\n"
+operator|+
+literal|"BETWEEN SYMMETRIC -\n"
+operator|+
+literal|"IN left\n"
+operator|+
+literal|"LIKE -\n"
+operator|+
+literal|"NOT BETWEEN ASYMMETRIC -\n"
+operator|+
+literal|"NOT BETWEEN SYMMETRIC -\n"
+operator|+
+literal|"NOT IN left\n"
+operator|+
+literal|"NOT LIKE -\n"
+operator|+
+literal|"NOT SIMILAR TO -\n"
+operator|+
+literal|"SIMILAR TO -\n"
+operator|+
+literal|"\n"
+operator|+
+literal|"$IS_DIFFERENT_FROM left\n"
+operator|+
+literal|"< left\n"
+operator|+
+literal|"<= left\n"
+operator|+
+literal|"<> left\n"
+operator|+
+literal|"= left\n"
+operator|+
+literal|"> left\n"
+operator|+
+literal|">= left\n"
+operator|+
+literal|"IS DISTINCT FROM left\n"
+operator|+
+literal|"IS NOT DISTINCT FROM left\n"
+operator|+
+literal|"MEMBER OF left\n"
+operator|+
+literal|"OVERLAPS -\n"
+operator|+
+literal|"SUBMULTISET OF left\n"
+operator|+
+literal|"\n"
+operator|+
+literal|"IS A SET post\n"
+operator|+
+literal|"IS FALSE post\n"
+operator|+
+literal|"IS NOT FALSE post\n"
+operator|+
+literal|"IS NOT NULL post\n"
+operator|+
+literal|"IS NOT TRUE post\n"
+operator|+
+literal|"IS NOT UNKNOWN post\n"
+operator|+
+literal|"IS NULL post\n"
+operator|+
+literal|"IS TRUE post\n"
+operator|+
+literal|"IS UNKNOWN post\n"
+operator|+
+literal|"\n"
+operator|+
+literal|"NOT pre\n"
+operator|+
+literal|"\n"
+operator|+
+literal|"AND left\n"
+operator|+
+literal|"\n"
+operator|+
+literal|"OR left\n"
+operator|+
+literal|"\n"
+operator|+
+literal|"=> -\n"
+operator|+
+literal|"AS -\n"
+operator|+
+literal|"DESC post\n"
+operator|+
+literal|"OVER left\n"
+operator|+
+literal|"TABLESAMPLE -\n"
+operator|+
+literal|"\n"
+operator|+
+literal|"INTERSECT left\n"
+operator|+
+literal|"INTERSECT ALL left\n"
+operator|+
+literal|"MULTISET INTERSECT left\n"
+operator|+
+literal|"MULTISET INTERSECT ALL left\n"
+operator|+
+literal|"NULLS FIRST post\n"
+operator|+
+literal|"NULLS LAST post\n"
+operator|+
+literal|"\n"
+operator|+
+literal|"EXCEPT left\n"
+operator|+
+literal|"EXCEPT ALL left\n"
+operator|+
+literal|"MULTISET EXCEPT left\n"
+operator|+
+literal|"MULTISET EXCEPT ALL left\n"
+operator|+
+literal|"MULTISET UNION left\n"
+operator|+
+literal|"MULTISET UNION ALL left\n"
+operator|+
+literal|"UNION left\n"
+operator|+
+literal|"UNION ALL left\n"
+operator|+
+literal|"\n"
+operator|+
+literal|"$throw -\n"
+operator|+
+literal|"EXTRACT_DATE -\n"
+operator|+
+literal|"FILTER left\n"
+operator|+
+literal|"Reinterpret -\n"
+operator|+
+literal|"TABLE pre\n"
+operator|+
+literal|"VALUES -\n"
+operator|+
+literal|"\n"
+operator|+
+literal|"CALL pre\n"
+operator|+
+literal|"ESCAPE -\n"
+operator|+
+literal|"NEW pre\n"
+decl_stmt|;
+name|assertThat
+argument_list|(
+name|b
+operator|.
+name|toString
+argument_list|()
+argument_list|,
+name|is
+argument_list|(
+name|expected
+argument_list|)
+argument_list|)
+expr_stmt|;
 block|}
 comment|/** Tests that it is an error to insert into the same column twice, even using    * case-insensitive matching. */
 annotation|@

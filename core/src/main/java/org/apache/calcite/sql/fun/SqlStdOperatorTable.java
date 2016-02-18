@@ -868,7 +868,7 @@ name|SqlKind
 operator|.
 name|AND
 argument_list|,
-literal|28
+literal|24
 argument_list|,
 literal|true
 argument_list|,
@@ -1556,7 +1556,7 @@ name|SqlKind
 operator|.
 name|OR
 argument_list|,
-literal|26
+literal|22
 argument_list|,
 literal|true
 argument_list|,
@@ -1917,7 +1917,7 @@ name|SqlKind
 operator|.
 name|IS_NOT_NULL
 argument_list|,
-literal|30
+literal|28
 argument_list|,
 name|ReturnTypes
 operator|.
@@ -1947,7 +1947,7 @@ name|SqlKind
 operator|.
 name|IS_NULL
 argument_list|,
-literal|30
+literal|28
 argument_list|,
 name|ReturnTypes
 operator|.
@@ -1977,7 +1977,7 @@ name|SqlKind
 operator|.
 name|IS_NOT_TRUE
 argument_list|,
-literal|30
+literal|28
 argument_list|,
 name|ReturnTypes
 operator|.
@@ -2007,7 +2007,7 @@ name|SqlKind
 operator|.
 name|IS_TRUE
 argument_list|,
-literal|30
+literal|28
 argument_list|,
 name|ReturnTypes
 operator|.
@@ -2037,7 +2037,7 @@ name|SqlKind
 operator|.
 name|IS_NOT_FALSE
 argument_list|,
-literal|30
+literal|28
 argument_list|,
 name|ReturnTypes
 operator|.
@@ -2067,7 +2067,7 @@ name|SqlKind
 operator|.
 name|IS_FALSE
 argument_list|,
-literal|30
+literal|28
 argument_list|,
 name|ReturnTypes
 operator|.
@@ -2097,7 +2097,7 @@ name|SqlKind
 operator|.
 name|IS_NOT_NULL
 argument_list|,
-literal|30
+literal|28
 argument_list|,
 name|ReturnTypes
 operator|.
@@ -2127,7 +2127,7 @@ name|SqlKind
 operator|.
 name|IS_NULL
 argument_list|,
-literal|30
+literal|28
 argument_list|,
 name|ReturnTypes
 operator|.
@@ -2157,7 +2157,7 @@ name|SqlKind
 operator|.
 name|OTHER
 argument_list|,
-literal|30
+literal|28
 argument_list|,
 name|ReturnTypes
 operator|.
@@ -2270,7 +2270,7 @@ name|SqlKind
 operator|.
 name|NOT
 argument_list|,
-literal|30
+literal|26
 argument_list|,
 name|ReturnTypes
 operator|.
@@ -3229,13 +3229,13 @@ init|=
 operator|new
 name|SqlSpecialOperator
 argument_list|(
-literal|"Escape"
+literal|"ESCAPE"
 argument_list|,
 name|SqlKind
 operator|.
 name|ESCAPE
 argument_list|,
-literal|30
+literal|0
 argument_list|)
 decl_stmt|;
 specifier|public

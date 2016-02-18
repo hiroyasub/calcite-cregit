@@ -7308,6 +7308,12 @@ name|fromIndex
 parameter_list|)
 block|{
 return|return
+name|fromIndex
+operator|==
+literal|0
+condition|?
+name|list
+else|:
 name|list
 operator|.
 name|subList

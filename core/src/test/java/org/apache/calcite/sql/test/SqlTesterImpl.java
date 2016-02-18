@@ -827,32 +827,25 @@ operator|==
 literal|null
 condition|)
 block|{
-name|e
-operator|.
-name|printStackTrace
-argument_list|()
-expr_stmt|;
 throw|throw
 operator|new
-name|AssertionError
+name|RuntimeException
 argument_list|(
-literal|"Error while parsing query ["
+literal|"Error while parsing query:"
 operator|+
 name|sap
 operator|.
 name|sql
-operator|+
-literal|"]"
+argument_list|,
+name|e
 argument_list|)
 throw|;
 block|}
 if|else if
 condition|(
-operator|(
-literal|null
-operator|==
 name|errMessage
-operator|)
+operator|==
+literal|null
 operator|||
 operator|!
 name|errMessage
@@ -863,14 +856,9 @@ name|expectedMsgPattern
 argument_list|)
 condition|)
 block|{
-name|e
-operator|.
-name|printStackTrace
-argument_list|()
-expr_stmt|;
 throw|throw
 operator|new
-name|AssertionError
+name|RuntimeException
 argument_list|(
 literal|"Error did not match expected ["
 operator|+
@@ -883,6 +871,8 @@ operator|.
 name|sql
 operator|+
 literal|"]"
+argument_list|,
+name|e
 argument_list|)
 throw|;
 block|}
@@ -894,22 +884,17 @@ name|Throwable
 name|e
 parameter_list|)
 block|{
-name|e
-operator|.
-name|printStackTrace
-argument_list|()
-expr_stmt|;
 throw|throw
 operator|new
-name|AssertionError
+name|RuntimeException
 argument_list|(
-literal|"Error while parsing query ["
+literal|"Error while parsing query: "
 operator|+
 name|sap
 operator|.
 name|sql
-operator|+
-literal|"]"
+argument_list|,
+name|e
 argument_list|)
 throw|;
 block|}
@@ -1075,7 +1060,7 @@ expr_stmt|;
 block|}
 catch|catch
 parameter_list|(
-name|SqlParseException
+name|Throwable
 name|e
 parameter_list|)
 block|{
@@ -1083,36 +1068,11 @@ throw|throw
 operator|new
 name|RuntimeException
 argument_list|(
-literal|"Error while parsing query ["
+literal|"Error while parsing query: "
 operator|+
 name|sql
-operator|+
-literal|"]"
 argument_list|,
 name|e
-argument_list|)
-throw|;
-block|}
-catch|catch
-parameter_list|(
-name|Throwable
-name|e
-parameter_list|)
-block|{
-name|e
-operator|.
-name|printStackTrace
-argument_list|()
-expr_stmt|;
-throw|throw
-operator|new
-name|AssertionError
-argument_list|(
-literal|"Error while parsing query ["
-operator|+
-name|sql
-operator|+
-literal|"]"
 argument_list|)
 throw|;
 block|}
