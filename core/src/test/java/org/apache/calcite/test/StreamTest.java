@@ -1071,6 +1071,75 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Ignore
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testTumbleViaOver
+parameter_list|()
+block|{
+name|String
+name|sql
+init|=
+literal|"WITH HourlyOrderTotals (rowtime, productId, c, su) AS (\n"
+operator|+
+literal|"  SELECT FLOOR(rowtime TO HOUR),\n"
+operator|+
+literal|"    productId,\n"
+operator|+
+literal|"    COUNT(*),\n"
+operator|+
+literal|"    SUM(units)\n"
+operator|+
+literal|"  FROM Orders\n"
+operator|+
+literal|"  GROUP BY FLOOR(rowtime TO HOUR), productId)\n"
+operator|+
+literal|"SELECT STREAM rowtime,\n"
+operator|+
+literal|"  productId,\n"
+operator|+
+literal|"  SUM(su) OVER w AS su,\n"
+operator|+
+literal|"  SUM(c) OVER w AS c\n"
+operator|+
+literal|"FROM HourlyTotals\n"
+operator|+
+literal|"WINDOW w AS (\n"
+operator|+
+literal|"  ORDER BY rowtime\n"
+operator|+
+literal|"  PARTITION BY productId\n"
+operator|+
+literal|"  RANGE INTERVAL '2' HOUR PRECEDING)\n"
+decl_stmt|;
+name|String
+name|sql2
+init|=
+literal|""
+operator|+
+literal|"SELECT STREAM rowtime, productId, SUM(units) AS su, COUNT(*) AS c\n"
+operator|+
+literal|"FROM Orders\n"
+operator|+
+literal|"GROUP BY TUMBLE(rowtime, INTERVAL '1' HOUR)"
+decl_stmt|;
+comment|// sql and sql2 should give same result
+name|CalciteAssert
+operator|.
+name|model
+argument_list|(
+name|STREAM_JOINS_MODEL
+argument_list|)
+operator|.
+name|query
+argument_list|(
+name|sql
+argument_list|)
+expr_stmt|;
+block|}
 specifier|private
 name|Function
 argument_list|<
@@ -1224,8 +1293,6 @@ class|class
 name|BaseOrderStreamTable
 implements|implements
 name|ScannableTable
-implements|,
-name|StreamableTable
 block|{
 specifier|protected
 specifier|final
@@ -1400,6 +1467,25 @@ name|RelDataType
 name|rowType
 parameter_list|)
 block|{
+return|return
+operator|new
+name|OrdersTable
+argument_list|(
+name|getRowList
+argument_list|()
+argument_list|)
+return|;
+block|}
+specifier|public
+specifier|static
+name|ImmutableList
+argument_list|<
+name|Object
+index|[]
+argument_list|>
+name|getRowList
+parameter_list|()
+block|{
 specifier|final
 name|Object
 index|[]
@@ -1494,19 +1580,16 @@ block|}
 block|}
 decl_stmt|;
 return|return
-operator|new
-name|OrdersTable
-argument_list|(
 name|ImmutableList
 operator|.
 name|copyOf
 argument_list|(
 name|rows
 argument_list|)
-argument_list|)
 return|;
 block|}
 specifier|private
+specifier|static
 name|Object
 name|ts
 parameter_list|(
@@ -1547,6 +1630,8 @@ class|class
 name|OrdersTable
 extends|extends
 name|BaseOrderStreamTable
+implements|implements
+name|StreamableTable
 block|{
 specifier|private
 specifier|final
@@ -1747,6 +1832,8 @@ class|class
 name|InfiniteOrdersTable
 extends|extends
 name|BaseOrderStreamTable
+implements|implements
+name|StreamableTable
 block|{
 specifier|public
 name|Enumerable
@@ -1840,6 +1927,63 @@ parameter_list|()
 block|{
 return|return
 name|this
+return|;
+block|}
+block|}
+comment|/** Table representing the history of the ORDERS stream. */
+specifier|public
+specifier|static
+class|class
+name|OrdersHistoryTable
+extends|extends
+name|BaseOrderStreamTable
+block|{
+specifier|private
+specifier|final
+name|ImmutableList
+argument_list|<
+name|Object
+index|[]
+argument_list|>
+name|rows
+decl_stmt|;
+specifier|public
+name|OrdersHistoryTable
+parameter_list|(
+name|ImmutableList
+argument_list|<
+name|Object
+index|[]
+argument_list|>
+name|rows
+parameter_list|)
+block|{
+name|this
+operator|.
+name|rows
+operator|=
+name|rows
+expr_stmt|;
+block|}
+specifier|public
+name|Enumerable
+argument_list|<
+name|Object
+index|[]
+argument_list|>
+name|scan
+parameter_list|(
+name|DataContext
+name|root
+parameter_list|)
+block|{
+return|return
+name|Linq4j
+operator|.
+name|asEnumerable
+argument_list|(
+name|rows
+argument_list|)
 return|;
 block|}
 block|}
