@@ -150,6 +150,10 @@ argument_list|(
 name|host
 argument_list|,
 name|keyspace
+argument_list|,
+name|parentSchema
+argument_list|,
+name|name
 argument_list|)
 return|;
 block|}

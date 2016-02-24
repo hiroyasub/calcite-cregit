@@ -291,6 +291,45 @@ literal|"      CassandraFilter(condition=[=(CAST($0):CHAR(8) CHARACTER SET \"ISO
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testMaterializedView
+parameter_list|()
+block|{
+name|CalciteAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|enable
+argument_list|(
+name|enabled
+argument_list|()
+argument_list|)
+operator|.
+name|with
+argument_list|(
+name|TWISSANDRA
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select \"tweet_id\" from \"tweets\" where \"username\"='JmuhsAaMdw'"
+argument_list|)
+operator|.
+name|enableMaterializations
+argument_list|(
+literal|true
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+literal|"CassandraTableScan(table=[[twissandra, tweets_by_user]])"
+argument_list|)
+expr_stmt|;
+block|}
 block|}
 end_class
 
