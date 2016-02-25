@@ -46,7 +46,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * ConnectStringParser is a utility class that parses or creates a JDBC connect  * string according to the OLE DB connect string syntax described at<a  * href="http://msdn.microsoft.com/library/default.asp?url=/library/en-us/oledb/htm/oledbconnectionstringsyntax.asp">  * OLE DB Connection String Syntax</a>.  *  *<p>This code was adapted from Mondrian's mondrian.olap.Util class.  * The primary differences between this and its Mondrian progenitor are:  *  *<ul>  *<li>use of regular {@link Properties} for compatibility with the JDBC API  * (replaces Mondrian's use of its own order-preserving and case-insensitive  * PropertyList, found in Util.java at link above)</li>  *  *<li>ability to pass to {@link #parse} a pre-existing Properties object into  * which properties are to be parsed, possibly overriding prior values</li>  *  *<li>use of {@link SQLException}s rather than unchecked  * {@link RuntimeException}s</li>  *  *<li>static members for parsing and creating connect strings</li>  *  *</ul>  *  *<p>ConnectStringParser has a private constructor. Callers use the static  * members:  *  *<dl>  *<dt>{@link #parse(String)}  *<dd>Parses the connect string into a new Properties object.  *  *<dt>{@link #parse(String, Properties)}  *<dd>Parses the connect string into an existing Properties object.  *  *<dt>{@link #getParamString(Properties)}  *<dd>Returns a param string, quoted and escaped as needed, to represent the  * supplied name-value pairs.  *</dl>  */
+comment|/**  * ConnectStringParser is a utility class that parses or creates a JDBC connect  * string according to the  *<a href="https://msdn.microsoft.com/en-us/library/windows/desktop/ms722656(v=vs.85).aspx">  * OLE DB Connection String Syntax</a>.  *  *<p>This code was adapted from Mondrian's mondrian.olap.Util class.  * The primary differences between this and its Mondrian progenitor are:  *  *<ul>  *<li>use of regular {@link Properties} for compatibility with the JDBC API  * (replaces Mondrian's use of its own order-preserving and case-insensitive  * PropertyList)</li>  *  *<li>ability to pass to {@link #parse} a pre-existing Properties object into  * which properties are to be parsed, possibly overriding prior values</li>  *  *<li>use of {@link SQLException}s rather than unchecked  * {@link RuntimeException}s</li>  *  *<li>static members for parsing and creating connect strings</li>  *  *</ul>  *  *<p>ConnectStringParser has a private constructor. Callers use the static  * members:  *  *<dl>  *<dt>{@link #parse(String)}  *<dd>Parses the connect string into a new Properties object.  *  *<dt>{@link #parse(String, Properties)}  *<dd>Parses the connect string into an existing Properties object.  *  *<dt>{@link #getParamString(Properties)}  *<dd>Returns a param string, quoted and escaped as needed, to represent the  * supplied name-value pairs.  *</dl>  */
 end_comment
 
 begin_class
@@ -494,26 +494,18 @@ decl_stmt|;
 comment|// skip over trailing white space
 while|while
 condition|(
-operator|(
 name|i
 operator|<
 name|n
-operator|)
 operator|&&
-operator|(
-operator|(
-name|c
-operator|=
 name|s
 operator|.
 name|charAt
 argument_list|(
 name|i
 argument_list|)
-operator|)
 operator|==
 literal|' '
-operator|)
 condition|)
 block|{
 name|i
@@ -1008,7 +1000,7 @@ name|value
 operator|.
 name|indexOf
 argument_list|(
-literal|"'"
+literal|'\''
 argument_list|)
 operator|>=
 literal|0
@@ -1216,6 +1208,7 @@ name|Properties
 name|properties
 parameter_list|)
 block|{
+comment|//noinspection unchecked
 return|return
 operator|(
 name|Map
