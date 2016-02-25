@@ -3497,6 +3497,11 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+synchronized|synchronized
+init|(
+name|this
+init|)
+block|{
 if|if
 condition|(
 name|ALL_RELS
@@ -3512,6 +3517,7 @@ operator|.
 name|invalidateAll
 argument_list|()
 expr_stmt|;
+block|}
 block|}
 block|}
 comment|/** Exception that indicates there there should be a handler for    * this class but there is not. The action is probably to    * re-generate the handler class. */
