@@ -2651,6 +2651,32 @@ argument_list|,
 name|reducedValues
 argument_list|)
 expr_stmt|;
+comment|// Use RexNode.digest to judge whether each newly generated RexNode
+comment|// is equivalent to the original one.
+if|if
+condition|(
+name|RexUtil
+operator|.
+name|strings
+argument_list|(
+name|constExps
+argument_list|)
+operator|.
+name|equals
+argument_list|(
+name|RexUtil
+operator|.
+name|strings
+argument_list|(
+name|reducedValues
+argument_list|)
+argument_list|)
+condition|)
+block|{
+return|return
+literal|false
+return|;
+block|}
 comment|// For Project, we have to be sure to preserve the result
 comment|// types, so always cast regardless of the expression type.
 comment|// For other RelNodes like Filter, in general, this isn't necessary,

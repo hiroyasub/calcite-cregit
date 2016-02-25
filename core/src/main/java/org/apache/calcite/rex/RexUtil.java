@@ -8488,9 +8488,7 @@ argument_list|()
 operator|.
 name|retainAll
 argument_list|(
-name|Lists
-operator|.
-name|transform
+name|strings
 argument_list|(
 name|RelOptUtil
 operator|.
@@ -8498,8 +8496,6 @@ name|conjunctions
 argument_list|(
 name|node
 argument_list|)
-argument_list|,
-name|TO_STRING
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -8627,6 +8623,33 @@ literal|false
 argument_list|)
 return|;
 block|}
+block|}
+comment|/** Transforms a list of expressions to the list of digests. */
+specifier|public
+specifier|static
+name|List
+argument_list|<
+name|String
+argument_list|>
+name|strings
+parameter_list|(
+name|List
+argument_list|<
+name|RexNode
+argument_list|>
+name|list
+parameter_list|)
+block|{
+return|return
+name|Lists
+operator|.
+name|transform
+argument_list|(
+name|list
+argument_list|,
+name|TO_STRING
+argument_list|)
+return|;
 block|}
 comment|/** Helps {@link org.apache.calcite.rex.RexUtil#toDnf}. */
 specifier|private
