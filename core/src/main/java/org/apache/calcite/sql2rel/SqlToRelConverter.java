@@ -3123,6 +3123,11 @@ name|left
 argument_list|(
 name|validatedFields
 argument_list|)
+argument_list|,
+name|catalogReader
+operator|.
+name|isCaseSensitive
+argument_list|()
 argument_list|)
 argument_list|)
 decl_stmt|;
@@ -17442,6 +17447,11 @@ operator|.
 name|uniquify
 argument_list|(
 name|fieldNames
+argument_list|,
+name|catalogReader
+operator|.
+name|isCaseSensitive
+argument_list|()
 argument_list|)
 expr_stmt|;
 name|bb

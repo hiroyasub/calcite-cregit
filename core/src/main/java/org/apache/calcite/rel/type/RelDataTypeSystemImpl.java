@@ -99,6 +99,8 @@ literal|1
 return|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|getDefaultPrecision
@@ -217,6 +219,8 @@ literal|1
 return|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|getMaxPrecision
@@ -286,6 +290,8 @@ argument_list|)
 return|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|getMaxNumericScale
@@ -295,6 +301,8 @@ return|return
 literal|19
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|getMaxNumericPrecision
@@ -304,6 +312,8 @@ return|return
 literal|19
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|String
 name|getLiteral
@@ -408,6 +418,8 @@ literal|null
 return|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|isCaseSensitive
@@ -436,6 +448,8 @@ literal|false
 return|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|isAutoincrement
@@ -448,6 +462,8 @@ return|return
 literal|false
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|getNumTypeRadix
@@ -484,6 +500,8 @@ return|return
 literal|0
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|deriveSumType
@@ -497,6 +515,15 @@ parameter_list|)
 block|{
 return|return
 name|argumentType
+return|;
+block|}
+specifier|public
+name|boolean
+name|isSchemaCaseSensitive
+parameter_list|()
+block|{
+return|return
+literal|true
 return|;
 block|}
 block|}

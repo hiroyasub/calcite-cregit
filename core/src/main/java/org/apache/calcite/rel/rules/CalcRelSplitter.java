@@ -2632,6 +2632,8 @@ argument_list|,
 name|projectRefs
 argument_list|,
 name|fieldNames
+argument_list|,
+literal|null
 argument_list|)
 expr_stmt|;
 block|}

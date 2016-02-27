@@ -182,6 +182,10 @@ argument_list|>
 name|columnNameList
 parameter_list|)
 function_decl|;
+name|boolean
+name|isCaseSensitive
+parameter_list|()
+function_decl|;
 block|}
 end_interface
 

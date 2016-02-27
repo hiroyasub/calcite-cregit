@@ -641,7 +641,8 @@ operator|)
 name|node
 decl_stmt|;
 comment|// Compare operators by name, not identity, because they may not
-comment|// have been resolved yet.
+comment|// have been resolved yet. Use case insensitive comparison since
+comment|// this may be a case insensitive system.
 if|if
 condition|(
 operator|!
@@ -653,7 +654,7 @@ operator|.
 name|getName
 argument_list|()
 operator|.
-name|equals
+name|equalsIgnoreCase
 argument_list|(
 name|that
 operator|.

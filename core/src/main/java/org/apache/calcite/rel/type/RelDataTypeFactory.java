@@ -359,7 +359,6 @@ parameter_list|()
 function_decl|;
 comment|//~ Inner Interfaces -------------------------------------------------------
 comment|/**    * Callback which provides enough information to create fields.    */
-specifier|public
 interface|interface
 name|FieldInfo
 block|{
@@ -386,8 +385,6 @@ parameter_list|)
 function_decl|;
 block|}
 comment|/**    * Implementation of {@link FieldInfo} that provides a fluid API to build    * a list of fields.    */
-specifier|public
-specifier|static
 class|class
 name|FieldInfoBuilder
 implements|implements
@@ -403,9 +400,7 @@ name|names
 init|=
 operator|new
 name|ArrayList
-argument_list|<
-name|String
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 specifier|private
@@ -418,9 +413,7 @@ name|types
 init|=
 operator|new
 name|ArrayList
-argument_list|<
-name|RelDataType
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 specifier|private
@@ -787,6 +780,14 @@ operator|.
 name|uniquify
 argument_list|(
 name|names
+argument_list|,
+name|typeFactory
+operator|.
+name|getTypeSystem
+argument_list|()
+operator|.
+name|isSchemaCaseSensitive
+argument_list|()
 argument_list|)
 decl_stmt|;
 if|if

@@ -1495,6 +1495,8 @@ argument_list|,
 name|projectRefList
 argument_list|,
 name|projectNameList
+argument_list|,
+literal|null
 argument_list|)
 return|;
 block|}

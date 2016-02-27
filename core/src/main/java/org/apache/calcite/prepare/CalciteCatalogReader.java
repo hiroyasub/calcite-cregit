@@ -2331,6 +2331,17 @@ throws|throws
 name|Exception
 block|{
 block|}
+annotation|@
+name|Override
+specifier|public
+name|boolean
+name|isCaseSensitive
+parameter_list|()
+block|{
+return|return
+name|caseSensitive
+return|;
+block|}
 block|}
 end_class
 

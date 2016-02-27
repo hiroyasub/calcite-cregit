@@ -131,6 +131,11 @@ name|RelDataType
 name|argumentType
 parameter_list|)
 function_decl|;
+comment|/** Whether two record types are considered distinct if their field names    * are the same but in different cases. */
+name|boolean
+name|isSchemaCaseSensitive
+parameter_list|()
+function_decl|;
 block|}
 end_interface
 

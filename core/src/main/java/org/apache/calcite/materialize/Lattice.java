@@ -1160,6 +1160,8 @@ name|columns
 argument_list|,
 name|GET_ALIAS
 argument_list|)
+argument_list|,
+literal|true
 argument_list|)
 argument_list|)
 expr_stmt|;

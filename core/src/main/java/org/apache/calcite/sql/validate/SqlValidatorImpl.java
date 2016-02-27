@@ -1292,6 +1292,16 @@ import|;
 end_import
 
 begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|TreeSet
+import|;
+end_import
+
+begin_import
 import|import static
 name|org
 operator|.
@@ -1898,12 +1908,28 @@ name|unknownType
 argument_list|,
 name|list
 argument_list|,
+name|catalogReader
+operator|.
+name|isCaseSensitive
+argument_list|()
+condition|?
 operator|new
 name|LinkedHashSet
 argument_list|<
 name|String
 argument_list|>
 argument_list|()
+else|:
+operator|new
+name|TreeSet
+argument_list|<
+name|String
+argument_list|>
+argument_list|(
+name|String
+operator|.
+name|CASE_INSENSITIVE_ORDER
+argument_list|)
 argument_list|,
 name|types
 argument_list|,

@@ -1154,6 +1154,17 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+annotation|@
+name|Override
+specifier|public
+name|boolean
+name|isCaseSensitive
+parameter_list|()
+block|{
+return|return
+name|caseSensitive
+return|;
+block|}
 comment|/**    * Initializes this catalog reader.    */
 specifier|public
 name|MockCatalogReader
