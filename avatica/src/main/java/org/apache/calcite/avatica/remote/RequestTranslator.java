@@ -133,6 +133,7 @@ parameter_list|)
 throws|throws
 name|InvalidProtocolBufferException
 block|{
+comment|// This should already be an aliased CodedInputStream from the WireMessage parsing.
 name|Message
 name|msg
 init|=
@@ -141,6 +142,9 @@ operator|.
 name|parseFrom
 argument_list|(
 name|serializedMessage
+operator|.
+name|newCodedInput
+argument_list|()
 argument_list|)
 decl_stmt|;
 return|return

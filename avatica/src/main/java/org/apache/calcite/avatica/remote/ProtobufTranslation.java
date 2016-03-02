@@ -55,18 +55,6 @@ end_import
 
 begin_import
 import|import
-name|com
-operator|.
-name|google
-operator|.
-name|protobuf
-operator|.
-name|InvalidProtocolBufferException
-import|;
-end_import
-
-begin_import
-import|import
 name|java
 operator|.
 name|io
@@ -106,7 +94,7 @@ parameter_list|)
 throws|throws
 name|IOException
 function_decl|;
-comment|/**    * Parses a serialized protocol buffer request into a {@link Request}.    *    * @param bytes Serialized protocol buffer request from client    * @return A Request object for the given bytes    * @throws InvalidProtocolBufferException If the protocol buffer cannot be deserialized    */
+comment|/**    * Parses a serialized protocol buffer request into a {@link Request}.    *    * @param bytes Serialized protocol buffer request from client    * @return A Request object for the given bytes    * @throws IOException If the protocol buffer cannot be deserialized    */
 name|Request
 name|parseRequest
 parameter_list|(
@@ -115,9 +103,9 @@ index|[]
 name|bytes
 parameter_list|)
 throws|throws
-name|InvalidProtocolBufferException
+name|IOException
 function_decl|;
-comment|/**    * Parses a serialized protocol buffer response into a {@link Response}.    *    * @param bytes Serialized protocol buffer request from server    * @return The Response object for the given bytes    * @throws InvalidProtocolBufferException If the protocol buffer cannot be deserialized    */
+comment|/**    * Parses a serialized protocol buffer response into a {@link Response}.    *    * @param bytes Serialized protocol buffer request from server    * @return The Response object for the given bytes    * @throws IOException If the protocol buffer cannot be deserialized    */
 name|Response
 name|parseResponse
 parameter_list|(
@@ -126,7 +114,7 @@ index|[]
 name|bytes
 parameter_list|)
 throws|throws
-name|InvalidProtocolBufferException
+name|IOException
 function_decl|;
 block|}
 end_interface
