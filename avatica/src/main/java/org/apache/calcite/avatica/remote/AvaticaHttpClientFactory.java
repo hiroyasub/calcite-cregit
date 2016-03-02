@@ -12,6 +12,8 @@ operator|.
 name|calcite
 operator|.
 name|avatica
+operator|.
+name|remote
 package|;
 end_package
 
@@ -25,77 +27,45 @@ name|calcite
 operator|.
 name|avatica
 operator|.
-name|remote
-operator|.
-name|AvaticaHttpClientFactory
+name|ConnectionConfig
 import|;
 end_import
 
 begin_import
 import|import
-name|org
+name|java
 operator|.
-name|apache
+name|net
 operator|.
-name|calcite
-operator|.
-name|avatica
-operator|.
-name|remote
-operator|.
-name|Service
+name|URL
 import|;
 end_import
 
 begin_comment
-comment|/**  * Connection configuration.  */
+comment|/**  * A factory for constructing {@link AvaticaHttpClient}'s.  */
 end_comment
 
 begin_interface
 specifier|public
 interface|interface
-name|ConnectionConfig
-block|{
-comment|/** @see BuiltInConnectionProperty#SCHEMA */
-name|String
-name|schema
-parameter_list|()
-function_decl|;
-comment|/** @see BuiltInConnectionProperty#TIME_ZONE */
-name|String
-name|timeZone
-parameter_list|()
-function_decl|;
-comment|/** @see BuiltInConnectionProperty#FACTORY */
-name|Service
-operator|.
-name|Factory
-name|factory
-parameter_list|()
-function_decl|;
-comment|/** @see BuiltInConnectionProperty#URL */
-name|String
-name|url
-parameter_list|()
-function_decl|;
-comment|/** @see BuiltInConnectionProperty#SERIALIZATION */
-name|String
-name|serialization
-parameter_list|()
-function_decl|;
 name|AvaticaHttpClientFactory
-name|httpClientFactory
-parameter_list|()
-function_decl|;
-name|String
-name|httpClientClass
-parameter_list|()
+block|{
+comment|/**    * Construct the appropriate implementation of {@link AvaticaHttpClient}.    *    * @param url URL that the client is for.    * @param config Configuration to use when constructing the implementation.    * @return An instance of {@link AvaticaHttpClient}.    */
+name|AvaticaHttpClient
+name|getClient
+parameter_list|(
+name|URL
+name|url
+parameter_list|,
+name|ConnectionConfig
+name|config
+parameter_list|)
 function_decl|;
 block|}
 end_interface
 
 begin_comment
-comment|// End ConnectionConfig.java
+comment|// End AvaticaHttpClientFactory.java
 end_comment
 
 end_unit
