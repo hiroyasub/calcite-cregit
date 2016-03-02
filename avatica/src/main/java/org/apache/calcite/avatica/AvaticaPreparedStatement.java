@@ -434,6 +434,8 @@ name|sig
 operator|.
 name|sql
 argument_list|)
+argument_list|,
+literal|false
 argument_list|)
 return|;
 block|}
@@ -478,8 +480,7 @@ name|executeQueryInternal
 argument_list|(
 name|this
 argument_list|,
-name|getSignature
-argument_list|()
+literal|null
 argument_list|,
 literal|null
 argument_list|,
@@ -491,6 +492,8 @@ argument_list|()
 operator|.
 name|sql
 argument_list|)
+argument_list|,
+literal|true
 argument_list|)
 expr_stmt|;
 return|return
@@ -949,6 +952,8 @@ operator|=
 operator|-
 literal|1
 expr_stmt|;
+comment|// We don't know if this is actually an update or a query, so call it a query so we pass the
+comment|// Signature to the server.
 name|getConnection
 argument_list|()
 operator|.
@@ -969,6 +974,8 @@ argument_list|()
 operator|.
 name|sql
 argument_list|)
+argument_list|,
+literal|false
 argument_list|)
 expr_stmt|;
 comment|// Result set is null for DML or DDL.

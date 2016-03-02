@@ -592,7 +592,7 @@ name|info
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Computes the number of retries    * {@link AvaticaStatement#executeInternal(Meta.Signature)}    * should retry before failing. */
+comment|/** Computes the number of retries    * {@link AvaticaStatement#executeInternal(Meta.Signature, boolean)}    * should retry before failing. */
 name|long
 name|getNumStatementRetries
 parameter_list|(
@@ -1876,7 +1876,7 @@ name|timeZoneName
 argument_list|)
 return|;
 block|}
-comment|/**    * Executes a prepared query, closing any previously open result set.    *    * @param statement     Statement    * @param signature     Prepared query    * @param firstFrame    First frame of rows, or null if we need to execute    * @param state         The state used to create the given result    * @return Result set    * @throws java.sql.SQLException if a database error occurs    */
+comment|/**    * Executes a prepared query, closing any previously open result set.    *    * @param statement     Statement    * @param signature     Prepared query    * @param firstFrame    First frame of rows, or null if we need to execute    * @param state         The state used to create the given result    * @param isUpdate      Was the caller context via {@link PreparedStatement#executeUpdate()}.    * @return Result set    * @throws java.sql.SQLException if a database error occurs    */
 specifier|protected
 name|ResultSet
 name|executeQueryInternal
@@ -1896,6 +1896,9 @@ name|firstFrame
 parameter_list|,
 name|QueryState
 name|state
+parameter_list|,
+name|boolean
+name|isUpdate
 parameter_list|)
 throws|throws
 name|SQLException
@@ -1992,6 +1995,42 @@ name|AvaticaPreparedStatement
 operator|)
 name|statement
 decl_stmt|;
+name|Meta
+operator|.
+name|StatementHandle
+name|handle
+init|=
+name|pstmt
+operator|.
+name|handle
+decl_stmt|;
+if|if
+condition|(
+name|isUpdate
+condition|)
+block|{
+comment|// Make a copy of the StatementHandle, nulling out the Signature.
+comment|// CALCITE-1086 we don't need to send the Signature to the server
+comment|// when we're only performing an update. Saves on serialization.
+name|handle
+operator|=
+operator|new
+name|Meta
+operator|.
+name|StatementHandle
+argument_list|(
+name|handle
+operator|.
+name|connectionId
+argument_list|,
+name|handle
+operator|.
+name|id
+argument_list|,
+literal|null
+argument_list|)
+expr_stmt|;
+block|}
 specifier|final
 name|Meta
 operator|.
@@ -2002,8 +2041,6 @@ name|meta
 operator|.
 name|execute
 argument_list|(
-name|pstmt
-operator|.
 name|handle
 argument_list|,
 name|pstmt
@@ -2622,6 +2659,7 @@ argument_list|(
 name|h
 argument_list|)
 decl_stmt|;
+comment|// These are all the metadata operations, no updates
 name|ResultSet
 name|resultSet
 init|=
@@ -2641,6 +2679,8 @@ operator|.
 name|firstFrame
 argument_list|,
 name|state
+argument_list|,
+literal|false
 argument_list|)
 decl_stmt|;
 if|if

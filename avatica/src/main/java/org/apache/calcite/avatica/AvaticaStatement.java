@@ -1787,7 +1787,7 @@ name|this
 argument_list|)
 return|;
 block|}
-comment|/**    * Executes a prepared statement.    *    * @param signature Parsed statement    *    * @return as specified by {@link java.sql.Statement#execute(String)}    * @throws java.sql.SQLException if a database error occurs    */
+comment|/**    * Executes a prepared statement.    *    * @param signature Parsed statement    * @param isUpdate if the execute is for an update    *    * @return as specified by {@link java.sql.Statement#execute(String)}    * @throws java.sql.SQLException if a database error occurs    */
 specifier|protected
 name|boolean
 name|executeInternal
@@ -1796,6 +1796,9 @@ name|Meta
 operator|.
 name|Signature
 name|signature
+parameter_list|,
+name|boolean
+name|isUpdate
 parameter_list|)
 throws|throws
 name|SQLException
@@ -1806,6 +1809,8 @@ init|=
 name|executeQueryInternal
 argument_list|(
 name|signature
+argument_list|,
+name|isUpdate
 argument_list|)
 decl_stmt|;
 comment|// user may have cancelled the query
@@ -1825,7 +1830,7 @@ return|return
 literal|true
 return|;
 block|}
-comment|/**    * Executes a prepared query, closing any previously open result set.    *    * @param signature Parsed query    * @return Result set    * @throws java.sql.SQLException if a database error occurs    */
+comment|/**    * Executes a prepared query, closing any previously open result set.    *    * @param signature Parsed query    * @param isUpdate If the execute is for an update    * @return Result set    * @throws java.sql.SQLException if a database error occurs    */
 specifier|protected
 name|ResultSet
 name|executeQueryInternal
@@ -1834,6 +1839,9 @@ name|Meta
 operator|.
 name|Signature
 name|signature
+parameter_list|,
+name|boolean
+name|isUpdate
 parameter_list|)
 throws|throws
 name|SQLException
@@ -1850,6 +1858,8 @@ argument_list|,
 literal|null
 argument_list|,
 literal|null
+argument_list|,
+name|isUpdate
 argument_list|)
 return|;
 block|}
