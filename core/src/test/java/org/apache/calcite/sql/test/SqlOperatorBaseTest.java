@@ -18991,6 +18991,48 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testTimestampAddAdnDiff
+parameter_list|()
+block|{
+if|if
+condition|(
+operator|!
+name|enable
+condition|)
+block|{
+return|return;
+block|}
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"timestampadd(MINUTE, 2, timestamp '2016-02-24 12:42:25')"
+argument_list|,
+literal|"2016-02-24 12:42:27"
+argument_list|,
+literal|"TIMESTAMP(0) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"timestampdiff(YEAR, "
+operator|+
+literal|"timestamp '2014-02-24 12:42:25', "
+operator|+
+literal|"timestamp '2016-02-24 12:42:25')"
+argument_list|,
+literal|"2"
+argument_list|,
+literal|"INTEGER NOT NULL"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testDenseRankFunc
 parameter_list|()
 block|{
