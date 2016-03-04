@@ -274,6 +274,20 @@ return|return
 name|values
 return|;
 block|}
+comment|/** Returns a copy of the values. */
+specifier|public
+name|Object
+index|[]
+name|copyValues
+parameter_list|()
+block|{
+return|return
+name|values
+operator|.
+name|clone
+argument_list|()
+return|;
+block|}
 specifier|public
 name|int
 name|size
@@ -362,6 +376,23 @@ argument_list|(
 name|values
 argument_list|)
 return|;
+block|}
+comment|/** Allocates a new internal array. */
+specifier|public
+name|void
+name|reset
+parameter_list|()
+block|{
+name|values
+operator|=
+operator|new
+name|Object
+index|[
+name|values
+operator|.
+name|length
+index|]
+expr_stmt|;
 block|}
 specifier|public
 name|int

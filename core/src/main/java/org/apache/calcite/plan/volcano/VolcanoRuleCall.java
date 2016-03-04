@@ -352,14 +352,7 @@ name|LOGGER
 operator|.
 name|debug
 argument_list|(
-literal|"Transform to: rel#{}"
-operator|+
-name|rel
-operator|.
-name|getId
-argument_list|()
-operator|+
-literal|" via {}{}"
+literal|"Transform to: rel#{} via {}{}"
 argument_list|,
 name|rel
 operator|.

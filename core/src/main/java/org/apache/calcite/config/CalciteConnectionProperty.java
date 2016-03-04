@@ -31,6 +31,20 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|util
+operator|.
+name|Bug
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -158,6 +172,25 @@ operator|.
 name|HIGH
 argument_list|,
 literal|true
+argument_list|)
+block|,
+comment|/** How many rows the Druid adapter should fetch at a time when executing    * "select" queries. */
+name|DRUID_FETCH
+argument_list|(
+literal|"druidFetch"
+argument_list|,
+name|Type
+operator|.
+name|STRING
+argument_list|,
+literal|"16384"
+argument_list|,
+name|Bug
+operator|.
+name|upgrade
+argument_list|(
+literal|"convert to Type.NUMBER after [CALCITE-1207]"
+argument_list|)
 argument_list|)
 block|,
 comment|/** URI of the model. */
