@@ -1574,7 +1574,11 @@ name|node
 operator|)
 operator|.
 name|symbolValue
-argument_list|()
+argument_list|(
+name|Bound
+operator|.
+name|class
+argument_list|)
 operator|==
 name|Bound
 operator|.
@@ -1606,7 +1610,11 @@ name|node
 operator|)
 operator|.
 name|symbolValue
-argument_list|()
+argument_list|(
+name|Bound
+operator|.
+name|class
+argument_list|)
 operator|==
 name|Bound
 operator|.
@@ -1638,7 +1646,11 @@ name|node
 operator|)
 operator|.
 name|symbolValue
-argument_list|()
+argument_list|(
+name|Bound
+operator|.
+name|class
+argument_list|)
 operator|==
 name|Bound
 operator|.
@@ -3254,10 +3266,6 @@ block|}
 comment|/**    * An enumeration of types of bounds in a window:<code>CURRENT ROW</code>,    *<code>UNBOUNDED PRECEDING</code>, and<code>UNBOUNDED FOLLOWING</code>.    */
 enum|enum
 name|Bound
-implements|implements
-name|SqlLiteral
-operator|.
-name|SqlSymbol
 block|{
 name|CURRENT_ROW
 argument_list|(

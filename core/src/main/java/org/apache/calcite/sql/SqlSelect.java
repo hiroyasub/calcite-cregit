@@ -508,7 +508,11 @@ name|keyword
 operator|)
 operator|.
 name|symbolValue
-argument_list|()
+argument_list|(
+name|SqlSelectKeyword
+operator|.
+name|class
+argument_list|)
 decl_stmt|;
 if|if
 condition|(

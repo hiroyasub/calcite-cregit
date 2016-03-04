@@ -143,13 +143,8 @@ decl_stmt|;
 comment|//~ Enums ------------------------------------------------------------------
 comment|/**    * The level of abstraction with which to display the plan.    */
 specifier|public
-specifier|static
 enum|enum
 name|Depth
-implements|implements
-name|SqlLiteral
-operator|.
-name|SqlSymbol
 block|{
 name|TYPE
 block|,
@@ -390,7 +385,11 @@ return|return
 name|detailLevel
 operator|.
 name|symbolValue
-argument_list|()
+argument_list|(
+name|SqlExplainLevel
+operator|.
+name|class
+argument_list|)
 return|;
 block|}
 comment|/**    * Returns the level of abstraction at which this plan should be displayed.    */
@@ -403,7 +402,11 @@ return|return
 name|depth
 operator|.
 name|symbolValue
-argument_list|()
+argument_list|(
+name|Depth
+operator|.
+name|class
+argument_list|)
 return|;
 block|}
 comment|/**    * @return the number of dynamic parameters in the statement    */

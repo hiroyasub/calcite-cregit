@@ -411,10 +411,6 @@ comment|/**    * Defines the enumerated values "LEADING", "TRAILING", "BOTH".   
 specifier|public
 enum|enum
 name|Flag
-implements|implements
-name|SqlLiteral
-operator|.
-name|SqlSymbol
 block|{
 name|BOTH
 argument_list|(

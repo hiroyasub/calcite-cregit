@@ -39,10 +39,6 @@ begin_enum
 specifier|public
 enum|enum
 name|SqlSelectKeyword
-implements|implements
-name|SqlLiteral
-operator|.
-name|SqlSymbol
 block|{
 name|DISTINCT
 block|,

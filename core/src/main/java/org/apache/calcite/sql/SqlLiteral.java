@@ -366,7 +366,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * A<code>SqlLiteral</code> is a constant. It is, appropriately, immutable.  *  *<p>How is the value stored? In that respect, the class is somewhat of a black  * box. There is a {@link #getValue} method which returns the value as an  * object, but the type of that value is implementation detail, and it is best  * that your code does not depend upon that knowledge. It is better to use  * task-oriented methods such as {@link #toSqlString(SqlDialect)} and  * {@link #toValue}.</p>  *  *<p>If you really need to access the value directly, you should switch on the  * value of the {@link #typeName} field, rather than making assumptions about  * the runtime type of the {@link #value}.</p>  *  *<p>The allowable types and combinations are:  *  *<table>  *<caption>Allowable types for SqlLiteral</caption>  *<tr>  *<th>TypeName</th>  *<th>Meaing</th>  *<th>Value type</th>  *</tr>  *<tr>  *<td>{@link SqlTypeName#NULL}</td>  *<td>The null value. It has its own special type.</td>  *<td>null</td>  *</tr>  *<tr>  *<td>{@link SqlTypeName#BOOLEAN}</td>  *<td>Boolean, namely<code>TRUE</code>,<code>FALSE</code> or<code>  * UNKNOWN</code>.</td>  *<td>{@link Boolean}, or null represents the UNKNOWN value</td>  *</tr>  *<tr>  *<td>{@link SqlTypeName#DECIMAL}</td>  *<td>Exact number, for example<code>0</code>,<code>-.5</code>,<code>  * 12345</code>.</td>  *<td>{@link BigDecimal}</td>  *</tr>  *<tr>  *<td>{@link SqlTypeName#DOUBLE}</td>  *<td>Approximate number, for example<code>6.023E-23</code>.</td>  *<td>{@link BigDecimal}</td>  *</tr>  *<tr>  *<td>{@link SqlTypeName#DATE}</td>  *<td>Date, for example<code>DATE '1969-04'29'</code></td>  *<td>{@link Calendar}</td>  *</tr>  *<tr>  *<td>{@link SqlTypeName#TIME}</td>  *<td>Time, for example<code>TIME '18:37:42.567'</code></td>  *<td>{@link Calendar}</td>  *</tr>  *<tr>  *<td>{@link SqlTypeName#TIMESTAMP}</td>  *<td>Timestamp, for example<code>TIMESTAMP '1969-04-29  * 18:37:42.567'</code></td>  *<td>{@link Calendar}</td>  *</tr>  *<tr>  *<td>{@link SqlTypeName#CHAR}</td>  *<td>Character constant, for example<code>'Hello, world!'</code>,<code>  * ''</code>,<code>_N'Bonjour'</code>,<code>_ISO-8859-1'It''s superman!'  * COLLATE SHIFT_JIS$ja_JP$2</code>. These are always CHAR, never VARCHAR.</td>  *<td>{@link NlsString}</td>  *</tr>  *<tr>  *<td>{@link SqlTypeName#BINARY}</td>  *<td>Binary constant, for example<code>X'ABC'</code>,<code>X'7F'</code>.  * Note that strings with an odd number of hexits will later become values of  * the BIT datatype, because they have an incomplete number of bytes. But here,  * they are all binary constants, because that's how they were written. These  * constants are always BINARY, never VARBINARY.</td>  *<td>{@link BitString}</td>  *</tr>  *<tr>  *<td>{@link SqlTypeName#SYMBOL}</td>  *<td>A symbol is a special type used to make parsing easier; it is not part of  * the SQL standard, and is not exposed to end-users. It is used to hold a  * symbol, such as the LEADING flag in a call to the function<code>  * TRIM([LEADING|TRAILING|BOTH] chars FROM string)</code>.</td>  *<td>A class which implements the {@link SqlSymbol} interface</td>  *</tr>  *<tr>  *<td>{@link SqlTypeName#INTERVAL_DAY_TIME}</td>  *<td>Interval, for example<code>INTERVAL '1:34' HOUR</code>.</td>  *<td>{@link SqlIntervalLiteral.IntervalValue}.</td>  *</tr>  *</table>  */
+comment|/**  * A<code>SqlLiteral</code> is a constant. It is, appropriately, immutable.  *  *<p>How is the value stored? In that respect, the class is somewhat of a black  * box. There is a {@link #getValue} method which returns the value as an  * object, but the type of that value is implementation detail, and it is best  * that your code does not depend upon that knowledge. It is better to use  * task-oriented methods such as {@link #toSqlString(SqlDialect)} and  * {@link #toValue}.</p>  *  *<p>If you really need to access the value directly, you should switch on the  * value of the {@link #typeName} field, rather than making assumptions about  * the runtime type of the {@link #value}.</p>  *  *<p>The allowable types and combinations are:  *  *<table>  *<caption>Allowable types for SqlLiteral</caption>  *<tr>  *<th>TypeName</th>  *<th>Meaing</th>  *<th>Value type</th>  *</tr>  *<tr>  *<td>{@link SqlTypeName#NULL}</td>  *<td>The null value. It has its own special type.</td>  *<td>null</td>  *</tr>  *<tr>  *<td>{@link SqlTypeName#BOOLEAN}</td>  *<td>Boolean, namely<code>TRUE</code>,<code>FALSE</code> or<code>  * UNKNOWN</code>.</td>  *<td>{@link Boolean}, or null represents the UNKNOWN value</td>  *</tr>  *<tr>  *<td>{@link SqlTypeName#DECIMAL}</td>  *<td>Exact number, for example<code>0</code>,<code>-.5</code>,<code>  * 12345</code>.</td>  *<td>{@link BigDecimal}</td>  *</tr>  *<tr>  *<td>{@link SqlTypeName#DOUBLE}</td>  *<td>Approximate number, for example<code>6.023E-23</code>.</td>  *<td>{@link BigDecimal}</td>  *</tr>  *<tr>  *<td>{@link SqlTypeName#DATE}</td>  *<td>Date, for example<code>DATE '1969-04'29'</code></td>  *<td>{@link Calendar}</td>  *</tr>  *<tr>  *<td>{@link SqlTypeName#TIME}</td>  *<td>Time, for example<code>TIME '18:37:42.567'</code></td>  *<td>{@link Calendar}</td>  *</tr>  *<tr>  *<td>{@link SqlTypeName#TIMESTAMP}</td>  *<td>Timestamp, for example<code>TIMESTAMP '1969-04-29  * 18:37:42.567'</code></td>  *<td>{@link Calendar}</td>  *</tr>  *<tr>  *<td>{@link SqlTypeName#CHAR}</td>  *<td>Character constant, for example<code>'Hello, world!'</code>,<code>  * ''</code>,<code>_N'Bonjour'</code>,<code>_ISO-8859-1'It''s superman!'  * COLLATE SHIFT_JIS$ja_JP$2</code>. These are always CHAR, never VARCHAR.</td>  *<td>{@link NlsString}</td>  *</tr>  *<tr>  *<td>{@link SqlTypeName#BINARY}</td>  *<td>Binary constant, for example<code>X'ABC'</code>,<code>X'7F'</code>.  * Note that strings with an odd number of hexits will later become values of  * the BIT datatype, because they have an incomplete number of bytes. But here,  * they are all binary constants, because that's how they were written. These  * constants are always BINARY, never VARBINARY.</td>  *<td>{@link BitString}</td>  *</tr>  *<tr>  *<td>{@link SqlTypeName#SYMBOL}</td>  *<td>A symbol is a special type used to make parsing easier; it is not part of  * the SQL standard, and is not exposed to end-users. It is used to hold a  * symbol, such as the LEADING flag in a call to the function<code>  * TRIM([LEADING|TRAILING|BOTH] chars FROM string)</code>.</td>  *<td>An {@link Enum}</td>  *</tr>  *<tr>  *<td>{@link SqlTypeName#INTERVAL_DAY_TIME}</td>  *<td>Interval, for example<code>INTERVAL '1:34' HOUR</code>.</td>  *<td>{@link SqlIntervalLiteral.IntervalValue}.</td>  *</tr>  *</table>  */
 end_comment
 
 begin_class
@@ -549,19 +549,13 @@ return|return
 operator|(
 name|value
 operator|instanceof
-name|SqlSymbol
+name|Enum
 operator|)
 operator|||
 operator|(
 name|value
 operator|instanceof
 name|SqlSampleSpec
-operator|)
-operator|||
-operator|(
-name|value
-operator|instanceof
-name|TimeUnitRange
 operator|)
 return|;
 case|case
@@ -624,7 +618,7 @@ operator|.
 name|LITERAL
 return|;
 block|}
-comment|/**    * Returns the value of this literal.    *    *<p>Try not to use this method! There are so many different kinds of    * values, it's better to to let SqlLiteral do whatever it is you want to    * do.    *    * @see #booleanValue()    * @see #symbolValue()    */
+comment|/**    * Returns the value of this literal.    *    *<p>Try not to use this method! There are so many different kinds of    * values, it's better to to let SqlLiteral do whatever it is you want to    * do.    *    * @see #booleanValue()    * @see #symbolValue(Class)    */
 specifier|public
 name|Object
 name|getValue
@@ -635,14 +629,20 @@ name|value
 return|;
 block|}
 comment|/** Returns the value as a symbol. */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 parameter_list|<
 name|E
 extends|extends
-name|SqlSymbol
+name|Enum
+argument_list|<
+name|E
+argument_list|>
 parameter_list|>
 name|E
-name|symbolValue
+name|symbolValue_
 parameter_list|()
 block|{
 comment|//noinspection unchecked
@@ -651,6 +651,35 @@ operator|(
 name|E
 operator|)
 name|value
+return|;
+block|}
+comment|/** Returns the value as a symbol. */
+specifier|public
+parameter_list|<
+name|E
+extends|extends
+name|Enum
+argument_list|<
+name|E
+argument_list|>
+parameter_list|>
+name|E
+name|symbolValue
+parameter_list|(
+name|Class
+argument_list|<
+name|E
+argument_list|>
+name|class_
+parameter_list|)
+block|{
+return|return
+name|class_
+operator|.
+name|cast
+argument_list|(
+name|value
+argument_list|)
 return|;
 block|}
 comment|/** Returns the value as a boolean. */
@@ -666,7 +695,7 @@ operator|)
 name|value
 return|;
 block|}
-comment|/**    * Extracts the {@link SqlSampleSpec} value from a symbol literal.    *    * @throws ClassCastException if the value is not a symbol literal    * @see #createSymbol(SqlSymbol, SqlParserPos)    */
+comment|/**    * Extracts the {@link SqlSampleSpec} value from a symbol literal.    *    * @throws ClassCastException if the value is not a symbol literal    * @see #createSymbol(Enum, SqlParserPos)    */
 specifier|public
 specifier|static
 name|SqlSampleSpec
@@ -1443,15 +1472,16 @@ name|pos
 argument_list|)
 return|;
 block|}
-comment|/**    * Creates a literal which represents a parser symbol, for example the    *<code>TRAILING</code> keyword in the call<code>Trim(TRAILING 'x' FROM    * 'Hello world!')</code>.    *    * @see #symbolValue()    */
+comment|/**    * Creates a literal which represents a parser symbol, for example the    *<code>TRAILING</code> keyword in the call<code>Trim(TRAILING 'x' FROM    * 'Hello world!')</code>.    *    * @see #symbolValue(Class)    */
 specifier|public
 specifier|static
 name|SqlLiteral
 name|createSymbol
 parameter_list|(
-name|SqlLiteral
-operator|.
-name|SqlSymbol
+name|Enum
+argument_list|<
+name|?
+argument_list|>
 name|o
 parameter_list|,
 name|SqlParserPos
@@ -3057,6 +3087,9 @@ return|;
 block|}
 comment|//~ Inner Interfaces -------------------------------------------------------
 comment|/**    * A value must implement this interface if it is to be embedded as a    * SqlLiteral of type SYMBOL. If the class is an {@link Enum} it trivially    * implements this interface.    *    *<p>The {@link #toString()} method should return how the symbol should be    * unparsed, which is sometimes not the same as the enumerated value's name    * (e.g. "UNBOUNDED PRECEDING" versus "UnboundedPreceeding").    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 interface|interface
 name|SqlSymbol

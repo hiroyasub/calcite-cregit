@@ -2878,15 +2878,11 @@ name|SYMBOL
 condition|)
 block|{
 specifier|final
-name|SqlLiteral
-operator|.
-name|SqlSymbol
+name|Enum
 name|symbol
 init|=
 operator|(
-name|SqlLiteral
-operator|.
-name|SqlSymbol
+name|Enum
 operator|)
 name|literal
 operator|.

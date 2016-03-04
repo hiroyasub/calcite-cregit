@@ -39,10 +39,6 @@ begin_enum
 specifier|public
 enum|enum
 name|SqlInsertKeyword
-implements|implements
-name|SqlLiteral
-operator|.
-name|SqlSymbol
 block|{
 name|UPSERT
 block|;

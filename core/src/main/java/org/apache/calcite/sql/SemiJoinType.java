@@ -69,10 +69,6 @@ begin_enum
 specifier|public
 enum|enum
 name|SemiJoinType
-implements|implements
-name|SqlLiteral
-operator|.
-name|SqlSymbol
 block|{
 comment|/**    * Inner join    */
 name|INNER

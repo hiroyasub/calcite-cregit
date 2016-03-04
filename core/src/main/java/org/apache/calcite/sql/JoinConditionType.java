@@ -39,10 +39,6 @@ begin_enum
 specifier|public
 enum|enum
 name|JoinConditionType
-implements|implements
-name|SqlLiteral
-operator|.
-name|SqlSymbol
 block|{
 comment|/**    * Join clause has no condition, for example "FROM EMP, DEPT"    */
 name|NONE

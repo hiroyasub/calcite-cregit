@@ -39,10 +39,6 @@ begin_enum
 specifier|public
 enum|enum
 name|SqlExplainLevel
-implements|implements
-name|SqlLiteral
-operator|.
-name|SqlSymbol
 block|{
 comment|/**    * Suppress all attributes.    */
 name|NO_ATTRIBUTES
