@@ -28,7 +28,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Enumeration of time units used to construct an interval.  */
+comment|/**  * Enumeration of time units used to construct an interval.  *  *<p>Only {@link #YEAR}, {@link #YEAR}, {@link #MONTH}, {@link #DAY},  * {@link #HOUR}, {@link #MINUTE}, {@link #SECOND} can be the unit of a SQL  * interval.  *  *<p>The others ({@link #QUARTER}, {@link #WEEK}, {@link #MILLISECOND} and  * {@link #MICROSECOND}) are convenient to use it internally, when converting to  * and from UNIX timestamps. And also may be arguments to the  * {@code TIMESTAMPADD} and {@code TIMESTAMPDIFF} functions.  */
 end_comment
 
 begin_enum
@@ -42,7 +42,12 @@ literal|true
 argument_list|,
 literal|' '
 argument_list|,
+name|BigDecimal
+operator|.
+name|valueOf
+argument_list|(
 literal|12
+argument_list|)
 comment|/* months */
 argument_list|,
 literal|null
@@ -54,7 +59,9 @@ literal|true
 argument_list|,
 literal|'-'
 argument_list|,
-literal|1
+name|BigDecimal
+operator|.
+name|ONE
 comment|/* months */
 argument_list|,
 name|BigDecimal
@@ -71,9 +78,14 @@ literal|false
 argument_list|,
 literal|'-'
 argument_list|,
+name|BigDecimal
+operator|.
+name|valueOf
+argument_list|(
 name|DateTimeUtils
 operator|.
 name|MILLIS_PER_DAY
+argument_list|)
 argument_list|,
 literal|null
 argument_list|)
@@ -84,9 +96,14 @@ literal|false
 argument_list|,
 literal|' '
 argument_list|,
+name|BigDecimal
+operator|.
+name|valueOf
+argument_list|(
 name|DateTimeUtils
 operator|.
 name|MILLIS_PER_HOUR
+argument_list|)
 argument_list|,
 name|BigDecimal
 operator|.
@@ -102,9 +119,14 @@ literal|false
 argument_list|,
 literal|':'
 argument_list|,
+name|BigDecimal
+operator|.
+name|valueOf
+argument_list|(
 name|DateTimeUtils
 operator|.
 name|MILLIS_PER_MINUTE
+argument_list|)
 argument_list|,
 name|BigDecimal
 operator|.
@@ -120,9 +142,14 @@ literal|false
 argument_list|,
 literal|':'
 argument_list|,
+name|BigDecimal
+operator|.
+name|valueOf
+argument_list|(
 name|DateTimeUtils
 operator|.
 name|MILLIS_PER_SECOND
+argument_list|)
 argument_list|,
 name|BigDecimal
 operator|.
@@ -132,20 +159,92 @@ literal|60
 argument_list|)
 argument_list|)
 block|,
-comment|/** Unlike the other units, MILLISECOND may not be the unit of a SQL interval.    * Still, it is convenient to use it internally, when converting to and from    * UNIX timestamps. */
+name|QUARTER
+argument_list|(
+literal|true
+argument_list|,
+literal|'*'
+argument_list|,
+name|BigDecimal
+operator|.
+name|valueOf
+argument_list|(
+literal|3
+argument_list|)
+comment|/* months */
+argument_list|,
+name|BigDecimal
+operator|.
+name|valueOf
+argument_list|(
+literal|4
+argument_list|)
+argument_list|)
+block|,
+name|WEEK
+argument_list|(
+literal|false
+argument_list|,
+literal|'*'
+argument_list|,
+name|BigDecimal
+operator|.
+name|valueOf
+argument_list|(
+name|DateTimeUtils
+operator|.
+name|MILLIS_PER_DAY
+operator|*
+literal|7
+argument_list|)
+argument_list|,
+name|BigDecimal
+operator|.
+name|valueOf
+argument_list|(
+literal|53
+argument_list|)
+argument_list|)
+block|,
 name|MILLISECOND
 argument_list|(
 literal|false
 argument_list|,
 literal|'.'
 argument_list|,
-literal|1
+name|BigDecimal
+operator|.
+name|ONE
 argument_list|,
 name|BigDecimal
 operator|.
 name|valueOf
 argument_list|(
-literal|1
+literal|1000
+argument_list|)
+argument_list|)
+block|,
+name|MICROSECOND
+argument_list|(
+literal|false
+argument_list|,
+literal|'.'
+argument_list|,
+name|BigDecimal
+operator|.
+name|ONE
+operator|.
+name|scaleByPowerOfTen
+argument_list|(
+operator|-
+literal|3
+argument_list|)
+argument_list|,
+name|BigDecimal
+operator|.
+name|valueOf
+argument_list|(
+literal|1000000
 argument_list|)
 argument_list|)
 block|;
@@ -161,7 +260,7 @@ name|separator
 decl_stmt|;
 specifier|public
 specifier|final
-name|long
+name|BigDecimal
 name|multiplier
 decl_stmt|;
 specifier|private
@@ -187,7 +286,7 @@ parameter_list|,
 name|char
 name|separator
 parameter_list|,
-name|long
+name|BigDecimal
 name|multiplier
 parameter_list|,
 name|BigDecimal
