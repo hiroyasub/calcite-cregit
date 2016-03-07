@@ -123,22 +123,6 @@ end_import
 
 begin_import
 import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|rel
-operator|.
-name|logical
-operator|.
-name|LogicalUnion
-import|;
-end_import
-
-begin_import
-import|import
 name|java
 operator|.
 name|util
@@ -158,7 +142,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Planner rule that pushes a  * {@link org.apache.calcite.rel.logical.LogicalJoin}  * past a non-distinct {@link org.apache.calcite.rel.logical.LogicalUnion}.  */
+comment|/**  * Planner rule that pushes a  * {@link org.apache.calcite.rel.core.Join}  * past a non-distinct {@link org.apache.calcite.rel.core.Union}.  */
 end_comment
 
 begin_class
@@ -302,7 +286,7 @@ argument_list|(
 literal|1
 argument_list|)
 operator|instanceof
-name|LogicalUnion
+name|Union
 condition|)
 block|{
 name|unionRel
