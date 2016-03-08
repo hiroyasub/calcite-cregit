@@ -3952,11 +3952,21 @@ argument_list|,
 literal|"(?s).*Cannot apply.*fn LOG10..<CHAR.1.>.*"
 argument_list|)
 expr_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"Cannot apply '\\{fn LOG10\\}' to arguments of"
+operator|+
+literal|" type '\\{fn LOG10\\}\\(<INTEGER>,<INTEGER>\\)'\\. "
+operator|+
+literal|"Supported form\\(s\\): '\\{fn LOG10\\}\\(<NUMERIC>\\)'"
+decl_stmt|;
 name|checkWholeExpFails
 argument_list|(
 literal|"{fn log10(1,1)}"
 argument_list|,
-literal|"(?s).*Encountered .fn LOG10. with 2 parameter.s.; was expecting 1 parameter.s.*"
+name|expected
 argument_list|)
 expr_stmt|;
 name|checkWholeExpFails

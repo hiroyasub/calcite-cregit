@@ -14007,6 +14007,78 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testTimestampAdd
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select * from t\n"
+operator|+
+literal|"where timestampadd(sql_tsi_month, 5, hiredate)< curdate"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM `T`\n"
+operator|+
+literal|"WHERE (TIMESTAMPADD(MONTH, 5, `HIREDATE`)< `CURDATE`)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testTimestampDiff
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select * from t\n"
+operator|+
+literal|"where timestampdiff(frac_second, 5, hiredate)< curdate"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM `T`\n"
+operator|+
+literal|"WHERE (TIMESTAMPDIFF(MICROSECOND, 5, `HIREDATE`)< `CURDATE`)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testUnnest
 parameter_list|()
 block|{

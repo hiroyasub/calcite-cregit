@@ -3810,8 +3810,7 @@ operator|new
 name|SqlCurrentDateFunction
 argument_list|()
 decl_stmt|;
-comment|/**    *<p>Timestamp modifying or calculating difference functions.    * As first parameter take timestamp interval.    *</p>    *    *<p>Interval can one of the following literals:<br>    *<i>FRAC_SECOND, MICROSECOND, SQL_TSI_FRAC_SECOND, SQL_TSI_MICROSECOND</i><br>    *<i>SECOND, SQL_TSI_SECOND</i><br>    *<i>MINUTE, SQL_TSI_MINUTE</i><br>    *<i>HOUR, SQL_TSI_HOUR</i><br>    *<i>DAY, SQL_TSI_DAY</i><br>    *<i>WEEK, SQL_TSI_WEEK</i><br>    *<i>MONTH, SQL_TSI_MONTH</i><br>    *<i>QUARTER, SQL_TSI_QUARTER</i><br>    *<i>YEAR, SQL_TSI_YEAR</i><br>    *</p>    */
-comment|/**    *<p>The SQL<code>TIMESTAMP_ADD</code> function.    * Adds interval to timestamp.</p>    *    *<p>The SQL syntax is    *    *<blockquote>    *<code>TIMESTAMP_ADD(<i>timestamp interval</i>,<i>quantity</i>,<i>timestamp</i>)</code>    *</blockquote><br>    *    * Returns modified timestamp.</p>    */
+comment|/**    *<p>The<code>TIMESTAMPADD</code> function, which adds an interval to a    * timestamp.    *    *<p>The SQL syntax is    *    *<blockquote>    *<code>TIMESTAMPADD(<i>timestamp interval</i>,<i>quantity</i>,<i>timestamp</i>)</code>    *</blockquote>    *    *<p>The interval time unit can one of the following literals:<ul>    *<li>MICROSECOND (and synonyms SQL_TSI_MICROSECOND, FRAC_SECOND,    *     SQL_TSI_FRAC_SECOND)    *<li>SECOND (and synonym SQL_TSI_SECOND)    *<li>MINUTE (and synonym  SQL_TSI_MINUTE)    *<li>HOUR (and synonym  SQL_TSI_HOUR)    *<li>DAY (and synonym SQL_TSI_DAY)    *<li>WEEK (and synonym  SQL_TSI_WEEK)    *<li>MONTH (and synonym SQL_TSI_MONTH)    *<li>QUARTER (and synonym SQL_TSI_QUARTER)    *<li>YEAR (and synonym  SQL_TSI_YEAR)    *</ul>    *    *<p>Returns modified timestamp.    */
 specifier|public
 specifier|static
 specifier|final
@@ -3825,7 +3824,7 @@ literal|"TIMESTAMPADD"
 argument_list|,
 name|SqlKind
 operator|.
-name|OTHER_FUNCTION
+name|TIMESTAMP_ADD
 argument_list|,
 name|ReturnTypes
 operator|.
@@ -3855,7 +3854,7 @@ operator|.
 name|TIMEDATE
 argument_list|)
 decl_stmt|;
-comment|/**    *<p>The SQL<code>TIMESTAMP_DIFF</code> function.    * Calculates difference between two timestamps.</p>    *    *<p>The SQL syntax is    *    *<blockquote>    *<code>TIMESTAMP_DIFF(<i>timestamp interval</i>,<i>timestamp</i>,<i>timestamp</i>)</code>    *</blockquote><br>    *    * Returns difference between two timestamps in indicated timestamp interval.</p>    */
+comment|/**    *<p>The<code>TIMESTAMPDIFF</code> function, which calculates the difference    * between two timestamps.    *    *<p>The SQL syntax is    *    *<blockquote>    *<code>TIMESTAMPDIFF(<i>timestamp interval</i>,<i>timestamp</i>,<i>timestamp</i>)</code>    *</blockquote>    *    *<p>The interval time unit can one of the following literals:<ul>    *<li>MICROSECOND (and synonyms SQL_TSI_MICROSECOND, FRAC_SECOND,    *     SQL_TSI_FRAC_SECOND)    *<li>SECOND (and synonym SQL_TSI_SECOND)    *<li>MINUTE (and synonym  SQL_TSI_MINUTE)    *<li>HOUR (and synonym  SQL_TSI_HOUR)    *<li>DAY (and synonym SQL_TSI_DAY)    *<li>WEEK (and synonym  SQL_TSI_WEEK)    *<li>MONTH (and synonym SQL_TSI_MONTH)    *<li>QUARTER (and synonym SQL_TSI_QUARTER)    *<li>YEAR (and synonym  SQL_TSI_YEAR)    *</ul>    *    *<p>Returns difference between two timestamps in indicated timestamp interval.    */
 specifier|public
 specifier|static
 specifier|final
@@ -3869,7 +3868,7 @@ literal|"TIMESTAMPDIFF"
 argument_list|,
 name|SqlKind
 operator|.
-name|OTHER_FUNCTION
+name|TIMESTAMP_DIFF
 argument_list|,
 name|ReturnTypes
 operator|.

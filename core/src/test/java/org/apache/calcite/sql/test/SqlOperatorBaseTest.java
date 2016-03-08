@@ -6932,40 +6932,34 @@ literal|""
 argument_list|)
 expr_stmt|;
 block|}
-if|if
-condition|(
-literal|false
-condition|)
-block|{
 name|tester
 operator|.
 name|checkScalar
 argument_list|(
-literal|"{fn TIMESTAMPADD(interval, count, timestamp)}"
+literal|"{fn TIMESTAMPADD(HOUR, 5,"
+operator|+
+literal|" TIMESTAMP '2014-03-29 12:34:56')}"
 argument_list|,
-literal|null
+literal|"2014-03-29 17:34:56"
 argument_list|,
-literal|""
+literal|"TIMESTAMP(0) NOT NULL"
 argument_list|)
 expr_stmt|;
-block|}
-if|if
-condition|(
-literal|false
-condition|)
-block|{
 name|tester
 operator|.
 name|checkScalar
 argument_list|(
-literal|"{fn TIMESTAMPDIFF(interval, timestamp1, timestamp2)}"
+literal|"{fn TIMESTAMPDIFF(HOUR,"
+operator|+
+literal|" TIMESTAMP '2014-03-29 12:34:56',"
+operator|+
+literal|" TIMESTAMP '2014-03-29 12:34:56')}"
 argument_list|,
-literal|null
+literal|"0"
 argument_list|,
-literal|""
+literal|"INTEGER NOT NULL"
 argument_list|)
 expr_stmt|;
-block|}
 if|if
 condition|(
 literal|false
@@ -18991,28 +18985,141 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testTimestampAddAdnDiff
+name|testTimestampAdd
 parameter_list|()
 block|{
-if|if
-condition|(
-operator|!
-name|enable
-condition|)
-block|{
-return|return;
-block|}
+name|tester
+operator|.
+name|setFor
+argument_list|(
+name|SqlStdOperatorTable
+operator|.
+name|TIMESTAMP_ADD
+argument_list|)
+expr_stmt|;
 name|tester
 operator|.
 name|checkScalar
 argument_list|(
-literal|"timestampadd(MINUTE, 2, timestamp '2016-02-24 12:42:25')"
+literal|"timestampadd(SQL_TSI_SECOND, 2, timestamp '2016-02-24 12:42:25')"
 argument_list|,
 literal|"2016-02-24 12:42:27"
 argument_list|,
 literal|"TIMESTAMP(0) NOT NULL"
 argument_list|)
 expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"timestampadd(MINUTE, 2, timestamp '2016-02-24 12:42:25')"
+argument_list|,
+literal|"2016-02-24 12:44:25"
+argument_list|,
+literal|"TIMESTAMP(0) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"timestampadd(HOUR, -2000, timestamp '2016-02-24 12:42:25')"
+argument_list|,
+literal|"2015-12-03 04:42:25"
+argument_list|,
+literal|"TIMESTAMP(0) NOT NULL"
+argument_list|)
+expr_stmt|;
+if|if
+condition|(
+operator|!
+name|INTERVAL
+condition|)
+block|{
+return|return;
+block|}
+name|tester
+operator|.
+name|checkNull
+argument_list|(
+literal|"timestampadd(HOUR, CAST(NULL AS INTEGER),"
+operator|+
+literal|" timestamp '2016-02-24 12:42:25')"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkNull
+argument_list|(
+literal|"timestampadd(HOUR, -200, CAST(NULL AS TIMESTAMP))"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"timestampadd(MONTH, 3, timestamp '2016-02-24 12:42:25')"
+argument_list|,
+literal|"2016-05-24 12:42:25"
+argument_list|,
+literal|"TIMESTAMP(0) NOT NULL"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testTimestampDiff
+parameter_list|()
+block|{
+name|tester
+operator|.
+name|setFor
+argument_list|(
+name|SqlStdOperatorTable
+operator|.
+name|TIMESTAMP_DIFF
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"timestampdiff(HOUR, "
+operator|+
+literal|"timestamp '2016-02-24 12:42:25', "
+operator|+
+literal|"timestamp '2016-02-24 15:42:25')"
+argument_list|,
+literal|"-3"
+argument_list|,
+literal|"INTEGER NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"timestampdiff(MICROSECOND, "
+operator|+
+literal|"timestamp '2016-02-24 12:42:25', "
+operator|+
+literal|"timestamp '2016-02-24 12:42:20')"
+argument_list|,
+literal|"5000000"
+argument_list|,
+literal|"INTEGER NOT NULL"
+argument_list|)
+expr_stmt|;
+if|if
+condition|(
+operator|!
+name|INTERVAL
+condition|)
+block|{
+return|return;
+block|}
 name|tester
 operator|.
 name|checkScalar
