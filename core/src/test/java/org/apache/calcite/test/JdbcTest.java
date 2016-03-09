@@ -9130,6 +9130,11 @@ argument_list|)
 expr_stmt|;
 name|checkJoinNWay
 argument_list|(
+literal|3
+argument_list|)
+expr_stmt|;
+name|checkJoinNWay
+argument_list|(
 literal|6
 argument_list|)
 expr_stmt|;

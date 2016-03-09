@@ -817,6 +817,13 @@ name|planner
 argument_list|)
 decl_stmt|;
 return|return
+name|fromConvention
+operator|.
+name|canConvertConvention
+argument_list|(
+name|toConvention
+argument_list|)
+operator|||
 name|conversionData
 operator|.
 name|getShortestPath

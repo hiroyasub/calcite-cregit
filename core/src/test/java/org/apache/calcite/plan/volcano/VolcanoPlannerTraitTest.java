@@ -431,6 +431,24 @@ begin_import
 import|import static
 name|org
 operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
+name|volcano
+operator|.
+name|PlannerTests
+operator|.
+name|newCluster
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
 name|junit
 operator|.
 name|Assert
@@ -628,8 +646,6 @@ expr_stmt|;
 name|RelOptCluster
 name|cluster
 init|=
-name|VolcanoPlannerTest
-operator|.
 name|newCluster
 argument_list|(
 name|planner
@@ -898,8 +914,6 @@ expr_stmt|;
 name|RelOptCluster
 name|cluster
 init|=
-name|VolcanoPlannerTest
-operator|.
 name|newCluster
 argument_list|(
 name|planner
@@ -1068,8 +1082,6 @@ expr_stmt|;
 name|RelOptCluster
 name|cluster
 init|=
-name|VolcanoPlannerTest
-operator|.
 name|newCluster
 argument_list|(
 name|planner
