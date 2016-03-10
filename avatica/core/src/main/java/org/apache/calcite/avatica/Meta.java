@@ -49,6 +49,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|avatica
+operator|.
+name|util
+operator|.
+name|FilteredConstants
+import|;
+end_import
+
+begin_import
+import|import
 name|com
 operator|.
 name|fasterxml
@@ -1086,6 +1102,66 @@ name|Connection
 operator|.
 name|TRANSACTION_NONE
 argument_list|)
+block|,
+comment|/** Database property which is the Avatica version */
+name|AVATICA_VERSION
+argument_list|(
+name|FilteredConstants
+operator|.
+name|VERSION
+argument_list|)
+block|,
+comment|/** Database property containing the value of      * {@link DatabaseMetaData#getDriverVersion()}. */
+name|GET_DRIVER_VERSION
+argument_list|(
+literal|""
+argument_list|)
+block|,
+comment|/** Database property containing the value of      * {@link DatabaseMetaData#getDriverMinorVersion()}. */
+name|GET_DRIVER_MINOR_VERSION
+argument_list|(
+operator|-
+literal|1
+argument_list|)
+block|,
+comment|/** Database property containing the value of      * {@link DatabaseMetaData#getDriverMajorVersion()}. */
+name|GET_DRIVER_MAJOR_VERSION
+argument_list|(
+operator|-
+literal|1
+argument_list|)
+block|,
+comment|/** Database property containing the value of      * {@link DatabaseMetaData#getDriverName()}. */
+name|GET_DRIVER_NAME
+argument_list|(
+literal|""
+argument_list|)
+block|,
+comment|/** Database property containing the value of      * {@link DatabaseMetaData#getDatabaseMinorVersion()}. */
+name|GET_DATABASE_MINOR_VERSION
+argument_list|(
+operator|-
+literal|1
+argument_list|)
+block|,
+comment|/** Database property containing the value of      * {@link DatabaseMetaData#getDatabaseMajorVersion()}. */
+name|GET_DATABASE_MAJOR_VERSION
+argument_list|(
+operator|-
+literal|1
+argument_list|)
+block|,
+comment|/** Database property containing the value of      * {@link DatabaseMetaData#getDatabaseProductName()}. */
+name|GET_DATABASE_PRODUCT_NAME
+argument_list|(
+literal|""
+argument_list|)
+block|,
+comment|/** Database property containing the value of      * {@link DatabaseMetaData#getDatabaseProductVersion()}. */
+name|GET_DATABASE_PRODUCT_VERSION
+argument_list|(
+literal|""
+argument_list|)
 block|;
 specifier|public
 specifier|final
@@ -1104,6 +1180,11 @@ specifier|public
 specifier|final
 name|Method
 name|method
+decl_stmt|;
+specifier|public
+specifier|final
+name|boolean
+name|isJdbc
 decl_stmt|;
 parameter_list|<
 name|T
@@ -1132,11 +1213,14 @@ name|name
 argument_list|()
 argument_list|)
 decl_stmt|;
+name|Method
+name|localMethod
+init|=
+literal|null
+decl_stmt|;
 try|try
 block|{
-name|this
-operator|.
-name|method
+name|localMethod
 operator|=
 name|DatabaseMetaData
 operator|.
@@ -1154,14 +1238,42 @@ name|NoSuchMethodException
 name|e
 parameter_list|)
 block|{
-throw|throw
-operator|new
-name|RuntimeException
-argument_list|(
-name|e
-argument_list|)
-throw|;
+comment|// Pass, localMethod stays null.
 block|}
+if|if
+condition|(
+literal|null
+operator|==
+name|localMethod
+condition|)
+block|{
+name|this
+operator|.
+name|method
+operator|=
+literal|null
+expr_stmt|;
+name|this
+operator|.
+name|type
+operator|=
+literal|null
+expr_stmt|;
+name|this
+operator|.
+name|isJdbc
+operator|=
+literal|false
+expr_stmt|;
+block|}
+else|else
+block|{
+name|this
+operator|.
+name|method
+operator|=
+name|localMethod
+expr_stmt|;
 name|this
 operator|.
 name|type
@@ -1176,7 +1288,19 @@ name|getReturnType
 argument_list|()
 argument_list|)
 expr_stmt|;
+name|this
+operator|.
+name|isJdbc
+operator|=
+literal|true
+expr_stmt|;
+block|}
+comment|// It's either: 1) not a JDBC method, 2) has no default value,
+comment|// 3) the defaultValue is of the expected type
 assert|assert
+operator|!
+name|isJdbc
+operator|||
 name|defaultValue
 operator|==
 literal|null

@@ -1000,7 +1000,7 @@ specifier|static
 class|class
 name|AvaticaJdbc41DatabaseMetaData
 extends|extends
-name|AvaticaDatabaseMetaData
+name|AvaticaDatabaseMetaDataImpl
 block|{
 name|AvaticaJdbc41DatabaseMetaData
 parameter_list|(

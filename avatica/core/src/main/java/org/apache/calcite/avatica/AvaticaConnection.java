@@ -589,6 +589,8 @@ argument_list|(
 name|this
 argument_list|)
 expr_stmt|;
+try|try
+block|{
 name|this
 operator|.
 name|holdability
@@ -598,6 +600,22 @@ operator|.
 name|getResultSetHoldability
 argument_list|()
 expr_stmt|;
+block|}
+catch|catch
+parameter_list|(
+name|SQLException
+name|e
+parameter_list|)
+block|{
+comment|// We know the impl doesn't throw this.
+throw|throw
+operator|new
+name|RuntimeException
+argument_list|(
+name|e
+argument_list|)
+throw|;
+block|}
 name|this
 operator|.
 name|maxRetriesPerExecute

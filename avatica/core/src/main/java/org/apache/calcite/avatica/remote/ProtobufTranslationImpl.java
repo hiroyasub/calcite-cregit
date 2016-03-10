@@ -2531,13 +2531,30 @@ condition|(
 literal|null
 operator|==
 name|className
+operator|||
+name|className
+operator|.
+name|isEmpty
+argument_list|()
 condition|)
 block|{
 throw|throw
 operator|new
 name|IllegalArgumentException
 argument_list|(
-literal|"Cannot fetch parser for null class name"
+literal|"Cannot fetch parser for Request with "
+operator|+
+operator|(
+literal|null
+operator|==
+name|className
+condition|?
+literal|"null"
+else|:
+literal|"missing"
+operator|)
+operator|+
+literal|" class name"
 argument_list|)
 throw|;
 block|}
@@ -2587,13 +2604,30 @@ condition|(
 literal|null
 operator|==
 name|className
+operator|||
+name|className
+operator|.
+name|isEmpty
+argument_list|()
 condition|)
 block|{
 throw|throw
 operator|new
 name|IllegalArgumentException
 argument_list|(
-literal|"Cannot fetch parser for null class name"
+literal|"Cannot fetch parser for Response with "
+operator|+
+operator|(
+literal|null
+operator|==
+name|className
+condition|?
+literal|"null"
+else|:
+literal|"missing"
+operator|)
+operator|+
+literal|" class name"
 argument_list|)
 throw|;
 block|}

@@ -74,7 +74,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Definitions of properties that drive the behavior of  * {@link org.apache.calcite.avatica.AvaticaDatabaseMetaData}.  */
+comment|/**  * Definitions of properties that drive the behavior of  * {@link org.apache.calcite.avatica.AvaticaDatabaseMetaDataImpl}.  */
 end_comment
 
 begin_enum
