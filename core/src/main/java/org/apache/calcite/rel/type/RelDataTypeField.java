@@ -61,6 +61,11 @@ name|RelDataType
 name|getType
 parameter_list|()
 function_decl|;
+comment|/**    * Returns true if this is a dynamic star field.    */
+name|boolean
+name|isDynamicStar
+parameter_list|()
+function_decl|;
 block|}
 end_interface
 

@@ -265,8 +265,10 @@ operator|.
 name|getRowType
 argument_list|()
 decl_stmt|;
-if|if
-condition|(
+specifier|final
+name|RelDataTypeField
+name|field
+init|=
 name|validator
 operator|.
 name|catalogReader
@@ -277,10 +279,21 @@ name|rowType
 argument_list|,
 name|name
 argument_list|)
+decl_stmt|;
+if|if
+condition|(
+name|field
 operator|!=
 literal|null
+operator|&&
+operator|!
+name|field
+operator|.
+name|isDynamicStar
+argument_list|()
 condition|)
 block|{
+comment|// if identifier is resolved to a dynamic star, use super.fullyQualify() for such case.
 return|return
 name|SqlQualified
 operator|.

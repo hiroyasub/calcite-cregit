@@ -1890,7 +1890,7 @@ name|CalciteAssert
 operator|.
 name|checkResultCount
 argument_list|(
-literal|30
+literal|31
 argument_list|)
 argument_list|)
 expr_stmt|;

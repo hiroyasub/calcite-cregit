@@ -246,6 +246,11 @@ name|RelDataTypeComparability
 name|getComparability
 parameter_list|()
 function_decl|;
+comment|/**    *@return whether it has dynamic structure (for "schema-on-read" table)    */
+name|boolean
+name|isDynamicStruct
+parameter_list|()
+function_decl|;
 block|}
 end_interface
 

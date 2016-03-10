@@ -456,6 +456,29 @@ argument_list|)
 return|;
 block|}
 block|}
+comment|// a dynamic * field will match any field name.
+for|for
+control|(
+name|RelDataTypeField
+name|field
+range|:
+name|fieldList
+control|)
+block|{
+if|if
+condition|(
+name|field
+operator|.
+name|isDynamicStar
+argument_list|()
+condition|)
+block|{
+comment|// the requested field could be in the unresolved star
+return|return
+name|field
+return|;
+block|}
+block|}
 return|return
 literal|null
 return|;
@@ -1298,6 +1321,15 @@ literal|true
 argument_list|,
 literal|false
 argument_list|)
+return|;
+block|}
+specifier|public
+name|boolean
+name|isDynamicStruct
+parameter_list|()
+block|{
+return|return
+literal|false
 return|;
 block|}
 comment|/** Work space for {@link RelDataTypeImpl#getFieldRecurse}. */

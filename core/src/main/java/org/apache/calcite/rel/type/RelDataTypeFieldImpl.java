@@ -19,6 +19,22 @@ end_package
 
 begin_import
 import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|type
+operator|.
+name|SqlTypeName
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|io
@@ -284,6 +300,22 @@ operator|+
 literal|" "
 operator|+
 name|type
+return|;
+block|}
+specifier|public
+name|boolean
+name|isDynamicStar
+parameter_list|()
+block|{
+return|return
+name|type
+operator|.
+name|getSqlTypeName
+argument_list|()
+operator|==
+name|SqlTypeName
+operator|.
+name|DYNAMIC_STAR
 return|;
 block|}
 block|}

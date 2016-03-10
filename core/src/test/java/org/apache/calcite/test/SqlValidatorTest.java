@@ -10413,7 +10413,7 @@ literal|" from emp\n"
 operator|+
 literal|" join dept on emp.deptno = dept.deptno\n"
 operator|+
-literal|" and ^sum(sal) over (partition by deptno\n"
+literal|" and ^sum(sal) over (partition by emp.deptno\n"
 operator|+
 literal|"    order by empno\n"
 operator|+
@@ -16314,7 +16314,7 @@ name|checkFails
 argument_list|(
 literal|"select 1 from emp group by deptno order by ^empno^"
 argument_list|,
-literal|"Expression 'EMP\\.EMPNO' is not being grouped"
+literal|"Expression 'EMPNO' is not being grouped"
 argument_list|)
 expr_stmt|;
 comment|// order by can contain aggregate expressions
@@ -16332,7 +16332,7 @@ name|checkFails
 argument_list|(
 literal|"select sum(sal) from emp having count(*)> 3 order by ^empno^"
 argument_list|,
-literal|"Expression 'EMP\\.EMPNO' is not being grouped"
+literal|"Expression 'EMPNO' is not being grouped"
 argument_list|)
 expr_stmt|;
 name|check
@@ -16345,14 +16345,14 @@ name|checkFails
 argument_list|(
 literal|"select distinct deptno from emp group by deptno order by ^empno^"
 argument_list|,
-literal|"Expression 'EMP\\.EMPNO' is not in the select clause"
+literal|"Expression 'EMPNO' is not in the select clause"
 argument_list|)
 expr_stmt|;
 name|checkFails
 argument_list|(
 literal|"select distinct deptno from emp group by deptno order by deptno, ^empno^"
 argument_list|,
-literal|"Expression 'EMP\\.EMPNO' is not in the select clause"
+literal|"Expression 'EMPNO' is not in the select clause"
 argument_list|)
 expr_stmt|;
 name|check
@@ -16425,7 +16425,7 @@ literal|"select distinct cast(empno as bigint) "
 operator|+
 literal|"from emp order by ^empno^"
 argument_list|,
-literal|"Expression 'EMP\\.EMPNO' is not in the select clause"
+literal|"Expression 'EMPNO' is not in the select clause"
 argument_list|)
 expr_stmt|;
 name|checkFails
@@ -16651,7 +16651,7 @@ literal|"SELECT DISTINCT deptno from emp\n"
 operator|+
 literal|"GROUP BY deptno ORDER BY deptno, ^sum(empno)^"
 argument_list|,
-literal|"Expression 'SUM\\(`EMP`\\.`EMPNO`\\)' is not in the select clause"
+literal|"Expression 'SUM\\(`EMPNO`\\)' is not in the select clause"
 argument_list|)
 expr_stmt|;
 name|checkFails
@@ -16660,7 +16660,7 @@ literal|"SELECT DISTINCT deptno, min(empno) from emp\n"
 operator|+
 literal|"GROUP BY deptno ORDER BY deptno, ^sum(empno)^"
 argument_list|,
-literal|"Expression 'SUM\\(`EMP`\\.`EMPNO`\\)' is not in the select clause"
+literal|"Expression 'SUM\\(`EMPNO`\\)' is not in the select clause"
 argument_list|)
 expr_stmt|;
 name|check
@@ -18705,14 +18705,14 @@ name|checkFails
 argument_list|(
 literal|"SELECT deptno FROM emp GROUP BY deptno ORDER BY deptno, ^empno^"
 argument_list|,
-literal|"Expression 'EMP\\.EMPNO' is not being grouped"
+literal|"Expression 'EMPNO' is not being grouped"
 argument_list|)
 expr_stmt|;
 name|checkFails
 argument_list|(
 literal|"SELECT DISTINCT deptno from emp ORDER BY deptno, ^empno^"
 argument_list|,
-literal|"Expression 'EMP\\.EMPNO' is not in the select clause"
+literal|"Expression 'EMPNO' is not in the select clause"
 argument_list|)
 expr_stmt|;
 name|check
@@ -18726,7 +18726,7 @@ name|checkFails
 argument_list|(
 literal|"SELECT DISTINCT deptno FROM emp GROUP BY deptno, empno ORDER BY deptno, ^empno^"
 argument_list|,
-literal|"Expression 'EMP\\.EMPNO' is not in the select clause"
+literal|"Expression 'EMPNO' is not in the select clause"
 argument_list|)
 expr_stmt|;
 comment|// redundant distinct; same query is in unitsql/optimizer/distinct.sql

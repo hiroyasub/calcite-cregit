@@ -685,6 +685,9 @@ return|;
 case|case
 name|ANY
 case|:
+case|case
+name|DYNAMIC_STAR
+case|:
 return|return
 name|OperandTypes
 operator|.
@@ -810,6 +813,9 @@ argument_list|)
 return|;
 case|case
 name|ANY
+case|:
+case|case
+name|DYNAMIC_STAR
 case|:
 return|return
 name|typeFactory

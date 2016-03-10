@@ -2481,10 +2481,7 @@ argument_list|(
 name|getOperatorTable
 argument_list|()
 argument_list|,
-name|createCatalogReader
-argument_list|(
-name|typeFactory
-argument_list|)
+name|catalogReader
 argument_list|,
 name|typeFactory
 argument_list|,
