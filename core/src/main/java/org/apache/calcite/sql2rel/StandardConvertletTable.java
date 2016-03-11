@@ -7452,7 +7452,7 @@ name|call
 parameter_list|)
 block|{
 comment|// TIMESTAMPDIFF(unit, t1, t2)
-comment|//    => (t1 - t2) UNIT
+comment|//    => (t2 - t1) UNIT
 specifier|final
 name|RexBuilder
 name|rexBuilder
@@ -7548,7 +7548,7 @@ name|call
 operator|.
 name|operand
 argument_list|(
-literal|1
+literal|2
 argument_list|)
 argument_list|)
 argument_list|,
@@ -7560,7 +7560,7 @@ name|call
 operator|.
 name|operand
 argument_list|(
-literal|2
+literal|1
 argument_list|)
 argument_list|)
 argument_list|,

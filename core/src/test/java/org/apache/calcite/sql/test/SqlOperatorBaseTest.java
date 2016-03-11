@@ -19092,7 +19092,7 @@ literal|"timestamp '2016-02-24 12:42:25', "
 operator|+
 literal|"timestamp '2016-02-24 15:42:25')"
 argument_list|,
-literal|"-3"
+literal|"3"
 argument_list|,
 literal|"INTEGER NOT NULL"
 argument_list|)
@@ -19107,7 +19107,7 @@ literal|"timestamp '2016-02-24 12:42:25', "
 operator|+
 literal|"timestamp '2016-02-24 12:42:20')"
 argument_list|,
-literal|"5000000"
+literal|"-5000000"
 argument_list|,
 literal|"INTEGER NOT NULL"
 argument_list|)
