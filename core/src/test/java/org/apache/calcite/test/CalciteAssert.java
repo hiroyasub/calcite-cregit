@@ -459,6 +459,22 @@ end_import
 
 begin_import
 import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|util
+operator|.
+name|concurrent
+operator|.
+name|UncheckedExecutionException
+import|;
+end_import
+
+begin_import
+import|import
 name|net
 operator|.
 name|hydromatic
@@ -5691,6 +5707,8 @@ return|;
 block|}
 catch|catch
 parameter_list|(
+name|UncheckedExecutionException
+decl||
 name|ExecutionException
 name|e
 parameter_list|)
@@ -5704,6 +5722,9 @@ operator|+
 name|factory
 argument_list|,
 name|e
+operator|.
+name|getCause
+argument_list|()
 argument_list|)
 throw|;
 block|}

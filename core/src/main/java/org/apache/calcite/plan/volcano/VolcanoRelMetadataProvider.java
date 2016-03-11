@@ -137,7 +137,21 @@ name|common
 operator|.
 name|collect
 operator|.
-name|ImmutableMap
+name|ImmutableMultimap
+import|;
+end_import
+
+begin_import
+import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|collect
+operator|.
+name|Multimap
 import|;
 end_import
 
@@ -150,16 +164,6 @@ operator|.
 name|reflect
 operator|.
 name|Method
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|Map
 import|;
 end_import
 
@@ -482,7 +486,7 @@ name|M
 extends|extends
 name|Metadata
 parameter_list|>
-name|Map
+name|Multimap
 argument_list|<
 name|Method
 argument_list|,
@@ -501,7 +505,7 @@ name|def
 parameter_list|)
 block|{
 return|return
-name|ImmutableMap
+name|ImmutableMultimap
 operator|.
 name|of
 argument_list|()

@@ -301,7 +301,7 @@ specifier|final
 name|JaninoRelMetadataProvider
 name|metadataProvider
 decl_stmt|;
-specifier|private
+specifier|protected
 specifier|static
 specifier|final
 name|RelMetadataQuery
@@ -486,7 +486,7 @@ return|;
 block|}
 block|}
 decl_stmt|;
-specifier|private
+specifier|protected
 name|RelMetadataQuery
 parameter_list|(
 name|JaninoRelMetadataProvider
@@ -652,7 +652,7 @@ operator|.
 name|uniqueKeysHandler
 expr_stmt|;
 block|}
-specifier|private
+specifier|protected
 specifier|static
 parameter_list|<
 name|H
@@ -1047,6 +1047,49 @@ name|class
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Re-generates the handler for a given kind of metadata, adding support for    * {@code class_} if it is not already present. */
+specifier|protected
+parameter_list|<
+name|M
+extends|extends
+name|Metadata
+parameter_list|,
+name|H
+extends|extends
+name|MetadataHandler
+argument_list|<
+name|M
+argument_list|>
+parameter_list|>
+name|H
+name|revise
+parameter_list|(
+name|Class
+argument_list|<
+name|?
+extends|extends
+name|RelNode
+argument_list|>
+name|class_
+parameter_list|,
+name|MetadataDef
+argument_list|<
+name|M
+argument_list|>
+name|def
+parameter_list|)
+block|{
+return|return
+name|metadataProvider
+operator|.
+name|revise
+argument_list|(
+name|class_
+argument_list|,
+name|def
+argument_list|)
+return|;
+block|}
 comment|/**    * Returns the    * {@link BuiltInMetadata.RowCount#getRowCount()}    * statistic.    *    * @param rel the relational expression    * @return estimated row count, or null if no reliable estimate can be    * determined    */
 specifier|public
 name|Double
@@ -1093,8 +1136,6 @@ parameter_list|)
 block|{
 name|rowCountHandler
 operator|=
-name|metadataProvider
-operator|.
 name|revise
 argument_list|(
 name|e
@@ -1149,8 +1190,6 @@ parameter_list|)
 block|{
 name|maxRowCountHandler
 operator|=
-name|metadataProvider
-operator|.
 name|revise
 argument_list|(
 name|e
@@ -1205,8 +1244,6 @@ parameter_list|)
 block|{
 name|cumulativeCostHandler
 operator|=
-name|metadataProvider
-operator|.
 name|revise
 argument_list|(
 name|e
@@ -1261,8 +1298,6 @@ parameter_list|)
 block|{
 name|nonCumulativeCostHandler
 operator|=
-name|metadataProvider
-operator|.
 name|revise
 argument_list|(
 name|e
@@ -1325,8 +1360,6 @@ parameter_list|)
 block|{
 name|percentageOriginalRowsHandler
 operator|=
-name|metadataProvider
-operator|.
 name|revise
 argument_list|(
 name|e
@@ -1389,8 +1422,6 @@ parameter_list|)
 block|{
 name|columnOriginHandler
 operator|=
-name|metadataProvider
-operator|.
 name|revise
 argument_list|(
 name|e
@@ -1581,8 +1612,6 @@ parameter_list|)
 block|{
 name|selectivityHandler
 operator|=
-name|metadataProvider
-operator|.
 name|revise
 argument_list|(
 name|e
@@ -1666,8 +1695,6 @@ parameter_list|)
 block|{
 name|uniqueKeysHandler
 operator|=
-name|metadataProvider
-operator|.
 name|revise
 argument_list|(
 name|e
@@ -1792,8 +1819,6 @@ parameter_list|)
 block|{
 name|columnUniquenessHandler
 operator|=
-name|metadataProvider
-operator|.
 name|revise
 argument_list|(
 name|e
@@ -1851,8 +1876,6 @@ parameter_list|)
 block|{
 name|collationHandler
 operator|=
-name|metadataProvider
-operator|.
 name|revise
 argument_list|(
 name|e
@@ -1907,8 +1930,6 @@ parameter_list|)
 block|{
 name|distributionHandler
 operator|=
-name|metadataProvider
-operator|.
 name|revise
 argument_list|(
 name|e
@@ -1976,8 +1997,6 @@ parameter_list|)
 block|{
 name|populationSizeHandler
 operator|=
-name|metadataProvider
-operator|.
 name|revise
 argument_list|(
 name|e
@@ -2032,8 +2051,6 @@ parameter_list|)
 block|{
 name|sizeHandler
 operator|=
-name|metadataProvider
-operator|.
 name|revise
 argument_list|(
 name|e
@@ -2091,8 +2108,6 @@ parameter_list|)
 block|{
 name|sizeHandler
 operator|=
-name|metadataProvider
-operator|.
 name|revise
 argument_list|(
 name|e
@@ -2197,8 +2212,6 @@ parameter_list|)
 block|{
 name|parallelismHandler
 operator|=
-name|metadataProvider
-operator|.
 name|revise
 argument_list|(
 name|e
@@ -2253,8 +2266,6 @@ parameter_list|)
 block|{
 name|parallelismHandler
 operator|=
-name|metadataProvider
-operator|.
 name|revise
 argument_list|(
 name|e
@@ -2309,8 +2320,6 @@ parameter_list|)
 block|{
 name|memoryHandler
 operator|=
-name|metadataProvider
-operator|.
 name|revise
 argument_list|(
 name|e
@@ -2365,8 +2374,6 @@ parameter_list|)
 block|{
 name|memoryHandler
 operator|=
-name|metadataProvider
-operator|.
 name|revise
 argument_list|(
 name|e
@@ -2421,8 +2428,6 @@ parameter_list|)
 block|{
 name|memoryHandler
 operator|=
-name|metadataProvider
-operator|.
 name|revise
 argument_list|(
 name|e
@@ -2495,8 +2500,6 @@ parameter_list|)
 block|{
 name|distinctRowCountHandler
 operator|=
-name|metadataProvider
-operator|.
 name|revise
 argument_list|(
 name|e
@@ -2551,8 +2554,6 @@ parameter_list|)
 block|{
 name|predicatesHandler
 operator|=
-name|metadataProvider
-operator|.
 name|revise
 argument_list|(
 name|e
@@ -2621,8 +2622,6 @@ parameter_list|)
 block|{
 name|explainVisibilityHandler
 operator|=
-name|metadataProvider
-operator|.
 name|revise
 argument_list|(
 name|e

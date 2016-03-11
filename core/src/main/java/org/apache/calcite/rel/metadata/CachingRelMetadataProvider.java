@@ -89,6 +89,20 @@ end_import
 
 begin_import
 import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|collect
+operator|.
+name|Multimap
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|lang
@@ -357,7 +371,7 @@ name|M
 extends|extends
 name|Metadata
 parameter_list|>
-name|Map
+name|Multimap
 argument_list|<
 name|Method
 argument_list|,

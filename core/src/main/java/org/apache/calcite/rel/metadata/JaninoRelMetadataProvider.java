@@ -723,6 +723,22 @@ end_import
 
 begin_import
 import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|util
+operator|.
+name|concurrent
+operator|.
+name|UncheckedExecutionException
+import|;
+end_import
+
+begin_import
+import|import
 name|org
 operator|.
 name|codehaus
@@ -1335,7 +1351,7 @@ name|M
 extends|extends
 name|Metadata
 parameter_list|>
-name|Map
+name|Multimap
 argument_list|<
 name|Method
 argument_list|,
@@ -1381,7 +1397,7 @@ name|M
 argument_list|>
 name|def
 parameter_list|,
-name|Map
+name|Multimap
 argument_list|<
 name|Method
 argument_list|,
@@ -1467,7 +1483,7 @@ operator|.
 name|Space
 argument_list|(
 operator|(
-name|Map
+name|Multimap
 operator|)
 name|map
 argument_list|)
@@ -3318,6 +3334,8 @@ return|;
 block|}
 catch|catch
 parameter_list|(
+name|UncheckedExecutionException
+decl||
 name|ExecutionException
 name|e
 parameter_list|)
@@ -3328,6 +3346,9 @@ operator|.
 name|propagate
 argument_list|(
 name|e
+operator|.
+name|getCause
+argument_list|()
 argument_list|)
 throw|;
 block|}
