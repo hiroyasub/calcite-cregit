@@ -11721,10 +11721,26 @@ decl_stmt|;
 specifier|public
 specifier|static
 specifier|final
+name|int
+name|UNAUTHORIZED_ERROR_CODE
+init|=
+literal|2
+decl_stmt|;
+specifier|public
+specifier|static
+specifier|final
 name|String
 name|UNKNOWN_SQL_STATE
 init|=
 literal|"00000"
+decl_stmt|;
+specifier|public
+specifier|static
+specifier|final
+name|String
+name|UNAUTHORIZED_SQL_STATE
+init|=
+literal|"00002"
 decl_stmt|;
 specifier|public
 specifier|final
@@ -12290,8 +12306,10 @@ name|metadata
 argument_list|)
 return|;
 block|}
+comment|// Public so the Jetty handler implementations can use it
 annotation|@
 name|Override
+specifier|public
 name|Responses
 operator|.
 name|ErrorResponse

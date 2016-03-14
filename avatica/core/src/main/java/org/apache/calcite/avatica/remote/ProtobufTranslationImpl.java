@@ -821,6 +821,38 @@ end_import
 
 begin_import
 import|import
+name|com
+operator|.
+name|google
+operator|.
+name|protobuf
+operator|.
+name|TextFormat
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|slf4j
+operator|.
+name|Logger
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|slf4j
+operator|.
+name|LoggerFactory
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|io
@@ -916,6 +948,21 @@ name|ProtobufTranslationImpl
 implements|implements
 name|ProtobufTranslation
 block|{
+specifier|private
+specifier|static
+specifier|final
+name|Logger
+name|LOG
+init|=
+name|LoggerFactory
+operator|.
+name|getLogger
+argument_list|(
+name|ProtobufTranslationImpl
+operator|.
+name|class
+argument_list|)
+decl_stmt|;
 comment|// Extremely ugly mapping of PB class name into a means to convert it to the POJO
 specifier|private
 specifier|static
@@ -2515,7 +2562,7 @@ throw|throw
 operator|new
 name|IllegalArgumentException
 argument_list|(
-literal|"Cannot find parser for "
+literal|"Cannot find request parser for "
 operator|+
 name|className
 argument_list|)
@@ -2571,7 +2618,7 @@ throw|throw
 operator|new
 name|IllegalArgumentException
 argument_list|(
-literal|"Cannot find parser for "
+literal|"Cannot find response parser for "
 operator|+
 name|className
 argument_list|)
@@ -2613,6 +2660,20 @@ operator|.
 name|serialize
 argument_list|()
 decl_stmt|;
+name|LOG
+operator|.
+name|trace
+argument_list|(
+literal|"Serializing response '{}'"
+argument_list|,
+name|TextFormat
+operator|.
+name|shortDebugString
+argument_list|(
+name|responseMsg
+argument_list|)
+argument_list|)
+expr_stmt|;
 name|serializeMessage
 argument_list|(
 name|out
@@ -2668,6 +2729,20 @@ operator|.
 name|serialize
 argument_list|()
 decl_stmt|;
+name|LOG
+operator|.
+name|trace
+argument_list|(
+literal|"Serializing request '{}'"
+argument_list|,
+name|TextFormat
+operator|.
+name|shortDebugString
+argument_list|(
+name|requestMsg
+argument_list|)
+argument_list|)
+expr_stmt|;
 name|serializeMessage
 argument_list|(
 name|out
@@ -2885,6 +2960,8 @@ operator|.
 name|getName
 argument_list|()
 decl_stmt|;
+try|try
+block|{
 name|RequestTranslator
 name|translator
 init|=
@@ -2905,6 +2982,31 @@ name|getWrappedMessage
 argument_list|()
 argument_list|)
 return|;
+block|}
+catch|catch
+parameter_list|(
+name|RuntimeException
+name|e
+parameter_list|)
+block|{
+name|LOG
+operator|.
+name|debug
+argument_list|(
+literal|"Failed to parse request message '{}'"
+argument_list|,
+name|TextFormat
+operator|.
+name|shortDebugString
+argument_list|(
+name|wireMsg
+argument_list|)
+argument_list|)
+expr_stmt|;
+throw|throw
+name|e
+throw|;
+block|}
 block|}
 annotation|@
 name|Override
@@ -2964,6 +3066,8 @@ operator|.
 name|getName
 argument_list|()
 decl_stmt|;
+try|try
+block|{
 name|ResponseTranslator
 name|translator
 init|=
@@ -2983,6 +3087,31 @@ name|getWrappedMessage
 argument_list|()
 argument_list|)
 return|;
+block|}
+catch|catch
+parameter_list|(
+name|RuntimeException
+name|e
+parameter_list|)
+block|{
+name|LOG
+operator|.
+name|debug
+argument_list|(
+literal|"Failed to parse response message '{}'"
+argument_list|,
+name|TextFormat
+operator|.
+name|shortDebugString
+argument_list|(
+name|wireMsg
+argument_list|)
+argument_list|)
+expr_stmt|;
+throw|throw
+name|e
+throw|;
+block|}
 block|}
 block|}
 end_class

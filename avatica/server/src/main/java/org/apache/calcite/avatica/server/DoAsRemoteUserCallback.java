@@ -12,95 +12,59 @@ operator|.
 name|calcite
 operator|.
 name|avatica
+operator|.
+name|server
 package|;
 end_package
 
 begin_import
 import|import
-name|org
+name|java
 operator|.
-name|apache
+name|util
 operator|.
-name|calcite
+name|concurrent
 operator|.
-name|avatica
-operator|.
-name|remote
-operator|.
-name|AvaticaHttpClientFactory
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|avatica
-operator|.
-name|remote
-operator|.
-name|Service
+name|Callable
 import|;
 end_import
 
 begin_comment
-comment|/**  * Connection configuration.  */
+comment|/**  * A callback which the server can invoke to allow implementations to control additional logic  * about whether or not a client from a specific host should be run.  *<p>For example, complex logic could be supplied to control whether clientA from host1 is  * permitted to execute queries. This logic is deferred upon the user to implement.  */
 end_comment
 
 begin_interface
 specifier|public
 interface|interface
-name|ConnectionConfig
+name|DoAsRemoteUserCallback
 block|{
-comment|/** @see BuiltInConnectionProperty#SCHEMA */
+comment|/**    * Invokes the given<code>action</code> as the<code>remoteUserName</code>.    *    * @param remoteUserName The remote user making a request to the Avatica server.    * @param remoteAddress The address the remote user is making the request from.    * @param action The operation the Avatica server wants to run as<code>remoteUserName</code>.    * @return The result from the Callable.    */
+parameter_list|<
+name|T
+parameter_list|>
+name|T
+name|doAsRemoteUser
+parameter_list|(
 name|String
-name|schema
-parameter_list|()
-function_decl|;
-comment|/** @see BuiltInConnectionProperty#TIME_ZONE */
+name|remoteUserName
+parameter_list|,
 name|String
-name|timeZone
-parameter_list|()
-function_decl|;
-comment|/** @see BuiltInConnectionProperty#FACTORY */
-name|Service
-operator|.
-name|Factory
-name|factory
-parameter_list|()
-function_decl|;
-comment|/** @see BuiltInConnectionProperty#URL */
-name|String
-name|url
-parameter_list|()
-function_decl|;
-comment|/** @see BuiltInConnectionProperty#SERIALIZATION */
-name|String
-name|serialization
-parameter_list|()
-function_decl|;
-comment|/** @see BuiltInConnectionProperty#AUTHENTICATION */
-name|String
-name|authentication
-parameter_list|()
-function_decl|;
-name|AvaticaHttpClientFactory
-name|httpClientFactory
-parameter_list|()
-function_decl|;
-name|String
-name|httpClientClass
-parameter_list|()
+name|remoteAddress
+parameter_list|,
+name|Callable
+argument_list|<
+name|T
+argument_list|>
+name|action
+parameter_list|)
+throws|throws
+name|Exception
 function_decl|;
 block|}
 end_interface
 
 begin_comment
-comment|// End ConnectionConfig.java
+comment|// End DoAsRemoteUserCallback.java
 end_comment
 
 end_unit

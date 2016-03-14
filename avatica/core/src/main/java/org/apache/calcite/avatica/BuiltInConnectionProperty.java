@@ -174,6 +174,20 @@ argument_list|,
 literal|false
 argument_list|)
 block|,
+comment|/** The type of authentication to be used */
+name|AUTHENTICATION
+argument_list|(
+literal|"authentication"
+argument_list|,
+name|Type
+operator|.
+name|STRING
+argument_list|,
+literal|null
+argument_list|,
+literal|false
+argument_list|)
+block|,
 comment|/** Factory for constructing http clients. */
 name|HTTP_CLIENT_FACTORY
 argument_list|(
