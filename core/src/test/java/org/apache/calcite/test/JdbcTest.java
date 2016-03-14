@@ -16806,19 +16806,6 @@ operator|+
 literal|"where \"lname\" = 'this string is longer than 30 characters'"
 argument_list|)
 operator|.
-name|enable
-argument_list|(
-name|CalciteAssert
-operator|.
-name|DB
-operator|!=
-name|CalciteAssert
-operator|.
-name|DatabaseInstance
-operator|.
-name|ORACLE
-argument_list|)
-operator|.
 name|returns
 argument_list|(
 literal|"C=0\n"
@@ -16838,22 +16825,82 @@ operator|+
 literal|"where cast(\"customer_id\" as char(20)) = 'this string is longer than 30 characters'"
 argument_list|)
 operator|.
-name|enable
+name|returns
 argument_list|(
+literal|"C=0\n"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1153">[CALCITE-1153]    * Invalid CAST when push JOIN down to Oracle</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testJoinMismatchedVarchar
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select count(*) as c\n"
+operator|+
+literal|"from \"customer\" as c\n"
+operator|+
+literal|"join \"product\" as p on c.\"lname\" = p.\"brand_name\""
+decl_stmt|;
 name|CalciteAssert
 operator|.
-name|DB
-operator|!=
-name|CalciteAssert
+name|model
+argument_list|(
+name|FOODMART_MODEL
+argument_list|)
 operator|.
-name|DatabaseInstance
-operator|.
-name|ORACLE
+name|query
+argument_list|(
+name|sql
 argument_list|)
 operator|.
 name|returns
 argument_list|(
-literal|"C=0\n"
+literal|"C=607\n"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testIntersectMismatchedVarchar
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select count(*) as c from (\n"
+operator|+
+literal|"  select \"lname\" from \"customer\" as c\n"
+operator|+
+literal|"  intersect\n"
+operator|+
+literal|"  select \"brand_name\" from \"product\" as p)"
+decl_stmt|;
+name|CalciteAssert
+operator|.
+name|model
+argument_list|(
+name|FOODMART_MODEL
+argument_list|)
+operator|.
+name|query
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"C=12\n"
 argument_list|)
 expr_stmt|;
 block|}
