@@ -1648,6 +1648,9 @@ case|:
 case|case
 name|POSTGRESQL
 case|:
+case|case
+name|ORACLE
+case|:
 return|return
 literal|false
 return|;
