@@ -906,7 +906,7 @@ name|lookupOperatorOverloads
 argument_list|(
 name|funName
 argument_list|,
-literal|null
+name|funcType
 argument_list|,
 name|SqlSyntax
 operator|.

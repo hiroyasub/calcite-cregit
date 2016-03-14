@@ -578,7 +578,7 @@ argument_list|)
 argument_list|,
 name|SqlFunctionCategory
 operator|.
-name|USER_DEFINED_FUNCTION
+name|USER_DEFINED_TABLE_FUNCTION
 argument_list|)
 expr_stmt|;
 name|this

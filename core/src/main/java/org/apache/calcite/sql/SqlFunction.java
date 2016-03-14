@@ -165,6 +165,20 @@ name|google
 operator|.
 name|common
 operator|.
+name|base
+operator|.
+name|Preconditions
+import|;
+end_import
+
+begin_import
+import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
 name|collect
 operator|.
 name|ImmutableList
@@ -178,6 +192,16 @@ operator|.
 name|util
 operator|.
 name|List
+import|;
+end_import
+
+begin_import
+import|import
+name|javax
+operator|.
+name|annotation
+operator|.
+name|Nonnull
 import|;
 end_import
 
@@ -442,7 +466,12 @@ name|this
 operator|.
 name|category
 operator|=
+name|Preconditions
+operator|.
+name|checkNotNull
+argument_list|(
 name|category
+argument_list|)
 expr_stmt|;
 name|this
 operator|.
@@ -461,11 +490,6 @@ argument_list|(
 name|paramTypes
 argument_list|)
 expr_stmt|;
-assert|assert
-name|category
-operator|!=
-literal|null
-assert|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
 specifier|public
@@ -585,6 +609,8 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/**    * @return function category    */
+annotation|@
+name|Nonnull
 specifier|public
 name|SqlFunctionCategory
 name|getFunctionType

@@ -3818,7 +3818,8 @@ operator|.
 name|class
 argument_list|)
 decl_stmt|;
-comment|// implement RelVisitor
+annotation|@
+name|Override
 specifier|public
 name|void
 name|visit
@@ -3902,17 +3903,11 @@ name|p
 argument_list|)
 expr_stmt|;
 block|}
-block|}
-if|if
-condition|(
-operator|!
-name|found
-condition|)
+else|else
 block|{
 throw|throw
-name|Util
-operator|.
-name|newInternal
+operator|new
+name|AssertionError
 argument_list|(
 literal|"no '"
 operator|+
@@ -3929,6 +3924,7 @@ name|getName
 argument_list|()
 argument_list|)
 throw|;
+block|}
 block|}
 block|}
 block|}
