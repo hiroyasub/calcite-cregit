@@ -228,7 +228,7 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|//~ Inner Classes ----------------------------------------------------------
-comment|/**    * TimedIterator is an Iterator that repeats a given collection's elements    * until<code>System.currentTimeMillis()>= endTimeMillis</code>.    */
+comment|/**    * TimedIterator is an Iterator that repeats a given collection's elements    * until<code>System.currentTimeMillis()&ge; endTimeMillis</code>.    */
 specifier|private
 class|class
 name|TimedIterator

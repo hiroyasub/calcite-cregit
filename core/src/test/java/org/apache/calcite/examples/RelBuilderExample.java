@@ -407,7 +407,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/**    * Creates a relational expression for a table scan, aggregate, filter.    * It is equivalent to    *    *<pre>    * SELECT deptno, count(*) AS c, sum(sal) AS s    * FROM emp    * GROUP BY deptno    * HAVING count(*)> 10</pre>    */
+comment|/**    * Creates a relational expression for a table scan, aggregate, filter.    * It is equivalent to    *    *<pre>    * SELECT deptno, count(*) AS c, sum(sal) AS s    * FROM emp    * GROUP BY deptno    * HAVING count(*)&gt; 10</pre>    */
 specifier|private
 name|RelBuilder
 name|example3
