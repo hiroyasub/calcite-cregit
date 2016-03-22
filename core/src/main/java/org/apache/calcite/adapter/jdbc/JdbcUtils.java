@@ -339,6 +339,16 @@ begin_import
 import|import
 name|javax
 operator|.
+name|annotation
+operator|.
+name|Nonnull
+import|;
+end_import
+
+begin_import
+import|import
+name|javax
+operator|.
 name|sql
 operator|.
 name|DataSource
@@ -367,7 +377,6 @@ argument_list|)
 throw|;
 block|}
 comment|/** Pool of dialects. */
-specifier|public
 specifier|static
 class|class
 name|DialectPool
@@ -383,11 +392,7 @@ name|map0
 init|=
 operator|new
 name|IdentityHashMap
-argument_list|<
-name|DataSource
-argument_list|,
-name|SqlDialect
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 specifier|final
@@ -401,11 +406,7 @@ name|map
 init|=
 operator|new
 name|HashMap
-argument_list|<
-name|List
-argument_list|,
-name|SqlDialect
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 specifier|public
@@ -599,7 +600,6 @@ block|}
 block|}
 block|}
 comment|/** Builder that calls {@link ResultSet#getObject(int)} for every column,    * or {@code getXxx} if the result type is a primitive {@code xxx},    * and returns an array of objects for each row. */
-specifier|public
 specifier|static
 class|class
 name|ObjectArrayRowBuilder
@@ -634,7 +634,6 @@ name|int
 index|[]
 name|types
 decl_stmt|;
-specifier|public
 name|ObjectArrayRowBuilder
 parameter_list|(
 name|ResultSet
@@ -1118,7 +1117,6 @@ return|;
 block|}
 block|}
 comment|/** Ensures that if two data sources have the same definition, they will use    * the same object.    *    *<p>This in turn makes it easier to cache    * {@link org.apache.calcite.sql.SqlDialect} objects. Otherwise, each time we    * see a new data source, we have to open a connection to find out what    * database product and version it is. */
-specifier|public
 specifier|static
 class|class
 name|DataSourcePool
@@ -1174,6 +1172,8 @@ specifier|public
 name|BasicDataSource
 name|load
 parameter_list|(
+annotation|@
+name|Nonnull
 name|List
 argument_list|<
 name|String
@@ -1285,7 +1285,7 @@ decl_stmt|;
 return|return
 name|cache
 operator|.
-name|apply
+name|getUnchecked
 argument_list|(
 name|key
 argument_list|)

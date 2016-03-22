@@ -430,7 +430,7 @@ name|AbstractQueryableTable
 implements|implements
 name|TranslatableTable
 block|{
-specifier|protected
+specifier|private
 specifier|final
 name|String
 name|collectionName
@@ -610,7 +610,7 @@ argument_list|)
 return|;
 block|}
 comment|/** Executes a "find" operation on the underlying collection.    *    *<p>For example,    *<code>zipsTable.find("{state: 'OR'}", "{city: 1, zipcode: 1}")</code></p>    *    * @param mongoDb MongoDB connection    * @param filterJson Filter JSON string, or null    * @param projectJson Project JSON string, or null    * @param fields List of fields to project; or null to return map    * @return Enumerator of results    */
-specifier|public
+specifier|private
 name|Enumerable
 argument_list|<
 name|Object
@@ -750,7 +750,7 @@ block|}
 return|;
 block|}
 comment|/** Executes an "aggregate" operation on the underlying collection.    *    *<p>For example:    *<code>zipsTable.aggregate(    * "{$filter: {state: 'OR'}",    * "{$group: {_id: '$city', c: {$sum: 1}, p: {$sum: '$pop'}}}")    *</code></p>    *    * @param mongoDb MongoDB connection    * @param fields List of fields to project; or null to return map    * @param operations One or more JSON strings    * @return Enumerator of results    */
-specifier|public
+specifier|private
 name|Enumerable
 argument_list|<
 name|Object
@@ -1197,7 +1197,6 @@ argument_list|<
 name|T
 argument_list|>
 block|{
-specifier|public
 name|MongoQueryable
 parameter_list|(
 name|QueryProvider

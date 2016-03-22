@@ -10640,9 +10640,12 @@ specifier|final
 name|String
 name|sampleName
 init|=
+operator|(
+name|String
+operator|)
 name|SqlLiteral
 operator|.
-name|stringValue
+name|value
 argument_list|(
 name|call
 operator|.

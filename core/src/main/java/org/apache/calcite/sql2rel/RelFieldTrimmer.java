@@ -2711,12 +2711,10 @@ operator|.
 name|Builder
 name|inputFieldsUsed
 init|=
-name|ImmutableBitSet
-operator|.
-name|builder
-argument_list|(
 name|fieldsUsed
-argument_list|)
+operator|.
+name|rebuild
+argument_list|()
 decl_stmt|;
 for|for
 control|(
@@ -4048,15 +4046,13 @@ operator|.
 name|Builder
 name|inputFieldsUsed
 init|=
-name|ImmutableBitSet
-operator|.
-name|builder
-argument_list|(
 name|aggregate
 operator|.
 name|getGroupSet
 argument_list|()
-argument_list|)
+operator|.
+name|rebuild
+argument_list|()
 decl_stmt|;
 comment|// 2. agg functions
 for|for

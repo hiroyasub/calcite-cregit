@@ -1784,7 +1784,7 @@ name|config
 argument_list|)
 return|;
 block|}
-comment|/** Tests that planner throws an error if you pass to    * {@link Planner#convert(org.apache.calcite.sql.SqlNode)}    * a {@link org.apache.calcite.sql.SqlNode} that has been parsed but not    * validated. */
+comment|/** Tests that planner throws an error if you pass to    * {@link Planner#rel(org.apache.calcite.sql.SqlNode)}    * a {@link org.apache.calcite.sql.SqlNode} that has been parsed but not    * validated. */
 annotation|@
 name|Test
 specifier|public
