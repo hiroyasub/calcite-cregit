@@ -162,7 +162,10 @@ name|RelOptRuleOperandChildPolicy
 name|childPolicy
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**    * Creates an operand.    *    *<p>The {@code childOperands} argument is often populated by calling one    * of the following methods:    * {@link RelOptRule#some},    * {@link RelOptRule#none()},    * {@link RelOptRule#any},    * {@link RelOptRule#unordered},    * See {@link org.apache.calcite.plan.RelOptRuleOperandChildren} for more    * details.</p>    *    * @param clazz    Class of relational expression to match (must not be null)    * @param trait    Trait to match, or null to match any trait    * @param predicate Predicate to apply to relational expression    * @param children Child operands    */
+comment|/**    * Creates an operand.    *    *<p>The {@code childOperands} argument is often populated by calling one    * of the following methods:    * {@link RelOptRule#some},    * {@link RelOptRule#none()},    * {@link RelOptRule#any},    * {@link RelOptRule#unordered},    * See {@link org.apache.calcite.plan.RelOptRuleOperandChildren} for more    * details.    *    * @param clazz    Class of relational expression to match (must not be null)    * @param trait    Trait to match, or null to match any trait    * @param predicate Predicate to apply to relational expression    * @param children Child operands    *    * @deprecated Use    * {@link RelOptRule#operand(Class, RelOptRuleOperandChildren)} or one of its    * overloaded methods.    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0; see [CALCITE-1166]
 specifier|protected
 parameter_list|<
 name|R
@@ -192,6 +195,59 @@ name|RelOptRuleOperandChildren
 name|children
 parameter_list|)
 block|{
+name|this
+argument_list|(
+name|clazz
+argument_list|,
+name|trait
+argument_list|,
+name|predicate
+argument_list|,
+name|children
+operator|.
+name|policy
+argument_list|,
+name|children
+operator|.
+name|operands
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Private constructor.    *    *<p>Do not call from outside package, and do not create a sub-class.    *    *<p>The other constructor is deprecated; when it is removed, make fields    * {@link #parent}, {@link #ordinalInParent} and {@link #solveOrder} final,    * and add constructor parameters for them. See    *<a href="https://issues.apache.org/jira/browse/CALCITE-1166">[CALCITE-1166]    * Disallow sub-classes of RelOptRuleOperand</a>. */
+parameter_list|<
+name|R
+extends|extends
+name|RelNode
+parameter_list|>
+name|RelOptRuleOperand
+parameter_list|(
+name|Class
+argument_list|<
+name|R
+argument_list|>
+name|clazz
+parameter_list|,
+name|RelTrait
+name|trait
+parameter_list|,
+name|Predicate
+argument_list|<
+name|?
+super|super
+name|R
+argument_list|>
+name|predicate
+parameter_list|,
+name|RelOptRuleOperandChildPolicy
+name|childPolicy
+parameter_list|,
+name|ImmutableList
+argument_list|<
+name|RelOptRuleOperand
+argument_list|>
+name|children
+parameter_list|)
+block|{
 assert|assert
 name|clazz
 operator|!=
@@ -199,9 +255,7 @@ literal|null
 assert|;
 switch|switch
 condition|(
-name|children
-operator|.
-name|policy
+name|childPolicy
 condition|)
 block|{
 case|case
@@ -213,8 +267,6 @@ name|LEAF
 case|:
 assert|assert
 name|children
-operator|.
-name|operands
 operator|.
 name|size
 argument_list|()
@@ -228,8 +280,6 @@ case|:
 assert|assert
 name|children
 operator|.
-name|operands
-operator|.
 name|size
 argument_list|()
 operator|==
@@ -239,8 +289,6 @@ break|break;
 default|default:
 assert|assert
 name|children
-operator|.
-name|operands
 operator|.
 name|size
 argument_list|()
@@ -252,9 +300,7 @@ name|this
 operator|.
 name|childPolicy
 operator|=
-name|children
-operator|.
-name|policy
+name|childPolicy
 expr_stmt|;
 name|this
 operator|.
@@ -293,8 +339,6 @@ operator|.
 name|children
 operator|=
 name|children
-operator|.
-name|operands
 expr_stmt|;
 for|for
 control|(

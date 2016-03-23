@@ -29,6 +29,16 @@ name|ImmutableList
 import|;
 end_import
 
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|List
+import|;
+end_import
+
 begin_comment
 comment|/**  * Children of a {@link org.apache.calcite.plan.RelOptRuleOperand} and the  * policy for matching them.  *  *<p>Often created by calling one of the following methods:  * {@link RelOptRule#some},  * {@link RelOptRule#none},  * {@link RelOptRule#any},  * {@link RelOptRule#unordered},</p>  */
 end_comment
@@ -97,7 +107,7 @@ parameter_list|(
 name|RelOptRuleOperandChildPolicy
 name|policy
 parameter_list|,
-name|ImmutableList
+name|List
 argument_list|<
 name|RelOptRuleOperand
 argument_list|>
@@ -114,7 +124,12 @@ name|this
 operator|.
 name|operands
 operator|=
+name|ImmutableList
+operator|.
+name|copyOf
+argument_list|(
 name|operands
+argument_list|)
 expr_stmt|;
 block|}
 block|}
