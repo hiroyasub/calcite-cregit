@@ -429,7 +429,7 @@ operator|.
 name|getOperator
 argument_list|()
 operator|.
-name|validateOperands
+name|deriveType
 argument_list|(
 name|validator
 argument_list|,
