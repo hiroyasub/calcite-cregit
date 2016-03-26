@@ -19,6 +19,22 @@ end_package
 
 begin_import
 import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|avatica
+operator|.
+name|remote
+operator|.
+name|AuthenticationType
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -51,6 +67,22 @@ function_decl|;
 comment|/**    * Returns the Kerberos principal that the Avatica server should log in as.    *    * @return A Kerberos principal, or null if not applicable.    */
 name|String
 name|getKerberosPrincipal
+parameter_list|()
+function_decl|;
+comment|/**    * Returns the array of allowed roles for login. Only applicable when    * {@link #getAuthenticationType()} returns {@link AuthenticationType#BASIC} or    * {@link AuthenticationType#DIGEST}.    *    * @return An array of allowed login roles, or null.    */
+name|String
+index|[]
+name|getAllowedRoles
+parameter_list|()
+function_decl|;
+comment|/**    * Returns the name of the realm to use in coordination with the properties files specified    * by {@link #getHashLoginServiceProperties()}. Only applicable when    * {@link #getAuthenticationType()} returns {@link AuthenticationType#BASIC} or    * {@link AuthenticationType#DIGEST}.    *    * @return A realm for the HashLoginService, or null.    */
+name|String
+name|getHashLoginServiceRealm
+parameter_list|()
+function_decl|;
+comment|/**    * Returns the path to a properties file that contains users and realms. Only applicable when    * {@link #getAuthenticationType()} returns {@link AuthenticationType#BASIC} or    * {@link AuthenticationType#DIGEST}.    *    * @return A realm for the HashLoginService, or null.    */
+name|String
+name|getHashLoginServiceProperties
 parameter_list|()
 function_decl|;
 comment|/**    * Returns true if the Avatica server should run user requests at that remote user. Otherwise,    * all requests are run as the Avatica server user (which is the default).    *    * @return True if impersonation is enabled, false otherwise.    */

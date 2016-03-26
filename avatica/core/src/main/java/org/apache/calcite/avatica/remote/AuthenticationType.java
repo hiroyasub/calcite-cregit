@@ -13,12 +13,12 @@ name|calcite
 operator|.
 name|avatica
 operator|.
-name|server
+name|remote
 package|;
 end_package
 
 begin_comment
-comment|/**  * An enumeration for support types of authentication for the {@link HttpServer}.  */
+comment|/**  * An enumeration for support types of authentication for the HttpServer.  */
 end_comment
 
 begin_enum
@@ -27,6 +27,10 @@ enum|enum
 name|AuthenticationType
 block|{
 name|NONE
+block|,
+name|BASIC
+block|,
+name|DIGEST
 block|,
 name|SPNEGO
 block|; }

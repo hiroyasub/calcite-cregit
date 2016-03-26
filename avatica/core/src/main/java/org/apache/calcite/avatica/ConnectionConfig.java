@@ -88,6 +88,16 @@ name|String
 name|authentication
 parameter_list|()
 function_decl|;
+comment|/** @see BuiltInConnectionProperty#AVATICA_USER */
+name|String
+name|avaticaUser
+parameter_list|()
+function_decl|;
+comment|/** @see BuiltInConnectionProperty#AVATICA_PASSWORD */
+name|String
+name|avaticaPassword
+parameter_list|()
+function_decl|;
 name|AvaticaHttpClientFactory
 name|httpClientFactory
 parameter_list|()
