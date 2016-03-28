@@ -77,6 +77,9 @@ block|,
 comment|/**    * EXPLAIN statement    */
 name|EXPLAIN
 block|,
+comment|/**    * DESCRIBE statement    */
+name|DESCRIBE
+block|,
 comment|/**    * INSERT statement    */
 name|INSERT
 block|,

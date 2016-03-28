@@ -5877,6 +5877,57 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testDescribeSchema
+parameter_list|()
+block|{
+name|check
+argument_list|(
+literal|"describe schema A"
+argument_list|,
+literal|"DESCRIBE SCHEMA `A`"
+argument_list|)
+expr_stmt|;
+name|check
+argument_list|(
+literal|"describe database A"
+argument_list|,
+literal|"DESCRIBE SCHEMA `A`"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testDescribeTable
+parameter_list|()
+block|{
+name|check
+argument_list|(
+literal|"describe emps"
+argument_list|,
+literal|"DESCRIBE `EMPS`"
+argument_list|)
+expr_stmt|;
+name|check
+argument_list|(
+literal|"describe emps col1"
+argument_list|,
+literal|"DESCRIBE `EMPS` `COL1`"
+argument_list|)
+expr_stmt|;
+name|check
+argument_list|(
+literal|"describe emps 'col_'"
+argument_list|,
+literal|"DESCRIBE `EMPS` 'col_'"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testInsertSelect
 parameter_list|()
 block|{
