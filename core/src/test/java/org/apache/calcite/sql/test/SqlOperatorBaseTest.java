@@ -874,6 +874,24 @@ literal|null
 else|:
 literal|"(?s).*"
 decl_stmt|;
+comment|// Error messages when an invalid time unit is given as
+comment|// input to extract for a particular input type.
+specifier|public
+specifier|static
+specifier|final
+name|String
+name|INVALID_EXTRACT_UNIT_CONVERTLET_ERROR
+init|=
+literal|"Extract.*from.*type data is not supported"
+decl_stmt|;
+specifier|public
+specifier|static
+specifier|final
+name|String
+name|INVALID_EXTRACT_UNIT_VALIDATION_ERROR
+init|=
+literal|"Cannot apply 'EXTRACT' to arguments of type .*'\n.*"
+decl_stmt|;
 specifier|public
 specifier|static
 specifier|final
@@ -18210,6 +18228,755 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testExtractIntervalYearMonth
+parameter_list|()
+block|{
+name|tester
+operator|.
+name|setFor
+argument_list|(
+name|SqlStdOperatorTable
+operator|.
+name|EXTRACT
+argument_list|,
+name|VM_FENNEL
+argument_list|,
+name|VM_JAVA
+argument_list|)
+expr_stmt|;
+if|if
+condition|(
+name|TODO
+condition|)
+block|{
+comment|// Not supported, fails in type validation because the extract
+comment|// unit is not YearMonth interval type.
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"extract(epoch from interval '4-2' year to month)"
+argument_list|,
+comment|// number of seconds elapsed since timestamp
+comment|// '1970-01-01 00:00:00' + input interval
+literal|"131328000"
+argument_list|,
+literal|"BIGINT NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"extract(second from interval '4-2' year to month)"
+argument_list|,
+literal|"0"
+argument_list|,
+literal|"BIGINT NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"extract(minute from interval '4-2' year to month)"
+argument_list|,
+literal|"0"
+argument_list|,
+literal|"BIGINT NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"extract(hour from interval '4-2' year to month)"
+argument_list|,
+literal|"0"
+argument_list|,
+literal|"BIGINT NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"extract(day from interval '4-2' year to month)"
+argument_list|,
+literal|"0"
+argument_list|,
+literal|"BIGINT NOT NULL"
+argument_list|)
+expr_stmt|;
+block|}
+comment|// Postgres doesn't support DOW, DOY and WEEK on INTERVAL YEAR MONTH type.
+comment|// SQL standard doesn't have extract units for DOW, DOY and WEEK.
+name|tester
+operator|.
+name|checkFails
+argument_list|(
+literal|"^extract(doy from interval '4-2' year to month)^"
+argument_list|,
+name|INVALID_EXTRACT_UNIT_VALIDATION_ERROR
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkFails
+argument_list|(
+literal|"^extract(dow from interval '4-2' year to month)^"
+argument_list|,
+name|INVALID_EXTRACT_UNIT_VALIDATION_ERROR
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkFails
+argument_list|(
+literal|"^extract(week from interval '4-2' year to month)^"
+argument_list|,
+name|INVALID_EXTRACT_UNIT_VALIDATION_ERROR
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"extract(month from interval '4-2' year to month)"
+argument_list|,
+literal|"2"
+argument_list|,
+literal|"BIGINT NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"extract(quarter from interval '4-2' year to month)"
+argument_list|,
+literal|"1"
+argument_list|,
+literal|"BIGINT NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"extract(year from interval '4-2' year to month)"
+argument_list|,
+literal|"4"
+argument_list|,
+literal|"BIGINT NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"extract(decade from interval '426-3' year(3) to month)"
+argument_list|,
+literal|"42"
+argument_list|,
+literal|"BIGINT NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"extract(century from interval '426-3' year(3) to month)"
+argument_list|,
+literal|"4"
+argument_list|,
+literal|"BIGINT NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"extract(millennium from interval '2005-3' year(4) to month)"
+argument_list|,
+literal|"2"
+argument_list|,
+literal|"BIGINT NOT NULL"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testExtractIntervalDayTime
+parameter_list|()
+block|{
+name|tester
+operator|.
+name|setFor
+argument_list|(
+name|SqlStdOperatorTable
+operator|.
+name|EXTRACT
+argument_list|,
+name|VM_FENNEL
+argument_list|,
+name|VM_JAVA
+argument_list|)
+expr_stmt|;
+if|if
+condition|(
+name|TODO
+condition|)
+block|{
+comment|// Not implemented in operator test
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"extract(epoch from interval '2 3:4:5.678' day to second)"
+argument_list|,
+comment|// number of seconds elapsed since timestamp
+comment|// '1970-01-01 00:00:00' + input interval
+literal|"183845.678"
+argument_list|,
+literal|"BIGINT NOT NULL"
+argument_list|)
+expr_stmt|;
+block|}
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"extract(second from interval '2 3:4:5.678' day to second)"
+argument_list|,
+literal|"5"
+argument_list|,
+literal|"BIGINT NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"extract(minute from interval '2 3:4:5.678' day to second)"
+argument_list|,
+literal|"4"
+argument_list|,
+literal|"BIGINT NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"extract(hour from interval '2 3:4:5.678' day to second)"
+argument_list|,
+literal|"3"
+argument_list|,
+literal|"BIGINT NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"extract(day from interval '2 3:4:5.678' day to second)"
+argument_list|,
+literal|"2"
+argument_list|,
+literal|"BIGINT NOT NULL"
+argument_list|)
+expr_stmt|;
+comment|// Postgres doesn't support DOW, DOY and WEEK on INTERVAL DAY TIME type.
+comment|// SQL standard doesn't have extract units for DOW, DOY and WEEK.
+name|tester
+operator|.
+name|checkFails
+argument_list|(
+literal|"extract(doy from interval '2 3:4:5.678' day to second)"
+argument_list|,
+name|INVALID_EXTRACT_UNIT_CONVERTLET_ERROR
+argument_list|,
+literal|true
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkFails
+argument_list|(
+literal|"extract(dow from interval '2 3:4:5.678' day to second)"
+argument_list|,
+name|INVALID_EXTRACT_UNIT_CONVERTLET_ERROR
+argument_list|,
+literal|true
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkFails
+argument_list|(
+literal|"extract(week from interval '2 3:4:5.678' day to second)"
+argument_list|,
+name|INVALID_EXTRACT_UNIT_CONVERTLET_ERROR
+argument_list|,
+literal|true
+argument_list|)
+expr_stmt|;
+if|if
+condition|(
+name|TODO
+condition|)
+block|{
+comment|// Not supported, fails in type validation because
+comment|// the extract unit is YearMonth interval type unit.
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"extract(month from interval '2 3:4:5.678' day to second)"
+argument_list|,
+literal|"0"
+argument_list|,
+literal|"BIGINT NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"extract(quarter from interval '2 3:4:5.678' day to second)"
+argument_list|,
+literal|"0"
+argument_list|,
+literal|"BIGINT NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"extract(year from interval '2 3:4:5.678' day to second)"
+argument_list|,
+literal|"0"
+argument_list|,
+literal|"BIGINT NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"extract(decade from interval '2 3:4:5.678' day to second)"
+argument_list|,
+literal|"0"
+argument_list|,
+literal|"BIGINT NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"extract(century from interval '2 3:4:5.678' day to second)"
+argument_list|,
+literal|"0"
+argument_list|,
+literal|"BIGINT NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"extract(millennium from interval '2 3:4:5.678' day to second)"
+argument_list|,
+literal|"0"
+argument_list|,
+literal|"BIGINT NOT NULL"
+argument_list|)
+expr_stmt|;
+block|}
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testExtractDate
+parameter_list|()
+block|{
+name|tester
+operator|.
+name|setFor
+argument_list|(
+name|SqlStdOperatorTable
+operator|.
+name|EXTRACT
+argument_list|,
+name|VM_FENNEL
+argument_list|,
+name|VM_JAVA
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"extract(epoch from date '2008-2-23')"
+argument_list|,
+literal|"1203724800"
+argument_list|,
+comment|// number of seconds elapsed since timestamp
+comment|// '1970-01-01 00:00:00' for given date
+literal|"BIGINT NOT NULL"
+argument_list|)
+expr_stmt|;
+if|if
+condition|(
+name|TODO
+condition|)
+block|{
+comment|// Looks like there is a bug in current execution code which returns 13
+comment|// instead of 0
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"extract(second from date '2008-2-23')"
+argument_list|,
+literal|"0"
+argument_list|,
+literal|"BIGINT NOT NULL"
+argument_list|)
+expr_stmt|;
+block|}
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"extract(minute from date '2008-2-23')"
+argument_list|,
+literal|"0"
+argument_list|,
+literal|"BIGINT NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"extract(hour from date '2008-2-23')"
+argument_list|,
+literal|"0"
+argument_list|,
+literal|"BIGINT NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"extract(day from date '2008-2-23')"
+argument_list|,
+literal|"23"
+argument_list|,
+literal|"BIGINT NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"extract(month from date '2008-2-23')"
+argument_list|,
+literal|"2"
+argument_list|,
+literal|"BIGINT NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"extract(quarter from date '2008-4-23')"
+argument_list|,
+literal|"2"
+argument_list|,
+literal|"BIGINT NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"extract(year from date '2008-2-23')"
+argument_list|,
+literal|"2008"
+argument_list|,
+literal|"BIGINT NOT NULL"
+argument_list|)
+expr_stmt|;
+comment|// TODO: Not implemented in operator test execution code
+name|tester
+operator|.
+name|checkFails
+argument_list|(
+literal|"extract(doy from date '2008-2-23')"
+argument_list|,
+literal|"cannot translate call EXTRACT.*"
+argument_list|,
+literal|true
+argument_list|)
+expr_stmt|;
+comment|// TODO: Not implemented in operator test execution code
+name|tester
+operator|.
+name|checkFails
+argument_list|(
+literal|"extract(dow from date '2008-2-23')"
+argument_list|,
+literal|"cannot translate call EXTRACT.*"
+argument_list|,
+literal|true
+argument_list|)
+expr_stmt|;
+comment|// TODO: Not implemented in operator test execution code
+name|tester
+operator|.
+name|checkFails
+argument_list|(
+literal|"extract(week from date '2008-2-23')"
+argument_list|,
+literal|"cannot translate call EXTRACT.*"
+argument_list|,
+literal|true
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"extract(decade from date '2008-2-23')"
+argument_list|,
+literal|"200"
+argument_list|,
+literal|"BIGINT NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"extract(century from date '2008-2-23')"
+argument_list|,
+literal|"20"
+argument_list|,
+literal|"BIGINT NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"extract(millennium from date '2008-2-23')"
+argument_list|,
+literal|"2"
+argument_list|,
+literal|"BIGINT NOT NULL"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testExtractTimestamp
+parameter_list|()
+block|{
+name|tester
+operator|.
+name|setFor
+argument_list|(
+name|SqlStdOperatorTable
+operator|.
+name|EXTRACT
+argument_list|,
+name|VM_FENNEL
+argument_list|,
+name|VM_JAVA
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"extract(epoch from timestamp '2008-2-23 12:34:56')"
+argument_list|,
+literal|"1203770096"
+argument_list|,
+comment|// number of seconds elapsed since timestamp
+comment|// '1970-01-01 00:00:00' for given date
+literal|"BIGINT NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"extract(second from timestamp '2008-2-23 12:34:56')"
+argument_list|,
+literal|"56"
+argument_list|,
+literal|"BIGINT NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"extract(minute from timestamp '2008-2-23 12:34:56')"
+argument_list|,
+literal|"34"
+argument_list|,
+literal|"BIGINT NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"extract(hour from timestamp '2008-2-23 12:34:56')"
+argument_list|,
+literal|"12"
+argument_list|,
+literal|"BIGINT NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"extract(day from timestamp '2008-2-23 12:34:56')"
+argument_list|,
+literal|"23"
+argument_list|,
+literal|"BIGINT NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"extract(month from timestamp '2008-2-23 12:34:56')"
+argument_list|,
+literal|"2"
+argument_list|,
+literal|"BIGINT NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"extract(quarter from timestamp '2008-7-23 12:34:56')"
+argument_list|,
+literal|"3"
+argument_list|,
+literal|"BIGINT NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"extract(year from timestamp '2008-2-23 12:34:56')"
+argument_list|,
+literal|"2008"
+argument_list|,
+literal|"BIGINT NOT NULL"
+argument_list|)
+expr_stmt|;
+comment|// TODO: Not implemented in operator test execution code
+name|tester
+operator|.
+name|checkFails
+argument_list|(
+literal|"extract(doy from timestamp '2008-2-23 12:34:56')"
+argument_list|,
+literal|"cannot translate call EXTRACT.*"
+argument_list|,
+literal|true
+argument_list|)
+expr_stmt|;
+comment|// TODO: Not implemented in operator test execution code
+name|tester
+operator|.
+name|checkFails
+argument_list|(
+literal|"extract(dow from timestamp '2008-2-23 12:34:56')"
+argument_list|,
+literal|"cannot translate call EXTRACT.*"
+argument_list|,
+literal|true
+argument_list|)
+expr_stmt|;
+comment|// TODO: Not implemented in operator test execution code
+name|tester
+operator|.
+name|checkFails
+argument_list|(
+literal|"extract(week from timestamp '2008-2-23 12:34:56')"
+argument_list|,
+literal|"cannot translate call EXTRACT.*"
+argument_list|,
+literal|true
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"extract(decade from timestamp '2008-2-23 12:34:56')"
+argument_list|,
+literal|"200"
+argument_list|,
+literal|"BIGINT NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"extract(century from timestamp '2008-2-23 12:34:56')"
+argument_list|,
+literal|"20"
+argument_list|,
+literal|"BIGINT NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"extract(millennium from timestamp '2008-2-23 12:34:56')"
+argument_list|,
+literal|"2"
+argument_list|,
+literal|"BIGINT NOT NULL"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testExtractFunc
 parameter_list|()
 block|{
@@ -19262,6 +20029,94 @@ argument_list|(
 literal|"floor(interval '-5-1' year to month)"
 argument_list|,
 literal|"-6-00"
+argument_list|,
+literal|"INTERVAL YEAR TO MONTH NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"floor(interval '-6.3' second to second)"
+argument_list|,
+literal|"-7.000000"
+argument_list|,
+literal|"INTERVAL SECOND NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"floor(interval '6-3' minute to second to minute)"
+argument_list|,
+literal|"-7-0"
+argument_list|,
+literal|"INTERVAL MINUTE TO SECOND NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"floor(interval '6-3' hour to minute to hour)"
+argument_list|,
+literal|"7-0"
+argument_list|,
+literal|"INTERVAL HOUR TO MINUTE NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"floor(interval '6 3' day to hour to day)"
+argument_list|,
+literal|"7 00"
+argument_list|,
+literal|"INTERVAL DAY TO HOUR NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"floor(interval '102-7' year to month to month)"
+argument_list|,
+literal|"102-07"
+argument_list|,
+literal|"INTERVAL YEAR TO MONTH NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"floor(interval '102-7' year to month to quarter)"
+argument_list|,
+literal|"102-10"
+argument_list|,
+literal|"INTERVAL YEAR TO MONTH NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"floor(interval '102-1' year to month to century)"
+argument_list|,
+literal|"201"
+argument_list|,
+literal|"INTERVAL YEAR TO MONTH NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"floor(interval '1004-1' year to month to millennium)"
+argument_list|,
+literal|"2001-00"
 argument_list|,
 literal|"INTERVAL YEAR TO MONTH NOT NULL"
 argument_list|)

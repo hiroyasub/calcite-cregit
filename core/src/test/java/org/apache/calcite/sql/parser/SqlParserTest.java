@@ -5438,9 +5438,255 @@ argument_list|)
 expr_stmt|;
 name|checkExp
 argument_list|(
+literal|"floor(x to second)"
+argument_list|,
+literal|"FLOOR(`X` TO SECOND)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"floor(x to epoch)"
+argument_list|,
+literal|"FLOOR(`X` TO EPOCH)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"floor(x to minute)"
+argument_list|,
+literal|"FLOOR(`X` TO MINUTE)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
 literal|"floor(x to hour)"
 argument_list|,
 literal|"FLOOR(`X` TO HOUR)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"floor(x to day)"
+argument_list|,
+literal|"FLOOR(`X` TO DAY)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"floor(x to dow)"
+argument_list|,
+literal|"FLOOR(`X` TO DOW)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"floor(x to doy)"
+argument_list|,
+literal|"FLOOR(`X` TO DOY)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"floor(x to week)"
+argument_list|,
+literal|"FLOOR(`X` TO WEEK)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"floor(x to month)"
+argument_list|,
+literal|"FLOOR(`X` TO MONTH)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"floor(x to quarter)"
+argument_list|,
+literal|"FLOOR(`X` TO QUARTER)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"floor(x to year)"
+argument_list|,
+literal|"FLOOR(`X` TO YEAR)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"floor(x to decade)"
+argument_list|,
+literal|"FLOOR(`X` TO DECADE)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"floor(x to century)"
+argument_list|,
+literal|"FLOOR(`X` TO CENTURY)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"floor(x to millennium)"
+argument_list|,
+literal|"FLOOR(`X` TO MILLENNIUM)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"floor(x + interval '1:20' minute to second)"
+argument_list|,
+literal|"FLOOR((`X` + INTERVAL '1:20' MINUTE TO SECOND))"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"floor(x + interval '1:20' minute to second to second)"
+argument_list|,
+literal|"FLOOR((`X` + INTERVAL '1:20' MINUTE TO SECOND) TO SECOND)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"floor(x + interval '1:20' minute to second to epoch)"
+argument_list|,
+literal|"FLOOR((`X` + INTERVAL '1:20' MINUTE TO SECOND) TO EPOCH)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"floor(x + interval '1:20' hour to minute)"
+argument_list|,
+literal|"FLOOR((`X` + INTERVAL '1:20' HOUR TO MINUTE))"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"floor(x + interval '1:20' hour to minute to minute)"
+argument_list|,
+literal|"FLOOR((`X` + INTERVAL '1:20' HOUR TO MINUTE) TO MINUTE)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"floor(x + interval '1:20' minute to second to hour)"
+argument_list|,
+literal|"FLOOR((`X` + INTERVAL '1:20' MINUTE TO SECOND) TO HOUR)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"floor(x + interval '1:20' minute to second to day)"
+argument_list|,
+literal|"FLOOR((`X` + INTERVAL '1:20' MINUTE TO SECOND) TO DAY)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"floor(x + interval '1:20' minute to second to dow)"
+argument_list|,
+literal|"FLOOR((`X` + INTERVAL '1:20' MINUTE TO SECOND) TO DOW)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"floor(x + interval '1:20' minute to second to doy)"
+argument_list|,
+literal|"FLOOR((`X` + INTERVAL '1:20' MINUTE TO SECOND) TO DOY)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"floor(x + interval '1:20' minute to second to week)"
+argument_list|,
+literal|"FLOOR((`X` + INTERVAL '1:20' MINUTE TO SECOND) TO WEEK)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"floor(x + interval '1:20' minute to second to month)"
+argument_list|,
+literal|"FLOOR((`X` + INTERVAL '1:20' MINUTE TO SECOND) TO MONTH)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"floor(x + interval '1:20' minute to second to quarter)"
+argument_list|,
+literal|"FLOOR((`X` + INTERVAL '1:20' MINUTE TO SECOND) TO QUARTER)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"floor(x + interval '1:20' minute to second to year)"
+argument_list|,
+literal|"FLOOR((`X` + INTERVAL '1:20' MINUTE TO SECOND) TO YEAR)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"floor(x + interval '1:20' minute to second to decade)"
+argument_list|,
+literal|"FLOOR((`X` + INTERVAL '1:20' MINUTE TO SECOND) TO DECADE)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"floor(x + interval '1:20' minute to second to century)"
+argument_list|,
+literal|"FLOOR((`X` + INTERVAL '1:20' MINUTE TO SECOND) TO CENTURY)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"floor(x + interval '1:20' minute to second to millennium)"
+argument_list|,
+literal|"FLOOR((`X` + INTERVAL '1:20' MINUTE TO SECOND) TO MILLENNIUM)"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testCeil
+parameter_list|()
+block|{
+name|checkExp
+argument_list|(
+literal|"ceil(3453.2)"
+argument_list|,
+literal|"CEIL(3453.2)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"ceil(x)"
+argument_list|,
+literal|"CEIL(`X`)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"ceil(x to second)"
+argument_list|,
+literal|"CEIL(`X` TO SECOND)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"ceil(x to epoch)"
+argument_list|,
+literal|"CEIL(`X` TO EPOCH)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"ceil(x to minute)"
+argument_list|,
+literal|"CEIL(`X` TO MINUTE)"
 argument_list|)
 expr_stmt|;
 name|checkExp
@@ -5452,30 +5698,184 @@ argument_list|)
 expr_stmt|;
 name|checkExp
 argument_list|(
-literal|"ceil(x + interval '1' minute to second)"
+literal|"ceil(x to day)"
 argument_list|,
-literal|"CEIL((`X` + INTERVAL '1' MINUTE TO SECOND))"
+literal|"CEIL(`X` TO DAY)"
 argument_list|)
 expr_stmt|;
 name|checkExp
 argument_list|(
-literal|"ceil((x + interval '1' minute) to second)"
+literal|"ceil(x to dow)"
 argument_list|,
-literal|"CEIL((`X` + INTERVAL '1' MINUTE) TO SECOND)"
+literal|"CEIL(`X` TO DOW)"
 argument_list|)
 expr_stmt|;
 name|checkExp
 argument_list|(
-literal|"ceil(x + (interval '1:23' minute to second))"
+literal|"ceil(x to doy)"
 argument_list|,
-literal|"CEIL((`X` + INTERVAL '1:23' MINUTE TO SECOND))"
+literal|"CEIL(`X` TO DOY)"
 argument_list|)
 expr_stmt|;
 name|checkExp
 argument_list|(
-literal|"ceil(x + interval '1:23' minute to second to second)"
+literal|"ceil(x to week)"
 argument_list|,
-literal|"CEIL((`X` + INTERVAL '1:23' MINUTE TO SECOND) TO SECOND)"
+literal|"CEIL(`X` TO WEEK)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"ceil(x to month)"
+argument_list|,
+literal|"CEIL(`X` TO MONTH)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"ceil(x to quarter)"
+argument_list|,
+literal|"CEIL(`X` TO QUARTER)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"ceil(x to year)"
+argument_list|,
+literal|"CEIL(`X` TO YEAR)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"ceil(x to decade)"
+argument_list|,
+literal|"CEIL(`X` TO DECADE)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"ceil(x to century)"
+argument_list|,
+literal|"CEIL(`X` TO CENTURY)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"ceil(x to millennium)"
+argument_list|,
+literal|"CEIL(`X` TO MILLENNIUM)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"ceil(x + interval '1:20' minute to second)"
+argument_list|,
+literal|"CEIL((`X` + INTERVAL '1:20' MINUTE TO SECOND))"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"ceil(x + interval '1:20' minute to second to second)"
+argument_list|,
+literal|"CEIL((`X` + INTERVAL '1:20' MINUTE TO SECOND) TO SECOND)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"ceil(x + interval '1:20' minute to second to epoch)"
+argument_list|,
+literal|"CEIL((`X` + INTERVAL '1:20' MINUTE TO SECOND) TO EPOCH)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"ceil(x + interval '1:20' hour to minute)"
+argument_list|,
+literal|"CEIL((`X` + INTERVAL '1:20' HOUR TO MINUTE))"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"ceil(x + interval '1:20' hour to minute to minute)"
+argument_list|,
+literal|"CEIL((`X` + INTERVAL '1:20' HOUR TO MINUTE) TO MINUTE)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"ceil(x + interval '1:20' minute to second to hour)"
+argument_list|,
+literal|"CEIL((`X` + INTERVAL '1:20' MINUTE TO SECOND) TO HOUR)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"ceil(x + interval '1:20' minute to second to day)"
+argument_list|,
+literal|"CEIL((`X` + INTERVAL '1:20' MINUTE TO SECOND) TO DAY)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"ceil(x + interval '1:20' minute to second to dow)"
+argument_list|,
+literal|"CEIL((`X` + INTERVAL '1:20' MINUTE TO SECOND) TO DOW)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"ceil(x + interval '1:20' minute to second to doy)"
+argument_list|,
+literal|"CEIL((`X` + INTERVAL '1:20' MINUTE TO SECOND) TO DOY)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"ceil(x + interval '1:20' minute to second to week)"
+argument_list|,
+literal|"CEIL((`X` + INTERVAL '1:20' MINUTE TO SECOND) TO WEEK)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"ceil(x + interval '1:20' minute to second to month)"
+argument_list|,
+literal|"CEIL((`X` + INTERVAL '1:20' MINUTE TO SECOND) TO MONTH)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"ceil(x + interval '1:20' minute to second to quarter)"
+argument_list|,
+literal|"CEIL((`X` + INTERVAL '1:20' MINUTE TO SECOND) TO QUARTER)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"ceil(x + interval '1:20' minute to second to year)"
+argument_list|,
+literal|"CEIL((`X` + INTERVAL '1:20' MINUTE TO SECOND) TO YEAR)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"ceil(x + interval '1:20' minute to second to decade)"
+argument_list|,
+literal|"CEIL((`X` + INTERVAL '1:20' MINUTE TO SECOND) TO DECADE)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"ceil(x + interval '1:20' minute to second to century)"
+argument_list|,
+literal|"CEIL((`X` + INTERVAL '1:20' MINUTE TO SECOND) TO CENTURY)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"ceil(x + interval '1:20' minute to second to millennium)"
+argument_list|,
+literal|"CEIL((`X` + INTERVAL '1:20' MINUTE TO SECOND) TO MILLENNIUM)"
 argument_list|)
 expr_stmt|;
 block|}
@@ -17582,6 +17982,42 @@ argument_list|,
 name|ANY
 argument_list|)
 expr_stmt|;
+comment|// Invalid units
+name|checkExpFails
+argument_list|(
+literal|"INTERVAL '2' ^MILLENNIUM^"
+argument_list|,
+name|ANY
+argument_list|)
+expr_stmt|;
+name|checkExpFails
+argument_list|(
+literal|"INTERVAL '1-2' ^MILLENNIUM^ TO CENTURY"
+argument_list|,
+name|ANY
+argument_list|)
+expr_stmt|;
+name|checkExpFails
+argument_list|(
+literal|"INTERVAL '10' ^CENTURY^"
+argument_list|,
+name|ANY
+argument_list|)
+expr_stmt|;
+name|checkExpFails
+argument_list|(
+literal|"INTERVAL '10' ^DECADE^"
+argument_list|,
+name|ANY
+argument_list|)
+expr_stmt|;
+name|checkExpFails
+argument_list|(
+literal|"INTERVAL '4' ^QUARTER^"
+argument_list|,
+name|ANY
+argument_list|)
+expr_stmt|;
 block|}
 annotation|@
 name|Test
@@ -17774,6 +18210,62 @@ argument_list|(
 literal|"extract(second from x)"
 argument_list|,
 literal|"EXTRACT(SECOND FROM `X`)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"extract(dow from x)"
+argument_list|,
+literal|"EXTRACT(DOW FROM `X`)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"extract(doy from x)"
+argument_list|,
+literal|"EXTRACT(DOY FROM `X`)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"extract(week from x)"
+argument_list|,
+literal|"EXTRACT(WEEK FROM `X`)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"extract(epoch from x)"
+argument_list|,
+literal|"EXTRACT(EPOCH FROM `X`)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"extract(quarter from x)"
+argument_list|,
+literal|"EXTRACT(QUARTER FROM `X`)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"extract(decade from x)"
+argument_list|,
+literal|"EXTRACT(DECADE FROM `X`)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"extract(century from x)"
+argument_list|,
+literal|"EXTRACT(CENTURY FROM `X`)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"extract(millennium from x)"
+argument_list|,
+literal|"EXTRACT(MILLENNIUM FROM `X`)"
 argument_list|)
 expr_stmt|;
 name|checkExpFails
