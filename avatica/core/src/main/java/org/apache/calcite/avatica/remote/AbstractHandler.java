@@ -347,39 +347,19 @@ name|T
 name|serializedRequest
 parameter_list|)
 block|{
+try|try
+block|{
 specifier|final
 name|Service
 operator|.
 name|Request
 name|request
-decl_stmt|;
-try|try
-block|{
-name|request
-operator|=
+init|=
 name|decode
 argument_list|(
 name|serializedRequest
 argument_list|)
-expr_stmt|;
-block|}
-catch|catch
-parameter_list|(
-name|IOException
-name|e
-parameter_list|)
-block|{
-comment|// TODO provide a canned ErrorResponse.
-throw|throw
-operator|new
-name|RuntimeException
-argument_list|(
-name|e
-argument_list|)
-throw|;
-block|}
-try|try
-block|{
+decl_stmt|;
 specifier|final
 name|Service
 operator|.
@@ -408,6 +388,26 @@ argument_list|)
 return|;
 block|}
 catch|catch
+parameter_list|(
+name|Exception
+name|e
+parameter_list|)
+block|{
+return|return
+name|convertToErrorResponse
+argument_list|(
+name|e
+argument_list|)
+return|;
+block|}
+block|}
+comment|/**    * Attempts to convert an Exception to an ErrorResponse. If there is an issue in serialization,    * a RuntimeException is thrown instead (wrapping the original exception if necessary).    *    * @param e The exception to convert.    * @return A HandlerResponse instance.    */
+specifier|private
+name|HandlerResponse
+argument_list|<
+name|T
+argument_list|>
+name|convertToErrorResponse
 parameter_list|(
 name|Exception
 name|e
@@ -444,7 +444,7 @@ name|e1
 parameter_list|)
 block|{
 comment|// TODO provide a canned ErrorResponse
-comment|// If we can't serialize error message to JSON, can't give a meaningful error to caller.
+comment|// If we can't serialize the error message, we can't give a meaningful error to caller.
 comment|// Just try to not unnecessarily create more exceptions.
 if|if
 condition|(
@@ -467,7 +467,6 @@ argument_list|(
 name|e
 argument_list|)
 throw|;
-block|}
 block|}
 block|}
 comment|/**    * Constructs a message for the summary of an Exception.    *    * @param e The Exception to summarize.    * @return A summary message for the Exception.    */
