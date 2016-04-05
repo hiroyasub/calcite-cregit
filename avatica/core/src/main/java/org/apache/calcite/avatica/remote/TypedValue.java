@@ -219,6 +219,20 @@ name|Objects
 import|;
 end_import
 
+begin_import
+import|import static
+name|java
+operator|.
+name|nio
+operator|.
+name|charset
+operator|.
+name|StandardCharsets
+operator|.
+name|UTF_8
+import|;
+end_import
+
 begin_comment
 comment|/** Value and type.  *  *<p>There are 3 representations:  *<ul>  *<li>JDBC - the representation used by JDBC get and set methods  *<li>Serial - suitable for serializing using JSON  *<li>Local - used by Calcite for efficient computation  *</ul>  *  *<p>The following table shows the Java type(s) that may represent each SQL  * type in each representation.  *  *<table>  *<caption>SQL types and their representations</caption>  *<tr>  *<th>Type</th><th>JDBC</th><th>Serial</th><th>Local</th>  *</tr>  *<tr>  *<td>BOOLEAN</td><td>boolean</td><td>boolean</td><td>boolean</td>  *</tr>  *<tr>  *<td>BINARY, VARBINARY</td><td>byte[]</td>  *<td>String (base64)</td><td>{@link ByteString}</td>  *</tr>  *<tr>  *<td>DATE</td><td>{@link java.sql.Date}</td>  *<td>int</td><td>int</td>  *</tr>  *<tr>  *<td>TIME</td><td>{@link java.sql.Time}</td>  *<td>int</td><td>int</td>  *</tr>  *<tr>  *<td>DATE</td><td>{@link java.sql.Timestamp}</td>  *<td>long</td><td>long</td>  *</tr>  *<tr>  *<td>CHAR, VARCHAR</td>  *<td>String</td><td>String</td><td>String</td>  *</tr>  *<tr>  *<td>TINYINT</td><td>byte</td><td>Number</td><td>byte</td>  *</tr>  *<tr>  *<td>SMALLINT</td><td>short</td><td>Number</td><td>short</td>  *</tr>  *<tr>  *<td>INTEGER</td><td>int</td><td>Number</td><td>int</td>  *</tr>  *<tr>  *<td>BIGINT</td><td>long</td><td>Number</td><td>long</td>  *</tr>  *<tr>  *<td>REAL</td><td>float</td><td>Number</td><td>float</td>  *</tr>  *<tr>  *<td>FLOAT, DOUBLE</td>  *<td>double</td><td>Number</td><td>double</td>  *</tr>  *<tr>  *<td>DECIMAL</td>  *<td>BigDecimal</td><td>Number</td><td>BigDecimal</td>  *</tr>  *</table>  *  * Note:  *<ul>  *<li>The various numeric types (TINYINT, SMALLINT, INTEGER, BIGINT, REAL,  *   FLOAT, DOUBLE) are represented by {@link Number} in serial format because  *   JSON numbers are not strongly typed. A {@code float} value {@code 3.0} is  *   transmitted as {@code 3}, and is therefore decoded as an {@code int}.  *  *<li>The date-time types (DATE, TIME, TIMESTAMP) are represented in JDBC as  *   {@link java.sql.Date}, {@link java.sql.Time}, {@link java.sql.Timestamp},  *   all sub-classes of {@link java.util.Date}. When they are passed to and  *   from the server, they are interpreted in terms of a time zone, by default  *   the current connection's time zone. Their serial and local representations  *   as {@code int} (days since 1970-01-01 for DATE, milliseconds since  *   00:00:00.000 for TIME), and long (milliseconds since 1970-01-01  *   00:00:00.000 for TIMESTAMP) are easier to work with, because it is clear  *   that time zone is not involved.  *  *<li>BINARY and VARBINARY values are represented as base64-encoded strings  *   for serialization over JSON.  *</ul>  */
 end_comment
@@ -1522,7 +1536,9 @@ name|o
 operator|)
 operator|.
 name|getBytes
-argument_list|()
+argument_list|(
+name|UTF_8
+argument_list|)
 argument_list|)
 argument_list|)
 expr_stmt|;
