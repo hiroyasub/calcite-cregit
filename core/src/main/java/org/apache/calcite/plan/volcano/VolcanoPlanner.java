@@ -2167,6 +2167,13 @@ operator|.
 name|INSTANCE
 argument_list|)
 operator|.
+name|addRuleInstance
+argument_list|(
+name|ProjectRemoveRule
+operator|.
+name|INSTANCE
+argument_list|)
+operator|.
 name|build
 argument_list|()
 decl_stmt|;

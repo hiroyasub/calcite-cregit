@@ -1630,6 +1630,42 @@ name|HR_MODEL
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** As {@link #testFilterQueryOnFilterView7()} but columns in materialized    * view are a permutation of columns in the query*/
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testFilterQueryOnFilterView14
+parameter_list|()
+block|{
+name|String
+name|q
+init|=
+literal|"select * from \"emps\" where (\"salary\"> 1000 "
+operator|+
+literal|"or (\"deptno\">= 30 and \"salary\"<= 500))"
+decl_stmt|;
+name|String
+name|m
+init|=
+literal|"select \"deptno\", \"empid\", \"name\", \"salary\", \"commission\" "
+operator|+
+literal|"from \"emps\" as em where "
+operator|+
+literal|"((\"salary\"< 1111.9 and \"deptno\"> 10)"
+operator|+
+literal|"or (\"empid\"> 400 and \"salary\"> 5000) "
+operator|+
+literal|"or \"salary\"> 500)"
+decl_stmt|;
+name|checkMaterialize
+argument_list|(
+name|m
+argument_list|,
+name|q
+argument_list|)
+expr_stmt|;
+block|}
 comment|/** As {@link #testFilterQueryOnFilterView13()} but using alias    * and condition of query is stronger*/
 annotation|@
 name|Test
