@@ -208,7 +208,7 @@ name|replacement_
 argument_list|)
 return|;
 block|}
-comment|/**    * Implementation of {@link UnifyRule} that matches a {@link MutableProject}    * to a {@link MutableProject} where the condition of the target relation is    * weaker.    *    *<p>Example: target has a weaker condition and contains all columns selected    * by query</p>    *<ul>    *<li>query:   Project(projects: [$2, $0])    *                Filter(condition:>($1, 20))    *                  Scan(table: [hr, emps])</li>    *<li>target:  Project(projects: [$0, $1, $2])    *                Filter(condition:>($1, 10))    *                  Scan(table: [hr, emps])</li>    *</ul>    */
+comment|/**    * Implementation of {@link SubstitutionVisitor.UnifyRule} that matches a    * {@link SubstitutionVisitor.MutableProject} to a    * {@link SubstitutionVisitor.MutableProject} where the condition of the target    * relation is weaker.    *    *<p>Example: target has a weaker condition and contains all columns selected    * by query</p>    *<ul>    *<li>query:   Project(projects: [$2, $0])    *                Filter(condition:>($1, 20))    *                  Scan(table: [hr, emps])</li>    *<li>target:  Project(projects: [$0, $1, $2])    *                Filter(condition:>($1, 10))    *                  Scan(table: [hr, emps])</li>    *</ul>    */
 specifier|private
 specifier|static
 class|class
@@ -573,7 +573,7 @@ literal|null
 return|;
 block|}
 block|}
-comment|/**    * Implementation of {@link UnifyRule} that matches a {@link MutableFilter}    * to a {@link MutableFilter} where the condition of the target relation is    * weaker.    *    *<p>Example: target has a weaker condition</p>    *<ul>    *<li>query:   Filter(condition:>($1, 20))    *                Scan(table: [hr, emps])</li>    *<li>target:  Filter(condition:>($1, 10))    *                Scan(table: [hr, emps])</li>    *</ul>    */
+comment|/**    * Implementation of {@link SubstitutionVisitor.UnifyRule} that matches a    * {@link SubstitutionVisitor.MutableFilter} to a    * {@link SubstitutionVisitor.MutableFilter} where the condition of the target    * relation is weaker.    *    *<p>Example: target has a weaker condition</p>    *<ul>    *<li>query:   Filter(condition:>($1, 20))    *                Scan(table: [hr, emps])</li>    *<li>target:  Filter(condition:>($1, 10))    *                Scan(table: [hr, emps])</li>    *</ul>    */
 specifier|private
 specifier|static
 class|class
@@ -762,7 +762,7 @@ literal|null
 return|;
 block|}
 block|}
-comment|/**    * Implementation of {@link UnifyRule} that matches a {@link MutableFilter}    * to a {@link MutableProject} on top of a {@link MutableFilter} where the    * condition of the target relation is weaker.    *    *<p>Example: target has a weaker condition and is a permutation projection    * of its child relation</p>    *<ul>    *<li>query:   Filter(condition:>($1, 20))    *                Scan(table: [hr, emps])</li>    *<li>target:  Project(projects: [$1, $0, $2, $3, $4])    *                Filter(condition:>($1, 10))    *                  Scan(table: [hr, emps])</li>    *</ul>    */
+comment|/**    * Implementation of {@link SubstitutionVisitor.UnifyRule} that matches a    * {@link SubstitutionVisitor.MutableFilter} to a    * {@link SubstitutionVisitor.MutableProject} on top of a    * {@link SubstitutionVisitor.MutableFilter} where the condition of the target    * relation is weaker.    *    *<p>Example: target has a weaker condition and is a permutation projection of    * its child relation</p>    *<ul>    *<li>query:   Filter(condition:>($1, 20))    *                Scan(table: [hr, emps])</li>    *<li>target:  Project(projects: [$1, $0, $2, $3, $4])    *                Filter(condition:>($1, 10))    *                  Scan(table: [hr, emps])</li>    *</ul>    */
 specifier|private
 specifier|static
 class|class
