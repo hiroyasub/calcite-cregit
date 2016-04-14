@@ -1122,6 +1122,18 @@ operator|.
 name|newArrayList
 argument_list|()
 decl_stmt|;
+specifier|final
+name|List
+argument_list|<
+name|Boolean
+argument_list|>
+name|filterNulls
+init|=
+name|Lists
+operator|.
+name|newArrayList
+argument_list|()
+decl_stmt|;
 name|RexNode
 name|nonEquiConj
 init|=
@@ -1147,6 +1159,8 @@ argument_list|,
 name|leftKeys
 argument_list|,
 name|rightKeys
+argument_list|,
+name|filterNulls
 argument_list|)
 decl_stmt|;
 comment|// If it contains non-equi join conditions, we bail out
