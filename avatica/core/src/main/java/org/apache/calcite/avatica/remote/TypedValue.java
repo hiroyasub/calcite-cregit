@@ -1506,7 +1506,7 @@ expr_stmt|;
 block|}
 name|builder
 operator|.
-name|setBytesValues
+name|setBytesValue
 argument_list|(
 name|HBaseZeroCopyByteString
 operator|.
@@ -1759,7 +1759,7 @@ argument_list|()
 decl_stmt|;
 name|builder
 operator|.
-name|setBytesValues
+name|setBytesValue
 argument_list|(
 name|com
 operator|.
@@ -1976,7 +1976,7 @@ name|ByteString
 argument_list|(
 name|protoValue
 operator|.
-name|getBytesValues
+name|getBytesValue
 argument_list|()
 operator|.
 name|toByteArray
@@ -2163,7 +2163,7 @@ name|BigInteger
 argument_list|(
 name|protoValue
 operator|.
-name|getBytesValues
+name|getBytesValue
 argument_list|()
 operator|.
 name|toByteArray
@@ -2193,7 +2193,7 @@ name|BigInteger
 argument_list|(
 name|protoValue
 operator|.
-name|getBytesValues
+name|getBytesValue
 argument_list|()
 operator|.
 name|toByteArray

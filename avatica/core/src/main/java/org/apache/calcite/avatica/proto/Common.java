@@ -63968,7 +63968,7 @@ name|long
 name|getNumberValue
 parameter_list|()
 function_decl|;
-comment|/**      *<code>optional bytes bytes_values = 5;</code>      *      *<pre>      * includes numeric types and date/time types.      *</pre>      */
+comment|/**      *<code>optional bytes bytes_value = 5;</code>      *      *<pre>      * includes numeric types and date/time types.      *</pre>      */
 name|com
 operator|.
 name|google
@@ -63976,7 +63976,7 @@ operator|.
 name|protobuf
 operator|.
 name|ByteString
-name|getBytesValues
+name|getBytesValue
 parameter_list|()
 function_decl|;
 comment|/**      *<code>optional double double_value = 6;</code>      *      *<pre>      * big numbers      *</pre>      */
@@ -64053,7 +64053,7 @@ name|numberValue_
 operator|=
 literal|0L
 expr_stmt|;
-name|bytesValues_
+name|bytesValue_
 operator|=
 name|com
 operator|.
@@ -64255,7 +64255,7 @@ case|case
 literal|42
 case|:
 block|{
-name|bytesValues_
+name|bytesValue_
 operator|=
 name|input
 operator|.
@@ -64790,7 +64790,7 @@ specifier|public
 specifier|static
 specifier|final
 name|int
-name|BYTES_VALUES_FIELD_NUMBER
+name|BYTES_VALUE_FIELD_NUMBER
 init|=
 literal|5
 decl_stmt|;
@@ -64802,9 +64802,9 @@ operator|.
 name|protobuf
 operator|.
 name|ByteString
-name|bytesValues_
+name|bytesValue_
 decl_stmt|;
-comment|/**      *<code>optional bytes bytes_values = 5;</code>      *      *<pre>      * includes numeric types and date/time types.      *</pre>      */
+comment|/**      *<code>optional bytes bytes_value = 5;</code>      *      *<pre>      * includes numeric types and date/time types.      *</pre>      */
 specifier|public
 name|com
 operator|.
@@ -64813,11 +64813,11 @@ operator|.
 name|protobuf
 operator|.
 name|ByteString
-name|getBytesValues
+name|getBytesValue
 parameter_list|()
 block|{
 return|return
-name|bytesValues_
+name|bytesValue_
 return|;
 block|}
 specifier|public
@@ -65027,7 +65027,7 @@ block|}
 if|if
 condition|(
 operator|!
-name|bytesValues_
+name|bytesValue_
 operator|.
 name|isEmpty
 argument_list|()
@@ -65039,7 +65039,7 @@ name|writeBytes
 argument_list|(
 literal|5
 argument_list|,
-name|bytesValues_
+name|bytesValue_
 argument_list|)
 expr_stmt|;
 block|}
@@ -65225,7 +65225,7 @@ block|}
 if|if
 condition|(
 operator|!
-name|bytesValues_
+name|bytesValue_
 operator|.
 name|isEmpty
 argument_list|()
@@ -65245,7 +65245,7 @@ name|computeBytesSize
 argument_list|(
 literal|5
 argument_list|,
-name|bytesValues_
+name|bytesValue_
 argument_list|)
 expr_stmt|;
 block|}
@@ -66106,7 +66106,7 @@ name|numberValue_
 operator|=
 literal|0L
 expr_stmt|;
-name|bytesValues_
+name|bytesValue_
 operator|=
 name|com
 operator|.
@@ -66326,9 +66326,9 @@ name|numberValue_
 expr_stmt|;
 name|result
 operator|.
-name|bytesValues_
+name|bytesValue_
 operator|=
-name|bytesValues_
+name|bytesValue_
 expr_stmt|;
 name|result
 operator|.
@@ -66544,7 +66544,7 @@ if|if
 condition|(
 name|other
 operator|.
-name|getBytesValues
+name|getBytesValue
 argument_list|()
 operator|!=
 name|com
@@ -66558,11 +66558,11 @@ operator|.
 name|EMPTY
 condition|)
 block|{
-name|setBytesValues
+name|setBytesValue
 argument_list|(
 name|other
 operator|.
-name|getBytesValues
+name|getBytesValue
 argument_list|()
 argument_list|)
 expr_stmt|;
@@ -67307,7 +67307,7 @@ operator|.
 name|protobuf
 operator|.
 name|ByteString
-name|bytesValues_
+name|bytesValue_
 init|=
 name|com
 operator|.
@@ -67319,7 +67319,7 @@ name|ByteString
 operator|.
 name|EMPTY
 decl_stmt|;
-comment|/**        *<code>optional bytes bytes_values = 5;</code>        *        *<pre>        * includes numeric types and date/time types.        *</pre>        */
+comment|/**        *<code>optional bytes bytes_value = 5;</code>        *        *<pre>        * includes numeric types and date/time types.        *</pre>        */
 specifier|public
 name|com
 operator|.
@@ -67328,17 +67328,17 @@ operator|.
 name|protobuf
 operator|.
 name|ByteString
-name|getBytesValues
+name|getBytesValue
 parameter_list|()
 block|{
 return|return
-name|bytesValues_
+name|bytesValue_
 return|;
 block|}
-comment|/**        *<code>optional bytes bytes_values = 5;</code>        *        *<pre>        * includes numeric types and date/time types.        *</pre>        */
+comment|/**        *<code>optional bytes bytes_value = 5;</code>        *        *<pre>        * includes numeric types and date/time types.        *</pre>        */
 specifier|public
 name|Builder
-name|setBytesValues
+name|setBytesValue
 parameter_list|(
 name|com
 operator|.
@@ -67363,7 +67363,7 @@ name|NullPointerException
 argument_list|()
 throw|;
 block|}
-name|bytesValues_
+name|bytesValue_
 operator|=
 name|value
 expr_stmt|;
@@ -67374,18 +67374,18 @@ return|return
 name|this
 return|;
 block|}
-comment|/**        *<code>optional bytes bytes_values = 5;</code>        *        *<pre>        * includes numeric types and date/time types.        *</pre>        */
+comment|/**        *<code>optional bytes bytes_value = 5;</code>        *        *<pre>        * includes numeric types and date/time types.        *</pre>        */
 specifier|public
 name|Builder
-name|clearBytesValues
+name|clearBytesValue
 parameter_list|()
 block|{
-name|bytesValues_
+name|bytesValue_
 operator|=
 name|getDefaultInstance
 argument_list|()
 operator|.
-name|getBytesValues
+name|getBytesValue
 argument_list|()
 expr_stmt|;
 name|onChanged
@@ -79600,109 +79600,109 @@ literal|"pedValue\022 \n\013array_value\030\002 \003(\0132\013.TypedVal"
 operator|+
 literal|"ue\022\027\n\017has_array_value\030\003 \001(\010\022!\n\014scalar_va"
 operator|+
-literal|"lue\030\004 \001(\0132\013.TypedValue\"\232\001\n\nTypedValue\022\022\n"
+literal|"lue\030\004 \001(\0132\013.TypedValue\"\231\001\n\nTypedValue\022\022\n"
 operator|+
 literal|"\004type\030\001 \001(\0162\004.Rep\022\022\n\nbool_value\030\002 \001(\010\022\024\n"
 operator|+
 literal|"\014string_value\030\003 \001(\t\022\024\n\014number_value\030\004 \001("
 operator|+
-literal|"\022\022\024\n\014bytes_values\030\005 \001(\014\022\024\n\014double_value\030"
+literal|"\022\022\023\n\013bytes_value\030\005 \001(\014\022\024\n\014double_value\030\006"
 operator|+
-literal|"\006 \001(\001\022\014\n\004null\030\007 \001(\010\"\246\002\n\031MetaDataOperatio"
+literal|" \001(\001\022\014\n\004null\030\007 \001(\010\"\246\002\n\031MetaDataOperation"
 operator|+
-literal|"nArgument\022\024\n\014string_value\030\001 \001(\t\022\022\n\nbool_"
+literal|"Argument\022\024\n\014string_value\030\001 \001(\t\022\022\n\nbool_v"
 operator|+
-literal|"value\030\002 \001(\010\022\021\n\tint_value\030\003 \001(\021\022\033\n\023string"
+literal|"alue\030\002 \001(\010\022\021\n\tint_value\030\003 \001(\021\022\033\n\023string_"
 operator|+
-literal|"_array_values\030\004 \003(\t\022\030\n\020int_array_values\030"
+literal|"array_values\030\004 \003(\t\022\030\n\020int_array_values\030\005"
 block|,
-literal|"\005 \003(\021\0225\n\004type\030\006 \001(\0162\'.MetaDataOperationA"
+literal|" \003(\021\0225\n\004type\030\006 \001(\0162\'.MetaDataOperationAr"
 operator|+
-literal|"rgument.ArgumentType\"^\n\014ArgumentType\022\n\n\006"
+literal|"gument.ArgumentType\"^\n\014ArgumentType\022\n\n\006S"
 operator|+
-literal|"STRING\020\000\022\010\n\004BOOL\020\001\022\007\n\003INT\020\002\022\023\n\017REPEATED_"
+literal|"TRING\020\000\022\010\n\004BOOL\020\001\022\007\n\003INT\020\002\022\023\n\017REPEATED_S"
 operator|+
-literal|"STRING\020\003\022\020\n\014REPEATED_INT\020\004\022\010\n\004NULL\020\005\"\260\001\n"
+literal|"TRING\020\003\022\020\n\014REPEATED_INT\020\004\022\010\n\004NULL\020\005\"\260\001\n\n"
 operator|+
-literal|"\nQueryState\022\030\n\004type\030\001 \001(\0162\n.StateType\022\013\n"
+literal|"QueryState\022\030\n\004type\030\001 \001(\0162\n.StateType\022\013\n\003"
 operator|+
-literal|"\003sql\030\002 \001(\t\022\036\n\002op\030\003 \001(\0162\022.MetaDataOperati"
+literal|"sql\030\002 \001(\t\022\036\n\002op\030\003 \001(\0162\022.MetaDataOperatio"
 operator|+
-literal|"on\022(\n\004args\030\004 \003(\0132\032.MetaDataOperationArgu"
+literal|"n\022(\n\004args\030\004 \003(\0132\032.MetaDataOperationArgum"
 operator|+
-literal|"ment\022\020\n\010has_args\030\005 \001(\010\022\017\n\007has_sql\030\006 \001(\010\022"
+literal|"ent\022\020\n\010has_args\030\005 \001(\010\022\017\n\007has_sql\030\006 \001(\010\022\016"
 operator|+
-literal|"\016\n\006has_op\030\007 \001(\010*\237\001\n\rStatementType\022\n\n\006SEL"
+literal|"\n\006has_op\030\007 \001(\010*\237\001\n\rStatementType\022\n\n\006SELE"
 operator|+
-literal|"ECT\020\000\022\n\n\006INSERT\020\001\022\n\n\006UPDATE\020\002\022\n\n\006DELETE\020"
+literal|"CT\020\000\022\n\n\006INSERT\020\001\022\n\n\006UPDATE\020\002\022\n\n\006DELETE\020\003"
 block|,
-literal|"\003\022\n\n\006UPSERT\020\004\022\t\n\005MERGE\020\005\022\r\n\tOTHER_DML\020\006\022"
+literal|"\022\n\n\006UPSERT\020\004\022\t\n\005MERGE\020\005\022\r\n\tOTHER_DML\020\006\022\n"
 operator|+
-literal|"\n\n\006CREATE\020\007\022\010\n\004DROP\020\010\022\t\n\005ALTER\020\t\022\r\n\tOTHE"
+literal|"\n\006CREATE\020\007\022\010\n\004DROP\020\010\022\t\n\005ALTER\020\t\022\r\n\tOTHER"
 operator|+
-literal|"R_DDL\020\n\022\010\n\004CALL\020\013*\342\003\n\003Rep\022\025\n\021PRIMITIVE_B"
+literal|"_DDL\020\n\022\010\n\004CALL\020\013*\342\003\n\003Rep\022\025\n\021PRIMITIVE_BO"
 operator|+
-literal|"OOLEAN\020\000\022\022\n\016PRIMITIVE_BYTE\020\001\022\022\n\016PRIMITIV"
+literal|"OLEAN\020\000\022\022\n\016PRIMITIVE_BYTE\020\001\022\022\n\016PRIMITIVE"
 operator|+
-literal|"E_CHAR\020\002\022\023\n\017PRIMITIVE_SHORT\020\003\022\021\n\rPRIMITI"
+literal|"_CHAR\020\002\022\023\n\017PRIMITIVE_SHORT\020\003\022\021\n\rPRIMITIV"
 operator|+
-literal|"VE_INT\020\004\022\022\n\016PRIMITIVE_LONG\020\005\022\023\n\017PRIMITIV"
+literal|"E_INT\020\004\022\022\n\016PRIMITIVE_LONG\020\005\022\023\n\017PRIMITIVE"
 operator|+
-literal|"E_FLOAT\020\006\022\024\n\020PRIMITIVE_DOUBLE\020\007\022\013\n\007BOOLE"
+literal|"_FLOAT\020\006\022\024\n\020PRIMITIVE_DOUBLE\020\007\022\013\n\007BOOLEA"
 operator|+
-literal|"AN\020\010\022\010\n\004BYTE\020\t\022\r\n\tCHARACTER\020\n\022\t\n\005SHORT\020\013"
+literal|"N\020\010\022\010\n\004BYTE\020\t\022\r\n\tCHARACTER\020\n\022\t\n\005SHORT\020\013\022"
 operator|+
-literal|"\022\013\n\007INTEGER\020\014\022\010\n\004LONG\020\r\022\t\n\005FLOAT\020\016\022\n\n\006DO"
+literal|"\013\n\007INTEGER\020\014\022\010\n\004LONG\020\r\022\t\n\005FLOAT\020\016\022\n\n\006DOU"
 operator|+
-literal|"UBLE\020\017\022\017\n\013BIG_INTEGER\020\031\022\017\n\013BIG_DECIMAL\020\032"
+literal|"BLE\020\017\022\017\n\013BIG_INTEGER\020\031\022\017\n\013BIG_DECIMAL\020\032\022"
 block|,
-literal|"\022\021\n\rJAVA_SQL_TIME\020\020\022\026\n\022JAVA_SQL_TIMESTAM"
+literal|"\021\n\rJAVA_SQL_TIME\020\020\022\026\n\022JAVA_SQL_TIMESTAMP"
 operator|+
-literal|"P\020\021\022\021\n\rJAVA_SQL_DATE\020\022\022\022\n\016JAVA_UTIL_DATE"
+literal|"\020\021\022\021\n\rJAVA_SQL_DATE\020\022\022\022\n\016JAVA_UTIL_DATE\020"
 operator|+
-literal|"\020\023\022\017\n\013BYTE_STRING\020\024\022\n\n\006STRING\020\025\022\n\n\006NUMBE"
+literal|"\023\022\017\n\013BYTE_STRING\020\024\022\n\n\006STRING\020\025\022\n\n\006NUMBER"
 operator|+
-literal|"R\020\026\022\n\n\006OBJECT\020\027\022\010\n\004NULL\020\030\022\t\n\005ARRAY\020\033\022\n\n\006"
+literal|"\020\026\022\n\n\006OBJECT\020\027\022\010\n\004NULL\020\030\022\t\n\005ARRAY\020\033\022\n\n\006S"
 operator|+
-literal|"STRUCT\020\034\022\014\n\010MULTISET\020\035*^\n\010Severity\022\024\n\020UN"
+literal|"TRUCT\020\034\022\014\n\010MULTISET\020\035*^\n\010Severity\022\024\n\020UNK"
 operator|+
-literal|"KNOWN_SEVERITY\020\000\022\022\n\016FATAL_SEVERITY\020\001\022\022\n\016"
+literal|"NOWN_SEVERITY\020\000\022\022\n\016FATAL_SEVERITY\020\001\022\022\n\016E"
 operator|+
-literal|"ERROR_SEVERITY\020\002\022\024\n\020WARNING_SEVERITY\020\003*\327"
+literal|"RROR_SEVERITY\020\002\022\024\n\020WARNING_SEVERITY\020\003*\327\004"
 operator|+
-literal|"\004\n\021MetaDataOperation\022\022\n\016GET_ATTRIBUTES\020\000"
+literal|"\n\021MetaDataOperation\022\022\n\016GET_ATTRIBUTES\020\000\022"
 operator|+
-literal|"\022\033\n\027GET_BEST_ROW_IDENTIFIER\020\001\022\020\n\014GET_CAT"
+literal|"\033\n\027GET_BEST_ROW_IDENTIFIER\020\001\022\020\n\014GET_CATA"
 operator|+
-literal|"ALOGS\020\002\022\036\n\032GET_CLIENT_INFO_PROPERTIES\020\003\022"
+literal|"LOGS\020\002\022\036\n\032GET_CLIENT_INFO_PROPERTIES\020\003\022\031"
 block|,
-literal|"\031\n\025GET_COLUMN_PRIVILEGES\020\004\022\017\n\013GET_COLUMN"
+literal|"\n\025GET_COLUMN_PRIVILEGES\020\004\022\017\n\013GET_COLUMNS"
 operator|+
-literal|"S\020\005\022\027\n\023GET_CROSS_REFERENCE\020\006\022\025\n\021GET_EXPO"
+literal|"\020\005\022\027\n\023GET_CROSS_REFERENCE\020\006\022\025\n\021GET_EXPOR"
 operator|+
-literal|"RTED_KEYS\020\007\022\030\n\024GET_FUNCTION_COLUMNS\020\010\022\021\n"
+literal|"TED_KEYS\020\007\022\030\n\024GET_FUNCTION_COLUMNS\020\010\022\021\n\r"
 operator|+
-literal|"\rGET_FUNCTIONS\020\t\022\025\n\021GET_IMPORTED_KEYS\020\n\022"
+literal|"GET_FUNCTIONS\020\t\022\025\n\021GET_IMPORTED_KEYS\020\n\022\022"
 operator|+
-literal|"\022\n\016GET_INDEX_INFO\020\013\022\024\n\020GET_PRIMARY_KEYS\020"
+literal|"\n\016GET_INDEX_INFO\020\013\022\024\n\020GET_PRIMARY_KEYS\020\014"
 operator|+
-literal|"\014\022\031\n\025GET_PROCEDURE_COLUMNS\020\r\022\022\n\016GET_PROC"
+literal|"\022\031\n\025GET_PROCEDURE_COLUMNS\020\r\022\022\n\016GET_PROCE"
 operator|+
-literal|"EDURES\020\016\022\026\n\022GET_PSEUDO_COLUMNS\020\017\022\017\n\013GET_"
+literal|"DURES\020\016\022\026\n\022GET_PSEUDO_COLUMNS\020\017\022\017\n\013GET_S"
 operator|+
-literal|"SCHEMAS\020\020\022\031\n\025GET_SCHEMAS_WITH_ARGS\020\021\022\024\n\020"
+literal|"CHEMAS\020\020\022\031\n\025GET_SCHEMAS_WITH_ARGS\020\021\022\024\n\020G"
 operator|+
-literal|"GET_SUPER_TABLES\020\022\022\023\n\017GET_SUPER_TYPES\020\023\022"
+literal|"ET_SUPER_TABLES\020\022\022\023\n\017GET_SUPER_TYPES\020\023\022\030"
 operator|+
-literal|"\030\n\024GET_TABLE_PRIVILEGES\020\024\022\016\n\nGET_TABLES\020"
+literal|"\n\024GET_TABLE_PRIVILEGES\020\024\022\016\n\nGET_TABLES\020\025"
 block|,
-literal|"\025\022\023\n\017GET_TABLE_TYPES\020\026\022\021\n\rGET_TYPE_INFO\020"
+literal|"\022\023\n\017GET_TABLE_TYPES\020\026\022\021\n\rGET_TYPE_INFO\020\027"
 operator|+
-literal|"\027\022\014\n\010GET_UDTS\020\030\022\027\n\023GET_VERSION_COLUMNS\020\031"
+literal|"\022\014\n\010GET_UDTS\020\030\022\027\n\023GET_VERSION_COLUMNS\020\031*"
 operator|+
-literal|"*\"\n\tStateType\022\007\n\003SQL\020\000\022\014\n\010METADATA\020\001B\"\n "
+literal|"\"\n\tStateType\022\007\n\003SQL\020\000\022\014\n\010METADATA\020\001B\"\n o"
 operator|+
-literal|"org.apache.calcite.avatica.protob\006proto3"
+literal|"rg.apache.calcite.avatica.protob\006proto3"
 block|}
 decl_stmt|;
 name|com
@@ -80420,7 +80420,7 @@ literal|"StringValue"
 block|,
 literal|"NumberValue"
 block|,
-literal|"BytesValues"
+literal|"BytesValue"
 block|,
 literal|"DoubleValue"
 block|,

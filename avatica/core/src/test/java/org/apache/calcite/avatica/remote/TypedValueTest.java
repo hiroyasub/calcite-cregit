@@ -766,7 +766,7 @@ operator|.
 name|newBuilder
 argument_list|()
 operator|.
-name|setBytesValues
+name|setBytesValue
 argument_list|(
 name|com
 operator|.

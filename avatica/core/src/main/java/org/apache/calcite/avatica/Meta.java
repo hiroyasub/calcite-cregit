@@ -4273,7 +4273,7 @@ comment|// TypedValue's benefit
 return|return
 name|protoElement
 operator|.
-name|getBytesValues
+name|getBytesValue
 argument_list|()
 operator|.
 name|toByteArray
