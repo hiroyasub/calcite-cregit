@@ -179,11 +179,15 @@ end_import
 
 begin_import
 import|import
-name|java
+name|org
 operator|.
-name|io
+name|apache
 operator|.
-name|File
+name|calcite
+operator|.
+name|util
+operator|.
+name|Source
 import|;
 end_import
 
@@ -227,8 +231,8 @@ block|{
 comment|/** Creates a CsvScannableTable. */
 name|CsvStreamScannableTable
 parameter_list|(
-name|File
-name|file
+name|Source
+name|source
 parameter_list|,
 name|RelProtoDataType
 name|protoRowType
@@ -236,7 +240,7 @@ parameter_list|)
 block|{
 name|super
 argument_list|(
-name|file
+name|source
 argument_list|,
 name|protoRowType
 argument_list|)
@@ -290,7 +294,7 @@ name|JavaTypeFactory
 operator|)
 name|typeFactory
 argument_list|,
-name|file
+name|source
 argument_list|,
 name|fieldTypes
 argument_list|,
@@ -310,7 +314,7 @@ name|JavaTypeFactory
 operator|)
 name|typeFactory
 argument_list|,
-name|file
+name|source
 argument_list|,
 literal|null
 argument_list|,
@@ -393,7 +397,7 @@ operator|new
 name|CsvEnumerator
 argument_list|<>
 argument_list|(
-name|file
+name|source
 argument_list|,
 name|cancelFlag
 argument_list|,

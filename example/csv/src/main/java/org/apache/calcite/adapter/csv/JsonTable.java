@@ -151,11 +151,15 @@ end_import
 
 begin_import
 import|import
-name|java
+name|org
 operator|.
-name|io
+name|apache
 operator|.
-name|File
+name|calcite
+operator|.
+name|util
+operator|.
+name|Source
 import|;
 end_import
 
@@ -174,21 +178,22 @@ name|ScannableTable
 block|{
 specifier|private
 specifier|final
-name|File
-name|file
+name|Source
+name|source
 decl_stmt|;
 comment|/** Creates a JsonTable. */
+specifier|public
 name|JsonTable
 parameter_list|(
-name|File
-name|file
+name|Source
+name|source
 parameter_list|)
 block|{
 name|this
 operator|.
-name|file
+name|source
 operator|=
-name|file
+name|source
 expr_stmt|;
 block|}
 specifier|public
@@ -287,7 +292,7 @@ return|return
 operator|new
 name|JsonEnumerator
 argument_list|(
-name|file
+name|source
 argument_list|)
 return|;
 block|}

@@ -99,11 +99,15 @@ end_import
 
 begin_import
 import|import
-name|java
+name|org
 operator|.
-name|io
+name|apache
 operator|.
-name|File
+name|calcite
+operator|.
+name|util
+operator|.
+name|Source
 import|;
 end_import
 
@@ -141,8 +145,8 @@ name|AbstractTable
 block|{
 specifier|protected
 specifier|final
-name|File
-name|file
+name|Source
+name|source
 decl_stmt|;
 specifier|protected
 specifier|final
@@ -156,11 +160,11 @@ name|CsvFieldType
 argument_list|>
 name|fieldTypes
 decl_stmt|;
-comment|/** Creates a CsvAbstractTable. */
+comment|/** Creates a CsvTable. */
 name|CsvTable
 parameter_list|(
-name|File
-name|file
+name|Source
+name|source
 parameter_list|,
 name|RelProtoDataType
 name|protoRowType
@@ -168,9 +172,9 @@ parameter_list|)
 block|{
 name|this
 operator|.
-name|file
+name|source
 operator|=
-name|file
+name|source
 expr_stmt|;
 name|this
 operator|.
@@ -214,9 +218,7 @@ name|fieldTypes
 operator|=
 operator|new
 name|ArrayList
-argument_list|<
-name|CsvFieldType
-argument_list|>
+argument_list|<>
 argument_list|()
 expr_stmt|;
 return|return
@@ -229,7 +231,7 @@ name|JavaTypeFactory
 operator|)
 name|typeFactory
 argument_list|,
-name|file
+name|source
 argument_list|,
 name|fieldTypes
 argument_list|)
@@ -247,7 +249,7 @@ name|JavaTypeFactory
 operator|)
 name|typeFactory
 argument_list|,
-name|file
+name|source
 argument_list|,
 literal|null
 argument_list|)

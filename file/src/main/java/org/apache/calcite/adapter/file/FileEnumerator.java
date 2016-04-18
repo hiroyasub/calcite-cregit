@@ -54,7 +54,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Wraps WebReader and FileRowConverter, enumerates tr Elements as  * table rows.  */
+comment|/**  * Wraps {@link FileReader} and {@link FileRowConverter}, enumerates tr DOM  * elements as table rows.  */
 end_comment
 
 begin_class
@@ -89,7 +89,6 @@ specifier|private
 name|Object
 name|current
 decl_stmt|;
-specifier|public
 name|FileEnumerator
 parameter_list|(
 name|Iterator
@@ -103,33 +102,21 @@ name|converter
 parameter_list|)
 block|{
 name|this
-operator|.
+argument_list|(
 name|iterator
-operator|=
-name|iterator
-expr_stmt|;
-name|this
-operator|.
+argument_list|,
 name|converter
-operator|=
-name|converter
-expr_stmt|;
-name|this
-operator|.
-name|fields
-operator|=
+argument_list|,
 name|identityList
 argument_list|(
-name|this
-operator|.
 name|converter
 operator|.
 name|width
 argument_list|()
 argument_list|)
+argument_list|)
 expr_stmt|;
 block|}
-specifier|public
 name|FileEnumerator
 parameter_list|(
 name|Iterator
@@ -244,6 +231,18 @@ return|return
 literal|false
 return|;
 block|}
+block|}
+catch|catch
+parameter_list|(
+name|RuntimeException
+decl||
+name|Error
+name|e
+parameter_list|)
+block|{
+throw|throw
+name|e
+throw|;
 block|}
 catch|catch
 parameter_list|(

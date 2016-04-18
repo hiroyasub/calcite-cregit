@@ -23,6 +23,20 @@ name|org
 operator|.
 name|apache
 operator|.
+name|calcite
+operator|.
+name|util
+operator|.
+name|Source
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
 name|commons
 operator|.
 name|io
@@ -100,16 +114,6 @@ operator|.
 name|io
 operator|.
 name|Closeable
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|io
-operator|.
-name|File
 import|;
 end_import
 
@@ -204,13 +208,13 @@ literal|2000
 decl_stmt|;
 name|CsvStreamReader
 parameter_list|(
-name|File
-name|csvFile
+name|Source
+name|source
 parameter_list|)
 block|{
 name|this
 argument_list|(
-name|csvFile
+name|source
 argument_list|,
 name|CSVParser
 operator|.
@@ -236,12 +240,12 @@ name|DEFAULT_IGNORE_LEADING_WHITESPACE
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Creates a CsvStreamReader with supplied separator and quote char.    *    * @param csvFile The file to an underlying CSV source.    * @param separator The delimiter to use for separating entries    * @param quoteChar The character to use for quoted elements    * @param escape The character to use for escaping a separator or quote    * @param line The line number to skip for start reading    * @param strictQuotes Sets if characters outside the quotes are ignored    * @param ignoreLeadingWhiteSpace If true, parser should ignore    *  white space before a quote in a field    */
+comment|/**    * Creates a CsvStreamReader with supplied separator and quote char.    *    * @param source The file to an underlying CSV source    * @param separator The delimiter to use for separating entries    * @param quoteChar The character to use for quoted elements    * @param escape The character to use for escaping a separator or quote    * @param line The line number to skip for start reading    * @param strictQuotes Sets if characters outside the quotes are ignored    * @param ignoreLeadingWhiteSpace If true, parser should ignore    *  white space before a quote in a field    */
 specifier|private
 name|CsvStreamReader
 parameter_list|(
-name|File
-name|csvFile
+name|Source
+name|source
 parameter_list|,
 name|char
 name|separator
@@ -294,7 +298,10 @@ name|Tailer
 operator|.
 name|create
 argument_list|(
-name|csvFile
+name|source
+operator|.
+name|file
+argument_list|()
 argument_list|,
 name|listener
 argument_list|,

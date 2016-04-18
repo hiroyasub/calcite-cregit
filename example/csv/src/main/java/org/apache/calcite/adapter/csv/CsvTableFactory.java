@@ -109,6 +109,34 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|util
+operator|.
+name|Source
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|util
+operator|.
+name|Sources
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|io
@@ -128,7 +156,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Factory that creates a {@link CsvTranslatableTable}.  *  *<p>Allows a CSV table to be included in a model.json file, even in a  * schema that is not based upon {@link CsvSchema}.</p>  */
+comment|/**  * Factory that creates a {@link CsvTranslatableTable}.  *  *<p>Allows a CSV table to be included in a model.json file, even in a  * schema that is not based upon {@link CsvSchema}.  */
 end_comment
 
 begin_class
@@ -187,15 +215,6 @@ argument_list|(
 literal|"file"
 argument_list|)
 decl_stmt|;
-name|File
-name|file
-init|=
-operator|new
-name|File
-argument_list|(
-name|fileName
-argument_list|)
-decl_stmt|;
 specifier|final
 name|File
 name|base
@@ -216,30 +235,19 @@ operator|.
 name|camelName
 argument_list|)
 decl_stmt|;
-if|if
-condition|(
-name|base
-operator|!=
-literal|null
-operator|&&
-operator|!
-name|file
+specifier|final
+name|Source
+name|source
+init|=
+name|Sources
 operator|.
-name|isAbsolute
-argument_list|()
-condition|)
-block|{
 name|file
-operator|=
-operator|new
-name|File
 argument_list|(
 name|base
 argument_list|,
 name|fileName
 argument_list|)
-expr_stmt|;
-block|}
+decl_stmt|;
 specifier|final
 name|RelProtoDataType
 name|protoRowType
@@ -261,7 +269,7 @@ return|return
 operator|new
 name|CsvScannableTable
 argument_list|(
-name|file
+name|source
 argument_list|,
 name|protoRowType
 argument_list|)
