@@ -11,11 +11,7 @@ name|apache
 operator|.
 name|calcite
 operator|.
-name|adapter
-operator|.
-name|splunk
-operator|.
-name|util
+name|runtime
 package|;
 end_package
 

@@ -11,11 +11,7 @@ name|apache
 operator|.
 name|calcite
 operator|.
-name|adapter
-operator|.
-name|splunk
-operator|.
-name|util
+name|runtime
 package|;
 end_package
 
@@ -26,6 +22,16 @@ operator|.
 name|slf4j
 operator|.
 name|Logger
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|slf4j
+operator|.
+name|LoggerFactory
 import|;
 end_import
 
@@ -166,7 +172,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Utilities for connecting to Splunk via HTTP.  */
+comment|/**  * Utilities for connecting to REST services such as Splunk via HTTP.  */
 end_comment
 
 begin_class
@@ -185,9 +191,9 @@ specifier|final
 name|Logger
 name|LOGGER
 init|=
-name|StringUtils
+name|LoggerFactory
 operator|.
-name|getClassTracer
+name|getLogger
 argument_list|(
 name|HttpUtils
 operator|.
@@ -805,11 +811,19 @@ operator|.
 name|getInputStream
 argument_list|()
 decl_stmt|;
+if|if
+condition|(
+name|wr
+operator|!=
+literal|null
+condition|)
+block|{
 name|wr
 operator|.
 name|close
 argument_list|()
 expr_stmt|;
+block|}
 name|LOGGER
 operator|.
 name|debug
