@@ -77,6 +77,8 @@ name|BOOLEAN
 block|,
 name|STRING
 block|,
+name|NUMBER
+block|,
 name|ENUM
 block|,
 name|PLUGIN
@@ -101,6 +103,14 @@ return|return
 name|defaultValue
 operator|instanceof
 name|Boolean
+return|;
+case|case
+name|NUMBER
+case|:
+return|return
+name|defaultValue
+operator|instanceof
+name|Number
 return|;
 case|case
 name|STRING
