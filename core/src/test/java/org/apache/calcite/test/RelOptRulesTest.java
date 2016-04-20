@@ -8358,11 +8358,11 @@ specifier|final
 name|String
 name|sql
 init|=
-literal|"select e.empno,d.deptno \n"
+literal|"select e.empno,d.deptno\n"
 operator|+
-literal|"from (select * from sales.emp where empno = 10) as e "
+literal|"from (select * from sales.emp where empno = 10) as e\n"
 operator|+
-literal|"join sales.dept as d on e.empno = d.deptno "
+literal|"join sales.dept as d on e.empno = d.deptno\n"
 operator|+
 literal|"group by e.empno,d.deptno"
 decl_stmt|;
@@ -8431,13 +8431,13 @@ specifier|final
 name|String
 name|sql
 init|=
-literal|"select e.empno,d.deptno \n"
+literal|"select e.empno,d.deptno\n"
 operator|+
-literal|"from (select * from sales.emp where empno = 10) as e "
+literal|"from (select * from sales.emp where empno = 10) as e\n"
 operator|+
-literal|"join sales.dept as d on e.empno = d.deptno "
+literal|"join sales.dept as d on e.empno = d.deptno\n"
 operator|+
-literal|"and e.deptno + e.empno = d.deptno + 5 "
+literal|"and e.deptno + e.empno = d.deptno + 5\n"
 operator|+
 literal|"group by e.empno,d.deptno"
 decl_stmt|;
@@ -8506,11 +8506,11 @@ specifier|final
 name|String
 name|sql
 init|=
-literal|"select e.empno,d.deptno \n"
+literal|"select e.empno,d.deptno\n"
 operator|+
-literal|"from (select * from sales.emp where empno = 10) as e "
+literal|"from (select * from sales.emp where empno = 10) as e\n"
 operator|+
-literal|"join sales.dept as d on e.empno< d.deptno "
+literal|"join sales.dept as d on e.empno< d.deptno\n"
 operator|+
 literal|"group by e.empno,d.deptno"
 decl_stmt|;
@@ -8582,11 +8582,11 @@ specifier|final
 name|String
 name|sql
 init|=
-literal|"select e.empno,sum(sal) \n"
+literal|"select e.empno,sum(sal)\n"
 operator|+
-literal|"from (select * from sales.emp where empno = 10) as e "
+literal|"from (select * from sales.emp where empno = 10) as e\n"
 operator|+
-literal|"join sales.dept as d on e.empno = d.deptno "
+literal|"join sales.dept as d on e.empno = d.deptno\n"
 operator|+
 literal|"group by e.empno,d.deptno"
 decl_stmt|;
