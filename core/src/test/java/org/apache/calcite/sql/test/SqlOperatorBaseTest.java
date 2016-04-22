@@ -2430,6 +2430,15 @@ operator|.
 name|CAST
 argument_list|)
 expr_stmt|;
+name|checkCastToString
+argument_list|(
+literal|"cast(cast('abc' as char(4)) as varchar(6))"
+argument_list|,
+literal|null
+argument_list|,
+literal|"abc "
+argument_list|)
+expr_stmt|;
 comment|// integer
 name|checkCastToString
 argument_list|(
@@ -2673,6 +2682,112 @@ argument_list|,
 literal|"abc"
 argument_list|)
 expr_stmt|;
+name|checkCastToString
+argument_list|(
+literal|"cast(' abc  ' as varchar(10))"
+argument_list|,
+literal|null
+argument_list|,
+literal|" abc  "
+argument_list|)
+expr_stmt|;
+name|checkCastToString
+argument_list|(
+literal|"cast(cast('abc' as char(4)) as varchar(6))"
+argument_list|,
+literal|null
+argument_list|,
+literal|"abc "
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"cast(cast('a' as char(2)) as varchar(3)) || 'x' "
+argument_list|,
+literal|"a x"
+argument_list|,
+literal|"VARCHAR(4) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"cast(cast('a' as char(3)) as varchar(5)) || 'x' "
+argument_list|,
+literal|"a  x"
+argument_list|,
+literal|"VARCHAR(6) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"cast('a' as char(3)) || 'x'"
+argument_list|,
+literal|"a  x"
+argument_list|,
+literal|"CHAR(4) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"char_length(cast(' x ' as char(4)))"
+argument_list|,
+literal|4
+argument_list|,
+literal|"INTEGER NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"char_length(cast(' x ' as varchar(3)))"
+argument_list|,
+literal|3
+argument_list|,
+literal|"INTEGER NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"char_length(cast(' x ' as varchar(4)))"
+argument_list|,
+literal|3
+argument_list|,
+literal|"INTEGER NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"char_length(cast(cast(' x ' as char(4)) as varchar(5)))"
+argument_list|,
+literal|4
+argument_list|,
+literal|"INTEGER NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"char_length(cast(' x ' as varchar(3)))"
+argument_list|,
+literal|3
+argument_list|,
+literal|"INTEGER NOT NULL"
+argument_list|)
+expr_stmt|;
 comment|// date& time
 name|checkCastToString
 argument_list|(
@@ -2752,7 +2867,7 @@ literal|"interval '60' day"
 argument_list|,
 literal|"CHAR(8)"
 argument_list|,
-literal|"+60"
+literal|"+60     "
 argument_list|)
 expr_stmt|;
 comment|// boolean
@@ -2761,6 +2876,24 @@ argument_list|(
 literal|"True"
 argument_list|,
 literal|"CHAR(4)"
+argument_list|,
+literal|"TRUE"
+argument_list|)
+expr_stmt|;
+name|checkCastToString
+argument_list|(
+literal|"True"
+argument_list|,
+literal|"CHAR(6)"
+argument_list|,
+literal|"TRUE  "
+argument_list|)
+expr_stmt|;
+name|checkCastToString
+argument_list|(
+literal|"True"
+argument_list|,
+literal|"VARCHAR(6)"
 argument_list|,
 literal|"TRUE"
 argument_list|)
@@ -7916,6 +8049,50 @@ operator|.
 name|checkBoolean
 argument_list|(
 literal|"cast('a ' as varchar(30))=cast('a' as varchar(30))"
+argument_list|,
+name|Boolean
+operator|.
+name|FALSE
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"cast(' a' as varchar(30))=cast(' a' as varchar(30))"
+argument_list|,
+name|Boolean
+operator|.
+name|TRUE
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"cast('a ' as varchar(15))=cast('a ' as varchar(30))"
+argument_list|,
+name|Boolean
+operator|.
+name|TRUE
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"cast(' ' as varchar(3))=cast(' ' as varchar(2))"
+argument_list|,
+name|Boolean
+operator|.
+name|TRUE
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"cast('abcd' as varchar(2))='ab'"
 argument_list|,
 name|Boolean
 operator|.

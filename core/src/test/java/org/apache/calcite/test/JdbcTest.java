@@ -4574,7 +4574,7 @@ name|equalTo
 argument_list|(
 literal|"N={'a'=1, 'baz'=2}\n"
 operator|+
-literal|"N=[3, 4, null]\n"
+literal|"N=[3, 4, null]    \n"
 argument_list|)
 argument_list|)
 expr_stmt|;
