@@ -883,6 +883,32 @@ name|type
 operator|==
 name|DataType
 operator|.
+name|uuid
+argument_list|()
+operator|||
+name|type
+operator|==
+name|DataType
+operator|.
+name|timeuuid
+argument_list|()
+condition|)
+block|{
+comment|// We currently rely on this in CassandraFilter to detect UUID columns.
+comment|// That is, these fixed length literals should be unquoted in CQL.
+name|typeName
+operator|=
+name|SqlTypeName
+operator|.
+name|CHAR
+expr_stmt|;
+block|}
+if|else if
+condition|(
+name|type
+operator|==
+name|DataType
+operator|.
 name|ascii
 argument_list|()
 operator|||
@@ -899,27 +925,13 @@ name|DataType
 operator|.
 name|varchar
 argument_list|()
-operator|||
-name|type
-operator|==
-name|DataType
-operator|.
-name|uuid
-argument_list|()
-operator|||
-name|type
-operator|==
-name|DataType
-operator|.
-name|timeuuid
-argument_list|()
 condition|)
 block|{
 name|typeName
 operator|=
 name|SqlTypeName
 operator|.
-name|CHAR
+name|VARCHAR
 expr_stmt|;
 block|}
 if|else if

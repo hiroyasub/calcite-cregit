@@ -197,9 +197,59 @@ name|explainContains
 argument_list|(
 literal|"PLAN=CassandraToEnumerableConverter\n"
 operator|+
-literal|"  CassandraFilter(condition=[=(CAST($0):CHAR(8) CHARACTER SET \"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$primary\", '!PUBLIC!')])\n"
+literal|"  CassandraFilter(condition=[=(CAST($0):VARCHAR(8) CHARACTER SET \"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$primary\", '!PUBLIC!')])\n"
 operator|+
 literal|"    CassandraTableScan(table=[[twissandra, userline]]"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testFilterUUID
+parameter_list|()
+block|{
+name|CalciteAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|enable
+argument_list|(
+name|enabled
+argument_list|()
+argument_list|)
+operator|.
+name|with
+argument_list|(
+name|TWISSANDRA
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select * from \"tweets\" where \"tweet_id\"='f3cd759c-d05b-11e5-b58b-90e2ba530b12'"
+argument_list|)
+operator|.
+name|limit
+argument_list|(
+literal|1
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"tweet_id=f3cd759c-d05b-11e5-b58b-90e2ba530b12; "
+operator|+
+literal|"body=Lacus augue pede posuere.; username=JmuhsAaMdw\n"
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+literal|"PLAN=CassandraToEnumerableConverter\n"
+operator|+
+literal|"  CassandraFilter(condition=[=(CAST($0):CHAR(36) CHARACTER SET \"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$primary\", 'f3cd759c-d05b-11e5-b58b-90e2ba530b12')])\n"
+operator|+
+literal|"    CassandraTableScan(table=[[twissandra, tweets]]"
 argument_list|)
 expr_stmt|;
 block|}
@@ -242,7 +292,7 @@ literal|"PLAN=CassandraToEnumerableConverter\n"
 operator|+
 literal|"  CassandraSort(sort0=[$1], dir0=[DESC])\n"
 operator|+
-literal|"    CassandraFilter(condition=[=(CAST($0):CHAR(8) CHARACTER SET \"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$primary\", '!PUBLIC!')])\n"
+literal|"    CassandraFilter(condition=[=(CAST($0):VARCHAR(8) CHARACTER SET \"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$primary\", '!PUBLIC!')])\n"
 argument_list|)
 expr_stmt|;
 block|}
@@ -287,7 +337,7 @@ literal|"  CassandraProject(tweet_id=[$2])\n"
 operator|+
 literal|"    CassandraSort(fetch=[1])\n"
 operator|+
-literal|"      CassandraFilter(condition=[=(CAST($0):CHAR(8) CHARACTER SET \"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$primary\", '!PUBLIC!')])\n"
+literal|"      CassandraFilter(condition=[=(CAST($0):VARCHAR(8) CHARACTER SET \"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$primary\", '!PUBLIC!')])\n"
 argument_list|)
 expr_stmt|;
 block|}
