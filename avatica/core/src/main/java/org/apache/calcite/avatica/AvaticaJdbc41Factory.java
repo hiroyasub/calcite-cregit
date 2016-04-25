@@ -217,7 +217,7 @@ argument_list|)
 return|;
 block|}
 specifier|public
-name|AvaticaDatabaseMetaData
+name|AvaticaSpecificDatabaseMetaData
 name|newDatabaseMetaData
 parameter_list|(
 name|AvaticaConnection
@@ -1000,7 +1000,7 @@ specifier|static
 class|class
 name|AvaticaJdbc41DatabaseMetaData
 extends|extends
-name|AvaticaDatabaseMetaDataImpl
+name|AvaticaDatabaseMetaData
 block|{
 name|AvaticaJdbc41DatabaseMetaData
 parameter_list|(

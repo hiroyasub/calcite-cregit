@@ -9039,7 +9039,7 @@ name|metadata
 operator|.
 name|isWrapperFor
 argument_list|(
-name|AvaticaDatabaseMetaData
+name|AvaticaSpecificDatabaseMetaData
 operator|.
 name|class
 argument_list|)

@@ -453,7 +453,7 @@ name|meta
 decl_stmt|;
 specifier|protected
 specifier|final
-name|AvaticaDatabaseMetaData
+name|AvaticaSpecificDatabaseMetaData
 name|metaData
 decl_stmt|;
 specifier|public

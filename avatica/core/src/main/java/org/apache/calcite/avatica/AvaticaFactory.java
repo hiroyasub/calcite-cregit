@@ -170,7 +170,7 @@ throws|throws
 name|SQLException
 function_decl|;
 comment|/**    * Creates meta data for the database.    *    * @return Database meta data    */
-name|AvaticaDatabaseMetaData
+name|AvaticaSpecificDatabaseMetaData
 name|newDatabaseMetaData
 parameter_list|(
 name|AvaticaConnection

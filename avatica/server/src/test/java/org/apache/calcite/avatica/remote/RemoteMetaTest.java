@@ -41,7 +41,7 @@ name|calcite
 operator|.
 name|avatica
 operator|.
-name|AvaticaDatabaseMetaData
+name|AvaticaSpecificDatabaseMetaData
 import|;
 end_import
 
@@ -4106,14 +4106,14 @@ literal|"DatabaseMetaData is not an instance of AvaticaDatabaseMetaData"
 argument_list|,
 name|metadata
 operator|instanceof
-name|AvaticaDatabaseMetaData
+name|AvaticaSpecificDatabaseMetaData
 argument_list|)
 expr_stmt|;
-name|AvaticaDatabaseMetaData
+name|AvaticaSpecificDatabaseMetaData
 name|avaticaMetadata
 init|=
 operator|(
-name|AvaticaDatabaseMetaData
+name|AvaticaSpecificDatabaseMetaData
 operator|)
 name|metadata
 decl_stmt|;
