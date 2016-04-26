@@ -100,6 +100,10 @@ name|List
 operator|.
 name|class
 argument_list|,
+name|List
+operator|.
+name|class
+argument_list|,
 name|String
 operator|.
 name|class
