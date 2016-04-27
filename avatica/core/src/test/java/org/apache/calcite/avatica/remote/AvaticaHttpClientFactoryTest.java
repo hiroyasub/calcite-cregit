@@ -161,6 +161,8 @@ argument_list|(
 name|url
 argument_list|,
 name|config
+argument_list|,
+literal|null
 argument_list|)
 decl_stmt|;
 name|assertTrue
@@ -248,6 +250,8 @@ argument_list|(
 name|url
 argument_list|,
 name|config
+argument_list|,
+literal|null
 argument_list|)
 decl_stmt|;
 name|assertTrue

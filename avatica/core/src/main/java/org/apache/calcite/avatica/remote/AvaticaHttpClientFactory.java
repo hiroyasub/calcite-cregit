@@ -59,6 +59,9 @@ name|url
 parameter_list|,
 name|ConnectionConfig
 name|config
+parameter_list|,
+name|KerberosConnection
+name|kerberosUtil
 parameter_list|)
 function_decl|;
 block|}

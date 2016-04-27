@@ -47,6 +47,16 @@ name|Service
 import|;
 end_import
 
+begin_import
+import|import
+name|java
+operator|.
+name|io
+operator|.
+name|File
+import|;
+end_import
+
 begin_comment
 comment|/**  * Connection configuration.  */
 end_comment
@@ -104,6 +114,16 @@ parameter_list|()
 function_decl|;
 name|String
 name|httpClientClass
+parameter_list|()
+function_decl|;
+comment|/** @see BuiltInConnectionProperty#PRINCIPAL */
+name|String
+name|kerberosPrincipal
+parameter_list|()
+function_decl|;
+comment|/** @see BuiltInConnectionProperty#KEYTAB */
+name|File
+name|kerberosKeytab
 parameter_list|()
 function_decl|;
 block|}

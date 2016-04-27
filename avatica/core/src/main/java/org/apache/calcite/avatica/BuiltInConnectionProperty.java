@@ -268,6 +268,34 @@ literal|null
 argument_list|,
 literal|false
 argument_list|)
+block|,
+comment|/** Principal to use to perform Kerberos login. */
+name|PRINCIPAL
+argument_list|(
+literal|"principal"
+argument_list|,
+name|Type
+operator|.
+name|STRING
+argument_list|,
+literal|null
+argument_list|,
+literal|false
+argument_list|)
+block|,
+comment|/** Keytab to use to perform Kerberos login. */
+name|KEYTAB
+argument_list|(
+literal|"keytab"
+argument_list|,
+name|Type
+operator|.
+name|STRING
+argument_list|,
+literal|null
+argument_list|,
+literal|false
+argument_list|)
 block|;
 specifier|private
 specifier|final
