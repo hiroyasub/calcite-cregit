@@ -5887,9 +5887,18 @@ argument_list|,
 literal|"DESCRIBE SCHEMA `A`"
 argument_list|)
 expr_stmt|;
+comment|// Currently DESCRIBE DATABASE, DESCRIBE CATALOG become DESCRIBE SCHEMA.
+comment|// See [CALCITE-1221] Implement DESCRIBE DATABASE, CATALOG, STATEMENT
 name|check
 argument_list|(
 literal|"describe database A"
+argument_list|,
+literal|"DESCRIBE SCHEMA `A`"
+argument_list|)
+expr_stmt|;
+name|check
+argument_list|(
+literal|"describe catalog A"
 argument_list|,
 literal|"DESCRIBE SCHEMA `A`"
 argument_list|)
@@ -5906,21 +5915,189 @@ name|check
 argument_list|(
 literal|"describe emps"
 argument_list|,
-literal|"DESCRIBE `EMPS`"
+literal|"DESCRIBE TABLE `EMPS`"
+argument_list|)
+expr_stmt|;
+name|check
+argument_list|(
+literal|"describe \"emps\""
+argument_list|,
+literal|"DESCRIBE TABLE `emps`"
+argument_list|)
+expr_stmt|;
+name|check
+argument_list|(
+literal|"describe s.emps"
+argument_list|,
+literal|"DESCRIBE TABLE `S`.`EMPS`"
+argument_list|)
+expr_stmt|;
+name|check
+argument_list|(
+literal|"describe db.c.s.emps"
+argument_list|,
+literal|"DESCRIBE TABLE `DB`.`C`.`S`.`EMPS`"
 argument_list|)
 expr_stmt|;
 name|check
 argument_list|(
 literal|"describe emps col1"
 argument_list|,
-literal|"DESCRIBE `EMPS` `COL1`"
+literal|"DESCRIBE TABLE `EMPS` `COL1`"
+argument_list|)
+expr_stmt|;
+comment|// table keyword is OK
+name|check
+argument_list|(
+literal|"describe table emps col1"
+argument_list|,
+literal|"DESCRIBE TABLE `EMPS` `COL1`"
+argument_list|)
+expr_stmt|;
+comment|// character literal for column name not ok
+name|checkFails
+argument_list|(
+literal|"describe emps ^'col_'^"
+argument_list|,
+literal|"(?s).*Encountered \"\\\\'col_\\\\'\" at .*"
+argument_list|)
+expr_stmt|;
+comment|// composite column name not ok
+name|checkFails
+argument_list|(
+literal|"describe emps c1^.^c2"
+argument_list|,
+literal|"(?s).*Encountered \"\\.\" at .*"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testDescribeStatement
+parameter_list|()
+block|{
+comment|// Currently DESCRIBE STATEMENT becomes EXPLAIN.
+comment|// See [CALCITE-1221] Implement DESCRIBE DATABASE, CATALOG, STATEMENT
+specifier|final
+name|String
+name|expected0
+init|=
+literal|""
+operator|+
+literal|"EXPLAIN PLAN INCLUDING ATTRIBUTES WITH IMPLEMENTATION FOR\n"
+operator|+
+literal|"SELECT *\n"
+operator|+
+literal|"FROM `EMPS`"
+decl_stmt|;
+name|check
+argument_list|(
+literal|"describe statement select * from emps"
+argument_list|,
+name|expected0
+argument_list|)
+expr_stmt|;
+specifier|final
+name|String
+name|expected1
+init|=
+literal|""
+operator|+
+literal|"EXPLAIN PLAN INCLUDING ATTRIBUTES WITH IMPLEMENTATION FOR\n"
+operator|+
+literal|"(SELECT *\n"
+operator|+
+literal|"FROM `EMPS`\n"
+operator|+
+literal|"ORDER BY 2)"
+decl_stmt|;
+name|check
+argument_list|(
+literal|"describe statement select * from emps order by 2"
+argument_list|,
+name|expected1
 argument_list|)
 expr_stmt|;
 name|check
 argument_list|(
-literal|"describe emps 'col_'"
+literal|"describe select * from emps"
 argument_list|,
-literal|"DESCRIBE `EMPS` 'col_'"
+name|expected0
+argument_list|)
+expr_stmt|;
+name|check
+argument_list|(
+literal|"describe (select * from emps)"
+argument_list|,
+name|expected0
+argument_list|)
+expr_stmt|;
+name|check
+argument_list|(
+literal|"describe statement (select * from emps)"
+argument_list|,
+name|expected0
+argument_list|)
+expr_stmt|;
+specifier|final
+name|String
+name|expected2
+init|=
+literal|""
+operator|+
+literal|"EXPLAIN PLAN INCLUDING ATTRIBUTES WITH IMPLEMENTATION FOR\n"
+operator|+
+literal|"(SELECT `DEPTNO`\n"
+operator|+
+literal|"FROM `EMPS`\n"
+operator|+
+literal|"UNION\n"
+operator|+
+literal|"SELECT `DEPTNO`\n"
+operator|+
+literal|"FROM `DEPTS`)"
+decl_stmt|;
+name|check
+argument_list|(
+literal|"describe select deptno from emps union select deptno from depts"
+argument_list|,
+name|expected2
+argument_list|)
+expr_stmt|;
+specifier|final
+name|String
+name|expected3
+init|=
+literal|""
+operator|+
+literal|"EXPLAIN PLAN INCLUDING ATTRIBUTES WITH IMPLEMENTATION FOR\n"
+operator|+
+literal|"INSERT INTO `EMPS`\n"
+operator|+
+literal|"(VALUES (ROW(1, 'a')))"
+decl_stmt|;
+name|check
+argument_list|(
+literal|"describe insert into emps values (1, 'a')"
+argument_list|,
+name|expected3
+argument_list|)
+expr_stmt|;
+comment|// only allow query or DML, not explain, inside describe
+name|checkFails
+argument_list|(
+literal|"^describe^ explain plan for select * from emps"
+argument_list|,
+literal|"(?s).*Encountered \"describe explain\" at .*"
+argument_list|)
+expr_stmt|;
+name|checkFails
+argument_list|(
+literal|"describe ^statement^ explain plan for select * from emps"
+argument_list|,
+literal|"(?s).*Encountered \"statement explain\" at .*"
 argument_list|)
 expr_stmt|;
 block|}

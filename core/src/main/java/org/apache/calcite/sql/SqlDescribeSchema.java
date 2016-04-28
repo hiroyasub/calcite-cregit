@@ -56,7 +56,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * A<code>SqlDescribeSchema</code> is a node of a parse tree which represents an  * DESCRIBE SCHEMA statement.  */
+comment|/**  * A<code>SqlDescribeSchema</code> is a node of a parse tree that represents a  * {@code DESCRIBE SCHEMA} statement.  */
 end_comment
 
 begin_class
@@ -79,7 +79,7 @@ literal|"DESCRIBE_SCHEMA"
 argument_list|,
 name|SqlKind
 operator|.
-name|DESCRIBE
+name|DESCRIBE_SCHEMA
 argument_list|)
 block|{
 annotation|@
@@ -120,6 +120,7 @@ decl_stmt|;
 name|SqlIdentifier
 name|schema
 decl_stmt|;
+comment|/** Creates a SqlDescribeSchema. */
 specifier|public
 name|SqlDescribeSchema
 parameter_list|(
@@ -226,19 +227,6 @@ block|}
 annotation|@
 name|Override
 specifier|public
-name|SqlKind
-name|getKind
-parameter_list|()
-block|{
-return|return
-name|SqlKind
-operator|.
-name|DESCRIBE
-return|;
-block|}
-annotation|@
-name|Override
-specifier|public
 name|SqlOperator
 name|getOperator
 parameter_list|()
@@ -260,11 +248,11 @@ block|{
 return|return
 name|ImmutableNullableList
 operator|.
+expr|<
+name|SqlNode
+operator|>
 name|of
 argument_list|(
-operator|(
-name|SqlNode
-operator|)
 name|schema
 argument_list|)
 return|;

@@ -56,7 +56,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * A<code>SqlDescribeTable</code> is a node of a parse tree which represents an  * DESCRIBE table statement.  */
+comment|/**  * A<code>SqlDescribeTable</code> is a node of a parse tree that represents a  * {@code DESCRIBE TABLE} statement.  */
 end_comment
 
 begin_class
@@ -79,7 +79,7 @@ literal|"DESCRIBE_TABLE"
 argument_list|,
 name|SqlKind
 operator|.
-name|DESCRIBE
+name|DESCRIBE_TABLE
 argument_list|)
 block|{
 annotation|@
@@ -120,11 +120,6 @@ name|operands
 index|[
 literal|1
 index|]
-argument_list|,
-name|operands
-index|[
-literal|2
-index|]
 argument_list|)
 return|;
 block|}
@@ -136,9 +131,7 @@ decl_stmt|;
 name|SqlIdentifier
 name|column
 decl_stmt|;
-name|SqlNode
-name|columnQualifier
-decl_stmt|;
+comment|/** Creates a SqlDescribeTable. */
 specifier|public
 name|SqlDescribeTable
 parameter_list|(
@@ -150,9 +143,6 @@ name|table
 parameter_list|,
 name|SqlIdentifier
 name|column
-parameter_list|,
-name|SqlNode
-name|columnQualifier
 parameter_list|)
 block|{
 name|super
@@ -171,12 +161,6 @@ operator|.
 name|column
 operator|=
 name|column
-expr_stmt|;
-name|this
-operator|.
-name|columnQualifier
-operator|=
-name|columnQualifier
 expr_stmt|;
 block|}
 annotation|@
@@ -202,6 +186,13 @@ argument_list|(
 literal|"DESCRIBE"
 argument_list|)
 expr_stmt|;
+name|writer
+operator|.
+name|keyword
+argument_list|(
+literal|"TABLE"
+argument_list|)
+expr_stmt|;
 name|table
 operator|.
 name|unparse
@@ -221,25 +212,6 @@ literal|null
 condition|)
 block|{
 name|column
-operator|.
-name|unparse
-argument_list|(
-name|writer
-argument_list|,
-name|leftPrec
-argument_list|,
-name|rightPrec
-argument_list|)
-expr_stmt|;
-block|}
-if|if
-condition|(
-name|columnQualifier
-operator|!=
-literal|null
-condition|)
-block|{
-name|columnQualifier
 operator|.
 name|unparse
 argument_list|(
@@ -292,14 +264,6 @@ operator|)
 name|operand
 expr_stmt|;
 break|break;
-case|case
-literal|2
-case|:
-name|columnQualifier
-operator|=
-name|operand
-expr_stmt|;
-break|break;
 default|default:
 throw|throw
 operator|new
@@ -309,19 +273,6 @@ name|i
 argument_list|)
 throw|;
 block|}
-block|}
-annotation|@
-name|Override
-specifier|public
-name|SqlKind
-name|getKind
-parameter_list|()
-block|{
-return|return
-name|SqlKind
-operator|.
-name|DESCRIBE
-return|;
 block|}
 annotation|@
 name|Override
@@ -347,13 +298,14 @@ block|{
 return|return
 name|ImmutableNullableList
 operator|.
+expr|<
+name|SqlNode
+operator|>
 name|of
 argument_list|(
 name|table
 argument_list|,
 name|column
-argument_list|,
-name|columnQualifier
 argument_list|)
 return|;
 block|}
@@ -373,15 +325,6 @@ parameter_list|()
 block|{
 return|return
 name|column
-return|;
-block|}
-specifier|public
-name|SqlNode
-name|getColumnQualifier
-parameter_list|()
-block|{
-return|return
-name|columnQualifier
 return|;
 block|}
 block|}

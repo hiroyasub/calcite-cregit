@@ -77,8 +77,11 @@ block|,
 comment|/**    * EXPLAIN statement    */
 name|EXPLAIN
 block|,
-comment|/**    * DESCRIBE statement    */
-name|DESCRIBE
+comment|/**    * DESCRIBE SCHEMA statement    */
+name|DESCRIBE_SCHEMA
+block|,
+comment|/**    * DESCRIBE TABLE statement    */
+name|DESCRIBE_TABLE
 block|,
 comment|/**    * INSERT statement    */
 name|INSERT
