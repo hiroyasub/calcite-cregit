@@ -23136,6 +23136,195 @@ comment|//            1         2         3         4         5         6
 comment|//   12345678901234567890123456789012345678901234567890123456789012345
 comment|//        check("SELECT count(0) FROM emp GROUP BY ()");
 block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testStructType
+parameter_list|()
+block|{
+comment|// Table STRUCT.T is defined as:
+comment|// (K0 VARCHAR(20) NOT NULL, C1 VARCHAR(20) NOT NULL,
+comment|//   RecordType(C0 INTEGER NOT NULL, C1 INTEGER NOT NULL) F0,
+comment|//   RecordType(C0 INTEGER, C2 INTEGER NOT NULL, A0 INTEGER NOT NULL) F1,
+comment|//   RecordType(C3 INTEGER NOT NULL, A0 BOOLEAN NOT NULL) F2)
+comment|// , where F0 has a default struct priority.
+name|check
+argument_list|(
+literal|"select * from struct.t"
+argument_list|)
+expr_stmt|;
+comment|// Resolve K0 as top-level column K0.
+name|checkResultType
+argument_list|(
+literal|"select k0 from struct.t"
+argument_list|,
+literal|"RecordType(VARCHAR(20) NOT NULL K0) NOT NULL"
+argument_list|)
+expr_stmt|;
+comment|// Resolve C2 as secondary-level column F1.C2.
+name|checkResultType
+argument_list|(
+literal|"select c2 from struct.t"
+argument_list|,
+literal|"RecordType(INTEGER NOT NULL C2) NOT NULL"
+argument_list|)
+expr_stmt|;
+comment|// Resolve F1.C2 as fully qualified column F1.C2.
+name|checkResultType
+argument_list|(
+literal|"select c2 from struct.t"
+argument_list|,
+literal|"RecordType(INTEGER NOT NULL C2) NOT NULL"
+argument_list|)
+expr_stmt|;
+comment|// Resolve C1 as top-level column C1 as opposed to F0.C1.
+name|checkResultType
+argument_list|(
+literal|"select c1 from struct.t"
+argument_list|,
+literal|"RecordType(VARCHAR(20) NOT NULL C1) NOT NULL"
+argument_list|)
+expr_stmt|;
+comment|// Resolve C0 as secondary-level column F0.C0 as opposed to F1.C0, since F0 has the
+comment|// default priority.
+name|checkResultType
+argument_list|(
+literal|"select c0 from struct.t"
+argument_list|,
+literal|"RecordType(INTEGER NOT NULL C0) NOT NULL"
+argument_list|)
+expr_stmt|;
+comment|// Resolve F1.C0 as fully qualified column F1.C0.
+name|checkResultType
+argument_list|(
+literal|"select f1.c0 from struct.t"
+argument_list|,
+literal|"RecordType(INTEGER C0) NOT NULL"
+argument_list|)
+expr_stmt|;
+comment|// Fail ambiguous column reference A0, since F1.A0 and F2.A0 both exist with the
+comment|// same resolving priority.
+name|checkFails
+argument_list|(
+literal|"select ^a0^ from struct.t"
+argument_list|,
+literal|"Column 'A0' is ambiguous"
+argument_list|)
+expr_stmt|;
+comment|// Resolve F2.A0 as fully qualified column F2.A0.
+name|checkResultType
+argument_list|(
+literal|"select f2.a0 from struct.t"
+argument_list|,
+literal|"RecordType(BOOLEAN NOT NULL C0) NOT NULL"
+argument_list|)
+expr_stmt|;
+comment|// Resolve T0.K0 as top-level column K0, since T0 is recognized as the table alias.
+name|checkResultType
+argument_list|(
+literal|"select t0.k0 from struct.t t0"
+argument_list|,
+literal|"RecordType(VARCHAR(20) NOT NULL K0) NOT NULL"
+argument_list|)
+expr_stmt|;
+comment|// Resolve T0.C2 as secondary-level column F1.C2, since T0 is recognized as the
+comment|// table alias here.
+name|checkResultType
+argument_list|(
+literal|"select t0.c2 from struct.t t0"
+argument_list|,
+literal|"RecordType(INTEGER NOT NULL C2) NOT NULL"
+argument_list|)
+expr_stmt|;
+comment|// Resolve F0.C2 as secondary-level column F1.C2, since F0 is recognized as the
+comment|// table alias here.
+name|checkResultType
+argument_list|(
+literal|"select f0.c2 from struct.t f0"
+argument_list|,
+literal|"RecordType(INTEGER NOT NULL C2) NOT NULL"
+argument_list|)
+expr_stmt|;
+comment|// Resolve F0.C1 as top-level column C1 as opposed to F0.C1, since F0 is recognized
+comment|// as the table alias here.
+name|checkResultType
+argument_list|(
+literal|"select f0.c1 from struct.t f0"
+argument_list|,
+literal|"RecordType(VARCHAR(20) NOT NULL C1) NOT NULL"
+argument_list|)
+expr_stmt|;
+comment|// Resolve T.C1 as top-level column C1 as opposed to F0.C1, since T is recognized as
+comment|// the table name.
+name|checkResultType
+argument_list|(
+literal|"select t.c1 from struct.t f0"
+argument_list|,
+literal|"RecordType(VARCHAR(20) NOT NULL C1) NOT NULL"
+argument_list|)
+expr_stmt|;
+comment|// Resolve STRUCT.T.C1 as top-level column C1 as opposed to F0.C1, since STRUCT.T is
+comment|// recognized as the schema and table name.
+name|checkResultType
+argument_list|(
+literal|"select struct.t.c1 from struct.t f0"
+argument_list|,
+literal|"RecordType(VARCHAR(20) NOT NULL C1) NOT NULL"
+argument_list|)
+expr_stmt|;
+comment|// Resolve F0.F0.C1 as secondary-level column F0.C1, since the first F0 is recognized
+comment|// as the table alias here.
+name|checkResultType
+argument_list|(
+literal|"select f0.f0.c1 from struct.t f0"
+argument_list|,
+literal|"RecordType(INTEGER NOT NULL C1) NOT NULL"
+argument_list|)
+expr_stmt|;
+comment|// Resolve T.F0.C1 as secondary-level column F0.C1, since T is recognized as the table
+comment|// name.
+name|checkResultType
+argument_list|(
+literal|"select t.f0.c1 from struct.t f0"
+argument_list|,
+literal|"RecordType(INTEGER NOT NULL C1) NOT NULL"
+argument_list|)
+expr_stmt|;
+comment|// Resolve STRUCT.T.F0.C1 as secondary-level column F0.C1, since STRUCT.T is
+comment|// recognized as the schema and table name.
+name|checkResultType
+argument_list|(
+literal|"select struct.t.f0.c1 from struct.t f0"
+argument_list|,
+literal|"RecordType(INTEGER NOT NULL C1) NOT NULL"
+argument_list|)
+expr_stmt|;
+comment|// Resolve struct type F1 with wildcard.
+name|checkResultType
+argument_list|(
+literal|"select f1.* from struct.t"
+argument_list|,
+literal|"RecordType(INTEGER NOT NULL C0, INTEGER NOT NULL C2) NOT NULL"
+argument_list|)
+expr_stmt|;
+comment|// Fail non-existent column B0.
+name|checkFails
+argument_list|(
+literal|"select ^b0^ from struct.t"
+argument_list|,
+literal|"Column 'B0' not found in any table"
+argument_list|)
+expr_stmt|;
+comment|// Fail struct type with no wildcard.
+name|checkFails
+argument_list|(
+literal|"select ^f1^ from struct.t"
+argument_list|,
+literal|"Unknown identifier 'F1'"
+argument_list|)
+expr_stmt|;
+block|}
 block|}
 end_class
 

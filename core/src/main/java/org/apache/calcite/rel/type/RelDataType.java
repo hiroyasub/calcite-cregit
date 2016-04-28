@@ -120,6 +120,15 @@ init|=
 operator|-
 literal|1
 decl_stmt|;
+enum|enum
+name|StructKind
+block|{
+name|FULLY_QUALIFIED
+block|,
+name|PEEK_FIELDS
+block|,
+name|PEEK_FIELDS_DEFAULT
+block|,   }
 comment|//~ Methods ----------------------------------------------------------------
 comment|/**    * Queries whether this is a structured type.    *    * @return whether this type has fields; examples include rows and    * user-defined structured types in SQL, and classes in Java    */
 name|boolean
@@ -150,6 +159,11 @@ function_decl|;
 comment|/**    * Returns the number of fields in a struct type.    *    *<p>This method is equivalent to<code>{@link #getFieldList}    * ().size()</code>.    */
 name|int
 name|getFieldCount
+parameter_list|()
+function_decl|;
+comment|/**    * Gets the StructKind of a structured type.    *    * @return the StructKind that determines how its fields are resolved.    */
+name|StructKind
+name|getStructKind
 parameter_list|()
 function_decl|;
 comment|/**    * Looks up a field by name.    *    *<p>NOTE: Be careful choosing the value of {@code caseSensitive}:</p>    *<ul>    *<li>If the field name was supplied by an end-user (e.g. as a column alias    * in SQL), use your session's case-sensitivity setting.</li>    *<li>Only hard-code {@code true} if you are sure that the field name is    * internally generated.</li>    *<li>Hard-coding {@code false} is almost certainly wrong.</li>    *</ul>    *    * @param fieldName Name of field to find    * @param caseSensitive Whether match is case-sensitive    * @param elideRecord Whether to find fields nested within records    * @return named field, or null if not found    */

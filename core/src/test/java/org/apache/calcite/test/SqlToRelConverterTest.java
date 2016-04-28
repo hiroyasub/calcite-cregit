@@ -6016,6 +6016,24 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testStructType
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"select * from struct.t"
+argument_list|)
+operator|.
+name|convertsTo
+argument_list|(
+literal|""
+argument_list|)
+expr_stmt|;
+block|}
 comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1150">[CALCITE-1150]    * Dynamic Table / Dynamic Star support</a>    */
 annotation|@
 name|Test
