@@ -525,6 +525,13 @@ name|registerEquivOp
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
+name|TRANSLATE3
+argument_list|)
+expr_stmt|;
+name|registerEquivOp
+argument_list|(
+name|SqlStdOperatorTable
+operator|.
 name|POSITION
 argument_list|)
 expr_stmt|;

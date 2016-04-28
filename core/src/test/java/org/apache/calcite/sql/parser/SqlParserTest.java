@@ -7380,6 +7380,21 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testTranslate3
+parameter_list|()
+block|{
+name|checkExp
+argument_list|(
+literal|"translate('aaabbbccc', 'ab', '+-')"
+argument_list|,
+literal|"TRANSLATE('aaabbbccc', 'ab', '+-')"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testOverlay
 parameter_list|()
 block|{

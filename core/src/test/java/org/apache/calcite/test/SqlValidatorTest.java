@@ -2710,6 +2710,21 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testTranslate3
+parameter_list|()
+block|{
+name|checkExpType
+argument_list|(
+literal|"translate('aabbcc', 'ab', '+-')"
+argument_list|,
+literal|"VARCHAR(6) NOT NULL"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testOverlay
 parameter_list|()
 block|{

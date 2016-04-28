@@ -14075,6 +14075,88 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testTranslate3Func
+parameter_list|()
+block|{
+name|tester
+operator|.
+name|setFor
+argument_list|(
+name|SqlStdOperatorTable
+operator|.
+name|TRANSLATE3
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"translate('aabbcc', 'ab', '+-')"
+argument_list|,
+literal|"++--cc"
+argument_list|,
+literal|"VARCHAR(6) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"translate('aabbcc', 'ab', '')"
+argument_list|,
+literal|"cc"
+argument_list|,
+literal|"VARCHAR(6) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"translate('aabbcc', '', '+-')"
+argument_list|,
+literal|"aabbcc"
+argument_list|,
+literal|"VARCHAR(6) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"translate(cast('aabbcc' as varchar(10)), 'ab', '+-')"
+argument_list|,
+literal|"++--cc"
+argument_list|,
+literal|"VARCHAR(10) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkNull
+argument_list|(
+literal|"translate(cast(null as varchar(7)), 'ab', '+-')"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkNull
+argument_list|(
+literal|"translate('aabbcc', cast(null as varchar(2)), '+-')"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkNull
+argument_list|(
+literal|"translate('aabbcc', 'ab', cast(null as varchar(2)))"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testOverlayFunc
 parameter_list|()
 block|{
