@@ -284,6 +284,24 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+comment|/**    * Determines whether an operand is a literal.    *    * @param ordinal   zero-based ordinal of operand of interest    * @param allowCast whether to regard CAST(literal) as a literal    * @return whether operand is literal    */
+specifier|public
+name|boolean
+name|isOperandLiteral
+parameter_list|(
+name|int
+name|ordinal
+parameter_list|,
+name|boolean
+name|allowCast
+parameter_list|)
+block|{
+throw|throw
+operator|new
+name|UnsupportedOperationException
+argument_list|()
+throw|;
+block|}
 comment|/**    * @return the number of bound operands    */
 specifier|public
 specifier|abstract
