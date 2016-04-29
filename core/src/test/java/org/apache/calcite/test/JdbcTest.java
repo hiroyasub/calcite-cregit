@@ -6703,7 +6703,7 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Tests driver's implementation of {@link DatabaseMetaData#getColumns}. */
+comment|/** Tests driver's implementation of {@link DatabaseMetaData#getColumns},    * and also    *<a href="https://issues.apache.org/jira/browse/CALCITE-1222">[CALCITE-1222]    * DatabaseMetaData.getColumnLabel returns null when query has ORDER    * BY</a>, */
 annotation|@
 name|Test
 specifier|public
@@ -6715,6 +6715,8 @@ name|ClassNotFoundException
 throws|,
 name|SQLException
 block|{
+try|try
+init|(
 name|Connection
 name|connection
 init|=
@@ -6731,7 +6733,57 @@ argument_list|)
 operator|.
 name|connect
 argument_list|()
+init|)
+block|{
+specifier|final
+name|String
+name|sql0
+init|=
+literal|"select \"empid\", \"deptno\" as x, 1 as y\n"
+operator|+
+literal|"from \"hr\".\"emps\""
 decl_stmt|;
+name|checkResultSetMetaData
+argument_list|(
+name|connection
+argument_list|,
+name|sql0
+argument_list|)
+expr_stmt|;
+specifier|final
+name|String
+name|sql1
+init|=
+literal|"select \"empid\", \"deptno\" as x, 1 as y\n"
+operator|+
+literal|"from \"hr\".\"emps\"\n"
+operator|+
+literal|"order by 1"
+decl_stmt|;
+name|checkResultSetMetaData
+argument_list|(
+name|connection
+argument_list|,
+name|sql1
+argument_list|)
+expr_stmt|;
+block|}
+block|}
+specifier|private
+name|void
+name|checkResultSetMetaData
+parameter_list|(
+name|Connection
+name|connection
+parameter_list|,
+name|String
+name|sql
+parameter_list|)
+throws|throws
+name|SQLException
+block|{
+try|try
+init|(
 name|Statement
 name|statement
 init|=
@@ -6739,7 +6791,7 @@ name|connection
 operator|.
 name|createStatement
 argument_list|()
-decl_stmt|;
+init|;
 name|ResultSet
 name|resultSet
 init|=
@@ -6747,11 +6799,10 @@ name|statement
 operator|.
 name|executeQuery
 argument_list|(
-literal|"select \"empid\", \"deptno\" as x, 1 as y\n"
-operator|+
-literal|"from \"hr\".\"emps\""
+name|sql
 argument_list|)
-decl_stmt|;
+init|)
+block|{
 name|ResultSetMetaData
 name|metaData
 init|=
@@ -6878,16 +6929,7 @@ literal|3
 argument_list|)
 argument_list|)
 expr_stmt|;
-name|resultSet
-operator|.
-name|close
-argument_list|()
-expr_stmt|;
-name|connection
-operator|.
-name|close
-argument_list|()
-expr_stmt|;
+block|}
 block|}
 comment|/** Tests some queries that have expedited processing because connection pools    * like to use them to check whether the connection is alive.    */
 annotation|@
