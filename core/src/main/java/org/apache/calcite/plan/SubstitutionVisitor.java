@@ -8309,7 +8309,9 @@ operator|instanceof
 name|MutableScan
 operator|&&
 name|rel
-operator|==
+operator|.
+name|equals
+argument_list|(
 operator|(
 operator|(
 name|MutableScan
@@ -8318,6 +8320,7 @@ name|obj
 operator|)
 operator|.
 name|rel
+argument_list|)
 return|;
 block|}
 annotation|@
