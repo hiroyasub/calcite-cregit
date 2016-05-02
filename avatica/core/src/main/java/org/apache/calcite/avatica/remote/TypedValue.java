@@ -75,6 +75,22 @@ name|avatica
 operator|.
 name|util
 operator|.
+name|Base64
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|avatica
+operator|.
+name|util
+operator|.
 name|ByteString
 import|;
 end_import
@@ -262,6 +278,50 @@ operator|.
 name|TypedValue
 operator|.
 name|NUMBER_VALUE_FIELD_NUMBER
+argument_list|)
+decl_stmt|;
+specifier|private
+specifier|static
+specifier|final
+name|FieldDescriptor
+name|STRING_DESCRIPTOR
+init|=
+name|Common
+operator|.
+name|TypedValue
+operator|.
+name|getDescriptor
+argument_list|()
+operator|.
+name|findFieldByNumber
+argument_list|(
+name|Common
+operator|.
+name|TypedValue
+operator|.
+name|STRING_VALUE_FIELD_NUMBER
+argument_list|)
+decl_stmt|;
+specifier|private
+specifier|static
+specifier|final
+name|FieldDescriptor
+name|BYTES_DESCRIPTOR
+init|=
+name|Common
+operator|.
+name|TypedValue
+operator|.
+name|getDescriptor
+argument_list|()
+operator|.
+name|findFieldByNumber
+argument_list|(
+name|Common
+operator|.
+name|TypedValue
+operator|.
+name|BYTES_VALUE_FIELD_NUMBER
 argument_list|)
 decl_stmt|;
 specifier|public
@@ -1479,6 +1539,17 @@ operator|instanceof
 name|String
 condition|)
 block|{
+comment|// Backwards compatibility for client CALCITE-1209
+name|builder
+operator|.
+name|setStringValue
+argument_list|(
+operator|(
+name|String
+operator|)
+name|o
+argument_list|)
+expr_stmt|;
 comment|// Assume strings are already b64 encoded
 name|bytes
 operator|=
@@ -1495,6 +1566,24 @@ expr_stmt|;
 block|}
 else|else
 block|{
+comment|// Backwards compatibility for client CALCITE-1209
+name|builder
+operator|.
+name|setStringValue
+argument_list|(
+name|Base64
+operator|.
+name|encodeBytes
+argument_list|(
+operator|(
+name|byte
+index|[]
+operator|)
+name|o
+argument_list|)
+argument_list|)
+expr_stmt|;
+comment|// Use the byte array
 name|bytes
 operator|=
 operator|(
@@ -1967,6 +2056,35 @@ return|;
 case|case
 name|BYTE_STRING
 case|:
+if|if
+condition|(
+name|protoValue
+operator|.
+name|hasField
+argument_list|(
+name|STRING_DESCRIPTOR
+argument_list|)
+operator|&&
+operator|!
+name|protoValue
+operator|.
+name|hasField
+argument_list|(
+name|BYTES_DESCRIPTOR
+argument_list|)
+condition|)
+block|{
+comment|// Prior to CALCITE-1103, clients would send b64 strings for bytes instead of using the
+comment|// native byte format. The value we need to provide as the local format for TypedValue
+comment|// is directly accessible via the Protobuf representation. Both fields are sent by the
+comment|// server to support older clients, so only parse the string value when it is alone.
+return|return
+name|protoValue
+operator|.
+name|getStringValue
+argument_list|()
+return|;
+block|}
 comment|// TypedValue is still going to expect a b64string for BYTE_STRING even though we sent it
 comment|// across the wire natively as bytes. Return it as b64.
 return|return
