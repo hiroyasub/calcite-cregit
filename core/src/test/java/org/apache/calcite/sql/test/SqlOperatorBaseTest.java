@@ -14078,16 +14078,23 @@ name|void
 name|testTranslate3Func
 parameter_list|()
 block|{
-name|tester
+specifier|final
+name|SqlTester
+name|tester1
+init|=
+name|oracleTester
+argument_list|()
+decl_stmt|;
+name|tester1
 operator|.
 name|setFor
 argument_list|(
-name|SqlStdOperatorTable
+name|OracleSqlOperatorTable
 operator|.
 name|TRANSLATE3
 argument_list|)
 expr_stmt|;
-name|tester
+name|tester1
 operator|.
 name|checkString
 argument_list|(
@@ -14098,7 +14105,18 @@ argument_list|,
 literal|"VARCHAR(6) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|tester1
+operator|.
+name|checkString
+argument_list|(
+literal|"translate('aabbcc', 'ab', 'ba')"
+argument_list|,
+literal|"bbaacc"
+argument_list|,
+literal|"VARCHAR(6) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester1
 operator|.
 name|checkString
 argument_list|(
@@ -14109,7 +14127,7 @@ argument_list|,
 literal|"VARCHAR(6) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|tester1
 operator|.
 name|checkString
 argument_list|(
@@ -14120,7 +14138,7 @@ argument_list|,
 literal|"VARCHAR(6) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|tester1
 operator|.
 name|checkString
 argument_list|(
@@ -14131,21 +14149,21 @@ argument_list|,
 literal|"VARCHAR(10) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|tester1
 operator|.
 name|checkNull
 argument_list|(
 literal|"translate(cast(null as varchar(7)), 'ab', '+-')"
 argument_list|)
 expr_stmt|;
-name|tester
+name|tester1
 operator|.
 name|checkNull
 argument_list|(
 literal|"translate('aabbcc', cast(null as varchar(2)), '+-')"
 argument_list|)
 expr_stmt|;
-name|tester
+name|tester1
 operator|.
 name|checkNull
 argument_list|(

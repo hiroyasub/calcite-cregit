@@ -3170,7 +3170,7 @@ argument_list|(
 literal|"CONVERT"
 argument_list|)
 decl_stmt|;
-comment|/**    * The<code>TRANSLATE(<i>char_value</i> USING<i>translation_name</i>)</code> function    * alters the character set of a string value from one base character set to another.    */
+comment|/**    * The<code>TRANSLATE(<i>char_value</i> USING<i>translation_name</i>)</code> function    * alters the character set of a string value from one base character set to another.    *    *<p>It is defined in the SQL standard. See also non-standard    * {@link OracleSqlOperatorTable#TRANSLATE3}.    */
 specifier|public
 specifier|static
 specifier|final
@@ -3182,17 +3182,6 @@ name|SqlConvertFunction
 argument_list|(
 literal|"TRANSLATE"
 argument_list|)
-decl_stmt|;
-comment|/**    * The<code>TRANSLATE(<i>string_expr</i>,<i>search_chars</i>,<i>replacement_chars</i>)</code>    * function returns<i>string_expr</i> with all occurrences of each character in    *<i>search_chars</i> replaced by its corresponding character in<i>replacement_chars</i>.    */
-specifier|public
-specifier|static
-specifier|final
-name|SqlFunction
-name|TRANSLATE3
-init|=
-operator|new
-name|SqlTranslate3Function
-argument_list|()
 decl_stmt|;
 specifier|public
 specifier|static

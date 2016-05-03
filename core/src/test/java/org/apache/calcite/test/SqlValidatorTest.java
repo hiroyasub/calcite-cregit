@@ -133,6 +133,22 @@ name|sql
 operator|.
 name|fun
 operator|.
+name|OracleSqlOperatorTable
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|fun
+operator|.
 name|SqlStdOperatorTable
 import|;
 end_import
@@ -166,6 +182,22 @@ operator|.
 name|type
 operator|.
 name|SqlTypeName
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|util
+operator|.
+name|ChainedSqlOperatorTable
 import|;
 end_import
 
@@ -2713,11 +2745,62 @@ name|void
 name|testTranslate3
 parameter_list|()
 block|{
+comment|// TRANSLATE3 is not in the standard operator table
+name|checkWholeExpFails
+argument_list|(
+literal|"translate('aabbcc', 'ab', '+-')"
+argument_list|,
+literal|"No match found for function signature TRANSLATE3\\(<CHARACTER>,<CHARACTER>,<CHARACTER>\\)"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|=
+name|tester
+operator|.
+name|withOperatorTable
+argument_list|(
+name|ChainedSqlOperatorTable
+operator|.
+name|of
+argument_list|(
+name|OracleSqlOperatorTable
+operator|.
+name|instance
+argument_list|()
+argument_list|,
+name|SqlStdOperatorTable
+operator|.
+name|instance
+argument_list|()
+argument_list|)
+argument_list|)
+expr_stmt|;
 name|checkExpType
 argument_list|(
 literal|"translate('aabbcc', 'ab', '+-')"
 argument_list|,
 literal|"VARCHAR(6) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|checkWholeExpFails
+argument_list|(
+literal|"translate('abc', 'ab')"
+argument_list|,
+literal|"Invalid number of arguments to function 'TRANSLATE3'. Was expecting 3 arguments"
+argument_list|)
+expr_stmt|;
+name|checkWholeExpFails
+argument_list|(
+literal|"translate('abc', 'ab', 123)"
+argument_list|,
+literal|"(?s)Cannot apply 'TRANSLATE3' to arguments of type 'TRANSLATE3\\(<CHAR\\(3\\)>,<CHAR\\(2\\)>,<INTEGER>\\)'\\. .*"
+argument_list|)
+expr_stmt|;
+name|checkWholeExpFails
+argument_list|(
+literal|"translate('abc', 'ab', '+-', 'four')"
+argument_list|,
+literal|"Invalid number of arguments to function 'TRANSLATE3'. Was expecting 3 arguments"
 argument_list|)
 expr_stmt|;
 block|}

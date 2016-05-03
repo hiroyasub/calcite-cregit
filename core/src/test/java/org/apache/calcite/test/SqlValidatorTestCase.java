@@ -315,7 +315,6 @@ argument_list|)
 decl_stmt|;
 comment|//~ Instance fields --------------------------------------------------------
 specifier|protected
-specifier|final
 name|SqlTester
 name|tester
 decl_stmt|;

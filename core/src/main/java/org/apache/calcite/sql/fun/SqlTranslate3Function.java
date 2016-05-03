@@ -134,7 +134,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Definition of the "TRANSLATE" builtin SQL function.  */
+comment|/**  * Definition of the "TRANSLATE" built-in SQL function that takes 3 arguments.  *  *<p>Based on Oracle's {@code TRANSLATE} function, it is commonly called  * "TRANSLATE3" to distinguish it from the standard SQL function  * {@link SqlStdOperatorTable#TRANSLATE} that takes 2 arguments and has an  * entirely different purpose.  */
 end_comment
 
 begin_class
@@ -174,7 +174,8 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|//Check logic
+annotation|@
+name|Override
 specifier|public
 name|void
 name|unparse
@@ -243,6 +244,8 @@ name|frame
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|String
 name|getSignatureTemplate

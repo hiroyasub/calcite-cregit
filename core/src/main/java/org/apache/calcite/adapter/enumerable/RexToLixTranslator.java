@@ -651,6 +651,24 @@ name|sql
 operator|.
 name|fun
 operator|.
+name|OracleSqlOperatorTable
+operator|.
+name|TRANSLATE3
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|fun
+operator|.
 name|SqlStdOperatorTable
 operator|.
 name|CHARACTER_LENGTH
@@ -690,24 +708,6 @@ operator|.
 name|SqlStdOperatorTable
 operator|.
 name|SUBSTRING
-import|;
-end_import
-
-begin_import
-import|import static
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|sql
-operator|.
-name|fun
-operator|.
-name|SqlStdOperatorTable
-operator|.
-name|TRANSLATE3
 import|;
 end_import
 

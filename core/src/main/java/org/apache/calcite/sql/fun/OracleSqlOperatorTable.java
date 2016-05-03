@@ -588,6 +588,17 @@ operator|.
 name|SYSTEM
 argument_list|)
 decl_stmt|;
+comment|/**    * The<code>TRANSLATE(<i>string_expr</i>,<i>search_chars</i>,<i>replacement_chars</i>)</code>    * function returns<i>string_expr</i> with all occurrences of each character in    *<i>search_chars</i> replaced by its corresponding character in<i>replacement_chars</i>.    *    *<p>It is not defined in the SQL standard, but occurs in Oracle and PostgreSQL.    */
+specifier|public
+specifier|static
+specifier|final
+name|SqlFunction
+name|TRANSLATE3
+init|=
+operator|new
+name|SqlTranslate3Function
+argument_list|()
+decl_stmt|;
 comment|/**    * Returns the Oracle operator table, creating it if necessary.    */
 specifier|public
 specifier|static
