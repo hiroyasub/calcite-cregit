@@ -612,6 +612,10 @@ name|RexProgramTest
 operator|.
 name|class
 block|,
+name|SqlOperatorBindingTest
+operator|.
+name|class
+block|,
 name|RexTransformerTest
 operator|.
 name|class
