@@ -1196,6 +1196,23 @@ literal|"${plan}"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSelectWithoutFrom
+parameter_list|()
+block|{
+name|check
+argument_list|(
+literal|"select 2+2"
+argument_list|,
+literal|"\nLogicalProject(EXPR$0=[+(2, 2)])\n"
+operator|+
+literal|"  LogicalValues(tuples=[[{ 0 }]])\n"
+argument_list|)
+expr_stmt|;
+block|}
 comment|/** Tests referencing columns from a sub-query that has duplicate column    * names. I think the standard says that this is illegal. We roll with it,    * and rename the second column to "e0". */
 annotation|@
 name|Test

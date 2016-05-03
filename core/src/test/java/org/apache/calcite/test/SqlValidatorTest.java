@@ -18747,6 +18747,38 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testSelectWithoutFrom
+parameter_list|()
+block|{
+specifier|final
+name|SqlConformance
+name|conformance
+init|=
+name|tester
+operator|.
+name|getConformance
+argument_list|()
+decl_stmt|;
+name|checkFails
+argument_list|(
+literal|"^select 2+2^"
+argument_list|,
+name|conformance
+operator|.
+name|isFromRequired
+argument_list|()
+condition|?
+literal|"SELECT must have a FROM clause"
+comment|// otherwise valid
+else|:
+literal|null
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testTableExtend
 parameter_list|()
 block|{

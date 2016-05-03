@@ -118,6 +118,32 @@ operator|.
 name|STRICT_92
 return|;
 block|}
+comment|/**    * Whether from clause is required for any select statement.    */
+specifier|public
+name|boolean
+name|isFromRequired
+parameter_list|()
+block|{
+switch|switch
+condition|(
+name|this
+condition|)
+block|{
+case|case
+name|DEFAULT
+case|:
+case|case
+name|PRAGMATIC_2003
+case|:
+return|return
+literal|false
+return|;
+default|default:
+return|return
+literal|true
+return|;
+block|}
+block|}
 block|}
 end_enum
 

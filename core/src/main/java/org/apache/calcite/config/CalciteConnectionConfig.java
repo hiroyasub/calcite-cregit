@@ -166,6 +166,11 @@ name|T
 name|defaultTypeSystem
 parameter_list|)
 function_decl|;
+comment|/** @see CalciteConnectionProperty#FROM_REQUIRED */
+name|boolean
+name|fromRequired
+parameter_list|()
+function_decl|;
 block|}
 end_interface
 

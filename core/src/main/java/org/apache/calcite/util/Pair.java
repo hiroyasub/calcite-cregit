@@ -886,6 +886,11 @@ name|hasNext
 argument_list|()
 return|;
 block|}
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"unchecked"
+argument_list|)
 specifier|public
 name|Pair
 argument_list|<
@@ -897,6 +902,14 @@ name|next
 parameter_list|()
 block|{
 return|return
+operator|(
+name|Pair
+argument_list|<
+name|K
+argument_list|,
+name|V
+argument_list|>
+operator|)
 name|Pair
 operator|.
 name|of

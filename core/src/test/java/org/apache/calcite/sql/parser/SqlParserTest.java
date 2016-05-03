@@ -738,15 +738,11 @@ literal|"(?s).*Encountered \".1\" at line 1, column 13.\n"
 operator|+
 literal|"Was expecting one of:\n"
 operator|+
-literal|"    \"FROM\" ...\n"
+literal|"<EOF> \n"
 operator|+
-literal|"    \",\" ...\n"
+literal|"    \"ORDER\" ...\n"
 operator|+
-literal|"    \"AS\" ...\n"
-operator|+
-literal|"<IDENTIFIER> ...\n"
-operator|+
-literal|"<QUOTED_IDENTIFIER> ...\n"
+literal|"    \"LIMIT\" ...\n"
 operator|+
 literal|".*"
 argument_list|)
@@ -5260,6 +5256,21 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testSelectWithoutFrom
+parameter_list|()
+block|{
+name|check
+argument_list|(
+literal|"select 2+2"
+argument_list|,
+literal|"SELECT (2 + 2)"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testSelectList3
 parameter_list|()
 block|{
@@ -5476,31 +5487,25 @@ parameter_list|()
 block|{
 name|checkFails
 argument_list|(
-literal|"select 1 from ^values^('x')"
+literal|"select 1 ^from^ values('x')"
 argument_list|,
-literal|"Encountered \"values\" at line 1, column 15\\.\n"
+literal|"(?s)Encountered \"from values\" at line 1, column 10\\.\n"
 operator|+
 literal|"Was expecting one of:\n"
 operator|+
-literal|"<IDENTIFIER> \\.\\.\\.\n"
+literal|"<EOF> \n"
 operator|+
-literal|"<QUOTED_IDENTIFIER> \\.\\.\\.\n"
+literal|"    \"ORDER\" \\.\\.\\.\n"
 operator|+
-literal|"<BACK_QUOTED_IDENTIFIER> \\.\\.\\.\n"
+literal|"    \"LIMIT\" \\.\\.\\.\n"
 operator|+
-literal|"<BRACKET_QUOTED_IDENTIFIER> \\.\\.\\.\n"
+literal|".*"
 operator|+
-literal|"<UNICODE_QUOTED_IDENTIFIER> \\.\\.\\.\n"
+literal|"    \"FROM\"<IDENTIFIER> \\.\\.\\.\n"
 operator|+
-literal|"    \"LATERAL\" \\.\\.\\.\n"
+literal|"    \"FROM\"<QUOTED_IDENTIFIER> \\.\\.\\.\n"
 operator|+
-literal|"    \"\\(\" \\.\\.\\.\n"
-operator|+
-literal|"    \"UNNEST\" \\.\\.\\.\n"
-operator|+
-literal|"    \"TABLE\" \\.\\.\\.\n"
-operator|+
-literal|"    "
+literal|".*"
 argument_list|)
 expr_stmt|;
 block|}

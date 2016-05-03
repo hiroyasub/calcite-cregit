@@ -362,6 +362,20 @@ literal|null
 argument_list|,
 literal|false
 argument_list|)
+block|,
+comment|/** Whether to support SELECT without FROM, e.g. SELECT 2+2. */
+name|FROM_REQUIRED
+argument_list|(
+literal|"fromRequired"
+argument_list|,
+name|Type
+operator|.
+name|BOOLEAN
+argument_list|,
+literal|false
+argument_list|,
+literal|false
+argument_list|)
 block|;
 specifier|private
 specifier|final
