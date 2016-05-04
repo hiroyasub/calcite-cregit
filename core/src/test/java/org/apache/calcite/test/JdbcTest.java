@@ -10835,6 +10835,109 @@ literal|"name=Sales; empid=150; deptno=10; name0=Sebastian; salary=7000.0; commi
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testUnnestArrayScalarArray
+parameter_list|()
+block|{
+name|CalciteAssert
+operator|.
+name|hr
+argument_list|()
+operator|.
+name|query
+argument_list|(
+literal|"select d.\"name\", e.*\n"
+operator|+
+literal|"from \"hr\".\"depts\" as d,\n"
+operator|+
+literal|" UNNEST(d.\"employees\", array[1, 2]) as e"
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"name=HR; empid=200; deptno=20; name0=Eric; salary=8000.0; commission=500; EXPR$1=1"
+argument_list|,
+literal|"name=HR; empid=200; deptno=20; name0=Eric; salary=8000.0; commission=500; EXPR$1=2"
+argument_list|,
+literal|"name=Sales; empid=100; deptno=10; name0=Bill; salary=10000.0; commission=1000; EXPR$1=1"
+argument_list|,
+literal|"name=Sales; empid=100; deptno=10; name0=Bill; salary=10000.0; commission=1000; EXPR$1=2"
+argument_list|,
+literal|"name=Sales; empid=150; deptno=10; name0=Sebastian; salary=7000.0; commission=null; EXPR$1=1"
+argument_list|,
+literal|"name=Sales; empid=150; deptno=10; name0=Sebastian; salary=7000.0; commission=null; EXPR$1=2"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testUnnestArrayScalarArrayAliased
+parameter_list|()
+block|{
+name|CalciteAssert
+operator|.
+name|hr
+argument_list|()
+operator|.
+name|query
+argument_list|(
+literal|"select d.\"name\", e.*\n"
+operator|+
+literal|"from \"hr\".\"depts\" as d,\n"
+operator|+
+literal|" UNNEST(d.\"employees\", array[1, 2]) as e (ei, d, n, s, c, i)\n"
+operator|+
+literal|"where ei + i> 151"
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"name=HR; EI=200; D=20; N=Eric; S=8000.0; C=500; I=1"
+argument_list|,
+literal|"name=HR; EI=200; D=20; N=Eric; S=8000.0; C=500; I=2"
+argument_list|,
+literal|"name=Sales; EI=150; D=10; N=Sebastian; S=7000.0; C=null; I=2"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testUnnestArrayScalarArrayWithOrdinal
+parameter_list|()
+block|{
+name|CalciteAssert
+operator|.
+name|hr
+argument_list|()
+operator|.
+name|query
+argument_list|(
+literal|"select d.\"name\", e.*\n"
+operator|+
+literal|"from \"hr\".\"depts\" as d,\n"
+operator|+
+literal|" UNNEST(d.\"employees\", array[1, 2]) with ordinality as e (ei, d, n, s, c, i, o)\n"
+operator|+
+literal|"where ei + i> 151"
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"name=HR; EI=200; D=20; N=Eric; S=8000.0; C=500; I=1; O=2"
+argument_list|,
+literal|"name=HR; EI=200; D=20; N=Eric; S=8000.0; C=500; I=2; O=4"
+argument_list|,
+literal|"name=Sales; EI=150; D=10; N=Sebastian; S=7000.0; C=null; I=2; O=5"
+argument_list|)
+expr_stmt|;
+block|}
 specifier|private
 name|CalciteAssert
 operator|.

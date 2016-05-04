@@ -562,7 +562,6 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|// implement SqlOperandTypeChecker
 specifier|public
 name|String
 name|getAllowedSignatures
@@ -574,6 +573,13 @@ name|String
 name|opName
 parameter_list|)
 block|{
+specifier|final
+name|String
+name|typeName
+init|=
+name|getTypeName
+argument_list|()
+decl_stmt|;
 return|return
 name|SqlUtil
 operator|.
@@ -592,9 +598,9 @@ name|ImmutableList
 operator|.
 name|of
 argument_list|(
-literal|"EQUIVALENT_TYPE"
+name|typeName
 argument_list|,
-literal|"EQUIVALENT_TYPE"
+name|typeName
 argument_list|,
 literal|"..."
 argument_list|)
@@ -605,9 +611,19 @@ name|nCopies
 argument_list|(
 name|nOperands
 argument_list|,
+name|typeName
+argument_list|)
+argument_list|)
+return|;
+block|}
+comment|/** Override to change the behavior of    * {@link #getAllowedSignatures(SqlOperator, String)}. */
+specifier|protected
+name|String
+name|getTypeName
+parameter_list|()
+block|{
+return|return
 literal|"EQUIVALENT_TYPE"
-argument_list|)
-argument_list|)
 return|;
 block|}
 specifier|public

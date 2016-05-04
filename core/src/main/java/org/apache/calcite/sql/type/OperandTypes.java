@@ -344,10 +344,12 @@ name|rules
 argument_list|)
 argument_list|,
 literal|null
+argument_list|,
+literal|null
 argument_list|)
 return|;
 block|}
-comment|/**    * Creates a single-operand checker that passes if any one of the rules    * passes.    */
+comment|/**    * Creates a checker that passes if all of the rules pass.    */
 specifier|public
 specifier|static
 name|SqlOperandTypeChecker
@@ -374,6 +376,8 @@ name|copyOf
 argument_list|(
 name|rules
 argument_list|)
+argument_list|,
+literal|null
 argument_list|,
 literal|null
 argument_list|)
@@ -411,7 +415,7 @@ literal|null
 argument_list|)
 return|;
 block|}
-comment|/**    * Creates a single-operand checker that passes if any one of the rules    * passes.    */
+comment|/**    * Creates a single-operand checker that passes if all of the rules    * pass.    */
 specifier|public
 specifier|static
 name|SqlSingleOperandTypeChecker
@@ -475,6 +479,45 @@ name|rules
 argument_list|)
 argument_list|,
 name|allowedSignatures
+argument_list|,
+literal|null
+argument_list|)
+return|;
+block|}
+comment|/**    * Creates a checker that passes if all of the rules pass for each operand,    * using a given operand count strategy.    */
+specifier|public
+specifier|static
+name|SqlOperandTypeChecker
+name|repeat
+parameter_list|(
+name|SqlOperandCountRange
+name|range
+parameter_list|,
+name|SqlSingleOperandTypeChecker
+modifier|...
+name|rules
+parameter_list|)
+block|{
+return|return
+operator|new
+name|CompositeOperandTypeChecker
+argument_list|(
+name|CompositeOperandTypeChecker
+operator|.
+name|Composition
+operator|.
+name|REPEAT
+argument_list|,
+name|ImmutableList
+operator|.
+name|copyOf
+argument_list|(
+name|rules
+argument_list|)
+argument_list|,
+literal|null
+argument_list|,
+name|range
 argument_list|)
 return|;
 block|}
