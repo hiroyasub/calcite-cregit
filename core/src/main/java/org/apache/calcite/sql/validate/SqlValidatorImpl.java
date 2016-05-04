@@ -10766,6 +10766,15 @@ argument_list|,
 literal|0
 argument_list|)
 expr_stmt|;
+name|scopes
+operator|.
+name|put
+argument_list|(
+name|node
+argument_list|,
+name|parentScope
+argument_list|)
+expr_stmt|;
 break|break;
 case|case
 name|OTHER_FUNCTION

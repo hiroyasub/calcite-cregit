@@ -14351,6 +14351,46 @@ argument_list|,
 literal|"(?s)Encountered \"unnest\" at.*"
 argument_list|)
 expr_stmt|;
+comment|// UNNEST with more than one argument
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select * from dept,\n"
+operator|+
+literal|"unnest(dept.employees, dept.managers)"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM `DEPT`,\n"
+operator|+
+literal|"(UNNEST(`DEPT`.`EMPLOYEES`, `DEPT`.`MANAGERS`))"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+comment|// LATERAL UNNEST is not valid
+name|sql
+argument_list|(
+literal|"select * from dept, ^lateral^ unnest(dept.employees)"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"(?s)Encountered \"lateral unnest\" at .*"
+argument_list|)
+expr_stmt|;
 block|}
 annotation|@
 name|Test

@@ -10805,8 +10805,6 @@ expr_stmt|;
 block|}
 comment|/** Per SQL std, UNNEST is implicitly LATERAL. */
 annotation|@
-name|Ignore
-annotation|@
 name|Test
 specifier|public
 name|void
@@ -10829,11 +10827,11 @@ argument_list|)
 operator|.
 name|returnsUnordered
 argument_list|(
-literal|"empid=100; deptno=10; name=Bill; salary=10000.0; commission=1000; deptno0=10; name0=Sales; employees=[Employee [empid: 100, deptno: 10, name: Bill], Employee [empid: 150, deptno: 10, name: Sebastian]]"
+literal|"name=HR; empid=200; deptno=20; name0=Eric; salary=8000.0; commission=500"
 argument_list|,
-literal|"empid=110; deptno=10; name=Theodore; salary=11500.0; commission=250; deptno0=10; name0=Sales; employees=[Employee [empid: 100, deptno: 10, name: Bill], Employee [empid: 150, deptno: 10, name: Sebastian]]"
+literal|"name=Sales; empid=100; deptno=10; name0=Bill; salary=10000.0; commission=1000"
 argument_list|,
-literal|"empid=150; deptno=10; name=Sebastian; salary=7000.0; commission=null; deptno0=10; name0=Sales; employees=[Employee [empid: 100, deptno: 10, name: Bill], Employee [empid: 150, deptno: 10, name: Sebastian]]"
+literal|"name=Sales; empid=150; deptno=10; name0=Sebastian; salary=7000.0; commission=null"
 argument_list|)
 expr_stmt|;
 block|}

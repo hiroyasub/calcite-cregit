@@ -18134,6 +18134,84 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testUnnestArrayColumn
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select d.deptno, e.*\n"
+operator|+
+literal|"from dept_nested as d,\n"
+operator|+
+literal|" UNNEST(d.employees) as e"
+decl_stmt|;
+specifier|final
+name|String
+name|type
+init|=
+literal|"RecordType(INTEGER NOT NULL DEPTNO,"
+operator|+
+literal|" INTEGER NOT NULL EMPNO,"
+operator|+
+literal|" VARCHAR(10) NOT NULL ENAME) NOT NULL"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|type
+argument_list|(
+name|type
+argument_list|)
+expr_stmt|;
+comment|// equivalent query using CROSS JOIN
+specifier|final
+name|String
+name|sql2
+init|=
+literal|"select d.deptno, e.*\n"
+operator|+
+literal|"from dept_nested as d CROSS JOIN\n"
+operator|+
+literal|" UNNEST(d.employees) as e"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql2
+argument_list|)
+operator|.
+name|type
+argument_list|(
+name|type
+argument_list|)
+expr_stmt|;
+comment|// LATERAL works left-to-right
+specifier|final
+name|String
+name|sql3
+init|=
+literal|"select d.deptno, e.*\n"
+operator|+
+literal|"from UNNEST(^d^.employees) as e, dept_nested as d"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql3
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Table 'D' not found"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testUnnestWithOrdinality
 parameter_list|()
 block|{

@@ -18990,9 +18990,6 @@ comment|// We're referencing a relational expression which has not been
 comment|// converted yet. This occurs when from items are correlated,
 comment|// e.g. "select from emp as emp join emp.getDepts() as dept".
 comment|// Create a temporary expression.
-assert|assert
-name|isParent
-assert|;
 name|DeferredLookup
 name|lookup
 init|=
