@@ -54,7 +54,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Tests for the {@code org.apache.calcite.adapter.cassandra} package.  *  *<p>Before calling this test, you need to populate Cassandra with the  * "twissandra" data set, as follows:</p>  *  *<blockquote><code>  * git clone https://github.com/vlsi/calcite-test-dataset  * cd calcite-test-dataset  * mvn install  *</code></blockquote>  *  * This will create a virtual machine with Cassandra and test dataset.  */
+comment|/**  * Tests for the {@code org.apache.calcite.adapter.cassandra} package.  *  *<p>Before calling this test, you need to populate Cassandra, as follows:  *  *<blockquote><code>  * git clone https://github.com/vlsi/calcite-test-dataset<br>  * cd calcite-test-dataset<br>  * mvn install  *</code></blockquote>  *  *<p>This will create a virtual machine with Cassandra and the "twissandra"  * test data set.  */
 end_comment
 
 begin_class

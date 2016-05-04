@@ -222,7 +222,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Tests for the {@code org.apache.calcite.adapter.mongodb} package.  *  *<p>Before calling this test, you need to populate MongoDB with the "zips"  * data set (as described in howto.md)  * and "foodmart" data set, as follows:</p>  *  *<blockquote><code>  * git clone https://github.com/vlsi/test-dataset  * cd test-dataset  * mvn install  *</code></blockquote>  *  * This will create a virtual machine with MongoDB and test dataset.  */
+comment|/**  * Tests for the {@code org.apache.calcite.adapter.mongodb} package.  *  *<p>Before calling this test, you need to populate MongoDB, as follows:  *  *<blockquote><code>  * git clone https://github.com/vlsi/calcite-test-dataset<br>  * cd calcite-test-dataset<br>  * mvn install  *</code></blockquote>  *  *<p>This will create a virtual machine with MongoDB and "zips" and "foodmart"  * data sets.  */
 end_comment
 
 begin_class
