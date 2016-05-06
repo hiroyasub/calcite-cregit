@@ -336,171 +336,6 @@ name|field
 return|;
 block|}
 block|}
-for|for
-control|(
-name|RelDataTypeField
-name|field
-range|:
-name|fieldList
-control|)
-block|{
-name|RelDataType
-name|dataType
-init|=
-name|field
-operator|.
-name|getType
-argument_list|()
-decl_stmt|;
-if|if
-condition|(
-name|dataType
-operator|.
-name|isStruct
-argument_list|()
-operator|&&
-name|dataType
-operator|.
-name|getStructKind
-argument_list|()
-operator|==
-name|StructKind
-operator|.
-name|PEEK_FIELDS_DEFAULT
-condition|)
-block|{
-for|for
-control|(
-name|RelDataTypeField
-name|subField
-range|:
-name|dataType
-operator|.
-name|getFieldList
-argument_list|()
-control|)
-block|{
-if|if
-condition|(
-name|Util
-operator|.
-name|matches
-argument_list|(
-name|caseSensitive
-argument_list|,
-name|subField
-operator|.
-name|getName
-argument_list|()
-argument_list|,
-name|fieldName
-argument_list|)
-condition|)
-block|{
-return|return
-name|subField
-return|;
-block|}
-block|}
-block|}
-block|}
-name|RelDataTypeField
-name|matched
-init|=
-literal|null
-decl_stmt|;
-for|for
-control|(
-name|RelDataTypeField
-name|field
-range|:
-name|fieldList
-control|)
-block|{
-name|RelDataType
-name|dataType
-init|=
-name|field
-operator|.
-name|getType
-argument_list|()
-decl_stmt|;
-if|if
-condition|(
-name|dataType
-operator|.
-name|isStruct
-argument_list|()
-operator|&&
-name|dataType
-operator|.
-name|getStructKind
-argument_list|()
-operator|==
-name|StructKind
-operator|.
-name|PEEK_FIELDS
-condition|)
-block|{
-for|for
-control|(
-name|RelDataTypeField
-name|subField
-range|:
-name|dataType
-operator|.
-name|getFieldList
-argument_list|()
-control|)
-block|{
-if|if
-condition|(
-name|Util
-operator|.
-name|matches
-argument_list|(
-name|caseSensitive
-argument_list|,
-name|subField
-operator|.
-name|getName
-argument_list|()
-argument_list|,
-name|fieldName
-argument_list|)
-condition|)
-block|{
-if|if
-condition|(
-name|matched
-operator|==
-literal|null
-condition|)
-block|{
-name|matched
-operator|=
-name|subField
-expr_stmt|;
-block|}
-else|else
-block|{
-comment|// TODO throw columnAmbiguous
-block|}
-block|}
-block|}
-block|}
-block|}
-if|if
-condition|(
-name|matched
-operator|!=
-literal|null
-condition|)
-block|{
-return|return
-name|matched
-return|;
-block|}
 if|if
 condition|(
 name|elideRecord
@@ -798,7 +633,6 @@ block|}
 block|}
 block|}
 block|}
-comment|// implement RelDataType
 specifier|public
 name|List
 argument_list|<
@@ -832,7 +666,6 @@ name|fieldList
 argument_list|)
 return|;
 block|}
-comment|// implement RelDataType
 specifier|public
 name|int
 name|getFieldCount
@@ -856,19 +689,19 @@ name|StructKind
 name|getStructKind
 parameter_list|()
 block|{
-assert|assert
+return|return
 name|isStruct
 argument_list|()
-operator|:
-name|this
-assert|;
-return|return
+condition|?
 name|StructKind
 operator|.
 name|FULLY_QUALIFIED
+else|:
+name|StructKind
+operator|.
+name|NONE
 return|;
 block|}
-comment|// implement RelDataType
 specifier|public
 name|RelDataType
 name|getComponentType
@@ -899,7 +732,6 @@ return|return
 literal|null
 return|;
 block|}
-comment|// implement RelDataType
 specifier|public
 name|boolean
 name|isStruct
@@ -911,7 +743,8 @@ operator|!=
 literal|null
 return|;
 block|}
-comment|// implement RelDataType
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|equals
@@ -953,7 +786,8 @@ return|return
 literal|false
 return|;
 block|}
-comment|// implement RelDataType
+annotation|@
+name|Override
 specifier|public
 name|int
 name|hashCode
@@ -966,7 +800,6 @@ name|hashCode
 argument_list|()
 return|;
 block|}
-comment|// implement RelDataType
 specifier|public
 name|String
 name|getFullTypeString
@@ -976,7 +809,6 @@ return|return
 name|digest
 return|;
 block|}
-comment|// implement RelDataType
 specifier|public
 name|boolean
 name|isNullable
@@ -986,7 +818,6 @@ return|return
 literal|false
 return|;
 block|}
-comment|// implement RelDataType
 specifier|public
 name|Charset
 name|getCharset
@@ -996,7 +827,6 @@ return|return
 literal|null
 return|;
 block|}
-comment|// implement RelDataType
 specifier|public
 name|SqlCollation
 name|getCollation
@@ -1006,7 +836,6 @@ return|return
 literal|null
 return|;
 block|}
-comment|// implement RelDataType
 specifier|public
 name|SqlIntervalQualifier
 name|getIntervalQualifier
@@ -1016,7 +845,6 @@ return|return
 literal|null
 return|;
 block|}
-comment|// implement RelDataType
 specifier|public
 name|int
 name|getPrecision
@@ -1026,7 +854,6 @@ return|return
 name|PRECISION_NOT_SPECIFIED
 return|;
 block|}
-comment|// implement RelDataType
 specifier|public
 name|int
 name|getScale
@@ -1036,7 +863,6 @@ return|return
 name|SCALE_NOT_SPECIFIED
 return|;
 block|}
-comment|// implement RelDataType
 specifier|public
 name|SqlTypeName
 name|getSqlTypeName
@@ -1046,7 +872,6 @@ return|return
 literal|null
 return|;
 block|}
-comment|// implement RelDataType
 specifier|public
 name|SqlIdentifier
 name|getSqlIdentifier
@@ -1084,7 +909,6 @@ name|ZERO
 argument_list|)
 return|;
 block|}
-comment|// implement RelDataType
 specifier|public
 name|RelDataTypeFamily
 name|getFamily
@@ -1151,7 +975,8 @@ name|toString
 argument_list|()
 expr_stmt|;
 block|}
-comment|// implement RelDataType
+annotation|@
+name|Override
 specifier|public
 name|String
 name|toString
@@ -1178,7 +1003,6 @@ name|toString
 argument_list|()
 return|;
 block|}
-comment|// implement RelDataType
 specifier|public
 name|RelDataTypePrecedenceList
 name|getPrecedenceList
@@ -1239,7 +1063,6 @@ block|}
 block|}
 return|;
 block|}
-comment|// implement RelDataType
 specifier|public
 name|RelDataTypeComparability
 name|getComparability

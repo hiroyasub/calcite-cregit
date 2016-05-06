@@ -460,7 +460,11 @@ name|asList
 argument_list|(
 literal|"CATALOG(CATALOG)"
 argument_list|,
+literal|"SCHEMA(CATALOG.DYNAMIC)"
+argument_list|,
 literal|"SCHEMA(CATALOG.SALES)"
+argument_list|,
+literal|"SCHEMA(CATALOG.STRUCT)"
 argument_list|,
 literal|"SCHEMA(CATALOG.CUSTOMER)"
 argument_list|)

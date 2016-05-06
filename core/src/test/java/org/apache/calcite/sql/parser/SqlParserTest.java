@@ -8785,6 +8785,24 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testTableStarColumnFails
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"select emp.*^.^xx from emp"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"(?s).*Encountered \".\" .*"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testNotExists
 parameter_list|()
 block|{
@@ -10112,6 +10130,44 @@ argument_list|,
 literal|"SELECT *\n"
 operator|+
 literal|"FROM `EMP`"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testCompoundStar
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select sales.emp.address.zipcode,\n"
+operator|+
+literal|" sales.emp.address.*\n"
+operator|+
+literal|"from sales.emp"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT `SALES`.`EMP`.`ADDRESS`.`ZIPCODE`,"
+operator|+
+literal|" `SALES`.`EMP`.`ADDRESS`.*\n"
+operator|+
+literal|"FROM `SALES`.`EMP`"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
 argument_list|)
 expr_stmt|;
 block|}

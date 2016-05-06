@@ -12350,11 +12350,24 @@ literal|"select emp.* from emp"
 argument_list|)
 expr_stmt|;
 comment|// Error message could be better (EMPNO does exist, but it's a column).
-name|checkFails
+name|sql
 argument_list|(
 literal|"select ^empno^ .  * from emp"
-argument_list|,
-literal|"Unknown identifier 'EMPNO'"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Not a record type. The '\\*' operator requires a record"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select ^emp.empno^ .  * from emp"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Not a record type. The '\\*' operator requires a record"
 argument_list|)
 expr_stmt|;
 block|}
@@ -12402,17 +12415,17 @@ name|void
 name|testNonLocalStar
 parameter_list|()
 block|{
-comment|// MySQL allows this but we can't, currently
+comment|// MySQL allows this, and now so do we
 name|sql
 argument_list|(
 literal|"select * from emp e where exists (\n"
 operator|+
-literal|"  select ^e^.* from dept where dept.deptno = e.deptno)"
+literal|"  select e.* from dept where dept.deptno = e.deptno)"
 argument_list|)
 operator|.
-name|fails
+name|type
 argument_list|(
-literal|"Unknown identifier 'E'"
+name|EMP_RECORD_TYPE
 argument_list|)
 expr_stmt|;
 block|}
@@ -12452,8 +12465,7 @@ name|void
 name|testStarDotIdFails
 parameter_list|()
 block|{
-comment|// Parser allows a star inside (not at end of) compound identifier, but
-comment|// validator does not
+comment|// Fails in parser
 name|sql
 argument_list|(
 literal|"select emp.^*^.foo from emp"
@@ -12461,7 +12473,7 @@ argument_list|)
 operator|.
 name|fails
 argument_list|(
-literal|"Column '\\*' not found in table 'EMP'"
+literal|"(?s).*Encountered \".\" at .*"
 argument_list|)
 expr_stmt|;
 comment|// Parser does not allow star dot identifier.
@@ -19228,6 +19240,60 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testColumnNotFound
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"select ^b0^ from sales.emp"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Column 'B0' not found in any table"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testColumnNotFound2
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"select ^b0^ from sales.emp, sales.dept"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Column 'B0' not found in any table"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testColumnNotFound3
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"select e.^b0^ from sales.emp as e"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Column 'B0' not found in table 'E'"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testSelectDistinct
 parameter_list|()
 block|{
@@ -19798,19 +19864,80 @@ name|void
 name|testRecordTypeElided
 parameter_list|()
 block|{
-name|checkResultType
+name|sql
 argument_list|(
-literal|"SELECT contact.x, contact.coord.y FROM customer.contact"
-argument_list|,
+literal|"SELECT contact.^x^, contact.coord.y FROM customer.contact"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Column 'X' not found in table 'CONTACT'"
+argument_list|)
+expr_stmt|;
+comment|// Fully qualified works.
+name|sql
+argument_list|(
+literal|"SELECT contact.coord.x, contact.coord.y FROM customer.contact"
+argument_list|)
+operator|.
+name|type
+argument_list|(
+literal|"RecordType(INTEGER NOT NULL X, INTEGER NOT NULL Y) NOT NULL"
+argument_list|)
+expr_stmt|;
+comment|// Because the type of CONTACT_PEEK.COORD is marked "peek", the validator
+comment|// can see through it.
+name|sql
+argument_list|(
+literal|"SELECT c.x, c.coord.y FROM customer.contact_peek as c"
+argument_list|)
+operator|.
+name|type
+argument_list|(
+literal|"RecordType(INTEGER NOT NULL X, INTEGER NOT NULL Y) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"SELECT c.coord.x, c.coord.y FROM customer.contact_peek as c"
+argument_list|)
+operator|.
+name|type
+argument_list|(
+literal|"RecordType(INTEGER NOT NULL X, INTEGER NOT NULL Y) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"SELECT x, c.coord.y FROM customer.contact_peek as c"
+argument_list|)
+operator|.
+name|type
+argument_list|(
 literal|"RecordType(INTEGER NOT NULL X, INTEGER NOT NULL Y) NOT NULL"
 argument_list|)
 expr_stmt|;
 comment|// Qualifying with schema is OK.
-name|checkResultType
+specifier|final
+name|String
+name|sql
+init|=
+literal|"SELECT customer.contact_peek.x,\n"
+operator|+
+literal|" customer.contact_peek.email, contact_peek.coord.y\n"
+operator|+
+literal|"FROM customer.contact_peek"
+decl_stmt|;
+name|sql
 argument_list|(
-literal|"SELECT customer.contact.x, customer.contact.email, contact.coord.y FROM customer.contact"
-argument_list|,
-literal|"RecordType(INTEGER NOT NULL X, VARCHAR(20) NOT NULL EMAIL, INTEGER NOT NULL Y) NOT NULL"
+name|sql
+argument_list|)
+operator|.
+name|type
+argument_list|(
+literal|"RecordType(INTEGER NOT NULL X, VARCHAR(20) NOT NULL EMAIL,"
+operator|+
+literal|" INTEGER NOT NULL Y) NOT NULL"
 argument_list|)
 expr_stmt|;
 block|}
@@ -23128,13 +23255,10 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testNew
+name|testDummy
 parameter_list|()
 block|{
 comment|// (To debug individual statements, paste them into this method.)
-comment|//            1         2         3         4         5         6
-comment|//   12345678901234567890123456789012345678901234567890123456789012345
-comment|//        check("SELECT count(0) FROM emp GROUP BY ()");
 block|}
 annotation|@
 name|Test
@@ -23143,185 +23267,504 @@ name|void
 name|testStructType
 parameter_list|()
 block|{
-comment|// Table STRUCT.T is defined as:
-comment|// (K0 VARCHAR(20) NOT NULL, C1 VARCHAR(20) NOT NULL,
-comment|//   RecordType(C0 INTEGER NOT NULL, C1 INTEGER NOT NULL) F0,
-comment|//   RecordType(C0 INTEGER, C2 INTEGER NOT NULL, A0 INTEGER NOT NULL) F1,
-comment|//   RecordType(C3 INTEGER NOT NULL, A0 BOOLEAN NOT NULL) F2)
-comment|// , where F0 has a default struct priority.
-name|check
+comment|// Table STRUCT.T is defined as: (
+comment|//   K0 VARCHAR(20) NOT NULL,
+comment|//   C1 VARCHAR(20) NOT NULL,
+comment|//   RecordType:PEEK_FIELDS_DEFAULT(
+comment|//     C0 INTEGER NOT NULL,
+comment|//     C1 INTEGER NOT NULL) F0,
+comment|//   RecordType:PEEK_FIELDS(
+comment|//      C0 INTEGER,
+comment|//      C2 INTEGER NOT NULL,
+comment|//      A0 INTEGER NOT NULL) F1,
+comment|//   RecordType:PEEK_FIELDS(
+comment|//      C3 INTEGER NOT NULL,
+comment|//      A0 BOOLEAN NOT NULL) F2)
+comment|//
+comment|// The labels 'PEEK_FIELDS_DEFAULT' and 'PEEK_FIELDS' mean that F0, F1 and
+comment|// F2 can all be transparent. F0 has default struct priority; F1 and F2 have
+comment|// lower priority.
+name|sql
 argument_list|(
 literal|"select * from struct.t"
 argument_list|)
+operator|.
+name|ok
+argument_list|()
 expr_stmt|;
 comment|// Resolve K0 as top-level column K0.
-name|checkResultType
+name|sql
 argument_list|(
 literal|"select k0 from struct.t"
-argument_list|,
+argument_list|)
+operator|.
+name|type
+argument_list|(
 literal|"RecordType(VARCHAR(20) NOT NULL K0) NOT NULL"
 argument_list|)
 expr_stmt|;
 comment|// Resolve C2 as secondary-level column F1.C2.
-name|checkResultType
+name|sql
 argument_list|(
 literal|"select c2 from struct.t"
-argument_list|,
+argument_list|)
+operator|.
+name|type
+argument_list|(
 literal|"RecordType(INTEGER NOT NULL C2) NOT NULL"
 argument_list|)
 expr_stmt|;
 comment|// Resolve F1.C2 as fully qualified column F1.C2.
-name|checkResultType
+name|sql
 argument_list|(
-literal|"select c2 from struct.t"
-argument_list|,
+literal|"select f1.c2 from struct.t"
+argument_list|)
+operator|.
+name|type
+argument_list|(
 literal|"RecordType(INTEGER NOT NULL C2) NOT NULL"
 argument_list|)
 expr_stmt|;
 comment|// Resolve C1 as top-level column C1 as opposed to F0.C1.
-name|checkResultType
+name|sql
 argument_list|(
 literal|"select c1 from struct.t"
-argument_list|,
+argument_list|)
+operator|.
+name|type
+argument_list|(
 literal|"RecordType(VARCHAR(20) NOT NULL C1) NOT NULL"
 argument_list|)
 expr_stmt|;
-comment|// Resolve C0 as secondary-level column F0.C0 as opposed to F1.C0, since F0 has the
-comment|// default priority.
-name|checkResultType
+comment|// Resolve C0 as secondary-level column F0.C0 as opposed to F1.C0, since F0
+comment|// has the default priority.
+name|sql
 argument_list|(
 literal|"select c0 from struct.t"
-argument_list|,
+argument_list|)
+operator|.
+name|type
+argument_list|(
 literal|"RecordType(INTEGER NOT NULL C0) NOT NULL"
 argument_list|)
 expr_stmt|;
-comment|// Resolve F1.C0 as fully qualified column F1.C0.
-name|checkResultType
+comment|// Resolve F1.C0 as fully qualified column F1.C0 (as evidenced by "INTEGER"
+comment|// rather than "INTEGER NOT NULL")
+name|sql
 argument_list|(
 literal|"select f1.c0 from struct.t"
-argument_list|,
+argument_list|)
+operator|.
+name|type
+argument_list|(
 literal|"RecordType(INTEGER C0) NOT NULL"
 argument_list|)
 expr_stmt|;
-comment|// Fail ambiguous column reference A0, since F1.A0 and F2.A0 both exist with the
-comment|// same resolving priority.
-name|checkFails
+comment|// Fail ambiguous column reference A0, since F1.A0 and F2.A0 both exist with
+comment|// the same resolving priority.
+name|sql
 argument_list|(
 literal|"select ^a0^ from struct.t"
-argument_list|,
+argument_list|)
+operator|.
+name|fails
+argument_list|(
 literal|"Column 'A0' is ambiguous"
 argument_list|)
 expr_stmt|;
 comment|// Resolve F2.A0 as fully qualified column F2.A0.
-name|checkResultType
+name|sql
 argument_list|(
 literal|"select f2.a0 from struct.t"
-argument_list|,
-literal|"RecordType(BOOLEAN NOT NULL C0) NOT NULL"
+argument_list|)
+operator|.
+name|type
+argument_list|(
+literal|"RecordType(BOOLEAN NOT NULL A0) NOT NULL"
 argument_list|)
 expr_stmt|;
-comment|// Resolve T0.K0 as top-level column K0, since T0 is recognized as the table alias.
-name|checkResultType
+comment|// Resolve T0.K0 as top-level column K0, since T0 is recognized as the table
+comment|// alias.
+name|sql
 argument_list|(
 literal|"select t0.k0 from struct.t t0"
-argument_list|,
+argument_list|)
+operator|.
+name|type
+argument_list|(
 literal|"RecordType(VARCHAR(20) NOT NULL K0) NOT NULL"
 argument_list|)
 expr_stmt|;
-comment|// Resolve T0.C2 as secondary-level column F1.C2, since T0 is recognized as the
-comment|// table alias here.
-name|checkResultType
+comment|// Resolve T0.C2 as secondary-level column F1.C2, since T0 is recognized as
+comment|// the table alias here.
+name|sql
 argument_list|(
 literal|"select t0.c2 from struct.t t0"
-argument_list|,
+argument_list|)
+operator|.
+name|type
+argument_list|(
 literal|"RecordType(INTEGER NOT NULL C2) NOT NULL"
 argument_list|)
 expr_stmt|;
-comment|// Resolve F0.C2 as secondary-level column F1.C2, since F0 is recognized as the
-comment|// table alias here.
-name|checkResultType
+comment|// Resolve F0.C2 as secondary-level column F1.C2, since F0 is recognized as
+comment|// the table alias here.
+name|sql
 argument_list|(
 literal|"select f0.c2 from struct.t f0"
-argument_list|,
+argument_list|)
+operator|.
+name|type
+argument_list|(
 literal|"RecordType(INTEGER NOT NULL C2) NOT NULL"
 argument_list|)
 expr_stmt|;
-comment|// Resolve F0.C1 as top-level column C1 as opposed to F0.C1, since F0 is recognized
-comment|// as the table alias here.
-name|checkResultType
+comment|// Resolve F0.C1 as top-level column C1 as opposed to F0.C1, since F0 is
+comment|// recognized as the table alias here.
+name|sql
 argument_list|(
 literal|"select f0.c1 from struct.t f0"
-argument_list|,
-literal|"RecordType(VARCHAR(20) NOT NULL C1) NOT NULL"
 argument_list|)
-expr_stmt|;
-comment|// Resolve T.C1 as top-level column C1 as opposed to F0.C1, since T is recognized as
-comment|// the table name.
-name|checkResultType
+operator|.
+name|type
 argument_list|(
-literal|"select t.c1 from struct.t f0"
-argument_list|,
 literal|"RecordType(VARCHAR(20) NOT NULL C1) NOT NULL"
 argument_list|)
 expr_stmt|;
-comment|// Resolve STRUCT.T.C1 as top-level column C1 as opposed to F0.C1, since STRUCT.T is
-comment|// recognized as the schema and table name.
-name|checkResultType
-argument_list|(
-literal|"select struct.t.c1 from struct.t f0"
-argument_list|,
-literal|"RecordType(VARCHAR(20) NOT NULL C1) NOT NULL"
-argument_list|)
-expr_stmt|;
-comment|// Resolve F0.F0.C1 as secondary-level column F0.C1, since the first F0 is recognized
-comment|// as the table alias here.
-name|checkResultType
+comment|// Resolve C1 as inner INTEGER column not top-level VARCHAR column.
+name|sql
 argument_list|(
 literal|"select f0.f0.c1 from struct.t f0"
-argument_list|,
+argument_list|)
+operator|.
+name|type
+argument_list|(
 literal|"RecordType(INTEGER NOT NULL C1) NOT NULL"
 argument_list|)
 expr_stmt|;
-comment|// Resolve T.F0.C1 as secondary-level column F0.C1, since T is recognized as the table
-comment|// name.
-name|checkResultType
+comment|// Resolve T.C1 as top-level column C1 as opposed to F0.C1, since T is
+comment|// recognized as the table name.
+name|sql
 argument_list|(
-literal|"select t.f0.c1 from struct.t f0"
-argument_list|,
+literal|"select t.c1 from struct.t"
+argument_list|)
+operator|.
+name|type
+argument_list|(
+literal|"RecordType(VARCHAR(20) NOT NULL C1) NOT NULL"
+argument_list|)
+expr_stmt|;
+comment|// Alias "f0" obscures table name "t"
+name|sql
+argument_list|(
+literal|"select ^t^.c1 from struct.t f0"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Table 'T' not found"
+argument_list|)
+expr_stmt|;
+comment|// Resolve STRUCT.T.C1 as top-level column C1 as opposed to F0.C1, since
+comment|// STRUCT.T is recognized as the schema and table name.
+name|sql
+argument_list|(
+literal|"select struct.t.c1 from struct.t"
+argument_list|)
+operator|.
+name|type
+argument_list|(
+literal|"RecordType(VARCHAR(20) NOT NULL C1) NOT NULL"
+argument_list|)
+expr_stmt|;
+comment|// Table alias "f0" obscures table name "struct.t"
+name|sql
+argument_list|(
+literal|"select ^struct.t^.c1 from struct.t f0"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Table 'STRUCT.T' not found"
+argument_list|)
+expr_stmt|;
+comment|// Resolve F0.F0.C1 as secondary-level column F0.C1, since the first F0 is
+comment|// recognized as the table alias here.
+name|sql
+argument_list|(
+literal|"select f0.f0.c1 from struct.t f0"
+argument_list|)
+operator|.
+name|type
+argument_list|(
 literal|"RecordType(INTEGER NOT NULL C1) NOT NULL"
+argument_list|)
+expr_stmt|;
+comment|// Resolve T.F0.C1 as secondary-level column F0.C1, since T is recognized as
+comment|// the table name.
+name|sql
+argument_list|(
+literal|"select t.f0.c1 from struct.t"
+argument_list|)
+operator|.
+name|type
+argument_list|(
+literal|"RecordType(INTEGER NOT NULL C1) NOT NULL"
+argument_list|)
+expr_stmt|;
+comment|// Table alias obscures
+name|sql
+argument_list|(
+literal|"select ^t.f0^.c1 from struct.t f0"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Table 'T.F0' not found"
 argument_list|)
 expr_stmt|;
 comment|// Resolve STRUCT.T.F0.C1 as secondary-level column F0.C1, since STRUCT.T is
 comment|// recognized as the schema and table name.
-name|checkResultType
+name|sql
 argument_list|(
-literal|"select struct.t.f0.c1 from struct.t f0"
-argument_list|,
+literal|"select struct.t.f0.c1 from struct.t"
+argument_list|)
+operator|.
+name|type
+argument_list|(
 literal|"RecordType(INTEGER NOT NULL C1) NOT NULL"
 argument_list|)
 expr_stmt|;
+comment|// Table alias "f0" obscures table name "struct.t"
+name|sql
+argument_list|(
+literal|"select ^struct.t.f0^.c1 from struct.t f0"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Table 'STRUCT.T.F0' not found"
+argument_list|)
+expr_stmt|;
 comment|// Resolve struct type F1 with wildcard.
-name|checkResultType
+name|sql
 argument_list|(
 literal|"select f1.* from struct.t"
-argument_list|,
-literal|"RecordType(INTEGER NOT NULL C0, INTEGER NOT NULL C2) NOT NULL"
+argument_list|)
+operator|.
+name|type
+argument_list|(
+literal|"RecordType(INTEGER C0, INTEGER NOT NULL C2,"
+operator|+
+literal|" INTEGER NOT NULL A0) NOT NULL"
 argument_list|)
 expr_stmt|;
 comment|// Fail non-existent column B0.
-name|checkFails
+name|sql
 argument_list|(
 literal|"select ^b0^ from struct.t"
-argument_list|,
+argument_list|)
+operator|.
+name|fails
+argument_list|(
 literal|"Column 'B0' not found in any table"
 argument_list|)
 expr_stmt|;
-comment|// Fail struct type with no wildcard.
-name|checkFails
+comment|// It's OK to reference a record type.
+comment|//
+comment|// This is admittedly a bit strange for Phoenix users. We model a column
+comment|// family as a column whose type is a record, but Phoenix users would
+comment|// rarely if ever want to use a column family as a record.
+name|sql
 argument_list|(
-literal|"select ^f1^ from struct.t"
-argument_list|,
-literal|"Unknown identifier 'F1'"
+literal|"select f1 from struct.t"
+argument_list|)
+operator|.
+name|type
+argument_list|(
+literal|"RecordType(RecordType:peek(INTEGER C0, INTEGER NOT NULL C2,"
+operator|+
+literal|" INTEGER NOT NULL A0) NOT NULL F1) NOT NULL"
+argument_list|)
+expr_stmt|;
+comment|// If we fail to find a column, give an error based on the shortest prefix
+comment|// that fails.
+name|sql
+argument_list|(
+literal|"select t.^f0.notFound^.a.b.c.d from struct.t"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Column 'F0\\.NOTFOUND' not found in table 'T'"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select t.^f0.notFound^ from struct.t"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Column 'F0\\.NOTFOUND' not found in table 'T'"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select t.^f0.c1.notFound^ from struct.t"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Column 'F0\\.C1\\.NOTFOUND' not found in table 'T'"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1150">[CALCITE-1150]    * Dynamic Table / Dynamic Star support</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testAmbiguousDynamicStar
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select ^n_nation^\n"
+operator|+
+literal|"from (select * from \"DYNAMIC\".NATION),\n"
+operator|+
+literal|" (select * from \"DYNAMIC\".CUSTOMER)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Column 'N_NATION' is ambiguous"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testAmbiguousDynamicStar2
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select ^n_nation^\n"
+operator|+
+literal|"from (select * from \"DYNAMIC\".NATION, \"DYNAMIC\".CUSTOMER)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Column 'N_NATION' is ambiguous"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testAmbiguousDynamicStar3
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select ^nc.n_nation^\n"
+operator|+
+literal|"from (select * from \"DYNAMIC\".NATION, \"DYNAMIC\".CUSTOMER) as nc"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Column 'N_NATION' is ambiguous"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testAmbiguousDynamicStar4
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select n.n_nation\n"
+operator|+
+literal|"from (select * from \"DYNAMIC\".NATION) as n,\n"
+operator|+
+literal|" (select * from \"DYNAMIC\".CUSTOMER)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|type
+argument_list|(
+literal|"RecordType(ANY N_NATION) NOT NULL"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** When resolve column reference, regular field has higher priority than    * dynamic star columns. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testDynamicStar2
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select newid from (\n"
+operator|+
+literal|"  select *, NATION.N_NATION + 100 as newid\n"
+operator|+
+literal|"  from \"DYNAMIC\".NATION, \"DYNAMIC\".CUSTOMER)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|type
+argument_list|(
+literal|"RecordType(ANY NEWID) NOT NULL"
 argument_list|)
 expr_stmt|;
 block|}

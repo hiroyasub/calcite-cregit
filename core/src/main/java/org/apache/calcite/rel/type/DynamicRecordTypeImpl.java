@@ -84,7 +84,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Implementation of RelDataType for dynamic table. It's used in  * Sql validation phase, where field list is mutable for getField() call.  *  *<p>After Sql validation, a normal RelDataTypeImpl with immutable field list  * would take place of DynamicRecordTypeImpl instance for dynamic table.</p>  */
+comment|/**  * Implementation of {@link RelDataType} for a dynamic table.  *  *<p>It's used during SQL validation, where the field list is mutable for  * the getField() call. After SQL validation, a normal {@link RelDataTypeImpl}  * with an immutable field list takes the place of the DynamicRecordTypeImpl  * instance.  */
 end_comment
 
 begin_class
@@ -96,14 +96,10 @@ name|DynamicRecordType
 block|{
 specifier|private
 specifier|final
-name|RelDataTypeFactory
-name|typeFactory
-decl_stmt|;
-specifier|private
-specifier|final
 name|RelDataTypeHolder
 name|holder
 decl_stmt|;
+comment|/** Creates a DynamicRecordTypeImpl. */
 specifier|public
 name|DynamicRecordTypeImpl
 parameter_list|(
@@ -113,23 +109,10 @@ parameter_list|)
 block|{
 name|this
 operator|.
-name|typeFactory
-operator|=
-name|typeFactory
-expr_stmt|;
-name|this
-operator|.
 name|holder
 operator|=
 operator|new
 name|RelDataTypeHolder
-argument_list|()
-expr_stmt|;
-name|this
-operator|.
-name|holder
-operator|.
-name|setRelDataTypeFactory
 argument_list|(
 name|typeFactory
 argument_list|)
@@ -138,6 +121,8 @@ name|computeDigest
 argument_list|()
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|List
 argument_list|<
@@ -150,11 +135,11 @@ return|return
 name|holder
 operator|.
 name|getFieldList
-argument_list|(
-name|typeFactory
-argument_list|)
+argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|int
 name|getFieldCount
@@ -167,6 +152,8 @@ name|getFieldCount
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelDataTypeField
 name|getField
@@ -181,6 +168,7 @@ name|boolean
 name|elideRecord
 parameter_list|)
 block|{
+specifier|final
 name|Pair
 argument_list|<
 name|RelDataTypeField
@@ -193,8 +181,6 @@ name|holder
 operator|.
 name|getFieldOrInsert
 argument_list|(
-name|typeFactory
-argument_list|,
 name|fieldName
 argument_list|,
 name|caseSensitive
@@ -218,6 +204,8 @@ operator|.
 name|left
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|List
 argument_list|<
@@ -233,6 +221,8 @@ name|getFieldNames
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|SqlTypeName
 name|getSqlTypeName
@@ -244,6 +234,8 @@ operator|.
 name|ROW
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelDataTypePrecedenceList
 name|getPrecedenceList
@@ -279,14 +271,22 @@ operator|.
 name|append
 argument_list|(
 literal|"(DynamicRecordRow"
-operator|+
+argument_list|)
+operator|.
+name|append
+argument_list|(
 name|getFieldNames
 argument_list|()
-operator|+
+argument_list|)
+operator|.
+name|append
+argument_list|(
 literal|")"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|boolean
 name|isStruct
@@ -296,6 +296,8 @@ return|return
 literal|true
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|RelDataTypeFamily
 name|getFamily

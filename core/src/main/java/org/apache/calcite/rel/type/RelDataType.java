@@ -120,15 +120,6 @@ init|=
 operator|-
 literal|1
 decl_stmt|;
-enum|enum
-name|StructKind
-block|{
-name|FULLY_QUALIFIED
-block|,
-name|PEEK_FIELDS
-block|,
-name|PEEK_FIELDS_DEFAULT
-block|,   }
 comment|//~ Methods ----------------------------------------------------------------
 comment|/**    * Queries whether this is a structured type.    *    * @return whether this type has fields; examples include rows and    * user-defined structured types in SQL, and classes in Java    */
 name|boolean
@@ -161,7 +152,7 @@ name|int
 name|getFieldCount
 parameter_list|()
 function_decl|;
-comment|/**    * Gets the StructKind of a structured type.    *    * @return the StructKind that determines how its fields are resolved.    */
+comment|/**    * Returns the rule for resolving the fields of a structured type,    * or {@link StructKind#NONE} if this is not a structured type.    *    * @return the StructKind that determines how this type's fields are resolved    */
 name|StructKind
 name|getStructKind
 parameter_list|()
@@ -260,7 +251,7 @@ name|RelDataTypeComparability
 name|getComparability
 parameter_list|()
 function_decl|;
-comment|/**    *@return whether it has dynamic structure (for "schema-on-read" table)    */
+comment|/**    * @return whether it has dynamic structure (for "schema-on-read" table)    */
 name|boolean
 name|isDynamicStruct
 parameter_list|()

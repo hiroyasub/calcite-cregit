@@ -3679,7 +3679,7 @@ name|list
 operator|=
 name|list
 operator|.
-name|add
+name|append
 argument_list|(
 name|remap
 argument_list|(

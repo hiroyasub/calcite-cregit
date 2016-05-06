@@ -6030,7 +6030,7 @@ argument_list|)
 operator|.
 name|convertsTo
 argument_list|(
-literal|""
+literal|"${plan}"
 argument_list|)
 expr_stmt|;
 block|}
@@ -6742,6 +6742,34 @@ return|;
 block|}
 block|}
 argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testUnionInFrom
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select x0, x1 from (\n"
+operator|+
+literal|"  select 'a' as x0, 'a' as x1, 'a' as x2 from emp\n"
+operator|+
+literal|"  union all\n"
+operator|+
+literal|"  select 'bb' as x0, 'bb' as x1, 'bb' as x2 from dept)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
 expr_stmt|;
 block|}
 comment|/**    * Visitor that checks that every {@link RelNode} in a tree is valid.    *    * @see RelNode#isValid(org.apache.calcite.util.Litmus)    */

@@ -134,7 +134,7 @@ name|RelDataTypeSystem
 name|getTypeSystem
 parameter_list|()
 function_decl|;
-comment|/**    * Creates a type which corresponds to a Java class.    *    * @param clazz the Java class used to define the type    * @return canonical Java type descriptor    */
+comment|/**    * Creates a type that corresponds to a Java class.    *    * @param clazz the Java class used to define the type    * @return canonical Java type descriptor    */
 name|RelDataType
 name|createJavaType
 parameter_list|(
@@ -151,7 +151,27 @@ modifier|...
 name|types
 parameter_list|)
 function_decl|;
-comment|/**    * Creates a type which represents a structured collection of fields, given    * lists of the names and types of the fields.    *    * @param typeList      types of the fields    * @param fieldNameList names of the fields    * @return canonical struct type descriptor    */
+comment|/**    * Creates a type that represents a structured collection of fields, given    * lists of the names and types of the fields.    *    * @param  kind         Name resolution policy    * @param typeList      types of the fields    * @param fieldNameList names of the fields    * @return canonical struct type descriptor    */
+name|RelDataType
+name|createStructType
+parameter_list|(
+name|StructKind
+name|kind
+parameter_list|,
+name|List
+argument_list|<
+name|RelDataType
+argument_list|>
+name|typeList
+parameter_list|,
+name|List
+argument_list|<
+name|String
+argument_list|>
+name|fieldNameList
+parameter_list|)
+function_decl|;
+comment|/** Creates a type that represents a structured collection of fields.    * Shorthand for<code>createStructType(StructKind.FULLY_QUALIFIED, typeList,    * fieldNameList)</code>. */
 name|RelDataType
 name|createStructType
 parameter_list|(
@@ -168,7 +188,10 @@ argument_list|>
 name|fieldNameList
 parameter_list|)
 function_decl|;
-comment|/**    * Creates a type which represents a structured collection of fields,    * obtaining the field information via a callback.    *    * @param fieldInfo callback for field information    * @return canonical struct type descriptor    */
+comment|/**    * Creates a type that represents a structured collection of fields,    * obtaining the field information via a callback.    *    * @param fieldInfo callback for field information    * @return canonical struct type descriptor    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 name|RelDataType
 name|createStructType
 parameter_list|(
@@ -176,7 +199,7 @@ name|FieldInfo
 name|fieldInfo
 parameter_list|)
 function_decl|;
-comment|/**    * Creates a type which represents a structured collection of fieldList,    * obtaining the field information from a list of (name, type) pairs.    *    * @param fieldList List of (name, type) pairs    * @return canonical struct type descriptor    */
+comment|/**    * Creates a type that represents a structured collection of fieldList,    * obtaining the field information from a list of (name, type) pairs.    *    * @param fieldList List of (name, type) pairs    * @return canonical struct type descriptor    */
 name|RelDataType
 name|createStructType
 parameter_list|(
@@ -237,7 +260,7 @@ name|RelDataType
 name|type
 parameter_list|)
 function_decl|;
-comment|/**    * Creates a type which is the same as another type but with possibly    * different nullability. The output type may be identical to the input    * type. For type systems without a concept of nullability, the return value    * is always the same as the input.    *    * @param type     input type    * @param nullable true to request a nullable type; false to request a NOT    *                 NULL type    * @return output type, same as input type except with specified nullability    * @throws NullPointerException if type is null    */
+comment|/**    * Creates a type that is the same as another type but with possibly    * different nullability. The output type may be identical to the input    * type. For type systems without a concept of nullability, the return value    * is always the same as the input.    *    * @param type     input type    * @param nullable true to request a nullable type; false to request a NOT    *                 NULL type    * @return output type, same as input type except with specified nullability    * @throws NullPointerException if type is null    */
 name|RelDataType
 name|createTypeWithNullability
 parameter_list|(
@@ -248,7 +271,7 @@ name|boolean
 name|nullable
 parameter_list|)
 function_decl|;
-comment|/**    * Creates a Type which is the same as another type but with possibly    * different charset or collation. For types without a concept of charset or    * collation this function must throw an error.    *    * @param type      input type    * @param charset   charset to assign    * @param collation collation to assign    * @return output type, same as input type except with specified charset and    * collation    */
+comment|/**    * Creates a type that is the same as another type but with possibly    * different charset or collation. For types without a concept of charset or    * collation this function must throw an error.    *    * @param type      input type    * @param charset   charset to assign    * @param collation collation to assign    * @return output type, same as input type except with specified charset and    * collation    */
 name|RelDataType
 name|createTypeWithCharsetAndCollation
 parameter_list|(
@@ -267,7 +290,7 @@ name|Charset
 name|getDefaultCharset
 parameter_list|()
 function_decl|;
-comment|/**    * Returns the most general of a set of types (that is, one type to which    * they can all be cast), or null if conversion is not possible. The result    * may be a new type which is less restrictive than any of the input types,    * e.g.<code>leastRestrictive(INT, NUMERIC(3, 2))</code> could be    * {@code NUMERIC(12, 2)}.    *    * @param types input types to be combined using union (not null, not empty)    * @return canonical union type descriptor    */
+comment|/**    * Returns the most general of a set of types (that is, one type to which    * they can all be cast), or null if conversion is not possible. The result    * may be a new type that is less restrictive than any of the input types,    * e.g.<code>leastRestrictive(INT, NUMERIC(3, 2))</code> could be    * {@code NUMERIC(12, 2)}.    *    * @param types input types to be combined using union (not null, not empty)    * @return canonical union type descriptor    */
 name|RelDataType
 name|leastRestrictive
 parameter_list|(
@@ -358,7 +381,10 @@ name|builder
 parameter_list|()
 function_decl|;
 comment|//~ Inner Interfaces -------------------------------------------------------
-comment|/**    * Callback which provides enough information to create fields.    */
+comment|/**    * Callback that provides enough information to create fields.    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 interface|interface
 name|FieldInfo
 block|{
@@ -385,6 +411,11 @@ parameter_list|)
 function_decl|;
 block|}
 comment|/**    * Implementation of {@link FieldInfo} that provides a fluid API to build    * a list of fields.    */
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"deprecation"
+argument_list|)
 class|class
 name|FieldInfoBuilder
 implements|implements
@@ -415,6 +446,14 @@ operator|new
 name|ArrayList
 argument_list|<>
 argument_list|()
+decl_stmt|;
+specifier|private
+name|StructKind
+name|kind
+init|=
+name|StructKind
+operator|.
+name|FULLY_QUALIFIED
 decl_stmt|;
 specifier|private
 specifier|final
@@ -762,6 +801,24 @@ return|return
 name|this
 return|;
 block|}
+specifier|public
+name|FieldInfoBuilder
+name|kind
+parameter_list|(
+name|StructKind
+name|kind
+parameter_list|)
+block|{
+name|this
+operator|.
+name|kind
+operator|=
+name|kind
+expr_stmt|;
+return|return
+name|this
+return|;
+block|}
 comment|/**      * Makes sure that field names are unique.      */
 specifier|public
 name|FieldInfoBuilder
@@ -825,6 +882,8 @@ name|typeFactory
 operator|.
 name|createStructType
 argument_list|(
+name|kind
+argument_list|,
 name|types
 argument_list|,
 name|names

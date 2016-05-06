@@ -2866,6 +2866,18 @@ function_decl|;
 annotation|@
 name|BaseMessage
 argument_list|(
+literal|"Not a record type. The ''*'' operator requires a record"
+argument_list|)
+name|ExInst
+argument_list|<
+name|SqlValidatorException
+argument_list|>
+name|starRequiresRecordType
+parameter_list|()
+function_decl|;
+annotation|@
+name|BaseMessage
+argument_list|(
 literal|"FILTER expression must be of type BOOLEAN"
 argument_list|)
 name|ExInst
