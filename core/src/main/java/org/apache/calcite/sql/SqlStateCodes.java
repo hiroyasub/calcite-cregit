@@ -16,10 +16,13 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * Contains {@link org.apache.calcite.util.Glossary#SQL2003} SQL state codes.  *  *<p>SQL State codes are defined in  *  *<pre><code>&#64;sql.2003 Part 2 Section 23.1</code></pre>  */
+comment|/**  * Contains {@link org.apache.calcite.util.Glossary#SQL2003} SQL state codes.  *  *<p>SQL State codes are defined in  *  *<pre><code>&#64;sql.2003 Part 2 Section 23.1</code></pre>  *  * @deprecated Use {@code org.apache.calcite.avatica.SqlState}  */
 end_comment
 
 begin_enum
+annotation|@
+name|Deprecated
+comment|// will be removed before 2.0
 specifier|public
 enum|enum
 name|SqlStateCodes
