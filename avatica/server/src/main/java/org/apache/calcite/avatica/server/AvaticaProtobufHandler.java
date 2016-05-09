@@ -694,7 +694,6 @@ name|reset
 argument_list|()
 expr_stmt|;
 block|}
-specifier|final
 name|HandlerResponse
 argument_list|<
 name|byte
@@ -702,6 +701,8 @@ index|[]
 argument_list|>
 name|handlerResponse
 decl_stmt|;
+try|try
+block|{
 if|if
 condition|(
 literal|null
@@ -715,8 +716,6 @@ argument_list|()
 condition|)
 block|{
 comment|// Invoke the ProtobufHandler inside as doAs for the remote user.
-try|try
-block|{
 name|handlerResponse
 operator|=
 name|serverConfig
@@ -768,21 +767,6 @@ block|}
 argument_list|)
 expr_stmt|;
 block|}
-catch|catch
-parameter_list|(
-name|Exception
-name|e
-parameter_list|)
-block|{
-throw|throw
-operator|new
-name|RuntimeException
-argument_list|(
-name|e
-argument_list|)
-throw|;
-block|}
-block|}
 else|else
 block|{
 name|handlerResponse
@@ -792,6 +776,24 @@ operator|.
 name|apply
 argument_list|(
 name|requestBytes
+argument_list|)
+expr_stmt|;
+block|}
+block|}
+catch|catch
+parameter_list|(
+name|Exception
+name|e
+parameter_list|)
+block|{
+comment|// Catch at the highest level of exceptions
+name|handlerResponse
+operator|=
+name|pbHandler
+operator|.
+name|convertToErrorResponse
+argument_list|(
+name|e
 argument_list|)
 expr_stmt|;
 block|}

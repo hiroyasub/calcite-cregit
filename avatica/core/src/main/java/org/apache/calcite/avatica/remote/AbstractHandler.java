@@ -402,7 +402,7 @@ return|;
 block|}
 block|}
 comment|/**    * Attempts to convert an Exception to an ErrorResponse. If there is an issue in serialization,    * a RuntimeException is thrown instead (wrapping the original exception if necessary).    *    * @param e The exception to convert.    * @return A HandlerResponse instance.    */
-specifier|private
+specifier|public
 name|HandlerResponse
 argument_list|<
 name|T
