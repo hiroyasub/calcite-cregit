@@ -19244,6 +19244,165 @@ literal|"FROM `DEPT`"
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1238">[CALCITE-1238]    * Unparsing LIMIT without ORDER BY after validation</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testRewriteWithLimitWithoutOrderBy
+parameter_list|()
+block|{
+name|SqlValidator
+name|validator
+init|=
+name|tester
+operator|.
+name|getValidator
+argument_list|()
+decl_stmt|;
+name|validator
+operator|.
+name|setIdentifierExpansion
+argument_list|(
+literal|false
+argument_list|)
+expr_stmt|;
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select name from dept limit 2"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT `NAME`\n"
+operator|+
+literal|"FROM `DEPT`\n"
+operator|+
+literal|"FETCH NEXT 2 ROWS ONLY"
+decl_stmt|;
+name|tester
+operator|.
+name|checkRewrite
+argument_list|(
+name|validator
+argument_list|,
+name|sql
+argument_list|,
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testRewriteWithOffsetWithoutOrderBy
+parameter_list|()
+block|{
+name|SqlValidator
+name|validator
+init|=
+name|tester
+operator|.
+name|getValidator
+argument_list|()
+decl_stmt|;
+name|validator
+operator|.
+name|setIdentifierExpansion
+argument_list|(
+literal|false
+argument_list|)
+expr_stmt|;
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select name from dept offset 2"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT `NAME`\n"
+operator|+
+literal|"FROM `DEPT`\n"
+operator|+
+literal|"OFFSET 2 ROWS"
+decl_stmt|;
+name|tester
+operator|.
+name|checkRewrite
+argument_list|(
+name|validator
+argument_list|,
+name|sql
+argument_list|,
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testRewriteWithUnionFetchWithoutOrderBy
+parameter_list|()
+block|{
+name|SqlValidator
+name|validator
+init|=
+name|tester
+operator|.
+name|getValidator
+argument_list|()
+decl_stmt|;
+name|validator
+operator|.
+name|setIdentifierExpansion
+argument_list|(
+literal|false
+argument_list|)
+expr_stmt|;
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select name from dept union all select name from dept limit 2"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM (SELECT `NAME`\n"
+operator|+
+literal|"FROM `DEPT`\n"
+operator|+
+literal|"UNION ALL\n"
+operator|+
+literal|"SELECT `NAME`\n"
+operator|+
+literal|"FROM `DEPT`)\n"
+operator|+
+literal|"FETCH NEXT 2 ROWS ONLY"
+decl_stmt|;
+name|tester
+operator|.
+name|checkRewrite
+argument_list|(
+name|validator
+argument_list|,
+name|sql
+argument_list|,
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
 annotation|@
 name|Test
 specifier|public

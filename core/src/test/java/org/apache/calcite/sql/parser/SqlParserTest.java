@@ -4470,6 +4470,65 @@ literal|"OFFSET 1 ROWS"
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Test case that does not reproduce but is related to    *<a href="https://issues.apache.org/jira/browse/CALCITE-1238">[CALCITE-1238]    * Unparsing LIMIT without ORDER BY after validation</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testLimitWithoutOrder
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT `A`\n"
+operator|+
+literal|"FROM `FOO`\n"
+operator|+
+literal|"FETCH NEXT 2 ROWS ONLY"
+decl_stmt|;
+name|sql
+argument_list|(
+literal|"select a from foo limit 2"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testLimitOffsetWithoutOrder
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT `A`\n"
+operator|+
+literal|"FROM `FOO`\n"
+operator|+
+literal|"OFFSET 1 ROWS\n"
+operator|+
+literal|"FETCH NEXT 2 ROWS ONLY"
+decl_stmt|;
+name|sql
+argument_list|(
+literal|"select a from foo limit 2 offset 1"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
 annotation|@
 name|Test
 specifier|public
