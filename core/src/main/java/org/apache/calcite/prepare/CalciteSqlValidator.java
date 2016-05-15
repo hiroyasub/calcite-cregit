@@ -128,6 +128,9 @@ name|catalogReader
 parameter_list|,
 name|JavaTypeFactory
 name|typeFactory
+parameter_list|,
+name|SqlConformance
+name|conformance
 parameter_list|)
 block|{
 name|super
@@ -138,9 +141,7 @@ name|catalogReader
 argument_list|,
 name|typeFactory
 argument_list|,
-name|SqlConformance
-operator|.
-name|DEFAULT
+name|conformance
 argument_list|)
 expr_stmt|;
 block|}

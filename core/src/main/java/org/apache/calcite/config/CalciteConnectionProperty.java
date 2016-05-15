@@ -37,6 +37,22 @@ name|apache
 operator|.
 name|calcite
 operator|.
+name|sql
+operator|.
+name|validate
+operator|.
+name|SqlConformance
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
 name|util
 operator|.
 name|Bug
@@ -363,16 +379,18 @@ argument_list|,
 literal|false
 argument_list|)
 block|,
-comment|/** Whether to support SELECT without FROM, e.g. SELECT 2+2. */
-name|FROM_REQUIRED
+comment|/** SQL conformance level. */
+name|CONFORMANCE
 argument_list|(
-literal|"fromRequired"
+literal|"conformance"
 argument_list|,
 name|Type
 operator|.
-name|BOOLEAN
+name|ENUM
 argument_list|,
-literal|false
+name|SqlConformance
+operator|.
+name|DEFAULT
 argument_list|,
 literal|false
 argument_list|)

@@ -18,7 +18,7 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * Enumeration of valid SQL compatiblity modes.  */
+comment|/**  * Enumeration of valid SQL compatibility modes.  */
 end_comment
 
 begin_enum
@@ -40,7 +40,7 @@ name|STRICT_2003
 block|,
 name|PRAGMATIC_2003
 block|;
-comment|/**    * Whether 'order by 2' is interpreted to mean 'sort by the 2nd column in    * the select list'.    */
+comment|/**    * Whether 'order by 2' is interpreted to mean 'sort by the 2nd column in    * the select list'.    *    *<p>True in {@link #DEFAULT}, {@link #ORACLE_10}, {@link #STRICT_92},    * {@link #PRAGMATIC_99}, {@link #PRAGMATIC_2003};    * false otherwise.    */
 specifier|public
 name|boolean
 name|isSortByOrdinal
@@ -75,7 +75,7 @@ literal|false
 return|;
 block|}
 block|}
-comment|/**    * Whether 'order by x' is interpreted to mean 'sort by the select list item    * whose alias is x' even if there is a column called x.    */
+comment|/**    * Whether 'order by x' is interpreted to mean 'sort by the select list item    * whose alias is x' even if there is a column called x.    *    *<p>True in {@link #DEFAULT}, {@link #ORACLE_10}, {@link #STRICT_92};    * false otherwise.    */
 specifier|public
 name|boolean
 name|isSortByAlias
@@ -104,7 +104,7 @@ literal|false
 return|;
 block|}
 block|}
-comment|/**    * Whether "empno" is invalid in "select empno as x from emp order by empno"    * because the alias "x" obscures it.    */
+comment|/**    * Whether "empno" is invalid in "select empno as x from emp order by empno"    * because the alias "x" obscures it.    *    *<p>True in {@link #STRICT_92};    * false otherwise.    */
 specifier|public
 name|boolean
 name|isSortByAliasObscures
@@ -118,7 +118,7 @@ operator|.
 name|STRICT_92
 return|;
 block|}
-comment|/**    * Whether from clause is required for any select statement.    */
+comment|/**    * Whether FROM clause is required in a SELECT statement.    *    *<p>True in {@link #ORACLE_10}, {@link #STRICT_92}, {@link #STRICT_99},    * {@link #STRICT_2003};    * false otherwise.    */
 specifier|public
 name|boolean
 name|isFromRequired
@@ -130,17 +130,23 @@ name|this
 condition|)
 block|{
 case|case
-name|DEFAULT
+name|ORACLE_10
 case|:
 case|case
-name|PRAGMATIC_2003
+name|STRICT_92
+case|:
+case|case
+name|STRICT_99
+case|:
+case|case
+name|STRICT_2003
 case|:
 return|return
-literal|false
+literal|true
 return|;
 default|default:
 return|return
-literal|true
+literal|false
 return|;
 block|}
 block|}

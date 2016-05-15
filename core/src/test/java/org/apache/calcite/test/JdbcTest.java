@@ -11905,11 +11905,12 @@ literal|"EXPR$0=-3\n"
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1120">[CALCITE-1120]    * Support SELECT without FROM</a>. */
 annotation|@
 name|Test
 specifier|public
 name|void
-name|testValuesWithoutFrom
+name|testSelectWithoutFrom
 parameter_list|()
 block|{
 name|CalciteAssert

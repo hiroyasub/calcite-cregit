@@ -5259,11 +5259,104 @@ name|void
 name|testSelectWithoutFrom
 parameter_list|()
 block|{
-name|check
+name|sql
 argument_list|(
 literal|"select 2+2"
-argument_list|,
+argument_list|)
+operator|.
+name|ok
+argument_list|(
 literal|"SELECT (2 + 2)"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSelectWithoutFrom2
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"select 2+2 as x, 'a' as y"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+literal|"SELECT (2 + 2) AS `X`, 'a' AS `Y`"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSelectDistinctWithoutFrom
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"select distinct 2+2 as x, 'a' as y"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+literal|"SELECT DISTINCT (2 + 2) AS `X`, 'a' AS `Y`"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSelectWithoutFromWhereFails
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"select 2+2 as x ^where^ 1> 2"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"(?s).*Encountered \"where\" at line .*"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSelectWithoutFromGroupByFails
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"select 2+2 as x ^group^ by 1, 2"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"(?s).*Encountered \"group\" at line .*"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSelectWithoutFromHavingFails
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"select 2+2 as x ^having^ 1> 2"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"(?s).*Encountered \"having\" at line .*"
 argument_list|)
 expr_stmt|;
 block|}

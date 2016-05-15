@@ -61,6 +61,22 @@ name|Quoting
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|validate
+operator|.
+name|SqlConformance
+import|;
+end_import
+
 begin_comment
 comment|/** Interface for reading connection properties within Calcite code. There is  * a method for every property. At some point there will be similar config  * classes for system and statement properties. */
 end_comment
@@ -166,9 +182,9 @@ name|T
 name|defaultTypeSystem
 parameter_list|)
 function_decl|;
-comment|/** @see CalciteConnectionProperty#FROM_REQUIRED */
-name|boolean
-name|fromRequired
+comment|/** @see CalciteConnectionProperty#CONFORMANCE */
+name|SqlConformance
+name|conformance
 parameter_list|()
 function_decl|;
 block|}
