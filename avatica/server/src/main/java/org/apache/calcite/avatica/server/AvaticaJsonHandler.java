@@ -775,6 +775,20 @@ name|Exception
 name|e
 parameter_list|)
 block|{
+name|LOG
+operator|.
+name|debug
+argument_list|(
+literal|"Error invoking request from {}"
+argument_list|,
+name|baseRequest
+operator|.
+name|getRemoteAddr
+argument_list|()
+argument_list|,
+name|e
+argument_list|)
+expr_stmt|;
 name|jsonResponse
 operator|=
 name|jsonHandler
