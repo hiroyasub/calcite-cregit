@@ -138,7 +138,10 @@ comment|//~ Methods ------------------------------------------------------------
 specifier|protected
 name|RelDataType
 name|validateImpl
-parameter_list|()
+parameter_list|(
+name|RelDataType
+name|targetRowType
+parameter_list|)
 block|{
 for|for
 control|(
@@ -191,6 +194,8 @@ operator|.
 name|body
 argument_list|,
 name|scope2
+argument_list|,
+name|targetRowType
 argument_list|)
 expr_stmt|;
 specifier|final

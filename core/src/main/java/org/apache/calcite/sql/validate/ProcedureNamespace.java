@@ -167,7 +167,10 @@ comment|//~ Methods ------------------------------------------------------------
 specifier|public
 name|RelDataType
 name|validateImpl
-parameter_list|()
+parameter_list|(
+name|RelDataType
+name|targetRowType
+parameter_list|)
 block|{
 name|validator
 operator|.

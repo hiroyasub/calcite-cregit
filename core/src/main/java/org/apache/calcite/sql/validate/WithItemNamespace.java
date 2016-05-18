@@ -167,7 +167,10 @@ name|Override
 specifier|protected
 name|RelDataType
 name|validateImpl
-parameter_list|()
+parameter_list|(
+name|RelDataType
+name|targetRowType
+parameter_list|)
 block|{
 specifier|final
 name|SqlValidatorNamespace

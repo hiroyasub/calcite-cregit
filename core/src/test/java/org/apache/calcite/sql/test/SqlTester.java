@@ -402,7 +402,7 @@ name|double
 name|delta
 parameter_list|)
 function_decl|;
-comment|/**    * Tests that a SQL query returns a result of expected type and value.    * Checking of type and value are abstracted using {@link TypeChecker}    * and {@link ResultChecker} functors.    *    * @param query         SQL query    * @param typeChecker   Checks whether the result is the expected type; must    *                      not be null    * @param resultChecker Checks whether the result has the expected value;    *                      must not be null    */
+comment|/**    * Tests that a SQL query returns a result of expected type and value.    * Checking of type and value are abstracted using {@link TypeChecker}    * and {@link ResultChecker} functors.    *    * @param query         SQL query    * @param typeChecker   Checks whether the result is the expected type; must    *                      not be null    * @param parameterChecker Checks whether the parameters are of expected    *                      types    * @param resultChecker Checks whether the result has the expected value;    *                      must not be null    */
 name|void
 name|check
 parameter_list|(
@@ -411,6 +411,9 @@ name|query
 parameter_list|,
 name|TypeChecker
 name|typeChecker
+parameter_list|,
+name|ParameterChecker
+name|parameterChecker
 parameter_list|,
 name|ResultChecker
 name|resultChecker
@@ -437,14 +440,6 @@ parameter_list|,
 name|VmName
 modifier|...
 name|unimplementedVmNames
-parameter_list|)
-function_decl|;
-comment|/**    * Checks to see if this tester is for the given VmName. Return false if    * no vm associated with this tester.    *    * @param vmName VmName to check for.    * @return whether or not this tester is for the given VmName.    */
-name|boolean
-name|isVm
-parameter_list|(
-name|VmName
-name|vmName
 parameter_list|)
 function_decl|;
 comment|/**    * Checks that an aggregate expression returns the expected result.    *    *<p>For example,<code>checkAgg("AVG(DISTINCT x)", new String[] {"2", "3",    * null, "3" }, new Double(2.5), 0);</code>    *    * @param expr        Aggregate expression, e.g.<code>SUM(DISTINCT x)</code>    * @param inputValues Array of input values, e.g.<code>["1", null,    *                    "2"]</code>.    * @param result      Expected result    * @param delta       Allowable variance from expected result    */
@@ -532,6 +527,18 @@ name|checkType
 parameter_list|(
 name|RelDataType
 name|type
+parameter_list|)
+function_decl|;
+block|}
+comment|/** Parameter checker. */
+interface|interface
+name|ParameterChecker
+block|{
+name|void
+name|checkParameters
+parameter_list|(
+name|RelDataType
+name|parameterRowType
 parameter_list|)
 function_decl|;
 block|}

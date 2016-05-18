@@ -7572,6 +7572,10 @@ name|SqlTests
 operator|.
 name|BOOLEAN_TYPE_CHECKER
 argument_list|,
+name|SqlTests
+operator|.
+name|ANY_PARAMETER_CHECKER
+argument_list|,
 operator|new
 name|ValueOrExceptionResultChecker
 argument_list|(
@@ -11277,6 +11281,10 @@ name|SqlTests
 operator|.
 name|BOOLEAN_TYPE_CHECKER
 argument_list|,
+name|SqlTests
+operator|.
+name|ANY_PARAMETER_CHECKER
+argument_list|,
 operator|new
 name|ValueOrExceptionResultChecker
 argument_list|(
@@ -11301,6 +11309,10 @@ argument_list|,
 name|SqlTests
 operator|.
 name|BOOLEAN_TYPE_CHECKER
+argument_list|,
+name|SqlTests
+operator|.
+name|ANY_PARAMETER_CHECKER
 argument_list|,
 operator|new
 name|ValueOrExceptionResultChecker
@@ -11328,6 +11340,10 @@ argument_list|,
 name|SqlTests
 operator|.
 name|BOOLEAN_TYPE_CHECKER
+argument_list|,
+name|SqlTests
+operator|.
+name|ANY_PARAMETER_CHECKER
 argument_list|,
 operator|new
 name|ValueOrExceptionResultChecker
@@ -22806,6 +22822,10 @@ name|ANY_TYPE_CHECKER
 argument_list|,
 name|SqlTests
 operator|.
+name|ANY_PARAMETER_CHECKER
+argument_list|,
+name|SqlTests
+operator|.
 name|ANY_RESULT_CHECKER
 argument_list|)
 expr_stmt|;
@@ -23355,6 +23375,9 @@ parameter_list|,
 name|TypeChecker
 name|typeChecker
 parameter_list|,
+name|ParameterChecker
+name|parameterChecker
+parameter_list|,
 name|ResultChecker
 name|resultChecker
 parameter_list|)
@@ -23366,6 +23389,8 @@ argument_list|(
 name|query
 argument_list|,
 name|typeChecker
+argument_list|,
+name|parameterChecker
 argument_list|,
 name|resultChecker
 argument_list|)

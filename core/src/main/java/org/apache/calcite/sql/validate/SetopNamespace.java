@@ -336,7 +336,10 @@ block|}
 specifier|public
 name|RelDataType
 name|validateImpl
-parameter_list|()
+parameter_list|(
+name|RelDataType
+name|targetRowType
+parameter_list|)
 block|{
 switch|switch
 condition|(
@@ -420,6 +423,8 @@ argument_list|(
 name|operand
 argument_list|,
 name|scope
+argument_list|,
+name|targetRowType
 argument_list|)
 expr_stmt|;
 block|}

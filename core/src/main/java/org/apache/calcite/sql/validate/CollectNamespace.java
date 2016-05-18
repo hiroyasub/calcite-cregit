@@ -160,7 +160,10 @@ comment|//~ Methods ------------------------------------------------------------
 specifier|protected
 name|RelDataType
 name|validateImpl
-parameter_list|()
+parameter_list|(
+name|RelDataType
+name|targetRowType
+parameter_list|)
 block|{
 return|return
 name|child

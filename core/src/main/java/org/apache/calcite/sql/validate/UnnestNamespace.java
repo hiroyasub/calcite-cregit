@@ -165,7 +165,10 @@ comment|//~ Methods ------------------------------------------------------------
 specifier|protected
 name|RelDataType
 name|validateImpl
-parameter_list|()
+parameter_list|(
+name|RelDataType
+name|targetRowType
+parameter_list|)
 block|{
 comment|// Validate the call and its arguments, and infer the return type.
 name|validator

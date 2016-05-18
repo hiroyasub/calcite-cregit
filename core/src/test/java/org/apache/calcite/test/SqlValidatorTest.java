@@ -468,14 +468,6 @@ name|TODO
 init|=
 literal|false
 decl_stmt|;
-specifier|public
-specifier|static
-specifier|final
-name|boolean
-name|TODO_TYPE_INFERENCE
-init|=
-literal|false
-decl_stmt|;
 specifier|private
 specifier|static
 specifier|final
@@ -17889,55 +17881,81 @@ name|void
 name|testBind
 parameter_list|()
 block|{
-name|check
+name|sql
 argument_list|(
 literal|"select * from emp where deptno = ?"
 argument_list|)
+operator|.
+name|ok
+argument_list|()
 expr_stmt|;
-name|check
+name|sql
 argument_list|(
 literal|"select * from emp where deptno = ? and sal< 100000"
 argument_list|)
+operator|.
+name|ok
+argument_list|()
 expr_stmt|;
-if|if
-condition|(
-name|TODO_TYPE_INFERENCE
-condition|)
-block|{
-name|check
+name|sql
 argument_list|(
 literal|"select case when deptno = ? then 1 else 2 end from emp"
 argument_list|)
+operator|.
+name|ok
+argument_list|()
 expr_stmt|;
-block|}
-if|if
-condition|(
-name|TODO_TYPE_INFERENCE
-condition|)
-block|{
-name|check
+comment|// It is not possible to infer type of ?, because SUBSTRING is overloaded
+name|sql
 argument_list|(
-literal|"select deptno from emp group by substring(name from ? for ?)"
+literal|"select deptno from emp group by substring(name from ^?^ for ?)"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Illegal use of dynamic parameter"
 argument_list|)
 expr_stmt|;
-block|}
-if|if
-condition|(
-name|TODO_TYPE_INFERENCE
-condition|)
-block|{
-name|check
+comment|// In principle we could infer that ? should be a VARCHAR
+name|sql
 argument_list|(
-literal|"select deptno from emp\n"
+literal|"select count(*) from emp group by position(^?^ in ename)"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Illegal use of dynamic parameter"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select ^deptno^ from emp\n"
 operator|+
 literal|"group by case when deptno = ? then 1 else 2 end"
 argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Expression 'DEPTNO' is not being grouped"
+argument_list|)
 expr_stmt|;
-block|}
-name|check
+name|sql
+argument_list|(
+literal|"select deptno from emp\n"
+operator|+
+literal|"group by deptno, case when deptno = ? then 1 else 2 end"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|sql
 argument_list|(
 literal|"select 1 from emp having sum(sal)< ?"
 argument_list|)
+operator|.
+name|ok
+argument_list|()
 expr_stmt|;
 block|}
 annotation|@
@@ -20647,6 +20665,190 @@ argument_list|(
 literal|"insert into emp (empno, deptno)\n"
 operator|+
 literal|"select 1, 1 from (values 'a')"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testInsertBind
+parameter_list|()
+block|{
+comment|// VALUES
+name|sql
+argument_list|(
+literal|"insert into emp (empno, deptno) values (?, ?)"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+operator|.
+name|bindType
+argument_list|(
+literal|"RecordType(INTEGER ?0, INTEGER ?1)"
+argument_list|)
+expr_stmt|;
+comment|// multiple VALUES
+name|sql
+argument_list|(
+literal|"insert into emp (empno, deptno) values (?, 1), (2, ?), (3, null)"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+operator|.
+name|bindType
+argument_list|(
+literal|"RecordType(INTEGER ?0, INTEGER ?1)"
+argument_list|)
+expr_stmt|;
+comment|// VALUES with expression
+name|sql
+argument_list|(
+literal|"insert into emp (ename, deptno) values (?, ? + 1)"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+operator|.
+name|bindType
+argument_list|(
+literal|"RecordType(VARCHAR(20) ?0, INTEGER ?1)"
+argument_list|)
+expr_stmt|;
+comment|// SELECT
+name|sql
+argument_list|(
+literal|"insert into emp (ename, deptno) select ?, ? from (values (1))"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+operator|.
+name|bindType
+argument_list|(
+literal|"RecordType(VARCHAR(20) ?0, INTEGER ?1)"
+argument_list|)
+expr_stmt|;
+comment|// WITH
+specifier|final
+name|String
+name|sql
+init|=
+literal|"insert into emp (ename, deptno)\n"
+operator|+
+literal|"with v as (values ('a'))\n"
+operator|+
+literal|"select ?, ? from (values (1))"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+operator|.
+name|bindType
+argument_list|(
+literal|"RecordType(VARCHAR(20) ?0, INTEGER ?1)"
+argument_list|)
+expr_stmt|;
+comment|// UNION
+specifier|final
+name|String
+name|sql2
+init|=
+literal|"insert into emp (ename, deptno)\n"
+operator|+
+literal|"select ?, ? from (values (1))\n"
+operator|+
+literal|"union all\n"
+operator|+
+literal|"select ?, ? from (values (time '1:2:3'))"
+decl_stmt|;
+specifier|final
+name|String
+name|expected2
+init|=
+literal|"RecordType(VARCHAR(20) ?0, INTEGER ?1,"
+operator|+
+literal|" VARCHAR(20) ?2, INTEGER ?3)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql2
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+operator|.
+name|bindType
+argument_list|(
+name|expected2
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testUpdateBind
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"update emp\n"
+operator|+
+literal|"set ename = ?\n"
+operator|+
+literal|"where deptno = ?"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+operator|.
+name|bindType
+argument_list|(
+literal|"RecordType(VARCHAR(20) ?0, INTEGER ?1)"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testDeleteBind
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"delete from emp\n"
+operator|+
+literal|"where deptno = ?\n"
+operator|+
+literal|"or ename = ?"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+operator|.
+name|bindType
+argument_list|(
+literal|"RecordType(INTEGER ?0, VARCHAR(20) ?1)"
 argument_list|)
 expr_stmt|;
 block|}

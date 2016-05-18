@@ -467,7 +467,7 @@ argument_list|>
 name|nameToTypeMap
 parameter_list|)
 function_decl|;
-comment|/**    * Checks that a query is valid.    *    *<p>Valid queries include:    *    *<ul>    *<li><code>SELECT</code> statement,    *<li>set operation (<code>UNION</code>,<code>INTERSECT</code>,<code>    * EXCEPT</code>)    *<li>identifier (e.g. representing use of a table in a FROM clause)    *<li>query aliased with the<code>AS</code> operator    *</ul>    *    * @param node  Query node    * @param scope Scope in which the query occurs    * @throws RuntimeException if the query is not valid    */
+comment|/**    * Checks that a query is valid.    *    *<p>Valid queries include:    *    *<ul>    *<li><code>SELECT</code> statement,    *<li>set operation (<code>UNION</code>,<code>INTERSECT</code>,<code>    * EXCEPT</code>)    *<li>identifier (e.g. representing use of a table in a FROM clause)    *<li>query aliased with the<code>AS</code> operator    *</ul>    *    * @param node  Query node    * @param scope Scope in which the query occurs    * @param targetRowType Desired row type, must not be null, may be the data    *                      type 'unknown'.    * @throws RuntimeException if the query is not valid    */
 name|void
 name|validateQuery
 parameter_list|(
@@ -476,6 +476,9 @@ name|node
 parameter_list|,
 name|SqlValidatorScope
 name|scope
+parameter_list|,
+name|RelDataType
+name|targetRowType
 parameter_list|)
 function_decl|;
 comment|/**    * Returns the type assigned to a node by validation.    *    * @param node the node of interest    * @return validated type, never null    */

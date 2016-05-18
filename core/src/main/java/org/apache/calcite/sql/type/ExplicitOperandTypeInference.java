@@ -115,16 +115,23 @@ index|[]
 name|operandTypes
 parameter_list|)
 block|{
-assert|assert
+if|if
+condition|(
 name|operandTypes
 operator|.
 name|length
-operator|==
+operator|!=
 name|paramTypes
 operator|.
 name|size
 argument_list|()
-assert|;
+condition|)
+block|{
+comment|// This call does not match the inference strategy.
+comment|// It's likely that we're just about to give a validation error.
+comment|// Don't make a fuss, just give up.
+return|return;
+block|}
 name|paramTypes
 operator|.
 name|toArray

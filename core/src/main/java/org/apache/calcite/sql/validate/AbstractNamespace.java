@@ -202,7 +202,10 @@ specifier|public
 specifier|final
 name|void
 name|validate
-parameter_list|()
+parameter_list|(
+name|RelDataType
+name|targetRowType
+parameter_list|)
 block|{
 switch|switch
 condition|(
@@ -237,7 +240,9 @@ name|RelDataType
 name|type
 init|=
 name|validateImpl
-argument_list|()
+argument_list|(
+name|targetRowType
+argument_list|)
 decl_stmt|;
 name|Util
 operator|.
@@ -317,12 +322,15 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/**    * Validates this scope and returns the type of the records it returns.    * External users should call {@link #validate}, which uses the    * {@link #status} field to protect against cycles.    *    * @return record data type, never null    */
+comment|/**    * Validates this scope and returns the type of the records it returns.    * External users should call {@link #validate}, which uses the    * {@link #status} field to protect against cycles.    *    * @return record data type, never null    *    * @param targetRowType Desired row type, must not be null, may be the data    *                      type 'unknown'.    */
 specifier|protected
 specifier|abstract
 name|RelDataType
 name|validateImpl
-parameter_list|()
+parameter_list|(
+name|RelDataType
+name|targetRowType
+parameter_list|)
 function_decl|;
 specifier|public
 name|RelDataType
@@ -341,6 +349,10 @@ operator|.
 name|validateNamespace
 argument_list|(
 name|this
+argument_list|,
+name|validator
+operator|.
+name|unknownType
 argument_list|)
 expr_stmt|;
 name|Util

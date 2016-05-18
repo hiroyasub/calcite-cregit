@@ -139,7 +139,10 @@ block|}
 specifier|public
 name|RelDataType
 name|validateImpl
-parameter_list|()
+parameter_list|(
+name|RelDataType
+name|targetRowType
+parameter_list|)
 block|{
 name|validator
 operator|.
@@ -147,9 +150,7 @@ name|validateSelect
 argument_list|(
 name|select
 argument_list|,
-name|validator
-operator|.
-name|unknownType
+name|targetRowType
 argument_list|)
 expr_stmt|;
 return|return

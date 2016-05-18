@@ -868,6 +868,9 @@ parameter_list|(
 specifier|final
 name|SqlValidatorNamespace
 name|namespace
+parameter_list|,
+name|RelDataType
+name|targetRowType
 parameter_list|)
 block|{
 comment|// Only attempt to validate each namespace once. Otherwise if
@@ -887,6 +890,8 @@ operator|.
 name|validateNamespace
 argument_list|(
 name|namespace
+argument_list|,
+name|targetRowType
 argument_list|)
 expr_stmt|;
 block|}

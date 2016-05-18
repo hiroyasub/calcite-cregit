@@ -282,6 +282,11 @@ argument_list|(
 name|call
 argument_list|,
 name|operandScope
+argument_list|,
+name|validator
+operator|.
+name|getUnknownType
+argument_list|()
 argument_list|)
 expr_stmt|;
 block|}

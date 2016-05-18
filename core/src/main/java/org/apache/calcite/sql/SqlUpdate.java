@@ -285,8 +285,6 @@ name|sourceExpressionList
 argument_list|,
 name|condition
 argument_list|,
-name|sourceSelect
-argument_list|,
 name|alias
 argument_list|)
 return|;
@@ -312,11 +310,13 @@ block|{
 case|case
 literal|0
 case|:
+assert|assert
+name|operand
+operator|instanceof
+name|SqlIdentifier
+assert|;
 name|targetTable
 operator|=
-operator|(
-name|SqlIdentifier
-operator|)
 name|operand
 expr_stmt|;
 break|break;

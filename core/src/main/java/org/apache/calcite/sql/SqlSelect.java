@@ -743,6 +743,11 @@ argument_list|(
 name|this
 argument_list|,
 name|scope
+argument_list|,
+name|validator
+operator|.
+name|getUnknownType
+argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
