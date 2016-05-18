@@ -39,6 +39,20 @@ name|calcite
 operator|.
 name|linq4j
 operator|.
+name|EnumerableDefaults
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|linq4j
+operator|.
 name|Linq4j
 import|;
 end_import
@@ -419,7 +433,7 @@ parameter_list|()
 block|{
 name|assertThat
 argument_list|(
-name|Enumerables
+name|EnumerableDefaults
 operator|.
 name|semiJoin
 argument_list|(
@@ -508,7 +522,7 @@ parameter_list|()
 block|{
 name|assertThat
 argument_list|(
-name|Enumerables
+name|EnumerableDefaults
 operator|.
 name|mergeJoin
 argument_list|(
@@ -1076,7 +1090,7 @@ name|list1
 parameter_list|)
 block|{
 return|return
-name|Enumerables
+name|EnumerableDefaults
 operator|.
 name|mergeJoin
 argument_list|(
@@ -1153,7 +1167,7 @@ parameter_list|()
 block|{
 name|assertThat
 argument_list|(
-name|Enumerables
+name|EnumerableDefaults
 operator|.
 name|thetaJoin
 argument_list|(
@@ -1192,7 +1206,7 @@ parameter_list|()
 block|{
 name|assertThat
 argument_list|(
-name|Enumerables
+name|EnumerableDefaults
 operator|.
 name|thetaJoin
 argument_list|(
@@ -1233,7 +1247,7 @@ parameter_list|()
 block|{
 name|assertThat
 argument_list|(
-name|Enumerables
+name|EnumerableDefaults
 operator|.
 name|thetaJoin
 argument_list|(
@@ -1274,7 +1288,7 @@ parameter_list|()
 block|{
 name|assertThat
 argument_list|(
-name|Enumerables
+name|EnumerableDefaults
 operator|.
 name|thetaJoin
 argument_list|(
@@ -1317,7 +1331,7 @@ parameter_list|()
 block|{
 name|assertThat
 argument_list|(
-name|Enumerables
+name|EnumerableDefaults
 operator|.
 name|thetaJoin
 argument_list|(
@@ -1372,7 +1386,7 @@ parameter_list|()
 block|{
 name|assertThat
 argument_list|(
-name|Enumerables
+name|EnumerableDefaults
 operator|.
 name|thetaJoin
 argument_list|(
@@ -1418,7 +1432,7 @@ parameter_list|()
 block|{
 name|assertThat
 argument_list|(
-name|Enumerables
+name|EnumerableDefaults
 operator|.
 name|thetaJoin
 argument_list|(

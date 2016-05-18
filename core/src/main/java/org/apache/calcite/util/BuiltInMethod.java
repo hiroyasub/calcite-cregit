@@ -1526,7 +1526,7 @@ argument_list|)
 block|,
 name|MERGE_JOIN
 argument_list|(
-name|Enumerables
+name|EnumerableDefaults
 operator|.
 name|class
 argument_list|,
@@ -1576,7 +1576,7 @@ argument_list|)
 block|,
 name|SEMI_JOIN
 argument_list|(
-name|Enumerables
+name|EnumerableDefaults
 operator|.
 name|class
 argument_list|,
@@ -1601,7 +1601,7 @@ argument_list|)
 block|,
 name|THETA_JOIN
 argument_list|(
-name|Enumerables
+name|EnumerableDefaults
 operator|.
 name|class
 argument_list|,
