@@ -18328,6 +18328,21 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|unnestMapMustNameColumnsKeyAndValueWhenNotAliased
+parameter_list|()
+block|{
+name|checkResultType
+argument_list|(
+literal|"select * from unnest(map[1, 12, 2, 22])"
+argument_list|,
+literal|"RecordType(INTEGER NOT NULL KEY, INTEGER NOT NULL VALUE) NOT NULL"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testCorrelationJoin
 parameter_list|()
 block|{
