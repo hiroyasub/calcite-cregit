@@ -24196,7 +24196,7 @@ name|ByteString
 name|getSqlBytes
 parameter_list|()
 function_decl|;
-comment|/**      *<code>optional uint64 max_row_count = 3;</code>      */
+comment|/**      *<code>optional uint64 max_row_count = 3;</code>      *      *<pre>      * Deprecated      *</pre>      */
 name|long
 name|getMaxRowCount
 parameter_list|()
@@ -24204,6 +24204,16 @@ function_decl|;
 comment|/**      *<code>optional uint32 statement_id = 4;</code>      */
 name|int
 name|getStatementId
+parameter_list|()
+function_decl|;
+comment|/**      *<code>optional int64 max_rows_total = 5;</code>      *      *<pre>      * The maximum number of rows that will be allowed for this query      *</pre>      */
+name|long
+name|getMaxRowsTotal
+parameter_list|()
+function_decl|;
+comment|/**      *<code>optional int32 first_frame_max_size = 6;</code>      *      *<pre>      * The maximum number of rows that will be returned in the      *</pre>      */
+name|int
+name|getFirstFrameMaxSize
 parameter_list|()
 function_decl|;
 block|}
@@ -24267,6 +24277,14 @@ operator|=
 literal|0L
 expr_stmt|;
 name|statementId_
+operator|=
+literal|0
+expr_stmt|;
+name|maxRowsTotal_
+operator|=
+literal|0L
+expr_stmt|;
+name|firstFrameMaxSize_
 operator|=
 literal|0
 expr_stmt|;
@@ -24444,6 +24462,32 @@ operator|=
 name|input
 operator|.
 name|readUInt32
+argument_list|()
+expr_stmt|;
+break|break;
+block|}
+case|case
+literal|40
+case|:
+block|{
+name|maxRowsTotal_
+operator|=
+name|input
+operator|.
+name|readInt64
+argument_list|()
+expr_stmt|;
+break|break;
+block|}
+case|case
+literal|48
+case|:
+block|{
+name|firstFrameMaxSize_
+operator|=
+name|input
+operator|.
+name|readInt32
 argument_list|()
 expr_stmt|;
 break|break;
@@ -25000,7 +25044,7 @@ specifier|private
 name|long
 name|maxRowCount_
 decl_stmt|;
-comment|/**      *<code>optional uint64 max_row_count = 3;</code>      */
+comment|/**      *<code>optional uint64 max_row_count = 3;</code>      *      *<pre>      * Deprecated      *</pre>      */
 specifier|public
 name|long
 name|getMaxRowCount
@@ -25030,6 +25074,50 @@ parameter_list|()
 block|{
 return|return
 name|statementId_
+return|;
+block|}
+specifier|public
+specifier|static
+specifier|final
+name|int
+name|MAX_ROWS_TOTAL_FIELD_NUMBER
+init|=
+literal|5
+decl_stmt|;
+specifier|private
+name|long
+name|maxRowsTotal_
+decl_stmt|;
+comment|/**      *<code>optional int64 max_rows_total = 5;</code>      *      *<pre>      * The maximum number of rows that will be allowed for this query      *</pre>      */
+specifier|public
+name|long
+name|getMaxRowsTotal
+parameter_list|()
+block|{
+return|return
+name|maxRowsTotal_
+return|;
+block|}
+specifier|public
+specifier|static
+specifier|final
+name|int
+name|FIRST_FRAME_MAX_SIZE_FIELD_NUMBER
+init|=
+literal|6
+decl_stmt|;
+specifier|private
+name|int
+name|firstFrameMaxSize_
+decl_stmt|;
+comment|/**      *<code>optional int32 first_frame_max_size = 6;</code>      *      *<pre>      * The maximum number of rows that will be returned in the      *</pre>      */
+specifier|public
+name|int
+name|getFirstFrameMaxSize
+parameter_list|()
+block|{
+return|return
+name|firstFrameMaxSize_
 return|;
 block|}
 specifier|private
@@ -25186,6 +25274,40 @@ name|statementId_
 argument_list|)
 expr_stmt|;
 block|}
+if|if
+condition|(
+name|maxRowsTotal_
+operator|!=
+literal|0L
+condition|)
+block|{
+name|output
+operator|.
+name|writeInt64
+argument_list|(
+literal|5
+argument_list|,
+name|maxRowsTotal_
+argument_list|)
+expr_stmt|;
+block|}
+if|if
+condition|(
+name|firstFrameMaxSize_
+operator|!=
+literal|0
+condition|)
+block|{
+name|output
+operator|.
+name|writeInt32
+argument_list|(
+literal|6
+argument_list|,
+name|firstFrameMaxSize_
+argument_list|)
+expr_stmt|;
+block|}
 block|}
 specifier|public
 name|int
@@ -25314,6 +25436,56 @@ argument_list|(
 literal|4
 argument_list|,
 name|statementId_
+argument_list|)
+expr_stmt|;
+block|}
+if|if
+condition|(
+name|maxRowsTotal_
+operator|!=
+literal|0L
+condition|)
+block|{
+name|size
+operator|+=
+name|com
+operator|.
+name|google
+operator|.
+name|protobuf
+operator|.
+name|CodedOutputStream
+operator|.
+name|computeInt64Size
+argument_list|(
+literal|5
+argument_list|,
+name|maxRowsTotal_
+argument_list|)
+expr_stmt|;
+block|}
+if|if
+condition|(
+name|firstFrameMaxSize_
+operator|!=
+literal|0
+condition|)
+block|{
+name|size
+operator|+=
+name|com
+operator|.
+name|google
+operator|.
+name|protobuf
+operator|.
+name|CodedOutputStream
+operator|.
+name|computeInt32Size
+argument_list|(
+literal|6
+argument_list|,
+name|firstFrameMaxSize_
 argument_list|)
 expr_stmt|;
 block|}
@@ -26124,6 +26296,14 @@ name|statementId_
 operator|=
 literal|0
 expr_stmt|;
+name|maxRowsTotal_
+operator|=
+literal|0L
+expr_stmt|;
+name|firstFrameMaxSize_
+operator|=
+literal|0
+expr_stmt|;
 return|return
 name|this
 return|;
@@ -26321,6 +26501,18 @@ operator|.
 name|statementId_
 operator|=
 name|statementId_
+expr_stmt|;
+name|result
+operator|.
+name|maxRowsTotal_
+operator|=
+name|maxRowsTotal_
+expr_stmt|;
+name|result
+operator|.
+name|firstFrameMaxSize_
+operator|=
+name|firstFrameMaxSize_
 expr_stmt|;
 name|onBuilt
 argument_list|()
@@ -26520,6 +26712,44 @@ argument_list|(
 name|other
 operator|.
 name|getStatementId
+argument_list|()
+argument_list|)
+expr_stmt|;
+block|}
+if|if
+condition|(
+name|other
+operator|.
+name|getMaxRowsTotal
+argument_list|()
+operator|!=
+literal|0L
+condition|)
+block|{
+name|setMaxRowsTotal
+argument_list|(
+name|other
+operator|.
+name|getMaxRowsTotal
+argument_list|()
+argument_list|)
+expr_stmt|;
+block|}
+if|if
+condition|(
+name|other
+operator|.
+name|getFirstFrameMaxSize
+argument_list|()
+operator|!=
+literal|0
+condition|)
+block|{
+name|setFirstFrameMaxSize
+argument_list|(
+name|other
+operator|.
+name|getFirstFrameMaxSize
 argument_list|()
 argument_list|)
 expr_stmt|;
@@ -27223,7 +27453,7 @@ specifier|private
 name|long
 name|maxRowCount_
 decl_stmt|;
-comment|/**        *<code>optional uint64 max_row_count = 3;</code>        */
+comment|/**        *<code>optional uint64 max_row_count = 3;</code>        *        *<pre>        * Deprecated        *</pre>        */
 specifier|public
 name|long
 name|getMaxRowCount
@@ -27233,7 +27463,7 @@ return|return
 name|maxRowCount_
 return|;
 block|}
-comment|/**        *<code>optional uint64 max_row_count = 3;</code>        */
+comment|/**        *<code>optional uint64 max_row_count = 3;</code>        *        *<pre>        * Deprecated        *</pre>        */
 specifier|public
 name|Builder
 name|setMaxRowCount
@@ -27253,7 +27483,7 @@ return|return
 name|this
 return|;
 block|}
-comment|/**        *<code>optional uint64 max_row_count = 3;</code>        */
+comment|/**        *<code>optional uint64 max_row_count = 3;</code>        *        *<pre>        * Deprecated        *</pre>        */
 specifier|public
 name|Builder
 name|clearMaxRowCount
@@ -27311,6 +27541,108 @@ name|clearStatementId
 parameter_list|()
 block|{
 name|statementId_
+operator|=
+literal|0
+expr_stmt|;
+name|onChanged
+argument_list|()
+expr_stmt|;
+return|return
+name|this
+return|;
+block|}
+specifier|private
+name|long
+name|maxRowsTotal_
+decl_stmt|;
+comment|/**        *<code>optional int64 max_rows_total = 5;</code>        *        *<pre>        * The maximum number of rows that will be allowed for this query        *</pre>        */
+specifier|public
+name|long
+name|getMaxRowsTotal
+parameter_list|()
+block|{
+return|return
+name|maxRowsTotal_
+return|;
+block|}
+comment|/**        *<code>optional int64 max_rows_total = 5;</code>        *        *<pre>        * The maximum number of rows that will be allowed for this query        *</pre>        */
+specifier|public
+name|Builder
+name|setMaxRowsTotal
+parameter_list|(
+name|long
+name|value
+parameter_list|)
+block|{
+name|maxRowsTotal_
+operator|=
+name|value
+expr_stmt|;
+name|onChanged
+argument_list|()
+expr_stmt|;
+return|return
+name|this
+return|;
+block|}
+comment|/**        *<code>optional int64 max_rows_total = 5;</code>        *        *<pre>        * The maximum number of rows that will be allowed for this query        *</pre>        */
+specifier|public
+name|Builder
+name|clearMaxRowsTotal
+parameter_list|()
+block|{
+name|maxRowsTotal_
+operator|=
+literal|0L
+expr_stmt|;
+name|onChanged
+argument_list|()
+expr_stmt|;
+return|return
+name|this
+return|;
+block|}
+specifier|private
+name|int
+name|firstFrameMaxSize_
+decl_stmt|;
+comment|/**        *<code>optional int32 first_frame_max_size = 6;</code>        *        *<pre>        * The maximum number of rows that will be returned in the        *</pre>        */
+specifier|public
+name|int
+name|getFirstFrameMaxSize
+parameter_list|()
+block|{
+return|return
+name|firstFrameMaxSize_
+return|;
+block|}
+comment|/**        *<code>optional int32 first_frame_max_size = 6;</code>        *        *<pre>        * The maximum number of rows that will be returned in the        *</pre>        */
+specifier|public
+name|Builder
+name|setFirstFrameMaxSize
+parameter_list|(
+name|int
+name|value
+parameter_list|)
+block|{
+name|firstFrameMaxSize_
+operator|=
+name|value
+expr_stmt|;
+name|onChanged
+argument_list|()
+expr_stmt|;
+return|return
+name|this
+return|;
+block|}
+comment|/**        *<code>optional int32 first_frame_max_size = 6;</code>        *        *<pre>        * The maximum number of rows that will be returned in the        *</pre>        */
+specifier|public
+name|Builder
+name|clearFirstFrameMaxSize
+parameter_list|()
+block|{
+name|firstFrameMaxSize_
 operator|=
 literal|0
 expr_stmt|;
@@ -27659,9 +27991,14 @@ name|ByteString
 name|getSqlBytes
 parameter_list|()
 function_decl|;
-comment|/**      *<code>optional uint64 max_row_count = 3;</code>      */
+comment|/**      *<code>optional uint64 max_row_count = 3;</code>      *      *<pre>      * Deprecated      *</pre>      */
 name|long
 name|getMaxRowCount
+parameter_list|()
+function_decl|;
+comment|/**      *<code>optional int64 max_rows_total = 4;</code>      *      *<pre>      * The maximum number of rows that will be allowed for this query      *</pre>      */
+name|long
+name|getMaxRowsTotal
 parameter_list|()
 function_decl|;
 block|}
@@ -27721,6 +28058,10 @@ operator|=
 literal|""
 expr_stmt|;
 name|maxRowCount_
+operator|=
+literal|0L
+expr_stmt|;
+name|maxRowsTotal_
 operator|=
 literal|0L
 expr_stmt|;
@@ -27885,6 +28226,19 @@ operator|=
 name|input
 operator|.
 name|readUInt64
+argument_list|()
+expr_stmt|;
+break|break;
+block|}
+case|case
+literal|32
+case|:
+block|{
+name|maxRowsTotal_
+operator|=
+name|input
+operator|.
+name|readInt64
 argument_list|()
 expr_stmt|;
 break|break;
@@ -28441,7 +28795,7 @@ specifier|private
 name|long
 name|maxRowCount_
 decl_stmt|;
-comment|/**      *<code>optional uint64 max_row_count = 3;</code>      */
+comment|/**      *<code>optional uint64 max_row_count = 3;</code>      *      *<pre>      * Deprecated      *</pre>      */
 specifier|public
 name|long
 name|getMaxRowCount
@@ -28449,6 +28803,28 @@ parameter_list|()
 block|{
 return|return
 name|maxRowCount_
+return|;
+block|}
+specifier|public
+specifier|static
+specifier|final
+name|int
+name|MAX_ROWS_TOTAL_FIELD_NUMBER
+init|=
+literal|4
+decl_stmt|;
+specifier|private
+name|long
+name|maxRowsTotal_
+decl_stmt|;
+comment|/**      *<code>optional int64 max_rows_total = 4;</code>      *      *<pre>      * The maximum number of rows that will be allowed for this query      *</pre>      */
+specifier|public
+name|long
+name|getMaxRowsTotal
+parameter_list|()
+block|{
+return|return
+name|maxRowsTotal_
 return|;
 block|}
 specifier|private
@@ -28588,6 +28964,23 @@ name|maxRowCount_
 argument_list|)
 expr_stmt|;
 block|}
+if|if
+condition|(
+name|maxRowsTotal_
+operator|!=
+literal|0L
+condition|)
+block|{
+name|output
+operator|.
+name|writeInt64
+argument_list|(
+literal|4
+argument_list|,
+name|maxRowsTotal_
+argument_list|)
+expr_stmt|;
+block|}
 block|}
 specifier|public
 name|int
@@ -28691,6 +29084,31 @@ argument_list|(
 literal|3
 argument_list|,
 name|maxRowCount_
+argument_list|)
+expr_stmt|;
+block|}
+if|if
+condition|(
+name|maxRowsTotal_
+operator|!=
+literal|0L
+condition|)
+block|{
+name|size
+operator|+=
+name|com
+operator|.
+name|google
+operator|.
+name|protobuf
+operator|.
+name|CodedOutputStream
+operator|.
+name|computeInt64Size
+argument_list|(
+literal|4
+argument_list|,
+name|maxRowsTotal_
 argument_list|)
 expr_stmt|;
 block|}
@@ -29497,6 +29915,10 @@ name|maxRowCount_
 operator|=
 literal|0L
 expr_stmt|;
+name|maxRowsTotal_
+operator|=
+literal|0L
+expr_stmt|;
 return|return
 name|this
 return|;
@@ -29689,6 +30111,12 @@ name|maxRowCount_
 operator|=
 name|maxRowCount_
 expr_stmt|;
+name|result
+operator|.
+name|maxRowsTotal_
+operator|=
+name|maxRowsTotal_
+expr_stmt|;
 name|onBuilt
 argument_list|()
 expr_stmt|;
@@ -29868,6 +30296,25 @@ argument_list|(
 name|other
 operator|.
 name|getMaxRowCount
+argument_list|()
+argument_list|)
+expr_stmt|;
+block|}
+if|if
+condition|(
+name|other
+operator|.
+name|getMaxRowsTotal
+argument_list|()
+operator|!=
+literal|0L
+condition|)
+block|{
+name|setMaxRowsTotal
+argument_list|(
+name|other
+operator|.
+name|getMaxRowsTotal
 argument_list|()
 argument_list|)
 expr_stmt|;
@@ -30571,7 +31018,7 @@ specifier|private
 name|long
 name|maxRowCount_
 decl_stmt|;
-comment|/**        *<code>optional uint64 max_row_count = 3;</code>        */
+comment|/**        *<code>optional uint64 max_row_count = 3;</code>        *        *<pre>        * Deprecated        *</pre>        */
 specifier|public
 name|long
 name|getMaxRowCount
@@ -30581,7 +31028,7 @@ return|return
 name|maxRowCount_
 return|;
 block|}
-comment|/**        *<code>optional uint64 max_row_count = 3;</code>        */
+comment|/**        *<code>optional uint64 max_row_count = 3;</code>        *        *<pre>        * Deprecated        *</pre>        */
 specifier|public
 name|Builder
 name|setMaxRowCount
@@ -30601,13 +31048,64 @@ return|return
 name|this
 return|;
 block|}
-comment|/**        *<code>optional uint64 max_row_count = 3;</code>        */
+comment|/**        *<code>optional uint64 max_row_count = 3;</code>        *        *<pre>        * Deprecated        *</pre>        */
 specifier|public
 name|Builder
 name|clearMaxRowCount
 parameter_list|()
 block|{
 name|maxRowCount_
+operator|=
+literal|0L
+expr_stmt|;
+name|onChanged
+argument_list|()
+expr_stmt|;
+return|return
+name|this
+return|;
+block|}
+specifier|private
+name|long
+name|maxRowsTotal_
+decl_stmt|;
+comment|/**        *<code>optional int64 max_rows_total = 4;</code>        *        *<pre>        * The maximum number of rows that will be allowed for this query        *</pre>        */
+specifier|public
+name|long
+name|getMaxRowsTotal
+parameter_list|()
+block|{
+return|return
+name|maxRowsTotal_
+return|;
+block|}
+comment|/**        *<code>optional int64 max_rows_total = 4;</code>        *        *<pre>        * The maximum number of rows that will be allowed for this query        *</pre>        */
+specifier|public
+name|Builder
+name|setMaxRowsTotal
+parameter_list|(
+name|long
+name|value
+parameter_list|)
+block|{
+name|maxRowsTotal_
+operator|=
+name|value
+expr_stmt|;
+name|onChanged
+argument_list|()
+expr_stmt|;
+return|return
+name|this
+return|;
+block|}
+comment|/**        *<code>optional int64 max_rows_total = 4;</code>        *        *<pre>        * The maximum number of rows that will be allowed for this query        *</pre>        */
+specifier|public
+name|Builder
+name|clearMaxRowsTotal
+parameter_list|()
+block|{
+name|maxRowsTotal_
 operator|=
 literal|0L
 expr_stmt|;
@@ -30946,9 +31444,14 @@ name|long
 name|getOffset
 parameter_list|()
 function_decl|;
-comment|/**      *<code>optional uint32 fetch_max_row_count = 4;</code>      *      *<pre>      * Maximum number of rows to be returned in the frame. Negative means no limit.      *</pre>      */
+comment|/**      *<code>optional uint32 fetch_max_row_count = 4;</code>      *      *<pre>      * Maximum number of rows to be returned in the frame. Negative means no limit. Deprecated!      *</pre>      */
 name|int
 name|getFetchMaxRowCount
+parameter_list|()
+function_decl|;
+comment|/**      *<code>optional int32 frame_max_size = 5;</code>      */
+name|int
+name|getFrameMaxSize
 parameter_list|()
 function_decl|;
 block|}
@@ -31012,6 +31515,10 @@ operator|=
 literal|0L
 expr_stmt|;
 name|fetchMaxRowCount_
+operator|=
+literal|0
+expr_stmt|;
+name|frameMaxSize_
 operator|=
 literal|0
 expr_stmt|;
@@ -31184,6 +31691,19 @@ operator|=
 name|input
 operator|.
 name|readUInt32
+argument_list|()
+expr_stmt|;
+break|break;
+block|}
+case|case
+literal|40
+case|:
+block|{
+name|frameMaxSize_
+operator|=
+name|input
+operator|.
+name|readInt32
 argument_list|()
 expr_stmt|;
 break|break;
@@ -31598,7 +32118,7 @@ specifier|private
 name|int
 name|fetchMaxRowCount_
 decl_stmt|;
-comment|/**      *<code>optional uint32 fetch_max_row_count = 4;</code>      *      *<pre>      * Maximum number of rows to be returned in the frame. Negative means no limit.      *</pre>      */
+comment|/**      *<code>optional uint32 fetch_max_row_count = 4;</code>      *      *<pre>      * Maximum number of rows to be returned in the frame. Negative means no limit. Deprecated!      *</pre>      */
 specifier|public
 name|int
 name|getFetchMaxRowCount
@@ -31606,6 +32126,28 @@ parameter_list|()
 block|{
 return|return
 name|fetchMaxRowCount_
+return|;
+block|}
+specifier|public
+specifier|static
+specifier|final
+name|int
+name|FRAME_MAX_SIZE_FIELD_NUMBER
+init|=
+literal|5
+decl_stmt|;
+specifier|private
+name|int
+name|frameMaxSize_
+decl_stmt|;
+comment|/**      *<code>optional int32 frame_max_size = 5;</code>      */
+specifier|public
+name|int
+name|getFrameMaxSize
+parameter_list|()
+block|{
+return|return
+name|frameMaxSize_
 return|;
 block|}
 specifier|private
@@ -31751,6 +32293,23 @@ name|fetchMaxRowCount_
 argument_list|)
 expr_stmt|;
 block|}
+if|if
+condition|(
+name|frameMaxSize_
+operator|!=
+literal|0
+condition|)
+block|{
+name|output
+operator|.
+name|writeInt32
+argument_list|(
+literal|5
+argument_list|,
+name|frameMaxSize_
+argument_list|)
+expr_stmt|;
+block|}
 block|}
 specifier|public
 name|int
@@ -31876,6 +32435,31 @@ argument_list|(
 literal|4
 argument_list|,
 name|fetchMaxRowCount_
+argument_list|)
+expr_stmt|;
+block|}
+if|if
+condition|(
+name|frameMaxSize_
+operator|!=
+literal|0
+condition|)
+block|{
+name|size
+operator|+=
+name|com
+operator|.
+name|google
+operator|.
+name|protobuf
+operator|.
+name|CodedOutputStream
+operator|.
+name|computeInt32Size
+argument_list|(
+literal|5
+argument_list|,
+name|frameMaxSize_
 argument_list|)
 expr_stmt|;
 block|}
@@ -32686,6 +33270,10 @@ name|fetchMaxRowCount_
 operator|=
 literal|0
 expr_stmt|;
+name|frameMaxSize_
+operator|=
+literal|0
+expr_stmt|;
 return|return
 name|this
 return|;
@@ -32884,6 +33472,12 @@ name|fetchMaxRowCount_
 operator|=
 name|fetchMaxRowCount_
 expr_stmt|;
+name|result
+operator|.
+name|frameMaxSize_
+operator|=
+name|frameMaxSize_
+expr_stmt|;
 name|onBuilt
 argument_list|()
 expr_stmt|;
@@ -33079,6 +33673,25 @@ argument_list|(
 name|other
 operator|.
 name|getFetchMaxRowCount
+argument_list|()
+argument_list|)
+expr_stmt|;
+block|}
+if|if
+condition|(
+name|other
+operator|.
+name|getFrameMaxSize
+argument_list|()
+operator|!=
+literal|0
+condition|)
+block|{
+name|setFrameMaxSize
+argument_list|(
+name|other
+operator|.
+name|getFrameMaxSize
 argument_list|()
 argument_list|)
 expr_stmt|;
@@ -33604,7 +34217,7 @@ specifier|private
 name|int
 name|fetchMaxRowCount_
 decl_stmt|;
-comment|/**        *<code>optional uint32 fetch_max_row_count = 4;</code>        *        *<pre>        * Maximum number of rows to be returned in the frame. Negative means no limit.        *</pre>        */
+comment|/**        *<code>optional uint32 fetch_max_row_count = 4;</code>        *        *<pre>        * Maximum number of rows to be returned in the frame. Negative means no limit. Deprecated!        *</pre>        */
 specifier|public
 name|int
 name|getFetchMaxRowCount
@@ -33614,7 +34227,7 @@ return|return
 name|fetchMaxRowCount_
 return|;
 block|}
-comment|/**        *<code>optional uint32 fetch_max_row_count = 4;</code>        *        *<pre>        * Maximum number of rows to be returned in the frame. Negative means no limit.        *</pre>        */
+comment|/**        *<code>optional uint32 fetch_max_row_count = 4;</code>        *        *<pre>        * Maximum number of rows to be returned in the frame. Negative means no limit. Deprecated!        *</pre>        */
 specifier|public
 name|Builder
 name|setFetchMaxRowCount
@@ -33634,13 +34247,64 @@ return|return
 name|this
 return|;
 block|}
-comment|/**        *<code>optional uint32 fetch_max_row_count = 4;</code>        *        *<pre>        * Maximum number of rows to be returned in the frame. Negative means no limit.        *</pre>        */
+comment|/**        *<code>optional uint32 fetch_max_row_count = 4;</code>        *        *<pre>        * Maximum number of rows to be returned in the frame. Negative means no limit. Deprecated!        *</pre>        */
 specifier|public
 name|Builder
 name|clearFetchMaxRowCount
 parameter_list|()
 block|{
 name|fetchMaxRowCount_
+operator|=
+literal|0
+expr_stmt|;
+name|onChanged
+argument_list|()
+expr_stmt|;
+return|return
+name|this
+return|;
+block|}
+specifier|private
+name|int
+name|frameMaxSize_
+decl_stmt|;
+comment|/**        *<code>optional int32 frame_max_size = 5;</code>        */
+specifier|public
+name|int
+name|getFrameMaxSize
+parameter_list|()
+block|{
+return|return
+name|frameMaxSize_
+return|;
+block|}
+comment|/**        *<code>optional int32 frame_max_size = 5;</code>        */
+specifier|public
+name|Builder
+name|setFrameMaxSize
+parameter_list|(
+name|int
+name|value
+parameter_list|)
+block|{
+name|frameMaxSize_
+operator|=
+name|value
+expr_stmt|;
+name|onChanged
+argument_list|()
+expr_stmt|;
+return|return
+name|this
+return|;
+block|}
+comment|/**        *<code>optional int32 frame_max_size = 5;</code>        */
+specifier|public
+name|Builder
+name|clearFrameMaxSize
+parameter_list|()
+block|{
+name|frameMaxSize_
 operator|=
 literal|0
 expr_stmt|;
@@ -48849,9 +49513,9 @@ name|int
 name|index
 parameter_list|)
 function_decl|;
-comment|/**      *<code>optional uint64 max_row_count = 3;</code>      */
+comment|/**      *<code>optional uint64 first_frame_max_size = 3;</code>      *      *<pre>      * The maximum number of rows to return in the first Frame      *</pre>      */
 name|long
-name|getMaxRowCount
+name|getFirstFrameMaxSize
 parameter_list|()
 function_decl|;
 comment|/**      *<code>optional bool has_parameter_values = 4;</code>      */
@@ -48918,7 +49582,7 @@ operator|.
 name|emptyList
 argument_list|()
 expr_stmt|;
-name|maxRowCount_
+name|firstFrameMaxSize_
 operator|=
 literal|0L
 expr_stmt|;
@@ -49213,7 +49877,7 @@ case|case
 literal|24
 case|:
 block|{
-name|maxRowCount_
+name|firstFrameMaxSize_
 operator|=
 name|input
 operator|.
@@ -49704,22 +50368,22 @@ specifier|public
 specifier|static
 specifier|final
 name|int
-name|MAX_ROW_COUNT_FIELD_NUMBER
+name|FIRST_FRAME_MAX_SIZE_FIELD_NUMBER
 init|=
 literal|3
 decl_stmt|;
 specifier|private
 name|long
-name|maxRowCount_
+name|firstFrameMaxSize_
 decl_stmt|;
-comment|/**      *<code>optional uint64 max_row_count = 3;</code>      */
+comment|/**      *<code>optional uint64 first_frame_max_size = 3;</code>      *      *<pre>      * The maximum number of rows to return in the first Frame      *</pre>      */
 specifier|public
 name|long
-name|getMaxRowCount
+name|getFirstFrameMaxSize
 parameter_list|()
 block|{
 return|return
-name|maxRowCount_
+name|firstFrameMaxSize_
 return|;
 block|}
 specifier|public
@@ -49861,7 +50525,7 @@ expr_stmt|;
 block|}
 if|if
 condition|(
-name|maxRowCount_
+name|firstFrameMaxSize_
 operator|!=
 literal|0L
 condition|)
@@ -49872,7 +50536,7 @@ name|writeUInt64
 argument_list|(
 literal|3
 argument_list|,
-name|maxRowCount_
+name|firstFrameMaxSize_
 argument_list|)
 expr_stmt|;
 block|}
@@ -49987,7 +50651,7 @@ expr_stmt|;
 block|}
 if|if
 condition|(
-name|maxRowCount_
+name|firstFrameMaxSize_
 operator|!=
 literal|0L
 condition|)
@@ -50006,7 +50670,7 @@ name|computeUInt64Size
 argument_list|(
 literal|3
 argument_list|,
-name|maxRowCount_
+name|firstFrameMaxSize_
 argument_list|)
 expr_stmt|;
 block|}
@@ -50888,7 +51552,7 @@ name|clear
 argument_list|()
 expr_stmt|;
 block|}
-name|maxRowCount_
+name|firstFrameMaxSize_
 operator|=
 literal|0L
 expr_stmt|;
@@ -51170,9 +51834,9 @@ expr_stmt|;
 block|}
 name|result
 operator|.
-name|maxRowCount_
+name|firstFrameMaxSize_
 operator|=
-name|maxRowCount_
+name|firstFrameMaxSize_
 expr_stmt|;
 name|result
 operator|.
@@ -51466,17 +52130,17 @@ if|if
 condition|(
 name|other
 operator|.
-name|getMaxRowCount
+name|getFirstFrameMaxSize
 argument_list|()
 operator|!=
 literal|0L
 condition|)
 block|{
-name|setMaxRowCount
+name|setFirstFrameMaxSize
 argument_list|(
 name|other
 operator|.
-name|getMaxRowCount
+name|getFirstFrameMaxSize
 argument_list|()
 argument_list|)
 expr_stmt|;
@@ -53551,28 +54215,28 @@ return|;
 block|}
 specifier|private
 name|long
-name|maxRowCount_
+name|firstFrameMaxSize_
 decl_stmt|;
-comment|/**        *<code>optional uint64 max_row_count = 3;</code>        */
+comment|/**        *<code>optional uint64 first_frame_max_size = 3;</code>        *        *<pre>        * The maximum number of rows to return in the first Frame        *</pre>        */
 specifier|public
 name|long
-name|getMaxRowCount
+name|getFirstFrameMaxSize
 parameter_list|()
 block|{
 return|return
-name|maxRowCount_
+name|firstFrameMaxSize_
 return|;
 block|}
-comment|/**        *<code>optional uint64 max_row_count = 3;</code>        */
+comment|/**        *<code>optional uint64 first_frame_max_size = 3;</code>        *        *<pre>        * The maximum number of rows to return in the first Frame        *</pre>        */
 specifier|public
 name|Builder
-name|setMaxRowCount
+name|setFirstFrameMaxSize
 parameter_list|(
 name|long
 name|value
 parameter_list|)
 block|{
-name|maxRowCount_
+name|firstFrameMaxSize_
 operator|=
 name|value
 expr_stmt|;
@@ -53583,13 +54247,13 @@ return|return
 name|this
 return|;
 block|}
-comment|/**        *<code>optional uint64 max_row_count = 3;</code>        */
+comment|/**        *<code>optional uint64 first_frame_max_size = 3;</code>        *        *<pre>        * The maximum number of rows to return in the first Frame        *</pre>        */
 specifier|public
 name|Builder
-name|clearMaxRowCount
+name|clearFirstFrameMaxSize
 parameter_list|()
 block|{
-name|maxRowCount_
+name|firstFrameMaxSize_
 operator|=
 literal|0L
 expr_stmt|;
@@ -75635,73 +76299,79 @@ literal|"rn\030\003 \001(\t\022\033\n\023column_name_pattern\030\004 \001(\t\022
 operator|+
 literal|"\rconnection_id\030\005 \001(\t\"(\n\017TypeInfoRequest\022"
 operator|+
-literal|"\025\n\rconnection_id\030\001 \001(\t\"k\n\030PrepareAndExec"
+literal|"\025\n\rconnection_id\030\001 \001(\t\"\241\001\n\030PrepareAndExe"
 operator|+
-literal|"uteRequest\022\025\n\rconnection_id\030\001 \001(\t\022\013\n\003sql"
+literal|"cuteRequest\022\025\n\rconnection_id\030\001 \001(\t\022\013\n\003sq"
 operator|+
-literal|"\030\002 \001(\t\022\025\n\rmax_row_count\030\003 \001(\004\022\024\n\014stateme"
+literal|"l\030\002 \001(\t\022\025\n\rmax_row_count\030\003 \001(\004\022\024\n\014statem"
 operator|+
-literal|"nt_id\030\004 \001(\r\"K\n\016PrepareRequest\022\025\n\rconnect"
+literal|"ent_id\030\004 \001(\r\022\026\n\016max_rows_total\030\005 \001(\003\022\034\n\024"
 operator|+
-literal|"ion_id\030\001 \001(\t\022\013\n\003sql\030\002 \001(\t\022\025\n\rmax_row_cou"
+literal|"first_frame_max_size\030\006 \001(\005\"c\n\016PrepareReq"
 operator|+
-literal|"nt\030\003 \001(\004\"h\n\014FetchRequest\022\025\n\rconnection_i"
+literal|"uest\022\025\n\rconnection_id\030\001 \001(\t\022\013\n\003sql\030\002 \001(\t"
 block|,
+literal|"\022\025\n\rmax_row_count\030\003 \001(\004\022\026\n\016max_rows_tota"
+operator|+
+literal|"l\030\004 \001(\003\"\200\001\n\014FetchRequest\022\025\n\rconnection_i"
+operator|+
 literal|"d\030\001 \001(\t\022\024\n\014statement_id\030\002 \001(\r\022\016\n\006offset\030"
 operator|+
-literal|"\003 \001(\004\022\033\n\023fetch_max_row_count\030\004 \001(\r\"/\n\026Cr"
+literal|"\003 \001(\004\022\033\n\023fetch_max_row_count\030\004 \001(\r\022\026\n\016fr"
 operator|+
-literal|"eateStatementRequest\022\025\n\rconnection_id\030\001 "
+literal|"ame_max_size\030\005 \001(\005\"/\n\026CreateStatementReq"
 operator|+
-literal|"\001(\t\"D\n\025CloseStatementRequest\022\025\n\rconnecti"
+literal|"uest\022\025\n\rconnection_id\030\001 \001(\t\"D\n\025CloseStat"
 operator|+
-literal|"on_id\030\001 \001(\t\022\024\n\014statement_id\030\002 \001(\r\"\213\001\n\025Op"
+literal|"ementRequest\022\025\n\rconnection_id\030\001 \001(\t\022\024\n\014s"
 operator|+
-literal|"enConnectionRequest\022\025\n\rconnection_id\030\001 \001"
+literal|"tatement_id\030\002 \001(\r\"\213\001\n\025OpenConnectionRequ"
 operator|+
-literal|"(\t\022.\n\004info\030\002 \003(\0132 .OpenConnectionRequest"
+literal|"est\022\025\n\rconnection_id\030\001 \001(\t\022.\n\004info\030\002 \003(\013"
 operator|+
-literal|".InfoEntry\032+\n\tInfoEntry\022\013\n\003key\030\001 \001(\t\022\r\n\005"
-operator|+
-literal|"value\030\002 \001(\t:\0028\001\"/\n\026CloseConnectionReques"
-operator|+
-literal|"t\022\025\n\rconnection_id\030\001 \001(\t\"Y\n\025ConnectionSy"
+literal|"2 .OpenConnectionRequest.InfoEntry\032+\n\tIn"
 block|,
-literal|"ncRequest\022\025\n\rconnection_id\030\001 \001(\t\022)\n\nconn"
+literal|"foEntry\022\013\n\003key\030\001 \001(\t\022\r\n\005value\030\002 \001(\t:\0028\001\""
 operator|+
-literal|"_props\030\002 \001(\0132\025.ConnectionProperties\"\227\001\n\016"
+literal|"/\n\026CloseConnectionRequest\022\025\n\rconnection_"
 operator|+
-literal|"ExecuteRequest\022)\n\017statementHandle\030\001 \001(\0132"
+literal|"id\030\001 \001(\t\"Y\n\025ConnectionSyncRequest\022\025\n\rcon"
 operator|+
-literal|"\020.StatementHandle\022%\n\020parameter_values\030\002 "
+literal|"nection_id\030\001 \001(\t\022)\n\nconn_props\030\002 \001(\0132\025.C"
 operator|+
-literal|"\003(\0132\013.TypedValue\022\025\n\rmax_row_count\030\003 \001(\004\022"
+literal|"onnectionProperties\"\236\001\n\016ExecuteRequest\022)"
 operator|+
-literal|"\034\n\024has_parameter_values\030\004 \001(\010\"m\n\022SyncRes"
+literal|"\n\017statementHandle\030\001 \001(\0132\020.StatementHandl"
 operator|+
-literal|"ultsRequest\022\025\n\rconnection_id\030\001 \001(\t\022\024\n\014st"
+literal|"e\022%\n\020parameter_values\030\002 \003(\0132\013.TypedValue"
 operator|+
-literal|"atement_id\030\002 \001(\r\022\032\n\005state\030\003 \001(\0132\013.QueryS"
+literal|"\022\034\n\024first_frame_max_size\030\003 \001(\004\022\034\n\024has_pa"
 operator|+
-literal|"tate\022\016\n\006offset\030\004 \001(\004\"&\n\rCommitRequest\022\025\n"
+literal|"rameter_values\030\004 \001(\010\"m\n\022SyncResultsReque"
 operator|+
-literal|"\rconnection_id\030\001 \001(\t\"(\n\017RollbackRequest\022"
+literal|"st\022\025\n\rconnection_id\030\001 \001(\t\022\024\n\014statement_i"
 block|,
-literal|"\025\n\rconnection_id\030\001 \001(\t\"b\n\035PrepareAndExec"
+literal|"d\030\002 \001(\r\022\032\n\005state\030\003 \001(\0132\013.QueryState\022\016\n\006o"
 operator|+
-literal|"uteBatchRequest\022\025\n\rconnection_id\030\001 \001(\t\022\024"
+literal|"ffset\030\004 \001(\004\"&\n\rCommitRequest\022\025\n\rconnecti"
 operator|+
-literal|"\n\014statement_id\030\002 \001(\r\022\024\n\014sql_commands\030\003 \003"
+literal|"on_id\030\001 \001(\t\"(\n\017RollbackRequest\022\025\n\rconnec"
 operator|+
-literal|"(\t\"4\n\013UpdateBatch\022%\n\020parameter_values\030\001 "
+literal|"tion_id\030\001 \001(\t\"b\n\035PrepareAndExecuteBatchR"
 operator|+
-literal|"\003(\0132\013.TypedValue\"a\n\023ExecuteBatchRequest\022"
+literal|"equest\022\025\n\rconnection_id\030\001 \001(\t\022\024\n\014stateme"
 operator|+
-literal|"\025\n\rconnection_id\030\001 \001(\t\022\024\n\014statement_id\030\002"
+literal|"nt_id\030\002 \001(\r\022\024\n\014sql_commands\030\003 \003(\t\"4\n\013Upd"
 operator|+
-literal|" \001(\r\022\035\n\007updates\030\003 \003(\0132\014.UpdateBatchB\"\n o"
+literal|"ateBatch\022%\n\020parameter_values\030\001 \003(\0132\013.Typ"
 operator|+
-literal|"rg.apache.calcite.avatica.protob\006proto3"
+literal|"edValue\"a\n\023ExecuteBatchRequest\022\025\n\rconnec"
+operator|+
+literal|"tion_id\030\001 \001(\t\022\024\n\014statement_id\030\002 \001(\r\022\035\n\007u"
+operator|+
+literal|"pdates\030\003 \003(\0132\014.UpdateBatchB\"\n org.apache"
+block|,
+literal|".calcite.avatica.protob\006proto3"
 block|}
 decl_stmt|;
 name|com
@@ -76153,6 +76823,10 @@ block|,
 literal|"MaxRowCount"
 block|,
 literal|"StatementId"
+block|,
+literal|"MaxRowsTotal"
+block|,
+literal|"FirstFrameMaxSize"
 block|, }
 argument_list|)
 expr_stmt|;
@@ -76197,6 +76871,8 @@ block|,
 literal|"Sql"
 block|,
 literal|"MaxRowCount"
+block|,
+literal|"MaxRowsTotal"
 block|, }
 argument_list|)
 expr_stmt|;
@@ -76243,6 +76919,8 @@ block|,
 literal|"Offset"
 block|,
 literal|"FetchMaxRowCount"
+block|,
+literal|"FrameMaxSize"
 block|, }
 argument_list|)
 expr_stmt|;
@@ -76533,7 +77211,7 @@ literal|"StatementHandle"
 block|,
 literal|"ParameterValues"
 block|,
-literal|"MaxRowCount"
+literal|"FirstFrameMaxSize"
 block|,
 literal|"HasParameterValues"
 block|, }

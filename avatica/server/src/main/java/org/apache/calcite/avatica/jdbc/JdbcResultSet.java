@@ -332,7 +332,7 @@ parameter_list|,
 name|ResultSet
 name|resultSet
 parameter_list|,
-name|long
+name|int
 name|maxRowCount
 parameter_list|)
 block|{
@@ -397,7 +397,7 @@ parameter_list|,
 name|ResultSet
 name|resultSet
 parameter_list|,
-name|long
+name|int
 name|maxRowCount
 parameter_list|,
 name|Meta
@@ -474,9 +474,6 @@ else|else
 block|{
 name|fetchRowCount
 operator|=
-operator|(
-name|int
-operator|)
 name|maxRowCount
 expr_stmt|;
 block|}

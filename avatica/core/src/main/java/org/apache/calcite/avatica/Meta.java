@@ -787,7 +787,9 @@ name|long
 name|maxRowCount
 parameter_list|)
 function_decl|;
-comment|/** Prepares and executes a statement.    *    * @param h Statement handle    * @param sql SQL query    * @param maxRowCount Negative for no limit (different meaning than JDBC)    * @param callback Callback to lock, clear and assign cursor    *    * @return Result containing statement ID, and if a query, a result set and    *     first frame of data    */
+comment|/** Prepares and executes a statement.    *    * @param h Statement handle    * @param sql SQL query    * @param maxRowCount Negative for no limit (different meaning than JDBC)    * @param callback Callback to lock, clear and assign cursor    *    * @return Result containing statement ID, and if a query, a result set and    *     first frame of data    * @deprecated See {@link #prepareAndExecute(StatementHandle, String, long, int, PrepareCallback)}    */
+annotation|@
+name|Deprecated
 name|ExecuteResult
 name|prepareAndExecute
 parameter_list|(
@@ -799,6 +801,28 @@ name|sql
 parameter_list|,
 name|long
 name|maxRowCount
+parameter_list|,
+name|PrepareCallback
+name|callback
+parameter_list|)
+throws|throws
+name|NoSuchStatementException
+function_decl|;
+comment|/** Prepares and executes a statement.    *    * @param h Statement handle    * @param sql SQL query    * @param maxRowCount Maximum number of rows for the entire query. Negative for no limit    *    (different meaning than JDBC).    * @param maxRowsInFirstFrame Maximum number of rows for the first frame.    * @param callback Callback to lock, clear and assign cursor    *    * @return Result containing statement ID, and if a query, a result set and    *     first frame of data    */
+name|ExecuteResult
+name|prepareAndExecute
+parameter_list|(
+name|StatementHandle
+name|h
+parameter_list|,
+name|String
+name|sql
+parameter_list|,
+name|long
+name|maxRowCount
+parameter_list|,
+name|int
+name|maxRowsInFirstFrame
 parameter_list|,
 name|PrepareCallback
 name|callback
@@ -859,7 +883,9 @@ name|NoSuchStatementException
 throws|,
 name|MissingResultsException
 function_decl|;
-comment|/** Executes a prepared statement.    *    * @param h Statement handle    * @param parameterValues A list of parameter values; may be empty, not null    * @param maxRowCount Maximum number of rows to return; negative means    * no limit    * @return Execute result    */
+comment|/** Executes a prepared statement.    *    * @param h Statement handle    * @param parameterValues A list of parameter values; may be empty, not null    * @param maxRowCount Maximum number of rows to return; negative means    * no limit    * @return Execute result    * @deprecated See {@link #execute(StatementHandle, List, int)}    */
+annotation|@
+name|Deprecated
 name|ExecuteResult
 name|execute
 parameter_list|(
@@ -874,6 +900,25 @@ name|parameterValues
 parameter_list|,
 name|long
 name|maxRowCount
+parameter_list|)
+throws|throws
+name|NoSuchStatementException
+function_decl|;
+comment|/** Executes a prepared statement.    *    * @param h Statement handle    * @param parameterValues A list of parameter values; may be empty, not null    * @param maxRowsInFirstFrame Maximum number of rows to return in the Frame.    * @return Execute result    */
+name|ExecuteResult
+name|execute
+parameter_list|(
+name|StatementHandle
+name|h
+parameter_list|,
+name|List
+argument_list|<
+name|TypedValue
+argument_list|>
+name|parameterValues
+parameter_list|,
+name|int
+name|maxRowsInFirstFrame
 parameter_list|)
 throws|throws
 name|NoSuchStatementException
