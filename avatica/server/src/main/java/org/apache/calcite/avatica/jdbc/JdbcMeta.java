@@ -1300,6 +1300,31 @@ block|}
 argument_list|)
 expr_stmt|;
 block|}
+comment|// For testing purposes
+specifier|protected
+name|AtomicInteger
+name|getStatementIdGenerator
+parameter_list|()
+block|{
+return|return
+name|statementIdGenerator
+return|;
+block|}
+comment|// For testing purposes
+specifier|protected
+name|Cache
+argument_list|<
+name|Integer
+argument_list|,
+name|StatementInfo
+argument_list|>
+name|getStatementCache
+parameter_list|()
+block|{
+return|return
+name|statementCache
+return|;
+block|}
 comment|/**    * Converts from JDBC metadata to Avatica columns.    */
 specifier|protected
 specifier|static
@@ -4231,7 +4256,8 @@ specifier|final
 name|int
 name|id
 init|=
-name|statementIdGenerator
+name|getStatementIdGenerator
+argument_list|()
 operator|.
 name|getAndIncrement
 argument_list|()
@@ -4278,7 +4304,16 @@ name|getStatementType
 argument_list|()
 expr_stmt|;
 block|}
-name|statementCache
+comment|// Set the maximum number of rows
+name|setMaxRows
+argument_list|(
+name|statement
+argument_list|,
+name|maxRowCount
+argument_list|)
+expr_stmt|;
+name|getStatementCache
+argument_list|()
 operator|.
 name|put
 argument_list|(
@@ -4413,7 +4448,8 @@ specifier|final
 name|StatementInfo
 name|info
 init|=
-name|statementCache
+name|getStatementCache
+argument_list|()
 operator|.
 name|getIfPresent
 argument_list|(
@@ -4445,39 +4481,14 @@ name|info
 operator|.
 name|statement
 decl_stmt|;
-comment|// Special handling of maxRowCount as JDBC 0 is unlimited, our meta 0 row
-if|if
-condition|(
-name|maxRowCount
-operator|>
-literal|0
-condition|)
-block|{
-name|AvaticaUtils
-operator|.
-name|setLargeMaxRows
+comment|// Make sure that we limit the number of rows for the query
+name|setMaxRows
 argument_list|(
 name|statement
 argument_list|,
 name|maxRowCount
 argument_list|)
 expr_stmt|;
-block|}
-if|else if
-condition|(
-name|maxRowCount
-operator|<
-literal|0
-condition|)
-block|{
-name|statement
-operator|.
-name|setMaxRows
-argument_list|(
-literal|0
-argument_list|)
-expr_stmt|;
-block|}
 name|boolean
 name|ret
 init|=
@@ -4616,6 +4627,53 @@ argument_list|(
 name|e
 argument_list|)
 throw|;
+block|}
+block|}
+comment|/**    * Sets the provided maximum number of rows on the given statement.    *    * @param statement The JDBC Statement to operate on    * @param maxRowCount The maximum number of rows which should be returned for the query    */
+name|void
+name|setMaxRows
+parameter_list|(
+name|Statement
+name|statement
+parameter_list|,
+name|long
+name|maxRowCount
+parameter_list|)
+throws|throws
+name|SQLException
+block|{
+comment|// Special handling of maxRowCount as JDBC 0 is unlimited, our meta 0 row
+if|if
+condition|(
+name|maxRowCount
+operator|>
+literal|0
+condition|)
+block|{
+name|AvaticaUtils
+operator|.
+name|setLargeMaxRows
+argument_list|(
+name|statement
+argument_list|,
+name|maxRowCount
+argument_list|)
+expr_stmt|;
+block|}
+if|else if
+condition|(
+name|maxRowCount
+operator|<
+literal|0
+condition|)
+block|{
+name|statement
+operator|.
+name|setMaxRows
+argument_list|(
+literal|0
+argument_list|)
+expr_stmt|;
 block|}
 block|}
 specifier|public

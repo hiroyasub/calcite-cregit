@@ -4726,6 +4726,7 @@ return|;
 block|}
 block|}
 comment|/** Connection handle. */
+specifier|public
 class|class
 name|ConnectionHandle
 block|{
@@ -4768,6 +4769,8 @@ expr_stmt|;
 block|}
 block|}
 comment|/** Statement handle. */
+comment|// Visible for testing
+specifier|public
 class|class
 name|StatementHandle
 block|{
