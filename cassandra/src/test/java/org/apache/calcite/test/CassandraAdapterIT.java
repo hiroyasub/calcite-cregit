@@ -321,21 +321,23 @@ argument_list|)
 operator|.
 name|query
 argument_list|(
-literal|"select \"tweet_id\" from \"userline\" where \"username\" = '!PUBLIC!' limit 1"
+literal|"select \"tweet_id\" from \"userline\" where \"username\" = '!PUBLIC!' limit 2"
 argument_list|)
 operator|.
 name|returns
 argument_list|(
 literal|"tweet_id=f3c329de-d05b-11e5-b58b-90e2ba530b12\n"
+operator|+
+literal|"tweet_id=f3dbb03a-d05b-11e5-b58b-90e2ba530b12\n"
 argument_list|)
 operator|.
 name|explainContains
 argument_list|(
 literal|"PLAN=CassandraToEnumerableConverter\n"
 operator|+
-literal|"  CassandraProject(tweet_id=[$2])\n"
+literal|"  CassandraLimit(fetch=[2])\n"
 operator|+
-literal|"    CassandraSort(fetch=[1])\n"
+literal|"    CassandraProject(tweet_id=[$2])\n"
 operator|+
 literal|"      CassandraFilter(condition=[=(CAST($0):VARCHAR(8) CHARACTER SET \"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$primary\", '!PUBLIC!')])\n"
 argument_list|)
@@ -441,7 +443,88 @@ argument_list|)
 operator|.
 name|explainContains
 argument_list|(
-literal|"CassandraSort(fetch=[8])\n"
+literal|"CassandraLimit(fetch=[8])\n"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSortLimit
+parameter_list|()
+block|{
+name|CalciteAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|enable
+argument_list|(
+name|enabled
+argument_list|()
+argument_list|)
+operator|.
+name|with
+argument_list|(
+name|TWISSANDRA
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select * from \"userline\" where \"username\"='!PUBLIC!' "
+operator|+
+literal|"order by \"time\" desc limit 10"
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+literal|"  CassandraLimit(fetch=[10])\n"
+operator|+
+literal|"    CassandraSort(sort0=[$1], dir0=[DESC])"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSortOffset
+parameter_list|()
+block|{
+name|CalciteAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|enable
+argument_list|(
+name|enabled
+argument_list|()
+argument_list|)
+operator|.
+name|with
+argument_list|(
+name|TWISSANDRA
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select \"tweet_id\" from \"userline\" where "
+operator|+
+literal|"\"username\"='!PUBLIC!' limit 2 offset 1"
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+literal|"CassandraLimit(offset=[1], fetch=[2])"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"tweet_id=f3dbb03a-d05b-11e5-b58b-90e2ba530b12\n"
+operator|+
+literal|"tweet_id=f3e4182e-d05b-11e5-b58b-90e2ba530b12\n"
 argument_list|)
 expr_stmt|;
 block|}

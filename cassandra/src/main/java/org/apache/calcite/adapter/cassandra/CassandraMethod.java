@@ -104,7 +104,11 @@ name|List
 operator|.
 name|class
 argument_list|,
-name|String
+name|Integer
+operator|.
+name|class
+argument_list|,
+name|Integer
 operator|.
 name|class
 argument_list|)
