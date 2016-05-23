@@ -37,6 +37,20 @@ name|apache
 operator|.
 name|calcite
 operator|.
+name|avatica
+operator|.
+name|NoSuchStatementException
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
 name|jdbc
 operator|.
 name|CalciteConnection
@@ -73,6 +87,7 @@ name|StatementHandle
 name|h
 parameter_list|)
 function_decl|;
+comment|/** Returns the statement with a given handle.    *    * @param h Statement handle    * @return Statement, never null    * @throws NoSuchStatementException if handle does not represent a statement    */
 name|CalciteServerStatement
 name|getStatement
 parameter_list|(
@@ -81,6 +96,8 @@ operator|.
 name|StatementHandle
 name|h
 parameter_list|)
+throws|throws
+name|NoSuchStatementException
 function_decl|;
 block|}
 end_interface

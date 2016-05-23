@@ -47,20 +47,6 @@ end_import
 
 begin_import
 import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|util
-operator|.
-name|Bug
-import|;
-end_import
-
-begin_import
-import|import
 name|java
 operator|.
 name|util
@@ -197,16 +183,11 @@ literal|"druidFetch"
 argument_list|,
 name|Type
 operator|.
-name|STRING
+name|NUMBER
 argument_list|,
-literal|"16384"
+literal|16384
 argument_list|,
-name|Bug
-operator|.
-name|upgrade
-argument_list|(
-literal|"convert to Type.NUMBER after [CALCITE-1207]"
-argument_list|)
+literal|false
 argument_list|)
 block|,
 comment|/** URI of the model. */
