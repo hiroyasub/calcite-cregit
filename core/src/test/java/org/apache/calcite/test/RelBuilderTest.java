@@ -713,6 +713,55 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testScanQualifiedTable
+parameter_list|()
+block|{
+comment|// Equivalent SQL:
+comment|//   SELECT *
+comment|//   FROM "scott"."emp"
+specifier|final
+name|RelNode
+name|root
+init|=
+name|RelBuilder
+operator|.
+name|create
+argument_list|(
+name|config
+argument_list|()
+operator|.
+name|build
+argument_list|()
+argument_list|)
+operator|.
+name|scan
+argument_list|(
+literal|"scott"
+argument_list|,
+literal|"EMP"
+argument_list|)
+operator|.
+name|build
+argument_list|()
+decl_stmt|;
+name|assertThat
+argument_list|(
+name|str
+argument_list|(
+name|root
+argument_list|)
+argument_list|,
+name|is
+argument_list|(
+literal|"LogicalTableScan(table=[[scott, EMP]])\n"
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testScanInvalidTable
 parameter_list|()
 block|{
@@ -769,6 +818,140 @@ argument_list|,
 name|is
 argument_list|(
 literal|"Table 'ZZZ' not found"
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testScanInvalidSchema
+parameter_list|()
+block|{
+comment|// Equivalent SQL:
+comment|//   SELECT *
+comment|//   FROM "zzz"."emp"
+try|try
+block|{
+specifier|final
+name|RelNode
+name|root
+init|=
+name|RelBuilder
+operator|.
+name|create
+argument_list|(
+name|config
+argument_list|()
+operator|.
+name|build
+argument_list|()
+argument_list|)
+operator|.
+name|scan
+argument_list|(
+literal|"ZZZ"
+argument_list|,
+literal|"EMP"
+argument_list|)
+comment|// the table exists, but the schema does not
+operator|.
+name|build
+argument_list|()
+decl_stmt|;
+name|fail
+argument_list|(
+literal|"expected error, got "
+operator|+
+name|root
+argument_list|)
+expr_stmt|;
+block|}
+catch|catch
+parameter_list|(
+name|Exception
+name|e
+parameter_list|)
+block|{
+name|assertThat
+argument_list|(
+name|e
+operator|.
+name|getMessage
+argument_list|()
+argument_list|,
+name|is
+argument_list|(
+literal|"Table 'ZZZ.EMP' not found"
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testScanInvalidQualifiedTable
+parameter_list|()
+block|{
+comment|// Equivalent SQL:
+comment|//   SELECT *
+comment|//   FROM "scott"."zzz"
+try|try
+block|{
+specifier|final
+name|RelNode
+name|root
+init|=
+name|RelBuilder
+operator|.
+name|create
+argument_list|(
+name|config
+argument_list|()
+operator|.
+name|build
+argument_list|()
+argument_list|)
+operator|.
+name|scan
+argument_list|(
+literal|"scott"
+argument_list|,
+literal|"ZZZ"
+argument_list|)
+comment|// the schema is valid, but the table does not exist
+operator|.
+name|build
+argument_list|()
+decl_stmt|;
+name|fail
+argument_list|(
+literal|"expected error, got "
+operator|+
+name|root
+argument_list|)
+expr_stmt|;
+block|}
+catch|catch
+parameter_list|(
+name|Exception
+name|e
+parameter_list|)
+block|{
+name|assertThat
+argument_list|(
+name|e
+operator|.
+name|getMessage
+argument_list|()
+argument_list|,
+name|is
+argument_list|(
+literal|"Table 'scott.ZZZ' not found"
 argument_list|)
 argument_list|)
 expr_stmt|;
