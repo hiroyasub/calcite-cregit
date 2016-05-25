@@ -17257,10 +17257,18 @@ argument_list|,
 name|ERR_NESTED_AGG
 argument_list|)
 expr_stmt|;
-comment|// in OVER clause
-name|checkFails
+comment|// in OVER clause - this should be OK
+name|check
 argument_list|(
 literal|"select ^sum(max(empno)) OVER^ (order by deptno ROWS 2 PRECEDING) from emp"
+argument_list|)
+expr_stmt|;
+comment|// in OVER clause with more than one level of nesting
+name|checkFails
+argument_list|(
+literal|"select ^avg(sum(min(sal))) OVER^ (partition by deptno) from emp"
+operator|+
+literal|" group by deptno"
 argument_list|,
 name|ERR_NESTED_AGG
 argument_list|)

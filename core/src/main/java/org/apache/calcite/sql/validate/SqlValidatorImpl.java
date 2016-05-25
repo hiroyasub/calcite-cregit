@@ -1621,6 +1621,11 @@ specifier|private
 name|boolean
 name|validatingSqlMerge
 decl_stmt|;
+specifier|private
+name|boolean
+name|nestedAgg
+decl_stmt|;
+comment|// Allow nested aggregates
 comment|//~ Constructors -----------------------------------------------------------
 comment|/**    * Creates a validator.    *    * @param opTab         Operator table    * @param catalogReader Catalog reader    * @param typeFactory   Type factory    * @param conformance   Compatibility mode    */
 specifier|protected
@@ -1737,6 +1742,32 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
+comment|/**    * Allows nested aggregates within window aggregates    */
+specifier|public
+name|void
+name|enableNestedAggregates
+parameter_list|()
+block|{
+name|this
+operator|.
+name|nestedAgg
+operator|=
+literal|true
+expr_stmt|;
+block|}
+comment|/**    * Disallows nested aggregates within window aggregates    */
+specifier|public
+name|void
+name|disableNestedAggregates
+parameter_list|()
+block|{
+name|this
+operator|.
+name|nestedAgg
+operator|=
+literal|false
+expr_stmt|;
+block|}
 specifier|public
 name|SqlConformance
 name|getConformance
@@ -18798,6 +18829,34 @@ comment|// invocations.  For example, SUM(2*MAX(x)) is illegal; when
 comment|// we see it, we'll report the error for the SUM (not the MAX).
 comment|// For more than one level of nesting, the error which results
 comment|// depends on the traversal order for validation.
+comment|// For window function agg(expr), expr can contain an aggregate function
+comment|// For example, AVG(2*MAX(x)) OVER (partition by y) GROUP BY y is legal; Only
+comment|// one level of nesting is allowed since non-window aggregates cannot nest aggregates.
+name|aggOrOverFinder
+operator|.
+name|disableNestedAggregates
+argument_list|()
+expr_stmt|;
+comment|// Store nesting level of each aggregate. If an aggregate is found at an invalid
+comment|// nesting level, throw an assert.
+if|if
+condition|(
+name|nestedAgg
+condition|)
+block|{
+name|aggOrOverFinder
+operator|.
+name|enableNestedAggregates
+argument_list|()
+expr_stmt|;
+name|aggOrOverFinder
+operator|.
+name|addAggLevel
+argument_list|(
+literal|1
+argument_list|)
+expr_stmt|;
+block|}
 for|for
 control|(
 name|SqlNode
@@ -18865,6 +18924,30 @@ argument_list|()
 argument_list|)
 throw|;
 block|}
+block|}
+comment|// Disallow nested aggregates post call to this function
+if|if
+condition|(
+name|nestedAgg
+condition|)
+block|{
+name|aggOrOverFinder
+operator|.
+name|removeAggLevel
+argument_list|()
+expr_stmt|;
+comment|// Assert we don't have dangling items left in the stack
+assert|assert
+name|aggOrOverFinder
+operator|.
+name|isEmptyAggLevel
+argument_list|()
+assert|;
+name|aggOrOverFinder
+operator|.
+name|disableNestedAggregates
+argument_list|()
+expr_stmt|;
 block|}
 block|}
 specifier|public
