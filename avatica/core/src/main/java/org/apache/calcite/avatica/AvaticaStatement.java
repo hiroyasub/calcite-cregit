@@ -607,9 +607,9 @@ literal|" attempts."
 argument_list|)
 throw|;
 block|}
-comment|/**    * Executes a collection of updates in a single batch RPC.    *    * @return an array of integers mapping to the update count per SQL command.    */
+comment|/**    * Executes a collection of updates in a single batch RPC.    *    * @return an array of long mapping to the update count per SQL command.    */
 specifier|protected
-name|int
+name|long
 index|[]
 name|executeBatchInternal
 parameter_list|()
@@ -635,11 +635,7 @@ control|)
 block|{
 try|try
 block|{
-name|Meta
-operator|.
-name|ExecuteBatchResult
-name|result
-init|=
+return|return
 name|connection
 operator|.
 name|prepareAndUpdateBatch
@@ -648,9 +644,6 @@ name|this
 argument_list|,
 name|batchedSql
 argument_list|)
-decl_stmt|;
-return|return
-name|result
 operator|.
 name|updateCounts
 return|;
@@ -899,12 +892,14 @@ throws|throws
 name|SQLException
 block|{
 return|return
-operator|(
-name|int
-operator|)
+name|AvaticaUtils
+operator|.
+name|toSaturatedInt
+argument_list|(
 name|executeLargeUpdate
 argument_list|(
 name|sql
+argument_list|)
 argument_list|)
 return|;
 block|}
@@ -1088,11 +1083,13 @@ name|getMaxRows
 parameter_list|()
 block|{
 return|return
-operator|(
-name|int
-operator|)
+name|AvaticaUtils
+operator|.
+name|toSaturatedInt
+argument_list|(
 name|getLargeMaxRows
 argument_list|()
+argument_list|)
 return|;
 block|}
 specifier|public
@@ -1378,10 +1375,12 @@ throws|throws
 name|SQLException
 block|{
 return|return
-operator|(
-name|int
-operator|)
+name|AvaticaUtils
+operator|.
+name|toSaturatedInt
+argument_list|(
 name|updateCount
+argument_list|)
 return|;
 block|}
 specifier|public
@@ -1543,6 +1542,24 @@ parameter_list|()
 throws|throws
 name|SQLException
 block|{
+return|return
+name|AvaticaUtils
+operator|.
+name|toSaturatedInts
+argument_list|(
+name|executeLargeBatch
+argument_list|()
+argument_list|)
+return|;
+block|}
+specifier|public
+name|long
+index|[]
+name|executeLargeBatch
+parameter_list|()
+throws|throws
+name|SQLException
+block|{
 try|try
 block|{
 return|return
@@ -1554,11 +1571,7 @@ finally|finally
 block|{
 comment|// If we failed to send this batch, that's a problem for the user to handle, not us.
 comment|// Make sure we always clear the statements we collected to submit in one RPC.
-name|this
-operator|.
-name|batchedSql
-operator|.
-name|clear
+name|clearBatch
 argument_list|()
 expr_stmt|;
 block|}

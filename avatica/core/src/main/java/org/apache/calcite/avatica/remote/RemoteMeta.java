@@ -71,6 +71,20 @@ name|calcite
 operator|.
 name|avatica
 operator|.
+name|AvaticaUtils
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|avatica
+operator|.
 name|ColumnMetaData
 import|;
 end_import
@@ -1454,6 +1468,9 @@ parameter_list|)
 throws|throws
 name|NoSuchStatementException
 block|{
+comment|// The old semantics were that maxRowCount was also treated as the maximum number of
+comment|// elements in the first Frame of results. A value of -1 would also preserve this, but an
+comment|// explicit (positive) number is easier to follow, IMO.
 return|return
 name|prepareAndExecute
 argument_list|(
@@ -1463,10 +1480,12 @@ name|sql
 argument_list|,
 name|maxRowCount
 argument_list|,
-operator|(
-name|int
-operator|)
+name|AvaticaUtils
+operator|.
+name|toSaturatedInt
+argument_list|(
 name|maxRowCount
+argument_list|)
 argument_list|,
 name|callback
 argument_list|)
@@ -1941,10 +1960,12 @@ name|h
 argument_list|,
 name|parameterValues
 argument_list|,
-operator|(
-name|int
-operator|)
+name|AvaticaUtils
+operator|.
+name|toSaturatedInt
+argument_list|(
 name|maxRowCount
+argument_list|)
 argument_list|)
 return|;
 block|}

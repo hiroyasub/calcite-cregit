@@ -790,6 +790,7 @@ function_decl|;
 comment|/** Prepares and executes a statement.    *    * @param h Statement handle    * @param sql SQL query    * @param maxRowCount Negative for no limit (different meaning than JDBC)    * @param callback Callback to lock, clear and assign cursor    *    * @return Result containing statement ID, and if a query, a result set and    *     first frame of data    * @deprecated See {@link #prepareAndExecute(StatementHandle, String, long, int, PrepareCallback)}    */
 annotation|@
 name|Deprecated
+comment|// to be removed before 2.0
 name|ExecuteResult
 name|prepareAndExecute
 parameter_list|(
@@ -808,7 +809,7 @@ parameter_list|)
 throws|throws
 name|NoSuchStatementException
 function_decl|;
-comment|/** Prepares and executes a statement.    *    * @param h Statement handle    * @param sql SQL query    * @param maxRowCount Maximum number of rows for the entire query. Negative for no limit    *    (different meaning than JDBC).    * @param maxRowsInFirstFrame Maximum number of rows for the first frame.    * @param callback Callback to lock, clear and assign cursor    *    * @return Result containing statement ID, and if a query, a result set and    *     first frame of data    */
+comment|/** Prepares and executes a statement.    *    * @param h Statement handle    * @param sql SQL query    * @param maxRowCount Maximum number of rows for the entire query. Negative for no limit    *    (different meaning than JDBC).    * @param maxRowsInFirstFrame Maximum number of rows for the first frame. This value should    *    always be less than or equal to {@code maxRowCount} as the number of results are guaranteed    *    to be restricted by {@code maxRowCount} and the underlying database.    * @param callback Callback to lock, clear and assign cursor    *    * @return Result containing statement ID, and if a query, a result set and    *     first frame of data    */
 name|ExecuteResult
 name|prepareAndExecute
 parameter_list|(
@@ -886,6 +887,7 @@ function_decl|;
 comment|/** Executes a prepared statement.    *    * @param h Statement handle    * @param parameterValues A list of parameter values; may be empty, not null    * @param maxRowCount Maximum number of rows to return; negative means    * no limit    * @return Execute result    * @deprecated See {@link #execute(StatementHandle, List, int)}    */
 annotation|@
 name|Deprecated
+comment|// to be removed before 2.0
 name|ExecuteResult
 name|execute
 parameter_list|(
@@ -931,7 +933,7 @@ name|ConnectionHandle
 name|ch
 parameter_list|)
 function_decl|;
-comment|/** Closes a statement. */
+comment|/** Closes a statement.    *    *<p>If the statement handle is not known, or is already closed, does    * nothing.    *    * @param h Statement handle    */
 name|void
 name|closeStatement
 parameter_list|(
@@ -963,7 +965,7 @@ name|ConnectionHandle
 name|ch
 parameter_list|)
 function_decl|;
-comment|/**    * Re-set the {@link ResultSet} on a Statement. Not a JDBC method.    * @return True if there are results to fetch after resetting to the given offset. False otherwise    */
+comment|/**    * Re-sets the {@link ResultSet} on a Statement. Not a JDBC method.    *    * @return True if there are results to fetch after resetting to the given offset. False otherwise    */
 name|boolean
 name|syncResults
 parameter_list|(
@@ -979,7 +981,7 @@ parameter_list|)
 throws|throws
 name|NoSuchStatementException
 function_decl|;
-comment|/**    * Makes all changes since the last commit/rollback permanent. Analogy to    * {@link Connection#commit()}.    *    * @param ch A reference to the real JDBC Connection.    */
+comment|/**    * Makes all changes since the last commit/rollback permanent. Analogous to    * {@link Connection#commit()}.    *    * @param ch A reference to the real JDBC Connection    */
 name|void
 name|commit
 parameter_list|(
@@ -987,7 +989,7 @@ name|ConnectionHandle
 name|ch
 parameter_list|)
 function_decl|;
-comment|/**    * Undoes all changes since the last commit/rollback. Analogy to    * {@link Connection#rollback()};    *    * @param ch A reference to the real JDBC Connection.    */
+comment|/**    * Undoes all changes since the last commit/rollback. Analogous to    * {@link Connection#rollback()};    *    * @param ch A reference to the real JDBC Connection    */
 name|void
 name|rollback
 parameter_list|(
@@ -995,7 +997,7 @@ name|ConnectionHandle
 name|ch
 parameter_list|)
 function_decl|;
-comment|/** Sync client and server view of connection properties.    *    *<p>Note: this interface is considered "experimental" and may undergo further changes as this    * functionality is extended to other aspects of state management for    * {@link java.sql.Connection}, {@link java.sql.Statement}, and {@link java.sql.ResultSet}.</p>    */
+comment|/** Synchronizes client and server view of connection properties.    *    *<p>Note: this interface is considered "experimental" and may undergo further changes as this    * functionality is extended to other aspects of state management for    * {@link java.sql.Connection}, {@link java.sql.Statement}, and {@link java.sql.ResultSet}.</p>    */
 name|ConnectionProperties
 name|connectionSync
 parameter_list|(
@@ -1515,14 +1517,14 @@ name|ExecuteBatchResult
 block|{
 specifier|public
 specifier|final
-name|int
+name|long
 index|[]
 name|updateCounts
 decl_stmt|;
 specifier|public
 name|ExecuteBatchResult
 parameter_list|(
-name|int
+name|long
 index|[]
 name|updateCounts
 parameter_list|)

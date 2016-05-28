@@ -60443,7 +60443,7 @@ name|int
 name|getStatementId
 parameter_list|()
 function_decl|;
-comment|/**      *<code>repeated uint32 update_counts = 3;</code>      */
+comment|/**      *<code>repeated uint64 update_counts = 3;</code>      */
 name|java
 operator|.
 name|util
@@ -60454,18 +60454,18 @@ name|java
 operator|.
 name|lang
 operator|.
-name|Integer
+name|Long
 argument_list|>
 name|getUpdateCountsList
 parameter_list|()
 function_decl|;
-comment|/**      *<code>repeated uint32 update_counts = 3;</code>      */
+comment|/**      *<code>repeated uint64 update_counts = 3;</code>      */
 name|int
 name|getUpdateCountsCount
 parameter_list|()
 function_decl|;
-comment|/**      *<code>repeated uint32 update_counts = 3;</code>      */
-name|int
+comment|/**      *<code>repeated uint64 update_counts = 3;</code>      */
+name|long
 name|getUpdateCounts
 parameter_list|(
 name|int
@@ -60765,7 +60765,7 @@ name|java
 operator|.
 name|lang
 operator|.
-name|Integer
+name|Long
 argument_list|>
 argument_list|()
 expr_stmt|;
@@ -60780,7 +60780,7 @@ name|add
 argument_list|(
 name|input
 operator|.
-name|readUInt32
+name|readUInt64
 argument_list|()
 argument_list|)
 expr_stmt|;
@@ -60842,7 +60842,7 @@ name|java
 operator|.
 name|lang
 operator|.
-name|Integer
+name|Long
 argument_list|>
 argument_list|()
 expr_stmt|;
@@ -60867,7 +60867,7 @@ name|add
 argument_list|(
 name|input
 operator|.
-name|readUInt32
+name|readUInt64
 argument_list|()
 argument_list|)
 expr_stmt|;
@@ -61408,11 +61408,11 @@ name|java
 operator|.
 name|lang
 operator|.
-name|Integer
+name|Long
 argument_list|>
 name|updateCounts_
 decl_stmt|;
-comment|/**      *<code>repeated uint32 update_counts = 3;</code>      */
+comment|/**      *<code>repeated uint64 update_counts = 3;</code>      */
 specifier|public
 name|java
 operator|.
@@ -61424,7 +61424,7 @@ name|java
 operator|.
 name|lang
 operator|.
-name|Integer
+name|Long
 argument_list|>
 name|getUpdateCountsList
 parameter_list|()
@@ -61433,7 +61433,7 @@ return|return
 name|updateCounts_
 return|;
 block|}
-comment|/**      *<code>repeated uint32 update_counts = 3;</code>      */
+comment|/**      *<code>repeated uint64 update_counts = 3;</code>      */
 specifier|public
 name|int
 name|getUpdateCountsCount
@@ -61446,9 +61446,9 @@ name|size
 argument_list|()
 return|;
 block|}
-comment|/**      *<code>repeated uint32 update_counts = 3;</code>      */
+comment|/**      *<code>repeated uint64 update_counts = 3;</code>      */
 specifier|public
-name|int
+name|long
 name|getUpdateCounts
 parameter_list|(
 name|int
@@ -61753,7 +61753,7 @@ control|)
 block|{
 name|output
 operator|.
-name|writeUInt32NoTag
+name|writeUInt64NoTag
 argument_list|(
 name|updateCounts_
 operator|.
@@ -61911,7 +61911,7 @@ name|protobuf
 operator|.
 name|CodedOutputStream
 operator|.
-name|computeUInt32SizeNoTag
+name|computeUInt64SizeNoTag
 argument_list|(
 name|updateCounts_
 operator|.
@@ -63866,7 +63866,7 @@ name|java
 operator|.
 name|lang
 operator|.
-name|Integer
+name|Long
 argument_list|>
 name|updateCounts_
 init|=
@@ -63911,7 +63911,7 @@ name|java
 operator|.
 name|lang
 operator|.
-name|Integer
+name|Long
 argument_list|>
 argument_list|(
 name|updateCounts_
@@ -63923,7 +63923,7 @@ literal|0x00000004
 expr_stmt|;
 block|}
 block|}
-comment|/**        *<code>repeated uint32 update_counts = 3;</code>        */
+comment|/**        *<code>repeated uint64 update_counts = 3;</code>        */
 specifier|public
 name|java
 operator|.
@@ -63935,7 +63935,7 @@ name|java
 operator|.
 name|lang
 operator|.
-name|Integer
+name|Long
 argument_list|>
 name|getUpdateCountsList
 parameter_list|()
@@ -63953,7 +63953,7 @@ name|updateCounts_
 argument_list|)
 return|;
 block|}
-comment|/**        *<code>repeated uint32 update_counts = 3;</code>        */
+comment|/**        *<code>repeated uint64 update_counts = 3;</code>        */
 specifier|public
 name|int
 name|getUpdateCountsCount
@@ -63966,9 +63966,9 @@ name|size
 argument_list|()
 return|;
 block|}
-comment|/**        *<code>repeated uint32 update_counts = 3;</code>        */
+comment|/**        *<code>repeated uint64 update_counts = 3;</code>        */
 specifier|public
-name|int
+name|long
 name|getUpdateCounts
 parameter_list|(
 name|int
@@ -63984,7 +63984,7 @@ name|index
 argument_list|)
 return|;
 block|}
-comment|/**        *<code>repeated uint32 update_counts = 3;</code>        */
+comment|/**        *<code>repeated uint64 update_counts = 3;</code>        */
 specifier|public
 name|Builder
 name|setUpdateCounts
@@ -63992,7 +63992,7 @@ parameter_list|(
 name|int
 name|index
 parameter_list|,
-name|int
+name|long
 name|value
 parameter_list|)
 block|{
@@ -64015,12 +64015,12 @@ return|return
 name|this
 return|;
 block|}
-comment|/**        *<code>repeated uint32 update_counts = 3;</code>        */
+comment|/**        *<code>repeated uint64 update_counts = 3;</code>        */
 specifier|public
 name|Builder
 name|addUpdateCounts
 parameter_list|(
-name|int
+name|long
 name|value
 parameter_list|)
 block|{
@@ -64041,7 +64041,7 @@ return|return
 name|this
 return|;
 block|}
-comment|/**        *<code>repeated uint32 update_counts = 3;</code>        */
+comment|/**        *<code>repeated uint64 update_counts = 3;</code>        */
 specifier|public
 name|Builder
 name|addAllUpdateCounts
@@ -64058,7 +64058,7 @@ name|java
 operator|.
 name|lang
 operator|.
-name|Integer
+name|Long
 argument_list|>
 name|values
 parameter_list|)
@@ -64090,7 +64090,7 @@ return|return
 name|this
 return|;
 block|}
-comment|/**        *<code>repeated uint32 update_counts = 3;</code>        */
+comment|/**        *<code>repeated uint64 update_counts = 3;</code>        */
 specifier|public
 name|Builder
 name|clearUpdateCounts
@@ -65649,7 +65649,7 @@ literal|"Response\"\225\001\n\024ExecuteBatchResponse\022\025\n\rcon"
 operator|+
 literal|"nection_id\030\001 \001(\t\022\024\n\014statement_id\030\002 \001(\r\022\025"
 block|,
-literal|"\n\rupdate_counts\030\003 \003(\r\022\031\n\021missing_stateme"
+literal|"\n\rupdate_counts\030\003 \003(\004\022\031\n\021missing_stateme"
 operator|+
 literal|"nt\030\004 \001(\010\022\036\n\010metadata\030\005 \001(\0132\014.RpcMetadata"
 operator|+

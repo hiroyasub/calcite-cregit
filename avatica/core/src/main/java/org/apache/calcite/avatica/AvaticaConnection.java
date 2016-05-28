@@ -2321,7 +2321,7 @@ return|;
 block|}
 comment|/** Executes a batch update using an {@link AvaticaPreparedStatement}.    *    * @param pstmt The prepared statement.    * @return An array of update counts containing one element for each command in the batch.    */
 specifier|protected
-name|int
+name|long
 index|[]
 name|executeBatchUpdateInternal
 parameter_list|(
@@ -2344,12 +2344,7 @@ operator|.
 name|handle
 decl_stmt|;
 comment|// Execute it against meta
-specifier|final
-name|Meta
-operator|.
-name|ExecuteBatchResult
-name|executeBatchResult
-init|=
+return|return
 name|meta
 operator|.
 name|executeBatch
@@ -2361,10 +2356,6 @@ operator|.
 name|getParameterValueBatch
 argument_list|()
 argument_list|)
-decl_stmt|;
-comment|// Send back just the update counts
-return|return
-name|executeBatchResult
 operator|.
 name|updateCounts
 return|;
@@ -2754,6 +2745,9 @@ block|}
 block|}
 block|}
 decl_stmt|;
+comment|// The old semantics were that maxRowCount was also treated as the maximum number of
+comment|// elements in the first Frame of results. A value of -1 would also preserve this, but an
+comment|// explicit (positive) number is easier to follow, IMO.
 return|return
 name|meta
 operator|.
@@ -2766,6 +2760,13 @@ argument_list|,
 name|sql
 argument_list|,
 name|maxRowCount
+argument_list|,
+name|AvaticaUtils
+operator|.
+name|toSaturatedInt
+argument_list|(
+name|maxRowCount
+argument_list|)
 argument_list|,
 name|callback
 argument_list|)

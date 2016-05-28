@@ -2848,12 +2848,12 @@ name|RollbackResponse
 argument_list|()
 argument_list|)
 expr_stmt|;
-name|int
+name|long
 index|[]
 name|updateCounts
 init|=
 operator|new
-name|int
+name|long
 index|[]
 block|{
 literal|1

@@ -4637,7 +4637,7 @@ throws|throws
 name|SQLException
 block|{
 return|return
-literal|false
+literal|true
 return|;
 block|}
 specifier|public
