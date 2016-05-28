@@ -69,6 +69,20 @@ name|apache
 operator|.
 name|calcite
 operator|.
+name|model
+operator|.
+name|JsonSchema
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
 name|sql
 operator|.
 name|validate
@@ -153,6 +167,30 @@ function_decl|;
 comment|/** @see CalciteConnectionProperty#CASE_SENSITIVE */
 name|boolean
 name|caseSensitive
+parameter_list|()
+function_decl|;
+comment|/** @see CalciteConnectionProperty#SCHEMA_FACTORY */
+parameter_list|<
+name|T
+parameter_list|>
+name|T
+name|schemaFactory
+parameter_list|(
+name|Class
+argument_list|<
+name|T
+argument_list|>
+name|schemaFactoryClass
+parameter_list|,
+name|T
+name|defaultSchemaFactory
+parameter_list|)
+function_decl|;
+comment|/** @see CalciteConnectionProperty#SCHEMA_TYPE */
+name|JsonSchema
+operator|.
+name|Type
+name|schemaType
 parameter_list|()
 function_decl|;
 comment|/** @see CalciteConnectionProperty#SPARK */

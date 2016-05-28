@@ -242,6 +242,19 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+comment|/** Built-in schema types. */
+specifier|public
+enum|enum
+name|Type
+block|{
+name|NONE
+block|,
+name|MAP
+block|,
+name|JDBC
+block|,
+name|CUSTOM
+block|}
 block|}
 end_class
 
