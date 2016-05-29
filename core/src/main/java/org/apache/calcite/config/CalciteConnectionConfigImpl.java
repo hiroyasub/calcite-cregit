@@ -717,14 +717,7 @@ name|Type
 name|schemaType
 parameter_list|()
 block|{
-comment|// Avatica won't allow enum properties whose default is null, so we use
-comment|// NONE, which is equivalent to null.
-specifier|final
-name|JsonSchema
-operator|.
-name|Type
-name|type
-init|=
+return|return
 name|CalciteConnectionProperty
 operator|.
 name|SCHEMA_TYPE
@@ -742,23 +735,6 @@ name|Type
 operator|.
 name|class
 argument_list|)
-decl_stmt|;
-return|return
-name|type
-operator|==
-literal|null
-operator|||
-name|type
-operator|==
-name|JsonSchema
-operator|.
-name|Type
-operator|.
-name|NONE
-condition|?
-literal|null
-else|:
-name|type
 return|;
 block|}
 specifier|public

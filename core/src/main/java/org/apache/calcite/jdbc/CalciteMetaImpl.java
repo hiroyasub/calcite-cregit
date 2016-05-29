@@ -1361,6 +1361,8 @@ name|field
 operator|.
 name|getType
 argument_list|()
+argument_list|,
+literal|false
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -2853,6 +2855,9 @@ literal|false
 argument_list|)
 argument_list|,
 comment|// All types are nullable
+operator|(
+name|short
+operator|)
 name|DatabaseMetaData
 operator|.
 name|typeNullable
@@ -2866,6 +2871,9 @@ argument_list|)
 argument_list|,
 comment|// Making all type searchable; we may want to
 comment|// be specific and declare under SqlTypeName
+operator|(
+name|short
+operator|)
 name|DatabaseMetaData
 operator|.
 name|typeSearchable
@@ -2881,11 +2889,17 @@ argument_list|(
 name|sqlTypeName
 argument_list|)
 argument_list|,
+operator|(
+name|short
+operator|)
 name|sqlTypeName
 operator|.
 name|getMinScale
 argument_list|()
 argument_list|,
+operator|(
+name|short
+operator|)
 name|typeSystem
 operator|.
 name|getMaxScale

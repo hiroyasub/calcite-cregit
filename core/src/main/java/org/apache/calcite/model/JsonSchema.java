@@ -247,8 +247,6 @@ specifier|public
 enum|enum
 name|Type
 block|{
-name|NONE
-block|,
 name|MAP
 block|,
 name|JDBC
