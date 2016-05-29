@@ -108,10 +108,12 @@ name|String
 name|avaticaPassword
 parameter_list|()
 function_decl|;
+comment|/** @see BuiltInConnectionProperty#HTTP_CLIENT_FACTORY */
 name|AvaticaHttpClientFactory
 name|httpClientFactory
 parameter_list|()
 function_decl|;
+comment|/** @see BuiltInConnectionProperty#HTTP_CLIENT_IMPL */
 name|String
 name|httpClientClass
 parameter_list|()
