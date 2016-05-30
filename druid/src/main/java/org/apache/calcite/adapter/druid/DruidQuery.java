@@ -943,7 +943,7 @@ name|litmus
 operator|.
 name|fail
 argument_list|(
-literal|"invalid signature [%s]"
+literal|"invalid signature [{}]"
 argument_list|,
 name|signature
 argument_list|)
@@ -1198,7 +1198,7 @@ name|litmus
 operator|.
 name|fail
 argument_list|(
-literal|"invalid filter [%s]"
+literal|"invalid filter [{}]"
 argument_list|,
 name|filter
 operator|.

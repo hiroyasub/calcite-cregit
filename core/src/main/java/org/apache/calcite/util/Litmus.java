@@ -15,6 +15,18 @@ name|util
 package|;
 end_package
 
+begin_import
+import|import
+name|org
+operator|.
+name|slf4j
+operator|.
+name|helpers
+operator|.
+name|MessageFormatter
+import|;
+end_import
+
 begin_comment
 comment|/**  * Callback to be called when a test for validity succeeds or fails.  */
 end_comment
@@ -54,14 +66,17 @@ literal|null
 condition|?
 literal|null
 else|:
-name|String
+name|MessageFormatter
 operator|.
-name|format
+name|arrayFormat
 argument_list|(
 name|message
 argument_list|,
 name|args
 argument_list|)
+operator|.
+name|getMessage
+argument_list|()
 decl_stmt|;
 throw|throw
 operator|new
