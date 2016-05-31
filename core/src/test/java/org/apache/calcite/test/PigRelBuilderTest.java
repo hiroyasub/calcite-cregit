@@ -577,7 +577,7 @@ specifier|final
 name|String
 name|plan
 init|=
-literal|"LogicalJoin(condition=[=($0, $0)], joinType=[inner])\n"
+literal|"LogicalJoin(condition=[=($0, $2)], joinType=[inner])\n"
 operator|+
 literal|"  LogicalAggregate(group=[{0}], EMP=[COLLECT($8)])\n"
 operator|+
