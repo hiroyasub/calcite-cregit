@@ -350,7 +350,7 @@ operator|.
 name|getGroupSet
 argument_list|()
 operator|.
-name|toList
+name|asList
 argument_list|()
 argument_list|)
 argument_list|)

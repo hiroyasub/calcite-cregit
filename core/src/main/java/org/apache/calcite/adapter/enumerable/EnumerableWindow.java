@@ -4008,7 +4008,7 @@ name|group
 operator|.
 name|keys
 operator|.
-name|toList
+name|asList
 argument_list|()
 argument_list|,
 name|JavaRowFormat

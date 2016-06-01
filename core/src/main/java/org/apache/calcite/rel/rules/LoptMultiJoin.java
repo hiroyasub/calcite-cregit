@@ -237,7 +237,7 @@ name|calcite
 operator|.
 name|util
 operator|.
-name|IntList
+name|ImmutableIntList
 import|;
 end_import
 
@@ -1741,13 +1741,18 @@ block|{
 comment|// multiple factor references -- set a weight for each
 comment|// combination of factors referenced within the filter
 specifier|final
-name|IntList
+name|List
+argument_list|<
+name|Integer
+argument_list|>
 name|list
 init|=
-name|factorRefs
+name|ImmutableIntList
 operator|.
-name|toList
-argument_list|()
+name|copyOf
+argument_list|(
+name|factorRefs
+argument_list|)
 decl_stmt|;
 for|for
 control|(

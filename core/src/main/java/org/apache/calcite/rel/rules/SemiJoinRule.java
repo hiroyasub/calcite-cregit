@@ -225,20 +225,6 @@ end_import
 
 begin_import
 import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|util
-operator|.
-name|IntList
-import|;
-end_import
-
-begin_import
-import|import
 name|com
 operator|.
 name|google
@@ -516,7 +502,10 @@ name|newArrayList
 argument_list|()
 decl_stmt|;
 specifier|final
-name|IntList
+name|List
+argument_list|<
+name|Integer
+argument_list|>
 name|aggregateKeys
 init|=
 name|aggregate
@@ -524,7 +513,7 @@ operator|.
 name|getGroupSet
 argument_list|()
 operator|.
-name|toList
+name|asList
 argument_list|()
 decl_stmt|;
 for|for

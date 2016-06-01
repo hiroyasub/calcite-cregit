@@ -203,15 +203,15 @@ end_import
 
 begin_import
 import|import
-name|org
+name|com
 operator|.
-name|apache
+name|google
 operator|.
-name|calcite
+name|common
 operator|.
-name|util
+name|primitives
 operator|.
-name|IntList
+name|Ints
 import|;
 end_import
 
@@ -621,7 +621,7 @@ name|Expressions
 operator|.
 name|constant
 argument_list|(
-name|IntList
+name|Ints
 operator|.
 name|toArray
 argument_list|(

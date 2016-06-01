@@ -1348,7 +1348,10 @@ name|list
 control|)
 block|{
 specifier|final
-name|IntList
+name|List
+argument_list|<
+name|Integer
+argument_list|>
 name|list1
 init|=
 name|bitSet

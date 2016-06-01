@@ -2112,12 +2112,12 @@ name|parameter
 argument_list|,
 name|groupSet
 operator|.
-name|toList
+name|asList
 argument_list|()
 argument_list|,
 name|set
 operator|.
-name|toList
+name|asList
 argument_list|()
 argument_list|,
 name|keyPhysType
@@ -2407,7 +2407,7 @@ name|parameter
 argument_list|,
 name|groupSet
 operator|.
-name|toList
+name|asList
 argument_list|()
 argument_list|,
 name|keyPhysType

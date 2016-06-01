@@ -363,6 +363,20 @@ end_import
 
 begin_import
 import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|primitives
+operator|.
+name|Ints
+import|;
+end_import
+
+begin_import
+import|import
 name|org
 operator|.
 name|junit
@@ -6644,7 +6658,7 @@ operator|new
 name|HashSet
 argument_list|<>
 argument_list|(
-name|IntList
+name|Ints
 operator|.
 name|asList
 argument_list|(

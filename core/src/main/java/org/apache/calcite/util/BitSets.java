@@ -35,6 +35,16 @@ name|java
 operator|.
 name|util
 operator|.
+name|ArrayList
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
 name|BitSet
 import|;
 end_import
@@ -46,6 +56,16 @@ operator|.
 name|util
 operator|.
 name|Iterator
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|List
 import|;
 end_import
 
@@ -334,7 +354,10 @@ block|}
 comment|/**    * Converts a bitset to a list.    *    *<p>The list is mutable, and future changes to the list do not affect the    * contents of the bit set.    *    * @param bitSet Bit set    * @return List of set bits    */
 specifier|public
 specifier|static
-name|IntList
+name|List
+argument_list|<
+name|Integer
+argument_list|>
 name|toList
 parameter_list|(
 specifier|final
@@ -343,11 +366,15 @@ name|bitSet
 parameter_list|)
 block|{
 specifier|final
-name|IntList
+name|List
+argument_list|<
+name|Integer
+argument_list|>
 name|list
 init|=
 operator|new
-name|IntList
+name|ArrayList
+argument_list|<>
 argument_list|()
 decl_stmt|;
 for|for

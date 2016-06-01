@@ -315,20 +315,6 @@ name|calcite
 operator|.
 name|util
 operator|.
-name|IntList
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|util
-operator|.
 name|Litmus
 import|;
 end_import
@@ -408,6 +394,20 @@ operator|.
 name|graph
 operator|.
 name|TopologicalOrderIterator
+import|;
+end_import
+
+begin_import
+import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|primitives
+operator|.
+name|Ints
 import|;
 end_import
 
@@ -1005,11 +1005,15 @@ literal|null
 expr_stmt|;
 comment|// Project the expressions which are computed at this level or
 comment|// before, and will be used at later levels.
-name|IntList
+name|List
+argument_list|<
+name|Integer
+argument_list|>
 name|projectExprOrdinalList
 init|=
 operator|new
-name|IntList
+name|ArrayList
+argument_list|<>
 argument_list|()
 decl_stmt|;
 for|for
@@ -1088,10 +1092,12 @@ block|}
 block|}
 name|projectExprOrdinals
 operator|=
-name|projectExprOrdinalList
+name|Ints
 operator|.
-name|toIntArray
-argument_list|()
+name|toArray
+argument_list|(
+name|projectExprOrdinalList
+argument_list|)
 expr_stmt|;
 block|}
 specifier|final
