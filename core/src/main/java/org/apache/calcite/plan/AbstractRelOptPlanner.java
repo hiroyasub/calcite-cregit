@@ -199,6 +199,20 @@ name|java
 operator|.
 name|util
 operator|.
+name|concurrent
+operator|.
+name|atomic
+operator|.
+name|AtomicBoolean
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
 name|regex
 operator|.
 name|Pattern
@@ -279,7 +293,8 @@ name|Pattern
 name|ruleDescExclusionFilter
 decl_stmt|;
 specifier|private
-name|CancelFlag
+specifier|final
+name|AtomicBoolean
 name|cancelFlag
 decl_stmt|;
 specifier|private
@@ -331,7 +346,6 @@ parameter_list|(
 name|RelOptCostFactory
 name|costFactory
 parameter_list|,
-comment|//
 name|Context
 name|context
 parameter_list|)
@@ -368,12 +382,33 @@ name|context
 operator|=
 name|context
 expr_stmt|;
-comment|// In case no one calls setCancelFlag, set up a
-comment|// dummy here.
+specifier|final
+name|CancelFlag
+name|cancelFlag
+init|=
+name|context
+operator|.
+name|unwrap
+argument_list|(
+name|CancelFlag
+operator|.
+name|class
+argument_list|)
+decl_stmt|;
+name|this
+operator|.
 name|cancelFlag
 operator|=
+name|cancelFlag
+operator|!=
+literal|null
+condition|?
+name|cancelFlag
+operator|.
+name|atomicBoolean
+else|:
 operator|new
-name|CancelFlag
+name|AtomicBoolean
 argument_list|()
 expr_stmt|;
 comment|// Add abstract RelNode classes. No RelNodes will ever be registered with
@@ -430,12 +465,7 @@ name|CancelFlag
 name|cancelFlag
 parameter_list|)
 block|{
-name|this
-operator|.
-name|cancelFlag
-operator|=
-name|cancelFlag
-expr_stmt|;
+comment|// ignored
 block|}
 comment|/**    * Checks to see whether cancellation has been requested, and if so, throws    * an exception.    */
 specifier|public
@@ -447,7 +477,7 @@ if|if
 condition|(
 name|cancelFlag
 operator|.
-name|isCancelRequested
+name|get
 argument_list|()
 condition|)
 block|{

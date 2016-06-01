@@ -624,6 +624,11 @@ argument_list|)
 argument_list|,
 literal|"project"
 argument_list|,
+name|implementor
+operator|.
+name|getRootExpression
+argument_list|()
+argument_list|,
 name|Expressions
 operator|.
 name|constant

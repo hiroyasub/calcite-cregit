@@ -254,7 +254,10 @@ name|Pattern
 name|exclusionFilter
 parameter_list|)
 function_decl|;
-comment|/**    * Installs the cancellation-checking flag for this planner. The planner    * should periodically check this flag and terminate the planning process if    * it sees a cancellation request.    *    * @param cancelFlag flag which the planner should periodically check    */
+comment|/**    * Does nothing.    *    * @deprecated Previously, this method installed the cancellation-checking    * flag for this planner, but is now deprecated. Now, you should add a    * {@link CancelFlag} to the {@link Context} passed to the constructor.    *    * @param cancelFlag flag which the planner should periodically check    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 name|void
 name|setCancelFlag
 parameter_list|(

@@ -94,7 +94,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Factory that creates a {@link CsvSchema}.  *  *<p>Allows a custom schema to be included in a<code><i>model</i>.json</code>  * file.</p>  */
+comment|/**  * Factory that creates a {@link CsvSchema}.  *  *<p>Allows a custom schema to be included in a<code><i>model</i>.json</code>  * file.  */
 end_comment
 
 begin_class
@@ -109,8 +109,26 @@ name|CsvSchemaFactory
 implements|implements
 name|SchemaFactory
 block|{
-comment|// public constructor, per factory contract
+comment|/** Name of the column that is implicitly created in a CSV stream table    * to hold the data arrival time. */
+specifier|static
+specifier|final
+name|String
+name|ROWTIME_COLUMN_NAME
+init|=
+literal|"ROWTIME"
+decl_stmt|;
+comment|/** Public singleton, per factory contract. */
 specifier|public
+specifier|static
+specifier|final
+name|CsvSchemaFactory
+name|INSTANCE
+init|=
+operator|new
+name|CsvSchemaFactory
+argument_list|()
+decl_stmt|;
+specifier|private
 name|CsvSchemaFactory
 parameter_list|()
 block|{

@@ -2902,6 +2902,15 @@ argument_list|>
 name|selectMissingFrom
 parameter_list|()
 function_decl|;
+annotation|@
+name|BaseMessage
+argument_list|(
+literal|"Statement canceled"
+argument_list|)
+name|Inst
+name|statementCanceled
+parameter_list|()
+function_decl|;
 block|}
 end_interface
 

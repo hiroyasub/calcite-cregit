@@ -141,6 +141,20 @@ name|TimeZone
 import|;
 end_import
 
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|concurrent
+operator|.
+name|atomic
+operator|.
+name|AtomicBoolean
+import|;
+end_import
+
 begin_comment
 comment|/**  * Runtime context allowing access to the tables in a database.  */
 end_comment
@@ -234,7 +248,17 @@ operator|.
 name|class
 argument_list|)
 block|,
-comment|/** Sql advisor that suggests completion hints. */
+comment|/** A mutable flag that indicates whether user has requested that the      * current statement be canceled. Cancellation may not be immediate, but      * implementations of relational operators should check the flag fairly      * frequently and cease execution (e.g. by returning end of data). */
+name|CANCEL_FLAG
+argument_list|(
+literal|"cancelFlag"
+argument_list|,
+name|AtomicBoolean
+operator|.
+name|class
+argument_list|)
+block|,
+comment|/** Advisor that suggests completion hints for SQL statements. */
 name|SQL_ADVISOR
 argument_list|(
 literal|"sqlAdvisor"

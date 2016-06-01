@@ -81,6 +81,34 @@ end_import
 
 begin_import
 import|import
+name|au
+operator|.
+name|com
+operator|.
+name|bytecode
+operator|.
+name|opencsv
+operator|.
+name|CSVReader
+import|;
+end_import
+
+begin_import
+import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|base
+operator|.
+name|Throwables
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|io
@@ -113,6 +141,16 @@ begin_import
 import|import
 name|java
 operator|.
+name|io
+operator|.
+name|StringReader
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
 name|util
 operator|.
 name|ArrayDeque
@@ -130,13 +168,14 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * CSVSreamReader that can read newly appended file content  */
+comment|/**  * Extension to {@link CSVReader} that can read newly appended file content.  */
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|CsvStreamReader
+extends|extends
+name|CSVReader
 implements|implements
 name|Closeable
 block|{
@@ -177,7 +216,6 @@ name|DEFAULT_MONITOR_DELAY
 init|=
 literal|2000
 decl_stmt|;
-specifier|public
 name|CsvStreamReader
 parameter_list|(
 name|File
@@ -212,8 +250,8 @@ name|DEFAULT_IGNORE_LEADING_WHITESPACE
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Constructs CSVReader with supplied separator and quote char.    *    * @param csvFile the file to an underlying CSV source.    * @param separator the delimiter to use for separating entries    * @param quotechar the character to use for quoted elements    * @param escape the character to use for escaping a separator or quote    * @param line the line number to skip for start reading    * @param strictQuotes sets if characters outside the quotes are ignored    * @param ignoreLeadingWhiteSpace it true, parser should ignore    *  white space before a quote in a field    */
-specifier|public
+comment|/**    * Creates a CsvStreamReader with supplied separator and quote char.    *    * @param csvFile The file to an underlying CSV source.    * @param separator The delimiter to use for separating entries    * @param quoteChar The character to use for quoted elements    * @param escape The character to use for escaping a separator or quote    * @param line The line number to skip for start reading    * @param strictQuotes Sets if characters outside the quotes are ignored    * @param ignoreLeadingWhiteSpace If true, parser should ignore    *  white space before a quote in a field    */
+specifier|private
 name|CsvStreamReader
 parameter_list|(
 name|File
@@ -223,7 +261,7 @@ name|char
 name|separator
 parameter_list|,
 name|char
-name|quotechar
+name|quoteChar
 parameter_list|,
 name|char
 name|escape
@@ -238,20 +276,28 @@ name|boolean
 name|ignoreLeadingWhiteSpace
 parameter_list|)
 block|{
+name|super
+argument_list|(
+operator|new
+name|StringReader
+argument_list|(
+literal|""
+argument_list|)
+argument_list|)
+expr_stmt|;
+comment|// dummy call to base constructor
 name|contentQueue
 operator|=
 operator|new
 name|ArrayDeque
-argument_list|<
-name|String
-argument_list|>
+argument_list|<>
 argument_list|()
 expr_stmt|;
 name|TailerListener
 name|listener
 init|=
 operator|new
-name|CSVContentListener
+name|CsvContentListener
 argument_list|(
 name|contentQueue
 argument_list|)
@@ -284,7 +330,7 @@ name|CSVParser
 argument_list|(
 name|separator
 argument_list|,
-name|quotechar
+name|quoteChar
 argument_list|,
 name|escape
 argument_list|,
@@ -301,7 +347,7 @@ name|line
 expr_stmt|;
 try|try
 block|{
-comment|//wait for tailer to capture data
+comment|// wait for tailer to capture data
 name|Thread
 operator|.
 name|sleep
@@ -316,7 +362,14 @@ name|InterruptedException
 name|e
 parameter_list|)
 block|{
-comment|//ignore the interruption
+throw|throw
+name|Throwables
+operator|.
+name|propagate
+argument_list|(
+name|e
+argument_list|)
+throw|;
 block|}
 block|}
 comment|/**    * Reads the next line from the buffer and converts to a string array.    *    * @return a string array with each comma-separated element as a separate entry.    *    * @throws IOException if bad things happen during the read    */
@@ -342,39 +395,16 @@ init|=
 name|getNextLine
 argument_list|()
 decl_stmt|;
-while|while
+if|if
 condition|(
 name|nextLine
 operator|==
 literal|null
 condition|)
 block|{
-try|try
-block|{
-name|Thread
-operator|.
-name|sleep
-argument_list|(
-name|DEFAULT_MONITOR_DELAY
-argument_list|)
-expr_stmt|;
-name|nextLine
-operator|=
-name|getNextLine
-argument_list|()
-expr_stmt|;
-block|}
-catch|catch
-parameter_list|(
-name|InterruptedException
-name|e
-parameter_list|)
-block|{
 return|return
 literal|null
 return|;
-comment|// should throw if still pending?
-block|}
 block|}
 name|String
 index|[]
@@ -505,19 +535,22 @@ throws|throws
 name|IOException
 block|{
 block|}
-comment|/** csv file content watcher*/
+comment|/** Watches for content being appended to a CSV file. */
+specifier|private
+specifier|static
 class|class
-name|CSVContentListener
+name|CsvContentListener
 extends|extends
 name|TailerListenerAdapter
 block|{
+specifier|final
 name|Queue
 argument_list|<
 name|String
 argument_list|>
 name|contentQueue
 decl_stmt|;
-name|CSVContentListener
+name|CsvContentListener
 parameter_list|(
 name|Queue
 argument_list|<
