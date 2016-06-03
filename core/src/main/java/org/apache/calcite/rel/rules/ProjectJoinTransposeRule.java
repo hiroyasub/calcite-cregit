@@ -195,7 +195,7 @@ name|preserveExprCondition
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
 comment|/**    * Creates a ProjectJoinTransposeRule with an explicit condition.    *    * @param preserveExprCondition Condition for expressions that should be    *                              preserved in the projection    */
-specifier|private
+specifier|public
 name|ProjectJoinTransposeRule
 parameter_list|(
 name|PushProjector
