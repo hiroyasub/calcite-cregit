@@ -189,6 +189,7 @@ extends|extends
 name|SqlAggFunction
 block|{
 comment|//~ Constructors -----------------------------------------------------------
+specifier|public
 name|SqlSumEmptyIsZeroAggFunction
 parameter_list|()
 block|{
