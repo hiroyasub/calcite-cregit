@@ -8300,6 +8300,55 @@ name|sql
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-750">[CALCITE-750]    * Allow windowed aggregate on top of regular aggregate</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testNestedAggregates
+parameter_list|()
+block|{
+specifier|final
+name|HepProgram
+name|program
+init|=
+name|HepProgram
+operator|.
+name|builder
+argument_list|()
+operator|.
+name|addRuleInstance
+argument_list|(
+name|ProjectToWindowRule
+operator|.
+name|PROJECT
+argument_list|)
+operator|.
+name|build
+argument_list|()
+decl_stmt|;
+specifier|final
+name|String
+name|sql
+init|=
+literal|"SELECT\n"
+operator|+
+literal|"  avg(sum(sal) + 2 * min(empno) + 3 * avg(empno))\n"
+operator|+
+literal|"  over (partition by deptno)\n"
+operator|+
+literal|"from emp\n"
+operator|+
+literal|"group by deptno"
+decl_stmt|;
+name|checkPlanning
+argument_list|(
+name|program
+argument_list|,
+name|sql
+argument_list|)
+expr_stmt|;
+block|}
 annotation|@
 name|Test
 specifier|public
@@ -10033,43 +10082,6 @@ argument_list|)
 operator|.
 name|check
 argument_list|()
-expr_stmt|;
-block|}
-comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-750">[CALCITE-750]    * Support nested aggregates - allows only one level nesting of aggregates    * under window aggregates i.e. window_agg(standard_agg)</a>. */
-annotation|@
-name|Test
-specifier|public
-name|void
-name|testNestedAggregates
-parameter_list|()
-block|{
-specifier|final
-name|HepProgram
-name|program
-init|=
-name|HepProgram
-operator|.
-name|builder
-argument_list|()
-operator|.
-name|addRuleInstance
-argument_list|(
-name|ProjectToWindowRule
-operator|.
-name|PROJECT
-argument_list|)
-operator|.
-name|build
-argument_list|()
-decl_stmt|;
-name|checkPlanning
-argument_list|(
-name|program
-argument_list|,
-literal|"SELECT avg(sum(sal) + 2*min(empno) + 3*avg(empno)) "
-operator|+
-literal|"over (partition by deptno) from emp group by deptno"
-argument_list|)
 expr_stmt|;
 block|}
 block|}

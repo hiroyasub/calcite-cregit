@@ -12636,10 +12636,10 @@ argument_list|)
 expr_stmt|;
 comment|// Assert we don't have dangling items left in the stack
 assert|assert
+operator|!
 name|aggConverter
 operator|.
-name|isEmptyAggLevel
-argument_list|()
+name|inOver
 assert|;
 for|for
 control|(
@@ -12657,10 +12657,10 @@ name|aggConverter
 argument_list|)
 expr_stmt|;
 assert|assert
+operator|!
 name|aggConverter
 operator|.
-name|isEmptyAggLevel
-argument_list|()
+name|inOver
 assert|;
 block|}
 if|if
@@ -12678,10 +12678,10 @@ name|aggConverter
 argument_list|)
 expr_stmt|;
 assert|assert
+operator|!
 name|aggConverter
 operator|.
-name|isEmptyAggLevel
-argument_list|()
+name|inOver
 assert|;
 block|}
 comment|// compute inputs to the aggregator
@@ -21169,32 +21169,12 @@ operator|.
 name|newHashMap
 argument_list|()
 decl_stmt|;
-comment|// Minimum allowed nesting level for converting aggregates within the
-comment|// OVER operator
+comment|/** Are we directly inside a windowed aggregate? */
 specifier|private
-specifier|static
-specifier|final
-name|int
-name|MIN_AGG_LEVEL
+name|boolean
+name|inOver
 init|=
-literal|1
-decl_stmt|;
-comment|// Stores aggregate nesting level while visiting the tree to keep track of
-comment|// nested aggregates within window aggregates. An explicit stack is used
-comment|// instead of recursion to obey the SqlVisitor interface
-specifier|private
-name|Deque
-argument_list|<
-name|Integer
-argument_list|>
-name|aggLevelStack
-init|=
-operator|new
-name|ArrayDeque
-argument_list|<
-name|Integer
-argument_list|>
-argument_list|()
+literal|false
 decl_stmt|;
 comment|/**      * Creates an AggConverter.      *      *<p>The<code>select</code> parameter provides enough context to name      * aggregate calls which are top-level select list items.      *      * @param bb     Blackboard      * @param select Query being translated; provides context to give      */
 specifier|public
@@ -21523,7 +21503,6 @@ name|name
 argument_list|)
 expr_stmt|;
 block|}
-comment|// implement SqlVisitor
 specifier|public
 name|Void
 name|visit
@@ -21536,7 +21515,6 @@ return|return
 literal|null
 return|;
 block|}
-comment|// implement SqlVisitor
 specifier|public
 name|Void
 name|visit
@@ -21580,7 +21558,6 @@ return|return
 literal|null
 return|;
 block|}
-comment|// implement SqlVisitor
 specifier|public
 name|Void
 name|visit
@@ -21593,7 +21570,6 @@ return|return
 literal|null
 return|;
 block|}
-comment|// implement SqlVisitor
 specifier|public
 name|Void
 name|visit
@@ -21606,7 +21582,6 @@ return|return
 literal|null
 return|;
 block|}
-comment|// implement SqlVisitor
 specifier|public
 name|Void
 name|visit
@@ -21619,7 +21594,6 @@ return|return
 literal|null
 return|;
 block|}
-comment|// implement SqlVisitor
 specifier|public
 name|Void
 name|visit
@@ -21633,84 +21607,6 @@ literal|null
 return|;
 block|}
 specifier|public
-name|void
-name|addAggLevel
-parameter_list|(
-name|int
-name|aggLevel
-parameter_list|)
-block|{
-name|aggLevelStack
-operator|.
-name|push
-argument_list|(
-name|aggLevel
-argument_list|)
-expr_stmt|;
-block|}
-specifier|public
-name|void
-name|removeAggLevel
-parameter_list|()
-block|{
-if|if
-condition|(
-operator|!
-name|aggLevelStack
-operator|.
-name|isEmpty
-argument_list|()
-condition|)
-block|{
-name|aggLevelStack
-operator|.
-name|pop
-argument_list|()
-expr_stmt|;
-block|}
-block|}
-specifier|public
-name|int
-name|getAggLevel
-parameter_list|()
-block|{
-if|if
-condition|(
-operator|!
-name|aggLevelStack
-operator|.
-name|isEmpty
-argument_list|()
-condition|)
-block|{
-return|return
-name|aggLevelStack
-operator|.
-name|peek
-argument_list|()
-return|;
-block|}
-else|else
-block|{
-return|return
-operator|-
-literal|1
-return|;
-block|}
-block|}
-specifier|public
-name|boolean
-name|isEmptyAggLevel
-parameter_list|()
-block|{
-return|return
-name|aggLevelStack
-operator|.
-name|isEmpty
-argument_list|()
-return|;
-block|}
-specifier|public
 name|Void
 name|visit
 parameter_list|(
@@ -21718,10 +21614,6 @@ name|SqlCall
 name|call
 parameter_list|)
 block|{
-name|int
-name|parAggLevel
-decl_stmt|;
-comment|//parent aggregate nesting level
 switch|switch
 condition|(
 name|call
@@ -21767,8 +21659,14 @@ return|return
 literal|null
 return|;
 block|}
-comment|// ignore window aggregates and ranking functions (associated with OVER operator)
-comment|// However, do not ignore nested window aggregates
+specifier|final
+name|boolean
+name|prevInOver
+init|=
+name|inOver
+decl_stmt|;
+comment|// Ignore window aggregates and ranking functions (associated with OVER
+comment|// operator). However, do not ignore nested window aggregates.
 if|if
 condition|(
 name|call
@@ -21806,21 +21704,11 @@ literal|null
 return|;
 block|}
 comment|// Track aggregate nesting levels only within an OVER operator.
-name|this
-operator|.
-name|addAggLevel
-argument_list|(
-literal|0
-argument_list|)
+name|inOver
+operator|=
+literal|true
 expr_stmt|;
 block|}
-name|parAggLevel
-operator|=
-name|this
-operator|.
-name|getAggLevel
-argument_list|()
-expr_stmt|;
 comment|// Do not translate the top level window aggregate. Only do so for
 comment|// nested aggregates, if present
 if|if
@@ -21836,19 +21724,18 @@ condition|)
 block|{
 if|if
 condition|(
-name|parAggLevel
-operator|<
-literal|0
-operator|||
-operator|(
-name|parAggLevel
-operator|+
-literal|1
-operator|)
-operator|>
-name|MIN_AGG_LEVEL
+name|inOver
 condition|)
 block|{
+comment|// Add the parent aggregate level before visiting its children
+name|inOver
+operator|=
+literal|false
+expr_stmt|;
+block|}
+else|else
+block|{
+comment|// We're beyond the one ignored level
 name|translateAgg
 argument_list|(
 name|call
@@ -21862,51 +21749,6 @@ return|return
 literal|null
 return|;
 block|}
-if|else if
-condition|(
-name|parAggLevel
-operator|>=
-literal|0
-condition|)
-block|{
-comment|// Add the parent aggregate level before visiting its children
-name|this
-operator|.
-name|addAggLevel
-argument_list|(
-name|parAggLevel
-operator|+
-literal|1
-argument_list|)
-expr_stmt|;
-block|}
-block|}
-if|else if
-condition|(
-name|call
-operator|.
-name|getOperator
-argument_list|()
-operator|.
-name|getKind
-argument_list|()
-operator|!=
-name|SqlKind
-operator|.
-name|OVER
-operator|&&
-name|parAggLevel
-operator|>=
-literal|0
-condition|)
-block|{
-name|this
-operator|.
-name|addAggLevel
-argument_list|(
-name|parAggLevel
-argument_list|)
-expr_stmt|;
 block|}
 for|for
 control|(
@@ -21937,19 +21779,10 @@ expr_stmt|;
 block|}
 block|}
 comment|// Remove the parent aggregate level after visiting its children
-if|if
-condition|(
-name|parAggLevel
-operator|>=
-literal|0
-condition|)
-block|{
-name|this
-operator|.
-name|removeAggLevel
-argument_list|()
+name|inOver
+operator|=
+name|prevInOver
 expr_stmt|;
-block|}
 return|return
 literal|null
 return|;

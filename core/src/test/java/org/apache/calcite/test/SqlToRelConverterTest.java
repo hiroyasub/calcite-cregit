@@ -4385,6 +4385,37 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-750">[CALCITE-750]    * Allow windowed aggregate on top of regular aggregate</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testNestedAggregates
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"SELECT\n"
+operator|+
+literal|"  avg(sum(sal) + 2 * min(empno) + 3 * avg(empno))\n"
+operator|+
+literal|"  over (partition by deptno)\n"
+operator|+
+literal|"from emp\n"
+operator|+
+literal|"group by deptno"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
 comment|/**    * Test one of the custom conversions which is recognized by the class of the    * operator (in this case,    * {@link org.apache.calcite.sql.fun.SqlCaseOperator}).    */
 annotation|@
 name|Test

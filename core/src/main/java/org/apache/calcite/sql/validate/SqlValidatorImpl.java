@@ -1569,6 +1569,11 @@ name|aggOrOverFinder
 decl_stmt|;
 specifier|private
 specifier|final
+name|AggFinder
+name|overFinder
+decl_stmt|;
+specifier|private
+specifier|final
 name|SqlConformance
 name|conformance
 decl_stmt|;
@@ -1623,7 +1628,7 @@ name|validatingSqlMerge
 decl_stmt|;
 specifier|private
 name|boolean
-name|nestedAgg
+name|inWindow
 decl_stmt|;
 comment|// Allow nested aggregates
 comment|//~ Constructors -----------------------------------------------------------
@@ -1728,6 +1733,10 @@ argument_list|(
 name|opTab
 argument_list|,
 literal|false
+argument_list|,
+literal|true
+argument_list|,
+literal|null
 argument_list|)
 expr_stmt|;
 name|aggOrOverFinder
@@ -1738,36 +1747,28 @@ argument_list|(
 name|opTab
 argument_list|,
 literal|true
+argument_list|,
+literal|true
+argument_list|,
+literal|null
+argument_list|)
+expr_stmt|;
+name|overFinder
+operator|=
+operator|new
+name|AggFinder
+argument_list|(
+name|opTab
+argument_list|,
+literal|true
+argument_list|,
+literal|false
+argument_list|,
+name|aggOrOverFinder
 argument_list|)
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**    * Allows nested aggregates within window aggregates    */
-specifier|public
-name|void
-name|enableNestedAggregates
-parameter_list|()
-block|{
-name|this
-operator|.
-name|nestedAgg
-operator|=
-literal|true
-expr_stmt|;
-block|}
-comment|/**    * Disallows nested aggregates within window aggregates    */
-specifier|public
-name|void
-name|disableNestedAggregates
-parameter_list|()
-block|{
-name|this
-operator|.
-name|nestedAgg
-operator|=
-literal|false
-expr_stmt|;
-block|}
 specifier|public
 name|SqlConformance
 name|getConformance
@@ -18715,6 +18716,11 @@ name|SqlCall
 name|call
 parameter_list|)
 block|{
+comment|// Enable nested aggregates with window aggregates (OVER operator)
+name|inWindow
+operator|=
+literal|true
+expr_stmt|;
 specifier|final
 name|SqlWindow
 name|targetWindow
@@ -18809,6 +18815,20 @@ argument_list|,
 name|scope
 argument_list|)
 expr_stmt|;
+name|validateAggregateParams
+argument_list|(
+name|call
+argument_list|,
+literal|null
+argument_list|,
+name|scope
+argument_list|)
+expr_stmt|;
+comment|// Disable nested aggregates post validation
+name|inWindow
+operator|=
+literal|false
+expr_stmt|;
 block|}
 specifier|public
 name|void
@@ -18824,37 +18844,40 @@ name|SqlValidatorScope
 name|scope
 parameter_list|)
 block|{
-comment|// For agg(expr), expr cannot itself contain aggregate function
-comment|// invocations.  For example, SUM(2*MAX(x)) is illegal; when
+comment|// For "agg(expr)", expr cannot itself contain aggregate function
+comment|// invocations.  For example, "SUM(2 * MAX(x))" is illegal; when
 comment|// we see it, we'll report the error for the SUM (not the MAX).
 comment|// For more than one level of nesting, the error which results
 comment|// depends on the traversal order for validation.
-comment|// For window function agg(expr), expr can contain an aggregate function
-comment|// For example, AVG(2*MAX(x)) OVER (partition by y) GROUP BY y is legal; Only
-comment|// one level of nesting is allowed since non-window aggregates cannot nest aggregates.
-name|aggOrOverFinder
-operator|.
-name|disableNestedAggregates
-argument_list|()
-expr_stmt|;
+comment|//
+comment|// For a windowed aggregate "agg(expr)", expr can contain an aggregate
+comment|// function. For example,
+comment|//   SELECT AVG(2 * MAX(x)) OVER (PARTITION BY y)
+comment|//   FROM t
+comment|//   GROUP BY y
+comment|// is legal. Only one level of nesting is allowed since non-windowed
+comment|// aggregates cannot nest aggregates.
 comment|// Store nesting level of each aggregate. If an aggregate is found at an invalid
 comment|// nesting level, throw an assert.
+specifier|final
+name|AggFinder
+name|a
+decl_stmt|;
 if|if
 condition|(
-name|nestedAgg
+name|inWindow
 condition|)
 block|{
-name|aggOrOverFinder
-operator|.
-name|enableNestedAggregates
-argument_list|()
+name|a
+operator|=
+name|overFinder
 expr_stmt|;
+block|}
+else|else
+block|{
+name|a
+operator|=
 name|aggOrOverFinder
-operator|.
-name|addAggLevel
-argument_list|(
-literal|1
-argument_list|)
 expr_stmt|;
 block|}
 for|for
@@ -18870,7 +18893,7 @@ control|)
 block|{
 if|if
 condition|(
-name|aggOrOverFinder
+name|a
 operator|.
 name|findAgg
 argument_list|(
@@ -18902,7 +18925,7 @@ condition|)
 block|{
 if|if
 condition|(
-name|aggOrOverFinder
+name|a
 operator|.
 name|findAgg
 argument_list|(
@@ -18924,30 +18947,6 @@ argument_list|()
 argument_list|)
 throw|;
 block|}
-block|}
-comment|// Disallow nested aggregates post call to this function
-if|if
-condition|(
-name|nestedAgg
-condition|)
-block|{
-name|aggOrOverFinder
-operator|.
-name|removeAggLevel
-argument_list|()
-expr_stmt|;
-comment|// Assert we don't have dangling items left in the stack
-assert|assert
-name|aggOrOverFinder
-operator|.
-name|isEmptyAggLevel
-argument_list|()
-assert|;
-name|aggOrOverFinder
-operator|.
-name|disableNestedAggregates
-argument_list|()
-expr_stmt|;
 block|}
 block|}
 specifier|public

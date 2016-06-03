@@ -17257,18 +17257,39 @@ argument_list|,
 name|ERR_NESTED_AGG
 argument_list|)
 expr_stmt|;
-comment|// in OVER clause - this should be OK
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testNestedAggOver
+parameter_list|()
+block|{
+comment|// windowed agg applied to agg is OK
 name|check
 argument_list|(
-literal|"select ^sum(max(empno)) OVER^ (order by deptno ROWS 2 PRECEDING) from emp"
+literal|"select sum(max(empno))\n"
+operator|+
+literal|"  OVER (order by deptno ROWS 2 PRECEDING)\n"
+operator|+
+literal|"from emp"
+argument_list|)
+expr_stmt|;
+name|check
+argument_list|(
+literal|"select sum(max(empno)) OVER w\n"
+operator|+
+literal|"from emp\n"
+operator|+
+literal|"window w as (order by deptno ROWS 2 PRECEDING)"
 argument_list|)
 expr_stmt|;
 comment|// in OVER clause with more than one level of nesting
 name|checkFails
 argument_list|(
-literal|"select ^avg(sum(min(sal))) OVER^ (partition by deptno) from emp"
+literal|"select ^avg(sum(min(sal))) OVER (partition by deptno)^\n"
 operator|+
-literal|" group by deptno"
+literal|"from emp group by deptno"
 argument_list|,
 name|ERR_NESTED_AGG
 argument_list|)
