@@ -1372,40 +1372,6 @@ name|UPDATE_ANON_PREFIX
 init|=
 literal|"SYS$ANON"
 decl_stmt|;
-specifier|private
-name|SqlNode
-name|top
-decl_stmt|;
-annotation|@
-name|VisibleForTesting
-specifier|public
-name|SqlValidatorScope
-name|getEmptyScope
-parameter_list|()
-block|{
-return|return
-operator|new
-name|EmptyScope
-argument_list|(
-name|this
-argument_list|)
-return|;
-block|}
-comment|//~ Enums ------------------------------------------------------------------
-comment|/**    * Validation status.    */
-specifier|public
-enum|enum
-name|Status
-block|{
-comment|/**      * Validation has not started for this scope.      */
-name|UNVALIDATED
-block|,
-comment|/**      * Validation is in progress for this scope.      */
-name|IN_PROGRESS
-block|,
-comment|/**      * Validation has completed (perhaps unsuccessfully).      */
-name|VALID
-block|}
 comment|//~ Instance fields --------------------------------------------------------
 specifier|private
 specifier|final
@@ -1620,6 +1586,10 @@ operator|new
 name|HashMap
 argument_list|<>
 argument_list|()
+decl_stmt|;
+specifier|private
+name|SqlNode
+name|top
 decl_stmt|;
 comment|// REVIEW jvs 30-June-2006: subclasses may override shouldExpandIdentifiers
 comment|// in a way that ignores this; we should probably get rid of the protected
@@ -4522,6 +4492,21 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
+block|}
+annotation|@
+name|VisibleForTesting
+specifier|public
+name|SqlValidatorScope
+name|getEmptyScope
+parameter_list|()
+block|{
+return|return
+operator|new
+name|EmptyScope
+argument_list|(
+name|this
+argument_list|)
+return|;
 block|}
 specifier|public
 name|SqlValidatorScope
@@ -21145,6 +21130,21 @@ argument_list|<>
 argument_list|()
 expr_stmt|;
 block|}
+block|}
+comment|//~ Enums ------------------------------------------------------------------
+comment|/**    * Validation status.    */
+specifier|public
+enum|enum
+name|Status
+block|{
+comment|/**      * Validation has not started for this scope.      */
+name|UNVALIDATED
+block|,
+comment|/**      * Validation is in progress for this scope.      */
+name|IN_PROGRESS
+block|,
+comment|/**      * Validation has completed (perhaps unsuccessfully).      */
+name|VALID
 block|}
 block|}
 end_class
