@@ -2249,7 +2249,7 @@ block|{
 assert|assert
 literal|false
 assert|;
-comment|/*     RelNode rel =         new EnumerableRules.EnumerableTableAccessRel(             udxRel.getCluster(),             udxRel.getTable(),             udxRel.getRowType(),             udxRel.getServerMofId());      rel = RelOptUtil.createCastRel(rel, udxRel.getRowType(), true);      rel = addProjectionRule(bottomProj, rel);      if (filter != null) {       rel =           new LogicalFilter(filter.getCluster(), rel, filter.getCondition());     }      rel = addProjectionRule(topProj, rel);      call.transformTo(rel); */
+comment|/*     RelNode rel =         new EnumerableTableScan(             udxRel.getCluster(),             udxRel.getTable(),             udxRel.getRowType(),             udxRel.getServerMofId());      rel = RelOptUtil.createCastRel(rel, udxRel.getRowType(), true);      rel = addProjectionRule(bottomProj, rel);      if (filter != null) {       rel =           new LogicalFilter(filter.getCluster(), rel, filter.getCondition());     }      rel = addProjectionRule(topProj, rel);      call.transformTo(rel); */
 block|}
 specifier|public
 specifier|static

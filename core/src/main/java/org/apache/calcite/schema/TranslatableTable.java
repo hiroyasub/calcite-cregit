@@ -44,7 +44,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Extension to {@link Table} that specifies how it is to be translated to  * a {@link org.apache.calcite.rel.RelNode planner node}.  *  *<p>It is optional for a Table to implement this interface. A Table that does  * not implement this interface, a Table will be converted to an  * EnumerableTableAccessRel. Generally a Table will implements this interface to  * create a particular subclass of RelNode, and also register rules that act  * on that particular subclass of RelNode.</p>  */
+comment|/**  * Extension to {@link Table} that specifies how it is to be translated to  * a {@link org.apache.calcite.rel.RelNode relational expression}.  *  *<p>It is optional for a Table to implement this interface. If Table does  * not implement this interface, it will be converted to an  * {@link org.apache.calcite.adapter.enumerable.EnumerableTableScan}.  * Generally a Table will implement this interface to  * create a particular subclass of RelNode, and also register rules that act  * on that particular subclass of RelNode.  */
 end_comment
 
 begin_interface
