@@ -293,14 +293,14 @@ name|T
 parameter_list|,
 name|R
 parameter_list|>
-extends|extends
+implements|implements
 name|FlatMapFunction
 argument_list|<
 name|T
 argument_list|,
 name|R
 argument_list|>
-implements|implements
+implements|,
 name|org
 operator|.
 name|apache
