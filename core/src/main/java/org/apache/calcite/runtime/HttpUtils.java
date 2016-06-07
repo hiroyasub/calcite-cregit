@@ -636,6 +636,12 @@ block|{
 return|return
 name|executeMethod
 argument_list|(
+name|data
+operator|==
+literal|null
+condition|?
+literal|"GET"
+else|:
 literal|"POST"
 argument_list|,
 name|url
