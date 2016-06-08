@@ -2598,10 +2598,6 @@ specifier|final
 name|int
 name|fetch
 init|=
-name|Integer
-operator|.
-name|parseInt
-argument_list|(
 name|CalciteConnectionProperty
 operator|.
 name|DRUID_FETCH
@@ -2613,9 +2609,8 @@ name|Properties
 argument_list|()
 argument_list|)
 operator|.
-name|getString
+name|getInt
 argument_list|()
-argument_list|)
 decl_stmt|;
 name|generator
 operator|.
