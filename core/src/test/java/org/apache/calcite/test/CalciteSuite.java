@@ -822,6 +822,10 @@ name|JdbcTest
 operator|.
 name|class
 block|,
+name|QuidemTest
+operator|.
+name|class
+block|,
 name|CalciteRemoteDriverTest
 operator|.
 name|class
