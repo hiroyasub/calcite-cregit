@@ -1167,6 +1167,10 @@ argument_list|,
 name|nullCount
 operator|>
 literal|0
+operator|||
+name|nullableCount
+operator|>
+literal|0
 argument_list|)
 return|;
 block|}
