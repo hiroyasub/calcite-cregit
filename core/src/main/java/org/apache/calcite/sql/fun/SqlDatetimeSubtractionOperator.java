@@ -166,7 +166,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * A special operator for the subtraction of two DATETIMEs. The format of  * DATETIME substraction is:  *  *<blockquote><code>"("&lt;datetime&gt; "-"&lt;datetime&gt; ")"  *&lt;interval qualifier&gt;</code></blockquote>  *  *<p>This operator is special since it needs to hold the  * additional interval qualifier specification.</p>  */
+comment|/**  * A special operator for the subtraction of two DATETIMEs. The format of  * DATETIME subtraction is:  *  *<blockquote><code>"("&lt;datetime&gt; "-"&lt;datetime&gt; ")"  *&lt;interval qualifier&gt;</code></blockquote>  *  *<p>This operator is special since it needs to hold the  * additional interval qualifier specification, when in {@link SqlCall} form.  * In {@link org.apache.calcite.rex.RexNode} form, it has only two parameters,  * and the return type describes the desired type of interval.  */
 end_comment
 
 begin_class

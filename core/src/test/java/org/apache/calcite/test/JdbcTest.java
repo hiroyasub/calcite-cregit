@@ -15476,13 +15476,6 @@ expr_stmt|;
 block|}
 comment|/** Tests for DATE +- INTERVAL window frame */
 annotation|@
-name|Ignore
-argument_list|(
-literal|"DATE/TIMESTAMP/INTERVAL support is broken:"
-operator|+
-literal|"1 year is converted to 12 months instead of milliseconds"
-argument_list|)
-annotation|@
 name|Test
 specifier|public
 name|void
@@ -15515,21 +15508,20 @@ argument_list|)
 operator|.
 name|typeIs
 argument_list|(
-literal|"[deptno INTEGER NOT NULL, empid INTEGER NOT NULL, hire_date DATE NOT NULL, R BIGINT]"
+literal|"[deptno INTEGER NOT NULL, empid INTEGER NOT NULL, hire_date DATE NOT NULL, R BIGINT NOT NULL]"
 argument_list|)
 operator|.
 name|returnsUnordered
 argument_list|(
-literal|"deptno=10; R=1"
+literal|"deptno=10; empid=100; hire_date=2014-06-12; R=3"
 argument_list|,
-literal|"deptno=10; R=1"
+literal|"deptno=10; empid=110; hire_date=2014-06-12; R=3"
 argument_list|,
-literal|"deptno=10; R=1"
+literal|"deptno=10; empid=150; hire_date=2014-06-12; R=3"
 argument_list|,
-literal|"deptno=20; R=4"
+literal|"deptno=20; empid=200; hire_date=2014-06-12; R=1"
 argument_list|)
 expr_stmt|;
-comment|// 4 for rank and 2 for dense_rank
 block|}
 specifier|private
 name|void

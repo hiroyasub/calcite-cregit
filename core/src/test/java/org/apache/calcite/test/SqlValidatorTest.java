@@ -9763,7 +9763,7 @@ argument_list|,
 literal|"DECIMAL(19, 2) NOT NULL"
 argument_list|)
 expr_stmt|;
-comment|// substraction operator
+comment|// subtraction operator
 name|checkExpType
 argument_list|(
 literal|"cast(1 as TINYINT) - cast(5 as BIGINT)"

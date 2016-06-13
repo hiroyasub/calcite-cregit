@@ -157,6 +157,20 @@ name|SqlString
 import|;
 end_import
 
+begin_import
+import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|base
+operator|.
+name|Preconditions
+import|;
+end_import
+
 begin_comment
 comment|/**  * IntervalSqlType represents a standard SQL datetime interval type.  */
 end_comment
@@ -175,6 +189,7 @@ name|RelDataTypeSystem
 name|typeSystem
 decl_stmt|;
 specifier|private
+specifier|final
 name|SqlIntervalQualifier
 name|intervalQualifier
 decl_stmt|;
@@ -217,20 +232,29 @@ name|this
 operator|.
 name|typeSystem
 operator|=
+name|Preconditions
+operator|.
+name|checkNotNull
+argument_list|(
 name|typeSystem
+argument_list|)
 expr_stmt|;
 name|this
 operator|.
 name|intervalQualifier
 operator|=
+name|Preconditions
+operator|.
+name|checkNotNull
+argument_list|(
 name|intervalQualifier
+argument_list|)
 expr_stmt|;
 name|computeDigest
 argument_list|()
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|// implement RelDataTypeImpl
 specifier|protected
 name|void
 name|generateTypeString
@@ -249,17 +273,15 @@ argument_list|(
 literal|"INTERVAL "
 argument_list|)
 expr_stmt|;
+specifier|final
 name|SqlDialect
 name|dialect
 init|=
-literal|null
-decl_stmt|;
-name|dialect
-operator|=
 name|SqlDialect
 operator|.
 name|DUMMY
-expr_stmt|;
+decl_stmt|;
+specifier|final
 name|SqlPrettyWriter
 name|writer
 init|=
@@ -327,7 +349,8 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
-comment|// implement RelDataType
+annotation|@
+name|Override
 specifier|public
 name|SqlIntervalQualifier
 name|getIntervalQualifier

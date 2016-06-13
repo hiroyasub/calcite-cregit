@@ -1363,15 +1363,6 @@ name|DECIMAL
 init|=
 literal|false
 decl_stmt|;
-comment|/**    * Whether INTERVAL type is implemented.    */
-specifier|public
-specifier|static
-specifier|final
-name|boolean
-name|INTERVAL
-init|=
-literal|false
-decl_stmt|;
 specifier|private
 specifier|final
 name|boolean
@@ -3695,14 +3686,6 @@ literal|"-5.0"
 argument_list|)
 expr_stmt|;
 block|}
-if|if
-condition|(
-operator|!
-name|INTERVAL
-condition|)
-block|{
-return|return;
-block|}
 comment|// Interval to bigint
 name|tester
 operator|.
@@ -3788,14 +3771,6 @@ operator|.
 name|CAST
 argument_list|)
 expr_stmt|;
-if|if
-condition|(
-operator|!
-name|INTERVAL
-condition|)
-block|{
-return|return;
-block|}
 name|tester
 operator|.
 name|checkScalar
@@ -3862,6 +3837,12 @@ argument_list|,
 literal|"INTERVAL YEAR NOT NULL"
 argument_list|)
 expr_stmt|;
+if|if
+condition|(
+name|DECIMAL
+condition|)
+block|{
+comment|// Due to DECIMAL rounding bugs, currently returns "+5"
 name|tester
 operator|.
 name|checkScalar
@@ -3884,6 +3865,22 @@ argument_list|,
 literal|"INTERVAL DAY NOT NULL"
 argument_list|)
 expr_stmt|;
+block|}
+else|else
+block|{
+comment|// An easier case
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"cast(6.2 as interval day)"
+argument_list|,
+literal|"+6"
+argument_list|,
+literal|"INTERVAL DAY NOT NULL"
+argument_list|)
+expr_stmt|;
+block|}
 name|tester
 operator|.
 name|checkScalar
@@ -3914,23 +3911,59 @@ name|void
 name|testCastIntervalToInterval
 parameter_list|()
 block|{
-if|if
-condition|(
-operator|!
-name|INTERVAL
-condition|)
-block|{
-return|return;
-block|}
 name|tester
 operator|.
 name|checkScalar
 argument_list|(
 literal|"cast(interval '2 5' day to hour as interval hour to minute)"
 argument_list|,
-literal|"+29:00"
+literal|"+53:00"
 argument_list|,
 literal|"INTERVAL HOUR TO MINUTE NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"cast(interval '2 5' day to hour as interval day to minute)"
+argument_list|,
+literal|"+2 05:00"
+argument_list|,
+literal|"INTERVAL DAY TO MINUTE NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"cast(interval '2 5' day to hour as interval hour to second)"
+argument_list|,
+literal|"+53:00:00.000000"
+argument_list|,
+literal|"INTERVAL HOUR TO SECOND NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"cast(interval '2 5' day to hour as interval hour)"
+argument_list|,
+literal|"+53"
+argument_list|,
+literal|"INTERVAL HOUR NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"cast(interval '-29:15' hour to minute as interval day to hour)"
+argument_list|,
+literal|"-1 05"
+argument_list|,
+literal|"INTERVAL DAY TO HOUR NOT NULL"
 argument_list|)
 expr_stmt|;
 block|}
@@ -7876,21 +7909,13 @@ argument_list|(
 literal|"cast(null as interval month) / 2"
 argument_list|)
 expr_stmt|;
-if|if
-condition|(
-operator|!
-name|INTERVAL
-condition|)
-block|{
-return|return;
-block|}
 name|tester
 operator|.
 name|checkScalar
 argument_list|(
 literal|"interval '3-3' year to month / 15e-1"
 argument_list|,
-literal|"+02-02"
+literal|"+2-02"
 argument_list|,
 literal|"INTERVAL YEAR TO MONTH NOT NULL"
 argument_list|)
@@ -7901,7 +7926,7 @@ name|checkScalar
 argument_list|(
 literal|"interval '3-4' year to month / 4.5"
 argument_list|,
-literal|"+00-08"
+literal|"+0-09"
 argument_list|,
 literal|"INTERVAL YEAR TO MONTH NOT NULL"
 argument_list|)
@@ -10584,14 +10609,6 @@ argument_list|,
 literal|"TIME(0) NOT NULL"
 argument_list|)
 expr_stmt|;
-if|if
-condition|(
-operator|!
-name|INTERVAL
-condition|)
-block|{
-return|return;
-block|}
 name|tester
 operator|.
 name|checkScalar
@@ -10614,7 +10631,40 @@ argument_list|,
 literal|"TIMESTAMP(0) NOT NULL"
 argument_list|)
 expr_stmt|;
-comment|// TODO: Tests with interval year months (not supported)
+comment|// Datetime minus year-month interval
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"timestamp '2003-08-02 12:54:01' - interval '12' year"
+argument_list|,
+literal|"1991-08-02 12:54:01"
+argument_list|,
+literal|"TIMESTAMP(0) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"date '2003-08-02' - interval '12' year"
+argument_list|,
+literal|"1991-08-02"
+argument_list|,
+literal|"DATE NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"date '2003-08-02' - interval '12-3' year to month"
+argument_list|,
+literal|"1991-05-02"
+argument_list|,
+literal|"DATE NOT NULL"
+argument_list|)
+expr_stmt|;
 block|}
 annotation|@
 name|Test
@@ -10632,21 +10682,13 @@ operator|.
 name|MINUS_DATE
 argument_list|)
 expr_stmt|;
-if|if
-condition|(
-operator|!
-name|enable
-condition|)
-block|{
-return|return;
-block|}
 name|tester
 operator|.
 name|checkScalar
 argument_list|(
 literal|"(time '12:03:34' - time '11:57:23') minute to second"
 argument_list|,
-literal|"+6:11"
+literal|"+6:11.000000"
 argument_list|,
 literal|"INTERVAL MINUTE TO SECOND NOT NULL"
 argument_list|)
@@ -10679,7 +10721,7 @@ name|checkScalar
 argument_list|(
 literal|"(timestamp '2004-05-01 12:03:34' - timestamp '2004-04-29 11:57:23') day to second"
 argument_list|,
-literal|"+2 00:06:11"
+literal|"+2 00:06:11.000000"
 argument_list|,
 literal|"INTERVAL DAY TO SECOND NOT NULL"
 argument_list|)
@@ -11699,14 +11741,6 @@ argument_list|,
 literal|"TIME(0) NOT NULL"
 argument_list|)
 expr_stmt|;
-if|if
-condition|(
-operator|!
-name|INTERVAL
-condition|)
-block|{
-return|return;
-block|}
 name|tester
 operator|.
 name|checkScalar
@@ -11729,7 +11763,29 @@ argument_list|,
 literal|"TIMESTAMP(0) NOT NULL"
 argument_list|)
 expr_stmt|;
-comment|// TODO: Tests with interval year months (not supported)
+comment|// Datetime plus year-to-month interval
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"interval '5-3' year to month + date '2005-03-02'"
+argument_list|,
+literal|"2010-06-02"
+argument_list|,
+literal|"DATE NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"timestamp '2003-08-02 12:54:01' + interval '5-3' year to month"
+argument_list|,
+literal|"2008-11-02 12:54:01"
+argument_list|,
+literal|"TIMESTAMP(0) NOT NULL"
+argument_list|)
+expr_stmt|;
 block|}
 annotation|@
 name|Test
@@ -15839,14 +15895,6 @@ argument_list|,
 literal|"INTERVAL MONTH"
 argument_list|)
 expr_stmt|;
-if|if
-condition|(
-operator|!
-name|INTERVAL
-condition|)
-block|{
-return|return;
-block|}
 name|tester
 operator|.
 name|checkScalar
@@ -19060,14 +19108,6 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-if|if
-condition|(
-operator|!
-name|INTERVAL
-condition|)
-block|{
-return|return;
-block|}
 name|tester
 operator|.
 name|checkScalar
@@ -20178,14 +20218,6 @@ argument_list|,
 literal|"TIMESTAMP(0) NOT NULL"
 argument_list|)
 expr_stmt|;
-if|if
-condition|(
-operator|!
-name|INTERVAL
-condition|)
-block|{
-return|return;
-block|}
 name|tester
 operator|.
 name|checkNull
@@ -20260,14 +20292,6 @@ argument_list|,
 literal|"INTEGER NOT NULL"
 argument_list|)
 expr_stmt|;
-if|if
-condition|(
-operator|!
-name|INTERVAL
-condition|)
-block|{
-return|return;
-block|}
 name|tester
 operator|.
 name|checkScalar

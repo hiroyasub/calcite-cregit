@@ -796,9 +796,8 @@ literal|true
 argument_list|,
 name|ReturnTypes
 operator|.
-name|ARG0_NULLABLE
+name|BOOLEAN_NULLABLE_OPTIMIZED
 argument_list|,
-comment|// more efficient than BOOLEAN_NULLABLE
 name|InferTypes
 operator|.
 name|BOOLEAN
@@ -1485,9 +1484,8 @@ literal|true
 argument_list|,
 name|ReturnTypes
 operator|.
-name|ARG0_NULLABLE
+name|BOOLEAN_NULLABLE_OPTIMIZED
 argument_list|,
-comment|// more efficient than BOOLEAN_NULLABLE
 name|InferTypes
 operator|.
 name|BOOLEAN
@@ -1552,7 +1550,7 @@ literal|true
 argument_list|,
 name|ReturnTypes
 operator|.
-name|NULLABLE_SUM
+name|ARG0_NULLABLE
 argument_list|,
 name|InferTypes
 operator|.
@@ -2697,11 +2695,11 @@ operator|new
 name|SqlRowOperator
 argument_list|()
 decl_stmt|;
-comment|/**    * A special operator for the subtraction of two DATETIMEs. The format of    * DATETIME substraction is:    *    *<blockquote><code>"("&lt;datetime&gt; "-"&lt;datetime&gt; ")"    *&lt;interval qualifier&gt;</code></blockquote>    *    *<p>This operator is special since it needs to hold the    * additional interval qualifier specification.</p>    */
+comment|/**    * A special operator for the subtraction of two DATETIMEs. The format of    * DATETIME subtraction is:    *    *<blockquote><code>"("&lt;datetime&gt; "-"&lt;datetime&gt; ")"    *&lt;interval qualifier&gt;</code></blockquote>    *    *<p>This operator is special since it needs to hold the    * additional interval qualifier specification.</p>    */
 specifier|public
 specifier|static
 specifier|final
-name|SqlOperator
+name|SqlDatetimeSubtractionOperator
 name|MINUS_DATE
 init|=
 operator|new
@@ -3829,7 +3827,7 @@ name|TIMESTAMP_ADD
 argument_list|,
 name|ReturnTypes
 operator|.
-name|ARG2
+name|ARG2_NULLABLE
 argument_list|,
 literal|null
 argument_list|,

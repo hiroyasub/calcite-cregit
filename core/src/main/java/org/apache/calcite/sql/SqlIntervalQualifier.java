@@ -899,6 +899,27 @@ operator|.
 name|endUnit
 return|;
 block|}
+comment|/** Returns {@code SECOND} for both {@code HOUR TO SECOND} and    * {@code SECOND}. */
+specifier|public
+name|TimeUnit
+name|getUnit
+parameter_list|()
+block|{
+return|return
+name|Util
+operator|.
+name|first
+argument_list|(
+name|timeUnitRange
+operator|.
+name|endUnit
+argument_list|,
+name|timeUnitRange
+operator|.
+name|startUnit
+argument_list|)
+return|;
+block|}
 specifier|public
 name|SqlNode
 name|clone

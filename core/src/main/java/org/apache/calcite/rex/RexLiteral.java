@@ -620,6 +620,9 @@ case|:
 case|case
 name|INTERVAL_YEAR_MONTH
 case|:
+comment|// The value of a DAY-TIME interval (whatever the start and end units,
+comment|// even say HOUR TO MINUTE) is in milliseconds (perhaps fractional
+comment|// milliseconds). The value of a YEAR-MONTH interval is in months.
 return|return
 name|value
 operator|instanceof
