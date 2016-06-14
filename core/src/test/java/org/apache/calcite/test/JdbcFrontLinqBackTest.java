@@ -1102,6 +1102,118 @@ literal|"empid=1; deptno=0; name=foo; salary=10.0; commission=null"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testDelete
+parameter_list|()
+block|{
+specifier|final
+name|List
+argument_list|<
+name|JdbcTest
+operator|.
+name|Employee
+argument_list|>
+name|employees
+init|=
+operator|new
+name|ArrayList
+argument_list|<>
+argument_list|()
+decl_stmt|;
+name|CalciteAssert
+operator|.
+name|AssertThat
+name|with
+init|=
+name|mutable
+argument_list|(
+name|employees
+argument_list|)
+decl_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"select * from \"foo\".\"bar\""
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"empid=0; deptno=0; name=first; salary=0.0; commission=null"
+argument_list|)
+expr_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"insert into \"foo\".\"bar\" select * from \"hr\".\"emps\""
+argument_list|)
+operator|.
+name|updates
+argument_list|(
+literal|4
+argument_list|)
+expr_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"select count(*) as c from \"foo\".\"bar\""
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"C=5"
+argument_list|)
+expr_stmt|;
+specifier|final
+name|String
+name|deleteSql
+init|=
+literal|"delete from \"foo\".\"bar\" "
+operator|+
+literal|"where \"deptno\" = 10"
+decl_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+name|deleteSql
+argument_list|)
+operator|.
+name|updates
+argument_list|(
+literal|3
+argument_list|)
+expr_stmt|;
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select \"name\", count(*) as c\n"
+operator|+
+literal|"from \"foo\".\"bar\"\n"
+operator|+
+literal|"group by \"name\""
+decl_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"name=Eric; C=1"
+argument_list|,
+literal|"name=first; C=1"
+argument_list|)
+expr_stmt|;
+block|}
 comment|/**    * Creates the post processor routine to be applied against a Connection.    *    *<p>Table schema is based on JdbcTest#Employee    * (refer to {@link JdbcFrontLinqBackTest#mutable}).    *    * @param initialData records to be presented in table    * @return a connection post-processor    */
 specifier|private
 specifier|static

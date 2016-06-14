@@ -4396,7 +4396,7 @@ name|SELECT
 argument_list|)
 return|;
 block|}
-comment|/**    * Routine to figure out the StatementType and defaults to SELECT    * As CASE increases the default may change    * @param kind a SqlKind    * @return Meta.StatementType*/
+comment|/**    * Deduces the broad type of statement.    * Currently returns SELECT for most statement types, but this may change.    *    * @param kind Kind of statement    */
 specifier|private
 name|Meta
 operator|.
@@ -4415,12 +4415,15 @@ block|{
 case|case
 name|INSERT
 case|:
+case|case
+name|DELETE
+case|:
 return|return
 name|Meta
 operator|.
 name|StatementType
 operator|.
-name|INSERT
+name|IS_DML
 return|;
 default|default:
 return|return
@@ -4432,7 +4435,7 @@ name|SELECT
 return|;
 block|}
 block|}
-comment|/**    * Routine to figure out the StatementType if call does not have sql    * defaults to SELECT    * @param preparedResult An objecet returned from prepareQueryable or prepareRel    * @return Meta.StatementType*/
+comment|/**    * Deduces the broad type of statement for a prepare result.    * Currently returns SELECT for most statement types, but this may change.    *    * @param preparedResult Prepare result    */
 specifier|private
 name|Meta
 operator|.
@@ -4892,6 +4895,9 @@ condition|)
 block|{
 case|case
 name|INSERT
+case|:
+case|case
+name|DELETE
 case|:
 case|case
 name|EXPLAIN

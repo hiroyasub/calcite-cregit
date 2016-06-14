@@ -8091,6 +8091,9 @@ block|{
 case|case
 name|INSERT
 case|:
+case|case
+name|DELETE
+case|:
 return|return
 name|typeFactory
 operator|.
