@@ -8646,7 +8646,7 @@ block|}
 comment|/** Finds the number of months between two dates, each represented as the    * number of days since the epoch. */
 specifier|public
 specifier|static
-name|long
+name|int
 name|subtractMonths
 parameter_list|(
 name|int
@@ -8826,9 +8826,6 @@ decl_stmt|;
 name|int
 name|x
 init|=
-operator|(
-name|int
-operator|)
 name|subtractMonths
 argument_list|(
 name|d0

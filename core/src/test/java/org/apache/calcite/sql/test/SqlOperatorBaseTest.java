@@ -20245,6 +20245,106 @@ argument_list|,
 literal|"TIMESTAMP(0) NOT NULL"
 argument_list|)
 expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"timestampadd(MONTH, 3, cast(null as timestamp))"
+argument_list|,
+literal|null
+argument_list|,
+literal|"TIMESTAMP(0)"
+argument_list|)
+expr_stmt|;
+comment|// TIMESTAMPADD with DATE; returns a TIMESTAMP value for sub-day intervals.
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"timestampadd(MONTH, 1, date '2016-06-15')"
+argument_list|,
+literal|"2016-07-15"
+argument_list|,
+literal|"DATE NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"timestampadd(DAY, 1, date '2016-06-15')"
+argument_list|,
+literal|"2016-06-16"
+argument_list|,
+literal|"DATE NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"timestampadd(HOUR, -1, date '2016-06-15')"
+argument_list|,
+literal|"2016-06-14 23:00:00"
+argument_list|,
+literal|"TIMESTAMP(0) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"timestampadd(MINUTE, 1, date '2016-06-15')"
+argument_list|,
+literal|"2016-06-15 00:01:00"
+argument_list|,
+literal|"TIMESTAMP(0) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"timestampadd(SQL_TSI_SECOND, -1, date '2016-06-15')"
+argument_list|,
+literal|"2016-06-14 23:59:59"
+argument_list|,
+literal|"TIMESTAMP(0) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"timestampadd(SECOND, 1, date '2016-06-15')"
+argument_list|,
+literal|"2016-06-15 00:00:01"
+argument_list|,
+literal|"TIMESTAMP(0) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"timestampadd(SECOND, 1, cast(null as date))"
+argument_list|,
+literal|null
+argument_list|,
+literal|"TIMESTAMP(0)"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"timestampadd(DAY, 1, cast(null as date))"
+argument_list|,
+literal|null
+argument_list|,
+literal|"DATE"
+argument_list|)
+expr_stmt|;
 block|}
 annotation|@
 name|Test
@@ -20395,6 +20495,103 @@ argument_list|,
 literal|"(?s)Encountered \"CENTURY\" at .*"
 argument_list|,
 literal|false
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"timestampdiff(QUARTER, "
+operator|+
+literal|"timestamp '2014-02-24 12:42:25', "
+operator|+
+literal|"cast(null as timestamp))"
+argument_list|,
+literal|null
+argument_list|,
+literal|"INTEGER"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"timestampdiff(QUARTER, "
+operator|+
+literal|"cast(null as timestamp), "
+operator|+
+literal|"timestamp '2014-02-24 12:42:25')"
+argument_list|,
+literal|null
+argument_list|,
+literal|"INTEGER"
+argument_list|)
+expr_stmt|;
+comment|// timestampdiff with date
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"timestampdiff(MONTH, date '2016-03-15', date '2016-06-14')"
+argument_list|,
+literal|"2"
+argument_list|,
+literal|"INTEGER NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"timestampdiff(DAY, date '2016-06-15', date '2016-06-14')"
+argument_list|,
+literal|"-1"
+argument_list|,
+literal|"INTEGER NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"timestampdiff(HOUR, date '2016-06-15', date '2016-06-14')"
+argument_list|,
+literal|"-24"
+argument_list|,
+literal|"INTEGER NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"timestampdiff(MINUTE, date '2016-06-15',  date '2016-06-15')"
+argument_list|,
+literal|"0"
+argument_list|,
+literal|"INTEGER NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"timestampdiff(SECOND, cast(null as date), date '2016-06-15')"
+argument_list|,
+literal|null
+argument_list|,
+literal|"INTEGER"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"timestampdiff(DAY, date '2016-06-15', cast(null as date))"
+argument_list|,
+literal|null
+argument_list|,
+literal|"INTEGER"
 argument_list|)
 expr_stmt|;
 block|}
