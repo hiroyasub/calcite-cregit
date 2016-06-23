@@ -1219,6 +1219,12 @@ name|rowType
 parameter_list|,
 name|Table
 name|table
+parameter_list|,
+name|ImmutableList
+argument_list|<
+name|String
+argument_list|>
+name|names
 parameter_list|)
 block|{
 assert|assert
@@ -1242,13 +1248,7 @@ name|schema
 argument_list|,
 name|rowType
 argument_list|,
-name|ImmutableList
-operator|.
-expr|<
-name|String
-operator|>
-name|of
-argument_list|()
+name|names
 argument_list|,
 name|table
 argument_list|,

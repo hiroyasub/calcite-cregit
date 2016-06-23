@@ -667,7 +667,7 @@ name|explainContains
 argument_list|(
 literal|"EnumerableInterpreter\n"
 operator|+
-literal|"  BindableTableScan(table=[[]])"
+literal|"  BindableTableScan(table=[[STREAMS, ORDERS, (STREAM)]])"
 argument_list|)
 operator|.
 name|returns
@@ -722,7 +722,7 @@ literal|"EnumerableCalc(expr#0..3=[{inputs}], expr#4=[6], expr#5=[>($t3, $t4)], 
 operator|+
 literal|"  EnumerableInterpreter\n"
 operator|+
-literal|"    BindableTableScan(table=[[]])"
+literal|"    BindableTableScan(table=[[STREAMS, ORDERS, (STREAM)]])"
 argument_list|)
 operator|.
 name|returns
@@ -791,7 +791,7 @@ literal|"    EnumerableCalc(expr#0..3=[{inputs}], expr#4=[FLAG(HOUR)], expr#5=[F
 operator|+
 literal|"      EnumerableInterpreter\n"
 operator|+
-literal|"        BindableTableScan(table=[[]])"
+literal|"        BindableTableScan(table=[[STREAMS, ORDERS, (STREAM)]])"
 argument_list|)
 operator|.
 name|returns
@@ -852,7 +852,7 @@ literal|"  EnumerableCalc(expr#0..3=[{inputs}], expr#4=[FLAG(HOUR)], expr#5=[FLO
 operator|+
 literal|"    EnumerableInterpreter\n"
 operator|+
-literal|"      BindableTableScan(table=[[]])"
+literal|"      BindableTableScan(table=[[STREAMS, ORDERS, (STREAM)]])"
 argument_list|)
 operator|.
 name|returns
@@ -985,7 +985,7 @@ name|explainContains
 argument_list|(
 literal|"EnumerableInterpreter\n"
 operator|+
-literal|"  BindableTableScan(table=[[]])"
+literal|"  BindableTableScan(table=[[INFINITE_STREAMS, ORDERS, (STREAM)]])"
 argument_list|)
 operator|.
 name|returnsCount
@@ -1051,7 +1051,7 @@ literal|"    EnumerableCalc(expr#0..3=[{inputs}], expr#4=[CAST($t2):VARCHAR(32) 
 operator|+
 literal|"      EnumerableInterpreter\n"
 operator|+
-literal|"        BindableTableScan(table=[[]])\n"
+literal|"        BindableTableScan(table=[[STREAM_JOINS, ORDERS, (STREAM)]])\n"
 operator|+
 literal|"    EnumerableInterpreter\n"
 operator|+

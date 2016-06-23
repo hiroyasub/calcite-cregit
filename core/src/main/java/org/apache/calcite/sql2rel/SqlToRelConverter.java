@@ -10892,6 +10892,13 @@ argument_list|,
 name|rowType
 argument_list|,
 name|table
+argument_list|,
+name|udf
+operator|.
+name|getNameAsId
+argument_list|()
+operator|.
+name|names
 argument_list|)
 decl_stmt|;
 name|RelNode
