@@ -5705,6 +5705,30 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1313">[CALCITE-1313]    * Validator should derive type of expression in ORDER BY</a>.    */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testOrderByOver
+parameter_list|()
+block|{
+name|String
+name|sql
+init|=
+literal|"select deptno, rank() over(partition by empno order by deptno)\n"
+operator|+
+literal|"from emp order by row_number() over(partition by empno order by deptno)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
 comment|/**    * Test case (correlated scalar aggregate subQuery) for    *<a href="https://issues.apache.org/jira/browse/CALCITE-714">[CALCITE-714]    * When de-correlating, push join condition into subQuery</a>.    */
 annotation|@
 name|Test
