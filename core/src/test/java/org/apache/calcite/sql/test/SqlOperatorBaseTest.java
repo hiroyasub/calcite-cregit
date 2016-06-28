@@ -20296,6 +20296,21 @@ name|tester
 operator|.
 name|checkScalar
 argument_list|(
+literal|"timestampdiff(SQL_TSI_FRAC_SECOND, "
+operator|+
+literal|"timestamp '2016-02-24 12:42:25', "
+operator|+
+literal|"timestamp '2016-02-24 12:42:20')"
+argument_list|,
+literal|"-5000000"
+argument_list|,
+literal|"INTEGER NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
 literal|"timestampdiff(YEAR, "
 operator|+
 literal|"timestamp '2014-02-24 12:42:25', "
@@ -20305,6 +20320,81 @@ argument_list|,
 literal|"2"
 argument_list|,
 literal|"INTEGER NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"timestampdiff(WEEK, "
+operator|+
+literal|"timestamp '2014-02-24 12:42:25', "
+operator|+
+literal|"timestamp '2016-02-24 12:42:25')"
+argument_list|,
+literal|"104"
+argument_list|,
+literal|"INTEGER NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"timestampdiff(WEEK, "
+operator|+
+literal|"timestamp '2014-02-19 12:42:25', "
+operator|+
+literal|"timestamp '2016-02-24 12:42:25')"
+argument_list|,
+literal|"105"
+argument_list|,
+literal|"INTEGER NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"timestampdiff(MONTH, "
+operator|+
+literal|"timestamp '2014-02-24 12:42:25', "
+operator|+
+literal|"timestamp '2016-02-24 12:42:25')"
+argument_list|,
+literal|"24"
+argument_list|,
+literal|"INTEGER NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"timestampdiff(QUARTER, "
+operator|+
+literal|"timestamp '2014-02-24 12:42:25', "
+operator|+
+literal|"timestamp '2016-02-24 12:42:25')"
+argument_list|,
+literal|"8"
+argument_list|,
+literal|"INTEGER NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkFails
+argument_list|(
+literal|"timestampdiff(CENTURY, "
+operator|+
+literal|"timestamp '2014-02-24 12:42:25', "
+operator|+
+literal|"timestamp '2614-02-24 12:42:25')"
+argument_list|,
+literal|"(?s)Encountered \"CENTURY\" at .*"
+argument_list|,
+literal|false
 argument_list|)
 expr_stmt|;
 block|}

@@ -93,7 +93,7 @@ name|java
 operator|.
 name|util
 operator|.
-name|List
+name|Collection
 import|;
 end_import
 
@@ -429,7 +429,7 @@ return|;
 block|}
 comment|/**    * @return collection of {@link SqlTypeName}s included in this family    */
 specifier|public
-name|List
+name|Collection
 argument_list|<
 name|SqlTypeName
 argument_list|>
@@ -516,27 +516,17 @@ case|case
 name|INTERVAL_YEAR_MONTH
 case|:
 return|return
-name|ImmutableList
-operator|.
-name|of
-argument_list|(
 name|SqlTypeName
 operator|.
-name|INTERVAL_YEAR_MONTH
-argument_list|)
+name|YEAR_INTERVAL_TYPES
 return|;
 case|case
 name|INTERVAL_DAY_TIME
 case|:
 return|return
-name|ImmutableList
-operator|.
-name|of
-argument_list|(
 name|SqlTypeName
 operator|.
-name|INTERVAL_DAY_TIME
-argument_list|)
+name|DAY_INTERVAL_TYPES
 return|;
 case|case
 name|STRING

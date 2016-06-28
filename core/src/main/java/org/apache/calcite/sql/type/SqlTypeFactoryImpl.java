@@ -1013,20 +1013,15 @@ operator|:
 literal|"use createMultisetType() instead"
 assert|;
 assert|assert
-name|typeName
-operator|!=
+operator|!
 name|SqlTypeName
 operator|.
-name|INTERVAL_DAY_TIME
-operator|:
-literal|"use createSqlIntervalType() instead"
-assert|;
-assert|assert
-name|typeName
-operator|!=
-name|SqlTypeName
+name|INTERVAL_TYPES
 operator|.
-name|INTERVAL_YEAR_MONTH
+name|contains
+argument_list|(
+name|typeName
+argument_list|)
 operator|:
 literal|"use createSqlIntervalType() instead"
 assert|;

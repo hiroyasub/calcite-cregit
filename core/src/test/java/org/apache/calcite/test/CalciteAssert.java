@@ -511,7 +511,7 @@ name|org
 operator|.
 name|hamcrest
 operator|.
-name|CoreMatchers
+name|Matcher
 import|;
 end_import
 
@@ -828,6 +828,18 @@ operator|.
 name|CoreMatchers
 operator|.
 name|equalTo
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|hamcrest
+operator|.
+name|CoreMatchers
+operator|.
+name|is
 import|;
 end_import
 
@@ -1759,7 +1771,10 @@ argument_list|>
 name|checkResultCount
 parameter_list|(
 specifier|final
-name|int
+name|Matcher
+argument_list|<
+name|Integer
+argument_list|>
 name|expected
 parameter_list|)
 block|{
@@ -1794,11 +1809,11 @@ argument_list|(
 name|resultSet
 argument_list|)
 decl_stmt|;
-name|assertEquals
+name|assertThat
 argument_list|(
-name|expected
-argument_list|,
 name|count
+argument_list|,
+name|expected
 argument_list|)
 expr_stmt|;
 return|return
@@ -1860,8 +1875,6 @@ name|assertThat
 argument_list|(
 name|updateCount
 argument_list|,
-name|CoreMatchers
-operator|.
 name|is
 argument_list|(
 name|expected
@@ -6398,7 +6411,10 @@ name|returns
 argument_list|(
 name|checkResultCount
 argument_list|(
+name|is
+argument_list|(
 name|expectedCount
+argument_list|)
 argument_list|)
 argument_list|)
 return|;

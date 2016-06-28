@@ -6600,10 +6600,13 @@ operator|==
 literal|null
 condition|)
 block|{
-comment|// not an enum type
-return|return
-literal|null
-return|;
+throw|throw
+operator|new
+name|AssertionError
+argument_list|(
+literal|"not an enum type"
+argument_list|)
+throw|;
 block|}
 name|ImmutableMap
 operator|.
