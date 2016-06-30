@@ -87,7 +87,7 @@ name|rel
 operator|.
 name|core
 operator|.
-name|SemiJoin
+name|Project
 import|;
 end_import
 
@@ -101,9 +101,25 @@ name|calcite
 operator|.
 name|rel
 operator|.
-name|logical
+name|core
 operator|.
-name|LogicalProject
+name|RelFactories
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|core
+operator|.
+name|SemiJoin
 import|;
 end_import
 
@@ -134,6 +150,20 @@ operator|.
 name|rex
 operator|.
 name|RexNode
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|tools
+operator|.
+name|RelBuilderFactory
 import|;
 end_import
 
@@ -182,6 +212,10 @@ operator|.
 name|ExprCondition
 operator|.
 name|FALSE
+argument_list|,
+name|RelFactories
+operator|.
+name|LOGICAL_BUILDER
 argument_list|)
 decl_stmt|;
 comment|//~ Instance fields --------------------------------------------------------
@@ -202,13 +236,16 @@ name|PushProjector
 operator|.
 name|ExprCondition
 name|preserveExprCondition
+parameter_list|,
+name|RelBuilderFactory
+name|relFactory
 parameter_list|)
 block|{
 name|super
 argument_list|(
 name|operand
 argument_list|(
-name|LogicalProject
+name|Project
 operator|.
 name|class
 argument_list|,
@@ -222,6 +259,10 @@ name|any
 argument_list|()
 argument_list|)
 argument_list|)
+argument_list|,
+name|relFactory
+argument_list|,
+literal|null
 argument_list|)
 expr_stmt|;
 name|this
@@ -241,7 +282,7 @@ name|RelOptRuleCall
 name|call
 parameter_list|)
 block|{
-name|LogicalProject
+name|Project
 name|origProj
 init|=
 name|call
@@ -292,6 +333,18 @@ argument_list|,
 name|join
 argument_list|,
 name|preserveExprCondition
+argument_list|,
+name|relBuilderFactory
+operator|.
+name|create
+argument_list|(
+name|origProj
+operator|.
+name|getCluster
+argument_list|()
+argument_list|,
+literal|null
+argument_list|)
 argument_list|)
 decl_stmt|;
 if|if

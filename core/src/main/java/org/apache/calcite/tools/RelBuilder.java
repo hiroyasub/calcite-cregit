@@ -4402,7 +4402,7 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-comment|/** Creates a {@link org.apache.calcite.rel.core.Project} of the given list    * of expressions, using the given names.    *    *<p>Names are deduced as follows:    *<ul>    *<li>If the length of {@code fieldNames} is greater than the index of    *     the current entry in {@code nodes}, and the entry in    *     {@code fieldNames} is not null, uses it; otherwise    *<li>If an expression projects an input field,    *     or is a cast an input field,    *     uses the input field name; otherwise    *<li>If an expression is a call to    *     {@link org.apache.calcite.sql.fun.SqlStdOperatorTable#AS}    *     (see {@link #alias}), removes the call but uses the intended alias.    *</ul>    *    *<p>After the field names have been inferred, makes the    * field names unique by appending numeric suffixes.    *    * @param nodes Expressions    * @param fieldNames Suggested field names    */
+comment|/** Creates a {@link org.apache.calcite.rel.core.Project} of the given list    * of expressions and field names.    *    *<p>Infers names as would {@link #project(Iterable, Iterable)} if all    * suggested names were null.    *    * @param nodes Expressions    * @param fieldNames field names for expressions    */
 specifier|public
 name|RelBuilder
 name|project
@@ -4420,6 +4420,40 @@ argument_list|<
 name|String
 argument_list|>
 name|fieldNames
+parameter_list|)
+block|{
+return|return
+name|project
+argument_list|(
+name|nodes
+argument_list|,
+name|fieldNames
+argument_list|,
+literal|false
+argument_list|)
+return|;
+block|}
+comment|/** Creates a {@link org.apache.calcite.rel.core.Project} of the given list    * of expressions, using the given names.    *    *<p>Names are deduced as follows:    *<ul>    *<li>If the length of {@code fieldNames} is greater than the index of    *     the current entry in {@code nodes}, and the entry in    *     {@code fieldNames} is not null, uses it; otherwise    *<li>If an expression projects an input field,    *     or is a cast an input field,    *     uses the input field name; otherwise    *<li>If an expression is a call to    *     {@link org.apache.calcite.sql.fun.SqlStdOperatorTable#AS}    *     (see {@link #alias}), removes the call but uses the intended alias.    *</ul>    *    *<p>After the field names have been inferred, makes the    * field names unique by appending numeric suffixes.    *    * @param nodes Expressions    * @param fieldNames Suggested field names    * @param force create project even if it is identity    */
+specifier|public
+name|RelBuilder
+name|project
+parameter_list|(
+name|Iterable
+argument_list|<
+name|?
+extends|extends
+name|RexNode
+argument_list|>
+name|nodes
+parameter_list|,
+name|Iterable
+argument_list|<
+name|String
+argument_list|>
+name|fieldNames
+parameter_list|,
+name|boolean
+name|force
 parameter_list|)
 block|{
 specifier|final
@@ -4522,6 +4556,9 @@ argument_list|()
 decl_stmt|;
 if|if
 condition|(
+operator|!
+name|force
+operator|&&
 name|RexUtil
 operator|.
 name|isIdentity
