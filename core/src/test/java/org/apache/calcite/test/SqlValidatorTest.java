@@ -20232,6 +20232,78 @@ literal|"Duplicate relation name 'D' in FROM clause"
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1305">[CALCITE-1305]    * Case-insensitive table aliases and GROUP BY</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testCaseInsensitiveTableAliasInGroupBy
+parameter_list|()
+block|{
+specifier|final
+name|SqlTester
+name|tester1
+init|=
+name|tester
+operator|.
+name|withCaseSensitive
+argument_list|(
+literal|false
+argument_list|)
+operator|.
+name|withUnquotedCasing
+argument_list|(
+name|Casing
+operator|.
+name|UNCHANGED
+argument_list|)
+decl_stmt|;
+name|tester1
+operator|.
+name|checkQuery
+argument_list|(
+literal|"select deptno, count(*) from EMP AS emp\n"
+operator|+
+literal|"group by eMp.deptno"
+argument_list|)
+expr_stmt|;
+name|tester1
+operator|.
+name|checkQuery
+argument_list|(
+literal|"select deptno, count(*) from EMP AS EMP\n"
+operator|+
+literal|"group by eMp.deptno"
+argument_list|)
+expr_stmt|;
+name|tester1
+operator|.
+name|checkQuery
+argument_list|(
+literal|"select deptno, count(*) from EMP\n"
+operator|+
+literal|"group by eMp.deptno"
+argument_list|)
+expr_stmt|;
+name|tester1
+operator|.
+name|checkQuery
+argument_list|(
+literal|"select * from EMP where exists (\n"
+operator|+
+literal|"  select 1 from dept\n"
+operator|+
+literal|"  group by eMp.deptno)"
+argument_list|)
+expr_stmt|;
+name|tester1
+operator|.
+name|checkQuery
+argument_list|(
+literal|"select deptno, count(*) from EMP group by DEPTNO"
+argument_list|)
+expr_stmt|;
+block|}
 comment|/** Tests matching of built-in operator names. */
 annotation|@
 name|Test

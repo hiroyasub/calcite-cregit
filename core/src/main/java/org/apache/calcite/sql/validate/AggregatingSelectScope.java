@@ -461,7 +461,6 @@ operator|.
 name|getGroup
 argument_list|()
 decl_stmt|;
-comment|//          SqlValidatorUtil.DeepCopier.copy(parent, select.getGroup());
 for|for
 control|(
 name|SqlNode

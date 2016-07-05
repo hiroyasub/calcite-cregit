@@ -1483,7 +1483,7 @@ name|fields
 expr_stmt|;
 block|}
 block|}
-comment|/** Parse tree node for GROUP statement.    *    *<p>Syntax:    *<blockquote>    *<code>alias = GROUP alias    *   ( ALL | BY ( exp | '(' exp [, exp]... ')' ) );</code>    *</blockquote>    */
+comment|/** Parse tree node for GROUP statement.    *    *<p>Syntax:    *<blockquote>    *<code>alias = GROUP alias    *   ( ALL | BY ( exp | '(' exp [, exp]... ')' ) )</code>    *</blockquote>    */
 specifier|public
 specifier|static
 class|class
