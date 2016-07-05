@@ -20161,11 +20161,60 @@ argument_list|,
 literal|"Expression 'EMPNO' is not being grouped"
 argument_list|)
 expr_stmt|;
+block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-319">[CALCITE-319]    * Table aliases should follow case-sensitivity policy</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testCaseInsensitiveTableAlias
+parameter_list|()
+block|{
+specifier|final
+name|SqlTester
+name|tester1
+init|=
+name|tester
+operator|.
+name|withCaseSensitive
+argument_list|(
+literal|false
+argument_list|)
+operator|.
+name|withQuoting
+argument_list|(
+name|Quoting
+operator|.
+name|BRACKET
+argument_list|)
+decl_stmt|;
+specifier|final
+name|SqlTester
+name|tester2
+init|=
+name|tester
+operator|.
+name|withQuoting
+argument_list|(
+name|Quoting
+operator|.
+name|BRACKET
+argument_list|)
+decl_stmt|;
 comment|// Table aliases should follow case-sensitivity preference.
 comment|//
 comment|// In MySQL, table aliases are case-insensitive:
 comment|// mysql> select `D`.day from DAYS as `d`, DAYS as `D`;
 comment|// ERROR 1066 (42000): Not unique table/alias: 'D'
+name|tester1
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"select count(*) from dept as [D], ^dept as [d]^"
+argument_list|,
+literal|"Duplicate relation name 'd' in FROM clause"
+argument_list|)
+expr_stmt|;
 name|tester2
 operator|.
 name|checkQuery
@@ -20173,23 +20222,13 @@ argument_list|(
 literal|"select count(*) from dept as [D], dept as [d]"
 argument_list|)
 expr_stmt|;
-if|if
-condition|(
-operator|!
-name|Bug
-operator|.
-name|CALCITE_319_FIXED
-condition|)
-block|{
-return|return;
-block|}
-name|tester1
+name|tester2
 operator|.
 name|checkQueryFails
 argument_list|(
-literal|"select count(*) from dept as [D], dept as [d]"
+literal|"select count(*) from dept as [D], ^dept as [D]^"
 argument_list|,
-literal|"xxx"
+literal|"Duplicate relation name 'D' in FROM clause"
 argument_list|)
 expr_stmt|;
 block|}
