@@ -131,6 +131,20 @@ name|Objects
 import|;
 end_import
 
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|concurrent
+operator|.
+name|atomic
+operator|.
+name|AtomicBoolean
+import|;
+end_import
+
 begin_comment
 comment|/**  * Implementation of {@link java.sql.Statement}  * for the Avatica engine.  */
 end_comment
@@ -167,6 +181,12 @@ decl_stmt|;
 specifier|protected
 name|boolean
 name|closed
+decl_stmt|;
+comment|/** Support for {@link #cancel()} method. */
+specifier|protected
+specifier|final
+name|AtomicBoolean
+name|cancelFlag
 decl_stmt|;
 comment|/**    * Support for {@link #closeOnCompletion()} method.    */
 specifier|protected
@@ -432,6 +452,36 @@ name|ArrayList
 argument_list|<>
 argument_list|()
 expr_stmt|;
+try|try
+block|{
+name|this
+operator|.
+name|cancelFlag
+operator|=
+name|connection
+operator|.
+name|getCancelFlag
+argument_list|(
+name|h
+argument_list|)
+expr_stmt|;
+block|}
+catch|catch
+parameter_list|(
+name|NoSuchStatementException
+name|e
+parameter_list|)
+block|{
+throw|throw
+operator|new
+name|AssertionError
+argument_list|(
+literal|"no statement"
+argument_list|,
+name|e
+argument_list|)
+throw|;
+block|}
 block|}
 comment|/** Returns the identifier of the statement, unique within its connection. */
 specifier|public
@@ -1309,6 +1359,16 @@ name|cancel
 argument_list|()
 expr_stmt|;
 block|}
+comment|// If there is an open result set, it probably just set the same flag.
+name|cancelFlag
+operator|.
+name|compareAndSet
+argument_list|(
+literal|false
+argument_list|,
+literal|true
+argument_list|)
+expr_stmt|;
 block|}
 specifier|public
 name|SQLWarning

@@ -393,6 +393,7 @@ specifier|private
 name|Cursor
 name|timeoutCursor
 decl_stmt|;
+comment|/** Creates an {@link AvaticaResultSet}. */
 specifier|public
 name|AvaticaResultSet
 parameter_list|(
@@ -677,7 +678,7 @@ expr_stmt|;
 comment|// TODO: for timeout, see IteratorResultSet.close
 comment|/*         if (timeoutCursor != null) {             final long noTimeout = 0;             timeoutCursor.close(noTimeout);             timeoutCursor = null;         } */
 block|}
-comment|/**    * Sets the timeout that this result set will wait for a row from the    * underlying iterator.    *    *<p>Not a JDBC method.</p>    *    * @param timeoutMillis Timeout in milliseconds. Must be greater than zero.    */
+comment|/**    * Sets the timeout that this result set will wait for a row from the    * underlying iterator.    *    *<p>Not a JDBC method.    *    * @param timeoutMillis Timeout in milliseconds. Must be greater than zero.    */
 name|void
 name|setTimeout
 parameter_list|(
@@ -715,18 +716,23 @@ expr_stmt|;
 comment|// TODO: for timeout, see IteratorResultSet.setTimeout
 comment|/*         timeoutCursor = new TimeoutCursor(timeoutMillis);         timeoutCursor.start(); */
 block|}
-comment|// not JDBC
+comment|/** Sets the flag to indicate that cancel has been requested.    *    *<p>The implementation should check this flag periodically and cease    * processing.    *    *<p>Not a JDBC method. */
 specifier|protected
 name|void
 name|cancel
 parameter_list|()
 block|{
-throw|throw
-operator|new
-name|UnsupportedOperationException
-argument_list|()
-throw|;
-comment|// TODO:
+name|statement
+operator|.
+name|cancelFlag
+operator|.
+name|compareAndSet
+argument_list|(
+literal|false
+argument_list|,
+literal|true
+argument_list|)
+expr_stmt|;
 block|}
 comment|/**    * Executes this result set. (Not a JDBC method.)    *    *<p>Note that execute cannot occur in the constructor, because the    * constructor occurs while the statement is locked, to make sure that    * execute/cancel don't happen at the same time.</p>    *    * @see org.apache.calcite.avatica.AvaticaConnection.Trojan#execute(AvaticaResultSet)    *    * @throws SQLException if execute fails for some reason.    */
 specifier|protected
@@ -916,6 +922,24 @@ operator|new
 name|SQLException
 argument_list|(
 literal|"next() called on closed cursor"
+argument_list|)
+throw|;
+block|}
+if|if
+condition|(
+name|statement
+operator|.
+name|cancelFlag
+operator|.
+name|get
+argument_list|()
+condition|)
+block|{
+throw|throw
+operator|new
+name|SQLException
+argument_list|(
+literal|"Statement canceled"
 argument_list|)
 throw|;
 block|}

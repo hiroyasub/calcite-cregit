@@ -572,6 +572,42 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+comment|/**    * Use this method to flag temporary code.    *    *<p>Example #1:    *<blockquote><pre>    * if (AvaticaUtils.remark("baz fixed") == null) {    *   baz();    * }</pre></blockquote>    *    *<p>Example #2:    *<blockquote><pre>    * /&#42;&#42;&#64;see AvaticaUtils#remark Remove before checking in&#42;/    * void uselessMethod() {}    *</pre></blockquote>    */
+specifier|public
+specifier|static
+parameter_list|<
+name|T
+parameter_list|>
+name|T
+name|remark
+parameter_list|(
+name|T
+name|remark
+parameter_list|)
+block|{
+return|return
+name|remark
+return|;
+block|}
+comment|/**    * Use this method to flag code that should be re-visited after upgrading    * a component.    *    *<p>If the intended change is that a class or member be removed, flag    * instead using a {@link Deprecated} annotation followed by a comment such as    * "to be removed before 2.0".    */
+specifier|public
+specifier|static
+name|boolean
+name|upgrade
+parameter_list|(
+name|String
+name|remark
+parameter_list|)
+block|{
+name|discard
+argument_list|(
+name|remark
+argument_list|)
+expr_stmt|;
+return|return
+literal|false
+return|;
+block|}
 comment|/**    * Adapts a primitive array into a {@link List}. For example,    * {@code asList(new double[2])} returns a {@code List&lt;Double&gt;}.    */
 specifier|public
 specifier|static
