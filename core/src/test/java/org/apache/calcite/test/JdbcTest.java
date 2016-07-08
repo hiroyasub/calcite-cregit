@@ -18723,7 +18723,80 @@ name|resultSet
 argument_list|)
 argument_list|)
 expr_stmt|;
+comment|// Now BETWEEN, with 3 arguments, 2 of which are parameters
+specifier|final
+name|String
+name|sql2
+init|=
+literal|"select \"deptno\", \"name\" "
+operator|+
+literal|"from \"hr\".\"emps\"\n"
+operator|+
+literal|"where \"deptno\" between symmetric ? and ?\n"
+operator|+
+literal|"order by 2"
+decl_stmt|;
+specifier|final
+name|PreparedStatement
+name|preparedStatement2
+init|=
+name|connection
+operator|.
+name|prepareStatement
+argument_list|(
+name|sql2
+argument_list|)
+decl_stmt|;
+name|preparedStatement2
+operator|.
+name|setInt
+argument_list|(
+literal|1
+argument_list|,
+literal|15
+argument_list|)
+expr_stmt|;
+name|preparedStatement2
+operator|.
+name|setInt
+argument_list|(
+literal|2
+argument_list|,
+literal|5
+argument_list|)
+expr_stmt|;
 name|resultSet
+operator|=
+name|preparedStatement2
+operator|.
+name|executeQuery
+argument_list|()
+expr_stmt|;
+name|assertThat
+argument_list|(
+name|CalciteAssert
+operator|.
+name|toString
+argument_list|(
+name|resultSet
+argument_list|)
+argument_list|,
+name|is
+argument_list|(
+literal|"deptno=10; name=Bill\n"
+operator|+
+literal|"deptno=10; name=Sebastian\n"
+operator|+
+literal|"deptno=10; name=Theodore\n"
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|resultSet
+operator|.
+name|close
+argument_list|()
+expr_stmt|;
+name|preparedStatement2
 operator|.
 name|close
 argument_list|()

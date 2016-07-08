@@ -17938,6 +17938,57 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1310">[CALCITE-1310]    * Infer type of arguments to BETWEEN operator</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testBindBetween
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"select * from emp where ename between ? and ?"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select * from emp where deptno between ? and ?"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select * from emp where ? between deptno and ?"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select * from emp where ? between ? and deptno"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select * from emp where ^?^ between ? and ?"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Illegal use of dynamic parameter"
+argument_list|)
+expr_stmt|;
+block|}
 annotation|@
 name|Test
 specifier|public
