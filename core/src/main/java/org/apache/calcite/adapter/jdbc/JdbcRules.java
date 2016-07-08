@@ -827,9 +827,7 @@ name|calcite
 operator|.
 name|sql
 operator|.
-name|fun
-operator|.
-name|SqlStdOperatorTable
+name|SqlKind
 import|;
 end_import
 
@@ -1054,7 +1052,7 @@ specifier|static
 specifier|final
 name|ImmutableList
 argument_list|<
-name|SqlAggFunction
+name|SqlKind
 argument_list|>
 name|AGG_FUNCS
 decl_stmt|;
@@ -1062,7 +1060,7 @@ specifier|static
 specifier|final
 name|ImmutableList
 argument_list|<
-name|SqlAggFunction
+name|SqlKind
 argument_list|>
 name|MYSQL_AGG_FUNCS
 decl_stmt|;
@@ -1072,7 +1070,7 @@ name|ImmutableList
 operator|.
 name|Builder
 argument_list|<
-name|SqlAggFunction
+name|SqlKind
 argument_list|>
 name|builder
 init|=
@@ -1085,7 +1083,7 @@ name|builder
 operator|.
 name|add
 argument_list|(
-name|SqlStdOperatorTable
+name|SqlKind
 operator|.
 name|COUNT
 argument_list|)
@@ -1094,7 +1092,7 @@ name|builder
 operator|.
 name|add
 argument_list|(
-name|SqlStdOperatorTable
+name|SqlKind
 operator|.
 name|SUM
 argument_list|)
@@ -1103,7 +1101,7 @@ name|builder
 operator|.
 name|add
 argument_list|(
-name|SqlStdOperatorTable
+name|SqlKind
 operator|.
 name|SUM0
 argument_list|)
@@ -1112,7 +1110,7 @@ name|builder
 operator|.
 name|add
 argument_list|(
-name|SqlStdOperatorTable
+name|SqlKind
 operator|.
 name|MIN
 argument_list|)
@@ -1121,7 +1119,7 @@ name|builder
 operator|.
 name|add
 argument_list|(
-name|SqlStdOperatorTable
+name|SqlKind
 operator|.
 name|MAX
 argument_list|)
@@ -1137,7 +1135,7 @@ name|builder
 operator|.
 name|add
 argument_list|(
-name|SqlStdOperatorTable
+name|SqlKind
 operator|.
 name|SINGLE_VALUE
 argument_list|)
@@ -2855,6 +2853,9 @@ operator|.
 name|contains
 argument_list|(
 name|aggregation
+operator|.
+name|getKind
+argument_list|()
 argument_list|)
 return|;
 default|default:
@@ -2864,6 +2865,9 @@ operator|.
 name|contains
 argument_list|(
 name|aggregation
+operator|.
+name|getKind
+argument_list|()
 argument_list|)
 return|;
 block|}
