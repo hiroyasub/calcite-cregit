@@ -72,8 +72,6 @@ name|ImmutableList
 argument_list|<
 name|List
 argument_list|<
-name|?
-extends|extends
 name|T
 argument_list|>
 argument_list|>
@@ -87,8 +85,6 @@ name|ImmutableList
 argument_list|<
 name|List
 argument_list|<
-name|?
-extends|extends
 name|T
 argument_list|>
 argument_list|>
@@ -103,6 +99,8 @@ name|lists
 expr_stmt|;
 block|}
 comment|/**    * Creates a CompositeList.    *    * @param lists Constituent lists    * @param<T>   Element type    * @return List consisting of all lists    */
+annotation|@
+name|SafeVarargs
 specifier|public
 specifier|static
 parameter_list|<
@@ -124,6 +122,7 @@ modifier|...
 name|lists
 parameter_list|)
 block|{
+comment|//noinspection unchecked
 return|return
 operator|new
 name|CompositeList
@@ -131,12 +130,65 @@ argument_list|<
 name|T
 argument_list|>
 argument_list|(
+operator|(
+name|ImmutableList
+operator|)
 name|ImmutableList
 operator|.
 name|copyOf
 argument_list|(
 name|lists
 argument_list|)
+argument_list|)
+return|;
+block|}
+comment|/**    * Creates a CompositeList.    *    * @param lists Constituent lists    * @param<T>   Element type    * @return List consisting of all lists    */
+specifier|public
+specifier|static
+parameter_list|<
+name|T
+parameter_list|>
+name|CompositeList
+argument_list|<
+name|T
+argument_list|>
+name|ofCopy
+parameter_list|(
+name|Iterable
+argument_list|<
+name|List
+argument_list|<
+name|T
+argument_list|>
+argument_list|>
+name|lists
+parameter_list|)
+block|{
+specifier|final
+name|ImmutableList
+argument_list|<
+name|List
+argument_list|<
+name|T
+argument_list|>
+argument_list|>
+name|list
+init|=
+name|ImmutableList
+operator|.
+name|copyOf
+argument_list|(
+name|lists
+argument_list|)
+decl_stmt|;
+return|return
+operator|new
+name|CompositeList
+argument_list|<
+name|T
+argument_list|>
+argument_list|(
+name|list
 argument_list|)
 return|;
 block|}
@@ -212,6 +264,7 @@ argument_list|>
 name|list1
 parameter_list|)
 block|{
+comment|//noinspection unchecked
 return|return
 operator|new
 name|CompositeList
@@ -219,6 +272,9 @@ argument_list|<
 name|T
 argument_list|>
 argument_list|(
+operator|(
+name|ImmutableList
+operator|)
 name|ImmutableList
 operator|.
 name|of
@@ -267,6 +323,7 @@ argument_list|>
 name|list2
 parameter_list|)
 block|{
+comment|//noinspection unchecked
 return|return
 operator|new
 name|CompositeList
@@ -274,6 +331,9 @@ argument_list|<
 name|T
 argument_list|>
 argument_list|(
+operator|(
+name|ImmutableList
+operator|)
 name|ImmutableList
 operator|.
 name|of
