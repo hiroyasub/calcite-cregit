@@ -37,6 +37,18 @@ name|apache
 operator|.
 name|http
 operator|.
+name|NoHttpResponseException
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|http
+operator|.
 name|auth
 operator|.
 name|AuthSchemeProvider
@@ -989,6 +1001,22 @@ operator|+
 name|statusCode
 argument_list|)
 throw|;
+block|}
+catch|catch
+parameter_list|(
+name|NoHttpResponseException
+name|e
+parameter_list|)
+block|{
+comment|// This can happen when sitting behind a load balancer and a backend server dies
+name|LOG
+operator|.
+name|debug
+argument_list|(
+literal|"The server failed to issue an HTTP response, retrying"
+argument_list|)
+expr_stmt|;
+continue|continue;
 block|}
 catch|catch
 parameter_list|(
