@@ -1778,7 +1778,7 @@ literal|130
 argument_list|,
 name|SqlToRelConverter
 operator|.
-name|IN_SUBQUERY_THRESHOLD
+name|DEFAULT_IN_SUBQUERY_THRESHOLD
 operator|-
 literal|5
 argument_list|)
@@ -1801,7 +1801,7 @@ literal|130
 argument_list|,
 name|SqlToRelConverter
 operator|.
-name|IN_SUBQUERY_THRESHOLD
+name|DEFAULT_IN_SUBQUERY_THRESHOLD
 argument_list|)
 argument_list|,
 literal|"smart"
@@ -1822,7 +1822,7 @@ literal|130
 argument_list|,
 name|SqlToRelConverter
 operator|.
-name|IN_SUBQUERY_THRESHOLD
+name|DEFAULT_IN_SUBQUERY_THRESHOLD
 operator|+
 literal|1000
 argument_list|)
@@ -1862,7 +1862,7 @@ literal|130
 argument_list|,
 name|SqlToRelConverter
 operator|.
-name|IN_SUBQUERY_THRESHOLD
+name|DEFAULT_IN_SUBQUERY_THRESHOLD
 argument_list|)
 decl_stmt|;
 name|checkSql
