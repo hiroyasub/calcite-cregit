@@ -65,6 +65,20 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|util
+operator|.
+name|Compatible
+import|;
+end_import
+
+begin_import
+import|import
 name|com
 operator|.
 name|google
@@ -130,20 +144,6 @@ operator|.
 name|collect
 operator|.
 name|ImmutableSet
-import|;
-end_import
-
-begin_import
-import|import
-name|com
-operator|.
-name|google
-operator|.
-name|common
-operator|.
-name|collect
-operator|.
-name|Maps
 import|;
 end_import
 
@@ -302,7 +302,9 @@ name|coordinatorUrl
 argument_list|)
 decl_stmt|;
 return|return
-name|Maps
+name|Compatible
+operator|.
+name|INSTANCE
 operator|.
 name|asMap
 argument_list|(

@@ -188,7 +188,7 @@ operator|.
 name|create
 argument_list|()
 decl_stmt|;
-comment|/** Same as Guava {@code Maps.asMap(set, function)}. */
+comment|/** Same as Guava {@code Maps.asMap(set, function)} (introduced in    * Guava 14.0). */
 parameter_list|<
 name|K
 parameter_list|,
@@ -219,7 +219,7 @@ argument_list|>
 name|function
 parameter_list|)
 function_decl|;
-comment|/** Converts a {@link com.google.common.collect.ImmutableSortedSet} to a    * {@link java.util.NavigableSet}. */
+comment|/** Converts a {@link com.google.common.collect.ImmutableSortedSet} to a    * {@link java.util.NavigableSet}.  (In Guava 12 and later, ImmutableSortedSet    * implements NavigableSet.) */
 parameter_list|<
 name|E
 parameter_list|>
@@ -236,7 +236,7 @@ argument_list|>
 name|set
 parameter_list|)
 function_decl|;
-comment|/** Converts a {@link com.google.common.collect.ImmutableSortedMap} to a    * {@link java.util.NavigableMap}. */
+comment|/** Converts a {@link com.google.common.collect.ImmutableSortedMap} to a    * {@link java.util.NavigableMap}. (In Guava 12 and later, ImmutableSortedMap    * implements NavigableMap.) */
 parameter_list|<
 name|K
 parameter_list|,
@@ -284,6 +284,11 @@ parameter_list|)
 function_decl|;
 comment|/** Calls {@link java.sql.Connection}{@code .setSchema(String)}.    *    *<p>This method is available in JDK 1.7 and above, and in    * {@link org.apache.calcite.jdbc.CalciteConnection} in all JDK versions. */
 annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"unused"
+argument_list|)
+annotation|@
 name|Deprecated
 comment|// to be removed before 2.0
 name|void
@@ -296,7 +301,7 @@ name|String
 name|schema
 parameter_list|)
 function_decl|;
-comment|/** Calls {@link Method}.{@code getParameters()[i].getName()}. */
+comment|/** Calls the {@link Method}.{@code getParameters()[i].getName()} method    * (introduced in JDK 1.8). */
 name|String
 name|getParameterName
 parameter_list|(
@@ -379,6 +384,7 @@ block|{
 comment|// Use the Guava implementation Maps.asMap if it is available
 try|try
 block|{
+comment|//noinspection ConfusingArgumentToVarargsMethod
 specifier|final
 name|Method
 name|guavaMethod
