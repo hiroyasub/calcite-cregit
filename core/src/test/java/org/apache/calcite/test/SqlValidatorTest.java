@@ -10179,7 +10179,7 @@ argument_list|)
 expr_stmt|;
 comment|// Test specified collation, window clause syntax rule 4,5.
 block|}
-comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-820">[CALCITE-820]    * Validate that window functions have OVER clause</a>. */
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-820">[CALCITE-820]    * Validate that window functions have OVER clause</a>, and    *<a href="https://issues.apache.org/jira/browse/CALCITE-1340">[CALCITE-1340]    * Window aggregates give invalid errors</a>. */
 annotation|@
 name|Test
 specifier|public
@@ -10215,6 +10215,9 @@ argument_list|(
 literal|"OVER clause is necessary for window functions"
 argument_list|)
 expr_stmt|;
+comment|// With [CALCITE-1340], the validator would see RANK without OVER,
+comment|// mistakenly think this is an aggregating query, and wrongly complain
+comment|// about the PARTITION BY: "Expression 'DEPTNO' is not being grouped"
 name|winSql
 argument_list|(
 literal|"select cume_dist() over w , ^rank()^\n"
@@ -13696,7 +13699,7 @@ argument_list|)
 operator|.
 name|fails
 argument_list|(
-literal|"Expression 'EMPNO' is not being grouped"
+literal|"Argument to GROUPING operator must be a grouped expression"
 argument_list|)
 expr_stmt|;
 name|sql
@@ -13926,7 +13929,7 @@ argument_list|)
 operator|.
 name|fails
 argument_list|(
-literal|"Expression 'EMPNO' is not being grouped"
+literal|"Argument to GROUPING_ID operator must be a grouped expression"
 argument_list|)
 expr_stmt|;
 name|sql
@@ -17216,23 +17219,62 @@ name|void
 name|testNestedAggOver
 parameter_list|()
 block|{
-comment|// windowed agg applied to agg is OK
-name|check
+name|sql
 argument_list|(
 literal|"select sum(max(empno))\n"
 operator|+
-literal|"  OVER (order by deptno ROWS 2 PRECEDING)\n"
+literal|" OVER (order by ^deptno^ ROWS 2 PRECEDING)\n"
 operator|+
-literal|"from emp"
+literal|" from emp"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Expression 'DEPTNO' is not being grouped"
 argument_list|)
 expr_stmt|;
-name|check
+name|sql
 argument_list|(
 literal|"select sum(max(empno)) OVER w\n"
 operator|+
-literal|"from emp\n"
+literal|" from emp\n"
 operator|+
-literal|"window w as (order by deptno ROWS 2 PRECEDING)"
+literal|" window w as (order by ^deptno^ ROWS 2 PRECEDING)"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Expression 'DEPTNO' is not being grouped"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select sum(max(empno)) OVER w2, sum(deptno) OVER w1\n"
+operator|+
+literal|" from emp group by deptno\n"
+operator|+
+literal|" window w1 as (partition by ^empno^ ROWS 2 PRECEDING),\n"
+operator|+
+literal|" w2 as (order by deptno ROWS 2 PRECEDING)"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Expression 'EMP.EMPNO' is not being grouped"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select avg(count(empno)) over w\n"
+operator|+
+literal|"from emp group by deptno\n"
+operator|+
+literal|"window w as (partition by deptno order by ^empno^)"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Expression 'EMPNO' is not being grouped"
 argument_list|)
 expr_stmt|;
 comment|// in OVER clause with more than one level of nesting
@@ -17243,6 +17285,316 @@ operator|+
 literal|"from emp group by deptno"
 argument_list|,
 name|ERR_NESTED_AGG
+argument_list|)
+expr_stmt|;
+comment|// OVER clause columns not appearing in GROUP BY clause NOT OK
+name|sql
+argument_list|(
+literal|"select avg(^sal^) OVER (), avg(count(empno)) OVER (partition by 1)\n"
+operator|+
+literal|" from emp"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Expression 'SAL' is not being grouped"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select avg(^sal^) OVER (), avg(count(empno)) OVER (partition by deptno)\n"
+operator|+
+literal|" from emp group by deptno"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Expression 'SAL' is not being grouped"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select avg(deptno) OVER (partition by ^empno^),\n"
+operator|+
+literal|" avg(count(empno)) OVER (partition by deptno)\n"
+operator|+
+literal|" from emp group by deptno"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Expression 'EMPNO' is not being grouped"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select avg(deptno) OVER (order by ^empno^),\n"
+operator|+
+literal|" avg(count(empno)) OVER (partition by deptno)\n"
+operator|+
+literal|" from emp group by deptno"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Expression 'EMPNO' is not being grouped"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select avg(sum(sal)) OVER (partition by ^empno^)\n"
+operator|+
+literal|" from emp"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Expression 'EMPNO' is not being grouped"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select avg(sum(sal)) OVER (partition by ^empno^)\n"
+operator|+
+literal|"from emp group by deptno"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Expression 'EMPNO' is not being grouped"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select avg(sum(sal)) OVER (partition by ^empno^)\n"
+operator|+
+literal|" from emp"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Expression 'EMPNO' is not being grouped"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select avg(sum(sal)) OVER (partition by ^empno^)\n"
+operator|+
+literal|"from emp group by deptno"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Expression 'EMPNO' is not being grouped"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select avg(sum(sal)) OVER (partition by deptno order by ^empno^)\n"
+operator|+
+literal|"from emp group by deptno"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Expression 'EMPNO' is not being grouped"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select avg(^sal^) OVER (),\n"
+operator|+
+literal|" avg(count(empno)) OVER (partition by min(deptno))\n"
+operator|+
+literal|" from emp"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Expression 'SAL' is not being grouped"
+argument_list|)
+expr_stmt|;
+name|check
+argument_list|(
+literal|"select avg(deptno) OVER (),\n"
+operator|+
+literal|" avg(count(empno)) OVER (partition by deptno)"
+operator|+
+literal|" from emp group by deptno"
+argument_list|)
+expr_stmt|;
+comment|// COUNT(*), PARTITION BY(CONST) with GROUP BY is OK
+name|check
+argument_list|(
+literal|"select avg(count(*)) OVER ()\n"
+operator|+
+literal|" from emp group by deptno"
+argument_list|)
+expr_stmt|;
+name|check
+argument_list|(
+literal|"select count(*) OVER ()\n"
+operator|+
+literal|" from emp group by deptno"
+argument_list|)
+expr_stmt|;
+name|check
+argument_list|(
+literal|"select count(deptno) OVER ()\n"
+operator|+
+literal|" from emp group by deptno"
+argument_list|)
+expr_stmt|;
+name|check
+argument_list|(
+literal|"select count(deptno, deptno + 1) OVER ()\n"
+operator|+
+literal|" from emp group by deptno"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select count(deptno, deptno + 1, ^empno^) OVER ()\n"
+operator|+
+literal|" from emp group by deptno"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Expression 'EMPNO' is not being grouped"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select count(emp.^*^)\n"
+operator|+
+literal|"from emp group by deptno"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Unknown field '\\*'"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select count(emp.^*^) OVER ()\n"
+operator|+
+literal|"from emp group by deptno"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Unknown field '\\*'"
+argument_list|)
+expr_stmt|;
+name|check
+argument_list|(
+literal|"select avg(count(*)) OVER (partition by 1)\n"
+operator|+
+literal|" from emp group by deptno"
+argument_list|)
+expr_stmt|;
+name|check
+argument_list|(
+literal|"select avg(sum(sal)) OVER (partition by 1)\n"
+operator|+
+literal|" from emp"
+argument_list|)
+expr_stmt|;
+name|check
+argument_list|(
+literal|"select avg(sal), avg(count(empno)) OVER (partition by 1)\n"
+operator|+
+literal|" from emp"
+argument_list|)
+expr_stmt|;
+comment|// expression is OK
+name|check
+argument_list|(
+literal|"select avg(sum(sal)) OVER (partition by 10 - deptno\n"
+operator|+
+literal|"   order by deptno / 2 desc)\n"
+operator|+
+literal|"from emp group by deptno"
+argument_list|)
+expr_stmt|;
+name|check
+argument_list|(
+literal|"select avg(sal),\n"
+operator|+
+literal|" avg(count(empno)) OVER (partition by min(deptno))\n"
+operator|+
+literal|" from emp"
+argument_list|)
+expr_stmt|;
+name|check
+argument_list|(
+literal|"select avg(min(sal)) OVER (),\n"
+operator|+
+literal|" avg(count(empno)) OVER (partition by min(deptno))\n"
+operator|+
+literal|" from emp"
+argument_list|)
+expr_stmt|;
+comment|// expression involving non-GROUP column is not OK
+name|sql
+argument_list|(
+literal|"select avg(2+^sal^) OVER (partition by deptno)\n"
+operator|+
+literal|"from emp group by deptno"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Expression 'SAL' is not being grouped"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select avg(sum(sal)) OVER (partition by deptno + ^empno^)\n"
+operator|+
+literal|"from emp group by deptno"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Expression 'EMPNO' is not being grouped"
+argument_list|)
+expr_stmt|;
+name|check
+argument_list|(
+literal|"select avg(sum(sal)) OVER (partition by empno + deptno)\n"
+operator|+
+literal|"from emp group by empno + deptno"
+argument_list|)
+expr_stmt|;
+name|check
+argument_list|(
+literal|"select avg(sum(sal)) OVER (partition by empno + deptno + 1)\n"
+operator|+
+literal|"from emp group by empno + deptno"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select avg(sum(sal)) OVER (partition by ^deptno^ + 1)\n"
+operator|+
+literal|"from emp group by empno + deptno"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Expression 'DEPTNO' is not being grouped"
+argument_list|)
+expr_stmt|;
+name|check
+argument_list|(
+literal|"select avg(empno + deptno) OVER (partition by empno + deptno + 1),\n"
+operator|+
+literal|" count(empno + deptno) OVER (partition by empno + deptno + 1)\n"
+operator|+
+literal|" from emp group by empno + deptno"
 argument_list|)
 expr_stmt|;
 comment|// OVER in clause

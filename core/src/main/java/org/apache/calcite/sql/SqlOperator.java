@@ -2251,6 +2251,16 @@ return|return
 literal|false
 return|;
 block|}
+comment|/** Returns whether this is a window function that requires an OVER clause.    *    *<p>For example, returns true for {@code RANK}, {@code DENSE_RANK} and    * other ranking functions; returns false for {@code SUM}, {@code COUNT},    * {@code MIN}, {@code MAX}, {@code AVG} (they can be used as non-window    * aggregate functions).    *    *<p>If {@code requiresOver} returns true, then {@link #isAggregator()} must    * also return true.    *    * @see #allowsFraming()    * @see #requiresOrder()    */
+specifier|public
+name|boolean
+name|requiresOver
+parameter_list|()
+block|{
+return|return
+literal|false
+return|;
+block|}
 comment|/**    * Returns whether this is a window function that requires ordering.    *    *<p>Per SQL:2011, 2, 6.10: "If&lt;ntile function&gt;,&lt;lead or lag    * function&gt;, RANK or DENSE_RANK is specified, then the window ordering    * clause shall be present."</p>    *    * @see #isAggregator()    */
 specifier|public
 name|boolean

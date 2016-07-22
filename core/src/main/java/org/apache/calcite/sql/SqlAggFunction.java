@@ -305,7 +305,7 @@ name|boolean
 name|requiresOrder
 parameter_list|,
 name|boolean
-name|requireOver
+name|requiresOver
 parameter_list|)
 block|{
 name|super
@@ -337,7 +337,7 @@ name|this
 operator|.
 name|requiresOver
 operator|=
-name|requireOver
+name|requiresOver
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
@@ -451,7 +451,8 @@ return|return
 name|requiresOrder
 return|;
 block|}
-comment|/** Returns whether this is a window function that requires an OVER clause.    *    *<p>For example, {@code RANK} and {@code DENSE_RANK} require an OVER clause;    * {@code SUM} does not (it can be used as a non-window aggregate function).    *    * @see #allowsFraming()    * @see #requiresOrder()    */
+annotation|@
+name|Override
 specifier|public
 specifier|final
 name|boolean

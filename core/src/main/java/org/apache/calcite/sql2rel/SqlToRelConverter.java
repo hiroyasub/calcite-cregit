@@ -21783,27 +21783,6 @@ operator|.
 name|OVER
 condition|)
 block|{
-if|if
-condition|(
-name|call
-operator|.
-name|operand
-argument_list|(
-literal|0
-argument_list|)
-operator|.
-name|getKind
-argument_list|()
-operator|==
-name|SqlKind
-operator|.
-name|RANK
-condition|)
-block|{
-return|return
-literal|null
-return|;
-block|}
 comment|// Track aggregate nesting levels only within an OVER operator.
 name|inOver
 operator|=
