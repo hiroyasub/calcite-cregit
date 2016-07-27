@@ -575,6 +575,20 @@ end_import
 
 begin_import
 import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|collect
+operator|.
+name|ImmutableMap
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -589,7 +603,7 @@ name|java
 operator|.
 name|util
 operator|.
-name|Collections
+name|List
 import|;
 end_import
 
@@ -599,7 +613,7 @@ name|java
 operator|.
 name|util
 operator|.
-name|List
+name|Map
 import|;
 end_import
 
@@ -1342,9 +1356,9 @@ name|result
 argument_list|(
 name|identifier
 argument_list|,
-name|Collections
+name|ImmutableList
 operator|.
-name|singletonList
+name|of
 argument_list|(
 name|Clause
 operator|.
@@ -1352,6 +1366,8 @@ name|FROM
 argument_list|)
 argument_list|,
 name|e
+argument_list|,
+literal|null
 argument_list|)
 return|;
 block|}
@@ -1639,9 +1655,9 @@ name|Clause
 argument_list|>
 name|clauses
 init|=
-name|Collections
+name|ImmutableList
 operator|.
-name|singletonList
+name|of
 argument_list|(
 name|Clause
 operator|.
@@ -1649,18 +1665,15 @@ name|SELECT
 argument_list|)
 decl_stmt|;
 specifier|final
-name|List
-argument_list|<
-name|Pair
+name|Map
 argument_list|<
 name|String
 argument_list|,
 name|RelDataType
 argument_list|>
-argument_list|>
 name|pairs
 init|=
-name|ImmutableList
+name|ImmutableMap
 operator|.
 name|of
 argument_list|()
@@ -1862,6 +1875,8 @@ argument_list|,
 name|clauses
 argument_list|,
 name|e
+argument_list|,
+literal|null
 argument_list|)
 return|;
 block|}

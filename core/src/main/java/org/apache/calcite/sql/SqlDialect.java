@@ -1572,6 +1572,29 @@ operator|.
 name|POSTGRESQL
 return|;
 block|}
+comment|/** Returns whether a qualified table in the FROM clause has an implicit alias    * which consists of just the table name.    *    *<p>For example, in {@link DatabaseProduct#ORACLE}    *    *<blockquote>SELECT * FROM sales.emp</blockquote>    *    *<p>is equivalent to    *    *<blockquote>SELECT * FROM sales.emp AS emp</blockquote>    *    *<p>and therefore    *    *<blockquote>SELECT emp.empno FROM sales.emp</blockquote>    *    *<p>is valid. But {@link DatabaseProduct#DB2} does not have an implicit    * alias, so the previous query it not valid; you need to write    *    *<blockquote>SELECT sales.emp.empno FROM sales.emp</blockquote>    *    *<p>Returns true for all databases except DB2.    */
+specifier|public
+name|boolean
+name|hasImplicitTableAlias
+parameter_list|()
+block|{
+switch|switch
+condition|(
+name|databaseProduct
+condition|)
+block|{
+case|case
+name|DB2
+case|:
+return|return
+literal|false
+return|;
+default|default:
+return|return
+literal|true
+return|;
+block|}
+block|}
 comment|/**    * Converts a timestamp to a SQL timestamp literal, e.g.    * {@code TIMESTAMP '2009-12-17 12:34:56'}.    *    *<p>Timestamp values do not have a time zone. We therefore interpret them    * as the number of milliseconds after the UTC epoch, and the formatted    * value is that time in UTC.    *    *<p>In particular,    *    *<blockquote><code>quoteTimestampLiteral(new Timestamp(0));</code>    *</blockquote>    *    * returns {@code TIMESTAMP '1970-01-01 00:00:00'}, regardless of the JVM's    * time zone.    *    * @param timestamp Timestamp    * @return SQL timestamp literal    */
 specifier|public
 name|String

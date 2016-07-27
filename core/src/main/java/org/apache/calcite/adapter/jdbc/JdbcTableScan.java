@@ -91,11 +91,15 @@ end_import
 
 begin_import
 import|import
-name|java
+name|com
 operator|.
-name|util
+name|google
 operator|.
-name|Collections
+name|common
+operator|.
+name|collect
+operator|.
+name|ImmutableList
 import|;
 end_import
 
@@ -229,9 +233,9 @@ operator|.
 name|tableName
 argument_list|()
 argument_list|,
-name|Collections
+name|ImmutableList
 operator|.
-name|singletonList
+name|of
 argument_list|(
 name|JdbcImplementor
 operator|.
@@ -241,6 +245,8 @@ name|FROM
 argument_list|)
 argument_list|,
 name|this
+argument_list|,
+literal|null
 argument_list|)
 return|;
 block|}

@@ -83,6 +83,22 @@ name|calcite
 operator|.
 name|sql
 operator|.
+name|SqlDialect
+operator|.
+name|DatabaseProduct
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
 name|SqlNode
 import|;
 end_import
@@ -537,8 +553,6 @@ literal|"select * from \"product\""
 decl_stmt|;
 name|checkRel2Sql
 argument_list|(
-name|this
-operator|.
 name|logicalPlanner
 argument_list|,
 name|query
@@ -561,8 +575,6 @@ literal|"select \"product_id\", \"product_class_id\" from \"product\""
 decl_stmt|;
 name|checkRel2Sql
 argument_list|(
-name|this
-operator|.
 name|logicalPlanner
 argument_list|,
 name|query
@@ -588,8 +600,6 @@ literal|"select \"product_id\", \"shelf_width\"  from \"product\" where \"produc
 decl_stmt|;
 name|checkRel2Sql
 argument_list|(
-name|this
-operator|.
 name|logicalPlanner
 argument_list|,
 name|query
@@ -620,8 +630,6 @@ literal|"AND (80>= \"shelf_width\" OR \"shelf_width\"> 30)"
 decl_stmt|;
 name|checkRel2Sql
 argument_list|(
-name|this
-operator|.
 name|logicalPlanner
 argument_list|,
 name|query
@@ -650,8 +658,6 @@ literal|"select count(*) from \"product\" group by \"product_class_id\", \"produ
 decl_stmt|;
 name|checkRel2Sql
 argument_list|(
-name|this
-operator|.
 name|logicalPlanner
 argument_list|,
 name|query
@@ -678,8 +684,6 @@ literal|"select min(\"net_weight\") from \"product\" group by \"product_class_id
 decl_stmt|;
 name|checkRel2Sql
 argument_list|(
-name|this
-operator|.
 name|logicalPlanner
 argument_list|,
 name|query
@@ -708,8 +712,6 @@ literal|" \"product\" group by \"product_class_id\""
 decl_stmt|;
 name|checkRel2Sql
 argument_list|(
-name|this
-operator|.
 name|logicalPlanner
 argument_list|,
 name|query
@@ -736,8 +738,6 @@ literal|"select sum(\"net_weight\") from \"product\" group by \"product_class_id
 decl_stmt|;
 name|checkRel2Sql
 argument_list|(
-name|this
-operator|.
 name|logicalPlanner
 argument_list|,
 name|query
@@ -766,8 +766,6 @@ literal|" from \"product\" group by \"product_class_id\" "
 decl_stmt|;
 name|checkRel2Sql
 argument_list|(
-name|this
-operator|.
 name|logicalPlanner
 argument_list|,
 name|query
@@ -796,8 +794,6 @@ literal|" from \"product\" group by \"product_class_id\" "
 decl_stmt|;
 name|checkRel2Sql
 argument_list|(
-name|this
-operator|.
 name|logicalPlanner
 argument_list|,
 name|query
@@ -826,8 +822,6 @@ literal|"by \"product_class_id\", \"product_id\"  "
 decl_stmt|;
 name|checkRel2Sql
 argument_list|(
-name|this
-operator|.
 name|logicalPlanner
 argument_list|,
 name|query
@@ -854,8 +848,6 @@ literal|"select count(*)  from \"product\" group by \"product_class_id\", \"prod
 decl_stmt|;
 name|checkRel2Sql
 argument_list|(
-name|this
-operator|.
 name|logicalPlanner
 argument_list|,
 name|query
@@ -884,8 +876,6 @@ literal|" \"product_id\"  having \"product_id\"> 10"
 decl_stmt|;
 name|checkRel2Sql
 argument_list|(
-name|this
-operator|.
 name|logicalPlanner
 argument_list|,
 name|query
@@ -916,8 +906,6 @@ literal|"select \"product_id\"  from \"product\" order by \"net_weight\""
 decl_stmt|;
 name|checkRel2Sql
 argument_list|(
-name|this
-operator|.
 name|logicalPlanner
 argument_list|,
 name|query
@@ -944,8 +932,6 @@ literal|"select \"product_id\", \"net_weight\" from \"product\" order by \"net_w
 decl_stmt|;
 name|checkRel2Sql
 argument_list|(
-name|this
-operator|.
 name|logicalPlanner
 argument_list|,
 name|query
@@ -972,8 +958,6 @@ literal|"select \"product_id\"  from \"product\" order by \"net_weight\", \"gros
 decl_stmt|;
 name|checkRel2Sql
 argument_list|(
-name|this
-operator|.
 name|logicalPlanner
 argument_list|,
 name|query
@@ -1002,8 +986,6 @@ literal|"\"gross_weight\" desc, \"low_fat\""
 decl_stmt|;
 name|checkRel2Sql
 argument_list|(
-name|this
-operator|.
 name|logicalPlanner
 argument_list|,
 name|query
@@ -1030,8 +1012,6 @@ literal|"select \"product_id\"  from \"product\" limit 100 offset 10"
 decl_stmt|;
 name|checkRel2Sql
 argument_list|(
-name|this
-operator|.
 name|logicalPlanner
 argument_list|,
 name|query
@@ -1067,8 +1047,6 @@ literal|"select \"product_id\"  from \"product\" limit 100 offset 10"
 decl_stmt|;
 name|checkRel2Sql
 argument_list|(
-name|this
-operator|.
 name|logicalPlanner
 argument_list|,
 name|query
@@ -1099,8 +1077,6 @@ literal|" limit 100 offset 10"
 decl_stmt|;
 name|checkRel2Sql
 argument_list|(
-name|this
-operator|.
 name|logicalPlanner
 argument_list|,
 name|query
@@ -1133,8 +1109,6 @@ literal|" offset 10 rows fetch next 100 rows only"
 decl_stmt|;
 name|checkRel2Sql
 argument_list|(
-name|this
-operator|.
 name|logicalPlanner
 argument_list|,
 name|query
@@ -1167,8 +1141,6 @@ literal|"group by \"product_id\", \"units_per_case\" order by \"units_per_case\"
 decl_stmt|;
 name|checkRel2Sql
 argument_list|(
-name|this
-operator|.
 name|logicalPlanner
 argument_list|,
 name|query
@@ -1205,8 +1177,6 @@ literal|"group by \"store_id\", \"position_title\""
 decl_stmt|;
 name|checkRel2Sql
 argument_list|(
-name|this
-operator|.
 name|logicalPlanner
 argument_list|,
 name|query
@@ -1249,8 +1219,6 @@ literal|"and pc.\"product_department\" = 'Snacks'\n"
 decl_stmt|;
 name|checkRel2Sql
 argument_list|(
-name|this
-operator|.
 name|logicalPlanner
 argument_list|,
 name|query
@@ -1293,8 +1261,6 @@ literal|"  where \"store_id\"< 150)"
 decl_stmt|;
 name|checkRel2Sql
 argument_list|(
-name|this
-operator|.
 name|logicalPlanner
 argument_list|,
 name|query
@@ -1308,6 +1274,530 @@ operator|+
 literal|"WHERE \"store_id\"< 150\nGROUP BY \"department_id\") AS \"t1\" "
 operator|+
 literal|"ON \"department\".\"department_id\" = \"t1\".\"department_id\""
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1332">[CALCITE-1332]    * DB2 should always use aliases for tables: x.y.z AS z</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testDb2DialectJoinStar
+parameter_list|()
+block|{
+name|String
+name|query
+init|=
+literal|"select * "
+operator|+
+literal|"from \"foodmart\".\"employee\" A "
+operator|+
+literal|"join \"foodmart\".\"department\" B\n"
+operator|+
+literal|"on A.\"department_id\" = B.\"department_id\""
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM foodmart.employee AS employee\n"
+operator|+
+literal|"INNER JOIN foodmart.department AS department "
+operator|+
+literal|"ON employee.department_id = department.department_id"
+decl_stmt|;
+name|checkRel2Sql
+argument_list|(
+name|logicalPlanner
+argument_list|,
+name|query
+argument_list|,
+name|expected
+argument_list|,
+name|DatabaseProduct
+operator|.
+name|DB2
+operator|.
+name|getDialect
+argument_list|()
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testDb2DialectSelfJoinStar
+parameter_list|()
+block|{
+name|String
+name|query
+init|=
+literal|"select * "
+operator|+
+literal|"from \"foodmart\".\"employee\" A join \"foodmart\".\"employee\" B\n"
+operator|+
+literal|"on A.\"department_id\" = B.\"department_id\""
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM foodmart.employee AS employee\n"
+operator|+
+literal|"INNER JOIN foodmart.employee AS employee0 "
+operator|+
+literal|"ON employee.department_id = employee0.department_id"
+decl_stmt|;
+name|checkRel2Sql
+argument_list|(
+name|logicalPlanner
+argument_list|,
+name|query
+argument_list|,
+name|expected
+argument_list|,
+name|DatabaseProduct
+operator|.
+name|DB2
+operator|.
+name|getDialect
+argument_list|()
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testDb2DialectJoin
+parameter_list|()
+block|{
+name|String
+name|query
+init|=
+literal|"select A.\"employee_id\", B.\"department_id\" "
+operator|+
+literal|"from \"foodmart\".\"employee\" A join \"foodmart\".\"department\" B\n"
+operator|+
+literal|"on A.\"department_id\" = B.\"department_id\""
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT"
+operator|+
+literal|" employee.employee_id, department.department_id\n"
+operator|+
+literal|"FROM foodmart.employee AS employee\n"
+operator|+
+literal|"INNER JOIN foodmart.department AS department "
+operator|+
+literal|"ON employee.department_id = department.department_id"
+decl_stmt|;
+name|checkRel2Sql
+argument_list|(
+name|logicalPlanner
+argument_list|,
+name|query
+argument_list|,
+name|expected
+argument_list|,
+name|DatabaseProduct
+operator|.
+name|DB2
+operator|.
+name|getDialect
+argument_list|()
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testDb2DialectSelfJoin
+parameter_list|()
+block|{
+name|String
+name|query
+init|=
+literal|"select A.\"employee_id\", B.\"employee_id\" from "
+operator|+
+literal|"\"foodmart\".\"employee\" A join \"foodmart\".\"employee\" B\n"
+operator|+
+literal|"on A.\"department_id\" = B.\"department_id\""
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT"
+operator|+
+literal|" employee.employee_id, employee0.employee_id AS employee_id0\n"
+operator|+
+literal|"FROM foodmart.employee AS employee\n"
+operator|+
+literal|"INNER JOIN foodmart.employee AS employee0 "
+operator|+
+literal|"ON employee.department_id = employee0.department_id"
+decl_stmt|;
+name|checkRel2Sql
+argument_list|(
+name|logicalPlanner
+argument_list|,
+name|query
+argument_list|,
+name|expected
+argument_list|,
+name|DatabaseProduct
+operator|.
+name|DB2
+operator|.
+name|getDialect
+argument_list|()
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testDb2DialectWhere
+parameter_list|()
+block|{
+name|String
+name|query
+init|=
+literal|"select A.\"employee_id\" from "
+operator|+
+literal|"\"foodmart\".\"employee\" A where A.\"department_id\"< 1000"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT employee.employee_id\n"
+operator|+
+literal|"FROM foodmart.employee AS employee\n"
+operator|+
+literal|"WHERE employee.department_id< 1000"
+decl_stmt|;
+name|checkRel2Sql
+argument_list|(
+name|logicalPlanner
+argument_list|,
+name|query
+argument_list|,
+name|expected
+argument_list|,
+name|DatabaseProduct
+operator|.
+name|DB2
+operator|.
+name|getDialect
+argument_list|()
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testDb2DialectJoinWhere
+parameter_list|()
+block|{
+name|String
+name|query
+init|=
+literal|"select A.\"employee_id\", B.\"department_id\" "
+operator|+
+literal|"from \"foodmart\".\"employee\" A join \"foodmart\".\"department\" B\n"
+operator|+
+literal|"on A.\"department_id\" = B.\"department_id\" "
+operator|+
+literal|"where A.\"employee_id\"< 1000"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT"
+operator|+
+literal|" employee.employee_id, department.department_id\n"
+operator|+
+literal|"FROM foodmart.employee AS employee\n"
+operator|+
+literal|"INNER JOIN foodmart.department AS department "
+operator|+
+literal|"ON employee.department_id = department.department_id\n"
+operator|+
+literal|"WHERE employee.employee_id< 1000"
+decl_stmt|;
+name|checkRel2Sql
+argument_list|(
+name|logicalPlanner
+argument_list|,
+name|query
+argument_list|,
+name|expected
+argument_list|,
+name|DatabaseProduct
+operator|.
+name|DB2
+operator|.
+name|getDialect
+argument_list|()
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testDb2DialectSelfJoinWhere
+parameter_list|()
+block|{
+name|String
+name|query
+init|=
+literal|"select A.\"employee_id\", B.\"employee_id\" from "
+operator|+
+literal|"\"foodmart\".\"employee\" A join \"foodmart\".\"employee\" B\n"
+operator|+
+literal|"on A.\"department_id\" = B.\"department_id\" "
+operator|+
+literal|"where B.\"employee_id\"< 2000"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT "
+operator|+
+literal|"employee.employee_id, employee0.employee_id AS employee_id0\n"
+operator|+
+literal|"FROM foodmart.employee AS employee\n"
+operator|+
+literal|"INNER JOIN foodmart.employee AS employee0 "
+operator|+
+literal|"ON employee.department_id = employee0.department_id\n"
+operator|+
+literal|"WHERE employee0.employee_id< 2000"
+decl_stmt|;
+name|checkRel2Sql
+argument_list|(
+name|logicalPlanner
+argument_list|,
+name|query
+argument_list|,
+name|expected
+argument_list|,
+name|DatabaseProduct
+operator|.
+name|DB2
+operator|.
+name|getDialect
+argument_list|()
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testDb2DialectCast
+parameter_list|()
+block|{
+name|String
+name|query
+init|=
+literal|"select \"hire_date\", cast(\"hire_date\" as varchar(10)) "
+operator|+
+literal|"from \"foodmart\".\"reserve_employee\""
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT reserve_employee.hire_date, "
+operator|+
+literal|"CAST(reserve_employee.hire_date AS VARCHAR(10))\n"
+operator|+
+literal|"FROM foodmart.reserve_employee AS reserve_employee"
+decl_stmt|;
+name|checkRel2Sql
+argument_list|(
+name|logicalPlanner
+argument_list|,
+name|query
+argument_list|,
+name|expected
+argument_list|,
+name|DatabaseProduct
+operator|.
+name|DB2
+operator|.
+name|getDialect
+argument_list|()
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testDb2DialectSelectQueryWithGroupByHaving
+parameter_list|()
+block|{
+name|String
+name|query
+init|=
+literal|"select count(*) from \"product\" "
+operator|+
+literal|"group by \"product_class_id\", \"product_id\" "
+operator|+
+literal|"having \"product_id\"> 10"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT COUNT(*)\n"
+operator|+
+literal|"FROM (SELECT product.product_class_id, product.product_id, COUNT"
+operator|+
+literal|"(*)\n"
+operator|+
+literal|"FROM foodmart.product AS product\n"
+operator|+
+literal|"GROUP BY product.product_class_id, product.product_id) AS t0\n"
+operator|+
+literal|"WHERE t0.product_id> 10"
+decl_stmt|;
+name|checkRel2Sql
+argument_list|(
+name|logicalPlanner
+argument_list|,
+name|query
+argument_list|,
+name|expected
+argument_list|,
+name|DatabaseProduct
+operator|.
+name|DB2
+operator|.
+name|getDialect
+argument_list|()
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testDb2DialectSelectQueryComplex
+parameter_list|()
+block|{
+name|String
+name|query
+init|=
+literal|"select count(*), \"units_per_case\" "
+operator|+
+literal|"from \"product\" where \"cases_per_pallet\"> 100 "
+operator|+
+literal|"group by \"product_id\", \"units_per_case\" "
+operator|+
+literal|"order by \"units_per_case\" desc"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT COUNT(*), product.units_per_case\n"
+operator|+
+literal|"FROM foodmart.product AS product\n"
+operator|+
+literal|"WHERE product.cases_per_pallet> 100\n"
+operator|+
+literal|"GROUP BY product.product_id, product.units_per_case\n"
+operator|+
+literal|"ORDER BY product.units_per_case DESC"
+decl_stmt|;
+name|checkRel2Sql
+argument_list|(
+name|logicalPlanner
+argument_list|,
+name|query
+argument_list|,
+name|expected
+argument_list|,
+name|DatabaseProduct
+operator|.
+name|DB2
+operator|.
+name|getDialect
+argument_list|()
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testDb2DialectSelectQueryWithGroup
+parameter_list|()
+block|{
+name|String
+name|query
+init|=
+literal|"select count(*), sum(\"employee_id\") "
+operator|+
+literal|"from \"reserve_employee\" "
+operator|+
+literal|"where \"hire_date\"> '2015-01-01' "
+operator|+
+literal|"and (\"position_title\" = 'SDE' or \"position_title\" = 'SDM') "
+operator|+
+literal|"group by \"store_id\", \"position_title\""
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT"
+operator|+
+literal|" COUNT(*), SUM(reserve_employee.employee_id)\n"
+operator|+
+literal|"FROM foodmart.reserve_employee AS reserve_employee\n"
+operator|+
+literal|"WHERE reserve_employee.hire_date> '2015-01-01' "
+operator|+
+literal|"AND (reserve_employee.position_title = 'SDE' OR "
+operator|+
+literal|"reserve_employee.position_title = 'SDM')\n"
+operator|+
+literal|"GROUP BY reserve_employee.store_id, reserve_employee.position_title"
+decl_stmt|;
+name|checkRel2Sql
+argument_list|(
+name|logicalPlanner
+argument_list|,
+name|query
+argument_list|,
+name|expected
+argument_list|,
+name|DatabaseProduct
+operator|.
+name|DB2
+operator|.
+name|getDialect
+argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
