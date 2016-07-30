@@ -338,6 +338,9 @@ block|,
 comment|/**    * The "RTRIM" function (Oracle).    */
 name|RTRIM
 block|,
+comment|/**    * The "EXTRACT" function.    */
+name|EXTRACT
+block|,
 comment|/**    * Call to a function using JDBC function syntax.    */
 name|JDBC_FN
 block|,
@@ -672,6 +675,8 @@ argument_list|,
 name|TIMESTAMP_ADD
 argument_list|,
 name|TIMESTAMP_DIFF
+argument_list|,
+name|EXTRACT
 argument_list|,
 name|LITERAL_CHAIN
 argument_list|,

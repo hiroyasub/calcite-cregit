@@ -1973,9 +1973,9 @@ literal|"PLAN="
 operator|+
 literal|"EnumerableInterpreter\n"
 operator|+
-literal|"  BindableSort(sort0=[$0], dir0=[DESC], fetch=[2])\n"
+literal|"  BindableProject(C=[$2], state_province=[$1], city=[$0])\n"
 operator|+
-literal|"    BindableProject(C=[$2], state_province=[$1], city=[$0])\n"
+literal|"    BindableSort(sort0=[$2], dir0=[DESC], fetch=[2])\n"
 operator|+
 literal|"      DruidQuery(table=[[foodmart, foodmart]], groups=[{28, 29}], aggs=[[COUNT()]])"
 decl_stmt|;
@@ -2341,6 +2341,53 @@ argument_list|,
 literal|"state_province=WA; city=Yakima; product_name=High Top Dried Mushrooms"
 argument_list|,
 literal|"state_province=WA; city=Yakima; product_name=High Top Dried Mushrooms"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Tests that conditions applied to time units extracted via the EXTRACT    * function become ranges on the timestamp column {@code the_date}.    *    *<p>Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1334">[CALCITE-1334]    * Convert predicates on EXTRACT function calls into date ranges</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testFilterTimestamp
+parameter_list|()
+block|{
+name|String
+name|sql
+init|=
+literal|"select count(*) as c\n"
+operator|+
+literal|"from \"foodmart\"\n"
+operator|+
+literal|"where extract(year from \"timestamp\") = 1997\n"
+operator|+
+literal|"and extract(month from \"timestamp\") in (4, 6)\n"
+decl_stmt|;
+specifier|final
+name|String
+name|explain
+init|=
+literal|"EnumerableInterpreter\n"
+operator|+
+literal|"  BindableAggregate(group=[{}], C=[COUNT()])\n"
+operator|+
+literal|"    BindableFilter(condition=[AND(>=(/INT(Reinterpret($91), 86400000), 1997-01-01),<(/INT(Reinterpret($91), 86400000), 1998-01-01),>=(/INT(Reinterpret($91), 86400000), 1997-04-01),<(/INT(Reinterpret($91), 86400000), 1997-05-01))])\n"
+operator|+
+literal|"      DruidQuery(table=[[foodmart, foodmart]])"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+name|explain
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"C=6588"
 argument_list|)
 expr_stmt|;
 block|}

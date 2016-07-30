@@ -3328,7 +3328,7 @@ literal|"EXTRACT_DATE"
 argument_list|,
 name|SqlKind
 operator|.
-name|OTHER
+name|EXTRACT
 argument_list|)
 decl_stmt|;
 comment|//-------------------------------------------------------------

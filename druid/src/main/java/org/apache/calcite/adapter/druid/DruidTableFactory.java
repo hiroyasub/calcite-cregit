@@ -536,7 +536,7 @@ name|timestampColumnName
 argument_list|,
 name|SqlTypeName
 operator|.
-name|VARCHAR
+name|TIMESTAMP
 argument_list|)
 expr_stmt|;
 block|}

@@ -203,7 +203,7 @@ literal|"EXTRACT"
 argument_list|,
 name|SqlKind
 operator|.
-name|OTHER_FUNCTION
+name|EXTRACT
 argument_list|,
 name|ReturnTypes
 operator|.
