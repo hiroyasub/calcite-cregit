@@ -447,6 +447,12 @@ argument_list|<
 name|String
 argument_list|>
 name|schemaPath
+parameter_list|,
+name|List
+argument_list|<
+name|String
+argument_list|>
+name|viewPath
 parameter_list|)
 block|{
 return|return
@@ -459,6 +465,8 @@ argument_list|,
 name|queryString
 argument_list|,
 name|schemaPath
+argument_list|,
+name|viewPath
 argument_list|)
 return|;
 block|}

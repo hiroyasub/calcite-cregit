@@ -258,6 +258,7 @@ comment|/** Can expand a view into relational expressions. */
 interface|interface
 name|ViewExpander
 block|{
+comment|/**      * Returns a relational expression that is to be substituted for an access      * to a SQL view.      *      * @param rowType Row type of the view      * @param queryString Body of the view      * @param schemaPath Path of a schema wherein to find referenced tables      * @param viewPath Path of the view, ending with its name; may be null      * @return Relational expression      */
 name|RelRoot
 name|expandView
 parameter_list|(
@@ -272,6 +273,12 @@ argument_list|<
 name|String
 argument_list|>
 name|schemaPath
+parameter_list|,
+name|List
+argument_list|<
+name|String
+argument_list|>
+name|viewPath
 parameter_list|)
 function_decl|;
 block|}

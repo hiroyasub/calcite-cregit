@@ -738,6 +738,15 @@ operator|>
 name|of
 argument_list|()
 argument_list|,
+name|ImmutableList
+operator|.
+name|of
+argument_list|(
+literal|"POST"
+argument_list|,
+literal|"V_EMP"
+argument_list|)
+argument_list|,
 literal|null
 argument_list|)
 argument_list|)

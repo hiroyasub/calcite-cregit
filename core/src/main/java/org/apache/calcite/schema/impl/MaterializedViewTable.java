@@ -338,6 +338,12 @@ name|String
 argument_list|>
 name|viewSchemaPath
 parameter_list|,
+name|List
+argument_list|<
+name|String
+argument_list|>
+name|viewPath
+parameter_list|,
 name|MaterializationKey
 name|key
 parameter_list|)
@@ -351,6 +357,8 @@ argument_list|,
 name|viewSql
 argument_list|,
 name|viewSchemaPath
+argument_list|,
+name|viewPath
 argument_list|)
 expr_stmt|;
 name|this
@@ -381,6 +389,12 @@ name|String
 argument_list|>
 name|viewSchemaPath
 parameter_list|,
+name|List
+argument_list|<
+name|String
+argument_list|>
+name|viewPath
+parameter_list|,
 specifier|final
 name|String
 name|suggestedTableName
@@ -398,6 +412,8 @@ argument_list|,
 name|viewSql
 argument_list|,
 name|viewSchemaPath
+argument_list|,
+name|viewPath
 argument_list|,
 name|suggestedTableName
 argument_list|,
@@ -517,6 +533,12 @@ name|String
 argument_list|>
 name|viewSchemaPath
 parameter_list|,
+name|List
+argument_list|<
+name|String
+argument_list|>
+name|viewPath
+parameter_list|,
 name|String
 name|suggestedTableName
 parameter_list|,
@@ -542,6 +564,8 @@ name|path
 argument_list|(
 literal|null
 argument_list|)
+argument_list|,
+name|viewPath
 argument_list|,
 name|Boolean
 operator|.
@@ -671,6 +695,8 @@ argument_list|,
 name|viewSql
 argument_list|,
 name|schemaPath1
+argument_list|,
+name|viewPath
 argument_list|,
 name|key
 argument_list|)

@@ -1380,6 +1380,8 @@ name|ViewExpanderImpl
 implements|implements
 name|ViewExpander
 block|{
+annotation|@
+name|Override
 specifier|public
 name|RelRoot
 name|expandView
@@ -1395,6 +1397,12 @@ argument_list|<
 name|String
 argument_list|>
 name|schemaPath
+parameter_list|,
+name|List
+argument_list|<
+name|String
+argument_list|>
+name|viewPath
 parameter_list|)
 block|{
 name|SqlParser

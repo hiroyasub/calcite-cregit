@@ -11872,6 +11872,12 @@ argument_list|<
 name|String
 argument_list|>
 name|schemaPath
+parameter_list|,
+name|List
+argument_list|<
+name|String
+argument_list|>
+name|viewPath
 parameter_list|)
 block|{
 throw|throw

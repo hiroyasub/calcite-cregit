@@ -1945,7 +1945,6 @@ operator|<
 literal|2
 return|;
 block|}
-comment|/**    * Returns a relational expression which is to be substituted for an access    * to a SQL view.    *    * @param rowType Row type of the view    * @param queryString Body of the view    * @param schemaPath List of schema names wherein to find referenced tables    * @return Relational expression    */
 specifier|public
 name|RelRoot
 name|expandView
@@ -1961,6 +1960,12 @@ argument_list|<
 name|String
 argument_list|>
 name|schemaPath
+parameter_list|,
+name|List
+argument_list|<
+name|String
+argument_list|>
+name|viewPath
 parameter_list|)
 block|{
 throw|throw
