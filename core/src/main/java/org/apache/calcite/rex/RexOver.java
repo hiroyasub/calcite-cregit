@@ -174,15 +174,6 @@ name|window
 operator|=
 name|window
 expr_stmt|;
-name|this
-operator|.
-name|digest
-operator|=
-name|computeDigest
-argument_list|(
-literal|true
-argument_list|)
-expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
 comment|/**    * Returns the aggregate operator for this expression.    */

@@ -3557,7 +3557,8 @@ name|add
 argument_list|(
 name|node
 operator|.
-name|digest
+name|toString
+argument_list|()
 argument_list|)
 condition|)
 block|{
@@ -3817,7 +3818,8 @@ name|add
 argument_list|(
 name|node
 operator|.
-name|digest
+name|toString
+argument_list|()
 argument_list|)
 condition|)
 block|{

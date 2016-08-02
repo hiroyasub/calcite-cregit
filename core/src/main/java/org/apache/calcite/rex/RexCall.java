@@ -214,15 +214,6 @@ literal|null
 operator|:
 name|op
 assert|;
-name|this
-operator|.
-name|digest
-operator|=
-name|computeDigest
-argument_list|(
-literal|true
-argument_list|)
-expr_stmt|;
 assert|assert
 name|op
 operator|.
@@ -396,10 +387,15 @@ name|String
 name|toString
 parameter_list|()
 block|{
-comment|// REVIEW jvs 16-Jan-2005: For CAST and NEW, the type is really an
-comment|// operand and needs to be printed out.  But special-casing it here is
-comment|// ugly.
-return|return
+if|if
+condition|(
+name|digest
+operator|==
+literal|null
+condition|)
+block|{
+name|digest
+operator|=
 name|computeDigest
 argument_list|(
 name|isA
@@ -416,6 +412,10 @@ operator|.
 name|NEW_SPECIFICATION
 argument_list|)
 argument_list|)
+expr_stmt|;
+block|}
+return|return
+name|digest
 return|;
 block|}
 specifier|public
