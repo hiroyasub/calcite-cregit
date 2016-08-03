@@ -2167,9 +2167,9 @@ literal|"  DruidQuery(table=[[foodmart, foodmart]],"
 operator|+
 literal|" filter=[AND(=(CAST($2):VARCHAR(24) CHARACTER SET \"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$primary\", 'High Top Dried Mushrooms'),"
 operator|+
-literal|" OR(=($86, CAST('Q2'):VARCHAR(1) CHARACTER SET \"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$primary\" NOT NULL),"
+literal|" OR(=($86, 'Q2'),"
 operator|+
-literal|" =($86, CAST('Q3'):VARCHAR(1) CHARACTER SET \"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$primary\" NOT NULL)),"
+literal|" =($86, 'Q3')),"
 operator|+
 literal|" =(CAST($29):VARCHAR(2) CHARACTER SET \"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$primary\", 'WA'))],"
 operator|+
@@ -2282,9 +2282,9 @@ literal|"  DruidQuery(table=[[foodmart, foodmart]],"
 operator|+
 literal|" filter=[AND(=(CAST($2):VARCHAR(24) CHARACTER SET \"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$primary\", 'High Top Dried Mushrooms'),"
 operator|+
-literal|" OR(=($86, CAST('Q2'):VARCHAR(1) CHARACTER SET \"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$primary\" NOT NULL),"
+literal|" OR(=($86, 'Q2'),"
 operator|+
-literal|" =($86, CAST('Q3'):VARCHAR(1) CHARACTER SET \"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$primary\" NOT NULL)),"
+literal|" =($86, 'Q3')),"
 operator|+
 literal|" =(CAST($29):VARCHAR(2) CHARACTER SET \"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$primary\", 'WA'))],"
 operator|+
@@ -2341,6 +2341,48 @@ argument_list|,
 literal|"state_province=WA; city=Yakima; product_name=High Top Dried Mushrooms"
 argument_list|,
 literal|"state_province=WA; city=Yakima; product_name=High Top Dried Mushrooms"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Tests a query that exposed several bugs in the interpreter. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testWhereGroupBy
+parameter_list|()
+block|{
+name|String
+name|sql
+init|=
+literal|"select \"wikiticker\".\"countryName\" as \"c0\",\n"
+operator|+
+literal|" sum(\"wikiticker\".\"count\") as \"m1\",\n"
+operator|+
+literal|" sum(\"wikiticker\".\"deleted\") as \"m2\",\n"
+operator|+
+literal|" sum(\"wikiticker\".\"delta\") as \"m3\"\n"
+operator|+
+literal|"from \"wiki\" as \"wikiticker\"\n"
+operator|+
+literal|"where (\"wikiticker\".\"countryName\" in ('Colombia', 'France',\n"
+operator|+
+literal|" 'Germany', 'India', 'Italy', 'Russia', 'United Kingdom',\n"
+operator|+
+literal|" 'United States') or \"wikiticker\".\"countryName\" is null)\n"
+operator|+
+literal|"group by \"wikiticker\".\"countryName\""
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|,
+name|WIKI
+argument_list|)
+operator|.
+name|returnsCount
+argument_list|(
+literal|9
 argument_list|)
 expr_stmt|;
 block|}

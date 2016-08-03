@@ -547,9 +547,6 @@ specifier|final
 name|List
 argument_list|<
 name|Class
-argument_list|<
-name|?
-argument_list|>
 argument_list|>
 name|addParamTypes
 init|=
@@ -557,6 +554,10 @@ name|ImmutableList
 operator|.
 name|copyOf
 argument_list|(
+operator|(
+name|Class
+index|[]
+operator|)
 name|addMethod
 operator|.
 name|getParameterTypes
@@ -643,9 +644,6 @@ control|)
 block|{
 specifier|final
 name|Class
-argument_list|<
-name|?
-argument_list|>
 name|type
 init|=
 name|addParamTypes
