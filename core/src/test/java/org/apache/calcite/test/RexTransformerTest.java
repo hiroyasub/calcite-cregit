@@ -1667,7 +1667,7 @@ literal|"AND(AND(AND(IS NOT NULL($0), IS NOT NULL($1)), =($0, $1)), AND(IS NOT N
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-814">[CALCITE-814]    * RexBuilder reverses precision and scale of DECIMAL literal</a>. */
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-814">[CALCITE-814]    * RexBuilder reverses precision and scale of DECIMAL literal</a>    * and    *<a href="https://issues.apache.org/jira/browse/CALCITE-1344">[CALCITE-1344]    * Incorrect inferred precision when BigDecimal value is less than 1</a>. */
 annotation|@
 name|Test
 specifier|public
@@ -1796,7 +1796,7 @@ argument_list|()
 argument_list|,
 name|is
 argument_list|(
-literal|"DECIMAL(6, 7) NOT NULL"
+literal|"DECIMAL(8, 7) NOT NULL"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -1813,6 +1813,53 @@ argument_list|,
 name|is
 argument_list|(
 literal|"0.0123456"
+argument_list|)
+argument_list|)
+expr_stmt|;
+specifier|final
+name|RexLiteral
+name|literal4
+init|=
+name|rexBuilder
+operator|.
+name|makeExactLiteral
+argument_list|(
+operator|new
+name|BigDecimal
+argument_list|(
+literal|"0.01234560"
+argument_list|)
+argument_list|)
+decl_stmt|;
+name|assertThat
+argument_list|(
+name|literal4
+operator|.
+name|getType
+argument_list|()
+operator|.
+name|getFullTypeString
+argument_list|()
+argument_list|,
+name|is
+argument_list|(
+literal|"DECIMAL(9, 8) NOT NULL"
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|assertThat
+argument_list|(
+name|literal4
+operator|.
+name|getValue
+argument_list|()
+operator|.
+name|toString
+argument_list|()
+argument_list|,
+name|is
+argument_list|(
+literal|"0.01234560"
 argument_list|)
 argument_list|)
 expr_stmt|;

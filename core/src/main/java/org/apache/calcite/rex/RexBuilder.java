@@ -3631,6 +3631,14 @@ operator|.
 name|length
 argument_list|()
 decl_stmt|;
+if|if
+condition|(
+name|precision
+operator|>
+name|scale
+condition|)
+block|{
+comment|// bd is greater than or equal to 1
 name|relType
 operator|=
 name|typeFactory
@@ -3646,6 +3654,28 @@ argument_list|,
 name|scale
 argument_list|)
 expr_stmt|;
+block|}
+else|else
+block|{
+comment|// bd is less than 1
+name|relType
+operator|=
+name|typeFactory
+operator|.
+name|createSqlType
+argument_list|(
+name|SqlTypeName
+operator|.
+name|DECIMAL
+argument_list|,
+name|scale
+operator|+
+literal|1
+argument_list|,
+name|scale
+argument_list|)
+expr_stmt|;
+block|}
 block|}
 return|return
 name|makeExactLiteral
