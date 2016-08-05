@@ -3417,6 +3417,15 @@ argument_list|)
 expr_stmt|;
 name|generator
 operator|.
+name|writeBooleanField
+argument_list|(
+literal|"lenientAggregatorMerge"
+argument_list|,
+literal|true
+argument_list|)
+expr_stmt|;
+name|generator
+operator|.
 name|writeArrayFieldStart
 argument_list|(
 literal|"analysisTypes"
