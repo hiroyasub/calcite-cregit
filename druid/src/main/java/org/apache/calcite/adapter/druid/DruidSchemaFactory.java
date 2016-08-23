@@ -119,19 +119,10 @@ name|operand
 parameter_list|)
 block|{
 specifier|final
-name|Map
-name|map
-init|=
-operator|(
-name|Map
-operator|)
-name|operand
-decl_stmt|;
-specifier|final
 name|String
 name|url
 init|=
-name|map
+name|operand
 operator|.
 name|get
 argument_list|(
@@ -143,7 +134,7 @@ condition|?
 operator|(
 name|String
 operator|)
-name|map
+name|operand
 operator|.
 name|get
 argument_list|(
@@ -156,7 +147,7 @@ specifier|final
 name|String
 name|coordinatorUrl
 init|=
-name|map
+name|operand
 operator|.
 name|get
 argument_list|(
@@ -168,7 +159,7 @@ condition|?
 operator|(
 name|String
 operator|)
-name|map
+name|operand
 operator|.
 name|get
 argument_list|(
@@ -190,7 +181,7 @@ specifier|final
 name|boolean
 name|containsTables
 init|=
-name|map
+name|operand
 operator|.
 name|get
 argument_list|(
@@ -203,7 +194,7 @@ operator|(
 operator|(
 name|List
 operator|)
-name|map
+name|operand
 operator|.
 name|get
 argument_list|(

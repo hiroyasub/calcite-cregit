@@ -285,20 +285,6 @@ name|google
 operator|.
 name|common
 operator|.
-name|annotations
-operator|.
-name|VisibleForTesting
-import|;
-end_import
-
-begin_import
-import|import
-name|com
-operator|.
-name|google
-operator|.
-name|common
-operator|.
 name|base
 operator|.
 name|Predicate
@@ -807,8 +793,7 @@ name|build
 argument_list|()
 decl_stmt|;
 comment|/** Returns whether an expression contains one or more calls to the    * {@code EXTRACT} function. */
-annotation|@
-name|VisibleForTesting
+specifier|public
 specifier|static
 name|Set
 argument_list|<
@@ -1199,8 +1184,7 @@ return|;
 block|}
 block|}
 comment|/** Walks over an expression, replacing {@code EXTRACT} with date ranges. */
-annotation|@
-name|VisibleForTesting
+specifier|public
 specifier|static
 class|class
 name|ExtractShuttle
@@ -1230,8 +1214,7 @@ argument_list|>
 argument_list|>
 name|operandRanges
 decl_stmt|;
-annotation|@
-name|VisibleForTesting
+specifier|public
 name|ExtractShuttle
 parameter_list|(
 name|RexBuilder

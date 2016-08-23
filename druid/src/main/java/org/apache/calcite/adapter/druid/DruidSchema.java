@@ -320,11 +320,6 @@ argument_list|)
 argument_list|,
 name|CacheBuilder
 operator|.
-expr|<
-name|String
-argument_list|,
-name|Table
-operator|>
 name|newBuilder
 argument_list|()
 operator|.

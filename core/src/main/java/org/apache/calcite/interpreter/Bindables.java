@@ -2351,15 +2351,6 @@ argument_list|()
 operator|instanceof
 name|BindableConvention
 assert|;
-assert|assert
-name|getConvention
-argument_list|()
-operator|==
-name|input
-operator|.
-name|getConvention
-argument_list|()
-assert|;
 block|}
 annotation|@
 name|Override

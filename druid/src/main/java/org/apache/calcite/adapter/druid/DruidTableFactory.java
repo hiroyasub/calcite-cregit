@@ -121,6 +121,18 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|joda
+operator|.
+name|time
+operator|.
+name|Interval
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -610,7 +622,7 @@ decl_stmt|;
 specifier|final
 name|List
 argument_list|<
-name|String
+name|Interval
 argument_list|>
 name|intervals
 init|=
@@ -622,10 +634,15 @@ name|ImmutableList
 operator|.
 name|of
 argument_list|(
+name|Interval
+operator|.
+name|parse
+argument_list|(
 operator|(
 name|String
 operator|)
 name|interval
+argument_list|)
 argument_list|)
 else|:
 literal|null
