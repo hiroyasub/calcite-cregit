@@ -2077,7 +2077,7 @@ name|checkSatisfiable
 argument_list|(
 name|e3
 argument_list|,
-literal|"NOT(=($0, 0))"
+literal|"<>($0, 0)"
 argument_list|)
 expr_stmt|;
 comment|// The expression "$1 = 1".
@@ -2193,7 +2193,7 @@ name|checkSatisfiable
 argument_list|(
 name|e5
 argument_list|,
-literal|"AND(=($0, 0), NOT(=($1, 1)))"
+literal|"AND(=($0, 0),<>($1, 1))"
 argument_list|)
 expr_stmt|;
 comment|// "$0 = 0 AND NOT ($0 = 0 AND $1 = 1)" may be satisfiable. Can simplify.
@@ -2238,7 +2238,7 @@ name|checkSatisfiable
 argument_list|(
 name|e6
 argument_list|,
-literal|"AND(=($0, 0), NOT(AND(=($0, 0), =($1, 1))))"
+literal|"AND(=($0, 0), OR(<>($0, 0),<>($1, 1)))"
 argument_list|)
 expr_stmt|;
 comment|// "$0 = 0 AND ($1 = 1 AND NOT ($0 = 0))" is not satisfiable.
@@ -2425,7 +2425,7 @@ name|checkSatisfiable
 argument_list|(
 name|e8
 argument_list|,
-literal|"AND(=($0, 0), $2, $3, NOT(AND($2, $3, $4)), NOT($4))"
+literal|"AND(=($0, 0), $2, $3, OR(NOT($2), NOT($3), NOT($4)), NOT($4))"
 argument_list|)
 expr_stmt|;
 block|}
