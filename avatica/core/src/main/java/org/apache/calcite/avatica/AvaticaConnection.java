@@ -549,7 +549,6 @@ name|ConcurrentHashMap
 argument_list|<>
 argument_list|()
 decl_stmt|;
-specifier|private
 specifier|final
 name|Map
 argument_list|<
@@ -560,7 +559,7 @@ argument_list|>
 name|flagMap
 init|=
 operator|new
-name|HashMap
+name|ConcurrentHashMap
 argument_list|<>
 argument_list|()
 decl_stmt|;

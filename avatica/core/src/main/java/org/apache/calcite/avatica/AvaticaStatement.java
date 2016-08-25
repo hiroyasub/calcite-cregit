@@ -740,6 +740,17 @@ operator|.
 name|id
 argument_list|)
 expr_stmt|;
+name|connection
+operator|.
+name|flagMap
+operator|.
+name|remove
+argument_list|(
+name|handle
+operator|.
+name|id
+argument_list|)
+expr_stmt|;
 comment|// Get a new one
 specifier|final
 name|Meta
@@ -1067,6 +1078,17 @@ comment|// make sure we don't leak on our side
 name|connection
 operator|.
 name|statementMap
+operator|.
+name|remove
+argument_list|(
+name|handle
+operator|.
+name|id
+argument_list|)
+expr_stmt|;
+name|connection
+operator|.
+name|flagMap
 operator|.
 name|remove
 argument_list|(
