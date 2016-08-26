@@ -653,6 +653,8 @@ name|GROUPING_SETS
 argument_list|,
 name|EXTEND
 argument_list|,
+name|LATERAL
+argument_list|,
 name|SELECT
 argument_list|,
 name|JOIN

@@ -10226,6 +10226,251 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testLateral
+parameter_list|()
+block|{
+comment|// Bad: LATERAL table
+name|sql
+argument_list|(
+literal|"select * from ^lateral^ emp"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"(?s)Encountered \"lateral emp\" at .*"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select * from lateral table ^emp^ as e"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"(?s)Encountered \"emp\" at .*"
+argument_list|)
+expr_stmt|;
+comment|// Bad: LATERAL TABLE schema.table
+name|sql
+argument_list|(
+literal|"select * from lateral table ^scott^.emp"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"(?s)Encountered \"scott\" at .*"
+argument_list|)
+expr_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM LATERAL TABLE(`RAMP`(1))"
+decl_stmt|;
+comment|// Good: LATERAL TABLE function(arg, arg)
+name|sql
+argument_list|(
+literal|"select * from lateral table(ramp(1))"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select * from lateral table(ramp(1)) as t"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+operator|+
+literal|" AS `T`"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select * from lateral table(ramp(1)) as t(x)"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+operator|+
+literal|" AS `T` (`X`)"
+argument_list|)
+expr_stmt|;
+comment|// Bad: Parentheses make it look like a sub-query
+name|sql
+argument_list|(
+literal|"select * from lateral (^table^(ramp(1)))"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"(?s)Encountered \"table \\(\" at .*"
+argument_list|)
+expr_stmt|;
+comment|// Good: LATERAL (subQuery)
+specifier|final
+name|String
+name|expected2
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM LATERAL((SELECT *\n"
+operator|+
+literal|"FROM `EMP`))"
+decl_stmt|;
+name|sql
+argument_list|(
+literal|"select * from lateral (select * from emp)"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected2
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select * from lateral (select * from emp) as t"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected2
+operator|+
+literal|" AS `T`"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select * from lateral (select * from emp) as t(x)"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected2
+operator|+
+literal|" AS `T` (`X`)"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testCollectionTableWithLateral
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select * from dept, lateral table(ramp(dept.deptno))"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM `DEPT`,\n"
+operator|+
+literal|"LATERAL TABLE(`RAMP`(`DEPT`.`DEPTNO`))"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testCollectionTableWithLateral2
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select * from dept as d\n"
+operator|+
+literal|"cross join lateral table(ramp(dept.deptno)) as r"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM `DEPT` AS `D`\n"
+operator|+
+literal|"CROSS JOIN LATERAL TABLE(`RAMP`(`DEPT`.`DEPTNO`)) AS `R`"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testCollectionTableWithLateral3
+parameter_list|()
+block|{
+comment|// LATERAL before first table in FROM clause doesn't achieve anything, but
+comment|// it's valid.
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select * from lateral table(ramp(dept.deptno)), dept"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM LATERAL TABLE(`RAMP`(`DEPT`.`DEPTNO`)),\n"
+operator|+
+literal|"`DEPT`"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testIllegalCursors
 parameter_list|()
 block|{

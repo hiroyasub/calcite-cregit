@@ -19484,6 +19484,153 @@ literal|"No match found for function signature NONEXISTENTRAMP\\(<CHARACTER>\\)"
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1309">[CALCITE-1309]    * Support LATERAL TABLE</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testCollectionTableWithLateral
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|expectedType
+init|=
+literal|"RecordType(INTEGER NOT NULL DEPTNO, "
+operator|+
+literal|"VARCHAR(10) NOT NULL NAME, "
+operator|+
+literal|"INTEGER NOT NULL I) NOT NULL"
+decl_stmt|;
+name|sql
+argument_list|(
+literal|"select * from dept, lateral table(ramp(dept.deptno))"
+argument_list|)
+operator|.
+name|type
+argument_list|(
+name|expectedType
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select * from dept cross join lateral table(ramp(dept.deptno))"
+argument_list|)
+operator|.
+name|type
+argument_list|(
+name|expectedType
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select * from dept join lateral table(ramp(dept.deptno)) on true"
+argument_list|)
+operator|.
+name|type
+argument_list|(
+name|expectedType
+argument_list|)
+expr_stmt|;
+specifier|final
+name|String
+name|expectedType2
+init|=
+literal|"RecordType(INTEGER NOT NULL DEPTNO, "
+operator|+
+literal|"VARCHAR(10) NOT NULL NAME, "
+operator|+
+literal|"INTEGER I) NOT NULL"
+decl_stmt|;
+name|sql
+argument_list|(
+literal|"select * from dept left join lateral table(ramp(dept.deptno)) on true"
+argument_list|)
+operator|.
+name|type
+argument_list|(
+name|expectedType2
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select * from dept, lateral table(^ramp(dept.name)^)"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"(?s)Cannot apply 'RAMP' to arguments of type 'RAMP\\(<VARCHAR\\(10\\)>\\)'.*"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select * from lateral table(ramp(^dept^.deptno)), dept"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Table 'DEPT' not found"
+argument_list|)
+expr_stmt|;
+specifier|final
+name|String
+name|expectedType3
+init|=
+literal|"RecordType(INTEGER NOT NULL I, "
+operator|+
+literal|"INTEGER NOT NULL DEPTNO, "
+operator|+
+literal|"VARCHAR(10) NOT NULL NAME) NOT NULL"
+decl_stmt|;
+name|sql
+argument_list|(
+literal|"select * from lateral table(ramp(1234)), dept"
+argument_list|)
+operator|.
+name|type
+argument_list|(
+name|expectedType3
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testCollectionTableWithLateral2
+parameter_list|()
+block|{
+comment|// The expression inside the LATERAL can only see tables before it in the
+comment|// FROM clause. And it can't see itself.
+name|sql
+argument_list|(
+literal|"select * from emp, lateral table(ramp(emp.deptno)), dept"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select * from emp, lateral table(ramp(^z^.i)) as z, dept"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Table 'Z' not found"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select * from emp, lateral table(ramp(^dept^.deptno)), dept"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Table 'DEPT' not found"
+argument_list|)
+expr_stmt|;
+block|}
 annotation|@
 name|Test
 specifier|public
