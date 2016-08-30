@@ -2003,8 +2003,8 @@ parameter_list|()
 throws|throws
 name|Exception
 block|{
-comment|// The result [OR(<($1, 10), AND(<($1, 10),>($0, 1)))]
-comment|// could be simplified to [<($1, 10)] but is nevertheless correct.
+comment|// The result is [OR(<($1, 10), AND(<($1, 10),>($0, 1)))]
+comment|// which can be simplified to [<($1, 10)].
 name|checkMetadataUnionPredicates
 argument_list|(
 literal|"select * from \"emps\" where \"deptno\"< 10\n"
@@ -2013,7 +2013,7 @@ literal|"union all\n"
 operator|+
 literal|"select * from \"emps\" where \"deptno\"< 10 and \"empid\"> 1"
 argument_list|,
-literal|"[OR(<($1, 10), AND(<($1, 10),>($0, 1)))]"
+literal|"[<($1, 10), OR(true,>($0, 1))]"
 argument_list|)
 expr_stmt|;
 block|}
@@ -2034,7 +2034,7 @@ literal|"union all\n"
 operator|+
 literal|"select * from \"emps\" where \"deptno\"< 10 or \"empid\"> 1"
 argument_list|,
-literal|"[OR(<($1, 10),>($0, 1))]"
+literal|"[OR(<($1, 10),<($1, 10),>($0, 1))]"
 argument_list|)
 expr_stmt|;
 block|}
