@@ -14331,7 +14331,7 @@ argument_list|)
 operator|.
 name|typeIs
 argument_list|(
-literal|"[deptno INTEGER NOT NULL, empid INTEGER NOT NULL, commission INTEGER, RCNF INTEGER NOT NULL, RCNL INTEGER NOT NULL, R INTEGER NOT NULL, RD INTEGER NOT NULL]"
+literal|"[deptno INTEGER NOT NULL, empid INTEGER NOT NULL, commission INTEGER, RCNF BIGINT NOT NULL, RCNL BIGINT NOT NULL, R BIGINT NOT NULL, RD BIGINT NOT NULL]"
 argument_list|)
 operator|.
 name|returnsUnordered
@@ -14370,7 +14370,7 @@ argument_list|)
 operator|.
 name|typeIs
 argument_list|(
-literal|"[deptno INTEGER NOT NULL, R INTEGER NOT NULL]"
+literal|"[deptno INTEGER NOT NULL, R BIGINT NOT NULL]"
 argument_list|)
 operator|.
 name|returnsUnordered
@@ -14410,7 +14410,7 @@ argument_list|)
 operator|.
 name|typeIs
 argument_list|(
-literal|"[deptno INTEGER NOT NULL, R INTEGER NOT NULL]"
+literal|"[deptno INTEGER NOT NULL, R BIGINT NOT NULL]"
 argument_list|)
 operator|.
 name|returnsUnordered
@@ -14449,7 +14449,7 @@ argument_list|)
 operator|.
 name|typeIs
 argument_list|(
-literal|"[deptno INTEGER NOT NULL, R INTEGER NOT NULL]"
+literal|"[deptno INTEGER NOT NULL, R BIGINT NOT NULL]"
 argument_list|)
 operator|.
 name|returnsUnordered
@@ -14488,7 +14488,7 @@ argument_list|)
 operator|.
 name|typeIs
 argument_list|(
-literal|"[deptno INTEGER NOT NULL, R INTEGER NOT NULL]"
+literal|"[deptno INTEGER NOT NULL, R BIGINT NOT NULL]"
 argument_list|)
 operator|.
 name|returnsUnordered
@@ -15056,7 +15056,7 @@ argument_list|)
 operator|.
 name|typeIs
 argument_list|(
-literal|"[RN INTEGER NOT NULL, L INTEGER NOT NULL]"
+literal|"[RN INTEGER NOT NULL, L BIGINT NOT NULL]"
 argument_list|)
 operator|.
 name|returnsUnordered
@@ -15103,7 +15103,7 @@ argument_list|)
 operator|.
 name|typeIs
 argument_list|(
-literal|"[RN INTEGER NOT NULL, L INTEGER NOT NULL]"
+literal|"[RN INTEGER NOT NULL, L BIGINT NOT NULL]"
 argument_list|)
 operator|.
 name|returnsUnordered
@@ -15399,7 +15399,7 @@ argument_list|)
 operator|.
 name|typeIs
 argument_list|(
-literal|"[deptno INTEGER NOT NULL, empid INTEGER NOT NULL, commission INTEGER, R INTEGER NOT NULL, RCNF INTEGER NOT NULL, RCNL INTEGER NOT NULL, R INTEGER NOT NULL, RD INTEGER NOT NULL]"
+literal|"[deptno INTEGER NOT NULL, empid INTEGER NOT NULL, commission INTEGER, R BIGINT NOT NULL, RCNF BIGINT NOT NULL, RCNL BIGINT NOT NULL, R BIGINT NOT NULL, RD BIGINT NOT NULL]"
 argument_list|)
 operator|.
 name|returnsUnordered

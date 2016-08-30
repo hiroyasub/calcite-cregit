@@ -96,7 +96,7 @@ name|boolean
 name|isPrefix
 parameter_list|)
 function_decl|;
-comment|/** Returns if the type is case sensitive true or not (false) */
+comment|/** Returns whether the type is case sensitive. */
 name|boolean
 name|isCaseSensitive
 parameter_list|(
@@ -104,7 +104,7 @@ name|SqlTypeName
 name|typeName
 parameter_list|)
 function_decl|;
-comment|/** Returns if the type can be auto increment true or not (false) */
+comment|/** Returns whether the type can be auto increment. */
 name|boolean
 name|isAutoincrement
 parameter_list|(
@@ -112,7 +112,7 @@ name|SqlTypeName
 name|typeName
 parameter_list|)
 function_decl|;
-comment|/** Returns the numeric type Radix, 2 or 10. 0 represent not applicable*/
+comment|/** Returns the numeric type radix, typically 2 or 10.    * 0 means "not applicable". */
 name|int
 name|getNumTypeRadix
 parameter_list|(
@@ -120,7 +120,7 @@ name|SqlTypeName
 name|typeName
 parameter_list|)
 function_decl|;
-comment|/**    * Returns the return type of SUM aggregate function inferred from its    * argument type.    */
+comment|/**    * Returns the return type of a call to the {@code SUM} aggregate function    * inferred from its argument type.    */
 name|RelDataType
 name|deriveSumType
 parameter_list|(
@@ -129,6 +129,22 @@ name|typeFactory
 parameter_list|,
 name|RelDataType
 name|argumentType
+parameter_list|)
+function_decl|;
+comment|/** Returns the return type of the {@code CUME_DIST} and {@code PERCENT_RANK}    * aggregate functions. */
+name|RelDataType
+name|deriveFractionalRankType
+parameter_list|(
+name|RelDataTypeFactory
+name|typeFactory
+parameter_list|)
+function_decl|;
+comment|/** Returns the return type of the {@code NTILE}, {@code RANK},    * {@code DENSE_RANK}, and {@code ROW_NUMBER} aggregate functions. */
+name|RelDataType
+name|deriveRankType
+parameter_list|(
+name|RelDataTypeFactory
+name|typeFactory
 parameter_list|)
 function_decl|;
 comment|/** Whether two record types are considered distinct if their field names    * are the same but in different cases. */

@@ -118,7 +118,7 @@ name|NTILE
 argument_list|,
 name|ReturnTypes
 operator|.
-name|INTEGER
+name|RANK
 argument_list|,
 literal|null
 argument_list|,

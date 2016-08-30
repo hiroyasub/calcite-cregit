@@ -3170,11 +3170,15 @@ init|=
 operator|new
 name|SqlRankFunction
 argument_list|(
-literal|true
-argument_list|,
 name|SqlKind
 operator|.
 name|CUME_DIST
+argument_list|,
+name|ReturnTypes
+operator|.
+name|FRACTIONAL_RANK
+argument_list|,
+literal|true
 argument_list|)
 decl_stmt|;
 comment|/**    *<code>DENSE_RANK</code> window function.    */
@@ -3187,11 +3191,15 @@ init|=
 operator|new
 name|SqlRankFunction
 argument_list|(
-literal|true
-argument_list|,
 name|SqlKind
 operator|.
 name|DENSE_RANK
+argument_list|,
+name|ReturnTypes
+operator|.
+name|RANK
+argument_list|,
+literal|true
 argument_list|)
 decl_stmt|;
 comment|/**    *<code>PERCENT_RANK</code> window function.    */
@@ -3204,11 +3212,15 @@ init|=
 operator|new
 name|SqlRankFunction
 argument_list|(
-literal|true
-argument_list|,
 name|SqlKind
 operator|.
 name|PERCENT_RANK
+argument_list|,
+name|ReturnTypes
+operator|.
+name|FRACTIONAL_RANK
+argument_list|,
+literal|true
 argument_list|)
 decl_stmt|;
 comment|/**    *<code>RANK</code> window function.    */
@@ -3221,11 +3233,15 @@ init|=
 operator|new
 name|SqlRankFunction
 argument_list|(
-literal|true
-argument_list|,
 name|SqlKind
 operator|.
 name|RANK
+argument_list|,
+name|ReturnTypes
+operator|.
+name|RANK
+argument_list|,
+literal|true
 argument_list|)
 decl_stmt|;
 comment|/**    *<code>ROW_NUMBER</code> window function.    */
@@ -3238,11 +3254,15 @@ init|=
 operator|new
 name|SqlRankFunction
 argument_list|(
-literal|false
-argument_list|,
 name|SqlKind
 operator|.
 name|ROW_NUMBER
+argument_list|,
+name|ReturnTypes
+operator|.
+name|RANK
+argument_list|,
+literal|false
 argument_list|)
 decl_stmt|;
 comment|//-------------------------------------------------------------

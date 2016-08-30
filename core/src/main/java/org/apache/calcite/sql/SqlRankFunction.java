@@ -47,6 +47,22 @@ name|ReturnTypes
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|type
+operator|.
+name|SqlReturnTypeInference
+import|;
+end_import
+
 begin_comment
 comment|/**  * Operator which aggregates sets of values into a result.  */
 end_comment
@@ -59,6 +75,8 @@ extends|extends
 name|SqlAggFunction
 block|{
 comment|//~ Constructors -----------------------------------------------------------
+annotation|@
+name|Deprecated
 specifier|public
 name|SqlRankFunction
 parameter_list|(
@@ -67,6 +85,31 @@ name|requiresOrder
 parameter_list|,
 name|SqlKind
 name|kind
+parameter_list|)
+block|{
+name|this
+argument_list|(
+name|kind
+argument_list|,
+name|ReturnTypes
+operator|.
+name|INTEGER
+argument_list|,
+name|requiresOrder
+argument_list|)
+expr_stmt|;
+block|}
+specifier|public
+name|SqlRankFunction
+parameter_list|(
+name|SqlKind
+name|kind
+parameter_list|,
+name|SqlReturnTypeInference
+name|returnTypes
+parameter_list|,
+name|boolean
+name|requiresOrder
 parameter_list|)
 block|{
 name|super
@@ -80,9 +123,7 @@ literal|null
 argument_list|,
 name|kind
 argument_list|,
-name|ReturnTypes
-operator|.
-name|INTEGER
+name|returnTypes
 argument_list|,
 literal|null
 argument_list|,
