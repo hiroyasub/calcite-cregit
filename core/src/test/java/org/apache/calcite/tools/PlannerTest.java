@@ -1856,7 +1856,7 @@ block|}
 comment|/** Helper method for testing {@link RelMetadataQuery#getPulledUpPredicates}    * metadata. */
 specifier|private
 name|void
-name|checkMetadataUnionPredicates
+name|checkMetadataPredicates
 parameter_list|(
 name|String
 name|sql
@@ -1960,7 +1960,7 @@ parameter_list|()
 throws|throws
 name|Exception
 block|{
-name|checkMetadataUnionPredicates
+name|checkMetadataPredicates
 argument_list|(
 literal|"select * from \"emps\" where \"deptno\"< 10\n"
 operator|+
@@ -1982,7 +1982,7 @@ parameter_list|()
 throws|throws
 name|Exception
 block|{
-name|checkMetadataUnionPredicates
+name|checkMetadataPredicates
 argument_list|(
 literal|"select * from \"emps\" where \"deptno\"< 10\n"
 operator|+
@@ -2005,7 +2005,7 @@ name|Exception
 block|{
 comment|// The result is [OR(<($1, 10), AND(<($1, 10),>($0, 1)))]
 comment|// which can be simplified to [<($1, 10)].
-name|checkMetadataUnionPredicates
+name|checkMetadataPredicates
 argument_list|(
 literal|"select * from \"emps\" where \"deptno\"< 10\n"
 operator|+
@@ -2026,7 +2026,7 @@ parameter_list|()
 throws|throws
 name|Exception
 block|{
-name|checkMetadataUnionPredicates
+name|checkMetadataPredicates
 argument_list|(
 literal|"select * from \"emps\" where \"deptno\"< 10\n"
 operator|+
@@ -2035,6 +2035,106 @@ operator|+
 literal|"select * from \"emps\" where \"deptno\"< 10 or \"empid\"> 1"
 argument_list|,
 literal|"[OR(<($1, 10),<($1, 10),>($0, 1))]"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testMetadataUnionPredicates5
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select * from \"emps\" where \"deptno\"< 10\n"
+operator|+
+literal|"union all\n"
+operator|+
+literal|"select * from \"emps\" where \"deptno\"< 10 and false"
+decl_stmt|;
+name|checkMetadataPredicates
+argument_list|(
+name|sql
+argument_list|,
+literal|"[<($1, 10)]"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Tests predicates that can be pulled-up from an Aggregate with    * {@code GROUP BY ()}. This form of Aggregate can convert an empty relation    * to a single-row relation, so it is not valid to pull up the predicate    * {@code false}. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testMetadataAggregatePredicates
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+name|checkMetadataPredicates
+argument_list|(
+literal|"select count(*) from \"emps\" where false"
+argument_list|,
+literal|"[]"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Tests predicates that can be pulled-up from an Aggregate with a non-empty    * group key. The {@code false} predicate effectively means that the relation    * is empty, because no row can satisfy {@code false}. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testMetadataAggregatePredicates2
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select \"deptno\", count(\"deptno\")\n"
+operator|+
+literal|"from \"emps\" where false\n"
+operator|+
+literal|"group by \"deptno\""
+decl_stmt|;
+name|checkMetadataPredicates
+argument_list|(
+name|sql
+argument_list|,
+literal|"[false]"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testMetadataAggregatePredicates3
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select \"deptno\", count(\"deptno\")\n"
+operator|+
+literal|"from \"emps\" where \"deptno\"> 10\n"
+operator|+
+literal|"group by \"deptno\""
+decl_stmt|;
+name|checkMetadataPredicates
+argument_list|(
+name|sql
+argument_list|,
+literal|"[>($0, 10)]"
 argument_list|)
 expr_stmt|;
 block|}

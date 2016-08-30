@@ -1598,6 +1598,24 @@ operator|.
 name|getGroupSet
 argument_list|()
 decl_stmt|;
+if|if
+condition|(
+name|groupKeys
+operator|.
+name|isEmpty
+argument_list|()
+condition|)
+block|{
+comment|// "GROUP BY ()" can convert an empty relation to a non-empty relation, so
+comment|// it is not valid to pull up predicates. In particular, consider the
+comment|// predicate "false": it is valid on all input rows (trivially - there are
+comment|// no rows!) but not on the output (there is one row).
+return|return
+name|RelOptPredicateList
+operator|.
+name|EMPTY
+return|;
+block|}
 name|Mapping
 name|m
 init|=
