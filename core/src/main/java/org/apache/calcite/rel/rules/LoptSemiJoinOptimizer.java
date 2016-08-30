@@ -283,6 +283,20 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|util
+operator|.
+name|Util
+import|;
+end_import
+
+begin_import
+import|import
 name|com
 operator|.
 name|google
@@ -297,11 +311,15 @@ end_import
 
 begin_import
 import|import
-name|java
+name|com
 operator|.
-name|util
+name|google
 operator|.
-name|ArrayList
+name|common
+operator|.
+name|collect
+operator|.
+name|Ordering
 import|;
 end_import
 
@@ -311,7 +329,7 @@ name|java
 operator|.
 name|util
 operator|.
-name|Arrays
+name|ArrayList
 import|;
 end_import
 
@@ -433,15 +451,20 @@ name|possibleSemiJoins
 decl_stmt|;
 specifier|private
 specifier|final
-name|Comparator
+name|Ordering
 argument_list|<
 name|Integer
 argument_list|>
-name|factorCostComparator
+name|factorCostOrdering
 init|=
+name|Ordering
+operator|.
+name|from
+argument_list|(
 operator|new
 name|FactorCostComparator
 argument_list|()
+argument_list|)
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
 specifier|public
@@ -2037,48 +2060,24 @@ operator|.
 name|getNumJoinFactors
 argument_list|()
 decl_stmt|;
+name|List
+argument_list|<
 name|Integer
-index|[]
+argument_list|>
 name|sortedFactors
 init|=
-operator|new
-name|Integer
-index|[
-name|nJoinFactors
-index|]
-decl_stmt|;
-for|for
-control|(
-name|int
-name|i
-init|=
-literal|0
-init|;
-name|i
-operator|<
-name|nJoinFactors
-condition|;
-name|i
-operator|++
-control|)
-block|{
-name|sortedFactors
-index|[
-name|i
-index|]
-operator|=
-name|i
-expr_stmt|;
-block|}
-name|Arrays
+name|factorCostOrdering
 operator|.
-name|sort
+name|immutableSortedCopy
 argument_list|(
-name|sortedFactors
-argument_list|,
-name|factorCostComparator
+name|Util
+operator|.
+name|range
+argument_list|(
+name|nJoinFactors
 argument_list|)
-expr_stmt|;
+argument_list|)
+decl_stmt|;
 comment|// loop through the factors in sort order, treating the factor as
 comment|// a fact table; analyze the possible semijoins associated with
 comment|// that fact table
@@ -2101,9 +2100,11 @@ name|Integer
 name|factIdx
 init|=
 name|sortedFactors
-index|[
+operator|.
+name|get
+argument_list|(
 name|i
-index|]
+argument_list|)
 decl_stmt|;
 name|RelNode
 name|factRel

@@ -786,7 +786,7 @@ argument_list|)
 operator|.
 name|planContains
 argument_list|(
-literal|"  return left.join(right, new org.apache.calcite.linq4j.function.Function1() {\n"
+literal|" left.join(right, new org.apache.calcite.linq4j.function.Function1() {\n"
 argument_list|)
 expr_stmt|;
 block|}

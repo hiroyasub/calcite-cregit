@@ -2059,13 +2059,11 @@ name|disjPred
 init|=
 name|RexUtil
 operator|.
-name|composeDisjunction
+name|simplifyOrs
 argument_list|(
 name|rB
 argument_list|,
 name|finalResidualPreds
-argument_list|,
-literal|false
 argument_list|)
 decl_stmt|;
 if|if
