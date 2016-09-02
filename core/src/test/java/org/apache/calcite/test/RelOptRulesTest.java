@@ -10513,6 +10513,58 @@ name|check
 argument_list|()
 expr_stmt|;
 block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testDistinctNonDistinctAggregates
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select emp.empno, count(*), avg(distinct dept.deptno)\n"
+operator|+
+literal|" from sales.emp emp inner join sales.dept dept\n"
+operator|+
+literal|" on emp.deptno = dept.deptno\n"
+operator|+
+literal|" group by emp.empno"
+decl_stmt|;
+specifier|final
+name|HepProgram
+name|program
+init|=
+name|HepProgram
+operator|.
+name|builder
+argument_list|()
+operator|.
+name|addRuleInstance
+argument_list|(
+name|AggregateExpandDistinctAggregatesRule
+operator|.
+name|JOIN
+argument_list|)
+operator|.
+name|build
+argument_list|()
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|with
+argument_list|(
+name|program
+argument_list|)
+operator|.
+name|check
+argument_list|()
+expr_stmt|;
+block|}
 block|}
 end_class
 
