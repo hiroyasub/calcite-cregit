@@ -2055,7 +2055,7 @@ condition|(
 operator|!
 name|disjPred
 operator|.
-name|isAlwaysFalse
+name|isAlwaysTrue
 argument_list|()
 condition|)
 block|{
