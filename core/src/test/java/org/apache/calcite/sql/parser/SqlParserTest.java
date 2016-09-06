@@ -73,6 +73,20 @@ name|calcite
 operator|.
 name|sql
 operator|.
+name|SqlKind
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
 name|SqlNode
 import|;
 end_import
@@ -199,6 +213,20 @@ name|google
 operator|.
 name|common
 operator|.
+name|base
+operator|.
+name|Throwables
+import|;
+end_import
+
+begin_import
+import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
 name|collect
 operator|.
 name|ImmutableList
@@ -230,6 +258,36 @@ operator|.
 name|collect
 operator|.
 name|ImmutableSortedSet
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|hamcrest
+operator|.
+name|BaseMatcher
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|hamcrest
+operator|.
+name|Description
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|hamcrest
+operator|.
+name|Matcher
 import|;
 end_import
 
@@ -404,6 +462,18 @@ operator|.
 name|CoreMatchers
 operator|.
 name|is
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|hamcrest
+operator|.
+name|CoreMatchers
+operator|.
+name|not
 import|;
 end_import
 
@@ -4482,6 +4552,74 @@ argument_list|,
 name|expectedMsgPattern
 argument_list|)
 expr_stmt|;
+block|}
+comment|/** Returns a {@link Matcher} that succeeds if the given {@link SqlNode} is a    * DDL statement. */
+specifier|public
+specifier|static
+name|Matcher
+argument_list|<
+name|SqlNode
+argument_list|>
+name|isDdl
+parameter_list|()
+block|{
+return|return
+operator|new
+name|BaseMatcher
+argument_list|<
+name|SqlNode
+argument_list|>
+argument_list|()
+block|{
+specifier|public
+name|boolean
+name|matches
+parameter_list|(
+name|Object
+name|item
+parameter_list|)
+block|{
+return|return
+name|item
+operator|instanceof
+name|SqlNode
+operator|&&
+name|SqlKind
+operator|.
+name|DDL
+operator|.
+name|contains
+argument_list|(
+operator|(
+operator|(
+name|SqlNode
+operator|)
+name|item
+operator|)
+operator|.
+name|getKind
+argument_list|()
+argument_list|)
+return|;
+block|}
+specifier|public
+name|void
+name|describeTo
+parameter_list|(
+name|Description
+name|description
+parameter_list|)
+block|{
+name|description
+operator|.
+name|appendText
+argument_list|(
+literal|"isDdl"
+argument_list|)
+expr_stmt|;
+block|}
+block|}
+return|;
 block|}
 specifier|protected
 name|SortedSet
@@ -10802,18 +10940,58 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testSelectIsNotDdl
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"select 1 from t"
+argument_list|)
+operator|.
+name|node
+argument_list|(
+name|not
+argument_list|(
+name|isDdl
+argument_list|()
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testInsertSelect
 parameter_list|()
 block|{
-name|check
-argument_list|(
-literal|"insert into emps select * from emps"
-argument_list|,
+specifier|final
+name|String
+name|expected
+init|=
 literal|"INSERT INTO `EMPS`\n"
 operator|+
 literal|"(SELECT *\n"
 operator|+
 literal|"FROM `EMPS`)"
+decl_stmt|;
+name|sql
+argument_list|(
+literal|"insert into emps select * from emps"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+operator|.
+name|node
+argument_list|(
+name|not
+argument_list|(
+name|isDdl
+argument_list|()
+argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
@@ -10824,10 +11002,10 @@ name|void
 name|testInsertUnion
 parameter_list|()
 block|{
-name|check
-argument_list|(
-literal|"insert into emps select * from emps1 union select * from emps2"
-argument_list|,
+specifier|final
+name|String
+name|expected
+init|=
 literal|"INSERT INTO `EMPS`\n"
 operator|+
 literal|"(SELECT *\n"
@@ -10839,6 +11017,15 @@ operator|+
 literal|"SELECT *\n"
 operator|+
 literal|"FROM `EMPS2`)"
+decl_stmt|;
+name|sql
+argument_list|(
+literal|"insert into emps select * from emps1 union select * from emps2"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
 argument_list|)
 expr_stmt|;
 block|}
@@ -10849,13 +11036,31 @@ name|void
 name|testInsertValues
 parameter_list|()
 block|{
-name|check
-argument_list|(
-literal|"insert into emps values (1,'Fredkin')"
-argument_list|,
+specifier|final
+name|String
+name|expected
+init|=
 literal|"INSERT INTO `EMPS`\n"
 operator|+
 literal|"(VALUES (ROW(1, 'Fredkin')))"
+decl_stmt|;
+name|sql
+argument_list|(
+literal|"insert into emps values (1,'Fredkin')"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+operator|.
+name|node
+argument_list|(
+name|not
+argument_list|(
+name|isDdl
+argument_list|()
+argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
@@ -10866,15 +11071,24 @@ name|void
 name|testInsertColumnList
 parameter_list|()
 block|{
-name|check
-argument_list|(
-literal|"insert into emps(x,y) select * from emps"
-argument_list|,
+specifier|final
+name|String
+name|expected
+init|=
 literal|"INSERT INTO `EMPS` (`X`, `Y`)\n"
 operator|+
 literal|"(SELECT *\n"
 operator|+
 literal|"FROM `EMPS`)"
+decl_stmt|;
+name|sql
+argument_list|(
+literal|"insert into emps(x,y) select * from emps"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
 argument_list|)
 expr_stmt|;
 block|}
@@ -10885,17 +11099,37 @@ name|void
 name|testExplainInsert
 parameter_list|()
 block|{
-name|check
-argument_list|(
-literal|"explain plan for insert into emps1 select * from emps2"
-argument_list|,
-literal|"EXPLAIN PLAN INCLUDING ATTRIBUTES WITH IMPLEMENTATION FOR\n"
+specifier|final
+name|String
+name|expected
+init|=
+literal|"EXPLAIN PLAN INCLUDING ATTRIBUTES"
+operator|+
+literal|" WITH IMPLEMENTATION FOR\n"
 operator|+
 literal|"INSERT INTO `EMPS1`\n"
 operator|+
 literal|"(SELECT *\n"
 operator|+
 literal|"FROM `EMPS2`)"
+decl_stmt|;
+name|sql
+argument_list|(
+literal|"explain plan for insert into emps1 select * from emps2"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+operator|.
+name|node
+argument_list|(
+name|not
+argument_list|(
+name|isDdl
+argument_list|()
+argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
@@ -10906,6 +11140,14 @@ name|void
 name|testUpsertValues
 parameter_list|()
 block|{
+specifier|final
+name|String
+name|expected
+init|=
+literal|"UPSERT INTO `EMPS`\n"
+operator|+
+literal|"(VALUES (ROW(1, 'Fredkin')))"
+decl_stmt|;
 name|sql
 argument_list|(
 literal|"upsert into emps values (1,'Fredkin')"
@@ -10913,9 +11155,16 @@ argument_list|)
 operator|.
 name|ok
 argument_list|(
-literal|"UPSERT INTO `EMPS`\n"
-operator|+
-literal|"(VALUES (ROW(1, 'Fredkin')))"
+name|expected
+argument_list|)
+operator|.
+name|node
+argument_list|(
+name|not
+argument_list|(
+name|isDdl
+argument_list|()
+argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
@@ -10970,11 +11219,23 @@ name|void
 name|testDelete
 parameter_list|()
 block|{
-name|check
+name|sql
 argument_list|(
 literal|"delete from emps"
-argument_list|,
+argument_list|)
+operator|.
+name|ok
+argument_list|(
 literal|"DELETE FROM `EMPS`"
+argument_list|)
+operator|.
+name|node
+argument_list|(
+name|not
+argument_list|(
+name|isDdl
+argument_list|()
+argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
@@ -11024,8 +11285,10 @@ name|void
 name|testMergeSelectSource
 parameter_list|()
 block|{
-name|check
-argument_list|(
+specifier|final
+name|String
+name|sql
+init|=
 literal|"merge into emps e "
 operator|+
 literal|"using (select * from tempemps where deptno is null) t "
@@ -11039,7 +11302,11 @@ operator|+
 literal|"when not matched then insert (name, dept, salary) "
 operator|+
 literal|"values(t.name, 10, t.salary * .15)"
-argument_list|,
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
 literal|"MERGE INTO `EMPS` AS `E`\n"
 operator|+
 literal|"USING (SELECT *\n"
@@ -11059,6 +11326,24 @@ operator|+
 literal|"WHEN NOT MATCHED THEN INSERT (`NAME`, `DEPT`, `SALARY`) "
 operator|+
 literal|"(VALUES (ROW(`T`.`NAME`, 10, (`T`.`SALARY` * 0.15))))"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+operator|.
+name|node
+argument_list|(
+name|not
+argument_list|(
+name|isDdl
+argument_list|()
+argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
@@ -20823,11 +21108,20 @@ literal|"ALTER SYSTEM SET \"SCHEMA\" = TRUE"
 argument_list|)
 argument_list|)
 expr_stmt|;
-name|check
+name|sql
 argument_list|(
 literal|"alter system set \"a number\" = 1"
-argument_list|,
+argument_list|)
+operator|.
+name|ok
+argument_list|(
 literal|"ALTER SYSTEM SET `a number` = 1"
+argument_list|)
+operator|.
+name|node
+argument_list|(
+name|isDdl
+argument_list|()
 argument_list|)
 expr_stmt|;
 name|check
@@ -20872,11 +21166,20 @@ argument_list|,
 literal|"ALTER SYSTEM SET `a`.`number` = 1"
 argument_list|)
 expr_stmt|;
-name|check
+name|sql
 argument_list|(
 literal|"set approx = -12.3450"
-argument_list|,
+argument_list|)
+operator|.
+name|ok
+argument_list|(
 literal|"SET `APPROX` = -12.3450"
+argument_list|)
+operator|.
+name|node
+argument_list|(
+name|isDdl
+argument_list|()
 argument_list|)
 expr_stmt|;
 name|node
@@ -20984,11 +21287,20 @@ argument_list|,
 literal|"ALTER SYSTEM RESET `FLAG`"
 argument_list|)
 expr_stmt|;
-name|check
+name|sql
 argument_list|(
 literal|"reset onOff"
-argument_list|,
+argument_list|)
+operator|.
+name|ok
+argument_list|(
 literal|"RESET `ONOFF`"
+argument_list|)
+operator|.
+name|node
+argument_list|(
+name|isDdl
+argument_list|()
 argument_list|)
 expr_stmt|;
 name|check
@@ -21185,6 +21497,19 @@ name|sql
 parameter_list|,
 name|String
 name|expectedMsgPattern
+parameter_list|)
+function_decl|;
+name|void
+name|checkNode
+parameter_list|(
+name|String
+name|sql
+parameter_list|,
+name|Matcher
+argument_list|<
+name|SqlNode
+argument_list|>
+name|matcher
 parameter_list|)
 function_decl|;
 block|}
@@ -21516,6 +21841,69 @@ name|sap
 argument_list|)
 expr_stmt|;
 block|}
+specifier|public
+name|void
+name|checkNode
+parameter_list|(
+name|String
+name|sql
+parameter_list|,
+name|Matcher
+argument_list|<
+name|SqlNode
+argument_list|>
+name|matcher
+parameter_list|)
+block|{
+name|SqlParserUtil
+operator|.
+name|StringAndPos
+name|sap
+init|=
+name|SqlParserUtil
+operator|.
+name|findPos
+argument_list|(
+name|sql
+argument_list|)
+decl_stmt|;
+try|try
+block|{
+specifier|final
+name|SqlNode
+name|sqlNode
+init|=
+name|parseStmt
+argument_list|(
+name|sap
+operator|.
+name|sql
+argument_list|)
+decl_stmt|;
+name|assertThat
+argument_list|(
+name|sqlNode
+argument_list|,
+name|matcher
+argument_list|)
+expr_stmt|;
+block|}
+catch|catch
+parameter_list|(
+name|SqlParseException
+name|e
+parameter_list|)
+block|{
+throw|throw
+name|Throwables
+operator|.
+name|propagate
+argument_list|(
+name|e
+argument_list|)
+throw|;
+block|}
+block|}
 comment|/**      * Tests that an expression throws an exception which matches the given      * pattern.      */
 specifier|public
 name|void
@@ -21597,6 +21985,8 @@ name|UnparsingTesterImpl
 extends|extends
 name|TesterImpl
 block|{
+annotation|@
+name|Override
 specifier|public
 name|void
 name|check
@@ -21752,6 +22142,8 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|checkExp
@@ -21907,6 +22299,8 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|checkFails
@@ -21920,6 +22314,8 @@ parameter_list|)
 block|{
 comment|// Do nothing. We're not interested in unparsing invalid SQL
 block|}
+annotation|@
+name|Override
 specifier|public
 name|void
 name|checkExpFails
@@ -21991,7 +22387,7 @@ name|sql
 expr_stmt|;
 block|}
 specifier|public
-name|void
+name|Sql
 name|ok
 parameter_list|(
 name|String
@@ -22008,9 +22404,12 @@ argument_list|,
 name|expected
 argument_list|)
 expr_stmt|;
+return|return
+name|this
+return|;
 block|}
 specifier|public
-name|void
+name|Sql
 name|fails
 parameter_list|(
 name|String
@@ -22027,6 +22426,34 @@ argument_list|,
 name|expectedMsgPattern
 argument_list|)
 expr_stmt|;
+return|return
+name|this
+return|;
+block|}
+specifier|public
+name|Sql
+name|node
+parameter_list|(
+name|Matcher
+argument_list|<
+name|SqlNode
+argument_list|>
+name|matcher
+parameter_list|)
+block|{
+name|getTester
+argument_list|()
+operator|.
+name|checkNode
+argument_list|(
+name|sql
+argument_list|,
+name|matcher
+argument_list|)
+expr_stmt|;
+return|return
+name|this
+return|;
 block|}
 block|}
 block|}

@@ -775,6 +775,10 @@ argument_list|,
 name|ALTER_INDEX
 argument_list|,
 name|DROP_INDEX
+argument_list|,
+name|SET_OPTION
+argument_list|,
+name|OTHER_DDL
 argument_list|)
 decl_stmt|;
 comment|/**    * Category consisting of query node types.    *    *<p>Consists of:    * {@link #SELECT},    * {@link #EXCEPT},    * {@link #INTERSECT},    * {@link #UNION},    * {@link #VALUES},    * {@link #ORDER_BY},    * {@link #EXPLICIT_TABLE}.    */
