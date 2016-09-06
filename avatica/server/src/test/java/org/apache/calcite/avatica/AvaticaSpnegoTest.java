@@ -183,6 +183,16 @@ name|org
 operator|.
 name|junit
 operator|.
+name|Ignore
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|junit
+operator|.
 name|Test
 import|;
 end_import
@@ -394,6 +404,11 @@ argument_list|(
 name|Parameterized
 operator|.
 name|class
+argument_list|)
+annotation|@
+name|Ignore
+argument_list|(
+literal|"Disabled due to [CALCITE-1183] intermittent HTTP 404 failures"
 argument_list|)
 specifier|public
 class|class
