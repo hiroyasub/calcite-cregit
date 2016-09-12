@@ -483,6 +483,16 @@ name|Set
 import|;
 end_import
 
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|TimeZone
+import|;
+end_import
+
 begin_comment
 comment|/**  * Collection of planner rules that convert  * {@code EXTRACT(timeUnit FROM dateTime) = constant} to  * {@code dateTime BETWEEN lower AND upper}.  *  *<p>The rules allow conversion of queries on time dimension tables, such as  *  *<blockquote>SELECT ... FROM sales JOIN time_by_day USING (time_id)  * WHERE time_by_day.the_year = 1997  * AND time_by_day.the_month IN (4, 5, 6)</blockquote>  *  *<p>into  *  *<blockquote>SELECT ... FROM sales JOIN time_by_day USING (time_id)  * WHERE the_date BETWEEN DATE '2016-04-01' AND DATE '2016-06-30'</blockquote>  *  *<p>and is especially useful for Druid, which has a single timestamp column.  */
 end_comment
@@ -1633,7 +1643,14 @@ operator|=
 name|Calendar
 operator|.
 name|getInstance
-argument_list|()
+argument_list|(
+name|TimeZone
+operator|.
+name|getTimeZone
+argument_list|(
+literal|"UTC"
+argument_list|)
+argument_list|)
 expr_stmt|;
 name|c
 operator|.
