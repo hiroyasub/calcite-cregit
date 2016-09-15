@@ -2774,11 +2774,9 @@ name|MetaTypeInfo
 argument_list|>
 name|allTypeList
 init|=
-operator|new
 name|ImmutableList
 operator|.
-name|Builder
-argument_list|<>
+name|builder
 argument_list|()
 decl_stmt|;
 specifier|final

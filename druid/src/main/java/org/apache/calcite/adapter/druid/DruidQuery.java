@@ -839,7 +839,7 @@ name|DRUID_QUERY_FETCH
 init|=
 literal|"druid.query.fetch"
 decl_stmt|;
-comment|/**    * Creates a DruidQuery.    *    * @param cluster        Cluster    * @param traitSet       Traits    * @param table          Table    * @param druidTable     Druid table    * @param interval       Interval for the query    * @param rels           Internal relational expressions    */
+comment|/**    * Creates a DruidQuery.    *    * @param cluster        Cluster    * @param traitSet       Traits    * @param table          Table    * @param druidTable     Druid table    * @param intervals      Intervals for the query    * @param rels           Internal relational expressions    */
 specifier|protected
 name|DruidQuery
 parameter_list|(
@@ -3321,13 +3321,9 @@ name|JsonCollation
 argument_list|>
 name|colBuilder
 init|=
-operator|new
 name|ImmutableList
 operator|.
-name|Builder
-argument_list|<
-name|JsonCollation
-argument_list|>
+name|builder
 argument_list|()
 decl_stmt|;
 for|for

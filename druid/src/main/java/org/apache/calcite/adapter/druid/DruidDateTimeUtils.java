@@ -381,7 +381,7 @@ name|DruidDateTimeUtils
 parameter_list|()
 block|{
 block|}
-comment|/**    * Given a list of predicates, it generates the equivalent Interval    * (if possible). It assumes that all the predicates in the input    * reference a single column : the timestamp column.    *    * @param conjs list of conditions to use for the transformation    * @return interval representing the conditions in the input list    */
+comment|/**    * Generates a list of {@link Interval}s equivalent to a given    * expression. Assumes that all the predicates in the input    * reference a single column: the timestamp column.    */
 specifier|public
 specifier|static
 name|List
@@ -2523,7 +2523,7 @@ return|return
 name|totalTime
 return|;
 block|}
-comment|/**    * Extract granularity from a call FLOOR(<time> TO<timeunit>).    * Timeunit specifies the granularity. Returns null if it cannot    * be inferred.    *    * @param call the function call    * @return the granularity, or null if it cannot be inferred    */
+comment|/**    * Extracts granularity from a call {@code FLOOR(<time> TO<timeunit>)}.    * Timeunit specifies the granularity. Returns null if it cannot    * be inferred.    *    * @param call the function call    * @return the granularity, or null if it cannot be inferred    */
 specifier|public
 specifier|static
 name|String
