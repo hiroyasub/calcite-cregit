@@ -23559,6 +23559,19 @@ operator|+
 literal|" INTEGER NOT NULL A0) NOT NULL"
 argument_list|)
 expr_stmt|;
+comment|// Resolve struct type F1 with wildcard.
+name|sql
+argument_list|(
+literal|"select t.f1.* from struct.t"
+argument_list|)
+operator|.
+name|type
+argument_list|(
+literal|"RecordType(INTEGER C0, INTEGER NOT NULL C2,"
+operator|+
+literal|" INTEGER NOT NULL A0) NOT NULL"
+argument_list|)
+expr_stmt|;
 comment|// Fail non-existent column B0.
 name|sql
 argument_list|(
