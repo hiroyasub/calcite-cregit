@@ -1631,6 +1631,100 @@ literal|"C=56\n"
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1382">[CALCITE-1382]    * ClassCastException in JDBC adapter</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testJoinPlan3
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"SELECT count(*) AS c FROM (\n"
+operator|+
+literal|"  SELECT count(emp.empno) `Count Emp`,\n"
+operator|+
+literal|"      dept.dname `Department Name`\n"
+operator|+
+literal|"  FROM emp emp\n"
+operator|+
+literal|"  JOIN dept dept ON emp.deptno = dept.deptno\n"
+operator|+
+literal|"  JOIN salgrade salgrade ON emp.comm = salgrade.hisal\n"
+operator|+
+literal|"  WHERE dept.dname LIKE '%A%'\n"
+operator|+
+literal|"  GROUP BY emp.deptno, dept.dname)"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"c=1\n"
+decl_stmt|;
+specifier|final
+name|String
+name|expectedSql
+init|=
+literal|"SELECT COUNT(*) AS \"c\"\n"
+operator|+
+literal|"FROM (SELECT \"t0\".\"DEPTNO\", \"t2\".\"DNAME\"\n"
+operator|+
+literal|"FROM (SELECT \"HISAL\"\n"
+operator|+
+literal|"FROM \"SCOTT\".\"SALGRADE\") AS \"t\"\n"
+operator|+
+literal|"INNER JOIN ((SELECT \"COMM\", \"DEPTNO\"\n"
+operator|+
+literal|"FROM \"SCOTT\".\"EMP\") AS \"t0\" "
+operator|+
+literal|"INNER JOIN (SELECT \"DEPTNO\", \"DNAME\"\n"
+operator|+
+literal|"FROM \"SCOTT\".\"DEPT\"\n"
+operator|+
+literal|"WHERE \"DNAME\" LIKE '%A%') AS \"t2\" "
+operator|+
+literal|"ON \"t0\".\"DEPTNO\" = \"t2\".\"DEPTNO\") "
+operator|+
+literal|"ON \"t\".\"HISAL\" = \"t0\".\"COMM\"\n"
+operator|+
+literal|"GROUP BY \"t0\".\"DEPTNO\", \"t2\".\"DNAME\") AS \"t3\""
+decl_stmt|;
+name|CalciteAssert
+operator|.
+name|model
+argument_list|(
+name|JdbcTest
+operator|.
+name|SCOTT_MODEL
+argument_list|)
+operator|.
+name|with
+argument_list|(
+name|Lex
+operator|.
+name|MYSQL
+argument_list|)
+operator|.
+name|query
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+name|expected
+argument_list|)
+operator|.
+name|planHasSql
+argument_list|(
+name|expectedSql
+argument_list|)
+expr_stmt|;
+block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-657">[CALCITE-657]    * NullPointerException when executing JdbcAggregate implement method</a>. */
 annotation|@
 name|Test
@@ -1804,9 +1898,6 @@ argument_list|)
 expr_stmt|;
 name|assertThat
 argument_list|(
-operator|(
-name|Long
-operator|)
 name|rs
 operator|.
 name|getObject
@@ -3541,8 +3632,6 @@ name|Test
 name|void
 name|testColumnNullability
 parameter_list|()
-throws|throws
-name|Exception
 block|{
 specifier|final
 name|String
@@ -3585,8 +3674,6 @@ name|Test
 name|void
 name|pushBindParameters
 parameter_list|()
-throws|throws
-name|Exception
 block|{
 specifier|final
 name|String
@@ -3612,7 +3699,6 @@ name|consumesPreparedStatement
 argument_list|(
 name|p
 lambda|->
-block|{
 name|p
 operator|.
 name|setInt
@@ -3621,8 +3707,6 @@ literal|1
 argument_list|,
 literal|7566
 argument_list|)
-expr_stmt|;
-block|}
 argument_list|)
 operator|.
 name|returnsCount
