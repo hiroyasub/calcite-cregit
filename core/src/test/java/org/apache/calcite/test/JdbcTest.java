@@ -19364,11 +19364,30 @@ argument_list|(
 literal|"custom-schema-model.json"
 argument_list|)
 expr_stmt|;
+switch|switch
+condition|(
+name|File
+operator|.
+name|pathSeparatorChar
+condition|)
+block|{
+case|case
+literal|'/'
+case|:
+comment|// Skip this test on Windows; the mapping from file names to URLs is too
+comment|// weird.
 name|checkCustomSchemaInFileInPwd
 argument_list|(
-literal|"./custom-schema-model2.json"
+literal|"."
+operator|+
+name|File
+operator|.
+name|pathSeparatorChar
+operator|+
+literal|"custom-schema-model2.json"
 argument_list|)
 expr_stmt|;
+block|}
 block|}
 specifier|private
 name|void
@@ -19520,18 +19539,11 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-name|assertThat
-argument_list|(
+comment|//noinspection ResultOfMethodCallIgnored
 name|file
 operator|.
 name|delete
 argument_list|()
-argument_list|,
-name|is
-argument_list|(
-literal|true
-argument_list|)
-argument_list|)
 expr_stmt|;
 block|}
 catch|catch
