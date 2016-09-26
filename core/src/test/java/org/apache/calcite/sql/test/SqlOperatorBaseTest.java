@@ -417,6 +417,22 @@ name|sql
 operator|.
 name|validate
 operator|.
+name|SqlConformance
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|validate
+operator|.
 name|SqlValidatorImpl
 import|;
 end_import
@@ -11195,6 +11211,70 @@ argument_list|(
 literal|"'a'<>cast(null as varchar(1))"
 argument_list|)
 expr_stmt|;
+comment|// "!=" is not an acceptable alternative to "<>" under default SQL conformance level
+name|tester
+operator|.
+name|checkFails
+argument_list|(
+literal|"1 != 1"
+argument_list|,
+literal|"Bang equal '!=' is not allowed under the current SQL conformance level"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+comment|// "!=" is allowed under ORACLE_10 SQL conformance level
+specifier|final
+name|SqlTester
+name|tester1
+init|=
+name|tester
+operator|.
+name|withConformance
+argument_list|(
+name|SqlConformance
+operator|.
+name|ORACLE_10
+argument_list|)
+operator|.
+name|withConnectionFactory
+argument_list|(
+name|CalciteAssert
+operator|.
+name|EMPTY_CONNECTION_FACTORY
+operator|.
+name|with
+argument_list|(
+literal|"conformance"
+argument_list|,
+name|SqlConformance
+operator|.
+name|ORACLE_10
+argument_list|)
+argument_list|)
+decl_stmt|;
+name|tester1
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"1<> 1"
+argument_list|,
+name|Boolean
+operator|.
+name|FALSE
+argument_list|)
+expr_stmt|;
+name|tester1
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"1 != 1"
+argument_list|,
+name|Boolean
+operator|.
+name|FALSE
+argument_list|)
+expr_stmt|;
 block|}
 annotation|@
 name|Test
@@ -11241,18 +11321,6 @@ operator|.
 name|checkNull
 argument_list|(
 literal|"cast(null as interval hour)<> interval '2' minute"
-argument_list|)
-expr_stmt|;
-comment|// "!=" is not an acceptable alternative to "<>"
-name|tester
-operator|.
-name|checkFails
-argument_list|(
-literal|"1 ^!^= 1"
-argument_list|,
-literal|"(?s).*Encountered: \"!\" \\(33\\).*"
-argument_list|,
-literal|false
 argument_list|)
 expr_stmt|;
 block|}

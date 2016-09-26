@@ -4682,6 +4682,17 @@ operator|.
 name|quoting
 argument_list|()
 argument_list|)
+operator|.
+name|setAllowBangEqual
+argument_list|(
+name|config
+operator|.
+name|conformance
+argument_list|()
+operator|.
+name|isBangEqualAllowed
+argument_list|()
+argument_list|)
 argument_list|)
 decl_stmt|;
 name|SqlNode

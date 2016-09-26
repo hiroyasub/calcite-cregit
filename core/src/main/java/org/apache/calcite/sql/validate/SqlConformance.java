@@ -150,6 +150,29 @@ literal|false
 return|;
 block|}
 block|}
+comment|/**    * Whether the bang-equal token != is allowed as an alternative to&lt;&gt; in    * the parser.    *    *<p>True in {@link #ORACLE_10};    * false otherwise.    */
+specifier|public
+name|boolean
+name|isBangEqualAllowed
+parameter_list|()
+block|{
+switch|switch
+condition|(
+name|this
+condition|)
+block|{
+case|case
+name|ORACLE_10
+case|:
+return|return
+literal|true
+return|;
+default|default:
+return|return
+literal|false
+return|;
+block|}
+block|}
 block|}
 end_enum
 

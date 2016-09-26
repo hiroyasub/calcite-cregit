@@ -1063,6 +1063,16 @@ name|int
 name|identifierMaxLength
 parameter_list|)
 function_decl|;
+comment|/**    * Sets whether the bang-equal token != is allowed as an alternative to&lt;&gt;.    */
+specifier|public
+specifier|abstract
+name|void
+name|setAllowBangEqual
+parameter_list|(
+name|boolean
+name|allowBangEqual
+parameter_list|)
+function_decl|;
 comment|/**    * Sets the SQL text that is being parsed.    */
 specifier|public
 name|void

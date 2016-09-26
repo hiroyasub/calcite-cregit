@@ -5405,11 +5405,12 @@ comment|//   only potential point of confusion is that the operator for 'not
 comment|//   equals' is<> as in BASIC. There are many texts which will tell
 comment|//   you that != is SQL's not-equals operator; those texts are false;
 comment|//   it's one of those unstampoutable urban myths."
-name|checkFails
+comment|// Therefore, we only support != with certain SQL conformance levels.
+name|checkExpFails
 argument_list|(
-literal|"'abc'^!^=123"
+literal|"'abc'!=123"
 argument_list|,
-literal|"Lexical error at line 1, column 6\\.  Encountered: \"!\" \\(33\\), after : \"\""
+literal|"Bang equal '!=' is not allowed under the current SQL conformance level"
 argument_list|)
 expr_stmt|;
 block|}
