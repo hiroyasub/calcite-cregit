@@ -2115,6 +2115,18 @@ argument_list|()
 decl_stmt|;
 if|if
 condition|(
+name|returnType
+operator|instanceof
+name|RecordType
+condition|)
+block|{
+comment|// We can't extract Class from RecordType since mapping Java Class might not generated yet.
+return|return
+name|expression
+return|;
+block|}
+if|if
+condition|(
 name|Types
 operator|.
 name|isAssignableFrom

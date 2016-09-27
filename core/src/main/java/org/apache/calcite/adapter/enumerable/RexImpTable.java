@@ -9999,6 +9999,10 @@ argument_list|>
 name|translatedOperands
 parameter_list|)
 block|{
+specifier|final
+name|Expression
+name|expression
+decl_stmt|;
 if|if
 condition|(
 name|Modifier
@@ -10012,7 +10016,8 @@ argument_list|()
 argument_list|)
 condition|)
 block|{
-return|return
+name|expression
+operator|=
 name|Expressions
 operator|.
 name|call
@@ -10021,11 +10026,12 @@ name|method
 argument_list|,
 name|translatedOperands
 argument_list|)
-return|;
+expr_stmt|;
 block|}
 else|else
 block|{
-return|return
+name|expression
+operator|=
 name|Expressions
 operator|.
 name|call
@@ -10048,8 +10054,34 @@ argument_list|,
 literal|1
 argument_list|)
 argument_list|)
-return|;
+expr_stmt|;
 block|}
+specifier|final
+name|Type
+name|returnType
+init|=
+name|translator
+operator|.
+name|typeFactory
+operator|.
+name|getJavaClass
+argument_list|(
+name|call
+operator|.
+name|getType
+argument_list|()
+argument_list|)
+decl_stmt|;
+return|return
+name|Types
+operator|.
+name|castIfNecessary
+argument_list|(
+name|returnType
+argument_list|,
+name|expression
+argument_list|)
+return|;
 block|}
 block|}
 comment|/** Implementor for a function that generates calls to a given method. */
@@ -11253,6 +11285,18 @@ name|getSqlTypeName
 argument_list|()
 argument_list|)
 decl_stmt|;
+comment|// Since we follow PostgreSQL's semantics that an out-of-bound reference
+comment|// returns NULL, x[y] can return null even if x and y are both NOT NULL.
+comment|// (In SQL standard semantics, an out-of-bound reference to an array
+comment|// throws an exception.)
+specifier|final
+name|NullPolicy
+name|nullPolicy
+init|=
+name|NullPolicy
+operator|.
+name|ANY
+decl_stmt|;
 return|return
 name|implementNullSemantics0
 argument_list|(
@@ -11262,9 +11306,7 @@ name|call
 argument_list|,
 name|nullAs
 argument_list|,
-name|NullPolicy
-operator|.
-name|STRICT
+name|nullPolicy
 argument_list|,
 literal|false
 argument_list|,

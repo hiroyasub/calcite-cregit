@@ -1007,6 +1007,10 @@ name|SqlLineTest
 operator|.
 name|class
 block|,
+name|CollectionTypeTest
+operator|.
+name|class
+block|,
 comment|// slow tests that don't break often
 name|SqlToRelConverterExtendedTest
 operator|.

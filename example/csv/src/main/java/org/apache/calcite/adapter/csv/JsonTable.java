@@ -241,7 +241,7 @@ name|createSqlType
 argument_list|(
 name|SqlTypeName
 operator|.
-name|ANY
+name|VARCHAR
 argument_list|)
 argument_list|,
 literal|true

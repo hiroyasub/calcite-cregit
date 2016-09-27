@@ -2789,7 +2789,7 @@ name|SqlFunctions
 operator|.
 name|class
 argument_list|,
-literal|"arrayItem"
+literal|"arrayItemOptional"
 argument_list|,
 name|List
 operator|.
@@ -2806,7 +2806,7 @@ name|SqlFunctions
 operator|.
 name|class
 argument_list|,
-literal|"mapItem"
+literal|"mapItemOptional"
 argument_list|,
 name|Map
 operator|.
@@ -2823,7 +2823,7 @@ name|SqlFunctions
 operator|.
 name|class
 argument_list|,
-literal|"item"
+literal|"itemOptional"
 argument_list|,
 name|Object
 operator|.

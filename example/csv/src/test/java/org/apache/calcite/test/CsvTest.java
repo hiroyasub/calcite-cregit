@@ -1198,7 +1198,7 @@ literal|" _MAP['title'] as title,\n"
 operator|+
 literal|" CHAR_LENGTH(CAST(_MAP['title'] AS VARCHAR(30))) as len\n"
 operator|+
-literal|" from \"archers\""
+literal|" from \"archers\"\n"
 argument_list|,
 literal|"ID=19990101; TITLE=Tractor trouble.; LEN=16"
 argument_list|,
