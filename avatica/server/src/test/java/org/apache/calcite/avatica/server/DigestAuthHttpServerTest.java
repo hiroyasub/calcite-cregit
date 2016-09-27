@@ -125,7 +125,9 @@ name|org
 operator|.
 name|hamcrest
 operator|.
-name|CoreMatchers
+name|core
+operator|.
+name|StringContains
 operator|.
 name|containsString
 import|;

@@ -553,18 +553,6 @@ name|hamcrest
 operator|.
 name|CoreMatchers
 operator|.
-name|containsString
-import|;
-end_import
-
-begin_import
-import|import static
-name|org
-operator|.
-name|hamcrest
-operator|.
-name|CoreMatchers
-operator|.
 name|equalTo
 import|;
 end_import
@@ -611,7 +599,23 @@ name|org
 operator|.
 name|hamcrest
 operator|.
-name|CoreMatchers
+name|core
+operator|.
+name|StringContains
+operator|.
+name|containsString
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|hamcrest
+operator|.
+name|core
+operator|.
+name|StringStartsWith
 operator|.
 name|startsWith
 import|;

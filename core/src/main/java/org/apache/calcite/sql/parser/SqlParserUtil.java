@@ -3591,7 +3591,7 @@ name|pos
 expr_stmt|;
 block|}
 block|}
-comment|/** Implementation of {@link SqlSpecialOperator.TokenSequence} based on an    * existing parser. */
+comment|/** Implementation of    * {@link org.apache.calcite.sql.SqlSpecialOperator.TokenSequence}    * based on an existing parser. */
 specifier|private
 specifier|static
 class|class
@@ -3908,7 +3908,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/** Implementation of {@link SqlSpecialOperator.TokenSequence}. */
+comment|/** Implementation of    * {@link org.apache.calcite.sql.SqlSpecialOperator.TokenSequence}. */
 specifier|private
 specifier|static
 class|class
