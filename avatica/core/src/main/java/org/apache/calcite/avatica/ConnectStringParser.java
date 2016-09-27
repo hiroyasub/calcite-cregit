@@ -172,16 +172,21 @@ name|props
 argument_list|)
 return|;
 block|}
-comment|/**    * Parses the connect string into a Properties object. Note that the string    * can only be parsed once. Subsequent calls return empty/unchanged    * Properties.    *    * @param props optional properties object, may be<code>null</code>    *    * @return properties object with parsed params; if an input<code>    * props</code> was supplied, any duplicate properties will have been    * replaced by those from the connect string.    *    * @throws SQLException error parsing name-value pairs    */
+comment|/**    * Parses the connect string into a Properties object. Note that the string    * can only be parsed once. Subsequent calls return empty/unchanged    * Properties. The original<code>props</code> argument is not altered.    *    * @param props optional properties object, may be<code>null</code>    *    * @return properties object with parsed params; if an input<code>    * props</code> was supplied, any duplicate properties will have been    * replaced by those from the connect string.    *    * @throws SQLException error parsing name-value pairs    */
 name|Properties
 name|parseInternal
 parameter_list|(
+specifier|final
 name|Properties
 name|props
 parameter_list|)
 throws|throws
 name|SQLException
 block|{
+specifier|final
+name|Properties
+name|newProps
+decl_stmt|;
 if|if
 condition|(
 name|props
@@ -189,10 +194,23 @@ operator|==
 literal|null
 condition|)
 block|{
-name|props
+name|newProps
 operator|=
 operator|new
 name|Properties
+argument_list|()
+expr_stmt|;
+block|}
+else|else
+block|{
+name|newProps
+operator|=
+operator|(
+name|Properties
+operator|)
+name|props
+operator|.
+name|clone
 argument_list|()
 expr_stmt|;
 block|}
@@ -205,12 +223,12 @@ condition|)
 block|{
 name|parsePair
 argument_list|(
-name|props
+name|newProps
 argument_list|)
 expr_stmt|;
 block|}
 return|return
-name|props
+name|newProps
 return|;
 block|}
 comment|/**    * Reads "name=value;" or "name=value&lt;EOF&gt;".    *    * @throws SQLException error parsing value    */
