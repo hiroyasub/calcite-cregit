@@ -1777,7 +1777,12 @@ name|NULL
 throw|;
 block|}
 return|return
-literal|null
+name|super
+operator|.
+name|visitCall
+argument_list|(
+name|call
+argument_list|)
 return|;
 block|}
 block|}
