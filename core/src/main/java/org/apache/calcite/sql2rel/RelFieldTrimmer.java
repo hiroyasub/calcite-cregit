@@ -1660,7 +1660,7 @@ return|return
 name|trimResult
 return|;
 block|}
-specifier|private
+specifier|protected
 name|TrimResult
 name|result
 parameter_list|(
@@ -2300,7 +2300,7 @@ argument_list|)
 return|;
 block|}
 comment|/** Creates a project with a dummy column, to protect the parts of the system    * that cannot handle a relational expression with no columns.    *    * @param fieldCount Number of fields in the original relational expression    * @param input Trimmed input    * @return Dummy project, or null if no dummy is required    */
-specifier|private
+specifier|protected
 name|TrimResult
 name|dummyProject
 parameter_list|(
@@ -5256,7 +5256,7 @@ name|mapping
 argument_list|)
 return|;
 block|}
-specifier|private
+specifier|protected
 name|Mapping
 name|createMapping
 parameter_list|(
