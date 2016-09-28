@@ -521,8 +521,8 @@ comment|// And exit now.
 return|return;
 block|}
 block|}
-comment|/**    * Converter from String to Serialization.    */
-specifier|private
+comment|/**    * Converter from String to Serialization. Must be public for JCommander.    */
+specifier|public
 specifier|static
 class|class
 name|SerializationConverter
