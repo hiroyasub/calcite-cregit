@@ -3184,6 +3184,57 @@ literal|"C=6588"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testFilterSwapped
+parameter_list|()
+block|{
+name|String
+name|sql
+init|=
+literal|"select \"state_province\"\n"
+operator|+
+literal|"from \"foodmart\"\n"
+operator|+
+literal|"where 'High Top Dried Mushrooms' = \"product_name\""
+decl_stmt|;
+specifier|final
+name|String
+name|explain
+init|=
+literal|"EnumerableInterpreter\n"
+operator|+
+literal|"  DruidQuery(table=[[foodmart, foodmart]], intervals=[[1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z]], filter=[=('High Top Dried Mushrooms', CAST($3):VARCHAR(24) CHARACTER SET \"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$primary\")], projects=[[$30]])"
+decl_stmt|;
+specifier|final
+name|String
+name|druidQuery
+init|=
+literal|"'filter':{'type':'selector','dimension':'product_name',"
+operator|+
+literal|"'value':'High Top Dried Mushrooms'}"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+name|explain
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|druidChecker
+argument_list|(
+name|druidQuery
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
 comment|/** Tests a query that exposed several bugs in the interpreter. */
 annotation|@
 name|Test
