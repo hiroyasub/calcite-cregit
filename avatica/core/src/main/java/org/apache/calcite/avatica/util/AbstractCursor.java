@@ -199,6 +199,16 @@ name|java
 operator|.
 name|sql
 operator|.
+name|SQLDataException
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|sql
+operator|.
 name|SQLException
 import|;
 end_import
@@ -1533,6 +1543,8 @@ specifier|public
 name|boolean
 name|wasNull
 parameter_list|()
+throws|throws
+name|SQLException
 block|{
 return|return
 name|getter
@@ -1545,6 +1557,8 @@ specifier|public
 name|String
 name|getString
 parameter_list|()
+throws|throws
+name|SQLException
 block|{
 specifier|final
 name|Object
@@ -1570,6 +1584,8 @@ specifier|public
 name|boolean
 name|getBoolean
 parameter_list|()
+throws|throws
+name|SQLException
 block|{
 return|return
 name|getLong
@@ -1582,6 +1598,8 @@ specifier|public
 name|byte
 name|getByte
 parameter_list|()
+throws|throws
+name|SQLException
 block|{
 return|return
 operator|(
@@ -1595,6 +1613,8 @@ specifier|public
 name|short
 name|getShort
 parameter_list|()
+throws|throws
+name|SQLException
 block|{
 return|return
 operator|(
@@ -1608,6 +1628,8 @@ specifier|public
 name|int
 name|getInt
 parameter_list|()
+throws|throws
+name|SQLException
 block|{
 return|return
 operator|(
@@ -1621,6 +1643,8 @@ specifier|public
 name|long
 name|getLong
 parameter_list|()
+throws|throws
+name|SQLException
 block|{
 throw|throw
 name|cannotConvert
@@ -1633,6 +1657,8 @@ specifier|public
 name|float
 name|getFloat
 parameter_list|()
+throws|throws
+name|SQLException
 block|{
 return|return
 operator|(
@@ -1646,6 +1672,8 @@ specifier|public
 name|double
 name|getDouble
 parameter_list|()
+throws|throws
+name|SQLException
 block|{
 throw|throw
 name|cannotConvert
@@ -1658,6 +1686,8 @@ specifier|public
 name|BigDecimal
 name|getBigDecimal
 parameter_list|()
+throws|throws
+name|SQLException
 block|{
 throw|throw
 name|cannotConvert
@@ -1673,6 +1703,8 @@ parameter_list|(
 name|int
 name|scale
 parameter_list|)
+throws|throws
+name|SQLException
 block|{
 throw|throw
 name|cannotConvert
@@ -1686,6 +1718,8 @@ name|byte
 index|[]
 name|getBytes
 parameter_list|()
+throws|throws
+name|SQLException
 block|{
 throw|throw
 name|cannotConvert
@@ -1698,6 +1732,8 @@ specifier|public
 name|InputStream
 name|getAsciiStream
 parameter_list|()
+throws|throws
+name|SQLException
 block|{
 throw|throw
 name|cannotConvert
@@ -1710,6 +1746,8 @@ specifier|public
 name|InputStream
 name|getUnicodeStream
 parameter_list|()
+throws|throws
+name|SQLException
 block|{
 throw|throw
 name|cannotConvert
@@ -1722,6 +1760,8 @@ specifier|public
 name|InputStream
 name|getBinaryStream
 parameter_list|()
+throws|throws
+name|SQLException
 block|{
 throw|throw
 name|cannotConvert
@@ -1734,6 +1774,8 @@ specifier|public
 name|Object
 name|getObject
 parameter_list|()
+throws|throws
+name|SQLException
 block|{
 return|return
 name|getter
@@ -1746,6 +1788,8 @@ specifier|public
 name|Reader
 name|getCharacterStream
 parameter_list|()
+throws|throws
+name|SQLException
 block|{
 throw|throw
 name|cannotConvert
@@ -1755,16 +1799,18 @@ argument_list|)
 throw|;
 block|}
 specifier|private
-name|RuntimeException
+name|SQLException
 name|cannotConvert
 parameter_list|(
 name|String
 name|targetType
 parameter_list|)
+throws|throws
+name|SQLException
 block|{
 return|return
 operator|new
-name|RuntimeException
+name|SQLDataException
 argument_list|(
 literal|"cannot convert to "
 operator|+
@@ -1793,6 +1839,8 @@ argument_list|>
 argument_list|>
 name|map
 parameter_list|)
+throws|throws
+name|SQLException
 block|{
 throw|throw
 name|cannotConvert
@@ -1805,6 +1853,8 @@ specifier|public
 name|Ref
 name|getRef
 parameter_list|()
+throws|throws
+name|SQLException
 block|{
 throw|throw
 name|cannotConvert
@@ -1817,6 +1867,8 @@ specifier|public
 name|Blob
 name|getBlob
 parameter_list|()
+throws|throws
+name|SQLException
 block|{
 throw|throw
 name|cannotConvert
@@ -1829,6 +1881,8 @@ specifier|public
 name|Clob
 name|getClob
 parameter_list|()
+throws|throws
+name|SQLException
 block|{
 throw|throw
 name|cannotConvert
@@ -1841,6 +1895,8 @@ specifier|public
 name|Array
 name|getArray
 parameter_list|()
+throws|throws
+name|SQLException
 block|{
 throw|throw
 name|cannotConvert
@@ -1853,6 +1909,8 @@ specifier|public
 name|Struct
 name|getStruct
 parameter_list|()
+throws|throws
+name|SQLException
 block|{
 throw|throw
 name|cannotConvert
@@ -1868,6 +1926,8 @@ parameter_list|(
 name|Calendar
 name|calendar
 parameter_list|)
+throws|throws
+name|SQLException
 block|{
 throw|throw
 name|cannotConvert
@@ -1883,6 +1943,8 @@ parameter_list|(
 name|Calendar
 name|calendar
 parameter_list|)
+throws|throws
+name|SQLException
 block|{
 throw|throw
 name|cannotConvert
@@ -1898,6 +1960,8 @@ parameter_list|(
 name|Calendar
 name|calendar
 parameter_list|)
+throws|throws
+name|SQLException
 block|{
 throw|throw
 name|cannotConvert
@@ -1910,6 +1974,8 @@ specifier|public
 name|URL
 name|getURL
 parameter_list|()
+throws|throws
+name|SQLException
 block|{
 throw|throw
 name|cannotConvert
@@ -1922,6 +1988,8 @@ specifier|public
 name|NClob
 name|getNClob
 parameter_list|()
+throws|throws
+name|SQLException
 block|{
 throw|throw
 name|cannotConvert
@@ -1934,6 +2002,8 @@ specifier|public
 name|SQLXML
 name|getSQLXML
 parameter_list|()
+throws|throws
+name|SQLException
 block|{
 throw|throw
 name|cannotConvert
@@ -1946,6 +2016,8 @@ specifier|public
 name|String
 name|getNString
 parameter_list|()
+throws|throws
+name|SQLException
 block|{
 throw|throw
 name|cannotConvert
@@ -1958,6 +2030,8 @@ specifier|public
 name|Reader
 name|getNCharacterStream
 parameter_list|()
+throws|throws
+name|SQLException
 block|{
 throw|throw
 name|cannotConvert
@@ -1979,6 +2053,8 @@ name|T
 argument_list|>
 name|type
 parameter_list|)
+throws|throws
+name|SQLException
 block|{
 throw|throw
 name|cannotConvert
@@ -2017,6 +2093,8 @@ parameter_list|(
 name|int
 name|scale
 parameter_list|)
+throws|throws
+name|SQLException
 block|{
 specifier|final
 name|long
@@ -2063,6 +2141,8 @@ specifier|public
 name|BigDecimal
 name|getBigDecimal
 parameter_list|()
+throws|throws
+name|SQLException
 block|{
 specifier|final
 name|long
@@ -2100,6 +2180,8 @@ specifier|public
 name|double
 name|getDouble
 parameter_list|()
+throws|throws
+name|SQLException
 block|{
 return|return
 name|getLong
@@ -2110,6 +2192,8 @@ specifier|public
 name|float
 name|getFloat
 parameter_list|()
+throws|throws
+name|SQLException
 block|{
 return|return
 name|getLong
@@ -2121,6 +2205,8 @@ specifier|abstract
 name|long
 name|getLong
 parameter_list|()
+throws|throws
+name|SQLException
 function_decl|;
 block|}
 comment|/**    * Accessor that assumes that the underlying value is a {@link Boolean};    * corresponds to {@link java.sql.Types#BOOLEAN}.    */
@@ -2148,6 +2234,8 @@ specifier|public
 name|boolean
 name|getBoolean
 parameter_list|()
+throws|throws
+name|SQLException
 block|{
 name|Boolean
 name|o
@@ -2170,6 +2258,8 @@ specifier|public
 name|long
 name|getLong
 parameter_list|()
+throws|throws
+name|SQLException
 block|{
 return|return
 name|getBoolean
@@ -2206,6 +2296,8 @@ specifier|public
 name|byte
 name|getByte
 parameter_list|()
+throws|throws
+name|SQLException
 block|{
 name|Byte
 name|o
@@ -2230,6 +2322,8 @@ specifier|public
 name|long
 name|getLong
 parameter_list|()
+throws|throws
+name|SQLException
 block|{
 return|return
 name|getByte
@@ -2262,6 +2356,8 @@ specifier|public
 name|short
 name|getShort
 parameter_list|()
+throws|throws
+name|SQLException
 block|{
 name|Short
 name|o
@@ -2286,6 +2382,8 @@ specifier|public
 name|long
 name|getLong
 parameter_list|()
+throws|throws
+name|SQLException
 block|{
 return|return
 name|getShort
@@ -2318,6 +2416,8 @@ specifier|public
 name|int
 name|getInt
 parameter_list|()
+throws|throws
+name|SQLException
 block|{
 name|Integer
 name|o
@@ -2344,6 +2444,8 @@ specifier|public
 name|long
 name|getLong
 parameter_list|()
+throws|throws
+name|SQLException
 block|{
 return|return
 name|getInt
@@ -2376,6 +2478,8 @@ specifier|public
 name|long
 name|getLong
 parameter_list|()
+throws|throws
+name|SQLException
 block|{
 name|Long
 name|o
@@ -2428,6 +2532,8 @@ parameter_list|(
 name|int
 name|scale
 parameter_list|)
+throws|throws
+name|SQLException
 block|{
 specifier|final
 name|double
@@ -2474,6 +2580,8 @@ specifier|public
 name|BigDecimal
 name|getBigDecimal
 parameter_list|()
+throws|throws
+name|SQLException
 block|{
 specifier|final
 name|double
@@ -2512,11 +2620,15 @@ specifier|abstract
 name|double
 name|getDouble
 parameter_list|()
+throws|throws
+name|SQLException
 function_decl|;
 specifier|public
 name|long
 name|getLong
 parameter_list|()
+throws|throws
+name|SQLException
 block|{
 return|return
 operator|(
@@ -2552,6 +2664,8 @@ specifier|public
 name|float
 name|getFloat
 parameter_list|()
+throws|throws
+name|SQLException
 block|{
 name|Float
 name|o
@@ -2576,6 +2690,8 @@ specifier|public
 name|double
 name|getDouble
 parameter_list|()
+throws|throws
+name|SQLException
 block|{
 return|return
 name|getFloat
@@ -2608,6 +2724,8 @@ specifier|public
 name|double
 name|getDouble
 parameter_list|()
+throws|throws
+name|SQLException
 block|{
 name|Double
 name|o
@@ -2656,11 +2774,15 @@ specifier|abstract
 name|Number
 name|getNumber
 parameter_list|()
+throws|throws
+name|SQLException
 function_decl|;
 specifier|public
 name|double
 name|getDouble
 parameter_list|()
+throws|throws
+name|SQLException
 block|{
 name|Number
 name|number
@@ -2685,6 +2807,8 @@ specifier|public
 name|float
 name|getFloat
 parameter_list|()
+throws|throws
+name|SQLException
 block|{
 name|Number
 name|number
@@ -2709,6 +2833,8 @@ specifier|public
 name|long
 name|getLong
 parameter_list|()
+throws|throws
+name|SQLException
 block|{
 name|Number
 name|number
@@ -2733,6 +2859,8 @@ specifier|public
 name|int
 name|getInt
 parameter_list|()
+throws|throws
+name|SQLException
 block|{
 name|Number
 name|number
@@ -2757,6 +2885,8 @@ specifier|public
 name|short
 name|getShort
 parameter_list|()
+throws|throws
+name|SQLException
 block|{
 name|Number
 name|number
@@ -2781,6 +2911,8 @@ specifier|public
 name|byte
 name|getByte
 parameter_list|()
+throws|throws
+name|SQLException
 block|{
 name|Number
 name|number
@@ -2805,6 +2937,8 @@ specifier|public
 name|boolean
 name|getBoolean
 parameter_list|()
+throws|throws
+name|SQLException
 block|{
 name|Number
 name|number
@@ -2851,6 +2985,8 @@ specifier|protected
 name|Number
 name|getNumber
 parameter_list|()
+throws|throws
+name|SQLException
 block|{
 return|return
 operator|(
@@ -2867,6 +3003,8 @@ parameter_list|(
 name|int
 name|scale
 parameter_list|)
+throws|throws
+name|SQLException
 block|{
 return|return
 operator|(
@@ -2880,6 +3018,8 @@ specifier|public
 name|BigDecimal
 name|getBigDecimal
 parameter_list|()
+throws|throws
+name|SQLException
 block|{
 return|return
 operator|(
@@ -2928,6 +3068,8 @@ specifier|protected
 name|Number
 name|getNumber
 parameter_list|()
+throws|throws
+name|SQLException
 block|{
 return|return
 operator|(
@@ -2946,6 +3088,8 @@ parameter_list|(
 name|int
 name|scale
 parameter_list|)
+throws|throws
+name|SQLException
 block|{
 name|Number
 name|n
@@ -3002,6 +3146,8 @@ specifier|public
 name|BigDecimal
 name|getBigDecimal
 parameter_list|()
+throws|throws
+name|SQLException
 block|{
 return|return
 name|getBigDecimal
@@ -3036,6 +3182,8 @@ specifier|public
 name|String
 name|getString
 parameter_list|()
+throws|throws
+name|SQLException
 block|{
 return|return
 operator|(
@@ -3052,6 +3200,8 @@ name|byte
 index|[]
 name|getBytes
 parameter_list|()
+throws|throws
+name|SQLException
 block|{
 return|return
 name|super
@@ -3104,6 +3254,8 @@ specifier|public
 name|String
 name|getString
 parameter_list|()
+throws|throws
+name|SQLException
 block|{
 name|String
 name|s
@@ -3164,6 +3316,8 @@ specifier|public
 name|String
 name|getString
 parameter_list|()
+throws|throws
+name|SQLException
 block|{
 name|Character
 name|s
@@ -3229,6 +3383,8 @@ name|byte
 index|[]
 name|getBytes
 parameter_list|()
+throws|throws
+name|SQLException
 block|{
 name|Object
 name|obj
@@ -3325,6 +3481,8 @@ specifier|public
 name|String
 name|getString
 parameter_list|()
+throws|throws
+name|SQLException
 block|{
 name|Object
 name|o
@@ -3427,6 +3585,8 @@ specifier|public
 name|Object
 name|getObject
 parameter_list|()
+throws|throws
+name|SQLException
 block|{
 return|return
 name|super
@@ -3442,6 +3602,8 @@ name|byte
 index|[]
 name|getBytes
 parameter_list|()
+throws|throws
+name|SQLException
 block|{
 comment|// JSON sends this as a base64-enc string, protobuf can do binary.
 name|Object
@@ -3477,6 +3639,8 @@ name|byte
 index|[]
 name|getBase64Decoded
 parameter_list|()
+throws|throws
+name|SQLException
 block|{
 specifier|final
 name|String
@@ -3514,6 +3678,8 @@ specifier|public
 name|String
 name|getString
 parameter_list|()
+throws|throws
+name|SQLException
 block|{
 specifier|final
 name|byte
@@ -3591,6 +3757,8 @@ specifier|public
 name|Object
 name|getObject
 parameter_list|()
+throws|throws
+name|SQLException
 block|{
 return|return
 name|getDate
@@ -3608,6 +3776,8 @@ parameter_list|(
 name|Calendar
 name|calendar
 parameter_list|)
+throws|throws
+name|SQLException
 block|{
 specifier|final
 name|Number
@@ -3652,6 +3822,8 @@ parameter_list|(
 name|Calendar
 name|calendar
 parameter_list|)
+throws|throws
+name|SQLException
 block|{
 specifier|final
 name|Number
@@ -3693,6 +3865,8 @@ specifier|public
 name|String
 name|getString
 parameter_list|()
+throws|throws
+name|SQLException
 block|{
 specifier|final
 name|Number
@@ -3768,6 +3942,8 @@ specifier|public
 name|Object
 name|getObject
 parameter_list|()
+throws|throws
+name|SQLException
 block|{
 return|return
 name|getTime
@@ -3785,6 +3961,8 @@ parameter_list|(
 name|Calendar
 name|calendar
 parameter_list|)
+throws|throws
+name|SQLException
 block|{
 specifier|final
 name|Number
@@ -3825,6 +4003,8 @@ parameter_list|(
 name|Calendar
 name|calendar
 parameter_list|)
+throws|throws
+name|SQLException
 block|{
 specifier|final
 name|Number
@@ -3862,6 +4042,8 @@ specifier|public
 name|String
 name|getString
 parameter_list|()
+throws|throws
+name|SQLException
 block|{
 specifier|final
 name|Number
@@ -3937,6 +4119,8 @@ specifier|public
 name|Object
 name|getObject
 parameter_list|()
+throws|throws
+name|SQLException
 block|{
 return|return
 name|getTimestamp
@@ -3954,6 +4138,8 @@ parameter_list|(
 name|Calendar
 name|calendar
 parameter_list|)
+throws|throws
+name|SQLException
 block|{
 specifier|final
 name|Number
@@ -3994,6 +4180,8 @@ parameter_list|(
 name|Calendar
 name|calendar
 parameter_list|)
+throws|throws
+name|SQLException
 block|{
 specifier|final
 name|Timestamp
@@ -4035,6 +4223,8 @@ parameter_list|(
 name|Calendar
 name|calendar
 parameter_list|)
+throws|throws
+name|SQLException
 block|{
 specifier|final
 name|Timestamp
@@ -4082,6 +4272,8 @@ specifier|public
 name|String
 name|getString
 parameter_list|()
+throws|throws
+name|SQLException
 block|{
 specifier|final
 name|Number
@@ -4144,6 +4336,8 @@ parameter_list|(
 name|Calendar
 name|calendar
 parameter_list|)
+throws|throws
+name|SQLException
 block|{
 name|java
 operator|.
@@ -4215,6 +4409,8 @@ specifier|public
 name|String
 name|getString
 parameter_list|()
+throws|throws
+name|SQLException
 block|{
 specifier|final
 name|int
@@ -4252,6 +4448,8 @@ specifier|public
 name|long
 name|getLong
 parameter_list|()
+throws|throws
+name|SQLException
 block|{
 name|Date
 name|date
@@ -4311,6 +4509,8 @@ parameter_list|(
 name|Calendar
 name|calendar
 parameter_list|)
+throws|throws
+name|SQLException
 block|{
 name|Time
 name|date
@@ -4378,6 +4578,8 @@ specifier|public
 name|String
 name|getString
 parameter_list|()
+throws|throws
+name|SQLException
 block|{
 specifier|final
 name|int
@@ -4415,6 +4617,8 @@ specifier|public
 name|long
 name|getLong
 parameter_list|()
+throws|throws
+name|SQLException
 block|{
 name|Time
 name|time
@@ -4474,6 +4678,8 @@ parameter_list|(
 name|Calendar
 name|calendar
 parameter_list|)
+throws|throws
+name|SQLException
 block|{
 name|Timestamp
 name|timestamp
@@ -4544,6 +4750,8 @@ parameter_list|(
 name|Calendar
 name|calendar
 parameter_list|)
+throws|throws
+name|SQLException
 block|{
 specifier|final
 name|Timestamp
@@ -4585,6 +4793,8 @@ parameter_list|(
 name|Calendar
 name|calendar
 parameter_list|)
+throws|throws
+name|SQLException
 block|{
 specifier|final
 name|Timestamp
@@ -4632,6 +4842,8 @@ specifier|public
 name|String
 name|getString
 parameter_list|()
+throws|throws
+name|SQLException
 block|{
 specifier|final
 name|long
@@ -4669,6 +4881,8 @@ specifier|public
 name|long
 name|getLong
 parameter_list|()
+throws|throws
+name|SQLException
 block|{
 name|Timestamp
 name|timestamp
@@ -4736,6 +4950,8 @@ parameter_list|(
 name|Calendar
 name|calendar
 parameter_list|)
+throws|throws
+name|SQLException
 block|{
 name|java
 operator|.
@@ -4810,6 +5026,8 @@ parameter_list|(
 name|Calendar
 name|calendar
 parameter_list|)
+throws|throws
+name|SQLException
 block|{
 specifier|final
 name|Timestamp
@@ -4851,6 +5069,8 @@ parameter_list|(
 name|Calendar
 name|calendar
 parameter_list|)
+throws|throws
+name|SQLException
 block|{
 specifier|final
 name|Timestamp
@@ -4898,6 +5118,8 @@ specifier|public
 name|String
 name|getString
 parameter_list|()
+throws|throws
+name|SQLException
 block|{
 name|java
 operator|.
@@ -4945,6 +5167,8 @@ specifier|public
 name|long
 name|getLong
 parameter_list|()
+throws|throws
+name|SQLException
 block|{
 name|Timestamp
 name|timestamp
@@ -5009,6 +5233,8 @@ specifier|public
 name|String
 name|getString
 parameter_list|()
+throws|throws
+name|SQLException
 block|{
 specifier|final
 name|int
@@ -5098,6 +5324,8 @@ specifier|public
 name|String
 name|getString
 parameter_list|()
+throws|throws
+name|SQLException
 block|{
 specifier|final
 name|long
@@ -5220,6 +5448,8 @@ specifier|public
 name|Object
 name|getObject
 parameter_list|()
+throws|throws
+name|SQLException
 block|{
 specifier|final
 name|Object
@@ -5262,6 +5492,8 @@ specifier|public
 name|Array
 name|getArray
 parameter_list|()
+throws|throws
+name|SQLException
 block|{
 specifier|final
 name|List
@@ -5300,6 +5532,8 @@ specifier|public
 name|String
 name|getString
 parameter_list|()
+throws|throws
+name|SQLException
 block|{
 specifier|final
 name|Array
@@ -5369,6 +5603,8 @@ specifier|public
 name|Object
 name|getObject
 parameter_list|()
+throws|throws
+name|SQLException
 block|{
 return|return
 name|getStruct
@@ -5381,6 +5617,8 @@ specifier|public
 name|Struct
 name|getStruct
 parameter_list|()
+throws|throws
+name|SQLException
 block|{
 specifier|final
 name|Object

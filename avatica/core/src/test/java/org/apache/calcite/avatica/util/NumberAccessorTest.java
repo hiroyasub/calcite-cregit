@@ -84,6 +84,16 @@ import|;
 end_import
 
 begin_import
+import|import
+name|java
+operator|.
+name|sql
+operator|.
+name|SQLException
+import|;
+end_import
+
+begin_import
 import|import static
 name|org
 operator|.
@@ -110,6 +120,8 @@ specifier|public
 name|void
 name|testBigDecimalZeroScale
 parameter_list|()
+throws|throws
+name|SQLException
 block|{
 specifier|final
 name|BigDecimal
