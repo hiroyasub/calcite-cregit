@@ -1093,7 +1093,7 @@ name|druidQuery
 init|=
 literal|"{'queryType':'select','dataSource':'foodmart',"
 operator|+
-literal|"'descending':'false','intervals':['1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z'],"
+literal|"'descending':false,'intervals':['1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z'],"
 operator|+
 literal|"'dimensions':['state_province','product_name'],'metrics':[],'granularity':'all',"
 operator|+
@@ -1137,7 +1137,7 @@ name|druidQuery
 init|=
 literal|"{'queryType':'select','dataSource':'foodmart',"
 operator|+
-literal|"'descending':'false','intervals':['1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z'],"
+literal|"'descending':false,'intervals':['1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z'],"
 operator|+
 literal|"'dimensions':['gender','state_province'],'metrics':[],'granularity':'all',"
 operator|+
@@ -1246,7 +1246,7 @@ name|druidQuery
 init|=
 literal|"{'queryType':'select','dataSource':'foodmart',"
 operator|+
-literal|"'descending':'false','intervals':['1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z'],"
+literal|"'descending':false,'intervals':['1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z'],"
 operator|+
 literal|"'filter':{'type':'and','fields':["
 operator|+
@@ -1416,7 +1416,7 @@ name|druidQuery
 init|=
 literal|"{'queryType':'select','dataSource':'foodmart',"
 operator|+
-literal|"'descending':'false','intervals':['1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z'],"
+literal|"'descending':false,'intervals':['1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z'],"
 operator|+
 literal|"'filter':{'type':'selector','dimension':'product_id','value':'-1'},"
 operator|+
@@ -1506,7 +1506,7 @@ name|druidQuery
 init|=
 literal|"{'queryType':'select','dataSource':'foodmart',"
 operator|+
-literal|"'descending':'false','intervals':['1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z'],"
+literal|"'descending':false,'intervals':['1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z'],"
 operator|+
 literal|"'dimensions':['product_id','brand_name','product_name','SKU','SRP','gross_weight',"
 operator|+
@@ -1771,7 +1771,7 @@ name|druidQuery
 init|=
 literal|"{'queryType':'timeseries','dataSource':'foodmart',"
 operator|+
-literal|"'descending':'false','granularity':'all',"
+literal|"'descending':false,'granularity':'all',"
 operator|+
 literal|"'aggregations':[{'type':'count','name':'EXPR$0'}],"
 operator|+
@@ -2056,7 +2056,7 @@ name|druidQuery
 init|=
 literal|"{'queryType':'timeseries','dataSource':'foodmart',"
 operator|+
-literal|"'descending':'false','granularity':'MONTH',"
+literal|"'descending':false,'granularity':'MONTH',"
 operator|+
 literal|"'aggregations':[{'type':'longSum','name':'S','fieldName':'unit_sales'},"
 operator|+
@@ -2116,7 +2116,7 @@ name|druidQuery
 init|=
 literal|"{'queryType':'timeseries','dataSource':'foodmart',"
 operator|+
-literal|"'descending':'false','granularity':'DAY',"
+literal|"'descending':false,'granularity':'DAY',"
 operator|+
 literal|"'aggregations':[{'type':'longSum','name':'S','fieldName':'unit_sales'},"
 operator|+
@@ -2180,7 +2180,7 @@ name|druidQuery
 init|=
 literal|"{'queryType':'timeseries','dataSource':'foodmart',"
 operator|+
-literal|"'descending':'false','granularity':'MONTH',"
+literal|"'descending':false,'granularity':'MONTH',"
 operator|+
 literal|"'aggregations':[{'type':'longSum','name':'S','fieldName':'unit_sales'},"
 operator|+
@@ -2715,7 +2715,7 @@ literal|"{'queryType':'select',"
 operator|+
 literal|"'dataSource':'foodmart',"
 operator|+
-literal|"'descending':'false',"
+literal|"'descending':false,"
 operator|+
 literal|"'intervals':['1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z'],"
 operator|+

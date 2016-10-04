@@ -608,7 +608,7 @@ name|coordinatorUrl
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Executes a query request.    *    * @param queryType Query type    * @param data Data to post    * @param sink Sink to which to send the parsed rows    * @param fieldNames Names of fields    * @param fieldTypes Types of fields (never null, but elements may be null)    * @param page Page definition (in/out)    * @throws IOException on error    */
+comment|/** Executes a query request.    *    * @param queryType Query type    * @param data Data to post    * @param sink Sink to which to send the parsed rows    * @param fieldNames Names of fields    * @param fieldTypes Types of fields (never null, but elements may be null)    * @param page Page definition (in/out)    */
 specifier|public
 name|void
 name|request
@@ -639,8 +639,6 @@ parameter_list|,
 name|Page
 name|page
 parameter_list|)
-throws|throws
-name|IOException
 block|{
 specifier|final
 name|String
@@ -729,6 +727,26 @@ argument_list|,
 name|page
 argument_list|)
 expr_stmt|;
+block|}
+catch|catch
+parameter_list|(
+name|IOException
+name|e
+parameter_list|)
+block|{
+throw|throw
+operator|new
+name|RuntimeException
+argument_list|(
+literal|"Error while processing druid request ["
+operator|+
+name|data
+operator|+
+literal|"]"
+argument_list|,
+name|e
+argument_list|)
+throw|;
 block|}
 block|}
 comment|/** Parses the output of a {@code topN} query, sending the results to a    * {@link Sink}. */
