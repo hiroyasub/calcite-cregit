@@ -2219,6 +2219,8 @@ argument_list|,
 name|String
 operator|.
 name|class
+argument_list|,
+literal|true
 argument_list|)
 argument_list|,
 name|MetaImpl
@@ -2232,6 +2234,8 @@ argument_list|,
 name|Integer
 operator|.
 name|class
+argument_list|,
+literal|true
 argument_list|)
 argument_list|,
 name|arrayColumnMetaData

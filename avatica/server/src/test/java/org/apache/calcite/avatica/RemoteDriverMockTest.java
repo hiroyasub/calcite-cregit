@@ -624,7 +624,7 @@ argument_list|)
 expr_stmt|;
 name|assertEquals
 argument_list|(
-literal|"TABLE_CATALOG"
+literal|"TABLE_SCHEM"
 argument_list|,
 name|metaData
 operator|.
@@ -636,7 +636,7 @@ argument_list|)
 expr_stmt|;
 name|assertEquals
 argument_list|(
-literal|"TABLE_SCHEM"
+literal|"TABLE_CATALOG"
 argument_list|,
 name|metaData
 operator|.
