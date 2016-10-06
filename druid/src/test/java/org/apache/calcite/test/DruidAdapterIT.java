@@ -531,7 +531,7 @@ literal|"PLAN="
 operator|+
 literal|"EnumerableInterpreter\n"
 operator|+
-literal|"  DruidQuery(table=[[wiki, wiki]], intervals=[[1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z]], filter=[=(CAST($18):VARCHAR(13) CHARACTER SET \"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$primary\", 'Jeremy Corbyn')], groups=[{8}], aggs=[[]])\n"
+literal|"  DruidQuery(table=[[wiki, wiki]], intervals=[[1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z]], filter=[=(CAST($16):VARCHAR(13) CHARACTER SET \"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$primary\", 'Jeremy Corbyn')], groups=[{6}], aggs=[[]])\n"
 decl_stmt|;
 name|checkSelectDistinctWiki
 argument_list|(
@@ -631,6 +631,70 @@ operator|.
 name|returnsUnordered
 argument_list|(
 literal|"C=86829"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSelectTimestampColumnNoTables
+parameter_list|()
+block|{
+comment|// Since columns are not explicitly declared, we use the default time
+comment|// column in the query.
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select sum(\"added\")\n"
+operator|+
+literal|"from \"wikiticker\"\n"
+operator|+
+literal|"group by floor(\"__time\" to DAY)"
+decl_stmt|;
+specifier|final
+name|String
+name|explain
+init|=
+literal|"PLAN="
+operator|+
+literal|"EnumerableInterpreter\n"
+operator|+
+literal|"  BindableProject(EXPR$0=[$1])\n"
+operator|+
+literal|"    DruidQuery(table=[[wiki, wikiticker]], intervals=[[1900-01-01T00:00:00.000Z/3000-01-01T00:00:00.000Z]], projects=[[FLOOR($0, FLAG(DAY)), $1]], groups=[{0}], aggs=[[SUM($1)]])\n"
+decl_stmt|;
+specifier|final
+name|String
+name|druidQuery
+init|=
+literal|"{'queryType':'timeseries',"
+operator|+
+literal|"'dataSource':'wikiticker','descending':false,'granularity':'DAY',"
+operator|+
+literal|"'aggregations':[{'type':'longSum','name':'EXPR$0','fieldName':'added'}],"
+operator|+
+literal|"'intervals':['1900-01-01T00:00:00.000Z/3000-01-01T00:00:00.000Z']}"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|,
+name|WIKI_AUTO2
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+name|explain
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|druidChecker
+argument_list|(
+name|druidQuery
+argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
