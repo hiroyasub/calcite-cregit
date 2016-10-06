@@ -501,7 +501,7 @@ literal|"PLAN="
 operator|+
 literal|"EnumerableInterpreter\n"
 operator|+
-literal|"  DruidQuery(table=[[wiki, wiki]], intervals=[[1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z]], filter=[=(CAST($12):VARCHAR(13) CHARACTER SET \"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$primary\", 'Jeremy Corbyn')], groups=[{4}], aggs=[[]])\n"
+literal|"  DruidQuery(table=[[wiki, wiki]], intervals=[[1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z]], filter=[=(CAST($13):VARCHAR(13) CHARACTER SET \"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$primary\", 'Jeremy Corbyn')], groups=[{5}], aggs=[[]])\n"
 decl_stmt|;
 name|checkSelectDistinctWiki
 argument_list|(
@@ -531,7 +531,7 @@ literal|"PLAN="
 operator|+
 literal|"EnumerableInterpreter\n"
 operator|+
-literal|"  DruidQuery(table=[[wiki, wiki]], intervals=[[1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z]], filter=[=(CAST($16):VARCHAR(13) CHARACTER SET \"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$primary\", 'Jeremy Corbyn')], groups=[{6}], aggs=[[]])\n"
+literal|"  DruidQuery(table=[[wiki, wiki]], intervals=[[1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z]], filter=[=(CAST($17):VARCHAR(13) CHARACTER SET \"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$primary\", 'Jeremy Corbyn')], groups=[{7}], aggs=[[]])\n"
 decl_stmt|;
 name|checkSelectDistinctWiki
 argument_list|(
@@ -638,7 +638,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testSelectTimestampColumnNoTables
+name|testSelectTimestampColumnNoTables1
 parameter_list|()
 block|{
 comment|// Since columns are not explicitly declared, we use the default time
@@ -682,6 +682,226 @@ argument_list|(
 name|sql
 argument_list|,
 name|WIKI_AUTO2
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+name|explain
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|druidChecker
+argument_list|(
+name|druidQuery
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSelectTimestampColumnNoTables2
+parameter_list|()
+block|{
+comment|// Since columns are not explicitly declared, we use the default time
+comment|// column in the query.
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select \"__time\"\n"
+operator|+
+literal|"from \"wikiticker\"\n"
+operator|+
+literal|"limit 1\n"
+decl_stmt|;
+specifier|final
+name|String
+name|explain
+init|=
+literal|"PLAN="
+operator|+
+literal|"EnumerableInterpreter\n"
+operator|+
+literal|"  DruidQuery(table=[[wiki, wikiticker]], intervals=[[1900-01-01T00:00:00.000Z/3000-01-01T00:00:00.000Z]], projects=[[$0]], fetch=[1])\n"
+decl_stmt|;
+specifier|final
+name|String
+name|druidQuery
+init|=
+literal|"{'queryType':'select',"
+operator|+
+literal|"'dataSource':'wikiticker','descending':false,"
+operator|+
+literal|"'intervals':['1900-01-01T00:00:00.000Z/3000-01-01T00:00:00.000Z'],"
+operator|+
+literal|"'dimensions':[],'metrics':[],'granularity':'all','pagingSpec':{'threshold':1},"
+operator|+
+literal|"'context':{'druid.query.fetch':true}}"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|,
+name|WIKI_AUTO2
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"__time=2015-09-12 00:46:58"
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+name|explain
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|druidChecker
+argument_list|(
+name|druidQuery
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSelectTimestampColumnNoTables3
+parameter_list|()
+block|{
+comment|// Since columns are not explicitly declared, we use the default time
+comment|// column in the query.
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select floor(\"__time\" to DAY) as \"day\", sum(\"added\")\n"
+operator|+
+literal|"from \"wikiticker\"\n"
+operator|+
+literal|"group by floor(\"__time\" to DAY)"
+decl_stmt|;
+specifier|final
+name|String
+name|explain
+init|=
+literal|"PLAN="
+operator|+
+literal|"EnumerableInterpreter\n"
+operator|+
+literal|"  DruidQuery(table=[[wiki, wikiticker]], intervals=[[1900-01-01T00:00:00.000Z/3000-01-01T00:00:00.000Z]], projects=[[FLOOR($0, FLAG(DAY)), $1]], groups=[{0}], aggs=[[SUM($1)]])\n"
+decl_stmt|;
+specifier|final
+name|String
+name|druidQuery
+init|=
+literal|"{'queryType':'timeseries',"
+operator|+
+literal|"'dataSource':'wikiticker','descending':false,'granularity':'DAY',"
+operator|+
+literal|"'aggregations':[{'type':'longSum','name':'EXPR$1','fieldName':'added'}],"
+operator|+
+literal|"'intervals':['1900-01-01T00:00:00.000Z/3000-01-01T00:00:00.000Z']}"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|,
+name|WIKI_AUTO2
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"day=2015-09-12 00:00:00; EXPR$1=9385573"
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+name|explain
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|druidChecker
+argument_list|(
+name|druidQuery
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSelectTimestampColumnNoTables4
+parameter_list|()
+block|{
+comment|// Since columns are not explicitly declared, we use the default time
+comment|// column in the query.
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select sum(\"added\") as \"s\", \"page\", "
+operator|+
+literal|"floor(\"__time\" to DAY) as \"day\"\n"
+operator|+
+literal|"from \"wikiticker\"\n"
+operator|+
+literal|"group by \"page\", floor(\"__time\" to DAY)\n"
+operator|+
+literal|"order by \"s\" desc"
+decl_stmt|;
+specifier|final
+name|String
+name|explain
+init|=
+literal|"PLAN="
+operator|+
+literal|"EnumerableInterpreter\n"
+operator|+
+literal|"  BindableSort(sort0=[$0], dir0=[DESC])\n"
+operator|+
+literal|"    BindableProject(s=[$2], page=[$0], day=[$1])\n"
+operator|+
+literal|"      DruidQuery(table=[[wiki, wikiticker]], intervals=[[1900-01-01T00:00:00.000Z/3000-01-01T00:00:00.000Z]], projects=[[$17, FLOOR($0, FLAG(DAY)), $1]], groups=[{0, 1}], aggs=[[SUM($2)]])\n"
+decl_stmt|;
+specifier|final
+name|String
+name|druidQuery
+init|=
+literal|"{'queryType':'groupBy',"
+operator|+
+literal|"'dataSource':'wikiticker','granularity':'DAY','dimensions':['page'],"
+operator|+
+literal|"'limitSpec':{'type':'default'},"
+operator|+
+literal|"'aggregations':[{'type':'longSum','name':'s','fieldName':'added'}],"
+operator|+
+literal|"'intervals':['1900-01-01T00:00:00.000Z/3000-01-01T00:00:00.000Z']}"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|,
+name|WIKI_AUTO2
+argument_list|)
+operator|.
+name|limit
+argument_list|(
+literal|1
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"s=199818; page=User:QuackGuru/Electronic cigarettes 1; "
+operator|+
+literal|"day=2015-09-12 00:00:00"
 argument_list|)
 operator|.
 name|explainContains
@@ -780,7 +1000,7 @@ literal|"PLAN="
 operator|+
 literal|"EnumerableInterpreter\n"
 operator|+
-literal|"  DruidQuery(table=[[foodmart, foodmart]], intervals=[[1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z]], groups=[{29}], aggs=[[]])"
+literal|"  DruidQuery(table=[[foodmart, foodmart]], intervals=[[1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z]], groups=[{30}], aggs=[[]])"
 decl_stmt|;
 specifier|final
 name|String
@@ -1046,7 +1266,7 @@ literal|"EnumerableInterpreter\n"
 operator|+
 literal|"  BindableSort(sort0=[$1], sort1=[$0], dir0=[ASC], dir1=[DESC])\n"
 operator|+
-literal|"    DruidQuery(table=[[foodmart, foodmart]], intervals=[[1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z]], projects=[[$38, $29]], groups=[{0, 1}], aggs=[[]])"
+literal|"    DruidQuery(table=[[foodmart, foodmart]], intervals=[[1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z]], projects=[[$39, $30]], groups=[{0, 1}], aggs=[[]])"
 decl_stmt|;
 specifier|final
 name|String
@@ -1100,7 +1320,7 @@ literal|"EnumerableInterpreter\n"
 operator|+
 literal|"  BindableSort(sort0=[$1], sort1=[$0], dir0=[ASC], dir1=[DESC], offset=[2], fetch=[3])\n"
 operator|+
-literal|"    DruidQuery(table=[[foodmart, foodmart]], intervals=[[1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z]], projects=[[$38, $29]], groups=[{0, 1}], aggs=[[]])"
+literal|"    DruidQuery(table=[[foodmart, foodmart]], intervals=[[1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z]], projects=[[$39, $30]], groups=[{0, 1}], aggs=[[]])"
 decl_stmt|;
 specifier|final
 name|String
@@ -1262,7 +1482,7 @@ literal|"EnumerableLimit(fetch=[3])\n"
 operator|+
 literal|"  EnumerableInterpreter\n"
 operator|+
-literal|"    DruidQuery(table=[[foodmart, foodmart]], intervals=[[1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z]], projects=[[$38, $29]], groups=[{0, 1}], aggs=[[]])"
+literal|"    DruidQuery(table=[[foodmart, foodmart]], intervals=[[1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z]], projects=[[$39, $30]], groups=[{0, 1}], aggs=[[]])"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -1741,9 +1961,9 @@ literal|"EnumerableInterpreter\n"
 operator|+
 literal|"  BindableUnion(all=[true])\n"
 operator|+
-literal|"    DruidQuery(table=[[foodmart, foodmart]], intervals=[[1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z]], groups=[{38}], aggs=[[]])\n"
+literal|"    DruidQuery(table=[[foodmart, foodmart]], intervals=[[1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z]], groups=[{39}], aggs=[[]])\n"
 operator|+
-literal|"    DruidQuery(table=[[foodmart, foodmart]], intervals=[[1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z]], groups=[{36}], aggs=[[]])"
+literal|"    DruidQuery(table=[[foodmart, foodmart]], intervals=[[1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z]], groups=[{37}], aggs=[[]])"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -1800,9 +2020,9 @@ literal|"  BindableFilter(condition=[=($0, 'M')])\n"
 operator|+
 literal|"    BindableUnion(all=[true])\n"
 operator|+
-literal|"      DruidQuery(table=[[foodmart, foodmart]], intervals=[[1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z]], groups=[{38}], aggs=[[]])\n"
+literal|"      DruidQuery(table=[[foodmart, foodmart]], intervals=[[1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z]], groups=[{39}], aggs=[[]])\n"
 operator|+
-literal|"      DruidQuery(table=[[foodmart, foodmart]], intervals=[[1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z]], groups=[{36}], aggs=[[]])"
+literal|"      DruidQuery(table=[[foodmart, foodmart]], intervals=[[1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z]], groups=[{37}], aggs=[[]])"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -1913,6 +2133,48 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testGroupByTimeAndOneColumnNotProjected
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select count(*) as \"c\", floor(\"timestamp\" to MONTH) as \"month\"\n"
+operator|+
+literal|"from \"foodmart\"\n"
+operator|+
+literal|"group by floor(\"timestamp\" to MONTH), \"state_province\"\n"
+operator|+
+literal|"order by \"c\" desc limit 3"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|returnsOrdered
+argument_list|(
+literal|"c=3072; month=1997-01-01 00:00:00"
+argument_list|,
+literal|"c=2231; month=1997-01-01 00:00:00"
+argument_list|,
+literal|"c=1730; month=1997-01-01 00:00:00"
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|druidChecker
+argument_list|(
+literal|"'queryType':'topN'"
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testOrderByOneColumnNotProjected
 parameter_list|()
 block|{
@@ -1966,7 +2228,7 @@ literal|"PLAN=EnumerableInterpreter\n"
 operator|+
 literal|"  BindableSort(sort0=[$0], dir0=[ASC])\n"
 operator|+
-literal|"    DruidQuery(table=[[foodmart, foodmart]], intervals=[[1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z]], groups=[{29}], aggs=[[COUNT()]])"
+literal|"    DruidQuery(table=[[foodmart, foodmart]], intervals=[[1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z]], groups=[{30}], aggs=[[COUNT()]])"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -2313,7 +2575,7 @@ literal|"EnumerableInterpreter\n"
 operator|+
 literal|"  BindableProject(S=[$2], M=[$3], P=[$0])\n"
 operator|+
-literal|"    DruidQuery(table=[[foodmart, foodmart]], intervals=[[1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z]], projects=[[$29, FLOOR($91, FLAG(MONTH)), $88]], groups=[{0, 1}], aggs=[[SUM($2), MAX($2)]], sort0=[2], dir0=[DESC], fetch=[3])"
+literal|"    DruidQuery(table=[[foodmart, foodmart]], intervals=[[1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z]], projects=[[$30, FLOOR($0, FLAG(MONTH)), $89]], groups=[{0, 1}], aggs=[[SUM($2), MAX($2)]], sort0=[2], dir0=[DESC], fetch=[3])"
 decl_stmt|;
 specifier|final
 name|String
@@ -2394,7 +2656,7 @@ literal|"EnumerableInterpreter\n"
 operator|+
 literal|"  BindableProject(S=[$2], M=[$3], P=[$0])\n"
 operator|+
-literal|"    DruidQuery(table=[[foodmart, foodmart]], intervals=[[1997-01-01T00:00:00.000Z/1997-09-01T00:00:00.000Z]], projects=[[$29, FLOOR($91, FLAG(DAY)), $88]], groups=[{0, 1}], aggs=[[SUM($2), MAX($2)]], sort0=[2], dir0=[DESC], fetch=[3])"
+literal|"    DruidQuery(table=[[foodmart, foodmart]], intervals=[[1997-01-01T00:00:00.000Z/1997-09-01T00:00:00.000Z]], projects=[[$30, FLOOR($0, FLAG(DAY)), $89]], groups=[{0, 1}], aggs=[[SUM($2), MAX($2)]], sort0=[2], dir0=[DESC], fetch=[3])"
 decl_stmt|;
 specifier|final
 name|String
@@ -2464,7 +2726,7 @@ literal|"  BindableSort(sort0=[$0], dir0=[ASC])\n"
 operator|+
 literal|"    BindableFilter(condition=[>($1, 23000)])\n"
 operator|+
-literal|"      DruidQuery(table=[[foodmart, foodmart]], intervals=[[1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z]], groups=[{29}], aggs=[[COUNT()]])"
+literal|"      DruidQuery(table=[[foodmart, foodmart]], intervals=[[1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z]], groups=[{30}], aggs=[[COUNT()]])"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -2514,7 +2776,7 @@ literal|"EnumerableInterpreter\n"
 operator|+
 literal|"  BindableProject(C=[$2], state_province=[$1], city=[$0])\n"
 operator|+
-literal|"    DruidQuery(table=[[foodmart, foodmart]], intervals=[[1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z]], groups=[{28, 29}], aggs=[[COUNT()]], sort0=[2], dir0=[DESC], fetch=[2])"
+literal|"    DruidQuery(table=[[foodmart, foodmart]], intervals=[[1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z]], groups=[{29, 30}], aggs=[[COUNT()]], sort0=[2], dir0=[DESC], fetch=[2])"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -2570,7 +2832,7 @@ literal|"    BindableProject(state_province=[$0], CDC=[FLOOR($1)])\n"
 operator|+
 literal|"      BindableAggregate(group=[{1}], agg#0=[COUNT($0)])\n"
 operator|+
-literal|"        DruidQuery(table=[[foodmart, foodmart]], intervals=[[1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z]], groups=[{28, 29}], aggs=[[]])"
+literal|"        DruidQuery(table=[[foodmart, foodmart]], intervals=[[1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z]], groups=[{29, 30}], aggs=[[]])"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -2620,7 +2882,7 @@ literal|"  BindableProject(product_name=[$0], ZERO=[0])\n"
 operator|+
 literal|"    BindableSort(sort0=[$0], dir0=[ASC])\n"
 operator|+
-literal|"      DruidQuery(table=[[foodmart, foodmart]], intervals=[[1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z]], projects=[[$2]])"
+literal|"      DruidQuery(table=[[foodmart, foodmart]], intervals=[[1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z]], projects=[[$3]])"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -2696,15 +2958,15 @@ literal|"PLAN=EnumerableInterpreter\n"
 operator|+
 literal|"  DruidQuery(table=[[foodmart, foodmart]], intervals=[[1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z]],"
 operator|+
-literal|" filter=[AND(=(CAST($2):VARCHAR(24) CHARACTER SET \"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$primary\", 'High Top Dried Mushrooms'),"
+literal|" filter=[AND(=(CAST($3):VARCHAR(24) CHARACTER SET \"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$primary\", 'High Top Dried Mushrooms'),"
 operator|+
-literal|" OR(=($86, 'Q2'),"
+literal|" OR(=($87, 'Q2'),"
 operator|+
-literal|" =($86, 'Q3')),"
+literal|" =($87, 'Q3')),"
 operator|+
-literal|" =(CAST($29):VARCHAR(2) CHARACTER SET \"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$primary\", 'WA'))],"
+literal|" =(CAST($30):VARCHAR(2) CHARACTER SET \"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$primary\", 'WA'))],"
 operator|+
-literal|" projects=[[$29, $28, $2]], groups=[{0, 1, 2}], aggs=[[]])\n"
+literal|" projects=[[$30, $29, $3]], groups=[{0, 1, 2}], aggs=[[]])\n"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -2811,15 +3073,15 @@ literal|"PLAN=EnumerableInterpreter\n"
 operator|+
 literal|"  DruidQuery(table=[[foodmart, foodmart]], intervals=[[1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z]],"
 operator|+
-literal|" filter=[AND(=(CAST($2):VARCHAR(24) CHARACTER SET \"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$primary\", 'High Top Dried Mushrooms'),"
+literal|" filter=[AND(=(CAST($3):VARCHAR(24) CHARACTER SET \"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$primary\", 'High Top Dried Mushrooms'),"
 operator|+
-literal|" OR(=($86, 'Q2'),"
+literal|" OR(=($87, 'Q2'),"
 operator|+
-literal|" =($86, 'Q3')),"
+literal|" =($87, 'Q3')),"
 operator|+
-literal|" =(CAST($29):VARCHAR(2) CHARACTER SET \"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$primary\", 'WA'))],"
+literal|" =(CAST($30):VARCHAR(2) CHARACTER SET \"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$primary\", 'WA'))],"
 operator|+
-literal|" projects=[[$29, $28, $2]])\n"
+literal|" projects=[[$30, $29, $3]])\n"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -2902,7 +3164,7 @@ literal|"EnumerableInterpreter\n"
 operator|+
 literal|"  BindableAggregate(group=[{}], C=[COUNT()])\n"
 operator|+
-literal|"    BindableFilter(condition=[AND(>=(/INT(Reinterpret($91), 86400000), 1997-01-01),<(/INT(Reinterpret($91), 86400000), 1998-01-01),>=(/INT(Reinterpret($91), 86400000), 1997-04-01),<(/INT(Reinterpret($91), 86400000), 1997-05-01))])\n"
+literal|"    BindableFilter(condition=[AND(>=(/INT(Reinterpret($0), 86400000), 1997-01-01),<(/INT(Reinterpret($0), 86400000), 1998-01-01),>=(/INT(Reinterpret($0), 86400000), 1997-04-01),<(/INT(Reinterpret($0), 86400000), 1997-05-01))])\n"
 operator|+
 literal|"      DruidQuery(table=[[foodmart, foodmart]], intervals=[[1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z]])"
 decl_stmt|;

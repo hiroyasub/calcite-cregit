@@ -378,6 +378,10 @@ name|metadata
 argument_list|(
 name|tableName
 argument_list|,
+name|DruidTable
+operator|.
+name|DEFAULT_TIMESTAMP_COLUMN
+argument_list|,
 literal|null
 argument_list|,
 name|fieldMap
@@ -402,7 +406,9 @@ name|fieldMap
 argument_list|,
 name|metricNameSet
 argument_list|,
-literal|null
+name|DruidTable
+operator|.
+name|DEFAULT_TIMESTAMP_COLUMN
 argument_list|,
 name|connection
 argument_list|)
