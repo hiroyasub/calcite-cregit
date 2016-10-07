@@ -260,7 +260,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Tests for utility {@link RelToSqlConverter}  */
+comment|/**  * Tests for {@link RelToSqlConverter}.  */
 end_comment
 
 begin_class
@@ -434,7 +434,6 @@ name|expected
 argument_list|)
 expr_stmt|;
 block|}
-comment|//TODO: add test for query -> select * from product
 annotation|@
 name|Test
 specifier|public
@@ -1958,6 +1957,69 @@ operator|.
 name|ok
 argument_list|(
 name|expected2
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1422">[CALCITE-1422]    * In JDBC adapter, allow IS NULL and IS NOT NULL operators in generated SQL    * join condition</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSimpleJoinConditionWithIsNullOperators
+parameter_list|()
+block|{
+name|String
+name|query
+init|=
+literal|"select *\n"
+operator|+
+literal|"from \"foodmart\".\"sales_fact_1997\" as \"t1\"\n"
+operator|+
+literal|"inner join \"foodmart\".\"customer\" as \"t2\"\n"
+operator|+
+literal|"on \"t1\".\"customer_id\" = \"t2\".\"customer_id\" or "
+operator|+
+literal|"(\"t1\".\"customer_id\" is null "
+operator|+
+literal|"and \"t2\".\"customer_id\" is null)\n"
+operator|+
+literal|"inner join \"foodmart\".\"product\" as \"t3\"\n"
+operator|+
+literal|"on \"t1\".\"product_id\" = \"t3\".\"product_id\" or "
+operator|+
+literal|"(\"t1\".\"product_id\" is not null or "
+operator|+
+literal|"\"t3\".\"product_id\" is not null)"
+decl_stmt|;
+name|String
+name|expected
+init|=
+literal|"SELECT *\nFROM \"foodmart\".\"sales_fact_1997\"\n"
+operator|+
+literal|"INNER JOIN \"foodmart\".\"customer\" "
+operator|+
+literal|"ON \"sales_fact_1997\".\"customer_id\" = \"customer\".\"customer_id\""
+operator|+
+literal|" OR \"sales_fact_1997\".\"customer_id\" IS NULL "
+operator|+
+literal|"AND \"customer\".\"customer_id\" IS NULL\n"
+operator|+
+literal|"INNER JOIN \"foodmart\".\"product\" "
+operator|+
+literal|"ON \"sales_fact_1997\".\"product_id\" = \"product\".\"product_id\" OR "
+operator|+
+literal|"\"sales_fact_1997\".\"product_id\" IS NOT NULL "
+operator|+
+literal|"OR \"product\".\"product_id\" IS NOT NULL"
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
 argument_list|)
 expr_stmt|;
 block|}
