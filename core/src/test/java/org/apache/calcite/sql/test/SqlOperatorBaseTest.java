@@ -17263,6 +17263,28 @@ argument_list|,
 literal|"VARCHAR(3) NOT NULL"
 argument_list|)
 expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"substring(x'aabbcc' from 1 for 2)"
+argument_list|,
+literal|"aabb"
+argument_list|,
+literal|"VARBINARY(3) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"substring(x'aabbcc' from 2)"
+argument_list|,
+literal|"bbcc"
+argument_list|,
+literal|"VARBINARY(3) NOT NULL"
+argument_list|)
+expr_stmt|;
 if|if
 condition|(
 name|Bug
