@@ -1262,6 +1262,27 @@ name|ByteString
 name|seek
 parameter_list|)
 block|{
+return|return
+name|indexOf
+argument_list|(
+name|seek
+argument_list|,
+literal|0
+argument_list|)
+return|;
+block|}
+comment|/** Returns the position at which {@code seek} first occurs in this byte    * string, starting at the specified index, or -1 if it does not occur. */
+specifier|public
+name|int
+name|indexOf
+parameter_list|(
+name|ByteString
+name|seek
+parameter_list|,
+name|int
+name|start
+parameter_list|)
+block|{
 name|iLoop
 label|:
 for|for
@@ -1269,7 +1290,7 @@ control|(
 name|int
 name|i
 init|=
-literal|0
+name|start
 init|;
 name|i
 operator|<
