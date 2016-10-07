@@ -1216,6 +1216,20 @@ argument_list|(
 literal|2
 argument_list|)
 decl_stmt|;
+specifier|public
+specifier|static
+specifier|final
+name|SqlSingleOperandTypeChecker
+name|SAME_SAME_INTEGER
+init|=
+operator|new
+name|SameOperandTypeExceptLastOperandChecker
+argument_list|(
+literal|3
+argument_list|,
+literal|"INTEGER"
+argument_list|)
+decl_stmt|;
 comment|/**    * Operand type-checking strategy where three operands must all be in the    * same type family.    */
 specifier|public
 specifier|static
@@ -1388,6 +1402,22 @@ argument_list|,
 name|SqlTypeFamily
 operator|.
 name|INTEGER
+argument_list|)
+decl_stmt|;
+comment|/**    * Operand type-checking strategy where two operands must both be in the    * same string type family and last type is INTEGER.    */
+specifier|public
+specifier|static
+specifier|final
+name|SqlSingleOperandTypeChecker
+name|STRING_SAME_SAME_INTEGER
+init|=
+name|OperandTypes
+operator|.
+name|and
+argument_list|(
+name|STRING_STRING_INTEGER
+argument_list|,
+name|SAME_SAME_INTEGER
 argument_list|)
 decl_stmt|;
 specifier|public

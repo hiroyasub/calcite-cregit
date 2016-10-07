@@ -1597,7 +1597,9 @@ name|createCharString
 argument_list|(
 literal|" "
 argument_list|,
-literal|null
+name|SqlParserPos
+operator|.
+name|ZERO
 argument_list|)
 argument_list|,
 name|operands
@@ -1685,7 +1687,9 @@ name|createCharString
 argument_list|(
 literal|" "
 argument_list|,
-literal|null
+name|SqlParserPos
+operator|.
+name|ZERO
 argument_list|)
 argument_list|,
 name|operands

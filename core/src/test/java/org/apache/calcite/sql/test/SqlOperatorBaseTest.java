@@ -6779,42 +6779,28 @@ argument_list|,
 literal|"INTEGER NOT NULL"
 argument_list|)
 expr_stmt|;
-comment|// only the 2 arg version of locate is implemented
-if|if
-condition|(
-literal|false
-condition|)
-block|{
 name|tester
 operator|.
 name|checkScalar
 argument_list|(
-literal|"{fn LOCATE(string1, string2[, start])}"
+literal|"{fn LOCATE('ha', 'alphabet', 6)}"
 argument_list|,
-literal|null
+literal|0
 argument_list|,
-literal|""
+literal|"INTEGER NOT NULL"
 argument_list|)
 expr_stmt|;
-block|}
-comment|// ltrim is implemented but has a bug in arg checking
-if|if
-condition|(
-literal|false
-condition|)
-block|{
 name|tester
 operator|.
 name|checkScalar
 argument_list|(
 literal|"{fn LTRIM(' xxx  ')}"
 argument_list|,
-literal|"xxx"
+literal|"xxx  "
 argument_list|,
-literal|"VARCHAR(6)"
+literal|"VARCHAR(6) NOT NULL"
 argument_list|)
 expr_stmt|;
-block|}
 if|if
 condition|(
 literal|false
@@ -6866,24 +6852,17 @@ literal|""
 argument_list|)
 expr_stmt|;
 block|}
-comment|// rtrim is implemented but has a bug in arg checking
-if|if
-condition|(
-literal|false
-condition|)
-block|{
 name|tester
 operator|.
 name|checkScalar
 argument_list|(
 literal|"{fn RTRIM(' xxx  ')}"
 argument_list|,
-literal|"xxx"
+literal|" xxx"
 argument_list|,
-literal|"VARCHAR(6)"
+literal|"VARCHAR(6) NOT NULL"
 argument_list|)
 expr_stmt|;
-block|}
 if|if
 condition|(
 literal|false
@@ -14710,6 +14689,141 @@ argument_list|(
 literal|"position('' in 'abc')"
 argument_list|,
 literal|"1"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalarExact
+argument_list|(
+literal|"position('b' in 'abcabc' FROM 3)"
+argument_list|,
+literal|"5"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalarExact
+argument_list|(
+literal|"position('b' in 'abcabc' FROM 5)"
+argument_list|,
+literal|"5"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalarExact
+argument_list|(
+literal|"position('b' in 'abcabc' FROM 6)"
+argument_list|,
+literal|"0"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalarExact
+argument_list|(
+literal|"position('b' in 'abcabc' FROM -5)"
+argument_list|,
+literal|"0"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalarExact
+argument_list|(
+literal|"position('' in 'abc' FROM 3)"
+argument_list|,
+literal|"3"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalarExact
+argument_list|(
+literal|"position('' in 'abc' FROM 10)"
+argument_list|,
+literal|"0"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalarExact
+argument_list|(
+literal|"position(x'bb' in x'aabbcc')"
+argument_list|,
+literal|"2"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalarExact
+argument_list|(
+literal|"position(x'' in x'aabbcc')"
+argument_list|,
+literal|"1"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalarExact
+argument_list|(
+literal|"position(x'bb' in x'aabbccaabbcc' FROM 3)"
+argument_list|,
+literal|"5"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalarExact
+argument_list|(
+literal|"position(x'bb' in x'aabbccaabbcc' FROM 5)"
+argument_list|,
+literal|"5"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalarExact
+argument_list|(
+literal|"position(x'bb' in x'aabbccaabbcc' FROM 6)"
+argument_list|,
+literal|"0"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalarExact
+argument_list|(
+literal|"position(x'bb' in x'aabbccaabbcc' FROM -5)"
+argument_list|,
+literal|"0"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalarExact
+argument_list|(
+literal|"position(x'cc' in x'aabbccdd' FROM 2)"
+argument_list|,
+literal|"3"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalarExact
+argument_list|(
+literal|"position(x'' in x'aabbcc' FROM 3)"
+argument_list|,
+literal|"3"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalarExact
+argument_list|(
+literal|"position(x'' in x'aabbcc' FROM 10)"
+argument_list|,
+literal|"0"
 argument_list|)
 expr_stmt|;
 comment|// FRG-211

@@ -2659,6 +2659,11 @@ argument_list|)
 expr_stmt|;
 name|checkExp
 argument_list|(
+literal|"position(x'11' in x'100110' FROM 10)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
 literal|"position(x'abcd' in x'')"
 argument_list|)
 expr_stmt|;
@@ -2672,6 +2677,13 @@ expr_stmt|;
 name|checkWholeExpFails
 argument_list|(
 literal|"position(x'1234' in '110')"
+argument_list|,
+literal|"Parameters must be of the same type"
+argument_list|)
+expr_stmt|;
+name|checkWholeExpFails
+argument_list|(
+literal|"position(x'1234' in '110' from 3)"
 argument_list|,
 literal|"Parameters must be of the same type"
 argument_list|)
@@ -4090,13 +4102,9 @@ argument_list|,
 literal|"(?s).*4.*"
 argument_list|)
 expr_stmt|;
-comment|// TODO: this is legal JDBC syntax, but the 3 ops call is not
-comment|// implemented
-name|checkWholeExpFails
+name|checkExp
 argument_list|(
 literal|"{fn locate('','',1)}"
-argument_list|,
-name|ANY
 argument_list|)
 expr_stmt|;
 name|checkWholeExpFails
