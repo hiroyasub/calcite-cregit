@@ -1151,7 +1151,7 @@ name|this
 return|;
 block|}
 block|}
-comment|/** Returns the kind that you get if you apply NOT to this kind.    *    *<p>For example, {@code IS_NOT_NULL.negate()} returns {@link #IS_NULL}. */
+comment|/** Returns the kind that you get if you apply NOT to this kind.    *    *<p>For example, {@code IS_NOT_NULL.negate()} returns {@link #IS_NULL}.    *    *<p>For {@link #IS_TRUE}, {@link #IS_FALSE}, {@link #IS_NOT_TRUE},    * {@link #IS_NOT_FALSE}, nullable inputs need to be treated carefully.    *    *<p>{@code NOT(IS_TRUE(null))} = {@code NOT(false)} = {@code true},    * while {@code IS_FALSE(null)} = {@code false},    * so {@code NOT(IS_TRUE(X))} should be {@code IS_NOT_TRUE(X)}.    * On the other hand,    * {@code IS_TRUE(NOT(null))} = {@code IS_TRUE(null)} = {@code false}.    *    *<p>This is why negate() != negateNullSafe() for these operators.    */
 specifier|public
 name|SqlKind
 name|negate
@@ -1166,13 +1166,13 @@ case|case
 name|IS_TRUE
 case|:
 return|return
-name|IS_FALSE
+name|IS_NOT_TRUE
 return|;
 case|case
 name|IS_FALSE
 case|:
 return|return
-name|IS_TRUE
+name|IS_NOT_FALSE
 return|;
 case|case
 name|IS_NULL
@@ -1184,13 +1184,13 @@ case|case
 name|IS_NOT_TRUE
 case|:
 return|return
-name|IS_NOT_FALSE
+name|IS_TRUE
 return|;
 case|case
 name|IS_NOT_FALSE
 case|:
 return|return
-name|IS_NOT_TRUE
+name|IS_FALSE
 return|;
 case|case
 name|IS_NOT_NULL
@@ -1216,7 +1216,7 @@ name|this
 return|;
 block|}
 block|}
-comment|/** Returns the kind that you get if you negate this kind.    * To conform to null semantics, null value should not be compared. */
+comment|/** Returns the kind that you get if you negate this kind.    * To conform to null semantics, null value should not be compared.    *    *<p>For {@link #IS_TRUE}, {@link #IS_FALSE}, {@link #IS_NOT_TRUE} and    * {@link #IS_NOT_FALSE}, nullable inputs need to be treated carefully:    *    *<ul>    *<li>NOT(IS_TRUE(null)) = NOT(false) = true    *<li>IS_TRUE(NOT(null)) = IS_TRUE(null) = false    *<li>IS_FALSE(null) = false    *<li>IS_NOT_TRUE(null) = true    *</ul>    */
 specifier|public
 name|SqlKind
 name|negateNullSafe
@@ -1262,6 +1262,30 @@ name|GREATER_THAN_OR_EQUAL
 case|:
 return|return
 name|LESS_THAN
+return|;
+case|case
+name|IS_TRUE
+case|:
+return|return
+name|IS_FALSE
+return|;
+case|case
+name|IS_FALSE
+case|:
+return|return
+name|IS_TRUE
+return|;
+case|case
+name|IS_NOT_TRUE
+case|:
+return|return
+name|IS_NOT_FALSE
+return|;
+case|case
+name|IS_NOT_FALSE
+case|:
+return|return
+name|IS_NOT_TRUE
 return|;
 default|default:
 return|return

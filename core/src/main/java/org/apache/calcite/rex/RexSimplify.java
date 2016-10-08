@@ -1719,7 +1719,7 @@ name|op
 argument_list|(
 name|kind
 operator|.
-name|negate
+name|negateNullSafe
 argument_list|()
 argument_list|)
 decl_stmt|;
