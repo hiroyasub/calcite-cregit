@@ -3139,14 +3139,6 @@ literal|true
 argument_list|)
 expr_stmt|;
 block|}
-if|if
-condition|(
-operator|!
-name|enable
-condition|)
-block|{
-return|return;
-block|}
 comment|// Convert from string to type
 name|checkCastToScalarOkay
 argument_list|(
@@ -4954,6 +4946,121 @@ argument_list|)
 expr_stmt|;
 block|}
 annotation|@
+name|Ignore
+argument_list|(
+literal|"[CALCITE-1439] Handling errors during constant reduction"
+argument_list|)
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testCastInvalid
+parameter_list|()
+block|{
+comment|// Constant reduction kicks in and generates Java constants that throw
+comment|// when the class is loaded, thus ExceptionInInitializerError. We don't have
+comment|// a fix yet.
+name|tester
+operator|.
+name|checkScalarExact
+argument_list|(
+literal|"cast('15' as integer)"
+argument_list|,
+literal|"INTEGER NOT NULL"
+argument_list|,
+literal|"15"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkFails
+argument_list|(
+literal|"cast('15.4' as integer)"
+argument_list|,
+literal|"xxx"
+argument_list|,
+literal|true
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkFails
+argument_list|(
+literal|"cast('15.6' as integer)"
+argument_list|,
+literal|"xxx"
+argument_list|,
+literal|true
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkFails
+argument_list|(
+literal|"cast('ue' as boolean)"
+argument_list|,
+literal|"xxx"
+argument_list|,
+literal|true
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkFails
+argument_list|(
+literal|"cast('' as boolean)"
+argument_list|,
+literal|"xxx"
+argument_list|,
+literal|true
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkFails
+argument_list|(
+literal|"cast('' as integer)"
+argument_list|,
+literal|"xxx"
+argument_list|,
+literal|true
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkFails
+argument_list|(
+literal|"cast('' as real)"
+argument_list|,
+literal|"xxx"
+argument_list|,
+literal|true
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkFails
+argument_list|(
+literal|"cast('' as double)"
+argument_list|,
+literal|"xxx"
+argument_list|,
+literal|true
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkFails
+argument_list|(
+literal|"cast('' as smallint)"
+argument_list|,
+literal|"xxx"
+argument_list|,
+literal|true
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
 name|Test
 specifier|public
 name|void
@@ -5283,6 +5390,39 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
+name|tester
+operator|.
+name|checkFails
+argument_list|(
+literal|"cast('12:34:5' as TIME)"
+argument_list|,
+name|BAD_DATETIME_MESSAGE
+argument_list|,
+literal|true
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkFails
+argument_list|(
+literal|"cast('12:3:45' as TIME)"
+argument_list|,
+name|BAD_DATETIME_MESSAGE
+argument_list|,
+literal|true
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkFails
+argument_list|(
+literal|"cast('1:23:45' as TIME)"
+argument_list|,
+name|BAD_DATETIME_MESSAGE
+argument_list|,
+literal|true
+argument_list|)
+expr_stmt|;
 comment|// timestamp<-> string
 name|checkCastToString
 argument_list|(
@@ -5416,6 +5556,17 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
+name|tester
+operator|.
+name|checkFails
+argument_list|(
+literal|"cast('1945-1-24 12:23:34.454' as TIMESTAMP)"
+argument_list|,
+name|BAD_DATETIME_MESSAGE
+argument_list|,
+literal|true
+argument_list|)
+expr_stmt|;
 comment|// date<-> string
 name|checkCastToString
 argument_list|(
@@ -5442,6 +5593,17 @@ argument_list|(
 literal|"cast('1945-02-24' as DATE)"
 argument_list|,
 literal|"1945-02-24"
+argument_list|,
+literal|"DATE NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"cast(' 1945-2-4 ' as DATE)"
+argument_list|,
+literal|"1945-02-04"
 argument_list|,
 literal|"DATE NOT NULL"
 argument_list|)
@@ -5762,6 +5924,17 @@ operator|.
 name|checkBoolean
 argument_list|(
 literal|"cast('  trUe' as boolean)"
+argument_list|,
+name|Boolean
+operator|.
+name|TRUE
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"cast('  tr' || 'Ue' as boolean)"
 argument_list|,
 name|Boolean
 operator|.

@@ -7879,9 +7879,7 @@ name|pulledUpPredicates
 argument_list|,
 name|sortsAs
 argument_list|(
-literal|"[<($0, 10), =($3, 'y'), =($4, CAST('1'):INTEGER NOT NULL), "
-operator|+
-literal|"IS NULL($1), IS NULL($2)]"
+literal|"[<($0, 10), =($3, 'y'), =($4, 1), IS NULL($1), IS NULL($2)]"
 argument_list|)
 argument_list|)
 expr_stmt|;

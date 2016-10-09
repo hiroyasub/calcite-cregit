@@ -470,7 +470,7 @@ name|path
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Run a test from the command line. */
+comment|/** Runs a test from the command line.    *    *<p>For example:    *    *<blockquote><code>java QuidemTest sql/dummy.iq</code></blockquote> */
 specifier|public
 specifier|static
 name|void
@@ -483,21 +483,24 @@ parameter_list|)
 throws|throws
 name|Exception
 block|{
-specifier|final
+for|for
+control|(
 name|String
-name|path
-init|=
-literal|"sql/lateral.iq"
-decl_stmt|;
+name|arg
+range|:
+name|args
+control|)
+block|{
 operator|new
 name|QuidemTest
 argument_list|(
-name|path
+name|arg
 argument_list|)
 operator|.
 name|test
 argument_list|()
 expr_stmt|;
+block|}
 block|}
 specifier|private
 name|Method

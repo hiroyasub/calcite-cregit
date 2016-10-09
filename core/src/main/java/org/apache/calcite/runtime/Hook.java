@@ -17,6 +17,20 @@ end_package
 
 begin_import
 import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|util
+operator|.
+name|Holder
+import|;
+end_import
+
+begin_import
+import|import
 name|com
 operator|.
 name|google
@@ -72,6 +86,9 @@ name|Hook
 block|{
 comment|/** Called to get the current time. Use this to return a predictable time    * in tests. */
 name|CURRENT_TIME
+block|,
+comment|/** Returns a boolean value, whether RelBuilder should simplify expressions.    * Default true. */
+name|REL_BUILDER_SIMPLIFY
 block|,
 comment|/** Called with the SQL string and parse tree, in an array. */
 name|PARSE_TREE
@@ -391,6 +408,44 @@ name|arg
 argument_list|)
 expr_stmt|;
 block|}
+block|}
+comment|/** Returns the value of a property hook.    * (Property hooks take a {@link Holder} as an argument.) */
+specifier|public
+parameter_list|<
+name|V
+parameter_list|>
+name|V
+name|get
+parameter_list|(
+name|V
+name|defaultValue
+parameter_list|)
+block|{
+specifier|final
+name|Holder
+argument_list|<
+name|V
+argument_list|>
+name|holder
+init|=
+name|Holder
+operator|.
+name|of
+argument_list|(
+name|defaultValue
+argument_list|)
+decl_stmt|;
+name|run
+argument_list|(
+name|holder
+argument_list|)
+expr_stmt|;
+return|return
+name|holder
+operator|.
+name|get
+argument_list|()
+return|;
 block|}
 comment|/** Removes a Hook after use.    *    *<p>Note: Although it would be convenient, this interface cannot extend    * {@code AutoCloseable} while Calcite maintains compatibility with    * JDK 1.6.</p>    */
 specifier|public
