@@ -1042,6 +1042,96 @@ literal|"[Ringo, 1]"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testAggregateGroupFilter
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+name|rootSchema
+operator|.
+name|add
+argument_list|(
+literal|"beatles"
+argument_list|,
+operator|new
+name|ScannableTableTest
+operator|.
+name|BeatlesTable
+argument_list|()
+argument_list|)
+expr_stmt|;
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select \"j\",\n"
+operator|+
+literal|"  count(*) filter (where char_length(\"j\")> 4)\n"
+operator|+
+literal|"from \"beatles\" group by \"j\""
+decl_stmt|;
+name|SqlNode
+name|parse
+init|=
+name|planner
+operator|.
+name|parse
+argument_list|(
+name|sql
+argument_list|)
+decl_stmt|;
+name|SqlNode
+name|validate
+init|=
+name|planner
+operator|.
+name|validate
+argument_list|(
+name|parse
+argument_list|)
+decl_stmt|;
+name|RelNode
+name|convert
+init|=
+name|planner
+operator|.
+name|rel
+argument_list|(
+name|validate
+argument_list|)
+operator|.
+name|rel
+decl_stmt|;
+specifier|final
+name|Interpreter
+name|interpreter
+init|=
+operator|new
+name|Interpreter
+argument_list|(
+name|dataContext
+argument_list|,
+name|convert
+argument_list|)
+decl_stmt|;
+name|assertRowsUnordered
+argument_list|(
+name|interpreter
+argument_list|,
+literal|"[George, 1]"
+argument_list|,
+literal|"[Paul, 0]"
+argument_list|,
+literal|"[John, 0]"
+argument_list|,
+literal|"[Ringo, 1]"
+argument_list|)
+expr_stmt|;
+block|}
 comment|/** Tests executing a plan on a single-column    * {@link org.apache.calcite.schema.ScannableTable} using an interpreter. */
 annotation|@
 name|Test
