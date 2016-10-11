@@ -1205,6 +1205,12 @@ operator|=
 operator|-
 literal|1
 expr_stmt|;
+name|page
+operator|.
+name|totalRowCount
+operator|=
+literal|0
+expr_stmt|;
 name|expectScalarField
 argument_list|(
 name|parser
@@ -1458,6 +1464,12 @@ name|rowBuilder
 operator|.
 name|reset
 argument_list|()
+expr_stmt|;
+name|page
+operator|.
+name|totalRowCount
+operator|+=
+literal|1
 expr_stmt|;
 block|}
 name|expect
@@ -3411,6 +3423,11 @@ name|offset
 init|=
 operator|-
 literal|1
+decl_stmt|;
+name|int
+name|totalRowCount
+init|=
+literal|0
 decl_stmt|;
 annotation|@
 name|Override

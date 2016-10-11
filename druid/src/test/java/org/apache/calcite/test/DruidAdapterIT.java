@@ -793,7 +793,7 @@ literal|"'dataSource':'wikiticker','descending':false,"
 operator|+
 literal|"'intervals':['1900-01-01T00:00:00.000Z/3000-01-01T00:00:00.000Z'],"
 operator|+
-literal|"'dimensions':[],'metrics':[],'granularity':'all','pagingSpec':{'threshold':1},"
+literal|"'dimensions':[],'metrics':[],'granularity':'all','pagingSpec':{'threshold':1,'fromNext':true},"
 operator|+
 literal|"'context':{'druid.query.fetch':true}}"
 decl_stmt|;
@@ -1663,7 +1663,7 @@ literal|"'descending':false,'intervals':['1900-01-09T00:00:00.000Z/2992-01-10T00
 operator|+
 literal|"'dimensions':['state_province','product_name'],'metrics':[],'granularity':'all',"
 operator|+
-literal|"'pagingSpec':{'threshold':16384},'context':{'druid.query.fetch':false}}"
+literal|"'pagingSpec':{'threshold':16384,'fromNext':true},'context':{'druid.query.fetch':false}}"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -1707,7 +1707,7 @@ literal|"'descending':false,'intervals':['1900-01-09T00:00:00.000Z/2992-01-10T00
 operator|+
 literal|"'dimensions':['gender','state_province'],'metrics':[],'granularity':'all',"
 operator|+
-literal|"'pagingSpec':{'threshold':3},'context':{'druid.query.fetch':true}}"
+literal|"'pagingSpec':{'threshold':3,'fromNext':true},'context':{'druid.query.fetch':true}}"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -1848,7 +1848,7 @@ literal|"'the_month','the_year','day_of_month','week_of_year','month_of_year','q
 operator|+
 literal|"'metrics':['unit_sales','store_sales','store_cost'],'granularity':'all',"
 operator|+
-literal|"'pagingSpec':{'threshold':16384},'context':{'druid.query.fetch':false}}"
+literal|"'pagingSpec':{'threshold':16384,'fromNext':true},'context':{'druid.query.fetch':false}}"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -2024,7 +2024,7 @@ literal|"'week_of_year','month_of_year','quarter','fiscal_period'],"
 operator|+
 literal|"'metrics':['unit_sales','store_sales','store_cost'],'granularity':'all',"
 operator|+
-literal|"'pagingSpec':{'threshold':16384},'context':{'druid.query.fetch':false}}"
+literal|"'pagingSpec':{'threshold':16384,'fromNext':true},'context':{'druid.query.fetch':false}}"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -2104,7 +2104,7 @@ literal|"'the_month','the_year','day_of_month','week_of_year','month_of_year','q
 operator|+
 literal|"'metrics':['unit_sales','store_sales','store_cost'],'granularity':'all',"
 operator|+
-literal|"'pagingSpec':{'threshold':16384},'context':{'druid.query.fetch':false}}"
+literal|"'pagingSpec':{'threshold':16384,'fromNext':true},'context':{'druid.query.fetch':false}}"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -3345,7 +3345,7 @@ literal|"'metrics':[],"
 operator|+
 literal|"'granularity':'all',"
 operator|+
-literal|"'pagingSpec':{'threshold':16384},'context':{'druid.query.fetch':false}}"
+literal|"'pagingSpec':{'threshold':16384,'fromNext':true},'context':{'druid.query.fetch':false}}"
 decl_stmt|;
 specifier|final
 name|String
@@ -3385,8 +3385,6 @@ argument_list|)
 operator|.
 name|returnsUnordered
 argument_list|(
-literal|"state_province=WA; city=Bremerton; product_name=High Top Dried Mushrooms"
-argument_list|,
 literal|"state_province=WA; city=Bremerton; product_name=High Top Dried Mushrooms"
 argument_list|,
 literal|"state_province=WA; city=Everett; product_name=High Top Dried Mushrooms"
