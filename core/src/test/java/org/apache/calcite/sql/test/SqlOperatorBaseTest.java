@@ -6449,14 +6449,6 @@ comment|// There follows one test for each function in appendix C of the JDBC
 comment|// 3.0 specification. The test is 'if-false'd out if the function is
 comment|// not implemented or is broken.
 comment|// Numeric Functions
-if|if
-condition|(
-operator|!
-name|enable
-condition|)
-block|{
-comment|//      return;
-block|}
 name|tester
 operator|.
 name|checkScalar
@@ -6468,142 +6460,111 @@ argument_list|,
 literal|"INTEGER NOT NULL"
 argument_list|)
 expr_stmt|;
-if|if
-condition|(
-literal|false
-condition|)
-block|{
 name|tester
 operator|.
-name|checkScalar
+name|checkScalarApprox
 argument_list|(
-literal|"{fn ACOS(float)}"
+literal|"{fn ACOS(0.2)}"
 argument_list|,
-literal|null
+literal|"DOUBLE NOT NULL"
 argument_list|,
-literal|""
+literal|1.36943
+argument_list|,
+literal|0.001
 argument_list|)
 expr_stmt|;
-block|}
-if|if
-condition|(
-literal|false
-condition|)
-block|{
 name|tester
 operator|.
-name|checkScalar
+name|checkScalarApprox
 argument_list|(
-literal|"{fn ASIN(float)}"
+literal|"{fn ASIN(0.2)}"
 argument_list|,
-literal|null
+literal|"DOUBLE NOT NULL"
 argument_list|,
-literal|""
+literal|0.20135
+argument_list|,
+literal|0.001
 argument_list|)
 expr_stmt|;
-block|}
-if|if
-condition|(
-literal|false
-condition|)
-block|{
 name|tester
 operator|.
-name|checkScalar
+name|checkScalarApprox
 argument_list|(
-literal|"{fn ATAN(float)}"
+literal|"{fn ATAN(0.2)}"
 argument_list|,
-literal|null
+literal|"DOUBLE NOT NULL"
 argument_list|,
-literal|""
+literal|0.19739
+argument_list|,
+literal|0.001
 argument_list|)
 expr_stmt|;
-block|}
-if|if
-condition|(
-literal|false
-condition|)
-block|{
 name|tester
 operator|.
-name|checkScalar
+name|checkScalarApprox
 argument_list|(
-literal|"{fn ATAN2(float1, float2)}"
+literal|"{fn ATAN2(-2, 2)}"
 argument_list|,
-literal|null
+literal|"DOUBLE NOT NULL"
 argument_list|,
-literal|""
+operator|-
+literal|0.78539
+argument_list|,
+literal|0.001
 argument_list|)
 expr_stmt|;
-block|}
-if|if
-condition|(
-literal|false
-condition|)
-block|{
 name|tester
 operator|.
 name|checkScalar
 argument_list|(
 literal|"{fn CEILING(-2.6)}"
 argument_list|,
+operator|-
 literal|2
 argument_list|,
-literal|""
+literal|"DECIMAL(2, 0) NOT NULL"
 argument_list|)
 expr_stmt|;
-block|}
-if|if
-condition|(
-literal|false
-condition|)
-block|{
 name|tester
 operator|.
-name|checkScalar
+name|checkScalarApprox
 argument_list|(
-literal|"{fn COS(float)}"
+literal|"{fn COS(0.2)}"
 argument_list|,
-literal|null
+literal|"DOUBLE NOT NULL"
 argument_list|,
-literal|""
+literal|0.98007
+argument_list|,
+literal|0.001
 argument_list|)
 expr_stmt|;
-block|}
-if|if
-condition|(
-literal|false
-condition|)
-block|{
 name|tester
 operator|.
-name|checkScalar
+name|checkScalarApprox
 argument_list|(
-literal|"{fn COT(float)}"
+literal|"{fn COT(0.2)}"
 argument_list|,
-literal|null
+literal|"DOUBLE NOT NULL"
 argument_list|,
-literal|""
+literal|4.93315
+argument_list|,
+literal|0.001
 argument_list|)
 expr_stmt|;
-block|}
-if|if
-condition|(
-literal|false
-condition|)
-block|{
 name|tester
 operator|.
-name|checkScalar
+name|checkScalarApprox
 argument_list|(
-literal|"{fn DEGREES(number)}"
+literal|"{fn DEGREES(-1)}"
 argument_list|,
-literal|null
+literal|"DOUBLE NOT NULL"
 argument_list|,
-literal|""
+operator|-
+literal|57.29578
+argument_list|,
+literal|0.001
 argument_list|)
 expr_stmt|;
-block|}
 name|tester
 operator|.
 name|checkScalarApprox
@@ -6617,11 +6578,6 @@ argument_list|,
 literal|0.001
 argument_list|)
 expr_stmt|;
-if|if
-condition|(
-literal|false
-condition|)
-block|{
 name|tester
 operator|.
 name|checkScalar
@@ -6630,10 +6586,9 @@ literal|"{fn FLOOR(2.6)}"
 argument_list|,
 literal|2
 argument_list|,
-literal|"DOUBLE NOT NULL"
+literal|"DECIMAL(2, 0) NOT NULL"
 argument_list|)
 expr_stmt|;
-block|}
 name|tester
 operator|.
 name|checkScalarApprox
@@ -6671,170 +6626,143 @@ argument_list|,
 literal|"INTEGER NOT NULL"
 argument_list|)
 expr_stmt|;
-if|if
-condition|(
-literal|false
-condition|)
-block|{
 name|tester
 operator|.
-name|checkScalar
+name|checkScalarApprox
 argument_list|(
 literal|"{fn PI()}"
 argument_list|,
-literal|null
+literal|"DOUBLE NOT NULL"
 argument_list|,
-literal|""
+literal|3.14159
+argument_list|,
+literal|0.0001
 argument_list|)
 expr_stmt|;
-block|}
 name|tester
 operator|.
-name|checkScalar
+name|checkScalarApprox
 argument_list|(
 literal|"{fn POWER(2, 3)}"
 argument_list|,
+literal|"DOUBLE NOT NULL"
+argument_list|,
 literal|8.0
 argument_list|,
+literal|0.001
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalarApprox
+argument_list|(
+literal|"{fn RADIANS(90)}"
+argument_list|,
 literal|"DOUBLE NOT NULL"
+argument_list|,
+literal|1.57080
+argument_list|,
+literal|0.001
 argument_list|)
 expr_stmt|;
-if|if
-condition|(
-literal|false
-condition|)
-block|{
+name|tester
+operator|.
+name|checkScalarApprox
+argument_list|(
+literal|"{fn RAND(42)}"
+argument_list|,
+literal|"DOUBLE NOT NULL"
+argument_list|,
+literal|0.63708
+argument_list|,
+literal|0.001
+argument_list|)
+expr_stmt|;
 name|tester
 operator|.
 name|checkScalar
 argument_list|(
-literal|"{fn RADIANS(number)}"
+literal|"{fn ROUND(1251, -2)}"
 argument_list|,
-literal|null
+literal|1300
 argument_list|,
-literal|""
+literal|"INTEGER NOT NULL"
 argument_list|)
 expr_stmt|;
-block|}
-if|if
-condition|(
-literal|false
-condition|)
-block|{
 name|tester
 operator|.
 name|checkScalar
 argument_list|(
-literal|"{fn RAND(integer)}"
+literal|"{fn SIGN(-1)}"
 argument_list|,
-literal|null
+operator|-
+literal|1
 argument_list|,
-literal|""
+literal|"INTEGER NOT NULL"
 argument_list|)
 expr_stmt|;
-block|}
-if|if
-condition|(
-literal|false
-condition|)
-block|{
+name|tester
+operator|.
+name|checkScalarApprox
+argument_list|(
+literal|"{fn SIN(0.2)}"
+argument_list|,
+literal|"DOUBLE NOT NULL"
+argument_list|,
+literal|0.19867
+argument_list|,
+literal|0.001
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalarApprox
+argument_list|(
+literal|"{fn SQRT(4.2)}"
+argument_list|,
+literal|"DOUBLE NOT NULL"
+argument_list|,
+literal|2.04939
+argument_list|,
+literal|0.001
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalarApprox
+argument_list|(
+literal|"{fn TAN(0.2)}"
+argument_list|,
+literal|"DOUBLE NOT NULL"
+argument_list|,
+literal|0.20271
+argument_list|,
+literal|0.001
+argument_list|)
+expr_stmt|;
 name|tester
 operator|.
 name|checkScalar
 argument_list|(
-literal|"{fn ROUND(number, places)}"
+literal|"{fn TRUNCATE(12.34, 1)}"
 argument_list|,
-literal|null
+literal|12.3
 argument_list|,
-literal|""
+literal|"DECIMAL(4, 2) NOT NULL"
 argument_list|)
 expr_stmt|;
-block|}
-if|if
-condition|(
-literal|false
-condition|)
-block|{
 name|tester
 operator|.
 name|checkScalar
 argument_list|(
-literal|"{fn SIGN(number)}"
+literal|"{fn TRUNCATE(-12.34, -1)}"
 argument_list|,
-literal|null
+operator|-
+literal|10
 argument_list|,
-literal|""
+literal|"DECIMAL(4, 2) NOT NULL"
 argument_list|)
 expr_stmt|;
-block|}
-if|if
-condition|(
-literal|false
-condition|)
-block|{
-name|tester
-operator|.
-name|checkScalar
-argument_list|(
-literal|"{fn SIN(float)}"
-argument_list|,
-literal|null
-argument_list|,
-literal|""
-argument_list|)
-expr_stmt|;
-block|}
-if|if
-condition|(
-literal|false
-condition|)
-block|{
-name|tester
-operator|.
-name|checkScalar
-argument_list|(
-literal|"{fn SQRT(float)}"
-argument_list|,
-literal|null
-argument_list|,
-literal|""
-argument_list|)
-expr_stmt|;
-block|}
-if|if
-condition|(
-literal|false
-condition|)
-block|{
-name|tester
-operator|.
-name|checkScalar
-argument_list|(
-literal|"{fn TAN(float)}"
-argument_list|,
-literal|null
-argument_list|,
-literal|""
-argument_list|)
-expr_stmt|;
-block|}
-if|if
-condition|(
-literal|false
-condition|)
-block|{
-name|tester
-operator|.
-name|checkScalar
-argument_list|(
-literal|"{fn TRUNCATE(number, places)}"
-argument_list|,
-literal|null
-argument_list|,
-literal|""
-argument_list|)
-expr_stmt|;
-block|}
 comment|// String Functions
 if|if
 condition|(
@@ -15486,6 +15414,19 @@ argument_list|)
 expr_stmt|;
 name|tester
 operator|.
+name|checkScalarApprox
+argument_list|(
+literal|"sqrt(cast(2 as decimal(2, 0)))"
+argument_list|,
+literal|"DOUBLE NOT NULL"
+argument_list|,
+literal|1.4142d
+argument_list|,
+literal|0.0001d
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
 name|checkNull
 argument_list|(
 literal|"sqrt(cast(null as integer))"
@@ -16246,6 +16187,1301 @@ operator|.
 name|checkNull
 argument_list|(
 literal|"abs(cast(null as interval hour))"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testAcosFunc
+parameter_list|()
+block|{
+name|tester
+operator|.
+name|setFor
+argument_list|(
+name|SqlStdOperatorTable
+operator|.
+name|ACOS
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkType
+argument_list|(
+literal|"acos(0)"
+argument_list|,
+literal|"DOUBLE NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkType
+argument_list|(
+literal|"acos(cast(1 as float))"
+argument_list|,
+literal|"DOUBLE NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkType
+argument_list|(
+literal|"acos(case when false then 0.5 else null end)"
+argument_list|,
+literal|"DOUBLE"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkFails
+argument_list|(
+literal|"^acos('abc')^"
+argument_list|,
+literal|"Cannot apply 'ACOS' to arguments of type 'ACOS\\(<CHAR\\(3\\)>\\)'\\. Supported form\\(s\\): 'ACOS\\(<NUMERIC>\\)'"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalarApprox
+argument_list|(
+literal|"acos(0.5)"
+argument_list|,
+literal|"DOUBLE NOT NULL"
+argument_list|,
+literal|1.0472d
+argument_list|,
+literal|0.0001d
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalarApprox
+argument_list|(
+literal|"acos(cast(0.5 as decimal(1, 1)))"
+argument_list|,
+literal|"DOUBLE NOT NULL"
+argument_list|,
+literal|1.0472d
+argument_list|,
+literal|0.0001d
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkNull
+argument_list|(
+literal|"acos(cast(null as integer))"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkNull
+argument_list|(
+literal|"acos(cast(null as double))"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testAsinFunc
+parameter_list|()
+block|{
+name|tester
+operator|.
+name|setFor
+argument_list|(
+name|SqlStdOperatorTable
+operator|.
+name|ASIN
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkType
+argument_list|(
+literal|"asin(0)"
+argument_list|,
+literal|"DOUBLE NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkType
+argument_list|(
+literal|"asin(cast(1 as float))"
+argument_list|,
+literal|"DOUBLE NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkType
+argument_list|(
+literal|"asin(case when false then 0.5 else null end)"
+argument_list|,
+literal|"DOUBLE"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkFails
+argument_list|(
+literal|"^asin('abc')^"
+argument_list|,
+literal|"Cannot apply 'ASIN' to arguments of type 'ASIN\\(<CHAR\\(3\\)>\\)'\\. Supported form\\(s\\): 'ASIN\\(<NUMERIC>\\)'"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalarApprox
+argument_list|(
+literal|"asin(0.5)"
+argument_list|,
+literal|"DOUBLE NOT NULL"
+argument_list|,
+literal|0.5236d
+argument_list|,
+literal|0.0001d
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalarApprox
+argument_list|(
+literal|"asin(cast(0.5 as decimal(1, 1)))"
+argument_list|,
+literal|"DOUBLE NOT NULL"
+argument_list|,
+literal|0.5236d
+argument_list|,
+literal|0.0001d
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkNull
+argument_list|(
+literal|"asin(cast(null as integer))"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkNull
+argument_list|(
+literal|"asin(cast(null as double))"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testAtanFunc
+parameter_list|()
+block|{
+name|tester
+operator|.
+name|setFor
+argument_list|(
+name|SqlStdOperatorTable
+operator|.
+name|ATAN
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkType
+argument_list|(
+literal|"atan(2)"
+argument_list|,
+literal|"DOUBLE NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkType
+argument_list|(
+literal|"atan(cast(2 as float))"
+argument_list|,
+literal|"DOUBLE NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkType
+argument_list|(
+literal|"atan(case when false then 2 else null end)"
+argument_list|,
+literal|"DOUBLE"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkFails
+argument_list|(
+literal|"^atan('abc')^"
+argument_list|,
+literal|"Cannot apply 'ATAN' to arguments of type 'ATAN\\(<CHAR\\(3\\)>\\)'\\. Supported form\\(s\\): 'ATAN\\(<NUMERIC>\\)'"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalarApprox
+argument_list|(
+literal|"atan(2)"
+argument_list|,
+literal|"DOUBLE NOT NULL"
+argument_list|,
+literal|1.1071d
+argument_list|,
+literal|0.0001d
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalarApprox
+argument_list|(
+literal|"atan(cast(2 as decimal(1, 0)))"
+argument_list|,
+literal|"DOUBLE NOT NULL"
+argument_list|,
+literal|1.1071d
+argument_list|,
+literal|0.0001d
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkNull
+argument_list|(
+literal|"atan(cast(null as integer))"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkNull
+argument_list|(
+literal|"atan(cast(null as double))"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testAtan2Func
+parameter_list|()
+block|{
+name|tester
+operator|.
+name|setFor
+argument_list|(
+name|SqlStdOperatorTable
+operator|.
+name|ATAN2
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkType
+argument_list|(
+literal|"atan2(2, -2)"
+argument_list|,
+literal|"DOUBLE NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkType
+argument_list|(
+literal|"atan2(cast(1 as float), -1)"
+argument_list|,
+literal|"DOUBLE NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkType
+argument_list|(
+literal|"atan2(case when false then 0.5 else null end, -1)"
+argument_list|,
+literal|"DOUBLE"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkFails
+argument_list|(
+literal|"^atan2('abc', 'def')^"
+argument_list|,
+literal|"Cannot apply 'ATAN2' to arguments of type 'ATAN2\\(<CHAR\\(3\\)>,<CHAR\\(3\\)>\\)'\\. Supported form\\(s\\): 'ATAN2\\(<NUMERIC>,<NUMERIC>\\)'"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalarApprox
+argument_list|(
+literal|"atan2(0.5, -0.5)"
+argument_list|,
+literal|"DOUBLE NOT NULL"
+argument_list|,
+literal|2.3562d
+argument_list|,
+literal|0.0001d
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalarApprox
+argument_list|(
+literal|"atan2(cast(0.5 as decimal(1, 1)), cast(-0.5 as decimal(1, 1)))"
+argument_list|,
+literal|"DOUBLE NOT NULL"
+argument_list|,
+literal|2.3562d
+argument_list|,
+literal|0.0001d
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkNull
+argument_list|(
+literal|"atan2(cast(null as integer), -1)"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkNull
+argument_list|(
+literal|"atan2(1, cast(null as double))"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testCosFunc
+parameter_list|()
+block|{
+name|tester
+operator|.
+name|setFor
+argument_list|(
+name|SqlStdOperatorTable
+operator|.
+name|COS
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkType
+argument_list|(
+literal|"cos(1)"
+argument_list|,
+literal|"DOUBLE NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkType
+argument_list|(
+literal|"cos(cast(1 as float))"
+argument_list|,
+literal|"DOUBLE NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkType
+argument_list|(
+literal|"cos(case when false then 1 else null end)"
+argument_list|,
+literal|"DOUBLE"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkFails
+argument_list|(
+literal|"^cos('abc')^"
+argument_list|,
+literal|"Cannot apply 'COS' to arguments of type 'COS\\(<CHAR\\(3\\)>\\)'\\. Supported form\\(s\\): 'COS\\(<NUMERIC>\\)'"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalarApprox
+argument_list|(
+literal|"cos(1)"
+argument_list|,
+literal|"DOUBLE NOT NULL"
+argument_list|,
+literal|0.5403d
+argument_list|,
+literal|0.0001d
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalarApprox
+argument_list|(
+literal|"cos(cast(1 as decimal(1, 0)))"
+argument_list|,
+literal|"DOUBLE NOT NULL"
+argument_list|,
+literal|0.5403d
+argument_list|,
+literal|0.0001d
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkNull
+argument_list|(
+literal|"cos(cast(null as integer))"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkNull
+argument_list|(
+literal|"cos(cast(null as double))"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testCotFunc
+parameter_list|()
+block|{
+name|tester
+operator|.
+name|setFor
+argument_list|(
+name|SqlStdOperatorTable
+operator|.
+name|COT
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkType
+argument_list|(
+literal|"cot(1)"
+argument_list|,
+literal|"DOUBLE NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkType
+argument_list|(
+literal|"cot(cast(1 as float))"
+argument_list|,
+literal|"DOUBLE NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkType
+argument_list|(
+literal|"cot(case when false then 1 else null end)"
+argument_list|,
+literal|"DOUBLE"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkFails
+argument_list|(
+literal|"^cot('abc')^"
+argument_list|,
+literal|"Cannot apply 'COT' to arguments of type 'COT\\(<CHAR\\(3\\)>\\)'\\. Supported form\\(s\\): 'COT\\(<NUMERIC>\\)'"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalarApprox
+argument_list|(
+literal|"cot(1)"
+argument_list|,
+literal|"DOUBLE NOT NULL"
+argument_list|,
+literal|0.6421d
+argument_list|,
+literal|0.0001d
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalarApprox
+argument_list|(
+literal|"cot(cast(1 as decimal(1, 0)))"
+argument_list|,
+literal|"DOUBLE NOT NULL"
+argument_list|,
+literal|0.6421d
+argument_list|,
+literal|0.0001d
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkNull
+argument_list|(
+literal|"cot(cast(null as integer))"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkNull
+argument_list|(
+literal|"cot(cast(null as double))"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testDegreesFunc
+parameter_list|()
+block|{
+name|tester
+operator|.
+name|setFor
+argument_list|(
+name|SqlStdOperatorTable
+operator|.
+name|DEGREES
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkType
+argument_list|(
+literal|"degrees(1)"
+argument_list|,
+literal|"DOUBLE NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkType
+argument_list|(
+literal|"degrees(cast(1 as float))"
+argument_list|,
+literal|"DOUBLE NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkType
+argument_list|(
+literal|"degrees(case when false then 1 else null end)"
+argument_list|,
+literal|"DOUBLE"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkFails
+argument_list|(
+literal|"^degrees('abc')^"
+argument_list|,
+literal|"Cannot apply 'DEGREES' to arguments of type 'DEGREES\\(<CHAR\\(3\\)>\\)'\\. Supported form\\(s\\): 'DEGREES\\(<NUMERIC>\\)'"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalarApprox
+argument_list|(
+literal|"degrees(1)"
+argument_list|,
+literal|"DOUBLE NOT NULL"
+argument_list|,
+literal|57.2958d
+argument_list|,
+literal|0.0001d
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalarApprox
+argument_list|(
+literal|"degrees(cast(1 as decimal(1, 0)))"
+argument_list|,
+literal|"DOUBLE NOT NULL"
+argument_list|,
+literal|57.2958d
+argument_list|,
+literal|0.0001d
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkNull
+argument_list|(
+literal|"degrees(cast(null as integer))"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkNull
+argument_list|(
+literal|"degrees(cast(null as double))"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testPiFunc
+parameter_list|()
+block|{
+name|tester
+operator|.
+name|setFor
+argument_list|(
+name|SqlStdOperatorTable
+operator|.
+name|PI
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalarApprox
+argument_list|(
+literal|"PI"
+argument_list|,
+literal|"DOUBLE NOT NULL"
+argument_list|,
+literal|3.1415d
+argument_list|,
+literal|0.0001d
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkFails
+argument_list|(
+literal|"^PI()^"
+argument_list|,
+literal|"No match found for function signature PI\\(\\)"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testRadiansFunc
+parameter_list|()
+block|{
+name|tester
+operator|.
+name|setFor
+argument_list|(
+name|SqlStdOperatorTable
+operator|.
+name|RADIANS
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkType
+argument_list|(
+literal|"radians(42)"
+argument_list|,
+literal|"DOUBLE NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkType
+argument_list|(
+literal|"radians(cast(42 as float))"
+argument_list|,
+literal|"DOUBLE NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkType
+argument_list|(
+literal|"radians(case when false then 42 else null end)"
+argument_list|,
+literal|"DOUBLE"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkFails
+argument_list|(
+literal|"^radians('abc')^"
+argument_list|,
+literal|"Cannot apply 'RADIANS' to arguments of type 'RADIANS\\(<CHAR\\(3\\)>\\)'\\. Supported form\\(s\\): 'RADIANS\\(<NUMERIC>\\)'"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalarApprox
+argument_list|(
+literal|"radians(42)"
+argument_list|,
+literal|"DOUBLE NOT NULL"
+argument_list|,
+literal|0.7330d
+argument_list|,
+literal|0.0001d
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalarApprox
+argument_list|(
+literal|"radians(cast(42 as decimal(2, 0)))"
+argument_list|,
+literal|"DOUBLE NOT NULL"
+argument_list|,
+literal|0.7330d
+argument_list|,
+literal|0.0001d
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkNull
+argument_list|(
+literal|"radians(cast(null as integer))"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkNull
+argument_list|(
+literal|"radians(cast(null as double))"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testRoundFunc
+parameter_list|()
+block|{
+name|tester
+operator|.
+name|setFor
+argument_list|(
+name|SqlStdOperatorTable
+operator|.
+name|ROUND
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkType
+argument_list|(
+literal|"round(42, -1)"
+argument_list|,
+literal|"INTEGER NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkType
+argument_list|(
+literal|"round(cast(42 as float), 1)"
+argument_list|,
+literal|"FLOAT NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkType
+argument_list|(
+literal|"round(case when false then 42 else null end, -1)"
+argument_list|,
+literal|"INTEGER"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkFails
+argument_list|(
+literal|"^round('abc', 'def')^"
+argument_list|,
+literal|"Cannot apply 'ROUND' to arguments of type 'ROUND\\(<CHAR\\(3\\)>,<CHAR\\(3\\)>\\)'\\. Supported form\\(s\\): 'ROUND\\(<NUMERIC>,<INTEGER>\\)'"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"round(42, -1)"
+argument_list|,
+literal|40
+argument_list|,
+literal|"INTEGER NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"round(cast(42.346 as decimal(2, 3)), 2)"
+argument_list|,
+name|BigDecimal
+operator|.
+name|valueOf
+argument_list|(
+literal|4235
+argument_list|,
+literal|2
+argument_list|)
+argument_list|,
+literal|"DECIMAL(2, 3) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkNull
+argument_list|(
+literal|"round(cast(null as integer), 1)"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkNull
+argument_list|(
+literal|"round(cast(null as double), 1)"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSignFunc
+parameter_list|()
+block|{
+name|tester
+operator|.
+name|setFor
+argument_list|(
+name|SqlStdOperatorTable
+operator|.
+name|SIGN
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkType
+argument_list|(
+literal|"sign(1)"
+argument_list|,
+literal|"INTEGER NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkType
+argument_list|(
+literal|"sign(cast(1 as float))"
+argument_list|,
+literal|"FLOAT NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkType
+argument_list|(
+literal|"sign(case when false then 1 else null end)"
+argument_list|,
+literal|"INTEGER"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkFails
+argument_list|(
+literal|"^sign('abc')^"
+argument_list|,
+literal|"Cannot apply 'SIGN' to arguments of type 'SIGN\\(<CHAR\\(3\\)>\\)'\\. Supported form\\(s\\): 'SIGN\\(<NUMERIC>\\)'"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"sign(1)"
+argument_list|,
+literal|1
+argument_list|,
+literal|"INTEGER NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"sign(cast(-1 as decimal(1, 0)))"
+argument_list|,
+name|BigDecimal
+operator|.
+name|valueOf
+argument_list|(
+operator|-
+literal|1
+argument_list|)
+argument_list|,
+literal|"DECIMAL(1, 0) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"sign(cast(0 as float))"
+argument_list|,
+literal|0d
+argument_list|,
+literal|"FLOAT NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkNull
+argument_list|(
+literal|"sign(cast(null as integer))"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkNull
+argument_list|(
+literal|"sign(cast(null as double))"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSinFunc
+parameter_list|()
+block|{
+name|tester
+operator|.
+name|setFor
+argument_list|(
+name|SqlStdOperatorTable
+operator|.
+name|SIN
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkType
+argument_list|(
+literal|"sin(1)"
+argument_list|,
+literal|"DOUBLE NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkType
+argument_list|(
+literal|"sin(cast(1 as float))"
+argument_list|,
+literal|"DOUBLE NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkType
+argument_list|(
+literal|"sin(case when false then 1 else null end)"
+argument_list|,
+literal|"DOUBLE"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkFails
+argument_list|(
+literal|"^sin('abc')^"
+argument_list|,
+literal|"Cannot apply 'SIN' to arguments of type 'SIN\\(<CHAR\\(3\\)>\\)'\\. Supported form\\(s\\): 'SIN\\(<NUMERIC>\\)'"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalarApprox
+argument_list|(
+literal|"sin(1)"
+argument_list|,
+literal|"DOUBLE NOT NULL"
+argument_list|,
+literal|0.8415d
+argument_list|,
+literal|0.0001d
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalarApprox
+argument_list|(
+literal|"sin(cast(1 as decimal(1, 0)))"
+argument_list|,
+literal|"DOUBLE NOT NULL"
+argument_list|,
+literal|0.8415d
+argument_list|,
+literal|0.0001d
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkNull
+argument_list|(
+literal|"sin(cast(null as integer))"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkNull
+argument_list|(
+literal|"sin(cast(null as double))"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testTanFunc
+parameter_list|()
+block|{
+name|tester
+operator|.
+name|setFor
+argument_list|(
+name|SqlStdOperatorTable
+operator|.
+name|TAN
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkType
+argument_list|(
+literal|"tan(1)"
+argument_list|,
+literal|"DOUBLE NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkType
+argument_list|(
+literal|"tan(cast(1 as float))"
+argument_list|,
+literal|"DOUBLE NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkType
+argument_list|(
+literal|"tan(case when false then 1 else null end)"
+argument_list|,
+literal|"DOUBLE"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkFails
+argument_list|(
+literal|"^tan('abc')^"
+argument_list|,
+literal|"Cannot apply 'TAN' to arguments of type 'TAN\\(<CHAR\\(3\\)>\\)'\\. Supported form\\(s\\): 'TAN\\(<NUMERIC>\\)'"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalarApprox
+argument_list|(
+literal|"tan(1)"
+argument_list|,
+literal|"DOUBLE NOT NULL"
+argument_list|,
+literal|1.5574d
+argument_list|,
+literal|0.0001d
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalarApprox
+argument_list|(
+literal|"tan(cast(1 as decimal(1, 0)))"
+argument_list|,
+literal|"DOUBLE NOT NULL"
+argument_list|,
+literal|1.5574d
+argument_list|,
+literal|0.0001d
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkNull
+argument_list|(
+literal|"tan(cast(null as integer))"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkNull
+argument_list|(
+literal|"tan(cast(null as double))"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testTruncateFunc
+parameter_list|()
+block|{
+name|tester
+operator|.
+name|setFor
+argument_list|(
+name|SqlStdOperatorTable
+operator|.
+name|TRUNCATE
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkType
+argument_list|(
+literal|"truncate(42, -1)"
+argument_list|,
+literal|"INTEGER NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkType
+argument_list|(
+literal|"truncate(cast(42 as float), 1)"
+argument_list|,
+literal|"FLOAT NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkType
+argument_list|(
+literal|"truncate(case when false then 42 else null end, -1)"
+argument_list|,
+literal|"INTEGER"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkFails
+argument_list|(
+literal|"^truncate('abc', 'def')^"
+argument_list|,
+literal|"Cannot apply 'TRUNCATE' to arguments of type 'TRUNCATE\\(<CHAR\\(3\\)>,<CHAR\\(3\\)>\\)'\\. Supported form\\(s\\): 'TRUNCATE\\(<NUMERIC>,<INTEGER>\\)'"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"truncate(42, -1)"
+argument_list|,
+literal|40
+argument_list|,
+literal|"INTEGER NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"truncate(cast(42.345 as decimal(2, 3)), 2)"
+argument_list|,
+name|BigDecimal
+operator|.
+name|valueOf
+argument_list|(
+literal|4234
+argument_list|,
+literal|2
+argument_list|)
+argument_list|,
+literal|"DECIMAL(2, 3) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkNull
+argument_list|(
+literal|"truncate(cast(null as integer), 1)"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkNull
+argument_list|(
+literal|"truncate(cast(null as double), 1)"
 argument_list|)
 expr_stmt|;
 block|}
