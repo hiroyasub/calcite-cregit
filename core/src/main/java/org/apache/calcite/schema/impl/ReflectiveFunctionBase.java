@@ -325,6 +325,12 @@ name|equals
 argument_list|(
 name|name
 argument_list|)
+operator|&&
+operator|!
+name|method
+operator|.
+name|isBridge
+argument_list|()
 condition|)
 block|{
 return|return

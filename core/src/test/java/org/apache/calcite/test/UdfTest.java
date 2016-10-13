@@ -1852,6 +1852,228 @@ literal|"Caused by: java.lang.RuntimeException: In user-defined aggregate class 
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1434">[CALCITE-1434]    * AggregateFunctionImpl doesnt work if the class implements a generic    * interface</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testUserDefinedAggregateFunctionImplementsInterface
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|empDept
+init|=
+name|JdbcTest
+operator|.
+name|EmpDeptTableFactory
+operator|.
+name|class
+operator|.
+name|getName
+argument_list|()
+decl_stmt|;
+specifier|final
+name|String
+name|mySum3
+init|=
+name|Smalls
+operator|.
+name|MySum3
+operator|.
+name|class
+operator|.
+name|getName
+argument_list|()
+decl_stmt|;
+specifier|final
+name|String
+name|model
+init|=
+literal|"{\n"
+operator|+
+literal|"  version: '1.0',\n"
+operator|+
+literal|"   schemas: [\n"
+operator|+
+literal|"     {\n"
+operator|+
+literal|"       name: 'adhoc',\n"
+operator|+
+literal|"       tables: [\n"
+operator|+
+literal|"         {\n"
+operator|+
+literal|"           name: 'EMPLOYEES',\n"
+operator|+
+literal|"           type: 'custom',\n"
+operator|+
+literal|"           factory: '"
+operator|+
+name|empDept
+operator|+
+literal|"',\n"
+operator|+
+literal|"           operand: {'foo': true, 'bar': 345}\n"
+operator|+
+literal|"         }\n"
+operator|+
+literal|"       ],\n"
+operator|+
+literal|"       functions: [\n"
+operator|+
+literal|"         {\n"
+operator|+
+literal|"           name: 'MY_SUM3',\n"
+operator|+
+literal|"           className: '"
+operator|+
+name|mySum3
+operator|+
+literal|"'\n"
+operator|+
+literal|"         }\n"
+operator|+
+literal|"       ]\n"
+operator|+
+literal|"     }\n"
+operator|+
+literal|"   ]\n"
+operator|+
+literal|"}"
+decl_stmt|;
+specifier|final
+name|CalciteAssert
+operator|.
+name|AssertThat
+name|with
+init|=
+name|CalciteAssert
+operator|.
+name|model
+argument_list|(
+name|model
+argument_list|)
+operator|.
+name|withDefaultSchema
+argument_list|(
+literal|"adhoc"
+argument_list|)
+decl_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"select my_sum3(\"deptno\") as p from EMPLOYEES\n"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"P=50\n"
+argument_list|)
+expr_stmt|;
+name|with
+operator|.
+name|withDefaultSchema
+argument_list|(
+literal|null
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select \"adhoc\".my_sum3(\"deptno\") as p\n"
+operator|+
+literal|"from \"adhoc\".EMPLOYEES\n"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"P=50\n"
+argument_list|)
+expr_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"select my_sum3(\"empid\"), \"deptno\" as p from EMPLOYEES\n"
+argument_list|)
+operator|.
+name|throws_
+argument_list|(
+literal|"Expression 'deptno' is not being grouped"
+argument_list|)
+expr_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"select my_sum3(\"deptno\") as p from EMPLOYEES\n"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"P=50\n"
+argument_list|)
+expr_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"select my_sum3(\"name\") as p from EMPLOYEES\n"
+argument_list|)
+operator|.
+name|throws_
+argument_list|(
+literal|"Cannot apply 'MY_SUM3' to arguments of type "
+operator|+
+literal|"'MY_SUM3(<JAVATYPE(CLASS JAVA.LANG.STRING)>)'. "
+operator|+
+literal|"Supported form(s): 'MY_SUM3(<NUMERIC>)"
+argument_list|)
+expr_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"select my_sum3(\"deptno\", 1) as p from EMPLOYEES\n"
+argument_list|)
+operator|.
+name|throws_
+argument_list|(
+literal|"No match found for function signature "
+operator|+
+literal|"MY_SUM3(<NUMERIC>,<NUMERIC>)"
+argument_list|)
+expr_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"select my_sum3() as p from EMPLOYEES\n"
+argument_list|)
+operator|.
+name|throws_
+argument_list|(
+literal|"No match found for function signature MY_SUM3()"
+argument_list|)
+expr_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"select \"deptno\", my_sum3(\"deptno\") as p from EMPLOYEES\n"
+operator|+
+literal|"group by \"deptno\""
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"deptno=20; P=20"
+argument_list|,
+literal|"deptno=10; P=30"
+argument_list|)
+expr_stmt|;
+block|}
 specifier|private
 specifier|static
 name|CalciteAssert
