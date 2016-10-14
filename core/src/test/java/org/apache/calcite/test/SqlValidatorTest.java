@@ -1963,6 +1963,13 @@ argument_list|,
 literal|"INTEGER"
 argument_list|)
 expr_stmt|;
+name|checkExpType
+argument_list|(
+literal|"CASE 1 WHEN 1 THEN INTERVAL '12 3:4:5.6' DAY TO SECOND(6) WHEN 2 THEN INTERVAL '12 3:4:5.6' DAY TO SECOND(9) END"
+argument_list|,
+literal|"INTERVAL DAY TO SECOND(9)"
+argument_list|)
+expr_stmt|;
 block|}
 annotation|@
 name|Test

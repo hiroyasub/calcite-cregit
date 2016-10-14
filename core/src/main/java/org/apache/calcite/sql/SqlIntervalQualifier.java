@@ -905,7 +905,7 @@ block|}
 else|else
 block|{
 return|return
-name|startPrecision
+name|fractionalSecondPrecision
 return|;
 block|}
 block|}
