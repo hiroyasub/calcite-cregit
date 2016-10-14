@@ -23275,6 +23275,33 @@ name|void
 name|testStructType
 parameter_list|()
 block|{
+name|checkStructType
+argument_list|(
+literal|"T"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testStructTypeWithView
+parameter_list|()
+block|{
+name|checkStructType
+argument_list|(
+literal|"T_10"
+argument_list|)
+expr_stmt|;
+block|}
+specifier|private
+name|void
+name|checkStructType
+parameter_list|(
+name|String
+name|table
+parameter_list|)
+block|{
 comment|// Table STRUCT.T is defined as: (
 comment|//   K0 VARCHAR(20) NOT NULL,
 comment|//   C1 VARCHAR(20) NOT NULL,
@@ -23294,7 +23321,9 @@ comment|// F2 can all be transparent. F0 has default struct priority; F1 and F2 
 comment|// lower priority.
 name|sql
 argument_list|(
-literal|"select * from struct.t"
+literal|"select * from struct."
+operator|+
+name|table
 argument_list|)
 operator|.
 name|ok
@@ -23303,7 +23332,9 @@ expr_stmt|;
 comment|// Resolve K0 as top-level column K0.
 name|sql
 argument_list|(
-literal|"select k0 from struct.t"
+literal|"select k0 from struct."
+operator|+
+name|table
 argument_list|)
 operator|.
 name|type
@@ -23314,7 +23345,9 @@ expr_stmt|;
 comment|// Resolve C2 as secondary-level column F1.C2.
 name|sql
 argument_list|(
-literal|"select c2 from struct.t"
+literal|"select c2 from struct."
+operator|+
+name|table
 argument_list|)
 operator|.
 name|type
@@ -23325,7 +23358,9 @@ expr_stmt|;
 comment|// Resolve F1.C2 as fully qualified column F1.C2.
 name|sql
 argument_list|(
-literal|"select f1.c2 from struct.t"
+literal|"select f1.c2 from struct."
+operator|+
+name|table
 argument_list|)
 operator|.
 name|type
@@ -23336,7 +23371,9 @@ expr_stmt|;
 comment|// Resolve C1 as top-level column C1 as opposed to F0.C1.
 name|sql
 argument_list|(
-literal|"select c1 from struct.t"
+literal|"select c1 from struct."
+operator|+
+name|table
 argument_list|)
 operator|.
 name|type
@@ -23348,7 +23385,9 @@ comment|// Resolve C0 as secondary-level column F0.C0 as opposed to F1.C0, since
 comment|// has the default priority.
 name|sql
 argument_list|(
-literal|"select c0 from struct.t"
+literal|"select c0 from struct."
+operator|+
+name|table
 argument_list|)
 operator|.
 name|type
@@ -23360,7 +23399,9 @@ comment|// Resolve F1.C0 as fully qualified column F1.C0 (as evidenced by "INTEG
 comment|// rather than "INTEGER NOT NULL")
 name|sql
 argument_list|(
-literal|"select f1.c0 from struct.t"
+literal|"select f1.c0 from struct."
+operator|+
+name|table
 argument_list|)
 operator|.
 name|type
@@ -23372,7 +23413,9 @@ comment|// Fail ambiguous column reference A0, since F1.A0 and F2.A0 both exist 
 comment|// the same resolving priority.
 name|sql
 argument_list|(
-literal|"select ^a0^ from struct.t"
+literal|"select ^a0^ from struct."
+operator|+
+name|table
 argument_list|)
 operator|.
 name|fails
@@ -23383,7 +23426,9 @@ expr_stmt|;
 comment|// Resolve F2.A0 as fully qualified column F2.A0.
 name|sql
 argument_list|(
-literal|"select f2.a0 from struct.t"
+literal|"select f2.a0 from struct."
+operator|+
+name|table
 argument_list|)
 operator|.
 name|type
@@ -23395,7 +23440,11 @@ comment|// Resolve T0.K0 as top-level column K0, since T0 is recognized as the t
 comment|// alias.
 name|sql
 argument_list|(
-literal|"select t0.k0 from struct.t t0"
+literal|"select t0.k0 from struct."
+operator|+
+name|table
+operator|+
+literal|" t0"
 argument_list|)
 operator|.
 name|type
@@ -23407,7 +23456,11 @@ comment|// Resolve T0.C2 as secondary-level column F1.C2, since T0 is recognized
 comment|// the table alias here.
 name|sql
 argument_list|(
-literal|"select t0.c2 from struct.t t0"
+literal|"select t0.c2 from struct."
+operator|+
+name|table
+operator|+
+literal|" t0"
 argument_list|)
 operator|.
 name|type
@@ -23419,7 +23472,11 @@ comment|// Resolve F0.C2 as secondary-level column F1.C2, since F0 is recognized
 comment|// the table alias here.
 name|sql
 argument_list|(
-literal|"select f0.c2 from struct.t f0"
+literal|"select f0.c2 from struct."
+operator|+
+name|table
+operator|+
+literal|" f0"
 argument_list|)
 operator|.
 name|type
@@ -23431,7 +23488,11 @@ comment|// Resolve F0.C1 as top-level column C1 as opposed to F0.C1, since F0 is
 comment|// recognized as the table alias here.
 name|sql
 argument_list|(
-literal|"select f0.c1 from struct.t f0"
+literal|"select f0.c1 from struct."
+operator|+
+name|table
+operator|+
+literal|" f0"
 argument_list|)
 operator|.
 name|type
@@ -23442,7 +23503,11 @@ expr_stmt|;
 comment|// Resolve C1 as inner INTEGER column not top-level VARCHAR column.
 name|sql
 argument_list|(
-literal|"select f0.f0.c1 from struct.t f0"
+literal|"select f0.f0.c1 from struct."
+operator|+
+name|table
+operator|+
+literal|" f0"
 argument_list|)
 operator|.
 name|type
@@ -23450,11 +23515,17 @@ argument_list|(
 literal|"RecordType(INTEGER NOT NULL C1) NOT NULL"
 argument_list|)
 expr_stmt|;
-comment|// Resolve T.C1 as top-level column C1 as opposed to F0.C1, since T is
+comment|// Resolve<table>.C1 as top-level column C1 as opposed to F0.C1, since<table> is
 comment|// recognized as the table name.
 name|sql
 argument_list|(
-literal|"select t.c1 from struct.t"
+literal|"select "
+operator|+
+name|table
+operator|+
+literal|".c1 from struct."
+operator|+
+name|table
 argument_list|)
 operator|.
 name|type
@@ -23462,22 +23533,40 @@ argument_list|(
 literal|"RecordType(VARCHAR(20) NOT NULL C1) NOT NULL"
 argument_list|)
 expr_stmt|;
-comment|// Alias "f0" obscures table name "t"
+comment|// Alias "f0" obscures table name "<table>"
 name|sql
 argument_list|(
-literal|"select ^t^.c1 from struct.t f0"
+literal|"select ^"
+operator|+
+name|table
+operator|+
+literal|"^.c1 from struct."
+operator|+
+name|table
+operator|+
+literal|" f0"
 argument_list|)
 operator|.
 name|fails
 argument_list|(
-literal|"Table 'T' not found"
+literal|"Table '"
+operator|+
+name|table
+operator|+
+literal|"' not found"
 argument_list|)
 expr_stmt|;
-comment|// Resolve STRUCT.T.C1 as top-level column C1 as opposed to F0.C1, since
-comment|// STRUCT.T is recognized as the schema and table name.
+comment|// Resolve STRUCT.<table>.C1 as top-level column C1 as opposed to F0.C1, since
+comment|// STRUCT.<table> is recognized as the schema and table name.
 name|sql
 argument_list|(
-literal|"select struct.t.c1 from struct.t"
+literal|"select struct."
+operator|+
+name|table
+operator|+
+literal|".c1 from struct."
+operator|+
+name|table
 argument_list|)
 operator|.
 name|type
@@ -23485,22 +23574,38 @@ argument_list|(
 literal|"RecordType(VARCHAR(20) NOT NULL C1) NOT NULL"
 argument_list|)
 expr_stmt|;
-comment|// Table alias "f0" obscures table name "struct.t"
+comment|// Table alias "f0" obscures table name "STRUCT.<table>"
 name|sql
 argument_list|(
-literal|"select ^struct.t^.c1 from struct.t f0"
+literal|"select ^struct."
+operator|+
+name|table
+operator|+
+literal|"^.c1 from struct."
+operator|+
+name|table
+operator|+
+literal|" f0"
 argument_list|)
 operator|.
 name|fails
 argument_list|(
-literal|"Table 'STRUCT.T' not found"
+literal|"Table 'STRUCT."
+operator|+
+name|table
+operator|+
+literal|"' not found"
 argument_list|)
 expr_stmt|;
 comment|// Resolve F0.F0.C1 as secondary-level column F0.C1, since the first F0 is
 comment|// recognized as the table alias here.
 name|sql
 argument_list|(
-literal|"select f0.f0.c1 from struct.t f0"
+literal|"select f0.f0.c1 from struct."
+operator|+
+name|table
+operator|+
+literal|" f0"
 argument_list|)
 operator|.
 name|type
@@ -23508,11 +23613,17 @@ argument_list|(
 literal|"RecordType(INTEGER NOT NULL C1) NOT NULL"
 argument_list|)
 expr_stmt|;
-comment|// Resolve T.F0.C1 as secondary-level column F0.C1, since T is recognized as
-comment|// the table name.
+comment|// Resolve<table>.F0.C1 as secondary-level column F0.C1, since<table> is
+comment|// recognized as the table name.
 name|sql
 argument_list|(
-literal|"select t.f0.c1 from struct.t"
+literal|"select "
+operator|+
+name|table
+operator|+
+literal|".f0.c1 from struct."
+operator|+
+name|table
 argument_list|)
 operator|.
 name|type
@@ -23523,19 +23634,37 @@ expr_stmt|;
 comment|// Table alias obscures
 name|sql
 argument_list|(
-literal|"select ^t.f0^.c1 from struct.t f0"
+literal|"select ^"
+operator|+
+name|table
+operator|+
+literal|".f0^.c1 from struct."
+operator|+
+name|table
+operator|+
+literal|" f0"
 argument_list|)
 operator|.
 name|fails
 argument_list|(
-literal|"Table 'T.F0' not found"
+literal|"Table '"
+operator|+
+name|table
+operator|+
+literal|".F0' not found"
 argument_list|)
 expr_stmt|;
-comment|// Resolve STRUCT.T.F0.C1 as secondary-level column F0.C1, since STRUCT.T is
-comment|// recognized as the schema and table name.
+comment|// Resolve STRUCT.<table>.F0.C1 as secondary-level column F0.C1, since
+comment|// STRUCT.<table> is recognized as the schema and table name.
 name|sql
 argument_list|(
-literal|"select struct.t.f0.c1 from struct.t"
+literal|"select struct."
+operator|+
+name|table
+operator|+
+literal|".f0.c1 from struct."
+operator|+
+name|table
 argument_list|)
 operator|.
 name|type
@@ -23543,21 +23672,35 @@ argument_list|(
 literal|"RecordType(INTEGER NOT NULL C1) NOT NULL"
 argument_list|)
 expr_stmt|;
-comment|// Table alias "f0" obscures table name "struct.t"
+comment|// Table alias "f0" obscures table name "STRUCT.<table>"
 name|sql
 argument_list|(
-literal|"select ^struct.t.f0^.c1 from struct.t f0"
+literal|"select ^struct."
+operator|+
+name|table
+operator|+
+literal|".f0^.c1 from struct."
+operator|+
+name|table
+operator|+
+literal|" f0"
 argument_list|)
 operator|.
 name|fails
 argument_list|(
-literal|"Table 'STRUCT.T.F0' not found"
+literal|"Table 'STRUCT."
+operator|+
+name|table
+operator|+
+literal|".F0' not found"
 argument_list|)
 expr_stmt|;
 comment|// Resolve struct type F1 with wildcard.
 name|sql
 argument_list|(
-literal|"select f1.* from struct.t"
+literal|"select f1.* from struct."
+operator|+
+name|table
 argument_list|)
 operator|.
 name|type
@@ -23570,7 +23713,13 @@ expr_stmt|;
 comment|// Resolve struct type F1 with wildcard.
 name|sql
 argument_list|(
-literal|"select t.f1.* from struct.t"
+literal|"select "
+operator|+
+name|table
+operator|+
+literal|".f1.* from struct."
+operator|+
+name|table
 argument_list|)
 operator|.
 name|type
@@ -23583,7 +23732,9 @@ expr_stmt|;
 comment|// Fail non-existent column B0.
 name|sql
 argument_list|(
-literal|"select ^b0^ from struct.t"
+literal|"select ^b0^ from struct."
+operator|+
+name|table
 argument_list|)
 operator|.
 name|fails
@@ -23598,7 +23749,9 @@ comment|// family as a column whose type is a record, but Phoenix users would
 comment|// rarely if ever want to use a column family as a record.
 name|sql
 argument_list|(
-literal|"select f1 from struct.t"
+literal|"select f1 from struct."
+operator|+
+name|table
 argument_list|)
 operator|.
 name|type
@@ -23612,32 +23765,62 @@ comment|// If we fail to find a column, give an error based on the shortest pref
 comment|// that fails.
 name|sql
 argument_list|(
-literal|"select t.^f0.notFound^.a.b.c.d from struct.t"
+literal|"select "
+operator|+
+name|table
+operator|+
+literal|".^f0.notFound^.a.b.c.d from struct."
+operator|+
+name|table
 argument_list|)
 operator|.
 name|fails
 argument_list|(
-literal|"Column 'F0\\.NOTFOUND' not found in table 'T'"
+literal|"Column 'F0\\.NOTFOUND' not found in table '"
+operator|+
+name|table
+operator|+
+literal|"'"
 argument_list|)
 expr_stmt|;
 name|sql
 argument_list|(
-literal|"select t.^f0.notFound^ from struct.t"
+literal|"select "
+operator|+
+name|table
+operator|+
+literal|".^f0.notFound^ from struct."
+operator|+
+name|table
 argument_list|)
 operator|.
 name|fails
 argument_list|(
-literal|"Column 'F0\\.NOTFOUND' not found in table 'T'"
+literal|"Column 'F0\\.NOTFOUND' not found in table '"
+operator|+
+name|table
+operator|+
+literal|"'"
 argument_list|)
 expr_stmt|;
 name|sql
 argument_list|(
-literal|"select t.^f0.c1.notFound^ from struct.t"
+literal|"select "
+operator|+
+name|table
+operator|+
+literal|".^f0.c1.notFound^ from struct."
+operator|+
+name|table
 argument_list|)
 operator|.
 name|fails
 argument_list|(
-literal|"Column 'F0\\.C1\\.NOTFOUND' not found in table 'T'"
+literal|"Column 'F0\\.C1\\.NOTFOUND' not found in table '"
+operator|+
+name|table
+operator|+
+literal|"'"
 argument_list|)
 expr_stmt|;
 block|}
