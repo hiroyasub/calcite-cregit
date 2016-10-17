@@ -12797,6 +12797,106 @@ argument_list|,
 literal|"{fn INSERT() }"
 argument_list|)
 expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"{fn convert(foo, SQL_VARCHAR)}"
+argument_list|,
+literal|"{fn CONVERT(`FOO`, SQL_VARCHAR) }"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"{fn convert(log10(100), integer)}"
+argument_list|,
+literal|"{fn CONVERT(LOG10(100), SQL_INTEGER) }"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"{fn convert(1, SQL_INTERVAL_YEAR)}"
+argument_list|,
+literal|"{fn CONVERT(1, SQL_INTERVAL_YEAR) }"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"{fn convert(1, SQL_INTERVAL_YEAR_TO_MONTH)}"
+argument_list|,
+literal|"{fn CONVERT(1, SQL_INTERVAL_YEAR_TO_MONTH) }"
+argument_list|)
+expr_stmt|;
+name|checkExpFails
+argument_list|(
+literal|"{fn convert(1, ^sql_interval_year_to_day^)}"
+argument_list|,
+literal|"(?s)Encountered \"sql_interval_year_to_day\" at line 1, column 16\\.\n.*"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"{fn convert(1, sql_interval_day)}"
+argument_list|,
+literal|"{fn CONVERT(1, SQL_INTERVAL_DAY) }"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"{fn convert(1, sql_interval_day_to_minute)}"
+argument_list|,
+literal|"{fn CONVERT(1, SQL_INTERVAL_DAY_TO_MINUTE) }"
+argument_list|)
+expr_stmt|;
+name|checkExpFails
+argument_list|(
+literal|"{fn convert(^)^}"
+argument_list|,
+literal|"(?s)Encountered \"\\)\" at.*"
+argument_list|)
+expr_stmt|;
+name|checkExpFails
+argument_list|(
+literal|"{fn convert(\"123\", SMALLINT^(^3)}"
+argument_list|,
+literal|"(?s)Encountered \"\\(\" at.*"
+argument_list|)
+expr_stmt|;
+comment|// Regular types (without SQL_) are OK for regular types, but not for
+comment|// intervals.
+name|checkExp
+argument_list|(
+literal|"{fn convert(1, INTEGER)}"
+argument_list|,
+literal|"{fn CONVERT(1, SQL_INTEGER) }"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"{fn convert(1, VARCHAR)}"
+argument_list|,
+literal|"{fn CONVERT(1, SQL_VARCHAR) }"
+argument_list|)
+expr_stmt|;
+name|checkExpFails
+argument_list|(
+literal|"{fn convert(1, VARCHAR^(^5))}"
+argument_list|,
+literal|"(?s)Encountered \"\\(\" at.*"
+argument_list|)
+expr_stmt|;
+name|checkExpFails
+argument_list|(
+literal|"{fn convert(1, ^INTERVAL^ YEAR TO MONTH)}"
+argument_list|,
+literal|"(?s)Encountered \"INTERVAL\" at.*"
+argument_list|)
+expr_stmt|;
+name|checkExpFails
+argument_list|(
+literal|"{fn convert(1, ^INTERVAL^ YEAR)}"
+argument_list|,
+literal|"(?s)Encountered \"INTERVAL\" at.*"
+argument_list|)
+expr_stmt|;
 block|}
 annotation|@
 name|Test

@@ -7399,23 +7399,41 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|// Conversion Functions
-if|if
-condition|(
-literal|false
-condition|)
-block|{
+comment|// Legacy JDBC style
 name|tester
 operator|.
 name|checkScalar
 argument_list|(
-literal|"{fn CONVERT(value, SQLtype)}"
+literal|"{fn CONVERT('123', INTEGER)}"
 argument_list|,
-literal|null
+literal|123
 argument_list|,
-literal|""
+literal|"INTEGER NOT NULL"
 argument_list|)
 expr_stmt|;
-block|}
+comment|// ODBC/JDBC style
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"{fn CONVERT('123', SQL_INTEGER)}"
+argument_list|,
+literal|123
+argument_list|,
+literal|"INTEGER NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"{fn CONVERT(INTERVAL '1' DAY, SQL_INTERVAL_DAY_TO_SECOND)}"
+argument_list|,
+literal|"+1 00:00:00.000000"
+argument_list|,
+literal|"INTERVAL DAY TO SECOND NOT NULL"
+argument_list|)
+expr_stmt|;
 block|}
 annotation|@
 name|Test
