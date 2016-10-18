@@ -6130,6 +6130,30 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testStructTypeWithSelectStar2
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select * from struct.t t1 join struct.t t2\n"
+operator|+
+literal|"on t1.k0 = t2.k0"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testStructTypeWithSelectFieldNameDotStar
 parameter_list|()
 block|{

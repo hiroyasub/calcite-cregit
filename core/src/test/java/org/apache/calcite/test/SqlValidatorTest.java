@@ -22628,6 +22628,27 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testInsertBindWithCustomStarExpansion
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"insert into struct.simple values (?, ?)"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+operator|.
+name|bindType
+argument_list|(
+literal|"RecordType(TIMESTAMP(0) ?0, VARCHAR(20) ?1)"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testUpdateBind
 parameter_list|()
 block|{
