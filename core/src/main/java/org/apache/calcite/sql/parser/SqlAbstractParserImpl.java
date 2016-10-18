@@ -169,6 +169,22 @@ name|apache
 operator|.
 name|calcite
 operator|.
+name|sql
+operator|.
+name|validate
+operator|.
+name|SqlConformance
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
 name|util
 operator|.
 name|Util
@@ -1063,14 +1079,14 @@ name|int
 name|identifierMaxLength
 parameter_list|)
 function_decl|;
-comment|/**    * Sets whether the bang-equal token != is allowed as an alternative to&lt;&gt;.    */
+comment|/**    * Sets the SQL language conformance level.    */
 specifier|public
 specifier|abstract
 name|void
-name|setAllowBangEqual
+name|setConformance
 parameter_list|(
-name|boolean
-name|allowBangEqual
+name|SqlConformance
+name|conformance
 parameter_list|)
 function_decl|;
 comment|/**    * Sets the SQL text that is being parsed.    */

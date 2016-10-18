@@ -417,7 +417,7 @@ name|sql
 operator|.
 name|validate
 operator|.
-name|SqlConformance
+name|SqlConformanceEnum
 import|;
 end_import
 
@@ -11384,7 +11384,7 @@ name|tester
 operator|.
 name|withConformance
 argument_list|(
-name|SqlConformance
+name|SqlConformanceEnum
 operator|.
 name|ORACLE_10
 argument_list|)
@@ -11399,7 +11399,7 @@ name|with
 argument_list|(
 literal|"conformance"
 argument_list|,
-name|SqlConformance
+name|SqlConformanceEnum
 operator|.
 name|ORACLE_10
 argument_list|)

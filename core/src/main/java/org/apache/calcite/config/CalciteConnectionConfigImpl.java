@@ -155,6 +155,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|validate
+operator|.
+name|SqlConformanceEnum
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -835,7 +851,7 @@ argument_list|)
 operator|.
 name|getEnum
 argument_list|(
-name|SqlConformance
+name|SqlConformanceEnum
 operator|.
 name|class
 argument_list|)

@@ -18,163 +18,153 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * Enumeration of valid SQL compatibility modes.  */
+comment|/**  * Enumeration of valid SQL compatibility modes.  *  *<p>For most purposes, one of the built-in compatibility modes in enum  * {@link SqlConformanceEnum} will suffice.  *  *<p>If you wish to implement this interface to build your own conformance,  * we strongly recommend that you extend {@link SqlAbstractConformance},  * or use a {@link SqlDelegatingConformance},  * so that you won't be broken by future changes.  *  * @see SqlConformanceEnum  * @see SqlAbstractConformance  * @see SqlDelegatingConformance  */
 end_comment
 
-begin_enum
+begin_interface
 specifier|public
-enum|enum
+interface|interface
 name|SqlConformance
 block|{
+comment|/** Short-cut for {@link SqlConformanceEnum#DEFAULT}. */
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"unused"
+argument_list|)
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
+name|SqlConformanceEnum
 name|DEFAULT
-block|,
+init|=
+name|SqlConformanceEnum
+operator|.
+name|DEFAULT
+decl_stmt|;
+comment|/** Short-cut for {@link SqlConformanceEnum#STRICT_92}. */
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"unused"
+argument_list|)
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
+name|SqlConformanceEnum
 name|STRICT_92
-block|,
+init|=
+name|SqlConformanceEnum
+operator|.
+name|STRICT_92
+decl_stmt|;
+comment|/** Short-cut for {@link SqlConformanceEnum#STRICT_99}. */
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"unused"
+argument_list|)
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
+name|SqlConformanceEnum
 name|STRICT_99
-block|,
+init|=
+name|SqlConformanceEnum
+operator|.
+name|STRICT_99
+decl_stmt|;
+comment|/** Short-cut for {@link SqlConformanceEnum#PRAGMATIC_99}. */
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"unused"
+argument_list|)
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
+name|SqlConformanceEnum
 name|PRAGMATIC_99
-block|,
+init|=
+name|SqlConformanceEnum
+operator|.
+name|PRAGMATIC_99
+decl_stmt|;
+comment|/** Short-cut for {@link SqlConformanceEnum#ORACLE_10}. */
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"unused"
+argument_list|)
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
+name|SqlConformanceEnum
 name|ORACLE_10
-block|,
+init|=
+name|SqlConformanceEnum
+operator|.
+name|ORACLE_10
+decl_stmt|;
+comment|/** Short-cut for {@link SqlConformanceEnum#STRICT_2003}. */
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"unused"
+argument_list|)
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
+name|SqlConformanceEnum
 name|STRICT_2003
-block|,
+init|=
+name|SqlConformanceEnum
+operator|.
+name|STRICT_2003
+decl_stmt|;
+comment|/** Short-cut for {@link SqlConformanceEnum#PRAGMATIC_2003}. */
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"unused"
+argument_list|)
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
+name|SqlConformanceEnum
 name|PRAGMATIC_2003
-block|;
-comment|/**    * Whether 'order by 2' is interpreted to mean 'sort by the 2nd column in    * the select list'.    *    *<p>True in {@link #DEFAULT}, {@link #ORACLE_10}, {@link #STRICT_92},    * {@link #PRAGMATIC_99}, {@link #PRAGMATIC_2003};    * false otherwise.    */
-specifier|public
+init|=
+name|SqlConformanceEnum
+operator|.
+name|PRAGMATIC_2003
+decl_stmt|;
+comment|/**    * Whether 'order by 2' is interpreted to mean 'sort by the 2nd column in    * the select list'.    *    *<p>Among the built-in conformance levels, true in    * {@link SqlConformanceEnum#DEFAULT},    * {@link SqlConformanceEnum#ORACLE_10},    * {@link SqlConformanceEnum#STRICT_92},    * {@link SqlConformanceEnum#PRAGMATIC_99},    * {@link SqlConformanceEnum#PRAGMATIC_2003};    * false otherwise.    */
 name|boolean
 name|isSortByOrdinal
 parameter_list|()
-block|{
-switch|switch
-condition|(
-name|this
-condition|)
-block|{
-case|case
-name|DEFAULT
-case|:
-case|case
-name|ORACLE_10
-case|:
-case|case
-name|STRICT_92
-case|:
-case|case
-name|PRAGMATIC_99
-case|:
-case|case
-name|PRAGMATIC_2003
-case|:
-return|return
-literal|true
-return|;
-default|default:
-return|return
-literal|false
-return|;
-block|}
-block|}
-comment|/**    * Whether 'order by x' is interpreted to mean 'sort by the select list item    * whose alias is x' even if there is a column called x.    *    *<p>True in {@link #DEFAULT}, {@link #ORACLE_10}, {@link #STRICT_92};    * false otherwise.    */
-specifier|public
+function_decl|;
+comment|/**    * Whether 'order by x' is interpreted to mean 'sort by the select list item    * whose alias is x' even if there is a column called x.    *    *<p>Among the built-in conformance levels, true in    * {@link SqlConformanceEnum#DEFAULT},    * {@link SqlConformanceEnum#ORACLE_10},    * {@link SqlConformanceEnum#STRICT_92};    * false otherwise.    */
 name|boolean
 name|isSortByAlias
 parameter_list|()
-block|{
-switch|switch
-condition|(
-name|this
-condition|)
-block|{
-case|case
-name|DEFAULT
-case|:
-case|case
-name|ORACLE_10
-case|:
-case|case
-name|STRICT_92
-case|:
-return|return
-literal|true
-return|;
-default|default:
-return|return
-literal|false
-return|;
-block|}
-block|}
-comment|/**    * Whether "empno" is invalid in "select empno as x from emp order by empno"    * because the alias "x" obscures it.    *    *<p>True in {@link #STRICT_92};    * false otherwise.    */
-specifier|public
+function_decl|;
+comment|/**    * Whether "empno" is invalid in "select empno as x from emp order by empno"    * because the alias "x" obscures it.    *    *<p>Among the built-in conformance levels, true in    * {@link SqlConformanceEnum#STRICT_92};    * false otherwise.    */
 name|boolean
 name|isSortByAliasObscures
 parameter_list|()
-block|{
-return|return
-name|this
-operator|==
-name|SqlConformance
-operator|.
-name|STRICT_92
-return|;
-block|}
-comment|/**    * Whether FROM clause is required in a SELECT statement.    *    *<p>True in {@link #ORACLE_10}, {@link #STRICT_92}, {@link #STRICT_99},    * {@link #STRICT_2003};    * false otherwise.    */
-specifier|public
+function_decl|;
+comment|/**    * Whether FROM clause is required in a SELECT statement.    *    *<p>Among the built-in conformance levels, true in    * {@link SqlConformanceEnum#ORACLE_10},    * {@link SqlConformanceEnum#STRICT_92},    * {@link SqlConformanceEnum#STRICT_99},    * {@link SqlConformanceEnum#STRICT_2003};    * false otherwise.    */
 name|boolean
 name|isFromRequired
 parameter_list|()
-block|{
-switch|switch
-condition|(
-name|this
-condition|)
-block|{
-case|case
-name|ORACLE_10
-case|:
-case|case
-name|STRICT_92
-case|:
-case|case
-name|STRICT_99
-case|:
-case|case
-name|STRICT_2003
-case|:
-return|return
-literal|true
-return|;
-default|default:
-return|return
-literal|false
-return|;
-block|}
-block|}
-comment|/**    * Whether the bang-equal token != is allowed as an alternative to&lt;&gt; in    * the parser.    *    *<p>True in {@link #ORACLE_10};    * false otherwise.    */
-specifier|public
+function_decl|;
+comment|/**    * Whether the bang-equal token != is allowed as an alternative to&lt;&gt; in    * the parser.    *    *<p>Among the built-in conformance levels, true in    * {@link SqlConformanceEnum#ORACLE_10};    * false otherwise.    */
 name|boolean
 name|isBangEqualAllowed
 parameter_list|()
-block|{
-switch|switch
-condition|(
-name|this
-condition|)
-block|{
-case|case
-name|ORACLE_10
-case|:
-return|return
-literal|true
-return|;
-default|default:
-return|return
-literal|false
-return|;
+function_decl|;
 block|}
-block|}
-block|}
-end_enum
+end_interface
 
 begin_comment
 comment|// End SqlConformance.java

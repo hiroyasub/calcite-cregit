@@ -55,7 +55,7 @@ name|sql
 operator|.
 name|validate
 operator|.
-name|SqlConformance
+name|SqlConformanceEnum
 import|;
 end_import
 
@@ -415,7 +415,7 @@ name|Type
 operator|.
 name|ENUM
 argument_list|,
-name|SqlConformance
+name|SqlConformanceEnum
 operator|.
 name|DEFAULT
 argument_list|,

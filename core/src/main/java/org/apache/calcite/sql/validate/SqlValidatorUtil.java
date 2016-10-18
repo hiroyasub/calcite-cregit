@@ -1042,7 +1042,7 @@ name|catalogReader
 argument_list|,
 name|typeFactory
 argument_list|,
-name|SqlConformance
+name|SqlConformanceEnum
 operator|.
 name|DEFAULT
 argument_list|)

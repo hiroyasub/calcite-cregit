@@ -428,7 +428,7 @@ literal|"calcite.strict.sql"
 argument_list|)
 decl_stmt|;
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**    * Returns the dialect of SQL (SQL:2003, etc.) this validator recognizes.    * Default is {@link SqlConformance#DEFAULT}.    *    * @return dialect of SQL this validator recognizes    */
+comment|/**    * Returns the dialect of SQL (SQL:2003, etc.) this validator recognizes.    * Default is {@link SqlConformanceEnum#DEFAULT}.    *    * @return dialect of SQL this validator recognizes    */
 name|SqlConformance
 name|getConformance
 parameter_list|()
