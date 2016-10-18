@@ -923,11 +923,7 @@ operator|.
 name|createStatement
 argument_list|()
 decl_stmt|;
-comment|// Since the value type is ANY, we need to wrap the value to CAST in order to
-comment|// compare with literal. if it doesn't, Exception is thrown at Runtime.
-comment|// This is only occurred with primitive type because of providing overloaded methods
-try|try
-block|{
+comment|// placing literal earlier than ANY type is intended: do not modify
 specifier|final
 name|String
 name|sql
@@ -938,76 +934,188 @@ literal|" \"NESTEDMAPFIELD\", \"ARRAYFIELD\" "
 operator|+
 literal|"from \"s\".\"nested\" "
 operator|+
-literal|"where \"NESTEDMAPFIELD\"['a']['b'] = 2 AND \"ARRAYFIELD\"[2] = 200"
+literal|"where \"NESTEDMAPFIELD\"['a']['b'] = 2 AND 200.0 = \"ARRAYFIELD\"[2]"
 decl_stmt|;
+specifier|final
+name|ResultSet
+name|resultSet
+init|=
 name|statement
 operator|.
 name|executeQuery
 argument_list|(
 name|sql
 argument_list|)
-expr_stmt|;
-name|fail
+decl_stmt|;
+specifier|final
+name|List
+argument_list|<
+name|String
+argument_list|>
+name|resultStrings
+init|=
+name|CalciteAssert
+operator|.
+name|toList
 argument_list|(
-literal|"Without CAST, comparing result of ITEM() and primitive type should throw Exception "
+name|resultSet
+argument_list|)
+decl_stmt|;
+name|assertThat
+argument_list|(
+name|resultStrings
+operator|.
+name|size
+argument_list|()
+argument_list|,
+name|is
+argument_list|(
+literal|1
+argument_list|)
+argument_list|)
+expr_stmt|;
+comment|// JDBC doesn't support Map / Nested Map so just relying on string representation
+name|String
+name|expectedRow
+init|=
+literal|"ID=2; MAPFIELD_C=4; NESTEDMAPFIELD={a={b=2, c=4}}; "
 operator|+
-literal|"in Runtime"
+literal|"ARRAYFIELD=[100, 200, 300]"
+decl_stmt|;
+name|assertThat
+argument_list|(
+name|resultStrings
+operator|.
+name|get
+argument_list|(
+literal|0
+argument_list|)
+argument_list|,
+name|is
+argument_list|(
+name|expectedRow
+argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-catch|catch
-parameter_list|(
-name|SQLException
-name|e
-parameter_list|)
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testArithmeticToAnyTypeWithoutCast
+parameter_list|()
+throws|throws
+name|Exception
 block|{
-name|Throwable
-name|e2
+name|Connection
+name|connection
 init|=
-name|e
-operator|.
-name|getCause
+name|setupConnectionWithNestedAnyTypeTable
 argument_list|()
+decl_stmt|;
+specifier|final
+name|Statement
+name|statement
+init|=
+name|connection
+operator|.
+name|createStatement
+argument_list|()
+decl_stmt|;
+comment|// placing literal earlier than ANY type is intended: do not modify
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select \"ID\", \"MAPFIELD\"['c'] AS \"MAPFIELD_C\","
+operator|+
+literal|" \"NESTEDMAPFIELD\", \"ARRAYFIELD\" "
+operator|+
+literal|"from \"s\".\"nested\" "
+operator|+
+literal|"where \"NESTEDMAPFIELD\"['a']['b'] + 1.0 = 3 "
+operator|+
+literal|"AND \"NESTEDMAPFIELD\"['a']['b'] * 2.0 = 4 "
+operator|+
+literal|"AND \"NESTEDMAPFIELD\"['a']['b']> 1"
+operator|+
+literal|"AND \"NESTEDMAPFIELD\"['a']['b']>= 2"
+operator|+
+literal|"AND 100.1<> \"ARRAYFIELD\"[2] - 100.0"
+operator|+
+literal|"AND 100.0 = \"ARRAYFIELD\"[2] / 2"
+operator|+
+literal|"AND 99.9< \"ARRAYFIELD\"[2] / 2"
+operator|+
+literal|"AND 100.0<= \"ARRAYFIELD\"[2] / 2"
+operator|+
+literal|"AND '200'<> \"STRINGARRAYFIELD\"[1]"
+operator|+
+literal|"AND '200' = \"STRINGARRAYFIELD\"[2]"
+operator|+
+literal|"AND '100'< \"STRINGARRAYFIELD\"[2]"
+decl_stmt|;
+specifier|final
+name|ResultSet
+name|resultSet
+init|=
+name|statement
+operator|.
+name|executeQuery
+argument_list|(
+name|sql
+argument_list|)
+decl_stmt|;
+specifier|final
+name|List
+argument_list|<
+name|String
+argument_list|>
+name|resultStrings
+init|=
+name|CalciteAssert
+operator|.
+name|toList
+argument_list|(
+name|resultSet
+argument_list|)
 decl_stmt|;
 name|assertThat
 argument_list|(
-name|e2
+name|resultStrings
+operator|.
+name|size
+argument_list|()
 argument_list|,
 name|is
 argument_list|(
-name|instanceOf
-argument_list|(
-name|RuntimeException
-operator|.
-name|class
-argument_list|)
+literal|1
 argument_list|)
 argument_list|)
 expr_stmt|;
-name|Throwable
-name|e3
+comment|// JDBC doesn't support Map / Nested Map so just relying on string representation
+name|String
+name|expectedRow
 init|=
-name|e2
-operator|.
-name|getCause
-argument_list|()
+literal|"ID=2; MAPFIELD_C=4; NESTEDMAPFIELD={a={b=2, c=4}}; "
+operator|+
+literal|"ARRAYFIELD=[100, 200, 300]"
 decl_stmt|;
 name|assertThat
 argument_list|(
-name|e3
+name|resultStrings
+operator|.
+name|get
+argument_list|(
+literal|0
+argument_list|)
 argument_list|,
 name|is
 argument_list|(
-name|instanceOf
-argument_list|(
-name|NoSuchMethodException
-operator|.
-name|class
-argument_list|)
+name|expectedRow
 argument_list|)
 argument_list|)
 expr_stmt|;
-block|}
 block|}
 annotation|@
 name|Test
@@ -1597,6 +1705,23 @@ argument_list|,
 literal|300
 argument_list|)
 decl_stmt|;
+name|List
+argument_list|<
+name|String
+argument_list|>
+name|strings
+init|=
+name|Arrays
+operator|.
+name|asList
+argument_list|(
+literal|"100"
+argument_list|,
+literal|"200"
+argument_list|,
+literal|"300"
+argument_list|)
+decl_stmt|;
 name|Object
 index|[]
 index|[]
@@ -1700,6 +1825,8 @@ block|,
 name|mm
 block|,
 name|ints
+block|,
+name|strings
 block|}
 expr_stmt|;
 block|}
@@ -1724,7 +1851,7 @@ name|typeFactory
 parameter_list|)
 block|{
 name|RelDataType
-name|nullableKeyType
+name|nullableVarcharType
 init|=
 name|typeFactory
 operator|.
@@ -1743,7 +1870,7 @@ literal|true
 argument_list|)
 decl_stmt|;
 name|RelDataType
-name|nullableValueType
+name|nullableIntegerType
 init|=
 name|typeFactory
 operator|.
@@ -1772,9 +1899,9 @@ name|typeFactory
 operator|.
 name|createMapType
 argument_list|(
-name|nullableKeyType
+name|nullableVarcharType
 argument_list|,
-name|nullableValueType
+name|nullableIntegerType
 argument_list|)
 argument_list|,
 literal|true
@@ -1807,9 +1934,9 @@ name|typeFactory
 operator|.
 name|createMapType
 argument_list|(
-name|nullableKeyType
+name|nullableVarcharType
 argument_list|,
-name|nullableValueType
+name|nullableIntegerType
 argument_list|)
 argument_list|,
 literal|true
@@ -1828,7 +1955,7 @@ name|typeFactory
 operator|.
 name|createMapType
 argument_list|(
-name|nullableKeyType
+name|nullableVarcharType
 argument_list|,
 name|nullableMapType
 argument_list|)
@@ -1849,7 +1976,29 @@ name|typeFactory
 operator|.
 name|createArrayType
 argument_list|(
-name|nullableValueType
+name|nullableIntegerType
+argument_list|,
+operator|-
+literal|1L
+argument_list|)
+argument_list|,
+literal|true
+argument_list|)
+argument_list|)
+operator|.
+name|add
+argument_list|(
+literal|"STRINGARRAYFIELD"
+argument_list|,
+name|typeFactory
+operator|.
+name|createTypeWithNullability
+argument_list|(
+name|typeFactory
+operator|.
+name|createArrayType
+argument_list|(
+name|nullableVarcharType
 argument_list|,
 operator|-
 literal|1L
@@ -1980,6 +2129,15 @@ operator|.
 name|add
 argument_list|(
 literal|"ARRAYFIELD"
+argument_list|,
+name|SqlTypeName
+operator|.
+name|ANY
+argument_list|)
+operator|.
+name|add
+argument_list|(
+literal|"STRINGARRAYFIELD"
 argument_list|,
 name|SqlTypeName
 operator|.
