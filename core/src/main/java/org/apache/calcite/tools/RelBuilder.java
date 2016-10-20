@@ -5712,6 +5712,9 @@ case|:
 case|case
 name|INTERSECT
 case|:
+case|case
+name|EXCEPT
+case|:
 if|if
 condition|(
 name|n
@@ -5723,26 +5726,7 @@ throw|throw
 operator|new
 name|IllegalArgumentException
 argument_list|(
-literal|"bad INTERSECT/UNION input count"
-argument_list|)
-throw|;
-block|}
-break|break;
-case|case
-name|EXCEPT
-case|:
-if|if
-condition|(
-name|n
-operator|!=
-literal|2
-condition|)
-block|{
-throw|throw
-operator|new
-name|AssertionError
-argument_list|(
-literal|"bad EXCEPT input count"
+literal|"bad INTERSECT/UNION/EXCEPT input count"
 argument_list|)
 throw|;
 block|}
@@ -5891,6 +5875,27 @@ name|all
 parameter_list|)
 block|{
 return|return
+name|minus
+argument_list|(
+name|all
+argument_list|,
+literal|2
+argument_list|)
+return|;
+block|}
+comment|/** Creates a {@link org.apache.calcite.rel.core.Minus} of the {@code n}    * most recent relational expressions on the stack.    *    * @param all Whether to create EXCEPT ALL    */
+specifier|public
+name|RelBuilder
+name|minus
+parameter_list|(
+name|boolean
+name|all
+parameter_list|,
+name|int
+name|n
+parameter_list|)
+block|{
+return|return
 name|setOp
 argument_list|(
 name|all
@@ -5899,7 +5904,7 @@ name|SqlKind
 operator|.
 name|EXCEPT
 argument_list|,
-literal|2
+name|n
 argument_list|)
 return|;
 block|}
