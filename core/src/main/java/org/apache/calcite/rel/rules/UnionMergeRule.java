@@ -523,13 +523,16 @@ else|else
 block|{
 return|return;
 block|}
-comment|// Can only combine if both are ALL or both are DISTINCT (i.e. not ALL).
+comment|// Can only combine (1) if all operators are ALL,
+comment|// or (2) top operator is DISTINCT (i.e. not ALL).
+comment|// In case (2), all operators become DISTINCT.
 if|if
 condition|(
 name|topOp
 operator|.
 name|all
-operator|!=
+operator|&&
+operator|!
 name|bottomOp
 operator|.
 name|all

@@ -4098,6 +4098,61 @@ name|sql
 init|=
 literal|"select * from emp where deptno = 10\n"
 operator|+
+literal|"union\n"
+operator|+
+literal|"select * from emp where deptno = 20\n"
+operator|+
+literal|"union all\n"
+operator|+
+literal|"select * from emp where deptno = 30\n"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|with
+argument_list|(
+name|program
+argument_list|)
+operator|.
+name|checkUnchanged
+argument_list|()
+expr_stmt|;
+block|}
+comment|/** Tests that {@link UnionMergeRule} converts all inputs to DISTINCT    * if the top one is DISTINCT.    * (Since UNION is left-associative, the "top one" is the rightmost.) */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testMergeUnionMixed2
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+name|HepProgram
+name|program
+init|=
+operator|new
+name|HepProgramBuilder
+argument_list|()
+operator|.
+name|addRuleInstance
+argument_list|(
+name|UnionMergeRule
+operator|.
+name|INSTANCE
+argument_list|)
+operator|.
+name|build
+argument_list|()
+decl_stmt|;
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select * from emp where deptno = 10\n"
+operator|+
 literal|"union all\n"
 operator|+
 literal|"select * from emp where deptno = 20\n"
@@ -4116,7 +4171,7 @@ argument_list|(
 name|program
 argument_list|)
 operator|.
-name|checkUnchanged
+name|check
 argument_list|()
 expr_stmt|;
 block|}
