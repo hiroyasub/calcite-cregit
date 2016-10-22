@@ -1499,6 +1499,66 @@ name|sql
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1479">[CALCITE-1479]    * AssertionError in ReduceExpressionsRule on multi-column IN subquery</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testReduceCompositeInSubQuery
+parameter_list|()
+block|{
+specifier|final
+name|HepProgram
+name|hepProgram
+init|=
+operator|new
+name|HepProgramBuilder
+argument_list|()
+operator|.
+name|addRuleInstance
+argument_list|(
+name|ReduceExpressionsRule
+operator|.
+name|FILTER_INSTANCE
+argument_list|)
+operator|.
+name|build
+argument_list|()
+decl_stmt|;
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"from emp\n"
+operator|+
+literal|"where (empno, deptno) in (\n"
+operator|+
+literal|"  select empno, deptno from (\n"
+operator|+
+literal|"    select empno, deptno\n"
+operator|+
+literal|"    from emp\n"
+operator|+
+literal|"    group by empno, deptno))\n"
+operator|+
+literal|"or deptno< 40 + 60"
+decl_stmt|;
+name|checkSubQuery
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|with
+argument_list|(
+name|hepProgram
+argument_list|)
+operator|.
+name|check
+argument_list|()
+expr_stmt|;
+block|}
 annotation|@
 name|Test
 specifier|public
