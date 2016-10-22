@@ -705,6 +705,8 @@ class|class
 name|SqlTesterImpl
 implements|implements
 name|SqlTester
+implements|,
+name|AutoCloseable
 block|{
 specifier|protected
 specifier|final
@@ -2213,11 +2215,7 @@ name|sql
 argument_list|,
 name|typeChecker
 argument_list|,
-operator|new
-name|Double
-argument_list|(
 name|expectedResult
-argument_list|)
 argument_list|,
 name|delta
 argument_list|)

@@ -132,14 +132,7 @@ name|handlers
 init|=
 operator|new
 name|CopyOnWriteArrayList
-argument_list|<
-name|Function
-argument_list|<
-name|Object
-argument_list|,
-name|Object
-argument_list|>
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 specifier|private
@@ -189,14 +182,7 @@ block|{
 return|return
 operator|new
 name|ArrayList
-argument_list|<
-name|Function
-argument_list|<
-name|Object
-argument_list|,
-name|Object
-argument_list|>
-argument_list|>
+argument_list|<>
 argument_list|()
 return|;
 block|}
@@ -447,11 +433,12 @@ name|get
 argument_list|()
 return|;
 block|}
-comment|/** Removes a Hook after use.    *    *<p>Note: Although it would be convenient, this interface cannot extend    * {@code AutoCloseable} while Calcite maintains compatibility with    * JDK 1.6.</p>    */
+comment|/** Removes a Hook after use. */
 specifier|public
 interface|interface
 name|Closeable
-comment|/*extends AutoCloseable*/
+extends|extends
+name|AutoCloseable
 block|{
 comment|/** Closeable that does nothing. */
 name|Closeable
@@ -469,11 +456,13 @@ block|{
 block|}
 block|}
 decl_stmt|;
+comment|// override, removing "throws"
+annotation|@
+name|Override
 name|void
 name|close
 parameter_list|()
 function_decl|;
-comment|// override, removing "throws"
 block|}
 block|}
 end_enum

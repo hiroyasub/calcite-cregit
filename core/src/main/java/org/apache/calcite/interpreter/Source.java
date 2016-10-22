@@ -23,6 +23,8 @@ begin_interface
 specifier|public
 interface|interface
 name|Source
+extends|extends
+name|AutoCloseable
 block|{
 comment|/** Reads a row. Null means end of data. */
 name|Row

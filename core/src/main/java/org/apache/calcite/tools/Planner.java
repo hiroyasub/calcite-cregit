@@ -141,6 +141,8 @@ begin_interface
 specifier|public
 interface|interface
 name|Planner
+extends|extends
+name|AutoCloseable
 block|{
 comment|/**    * Parses and validates a SQL statement.    *    * @param sql The SQL statement to parse.    * @return The root node of the SQL parse tree.    * @throws org.apache.calcite.sql.parser.SqlParseException on parse error    */
 name|SqlNode

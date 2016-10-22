@@ -474,7 +474,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Interpreter.  *  *<p>Contains the context for interpreting relational expressions. In  * particular it holds working state while the data flow graph is being  * assembled.</p>  */
+comment|/**  * Interpreter.  *  *<p>Contains the context for interpreting relational expressions. In  * particular it holds working state while the data flow graph is being  * assembled.  */
 end_comment
 
 begin_class
@@ -487,6 +487,8 @@ argument_list|<
 name|Object
 index|[]
 argument_list|>
+implements|implements
+name|AutoCloseable
 block|{
 specifier|final
 name|Map
@@ -535,6 +537,7 @@ specifier|final
 name|ScalarCompiler
 name|scalarCompiler
 decl_stmt|;
+comment|/** Creates an Interpreter. */
 specifier|public
 name|Interpreter
 parameter_list|(
@@ -855,12 +858,11 @@ expr_stmt|;
 block|}
 block|}
 block|}
-specifier|private
+specifier|public
 name|void
 name|close
 parameter_list|()
 block|{
-comment|// TODO:
 block|}
 comment|/** Compiles an expression to an executable form. */
 specifier|public
