@@ -803,18 +803,6 @@ name|google
 operator|.
 name|protobuf
 operator|.
-name|HBaseZeroCopyByteString
-import|;
-end_import
-
-begin_import
-import|import
-name|com
-operator|.
-name|google
-operator|.
-name|protobuf
-operator|.
 name|Message
 import|;
 end_import
@@ -828,6 +816,18 @@ operator|.
 name|protobuf
 operator|.
 name|TextFormat
+import|;
+end_import
+
+begin_import
+import|import
+name|com
+operator|.
+name|google
+operator|.
+name|protobuf
+operator|.
+name|UnsafeByteOperations
 import|;
 end_import
 
@@ -2470,9 +2470,9 @@ name|clz
 parameter_list|)
 block|{
 return|return
-name|HBaseZeroCopyByteString
+name|UnsafeByteOperations
 operator|.
-name|wrap
+name|unsafeWrap
 argument_list|(
 name|clz
 operator|.
@@ -2836,9 +2836,9 @@ expr_stmt|;
 comment|// Make a bytestring from it
 name|serializedMsg
 operator|=
-name|HBaseZeroCopyByteString
+name|UnsafeByteOperations
 operator|.
-name|wrap
+name|unsafeWrap
 argument_list|(
 name|buffer
 operator|.
@@ -2952,9 +2952,9 @@ block|{
 name|ByteString
 name|byteString
 init|=
-name|HBaseZeroCopyByteString
+name|UnsafeByteOperations
 operator|.
-name|wrap
+name|unsafeWrap
 argument_list|(
 name|bytes
 argument_list|)
@@ -3058,9 +3058,9 @@ block|{
 name|ByteString
 name|byteString
 init|=
-name|HBaseZeroCopyByteString
+name|UnsafeByteOperations
 operator|.
-name|wrap
+name|unsafeWrap
 argument_list|(
 name|bytes
 argument_list|)

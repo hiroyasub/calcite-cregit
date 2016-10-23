@@ -281,7 +281,7 @@ name|google
 operator|.
 name|protobuf
 operator|.
-name|HBaseZeroCopyByteString
+name|Message
 import|;
 end_import
 
@@ -293,7 +293,7 @@ name|google
 operator|.
 name|protobuf
 operator|.
-name|Message
+name|UnsafeByteOperations
 import|;
 end_import
 
@@ -416,6 +416,20 @@ operator|.
 name|util
 operator|.
 name|Properties
+import|;
+end_import
+
+begin_import
+import|import static
+name|java
+operator|.
+name|nio
+operator|.
+name|charset
+operator|.
+name|StandardCharsets
+operator|.
+name|UTF_8
 import|;
 end_import
 
@@ -14087,14 +14101,16 @@ name|this
 operator|.
 name|serverAddressAsBytes
 operator|=
-name|HBaseZeroCopyByteString
+name|UnsafeByteOperations
 operator|.
-name|wrap
+name|unsafeWrap
 argument_list|(
 name|serverAddress
 operator|.
 name|getBytes
-argument_list|()
+argument_list|(
+name|UTF_8
+argument_list|)
 argument_list|)
 expr_stmt|;
 block|}

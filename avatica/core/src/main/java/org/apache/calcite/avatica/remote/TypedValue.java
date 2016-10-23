@@ -161,7 +161,7 @@ name|google
 operator|.
 name|protobuf
 operator|.
-name|HBaseZeroCopyByteString
+name|UnsafeByteOperations
 import|;
 end_import
 
@@ -1597,9 +1597,9 @@ name|builder
 operator|.
 name|setBytesValue
 argument_list|(
-name|HBaseZeroCopyByteString
+name|UnsafeByteOperations
 operator|.
-name|wrap
+name|unsafeWrap
 argument_list|(
 name|bytes
 argument_list|)
@@ -1613,9 +1613,9 @@ name|builder
 operator|.
 name|setStringValueBytes
 argument_list|(
-name|HBaseZeroCopyByteString
+name|UnsafeByteOperations
 operator|.
-name|wrap
+name|unsafeWrap
 argument_list|(
 operator|(
 operator|(

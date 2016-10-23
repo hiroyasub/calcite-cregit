@@ -139,7 +139,7 @@ name|google
 operator|.
 name|protobuf
 operator|.
-name|HBaseZeroCopyByteString
+name|UnsafeByteOperations
 import|;
 end_import
 
@@ -384,9 +384,9 @@ argument_list|)
 operator|.
 name|setWrappedMessage
 argument_list|(
-name|HBaseZeroCopyByteString
+name|UnsafeByteOperations
 operator|.
-name|wrap
+name|unsafeWrap
 argument_list|(
 name|serialized
 argument_list|)
