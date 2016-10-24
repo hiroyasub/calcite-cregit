@@ -1728,7 +1728,22 @@ argument_list|)
 operator|.
 name|append
 argument_list|(
-literal|"  public org.apache.calcite.rel.metadata.MetadataDef getDef() {\n"
+literal|"  public "
+argument_list|)
+operator|.
+name|append
+argument_list|(
+name|MetadataDef
+operator|.
+name|class
+operator|.
+name|getName
+argument_list|()
+argument_list|)
+operator|.
+name|append
+argument_list|(
+literal|" getDef() {\n"
 argument_list|)
 operator|.
 name|append
@@ -1816,12 +1831,42 @@ argument_list|)
 operator|.
 name|append
 argument_list|(
-literal|"      org.apache.calcite.rel.RelNode r,\n"
+literal|"      "
 argument_list|)
 operator|.
 name|append
 argument_list|(
-literal|"      org.apache.calcite.rel.metadata.RelMetadataQuery mq"
+name|RelNode
+operator|.
+name|class
+operator|.
+name|getName
+argument_list|()
+argument_list|)
+operator|.
+name|append
+argument_list|(
+literal|" r,\n"
+argument_list|)
+operator|.
+name|append
+argument_list|(
+literal|"      "
+argument_list|)
+operator|.
+name|append
+argument_list|(
+name|RelMetadataQuery
+operator|.
+name|class
+operator|.
+name|getName
+argument_list|()
+argument_list|)
+operator|.
+name|append
+argument_list|(
+literal|" mq"
 argument_list|)
 expr_stmt|;
 name|paramList
@@ -2210,12 +2255,42 @@ argument_list|)
 operator|.
 name|append
 argument_list|(
-literal|"      org.apache.calcite.rel.RelNode r,\n"
+literal|"      "
 argument_list|)
 operator|.
 name|append
 argument_list|(
-literal|"      org.apache.calcite.rel.metadata.RelMetadataQuery mq"
+name|RelNode
+operator|.
+name|class
+operator|.
+name|getName
+argument_list|()
+argument_list|)
+operator|.
+name|append
+argument_list|(
+literal|" r,\n"
+argument_list|)
+operator|.
+name|append
+argument_list|(
+literal|"      "
+argument_list|)
+operator|.
+name|append
+argument_list|(
+name|RelMetadataQuery
+operator|.
+name|class
+operator|.
+name|getName
+argument_list|()
+argument_list|)
+operator|.
+name|append
+argument_list|(
+literal|" mq"
 argument_list|)
 expr_stmt|;
 name|paramList
