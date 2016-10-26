@@ -603,6 +603,9 @@ argument_list|(
 literal|" keyTab=\""
 operator|+
 name|serverKeytab
+operator|.
+name|toURI
+argument_list|()
 operator|+
 literal|"\"\n"
 argument_list|)
