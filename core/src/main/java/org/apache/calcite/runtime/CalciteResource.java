@@ -2917,6 +2917,18 @@ function_decl|;
 annotation|@
 name|BaseMessage
 argument_list|(
+literal|"MINUS is not allowed under the current SQL conformance level"
+argument_list|)
+name|ExInst
+argument_list|<
+name|CalciteException
+argument_list|>
+name|minusNotAllowed
+parameter_list|()
+function_decl|;
+annotation|@
+name|BaseMessage
+argument_list|(
 literal|"SELECT must have a FROM clause"
 argument_list|)
 name|ExInst

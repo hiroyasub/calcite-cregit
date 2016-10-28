@@ -163,6 +163,11 @@ name|boolean
 name|isBangEqualAllowed
 parameter_list|()
 function_decl|;
+comment|/**    * Whether {@code MINUS} is allowed as an alternative to {@code EXCEPT} in    * the parser.    *    *<p>Among the built-in conformance levels, true in    * {@link SqlConformanceEnum#ORACLE_10};    * false otherwise.    */
+name|boolean
+name|isMinusAllowed
+parameter_list|()
+function_decl|;
 block|}
 end_interface
 

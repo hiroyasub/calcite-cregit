@@ -99,6 +99,22 @@ name|isBangEqualAllowed
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
+specifier|public
+name|boolean
+name|isMinusAllowed
+parameter_list|()
+block|{
+return|return
+name|SqlConformanceEnum
+operator|.
+name|DEFAULT
+operator|.
+name|isMinusAllowed
+argument_list|()
+return|;
+block|}
 block|}
 end_class
 

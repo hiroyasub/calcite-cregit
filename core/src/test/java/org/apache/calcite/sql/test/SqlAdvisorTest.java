@@ -884,6 +884,8 @@ name|asList
 argument_list|(
 literal|"KEYWORD(EXCEPT)"
 argument_list|,
+literal|"KEYWORD(MINUS)"
+argument_list|,
 literal|"KEYWORD(FETCH)"
 argument_list|,
 literal|"KEYWORD(OFFSET)"
@@ -970,6 +972,8 @@ literal|"KEYWORD(LEFT)"
 argument_list|,
 literal|"KEYWORD(EXCEPT)"
 argument_list|,
+literal|"KEYWORD(MINUS)"
+argument_list|,
 literal|"KEYWORD(JOIN)"
 argument_list|,
 literal|"KEYWORD(WINDOW)"
@@ -999,6 +1003,8 @@ operator|.
 name|asList
 argument_list|(
 literal|"KEYWORD(EXCEPT)"
+argument_list|,
+literal|"KEYWORD(MINUS)"
 argument_list|,
 literal|"KEYWORD(INTERSECT)"
 argument_list|,
