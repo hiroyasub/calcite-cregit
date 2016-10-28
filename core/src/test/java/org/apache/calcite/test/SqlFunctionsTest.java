@@ -7281,7 +7281,7 @@ argument_list|()
 argument_list|,
 name|is
 argument_list|(
-literal|"Invalid types for arithmetic: class java.lang.String>= "
+literal|"Invalid types for comparison: class java.lang.String>= "
 operator|+
 literal|"class java.lang.Long"
 argument_list|)
