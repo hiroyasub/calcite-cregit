@@ -90,6 +90,9 @@ block|,
 comment|/** Returns a boolean value, whether RelBuilder should simplify expressions.    * Default true. */
 name|REL_BUILDER_SIMPLIFY
 block|,
+comment|/** Returns a boolean value, whether the return convention should be    * {@link org.apache.calcite.interpreter.BindableConvention}.    * Default false. */
+name|ENABLE_BINDABLE
+block|,
 comment|/** Called with the SQL string and parse tree, in an array. */
 name|PARSE_TREE
 block|,
@@ -338,6 +341,66 @@ name|remove
 argument_list|(
 name|handler
 argument_list|)
+return|;
+block|}
+comment|/** Returns a function that, when a hook is called, will "return" a given    * value. (Because of the way hooks work, it "returns" the value by writing    * into a {@link Holder}. */
+specifier|public
+specifier|static
+parameter_list|<
+name|V
+parameter_list|>
+name|Function
+argument_list|<
+name|Holder
+argument_list|<
+name|V
+argument_list|>
+argument_list|,
+name|Void
+argument_list|>
+name|property
+parameter_list|(
+specifier|final
+name|V
+name|v
+parameter_list|)
+block|{
+return|return
+operator|new
+name|Function
+argument_list|<
+name|Holder
+argument_list|<
+name|V
+argument_list|>
+argument_list|,
+name|Void
+argument_list|>
+argument_list|()
+block|{
+specifier|public
+name|Void
+name|apply
+parameter_list|(
+name|Holder
+argument_list|<
+name|V
+argument_list|>
+name|holder
+parameter_list|)
+block|{
+name|holder
+operator|.
+name|set
+argument_list|(
+name|v
+argument_list|)
+expr_stmt|;
+return|return
+literal|null
+return|;
+block|}
+block|}
 return|;
 block|}
 comment|/** Runs all handlers registered for this Hook, with the given argument. */

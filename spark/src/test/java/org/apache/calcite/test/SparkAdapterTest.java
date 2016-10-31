@@ -19,6 +19,36 @@ begin_import
 import|import
 name|org
 operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|adapter
+operator|.
+name|spark
+operator|.
+name|SparkRel
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|util
+operator|.
+name|Util
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
 name|junit
 operator|.
 name|Test
@@ -54,6 +84,18 @@ parameter_list|()
 throws|throws
 name|SQLException
 block|{
+comment|// Insert a spurious reference to a class in Calcite's Spark adapter.
+comment|// Otherwise this test doesn't depend on the Spark module at all, and
+comment|// Javadoc gets confused.
+name|Util
+operator|.
+name|discard
+argument_list|(
+name|SparkRel
+operator|.
+name|class
+argument_list|)
+expr_stmt|;
 name|CalciteAssert
 operator|.
 name|that

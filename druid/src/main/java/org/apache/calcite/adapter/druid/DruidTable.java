@@ -420,7 +420,7 @@ specifier|final
 name|String
 name|timestampFieldName
 decl_stmt|;
-comment|/**    * Creates a Druid table.    *    * @param schema Druid schema that contains this table    * @param dataSource Druid data source name    * @param protoRowType Field names and types    * @param metricFieldNames Names of fields that are metrics    * @param intervals Default interval if query does not constrain the time, or null    * @param timestampFieldName Name of the column that contains the time    * @param intervals Intervals for the given table    */
+comment|/**    * Creates a Druid table.    *    * @param schema Druid schema that contains this table    * @param dataSource Druid data source name    * @param protoRowType Field names and types    * @param metricFieldNames Names of fields that are metrics    * @param intervals Default interval if query does not constrain the time, or null    * @param timestampFieldName Name of the column that contains the time    */
 specifier|public
 name|DruidTable
 parameter_list|(

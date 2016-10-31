@@ -51,6 +51,20 @@ name|apache
 operator|.
 name|calcite
 operator|.
+name|avatica
+operator|.
+name|Meta
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
 name|jdbc
 operator|.
 name|CalcitePrepare
@@ -2233,12 +2247,6 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-specifier|public
-specifier|abstract
-name|Bindable
-name|getBindable
-parameter_list|()
-function_decl|;
 block|}
 comment|/**    * Result of a call to {@link Prepare#prepareSql}.    */
 specifier|public
@@ -2278,10 +2286,15 @@ name|RelDataType
 name|getParameterRowType
 parameter_list|()
 function_decl|;
-comment|/**      * Executes the prepared result.      *      * @return producer of rows resulting from execution      */
+comment|/**      * Executes the prepared result.      *      * @param cursorFactory How to map values into a cursor      * @return producer of rows resulting from execution      */
 name|Bindable
 name|getBindable
-parameter_list|()
+parameter_list|(
+name|Meta
+operator|.
+name|CursorFactory
+name|cursorFactory
+parameter_list|)
 function_decl|;
 block|}
 comment|/**    * Abstract implementation of {@link PreparedResult}.    */
@@ -2514,12 +2527,6 @@ return|return
 name|rootRel
 return|;
 block|}
-specifier|public
-specifier|abstract
-name|Bindable
-name|getBindable
-parameter_list|()
-function_decl|;
 block|}
 comment|/** Describes that a given SQL query is materialized by a given table.    * The materialization is currently valid, and can be used in the planning    * process. */
 specifier|public

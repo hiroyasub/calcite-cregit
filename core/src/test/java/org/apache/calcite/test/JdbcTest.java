@@ -24075,7 +24075,8 @@ block|{
 literal|0
 block|}
 decl_stmt|;
-specifier|final
+try|try
+init|(
 name|Hook
 operator|.
 name|Closeable
@@ -24180,8 +24181,7 @@ return|;
 block|}
 block|}
 argument_list|)
-decl_stmt|;
-try|try
+init|)
 block|{
 comment|// Simple query does not run the hook.
 name|testSimple
@@ -24216,14 +24216,6 @@ argument_list|(
 literal|1
 argument_list|)
 argument_list|)
-expr_stmt|;
-block|}
-finally|finally
-block|{
-name|hook
-operator|.
-name|close
-argument_list|()
 expr_stmt|;
 block|}
 block|}
