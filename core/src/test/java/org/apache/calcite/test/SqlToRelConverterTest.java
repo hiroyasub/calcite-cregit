@@ -3916,6 +3916,116 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+comment|/** Since 'deptno NOT IN (SELECT mgr FROM emp)' can be null, we need a more    * complex plan, including counts of null and not-null keys. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testNotInUncorrelatedSubQueryInSelectMayBeNull
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select empno, deptno not in (\n"
+operator|+
+literal|"  select mgr from emp)\n"
+operator|+
+literal|"from emp"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+comment|/** Even though "mgr" allows nulls, we can deduce from the WHERE clause that    * it will never be null. Therefore we can generate a simpler plan. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testNotInUncorrelatedSubQueryInSelectDeduceNotNull
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select empno, deptno not in (\n"
+operator|+
+literal|"  select mgr from emp where mgr> 5)\n"
+operator|+
+literal|"from emp"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+comment|/** Similar to {@link #testNotInUncorrelatedSubQueryInSelectDeduceNotNull()},    * using {@code IS NOT NULL}. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testNotInUncorrelatedSubQueryInSelectDeduceNotNull2
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select empno, deptno not in (\n"
+operator|+
+literal|"  select mgr from emp where mgr is not null)\n"
+operator|+
+literal|"from emp"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+comment|/** Similar to {@link #testNotInUncorrelatedSubQueryInSelectDeduceNotNull()},    * using {@code IN}. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testNotInUncorrelatedSubQueryInSelectDeduceNotNull3
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select empno, deptno not in (\n"
+operator|+
+literal|"  select mgr from emp where mgr in (\n"
+operator|+
+literal|"    select mgr from emp where deptno = 10))\n"
+operator|+
+literal|"from emp"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
 annotation|@
 name|Test
 specifier|public
