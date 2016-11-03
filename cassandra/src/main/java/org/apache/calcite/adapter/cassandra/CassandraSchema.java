@@ -635,6 +635,12 @@ specifier|final
 name|String
 name|name
 decl_stmt|;
+specifier|final
+name|Hook
+operator|.
+name|Closeable
+name|hook
+decl_stmt|;
 specifier|protected
 specifier|static
 specifier|final
@@ -806,6 +812,10 @@ name|name
 operator|=
 name|name
 expr_stmt|;
+name|this
+operator|.
+name|hook
+operator|=
 name|Hook
 operator|.
 name|TRIMMED
@@ -1436,6 +1446,12 @@ name|void
 name|addMaterializedViews
 parameter_list|()
 block|{
+comment|// Close the hook use to get us here
+name|hook
+operator|.
+name|close
+argument_list|()
+expr_stmt|;
 for|for
 control|(
 name|MaterializedViewMetadata
