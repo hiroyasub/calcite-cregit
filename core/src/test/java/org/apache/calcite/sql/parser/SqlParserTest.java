@@ -115,6 +115,24 @@ name|calcite
 operator|.
 name|sql
 operator|.
+name|parser
+operator|.
+name|impl
+operator|.
+name|SqlParserImpl
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
 name|pretty
 operator|.
 name|SqlPrettyWriter
@@ -557,8 +575,20 @@ name|assertTrue
 import|;
 end_import
 
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|Assume
+operator|.
+name|assumeTrue
+import|;
+end_import
+
 begin_comment
-comment|/**  * A<code>SqlParserTest</code> is a unit-test for  * {@link SqlParser the SQL parser}.  */
+comment|/**  * A<code>SqlParserTest</code> is a unit-test for  * {@link SqlParser the SQL parser}.  *  *<p>To reuse this test for an extension parser, implement the  * {@link #parserImplFactory()} method to return the extension parser  * implementation.  */
 end_comment
 
 begin_class
@@ -4416,7 +4446,19 @@ name|sql
 argument_list|)
 return|;
 block|}
-specifier|private
+comment|/**    * Implementors of custom parsing logic who want to reuse this test should    * override this method with the factory for their extension parser.    */
+specifier|protected
+name|SqlParserImplFactory
+name|parserImplFactory
+parameter_list|()
+block|{
+return|return
+name|SqlParserImpl
+operator|.
+name|FACTORY
+return|;
+block|}
+specifier|protected
 name|SqlParser
 name|getSqlParser
 parameter_list|(
@@ -4435,6 +4477,12 @@ name|SqlParser
 operator|.
 name|configBuilder
 argument_list|()
+operator|.
+name|setParserFactory
+argument_list|(
+name|parserImplFactory
+argument_list|()
+argument_list|)
 operator|.
 name|setQuoting
 argument_list|(
@@ -20620,6 +20668,14 @@ name|void
 name|testNoUnintendedNewReservedKeywords
 parameter_list|()
 block|{
+name|assumeTrue
+argument_list|(
+literal|"don't run this test for sub-classes"
+argument_list|,
+name|isNotSubclass
+argument_list|()
+argument_list|)
+expr_stmt|;
 specifier|final
 name|SqlAbstractParserImpl
 operator|.
@@ -20751,6 +20807,14 @@ parameter_list|()
 throws|throws
 name|IOException
 block|{
+name|assumeTrue
+argument_list|(
+literal|"don't run this test for sub-classes"
+argument_list|,
+name|isNotSubclass
+argument_list|()
+argument_list|)
+expr_stmt|;
 comment|// inUrl = "file:/home/x/calcite/core/target/test-classes/hsqldb-model.json"
 name|String
 name|path
@@ -21591,9 +21655,7 @@ block|{
 name|SqlNode
 name|node
 init|=
-name|SqlParser
-operator|.
-name|create
+name|getSqlParser
 argument_list|(
 literal|"alter system set schema = true"
 argument_list|)
@@ -21780,9 +21842,7 @@ argument_list|)
 expr_stmt|;
 name|node
 operator|=
-name|SqlParser
-operator|.
-name|create
+name|getSqlParser
 argument_list|(
 literal|"reset schema"
 argument_list|)
@@ -22561,6 +22621,25 @@ name|sap
 argument_list|)
 expr_stmt|;
 block|}
+block|}
+specifier|private
+name|boolean
+name|isNotSubclass
+parameter_list|()
+block|{
+return|return
+name|this
+operator|.
+name|getClass
+argument_list|()
+operator|.
+name|equals
+argument_list|(
+name|SqlParserTest
+operator|.
+name|class
+argument_list|)
+return|;
 block|}
 comment|/**    * Implementation of {@link Tester} which makes sure that the results of    * unparsing a query are consistent with the original query.    */
 specifier|public
