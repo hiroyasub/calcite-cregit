@@ -53,9 +53,9 @@ name|apache
 operator|.
 name|calcite
 operator|.
-name|plan
+name|rel
 operator|.
-name|RelOptUtil
+name|RelNode
 import|;
 end_import
 
@@ -69,7 +69,9 @@ name|calcite
 operator|.
 name|rel
 operator|.
-name|RelNode
+name|core
+operator|.
+name|RelFactories
 import|;
 end_import
 
@@ -219,10 +221,20 @@ name|getRightKeys
 argument_list|()
 argument_list|)
 decl_stmt|;
+specifier|final
+name|RelFactories
+operator|.
+name|FilterFactory
+name|factory
+init|=
+name|RelFactories
+operator|.
+name|DEFAULT_FILTER_FACTORY
+decl_stmt|;
 name|RelNode
 name|newFilter
 init|=
-name|RelOptUtil
+name|factory
 operator|.
 name|createFilter
 argument_list|(

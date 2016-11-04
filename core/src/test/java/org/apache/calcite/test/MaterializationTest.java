@@ -1806,7 +1806,7 @@ literal|"select \"name\" from \"emps\" where \"deptno\"> 30"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** As {@link #testFilterQueryOnFilterView()} but condition is stronger in    * query and columns selected are subset of columns in materialized view */
+comment|/** As {@link #testFilterQueryOnFilterView()} but condition is stronger in    * query and columns selected are subset of columns in materialized view. */
 annotation|@
 name|Test
 specifier|public
@@ -1822,7 +1822,7 @@ literal|"select \"name\" from \"emps\" where \"deptno\"> 30"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** As {@link #testFilterQueryOnFilterView()} but condition is stronger in    * query and columns selected are subset of columns in materialized view */
+comment|/** As {@link #testFilterQueryOnFilterView()} but condition is stronger in    * query and columns selected are subset of columns in materialized view. */
 annotation|@
 name|Test
 specifier|public
@@ -1840,7 +1840,7 @@ literal|"select \"name\" from \"emps\" where \"deptno\"> 30 and \"salary\"> 3000
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** As {@link #testFilterQueryOnFilterView()} but condition is stronger in    * query and columns selected are subset of columns in materialized view    * Condition here is complex*/
+comment|/** As {@link #testFilterQueryOnFilterView()} but condition is stronger in    * query and columns selected are subset of columns in materialized view.    * Condition here is complex. */
 annotation|@
 name|Test
 specifier|public
@@ -1864,7 +1864,7 @@ literal|"or (\"deptno\">= 30 and \"salary\"<= 500))"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** As {@link #testFilterQueryOnFilterView()} but condition is stronger in    * query. However, columns selected are not present in columns of materialized view,    * hence should not use materialized view*/
+comment|/** As {@link #testFilterQueryOnFilterView()} but condition is stronger in    * query. However, columns selected are not present in columns of materialized    * view, Hence should not use materialized view. */
 annotation|@
 name|Test
 specifier|public
@@ -1884,7 +1884,7 @@ name|HR_MODEL
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** As {@link #testFilterQueryOnFilterView()} but condition is weaker in    * query.*/
+comment|/** As {@link #testFilterQueryOnFilterView()} but condition is weaker in    * query. */
 annotation|@
 name|Test
 specifier|public
@@ -1906,7 +1906,7 @@ name|HR_MODEL
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** As {@link #testFilterQueryOnFilterView()} but condition currently    * has unsupported type being checked on query.    */
+comment|/** As {@link #testFilterQueryOnFilterView()} but condition currently    * has unsupported type being checked on query. */
 annotation|@
 name|Test
 specifier|public
@@ -1930,7 +1930,7 @@ name|HR_MODEL
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** As {@link #testFilterQueryOnFilterView()} but condition is weaker in    * query and columns selected are subset of columns in materialized view    * Condition here is complex*/
+comment|/** As {@link #testFilterQueryOnFilterView()} but condition is weaker in    * query and columns selected are subset of columns in materialized view.    * Condition here is complex. */
 annotation|@
 name|Test
 specifier|public
@@ -1974,7 +1974,7 @@ name|HR_MODEL
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** As {@link #testFilterQueryOnFilterView()} but condition is weaker in    * query and columns selected are subset of columns in materialized view    * Condition here is complex*/
+comment|/** As {@link #testFilterQueryOnFilterView()} but condition is weaker in    * query and columns selected are subset of columns in materialized view.    * Condition here is complex. */
 annotation|@
 name|Test
 specifier|public
@@ -2000,7 +2000,7 @@ name|HR_MODEL
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** As {@link #testFilterQueryOnFilterView7()} but columns in materialized    * view are a permutation of columns in the query*/
+comment|/** As {@link #testFilterQueryOnFilterView7()} but columns in materialized    * view are a permutation of columns in the query. */
 annotation|@
 name|Test
 specifier|public
@@ -2036,7 +2036,7 @@ name|q
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** As {@link #testFilterQueryOnFilterView13()} but using alias    * and condition of query is stronger*/
+comment|/** As {@link #testFilterQueryOnFilterView13()} but using alias    * and condition of query is stronger. */
 annotation|@
 name|Test
 specifier|public

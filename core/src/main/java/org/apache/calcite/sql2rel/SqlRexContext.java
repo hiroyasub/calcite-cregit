@@ -175,7 +175,7 @@ parameter_list|()
 function_decl|;
 comment|/**    * Returns the expression used to access a given IN or EXISTS    * {@link SqlSelect sub-query}.    *    * @param call IN or EXISTS expression    * @return Expression used to access current row of sub-query    */
 name|RexRangeRef
-name|getSubqueryExpr
+name|getSubQueryExpr
 parameter_list|(
 name|SqlCall
 name|call

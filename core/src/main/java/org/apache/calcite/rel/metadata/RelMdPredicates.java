@@ -1323,13 +1323,7 @@ argument_list|)
 operator|.
 name|union
 argument_list|(
-name|filter
-operator|.
-name|getCluster
-argument_list|()
-operator|.
-name|getRexBuilder
-argument_list|()
+name|rexBuilder
 argument_list|,
 name|RelOptPredicateList
 operator|.

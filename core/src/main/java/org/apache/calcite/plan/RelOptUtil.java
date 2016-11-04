@@ -1709,9 +1709,7 @@ block|{
 return|return
 operator|new
 name|LinkedHashSet
-argument_list|<
-name|RelOptTable
-argument_list|>
+argument_list|<>
 argument_list|(
 name|findAllTables
 argument_list|(
@@ -1840,7 +1838,9 @@ operator|.
 name|variables
 return|;
 block|}
-comment|/**    * Returns a set of distinct variables set by<code>rel0</code> and used by    *<code>rel1</code>.    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 specifier|static
 name|List
@@ -2616,7 +2616,9 @@ return|return
 name|mapping
 return|;
 block|}
-comment|/**    * Creates a plan suitable for use in<code>EXISTS</code> or<code>IN</code>    * statements.    *    *<p>See {@link org.apache.calcite.sql2rel.SqlToRelConverter#convertExists}    *    *<p>Note: this implementation of createExistsPlan is only called from    * net.sf.farrago.fennel.rel. The last two arguments do not apply to those    * invocations and can be removed from the method.    *    * @param cluster    Cluster    * @param seekRel    A query rel, for example the resulting rel from 'select *    *                   from emp' or 'values (1,2,3)' or '('Foo', 34)'.    * @param conditions May be null    * @param extraExpr  Column expression to add. "TRUE" for EXISTS and IN    * @param extraName  Name of expression to add.    * @return relational expression which outer joins a boolean condition    * column    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 specifier|static
 name|RelNode
@@ -2690,17 +2692,25 @@ argument_list|,
 literal|true
 argument_list|)
 decl_stmt|;
+specifier|final
+name|RelFactories
+operator|.
+name|FilterFactory
+name|factory
+init|=
+name|RelFactories
+operator|.
+name|DEFAULT_FILTER_FACTORY
+decl_stmt|;
 name|ret
 operator|=
+name|factory
+operator|.
 name|createFilter
 argument_list|(
 name|ret
 argument_list|,
 name|conditionExp
-argument_list|,
-name|RelFactories
-operator|.
-name|DEFAULT_FILTER_FACTORY
 argument_list|)
 expr_stmt|;
 block|}
@@ -3133,7 +3143,9 @@ return|;
 block|}
 block|}
 block|}
-comment|/**    * Creates a LogicalProject which accomplishes a rename.    *    * @param outputType a row type descriptor whose field names the generated    *                   LogicalProject must match    * @param rel        the rel whose output is to be renamed; rel.getRowType()    *                   must be the same as outputType except for field names    * @return generated relational expression    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 specifier|static
 name|RelNode
@@ -3336,7 +3348,9 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/**    * Creates a relational expression which filters according to a given    * condition, returning the same fields as its input, using the default    * filter factory.    *    * @param child     Child relational expression    * @param condition Condition    * @return Relational expression    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 specifier|static
 name|RelNode
@@ -3349,20 +3363,30 @@ name|RexNode
 name|condition
 parameter_list|)
 block|{
+specifier|final
+name|RelFactories
+operator|.
+name|FilterFactory
+name|factory
+init|=
+name|RelFactories
+operator|.
+name|DEFAULT_FILTER_FACTORY
+decl_stmt|;
 return|return
+name|factory
+operator|.
 name|createFilter
 argument_list|(
 name|child
 argument_list|,
 name|condition
-argument_list|,
-name|RelFactories
-operator|.
-name|DEFAULT_FILTER_FACTORY
 argument_list|)
 return|;
 block|}
-comment|/**    * Creates a relational expression which filters according to a given    * condition, returning the same fields as its input.    *    * @param child     Child relational expression    * @param condition Condition    * @param filterFactory Filter factory    * @return Relational expression    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 specifier|static
 name|RelNode
@@ -3486,18 +3510,20 @@ block|}
 else|else
 block|{
 return|return
+name|filterFactory
+operator|.
 name|createFilter
 argument_list|(
 name|child
 argument_list|,
 name|condition
-argument_list|,
-name|filterFactory
 argument_list|)
 return|;
 block|}
 block|}
-comment|/**    * Creates a filter which will remove rows containing NULL values.    *    * @param rel           the rel to be filtered    * @param fieldOrdinals array of 0-based field ordinals to filter, or null    *                      for all fields    * @return filtered rel    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 specifier|static
 name|RelNode
@@ -3702,16 +3728,24 @@ return|return
 name|rel
 return|;
 block|}
+specifier|final
+name|RelFactories
+operator|.
+name|FilterFactory
+name|factory
+init|=
+name|RelFactories
+operator|.
+name|DEFAULT_FILTER_FACTORY
+decl_stmt|;
 return|return
+name|factory
+operator|.
 name|createFilter
 argument_list|(
 name|rel
 argument_list|,
 name|condition
-argument_list|,
-name|RelFactories
-operator|.
-name|DEFAULT_FILTER_FACTORY
 argument_list|)
 return|;
 block|}
@@ -4023,6 +4057,9 @@ argument_list|()
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 specifier|static
 name|boolean
@@ -4307,7 +4344,9 @@ literal|false
 argument_list|)
 return|;
 block|}
-comment|/**    * Returns whether a join condition is an "equi-join" condition.    *    * @param left      Left input of join    * @param right     Right input of join    * @param condition Condition    * @return Whether condition is equi-join    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 specifier|static
 name|boolean
@@ -4583,6 +4622,9 @@ literal|false
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 specifier|static
 name|RexNode
@@ -7480,7 +7522,9 @@ return|return
 name|call
 return|;
 block|}
-comment|/**    * Adding projection to the inputs of a join to produce the required join    * keys.    *    * @param inputRels      inputs to a join    * @param leftJoinKeys   expressions for LHS of join key    * @param rightJoinKeys  expressions for RHS of join key    * @param systemColCount number of system columns, usually zero. These    *                       columns are projected at the leading edge of the    *                       output row.    * @param leftKeys       on return this contains the join key positions from    *                       the new project rel on the LHS.    * @param rightKeys      on return this contains the join key positions from    *                       the new project rel on the RHS.    * @param outputProj     on return this contains the positions of the original    *                       join output in the (to be formed by caller)    *                       LhxJoinRel. Caller needs to be responsible for adding    *                       projection on the new join output.    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 specifier|static
 name|void
@@ -8069,7 +8113,9 @@ operator|=
 name|rightRel
 expr_stmt|;
 block|}
-comment|/**    * Creates a projection on top of a join, if the desired projection is a    * subset of the join columns    *    * @param outputProj desired projection; if null, return original join node    * @param joinRel    the join node    * @return projected join node or the original join if projection is    * unnecessary    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 specifier|static
 name|RelNode
@@ -9349,7 +9395,9 @@ name|toString
 argument_list|()
 return|;
 block|}
-comment|/**    * Renames a relational expression to make its field names the same as    * another row type. If the row type is already identical, or if the row    * type is too different (the fields are different in number or type) does    * nothing.    *    * @param rel            Relational expression    * @param desiredRowType Desired row type (including desired field names)    * @return Renamed relational expression, or the original expression if    * there is nothing to do or nothing we<em>can</em> do.    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 specifier|static
 name|RelNode
@@ -11136,7 +11184,9 @@ expr_stmt|;
 block|}
 block|}
 block|}
-comment|/**    * Determines if a projection and its input reference identical input    * references.    *    * @param project    projection being examined    * @param checkNames if true, also compare that the names of the project    *                   fields and its child fields    * @return if checkNames is false, true is returned if the project and its    * child reference the same input references, regardless of the names of the    * project and child fields; if checkNames is true, then true is returned if    * the input references are the same but the field names are different    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 specifier|static
 name|boolean
@@ -12860,7 +12910,9 @@ name|build
 argument_list|()
 return|;
 block|}
-comment|/**    * Returns a relational expression which has the same fields as the    * underlying expression, but the fields have different names.    *    * @param rel        Relational expression    * @param fieldNames Field names    * @return Renamed relational expression    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 specifier|static
 name|RelNode
@@ -13551,7 +13603,9 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/**    * Creates a relational expression which projects the output fields of a    * relational expression according to a partial mapping.    *    *<p>A partial mapping is weaker than a permutation: every target has one    * source, but a source may have 0, 1 or more than one targets. Usually the    * result will have fewer fields than the source, unless some source fields    * are projected multiple times.    *    *<p>This method could optimize the result as {@link #permute} does, but    * does not at present.    *    * @param rel        Relational expression    * @param mapping Mapping from source fields to target fields. The mapping    * type must obey the constraints    * {@link org.apache.calcite.util.mapping.MappingType#isMandatorySource()}    * and    * {@link org.apache.calcite.util.mapping.MappingType#isSingleSource()},    * as does    * {@link org.apache.calcite.util.mapping.MappingType#INVERSE_FUNCTION}.    * @param fieldNames Field names; if null, or if a particular entry is null,    *                   the name of the permuted field is used    * @return relational expression which projects a subset of the input fields    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 specifier|static
 name|RelNode

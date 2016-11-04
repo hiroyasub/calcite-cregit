@@ -4644,10 +4644,20 @@ expr_stmt|;
 block|}
 comment|// Replace the filter expression to reference output of the join
 comment|// Map filter to the new filter over join
+specifier|final
+name|RelFactories
+operator|.
+name|FilterFactory
+name|factory
+init|=
+name|RelFactories
+operator|.
+name|DEFAULT_FILTER_FACTORY
+decl_stmt|;
 name|RelNode
 name|newFilter
 init|=
-name|RelOptUtil
+name|factory
 operator|.
 name|createFilter
 argument_list|(

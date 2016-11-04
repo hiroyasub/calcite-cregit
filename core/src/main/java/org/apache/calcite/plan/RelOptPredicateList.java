@@ -454,6 +454,30 @@ name|RelOptPredicateList
 name|list
 parameter_list|)
 block|{
+if|if
+condition|(
+name|this
+operator|==
+name|EMPTY
+condition|)
+block|{
+return|return
+name|list
+return|;
+block|}
+if|else if
+condition|(
+name|list
+operator|==
+name|EMPTY
+condition|)
+block|{
+return|return
+name|this
+return|;
+block|}
+else|else
+block|{
 return|return
 name|RelOptPredicateList
 operator|.
@@ -489,6 +513,7 @@ name|rightInferredPredicates
 argument_list|)
 argument_list|)
 return|;
+block|}
 block|}
 comment|/** Concatenates two immutable lists, avoiding a copy it possible. */
 specifier|private

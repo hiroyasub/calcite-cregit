@@ -2255,20 +2255,6 @@ end_import
 
 begin_import
 import|import
-name|com
-operator|.
-name|google
-operator|.
-name|common
-operator|.
-name|collect
-operator|.
-name|Sets
-import|;
-end_import
-
-begin_import
-import|import
 name|org
 operator|.
 name|slf4j
@@ -2376,6 +2362,16 @@ operator|.
 name|util
 operator|.
 name|HashMap
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|LinkedHashSet
 import|;
 end_import
 
@@ -5629,7 +5625,7 @@ argument_list|(
 name|where
 argument_list|)
 decl_stmt|;
-name|replaceSubqueries
+name|replaceSubQueries
 argument_list|(
 name|bb
 argument_list|,
@@ -5665,10 +5661,20 @@ block|{
 return|return;
 block|}
 specifier|final
+name|RelFactories
+operator|.
+name|FilterFactory
+name|factory
+init|=
+name|RelFactories
+operator|.
+name|DEFAULT_FILTER_FACTORY
+decl_stmt|;
+specifier|final
 name|RelNode
 name|filter
 init|=
-name|RelOptUtil
+name|factory
 operator|.
 name|createFilter
 argument_list|(
@@ -5764,7 +5770,7 @@ expr_stmt|;
 block|}
 specifier|private
 name|void
-name|replaceSubqueries
+name|replaceSubQueries
 parameter_list|(
 specifier|final
 name|Blackboard
@@ -5798,10 +5804,10 @@ name|node
 range|:
 name|bb
 operator|.
-name|subqueryList
+name|subQueryList
 control|)
 block|{
-name|substituteSubquery
+name|substituteSubQuery
 argument_list|(
 name|bb
 argument_list|,
@@ -5812,7 +5818,7 @@ block|}
 block|}
 specifier|private
 name|void
-name|substituteSubquery
+name|substituteSubQuery
 parameter_list|(
 name|Blackboard
 name|bb
@@ -6045,7 +6051,7 @@ expr_stmt|;
 block|}
 specifier|final
 name|boolean
-name|isNotIn
+name|notIn
 init|=
 operator|(
 operator|(
@@ -6088,6 +6094,8 @@ operator|.
 name|size
 argument_list|()
 operator|<
+name|config
+operator|.
 name|getInSubqueryThreshold
 argument_list|()
 condition|)
@@ -6105,7 +6113,7 @@ name|leftKeys
 argument_list|,
 name|valueList
 argument_list|,
-name|isNotIn
+name|notIn
 argument_list|)
 expr_stmt|;
 return|return;
@@ -6115,7 +6123,7 @@ comment|// values list into an inline table for the
 comment|// reference to Q below.
 block|}
 comment|// Project out the search columns from the left side
-comment|//  Q1:
+comment|// Q1:
 comment|// "select from emp where emp.deptno in (select col1 from T)"
 comment|//
 comment|// is converted to
@@ -6143,7 +6151,7 @@ name|bb
 operator|.
 name|subqueryNeedsOuterJoin
 operator|||
-name|isNotIn
+name|notIn
 operator|||
 name|subQuery
 operator|.
@@ -6412,7 +6420,7 @@ argument_list|)
 expr_stmt|;
 if|if
 condition|(
-name|isNotIn
+name|notIn
 condition|)
 block|{
 name|subQuery
@@ -8912,7 +8920,7 @@ condition|)
 block|{
 name|bb
 operator|.
-name|registerSubquery
+name|registerSubQuery
 argument_list|(
 name|node
 argument_list|,
@@ -9152,7 +9160,7 @@ expr_stmt|;
 block|}
 name|bb
 operator|.
-name|registerSubquery
+name|registerSubQuery
 argument_list|(
 name|node
 argument_list|,
@@ -10595,7 +10603,7 @@ range|:
 name|nodes
 control|)
 block|{
-name|replaceSubqueries
+name|replaceSubQueries
 argument_list|(
 name|bb
 argument_list|,
@@ -10909,7 +10917,7 @@ argument_list|()
 expr_stmt|;
 return|return;
 block|}
-name|replaceSubqueries
+name|replaceSubQueries
 argument_list|(
 name|bb
 argument_list|,
@@ -11302,8 +11310,18 @@ name|isAlwaysTrue
 argument_list|()
 condition|)
 block|{
+specifier|final
+name|RelFactories
+operator|.
+name|FilterFactory
+name|factory
+init|=
+name|RelFactories
+operator|.
+name|DEFAULT_FILTER_FACTORY
+decl_stmt|;
 return|return
-name|RelOptUtil
+name|factory
 operator|.
 name|createFilter
 argument_list|(
@@ -12153,7 +12171,7 @@ name|rightRel
 argument_list|)
 argument_list|)
 expr_stmt|;
-name|replaceSubqueries
+name|replaceSubQueries
 argument_list|(
 name|bb
 argument_list|,
@@ -12631,7 +12649,7 @@ expr_stmt|;
 block|}
 comment|// first replace the subqueries inside the aggregates
 comment|// because they will provide input rows to the aggregates.
-name|replaceSubqueries
+name|replaceSubQueries
 argument_list|(
 name|bb
 argument_list|,
@@ -12661,7 +12679,7 @@ operator|.
 name|EMPTY
 expr_stmt|;
 block|}
-name|replaceSubqueries
+name|replaceSubQueries
 argument_list|(
 name|bb
 argument_list|,
@@ -13251,7 +13269,7 @@ argument_list|(
 name|having
 argument_list|)
 decl_stmt|;
-name|replaceSubqueries
+name|replaceSubQueries
 argument_list|(
 name|bb
 argument_list|,
@@ -13291,7 +13309,7 @@ comment|// Now convert the other subqueries in the select list.
 comment|// This needs to be done separately from the subquery inside
 comment|// any aggregate in the select list, and after the aggregate rel
 comment|// is allocated.
-name|replaceSubqueries
+name|replaceSubQueries
 argument_list|(
 name|bb
 argument_list|,
@@ -13482,11 +13500,21 @@ operator|!=
 literal|null
 condition|)
 block|{
+specifier|final
+name|RelFactories
+operator|.
+name|FilterFactory
+name|factory
+init|=
+name|RelFactories
+operator|.
+name|DEFAULT_FILTER_FACTORY
+decl_stmt|;
 name|bb
 operator|.
 name|setRoot
 argument_list|(
-name|RelOptUtil
+name|factory
 operator|.
 name|createFilter
 argument_list|(
@@ -17351,7 +17379,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|replaceSubqueries
+name|replaceSubQueries
 argument_list|(
 name|bb
 argument_list|,
@@ -17922,7 +17950,7 @@ argument_list|,
 literal|false
 argument_list|)
 decl_stmt|;
-name|replaceSubqueries
+name|replaceSubQueries
 argument_list|(
 name|tmpBb
 argument_list|,
@@ -18196,11 +18224,11 @@ name|Set
 argument_list|<
 name|SubQuery
 argument_list|>
-name|subqueryList
+name|subQueryList
 init|=
-name|Sets
-operator|.
-name|newLinkedHashSet
+operator|new
+name|LinkedHashSet
+argument_list|<>
 argument_list|()
 decl_stmt|;
 specifier|private
@@ -19706,7 +19734,7 @@ block|}
 block|}
 block|}
 name|void
-name|registerSubquery
+name|registerSubQuery
 parameter_list|(
 name|SqlNode
 name|node
@@ -19722,7 +19750,7 @@ control|(
 name|SubQuery
 name|subQuery
 range|:
-name|subqueryList
+name|subQueryList
 control|)
 block|{
 if|if
@@ -19744,7 +19772,7 @@ block|{
 return|return;
 block|}
 block|}
-name|subqueryList
+name|subQueryList
 operator|.
 name|add
 argument_list|(
@@ -19759,7 +19787,7 @@ argument_list|)
 expr_stmt|;
 block|}
 name|SubQuery
-name|getSubquery
+name|getSubQuery
 parameter_list|(
 name|SqlNode
 name|expr
@@ -19770,7 +19798,7 @@ control|(
 name|SubQuery
 name|subQuery
 range|:
-name|subqueryList
+name|subQueryList
 control|)
 block|{
 if|if
@@ -20310,7 +20338,7 @@ name|IN
 case|:
 name|subQuery
 operator|=
-name|getSubquery
+name|getSubQuery
 argument_list|(
 name|expr
 argument_list|)
@@ -20347,7 +20375,7 @@ name|SCALAR_QUERY
 case|:
 name|subQuery
 operator|=
-name|getSubquery
+name|getSubQuery
 argument_list|(
 name|expr
 argument_list|)
@@ -20659,7 +20687,6 @@ return|return
 literal|false
 return|;
 block|}
-comment|// implement SqlRexContext
 specifier|public
 name|int
 name|getGroupCount
@@ -20704,7 +20731,6 @@ operator|-
 literal|1
 return|;
 block|}
-comment|// implement SqlRexContext
 specifier|public
 name|RexBuilder
 name|getRexBuilder
@@ -20714,10 +20740,9 @@ return|return
 name|rexBuilder
 return|;
 block|}
-comment|// implement SqlRexContext
 specifier|public
 name|RexRangeRef
-name|getSubqueryExpr
+name|getSubQueryExpr
 parameter_list|(
 name|SqlCall
 name|call
@@ -20727,7 +20752,7 @@ specifier|final
 name|SubQuery
 name|subQuery
 init|=
-name|getSubquery
+name|getSubQuery
 argument_list|(
 name|call
 argument_list|)
@@ -20746,7 +20771,6 @@ operator|.
 name|expr
 return|;
 block|}
-comment|// implement SqlRexContext
 specifier|public
 name|RelDataTypeFactory
 name|getTypeFactory
@@ -20756,7 +20780,6 @@ return|return
 name|typeFactory
 return|;
 block|}
-comment|// implement SqlRexContext
 specifier|public
 name|DefaultValueFactory
 name|getDefaultValueFactory
@@ -20766,7 +20789,6 @@ return|return
 name|defaultValueFactory
 return|;
 block|}
-comment|// implement SqlRexContext
 specifier|public
 name|SqlValidator
 name|getValidator
@@ -20776,7 +20798,6 @@ return|return
 name|validator
 return|;
 block|}
-comment|// implement SqlRexContext
 specifier|public
 name|RexNode
 name|convertLiteral
@@ -20815,7 +20836,6 @@ name|intervalQualifier
 argument_list|)
 return|;
 block|}
-comment|// implement SqlVisitor
 specifier|public
 name|RexNode
 name|visit
@@ -20835,7 +20855,6 @@ name|literal
 argument_list|)
 return|;
 block|}
-comment|// implement SqlVisitor
 specifier|public
 name|RexNode
 name|visit
@@ -20915,7 +20934,6 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-comment|// implement SqlVisitor
 specifier|public
 name|RexNode
 name|visit
@@ -20930,7 +20948,6 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
-comment|// implement SqlVisitor
 specifier|public
 name|RexNode
 name|visit
@@ -20948,7 +20965,6 @@ name|id
 argument_list|)
 return|;
 block|}
-comment|// implement SqlVisitor
 specifier|public
 name|RexNode
 name|visit
@@ -20963,7 +20979,6 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
-comment|// implement SqlVisitor
 specifier|public
 name|RexNode
 name|visit
@@ -20979,7 +20994,6 @@ name|param
 argument_list|)
 return|;
 block|}
-comment|// implement SqlVisitor
 specifier|public
 name|RexNode
 name|visit
@@ -21148,7 +21162,6 @@ name|NoOpSubqueryConverter
 implements|implements
 name|SubqueryConverter
 block|{
-comment|// implement SubqueryConverter
 specifier|public
 name|boolean
 name|canConvertSubquery
@@ -21158,7 +21171,6 @@ return|return
 literal|false
 return|;
 block|}
-comment|// implement SubqueryConverter
 specifier|public
 name|RexNode
 name|convertSubquery

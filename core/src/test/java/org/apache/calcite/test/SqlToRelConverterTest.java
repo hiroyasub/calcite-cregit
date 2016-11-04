@@ -3442,7 +3442,7 @@ name|void
 name|testInValueListLong
 parameter_list|()
 block|{
-comment|// Go over the default threshold of 20 to force a subQuery.
+comment|// Go over the default threshold of 20 to force a sub-query.
 specifier|final
 name|String
 name|sql
@@ -4364,7 +4364,7 @@ name|void
 name|testUnionSubQuery
 parameter_list|()
 block|{
-comment|// union of subQuery, inside from list, also values
+comment|// union of sub-query, inside from list, also values
 specifier|final
 name|String
 name|sql
@@ -5507,7 +5507,7 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
-comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-710">[CALCITE-710]    * When look up subqueries, perform the same logic as the way when ones were    * registered</a>.    */
+comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-710">[CALCITE-710]    * When look up sub-queries, perform the same logic as the way when ones were    * registered</a>.    */
 annotation|@
 name|Test
 specifier|public
@@ -5774,7 +5774,7 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
-comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-770">[CALCITE-770]    * variant involving join with subQuery that contains window function and    * GROUP BY</a>.    */
+comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-770">[CALCITE-770]    * variant involving join with sub-query that contains window function and    * GROUP BY</a>.    */
 annotation|@
 name|Test
 specifier|public
@@ -5833,7 +5833,7 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
-comment|/**    * Test case (correlated scalar aggregate subQuery) for    *<a href="https://issues.apache.org/jira/browse/CALCITE-714">[CALCITE-714]    * When de-correlating, push join condition into subQuery</a>.    */
+comment|/**    * Test case (correlated scalar aggregate sub-query) for    *<a href="https://issues.apache.org/jira/browse/CALCITE-714">[CALCITE-714]    * When de-correlating, push join condition into sub-query</a>.    */
 annotation|@
 name|Test
 specifier|public
@@ -5910,7 +5910,7 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
-comment|/**    * Test case (correlated EXISTS subQuery) for    *<a href="https://issues.apache.org/jira/browse/CALCITE-714">[CALCITE-714]    * When de-correlating, push join condition into subQuery</a>.    */
+comment|/**    * Test case (correlated EXISTS sub-query) for    *<a href="https://issues.apache.org/jira/browse/CALCITE-714">[CALCITE-714]    * When de-correlating, push join condition into sub-query</a>.    */
 annotation|@
 name|Test
 specifier|public
@@ -5982,7 +5982,7 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
-comment|/**    * Test case (correlated NOT EXISTS subQuery) for    *<a href="https://issues.apache.org/jira/browse/CALCITE-714">[CALCITE-714]    * When de-correlating, push join condition into subQuery</a>.    */
+comment|/**    * Test case (correlated NOT EXISTS sub-query) for    *<a href="https://issues.apache.org/jira/browse/CALCITE-714">[CALCITE-714]    * When de-correlating, push join condition into sub-query</a>.    */
 annotation|@
 name|Test
 specifier|public
