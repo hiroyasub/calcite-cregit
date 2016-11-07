@@ -649,6 +649,22 @@ name|rel
 operator|.
 name|rules
 operator|.
+name|IntersectToDistinctRule
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|rules
+operator|.
 name|JoinAddRedundantSemiJoinRule
 import|;
 end_import
@@ -4352,6 +4368,130 @@ name|check
 argument_list|()
 expr_stmt|;
 block|}
+comment|/** Tests {@link org.apache.calcite.rel.rules.IntersectToDistinctRule},    * which rewrites an {@link Intersect} operator with 3 inputs. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testIntersectToDistinct
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+name|HepProgram
+name|program
+init|=
+operator|new
+name|HepProgramBuilder
+argument_list|()
+operator|.
+name|addRuleInstance
+argument_list|(
+name|UnionMergeRule
+operator|.
+name|INTERSECT_INSTANCE
+argument_list|)
+operator|.
+name|addRuleInstance
+argument_list|(
+name|IntersectToDistinctRule
+operator|.
+name|INSTANCE
+argument_list|)
+operator|.
+name|build
+argument_list|()
+decl_stmt|;
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select * from emp where deptno = 10\n"
+operator|+
+literal|"intersect\n"
+operator|+
+literal|"select * from emp where deptno = 20\n"
+operator|+
+literal|"intersect\n"
+operator|+
+literal|"select * from emp where deptno = 30\n"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|with
+argument_list|(
+name|program
+argument_list|)
+operator|.
+name|check
+argument_list|()
+expr_stmt|;
+block|}
+comment|/** Tests that {@link org.apache.calcite.rel.rules.IntersectToDistinctRule}    * correctly ignores an {@code INTERSECT ALL}. It can only handle    * {@code INTERSECT DISTINCT}. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testIntersectToDistinctAll
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+name|HepProgram
+name|program
+init|=
+operator|new
+name|HepProgramBuilder
+argument_list|()
+operator|.
+name|addRuleInstance
+argument_list|(
+name|UnionMergeRule
+operator|.
+name|INTERSECT_INSTANCE
+argument_list|)
+operator|.
+name|addRuleInstance
+argument_list|(
+name|IntersectToDistinctRule
+operator|.
+name|INSTANCE
+argument_list|)
+operator|.
+name|build
+argument_list|()
+decl_stmt|;
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select * from emp where deptno = 10\n"
+operator|+
+literal|"intersect\n"
+operator|+
+literal|"select * from emp where deptno = 20\n"
+operator|+
+literal|"intersect all\n"
+operator|+
+literal|"select * from emp where deptno = 30\n"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|with
+argument_list|(
+name|program
+argument_list|)
+operator|.
+name|check
+argument_list|()
+expr_stmt|;
+block|}
 comment|/** Tests {@link UnionMergeRule#MINUS_INSTANCE}, which merges 2    * {@link Minus} operators into a single {@code Minus} with 3    * inputs. */
 annotation|@
 name|Test
@@ -6830,7 +6970,9 @@ specifier|final
 name|String
 name|sql
 init|=
-literal|"select * from (values (30, 3)) as t (x, y) where x> 30"
+literal|"select * from (values (30, 3)) as t (x, y)\n"
+operator|+
+literal|"where x> 30\n"
 operator|+
 literal|"except\n"
 operator|+
@@ -11797,11 +11939,11 @@ name|sql
 init|=
 literal|"select emp.empno, count(*), avg(distinct dept.deptno)\n"
 operator|+
-literal|" from sales.emp emp inner join sales.dept dept\n"
+literal|"from sales.emp emp inner join sales.dept dept\n"
 operator|+
-literal|" on emp.deptno = dept.deptno\n"
+literal|"on emp.deptno = dept.deptno\n"
 operator|+
-literal|" group by emp.empno"
+literal|"group by emp.empno"
 decl_stmt|;
 specifier|final
 name|HepProgram

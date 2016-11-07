@@ -673,8 +673,6 @@ expr_stmt|;
 block|}
 comment|/**    * Tests INTERSECT.    */
 annotation|@
-name|Ignore
-annotation|@
 name|Test
 specifier|public
 name|void
