@@ -1162,7 +1162,7 @@ block|}
 block|}
 block|}
 decl_stmt|;
-comment|/**    * Rule that converts an {@link org.apache.calcite.rel.core.Aggregate}    * to empty if its child is empty.    *    *<p>Examples:    *    *<ul>    *<li>{@code Aggregate(key: [1, 3], Empty)}&rarr; {@code Empty}    *    *<li>{@code Aggregate(key: [], Empty)} is unchanged, because an aggregate    * without a GROUP BY key always returns 1 row, even over empty input    *</ul>    */
+comment|/**    * Rule that converts an {@link org.apache.calcite.rel.core.Aggregate}    * to empty if its child is empty.    *    *<p>Examples:    *    *<ul>    *<li>{@code Aggregate(key: [1, 3], Empty)}&rarr; {@code Empty}    *    *<li>{@code Aggregate(key: [], Empty)} is unchanged, because an aggregate    * without a GROUP BY key always returns 1 row, even over empty input    *</ul>    *    * @see AggregateValuesRule    */
 specifier|public
 specifier|static
 specifier|final
