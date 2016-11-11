@@ -1078,6 +1078,9 @@ name|int
 name|ordinal
 parameter_list|)
 block|{
+try|try
+block|{
+specifier|final
 name|SqlNode
 name|node
 init|=
@@ -1096,6 +1099,17 @@ argument_list|(
 name|node
 argument_list|)
 return|;
+block|}
+catch|catch
+parameter_list|(
+name|IllegalArgumentException
+name|e
+parameter_list|)
+block|{
+return|return
+literal|null
+return|;
+block|}
 block|}
 annotation|@
 name|Override

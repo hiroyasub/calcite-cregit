@@ -752,7 +752,7 @@ operator|.
 name|value
 return|;
 block|}
-comment|/**    * Extracts the value from a literal.    *    *<p>Cases:    *<ul>    *<li>If the node is a character literal, a chain of string    * literals, or a CAST of a character literal, returns the value as a    * {@link NlsString}.    *    *<li>If the node is a numeric literal, or a negated numeric literal,    * returns the value as a {@link BigDecimal}.    *    *<li>If the node is a {@link SqlIntervalQualifier},    * returns its {@link TimeUnitRange}.    *    *<li>If the node is INTERVAL_DAY_TIME_ in {@link SqlTypeFamily},    * returns its sign multiplied by its millisecond equivalent value    *    *<li>If the node is INTERVAL_YEAR_MONTH_ in {@link SqlTypeFamily},    * returns its sign multiplied by its months equivalent value    *    *<li>Otherwise the behavior is not specified.    *</ul>    */
+comment|/**    * Extracts the value from a literal.    *    *<p>Cases:    *<ul>    *<li>If the node is a character literal, a chain of string    * literals, or a CAST of a character literal, returns the value as a    * {@link NlsString}.    *    *<li>If the node is a numeric literal, or a negated numeric literal,    * returns the value as a {@link BigDecimal}.    *    *<li>If the node is a {@link SqlIntervalQualifier},    * returns its {@link TimeUnitRange}.    *    *<li>If the node is INTERVAL_DAY_TIME_ in {@link SqlTypeFamily},    * returns its sign multiplied by its millisecond equivalent value    *    *<li>If the node is INTERVAL_YEAR_MONTH_ in {@link SqlTypeFamily},    * returns its sign multiplied by its months equivalent value    *    *<li>Otherwise throws {@link IllegalArgumentException}.    *</ul>    */
 specifier|public
 specifier|static
 name|Comparable
@@ -761,6 +761,8 @@ parameter_list|(
 name|SqlNode
 name|node
 parameter_list|)
+throws|throws
+name|IllegalArgumentException
 block|{
 if|if
 condition|(
@@ -1049,11 +1051,10 @@ block|}
 comment|// fall through
 default|default:
 throw|throw
-name|Util
-operator|.
-name|newInternal
+operator|new
+name|IllegalArgumentException
 argument_list|(
-literal|"invalid literal: "
+literal|"not a literal: "
 operator|+
 name|node
 argument_list|)
