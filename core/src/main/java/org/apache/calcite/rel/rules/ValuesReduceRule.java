@@ -97,6 +97,22 @@ name|calcite
 operator|.
 name|rel
 operator|.
+name|core
+operator|.
+name|Values
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
 name|logical
 operator|.
 name|LogicalFilter
@@ -310,7 +326,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Planner rule that folds projections and filters into an underlying  * {@link org.apache.calcite.rel.logical.LogicalValues}.  *  *<p>Returns a simplified {@code Values}, perhaps containing zero tuples  * if all rows are filtered away.  *  *<p>For example,</p>  *  *<blockquote><code>select a - b from (values (1, 2), (3, 5), (7, 11)) as t (a,  * b) where a + b&gt; 4</code></blockquote>  *  *<p>becomes</p>  *  *<blockquote><code>select x from (values (-2), (-4))</code></blockquote>  */
+comment|/**  * Planner rule that folds projections and filters into an underlying  * {@link org.apache.calcite.rel.logical.LogicalValues}.  *  *<p>Returns a simplified {@code Values}, perhaps containing zero tuples  * if all rows are filtered away.  *  *<p>For example,</p>  *  *<blockquote><code>select a - b from (values (1, 2), (3, 5), (7, 11)) as t (a,  * b) where a + b&gt; 4</code></blockquote>  *  *<p>becomes</p>  *  *<blockquote><code>select x from (values (-2), (-4))</code></blockquote>  *  *<p>Ignores an empty {@code Values}; this is better dealt with by  * {@link PruneEmptyRules}.  */
 end_comment
 
 begin_class
@@ -354,6 +370,12 @@ argument_list|(
 name|LogicalValues
 operator|.
 name|class
+argument_list|,
+literal|null
+argument_list|,
+name|Values
+operator|.
+name|IS_NOT_EMPTY
 argument_list|,
 name|none
 argument_list|()
@@ -426,6 +448,12 @@ argument_list|(
 name|LogicalValues
 operator|.
 name|class
+argument_list|,
+literal|null
+argument_list|,
+name|Values
+operator|.
+name|IS_NOT_EMPTY
 argument_list|,
 name|none
 argument_list|()
@@ -504,6 +532,12 @@ argument_list|(
 name|LogicalValues
 operator|.
 name|class
+argument_list|,
+literal|null
+argument_list|,
+name|Values
+operator|.
+name|IS_NOT_EMPTY
 argument_list|,
 name|none
 argument_list|()
@@ -675,6 +709,7 @@ name|getRexBuilder
 argument_list|()
 decl_stmt|;
 comment|// Find reducible expressions.
+specifier|final
 name|List
 argument_list|<
 name|RexNode
@@ -683,9 +718,7 @@ name|reducibleExps
 init|=
 operator|new
 name|ArrayList
-argument_list|<
-name|RexNode
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 specifier|final

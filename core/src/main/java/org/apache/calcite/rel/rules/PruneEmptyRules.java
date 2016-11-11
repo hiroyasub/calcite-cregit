@@ -1450,7 +1450,7 @@ name|description
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Creatse a RemoveEmptySingleRule. */
+comment|/** Creates a RemoveEmptySingleRule. */
 specifier|public
 parameter_list|<
 name|R
