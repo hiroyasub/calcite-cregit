@@ -332,7 +332,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Checks whether one condition logically implies another.  *  *<p>If A&rArr; B, whenever A is true, B will be true also.  *  *<p>For example:  *<ul>  *<li>(x&gt; 10)&rArr; (x&gt; 5)  *<li>(y = 10)&rArr; (y&lt; 30 OR x&gt; 30)  *</ul>  */
+comment|/**  * Checks whether one condition logically implies another.  *  *<p>If A&rArr; B, whenever A is true, B will be true also.  *  *<p>For example:  *<ul>  *<li>(x&gt; 10)&rArr; (x&gt; 5)  *<li>(x = 10)&rArr; (x&lt; 30 OR y&gt; 30)  *<li>(x = 10)&rArr; (x IS NOT NULL)  *<li>(x&gt; 10 AND y = 20)&rArr; (x&gt; 5)  *</ul>  */
 end_comment
 
 begin_class
@@ -448,22 +448,6 @@ name|toString
 argument_list|()
 argument_list|)
 expr_stmt|;
-name|RexCall
-name|firstCond
-init|=
-operator|(
-name|RexCall
-operator|)
-name|first
-decl_stmt|;
-name|RexCall
-name|secondCond
-init|=
-operator|(
-name|RexCall
-operator|)
-name|second
-decl_stmt|;
 comment|// Get DNF
 name|RexNode
 name|firstDnf
@@ -507,12 +491,20 @@ return|return
 literal|true
 return|;
 block|}
-comment|/** Decomposes DNF into List of Conjunctions.      *      *<p>For example,      * {@code x> 10 AND y> 30) OR (z> 90)}      * will be converted to      * list of 2 conditions:      *      *<ul>      *<li>(x> 10 AND y> 30)</li>      *<li>z> 90</li>      *</ul>      */
+comment|// Decompose DNF into a list of conditions, each of which is a conjunction.
+comment|// For example,
+comment|//   (x> 10 AND y> 30) OR (z> 90)
+comment|// is converted to list of 2 conditions:
+comment|//   (x> 10 AND y> 30)
+comment|//   z> 90
+comment|//
+comment|// Similarly, decompose CNF into a list of conditions, each of which is a
+comment|// disjunction.
 name|List
 argument_list|<
 name|RexNode
 argument_list|>
-name|firstDnfs
+name|firsts
 init|=
 name|RelOptUtil
 operator|.
@@ -525,7 +517,7 @@ name|List
 argument_list|<
 name|RexNode
 argument_list|>
-name|secondDnfs
+name|seconds
 init|=
 name|RelOptUtil
 operator|.
@@ -539,76 +531,29 @@ control|(
 name|RexNode
 name|f
 range|:
-name|firstDnfs
+name|firsts
 control|)
 block|{
+comment|// Check if f implies at least
+comment|// one of the conjunctions in list secondDnfs.
+comment|// If f could not imply even one conjunction in
+comment|// secondDnfs, then final implication may be false.
 if|if
 condition|(
 operator|!
-name|f
-operator|.
-name|isAlwaysFalse
-argument_list|()
-condition|)
-block|{
-comment|// Check if f implies at least
-comment|// one of the conjunctions in list secondDnfs
-name|boolean
-name|implyOneConjunction
-init|=
-literal|false
-decl_stmt|;
-for|for
-control|(
-name|RexNode
-name|s
-range|:
-name|secondDnfs
-control|)
-block|{
-if|if
-condition|(
-name|s
-operator|.
-name|isAlwaysFalse
-argument_list|()
-condition|)
-block|{
-comment|// f cannot imply s
-continue|continue;
-block|}
-if|if
-condition|(
-name|impliesConjunction
+name|impliesAny
 argument_list|(
 name|f
 argument_list|,
-name|s
+name|seconds
 argument_list|)
-condition|)
-block|{
-comment|// Satisfies one of the condition, so lets
-comment|// move to next conjunction in firstDnfs
-name|implyOneConjunction
-operator|=
-literal|true
-expr_stmt|;
-break|break;
-block|}
-block|}
-comment|// If f could not imply even one conjunction in
-comment|// secondDnfs, then final implication may be false
-if|if
-condition|(
-operator|!
-name|implyOneConjunction
 condition|)
 block|{
 name|LOGGER
 operator|.
 name|debug
 argument_list|(
-literal|"{} doesnot imply {}"
+literal|"{} does not imply {}"
 argument_list|,
 name|first
 argument_list|,
@@ -618,7 +563,6 @@ expr_stmt|;
 return|return
 literal|false
 return|;
-block|}
 block|}
 block|}
 name|LOGGER
@@ -636,7 +580,49 @@ return|return
 literal|true
 return|;
 block|}
-comment|/** Returns whether first implies second (both are conjunctions). */
+comment|/** Returns whether the predicate {@code first} implies (&rArr;)    * at least one predicate in {@code seconds}. */
+specifier|private
+name|boolean
+name|impliesAny
+parameter_list|(
+name|RexNode
+name|first
+parameter_list|,
+name|List
+argument_list|<
+name|RexNode
+argument_list|>
+name|seconds
+parameter_list|)
+block|{
+for|for
+control|(
+name|RexNode
+name|second
+range|:
+name|seconds
+control|)
+block|{
+if|if
+condition|(
+name|impliesConjunction
+argument_list|(
+name|first
+argument_list|,
+name|second
+argument_list|)
+condition|)
+block|{
+return|return
+literal|true
+return|;
+block|}
+block|}
+return|return
+literal|false
+return|;
+block|}
+comment|/** Returns whether the predicate {@code first} implies {@code second} (both    * may be conjunctions). */
 specifier|private
 name|boolean
 name|impliesConjunction
@@ -648,6 +634,196 @@ name|RexNode
 name|second
 parameter_list|)
 block|{
+if|if
+condition|(
+name|implies2
+argument_list|(
+name|first
+argument_list|,
+name|second
+argument_list|)
+condition|)
+block|{
+return|return
+literal|true
+return|;
+block|}
+switch|switch
+condition|(
+name|first
+operator|.
+name|getKind
+argument_list|()
+condition|)
+block|{
+case|case
+name|AND
+case|:
+for|for
+control|(
+name|RexNode
+name|f
+range|:
+name|RelOptUtil
+operator|.
+name|conjunctions
+argument_list|(
+name|first
+argument_list|)
+control|)
+block|{
+if|if
+condition|(
+name|implies2
+argument_list|(
+name|f
+argument_list|,
+name|second
+argument_list|)
+condition|)
+block|{
+return|return
+literal|true
+return|;
+block|}
+block|}
+block|}
+return|return
+literal|false
+return|;
+block|}
+comment|/** Returns whether the predicate {@code first} (not a conjunction)    * implies {@code second}. */
+specifier|private
+name|boolean
+name|implies2
+parameter_list|(
+name|RexNode
+name|first
+parameter_list|,
+name|RexNode
+name|second
+parameter_list|)
+block|{
+if|if
+condition|(
+name|second
+operator|.
+name|isAlwaysFalse
+argument_list|()
+condition|)
+block|{
+comment|// f cannot imply s
+return|return
+literal|false
+return|;
+block|}
+comment|// E.g. "x is null" implies "x is null".
+if|if
+condition|(
+name|RexUtil
+operator|.
+name|eq
+argument_list|(
+name|first
+argument_list|,
+name|second
+argument_list|)
+condition|)
+block|{
+return|return
+literal|true
+return|;
+block|}
+comment|// Several things imply "IS NOT NULL"
+switch|switch
+condition|(
+name|second
+operator|.
+name|getKind
+argument_list|()
+condition|)
+block|{
+case|case
+name|IS_NOT_NULL
+case|:
+specifier|final
+name|RexNode
+name|operand
+init|=
+operator|(
+operator|(
+name|RexCall
+operator|)
+name|second
+operator|)
+operator|.
+name|getOperands
+argument_list|()
+operator|.
+name|get
+argument_list|(
+literal|0
+argument_list|)
+decl_stmt|;
+switch|switch
+condition|(
+name|first
+operator|.
+name|getKind
+argument_list|()
+condition|)
+block|{
+case|case
+name|IS_NOT_NULL
+case|:
+case|case
+name|IS_TRUE
+case|:
+case|case
+name|IS_FALSE
+case|:
+case|case
+name|LESS_THAN
+case|:
+case|case
+name|LESS_THAN_OR_EQUAL
+case|:
+case|case
+name|GREATER_THAN
+case|:
+case|case
+name|GREATER_THAN_OR_EQUAL
+case|:
+case|case
+name|EQUALS
+case|:
+case|case
+name|NOT_EQUALS
+case|:
+if|if
+condition|(
+operator|(
+operator|(
+name|RexCall
+operator|)
+name|first
+operator|)
+operator|.
+name|getOperands
+argument_list|()
+operator|.
+name|contains
+argument_list|(
+name|operand
+argument_list|)
+condition|)
+block|{
+return|return
+literal|true
+return|;
+block|}
+block|}
+block|}
 specifier|final
 name|InputUsageFinder
 name|firstUsageFinder
@@ -670,11 +846,12 @@ name|apply
 argument_list|(
 name|firstUsageFinder
 argument_list|,
-operator|new
-name|ArrayList
-argument_list|<
+name|ImmutableList
+operator|.
+expr|<
 name|RexNode
-argument_list|>
+operator|>
+name|of
 argument_list|()
 argument_list|,
 name|first
@@ -686,11 +863,12 @@ name|apply
 argument_list|(
 name|secondUsageFinder
 argument_list|,
-operator|new
-name|ArrayList
-argument_list|<
+name|ImmutableList
+operator|.
+expr|<
 name|RexNode
-argument_list|>
+operator|>
+name|of
 argument_list|()
 argument_list|,
 name|second
@@ -882,6 +1060,14 @@ decl_stmt|;
 for|for
 control|(
 name|List
+argument_list|<
+name|Pair
+argument_list|<
+name|RexInputRef
+argument_list|,
+name|RexNode
+argument_list|>
+argument_list|>
 name|usageList
 range|:
 name|usages
@@ -1745,7 +1931,6 @@ argument_list|<
 name|Void
 argument_list|>
 block|{
-specifier|public
 specifier|final
 name|Map
 argument_list|<
@@ -1765,7 +1950,6 @@ name|HashMap
 argument_list|<>
 argument_list|()
 decl_stmt|;
-specifier|public
 name|InputUsageFinder
 parameter_list|()
 block|{
