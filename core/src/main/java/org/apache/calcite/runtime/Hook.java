@@ -102,6 +102,9 @@ block|,
 comment|/** Called with the output of sql-to-rel-converter. */
 name|CONVERTED
 block|,
+comment|/** Called with the created planner. */
+name|PLANNER
+block|,
 comment|/** Called after de-correlation and field trimming, but before    * optimization. */
 name|TRIMMED
 block|,

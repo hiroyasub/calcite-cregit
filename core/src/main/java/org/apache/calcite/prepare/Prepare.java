@@ -1070,7 +1070,7 @@ name|Program
 name|getProgram
 parameter_list|()
 block|{
-comment|// Allow a test to override the planner.
+comment|// Allow a test to override the default program.
 specifier|final
 name|List
 argument_list|<

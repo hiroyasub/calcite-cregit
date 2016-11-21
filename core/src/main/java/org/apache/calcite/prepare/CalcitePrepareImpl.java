@@ -3952,6 +3952,16 @@ block|}
 argument_list|)
 expr_stmt|;
 block|}
+name|Hook
+operator|.
+name|PLANNER
+operator|.
+name|run
+argument_list|(
+name|planner
+argument_list|)
+expr_stmt|;
+comment|// allow test to add or remove rules
 return|return
 name|planner
 return|;
