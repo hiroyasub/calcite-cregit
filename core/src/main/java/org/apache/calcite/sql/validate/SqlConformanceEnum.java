@@ -43,11 +43,17 @@ block|,
 comment|/** Conformance value that instructs Calcite to use SQL semantics    * consistent with Oracle version 10. */
 name|ORACLE_10
 block|,
+comment|/** Conformance value that instructs Calcite to use SQL semantics    * consistent with Oracle version 12.    *    *<p>As {@link #ORACLE_10} except for {@link #isApplyAllowed()}. */
+name|ORACLE_12
+block|,
 comment|/** Conformance value that instructs Calcite to use SQL semantics strictly    * consistent with the SQL:2003 standard. */
 name|STRICT_2003
 block|,
 comment|/** Conformance value that instructs Calcite to use SQL semantics    * consistent with the SQL:2003 standard, but ignoring its more    * inconvenient or controversial dicta. */
 name|PRAGMATIC_2003
+block|,
+comment|/** Conformance value that instructs Calcite to use SQL semantics    * consistent with Microsoft SQL Server version 2008. */
+name|SQL_SERVER_2008
 block|;
 specifier|public
 name|boolean
@@ -66,6 +72,9 @@ case|case
 name|ORACLE_10
 case|:
 case|case
+name|ORACLE_12
+case|:
+case|case
 name|STRICT_92
 case|:
 case|case
@@ -73,6 +82,9 @@ name|PRAGMATIC_99
 case|:
 case|case
 name|PRAGMATIC_2003
+case|:
+case|case
+name|SQL_SERVER_2008
 case|:
 return|return
 literal|true
@@ -100,7 +112,13 @@ case|case
 name|ORACLE_10
 case|:
 case|case
+name|ORACLE_12
+case|:
+case|case
 name|STRICT_92
+case|:
+case|case
+name|SQL_SERVER_2008
 case|:
 return|return
 literal|true
@@ -138,6 +156,9 @@ case|case
 name|ORACLE_10
 case|:
 case|case
+name|ORACLE_12
+case|:
+case|case
 name|STRICT_92
 case|:
 case|case
@@ -168,6 +189,9 @@ block|{
 case|case
 name|ORACLE_10
 case|:
+case|case
+name|ORACLE_12
+case|:
 return|return
 literal|true
 return|;
@@ -191,6 +215,34 @@ condition|)
 block|{
 case|case
 name|ORACLE_10
+case|:
+case|case
+name|ORACLE_12
+case|:
+return|return
+literal|true
+return|;
+default|default:
+return|return
+literal|false
+return|;
+block|}
+block|}
+specifier|public
+name|boolean
+name|isApplyAllowed
+parameter_list|()
+block|{
+switch|switch
+condition|(
+name|this
+condition|)
+block|{
+case|case
+name|SQL_SERVER_2008
+case|:
+case|case
+name|ORACLE_12
 case|:
 return|return
 literal|true

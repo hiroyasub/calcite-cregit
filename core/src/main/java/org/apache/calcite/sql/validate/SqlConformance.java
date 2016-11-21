@@ -138,12 +138,12 @@ name|SqlConformanceEnum
 operator|.
 name|PRAGMATIC_2003
 decl_stmt|;
-comment|/**    * Whether 'order by 2' is interpreted to mean 'sort by the 2nd column in    * the select list'.    *    *<p>Among the built-in conformance levels, true in    * {@link SqlConformanceEnum#DEFAULT},    * {@link SqlConformanceEnum#ORACLE_10},    * {@link SqlConformanceEnum#STRICT_92},    * {@link SqlConformanceEnum#PRAGMATIC_99},    * {@link SqlConformanceEnum#PRAGMATIC_2003};    * false otherwise.    */
+comment|/**    * Whether 'order by 2' is interpreted to mean 'sort by the 2nd column in    * the select list'.    *    *<p>Among the built-in conformance levels, true in    * {@link SqlConformanceEnum#DEFAULT},    * {@link SqlConformanceEnum#ORACLE_10},    * {@link SqlConformanceEnum#ORACLE_12},    * {@link SqlConformanceEnum#STRICT_92},    * {@link SqlConformanceEnum#PRAGMATIC_99},    * {@link SqlConformanceEnum#PRAGMATIC_2003};    * {@link SqlConformanceEnum#SQL_SERVER_2008};    * false otherwise.    */
 name|boolean
 name|isSortByOrdinal
 parameter_list|()
 function_decl|;
-comment|/**    * Whether 'order by x' is interpreted to mean 'sort by the select list item    * whose alias is x' even if there is a column called x.    *    *<p>Among the built-in conformance levels, true in    * {@link SqlConformanceEnum#DEFAULT},    * {@link SqlConformanceEnum#ORACLE_10},    * {@link SqlConformanceEnum#STRICT_92};    * false otherwise.    */
+comment|/**    * Whether 'order by x' is interpreted to mean 'sort by the select list item    * whose alias is x' even if there is a column called x.    *    *<p>Among the built-in conformance levels, true in    * {@link SqlConformanceEnum#DEFAULT},    * {@link SqlConformanceEnum#ORACLE_10},    * {@link SqlConformanceEnum#ORACLE_12},    * {@link SqlConformanceEnum#STRICT_92};    * {@link SqlConformanceEnum#SQL_SERVER_2008};    * false otherwise.    */
 name|boolean
 name|isSortByAlias
 parameter_list|()
@@ -153,19 +153,24 @@ name|boolean
 name|isSortByAliasObscures
 parameter_list|()
 function_decl|;
-comment|/**    * Whether FROM clause is required in a SELECT statement.    *    *<p>Among the built-in conformance levels, true in    * {@link SqlConformanceEnum#ORACLE_10},    * {@link SqlConformanceEnum#STRICT_92},    * {@link SqlConformanceEnum#STRICT_99},    * {@link SqlConformanceEnum#STRICT_2003};    * false otherwise.    */
+comment|/**    * Whether FROM clause is required in a SELECT statement.    *    *<p>Among the built-in conformance levels, true in    * {@link SqlConformanceEnum#ORACLE_10},    * {@link SqlConformanceEnum#ORACLE_12},    * {@link SqlConformanceEnum#STRICT_92},    * {@link SqlConformanceEnum#STRICT_99},    * {@link SqlConformanceEnum#STRICT_2003};    * false otherwise.    */
 name|boolean
 name|isFromRequired
 parameter_list|()
 function_decl|;
-comment|/**    * Whether the bang-equal token != is allowed as an alternative to&lt;&gt; in    * the parser.    *    *<p>Among the built-in conformance levels, true in    * {@link SqlConformanceEnum#ORACLE_10};    * false otherwise.    */
+comment|/**    * Whether the bang-equal token != is allowed as an alternative to&lt;&gt; in    * the parser.    *    *<p>Among the built-in conformance levels, true in    * {@link SqlConformanceEnum#ORACLE_10};    * {@link SqlConformanceEnum#ORACLE_12};    * false otherwise.    */
 name|boolean
 name|isBangEqualAllowed
 parameter_list|()
 function_decl|;
-comment|/**    * Whether {@code MINUS} is allowed as an alternative to {@code EXCEPT} in    * the parser.    *    *<p>Among the built-in conformance levels, true in    * {@link SqlConformanceEnum#ORACLE_10};    * false otherwise.    */
+comment|/**    * Whether {@code MINUS} is allowed as an alternative to {@code EXCEPT} in    * the parser.    *    *<p>Among the built-in conformance levels, true in    * {@link SqlConformanceEnum#ORACLE_10};    * {@link SqlConformanceEnum#ORACLE_12};    * false otherwise.    */
 name|boolean
 name|isMinusAllowed
+parameter_list|()
+function_decl|;
+comment|/**    * Whether {@code CROSS APPLY} and {@code OUTER APPLY} operators are allowed    * in the parser.    *    *<p>{@code APPLY} invokes a table-valued function for each row returned    * by a table expression. It is syntactic sugar:<ul>    *    *<li>{@code SELECT * FROM emp CROSS APPLY TABLE(promote(empno)}<br>    * is equivalent to<br>    * {@code SELECT * FROM emp CROSS JOIN LATERAL TABLE(promote(empno)}    *    *<li>{@code SELECT * FROM emp OUTER APPLY TABLE(promote(empno)}<br>    * is equivalent to<br>    * {@code SELECT * FROM emp LEFT JOIN LATERAL TABLE(promote(empno)} ON true    *</ul>    *    *<p>Among the built-in conformance levels, true in    * {@link SqlConformanceEnum#SQL_SERVER_2008};    * {@link SqlConformanceEnum#ORACLE_12};    * false otherwise.    */
+name|boolean
+name|isApplyAllowed
 parameter_list|()
 function_decl|;
 block|}

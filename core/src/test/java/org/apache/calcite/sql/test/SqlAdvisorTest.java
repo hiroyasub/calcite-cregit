@@ -954,6 +954,8 @@ literal|"KEYWORD(AS)"
 argument_list|,
 literal|"KEYWORD(USING)"
 argument_list|,
+literal|"KEYWORD(OUTER)"
+argument_list|,
 literal|"KEYWORD(RIGHT)"
 argument_list|,
 literal|"KEYWORD(GROUP)"

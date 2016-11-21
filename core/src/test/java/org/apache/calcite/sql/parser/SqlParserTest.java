@@ -8653,6 +8653,308 @@ literal|"(?s).*Encountered \"[)]\" at line 1, column 31.*"
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Tests CROSS APPLY, which is equivalent to CROSS JOIN and LEFT JOIN but    * only supported in some conformance levels (e.g. SQL Server). */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testApply
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|pattern
+init|=
+literal|"APPLY operator is not allowed under the current SQL conformance level"
+decl_stmt|;
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select * from dept\n"
+operator|+
+literal|"cross apply table(ramp(deptno)) as t(a)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+name|pattern
+argument_list|)
+expr_stmt|;
+name|conformance
+operator|=
+name|SqlConformanceEnum
+operator|.
+name|SQL_SERVER_2008
+expr_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM `DEPT`\n"
+operator|+
+literal|"CROSS JOIN LATERAL TABLE(`RAMP`(`DEPTNO`)) AS `T` (`A`)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+comment|// Supported in Oracle 12 but not Oracle 10
+name|conformance
+operator|=
+name|SqlConformanceEnum
+operator|.
+name|ORACLE_10
+expr_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+name|pattern
+argument_list|)
+expr_stmt|;
+name|conformance
+operator|=
+name|SqlConformanceEnum
+operator|.
+name|ORACLE_12
+expr_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Tests OUTER APPLY. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testOuterApply
+parameter_list|()
+block|{
+name|conformance
+operator|=
+name|SqlConformanceEnum
+operator|.
+name|SQL_SERVER_2008
+expr_stmt|;
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select * from dept outer apply table(ramp(deptno))"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM `DEPT`\n"
+operator|+
+literal|"LEFT JOIN LATERAL TABLE(`RAMP`(`DEPTNO`)) ON TRUE"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testOuterApplySubQuery
+parameter_list|()
+block|{
+name|conformance
+operator|=
+name|SqlConformanceEnum
+operator|.
+name|SQL_SERVER_2008
+expr_stmt|;
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select * from dept\n"
+operator|+
+literal|"outer apply (select * from emp where emp.deptno = dept.deptno)"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM `DEPT`\n"
+operator|+
+literal|"LEFT JOIN LATERAL((SELECT *\n"
+operator|+
+literal|"FROM `EMP`\n"
+operator|+
+literal|"WHERE (`EMP`.`DEPTNO` = `DEPT`.`DEPTNO`))) ON TRUE"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testOuterApplyValues
+parameter_list|()
+block|{
+name|conformance
+operator|=
+name|SqlConformanceEnum
+operator|.
+name|SQL_SERVER_2008
+expr_stmt|;
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select * from dept\n"
+operator|+
+literal|"outer apply (select * from emp where emp.deptno = dept.deptno)"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM `DEPT`\n"
+operator|+
+literal|"LEFT JOIN LATERAL((SELECT *\n"
+operator|+
+literal|"FROM `EMP`\n"
+operator|+
+literal|"WHERE (`EMP`.`DEPTNO` = `DEPT`.`DEPTNO`))) ON TRUE"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Even in SQL Server conformance mode, we do not yet support    * 'function(args)' as an abbreviation for 'table(function(args)'. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testOuterApplyFunctionFails
+parameter_list|()
+block|{
+name|conformance
+operator|=
+name|SqlConformanceEnum
+operator|.
+name|SQL_SERVER_2008
+expr_stmt|;
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select * from dept outer apply ramp(deptno^)^)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"(?s).*Encountered \"\\)\" at .*"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testCrossOuterApply
+parameter_list|()
+block|{
+name|conformance
+operator|=
+name|SqlConformanceEnum
+operator|.
+name|SQL_SERVER_2008
+expr_stmt|;
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select * from dept\n"
+operator|+
+literal|"cross apply table(ramp(deptno)) as t(a)\n"
+operator|+
+literal|"outer apply table(ramp2(a))"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM `DEPT`\n"
+operator|+
+literal|"CROSS JOIN LATERAL TABLE(`RAMP`(`DEPTNO`)) AS `T` (`A`)\n"
+operator|+
+literal|"LEFT JOIN LATERAL TABLE(`RAMP2`(`A`)) ON TRUE"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
 annotation|@
 name|Test
 specifier|public
