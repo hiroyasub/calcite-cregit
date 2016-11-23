@@ -3436,7 +3436,13 @@ comment|// Check if the input is already sorted
 name|boolean
 name|alreadySorted
 init|=
-literal|false
+name|collation
+operator|.
+name|getFieldCollations
+argument_list|()
+operator|.
+name|isEmpty
+argument_list|()
 decl_stmt|;
 for|for
 control|(
