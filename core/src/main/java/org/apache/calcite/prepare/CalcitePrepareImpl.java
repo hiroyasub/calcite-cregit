@@ -1673,6 +1673,20 @@ name|calcite
 operator|.
 name|sql2rel
 operator|.
+name|SqlRexConvertletTable
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql2rel
+operator|.
 name|SqlToRelConverter
 import|;
 end_import
@@ -2651,6 +2665,9 @@ argument_list|,
 name|planner
 argument_list|,
 name|resultConvention
+argument_list|,
+name|createConvertletTable
+argument_list|()
 argument_list|)
 decl_stmt|;
 specifier|final
@@ -3516,6 +3533,18 @@ name|SqlParser
 operator|.
 name|configBuilder
 argument_list|()
+return|;
+block|}
+comment|/** Factory method for default convertlet table. */
+specifier|protected
+name|SqlRexConvertletTable
+name|createConvertletTable
+parameter_list|()
+block|{
+return|return
+name|StandardConvertletTable
+operator|.
+name|INSTANCE
 return|;
 block|}
 comment|/** Factory method for cluster. */
@@ -4661,6 +4690,9 @@ argument_list|,
 name|planner
 argument_list|,
 name|resultConvention
+argument_list|,
+name|createConvertletTable
+argument_list|()
 argument_list|)
 decl_stmt|;
 specifier|final
@@ -6219,6 +6251,9 @@ argument_list|,
 name|schema
 argument_list|,
 name|planner
+argument_list|,
+name|createConvertletTable
+argument_list|()
 argument_list|)
 decl_stmt|;
 name|materializer
@@ -6498,6 +6533,11 @@ specifier|final
 name|RelDataTypeFactory
 name|typeFactory
 decl_stmt|;
+specifier|protected
+specifier|final
+name|SqlRexConvertletTable
+name|convertletTable
+decl_stmt|;
 specifier|private
 specifier|final
 name|EnumerableRel
@@ -6556,6 +6596,9 @@ name|planner
 parameter_list|,
 name|Convention
 name|resultConvention
+parameter_list|,
+name|SqlRexConvertletTable
+name|convertletTable
 parameter_list|)
 block|{
 name|super
@@ -6596,6 +6639,12 @@ operator|.
 name|typeFactory
 operator|=
 name|typeFactory
+expr_stmt|;
+name|this
+operator|.
+name|convertletTable
+operator|=
+name|convertletTable
 expr_stmt|;
 name|this
 operator|.
@@ -7025,9 +7074,7 @@ name|catalogReader
 argument_list|,
 name|cluster
 argument_list|,
-name|StandardConvertletTable
-operator|.
-name|INSTANCE
+name|convertletTable
 argument_list|,
 name|config
 argument_list|)
