@@ -1387,6 +1387,395 @@ name|close
 argument_list|()
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1506">[CALCITE-1506]    * Push OVER Clause to underlying SQL via JDBC adapter</a>.    *    *<p>Test runs only on Postgres; the default database, Hsqldb, does not    * support OVER. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testOverDefault
+parameter_list|()
+block|{
+name|CalciteAssert
+operator|.
+name|model
+argument_list|(
+name|JdbcTest
+operator|.
+name|FOODMART_MODEL
+argument_list|)
+operator|.
+name|enable
+argument_list|(
+name|CalciteAssert
+operator|.
+name|DB
+operator|==
+name|CalciteAssert
+operator|.
+name|DatabaseInstance
+operator|.
+name|POSTGRESQL
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select \"store_id\", \"account_id\", \"exp_date\","
+operator|+
+literal|" \"time_id\", \"category_id\", \"currency_id\", \"amount\","
+operator|+
+literal|" last_value(\"time_id\") over ()"
+operator|+
+literal|" as \"last_version\" from \"expense_fact\""
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+literal|"PLAN=JdbcToEnumerableConverter\n"
+operator|+
+literal|"  JdbcProject(store_id=[$0], account_id=[$1], exp_date=[$2], "
+operator|+
+literal|"time_id=[$3], category_id=[$4], currency_id=[$5], amount=[$6],"
+operator|+
+literal|" last_version=[LAST_VALUE($3) OVER (RANGE BETWEEN UNBOUNDED"
+operator|+
+literal|" PRECEDING AND UNBOUNDED FOLLOWING)])\n"
+operator|+
+literal|"    JdbcTableScan(table=[[foodmart, expense_fact]])\n"
+argument_list|)
+operator|.
+name|runs
+argument_list|()
+operator|.
+name|planHasSql
+argument_list|(
+literal|"SELECT \"store_id\", \"account_id\", \"exp_date\","
+operator|+
+literal|" \"time_id\", \"category_id\", \"currency_id\", \"amount\","
+operator|+
+literal|" LAST_VALUE(\"time_id\") OVER (RANGE BETWEEN UNBOUNDED"
+operator|+
+literal|" PRECEDING AND UNBOUNDED FOLLOWING) AS \"last_version\"\n"
+operator|+
+literal|"FROM \"foodmart\".\"expense_fact\""
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testOverRowsBetweenBoundFollowingAndFollowing
+parameter_list|()
+block|{
+name|CalciteAssert
+operator|.
+name|model
+argument_list|(
+name|JdbcTest
+operator|.
+name|FOODMART_MODEL
+argument_list|)
+operator|.
+name|enable
+argument_list|(
+name|CalciteAssert
+operator|.
+name|DB
+operator|==
+name|CalciteAssert
+operator|.
+name|DatabaseInstance
+operator|.
+name|POSTGRESQL
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select \"store_id\", \"account_id\", \"exp_date\","
+operator|+
+literal|" \"time_id\", \"category_id\", \"currency_id\", \"amount\","
+operator|+
+literal|" last_value(\"time_id\") over (partition by \"account_id\""
+operator|+
+literal|" order by \"time_id\" rows between 1 following and 10 following)"
+operator|+
+literal|" as \"last_version\" from \"expense_fact\""
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+literal|"PLAN=JdbcToEnumerableConverter\n"
+operator|+
+literal|"  JdbcProject(store_id=[$0], account_id=[$1], exp_date=[$2], "
+operator|+
+literal|"time_id=[$3], category_id=[$4], currency_id=[$5], amount=[$6],"
+operator|+
+literal|" last_version=[LAST_VALUE($3) OVER (PARTITION BY $1"
+operator|+
+literal|" ORDER BY $3 ROWS BETWEEN 1 FOLLOWING AND 10 FOLLOWING)])\n"
+operator|+
+literal|"    JdbcTableScan(table=[[foodmart, expense_fact]])\n"
+argument_list|)
+operator|.
+name|runs
+argument_list|()
+operator|.
+name|planHasSql
+argument_list|(
+literal|"SELECT \"store_id\", \"account_id\", \"exp_date\","
+operator|+
+literal|" \"time_id\", \"category_id\", \"currency_id\", \"amount\","
+operator|+
+literal|" LAST_VALUE(\"time_id\") OVER (PARTITION BY \"account_id\""
+operator|+
+literal|" ORDER BY \"time_id\" ROWS BETWEEN 1 FOLLOWING"
+operator|+
+literal|" AND 10 FOLLOWING) AS \"last_version\"\n"
+operator|+
+literal|"FROM \"foodmart\".\"expense_fact\""
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testOverRowsBetweenBoundPrecedingAndCurrent
+parameter_list|()
+block|{
+name|CalciteAssert
+operator|.
+name|model
+argument_list|(
+name|JdbcTest
+operator|.
+name|FOODMART_MODEL
+argument_list|)
+operator|.
+name|enable
+argument_list|(
+name|CalciteAssert
+operator|.
+name|DB
+operator|==
+name|CalciteAssert
+operator|.
+name|DatabaseInstance
+operator|.
+name|POSTGRESQL
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select \"store_id\", \"account_id\", \"exp_date\","
+operator|+
+literal|" \"time_id\", \"category_id\", \"currency_id\", \"amount\","
+operator|+
+literal|" last_value(\"time_id\") over (partition by \"account_id\""
+operator|+
+literal|" order by \"time_id\" rows between 3 preceding and current row)"
+operator|+
+literal|" as \"last_version\" from \"expense_fact\""
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+literal|"PLAN=JdbcToEnumerableConverter\n"
+operator|+
+literal|"  JdbcProject(store_id=[$0], account_id=[$1], exp_date=[$2], "
+operator|+
+literal|"time_id=[$3], category_id=[$4], currency_id=[$5], amount=[$6],"
+operator|+
+literal|" last_version=[LAST_VALUE($3) OVER (PARTITION BY $1"
+operator|+
+literal|" ORDER BY $3 ROWS BETWEEN 3 PRECEDING AND CURRENT ROW)])\n"
+operator|+
+literal|"    JdbcTableScan(table=[[foodmart, expense_fact]])\n"
+argument_list|)
+operator|.
+name|runs
+argument_list|()
+operator|.
+name|planHasSql
+argument_list|(
+literal|"SELECT \"store_id\", \"account_id\", \"exp_date\","
+operator|+
+literal|" \"time_id\", \"category_id\", \"currency_id\", \"amount\","
+operator|+
+literal|" LAST_VALUE(\"time_id\") OVER (PARTITION BY \"account_id\""
+operator|+
+literal|" ORDER BY \"time_id\" ROWS BETWEEN 3 PRECEDING"
+operator|+
+literal|" AND CURRENT ROW) AS \"last_version\"\n"
+operator|+
+literal|"FROM \"foodmart\".\"expense_fact\""
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testOverDisallowPartial
+parameter_list|()
+block|{
+name|CalciteAssert
+operator|.
+name|model
+argument_list|(
+name|JdbcTest
+operator|.
+name|FOODMART_MODEL
+argument_list|)
+operator|.
+name|enable
+argument_list|(
+name|CalciteAssert
+operator|.
+name|DB
+operator|==
+name|CalciteAssert
+operator|.
+name|DatabaseInstance
+operator|.
+name|POSTGRESQL
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select \"store_id\", \"account_id\", \"exp_date\","
+operator|+
+literal|" \"time_id\", \"category_id\", \"currency_id\", \"amount\","
+operator|+
+literal|" last_value(\"time_id\") over (partition by \"account_id\""
+operator|+
+literal|" order by \"time_id\" rows 3 preceding disallow partial)"
+operator|+
+literal|" as \"last_version\" from \"expense_fact\""
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+literal|"PLAN=JdbcToEnumerableConverter\n"
+operator|+
+literal|"  JdbcProject(store_id=[$0], account_id=[$1], exp_date=[$2],"
+operator|+
+literal|" time_id=[$3], category_id=[$4], currency_id=[$5],"
+operator|+
+literal|" amount=[$6], last_version=[CASE(>=(COUNT() OVER"
+operator|+
+literal|" (PARTITION BY $1 ORDER BY $3 ROWS BETWEEN 3 PRECEDING AND"
+operator|+
+literal|" CURRENT ROW), 2), LAST_VALUE($3) OVER (PARTITION BY $1"
+operator|+
+literal|" ORDER BY $3 ROWS BETWEEN 3 PRECEDING AND CURRENT ROW),"
+operator|+
+literal|" null)])\n    JdbcTableScan(table=[[foodmart,"
+operator|+
+literal|" expense_fact]])\n"
+argument_list|)
+operator|.
+name|runs
+argument_list|()
+operator|.
+name|planHasSql
+argument_list|(
+literal|"SELECT \"store_id\", \"account_id\", \"exp_date\","
+operator|+
+literal|" \"time_id\", \"category_id\", \"currency_id\", \"amount\","
+operator|+
+literal|" CASE WHEN (COUNT(*) OVER (PARTITION BY \"account_id\""
+operator|+
+literal|" ORDER BY \"time_id\" ROWS BETWEEN 3 PRECEDING"
+operator|+
+literal|" AND CURRENT ROW))>= 2 THEN LAST_VALUE(\"time_id\")"
+operator|+
+literal|" OVER (PARTITION BY \"account_id\" ORDER BY \"time_id\""
+operator|+
+literal|" ROWS BETWEEN 3 PRECEDING AND CURRENT ROW)"
+operator|+
+literal|" ELSE NULL END AS \"last_version\"\n"
+operator|+
+literal|"FROM \"foodmart\".\"expense_fact\""
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testLastValueOver
+parameter_list|()
+block|{
+name|CalciteAssert
+operator|.
+name|model
+argument_list|(
+name|JdbcTest
+operator|.
+name|FOODMART_MODEL
+argument_list|)
+operator|.
+name|enable
+argument_list|(
+name|CalciteAssert
+operator|.
+name|DB
+operator|==
+name|CalciteAssert
+operator|.
+name|DatabaseInstance
+operator|.
+name|POSTGRESQL
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select \"store_id\", \"account_id\", \"exp_date\","
+operator|+
+literal|" \"time_id\", \"category_id\", \"currency_id\", \"amount\","
+operator|+
+literal|" last_value(\"time_id\") over (partition by \"account_id\""
+operator|+
+literal|" order by \"time_id\") as \"last_version\""
+operator|+
+literal|" from \"expense_fact\""
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+literal|"PLAN=JdbcToEnumerableConverter\n"
+operator|+
+literal|"  JdbcProject(store_id=[$0], account_id=[$1], exp_date=[$2],"
+operator|+
+literal|" time_id=[$3], category_id=[$4], currency_id=[$5], amount=[$6],"
+operator|+
+literal|" last_version=[LAST_VALUE($3) OVER (PARTITION BY $1 ORDER BY $3"
+operator|+
+literal|" RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW)])\n"
+operator|+
+literal|"    JdbcTableScan(table=[[foodmart, expense_fact]])\n"
+argument_list|)
+operator|.
+name|runs
+argument_list|()
+operator|.
+name|planHasSql
+argument_list|(
+literal|"SELECT \"store_id\", \"account_id\", \"exp_date\","
+operator|+
+literal|" \"time_id\", \"category_id\", \"currency_id\", \"amount\","
+operator|+
+literal|" LAST_VALUE(\"time_id\") OVER (PARTITION BY \"account_id\""
+operator|+
+literal|" ORDER BY \"time_id\" RANGE BETWEEN UNBOUNDED PRECEDING AND"
+operator|+
+literal|" CURRENT ROW) AS \"last_version\""
+operator|+
+literal|"\nFROM \"foodmart\".\"expense_fact\""
+argument_list|)
+expr_stmt|;
+block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-259">[CALCITE-259]    * Using sub-queries in CASE statement against JDBC tables generates invalid    * Oracle SQL</a>. */
 annotation|@
 name|Test
