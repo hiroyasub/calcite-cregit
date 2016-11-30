@@ -6600,7 +6600,7 @@ argument_list|,
 literal|"VALUES (ROW((`A` SIMILAR TO (`B` LIKE (`C` SIMILAR TO `D` ESCAPE `E`) ESCAPE `F`))))"
 argument_list|)
 expr_stmt|;
-comment|// SIMILAR TO with subquery
+comment|// SIMILAR TO with sub-query
 name|check
 argument_list|(
 literal|"values a similar to (select * from t where a like b escape c) escape d"
@@ -7501,7 +7501,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testWithNestedInSubquery
+name|testWithNestedInSubQuery
 parameter_list|()
 block|{
 comment|// SQL standard does not allow sub-query to contain WITH but we do
@@ -8438,7 +8438,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testSubqueryInJoin
+name|testSubQueryInJoin
 parameter_list|()
 block|{
 if|if
@@ -12604,7 +12604,7 @@ argument_list|,
 literal|"(CASE WHEN (`COL1` = 1.2) THEN 'one' WHEN (`COL1` = 2) THEN 'two' ELSE 'three' END)"
 argument_list|)
 expr_stmt|;
-comment|// subqueries as case expression operands
+comment|// sub-queries as case expression operands
 name|checkExp
 argument_list|(
 literal|"case (select * from emp) when 1 then 2 end"
@@ -13402,7 +13402,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testWindowInSubquery
+name|testWindowInSubQuery
 parameter_list|()
 block|{
 name|check
@@ -13486,7 +13486,7 @@ argument_list|,
 literal|"(?s).*Encountered \"partition\".*"
 argument_list|)
 expr_stmt|;
-comment|// Cannot partition by subquery
+comment|// Cannot partition by sub-query
 name|checkFails
 argument_list|(
 literal|"select sum(a) over (partition by ^(^select 1 from t), x) from t2"

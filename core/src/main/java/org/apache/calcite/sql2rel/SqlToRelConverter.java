@@ -2502,9 +2502,20 @@ specifier|public
 specifier|static
 specifier|final
 name|int
-name|DEFAULT_IN_SUBQUERY_THRESHOLD
+name|DEFAULT_IN_SUB_QUERY_THRESHOLD
 init|=
 literal|20
+decl_stmt|;
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
+specifier|public
+specifier|static
+specifier|final
+name|int
+name|DEFAULT_IN_SUBQUERY_THRESHOLD
+init|=
+name|DEFAULT_IN_SUB_QUERY_THRESHOLD
 decl_stmt|;
 comment|//~ Instance fields --------------------------------------------------------
 specifier|protected
@@ -2534,8 +2545,8 @@ name|DefaultValueFactory
 name|defaultValueFactory
 decl_stmt|;
 specifier|private
-name|SubqueryConverter
-name|subqueryConverter
+name|SubQueryConverter
+name|subQueryConverter
 decl_stmt|;
 specifier|protected
 specifier|final
@@ -2589,7 +2600,7 @@ operator|.
 name|Config
 name|config
 decl_stmt|;
-comment|/**    * Fields used in name resolution for correlated subqueries.    */
+comment|/**    * Fields used in name resolution for correlated sub-queries.    */
 specifier|private
 specifier|final
 name|Map
@@ -2619,7 +2630,7 @@ name|ArrayDeque
 argument_list|<>
 argument_list|()
 decl_stmt|;
-comment|/**    * Mapping of non-correlated subqueries that have been converted to their    * equivalent constants. Used to avoid re-evaluating the subquery if it's    * already been evaluated.    */
+comment|/**    * Mapping of non-correlated sub-queries that have been converted to their    * equivalent constants. Used to avoid re-evaluating the sub-query if it's    * already been evaluated.    */
 specifier|private
 specifier|final
 name|Map
@@ -2817,10 +2828,10 @@ argument_list|()
 expr_stmt|;
 name|this
 operator|.
-name|subqueryConverter
+name|subQueryConverter
 operator|=
 operator|new
-name|NoOpSubqueryConverter
+name|NoOpSubQueryConverter
 argument_list|()
 expr_stmt|;
 name|this
@@ -2990,7 +3001,7 @@ return|return
 name|retVal
 return|;
 block|}
-comment|/**    * @return mapping of non-correlated subqueries that have been converted to    * the constants that they evaluate to    */
+comment|/**    * @return mapping of non-correlated sub-queries that have been converted to    * the constants that they evaluate to    */
 specifier|public
 name|Map
 argument_list|<
@@ -3005,7 +3016,7 @@ return|return
 name|mapConvertedNonCorrSubqs
 return|;
 block|}
-comment|/**    * Adds to the current map of non-correlated converted subqueries the    * elements from another map that contains non-correlated subqueries that    * have been converted by another SqlToRelConverter.    *    * @param alreadyConvertedNonCorrSubqs the other map    */
+comment|/**    * Adds to the current map of non-correlated converted sub-queries the    * elements from another map that contains non-correlated sub-queries that    * have been converted by another SqlToRelConverter.    *    * @param alreadyConvertedNonCorrSubqs the other map    */
 specifier|public
 name|void
 name|addConvertedNonCorrSubqs
@@ -3041,16 +3052,16 @@ operator|=
 name|factory
 expr_stmt|;
 block|}
-comment|/**    * Sets a new SubqueryConverter. To have any effect, this must be called    * before any convert method.    *    * @param converter new SubqueryConverter    */
+comment|/**    * Sets a new SubQueryConverter. To have any effect, this must be called    * before any convert method.    *    * @param converter new SubQueryConverter    */
 specifier|public
 name|void
-name|setSubqueryConverter
+name|setSubQueryConverter
 parameter_list|(
-name|SubqueryConverter
+name|SubQueryConverter
 name|converter
 parameter_list|)
 block|{
-name|subqueryConverter
+name|subQueryConverter
 operator|=
 name|converter
 expr_stmt|;
@@ -3288,7 +3299,7 @@ name|rootRel
 argument_list|)
 return|;
 block|}
-comment|/**    * If subquery is correlated and decorrelation is enabled, performs    * decorrelation.    *    * @param query   Query    * @param rootRel Root relational expression    * @return New root relational expression after decorrelation    */
+comment|/**    * If sub-query is correlated and decorrelation is enabled, performs    * decorrelation.    *    * @param query   Query    * @param rootRel Root relational expression    * @return New root relational expression after decorrelation    */
 specifier|public
 name|RelNode
 name|decorrelate
@@ -5802,7 +5813,7 @@ name|Logic
 name|logic
 parameter_list|)
 block|{
-name|findSubqueries
+name|findSubQueries
 argument_list|(
 name|bb
 argument_list|,
@@ -6109,7 +6120,7 @@ argument_list|()
 operator|<
 name|config
 operator|.
-name|getInSubqueryThreshold
+name|getInSubQueryThreshold
 argument_list|()
 condition|)
 block|{
@@ -6184,7 +6195,7 @@ name|query
 argument_list|,
 name|RelOptUtil
 operator|.
-name|SubqueryType
+name|SubQueryType
 operator|.
 name|IN
 argument_list|,
@@ -6481,13 +6492,13 @@ name|EXISTS
 case|:
 comment|// "select from emp where exists (select a from T)"
 comment|//
-comment|// is converted to the following if the subquery is correlated:
+comment|// is converted to the following if the sub-query is correlated:
 comment|//
 comment|// "select from emp left outer join (select AGG_TRUE() as indicator
 comment|// from T group by corr_var) q where q.indicator is true"
 comment|//
 comment|// If there is no correlation, the expression is replaced with a
-comment|// boolean indicating whether the subquery returned 0 or>= 1 row.
+comment|// boolean indicating whether the sub-query returned 0 or>= 1 row.
 name|call
 operator|=
 operator|(
@@ -6525,7 +6536,7 @@ name|query
 argument_list|,
 name|RelOptUtil
 operator|.
-name|SubqueryType
+name|SubQueryType
 operator|.
 name|EXISTS
 argument_list|,
@@ -6583,7 +6594,7 @@ return|return;
 case|case
 name|SCALAR_QUERY
 case|:
-comment|// Convert the subquery.  If it's non-correlated, convert it
+comment|// Convert the sub-query.  If it's non-correlated, convert it
 comment|// to a constant expression.
 if|if
 condition|(
@@ -6622,7 +6633,7 @@ name|query
 argument_list|,
 name|RelOptUtil
 operator|.
-name|SubqueryType
+name|SubQueryType
 operator|.
 name|SCALAR
 argument_list|,
@@ -6703,7 +6714,7 @@ name|node
 argument_list|,
 name|RelOptUtil
 operator|.
-name|SubqueryType
+name|SubQueryType
 operator|.
 name|SCALAR
 argument_list|,
@@ -6746,7 +6757,7 @@ name|Util
 operator|.
 name|newInternal
 argument_list|(
-literal|"unexpected kind of subquery :"
+literal|"unexpected kind of sub-query :"
 operator|+
 name|subQuery
 operator|.
@@ -6842,7 +6853,7 @@ comment|// Then append the IS NOT NULL(leftKeysForIn).
 comment|//
 comment|// RexRangeRef contains the following fields:
 comment|//   leftKeysForIn,
-comment|//   rightKeysForIn (the original subquery select list),
+comment|//   rightKeysForIn (the original sub-query select list),
 comment|//   nullIndicator
 comment|//
 comment|// The first two lists contain the same number of fields.
@@ -7288,7 +7299,7 @@ return|return
 literal|false
 return|;
 block|}
-comment|/**    * Determines if a subquery is non-correlated and if so, converts it to a    * constant.    *    * @param subQuery  the call that references the subquery    * @param bb        blackboard used to convert the subquery    * @param converted RelNode tree corresponding to the subquery    * @param isExists  true if the subquery is part of an EXISTS expression    * @return if the subquery can be converted to a constant    */
+comment|/**    * Determines if a sub-query is non-correlated and if so, converts it to a    * constant.    *    * @param subQuery  the call that references the sub-query    * @param bb        blackboard used to convert the sub-query    * @param converted RelNode tree corresponding to the sub-query    * @param isExists  true if the sub-query is part of an EXISTS expression    * @return Whether the sub-query can be converted to a constant    */
 specifier|private
 name|boolean
 name|convertNonCorrelatedSubQuery
@@ -7318,9 +7329,9 @@ name|node
 decl_stmt|;
 if|if
 condition|(
-name|subqueryConverter
+name|subQueryConverter
 operator|.
-name|canConvertSubquery
+name|canConvertSubQuery
 argument_list|()
 operator|&&
 name|isSubQueryNonCorrelated
@@ -7331,8 +7342,8 @@ name|bb
 argument_list|)
 condition|)
 block|{
-comment|// First check if the subquery has already been converted
-comment|// because it's a nested subquery.  If so, don't re-evaluate
+comment|// First check if the sub-query has already been converted
+comment|// because it's a nested sub-query.  If so, don't re-evaluate
 comment|// it again.
 name|RexNode
 name|constExpr
@@ -7353,9 +7364,9 @@ condition|)
 block|{
 name|constExpr
 operator|=
-name|subqueryConverter
+name|subQueryConverter
 operator|.
-name|convertSubquery
+name|convertSubQuery
 argument_list|(
 name|call
 argument_list|,
@@ -7962,7 +7973,7 @@ literal|true
 argument_list|)
 return|;
 block|}
-comment|/**    * Gets the list size threshold under which {@link #convertInToOr} is used.    * Lists of this size or greater will instead be converted to use a join    * against an inline table    * ({@link org.apache.calcite.rel.logical.LogicalValues}) rather than a    * predicate. A threshold of 0 forces usage of an inline table in all cases; a    * threshold of Integer.MAX_VALUE forces usage of OR in all cases    *    * @return threshold, default {@link #DEFAULT_IN_SUBQUERY_THRESHOLD}    */
+comment|/**    * Gets the list size threshold under which {@link #convertInToOr} is used.    * Lists of this size or greater will instead be converted to use a join    * against an inline table    * ({@link org.apache.calcite.rel.logical.LogicalValues}) rather than a    * predicate. A threshold of 0 forces usage of an inline table in all cases; a    * threshold of Integer.MAX_VALUE forces usage of OR in all cases    *    * @return threshold, default {@link #DEFAULT_IN_SUB_QUERY_THRESHOLD}    */
 annotation|@
 name|Deprecated
 comment|// to be removed before 2.0
@@ -7974,11 +7985,11 @@ block|{
 return|return
 name|config
 operator|.
-name|getInSubqueryThreshold
+name|getInSubQueryThreshold
 argument_list|()
 return|;
 block|}
-comment|/**    * Converts an EXISTS or IN predicate into a join. For EXISTS, the subquery    * produces an indicator variable, and the result is a relational expression    * which outer joins that indicator to the original query. After performing    * the outer join, the condition will be TRUE if the EXISTS condition holds,    * NULL otherwise.    *    * @param seek           A query, for example 'select * from emp' or    *                       'values (1,2,3)' or '('Foo', 34)'.    * @param subqueryType   Whether sub-query is IN, EXISTS or scalar    * @param logic Whether the answer needs to be in full 3-valued logic (TRUE,    *     FALSE, UNKNOWN) will be required, or whether we can accept an    *     approximation (say representing UNKNOWN as FALSE)    * @param notIn Whether the operation is NOT IN    * @return join expression    * @pre extraExpr == null || extraName != null    */
+comment|/**    * Converts an EXISTS or IN predicate into a join. For EXISTS, the sub-query    * produces an indicator variable, and the result is a relational expression    * which outer joins that indicator to the original query. After performing    * the outer join, the condition will be TRUE if the EXISTS condition holds,    * NULL otherwise.    *    * @param seek           A query, for example 'select * from emp' or    *                       'values (1,2,3)' or '('Foo', 34)'.    * @param subQueryType   Whether sub-query is IN, EXISTS or scalar    * @param logic Whether the answer needs to be in full 3-valued logic (TRUE,    *     FALSE, UNKNOWN) will be required, or whether we can accept an    *     approximation (say representing UNKNOWN as FALSE)    * @param notIn Whether the operation is NOT IN    * @return join expression    * @pre extraExpr == null || extraName != null    */
 specifier|private
 name|RelOptUtil
 operator|.
@@ -7990,8 +8001,8 @@ name|seek
 parameter_list|,
 name|RelOptUtil
 operator|.
-name|SubqueryType
-name|subqueryType
+name|SubQueryType
+name|subQueryType
 parameter_list|,
 name|RelOptUtil
 operator|.
@@ -8059,7 +8070,7 @@ name|createExistsPlan
 argument_list|(
 name|seekRel
 argument_list|,
-name|subqueryType
+name|subQueryType
 argument_list|,
 name|logic
 argument_list|,
@@ -8160,7 +8171,7 @@ block|{
 comment|// NOTE jvs 30-Apr-2006: We combine all rows consisting entirely of
 comment|// literals into a single LogicalValues; this gives the optimizer a smaller
 comment|// input tree.  For everything else (computed expressions, row
-comment|// subqueries), we union each row in as a projection on top of a
+comment|// sub-queries), we union each row in as a projection on top of a
 comment|// LogicalOneRow.
 specifier|final
 name|ImmutableList
@@ -8859,10 +8870,10 @@ literal|"row"
 argument_list|)
 return|;
 block|}
-comment|/**    * Builds a list of all<code>IN</code> or<code>EXISTS</code> operators    * inside SQL parse tree. Does not traverse inside queries.    *    * @param bb                           blackboard    * @param node                         the SQL parse tree    * @param logic Whether the answer needs to be in full 3-valued logic (TRUE,    *              FALSE, UNKNOWN) will be required, or whether we can accept    *              an approximation (say representing UNKNOWN as FALSE)    * @param registerOnlyScalarSubqueries if set to true and the parse tree    *                                     corresponds to a variation of a select    *                                     node, only register it if it's a scalar    *                                     subquery    */
+comment|/**    * Builds a list of all<code>IN</code> or<code>EXISTS</code> operators    * inside SQL parse tree. Does not traverse inside queries.    *    * @param bb                           blackboard    * @param node                         the SQL parse tree    * @param logic Whether the answer needs to be in full 3-valued logic (TRUE,    *              FALSE, UNKNOWN) will be required, or whether we can accept    *              an approximation (say representing UNKNOWN as FALSE)    * @param registerOnlyScalarSubQueries if set to true and the parse tree    *                                     corresponds to a variation of a select    *                                     node, only register it if it's a scalar    *                                     sub-query    */
 specifier|private
 name|void
-name|findSubqueries
+name|findSubQueries
 parameter_list|(
 name|Blackboard
 name|bb
@@ -8876,7 +8887,7 @@ name|Logic
 name|logic
 parameter_list|,
 name|boolean
-name|registerOnlyScalarSubqueries
+name|registerOnlyScalarSubQueries
 parameter_list|)
 block|{
 specifier|final
@@ -8917,7 +8928,7 @@ case|:
 if|if
 condition|(
 operator|!
-name|registerOnlyScalarSubqueries
+name|registerOnlyScalarSubQueries
 operator|||
 operator|(
 name|kind
@@ -9015,8 +9026,8 @@ literal|null
 condition|)
 block|{
 comment|// In the case of an IN expression, locate scalar
-comment|// subqueries so we can convert them to constants
-name|findSubqueries
+comment|// sub-queries so we can convert them to constants
+name|findSubQueries
 argument_list|(
 name|bb
 argument_list|,
@@ -9030,7 +9041,7 @@ name|SqlKind
 operator|.
 name|IN
 operator|||
-name|registerOnlyScalarSubqueries
+name|registerOnlyScalarSubQueries
 argument_list|)
 expr_stmt|;
 block|}
@@ -9054,7 +9065,7 @@ operator|)
 name|node
 control|)
 block|{
-name|findSubqueries
+name|findSubQueries
 argument_list|(
 name|bb
 argument_list|,
@@ -9068,14 +9079,14 @@ name|SqlKind
 operator|.
 name|IN
 operator|||
-name|registerOnlyScalarSubqueries
+name|registerOnlyScalarSubQueries
 argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|// Now that we've located any scalar subqueries inside the IN
+comment|// Now that we've located any scalar sub-queries inside the IN
 comment|// expression, register the IN expression itself.  We need to
-comment|// register the scalar subqueries first so they can be converted
+comment|// register the scalar sub-queries first so they can be converted
 comment|// before the IN expression is converted.
 if|if
 condition|(
@@ -11785,7 +11796,7 @@ operator|.
 name|root
 argument_list|)
 decl_stmt|;
-comment|// subquery can reference group by keys projected from
+comment|// sub-query can reference group by keys projected from
 comment|// the root of the outer relation.
 if|if
 condition|(
@@ -11918,7 +11929,7 @@ name|r
 argument_list|)
 return|;
 block|}
-comment|/**    * Determines whether a subquery is non-correlated. Note that a    * non-correlated subquery can contain correlated references, provided those    * references do not reference select statements that are parents of the    * subquery.    *    * @param subq the subquery    * @param bb   blackboard used while converting the subquery, i.e., the    *             blackboard of the parent query of this subquery    * @return true if the subquery is non-correlated.    */
+comment|/**    * Determines whether a sub-query is non-correlated. Note that a    * non-correlated sub-query can contain correlated references, provided those    * references do not reference select statements that are parents of the    * sub-query.    *    * @param subq the sub-query    * @param bb   blackboard used while converting the sub-query, i.e., the    *             blackboard of the parent query of this sub-query    * @return true if the sub-query is non-correlated    */
 specifier|private
 name|boolean
 name|isSubQueryNonCorrelated
@@ -12012,7 +12023,7 @@ operator|.
 name|scope
 decl_stmt|;
 comment|// If the correlated reference is in a scope that's "above" the
-comment|// subquery, then this is a correlated subquery.
+comment|// sub-query, then this is a correlated sub-query.
 name|SqlValidatorScope
 name|parentScope
 init|=
@@ -12618,7 +12629,7 @@ name|aggregateFinder
 argument_list|)
 expr_stmt|;
 block|}
-comment|// first replace the subqueries inside the aggregates
+comment|// first replace the sub-queries inside the aggregates
 comment|// because they will provide input rows to the aggregates.
 name|replaceSubQueries
 argument_list|(
@@ -13223,7 +13234,7 @@ operator|.
 name|groupExprProjection
 argument_list|)
 expr_stmt|;
-comment|// Replace subqueries in having here and modify having to use
+comment|// Replace sub-queries in having here and modify having to use
 comment|// the replaced expressions
 if|if
 condition|(
@@ -13276,8 +13287,8 @@ literal|null
 expr_stmt|;
 block|}
 block|}
-comment|// Now convert the other subqueries in the select list.
-comment|// This needs to be done separately from the subquery inside
+comment|// Now convert the other sub-queries in the select list.
+comment|// This needs to be done separately from the sub-query inside
 comment|// any aggregate in the select list, and after the aggregate rel
 comment|// is allocated.
 name|replaceSubQueries
@@ -13293,7 +13304,7 @@ operator|.
 name|TRUE_FALSE_UNKNOWN
 argument_list|)
 expr_stmt|;
-comment|// Now subqueries in the entire select list have been converted.
+comment|// Now sub-queries in the entire select list have been converted.
 comment|// Convert the select expressions to get the final list to be
 comment|// projected.
 name|int
@@ -14099,7 +14110,7 @@ name|boolean
 name|enableDecorrelation
 parameter_list|()
 block|{
-comment|// disable subquery decorrelation when needed.
+comment|// disable sub-query decorrelation when needed.
 comment|// e.g. if outer joins are not supported.
 return|return
 name|config
@@ -18021,7 +18032,7 @@ name|targetRowType
 parameter_list|)
 block|{
 comment|// Attempt direct conversion to LogicalValues; if that fails, deal with
-comment|// fancy stuff like subqueries below.
+comment|// fancy stuff like sub-queries below.
 name|RelNode
 name|valuesRel
 init|=
@@ -18393,7 +18404,7 @@ comment|/**      * When converting window aggregate, we need to know if the wind
 name|SqlWindow
 name|window
 decl_stmt|;
-comment|/**      * Project the groupby expressions out of the root of this sub-select.      * Subqueries can reference group by expressions projected from the      * "right" to the subquery.      */
+comment|/**      * Project the groupby expressions out of the root of this sub-select.      * Sub-queries can reference group by expressions projected from the      * "right" to the sub-query.      */
 specifier|private
 specifier|final
 name|Map
@@ -18996,7 +19007,7 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/**      * Sets a new root relational expression, as the translation process      * backs its way further up the tree.      *      * @param root New root relational expression      * @param leaf Whether the relational expression is a leaf, that is,      *             derived from an atomic relational expression such as a table      *             name in the from clause, or the projection on top of a      *             select-subquery. In particular, relational expressions      *             derived from JOIN operators are not leaves, but set      *             expressions are.      */
+comment|/**      * Sets a new root relational expression, as the translation process      * backs its way further up the tree.      *      * @param root New root relational expression      * @param leaf Whether the relational expression is a leaf, that is,      *             derived from an atomic relational expression such as a table      *             name in the from clause, or the projection on top of a      *             select-sub-query. In particular, relational expressions      *             derived from JOIN operators are not leaves, but set      *             expressions are.      */
 specifier|public
 name|void
 name|setRoot
@@ -20579,13 +20590,13 @@ name|rex
 argument_list|)
 condition|)
 block|{
-comment|// scalar subquery or EXISTS has been converted to a
+comment|// scalar sub-query or EXISTS has been converted to a
 comment|// constant
 return|return
 name|rex
 return|;
 block|}
-comment|// The indicator column is the last field of the subquery.
+comment|// The indicator column is the last field of the sub-query.
 name|RexNode
 name|fieldAccess
 init|=
@@ -20757,7 +20768,7 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/**      * Determines whether a RexNode corresponds to a subquery that's been      * converted to a constant.      *      * @param rex the expression to be examined      * @return true if the expression is a dynamic parameter, a literal, or      * a literal that is being cast      */
+comment|/**      * Determines whether a RexNode corresponds to a sub-query that's been      * converted to a constant.      *      * @param rex the expression to be examined      * @return true if the expression is a dynamic parameter, a literal, or      * a literal that is being cast      */
 specifier|private
 name|boolean
 name|isConvertedSubq
@@ -21310,16 +21321,16 @@ argument_list|()
 return|;
 block|}
 block|}
-comment|/**    * A default implementation of SubqueryConverter that does no conversion.    */
+comment|/**    * A default implementation of SubQueryConverter that does no conversion.    */
 specifier|private
 class|class
-name|NoOpSubqueryConverter
+name|NoOpSubQueryConverter
 implements|implements
-name|SubqueryConverter
+name|SubQueryConverter
 block|{
 specifier|public
 name|boolean
-name|canConvertSubquery
+name|canConvertSubQuery
 parameter_list|()
 block|{
 return|return
@@ -21328,10 +21339,10 @@ return|;
 block|}
 specifier|public
 name|RexNode
-name|convertSubquery
+name|convertSubQuery
 parameter_list|(
 name|SqlCall
-name|subquery
+name|subQuery
 parameter_list|,
 name|SqlToRelConverter
 name|parentConverter
@@ -21955,7 +21966,7 @@ case|case
 name|SELECT
 case|:
 comment|// rchen 2006-10-17:
-comment|// for now do not detect aggregates in subqueries.
+comment|// for now do not detect aggregates in sub-queries.
 return|return
 literal|null
 return|;
@@ -23064,7 +23075,7 @@ name|ArrayList
 argument_list|<>
 argument_list|()
 decl_stmt|;
-comment|/**      * Creates a LookupContext with multiple input relational expressions.      *      * @param bb               Context for translating this subquery      * @param rels             Relational expressions      * @param systemFieldCount Number of system fields      */
+comment|/**      * Creates a LookupContext with multiple input relational expressions.      *      * @param bb               Context for translating this sub-query      * @param rels             Relational expressions      * @param systemFieldCount Number of system fields      */
 name|LookupContext
 parameter_list|(
 name|Blackboard
@@ -23982,7 +23993,7 @@ name|boolean
 name|isConvertTableAccess
 parameter_list|()
 function_decl|;
-comment|/** Returns the {@code decorrelationEnabled} option. Controls whether to      * disable subquery decorrelation when needed. e.g. if outer joins are not      * supported. */
+comment|/** Returns the {@code decorrelationEnabled} option. Controls whether to      * disable sub-query decorrelation when needed. e.g. if outer joins are not      * supported. */
 name|boolean
 name|isDecorrelationEnabled
 parameter_list|()
@@ -24007,9 +24018,9 @@ name|boolean
 name|isExpand
 parameter_list|()
 function_decl|;
-comment|/** Returns the {@code inSubqueryThreshold} option,      * default {@link #DEFAULT_IN_SUBQUERY_THRESHOLD}. Controls the list size      * threshold under which {@link #convertInToOr} is used. Lists of this size      * or greater will instead be converted to use a join against an inline      * table ({@link org.apache.calcite.rel.logical.LogicalValues}) rather than      * a predicate. A threshold of 0 forces usage of an inline table in all      * cases; a threshold of {@link Integer#MAX_VALUE} forces usage of OR in all      * cases. */
+comment|/** Returns the {@code inSubQueryThreshold} option,      * default {@link #DEFAULT_IN_SUB_QUERY_THRESHOLD}. Controls the list size      * threshold under which {@link #convertInToOr} is used. Lists of this size      * or greater will instead be converted to use a join against an inline      * table ({@link org.apache.calcite.rel.logical.LogicalValues}) rather than      * a predicate. A threshold of 0 forces usage of an inline table in all      * cases; a threshold of {@link Integer#MAX_VALUE} forces usage of OR in all      * cases. */
 name|int
-name|getInSubqueryThreshold
+name|getInSubQueryThreshold
 parameter_list|()
 function_decl|;
 block|}
@@ -24055,9 +24066,9 @@ literal|true
 decl_stmt|;
 specifier|private
 name|int
-name|inSubqueryThreshold
+name|inSubQueryThreshold
 init|=
-name|DEFAULT_IN_SUBQUERY_THRESHOLD
+name|DEFAULT_IN_SUB_QUERY_THRESHOLD
 decl_stmt|;
 specifier|private
 name|ConfigBuilder
@@ -24129,11 +24140,11 @@ argument_list|()
 expr_stmt|;
 name|this
 operator|.
-name|inSubqueryThreshold
+name|inSubQueryThreshold
 operator|=
 name|config
 operator|.
-name|getInSubqueryThreshold
+name|getInSubQueryThreshold
 argument_list|()
 expr_stmt|;
 return|return
@@ -24248,19 +24259,37 @@ return|return
 name|this
 return|;
 block|}
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 name|ConfigBuilder
 name|withInSubqueryThreshold
 parameter_list|(
 name|int
-name|inSubqueryThreshold
+name|inSubQueryThreshold
+parameter_list|)
+block|{
+return|return
+name|withInSubQueryThreshold
+argument_list|(
+name|inSubQueryThreshold
+argument_list|)
+return|;
+block|}
+specifier|public
+name|ConfigBuilder
+name|withInSubQueryThreshold
+parameter_list|(
+name|int
+name|inSubQueryThreshold
 parameter_list|)
 block|{
 name|this
 operator|.
-name|inSubqueryThreshold
+name|inSubQueryThreshold
 operator|=
-name|inSubqueryThreshold
+name|inSubQueryThreshold
 expr_stmt|;
 return|return
 name|this
@@ -24288,7 +24317,7 @@ name|explain
 argument_list|,
 name|expand
 argument_list|,
-name|inSubqueryThreshold
+name|inSubQueryThreshold
 argument_list|)
 return|;
 block|}
@@ -24329,7 +24358,7 @@ decl_stmt|;
 specifier|private
 specifier|final
 name|int
-name|inSubqueryThreshold
+name|inSubQueryThreshold
 decl_stmt|;
 specifier|private
 specifier|final
@@ -24358,7 +24387,7 @@ name|boolean
 name|expand
 parameter_list|,
 name|int
-name|inSubqueryThreshold
+name|inSubQueryThreshold
 parameter_list|)
 block|{
 name|this
@@ -24399,9 +24428,9 @@ name|expand
 expr_stmt|;
 name|this
 operator|.
-name|inSubqueryThreshold
+name|inSubQueryThreshold
 operator|=
-name|inSubqueryThreshold
+name|inSubQueryThreshold
 expr_stmt|;
 block|}
 specifier|public
@@ -24460,11 +24489,11 @@ return|;
 block|}
 specifier|public
 name|int
-name|getInSubqueryThreshold
+name|getInSubQueryThreshold
 parameter_list|()
 block|{
 return|return
-name|inSubqueryThreshold
+name|inSubQueryThreshold
 return|;
 block|}
 block|}

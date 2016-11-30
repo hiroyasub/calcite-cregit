@@ -140,7 +140,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Relational expression that returns a sample of the rows from its input.  *  *<p>In SQL, a sample is expressed using the {@code TABLESAMPLE BERNOULLI} or  * {@code SYSTEM} keyword applied to a table, view or subquery.  */
+comment|/**  * Relational expression that returns a sample of the rows from its input.  *  *<p>In SQL, a sample is expressed using the {@code TABLESAMPLE BERNOULLI} or  * {@code SYSTEM} keyword applied to a table, view or sub-query.  */
 end_comment
 
 begin_class

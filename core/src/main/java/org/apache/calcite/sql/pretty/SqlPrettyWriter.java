@@ -286,7 +286,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Pretty printer for SQL statements.  *  *<p>There are several options to control the format.  *  *<table>  *<caption>Formatting options</caption>  *<tr>  *<th>Option</th>  *<th>Description</th>  *<th>Default</th>  *</tr>  *<tr>  *<td>{@link #setSelectListItemsOnSeparateLines SelectListItemsOnSeparateLines}  *</td>  *<td>Whether each item in the select clause is on its own line</td>  *<td>false</td>  *</tr>  *<tr>  *<td>{@link #setCaseClausesOnNewLines CaseClausesOnNewLines}</td>  *<td>Whether the WHEN, THEN and ELSE clauses of a CASE expression appear at  * the start of a new line.</td>  *<td>false</td>  *</tr>  *<tr>  *<td>{@link #setIndentation Indentation}</td>  *<td>Number of spaces to indent</td>  *<td>4</td>  *</tr>  *<tr>  *<td>{@link #setKeywordsLowerCase KeywordsLowerCase}</td>  *<td>Whether to print keywords (SELECT, AS, etc.) in lower-case.</td>  *<td>false</td>  *</tr>  *<tr>  *<td>{@link #isAlwaysUseParentheses ParenthesizeAllExprs}</td>  *<td>Whether to enclose all expressions in parentheses, even if the operator  * has high enough precedence that the parentheses are not required.  *  *<p>For example, the parentheses are required in the expression<code>(a + b)  * c</code> because the '*' operator has higher precedence than the '+'  * operator, and so without the parentheses, the expression would be equivalent  * to<code>a + (b * c)</code>. The fully-parenthesized expression,<code>((a +  * b) * c)</code> is unambiguous even if you don't know the precedence of every  * operator.</td>  *<td></td>  *</tr>  *<tr>  *<td>{@link #setQuoteAllIdentifiers QuoteAllIdentifiers}</td>  *<td>Whether to quote all identifiers, even those which would be correct  * according to the rules of the {@link SqlDialect} if quotation marks were  * omitted.</td>  *<td>true</td>  *</tr>  *<tr>  *<td>{@link #setSelectListItemsOnSeparateLines SelectListItemsOnSeparateLines}  *</td>  *<td>Whether each item in the select clause is on its own line.</td>  *<td>false</td>  *</tr>  *<tr>  *<td>{@link #setSubqueryStyle SubqueryStyle}</td>  *<td>Style for formatting sub-queries. Values are:  * {@link org.apache.calcite.sql.SqlWriter.SubqueryStyle#HYDE Hyde},  * {@link org.apache.calcite.sql.SqlWriter.SubqueryStyle#BLACK Black}.</td>  *  *<td>{@link org.apache.calcite.sql.SqlWriter.SubqueryStyle#HYDE Hyde}</td>  *</tr>  *<tr>  *<td>{@link #setLineLength LineLength}</td>  *<td>Set the desired maximum length for lines (to look nice in editors,  * printouts, etc.).</td>  *<td>0</td>  *</tr>  *</table>  */
+comment|/**  * Pretty printer for SQL statements.  *  *<p>There are several options to control the format.  *  *<table>  *<caption>Formatting options</caption>  *<tr>  *<th>Option</th>  *<th>Description</th>  *<th>Default</th>  *</tr>  *<tr>  *<td>{@link #setSelectListItemsOnSeparateLines SelectListItemsOnSeparateLines}  *</td>  *<td>Whether each item in the select clause is on its own line</td>  *<td>false</td>  *</tr>  *<tr>  *<td>{@link #setCaseClausesOnNewLines CaseClausesOnNewLines}</td>  *<td>Whether the WHEN, THEN and ELSE clauses of a CASE expression appear at  * the start of a new line.</td>  *<td>false</td>  *</tr>  *<tr>  *<td>{@link #setIndentation Indentation}</td>  *<td>Number of spaces to indent</td>  *<td>4</td>  *</tr>  *<tr>  *<td>{@link #setKeywordsLowerCase KeywordsLowerCase}</td>  *<td>Whether to print keywords (SELECT, AS, etc.) in lower-case.</td>  *<td>false</td>  *</tr>  *<tr>  *<td>{@link #isAlwaysUseParentheses ParenthesizeAllExprs}</td>  *<td>Whether to enclose all expressions in parentheses, even if the operator  * has high enough precedence that the parentheses are not required.  *  *<p>For example, the parentheses are required in the expression<code>(a + b)  * c</code> because the '*' operator has higher precedence than the '+'  * operator, and so without the parentheses, the expression would be equivalent  * to<code>a + (b * c)</code>. The fully-parenthesized expression,<code>((a +  * b) * c)</code> is unambiguous even if you don't know the precedence of every  * operator.</td>  *<td></td>  *</tr>  *<tr>  *<td>{@link #setQuoteAllIdentifiers QuoteAllIdentifiers}</td>  *<td>Whether to quote all identifiers, even those which would be correct  * according to the rules of the {@link SqlDialect} if quotation marks were  * omitted.</td>  *<td>true</td>  *</tr>  *<tr>  *<td>{@link #setSelectListItemsOnSeparateLines SelectListItemsOnSeparateLines}  *</td>  *<td>Whether each item in the select clause is on its own line.</td>  *<td>false</td>  *</tr>  *<tr>  *<td>{@link #setSubQueryStyle SubQueryStyle}</td>  *<td>Style for formatting sub-queries. Values are:  * {@link org.apache.calcite.sql.SqlWriter.SubQueryStyle#HYDE Hyde},  * {@link org.apache.calcite.sql.SqlWriter.SubQueryStyle#BLACK Black}.</td>  *  *<td>{@link org.apache.calcite.sql.SqlWriter.SubQueryStyle#HYDE Hyde}</td>  *</tr>  *<tr>  *<td>{@link #setLineLength LineLength}</td>  *<td>Set the desired maximum length for lines (to look nice in editors,  * printouts, etc.).</td>  *<td>0</td>  *</tr>  *</table>  */
 end_comment
 
 begin_class
@@ -439,8 +439,8 @@ name|boolean
 name|windowNewline
 decl_stmt|;
 specifier|private
-name|SubqueryStyle
-name|subqueryStyle
+name|SubQueryStyle
+name|subQueryStyle
 decl_stmt|;
 specifier|private
 name|boolean
@@ -565,20 +565,20 @@ operator|=
 name|caseClausesOnNewLines
 expr_stmt|;
 block|}
-comment|/**    * Sets the subquery style. Default is    * {@link org.apache.calcite.sql.SqlWriter.SubqueryStyle#HYDE}.    */
+comment|/**    * Sets the sub-query style. Default is    * {@link org.apache.calcite.sql.SqlWriter.SubQueryStyle#HYDE}.    */
 specifier|public
 name|void
-name|setSubqueryStyle
+name|setSubQueryStyle
 parameter_list|(
-name|SubqueryStyle
-name|subqueryStyle
+name|SubQueryStyle
+name|subQueryStyle
 parameter_list|)
 block|{
 name|this
 operator|.
-name|subqueryStyle
+name|subQueryStyle
 operator|=
-name|subqueryStyle
+name|subQueryStyle
 expr_stmt|;
 block|}
 specifier|public
@@ -779,9 +779,9 @@ name|windowNewline
 operator|=
 literal|false
 expr_stmt|;
-name|subqueryStyle
+name|subQueryStyle
 operator|=
-name|SubqueryStyle
+name|SubQueryStyle
 operator|.
 name|HYDE
 expr_stmt|;
@@ -1402,7 +1402,7 @@ name|SUB_QUERY
 case|:
 switch|switch
 condition|(
-name|subqueryStyle
+name|subQueryStyle
 condition|)
 block|{
 case|case
@@ -1513,7 +1513,7 @@ name|Util
 operator|.
 name|unexpected
 argument_list|(
-name|subqueryStyle
+name|subQueryStyle
 argument_list|)
 throw|;
 block|}

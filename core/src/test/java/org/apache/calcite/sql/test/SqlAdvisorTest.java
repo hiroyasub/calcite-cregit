@@ -2901,7 +2901,7 @@ block|{
 name|String
 name|sql
 decl_stmt|;
-comment|// Aliases from enclosing subqueries are inherited: hence A from
+comment|// Aliases from enclosing sub-queries are inherited: hence A from
 comment|// enclosing, B from same scope.
 comment|// The raw columns from dept are suggested (because they can
 comment|// be used unqualified in the inner scope) but the raw
@@ -3350,7 +3350,7 @@ argument_list|,
 name|expected
 argument_list|)
 expr_stmt|;
-comment|// subquery in from
+comment|// sub-query in from
 name|sql
 operator|=
 literal|"select t.^ from (select 1 as x, 2 as y from sales.emp) as t "
@@ -3442,10 +3442,10 @@ argument_list|,
 name|expected
 argument_list|)
 expr_stmt|;
-comment|// subquery in where; note that:
-comment|// 1. removes the SELECT clause of subquery in WHERE clause;
-comment|// 2. keeps SELECT clause of subquery in FROM clause;
-comment|// 3. removes GROUP BY clause of subquery in FROM clause;
+comment|// sub-query in where; note that:
+comment|// 1. removes the SELECT clause of sub-query in WHERE clause;
+comment|// 2. keeps SELECT clause of sub-query in FROM clause;
+comment|// 3. removes GROUP BY clause of sub-query in FROM clause;
 comment|// 4. removes SELECT clause of outer query.
 name|sql
 operator|=
@@ -3519,7 +3519,7 @@ argument_list|,
 name|expected
 argument_list|)
 expr_stmt|;
-comment|// missing ')' following subquery
+comment|// missing ')' following sub-query
 name|sql
 operator|=
 literal|"select * from sales.emp a where deptno in ("

@@ -78,7 +78,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Namespace offered by a subquery.  *  * @see SelectScope  * @see SetopNamespace  */
+comment|/**  * Namespace offered by a sub-query.  *  * @see SelectScope  * @see SetopNamespace  */
 end_comment
 
 begin_class

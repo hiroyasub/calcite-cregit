@@ -6694,7 +6694,7 @@ operator|.
 name|configBuilder
 argument_list|()
 operator|.
-name|withInSubqueryThreshold
+name|withInSubQueryThreshold
 argument_list|(
 literal|10
 argument_list|)
@@ -6728,7 +6728,7 @@ operator|.
 name|configBuilder
 argument_list|()
 operator|.
-name|withInSubqueryThreshold
+name|withInSubQueryThreshold
 argument_list|(
 literal|2
 argument_list|)

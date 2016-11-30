@@ -44,26 +44,26 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * SubqueryConverter provides the interface for classes that convert subqueries  * into equivalent expressions.  */
+comment|/**  * SubQueryConverter provides the interface for classes that convert sub-queries  * into equivalent expressions.  */
 end_comment
 
 begin_interface
 specifier|public
 interface|interface
-name|SubqueryConverter
+name|SubQueryConverter
 block|{
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**    * @return true if the subquery can be converted    */
+comment|/**    * @return Whether the sub-query can be converted    */
 name|boolean
-name|canConvertSubquery
+name|canConvertSubQuery
 parameter_list|()
 function_decl|;
-comment|/**    * Converts the subquery to an equivalent expression.    *    * @param subquery        the SqlNode tree corresponding to a subquery    * @param parentConverter sqlToRelConverter of the parent query    * @param isExists        whether the subquery is part of an EXISTS expression    * @param isExplain       whether the subquery is part of an EXPLAIN PLAN    *                        statement    * @return the equivalent expression or null if the subquery couldn't be    * converted    */
+comment|/**    * Converts the sub-query to an equivalent expression.    *    * @param subQuery        the SqlNode tree corresponding to a sub-query    * @param parentConverter sqlToRelConverter of the parent query    * @param isExists        whether the sub-query is part of an EXISTS    *                        expression    * @param isExplain       whether the sub-query is part of an EXPLAIN PLAN    *                        statement    * @return the equivalent expression or null if the sub-query couldn't be    * converted    */
 name|RexNode
-name|convertSubquery
+name|convertSubQuery
 parameter_list|(
 name|SqlCall
-name|subquery
+name|subQuery
 parameter_list|,
 name|SqlToRelConverter
 name|parentConverter
@@ -79,7 +79,7 @@ block|}
 end_interface
 
 begin_comment
-comment|// End SubqueryConverter.java
+comment|// End SubQueryConverter.java
 end_comment
 
 end_unit

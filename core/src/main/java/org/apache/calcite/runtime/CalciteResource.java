@@ -1933,13 +1933,13 @@ function_decl|;
 annotation|@
 name|BaseMessage
 argument_list|(
-literal|"Only scalar subqueries allowed in select list."
+literal|"Only scalar sub-queries allowed in select list."
 argument_list|)
 name|ExInst
 argument_list|<
 name|SqlValidatorException
 argument_list|>
-name|onlyScalarSubqueryAllowed
+name|onlyScalarSubQueryAllowed
 parameter_list|()
 function_decl|;
 annotation|@

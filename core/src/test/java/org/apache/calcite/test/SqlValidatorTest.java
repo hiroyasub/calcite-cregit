@@ -11833,7 +11833,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testWindowClauseWithSubquery
+name|testWindowClauseWithSubQuery
 parameter_list|()
 block|{
 name|check
@@ -12807,7 +12807,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testInSubquery
+name|testInSubQuery
 parameter_list|()
 block|{
 name|check
@@ -12923,7 +12923,7 @@ argument_list|,
 literal|"Duplicate relation name 'EMP' in FROM clause"
 argument_list|)
 expr_stmt|;
-comment|// alias applied to subquery
+comment|// alias applied to sub-query
 name|checkFails
 argument_list|(
 literal|"select 1 from emp, (^select 1 as x from (values (true))) as emp^"
@@ -15104,13 +15104,13 @@ block|}
 annotation|@
 name|Ignore
 argument_list|(
-literal|"bug: should fail if subquery does not have alias"
+literal|"bug: should fail if sub-query does not have alias"
 argument_list|)
 annotation|@
 name|Test
 specifier|public
 name|void
-name|testJoinSubquery
+name|testJoinSubQuery
 parameter_list|()
 block|{
 comment|// Sub-queries require alias
@@ -15582,7 +15582,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testWithSubquery
+name|testWithSubQuery
 parameter_list|()
 block|{
 comment|// nested WITH (parentheses required - and even with parentheses SQL
@@ -16431,7 +16431,7 @@ else|:
 literal|null
 argument_list|)
 expr_stmt|;
-comment|// Sort by scalar subquery
+comment|// Sort by scalar sub-query
 name|check
 argument_list|(
 literal|"select * from emp\n"
@@ -17099,7 +17099,7 @@ literal|"select * from (select empno,deptno from emp) group by deptno,empno"
 argument_list|)
 expr_stmt|;
 comment|// This query tries to reference an agg expression from within a
-comment|// subquery as a correlating expression, but the SQL syntax rules say
+comment|// sub-query as a correlating expression, but the SQL syntax rules say
 comment|// that the agg function SUM always applies to the current scope.
 comment|// As it happens, the query is valid.
 name|check
@@ -17113,7 +17113,7 @@ operator|+
 literal|"having exists (select sum(emp.sal)> 10 from (values(true)))"
 argument_list|)
 expr_stmt|;
-comment|// if you reference a column from a subquery, it must be a group col
+comment|// if you reference a column from a sub-query, it must be a group col
 name|check
 argument_list|(
 literal|"select deptno "
@@ -17432,7 +17432,7 @@ name|void
 name|_testGroupExpressionEquivalenceCorrelated
 parameter_list|()
 block|{
-comment|// dname comes from dept, so it is constant within the subquery, and
+comment|// dname comes from dept, so it is constant within the sub-query, and
 comment|// is so is a valid expr in a group-by query
 name|check
 argument_list|(
@@ -20117,16 +20117,23 @@ argument_list|,
 literal|"RecordType(VARCHAR(20) NOT NULL ENAME, INTEGER X) NOT NULL"
 argument_list|)
 expr_stmt|;
-comment|// scalar subquery inside WHERE
+comment|// scalar sub-query inside WHERE
 name|check
 argument_list|(
 literal|"select * from emp where (select true from dept)"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Ignore
+argument_list|(
+literal|"not supported"
+argument_list|)
+annotation|@
+name|Test
 specifier|public
 name|void
-name|_testSubqueryInOnClause
+name|testSubQueryInOnClause
 parameter_list|()
 block|{
 comment|// Currently not supported. Should give validator error, but gives

@@ -1013,7 +1013,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testDamiansSubqueryStyle
+name|testDamiansSubQueryStyle
 parameter_list|()
 throws|throws
 name|Exception
@@ -1034,11 +1034,11 @@ argument_list|)
 decl_stmt|;
 name|prettyWriter
 operator|.
-name|setSubqueryStyle
+name|setSubQueryStyle
 argument_list|(
 name|SqlWriter
 operator|.
-name|SubqueryStyle
+name|SubQueryStyle
 operator|.
 name|BLACK
 argument_list|)

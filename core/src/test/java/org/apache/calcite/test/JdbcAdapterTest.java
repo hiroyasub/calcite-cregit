@@ -1931,7 +1931,9 @@ name|MYSQL
 case|:
 name|expected
 operator|=
-literal|"Subquery returns more than 1 row"
+literal|"Sub"
+operator|+
+literal|"query returns more than 1 row"
 expr_stmt|;
 break|break;
 default|default:
@@ -2083,7 +2085,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testScalarSubquery
+name|testScalarSubQuery
 parameter_list|()
 block|{
 name|CalciteAssert

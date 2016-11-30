@@ -822,13 +822,36 @@ comment|/**      * Accept only query expressions in this context.      */
 name|ACCEPT_QUERY
 block|,
 comment|/**      * Accept only non-query expressions in this context.      */
-name|ACCEPT_NONQUERY
+name|ACCEPT_NON_QUERY
 block|,
 comment|/**      * Accept only parenthesized queries or non-query expressions in this      * context.      */
-name|ACCEPT_SUBQUERY
+name|ACCEPT_SUB_QUERY
 block|,
 comment|/**      * Accept only CURSOR constructors, parenthesized queries, or non-query      * expressions in this context.      */
 name|ACCEPT_CURSOR
+block|;
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
+specifier|public
+specifier|static
+specifier|final
+name|ExprContext
+name|ACCEPT_SUBQUERY
+init|=
+name|ACCEPT_SUB_QUERY
+decl_stmt|;
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
+specifier|public
+specifier|static
+specifier|final
+name|ExprContext
+name|ACCEPT_NONQUERY
+init|=
+name|ACCEPT_NON_QUERY
+decl_stmt|;
 block|}
 comment|//~ Instance fields --------------------------------------------------------
 comment|/**    * Operator table containing the standard SQL operators and functions.    */

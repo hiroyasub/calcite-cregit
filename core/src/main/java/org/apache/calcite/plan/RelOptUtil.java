@@ -2792,7 +2792,7 @@ literal|true
 argument_list|)
 assert|;
 comment|// this should only be called for the exists case
-comment|// first stick an Agg on top of the subquery
+comment|// first stick an Agg on top of the sub-query
 comment|// agg does not like no agg functions so just pretend it is
 comment|// doing a min(TRUE)
 name|ret
@@ -2874,7 +2874,7 @@ return|return
 name|ret
 return|;
 block|}
-comment|/**    * Creates a plan suitable for use in<code>EXISTS</code> or<code>IN</code>    * statements.    *    * @see org.apache.calcite.sql2rel.SqlToRelConverter#convertExists    *    * @param seekRel    A query rel, for example the resulting rel from 'select *    *                   from emp' or 'values (1,2,3)' or '('Foo', 34)'.    * @param subqueryType Sub-query type    * @param logic  Whether to use 2- or 3-valued boolean logic    * @param notIn Whether the operator is NOT IN    *    * @return A pair of a relational expression which outer joins a boolean    * condition column, and a numeric offset. The offset is 2 if column 0 is    * the number of rows and column 1 is the number of rows with not-null keys;    * 0 otherwise.    */
+comment|/**    * Creates a plan suitable for use in<code>EXISTS</code> or<code>IN</code>    * statements.    *    * @see org.apache.calcite.sql2rel.SqlToRelConverter#convertExists    *    * @param seekRel    A query rel, for example the resulting rel from 'select *    *                   from emp' or 'values (1,2,3)' or '('Foo', 34)'.    * @param subQueryType Sub-query type    * @param logic  Whether to use 2- or 3-valued boolean logic    * @param notIn Whether the operator is NOT IN    *    * @return A pair of a relational expression which outer joins a boolean    * condition column, and a numeric offset. The offset is 2 if column 0 is    * the number of rows and column 1 is the number of rows with not-null keys;    * 0 otherwise.    */
 specifier|public
 specifier|static
 name|Exists
@@ -2883,8 +2883,8 @@ parameter_list|(
 name|RelNode
 name|seekRel
 parameter_list|,
-name|SubqueryType
-name|subqueryType
+name|SubQueryType
+name|subQueryType
 parameter_list|,
 name|Logic
 name|logic
@@ -2895,7 +2895,7 @@ parameter_list|)
 block|{
 switch|switch
 condition|(
-name|subqueryType
+name|subQueryType
 condition|)
 block|{
 case|case
@@ -3053,9 +3053,9 @@ argument_list|()
 decl_stmt|;
 if|if
 condition|(
-name|subqueryType
+name|subQueryType
 operator|==
-name|SubqueryType
+name|SubQueryType
 operator|.
 name|IN
 condition|)
@@ -16711,7 +16711,7 @@ block|}
 comment|/** What kind of sub-query. */
 specifier|public
 enum|enum
-name|SubqueryType
+name|SubQueryType
 block|{
 name|EXISTS
 block|,

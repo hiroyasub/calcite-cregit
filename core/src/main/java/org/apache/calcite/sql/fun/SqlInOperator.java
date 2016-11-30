@@ -356,7 +356,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Definition of the SQL<code>IN</code> operator, which tests for a value's  * membership in a subquery or a list of values.  */
+comment|/**  * Definition of the SQL<code>IN</code> operator, which tests for a value's  * membership in a sub-query or a list of values.  */
 end_comment
 
 begin_class
@@ -861,7 +861,7 @@ parameter_list|)
 block|{
 comment|// Argument #0 must be scalar, argument #1 can be a list (1, 2) or
 comment|// a query (select deptno from emp). So, only coerce argument #0 into
-comment|// a scalar subquery. For example, in
+comment|// a scalar sub-query. For example, in
 comment|//  select * from emp
 comment|//  where (select count(*) from dept) in (select deptno from dept)
 comment|// we should coerce the LHS to a scalar.

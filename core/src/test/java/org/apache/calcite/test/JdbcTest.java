@@ -18027,7 +18027,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testJoinInCorrelatedSubquery
+name|testJoinInCorrelatedSubQuery
 parameter_list|()
 block|{
 name|CalciteAssert
@@ -18157,12 +18157,12 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-559">[CALCITE-559]    * Correlated scalar subquery in WHERE gives error</a>. */
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-559">[CALCITE-559]    * Correlated scalar sub-query in WHERE gives error</a>. */
 annotation|@
 name|Test
 specifier|public
 name|void
-name|testJoinCorrelatedScalarSubquery
+name|testJoinCorrelatedScalarSubQuery
 parameter_list|()
 throws|throws
 name|SQLException

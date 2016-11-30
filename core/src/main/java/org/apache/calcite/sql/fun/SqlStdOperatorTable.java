@@ -1348,7 +1348,7 @@ operator|.
 name|COMPARABLE_ORDERED_COMPARABLE_ORDERED
 argument_list|)
 decl_stmt|;
-comment|/**    *<code>IN</code> operator tests for a value's membership in a subquery or    * a list of values.    */
+comment|/**    *<code>IN</code> operator tests for a value's membership in a sub-query or    * a list of values.    */
 specifier|public
 specifier|static
 specifier|final
@@ -1361,7 +1361,7 @@ argument_list|(
 literal|false
 argument_list|)
 decl_stmt|;
-comment|/**    *<code>NOT IN</code> operator tests for a value's membership in a subquery    * or a list of values.    */
+comment|/**    *<code>NOT IN</code> operator tests for a value's membership in a sub-query    * or a list of values.    */
 specifier|public
 specifier|static
 specifier|final

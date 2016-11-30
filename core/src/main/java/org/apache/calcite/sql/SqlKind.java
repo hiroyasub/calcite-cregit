@@ -249,7 +249,7 @@ block|,
 comment|/**    * Explicit table, e.g.<code>select * from (TABLE t)</code> or<code>TABLE    * t</code>. See also {@link #COLLECTION_TABLE}.    */
 name|EXPLICIT_TABLE
 block|,
-comment|/**    * Scalar query; that is, a subquery used in an expression context, and    * returning one row and one column.    */
+comment|/**    * Scalar query; that is, a sub-query used in an expression context, and    * returning one row and one column.    */
 name|SCALAR_QUERY
 block|,
 comment|/**    * ProcedureCall    */

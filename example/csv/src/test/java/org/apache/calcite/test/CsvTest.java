@@ -1931,6 +1931,14 @@ literal|"FROM emps AS e\n"
 operator|+
 literal|"WHERE cast(e.empno as bigint) in "
 decl_stmt|;
+specifier|final
+name|int
+name|threshold
+init|=
+name|SqlToRelConverter
+operator|.
+name|DEFAULT_IN_SUB_QUERY_THRESHOLD
+decl_stmt|;
 name|checkSql
 argument_list|(
 name|sql
@@ -1939,9 +1947,7 @@ name|range
 argument_list|(
 literal|130
 argument_list|,
-name|SqlToRelConverter
-operator|.
-name|DEFAULT_IN_SUBQUERY_THRESHOLD
+name|threshold
 operator|-
 literal|5
 argument_list|)
@@ -1962,9 +1968,7 @@ name|range
 argument_list|(
 literal|130
 argument_list|,
-name|SqlToRelConverter
-operator|.
-name|DEFAULT_IN_SUBQUERY_THRESHOLD
+name|threshold
 argument_list|)
 argument_list|,
 literal|"smart"
@@ -1983,9 +1987,7 @@ name|range
 argument_list|(
 literal|130
 argument_list|,
-name|SqlToRelConverter
-operator|.
-name|DEFAULT_IN_SUBQUERY_THRESHOLD
+name|threshold
 operator|+
 literal|1000
 argument_list|)
@@ -2025,7 +2027,7 @@ literal|130
 argument_list|,
 name|SqlToRelConverter
 operator|.
-name|DEFAULT_IN_SUBQUERY_THRESHOLD
+name|DEFAULT_IN_SUB_QUERY_THRESHOLD
 argument_list|)
 decl_stmt|;
 name|checkSql

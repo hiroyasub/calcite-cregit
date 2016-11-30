@@ -919,7 +919,7 @@ specifier|final
 name|Program
 name|SUB_QUERY_PROGRAM
 init|=
-name|subquery
+name|subQuery
 argument_list|(
 name|DefaultRelMetadataProvider
 operator|.
@@ -1648,10 +1648,29 @@ name|metadataProvider
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 specifier|static
 name|Program
 name|subquery
+parameter_list|(
+name|RelMetadataProvider
+name|metadataProvider
+parameter_list|)
+block|{
+return|return
+name|subQuery
+argument_list|(
+name|metadataProvider
+argument_list|)
+return|;
+block|}
+specifier|public
+specifier|static
+name|Program
+name|subQuery
 parameter_list|(
 name|RelMetadataProvider
 name|metadataProvider
@@ -1837,7 +1856,7 @@ decl_stmt|;
 return|return
 name|sequence
 argument_list|(
-name|subquery
+name|subQuery
 argument_list|(
 name|metadataProvider
 argument_list|)

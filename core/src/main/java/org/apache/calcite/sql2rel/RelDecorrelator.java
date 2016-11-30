@@ -6946,11 +6946,11 @@ index|]
 decl_stmt|;
 comment|// Construct a CASE expression to handle the null indicator.
 comment|//
-comment|// This also covers the case where a left correlated subquery
+comment|// This also covers the case where a left correlated sub-query
 comment|// projects fields from outer relation. Since LOJ cannot produce
 comment|// nulls on the LHS, the projection now need to make a nullable LHS
 comment|// reference using a nullability indicator. If this this indicator
-comment|// is null, it means the subquery does not produce any value. As a
+comment|// is null, it means the sub-query does not produce any value. As a
 comment|// result, any RHS ref by this usbquery needs to produce null value.
 comment|// WHEN indicator IS NULL
 name|caseOperands
@@ -7649,7 +7649,7 @@ return|return;
 block|}
 comment|// check projRel only projects one expression
 comment|// check this project only projects one expression, i.e. scalar
-comment|// subqueries.
+comment|// sub-queries.
 name|List
 argument_list|<
 name|RexNode
@@ -8004,7 +8004,7 @@ block|{
 return|return;
 block|}
 comment|// check this project only projects one expression, i.e. scalar
-comment|// subqueries.
+comment|// sub-queries.
 if|if
 condition|(
 name|project

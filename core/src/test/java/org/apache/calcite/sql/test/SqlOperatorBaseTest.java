@@ -7471,8 +7471,8 @@ argument_list|,
 literal|0
 argument_list|)
 expr_stmt|;
-comment|// Check return type on scalar subquery in select list.  Note return
-comment|// type is always nullable even if subquery select value is NOT NULL.
+comment|// Check return type on scalar sub-query in select list.  Note return
+comment|// type is always nullable even if sub-query select value is NOT NULL.
 comment|// Bug FRG-189 causes this test to fail only in SqlOperatorTest; not
 comment|// in subtypes.
 if|if

@@ -1541,7 +1541,7 @@ name|forceDecorrelate
 argument_list|()
 condition|)
 block|{
-comment|// Subquery decorrelation.
+comment|// Sub-query decorrelation.
 name|root
 operator|=
 name|root

@@ -169,7 +169,7 @@ return|;
 block|}
 block|}
 block|,
-comment|/**      * A token created by reducing an entire subquery.      */
+comment|/**      * A token created by reducing an entire sub-query.      */
 name|QUERY
 block|;
 specifier|public
@@ -345,7 +345,7 @@ name|token
 argument_list|)
 expr_stmt|;
 block|}
-comment|// Gather consecutive sub-sequences of tokens into subqueries.
+comment|// Gather consecutive sub-sequences of tokens into sub-queries.
 name|List
 argument_list|<
 name|Token
@@ -612,7 +612,7 @@ name|List
 argument_list|<
 name|Token
 argument_list|>
-name|subqueryList
+name|subQueryList
 init|=
 operator|new
 name|ArrayList
@@ -639,7 +639,7 @@ operator|.
 name|next
 argument_list|()
 decl_stmt|;
-name|subqueryList
+name|subQueryList
 operator|.
 name|add
 argument_list|(
@@ -660,7 +660,7 @@ name|consumeQuery
 argument_list|(
 name|iter
 argument_list|,
-name|subqueryList
+name|subQueryList
 argument_list|)
 expr_stmt|;
 break|break;
@@ -672,11 +672,11 @@ condition|(
 name|isQuery
 condition|)
 block|{
-name|subqueryList
+name|subQueryList
 operator|.
 name|remove
 argument_list|(
-name|subqueryList
+name|subQueryList
 operator|.
 name|size
 argument_list|()
@@ -705,11 +705,11 @@ case|:
 case|case
 name|EXCEPT
 case|:
-name|subqueryList
+name|subQueryList
 operator|.
 name|remove
 argument_list|(
-name|subqueryList
+name|subQueryList
 operator|.
 name|size
 argument_list|()
@@ -756,7 +756,7 @@ argument_list|(
 operator|new
 name|Query
 argument_list|(
-name|subqueryList
+name|subQueryList
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -814,7 +814,7 @@ name|outList
 operator|.
 name|addAll
 argument_list|(
-name|subqueryList
+name|subQueryList
 argument_list|)
 expr_stmt|;
 block|}
@@ -1915,7 +1915,7 @@ init|=
 literal|null
 decl_stmt|;
 name|Query
-name|foundInSubquery
+name|foundInSubQuery
 init|=
 literal|null
 decl_stmt|;
@@ -2051,7 +2051,7 @@ name|foundInClause
 operator|=
 name|clause
 expr_stmt|;
-name|foundInSubquery
+name|foundInSubQuery
 operator|=
 operator|(
 name|Query
@@ -2186,7 +2186,7 @@ case|case
 name|QUERY
 case|:
 comment|// Indicates that the expression to be simplified is
-comment|// outside this subquery. Preserve a simplified SELECT
+comment|// outside this sub-query. Preserve a simplified SELECT
 comment|// clause.
 name|purgeSelectExprsKeepAliases
 argument_list|()
@@ -2235,7 +2235,7 @@ argument_list|(
 operator|(
 name|query
 operator|==
-name|foundInSubquery
+name|foundInSubQuery
 operator|)
 condition|?
 name|hintToken

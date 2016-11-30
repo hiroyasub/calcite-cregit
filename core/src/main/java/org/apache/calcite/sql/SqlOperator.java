@@ -2497,7 +2497,7 @@ return|return
 literal|true
 return|;
 block|}
-comment|/**    * Returns whether the<code>ordinal</code>th argument to this operator must    * be scalar (as opposed to a query).    *    *<p>If true (the default), the validator will attempt to convert the    * argument into a scalar subquery, which must have one column and return at    * most one row.    *    *<p>Operators such as<code>SELECT</code> and<code>EXISTS</code> override    * this method.    */
+comment|/**    * Returns whether the<code>ordinal</code>th argument to this operator must    * be scalar (as opposed to a query).    *    *<p>If true (the default), the validator will attempt to convert the    * argument into a scalar sub-query, which must have one column and return at    * most one row.    *    *<p>Operators such as<code>SELECT</code> and<code>EXISTS</code> override    * this method.    */
 specifier|public
 name|boolean
 name|argumentMustBeScalar

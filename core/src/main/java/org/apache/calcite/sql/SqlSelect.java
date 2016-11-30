@@ -751,7 +751,7 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
-comment|// Override SqlCall, to introduce a subquery frame.
+comment|// Override SqlCall, to introduce a sub-query frame.
 annotation|@
 name|Override
 specifier|public
@@ -777,8 +777,8 @@ name|inQuery
 argument_list|()
 condition|)
 block|{
-comment|// If this SELECT is the topmost item in a subquery, introduce a new
-comment|// frame. (The topmost item in the subquery might be a UNION or
+comment|// If this SELECT is the topmost item in a sub-query, introduce a new
+comment|// frame. (The topmost item in the sub-query might be a UNION or
 comment|// ORDER. In this case, we don't need a wrapper frame.)
 specifier|final
 name|SqlWriter

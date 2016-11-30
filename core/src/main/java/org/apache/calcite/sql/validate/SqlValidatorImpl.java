@@ -9480,7 +9480,7 @@ name|newRight
 argument_list|)
 expr_stmt|;
 block|}
-name|registerSubqueries
+name|registerSubQueries
 argument_list|(
 name|joinScope
 argument_list|,
@@ -10246,7 +10246,7 @@ argument_list|,
 name|selectScope
 argument_list|)
 expr_stmt|;
-name|registerOperandSubqueries
+name|registerOperandSubQueries
 argument_list|(
 name|selectScope
 argument_list|,
@@ -10363,7 +10363,7 @@ name|selectScope
 argument_list|)
 expr_stmt|;
 block|}
-name|registerSubqueries
+name|registerSubQueries
 argument_list|(
 name|selectScope
 argument_list|,
@@ -10373,7 +10373,7 @@ name|getGroup
 argument_list|()
 argument_list|)
 expr_stmt|;
-name|registerOperandSubqueries
+name|registerOperandSubQueries
 argument_list|(
 name|aggScope
 argument_list|,
@@ -10384,7 +10384,7 @@ operator|.
 name|HAVING_OPERAND
 argument_list|)
 expr_stmt|;
-name|registerSubqueries
+name|registerSubQueries
 argument_list|(
 name|aggScope
 argument_list|,
@@ -10455,7 +10455,7 @@ argument_list|,
 name|orderScope
 argument_list|)
 expr_stmt|;
-name|registerSubqueries
+name|registerSubQueries
 argument_list|(
 name|orderScope
 argument_list|,
@@ -10699,9 +10699,9 @@ operator|.
 name|ROW
 assert|;
 comment|// FIXME jvs 9-Feb-2005:  Correlation should
-comment|// be illegal in these subqueries.  Same goes for
+comment|// be illegal in these sub-queries.  Same goes for
 comment|// any non-lateral SELECT in the FROM list.
-name|registerOperandSubqueries
+name|registerOperandSubQueries
 argument_list|(
 name|parentScope
 argument_list|,
@@ -11077,7 +11077,7 @@ argument_list|,
 name|forceNullable
 argument_list|)
 expr_stmt|;
-name|registerOperandSubqueries
+name|registerOperandSubQueries
 argument_list|(
 name|parentScope
 argument_list|,
@@ -11132,7 +11132,7 @@ argument_list|,
 name|forceNullable
 argument_list|)
 expr_stmt|;
-name|registerSubqueries
+name|registerSubQueries
 argument_list|(
 name|parentScope
 argument_list|,
@@ -11241,7 +11241,7 @@ name|i
 operator|++
 control|)
 block|{
-name|registerOperandSubqueries
+name|registerOperandSubQueries
 argument_list|(
 name|parentScope
 argument_list|,
@@ -11846,7 +11846,7 @@ block|}
 block|}
 specifier|private
 name|void
-name|registerSubqueries
+name|registerSubQueries
 parameter_list|(
 name|SqlValidatorScope
 name|parentScope
@@ -11951,7 +11951,7 @@ name|i
 operator|++
 control|)
 block|{
-name|registerOperandSubqueries
+name|registerOperandSubQueries
 argument_list|(
 name|parentScope
 argument_list|,
@@ -12050,7 +12050,7 @@ name|listNode
 argument_list|)
 expr_stmt|;
 block|}
-name|registerSubqueries
+name|registerSubQueries
 argument_list|(
 name|parentScope
 argument_list|,
@@ -12064,10 +12064,10 @@ block|{
 comment|// atomic node -- can be ignored
 block|}
 block|}
-comment|/**    * Registers any subqueries inside a given call operand, and converts the    * operand to a scalar subquery if the operator requires it.    *    * @param parentScope    Parent scope    * @param call           Call    * @param operandOrdinal Ordinal of operand within call    * @see SqlOperator#argumentMustBeScalar(int)    */
+comment|/**    * Registers any sub-queries inside a given call operand, and converts the    * operand to a scalar sub-query if the operator requires it.    *    * @param parentScope    Parent scope    * @param call           Call    * @param operandOrdinal Ordinal of operand within call    * @see SqlOperator#argumentMustBeScalar(int)    */
 specifier|private
 name|void
-name|registerOperandSubqueries
+name|registerOperandSubQueries
 parameter_list|(
 name|SqlValidatorScope
 name|parentScope
@@ -12149,7 +12149,7 @@ name|operand
 argument_list|)
 expr_stmt|;
 block|}
-name|registerSubqueries
+name|registerSubQueries
 argument_list|(
 name|parentScope
 argument_list|,
@@ -12847,7 +12847,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/**    * Validates the FROM clause of a query, or (recursively) a child node of    * the FROM clause: AS, OVER, JOIN, VALUES, or subquery.    *    * @param node          Node in FROM clause, typically a table or derived    *                      table    * @param targetRowType Desired row type of this expression, or    *                      {@link #unknownType} if not fussy. Must not be null.    * @param scope         Scope    */
+comment|/**    * Validates the FROM clause of a query, or (recursively) a child node of    * the FROM clause: AS, OVER, JOIN, VALUES, or sub-query.    *    * @param node          Node in FROM clause, typically a table or derived    *                      table    * @param targetRowType Desired row type of this expression, or    *                      {@link #unknownType} if not fussy. Must not be null.    * @param scope         Scope    */
 specifier|protected
 name|void
 name|validateFrom
@@ -16747,7 +16747,7 @@ argument_list|(
 name|expandedSelectItems
 argument_list|)
 expr_stmt|;
-comment|// TODO: when SELECT appears as a value subquery, should be using
+comment|// TODO: when SELECT appears as a value sub-query, should be using
 comment|// something other than unknownType for targetRowType
 name|inferUnknownTypes
 argument_list|(
@@ -16873,7 +16873,7 @@ name|expr
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Processes SubQuery found in Select list. Checks that is actually Scalar    * subquery and makes proper entries in each of the 3 lists used to create    * the final rowType entry.    *    * @param parentSelect        base SqlSelect item    * @param selectItem          child SqlSelect from select list    * @param expandedSelectItems Select items after processing    * @param aliasList           built from user or system values    * @param fieldList           Built up entries for each select list entry    */
+comment|/**    * Processes SubQuery found in Select list. Checks that is actually Scalar    * sub-query and makes proper entries in each of the 3 lists used to create    * the final rowType entry.    *    * @param parentSelect        base SqlSelect item    * @param selectItem          child SqlSelect from select list    * @param expandedSelectItems Select items after processing    * @param aliasList           built from user or system values    * @param fieldList           Built up entries for each select list entry    */
 specifier|private
 name|void
 name|handleScalarSubQuery
@@ -16910,7 +16910,7 @@ argument_list|>
 name|fieldList
 parameter_list|)
 block|{
-comment|// A scalar subquery only has one output column.
+comment|// A scalar sub-query only has one output column.
 if|if
 condition|(
 literal|1
@@ -16931,7 +16931,7 @@ name|selectItem
 argument_list|,
 name|RESOURCE
 operator|.
-name|onlyScalarSubqueryAllowed
+name|onlyScalarSubQueryAllowed
 argument_list|()
 argument_list|)
 throw|;
@@ -16998,7 +16998,7 @@ argument_list|)
 expr_stmt|;
 comment|// we do not want to pass on the RelRecordType returned
 comment|// by the sub query.  Just the type of the single expression
-comment|// in the subquery select list.
+comment|// in the sub-query select list.
 assert|assert
 name|type
 operator|instanceof

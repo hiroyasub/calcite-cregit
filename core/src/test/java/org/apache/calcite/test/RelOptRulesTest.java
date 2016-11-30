@@ -1531,7 +1531,7 @@ name|sql
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1479">[CALCITE-1479]    * AssertionError in ReduceExpressionsRule on multi-column IN subquery</a>. */
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1479">[CALCITE-1479]    * AssertionError in ReduceExpressionsRule on multi-column IN    * sub-query</a>. */
 annotation|@
 name|Test
 specifier|public
