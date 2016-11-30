@@ -11903,11 +11903,6 @@ expr_stmt|;
 block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1493">[CALCITE-1493]    * Wrong plan for NOT IN correlated queries</a>. */
 annotation|@
-name|Ignore
-argument_list|(
-literal|"[CALCITE-1493] is not fixed yet"
-argument_list|)
-annotation|@
 name|Test
 specifier|public
 name|void
@@ -11933,7 +11928,7 @@ argument_list|)
 operator|.
 name|withLateDecorrelation
 argument_list|(
-literal|false
+literal|true
 argument_list|)
 operator|.
 name|check

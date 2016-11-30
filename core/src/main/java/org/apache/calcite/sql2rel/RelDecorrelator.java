@@ -11291,6 +11291,37 @@ name|RexCorrelVariable
 operator|)
 name|ref
 decl_stmt|;
+if|if
+condition|(
+name|mapFieldAccessToCorVar
+operator|.
+name|containsKey
+argument_list|(
+name|fieldAccess
+argument_list|)
+condition|)
+block|{
+comment|//for cases where different Rel nodes are referring to
+comment|// same correlation var (e.g. in case of NOT IN)
+comment|// avoid generating another correlation var
+comment|// and record the 'rel' is using the same correlation
+name|mapRefRelToCorVar
+operator|.
+name|put
+argument_list|(
+name|rel
+argument_list|,
+name|mapFieldAccessToCorVar
+operator|.
+name|get
+argument_list|(
+name|fieldAccess
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+else|else
+block|{
 specifier|final
 name|Correlation
 name|correlation
@@ -11332,6 +11363,7 @@ argument_list|,
 name|correlation
 argument_list|)
 expr_stmt|;
+block|}
 block|}
 return|return
 name|super

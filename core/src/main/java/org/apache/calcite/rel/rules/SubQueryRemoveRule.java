@@ -323,6 +323,20 @@ name|calcite
 operator|.
 name|sql
 operator|.
+name|SqlKind
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
 name|fun
 operator|.
 name|SqlStdOperatorTable
@@ -1406,28 +1420,20 @@ case|:
 case|case
 name|UNKNOWN_AS_TRUE
 case|:
+comment|// Since EXISTS/NOT EXISTS are not affected by presence of
+comment|// null keys we do not need to generate count(*), count(c)
 if|if
 condition|(
-operator|!
-name|variablesSet
+name|e
 operator|.
-name|isEmpty
+name|getKind
 argument_list|()
+operator|==
+name|SqlKind
+operator|.
+name|EXISTS
 condition|)
 block|{
-comment|// We have not yet figured out how to include "ct" in a query if
-comment|// the source relation "e.rel" is correlated. So, dodge the issue:
-comment|// we pretend that the join key is NOT NULL.
-comment|//
-comment|// We will get wrong results in correlated IN where the join
-comment|// key has nulls. E.g.
-comment|//
-comment|//   SELECT *
-comment|//   FROM emp
-comment|//   WHERE mgr NOT IN (
-comment|//     SELECT mgr
-comment|//     FROM emp AS e2
-comment|//     WHERE
 name|logic
 operator|=
 name|RelOptUtil
@@ -1484,6 +1490,36 @@ argument_list|(
 literal|"ct"
 argument_list|)
 expr_stmt|;
+if|if
+condition|(
+operator|!
+name|variablesSet
+operator|.
+name|isEmpty
+argument_list|()
+condition|)
+block|{
+name|builder
+operator|.
+name|join
+argument_list|(
+name|JoinRelType
+operator|.
+name|LEFT
+argument_list|,
+name|builder
+operator|.
+name|literal
+argument_list|(
+literal|true
+argument_list|)
+argument_list|,
+name|variablesSet
+argument_list|)
+expr_stmt|;
+block|}
+else|else
+block|{
 name|builder
 operator|.
 name|join
@@ -1502,6 +1538,7 @@ argument_list|,
 name|variablesSet
 argument_list|)
 expr_stmt|;
+block|}
 name|offset
 operator|+=
 literal|2
