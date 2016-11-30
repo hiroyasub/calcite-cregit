@@ -1156,10 +1156,10 @@ name|equals
 argument_list|(
 name|SaffronProperties
 operator|.
-name|instance
-argument_list|()
+name|INSTANCE
 operator|.
 name|defaultCharset
+argument_list|()
 operator|.
 name|get
 argument_list|()

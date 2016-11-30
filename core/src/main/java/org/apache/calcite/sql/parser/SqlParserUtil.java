@@ -501,10 +501,10 @@ block|{
 return|return
 name|SaffronProperties
 operator|.
-name|instance
-argument_list|()
+name|INSTANCE
 operator|.
 name|defaultNationalCharset
+argument_list|()
 operator|.
 name|get
 argument_list|()
@@ -2407,10 +2407,10 @@ name|strength
 operator|=
 name|SaffronProperties
 operator|.
-name|instance
-argument_list|()
+name|INSTANCE
 operator|.
 name|defaultCollationStrength
+argument_list|()
 operator|.
 name|get
 argument_list|()

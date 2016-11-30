@@ -5680,10 +5680,10 @@ name|allowInfiniteCostConverters
 init|=
 name|SaffronProperties
 operator|.
-name|instance
-argument_list|()
+name|INSTANCE
 operator|.
 name|allowInfiniteCostConverters
+argument_list|()
 operator|.
 name|get
 argument_list|()

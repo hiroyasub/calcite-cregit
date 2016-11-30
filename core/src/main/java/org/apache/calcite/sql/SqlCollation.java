@@ -325,10 +325,10 @@ name|this
 argument_list|(
 name|SaffronProperties
 operator|.
-name|instance
-argument_list|()
+name|INSTANCE
 operator|.
 name|defaultCollation
+argument_list|()
 operator|.
 name|get
 argument_list|()
