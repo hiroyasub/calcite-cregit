@@ -11944,7 +11944,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testStructTypeInNonCorrelatedSubQuery
+name|testCustomColumnResolvingInNonCorrelatedSubQuery
 parameter_list|()
 block|{
 specifier|final
@@ -12029,7 +12029,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testStructTypeInCorrelatedSubQuery
+name|testCustomColumnResolvingInCorrelatedSubQuery
 parameter_list|()
 block|{
 specifier|final
@@ -12114,7 +12114,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testStructTypeInCorrelatedSubQuery2
+name|testCustomColumnResolvingInCorrelatedSubQuery2
 parameter_list|()
 block|{
 specifier|final

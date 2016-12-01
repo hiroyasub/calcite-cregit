@@ -22628,12 +22628,30 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testInsertBindWithCustomStarExpansion
+name|testInsertBindWithCustomColumnResolving
 parameter_list|()
 block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"insert into struct.t\n"
+operator|+
+literal|"values (?, ?, ?, ?, ?, ?, ?, ?, ?)"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"RecordType(VARCHAR(20) ?0, VARCHAR(20) ?1,"
+operator|+
+literal|" INTEGER ?2, BOOLEAN ?3, INTEGER ?4, INTEGER ?5, INTEGER ?6,"
+operator|+
+literal|" INTEGER ?7, INTEGER ?8)"
+decl_stmt|;
 name|sql
 argument_list|(
-literal|"insert into struct.simple values (?, ?)"
+name|sql
 argument_list|)
 operator|.
 name|ok
@@ -22641,7 +22659,52 @@ argument_list|()
 operator|.
 name|bindType
 argument_list|(
-literal|"RecordType(TIMESTAMP(0) ?0, VARCHAR(20) ?1)"
+name|expected
+argument_list|)
+expr_stmt|;
+specifier|final
+name|String
+name|sql2
+init|=
+literal|"insert into struct.t (c0, c2, c1) values (?, ?, ?)"
+decl_stmt|;
+specifier|final
+name|String
+name|expected2
+init|=
+literal|"RecordType(INTEGER ?0, INTEGER ?1, VARCHAR(20) ?2)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql2
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+operator|.
+name|bindType
+argument_list|(
+name|expected2
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"insert into struct.t (c0, ^c4^, c1) values (?, ?, ?)"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Unknown target column 'C4'"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"insert into struct.t (^a0^, c2, c1) values (?, ?, ?)"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Unknown target column 'A0'"
 argument_list|)
 expr_stmt|;
 block|}
@@ -23601,10 +23664,10 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testStructType
+name|testCustomColumnResolving
 parameter_list|()
 block|{
-name|checkStructType
+name|checkCustomColumnResolving
 argument_list|(
 literal|"T"
 argument_list|)
@@ -23614,10 +23677,10 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testStructTypeWithView
+name|testCustomColumnResolvingWithView
 parameter_list|()
 block|{
-name|checkStructType
+name|checkCustomColumnResolving
 argument_list|(
 literal|"T_10"
 argument_list|)
@@ -23625,7 +23688,7 @@ expr_stmt|;
 block|}
 specifier|private
 name|void
-name|checkStructType
+name|checkCustomColumnResolving
 parameter_list|(
 name|String
 name|table
@@ -24034,9 +24097,9 @@ argument_list|)
 operator|.
 name|type
 argument_list|(
-literal|"RecordType(INTEGER C0, INTEGER NOT NULL C2,"
+literal|"RecordType(INTEGER NOT NULL A0, INTEGER C0,"
 operator|+
-literal|" INTEGER NOT NULL A0) NOT NULL"
+literal|" INTEGER NOT NULL C2) NOT NULL"
 argument_list|)
 expr_stmt|;
 comment|// Resolve struct type F1 with wildcard.
@@ -24053,9 +24116,9 @@ argument_list|)
 operator|.
 name|type
 argument_list|(
-literal|"RecordType(INTEGER C0, INTEGER NOT NULL C2,"
+literal|"RecordType(INTEGER NOT NULL A0, INTEGER C0,"
 operator|+
-literal|" INTEGER NOT NULL A0) NOT NULL"
+literal|" INTEGER NOT NULL C2) NOT NULL"
 argument_list|)
 expr_stmt|;
 comment|// Fail non-existent column B0.
@@ -24071,23 +24134,17 @@ argument_list|(
 literal|"Column 'B0' not found in any table"
 argument_list|)
 expr_stmt|;
-comment|// It's OK to reference a record type.
-comment|//
-comment|// This is admittedly a bit strange for Phoenix users. We model a column
-comment|// family as a column whose type is a record, but Phoenix users would
-comment|// rarely if ever want to use a column family as a record.
+comment|// A column family can only be referenced with a star expansion.
 name|sql
 argument_list|(
-literal|"select f1 from struct."
+literal|"select ^f1^ from struct."
 operator|+
 name|table
 argument_list|)
 operator|.
-name|type
+name|fails
 argument_list|(
-literal|"RecordType(RecordType:peek(INTEGER C0, INTEGER NOT NULL C2,"
-operator|+
-literal|" INTEGER NOT NULL A0) NOT NULL F1) NOT NULL"
+literal|"Column 'F1' not found in any table"
 argument_list|)
 expr_stmt|;
 comment|// If we fail to find a column, give an error based on the shortest prefix

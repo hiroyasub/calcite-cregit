@@ -926,18 +926,6 @@ return|return
 literal|true
 return|;
 block|}
-specifier|public
-name|boolean
-name|shouldUseCustomStarExpansion
-parameter_list|()
-block|{
-comment|// Disable custom star expansion otherwise SqlValidatorNamespace.getTable()
-comment|// could be called on a SqlValidatorNamespace that was not successfully
-comment|// validated.
-return|return
-literal|false
-return|;
-block|}
 specifier|protected
 name|boolean
 name|shouldAllowOverRelation

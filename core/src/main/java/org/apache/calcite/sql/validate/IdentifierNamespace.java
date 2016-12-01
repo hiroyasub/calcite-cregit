@@ -980,6 +980,12 @@ name|getTable
 parameter_list|()
 block|{
 return|return
+name|resolvedNamespace
+operator|==
+literal|null
+condition|?
+literal|null
+else|:
 name|resolve
 argument_list|()
 operator|.
