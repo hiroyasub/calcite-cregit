@@ -2496,7 +2496,7 @@ throw|throw
 operator|new
 name|IllegalArgumentException
 argument_list|(
-literal|"no relation wtih alias '"
+literal|"no relation with alias '"
 operator|+
 name|alias
 operator|+
