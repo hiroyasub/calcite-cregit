@@ -839,7 +839,6 @@ specifier|protected
 name|RelRoot
 name|optimize
 parameter_list|(
-specifier|final
 name|RelRoot
 name|root
 parameter_list|,
@@ -874,13 +873,19 @@ operator|.
 name|getPlanner
 argument_list|()
 decl_stmt|;
+comment|// Add a project to the root. Even if the project is trivial, it informs
+comment|// rules firing on the relational expression below it which of the fields
+comment|// are used. SemiJoinRule, for instance.
 name|planner
 operator|.
 name|setRoot
 argument_list|(
 name|root
 operator|.
-name|rel
+name|project
+argument_list|(
+literal|true
+argument_list|)
 argument_list|)
 expr_stmt|;
 specifier|final
