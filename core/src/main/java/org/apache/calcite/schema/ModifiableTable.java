@@ -89,6 +89,20 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rex
+operator|.
+name|RexNode
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -151,6 +165,12 @@ argument_list|<
 name|String
 argument_list|>
 name|updateColumnList
+parameter_list|,
+name|List
+argument_list|<
+name|RexNode
+argument_list|>
+name|sourceExpressionList
 parameter_list|,
 name|boolean
 name|flattened

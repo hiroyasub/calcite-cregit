@@ -69,6 +69,12 @@ name|writer
 operator|.
 name|startList
 argument_list|(
+name|SqlWriter
+operator|.
+name|FrameTypeEnum
+operator|.
+name|VALUES
+argument_list|,
 literal|"VALUES"
 argument_list|,
 literal|""

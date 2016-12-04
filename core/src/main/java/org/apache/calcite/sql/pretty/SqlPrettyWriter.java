@@ -1270,6 +1270,9 @@ block|{
 case|case
 name|WINDOW_DECL_LIST
 case|:
+case|case
+name|VALUES
+case|:
 return|return
 operator|new
 name|FrameImpl

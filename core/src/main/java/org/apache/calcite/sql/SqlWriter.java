@@ -105,6 +105,9 @@ block|,
 comment|/**      * Set operation.      *      *<p>Example:</p>      *<ul>      *<li><code>SELECT * FROM a UNION SELECT * FROM b</code></li>      *</ul>      */
 name|SETOP
 block|,
+comment|/**      * VALUES clause.      *      *<p>Example:      *      *<blockquote><pre>VALUES (1, 'a'),      *   (2, 'b')</pre></blockquote>      */
+name|VALUES
+block|,
 comment|/**      * FROM clause (containing various kinds of JOIN).      */
 name|FROM_LIST
 block|,

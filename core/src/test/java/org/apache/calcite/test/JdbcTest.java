@@ -581,6 +581,20 @@ name|apache
 operator|.
 name|calcite
 operator|.
+name|rex
+operator|.
+name|RexNode
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
 name|runtime
 operator|.
 name|FlatLists
@@ -2325,7 +2339,7 @@ argument_list|)
 argument_list|,
 name|is
 argument_list|(
-literal|"EnumerableTableModify(table=[[adhoc, MUTABLE_EMPLOYEES]], operation=[INSERT], updateColumnList=[[]], flattened=[false])\n"
+literal|"EnumerableTableModify(table=[[adhoc, MUTABLE_EMPLOYEES]], operation=[INSERT], flattened=[false])\n"
 operator|+
 literal|"  EnumerableCalc(expr#0..2=[{inputs}], expr#3=[CAST($t1):JavaType(int) NOT NULL], expr#4=[10], expr#5=[CAST($t0):JavaType(class java.lang.String)], expr#6=[CAST($t2):JavaType(float) NOT NULL], expr#7=[null], empid=[$t3], deptno=[$t4], name=[$t5], salary=[$t6], commission=[$t7])\n"
 operator|+
@@ -2664,7 +2678,7 @@ name|explainContains
 argument_list|(
 literal|""
 operator|+
-literal|"EnumerableTableModify(table=[[adhoc, MUTABLE_EMPLOYEES]], operation=[INSERT], updateColumnList=[[]], flattened=[false])\n"
+literal|"EnumerableTableModify(table=[[adhoc, MUTABLE_EMPLOYEES]], operation=[INSERT], flattened=[false])\n"
 operator|+
 literal|"  EnumerableCalc(expr#0..2=[{inputs}], expr#3=[CAST($t1):JavaType(int) NOT NULL], expr#4=[10], expr#5=[CAST($t0):JavaType(class java.lang.String)], expr#6=[CAST($t2):JavaType(float) NOT NULL], expr#7=[null], expr#8=[20], expr#9=[<($t4, $t8)], expr#10=[1000], expr#11=[>($t7, $t10)], expr#12=[OR($t9, $t11)], empid=[$t3], deptno=[$t4], name=[$t5], salary=[$t6], commission=[$t7], $condition=[$t12])\n"
 operator|+
@@ -27980,6 +27994,12 @@ name|String
 argument_list|>
 name|updateColumnList
 parameter_list|,
+name|List
+argument_list|<
+name|RexNode
+argument_list|>
+name|sourceExpressionList
+parameter_list|,
 name|boolean
 name|flattened
 parameter_list|)
@@ -27998,6 +28018,8 @@ argument_list|,
 name|operation
 argument_list|,
 name|updateColumnList
+argument_list|,
+name|sourceExpressionList
 argument_list|,
 name|flattened
 argument_list|)

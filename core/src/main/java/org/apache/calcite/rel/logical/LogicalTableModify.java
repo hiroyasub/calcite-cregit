@@ -119,6 +119,20 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rex
+operator|.
+name|RexNode
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -170,6 +184,12 @@ name|String
 argument_list|>
 name|updateColumnList
 parameter_list|,
+name|List
+argument_list|<
+name|RexNode
+argument_list|>
+name|sourceExpressionList
+parameter_list|,
 name|boolean
 name|flattened
 parameter_list|)
@@ -189,6 +209,8 @@ argument_list|,
 name|operation
 argument_list|,
 name|updateColumnList
+argument_list|,
+name|sourceExpressionList
 argument_list|,
 name|flattened
 argument_list|)
@@ -250,6 +272,8 @@ name|operation
 argument_list|,
 name|updateColumnList
 argument_list|,
+literal|null
+argument_list|,
 name|flattened
 argument_list|)
 expr_stmt|;
@@ -279,6 +303,12 @@ argument_list|<
 name|String
 argument_list|>
 name|updateColumnList
+parameter_list|,
+name|List
+argument_list|<
+name|RexNode
+argument_list|>
+name|sourceExpressionList
 parameter_list|,
 name|boolean
 name|flattened
@@ -323,6 +353,8 @@ argument_list|,
 name|operation
 argument_list|,
 name|updateColumnList
+argument_list|,
+name|sourceExpressionList
 argument_list|,
 name|flattened
 argument_list|)
@@ -377,6 +409,9 @@ name|getOperation
 argument_list|()
 argument_list|,
 name|getUpdateColumnList
+argument_list|()
+argument_list|,
+name|getSourceExpressionList
 argument_list|()
 argument_list|,
 name|isFlattened

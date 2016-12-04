@@ -821,7 +821,7 @@ decl_stmt|;
 return|return
 name|result
 operator|.
-name|asQuery
+name|asStatement
 argument_list|()
 operator|.
 name|toSqlString

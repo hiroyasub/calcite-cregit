@@ -8725,6 +8725,9 @@ case|:
 case|case
 name|DELETE
 case|:
+case|case
+name|UPDATE
+case|:
 return|return
 name|typeFactory
 operator|.

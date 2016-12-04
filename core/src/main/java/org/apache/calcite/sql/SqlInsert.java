@@ -511,9 +511,9 @@ name|unparse
 argument_list|(
 name|writer
 argument_list|,
-name|opLeft
+literal|0
 argument_list|,
-name|opRight
+literal|0
 argument_list|)
 expr_stmt|;
 block|}

@@ -242,6 +242,11 @@ argument_list|()
 argument_list|,
 name|modify
 operator|.
+name|getSourceExpressionList
+argument_list|()
+argument_list|,
+name|modify
+operator|.
 name|isFlattened
 argument_list|()
 argument_list|)

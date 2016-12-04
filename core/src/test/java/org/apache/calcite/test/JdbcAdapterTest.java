@@ -45,6 +45,38 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|test
+operator|.
+name|CalciteAssert
+operator|.
+name|AssertThat
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|test
+operator|.
+name|CalciteAssert
+operator|.
+name|DatabaseInstance
+import|;
+end_import
+
+begin_import
+import|import
 name|com
 operator|.
 name|google
@@ -199,6 +231,18 @@ name|assertThat
 import|;
 end_import
 
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|Assert
+operator|.
+name|assertTrue
+import|;
+end_import
+
 begin_comment
 comment|/**  * Tests for the {@code org.apache.calcite.adapter.jdbc} package.  */
 end_comment
@@ -208,6 +252,93 @@ specifier|public
 class|class
 name|JdbcAdapterTest
 block|{
+comment|/** VALUES is not pushed down, currently. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testValuesPlan
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select * from \"days\", (values 1, 2) as t(c)"
+decl_stmt|;
+specifier|final
+name|String
+name|explain
+init|=
+literal|"PLAN="
+operator|+
+literal|"EnumerableCalc(expr#0..2=[{inputs}], day=[$t1], week_day=[$t2], EXPR$0=[$t0])\n"
+operator|+
+literal|"  EnumerableJoin(condition=[true], joinType=[inner])\n"
+operator|+
+literal|"    EnumerableValues(tuples=[[{ 1 }, { 2 }]])\n"
+operator|+
+literal|"    JdbcToEnumerableConverter\n"
+operator|+
+literal|"      JdbcTableScan(table=[[foodmart, days]])"
+decl_stmt|;
+specifier|final
+name|String
+name|jdbcSql
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM \"foodmart\".\"days\""
+decl_stmt|;
+name|CalciteAssert
+operator|.
+name|model
+argument_list|(
+name|JdbcTest
+operator|.
+name|FOODMART_MODEL
+argument_list|)
+operator|.
+name|query
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+name|explain
+argument_list|)
+operator|.
+name|runs
+argument_list|()
+operator|.
+name|enable
+argument_list|(
+name|CalciteAssert
+operator|.
+name|DB
+operator|==
+name|CalciteAssert
+operator|.
+name|DatabaseInstance
+operator|.
+name|HSQLDB
+operator|||
+name|CalciteAssert
+operator|.
+name|DB
+operator|==
+name|DatabaseInstance
+operator|.
+name|POSTGRESQL
+argument_list|)
+operator|.
+name|planHasSql
+argument_list|(
+name|jdbcSql
+argument_list|)
+expr_stmt|;
+block|}
 annotation|@
 name|Test
 specifier|public
@@ -2095,6 +2226,692 @@ operator|.
 name|returns
 argument_list|(
 literal|"CENAME=0\n"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/**    * Helper method that should clean any previous TableModify states and create    * one expense_fact instance with store_id = 666.    *    * @param statement JDBC connection statement    */
+specifier|private
+name|void
+name|tableModifyTestDbInitializer
+parameter_list|(
+name|Statement
+name|statement
+parameter_list|)
+block|{
+try|try
+block|{
+name|statement
+operator|.
+name|executeUpdate
+argument_list|(
+literal|"DELETE FROM \"foodmart\".\"expense_fact\""
+operator|+
+literal|" WHERE \"store_id\"=666\n"
+argument_list|)
+expr_stmt|;
+name|int
+name|rowCount
+init|=
+name|statement
+operator|.
+name|executeUpdate
+argument_list|(
+literal|"INSERT INTO \"foodmart\".\"expense_fact\"(\n"
+operator|+
+literal|" \"store_id\", \"account_id\", \"exp_date\", \"time_id\","
+operator|+
+literal|" \"category_id\", \"currency_id\", \"amount\")\n"
+operator|+
+literal|" VALUES (666, 666, TIMESTAMP '1997-01-01 00:00:00',"
+operator|+
+literal|" 666, '666', 666, 666)"
+argument_list|)
+decl_stmt|;
+name|assertTrue
+argument_list|(
+name|rowCount
+operator|==
+literal|1
+argument_list|)
+expr_stmt|;
+block|}
+catch|catch
+parameter_list|(
+name|SQLException
+name|e
+parameter_list|)
+block|{
+throw|throw
+name|Throwables
+operator|.
+name|propagate
+argument_list|(
+name|e
+argument_list|)
+throw|;
+block|}
+block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1527">[CALCITE-1527]    * Support DML in the JDBC adapter</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testTableModifyInsert
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"INSERT INTO \"foodmart\".\"expense_fact\"(\n"
+operator|+
+literal|" \"store_id\", \"account_id\", \"exp_date\", \"time_id\","
+operator|+
+literal|" \"category_id\", \"currency_id\", \"amount\")\n"
+operator|+
+literal|"VALUES (666, 666, TIMESTAMP '1997-01-01 00:00:00',"
+operator|+
+literal|" 666, '666', 666, 666)"
+decl_stmt|;
+specifier|final
+name|String
+name|explain
+init|=
+literal|"PLAN=JdbcToEnumerableConverter\n"
+operator|+
+literal|"  JdbcTableModify(table=[[foodmart, expense_fact]], operation=[INSERT], flattened=[false])\n"
+operator|+
+literal|"    JdbcValues(tuples=[[{ 666, 666, 1997-01-01 00:00:00, 666, '666', 666, 666.0000 }]])\n"
+decl_stmt|;
+specifier|final
+name|String
+name|jdbcSql
+init|=
+literal|"INSERT INTO \"foodmart\".\"expense_fact\""
+operator|+
+literal|" (\"store_id\", \"account_id\", \"exp_date\", \"time_id\","
+operator|+
+literal|" \"category_id\", \"currency_id\", \"amount\")\n"
+operator|+
+literal|"VALUES  (666, 666, TIMESTAMP '1997-01-01 00:00:00', 666, '666', 666, 666.0000)"
+decl_stmt|;
+name|CalciteAssert
+operator|.
+name|model
+argument_list|(
+name|JdbcTest
+operator|.
+name|FOODMART_MODEL
+argument_list|)
+operator|.
+name|query
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+name|explain
+argument_list|)
+operator|.
+name|enable
+argument_list|(
+name|CalciteAssert
+operator|.
+name|DB
+operator|==
+name|DatabaseInstance
+operator|.
+name|HSQLDB
+operator|||
+name|CalciteAssert
+operator|.
+name|DB
+operator|==
+name|DatabaseInstance
+operator|.
+name|POSTGRESQL
+argument_list|)
+operator|.
+name|planUpdateHasSql
+argument_list|(
+name|jdbcSql
+argument_list|,
+literal|1
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testTableModifyInsertMultiValues
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"INSERT INTO \"foodmart\".\"expense_fact\"(\n"
+operator|+
+literal|" \"store_id\", \"account_id\", \"exp_date\", \"time_id\","
+operator|+
+literal|" \"category_id\", \"currency_id\", \"amount\")\n"
+operator|+
+literal|"VALUES (666, 666, TIMESTAMP '1997-01-01 00:00:00',"
+operator|+
+literal|"   666, '666', 666, 666),\n"
+operator|+
+literal|" (777, 666, TIMESTAMP '1997-01-01 00:00:00',"
+operator|+
+literal|"   666, '666', 666, 666)"
+decl_stmt|;
+specifier|final
+name|String
+name|explain
+init|=
+literal|"PLAN=JdbcToEnumerableConverter\n"
+operator|+
+literal|"  JdbcTableModify(table=[[foodmart, expense_fact]], operation=[INSERT], flattened=[false])\n"
+operator|+
+literal|"    JdbcValues(tuples=[[{ 666, 666, 1997-01-01 00:00:00, 666, '666', 666, 666.0000 },"
+operator|+
+literal|" { 777, 666, 1997-01-01 00:00:00, 666, '666', 666, 666.0000 }]])\n"
+decl_stmt|;
+specifier|final
+name|String
+name|jdbcSql
+init|=
+literal|"INSERT INTO \"foodmart\".\"expense_fact\""
+operator|+
+literal|" (\"store_id\", \"account_id\", \"exp_date\", \"time_id\","
+operator|+
+literal|" \"category_id\", \"currency_id\", \"amount\")\n"
+operator|+
+literal|"VALUES  (666, 666, TIMESTAMP '1997-01-01 00:00:00', 666, '666', 666, 666.0000),\n"
+operator|+
+literal|" (777, 666, TIMESTAMP '1997-01-01 00:00:00', 666, '666', 666, 666.0000)"
+decl_stmt|;
+name|CalciteAssert
+operator|.
+name|model
+argument_list|(
+name|JdbcTest
+operator|.
+name|FOODMART_MODEL
+argument_list|)
+operator|.
+name|query
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+name|explain
+argument_list|)
+operator|.
+name|enable
+argument_list|(
+name|CalciteAssert
+operator|.
+name|DB
+operator|==
+name|DatabaseInstance
+operator|.
+name|HSQLDB
+operator|||
+name|CalciteAssert
+operator|.
+name|DB
+operator|==
+name|DatabaseInstance
+operator|.
+name|POSTGRESQL
+argument_list|)
+operator|.
+name|planUpdateHasSql
+argument_list|(
+name|jdbcSql
+argument_list|,
+literal|2
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testTableModifyInsertWithSubQuery
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+specifier|final
+name|AssertThat
+name|that
+init|=
+name|CalciteAssert
+operator|.
+name|model
+argument_list|(
+name|JdbcTest
+operator|.
+name|FOODMART_MODEL
+argument_list|)
+operator|.
+name|enable
+argument_list|(
+name|CalciteAssert
+operator|.
+name|DB
+operator|==
+name|DatabaseInstance
+operator|.
+name|HSQLDB
+argument_list|)
+decl_stmt|;
+name|that
+operator|.
+name|doWithConnection
+argument_list|(
+operator|new
+name|Function
+argument_list|<
+name|CalciteConnection
+argument_list|,
+name|Void
+argument_list|>
+argument_list|()
+block|{
+specifier|public
+name|Void
+name|apply
+parameter_list|(
+name|CalciteConnection
+name|connection
+parameter_list|)
+block|{
+try|try
+block|{
+name|tableModifyTestDbInitializer
+argument_list|(
+name|connection
+operator|.
+name|createStatement
+argument_list|()
+argument_list|)
+expr_stmt|;
+specifier|final
+name|String
+name|sql
+init|=
+literal|"INSERT INTO \"foodmart\".\"expense_fact\"(\n"
+operator|+
+literal|" \"store_id\", \"account_id\", \"exp_date\", \"time_id\","
+operator|+
+literal|" \"category_id\", \"currency_id\", \"amount\")\n"
+operator|+
+literal|"SELECT  \"store_id\", \"account_id\", \"exp_date\","
+operator|+
+literal|" \"time_id\" + 1, \"category_id\", \"currency_id\","
+operator|+
+literal|" \"amount\"\n"
+operator|+
+literal|"FROM \"foodmart\".\"expense_fact\"\n"
+operator|+
+literal|"WHERE \"store_id\" = 666"
+decl_stmt|;
+specifier|final
+name|String
+name|explain
+init|=
+literal|"PLAN=JdbcToEnumerableConverter\n"
+operator|+
+literal|"  JdbcTableModify(table=[[foodmart, expense_fact]], operation=[INSERT], flattened=[false])\n"
+operator|+
+literal|"    JdbcProject(store_id=[$0], account_id=[$1], exp_date=[$2], time_id=[+($3, 1)], category_id=[$4], currency_id=[$5], amount=[$6])\n"
+operator|+
+literal|"      JdbcFilter(condition=[=($0, 666)])\n"
+operator|+
+literal|"        JdbcTableScan(table=[[foodmart, expense_fact]])\n"
+decl_stmt|;
+specifier|final
+name|String
+name|jdbcSql
+init|=
+literal|"INSERT INTO \"foodmart\".\"expense_fact\""
+operator|+
+literal|" (\"store_id\", \"account_id\", \"exp_date\", \"time_id\","
+operator|+
+literal|" \"category_id\", \"currency_id\", \"amount\")\n"
+operator|+
+literal|"(SELECT \"store_id\", \"account_id\", \"exp_date\","
+operator|+
+literal|" \"time_id\" + 1 AS \"time_id\", \"category_id\","
+operator|+
+literal|" \"currency_id\", \"amount\"\n"
+operator|+
+literal|"FROM \"foodmart\".\"expense_fact\"\n"
+operator|+
+literal|"WHERE \"store_id\" = 666)"
+decl_stmt|;
+name|that
+operator|.
+name|query
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+name|explain
+argument_list|)
+operator|.
+name|planUpdateHasSql
+argument_list|(
+name|jdbcSql
+argument_list|,
+literal|1
+argument_list|)
+expr_stmt|;
+return|return
+literal|null
+return|;
+block|}
+catch|catch
+parameter_list|(
+name|SQLException
+name|e
+parameter_list|)
+block|{
+throw|throw
+name|Throwables
+operator|.
+name|propagate
+argument_list|(
+name|e
+argument_list|)
+throw|;
+block|}
+block|}
+block|}
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testTableModifyUpdate
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+specifier|final
+name|AssertThat
+name|that
+init|=
+name|CalciteAssert
+operator|.
+name|model
+argument_list|(
+name|JdbcTest
+operator|.
+name|FOODMART_MODEL
+argument_list|)
+operator|.
+name|enable
+argument_list|(
+name|CalciteAssert
+operator|.
+name|DB
+operator|==
+name|DatabaseInstance
+operator|.
+name|HSQLDB
+argument_list|)
+decl_stmt|;
+name|that
+operator|.
+name|doWithConnection
+argument_list|(
+operator|new
+name|Function
+argument_list|<
+name|CalciteConnection
+argument_list|,
+name|Void
+argument_list|>
+argument_list|()
+block|{
+specifier|public
+name|Void
+name|apply
+parameter_list|(
+name|CalciteConnection
+name|connection
+parameter_list|)
+block|{
+try|try
+block|{
+name|tableModifyTestDbInitializer
+argument_list|(
+name|connection
+operator|.
+name|createStatement
+argument_list|()
+argument_list|)
+expr_stmt|;
+specifier|final
+name|String
+name|sql
+init|=
+literal|"UPDATE \"foodmart\".\"expense_fact\"\n"
+operator|+
+literal|" SET \"account_id\"=888\n"
+operator|+
+literal|" WHERE \"store_id\"=666\n"
+decl_stmt|;
+specifier|final
+name|String
+name|explain
+init|=
+literal|"PLAN=JdbcToEnumerableConverter\n"
+operator|+
+literal|"  JdbcTableModify(table=[[foodmart, expense_fact]], operation=[UPDATE], updateColumnList=[[account_id]], sourceExpressionList=[[888]], flattened=[false])\n"
+operator|+
+literal|"    JdbcProject(store_id=[$0], account_id=[$1], exp_date=[$2], time_id=[$3], category_id=[$4], currency_id=[$5], amount=[$6], EXPR$0=[888])\n"
+operator|+
+literal|"      JdbcFilter(condition=[=($0, 666)])\n"
+operator|+
+literal|"        JdbcTableScan(table=[[foodmart, expense_fact]])"
+decl_stmt|;
+specifier|final
+name|String
+name|jdbcSql
+init|=
+literal|"UPDATE \"foodmart\".\"expense_fact\""
+operator|+
+literal|" SET \"account_id\" = 888\n"
+operator|+
+literal|"WHERE \"store_id\" = 666"
+decl_stmt|;
+name|that
+operator|.
+name|query
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+name|explain
+argument_list|)
+operator|.
+name|planUpdateHasSql
+argument_list|(
+name|jdbcSql
+argument_list|,
+literal|1
+argument_list|)
+expr_stmt|;
+return|return
+literal|null
+return|;
+block|}
+catch|catch
+parameter_list|(
+name|SQLException
+name|e
+parameter_list|)
+block|{
+throw|throw
+name|Throwables
+operator|.
+name|propagate
+argument_list|(
+name|e
+argument_list|)
+throw|;
+block|}
+block|}
+block|}
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testTableModifyDelete
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+specifier|final
+name|AssertThat
+name|that
+init|=
+name|CalciteAssert
+operator|.
+name|model
+argument_list|(
+name|JdbcTest
+operator|.
+name|FOODMART_MODEL
+argument_list|)
+operator|.
+name|enable
+argument_list|(
+name|CalciteAssert
+operator|.
+name|DB
+operator|==
+name|DatabaseInstance
+operator|.
+name|HSQLDB
+argument_list|)
+decl_stmt|;
+name|that
+operator|.
+name|doWithConnection
+argument_list|(
+operator|new
+name|Function
+argument_list|<
+name|CalciteConnection
+argument_list|,
+name|Void
+argument_list|>
+argument_list|()
+block|{
+specifier|public
+name|Void
+name|apply
+parameter_list|(
+name|CalciteConnection
+name|connection
+parameter_list|)
+block|{
+try|try
+block|{
+name|tableModifyTestDbInitializer
+argument_list|(
+name|connection
+operator|.
+name|createStatement
+argument_list|()
+argument_list|)
+expr_stmt|;
+specifier|final
+name|String
+name|sql
+init|=
+literal|"DELETE FROM \"foodmart\".\"expense_fact\"\n"
+operator|+
+literal|"WHERE \"store_id\"=666\n"
+decl_stmt|;
+specifier|final
+name|String
+name|explain
+init|=
+literal|"PLAN=JdbcToEnumerableConverter\n"
+operator|+
+literal|"  JdbcTableModify(table=[[foodmart, expense_fact]], operation=[DELETE], flattened=[false])\n"
+operator|+
+literal|"    JdbcFilter(condition=[=($0, 666)])\n"
+operator|+
+literal|"      JdbcTableScan(table=[[foodmart, expense_fact]]"
+decl_stmt|;
+specifier|final
+name|String
+name|jdbcSql
+init|=
+literal|"DELETE FROM \"foodmart\".\"expense_fact\"\n"
+operator|+
+literal|"WHERE \"store_id\" = 666"
+decl_stmt|;
+name|that
+operator|.
+name|query
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+name|explain
+argument_list|)
+operator|.
+name|planUpdateHasSql
+argument_list|(
+name|jdbcSql
+argument_list|,
+literal|1
+argument_list|)
+expr_stmt|;
+return|return
+literal|null
+return|;
+block|}
+catch|catch
+parameter_list|(
+name|SQLException
+name|e
+parameter_list|)
+block|{
+throw|throw
+name|Throwables
+operator|.
+name|propagate
+argument_list|(
+name|e
+argument_list|)
+throw|;
+block|}
+block|}
+block|}
 argument_list|)
 expr_stmt|;
 block|}

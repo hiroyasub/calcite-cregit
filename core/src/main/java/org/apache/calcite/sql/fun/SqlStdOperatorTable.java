@@ -2898,7 +2898,9 @@ name|ROW
 init|=
 operator|new
 name|SqlRowOperator
-argument_list|()
+argument_list|(
+literal|"ROW"
+argument_list|)
 decl_stmt|;
 comment|/**    * A special operator for the subtraction of two DATETIMEs. The format of    * DATETIME subtraction is:    *    *<blockquote><code>"("&lt;datetime&gt; "-"&lt;datetime&gt; ")"    *&lt;interval qualifier&gt;</code></blockquote>    *    *<p>This operator is special since it needs to hold the    * additional interval qualifier specification.</p>    */
 specifier|public

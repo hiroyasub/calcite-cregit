@@ -7469,7 +7469,9 @@ literal|"with v(i,c) as (values (1, 'a'), (2, 'bb'))\n"
 operator|+
 literal|"select c, i from v"
 argument_list|,
-literal|"WITH `V` (`I`, `C`) AS (VALUES (ROW(1, 'a')), (ROW(2, 'bb'))) (SELECT `C`, `I`\n"
+literal|"WITH `V` (`I`, `C`) AS (VALUES (ROW(1, 'a')),\n"
+operator|+
+literal|"(ROW(2, 'bb'))) (SELECT `C`, `I`\n"
 operator|+
 literal|"FROM `V`)"
 argument_list|)
@@ -10801,7 +10803,11 @@ literal|"select * from (values(1,'two'), 3, (4, 'five'))"
 argument_list|,
 literal|"SELECT *\n"
 operator|+
-literal|"FROM (VALUES (ROW(1, 'two')), (ROW(3)), (ROW(4, 'five')))"
+literal|"FROM (VALUES (ROW(1, 'two')),\n"
+operator|+
+literal|"(ROW(3)),\n"
+operator|+
+literal|"(ROW(4, 'five')))"
 argument_list|)
 expr_stmt|;
 block|}
@@ -11742,7 +11748,7 @@ literal|"EXPLAIN PLAN INCLUDING ATTRIBUTES WITH IMPLEMENTATION FOR\n"
 operator|+
 literal|"INSERT INTO `EMPS`\n"
 operator|+
-literal|"(VALUES (ROW(1, 'a')))"
+literal|"VALUES (ROW(1, 'a'))"
 decl_stmt|;
 name|check
 argument_list|(
@@ -11873,7 +11879,7 @@ name|expected
 init|=
 literal|"INSERT INTO `EMPS`\n"
 operator|+
-literal|"(VALUES (ROW(1, 'Fredkin')))"
+literal|"VALUES (ROW(1, 'Fredkin'))"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -11977,7 +11983,7 @@ name|expected
 init|=
 literal|"UPSERT INTO `EMPS`\n"
 operator|+
-literal|"(VALUES (ROW(1, 'Fredkin')))"
+literal|"VALUES (ROW(1, 'Fredkin'))"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -12039,7 +12045,7 @@ literal|"EXPLAIN PLAN INCLUDING ATTRIBUTES WITH IMPLEMENTATION FOR\n"
 operator|+
 literal|"UPSERT INTO `EMPS1`\n"
 operator|+
-literal|"(VALUES (ROW(1, 2)))"
+literal|"VALUES (ROW(1, 2))"
 argument_list|)
 expr_stmt|;
 block|}
@@ -13673,7 +13679,9 @@ literal|"select x from (values (1, 2), (3, 4)) as t1 (\"a\", b) where \"a\"> b"
 argument_list|,
 literal|"SELECT `X`\n"
 operator|+
-literal|"FROM (VALUES (ROW(1, 2)), (ROW(3, 4))) AS `T1` (`a`, `B`)\n"
+literal|"FROM (VALUES (ROW(1, 2)),\n"
+operator|+
+literal|"(ROW(3, 4))) AS `T1` (`a`, `B`)\n"
 operator|+
 literal|"WHERE (`a`> `B`)"
 argument_list|)
@@ -22395,7 +22403,9 @@ name|ok
 argument_list|(
 literal|"INSERT INTO `T`\n"
 operator|+
-literal|"(VALUES (ROW((NEXT VALUE FOR `MY_SEQ`))), (ROW((CURRENT VALUE FOR `MY_SEQ`))))"
+literal|"VALUES (ROW((NEXT VALUE FOR `MY_SEQ`))),\n"
+operator|+
+literal|"(ROW((CURRENT VALUE FOR `MY_SEQ`)))"
 argument_list|)
 expr_stmt|;
 name|sql
@@ -22407,7 +22417,7 @@ name|ok
 argument_list|(
 literal|"INSERT INTO `T`\n"
 operator|+
-literal|"(VALUES (ROW(1, (CURRENT VALUE FOR `MY_SEQ`))))"
+literal|"VALUES (ROW(1, (CURRENT VALUE FOR `MY_SEQ`)))"
 argument_list|)
 expr_stmt|;
 block|}

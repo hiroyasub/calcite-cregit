@@ -211,11 +211,14 @@ block|{
 comment|//~ Constructors -----------------------------------------------------------
 specifier|public
 name|SqlRowOperator
-parameter_list|()
+parameter_list|(
+name|String
+name|name
+parameter_list|)
 block|{
 name|super
 argument_list|(
-literal|"ROW"
+name|name
 argument_list|,
 name|SqlKind
 operator|.
@@ -236,6 +239,21 @@ operator|.
 name|VARIADIC
 argument_list|)
 expr_stmt|;
+assert|assert
+name|name
+operator|.
+name|equals
+argument_list|(
+literal|"ROW"
+argument_list|)
+operator|||
+name|name
+operator|.
+name|equals
+argument_list|(
+literal|" "
+argument_list|)
+assert|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
 comment|// implement SqlOperator

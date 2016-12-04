@@ -205,6 +205,20 @@ end_import
 
 begin_import
 import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|base
+operator|.
+name|Throwables
+import|;
+end_import
+
+begin_import
+import|import
 name|org
 operator|.
 name|junit
@@ -244,18 +258,6 @@ operator|.
 name|Assert
 operator|.
 name|assertThat
-import|;
-end_import
-
-begin_import
-import|import static
-name|org
-operator|.
-name|junit
-operator|.
-name|Assert
-operator|.
-name|assertTrue
 import|;
 end_import
 
@@ -2197,7 +2199,7 @@ argument_list|,
 name|rel
 argument_list|)
 operator|.
-name|asQuery
+name|asStatement
 argument_list|()
 decl_stmt|;
 name|assertThat
@@ -2230,18 +2232,14 @@ name|Exception
 name|e
 parameter_list|)
 block|{
-name|assertTrue
-argument_list|(
-literal|"Parsing failed throwing error: "
-operator|+
-name|e
+throw|throw
+name|Throwables
 operator|.
-name|getMessage
-argument_list|()
-argument_list|,
-literal|false
+name|propagate
+argument_list|(
+name|e
 argument_list|)
-expr_stmt|;
+throw|;
 block|}
 return|return
 name|this

@@ -4518,6 +4518,9 @@ case|:
 case|case
 name|DELETE
 case|:
+case|case
+name|UPDATE
+case|:
 return|return
 name|Meta
 operator|.
@@ -5009,6 +5012,9 @@ name|INSERT
 case|:
 case|case
 name|DELETE
+case|:
+case|case
+name|UPDATE
 case|:
 case|case
 name|EXPLAIN

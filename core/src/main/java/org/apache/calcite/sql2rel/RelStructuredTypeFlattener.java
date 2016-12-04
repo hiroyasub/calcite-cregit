@@ -1926,6 +1926,11 @@ operator|.
 name|getUpdateColumnList
 argument_list|()
 argument_list|,
+name|rel
+operator|.
+name|getSourceExpressionList
+argument_list|()
+argument_list|,
 literal|true
 argument_list|)
 decl_stmt|;
