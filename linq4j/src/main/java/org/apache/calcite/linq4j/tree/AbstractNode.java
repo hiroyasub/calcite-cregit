@@ -202,8 +202,8 @@ specifier|public
 name|Node
 name|accept
 parameter_list|(
-name|Visitor
-name|visitor
+name|Shuttle
+name|shuttle
 parameter_list|)
 block|{
 throw|throw

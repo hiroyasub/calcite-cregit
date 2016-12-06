@@ -138,15 +138,15 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Visitor that optimizes expressions.  *  *<p>The optimizations are essential, not mere tweaks. Without  * optimization, expressions such as {@code false == null} will be left in,  * which are invalid to Janino (because it does not automatically box  * primitives).</p>  */
+comment|/**  * Shuttle that optimizes expressions.  *  *<p>The optimizations are essential, not mere tweaks. Without  * optimization, expressions such as {@code false == null} will be left in,  * which are invalid to Janino (because it does not automatically box  * primitives).  */
 end_comment
 
 begin_class
 specifier|public
 class|class
-name|OptimizeVisitor
+name|OptimizeShuttle
 extends|extends
-name|Visitor
+name|Shuttle
 block|{
 specifier|public
 specifier|static
@@ -236,9 +236,7 @@ name|KNOWN_NON_NULL_METHODS
 init|=
 operator|new
 name|HashSet
-argument_list|<
-name|Method
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 static|static
@@ -336,11 +334,7 @@ name|NOT_BINARY_COMPLEMENT
 init|=
 operator|new
 name|EnumMap
-argument_list|<
-name|ExpressionType
-argument_list|,
-name|ExpressionType
-argument_list|>
+argument_list|<>
 argument_list|(
 name|ExpressionType
 operator|.
@@ -1697,9 +1691,7 @@ name|newList
 init|=
 operator|new
 name|ArrayList
-argument_list|<
-name|Node
-argument_list|>
+argument_list|<>
 argument_list|(
 name|list
 operator|.
@@ -2169,7 +2161,7 @@ block|}
 end_class
 
 begin_comment
-comment|// End OptimizeVisitor.java
+comment|// End OptimizeShuttle.java
 end_comment
 
 end_unit

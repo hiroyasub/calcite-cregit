@@ -203,7 +203,7 @@ name|linq4j
 operator|.
 name|tree
 operator|.
-name|OptimizeVisitor
+name|OptimizeShuttle
 import|;
 end_import
 
@@ -5355,7 +5355,7 @@ operator|.
 name|accept
 argument_list|(
 operator|new
-name|OptimizeVisitor
+name|OptimizeShuttle
 argument_list|()
 argument_list|)
 return|;

@@ -86,7 +86,7 @@ specifier|public
 class|class
 name|ClassDeclarationFinder
 extends|extends
-name|Visitor
+name|Shuttle
 block|{
 specifier|protected
 specifier|final
@@ -421,7 +421,7 @@ comment|/**    * Creates optimizer local to the newly generated anonymous class.
 annotation|@
 name|Override
 specifier|public
-name|Visitor
+name|Shuttle
 name|preVisit
 parameter_list|(
 name|NewExpression
@@ -464,7 +464,7 @@ comment|/**    * Creates optimizer local to the newly generated class.    *    *
 annotation|@
 name|Override
 specifier|public
-name|Visitor
+name|Shuttle
 name|preVisit
 parameter_list|(
 name|ClassDeclaration
@@ -699,9 +699,7 @@ name|newDecls
 init|=
 operator|new
 name|ArrayList
-argument_list|<
-name|MemberDeclaration
-argument_list|>
+argument_list|<>
 argument_list|(
 name|memberDeclarations
 operator|.

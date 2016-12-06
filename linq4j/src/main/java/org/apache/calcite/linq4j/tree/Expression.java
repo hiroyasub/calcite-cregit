@@ -78,8 +78,8 @@ specifier|abstract
 name|Expression
 name|accept
 parameter_list|(
-name|Visitor
-name|visitor
+name|Shuttle
+name|shuttle
 parameter_list|)
 function_decl|;
 comment|/**    * Indicates that the node can be reduced to a simpler node. If this    * returns true, Reduce() can be called to produce the reduced form.    */

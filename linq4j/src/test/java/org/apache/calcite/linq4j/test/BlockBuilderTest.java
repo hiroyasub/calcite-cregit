@@ -109,7 +109,7 @@ name|linq4j
 operator|.
 name|tree
 operator|.
-name|OptimizeVisitor
+name|OptimizeShuttle
 import|;
 end_import
 
@@ -125,7 +125,7 @@ name|linq4j
 operator|.
 name|tree
 operator|.
-name|Visitor
+name|Shuttle
 import|;
 end_import
 
@@ -371,13 +371,13 @@ block|{
 annotation|@
 name|Override
 specifier|protected
-name|Visitor
-name|createOptimizeVisitor
+name|Shuttle
+name|createOptimizeShuttle
 parameter_list|()
 block|{
 return|return
 operator|new
-name|OptimizeVisitor
+name|OptimizeShuttle
 argument_list|()
 block|{
 annotation|@

@@ -269,7 +269,7 @@ name|linq4j
 operator|.
 name|tree
 operator|.
-name|Types
+name|Shuttle
 import|;
 end_import
 
@@ -285,7 +285,7 @@ name|linq4j
 operator|.
 name|tree
 operator|.
-name|Visitor
+name|Types
 import|;
 end_import
 
@@ -4015,7 +4015,7 @@ operator|.
 name|accept
 argument_list|(
 operator|new
-name|Visitor
+name|Shuttle
 argument_list|()
 argument_list|)
 expr_stmt|;
@@ -4152,7 +4152,7 @@ operator|.
 name|accept
 argument_list|(
 operator|new
-name|Visitor
+name|Shuttle
 argument_list|()
 argument_list|)
 expr_stmt|;
@@ -4407,7 +4407,7 @@ operator|.
 name|accept
 argument_list|(
 operator|new
-name|Visitor
+name|Shuttle
 argument_list|()
 argument_list|)
 expr_stmt|;
@@ -4600,7 +4600,7 @@ operator|.
 name|accept
 argument_list|(
 operator|new
-name|Visitor
+name|Shuttle
 argument_list|()
 argument_list|)
 expr_stmt|;
@@ -4775,7 +4775,7 @@ operator|.
 name|accept
 argument_list|(
 operator|new
-name|Visitor
+name|Shuttle
 argument_list|()
 argument_list|)
 expr_stmt|;
