@@ -476,7 +476,7 @@ name|getSql
 argument_list|()
 return|;
 block|}
-comment|/**    * Returns the SQL text of the tree of which this<code>SqlNode</code> is    * the root.    *    * @param dialect     Dialect    * @param forceParens wraps all expressions in parentheses; good for parse    *                    test, but false by default.    *    *<p>Typical return values are:</p>    *<ul>    *<li>'It''s a bird!'</li>    *<li>NULL</li>    *<li>12.3</li>    *<li>DATE '1969-04-29'</li>    *</ul>    */
+comment|/**    * Returns the SQL text of the tree of which this<code>SqlNode</code> is    * the root.    *    *<p>Typical return values are:    *    *<ul>    *<li>'It''s a bird!'    *<li>NULL    *<li>12.3    *<li>DATE '1969-04-29'    *</ul>    *    * @param dialect     Dialect (null for ANSI SQL)    * @param forceParens Whether to wrap all expressions in parentheses;    *                    useful for parse test, but false by default    */
 specifier|public
 name|SqlString
 name|toSqlString

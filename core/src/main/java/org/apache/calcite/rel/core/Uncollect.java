@@ -187,20 +187,6 @@ name|calcite
 operator|.
 name|sql
 operator|.
-name|SqlUtil
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|sql
-operator|.
 name|type
 operator|.
 name|MapSqlType
@@ -718,21 +704,15 @@ expr_stmt|;
 block|}
 else|else
 block|{
-comment|// Element type is not a record. It may be a scalar type, say
-comment|// "INTEGER". Wrap it in a struct type.
+comment|// Element type is not a record, use the field name of the element directly
 name|builder
 operator|.
 name|add
 argument_list|(
-name|SqlUtil
-operator|.
-name|deriveAliasFromOrdinal
-argument_list|(
 name|field
 operator|.
-name|getIndex
+name|getName
 argument_list|()
-argument_list|)
 argument_list|,
 name|ret
 argument_list|)

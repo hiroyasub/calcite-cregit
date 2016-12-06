@@ -183,6 +183,18 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|hamcrest
+operator|.
+name|core
+operator|.
+name|StringContains
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|sql
@@ -900,7 +912,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/**    * Creates a Matcher that matches a {@link RelNode} its string representation,    * after converting Windows-style line endings ("\r\n")    * to Unix-style line endings ("\n"), is equal to the given {@code value}.    */
+comment|/**    * Creates a Matcher that matches a {@link RelNode} if its string    * representation, after converting Windows-style line endings ("\r\n")    * to Unix-style line endings ("\n"), is equal to the given {@code value}.    */
 annotation|@
 name|Factory
 specifier|public
@@ -922,6 +934,53 @@ argument_list|(
 name|Is
 operator|.
 name|is
+argument_list|(
+name|value
+argument_list|)
+argument_list|,
+name|input
+lambda|->
+block|{
+comment|// Convert RelNode to a string with Linux line-endings
+return|return
+name|Util
+operator|.
+name|toLinux
+argument_list|(
+name|RelOptUtil
+operator|.
+name|toString
+argument_list|(
+name|input
+argument_list|)
+argument_list|)
+return|;
+block|}
+argument_list|)
+return|;
+block|}
+comment|/**    * Creates a Matcher that matches a {@link RelNode} if its string    * representation, after converting Windows-style line endings ("\r\n")    * to Unix-style line endings ("\n"), contains the given {@code value}    * as a substring.    */
+annotation|@
+name|Factory
+specifier|public
+specifier|static
+name|Matcher
+argument_list|<
+name|RelNode
+argument_list|>
+name|inTree
+parameter_list|(
+specifier|final
+name|String
+name|value
+parameter_list|)
+block|{
+return|return
+name|compose
+argument_list|(
+name|StringContains
+operator|.
+name|containsString
 argument_list|(
 name|value
 argument_list|)

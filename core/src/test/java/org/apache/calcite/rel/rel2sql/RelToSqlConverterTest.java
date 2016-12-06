@@ -12341,6 +12341,124 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testCorrelate
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select d.\"department_id\", d_plusOne "
+operator|+
+literal|"from \"department\" as d, "
+operator|+
+literal|"       lateral (select d.\"department_id\" + 1 as d_plusOne"
+operator|+
+literal|"                from (values(true)))"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT \"$cor0\".\"department_id\", \"$cor0\".\"D_PLUSONE\"\n"
+operator|+
+literal|"FROM \"foodmart\".\"department\" AS \"$cor0\",\n"
+operator|+
+literal|"LATERAL (SELECT \"$cor0\".\"department_id\" + 1 AS \"D_PLUSONE\"\n"
+operator|+
+literal|"FROM (VALUES  (TRUE)) AS \"t\" (\"EXPR$0\")) AS \"t0\""
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testUncollectExplicitAlias
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select did + 1 \n"
+operator|+
+literal|"from unnest(select collect(\"department_id\") as deptid"
+operator|+
+literal|"            from \"department\") as t(did)"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT \"DEPTID\" + 1\n"
+operator|+
+literal|"FROM UNNEST (SELECT COLLECT(\"department_id\") AS \"DEPTID\"\n"
+operator|+
+literal|"FROM \"foodmart\".\"department\") AS \"t0\" (\"DEPTID\")"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testUncollectImplicitAlias
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select did + 1 \n"
+operator|+
+literal|"from unnest(select collect(\"department_id\") "
+operator|+
+literal|"            from \"department\") as t(did)"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT \"col_0\" + 1\n"
+operator|+
+literal|"FROM UNNEST (SELECT COLLECT(\"department_id\")\n"
+operator|+
+literal|"FROM \"foodmart\".\"department\") AS \"t0\" (\"col_0\")"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testWithinGroup1
 parameter_list|()
 block|{

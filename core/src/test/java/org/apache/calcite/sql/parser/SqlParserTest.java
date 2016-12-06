@@ -11422,11 +11422,11 @@ literal|"SELECT *\n"
 operator|+
 literal|"FROM `DEPT`\n"
 operator|+
-literal|"LEFT JOIN LATERAL((SELECT *\n"
+literal|"LEFT JOIN LATERAL (SELECT *\n"
 operator|+
 literal|"FROM `EMP`\n"
 operator|+
-literal|"WHERE (`EMP`.`DEPTNO` = `DEPT`.`DEPTNO`))) ON TRUE"
+literal|"WHERE (`EMP`.`DEPTNO` = `DEPT`.`DEPTNO`)) ON TRUE"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -11468,11 +11468,11 @@ literal|"SELECT *\n"
 operator|+
 literal|"FROM `DEPT`\n"
 operator|+
-literal|"LEFT JOIN LATERAL((SELECT *\n"
+literal|"LEFT JOIN LATERAL (SELECT *\n"
 operator|+
 literal|"FROM `EMP`\n"
 operator|+
-literal|"WHERE (`EMP`.`DEPTNO` = `DEPT`.`DEPTNO`))) ON TRUE"
+literal|"WHERE (`EMP`.`DEPTNO` = `DEPT`.`DEPTNO`)) ON TRUE"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -14008,9 +14008,9 @@ name|expected2
 init|=
 literal|"SELECT *\n"
 operator|+
-literal|"FROM LATERAL((SELECT *\n"
+literal|"FROM LATERAL (SELECT *\n"
 operator|+
-literal|"FROM `EMP`))"
+literal|"FROM `EMP`)"
 decl_stmt|;
 name|sql
 argument_list|(

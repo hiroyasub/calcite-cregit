@@ -229,7 +229,6 @@ name|RelDataTypeFactory
 name|typeFactory
 decl_stmt|;
 specifier|private
-specifier|final
 name|RelOptPlanner
 name|planner
 decl_stmt|;

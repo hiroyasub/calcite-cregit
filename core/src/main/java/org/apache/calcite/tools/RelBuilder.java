@@ -2336,6 +2336,35 @@ argument_list|)
 argument_list|)
 return|;
 block|}
+specifier|public
+name|RelOptCluster
+name|getCluster
+parameter_list|()
+block|{
+return|return
+name|cluster
+return|;
+block|}
+specifier|public
+name|RelOptSchema
+name|getRelOptSchema
+parameter_list|()
+block|{
+return|return
+name|relOptSchema
+return|;
+block|}
+specifier|public
+name|RelFactories
+operator|.
+name|TableScanFactory
+name|getScanFactory
+parameter_list|()
+block|{
+return|return
+name|scanFactory
+return|;
+block|}
 comment|// Methods for manipulating the stack
 comment|/** Adds a relational expression to be the input to the next relational    * expression constructed.    *    *<p>This method is usual when you want to weave in relational expressions    * that are not supported by the builder. If, while creating such expressions,    * you need to use previously built expressions as inputs, call    * {@link #build()} to pop those inputs. */
 specifier|public
@@ -13768,14 +13797,15 @@ name|alias
 parameter_list|)
 function_decl|;
 block|}
-comment|/** Implementation of {@link GroupKey}. */
-specifier|protected
+comment|/** Implementation of {@link RelBuilder.GroupKey}. */
+specifier|public
 specifier|static
 class|class
 name|GroupKeyImpl
 implements|implements
 name|GroupKey
 block|{
+specifier|public
 specifier|final
 name|ImmutableList
 argument_list|<
@@ -13783,6 +13813,7 @@ name|RexNode
 argument_list|>
 name|nodes
 decl_stmt|;
+specifier|public
 specifier|final
 name|ImmutableList
 argument_list|<
@@ -13793,6 +13824,7 @@ argument_list|>
 argument_list|>
 name|nodeLists
 decl_stmt|;
+specifier|public
 specifier|final
 name|String
 name|alias

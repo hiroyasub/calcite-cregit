@@ -19941,8 +19941,8 @@ argument_list|,
 name|type
 argument_list|)
 expr_stmt|;
-comment|// we do not want to pass on the RelRecordType returned
-comment|// by the sub query.  Just the type of the single expression
+comment|// We do not want to pass on the RelRecordType returned
+comment|// by the sub-query.  Just the type of the single expression
 comment|// in the sub-query select list.
 assert|assert
 name|type
