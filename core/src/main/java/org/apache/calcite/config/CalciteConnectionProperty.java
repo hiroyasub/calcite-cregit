@@ -352,6 +352,20 @@ argument_list|,
 literal|false
 argument_list|)
 block|,
+comment|/** Parser factory.    *    *<p>The name of a class that implements    * {@link org.apache.calcite.sql.parser.SqlParserImplFactory}. */
+name|PARSER_FACTORY
+argument_list|(
+literal|"parserFactory"
+argument_list|,
+name|Type
+operator|.
+name|PLUGIN
+argument_list|,
+literal|null
+argument_list|,
+literal|false
+argument_list|)
+block|,
 comment|/** Name of initial schema. */
 name|SCHEMA
 argument_list|(

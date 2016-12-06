@@ -169,6 +169,23 @@ name|boolean
 name|caseSensitive
 parameter_list|()
 function_decl|;
+comment|/** @see CalciteConnectionProperty#PARSER_FACTORY */
+parameter_list|<
+name|T
+parameter_list|>
+name|T
+name|parserFactory
+parameter_list|(
+name|Class
+argument_list|<
+name|T
+argument_list|>
+name|parserFactoryClass
+parameter_list|,
+name|T
+name|defaultParserFactory
+parameter_list|)
+function_decl|;
 comment|/** @see CalciteConnectionProperty#SCHEMA_FACTORY */
 parameter_list|<
 name|T

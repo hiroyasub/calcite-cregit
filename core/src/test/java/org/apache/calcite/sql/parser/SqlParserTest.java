@@ -23339,7 +23339,7 @@ name|s
 return|;
 block|}
 comment|/** Helper class for building fluent code such as    * {@code sql("values 1").ok();}. */
-specifier|private
+specifier|protected
 class|class
 name|Sql
 block|{

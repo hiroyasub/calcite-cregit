@@ -136,6 +136,24 @@ literal|"(?s).*Encountered \"upload\" at .*"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testCreateTable
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"CREATE TABLE foo.baz(i INTEGER, j VARCHAR(10) NOT NULL)"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+literal|"CREATE TABLE `FOO`.`BAZ` (`I` INTEGER, `J` VARCHAR(10) NOT NULL)"
+argument_list|)
+expr_stmt|;
+block|}
 block|}
 end_class
 
