@@ -3244,7 +3244,7 @@ name|sql
 init|=
 literal|"select deptno from emp\n"
 operator|+
-literal|"group by grouping sets ((deptno), (empno, deptno))"
+literal|"group by grouping sets ((deptno), (ename, deptno))"
 decl_stmt|;
 name|checkRowCount
 argument_list|(
@@ -4006,7 +4006,7 @@ name|rel
 init|=
 name|convertSql
 argument_list|(
-literal|"select * from emp join dept using (deptno)"
+literal|"select * from emp join bonus using (ename)"
 argument_list|)
 decl_stmt|;
 specifier|final

@@ -8769,15 +8769,15 @@ specifier|final
 name|String
 name|sql
 init|=
-literal|"select empno, sal, deptno from ("
+literal|"select ename, sal, deptno from ("
 operator|+
-literal|"  select empno, sal, deptno"
+literal|"  select ename, sal, deptno"
 operator|+
 literal|"  from emp"
 operator|+
 literal|"  where sal> 5000)"
 operator|+
-literal|"group by empno, sal, deptno"
+literal|"group by ename, sal, deptno"
 decl_stmt|;
 name|checkPlanning
 argument_list|(
@@ -8851,15 +8851,15 @@ specifier|final
 name|String
 name|sql
 init|=
-literal|"select empno, sal, deptno from ("
+literal|"select ename, sal, deptno from ("
 operator|+
-literal|"  select empno, sal, deptno"
+literal|"  select ename, sal, deptno"
 operator|+
 literal|"  from emp"
 operator|+
 literal|"  where sal> 5000)"
 operator|+
-literal|"group by rollup(empno, sal, deptno)"
+literal|"group by rollup(ename, sal, deptno)"
 decl_stmt|;
 name|checkPlanning
 argument_list|(
@@ -10463,13 +10463,13 @@ specifier|final
 name|String
 name|sql
 init|=
-literal|"select e.empno,d.deptno\n"
+literal|"select e.job,d.name\n"
 operator|+
 literal|"from (select * from sales.emp where empno = 10) as e\n"
 operator|+
-literal|"join sales.dept as d on e.empno = d.deptno\n"
+literal|"join sales.dept as d on e.job = d.name\n"
 operator|+
-literal|"group by e.empno,d.deptno"
+literal|"group by e.job,d.name"
 decl_stmt|;
 name|checkPlanning
 argument_list|(
@@ -10536,15 +10536,15 @@ specifier|final
 name|String
 name|sql
 init|=
-literal|"select e.empno,d.deptno\n"
+literal|"select e.job,d.name\n"
 operator|+
 literal|"from (select * from sales.emp where empno = 10) as e\n"
 operator|+
-literal|"join sales.dept as d on e.empno = d.deptno\n"
+literal|"join sales.dept as d on e.job = d.name\n"
 operator|+
 literal|"and e.deptno + e.empno = d.deptno + 5\n"
 operator|+
-literal|"group by e.empno,d.deptno"
+literal|"group by e.job,d.name"
 decl_stmt|;
 name|checkPlanning
 argument_list|(
@@ -10687,13 +10687,13 @@ specifier|final
 name|String
 name|sql
 init|=
-literal|"select e.empno,sum(sal)\n"
+literal|"select e.job,sum(sal)\n"
 operator|+
 literal|"from (select * from sales.emp where empno = 10) as e\n"
 operator|+
-literal|"join sales.dept as d on e.empno = d.deptno\n"
+literal|"join sales.dept as d on e.job = d.name\n"
 operator|+
-literal|"group by e.empno,d.deptno"
+literal|"group by e.job,d.name"
 decl_stmt|;
 name|checkPlanning
 argument_list|(
@@ -10761,7 +10761,7 @@ specifier|final
 name|String
 name|sql
 init|=
-literal|"select e.empno,\n"
+literal|"select e.job,\n"
 operator|+
 literal|"  min(sal) as min_sal, min(e.deptno) as min_deptno,\n"
 operator|+
@@ -10773,9 +10773,9 @@ literal|"  count(mgr) as count_mgr\n"
 operator|+
 literal|"from sales.emp as e\n"
 operator|+
-literal|"join sales.dept as d on e.empno = d.deptno\n"
+literal|"join sales.dept as d on e.job = d.name\n"
 operator|+
-literal|"group by e.empno,d.deptno"
+literal|"group by e.job,d.name"
 decl_stmt|;
 name|checkPlanning
 argument_list|(
@@ -10843,17 +10843,17 @@ specifier|final
 name|String
 name|sql
 init|=
-literal|"select d.deptno,\n"
+literal|"select d.name,\n"
 operator|+
 literal|"  sum(sal) as sum_sal, count(*) as c\n"
 operator|+
 literal|"from sales.emp as e\n"
 operator|+
-literal|"join (select distinct deptno from sales.dept) as d\n"
+literal|"join (select distinct name from sales.dept) as d\n"
 operator|+
-literal|"  on e.empno = d.deptno\n"
+literal|"  on e.job = d.name\n"
 operator|+
-literal|"group by d.deptno"
+literal|"group by d.name"
 decl_stmt|;
 name|checkPlanning
 argument_list|(
@@ -10921,7 +10921,7 @@ specifier|final
 name|String
 name|sql
 init|=
-literal|"select count(*) from sales.emp join sales.dept using (deptno)"
+literal|"select count(*) from sales.emp join sales.dept on job = name"
 decl_stmt|;
 name|checkPlanning
 argument_list|(
@@ -11476,6 +11476,151 @@ name|sql
 argument_list|,
 literal|true
 argument_list|)
+expr_stmt|;
+block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1507">[CALCITE-1507]    * OFFSET cannot be pushed through a JOIN if the non-preserved side of outer    * join is not count-preserving</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSortJoinTranspose6
+parameter_list|()
+block|{
+specifier|final
+name|HepProgram
+name|preProgram
+init|=
+operator|new
+name|HepProgramBuilder
+argument_list|()
+operator|.
+name|addRuleInstance
+argument_list|(
+name|SortProjectTransposeRule
+operator|.
+name|INSTANCE
+argument_list|)
+operator|.
+name|build
+argument_list|()
+decl_stmt|;
+specifier|final
+name|HepProgram
+name|program
+init|=
+operator|new
+name|HepProgramBuilder
+argument_list|()
+operator|.
+name|addRuleInstance
+argument_list|(
+name|SortJoinTransposeRule
+operator|.
+name|INSTANCE
+argument_list|)
+operator|.
+name|build
+argument_list|()
+decl_stmt|;
+comment|// This one can be pushed down even if it has an OFFSET, since the dept
+comment|// table is count-preserving against the join condition.
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select d.deptno, empno from sales.dept d\n"
+operator|+
+literal|"right join sales.emp e using (deptno) limit 10 offset 2"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|withPre
+argument_list|(
+name|preProgram
+argument_list|)
+operator|.
+name|with
+argument_list|(
+name|program
+argument_list|)
+operator|.
+name|check
+argument_list|()
+expr_stmt|;
+block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1507">[CALCITE-1507]    * OFFSET cannot be pushed through a JOIN if the non-preserved side of outer    * join is not count-preserving</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSortJoinTranspose7
+parameter_list|()
+block|{
+specifier|final
+name|HepProgram
+name|preProgram
+init|=
+operator|new
+name|HepProgramBuilder
+argument_list|()
+operator|.
+name|addRuleInstance
+argument_list|(
+name|SortProjectTransposeRule
+operator|.
+name|INSTANCE
+argument_list|)
+operator|.
+name|build
+argument_list|()
+decl_stmt|;
+specifier|final
+name|HepProgram
+name|program
+init|=
+operator|new
+name|HepProgramBuilder
+argument_list|()
+operator|.
+name|addRuleInstance
+argument_list|(
+name|SortJoinTransposeRule
+operator|.
+name|INSTANCE
+argument_list|)
+operator|.
+name|build
+argument_list|()
+decl_stmt|;
+comment|// This one cannot be pushed down
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select d.deptno, empno from sales.dept d\n"
+operator|+
+literal|"left join sales.emp e using (deptno) order by d.deptno offset 1"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|withPre
+argument_list|(
+name|preProgram
+argument_list|)
+operator|.
+name|with
+argument_list|(
+name|program
+argument_list|)
+operator|.
+name|checkUnchanged
+argument_list|()
 expr_stmt|;
 block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1023">[CALCITE-1023]    * Planner rule that removes Aggregate keys that are constant</a>. */

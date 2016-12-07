@@ -143,6 +143,22 @@ name|rel
 operator|.
 name|core
 operator|.
+name|JoinInfo
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|core
+operator|.
 name|JoinRelType
 import|;
 end_import
@@ -328,10 +344,46 @@ argument_list|(
 literal|1
 argument_list|)
 decl_stmt|;
+specifier|final
+name|RelMetadataQuery
+name|mq
+init|=
+name|RelMetadataQuery
+operator|.
+name|instance
+argument_list|()
+decl_stmt|;
+specifier|final
+name|JoinInfo
+name|joinInfo
+init|=
+name|JoinInfo
+operator|.
+name|of
+argument_list|(
+name|join
+operator|.
+name|getLeft
+argument_list|()
+argument_list|,
+name|join
+operator|.
+name|getRight
+argument_list|()
+argument_list|,
+name|join
+operator|.
+name|getCondition
+argument_list|()
+argument_list|)
+decl_stmt|;
 comment|// 1) If join is not a left or right outer, we bail out
-comment|// 2) If sort does not consist only of a limit operation,
-comment|// or any sort column is not part of the input where the
+comment|// 2) If sort is not a trivial order-by, and if there is
+comment|// any sort column that is not part of the input where the
 comment|// sort is pushed, we bail out
+comment|// 3) If sort has an offset, and if the non-preserved side
+comment|// of the join is not count-preserving against the join
+comment|// condition, we bail out
 if|if
 condition|(
 name|join
@@ -394,6 +446,37 @@ literal|false
 return|;
 block|}
 block|}
+block|}
+if|if
+condition|(
+name|sort
+operator|.
+name|offset
+operator|!=
+literal|null
+operator|&&
+operator|!
+name|RelMdUtil
+operator|.
+name|areColumnsDefinitelyUnique
+argument_list|(
+name|mq
+argument_list|,
+name|join
+operator|.
+name|getRight
+argument_list|()
+argument_list|,
+name|joinInfo
+operator|.
+name|rightSet
+argument_list|()
+argument_list|)
+condition|)
+block|{
+return|return
+literal|false
+return|;
 block|}
 block|}
 if|else if
@@ -458,6 +541,37 @@ literal|false
 return|;
 block|}
 block|}
+block|}
+if|if
+condition|(
+name|sort
+operator|.
+name|offset
+operator|!=
+literal|null
+operator|&&
+operator|!
+name|RelMdUtil
+operator|.
+name|areColumnsDefinitelyUnique
+argument_list|(
+name|mq
+argument_list|,
+name|join
+operator|.
+name|getLeft
+argument_list|()
+argument_list|,
+name|joinInfo
+operator|.
+name|leftSet
+argument_list|()
+argument_list|)
+condition|)
+block|{
+return|return
+literal|false
+return|;
 block|}
 block|}
 else|else
