@@ -10565,7 +10565,7 @@ argument_list|()
 operator|&&
 name|Strong
 operator|.
-name|is
+name|isNull
 argument_list|(
 name|filter
 argument_list|,
@@ -10590,7 +10590,7 @@ argument_list|()
 operator|&&
 name|Strong
 operator|.
-name|is
+name|isNull
 argument_list|(
 name|filter
 argument_list|,

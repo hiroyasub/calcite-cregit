@@ -12700,7 +12700,7 @@ name|checkExp
 argument_list|(
 literal|"nullif(v1,v2)"
 argument_list|,
-literal|"NULLIF(`V1`, `V2`)"
+literal|"(NULLIF(`V1`, `V2`))"
 argument_list|)
 expr_stmt|;
 name|checkExpFails
@@ -12722,21 +12722,21 @@ name|checkExp
 argument_list|(
 literal|"coalesce(v1)"
 argument_list|,
-literal|"COALESCE(`V1`)"
+literal|"(COALESCE(`V1`))"
 argument_list|)
 expr_stmt|;
 name|checkExp
 argument_list|(
 literal|"coalesce(v1,v2)"
 argument_list|,
-literal|"COALESCE(`V1`, `V2`)"
+literal|"(COALESCE(`V1`, `V2`))"
 argument_list|)
 expr_stmt|;
 name|checkExp
 argument_list|(
 literal|"coalesce(v1,v2,v3)"
 argument_list|,
-literal|"COALESCE(`V1`, `V2`, `V3`)"
+literal|"(COALESCE(`V1`, `V2`, `V3`))"
 argument_list|)
 expr_stmt|;
 block|}
@@ -13160,9 +13160,9 @@ literal|"trim (coalesce(cast(null as varchar(2)))||"
 operator|+
 literal|"' '||coalesce('junk ',''))"
 argument_list|,
-literal|"TRIM(BOTH ' ' FROM ((COALESCE(CAST(NULL AS VARCHAR(2))) || "
+literal|"TRIM(BOTH ' ' FROM (((COALESCE(CAST(NULL AS VARCHAR(2)))) || "
 operator|+
-literal|"' ') || COALESCE('junk ', '')))"
+literal|"' ') || (COALESCE('junk ', ''))))"
 argument_list|)
 expr_stmt|;
 name|checkFails
@@ -20533,21 +20533,21 @@ name|check
 argument_list|(
 literal|"call blubber(5)"
 argument_list|,
-literal|"(CALL `BLUBBER`(5))"
+literal|"CALL `BLUBBER`(5)"
 argument_list|)
 expr_stmt|;
 name|check
 argument_list|(
 literal|"call \"blubber\"(5)"
 argument_list|,
-literal|"(CALL `blubber`(5))"
+literal|"CALL `blubber`(5)"
 argument_list|)
 expr_stmt|;
 name|check
 argument_list|(
 literal|"call whale.blubber(5)"
 argument_list|,
-literal|"(CALL `WHALE`.`BLUBBER`(5))"
+literal|"CALL `WHALE`.`BLUBBER`(5)"
 argument_list|)
 expr_stmt|;
 block|}

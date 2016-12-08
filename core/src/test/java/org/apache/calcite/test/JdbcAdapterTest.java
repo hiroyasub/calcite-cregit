@@ -2402,7 +2402,7 @@ literal|"VALUES (666, 666, TIMESTAMP '1997-01-01 00:00:00',"
 operator|+
 literal|"   666, '666', 666, 666),\n"
 operator|+
-literal|" (777, 666, TIMESTAMP '1997-01-01 00:00:00',"
+literal|" (666, 777, TIMESTAMP '1997-01-01 00:00:00',"
 operator|+
 literal|"   666, '666', 666, 666)"
 decl_stmt|;
@@ -2416,7 +2416,7 @@ literal|"  JdbcTableModify(table=[[foodmart, expense_fact]], operation=[INSERT],
 operator|+
 literal|"    JdbcValues(tuples=[[{ 666, 666, 1997-01-01 00:00:00, 666, '666', 666, 666.0000 },"
 operator|+
-literal|" { 777, 666, 1997-01-01 00:00:00, 666, '666', 666, 666.0000 }]])\n"
+literal|" { 666, 777, 1997-01-01 00:00:00, 666, '666', 666, 666.0000 }]])\n"
 decl_stmt|;
 specifier|final
 name|String
@@ -2430,7 +2430,7 @@ literal|" \"category_id\", \"currency_id\", \"amount\")\n"
 operator|+
 literal|"VALUES  (666, 666, TIMESTAMP '1997-01-01 00:00:00', 666, '666', 666, 666.0000),\n"
 operator|+
-literal|" (777, 666, TIMESTAMP '1997-01-01 00:00:00', 666, '666', 666, 666.0000)"
+literal|" (666, 777, TIMESTAMP '1997-01-01 00:00:00', 666, '666', 666, 666.0000)"
 decl_stmt|;
 name|CalciteAssert
 operator|.

@@ -216,7 +216,7 @@ literal|"COALESCE"
 argument_list|,
 name|SqlKind
 operator|.
-name|OTHER_FUNCTION
+name|COALESCE
 argument_list|,
 name|ReturnTypes
 operator|.
