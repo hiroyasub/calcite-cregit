@@ -22687,6 +22687,31 @@ argument_list|(
 name|expected2
 argument_list|)
 expr_stmt|;
+specifier|final
+name|String
+name|sql3
+init|=
+literal|"insert into struct.t (f1.c0, f1.c2, f0.c1) values (?, ?, ?)"
+decl_stmt|;
+specifier|final
+name|String
+name|expected3
+init|=
+literal|"RecordType(INTEGER ?0, INTEGER ?1, INTEGER ?2)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql3
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+operator|.
+name|bindType
+argument_list|(
+name|expected3
+argument_list|)
+expr_stmt|;
 name|sql
 argument_list|(
 literal|"insert into struct.t (c0, ^c4^, c1) values (?, ?, ?)"
@@ -22705,6 +22730,26 @@ operator|.
 name|fails
 argument_list|(
 literal|"Unknown target column 'A0'"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"insert into struct.t (f1.c0, ^f0.a0^, f0.c1) values (?, ?, ?)"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Unknown target column 'F0.A0'"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"insert into struct.t (f1.c0, f1.c2, ^f1.c0^) values (?, ?, ?)"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Target column '\"F1\".\"C0\"' is assigned more than once"
 argument_list|)
 expr_stmt|;
 block|}

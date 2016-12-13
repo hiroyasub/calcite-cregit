@@ -5572,7 +5572,7 @@ specifier|final
 name|String
 name|sql
 init|=
-literal|"insert into struct.t (c0, c2, c1) values (?, ?, ?)"
+literal|"insert into struct.t (f0.c0, f1.c2, c1) values (?, ?, ?)"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -5594,7 +5594,7 @@ specifier|final
 name|String
 name|sql
 init|=
-literal|"insert into struct.t_10 (c0, c2, c1) values (?, ?, ?)"
+literal|"insert into struct.t_10 (f0.c0, f1.c2, c1) values (?, ?, ?)"
 decl_stmt|;
 name|sql
 argument_list|(
