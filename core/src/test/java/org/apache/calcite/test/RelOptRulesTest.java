@@ -12444,6 +12444,160 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testDecorrelateExists
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select * from sales.emp\n"
+operator|+
+literal|"where EXISTS (\n"
+operator|+
+literal|"  select * from emp e where emp.deptno = e.deptno)"
+decl_stmt|;
+name|checkSubQuery
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|withLateDecorrelation
+argument_list|(
+literal|true
+argument_list|)
+operator|.
+name|check
+argument_list|()
+expr_stmt|;
+block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1511">[CALCITE-1511]    * AssertionError while decorrelating query with two EXISTS    * sub-queries</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testDecorrelateTwoExists
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select * from sales.emp\n"
+operator|+
+literal|"where EXISTS (\n"
+operator|+
+literal|"  select * from emp e where emp.deptno = e.deptno)\n"
+operator|+
+literal|"AND NOT EXISTS (\n"
+operator|+
+literal|"  select * from emp ee where ee.job = emp.job AND ee.sal=34)"
+decl_stmt|;
+name|checkSubQuery
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|withLateDecorrelation
+argument_list|(
+literal|true
+argument_list|)
+operator|.
+name|check
+argument_list|()
+expr_stmt|;
+block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1537">[CALCITE-1537]    * Unnecessary project expression in multi-sub-query plan</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testDecorrelateTwoIn
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select sal\n"
+operator|+
+literal|"from sales.emp\n"
+operator|+
+literal|"where empno IN (\n"
+operator|+
+literal|"  select deptno from dept where emp.job = dept.name)\n"
+operator|+
+literal|"AND empno IN (\n"
+operator|+
+literal|"  select empno from emp e where emp.ename = e.ename)"
+decl_stmt|;
+name|checkSubQuery
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|withLateDecorrelation
+argument_list|(
+literal|true
+argument_list|)
+operator|.
+name|check
+argument_list|()
+expr_stmt|;
+block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1045">[CALCITE-1045]    * Decorrelate sub-queries in Project and Join</a>, with the added    * complication that there are two sub-queries. */
+annotation|@
+name|Ignore
+argument_list|(
+literal|"[CALCITE-1045]"
+argument_list|)
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testDecorrelateTwoScalar
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select deptno,\n"
+operator|+
+literal|"  (select min(1) from emp where empno> d.deptno) as i0,\n"
+operator|+
+literal|"  (select min(0) from emp\n"
+operator|+
+literal|"    where deptno = d.deptno and ename = 'SMITH') as i1\n"
+operator|+
+literal|"from dept as d"
+decl_stmt|;
+name|checkSubQuery
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|withLateDecorrelation
+argument_list|(
+literal|true
+argument_list|)
+operator|.
+name|check
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testWhereInCorrelated
 parameter_list|()
 block|{
