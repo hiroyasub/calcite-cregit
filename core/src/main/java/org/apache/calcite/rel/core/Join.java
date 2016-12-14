@@ -632,6 +632,9 @@ name|isValid_
 parameter_list|(
 name|Litmus
 name|litmus
+parameter_list|,
+name|Context
+name|context
 parameter_list|)
 block|{
 if|if
@@ -642,6 +645,8 @@ operator|.
 name|isValid
 argument_list|(
 name|litmus
+argument_list|,
+name|context
 argument_list|)
 condition|)
 block|{
@@ -776,6 +781,8 @@ argument_list|)
 operator|.
 name|build
 argument_list|()
+argument_list|,
+name|context
 argument_list|,
 name|litmus
 argument_list|)

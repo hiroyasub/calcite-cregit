@@ -335,6 +335,8 @@ argument_list|(
 name|Litmus
 operator|.
 name|THROW
+argument_list|,
+literal|null
 argument_list|)
 assert|;
 block|}
@@ -477,6 +479,9 @@ name|isValid
 parameter_list|(
 name|Litmus
 name|litmus
+parameter_list|,
+name|Context
+name|context
 parameter_list|)
 block|{
 if|if
@@ -522,6 +527,8 @@ operator|.
 name|isValid
 argument_list|(
 name|litmus
+argument_list|,
+name|context
 argument_list|)
 condition|)
 block|{

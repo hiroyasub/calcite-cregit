@@ -957,6 +957,9 @@ name|isValid
 parameter_list|(
 name|Litmus
 name|litmus
+parameter_list|,
+name|Context
+name|context
 parameter_list|)
 block|{
 return|return
@@ -980,6 +983,8 @@ argument_list|(
 name|Litmus
 operator|.
 name|THROW
+argument_list|,
+literal|null
 argument_list|)
 return|;
 block|}
@@ -1544,6 +1549,8 @@ argument_list|(
 name|Litmus
 operator|.
 name|THROW
+argument_list|,
+literal|null
 argument_list|)
 assert|;
 return|return

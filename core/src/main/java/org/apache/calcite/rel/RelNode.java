@@ -481,12 +481,15 @@ name|String
 name|getRelTypeName
 parameter_list|()
 function_decl|;
-comment|/**    * Returns whether this relational expression is valid.    *    *<p>If assertions are enabled, this method is typically called with<code>    * litmus</code> =<code>THROW</code>, as follows:    *    *<blockquote>    *<pre>assert rel.isValid(Litmus.THROW)</pre>    *</blockquote>    *    *<p>This signals that the method can throw an {@link AssertionError} if it    * is not valid.    *    * @param litmus What to do if invalid    * @return Whether relational expression is valid    * @throws AssertionError if this relational expression is invalid and    *                        litmus is THROW    */
+comment|/**    * Returns whether this relational expression is valid.    *    *<p>If assertions are enabled, this method is typically called with<code>    * litmus</code> =<code>THROW</code>, as follows:    *    *<blockquote>    *<pre>assert rel.isValid(Litmus.THROW)</pre>    *</blockquote>    *    *<p>This signals that the method can throw an {@link AssertionError} if it    * is not valid.    *    * @param litmus What to do if invalid    * @param context Context for validity checking    * @return Whether relational expression is valid    * @throws AssertionError if this relational expression is invalid and    *                        litmus is THROW    */
 name|boolean
 name|isValid
 parameter_list|(
 name|Litmus
 name|litmus
+parameter_list|,
+name|Context
+name|context
 parameter_list|)
 function_decl|;
 annotation|@
@@ -559,6 +562,18 @@ name|RexShuttle
 name|shuttle
 parameter_list|)
 function_decl|;
+comment|/** Context of a relational expression, for purposes of checking validity. */
+interface|interface
+name|Context
+block|{
+name|Set
+argument_list|<
+name|CorrelationId
+argument_list|>
+name|correlationIds
+parameter_list|()
+function_decl|;
+block|}
 block|}
 end_interface
 

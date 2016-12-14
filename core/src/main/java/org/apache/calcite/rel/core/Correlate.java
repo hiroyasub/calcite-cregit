@@ -435,6 +435,9 @@ name|isValid
 parameter_list|(
 name|Litmus
 name|litmus
+parameter_list|,
+name|Context
+name|context
 parameter_list|)
 block|{
 return|return
@@ -443,6 +446,8 @@ operator|.
 name|isValid
 argument_list|(
 name|litmus
+argument_list|,
+name|context
 argument_list|)
 operator|&&
 name|RelOptUtil

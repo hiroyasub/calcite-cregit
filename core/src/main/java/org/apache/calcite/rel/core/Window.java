@@ -527,6 +527,9 @@ name|isValid
 parameter_list|(
 name|Litmus
 name|litmus
+parameter_list|,
+name|Context
+name|context
 parameter_list|)
 block|{
 comment|// In the window specifications, an aggregate call such as
@@ -638,6 +641,8 @@ operator|new
 name|RexChecker
 argument_list|(
 name|inputTypes
+argument_list|,
+name|context
 argument_list|,
 name|litmus
 argument_list|)

@@ -257,6 +257,8 @@ argument_list|(
 name|Litmus
 operator|.
 name|THROW
+argument_list|,
+literal|null
 argument_list|)
 assert|;
 block|}

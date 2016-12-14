@@ -1598,6 +1598,8 @@ argument_list|(
 name|Litmus
 operator|.
 name|THROW
+argument_list|,
+literal|null
 argument_list|)
 assert|;
 specifier|final
@@ -2237,6 +2239,8 @@ argument_list|(
 name|Litmus
 operator|.
 name|THROW
+argument_list|,
+literal|null
 argument_list|)
 assert|;
 assert|assert
@@ -2247,6 +2251,8 @@ argument_list|(
 name|Litmus
 operator|.
 name|THROW
+argument_list|,
+literal|null
 argument_list|)
 assert|;
 specifier|final
@@ -2353,6 +2359,8 @@ argument_list|(
 name|Litmus
 operator|.
 name|THROW
+argument_list|,
+literal|null
 argument_list|)
 assert|;
 assert|assert
