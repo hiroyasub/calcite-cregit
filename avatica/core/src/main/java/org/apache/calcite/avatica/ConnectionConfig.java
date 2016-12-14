@@ -128,6 +128,16 @@ name|File
 name|kerberosKeytab
 parameter_list|()
 function_decl|;
+comment|/** @see BuiltInConnectionProperty#TRUSTSTORE */
+name|File
+name|truststore
+parameter_list|()
+function_decl|;
+comment|/** @see BuiltInConnectionProperty#TRUSTSTORE_PASSWORD */
+name|String
+name|truststorePassword
+parameter_list|()
+function_decl|;
 block|}
 end_interface
 

@@ -296,6 +296,34 @@ literal|null
 argument_list|,
 literal|false
 argument_list|)
+block|,
+comment|/** Truststore for SSL/TLS communication */
+name|TRUSTSTORE
+argument_list|(
+literal|"truststore"
+argument_list|,
+name|Type
+operator|.
+name|STRING
+argument_list|,
+literal|null
+argument_list|,
+literal|false
+argument_list|)
+block|,
+comment|/** Password for the truststore */
+name|TRUSTSTORE_PASSWORD
+argument_list|(
+literal|"truststore_password"
+argument_list|,
+name|Type
+operator|.
+name|STRING
+argument_list|,
+literal|null
+argument_list|,
+literal|false
+argument_list|)
 block|;
 specifier|private
 specifier|final
