@@ -10579,7 +10579,7 @@ argument_list|()
 operator|&&
 name|Strong
 operator|.
-name|isNull
+name|isNotTrue
 argument_list|(
 name|filter
 argument_list|,
@@ -10604,7 +10604,7 @@ argument_list|()
 operator|&&
 name|Strong
 operator|.
-name|isNull
+name|isNotTrue
 argument_list|(
 name|filter
 argument_list|,
