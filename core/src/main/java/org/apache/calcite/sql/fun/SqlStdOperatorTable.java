@@ -1088,6 +1088,17 @@ operator|.
 name|DIVISION_OPERATOR
 argument_list|)
 decl_stmt|;
+comment|/**    * Random Integer.    */
+specifier|public
+specifier|static
+specifier|final
+name|SqlRandInteger
+name|RAND_INTEGER
+init|=
+operator|new
+name|SqlRandInteger
+argument_list|()
+decl_stmt|;
 comment|/**    * Internal integer arithmetic division operator, '<code>/INT</code>'. This    * is only used to adjust scale for numerics. We distinguish it from    * user-requested division since some personalities want a floating-point    * computation, whereas for the internal scaling use of division, we always    * want integer division.    */
 specifier|public
 specifier|static
