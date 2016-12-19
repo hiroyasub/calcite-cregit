@@ -2344,6 +2344,25 @@ return|return
 name|wrapper
 return|;
 block|}
+catch|catch
+parameter_list|(
+name|SQLException
+decl||
+name|RuntimeException
+decl||
+name|Error
+name|e
+parameter_list|)
+block|{
+name|wrapper
+operator|.
+name|close
+argument_list|()
+expr_stmt|;
+throw|throw
+name|e
+throw|;
+block|}
 block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1527">[CALCITE-1527]    * Support DML in the JDBC adapter</a>. */
 annotation|@
