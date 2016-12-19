@@ -278,8 +278,16 @@ name|JavaRowFormat
 name|targetFormat
 parameter_list|)
 function_decl|;
-comment|/** Generates a selector for the given fields from an expression. */
+comment|/** Generates a selector for the given fields from an expression.    * Only used by EnumerableWindow. */
+name|Pair
+argument_list|<
+name|Type
+argument_list|,
+name|List
+argument_list|<
 name|Expression
+argument_list|>
+argument_list|>
 name|selector
 parameter_list|(
 name|ParameterExpression
