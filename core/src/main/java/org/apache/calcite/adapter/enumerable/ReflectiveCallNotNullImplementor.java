@@ -57,22 +57,6 @@ name|apache
 operator|.
 name|calcite
 operator|.
-name|linq4j
-operator|.
-name|tree
-operator|.
-name|NewExpression
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
 name|rex
 operator|.
 name|RexCall
@@ -207,7 +191,7 @@ block|{
 comment|// The UDF class must have a public zero-args constructor.
 comment|// Assume that the validator checked already.
 specifier|final
-name|NewExpression
+name|Expression
 name|target
 init|=
 name|Expressions

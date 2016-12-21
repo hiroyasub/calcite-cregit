@@ -891,7 +891,7 @@ operator|.
 name|parameter
 return|;
 block|}
-comment|/**    * Checks if experssion is simple enough for always inline    * @param expr expression to test    * @return true when given expression is safe to always inline    */
+comment|/**    * Checks if expression is simple enough to always inline at zero cost.    *    * @param expr expression to test    * @return true when given expression is safe to always inline    */
 specifier|protected
 name|boolean
 name|isSimpleExpression
@@ -1008,6 +1008,22 @@ name|decl
 argument_list|)
 expr_stmt|;
 block|}
+block|}
+specifier|private
+name|boolean
+name|isCostly
+parameter_list|(
+name|DeclarationStatement
+name|decl
+parameter_list|)
+block|{
+return|return
+name|decl
+operator|.
+name|initializer
+operator|instanceof
+name|NewExpression
+return|;
 block|}
 comment|/**    * Prepares declaration for inlining: adds cast    * @param decl inlining candidate    * @return normalized expression    */
 specifier|private
@@ -1506,6 +1522,21 @@ condition|)
 block|{
 comment|// Don't inline variables that are not final. They might be assigned
 comment|// more than once.
+name|count
+operator|=
+literal|100
+expr_stmt|;
+block|}
+if|if
+condition|(
+name|isCostly
+argument_list|(
+name|statement
+argument_list|)
+condition|)
+block|{
+comment|// Don't inline variables that are costly, such as "new MyFunction()".
+comment|// Later we will make their declarations static.
 name|count
 operator|=
 literal|100

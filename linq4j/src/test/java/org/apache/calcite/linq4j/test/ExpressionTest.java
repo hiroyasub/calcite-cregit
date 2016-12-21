@@ -407,11 +407,37 @@ begin_import
 import|import static
 name|org
 operator|.
+name|hamcrest
+operator|.
+name|core
+operator|.
+name|Is
+operator|.
+name|is
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
 name|junit
 operator|.
 name|Assert
 operator|.
 name|assertEquals
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|Assert
+operator|.
+name|assertThat
 import|;
 end_import
 
@@ -4129,21 +4155,32 @@ operator|.
 name|toBlock
 argument_list|()
 decl_stmt|;
-name|assertEquals
-argument_list|(
+specifier|final
+name|String
+name|expected
+init|=
 literal|"{\n"
 operator|+
-literal|"  return new java.util.TreeSet(\n"
+literal|"  final java.util.TreeSet treeSet = new java.util.TreeSet(\n"
 operator|+
-literal|"      (java.util.Comparator) null).add(null);\n"
+literal|"    (java.util.Comparator) null);\n"
+operator|+
+literal|"  return treeSet.add(null);\n"
 operator|+
 literal|"}\n"
-argument_list|,
+decl_stmt|;
+name|assertThat
+argument_list|(
 name|Expressions
 operator|.
 name|toString
 argument_list|(
 name|expression
+argument_list|)
+argument_list|,
+name|is
+argument_list|(
+name|expected
 argument_list|)
 argument_list|)
 expr_stmt|;
