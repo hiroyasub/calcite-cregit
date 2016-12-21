@@ -393,16 +393,6 @@ name|java
 operator|.
 name|util
 operator|.
-name|Random
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
 name|TimeZone
 import|;
 end_import
@@ -5496,29 +5486,6 @@ name|b0
 operator|.
 name|abs
 argument_list|()
-return|;
-block|}
-comment|// Random Function
-annotation|@
-name|NonDeterministic
-specifier|public
-specifier|static
-name|int
-name|randInteger
-parameter_list|(
-name|int
-name|n
-parameter_list|)
-block|{
-return|return
-operator|new
-name|Random
-argument_list|()
-operator|.
-name|nextInt
-argument_list|(
-name|n
-argument_list|)
 return|;
 block|}
 comment|// Helpers

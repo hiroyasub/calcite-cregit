@@ -106,24 +106,24 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * The<code>RAND_INTEGER</code> function.  */
+comment|/**  * The<code>RAND</code> function. There are two overloads:  *  *<ul>  *<li>RAND() returns a random double between 0 and 1  *<li>RAND(seed) returns a random double between 0 and 1, initializing the  *   random number generator with seed on first call  *</ul>  */
 end_comment
 
 begin_class
 specifier|public
 class|class
-name|SqlRandInteger
+name|SqlRandFunction
 extends|extends
 name|SqlFunction
 block|{
 comment|//~ Constructors -----------------------------------------------------------
 specifier|public
-name|SqlRandInteger
+name|SqlRandFunction
 parameter_list|()
 block|{
 name|super
 argument_list|(
-literal|"RAND_INTEGER"
+literal|"RAND"
 argument_list|,
 name|SqlKind
 operator|.
@@ -131,13 +131,22 @@ name|OTHER_FUNCTION
 argument_list|,
 name|ReturnTypes
 operator|.
-name|INTEGER
+name|DOUBLE
 argument_list|,
 literal|null
 argument_list|,
 name|OperandTypes
 operator|.
+name|or
+argument_list|(
+name|OperandTypes
+operator|.
+name|NILADIC
+argument_list|,
+name|OperandTypes
+operator|.
 name|NUMERIC
+argument_list|)
 argument_list|,
 name|SqlFunctionCategory
 operator|.
@@ -171,7 +180,7 @@ block|}
 end_class
 
 begin_comment
-comment|// End SqlRandInteger.java
+comment|// End SqlRandFunction.java
 end_comment
 
 end_unit
