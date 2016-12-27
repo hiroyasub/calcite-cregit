@@ -391,6 +391,8 @@ name|parent
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
+annotation|@
+name|Override
 specifier|public
 name|void
 name|addChild
@@ -400,6 +402,9 @@ name|ns
 parameter_list|,
 name|String
 name|alias
+parameter_list|,
+name|boolean
+name|nullable
 parameter_list|)
 block|{
 comment|// By default, you cannot add to a scope. Derived classes can
@@ -446,6 +451,9 @@ parameter_list|(
 name|SqlValidatorNamespace
 name|ns
 parameter_list|,
+name|boolean
+name|nullable
+parameter_list|,
 name|List
 argument_list|<
 name|String
@@ -472,6 +480,8 @@ operator|.
 name|found
 argument_list|(
 name|ns
+argument_list|,
+name|nullable
 argument_list|,
 name|this
 argument_list|,
@@ -650,6 +660,8 @@ name|resolveInNamespace
 argument_list|(
 name|ns2
 argument_list|,
+name|nullable
+argument_list|,
 name|remainder
 argument_list|,
 name|path2
@@ -731,6 +743,8 @@ decl_stmt|;
 name|resolveInNamespace
 argument_list|(
 name|ns2
+argument_list|,
+name|nullable
 argument_list|,
 name|names
 operator|.
@@ -821,6 +835,8 @@ decl_stmt|;
 name|resolveInNamespace
 argument_list|(
 name|ns2
+argument_list|,
+name|nullable
 argument_list|,
 name|names
 argument_list|,
@@ -972,7 +988,7 @@ name|Map
 argument_list|<
 name|String
 argument_list|,
-name|SqlValidatorNamespace
+name|ScopeChild
 argument_list|>
 name|findQualifyingTables
 parameter_list|(
@@ -1201,6 +1217,8 @@ name|resolveInNamespace
 argument_list|(
 name|namespace
 argument_list|,
+literal|false
+argument_list|,
 name|identifier
 operator|.
 name|names
@@ -1332,6 +1350,11 @@ name|fromPath
 init|=
 literal|null
 decl_stmt|;
+name|RelDataType
+name|fromRowType
+init|=
+literal|null
+decl_stmt|;
 specifier|final
 name|ResolvedImpl
 name|resolved
@@ -1428,6 +1451,13 @@ name|resolve
 operator|.
 name|path
 expr_stmt|;
+name|fromRowType
+operator|=
+name|resolve
+operator|.
+name|rowType
+argument_list|()
+expr_stmt|;
 break|break;
 block|}
 block|}
@@ -1459,7 +1489,7 @@ name|Map
 argument_list|<
 name|String
 argument_list|,
-name|SqlValidatorNamespace
+name|ScopeChild
 argument_list|>
 name|map
 init|=
@@ -1517,7 +1547,7 @@ name|Entry
 argument_list|<
 name|String
 argument_list|,
-name|SqlValidatorNamespace
+name|ScopeChild
 argument_list|>
 name|entry
 init|=
@@ -1541,17 +1571,13 @@ operator|.
 name|getKey
 argument_list|()
 decl_stmt|;
-specifier|final
-name|SqlValidatorNamespace
-name|namespace
-init|=
+name|fromNs
+operator|=
 name|entry
 operator|.
 name|getValue
 argument_list|()
-decl_stmt|;
-name|fromNs
-operator|=
+operator|.
 name|namespace
 expr_stmt|;
 name|fromPath
@@ -1574,7 +1600,7 @@ name|catalogReader
 operator|.
 name|field
 argument_list|(
-name|namespace
+name|fromNs
 operator|.
 name|getRowType
 argument_list|()
@@ -1658,6 +1684,13 @@ operator|=
 name|resolve
 operator|.
 name|path
+expr_stmt|;
+name|fromRowType
+operator|=
+name|resolve
+operator|.
+name|rowType
+argument_list|()
 expr_stmt|;
 name|identifier
 operator|=
@@ -1803,14 +1836,6 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-name|RelDataType
-name|fromRowType
-init|=
-name|fromNs
-operator|.
-name|getRowType
-argument_list|()
-decl_stmt|;
 if|if
 condition|(
 name|fromPath
@@ -1821,6 +1846,11 @@ operator|>
 literal|1
 condition|)
 block|{
+assert|assert
+name|fromRowType
+operator|!=
+literal|null
+assert|;
 for|for
 control|(
 name|Step
@@ -1875,6 +1905,8 @@ expr_stmt|;
 name|resolveInNamespace
 argument_list|(
 name|fromNs
+argument_list|,
+literal|false
 argument_list|,
 name|suffix
 operator|.
@@ -1944,6 +1976,8 @@ expr_stmt|;
 name|resolveInNamespace
 argument_list|(
 name|fromNs
+argument_list|,
+literal|false
 argument_list|,
 name|suffix2
 operator|.

@@ -572,7 +572,7 @@ argument_list|(
 literal|0
 argument_list|)
 operator|.
-name|right
+name|namespace
 decl_stmt|;
 specifier|final
 name|List

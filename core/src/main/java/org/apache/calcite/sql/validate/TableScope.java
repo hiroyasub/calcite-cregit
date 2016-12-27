@@ -94,6 +94,9 @@ name|ns
 parameter_list|,
 name|String
 name|alias
+parameter_list|,
+name|boolean
+name|nullable
 parameter_list|)
 block|{
 if|if
@@ -108,6 +111,8 @@ argument_list|(
 name|ns
 argument_list|,
 name|alias
+argument_list|,
+name|nullable
 argument_list|)
 expr_stmt|;
 block|}

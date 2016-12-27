@@ -288,7 +288,7 @@ name|SqlIdentifier
 name|identifier
 parameter_list|)
 function_decl|;
-comment|/**    * Registers a relation in this scope.    *    * @param ns    Namespace representing the result-columns of the relation    * @param alias Alias with which to reference the relation, must not be null    */
+comment|/**    * Registers a relation in this scope.    *    * @param ns    Namespace representing the result-columns of the relation    * @param alias Alias with which to reference the relation, must not be null    * @param nullable Whether this is a null-generating side of a join    */
 name|void
 name|addChild
 parameter_list|(
@@ -297,6 +297,9 @@ name|ns
 parameter_list|,
 name|String
 name|alias
+parameter_list|,
+name|boolean
+name|nullable
 parameter_list|)
 function_decl|;
 comment|/**    * Finds a window with a given name. Returns null if not found.    */
@@ -378,6 +381,9 @@ name|found
 parameter_list|(
 name|SqlValidatorNamespace
 name|namespace
+parameter_list|,
+name|boolean
+name|nullable
 parameter_list|,
 name|SqlValidatorScope
 name|scope
@@ -648,6 +654,9 @@ parameter_list|(
 name|SqlValidatorNamespace
 name|namespace
 parameter_list|,
+name|boolean
+name|nullable
+parameter_list|,
 name|SqlValidatorScope
 name|scope
 parameter_list|,
@@ -663,6 +672,8 @@ operator|new
 name|Resolve
 argument_list|(
 name|namespace
+argument_list|,
+name|nullable
 argument_list|,
 name|scope
 argument_list|,
@@ -728,11 +739,17 @@ specifier|final
 name|SqlValidatorNamespace
 name|namespace
 decl_stmt|;
+specifier|private
+specifier|final
+name|boolean
+name|nullable
+decl_stmt|;
 specifier|public
 specifier|final
 name|SqlValidatorScope
 name|scope
 decl_stmt|;
+comment|// may be null
 specifier|public
 specifier|final
 name|Path
@@ -742,6 +759,9 @@ name|Resolve
 parameter_list|(
 name|SqlValidatorNamespace
 name|namespace
+parameter_list|,
+name|boolean
+name|nullable
 parameter_list|,
 name|SqlValidatorScope
 name|scope
@@ -763,6 +783,12 @@ argument_list|)
 expr_stmt|;
 name|this
 operator|.
+name|nullable
+operator|=
+name|nullable
+expr_stmt|;
+name|this
+operator|.
 name|scope
 operator|=
 name|scope
@@ -771,8 +797,39 @@ name|this
 operator|.
 name|path
 operator|=
+name|Preconditions
+operator|.
+name|checkNotNull
+argument_list|(
 name|path
+argument_list|)
 expr_stmt|;
+block|}
+comment|/** The row type of the found namespace, nullable if the lookup has      * looked into outer joins. */
+specifier|public
+name|RelDataType
+name|rowType
+parameter_list|()
+block|{
+return|return
+name|namespace
+operator|.
+name|getValidator
+argument_list|()
+operator|.
+name|getTypeFactory
+argument_list|()
+operator|.
+name|createTypeWithNullability
+argument_list|(
+name|namespace
+operator|.
+name|getRowType
+argument_list|()
+argument_list|,
+name|nullable
+argument_list|)
+return|;
 block|}
 block|}
 block|}

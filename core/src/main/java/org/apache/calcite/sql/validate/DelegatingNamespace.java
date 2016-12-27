@@ -298,11 +298,6 @@ name|void
 name|makeNullable
 parameter_list|()
 block|{
-name|namespace
-operator|.
-name|makeNullable
-argument_list|()
-expr_stmt|;
 block|}
 specifier|public
 name|String

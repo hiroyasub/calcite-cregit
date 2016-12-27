@@ -155,10 +155,6 @@ specifier|protected
 name|RelDataType
 name|type
 decl_stmt|;
-specifier|private
-name|boolean
-name|forceNullable
-decl_stmt|;
 specifier|protected
 specifier|final
 name|SqlNode
@@ -255,29 +251,6 @@ argument_list|,
 literal|"validateImpl() returned null"
 argument_list|)
 expr_stmt|;
-if|if
-condition|(
-name|forceNullable
-condition|)
-block|{
-comment|// REVIEW jvs 10-Oct-2005: This may not be quite right
-comment|// if it means that nullability will be forced in the
-comment|// ON clause where it doesn't belong.
-name|type
-operator|=
-name|validator
-operator|.
-name|getTypeFactory
-argument_list|()
-operator|.
-name|createTypeWithNullability
-argument_list|(
-name|type
-argument_list|,
-literal|true
-argument_list|)
-expr_stmt|;
-block|}
 name|setType
 argument_list|(
 name|type
@@ -529,10 +502,6 @@ name|void
 name|makeNullable
 parameter_list|()
 block|{
-name|forceNullable
-operator|=
-literal|true
-expr_stmt|;
 block|}
 specifier|public
 name|String

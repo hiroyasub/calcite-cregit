@@ -169,7 +169,9 @@ name|String
 name|columnName
 parameter_list|)
 function_decl|;
-comment|/**    * Makes all fields in this namespace nullable (typically because it is on    * the outer side of an outer join.    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 name|void
 name|makeNullable
 parameter_list|()

@@ -11534,6 +11534,15 @@ operator|.
 name|namespace
 decl_stmt|;
 specifier|final
+name|RelDataType
+name|rowType
+init|=
+name|resolve
+operator|.
+name|rowType
+argument_list|()
+decl_stmt|;
+specifier|final
 name|int
 name|childNamespaceIndex
 init|=
@@ -11710,10 +11719,7 @@ specifier|final
 name|RelDataTypeField
 name|field
 init|=
-name|foundNs
-operator|.
-name|getRowType
-argument_list|()
+name|rowType
 operator|.
 name|getFieldList
 argument_list|()
@@ -19277,12 +19283,13 @@ name|only
 argument_list|()
 decl_stmt|;
 specifier|final
-name|SqlValidatorNamespace
-name|foundNs
+name|RelDataType
+name|rowType
 init|=
 name|resolve
 operator|.
-name|namespace
+name|rowType
+argument_list|()
 decl_stmt|;
 comment|// Found in current query's from list.  Find which from item.
 comment|// We assume that the order of the from clause items has been
@@ -19451,10 +19458,7 @@ name|rexBuilder
 operator|.
 name|makeCorrel
 argument_list|(
-name|foundNs
-operator|.
-name|getRowType
-argument_list|()
+name|rowType
 argument_list|,
 name|correlId
 argument_list|)

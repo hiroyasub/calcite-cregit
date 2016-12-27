@@ -12355,6 +12355,11 @@ argument_list|()
 expr_stmt|;
 block|}
 annotation|@
+name|Ignore
+argument_list|(
+literal|"[CALCITE-1045]"
+argument_list|)
+annotation|@
 name|Test
 specifier|public
 name|void
@@ -12382,6 +12387,11 @@ name|check
 argument_list|()
 expr_stmt|;
 block|}
+annotation|@
+name|Ignore
+argument_list|(
+literal|"[CALCITE-1045]"
+argument_list|)
 annotation|@
 name|Test
 specifier|public

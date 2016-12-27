@@ -455,6 +455,9 @@ name|ns
 parameter_list|,
 name|String
 name|alias
+parameter_list|,
+name|boolean
+name|nullable
 parameter_list|)
 block|{
 comment|// cannot add to the empty scope

@@ -625,10 +625,11 @@ return|return
 name|joinType
 return|;
 block|}
-comment|// TODO: enable
+annotation|@
+name|Override
 specifier|public
 name|boolean
-name|isValid_
+name|isValid
 parameter_list|(
 name|Litmus
 name|litmus
@@ -676,6 +677,13 @@ operator|.
 name|getFieldCount
 argument_list|()
 operator|+
+operator|(
+name|this
+operator|instanceof
+name|SemiJoin
+condition|?
+literal|0
+else|:
 name|right
 operator|.
 name|getRowType
@@ -683,6 +691,7 @@ argument_list|()
 operator|.
 name|getFieldCount
 argument_list|()
+operator|)
 condition|)
 block|{
 return|return
