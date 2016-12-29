@@ -3443,8 +3443,6 @@ name|String
 name|m
 init|=
 literal|"select \"empid\", \"deptno\" from \"emps\"\n"
-operator|+
-literal|""
 decl_stmt|;
 try|try
 init|(
@@ -3544,7 +3542,7 @@ name|assertTrue
 argument_list|(
 name|actual
 operator|+
-literal|" should have had two occurrences of "
+literal|" should have 1 occurrence of "
 operator|+
 name|scan
 argument_list|,
@@ -3557,7 +3555,7 @@ argument_list|,
 name|scan
 argument_list|)
 operator|==
-literal|2
+literal|1
 argument_list|)
 expr_stmt|;
 return|return

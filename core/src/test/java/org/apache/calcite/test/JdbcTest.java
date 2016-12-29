@@ -18010,15 +18010,7 @@ literal|"    EnumerableCalc(expr#0=[{inputs}], expr#1=[true], proj#0..1=[{exprs}
 operator|+
 literal|"      EnumerableAggregate(group=[{0}])\n"
 operator|+
-literal|"        EnumerableJoin(condition=[=($0, $1)], joinType=[inner])\n"
-operator|+
-literal|"          EnumerableAggregate(group=[{1}])\n"
-operator|+
-literal|"            EnumerableTableScan(table=[[hr, emps]])\n"
-operator|+
-literal|"          EnumerableCalc(expr#0..3=[{inputs}], deptno=[$t0])\n"
-operator|+
-literal|"            EnumerableTableScan(table=[[hr, depts]])"
+literal|"        EnumerableTableScan(table=[[hr, depts]])"
 decl_stmt|;
 name|CalciteAssert
 operator|.

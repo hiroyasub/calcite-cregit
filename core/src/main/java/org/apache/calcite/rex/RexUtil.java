@@ -6145,6 +6145,17 @@ name|int
 name|offset
 parameter_list|)
 block|{
+if|if
+condition|(
+name|offset
+operator|==
+literal|0
+condition|)
+block|{
+return|return
+name|node
+return|;
+block|}
 return|return
 name|node
 operator|.

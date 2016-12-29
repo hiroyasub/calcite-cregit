@@ -309,6 +309,22 @@ name|rel
 operator|.
 name|core
 operator|.
+name|Filter
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|core
+operator|.
 name|JoinRelType
 import|;
 end_import
@@ -1125,6 +1141,34 @@ name|common
 operator|.
 name|collect
 operator|.
+name|ImmutableSortedSet
+import|;
+end_import
+
+begin_import
+import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|collect
+operator|.
+name|Iterables
+import|;
+end_import
+
+begin_import
+import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|collect
+operator|.
 name|Lists
 import|;
 end_import
@@ -1366,6 +1410,16 @@ operator|.
 name|util
 operator|.
 name|TreeSet
+import|;
+end_import
+
+begin_import
+import|import
+name|javax
+operator|.
+name|annotation
+operator|.
+name|Nonnull
 import|;
 end_import
 
@@ -1637,7 +1691,7 @@ name|decorrelator
 operator|.
 name|cm
 operator|.
-name|mapCorVarToCorRel
+name|mapCorToCorRel
 operator|.
 name|isEmpty
 argument_list|()
@@ -1905,7 +1959,7 @@ if|if
 condition|(
 name|cm
 operator|.
-name|mapRefRelToCorVar
+name|mapRefRelToCorRef
 operator|.
 name|containsKey
 argument_list|(
@@ -1915,7 +1969,7 @@ condition|)
 block|{
 name|cm
 operator|.
-name|mapRefRelToCorVar
+name|mapRefRelToCorRef
 operator|.
 name|putAll
 argument_list|(
@@ -1923,7 +1977,7 @@ name|newNode
 argument_list|,
 name|cm
 operator|.
-name|mapRefRelToCorVar
+name|mapRefRelToCorRef
 operator|.
 name|get
 argument_list|(
@@ -1963,7 +2017,7 @@ if|if
 condition|(
 name|cm
 operator|.
-name|mapCorVarToCorRel
+name|mapCorToCorRel
 operator|.
 name|get
 argument_list|(
@@ -1975,7 +2029,7 @@ condition|)
 block|{
 name|cm
 operator|.
-name|mapCorVarToCorRel
+name|mapCorToCorRel
 operator|.
 name|put
 argument_list|(
@@ -2109,6 +2163,20 @@ specifier|protected
 name|RexNode
 name|decorrelateExpr
 parameter_list|(
+name|RelNode
+name|currentRel
+parameter_list|,
+name|Map
+argument_list|<
+name|RelNode
+argument_list|,
+name|Frame
+argument_list|>
+name|map
+parameter_list|,
+name|CorelMap
+name|cm
+parameter_list|,
 name|RexNode
 name|exp
 parameter_list|)
@@ -2118,7 +2186,13 @@ name|shuttle
 init|=
 operator|new
 name|DecorrelateRexShuttle
-argument_list|()
+argument_list|(
+name|currentRel
+argument_list|,
+name|map
+argument_list|,
+name|cm
+argument_list|)
 decl_stmt|;
 return|return
 name|exp
@@ -2360,7 +2434,7 @@ operator|||
 operator|!
 name|frame
 operator|.
-name|corVarOutputPos
+name|corDefOutputs
 operator|.
 name|isEmpty
 argument_list|()
@@ -2445,7 +2519,7 @@ argument_list|,
 name|ImmutableSortedMap
 operator|.
 expr|<
-name|Correlation
+name|CorDef
 argument_list|,
 name|Integer
 operator|>
@@ -2468,12 +2542,12 @@ comment|// Rewrite logic:
 comment|//
 comment|// 1. change the collations field to reference the new input.
 comment|//
-comment|// Sort itself should not reference cor vars.
+comment|// Sort itself should not reference corVars.
 assert|assert
 operator|!
 name|cm
 operator|.
-name|mapRefRelToCorVar
+name|mapRefRelToCorRef
 operator|.
 name|containsKey
 argument_list|(
@@ -2536,7 +2610,7 @@ name|target
 argument_list|(
 name|frame
 operator|.
-name|oldToNewOutputPos
+name|oldToNewOutputs
 argument_list|,
 name|oldInput
 operator|.
@@ -2606,11 +2680,11 @@ name|newSort
 argument_list|,
 name|frame
 operator|.
-name|oldToNewOutputPos
+name|oldToNewOutputs
 argument_list|,
 name|frame
 operator|.
-name|corVarOutputPos
+name|corDefOutputs
 argument_list|)
 return|;
 block|}
@@ -2669,12 +2743,12 @@ comment|// 2. If the input of an aggregate produces correlated variables,
 comment|//    add them to the group list.
 comment|// 3. Change aggCalls to reference the new project.
 comment|//
-comment|// Aggregate itself should not reference cor vars.
+comment|// Aggregate itself should not reference corVars.
 assert|assert
 operator|!
 name|cm
 operator|.
-name|mapRefRelToCorVar
+name|mapRefRelToCorRef
 operator|.
 name|containsKey
 argument_list|(
@@ -2728,11 +2802,11 @@ name|Integer
 argument_list|,
 name|Integer
 argument_list|>
-name|mapNewInputToProjOutputPos
+name|mapNewInputToProjOutputs
 init|=
-name|Maps
-operator|.
-name|newHashMap
+operator|new
+name|HashMap
+argument_list|<>
 argument_list|()
 decl_stmt|;
 specifier|final
@@ -2851,7 +2925,7 @@ name|newInputPos
 init|=
 name|frame
 operator|.
-name|oldToNewOutputPos
+name|oldToNewOutputs
 operator|.
 name|get
 argument_list|(
@@ -2872,7 +2946,7 @@ name|newInputOutput
 argument_list|)
 argument_list|)
 expr_stmt|;
-name|mapNewInputToProjOutputPos
+name|mapNewInputToProjOutputs
 operator|.
 name|put
 argument_list|(
@@ -2888,11 +2962,11 @@ block|}
 specifier|final
 name|SortedMap
 argument_list|<
-name|Correlation
+name|CorDef
 argument_list|,
 name|Integer
 argument_list|>
-name|mapCorVarToOutputPos
+name|corDefOutputs
 init|=
 operator|new
 name|TreeMap
@@ -2904,7 +2978,7 @@ condition|(
 operator|!
 name|frame
 operator|.
-name|corVarOutputPos
+name|corDefOutputs
 operator|.
 name|isEmpty
 argument_list|()
@@ -2920,7 +2994,7 @@ name|Map
 operator|.
 name|Entry
 argument_list|<
-name|Correlation
+name|CorDef
 argument_list|,
 name|Integer
 argument_list|>
@@ -2928,7 +3002,7 @@ name|entry
 range|:
 name|frame
 operator|.
-name|corVarOutputPos
+name|corDefOutputs
 operator|.
 name|entrySet
 argument_list|()
@@ -2951,7 +3025,7 @@ name|newInputOutput
 argument_list|)
 argument_list|)
 expr_stmt|;
-name|mapCorVarToOutputPos
+name|corDefOutputs
 operator|.
 name|put
 argument_list|(
@@ -2963,7 +3037,7 @@ argument_list|,
 name|newPos
 argument_list|)
 expr_stmt|;
-name|mapNewInputToProjOutputPos
+name|mapNewInputToProjOutputs
 operator|.
 name|put
 argument_list|(
@@ -3008,7 +3082,7 @@ block|{
 if|if
 condition|(
 operator|!
-name|mapNewInputToProjOutputPos
+name|mapNewInputToProjOutputs
 operator|.
 name|containsKey
 argument_list|(
@@ -3030,7 +3104,7 @@ name|newInputOutput
 argument_list|)
 argument_list|)
 expr_stmt|;
-name|mapNewInputToProjOutputPos
+name|mapNewInputToProjOutputs
 operator|.
 name|put
 argument_list|(
@@ -3100,7 +3174,7 @@ name|oldInputPos
 range|:
 name|frame
 operator|.
-name|oldToNewOutputPos
+name|oldToNewOutputs
 operator|.
 name|keySet
 argument_list|()
@@ -3112,13 +3186,13 @@ name|put
 argument_list|(
 name|oldInputPos
 argument_list|,
-name|mapNewInputToProjOutputPos
+name|mapNewInputToProjOutputs
 operator|.
 name|get
 argument_list|(
 name|frame
 operator|.
-name|oldToNewOutputPos
+name|oldToNewOutputs
 operator|.
 name|get
 argument_list|(
@@ -3136,7 +3210,7 @@ name|newProject
 argument_list|,
 name|combinedMap
 argument_list|,
-name|mapCorVarToOutputPos
+name|corDefOutputs
 argument_list|)
 expr_stmt|;
 comment|// now it's time to rewrite the Aggregate
@@ -3231,8 +3305,8 @@ operator|.
 name|newArrayList
 argument_list|()
 decl_stmt|;
-comment|// Adjust the aggregator argument positions.
-comment|// Note aggregator does not change input ordering, so the input
+comment|// Adjust the Aggregate argument positions.
+comment|// Note Aggregate does not change input ordering, so the input
 comment|// output position mapping can be used to derive the new positions
 comment|// for the argument.
 for|for
@@ -3393,7 +3467,7 @@ argument_list|()
 operator|+
 name|frame
 operator|.
-name|corVarOutputPos
+name|corDefOutputs
 operator|.
 name|size
 argument_list|()
@@ -3427,7 +3501,7 @@ argument_list|()
 argument_list|,
 name|combinedMap
 argument_list|,
-name|mapCorVarToOutputPos
+name|corDefOutputs
 argument_list|)
 return|;
 block|}
@@ -3612,7 +3686,7 @@ operator|.
 name|getFieldList
 argument_list|()
 decl_stmt|;
-comment|// LogicalProject projects the original expressions,
+comment|// Project projects the original expressions,
 comment|// plus any correlated variables the input wants to pass along.
 specifier|final
 name|List
@@ -3631,13 +3705,13 @@ operator|.
 name|newArrayList
 argument_list|()
 decl_stmt|;
-comment|// If this LogicalProject has correlated reference, create value generator
+comment|// If this Project has correlated reference, create value generator
 comment|// and produce the correlated variables in the new output.
 if|if
 condition|(
 name|cm
 operator|.
-name|mapRefRelToCorVar
+name|mapRefRelToCorRef
 operator|.
 name|containsKey
 argument_list|(
@@ -3645,24 +3719,17 @@ name|rel
 argument_list|)
 condition|)
 block|{
+name|frame
+operator|=
 name|decorrelateInputWithValueGenerator
 argument_list|(
 name|rel
-argument_list|)
-expr_stmt|;
-comment|// The old input should be mapped to the LogicalJoin created by
-comment|// rewriteInputWithValueGenerator().
+argument_list|,
 name|frame
-operator|=
-name|map
-operator|.
-name|get
-argument_list|(
-name|oldInput
 argument_list|)
 expr_stmt|;
 block|}
-comment|// LogicalProject projects the original expressions
+comment|// Project projects the original expressions
 specifier|final
 name|Map
 argument_list|<
@@ -3670,11 +3737,11 @@ name|Integer
 argument_list|,
 name|Integer
 argument_list|>
-name|mapOldToNewOutputPos
+name|mapOldToNewOutputs
 init|=
-name|Maps
-operator|.
-name|newHashMap
+operator|new
+name|HashMap
+argument_list|<>
 argument_list|()
 decl_stmt|;
 name|int
@@ -3709,6 +3776,12 @@ name|of
 argument_list|(
 name|decorrelateExpr
 argument_list|(
+name|currentRel
+argument_list|,
+name|map
+argument_list|,
+name|cm
+argument_list|,
 name|oldProjects
 operator|.
 name|get
@@ -3729,7 +3802,7 @@ argument_list|()
 argument_list|)
 argument_list|)
 expr_stmt|;
-name|mapOldToNewOutputPos
+name|mapOldToNewOutputs
 operator|.
 name|put
 argument_list|(
@@ -3743,11 +3816,11 @@ comment|// Project any correlated variables the input wants to pass along.
 specifier|final
 name|SortedMap
 argument_list|<
-name|Correlation
+name|CorDef
 argument_list|,
 name|Integer
 argument_list|>
-name|mapCorVarToOutputPos
+name|corDefOutputs
 init|=
 operator|new
 name|TreeMap
@@ -3760,7 +3833,7 @@ name|Map
 operator|.
 name|Entry
 argument_list|<
-name|Correlation
+name|CorDef
 argument_list|,
 name|Integer
 argument_list|>
@@ -3768,7 +3841,7 @@ name|entry
 range|:
 name|frame
 operator|.
-name|corVarOutputPos
+name|corDefOutputs
 operator|.
 name|entrySet
 argument_list|()
@@ -3799,7 +3872,7 @@ argument_list|()
 argument_list|)
 argument_list|)
 expr_stmt|;
-name|mapCorVarToOutputPos
+name|corDefOutputs
 operator|.
 name|put
 argument_list|(
@@ -3838,20 +3911,20 @@ name|rel
 argument_list|,
 name|newProject
 argument_list|,
-name|mapOldToNewOutputPos
+name|mapOldToNewOutputs
 argument_list|,
-name|mapCorVarToOutputPos
+name|corDefOutputs
 argument_list|)
 return|;
 block|}
-comment|/**    * Create RelNode tree that produces a list of correlated variables.    *    * @param correlations         correlated variables to generate    * @param valueGenFieldOffset  offset in the output that generated columns    *                             will start    * @param mapCorVarToOutputPos output positions for the correlated variables    *                             generated    * @return RelNode the root of the resultant RelNode tree    */
+comment|/**    * Create RelNode tree that produces a list of correlated variables.    *    * @param correlations         correlated variables to generate    * @param valueGenFieldOffset  offset in the output that generated columns    *                             will start    * @param corDefOutputs        output positions for the correlated variables    *                             generated    * @return RelNode the root of the resultant RelNode tree    */
 specifier|private
 name|RelNode
 name|createValueGenerator
 parameter_list|(
 name|Iterable
 argument_list|<
-name|Correlation
+name|CorRef
 argument_list|>
 name|correlations
 parameter_list|,
@@ -3860,11 +3933,11 @@ name|valueGenFieldOffset
 parameter_list|,
 name|SortedMap
 argument_list|<
-name|Correlation
+name|CorDef
 argument_list|,
 name|Integer
 argument_list|>
-name|mapCorVarToOutputPos
+name|corDefOutputs
 parameter_list|)
 block|{
 specifier|final
@@ -3877,7 +3950,7 @@ argument_list|<
 name|Integer
 argument_list|>
 argument_list|>
-name|mapNewInputToOutputPos
+name|mapNewInputToOutputs
 init|=
 operator|new
 name|HashMap
@@ -3902,7 +3975,7 @@ comment|// Input provides the definition of a correlated variable.
 comment|// Add to map all the referenced positions (relative to each input rel).
 for|for
 control|(
-name|Correlation
+name|CorRef
 name|corVar
 range|:
 name|correlations
@@ -3959,12 +4032,12 @@ name|List
 argument_list|<
 name|Integer
 argument_list|>
-name|newLocalOutputPosList
+name|newLocalOutputs
 decl_stmt|;
 if|if
 condition|(
 operator|!
-name|mapNewInputToOutputPos
+name|mapNewInputToOutputs
 operator|.
 name|containsKey
 argument_list|(
@@ -3972,19 +4045,19 @@ name|newInput
 argument_list|)
 condition|)
 block|{
-name|newLocalOutputPosList
+name|newLocalOutputs
 operator|=
-name|Lists
-operator|.
-name|newArrayList
+operator|new
+name|ArrayList
+argument_list|<>
 argument_list|()
 expr_stmt|;
 block|}
 else|else
 block|{
-name|newLocalOutputPosList
+name|newLocalOutputs
 operator|=
-name|mapNewInputToOutputPos
+name|mapNewInputToOutputs
 operator|.
 name|get
 argument_list|(
@@ -3998,7 +4071,7 @@ name|newCorVarOffset
 init|=
 name|frame
 operator|.
-name|oldToNewOutputPos
+name|oldToNewOutputs
 operator|.
 name|get
 argument_list|(
@@ -4009,7 +4082,7 @@ comment|// Add all unique positions referenced.
 if|if
 condition|(
 operator|!
-name|newLocalOutputPosList
+name|newLocalOutputs
 operator|.
 name|contains
 argument_list|(
@@ -4017,7 +4090,7 @@ name|newCorVarOffset
 argument_list|)
 condition|)
 block|{
-name|newLocalOutputPosList
+name|newLocalOutputs
 operator|.
 name|add
 argument_list|(
@@ -4025,13 +4098,13 @@ name|newCorVarOffset
 argument_list|)
 expr_stmt|;
 block|}
-name|mapNewInputToOutputPos
+name|mapNewInputToOutputs
 operator|.
 name|put
 argument_list|(
 name|newInput
 argument_list|,
-name|newLocalOutputPosList
+name|newLocalOutputs
 argument_list|)
 expr_stmt|;
 block|}
@@ -4040,21 +4113,21 @@ name|offset
 init|=
 literal|0
 decl_stmt|;
-comment|// Project only the correlated fields out of each inputRel
-comment|// and join the projectRel together.
+comment|// Project only the correlated fields out of each input
+comment|// and join the project together.
 comment|// To make sure the plan does not change in terms of join order,
-comment|// join these rels based on their occurrence in cor var list which
+comment|// join these rels based on their occurrence in corVar list which
 comment|// is sorted.
 specifier|final
 name|Set
 argument_list|<
 name|RelNode
 argument_list|>
-name|joinedInputRelSet
+name|joinedInputs
 init|=
-name|Sets
-operator|.
-name|newHashSet
+operator|new
+name|HashSet
+argument_list|<>
 argument_list|()
 decl_stmt|;
 name|RelNode
@@ -4064,7 +4137,7 @@ literal|null
 decl_stmt|;
 for|for
 control|(
-name|Correlation
+name|CorRef
 name|corVar
 range|:
 name|correlations
@@ -4105,7 +4178,7 @@ assert|;
 if|if
 condition|(
 operator|!
-name|joinedInputRelSet
+name|joinedInputs
 operator|.
 name|contains
 argument_list|(
@@ -4122,7 +4195,7 @@ name|createProject
 argument_list|(
 name|newInput
 argument_list|,
-name|mapNewInputToOutputPos
+name|mapNewInputToOutputs
 operator|.
 name|get
 argument_list|(
@@ -4154,7 +4227,7 @@ operator|.
 name|getCluster
 argument_list|()
 decl_stmt|;
-name|joinedInputRelSet
+name|joinedInputs
 operator|.
 name|add
 argument_list|(
@@ -4236,13 +4309,13 @@ comment|// valueGenerators are joined with the original left input of the rel
 comment|// referencing correlated variables.
 for|for
 control|(
-name|Correlation
-name|corVar
+name|CorRef
+name|corRef
 range|:
 name|correlations
 control|)
 block|{
-comment|// The first input of a Correlator is always the rel defining
+comment|// The first input of a Correlate is always the rel defining
 comment|// the correlated variables.
 specifier|final
 name|RelNode
@@ -4250,7 +4323,7 @@ name|oldInput
 init|=
 name|getCorRel
 argument_list|(
-name|corVar
+name|corRef
 argument_list|)
 decl_stmt|;
 assert|assert
@@ -4287,9 +4360,9 @@ name|List
 argument_list|<
 name|Integer
 argument_list|>
-name|newLocalOutputPosList
+name|newLocalOutputs
 init|=
-name|mapNewInputToOutputPos
+name|mapNewInputToOutputs
 operator|.
 name|get
 argument_list|(
@@ -4298,31 +4371,31 @@ argument_list|)
 decl_stmt|;
 specifier|final
 name|int
-name|newLocalOutputPos
+name|newLocalOutput
 init|=
 name|frame
 operator|.
-name|oldToNewOutputPos
+name|oldToNewOutputs
 operator|.
 name|get
 argument_list|(
-name|corVar
+name|corRef
 operator|.
 name|field
 argument_list|)
 decl_stmt|;
-comment|// newOutputPos is the index of the cor var in the referenced
+comment|// newOutput is the index of the corVar in the referenced
 comment|// position list plus the offset of referenced position list of
 comment|// each newInput.
 specifier|final
 name|int
-name|newOutputPos
+name|newOutput
 init|=
-name|newLocalOutputPosList
+name|newLocalOutputs
 operator|.
 name|indexOf
 argument_list|(
-name|newLocalOutputPos
+name|newLocalOutput
 argument_list|)
 operator|+
 name|mapNewInputToNewOffset
@@ -4334,34 +4407,16 @@ argument_list|)
 operator|+
 name|valueGenFieldOffset
 decl_stmt|;
-if|if
-condition|(
-name|mapCorVarToOutputPos
-operator|.
-name|containsKey
-argument_list|(
-name|corVar
-argument_list|)
-condition|)
-block|{
-assert|assert
-name|mapCorVarToOutputPos
-operator|.
-name|get
-argument_list|(
-name|corVar
-argument_list|)
-operator|==
-name|newOutputPos
-assert|;
-block|}
-name|mapCorVarToOutputPos
+name|corDefOutputs
 operator|.
 name|put
 argument_list|(
-name|corVar
+name|corRef
+operator|.
+name|def
+argument_list|()
 argument_list|,
-name|newOutputPos
+name|newOutput
 argument_list|)
 expr_stmt|;
 block|}
@@ -4406,10 +4461,12 @@ name|Frame
 argument_list|(
 name|r
 argument_list|,
+name|r
+argument_list|,
 name|ImmutableSortedMap
 operator|.
 expr|<
-name|Correlation
+name|CorDef
 argument_list|,
 name|Integer
 operator|>
@@ -4437,7 +4494,7 @@ specifier|private
 name|RelNode
 name|getCorRel
 parameter_list|(
-name|Correlation
+name|CorRef
 name|corVar
 parameter_list|)
 block|{
@@ -4447,7 +4504,7 @@ name|r
 init|=
 name|cm
 operator|.
-name|mapCorVarToCorRel
+name|mapCorToCorRel
 operator|.
 name|get
 argument_list|(
@@ -4465,15 +4522,217 @@ literal|0
 argument_list|)
 return|;
 block|}
+comment|/** Adds a value generator to satisfy the correlating variables used by    * a relational expression, if those variables are not already provided by    * its input. */
 specifier|private
-name|void
+name|Frame
+name|maybeAddValueGenerator
+parameter_list|(
+name|RelNode
+name|rel
+parameter_list|,
+name|Frame
+name|frame
+parameter_list|)
+block|{
+specifier|final
+name|CorelMap
+name|cm1
+init|=
+operator|new
+name|CorelMapBuilder
+argument_list|()
+operator|.
+name|build
+argument_list|(
+name|frame
+operator|.
+name|r
+argument_list|,
+name|rel
+argument_list|)
+decl_stmt|;
+if|if
+condition|(
+operator|!
+name|cm1
+operator|.
+name|mapRefRelToCorRef
+operator|.
+name|containsKey
+argument_list|(
+name|rel
+argument_list|)
+condition|)
+block|{
+return|return
+name|frame
+return|;
+block|}
+specifier|final
+name|Collection
+argument_list|<
+name|CorRef
+argument_list|>
+name|needs
+init|=
+name|cm1
+operator|.
+name|mapRefRelToCorRef
+operator|.
+name|get
+argument_list|(
+name|rel
+argument_list|)
+decl_stmt|;
+specifier|final
+name|ImmutableSortedSet
+argument_list|<
+name|CorDef
+argument_list|>
+name|haves
+init|=
+name|frame
+operator|.
+name|corDefOutputs
+operator|.
+name|keySet
+argument_list|()
+decl_stmt|;
+if|if
+condition|(
+name|hasAll
+argument_list|(
+name|needs
+argument_list|,
+name|haves
+argument_list|)
+condition|)
+block|{
+return|return
+name|frame
+return|;
+block|}
+return|return
+name|decorrelateInputWithValueGenerator
+argument_list|(
+name|rel
+argument_list|,
+name|frame
+argument_list|)
+return|;
+block|}
+comment|/** Returns whether all of a collection of {@link CorRef}s are satisfied    * by at least one of a collection of {@link CorDef}s. */
+specifier|private
+name|boolean
+name|hasAll
+parameter_list|(
+name|Collection
+argument_list|<
+name|CorRef
+argument_list|>
+name|corRefs
+parameter_list|,
+name|Collection
+argument_list|<
+name|CorDef
+argument_list|>
+name|corDefs
+parameter_list|)
+block|{
+for|for
+control|(
+name|CorRef
+name|corRef
+range|:
+name|corRefs
+control|)
+block|{
+if|if
+condition|(
+operator|!
+name|has
+argument_list|(
+name|corDefs
+argument_list|,
+name|corRef
+argument_list|)
+condition|)
+block|{
+return|return
+literal|false
+return|;
+block|}
+block|}
+return|return
+literal|true
+return|;
+block|}
+comment|/** Returns whether a {@link CorrelationId} is satisfied by at least one of a    * collection of {@link CorDef}s. */
+specifier|private
+name|boolean
+name|has
+parameter_list|(
+name|Collection
+argument_list|<
+name|CorDef
+argument_list|>
+name|corDefs
+parameter_list|,
+name|CorRef
+name|corr
+parameter_list|)
+block|{
+for|for
+control|(
+name|CorDef
+name|corDef
+range|:
+name|corDefs
+control|)
+block|{
+if|if
+condition|(
+name|corDef
+operator|.
+name|corr
+operator|.
+name|equals
+argument_list|(
+name|corr
+operator|.
+name|corr
+argument_list|)
+operator|&&
+name|corDef
+operator|.
+name|field
+operator|==
+name|corr
+operator|.
+name|field
+condition|)
+block|{
+return|return
+literal|true
+return|;
+block|}
+block|}
+return|return
+literal|false
+return|;
+block|}
+specifier|private
+name|Frame
 name|decorrelateInputWithValueGenerator
 parameter_list|(
 name|RelNode
 name|rel
+parameter_list|,
+name|Frame
+name|frame
 parameter_list|)
 block|{
-comment|// currently only handles one input input
+comment|// currently only handles one input
 assert|assert
 name|rel
 operator|.
@@ -4488,32 +4747,18 @@ assert|;
 name|RelNode
 name|oldInput
 init|=
-name|rel
-operator|.
-name|getInput
-argument_list|(
-literal|0
-argument_list|)
-decl_stmt|;
-specifier|final
-name|Frame
 name|frame
-init|=
-name|map
 operator|.
-name|get
-argument_list|(
-name|oldInput
-argument_list|)
+name|r
 decl_stmt|;
 specifier|final
 name|SortedMap
 argument_list|<
-name|Correlation
+name|CorDef
 argument_list|,
 name|Integer
 argument_list|>
-name|mapCorVarToOutputPos
+name|corDefOutputs
 init|=
 operator|new
 name|TreeMap
@@ -4521,25 +4766,286 @@ argument_list|<>
 argument_list|(
 name|frame
 operator|.
-name|corVarOutputPos
+name|corDefOutputs
 argument_list|)
 decl_stmt|;
 specifier|final
 name|Collection
 argument_list|<
-name|Correlation
+name|CorRef
 argument_list|>
 name|corVarList
 init|=
 name|cm
 operator|.
-name|mapRefRelToCorVar
+name|mapRefRelToCorRef
 operator|.
 name|get
 argument_list|(
 name|rel
 argument_list|)
 decl_stmt|;
+comment|// Try to populate correlation variables using local fields.
+comment|// This means that we do not need a value generator.
+if|if
+condition|(
+name|rel
+operator|instanceof
+name|Filter
+condition|)
+block|{
+name|SortedMap
+argument_list|<
+name|CorDef
+argument_list|,
+name|Integer
+argument_list|>
+name|map
+init|=
+operator|new
+name|TreeMap
+argument_list|<>
+argument_list|()
+decl_stmt|;
+name|List
+argument_list|<
+name|RexNode
+argument_list|>
+name|projects
+init|=
+operator|new
+name|ArrayList
+argument_list|<>
+argument_list|()
+decl_stmt|;
+for|for
+control|(
+name|CorRef
+name|correlation
+range|:
+name|corVarList
+control|)
+block|{
+specifier|final
+name|CorDef
+name|def
+init|=
+name|correlation
+operator|.
+name|def
+argument_list|()
+decl_stmt|;
+if|if
+condition|(
+name|corDefOutputs
+operator|.
+name|containsKey
+argument_list|(
+name|def
+argument_list|)
+operator|||
+name|map
+operator|.
+name|containsKey
+argument_list|(
+name|def
+argument_list|)
+condition|)
+block|{
+continue|continue;
+block|}
+try|try
+block|{
+name|findCorrelationEquivalent
+argument_list|(
+name|correlation
+argument_list|,
+operator|(
+operator|(
+name|Filter
+operator|)
+name|rel
+operator|)
+operator|.
+name|getCondition
+argument_list|()
+argument_list|)
+expr_stmt|;
+block|}
+catch|catch
+parameter_list|(
+name|Util
+operator|.
+name|FoundOne
+name|e
+parameter_list|)
+block|{
+if|if
+condition|(
+name|e
+operator|.
+name|getNode
+argument_list|()
+operator|instanceof
+name|RexInputRef
+condition|)
+block|{
+name|map
+operator|.
+name|put
+argument_list|(
+name|def
+argument_list|,
+operator|(
+operator|(
+name|RexInputRef
+operator|)
+name|e
+operator|.
+name|getNode
+argument_list|()
+operator|)
+operator|.
+name|getIndex
+argument_list|()
+argument_list|)
+expr_stmt|;
+block|}
+else|else
+block|{
+name|map
+operator|.
+name|put
+argument_list|(
+name|def
+argument_list|,
+name|frame
+operator|.
+name|r
+operator|.
+name|getRowType
+argument_list|()
+operator|.
+name|getFieldCount
+argument_list|()
+operator|+
+name|projects
+operator|.
+name|size
+argument_list|()
+argument_list|)
+expr_stmt|;
+name|projects
+operator|.
+name|add
+argument_list|(
+operator|(
+name|RexNode
+operator|)
+name|e
+operator|.
+name|getNode
+argument_list|()
+argument_list|)
+expr_stmt|;
+block|}
+block|}
+block|}
+comment|// If all correlation variables are now satisfied, skip creating a value
+comment|// generator.
+if|if
+condition|(
+name|map
+operator|.
+name|size
+argument_list|()
+operator|==
+name|corVarList
+operator|.
+name|size
+argument_list|()
+condition|)
+block|{
+name|map
+operator|.
+name|putAll
+argument_list|(
+name|frame
+operator|.
+name|corDefOutputs
+argument_list|)
+expr_stmt|;
+specifier|final
+name|RelNode
+name|r
+decl_stmt|;
+if|if
+condition|(
+operator|!
+name|projects
+operator|.
+name|isEmpty
+argument_list|()
+condition|)
+block|{
+name|relBuilder
+operator|.
+name|push
+argument_list|(
+name|oldInput
+argument_list|)
+operator|.
+name|project
+argument_list|(
+name|Iterables
+operator|.
+name|concat
+argument_list|(
+name|relBuilder
+operator|.
+name|fields
+argument_list|()
+argument_list|,
+name|projects
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|r
+operator|=
+name|relBuilder
+operator|.
+name|build
+argument_list|()
+expr_stmt|;
+block|}
+else|else
+block|{
+name|r
+operator|=
+name|oldInput
+expr_stmt|;
+block|}
+return|return
+name|register
+argument_list|(
+name|rel
+operator|.
+name|getInput
+argument_list|(
+literal|0
+argument_list|)
+argument_list|,
+name|r
+argument_list|,
+name|frame
+operator|.
+name|oldToNewOutputs
+argument_list|,
+name|map
+argument_list|)
+return|;
+block|}
+block|}
 name|int
 name|leftInputOutputCount
 init|=
@@ -4553,7 +5059,7 @@ operator|.
 name|getFieldCount
 argument_list|()
 decl_stmt|;
-comment|// can directly add positions into mapCorVarToOutputPos since join
+comment|// can directly add positions into corDefOutputs since join
 comment|// does not change the output ordering from the inputs.
 name|RelNode
 name|valueGen
@@ -4564,7 +5070,7 @@ name|corVarList
 argument_list|,
 name|leftInputOutputCount
 argument_list|,
-name|mapCorVarToOutputPos
+name|corDefOutputs
 argument_list|)
 decl_stmt|;
 name|RelNode
@@ -4600,22 +5106,334 @@ operator|.
 name|INNER
 argument_list|)
 decl_stmt|;
-comment|// LogicalJoin or LogicalFilter does not change the old input ordering. All
-comment|// input fields from newLeftInput(i.e. the original input to the old
-comment|// LogicalFilter) are in the output and in the same position.
+comment|// Join or Filter does not change the old input ordering. All
+comment|// input fields from newLeftInput (i.e. the original input to the old
+comment|// Filter) are in the output and in the same position.
+return|return
 name|register
 argument_list|(
-name|oldInput
+name|rel
+operator|.
+name|getInput
+argument_list|(
+literal|0
+argument_list|)
 argument_list|,
 name|join
 argument_list|,
 name|frame
 operator|.
-name|oldToNewOutputPos
+name|oldToNewOutputs
 argument_list|,
-name|mapCorVarToOutputPos
+name|corDefOutputs
+argument_list|)
+return|;
+block|}
+comment|/** Finds a {@link RexInputRef} that is equivalent to a {@link CorRef},    * and if found, throws a {@link org.apache.calcite.util.Util.FoundOne}. */
+specifier|private
+name|void
+name|findCorrelationEquivalent
+parameter_list|(
+name|CorRef
+name|correlation
+parameter_list|,
+name|RexNode
+name|e
+parameter_list|)
+throws|throws
+name|Util
+operator|.
+name|FoundOne
+block|{
+switch|switch
+condition|(
+name|e
+operator|.
+name|getKind
+argument_list|()
+condition|)
+block|{
+case|case
+name|EQUALS
+case|:
+specifier|final
+name|RexCall
+name|call
+init|=
+operator|(
+name|RexCall
+operator|)
+name|e
+decl_stmt|;
+specifier|final
+name|List
+argument_list|<
+name|RexNode
+argument_list|>
+name|operands
+init|=
+name|call
+operator|.
+name|getOperands
+argument_list|()
+decl_stmt|;
+if|if
+condition|(
+name|references
+argument_list|(
+name|operands
+operator|.
+name|get
+argument_list|(
+literal|0
+argument_list|)
+argument_list|,
+name|correlation
+argument_list|)
+condition|)
+block|{
+throw|throw
+operator|new
+name|Util
+operator|.
+name|FoundOne
+argument_list|(
+name|operands
+operator|.
+name|get
+argument_list|(
+literal|1
+argument_list|)
+argument_list|)
+throw|;
+block|}
+if|if
+condition|(
+name|references
+argument_list|(
+name|operands
+operator|.
+name|get
+argument_list|(
+literal|1
+argument_list|)
+argument_list|,
+name|correlation
+argument_list|)
+condition|)
+block|{
+throw|throw
+operator|new
+name|Util
+operator|.
+name|FoundOne
+argument_list|(
+name|operands
+operator|.
+name|get
+argument_list|(
+literal|0
+argument_list|)
+argument_list|)
+throw|;
+block|}
+break|break;
+case|case
+name|AND
+case|:
+for|for
+control|(
+name|RexNode
+name|operand
+range|:
+operator|(
+operator|(
+name|RexCall
+operator|)
+name|e
+operator|)
+operator|.
+name|getOperands
+argument_list|()
+control|)
+block|{
+name|findCorrelationEquivalent
+argument_list|(
+name|correlation
+argument_list|,
+name|operand
 argument_list|)
 expr_stmt|;
+block|}
+block|}
+block|}
+specifier|private
+name|boolean
+name|references
+parameter_list|(
+name|RexNode
+name|e
+parameter_list|,
+name|CorRef
+name|correlation
+parameter_list|)
+block|{
+switch|switch
+condition|(
+name|e
+operator|.
+name|getKind
+argument_list|()
+condition|)
+block|{
+case|case
+name|CAST
+case|:
+specifier|final
+name|RexNode
+name|operand
+init|=
+operator|(
+operator|(
+name|RexCall
+operator|)
+name|e
+operator|)
+operator|.
+name|getOperands
+argument_list|()
+operator|.
+name|get
+argument_list|(
+literal|0
+argument_list|)
+decl_stmt|;
+if|if
+condition|(
+name|isWidening
+argument_list|(
+name|e
+operator|.
+name|getType
+argument_list|()
+argument_list|,
+name|operand
+operator|.
+name|getType
+argument_list|()
+argument_list|)
+condition|)
+block|{
+return|return
+name|references
+argument_list|(
+name|operand
+argument_list|,
+name|correlation
+argument_list|)
+return|;
+block|}
+return|return
+literal|false
+return|;
+case|case
+name|FIELD_ACCESS
+case|:
+specifier|final
+name|RexFieldAccess
+name|f
+init|=
+operator|(
+name|RexFieldAccess
+operator|)
+name|e
+decl_stmt|;
+if|if
+condition|(
+name|f
+operator|.
+name|getField
+argument_list|()
+operator|.
+name|getIndex
+argument_list|()
+operator|==
+name|correlation
+operator|.
+name|field
+operator|&&
+name|f
+operator|.
+name|getReferenceExpr
+argument_list|()
+operator|instanceof
+name|RexCorrelVariable
+condition|)
+block|{
+if|if
+condition|(
+operator|(
+operator|(
+name|RexCorrelVariable
+operator|)
+name|f
+operator|.
+name|getReferenceExpr
+argument_list|()
+operator|)
+operator|.
+name|id
+operator|==
+name|correlation
+operator|.
+name|corr
+condition|)
+block|{
+return|return
+literal|true
+return|;
+block|}
+block|}
+comment|// fall through
+default|default:
+return|return
+literal|false
+return|;
+block|}
+block|}
+comment|/** Returns whether one type is just a widening of another.    *    *<p>For example:<ul>    *<li>{@code VARCHAR(10)} is a widening of {@code VARCHAR(5)}.    *<li>{@code VARCHAR(10)} is a widening of {@code VARCHAR(10) NOT NULL}.    *</ul>    */
+specifier|private
+name|boolean
+name|isWidening
+parameter_list|(
+name|RelDataType
+name|type
+parameter_list|,
+name|RelDataType
+name|type1
+parameter_list|)
+block|{
+return|return
+name|type
+operator|.
+name|getSqlTypeName
+argument_list|()
+operator|==
+name|type1
+operator|.
+name|getSqlTypeName
+argument_list|()
+operator|&&
+name|type
+operator|.
+name|getPrecision
+argument_list|()
+operator|>=
+name|type1
+operator|.
+name|getPrecision
+argument_list|()
+return|;
 block|}
 comment|/**    * Rewrite LogicalFilter.    *    * @param rel the filter rel to rewrite    */
 specifier|public
@@ -4629,16 +5447,16 @@ block|{
 comment|//
 comment|// Rewrite logic:
 comment|//
-comment|// 1. If a LogicalFilter references a correlated field in its filter
-comment|// condition, rewrite the LogicalFilter to be
-comment|//   LogicalFilter
-comment|//     LogicalJoin(cross product)
-comment|//       OriginalFilterInput
+comment|// 1. If a Filter references a correlated field in its filter
+comment|// condition, rewrite the Filter to be
+comment|//   Filter
+comment|//     Join(cross product)
+comment|//       originalFilterInput
 comment|//       ValueGenerator(produces distinct sets of correlated variables)
 comment|// and rewrite the correlated fieldAccess in the filter condition to
-comment|// reference the LogicalJoin output.
+comment|// reference the Join output.
 comment|//
-comment|// 2. If LogicalFilter does not reference correlated variables, simply
+comment|// 2. If Filter does not reference correlated variables, simply
 comment|// rewrite the filter condition using new input.
 comment|//
 specifier|final
@@ -4672,13 +5490,18 @@ return|return
 literal|null
 return|;
 block|}
-comment|// If this LogicalFilter has correlated reference, create value generator
+comment|// If this Filter has correlated reference, create value generator
 comment|// and produce the correlated variables in the new output.
+if|if
+condition|(
+literal|false
+condition|)
+block|{
 if|if
 condition|(
 name|cm
 operator|.
-name|mapRefRelToCorVar
+name|mapRefRelToCorRef
 operator|.
 name|containsKey
 argument_list|(
@@ -4686,77 +5509,95 @@ name|rel
 argument_list|)
 condition|)
 block|{
+name|frame
+operator|=
 name|decorrelateInputWithValueGenerator
 argument_list|(
 name|rel
-argument_list|)
-expr_stmt|;
-comment|// The old input should be mapped to the newly created LogicalJoin by
-comment|// rewriteInputWithValueGenerator().
+argument_list|,
 name|frame
-operator|=
-name|map
-operator|.
-name|get
-argument_list|(
-name|oldInput
 argument_list|)
 expr_stmt|;
 block|}
+block|}
+else|else
+block|{
+name|frame
+operator|=
+name|maybeAddValueGenerator
+argument_list|(
+name|rel
+argument_list|,
+name|frame
+argument_list|)
+expr_stmt|;
+block|}
+specifier|final
+name|CorelMap
+name|cm2
+init|=
+operator|new
+name|CorelMapBuilder
+argument_list|()
+operator|.
+name|build
+argument_list|(
+name|rel
+argument_list|)
+decl_stmt|;
 comment|// Replace the filter expression to reference output of the join
 comment|// Map filter to the new filter over join
-specifier|final
-name|RelFactories
+name|relBuilder
 operator|.
-name|FilterFactory
-name|factory
-init|=
-name|RelFactories
-operator|.
-name|DEFAULT_FILTER_FACTORY
-decl_stmt|;
-name|RelNode
-name|newFilter
-init|=
-name|factory
-operator|.
-name|createFilter
+name|push
 argument_list|(
 name|frame
 operator|.
 name|r
-argument_list|,
+argument_list|)
+operator|.
+name|filter
+argument_list|(
 name|decorrelateExpr
 argument_list|(
+name|currentRel
+argument_list|,
+name|map
+argument_list|,
+name|cm2
+argument_list|,
 name|rel
 operator|.
 name|getCondition
 argument_list|()
 argument_list|)
 argument_list|)
-decl_stmt|;
+expr_stmt|;
 comment|// Filter does not change the input ordering.
 comment|// Filter rel does not permute the input.
-comment|// All corvars produced by filter will have the same output positions in the
+comment|// All corVars produced by filter will have the same output positions in the
 comment|// input rel.
 return|return
 name|register
 argument_list|(
 name|rel
 argument_list|,
-name|newFilter
+name|relBuilder
+operator|.
+name|build
+argument_list|()
 argument_list|,
 name|frame
 operator|.
-name|oldToNewOutputPos
+name|oldToNewOutputs
 argument_list|,
 name|frame
 operator|.
-name|corVarOutputPos
+name|corDefOutputs
 argument_list|)
 return|;
 block|}
-comment|/**    * Rewrite Correlator into a left outer join.    *    * @param rel Correlator    */
+comment|/**    * Rewrite Correlate into a left outer join.    *    * @param rel Correlator    */
 specifier|public
 name|Frame
 name|decorrelateRel
@@ -4770,10 +5611,10 @@ comment|// Rewrite logic:
 comment|//
 comment|// The original left input will be joined with the new right input that
 comment|// has generated correlated variables propagated up. For any generated
-comment|// cor vars that are not used in the join key, pass them along to be
-comment|// joined later with the CorrelatorRels that produce them.
+comment|// corVars that are not used in the join key, pass them along to be
+comment|// joined later with the Correlates that produce them.
 comment|//
-comment|// the right input to Correlator should produce correlated variables
+comment|// the right input to Correlate should produce correlated variables
 specifier|final
 name|RelNode
 name|oldLeft
@@ -4838,7 +5679,7 @@ if|if
 condition|(
 name|rightFrame
 operator|.
-name|corVarOutputPos
+name|corDefOutputs
 operator|.
 name|isEmpty
 argument_list|()
@@ -4859,7 +5700,7 @@ argument_list|()
 operator|<=
 name|rightFrame
 operator|.
-name|corVarOutputPos
+name|corDefOutputs
 operator|.
 name|keySet
 argument_list|()
@@ -4873,11 +5714,11 @@ comment|// with the values generated and propagated from the right input
 specifier|final
 name|SortedMap
 argument_list|<
-name|Correlation
+name|CorDef
 argument_list|,
 name|Integer
 argument_list|>
-name|corVarOutputPos
+name|corDefOutputs
 init|=
 operator|new
 name|TreeMap
@@ -4885,7 +5726,7 @@ argument_list|<>
 argument_list|(
 name|rightFrame
 operator|.
-name|corVarOutputPos
+name|corDefOutputs
 argument_list|)
 decl_stmt|;
 specifier|final
@@ -4948,17 +5789,17 @@ name|Map
 operator|.
 name|Entry
 argument_list|<
-name|Correlation
+name|CorDef
 argument_list|,
 name|Integer
 argument_list|>
-name|rightOutputPos
+name|rightOutput
 range|:
-name|Lists
-operator|.
-name|newArrayList
+operator|new
+name|ArrayList
+argument_list|<>
 argument_list|(
-name|corVarOutputPos
+name|corDefOutputs
 operator|.
 name|entrySet
 argument_list|()
@@ -4966,10 +5807,10 @@ argument_list|)
 control|)
 block|{
 specifier|final
-name|Correlation
-name|corVar
+name|CorDef
+name|corDef
 init|=
-name|rightOutputPos
+name|rightOutput
 operator|.
 name|getKey
 argument_list|()
@@ -4977,7 +5818,7 @@ decl_stmt|;
 if|if
 condition|(
 operator|!
-name|corVar
+name|corDef
 operator|.
 name|corr
 operator|.
@@ -4998,11 +5839,11 @@ name|newLeftPos
 init|=
 name|leftFrame
 operator|.
-name|oldToNewOutputPos
+name|oldToNewOutputs
 operator|.
 name|get
 argument_list|(
-name|corVar
+name|corDef
 operator|.
 name|field
 argument_list|)
@@ -5011,7 +5852,7 @@ specifier|final
 name|int
 name|newRightPos
 init|=
-name|rightOutputPos
+name|rightOutput
 operator|.
 name|getValue
 argument_list|()
@@ -5057,23 +5898,23 @@ argument_list|)
 argument_list|)
 argument_list|)
 expr_stmt|;
-comment|// remove this cor var from output position mapping
-name|corVarOutputPos
+comment|// remove this corVar from output position mapping
+name|corDefOutputs
 operator|.
 name|remove
 argument_list|(
-name|corVar
+name|corDef
 argument_list|)
 expr_stmt|;
 block|}
-comment|// Update the output position for the cor vars: only pass on the cor
+comment|// Update the output position for the corVars: only pass on the cor
 comment|// vars that are not used in the join key.
 for|for
 control|(
-name|Correlation
-name|corVar
+name|CorDef
+name|corDef
 range|:
-name|corVarOutputPos
+name|corDefOutputs
 operator|.
 name|keySet
 argument_list|()
@@ -5082,34 +5923,34 @@ block|{
 name|int
 name|newPos
 init|=
-name|corVarOutputPos
+name|corDefOutputs
 operator|.
 name|get
 argument_list|(
-name|corVar
+name|corDef
 argument_list|)
 operator|+
 name|newLeftFieldCount
 decl_stmt|;
-name|corVarOutputPos
+name|corDefOutputs
 operator|.
 name|put
 argument_list|(
-name|corVar
+name|corDef
 argument_list|,
 name|newPos
 argument_list|)
 expr_stmt|;
 block|}
-comment|// then add any cor var from the left input. Do not need to change
+comment|// then add any corVar from the left input. Do not need to change
 comment|// output positions.
-name|corVarOutputPos
+name|corDefOutputs
 operator|.
 name|putAll
 argument_list|(
 name|leftFrame
 operator|.
-name|corVarOutputPos
+name|corDefOutputs
 argument_list|)
 expr_stmt|;
 comment|// Create the mapping between the output of the old correlation rel
@@ -5121,11 +5962,11 @@ name|Integer
 argument_list|,
 name|Integer
 argument_list|>
-name|mapOldToNewOutputPos
+name|mapOldToNewOutputs
 init|=
-name|Maps
-operator|.
-name|newHashMap
+operator|new
+name|HashMap
+argument_list|<>
 argument_list|()
 decl_stmt|;
 name|int
@@ -5164,13 +6005,13 @@ operator|+
 name|oldRightFieldCount
 assert|;
 comment|// Left input positions are not changed.
-name|mapOldToNewOutputPos
+name|mapOldToNewOutputs
 operator|.
 name|putAll
 argument_list|(
 name|leftFrame
 operator|.
-name|oldToNewOutputPos
+name|oldToNewOutputs
 argument_list|)
 expr_stmt|;
 comment|// Right input positions are shifted by newLeftFieldCount.
@@ -5189,7 +6030,7 @@ name|i
 operator|++
 control|)
 block|{
-name|mapOldToNewOutputPos
+name|mapOldToNewOutputs
 operator|.
 name|put
 argument_list|(
@@ -5199,7 +6040,7 @@ name|oldLeftFieldCount
 argument_list|,
 name|rightFrame
 operator|.
-name|oldToNewOutputPos
+name|oldToNewOutputs
 operator|.
 name|get
 argument_list|(
@@ -5266,13 +6107,13 @@ name|rel
 argument_list|,
 name|newJoin
 argument_list|,
-name|mapOldToNewOutputPos
+name|mapOldToNewOutputs
 argument_list|,
-name|corVarOutputPos
+name|corDefOutputs
 argument_list|)
 return|;
 block|}
-comment|/**    * Rewrite LogicalJoin.    *    * @param rel LogicalJoin    */
+comment|/**    * Rewrite LogicalJoin.    *    * @param rel Join    */
 specifier|public
 name|Frame
 name|decorrelateRel
@@ -5285,7 +6126,7 @@ comment|//
 comment|// Rewrite logic:
 comment|//
 comment|// 1. rewrite join condition.
-comment|// 2. map output positions and produce cor vars if any.
+comment|// 2. map output positions and produce corVars if any.
 comment|//
 specifier|final
 name|RelNode
@@ -5365,6 +6206,12 @@ name|r
 argument_list|,
 name|decorrelateExpr
 argument_list|(
+name|currentRel
+argument_list|,
+name|map
+argument_list|,
+name|cm
+argument_list|,
 name|rel
 operator|.
 name|getCondition
@@ -5393,7 +6240,7 @@ name|Integer
 argument_list|,
 name|Integer
 argument_list|>
-name|mapOldToNewOutputPos
+name|mapOldToNewOutputs
 init|=
 name|Maps
 operator|.
@@ -5449,13 +6296,13 @@ operator|+
 name|oldRightFieldCount
 assert|;
 comment|// Left input positions are not changed.
-name|mapOldToNewOutputPos
+name|mapOldToNewOutputs
 operator|.
 name|putAll
 argument_list|(
 name|leftFrame
 operator|.
-name|oldToNewOutputPos
+name|oldToNewOutputs
 argument_list|)
 expr_stmt|;
 comment|// Right input positions are shifted by newLeftFieldCount.
@@ -5474,7 +6321,7 @@ name|i
 operator|++
 control|)
 block|{
-name|mapOldToNewOutputPos
+name|mapOldToNewOutputs
 operator|.
 name|put
 argument_list|(
@@ -5484,7 +6331,7 @@ name|oldLeftFieldCount
 argument_list|,
 name|rightFrame
 operator|.
-name|oldToNewOutputPos
+name|oldToNewOutputs
 operator|.
 name|get
 argument_list|(
@@ -5498,11 +6345,11 @@ block|}
 specifier|final
 name|SortedMap
 argument_list|<
-name|Correlation
+name|CorDef
 argument_list|,
 name|Integer
 argument_list|>
-name|mapCorVarToOutputPos
+name|corDefOutputs
 init|=
 operator|new
 name|TreeMap
@@ -5510,7 +6357,7 @@ argument_list|<>
 argument_list|(
 name|leftFrame
 operator|.
-name|corVarOutputPos
+name|corDefOutputs
 argument_list|)
 decl_stmt|;
 comment|// Right input positions are shifted by newLeftFieldCount.
@@ -5520,7 +6367,7 @@ name|Map
 operator|.
 name|Entry
 argument_list|<
-name|Correlation
+name|CorDef
 argument_list|,
 name|Integer
 argument_list|>
@@ -5528,13 +6375,13 @@ name|entry
 range|:
 name|rightFrame
 operator|.
-name|corVarOutputPos
+name|corDefOutputs
 operator|.
 name|entrySet
 argument_list|()
 control|)
 block|{
-name|mapCorVarToOutputPos
+name|corDefOutputs
 operator|.
 name|put
 argument_list|(
@@ -5559,16 +6406,28 @@ name|rel
 argument_list|,
 name|newJoin
 argument_list|,
-name|mapOldToNewOutputPos
+name|mapOldToNewOutputs
 argument_list|,
-name|mapCorVarToOutputPos
+name|corDefOutputs
 argument_list|)
 return|;
 block|}
 specifier|private
+specifier|static
 name|RexInputRef
 name|getNewForOldInputRef
 parameter_list|(
+name|RelNode
+name|currentRel
+parameter_list|,
+name|Map
+argument_list|<
+name|RelNode
+argument_list|,
+name|Frame
+argument_list|>
+name|map
+parameter_list|,
 name|RexInputRef
 name|oldInputRef
 parameter_list|)
@@ -5703,7 +6562,7 @@ condition|(
 operator|!
 name|frame
 operator|.
-name|oldToNewOutputPos
+name|oldToNewOutputs
 operator|.
 name|isEmpty
 argument_list|()
@@ -5713,7 +6572,7 @@ name|newLocalOrdinal
 operator|=
 name|frame
 operator|.
-name|oldToNewOutputPos
+name|oldToNewOutputs
 operator|.
 name|get
 argument_list|(
@@ -5751,7 +6610,7 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-comment|/**    * Pulls project above the join from its RHS input. Enforces nullability    * for join output.    *    * @param join          Join    * @param project       Original project as the right-hand input of the join    * @param nullIndicatorPos Position of null indicator    * @return the subtree with the new LogicalProject at the root    */
+comment|/**    * Pulls project above the join from its RHS input. Enforces nullability    * for join output.    *    * @param join          Join    * @param project       Original project as the right-hand input of the join    * @param nullIndicatorPos Position of null indicator    * @return the subtree with the new Project at the root    */
 specifier|private
 name|RelNode
 name|projectJoinOutputWithNullability
@@ -5965,7 +6824,7 @@ literal|false
 argument_list|)
 return|;
 block|}
-comment|/**    * Pulls a {@link Project} above a {@link Correlate} from its RHS input.    * Enforces nullability for join output.    *    * @param correlate  Correlate    * @param project the original project as the RHS input of the join    * @param isCount Positions which are calls to the<code>COUNT</code>    *                aggregation function    * @return the subtree with the new LogicalProject at the root    */
+comment|/**    * Pulls a {@link Project} above a {@link Correlate} from its RHS input.    * Enforces nullability for join output.    *    * @param correlate  Correlate    * @param project the original project as the RHS input of the join    * @param isCount Positions which are calls to the<code>COUNT</code>    *                aggregation function    * @return the subtree with the new Project at the root    */
 specifier|private
 name|RelNode
 name|aggregateCorrelatorOutput
@@ -6180,7 +7039,7 @@ comment|// check that all correlated refs in the filter condition are
 comment|// used in the join(as field access).
 name|Set
 argument_list|<
-name|Correlation
+name|CorRef
 argument_list|>
 name|corVarInFilter
 init|=
@@ -6190,7 +7049,7 @@ name|newHashSet
 argument_list|(
 name|cm
 operator|.
-name|mapRefRelToCorVar
+name|mapRefRelToCorRef
 operator|.
 name|get
 argument_list|(
@@ -6212,7 +7071,7 @@ name|remove
 argument_list|(
 name|cm
 operator|.
-name|mapFieldAccessToCorVar
+name|mapFieldAccessToCorRef
 operator|.
 name|get
 argument_list|(
@@ -6235,14 +7094,14 @@ literal|false
 return|;
 block|}
 comment|// Check that the correlated variables referenced in these
-comment|// comparisons do come from the correlatorRel.
+comment|// comparisons do come from the Correlate.
 name|corVarInFilter
 operator|.
 name|addAll
 argument_list|(
 name|cm
 operator|.
-name|mapRefRelToCorVar
+name|mapRefRelToCorRef
 operator|.
 name|get
 argument_list|(
@@ -6252,7 +7111,7 @@ argument_list|)
 expr_stmt|;
 for|for
 control|(
-name|Correlation
+name|CorRef
 name|corVar
 range|:
 name|corVarInFilter
@@ -6262,7 +7121,7 @@ if|if
 condition|(
 name|cm
 operator|.
-name|mapCorVarToCorRel
+name|mapCorToCorRel
 operator|.
 name|get
 argument_list|(
@@ -6293,7 +7152,7 @@ operator|)
 operator|&&
 name|cm
 operator|.
-name|mapRefRelToCorVar
+name|mapRefRelToCorRef
 operator|.
 name|containsKey
 argument_list|(
@@ -6303,12 +7162,12 @@ condition|)
 block|{
 for|for
 control|(
-name|Correlation
+name|CorRef
 name|corVar
 range|:
 name|cm
 operator|.
-name|mapRefRelToCorVar
+name|mapRefRelToCorRef
 operator|.
 name|get
 argument_list|(
@@ -6320,7 +7179,7 @@ if|if
 condition|(
 name|cm
 operator|.
-name|mapCorVarToCorRel
+name|mapCorToCorRel
 operator|.
 name|get
 argument_list|(
@@ -6342,7 +7201,7 @@ return|return
 literal|true
 return|;
 block|}
-comment|/**    * Remove correlated variables from the tree at root corRel    *    * @param correlate Correlator    */
+comment|/**    * Remove correlated variables from the tree at root corRel    *    * @param correlate Correlate    */
 specifier|private
 name|void
 name|removeCorVarFromTree
@@ -6355,7 +7214,7 @@ if|if
 condition|(
 name|cm
 operator|.
-name|mapCorVarToCorRel
+name|mapCorToCorRel
 operator|.
 name|get
 argument_list|(
@@ -6370,7 +7229,7 @@ condition|)
 block|{
 name|cm
 operator|.
-name|mapCorVarToCorRel
+name|mapCorToCorRel
 operator|.
 name|remove
 argument_list|(
@@ -6382,7 +7241,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**    * Projects all {@code input} output fields plus the additional expressions.    *    * @param input        Input relational expression    * @param additionalExprs Additional expressions and names    * @return the new LogicalProject    */
+comment|/**    * Projects all {@code input} output fields plus the additional expressions.    *    * @param input        Input relational expression    * @param additionalExprs Additional expressions and names    * @return the new Project    */
 specifier|private
 name|RelNode
 name|createProjectWithAdditionalExprs
@@ -6583,38 +7442,17 @@ name|Integer
 argument_list|,
 name|Integer
 argument_list|>
-name|oldToNewOutputPos
+name|oldToNewOutputs
 parameter_list|,
 name|SortedMap
 argument_list|<
-name|Correlation
+name|CorDef
 argument_list|,
 name|Integer
 argument_list|>
-name|corVarToOutputPos
+name|corDefOutputs
 parameter_list|)
 block|{
-assert|assert
-name|allLessThan
-argument_list|(
-name|oldToNewOutputPos
-operator|.
-name|keySet
-argument_list|()
-argument_list|,
-name|newRel
-operator|.
-name|getRowType
-argument_list|()
-operator|.
-name|getFieldCount
-argument_list|()
-argument_list|,
-name|Litmus
-operator|.
-name|THROW
-argument_list|)
-assert|;
 specifier|final
 name|Frame
 name|frame
@@ -6622,11 +7460,13 @@ init|=
 operator|new
 name|Frame
 argument_list|(
+name|rel
+argument_list|,
 name|newRel
 argument_list|,
-name|corVarToOutputPos
+name|corDefOutputs
 argument_list|,
-name|oldToNewOutputPos
+name|oldToNewOutputs
 argument_list|)
 decl_stmt|;
 name|map
@@ -6734,11 +7574,84 @@ block|}
 comment|//~ Inner Classes ----------------------------------------------------------
 comment|/** Shuttle that decorrelates. */
 specifier|private
+specifier|static
 class|class
 name|DecorrelateRexShuttle
 extends|extends
 name|RexShuttle
 block|{
+specifier|private
+specifier|final
+name|RelNode
+name|currentRel
+decl_stmt|;
+specifier|private
+specifier|final
+name|Map
+argument_list|<
+name|RelNode
+argument_list|,
+name|Frame
+argument_list|>
+name|map
+decl_stmt|;
+specifier|private
+specifier|final
+name|CorelMap
+name|cm
+decl_stmt|;
+specifier|private
+name|DecorrelateRexShuttle
+parameter_list|(
+name|RelNode
+name|currentRel
+parameter_list|,
+name|Map
+argument_list|<
+name|RelNode
+argument_list|,
+name|Frame
+argument_list|>
+name|map
+parameter_list|,
+name|CorelMap
+name|cm
+parameter_list|)
+block|{
+name|this
+operator|.
+name|currentRel
+operator|=
+name|Preconditions
+operator|.
+name|checkNotNull
+argument_list|(
+name|currentRel
+argument_list|)
+expr_stmt|;
+name|this
+operator|.
+name|map
+operator|=
+name|Preconditions
+operator|.
+name|checkNotNull
+argument_list|(
+name|map
+argument_list|)
+expr_stmt|;
+name|this
+operator|.
+name|cm
+operator|=
+name|Preconditions
+operator|.
+name|checkNotNull
+argument_list|(
+name|cm
+argument_list|)
+expr_stmt|;
+block|}
 annotation|@
 name|Override
 specifier|public
@@ -6783,14 +7696,14 @@ operator|!=
 literal|null
 condition|)
 block|{
-comment|// try to find in this input rel the position of cor var
+comment|// try to find in this input rel the position of corVar
 specifier|final
-name|Correlation
-name|corVar
+name|CorRef
+name|corRef
 init|=
 name|cm
 operator|.
-name|mapFieldAccessToCorVar
+name|mapFieldAccessToCorRef
 operator|.
 name|get
 argument_list|(
@@ -6799,7 +7712,7 @@ argument_list|)
 decl_stmt|;
 if|if
 condition|(
-name|corVar
+name|corRef
 operator|!=
 literal|null
 condition|)
@@ -6809,11 +7722,14 @@ name|newInputPos
 init|=
 name|frame
 operator|.
-name|corVarOutputPos
+name|corDefOutputs
 operator|.
 name|get
 argument_list|(
-name|corVar
+name|corRef
+operator|.
+name|def
+argument_list|()
 argument_list|)
 decl_stmt|;
 if|if
@@ -6823,8 +7739,7 @@ operator|!=
 literal|null
 condition|)
 block|{
-comment|// This input rel does produce the cor var referenced.
-comment|// Assume fieldAccess has the correct type info.
+comment|// This input does produce the corVar referenced.
 return|return
 operator|new
 name|RexInputRef
@@ -6833,7 +7748,20 @@ name|newInputPos
 operator|+
 name|newInputOutputOffset
 argument_list|,
-name|fieldAccess
+name|frame
+operator|.
+name|r
+operator|.
+name|getRowType
+argument_list|()
+operator|.
+name|getFieldList
+argument_list|()
+operator|.
+name|get
+argument_list|(
+name|newInputPos
+argument_list|)
 operator|.
 name|getType
 argument_list|()
@@ -6841,7 +7769,7 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|// this input rel does not produce the cor var needed
+comment|// this input does not produce the corVar needed
 name|newInputOutputOffset
 operator|+=
 name|frame
@@ -6857,7 +7785,7 @@ expr_stmt|;
 block|}
 else|else
 block|{
-comment|// this input rel is not rewritten
+comment|// this input is not rewritten
 name|newInputOutputOffset
 operator|+=
 name|input
@@ -6884,11 +7812,49 @@ name|RexInputRef
 name|inputRef
 parameter_list|)
 block|{
-return|return
+specifier|final
+name|RexInputRef
+name|ref
+init|=
 name|getNewForOldInputRef
 argument_list|(
+name|currentRel
+argument_list|,
+name|map
+argument_list|,
 name|inputRef
 argument_list|)
+decl_stmt|;
+if|if
+condition|(
+name|ref
+operator|.
+name|getIndex
+argument_list|()
+operator|==
+name|inputRef
+operator|.
+name|getIndex
+argument_list|()
+operator|&&
+name|ref
+operator|.
+name|getType
+argument_list|()
+operator|==
+name|inputRef
+operator|.
+name|getType
+argument_list|()
+condition|)
+block|{
+return|return
+name|inputRef
+return|;
+comment|// re-use old object, to prevent needless expr cloning
+block|}
+return|return
+name|ref
 return|;
 block|}
 block|}
@@ -7126,7 +8092,7 @@ if|if
 condition|(
 name|cm
 operator|.
-name|mapFieldAccessToCorVar
+name|mapFieldAccessToCorRef
 operator|.
 name|containsKey
 argument_list|(
@@ -7135,12 +8101,12 @@ argument_list|)
 condition|)
 block|{
 comment|// if it is a corVar, change it to be input ref.
-name|Correlation
+name|CorRef
 name|corVar
 init|=
 name|cm
 operator|.
-name|mapFieldAccessToCorVar
+name|mapFieldAccessToCorRef
 operator|.
 name|get
 argument_list|(
@@ -7148,7 +8114,7 @@ name|fieldAccess
 argument_list|)
 decl_stmt|;
 comment|// corVar offset should point to the leftInput of currentRel,
-comment|// which is the Correlator.
+comment|// which is the Correlate.
 name|RexNode
 name|newRexNode
 init|=
@@ -7220,9 +8186,9 @@ condition|)
 block|{
 comment|// if this rel references corVar
 comment|// and now it needs to be rewritten
-comment|// it must have been pulled above the Correlator
+comment|// it must have been pulled above the Correlate
 comment|// replace the input ref to account for the LHS of the
-comment|// Correlator
+comment|// Correlate
 specifier|final
 name|int
 name|leftInputFieldCount
@@ -7734,7 +8700,7 @@ condition|)
 block|{
 return|return;
 block|}
-comment|// check the input to projRel is an aggregate on the entire input
+comment|// check the input to project is an aggregate on the entire input
 if|if
 condition|(
 operator|!
@@ -7963,11 +8929,11 @@ comment|// Check for this pattern.
 comment|// The pattern matching could be simplified if rules can be applied
 comment|// during decorrelation.
 comment|//
-comment|// CorrelateRel(left correlation, condition = true)
-comment|//   LeftInputRel
-comment|//   LogicalAggregate (groupby (0) single_value())
-comment|//     LogicalProject-A (may reference coVar)
-comment|//       RightInputRel
+comment|// Correlate(left correlation, condition = true)
+comment|//   leftInput
+comment|//   Aggregate (groupby (0) single_value())
+comment|//     Project-A (may reference corVar)
+comment|//       rightInput
 specifier|final
 name|JoinRelType
 name|joinType
@@ -8094,7 +9060,7 @@ operator|)
 operator|&&
 name|cm
 operator|.
-name|mapRefRelToCorVar
+name|mapRefRelToCorRef
 operator|.
 name|containsKey
 argument_list|(
@@ -8102,11 +9068,11 @@ name|right
 argument_list|)
 condition|)
 block|{
-comment|// rightInputRel has this shape:
+comment|// rightInput has this shape:
 comment|//
-comment|//       LogicalFilter (references corvar)
-comment|//         FilterInputRel
-comment|// If rightInputRel is a filter and contains correlated
+comment|//       Filter (references corVar)
+comment|//         filterInput
+comment|// If rightInput is a filter and contains correlated
 comment|// reference, make sure the correlated keys in the filter
 comment|// condition forms a unique key of the RHS.
 name|LogicalFilter
@@ -8161,8 +9127,8 @@ return|return;
 block|}
 comment|// extract the correlation out of the filter
 comment|// First breaking up the filter conditions into equality
-comment|// comparisons between rightJoinKeys(from the original
-comment|// filterInputRel) and correlatedJoinKeys. correlatedJoinKeys
+comment|// comparisons between rightJoinKeys (from the original
+comment|// filterInput) and correlatedJoinKeys. correlatedJoinKeys
 comment|// can be expressions, while rightJoinKeys need to be input
 comment|// refs. These comparisons are AND'ed together.
 name|List
@@ -8201,7 +9167,7 @@ literal|false
 argument_list|)
 expr_stmt|;
 comment|// check that the columns referenced in these comparisons form
-comment|// an unique key of the filterInputRel
+comment|// an unique key of the filterInput
 specifier|final
 name|List
 argument_list|<
@@ -8239,7 +9205,7 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|// check that the columns referenced in rightJoinKeys form an
-comment|// unique key of the filterInputRel
+comment|// unique key of the filterInput
 if|if
 condition|(
 name|rightJoinKeys
@@ -8346,12 +9312,12 @@ block|{
 return|return;
 block|}
 comment|// Change the plan to this structure.
-comment|// Note that the aggregateRel is removed.
+comment|// Note that the Aggregate is removed.
 comment|//
-comment|// LogicalProject-A' (replace corvar to input ref from the LogicalJoin)
-comment|//   LogicalJoin (replace corvar to input ref from LeftInputRel)
-comment|//     LeftInputRel
-comment|//     RightInputRel(oreviously FilterInputRel)
+comment|// Project-A' (replace corVar to input ref from the Join)
+comment|//   Join (replace corVar to input ref from leftInput)
+comment|//     leftInput
+comment|//     rightInput (previously filterInput)
 comment|// Change the filter condition into a join condition
 name|joinCond
 operator|=
@@ -8390,7 +9356,7 @@ if|else if
 condition|(
 name|cm
 operator|.
-name|mapRefRelToCorVar
+name|mapRefRelToCorRef
 operator|.
 name|containsKey
 argument_list|(
@@ -8435,13 +9401,13 @@ return|return;
 block|}
 comment|// Change the plan to this structure.
 comment|//
-comment|// LogicalProject-A' (replace corvar to input ref from LogicalJoin)
-comment|//   LogicalJoin (left, condition = true)
-comment|//     LeftInputRel
-comment|//     LogicalAggregate(groupby(0), single_value(0), s_v(1)....)
-comment|//       LogicalProject-B (everything from input plus literal true)
-comment|//         ProjInputRel
-comment|// make the new projRel to provide a null indicator
+comment|// Project-A' (replace corVar to input ref from Join)
+comment|//   Join (left, condition = true)
+comment|//     leftInput
+comment|//     Aggregate(groupby(0), single_value(0), s_v(1)....)
+comment|//       Project-B (everything from input plus literal true)
+comment|//         projectInput
+comment|// make the new Project to provide a null indicator
 name|right
 operator|=
 name|createProjectWithAdditionalExprs
@@ -8734,11 +9700,11 @@ comment|// The pattern matching could be simplified if rules can be applied
 comment|// during decorrelation,
 comment|//
 comment|// CorrelateRel(left correlation, condition = true)
-comment|//   LeftInputRel
-comment|//   LogicalProject-A (a RexNode)
-comment|//     LogicalAggregate (groupby (0), agg0(), agg1()...)
-comment|//       LogicalProject-B (references coVar)
-comment|//         rightInputRel
+comment|//   leftInput
+comment|//   Project-A (a RexNode)
+comment|//     Aggregate (groupby (0), agg0(), agg1()...)
+comment|//       Project-B (references coVar)
+comment|//         rightInput
 comment|// check aggOutputProject projects only one expression
 specifier|final
 name|List
@@ -8925,7 +9891,7 @@ operator|)
 operator|&&
 name|cm
 operator|.
-name|mapRefRelToCorVar
+name|mapRefRelToCorRef
 operator|.
 name|containsKey
 argument_list|(
@@ -8933,10 +9899,10 @@ name|right
 argument_list|)
 condition|)
 block|{
-comment|// rightInputRel has this shape:
+comment|// rightInput has this shape:
 comment|//
-comment|//       LogicalFilter (references corvar)
-comment|//         FilterInputRel
+comment|//       Filter (references corVar)
+comment|//         filterInput
 name|LogicalFilter
 name|filter
 init|=
@@ -8991,7 +9957,7 @@ comment|// check filter condition type First extract the correlation out
 comment|// of the filter
 comment|// First breaking up the filter conditions into equality
 comment|// comparisons between rightJoinKeys(from the original
-comment|// filterInputRel) and correlatedJoinKeys. correlatedJoinKeys
+comment|// filterInput) and correlatedJoinKeys. correlatedJoinKeys
 comment|// can only be RexFieldAccess, while rightJoinKeys can be
 comment|// expressions. These comparisons are AND'ed together.
 name|List
@@ -9031,7 +9997,7 @@ argument_list|)
 expr_stmt|;
 comment|// make sure the correlated reference forms a unique key check
 comment|// that the columns referenced in these comparisons form an
-comment|// unique key of the leftInputRel
+comment|// unique key of the leftInput
 name|List
 argument_list|<
 name|RexFieldAccess
@@ -9104,7 +10070,7 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|// check that the columns referenced in rightJoinKeys form an
-comment|// unique key of the filterInputRel
+comment|// unique key of the filterInput
 if|if
 condition|(
 name|correlatedInputRefJoinKeys
@@ -9160,7 +10126,7 @@ argument_list|)
 expr_stmt|;
 return|return;
 block|}
-comment|// check cor var references are valid
+comment|// check corVar references are valid
 if|if
 condition|(
 operator|!
@@ -9180,24 +10146,24 @@ return|return;
 block|}
 comment|// Rewrite the above plan:
 comment|//
-comment|// CorrelateRel(left correlation, condition = true)
-comment|//   LeftInputRel
-comment|//   LogicalProject-A (a RexNode)
-comment|//     LogicalAggregate (groupby(0), agg0(),agg1()...)
-comment|//       LogicalProject-B (may reference coVar)
-comment|//         LogicalFilter (references corVar)
-comment|//           RightInputRel (no correlated reference)
+comment|// Correlate(left correlation, condition = true)
+comment|//   leftInput
+comment|//   Project-A (a RexNode)
+comment|//     Aggregate (groupby(0), agg0(),agg1()...)
+comment|//       Project-B (may reference corVar)
+comment|//         Filter (references corVar)
+comment|//           rightInput (no correlated reference)
 comment|//
 comment|// to this plan:
 comment|//
-comment|// LogicalProject-A' (all gby keys + rewritten nullable ProjExpr)
-comment|//   LogicalAggregate (groupby(all left input refs)
+comment|// Project-A' (all gby keys + rewritten nullable ProjExpr)
+comment|//   Aggregate (groupby(all left input refs)
 comment|//                 agg0(rewritten expression),
 comment|//                 agg1()...)
-comment|//     LogicalProject-B' (rewriten original projected exprs)
-comment|//       LogicalJoin(replace corvar w/ input ref from LeftInputRel)
-comment|//         LeftInputRel
-comment|//         RightInputRel
+comment|//     Project-B' (rewritten original projected exprs)
+comment|//       Join(replace corVar w/ input ref from leftInput)
+comment|//         leftInput
+comment|//         rightInput
 comment|//
 comment|// In the case where agg is count(*) or count($corVar), it is
 comment|// changed to count(nullIndicator).
@@ -9206,16 +10172,16 @@ comment|// the indicator however a "true" field is added to the
 comment|// projection list from the RHS for simplicity to avoid
 comment|// searching for non-null fields.
 comment|//
-comment|// LogicalProject-A' (all gby keys + rewritten nullable ProjExpr)
-comment|//   LogicalAggregate (groupby(all left input refs),
+comment|// Project-A' (all gby keys + rewritten nullable ProjExpr)
+comment|//   Aggregate (groupby(all left input refs),
 comment|//                 count(nullIndicator), other aggs...)
-comment|//     LogicalProject-B' (all left input refs plus
+comment|//     Project-B' (all left input refs plus
 comment|//                    the rewritten original projected exprs)
-comment|//       LogicalJoin(replace corvar to input ref from LeftInputRel)
-comment|//         LeftInputRel
-comment|//         LogicalProject (everything from RightInputRel plus
+comment|//       Join(replace corVar to input ref from leftInput)
+comment|//         leftInput
+comment|//         Project (everything from rightInput plus
 comment|//                     the nullIndicator "true")
-comment|//           RightInputRel
+comment|//           rightInput
 comment|//
 comment|// first change the filter condition into a join condition
 name|joinCond
@@ -9235,7 +10201,7 @@ if|else if
 condition|(
 name|cm
 operator|.
-name|mapRefRelToCorVar
+name|mapRefRelToCorRef
 operator|.
 name|containsKey
 argument_list|(
@@ -9243,7 +10209,7 @@ name|aggInputProject
 argument_list|)
 condition|)
 block|{
-comment|// check rightInputRel contains no correlation
+comment|// check rightInput contains no correlation
 if|if
 condition|(
 name|RelOptUtil
@@ -9261,7 +10227,7 @@ condition|)
 block|{
 return|return;
 block|}
-comment|// check cor var references are valid
+comment|// check corVar references are valid
 if|if
 condition|(
 operator|!
@@ -9300,7 +10266,7 @@ argument_list|(
 name|nFields
 argument_list|)
 decl_stmt|;
-comment|// leftInputRel contains unique keys
+comment|// leftInput contains unique keys
 comment|// i.e. each row is distinct and can group by on all the left
 comment|// fields
 specifier|final
@@ -9342,22 +10308,22 @@ comment|//
 comment|// Rewrite the above plan:
 comment|//
 comment|// CorrelateRel(left correlation, condition = true)
-comment|//   LeftInputRel
-comment|//   LogicalProject-A (a RexNode)
-comment|//     LogicalAggregate (groupby(0), agg0(), agg1()...)
-comment|//       LogicalProject-B (references coVar)
-comment|//         RightInputRel (no correlated reference)
+comment|//   leftInput
+comment|//   Project-A (a RexNode)
+comment|//     Aggregate (groupby(0), agg0(), agg1()...)
+comment|//       Project-B (references coVar)
+comment|//         rightInput (no correlated reference)
 comment|//
 comment|// to this plan:
 comment|//
-comment|// LogicalProject-A' (all gby keys + rewritten nullable ProjExpr)
-comment|//   LogicalAggregate (groupby(all left input refs)
+comment|// Project-A' (all gby keys + rewritten nullable ProjExpr)
+comment|//   Aggregate (groupby(all left input refs)
 comment|//                 agg0(rewritten expression),
 comment|//                 agg1()...)
-comment|//     LogicalProject-B' (rewriten original projected exprs)
-comment|//       LogicalJoin (LOJ cond = true)
-comment|//         LeftInputRel
-comment|//         RightInputRel
+comment|//     Project-B' (rewritten original projected exprs)
+comment|//       Join (LOJ cond = true)
+comment|//         leftInput
+comment|//         rightInput
 comment|//
 comment|// In the case where agg is count($corVar), it is changed to
 comment|// count(nullIndicator).
@@ -9366,16 +10332,16 @@ comment|// the indicator however a "true" field is added to the
 comment|// projection list from the RHS for simplicity to avoid
 comment|// searching for non-null fields.
 comment|//
-comment|// LogicalProject-A' (all gby keys + rewritten nullable ProjExpr)
-comment|//   LogicalAggregate (groupby(all left input refs),
+comment|// Project-A' (all gby keys + rewritten nullable ProjExpr)
+comment|//   Aggregate (groupby(all left input refs),
 comment|//                 count(nullIndicator), other aggs...)
-comment|//     LogicalProject-B' (all left input refs plus
+comment|//     Project-B' (all left input refs plus
 comment|//                    the rewritten original projected exprs)
-comment|//       LogicalJoin(replace corvar to input ref from LeftInputRel)
-comment|//         LeftInputRel
-comment|//         LogicalProject (everything from RightInputRel plus
+comment|//       Join (replace corVar to input ref from leftInput)
+comment|//         leftInput
+comment|//         Project (everything from rightInput plus
 comment|//                     the nullIndicator "true")
-comment|//           RightInputRel
+comment|//           rightInput
 block|}
 else|else
 block|{
@@ -10199,7 +11165,7 @@ name|correlate
 argument_list|)
 condition|)
 block|{
-comment|// This correlator was generated by a previous invocation of
+comment|// This Correlate was generated by a previous invocation of
 comment|// this rule. No further work to do.
 return|return;
 block|}
@@ -10221,9 +11187,9 @@ comment|// The pattern matching could be simplified if rules can be applied
 comment|// during decorrelation,
 comment|//
 comment|// CorrelateRel(left correlation, condition = true)
-comment|//   LeftInputRel
-comment|//   LogicalProject-A (a RexNode)
-comment|//     LogicalAggregate (groupby (0), agg0(), agg1()...)
+comment|//   leftInput
+comment|//   Project-A (a RexNode)
+comment|//     Aggregate (groupby (0), agg0(), agg1()...)
 comment|// check aggOutputProj projects only one expression
 name|List
 argument_list|<
@@ -10373,9 +11339,9 @@ comment|// now rewrite the plan to
 comment|//
 comment|// Project-A' (all LHS plus transformed original projections,
 comment|//             replacing references to count() with case statement)
-comment|//   Correlator(left correlation, condition = true)
-comment|//     LeftInputRel
-comment|//     LogicalAggregate (groupby (0), agg0(), agg1()...)
+comment|//   Correlate(left correlation, condition = true)
+comment|//     leftInput
+comment|//     Aggregate(groupby (0), agg0(), agg1()...)
 comment|//
 name|LogicalCorrelate
 name|newCorrelate
@@ -10415,14 +11381,14 @@ argument_list|(
 name|newCorrelate
 argument_list|)
 expr_stmt|;
-comment|// need to update the mapCorVarToCorRel Update the output position
-comment|// for the cor vars: only pass on the cor vars that are not used in
+comment|// need to update the mapCorToCorRel Update the output position
+comment|// for the corVars: only pass on the corVars that are not used in
 comment|// the join key.
 if|if
 condition|(
 name|cm
 operator|.
-name|mapCorVarToCorRel
+name|mapCorToCorRel
 operator|.
 name|get
 argument_list|(
@@ -10437,7 +11403,7 @@ condition|)
 block|{
 name|cm
 operator|.
-name|mapCorVarToCorRel
+name|mapCorToCorRel
 operator|.
 name|put
 argument_list|(
@@ -10471,14 +11437,14 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**    * {@code Correlation} here represents a unique reference to a correlation    * field.    * For instance, if a RelNode references emp.name multiple times, it would    * result in multiple {@code Correlation} objects that differ just in    * {@link Correlation#uniqueKey}.    */
+comment|/**    * A unique reference to a correlation field.    *    *<p>For instance, if a RelNode references emp.name multiple times, it would    * result in multiple {@code CorRef} objects that differ just in    * {@link CorRef#uniqueKey}.    */
 specifier|static
 class|class
-name|Correlation
+name|CorRef
 implements|implements
 name|Comparable
 argument_list|<
-name|Correlation
+name|CorRef
 argument_list|>
 block|{
 specifier|public
@@ -10496,7 +11462,7 @@ specifier|final
 name|int
 name|field
 decl_stmt|;
-name|Correlation
+name|CorRef
 parameter_list|(
 name|CorrelationId
 name|corr
@@ -10527,11 +11493,104 @@ operator|=
 name|uniqueKey
 expr_stmt|;
 block|}
+annotation|@
+name|Override
+specifier|public
+name|String
+name|toString
+parameter_list|()
+block|{
+return|return
+name|corr
+operator|.
+name|getName
+argument_list|()
+operator|+
+literal|'.'
+operator|+
+name|field
+return|;
+block|}
+annotation|@
+name|Override
+specifier|public
+name|int
+name|hashCode
+parameter_list|()
+block|{
+return|return
+name|Objects
+operator|.
+name|hash
+argument_list|(
+name|uniqueKey
+argument_list|,
+name|corr
+argument_list|,
+name|field
+argument_list|)
+return|;
+block|}
+annotation|@
+name|Override
+specifier|public
+name|boolean
+name|equals
+parameter_list|(
+name|Object
+name|o
+parameter_list|)
+block|{
+return|return
+name|this
+operator|==
+name|o
+operator|||
+name|o
+operator|instanceof
+name|CorRef
+operator|&&
+name|uniqueKey
+operator|==
+operator|(
+operator|(
+name|CorRef
+operator|)
+name|o
+operator|)
+operator|.
+name|uniqueKey
+operator|&&
+name|corr
+operator|==
+operator|(
+operator|(
+name|CorRef
+operator|)
+name|o
+operator|)
+operator|.
+name|corr
+operator|&&
+name|field
+operator|==
+operator|(
+operator|(
+name|CorRef
+operator|)
+name|o
+operator|)
+operator|.
+name|field
+return|;
+block|}
 specifier|public
 name|int
 name|compareTo
 parameter_list|(
-name|Correlation
+annotation|@
+name|Nonnull
+name|CorRef
 name|o
 parameter_list|)
 block|{
@@ -10595,8 +11654,190 @@ name|uniqueKey
 argument_list|)
 return|;
 block|}
+specifier|public
+name|CorDef
+name|def
+parameter_list|()
+block|{
+return|return
+operator|new
+name|CorDef
+argument_list|(
+name|corr
+argument_list|,
+name|field
+argument_list|)
+return|;
 block|}
-comment|/** A map of the locations of    * {@link org.apache.calcite.rel.logical.LogicalCorrelate}    * in a tree of {@link RelNode}s.    *    *<p>It is used to drive the decorrelation process.    * Treat it as immutable; rebuild if you modify the tree.    *    *<p>There are three maps:<ol>    *    *<li>mapRefRelToCorVars map a rel node to the correlated variables it    * references;    *    *<li>mapCorVarToCorRel maps a correlated variable to the correlatorRel    * providing it;    *    *<li>mapFieldAccessToCorVar maps a rex field access to    * the cor var it represents. Because typeFlattener does not clone or    * modify a correlated field access this map does not need to be    * updated.    *    *</ol> */
+block|}
+comment|/** A correlation and a field. */
+specifier|static
+class|class
+name|CorDef
+implements|implements
+name|Comparable
+argument_list|<
+name|CorDef
+argument_list|>
+block|{
+specifier|public
+specifier|final
+name|CorrelationId
+name|corr
+decl_stmt|;
+specifier|public
+specifier|final
+name|int
+name|field
+decl_stmt|;
+name|CorDef
+parameter_list|(
+name|CorrelationId
+name|corr
+parameter_list|,
+name|int
+name|field
+parameter_list|)
+block|{
+name|this
+operator|.
+name|corr
+operator|=
+name|corr
+expr_stmt|;
+name|this
+operator|.
+name|field
+operator|=
+name|field
+expr_stmt|;
+block|}
+annotation|@
+name|Override
+specifier|public
+name|String
+name|toString
+parameter_list|()
+block|{
+return|return
+name|corr
+operator|.
+name|getName
+argument_list|()
+operator|+
+literal|'.'
+operator|+
+name|field
+return|;
+block|}
+annotation|@
+name|Override
+specifier|public
+name|int
+name|hashCode
+parameter_list|()
+block|{
+return|return
+name|Objects
+operator|.
+name|hash
+argument_list|(
+name|corr
+argument_list|,
+name|field
+argument_list|)
+return|;
+block|}
+annotation|@
+name|Override
+specifier|public
+name|boolean
+name|equals
+parameter_list|(
+name|Object
+name|o
+parameter_list|)
+block|{
+return|return
+name|this
+operator|==
+name|o
+operator|||
+name|o
+operator|instanceof
+name|CorDef
+operator|&&
+name|corr
+operator|==
+operator|(
+operator|(
+name|CorDef
+operator|)
+name|o
+operator|)
+operator|.
+name|corr
+operator|&&
+name|field
+operator|==
+operator|(
+operator|(
+name|CorDef
+operator|)
+name|o
+operator|)
+operator|.
+name|field
+return|;
+block|}
+specifier|public
+name|int
+name|compareTo
+parameter_list|(
+annotation|@
+name|Nonnull
+name|CorDef
+name|o
+parameter_list|)
+block|{
+name|int
+name|c
+init|=
+name|corr
+operator|.
+name|compareTo
+argument_list|(
+name|o
+operator|.
+name|corr
+argument_list|)
+decl_stmt|;
+if|if
+condition|(
+name|c
+operator|!=
+literal|0
+condition|)
+block|{
+return|return
+name|c
+return|;
+block|}
+return|return
+name|Integer
+operator|.
+name|compare
+argument_list|(
+name|field
+argument_list|,
+name|o
+operator|.
+name|field
+argument_list|)
+return|;
+block|}
+block|}
+comment|/** A map of the locations of    * {@link org.apache.calcite.rel.logical.LogicalCorrelate}    * in a tree of {@link RelNode}s.    *    *<p>It is used to drive the decorrelation process.    * Treat it as immutable; rebuild if you modify the tree.    *    *<p>There are three maps:<ol>    *    *<li>{@link #mapRefRelToCorRef} maps a {@link RelNode} to the correlated    * variables it references;    *    *<li>{@link #mapCorToCorRel} maps a correlated variable to the    * {@link Correlate} providing it;    *    *<li>{@link #mapFieldAccessToCorRef} maps a rex field access to    * the corVar it represents. Because typeFlattener does not clone or    * modify a correlated field access this map does not need to be    * updated.    *    *</ol> */
 specifier|private
 specifier|static
 class|class
@@ -10608,9 +11849,9 @@ name|Multimap
 argument_list|<
 name|RelNode
 argument_list|,
-name|Correlation
+name|CorRef
 argument_list|>
-name|mapRefRelToCorVar
+name|mapRefRelToCorRef
 decl_stmt|;
 specifier|private
 specifier|final
@@ -10620,7 +11861,7 @@ name|CorrelationId
 argument_list|,
 name|RelNode
 argument_list|>
-name|mapCorVarToCorRel
+name|mapCorToCorRel
 decl_stmt|;
 specifier|private
 specifier|final
@@ -10628,9 +11869,9 @@ name|Map
 argument_list|<
 name|RexFieldAccess
 argument_list|,
-name|Correlation
+name|CorRef
 argument_list|>
-name|mapFieldAccessToCorVar
+name|mapFieldAccessToCorRef
 decl_stmt|;
 comment|// TODO: create immutable copies of all maps
 specifier|private
@@ -10640,9 +11881,9 @@ name|Multimap
 argument_list|<
 name|RelNode
 argument_list|,
-name|Correlation
+name|CorRef
 argument_list|>
-name|mapRefRelToCorVar
+name|mapRefRelToCorRef
 parameter_list|,
 name|SortedMap
 argument_list|<
@@ -10650,38 +11891,38 @@ name|CorrelationId
 argument_list|,
 name|RelNode
 argument_list|>
-name|mapCorVarToCorRel
+name|mapCorToCorRel
 parameter_list|,
 name|Map
 argument_list|<
 name|RexFieldAccess
 argument_list|,
-name|Correlation
+name|CorRef
 argument_list|>
-name|mapFieldAccessToCorVar
+name|mapFieldAccessToCorRef
 parameter_list|)
 block|{
 name|this
 operator|.
-name|mapRefRelToCorVar
+name|mapRefRelToCorRef
 operator|=
-name|mapRefRelToCorVar
+name|mapRefRelToCorRef
 expr_stmt|;
 name|this
 operator|.
-name|mapCorVarToCorRel
+name|mapCorToCorRel
 operator|=
-name|mapCorVarToCorRel
+name|mapCorToCorRel
 expr_stmt|;
 name|this
 operator|.
-name|mapFieldAccessToCorVar
+name|mapFieldAccessToCorRef
 operator|=
 name|ImmutableMap
 operator|.
 name|copyOf
 argument_list|(
-name|mapFieldAccessToCorVar
+name|mapFieldAccessToCorRef
 argument_list|)
 expr_stmt|;
 block|}
@@ -10693,17 +11934,17 @@ name|toString
 parameter_list|()
 block|{
 return|return
-literal|"mapRefRelToCorVar="
+literal|"mapRefRelToCorRef="
 operator|+
-name|mapRefRelToCorVar
+name|mapRefRelToCorRef
 operator|+
-literal|"\nmapCorVarToCorRel="
+literal|"\nmapCorToCorRel="
 operator|+
-name|mapCorVarToCorRel
+name|mapCorToCorRel
 operator|+
-literal|"\nmapFieldAccessToCorVar="
+literal|"\nmapFieldAccessToCorRef="
 operator|+
-name|mapFieldAccessToCorVar
+name|mapFieldAccessToCorRef
 operator|+
 literal|"\n"
 return|;
@@ -10727,7 +11968,7 @@ name|obj
 operator|instanceof
 name|CorelMap
 operator|&&
-name|mapRefRelToCorVar
+name|mapRefRelToCorRef
 operator|.
 name|equals
 argument_list|(
@@ -10738,10 +11979,10 @@ operator|)
 name|obj
 operator|)
 operator|.
-name|mapRefRelToCorVar
+name|mapRefRelToCorRef
 argument_list|)
 operator|&&
-name|mapCorVarToCorRel
+name|mapCorToCorRel
 operator|.
 name|equals
 argument_list|(
@@ -10752,10 +11993,10 @@ operator|)
 name|obj
 operator|)
 operator|.
-name|mapCorVarToCorRel
+name|mapCorToCorRel
 argument_list|)
 operator|&&
-name|mapFieldAccessToCorVar
+name|mapFieldAccessToCorRef
 operator|.
 name|equals
 argument_list|(
@@ -10766,7 +12007,7 @@ operator|)
 name|obj
 operator|)
 operator|.
-name|mapFieldAccessToCorVar
+name|mapFieldAccessToCorRef
 argument_list|)
 return|;
 block|}
@@ -10782,11 +12023,11 @@ name|Objects
 operator|.
 name|hash
 argument_list|(
-name|mapRefRelToCorVar
+name|mapRefRelToCorRef
 argument_list|,
-name|mapCorVarToCorRel
+name|mapCorToCorRel
 argument_list|,
-name|mapFieldAccessToCorVar
+name|mapFieldAccessToCorRef
 argument_list|)
 return|;
 block|}
@@ -10800,7 +12041,7 @@ name|SortedSetMultimap
 argument_list|<
 name|RelNode
 argument_list|,
-name|Correlation
+name|CorRef
 argument_list|>
 name|mapRefRelToCorVar
 parameter_list|,
@@ -10810,13 +12051,13 @@ name|CorrelationId
 argument_list|,
 name|RelNode
 argument_list|>
-name|mapCorVarToCorRel
+name|mapCorToCorRel
 parameter_list|,
 name|Map
 argument_list|<
 name|RexFieldAccess
 argument_list|,
-name|Correlation
+name|CorRef
 argument_list|>
 name|mapFieldAccessToCorVar
 parameter_list|)
@@ -10827,7 +12068,7 @@ name|CorelMap
 argument_list|(
 name|mapRefRelToCorVar
 argument_list|,
-name|mapCorVarToCorRel
+name|mapCorToCorRel
 argument_list|,
 name|mapFieldAccessToCorVar
 argument_list|)
@@ -10841,7 +12082,7 @@ parameter_list|()
 block|{
 return|return
 operator|!
-name|mapCorVarToCorRel
+name|mapCorToCorRel
 operator|.
 name|isEmpty
 argument_list|()
@@ -10863,7 +12104,7 @@ name|CorrelationId
 argument_list|,
 name|RelNode
 argument_list|>
-name|mapCorVarToCorRel
+name|mapCorToCorRel
 init|=
 operator|new
 name|TreeMap
@@ -10875,25 +12116,24 @@ name|SortedSetMultimap
 argument_list|<
 name|RelNode
 argument_list|,
-name|Correlation
+name|CorRef
 argument_list|>
-name|mapRefRelToCorVar
+name|mapRefRelToCorRef
 init|=
 name|Multimaps
 operator|.
 name|newSortedSetMultimap
 argument_list|(
-name|Maps
-operator|.
-expr|<
+operator|new
+name|HashMap
+argument_list|<
 name|RelNode
 argument_list|,
 name|Collection
 argument_list|<
-name|Correlation
+name|CorRef
 argument_list|>
-operator|>
-name|newHashMap
+argument_list|>
 argument_list|()
 argument_list|,
 operator|new
@@ -10901,7 +12141,7 @@ name|Supplier
 argument_list|<
 name|TreeSet
 argument_list|<
-name|Correlation
+name|CorRef
 argument_list|>
 argument_list|>
 argument_list|()
@@ -10909,7 +12149,7 @@ block|{
 specifier|public
 name|TreeSet
 argument_list|<
-name|Correlation
+name|CorRef
 argument_list|>
 name|get
 parameter_list|()
@@ -10936,7 +12176,7 @@ name|Map
 argument_list|<
 name|RexFieldAccess
 argument_list|,
-name|Correlation
+name|CorRef
 argument_list|>
 name|mapFieldAccessToCorVar
 init|=
@@ -10981,8 +12221,17 @@ name|CorelMap
 name|build
 parameter_list|(
 name|RelNode
-name|rel
+modifier|...
+name|rels
 parameter_list|)
+block|{
+for|for
+control|(
+name|RelNode
+name|rel
+range|:
+name|rels
+control|)
 block|{
 name|stripHep
 argument_list|(
@@ -10994,13 +12243,14 @@ argument_list|(
 name|this
 argument_list|)
 expr_stmt|;
+block|}
 return|return
 operator|new
 name|CorelMap
 argument_list|(
-name|mapRefRelToCorVar
+name|mapRefRelToCorRef
 argument_list|,
-name|mapCorVarToCorRel
+name|mapCorToCorRel
 argument_list|,
 name|mapFieldAccessToCorVar
 argument_list|)
@@ -11096,7 +12346,7 @@ name|LogicalCorrelate
 name|correlate
 parameter_list|)
 block|{
-name|mapCorVarToCorRel
+name|mapCorToCorRel
 operator|.
 name|put
 argument_list|(
@@ -11366,7 +12616,7 @@ comment|//for cases where different Rel nodes are referring to
 comment|// same correlation var (e.g. in case of NOT IN)
 comment|// avoid generating another correlation var
 comment|// and record the 'rel' is using the same correlation
-name|mapRefRelToCorVar
+name|mapRefRelToCorRef
 operator|.
 name|put
 argument_list|(
@@ -11384,11 +12634,11 @@ block|}
 else|else
 block|{
 specifier|final
-name|Correlation
+name|CorRef
 name|correlation
 init|=
 operator|new
-name|Correlation
+name|CorRef
 argument_list|(
 name|var
 operator|.
@@ -11415,7 +12665,7 @@ argument_list|,
 name|correlation
 argument_list|)
 expr_stmt|;
-name|mapRefRelToCorVar
+name|mapRefRelToCorRef
 operator|.
 name|put
 argument_list|(
@@ -11481,33 +12731,36 @@ decl_stmt|;
 specifier|final
 name|ImmutableSortedMap
 argument_list|<
-name|Correlation
+name|CorDef
 argument_list|,
 name|Integer
 argument_list|>
-name|corVarOutputPos
+name|corDefOutputs
 decl_stmt|;
 specifier|final
-name|ImmutableMap
+name|ImmutableSortedMap
 argument_list|<
 name|Integer
 argument_list|,
 name|Integer
 argument_list|>
-name|oldToNewOutputPos
+name|oldToNewOutputs
 decl_stmt|;
 name|Frame
 parameter_list|(
+name|RelNode
+name|oldRel
+parameter_list|,
 name|RelNode
 name|r
 parameter_list|,
 name|SortedMap
 argument_list|<
-name|Correlation
+name|CorDef
 argument_list|,
 name|Integer
 argument_list|>
-name|corVarOutputPos
+name|corDefOutputs
 parameter_list|,
 name|Map
 argument_list|<
@@ -11515,7 +12768,7 @@ name|Integer
 argument_list|,
 name|Integer
 argument_list|>
-name|oldToNewOutputPos
+name|oldToNewOutputs
 parameter_list|)
 block|{
 name|this
@@ -11531,26 +12784,95 @@ argument_list|)
 expr_stmt|;
 name|this
 operator|.
-name|corVarOutputPos
+name|corDefOutputs
 operator|=
 name|ImmutableSortedMap
 operator|.
 name|copyOf
 argument_list|(
-name|corVarOutputPos
+name|corDefOutputs
 argument_list|)
 expr_stmt|;
 name|this
 operator|.
-name|oldToNewOutputPos
+name|oldToNewOutputs
 operator|=
 name|ImmutableSortedMap
 operator|.
 name|copyOf
 argument_list|(
-name|oldToNewOutputPos
+name|oldToNewOutputs
 argument_list|)
 expr_stmt|;
+assert|assert
+name|allLessThan
+argument_list|(
+name|this
+operator|.
+name|corDefOutputs
+operator|.
+name|values
+argument_list|()
+argument_list|,
+name|r
+operator|.
+name|getRowType
+argument_list|()
+operator|.
+name|getFieldCount
+argument_list|()
+argument_list|,
+name|Litmus
+operator|.
+name|THROW
+argument_list|)
+assert|;
+assert|assert
+name|allLessThan
+argument_list|(
+name|this
+operator|.
+name|oldToNewOutputs
+operator|.
+name|keySet
+argument_list|()
+argument_list|,
+name|oldRel
+operator|.
+name|getRowType
+argument_list|()
+operator|.
+name|getFieldCount
+argument_list|()
+argument_list|,
+name|Litmus
+operator|.
+name|THROW
+argument_list|)
+assert|;
+assert|assert
+name|allLessThan
+argument_list|(
+name|this
+operator|.
+name|oldToNewOutputs
+operator|.
+name|values
+argument_list|()
+argument_list|,
+name|r
+operator|.
+name|getRowType
+argument_list|()
+operator|.
+name|getFieldCount
+argument_list|()
+argument_list|,
+name|Litmus
+operator|.
+name|THROW
+argument_list|)
+assert|;
 block|}
 block|}
 block|}

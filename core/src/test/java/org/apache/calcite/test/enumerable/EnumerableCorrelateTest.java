@@ -115,15 +115,7 @@ literal|"    EnumerableCalc(expr#0..4=[{inputs}], proj#0..2=[{exprs}])\n"
 operator|+
 literal|"      EnumerableTableScan(table=[[s, emps]])\n"
 operator|+
-literal|"    EnumerableJoin(condition=[=($0, $1)], joinType=[inner])\n"
-operator|+
-literal|"      EnumerableAggregate(group=[{1}])\n"
-operator|+
-literal|"        EnumerableTableScan(table=[[s, emps]])\n"
-operator|+
-literal|"      EnumerableCalc(expr#0..3=[{inputs}], deptno=[$t0])\n"
-operator|+
-literal|"        EnumerableTableScan(table=[[s, depts]])"
+literal|"    EnumerableTableScan(table=[[s, depts]])"
 argument_list|)
 operator|.
 name|returnsUnordered

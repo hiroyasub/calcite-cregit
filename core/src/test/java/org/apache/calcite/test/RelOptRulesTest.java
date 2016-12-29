@@ -12521,6 +12521,39 @@ name|check
 argument_list|()
 expr_stmt|;
 block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testWhereNotInCorrelated2
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select * from emp e1\n"
+operator|+
+literal|"  where e1.empno NOT IN\n"
+operator|+
+literal|"   (select empno from (select ename, empno, sal as r from emp) e2\n"
+operator|+
+literal|"    where r> 2 and e1.ename= e2.ename)"
+decl_stmt|;
+name|checkSubQuery
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|withLateDecorrelation
+argument_list|(
+literal|true
+argument_list|)
+operator|.
+name|check
+argument_list|()
+expr_stmt|;
+block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1546">[CALCITE-1546]    * Sub-queries connected by OR</a>. */
 annotation|@
 name|Test
@@ -13226,7 +13259,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testWhereInCorrelated
+name|testWhereInJoinCorrelated
 parameter_list|()
 block|{
 specifier|final
@@ -13244,6 +13277,102 @@ decl_stmt|;
 name|checkSubQuery
 argument_list|(
 name|sql
+argument_list|)
+operator|.
+name|check
+argument_list|()
+expr_stmt|;
+block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1494">[CALCITE-1494]    * Inefficient plan for correlated sub-queries</a>. In "planAfter", there    * must be only one scan each of emp and dept. We don't need a separate    * value-generator for emp.job. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testWhereInCorrelated
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select sal from emp where empno IN (\n"
+operator|+
+literal|"  select deptno from dept where emp.job = dept.name)"
+decl_stmt|;
+name|checkSubQuery
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|withLateDecorrelation
+argument_list|(
+literal|true
+argument_list|)
+operator|.
+name|check
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testWhereExpressionInCorrelated
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select ename from (\n"
+operator|+
+literal|"  select ename, deptno, sal + 1 as salPlus from emp) as e\n"
+operator|+
+literal|"where deptno in (\n"
+operator|+
+literal|"  select deptno from emp where sal + 1 = e.salPlus)"
+decl_stmt|;
+name|checkSubQuery
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|withLateDecorrelation
+argument_list|(
+literal|true
+argument_list|)
+operator|.
+name|check
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testWhereExpressionInCorrelated2
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select name from (\n"
+operator|+
+literal|"  select name, deptno, deptno - 10 as deptnoMinus from dept) as d\n"
+operator|+
+literal|"where deptno in (\n"
+operator|+
+literal|"  select deptno from emp where sal + 1 = d.deptnoMinus)"
+decl_stmt|;
+name|checkSubQuery
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|withLateDecorrelation
+argument_list|(
+literal|true
 argument_list|)
 operator|.
 name|check
