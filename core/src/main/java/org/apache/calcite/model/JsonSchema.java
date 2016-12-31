@@ -152,7 +152,7 @@ specifier|public
 name|String
 name|name
 decl_stmt|;
-comment|/** SQL path that is used to resolve functions used in this schema.    *    *<p>May be null, or a list, each element of which is a string or a    * string-list.    *    *<p>For example,    *    *<blockquote><pre>path: [ ['usr', 'lib'], 'lib' ]</pre></blockquote>    *    *<p>declares a path with two elements: the schema â/usr/libâ and the schema    * â/libâ. Most schemas are at the top level, and for these you can use a    * string.    */
+comment|/** SQL path that is used to resolve functions used in this schema.    *    *<p>May be null, or a list, each element of which is a string or a    * string-list.    *    *<p>For example,    *    *<blockquote><pre>path: [ ['usr', 'lib'], 'lib' ]</pre></blockquote>    *    *<p>declares a path with two elements: the schema '/usr/lib' and the schema    * '/lib'. Most schemas are at the top level, and for these you can use a    * string.    */
 specifier|public
 name|List
 argument_list|<

@@ -1225,7 +1225,7 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
-comment|/**    * GROUP BY with duplicates    *    *<p>From SQL spec:    *<blockquote>NOTE 190 â That is, a simple<em>group by clause</em> that is    * not primitive may be transformed into a primitive<em>group by clause</em>    * by deleting all parentheses, and deleting extra commas as necessary for    * correct syntax. If there are no grouping columns at all (for example,    * GROUP BY (), ()), this is transformed to the canonical form GROUP BY ().    *</blockquote> */
+comment|/**    * GROUP BY with duplicates.    *    *<p>From SQL spec:    *<blockquote>NOTE 190&mdash; That is, a simple<em>group by clause</em>    * that is not primitive may be transformed into a primitive<em>group by    * clause</em> by deleting all parentheses, and deleting extra commas as    * necessary for correct syntax. If there are no grouping columns at all (for    * example, GROUP BY (), ()), this is transformed to the canonical form GROUP    * BY ().    *</blockquote> */
 comment|// Same effect as writing "GROUP BY ()"
 annotation|@
 name|Test

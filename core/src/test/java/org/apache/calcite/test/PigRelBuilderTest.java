@@ -413,7 +413,7 @@ parameter_list|()
 block|{
 comment|// Syntax:
 comment|//   alias = GROUP alias { ALL | BY expression}
-comment|//     [, alias ALL | BY expression â¦] [USING 'collected' | 'merge']
+comment|//     [, alias ALL | BY expression ...] [USING 'collected' | 'merge']
 comment|//     [PARTITION BY partitioner] [PARALLEL n];
 comment|// Equivalent to Pig Latin:
 comment|//   r = GROUP e BY (deptno, job);

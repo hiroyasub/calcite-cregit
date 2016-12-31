@@ -31,7 +31,7 @@ specifier|public
 name|String
 name|jdbcDriver
 decl_stmt|;
-comment|/** JDBC connect string, for example âjdbc:mysql://localhost/foodmartâ.    *    *<p>Optional.    */
+comment|/** JDBC connect string, for example "jdbc:mysql://localhost/foodmart".    *    *<p>Optional.    */
 specifier|public
 name|String
 name|jdbcUrl
@@ -41,7 +41,7 @@ specifier|public
 name|String
 name|jdbcUser
 decl_stmt|;
-comment|/** JDBC connect string, for example âjdbc:mysql://localhost/foodmartâ.    *    *<p>Optional.    */
+comment|/** JDBC connect string, for example "jdbc:mysql://localhost/foodmart".    *    *<p>Optional.    */
 specifier|public
 name|String
 name|jdbcPassword

@@ -9293,7 +9293,9 @@ specifier|final
 name|String
 name|columnName
 init|=
-literal|"ÐÐ¾Ð¼ÐµÑÐ¢ÐµÐ»ÐµÑÐ¾Ð½Ð°"
+literal|"\u041d\u043e\u043c\u0435\u0440\u0422\u0435\u043b"
+operator|+
+literal|"\u0435\u0444\u043e\u043d\u0430"
 decl_stmt|;
 comment|// PhoneNumber in Russian
 name|ConnectionSpec
