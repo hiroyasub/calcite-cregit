@@ -19632,7 +19632,7 @@ argument_list|)
 operator|.
 name|throws_
 argument_list|(
-literal|"Table 'adhoc.EMPLOYEES' not found"
+literal|"Object 'EMPLOYEES' not found within 'adhoc'"
 argument_list|)
 expr_stmt|;
 block|}
@@ -24202,7 +24202,55 @@ argument_list|)
 operator|.
 name|throws_
 argument_list|(
-literal|"Table 'metaData.tAbles' not found"
+literal|"Object 'metaData' not found; did you mean 'metadata'?"
+argument_list|)
+expr_stmt|;
+name|with2
+operator|.
+name|query
+argument_list|(
+literal|"select COUNT(*) as c from `metaData`.`TABLES`"
+argument_list|)
+operator|.
+name|throws_
+argument_list|(
+literal|"Object 'metaData' not found; did you mean 'metadata'?"
+argument_list|)
+expr_stmt|;
+name|with2
+operator|.
+name|query
+argument_list|(
+literal|"select COUNT(*) as c from `metaData`.`tables`"
+argument_list|)
+operator|.
+name|throws_
+argument_list|(
+literal|"Object 'metaData' not found; did you mean 'metadata'?"
+argument_list|)
+expr_stmt|;
+name|with2
+operator|.
+name|query
+argument_list|(
+literal|"select COUNT(*) as c from `metaData`.`nonExistent`"
+argument_list|)
+operator|.
+name|throws_
+argument_list|(
+literal|"Object 'metaData' not found; did you mean 'metadata'?"
+argument_list|)
+expr_stmt|;
+name|with2
+operator|.
+name|query
+argument_list|(
+literal|"select COUNT(*) as c from `metadata`.`tAbles`"
+argument_list|)
+operator|.
+name|throws_
+argument_list|(
+literal|"Object 'tAbles' not found within 'metadata'; did you mean 'TABLES'?"
 argument_list|)
 expr_stmt|;
 block|}
@@ -24243,7 +24291,7 @@ argument_list|)
 operator|.
 name|throws_
 argument_list|(
-literal|"Table 'metaData.zoo' not found"
+literal|"Object 'zoo' not found within 'metadata'"
 argument_list|)
 expr_stmt|;
 name|with

@@ -598,7 +598,7 @@ argument_list|()
 argument_list|,
 name|containsString
 argument_list|(
-literal|"Table 'nonexistentTable' not found"
+literal|"Object 'nonexistentTable' not found"
 argument_list|)
 argument_list|)
 expr_stmt|;

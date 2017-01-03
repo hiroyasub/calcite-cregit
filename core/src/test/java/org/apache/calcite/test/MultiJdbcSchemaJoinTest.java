@@ -1137,7 +1137,7 @@ argument_list|()
 argument_list|,
 name|equalTo
 argument_list|(
-literal|"Table 'DB.TABLE2' not found"
+literal|"Object 'TABLE2' not found within 'DB'"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -1199,7 +1199,7 @@ argument_list|()
 argument_list|,
 name|equalTo
 argument_list|(
-literal|"Table 'DB.TABLE2' not found"
+literal|"Object 'TABLE2' not found within 'DB'"
 argument_list|)
 argument_list|)
 expr_stmt|;

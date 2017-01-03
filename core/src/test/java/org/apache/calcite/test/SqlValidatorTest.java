@@ -12541,7 +12541,27 @@ argument_list|)
 operator|.
 name|fails
 argument_list|(
-literal|"Table 'SALES.\\*' not found"
+literal|"Object '\\*' not found within 'SALES'"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select * from ^emp.*^"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Object '\\*' not found within 'SALES.EMP'"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select emp.empno AS x from ^emp.*^"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Object '\\*' not found within 'SALES.EMP'"
 argument_list|)
 expr_stmt|;
 name|sql
@@ -15448,7 +15468,7 @@ literal|" emp2 as (select * from emp)\n"
 operator|+
 literal|"select * from emp3"
 argument_list|,
-literal|"Table 'EMP2' not found"
+literal|"Object 'EMP2' not found"
 argument_list|)
 expr_stmt|;
 comment|// forward reference in with-item not used; should still fail
@@ -15460,7 +15480,7 @@ literal|" emp2 as (select * from emp)\n"
 operator|+
 literal|"select * from emp2"
 argument_list|,
-literal|"Table 'EMP2' not found"
+literal|"Object 'EMP2' not found"
 argument_list|)
 expr_stmt|;
 comment|// table not used is ok
@@ -15484,7 +15504,7 @@ literal|" emp3 as (select * from ^emp3^)\n"
 operator|+
 literal|"values (1)"
 argument_list|,
-literal|"Table 'EMP3' not found"
+literal|"Object 'EMP3' not found"
 argument_list|)
 expr_stmt|;
 comment|// self-reference not ok
@@ -15494,7 +15514,7 @@ literal|"with emp2 as (select * from ^emp2^)\n"
 operator|+
 literal|"select * from emp2 where false"
 argument_list|,
-literal|"Table 'EMP2' not found"
+literal|"Object 'EMP2' not found"
 argument_list|)
 expr_stmt|;
 comment|// refer to 2 previous tables, not just immediately preceding
@@ -19871,7 +19891,21 @@ name|checkFails
 argument_list|(
 literal|"table ^nonexistent^"
 argument_list|,
-literal|"Table 'NONEXISTENT' not found"
+literal|"Object 'NONEXISTENT' not found"
+argument_list|)
+expr_stmt|;
+name|checkFails
+argument_list|(
+literal|"table ^sales.nonexistent^"
+argument_list|,
+literal|"Object 'NONEXISTENT' not found within 'SALES'"
+argument_list|)
+expr_stmt|;
+name|checkFails
+argument_list|(
+literal|"table ^nonexistent.foo^"
+argument_list|,
+literal|"Object 'NONEXISTENT' not found"
 argument_list|)
 expr_stmt|;
 block|}
@@ -20069,7 +20103,7 @@ name|checkFails
 argument_list|(
 literal|"select * from table(dedup(cursor(select * from ^bloop^),'ename'))"
 argument_list|,
-literal|"Table 'BLOOP' not found"
+literal|"Object 'BLOOP' not found"
 argument_list|)
 expr_stmt|;
 block|}
@@ -20979,7 +21013,7 @@ name|checkQueryFails
 argument_list|(
 literal|"select ^e^.EMPNO from [EMP] as [e]"
 argument_list|,
-literal|"Table 'E' not found"
+literal|"Table 'E' not found; did you mean 'e'\\?"
 argument_list|)
 expr_stmt|;
 name|tester1
@@ -20989,6 +21023,17 @@ argument_list|(
 literal|"select ^x^ from (\n"
 operator|+
 literal|"  select [e].EMPNO as [x] from [EMP] as [e])"
+argument_list|,
+literal|"Column 'X' not found in any table; did you mean 'x'\\?"
+argument_list|)
+expr_stmt|;
+name|tester1
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"select ^x^ from (\n"
+operator|+
+literal|"  select [e].EMPNO as [x ] from [EMP] as [e])"
 argument_list|,
 literal|"Column 'X' not found in any table"
 argument_list|)
@@ -21049,7 +21094,7 @@ name|checkQueryFails
 argument_list|(
 literal|"select ^e^.EMPNO from EMP as E"
 argument_list|,
-literal|"Table 'e' not found"
+literal|"Table 'e' not found; did you mean 'E'\\?"
 argument_list|)
 expr_stmt|;
 name|tester1
@@ -21058,7 +21103,7 @@ name|checkQueryFails
 argument_list|(
 literal|"select ^E^.EMPNO from EMP as e"
 argument_list|,
-literal|"Table 'E' not found"
+literal|"Table 'E' not found; did you mean 'e'\\?"
 argument_list|)
 expr_stmt|;
 name|tester1
@@ -21068,6 +21113,17 @@ argument_list|(
 literal|"select ^x^ from (\n"
 operator|+
 literal|"  select e.EMPNO as X from EMP as e)"
+argument_list|,
+literal|"Column 'x' not found in any table; did you mean 'X'\\?"
+argument_list|)
+expr_stmt|;
+name|tester1
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"select ^x^ from (\n"
+operator|+
+literal|"  select e.EMPNO as Xx from EMP as e)"
 argument_list|,
 literal|"Column 'x' not found in any table"
 argument_list|)
@@ -21150,7 +21206,7 @@ name|checkFails
 argument_list|(
 literal|"select ^PATH^ from (select 1 as path from (values (true)))"
 argument_list|,
-literal|"Column 'PATH' not found in any table"
+literal|"Column 'PATH' not found in any table; did you mean 'path'\\?"
 argument_list|,
 literal|false
 argument_list|)
@@ -21161,7 +21217,7 @@ name|checkFails
 argument_list|(
 literal|"select t.^PATH^ from (select 1 as path from (values (true))) as t"
 argument_list|,
-literal|"Column 'PATH' not found in table 't'"
+literal|"Column 'PATH' not found in table 't'; did you mean 'path'\\?"
 argument_list|,
 literal|false
 argument_list|)
@@ -21172,7 +21228,7 @@ name|checkQueryFails
 argument_list|(
 literal|"select t.x, t.^PATH^ from (values (true, 1)) as t(path, x)"
 argument_list|,
-literal|"Column 'PATH' not found in table 't'"
+literal|"Column 'PATH' not found in table 't'; did you mean 'path'\\?"
 argument_list|)
 expr_stmt|;
 comment|// Built-in functions can be written in any case, even those with no args,
@@ -21336,7 +21392,7 @@ literal|"select * from emp as [e] where exists (\n"
 operator|+
 literal|"select 1 from dept where dept.deptno = ^[E]^.deptno)"
 argument_list|,
-literal|"(?s).*Table 'E' not found"
+literal|"(?s).*Table 'E' not found; did you mean 'e'\\?"
 argument_list|)
 expr_stmt|;
 name|checkFails
@@ -21486,6 +21542,256 @@ operator|.
 name|checkQuery
 argument_list|(
 literal|"select deptno, count(*) from EMP group by DEPTNO"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1549">[CALCITE-1549]    * Improve error message when table or column not found</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testTableNotFoundDidYouMean
+parameter_list|()
+block|{
+comment|// No table in default schema
+name|tester
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"select * from ^unknownTable^"
+argument_list|,
+literal|"Object 'UNKNOWNTABLE' not found"
+argument_list|)
+expr_stmt|;
+comment|// Similar table exists in default schema
+name|tester
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"select * from ^\"Emp\"^"
+argument_list|,
+literal|"Object 'Emp' not found within 'SALES'; did you mean 'EMP'\\?"
+argument_list|)
+expr_stmt|;
+comment|// Schema correct, but no table in specified schema
+name|tester
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"select * from ^sales.unknownTable^"
+argument_list|,
+literal|"Object 'UNKNOWNTABLE' not found within 'SALES'"
+argument_list|)
+expr_stmt|;
+comment|// Similar table exists in specified schema
+name|tester
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"select * from ^sales.\"Emp\"^"
+argument_list|,
+literal|"Object 'Emp' not found within 'SALES'; did you mean 'EMP'\\?"
+argument_list|)
+expr_stmt|;
+comment|// No schema found
+name|tester
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"select * from ^unknownSchema.unknownTable^"
+argument_list|,
+literal|"Object 'UNKNOWNSCHEMA' not found"
+argument_list|)
+expr_stmt|;
+comment|// Similar schema found
+name|tester
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"select * from ^\"sales\".emp^"
+argument_list|,
+literal|"Object 'sales' not found; did you mean 'SALES'\\?"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"select * from ^\"saLes\".\"eMp\"^"
+argument_list|,
+literal|"Object 'saLes' not found; did you mean 'SALES'\\?"
+argument_list|)
+expr_stmt|;
+comment|// Spurious after table
+name|tester
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"select * from ^emp.foo^"
+argument_list|,
+literal|"Object 'FOO' not found within 'SALES\\.EMP'"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"select * from ^sales.emp.foo^"
+argument_list|,
+literal|"Object 'FOO' not found within 'SALES\\.EMP'"
+argument_list|)
+expr_stmt|;
+comment|// Alias not found
+name|tester
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"select ^aliAs^.\"name\"\n"
+operator|+
+literal|"from sales.emp as \"Alias\""
+argument_list|,
+literal|"Table 'ALIAS' not found; did you mean 'Alias'\\?"
+argument_list|)
+expr_stmt|;
+comment|// Alias not found, fully-qualified
+name|tester
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"select ^sales.\"emp\"^.\"name\" from sales.emp"
+argument_list|,
+literal|"Table 'SALES\\.emp' not found; did you mean 'EMP'\\?"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testColumnNotFoundDidYouMean
+parameter_list|()
+block|{
+comment|// Column not found
+name|tester
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"select ^\"unknownColumn\"^ from emp"
+argument_list|,
+literal|"Column 'unknownColumn' not found in any table"
+argument_list|)
+expr_stmt|;
+comment|// Similar column in table, unqualified table name
+name|tester
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"select ^\"empNo\"^ from emp"
+argument_list|,
+literal|"Column 'empNo' not found in any table; did you mean 'EMPNO'\\?"
+argument_list|)
+expr_stmt|;
+comment|// Similar column in table, table name qualified with schema
+name|tester
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"select ^\"empNo\"^ from sales.emp"
+argument_list|,
+literal|"Column 'empNo' not found in any table; did you mean 'EMPNO'\\?"
+argument_list|)
+expr_stmt|;
+comment|// Similar column in table, table name qualified with catalog and schema
+name|tester
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"select ^\"empNo\"^ from catalog.sales.emp"
+argument_list|,
+literal|"Column 'empNo' not found in any table; did you mean 'EMPNO'\\?"
+argument_list|)
+expr_stmt|;
+comment|// With table alias
+name|tester
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"select e.^\"empNo\"^ from catalog.sales.emp as e"
+argument_list|,
+literal|"Column 'empNo' not found in table 'E'; did you mean 'EMPNO'\\?"
+argument_list|)
+expr_stmt|;
+comment|// With fully-qualified table alias
+name|tester
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"select catalog.sales.emp.^\"empNo\"^\n"
+operator|+
+literal|"from catalog.sales.emp"
+argument_list|,
+literal|"Column 'empNo' not found in table 'CATALOG\\.SALES\\.EMP'; "
+operator|+
+literal|"did you mean 'EMPNO'\\?"
+argument_list|)
+expr_stmt|;
+comment|// Similar column in table; multiple tables
+name|tester
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"select ^\"name\"^ from emp, dept"
+argument_list|,
+literal|"Column 'name' not found in any table; did you mean 'NAME'\\?"
+argument_list|)
+expr_stmt|;
+comment|// Similar column in table; table and a query
+name|tester
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"select ^\"name\"^ from emp,\n"
+operator|+
+literal|"  (select * from dept) as d"
+argument_list|,
+literal|"Column 'name' not found in any table; did you mean 'NAME'\\?"
+argument_list|)
+expr_stmt|;
+comment|// Similar column in table; table and an un-aliased query
+name|tester
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"select ^\"name\"^ from emp, (select * from dept)"
+argument_list|,
+literal|"Column 'name' not found in any table; did you mean 'NAME'\\?"
+argument_list|)
+expr_stmt|;
+comment|// Similar column in table, multiple tables
+name|tester
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"select ^\"deptno\"^ from emp,\n"
+operator|+
+literal|"  (select deptno as \"deptNo\" from dept)"
+argument_list|,
+literal|"Column 'deptno' not found in any table; "
+operator|+
+literal|"did you mean 'DEPTNO', 'deptNo'\\?"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"select ^\"deptno\"^ from emp,\n"
+operator|+
+literal|"  (select * from dept) as t(\"deptNo\", name)"
+argument_list|,
+literal|"Column 'deptno' not found in any table; "
+operator|+
+literal|"did you mean 'DEPTNO', 'deptNo'\\?"
 argument_list|)
 expr_stmt|;
 block|}

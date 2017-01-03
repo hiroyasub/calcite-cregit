@@ -10862,8 +10862,11 @@ operator|.
 name|value
 argument_list|)
 decl_stmt|;
-name|RelOptTable
-name|table
+specifier|final
+name|Prepare
+operator|.
+name|CatalogReader
+name|catalogReader
 init|=
 name|Prepare
 operator|.
@@ -10873,6 +10876,11 @@ name|THREAD_LOCAL
 operator|.
 name|get
 argument_list|()
+decl_stmt|;
+name|RelOptTable
+name|table
+init|=
+name|catalogReader
 operator|.
 name|getTable
 argument_list|(

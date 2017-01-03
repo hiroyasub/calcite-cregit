@@ -2046,6 +2046,8 @@ argument_list|>
 name|schemaPath
 parameter_list|)
 function_decl|;
+annotation|@
+name|Override
 name|PreparingTable
 name|getTable
 parameter_list|(

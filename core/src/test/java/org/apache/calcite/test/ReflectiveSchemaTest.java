@@ -3589,7 +3589,7 @@ argument_list|)
 operator|.
 name|throws_
 argument_list|(
-literal|"Table 's.bitSet' not found"
+literal|"Object 'bitSet' not found within 's'"
 argument_list|)
 expr_stmt|;
 comment|// Enumerable field returns 3 records with 0 fields

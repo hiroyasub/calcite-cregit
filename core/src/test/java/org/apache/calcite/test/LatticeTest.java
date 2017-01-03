@@ -716,7 +716,7 @@ argument_list|)
 operator|.
 name|connectThrows
 argument_list|(
-literal|"Table 'NONEXISTENT' not found"
+literal|"Object 'NONEXISTENT' not found"
 argument_list|)
 expr_stmt|;
 block|}

@@ -143,6 +143,20 @@ name|common
 operator|.
 name|base
 operator|.
+name|Function
+import|;
+end_import
+
+begin_import
+import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|base
+operator|.
 name|Preconditions
 import|;
 end_import
@@ -177,6 +191,20 @@ end_import
 
 begin_import
 import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|collect
+operator|.
+name|Lists
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -205,6 +233,16 @@ name|List
 import|;
 end_import
 
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Map
+import|;
+end_import
+
 begin_comment
 comment|/**  * Name-resolution scope. Represents any position in a parse tree than an  * expression can be, or anything in the parse tree which has columns.  *  *<p>When validating an expression, say "foo"."bar", you first use the  * {@link #resolve} method of the scope where the expression is defined to  * locate "foo". If successful, this returns a  * {@link SqlValidatorNamespace namespace} describing the type of the resulting  * object.  */
 end_comment
@@ -225,7 +263,7 @@ name|SqlNode
 name|getNode
 parameter_list|()
 function_decl|;
-comment|/**    * Looks up a node with a given name. Returns null if none is found.    *    * @param names       Name of node to find, maybe partially or fully qualified    * @param deep        Whether to look more than one level deep    * @param resolved    Callback wherein to write the match(es) we find    */
+comment|/**    * Looks up a node with a given name. Returns null if none is found.    *    * @param names       Name of node to find, maybe partially or fully qualified    * @param nameMatcher Name matcher    * @param deep        Whether to look more than one level deep    * @param resolved    Callback wherein to write the match(es) we find    */
 name|void
 name|resolve
 parameter_list|(
@@ -235,6 +273,9 @@ name|String
 argument_list|>
 name|names
 parameter_list|,
+name|SqlNameMatcher
+name|nameMatcher
+parameter_list|,
 name|boolean
 name|deep
 parameter_list|,
@@ -242,7 +283,10 @@ name|Resolved
 name|resolved
 parameter_list|)
 function_decl|;
-comment|/**    * Finds the table alias which is implicitly qualifying an unqualified    * column name. Throws an error if there is not exactly one table.    *    *<p>This method is only implemented in scopes (such as    * {@link org.apache.calcite.sql.validate.SelectScope}) which can be the    * context for name-resolution. In scopes such as    * {@link org.apache.calcite.sql.validate.IdentifierNamespace}, it throws    * {@link UnsupportedOperationException}.</p>    *    * @param columnName Column name    * @param ctx        Validation context, to appear in any error thrown    * @return Table alias and namespace    */
+comment|/** @deprecated Use    * {@link #findQualifyingTableNames(String, SqlNode, SqlNameMatcher)} */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 name|Pair
 argument_list|<
 name|String
@@ -256,6 +300,25 @@ name|columnName
 parameter_list|,
 name|SqlNode
 name|ctx
+parameter_list|)
+function_decl|;
+comment|/**    * Finds all table aliases which are implicitly qualifying an unqualified    * column name.    *    *<p>This method is only implemented in scopes (such as    * {@link org.apache.calcite.sql.validate.SelectScope}) which can be the    * context for name-resolution. In scopes such as    * {@link org.apache.calcite.sql.validate.IdentifierNamespace}, it throws    * {@link UnsupportedOperationException}.    *    * @param columnName Column name    * @param ctx        Validation context, to appear in any error thrown    * @param nameMatcher Name matcher    *    * @return Map of applicable table alias and namespaces, never null, empty    * if no aliases found    */
+name|Map
+argument_list|<
+name|String
+argument_list|,
+name|ScopeChild
+argument_list|>
+name|findQualifyingTableNames
+parameter_list|(
+name|String
+name|columnName
+parameter_list|,
+name|SqlNode
+name|ctx
+parameter_list|,
+name|SqlNameMatcher
+name|nameMatcher
 parameter_list|)
 function_decl|;
 comment|/**    * Collects the {@link SqlMoniker}s of all possible columns in this scope.    *    * @param result an array list of strings to add the result to    */
@@ -350,7 +413,10 @@ name|SqlNode
 name|expr
 parameter_list|)
 function_decl|;
-comment|/**    * Looks up a table in this scope from its name. If found, returns the    * {@link TableNamespace} that wraps it. If the "table" is defined in a    * {@code WITH} clause it may be a query, not a table after all.    *    * @param names Name of table, may be qualified or fully-qualified    * @return Namespace of table    */
+comment|/** @deprecated Use    * {@link #resolveTable(List, SqlNameMatcher, Path, Resolved)}. */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 name|SqlValidatorNamespace
 name|getTableNamespace
 parameter_list|(
@@ -359,6 +425,26 @@ argument_list|<
 name|String
 argument_list|>
 name|names
+parameter_list|)
+function_decl|;
+comment|/**    * Looks up a table in this scope from its name. If found, calls    * {@link Resolved#resolve(List, SqlNameMatcher, boolean, Resolved)}.    * {@link TableNamespace} that wraps it. If the "table" is defined in a    * {@code WITH} clause it may be a query, not a table after all.    *    *<p>The name matcher is not null, and one typically uses    * {@link SqlValidatorCatalogReader#nameMatcher()}.    *    * @param names Name of table, may be qualified or fully-qualified    * @param nameMatcher Name matcher    * @param path List of names that we have traversed through so far    */
+name|void
+name|resolveTable
+parameter_list|(
+name|List
+argument_list|<
+name|String
+argument_list|>
+name|names
+parameter_list|,
+name|SqlNameMatcher
+name|nameMatcher
+parameter_list|,
+name|Path
+name|path
+parameter_list|,
+name|Resolved
+name|resolved
 parameter_list|)
 function_decl|;
 comment|/** Converts the type of an expression to nullable, if the context    * warrants it. */
@@ -372,7 +458,7 @@ name|RelDataType
 name|type
 parameter_list|)
 function_decl|;
-comment|/** Callback from    * {@link SqlValidatorScope#resolve(List, boolean, Resolved)}. */
+comment|/** Callback from {@link SqlValidatorScope#resolve}. */
 interface|interface
 name|Resolved
 block|{
@@ -390,31 +476,53 @@ name|scope
 parameter_list|,
 name|Path
 name|path
+parameter_list|,
+name|List
+argument_list|<
+name|String
+argument_list|>
+name|remainingNames
 parameter_list|)
 function_decl|;
 name|int
 name|count
 parameter_list|()
 function_decl|;
-name|Path
-name|emptyPath
-parameter_list|()
-function_decl|;
 block|}
-comment|/** A sequence of steps by which an identifier was resolved. */
+comment|/** A sequence of steps by which an identifier was resolved. Immutable. */
 specifier|abstract
 class|class
 name|Path
 block|{
-comment|/** Creates a path which consists of this path plus one additional step. */
+comment|/** The empty path. */
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"StaticInitializerReferencesSubClass"
+argument_list|)
+specifier|public
+specifier|static
+specifier|final
+name|EmptyPath
+name|EMPTY
+init|=
+operator|new
+name|EmptyPath
+argument_list|()
+decl_stmt|;
+comment|/** Creates a path that consists of this path plus one additional step. */
+specifier|public
 name|Step
-name|add
+name|plus
 parameter_list|(
 name|RelDataType
 name|rowType
 parameter_list|,
 name|int
 name|i
+parameter_list|,
+name|String
+name|name
 parameter_list|,
 name|StructKind
 name|kind
@@ -429,6 +537,8 @@ argument_list|,
 name|rowType
 argument_list|,
 name|i
+argument_list|,
+name|name
 argument_list|,
 name|kind
 argument_list|)
@@ -480,6 +590,49 @@ name|build
 argument_list|()
 return|;
 block|}
+comment|/** Returns a list ["step1", "step2"]. */
+name|List
+argument_list|<
+name|String
+argument_list|>
+name|stepNames
+parameter_list|()
+block|{
+return|return
+name|Lists
+operator|.
+name|transform
+argument_list|(
+name|steps
+argument_list|()
+argument_list|,
+operator|new
+name|Function
+argument_list|<
+name|Step
+argument_list|,
+name|String
+argument_list|>
+argument_list|()
+block|{
+specifier|public
+name|String
+name|apply
+parameter_list|(
+name|Step
+name|input
+parameter_list|)
+block|{
+return|return
+name|input
+operator|.
+name|name
+return|;
+block|}
+block|}
+argument_list|)
+return|;
+block|}
 specifier|protected
 name|void
 name|build
@@ -520,6 +673,11 @@ specifier|final
 name|int
 name|i
 decl_stmt|;
+specifier|public
+specifier|final
+name|String
+name|name
+decl_stmt|;
 specifier|final
 name|StructKind
 name|kind
@@ -534,6 +692,9 @@ name|rowType
 parameter_list|,
 name|int
 name|i
+parameter_list|,
+name|String
+name|name
 parameter_list|,
 name|StructKind
 name|kind
@@ -562,6 +723,12 @@ operator|.
 name|i
 operator|=
 name|i
+expr_stmt|;
+name|this
+operator|.
+name|name
+operator|=
+name|name
 expr_stmt|;
 name|this
 operator|.
@@ -638,15 +805,6 @@ name|ArrayList
 argument_list|<>
 argument_list|()
 decl_stmt|;
-specifier|private
-specifier|final
-name|EmptyPath
-name|emptyPath
-init|=
-operator|new
-name|EmptyPath
-argument_list|()
-decl_stmt|;
 specifier|public
 name|void
 name|found
@@ -662,6 +820,12 @@ name|scope
 parameter_list|,
 name|Path
 name|path
+parameter_list|,
+name|List
+argument_list|<
+name|String
+argument_list|>
+name|remainingNames
 parameter_list|)
 block|{
 name|resolves
@@ -678,6 +842,8 @@ argument_list|,
 name|scope
 argument_list|,
 name|path
+argument_list|,
+name|remainingNames
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -692,15 +858,6 @@ name|resolves
 operator|.
 name|size
 argument_list|()
-return|;
-block|}
-specifier|public
-name|Path
-name|emptyPath
-parameter_list|()
-block|{
-return|return
-name|emptyPath
 return|;
 block|}
 specifier|public
@@ -755,6 +912,14 @@ specifier|final
 name|Path
 name|path
 decl_stmt|;
+comment|/** Names not matched; empty if it was a full match. */
+specifier|final
+name|List
+argument_list|<
+name|String
+argument_list|>
+name|remainingNames
+decl_stmt|;
 name|Resolve
 parameter_list|(
 name|SqlValidatorNamespace
@@ -768,6 +933,12 @@ name|scope
 parameter_list|,
 name|Path
 name|path
+parameter_list|,
+name|List
+argument_list|<
+name|String
+argument_list|>
+name|remainingNames
 parameter_list|)
 block|{
 name|this
@@ -802,6 +973,29 @@ operator|.
 name|checkNotNull
 argument_list|(
 name|path
+argument_list|)
+expr_stmt|;
+name|this
+operator|.
+name|remainingNames
+operator|=
+name|remainingNames
+operator|==
+literal|null
+condition|?
+name|ImmutableList
+operator|.
+expr|<
+name|String
+operator|>
+name|of
+argument_list|()
+else|:
+name|ImmutableList
+operator|.
+name|copyOf
+argument_list|(
+name|remainingNames
 argument_list|)
 expr_stmt|;
 block|}

@@ -2030,7 +2030,7 @@ operator|.
 name|ALL
 return|;
 block|}
-comment|/** Im0plementation of {@link SchemaPlus} that wraps a regular schema and knows    * its name and parent.    *    *<p>It is read-only, and functionality is limited in other ways, it but    * allows table expressions to be genenerated. */
+comment|/** Implementation of {@link SchemaPlus} that wraps a regular schema and knows    * its name and parent.    *    *<p>It is read-only, and functionality is limited in other ways, it but    * allows table expressions to be generated. */
 specifier|private
 specifier|static
 class|class

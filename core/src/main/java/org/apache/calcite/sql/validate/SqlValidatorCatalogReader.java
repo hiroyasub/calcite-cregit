@@ -25,6 +25,20 @@ name|apache
 operator|.
 name|calcite
 operator|.
+name|jdbc
+operator|.
+name|CalciteSchema
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
 name|rel
 operator|.
 name|type
@@ -83,7 +97,7 @@ interface|interface
 name|SqlValidatorCatalogReader
 block|{
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**    * Finds a table with the given name, possibly qualified.    *    * @param names Qualified name of table    * @return named table, or null if not found    */
+comment|/**    * Finds a table or schema with the given name, possibly qualified.    *    *<p>Uses the case-sensitivity policy of the catalog reader.    *    *<p>If not found, returns null. If you want a more descriptive error    * message or to override the case-sensitivity of the match, use    * {@link SqlValidatorScope#resolveTable}.    *    * @param names Name of table, may be qualified or fully-qualified    *    * @return Table with the given name, or null    */
 name|SqlValidatorTable
 name|getTable
 parameter_list|(
@@ -116,15 +130,21 @@ argument_list|>
 name|names
 parameter_list|)
 function_decl|;
-comment|/**    * Returns the name of the current schema.    *    * @return name of the current schema    */
+comment|/**    * Returns the paths of all schemas to look in for tables.    *    * @return paths of current schema and root schema    */
+name|List
+argument_list|<
 name|List
 argument_list|<
 name|String
 argument_list|>
-name|getSchemaName
+argument_list|>
+name|getSchemaPaths
 parameter_list|()
 function_decl|;
-comment|/**    * Finds a field with a given name, using the case-sensitivity of the current    * session.    */
+comment|/** @deprecated Use    * {@link #nameMatcher()}.{@link SqlNameMatcher#field(RelDataType, String)} */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 name|RelDataTypeField
 name|field
 parameter_list|(
@@ -135,6 +155,15 @@ name|String
 name|alias
 parameter_list|)
 function_decl|;
+comment|/** Returns an implementation of    * {@link org.apache.calcite.sql.validate.SqlNameMatcher}    * that matches the case-sensitivity policy. */
+name|SqlNameMatcher
+name|nameMatcher
+parameter_list|()
+function_decl|;
+comment|/** @deprecated Use    * {@link #nameMatcher()}.{@link SqlNameMatcher#matches(String, String)} */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 name|boolean
 name|matches
 parameter_list|(
@@ -158,8 +187,17 @@ argument_list|>
 name|columnNameList
 parameter_list|)
 function_decl|;
+comment|/** @deprecated Use    * {@link #nameMatcher()}.{@link SqlNameMatcher#isCaseSensitive()} */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 name|boolean
 name|isCaseSensitive
+parameter_list|()
+function_decl|;
+comment|/** Returns the root namespace for name resolution. */
+name|CalciteSchema
+name|getRootSchema
 parameter_list|()
 function_decl|;
 block|}

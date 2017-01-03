@@ -453,6 +453,9 @@ name|validator
 operator|.
 name|catalogReader
 operator|.
+name|nameMatcher
+argument_list|()
+operator|.
 name|field
 argument_list|(
 name|rowType
