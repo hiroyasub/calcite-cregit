@@ -1688,6 +1688,53 @@ literal|1500000
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1543">[CALCITE-1543]    * Correlated scalar sub-query with multiple aggregates gives    * AssertionError</a>. */
+annotation|@
+name|Ignore
+argument_list|(
+literal|"planning succeeds, but gives OutOfMemoryError during execution"
+argument_list|)
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testDecorrelateScalarAggregate
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select sum(l_extendedprice)\n"
+operator|+
+literal|"from lineitem, part\n"
+operator|+
+literal|"where\n"
+operator|+
+literal|"     p_partkey = l_partkey\n"
+operator|+
+literal|"     and l_quantity> (\n"
+operator|+
+literal|"       select avg(l_quantity)\n"
+operator|+
+literal|"       from lineitem\n"
+operator|+
+literal|"       where l_partkey = p_partkey\n"
+operator|+
+literal|"    )\n"
+decl_stmt|;
+name|with
+argument_list|()
+operator|.
+name|query
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|runs
+argument_list|()
+expr_stmt|;
+block|}
 annotation|@
 name|Test
 specifier|public

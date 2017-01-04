@@ -2713,15 +2713,6 @@ return|return
 literal|null
 return|;
 block|}
-assert|assert
-operator|!
-name|frame
-operator|.
-name|corVarOutputPos
-operator|.
-name|isEmpty
-argument_list|()
-assert|;
 specifier|final
 name|RelNode
 name|newInput

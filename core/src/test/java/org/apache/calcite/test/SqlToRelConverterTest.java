@@ -6135,6 +6135,47 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1543">[CALCITE-1543]    * Correlated scalar sub-query with multiple aggregates gives    * AssertionError</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testCorrelationMultiScalarAggregate
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select sum(e1.empno)\n"
+operator|+
+literal|"from emp e1, dept d1\n"
+operator|+
+literal|"where e1.deptno = d1.deptno\n"
+operator|+
+literal|"and e1.sal> (select avg(e2.sal) from emp e2\n"
+operator|+
+literal|"  where e2.deptno = d1.deptno)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|decorrelate
+argument_list|(
+literal|true
+argument_list|)
+operator|.
+name|expand
+argument_list|(
+literal|true
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
 annotation|@
 name|Test
 specifier|public
