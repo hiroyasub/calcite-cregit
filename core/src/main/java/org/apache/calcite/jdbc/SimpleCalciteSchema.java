@@ -123,7 +123,7 @@ name|SimpleCalciteSchema
 extends|extends
 name|CalciteSchema
 block|{
-comment|/** Creates a CachingCalciteSchema.    *    *<p>Use {@link CalciteSchema#createRootSchema(boolean)}    * or {@link #add(String, Schema)}. */
+comment|/** Creates a SimpleCalciteSchema.    *    *<p>Use {@link CalciteSchema#createRootSchema(boolean)}    * or {@link #add(String, Schema)}. */
 name|SimpleCalciteSchema
 parameter_list|(
 name|CalciteSchema
@@ -405,7 +405,7 @@ expr_stmt|;
 block|}
 specifier|protected
 name|void
-name|addImplicitFunctionToBuilder
+name|addImplicitFunctionsToBuilder
 parameter_list|(
 name|ImmutableList
 operator|.
@@ -414,6 +414,9 @@ argument_list|<
 name|Function
 argument_list|>
 name|builder
+parameter_list|,
+name|boolean
+name|caseSensitive
 parameter_list|)
 block|{
 for|for

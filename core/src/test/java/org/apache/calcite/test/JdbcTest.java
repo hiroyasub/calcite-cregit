@@ -24166,6 +24166,59 @@ literal|"Table 'metaData.tAbles' not found"
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1563">[CALCITE-1563]    * In case-insensitive connection, non-existent tables use alphabetically    * preceding table</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testLexCaseInsensitiveFindsNonexistentTable
+parameter_list|()
+block|{
+specifier|final
+name|CalciteAssert
+operator|.
+name|AssertThat
+name|with
+init|=
+name|CalciteAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|Lex
+operator|.
+name|MYSQL
+argument_list|)
+decl_stmt|;
+comment|// With [CALCITE-1563], the following query succeeded; it queried
+comment|// metadata.tables.
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"select COUNT(*) as c from `metaData`.`zoo`"
+argument_list|)
+operator|.
+name|throws_
+argument_list|(
+literal|"Table 'metaData.zoo' not found"
+argument_list|)
+expr_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"select COUNT(*) as c from `metaData`.`tAbLes`"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"c=2\n"
+argument_list|)
+expr_stmt|;
+block|}
 comment|/** Tests case-insensitive resolution of sub-query columns.    *    *<p>Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-555">[CALCITE-555]    * Case-insensitive matching of sub-query columns fails</a>. */
 annotation|@
 name|Test
