@@ -187,6 +187,20 @@ name|calcite
 operator|.
 name|util
 operator|.
+name|Glossary
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|util
+operator|.
 name|Util
 import|;
 end_import
@@ -874,7 +888,7 @@ name|String
 name|originalSql
 decl_stmt|;
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**    * @return immutable set of all reserved words defined by SQL-92    * @sql.92 Section 5.2    */
+comment|/**    * Returns immutable set of all reserved words defined by SQL-92.    *    * @see Glossary#SQL92 SQL-92 Section 5.2    */
 specifier|public
 specifier|static
 name|Set

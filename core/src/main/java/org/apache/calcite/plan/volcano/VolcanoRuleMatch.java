@@ -75,6 +75,20 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|util
+operator|.
+name|Litmus
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -126,7 +140,7 @@ operator|.
 name|NaN
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**    * Creates a<code>VolcanoRuleMatch</code>.    *    * @param operand0 Primary operand    * @param rels     List of targets; copied by the constructor, so the client    *                 can modify it later    * @param nodeInputs Map from relational expressions to their inputs    * @pre rels[i] != null    */
+comment|/**    * Creates a<code>VolcanoRuleMatch</code>.    *    * @param operand0 Primary operand    * @param rels     List of targets; copied by the constructor, so the client    *                 can modify it later    * @param nodeInputs Map from relational expressions to their inputs    */
 name|VolcanoRuleMatch
 parameter_list|(
 name|VolcanoPlanner
@@ -165,20 +179,16 @@ argument_list|,
 name|nodeInputs
 argument_list|)
 expr_stmt|;
-for|for
-control|(
-name|RelNode
-name|rel
-range|:
-name|rels
-control|)
-block|{
 assert|assert
-name|rel
-operator|!=
-literal|null
+name|allNotNull
+argument_list|(
+name|rels
+argument_list|,
+name|Litmus
+operator|.
+name|THROW
+argument_list|)
 assert|;
-block|}
 comment|// Try to deduce which subset the result will belong to. Assume --
 comment|// for now -- that the set is the same as the root relexp.
 name|targetSet
@@ -589,6 +599,60 @@ block|}
 comment|// The target subset doesn't exist yet.
 return|return
 literal|null
+return|;
+block|}
+comment|/** Returns whether all elements of a given array are not-null;    * fails if any are null. */
+specifier|private
+specifier|static
+parameter_list|<
+name|E
+parameter_list|>
+name|boolean
+name|allNotNull
+parameter_list|(
+name|E
+index|[]
+name|es
+parameter_list|,
+name|Litmus
+name|litmus
+parameter_list|)
+block|{
+for|for
+control|(
+name|E
+name|e
+range|:
+name|es
+control|)
+block|{
+if|if
+condition|(
+name|e
+operator|==
+literal|null
+condition|)
+block|{
+return|return
+name|litmus
+operator|.
+name|fail
+argument_list|(
+literal|"was null"
+argument_list|,
+operator|(
+name|Object
+operator|)
+name|es
+argument_list|)
+return|;
+block|}
+block|}
+return|return
+name|litmus
+operator|.
+name|succeed
+argument_list|()
 return|;
 block|}
 block|}

@@ -89,6 +89,20 @@ end_import
 
 begin_import
 import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|base
+operator|.
+name|Preconditions
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -125,7 +139,7 @@ name|RexWindow
 name|window
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**    * Creates a RexOver.    *    *<p>For example, "SUM(x) OVER (ROWS 3 PRECEDING)" is represented as:    *    *<ul>    *<li>type = Integer,    *<li>op = {@link org.apache.calcite.sql.fun.SqlStdOperatorTable#SUM},    *<li>operands = { {@link RexFieldAccess}("x") }    *<li>window = {@link SqlWindow}(ROWS 3 PRECEDING)    *</ul>    *    * @param type     Result type    * @param op       Aggregate operator    * @param operands Operands list    * @param window   Window specification    * @pre op.isAggregator()    * @pre window != null    * @pre window.getRefName() == null    */
+comment|/**    * Creates a RexOver.    *    *<p>For example, "SUM(x) OVER (ROWS 3 PRECEDING)" is represented as:    *    *<ul>    *<li>type = Integer,    *<li>op = {@link org.apache.calcite.sql.fun.SqlStdOperatorTable#SUM},    *<li>operands = { {@link RexFieldAccess}("x") }    *<li>window = {@link SqlWindow}(ROWS 3 PRECEDING)    *</ul>    *    * @param type     Result type    * @param op       Aggregate operator    * @param operands Operands list    * @param window   Window specification    */
 name|RexOver
 parameter_list|(
 name|RelDataType
@@ -153,26 +167,26 @@ argument_list|,
 name|operands
 argument_list|)
 expr_stmt|;
-assert|assert
+name|Preconditions
+operator|.
+name|checkArgument
+argument_list|(
 name|op
 operator|.
 name|isAggregator
 argument_list|()
-operator|:
-literal|"precondition: op.isAggregator()"
-assert|;
-assert|assert
-name|window
-operator|!=
-literal|null
-operator|:
-literal|"precondition: window != null"
-assert|;
+argument_list|)
+expr_stmt|;
 name|this
 operator|.
 name|window
 operator|=
+name|Preconditions
+operator|.
+name|checkNotNull
+argument_list|(
 name|window
+argument_list|)
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------

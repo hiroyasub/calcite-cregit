@@ -59,6 +59,20 @@ name|calcite
 operator|.
 name|util
 operator|.
+name|Glossary
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|util
+operator|.
 name|ImmutableNullableList
 import|;
 end_import
@@ -261,7 +275,7 @@ argument_list|()
 argument_list|)
 argument_list|)
 decl_stmt|;
-comment|/**    * Map from SqlTypeName to corresponding precedence list.    *    * @sql.2003 Part 2 Section 9.5    */
+comment|/**    * Map from SqlTypeName to corresponding precedence list.    *    * @see Glossary#SQL2003 SQL:2003 Part 2 Section 9.5    */
 specifier|private
 specifier|static
 specifier|final

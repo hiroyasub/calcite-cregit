@@ -77,6 +77,20 @@ end_import
 
 begin_import
 import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|base
+operator|.
+name|Preconditions
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|nio
@@ -359,7 +373,7 @@ return|return
 name|ret
 return|;
 block|}
-comment|/**    * Constructs a type with charset and collation    *    * @pre SqlTypeUtil.inCharFamily(this)    */
+comment|/**    * Constructs a type with charset and collation.    *    *<p>This must be a character tyoe.    */
 name|BasicSqlType
 name|createWithCharsetAndCollation
 parameter_list|(
@@ -370,9 +384,9 @@ name|SqlCollation
 name|collation
 parameter_list|)
 block|{
-name|Util
+name|Preconditions
 operator|.
-name|pre
+name|checkArgument
 argument_list|(
 name|SqlTypeUtil
 operator|.
@@ -380,8 +394,6 @@ name|inCharFamily
 argument_list|(
 name|this
 argument_list|)
-argument_list|,
-literal|"Not an chartype"
 argument_list|)
 expr_stmt|;
 name|BasicSqlType

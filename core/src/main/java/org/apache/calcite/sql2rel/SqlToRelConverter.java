@@ -7989,7 +7989,7 @@ name|getInSubQueryThreshold
 argument_list|()
 return|;
 block|}
-comment|/**    * Converts an EXISTS or IN predicate into a join. For EXISTS, the sub-query    * produces an indicator variable, and the result is a relational expression    * which outer joins that indicator to the original query. After performing    * the outer join, the condition will be TRUE if the EXISTS condition holds,    * NULL otherwise.    *    * @param seek           A query, for example 'select * from emp' or    *                       'values (1,2,3)' or '('Foo', 34)'.    * @param subQueryType   Whether sub-query is IN, EXISTS or scalar    * @param logic Whether the answer needs to be in full 3-valued logic (TRUE,    *     FALSE, UNKNOWN) will be required, or whether we can accept an    *     approximation (say representing UNKNOWN as FALSE)    * @param notIn Whether the operation is NOT IN    * @return join expression    * @pre extraExpr == null || extraName != null    */
+comment|/**    * Converts an EXISTS or IN predicate into a join. For EXISTS, the sub-query    * produces an indicator variable, and the result is a relational expression    * which outer joins that indicator to the original query. After performing    * the outer join, the condition will be TRUE if the EXISTS condition holds,    * NULL otherwise.    *    * @param seek           A query, for example 'select * from emp' or    *                       'values (1,2,3)' or '('Foo', 34)'.    * @param subQueryType   Whether sub-query is IN, EXISTS or scalar    * @param logic Whether the answer needs to be in full 3-valued logic (TRUE,    *     FALSE, UNKNOWN) will be required, or whether we can accept an    *     approximation (say representing UNKNOWN as FALSE)    * @param notIn Whether the operation is NOT IN    * @return join expression    */
 specifier|private
 name|RelOptUtil
 operator|.
@@ -16773,7 +16773,7 @@ return|return
 name|inputRef
 return|;
 block|}
-comment|/**    * Converts a row constructor into a relational expression.    *    * @param bb             Blackboard    * @param rowConstructor Row constructor expression    * @return Relational expression which returns a single row.    * @pre isRowConstructor(rowConstructor)    */
+comment|/**    * Converts a row constructor into a relational expression.    *    * @param bb             Blackboard    * @param rowConstructor Row constructor expression    * @return Relational expression which returns a single row.    */
 specifier|private
 name|RelNode
 name|convertRowConstructor
@@ -16785,14 +16785,16 @@ name|SqlCall
 name|rowConstructor
 parameter_list|)
 block|{
-assert|assert
+name|Preconditions
+operator|.
+name|checkArgument
+argument_list|(
 name|isRowConstructor
 argument_list|(
 name|rowConstructor
 argument_list|)
-operator|:
-name|rowConstructor
-assert|;
+argument_list|)
+expr_stmt|;
 specifier|final
 name|List
 argument_list|<

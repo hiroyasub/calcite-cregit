@@ -17,8 +17,22 @@ name|type
 package|;
 end_package
 
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|util
+operator|.
+name|Glossary
+import|;
+end_import
+
 begin_comment
-comment|/**  * RelDataTypePrecedenceList defines a type precedence list for a particular  * type.  *  * @sql.99 Part 2 Section 9.5  */
+comment|/**  * RelDataTypePrecedenceList defines a type precedence list for a particular  * type.  *  * @see Glossary#SQL99 SQL:1999 Part 2 Section 9.5  */
 end_comment
 
 begin_interface

@@ -285,6 +285,20 @@ name|calcite
 operator|.
 name|util
 operator|.
+name|Glossary
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|util
+operator|.
 name|NlsString
 import|;
 end_import
@@ -1602,7 +1616,7 @@ name|lits
 argument_list|)
 return|;
 block|}
-comment|/**    * Looks up a (possibly overloaded) routine based on name and argument    * types.    *    * @param opTab    operator table to search    * @param funcName name of function being invoked    * @param argTypes argument types    * @param argNames argument names, or null if call by position    * @param category whether a function or a procedure. (If a procedure is    *                 being invoked, the overload rules are simpler.)    * @return matching routine, or null if none found    * @sql.99 Part 2 Section 10.4    */
+comment|/**    * Looks up a (possibly overloaded) routine based on name and argument    * types.    *    * @param opTab    operator table to search    * @param funcName name of function being invoked    * @param argTypes argument types    * @param argNames argument names, or null if call by position    * @param category whether a function or a procedure. (If a procedure is    *                 being invoked, the overload rules are simpler.)    * @return matching routine, or null if none found    *    * @see Glossary#SQL99 SQL:1999 Part 2 Section 10.4    */
 specifier|public
 specifier|static
 name|SqlOperator
@@ -1733,7 +1747,7 @@ block|}
 argument_list|)
 return|;
 block|}
-comment|/**    * Looks up all subject routines matching the given name and argument types.    *    * @param opTab     operator table to search    * @param funcName  name of function being invoked    * @param argTypes  argument types    * @param argNames  argument names, or null if call by position    * @param sqlSyntax the SqlSyntax of the SqlOperator being looked up    * @param sqlKind   the SqlKind of the SqlOperator being looked up    * @param category category of routine to look up    * @return list of matching routines    * @sql.99 Part 2 Section 10.4    */
+comment|/**    * Looks up all subject routines matching the given name and argument types.    *    * @param opTab     operator table to search    * @param funcName  name of function being invoked    * @param argTypes  argument types    * @param argNames  argument names, or null if call by position    * @param sqlSyntax the SqlSyntax of the SqlOperator being looked up    * @param sqlKind   the SqlKind of the SqlOperator being looked up    * @param category category of routine to look up    * @return list of matching routines    * @see Glossary#SQL99 SQL:1999 Part 2 Section 10.4    */
 specifier|public
 specifier|static
 name|Iterator
@@ -2134,7 +2148,7 @@ block|}
 argument_list|)
 return|;
 block|}
-comment|/**    * @sql.99 Part 2 Section 10.4 Syntax Rule 6.b.iii.2.B    */
+comment|/**    * @see Glossary#SQL99 SQL:1999 Part 2 Section 10.4 Syntax Rule 6.b.iii.2.B    */
 specifier|private
 specifier|static
 name|Iterator
@@ -2488,7 +2502,7 @@ block|}
 argument_list|)
 return|;
 block|}
-comment|/**    * @sql.99 Part 2 Section 9.4    */
+comment|/**    * @see Glossary#SQL99 SQL:1999 Part 2 Section 9.4    */
 specifier|private
 specifier|static
 name|Iterator

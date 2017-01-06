@@ -1016,7 +1016,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/**    * Applies this rule, with a given relexp in the first slot.    *    * @pre operand0.matches(rel)    */
+comment|/**    * Applies this rule, with a given relational expression in the first slot.    */
 name|void
 name|match
 parameter_list|(
@@ -1032,6 +1032,8 @@ name|matches
 argument_list|(
 name|rel
 argument_list|)
+operator|:
+literal|"precondition"
 assert|;
 specifier|final
 name|int
@@ -1067,7 +1069,7 @@ literal|1
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Recursively matches operands above a given solve order.    *    * @param solve Solver order of operand    * @pre solve&gt; 0    * @pre solve&lt;= rule.operands.length    */
+comment|/**    * Recursively matches operands above a given solve order.    *    * @param solve Solve order of operand (&gt; 0 and&le; the operand count)    */
 specifier|private
 name|void
 name|matchRecurse
@@ -1076,6 +1078,21 @@ name|int
 name|solve
 parameter_list|)
 block|{
+assert|assert
+name|solve
+operator|>
+literal|0
+assert|;
+assert|assert
+name|solve
+operator|<=
+name|rule
+operator|.
+name|operands
+operator|.
+name|size
+argument_list|()
+assert|;
 specifier|final
 name|List
 argument_list|<

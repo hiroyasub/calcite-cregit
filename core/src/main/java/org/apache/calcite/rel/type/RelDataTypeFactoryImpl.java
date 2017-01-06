@@ -121,6 +121,20 @@ name|calcite
 operator|.
 name|util
 operator|.
+name|Glossary
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|util
+operator|.
 name|Util
 import|;
 end_import
@@ -2191,7 +2205,7 @@ return|return
 name|list
 return|;
 block|}
-comment|/**    * {@inheritDoc}    *    *<p>Implement RelDataTypeFactory with SQL 2003 compliant behavior. Let p1,    * s1 be the precision and scale of the first operand Let p2, s2 be the    * precision and scale of the second operand Let p, s be the precision and    * scale of the result, Then the result type is a decimal with:    *    *<ul>    *<li>p = p1 + p2</li>    *<li>s = s1 + s2</li>    *</ul>    *    * p and s are capped at their maximum values    *    * @sql.2003 Part 2 Section 6.26    */
+comment|/**    * {@inheritDoc}    *    *<p>Implement RelDataTypeFactory with SQL 2003 compliant behavior. Let p1,    * s1 be the precision and scale of the first operand Let p2, s2 be the    * precision and scale of the second operand Let p, s be the precision and    * scale of the result, Then the result type is a decimal with:    *    *<ul>    *<li>p = p1 + p2</li>    *<li>s = s1 + s2</li>    *</ul>    *    * p and s are capped at their maximum values    *    * @see Glossary#SQL2003 SQL:2003 Part 2 Section 6.26    */
 specifier|public
 name|RelDataType
 name|createDecimalProduct
@@ -2362,7 +2376,7 @@ return|return
 literal|false
 return|;
 block|}
-comment|/**    * Rules:    *    *<ul>    *<li>Let p1, s1 be the precision and scale of the first operand    *<li>Let p2, s2 be the precision and scale of the second operand    *<li>Let p, s be the precision and scale of the result    *<li>Let d be the number of whole digits in the result    *<li>Then the result type is a decimal with:    *<ul>    *<li>d = p1 - s1 + s2</li>    *<li>s&lt; max(6, s1 + p2 + 1)</li>    *<li>p = d + s</li>    *</ul>    *</li>    *<li>p and s are capped at their maximum values</li>    *</ul>    *    * @sql.2003 Part 2 Section 6.26    */
+comment|/**    * Rules:    *    *<ul>    *<li>Let p1, s1 be the precision and scale of the first operand    *<li>Let p2, s2 be the precision and scale of the second operand    *<li>Let p, s be the precision and scale of the result    *<li>Let d be the number of whole digits in the result    *<li>Then the result type is a decimal with:    *<ul>    *<li>d = p1 - s1 + s2</li>    *<li>s&lt; max(6, s1 + p2 + 1)</li>    *<li>p = d + s</li>    *</ul>    *</li>    *<li>p and s are capped at their maximum values</li>    *</ul>    *    * @see Glossary#SQL2003 SQL:2003 Part 2 Section 6.26    */
 specifier|public
 name|RelDataType
 name|createDecimalQuotient

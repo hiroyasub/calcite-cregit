@@ -913,6 +913,20 @@ name|calcite
 operator|.
 name|util
 operator|.
+name|Bug
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|util
+operator|.
 name|ImmutableNullableList
 import|;
 end_import
@@ -7722,7 +7736,7 @@ return|return
 name|type
 return|;
 block|}
-comment|/**    * Derives the type of a node.    *    * @post return != null    */
+comment|/**    * Derives the type of a node, never null.    */
 name|RelDataType
 name|deriveTypeImpl
 parameter_list|(
@@ -7753,7 +7767,19 @@ argument_list|(
 name|v
 argument_list|)
 decl_stmt|;
+comment|// After Guava 17, use Verify.verifyNotNull for Preconditions.checkNotNull
+name|Bug
+operator|.
+name|upgrade
+argument_list|(
+literal|"guava-17"
+argument_list|)
+expr_stmt|;
 return|return
+name|Preconditions
+operator|.
+name|checkNotNull
+argument_list|(
 name|scope
 operator|.
 name|nullifyType
@@ -7761,6 +7787,7 @@ argument_list|(
 name|operand
 argument_list|,
 name|type
+argument_list|)
 argument_list|)
 return|;
 block|}
@@ -10144,7 +10171,7 @@ name|enclosingNode
 argument_list|)
 return|;
 block|}
-comment|/**    * Registers a query in a parent scope.    *    * @param parentScope Parent scope which this scope turns to in order to    *                    resolve objects    * @param usingScope  Scope whose child list this scope should add itself to    * @param node        Query node    * @param alias       Name of this query within its parent. Must be specified    *                    if usingScope != null    * @pre usingScope == null || alias != null    */
+comment|/**    * Registers a query in a parent scope.    *    * @param parentScope Parent scope which this scope turns to in order to    *                    resolve objects    * @param usingScope  Scope whose child list this scope should add itself to    * @param node        Query node    * @param alias       Name of this query within its parent. Must be specified    *                    if usingScope != null    */
 specifier|private
 name|void
 name|registerQuery
@@ -10168,6 +10195,19 @@ name|boolean
 name|forceNullable
 parameter_list|)
 block|{
+name|Preconditions
+operator|.
+name|checkArgument
+argument_list|(
+name|usingScope
+operator|==
+literal|null
+operator|||
+name|alias
+operator|!=
+literal|null
+argument_list|)
+expr_stmt|;
 name|registerQuery
 argument_list|(
 name|parentScope
@@ -10186,7 +10226,7 @@ literal|true
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Registers a query in a parent scope.    *    * @param parentScope Parent scope which this scope turns to in order to    *                    resolve objects    * @param usingScope  Scope whose child list this scope should add itself to    * @param node        Query node    * @param alias       Name of this query within its parent. Must be specified    *                    if usingScope != null    * @param checkUpdate if true, validate that the update feature is supported    *                    if validating the update statement    * @pre usingScope == null || alias != null    */
+comment|/**    * Registers a query in a parent scope.    *    * @param parentScope Parent scope which this scope turns to in order to    *                    resolve objects    * @param usingScope  Scope whose child list this scope should add itself to    * @param node        Query node    * @param alias       Name of this query within its parent. Must be specified    *                    if usingScope != null    * @param checkUpdate if true, validate that the update feature is supported    *                    if validating the update statement    */
 specifier|private
 name|void
 name|registerQuery
@@ -10213,17 +10253,24 @@ name|boolean
 name|checkUpdate
 parameter_list|)
 block|{
-assert|assert
+name|Preconditions
+operator|.
+name|checkNotNull
+argument_list|(
 name|node
-operator|!=
-literal|null
-assert|;
-assert|assert
+argument_list|)
+expr_stmt|;
+name|Preconditions
+operator|.
+name|checkNotNull
+argument_list|(
 name|enclosingNode
-operator|!=
-literal|null
-assert|;
-assert|assert
+argument_list|)
+expr_stmt|;
+name|Preconditions
+operator|.
+name|checkArgument
+argument_list|(
 name|usingScope
 operator|==
 literal|null
@@ -10231,9 +10278,8 @@ operator|||
 name|alias
 operator|!=
 literal|null
-operator|:
-name|usingScope
-assert|;
+argument_list|)
+expr_stmt|;
 name|SqlCall
 name|call
 decl_stmt|;

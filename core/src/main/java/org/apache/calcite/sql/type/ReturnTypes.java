@@ -193,7 +193,35 @@ name|calcite
 operator|.
 name|util
 operator|.
+name|Glossary
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|util
+operator|.
 name|Util
+import|;
+end_import
+
+begin_import
+import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|base
+operator|.
+name|Preconditions
 import|;
 end_import
 
@@ -947,7 +975,7 @@ operator|.
 name|COLUMN_LIST
 argument_list|)
 decl_stmt|;
-comment|/**    * Type-inference strategy whereby the result type of a call is using its    * operands biggest type, using the SQL:1999 rules described in "Data types    * of results of aggregations". These rules are used in union, except,    * intersect, case and other places.    *    * @sql.99 Part 2 Section 9.3    */
+comment|/**    * Type-inference strategy whereby the result type of a call is using its    * operands biggest type, using the SQL:1999 rules described in "Data types    * of results of aggregations". These rules are used in union, except,    * intersect, case and other places.    *    * @see Glossary#SQL99 SQL:1999 Part 2 Section 9.3    */
 specifier|public
 specifier|static
 specifier|final
@@ -1485,7 +1513,7 @@ argument_list|,
 name|LEAST_RESTRICTIVE
 argument_list|)
 decl_stmt|;
-comment|/**    * Type-inference strategy whereby the result type of a call is the decimal    * sum of two exact numeric operands where at least one of the operands is a    * decimal. Let p1, s1 be the precision and scale of the first operand Let    * p2, s2 be the precision and scale of the second operand Let p, s be the    * precision and scale of the result, Then the result type is a decimal    * with:    *    *<ul>    *<li>s = max(s1, s2)</li>    *<li>p = max(p1 - s1, p2 - s2) + s + 1</li>    *</ul>    *    * p and s are capped at their maximum values    *    * @sql.2003 Part 2 Section 6.26    */
+comment|/**    * Type-inference strategy whereby the result type of a call is the decimal    * sum of two exact numeric operands where at least one of the operands is a    * decimal. Let p1, s1 be the precision and scale of the first operand Let    * p2, s2 be the precision and scale of the second operand Let p, s be the    * precision and scale of the result, Then the result type is a decimal    * with:    *    *<ul>    *<li>s = max(s1, s2)</li>    *<li>p = max(p1 - s1, p2 - s2) + s + 1</li>    *</ul>    *    * p and s are capped at their maximum values    *    * @see Glossary#SQL2003 SQL:2003 Part 2 Section 6.26    */
 specifier|public
 specifier|static
 specifier|final
@@ -1731,7 +1759,6 @@ operator|new
 name|SqlReturnTypeInference
 argument_list|()
 block|{
-comment|/**          * @pre SqlTypeUtil.sameNamedType(argTypes[0], (argTypes[1]))          */
 specifier|public
 name|RelDataType
 name|inferReturnType
@@ -1811,9 +1838,9 @@ argument_list|)
 operator|)
 condition|)
 block|{
-name|Util
+name|Preconditions
 operator|.
-name|pre
+name|checkArgument
 argument_list|(
 name|SqlTypeUtil
 operator|.
@@ -1823,8 +1850,6 @@ name|argType0
 argument_list|,
 name|argType1
 argument_list|)
-argument_list|,
-literal|"SqlTypeUtil.sameNamedType(argTypes[0], argTypes[1])"
 argument_list|)
 expr_stmt|;
 block|}
