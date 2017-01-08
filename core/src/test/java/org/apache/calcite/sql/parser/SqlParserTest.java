@@ -12844,6 +12844,21 @@ literal|"POSITION('mouse' IN 'house')"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testReplace
+parameter_list|()
+block|{
+name|checkExp
+argument_list|(
+literal|"replace('x', 'y', 'z')"
+argument_list|,
+literal|"REPLACE('x', 'y', 'z')"
+argument_list|)
+expr_stmt|;
+block|}
 comment|// check date/time functions.
 annotation|@
 name|Test

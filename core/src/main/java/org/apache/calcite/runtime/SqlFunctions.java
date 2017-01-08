@@ -9480,6 +9480,33 @@ name|replacement
 argument_list|)
 return|;
 block|}
+comment|/** SQL {@code REPLACE(string, search, replacement)} function. */
+specifier|public
+specifier|static
+name|String
+name|replace
+parameter_list|(
+name|String
+name|s
+parameter_list|,
+name|String
+name|search
+parameter_list|,
+name|String
+name|replacement
+parameter_list|)
+block|{
+return|return
+name|s
+operator|.
+name|replace
+argument_list|(
+name|search
+argument_list|,
+name|replacement
+argument_list|)
+return|;
+block|}
 comment|/** Helper for "array element reference". Caller has already ensured that    * array and index are not null. Index is 1-based, per SQL. */
 specifier|public
 specifier|static

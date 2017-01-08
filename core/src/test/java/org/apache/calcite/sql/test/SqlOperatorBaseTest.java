@@ -6933,23 +6933,63 @@ literal|""
 argument_list|)
 expr_stmt|;
 block|}
-if|if
-condition|(
-literal|false
-condition|)
-block|{
 name|tester
 operator|.
-name|checkScalar
+name|checkString
 argument_list|(
-literal|"{fn REPLACE(string1, string2, string3)}"
+literal|"{fn REPLACE('JACK and JUE','J','BL')}"
 argument_list|,
-literal|null
+literal|"BLACK and BLUE"
 argument_list|,
-literal|""
+literal|"VARCHAR(12) NOT NULL"
 argument_list|)
 expr_stmt|;
-block|}
+comment|// REPLACE returns NULL in Oracle but not in Postgres or in Calcite.
+comment|// When [CALCITE-815] is implemented and SqlConformance#emptyStringIsNull is
+comment|// enabled, it will return empty string as NULL.
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"{fn REPLACE('ciao', 'ciao', '')}"
+argument_list|,
+literal|""
+argument_list|,
+literal|"VARCHAR(4) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"{fn REPLACE('hello world', 'o', '')}"
+argument_list|,
+literal|"hell wrld"
+argument_list|,
+literal|"VARCHAR(11) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkNull
+argument_list|(
+literal|"{fn REPLACE(cast(null as varchar(5)), 'ciao', '')}"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkNull
+argument_list|(
+literal|"{fn REPLACE('ciao', cast(null as varchar(3)), 'zz')}"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkNull
+argument_list|(
+literal|"{fn REPLACE('ciao', 'bella', cast(null as varchar(3)))}"
+argument_list|)
+expr_stmt|;
 if|if
 condition|(
 literal|false
@@ -14992,6 +15032,66 @@ argument_list|,
 literal|0
 argument_list|,
 literal|"INTEGER NOT NULL"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testReplaceFunc
+parameter_list|()
+block|{
+name|tester
+operator|.
+name|setFor
+argument_list|(
+name|SqlStdOperatorTable
+operator|.
+name|REPLACE
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"REPLACE('ciao', 'ciao', '')"
+argument_list|,
+literal|""
+argument_list|,
+literal|"VARCHAR(4) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"REPLACE('hello world', 'o', '')"
+argument_list|,
+literal|"hell wrld"
+argument_list|,
+literal|"VARCHAR(11) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkNull
+argument_list|(
+literal|"REPLACE(cast(null as varchar(5)), 'ciao', '')"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkNull
+argument_list|(
+literal|"REPLACE('ciao', cast(null as varchar(3)), 'zz')"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkNull
+argument_list|(
+literal|"REPLACE('ciao', 'bella', cast(null as varchar(3)))"
 argument_list|)
 expr_stmt|;
 block|}
