@@ -1433,6 +1433,38 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testCartesianProduct
+parameter_list|()
+block|{
+name|String
+name|query
+init|=
+literal|"select * from \"department\" , \"employee\""
+decl_stmt|;
+name|String
+name|expected
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM \"foodmart\".\"department\",\n"
+operator|+
+literal|"\"foodmart\".\"employee\""
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testSimpleIn
 parameter_list|()
 block|{
