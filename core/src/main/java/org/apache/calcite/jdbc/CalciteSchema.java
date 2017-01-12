@@ -583,6 +583,9 @@ name|Function
 argument_list|>
 name|builder
 parameter_list|,
+name|String
+name|name
+parameter_list|,
 name|boolean
 name|caseSensitive
 parameter_list|)
@@ -1487,6 +1490,8 @@ comment|// Add implicit functions.
 name|addImplicitFunctionsToBuilder
 argument_list|(
 name|builder
+argument_list|,
+name|name
 argument_list|,
 name|caseSensitive
 argument_list|)
