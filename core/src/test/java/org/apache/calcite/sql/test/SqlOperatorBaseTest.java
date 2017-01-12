@@ -6717,6 +6717,19 @@ argument_list|)
 expr_stmt|;
 name|tester
 operator|.
+name|checkFails
+argument_list|(
+literal|"^{fn ROUND(1251)}^"
+argument_list|,
+literal|"Cannot apply '\\{fn ROUND\\}' to "
+operator|+
+literal|"arguments of type '\\{fn ROUND\\}\\(<INTEGER>\\)'.*"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
 name|checkScalar
 argument_list|(
 literal|"{fn SIGN(-1)}"
@@ -18609,6 +18622,25 @@ argument_list|)
 expr_stmt|;
 name|tester
 operator|.
+name|checkScalar
+argument_list|(
+literal|"round(cast(-42.346 as decimal(2, 3)), 2)"
+argument_list|,
+name|BigDecimal
+operator|.
+name|valueOf
+argument_list|(
+operator|-
+literal|4235
+argument_list|,
+literal|2
+argument_list|)
+argument_list|,
+literal|"DECIMAL(2, 3) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
 name|checkNull
 argument_list|(
 literal|"round(cast(null as integer), 1)"
@@ -18619,6 +18651,85 @@ operator|.
 name|checkNull
 argument_list|(
 literal|"round(cast(null as double), 1)"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkNull
+argument_list|(
+literal|"round(43.21, cast(null as integer))"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkNull
+argument_list|(
+literal|"round(cast(null as double))"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"round(42)"
+argument_list|,
+literal|42
+argument_list|,
+literal|"INTEGER NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"round(cast(42.346 as decimal(2, 3)))"
+argument_list|,
+name|BigDecimal
+operator|.
+name|valueOf
+argument_list|(
+literal|42
+argument_list|,
+literal|0
+argument_list|)
+argument_list|,
+literal|"DECIMAL(2, 3) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"round(42.324)"
+argument_list|,
+name|BigDecimal
+operator|.
+name|valueOf
+argument_list|(
+literal|42
+argument_list|,
+literal|0
+argument_list|)
+argument_list|,
+literal|"DECIMAL(5, 3) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"round(42.724)"
+argument_list|,
+name|BigDecimal
+operator|.
+name|valueOf
+argument_list|(
+literal|43
+argument_list|,
+literal|0
+argument_list|)
+argument_list|,
+literal|"DECIMAL(5, 3) NOT NULL"
 argument_list|)
 expr_stmt|;
 block|}
@@ -19005,6 +19116,25 @@ argument_list|)
 expr_stmt|;
 name|tester
 operator|.
+name|checkScalar
+argument_list|(
+literal|"truncate(cast(-42.345 as decimal(2, 3)), 2)"
+argument_list|,
+name|BigDecimal
+operator|.
+name|valueOf
+argument_list|(
+operator|-
+literal|4234
+argument_list|,
+literal|2
+argument_list|)
+argument_list|,
+literal|"DECIMAL(2, 3) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
 name|checkNull
 argument_list|(
 literal|"truncate(cast(null as integer), 1)"
@@ -19015,6 +19145,85 @@ operator|.
 name|checkNull
 argument_list|(
 literal|"truncate(cast(null as double), 1)"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkNull
+argument_list|(
+literal|"truncate(43.21, cast(null as integer))"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"truncate(42)"
+argument_list|,
+literal|42
+argument_list|,
+literal|"INTEGER NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"truncate(42.324)"
+argument_list|,
+name|BigDecimal
+operator|.
+name|valueOf
+argument_list|(
+literal|42
+argument_list|,
+literal|0
+argument_list|)
+argument_list|,
+literal|"DECIMAL(5, 3) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"truncate(cast(42.324 as float))"
+argument_list|,
+literal|42F
+argument_list|,
+literal|"FLOAT NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"truncate(cast(42.345 as decimal(2, 3)))"
+argument_list|,
+name|BigDecimal
+operator|.
+name|valueOf
+argument_list|(
+literal|42
+argument_list|,
+literal|0
+argument_list|)
+argument_list|,
+literal|"DECIMAL(2, 3) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkNull
+argument_list|(
+literal|"truncate(cast(null as integer))"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkNull
+argument_list|(
+literal|"truncate(cast(null as double))"
 argument_list|)
 expr_stmt|;
 block|}

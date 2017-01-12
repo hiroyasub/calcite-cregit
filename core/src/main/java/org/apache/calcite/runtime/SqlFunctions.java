@@ -6121,7 +6121,26 @@ argument_list|)
 return|;
 block|}
 comment|// SQL ROUND
-comment|/** SQL<code>ROUND</code> operator applied to long values. */
+comment|/** SQL<code>ROUND</code> operator applied to int values. */
+specifier|public
+specifier|static
+name|int
+name|sround
+parameter_list|(
+name|int
+name|b0
+parameter_list|)
+block|{
+return|return
+name|sround
+argument_list|(
+name|b0
+argument_list|,
+literal|0
+argument_list|)
+return|;
+block|}
+comment|/** SQL<code>ROUND</code> operator applied to int values. */
 specifier|public
 specifier|static
 name|int
@@ -6159,6 +6178,25 @@ name|sround
 parameter_list|(
 name|long
 name|b0
+parameter_list|)
+block|{
+return|return
+name|sround
+argument_list|(
+name|b0
+argument_list|,
+literal|0
+argument_list|)
+return|;
+block|}
+comment|/** SQL<code>ROUND</code> operator applied to long values. */
+specifier|public
+specifier|static
+name|long
+name|sround
+parameter_list|(
+name|long
+name|b0
 parameter_list|,
 name|int
 name|b1
@@ -6179,6 +6217,25 @@ argument_list|)
 operator|.
 name|longValue
 argument_list|()
+return|;
+block|}
+comment|/** SQL<code>ROUND</code> operator applied to BigDecimal values. */
+specifier|public
+specifier|static
+name|BigDecimal
+name|sround
+parameter_list|(
+name|BigDecimal
+name|b0
+parameter_list|)
+block|{
+return|return
+name|sround
+argument_list|(
+name|b0
+argument_list|,
+literal|0
+argument_list|)
 return|;
 block|}
 comment|/** SQL<code>ROUND</code> operator applied to BigDecimal values. */
@@ -6225,6 +6282,25 @@ name|sround
 parameter_list|(
 name|double
 name|b0
+parameter_list|)
+block|{
+return|return
+name|sround
+argument_list|(
+name|b0
+argument_list|,
+literal|0
+argument_list|)
+return|;
+block|}
+comment|/** SQL<code>ROUND</code> operator applied to double values. */
+specifier|public
+specifier|static
+name|double
+name|sround
+parameter_list|(
+name|double
+name|b0
 parameter_list|,
 name|int
 name|b1
@@ -6249,6 +6325,24 @@ return|;
 block|}
 comment|// SQL TRUNCATE
 comment|/** SQL<code>TRUNCATE</code> operator applied to int values. */
+specifier|public
+specifier|static
+name|int
+name|struncate
+parameter_list|(
+name|int
+name|b0
+parameter_list|)
+block|{
+return|return
+name|struncate
+argument_list|(
+name|b0
+argument_list|,
+literal|0
+argument_list|)
+return|;
+block|}
 specifier|public
 specifier|static
 name|int
@@ -6286,6 +6380,24 @@ name|struncate
 parameter_list|(
 name|long
 name|b0
+parameter_list|)
+block|{
+return|return
+name|struncate
+argument_list|(
+name|b0
+argument_list|,
+literal|0
+argument_list|)
+return|;
+block|}
+specifier|public
+specifier|static
+name|long
+name|struncate
+parameter_list|(
+name|long
+name|b0
 parameter_list|,
 name|int
 name|b1
@@ -6309,6 +6421,24 @@ argument_list|()
 return|;
 block|}
 comment|/** SQL<code>TRUNCATE</code> operator applied to BigDecimal values. */
+specifier|public
+specifier|static
+name|BigDecimal
+name|struncate
+parameter_list|(
+name|BigDecimal
+name|b0
+parameter_list|)
+block|{
+return|return
+name|struncate
+argument_list|(
+name|b0
+argument_list|,
+literal|0
+argument_list|)
+return|;
+block|}
 specifier|public
 specifier|static
 name|BigDecimal
@@ -6345,6 +6475,24 @@ argument_list|)
 return|;
 block|}
 comment|/** SQL<code>TRUNCATE</code> operator applied to double values. */
+specifier|public
+specifier|static
+name|double
+name|struncate
+parameter_list|(
+name|double
+name|b0
+parameter_list|)
+block|{
+return|return
+name|struncate
+argument_list|(
+name|b0
+argument_list|,
+literal|0
+argument_list|)
+return|;
+block|}
 specifier|public
 specifier|static
 name|double
