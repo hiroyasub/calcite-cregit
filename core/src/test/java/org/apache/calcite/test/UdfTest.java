@@ -141,6 +141,16 @@ name|org
 operator|.
 name|junit
 operator|.
+name|Ignore
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|junit
+operator|.
 name|Test
 import|;
 end_import
@@ -551,6 +561,11 @@ argument_list|)
 return|;
 block|}
 comment|/** Tests a user-defined function that is defined in terms of a class with    * non-static methods. */
+annotation|@
+name|Ignore
+argument_list|(
+literal|"[CALCITE-1561] Intermittent test failures"
+argument_list|)
 annotation|@
 name|Test
 specifier|public
