@@ -2303,10 +2303,11 @@ name|is
 argument_list|(
 name|Logic
 operator|.
-name|TRUE_FALSE
+name|TRUE_FALSE_UNKNOWN
 argument_list|)
 argument_list|)
 expr_stmt|;
+comment|// TRUE_FALSE would be better
 name|assertThat
 argument_list|(
 name|deduceLogic
@@ -2363,7 +2364,7 @@ name|is
 argument_list|(
 name|Logic
 operator|.
-name|TRUE_FALSE
+name|TRUE_FALSE_UNKNOWN
 argument_list|)
 argument_list|)
 expr_stmt|;

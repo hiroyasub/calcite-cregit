@@ -12235,6 +12235,38 @@ name|check
 argument_list|()
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1546">[CALCITE-1546]    * Sub-queries connected by OR</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testWhereOrSubQuery
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select * from emp\n"
+operator|+
+literal|"where sal = 4\n"
+operator|+
+literal|"or empno NOT IN (select deptno from dept)"
+decl_stmt|;
+name|checkSubQuery
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|withLateDecorrelation
+argument_list|(
+literal|true
+argument_list|)
+operator|.
+name|check
+argument_list|()
+expr_stmt|;
+block|}
 annotation|@
 name|Test
 specifier|public

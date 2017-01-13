@@ -444,7 +444,7 @@ name|logic
 operator|=
 name|Logic
 operator|.
-name|TRUE_FALSE
+name|TRUE_FALSE_UNKNOWN
 expr_stmt|;
 block|}
 block|}
