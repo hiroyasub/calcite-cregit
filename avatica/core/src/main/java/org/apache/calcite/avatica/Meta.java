@@ -3591,7 +3591,7 @@ name|JsonProperty
 argument_list|(
 literal|"offset"
 argument_list|)
-name|int
+name|long
 name|offset
 parameter_list|,
 annotation|@
