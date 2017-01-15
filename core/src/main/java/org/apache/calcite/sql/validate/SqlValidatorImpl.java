@@ -9894,7 +9894,7 @@ argument_list|,
 name|enclosingNode
 argument_list|)
 argument_list|,
-literal|false
+name|forceNullable
 argument_list|)
 expr_stmt|;
 block|}

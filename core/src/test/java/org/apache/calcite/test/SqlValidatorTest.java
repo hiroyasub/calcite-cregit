@@ -11103,6 +11103,96 @@ literal|"RANK or DENSE_RANK functions require ORDER BY clause in window specific
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1954">[CALCITE-1954]    * Column from outer join should be null, whether or not it is aliased</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testLeftOuterJoinWithAlias
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|query
+init|=
+literal|"select *\n"
+operator|+
+literal|"from (select row_number() over (order by sal) from emp) as emp1(r1)\n"
+operator|+
+literal|"left outer join\n"
+operator|+
+literal|"(select  dense_rank() over(order by sal) from emp) as emp2(r2)\n"
+operator|+
+literal|"on (emp1.r1 = emp2.r2)"
+decl_stmt|;
+comment|// In this case, R2 is nullable in the join since we have a left outer join.
+specifier|final
+name|String
+name|type
+init|=
+literal|"RecordType(BIGINT NOT NULL R1, BIGINT R2) NOT NULL"
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|type
+argument_list|(
+name|type
+argument_list|)
+expr_stmt|;
+comment|// Similar query, without "AS t(c)"
+specifier|final
+name|String
+name|query2
+init|=
+literal|"select *\n"
+operator|+
+literal|"from (select row_number() over (order by sal) as r1 from emp) as emp1\n"
+operator|+
+literal|"left outer join\n"
+operator|+
+literal|"(select dense_rank() over(order by sal) as r2 from emp) as emp2\n"
+operator|+
+literal|"on (emp1.r1 = emp2.r2)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|query2
+argument_list|)
+operator|.
+name|type
+argument_list|(
+name|type
+argument_list|)
+expr_stmt|;
+comment|// Similar query, without "AS t"
+specifier|final
+name|String
+name|query3
+init|=
+literal|"select *\n"
+operator|+
+literal|"from (select row_number() over (order by sal) as r1 from emp)\n"
+operator|+
+literal|"left outer join\n"
+operator|+
+literal|"(select dense_rank() over(order by sal) as r2 from emp)\n"
+operator|+
+literal|"on r1 = r2"
+decl_stmt|;
+name|sql
+argument_list|(
+name|query3
+argument_list|)
+operator|.
+name|type
+argument_list|(
+name|type
+argument_list|)
+expr_stmt|;
+block|}
 annotation|@
 name|Test
 specifier|public
