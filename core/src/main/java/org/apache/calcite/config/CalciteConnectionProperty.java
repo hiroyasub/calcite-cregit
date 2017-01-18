@@ -164,6 +164,34 @@ name|CalciteConnectionProperty
 implements|implements
 name|ConnectionProperty
 block|{
+comment|/** Whether approximate results from {@code COUNT(DISTINCT ...)} aggregate    * functions are acceptable. */
+name|APPROXIMATE_DISTINCT_COUNT
+argument_list|(
+literal|"approximateDistinctCount"
+argument_list|,
+name|Type
+operator|.
+name|BOOLEAN
+argument_list|,
+literal|false
+argument_list|,
+literal|false
+argument_list|)
+block|,
+comment|/** Whether approximate results from "Top N" queries    * ({@code ORDER BY aggFun DESC LIMIT n}) are acceptable. */
+name|APPROXIMATE_TOP_N
+argument_list|(
+literal|"approximateTopN"
+argument_list|,
+name|Type
+operator|.
+name|BOOLEAN
+argument_list|,
+literal|false
+argument_list|,
+literal|false
+argument_list|)
+block|,
 comment|/** Whether to store query results in temporary tables. */
 name|AUTO_TEMP
 argument_list|(

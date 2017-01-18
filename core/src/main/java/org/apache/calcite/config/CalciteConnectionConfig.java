@@ -102,6 +102,16 @@ name|CalciteConnectionConfig
 extends|extends
 name|ConnectionConfig
 block|{
+comment|/** @see CalciteConnectionProperty#APPROXIMATE_DISTINCT_COUNT */
+name|boolean
+name|approximateDistinctCount
+parameter_list|()
+function_decl|;
+comment|/** @see CalciteConnectionProperty#APPROXIMATE_TOP_N */
+name|boolean
+name|approximateTopN
+parameter_list|()
+function_decl|;
 comment|/** @see CalciteConnectionProperty#AUTO_TEMP */
 name|boolean
 name|autoTemp
