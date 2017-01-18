@@ -727,7 +727,7 @@ name|druidQuery
 init|=
 literal|"{'queryType':'timeseries',"
 operator|+
-literal|"'dataSource':'wikiticker','descending':false,'granularity':'DAY',"
+literal|"'dataSource':'wikiticker','descending':false,'granularity':'day',"
 operator|+
 literal|"'aggregations':[{'type':'longSum','name':'EXPR$0','fieldName':'added'}],"
 operator|+
@@ -858,7 +858,7 @@ name|druidQuery
 init|=
 literal|"{'queryType':'timeseries',"
 operator|+
-literal|"'dataSource':'wikiticker','descending':false,'granularity':'DAY',"
+literal|"'dataSource':'wikiticker','descending':false,'granularity':'day',"
 operator|+
 literal|"'aggregations':[{'type':'longSum','name':'EXPR$1','fieldName':'added'}],"
 operator|+
@@ -921,9 +921,9 @@ literal|"PLAN="
 operator|+
 literal|"EnumerableInterpreter\n"
 operator|+
-literal|"  BindableSort(sort0=[$0], dir0=[DESC])\n"
+literal|"  BindableProject(s=[$2], page=[$0], day=[$1])\n"
 operator|+
-literal|"    BindableProject(s=[$2], page=[$0], day=[$1])\n"
+literal|"    BindableSort(sort0=[$2], dir0=[DESC])\n"
 operator|+
 literal|"      DruidQuery(table=[[wiki, wikiticker]], intervals=[[1900-01-01T00:00:00.000Z/3000-01-01T00:00:00.000Z]], projects=[[$17, FLOOR($0, FLAG(DAY)), $1]], groups=[{0, 1}], aggs=[[SUM($2)]])\n"
 decl_stmt|;
@@ -933,7 +933,7 @@ name|druidQuery
 init|=
 literal|"{'queryType':'groupBy',"
 operator|+
-literal|"'dataSource':'wikiticker','granularity':'DAY','dimensions':['page'],"
+literal|"'dataSource':'wikiticker','granularity':'day','dimensions':['page'],"
 operator|+
 literal|"'limitSpec':{'type':'default'},"
 operator|+
@@ -1773,6 +1773,159 @@ argument_list|)
 operator|.
 name|runs
 argument_list|()
+operator|.
+name|explainContains
+argument_list|(
+name|explain
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|druidChecker
+argument_list|(
+name|druidQuery
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1578">[CALCITE-1578]    * Druid adapter: wrong semantics of topN query limit with granularity</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testGroupBySortLimit
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select \"brand_name\", \"gender\", sum(\"unit_sales\") as s\n"
+operator|+
+literal|"from \"foodmart\"\n"
+operator|+
+literal|"group by \"brand_name\", \"gender\"\n"
+operator|+
+literal|"order by s desc limit 3"
+decl_stmt|;
+specifier|final
+name|String
+name|druidQuery
+init|=
+literal|"{'queryType':'groupBy','dataSource':'foodmart',"
+operator|+
+literal|"'granularity':'all','dimensions':['brand_name','gender'],"
+operator|+
+literal|"'limitSpec':{'type':'default','limit':3,'columns':[{'dimension':'S','direction':'descending'}]},"
+operator|+
+literal|"'aggregations':[{'type':'longSum','name':'S','fieldName':'unit_sales'}],"
+operator|+
+literal|"'intervals':['1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z']}"
+decl_stmt|;
+specifier|final
+name|String
+name|explain
+init|=
+literal|"PLAN=EnumerableInterpreter\n"
+operator|+
+literal|"  DruidQuery(table=[[foodmart, foodmart]], "
+operator|+
+literal|"intervals=[[1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z]], "
+operator|+
+literal|"groups=[{2, 39}], aggs=[[SUM($89)]], sort0=[2], dir0=[DESC], fetch=[3])\n"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|runs
+argument_list|()
+operator|.
+name|returnsOrdered
+argument_list|(
+literal|"brand_name=Hermanos; gender=M; S=4286"
+argument_list|,
+literal|"brand_name=Hermanos; gender=F; S=4183"
+argument_list|,
+literal|"brand_name=Tell Tale; gender=F; S=4033"
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+name|explain
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|druidChecker
+argument_list|(
+name|druidQuery
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testGroupBySingleSortLimit
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select \"brand_name\", sum(\"unit_sales\") as s\n"
+operator|+
+literal|"from \"foodmart\"\n"
+operator|+
+literal|"group by \"brand_name\"\n"
+operator|+
+literal|"order by s desc limit 3"
+decl_stmt|;
+specifier|final
+name|String
+name|druidQuery
+init|=
+literal|"{'queryType':'topN','dataSource':'foodmart',"
+operator|+
+literal|"'granularity':'all','dimension':'brand_name','metric':'S',"
+operator|+
+literal|"'aggregations':[{'type':'longSum','name':'S','fieldName':'unit_sales'}],"
+operator|+
+literal|"'intervals':['1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z'],"
+operator|+
+literal|"'threshold':3}"
+decl_stmt|;
+specifier|final
+name|String
+name|explain
+init|=
+literal|"PLAN=EnumerableInterpreter\n"
+operator|+
+literal|"  DruidQuery(table=[[foodmart, foodmart]], "
+operator|+
+literal|"intervals=[[1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z]], "
+operator|+
+literal|"groups=[{2}], aggs=[[SUM($89)]], sort0=[1], dir0=[DESC], fetch=[3])\n"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|runs
+argument_list|()
+operator|.
+name|returnsOrdered
+argument_list|(
+literal|"brand_name=Hermanos; S=8469"
+argument_list|,
+literal|"brand_name=Tell Tale; S=7877"
+argument_list|,
+literal|"brand_name=Ebony; S=7438"
+argument_list|)
 operator|.
 name|explainContains
 argument_list|(
@@ -2664,7 +2817,7 @@ name|druidQuery
 init|=
 literal|"{'queryType':'timeseries','dataSource':'foodmart',"
 operator|+
-literal|"'descending':false,'granularity':'MONTH',"
+literal|"'descending':false,'granularity':'month',"
 operator|+
 literal|"'aggregations':[{'type':'longSum','name':'S','fieldName':'unit_sales'},"
 operator|+
@@ -2724,7 +2877,7 @@ name|druidQuery
 init|=
 literal|"{'queryType':'timeseries','dataSource':'foodmart',"
 operator|+
-literal|"'descending':false,'granularity':'DAY',"
+literal|"'descending':false,'granularity':'day',"
 operator|+
 literal|"'aggregations':[{'type':'longSum','name':'S','fieldName':'unit_sales'},"
 operator|+
@@ -2788,7 +2941,7 @@ name|druidQuery
 init|=
 literal|"{'queryType':'timeseries','dataSource':'foodmart',"
 operator|+
-literal|"'descending':false,'granularity':'MONTH',"
+literal|"'descending':false,'granularity':'month',"
 operator|+
 literal|"'aggregations':[{'type':'longSum','name':'S','fieldName':'unit_sales'},"
 operator|+
@@ -2865,7 +3018,7 @@ name|druidQuery
 init|=
 literal|"{'queryType':'topN','dataSource':'foodmart',"
 operator|+
-literal|"'granularity':'MONTH','dimension':'state_province','metric':'S',"
+literal|"'granularity':'month','dimension':'state_province','metric':'S',"
 operator|+
 literal|"'aggregations':[{'type':'longSum','name':'S','fieldName':'unit_sales'},"
 operator|+
@@ -2946,7 +3099,7 @@ name|druidQuery
 init|=
 literal|"{'queryType':'topN','dataSource':'foodmart',"
 operator|+
-literal|"'granularity':'DAY','dimension':'state_province','metric':'S',"
+literal|"'granularity':'day','dimension':'state_province','metric':'S',"
 operator|+
 literal|"'aggregations':[{'type':'longSum','name':'S','fieldName':'unit_sales'},"
 operator|+

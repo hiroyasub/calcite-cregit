@@ -2934,10 +2934,12 @@ name|ArrayList
 argument_list|<>
 argument_list|()
 decl_stmt|;
-name|String
+name|Granularity
 name|granularity
 init|=
-literal|"all"
+name|Granularity
+operator|.
+name|ALL
 decl_stmt|;
 name|Direction
 name|timeSeriesDirection
@@ -3094,7 +3096,9 @@ condition|)
 block|{
 name|granularity
 operator|=
-literal|"none"
+name|Granularity
+operator|.
+name|NONE
 expr_stmt|;
 name|builder
 operator|.
@@ -3150,7 +3154,7 @@ operator|)
 name|project
 decl_stmt|;
 specifier|final
-name|String
+name|Granularity
 name|funcGranularity
 init|=
 name|DruidDateTimeUtils
@@ -3256,7 +3260,9 @@ condition|)
 block|{
 name|granularity
 operator|=
-literal|"NONE"
+name|Granularity
+operator|.
+name|NONE
 expr_stmt|;
 name|builder
 operator|.
@@ -3701,6 +3707,8 @@ argument_list|(
 literal|"granularity"
 argument_list|,
 name|granularity
+operator|.
+name|value
 argument_list|)
 expr_stmt|;
 name|writeFieldIf
@@ -3780,6 +3788,8 @@ argument_list|(
 literal|"granularity"
 argument_list|,
 name|granularity
+operator|.
+name|value
 argument_list|)
 expr_stmt|;
 name|generator
@@ -3927,6 +3937,8 @@ argument_list|(
 literal|"granularity"
 argument_list|,
 name|granularity
+operator|.
+name|value
 argument_list|)
 expr_stmt|;
 name|writeField
@@ -4082,6 +4094,8 @@ argument_list|(
 literal|"granularity"
 argument_list|,
 name|granularity
+operator|.
+name|value
 argument_list|)
 expr_stmt|;
 name|generator
