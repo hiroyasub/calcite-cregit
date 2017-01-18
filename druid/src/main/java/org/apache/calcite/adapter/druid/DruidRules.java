@@ -3133,6 +3133,42 @@ return|return
 literal|false
 return|;
 block|}
+comment|// If the aggregate is grouping by timestamp (or a function of the
+comment|// timestamp such as month) then we cannot push Sort to Druid.
+comment|// Druid's topN and groupBy operators would sort only within the
+comment|// granularity, whereas we want global sort.
+specifier|final
+name|boolean
+name|aggregateRefsTimestamp
+init|=
+name|checkTimestampRefOnQuery
+argument_list|(
+name|topAgg
+operator|.
+name|getGroupSet
+argument_list|()
+argument_list|,
+name|topAgg
+operator|.
+name|getInput
+argument_list|()
+argument_list|,
+name|query
+argument_list|)
+decl_stmt|;
+if|if
+condition|(
+name|aggregateRefsTimestamp
+operator|&&
+name|metricsRefs
+operator|!=
+literal|0
+condition|)
+block|{
+return|return
+literal|false
+return|;
+block|}
 return|return
 literal|true
 return|;

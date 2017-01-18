@@ -3557,6 +3557,12 @@ argument_list|()
 operator|==
 literal|1
 operator|&&
+name|granularity
+operator|==
+name|Granularity
+operator|.
+name|ALL
+operator|&&
 name|sortsMetric
 operator|&&
 name|collations

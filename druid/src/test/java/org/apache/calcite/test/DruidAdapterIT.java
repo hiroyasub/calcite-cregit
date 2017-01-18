@@ -1730,7 +1730,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testGroupByLimit
+name|testDistinctLimit
 parameter_list|()
 block|{
 comment|// We do not yet push LIMIT into a Druid "groupBy" query.
@@ -1925,6 +1925,255 @@ argument_list|,
 literal|"brand_name=Tell Tale; S=7877"
 argument_list|,
 literal|"brand_name=Ebony; S=7438"
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+name|explain
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|druidChecker
+argument_list|(
+name|druidQuery
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1578">[CALCITE-1578]    * Druid adapter: wrong semantics of groupBy query limit with granularity</a>.    *    *<p>Before CALCITE-1578 was fixed, this would use a "topN" query but return    * the wrong results. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testGroupByDaySortDescLimit
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select \"brand_name\", floor(\"timestamp\" to DAY) as d,"
+operator|+
+literal|" sum(\"unit_sales\") as s\n"
+operator|+
+literal|"from \"foodmart\"\n"
+operator|+
+literal|"group by \"brand_name\", floor(\"timestamp\" to DAY)\n"
+operator|+
+literal|"order by s desc limit 30"
+decl_stmt|;
+specifier|final
+name|String
+name|druidQuery
+init|=
+literal|"{'queryType':'groupBy','dataSource':'foodmart',"
+operator|+
+literal|"'granularity':'day','dimensions':['brand_name'],"
+operator|+
+literal|"'limitSpec':{'type':'default'},"
+operator|+
+literal|"'aggregations':[{'type':'longSum','name':'S','fieldName':'unit_sales'}],"
+operator|+
+literal|"'intervals':['1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z']}"
+decl_stmt|;
+specifier|final
+name|String
+name|explain
+init|=
+literal|"PLAN=EnumerableInterpreter\n"
+operator|+
+literal|"  BindableSort(sort0=[$2], dir0=[DESC], fetch=[30])\n"
+operator|+
+literal|"    DruidQuery(table=[[foodmart, foodmart]], "
+operator|+
+literal|"intervals=[[1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z]], "
+operator|+
+literal|"projects=[[$2, FLOOR($0, FLAG(DAY)), $89]], groups=[{0, 1}], "
+operator|+
+literal|"aggs=[[SUM($2)]])\n"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|runs
+argument_list|()
+operator|.
+name|returnsStartingWith
+argument_list|(
+literal|"brand_name=Ebony; D=1997-07-27 00:00:00; S=135"
+argument_list|,
+literal|"brand_name=Tri-State; D=1997-05-09 00:00:00; S=120"
+argument_list|,
+literal|"brand_name=Hermanos; D=1997-05-09 00:00:00; S=115"
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+name|explain
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|druidChecker
+argument_list|(
+name|druidQuery
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1579">[CALCITE-1579]    * Druid adapter: wrong semantics of groupBy query limit with    * granularity</a>.    *    *<p>Before CALCITE-1579 was fixed, this would use a "groupBy" query but    * wrongly try to use a {@code limitSpec} to sort and filter. (A "topN" query    * was not possible because the sort was {@code ASC}.) */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testGroupByDaySortLimit
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select \"brand_name\", floor(\"timestamp\" to DAY) as d,"
+operator|+
+literal|" sum(\"unit_sales\") as s\n"
+operator|+
+literal|"from \"foodmart\"\n"
+operator|+
+literal|"group by \"brand_name\", floor(\"timestamp\" to DAY)\n"
+operator|+
+literal|"order by s desc limit 30"
+decl_stmt|;
+specifier|final
+name|String
+name|druidQuery
+init|=
+literal|"{'queryType':'groupBy','dataSource':'foodmart',"
+operator|+
+literal|"'granularity':'day','dimensions':['brand_name'],"
+operator|+
+literal|"'limitSpec':{'type':'default'},"
+operator|+
+literal|"'aggregations':[{'type':'longSum','name':'S','fieldName':'unit_sales'}],"
+operator|+
+literal|"'intervals':['1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z']}"
+decl_stmt|;
+specifier|final
+name|String
+name|explain
+init|=
+literal|"PLAN=EnumerableInterpreter\n"
+operator|+
+literal|"  BindableSort(sort0=[$2], dir0=[DESC], fetch=[30])\n"
+operator|+
+literal|"    DruidQuery(table=[[foodmart, foodmart]], "
+operator|+
+literal|"intervals=[[1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z]], "
+operator|+
+literal|"projects=[[$2, FLOOR($0, FLAG(DAY)), $89]], groups=[{0, 1}], "
+operator|+
+literal|"aggs=[[SUM($2)]])\n"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|runs
+argument_list|()
+operator|.
+name|returnsStartingWith
+argument_list|(
+literal|"brand_name=Ebony; D=1997-07-27 00:00:00; S=135"
+argument_list|,
+literal|"brand_name=Tri-State; D=1997-05-09 00:00:00; S=120"
+argument_list|,
+literal|"brand_name=Hermanos; D=1997-05-09 00:00:00; S=115"
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+name|explain
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|druidChecker
+argument_list|(
+name|druidQuery
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1580">[CALCITE-1580]    * Druid adapter: Wrong semantics for ordering within groupBy queries</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testGroupByDaySortDimension
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select \"brand_name\", floor(\"timestamp\" to DAY) as d,"
+operator|+
+literal|" sum(\"unit_sales\") as s\n"
+operator|+
+literal|"from \"foodmart\"\n"
+operator|+
+literal|"group by \"brand_name\", floor(\"timestamp\" to DAY)\n"
+operator|+
+literal|"order by \"brand_name\""
+decl_stmt|;
+specifier|final
+name|String
+name|druidQuery
+init|=
+literal|"{'queryType':'groupBy','dataSource':'foodmart',"
+operator|+
+literal|"'granularity':'day','dimensions':['brand_name'],"
+operator|+
+literal|"'limitSpec':{'type':'default'},"
+operator|+
+literal|"'aggregations':[{'type':'longSum','name':'S','fieldName':'unit_sales'}],"
+operator|+
+literal|"'intervals':['1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z']}"
+decl_stmt|;
+specifier|final
+name|String
+name|explain
+init|=
+literal|"PLAN=EnumerableInterpreter\n"
+operator|+
+literal|"  BindableSort(sort0=[$0], dir0=[ASC])\n"
+operator|+
+literal|"    DruidQuery(table=[[foodmart, foodmart]], "
+operator|+
+literal|"intervals=[[1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z]], "
+operator|+
+literal|"projects=[[$2, FLOOR($0, FLAG(DAY)), $89]], groups=[{0, 1}], "
+operator|+
+literal|"aggs=[[SUM($2)]])\n"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|runs
+argument_list|()
+operator|.
+name|returnsStartingWith
+argument_list|(
+literal|"brand_name=ADJ; D=1997-01-11 00:00:00; S=2"
+argument_list|,
+literal|"brand_name=ADJ; D=1997-01-12 00:00:00; S=3"
+argument_list|,
+literal|"brand_name=ADJ; D=1997-01-17 00:00:00; S=3"
 argument_list|)
 operator|.
 name|explainContains
@@ -2564,11 +2813,12 @@ literal|"C=40778"
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Unlike {@link #testGroupByTimeAndOneColumnNotProjected()}, we cannot use    * "topN" because we have a global limit, and that requires    * {@code granularity: all}. */
 annotation|@
 name|Test
 specifier|public
 name|void
-name|testGroupByTimeAndOneColumnNotProjected
+name|testGroupByTimeAndOneColumnNotProjectedWithLimit
 parameter_list|()
 block|{
 specifier|final
@@ -2590,18 +2840,62 @@ argument_list|)
 operator|.
 name|returnsOrdered
 argument_list|(
-literal|"c=3072; month=1997-01-01 00:00:00"
+literal|"c=4070; month=1997-12-01 00:00:00"
 argument_list|,
-literal|"c=2231; month=1997-01-01 00:00:00"
+literal|"c=4033; month=1997-11-01 00:00:00"
 argument_list|,
-literal|"c=1730; month=1997-01-01 00:00:00"
+literal|"c=3511; month=1997-07-01 00:00:00"
 argument_list|)
 operator|.
 name|queryContains
 argument_list|(
 name|druidChecker
 argument_list|(
-literal|"'queryType':'topN'"
+literal|"'queryType':'groupBy'"
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testGroupByTimeAndOneColumnNotProjected
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select count(*) as \"c\",\n"
+operator|+
+literal|"  floor(\"timestamp\" to MONTH) as \"month\"\n"
+operator|+
+literal|"from \"foodmart\"\n"
+operator|+
+literal|"group by floor(\"timestamp\" to MONTH), \"state_province\"\n"
+operator|+
+literal|"having count(*)> 3500"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"c=3511; month=1997-07-01 00:00:00"
+argument_list|,
+literal|"c=4033; month=1997-11-01 00:00:00"
+argument_list|,
+literal|"c=4070; month=1997-12-01 00:00:00"
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|druidChecker
+argument_list|(
+literal|"'queryType':'groupBy'"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -3000,6 +3294,8 @@ literal|"group by \"state_province\", floor(\"timestamp\" to MONTH)\n"
 operator|+
 literal|"order by s desc limit 3"
 decl_stmt|;
+comment|// Cannot use a Druid "topN" query, granularity != "all";
+comment|// have to use "groupBy" query followed by external Sort and fetch.
 specifier|final
 name|String
 name|explain
@@ -3008,36 +3304,40 @@ literal|"PLAN="
 operator|+
 literal|"EnumerableInterpreter\n"
 operator|+
-literal|"  BindableProject(S=[$2], M=[$3], P=[$0])\n"
+literal|"  BindableSort(sort0=[$0], dir0=[DESC], fetch=[3])\n"
 operator|+
-literal|"    DruidQuery(table=[[foodmart, foodmart]], intervals=[[1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z]], projects=[[$30, FLOOR($0, FLAG(MONTH)), $89]], groups=[{0, 1}], aggs=[[SUM($2), MAX($2)]], sort0=[2], dir0=[DESC], fetch=[3])"
+literal|"    BindableProject(S=[$2], M=[$3], P=[$0])\n"
+operator|+
+literal|"      DruidQuery(table=[[foodmart, foodmart]], intervals=[[1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z]], projects=[[$30, FLOOR($0, FLAG(MONTH)), $89]], groups=[{0, 1}], aggs=[[SUM($2), MAX($2)]])"
 decl_stmt|;
 specifier|final
 name|String
 name|druidQuery
 init|=
-literal|"{'queryType':'topN','dataSource':'foodmart',"
+literal|"{'queryType':'groupBy','dataSource':'foodmart',"
 operator|+
-literal|"'granularity':'month','dimension':'state_province','metric':'S',"
+literal|"'granularity':'month','dimensions':['state_province'],"
+operator|+
+literal|"'limitSpec':{'type':'default'},"
 operator|+
 literal|"'aggregations':[{'type':'longSum','name':'S','fieldName':'unit_sales'},"
 operator|+
 literal|"{'type':'longMax','name':'M','fieldName':'unit_sales'}],"
 operator|+
-literal|"'intervals':['1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z'],'threshold':3}"
+literal|"'intervals':['1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z']}"
 decl_stmt|;
 name|sql
 argument_list|(
 name|sql
 argument_list|)
 operator|.
-name|returnsOrdered
+name|returnsUnordered
 argument_list|(
-literal|"S=9342; M=6; P=WA"
+literal|"S=12399; M=6; P=WA"
 argument_list|,
-literal|"S=6909; M=6; P=OR"
+literal|"S=12297; M=7; P=WA"
 argument_list|,
-literal|"S=5377; M=7; P=CA"
+literal|"S=10640; M=6; P=WA"
 argument_list|)
 operator|.
 name|explainContains
@@ -3079,7 +3379,7 @@ literal|" \"timestamp\"< '1997-09-01 00:00:00'\n"
 operator|+
 literal|"group by \"state_province\", floor(\"timestamp\" to DAY)\n"
 operator|+
-literal|"order by s desc limit 3"
+literal|"order by s desc limit 6"
 decl_stmt|;
 specifier|final
 name|String
@@ -3089,23 +3389,33 @@ literal|"PLAN="
 operator|+
 literal|"EnumerableInterpreter\n"
 operator|+
-literal|"  BindableProject(S=[$2], M=[$3], P=[$0])\n"
+literal|"  BindableSort(sort0=[$0], dir0=[DESC], fetch=[6])\n"
 operator|+
-literal|"    DruidQuery(table=[[foodmart, foodmart]], intervals=[[1997-01-01T00:00:00.000Z/1997-09-01T00:00:00.000Z]], projects=[[$30, FLOOR($0, FLAG(DAY)), $89]], groups=[{0, 1}], aggs=[[SUM($2), MAX($2)]], sort0=[2], dir0=[DESC], fetch=[3])"
+literal|"    BindableProject(S=[$2], M=[$3], P=[$0])\n"
+operator|+
+literal|"      DruidQuery(table=[[foodmart, foodmart]], "
+operator|+
+literal|"intervals=[[1997-01-01T00:00:00.000Z/1997-09-01T00:00:00.000Z]], "
+operator|+
+literal|"projects=[[$30, FLOOR($0, FLAG(DAY)), $89]], groups=[{0, 1}], "
+operator|+
+literal|"aggs=[[SUM($2), MAX($2)]]"
 decl_stmt|;
 specifier|final
 name|String
 name|druidQuery
 init|=
-literal|"{'queryType':'topN','dataSource':'foodmart',"
+literal|"{'queryType':'groupBy','dataSource':'foodmart',"
 operator|+
-literal|"'granularity':'day','dimension':'state_province','metric':'S',"
+literal|"'granularity':'day','dimensions':['state_province'],"
+operator|+
+literal|"'limitSpec':{'type':'default'},"
 operator|+
 literal|"'aggregations':[{'type':'longSum','name':'S','fieldName':'unit_sales'},"
 operator|+
 literal|"{'type':'longMax','name':'M','fieldName':'unit_sales'}],"
 operator|+
-literal|"'intervals':['1997-01-01T00:00:00.000Z/1997-09-01T00:00:00.000Z'],'threshold':3}"
+literal|"'intervals':['1997-01-01T00:00:00.000Z/1997-09-01T00:00:00.000Z']}"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -3114,7 +3424,17 @@ argument_list|)
 operator|.
 name|returnsOrdered
 argument_list|(
-literal|"S=348; M=5; P=CA"
+literal|"S=2527; M=5; P=OR"
+argument_list|,
+literal|"S=2525; M=6; P=OR"
+argument_list|,
+literal|"S=2238; M=6; P=OR"
+argument_list|,
+literal|"S=1715; M=5; P=OR"
+argument_list|,
+literal|"S=1691; M=5; P=OR"
+argument_list|,
+literal|"S=1629; M=5; P=WA"
 argument_list|)
 operator|.
 name|explainContains
