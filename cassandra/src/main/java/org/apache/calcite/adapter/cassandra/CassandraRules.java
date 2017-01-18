@@ -333,6 +333,20 @@ name|apache
 operator|.
 name|calcite
 operator|.
+name|runtime
+operator|.
+name|PredicateImpl
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
 name|sql
 operator|.
 name|SqlKind
@@ -735,7 +749,7 @@ argument_list|>
 name|PREDICATE
 init|=
 operator|new
-name|Predicate
+name|PredicateImpl
 argument_list|<
 name|LogicalFilter
 argument_list|>
@@ -743,7 +757,7 @@ argument_list|()
 block|{
 specifier|public
 name|boolean
-name|apply
+name|test
 parameter_list|(
 name|LogicalFilter
 name|input
@@ -1574,7 +1588,7 @@ argument_list|>
 name|SORT_PREDICATE
 init|=
 operator|new
-name|Predicate
+name|PredicateImpl
 argument_list|<
 name|Sort
 argument_list|>
@@ -1582,7 +1596,7 @@ argument_list|()
 block|{
 specifier|public
 name|boolean
-name|apply
+name|test
 parameter_list|(
 name|Sort
 name|input
@@ -1615,7 +1629,7 @@ argument_list|>
 name|FILTER_PREDICATE
 init|=
 operator|new
-name|Predicate
+name|PredicateImpl
 argument_list|<
 name|CassandraFilter
 argument_list|>
@@ -1623,7 +1637,7 @@ argument_list|()
 block|{
 specifier|public
 name|boolean
-name|apply
+name|test
 parameter_list|(
 name|CassandraFilter
 name|input

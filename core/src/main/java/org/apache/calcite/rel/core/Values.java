@@ -199,6 +199,20 @@ name|apache
 operator|.
 name|calcite
 operator|.
+name|runtime
+operator|.
+name|PredicateImpl
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
 name|sql
 operator|.
 name|SqlExplainLevel
@@ -410,7 +424,7 @@ argument_list|>
 name|IS_EMPTY
 init|=
 operator|new
-name|Predicate
+name|PredicateImpl
 argument_list|<
 name|Values
 argument_list|>
@@ -418,7 +432,7 @@ argument_list|()
 block|{
 specifier|public
 name|boolean
-name|apply
+name|test
 parameter_list|(
 name|Values
 name|values
@@ -449,7 +463,7 @@ argument_list|>
 name|IS_NOT_EMPTY
 init|=
 operator|new
-name|Predicate
+name|PredicateImpl
 argument_list|<
 name|Values
 argument_list|>
@@ -457,7 +471,7 @@ argument_list|()
 block|{
 specifier|public
 name|boolean
-name|apply
+name|test
 parameter_list|(
 name|Values
 name|values

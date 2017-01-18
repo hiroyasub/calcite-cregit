@@ -327,6 +327,20 @@ name|apache
 operator|.
 name|calcite
 operator|.
+name|runtime
+operator|.
+name|PredicateImpl
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
 name|tools
 operator|.
 name|RelBuilder
@@ -578,7 +592,7 @@ argument_list|>
 name|PREDICATE
 init|=
 operator|new
-name|Predicate
+name|PredicateImpl
 argument_list|<
 name|Calc
 argument_list|>
@@ -586,7 +600,7 @@ argument_list|()
 block|{
 specifier|public
 name|boolean
-name|apply
+name|test
 parameter_list|(
 name|Calc
 name|calc
@@ -616,7 +630,7 @@ argument_list|>
 name|PREDICATE2
 init|=
 operator|new
-name|Predicate
+name|PredicateImpl
 argument_list|<
 name|Project
 argument_list|>
@@ -624,7 +638,7 @@ argument_list|()
 block|{
 specifier|public
 name|boolean
-name|apply
+name|test
 parameter_list|(
 name|Project
 name|project

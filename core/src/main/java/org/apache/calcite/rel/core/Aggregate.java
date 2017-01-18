@@ -245,6 +245,20 @@ name|calcite
 operator|.
 name|runtime
 operator|.
+name|PredicateImpl
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|runtime
+operator|.
 name|Resources
 import|;
 end_import
@@ -508,7 +522,7 @@ argument_list|>
 name|IS_SIMPLE
 init|=
 operator|new
-name|Predicate
+name|PredicateImpl
 argument_list|<
 name|Aggregate
 argument_list|>
@@ -516,7 +530,7 @@ argument_list|()
 block|{
 specifier|public
 name|boolean
-name|apply
+name|test
 parameter_list|(
 name|Aggregate
 name|input
@@ -545,7 +559,7 @@ argument_list|>
 name|IS_NOT_GRAND_TOTAL
 init|=
 operator|new
-name|Predicate
+name|PredicateImpl
 argument_list|<
 name|Aggregate
 argument_list|>
@@ -553,7 +567,7 @@ argument_list|()
 block|{
 specifier|public
 name|boolean
-name|apply
+name|test
 parameter_list|(
 name|Aggregate
 name|input

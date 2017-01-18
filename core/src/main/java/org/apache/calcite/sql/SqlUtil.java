@@ -147,6 +147,20 @@ name|calcite
 operator|.
 name|runtime
 operator|.
+name|PredicateImpl
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|runtime
+operator|.
 name|Resources
 import|;
 end_import
@@ -1720,7 +1734,7 @@ argument_list|(
 name|routines
 argument_list|,
 operator|new
-name|Predicate
+name|PredicateImpl
 argument_list|<
 name|SqlOperator
 argument_list|>
@@ -1728,7 +1742,7 @@ argument_list|()
 block|{
 specifier|public
 name|boolean
-name|apply
+name|test
 parameter_list|(
 name|SqlOperator
 name|input
@@ -2052,7 +2066,7 @@ name|iterator
 argument_list|()
 argument_list|,
 operator|new
-name|Predicate
+name|PredicateImpl
 argument_list|<
 name|SqlOperator
 argument_list|>
@@ -2060,7 +2074,7 @@ argument_list|()
 block|{
 specifier|public
 name|boolean
-name|apply
+name|test
 parameter_list|(
 name|SqlOperator
 name|operator
@@ -2110,7 +2124,7 @@ argument_list|(
 name|routines
 argument_list|,
 operator|new
-name|Predicate
+name|PredicateImpl
 argument_list|<
 name|SqlOperator
 argument_list|>
@@ -2118,7 +2132,7 @@ argument_list|()
 block|{
 specifier|public
 name|boolean
-name|apply
+name|test
 parameter_list|(
 name|SqlOperator
 name|operator
@@ -2216,7 +2230,7 @@ name|class
 argument_list|)
 argument_list|,
 operator|new
-name|Predicate
+name|PredicateImpl
 argument_list|<
 name|SqlFunction
 argument_list|>
@@ -2224,7 +2238,7 @@ argument_list|()
 block|{
 specifier|public
 name|boolean
-name|apply
+name|test
 parameter_list|(
 name|SqlFunction
 name|function
@@ -2625,7 +2639,7 @@ argument_list|(
 name|sqlFunctions
 argument_list|,
 operator|new
-name|Predicate
+name|PredicateImpl
 argument_list|<
 name|SqlFunction
 argument_list|>
@@ -2633,7 +2647,7 @@ argument_list|()
 block|{
 specifier|public
 name|boolean
-name|apply
+name|test
 parameter_list|(
 name|SqlFunction
 name|function

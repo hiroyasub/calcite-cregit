@@ -917,6 +917,20 @@ name|apache
 operator|.
 name|calcite
 operator|.
+name|runtime
+operator|.
+name|PredicateImpl
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
 name|sql
 operator|.
 name|SqlExplainFormat
@@ -1409,7 +1423,7 @@ argument_list|>
 name|FILTER_PREDICATE
 init|=
 operator|new
-name|Predicate
+name|PredicateImpl
 argument_list|<
 name|Filter
 argument_list|>
@@ -1417,7 +1431,7 @@ argument_list|()
 block|{
 specifier|public
 name|boolean
-name|apply
+name|test
 parameter_list|(
 name|Filter
 name|filter
@@ -1465,7 +1479,7 @@ argument_list|>
 name|PROJECT_PREDICATE
 init|=
 operator|new
-name|Predicate
+name|PredicateImpl
 argument_list|<
 name|Project
 argument_list|>
@@ -1473,7 +1487,7 @@ argument_list|()
 block|{
 specifier|public
 name|boolean
-name|apply
+name|test
 parameter_list|(
 name|Project
 name|project
@@ -1523,7 +1537,7 @@ argument_list|>
 name|CALC_PREDICATE
 init|=
 operator|new
-name|Predicate
+name|PredicateImpl
 argument_list|<
 name|Calc
 argument_list|>
@@ -1531,7 +1545,7 @@ argument_list|()
 block|{
 specifier|public
 name|boolean
-name|apply
+name|test
 parameter_list|(
 name|Calc
 name|calc

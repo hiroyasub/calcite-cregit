@@ -53,6 +53,20 @@ name|apache
 operator|.
 name|calcite
 operator|.
+name|runtime
+operator|.
+name|PredicateImpl
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
 name|sql
 operator|.
 name|SqlIdentifier
@@ -256,20 +270,6 @@ operator|.
 name|trace
 operator|.
 name|CalciteTrace
-import|;
-end_import
-
-begin_import
-import|import
-name|com
-operator|.
-name|google
-operator|.
-name|common
-operator|.
-name|base
-operator|.
-name|Predicate
 import|;
 end_import
 
@@ -1091,7 +1091,7 @@ argument_list|(
 name|root
 argument_list|,
 operator|new
-name|Predicate
+name|PredicateImpl
 argument_list|<
 name|SqlNode
 argument_list|>
@@ -1099,7 +1099,7 @@ argument_list|()
 block|{
 specifier|public
 name|boolean
-name|apply
+name|test
 parameter_list|(
 name|SqlNode
 name|input
@@ -1133,7 +1133,7 @@ block|}
 block|}
 argument_list|,
 operator|new
-name|Predicate
+name|PredicateImpl
 argument_list|<
 name|SqlNode
 argument_list|>
@@ -1141,7 +1141,7 @@ argument_list|()
 block|{
 specifier|public
 name|boolean
-name|apply
+name|test
 parameter_list|(
 name|SqlNode
 name|input

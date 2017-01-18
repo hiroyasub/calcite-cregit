@@ -85,23 +85,23 @@ name|apache
 operator|.
 name|calcite
 operator|.
-name|util
+name|runtime
 operator|.
-name|CancelFlag
+name|PredicateImpl
 import|;
 end_import
 
 begin_import
 import|import
-name|com
+name|org
 operator|.
-name|google
+name|apache
 operator|.
-name|common
+name|calcite
 operator|.
-name|base
+name|util
 operator|.
-name|Predicate
+name|CancelFlag
 import|;
 end_import
 
@@ -1471,7 +1471,7 @@ argument_list|(
 name|classes
 argument_list|,
 operator|new
-name|Predicate
+name|PredicateImpl
 argument_list|<
 name|Class
 argument_list|<
@@ -1484,7 +1484,7 @@ argument_list|()
 block|{
 specifier|public
 name|boolean
-name|apply
+name|test
 parameter_list|(
 name|Class
 argument_list|<
