@@ -5097,12 +5097,15 @@ literal|true
 return|;
 block|}
 block|}
-comment|/**    * Push down all the NOT logical operators into any IN/NOT IN operators.    *    * @param sqlNode the root node from which to look for NOT operators    * @return the transformed SqlNode representation with NOT pushed down.    */
+comment|/**    * Push down all the NOT logical operators into any IN/NOT IN operators.    *    * @param scope Scope where {@code sqlNode} occurs    * @param sqlNode the root node from which to look for NOT operators    * @return the transformed SqlNode representation with NOT pushed down.    */
 specifier|private
 specifier|static
 name|SqlNode
 name|pushDownNotForIn
 parameter_list|(
+name|SqlValidatorScope
+name|scope
+parameter_list|,
 name|SqlNode
 name|sqlNode
 parameter_list|)
@@ -5191,6 +5194,8 @@ index|]
 operator|=
 name|pushDownNotForIn
 argument_list|(
+name|scope
+argument_list|,
 name|sqlOperands
 index|[
 name|i
@@ -5199,7 +5204,12 @@ argument_list|)
 expr_stmt|;
 block|}
 return|return
+name|reg
+argument_list|(
+name|scope
+argument_list|,
 name|sqlNode
+argument_list|)
 return|;
 block|}
 if|else if
@@ -5292,6 +5302,10 @@ index|[
 name|i
 index|]
 operator|=
+name|reg
+argument_list|(
+name|scope
+argument_list|,
 name|SqlStdOperatorTable
 operator|.
 name|NOT
@@ -5306,6 +5320,7 @@ name|andOperands
 index|[
 name|i
 index|]
+argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
@@ -5333,6 +5348,8 @@ index|]
 operator|=
 name|pushDownNotForIn
 argument_list|(
+name|scope
+argument_list|,
 name|orOperands
 index|[
 name|i
@@ -5341,6 +5358,10 @@ argument_list|)
 expr_stmt|;
 block|}
 return|return
+name|reg
+argument_list|(
+name|scope
+argument_list|,
 name|SqlStdOperatorTable
 operator|.
 name|OR
@@ -5360,6 +5381,7 @@ name|orOperands
 index|[
 literal|1
 index|]
+argument_list|)
 argument_list|)
 return|;
 block|}
@@ -5418,6 +5440,10 @@ index|[
 name|i
 index|]
 operator|=
+name|reg
+argument_list|(
+name|scope
+argument_list|,
 name|SqlStdOperatorTable
 operator|.
 name|NOT
@@ -5432,6 +5458,7 @@ name|orOperands
 index|[
 name|i
 index|]
+argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
@@ -5459,6 +5486,8 @@ index|]
 operator|=
 name|pushDownNotForIn
 argument_list|(
+name|scope
+argument_list|,
 name|andOperands
 index|[
 name|i
@@ -5467,6 +5496,10 @@ argument_list|)
 expr_stmt|;
 block|}
 return|return
+name|reg
+argument_list|(
+name|scope
+argument_list|,
 name|SqlStdOperatorTable
 operator|.
 name|AND
@@ -5486,6 +5519,7 @@ name|andOperands
 index|[
 literal|1
 index|]
+argument_list|)
 argument_list|)
 return|;
 block|}
@@ -5520,6 +5554,8 @@ assert|;
 return|return
 name|pushDownNotForIn
 argument_list|(
+name|scope
+argument_list|,
 name|notOperands
 index|[
 literal|0
@@ -5566,6 +5602,10 @@ argument_list|()
 condition|)
 block|{
 return|return
+name|reg
+argument_list|(
+name|scope
+argument_list|,
 name|SqlStdOperatorTable
 operator|.
 name|IN
@@ -5586,11 +5626,16 @@ index|[
 literal|1
 index|]
 argument_list|)
+argument_list|)
 return|;
 block|}
 else|else
 block|{
 return|return
+name|reg
+argument_list|(
+name|scope
+argument_list|,
 name|SqlStdOperatorTable
 operator|.
 name|NOT_IN
@@ -5610,6 +5655,7 @@ name|inOperands
 index|[
 literal|1
 index|]
+argument_list|)
 argument_list|)
 return|;
 block|}
@@ -5640,6 +5686,35 @@ name|sqlNode
 return|;
 block|}
 block|}
+comment|/** Registers with the validator a {@link SqlNode} that has been created    * during the Sql-to-Rel process. */
+specifier|private
+specifier|static
+name|SqlNode
+name|reg
+parameter_list|(
+name|SqlValidatorScope
+name|scope
+parameter_list|,
+name|SqlNode
+name|e
+parameter_list|)
+block|{
+name|scope
+operator|.
+name|getValidator
+argument_list|()
+operator|.
+name|deriveType
+argument_list|(
+name|scope
+argument_list|,
+name|e
+argument_list|)
+expr_stmt|;
+return|return
+name|e
+return|;
+block|}
 comment|/**    * Converts a WHERE clause.    *    * @param bb    Blackboard    * @param where WHERE clause, may be null    */
 specifier|private
 name|void
@@ -5668,6 +5743,10 @@ name|newWhere
 init|=
 name|pushDownNotForIn
 argument_list|(
+name|bb
+operator|.
+name|scope
+argument_list|,
 name|where
 argument_list|)
 decl_stmt|;
@@ -13325,6 +13404,10 @@ name|newHaving
 init|=
 name|pushDownNotForIn
 argument_list|(
+name|bb
+operator|.
+name|scope
+argument_list|,
 name|having
 argument_list|)
 decl_stmt|;
