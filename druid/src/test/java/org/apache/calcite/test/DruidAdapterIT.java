@@ -3268,6 +3268,147 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1577">[CALCITE-1577]    * Druid adapter: Incorrect result - limit on timestamp disappears</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testGroupByMonthGranularitySort
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select floor(\"timestamp\" to MONTH) as m,\n"
+operator|+
+literal|" sum(\"unit_sales\") as s,\n"
+operator|+
+literal|" count(\"store_sqft\") as c\n"
+operator|+
+literal|"from \"foodmart\"\n"
+operator|+
+literal|"group by floor(\"timestamp\" to MONTH)\n"
+operator|+
+literal|"order by floor(\"timestamp\" to MONTH) ASC"
+decl_stmt|;
+specifier|final
+name|String
+name|explain
+init|=
+literal|"PLAN="
+operator|+
+literal|"EnumerableInterpreter\n"
+operator|+
+literal|"  BindableSort(sort0=[$0], dir0=[ASC])\n"
+operator|+
+literal|"    DruidQuery(table=[[foodmart, foodmart]], "
+operator|+
+literal|"intervals=[[1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z]], "
+operator|+
+literal|"projects=[[FLOOR($0, FLAG(MONTH)), $89, $71]], groups=[{0}], "
+operator|+
+literal|"aggs=[[SUM($1), COUNT($2)]])"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|returnsOrdered
+argument_list|(
+literal|"M=1997-01-01 00:00:00; S=21628; C=7033"
+argument_list|,
+literal|"M=1997-02-01 00:00:00; S=20957; C=6844"
+argument_list|,
+literal|"M=1997-03-01 00:00:00; S=23706; C=7710"
+argument_list|,
+literal|"M=1997-04-01 00:00:00; S=20179; C=6588"
+argument_list|,
+literal|"M=1997-05-01 00:00:00; S=21081; C=6865"
+argument_list|,
+literal|"M=1997-06-01 00:00:00; S=21350; C=6912"
+argument_list|,
+literal|"M=1997-07-01 00:00:00; S=23763; C=7752"
+argument_list|,
+literal|"M=1997-08-01 00:00:00; S=21697; C=7038"
+argument_list|,
+literal|"M=1997-09-01 00:00:00; S=20388; C=6662"
+argument_list|,
+literal|"M=1997-10-01 00:00:00; S=19958; C=6478"
+argument_list|,
+literal|"M=1997-11-01 00:00:00; S=25270; C=8231"
+argument_list|,
+literal|"M=1997-12-01 00:00:00; S=26796; C=8716"
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+name|explain
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testGroupByMonthGranularitySortLimit
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select floor(\"timestamp\" to MONTH) as m,\n"
+operator|+
+literal|" sum(\"unit_sales\") as s,\n"
+operator|+
+literal|" count(\"store_sqft\") as c\n"
+operator|+
+literal|"from \"foodmart\"\n"
+operator|+
+literal|"group by floor(\"timestamp\" to MONTH)\n"
+operator|+
+literal|"order by floor(\"timestamp\" to MONTH) limit 3"
+decl_stmt|;
+specifier|final
+name|String
+name|explain
+init|=
+literal|"PLAN="
+operator|+
+literal|"EnumerableInterpreter\n"
+operator|+
+literal|"  BindableSort(sort0=[$0], dir0=[ASC], fetch=[3])\n"
+operator|+
+literal|"    DruidQuery(table=[[foodmart, foodmart]], "
+operator|+
+literal|"intervals=[[1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z]], "
+operator|+
+literal|"projects=[[FLOOR($0, FLAG(MONTH)), $89, $71]], groups=[{0}], "
+operator|+
+literal|"aggs=[[SUM($1), COUNT($2)]])"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|returnsOrdered
+argument_list|(
+literal|"M=1997-01-01 00:00:00; S=21628; C=7033"
+argument_list|,
+literal|"M=1997-02-01 00:00:00; S=20957; C=6844"
+argument_list|,
+literal|"M=1997-03-01 00:00:00; S=23706; C=7710"
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+name|explain
+argument_list|)
+expr_stmt|;
+block|}
 annotation|@
 name|Test
 specifier|public
