@@ -80,6 +80,10 @@ name|RelMdMaxRowCount
 operator|.
 name|SOURCE
 argument_list|,
+name|RelMdMinRowCount
+operator|.
+name|SOURCE
+argument_list|,
 name|RelMdUniqueKeys
 operator|.
 name|SOURCE
