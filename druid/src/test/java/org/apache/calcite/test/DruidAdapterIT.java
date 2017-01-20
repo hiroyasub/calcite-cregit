@@ -745,7 +745,9 @@ literal|"'dataSource':'wikiticker','descending':false,'granularity':'day',"
 operator|+
 literal|"'aggregations':[{'type':'longSum','name':'EXPR$0','fieldName':'added'}],"
 operator|+
-literal|"'intervals':['1900-01-01T00:00:00.000Z/3000-01-01T00:00:00.000Z']}"
+literal|"'intervals':['1900-01-01T00:00:00.000Z/3000-01-01T00:00:00.000Z'],"
+operator|+
+literal|"'context':{'skipEmptyBuckets':true}}"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -876,7 +878,9 @@ literal|"'dataSource':'wikiticker','descending':false,'granularity':'day',"
 operator|+
 literal|"'aggregations':[{'type':'longSum','name':'EXPR$1','fieldName':'added'}],"
 operator|+
-literal|"'intervals':['1900-01-01T00:00:00.000Z/3000-01-01T00:00:00.000Z']}"
+literal|"'intervals':['1900-01-01T00:00:00.000Z/3000-01-01T00:00:00.000Z'],"
+operator|+
+literal|"'context':{'skipEmptyBuckets':true}}"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -977,6 +981,68 @@ operator|.
 name|explainContains
 argument_list|(
 name|explain
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|druidChecker
+argument_list|(
+name|druidQuery
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSkipEmptyBuckets
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select floor(\"__time\" to SECOND) as \"second\", sum(\"added\")\n"
+operator|+
+literal|"from \"wikiticker\"\n"
+operator|+
+literal|"where \"page\" = 'Jeremy Corbyn'\n"
+operator|+
+literal|"group by floor(\"__time\" to SECOND)"
+decl_stmt|;
+specifier|final
+name|String
+name|druidQuery
+init|=
+literal|"{'queryType':'timeseries',"
+operator|+
+literal|"'dataSource':'wikiticker','descending':false,'granularity':'second',"
+operator|+
+literal|"'filter':{'type':'selector','dimension':'page','value':'Jeremy Corbyn'},"
+operator|+
+literal|"'aggregations':[{'type':'longSum','name':'EXPR$1','fieldName':'added'}],"
+operator|+
+literal|"'intervals':['1900-01-01T00:00:00.000Z/3000-01-01T00:00:00.000Z'],"
+operator|+
+literal|"'context':{'skipEmptyBuckets':true}}"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|,
+name|WIKI_AUTO2
+argument_list|)
+operator|.
+name|limit
+argument_list|(
+literal|1
+argument_list|)
+comment|// Result without 'skipEmptyBuckets':true => "second=2015-09-12 00:46:58; EXPR$1=0"
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"second=2015-09-12 01:20:19; EXPR$1=1075"
 argument_list|)
 operator|.
 name|queryContains
@@ -2846,7 +2912,9 @@ literal|"'descending':false,'granularity':'all',"
 operator|+
 literal|"'aggregations':[{'type':'count','name':'EXPR$0'}],"
 operator|+
-literal|"'intervals':['1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z']}"
+literal|"'intervals':['1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z'],"
+operator|+
+literal|"'context':{'skipEmptyBuckets':true}}"
 decl_stmt|;
 specifier|final
 name|String
@@ -3220,7 +3288,9 @@ literal|"'aggregations':[{'type':'longSum','name':'S','fieldName':'unit_sales'},
 operator|+
 literal|"{'type':'count','name':'C','fieldName':'store_sqft'}],"
 operator|+
-literal|"'intervals':['1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z']}"
+literal|"'intervals':['1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z'],"
+operator|+
+literal|"'context':{'skipEmptyBuckets':true}}"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -3421,7 +3491,9 @@ literal|"'aggregations':[{'type':'longSum','name':'S','fieldName':'unit_sales'},
 operator|+
 literal|"{'type':'count','name':'C','fieldName':'store_sqft'}],"
 operator|+
-literal|"'intervals':['1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z']}"
+literal|"'intervals':['1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z'],"
+operator|+
+literal|"'context':{'skipEmptyBuckets':true}}"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -3485,7 +3557,9 @@ literal|"'aggregations':[{'type':'longSum','name':'S','fieldName':'unit_sales'},
 operator|+
 literal|"{'type':'count','name':'C','fieldName':'store_sqft'}],"
 operator|+
-literal|"'intervals':['1996-01-01T00:00:00.000Z/1998-01-01T00:00:00.000Z']}"
+literal|"'intervals':['1996-01-01T00:00:00.000Z/1998-01-01T00:00:00.000Z'],"
+operator|+
+literal|"'context':{'skipEmptyBuckets':true}}"
 decl_stmt|;
 name|sql
 argument_list|(
