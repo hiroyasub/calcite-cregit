@@ -1324,6 +1324,8 @@ name|row_
 argument_list|,
 name|i
 argument_list|,
+literal|null
+argument_list|,
 name|physType
 operator|.
 name|getJavaFieldType

@@ -3888,6 +3888,59 @@ literal|"value=10"
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1569">[CALCITE-1569]    * Date condition can generates Integer == Integer, which is always    * false</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testDateCanCompare
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select a.v\n"
+operator|+
+literal|"from (select \"sqlDate\" v\n"
+operator|+
+literal|"  from \"s\".\"everyTypes\" "
+operator|+
+literal|"  group by \"sqlDate\") a,"
+operator|+
+literal|"    (select \"sqlDate\" v\n"
+operator|+
+literal|"  from \"s\".\"everyTypes\"\n"
+operator|+
+literal|"  group by \"sqlDate\") b\n"
+operator|+
+literal|"where a.v>= b.v\n"
+operator|+
+literal|"group by a.v"
+decl_stmt|;
+name|CalciteAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|withSchema
+argument_list|(
+literal|"s"
+argument_list|,
+name|CATCHALL
+argument_list|)
+operator|.
+name|query
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"V=1970-01-01"
+argument_list|)
+expr_stmt|;
+block|}
 comment|/** Extension to {@link Employee} with a {@code hireDate} column. */
 specifier|public
 specifier|static
