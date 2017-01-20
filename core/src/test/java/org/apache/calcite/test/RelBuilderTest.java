@@ -3891,8 +3891,81 @@ name|testDistinct
 parameter_list|()
 block|{
 comment|// Equivalent SQL:
-comment|//   SELECT DISTINCT *
-comment|//   FROM dept
+comment|//   SELECT DISTINCT deptno
+comment|//   FROM emp
+specifier|final
+name|RelBuilder
+name|builder
+init|=
+name|RelBuilder
+operator|.
+name|create
+argument_list|(
+name|config
+argument_list|()
+operator|.
+name|build
+argument_list|()
+argument_list|)
+decl_stmt|;
+name|RelNode
+name|root
+init|=
+name|builder
+operator|.
+name|scan
+argument_list|(
+literal|"EMP"
+argument_list|)
+operator|.
+name|project
+argument_list|(
+name|builder
+operator|.
+name|field
+argument_list|(
+literal|"DEPTNO"
+argument_list|)
+argument_list|)
+operator|.
+name|distinct
+argument_list|()
+operator|.
+name|build
+argument_list|()
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"LogicalAggregate(group=[{0}])\n"
+operator|+
+literal|"  LogicalProject(DEPTNO=[$7])\n"
+operator|+
+literal|"    LogicalTableScan(table=[[scott, EMP]])\n"
+decl_stmt|;
+name|assertThat
+argument_list|(
+name|str
+argument_list|(
+name|root
+argument_list|)
+argument_list|,
+name|is
+argument_list|(
+name|expected
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testDistinctAlready
+parameter_list|()
+block|{
+comment|// DEPT is already distinct
 specifier|final
 name|RelBuilder
 name|builder
@@ -3933,9 +4006,99 @@ argument_list|)
 argument_list|,
 name|is
 argument_list|(
-literal|"LogicalAggregate(group=[{0, 1, 2}])\n"
+literal|"LogicalTableScan(table=[[scott, DEPT]])\n"
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testDistinctEmpty
+parameter_list|()
+block|{
+comment|// Is a relation with zero columns distinct?
+comment|// What about if we know there are zero rows?
+comment|// It is a matter of definition: there are no duplicate rows,
+comment|// but applying "select ... group by ()" to it would change the result.
+comment|// In theory, we could omit the distinct if we know there is precisely one
+comment|// row, but we don't currently.
+specifier|final
+name|RelBuilder
+name|builder
+init|=
+name|RelBuilder
+operator|.
+name|create
+argument_list|(
+name|config
+argument_list|()
+operator|.
+name|build
+argument_list|()
+argument_list|)
+decl_stmt|;
+name|RelNode
+name|root
+init|=
+name|builder
+operator|.
+name|scan
+argument_list|(
+literal|"EMP"
+argument_list|)
+operator|.
+name|filter
+argument_list|(
+name|builder
+operator|.
+name|call
+argument_list|(
+name|SqlStdOperatorTable
+operator|.
+name|IS_NULL
+argument_list|,
+name|builder
+operator|.
+name|field
+argument_list|(
+literal|"COMM"
+argument_list|)
+argument_list|)
+argument_list|)
+operator|.
+name|project
+argument_list|()
+operator|.
+name|distinct
+argument_list|()
+operator|.
+name|build
+argument_list|()
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"LogicalAggregate(group=[{}])\n"
 operator|+
-literal|"  LogicalTableScan(table=[[scott, DEPT]])\n"
+literal|"  LogicalProject\n"
+operator|+
+literal|"    LogicalFilter(condition=[IS NULL($6)])\n"
+operator|+
+literal|"      LogicalTableScan(table=[[scott, EMP]])\n"
+decl_stmt|;
+name|assertThat
+argument_list|(
+name|str
+argument_list|(
+name|root
+argument_list|)
+argument_list|,
+name|is
+argument_list|(
+name|expected
 argument_list|)
 argument_list|)
 expr_stmt|;

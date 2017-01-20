@@ -675,7 +675,6 @@ operator|.
 name|clear
 argument_list|()
 expr_stmt|;
-comment|// TODO: remove?
 name|parentScope
 operator|.
 name|resolveTable

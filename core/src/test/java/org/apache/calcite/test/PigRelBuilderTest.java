@@ -287,6 +287,16 @@ argument_list|(
 literal|"EMP"
 argument_list|)
 operator|.
+name|project
+argument_list|(
+name|builder
+operator|.
+name|field
+argument_list|(
+literal|"DEPTNO"
+argument_list|)
+argument_list|)
+operator|.
 name|distinct
 argument_list|()
 operator|.
@@ -297,9 +307,11 @@ specifier|final
 name|String
 name|plan
 init|=
-literal|"LogicalAggregate(group=[{0, 1, 2, 3, 4, 5, 6, 7}])\n"
+literal|"LogicalAggregate(group=[{0}])\n"
 operator|+
-literal|"  LogicalTableScan(table=[[scott, EMP]])\n"
+literal|"  LogicalProject(DEPTNO=[$7])\n"
+operator|+
+literal|"    LogicalTableScan(table=[[scott, EMP]])\n"
 decl_stmt|;
 name|assertThat
 argument_list|(

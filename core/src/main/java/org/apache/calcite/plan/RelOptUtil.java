@@ -4197,7 +4197,10 @@ name|aggCalls
 argument_list|)
 return|;
 block|}
-comment|/**    * Creates a LogicalAggregate that removes all duplicates from the result of    * an underlying relational expression.    *    * @param rel underlying rel    * @return rel implementing DISTINCT    */
+comment|/** @deprecated Use {@link RelBuilder#distinct()}. */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 specifier|static
 name|RelNode
