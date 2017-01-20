@@ -1563,10 +1563,14 @@ name|nullable
 init|=
 name|resultSet
 operator|.
-name|getBoolean
+name|getInt
 argument_list|(
 literal|11
 argument_list|)
+operator|!=
+name|DatabaseMetaData
+operator|.
+name|columnNoNulls
 decl_stmt|;
 name|fieldInfo
 operator|.

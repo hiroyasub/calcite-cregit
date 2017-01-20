@@ -3167,6 +3167,52 @@ block|}
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1572">[CALCITE-1572]    * JdbcSchema throws exception when detecting nullable columns</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testColumnNullability
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select \"employee_id\", \"position_id\"\n"
+operator|+
+literal|"from \"foodmart\".\"employee\" limit 10"
+decl_stmt|;
+name|CalciteAssert
+operator|.
+name|model
+argument_list|(
+name|JdbcTest
+operator|.
+name|FOODMART_MODEL
+argument_list|)
+operator|.
+name|query
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|runs
+argument_list|()
+operator|.
+name|returnsCount
+argument_list|(
+literal|10
+argument_list|)
+operator|.
+name|typeIs
+argument_list|(
+literal|"[employee_id INTEGER NOT NULL, position_id INTEGER]"
+argument_list|)
+expr_stmt|;
+block|}
 comment|/** Acquires a lock, and releases it when closed. */
 specifier|static
 class|class
