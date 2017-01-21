@@ -11907,6 +11907,105 @@ literal|"Column 'DEPTNO' is ambiguous"
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1535">[CALCITE-1535]    * Give error if column referenced in ORDER BY is ambiguous</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testOrderByColumn
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"select emp.deptno from emp, dept order by emp.deptno"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+comment|// Not ambiguous. There are two columns which could be referenced as
+comment|// "deptno", but the one in the SELECT clause takes priority.
+name|sql
+argument_list|(
+literal|"select emp.deptno from emp, dept order by deptno"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select emp.deptno as deptno from emp, dept order by deptno"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select emp.empno as deptno from emp, dept order by deptno"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select emp.deptno as n, dept.deptno as n from emp, dept order by ^n^"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Column 'N' is ambiguous"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select emp.empno as deptno, dept.deptno from emp, dept\n"
+operator|+
+literal|"order by ^deptno^"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Column 'DEPTNO' is ambiguous"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select emp.empno as deptno, dept.deptno from emp, dept\n"
+operator|+
+literal|"order by emp.deptno"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select emp.empno as deptno, dept.deptno from emp, dept order by 1, 2"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select empno as \"deptno\", deptno from emp order by deptno"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select empno as \"deptno\", deptno from emp order by \"deptno\""
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
 annotation|@
 name|Test
 specifier|public
@@ -20678,9 +20777,9 @@ name|void
 name|testRewriteWithColumnReferenceExpansion
 parameter_list|()
 block|{
-comment|// NOTE jvs 9-Apr-2007:  This tests illustrates that
-comment|// ORDER BY is still a special case.  Update expected
-comment|// output if that gets fixed in the future.
+comment|// The names in the ORDER BY clause are not qualified.
+comment|// This is because ORDER BY references columns in the SELECT clause
+comment|// in preference to columns in tables in the FROM clause.
 name|SqlValidator
 name|validator
 init|=
@@ -20734,9 +20833,9 @@ name|void
 name|testRewriteWithColumnReferenceExpansionAndFromAlias
 parameter_list|()
 block|{
-comment|// NOTE jvs 9-Apr-2007:  This tests illustrates that
-comment|// ORDER BY is still a special case.  Update expected
-comment|// output if that gets fixed in the future.
+comment|// In the ORDER BY clause, 'ename' is not qualified but 'deptno' and 'sal'
+comment|// are. This is because 'ename' appears as an alias in the SELECT clause.
+comment|// 'sal' is qualified in the ORDER BY clause, so remains qualified.
 name|SqlValidator
 name|validator
 init|=
@@ -20765,25 +20864,29 @@ name|checkRewrite
 argument_list|(
 name|validator
 argument_list|,
-literal|"select name from (select * from dept)"
+literal|"select ename, sal from (select * from emp) as e"
 operator|+
-literal|" where name = 'Moonracer' group by name"
+literal|" where ename = 'Moonracer' group by ename, deptno, sal"
 operator|+
-literal|" having sum(deptno)> 3 order by name"
+literal|" having sum(deptno)> 3 order by ename, deptno, e.sal"
 argument_list|,
-literal|"SELECT `EXPR$0`.`NAME`\n"
+literal|"SELECT `E`.`ENAME`, `E`.`SAL`\n"
 operator|+
-literal|"FROM (SELECT `DEPT`.`DEPTNO`, `DEPT`.`NAME`\n"
+literal|"FROM (SELECT `EMP`.`EMPNO`, `EMP`.`ENAME`, `EMP`.`JOB`,"
 operator|+
-literal|"FROM `CATALOG`.`SALES`.`DEPT` AS `DEPT`) AS `EXPR$0`\n"
+literal|" `EMP`.`MGR`, `EMP`.`HIREDATE`, `EMP`.`SAL`, `EMP`.`COMM`,"
 operator|+
-literal|"WHERE `EXPR$0`.`NAME` = 'Moonracer'\n"
+literal|" `EMP`.`DEPTNO`, `EMP`.`SLACKER`\n"
 operator|+
-literal|"GROUP BY `EXPR$0`.`NAME`\n"
+literal|"FROM `CATALOG`.`SALES`.`EMP` AS `EMP`) AS `E`\n"
 operator|+
-literal|"HAVING SUM(`EXPR$0`.`DEPTNO`)> 3\n"
+literal|"WHERE `E`.`ENAME` = 'Moonracer'\n"
 operator|+
-literal|"ORDER BY `NAME`"
+literal|"GROUP BY `E`.`ENAME`, `E`.`DEPTNO`, `E`.`SAL`\n"
+operator|+
+literal|"HAVING SUM(`E`.`DEPTNO`)> 3\n"
+operator|+
+literal|"ORDER BY `ENAME`, `E`.`DEPTNO`, `E`.`SAL`"
 argument_list|)
 expr_stmt|;
 block|}
