@@ -63,20 +63,6 @@ end_import
 
 begin_import
 import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|util
-operator|.
-name|Util
-import|;
-end_import
-
-begin_import
-import|import
 name|com
 operator|.
 name|google
@@ -350,9 +336,8 @@ name|e
 parameter_list|)
 block|{
 throw|throw
-name|Util
-operator|.
-name|newInternal
+operator|new
+name|AssertionError
 argument_list|(
 name|e
 argument_list|)
@@ -419,9 +404,8 @@ name|e
 parameter_list|)
 block|{
 throw|throw
-name|Util
-operator|.
-name|newInternal
+operator|new
+name|AssertionError
 argument_list|(
 name|e
 argument_list|)

@@ -173,6 +173,20 @@ end_import
 
 begin_import
 import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|base
+operator|.
+name|Preconditions
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -241,22 +255,16 @@ name|SqlParserPos
 name|pos
 parameter_list|)
 block|{
-name|Util
-operator|.
-name|pre
-argument_list|(
-name|pos
-operator|!=
-literal|null
-argument_list|,
-literal|"pos != null"
-argument_list|)
-expr_stmt|;
 name|this
 operator|.
 name|pos
 operator|=
+name|Preconditions
+operator|.
+name|checkNotNull
+argument_list|(
 name|pos
+argument_list|)
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
@@ -275,48 +283,14 @@ return|;
 block|}
 comment|/**    * Clones a SqlNode with a different position.    */
 specifier|public
+specifier|abstract
 name|SqlNode
 name|clone
 parameter_list|(
 name|SqlParserPos
 name|pos
 parameter_list|)
-block|{
-comment|// REVIEW jvs 26-July-2006:  shouldn't pos be used here?  Or are
-comment|// subclasses always supposed to override, in which case this
-comment|// method should probably be abstract?
-try|try
-block|{
-return|return
-operator|(
-name|SqlNode
-operator|)
-name|super
-operator|.
-name|clone
-argument_list|()
-return|;
-block|}
-catch|catch
-parameter_list|(
-name|CloneNotSupportedException
-name|e
-parameter_list|)
-block|{
-throw|throw
-name|Util
-operator|.
-name|newInternal
-argument_list|(
-name|e
-argument_list|,
-literal|"error while cloning "
-operator|+
-name|this
-argument_list|)
-throw|;
-block|}
-block|}
+function_decl|;
 comment|/**    * Returns the type of node this is, or    * {@link org.apache.calcite.sql.SqlKind#OTHER} if it's nothing special.    *    * @return a {@link SqlKind} value, never null    * @see #isA    */
 specifier|public
 name|SqlKind

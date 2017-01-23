@@ -539,20 +539,6 @@ end_import
 
 begin_import
 import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|util
-operator|.
-name|Util
-import|;
-end_import
-
-begin_import
-import|import
 name|com
 operator|.
 name|google
@@ -5866,11 +5852,10 @@ name|cal
 return|;
 default|default:
 throw|throw
-name|Util
-operator|.
-name|newInternal
+operator|new
+name|AssertionError
 argument_list|(
-literal|"unexpected time unit "
+literal|"unexpected time unit: "
 operator|+
 name|timeUnit
 argument_list|)
@@ -5884,9 +5869,8 @@ name|e
 parameter_list|)
 block|{
 throw|throw
-name|Util
-operator|.
-name|newInternal
+operator|new
+name|RuntimeException
 argument_list|(
 name|e
 argument_list|)
@@ -26496,14 +26480,23 @@ expr_stmt|;
 block|}
 catch|catch
 parameter_list|(
+name|RuntimeException
+name|e
+parameter_list|)
+block|{
+throw|throw
+name|e
+throw|;
+block|}
+catch|catch
+parameter_list|(
 name|Exception
 name|e
 parameter_list|)
 block|{
 throw|throw
-name|Throwables
-operator|.
-name|propagate
+operator|new
+name|RuntimeException
 argument_list|(
 name|e
 argument_list|)

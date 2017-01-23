@@ -491,6 +491,20 @@ name|google
 operator|.
 name|common
 operator|.
+name|base
+operator|.
+name|Preconditions
+import|;
+end_import
+
+begin_import
+import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
 name|collect
 operator|.
 name|ImmutableList
@@ -904,9 +918,8 @@ literal|null
 condition|)
 block|{
 throw|throw
-name|Util
-operator|.
-name|newInternal
+operator|new
+name|AssertionError
 argument_list|(
 literal|"Type '"
 operator|+
@@ -981,9 +994,8 @@ operator|)
 condition|)
 block|{
 throw|throw
-name|Util
-operator|.
-name|newInternal
+operator|new
+name|AssertionError
 argument_list|(
 literal|"Field ordinal "
 operator|+
@@ -1708,9 +1720,9 @@ operator|!
 name|allowPartial
 condition|)
 block|{
-name|Util
+name|Preconditions
 operator|.
-name|permAssert
+name|checkArgument
 argument_list|(
 name|physical
 argument_list|,

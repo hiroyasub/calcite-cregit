@@ -405,6 +405,20 @@ name|google
 operator|.
 name|common
 operator|.
+name|base
+operator|.
+name|Preconditions
+import|;
+end_import
+
+begin_import
+import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
 name|primitives
 operator|.
 name|Ints
@@ -1262,9 +1276,9 @@ operator|=
 name|projectExprOrdinals
 expr_stmt|;
 block|}
-name|Util
+name|Preconditions
 operator|.
-name|permAssert
+name|checkArgument
 argument_list|(
 name|doneCondition
 operator|||
@@ -1744,9 +1758,8 @@ condition|)
 block|{
 comment|// Cannot implement for any type.
 throw|throw
-name|Util
-operator|.
-name|newInternal
+operator|new
+name|AssertionError
 argument_list|(
 literal|"cannot implement "
 operator|+
@@ -3107,9 +3120,8 @@ return|;
 block|}
 block|}
 throw|throw
-name|Util
-operator|.
-name|newInternal
+operator|new
+name|AssertionError
 argument_list|(
 literal|"unknown type "
 operator|+

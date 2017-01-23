@@ -99,6 +99,20 @@ name|google
 operator|.
 name|common
 operator|.
+name|base
+operator|.
+name|Preconditions
+import|;
+end_import
+
+begin_import
+import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
 name|collect
 operator|.
 name|ImmutableList
@@ -221,9 +235,9 @@ name|Status
 operator|.
 name|IN_PROGRESS
 expr_stmt|;
-name|Util
+name|Preconditions
 operator|.
-name|permAssert
+name|checkArgument
 argument_list|(
 name|rowType
 operator|==
@@ -240,9 +254,9 @@ argument_list|(
 name|targetRowType
 argument_list|)
 decl_stmt|;
-name|Util
+name|Preconditions
 operator|.
-name|permAssert
+name|checkArgument
 argument_list|(
 name|type
 operator|!=
@@ -273,11 +287,10 @@ case|case
 name|IN_PROGRESS
 case|:
 throw|throw
-name|Util
-operator|.
-name|newInternal
+operator|new
+name|AssertionError
 argument_list|(
-literal|"todo: Cycle detected during type-checking"
+literal|"Cycle detected during type-checking"
 argument_list|)
 throw|;
 case|case
@@ -328,9 +341,9 @@ operator|.
 name|unknownType
 argument_list|)
 expr_stmt|;
-name|Util
+name|Preconditions
 operator|.
-name|permAssert
+name|checkArgument
 argument_list|(
 name|rowType
 operator|!=

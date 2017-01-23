@@ -131,20 +131,6 @@ name|RelMetadataQuery
 import|;
 end_import
 
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|util
-operator|.
-name|Util
-import|;
-end_import
-
 begin_comment
 comment|/**  * Abstract implementation of {@link Converter}.  */
 end_comment
@@ -263,15 +249,17 @@ name|dIo
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|protected
 name|Error
 name|cannotImplement
 parameter_list|()
 block|{
 return|return
-name|Util
-operator|.
-name|newInternal
+operator|new
+name|AssertionError
 argument_list|(
 name|getClass
 argument_list|()

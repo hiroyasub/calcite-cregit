@@ -1985,9 +1985,8 @@ literal|null
 condition|)
 block|{
 throw|throw
-name|Util
-operator|.
-name|newInternal
+operator|new
+name|AssertionError
 argument_list|(
 literal|"fromJdbcString: invalid date/time value '"
 operator|+
@@ -2014,9 +2013,8 @@ case|:
 comment|// Symbols are for internal use
 default|default:
 throw|throw
-name|Util
-operator|.
-name|newInternal
+operator|new
+name|AssertionError
 argument_list|(
 literal|"fromJdbcString: unsupported type"
 argument_list|)
@@ -2063,9 +2061,8 @@ name|TIMESTAMP_FORMAT_STRING
 return|;
 default|default:
 throw|throw
-name|Util
-operator|.
-name|newInternal
+operator|new
+name|AssertionError
 argument_list|(
 literal|"getCalendarFormat: unknown type"
 argument_list|)
@@ -2605,9 +2602,8 @@ return|;
 block|}
 block|}
 throw|throw
-name|Util
-operator|.
-name|newInternal
+operator|new
+name|AssertionError
 argument_list|(
 literal|"not a literal: "
 operator|+

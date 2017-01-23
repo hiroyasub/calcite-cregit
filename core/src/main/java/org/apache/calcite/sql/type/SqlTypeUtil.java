@@ -534,13 +534,12 @@ literal|null
 condition|)
 block|{
 throw|throw
-name|Util
-operator|.
-name|newInternal
+operator|new
+name|AssertionError
 argument_list|(
-literal|"RelDataType object should have been assigned a "
+literal|"RelDataType object should have been assigned "
 operator|+
-literal|"(default) charset when calling deriveType"
+literal|"a (default) charset when calling deriveType"
 argument_list|)
 throw|;
 block|}
@@ -576,13 +575,12 @@ literal|null
 condition|)
 block|{
 throw|throw
-name|Util
-operator|.
-name|newInternal
+operator|new
+name|AssertionError
 argument_list|(
-literal|"RelDataType object should have been assigned a "
+literal|"RelDataType object should have been assigned "
 operator|+
-literal|"(default) collation when calling deriveType"
+literal|"a (default) collation when calling deriveType"
 argument_list|)
 throw|;
 block|}
@@ -2251,9 +2249,8 @@ argument_list|()
 return|;
 default|default:
 throw|throw
-name|Util
-operator|.
-name|newInternal
+operator|new
+name|AssertionError
 argument_list|(
 literal|"getMinValue("
 operator|+
@@ -2333,9 +2330,8 @@ argument_list|()
 return|;
 default|default:
 throw|throw
-name|Util
-operator|.
-name|newInternal
+operator|new
+name|AssertionError
 argument_list|(
 literal|"getMaxValue("
 operator|+

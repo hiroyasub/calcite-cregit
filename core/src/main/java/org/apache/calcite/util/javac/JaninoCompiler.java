@@ -21,20 +21,6 @@ begin_import
 import|import
 name|org
 operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|util
-operator|.
-name|Util
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
 name|codehaus
 operator|.
 name|janino
@@ -325,17 +311,16 @@ name|ex
 parameter_list|)
 block|{
 throw|throw
-name|Util
-operator|.
-name|newInternal
+operator|new
+name|RuntimeException
 argument_list|(
-name|ex
-argument_list|,
 literal|"while compiling "
 operator|+
 name|args
 operator|.
 name|fullClassName
+argument_list|,
+name|ex
 argument_list|)
 throw|;
 block|}
@@ -523,9 +508,16 @@ return|return
 name|nBytes
 return|;
 block|}
-comment|// override JavaSourceClassLoader
+annotation|@
+name|Override
 specifier|public
 name|Map
+argument_list|<
+name|String
+argument_list|,
+name|byte
+index|[]
+argument_list|>
 name|generateBytecodes
 parameter_list|(
 name|String
@@ -534,6 +526,7 @@ parameter_list|)
 throws|throws
 name|ClassNotFoundException
 block|{
+specifier|final
 name|Map
 argument_list|<
 name|String
@@ -558,7 +551,7 @@ literal|null
 condition|)
 block|{
 return|return
-name|map
+literal|null
 return|;
 block|}
 if|if

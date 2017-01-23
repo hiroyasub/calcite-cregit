@@ -147,7 +147,7 @@ name|common
 operator|.
 name|base
 operator|.
-name|Throwables
+name|Preconditions
 import|;
 end_import
 
@@ -2085,9 +2085,9 @@ name|FrameImpl
 operator|)
 name|frame
 decl_stmt|;
-name|Util
+name|Preconditions
 operator|.
-name|pre
+name|checkArgument
 argument_list|(
 name|frame
 operator|==
@@ -2095,19 +2095,7 @@ name|this
 operator|.
 name|frame
 argument_list|,
-literal|"Frame "
-operator|+
-name|endedFrame
-operator|.
-name|frameType
-operator|+
-literal|" does not match current frame "
-operator|+
-name|this
-operator|.
-name|frame
-operator|.
-name|frameType
+literal|"Frame does not match current frame"
 argument_list|)
 expr_stmt|;
 if|if
@@ -4033,12 +4021,24 @@ name|InvocationTargetException
 name|e
 parameter_list|)
 block|{
-throw|throw
-name|Throwables
+name|Util
 operator|.
-name|propagate
+name|throwIfUnchecked
 argument_list|(
 name|e
+operator|.
+name|getCause
+argument_list|()
+argument_list|)
+expr_stmt|;
+throw|throw
+operator|new
+name|RuntimeException
+argument_list|(
+name|e
+operator|.
+name|getCause
+argument_list|()
 argument_list|)
 throw|;
 block|}
@@ -4081,12 +4081,24 @@ name|InvocationTargetException
 name|e
 parameter_list|)
 block|{
-throw|throw
-name|Throwables
+name|Util
 operator|.
-name|propagate
+name|throwIfUnchecked
 argument_list|(
 name|e
+operator|.
+name|getCause
+argument_list|()
+argument_list|)
+expr_stmt|;
+throw|throw
+operator|new
+name|RuntimeException
+argument_list|(
+name|e
+operator|.
+name|getCause
+argument_list|()
 argument_list|)
 throw|;
 block|}

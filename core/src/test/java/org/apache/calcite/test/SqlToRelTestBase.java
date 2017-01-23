@@ -597,15 +597,15 @@ end_import
 
 begin_import
 import|import
-name|org
+name|com
 operator|.
-name|apache
+name|google
 operator|.
-name|calcite
+name|common
 operator|.
-name|util
+name|base
 operator|.
-name|Util
+name|Function
 import|;
 end_import
 
@@ -619,7 +619,7 @@ name|common
 operator|.
 name|base
 operator|.
-name|Function
+name|Preconditions
 import|;
 end_import
 
@@ -2208,15 +2208,11 @@ name|String
 name|sql
 parameter_list|)
 block|{
-name|Util
+name|Preconditions
 operator|.
-name|pre
+name|checkNotNull
 argument_list|(
 name|sql
-operator|!=
-literal|null
-argument_list|,
-literal|"sql != null"
 argument_list|)
 expr_stmt|;
 specifier|final
@@ -2241,19 +2237,29 @@ expr_stmt|;
 block|}
 catch|catch
 parameter_list|(
+name|RuntimeException
+decl||
+name|Error
+name|e
+parameter_list|)
+block|{
+throw|throw
+name|e
+throw|;
+block|}
+catch|catch
+parameter_list|(
 name|Exception
 name|e
 parameter_list|)
 block|{
 throw|throw
-name|Util
-operator|.
-name|newInternal
+operator|new
+name|RuntimeException
 argument_list|(
 name|e
 argument_list|)
 throw|;
-comment|// todo: better handling
 block|}
 specifier|final
 name|RelDataTypeFactory

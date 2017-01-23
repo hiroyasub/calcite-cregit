@@ -199,20 +199,6 @@ end_import
 
 begin_import
 import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|util
-operator|.
-name|Util
-import|;
-end_import
-
-begin_import
-import|import
 name|com
 operator|.
 name|google
@@ -2076,9 +2062,8 @@ block|}
 else|else
 block|{
 throw|throw
-name|Util
-operator|.
-name|newInternal
+operator|new
+name|AssertionError
 argument_list|(
 literal|"should never come here"
 argument_list|)

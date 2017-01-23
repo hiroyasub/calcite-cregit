@@ -241,20 +241,6 @@ name|SqlTypeUtil
 import|;
 end_import
 
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|util
-operator|.
-name|Util
-import|;
-end_import
-
 begin_comment
 comment|/**  * An operator describing the<code>LIKE</code> and<code>SIMILAR</code>  * operators.  *  *<p>Syntax of the two operators:  *  *<ul>  *<li><code>src-value [NOT] LIKE pattern-value [ESCAPE  * escape-value]</code></li>  *<li><code>src-value [NOT] SIMILAR pattern-value [ESCAPE  * escape-value]</code></li>  *</ul>  *  *<p><b>NOTE</b> If the<code>NOT</code> clause is present the  * {@link org.apache.calcite.sql.parser.SqlParser parser} will generate a  * equivalent to<code>NOT (src LIKE pattern ...)</code>  */
 end_comment
@@ -415,15 +401,21 @@ comment|// enforce the escape character length to be 1
 break|break;
 default|default:
 throw|throw
-name|Util
-operator|.
-name|newInternal
+operator|new
+name|AssertionError
 argument_list|(
 literal|"unexpected number of args to "
 operator|+
 name|callBinding
 operator|.
 name|getCall
+argument_list|()
+operator|+
+literal|": "
+operator|+
+name|callBinding
+operator|.
+name|getOperandCount
 argument_list|()
 argument_list|)
 throw|;

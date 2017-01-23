@@ -750,6 +750,12 @@ argument_list|()
 return|;
 block|}
 block|}
+argument_list|,
+name|SqlValidatorUtil
+operator|.
+name|EXPR_SUGGESTER
+argument_list|,
+literal|true
 argument_list|)
 return|;
 block|}

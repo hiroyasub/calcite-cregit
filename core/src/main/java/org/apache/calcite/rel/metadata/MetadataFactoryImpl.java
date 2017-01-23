@@ -47,15 +47,15 @@ end_import
 
 begin_import
 import|import
-name|com
+name|org
 operator|.
-name|google
+name|apache
 operator|.
-name|common
+name|calcite
 operator|.
-name|base
+name|util
 operator|.
-name|Throwables
+name|Util
 import|;
 end_import
 
@@ -227,6 +227,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+specifier|private
 specifier|static
 name|CacheLoader
 argument_list|<
@@ -429,10 +430,19 @@ name|ExecutionException
 name|e
 parameter_list|)
 block|{
-throw|throw
-name|Throwables
+name|Util
 operator|.
-name|propagate
+name|throwIfUnchecked
+argument_list|(
+name|e
+operator|.
+name|getCause
+argument_list|()
+argument_list|)
+expr_stmt|;
+throw|throw
+operator|new
+name|RuntimeException
 argument_list|(
 name|e
 operator|.

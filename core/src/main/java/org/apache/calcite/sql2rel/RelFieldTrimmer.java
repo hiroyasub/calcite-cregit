@@ -4754,9 +4754,8 @@ block|{
 comment|// We asked for all fields. Can't believe that the child decided
 comment|// to permute them!
 throw|throw
-name|Util
-operator|.
-name|newInternal
+operator|new
+name|AssertionError
 argument_list|(
 literal|"Expected identity mapping, got "
 operator|+

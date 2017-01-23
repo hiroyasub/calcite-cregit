@@ -1628,9 +1628,8 @@ name|p
 parameter_list|)
 block|{
 throw|throw
-name|Util
-operator|.
-name|newInternal
+operator|new
+name|UnsupportedOperationException
 argument_list|(
 literal|"replaceInput called on "
 operator|+

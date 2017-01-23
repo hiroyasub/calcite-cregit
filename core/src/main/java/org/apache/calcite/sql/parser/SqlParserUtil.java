@@ -329,6 +329,20 @@ name|common
 operator|.
 name|base
 operator|.
+name|Preconditions
+import|;
+end_import
+
+begin_import
+import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|base
+operator|.
 name|Predicate
 import|;
 end_import
@@ -791,9 +805,9 @@ name|SqlIntervalQualifier
 name|intervalQualifier
 parameter_list|)
 block|{
-name|Util
+name|Preconditions
 operator|.
-name|permAssert
+name|checkArgument
 argument_list|(
 operator|!
 name|intervalQualifier
@@ -841,15 +855,14 @@ name|e
 parameter_list|)
 block|{
 throw|throw
-name|Util
-operator|.
-name|newInternal
+operator|new
+name|RuntimeException
 argument_list|(
-name|e
-argument_list|,
 literal|"while parsing day-to-second interval "
 operator|+
 name|literal
+argument_list|,
+name|e
 argument_list|)
 throw|;
 block|}
@@ -1008,9 +1021,9 @@ name|SqlIntervalQualifier
 name|intervalQualifier
 parameter_list|)
 block|{
-name|Util
+name|Preconditions
 operator|.
-name|permAssert
+name|checkArgument
 argument_list|(
 name|intervalQualifier
 operator|.
@@ -1057,15 +1070,14 @@ name|e
 parameter_list|)
 block|{
 throw|throw
-name|Util
-operator|.
-name|newInternal
+operator|new
+name|RuntimeException
 argument_list|(
-name|e
-argument_list|,
-literal|"error parsing year-to-month interval "
+literal|"Error while parsing year-to-month interval "
 operator|+
 name|literal
+argument_list|,
+name|e
 argument_list|)
 throw|;
 block|}
@@ -2735,26 +2747,20 @@ name|T
 name|o
 parameter_list|)
 block|{
-name|Util
+name|Preconditions
 operator|.
-name|pre
+name|checkNotNull
 argument_list|(
 name|list
-operator|!=
-literal|null
-argument_list|,
-literal|"list != null"
 argument_list|)
 expr_stmt|;
-name|Util
+name|Preconditions
 operator|.
-name|pre
+name|checkArgument
 argument_list|(
 name|start
 operator|<
 name|end
-argument_list|,
-literal|"start< end"
 argument_list|)
 expr_stmt|;
 for|for

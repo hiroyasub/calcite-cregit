@@ -33,15 +33,15 @@ end_import
 
 begin_import
 import|import
-name|com
+name|org
 operator|.
-name|google
+name|apache
 operator|.
-name|common
+name|calcite
 operator|.
-name|base
+name|util
 operator|.
-name|Throwables
+name|Util
 import|;
 end_import
 
@@ -691,9 +691,9 @@ condition|)
 block|{
 continue|continue;
 block|}
-name|Throwables
+name|Util
 operator|.
-name|propagateIfPossible
+name|throwIfUnchecked
 argument_list|(
 name|e
 operator|.
@@ -702,7 +702,14 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 throw|throw
+operator|new
+name|RuntimeException
+argument_list|(
 name|e
+operator|.
+name|getCause
+argument_list|()
+argument_list|)
 throw|;
 block|}
 block|}

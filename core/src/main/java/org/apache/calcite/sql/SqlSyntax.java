@@ -382,15 +382,16 @@ name|rightPrec
 parameter_list|)
 block|{
 throw|throw
-name|Util
-operator|.
-name|newInternal
+operator|new
+name|UnsupportedOperationException
 argument_list|(
 literal|"Internal operator '"
 operator|+
 name|operator
 operator|+
-literal|"' cannot be un-parsed"
+literal|"' "
+operator|+
+literal|"cannot be un-parsed"
 argument_list|)
 throw|;
 block|}

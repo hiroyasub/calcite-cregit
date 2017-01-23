@@ -239,20 +239,6 @@ end_import
 
 begin_import
 import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|util
-operator|.
-name|Util
-import|;
-end_import
-
-begin_import
-import|import
 name|com
 operator|.
 name|google
@@ -2322,7 +2308,8 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|// implement RelOptRule
+annotation|@
+name|Override
 specifier|public
 name|Convention
 name|getOutConvention
@@ -2332,7 +2319,6 @@ return|return
 name|PHYS_CALLING_CONVENTION
 return|;
 block|}
-comment|// implement RelOptRule
 specifier|public
 name|void
 name|onMatch
@@ -2422,7 +2408,8 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|// implement RelOptRule
+annotation|@
+name|Override
 specifier|public
 name|Convention
 name|getOutConvention
@@ -2432,7 +2419,6 @@ return|return
 name|PHYS_CALLING_CONVENTION
 return|;
 block|}
-comment|// implement RelOptRule
 specifier|public
 name|void
 name|onMatch
@@ -2510,7 +2496,8 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|// implement RelOptRule
+annotation|@
+name|Override
 specifier|public
 name|Convention
 name|getOutConvention
@@ -2520,7 +2507,6 @@ return|return
 name|PHYS_CALLING_CONVENTION
 return|;
 block|}
-comment|// implement RelOptRule
 specifier|public
 name|void
 name|onMatch
@@ -2599,7 +2585,6 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|// implement RelOptRule
 specifier|public
 name|Convention
 name|getOutConvention
@@ -2609,7 +2594,6 @@ return|return
 name|PHYS_CALLING_CONVENTION
 return|;
 block|}
-comment|// implement RelOptRule
 specifier|public
 name|void
 name|onMatch
@@ -2709,7 +2693,6 @@ name|event
 argument_list|)
 expr_stmt|;
 block|}
-comment|// implement RelOptListener
 specifier|public
 name|void
 name|relChosen
@@ -2724,7 +2707,6 @@ name|event
 argument_list|)
 expr_stmt|;
 block|}
-comment|// implement RelOptListener
 specifier|public
 name|void
 name|relDiscarded
@@ -2733,20 +2715,15 @@ name|RelDiscardedEvent
 name|event
 parameter_list|)
 block|{
-comment|// Volcano is quite a packrat--it never discards anything!
+comment|// Volcano is quite a pack rat--it never discards anything!
 throw|throw
-name|Util
-operator|.
-name|newInternal
+operator|new
+name|AssertionError
 argument_list|(
 name|event
-operator|.
-name|toString
-argument_list|()
 argument_list|)
 throw|;
 block|}
-comment|// implement RelOptListener
 specifier|public
 name|void
 name|relEquivalenceFound
@@ -2772,7 +2749,6 @@ name|event
 argument_list|)
 expr_stmt|;
 block|}
-comment|// implement RelOptListener
 specifier|public
 name|void
 name|ruleAttempted
@@ -2787,7 +2763,6 @@ name|event
 argument_list|)
 expr_stmt|;
 block|}
-comment|// implement RelOptListener
 specifier|public
 name|void
 name|ruleProductionSucceeded

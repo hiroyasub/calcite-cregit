@@ -395,20 +395,6 @@ end_import
 
 begin_import
 import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|util
-operator|.
-name|Util
-import|;
-end_import
-
-begin_import
-import|import
 name|com
 operator|.
 name|google
@@ -877,20 +863,19 @@ return|;
 block|}
 catch|catch
 parameter_list|(
-name|Throwable
+name|Exception
 name|e
 parameter_list|)
 block|{
 throw|throw
-name|Util
-operator|.
-name|newInternal
+operator|new
+name|RuntimeException
 argument_list|(
-name|e
-argument_list|,
-literal|"Error while parsing view definition:  "
+literal|"Error while parsing view definition: "
 operator|+
 name|queryString
+argument_list|,
+name|e
 argument_list|)
 throw|;
 block|}

@@ -2973,9 +2973,8 @@ block|}
 break|break;
 default|default:
 throw|throw
-name|Util
-operator|.
-name|newInternal
+operator|new
+name|AssertionError
 argument_list|(
 literal|"Unexpected node type"
 argument_list|)

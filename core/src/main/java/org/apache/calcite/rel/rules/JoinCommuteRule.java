@@ -287,20 +287,6 @@ end_import
 
 begin_import
 import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|util
-operator|.
-name|Util
-import|;
-end_import
-
-begin_import
-import|import
 name|com
 operator|.
 name|google
@@ -528,7 +514,7 @@ literal|false
 argument_list|)
 return|;
 block|}
-comment|/**    * @param join           join to be swapped    * @param swapOuterJoins whether outer joins should be swapped    * @return swapped join if swapping possible; else null    */
+comment|/**    * Returns a relational expression with the inputs switched round. Does not    * modify<code>join</code>. Returns null if the join cannot be swapped (for    * example, because it is an outer join).    *    * @param join           join to be swapped    * @param swapOuterJoins whether outer joins should be swapped    * @return swapped join if swapping possible; else null    */
 specifier|public
 specifier|static
 name|RelNode
@@ -1106,9 +1092,8 @@ argument_list|)
 return|;
 block|}
 throw|throw
-name|Util
-operator|.
-name|newInternal
+operator|new
+name|AssertionError
 argument_list|(
 literal|"Bad field offset: index="
 operator|+

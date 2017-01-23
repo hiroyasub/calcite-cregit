@@ -6851,11 +6851,10 @@ expr_stmt|;
 return|return;
 default|default:
 throw|throw
-name|Util
-operator|.
-name|newInternal
+operator|new
+name|AssertionError
 argument_list|(
-literal|"unexpected kind of sub-query :"
+literal|"unexpected kind of sub-query: "
 operator|+
 name|subQuery
 operator|.
@@ -9738,9 +9737,9 @@ expr_stmt|;
 block|}
 try|try
 block|{
-name|Util
+name|Preconditions
 operator|.
-name|permAssert
+name|checkArgument
 argument_list|(
 name|bb
 operator|.
@@ -10118,9 +10117,8 @@ block|}
 else|else
 block|{
 throw|throw
-name|Util
-operator|.
-name|newInternal
+operator|new
+name|AssertionError
 argument_list|(
 literal|"unknown TABLESAMPLE type: "
 operator|+
@@ -10881,9 +10879,8 @@ expr_stmt|;
 return|return;
 default|default:
 throw|throw
-name|Util
-operator|.
-name|newInternal
+operator|new
+name|AssertionError
 argument_list|(
 literal|"not a join operator "
 operator|+
@@ -12899,9 +12896,9 @@ argument_list|()
 decl_stmt|;
 try|try
 block|{
-name|Util
+name|Preconditions
 operator|.
-name|permAssert
+name|checkArgument
 argument_list|(
 name|bb
 operator|.
@@ -14500,9 +14497,8 @@ argument_list|)
 return|;
 default|default:
 throw|throw
-name|Util
-operator|.
-name|newInternal
+operator|new
+name|AssertionError
 argument_list|(
 literal|"not a query: "
 operator|+
@@ -18433,9 +18429,8 @@ literal|0
 condition|)
 block|{
 throw|throw
-name|Util
-operator|.
-name|newInternal
+operator|new
+name|AssertionError
 argument_list|(
 literal|"empty values clause"
 argument_list|)
@@ -19371,9 +19366,8 @@ literal|null
 condition|)
 block|{
 throw|throw
-name|Util
-operator|.
-name|newInternal
+operator|new
+name|AssertionError
 argument_list|(
 literal|"Unknown identifier '"
 operator|+
@@ -20867,19 +20861,13 @@ argument_list|(
 name|this
 argument_list|)
 expr_stmt|;
-name|Util
+return|return
+name|Preconditions
 operator|.
-name|permAssert
+name|checkNotNull
 argument_list|(
 name|rex
-operator|!=
-literal|null
-argument_list|,
-literal|"conversion result not null"
 argument_list|)
-expr_stmt|;
-return|return
-name|rex
 return|;
 block|}
 comment|/**      * Converts an item in an ORDER BY clause, extracting DESC, NULLS LAST      * and NULLS FIRST flags first.      */

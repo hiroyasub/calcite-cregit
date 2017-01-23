@@ -107,20 +107,6 @@ end_import
 
 begin_import
 import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|util
-operator|.
-name|Util
-import|;
-end_import
-
-begin_import
-import|import
 name|java
 operator|.
 name|util
@@ -762,9 +748,8 @@ argument_list|()
 condition|)
 block|{
 throw|throw
-name|Util
-operator|.
-name|newInternal
+operator|new
+name|AssertionError
 argument_list|(
 literal|"in expression "
 operator|+
@@ -789,9 +774,8 @@ name|fieldOrdinal
 condition|)
 block|{
 throw|throw
-name|Util
-operator|.
-name|newInternal
+operator|new
+name|AssertionError
 argument_list|(
 literal|"in expression "
 operator|+
@@ -829,9 +813,8 @@ argument_list|()
 condition|)
 block|{
 throw|throw
-name|Util
-operator|.
-name|newInternal
+operator|new
+name|AssertionError
 argument_list|(
 literal|"in expression "
 operator|+
@@ -3134,9 +3117,8 @@ name|index
 condition|)
 block|{
 throw|throw
-name|Util
-operator|.
-name|newInternal
+operator|new
+name|AssertionError
 argument_list|(
 literal|"expr "
 operator|+

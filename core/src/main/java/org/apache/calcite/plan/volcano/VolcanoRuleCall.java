@@ -103,20 +103,6 @@ end_import
 
 begin_import
 import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|util
-operator|.
-name|Util
-import|;
-end_import
-
-begin_import
-import|import
 name|com
 operator|.
 name|google
@@ -603,21 +589,20 @@ block|}
 block|}
 catch|catch
 parameter_list|(
-name|Throwable
+name|Exception
 name|e
 parameter_list|)
 block|{
 throw|throw
-name|Util
-operator|.
-name|newInternal
+operator|new
+name|RuntimeException
 argument_list|(
-name|e
-argument_list|,
 literal|"Error occurred while applying rule "
 operator|+
 name|getRule
 argument_list|()
+argument_list|,
+name|e
 argument_list|)
 throw|;
 block|}
@@ -988,17 +973,14 @@ block|}
 block|}
 catch|catch
 parameter_list|(
-name|Throwable
+name|Exception
 name|e
 parameter_list|)
 block|{
 throw|throw
-name|Util
-operator|.
-name|newInternal
+operator|new
+name|RuntimeException
 argument_list|(
-name|e
-argument_list|,
 literal|"Error while applying rule "
 operator|+
 name|getRule
@@ -1012,6 +994,8 @@ name|toString
 argument_list|(
 name|rels
 argument_list|)
+argument_list|,
+name|e
 argument_list|)
 throw|;
 block|}

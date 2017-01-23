@@ -33,15 +33,15 @@ end_import
 
 begin_import
 import|import
-name|org
+name|com
 operator|.
-name|apache
+name|google
 operator|.
-name|calcite
+name|common
 operator|.
-name|util
+name|base
 operator|.
-name|Util
+name|Preconditions
 import|;
 end_import
 
@@ -81,22 +81,16 @@ name|SqlIdentifier
 name|id
 parameter_list|)
 block|{
-name|Util
-operator|.
-name|pre
-argument_list|(
-name|id
-operator|!=
-literal|null
-argument_list|,
-literal|"id != null"
-argument_list|)
-expr_stmt|;
 name|this
 operator|.
 name|id
 operator|=
+name|Preconditions
+operator|.
+name|checkNotNull
+argument_list|(
 name|id
+argument_list|)
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------

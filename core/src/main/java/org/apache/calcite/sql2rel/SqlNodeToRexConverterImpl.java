@@ -265,6 +265,20 @@ end_import
 
 begin_import
 import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|base
+operator|.
+name|Preconditions
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|math
@@ -616,9 +630,9 @@ name|BitString
 operator|)
 name|value
 expr_stmt|;
-name|Util
+name|Preconditions
 operator|.
-name|permAssert
+name|checkArgument
 argument_list|(
 operator|(
 name|bitString

@@ -73,20 +73,6 @@ end_import
 
 begin_import
 import|import
-name|com
-operator|.
-name|google
-operator|.
-name|common
-operator|.
-name|base
-operator|.
-name|Throwables
-import|;
-end_import
-
-begin_import
-import|import
 name|java
 operator|.
 name|io
@@ -244,9 +230,8 @@ name|e
 parameter_list|)
 block|{
 throw|throw
-name|Throwables
-operator|.
-name|propagate
+operator|new
+name|RuntimeException
 argument_list|(
 name|e
 argument_list|)

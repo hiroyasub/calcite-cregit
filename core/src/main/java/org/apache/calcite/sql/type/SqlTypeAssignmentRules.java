@@ -19,20 +19,6 @@ end_package
 
 begin_import
 import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|util
-operator|.
-name|Util
-import|;
-end_import
-
-begin_import
-import|import
 name|java
 operator|.
 name|util
@@ -1809,6 +1795,7 @@ return|return
 literal|true
 return|;
 block|}
+specifier|final
 name|Set
 argument_list|<
 name|SqlTypeName
@@ -1824,17 +1811,16 @@ argument_list|)
 decl_stmt|;
 if|if
 condition|(
-literal|null
-operator|==
 name|rule
+operator|==
+literal|null
 condition|)
 block|{
 comment|// if you hit this assert, see the constructor of this class on how
 comment|// to add new rule
 throw|throw
-name|Util
-operator|.
-name|newInternal
+operator|new
+name|AssertionError
 argument_list|(
 literal|"No assign rules for "
 operator|+

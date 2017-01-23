@@ -298,9 +298,8 @@ name|operandType
 condition|)
 block|{
 throw|throw
-name|Util
-operator|.
-name|newInternal
+operator|new
+name|AssertionError
 argument_list|(
 literal|"operand's type should have been derived"
 argument_list|)

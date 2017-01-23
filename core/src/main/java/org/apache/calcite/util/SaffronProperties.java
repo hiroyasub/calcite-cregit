@@ -308,15 +308,14 @@ name|e
 parameter_list|)
 block|{
 throw|throw
-name|Util
-operator|.
-name|newInternal
+operator|new
+name|RuntimeException
 argument_list|(
-name|e
-argument_list|,
 literal|"while reading from "
 operator|+
 name|file
+argument_list|,
+name|e
 argument_list|)
 throw|;
 block|}

@@ -3214,9 +3214,8 @@ literal|null
 condition|)
 block|{
 throw|throw
-name|Util
-operator|.
-name|newInternal
+operator|new
+name|AssertionError
 argument_list|(
 literal|"Not a query: "
 operator|+
@@ -7619,26 +7618,18 @@ name|RelDataType
 name|type
 parameter_list|)
 block|{
-name|Util
+name|Preconditions
 operator|.
-name|pre
+name|checkNotNull
 argument_list|(
 name|type
-operator|!=
-literal|null
-argument_list|,
-literal|"type != null"
 argument_list|)
 expr_stmt|;
-name|Util
+name|Preconditions
 operator|.
-name|pre
+name|checkNotNull
 argument_list|(
 name|node
-operator|!=
-literal|null
-argument_list|,
-literal|"node != null"
 argument_list|)
 expr_stmt|;
 if|if
@@ -7676,26 +7667,18 @@ name|SqlNode
 name|expr
 parameter_list|)
 block|{
-name|Util
+name|Preconditions
 operator|.
-name|pre
+name|checkNotNull
 argument_list|(
 name|scope
-operator|!=
-literal|null
-argument_list|,
-literal|"scope != null"
 argument_list|)
 expr_stmt|;
-name|Util
+name|Preconditions
 operator|.
-name|pre
+name|checkNotNull
 argument_list|(
 name|expr
-operator|!=
-literal|null
-argument_list|,
-literal|"expr != null"
 argument_list|)
 expr_stmt|;
 comment|// if we already know the type, no need to re-derive
@@ -7752,9 +7735,9 @@ argument_list|,
 name|expr
 argument_list|)
 expr_stmt|;
-name|Util
+name|Preconditions
 operator|.
-name|permAssert
+name|checkArgument
 argument_list|(
 name|type
 operator|!=
@@ -13031,15 +13014,11 @@ name|SqlValidatorScope
 name|scope
 parameter_list|)
 block|{
-name|Util
+name|Preconditions
 operator|.
-name|pre
+name|checkNotNull
 argument_list|(
 name|targetRowType
-operator|!=
-literal|null
-argument_list|,
-literal|"targetRowType != null"
 argument_list|)
 expr_stmt|;
 switch|switch
@@ -13156,9 +13135,8 @@ name|scope
 parameter_list|)
 block|{
 throw|throw
-name|Util
-operator|.
-name|newInternal
+operator|new
+name|AssertionError
 argument_list|(
 literal|"OVER unexpected in this context"
 argument_list|)
@@ -13263,30 +13241,26 @@ block|{
 case|case
 name|NONE
 case|:
-name|Util
+name|Preconditions
 operator|.
-name|permAssert
+name|checkArgument
 argument_list|(
 name|condition
 operator|==
 literal|null
-argument_list|,
-literal|"condition == null"
 argument_list|)
 expr_stmt|;
 break|break;
 case|case
 name|ON
 case|:
-name|Util
+name|Preconditions
 operator|.
-name|permAssert
+name|checkArgument
 argument_list|(
 name|condition
 operator|!=
 literal|null
-argument_list|,
-literal|"condition != null"
 argument_list|)
 expr_stmt|;
 name|SqlNode
@@ -13337,9 +13311,9 @@ operator|)
 name|condition
 decl_stmt|;
 comment|// Parser ensures that using clause is not empty.
-name|Util
+name|Preconditions
 operator|.
-name|permAssert
+name|checkArgument
 argument_list|(
 name|list
 operator|.
@@ -15810,15 +15784,13 @@ argument_list|(
 name|select
 argument_list|)
 decl_stmt|;
-name|Util
+name|Preconditions
 operator|.
-name|permAssert
+name|checkNotNull
 argument_list|(
 name|orderScope
 operator|!=
 literal|null
-argument_list|,
-literal|"orderScope != null"
 argument_list|)
 expr_stmt|;
 name|List

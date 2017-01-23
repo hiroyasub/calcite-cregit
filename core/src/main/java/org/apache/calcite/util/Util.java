@@ -197,6 +197,34 @@ name|google
 operator|.
 name|common
 operator|.
+name|base
+operator|.
+name|Preconditions
+import|;
+end_import
+
+begin_import
+import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|base
+operator|.
+name|Throwables
+import|;
+end_import
+
+begin_import
+import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
 name|cache
 operator|.
 name|CacheBuilder
@@ -784,6 +812,22 @@ operator|.
 name|annotation
 operator|.
 name|Nullable
+import|;
+end_import
+
+begin_import
+import|import static
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|base
+operator|.
+name|Preconditions
+operator|.
+name|checkNotNull
 import|;
 end_import
 
@@ -2172,7 +2216,8 @@ name|e
 parameter_list|)
 block|{
 throw|throw
-name|newInternal
+operator|new
+name|RuntimeException
 argument_list|(
 name|e
 argument_list|)
@@ -3440,6 +3485,10 @@ return|return
 name|DEFAULT_CHARSET
 return|;
 block|}
+comment|/** @deprecated Throw new {@link AssertionError} */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 specifier|static
 name|Error
@@ -3447,12 +3496,17 @@ name|newInternal
 parameter_list|()
 block|{
 return|return
-name|newInternal
+operator|new
+name|AssertionError
 argument_list|(
 literal|"(unknown cause)"
 argument_list|)
 return|;
 block|}
+comment|/** @deprecated Throw new {@link AssertionError} */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 specifier|static
 name|Error
@@ -3466,12 +3520,14 @@ return|return
 operator|new
 name|AssertionError
 argument_list|(
-literal|"Internal error: "
-operator|+
 name|s
 argument_list|)
 return|;
 block|}
+comment|/** @deprecated Throw new {@link RuntimeException} if checked; throw raw    * exception if unchecked or {@link Error} */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 specifier|static
 name|Error
@@ -3482,14 +3538,14 @@ name|e
 parameter_list|)
 block|{
 return|return
-name|newInternal
+operator|new
+name|AssertionError
 argument_list|(
 name|e
-argument_list|,
-literal|"(unknown cause)"
 argument_list|)
 return|;
 block|}
+comment|/** @deprecated Throw new {@link AssertionError} if applicable;    * or {@link RuntimeException} if e is checked;    * or raw exception if e is unchecked or {@link Error}. */
 specifier|public
 specifier|static
 name|Error
@@ -3502,58 +3558,68 @@ name|String
 name|s
 parameter_list|)
 block|{
-name|String
-name|message
-init|=
-literal|"Internal error: "
-operator|+
-name|s
-decl_stmt|;
-if|if
-condition|(
-literal|false
-condition|)
-block|{
-comment|// TODO re-enable this code when we're no longer throwing spurious
-comment|//   internal errors (which should be parse errors, for example)
-name|System
-operator|.
-name|err
-operator|.
-name|println
-argument_list|(
-name|message
-argument_list|)
-expr_stmt|;
-name|e
-operator|.
-name|printStackTrace
-argument_list|(
-name|System
-operator|.
-name|err
-argument_list|)
-expr_stmt|;
-block|}
-name|AssertionError
-name|ae
-init|=
+return|return
 operator|new
 name|AssertionError
 argument_list|(
-name|message
-argument_list|)
-decl_stmt|;
-name|ae
-operator|.
-name|initCause
-argument_list|(
+literal|"Internal error: "
+operator|+
+name|s
+argument_list|,
 name|e
 argument_list|)
-expr_stmt|;
-return|return
-name|ae
 return|;
+block|}
+comment|/** As {@link Throwables#throwIfUnchecked(Throwable)}, but we don't require    * Guava version 20 yet. */
+specifier|public
+specifier|static
+name|void
+name|throwIfUnchecked
+parameter_list|(
+name|Throwable
+name|throwable
+parameter_list|)
+block|{
+name|Bug
+operator|.
+name|upgrade
+argument_list|(
+literal|"Remove when minimum Guava version is 20"
+argument_list|)
+expr_stmt|;
+name|checkNotNull
+argument_list|(
+name|throwable
+argument_list|)
+expr_stmt|;
+if|if
+condition|(
+name|throwable
+operator|instanceof
+name|RuntimeException
+condition|)
+block|{
+throw|throw
+operator|(
+name|RuntimeException
+operator|)
+name|throwable
+throw|;
+block|}
+if|if
+condition|(
+name|throwable
+operator|instanceof
+name|Error
+condition|)
+block|{
+throw|throw
+operator|(
+name|Error
+operator|)
+name|throwable
+throw|;
+block|}
 block|}
 comment|/**    * Retrieves messages in a exception and writes them to a string. In the    * string returned, each message will appear on a different line.    *    * @return a non-null string containing all messages of the exception    */
 annotation|@
@@ -3704,7 +3770,10 @@ name|toString
 argument_list|()
 return|;
 block|}
-comment|/**    * Checks a pre-condition.    *    *<p>For example,    *    *<pre>    * /**    *   * @ pre x != 0    *   * /    * void foo(int x) {    *     Util.pre(x != 0, "x != 0");    * }</pre>    *    * @param b           Result of evaluating the pre-condition.    * @param description Description of the pre-condition.    */
+comment|/** @deprecated Use {@link Preconditions#checkArgument}    * or {@link Preconditions#checkNotNull(Object)} */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 specifier|static
 name|void
@@ -3724,7 +3793,8 @@ name|b
 condition|)
 block|{
 throw|throw
-name|newInternal
+operator|new
+name|AssertionError
 argument_list|(
 literal|"pre-condition failed: "
 operator|+
@@ -3733,7 +3803,10 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/**    * Checks a post-condition.    *    *<p>For example,    *    *<pre>    * /**    *   * @ post return != 0    *   * /    * void foo(int x) {    *     int res = bar(x);    *     Util.post(res != 0, "return != 0");    * }</pre>    *    * @param b           Result of evaluating the pre-condition.    * @param description Description of the pre-condition.    */
+comment|/** @deprecated Use {@link Preconditions#checkArgument}    * or {@link Preconditions#checkNotNull(Object)} */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 specifier|static
 name|void
@@ -3753,7 +3826,8 @@ name|b
 condition|)
 block|{
 throw|throw
-name|newInternal
+operator|new
+name|AssertionError
 argument_list|(
 literal|"post-condition failed: "
 operator|+
@@ -3762,7 +3836,10 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/**    * Checks an invariant.    *    *<p>This is similar to<code>assert</code> keyword, except that the    * condition is always evaluated even if asserts are disabled.    */
+comment|/** @deprecated Use {@link Preconditions#checkArgument} */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 specifier|static
 name|void
@@ -3782,7 +3859,8 @@ name|b
 condition|)
 block|{
 throw|throw
-name|newInternal
+operator|new
+name|AssertionError
 argument_list|(
 literal|"invariant violated: "
 operator|+
@@ -5600,7 +5678,8 @@ argument_list|)
 return|;
 default|default:
 throw|throw
-name|newInternal
+operator|new
+name|AssertionError
 argument_list|(
 literal|"bad locale string '"
 operator|+

@@ -5351,15 +5351,14 @@ name|e
 parameter_list|)
 block|{
 throw|throw
-name|Util
-operator|.
-name|newInternal
+operator|new
+name|AssertionError
 argument_list|(
-name|e
-argument_list|,
-literal|"Error while registering schema "
+literal|"While registering schema "
 operator|+
 name|schema
+argument_list|,
+name|e
 argument_list|)
 throw|;
 block|}
@@ -7609,9 +7608,8 @@ name|s
 condition|)
 block|{
 throw|throw
-name|Util
-operator|.
-name|newInternal
+operator|new
+name|AssertionError
 argument_list|(
 literal|"cycle in equivalence tree"
 argument_list|)
@@ -7678,17 +7676,14 @@ name|this
 condition|)
 block|{
 throw|throw
-name|Util
-operator|.
-name|newInternal
+operator|new
+name|AssertionError
 argument_list|(
 literal|"Relational expression "
 operator|+
 name|rel
 operator|+
-literal|" belongs to a different planner than is currently being"
-operator|+
-literal|" used."
+literal|" belongs to a different planner than is currently being used."
 argument_list|)
 throw|;
 block|}
@@ -7743,9 +7738,8 @@ operator|)
 condition|)
 block|{
 throw|throw
-name|Util
-operator|.
-name|newInternal
+operator|new
+name|AssertionError
 argument_list|(
 literal|"Relational expression "
 operator|+
@@ -7780,15 +7774,14 @@ argument_list|()
 condition|)
 block|{
 throw|throw
-name|Util
-operator|.
-name|newInternal
+operator|new
+name|AssertionError
 argument_list|(
 literal|"Relational expression "
 operator|+
 name|rel
 operator|+
-literal|" does not have the correct number of traits "
+literal|" does not have the correct number of traits: "
 operator|+
 name|traits
 operator|.

@@ -4055,11 +4055,10 @@ block|{
 return|return;
 block|}
 throw|throw
-name|Util
-operator|.
-name|newInternal
+operator|new
+name|AssertionError
 argument_list|(
-literal|"Query graph cycle detected in HepPlanner:  "
+literal|"Query graph cycle detected in HepPlanner: "
 operator|+
 name|cyclicVertices
 argument_list|)

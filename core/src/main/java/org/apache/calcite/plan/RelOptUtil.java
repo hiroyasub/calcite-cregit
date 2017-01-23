@@ -2220,18 +2220,17 @@ expr_stmt|;
 block|}
 catch|catch
 parameter_list|(
-name|Throwable
+name|Exception
 name|e
 parameter_list|)
 block|{
 throw|throw
-name|Util
-operator|.
-name|newInternal
+operator|new
+name|RuntimeException
 argument_list|(
-name|e
-argument_list|,
 literal|"while visiting tree"
+argument_list|,
+name|e
 argument_list|)
 throw|;
 block|}
@@ -2509,9 +2508,8 @@ name|toString
 argument_list|()
 decl_stmt|;
 throw|throw
-name|Util
-operator|.
-name|newInternal
+operator|new
+name|AssertionError
 argument_list|(
 name|s
 argument_list|)
@@ -5655,9 +5653,8 @@ literal|null
 condition|)
 block|{
 throw|throw
-name|Util
-operator|.
-name|newInternal
+operator|new
+name|AssertionError
 argument_list|(
 literal|"Cannot find common type for join keys "
 operator|+

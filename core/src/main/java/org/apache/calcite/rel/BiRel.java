@@ -59,20 +59,6 @@ end_import
 
 begin_import
 import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|util
-operator|.
-name|Util
-import|;
-end_import
-
-begin_import
-import|import
 name|java
 operator|.
 name|util
@@ -243,10 +229,13 @@ expr_stmt|;
 break|break;
 default|default:
 throw|throw
-name|Util
-operator|.
-name|newInternal
-argument_list|()
+operator|new
+name|IndexOutOfBoundsException
+argument_list|(
+literal|"Input "
+operator|+
+name|ordinalInParent
+argument_list|)
 throw|;
 block|}
 name|recomputeDigest

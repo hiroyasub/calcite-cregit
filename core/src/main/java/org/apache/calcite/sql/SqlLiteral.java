@@ -1170,6 +1170,7 @@ operator|.
 name|CAST
 condition|)
 block|{
+comment|//noinspection deprecation
 return|return
 name|stringValue
 argument_list|(
@@ -1190,9 +1191,8 @@ block|}
 else|else
 block|{
 throw|throw
-name|Util
-operator|.
-name|newInternal
+operator|new
+name|AssertionError
 argument_list|(
 literal|"invalid string literal: "
 operator|+
@@ -1250,9 +1250,8 @@ block|}
 else|else
 block|{
 throw|throw
-name|Util
-operator|.
-name|newInternal
+operator|new
+name|AssertionError
 argument_list|(
 literal|"invalid literal: "
 operator|+
