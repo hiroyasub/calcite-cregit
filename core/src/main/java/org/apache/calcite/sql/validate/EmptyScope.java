@@ -438,6 +438,11 @@ name|resolved
 parameter_list|)
 block|{
 block|}
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"deprecation"
+argument_list|)
 specifier|public
 name|SqlValidatorNamespace
 name|getTableNamespace
@@ -1127,6 +1132,11 @@ parameter_list|)
 block|{
 comment|// valid
 block|}
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"deprecation"
+argument_list|)
 specifier|public
 name|Pair
 argument_list|<

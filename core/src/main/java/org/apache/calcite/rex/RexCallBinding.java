@@ -377,6 +377,11 @@ return|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
 annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"deprecation"
+argument_list|)
+annotation|@
 name|Override
 specifier|public
 name|String
@@ -400,6 +405,11 @@ argument_list|)
 argument_list|)
 return|;
 block|}
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"deprecation"
+argument_list|)
 annotation|@
 name|Override
 specifier|public

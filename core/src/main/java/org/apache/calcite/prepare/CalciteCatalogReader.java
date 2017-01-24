@@ -1815,6 +1815,11 @@ name|names
 argument_list|)
 return|;
 block|}
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"deprecation"
+argument_list|)
 specifier|public
 name|RelDataTypeField
 name|field
@@ -1837,6 +1842,11 @@ name|alias
 argument_list|)
 return|;
 block|}
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"deprecation"
+argument_list|)
 specifier|public
 name|boolean
 name|matches
@@ -2652,6 +2662,11 @@ throws|throws
 name|Exception
 block|{
 block|}
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"deprecation"
+argument_list|)
 annotation|@
 name|Override
 specifier|public

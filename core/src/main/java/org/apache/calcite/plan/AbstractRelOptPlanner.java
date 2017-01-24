@@ -457,6 +457,11 @@ return|return
 name|costFactory
 return|;
 block|}
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"deprecation"
+argument_list|)
 specifier|public
 name|void
 name|setCancelFlag
@@ -890,6 +895,11 @@ name|rel
 argument_list|)
 return|;
 block|}
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"deprecation"
+argument_list|)
 specifier|public
 name|RelOptCost
 name|getCost

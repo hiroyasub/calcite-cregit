@@ -9634,7 +9634,7 @@ name|info
 init|=
 name|msg
 operator|.
-name|getInfo
+name|getInfoMap
 argument_list|()
 decl_stmt|;
 if|if
@@ -9704,10 +9704,7 @@ condition|)
 block|{
 name|builder
 operator|.
-name|getMutableInfo
-argument_list|()
-operator|.
-name|putAll
+name|putAllInfo
 argument_list|(
 name|info
 argument_list|)

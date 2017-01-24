@@ -307,6 +307,11 @@ operator|=
 name|function
 expr_stmt|;
 block|}
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"deprecation"
+argument_list|)
 specifier|public
 name|List
 argument_list|<
@@ -359,6 +364,11 @@ block|}
 argument_list|)
 return|;
 block|}
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"deprecation"
+argument_list|)
 specifier|public
 name|RelDataType
 name|getReturnType

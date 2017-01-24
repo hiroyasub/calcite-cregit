@@ -17278,7 +17278,12 @@ argument_list|(
 name|call
 argument_list|)
 decl_stmt|;
+operator|(
+operator|(
+name|SqlValidatorImpl
+operator|)
 name|validator
+operator|)
 operator|.
 name|setValidatedNodeType
 argument_list|(

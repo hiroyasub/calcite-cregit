@@ -604,6 +604,11 @@ argument_list|)
 expr_stmt|;
 block|}
 annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"deprecation"
+argument_list|)
+annotation|@
 name|Override
 specifier|public
 name|Pair
@@ -660,7 +665,6 @@ block|{
 case|case
 literal|0
 case|:
-comment|//noinspection deprecation
 return|return
 name|parent
 operator|.

@@ -1162,6 +1162,11 @@ name|getDouble
 argument_list|()
 return|;
 block|}
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"deprecation"
+argument_list|)
 specifier|public
 name|BigDecimal
 name|getBigDecimal
@@ -1294,6 +1299,11 @@ name|getAsciiStream
 argument_list|()
 return|;
 block|}
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"deprecation"
+argument_list|)
 specifier|public
 name|InputStream
 name|getUnicodeStream
@@ -1494,6 +1504,11 @@ name|getDouble
 argument_list|()
 return|;
 block|}
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"deprecation"
+argument_list|)
 specifier|public
 name|BigDecimal
 name|getBigDecimal
@@ -1626,6 +1641,11 @@ name|getAsciiStream
 argument_list|()
 return|;
 block|}
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"deprecation"
+argument_list|)
 specifier|public
 name|InputStream
 name|getUnicodeStream

@@ -796,7 +796,6 @@ operator|=
 name|sslFactory
 expr_stmt|;
 block|}
-specifier|private
 specifier|static
 name|AvaticaHandler
 name|wrapJettyHandler

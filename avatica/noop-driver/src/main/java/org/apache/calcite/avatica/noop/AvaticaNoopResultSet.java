@@ -492,6 +492,11 @@ argument_list|()
 throw|;
 block|}
 annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"deprecation"
+argument_list|)
+annotation|@
 name|Override
 specifier|public
 name|BigDecimal
@@ -597,6 +602,11 @@ name|unsupported
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"deprecation"
+argument_list|)
 annotation|@
 name|Override
 specifier|public
@@ -768,6 +778,11 @@ argument_list|()
 throw|;
 block|}
 annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"deprecation"
+argument_list|)
+annotation|@
 name|Override
 specifier|public
 name|BigDecimal
@@ -873,6 +888,11 @@ name|unsupported
 argument_list|()
 throw|;
 block|}
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"deprecation"
+argument_list|)
 annotation|@
 name|Override
 specifier|public

@@ -3132,9 +3132,9 @@ name|setScale
 argument_list|(
 name|scale
 argument_list|,
-name|BigDecimal
+name|RoundingMode
 operator|.
-name|ROUND_UNNECESSARY
+name|UNNECESSARY
 argument_list|)
 return|;
 block|}
