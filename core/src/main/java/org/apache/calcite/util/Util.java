@@ -3570,7 +3570,7 @@ name|e
 argument_list|)
 return|;
 block|}
-comment|/** As {@link Throwables#throwIfUnchecked(Throwable)}, but we don't require    * Guava version 20 yet. */
+comment|/** As {@link Throwables}{@code .throwIfUnchecked(Throwable)},    * which was introduced in Guava 20,    * but we don't require Guava version 20 yet. */
 specifier|public
 specifier|static
 name|void
