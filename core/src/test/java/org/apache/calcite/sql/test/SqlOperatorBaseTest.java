@@ -7313,57 +7313,37 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|// System Functions
-if|if
-condition|(
-literal|false
-condition|)
-block|{
 name|tester
 operator|.
-name|checkScalar
+name|checkType
 argument_list|(
 literal|"{fn DATABASE()}"
 argument_list|,
-literal|null
-argument_list|,
-literal|""
+literal|"VARCHAR(2000) NOT NULL"
 argument_list|)
 expr_stmt|;
-block|}
-if|if
-condition|(
-literal|false
-condition|)
-block|{
 name|tester
 operator|.
-name|checkScalar
+name|checkString
 argument_list|(
-literal|"{fn IFNULL(expression, value)}"
+literal|"{fn IFNULL('a', 'b')}"
 argument_list|,
-literal|null
+literal|"a"
 argument_list|,
-literal|""
+literal|"CHAR(1) NOT NULL"
 argument_list|)
 expr_stmt|;
-block|}
-if|if
-condition|(
-literal|false
-condition|)
-block|{
 name|tester
 operator|.
-name|checkScalar
+name|checkString
 argument_list|(
 literal|"{fn USER()}"
 argument_list|,
-literal|null
+literal|"sa"
 argument_list|,
-literal|""
+literal|"VARCHAR(2000) NOT NULL"
 argument_list|)
 expr_stmt|;
-block|}
 comment|// Conversion Functions
 comment|// Legacy JDBC style
 name|tester
@@ -18044,6 +18024,38 @@ operator|.
 name|checkString
 argument_list|(
 literal|"CURRENT_ROLE"
+argument_list|,
+literal|""
+argument_list|,
+literal|"VARCHAR(2000) NOT NULL"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testCurrentCatalogFunc
+parameter_list|()
+block|{
+name|tester
+operator|.
+name|setFor
+argument_list|(
+name|SqlStdOperatorTable
+operator|.
+name|CURRENT_CATALOG
+argument_list|,
+name|VM_FENNEL
+argument_list|)
+expr_stmt|;
+comment|// By default, the CURRENT_CATALOG function returns
+comment|// the empty string because a catalog has to be set explicitly.
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"CURRENT_CATALOG"
 argument_list|,
 literal|""
 argument_list|,

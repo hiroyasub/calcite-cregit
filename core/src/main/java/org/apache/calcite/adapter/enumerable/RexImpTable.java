@@ -1405,6 +1405,24 @@ name|fun
 operator|.
 name|SqlStdOperatorTable
 operator|.
+name|CURRENT_CATALOG
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|fun
+operator|.
+name|SqlStdOperatorTable
+operator|.
 name|CURRENT_DATE
 import|;
 end_import
@@ -4445,6 +4463,15 @@ operator|.
 name|put
 argument_list|(
 name|CURRENT_ROLE
+argument_list|,
+name|systemFunctionImplementor
+argument_list|)
+expr_stmt|;
+name|map
+operator|.
+name|put
+argument_list|(
+name|CURRENT_CATALOG
 argument_list|,
 name|systemFunctionImplementor
 argument_list|)
@@ -12412,10 +12439,14 @@ operator|||
 name|op
 operator|==
 name|CURRENT_ROLE
+operator|||
+name|op
+operator|==
+name|CURRENT_CATALOG
 condition|)
 block|{
-comment|// By default, the CURRENT_ROLE function returns
-comment|// the empty string because a role has to be set explicitly.
+comment|// By default, the CURRENT_ROLE and CURRENT_CATALOG functions return the
+comment|// empty string because a role or a catalog has to be set explicitly.
 return|return
 name|Expressions
 operator|.
