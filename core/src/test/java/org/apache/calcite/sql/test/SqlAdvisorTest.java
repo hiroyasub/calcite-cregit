@@ -644,6 +644,8 @@ literal|"KEYWORD(FUSION)"
 argument_list|,
 literal|"KEYWORD(GROUPING)"
 argument_list|,
+literal|"KEYWORD(HOUR)"
+argument_list|,
 literal|"KEYWORD(INTERVAL)"
 argument_list|,
 literal|"KEYWORD(LAST_VALUE)"
@@ -660,7 +662,11 @@ literal|"KEYWORD(MAX)"
 argument_list|,
 literal|"KEYWORD(MIN)"
 argument_list|,
+literal|"KEYWORD(MINUTE)"
+argument_list|,
 literal|"KEYWORD(MOD)"
+argument_list|,
+literal|"KEYWORD(MONTH)"
 argument_list|,
 literal|"KEYWORD(MULTISET)"
 argument_list|,
@@ -693,6 +699,8 @@ argument_list|,
 literal|"KEYWORD(ROW)"
 argument_list|,
 literal|"KEYWORD(ROW_NUMBER)"
+argument_list|,
+literal|"KEYWORD(SECOND)"
 argument_list|,
 literal|"KEYWORD(SESSION_USER)"
 argument_list|,
@@ -729,6 +737,8 @@ argument_list|,
 literal|"KEYWORD(VAR_POP)"
 argument_list|,
 literal|"KEYWORD(VAR_SAMP)"
+argument_list|,
+literal|"KEYWORD(YEAR)"
 argument_list|)
 decl_stmt|;
 specifier|protected

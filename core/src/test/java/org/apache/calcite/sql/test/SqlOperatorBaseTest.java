@@ -7094,108 +7094,72 @@ literal|""
 argument_list|)
 expr_stmt|;
 block|}
-if|if
-condition|(
-literal|false
-condition|)
-block|{
 name|tester
 operator|.
 name|checkScalar
 argument_list|(
-literal|"{fn DAYOFMONTH(date)}"
+literal|"{fn DAYOFMONTH(DATE '2014-12-10')}"
 argument_list|,
-literal|null
+literal|10
 argument_list|,
-literal|""
+literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-block|}
-if|if
-condition|(
-literal|false
-condition|)
-block|{
+name|tester
+operator|.
+name|checkFails
+argument_list|(
+literal|"{fn DAYOFWEEK(DATE '2014-12-10')}"
+argument_list|,
+literal|"cannot translate call EXTRACT.*"
+argument_list|,
+literal|true
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkFails
+argument_list|(
+literal|"{fn DAYOFYEAR(DATE '2014-12-10')}"
+argument_list|,
+literal|"cannot translate call EXTRACT.*"
+argument_list|,
+literal|true
+argument_list|)
+expr_stmt|;
 name|tester
 operator|.
 name|checkScalar
 argument_list|(
-literal|"{fn DAYOFWEEK(date)}"
+literal|"{fn HOUR(TIMESTAMP '2014-12-10 12:34:56')}"
 argument_list|,
-literal|null
+literal|12
 argument_list|,
-literal|""
+literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-block|}
-if|if
-condition|(
-literal|false
-condition|)
-block|{
 name|tester
 operator|.
 name|checkScalar
 argument_list|(
-literal|"{fn DAYOFYEAR(date)}"
+literal|"{fn MINUTE(TIMESTAMP '2014-12-10 12:34:56')}"
 argument_list|,
-literal|null
+literal|34
 argument_list|,
-literal|""
+literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-block|}
-if|if
-condition|(
-literal|false
-condition|)
-block|{
 name|tester
 operator|.
 name|checkScalar
 argument_list|(
-literal|"{fn HOUR(time)}"
+literal|"{fn MONTH(DATE '2014-12-10')}"
 argument_list|,
-literal|null
+literal|12
 argument_list|,
-literal|""
+literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-block|}
-if|if
-condition|(
-literal|false
-condition|)
-block|{
-name|tester
-operator|.
-name|checkScalar
-argument_list|(
-literal|"{fn MINUTE(time)}"
-argument_list|,
-literal|null
-argument_list|,
-literal|""
-argument_list|)
-expr_stmt|;
-block|}
-if|if
-condition|(
-literal|false
-condition|)
-block|{
-name|tester
-operator|.
-name|checkScalar
-argument_list|(
-literal|"{fn MONTH(date)}"
-argument_list|,
-literal|null
-argument_list|,
-literal|""
-argument_list|)
-expr_stmt|;
-block|}
 if|if
 condition|(
 literal|false
@@ -7233,23 +7197,17 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-if|if
-condition|(
-literal|false
-condition|)
-block|{
 name|tester
 operator|.
 name|checkScalar
 argument_list|(
-literal|"{fn SECOND(time)}"
+literal|"{fn SECOND(TIMESTAMP '2014-12-10 12:34:56')}"
 argument_list|,
-literal|null
+literal|56
 argument_list|,
-literal|""
+literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-block|}
 name|tester
 operator|.
 name|checkScalar
@@ -7278,40 +7236,28 @@ argument_list|,
 literal|"INTEGER NOT NULL"
 argument_list|)
 expr_stmt|;
-if|if
-condition|(
-literal|false
-condition|)
-block|{
+name|tester
+operator|.
+name|checkFails
+argument_list|(
+literal|"{fn WEEK(DATE '2014-12-10')}"
+argument_list|,
+literal|"cannot translate call EXTRACT.*"
+argument_list|,
+literal|true
+argument_list|)
+expr_stmt|;
 name|tester
 operator|.
 name|checkScalar
 argument_list|(
-literal|"{fn WEEK(date)}"
+literal|"{fn YEAR(DATE '2014-12-10')}"
 argument_list|,
-literal|null
+literal|2014
 argument_list|,
-literal|""
+literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-block|}
-if|if
-condition|(
-literal|false
-condition|)
-block|{
-name|tester
-operator|.
-name|checkScalar
-argument_list|(
-literal|"{fn YEAR(date)}"
-argument_list|,
-literal|null
-argument_list|,
-literal|""
-argument_list|)
-expr_stmt|;
-block|}
 comment|// System Functions
 name|tester
 operator|.
@@ -20044,6 +19990,45 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testYear
+parameter_list|()
+block|{
+name|tester
+operator|.
+name|setFor
+argument_list|(
+name|SqlStdOperatorTable
+operator|.
+name|YEAR
+argument_list|,
+name|VM_FENNEL
+argument_list|,
+name|VM_JAVA
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"year(date '2008-1-23')"
+argument_list|,
+literal|"2008"
+argument_list|,
+literal|"BIGINT NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkNull
+argument_list|(
+literal|"year(cast(null as date))"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testQuarter
 parameter_list|()
 block|{
@@ -20197,6 +20182,333 @@ operator|.
 name|checkNull
 argument_list|(
 literal|"quarter(cast(null as date))"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testMonth
+parameter_list|()
+block|{
+name|tester
+operator|.
+name|setFor
+argument_list|(
+name|SqlStdOperatorTable
+operator|.
+name|MONTH
+argument_list|,
+name|VM_FENNEL
+argument_list|,
+name|VM_JAVA
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"month(date '2008-1-23')"
+argument_list|,
+literal|"1"
+argument_list|,
+literal|"BIGINT NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkNull
+argument_list|(
+literal|"month(cast(null as date))"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testWeek
+parameter_list|()
+block|{
+name|tester
+operator|.
+name|setFor
+argument_list|(
+name|SqlStdOperatorTable
+operator|.
+name|WEEK
+argument_list|,
+name|VM_FENNEL
+argument_list|,
+name|VM_JAVA
+argument_list|)
+expr_stmt|;
+comment|// TODO: Not implemented in operator test execution code
+name|tester
+operator|.
+name|checkFails
+argument_list|(
+literal|"week(date '2008-1-23')"
+argument_list|,
+literal|"cannot translate call EXTRACT.*"
+argument_list|,
+literal|true
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkFails
+argument_list|(
+literal|"week(cast(null as date))"
+argument_list|,
+literal|"cannot translate call EXTRACT.*"
+argument_list|,
+literal|true
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testDayOfYear
+parameter_list|()
+block|{
+name|tester
+operator|.
+name|setFor
+argument_list|(
+name|SqlStdOperatorTable
+operator|.
+name|DAYOFYEAR
+argument_list|,
+name|VM_FENNEL
+argument_list|,
+name|VM_JAVA
+argument_list|)
+expr_stmt|;
+comment|// TODO: Not implemented in operator test execution code
+name|tester
+operator|.
+name|checkFails
+argument_list|(
+literal|"dayofyear(date '2008-1-23')"
+argument_list|,
+literal|"cannot translate call EXTRACT.*"
+argument_list|,
+literal|true
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkFails
+argument_list|(
+literal|"dayofyear(cast(null as date))"
+argument_list|,
+literal|"cannot translate call EXTRACT.*"
+argument_list|,
+literal|true
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testDayOfMonth
+parameter_list|()
+block|{
+name|tester
+operator|.
+name|setFor
+argument_list|(
+name|SqlStdOperatorTable
+operator|.
+name|DAYOFMONTH
+argument_list|,
+name|VM_FENNEL
+argument_list|,
+name|VM_JAVA
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"dayofmonth(date '2008-1-23')"
+argument_list|,
+literal|"23"
+argument_list|,
+literal|"BIGINT NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkNull
+argument_list|(
+literal|"dayofmonth(cast(null as date))"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testDayOfWeek
+parameter_list|()
+block|{
+name|tester
+operator|.
+name|setFor
+argument_list|(
+name|SqlStdOperatorTable
+operator|.
+name|DAYOFWEEK
+argument_list|,
+name|VM_FENNEL
+argument_list|,
+name|VM_JAVA
+argument_list|)
+expr_stmt|;
+comment|// TODO: Not implemented in operator test execution code
+name|tester
+operator|.
+name|checkFails
+argument_list|(
+literal|"dayofweek(date '2008-1-23')"
+argument_list|,
+literal|"cannot translate call EXTRACT.*"
+argument_list|,
+literal|true
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkFails
+argument_list|(
+literal|"dayofweek(cast(null as date))"
+argument_list|,
+literal|"cannot translate call EXTRACT.*"
+argument_list|,
+literal|true
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testHour
+parameter_list|()
+block|{
+name|tester
+operator|.
+name|setFor
+argument_list|(
+name|SqlStdOperatorTable
+operator|.
+name|HOUR
+argument_list|,
+name|VM_FENNEL
+argument_list|,
+name|VM_JAVA
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"hour(timestamp '2008-1-23 12:34:56')"
+argument_list|,
+literal|"12"
+argument_list|,
+literal|"BIGINT NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkNull
+argument_list|(
+literal|"hour(cast(null as timestamp))"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testMinute
+parameter_list|()
+block|{
+name|tester
+operator|.
+name|setFor
+argument_list|(
+name|SqlStdOperatorTable
+operator|.
+name|MINUTE
+argument_list|,
+name|VM_FENNEL
+argument_list|,
+name|VM_JAVA
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"minute(timestamp '2008-1-23 12:34:56')"
+argument_list|,
+literal|"34"
+argument_list|,
+literal|"BIGINT NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkNull
+argument_list|(
+literal|"minute(cast(null as timestamp))"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSecond
+parameter_list|()
+block|{
+name|tester
+operator|.
+name|setFor
+argument_list|(
+name|SqlStdOperatorTable
+operator|.
+name|SECOND
+argument_list|,
+name|VM_FENNEL
+argument_list|,
+name|VM_JAVA
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"second(timestamp '2008-1-23 12:34:56')"
+argument_list|,
+literal|"56"
+argument_list|,
+literal|"BIGINT NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkNull
+argument_list|(
+literal|"second(cast(null as timestamp))"
 argument_list|)
 expr_stmt|;
 block|}
