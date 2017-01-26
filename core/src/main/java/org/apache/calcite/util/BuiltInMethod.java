@@ -1997,6 +1997,15 @@ operator|.
 name|class
 argument_list|)
 block|,
+name|EMPTY_ENUMERABLE
+argument_list|(
+name|Linq4j
+operator|.
+name|class
+argument_list|,
+literal|"emptyEnumerable"
+argument_list|)
+block|,
 name|NULLS_COMPARATOR
 argument_list|(
 name|Functions
