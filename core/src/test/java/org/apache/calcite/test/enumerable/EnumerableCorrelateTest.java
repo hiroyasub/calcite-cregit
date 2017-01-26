@@ -165,7 +165,7 @@ literal|""
 operator|+
 literal|"EnumerableCalc(expr#0..3=[{inputs}], empid=[$t0], name=[$t2])\n"
 operator|+
-literal|"  EnumerableCorrelate(correlation=[$cor0], joinType=[INNER], requiredColumns=[{1}])\n"
+literal|"  EnumerableCorrelate(correlation=[$cor0], joinType=[inner], requiredColumns=[{1}])\n"
 operator|+
 literal|"    EnumerableCalc(expr#0..4=[{inputs}], proj#0..2=[{exprs}])\n"
 operator|+

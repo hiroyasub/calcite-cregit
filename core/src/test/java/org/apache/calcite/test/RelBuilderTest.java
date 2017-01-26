@@ -5635,7 +5635,7 @@ name|expected
 init|=
 literal|""
 operator|+
-literal|"LogicalCorrelate(correlation=[$cor0], joinType=[LEFT], requiredColumns=[{7}])\n"
+literal|"LogicalCorrelate(correlation=[$cor0], joinType=[left], requiredColumns=[{7}])\n"
 operator|+
 literal|"  LogicalTableScan(table=[[scott, EMP]])\n"
 operator|+

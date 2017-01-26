@@ -17926,7 +17926,7 @@ literal|"PLAN="
 operator|+
 literal|"EnumerableCalc(expr#0..5=[{inputs}], expr#6=[IS NULL($t5)], proj#0..4=[{exprs}], $condition=[$t6])\n"
 operator|+
-literal|"  EnumerableCorrelate(correlation=[$cor0], joinType=[LEFT], requiredColumns=[{1}])\n"
+literal|"  EnumerableCorrelate(correlation=[$cor0], joinType=[left], requiredColumns=[{1}])\n"
 operator|+
 literal|"    EnumerableTableScan(table=[[hr, emps]])\n"
 operator|+
