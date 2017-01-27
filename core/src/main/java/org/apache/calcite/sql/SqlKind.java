@@ -487,6 +487,16 @@ block|,
 comment|/** The {@code ROW_NUMBER} window function. */
 name|CUME_DIST
 block|,
+comment|// Group functions
+comment|/** The {@code TUMBLE} group function. */
+name|TUMBLE
+block|,
+comment|/** The {@code TUMBLE_START} auxiliary function of    * the {@link #TUMBLE} function. */
+name|TUMBLE_START
+block|,
+comment|/** The {@code TUMBLE_END} auxiliary function of    * the {@link #TUMBLE} function. */
+name|TUMBLE_END
+block|,
 comment|// DDL and session control statements follow. The list is not exhaustive: feel
 comment|// free to add more.
 comment|/** {@code COMMIT} session control statement. */

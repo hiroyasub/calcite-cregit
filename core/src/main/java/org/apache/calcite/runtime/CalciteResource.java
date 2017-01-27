@@ -3080,6 +3080,39 @@ argument_list|>
 name|selectMissingFrom
 parameter_list|()
 function_decl|;
+annotation|@
+name|BaseMessage
+argument_list|(
+literal|"Group function ''{0}'' can only appear in GROUP BY clause"
+argument_list|)
+name|ExInst
+argument_list|<
+name|SqlValidatorException
+argument_list|>
+name|groupFunctionMustAppearInGroupByClause
+parameter_list|(
+name|String
+name|funcName
+parameter_list|)
+function_decl|;
+annotation|@
+name|BaseMessage
+argument_list|(
+literal|"Call to auxiliary group function ''{0}'' must have matching call to group function ''{1}'' in GROUP BY clause"
+argument_list|)
+name|ExInst
+argument_list|<
+name|SqlValidatorException
+argument_list|>
+name|auxiliaryWithoutMatchingGroupCall
+parameter_list|(
+name|String
+name|func1
+parameter_list|,
+name|String
+name|func2
+parameter_list|)
+function_decl|;
 block|}
 end_interface
 

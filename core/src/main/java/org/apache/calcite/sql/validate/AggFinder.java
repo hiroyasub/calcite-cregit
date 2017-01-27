@@ -199,13 +199,18 @@ specifier|private
 name|boolean
 name|aggregate
 decl_stmt|;
+comment|/** Whether to find group functions (e.g. {@code TUMBLE})    * or group auxiliary functions (e.g. {@code TUMBLE_START}). */
+specifier|private
+name|boolean
+name|group
+decl_stmt|;
 specifier|private
 specifier|final
 name|AggFinder
 name|delegate
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**    * Creates an AggFinder.    *    * @param opTab Operator table    * @param over Whether to find windowed function calls {@code agg(x) OVER    *             windowSpec}    * @param aggregate Whether to find non-windowed aggregate calls    * @param delegate Finder to which to delegate when processing the arguments    *                  to a non-windowed aggregate    */
+comment|/**    * Creates an AggFinder.    *    * @param opTab Operator table    * @param over Whether to find windowed function calls {@code agg(x) OVER    *             windowSpec}    * @param aggregate Whether to find non-windowed aggregate calls    * @param group Whether to find group functions (e.g. {@code TUMBLE})    * @param delegate Finder to which to delegate when processing the arguments    */
 name|AggFinder
 parameter_list|(
 name|SqlOperatorTable
@@ -216,6 +221,9 @@ name|over
 parameter_list|,
 name|boolean
 name|aggregate
+parameter_list|,
+name|boolean
+name|group
 parameter_list|,
 name|AggFinder
 name|delegate
@@ -241,6 +249,12 @@ name|aggregate
 expr_stmt|;
 name|this
 operator|.
+name|group
+operator|=
+name|group
+expr_stmt|;
+name|this
+operator|.
 name|delegate
 operator|=
 name|delegate
@@ -249,7 +263,7 @@ block|}
 comment|//~ Methods ----------------------------------------------------------------
 comment|/**    * Finds an aggregate.    *    * @param node Parse tree to search    * @return First aggregate function in parse tree, or null if not found    */
 specifier|public
-name|SqlNode
+name|SqlCall
 name|findAgg
 parameter_list|(
 name|SqlNode
@@ -288,7 +302,7 @@ argument_list|)
 expr_stmt|;
 return|return
 operator|(
-name|SqlNode
+name|SqlCall
 operator|)
 name|e
 operator|.
@@ -298,7 +312,7 @@ return|;
 block|}
 block|}
 specifier|public
-name|SqlNode
+name|SqlCall
 name|findAgg
 parameter_list|(
 name|List
@@ -349,7 +363,7 @@ argument_list|)
 expr_stmt|;
 return|return
 operator|(
-name|SqlNode
+name|SqlCall
 operator|)
 name|e
 operator|.
@@ -423,6 +437,26 @@ name|call
 argument_list|)
 throw|;
 block|}
+block|}
+if|if
+condition|(
+name|group
+operator|&&
+name|operator
+operator|.
+name|isGroup
+argument_list|()
+condition|)
+block|{
+throw|throw
+operator|new
+name|Util
+operator|.
+name|FoundOne
+argument_list|(
+name|call
+argument_list|)
+throw|;
 block|}
 comment|// User-defined function may not be resolved yet.
 if|if

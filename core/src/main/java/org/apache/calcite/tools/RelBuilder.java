@@ -729,20 +729,6 @@ name|calcite
 operator|.
 name|util
 operator|.
-name|Static
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|util
-operator|.
 name|Util
 import|;
 end_import
@@ -1004,6 +990,22 @@ operator|.
 name|util
 operator|.
 name|TreeSet
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|util
+operator|.
+name|Static
+operator|.
+name|RESOURCE
 import|;
 end_import
 
@@ -4118,8 +4120,6 @@ name|BOOLEAN
 condition|)
 block|{
 throw|throw
-name|Static
-operator|.
 name|RESOURCE
 operator|.
 name|filterMustBeBoolean
@@ -4399,8 +4399,6 @@ literal|null
 condition|)
 block|{
 throw|throw
-name|Static
-operator|.
 name|RESOURCE
 operator|.
 name|tableNotFound

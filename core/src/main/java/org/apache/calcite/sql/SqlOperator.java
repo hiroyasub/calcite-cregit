@@ -2307,6 +2307,26 @@ return|return
 literal|true
 return|;
 block|}
+comment|/**    * Returns whether this is a group function.    *    *<p>Group functions can only appear in the GROUP BY clause.    *    *<p>Examples are {@code HOP}, {@code TUMBLE}, {@code SESSION}.    *    *<p>Group functions have auxiliary functions, e.g. {@code HOP_START}, but    * these are not group functions.    */
+specifier|public
+name|boolean
+name|isGroup
+parameter_list|()
+block|{
+return|return
+literal|false
+return|;
+block|}
+comment|/**    * Returns whether this is an group auxiliary function.    *    *<p>Examples are {@code HOP_START} and {@code HOP_END} (both auxiliary to    * {@code HOP}).    *    * @see #isGroup()    */
+specifier|public
+name|boolean
+name|isGroupAuxiliary
+parameter_list|()
+block|{
+return|return
+literal|false
+return|;
+block|}
 comment|/**    * Accepts a {@link SqlVisitor}, visiting each operand of a call. Returns    * null.    *    * @param visitor Visitor    * @param call    Call to visit    */
 specifier|public
 parameter_list|<

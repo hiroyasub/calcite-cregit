@@ -24819,6 +24819,143 @@ literal|"RecordType(ANY NEWID) NOT NULL"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testStreamTumble
+parameter_list|()
+block|{
+comment|// TUMBLE
+name|sql
+argument_list|(
+literal|"select stream tumble_end(rowtime, interval '2' hour) as rowtime\n"
+operator|+
+literal|"from orders\n"
+operator|+
+literal|"group by tumble(rowtime, interval '2' hour), productId"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select stream ^tumble(rowtime, interval '2' hour)^ as rowtime\n"
+operator|+
+literal|"from orders\n"
+operator|+
+literal|"group by tumble(rowtime, interval '2' hour), productId"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Group function 'TUMBLE' can only appear in GROUP BY clause"
+argument_list|)
+expr_stmt|;
+comment|// TUMBLE with align argument
+name|sql
+argument_list|(
+literal|"select stream\n"
+operator|+
+literal|"  tumble_end(rowtime, interval '2' hour, time '00:12:00') as rowtime\n"
+operator|+
+literal|"from orders\n"
+operator|+
+literal|"group by tumble(rowtime, interval '2' hour, time '00:12:00')"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+comment|// TUMBLE_END without corresponding TUMBLE
+name|sql
+argument_list|(
+literal|"select stream\n"
+operator|+
+literal|"  ^tumble_end(rowtime, interval '2' hour, time '00:13:00')^ as rowtime\n"
+operator|+
+literal|"from orders\n"
+operator|+
+literal|"group by floor(rowtime to hour)"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Call to auxiliary group function 'TUMBLE_END' must have "
+operator|+
+literal|"matching call to group function 'TUMBLE' in GROUP BY clause"
+argument_list|)
+expr_stmt|;
+comment|// Arguments to TUMBLE_END are slightly different to arguments to TUMBLE
+name|sql
+argument_list|(
+literal|"select stream\n"
+operator|+
+literal|"  ^tumble_start(rowtime, interval '2' hour, time '00:13:00')^ as rowtime\n"
+operator|+
+literal|"from orders\n"
+operator|+
+literal|"group by tumble(rowtime, interval '2' hour, time '00:12:00')"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Call to auxiliary group function 'TUMBLE_START' must have "
+operator|+
+literal|"matching call to group function 'TUMBLE' in GROUP BY clause"
+argument_list|)
+expr_stmt|;
+comment|// Even though align defaults to TIME '00:00:00', we need structural
+comment|// equivalence, not semantic equivalence.
+name|sql
+argument_list|(
+literal|"select stream\n"
+operator|+
+literal|"  ^tumble_end(rowtime, interval '2' hour, time '00:00:00')^ as rowtime\n"
+operator|+
+literal|"from orders\n"
+operator|+
+literal|"group by tumble(rowtime, interval '2' hour)"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Call to auxiliary group function 'TUMBLE_END' must have "
+operator|+
+literal|"matching call to group function 'TUMBLE' in GROUP BY clause"
+argument_list|)
+expr_stmt|;
+comment|// TUMBLE query produces no monotonic column - OK
+name|sql
+argument_list|(
+literal|"select stream productId\n"
+operator|+
+literal|"from orders\n"
+operator|+
+literal|"group by tumble(rowtime, interval '2' hour), productId"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select stream productId\n"
+operator|+
+literal|"from orders\n"
+operator|+
+literal|"^group by productId,\n"
+operator|+
+literal|"  tumble(timestamp '1990-03-04 12:34:56', interval '2' hour)^"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+name|STR_AGG_REQUIRES_MONO
+argument_list|)
+expr_stmt|;
+block|}
 block|}
 end_class
 
