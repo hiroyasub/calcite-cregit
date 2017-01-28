@@ -22263,80 +22263,66 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-if|if
-condition|(
-name|TODO
-condition|)
-block|{
-comment|// Not supported, fails in type validation because
-comment|// the extract unit is YearMonth interval type unit.
 name|tester
 operator|.
-name|checkScalar
+name|checkFails
 argument_list|(
-literal|"extract(month from interval '2 3:4:5.678' day to second)"
+literal|"^extract(month from interval '2 3:4:5.678' day to second)^"
 argument_list|,
-literal|"0"
+literal|"(?s)Cannot apply 'EXTRACT' to arguments of type 'EXTRACT\\(<INTERVAL "
+operator|+
+literal|"MONTH> FROM<INTERVAL DAY TO SECOND>\\)'\\. Supported "
+operator|+
+literal|"form\\(s\\):.*"
 argument_list|,
-literal|"BIGINT NOT NULL"
+literal|false
 argument_list|)
 expr_stmt|;
 name|tester
 operator|.
-name|checkScalar
+name|checkFails
 argument_list|(
-literal|"extract(quarter from interval '2 3:4:5.678' day to second)"
+literal|"^extract(quarter from interval '2 3:4:5.678' day to second)^"
 argument_list|,
-literal|"0"
+literal|"(?s)Cannot apply 'EXTRACT' to arguments of type 'EXTRACT\\(<INTERVAL "
+operator|+
+literal|"QUARTER> FROM<INTERVAL DAY TO SECOND>\\)'\\. Supported "
+operator|+
+literal|"form\\(s\\):.*"
 argument_list|,
-literal|"BIGINT NOT NULL"
+literal|false
 argument_list|)
 expr_stmt|;
 name|tester
 operator|.
-name|checkScalar
+name|checkFails
 argument_list|(
-literal|"extract(year from interval '2 3:4:5.678' day to second)"
+literal|"^extract(year from interval '2 3:4:5.678' day to second)^"
 argument_list|,
-literal|"0"
+literal|"(?s)Cannot apply 'EXTRACT' to arguments of type 'EXTRACT\\(<INTERVAL "
+operator|+
+literal|"YEAR> FROM<INTERVAL DAY TO SECOND>\\)'\\. Supported "
+operator|+
+literal|"form\\(s\\):.*"
 argument_list|,
-literal|"BIGINT NOT NULL"
+literal|false
 argument_list|)
 expr_stmt|;
 name|tester
 operator|.
-name|checkScalar
+name|checkFails
 argument_list|(
-literal|"extract(decade from interval '2 3:4:5.678' day to second)"
+literal|"^extract(century from interval '2 3:4:5.678' day to second)^"
 argument_list|,
-literal|"0"
+literal|"(?s)Cannot apply 'EXTRACT' to arguments of type 'EXTRACT\\(<INTERVAL "
+operator|+
+literal|"CENTURY> FROM<INTERVAL DAY TO SECOND>\\)'\\. Supported "
+operator|+
+literal|"form\\(s\\):.*"
 argument_list|,
-literal|"BIGINT NOT NULL"
+literal|false
 argument_list|)
 expr_stmt|;
-name|tester
-operator|.
-name|checkScalar
-argument_list|(
-literal|"extract(century from interval '2 3:4:5.678' day to second)"
-argument_list|,
-literal|"0"
-argument_list|,
-literal|"BIGINT NOT NULL"
-argument_list|)
-expr_stmt|;
-name|tester
-operator|.
-name|checkScalar
-argument_list|(
-literal|"extract(millennium from interval '2 3:4:5.678' day to second)"
-argument_list|,
-literal|"0"
-argument_list|,
-literal|"BIGINT NOT NULL"
-argument_list|)
-expr_stmt|;
-block|}
 block|}
 annotation|@
 name|Test
@@ -22456,40 +22442,70 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-comment|// TODO: Not implemented in operator test execution code
 name|tester
 operator|.
-name|checkFails
+name|checkScalar
 argument_list|(
 literal|"extract(doy from date '2008-2-23')"
 argument_list|,
-literal|"cannot translate call EXTRACT.*"
+literal|"54"
 argument_list|,
-literal|true
+literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-comment|// TODO: Not implemented in operator test execution code
 name|tester
 operator|.
-name|checkFails
+name|checkScalar
 argument_list|(
 literal|"extract(dow from date '2008-2-23')"
 argument_list|,
-literal|"cannot translate call EXTRACT.*"
+literal|"7"
 argument_list|,
-literal|true
+literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-comment|// TODO: Not implemented in operator test execution code
 name|tester
 operator|.
-name|checkFails
+name|checkScalar
+argument_list|(
+literal|"extract(dow from date '2008-2-24')"
+argument_list|,
+literal|"1"
+argument_list|,
+literal|"BIGINT NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
 argument_list|(
 literal|"extract(week from date '2008-2-23')"
 argument_list|,
-literal|"cannot translate call EXTRACT.*"
+literal|"8"
 argument_list|,
-literal|true
+literal|"BIGINT NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"extract(week from timestamp '2008-2-23 01:23:45')"
+argument_list|,
+literal|"8"
+argument_list|,
+literal|"BIGINT NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"extract(week from cast(null as date))"
+argument_list|,
+literal|null
+argument_list|,
+literal|"BIGINT"
 argument_list|)
 expr_stmt|;
 name|tester
@@ -22509,6 +22525,28 @@ name|checkScalar
 argument_list|(
 literal|"extract(century from date '2008-2-23')"
 argument_list|,
+literal|"21"
+argument_list|,
+literal|"BIGINT NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"extract(century from date '2001-01-01')"
+argument_list|,
+literal|"21"
+argument_list|,
+literal|"BIGINT NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"extract(century from date '2000-12-31')"
+argument_list|,
 literal|"20"
 argument_list|,
 literal|"BIGINT NOT NULL"
@@ -22518,9 +22556,64 @@ name|tester
 operator|.
 name|checkScalar
 argument_list|(
-literal|"extract(millennium from date '2008-2-23')"
+literal|"extract(century from date '1852-06-07')"
+argument_list|,
+literal|"19"
+argument_list|,
+literal|"BIGINT NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"extract(century from date '0001-02-01')"
+argument_list|,
+literal|"1"
+argument_list|,
+literal|"BIGINT NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"extract(millennium from date '2000-2-23')"
 argument_list|,
 literal|"2"
+argument_list|,
+literal|"BIGINT NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"extract(millennium from date '1969-2-23')"
+argument_list|,
+literal|"2"
+argument_list|,
+literal|"BIGINT NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"extract(millennium from date '2000-12-31')"
+argument_list|,
+literal|"2"
+argument_list|,
+literal|"BIGINT NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"extract(millennium from date '2001-01-01')"
+argument_list|,
+literal|"3"
 argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
@@ -22689,6 +22782,28 @@ name|checkScalar
 argument_list|(
 literal|"extract(century from timestamp '2008-2-23 12:34:56')"
 argument_list|,
+literal|"21"
+argument_list|,
+literal|"BIGINT NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"extract(century from timestamp '2001-01-01 12:34:56')"
+argument_list|,
+literal|"21"
+argument_list|,
+literal|"BIGINT NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"extract(century from timestamp '2000-12-31 12:34:56')"
+argument_list|,
 literal|"20"
 argument_list|,
 literal|"BIGINT NOT NULL"
@@ -22699,6 +22814,17 @@ operator|.
 name|checkScalar
 argument_list|(
 literal|"extract(millennium from timestamp '2008-2-23 12:34:56')"
+argument_list|,
+literal|"3"
+argument_list|,
+literal|"BIGINT NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"extract(millennium from timestamp '2000-2-23 12:34:56')"
 argument_list|,
 literal|"2"
 argument_list|,
@@ -22778,28 +22904,6 @@ argument_list|(
 literal|"extract(second from interval '2 3:4:5.678' day to second)"
 argument_list|,
 literal|"5"
-argument_list|,
-literal|"BIGINT NOT NULL"
-argument_list|)
-expr_stmt|;
-name|tester
-operator|.
-name|checkScalar
-argument_list|(
-literal|"extract(year from interval '4-2' year to month)"
-argument_list|,
-literal|"4"
-argument_list|,
-literal|"BIGINT NOT NULL"
-argument_list|)
-expr_stmt|;
-name|tester
-operator|.
-name|checkScalar
-argument_list|(
-literal|"extract(month from interval '4-2' year to month)"
-argument_list|,
-literal|"2"
 argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
