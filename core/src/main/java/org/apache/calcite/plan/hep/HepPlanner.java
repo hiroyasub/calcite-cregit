@@ -826,6 +826,23 @@ return|return
 name|root
 return|;
 block|}
+specifier|public
+name|List
+argument_list|<
+name|RelOptRule
+argument_list|>
+name|getRules
+parameter_list|()
+block|{
+return|return
+name|ImmutableList
+operator|.
+name|copyOf
+argument_list|(
+name|allRules
+argument_list|)
+return|;
+block|}
 comment|// implement RelOptPlanner
 specifier|public
 name|boolean

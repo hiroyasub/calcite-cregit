@@ -220,9 +220,17 @@ argument_list|>
 name|getRelTraitDefs
 parameter_list|()
 function_decl|;
-comment|/**    * Removes all internal state, including all rules.    */
+comment|/**    * Removes all internal state, including all registered rules,    * materialized views, and lattices.    */
 name|void
 name|clear
+parameter_list|()
+function_decl|;
+comment|/**    * Returns the list of all registered rules.    */
+name|List
+argument_list|<
+name|RelOptRule
+argument_list|>
+name|getRules
 parameter_list|()
 function_decl|;
 comment|/**    * Registers a rule.    *    *<p>If the rule has already been registered, does nothing.    * This method determines if the given rule is a    * {@link org.apache.calcite.rel.convert.ConverterRule} and pass the    * ConverterRule to all    * {@link #addRelTraitDef(RelTraitDef) registered} RelTraitDef    * instances.    *    * @return whether the rule was added, as per    * {@link java.util.Collection#add}    */

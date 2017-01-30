@@ -2084,7 +2084,7 @@ argument_list|,
 literal|"VALUES 1"
 argument_list|)
 decl_stmt|;
-specifier|private
+specifier|public
 specifier|static
 specifier|final
 name|List

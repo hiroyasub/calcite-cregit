@@ -633,6 +633,23 @@ operator|.
 name|clear
 argument_list|()
 expr_stmt|;
+for|for
+control|(
+name|PhaseMatchList
+name|matchList
+range|:
+name|matchListMap
+operator|.
+name|values
+argument_list|()
+control|)
+block|{
+name|matchList
+operator|.
+name|clear
+argument_list|()
+expr_stmt|;
+block|}
 block|}
 comment|/**    * Removes the {@link PhaseMatchList rule-match list} for the given planner    * phase.    */
 specifier|public
