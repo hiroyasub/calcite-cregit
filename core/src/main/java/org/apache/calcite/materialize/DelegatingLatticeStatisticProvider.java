@@ -15,6 +15,16 @@ name|materialize
 package|;
 end_package
 
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|List
+import|;
+end_import
+
 begin_comment
 comment|/**  * Implementation of {@link LatticeStatisticProvider} that delegates  * to an underlying provider.  */
 end_comment
@@ -47,16 +57,16 @@ name|provider
 expr_stmt|;
 block|}
 specifier|public
-name|int
+name|double
 name|cardinality
 parameter_list|(
-name|Lattice
-name|lattice
-parameter_list|,
+name|List
+argument_list|<
 name|Lattice
 operator|.
 name|Column
-name|column
+argument_list|>
+name|columns
 parameter_list|)
 block|{
 return|return
@@ -64,9 +74,7 @@ name|provider
 operator|.
 name|cardinality
 argument_list|(
-name|lattice
-argument_list|,
-name|column
+name|columns
 argument_list|)
 return|;
 block|}
