@@ -475,18 +475,6 @@ begin_import
 import|import
 name|org
 operator|.
-name|joda
-operator|.
-name|time
-operator|.
-name|Interval
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
 name|slf4j
 operator|.
 name|Logger
@@ -921,7 +909,7 @@ return|return;
 block|}
 name|List
 argument_list|<
-name|Interval
+name|LocalInterval
 argument_list|>
 name|intervals
 init|=

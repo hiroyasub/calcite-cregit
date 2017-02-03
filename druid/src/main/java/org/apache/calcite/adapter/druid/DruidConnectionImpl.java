@@ -319,18 +319,6 @@ end_import
 
 begin_import
 import|import
-name|org
-operator|.
-name|joda
-operator|.
-name|time
-operator|.
-name|Interval
-import|;
-end_import
-
-begin_import
-import|import
 name|java
 operator|.
 name|io
@@ -2656,7 +2644,7 @@ name|timestampColumnName
 parameter_list|,
 name|List
 argument_list|<
-name|Interval
+name|LocalInterval
 argument_list|>
 name|intervals
 parameter_list|,
