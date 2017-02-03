@@ -444,9 +444,15 @@ literal|"SCHEMA(CATALOG.SALES)"
 argument_list|,
 literal|"TABLE(CATALOG.SALES.EMP)"
 argument_list|,
+literal|"TABLE(CATALOG.SALES.EMPDEFAULTS)"
+argument_list|,
+literal|"TABLE(CATALOG.SALES.EMPNULLABLES)"
+argument_list|,
 literal|"TABLE(CATALOG.SALES.EMP_B)"
 argument_list|,
 literal|"TABLE(CATALOG.SALES.EMP_20)"
+argument_list|,
+literal|"TABLE(CATALOG.SALES.EMPNULLABLES_20)"
 argument_list|,
 literal|"TABLE(CATALOG.SALES.EMP_ADDRESS)"
 argument_list|,

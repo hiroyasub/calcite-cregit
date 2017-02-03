@@ -187,8 +187,8 @@ name|getTypeFactory
 parameter_list|()
 function_decl|;
 comment|/**    * Returns the factory which supplies default values for INSERT, UPDATE, and    * NEW.    */
-name|DefaultValueFactory
-name|getDefaultValueFactory
+name|InitializerExpressionFactory
+name|getInitializerExpressionFactory
 parameter_list|()
 function_decl|;
 comment|/**    * Returns the validator.    */

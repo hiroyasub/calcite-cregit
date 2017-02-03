@@ -24,7 +24,7 @@ specifier|public
 interface|interface
 name|Wrapper
 block|{
-comment|/** Returns an instance of a class, or null. */
+comment|/** Finds an instance of an interface implemented by this object,    * or returns null if this object does not support that interface. */
 parameter_list|<
 name|C
 parameter_list|>

@@ -53,6 +53,36 @@ name|apache
 operator|.
 name|calcite
 operator|.
+name|rel
+operator|.
+name|type
+operator|.
+name|RelDataTypeFactory
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rex
+operator|.
+name|RexBuilder
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
 name|rex
 operator|.
 name|RexNode
@@ -84,16 +114,40 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * DefaultValueFactory supplies default values for INSERT, UPDATE, and NEW.  *  *<p>TODO jvs 26-Feb-2005: rename this to InitializerExpressionFactory, since  * it is in the process of being generalized to handle constructor invocations  * and eventually generated columns.  */
+comment|/**  * An implementation of {@link InitializerExpressionFactory} that always supplies NULL.  */
 end_comment
 
-begin_interface
+begin_class
 specifier|public
-interface|interface
-name|DefaultValueFactory
+class|class
+name|NullInitializerExpressionFactory
+implements|implements
+name|InitializerExpressionFactory
 block|{
-comment|//~ Methods ----------------------------------------------------------------
-comment|/**    * Whether a column is always generated. If a column is always generated,    * then non-generated values cannot be inserted into the column.    */
+specifier|private
+specifier|final
+name|RexBuilder
+name|rexBuilder
+decl_stmt|;
+specifier|public
+name|NullInitializerExpressionFactory
+parameter_list|(
+name|RelDataTypeFactory
+name|typeFactory
+parameter_list|)
+block|{
+name|this
+operator|.
+name|rexBuilder
+operator|=
+operator|new
+name|RexBuilder
+argument_list|(
+name|typeFactory
+argument_list|)
+expr_stmt|;
+block|}
+specifier|public
 name|boolean
 name|isGeneratedAlways
 parameter_list|(
@@ -103,8 +157,12 @@ parameter_list|,
 name|int
 name|iColumn
 parameter_list|)
-function_decl|;
-comment|/**    * Creates an expression which evaluates to the default value for a    * particular column.    *    * @param table   the table containing the column    * @param iColumn the 0-based offset of the column in the table    * @return default value expression    */
+block|{
+return|return
+literal|false
+return|;
+block|}
+specifier|public
 name|RexNode
 name|newColumnDefaultValue
 parameter_list|(
@@ -114,8 +172,15 @@ parameter_list|,
 name|int
 name|iColumn
 parameter_list|)
-function_decl|;
-comment|/**    * Creates an expression which evaluates to the initializer expression for a    * particular attribute of a structured type.    *    * @param type            the structured type    * @param constructor     the constructor invoked to initialize the type    * @param iAttribute      the 0-based offset of the attribute in the type    * @param constructorArgs arguments passed to the constructor invocation    * @return default value expression    */
+block|{
+return|return
+name|rexBuilder
+operator|.
+name|constantNull
+argument_list|()
+return|;
+block|}
+specifier|public
 name|RexNode
 name|newAttributeInitializer
 parameter_list|(
@@ -134,12 +199,19 @@ name|RexNode
 argument_list|>
 name|constructorArgs
 parameter_list|)
-function_decl|;
+block|{
+return|return
+name|rexBuilder
+operator|.
+name|constantNull
+argument_list|()
+return|;
 block|}
-end_interface
+block|}
+end_class
 
 begin_comment
-comment|// End DefaultValueFactory.java
+comment|// End NullInitializerExpressionFactory.java
 end_comment
 
 end_unit

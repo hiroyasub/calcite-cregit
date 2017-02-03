@@ -143,6 +143,20 @@ name|apache
 operator|.
 name|calcite
 operator|.
+name|schema
+operator|.
+name|Wrapper
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
 name|util
 operator|.
 name|ImmutableBitSet
@@ -167,6 +181,8 @@ begin_interface
 specifier|public
 interface|interface
 name|RelOptTable
+extends|extends
+name|Wrapper
 block|{
 comment|//~ Methods ----------------------------------------------------------------
 comment|/**    * Obtains an identifier for this table. The identifier must be unique with    * respect to the Connection producing this table.    *    * @return qualified name    */
@@ -219,20 +235,6 @@ name|isKey
 parameter_list|(
 name|ImmutableBitSet
 name|columns
-parameter_list|)
-function_decl|;
-comment|/**    * Finds an interface implemented by this table.    */
-parameter_list|<
-name|T
-parameter_list|>
-name|T
-name|unwrap
-parameter_list|(
-name|Class
-argument_list|<
-name|T
-argument_list|>
-name|clazz
 parameter_list|)
 function_decl|;
 comment|/**    * Generates code for this table.    *    * @param clazz The desired collection class; for example {@code Queryable}.    */

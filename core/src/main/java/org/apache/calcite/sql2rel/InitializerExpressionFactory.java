@@ -11,11 +11,23 @@ name|apache
 operator|.
 name|calcite
 operator|.
-name|sql
-operator|.
-name|validate
+name|sql2rel
 package|;
 end_package
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
+name|RelOptTable
+import|;
+end_import
 
 begin_import
 import|import
@@ -41,9 +53,23 @@ name|apache
 operator|.
 name|calcite
 operator|.
+name|rex
+operator|.
+name|RexNode
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
 name|sql
 operator|.
-name|SqlAccessType
+name|SqlFunction
 import|;
 end_import
 
@@ -58,76 +84,62 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Supplies a {@link SqlValidator} with the metadata for a table.  *  * @see SqlValidatorCatalogReader  */
+comment|/**  * InitializerExpressionFactory supplies default values for INSERT, UPDATE, and NEW.  */
 end_comment
 
 begin_interface
 specifier|public
 interface|interface
-name|SqlValidatorTable
+name|InitializerExpressionFactory
 block|{
 comment|//~ Methods ----------------------------------------------------------------
-name|RelDataType
-name|getRowType
-parameter_list|()
-function_decl|;
-name|List
-argument_list|<
-name|String
-argument_list|>
-name|getQualifiedName
-parameter_list|()
-function_decl|;
-comment|/**    * Returns whether a given column is monotonic.    */
-name|SqlMonotonicity
-name|getMonotonicity
-parameter_list|(
-name|String
-name|columnName
-parameter_list|)
-function_decl|;
-comment|/**    * Returns the access type of the table    */
-name|SqlAccessType
-name|getAllowedAccess
-parameter_list|()
-function_decl|;
+comment|/**    * Whether a column is always generated. If a column is always generated,    * then non-generated values cannot be inserted into the column.    */
 name|boolean
-name|supportsModality
+name|isGeneratedAlways
 parameter_list|(
-name|SqlModality
-name|modality
-parameter_list|)
-function_decl|;
-comment|/**    * Returns whether the ordinal column has a default value.    */
-name|boolean
-name|columnHasDefaultValue
-parameter_list|(
-name|RelDataType
-name|rowType
+name|RelOptTable
+name|table
 parameter_list|,
 name|int
-name|ordinal
+name|iColumn
 parameter_list|)
 function_decl|;
-comment|/**    * Finds an interface implemented by this table.    */
-parameter_list|<
-name|T
-parameter_list|>
-name|T
-name|unwrap
+comment|/**    * Creates an expression which evaluates to the default value for a    * particular column.    *    * @param table   the table containing the column    * @param iColumn the 0-based offset of the column in the table    * @return default value expression    */
+name|RexNode
+name|newColumnDefaultValue
 parameter_list|(
-name|Class
+name|RelOptTable
+name|table
+parameter_list|,
+name|int
+name|iColumn
+parameter_list|)
+function_decl|;
+comment|/**    * Creates an expression which evaluates to the initializer expression for a    * particular attribute of a structured type.    *    * @param type            the structured type    * @param constructor     the constructor invoked to initialize the type    * @param iAttribute      the 0-based offset of the attribute in the type    * @param constructorArgs arguments passed to the constructor invocation    * @return default value expression    */
+name|RexNode
+name|newAttributeInitializer
+parameter_list|(
+name|RelDataType
+name|type
+parameter_list|,
+name|SqlFunction
+name|constructor
+parameter_list|,
+name|int
+name|iAttribute
+parameter_list|,
+name|List
 argument_list|<
-name|T
+name|RexNode
 argument_list|>
-name|clazz
+name|constructorArgs
 parameter_list|)
 function_decl|;
 block|}
 end_interface
 
 begin_comment
-comment|// End SqlValidatorTable.java
+comment|// End InitializerExpressionFactory.java
 end_comment
 
 end_unit

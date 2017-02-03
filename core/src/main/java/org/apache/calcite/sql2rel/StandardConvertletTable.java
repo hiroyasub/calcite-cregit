@@ -5250,7 +5250,7 @@ name|add
 argument_list|(
 name|cx
 operator|.
-name|getDefaultValueFactory
+name|getInitializerExpressionFactory
 argument_list|()
 operator|.
 name|newAttributeInitializer

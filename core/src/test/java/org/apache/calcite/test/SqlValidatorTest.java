@@ -22905,16 +22905,198 @@ name|tester
 operator|.
 name|checkQuery
 argument_list|(
-literal|"insert into emp (empno, deptno) values (1, 1)"
+literal|"insert into empnullables (empno, ename)\n"
+operator|+
+literal|"values (1, 'Ambrosia')"
 argument_list|)
 expr_stmt|;
 name|tester
 operator|.
 name|checkQuery
 argument_list|(
-literal|"insert into emp (empno, deptno)\n"
+literal|"insert into empnullables (empno, ename)\n"
 operator|+
-literal|"select 1, 1 from (values 'a')"
+literal|"select 1, 'Ardy' from (values 'a')"
+argument_list|)
+expr_stmt|;
+specifier|final
+name|String
+name|sql
+init|=
+literal|"insert into emp\n"
+operator|+
+literal|"values (1, 'nom', 'job', 0, timestamp '1970-01-01 00:00:00', 1, 1,\n"
+operator|+
+literal|"  1, false)"
+decl_stmt|;
+name|tester
+operator|.
+name|checkQuery
+argument_list|(
+name|sql
+argument_list|)
+expr_stmt|;
+specifier|final
+name|String
+name|sql2
+init|=
+literal|"insert into emp (empno, ename, job, mgr, hiredate,\n"
+operator|+
+literal|"  sal, comm, deptno, slacker)\n"
+operator|+
+literal|"select 1, 'nom', 'job', 0, timestamp '1970-01-01 00:00:00',\n"
+operator|+
+literal|"  1, 1, 1, false\n"
+operator|+
+literal|"from (values 'a')"
+decl_stmt|;
+name|tester
+operator|.
+name|checkQuery
+argument_list|(
+name|sql2
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkQuery
+argument_list|(
+literal|"insert into empnullables (ename, empno, deptno)\n"
+operator|+
+literal|"values ('Pat', 1, null)"
+argument_list|)
+expr_stmt|;
+specifier|final
+name|String
+name|sql3
+init|=
+literal|"insert into empnullables (\n"
+operator|+
+literal|"  empno, ename, job, hiredate)\n"
+operator|+
+literal|"values (1, 'Jim', 'Baker', timestamp '1970-01-01 00:00:00')"
+decl_stmt|;
+name|tester
+operator|.
+name|checkQuery
+argument_list|(
+name|sql3
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkQuery
+argument_list|(
+literal|"insert into empnullables (empno, ename)\n"
+operator|+
+literal|"select 1, 'b' from (values 'a')"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkQuery
+argument_list|(
+literal|"insert into empnullables (empno, ename)\n"
+operator|+
+literal|"values (1, 'Karl')"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testInsertSubset
+parameter_list|()
+block|{
+specifier|final
+name|SqlTester
+name|pragmaticTester
+init|=
+name|tester
+operator|.
+name|withConformance
+argument_list|(
+name|SqlConformanceEnum
+operator|.
+name|PRAGMATIC_2003
+argument_list|)
+decl_stmt|;
+specifier|final
+name|String
+name|sql1
+init|=
+literal|"insert into empnullables\n"
+operator|+
+literal|"values (1, 'nom', 'job', 0, timestamp '1970-01-01 00:00:00')"
+decl_stmt|;
+name|pragmaticTester
+operator|.
+name|checkQuery
+argument_list|(
+name|sql1
+argument_list|)
+expr_stmt|;
+specifier|final
+name|String
+name|sql2
+init|=
+literal|"insert into empnullables\n"
+operator|+
+literal|"values (1, 'nom', null, 0, null)"
+decl_stmt|;
+name|pragmaticTester
+operator|.
+name|checkQuery
+argument_list|(
+name|sql2
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testInsertView
+parameter_list|()
+block|{
+name|tester
+operator|.
+name|checkQuery
+argument_list|(
+literal|"insert into empnullables_20 (ename, empno, comm)\n"
+operator|+
+literal|"values ('Karl', 1, 1)"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testInsertSubsetView
+parameter_list|()
+block|{
+specifier|final
+name|SqlTester
+name|pragmaticTester
+init|=
+name|tester
+operator|.
+name|withConformance
+argument_list|(
+name|SqlConformanceEnum
+operator|.
+name|PRAGMATIC_2003
+argument_list|)
+decl_stmt|;
+name|pragmaticTester
+operator|.
+name|checkQuery
+argument_list|(
+literal|"insert into empnullables_20\n"
+operator|+
+literal|"values (1, 'Karl')"
 argument_list|)
 expr_stmt|;
 block|}
@@ -22926,9 +23108,17 @@ name|testInsertBind
 parameter_list|()
 block|{
 comment|// VALUES
+specifier|final
+name|String
+name|sql0
+init|=
+literal|"insert into empnullables (empno, ename, deptno)\n"
+operator|+
+literal|"values (?, ?, ?)"
+decl_stmt|;
 name|sql
 argument_list|(
-literal|"insert into emp (empno, deptno) values (?, ?)"
+name|sql0
 argument_list|)
 operator|.
 name|ok
@@ -22936,13 +23126,21 @@ argument_list|()
 operator|.
 name|bindType
 argument_list|(
-literal|"RecordType(INTEGER ?0, INTEGER ?1)"
+literal|"RecordType(INTEGER ?0, VARCHAR(20) ?1, INTEGER ?2)"
 argument_list|)
 expr_stmt|;
 comment|// multiple VALUES
+specifier|final
+name|String
+name|sql1
+init|=
+literal|"insert into empnullables (empno, ename, deptno)\n"
+operator|+
+literal|"values (?, 'Pat', 1), (2, ?, ?), (3, 'Tod', ?), (4, 'Arthur', null)"
+decl_stmt|;
 name|sql
 argument_list|(
-literal|"insert into emp (empno, deptno) values (?, 1), (2, ?), (3, null)"
+name|sql1
 argument_list|)
 operator|.
 name|ok
@@ -22950,13 +23148,13 @@ argument_list|()
 operator|.
 name|bindType
 argument_list|(
-literal|"RecordType(INTEGER ?0, INTEGER ?1)"
+literal|"RecordType(INTEGER ?0, VARCHAR(20) ?1, INTEGER ?2, INTEGER ?3)"
 argument_list|)
 expr_stmt|;
 comment|// VALUES with expression
 name|sql
 argument_list|(
-literal|"insert into emp (ename, deptno) values (?, ? + 1)"
+literal|"insert into empnullables (ename, empno) values (?, ? + 1)"
 argument_list|)
 operator|.
 name|ok
@@ -22970,7 +23168,7 @@ expr_stmt|;
 comment|// SELECT
 name|sql
 argument_list|(
-literal|"insert into emp (ename, deptno) select ?, ? from (values (1))"
+literal|"insert into empnullables (ename, empno) select ?, ? from (values (1))"
 argument_list|)
 operator|.
 name|ok
@@ -22984,9 +23182,9 @@ expr_stmt|;
 comment|// WITH
 specifier|final
 name|String
-name|sql
+name|sql3
 init|=
-literal|"insert into emp (ename, deptno)\n"
+literal|"insert into empnullables (ename, empno)\n"
 operator|+
 literal|"with v as (values ('a'))\n"
 operator|+
@@ -22994,7 +23192,7 @@ literal|"select ?, ? from (values (1))"
 decl_stmt|;
 name|sql
 argument_list|(
-name|sql
+name|sql3
 argument_list|)
 operator|.
 name|ok
@@ -23010,7 +23208,7 @@ specifier|final
 name|String
 name|sql2
 init|=
-literal|"insert into emp (ename, deptno)\n"
+literal|"insert into empnullables (ename, empno)\n"
 operator|+
 literal|"select ?, ? from (values (1))\n"
 operator|+
@@ -23044,9 +23242,743 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testInsertBindSubset
+parameter_list|()
+block|{
+specifier|final
+name|SqlTester
+name|pragmaticTester
+init|=
+name|tester
+operator|.
+name|withConformance
+argument_list|(
+name|SqlConformanceEnum
+operator|.
+name|PRAGMATIC_2003
+argument_list|)
+decl_stmt|;
+comment|// VALUES
+specifier|final
+name|String
+name|sql0
+init|=
+literal|"insert into empnullables \n"
+operator|+
+literal|"values (?, ?, ?)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql0
+argument_list|)
+operator|.
+name|tester
+argument_list|(
+name|pragmaticTester
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+operator|.
+name|bindType
+argument_list|(
+literal|"RecordType(INTEGER ?0, VARCHAR(20) ?1, VARCHAR(10) ?2)"
+argument_list|)
+expr_stmt|;
+comment|// multiple VALUES
+specifier|final
+name|String
+name|sql1
+init|=
+literal|"insert into empnullables\n"
+operator|+
+literal|"values (?, 'Pat', 'Tailor'), (2, ?, ?),\n"
+operator|+
+literal|" (3, 'Tod', ?), (4, 'Arthur', null)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql1
+argument_list|)
+operator|.
+name|tester
+argument_list|(
+name|pragmaticTester
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+operator|.
+name|bindType
+argument_list|(
+literal|"RecordType(INTEGER ?0, VARCHAR(20) ?1, VARCHAR(10) ?2, VARCHAR(10) ?3)"
+argument_list|)
+expr_stmt|;
+comment|// VALUES with expression
+name|sql
+argument_list|(
+literal|"insert into empnullables values (? + 1, ?)"
+argument_list|)
+operator|.
+name|tester
+argument_list|(
+name|pragmaticTester
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+operator|.
+name|bindType
+argument_list|(
+literal|"RecordType(INTEGER ?0, VARCHAR(20) ?1)"
+argument_list|)
+expr_stmt|;
+comment|// SELECT
+name|sql
+argument_list|(
+literal|"insert into empnullables select ?, ? from (values (1))"
+argument_list|)
+operator|.
+name|tester
+argument_list|(
+name|pragmaticTester
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+operator|.
+name|bindType
+argument_list|(
+literal|"RecordType(INTEGER ?0, VARCHAR(20) ?1)"
+argument_list|)
+expr_stmt|;
+comment|// WITH
+specifier|final
+name|String
+name|sql3
+init|=
+literal|"insert into empnullables \n"
+operator|+
+literal|"with v as (values ('a'))\n"
+operator|+
+literal|"select ?, ? from (values (1))"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql3
+argument_list|)
+operator|.
+name|tester
+argument_list|(
+name|pragmaticTester
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+operator|.
+name|bindType
+argument_list|(
+literal|"RecordType(INTEGER ?0, VARCHAR(20) ?1)"
+argument_list|)
+expr_stmt|;
+comment|// UNION
+specifier|final
+name|String
+name|sql2
+init|=
+literal|"insert into empnullables \n"
+operator|+
+literal|"select ?, ? from (values (1))\n"
+operator|+
+literal|"union all\n"
+operator|+
+literal|"select ?, ? from (values (time '1:2:3'))"
+decl_stmt|;
+specifier|final
+name|String
+name|expected2
+init|=
+literal|"RecordType(INTEGER ?0, VARCHAR(20) ?1,"
+operator|+
+literal|" INTEGER ?2, VARCHAR(20) ?3)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql2
+argument_list|)
+operator|.
+name|tester
+argument_list|(
+name|pragmaticTester
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+operator|.
+name|bindType
+argument_list|(
+name|expected2
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testInsertFailNullability
+parameter_list|()
+block|{
+name|tester
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"insert into ^empnullables^ (ename) values ('Kevin')"
+argument_list|,
+literal|"Column 'EMPNO' has no default value and does not allow NULLs"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"insert into ^empnullables^ (empno) values (10)"
+argument_list|,
+literal|"Column 'ENAME' has no default value and does not allow NULLs"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"insert into empnullables (empno, ename, deptno) ^values (5, null, 5)^"
+argument_list|,
+literal|"Column 'ENAME' has no default value and does not allow NULLs"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testInsertSubsetFailNullability
+parameter_list|()
+block|{
+specifier|final
+name|SqlTester
+name|pragmaticTester
+init|=
+name|tester
+operator|.
+name|withConformance
+argument_list|(
+name|SqlConformanceEnum
+operator|.
+name|PRAGMATIC_2003
+argument_list|)
+decl_stmt|;
+name|pragmaticTester
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"insert into ^empnullables^ values (1)"
+argument_list|,
+literal|"Column 'ENAME' has no default value and does not allow NULLs"
+argument_list|)
+expr_stmt|;
+name|pragmaticTester
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"insert into empnullables ^values (null, 'Liam')^"
+argument_list|,
+literal|"Column 'EMPNO' has no default value and does not allow NULLs"
+argument_list|)
+expr_stmt|;
+name|pragmaticTester
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"insert into empnullables ^values (45, null, 5)^"
+argument_list|,
+literal|"Column 'ENAME' has no default value and does not allow NULLs"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testInsertViewFailNullability
+parameter_list|()
+block|{
+name|tester
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"insert into ^empnullables_20^ (ename) values ('Jake')"
+argument_list|,
+literal|"Column 'EMPNO' has no default value and does not allow NULLs"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"insert into ^empnullables_20^ (empno) values (9)"
+argument_list|,
+literal|"Column 'ENAME' has no default value and does not allow NULLs"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"insert into empnullables_20 (empno, ename, mgr) ^values (5, null, 5)^"
+argument_list|,
+literal|"Column 'ENAME' has no default value and does not allow NULLs"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testInsertSubsetViewFailNullability
+parameter_list|()
+block|{
+specifier|final
+name|SqlTester
+name|pragmaticTester
+init|=
+name|tester
+operator|.
+name|withConformance
+argument_list|(
+name|SqlConformanceEnum
+operator|.
+name|PRAGMATIC_2003
+argument_list|)
+decl_stmt|;
+name|pragmaticTester
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"insert into ^empnullables_20^ values (1)"
+argument_list|,
+literal|"Column 'ENAME' has no default value and does not allow NULLs"
+argument_list|)
+expr_stmt|;
+name|pragmaticTester
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"insert into empnullables_20 ^values (null, 'Liam')^"
+argument_list|,
+literal|"Column 'EMPNO' has no default value and does not allow NULLs"
+argument_list|)
+expr_stmt|;
+name|pragmaticTester
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"insert into empnullables_20 ^values (45, null)^"
+argument_list|,
+literal|"Column 'ENAME' has no default value and does not allow NULLs"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testInsertBindFailNullability
+parameter_list|()
+block|{
+name|tester
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"insert into ^emp^ (ename) values (?)"
+argument_list|,
+literal|"Column 'EMPNO' has no default value and does not allow NULLs"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"insert into ^emp^ (empno) values (?)"
+argument_list|,
+literal|"Column 'ENAME' has no default value and does not allow NULLs"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"insert into emp (empno, ename, deptno) ^values (?, null, 5)^"
+argument_list|,
+literal|"Column 'ENAME' has no default value and does not allow NULLs"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testInsertBindSubsetFailNullability
+parameter_list|()
+block|{
+specifier|final
+name|SqlTester
+name|pragmaticTester
+init|=
+name|tester
+operator|.
+name|withConformance
+argument_list|(
+name|SqlConformanceEnum
+operator|.
+name|PRAGMATIC_2003
+argument_list|)
+decl_stmt|;
+name|pragmaticTester
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"insert into ^empnullables^ values (?)"
+argument_list|,
+literal|"Column 'ENAME' has no default value and does not allow NULLs"
+argument_list|)
+expr_stmt|;
+name|pragmaticTester
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"insert into empnullables ^values (null, ?)^"
+argument_list|,
+literal|"Column 'EMPNO' has no default value and does not allow NULLs"
+argument_list|)
+expr_stmt|;
+name|pragmaticTester
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"insert into empnullables ^values (?, null)^"
+argument_list|,
+literal|"Column 'ENAME' has no default value and does not allow NULLs"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testInsertSubsetDisallowed
+parameter_list|()
+block|{
+name|tester
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"insert into ^emp^ values (1)"
+argument_list|,
+literal|"Number of INSERT target columns \\(9\\) does not equal number of source items \\(1\\)"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"insert into ^emp^ values (null)"
+argument_list|,
+literal|"Number of INSERT target columns \\(9\\) does not equal number of source items \\(1\\)"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"insert into ^emp^ values (1, 'Kevin')"
+argument_list|,
+literal|"Number of INSERT target columns \\(9\\) does not equal number of source items \\(2\\)"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testInsertSubsetViewDisallowed
+parameter_list|()
+block|{
+name|tester
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"insert into ^emp_20^ values (1)"
+argument_list|,
+literal|"Number of INSERT target columns \\(8\\) does not equal number of source items \\(1\\)"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"insert into ^emp_20^ values (null)"
+argument_list|,
+literal|"Number of INSERT target columns \\(8\\) does not equal number of source items \\(1\\)"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"insert into ^emp_20^ values (?, ?)"
+argument_list|,
+literal|"Number of INSERT target columns \\(8\\) does not equal number of source items \\(2\\)"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testInsertBindSubsetDisallowed
+parameter_list|()
+block|{
+name|tester
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"insert into ^emp^ values (?)"
+argument_list|,
+literal|"Number of INSERT target columns \\(9\\) does not equal number of source items \\(1\\)"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"insert into ^emp^ values (?, ?)"
+argument_list|,
+literal|"Number of INSERT target columns \\(9\\) does not equal number of source items \\(2\\)"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testInsertWithCustomInitializerExpressionFactory
+parameter_list|()
+block|{
+name|tester
+operator|.
+name|checkQuery
+argument_list|(
+literal|"insert into empdefaults (deptno) values (1)"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkQuery
+argument_list|(
+literal|"insert into empdefaults (ename, empno) values ('Quan', 50)"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"insert into empdefaults (ename, deptno) ^values (null, 1)^"
+argument_list|,
+literal|"Column 'ENAME' has no default value and does not allow NULLs"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"insert into ^empdefaults^ values (null, 'Tod')"
+argument_list|,
+literal|"Number of INSERT target columns \\(9\\) does not equal number of source items \\(2\\)"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testInsertSubsetWithCustomInitializerExpressionFactory
+parameter_list|()
+block|{
+specifier|final
+name|SqlTester
+name|pragmaticTester
+init|=
+name|tester
+operator|.
+name|withConformance
+argument_list|(
+name|SqlConformanceEnum
+operator|.
+name|PRAGMATIC_2003
+argument_list|)
+decl_stmt|;
+name|pragmaticTester
+operator|.
+name|checkQuery
+argument_list|(
+literal|"insert into empdefaults values (101)"
+argument_list|)
+expr_stmt|;
+name|pragmaticTester
+operator|.
+name|checkQuery
+argument_list|(
+literal|"insert into empdefaults values (101, 'Coral')"
+argument_list|)
+expr_stmt|;
+name|pragmaticTester
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"insert into empdefaults ^values (null, 'Tod')^"
+argument_list|,
+literal|"Column 'EMPNO' has no default value and does not allow NULLs"
+argument_list|)
+expr_stmt|;
+name|pragmaticTester
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"insert into empdefaults ^values (78, null)^"
+argument_list|,
+literal|"Column 'ENAME' has no default value and does not allow NULLs"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testInsertBindWithCustomInitializerExpressionFactory
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"insert into empdefaults (deptno) values (?)"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+operator|.
+name|bindType
+argument_list|(
+literal|"RecordType(INTEGER ?0)"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"insert into empdefaults (ename, empno) values (?, ?)"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+operator|.
+name|bindType
+argument_list|(
+literal|"RecordType(VARCHAR(20) ?0, INTEGER ?1)"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"insert into empdefaults (ename, deptno) ^values (null, ?)^"
+argument_list|,
+literal|"Column 'ENAME' has no default value and does not allow NULLs"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"insert into ^empdefaults^ values (null, ?)"
+argument_list|,
+literal|"Number of INSERT target columns \\(9\\) does not equal number of source items \\(2\\)"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testInsertBindSubsetWithCustomInitializerExpressionFactory
+parameter_list|()
+block|{
+specifier|final
+name|SqlTester
+name|pragmaticTester
+init|=
+name|tester
+operator|.
+name|withConformance
+argument_list|(
+name|SqlConformanceEnum
+operator|.
+name|PRAGMATIC_2003
+argument_list|)
+decl_stmt|;
+name|sql
+argument_list|(
+literal|"insert into empdefaults values (101, ?)"
+argument_list|)
+operator|.
+name|tester
+argument_list|(
+name|pragmaticTester
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+operator|.
+name|bindType
+argument_list|(
+literal|"RecordType(VARCHAR(20) ?0)"
+argument_list|)
+expr_stmt|;
+name|pragmaticTester
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"insert into empdefaults ^values (null, ?)^"
+argument_list|,
+literal|"Column 'EMPNO' has no default value and does not allow NULLs"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testInsertBindWithCustomColumnResolving
 parameter_list|()
 block|{
+specifier|final
+name|SqlTester
+name|pragmaticTester
+init|=
+name|tester
+operator|.
+name|withConformance
+argument_list|(
+name|SqlConformanceEnum
+operator|.
+name|PRAGMATIC_2003
+argument_list|)
+decl_stmt|;
 specifier|final
 name|String
 name|sql
@@ -23082,7 +24014,7 @@ specifier|final
 name|String
 name|sql2
 init|=
-literal|"insert into struct.t (c0, c2, c1) values (?, ?, ?)"
+literal|"insert into struct.t_nullables (c0, c2, c1) values (?, ?, ?)"
 decl_stmt|;
 specifier|final
 name|String
@@ -23095,6 +24027,11 @@ argument_list|(
 name|sql2
 argument_list|)
 operator|.
+name|tester
+argument_list|(
+name|pragmaticTester
+argument_list|)
+operator|.
 name|ok
 argument_list|()
 operator|.
@@ -23107,7 +24044,7 @@ specifier|final
 name|String
 name|sql3
 init|=
-literal|"insert into struct.t (f1.c0, f1.c2, f0.c1) values (?, ?, ?)"
+literal|"insert into struct.t_nullables (f1.c0, f1.c2, f0.c1) values (?, ?, ?)"
 decl_stmt|;
 specifier|final
 name|String
@@ -23120,6 +24057,11 @@ argument_list|(
 name|sql3
 argument_list|)
 operator|.
+name|tester
+argument_list|(
+name|pragmaticTester
+argument_list|)
+operator|.
 name|ok
 argument_list|()
 operator|.
@@ -23130,7 +24072,12 @@ argument_list|)
 expr_stmt|;
 name|sql
 argument_list|(
-literal|"insert into struct.t (c0, ^c4^, c1) values (?, ?, ?)"
+literal|"insert into struct.t_nullables (c0, ^c4^, c1) values (?, ?, ?)"
+argument_list|)
+operator|.
+name|tester
+argument_list|(
+name|pragmaticTester
 argument_list|)
 operator|.
 name|fails
@@ -23140,7 +24087,12 @@ argument_list|)
 expr_stmt|;
 name|sql
 argument_list|(
-literal|"insert into struct.t (^a0^, c2, c1) values (?, ?, ?)"
+literal|"insert into struct.t_nullables (^a0^, c2, c1) values (?, ?, ?)"
+argument_list|)
+operator|.
+name|tester
+argument_list|(
+name|pragmaticTester
 argument_list|)
 operator|.
 name|fails
@@ -23148,9 +24100,22 @@ argument_list|(
 literal|"Unknown target column 'A0'"
 argument_list|)
 expr_stmt|;
+specifier|final
+name|String
+name|sql4
+init|=
+literal|"insert into struct.t_nullables (\n"
+operator|+
+literal|"  f1.c0, ^f0.a0^, f0.c1) values (?, ?, ?)"
+decl_stmt|;
 name|sql
 argument_list|(
-literal|"insert into struct.t (f1.c0, ^f0.a0^, f0.c1) values (?, ?, ?)"
+name|sql4
+argument_list|)
+operator|.
+name|tester
+argument_list|(
+name|pragmaticTester
 argument_list|)
 operator|.
 name|fails
@@ -23158,9 +24123,22 @@ argument_list|(
 literal|"Unknown target column 'F0.A0'"
 argument_list|)
 expr_stmt|;
+specifier|final
+name|String
+name|sql5
+init|=
+literal|"insert into struct.t_nullables (\n"
+operator|+
+literal|"  f1.c0, f1.c2, ^f1.c0^) values (?, ?, ?)"
+decl_stmt|;
 name|sql
 argument_list|(
-literal|"insert into struct.t (f1.c0, f1.c2, ^f1.c0^) values (?, ?, ?)"
+name|sql5
+argument_list|)
+operator|.
+name|tester
+argument_list|(
+name|pragmaticTester
 argument_list|)
 operator|.
 name|fails

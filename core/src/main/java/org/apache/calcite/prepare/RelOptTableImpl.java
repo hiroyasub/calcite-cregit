@@ -629,10 +629,10 @@ begin_class
 specifier|public
 class|class
 name|RelOptTableImpl
-implements|implements
+extends|extends
 name|Prepare
 operator|.
-name|PreparingTable
+name|AbstractPreparingTable
 block|{
 specifier|private
 specifier|final

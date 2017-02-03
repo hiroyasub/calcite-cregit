@@ -724,6 +724,21 @@ function_decl|;
 annotation|@
 name|BaseMessage
 argument_list|(
+literal|"Column ''{0}'' has no default value and does not allow NULLs"
+argument_list|)
+name|ExInst
+argument_list|<
+name|SqlValidatorException
+argument_list|>
+name|columnNotNullable
+parameter_list|(
+name|String
+name|a0
+parameter_list|)
+function_decl|;
+annotation|@
+name|BaseMessage
+argument_list|(
 literal|"Cannot assign to target field ''{0}'' of type {1} from source field ''{2}'' of type {3}"
 argument_list|)
 name|ExInst

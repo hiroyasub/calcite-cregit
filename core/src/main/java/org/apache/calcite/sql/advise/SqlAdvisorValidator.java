@@ -333,9 +333,7 @@ name|activeNamespaces
 init|=
 operator|new
 name|HashSet
-argument_list|<
-name|SqlValidatorNamespace
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 specifier|private
@@ -379,24 +377,9 @@ argument_list|,
 name|conformance
 argument_list|)
 expr_stmt|;
-assert|assert
-name|opTab
-operator|!=
-literal|null
-assert|;
-assert|assert
-name|catalogReader
-operator|!=
-literal|null
-assert|;
-assert|assert
-name|typeFactory
-operator|!=
-literal|null
-assert|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**    * Registers the identifier and its scope into a map keyed by ParserPostion.    */
+comment|/**    * Registers the identifier and its scope into a map keyed by ParserPosition.    */
 specifier|public
 name|void
 name|validateIdentifier
@@ -608,25 +591,9 @@ block|}
 catch|catch
 parameter_list|(
 name|CalciteException
-name|e
-parameter_list|)
-block|{
-return|return
-name|unknownType
-return|;
-block|}
-catch|catch
-parameter_list|(
+decl||
 name|UnsupportedOperationException
-name|e
-parameter_list|)
-block|{
-return|return
-name|unknownType
-return|;
-block|}
-catch|catch
-parameter_list|(
+decl||
 name|Error
 name|e
 parameter_list|)
