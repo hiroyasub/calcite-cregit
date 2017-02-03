@@ -573,6 +573,7 @@ argument_list|,
 name|inputCollations
 argument_list|)
 decl_stmt|;
+return|return
 operator|(
 operator|(
 name|RexCall
@@ -587,7 +588,7 @@ name|getMonotonicity
 argument_list|(
 name|binding
 argument_list|)
-expr_stmt|;
+return|;
 block|}
 return|return
 name|SqlMonotonicity
