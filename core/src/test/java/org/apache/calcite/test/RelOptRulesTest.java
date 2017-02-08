@@ -3835,6 +3835,57 @@ literal|" from sales.dept group by name"
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1621">[CALCITE-1621]    * Adding a cast around the null literal in aggregate rules</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testCastInAggregateReduceFunctions
+parameter_list|()
+block|{
+specifier|final
+name|HepProgram
+name|program
+init|=
+name|HepProgram
+operator|.
+name|builder
+argument_list|()
+operator|.
+name|addRuleInstance
+argument_list|(
+name|AggregateReduceFunctionsRule
+operator|.
+name|INSTANCE
+argument_list|)
+operator|.
+name|build
+argument_list|()
+decl_stmt|;
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select name, stddev_pop(deptno), avg(deptno),"
+operator|+
+literal|" stddev_samp(deptno),var_pop(deptno), var_samp(deptno)\n"
+operator|+
+literal|"from sales.dept group by name"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|with
+argument_list|(
+name|program
+argument_list|)
+operator|.
+name|check
+argument_list|()
+expr_stmt|;
+block|}
 annotation|@
 name|Test
 specifier|public
@@ -4317,6 +4368,61 @@ argument_list|(
 name|AggregateExpandDistinctAggregatesRule
 operator|.
 name|JOIN
+argument_list|)
+operator|.
+name|build
+argument_list|()
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|with
+argument_list|(
+name|program
+argument_list|)
+operator|.
+name|check
+argument_list|()
+expr_stmt|;
+block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1621">[CALCITE-1621]    * Adding a cast around the null literal in aggregate rules</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testCastInAggregateExpandDistinctAggregatesRule
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select name, sum(distinct cn), sum(distinct sm)\n"
+operator|+
+literal|"from (\n"
+operator|+
+literal|"  select name, count(dept.deptno) as cn,sum(dept.deptno) as sm\n"
+operator|+
+literal|"  from sales.dept group by name)\n"
+operator|+
+literal|"group by name"
+decl_stmt|;
+specifier|final
+name|HepProgram
+name|program
+init|=
+name|HepProgram
+operator|.
+name|builder
+argument_list|()
+operator|.
+name|addRuleInstance
+argument_list|(
+name|AggregateExpandDistinctAggregatesRule
+operator|.
+name|INSTANCE
 argument_list|)
 operator|.
 name|build

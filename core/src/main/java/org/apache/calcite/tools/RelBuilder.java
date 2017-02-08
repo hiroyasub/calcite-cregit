@@ -5480,6 +5480,11 @@ name|isEmpty
 argument_list|(
 name|aggCalls
 argument_list|)
+operator|&&
+operator|!
+name|groupKey_
+operator|.
+name|indicator
 condition|)
 block|{
 specifier|final
