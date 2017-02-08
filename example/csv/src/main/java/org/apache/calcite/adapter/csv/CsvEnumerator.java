@@ -323,6 +323,7 @@ name|TIME_FORMAT_TIMESTAMP
 decl_stmt|;
 static|static
 block|{
+specifier|final
 name|TimeZone
 name|gmt
 init|=
