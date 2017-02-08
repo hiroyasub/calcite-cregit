@@ -2533,7 +2533,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testFilterSortDesc1
+name|testFilterSortDesc
 parameter_list|()
 block|{
 specifier|final
@@ -2699,12 +2699,12 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Tests a query that contains no GROUP BY and is therefore executed as a    * Druid "select" query. */
+comment|/** As {@link #testFilterSortDesc()} but the bounds are numeric. */
 annotation|@
 name|Test
 specifier|public
 name|void
-name|testFilterSortDesc2
+name|testFilterSortDescNumeric
 parameter_list|()
 block|{
 specifier|final
@@ -2958,7 +2958,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** As {@link #testFilterSortDesc} but with a filter that cannot be pushed    * down to Druid. */
+comment|/** As {@link #testFilterSortDescNumeric()} but with a filter that cannot    * be pushed down to Druid. */
 annotation|@
 name|Test
 specifier|public
