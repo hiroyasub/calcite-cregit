@@ -2876,7 +2876,7 @@ name|addRuleInstance
 argument_list|(
 name|SemiJoinRule
 operator|.
-name|INSTANCE
+name|PROJECT
 argument_list|)
 operator|.
 name|build
@@ -2976,7 +2976,7 @@ name|addRuleInstance
 argument_list|(
 name|SemiJoinRule
 operator|.
-name|INSTANCE
+name|PROJECT
 argument_list|)
 operator|.
 name|build
@@ -3075,7 +3075,7 @@ name|addRuleInstance
 argument_list|(
 name|SemiJoinRule
 operator|.
-name|INSTANCE
+name|PROJECT
 argument_list|)
 operator|.
 name|build
@@ -3174,7 +3174,7 @@ name|addRuleInstance
 argument_list|(
 name|SemiJoinRule
 operator|.
-name|INSTANCE
+name|PROJECT
 argument_list|)
 operator|.
 name|build
@@ -3273,7 +3273,7 @@ name|addRuleInstance
 argument_list|(
 name|SemiJoinRule
 operator|.
-name|INSTANCE
+name|PROJECT
 argument_list|)
 operator|.
 name|build
@@ -3339,7 +3339,7 @@ name|addRuleInstance
 argument_list|(
 name|SemiJoinRule
 operator|.
-name|INSTANCE
+name|PROJECT
 argument_list|)
 operator|.
 name|build
@@ -3440,7 +3440,7 @@ name|addRuleInstance
 argument_list|(
 name|SemiJoinRule
 operator|.
-name|INSTANCE
+name|PROJECT
 argument_list|)
 operator|.
 name|build
@@ -3685,7 +3685,7 @@ name|addRuleInstance
 argument_list|(
 name|SemiJoinRule
 operator|.
-name|INSTANCE
+name|PROJECT
 argument_list|)
 operator|.
 name|build

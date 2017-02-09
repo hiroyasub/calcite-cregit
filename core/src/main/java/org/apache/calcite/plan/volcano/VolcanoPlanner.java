@@ -4291,7 +4291,14 @@ name|addRule
 argument_list|(
 name|SemiJoinRule
 operator|.
-name|INSTANCE
+name|PROJECT
+argument_list|)
+expr_stmt|;
+name|addRule
+argument_list|(
+name|SemiJoinRule
+operator|.
+name|JOIN
 argument_list|)
 expr_stmt|;
 if|if

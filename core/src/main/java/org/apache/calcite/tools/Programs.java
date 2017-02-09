@@ -1029,7 +1029,11 @@ name|ENUMERABLE_WINDOW_RULE
 argument_list|,
 name|SemiJoinRule
 operator|.
-name|INSTANCE
+name|PROJECT
+argument_list|,
+name|SemiJoinRule
+operator|.
+name|JOIN
 argument_list|,
 name|TableScanRule
 operator|.
