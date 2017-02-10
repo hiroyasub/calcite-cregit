@@ -375,7 +375,7 @@ argument_list|>
 name|IS_EMPTY_AGGREGATE
 init|=
 operator|new
-name|Predicate
+name|PredicateImpl
 argument_list|<
 name|Aggregate
 argument_list|>
@@ -383,7 +383,7 @@ argument_list|()
 block|{
 specifier|public
 name|boolean
-name|apply
+name|test
 parameter_list|(
 name|Aggregate
 name|input
