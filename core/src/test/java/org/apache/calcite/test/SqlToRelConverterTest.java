@@ -2728,6 +2728,33 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-365">[CALCITE-365]    * AssertionError while translating query with WITH and correlated    * sub-query</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testWithExists
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"with t (a, b) as (select * from (values (1, 2)))\n"
+operator|+
+literal|"select * from t where exists (\n"
+operator|+
+literal|"  select 1 from emp where deptno = t.a)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
 annotation|@
 name|Test
 specifier|public

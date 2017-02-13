@@ -19946,10 +19946,15 @@ name|fields
 operator|.
 name|put
 argument_list|(
+name|c
+operator|.
+name|translate
+argument_list|(
 name|field
 operator|.
 name|getName
 argument_list|()
+argument_list|)
 argument_list|,
 name|field
 operator|.
