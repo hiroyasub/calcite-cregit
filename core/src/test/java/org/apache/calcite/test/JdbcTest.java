@@ -18240,6 +18240,92 @@ literal|599
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-685">[CALCITE-685]    * Correlated scalar sub-query in SELECT clause throws</a>. */
+annotation|@
+name|Ignore
+argument_list|(
+literal|"[CALCITE-685]"
+argument_list|)
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testCorrelatedScalarSubQuery
+parameter_list|()
+throws|throws
+name|SQLException
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select e.department_id, sum(e.employee_id),\n"
+operator|+
+literal|"       ( select sum(e2.employee_id)\n"
+operator|+
+literal|"         from  employee e2\n"
+operator|+
+literal|"         where e.department_id = e2.department_id\n"
+operator|+
+literal|"       )\n"
+operator|+
+literal|"from employee e\n"
+operator|+
+literal|"group by e.department_id\n"
+decl_stmt|;
+specifier|final
+name|String
+name|explain
+init|=
+literal|"EnumerableJoin(condition=[true], joinType=[left])\n"
+operator|+
+literal|"  EnumerableAggregate(group=[{7}], EXPR$1=[$SUM0($0)])\n"
+operator|+
+literal|"    EnumerableTableScan(table=[[foodmart2, employee]])\n"
+operator|+
+literal|"  EnumerableAggregate(group=[{}], EXPR$0=[SUM($0)])\n"
+operator|+
+literal|"    EnumerableCalc(expr#0..16=[{inputs}], expr#17=[$cor0], expr#18=[$t17.department_id], expr#19=[=($t18, $t7)], employee_id=[$t0], department_id=[$t7], $condition=[$t19])\n"
+operator|+
+literal|"      EnumerableTableScan(table=[[foodmart2, employee]])\n"
+decl_stmt|;
+name|CalciteAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|CalciteAssert
+operator|.
+name|Config
+operator|.
+name|FOODMART_CLONE
+argument_list|)
+operator|.
+name|with
+argument_list|(
+name|Lex
+operator|.
+name|JAVA
+argument_list|)
+operator|.
+name|query
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+name|explain
+argument_list|)
+operator|.
+name|returnsCount
+argument_list|(
+literal|0
+argument_list|)
+expr_stmt|;
+block|}
 annotation|@
 name|Test
 specifier|public
