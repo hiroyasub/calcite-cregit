@@ -10687,6 +10687,41 @@ argument_list|,
 literal|"TIME(0) NOT NULL"
 argument_list|)
 expr_stmt|;
+comment|// Per [CALCITE-1632] Return types of datetime + interval
+comment|// make sure that TIME values say in range
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"time '12:03:01' - interval '1' day"
+argument_list|,
+literal|"12:03:01"
+argument_list|,
+literal|"TIME(0) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"time '12:03:01' - interval '25' hour"
+argument_list|,
+literal|"11:03:01"
+argument_list|,
+literal|"TIME(0) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"time '12:03:03' - interval '25:0:1' hour to second"
+argument_list|,
+literal|"11:03:02"
+argument_list|,
+literal|"TIME(0) NOT NULL"
+argument_list|)
+expr_stmt|;
 name|tester
 operator|.
 name|checkScalar
@@ -10694,6 +10729,61 @@ argument_list|(
 literal|"date '2005-03-02' - interval '5' day"
 argument_list|,
 literal|"2005-02-25"
+argument_list|,
+literal|"DATE NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"date '2005-03-02' - interval '5' day"
+argument_list|,
+literal|"2005-02-25"
+argument_list|,
+literal|"DATE NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"date '2005-03-02' - interval '5' hour"
+argument_list|,
+literal|"2005-03-02"
+argument_list|,
+literal|"DATE NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"date '2005-03-02' - interval '25' hour"
+argument_list|,
+literal|"2005-03-01"
+argument_list|,
+literal|"DATE NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"date '2005-03-02' - interval '25:45' hour to minute"
+argument_list|,
+literal|"2005-03-01"
+argument_list|,
+literal|"DATE NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"date '2005-03-02' - interval '25:45:54' hour to second"
+argument_list|,
+literal|"2005-03-01"
 argument_list|,
 literal|"DATE NOT NULL"
 argument_list|)
@@ -11871,6 +11961,41 @@ argument_list|,
 literal|"TIME(0) NOT NULL"
 argument_list|)
 expr_stmt|;
+comment|// Per [CALCITE-1632] Return types of datetime + interval
+comment|// make sure that TIME values say in range
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"time '12:03:01' + interval '1' day"
+argument_list|,
+literal|"12:03:01"
+argument_list|,
+literal|"TIME(0) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"time '12:03:01' + interval '25' hour"
+argument_list|,
+literal|"13:03:01"
+argument_list|,
+literal|"TIME(0) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"time '12:03:01' + interval '25:0:1' hour to second"
+argument_list|,
+literal|"13:03:02"
+argument_list|,
+literal|"TIME(0) NOT NULL"
+argument_list|)
+expr_stmt|;
 name|tester
 operator|.
 name|checkScalar
@@ -11878,6 +12003,61 @@ argument_list|(
 literal|"interval '5' day + date '2005-03-02'"
 argument_list|,
 literal|"2005-03-07"
+argument_list|,
+literal|"DATE NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"date '2005-03-02' + interval '5' day"
+argument_list|,
+literal|"2005-03-07"
+argument_list|,
+literal|"DATE NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"date '2005-03-02' + interval '5' hour"
+argument_list|,
+literal|"2005-03-02"
+argument_list|,
+literal|"DATE NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"date '2005-03-02' + interval '25' hour"
+argument_list|,
+literal|"2005-03-03"
+argument_list|,
+literal|"DATE NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"date '2005-03-02' + interval '25:45' hour to minute"
+argument_list|,
+literal|"2005-03-03"
+argument_list|,
+literal|"DATE NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"date '2005-03-02' + interval '25:45:54' hour to second"
+argument_list|,
+literal|"2005-03-03"
 argument_list|,
 literal|"DATE NOT NULL"
 argument_list|)
@@ -11910,6 +12090,17 @@ operator|.
 name|checkScalar
 argument_list|(
 literal|"timestamp '2003-08-02 12:54:01' + interval '5-3' year to month"
+argument_list|,
+literal|"2008-11-02 12:54:01"
+argument_list|,
+literal|"TIMESTAMP(0) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"interval '5-3' year to month + timestamp '2003-08-02 12:54:01'"
 argument_list|,
 literal|"2008-11-02 12:54:01"
 argument_list|,
