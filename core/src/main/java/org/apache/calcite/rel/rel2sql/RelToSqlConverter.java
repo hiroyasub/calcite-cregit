@@ -871,6 +871,9 @@ operator|.
 name|getLeft
 argument_list|()
 argument_list|)
+operator|.
+name|resetAlias
+argument_list|()
 decl_stmt|;
 specifier|final
 name|Result
@@ -885,6 +888,9 @@ operator|.
 name|getRight
 argument_list|()
 argument_list|)
+operator|.
+name|resetAlias
+argument_list|()
 decl_stmt|;
 specifier|final
 name|Context

@@ -1457,6 +1457,60 @@ name|expected
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1636">[CALCITE-1636]    * JDBC adapter generates wrong SQL for self join with sub-query</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSubQueryAlias
+parameter_list|()
+block|{
+name|String
+name|query
+init|=
+literal|"select t1.\"customer_id\", t2.\"customer_id\" \n"
+operator|+
+literal|"from (select \"customer_id\" from \"sales_fact_1997\") as t1 \n"
+operator|+
+literal|"inner join (select \"customer_id\" from \"sales_fact_1997\") t2 \n"
+operator|+
+literal|"on t1.\"customer_id\" = t2.\"customer_id\""
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM (SELECT sales_fact_1997.customer_id\n"
+operator|+
+literal|"FROM foodmart.sales_fact_1997 AS sales_fact_1997) AS t\n"
+operator|+
+literal|"INNER JOIN (SELECT sales_fact_19970.customer_id\n"
+operator|+
+literal|"FROM foodmart.sales_fact_1997 AS sales_fact_19970) AS t0 ON t.customer_id = t0.customer_id"
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|dialect
+argument_list|(
+name|DatabaseProduct
+operator|.
+name|DB2
+operator|.
+name|getDialect
+argument_list|()
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
 annotation|@
 name|Test
 specifier|public
