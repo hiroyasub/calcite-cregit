@@ -494,11 +494,29 @@ comment|// Group functions
 comment|/** The {@code TUMBLE} group function. */
 name|TUMBLE
 block|,
-comment|/** The {@code TUMBLE_START} auxiliary function of    * the {@link #TUMBLE} function. */
+comment|/** The {@code TUMBLE_START} auxiliary function of    * the {@link #TUMBLE} group function. */
 name|TUMBLE_START
 block|,
-comment|/** The {@code TUMBLE_END} auxiliary function of    * the {@link #TUMBLE} function. */
+comment|/** The {@code TUMBLE_END} auxiliary function of    * the {@link #TUMBLE} group function. */
 name|TUMBLE_END
+block|,
+comment|/** The {@code HOP} group function. */
+name|HOP
+block|,
+comment|/** The {@code HOP_START} auxiliary function of    * the {@link #HOP} group function. */
+name|HOP_START
+block|,
+comment|/** The {@code HOP_END} auxiliary function of    * the {@link #HOP} group function. */
+name|HOP_END
+block|,
+comment|/** The {@code SESSION} group function. */
+name|SESSION
+block|,
+comment|/** The {@code SESSION_START} auxiliary function of    * the {@link #SESSION} group function. */
+name|SESSION_START
+block|,
+comment|/** The {@code SESSION_END} auxiliary function of    * the {@link #SESSION} group function. */
+name|SESSION_END
 block|,
 comment|// DDL and session control statements follow. The list is not exhaustive: feel
 comment|// free to add more.

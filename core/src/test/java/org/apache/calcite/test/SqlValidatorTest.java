@@ -26131,6 +26131,97 @@ name|STR_AGG_REQUIRES_MONO
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testStreamHop
+parameter_list|()
+block|{
+comment|// HOP
+name|sql
+argument_list|(
+literal|"select stream\n"
+operator|+
+literal|"  hop_start(rowtime, interval '1' hour, interval '3' hour) as rowtime,\n"
+operator|+
+literal|"  count(*) as c\n"
+operator|+
+literal|"from orders\n"
+operator|+
+literal|"group by hop(rowtime, interval '1' hour, interval '3' hour)"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select stream\n"
+operator|+
+literal|"  ^hop_start(rowtime, interval '1' hour, interval '2' hour)^,\n"
+operator|+
+literal|"  count(*) as c\n"
+operator|+
+literal|"from orders\n"
+operator|+
+literal|"group by hop(rowtime, interval '1' hour, interval '3' hour)"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Call to auxiliary group function 'HOP_START' must have "
+operator|+
+literal|"matching call to group function 'HOP' in GROUP BY clause"
+argument_list|)
+expr_stmt|;
+comment|// HOP with align
+name|sql
+argument_list|(
+literal|"select stream\n"
+operator|+
+literal|"  hop_start(rowtime, interval '1' hour, interval '3' hour,\n"
+operator|+
+literal|"    time '12:34:56') as rowtime,\n"
+operator|+
+literal|"  count(*) as c\n"
+operator|+
+literal|"from orders\n"
+operator|+
+literal|"group by hop(rowtime, interval '1' hour, interval '3' hour,\n"
+operator|+
+literal|"    time '12:34:56')"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testStreamSession
+parameter_list|()
+block|{
+comment|// SESSION
+name|sql
+argument_list|(
+literal|"select stream session_start(rowtime, interval '1' hour) as rowtime,\n"
+operator|+
+literal|"  session_end(rowtime, interval '1' hour),\n"
+operator|+
+literal|"  count(*) as c\n"
+operator|+
+literal|"from orders\n"
+operator|+
+literal|"group by session(rowtime, interval '1' hour)"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
 block|}
 end_class
 

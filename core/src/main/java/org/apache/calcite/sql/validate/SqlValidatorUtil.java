@@ -2496,7 +2496,7 @@ name|fields
 argument_list|)
 return|;
 block|}
-comment|/** Analyzes an expression in a GROUP BY clause.    *    *<p>It may be an expression, an empty list (), or a call to    * {@code GROUPING SETS}, {@code CUBE}, {@code ROLLUP} or {@code TUMBLE}.    *    *<p>Each group item produces a list of group sets, which are written to    * {@code topBuilder}. To find the grouping sets of the query, we will take    * the cartesian product of the group sets. */
+comment|/** Analyzes an expression in a GROUP BY clause.    *    *<p>It may be an expression, an empty list (), or a call to    * {@code GROUPING SETS}, {@code CUBE}, {@code ROLLUP},    * {@code TUMBLE}, {@code HOP} or {@code SESSION}.    *    *<p>Each group item produces a list of group sets, which are written to    * {@code topBuilder}. To find the grouping sets of the query, we will take    * the cartesian product of the group sets. */
 specifier|public
 specifier|static
 name|void
@@ -2648,7 +2648,13 @@ return|return;
 block|}
 comment|// fall through
 case|case
+name|HOP
+case|:
+case|case
 name|TUMBLE
+case|:
+case|case
+name|SESSION
 case|:
 case|case
 name|GROUPING_SETS
@@ -3299,7 +3305,13 @@ argument_list|()
 condition|)
 block|{
 case|case
+name|HOP
+case|:
+case|case
 name|TUMBLE
+case|:
+case|case
+name|SESSION
 case|:
 name|groupAnalyzer
 operator|.
