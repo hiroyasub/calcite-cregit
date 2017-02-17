@@ -7195,9 +7195,10 @@ name|rexBuilder
 operator|.
 name|makeNullLiteral
 argument_list|(
-name|SqlTypeName
+name|trueLiteral
 operator|.
-name|BOOLEAN
+name|getType
+argument_list|()
 argument_list|)
 decl_stmt|;
 specifier|final
@@ -15120,9 +15121,6 @@ argument_list|(
 name|field
 operator|.
 name|getType
-argument_list|()
-operator|.
-name|getSqlTypeName
 argument_list|()
 argument_list|)
 expr_stmt|;

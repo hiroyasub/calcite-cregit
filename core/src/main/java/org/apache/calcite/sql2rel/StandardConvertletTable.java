@@ -1593,9 +1593,6 @@ operator|.
 name|makeNullLiteral
 argument_list|(
 name|type
-operator|.
-name|getSqlTypeName
-argument_list|()
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -7777,9 +7774,6 @@ operator|.
 name|makeNullLiteral
 argument_list|(
 name|type
-operator|.
-name|getSqlTypeName
-argument_list|()
 argument_list|)
 argument_list|)
 expr_stmt|;
