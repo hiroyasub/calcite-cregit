@@ -2210,6 +2210,13 @@ name|getEnclosingNode
 argument_list|()
 operator|!=
 literal|null
+operator|&&
+operator|!
+operator|(
+name|this
+operator|instanceof
+name|MatchRecognizeScope
+operator|)
 condition|)
 block|{
 name|String

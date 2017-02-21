@@ -257,6 +257,20 @@ name|calcite
 operator|.
 name|sql
 operator|.
+name|SqlMatchRecognize
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
 name|SqlMerge
 import|;
 end_import
@@ -586,6 +600,14 @@ name|SqlCall
 name|call
 parameter_list|)
 function_decl|;
+comment|/**    * Validates a MATCH_RECOGNIZE clause.    *    * @param pattern MATCH_RECOGNIZE clause    */
+name|void
+name|validateMatchRecognize
+parameter_list|(
+name|SqlCall
+name|pattern
+parameter_list|)
+function_decl|;
 comment|/**    * Validates a call to an operator.    *    * @param call  Operator call    * @param scope Naming scope    */
 name|void
 name|validateCall
@@ -815,6 +837,14 @@ name|getOrderScope
 parameter_list|(
 name|SqlSelect
 name|select
+parameter_list|)
+function_decl|;
+comment|/**    * Returns a scope match recognize clause.    *    * @param node Match recognize    * @return naming scope for Match recognize clause    */
+name|SqlValidatorScope
+name|getMatchRecognizeScope
+parameter_list|(
+name|SqlMatchRecognize
+name|node
 parameter_list|)
 function_decl|;
 comment|/**    * Declares a SELECT expression as a cursor.    *    * @param select select expression associated with the cursor    * @param scope  scope of the parent query associated with the cursor    */

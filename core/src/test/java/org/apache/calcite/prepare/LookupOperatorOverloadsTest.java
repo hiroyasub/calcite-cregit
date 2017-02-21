@@ -345,6 +345,22 @@ name|sql
 operator|.
 name|SqlFunctionCategory
 operator|.
+name|MATCH_RECOGNIZE
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|SqlFunctionCategory
+operator|.
 name|USER_DEFINED_CONSTRUCTOR
 import|;
 end_import
@@ -692,6 +708,8 @@ argument_list|,
 name|USER_DEFINED_TABLE_FUNCTION
 argument_list|,
 name|USER_DEFINED_TABLE_SPECIFIC_FUNCTION
+argument_list|,
+name|MATCH_RECOGNIZE
 argument_list|)
 expr_stmt|;
 block|}

@@ -1467,6 +1467,23 @@ operator|.
 name|ANY
 argument_list|)
 decl_stmt|;
+specifier|public
+specifier|static
+specifier|final
+name|SqlSingleOperandTypeChecker
+name|ANY_NUMERIC
+init|=
+name|family
+argument_list|(
+name|SqlTypeFamily
+operator|.
+name|ANY
+argument_list|,
+name|SqlTypeFamily
+operator|.
+name|NUMERIC
+argument_list|)
+decl_stmt|;
 comment|/**    * Parameter type-checking strategy type must a nullable time interval,    * nullable time interval    */
 specifier|public
 specifier|static

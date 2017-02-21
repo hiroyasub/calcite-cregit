@@ -363,6 +363,20 @@ return|return
 name|r
 return|;
 block|}
+annotation|@
+name|Override
+specifier|public
+name|R
+name|visitPatternFieldRef
+parameter_list|(
+name|RexPatternFieldRef
+name|fieldRef
+parameter_list|)
+block|{
+return|return
+literal|null
+return|;
+block|}
 comment|/**    *<p>Visits an array of expressions, returning the logical 'and' of their    * results.    *    *<p>If any of them returns false, returns false immediately; if they all    * return true, returns true.    *    * @see #visitArrayOr    * @see RexShuttle#visitArray    */
 specifier|public
 specifier|static

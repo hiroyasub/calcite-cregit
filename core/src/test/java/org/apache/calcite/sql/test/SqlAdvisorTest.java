@@ -696,6 +696,8 @@ literal|"KEYWORD(POSITION)"
 argument_list|,
 literal|"KEYWORD(POWER)"
 argument_list|,
+literal|"KEYWORD(PREV)"
+argument_list|,
 literal|"KEYWORD(RANK)"
 argument_list|,
 literal|"KEYWORD(REGR_SXX)"
@@ -705,6 +707,8 @@ argument_list|,
 literal|"KEYWORD(ROW)"
 argument_list|,
 literal|"KEYWORD(ROW_NUMBER)"
+argument_list|,
+literal|"KEYWORD(RUNNING)"
 argument_list|,
 literal|"KEYWORD(SECOND)"
 argument_list|,
@@ -1011,6 +1015,8 @@ argument_list|,
 literal|"KEYWORD(LEFT)"
 argument_list|,
 literal|"KEYWORD(EXCEPT)"
+argument_list|,
+literal|"KEYWORD(MATCH_RECOGNIZE)"
 argument_list|,
 literal|"KEYWORD(MINUS)"
 argument_list|,

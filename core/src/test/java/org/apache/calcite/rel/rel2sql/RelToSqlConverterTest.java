@@ -2393,6 +2393,1008 @@ name|expected
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testMatchRecognizePatternExpression
+parameter_list|()
+block|{
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"  from \"product\" match_recognize\n"
+operator|+
+literal|"  (\n"
+operator|+
+literal|"    pattern (strt down+ up+)\n"
+operator|+
+literal|"    define\n"
+operator|+
+literal|"      down as down.\"net_weight\"< PREV(down.\"net_weight\"),\n"
+operator|+
+literal|"      up as up.\"net_weight\"> prev(up.\"net_weight\")\n"
+operator|+
+literal|"  ) mr"
+decl_stmt|;
+name|String
+name|expected
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM (SELECT *\n"
+operator|+
+literal|"FROM \"foodmart\".\"product\") MATCH_RECOGNIZE(\n"
+operator|+
+literal|"PATTERN (\"STRT\" \"DOWN\" + \"UP\" +)\n"
+operator|+
+literal|"DEFINE "
+operator|+
+literal|"\"DOWN\" AS PREV(\"net_weight\", 0)< PREV(\"net_weight\", 1), "
+operator|+
+literal|"\"UP\" AS PREV(\"net_weight\", 0)> PREV(\"net_weight\", 1))"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testMatchRecognizePatternExpression2
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"  from \"product\" match_recognize\n"
+operator|+
+literal|"  (\n"
+operator|+
+literal|"    pattern (strt down+ up+$)\n"
+operator|+
+literal|"    define\n"
+operator|+
+literal|"      down as down.\"net_weight\"< PREV(down.\"net_weight\"),\n"
+operator|+
+literal|"      up as up.\"net_weight\"> prev(up.\"net_weight\")\n"
+operator|+
+literal|"  ) mr"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM (SELECT *\n"
+operator|+
+literal|"FROM \"foodmart\".\"product\") MATCH_RECOGNIZE(\n"
+operator|+
+literal|"PATTERN (\"STRT\" \"DOWN\" + \"UP\" + $)\n"
+operator|+
+literal|"DEFINE "
+operator|+
+literal|"\"DOWN\" AS PREV(\"net_weight\", 0)< PREV(\"net_weight\", 1), "
+operator|+
+literal|"\"UP\" AS PREV(\"net_weight\", 0)> PREV(\"net_weight\", 1))"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testMatchRecognizePatternExpression3
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"  from \"product\" match_recognize\n"
+operator|+
+literal|"  (\n"
+operator|+
+literal|"    pattern (^strt down+ up+)\n"
+operator|+
+literal|"    define\n"
+operator|+
+literal|"      down as down.\"net_weight\"< PREV(down.\"net_weight\"),\n"
+operator|+
+literal|"      up as up.\"net_weight\"> prev(up.\"net_weight\")\n"
+operator|+
+literal|"  ) mr"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM (SELECT *\n"
+operator|+
+literal|"FROM \"foodmart\".\"product\") MATCH_RECOGNIZE(\n"
+operator|+
+literal|"PATTERN (^ \"STRT\" \"DOWN\" + \"UP\" +)\n"
+operator|+
+literal|"DEFINE "
+operator|+
+literal|"\"DOWN\" AS PREV(\"net_weight\", 0)< PREV(\"net_weight\", 1), "
+operator|+
+literal|"\"UP\" AS PREV(\"net_weight\", 0)> PREV(\"net_weight\", 1))"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testMatchRecognizePatternExpression4
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"  from \"product\" match_recognize\n"
+operator|+
+literal|"  (\n"
+operator|+
+literal|"    pattern (^strt down+ up+$)\n"
+operator|+
+literal|"    define\n"
+operator|+
+literal|"      down as down.\"net_weight\"< PREV(down.\"net_weight\"),\n"
+operator|+
+literal|"      up as up.\"net_weight\"> prev(up.\"net_weight\")\n"
+operator|+
+literal|"  ) mr"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM (SELECT *\n"
+operator|+
+literal|"FROM \"foodmart\".\"product\") MATCH_RECOGNIZE(\n"
+operator|+
+literal|"PATTERN (^ \"STRT\" \"DOWN\" + \"UP\" + $)\n"
+operator|+
+literal|"DEFINE "
+operator|+
+literal|"\"DOWN\" AS PREV(\"net_weight\", 0)< PREV(\"net_weight\", 1), "
+operator|+
+literal|"\"UP\" AS PREV(\"net_weight\", 0)> PREV(\"net_weight\", 1))"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testMatchRecognizePatternExpression5
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"  from \"product\" match_recognize\n"
+operator|+
+literal|"  (\n"
+operator|+
+literal|"    pattern (strt down* up?)\n"
+operator|+
+literal|"    define\n"
+operator|+
+literal|"      down as down.\"net_weight\"< PREV(down.\"net_weight\"),\n"
+operator|+
+literal|"      up as up.\"net_weight\"> prev(up.\"net_weight\")\n"
+operator|+
+literal|"  ) mr"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM (SELECT *\n"
+operator|+
+literal|"FROM \"foodmart\".\"product\") MATCH_RECOGNIZE(\n"
+operator|+
+literal|"PATTERN (\"STRT\" \"DOWN\" * \"UP\" ?)\n"
+operator|+
+literal|"DEFINE "
+operator|+
+literal|"\"DOWN\" AS PREV(\"net_weight\", 0)< PREV(\"net_weight\", 1), "
+operator|+
+literal|"\"UP\" AS PREV(\"net_weight\", 0)> PREV(\"net_weight\", 1))"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testMatchRecognizePatternExpression6
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"  from \"product\" match_recognize\n"
+operator|+
+literal|"  (\n"
+operator|+
+literal|"    pattern (strt {-down-} up?)\n"
+operator|+
+literal|"    define\n"
+operator|+
+literal|"      down as down.\"net_weight\"< PREV(down.\"net_weight\"),\n"
+operator|+
+literal|"      up as up.\"net_weight\"> prev(up.\"net_weight\")\n"
+operator|+
+literal|"  ) mr"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM (SELECT *\n"
+operator|+
+literal|"FROM \"foodmart\".\"product\") MATCH_RECOGNIZE(\n"
+operator|+
+literal|"PATTERN (\"STRT\" {- \"DOWN\" -} \"UP\" ?)\n"
+operator|+
+literal|"DEFINE "
+operator|+
+literal|"\"DOWN\" AS PREV(\"net_weight\", 0)< PREV(\"net_weight\", 1), "
+operator|+
+literal|"\"UP\" AS PREV(\"net_weight\", 0)> PREV(\"net_weight\", 1))"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testMatchRecognizePatternExpression7
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"  from \"product\" match_recognize\n"
+operator|+
+literal|"  (\n"
+operator|+
+literal|"    pattern (strt down{2} up{3,})\n"
+operator|+
+literal|"    define\n"
+operator|+
+literal|"      down as down.\"net_weight\"< PREV(down.\"net_weight\"),\n"
+operator|+
+literal|"      up as up.\"net_weight\"> prev(up.\"net_weight\")\n"
+operator|+
+literal|"  ) mr"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM (SELECT *\n"
+operator|+
+literal|"FROM \"foodmart\".\"product\") MATCH_RECOGNIZE(\n"
+operator|+
+literal|"PATTERN (\"STRT\" \"DOWN\" { 2 } \"UP\" { 3, })\n"
+operator|+
+literal|"DEFINE "
+operator|+
+literal|"\"DOWN\" AS PREV(\"net_weight\", 0)< PREV(\"net_weight\", 1), "
+operator|+
+literal|"\"UP\" AS PREV(\"net_weight\", 0)> PREV(\"net_weight\", 1))"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testMatchRecognizePatternExpression8
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"  from \"product\" match_recognize\n"
+operator|+
+literal|"  (\n"
+operator|+
+literal|"    pattern (strt down{,2} up{3,5})\n"
+operator|+
+literal|"    define\n"
+operator|+
+literal|"      down as down.\"net_weight\"< PREV(down.\"net_weight\"),\n"
+operator|+
+literal|"      up as up.\"net_weight\"> prev(up.\"net_weight\")\n"
+operator|+
+literal|"  ) mr"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM (SELECT *\n"
+operator|+
+literal|"FROM \"foodmart\".\"product\") MATCH_RECOGNIZE(\n"
+operator|+
+literal|"PATTERN (\"STRT\" \"DOWN\" { , 2 } \"UP\" { 3, 5 })\n"
+operator|+
+literal|"DEFINE "
+operator|+
+literal|"\"DOWN\" AS PREV(\"net_weight\", 0)< PREV(\"net_weight\", 1), "
+operator|+
+literal|"\"UP\" AS PREV(\"net_weight\", 0)> PREV(\"net_weight\", 1))"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testMatchRecognizePatternExpression9
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"  from \"product\" match_recognize\n"
+operator|+
+literal|"  (\n"
+operator|+
+literal|"    pattern (strt {-down+-} {-up*-})\n"
+operator|+
+literal|"    define\n"
+operator|+
+literal|"      down as down.\"net_weight\"< PREV(down.\"net_weight\"),\n"
+operator|+
+literal|"      up as up.\"net_weight\"> prev(up.\"net_weight\")\n"
+operator|+
+literal|"  ) mr"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM (SELECT *\n"
+operator|+
+literal|"FROM \"foodmart\".\"product\") MATCH_RECOGNIZE(\n"
+operator|+
+literal|"PATTERN (\"STRT\" {- \"DOWN\" + -} {- \"UP\" * -})\n"
+operator|+
+literal|"DEFINE "
+operator|+
+literal|"\"DOWN\" AS PREV(\"net_weight\", 0)< PREV(\"net_weight\", 1), "
+operator|+
+literal|"\"UP\" AS PREV(\"net_weight\", 0)> PREV(\"net_weight\", 1))"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testMatchRecognizePatternExpression10
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"  from \"product\" match_recognize\n"
+operator|+
+literal|"  (\n"
+operator|+
+literal|"    pattern (A B C | A C B | B A C | B C A | C A B | C B A)\n"
+operator|+
+literal|"    define\n"
+operator|+
+literal|"      A as A.\"net_weight\"< PREV(A.\"net_weight\"),\n"
+operator|+
+literal|"      B as B.\"net_weight\"> PREV(B.\"net_weight\"),\n"
+operator|+
+literal|"      C as C.\"net_weight\"< PREV(C.\"net_weight\")\n"
+operator|+
+literal|"  ) mr"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM (SELECT *\n"
+operator|+
+literal|"FROM \"foodmart\".\"product\") MATCH_RECOGNIZE(\n"
+operator|+
+literal|"PATTERN (\"A\" \"B\" \"C\" | \"A\" \"C\" \"B\" "
+operator|+
+literal|"| \"B\" \"A\" \"C\" | \"B\" \"C\" \"A\" "
+operator|+
+literal|"| \"C\" \"A\" \"B\" | \"C\" \"B\" \"A\")\n"
+operator|+
+literal|"DEFINE "
+operator|+
+literal|"\"A\" AS PREV(\"net_weight\", 0)< PREV(\"net_weight\", 1), "
+operator|+
+literal|"\"B\" AS PREV(\"net_weight\", 0)> PREV(\"net_weight\", 1), "
+operator|+
+literal|"\"C\" AS PREV(\"net_weight\", 0)< PREV(\"net_weight\", 1))"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testMatchRecognizePatternExpression11
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"  from (select * from \"product\") match_recognize\n"
+operator|+
+literal|"  (\n"
+operator|+
+literal|"    pattern (strt down+ up+)\n"
+operator|+
+literal|"    define\n"
+operator|+
+literal|"      down as down.\"net_weight\"< PREV(down.\"net_weight\"),\n"
+operator|+
+literal|"      up as up.\"net_weight\"> prev(up.\"net_weight\")\n"
+operator|+
+literal|"  ) mr"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM (SELECT *\n"
+operator|+
+literal|"FROM \"foodmart\".\"product\") MATCH_RECOGNIZE(\n"
+operator|+
+literal|"PATTERN (\"STRT\" \"DOWN\" + \"UP\" +)\n"
+operator|+
+literal|"DEFINE "
+operator|+
+literal|"\"DOWN\" AS PREV(\"net_weight\", 0)< PREV(\"net_weight\", 1), "
+operator|+
+literal|"\"UP\" AS PREV(\"net_weight\", 0)> PREV(\"net_weight\", 1))"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testMatchRecognizePatternExpression12
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"  from \"product\" match_recognize\n"
+operator|+
+literal|"  (\n"
+operator|+
+literal|"    pattern (strt down+ up+)\n"
+operator|+
+literal|"    define\n"
+operator|+
+literal|"      down as down.\"net_weight\"< PREV(down.\"net_weight\"),\n"
+operator|+
+literal|"      up as up.\"net_weight\"> prev(up.\"net_weight\")\n"
+operator|+
+literal|"  ) mr order by MR.\"net_weight\""
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM (SELECT *\n"
+operator|+
+literal|"FROM \"foodmart\".\"product\") MATCH_RECOGNIZE(\n"
+operator|+
+literal|"PATTERN (\"STRT\" \"DOWN\" + \"UP\" +)\n"
+operator|+
+literal|"DEFINE "
+operator|+
+literal|"\"DOWN\" AS PREV(\"net_weight\", 0)< PREV(\"net_weight\", 1), "
+operator|+
+literal|"\"UP\" AS PREV(\"net_weight\", 0)> PREV(\"net_weight\", 1))\n"
+operator|+
+literal|"ORDER BY \"net_weight\""
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testMatchRecognizePatternExpression13
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"  from (\n"
+operator|+
+literal|"select *\n"
+operator|+
+literal|"from \"sales_fact_1997\" as s\n"
+operator|+
+literal|"join \"customer\" as c using (\"customer_id\")\n"
+operator|+
+literal|"join \"product\" as p using (\"product_id\")\n"
+operator|+
+literal|"join \"product_class\" as pc using (\"product_class_id\")\n"
+operator|+
+literal|"where c.\"city\" = 'San Francisco'\n"
+operator|+
+literal|"and pc.\"product_department\" = 'Snacks'"
+operator|+
+literal|") match_recognize\n"
+operator|+
+literal|"  (\n"
+operator|+
+literal|"    pattern (strt down+ up+)\n"
+operator|+
+literal|"    define\n"
+operator|+
+literal|"      down as down.\"net_weight\"< PREV(down.\"net_weight\"),\n"
+operator|+
+literal|"      up as up.\"net_weight\"> prev(up.\"net_weight\")\n"
+operator|+
+literal|"  ) mr order by MR.\"net_weight\""
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM (SELECT *\n"
+operator|+
+literal|"FROM \"foodmart\".\"sales_fact_1997\"\n"
+operator|+
+literal|"INNER JOIN \"foodmart\".\"customer\" "
+operator|+
+literal|"ON \"sales_fact_1997\".\"customer_id\" = \"customer\".\"customer_id\"\n"
+operator|+
+literal|"INNER JOIN \"foodmart\".\"product\" "
+operator|+
+literal|"ON \"sales_fact_1997\".\"product_id\" = \"product\".\"product_id\"\n"
+operator|+
+literal|"INNER JOIN \"foodmart\".\"product_class\" "
+operator|+
+literal|"ON \"product\".\"product_class_id\" = \"product_class\".\"product_class_id\"\n"
+operator|+
+literal|"WHERE \"customer\".\"city\" = 'San Francisco' "
+operator|+
+literal|"AND \"product_class\".\"product_department\" = 'Snacks') "
+operator|+
+literal|"MATCH_RECOGNIZE(\n"
+operator|+
+literal|"PATTERN (\"STRT\" \"DOWN\" + \"UP\" +)\n"
+operator|+
+literal|"DEFINE "
+operator|+
+literal|"\"DOWN\" AS PREV(\"net_weight\", 0)< PREV(\"net_weight\", 1), "
+operator|+
+literal|"\"UP\" AS PREV(\"net_weight\", 0)> PREV(\"net_weight\", 1))\n"
+operator|+
+literal|"ORDER BY \"net_weight\""
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testMatchRecognizeDefineClause
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"  from \"product\" match_recognize\n"
+operator|+
+literal|"  (\n"
+operator|+
+literal|"    pattern (strt down+ up+)\n"
+operator|+
+literal|"    define\n"
+operator|+
+literal|"      down as down.\"net_weight\"< PREV(down.\"net_weight\"),\n"
+operator|+
+literal|"      up as up.\"net_weight\"> NEXT(up.\"net_weight\")\n"
+operator|+
+literal|"  ) mr"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM (SELECT *\n"
+operator|+
+literal|"FROM \"foodmart\".\"product\") MATCH_RECOGNIZE(\n"
+operator|+
+literal|"PATTERN (\"STRT\" \"DOWN\" + \"UP\" +)\n"
+operator|+
+literal|"DEFINE "
+operator|+
+literal|"\"DOWN\" AS PREV(\"net_weight\", 0)< PREV(\"net_weight\", 1), "
+operator|+
+literal|"\"UP\" AS PREV(\"net_weight\", 0)> NEXT(PREV(\"net_weight\", 0), 1))"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testMatchRecognizeDefineClause2
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"  from \"product\" match_recognize\n"
+operator|+
+literal|"  (\n"
+operator|+
+literal|"    pattern (strt down+ up+)\n"
+operator|+
+literal|"    define\n"
+operator|+
+literal|"      down as down.\"net_weight\"< FIRST(down.\"net_weight\"),\n"
+operator|+
+literal|"      up as up.\"net_weight\"> LAST(up.\"net_weight\")\n"
+operator|+
+literal|"  ) mr"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM (SELECT *\n"
+operator|+
+literal|"FROM \"foodmart\".\"product\") MATCH_RECOGNIZE(\n"
+operator|+
+literal|"PATTERN (\"STRT\" \"DOWN\" + \"UP\" +)\n"
+operator|+
+literal|"DEFINE "
+operator|+
+literal|"\"DOWN\" AS PREV(\"net_weight\", 0)< FIRST(\"net_weight\", 0), "
+operator|+
+literal|"\"UP\" AS PREV(\"net_weight\", 0)> LAST(\"net_weight\", 0))"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testMatchRecognizeDefineClause3
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"  from \"product\" match_recognize\n"
+operator|+
+literal|"  (\n"
+operator|+
+literal|"    pattern (strt down+ up+)\n"
+operator|+
+literal|"    define\n"
+operator|+
+literal|"      down as down.\"net_weight\"< PREV(down.\"net_weight\",1),\n"
+operator|+
+literal|"      up as up.\"net_weight\"> LAST(up.\"net_weight\" + up.\"gross_weight\")\n"
+operator|+
+literal|"  ) mr"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM (SELECT *\n"
+operator|+
+literal|"FROM \"foodmart\".\"product\") MATCH_RECOGNIZE(\n"
+operator|+
+literal|"PATTERN (\"STRT\" \"DOWN\" + \"UP\" +)\n"
+operator|+
+literal|"DEFINE "
+operator|+
+literal|"\"DOWN\" AS PREV(\"net_weight\", 0)< PREV(\"net_weight\", 1), "
+operator|+
+literal|"\"UP\" AS PREV(\"net_weight\", 0)> "
+operator|+
+literal|"LAST(\"net_weight\", 0) + LAST(\"gross_weight\", 0))"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testMatchRecognizeDefineClause4
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"  from \"product\" match_recognize\n"
+operator|+
+literal|"  (\n"
+operator|+
+literal|"    pattern (strt down+ up+)\n"
+operator|+
+literal|"    define\n"
+operator|+
+literal|"      down as down.\"net_weight\"< PREV(down.\"net_weight\",1),\n"
+operator|+
+literal|"      up as up.\"net_weight\"> "
+operator|+
+literal|"PREV(LAST(up.\"net_weight\" + up.\"gross_weight\"),3)\n"
+operator|+
+literal|"  ) mr"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM (SELECT *\n"
+operator|+
+literal|"FROM \"foodmart\".\"product\") MATCH_RECOGNIZE(\n"
+operator|+
+literal|"PATTERN (\"STRT\" \"DOWN\" + \"UP\" +)\n"
+operator|+
+literal|"DEFINE "
+operator|+
+literal|"\"DOWN\" AS PREV(\"net_weight\", 0)< PREV(\"net_weight\", 1), "
+operator|+
+literal|"\"UP\" AS PREV(\"net_weight\", 0)> "
+operator|+
+literal|"LAST(\"net_weight\", 0) + LAST(\"gross_weight\", 0))"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
 comment|/** Fluid interface to run tests. */
 specifier|private
 specifier|static

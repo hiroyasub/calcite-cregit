@@ -130,6 +130,16 @@ name|P
 name|arg
 parameter_list|)
 function_decl|;
+name|R
+name|visitPatternFieldRef
+parameter_list|(
+name|RexPatternFieldRef
+name|ref
+parameter_list|,
+name|P
+name|arg
+parameter_list|)
+function_decl|;
 block|}
 end_interface
 

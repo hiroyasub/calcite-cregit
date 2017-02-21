@@ -150,6 +150,9 @@ block|,
 comment|/**    * TABLESAMPLE operator    */
 name|TABLESAMPLE
 block|,
+comment|/**    * MATCH_RECOGNIZE clause    */
+name|MATCH_RECOGNIZE
+block|,
 comment|// binary operators
 comment|/**    * The arithmetic multiplication operator, "*".    */
 name|TIMES
@@ -162,6 +165,12 @@ name|PLUS
 block|,
 comment|/**    * The arithmetic minus operator, "-".    *    * @see #MINUS_PREFIX    */
 name|MINUS
+block|,
+comment|/**    * the alternation operator in a pattern expression within a match_recognize clause    */
+name|PATTERN_ALTER
+block|,
+comment|/**    * the concatenation operator in a pattern expression within a match_recognize clause    */
+name|PATTERN_CONCAT
 block|,
 comment|// comparison operators
 comment|/**    * The "IN" operator.    */
@@ -268,6 +277,23 @@ block|,
 comment|/**    * NewSpecification    */
 name|NEW_SPECIFICATION
 block|,
+comment|/**    * Special functions in MATCH_RECOGNIZE.    */
+name|FINAL
+block|,
+name|RUNNING
+block|,
+name|PREV
+block|,
+name|NEXT
+block|,
+name|FIRST
+block|,
+name|LAST
+block|,
+name|CLASSIFIER
+block|,
+name|MATCH_NUMBER
+block|,
 comment|// postfix operators
 comment|/**    * DESC in ORDER BY. A parse tree, not a true expression.    */
 name|DESCENDING
@@ -311,11 +337,17 @@ block|,
 comment|/**    * Reference to an input field.    *    *<p>(Only used at the RexNode level.)</p>    */
 name|INPUT_REF
 block|,
+comment|/**    * Reference to an input field, with pattern var as modifier    *    *<p>(Only used at the RexNode level.)</p>    */
+name|PATTERN_INPUT_REF
+block|,
 comment|/**    * Reference to a sub-expression computed within the current relational    * operator.    *    *<p>(Only used at the RexNode level.)</p>    */
 name|LOCAL_REF
 block|,
 comment|/**    * Reference to correlation variable.    *    *<p>(Only used at the RexNode level.)</p>    */
 name|CORREL_VARIABLE
+block|,
+comment|/**    * the repetition quantifier of a pattern factor in a match_recognize clause.    */
+name|PATTERN_QUANTIFIER
 block|,
 comment|// functions
 comment|/**    * The row-constructor function. May be explicit or implicit:    * {@code VALUES 1, ROW (2)}.    */
@@ -417,6 +449,12 @@ name|GROUPING_ID
 block|,
 comment|/** The {@code GROUP_ID()} function. */
 name|GROUP_ID
+block|,
+comment|/**    * the internal permute function in match_recognize cluse    */
+name|PATTERN_PERMUTE
+block|,
+comment|/**    * the special patterns to exclude enclosing pattern from output in match_recognize clause    */
+name|PATTERN_EXCLUDED
 block|,
 comment|// Aggregate functions
 comment|/** The {@code COUNT} aggregate function. */

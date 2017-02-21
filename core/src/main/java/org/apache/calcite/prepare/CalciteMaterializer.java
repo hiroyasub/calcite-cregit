@@ -297,6 +297,22 @@ name|rel
 operator|.
 name|logical
 operator|.
+name|LogicalMatch
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|logical
+operator|.
 name|LogicalMinus
 import|;
 end_import
@@ -968,7 +984,7 @@ return|return
 name|list
 return|;
 block|}
-comment|/** Implementation of {@link RelShuttle} that returns each relational    * expression unchanged. It does not visit children. */
+comment|/** Implementation of {@link RelShuttle} that returns each relational    * expression unchanged. It does not visit inputs. */
 specifier|static
 class|class
 name|RelNullShuttle
@@ -1105,6 +1121,18 @@ parameter_list|)
 block|{
 return|return
 name|aggregate
+return|;
+block|}
+specifier|public
+name|RelNode
+name|visit
+parameter_list|(
+name|LogicalMatch
+name|match
+parameter_list|)
+block|{
+return|return
+name|match
 return|;
 block|}
 specifier|public

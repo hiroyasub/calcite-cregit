@@ -98,6 +98,13 @@ name|RexSubQuery
 name|subQuery
 parameter_list|)
 function_decl|;
+name|R
+name|visitPatternFieldRef
+parameter_list|(
+name|RexPatternFieldRef
+name|fieldRef
+parameter_list|)
+function_decl|;
 block|}
 end_interface
 

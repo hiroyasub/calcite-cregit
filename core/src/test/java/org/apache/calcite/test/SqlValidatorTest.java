@@ -22553,7 +22553,17 @@ literal|"ITEM -\n"
 operator|+
 literal|"NEXT_VALUE -\n"
 operator|+
+literal|"PATTERN_EXCLUDE -\n"
+operator|+
+literal|"PATTERN_PERMUTE -\n"
+operator|+
 literal|"\n"
+operator|+
+literal|"PATTERN_QUANTIFIER -\n"
+operator|+
+literal|"\n"
+operator|+
+literal|" left\n"
 operator|+
 literal|"$LiteralChain -\n"
 operator|+
@@ -22562,6 +22572,10 @@ operator|+
 literal|"- pre\n"
 operator|+
 literal|". left\n"
+operator|+
+literal|"\n"
+operator|+
+literal|"| left\n"
 operator|+
 literal|"\n"
 operator|+
@@ -22674,6 +22688,8 @@ operator|+
 literal|"DESC post\n"
 operator|+
 literal|"OVER left\n"
+operator|+
+literal|"PATTERN_DEFINE_AS -\n"
 operator|+
 literal|"TABLESAMPLE -\n"
 operator|+
@@ -26228,6 +26244,335 @@ argument_list|)
 operator|.
 name|ok
 argument_list|()
+expr_stmt|;
+block|}
+comment|/** Tries to create a calls to some internal operators in    * MATCH_RECOGNIZE. Should fail. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testMatchRecognizeInternals
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+name|sql
+argument_list|(
+literal|"values ^pattern_define_as(1, 2)^"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"No match found for function signature .*"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"values ^pattern_exclude(1, 2)^"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"No match found for function signature .*"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"values ^\"|\"(1, 2)^"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"No match found for function signature .*"
+argument_list|)
+expr_stmt|;
+if|if
+condition|(
+name|TODO
+condition|)
+block|{
+comment|// FINAL and other functions should not be visible outside of
+comment|// MATCH_RECOGNIZE
+name|sql
+argument_list|(
+literal|"values ^\"FINAL\"(1, 2)^"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"No match found for function signature .*"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"values ^\"RUNNING\"(1, 2)^"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"No match found for function signature .*"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"values ^\"FIRST\"(1, 2)^"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"No match found for function signature .*"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"values ^\"LAST\"(1, 2)^"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"No match found for function signature .*"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"values ^\"PREV\"(1, 2)^"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"No match found for function signature .*"
+argument_list|)
+expr_stmt|;
+block|}
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testMatchRecognizeDefines
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"  from emp match_recognize (\n"
+operator|+
+literal|"    pattern (strt down+ up+)\n"
+operator|+
+literal|"    define\n"
+operator|+
+literal|"      down as down.sal< PREV(down.sal),\n"
+operator|+
+literal|"      up as up.sal> PREV(up.sal)\n"
+operator|+
+literal|"  ) mr"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testMatchRecognizeDefines2
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"  from t match_recognize (\n"
+operator|+
+literal|"    pattern (strt down+ up+)\n"
+operator|+
+literal|"    define\n"
+operator|+
+literal|"      down as down.price< PREV(down.price),\n"
+operator|+
+literal|"      ^down as up.price> PREV(up.price)^\n"
+operator|+
+literal|"  ) mr"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Pattern variable 'DOWN' has already been defined"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testMatchRecognizeDefines3
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"  from emp match_recognize (\n"
+operator|+
+literal|"    pattern (strt down+up+)\n"
+operator|+
+literal|"    define\n"
+operator|+
+literal|"      down as down.sal< PREV(down.sal),\n"
+operator|+
+literal|"      up as up.sal> PREV(up.sal)\n"
+operator|+
+literal|"  ) mr"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testMatchRecognizeDefines4
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select * \n"
+operator|+
+literal|"  from emp match_recognize \n"
+operator|+
+literal|"  (\n"
+operator|+
+literal|"    pattern (strt down+ up+)\n"
+operator|+
+literal|"    define \n"
+operator|+
+literal|"      down as down.sal< PREV(down.sal),\n"
+operator|+
+literal|"      up as up.sal> FIRST(^PREV(up.sal)^)\n"
+operator|+
+literal|"  ) mr"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Cannot nest PREV/NEXT under LAST/FIRST 'PREV\\(`UP`\\.`SAL`, 1\\)'"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testMatchRecognizeDefines5
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select * \n"
+operator|+
+literal|"  from emp match_recognize \n"
+operator|+
+literal|"  (\n"
+operator|+
+literal|"    pattern (strt down+ up+)\n"
+operator|+
+literal|"    define \n"
+operator|+
+literal|"      down as down.sal< PREV(down.sal),\n"
+operator|+
+literal|"      up as up.sal> FIRST(^FIRST(up.sal)^)\n"
+operator|+
+literal|"  ) mr"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Cannot nest PREV/NEXT under LAST/FIRST 'FIRST\\(`UP`\\.`SAL`, 0\\)'"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testMatchRecognizeDefines6
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select * \n"
+operator|+
+literal|"  from emp match_recognize \n"
+operator|+
+literal|"  (\n"
+operator|+
+literal|"    pattern (strt down+ up+)\n"
+operator|+
+literal|"    define \n"
+operator|+
+literal|"      down as down.sal< PREV(down.sal),\n"
+operator|+
+literal|"      up as up.sal> ^COUNT(down.sal, up.sal)^\n"
+operator|+
+literal|"  ) mr"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Invalid number of parameters to COUNT method"
+argument_list|)
 expr_stmt|;
 block|}
 block|}

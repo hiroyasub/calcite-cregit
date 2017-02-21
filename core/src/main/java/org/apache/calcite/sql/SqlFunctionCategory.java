@@ -231,6 +231,15 @@ name|TABLE_FUNCTION
 argument_list|,
 name|SPECIFIC
 argument_list|)
+block|,
+name|MATCH_RECOGNIZE
+argument_list|(
+literal|"MATCH_RECOGNIZE"
+argument_list|,
+literal|"MATCH_RECOGNIZE function"
+argument_list|,
+name|TABLE_FUNCTION
+argument_list|)
 block|;
 specifier|private
 specifier|final

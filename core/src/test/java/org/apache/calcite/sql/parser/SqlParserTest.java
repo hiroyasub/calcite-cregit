@@ -1505,6 +1505,10 @@ literal|"92"
 argument_list|,
 literal|"99"
 argument_list|,
+literal|"DEFINE"
+argument_list|,
+literal|"c"
+argument_list|,
 literal|"DELETE"
 argument_list|,
 literal|"92"
@@ -2513,6 +2517,10 @@ literal|"2011"
 argument_list|,
 literal|"c"
 argument_list|,
+literal|"MATCH_RECOGNIZE"
+argument_list|,
+literal|"c"
+argument_list|,
 literal|"MAX"
 argument_list|,
 literal|"92"
@@ -2991,6 +2999,10 @@ literal|"92"
 argument_list|,
 literal|"99"
 argument_list|,
+literal|"PATTERN"
+argument_list|,
+literal|"c"
+argument_list|,
 literal|"PERCENTILE_CONT"
 argument_list|,
 literal|"2011"
@@ -3006,6 +3018,10 @@ argument_list|,
 literal|"PERCENT_RANK"
 argument_list|,
 literal|"2011"
+argument_list|,
+literal|"c"
+argument_list|,
+literal|"PERMUTE"
 argument_list|,
 literal|"c"
 argument_list|,
@@ -3056,6 +3072,10 @@ argument_list|,
 literal|"92"
 argument_list|,
 literal|"99"
+argument_list|,
+literal|"PREV"
+argument_list|,
+literal|"c"
 argument_list|,
 literal|"PRIMARY"
 argument_list|,
@@ -3396,6 +3416,10 @@ argument_list|,
 literal|"ROW_NUMBER"
 argument_list|,
 literal|"2011"
+argument_list|,
+literal|"c"
+argument_list|,
+literal|"RUNNING"
 argument_list|,
 literal|"c"
 argument_list|,
@@ -22419,6 +22443,848 @@ argument_list|(
 literal|"INSERT INTO `T`\n"
 operator|+
 literal|"VALUES (ROW(1, (CURRENT VALUE FOR `MY_SEQ`)))"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testMatchRecognize1
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"  from t match_recognize\n"
+operator|+
+literal|"  (\n"
+operator|+
+literal|"    pattern (strt down+ up+)\n"
+operator|+
+literal|"    define\n"
+operator|+
+literal|"      down as down.price< PREV(down.price),\n"
+operator|+
+literal|"      up as up.price> prev(up.price)\n"
+operator|+
+literal|"  ) mr"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM `T` MATCH_RECOGNIZE(\n"
+operator|+
+literal|"PATTERN (((`STRT` (`DOWN` +)) (`UP` +)))\n"
+operator|+
+literal|"DEFINE "
+operator|+
+literal|"`DOWN` AS (`DOWN`.`PRICE`< (PREV(`DOWN`.`PRICE`, 1))), "
+operator|+
+literal|"`UP` AS (`UP`.`PRICE`> (PREV(`UP`.`PRICE`, 1)))"
+operator|+
+literal|") AS `MR`"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testMatchRecognize2
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"  from t match_recognize\n"
+operator|+
+literal|"  (\n"
+operator|+
+literal|"    pattern (strt down+ up+$)\n"
+operator|+
+literal|"    define\n"
+operator|+
+literal|"      down as down.price< PREV(down.price),\n"
+operator|+
+literal|"      up as up.price> prev(up.price)\n"
+operator|+
+literal|"  ) mr"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM `T` MATCH_RECOGNIZE(\n"
+operator|+
+literal|"PATTERN (((`STRT` (`DOWN` +)) (`UP` +)) $)\n"
+operator|+
+literal|"DEFINE "
+operator|+
+literal|"`DOWN` AS (`DOWN`.`PRICE`< (PREV(`DOWN`.`PRICE`, 1))), "
+operator|+
+literal|"`UP` AS (`UP`.`PRICE`> (PREV(`UP`.`PRICE`, 1)))"
+operator|+
+literal|") AS `MR`"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testMatchRecognize3
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"  from t match_recognize\n"
+operator|+
+literal|"  (\n"
+operator|+
+literal|"    pattern (^strt down+ up+)\n"
+operator|+
+literal|"    define\n"
+operator|+
+literal|"      down as down.price< PREV(down.price),\n"
+operator|+
+literal|"      up as up.price> prev(up.price)\n"
+operator|+
+literal|"  ) mr"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM `T` MATCH_RECOGNIZE(\n"
+operator|+
+literal|"PATTERN (^ ((`STRT` (`DOWN` +)) (`UP` +)))\n"
+operator|+
+literal|"DEFINE "
+operator|+
+literal|"`DOWN` AS (`DOWN`.`PRICE`< (PREV(`DOWN`.`PRICE`, 1))), "
+operator|+
+literal|"`UP` AS (`UP`.`PRICE`> (PREV(`UP`.`PRICE`, 1)))"
+operator|+
+literal|") AS `MR`"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testMatchRecognize4
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"  from t match_recognize\n"
+operator|+
+literal|"  (\n"
+operator|+
+literal|"    pattern (^strt down+ up+$)\n"
+operator|+
+literal|"    define\n"
+operator|+
+literal|"      down as down.price< PREV(down.price),\n"
+operator|+
+literal|"      up as up.price> prev(up.price)\n"
+operator|+
+literal|"  ) mr"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM `T` MATCH_RECOGNIZE(\n"
+operator|+
+literal|"PATTERN (^ ((`STRT` (`DOWN` +)) (`UP` +)) $)\n"
+operator|+
+literal|"DEFINE "
+operator|+
+literal|"`DOWN` AS (`DOWN`.`PRICE`< (PREV(`DOWN`.`PRICE`, 1))), "
+operator|+
+literal|"`UP` AS (`UP`.`PRICE`> (PREV(`UP`.`PRICE`, 1)))"
+operator|+
+literal|") AS `MR`"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testMatchRecognize5
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"  from t match_recognize\n"
+operator|+
+literal|"  (\n"
+operator|+
+literal|"    pattern (strt down* up?)\n"
+operator|+
+literal|"    define\n"
+operator|+
+literal|"      down as down.price< PREV(down.price),\n"
+operator|+
+literal|"      up as up.price> prev(up.price)\n"
+operator|+
+literal|"  ) mr"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM `T` MATCH_RECOGNIZE(\n"
+operator|+
+literal|"PATTERN (((`STRT` (`DOWN` *)) (`UP` ?)))\n"
+operator|+
+literal|"DEFINE "
+operator|+
+literal|"`DOWN` AS (`DOWN`.`PRICE`< (PREV(`DOWN`.`PRICE`, 1))), "
+operator|+
+literal|"`UP` AS (`UP`.`PRICE`> (PREV(`UP`.`PRICE`, 1)))"
+operator|+
+literal|") AS `MR`"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testMatchRecognize6
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"  from t match_recognize\n"
+operator|+
+literal|"  (\n"
+operator|+
+literal|"    pattern (strt {-down-} up?)\n"
+operator|+
+literal|"    define\n"
+operator|+
+literal|"      down as down.price< PREV(down.price),\n"
+operator|+
+literal|"      up as up.price> prev(up.price)\n"
+operator|+
+literal|"  ) mr"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM `T` MATCH_RECOGNIZE(\n"
+operator|+
+literal|"PATTERN (((`STRT` ({- `DOWN` -})) (`UP` ?)))\n"
+operator|+
+literal|"DEFINE "
+operator|+
+literal|"`DOWN` AS (`DOWN`.`PRICE`< (PREV(`DOWN`.`PRICE`, 1))), "
+operator|+
+literal|"`UP` AS (`UP`.`PRICE`> (PREV(`UP`.`PRICE`, 1)))"
+operator|+
+literal|") AS `MR`"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testMatchRecognize7
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"  from t match_recognize\n"
+operator|+
+literal|"  (\n"
+operator|+
+literal|"    pattern (strt down{2} up{3,})\n"
+operator|+
+literal|"    define\n"
+operator|+
+literal|"      down as down.price< PREV(down.price),\n"
+operator|+
+literal|"      up as up.price> prev(up.price)\n"
+operator|+
+literal|"  ) mr"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM `T` MATCH_RECOGNIZE(\n"
+operator|+
+literal|"PATTERN (((`STRT` (`DOWN` { 2 })) (`UP` { 3, })))\n"
+operator|+
+literal|"DEFINE "
+operator|+
+literal|"`DOWN` AS (`DOWN`.`PRICE`< (PREV(`DOWN`.`PRICE`, 1))), "
+operator|+
+literal|"`UP` AS (`UP`.`PRICE`> (PREV(`UP`.`PRICE`, 1)))"
+operator|+
+literal|") AS `MR`"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testMatchRecognize8
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"  from t match_recognize\n"
+operator|+
+literal|"  (\n"
+operator|+
+literal|"    pattern (strt down{,2} up{3,5})\n"
+operator|+
+literal|"    define\n"
+operator|+
+literal|"      down as down.price< PREV(down.price),\n"
+operator|+
+literal|"      up as up.price> prev(up.price)\n"
+operator|+
+literal|"  ) mr"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM `T` MATCH_RECOGNIZE(\n"
+operator|+
+literal|"PATTERN (((`STRT` (`DOWN` { , 2 })) (`UP` { 3, 5 })))\n"
+operator|+
+literal|"DEFINE "
+operator|+
+literal|"`DOWN` AS (`DOWN`.`PRICE`< (PREV(`DOWN`.`PRICE`, 1))), "
+operator|+
+literal|"`UP` AS (`UP`.`PRICE`> (PREV(`UP`.`PRICE`, 1)))"
+operator|+
+literal|") AS `MR`"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testMatchRecognize9
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"  from t match_recognize\n"
+operator|+
+literal|"  (\n"
+operator|+
+literal|"    pattern (strt {-down+-} {-up*-})\n"
+operator|+
+literal|"    define\n"
+operator|+
+literal|"      down as down.price< PREV(down.price),\n"
+operator|+
+literal|"      up as up.price> prev(up.price)\n"
+operator|+
+literal|"  ) mr"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM `T` MATCH_RECOGNIZE(\n"
+operator|+
+literal|"PATTERN (((`STRT` ({- (`DOWN` +) -})) ({- (`UP` *) -})))\n"
+operator|+
+literal|"DEFINE "
+operator|+
+literal|"`DOWN` AS (`DOWN`.`PRICE`< (PREV(`DOWN`.`PRICE`, 1))), "
+operator|+
+literal|"`UP` AS (`UP`.`PRICE`> (PREV(`UP`.`PRICE`, 1)))"
+operator|+
+literal|") AS `MR`"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testMatchRecognize10
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"  from t match_recognize\n"
+operator|+
+literal|"  (\n"
+operator|+
+literal|"    pattern ( A B C | A C B | B A C | B C A | C A B | C B A)\n"
+operator|+
+literal|"    define\n"
+operator|+
+literal|"      A as A.price> PREV(A.price),\n"
+operator|+
+literal|"      B as B.price< prev(B.price),\n"
+operator|+
+literal|"      C as C.price> prev(C.price)\n"
+operator|+
+literal|"  ) mr"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM `T` MATCH_RECOGNIZE(\n"
+operator|+
+literal|"PATTERN ((((((((`A` `B`) `C`) | ((`A` `C`) `B`)) | ((`B` `A`) `C`)) "
+operator|+
+literal|"| ((`B` `C`) `A`)) | ((`C` `A`) `B`)) | ((`C` `B`) `A`)))\n"
+operator|+
+literal|"DEFINE "
+operator|+
+literal|"`A` AS (`A`.`PRICE`> (PREV(`A`.`PRICE`, 1))), "
+operator|+
+literal|"`B` AS (`B`.`PRICE`< (PREV(`B`.`PRICE`, 1))), "
+operator|+
+literal|"`C` AS (`C`.`PRICE`> (PREV(`C`.`PRICE`, 1)))"
+operator|+
+literal|") AS `MR`"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testMatchRecognize11
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"  from t match_recognize (\n"
+operator|+
+literal|"    pattern ( \"a\" \"b c\")\n"
+operator|+
+literal|"    define\n"
+operator|+
+literal|"      \"A\" as A.price> PREV(A.price),\n"
+operator|+
+literal|"      \"b c\" as \"b c\".foo\n"
+operator|+
+literal|"  ) as mr(c1, c2) join e as x on foo = baz"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM `T` MATCH_RECOGNIZE(\n"
+operator|+
+literal|"PATTERN ((`a` `b c`))\n"
+operator|+
+literal|"DEFINE `A` AS (`A`.`PRICE`> (PREV(`A`.`PRICE`, 1))),"
+operator|+
+literal|" `b c` AS `b c`.`FOO`) AS `MR` (`C1`, `C2`)\n"
+operator|+
+literal|"INNER JOIN `E` AS `X` ON (`FOO` = `BAZ`)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testMatchRecognizeDefineClause
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"  from t match_recognize\n"
+operator|+
+literal|"  (\n"
+operator|+
+literal|"    pattern (strt down+ up+)\n"
+operator|+
+literal|"    define\n"
+operator|+
+literal|"      down as down.price< PREV(down.price),\n"
+operator|+
+literal|"      up as up.price> NEXT(up.price)\n"
+operator|+
+literal|"  ) mr"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM `T` MATCH_RECOGNIZE(\n"
+operator|+
+literal|"PATTERN (((`STRT` (`DOWN` +)) (`UP` +)))\n"
+operator|+
+literal|"DEFINE "
+operator|+
+literal|"`DOWN` AS (`DOWN`.`PRICE`< (PREV(`DOWN`.`PRICE`, 1))), "
+operator|+
+literal|"`UP` AS (`UP`.`PRICE`> (NEXT(`UP`.`PRICE`, 1)))"
+operator|+
+literal|") AS `MR`"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testMatchRecognizeDefineClause2
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"  from t match_recognize\n"
+operator|+
+literal|"  (\n"
+operator|+
+literal|"    pattern (strt down+ up+)\n"
+operator|+
+literal|"    define\n"
+operator|+
+literal|"      down as down.price< FIRST(down.price),\n"
+operator|+
+literal|"      up as up.price> LAST(up.price)\n"
+operator|+
+literal|"  ) mr"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM `T` MATCH_RECOGNIZE(\n"
+operator|+
+literal|"PATTERN (((`STRT` (`DOWN` +)) (`UP` +)))\n"
+operator|+
+literal|"DEFINE "
+operator|+
+literal|"`DOWN` AS (`DOWN`.`PRICE`< (FIRST(`DOWN`.`PRICE`, 0))), "
+operator|+
+literal|"`UP` AS (`UP`.`PRICE`> (LAST(`UP`.`PRICE`, 0)))"
+operator|+
+literal|") AS `MR`"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testMatchRecognizeDefineClause3
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"  from t match_recognize\n"
+operator|+
+literal|"  (\n"
+operator|+
+literal|"    pattern (strt down+ up+)\n"
+operator|+
+literal|"    define\n"
+operator|+
+literal|"      down as down.price< PREV(down.price,1),\n"
+operator|+
+literal|"      up as up.price> LAST(up.price + up.TAX)\n"
+operator|+
+literal|"  ) mr"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM `T` MATCH_RECOGNIZE(\n"
+operator|+
+literal|"PATTERN (((`STRT` (`DOWN` +)) (`UP` +)))\n"
+operator|+
+literal|"DEFINE "
+operator|+
+literal|"`DOWN` AS (`DOWN`.`PRICE`< (PREV(`DOWN`.`PRICE`, 1))), "
+operator|+
+literal|"`UP` AS (`UP`.`PRICE`> (LAST((`UP`.`PRICE` + `UP`.`TAX`), 0)))"
+operator|+
+literal|") AS `MR`"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testMatchRecognizeDefineClause4
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"  from t match_recognize\n"
+operator|+
+literal|"  (\n"
+operator|+
+literal|"    pattern (strt down+ up+)\n"
+operator|+
+literal|"    define\n"
+operator|+
+literal|"      down as down.price< PREV(down.price,1),\n"
+operator|+
+literal|"      up as up.price> PREV(LAST(up.price + up.TAX),3)\n"
+operator|+
+literal|"  ) mr"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM `T` MATCH_RECOGNIZE(\n"
+operator|+
+literal|"PATTERN (((`STRT` (`DOWN` +)) (`UP` +)))\n"
+operator|+
+literal|"DEFINE "
+operator|+
+literal|"`DOWN` AS (`DOWN`.`PRICE`< (PREV(`DOWN`.`PRICE`, 1))), "
+operator|+
+literal|"`UP` AS (`UP`.`PRICE`> (PREV((LAST((`UP`.`PRICE` + `UP`.`TAX`), 0)), 3)))"
+operator|+
+literal|") AS `MR`"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
 argument_list|)
 expr_stmt|;
 block|}
