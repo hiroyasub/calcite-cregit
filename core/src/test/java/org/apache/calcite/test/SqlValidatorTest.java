@@ -13960,6 +13960,14 @@ argument_list|()
 expr_stmt|;
 name|sql
 argument_list|(
+literal|"select deptno, grouping(deptno, deptno) from emp group by deptno"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|sql
+argument_list|(
 literal|"select deptno / 2, grouping(deptno / 2),\n"
 operator|+
 literal|" ^grouping(deptno / 2, empno)^\n"
@@ -13967,14 +13975,32 @@ operator|+
 literal|"from emp group by deptno / 2, empno"
 argument_list|)
 operator|.
-name|fails
-argument_list|(
-literal|"Invalid number of arguments to function 'GROUPING'. Was expecting 1 arguments"
-argument_list|)
+name|ok
+argument_list|()
 expr_stmt|;
 name|sql
 argument_list|(
 literal|"select deptno, grouping(^empno^) from emp group by deptno"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Argument to GROUPING operator must be a grouped expression"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select deptno, grouping(deptno, ^empno^) from emp group by deptno"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Argument to GROUPING operator must be a grouped expression"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select deptno, grouping(^empno^, deptno) from emp group by deptno"
 argument_list|)
 operator|.
 name|fails
@@ -14173,6 +14199,14 @@ block|{
 name|sql
 argument_list|(
 literal|"select deptno, grouping_id(deptno) from emp group by deptno"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select deptno, grouping_id(deptno, deptno) from emp group by deptno"
 argument_list|)
 operator|.
 name|ok

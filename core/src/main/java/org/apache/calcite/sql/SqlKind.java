@@ -396,13 +396,16 @@ block|,
 comment|/** The internal {@code GROUPING SETS} operator that occurs within a    * {@code GROUP BY} clause. */
 name|GROUPING_SETS
 block|,
-comment|/** The internal {@code GROUPING(e)} function. */
+comment|/** The {@code GROUPING(e, ...)} function. */
 name|GROUPING
 block|,
-comment|/** The internal {@code GROUPING_ID(e, ...)} function. */
+comment|/** @deprecated Use {@link #GROUPING}. */
+block|@
+name|Deprecated
+comment|// to be removed before 2.0
 name|GROUPING_ID
 block|,
-comment|/** The internal {@code GROUP_ID()} function. */
+comment|/** The {@code GROUP_ID()} function. */
 name|GROUP_ID
 block|,
 comment|// Aggregate functions

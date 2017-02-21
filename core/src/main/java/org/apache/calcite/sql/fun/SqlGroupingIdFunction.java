@@ -78,10 +78,13 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * The {@code GROUPING_ID} function.  *  *<p>This function is not defined in the SQL standard; our implementation is  * consistent with Oracle.  *  *<p>Some examples are in {@code agg.iq}.  */
+comment|/**  * The {@code GROUPING_ID} function.  *  *<p>This function is not defined in the SQL standard; our implementation is  * consistent with Oracle.  *  *<p>Some examples are in {@code agg.iq}.  *  * @deprecated Now that {@code GROUPING} has the same functionality,  * this function is deprecated.  */
 end_comment
 
 begin_class
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 class|class
 name|SqlGroupingIdFunction
 extends|extends
@@ -91,6 +94,7 @@ specifier|public
 name|SqlGroupingIdFunction
 parameter_list|()
 block|{
+comment|//noinspection deprecation
 name|super
 argument_list|(
 literal|"GROUPING_ID"

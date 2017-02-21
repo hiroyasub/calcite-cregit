@@ -78,7 +78,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * The {@code GROUPING} function.  *  *<p>This function is defined in the SQL standard.  *  *<p>Some examples are in {@code agg.iq}.  */
+comment|/**  * The {@code GROUPING} function.  *  *<p>This function is defined in the SQL standard.  * {@code GROUPING_ID} is a non-standard synonym.  *  *<p>Some examples are in {@code agg.iq}.  */
 end_comment
 
 begin_class
@@ -89,11 +89,14 @@ name|SqlAbstractGroupFunction
 block|{
 specifier|public
 name|SqlGroupingFunction
-parameter_list|()
+parameter_list|(
+name|String
+name|name
+parameter_list|)
 block|{
 name|super
 argument_list|(
-literal|"GROUPING"
+name|name
 argument_list|,
 name|SqlKind
 operator|.
@@ -101,13 +104,13 @@ name|GROUPING
 argument_list|,
 name|ReturnTypes
 operator|.
-name|INTEGER
+name|BIGINT
 argument_list|,
 literal|null
 argument_list|,
 name|OperandTypes
 operator|.
-name|ANY
+name|ONE_OR_MORE
 argument_list|,
 name|SqlFunctionCategory
 operator|.

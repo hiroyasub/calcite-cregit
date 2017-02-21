@@ -22923,9 +22923,6 @@ case|case
 name|GROUPING
 case|:
 case|case
-name|GROUPING_ID
-case|:
-case|case
 name|GROUP_ID
 case|:
 specifier|final
@@ -23123,12 +23120,6 @@ condition|)
 block|{
 case|case
 name|GROUPING
-case|:
-return|return
-literal|1
-return|;
-case|case
-name|GROUPING_ID
 case|:
 return|return
 name|call

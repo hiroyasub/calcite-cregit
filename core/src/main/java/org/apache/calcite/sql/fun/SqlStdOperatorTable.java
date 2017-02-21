@@ -973,7 +973,9 @@ name|GROUPING
 init|=
 operator|new
 name|SqlGroupingFunction
-argument_list|()
+argument_list|(
+literal|"GROUPING"
+argument_list|)
 decl_stmt|;
 comment|/** {@code GROUP_ID} function. */
 specifier|public
@@ -986,16 +988,18 @@ operator|new
 name|SqlGroupIdFunction
 argument_list|()
 decl_stmt|;
-comment|/** {@code GROUPING_ID} function. */
+comment|/** {@code GROUP_ID} function is a synonym for {@code GROUPING}.    *    *<p>Some history. The {@code GROUPING} function is in the SQL standard,    * and originally supported only one argument. The {@code GROUP_ID} is not    * standard (though supported in Oracle and SQL Server) and supports zero or    * more arguments.    *    *<p>The SQL standard has changed to allow {@code GROUPING} to have multiple    * arguments. It is now equivalent to {@code GROUP_ID}, so we made    * {@code GROUP_ID} a synonym for {@code GROUPING}. */
 specifier|public
 specifier|static
 specifier|final
-name|SqlGroupingIdFunction
+name|SqlGroupingFunction
 name|GROUPING_ID
 init|=
 operator|new
-name|SqlGroupingIdFunction
-argument_list|()
+name|SqlGroupingFunction
+argument_list|(
+literal|"GROUPING_ID"
+argument_list|)
 decl_stmt|;
 comment|/** {@code EXTEND} operator. */
 specifier|public
