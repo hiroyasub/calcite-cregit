@@ -85,6 +85,20 @@ name|apache
 operator|.
 name|calcite
 operator|.
+name|rex
+operator|.
+name|RexExecutor
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
 name|runtime
 operator|.
 name|PredicateImpl
@@ -335,7 +349,7 @@ name|Context
 name|context
 decl_stmt|;
 specifier|private
-name|Executor
+name|RexExecutor
 name|executor
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
@@ -1005,7 +1019,7 @@ specifier|public
 name|void
 name|setExecutor
 parameter_list|(
-name|Executor
+name|RexExecutor
 name|executor
 parameter_list|)
 block|{
@@ -1017,7 +1031,7 @@ name|executor
 expr_stmt|;
 block|}
 specifier|public
-name|Executor
+name|RexExecutor
 name|getExecutor
 parameter_list|()
 block|{

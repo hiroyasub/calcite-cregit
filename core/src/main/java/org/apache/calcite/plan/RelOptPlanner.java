@@ -87,21 +87,7 @@ name|calcite
 operator|.
 name|rex
 operator|.
-name|RexBuilder
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|rex
-operator|.
-name|RexNode
+name|RexExecutor
 import|;
 end_import
 
@@ -438,12 +424,12 @@ comment|/** Sets the object that can execute scalar expressions. */
 name|void
 name|setExecutor
 parameter_list|(
-name|Executor
+name|RexExecutor
 name|executor
 parameter_list|)
 function_decl|;
 comment|/** Returns the executor used to evaluate constant expressions. */
-name|Executor
+name|RexExecutor
 name|getExecutor
 parameter_list|()
 function_decl|;
@@ -458,31 +444,15 @@ name|RelNode
 name|newRel
 parameter_list|)
 function_decl|;
-comment|/** Can reduce expressions, writing a literal for each into a list. */
+comment|/** @deprecated Use {@link RexExecutor} */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 interface|interface
 name|Executor
-block|{
-comment|/**      * Reduces expressions, and writes their results into {@code reducedValues}.      */
-name|void
-name|reduce
-parameter_list|(
-name|RexBuilder
-name|rexBuilder
-parameter_list|,
-name|List
-argument_list|<
-name|RexNode
-argument_list|>
-name|constExps
-parameter_list|,
-name|List
-argument_list|<
-name|RexNode
-argument_list|>
-name|reducedValues
-parameter_list|)
-function_decl|;
-block|}
+extends|extends
+name|RexExecutor
+block|{   }
 comment|/**    * Thrown by {@link org.apache.calcite.plan.RelOptPlanner#findBestExp()}.    */
 class|class
 name|CannotPlanException

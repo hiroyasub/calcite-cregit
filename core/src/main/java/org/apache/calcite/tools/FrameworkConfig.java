@@ -53,20 +53,6 @@ name|calcite
 operator|.
 name|plan
 operator|.
-name|RelOptPlanner
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|plan
-operator|.
 name|RelTraitDef
 import|;
 end_import
@@ -84,6 +70,20 @@ operator|.
 name|type
 operator|.
 name|RelDataTypeSystem
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rex
+operator|.
+name|RexExecutor
 import|;
 end_import
 
@@ -181,9 +181,7 @@ name|getDefaultSchema
 parameter_list|()
 function_decl|;
 comment|/**    * Returns the executor used to evaluate constant expressions.    */
-name|RelOptPlanner
-operator|.
-name|Executor
+name|RexExecutor
 name|getExecutor
 parameter_list|()
 function_decl|;
