@@ -2694,6 +2694,15 @@ operator|.
 name|serialize
 argument_list|()
 decl_stmt|;
+comment|// Serialization of the response may be large
+if|if
+condition|(
+name|LOG
+operator|.
+name|isTraceEnabled
+argument_list|()
+condition|)
+block|{
 name|LOG
 operator|.
 name|trace
@@ -2708,6 +2717,7 @@ name|responseMsg
 argument_list|)
 argument_list|)
 expr_stmt|;
+block|}
 name|serializeMessage
 argument_list|(
 name|out
@@ -2763,6 +2773,15 @@ operator|.
 name|serialize
 argument_list|()
 decl_stmt|;
+comment|// Serialization of the request may be large
+if|if
+condition|(
+name|LOG
+operator|.
+name|isTraceEnabled
+argument_list|()
+condition|)
+block|{
 name|LOG
 operator|.
 name|trace
@@ -2777,6 +2796,7 @@ name|requestMsg
 argument_list|)
 argument_list|)
 expr_stmt|;
+block|}
 name|serializeMessage
 argument_list|(
 name|out
@@ -3023,6 +3043,14 @@ name|RuntimeException
 name|e
 parameter_list|)
 block|{
+if|if
+condition|(
+name|LOG
+operator|.
+name|isDebugEnabled
+argument_list|()
+condition|)
+block|{
 name|LOG
 operator|.
 name|debug
@@ -3037,6 +3065,7 @@ name|wireMsg
 argument_list|)
 argument_list|)
 expr_stmt|;
+block|}
 throw|throw
 name|e
 throw|;
@@ -3128,6 +3157,14 @@ name|RuntimeException
 name|e
 parameter_list|)
 block|{
+if|if
+condition|(
+name|LOG
+operator|.
+name|isDebugEnabled
+argument_list|()
+condition|)
+block|{
 name|LOG
 operator|.
 name|debug
@@ -3142,6 +3179,7 @@ name|wireMsg
 argument_list|)
 argument_list|)
 expr_stmt|;
+block|}
 throw|throw
 name|e
 throw|;
