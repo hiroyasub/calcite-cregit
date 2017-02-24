@@ -4575,7 +4575,7 @@ literal|"  BindableAggregate(group=[{}], C=[COUNT()])\n"
 operator|+
 literal|"    BindableFilter(condition=[AND(>=(/INT(Reinterpret($0), 86400000), 1997-01-01),<(/INT(Reinterpret($0), 86400000), 1998-01-01), OR(AND(>=(/INT(Reinterpret($0), 86400000), 1997-04-01),<(/INT(Reinterpret($0), 86400000), 1997-05-01)), AND(>=(/INT(Reinterpret($0), 86400000), 1997-06-01),<(/INT(Reinterpret($0), 86400000), 1997-07-01))))])\n"
 operator|+
-literal|"      DruidQuery(table=[[foodmart, foodmart]], intervals=[[1900-01-09T00:00:00.000/2992-01-10T00:00:00.000]])"
+literal|"      DruidQuery(table=[[foodmart, foodmart]], intervals=[[1900-01-09T00:00:00.000/2992-01-10T00:00:00.000]], projects=[[$0]])"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -4683,6 +4683,99 @@ operator|.
 name|returnsCount
 argument_list|(
 literal|9
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1656">[CALCITE-1656]    * Improve cost function in DruidQuery to encourage early column    * pruning</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testFieldBasedCostColumnPruning
+parameter_list|()
+block|{
+comment|// A query where filter cannot be pushed to Druid but
+comment|// the project can still be pushed in order to prune extra columns.
+name|String
+name|sql
+init|=
+literal|"select \"countryName\", floor(\"time\" to DAY),\n"
+operator|+
+literal|"  cast(count(*) as integer) as c\n"
+operator|+
+literal|"from \"wiki\"\n"
+operator|+
+literal|"where floor(\"time\" to DAY)>= '1997-01-01 00:00:00'\n"
+operator|+
+literal|"and floor(\"time\" to DAY)< '1997-09-01 00:00:00'\n"
+operator|+
+literal|"group by \"countryName\", floor(\"time\" TO DAY)\n"
+operator|+
+literal|"order by c limit 5"
+decl_stmt|;
+name|String
+name|plan
+init|=
+literal|"BindableProject(countryName=[$0], EXPR$1=[$1], C=[CAST($2):INTEGER NOT NULL])\n"
+operator|+
+literal|"    BindableSort(sort0=[$2], dir0=[ASC], fetch=[5])\n"
+operator|+
+literal|"      BindableAggregate(group=[{0, 1}], agg#0=[COUNT()])\n"
+operator|+
+literal|"        BindableProject(countryName=[$1], EXPR$1=[FLOOR($0, FLAG(DAY))])\n"
+operator|+
+literal|"          BindableFilter(condition=[AND(>=(FLOOR($0, FLAG(DAY)), 1997-01-01 00:00:00),<(FLOOR($0, FLAG(DAY)), 1997-09-01 00:00:00))])\n"
+operator|+
+literal|"            DruidQuery(table=[[wiki, wiki]], intervals=[[1900-01-09T00:00:00.000/2992-01-10T00:00:00.000]], projects=[[$0, $5]])"
+decl_stmt|;
+comment|// NOTE: Druid query only has countryName as the dimension
+comment|// being queried after project is pushed to druid query.
+name|String
+name|druidQuery
+init|=
+literal|"{\"queryType\":\"select\","
+operator|+
+literal|"\"dataSource\":\"wikiticker\","
+operator|+
+literal|"\"descending\":false,"
+operator|+
+literal|"\"intervals\":[\"1900-01-09T00:00:00.000/2992-01-10T00:00:00.000\"],"
+operator|+
+literal|"\"dimensions\":[\"countryName\"],"
+operator|+
+literal|"\"metrics\":[],"
+operator|+
+literal|"\"granularity\":\"all\","
+operator|+
+literal|"\"pagingSpec\":{\"threshold\":16384,\"fromNext\":true},"
+operator|+
+literal|"\"context\":{\"druid.query.fetch\":false}}"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|,
+name|WIKI
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+name|plan
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|,
+name|WIKI
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|druidChecker
+argument_list|(
+name|druidQuery
+argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
