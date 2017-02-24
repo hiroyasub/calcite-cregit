@@ -23087,6 +23087,169 @@ name|sql2
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1510">[CALCITE-1510]    * INSERT/UPSERT should allow fewer values than columns</a>,    * check for default value only when target field is null. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testInsertShouldNotCheckForDefaultValue
+parameter_list|()
+block|{
+specifier|final
+name|int
+name|c
+init|=
+name|MockCatalogReader
+operator|.
+name|CountingFactory
+operator|.
+name|THREAD_CALL_COUNT
+operator|.
+name|get
+argument_list|()
+operator|.
+name|get
+argument_list|()
+decl_stmt|;
+specifier|final
+name|SqlTester
+name|pragmaticTester
+init|=
+name|tester
+operator|.
+name|withConformance
+argument_list|(
+name|SqlConformanceEnum
+operator|.
+name|PRAGMATIC_2003
+argument_list|)
+decl_stmt|;
+specifier|final
+name|String
+name|sql1
+init|=
+literal|"insert into emp values(1, 'nom', 'job', 0, "
+operator|+
+literal|"timestamp '1970-01-01 00:00:00', 1, 1, 1, false)"
+decl_stmt|;
+name|pragmaticTester
+operator|.
+name|checkQuery
+argument_list|(
+name|sql1
+argument_list|)
+expr_stmt|;
+name|assertThat
+argument_list|(
+literal|"Should not check for default value if column is in INSERT"
+argument_list|,
+name|MockCatalogReader
+operator|.
+name|CountingFactory
+operator|.
+name|THREAD_CALL_COUNT
+operator|.
+name|get
+argument_list|()
+operator|.
+name|get
+argument_list|()
+argument_list|,
+name|is
+argument_list|(
+name|c
+argument_list|)
+argument_list|)
+expr_stmt|;
+comment|// Now add a list of target columns, keeping the query otherwise the same.
+specifier|final
+name|String
+name|sql2
+init|=
+literal|"insert into emp (empno, ename, job, mgr, hiredate,\n"
+operator|+
+literal|"  sal, comm, deptno, slacker)\n"
+operator|+
+literal|"values(1, 'nom', 'job', 0,\n"
+operator|+
+literal|"  timestamp '1970-01-01 00:00:00', 1, 1, 1, false)"
+decl_stmt|;
+name|pragmaticTester
+operator|.
+name|checkQuery
+argument_list|(
+name|sql2
+argument_list|)
+expr_stmt|;
+name|assertThat
+argument_list|(
+literal|"Should not check for default value if column is in INSERT"
+argument_list|,
+name|MockCatalogReader
+operator|.
+name|CountingFactory
+operator|.
+name|THREAD_CALL_COUNT
+operator|.
+name|get
+argument_list|()
+operator|.
+name|get
+argument_list|()
+argument_list|,
+name|is
+argument_list|(
+name|c
+argument_list|)
+argument_list|)
+expr_stmt|;
+comment|// Now remove SLACKER, which is NOT NULL, from the target list.
+specifier|final
+name|String
+name|sql3
+init|=
+literal|"insert into ^emp^ (empno, ename, job, mgr, hiredate,\n"
+operator|+
+literal|"  sal, comm, deptno)\n"
+operator|+
+literal|"values(1, 'nom', 'job', 0,\n"
+operator|+
+literal|"  timestamp '1970-01-01 00:00:00', 1, 1, 1)"
+decl_stmt|;
+name|pragmaticTester
+operator|.
+name|checkQueryFails
+argument_list|(
+name|sql3
+argument_list|,
+literal|"Column 'SLACKER' has no default value and does not allow NULLs"
+argument_list|)
+expr_stmt|;
+name|assertThat
+argument_list|(
+literal|"Missing non-NULL column generates a call to factory"
+argument_list|,
+name|MockCatalogReader
+operator|.
+name|CountingFactory
+operator|.
+name|THREAD_CALL_COUNT
+operator|.
+name|get
+argument_list|()
+operator|.
+name|get
+argument_list|()
+argument_list|,
+name|is
+argument_list|(
+name|c
+operator|+
+literal|1
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
 annotation|@
 name|Test
 specifier|public
