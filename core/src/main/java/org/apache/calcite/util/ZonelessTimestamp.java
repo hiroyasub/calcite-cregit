@@ -154,11 +154,34 @@ decl_stmt|;
 comment|// Remove trailing '.0' so that format is consistent with SQL spec for
 comment|// CAST(TIMESTAMP(0) TO VARCHAR). E.g. "1969-12-31 16:00:00.0"
 comment|// becomes "1969-12-31 16:00:00"
-return|return
+name|String
+name|sts
+init|=
 name|ts
 operator|.
 name|toString
 argument_list|()
+decl_stmt|;
+if|if
+condition|(
+name|sts
+operator|.
+name|length
+argument_list|()
+operator|>
+literal|19
+operator|&&
+name|ts
+operator|.
+name|getNanos
+argument_list|()
+operator|==
+literal|0
+condition|)
+block|{
+name|sts
+operator|=
+name|sts
 operator|.
 name|substring
 argument_list|(
@@ -166,6 +189,10 @@ literal|0
 argument_list|,
 literal|19
 argument_list|)
+expr_stmt|;
+block|}
+return|return
+name|sts
 return|;
 block|}
 comment|/**    * Formats this ZonelessTimestamp via a SimpleDateFormat. This method does    * not display milliseconds precision.    *    * @param format format string, as required by SimpleDateFormat    * @return the formatted timestamp string    */
