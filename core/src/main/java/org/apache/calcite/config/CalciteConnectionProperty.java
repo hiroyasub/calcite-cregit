@@ -192,6 +192,20 @@ argument_list|,
 literal|false
 argument_list|)
 block|,
+comment|/** Whether approximate results from aggregate functions on    * DECIMAL types are acceptable. */
+name|APPROXIMATE_DECIMAL
+argument_list|(
+literal|"approximateDecimal"
+argument_list|,
+name|Type
+operator|.
+name|BOOLEAN
+argument_list|,
+literal|false
+argument_list|,
+literal|false
+argument_list|)
+block|,
 comment|/** Whether to store query results in temporary tables. */
 name|AUTO_TEMP
 argument_list|(

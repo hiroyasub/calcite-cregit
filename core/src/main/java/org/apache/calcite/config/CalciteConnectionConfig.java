@@ -112,6 +112,11 @@ name|boolean
 name|approximateTopN
 parameter_list|()
 function_decl|;
+comment|/** @see CalciteConnectionProperty#APPROXIMATE_DECIMAL */
+name|boolean
+name|approximateDecimal
+parameter_list|()
+function_decl|;
 comment|/** @see CalciteConnectionProperty#AUTO_TEMP */
 name|boolean
 name|autoTemp
