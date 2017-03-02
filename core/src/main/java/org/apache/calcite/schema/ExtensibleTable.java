@@ -63,6 +63,11 @@ argument_list|>
 name|fields
 parameter_list|)
 function_decl|;
+comment|/** Returns the starting offset of the first extended column, which may differ    * from the field count when the table stores metadata columns that are not    * counted in the row-type field count. */
+name|int
+name|getExtendedColumnOffset
+parameter_list|()
+function_decl|;
 block|}
 end_interface
 

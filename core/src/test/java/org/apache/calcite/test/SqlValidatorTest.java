@@ -23353,6 +23353,73 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testInsertModifiableView
+parameter_list|()
+block|{
+name|tester
+operator|.
+name|checkQuery
+argument_list|(
+literal|"insert into EMP_MODIFIABLEVIEW (empno, ename, job)\n"
+operator|+
+literal|"values (1, 'Arthur', 'clown')"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkQuery
+argument_list|(
+literal|"insert into EMP_MODIFIABLEVIEW2 (empno, ename, job, extra)\n"
+operator|+
+literal|"values (1, 'Arthur', 'clown', true)"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testInsertSubsetModifiableView
+parameter_list|()
+block|{
+specifier|final
+name|SqlTester
+name|pragmaticTester
+init|=
+name|tester
+operator|.
+name|withConformance
+argument_list|(
+name|SqlConformanceEnum
+operator|.
+name|PRAGMATIC_2003
+argument_list|)
+decl_stmt|;
+name|pragmaticTester
+operator|.
+name|checkQuery
+argument_list|(
+literal|"insert into EMP_MODIFIABLEVIEW2\n"
+operator|+
+literal|"values ('Arthur', 1)"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkQuery
+argument_list|(
+literal|"insert into EMP_MODIFIABLEVIEW2\n"
+operator|+
+literal|"values ('Arthur', 1, 'Knight', 20, false, 99999, true, timestamp '1370-01-01 00:00:00',"
+operator|+
+literal|" 1, 100)"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testInsertBind
 parameter_list|()
 block|{
@@ -23667,6 +23734,202 @@ operator|.
 name|bindType
 argument_list|(
 name|expected2
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testInsertBindView
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"insert into EMP_MODIFIABLEVIEW (mgr, empno, ename)"
+operator|+
+literal|" values (?, ?, ?)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+operator|.
+name|bindType
+argument_list|(
+literal|"RecordType(INTEGER ?0, INTEGER ?1, VARCHAR(20) ?2)"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testInsertModifiableViewPassConstraint
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"insert into EMP_MODIFIABLEVIEW2 (deptno, empno, ename, extra)"
+operator|+
+literal|" values (20, 100, 'Lex', true)"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"insert into EMP_MODIFIABLEVIEW2 (empno, ename, extra)"
+operator|+
+literal|" values (100, 'Lex', true)"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"insert into EMP_MODIFIABLEVIEW2 values ('Edward', 20)"
+argument_list|)
+operator|.
+name|tester
+argument_list|(
+name|tester
+operator|.
+name|withConformance
+argument_list|(
+name|SqlConformanceEnum
+operator|.
+name|PRAGMATIC_2003
+argument_list|)
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testInsertModifiableViewFailConstraint
+parameter_list|()
+block|{
+name|tester
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"insert into EMP_MODIFIABLEVIEW2 (deptno, empno, ename)"
+operator|+
+literal|" values (^21^, 100, 'Lex')"
+argument_list|,
+literal|"Modifiable view constraint is not satisfied"
+operator|+
+literal|" for column 'DEPTNO' of base table 'EMP_MODIFIABLEVIEW2'"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"insert into EMP_MODIFIABLEVIEW2 (deptno, empno, ename)"
+operator|+
+literal|" values (^19+1^, 100, 'Lex')"
+argument_list|,
+literal|"Modifiable view constraint is not satisfied"
+operator|+
+literal|" for column 'DEPTNO' of base table 'EMP_MODIFIABLEVIEW2'"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"insert into EMP_MODIFIABLEVIEW2\n"
+operator|+
+literal|"values ('Arthur', 1, 'Knight', ^27^, false, 99999, true,"
+operator|+
+literal|"timestamp '1370-01-01 00:00:00', 1, 100)"
+argument_list|,
+literal|"Modifiable view constraint is not satisfied"
+operator|+
+literal|" for column 'DEPTNO' of base table 'EMP_MODIFIABLEVIEW2'"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testUpdateModifiableViewPassConstraint
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"update EMP_MODIFIABLEVIEW2"
+operator|+
+literal|" set deptno = 20, empno = 99"
+operator|+
+literal|" where ename = 'Lex'"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"update EMP_MODIFIABLEVIEW2"
+operator|+
+literal|" set empno = 99"
+operator|+
+literal|" where ename = 'Lex'"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testUpdateModifiableViewFailConstraint
+parameter_list|()
+block|{
+name|tester
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"update EMP_MODIFIABLEVIEW2"
+operator|+
+literal|" set deptno = ^21^, empno = 99"
+operator|+
+literal|" where ename = 'Lex'"
+argument_list|,
+literal|"Modifiable view constraint is not satisfied"
+operator|+
+literal|" for column 'DEPTNO' of base table 'EMP_MODIFIABLEVIEW2'"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"update EMP_MODIFIABLEVIEW2"
+operator|+
+literal|" set deptno = ^19 + 1^, empno = 99"
+operator|+
+literal|" where ename = 'Lex'"
+argument_list|,
+literal|"Modifiable view constraint is not satisfied"
+operator|+
+literal|" for column 'DEPTNO' of base table 'EMP_MODIFIABLEVIEW2'"
 argument_list|)
 expr_stmt|;
 block|}
@@ -24012,6 +24275,67 @@ argument_list|(
 literal|"insert into ^emp^ values (?, ?)"
 argument_list|,
 literal|"Number of INSERT target columns \\(9\\) does not equal number of source items \\(2\\)"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSelectViewFailExcludedColumn
+parameter_list|()
+block|{
+name|tester
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"select ^deptno^, empno from EMP_MODIFIABLEVIEW"
+argument_list|,
+literal|"Column 'DEPTNO' not found in any table"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testInsertFailExcludedColumn
+parameter_list|()
+block|{
+name|tester
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"insert into EMP_MODIFIABLEVIEW (empno, ename, ^deptno^)"
+operator|+
+literal|" values (45, 'Jake', 5)"
+argument_list|,
+literal|"Unknown target column 'DEPTNO'"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testInsertBindViewFailExcludedColumn
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"insert into EMP_MODIFIABLEVIEW (empno, ename, ^deptno^)"
+operator|+
+literal|" values (?, ?, ?)"
+decl_stmt|;
+name|tester
+operator|.
+name|checkQueryFails
+argument_list|(
+name|sql
+argument_list|,
+literal|"Unknown target column 'DEPTNO'"
 argument_list|)
 expr_stmt|;
 block|}

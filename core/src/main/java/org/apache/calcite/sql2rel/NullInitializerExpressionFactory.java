@@ -124,7 +124,7 @@ name|NullInitializerExpressionFactory
 implements|implements
 name|InitializerExpressionFactory
 block|{
-specifier|private
+specifier|protected
 specifier|final
 name|RexBuilder
 name|rexBuilder

@@ -71,6 +71,20 @@ name|apache
 operator|.
 name|calcite
 operator|.
+name|schema
+operator|.
+name|Wrapper
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
 name|sql
 operator|.
 name|SqlIdentifier
@@ -95,6 +109,8 @@ begin_interface
 specifier|public
 interface|interface
 name|SqlValidatorCatalogReader
+extends|extends
+name|Wrapper
 block|{
 comment|//~ Methods ----------------------------------------------------------------
 comment|/**    * Finds a table or schema with the given name, possibly qualified.    *    *<p>Uses the case-sensitivity policy of the catalog reader.    *    *<p>If not found, returns null. If you want a more descriptive error    * message or to override the case-sensitivity of the match, use    * {@link SqlValidatorScope#resolveTable}.    *    * @param names Name of table, may be qualified or fully-qualified    *    * @return Table with the given name, or null    */

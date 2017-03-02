@@ -2999,6 +2999,18 @@ function_decl|;
 annotation|@
 name|BaseMessage
 argument_list|(
+literal|"Modifiable view must be predicated only on equality expressions"
+argument_list|)
+name|ExInst
+argument_list|<
+name|SqlValidatorException
+argument_list|>
+name|modifiableViewMustHaveOnlyEqualityPredicates
+parameter_list|()
+function_decl|;
+annotation|@
+name|BaseMessage
+argument_list|(
 literal|"View is not modifiable. More than one expression maps to column ''{0}'' of base table ''{1}''"
 argument_list|)
 name|ExInst
@@ -3024,6 +3036,24 @@ argument_list|<
 name|SqlValidatorException
 argument_list|>
 name|noValueSuppliedForViewColumn
+parameter_list|(
+name|String
+name|columnName
+parameter_list|,
+name|String
+name|tableName
+parameter_list|)
+function_decl|;
+annotation|@
+name|BaseMessage
+argument_list|(
+literal|"Modifiable view constraint is not satisfied for column ''{0}'' of base table ''{1}''"
+argument_list|)
+name|ExInst
+argument_list|<
+name|SqlValidatorException
+argument_list|>
+name|viewConstraintNotSatisfied
 parameter_list|(
 name|String
 name|columnName

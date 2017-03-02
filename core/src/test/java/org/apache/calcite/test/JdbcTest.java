@@ -2676,9 +2676,7 @@ argument_list|)
 operator|.
 name|throws_
 argument_list|(
-literal|"View is not modifiable. No value is supplied for NOT NULL "
-operator|+
-literal|"column 'deptno' of base table 'MUTABLE_EMPLOYEES'"
+literal|"Modifiable view must be predicated only on equality expressions"
 argument_list|)
 expr_stmt|;
 comment|// Deduce "deptno = 10" from the constraint, and add a further
@@ -2699,15 +2697,30 @@ argument_list|(
 literal|"insert into \"adhoc\".v values ('n',1,2)"
 argument_list|)
 operator|.
-name|explainContains
+name|throws_
 argument_list|(
-literal|""
+literal|"Modifiable view must be predicated only on equality expressions"
+argument_list|)
+expr_stmt|;
+name|modelWithView
+argument_list|(
+literal|"select \"name\", \"empid\" as e, \"salary\" "
 operator|+
-literal|"EnumerableTableModify(table=[[adhoc, MUTABLE_EMPLOYEES]], operation=[INSERT], flattened=[false])\n"
+literal|"from \"MUTABLE_EMPLOYEES\"\n"
 operator|+
-literal|"  EnumerableCalc(expr#0..2=[{inputs}], expr#3=[CAST($t1):JavaType(int) NOT NULL], expr#4=[10], expr#5=[CAST($t0):JavaType(class java.lang.String)], expr#6=[CAST($t2):JavaType(float) NOT NULL], expr#7=[null], expr#8=[20], expr#9=[<($t4, $t8)], expr#10=[1000], expr#11=[>($t7, $t10)], expr#12=[OR($t9, $t11)], empid=[$t3], deptno=[$t4], name=[$t5], salary=[$t6], commission=[$t7], $condition=[$t12])\n"
-operator|+
-literal|"    EnumerableValues(tuples=[[{ 'n', 1, 2 }]])"
+literal|"where \"deptno\" = 10 AND (\"deptno\"> 20 AND \"commission\"> 1000)"
+argument_list|,
+literal|true
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"insert into \"adhoc\".v values ('n',1,2)"
+argument_list|)
+operator|.
+name|throws_
+argument_list|(
+literal|"Modifiable view must be predicated only on equality expressions"
 argument_list|)
 expr_stmt|;
 name|modelWithView
