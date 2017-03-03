@@ -4573,7 +4573,7 @@ literal|"EnumerableInterpreter\n"
 operator|+
 literal|"  BindableAggregate(group=[{}], C=[COUNT()])\n"
 operator|+
-literal|"    BindableFilter(condition=[AND(>=(/INT(Reinterpret($0), 86400000), 1997-01-01),<(/INT(Reinterpret($0), 86400000), 1998-01-01),>=(/INT(Reinterpret($0), 86400000), 1997-04-01),<(/INT(Reinterpret($0), 86400000), 1997-05-01))])\n"
+literal|"    BindableFilter(condition=[AND(>=(/INT(Reinterpret($0), 86400000), 1997-01-01),<(/INT(Reinterpret($0), 86400000), 1998-01-01), OR(AND(>=(/INT(Reinterpret($0), 86400000), 1997-04-01),<(/INT(Reinterpret($0), 86400000), 1997-05-01)), AND(>=(/INT(Reinterpret($0), 86400000), 1997-06-01),<(/INT(Reinterpret($0), 86400000), 1997-07-01))))])\n"
 operator|+
 literal|"      DruidQuery(table=[[foodmart, foodmart]], intervals=[[1900-01-09T00:00:00.000/2992-01-10T00:00:00.000]])"
 decl_stmt|;
@@ -4589,7 +4589,7 @@ argument_list|)
 operator|.
 name|returnsUnordered
 argument_list|(
-literal|"C=6588"
+literal|"C=13500"
 argument_list|)
 expr_stmt|;
 block|}
