@@ -17,6 +17,16 @@ name|core
 package|;
 end_package
 
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Locale
+import|;
+end_import
+
 begin_comment
 comment|/**  * Enumeration of join types.  */
 end_comment
@@ -34,6 +44,22 @@ name|RIGHT
 block|,
 name|FULL
 block|;
+comment|/** Lower-case name. */
+specifier|public
+specifier|final
+name|String
+name|lowerName
+init|=
+name|name
+argument_list|()
+operator|.
+name|toLowerCase
+argument_list|(
+name|Locale
+operator|.
+name|ROOT
+argument_list|)
+decl_stmt|;
 comment|/**    * Returns whether a join of this type may generate NULL values on the    * right-hand side.    */
 specifier|public
 name|boolean

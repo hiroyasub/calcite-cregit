@@ -457,6 +457,16 @@ name|java
 operator|.
 name|util
 operator|.
+name|Locale
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
 name|Map
 import|;
 end_import
@@ -2115,7 +2125,11 @@ else|:
 name|s
 operator|.
 name|toLowerCase
-argument_list|()
+argument_list|(
+name|Locale
+operator|.
+name|ROOT
+argument_list|)
 operator|.
 name|hashCode
 argument_list|()
@@ -2302,7 +2316,11 @@ else|:
 name|x
 operator|.
 name|toUpperCase
-argument_list|()
+argument_list|(
+name|Locale
+operator|.
+name|ROOT
+argument_list|)
 return|;
 block|}
 block|}
@@ -2363,7 +2381,11 @@ else|:
 name|s
 operator|.
 name|toLowerCase
-argument_list|()
+argument_list|(
+name|Locale
+operator|.
+name|ROOT
+argument_list|)
 operator|.
 name|hashCode
 argument_list|()
@@ -13305,6 +13327,10 @@ name|String
 operator|.
 name|format
 argument_list|(
+name|Locale
+operator|.
+name|ROOT
+argument_list|,
 literal|"%s: %s"
 argument_list|,
 name|group
@@ -13458,6 +13484,10 @@ name|String
 operator|.
 name|format
 argument_list|(
+name|Locale
+operator|.
+name|ROOT
+argument_list|,
 literal|"%s: %s"
 argument_list|,
 name|group
@@ -13577,6 +13607,10 @@ name|String
 operator|.
 name|format
 argument_list|(
+name|Locale
+operator|.
+name|ROOT
+argument_list|,
 literal|"%s: %s"
 argument_list|,
 name|group
@@ -13790,6 +13824,10 @@ name|String
 operator|.
 name|format
 argument_list|(
+name|Locale
+operator|.
+name|ROOT
+argument_list|,
 literal|"%s: %s"
 argument_list|,
 name|group
@@ -13877,6 +13915,10 @@ name|String
 operator|.
 name|format
 argument_list|(
+name|Locale
+operator|.
+name|ROOT
+argument_list|,
 literal|"%s: %s"
 argument_list|,
 name|key
@@ -13989,6 +14031,10 @@ name|String
 operator|.
 name|format
 argument_list|(
+name|Locale
+operator|.
+name|ROOT
+argument_list|,
 literal|"%s: %s"
 argument_list|,
 name|key
@@ -14139,6 +14185,10 @@ name|String
 operator|.
 name|format
 argument_list|(
+name|Locale
+operator|.
+name|ROOT
+argument_list|,
 literal|"%s: %s"
 argument_list|,
 name|key
@@ -14225,6 +14275,10 @@ name|String
 operator|.
 name|format
 argument_list|(
+name|Locale
+operator|.
+name|ROOT
+argument_list|,
 literal|"%s: %s"
 argument_list|,
 name|key

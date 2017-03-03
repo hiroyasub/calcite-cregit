@@ -129,6 +129,16 @@ name|java
 operator|.
 name|util
 operator|.
+name|Locale
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
 name|regex
 operator|.
 name|Pattern
@@ -591,7 +601,11 @@ init|=
 name|productName
 operator|.
 name|toUpperCase
-argument_list|()
+argument_list|(
+name|Locale
+operator|.
+name|ROOT
+argument_list|)
 operator|.
 name|trim
 argument_list|()
@@ -1618,6 +1632,10 @@ operator|new
 name|SimpleDateFormat
 argument_list|(
 literal|"'TIMESTAMP' ''yyyy-MM-DD HH:mm:SS''"
+argument_list|,
+name|Locale
+operator|.
+name|ROOT
 argument_list|)
 decl_stmt|;
 name|format

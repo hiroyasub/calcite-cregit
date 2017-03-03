@@ -825,11 +825,11 @@ parameter_list|()
 block|{
 name|assertEquals
 argument_list|(
-literal|"a bcd"
+literal|"a bcd iijk"
 argument_list|,
 name|lower
 argument_list|(
-literal|"A bCd"
+literal|"A bCd Iijk"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -843,11 +843,11 @@ parameter_list|()
 block|{
 name|assertEquals
 argument_list|(
-literal|"A BCD"
+literal|"A BCD IIJK"
 argument_list|,
 name|upper
 argument_list|(
-literal|"A bCd"
+literal|"A bCd iIjk"
 argument_list|)
 argument_list|)
 expr_stmt|;

@@ -361,6 +361,16 @@ name|List
 import|;
 end_import
 
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Locale
+import|;
+end_import
+
 begin_comment
 comment|/**  * An assistant which offers hints and corrections to a partially-formed SQL  * statement. It is used in the SQL editor user-interface.  */
 end_comment
@@ -398,7 +408,11 @@ init|=
 name|HINT_TOKEN
 operator|.
 name|toUpperCase
-argument_list|()
+argument_list|(
+name|Locale
+operator|.
+name|ROOT
+argument_list|)
 decl_stmt|;
 comment|//~ Instance fields --------------------------------------------------------
 comment|// Flags indicating precision/scale combinations

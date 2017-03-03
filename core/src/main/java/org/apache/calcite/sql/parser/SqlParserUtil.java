@@ -756,6 +756,10 @@ operator|new
 name|SimpleDateFormat
 argument_list|(
 name|pattern
+argument_list|,
+name|Locale
+operator|.
+name|ROOT
 argument_list|)
 decl_stmt|;
 name|Util
@@ -1485,7 +1489,11 @@ return|return
 name|s
 operator|.
 name|toUpperCase
-argument_list|()
+argument_list|(
+name|Locale
+operator|.
+name|ROOT
+argument_list|)
 return|;
 case|case
 name|TO_LOWER
@@ -1494,7 +1502,11 @@ return|return
 name|s
 operator|.
 name|toLowerCase
-argument_list|()
+argument_list|(
+name|Locale
+operator|.
+name|ROOT
+argument_list|)
 return|;
 default|default:
 return|return

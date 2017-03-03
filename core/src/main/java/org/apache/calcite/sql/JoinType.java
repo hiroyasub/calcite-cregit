@@ -31,6 +31,16 @@ name|SqlParserPos
 import|;
 end_import
 
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Locale
+import|;
+end_import
+
 begin_comment
 comment|/**  * Enumerates the types of join.  */
 end_comment
@@ -58,6 +68,22 @@ block|,
 comment|/**    * Comma join: the good old-fashioned SQL<code>FROM</code> clause,    * where table expressions are specified with commas between them, and    * join conditions are specified in the<code>WHERE</code> clause.    */
 name|COMMA
 block|;
+comment|/** Lower-case name. */
+specifier|public
+specifier|final
+name|String
+name|lowerName
+init|=
+name|name
+argument_list|()
+operator|.
+name|toLowerCase
+argument_list|(
+name|Locale
+operator|.
+name|ROOT
+argument_list|)
+decl_stmt|;
 comment|/**    * Creates a parse-tree node representing an occurrence of this    * condition type keyword at a particular position in the parsed    * text.    */
 specifier|public
 name|SqlLiteral

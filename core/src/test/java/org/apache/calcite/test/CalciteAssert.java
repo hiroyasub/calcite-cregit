@@ -761,6 +761,16 @@ name|java
 operator|.
 name|util
 operator|.
+name|Locale
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
 name|Map
 import|;
 end_import
@@ -987,7 +997,11 @@ literal|"HSQLDB"
 argument_list|)
 operator|.
 name|toUpperCase
-argument_list|()
+argument_list|(
+name|Locale
+operator|.
+name|ROOT
+argument_list|)
 argument_list|)
 decl_stmt|;
 comment|/** Whether to enable slow tests. Default is false. */
@@ -1038,6 +1052,10 @@ operator|new
 name|SimpleDateFormat
 argument_list|(
 literal|"yyyy-MM-dd"
+argument_list|,
+name|Locale
+operator|.
+name|ROOT
 argument_list|)
 expr_stmt|;
 name|UTC_DATE_FORMAT
@@ -1053,6 +1071,10 @@ operator|new
 name|SimpleDateFormat
 argument_list|(
 literal|"HH:mm:ss"
+argument_list|,
+name|Locale
+operator|.
+name|ROOT
 argument_list|)
 expr_stmt|;
 name|UTC_TIME_FORMAT
@@ -1068,6 +1090,10 @@ operator|new
 name|SimpleDateFormat
 argument_list|(
 literal|"yyyy-MM-dd'T'HH:mm:ss'Z'"
+argument_list|,
+name|Locale
+operator|.
+name|ROOT
 argument_list|)
 expr_stmt|;
 name|UTC_TIMESTAMP_FORMAT
@@ -7563,7 +7589,11 @@ init|=
 name|sql
 operator|.
 name|toUpperCase
-argument_list|()
+argument_list|(
+name|Locale
+operator|.
+name|ROOT
+argument_list|)
 operator|.
 name|contains
 argument_list|(

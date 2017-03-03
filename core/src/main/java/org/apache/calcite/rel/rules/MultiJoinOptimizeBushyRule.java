@@ -409,14 +409,13 @@ name|CalcitePrepareImpl
 operator|.
 name|DEBUG
 condition|?
-operator|new
-name|PrintWriter
+name|Util
+operator|.
+name|printWriter
 argument_list|(
 name|System
 operator|.
 name|out
-argument_list|,
-literal|true
 argument_list|)
 else|:
 literal|null

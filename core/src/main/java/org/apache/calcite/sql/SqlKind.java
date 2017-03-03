@@ -41,6 +41,16 @@ name|java
 operator|.
 name|util
 operator|.
+name|Locale
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
 name|Set
 import|;
 end_import
@@ -932,6 +942,22 @@ argument_list|,
 name|GREATER_THAN_OR_EQUAL
 argument_list|,
 name|LESS_THAN_OR_EQUAL
+argument_list|)
+decl_stmt|;
+comment|/** Lower-case name. */
+specifier|public
+specifier|final
+name|String
+name|lowerName
+init|=
+name|name
+argument_list|()
+operator|.
+name|toLowerCase
+argument_list|(
+name|Locale
+operator|.
+name|ROOT
 argument_list|)
 decl_stmt|;
 comment|/** Returns the kind that corresponds to this operator but in the opposite    * direction. Or returns this, if this kind is not reversible.    *    *<p>For example, {@code GREATER_THAN.reverse()} returns {@link #LESS_THAN}.    */

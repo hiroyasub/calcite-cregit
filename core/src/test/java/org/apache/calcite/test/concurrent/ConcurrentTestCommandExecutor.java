@@ -19,6 +19,20 @@ end_package
 
 begin_import
 import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|util
+operator|.
+name|Unsafe
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|io
@@ -645,8 +659,12 @@ name|numWaiting
 operator|=
 literal|0
 expr_stmt|;
+name|Unsafe
+operator|.
 name|notifyAll
-argument_list|()
+argument_list|(
+name|this
+argument_list|)
 expr_stmt|;
 block|}
 else|else
@@ -655,8 +673,12 @@ comment|// REVIEW: SZ 6/17/2004: Need a timeout here --
 comment|// otherwise a test case will hang forever if there's
 comment|// a deadlock.  The question is, how long should the
 comment|// timeout be to avoid falsely detecting deadlocks?
+name|Unsafe
+operator|.
 name|wait
-argument_list|()
+argument_list|(
+name|this
+argument_list|)
 expr_stmt|;
 block|}
 block|}

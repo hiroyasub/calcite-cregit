@@ -686,11 +686,7 @@ literal|"joinType"
 argument_list|,
 name|joinType
 operator|.
-name|name
-argument_list|()
-operator|.
-name|toLowerCase
-argument_list|()
+name|lowerName
 argument_list|)
 operator|.
 name|item

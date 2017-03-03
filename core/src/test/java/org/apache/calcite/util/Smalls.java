@@ -463,6 +463,16 @@ name|java
 operator|.
 name|util
 operator|.
+name|Locale
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
 name|concurrent
 operator|.
 name|atomic
@@ -2500,7 +2510,11 @@ return|return
 name|x
 operator|.
 name|toLowerCase
-argument_list|()
+argument_list|(
+name|Locale
+operator|.
+name|ROOT
+argument_list|)
 return|;
 block|}
 specifier|public
@@ -3347,6 +3361,10 @@ name|String
 operator|.
 name|format
 argument_list|(
+name|Locale
+operator|.
+name|ROOT
+argument_list|,
 literal|"generate(w=%d, h=%d, s=%d)"
 argument_list|,
 name|width
@@ -3406,6 +3424,10 @@ name|String
 operator|.
 name|format
 argument_list|(
+name|Locale
+operator|.
+name|ROOT
+argument_list|,
 literal|"generate2(w=%d, h=%d, s=%d)"
 argument_list|,
 name|width
@@ -3441,6 +3463,10 @@ name|String
 operator|.
 name|format
 argument_list|(
+name|Locale
+operator|.
+name|ROOT
+argument_list|,
 literal|"generate3(foo=%s)"
 argument_list|,
 name|foo

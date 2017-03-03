@@ -9635,6 +9635,10 @@ name|String
 operator|.
 name|format
 argument_list|(
+name|Locale
+operator|.
+name|ROOT
+argument_list|,
 name|function
 argument_list|,
 name|interval
@@ -22175,7 +22179,11 @@ argument_list|(
 name|name
 operator|.
 name|toUpperCase
-argument_list|()
+argument_list|(
+name|Locale
+operator|.
+name|ROOT
+argument_list|)
 argument_list|,
 name|equalTo
 argument_list|(

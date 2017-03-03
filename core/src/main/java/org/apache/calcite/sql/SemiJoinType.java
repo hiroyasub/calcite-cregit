@@ -61,6 +61,16 @@ name|SqlParserPos
 import|;
 end_import
 
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Locale
+import|;
+end_import
+
 begin_comment
 comment|/**  * Enumeration representing different join types used in correlation  * relations.  */
 end_comment
@@ -82,6 +92,22 @@ block|,
 comment|/**    * Anti-join    *<p>Similar to from A ... where a NOT in (select b from B ...)</p>    *<p>Note: if B.b is nullable and B has nulls, no rows must be returned</p>    */
 name|ANTI
 block|;
+comment|/** Lower-case name. */
+specifier|public
+specifier|final
+name|String
+name|lowerName
+init|=
+name|name
+argument_list|()
+operator|.
+name|toLowerCase
+argument_list|(
+name|Locale
+operator|.
+name|ROOT
+argument_list|)
+decl_stmt|;
 comment|/**    * Creates a parse-tree node representing an occurrence of this    * condition type keyword at a particular position in the parsed    * text.    */
 specifier|public
 name|SqlLiteral

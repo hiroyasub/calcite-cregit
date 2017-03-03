@@ -257,6 +257,20 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|util
+operator|.
+name|NumberUtil
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|math
@@ -381,6 +395,16 @@ name|java
 operator|.
 name|util
 operator|.
+name|Locale
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
 name|Map
 import|;
 end_import
@@ -455,8 +479,9 @@ specifier|final
 name|DecimalFormat
 name|DOUBLE_FORMAT
 init|=
-operator|new
-name|DecimalFormat
+name|NumberUtil
+operator|.
+name|decimalFormat
 argument_list|(
 literal|"0.0E0"
 argument_list|)
@@ -899,7 +924,11 @@ return|return
 name|s
 operator|.
 name|toUpperCase
-argument_list|()
+argument_list|(
+name|Locale
+operator|.
+name|ROOT
+argument_list|)
 return|;
 block|}
 comment|/** SQL LOWER(string) function. */
@@ -916,7 +945,11 @@ return|return
 name|s
 operator|.
 name|toLowerCase
-argument_list|()
+argument_list|(
+name|Locale
+operator|.
+name|ROOT
+argument_list|)
 return|;
 block|}
 comment|/** SQL INITCAP(string) function. */

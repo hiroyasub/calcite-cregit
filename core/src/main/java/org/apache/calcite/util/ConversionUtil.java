@@ -36,6 +36,16 @@ import|;
 end_import
 
 begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Locale
+import|;
+end_import
+
+begin_import
 import|import static
 name|org
 operator|.
@@ -155,28 +165,19 @@ name|radix
 operator|*
 name|radix
 decl_stmt|;
-name|StringBuffer
+name|StringBuilder
 name|ret
 init|=
 operator|new
-name|StringBuffer
+name|StringBuilder
 argument_list|()
 decl_stmt|;
 for|for
 control|(
-name|int
-name|i
-init|=
-literal|0
-init|;
-name|i
-operator|<
+name|byte
+name|b
+range|:
 name|value
-operator|.
-name|length
-condition|;
-name|i
-operator|++
 control|)
 block|{
 name|ret
@@ -192,10 +193,7 @@ operator||
 operator|(
 literal|0x0ff
 operator|&
-name|value
-index|[
-name|i
-index|]
+name|b
 operator|)
 argument_list|,
 name|radix
@@ -215,7 +213,11 @@ name|toString
 argument_list|()
 operator|.
 name|toUpperCase
-argument_list|()
+argument_list|(
+name|Locale
+operator|.
+name|ROOT
+argument_list|)
 return|;
 block|}
 comment|/**    * Converts a string into a byte array. The inverse of    * {@link #toStringFromByteArray(byte[], int)}.    */

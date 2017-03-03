@@ -17,6 +17,20 @@ end_package
 
 begin_import
 import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|util
+operator|.
+name|Util
+import|;
+end_import
+
+begin_import
+import|import
 name|com
 operator|.
 name|google
@@ -390,8 +404,9 @@ specifier|final
 name|PrintWriter
 name|pw
 init|=
-operator|new
-name|PrintWriter
+name|Util
+operator|.
+name|printWriter
 argument_list|(
 name|System
 operator|.

@@ -6172,11 +6172,7 @@ operator|.
 name|getKind
 argument_list|()
 operator|.
-name|toString
-argument_list|()
-operator|.
-name|toLowerCase
-argument_list|()
+name|lowerName
 argument_list|,
 name|translateFilters
 argument_list|(

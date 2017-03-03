@@ -1084,6 +1084,10 @@ operator|new
 name|SimpleDateFormat
 argument_list|(
 literal|"MMM d, yyyy"
+argument_list|,
+name|Locale
+operator|.
+name|ROOT
 argument_list|)
 return|;
 case|case
@@ -1094,6 +1098,10 @@ operator|new
 name|SimpleDateFormat
 argument_list|(
 literal|"hh:mm:ss a"
+argument_list|,
+name|Locale
+operator|.
+name|ROOT
 argument_list|)
 return|;
 default|default:
@@ -1102,6 +1110,10 @@ operator|new
 name|SimpleDateFormat
 argument_list|(
 literal|"MMM d, yyyy hh:mm:ss a"
+argument_list|,
+name|Locale
+operator|.
+name|ROOT
 argument_list|)
 return|;
 block|}

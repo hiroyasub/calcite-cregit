@@ -539,6 +539,20 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|util
+operator|.
+name|Util
+import|;
+end_import
+
+begin_import
+import|import
 name|com
 operator|.
 name|google
@@ -726,6 +740,16 @@ operator|.
 name|util
 operator|.
 name|List
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Locale
 import|;
 end_import
 
@@ -5196,6 +5220,10 @@ operator|new
 name|SimpleDateFormat
 argument_list|(
 literal|"yyyy-MM-dd"
+argument_list|,
+name|Locale
+operator|.
+name|ROOT
 argument_list|)
 operator|.
 name|format
@@ -5738,9 +5766,9 @@ specifier|final
 name|Calendar
 name|cal
 init|=
-name|Calendar
+name|Util
 operator|.
-name|getInstance
+name|calendar
 argument_list|()
 decl_stmt|;
 while|while
@@ -18771,9 +18799,9 @@ else|else
 block|{
 name|calendar
 operator|=
-name|Calendar
+name|Util
 operator|.
-name|getInstance
+name|calendar
 argument_list|()
 expr_stmt|;
 name|calendar
@@ -18915,6 +18943,10 @@ operator|new
 name|SimpleDateFormat
 argument_list|(
 literal|"yyyy-MM-dd HH:"
+argument_list|,
+name|Locale
+operator|.
+name|ROOT
 argument_list|)
 decl_stmt|;
 name|sdf
@@ -27335,9 +27367,9 @@ case|:
 name|Calendar
 name|calendar
 init|=
-name|Calendar
+name|Util
 operator|.
-name|getInstance
+name|calendar
 argument_list|()
 decl_stmt|;
 name|calendar

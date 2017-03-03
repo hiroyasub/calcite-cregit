@@ -141,11 +141,15 @@ end_import
 
 begin_import
 import|import
-name|java
+name|org
 operator|.
-name|io
+name|apache
 operator|.
-name|File
+name|calcite
+operator|.
+name|util
+operator|.
+name|Util
 import|;
 end_import
 
@@ -155,7 +159,7 @@ name|java
 operator|.
 name|io
 operator|.
-name|FileOutputStream
+name|File
 import|;
 end_import
 
@@ -309,22 +313,14 @@ argument_list|)
 decl_stmt|;
 try|try
 init|(
-name|FileOutputStream
-name|fos
-init|=
-operator|new
-name|FileOutputStream
-argument_list|(
-name|file
-argument_list|)
-init|;
 name|PrintWriter
 name|pw
 init|=
-operator|new
-name|PrintWriter
+name|Util
+operator|.
+name|printWriter
 argument_list|(
-name|fos
+name|file
 argument_list|)
 init|)
 block|{

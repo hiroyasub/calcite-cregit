@@ -142,9 +142,7 @@ name|parameterNames
 init|=
 operator|new
 name|ArrayList
-argument_list|<
-name|String
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 specifier|final
@@ -221,12 +219,12 @@ argument_list|>
 name|parameterNames
 parameter_list|)
 block|{
-name|StringBuffer
+name|StringBuilder
 index|[]
 name|segments
 init|=
 operator|new
-name|StringBuffer
+name|StringBuilder
 index|[
 literal|4
 index|]
@@ -254,7 +252,7 @@ name|i
 index|]
 operator|=
 operator|new
-name|StringBuffer
+name|StringBuilder
 argument_list|()
 expr_stmt|;
 block|}
@@ -581,7 +579,7 @@ specifier|static
 name|void
 name|makeFormat
 parameter_list|(
-name|StringBuffer
+name|StringBuilder
 index|[]
 name|segments
 parameter_list|,

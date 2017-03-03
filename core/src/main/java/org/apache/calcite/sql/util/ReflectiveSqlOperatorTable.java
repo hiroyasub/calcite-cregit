@@ -203,6 +203,16 @@ name|List
 import|;
 end_import
 
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Locale
+import|;
+end_import
+
 begin_comment
 comment|/**  * ReflectiveSqlOperatorTable implements the {@link SqlOperatorTable} interface  * by reflecting the public fields of a subclass.  */
 end_comment
@@ -688,7 +698,11 @@ argument_list|(
 name|name
 operator|.
 name|toUpperCase
-argument_list|()
+argument_list|(
+name|Locale
+operator|.
+name|ROOT
+argument_list|)
 argument_list|,
 name|normalize
 argument_list|(

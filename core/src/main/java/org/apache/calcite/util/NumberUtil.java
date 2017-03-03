@@ -61,12 +61,32 @@ name|java
 operator|.
 name|text
 operator|.
+name|DecimalFormatSymbols
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|text
+operator|.
 name|NumberFormat
 import|;
 end_import
 
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Locale
+import|;
+end_import
+
 begin_comment
-comment|/**  * Utility functions for working with numbers This class is JDK 1.4 compatible.  */
+comment|/**  * Utility functions for working with numbers.  */
 end_comment
 
 begin_class
@@ -119,13 +139,7 @@ comment|// TODO: DecimalFormat uses ROUND_HALF_EVEN, not ROUND_HALF_UP
 comment|// Float: precision of 7 (6 digits after .)
 name|FLOAT_FORMATTER
 operator|=
-operator|new
-name|DecimalFormat
-argument_list|()
-expr_stmt|;
-name|FLOAT_FORMATTER
-operator|.
-name|applyPattern
+name|decimalFormat
 argument_list|(
 literal|"0.######E0"
 argument_list|)
@@ -133,13 +147,7 @@ expr_stmt|;
 comment|// Double: precision of 16 (15 digits after .)
 name|DOUBLE_FORMATTER
 operator|=
-operator|new
-name|DecimalFormat
-argument_list|()
-expr_stmt|;
-name|DOUBLE_FORMATTER
-operator|.
-name|applyPattern
+name|decimalFormat
 argument_list|(
 literal|"0.###############E0"
 argument_list|)
@@ -271,6 +279,33 @@ block|}
 block|}
 block|}
 comment|//~ Methods ----------------------------------------------------------------
+comment|/** Creates a format. Locale-independent. */
+specifier|public
+specifier|static
+name|DecimalFormat
+name|decimalFormat
+parameter_list|(
+name|String
+name|pattern
+parameter_list|)
+block|{
+return|return
+operator|new
+name|DecimalFormat
+argument_list|(
+name|pattern
+argument_list|,
+name|DecimalFormatSymbols
+operator|.
+name|getInstance
+argument_list|(
+name|Locale
+operator|.
+name|ROOT
+argument_list|)
+argument_list|)
+return|;
+block|}
 specifier|public
 specifier|static
 name|BigInteger
