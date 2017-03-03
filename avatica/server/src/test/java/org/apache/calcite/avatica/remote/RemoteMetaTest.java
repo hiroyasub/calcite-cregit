@@ -619,6 +619,16 @@ name|java
 operator|.
 name|util
 operator|.
+name|Locale
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
 name|Map
 import|;
 end_import
@@ -2226,6 +2236,10 @@ name|String
 operator|.
 name|format
 argument_list|(
+name|Locale
+operator|.
+name|ROOT
+argument_list|,
 literal|"create table if not exists %s ("
 operator|+
 literal|"  id int not null, msg varchar(255) not null)"
@@ -2265,6 +2279,10 @@ name|String
 operator|.
 name|format
 argument_list|(
+name|Locale
+operator|.
+name|ROOT
+argument_list|,
 literal|"insert into %s values ('%d', '%s')"
 argument_list|,
 name|t
@@ -3825,6 +3843,10 @@ name|String
 operator|.
 name|format
 argument_list|(
+name|Locale
+operator|.
+name|ROOT
+argument_list|,
 literal|"CREATE TABLE %s(id integer, stock integer)"
 argument_list|,
 name|productTable
@@ -3854,6 +3876,10 @@ name|String
 operator|.
 name|format
 argument_list|(
+name|Locale
+operator|.
+name|ROOT
+argument_list|,
 literal|"CREATE TABLE %s(id integer, units_sold integer)"
 argument_list|,
 name|salesTable
@@ -3878,6 +3904,10 @@ name|String
 operator|.
 name|format
 argument_list|(
+name|Locale
+operator|.
+name|ROOT
+argument_list|,
 literal|"INSERT INTO %s VALUES(%d, 0)"
 argument_list|,
 name|productTable
@@ -3897,6 +3927,10 @@ name|String
 operator|.
 name|format
 argument_list|(
+name|Locale
+operator|.
+name|ROOT
+argument_list|,
 literal|"INSERT INTO %s VALUES(%d, 0)"
 argument_list|,
 name|salesTable
@@ -3924,6 +3958,10 @@ name|String
 operator|.
 name|format
 argument_list|(
+name|Locale
+operator|.
+name|ROOT
+argument_list|,
 literal|"UPDATE %s SET stock = stock + ? WHERE id = ?"
 argument_list|,
 name|productTable
@@ -3941,6 +3979,10 @@ name|String
 operator|.
 name|format
 argument_list|(
+name|Locale
+operator|.
+name|ROOT
+argument_list|,
 literal|"UPDATE %s SET units_sold = units_sold + ? WHERE id = ?"
 argument_list|,
 name|salesTable
@@ -4221,6 +4263,10 @@ name|String
 operator|.
 name|format
 argument_list|(
+name|Locale
+operator|.
+name|ROOT
+argument_list|,
 literal|"SELECT stock FROM %s WHERE id = %d"
 argument_list|,
 name|productTable
@@ -4285,6 +4331,10 @@ name|String
 operator|.
 name|format
 argument_list|(
+name|Locale
+operator|.
+name|ROOT
+argument_list|,
 literal|"SELECT units_sold FROM %s WHERE id = %d"
 argument_list|,
 name|salesTable

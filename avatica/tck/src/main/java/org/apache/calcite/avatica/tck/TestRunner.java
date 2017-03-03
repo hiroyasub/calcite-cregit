@@ -420,9 +420,9 @@ argument_list|,
 name|jdbcUrl
 argument_list|)
 expr_stmt|;
-name|System
+name|Unsafe
 operator|.
-name|exit
+name|systemExit
 argument_list|(
 name|TestRunnerExitCodes
 operator|.
@@ -502,9 +502,9 @@ literal|0
 condition|)
 block|{
 comment|// Tests failed, don't exit normally
-name|System
+name|Unsafe
 operator|.
-name|exit
+name|systemExit
 argument_list|(
 name|TestRunnerExitCodes
 operator|.
@@ -518,9 +518,9 @@ block|}
 else|else
 block|{
 comment|// Exited normally
-name|System
+name|Unsafe
 operator|.
-name|exit
+name|systemExit
 argument_list|(
 name|TestRunnerExitCodes
 operator|.
@@ -673,9 +673,9 @@ argument_list|,
 name|e
 argument_list|)
 expr_stmt|;
-name|System
+name|Unsafe
 operator|.
-name|exit
+name|systemExit
 argument_list|(
 name|TestRunnerExitCodes
 operator|.
@@ -736,9 +736,9 @@ argument_list|,
 name|e
 argument_list|)
 expr_stmt|;
-name|System
+name|Unsafe
 operator|.
-name|exit
+name|systemExit
 argument_list|(
 name|TestRunnerExitCodes
 operator|.
@@ -764,9 +764,9 @@ argument_list|,
 name|e
 argument_list|)
 expr_stmt|;
-name|System
+name|Unsafe
 operator|.
-name|exit
+name|systemExit
 argument_list|(
 name|TestRunnerExitCodes
 operator|.

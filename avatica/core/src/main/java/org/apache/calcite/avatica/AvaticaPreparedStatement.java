@@ -247,6 +247,16 @@ name|List
 import|;
 end_import
 
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Locale
+import|;
+end_import
+
 begin_comment
 comment|/**  * Implementation of {@link java.sql.PreparedStatement}  * for the Avatica engine.  *  *<p>This class has sub-classes which implement JDBC 3.0 and JDBC 4.0 APIs;  * it is instantiated using {@link AvaticaFactory#newPreparedStatement}.</p>  */
 end_comment
@@ -463,6 +473,10 @@ name|connection
 operator|.
 name|getTimeZone
 argument_list|()
+argument_list|,
+name|Locale
+operator|.
+name|ROOT
 argument_list|)
 expr_stmt|;
 block|}

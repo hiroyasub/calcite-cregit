@@ -301,6 +301,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|avatica
+operator|.
+name|util
+operator|.
+name|Unsafe
+import|;
+end_import
+
+begin_import
+import|import
 name|com
 operator|.
 name|google
@@ -668,9 +684,9 @@ specifier|final
 name|Calendar
 name|calendar
 init|=
-name|Calendar
+name|Unsafe
 operator|.
-name|getInstance
+name|localCalendar
 argument_list|()
 decl_stmt|;
 comment|/** Generates ids for statements. The ids are unique across all connections    * created by this JdbcMeta. */

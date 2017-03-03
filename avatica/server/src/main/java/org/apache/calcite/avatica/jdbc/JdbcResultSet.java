@@ -412,14 +412,10 @@ specifier|final
 name|Calendar
 name|calendar
 init|=
-name|Calendar
-operator|.
-name|getInstance
-argument_list|(
 name|DateTimeUtils
 operator|.
-name|GMT_ZONE
-argument_list|)
+name|calendar
+argument_list|()
 decl_stmt|;
 specifier|final
 name|int

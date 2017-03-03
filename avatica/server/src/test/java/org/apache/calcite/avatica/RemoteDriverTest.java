@@ -177,6 +177,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|avatica
+operator|.
+name|util
+operator|.
+name|DateTimeUtils
+import|;
+end_import
+
+begin_import
+import|import
 name|com
 operator|.
 name|google
@@ -478,6 +494,16 @@ operator|.
 name|util
 operator|.
 name|List
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Locale
 import|;
 end_import
 
@@ -2033,6 +2059,10 @@ name|String
 operator|.
 name|format
 argument_list|(
+name|Locale
+operator|.
+name|ROOT
+argument_list|,
 literal|"create table if not exists %s ("
 operator|+
 literal|"id int not null, "
@@ -2050,6 +2080,10 @@ name|String
 operator|.
 name|format
 argument_list|(
+name|Locale
+operator|.
+name|ROOT
+argument_list|,
 literal|"insert into %s values(1, 'foo')"
 argument_list|,
 name|t
@@ -3155,6 +3189,10 @@ name|String
 operator|.
 name|format
 argument_list|(
+name|Locale
+operator|.
+name|ROOT
+argument_list|,
 literal|"drop table %s if exists"
 argument_list|,
 name|t
@@ -3168,6 +3206,10 @@ name|String
 operator|.
 name|format
 argument_list|(
+name|Locale
+operator|.
+name|ROOT
+argument_list|,
 literal|"create table %s("
 operator|+
 literal|"id int not null, "
@@ -3185,6 +3227,10 @@ name|String
 operator|.
 name|format
 argument_list|(
+name|Locale
+operator|.
+name|ROOT
+argument_list|,
 literal|"insert into %s values(1, 'foo')"
 argument_list|,
 name|t
@@ -3198,6 +3244,10 @@ name|String
 operator|.
 name|format
 argument_list|(
+name|Locale
+operator|.
+name|ROOT
+argument_list|,
 literal|"update %s set msg='bar' where id=1"
 argument_list|,
 name|t
@@ -3922,6 +3972,10 @@ operator|.
 name|getInstance
 argument_list|(
 name|moscowTz
+argument_list|,
+name|Locale
+operator|.
+name|ROOT
 argument_list|)
 decl_stmt|;
 specifier|final
@@ -3944,6 +3998,10 @@ operator|.
 name|getInstance
 argument_list|(
 name|alaskaTz
+argument_list|,
+name|Locale
+operator|.
+name|ROOT
 argument_list|)
 decl_stmt|;
 try|try
@@ -6425,6 +6483,10 @@ name|String
 operator|.
 name|format
 argument_list|(
+name|Locale
+operator|.
+name|ROOT
+argument_list|,
 literal|"create table if not exists %s ("
 operator|+
 literal|"id int not null, "
@@ -6454,6 +6516,10 @@ name|String
 operator|.
 name|format
 argument_list|(
+name|Locale
+operator|.
+name|ROOT
+argument_list|,
 literal|"INSERT INTO %s values("
 argument_list|,
 name|tableName
@@ -6758,6 +6824,10 @@ name|String
 operator|.
 name|format
 argument_list|(
+name|Locale
+operator|.
+name|ROOT
+argument_list|,
 literal|"create table if not exists %s ("
 operator|+
 literal|"id int not null, "
@@ -6788,6 +6858,10 @@ name|String
 operator|.
 name|format
 argument_list|(
+name|Locale
+operator|.
+name|ROOT
+argument_list|,
 literal|"INSERT INTO %s values(?, ?)"
 argument_list|,
 name|tableName
@@ -7126,6 +7200,10 @@ name|String
 operator|.
 name|format
 argument_list|(
+name|Locale
+operator|.
+name|ROOT
+argument_list|,
 literal|"create table if not exists %s ("
 operator|+
 literal|"id int not null, "
@@ -7156,6 +7234,10 @@ name|String
 operator|.
 name|format
 argument_list|(
+name|Locale
+operator|.
+name|ROOT
+argument_list|,
 literal|"INSERT INTO %s values(?, ?)"
 argument_list|,
 name|tableName
@@ -7447,6 +7529,10 @@ name|String
 operator|.
 name|format
 argument_list|(
+name|Locale
+operator|.
+name|ROOT
+argument_list|,
 literal|"create table if not exists %s ("
 operator|+
 literal|"id int not null, "
@@ -7477,6 +7563,10 @@ name|String
 operator|.
 name|format
 argument_list|(
+name|Locale
+operator|.
+name|ROOT
+argument_list|,
 literal|"INSERT INTO %s values(?, ?)"
 argument_list|,
 name|tableName
@@ -7820,6 +7910,10 @@ name|String
 operator|.
 name|format
 argument_list|(
+name|Locale
+operator|.
+name|ROOT
+argument_list|,
 literal|"create table if not exists %s ("
 operator|+
 literal|"id int not null, "
@@ -7850,6 +7944,10 @@ name|String
 operator|.
 name|format
 argument_list|(
+name|Locale
+operator|.
+name|ROOT
+argument_list|,
 literal|"INSERT INTO %s values(?, ?)"
 argument_list|,
 name|tableName
@@ -8505,9 +8603,9 @@ specifier|final
 name|Calendar
 name|calendar
 init|=
-name|Calendar
+name|DateTimeUtils
 operator|.
-name|getInstance
+name|calendar
 argument_list|()
 decl_stmt|;
 name|long
@@ -8566,6 +8664,10 @@ name|String
 operator|.
 name|format
 argument_list|(
+name|Locale
+operator|.
+name|ROOT
+argument_list|,
 literal|"drop table if exists %s"
 argument_list|,
 name|tableName
@@ -8591,6 +8693,10 @@ name|String
 operator|.
 name|format
 argument_list|(
+name|Locale
+operator|.
+name|ROOT
+argument_list|,
 literal|"create table %s ("
 operator|+
 literal|"id char(15) not null, "
@@ -8623,6 +8729,10 @@ name|String
 operator|.
 name|format
 argument_list|(
+name|Locale
+operator|.
+name|ROOT
+argument_list|,
 literal|"INSERT INTO %s values(?, ?, ?)"
 argument_list|,
 name|tableName
@@ -9406,7 +9516,11 @@ argument_list|(
 name|columnName
 operator|.
 name|toUpperCase
-argument_list|()
+argument_list|(
+name|Locale
+operator|.
+name|ROOT
+argument_list|)
 argument_list|,
 name|actualColumnName
 argument_list|)
@@ -9689,6 +9803,10 @@ name|String
 operator|.
 name|format
 argument_list|(
+name|Locale
+operator|.
+name|ROOT
+argument_list|,
 literal|"create table if not exists %s ("
 operator|+
 literal|"id int not null, "
@@ -9719,6 +9837,10 @@ name|String
 operator|.
 name|format
 argument_list|(
+name|Locale
+operator|.
+name|ROOT
+argument_list|,
 literal|"INSERT INTO %s values(?, ?)"
 argument_list|,
 name|tableName
@@ -10083,6 +10205,10 @@ name|String
 operator|.
 name|format
 argument_list|(
+name|Locale
+operator|.
+name|ROOT
+argument_list|,
 literal|"create table if not exists %s ("
 operator|+
 literal|"id int not null, "
@@ -10112,6 +10238,10 @@ name|String
 operator|.
 name|format
 argument_list|(
+name|Locale
+operator|.
+name|ROOT
+argument_list|,
 literal|"INSERT INTO %s values("
 argument_list|,
 name|tableName
@@ -10903,6 +11033,10 @@ operator|.
 name|getInstance
 argument_list|(
 name|tzUtc
+argument_list|,
+name|Locale
+operator|.
+name|ROOT
 argument_list|)
 decl_stmt|;
 name|cUtc
@@ -11213,6 +11347,10 @@ operator|.
 name|getInstance
 argument_list|(
 name|tzUtc
+argument_list|,
+name|Locale
+operator|.
+name|ROOT
 argument_list|)
 decl_stmt|;
 name|cUtc

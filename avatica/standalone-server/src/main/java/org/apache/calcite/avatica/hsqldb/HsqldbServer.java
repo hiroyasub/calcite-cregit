@@ -85,6 +85,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|avatica
+operator|.
+name|util
+operator|.
+name|Unsafe
+import|;
+end_import
+
+begin_import
+import|import
 name|com
 operator|.
 name|beust
@@ -152,6 +168,16 @@ operator|.
 name|slf4j
 operator|.
 name|LoggerFactory
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Locale
 import|;
 end_import
 
@@ -260,9 +286,9 @@ argument_list|(
 literal|"The server was already started"
 argument_list|)
 expr_stmt|;
-name|System
+name|Unsafe
 operator|.
-name|exit
+name|systemExit
 argument_list|(
 name|ExitCodes
 operator|.
@@ -367,9 +393,9 @@ argument_list|,
 name|e
 argument_list|)
 expr_stmt|;
-name|System
+name|Unsafe
 operator|.
-name|exit
+name|systemExit
 argument_list|(
 name|ExitCodes
 operator|.
@@ -550,7 +576,11 @@ argument_list|(
 name|value
 operator|.
 name|toUpperCase
-argument_list|()
+argument_list|(
+name|Locale
+operator|.
+name|ROOT
+argument_list|)
 argument_list|)
 return|;
 block|}

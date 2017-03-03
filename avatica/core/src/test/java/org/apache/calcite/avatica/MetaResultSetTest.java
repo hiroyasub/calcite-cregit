@@ -132,6 +132,16 @@ import|;
 end_import
 
 begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Locale
+import|;
+end_import
+
+begin_import
 import|import static
 name|org
 operator|.
@@ -6176,6 +6186,10 @@ name|String
 operator|.
 name|format
 argument_list|(
+name|Locale
+operator|.
+name|ROOT
+argument_list|,
 literal|"Expected column %d to be named '%s', was '%s'."
 argument_list|,
 name|column
@@ -6206,6 +6220,10 @@ name|String
 operator|.
 name|format
 argument_list|(
+name|Locale
+operator|.
+name|ROOT
+argument_list|,
 literal|"Expected column %d type to be '%d', was '%d'."
 argument_list|,
 name|column
@@ -6236,6 +6254,10 @@ name|String
 operator|.
 name|format
 argument_list|(
+name|Locale
+operator|.
+name|ROOT
+argument_list|,
 literal|"Expected column %d nullability to be '%d', was '%d'."
 argument_list|,
 name|column

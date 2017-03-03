@@ -63,6 +63,16 @@ name|java
 operator|.
 name|util
 operator|.
+name|Locale
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
 name|TimeZone
 import|;
 end_import
@@ -122,7 +132,10 @@ literal|" "
 operator|+
 name|TIME_FORMAT_STRING
 decl_stmt|;
-comment|/** The GMT time zone. */
+comment|/** The GMT time zone.    *    * @deprecated Use {@link #UTC_ZONE} */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 specifier|static
 specifier|final
@@ -134,6 +147,20 @@ operator|.
 name|getTimeZone
 argument_list|(
 literal|"GMT"
+argument_list|)
+decl_stmt|;
+comment|/** The UTC time zone. */
+specifier|public
+specifier|static
+specifier|final
+name|TimeZone
+name|UTC_ZONE
+init|=
+name|TimeZone
+operator|.
+name|getTimeZone
+argument_list|(
+literal|"UTC"
 argument_list|)
 decl_stmt|;
 comment|/** The Java default time zone. */
@@ -204,6 +231,10 @@ argument_list|(
 name|DateTimeUtils
 operator|.
 name|GMT_ZONE
+argument_list|,
+name|Locale
+operator|.
+name|ROOT
 argument_list|)
 expr_stmt|;
 name|ZERO_CALENDAR
@@ -214,18 +245,6 @@ literal|0
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Calendar set to local time.    */
-specifier|private
-specifier|static
-specifier|final
-name|Calendar
-name|LOCAL_CALENDAR
-init|=
-name|Calendar
-operator|.
-name|getInstance
-argument_list|()
-decl_stmt|;
 comment|//~ Methods ----------------------------------------------------------------
 comment|/**    * Parses a string using {@link SimpleDateFormat} and a given pattern. This    * method parses a string at the specified parse position and if successful,    * updates the parse position to the index after the last character used.    * The parsing is strict and requires months to be less than 12, days to be    * less than 31, etc.    *    * @param s       string to be parsed    * @param pattern {@link SimpleDateFormat} pattern (not null)    * @param tz      time zone in which to interpret string. Defaults to the Java    *                default time zone    * @param pp      position to start parsing from    * @return a Calendar initialized with the parsed value, or null if parsing    * failed. If returned, the Calendar is configured to the GMT time zone.    */
 specifier|private
@@ -258,6 +277,10 @@ operator|new
 name|SimpleDateFormat
 argument_list|(
 name|pattern
+argument_list|,
+name|Locale
+operator|.
+name|ROOT
 argument_list|)
 decl_stmt|;
 if|if
@@ -280,6 +303,10 @@ operator|.
 name|getInstance
 argument_list|(
 name|tz
+argument_list|,
+name|Locale
+operator|.
+name|ROOT
 argument_list|)
 decl_stmt|;
 name|df
@@ -565,7 +592,11 @@ init|=
 name|NumberFormat
 operator|.
 name|getIntegerInstance
-argument_list|()
+argument_list|(
+name|Locale
+operator|.
+name|ROOT
+argument_list|)
 decl_stmt|;
 name|Number
 name|num
@@ -733,6 +764,10 @@ operator|new
 name|SimpleDateFormat
 argument_list|(
 name|pattern
+argument_list|,
+name|Locale
+operator|.
+name|ROOT
 argument_list|)
 expr_stmt|;
 block|}
@@ -753,6 +788,10 @@ operator|new
 name|SimpleDateFormat
 argument_list|(
 name|format
+argument_list|,
+name|Locale
+operator|.
+name|ROOT
 argument_list|)
 decl_stmt|;
 name|sdf
@@ -5244,6 +5283,26 @@ name|y
 argument_list|)
 operator|*
 name|y
+return|;
+block|}
+comment|/** Creates an instance of {@link Calendar} in the root locale and UTC time    * zone. */
+specifier|public
+specifier|static
+name|Calendar
+name|calendar
+parameter_list|()
+block|{
+return|return
+name|Calendar
+operator|.
+name|getInstance
+argument_list|(
+name|UTC_ZONE
+argument_list|,
+name|Locale
+operator|.
+name|ROOT
+argument_list|)
 return|;
 block|}
 comment|//~ Inner Classes ----------------------------------------------------------

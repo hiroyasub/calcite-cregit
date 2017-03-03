@@ -85,6 +85,22 @@ begin_import
 import|import
 name|org
 operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|avatica
+operator|.
+name|util
+operator|.
+name|DateTimeUtils
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
 name|junit
 operator|.
 name|Test
@@ -108,16 +124,6 @@ operator|.
 name|util
 operator|.
 name|Calendar
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|GregorianCalendar
 import|;
 end_import
 
@@ -862,9 +868,9 @@ name|protoToJdbc
 argument_list|(
 name|proto
 argument_list|,
-name|GregorianCalendar
+name|DateTimeUtils
 operator|.
-name|getInstance
+name|calendar
 argument_list|()
 argument_list|)
 expr_stmt|;
@@ -1020,9 +1026,9 @@ specifier|final
 name|Calendar
 name|calendar
 init|=
-name|GregorianCalendar
+name|DateTimeUtils
 operator|.
-name|getInstance
+name|calendar
 argument_list|()
 decl_stmt|;
 comment|// CALCITE-1103 Decimals were (incorrectly) getting serialized as normal "numbers" which
@@ -1149,6 +1155,8 @@ operator|new
 name|String
 argument_list|(
 name|b64Bytes
+argument_list|,
+name|UTF_8
 argument_list|)
 argument_list|,
 name|tv
@@ -1225,6 +1233,8 @@ operator|new
 name|String
 argument_list|(
 name|b64Bytes
+argument_list|,
+name|UTF_8
 argument_list|)
 argument_list|,
 name|protoTv
