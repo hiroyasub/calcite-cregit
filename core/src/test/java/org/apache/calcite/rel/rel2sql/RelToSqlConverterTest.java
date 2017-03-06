@@ -997,13 +997,117 @@ name|expected
 init|=
 literal|"SELECT COUNT(*)\n"
 operator|+
-literal|"FROM (SELECT \"product_class_id\", \"product_id\", COUNT(*)\n"
+literal|"FROM \"foodmart\".\"product\"\n"
+operator|+
+literal|"GROUP BY \"product_class_id\", \"product_id\"\n"
+operator|+
+literal|"HAVING \"product_id\"> 10"
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1665">[CALCITE-1665]    * Aggregates and having cannot be combined</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSelectQueryWithGroupByHaving2
+parameter_list|()
+block|{
+name|String
+name|query
+init|=
+literal|" select \"product\".\"product_id\",\n"
+operator|+
+literal|"    min(\"sales_fact_1997\".\"store_id\")\n"
+operator|+
+literal|"    from \"product\"\n"
+operator|+
+literal|"    inner join \"sales_fact_1997\"\n"
+operator|+
+literal|"    on \"product\".\"product_id\" = \"sales_fact_1997\".\"product_id\"\n"
+operator|+
+literal|"    group by \"product\".\"product_id\"\n"
+operator|+
+literal|"    having count(*)> 1"
+decl_stmt|;
+name|String
+name|expected
+init|=
+literal|"SELECT \"product\".\"product_id\", "
+operator|+
+literal|"MIN(\"sales_fact_1997\".\"store_id\")\n"
 operator|+
 literal|"FROM \"foodmart\".\"product\"\n"
 operator|+
-literal|"GROUP BY \"product_class_id\", \"product_id\") AS \"t0\"\n"
+literal|"INNER JOIN \"foodmart\".\"sales_fact_1997\" "
 operator|+
-literal|"WHERE \"product_id\"> 10"
+literal|"ON \"product\".\"product_id\" = \"sales_fact_1997\".\"product_id\"\n"
+operator|+
+literal|"GROUP BY \"product\".\"product_id\"\n"
+operator|+
+literal|"HAVING COUNT(*)> 1"
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1665">[CALCITE-1665]    * Aggregates and having cannot be combined</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSelectQueryWithGroupByHaving3
+parameter_list|()
+block|{
+name|String
+name|query
+init|=
+literal|" select * from (select \"product\".\"product_id\",\n"
+operator|+
+literal|"    min(\"sales_fact_1997\".\"store_id\")\n"
+operator|+
+literal|"    from \"product\"\n"
+operator|+
+literal|"    inner join \"sales_fact_1997\"\n"
+operator|+
+literal|"    on \"product\".\"product_id\" = \"sales_fact_1997\".\"product_id\"\n"
+operator|+
+literal|"    group by \"product\".\"product_id\"\n"
+operator|+
+literal|"    having count(*)> 1) where \"product_id\"> 100"
+decl_stmt|;
+name|String
+name|expected
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM (SELECT \"product\".\"product_id\", MIN(\"sales_fact_1997\".\"store_id\")\n"
+operator|+
+literal|"FROM \"foodmart\".\"product\"\n"
+operator|+
+literal|"INNER JOIN \"foodmart\".\"sales_fact_1997\" ON \"product\".\"product_id\" = \"sales_fact_1997\".\"product_id\"\n"
+operator|+
+literal|"GROUP BY \"product\".\"product_id\"\n"
+operator|+
+literal|"HAVING COUNT(*)> 1) AS \"t2\"\n"
+operator|+
+literal|"WHERE \"t2\".\"product_id\"> 100"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -2013,15 +2117,11 @@ name|expected
 init|=
 literal|"SELECT COUNT(*)\n"
 operator|+
-literal|"FROM (SELECT product.product_class_id, product.product_id, COUNT"
-operator|+
-literal|"(*)\n"
-operator|+
 literal|"FROM foodmart.product AS product\n"
 operator|+
-literal|"GROUP BY product.product_class_id, product.product_id) AS t0\n"
+literal|"GROUP BY product.product_class_id, product.product_id\n"
 operator|+
-literal|"WHERE t0.product_id> 10"
+literal|"HAVING product.product_id> 10"
 decl_stmt|;
 name|sql
 argument_list|(
