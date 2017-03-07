@@ -13028,6 +13028,50 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
+name|tester
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"'ab\ncd' not like 'ab%'"
+argument_list|,
+name|Boolean
+operator|.
+name|FALSE
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"'123\n\n45\n' not like '%'"
+argument_list|,
+name|Boolean
+operator|.
+name|FALSE
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"'ab\ncd\nef' not like '%cd%'"
+argument_list|,
+name|Boolean
+operator|.
+name|FALSE
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"'ab\ncd\nef' not like '%cde%'"
+argument_list|,
+name|Boolean
+operator|.
+name|TRUE
+argument_list|)
+expr_stmt|;
 block|}
 annotation|@
 name|Test
@@ -13350,6 +13394,61 @@ operator|.
 name|TRUE
 argument_list|)
 expr_stmt|;
+name|tester
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"'ab\ncd' like 'ab%'"
+argument_list|,
+name|Boolean
+operator|.
+name|TRUE
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"'abc\ncd' like 'ab%'"
+argument_list|,
+name|Boolean
+operator|.
+name|TRUE
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"'123\n\n45\n' like '%'"
+argument_list|,
+name|Boolean
+operator|.
+name|TRUE
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"'ab\ncd\nef' like '%cd%'"
+argument_list|,
+name|Boolean
+operator|.
+name|TRUE
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"'ab\ncd\nef' like '%cde%'"
+argument_list|,
+name|Boolean
+operator|.
+name|FALSE
+argument_list|)
+expr_stmt|;
 block|}
 annotation|@
 name|Test
@@ -13604,6 +13703,61 @@ argument_list|,
 name|Boolean
 operator|.
 name|TRUE
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"'ab\ncd' similar to 'ab%'"
+argument_list|,
+name|Boolean
+operator|.
+name|TRUE
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"'abc\ncd' similar to 'ab%'"
+argument_list|,
+name|Boolean
+operator|.
+name|TRUE
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"'123\n\n45\n' similar to '%'"
+argument_list|,
+name|Boolean
+operator|.
+name|TRUE
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"'ab\ncd\nef' similar to '%cd%'"
+argument_list|,
+name|Boolean
+operator|.
+name|TRUE
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"'ab\ncd\nef' similar to '%cde%'"
+argument_list|,
+name|Boolean
+operator|.
+name|FALSE
 argument_list|)
 expr_stmt|;
 comment|// simple regular expressions
