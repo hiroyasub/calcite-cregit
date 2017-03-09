@@ -3394,7 +3394,7 @@ name|checkExpType
 argument_list|(
 literal|"cast(123 as varchar)"
 argument_list|,
-literal|"VARCHAR(1) NOT NULL"
+literal|"VARCHAR NOT NULL"
 argument_list|)
 expr_stmt|;
 name|checkExpType
@@ -3408,7 +3408,7 @@ name|checkExpType
 argument_list|(
 literal|"cast(x'1234' as varbinary)"
 argument_list|,
-literal|"VARBINARY(1) NOT NULL"
+literal|"VARBINARY NOT NULL"
 argument_list|)
 expr_stmt|;
 name|checkExpType
@@ -14933,6 +14933,36 @@ argument_list|(
 literal|"select * from emp join dept using (deptno, ^comm^)"
 argument_list|,
 literal|"Column 'COMM' not found in any table"
+argument_list|)
+expr_stmt|;
+name|checkFails
+argument_list|(
+literal|"select * from emp join dept using (^empno^)"
+argument_list|,
+literal|"Column 'EMPNO' not found in any table"
+argument_list|)
+expr_stmt|;
+name|checkFails
+argument_list|(
+literal|"select * from dept join emp using (^empno^)"
+argument_list|,
+literal|"Column 'EMPNO' not found in any table"
+argument_list|)
+expr_stmt|;
+comment|// not on either side
+name|checkFails
+argument_list|(
+literal|"select * from dept join emp using (^abc^)"
+argument_list|,
+literal|"Column 'ABC' not found in any table"
+argument_list|)
+expr_stmt|;
+comment|// column exists, but wrong case
+name|checkFails
+argument_list|(
+literal|"select * from dept join emp using (^\"deptno\"^)"
+argument_list|,
+literal|"Column 'deptno' not found in any table"
 argument_list|)
 expr_stmt|;
 comment|// ok to repeat (ok in Oracle10g too)

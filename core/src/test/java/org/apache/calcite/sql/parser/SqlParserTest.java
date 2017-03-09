@@ -19998,6 +19998,42 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testCastToVarchar
+parameter_list|()
+block|{
+name|checkExp
+argument_list|(
+literal|"cast(x as varchar(5))"
+argument_list|,
+literal|"CAST(`X` AS VARCHAR(5))"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"cast(x as varchar)"
+argument_list|,
+literal|"CAST(`X` AS VARCHAR)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"cast(x as varBINARY(5))"
+argument_list|,
+literal|"CAST(`X` AS VARBINARY(5))"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"cast(x as varbinary)"
+argument_list|,
+literal|"CAST(`X` AS VARBINARY)"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testTimestampAddAndDiff
 parameter_list|()
 block|{

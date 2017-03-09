@@ -174,7 +174,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testImplWithMltipleFilters
+name|testImplWithMultipleFilters
 parameter_list|()
 block|{
 name|CalciteAssert
@@ -196,7 +196,7 @@ name|explainContains
 argument_list|(
 literal|"PigToEnumerableConverter\n"
 operator|+
-literal|"  PigFilter(condition=[AND(>($0, 'abc'), =($1, '3'))])\n"
+literal|"  PigFilter(condition=[AND(>($0, 'abc'), =($1, CAST('3'):VARCHAR CHARACTER SET \"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$primary\" NOT NULL))])\n"
 operator|+
 literal|"    PigTableScan(table=[[PIG, t]])"
 argument_list|)

@@ -523,7 +523,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testImplWithMltipleFilters
+name|testImplWithMultipleFilters
 parameter_list|()
 block|{
 specifier|final

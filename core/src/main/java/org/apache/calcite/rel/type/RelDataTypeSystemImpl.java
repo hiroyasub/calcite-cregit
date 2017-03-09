@@ -154,6 +154,9 @@ case|:
 case|case
 name|BINARY
 case|:
+return|return
+literal|1
+return|;
 case|case
 name|VARCHAR
 case|:
@@ -161,7 +164,9 @@ case|case
 name|VARBINARY
 case|:
 return|return
-literal|1
+name|RelDataType
+operator|.
+name|PRECISION_NOT_SPECIFIED
 return|;
 case|case
 name|DECIMAL

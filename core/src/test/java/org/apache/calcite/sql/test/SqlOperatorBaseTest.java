@@ -7808,6 +7808,40 @@ argument_list|)
 expr_stmt|;
 name|tester
 operator|.
+name|checkString
+argument_list|(
+literal|" cast('fe' as char(2)) || cast('df' as varchar)"
+argument_list|,
+literal|"fedf"
+argument_list|,
+literal|"VARCHAR NOT NULL"
+argument_list|)
+expr_stmt|;
+comment|// Precision is larger than VARCHAR allows, so result is unbounded
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|" cast('fe' as char(2)) || cast('df' as varchar(65535))"
+argument_list|,
+literal|"fedf"
+argument_list|,
+literal|"VARCHAR NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|" cast('fe' as char(2)) || cast('df' as varchar(33333))"
+argument_list|,
+literal|"fedf"
+argument_list|,
+literal|"VARCHAR(33335) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
 name|checkNull
 argument_list|(
 literal|"x'ff' || cast(null as varbinary)"
@@ -15312,7 +15346,7 @@ name|checkScalar
 argument_list|(
 literal|"position(cast('a' as char) in cast('bca' as varchar))"
 argument_list|,
-literal|0
+literal|3
 argument_list|,
 literal|"INTEGER NOT NULL"
 argument_list|)
@@ -25963,6 +25997,28 @@ name|tester
 operator|.
 name|checkScalar
 argument_list|(
+literal|"CAST('ABCD' AS VARCHAR)"
+argument_list|,
+literal|"ABCD"
+argument_list|,
+literal|"VARCHAR NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"CAST(CAST('ABCD' AS VARCHAR) AS VARCHAR(3))"
+argument_list|,
+literal|"ABC"
+argument_list|,
+literal|"VARCHAR(3) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
 literal|"CAST(x'ABCDEF12' AS BINARY(2))"
 argument_list|,
 literal|"abcd"
@@ -25979,6 +26035,28 @@ argument_list|,
 literal|"abcd"
 argument_list|,
 literal|"VARBINARY(2) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"CAST(x'ABCDEF12' AS VARBINARY)"
+argument_list|,
+literal|"abcdef12"
+argument_list|,
+literal|"VARBINARY NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"CAST(CAST(x'ABCDEF12' AS VARBINARY) AS VARBINARY(3))"
+argument_list|,
+literal|"abcdef"
+argument_list|,
+literal|"VARBINARY(3) NOT NULL"
 argument_list|)
 expr_stmt|;
 if|if
