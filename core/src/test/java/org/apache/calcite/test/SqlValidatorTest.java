@@ -19540,7 +19540,7 @@ argument_list|(
 literal|"select fusion(multiset[3]) from emp"
 argument_list|)
 expr_stmt|;
-comment|// todo. FUSION is an aggregate function. test that validator only can
+comment|// todo. FUSION is an aggregate function. test that validator can only
 comment|// take set operators in its select list once aggregation support is
 comment|// complete
 block|}
@@ -26286,11 +26286,6 @@ argument_list|(
 literal|"No match found for function signature .*"
 argument_list|)
 expr_stmt|;
-if|if
-condition|(
-name|TODO
-condition|)
-block|{
 comment|// FINAL and other functions should not be visible outside of
 comment|// MATCH_RECOGNIZE
 name|sql
@@ -26300,7 +26295,7 @@ argument_list|)
 operator|.
 name|fails
 argument_list|(
-literal|"No match found for function signature .*"
+literal|"Function 'FINAL\\(1, 2\\)' can only be used in MATCH_RECOGNIZE"
 argument_list|)
 expr_stmt|;
 name|sql
@@ -26310,7 +26305,7 @@ argument_list|)
 operator|.
 name|fails
 argument_list|(
-literal|"No match found for function signature .*"
+literal|"Function 'RUNNING\\(1, 2\\)' can only be used in MATCH_RECOGNIZE"
 argument_list|)
 expr_stmt|;
 name|sql
@@ -26320,7 +26315,7 @@ argument_list|)
 operator|.
 name|fails
 argument_list|(
-literal|"No match found for function signature .*"
+literal|"Function 'FIRST\\(1, 2\\)' can only be used in MATCH_RECOGNIZE"
 argument_list|)
 expr_stmt|;
 name|sql
@@ -26330,7 +26325,7 @@ argument_list|)
 operator|.
 name|fails
 argument_list|(
-literal|"No match found for function signature .*"
+literal|"Function 'LAST\\(1, 2\\)' can only be used in MATCH_RECOGNIZE"
 argument_list|)
 expr_stmt|;
 name|sql
@@ -26340,10 +26335,9 @@ argument_list|)
 operator|.
 name|fails
 argument_list|(
-literal|"No match found for function signature .*"
+literal|"Function 'PREV\\(1, 2\\)' can only be used in MATCH_RECOGNIZE"
 argument_list|)
 expr_stmt|;
-block|}
 block|}
 annotation|@
 name|Test
