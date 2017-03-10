@@ -22719,8 +22719,6 @@ literal|"DESC post\n"
 operator|+
 literal|"OVER left\n"
 operator|+
-literal|"PATTERN_DEFINE_AS -\n"
-operator|+
 literal|"TABLESAMPLE -\n"
 operator|+
 literal|"\n"
@@ -26286,16 +26284,6 @@ parameter_list|()
 throws|throws
 name|Exception
 block|{
-name|sql
-argument_list|(
-literal|"values ^pattern_define_as(1, 2)^"
-argument_list|)
-operator|.
-name|fails
-argument_list|(
-literal|"No match found for function signature .*"
-argument_list|)
-expr_stmt|;
 name|sql
 argument_list|(
 literal|"values ^pattern_exclude(1, 2)^"
