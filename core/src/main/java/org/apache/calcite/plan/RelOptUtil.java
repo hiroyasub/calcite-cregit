@@ -737,6 +737,20 @@ name|calcite
 operator|.
 name|rex
 operator|.
+name|RexExecutor
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rex
+operator|.
 name|RexExecutorImpl
 import|;
 end_import
@@ -15334,7 +15348,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**    * Determines whether any of the fields in a given relational expression may    * contain null values, taking into account constraints on the field types and    * also deduced predicates.    */
+comment|/**    * Determines whether any of the fields in a given relational expression may    * contain null values, taking into account constraints on the field types and    * also deduced predicates.    *    *<p>The method is cautious: It may sometimes return {@code true} when the    * actual answer is {@code false}. In particular, it does this when there    * is no executor, or the executor is not a sub-class of    * {@link RexExecutorImpl}.    */
 specifier|private
 specifier|static
 name|boolean
@@ -15473,12 +15487,10 @@ return|return
 literal|true
 return|;
 block|}
-name|RexExecutorImpl
-name|rexImpl
+specifier|final
+name|RexExecutor
+name|executor
 init|=
-operator|(
-name|RexExecutorImpl
-operator|)
 name|r
 operator|.
 name|getCluster
@@ -15490,6 +15502,21 @@ operator|.
 name|getExecutor
 argument_list|()
 decl_stmt|;
+if|if
+condition|(
+operator|!
+operator|(
+name|executor
+operator|instanceof
+name|RexExecutorImpl
+operator|)
+condition|)
+block|{
+comment|// Cannot proceed without an executor.
+return|return
+literal|true
+return|;
+block|}
 specifier|final
 name|RexImplicationChecker
 name|checker
@@ -15499,7 +15526,10 @@ name|RexImplicationChecker
 argument_list|(
 name|rexBuilder
 argument_list|,
-name|rexImpl
+operator|(
+name|RexExecutorImpl
+operator|)
+name|executor
 argument_list|,
 name|rowType
 argument_list|)
