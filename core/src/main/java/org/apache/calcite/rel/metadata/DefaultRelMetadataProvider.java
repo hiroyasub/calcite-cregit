@@ -72,6 +72,14 @@ name|RelMdColumnOrigins
 operator|.
 name|SOURCE
 argument_list|,
+name|RelMdExpressionLineage
+operator|.
+name|SOURCE
+argument_list|,
+name|RelMdNodeTypes
+operator|.
+name|SOURCE
+argument_list|,
 name|RelMdRowCount
 operator|.
 name|SOURCE
@@ -125,6 +133,10 @@ operator|.
 name|SOURCE
 argument_list|,
 name|RelMdPredicates
+operator|.
+name|SOURCE
+argument_list|,
+name|RelMdAllPredicates
 operator|.
 name|SOURCE
 argument_list|,

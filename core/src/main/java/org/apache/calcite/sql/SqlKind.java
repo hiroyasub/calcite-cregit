@@ -343,6 +343,9 @@ block|,
 comment|/**    * Reference to an input field.    *    *<p>(Only used at the RexNode level.)</p>    */
 name|INPUT_REF
 block|,
+comment|/**    * Reference to an input field, with a qualified name and an identifier    *    *<p>(Only used at the RexNode level.)</p>    */
+name|TABLE_INPUT_REF
+block|,
 comment|/**    * Reference to an input field, with pattern var as modifier    *    *<p>(Only used at the RexNode level.)</p>    */
 name|PATTERN_INPUT_REF
 block|,

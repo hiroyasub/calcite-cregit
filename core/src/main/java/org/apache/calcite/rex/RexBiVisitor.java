@@ -131,6 +131,16 @@ name|arg
 parameter_list|)
 function_decl|;
 name|R
+name|visitTableInputRef
+parameter_list|(
+name|RexTableInputRef
+name|ref
+parameter_list|,
+name|P
+name|arg
+parameter_list|)
+function_decl|;
+name|R
 name|visitPatternFieldRef
 parameter_list|(
 name|RexPatternFieldRef
