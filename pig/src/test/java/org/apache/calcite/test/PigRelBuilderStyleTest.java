@@ -309,6 +309,34 @@ name|org
 operator|.
 name|apache
 operator|.
+name|hadoop
+operator|.
+name|fs
+operator|.
+name|Path
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|pig
+operator|.
+name|pigunit
+operator|.
+name|Cluster
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
 name|pig
 operator|.
 name|pigunit
@@ -321,9 +349,33 @@ begin_import
 import|import
 name|org
 operator|.
+name|apache
+operator|.
+name|pig
+operator|.
+name|test
+operator|.
+name|Util
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
 name|junit
 operator|.
 name|After
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|junit
+operator|.
+name|Before
 import|;
 end_import
 
@@ -497,12 +549,7 @@ argument_list|,
 name|schema
 argument_list|)
 argument_list|,
-literal|"t = LOAD '"
-operator|+
-name|getFullPathForTestDataFile
-argument_list|(
-literal|"data.txt"
-argument_list|)
+literal|"t = LOAD 'data.txt"
 operator|+
 literal|"' USING PigStorage() AS (tc0:chararray, tc1:chararray);\n"
 operator|+
@@ -626,12 +673,7 @@ argument_list|,
 name|schema
 argument_list|)
 argument_list|,
-literal|"t = LOAD '"
-operator|+
-name|getFullPathForTestDataFile
-argument_list|(
-literal|"data.txt"
-argument_list|)
+literal|"t = LOAD 'data.txt"
 operator|+
 literal|"' USING PigStorage() AS (tc0:chararray, tc1:chararray);\n"
 operator|+
@@ -729,12 +771,7 @@ argument_list|,
 name|schema
 argument_list|)
 argument_list|,
-literal|"t = LOAD '"
-operator|+
-name|getFullPathForTestDataFile
-argument_list|(
-literal|"data.txt"
-argument_list|)
+literal|"t = LOAD 'data.txt"
 operator|+
 literal|"' USING PigStorage() AS (tc0:chararray, tc1:chararray);\n"
 operator|+
@@ -840,12 +877,7 @@ argument_list|,
 name|schema
 argument_list|)
 argument_list|,
-literal|"t = LOAD '"
-operator|+
-name|getFullPathForTestDataFile
-argument_list|(
-literal|"data.txt"
-argument_list|)
+literal|"t = LOAD 'data.txt"
 operator|+
 literal|"' USING PigStorage() AS (tc0:chararray, tc1:chararray);\n"
 operator|+
@@ -951,12 +983,7 @@ argument_list|,
 name|schema
 argument_list|)
 argument_list|,
-literal|"t = LOAD '"
-operator|+
-name|getFullPathForTestDataFile
-argument_list|(
-literal|"data.txt"
-argument_list|)
+literal|"t = LOAD 'data.txt"
 operator|+
 literal|"' USING PigStorage() AS (tc0:chararray, tc1:chararray);\n"
 operator|+
@@ -1066,12 +1093,7 @@ argument_list|,
 name|schema
 argument_list|)
 argument_list|,
-literal|"t = LOAD '"
-operator|+
-name|getFullPathForTestDataFile
-argument_list|(
-literal|"data.txt"
-argument_list|)
+literal|"t = LOAD 'data.txt"
 operator|+
 literal|"' USING PigStorage() AS (tc0:chararray, tc1:chararray);\n"
 operator|+
@@ -1220,23 +1242,13 @@ argument_list|,
 name|schema
 argument_list|)
 argument_list|,
-literal|"t = LOAD '"
-operator|+
-name|getFullPathForTestDataFile
-argument_list|(
-literal|"data.txt"
-argument_list|)
+literal|"t = LOAD 'data.txt"
 operator|+
 literal|"' USING PigStorage() AS (tc0:chararray, tc1:chararray);\n"
 operator|+
 literal|"t = FILTER t BY (tc0> 'a');\n"
 operator|+
-literal|"s = LOAD '"
-operator|+
-name|getFullPathForTestDataFile
-argument_list|(
-literal|"data2.txt"
-argument_list|)
+literal|"s = LOAD 'data2.txt"
 operator|+
 literal|"' USING PigStorage() AS (sc0:chararray, sc1:chararray);\n"
 operator|+
@@ -1399,23 +1411,13 @@ argument_list|,
 name|schema
 argument_list|)
 argument_list|,
-literal|"t = LOAD '"
-operator|+
-name|getFullPathForTestDataFile
-argument_list|(
-literal|"data.txt"
-argument_list|)
+literal|"t = LOAD 'data.txt"
 operator|+
 literal|"' USING PigStorage() AS (tc0:chararray, tc1:chararray);\n"
 operator|+
 literal|"t = FILTER t BY (tc0> 'abc');\n"
 operator|+
-literal|"s = LOAD '"
-operator|+
-name|getFullPathForTestDataFile
-argument_list|(
-literal|"data2.txt"
-argument_list|)
+literal|"s = LOAD 'data2.txt"
 operator|+
 literal|"' USING PigStorage() AS (sc0:chararray, sc1:chararray);\n"
 operator|+
@@ -1464,10 +1466,7 @@ argument_list|,
 operator|new
 name|PigTable
 argument_list|(
-name|getFullPathForTestDataFile
-argument_list|(
 literal|"data.txt"
-argument_list|)
 argument_list|,
 operator|new
 name|String
@@ -1489,10 +1488,7 @@ argument_list|,
 operator|new
 name|PigTable
 argument_list|(
-name|getFullPathForTestDataFile
-argument_list|(
 literal|"data2.txt"
-argument_list|)
 argument_list|,
 operator|new
 name|String
@@ -1814,6 +1810,82 @@ argument_list|()
 operator|.
 name|shutdown
 argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Before
+specifier|public
+name|void
+name|setupDataFilesForPigServer
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+name|System
+operator|.
+name|getProperties
+argument_list|()
+operator|.
+name|setProperty
+argument_list|(
+literal|"pigunit.exectype"
+argument_list|,
+name|Util
+operator|.
+name|getLocalTestMode
+argument_list|()
+operator|.
+name|toString
+argument_list|()
+argument_list|)
+expr_stmt|;
+name|Cluster
+name|cluster
+init|=
+name|PigTest
+operator|.
+name|getCluster
+argument_list|()
+decl_stmt|;
+name|cluster
+operator|.
+name|update
+argument_list|(
+operator|new
+name|Path
+argument_list|(
+name|getFullPathForTestDataFile
+argument_list|(
+literal|"data.txt"
+argument_list|)
+argument_list|)
+argument_list|,
+operator|new
+name|Path
+argument_list|(
+literal|"data.txt"
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|cluster
+operator|.
+name|update
+argument_list|(
+operator|new
+name|Path
+argument_list|(
+name|getFullPathForTestDataFile
+argument_list|(
+literal|"data2.txt"
+argument_list|)
+argument_list|)
+argument_list|,
+operator|new
+name|Path
+argument_list|(
+literal|"data2.txt"
+argument_list|)
+argument_list|)
 expr_stmt|;
 block|}
 block|}
