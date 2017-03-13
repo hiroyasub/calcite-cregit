@@ -22603,6 +22603,10 @@ literal|"- pre\n"
 operator|+
 literal|". left\n"
 operator|+
+literal|"FINAL pre\n"
+operator|+
+literal|"RUNNING pre\n"
+operator|+
 literal|"\n"
 operator|+
 literal|"| left\n"
@@ -27052,7 +27056,7 @@ argument_list|)
 operator|.
 name|fails
 argument_list|(
-literal|"Function 'FINAL\\(1, 2\\)' can only be used in MATCH_RECOGNIZE"
+literal|"No match found for function signature FINAL\\(<NUMERIC>,<NUMERIC>\\)"
 argument_list|)
 expr_stmt|;
 name|sql
@@ -27062,7 +27066,7 @@ argument_list|)
 operator|.
 name|fails
 argument_list|(
-literal|"Function 'RUNNING\\(1, 2\\)' can only be used in MATCH_RECOGNIZE"
+literal|"No match found for function signature RUNNING\\(<NUMERIC>,<NUMERIC>\\)"
 argument_list|)
 expr_stmt|;
 name|sql
@@ -28705,6 +28709,54 @@ operator|+
 literal|" where extra = 'test'"
 argument_list|,
 literal|"Duplicate name 'EXTRA' in column list"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testMatchRecognizeMeasures1
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"  from emp match_recognize\n"
+operator|+
+literal|"  (\n"
+operator|+
+literal|"   measures "
+operator|+
+literal|"   STRT.sal as start_sal,"
+operator|+
+literal|"   ^LAST(null)^ as bottom_sal,"
+operator|+
+literal|"   LAST(up.ts) as end_sal"
+operator|+
+literal|"    pattern (strt down+ up+)\n"
+operator|+
+literal|"    define\n"
+operator|+
+literal|"      down as down.sal< PREV(down.sal),\n"
+operator|+
+literal|"      up as up.sal> prev(up.sal)\n"
+operator|+
+literal|"  ) mr"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Null parameters in 'LAST\\(NULL, 0\\)'"
 argument_list|)
 expr_stmt|;
 block|}

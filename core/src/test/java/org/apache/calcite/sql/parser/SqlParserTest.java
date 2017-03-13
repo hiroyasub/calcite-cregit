@@ -2533,6 +2533,10 @@ literal|"MAX_CARDINALITY"
 argument_list|,
 literal|"2011"
 argument_list|,
+literal|"MEASURES"
+argument_list|,
+literal|"c"
+argument_list|,
 literal|"MEMBER"
 argument_list|,
 literal|"2003"
@@ -22685,9 +22689,9 @@ literal|"PATTERN (((`STRT` (`DOWN` +)) (`UP` +)))\n"
 operator|+
 literal|"DEFINE "
 operator|+
-literal|"`DOWN` AS (`DOWN`.`PRICE`< (PREV(`DOWN`.`PRICE`, 1))), "
+literal|"`DOWN` AS (`DOWN`.`PRICE`< PREV(`DOWN`.`PRICE`, 1)), "
 operator|+
-literal|"`UP` AS (`UP`.`PRICE`> (PREV(`UP`.`PRICE`, 1)))"
+literal|"`UP` AS (`UP`.`PRICE`> PREV(`UP`.`PRICE`, 1))"
 operator|+
 literal|") AS `MR`"
 decl_stmt|;
@@ -22741,9 +22745,9 @@ literal|"PATTERN (((`STRT` (`DOWN` +)) (`UP` +)) $)\n"
 operator|+
 literal|"DEFINE "
 operator|+
-literal|"`DOWN` AS (`DOWN`.`PRICE`< (PREV(`DOWN`.`PRICE`, 1))), "
+literal|"`DOWN` AS (`DOWN`.`PRICE`< PREV(`DOWN`.`PRICE`, 1)), "
 operator|+
-literal|"`UP` AS (`UP`.`PRICE`> (PREV(`UP`.`PRICE`, 1)))"
+literal|"`UP` AS (`UP`.`PRICE`> PREV(`UP`.`PRICE`, 1))"
 operator|+
 literal|") AS `MR`"
 decl_stmt|;
@@ -22797,9 +22801,9 @@ literal|"PATTERN (^ ((`STRT` (`DOWN` +)) (`UP` +)))\n"
 operator|+
 literal|"DEFINE "
 operator|+
-literal|"`DOWN` AS (`DOWN`.`PRICE`< (PREV(`DOWN`.`PRICE`, 1))), "
+literal|"`DOWN` AS (`DOWN`.`PRICE`< PREV(`DOWN`.`PRICE`, 1)), "
 operator|+
-literal|"`UP` AS (`UP`.`PRICE`> (PREV(`UP`.`PRICE`, 1)))"
+literal|"`UP` AS (`UP`.`PRICE`> PREV(`UP`.`PRICE`, 1))"
 operator|+
 literal|") AS `MR`"
 decl_stmt|;
@@ -22853,9 +22857,9 @@ literal|"PATTERN (^ ((`STRT` (`DOWN` +)) (`UP` +)) $)\n"
 operator|+
 literal|"DEFINE "
 operator|+
-literal|"`DOWN` AS (`DOWN`.`PRICE`< (PREV(`DOWN`.`PRICE`, 1))), "
+literal|"`DOWN` AS (`DOWN`.`PRICE`< PREV(`DOWN`.`PRICE`, 1)), "
 operator|+
-literal|"`UP` AS (`UP`.`PRICE`> (PREV(`UP`.`PRICE`, 1)))"
+literal|"`UP` AS (`UP`.`PRICE`> PREV(`UP`.`PRICE`, 1))"
 operator|+
 literal|") AS `MR`"
 decl_stmt|;
@@ -22909,9 +22913,9 @@ literal|"PATTERN (((`STRT` (`DOWN` *)) (`UP` ?)))\n"
 operator|+
 literal|"DEFINE "
 operator|+
-literal|"`DOWN` AS (`DOWN`.`PRICE`< (PREV(`DOWN`.`PRICE`, 1))), "
+literal|"`DOWN` AS (`DOWN`.`PRICE`< PREV(`DOWN`.`PRICE`, 1)), "
 operator|+
-literal|"`UP` AS (`UP`.`PRICE`> (PREV(`UP`.`PRICE`, 1)))"
+literal|"`UP` AS (`UP`.`PRICE`> PREV(`UP`.`PRICE`, 1))"
 operator|+
 literal|") AS `MR`"
 decl_stmt|;
@@ -22965,9 +22969,9 @@ literal|"PATTERN (((`STRT` ({- `DOWN` -})) (`UP` ?)))\n"
 operator|+
 literal|"DEFINE "
 operator|+
-literal|"`DOWN` AS (`DOWN`.`PRICE`< (PREV(`DOWN`.`PRICE`, 1))), "
+literal|"`DOWN` AS (`DOWN`.`PRICE`< PREV(`DOWN`.`PRICE`, 1)), "
 operator|+
-literal|"`UP` AS (`UP`.`PRICE`> (PREV(`UP`.`PRICE`, 1)))"
+literal|"`UP` AS (`UP`.`PRICE`> PREV(`UP`.`PRICE`, 1))"
 operator|+
 literal|") AS `MR`"
 decl_stmt|;
@@ -23021,9 +23025,9 @@ literal|"PATTERN (((`STRT` (`DOWN` { 2 })) (`UP` { 3, })))\n"
 operator|+
 literal|"DEFINE "
 operator|+
-literal|"`DOWN` AS (`DOWN`.`PRICE`< (PREV(`DOWN`.`PRICE`, 1))), "
+literal|"`DOWN` AS (`DOWN`.`PRICE`< PREV(`DOWN`.`PRICE`, 1)), "
 operator|+
-literal|"`UP` AS (`UP`.`PRICE`> (PREV(`UP`.`PRICE`, 1)))"
+literal|"`UP` AS (`UP`.`PRICE`> PREV(`UP`.`PRICE`, 1))"
 operator|+
 literal|") AS `MR`"
 decl_stmt|;
@@ -23077,9 +23081,9 @@ literal|"PATTERN (((`STRT` (`DOWN` { , 2 })) (`UP` { 3, 5 })))\n"
 operator|+
 literal|"DEFINE "
 operator|+
-literal|"`DOWN` AS (`DOWN`.`PRICE`< (PREV(`DOWN`.`PRICE`, 1))), "
+literal|"`DOWN` AS (`DOWN`.`PRICE`< PREV(`DOWN`.`PRICE`, 1)), "
 operator|+
-literal|"`UP` AS (`UP`.`PRICE`> (PREV(`UP`.`PRICE`, 1)))"
+literal|"`UP` AS (`UP`.`PRICE`> PREV(`UP`.`PRICE`, 1))"
 operator|+
 literal|") AS `MR`"
 decl_stmt|;
@@ -23133,9 +23137,9 @@ literal|"PATTERN (((`STRT` ({- (`DOWN` +) -})) ({- (`UP` *) -})))\n"
 operator|+
 literal|"DEFINE "
 operator|+
-literal|"`DOWN` AS (`DOWN`.`PRICE`< (PREV(`DOWN`.`PRICE`, 1))), "
+literal|"`DOWN` AS (`DOWN`.`PRICE`< PREV(`DOWN`.`PRICE`, 1)), "
 operator|+
-literal|"`UP` AS (`UP`.`PRICE`> (PREV(`UP`.`PRICE`, 1)))"
+literal|"`UP` AS (`UP`.`PRICE`> PREV(`UP`.`PRICE`, 1))"
 operator|+
 literal|") AS `MR`"
 decl_stmt|;
@@ -23193,11 +23197,11 @@ literal|"| ((`B` `C`) `A`)) | ((`C` `A`) `B`)) | ((`C` `B`) `A`)))\n"
 operator|+
 literal|"DEFINE "
 operator|+
-literal|"`A` AS (`A`.`PRICE`> (PREV(`A`.`PRICE`, 1))), "
+literal|"`A` AS (`A`.`PRICE`> PREV(`A`.`PRICE`, 1)), "
 operator|+
-literal|"`B` AS (`B`.`PRICE`< (PREV(`B`.`PRICE`, 1))), "
+literal|"`B` AS (`B`.`PRICE`< PREV(`B`.`PRICE`, 1)), "
 operator|+
-literal|"`C` AS (`C`.`PRICE`> (PREV(`C`.`PRICE`, 1)))"
+literal|"`C` AS (`C`.`PRICE`> PREV(`C`.`PRICE`, 1))"
 operator|+
 literal|") AS `MR`"
 decl_stmt|;
@@ -23247,7 +23251,7 @@ literal|"FROM `T` MATCH_RECOGNIZE(\n"
 operator|+
 literal|"PATTERN ((`a` `b c`))\n"
 operator|+
-literal|"DEFINE `A` AS (`A`.`PRICE`> (PREV(`A`.`PRICE`, 1))),"
+literal|"DEFINE `A` AS (`A`.`PRICE`> PREV(`A`.`PRICE`, 1)),"
 operator|+
 literal|" `b c` AS `b c`.`FOO`) AS `MR` (`C1`, `C2`)\n"
 operator|+
@@ -23303,9 +23307,9 @@ literal|"PATTERN (((`STRT` (`DOWN` +)) (`UP` +)))\n"
 operator|+
 literal|"DEFINE "
 operator|+
-literal|"`DOWN` AS (`DOWN`.`PRICE`< (PREV(`DOWN`.`PRICE`, 1))), "
+literal|"`DOWN` AS (`DOWN`.`PRICE`< PREV(`DOWN`.`PRICE`, 1)), "
 operator|+
-literal|"`UP` AS (`UP`.`PRICE`> (NEXT(`UP`.`PRICE`, 1)))"
+literal|"`UP` AS (`UP`.`PRICE`> NEXT(`UP`.`PRICE`, 1))"
 operator|+
 literal|") AS `MR`"
 decl_stmt|;
@@ -23357,11 +23361,9 @@ literal|"FROM `T` MATCH_RECOGNIZE(\n"
 operator|+
 literal|"PATTERN (((`STRT` (`DOWN` +)) (`UP` +)))\n"
 operator|+
-literal|"DEFINE "
+literal|"DEFINE `DOWN` AS (`DOWN`.`PRICE`< FIRST(`DOWN`.`PRICE`, 0)), "
 operator|+
-literal|"`DOWN` AS (`DOWN`.`PRICE`< (FIRST(`DOWN`.`PRICE`, 0))), "
-operator|+
-literal|"`UP` AS (`UP`.`PRICE`> (LAST(`UP`.`PRICE`, 0)))"
+literal|"`UP` AS (`UP`.`PRICE`> LAST(`UP`.`PRICE`, 0))"
 operator|+
 literal|") AS `MR`"
 decl_stmt|;
@@ -23415,9 +23417,9 @@ literal|"PATTERN (((`STRT` (`DOWN` +)) (`UP` +)))\n"
 operator|+
 literal|"DEFINE "
 operator|+
-literal|"`DOWN` AS (`DOWN`.`PRICE`< (PREV(`DOWN`.`PRICE`, 1))), "
+literal|"`DOWN` AS (`DOWN`.`PRICE`< PREV(`DOWN`.`PRICE`, 1)), "
 operator|+
-literal|"`UP` AS (`UP`.`PRICE`> (LAST((`UP`.`PRICE` + `UP`.`TAX`), 0)))"
+literal|"`UP` AS (`UP`.`PRICE`> LAST((`UP`.`PRICE` + `UP`.`TAX`), 0))"
 operator|+
 literal|") AS `MR`"
 decl_stmt|;
@@ -23469,11 +23471,413 @@ literal|"FROM `T` MATCH_RECOGNIZE(\n"
 operator|+
 literal|"PATTERN (((`STRT` (`DOWN` +)) (`UP` +)))\n"
 operator|+
-literal|"DEFINE "
+literal|"DEFINE `DOWN` AS (`DOWN`.`PRICE`< PREV(`DOWN`.`PRICE`, 1)), "
 operator|+
-literal|"`DOWN` AS (`DOWN`.`PRICE`< (PREV(`DOWN`.`PRICE`, 1))), "
+literal|"`UP` AS (`UP`.`PRICE`> PREV(LAST((`UP`.`PRICE` + `UP`.`TAX`), 0), 3))"
 operator|+
-literal|"`UP` AS (`UP`.`PRICE`> (PREV((LAST((`UP`.`PRICE` + `UP`.`TAX`), 0)), 3)))"
+literal|") AS `MR`"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testMatchRecognizeMeasures1
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"  from t match_recognize\n"
+operator|+
+literal|"  (\n"
+operator|+
+literal|"   measures STRT.ts as start_ts,"
+operator|+
+literal|"   LAST(DOWN.ts) as bottom_ts,"
+operator|+
+literal|"   LAST(up.ts) as end_ts"
+operator|+
+literal|"    pattern (strt down+ up+)\n"
+operator|+
+literal|"    define\n"
+operator|+
+literal|"      down as down.price< PREV(down.price),\n"
+operator|+
+literal|"      up as up.price> prev(up.price)\n"
+operator|+
+literal|"  ) mr"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM `T` MATCH_RECOGNIZE(\n"
+operator|+
+literal|"MEASURES `STRT`.`TS` AS `START_TS`, "
+operator|+
+literal|"LAST(`DOWN`.`TS`, 0) AS `BOTTOM_TS`, "
+operator|+
+literal|"LAST(`UP`.`TS`, 0) AS `END_TS`\n"
+operator|+
+literal|"PATTERN (((`STRT` (`DOWN` +)) (`UP` +)))\n"
+operator|+
+literal|"DEFINE `DOWN` AS (`DOWN`.`PRICE`< PREV(`DOWN`.`PRICE`, 1)), "
+operator|+
+literal|"`UP` AS (`UP`.`PRICE`> PREV(`UP`.`PRICE`, 1))"
+operator|+
+literal|") AS `MR`"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testMatchRecognizeMeasures2
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"  from t match_recognize\n"
+operator|+
+literal|"  (\n"
+operator|+
+literal|"   measures STRT.ts as start_ts,"
+operator|+
+literal|"  FINAL LAST(DOWN.ts) as bottom_ts,"
+operator|+
+literal|"   LAST(up.ts) as end_ts"
+operator|+
+literal|"    pattern (strt down+ up+)\n"
+operator|+
+literal|"    define\n"
+operator|+
+literal|"      down as down.price< PREV(down.price),\n"
+operator|+
+literal|"      up as up.price> prev(up.price)\n"
+operator|+
+literal|"  ) mr"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM `T` MATCH_RECOGNIZE(\n"
+operator|+
+literal|"MEASURES `STRT`.`TS` AS `START_TS`, "
+operator|+
+literal|"FINAL LAST(`DOWN`.`TS`, 0) AS `BOTTOM_TS`, "
+operator|+
+literal|"LAST(`UP`.`TS`, 0) AS `END_TS`\n"
+operator|+
+literal|"PATTERN (((`STRT` (`DOWN` +)) (`UP` +)))\n"
+operator|+
+literal|"DEFINE `DOWN` AS (`DOWN`.`PRICE`< PREV(`DOWN`.`PRICE`, 1)), "
+operator|+
+literal|"`UP` AS (`UP`.`PRICE`> PREV(`UP`.`PRICE`, 1))"
+operator|+
+literal|") AS `MR`"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testMatchRecognizeMeasures3
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"  from t match_recognize\n"
+operator|+
+literal|"  (\n"
+operator|+
+literal|"   measures STRT.ts as start_ts,"
+operator|+
+literal|"  RUNNING LAST(DOWN.ts) as bottom_ts,"
+operator|+
+literal|"   LAST(up.ts) as end_ts"
+operator|+
+literal|"    pattern (strt down+ up+)\n"
+operator|+
+literal|"    define\n"
+operator|+
+literal|"      down as down.price< PREV(down.price),\n"
+operator|+
+literal|"      up as up.price> prev(up.price)\n"
+operator|+
+literal|"  ) mr"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM `T` MATCH_RECOGNIZE(\n"
+operator|+
+literal|"MEASURES `STRT`.`TS` AS `START_TS`, "
+operator|+
+literal|"RUNNING LAST(`DOWN`.`TS`, 0) AS `BOTTOM_TS`, "
+operator|+
+literal|"LAST(`UP`.`TS`, 0) AS `END_TS`\n"
+operator|+
+literal|"PATTERN (((`STRT` (`DOWN` +)) (`UP` +)))\n"
+operator|+
+literal|"DEFINE `DOWN` AS (`DOWN`.`PRICE`< PREV(`DOWN`.`PRICE`, 1)), "
+operator|+
+literal|"`UP` AS (`UP`.`PRICE`> PREV(`UP`.`PRICE`, 1))"
+operator|+
+literal|") AS `MR`"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testMatchRecognizeMeasures4
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"  from t match_recognize\n"
+operator|+
+literal|"  (\n"
+operator|+
+literal|"   measures "
+operator|+
+literal|"  FINAL count(up.ts) as up_ts,"
+operator|+
+literal|"  FINAL count(ts) as total_ts,"
+operator|+
+literal|"  RUNNING count(ts) as cnt_ts,"
+operator|+
+literal|"  price - strt.price as price_dif"
+operator|+
+literal|"    pattern (strt down+ up+)\n"
+operator|+
+literal|"    define\n"
+operator|+
+literal|"      down as down.price< PREV(down.price),\n"
+operator|+
+literal|"      up as up.price> prev(up.price)\n"
+operator|+
+literal|"  ) mr"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM `T` MATCH_RECOGNIZE(\n"
+operator|+
+literal|"MEASURES FINAL COUNT(`UP`.`TS`) AS `UP_TS`, "
+operator|+
+literal|"FINAL COUNT(`TS`) AS `TOTAL_TS`, "
+operator|+
+literal|"RUNNING COUNT(`TS`) AS `CNT_TS`, "
+operator|+
+literal|"(`PRICE` - `STRT`.`PRICE`) AS `PRICE_DIF`\n"
+operator|+
+literal|"PATTERN (((`STRT` (`DOWN` +)) (`UP` +)))\n"
+operator|+
+literal|"DEFINE `DOWN` AS (`DOWN`.`PRICE`< PREV(`DOWN`.`PRICE`, 1)), "
+operator|+
+literal|"`UP` AS (`UP`.`PRICE`> PREV(`UP`.`PRICE`, 1))) AS `MR`"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testMatchRecognizeMeasures5
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"  from t match_recognize\n"
+operator|+
+literal|"  (\n"
+operator|+
+literal|"   measures "
+operator|+
+literal|"  FIRST(STRT.ts) as strt_ts,"
+operator|+
+literal|"  LAST(DOWN.ts) as down_ts,"
+operator|+
+literal|"  AVG(DOWN.ts) as avg_down_ts"
+operator|+
+literal|"    pattern (strt down+ up+)\n"
+operator|+
+literal|"    define\n"
+operator|+
+literal|"      down as down.price< PREV(down.price),\n"
+operator|+
+literal|"      up as up.price> prev(up.price)\n"
+operator|+
+literal|"  ) mr"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM `T` MATCH_RECOGNIZE(\n"
+operator|+
+literal|"MEASURES FIRST(`STRT`.`TS`, 0) AS `STRT_TS`, "
+operator|+
+literal|"LAST(`DOWN`.`TS`, 0) AS `DOWN_TS`, "
+operator|+
+literal|"AVG(`DOWN`.`TS`) AS `AVG_DOWN_TS`\n"
+operator|+
+literal|"PATTERN (((`STRT` (`DOWN` +)) (`UP` +)))\n"
+operator|+
+literal|"DEFINE `DOWN` AS (`DOWN`.`PRICE`< PREV(`DOWN`.`PRICE`, 1)), "
+operator|+
+literal|"`UP` AS (`UP`.`PRICE`> PREV(`UP`.`PRICE`, 1))"
+operator|+
+literal|") AS `MR`"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testMatchRecognizeMeasures6
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"  from t match_recognize\n"
+operator|+
+literal|"  (\n"
+operator|+
+literal|"   measures "
+operator|+
+literal|"  FIRST(STRT.ts) as strt_ts,"
+operator|+
+literal|"  LAST(DOWN.ts) as down_ts,"
+operator|+
+literal|"  FINAL SUM(DOWN.ts) as sum_down_ts"
+operator|+
+literal|"    pattern (strt down+ up+)\n"
+operator|+
+literal|"    define\n"
+operator|+
+literal|"      down as down.price< PREV(down.price),\n"
+operator|+
+literal|"      up as up.price> prev(up.price)\n"
+operator|+
+literal|"  ) mr"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM `T` MATCH_RECOGNIZE(\n"
+operator|+
+literal|"MEASURES FIRST(`STRT`.`TS`, 0) AS `STRT_TS`, "
+operator|+
+literal|"LAST(`DOWN`.`TS`, 0) AS `DOWN_TS`, "
+operator|+
+literal|"FINAL SUM(`DOWN`.`TS`) AS `SUM_DOWN_TS`\n"
+operator|+
+literal|"PATTERN (((`STRT` (`DOWN` +)) (`UP` +)))\n"
+operator|+
+literal|"DEFINE `DOWN` AS (`DOWN`.`PRICE`< PREV(`DOWN`.`PRICE`, 1)), "
+operator|+
+literal|"`UP` AS (`UP`.`PRICE`> PREV(`UP`.`PRICE`, 1))"
 operator|+
 literal|") AS `MR`"
 decl_stmt|;

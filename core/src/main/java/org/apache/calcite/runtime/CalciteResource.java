@@ -3275,6 +3275,21 @@ name|String
 name|call
 parameter_list|)
 function_decl|;
+annotation|@
+name|BaseMessage
+argument_list|(
+literal|"Null parameters in ''{0}''"
+argument_list|)
+name|ExInst
+argument_list|<
+name|SqlValidatorException
+argument_list|>
+name|PatternFunctionNullCheck
+parameter_list|(
+name|String
+name|call
+parameter_list|)
+function_decl|;
 block|}
 end_interface
 

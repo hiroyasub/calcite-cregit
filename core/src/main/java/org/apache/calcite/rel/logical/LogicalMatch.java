@@ -140,7 +140,7 @@ name|LogicalMatch
 extends|extends
 name|Match
 block|{
-comment|/**    * Creates a LogicalMatch.    *    * @param cluster cluster    * @param traitSet Trait set    * @param input Input relational expression    * @param pattern Regular Expression defining pattern variables    * @param strictStart Whether it is a strict start pattern    * @param strictEnd Whether it is a strict end pattern    * @param patternDefinitions Pattern definitions    * @param rowType Row type    */
+comment|/**    * Creates a LogicalMatch.    *    * @param cluster cluster    * @param traitSet Trait set    * @param input Input relational expression    * @param pattern Regular Expression defining pattern variables    * @param strictStart Whether it is a strict start pattern    * @param strictEnd Whether it is a strict end pattern    * @param patternDefinitions Pattern definitions    * @param measures Measure definitions    * @param rowType Row type    */
 specifier|public
 name|LogicalMatch
 parameter_list|(
@@ -170,6 +170,14 @@ name|RexNode
 argument_list|>
 name|patternDefinitions
 parameter_list|,
+name|Map
+argument_list|<
+name|String
+argument_list|,
+name|RexNode
+argument_list|>
+name|measures
+parameter_list|,
 name|RelDataType
 name|rowType
 parameter_list|)
@@ -189,6 +197,8 @@ argument_list|,
 name|strictEnd
 argument_list|,
 name|patternDefinitions
+argument_list|,
+name|measures
 argument_list|,
 name|rowType
 argument_list|)
@@ -219,6 +229,14 @@ argument_list|,
 name|RexNode
 argument_list|>
 name|patternDefinitions
+parameter_list|,
+name|Map
+argument_list|<
+name|String
+argument_list|,
+name|RexNode
+argument_list|>
+name|measures
 parameter_list|,
 name|RelDataType
 name|rowType
@@ -263,6 +281,8 @@ argument_list|,
 name|strictEnd
 argument_list|,
 name|patternDefinitions
+argument_list|,
+name|measures
 argument_list|,
 name|rowType
 argument_list|)
@@ -295,6 +315,14 @@ name|RexNode
 argument_list|>
 name|patternDefinitions
 parameter_list|,
+name|Map
+argument_list|<
+name|String
+argument_list|,
+name|RexNode
+argument_list|>
+name|measures
+parameter_list|,
 name|RelDataType
 name|rowType
 parameter_list|)
@@ -331,6 +359,8 @@ argument_list|,
 name|strictEnd
 argument_list|,
 name|patternDefinitions
+argument_list|,
+name|measures
 argument_list|,
 name|rowType
 argument_list|)

@@ -2532,9 +2532,13 @@ literal|"PATTERN (\"STRT\" \"DOWN\" + \"UP\" +)\n"
 operator|+
 literal|"DEFINE "
 operator|+
-literal|"\"DOWN\" AS PREV(\"net_weight\", 0)< PREV(\"net_weight\", 1), "
+literal|"\"DOWN\" AS PREV(\"DOWN\".\"net_weight\", 0)< "
 operator|+
-literal|"\"UP\" AS PREV(\"net_weight\", 0)> PREV(\"net_weight\", 1))"
+literal|"PREV(\"DOWN\".\"net_weight\", 1), "
+operator|+
+literal|"\"UP\" AS PREV(\"UP\".\"net_weight\", 0)> "
+operator|+
+literal|"PREV(\"UP\".\"net_weight\", 1))"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -2588,9 +2592,13 @@ literal|"PATTERN (\"STRT\" \"DOWN\" + \"UP\" + $)\n"
 operator|+
 literal|"DEFINE "
 operator|+
-literal|"\"DOWN\" AS PREV(\"net_weight\", 0)< PREV(\"net_weight\", 1), "
+literal|"\"DOWN\" AS PREV(\"DOWN\".\"net_weight\", 0)< "
 operator|+
-literal|"\"UP\" AS PREV(\"net_weight\", 0)> PREV(\"net_weight\", 1))"
+literal|"PREV(\"DOWN\".\"net_weight\", 1), "
+operator|+
+literal|"\"UP\" AS PREV(\"UP\".\"net_weight\", 0)> "
+operator|+
+literal|"PREV(\"UP\".\"net_weight\", 1))"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -2644,9 +2652,13 @@ literal|"PATTERN (^ \"STRT\" \"DOWN\" + \"UP\" +)\n"
 operator|+
 literal|"DEFINE "
 operator|+
-literal|"\"DOWN\" AS PREV(\"net_weight\", 0)< PREV(\"net_weight\", 1), "
+literal|"\"DOWN\" AS PREV(\"DOWN\".\"net_weight\", 0)< "
 operator|+
-literal|"\"UP\" AS PREV(\"net_weight\", 0)> PREV(\"net_weight\", 1))"
+literal|"PREV(\"DOWN\".\"net_weight\", 1), "
+operator|+
+literal|"\"UP\" AS PREV(\"UP\".\"net_weight\", 0)> "
+operator|+
+literal|"PREV(\"UP\".\"net_weight\", 1))"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -2700,9 +2712,13 @@ literal|"PATTERN (^ \"STRT\" \"DOWN\" + \"UP\" + $)\n"
 operator|+
 literal|"DEFINE "
 operator|+
-literal|"\"DOWN\" AS PREV(\"net_weight\", 0)< PREV(\"net_weight\", 1), "
+literal|"\"DOWN\" AS PREV(\"DOWN\".\"net_weight\", 0)< "
 operator|+
-literal|"\"UP\" AS PREV(\"net_weight\", 0)> PREV(\"net_weight\", 1))"
+literal|"PREV(\"DOWN\".\"net_weight\", 1), "
+operator|+
+literal|"\"UP\" AS PREV(\"UP\".\"net_weight\", 0)> "
+operator|+
+literal|"PREV(\"UP\".\"net_weight\", 1))"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -2756,9 +2772,13 @@ literal|"PATTERN (\"STRT\" \"DOWN\" * \"UP\" ?)\n"
 operator|+
 literal|"DEFINE "
 operator|+
-literal|"\"DOWN\" AS PREV(\"net_weight\", 0)< PREV(\"net_weight\", 1), "
+literal|"\"DOWN\" AS PREV(\"DOWN\".\"net_weight\", 0)< "
 operator|+
-literal|"\"UP\" AS PREV(\"net_weight\", 0)> PREV(\"net_weight\", 1))"
+literal|"PREV(\"DOWN\".\"net_weight\", 1), "
+operator|+
+literal|"\"UP\" AS PREV(\"UP\".\"net_weight\", 0)> "
+operator|+
+literal|"PREV(\"UP\".\"net_weight\", 1))"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -2812,9 +2832,13 @@ literal|"PATTERN (\"STRT\" {- \"DOWN\" -} \"UP\" ?)\n"
 operator|+
 literal|"DEFINE "
 operator|+
-literal|"\"DOWN\" AS PREV(\"net_weight\", 0)< PREV(\"net_weight\", 1), "
+literal|"\"DOWN\" AS PREV(\"DOWN\".\"net_weight\", 0)< "
 operator|+
-literal|"\"UP\" AS PREV(\"net_weight\", 0)> PREV(\"net_weight\", 1))"
+literal|"PREV(\"DOWN\".\"net_weight\", 1), "
+operator|+
+literal|"\"UP\" AS PREV(\"UP\".\"net_weight\", 0)> "
+operator|+
+literal|"PREV(\"UP\".\"net_weight\", 1))"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -2868,9 +2892,13 @@ literal|"PATTERN (\"STRT\" \"DOWN\" { 2 } \"UP\" { 3, })\n"
 operator|+
 literal|"DEFINE "
 operator|+
-literal|"\"DOWN\" AS PREV(\"net_weight\", 0)< PREV(\"net_weight\", 1), "
+literal|"\"DOWN\" AS PREV(\"DOWN\".\"net_weight\", 0)< "
 operator|+
-literal|"\"UP\" AS PREV(\"net_weight\", 0)> PREV(\"net_weight\", 1))"
+literal|"PREV(\"DOWN\".\"net_weight\", 1), "
+operator|+
+literal|"\"UP\" AS PREV(\"UP\".\"net_weight\", 0)> "
+operator|+
+literal|"PREV(\"UP\".\"net_weight\", 1))"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -2924,9 +2952,13 @@ literal|"PATTERN (\"STRT\" \"DOWN\" { , 2 } \"UP\" { 3, 5 })\n"
 operator|+
 literal|"DEFINE "
 operator|+
-literal|"\"DOWN\" AS PREV(\"net_weight\", 0)< PREV(\"net_weight\", 1), "
+literal|"\"DOWN\" AS PREV(\"DOWN\".\"net_weight\", 0)< "
 operator|+
-literal|"\"UP\" AS PREV(\"net_weight\", 0)> PREV(\"net_weight\", 1))"
+literal|"PREV(\"DOWN\".\"net_weight\", 1), "
+operator|+
+literal|"\"UP\" AS PREV(\"UP\".\"net_weight\", 0)> "
+operator|+
+literal|"PREV(\"UP\".\"net_weight\", 1))"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -2980,9 +3012,13 @@ literal|"PATTERN (\"STRT\" {- \"DOWN\" + -} {- \"UP\" * -})\n"
 operator|+
 literal|"DEFINE "
 operator|+
-literal|"\"DOWN\" AS PREV(\"net_weight\", 0)< PREV(\"net_weight\", 1), "
+literal|"\"DOWN\" AS PREV(\"DOWN\".\"net_weight\", 0)< "
 operator|+
-literal|"\"UP\" AS PREV(\"net_weight\", 0)> PREV(\"net_weight\", 1))"
+literal|"PREV(\"DOWN\".\"net_weight\", 1), "
+operator|+
+literal|"\"UP\" AS PREV(\"UP\".\"net_weight\", 0)> "
+operator|+
+literal|"PREV(\"UP\".\"net_weight\", 1))"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -3034,19 +3070,19 @@ literal|"FROM (SELECT *\n"
 operator|+
 literal|"FROM \"foodmart\".\"product\") MATCH_RECOGNIZE(\n"
 operator|+
-literal|"PATTERN (\"A\" \"B\" \"C\" | \"A\" \"C\" \"B\" "
+literal|"PATTERN "
 operator|+
-literal|"| \"B\" \"A\" \"C\" | \"B\" \"C\" \"A\" "
+literal|"(\"A\" \"B\" \"C\" | \"A\" \"C\" \"B\" | \"B\" \"A\" \"C\" "
 operator|+
-literal|"| \"C\" \"A\" \"B\" | \"C\" \"B\" \"A\")\n"
+literal|"| \"B\" \"C\" \"A\" | \"C\" \"A\" \"B\" | \"C\" \"B\" \"A\")\n"
 operator|+
 literal|"DEFINE "
 operator|+
-literal|"\"A\" AS PREV(\"net_weight\", 0)< PREV(\"net_weight\", 1), "
+literal|"\"A\" AS PREV(\"A\".\"net_weight\", 0)< PREV(\"A\".\"net_weight\", 1), "
 operator|+
-literal|"\"B\" AS PREV(\"net_weight\", 0)> PREV(\"net_weight\", 1), "
+literal|"\"B\" AS PREV(\"B\".\"net_weight\", 0)> PREV(\"B\".\"net_weight\", 1), "
 operator|+
-literal|"\"C\" AS PREV(\"net_weight\", 0)< PREV(\"net_weight\", 1))"
+literal|"\"C\" AS PREV(\"C\".\"net_weight\", 0)< PREV(\"C\".\"net_weight\", 1))"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -3100,9 +3136,13 @@ literal|"PATTERN (\"STRT\" \"DOWN\" + \"UP\" +)\n"
 operator|+
 literal|"DEFINE "
 operator|+
-literal|"\"DOWN\" AS PREV(\"net_weight\", 0)< PREV(\"net_weight\", 1), "
+literal|"\"DOWN\" AS PREV(\"DOWN\".\"net_weight\", 0)< "
 operator|+
-literal|"\"UP\" AS PREV(\"net_weight\", 0)> PREV(\"net_weight\", 1))"
+literal|"PREV(\"DOWN\".\"net_weight\", 1), "
+operator|+
+literal|"\"UP\" AS PREV(\"UP\".\"net_weight\", 0)> "
+operator|+
+literal|"PREV(\"UP\".\"net_weight\", 1))"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -3156,9 +3196,13 @@ literal|"PATTERN (\"STRT\" \"DOWN\" + \"UP\" +)\n"
 operator|+
 literal|"DEFINE "
 operator|+
-literal|"\"DOWN\" AS PREV(\"net_weight\", 0)< PREV(\"net_weight\", 1), "
+literal|"\"DOWN\" AS PREV(\"DOWN\".\"net_weight\", 0)< "
 operator|+
-literal|"\"UP\" AS PREV(\"net_weight\", 0)> PREV(\"net_weight\", 1))\n"
+literal|"PREV(\"DOWN\".\"net_weight\", 1), "
+operator|+
+literal|"\"UP\" AS PREV(\"UP\".\"net_weight\", 0)> "
+operator|+
+literal|"PREV(\"UP\".\"net_weight\", 1))\n"
 operator|+
 literal|"ORDER BY \"net_weight\""
 decl_stmt|;
@@ -3248,9 +3292,13 @@ literal|"PATTERN (\"STRT\" \"DOWN\" + \"UP\" +)\n"
 operator|+
 literal|"DEFINE "
 operator|+
-literal|"\"DOWN\" AS PREV(\"net_weight\", 0)< PREV(\"net_weight\", 1), "
+literal|"\"DOWN\" AS PREV(\"DOWN\".\"net_weight\", 0)< "
 operator|+
-literal|"\"UP\" AS PREV(\"net_weight\", 0)> PREV(\"net_weight\", 1))\n"
+literal|"PREV(\"DOWN\".\"net_weight\", 1), "
+operator|+
+literal|"\"UP\" AS PREV(\"UP\".\"net_weight\", 0)> "
+operator|+
+literal|"PREV(\"UP\".\"net_weight\", 1))\n"
 operator|+
 literal|"ORDER BY \"net_weight\""
 decl_stmt|;
@@ -3306,9 +3354,13 @@ literal|"PATTERN (\"STRT\" \"DOWN\" + \"UP\" +)\n"
 operator|+
 literal|"DEFINE "
 operator|+
-literal|"\"DOWN\" AS PREV(\"net_weight\", 0)< PREV(\"net_weight\", 1), "
+literal|"\"DOWN\" AS PREV(\"DOWN\".\"net_weight\", 0)"
 operator|+
-literal|"\"UP\" AS PREV(\"net_weight\", 0)> NEXT(PREV(\"net_weight\", 0), 1))"
+literal|"< PREV(\"DOWN\".\"net_weight\", 1), "
+operator|+
+literal|"\"UP\" AS PREV(\"UP\".\"net_weight\", 0)"
+operator|+
+literal|"> NEXT(PREV(\"UP\".\"net_weight\", 0), 1))"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -3362,9 +3414,13 @@ literal|"PATTERN (\"STRT\" \"DOWN\" + \"UP\" +)\n"
 operator|+
 literal|"DEFINE "
 operator|+
-literal|"\"DOWN\" AS PREV(\"net_weight\", 0)< FIRST(\"net_weight\", 0), "
+literal|"\"DOWN\" AS PREV(\"DOWN\".\"net_weight\", 0) "
 operator|+
-literal|"\"UP\" AS PREV(\"net_weight\", 0)> LAST(\"net_weight\", 0))"
+literal|"< FIRST(\"DOWN\".\"net_weight\", 0), "
+operator|+
+literal|"\"UP\" AS PREV(\"UP\".\"net_weight\", 0) "
+operator|+
+literal|"> LAST(\"UP\".\"net_weight\", 0))"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -3418,11 +3474,13 @@ literal|"PATTERN (\"STRT\" \"DOWN\" + \"UP\" +)\n"
 operator|+
 literal|"DEFINE "
 operator|+
-literal|"\"DOWN\" AS PREV(\"net_weight\", 0)< PREV(\"net_weight\", 1), "
+literal|"\"DOWN\" AS PREV(\"DOWN\".\"net_weight\", 0)< "
 operator|+
-literal|"\"UP\" AS PREV(\"net_weight\", 0)> "
+literal|"PREV(\"DOWN\".\"net_weight\", 1), "
 operator|+
-literal|"LAST(\"net_weight\", 0) + LAST(\"gross_weight\", 0))"
+literal|"\"UP\" AS PREV(\"UP\".\"net_weight\", 0)> "
+operator|+
+literal|"LAST(\"UP\".\"net_weight\", 0) + LAST(\"UP\".\"gross_weight\", 0))"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -3478,11 +3536,557 @@ literal|"PATTERN (\"STRT\" \"DOWN\" + \"UP\" +)\n"
 operator|+
 literal|"DEFINE "
 operator|+
-literal|"\"DOWN\" AS PREV(\"net_weight\", 0)< PREV(\"net_weight\", 1), "
+literal|"\"DOWN\" AS PREV(\"DOWN\".\"net_weight\", 0)< "
 operator|+
-literal|"\"UP\" AS PREV(\"net_weight\", 0)> "
+literal|"PREV(\"DOWN\".\"net_weight\", 1), "
 operator|+
-literal|"LAST(\"net_weight\", 0) + LAST(\"gross_weight\", 0))"
+literal|"\"UP\" AS PREV(\"UP\".\"net_weight\", 0)> "
+operator|+
+literal|"LAST(\"UP\".\"net_weight\", 0) + LAST(\"UP\".\"gross_weight\", 0))"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testMatchRecognizeMeasures1
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"  from \"product\" match_recognize\n"
+operator|+
+literal|"  (\n"
+operator|+
+literal|"   measures STRT.\"net_weight\" as start_nw,"
+operator|+
+literal|"   LAST(DOWN.\"net_weight\") as bottom_nw,"
+operator|+
+literal|"   LAST(up.\"net_weight\") as end_nw"
+operator|+
+literal|"    pattern (strt down+ up+)\n"
+operator|+
+literal|"    define\n"
+operator|+
+literal|"      down as down.\"net_weight\"< PREV(down.\"net_weight\"),\n"
+operator|+
+literal|"      up as up.\"net_weight\"> prev(up.\"net_weight\")\n"
+operator|+
+literal|"  ) mr"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM (SELECT *\n"
+operator|+
+literal|"FROM \"foodmart\".\"product\") "
+operator|+
+literal|"MATCH_RECOGNIZE(\n"
+operator|+
+literal|"MEASURES "
+operator|+
+literal|"FINAL \"STRT\".\"net_weight\" AS \"START_NW\", "
+operator|+
+literal|"FINAL LAST(\"DOWN\".\"net_weight\", 0) AS \"BOTTOM_NW\", "
+operator|+
+literal|"FINAL LAST(\"UP\".\"net_weight\", 0) AS \"END_NW\"\n"
+operator|+
+literal|"PATTERN (\"STRT\" \"DOWN\" + \"UP\" +)\n"
+operator|+
+literal|"DEFINE "
+operator|+
+literal|"\"DOWN\" AS PREV(\"DOWN\".\"net_weight\", 0)< "
+operator|+
+literal|"PREV(\"DOWN\".\"net_weight\", 1), "
+operator|+
+literal|"\"UP\" AS PREV(\"UP\".\"net_weight\", 0)> "
+operator|+
+literal|"PREV(\"UP\".\"net_weight\", 1))"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testMatchRecognizeMeasures2
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"  from \"product\" match_recognize\n"
+operator|+
+literal|"  (\n"
+operator|+
+literal|"   measures STRT.\"net_weight\" as start_nw,"
+operator|+
+literal|"   FINAL LAST(DOWN.\"net_weight\") as bottom_nw,"
+operator|+
+literal|"   LAST(up.\"net_weight\") as end_nw"
+operator|+
+literal|"    pattern (strt down+ up+)\n"
+operator|+
+literal|"    define\n"
+operator|+
+literal|"      down as down.\"net_weight\"< PREV(down.\"net_weight\"),\n"
+operator|+
+literal|"      up as up.\"net_weight\"> prev(up.\"net_weight\")\n"
+operator|+
+literal|"  ) mr"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM (SELECT *\n"
+operator|+
+literal|"FROM \"foodmart\".\"product\") "
+operator|+
+literal|"MATCH_RECOGNIZE(\n"
+operator|+
+literal|"MEASURES "
+operator|+
+literal|"FINAL \"STRT\".\"net_weight\" AS \"START_NW\", "
+operator|+
+literal|"FINAL LAST(\"DOWN\".\"net_weight\", 0) AS \"BOTTOM_NW\", "
+operator|+
+literal|"FINAL LAST(\"UP\".\"net_weight\", 0) AS \"END_NW\"\n"
+operator|+
+literal|"PATTERN (\"STRT\" \"DOWN\" + \"UP\" +)\n"
+operator|+
+literal|"DEFINE "
+operator|+
+literal|"\"DOWN\" AS PREV(\"DOWN\".\"net_weight\", 0)< "
+operator|+
+literal|"PREV(\"DOWN\".\"net_weight\", 1), "
+operator|+
+literal|"\"UP\" AS PREV(\"UP\".\"net_weight\", 0)> "
+operator|+
+literal|"PREV(\"UP\".\"net_weight\", 1))"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testMatchRecognizeMeasures3
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"  from \"product\" match_recognize\n"
+operator|+
+literal|"  (\n"
+operator|+
+literal|"   measures STRT.\"net_weight\" as start_nw,"
+operator|+
+literal|"   RUNNING LAST(DOWN.\"net_weight\") as bottom_nw,"
+operator|+
+literal|"   LAST(up.\"net_weight\") as end_nw"
+operator|+
+literal|"    pattern (strt down+ up+)\n"
+operator|+
+literal|"    define\n"
+operator|+
+literal|"      down as down.\"net_weight\"< PREV(down.\"net_weight\"),\n"
+operator|+
+literal|"      up as up.\"net_weight\"> prev(up.\"net_weight\")\n"
+operator|+
+literal|"  ) mr"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM (SELECT *\n"
+operator|+
+literal|"FROM \"foodmart\".\"product\") "
+operator|+
+literal|"MATCH_RECOGNIZE(\n"
+operator|+
+literal|"MEASURES "
+operator|+
+literal|"FINAL \"STRT\".\"net_weight\" AS \"START_NW\", "
+operator|+
+literal|"FINAL (RUNNING LAST(\"DOWN\".\"net_weight\", 0)) AS \"BOTTOM_NW\", "
+operator|+
+literal|"FINAL LAST(\"UP\".\"net_weight\", 0) AS \"END_NW\"\n"
+operator|+
+literal|"PATTERN (\"STRT\" \"DOWN\" + \"UP\" +)\n"
+operator|+
+literal|"DEFINE "
+operator|+
+literal|"\"DOWN\" AS PREV(\"DOWN\".\"net_weight\", 0)< "
+operator|+
+literal|"PREV(\"DOWN\".\"net_weight\", 1), "
+operator|+
+literal|"\"UP\" AS PREV(\"UP\".\"net_weight\", 0)> "
+operator|+
+literal|"PREV(\"UP\".\"net_weight\", 1))"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testMatchRecognizeMeasures4
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"  from \"product\" match_recognize\n"
+operator|+
+literal|"  (\n"
+operator|+
+literal|"   measures STRT.\"net_weight\" as start_nw,"
+operator|+
+literal|"   FINAL COUNT(up.\"net_weight\") as up_cnt,"
+operator|+
+literal|"   FINAL COUNT(\"net_weight\") as down_cnt,"
+operator|+
+literal|"   RUNNING COUNT(\"net_weight\") as running_cnt"
+operator|+
+literal|"    pattern (strt down+ up+)\n"
+operator|+
+literal|"    define\n"
+operator|+
+literal|"      down as down.\"net_weight\"< PREV(down.\"net_weight\"),\n"
+operator|+
+literal|"      up as up.\"net_weight\"> prev(up.\"net_weight\")\n"
+operator|+
+literal|"  ) mr"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM (SELECT *\n"
+operator|+
+literal|"FROM \"foodmart\".\"product\") "
+operator|+
+literal|"MATCH_RECOGNIZE(\n"
+operator|+
+literal|"MEASURES FINAL \"STRT\".\"net_weight\" AS \"START_NW\", "
+operator|+
+literal|"FINAL COUNT(\"UP\".\"net_weight\") AS \"UP_CNT\", "
+operator|+
+literal|"FINAL COUNT(\"*\".\"net_weight\") AS \"DOWN_CNT\", "
+operator|+
+literal|"FINAL (RUNNING COUNT(\"*\".\"net_weight\")) AS \"RUNNING_CNT\"\n"
+operator|+
+literal|"PATTERN (\"STRT\" \"DOWN\" + \"UP\" +)\n"
+operator|+
+literal|"DEFINE "
+operator|+
+literal|"\"DOWN\" AS PREV(\"DOWN\".\"net_weight\", 0)< "
+operator|+
+literal|"PREV(\"DOWN\".\"net_weight\", 1), "
+operator|+
+literal|"\"UP\" AS PREV(\"UP\".\"net_weight\", 0)> "
+operator|+
+literal|"PREV(\"UP\".\"net_weight\", 1))"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testMatchRecognizeMeasures5
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"  from \"product\" match_recognize\n"
+operator|+
+literal|"  (\n"
+operator|+
+literal|"   measures "
+operator|+
+literal|"   FIRST(STRT.\"net_weight\") as start_nw,"
+operator|+
+literal|"   LAST(UP.\"net_weight\") as up_cnt,"
+operator|+
+literal|"   AVG(DOWN.\"net_weight\") as down_cnt"
+operator|+
+literal|"    pattern (strt down+ up+)\n"
+operator|+
+literal|"    define\n"
+operator|+
+literal|"      down as down.\"net_weight\"< PREV(down.\"net_weight\"),\n"
+operator|+
+literal|"      up as up.\"net_weight\"> prev(up.\"net_weight\")\n"
+operator|+
+literal|"  ) mr"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM (SELECT *\n"
+operator|+
+literal|"FROM \"foodmart\".\"product\") "
+operator|+
+literal|"MATCH_RECOGNIZE(\n"
+operator|+
+literal|"MEASURES "
+operator|+
+literal|"FINAL FIRST(\"STRT\".\"net_weight\", 0) AS \"START_NW\", "
+operator|+
+literal|"FINAL LAST(\"UP\".\"net_weight\", 0) AS \"UP_CNT\", "
+operator|+
+literal|"FINAL (SUM(\"DOWN\".\"net_weight\") / COUNT(\"DOWN\".\"net_weight\")) "
+operator|+
+literal|"AS \"DOWN_CNT\"\n"
+operator|+
+literal|"PATTERN (\"STRT\" \"DOWN\" + \"UP\" +)\n"
+operator|+
+literal|"DEFINE "
+operator|+
+literal|"\"DOWN\" AS PREV(\"DOWN\".\"net_weight\", 0)< "
+operator|+
+literal|"PREV(\"DOWN\".\"net_weight\", 1), "
+operator|+
+literal|"\"UP\" AS PREV(\"UP\".\"net_weight\", 0)> "
+operator|+
+literal|"PREV(\"UP\".\"net_weight\", 1))"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testMatchRecognizeMeasures6
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"  from \"product\" match_recognize\n"
+operator|+
+literal|"  (\n"
+operator|+
+literal|"   measures "
+operator|+
+literal|"   FIRST(STRT.\"net_weight\") as start_nw,"
+operator|+
+literal|"   LAST(DOWN.\"net_weight\") as up_cnt,"
+operator|+
+literal|"   FINAL SUM(DOWN.\"net_weight\") as down_cnt"
+operator|+
+literal|"    pattern (strt down+ up+)\n"
+operator|+
+literal|"    define\n"
+operator|+
+literal|"      down as down.\"net_weight\"< PREV(down.\"net_weight\"),\n"
+operator|+
+literal|"      up as up.\"net_weight\"> prev(up.\"net_weight\")\n"
+operator|+
+literal|"  ) mr"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM (SELECT *\n"
+operator|+
+literal|"FROM \"foodmart\".\"product\") MATCH_RECOGNIZE(\n"
+operator|+
+literal|"MEASURES "
+operator|+
+literal|"FINAL FIRST(\"STRT\".\"net_weight\", 0) AS \"START_NW\", "
+operator|+
+literal|"FINAL LAST(\"DOWN\".\"net_weight\", 0) AS \"UP_CNT\", "
+operator|+
+literal|"FINAL SUM(\"DOWN\".\"net_weight\") AS \"DOWN_CNT\"\n"
+operator|+
+literal|"PATTERN "
+operator|+
+literal|"(\"STRT\" \"DOWN\" + \"UP\" +)\n"
+operator|+
+literal|"DEFINE "
+operator|+
+literal|"\"DOWN\" AS PREV(\"DOWN\".\"net_weight\", 0)< "
+operator|+
+literal|"PREV(\"DOWN\".\"net_weight\", 1), "
+operator|+
+literal|"\"UP\" AS PREV(\"UP\".\"net_weight\", 0)> "
+operator|+
+literal|"PREV(\"UP\".\"net_weight\", 1))"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testMatchRecognizeMeasures7
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"  from \"product\" match_recognize\n"
+operator|+
+literal|"  (\n"
+operator|+
+literal|"   measures "
+operator|+
+literal|"   FIRST(STRT.\"net_weight\") as start_nw,"
+operator|+
+literal|"   LAST(DOWN.\"net_weight\") as up_cnt,"
+operator|+
+literal|"   FINAL SUM(DOWN.\"net_weight\") as down_cnt"
+operator|+
+literal|"    pattern (strt down+ up+)\n"
+operator|+
+literal|"    define\n"
+operator|+
+literal|"      down as down.\"net_weight\"< PREV(down.\"net_weight\"),\n"
+operator|+
+literal|"      up as up.\"net_weight\"> prev(up.\"net_weight\")\n"
+operator|+
+literal|"  ) mr order by start_nw, up_cnt"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM (SELECT *\n"
+operator|+
+literal|"FROM \"foodmart\".\"product\") MATCH_RECOGNIZE(\n"
+operator|+
+literal|"MEASURES "
+operator|+
+literal|"FINAL FIRST(\"STRT\".\"net_weight\", 0) AS \"START_NW\", "
+operator|+
+literal|"FINAL LAST(\"DOWN\".\"net_weight\", 0) AS \"UP_CNT\", "
+operator|+
+literal|"FINAL SUM(\"DOWN\".\"net_weight\") AS \"DOWN_CNT\"\n"
+operator|+
+literal|"PATTERN "
+operator|+
+literal|"(\"STRT\" \"DOWN\" + \"UP\" +)\n"
+operator|+
+literal|"DEFINE "
+operator|+
+literal|"\"DOWN\" AS PREV(\"DOWN\".\"net_weight\", 0)< "
+operator|+
+literal|"PREV(\"DOWN\".\"net_weight\", 1), "
+operator|+
+literal|"\"UP\" AS PREV(\"UP\".\"net_weight\", 0)> "
+operator|+
+literal|"PREV(\"UP\".\"net_weight\", 1))\n"
+operator|+
+literal|"ORDER BY \"START_NW\", \"UP_CNT\""
 decl_stmt|;
 name|sql
 argument_list|(
