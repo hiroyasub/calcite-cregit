@@ -430,7 +430,9 @@ literal|"        \"operands\": [\n"
 operator|+
 literal|"          {\n"
 operator|+
-literal|"            \"input\": 1\n"
+literal|"            \"input\": 1,\n"
+operator|+
+literal|"            \"name\": \"$1\"\n"
 operator|+
 literal|"          },\n"
 operator|+
