@@ -1881,6 +1881,14 @@ name|r
 operator|.
 name|getTraitSet
 argument_list|()
+operator|.
+name|replace
+argument_list|(
+name|query
+operator|.
+name|getConvention
+argument_list|()
+argument_list|)
 argument_list|,
 name|query
 operator|.

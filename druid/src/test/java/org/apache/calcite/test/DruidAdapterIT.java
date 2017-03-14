@@ -4241,9 +4241,25 @@ literal|"  BindableSort(sort0=[$1], dir0=[DESC], fetch=[2])\n"
 operator|+
 literal|"    BindableProject(state_province=[$0], CDC=[FLOOR($1)])\n"
 operator|+
-literal|"      BindableAggregate(group=[{1}], agg#0=[COUNT($0)])\n"
+literal|"      DruidQuery(table=[[foodmart, foodmart]], intervals=[[1900-01-09T00:00:00.000/2992-01-10T00:00:00.000]], groups=[{30}], aggs=[[COUNT(DISTINCT $29)]])\n"
+decl_stmt|;
+specifier|final
+name|String
+name|druidQuery
+init|=
+literal|"{\"queryType\":\"groupBy\","
 operator|+
-literal|"        DruidQuery(table=[[foodmart, foodmart]], intervals=[[1900-01-09T00:00:00.000/2992-01-10T00:00:00.000]], groups=[{29, 30}], aggs=[[]])"
+literal|"\"dataSource\":\"foodmart\","
+operator|+
+literal|"\"granularity\":\"all\","
+operator|+
+literal|"\"dimensions\":[\"state_province\"],"
+operator|+
+literal|"\"limitSpec\":{\"type\":\"default\"},"
+operator|+
+literal|"\"aggregations\":[{\"type\":\"cardinality\",\"name\":\"$f1\",\"fieldNames\":[\"city\"]}],"
+operator|+
+literal|"\"intervals\":[\"1900-01-09T00:00:00.000/2992-01-10T00:00:00.000\"]}"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -4253,6 +4269,14 @@ operator|.
 name|explainContains
 argument_list|(
 name|explain
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|druidChecker
+argument_list|(
+name|druidQuery
+argument_list|)
 argument_list|)
 operator|.
 name|returnsUnordered
