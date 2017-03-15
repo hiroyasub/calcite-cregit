@@ -715,11 +715,11 @@ decl_stmt|;
 specifier|public
 specifier|static
 specifier|final
-name|DruidProjectAggregateRule
-name|PROJECT_AGGREGATE
+name|DruidAggregateProjectRule
+name|AGGREGATE_PROJECT
 init|=
 operator|new
-name|DruidProjectAggregateRule
+name|DruidAggregateProjectRule
 argument_list|()
 decl_stmt|;
 specifier|public
@@ -735,28 +735,28 @@ decl_stmt|;
 specifier|public
 specifier|static
 specifier|final
-name|DruidProjectSortRule
-name|PROJECT_SORT
+name|DruidSortProjectTransposeRule
+name|SORT_PROJECT_TRANSPOSE
 init|=
 operator|new
-name|DruidProjectSortRule
+name|DruidSortProjectTransposeRule
 argument_list|()
 decl_stmt|;
 specifier|public
 specifier|static
 specifier|final
-name|DruidSortProjectRule
-name|SORT_PROJECT
+name|DruidProjectSortTransposeRule
+name|PROJECT_SORT_TRANSPOSE
 init|=
 operator|new
-name|DruidSortProjectRule
+name|DruidProjectSortTransposeRule
 argument_list|()
 decl_stmt|;
 specifier|public
 specifier|static
 specifier|final
 name|DruidProjectFilterTransposeRule
-name|PROJECT_FILTER_TRANSPOSE_RULE
+name|PROJECT_FILTER_TRANSPOSE
 init|=
 operator|new
 name|DruidProjectFilterTransposeRule
@@ -766,7 +766,7 @@ specifier|public
 specifier|static
 specifier|final
 name|DruidFilterProjectTransposeRule
-name|FILTER_PROJECT_TRANSPOSE_RULE
+name|FILTER_PROJECT_TRANSPOSE
 init|=
 operator|new
 name|DruidFilterProjectTransposeRule
@@ -776,7 +776,7 @@ specifier|public
 specifier|static
 specifier|final
 name|DruidAggregateFilterTransposeRule
-name|AGGREGATE_FILTER_TRANSPOSE_RULE
+name|AGGREGATE_FILTER_TRANSPOSE
 init|=
 operator|new
 name|DruidAggregateFilterTransposeRule
@@ -786,7 +786,7 @@ specifier|public
 specifier|static
 specifier|final
 name|DruidFilterAggregateTransposeRule
-name|FILTER_AGGREGATE_TRANSPOSE_RULE
+name|FILTER_AGGREGATE_TRANSPOSE
 init|=
 operator|new
 name|DruidFilterAggregateTransposeRule
@@ -807,27 +807,27 @@ name|of
 argument_list|(
 name|FILTER
 argument_list|,
-name|PROJECT_FILTER_TRANSPOSE_RULE
+name|PROJECT_FILTER_TRANSPOSE
 argument_list|,
 comment|// Disabled, per
 comment|//   [CALCITE-1706] DruidAggregateFilterTransposeRule
 comment|//   causes very fine-grained aggregations to be pushed to Druid
-comment|// AGGREGATE_FILTER_TRANSPOSE_RULE,
-name|PROJECT_AGGREGATE
+comment|// AGGREGATE_FILTER_TRANSPOSE,
+name|AGGREGATE_PROJECT
 argument_list|,
 name|PROJECT
 argument_list|,
 name|AGGREGATE
 argument_list|,
-name|FILTER_AGGREGATE_TRANSPOSE_RULE
+name|FILTER_AGGREGATE_TRANSPOSE
 argument_list|,
-name|FILTER_PROJECT_TRANSPOSE_RULE
+name|FILTER_PROJECT_TRANSPOSE
 argument_list|,
-name|PROJECT_SORT
+name|PROJECT_SORT_TRANSPOSE
 argument_list|,
 name|SORT
 argument_list|,
-name|SORT_PROJECT
+name|SORT_PROJECT_TRANSPOSE
 argument_list|)
 decl_stmt|;
 comment|/** Predicate that returns whether Druid can not handle an aggregate. */
@@ -1429,7 +1429,7 @@ name|newDruidQuery
 argument_list|)
 expr_stmt|;
 block|}
-comment|/* Splits the filter condition in two groups: those that filter on the timestamp column      * and those that filter on other fields */
+comment|/** Splits the filter condition in two groups: those that filter on the timestamp column      * and those that filter on other fields. */
 specifier|private
 specifier|static
 name|Pair
@@ -2535,12 +2535,12 @@ comment|/**    * Rule to push an {@link org.apache.calcite.rel.core.Aggregate} a
 specifier|private
 specifier|static
 class|class
-name|DruidProjectAggregateRule
+name|DruidAggregateProjectRule
 extends|extends
 name|RelOptRule
 block|{
 specifier|private
-name|DruidProjectAggregateRule
+name|DruidAggregateProjectRule
 parameter_list|()
 block|{
 name|super
@@ -3096,12 +3096,12 @@ comment|/**    * Rule to push an {@link org.apache.calcite.rel.core.Sort} throug
 specifier|private
 specifier|static
 class|class
-name|DruidProjectSortRule
+name|DruidSortProjectTransposeRule
 extends|extends
 name|SortProjectTransposeRule
 block|{
 specifier|private
-name|DruidProjectSortRule
+name|DruidSortProjectTransposeRule
 parameter_list|()
 block|{
 name|super
@@ -3137,12 +3137,12 @@ comment|/**    * Rule to push back {@link org.apache.calcite.rel.core.Project} t
 specifier|private
 specifier|static
 class|class
-name|DruidSortProjectRule
+name|DruidProjectSortTransposeRule
 extends|extends
 name|ProjectSortTransposeRule
 block|{
 specifier|private
-name|DruidSortProjectRule
+name|DruidProjectSortTransposeRule
 parameter_list|()
 block|{
 name|super
@@ -3174,7 +3174,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**    * Rule to push an {@link org.apache.calcite.rel.core.Aggregate} into a {@link DruidQuery}.    */
+comment|/**    * Rule to push a {@link org.apache.calcite.rel.core.Sort}    * into a {@link DruidQuery}.    */
 specifier|private
 specifier|static
 class|class
@@ -3317,7 +3317,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/* Check sort valid */
+comment|/** Checks whether sort is valid. */
 specifier|private
 specifier|static
 name|boolean
@@ -3564,7 +3564,7 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/* Check if any of the references leads to the timestamp column */
+comment|/** Checks whether any of the references leads to the timestamp column. */
 specifier|private
 specifier|static
 name|boolean
@@ -3758,7 +3758,7 @@ return|return
 literal|false
 return|;
 block|}
-comment|/**    * Rule to push an {@link org.apache.calcite.rel.core.Project} past a    * {@link org.apache.calcite.rel.core.Filter} when filter is on top of {@link org.apache.calcite.adapter.druid.DruidQuery}    */
+comment|/**    * Rule to push a {@link org.apache.calcite.rel.core.Project}    * past a {@link org.apache.calcite.rel.core.Filter}    * when {@code Filter} is on top of a {@link DruidQuery}.    */
 specifier|private
 specifier|static
 class|class
@@ -3802,7 +3802,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**    * Rule to push an {@link org.apache.calcite.rel.core.Filter} past a    * {@link org.apache.calcite.rel.core.Project} when project is on top of {@link org.apache.calcite.adapter.druid.DruidQuery}    */
+comment|/**    * Rule to push a {@link org.apache.calcite.rel.core.Filter}    * past a {@link org.apache.calcite.rel.core.Project}    * when {@code Project} is on top of a {@link DruidQuery}.    */
 specifier|private
 specifier|static
 class|class
@@ -3851,7 +3851,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**    * Rule to push an {@link org.apache.calcite.rel.core.Filter} past a    * {@link org.apache.calcite.rel.core.Project} when project is on top of {@link org.apache.calcite.adapter.druid.DruidQuery}    */
+comment|/**    * Rule to push an {@link org.apache.calcite.rel.core.Aggregate}    * past a {@link org.apache.calcite.rel.core.Filter}    * when {@code Filter} is on top of a {@link DruidQuery}.    */
 specifier|private
 specifier|static
 class|class
@@ -3896,7 +3896,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**    * Rule to push an {@link org.apache.calcite.rel.core.Aggregate} past a    * {@link org.apache.calcite.rel.core.Filter} when filter is on top of {@link org.apache.calcite.adapter.druid.DruidQuery}    */
+comment|/**    * Rule to push an {@link org.apache.calcite.rel.core.Filter}    * past an {@link org.apache.calcite.rel.core.Aggregate}    * when {@code Aggregate} is on top of a {@link DruidQuery}.    */
 specifier|private
 specifier|static
 class|class
