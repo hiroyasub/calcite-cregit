@@ -4,7 +4,7 @@ comment|/*  * Licensed to the Apache Software Foundation (ASF) under one or more
 end_comment
 
 begin_comment
-comment|/**  * Avatica Server for HSQLDB.  */
+comment|/**  * Avatica Server without any authentication for any JDBC driver.  */
 end_comment
 
 begin_annotation
@@ -22,7 +22,7 @@ name|calcite
 operator|.
 name|avatica
 operator|.
-name|hsqldb
+name|server
 package|;
 end_package
 

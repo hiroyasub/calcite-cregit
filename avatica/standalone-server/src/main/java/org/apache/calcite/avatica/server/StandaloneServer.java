@@ -13,7 +13,7 @@ name|calcite
 operator|.
 name|avatica
 operator|.
-name|hsqldb
+name|server
 package|;
 end_package
 
@@ -77,22 +77,6 @@ name|calcite
 operator|.
 name|avatica
 operator|.
-name|server
-operator|.
-name|HttpServer
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|avatica
-operator|.
 name|util
 operator|.
 name|Unsafe
@@ -137,22 +121,6 @@ end_import
 
 begin_import
 import|import
-name|net
-operator|.
-name|hydromatic
-operator|.
-name|scott
-operator|.
-name|data
-operator|.
-name|hsqldb
-operator|.
-name|ScottHsqldb
-import|;
-end_import
-
-begin_import
-import|import
 name|org
 operator|.
 name|slf4j
@@ -182,13 +150,13 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * An Avatica server for HSQLDB.  */
+comment|/**  * An Avatica server for arbitrary JDBC drivers.  */
 end_comment
 
 begin_class
 specifier|public
 class|class
-name|HsqldbServer
+name|StandaloneServer
 block|{
 specifier|private
 specifier|static
@@ -200,10 +168,33 @@ name|LoggerFactory
 operator|.
 name|getLogger
 argument_list|(
-name|HsqldbServer
+name|StandaloneServer
 operator|.
 name|class
 argument_list|)
+decl_stmt|;
+annotation|@
+name|Parameter
+argument_list|(
+name|names
+operator|=
+block|{
+literal|"-u"
+block|,
+literal|"--url"
+block|}
+argument_list|,
+name|required
+operator|=
+literal|true
+argument_list|,
+name|description
+operator|=
+literal|"JDBC driver url for the server"
+argument_list|)
+specifier|private
+name|String
+name|url
 decl_stmt|;
 annotation|@
 name|Parameter
@@ -302,24 +293,13 @@ return|return;
 block|}
 try|try
 block|{
-comment|// Set up Julian's ScottDB for HSQLDB
 name|JdbcMeta
 name|meta
 init|=
 operator|new
 name|JdbcMeta
 argument_list|(
-name|ScottHsqldb
-operator|.
-name|URI
-argument_list|,
-name|ScottHsqldb
-operator|.
-name|USER
-argument_list|,
-name|ScottHsqldb
-operator|.
-name|PASSWORD
+name|url
 argument_list|)
 decl_stmt|;
 name|LocalService
@@ -454,11 +434,11 @@ name|args
 parameter_list|)
 block|{
 specifier|final
-name|HsqldbServer
+name|StandaloneServer
 name|server
 init|=
 operator|new
-name|HsqldbServer
+name|StandaloneServer
 argument_list|()
 decl_stmt|;
 operator|new
@@ -603,7 +583,7 @@ block|}
 end_class
 
 begin_comment
-comment|// End HsqldbServer.java
+comment|// End StandaloneServer.java
 end_comment
 
 end_unit
