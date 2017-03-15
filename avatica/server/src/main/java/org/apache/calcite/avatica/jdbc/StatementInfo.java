@@ -57,16 +57,6 @@ name|Statement
 import|;
 end_import
 
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|Objects
-import|;
-end_import
-
 begin_comment
 comment|/**  * All we know about a statement. Encapsulates a {@link ResultSet}.  */
 end_comment
@@ -113,16 +103,12 @@ name|Statement
 name|statement
 parameter_list|)
 block|{
+comment|// May be null when coming from a DatabaseMetaData call
 name|this
 operator|.
 name|statement
 operator|=
-name|Objects
-operator|.
-name|requireNonNull
-argument_list|(
 name|statement
-argument_list|)
 expr_stmt|;
 block|}
 comment|// Visible for testing
