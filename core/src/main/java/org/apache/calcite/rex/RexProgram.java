@@ -3013,7 +3013,7 @@ name|normalize
 argument_list|(
 name|rexBuilder
 argument_list|,
-literal|false
+literal|null
 argument_list|)
 decl_stmt|;
 name|String
@@ -3071,7 +3071,7 @@ name|succeed
 argument_list|()
 return|;
 block|}
-comment|/**    * Creates a simplified/normalized copy of this program.    *    * @param rexBuilder Rex builder    * @param simplify Whether to simplify (in addition to normalizing)    * @return Normalized program    */
+comment|/**    * Creates a simplified/normalized copy of this program.    *    * @param rexBuilder Rex builder    * @param simplify Simplifier to simplify (in addition to normalizing),    *     or null to not simplify    * @return Normalized program    */
 specifier|public
 name|RexProgram
 name|normalize
@@ -3079,7 +3079,7 @@ parameter_list|(
 name|RexBuilder
 name|rexBuilder
 parameter_list|,
-name|boolean
+name|RexSimplify
 name|simplify
 parameter_list|)
 block|{
@@ -3127,6 +3127,43 @@ operator|.
 name|getProgram
 argument_list|(
 literal|false
+argument_list|)
+return|;
+block|}
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
+specifier|public
+name|RexProgram
+name|normalize
+parameter_list|(
+name|RexBuilder
+name|rexBuilder
+parameter_list|,
+name|boolean
+name|simplify
+parameter_list|)
+block|{
+return|return
+name|normalize
+argument_list|(
+name|rexBuilder
+argument_list|,
+name|simplify
+condition|?
+operator|new
+name|RexSimplify
+argument_list|(
+name|rexBuilder
+argument_list|,
+literal|false
+argument_list|,
+name|RexUtil
+operator|.
+name|EXECUTOR
+argument_list|)
+else|:
+literal|null
 argument_list|)
 return|;
 block|}

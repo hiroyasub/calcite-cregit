@@ -1170,7 +1170,7 @@ operator|.
 name|getRexBuilder
 argument_list|()
 argument_list|,
-literal|false
+literal|null
 argument_list|)
 decl_stmt|;
 return|return

@@ -1083,16 +1083,7 @@ argument_list|)
 operator|.
 name|filter
 argument_list|(
-name|RexUtil
-operator|.
-name|simplify
-argument_list|(
-name|rexBuilder
-argument_list|,
 name|condition
-argument_list|,
-literal|true
-argument_list|)
 argument_list|)
 expr_stmt|;
 name|call
@@ -2065,8 +2056,6 @@ argument_list|(
 name|rexBuilder
 argument_list|,
 name|nodes
-argument_list|,
-literal|false
 argument_list|)
 return|;
 block|}
