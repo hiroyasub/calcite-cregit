@@ -1466,6 +1466,8 @@ specifier|final
 name|int
 name|precision
 init|=
+name|SqlTypeUtil
+operator|.
 name|maxPrecision
 argument_list|(
 name|resultType
@@ -2393,36 +2395,6 @@ expr_stmt|;
 block|}
 return|return
 name|resultType
-return|;
-block|}
-comment|/** Returns the larger of two precisions, treating    * {@link RelDataType#PRECISION_NOT_SPECIFIED} as infinity. */
-specifier|private
-name|int
-name|maxPrecision
-parameter_list|(
-name|int
-name|p0
-parameter_list|,
-name|int
-name|p1
-parameter_list|)
-block|{
-return|return
-operator|(
-name|p0
-operator|==
-name|RelDataType
-operator|.
-name|PRECISION_NOT_SPECIFIED
-operator|||
-name|p0
-operator|>=
-name|p1
-operator|)
-condition|?
-name|p0
-else|:
-name|p1
 return|;
 block|}
 comment|/**    * Controls behavior discussed<a    * href="http://sf.net/mailarchive/message.php?msg_id=13337379">here</a>.    *    * @return false (the default) to provide strict SQL:2003 behavior; true to    * provide pragmatic behavior    *    * @see Glossary#SQL2003 SQL:2003 Part 2 Section 9.3 Syntax Rule 3.a.iii.3    */
