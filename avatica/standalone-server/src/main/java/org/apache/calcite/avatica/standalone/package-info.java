@@ -22,7 +22,7 @@ name|calcite
 operator|.
 name|avatica
 operator|.
-name|server
+name|standalone
 package|;
 end_package
 

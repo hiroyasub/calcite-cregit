@@ -13,7 +13,7 @@ name|calcite
 operator|.
 name|avatica
 operator|.
-name|server
+name|standalone
 package|;
 end_package
 
@@ -64,6 +64,22 @@ operator|.
 name|remote
 operator|.
 name|LocalService
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|avatica
+operator|.
+name|server
+operator|.
+name|HttpServer
 import|;
 end_import
 
