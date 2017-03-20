@@ -197,7 +197,7 @@ name|explainContains
 argument_list|(
 literal|"PLAN=CassandraToEnumerableConverter\n"
 operator|+
-literal|"  CassandraFilter(condition=[=(CAST($0):VARCHAR(8) CHARACTER SET \"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$primary\", '!PUBLIC!')])\n"
+literal|"  CassandraFilter(condition=[=($0, '!PUBLIC!')])\n"
 operator|+
 literal|"    CassandraTableScan(table=[[twissandra, userline]]"
 argument_list|)
@@ -292,7 +292,7 @@ literal|"PLAN=CassandraToEnumerableConverter\n"
 operator|+
 literal|"  CassandraSort(sort0=[$1], dir0=[DESC])\n"
 operator|+
-literal|"    CassandraFilter(condition=[=(CAST($0):VARCHAR(8) CHARACTER SET \"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$primary\", '!PUBLIC!')])\n"
+literal|"    CassandraFilter(condition=[=($0, '!PUBLIC!')])\n"
 argument_list|)
 expr_stmt|;
 block|}
@@ -339,7 +339,7 @@ literal|"  CassandraLimit(fetch=[2])\n"
 operator|+
 literal|"    CassandraProject(tweet_id=[$2])\n"
 operator|+
-literal|"      CassandraFilter(condition=[=(CAST($0):VARCHAR(8) CHARACTER SET \"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$primary\", '!PUBLIC!')])\n"
+literal|"      CassandraFilter(condition=[=($0, '!PUBLIC!')])\n"
 argument_list|)
 expr_stmt|;
 block|}
