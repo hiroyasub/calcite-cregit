@@ -14915,6 +14915,18 @@ name|void
 name|testGroupId
 parameter_list|()
 block|{
+specifier|final
+name|String
+name|groupIdOnlyInAggregate
+init|=
+literal|"GROUP_ID operator may only occur in an aggregate query"
+decl_stmt|;
+specifier|final
+name|String
+name|groupIdWrongClause
+init|=
+literal|"GROUP_ID operator may only occur in SELECT, HAVING or ORDER BY clause"
+decl_stmt|;
 name|sql
 argument_list|(
 literal|"select deptno, group_id() from emp group by deptno"
@@ -14945,6 +14957,18 @@ operator|+
 literal|"Was expecting 0 arguments"
 argument_list|)
 expr_stmt|;
+comment|// Oracle throws "GROUPING function only supported with GROUP BY CUBE or
+comment|// ROLLUP"
+name|sql
+argument_list|(
+literal|"select ^group_id()^ from emp"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+name|groupIdOnlyInAggregate
+argument_list|)
+expr_stmt|;
 name|sql
 argument_list|(
 literal|"select deptno from emp order by ^group_id(deptno)^"
@@ -14952,9 +14976,32 @@ argument_list|)
 operator|.
 name|fails
 argument_list|(
-literal|"GROUP_ID operator may only occur in an aggregate query"
+name|groupIdOnlyInAggregate
 argument_list|)
 expr_stmt|;
+comment|// Oracle throws "GROUPING function only supported with GROUP BY CUBE or
+comment|// ROLLUP"
+name|sql
+argument_list|(
+literal|"select 1 from emp order by ^group_id()^"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+name|groupIdOnlyInAggregate
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select 1 from emp order by ^grouping(deptno)^"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"GROUPING operator may only occur in an aggregate query"
+argument_list|)
+expr_stmt|;
+comment|// Oracle throws "group function is not allowed here"
 name|sql
 argument_list|(
 literal|"select deptno from emp where ^group_id()^ = 1"
@@ -14962,7 +15009,18 @@ argument_list|)
 operator|.
 name|fails
 argument_list|(
-literal|"GROUP_ID operator may only occur in an aggregate query"
+name|groupIdOnlyInAggregate
+argument_list|)
+expr_stmt|;
+comment|// Oracle throws "group function is not allowed here"
+name|sql
+argument_list|(
+literal|"select deptno from emp group by ^group_id()^"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+name|groupIdWrongClause
 argument_list|)
 expr_stmt|;
 name|sql
@@ -14972,7 +15030,7 @@ argument_list|)
 operator|.
 name|fails
 argument_list|(
-literal|"GROUP_ID operator may only occur in SELECT, HAVING or ORDER BY clause"
+name|groupIdWrongClause
 argument_list|)
 expr_stmt|;
 name|sql
@@ -14982,7 +15040,7 @@ argument_list|)
 operator|.
 name|fails
 argument_list|(
-literal|"GROUP_ID operator may only occur in SELECT, HAVING or ORDER BY clause"
+name|groupIdWrongClause
 argument_list|)
 expr_stmt|;
 name|sql
@@ -14994,7 +15052,7 @@ argument_list|)
 operator|.
 name|fails
 argument_list|(
-literal|"GROUP_ID operator may only occur in SELECT, HAVING or ORDER BY clause"
+name|groupIdWrongClause
 argument_list|)
 expr_stmt|;
 name|sql
@@ -15006,7 +15064,7 @@ argument_list|)
 operator|.
 name|fails
 argument_list|(
-literal|"GROUP_ID operator may only occur in SELECT, HAVING or ORDER BY clause"
+name|groupIdWrongClause
 argument_list|)
 expr_stmt|;
 name|sql
@@ -15018,7 +15076,38 @@ argument_list|)
 operator|.
 name|fails
 argument_list|(
-literal|"GROUP_ID operator may only occur in SELECT, HAVING or ORDER BY clause"
+name|groupIdWrongClause
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select grouping(^group_id()^) from emp"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+name|groupIdOnlyInAggregate
+argument_list|)
+expr_stmt|;
+comment|// Oracle throws "not a GROUP BY expression"
+name|sql
+argument_list|(
+literal|"select grouping(^group_id()^) from emp group by deptno"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+name|groupIdWrongClause
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select ^grouping(sum(empno))^ from emp group by deptno"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Aggregate expressions cannot be nested"
 argument_list|)
 expr_stmt|;
 block|}

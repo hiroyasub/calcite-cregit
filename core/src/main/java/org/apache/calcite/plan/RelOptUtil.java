@@ -3224,8 +3224,6 @@ name|create
 argument_list|(
 name|ret
 argument_list|,
-literal|false
-argument_list|,
 name|ImmutableBitSet
 operator|.
 name|of
@@ -3377,8 +3375,6 @@ operator|.
 name|create
 argument_list|(
 name|ret
-argument_list|,
-literal|false
 argument_list|,
 name|ImmutableBitSet
 operator|.
@@ -3535,8 +3531,6 @@ operator|.
 name|create
 argument_list|(
 name|ret
-argument_list|,
-literal|false
 argument_list|,
 name|ImmutableBitSet
 operator|.
@@ -4448,8 +4442,6 @@ name|create
 argument_list|(
 name|rel
 argument_list|,
-literal|false
-argument_list|,
 name|ImmutableBitSet
 operator|.
 name|of
@@ -4480,8 +4472,6 @@ operator|.
 name|create
 argument_list|(
 name|rel
-argument_list|,
-literal|false
 argument_list|,
 name|ImmutableBitSet
 operator|.

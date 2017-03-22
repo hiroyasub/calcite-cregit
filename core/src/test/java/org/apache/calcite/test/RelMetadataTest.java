@@ -7653,8 +7653,6 @@ name|create
 argument_list|(
 name|join
 argument_list|,
-literal|false
-argument_list|,
 name|ImmutableBitSet
 operator|.
 name|of
@@ -14615,7 +14613,7 @@ name|Project
 operator|.
 name|class
 argument_list|,
-literal|3
+literal|2
 argument_list|)
 expr_stmt|;
 name|expected

@@ -1556,18 +1556,6 @@ function_decl|;
 annotation|@
 name|BaseMessage
 argument_list|(
-literal|"Aggregate expression is illegal in GROUP BY clause"
-argument_list|)
-name|ExInst
-argument_list|<
-name|SqlValidatorException
-argument_list|>
-name|aggregateIllegalInGroupBy
-parameter_list|()
-function_decl|;
-annotation|@
-name|BaseMessage
-argument_list|(
 literal|"Aggregate expressions cannot be nested"
 argument_list|)
 name|ExInst

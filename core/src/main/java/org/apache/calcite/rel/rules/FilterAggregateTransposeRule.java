@@ -776,7 +776,13 @@ if|if
 condition|(
 name|aggregate
 operator|.
-name|indicator
+name|getGroupSets
+argument_list|()
+operator|.
+name|size
+argument_list|()
+operator|>
+literal|1
 condition|)
 block|{
 comment|// If grouping sets are used, the filter can be pushed if

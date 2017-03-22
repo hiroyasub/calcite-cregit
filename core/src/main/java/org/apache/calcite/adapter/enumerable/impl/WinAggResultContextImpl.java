@@ -189,7 +189,13 @@ name|super
 argument_list|(
 name|block
 argument_list|,
+literal|null
+argument_list|,
 name|accumulator
+argument_list|,
+literal|null
+argument_list|,
+literal|null
 argument_list|)
 expr_stmt|;
 name|this

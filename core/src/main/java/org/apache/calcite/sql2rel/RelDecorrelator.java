@@ -3399,8 +3399,6 @@ name|create
 argument_list|(
 name|newProject
 argument_list|,
-literal|false
-argument_list|,
 name|newGroupSet
 argument_list|,
 literal|null
@@ -10746,8 +10744,6 @@ operator|.
 name|create
 argument_list|(
 name|joinOutputProject
-argument_list|,
-literal|false
 argument_list|,
 name|groupSet
 argument_list|,

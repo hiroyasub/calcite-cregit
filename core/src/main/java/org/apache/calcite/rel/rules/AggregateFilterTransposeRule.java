@@ -625,10 +625,15 @@ if|if
 condition|(
 name|allColumnsInAggregate
 operator|&&
-operator|!
 name|aggregate
 operator|.
-name|indicator
+name|getGroupSets
+argument_list|()
+operator|.
+name|size
+argument_list|()
+operator|==
+literal|1
 condition|)
 block|{
 comment|// Everything needed by the filter is returned by the aggregate.
@@ -703,7 +708,12 @@ if|if
 condition|(
 name|aggregate
 operator|.
-name|indicator
+name|groupSets
+operator|.
+name|size
+argument_list|()
+operator|>
+literal|1
 condition|)
 block|{
 name|ImmutableList

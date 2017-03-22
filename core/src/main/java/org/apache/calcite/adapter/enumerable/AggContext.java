@@ -49,6 +49,20 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|util
+operator|.
+name|ImmutableBitSet
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|lang
@@ -111,6 +125,42 @@ extends|extends
 name|Type
 argument_list|>
 name|parameterTypes
+parameter_list|()
+function_decl|;
+comment|/** Returns the ordinals of the input fields that make up the key. */
+name|List
+argument_list|<
+name|Integer
+argument_list|>
+name|keyOrdinals
+parameter_list|()
+function_decl|;
+comment|/**    * Returns the types of the group key as    * {@link org.apache.calcite.rel.type.RelDataType}.    */
+name|List
+argument_list|<
+name|?
+extends|extends
+name|RelDataType
+argument_list|>
+name|keyRelTypes
+parameter_list|()
+function_decl|;
+comment|/**    * Returns the types of the group key as    * {@link java.lang.reflect.Type}.    */
+name|List
+argument_list|<
+name|?
+extends|extends
+name|Type
+argument_list|>
+name|keyTypes
+parameter_list|()
+function_decl|;
+comment|/** Returns the grouping sets we are aggregating on. */
+name|List
+argument_list|<
+name|ImmutableBitSet
+argument_list|>
+name|groupSets
 parameter_list|()
 function_decl|;
 block|}

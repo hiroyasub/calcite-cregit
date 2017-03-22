@@ -18154,13 +18154,19 @@ condition|)
 block|{
 return|return;
 block|}
+specifier|final
+name|String
+name|clause
+init|=
+literal|"GROUP BY"
+decl_stmt|;
 name|validateNoAggs
 argument_list|(
 name|aggOrOverFinder
 argument_list|,
 name|groupList
 argument_list|,
-literal|"GROUP BY"
+name|clause
 argument_list|)
 expr_stmt|;
 specifier|final
@@ -18404,8 +18410,10 @@ name|agg
 argument_list|,
 name|RESOURCE
 operator|.
-name|aggregateIllegalInGroupBy
-argument_list|()
+name|aggregateIllegalInClause
+argument_list|(
+name|clause
+argument_list|)
 argument_list|)
 throw|;
 block|}
@@ -18595,7 +18603,7 @@ name|SqlNode
 name|condition
 parameter_list|,
 name|String
-name|keyword
+name|clause
 parameter_list|)
 block|{
 name|validateNoAggs
@@ -18604,7 +18612,7 @@ name|aggOrOverOrGroupFinder
 argument_list|,
 name|condition
 argument_list|,
-name|keyword
+name|clause
 argument_list|)
 expr_stmt|;
 name|inferUnknownTypes
@@ -18656,7 +18664,7 @@ name|RESOURCE
 operator|.
 name|condMustBeBoolean
 argument_list|(
-name|keyword
+name|clause
 argument_list|)
 argument_list|)
 throw|;

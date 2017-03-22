@@ -27,7 +27,7 @@ name|calcite
 operator|.
 name|sql
 operator|.
-name|SqlCall
+name|SqlAggFunction
 import|;
 end_import
 
@@ -41,7 +41,7 @@ name|calcite
 operator|.
 name|sql
 operator|.
-name|SqlFunction
+name|SqlCall
 import|;
 end_import
 
@@ -268,7 +268,7 @@ specifier|public
 class|class
 name|SqlAbstractGroupFunction
 extends|extends
-name|SqlFunction
+name|SqlAggFunction
 block|{
 comment|/**    * Creates a SqlAbstractGroupFunction.    *    * @param name                 Name of builtin function    * @param kind                 kind of operator implemented by function    * @param returnTypeInference  strategy to use for return type inference    * @param operandTypeInference strategy to use for parameter type inference    * @param operandTypeChecker   strategy to use for parameter type checking    * @param category             categorization for function    */
 specifier|public
@@ -297,6 +297,8 @@ name|super
 argument_list|(
 name|name
 argument_list|,
+literal|null
+argument_list|,
 name|kind
 argument_list|,
 name|returnTypeInference
@@ -306,6 +308,10 @@ argument_list|,
 name|operandTypeChecker
 argument_list|,
 name|category
+argument_list|,
+literal|false
+argument_list|,
+literal|false
 argument_list|)
 expr_stmt|;
 block|}
@@ -514,6 +520,28 @@ argument_list|)
 throw|;
 block|}
 block|}
+block|}
+annotation|@
+name|Override
+specifier|public
+name|boolean
+name|isQuantifierAllowed
+parameter_list|()
+block|{
+return|return
+literal|false
+return|;
+block|}
+annotation|@
+name|Override
+specifier|public
+name|boolean
+name|allowsFilter
+parameter_list|()
+block|{
+return|return
+literal|false
+return|;
 block|}
 block|}
 end_class

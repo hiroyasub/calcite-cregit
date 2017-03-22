@@ -4599,10 +4599,6 @@ name|groupKey
 argument_list|(
 name|newGroupSet
 argument_list|,
-name|aggregate
-operator|.
-name|indicator
-argument_list|,
 name|newGroupSets
 argument_list|)
 decl_stmt|;

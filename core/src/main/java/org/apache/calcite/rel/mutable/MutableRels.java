@@ -1423,10 +1423,6 @@ name|groupSet
 argument_list|,
 name|aggregate
 operator|.
-name|indicator
-argument_list|,
-name|aggregate
-operator|.
 name|groupSets
 argument_list|)
 argument_list|,
@@ -2447,10 +2443,6 @@ operator|.
 name|of
 argument_list|(
 name|input
-argument_list|,
-name|aggregate
-operator|.
-name|indicator
 argument_list|,
 name|aggregate
 operator|.

@@ -504,6 +504,16 @@ literal|"remove before calcite-2.0"
 argument_list|)
 throw|;
 block|}
+comment|/** Whether this aggregate function allows a {@code FILTER (WHERE ...)}    * clause. */
+specifier|public
+name|boolean
+name|allowsFilter
+parameter_list|()
+block|{
+return|return
+literal|true
+return|;
+block|}
 block|}
 end_class
 

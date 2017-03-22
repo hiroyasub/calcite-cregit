@@ -176,14 +176,6 @@ name|void
 name|makeNullable
 parameter_list|()
 function_decl|;
-comment|/**    * Translates a field name to the name in the underlying namespace.    */
-name|String
-name|translate
-parameter_list|(
-name|String
-name|name
-parameter_list|)
-function_decl|;
 comment|/**    * Returns this namespace, or a wrapped namespace, cast to a particular    * class.    *    * @param clazz Desired type    * @return This namespace cast to desired type    * @throws ClassCastException if no such interface is available    */
 parameter_list|<
 name|T

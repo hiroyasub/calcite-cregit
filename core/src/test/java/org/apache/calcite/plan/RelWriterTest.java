@@ -671,8 +671,6 @@ name|create
 argument_list|(
 name|filter
 argument_list|,
-literal|false
-argument_list|,
 name|ImmutableBitSet
 operator|.
 name|of

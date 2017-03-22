@@ -85,6 +85,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|core
+operator|.
+name|AggregateCall
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -99,6 +115,7 @@ end_comment
 
 begin_class
 specifier|public
+specifier|abstract
 class|class
 name|AggResetContextImpl
 extends|extends
@@ -114,7 +131,7 @@ name|Expression
 argument_list|>
 name|accumulator
 decl_stmt|;
-comment|/**    * Creates aggregate reset context    * @param block code block that will contain the added initialization    * @param accumulator accumulator variables that store the intermediate    *                    aggregate state    */
+comment|/**    * Creates aggregate reset context.    *    * @param block Code block that will contain the added initialization    * @param accumulator Accumulator variables that store the intermediate    *                    aggregate state    */
 specifier|public
 name|AggResetContextImpl
 parameter_list|(
@@ -151,6 +168,17 @@ block|{
 return|return
 name|accumulator
 return|;
+block|}
+specifier|public
+name|AggregateCall
+name|call
+parameter_list|()
+block|{
+throw|throw
+operator|new
+name|UnsupportedOperationException
+argument_list|()
+throw|;
 block|}
 block|}
 end_class

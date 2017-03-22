@@ -1074,7 +1074,7 @@ operator|.
 name|GROUPING_SETS
 argument_list|)
 decl_stmt|;
-comment|/** {@code GROUPING} function. Occurs in similar places to an aggregate    * function ({@code SELECT}, {@code HAVING} clause, etc. of an aggregate    * query), but not technically an aggregate function. */
+comment|/** {@code GROUPING(c1 [, c2, ...])} function.    *    *<p>Occurs in similar places to an aggregate    * function ({@code SELECT}, {@code HAVING} clause, etc. of an aggregate    * query), but not technically an aggregate function. */
 specifier|public
 specifier|static
 specifier|final
@@ -1087,7 +1087,7 @@ argument_list|(
 literal|"GROUPING"
 argument_list|)
 decl_stmt|;
-comment|/** {@code GROUP_ID} function. */
+comment|/** {@code GROUP_ID()} function. (Oracle-specific.) */
 specifier|public
 specifier|static
 specifier|final
@@ -1098,7 +1098,7 @@ operator|new
 name|SqlGroupIdFunction
 argument_list|()
 decl_stmt|;
-comment|/** {@code GROUP_ID} function is a synonym for {@code GROUPING}.    *    *<p>Some history. The {@code GROUPING} function is in the SQL standard,    * and originally supported only one argument. The {@code GROUP_ID} is not    * standard (though supported in Oracle and SQL Server) and supports zero or    * more arguments.    *    *<p>The SQL standard has changed to allow {@code GROUPING} to have multiple    * arguments. It is now equivalent to {@code GROUP_ID}, so we made    * {@code GROUP_ID} a synonym for {@code GROUPING}. */
+comment|/** {@code GROUPING_ID} function is a synonym for {@code GROUPING}.    *    *<p>Some history. The {@code GROUPING} function is in the SQL standard,    * and originally supported only one argument. {@code GROUPING_ID} is not    * standard (though supported in Oracle and SQL Server) and supports one or    * more arguments.    *    *<p>The SQL standard has changed to allow {@code GROUPING} to have multiple    * arguments. It is now equivalent to {@code GROUPING_ID}, so we made    * {@code GROUPING_ID} a synonym for {@code GROUPING}. */
 specifier|public
 specifier|static
 specifier|final

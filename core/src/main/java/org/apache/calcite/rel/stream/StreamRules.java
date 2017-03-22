@@ -751,6 +751,12 @@ name|Aggregate
 operator|.
 name|class
 argument_list|,
+literal|null
+argument_list|,
+name|Aggregate
+operator|.
+name|NO_INDICATOR
+argument_list|,
 name|any
 argument_list|()
 argument_list|)
@@ -820,10 +826,6 @@ operator|.
 name|create
 argument_list|(
 name|newDelta
-argument_list|,
-name|aggregate
-operator|.
-name|indicator
 argument_list|,
 name|aggregate
 operator|.

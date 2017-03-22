@@ -126,11 +126,6 @@ name|MutableSingleRel
 block|{
 specifier|public
 specifier|final
-name|boolean
-name|indicator
-decl_stmt|;
-specifier|public
-specifier|final
 name|ImmutableBitSet
 name|groupSet
 decl_stmt|;
@@ -159,9 +154,6 @@ parameter_list|,
 name|RelDataType
 name|rowType
 parameter_list|,
-name|boolean
-name|indicator
-parameter_list|,
 name|ImmutableBitSet
 name|groupSet
 parameter_list|,
@@ -188,12 +180,6 @@ name|rowType
 argument_list|,
 name|input
 argument_list|)
-expr_stmt|;
-name|this
-operator|.
-name|indicator
-operator|=
-name|indicator
 expr_stmt|;
 name|this
 operator|.
@@ -230,7 +216,7 @@ operator|=
 name|aggCalls
 expr_stmt|;
 block|}
-comment|/**    * Creates a MutableAggregate.    *    * @param input     Input relational expression    * @param indicator Whether row type should include indicator fields to    *                  indicate which grouping set is active; must be true if    *                  aggregate is not simple    * @param groupSet  Bit set of grouping fields    * @param groupSets List of all grouping sets; null for just {@code groupSet}    * @param aggCalls  Collection of calls to aggregate functions    */
+comment|/**    * Creates a MutableAggregate.    *    * @param input     Input relational expression    * @param groupSet  Bit set of grouping fields    * @param groupSets List of all grouping sets; null for just {@code groupSet}    * @param aggCalls  Collection of calls to aggregate functions    */
 specifier|public
 specifier|static
 name|MutableAggregate
@@ -238,9 +224,6 @@ name|of
 parameter_list|(
 name|MutableRel
 name|input
-parameter_list|,
-name|boolean
-name|indicator
 parameter_list|,
 name|ImmutableBitSet
 name|groupSet
@@ -276,7 +259,7 @@ name|input
 operator|.
 name|rowType
 argument_list|,
-name|indicator
+literal|false
 argument_list|,
 name|groupSet
 argument_list|,
@@ -292,8 +275,6 @@ argument_list|(
 name|input
 argument_list|,
 name|rowType
-argument_list|,
-name|indicator
 argument_list|,
 name|groupSet
 argument_list|,
@@ -470,8 +451,6 @@ name|input
 operator|.
 name|clone
 argument_list|()
-argument_list|,
-name|indicator
 argument_list|,
 name|groupSet
 argument_list|,

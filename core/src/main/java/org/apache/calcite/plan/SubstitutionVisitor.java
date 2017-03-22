@@ -6062,10 +6062,6 @@ name|of
 argument_list|(
 name|input
 argument_list|,
-name|aggregate
-operator|.
-name|indicator
-argument_list|,
 name|groupSet
 argument_list|,
 name|groupSets
@@ -6497,8 +6493,6 @@ operator|.
 name|of
 argument_list|(
 name|target
-argument_list|,
-literal|false
 argument_list|,
 name|groupSet
 operator|.
