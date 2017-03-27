@@ -3999,8 +3999,15 @@ name|Filter
 operator|.
 name|class
 argument_list|,
-name|any
+name|operand
+argument_list|(
+name|DruidQuery
+operator|.
+name|class
+argument_list|,
+name|none
 argument_list|()
+argument_list|)
 argument_list|)
 argument_list|)
 argument_list|,
