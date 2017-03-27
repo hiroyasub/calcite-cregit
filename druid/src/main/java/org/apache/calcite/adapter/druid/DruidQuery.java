@@ -5730,7 +5730,7 @@ operator|)
 name|e
 operator|)
 operator|.
-name|getValue2
+name|getValue3
 argument_list|()
 operator|.
 name|toString

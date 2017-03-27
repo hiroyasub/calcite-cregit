@@ -5075,6 +5075,36 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testFilterOnDouble
+parameter_list|()
+block|{
+name|String
+name|sql
+init|=
+literal|"select \"product_id\" from \"foodmart\"\n"
+operator|+
+literal|"where cast(\"product_id\" as double)< 0.41024 and \"product_id\"< 12223"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|druidChecker
+argument_list|(
+literal|"\"type\":\"bound\",\"dimension\":\"product_id\",\"upper\":\"0.41024\""
+argument_list|,
+literal|"\"upper\":\"12223\""
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
 block|}
 end_class
 
