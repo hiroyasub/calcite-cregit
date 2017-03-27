@@ -3335,7 +3335,7 @@ operator|instanceof
 name|RexInputRef
 condition|)
 block|{
-comment|// Reference, it could be to the timestamp column or any other dimension
+comment|// Reference could be to the timestamp or druid dimension but no druid metric
 specifier|final
 name|RexInputRef
 name|ref

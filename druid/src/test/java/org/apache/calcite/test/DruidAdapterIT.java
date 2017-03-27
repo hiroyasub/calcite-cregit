@@ -1640,6 +1640,189 @@ name|explain
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testGroupbyMetric
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select  \"store_sales\" ,\"product_id\" from \"foodmart\" "
+operator|+
+literal|"where \"product_id\" = 1020"
+operator|+
+literal|"group by \"store_sales\" ,\"product_id\" "
+decl_stmt|;
+specifier|final
+name|String
+name|plan
+init|=
+literal|"PLAN=EnumerableInterpreter\n  BindableAggregate(group=[{0, 1}])\n"
+operator|+
+literal|"    DruidQuery(table=[[foodmart, foodmart]], "
+operator|+
+literal|"intervals=[[1900-01-09T00:00:00.000/2992-01-10T00:00:00.000]], filter=[=($1, 1020)],"
+operator|+
+literal|" projects=[[$90, $1]])\n"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+name|plan
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|druidChecker
+argument_list|(
+literal|"{\"queryType\":\"select\",\"dataSource\":\"foodmart\","
+operator|+
+literal|"\"descending\":false,"
+operator|+
+literal|"\"intervals\":[\"1900-01-09T00:00:00.000/2992-01-10T00:00:00.000"
+operator|+
+literal|"\"],\"filter\":{\"type\":\"selector\",\"dimension\":\"product_id\","
+operator|+
+literal|"\"value\":\"1020\"},\"dimensions\":[\"product_id\"],"
+operator|+
+literal|"\"metrics\":[\"store_sales\"],\"granularity\":\"all\","
+operator|+
+literal|"\"pagingSpec\":{\"threshold\":16384,\"fromNext\":true},"
+operator|+
+literal|"\"context\":{\"druid.query.fetch\":false}}"
+argument_list|)
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"store_sales=0.5099999904632568; product_id=1020"
+argument_list|,
+literal|"store_sales=1.0199999809265137; product_id=1020"
+argument_list|,
+literal|"store_sales=1.5299999713897705; product_id=1020"
+argument_list|,
+literal|"store_sales=2.0399999618530273; product_id=1020"
+argument_list|,
+literal|"store_sales=2.549999952316284; product_id=1020"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testPushSimpleGroupBy
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select \"product_id\" from \"foodmart\" where "
+operator|+
+literal|"\"product_id\" = 1020 group by \"product_id\""
+decl_stmt|;
+specifier|final
+name|String
+name|druidQuery
+init|=
+literal|"{\"queryType\":\"groupBy\",\"dataSource\":\"foodmart\","
+operator|+
+literal|"\"granularity\":\"all\",\"dimensions\":[\"product_id\"],"
+operator|+
+literal|"\"limitSpec\":{\"type\":\"default\"},\"filter\":{\"type\":\"selector\","
+operator|+
+literal|"\"dimension\":\"product_id\",\"value\":\"1020\"},"
+operator|+
+literal|"\"aggregations\":[{\"type\":\"longSum\",\"name\":\"dummy_agg\","
+operator|+
+literal|"\"fieldName\":\"dummy_agg\"}],"
+operator|+
+literal|"\"intervals\":[\"1900-01-09T00:00:00.000/2992-01-10T00:00:00.000\"]}"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|druidChecker
+argument_list|(
+name|druidQuery
+argument_list|)
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"product_id=1020"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testComplexPushGroupBy
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|innerQuery
+init|=
+literal|"select \"product_id\" as \"id\" from \"foodmart\" where "
+operator|+
+literal|"\"product_id\" = 1020"
+decl_stmt|;
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select \"id\" from ("
+operator|+
+name|innerQuery
+operator|+
+literal|") group by \"id\""
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"id=1020"
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|druidChecker
+argument_list|(
+literal|"{\"queryType\":\"groupBy"
+operator|+
+literal|"\",\"dataSource\":\"foodmart\",\"granularity\":\"all\","
+operator|+
+literal|"\"dimensions\":[\"product_id\"],\"limitSpec\":{\"type\":\"default\"},"
+operator|+
+literal|"\"filter\":{\"type\":\"selector\",\"dimension\":\"product_id\","
+operator|+
+literal|"\"value\":\"1020\"},\"aggregations\":[{\"type\":\"longSum\","
+operator|+
+literal|"\"name\":\"dummy_agg\",\"fieldName\":\"dummy_agg\"}],"
+operator|+
+literal|"\"intervals\":[\"1900-01-09T00:00:00.000/2992-01-10T00:00:00.000\"]}"
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1281">[CALCITE-1281]    * Druid adapter wrongly returns all numeric values as int or float</a>. */
 annotation|@
 name|Test
@@ -3381,6 +3564,52 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testGroupByTimeAndOneMetricNotProjected
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select count(*) as \"c\", floor(\"timestamp\" to MONTH) as \"month\", floor"
+operator|+
+literal|"(\"store_sales\") as sales\n"
+operator|+
+literal|"from \"foodmart\"\n"
+operator|+
+literal|"group by floor(\"timestamp\" to MONTH), \"state_province\", floor"
+operator|+
+literal|"(\"store_sales\")\n"
+operator|+
+literal|"order by \"c\" desc limit 3"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|returnsOrdered
+argument_list|(
+literal|"c=494; month=1997-11-01 00:00:00; SALES=5.0"
+argument_list|,
+literal|"c=475; month=1997-12-01 00:00:00; SALES=5.0"
+argument_list|,
+literal|"c=468; month=1997-03-01 00:00:00; SALES=5.0"
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|druidChecker
+argument_list|(
+literal|"'queryType':'select'"
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testGroupByTimeAndOneColumnNotProjected
 parameter_list|()
 block|{
@@ -4809,6 +5038,39 @@ argument_list|(
 name|druidChecker
 argument_list|(
 name|druidQuery
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testGroupByMetricAndExtractTime
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"SELECT count(*), floor(\"timestamp\" to DAY), \"store_sales\" "
+operator|+
+literal|"FROM \"foodmart\"\n"
+operator|+
+literal|"GROUP BY \"store_sales\", floor(\"timestamp\" to DAY)\n ORDER BY \"store_sales\" DESC\n"
+operator|+
+literal|"LIMIT 10\n"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|druidChecker
+argument_list|(
+literal|"{\"queryType\":\"select\""
 argument_list|)
 argument_list|)
 expr_stmt|;
