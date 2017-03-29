@@ -1722,7 +1722,11 @@ specifier|final
 name|RelDataType
 name|extendedRowType
 init|=
-name|typeFactory
+name|getRelOptSchema
+argument_list|()
+operator|.
+name|getTypeFactory
+argument_list|()
 operator|.
 name|builder
 argument_list|()

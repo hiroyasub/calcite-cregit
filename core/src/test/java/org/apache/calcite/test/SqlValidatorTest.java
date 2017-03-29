@@ -24282,6 +24282,68 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testSelectExtendedColumnDuplicate
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"select deptno, extra from emp (extra int, \"extra\" boolean)"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select deptno, extra from emp (extra int, \"extra\" int)"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|tester
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"select deptno, extra from emp (extra int, ^extra^ int)"
+argument_list|,
+literal|"Duplicate name 'EXTRA' in column list"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"select deptno, extra from emp (extra int, ^extra^ boolean)"
+argument_list|,
+literal|"Duplicate name 'EXTRA' in column list"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"select deptno, extra from EMP_MODIFIABLEVIEW (extra int, ^extra^ int)"
+argument_list|,
+literal|"Duplicate name 'EXTRA' in column list"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"select deptno, extra from EMP_MODIFIABLEVIEW"
+operator|+
+literal|" (extra int, ^extra^ boolean)"
+argument_list|,
+literal|"Duplicate name 'EXTRA' in column list"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testSelectViewFailExcludedColumn
 parameter_list|()
 block|{
@@ -24292,6 +24354,359 @@ argument_list|(
 literal|"select ^deptno^, empno from EMP_MODIFIABLEVIEW"
 argument_list|,
 literal|"Column 'DEPTNO' not found in any table"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSelectViewExtendedColumnCollision
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"select ENAME, EMPNO, JOB, SLACKER, SAL, HIREDATE, MGR\n"
+operator|+
+literal|" from EMP_MODIFIABLEVIEW3 extend (SAL int)\n"
+operator|+
+literal|" where SAL = 20"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select ENAME, EMPNO, JOB, SLACKER, SAL, \"Sal\", HIREDATE, MGR\n"
+operator|+
+literal|" from EMP_MODIFIABLEVIEW3 extend (\"Sal\" VARCHAR)\n"
+operator|+
+literal|" where SAL = 20"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSelectViewExtendedColumnExtendedCollision
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"select ENAME, EMPNO, JOB, SLACKER, SAL, HIREDATE, MGR, EXTRA\n"
+operator|+
+literal|" from EMP_MODIFIABLEVIEW2 extend (EXTRA boolean)\n"
+operator|+
+literal|" where SAL = 20"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select ENAME, EMPNO, JOB, SLACKER, SAL, HIREDATE, MGR, EXTRA, \"EXtra\"\n"
+operator|+
+literal|" from EMP_MODIFIABLEVIEW2 extend (\"EXtra\" VARCHAR)\n"
+operator|+
+literal|" where SAL = 20"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSelectViewExtendedColumnUnderlyingCollision
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"select ENAME, EMPNO, JOB, SLACKER, SAL, HIREDATE, MGR, COMM\n"
+operator|+
+literal|" from EMP_MODIFIABLEVIEW3 extend (COMM int)\n"
+operator|+
+literal|" where SAL = 20"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select ENAME, EMPNO, JOB, SLACKER, SAL, HIREDATE, MGR, \"comM\"\n"
+operator|+
+literal|" from EMP_MODIFIABLEVIEW3 extend (\"comM\" BOOLEAN)\n"
+operator|+
+literal|" where SAL = 20"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSelectExtendedColumnCollision
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"select ENAME, EMPNO, JOB, SLACKER, SAL, HIREDATE, MGR, COMM\n"
+operator|+
+literal|" from EMPDEFAULTS extend (COMM int)\n"
+operator|+
+literal|" where SAL = 20"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select ENAME, EMPNO, JOB, SLACKER, SAL, HIREDATE, MGR, COMM, \"ComM\"\n"
+operator|+
+literal|" from EMPDEFAULTS extend (\"ComM\" int)\n"
+operator|+
+literal|" where SAL = 20"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSelectExtendedColumnFailCollision
+parameter_list|()
+block|{
+name|tester
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"select ENAME, EMPNO, JOB, SLACKER, SAL, HIREDATE, MGR, COMM\n"
+operator|+
+literal|" from EMPDEFAULTS extend (^COMM^ boolean)\n"
+operator|+
+literal|" where SAL = 20"
+argument_list|,
+literal|"Cannot assign to target field 'COMM' of type INTEGER from source field 'COMM' of type BOOLEAN"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"select ENAME, EMPNO, JOB, SLACKER, SAL, HIREDATE, MGR, COMM\n"
+operator|+
+literal|" from EMPDEFAULTS extend (^EMPNO^ integer)\n"
+operator|+
+literal|" where SAL = 20"
+argument_list|,
+literal|"Cannot assign to target field 'EMPNO' of type INTEGER NOT NULL from source field 'EMPNO' of type INTEGER"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"select ENAME, EMPNO, JOB, SLACKER, SAL, HIREDATE, MGR, COMM\n"
+operator|+
+literal|" from EMPDEFAULTS extend (^\"EMPNO\"^ integer)\n"
+operator|+
+literal|" where SAL = 20"
+argument_list|,
+literal|"Cannot assign to target field 'EMPNO' of type INTEGER NOT NULL from source field 'EMPNO' of type INTEGER"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSelectViewExtendedColumnFailCollision
+parameter_list|()
+block|{
+name|tester
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"select ENAME, EMPNO, JOB, SLACKER, SAL, HIREDATE, MGR, EXTRA\n"
+operator|+
+literal|" from EMP_MODIFIABLEVIEW2 extend (^SLACKER^ integer)\n"
+operator|+
+literal|" where SAL = 20"
+argument_list|,
+literal|"Cannot assign to target field 'SLACKER' of type BOOLEAN from source field 'SLACKER' of type INTEGER"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"select ENAME, EMPNO, JOB, SLACKER, SAL, HIREDATE, MGR, COMM\n"
+operator|+
+literal|" from EMP_MODIFIABLEVIEW2 extend (^EMPNO^ integer)\n"
+operator|+
+literal|" where SAL = 20"
+argument_list|,
+literal|"Cannot assign to target field 'EMPNO' of type INTEGER NOT NULL from source field 'EMPNO' of type INTEGER"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSelectViewExtendedColumnFailExtendedCollision
+parameter_list|()
+block|{
+name|tester
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"select ENAME, EMPNO, JOB, SLACKER, SAL, HIREDATE, MGR, EXTRA\n"
+operator|+
+literal|" from EMP_MODIFIABLEVIEW2 extend (^EXTRA^ integer)\n"
+operator|+
+literal|" where SAL = 20"
+argument_list|,
+literal|"Cannot assign to target field 'EXTRA' of type BOOLEAN from source field 'EXTRA' of type INTEGER"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"select ENAME, EMPNO, JOB, SLACKER, SAL, HIREDATE, MGR, EXTRA\n"
+operator|+
+literal|" from EMP_MODIFIABLEVIEW2 extend (^\"EXTRA\"^ integer)\n"
+operator|+
+literal|" where SAL = 20"
+argument_list|,
+literal|"Cannot assign to target field 'EXTRA' of type BOOLEAN from source field 'EXTRA' of type INTEGER"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSelectViewExtendedColumnFailUnderlyingCollision
+parameter_list|()
+block|{
+name|tester
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"select ENAME, EMPNO, JOB, SLACKER, SAL, HIREDATE, MGR, COMM\n"
+operator|+
+literal|" from EMP_MODIFIABLEVIEW3 extend (^COMM^ boolean)\n"
+operator|+
+literal|" where SAL = 20"
+argument_list|,
+literal|"Cannot assign to target field 'COMM' of type INTEGER from source field 'COMM' of type BOOLEAN"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"select ENAME, EMPNO, JOB, SLACKER, SAL, HIREDATE, MGR, COMM\n"
+operator|+
+literal|" from EMP_MODIFIABLEVIEW3 extend (^\"COMM\"^ boolean)\n"
+operator|+
+literal|" where SAL = 20"
+argument_list|,
+literal|"Cannot assign to target field 'COMM' of type INTEGER from source field 'COMM' of type BOOLEAN"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSelectFailCaseSensitivity
+parameter_list|()
+block|{
+name|tester
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"select ^\"empno\"^, ename, deptno from EMP"
+argument_list|,
+literal|"Column 'empno' not found in any table; did you mean 'EMPNO'\\?"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"select ^\"extra\"^, ename, deptno from EMP (extra boolean)"
+argument_list|,
+literal|"Column 'extra' not found in any table; did you mean 'EXTRA'\\?"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"select ^extra^, ename, deptno from EMP (\"extra\" boolean)"
+argument_list|,
+literal|"Column 'EXTRA' not found in any table; did you mean 'extra'\\?"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testInsertFailCaseSensitivity
+parameter_list|()
+block|{
+name|tester
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"insert into EMP_MODIFIABLEVIEW (^\"empno\"^, ename, deptno)"
+operator|+
+literal|" values (45, 'Jake', 5)"
+argument_list|,
+literal|"Unknown target column 'empno'"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"insert into EMP_MODIFIABLEVIEW (\"extra\" int) (^extra^, ename, deptno)"
+operator|+
+literal|" values (45, 'Jake', 5)"
+argument_list|,
+literal|"Unknown target column 'EXTRA'"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"insert into EMP_MODIFIABLEVIEW (extra int) (^\"extra\"^, ename, deptno)"
+operator|+
+literal|" values (45, 'Jake', 5)"
+argument_list|,
+literal|"Unknown target column 'extra'"
 argument_list|)
 expr_stmt|;
 block|}
@@ -26908,6 +27323,1388 @@ operator|.
 name|fails
 argument_list|(
 literal|"Invalid number of parameters to COUNT method"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testInsertExtendedColumn
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"insert into empdefaults(extra BOOLEAN, note VARCHAR)"
+operator|+
+literal|" (deptno, empno, ename, extra, note) values (1, 10, '2', true, 'ok')"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"insert into emp(\"rank\" INT, extra BOOLEAN)"
+operator|+
+literal|" values (1, 'nom', 'job', 0, timestamp '1970-01-01 00:00:00', 1, 1,"
+operator|+
+literal|"  1, false, 100, false)"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testInsertBindExtendedColumn
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"insert into empdefaults(extra BOOLEAN, note VARCHAR)"
+operator|+
+literal|" (deptno, empno, ename, extra, note) values (1, 10, '2', ?, 'ok')"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"insert into emp(\"rank\" INT, extra BOOLEAN)"
+operator|+
+literal|" values (1, 'nom', 'job', 0, timestamp '1970-01-01 00:00:00', 1, 1,"
+operator|+
+literal|"  1, false, ?, ?)"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testInsertExtendedColumnModifiableView
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"insert into EMP_MODIFIABLEVIEW2(extra2 BOOLEAN, note VARCHAR)"
+operator|+
+literal|" (deptno, empno, ename, extra2, note) values (20, 10, '2', true, 'ok')"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"insert into EMP_MODIFIABLEVIEW2(\"rank\" INT, extra2 BOOLEAN)"
+operator|+
+literal|" values ('nom', 1, 'job', 20, true, 0, false, timestamp '1970-01-01 00:00:00', 1, 1,"
+operator|+
+literal|"  1, false)"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testInsertBindExtendedColumnModifiableView
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"insert into EMP_MODIFIABLEVIEW2(extra2 BOOLEAN, note VARCHAR)"
+operator|+
+literal|" (deptno, empno, ename, extra2, note) values (20, 10, '2', true, ?)"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"insert into EMP_MODIFIABLEVIEW2(\"rank\" INT, extra2 BOOLEAN)"
+operator|+
+literal|" values ('nom', 1, 'job', 20, true, 0, false, timestamp '1970-01-01 00:00:00', 1, 1,"
+operator|+
+literal|"  ?, false)"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testInsertExtendedColumnModifiableViewFailConstraint
+parameter_list|()
+block|{
+name|tester
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"insert into EMP_MODIFIABLEVIEW2(extra2 BOOLEAN, note VARCHAR)"
+operator|+
+literal|" (deptno, empno, ename, extra2, note) values (^1^, 10, '2', true, 'ok')"
+argument_list|,
+literal|"Modifiable view constraint is not satisfied"
+operator|+
+literal|" for column 'DEPTNO' of base table 'EMP_MODIFIABLEVIEW2'"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"insert into EMP_MODIFIABLEVIEW2(extra2 BOOLEAN, note VARCHAR)"
+operator|+
+literal|" (deptno, empno, ename, extra2, note) values (^?^, 10, '2', true, 'ok')"
+argument_list|,
+literal|"Modifiable view constraint is not satisfied"
+operator|+
+literal|" for column 'DEPTNO' of base table 'EMP_MODIFIABLEVIEW2'"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"insert into EMP_MODIFIABLEVIEW2(\"rank\" INT, extra2 BOOLEAN)"
+operator|+
+literal|" values ('nom', 1, 'job', ^0^, true, 0, false, timestamp '1970-01-01 00:00:00', 1, 1,"
+operator|+
+literal|"  1, false)"
+argument_list|,
+literal|"Modifiable view constraint is not satisfied"
+operator|+
+literal|" for column 'DEPTNO' of base table 'EMP_MODIFIABLEVIEW2'"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testInsertExtendedColumnModifiableViewFailColumnCount
+parameter_list|()
+block|{
+name|tester
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"insert into EMP_MODIFIABLEVIEW2(\"rank\" INT, extra2 BOOLEAN^)^"
+operator|+
+literal|" values ('nom', 1, 'job', 0, true, 0, false, timestamp '1970-01-01 00:00:00', 1, 1,"
+operator|+
+literal|"  1)"
+argument_list|,
+literal|"Number of INSERT target columns \\(12\\) does not equal number of source items \\(11\\)"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"insert into EMP_MODIFIABLEVIEW2(\"rank\" INT, extra2 BOOLEAN^)^"
+operator|+
+literal|" (deptno, empno, ename, extra2, \"rank\") values (?, 10, '2', true)"
+argument_list|,
+literal|"Number of INSERT target columns \\(5\\) does not equal number of source items \\(4\\)"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testInsertExtendedColumnFailDuplicate
+parameter_list|()
+block|{
+name|tester
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"insert into EMP_MODIFIABLEVIEW2(extcol INT, ^extcol^ BOOLEAN)"
+operator|+
+literal|" values ('nom', 1, 'job', 0, true, 0, false, timestamp '1970-01-01 00:00:00', 1, 1,"
+operator|+
+literal|"  1)"
+argument_list|,
+literal|"Duplicate name 'EXTCOL' in column list"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"insert into EMP_MODIFIABLEVIEW2(extcol INT, ^extcol^ BOOLEAN)"
+operator|+
+literal|" (extcol) values (1)"
+argument_list|,
+literal|"Duplicate name 'EXTCOL' in column list"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"insert into EMP_MODIFIABLEVIEW2(extcol INT, ^extcol^ BOOLEAN)"
+operator|+
+literal|" (extcol) values (false)"
+argument_list|,
+literal|"Duplicate name 'EXTCOL' in column list"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"insert into EMP(extcol INT, ^extcol^ BOOLEAN)"
+operator|+
+literal|" (extcol) values (1)"
+argument_list|,
+literal|"Duplicate name 'EXTCOL' in column list"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"insert into EMP(extcol INT, ^extcol^ BOOLEAN)"
+operator|+
+literal|" (extcol) values (false)"
+argument_list|,
+literal|"Duplicate name 'EXTCOL' in column list"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testUpdateExtendedColumn
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"update empdefaults(extra BOOLEAN, note VARCHAR)"
+operator|+
+literal|" set deptno = 1, extra = true, empno = 20, ename = 'Bob', note = 'legion'"
+operator|+
+literal|" where deptno = 10"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"update empdefaults(extra BOOLEAN)"
+operator|+
+literal|" set extra = true, deptno = 1, ename = 'Bob'"
+operator|+
+literal|" where deptno = 10"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"update empdefaults(\"empNo\" VARCHAR)"
+operator|+
+literal|" set \"empNo\" = '5', deptno = 1, ename = 'Bob'"
+operator|+
+literal|" where deptno = 10"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testInsertFailDataType
+parameter_list|()
+block|{
+name|tester
+operator|.
+name|withConformance
+argument_list|(
+name|SqlConformanceEnum
+operator|.
+name|PRAGMATIC_2003
+argument_list|)
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"insert into empnullables ^values ('5', 'bob')^"
+argument_list|,
+literal|"Cannot assign to target field 'EMPNO' of type INTEGER"
+operator|+
+literal|" from source field 'EXPR\\$0' of type CHAR\\(1\\)"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|withConformance
+argument_list|(
+name|SqlConformanceEnum
+operator|.
+name|PRAGMATIC_2003
+argument_list|)
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"insert into empnullables (^empno^, ename) values ('5', 'bob')"
+argument_list|,
+literal|"Cannot assign to target field 'EMPNO' of type INTEGER"
+operator|+
+literal|" from source field 'EXPR\\$0' of type CHAR\\(1\\)"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|withConformance
+argument_list|(
+name|SqlConformanceEnum
+operator|.
+name|PRAGMATIC_2003
+argument_list|)
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"insert into empnullables(extra BOOLEAN)"
+operator|+
+literal|" (empno, ename, ^extra^) values (5, 'bob', 'true')"
+argument_list|,
+literal|"Cannot assign to target field 'EXTRA' of type BOOLEAN"
+operator|+
+literal|" from source field 'EXPR\\$2' of type CHAR\\(4\\)"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Ignore
+argument_list|(
+literal|"CALCITE-1727"
+argument_list|)
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testUpdateFailDataType
+parameter_list|()
+block|{
+name|tester
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"update emp"
+operator|+
+literal|" set ^empNo^ = '5', deptno = 1, ename = 'Bob'"
+operator|+
+literal|" where deptno = 10"
+argument_list|,
+literal|"Cannot assign to target field 'EMPNO' of type INTEGER"
+operator|+
+literal|" from source field 'EXPR$0' of type CHAR(1)"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"update emp(extra boolean)"
+operator|+
+literal|" set ^extra^ = '5', deptno = 1, ename = 'Bob'"
+operator|+
+literal|" where deptno = 10"
+argument_list|,
+literal|"Cannot assign to target field 'EXTRA' of type BOOLEAN"
+operator|+
+literal|" from source field 'EXPR$0' of type CHAR(1)"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Ignore
+argument_list|(
+literal|"CALCITE-1727"
+argument_list|)
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testUpdateFailCaseSensitivity
+parameter_list|()
+block|{
+name|tester
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"update empdefaults"
+operator|+
+literal|" set empNo = '5', deptno = 1, ename = 'Bob'"
+operator|+
+literal|" where deptno = 10"
+argument_list|,
+literal|"Column 'empno' not found in any table; did you mean 'EMPNO'\\?"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testUpdateExtendedColumnFailCaseSensitivity
+parameter_list|()
+block|{
+name|tester
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"update empdefaults(\"extra\" BOOLEAN)"
+operator|+
+literal|" set ^extra^ = true, deptno = 1, ename = 'Bob'"
+operator|+
+literal|" where deptno = 10"
+argument_list|,
+literal|"Unknown target column 'EXTRA'"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"update empdefaults(extra BOOLEAN)"
+operator|+
+literal|" set ^\"extra\"^ = true, deptno = 1, ename = 'Bob'"
+operator|+
+literal|" where deptno = 10"
+argument_list|,
+literal|"Unknown target column 'extra'"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testUpdateBindExtendedColumn
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"update empdefaults(extra BOOLEAN, note VARCHAR)"
+operator|+
+literal|" set deptno = 1, extra = true, empno = 20, ename = 'Bob', note = ?"
+operator|+
+literal|" where deptno = 10"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"update empdefaults(extra BOOLEAN)"
+operator|+
+literal|" set extra = ?, deptno = 1, ename = 'Bob'"
+operator|+
+literal|" where deptno = 10"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testUpdateExtendedColumnModifiableView
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"update EMP_MODIFIABLEVIEW2(extra2 BOOLEAN, note VARCHAR)"
+operator|+
+literal|" set deptno = 20, extra2 = true, empno = 20, ename = 'Bob', note = 'legion'"
+operator|+
+literal|" where ename = 'Jane'"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"update EMP_MODIFIABLEVIEW2(extra2 BOOLEAN)"
+operator|+
+literal|" set extra2 = true, ename = 'Bob'"
+operator|+
+literal|" where ename = 'Jane'"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testUpdateBindExtendedColumnModifiableView
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"update EMP_MODIFIABLEVIEW2(extra2 BOOLEAN, note VARCHAR)"
+operator|+
+literal|" set deptno = 20, extra2 = true, empno = 20, ename = 'Bob', note = ?"
+operator|+
+literal|" where ename = 'Jane'"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"update EMP_MODIFIABLEVIEW2(extra2 BOOLEAN)"
+operator|+
+literal|" set extra2 = ?, ename = 'Bob'"
+operator|+
+literal|" where ename = 'Jane'"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testUpdateExtendedColumnModifiableViewFailConstraint
+parameter_list|()
+block|{
+name|tester
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"update EMP_MODIFIABLEVIEW2(extra2 BOOLEAN, note VARCHAR)"
+operator|+
+literal|" set deptno = ^1^, extra2 = true, empno = 20, ename = 'Bob', note = 'legion'"
+operator|+
+literal|" where ename = 'Jane'"
+argument_list|,
+literal|"Modifiable view constraint is not satisfied"
+operator|+
+literal|" for column 'DEPTNO' of base table 'EMP_MODIFIABLEVIEW2'"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"update EMP_MODIFIABLEVIEW2(extra2 BOOLEAN)"
+operator|+
+literal|" set extra2 = true, deptno = ^1^, ename = 'Bob'"
+operator|+
+literal|" where ename = 'Jane'"
+argument_list|,
+literal|"Modifiable view constraint is not satisfied"
+operator|+
+literal|" for column 'DEPTNO' of base table 'EMP_MODIFIABLEVIEW2'"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testUpdateExtendedColumnCollision
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"update empdefaults(empno INTEGER NOT NULL, deptno INTEGER)"
+operator|+
+literal|" set deptno = 1, empno = 20, ename = 'Bob'"
+operator|+
+literal|" where deptno = 10"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testUpdateExtendedColumnModifiableViewCollision
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"update EMP_MODIFIABLEVIEW3(empno INTEGER NOT NULL, deptno INTEGER)"
+operator|+
+literal|" set deptno = 20, empno = 20, ename = 'Bob'"
+operator|+
+literal|" where empno = 10"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"update EMP_MODIFIABLEVIEW3(empno INTEGER NOT NULL, \"deptno\" BOOLEAN)"
+operator|+
+literal|" set \"deptno\" = true, empno = 20, ename = 'Bob'"
+operator|+
+literal|" where empno = 10"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testUpdateExtendedColumnFailCollision
+parameter_list|()
+block|{
+name|tester
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"update empdefaults(^empno^ BOOLEAN, deptno INTEGER)"
+operator|+
+literal|" set deptno = 1, empno = false, ename = 'Bob'"
+operator|+
+literal|" where deptno = 10"
+argument_list|,
+literal|"Cannot assign to target field 'EMPNO' of type INTEGER NOT NULL from source field 'EMPNO' of type BOOLEAN"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Ignore
+argument_list|(
+literal|"CALCITE-1727"
+argument_list|)
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testUpdateExtendedColumnFailCollision2
+parameter_list|()
+block|{
+name|tester
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"update empdefaults(^\"deptno\"^ BOOLEAN)"
+operator|+
+literal|" set \"deptno\" = 1, empno = 1, ename = 'Bob'"
+operator|+
+literal|" where deptno = 10"
+argument_list|,
+literal|"Cannot assign to target field 'deptno' of type BOOLEAN NOT NULL from source field 'deptno' of type INTEGER"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testUpdateExtendedColumnModifiableViewFailCollision
+parameter_list|()
+block|{
+name|tester
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"update EMP_MODIFIABLEVIEW3(^empno^ BOOLEAN, deptno INTEGER)"
+operator|+
+literal|" set deptno = 1, empno = false, ename = 'Bob'"
+operator|+
+literal|" where deptno = 10"
+argument_list|,
+literal|"Cannot assign to target field 'EMPNO' of type INTEGER NOT NULL from source field 'EMPNO' of type BOOLEAN"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testUpdateExtendedColumnModifiableViewFailExtendedCollision
+parameter_list|()
+block|{
+name|tester
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"update EMP_MODIFIABLEVIEW2(^extra^ INTEGER, deptno INTEGER)"
+operator|+
+literal|" set deptno = 20, empno = 20, ename = 'Bob', extra = 5"
+operator|+
+literal|" where empno = 10"
+argument_list|,
+literal|"Cannot assign to target field 'EXTRA' of type BOOLEAN from source field 'EXTRA' of type INTEGER"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testUpdateExtendedColumnModifiableViewFailUnderlyingCollision
+parameter_list|()
+block|{
+name|tester
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"update EMP_MODIFIABLEVIEW3(^comm^ BOOLEAN, deptno INTEGER)"
+operator|+
+literal|" set deptno = 1, empno = 20, ename = 'Bob', comm = true"
+operator|+
+literal|" where deptno = 10"
+argument_list|,
+literal|"Cannot assign to target field 'COMM' of type INTEGER from source field 'COMM' of type BOOLEAN"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testUpdateExtendedColumnFailDuplicate
+parameter_list|()
+block|{
+name|tester
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"update emp(comm BOOLEAN, ^comm^ INTEGER)"
+operator|+
+literal|" set deptno = 1, empno = 20, ename = 'Bob', comm = 1"
+operator|+
+literal|" where deptno = 10"
+argument_list|,
+literal|"Duplicate name 'COMM' in column list"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"update EMP_MODIFIABLEVIEW3(comm BOOLEAN, ^comm^ INTEGER)"
+operator|+
+literal|" set deptno = 1, empno = 20, ename = 'Bob', comm = true"
+operator|+
+literal|" where deptno = 10"
+argument_list|,
+literal|"Duplicate name 'COMM' in column list"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testInsertExtendedColumnCollision
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"insert into EMPDEFAULTS(^comm^ INTEGER) (empno, ename, job, comm)\n"
+operator|+
+literal|"values (1, 'Arthur', 'clown', 5)"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testInsertExtendedColumnModifiableViewCollision
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"insert into EMP_MODIFIABLEVIEW3(^sal^ INTEGER) (empno, ename, job, sal)\n"
+operator|+
+literal|"values (1, 'Arthur', 'clown', 5)"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testInsertExtendedColumnModifiableViewExtendedCollision
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"insert into EMP_MODIFIABLEVIEW2(^extra^ BOOLEAN) (empno, ename, job, extra)\n"
+operator|+
+literal|"values (1, 'Arthur', 'clown', true)"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testInsertExtendedColumnModifiableViewUnderlyingCollision
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"insert into EMP_MODIFIABLEVIEW3(^comm^ INTEGER) (empno, ename, job, comm)\n"
+operator|+
+literal|"values (1, 'Arthur', 'clown', 5)"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testInsertExtendedColumnFailCollision
+parameter_list|()
+block|{
+name|tester
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"insert into EMPDEFAULTS(^comm^ BOOLEAN)"
+operator|+
+literal|" (empno, ename, job, comm)\n"
+operator|+
+literal|"values (1, 'Arthur', 'clown', true)"
+argument_list|,
+literal|"Cannot assign to target field 'COMM' of type INTEGER"
+operator|+
+literal|" from source field 'COMM' of type BOOLEAN"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"insert into EMPDEFAULTS(\"comm\" BOOLEAN)"
+operator|+
+literal|" (empno, ename, job, ^comm^)\n"
+operator|+
+literal|"values (1, 'Arthur', 'clown', true)"
+argument_list|,
+literal|"Cannot assign to target field 'COMM' of type INTEGER"
+operator|+
+literal|" from source field 'EXPR\\$3' of type BOOLEAN"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"insert into EMPDEFAULTS(\"comm\" BOOLEAN)"
+operator|+
+literal|" (empno, ename, job, ^\"comm\"^)\n"
+operator|+
+literal|"values (1, 'Arthur', 'clown', 1)"
+argument_list|,
+literal|"Cannot assign to target field 'comm' of type BOOLEAN"
+operator|+
+literal|" from source field 'EXPR\\$3' of type INTEGER"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testInsertExtendedColumnModifiableViewFailCollision
+parameter_list|()
+block|{
+name|tester
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"insert into EMP_MODIFIABLEVIEW2(^slacker^ INTEGER)"
+operator|+
+literal|" (empno, ename, job, slacker) values (1, 'Arthur', 'clown', true)"
+argument_list|,
+literal|"Cannot assign to target field 'SLACKER' of type BOOLEAN from source field 'SLACKER' of type INTEGER"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"insert into EMP_MODIFIABLEVIEW2(\"slacker\" INTEGER)"
+operator|+
+literal|" (empno, ename, job, ^slacker^) values (1, 'Arthur', 'clown', 1)"
+argument_list|,
+literal|"Cannot assign to target field 'SLACKER' of type BOOLEAN from source field 'EXPR\\$3' of type INTEGER"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"insert into EMP_MODIFIABLEVIEW2(\"slacker\" INTEGER)"
+operator|+
+literal|" (empno, ename, job, ^\"slacker\"^) values (1, 'Arthur', 'clown', true)"
+argument_list|,
+literal|"Cannot assign to target field 'slacker' of type INTEGER from source field 'EXPR\\$3' of type BOOLEAN"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testInsertExtendedColumnModifiableViewFailExtendedCollision
+parameter_list|()
+block|{
+name|tester
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"insert into EMP_MODIFIABLEVIEW2(^extra^ INTEGER)"
+operator|+
+literal|" (empno, ename, job, extra) values (1, 'Arthur', 'clown', true)"
+argument_list|,
+literal|"Cannot assign to target field 'EXTRA' of type BOOLEAN from source field 'EXTRA' of type INTEGER"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"insert into EMP_MODIFIABLEVIEW2(\"extra\" INTEGER)"
+operator|+
+literal|" (empno, ename, job, ^extra^) values (1, 'Arthur', 'clown', 1)"
+argument_list|,
+literal|"Cannot assign to target field 'EXTRA' of type BOOLEAN from source field 'EXPR\\$3' of type INTEGER"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"insert into EMP_MODIFIABLEVIEW2(\"extra\" INTEGER)"
+operator|+
+literal|" (empno, ename, job, ^\"extra\"^) values (1, 'Arthur', 'clown', true)"
+argument_list|,
+literal|"Cannot assign to target field 'extra' of type INTEGER from source field 'EXPR\\$3' of type BOOLEAN"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testInsertExtendedColumnModifiableViewFailUnderlyingCollision
+parameter_list|()
+block|{
+name|tester
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"insert into EMP_MODIFIABLEVIEW3(^comm^ BOOLEAN)"
+operator|+
+literal|" (empno, ename, job, comm) values (1, 'Arthur', 'clown', true)"
+argument_list|,
+literal|"Cannot assign to target field 'COMM' of type INTEGER from source field 'COMM' of type BOOLEAN"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"insert into EMP_MODIFIABLEVIEW3(\"comm\" BOOLEAN)"
+operator|+
+literal|" (empno, ename, job, ^comm^) values (1, 'Arthur', 'clown', 5)"
+argument_list|,
+literal|"Unknown target column 'COMM'"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"insert into EMP_MODIFIABLEVIEW3(\"comm\" BOOLEAN)"
+operator|+
+literal|" (empno, ename, job, ^\"comm\"^) values (1, 'Arthur', 'clown', 1)"
+argument_list|,
+literal|"Cannot assign to target field 'comm' of type BOOLEAN from source field 'EXPR\\$3' of type INTEGER"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testDelete
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"delete from empdefaults where deptno = 10"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testDeleteExtendedColumn
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"delete from empdefaults(extra BOOLEAN) where deptno = 10"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"delete from empdefaults(extra BOOLEAN) where extra = false"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testDeleteBindExtendedColumn
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"delete from empdefaults(extra BOOLEAN) where deptno = ?"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"delete from empdefaults(extra BOOLEAN) where extra = ?"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testDeleteModifiableView
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"delete from EMP_MODIFIABLEVIEW2 where deptno = 10"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"delete from EMP_MODIFIABLEVIEW2 where deptno = 20"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"delete from EMP_MODIFIABLEVIEW2 where empno = 30"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testDeleteExtendedColumnModifiableView
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"delete from EMP_MODIFIABLEVIEW2(extra BOOLEAN) where sal> 10"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"delete from EMP_MODIFIABLEVIEW2(note BOOLEAN) where note = 'fired'"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testDeleteExtendedColumnCollision
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"delete from emp(empno INTEGER NOT NULL) where sal> 10"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testDeleteExtendedColumnModifiableViewCollision
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"delete from EMP_MODIFIABLEVIEW2(empno INTEGER NOT NULL) where sal> 10"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"delete from EMP_MODIFIABLEVIEW2(\"empno\" INTEGER) where sal> 10"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"delete from EMP_MODIFIABLEVIEW2(extra BOOLEAN) where sal> 10"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"delete from EMP_MODIFIABLEVIEW2(\"extra\" VARCHAR) where sal> 10"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"delete from EMP_MODIFIABLEVIEW3(comm INTEGER) where sal> 10"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"delete from EMP_MODIFIABLEVIEW3(\"comm\" BIGINT) where sal> 10"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testDeleteExtendedColumnFailCollision
+parameter_list|()
+block|{
+name|tester
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"delete from EMP_MODIFIABLEVIEW2(^empno^ BOOLEAN) where sal> 10"
+argument_list|,
+literal|"Cannot assign to target field 'EMPNO' of type INTEGER NOT NULL from source field 'EMPNO' of type BOOLEAN"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"delete from EMP_MODIFIABLEVIEW2(^empno^ INTEGER) where sal> 10"
+argument_list|,
+literal|"Cannot assign to target field 'EMPNO' of type INTEGER NOT NULL from source field 'EMPNO' of type INTEGER"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"delete from EMP_MODIFIABLEVIEW2(^\"EMPNO\"^ INTEGER) where sal> 10"
+argument_list|,
+literal|"Cannot assign to target field 'EMPNO' of type INTEGER NOT NULL from source field 'EMPNO' of type INTEGER"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"delete from EMP_MODIFIABLEVIEW2(^empno^ INTEGER) where sal> 10"
+argument_list|,
+literal|"Cannot assign to target field 'EMPNO' of type INTEGER NOT NULL from source field 'EMPNO' of type INTEGER"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testDeleteExtendedColumnModifiableViewFailCollision
+parameter_list|()
+block|{
+name|tester
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"delete from EMP_MODIFIABLEVIEW(^deptno^ BOOLEAN) where sal> 10"
+argument_list|,
+literal|"Cannot assign to target field 'DEPTNO' of type INTEGER from source field 'DEPTNO' of type BOOLEAN"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"delete from EMP_MODIFIABLEVIEW(^\"DEPTNO\"^ BOOLEAN) where sal> 10"
+argument_list|,
+literal|"Cannot assign to target field 'DEPTNO' of type INTEGER from source field 'DEPTNO' of type BOOLEAN"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testDeleteExtendedColumnModifiableViewFailExtendedCollision
+parameter_list|()
+block|{
+name|tester
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"delete from EMP_MODIFIABLEVIEW(^slacker^ INTEGER) where sal> 10"
+argument_list|,
+literal|"Cannot assign to target field 'SLACKER' of type BOOLEAN from source field 'SLACKER' of type INTEGER"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"delete from EMP_MODIFIABLEVIEW(^\"SLACKER\"^ INTEGER) where sal> 10"
+argument_list|,
+literal|"Cannot assign to target field 'SLACKER' of type BOOLEAN from source field 'SLACKER' of type INTEGER"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testDeleteExtendedColumnFailDuplicate
+parameter_list|()
+block|{
+name|tester
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"delete from emp (extra VARCHAR, ^extra^ VARCHAR)"
+argument_list|,
+literal|"Duplicate name 'EXTRA' in column list"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"delete from EMP_MODIFIABLEVIEW (extra VARCHAR, ^extra^ VARCHAR)"
+operator|+
+literal|" where extra = 'test'"
+argument_list|,
+literal|"Duplicate name 'EXTRA' in column list"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"delete from EMP_MODIFIABLEVIEW (extra VARCHAR, ^\"EXTRA\"^ VARCHAR)"
+operator|+
+literal|" where extra = 'test'"
+argument_list|,
+literal|"Duplicate name 'EXTRA' in column list"
 argument_list|)
 expr_stmt|;
 block|}

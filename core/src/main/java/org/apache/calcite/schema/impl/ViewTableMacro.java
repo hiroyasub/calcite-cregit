@@ -524,10 +524,6 @@ argument_list|,
 name|parsed
 operator|.
 name|columnMapping
-argument_list|,
-name|parsed
-operator|.
-name|typeFactory
 argument_list|)
 return|;
 block|}

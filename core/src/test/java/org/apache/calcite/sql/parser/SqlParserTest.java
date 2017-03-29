@@ -11933,6 +11933,170 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testInsertCaseSensitiveColumnList
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|expected
+init|=
+literal|"INSERT INTO `emps` (`x`, `y`)\n"
+operator|+
+literal|"(SELECT *\n"
+operator|+
+literal|"FROM `EMPS`)"
+decl_stmt|;
+name|sql
+argument_list|(
+literal|"insert into \"emps\"(\"x\",\"y\") select * from emps"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testInsertExtendedColumnList
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|expected
+init|=
+literal|"INSERT INTO `EMPS` EXTEND (`Z` BOOLEAN) (`X`, `Y`)\n"
+operator|+
+literal|"(SELECT *\n"
+operator|+
+literal|"FROM `EMPS`)"
+decl_stmt|;
+name|sql
+argument_list|(
+literal|"insert into emps(z boolean)(x,y) select * from emps"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testUpdateExtendedColumnList
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|expected
+init|=
+literal|"UPDATE `EMPDEFAULTS` EXTEND (`EXTRA` BOOLEAN, `NOTE` VARCHAR)"
+operator|+
+literal|" SET `DEPTNO` = 1\n"
+operator|+
+literal|", `EXTRA` = TRUE\n"
+operator|+
+literal|", `EMPNO` = 20\n"
+operator|+
+literal|", `ENAME` = 'Bob'\n"
+operator|+
+literal|", `NOTE` = 'legion'\n"
+operator|+
+literal|"WHERE (`DEPTNO` = 10)"
+decl_stmt|;
+name|sql
+argument_list|(
+literal|"update empdefaults(extra BOOLEAN, note VARCHAR)"
+operator|+
+literal|" set deptno = 1, extra = true, empno = 20, ename = 'Bob', note = 'legion'"
+operator|+
+literal|" where deptno = 10"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testUpdateCaseSensitiveExtendedColumnList
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|expected
+init|=
+literal|"UPDATE `EMPDEFAULTS` EXTEND (`extra` BOOLEAN, `NOTE` VARCHAR)"
+operator|+
+literal|" SET `DEPTNO` = 1\n"
+operator|+
+literal|", `extra` = TRUE\n"
+operator|+
+literal|", `EMPNO` = 20\n"
+operator|+
+literal|", `ENAME` = 'Bob'\n"
+operator|+
+literal|", `NOTE` = 'legion'\n"
+operator|+
+literal|"WHERE (`DEPTNO` = 10)"
+decl_stmt|;
+name|sql
+argument_list|(
+literal|"update empdefaults(\"extra\" BOOLEAN, note VARCHAR)"
+operator|+
+literal|" set deptno = 1, \"extra\" = true, empno = 20, ename = 'Bob', note = 'legion'"
+operator|+
+literal|" where deptno = 10"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testInsertCaseSensitiveExtendedColumnList
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|expected
+init|=
+literal|"INSERT INTO `emps` EXTEND (`z` BOOLEAN) (`x`, `y`)\n"
+operator|+
+literal|"(SELECT *\n"
+operator|+
+literal|"FROM `EMPS`)"
+decl_stmt|;
+name|sql
+argument_list|(
+literal|"insert into \"emps\"(\"z\" boolean)(\"x\",\"y\") select * from emps"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testExplainInsert
 parameter_list|()
 block|{

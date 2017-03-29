@@ -518,6 +518,19 @@ return|return
 name|schemaPath
 return|;
 block|}
+comment|/** Returns the the path of the view. */
+specifier|public
+name|List
+argument_list|<
+name|String
+argument_list|>
+name|getViewPath
+parameter_list|()
+block|{
+return|return
+name|viewPath
+return|;
+block|}
 annotation|@
 name|Override
 specifier|public

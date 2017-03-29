@@ -104,7 +104,7 @@ name|int
 name|iColumn
 parameter_list|)
 function_decl|;
-comment|/**    * Creates an expression which evaluates to the default value for a    * particular column.    *    * @param table   the table containing the column    * @param iColumn the 0-based offset of the column in the table    * @return default value expression    */
+comment|/**    * Creates an expression which evaluates to the default value for a    * particular column.    *    * @param table   the table containing the column    * @param iColumn the 0-based offset of the column in the table    * @param context Context for creating the expression    *    * @return default value expression    */
 name|RexNode
 name|newColumnDefaultValue
 parameter_list|(
@@ -113,9 +113,12 @@ name|table
 parameter_list|,
 name|int
 name|iColumn
+parameter_list|,
+name|InitializerContext
+name|context
 parameter_list|)
 function_decl|;
-comment|/**    * Creates an expression which evaluates to the initializer expression for a    * particular attribute of a structured type.    *    * @param type            the structured type    * @param constructor     the constructor invoked to initialize the type    * @param iAttribute      the 0-based offset of the attribute in the type    * @param constructorArgs arguments passed to the constructor invocation    * @return default value expression    */
+comment|/**    * Creates an expression which evaluates to the initializer expression for a    * particular attribute of a structured type.    *    * @param type            the structured type    * @param constructor     the constructor invoked to initialize the type    * @param iAttribute      the 0-based offset of the attribute in the type    * @param constructorArgs arguments passed to the constructor invocation    * @param context Context for creating the expression    *    * @return default value expression    */
 name|RexNode
 name|newAttributeInitializer
 parameter_list|(
@@ -133,6 +136,9 @@ argument_list|<
 name|RexNode
 argument_list|>
 name|constructorArgs
+parameter_list|,
+name|InitializerContext
+name|context
 parameter_list|)
 function_decl|;
 block|}

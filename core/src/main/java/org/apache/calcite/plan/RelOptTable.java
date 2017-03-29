@@ -245,7 +245,7 @@ name|Class
 name|clazz
 parameter_list|)
 function_decl|;
-comment|/** Returns a table with the given extra fields. */
+comment|/** Returns a table with the given extra fields.    *    *<p>The extended table includes the fields of this base table plus the    * extended fields that do not have the same name as a field in the base    * table.    */
 name|RelOptTable
 name|extend
 parameter_list|(

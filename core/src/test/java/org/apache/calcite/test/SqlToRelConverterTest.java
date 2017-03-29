@@ -2935,6 +2935,290 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testSelectViewExtendedColumnCollision
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"select ENAME, EMPNO, JOB, SLACKER, SAL, HIREDATE, MGR\n"
+operator|+
+literal|" from EMP_MODIFIABLEVIEW3\n"
+operator|+
+literal|" where SAL = 20"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select ENAME, EMPNO, JOB, SLACKER, SAL, HIREDATE, MGR\n"
+operator|+
+literal|" from EMP_MODIFIABLEVIEW3 extend (SAL int)\n"
+operator|+
+literal|" where SAL = 20"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSelectViewExtendedColumnCaseSensitiveCollision
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"select ENAME, EMPNO, JOB, SLACKER, \"sal\", HIREDATE, MGR\n"
+operator|+
+literal|" from EMP_MODIFIABLEVIEW3 extend (\"sal\" boolean)\n"
+operator|+
+literal|" where \"sal\" = true"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSelectViewExtendedColumnExtendedCollision
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"select ENAME, EMPNO, JOB, SLACKER, SAL, HIREDATE, EXTRA\n"
+operator|+
+literal|" from EMP_MODIFIABLEVIEW2\n"
+operator|+
+literal|" where SAL = 20"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select ENAME, EMPNO, JOB, SLACKER, SAL, HIREDATE, EXTRA\n"
+operator|+
+literal|" from EMP_MODIFIABLEVIEW2 extend (EXTRA boolean)\n"
+operator|+
+literal|" where SAL = 20"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSelectViewExtendedColumnCaseSensitiveExtendedCollision
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"select ENAME, EMPNO, JOB, SLACKER, SAL, HIREDATE, \"extra\"\n"
+operator|+
+literal|" from EMP_MODIFIABLEVIEW2 extend (\"extra\" boolean)\n"
+operator|+
+literal|" where \"extra\" = false"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSelectViewExtendedColumnUnderlyingCollision
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"select ENAME, EMPNO, JOB, SLACKER, SAL, HIREDATE, MGR, COMM\n"
+operator|+
+literal|" from EMP_MODIFIABLEVIEW3 extend (COMM int)\n"
+operator|+
+literal|" where SAL = 20"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSelectViewExtendedColumnCaseSensitiveUnderlyingCollision
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"select ENAME, EMPNO, JOB, SLACKER, SAL, HIREDATE, MGR, \"comm\"\n"
+operator|+
+literal|" from EMP_MODIFIABLEVIEW3 extend (\"comm\" int)\n"
+operator|+
+literal|" where \"comm\" = 20"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testUpdateExtendedColumnCollision
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"update empdefaults(empno INTEGER NOT NULL, deptno INTEGER)"
+operator|+
+literal|" set deptno = 1, empno = 20, ename = 'Bob'"
+operator|+
+literal|" where deptno = 10"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testUpdateExtendedColumnCaseSensitiveCollision
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"update empdefaults(\"slacker\" INTEGER, deptno INTEGER)"
+operator|+
+literal|" set deptno = 1, \"slacker\" = 100"
+operator|+
+literal|" where ename = 'Bob'"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testUpdateExtendedColumnModifiableViewCollision
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"update EMP_MODIFIABLEVIEW3(empno INTEGER NOT NULL, deptno INTEGER)"
+operator|+
+literal|" set deptno = 20, empno = 20, ename = 'Bob'"
+operator|+
+literal|" where empno = 10"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testUpdateExtendedColumnModifiableViewCaseSensitiveCollision
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"update EMP_MODIFIABLEVIEW2(\"slacker\" INTEGER, deptno INTEGER)"
+operator|+
+literal|" set deptno = 20, \"slacker\" = 100"
+operator|+
+literal|" where ename = 'Bob'"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testUpdateExtendedColumnModifiableViewExtendedCollision
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"update EMP_MODIFIABLEVIEW2(\"slacker\" INTEGER, extra BOOLEAN)"
+operator|+
+literal|" set deptno = 20, \"slacker\" = 100, extra = true"
+operator|+
+literal|" where ename = 'Bob'"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testUpdateExtendedColumnModifiableViewExtendedCaseSensitiveCollision
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"update EMP_MODIFIABLEVIEW2(\"extra\" INTEGER, extra BOOLEAN)"
+operator|+
+literal|" set deptno = 20, \"extra\" = 100, extra = true"
+operator|+
+literal|" where ename = 'Bob'"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testUpdateExtendedColumnModifiableViewUnderlyingCollision
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"update EMP_MODIFIABLEVIEW3(extra BOOLEAN, comm INTEGER)"
+operator|+
+literal|" set empno = 20, comm = true, extra = true"
+operator|+
+literal|" where ename = 'Bob'"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testSelectModifiableViewConstraint
 parameter_list|()
 block|{
@@ -5931,6 +6215,110 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testInsertExtendedColumn
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"insert into empdefaults(updated TIMESTAMP)"
+operator|+
+literal|" (ename, deptno, empno, updated, sal)"
+operator|+
+literal|" values ('Fred', 456, 44, timestamp '2017-03-12 13:03:05', 999999)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testInsertBindExtendedColumn
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"insert into empdefaults(updated TIMESTAMP)"
+operator|+
+literal|" (ename, deptno, empno, updated, sal)"
+operator|+
+literal|" values ('Fred', 456, 44, ?, 999999)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testInsertExtendedColumnModifiableView
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"insert into EMP_MODIFIABLEVIEW2(updated TIMESTAMP)"
+operator|+
+literal|" (ename, deptno, empno, updated, sal)"
+operator|+
+literal|" values ('Fred', 20, 44, timestamp '2017-03-12 13:03:05', 999999)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testInsertBindExtendedColumnModifiableView
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"insert into EMP_MODIFIABLEVIEW2(updated TIMESTAMP)"
+operator|+
+literal|" (ename, deptno, empno, updated, sal)"
+operator|+
+literal|" values ('Fred', 20, 44, ?, 999999)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testDelete
 parameter_list|()
 block|{
@@ -5961,6 +6349,94 @@ name|String
 name|sql
 init|=
 literal|"delete from emp where deptno = 10"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testDeleteBind
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"delete from emp where deptno = ?"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testDeleteBindExtendedColumn
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"delete from emp(enddate TIMESTAMP) where enddate< ?"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testDeleteBindModifiableView
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"delete from EMP_MODIFIABLEVIEW2 where empno = ?"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testDeleteBindExtendedColumnModifiableView
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"delete from EMP_MODIFIABLEVIEW2(note VARCHAR) where note = ?"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -6036,6 +6512,160 @@ name|String
 name|sql
 init|=
 literal|"update emp set empno = empno + 1 where deptno = 10"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testUpdateModifiableView
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"update EMP_MODIFIABLEVIEW2 set sal = sal + 5000 where slacker = false"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testUpdateExtendedColumn
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"update empdefaults(updated TIMESTAMP)"
+operator|+
+literal|" set deptno = 1, updated = timestamp '2017-03-12 13:03:05', empno = 20, ename = 'Bob'"
+operator|+
+literal|" where deptno = 10"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testUpdateExtendedColumnModifiableView
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"update EMP_MODIFIABLEVIEW2(updated TIMESTAMP)"
+operator|+
+literal|" set updated = timestamp '2017-03-12 13:03:05', sal = sal + 5000 where slacker = false"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testUpdateBind
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"update emp"
+operator|+
+literal|" set sal = sal + ? where slacker = false"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Ignore
+argument_list|(
+literal|"CALCITE-1708"
+argument_list|)
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testUpdateBindExtendedColumn
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"update emp(test INT)"
+operator|+
+literal|" set test = ?, sal = sal + 5000 where slacker = false"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Ignore
+argument_list|(
+literal|"CALCITE-1708"
+argument_list|)
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testUpdateBindExtendedColumnModifiableView
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"update EMP_MODIFIABLEVIEW2(test INT)"
+operator|+
+literal|" set test = ?, sal = sal + 5000 where slacker = false"
 decl_stmt|;
 name|sql
 argument_list|(

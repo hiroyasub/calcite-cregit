@@ -49,6 +49,20 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql2rel
+operator|.
+name|InitializerContext
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -107,6 +121,9 @@ name|rowType
 parameter_list|,
 name|int
 name|ordinal
+parameter_list|,
+name|InitializerContext
+name|initializerContext
 parameter_list|)
 function_decl|;
 comment|/**    * Finds an interface implemented by this table.    */
