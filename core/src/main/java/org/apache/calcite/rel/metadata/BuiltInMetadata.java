@@ -109,6 +109,36 @@ name|apache
 operator|.
 name|calcite
 operator|.
+name|rex
+operator|.
+name|RexTableInputRef
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rex
+operator|.
+name|RexTableInputRef
+operator|.
+name|RelTableRef
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
 name|sql
 operator|.
 name|SqlExplainLevel
@@ -537,7 +567,7 @@ parameter_list|)
 function_decl|;
 block|}
 block|}
-comment|/** Metadata about the node types and count in a relational expression. */
+comment|/**    * Metadata about the node types in a relational expression.    *    *<p>For each relational expression, it returns a multimap from the class    * to the nodes instantiating that class. Each node will appear in the    * multimap only once.    */
 specifier|public
 interface|interface
 name|NodeTypes
@@ -571,7 +601,7 @@ operator|.
 name|method
 argument_list|)
 decl_stmt|;
-comment|/**      *      */
+comment|/**      * Returns a multimap from the class to the nodes instantiating that      * class. The default implementation for a node classifies it as a      * {@link RelNode}.      */
 name|Multimap
 argument_list|<
 name|Class
@@ -1188,7 +1218,7 @@ operator|.
 name|method
 argument_list|)
 decl_stmt|;
-comment|/**      *      */
+comment|/**      * Given the input expression applied on the given {@link RelNode}, this      * provider returns the expression with its lineage resolved.      *      *<p>In particular, the result will be a set of nodes which might contain      * references to columns in TableScan operators ({@link RexTableInputRef}).      * An expression can have more than one lineage expression due to Union      * operators. However, we do not check column equality in Filter predicates.      * Each TableScan operator below the node is identified uniquely by its      * qualified name and its entity number.      *      *<p>For example, if the expression is {@code $0 + 2} and {@code $0} originated      * from column {@code $3} in the {@code 0} occurrence of table {@code A} in the      * plan, result will be: {@code A.#0.$3 + 2}. Occurrences are generated in no      * particular order, but it is guaranteed that if two expressions referred to the      * same table, the qualified name + occurrence will be the same.      *      * @param expression expression whose lineage we want to resolve      * @return set of expressions with lineage resolved, or null if this information      * cannot be determined (e.g. origin of an expression is an aggregation      * in an {@link Aggregate} operator)      */
 name|Set
 argument_list|<
 name|RexNode
@@ -1222,6 +1252,72 @@ name|mq
 parameter_list|,
 name|RexNode
 name|expression
+parameter_list|)
+function_decl|;
+block|}
+block|}
+comment|/** Metadata to obtain references to tables used by a given expression. */
+specifier|public
+interface|interface
+name|TableReferences
+extends|extends
+name|Metadata
+block|{
+name|MetadataDef
+argument_list|<
+name|TableReferences
+argument_list|>
+name|DEF
+init|=
+name|MetadataDef
+operator|.
+name|of
+argument_list|(
+name|TableReferences
+operator|.
+name|class
+argument_list|,
+name|TableReferences
+operator|.
+name|Handler
+operator|.
+name|class
+argument_list|,
+name|BuiltInMethod
+operator|.
+name|TABLE_REFERENCES
+operator|.
+name|method
+argument_list|)
+decl_stmt|;
+comment|/**      * This provider returns the tables used by a given plan.      *      *<p>In particular, the result will be a set of unique table references      * ({@link RelTableRef}) corresponding to each TableScan operator in the      * plan. These table references are composed by the table qualified name      * and an entity number.      *      *<p>Importantly, the table identifiers returned by this metadata provider      * will be consistent with the unique identifiers used by the {@link ExpressionLineage}      * provider, meaning that it is guaranteed that same table will use same unique      * identifiers in both.      *      * @return set of unique table identifiers, or null if this information      * cannot be determined      */
+name|Set
+argument_list|<
+name|RelTableRef
+argument_list|>
+name|getTableReferences
+parameter_list|()
+function_decl|;
+comment|/** Handler API. */
+interface|interface
+name|Handler
+extends|extends
+name|MetadataHandler
+argument_list|<
+name|TableReferences
+argument_list|>
+block|{
+name|Set
+argument_list|<
+name|RelTableRef
+argument_list|>
+name|getTableReferences
+parameter_list|(
+name|RelNode
+name|r
+parameter_list|,
+name|RelMetadataQuery
+name|mq
 parameter_list|)
 function_decl|;
 block|}
@@ -1472,7 +1568,7 @@ parameter_list|)
 function_decl|;
 block|}
 block|}
-comment|/** Metadata about the predicates that hold in the rows emitted from a    * relational expression. */
+comment|/** Metadata about the predicates that hold in the rows emitted from a    * relational expression.    *    *<p>The difference with respect to {@link Predicates} provider is that    * this provider tries to extract ALL predicates even if they are not    * applied on the output expressions of the relational expression; we rely    * on {@link RexTableInputRef} to reference origin columns in {@link TableScan}    * for the result predicates.    */
 specifier|public
 interface|interface
 name|AllPredicates
@@ -1506,7 +1602,7 @@ operator|.
 name|method
 argument_list|)
 decl_stmt|;
-comment|/**      * Derives the predicates that hold on rows emitted from a relational      * expression.      *      * @return Predicate list      */
+comment|/**      * Derives the predicates that hold on rows emitted from a relational      * expression.      *      * @return predicate list, or null if the provider cannot infer the      * lineage for any of the expressions contained in any of the predicates      */
 name|RelOptPredicateList
 name|getAllPredicates
 parameter_list|()
@@ -1748,6 +1844,8 @@ extends|,
 name|AllPredicates
 extends|,
 name|ExpressionLineage
+extends|,
+name|TableReferences
 extends|,
 name|NodeTypes
 block|{   }

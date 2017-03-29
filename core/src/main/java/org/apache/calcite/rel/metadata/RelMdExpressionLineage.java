@@ -317,6 +317,22 @@ name|calcite
 operator|.
 name|rex
 operator|.
+name|RexTableInputRef
+operator|.
+name|RelTableRef
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rex
+operator|.
 name|RexUtil
 import|;
 end_import
@@ -538,7 +554,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * RelMdExpressionLineage supplies a default implementation of  * {@link RelMetadataQuery#getExpressionLineage} for the standard logical algebra.  *  * The goal of this provider is to infer the lineage for the given expression.  *  * The output expressions might contain references to columns produced by TableScan  * operators ({@link RexTableInputRef}). In turn, each TableScan operator is identified  * uniquely by its qualified name and an identifier contained in .  *  * If the lineage cannot be inferred, we return null.  */
+comment|/**  * RelMdExpressionLineage supplies a default implementation of  * {@link RelMetadataQuery#getExpressionLineage} for the standard logical algebra.  *  * The goal of this provider is to infer the lineage for the given expression.  *  * The output expressions might contain references to columns produced by TableScan  * operators ({@link RexTableInputRef}). In turn, each TableScan operator is identified  * uniquely by a {@link RelTableRef} containing its qualified name and an identifier.  *  * If the lineage cannot be inferred, we return null.  */
 end_comment
 
 begin_class
@@ -802,8 +818,9 @@ name|RexTableInputRef
 operator|.
 name|of
 argument_list|(
-operator|new
 name|RelTableRef
+operator|.
+name|of
 argument_list|(
 name|rel
 operator|.
@@ -811,9 +828,6 @@ name|getTable
 argument_list|()
 operator|.
 name|getQualifiedName
-argument_list|()
-operator|.
-name|toString
 argument_list|()
 argument_list|,
 literal|0
@@ -1204,7 +1218,10 @@ comment|// Infer column origin expressions for given references
 specifier|final
 name|Multimap
 argument_list|<
+name|List
+argument_list|<
 name|String
+argument_list|>
 argument_list|,
 name|RelTableRef
 argument_list|>
@@ -1511,8 +1528,9 @@ name|put
 argument_list|(
 name|rightRef
 argument_list|,
-operator|new
 name|RelTableRef
+operator|.
+name|of
 argument_list|(
 name|rightRef
 operator|.
@@ -1523,7 +1541,7 @@ name|shift
 operator|+
 name|rightRef
 operator|.
-name|getIdentifier
+name|getEntityNumber
 argument_list|()
 argument_list|)
 argument_list|)
@@ -1652,7 +1670,10 @@ comment|// Infer column origin expressions for given references
 specifier|final
 name|Multimap
 argument_list|<
+name|List
+argument_list|<
 name|String
+argument_list|>
 argument_list|,
 name|RelTableRef
 argument_list|>
@@ -1866,8 +1887,9 @@ name|put
 argument_list|(
 name|tableRef
 argument_list|,
-operator|new
 name|RelTableRef
+operator|.
+name|of
 argument_list|(
 name|tableRef
 operator|.
@@ -1878,7 +1900,7 @@ name|shift
 operator|+
 name|tableRef
 operator|.
-name|getIdentifier
+name|getEntityNumber
 argument_list|()
 argument_list|)
 argument_list|)
@@ -2379,6 +2401,24 @@ operator|.
 name|build
 argument_list|()
 decl_stmt|;
+if|if
+condition|(
+name|predFieldsUsed
+operator|.
+name|isEmpty
+argument_list|()
+condition|)
+block|{
+comment|// The unique expression is the input expression
+return|return
+name|Sets
+operator|.
+name|newHashSet
+argument_list|(
+name|expr
+argument_list|)
+return|;
+block|}
 return|return
 name|createAllPossibleExpressions
 argument_list|(

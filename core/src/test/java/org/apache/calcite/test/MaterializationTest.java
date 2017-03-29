@@ -553,6 +553,18 @@ name|junit
 operator|.
 name|Assert
 operator|.
+name|assertNull
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|Assert
+operator|.
 name|assertThat
 import|;
 end_import
@@ -2887,6 +2899,24 @@ decl_stmt|;
 comment|// $0 = 1 again
 specifier|final
 name|RexNode
+name|x_eq_2
+init|=
+name|rexBuilder
+operator|.
+name|makeCall
+argument_list|(
+name|SqlStdOperatorTable
+operator|.
+name|EQUALS
+argument_list|,
+name|x
+argument_list|,
+name|i2
+argument_list|)
+decl_stmt|;
+comment|// $0 = 2
+specifier|final
+name|RexNode
 name|y_eq_2
 init|=
 name|rexBuilder
@@ -2930,7 +2960,7 @@ comment|// Example 2.
 comment|//   condition: x = 1,
 comment|//   target:    x = 1 or z = 3
 comment|// yields
-comment|//   residue:   not (z = 3)
+comment|//   residue:   x = 1
 name|newFilter
 operator|=
 name|SubstitutionVisitor
@@ -2964,7 +2994,7 @@ argument_list|()
 argument_list|,
 name|equalTo
 argument_list|(
-literal|"NOT(=($2, 3))"
+literal|"=($0, 1)"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -2972,7 +3002,7 @@ comment|// 2b.
 comment|//   condition: x = 1 or y = 2
 comment|//   target:    x = 1 or y = 2 or z = 3
 comment|// yields
-comment|//   residue:   not (z = 3)
+comment|//   residue:   x = 1 or y = 2
 name|newFilter
 operator|=
 name|SubstitutionVisitor
@@ -3019,7 +3049,7 @@ argument_list|()
 argument_list|,
 name|equalTo
 argument_list|(
-literal|"NOT(=($2, 3))"
+literal|"OR(=($0, 1), =($1, 2))"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -3027,7 +3057,7 @@ comment|// 2c.
 comment|//   condition: x = 1
 comment|//   target:    x = 1 or y = 2 or z = 3
 comment|// yields
-comment|//   residue:   not (y = 2) and not (z = 3)
+comment|//   residue:   x = 1
 name|newFilter
 operator|=
 name|SubstitutionVisitor
@@ -3063,7 +3093,7 @@ argument_list|()
 argument_list|,
 name|equalTo
 argument_list|(
-literal|"AND(NOT(=($1, 2)), NOT(=($2, 3)))"
+literal|"=($0, 1)"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -3156,14 +3186,209 @@ comment|//   condition: x = 1 or y = 2
 comment|//   target:    x = 1
 comment|// yields
 comment|//   residue:   null
-comment|// TODO:
+name|newFilter
+operator|=
+name|SubstitutionVisitor
+operator|.
+name|splitFilter
+argument_list|(
+name|simplify
+argument_list|,
+name|rexBuilder
+operator|.
+name|makeCall
+argument_list|(
+name|SqlStdOperatorTable
+operator|.
+name|OR
+argument_list|,
+name|x_eq_1
+argument_list|,
+name|y_eq_2
+argument_list|)
+argument_list|,
+name|x_eq_1
+argument_list|)
+expr_stmt|;
+name|assertNull
+argument_list|(
+name|newFilter
+argument_list|)
+expr_stmt|;
 comment|// Example 3.
 comment|// Condition [x = 1 and y = 2],
 comment|// target [y = 2 and x = 1] yields
 comment|// residue [true].
-comment|// TODO:
+name|newFilter
+operator|=
+name|SubstitutionVisitor
+operator|.
+name|splitFilter
+argument_list|(
+name|simplify
+argument_list|,
+name|rexBuilder
+operator|.
+name|makeCall
+argument_list|(
+name|SqlStdOperatorTable
+operator|.
+name|AND
+argument_list|,
+name|x_eq_1
+argument_list|,
+name|y_eq_2
+argument_list|)
+argument_list|,
+name|rexBuilder
+operator|.
+name|makeCall
+argument_list|(
+name|SqlStdOperatorTable
+operator|.
+name|AND
+argument_list|,
+name|y_eq_2
+argument_list|,
+name|x_eq_1
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|assertThat
+argument_list|(
+name|newFilter
+operator|.
+name|isAlwaysTrue
+argument_list|()
+argument_list|,
+name|equalTo
+argument_list|(
+literal|true
+argument_list|)
+argument_list|)
+expr_stmt|;
 comment|// Example 4.
-comment|// TODO:
+comment|//   condition: x = 1 and y = 2
+comment|//   target:    y = 2
+comment|// yields
+comment|//   residue:   x = 1
+name|newFilter
+operator|=
+name|SubstitutionVisitor
+operator|.
+name|splitFilter
+argument_list|(
+name|simplify
+argument_list|,
+name|rexBuilder
+operator|.
+name|makeCall
+argument_list|(
+name|SqlStdOperatorTable
+operator|.
+name|AND
+argument_list|,
+name|x_eq_1
+argument_list|,
+name|y_eq_2
+argument_list|)
+argument_list|,
+name|y_eq_2
+argument_list|)
+expr_stmt|;
+name|assertThat
+argument_list|(
+name|newFilter
+operator|.
+name|toString
+argument_list|()
+argument_list|,
+name|equalTo
+argument_list|(
+literal|"=($0, 1)"
+argument_list|)
+argument_list|)
+expr_stmt|;
+comment|// Example 5.
+comment|//   condition: x = 1
+comment|//   target:    x = 1 and y = 2
+comment|// yields
+comment|//   residue:   null
+name|newFilter
+operator|=
+name|SubstitutionVisitor
+operator|.
+name|splitFilter
+argument_list|(
+name|simplify
+argument_list|,
+name|x_eq_1
+argument_list|,
+name|rexBuilder
+operator|.
+name|makeCall
+argument_list|(
+name|SqlStdOperatorTable
+operator|.
+name|AND
+argument_list|,
+name|x_eq_1
+argument_list|,
+name|y_eq_2
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|assertNull
+argument_list|(
+name|newFilter
+argument_list|)
+expr_stmt|;
+comment|// Example 6.
+comment|//   condition: x = 1
+comment|//   target:    y = 2
+comment|// yields
+comment|//   residue:   null
+name|newFilter
+operator|=
+name|SubstitutionVisitor
+operator|.
+name|splitFilter
+argument_list|(
+name|simplify
+argument_list|,
+name|x_eq_1
+argument_list|,
+name|y_eq_2
+argument_list|)
+expr_stmt|;
+name|assertNull
+argument_list|(
+name|newFilter
+argument_list|)
+expr_stmt|;
+comment|// Example 7.
+comment|//   condition: x = 1
+comment|//   target:    x = 2
+comment|// yields
+comment|//   residue:   null
+name|newFilter
+operator|=
+name|SubstitutionVisitor
+operator|.
+name|splitFilter
+argument_list|(
+name|simplify
+argument_list|,
+name|x_eq_1
+argument_list|,
+name|x_eq_2
+argument_list|)
+expr_stmt|;
+name|assertNull
+argument_list|(
+name|newFilter
+argument_list|)
+expr_stmt|;
 block|}
 comment|/** Tests a complicated star-join query on a complicated materialized    * star-join query. Some of the features:    *    * 1. query joins in different order;    * 2. query's join conditions are in where clause;    * 3. query does not use all join tables (safe to omit them because they are    *    many-to-mandatory-one joins);    * 4. query is at higher granularity, therefore needs to roll up;    * 5. query has a condition on one of the materialization's grouping columns.    */
 annotation|@
@@ -3446,6 +3671,731 @@ argument_list|(
 literal|"EnumerableTableScan(table=[[hr, m0]])"
 argument_list|,
 literal|1
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testAggregateMaterializationNoAggregateFuncs1
+parameter_list|()
+block|{
+name|checkMaterialize
+argument_list|(
+literal|"select \"empid\", \"deptno\" from \"emps\" group by \"empid\", \"deptno\""
+argument_list|,
+literal|"select \"empid\", \"deptno\" from \"emps\" group by \"empid\", \"deptno\""
+argument_list|,
+name|JdbcTest
+operator|.
+name|HR_MODEL
+argument_list|,
+name|CalciteAssert
+operator|.
+name|checkResultContains
+argument_list|(
+literal|"EnumerableTableScan(table=[[hr, m0]])"
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testAggregateMaterializationNoAggregateFuncs2
+parameter_list|()
+block|{
+name|checkMaterialize
+argument_list|(
+literal|"select \"empid\", \"deptno\" from \"emps\" group by \"empid\", \"deptno\""
+argument_list|,
+literal|"select \"deptno\" from \"emps\" group by \"deptno\""
+argument_list|,
+name|JdbcTest
+operator|.
+name|HR_MODEL
+argument_list|,
+name|CalciteAssert
+operator|.
+name|checkResultContains
+argument_list|(
+literal|"EnumerableAggregate(group=[{1}])\n"
+operator|+
+literal|"  EnumerableTableScan(table=[[hr, m0]])"
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testAggregateMaterializationNoAggregateFuncs3
+parameter_list|()
+block|{
+name|checkNoMaterialize
+argument_list|(
+literal|"select \"deptno\" from \"emps\" group by \"deptno\""
+argument_list|,
+literal|"select \"empid\", \"deptno\" from \"emps\" group by \"empid\", \"deptno\""
+argument_list|,
+name|JdbcTest
+operator|.
+name|HR_MODEL
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testAggregateMaterializationNoAggregateFuncs4
+parameter_list|()
+block|{
+name|checkMaterialize
+argument_list|(
+literal|"select \"empid\", \"deptno\" from \"emps\" where \"deptno\" = 10 group by \"empid\", \"deptno\""
+argument_list|,
+literal|"select \"deptno\" from \"emps\" where \"deptno\" = 10 group by \"deptno\""
+argument_list|,
+name|JdbcTest
+operator|.
+name|HR_MODEL
+argument_list|,
+name|CalciteAssert
+operator|.
+name|checkResultContains
+argument_list|(
+literal|"EnumerableAggregate(group=[{1}])\n"
+operator|+
+literal|"  EnumerableTableScan(table=[[hr, m0]])"
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testAggregateMaterializationNoAggregateFuncs5
+parameter_list|()
+block|{
+name|checkNoMaterialize
+argument_list|(
+literal|"select \"empid\", \"deptno\" from \"emps\" where \"deptno\" = 5 group by \"empid\", \"deptno\""
+argument_list|,
+literal|"select \"deptno\" from \"emps\" where \"deptno\" = 10 group by \"deptno\""
+argument_list|,
+name|JdbcTest
+operator|.
+name|HR_MODEL
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testAggregateMaterializationNoAggregateFuncs6
+parameter_list|()
+block|{
+name|checkMaterialize
+argument_list|(
+literal|"select \"empid\", \"deptno\" from \"emps\" where \"deptno\"> 5 group by \"empid\", \"deptno\""
+argument_list|,
+literal|"select \"deptno\" from \"emps\" where \"deptno\"> 10 group by \"deptno\""
+argument_list|,
+name|JdbcTest
+operator|.
+name|HR_MODEL
+argument_list|,
+name|CalciteAssert
+operator|.
+name|checkResultContains
+argument_list|(
+literal|"EnumerableAggregate(group=[{1}])\n"
+operator|+
+literal|"  EnumerableCalc(expr#0..1=[{inputs}], expr#2=[10], expr#3=[>($t1, $t2)], "
+operator|+
+literal|"proj#0..1=[{exprs}], $condition=[$t3])\n"
+operator|+
+literal|"    EnumerableTableScan(table=[[hr, m0]])"
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testAggregateMaterializationNoAggregateFuncs7
+parameter_list|()
+block|{
+name|checkNoMaterialize
+argument_list|(
+literal|"select \"empid\", \"deptno\" from \"emps\" where \"deptno\"> 5 group by \"empid\", \"deptno\""
+argument_list|,
+literal|"select \"deptno\" from \"emps\" where \"deptno\"< 10 group by \"deptno\""
+argument_list|,
+name|JdbcTest
+operator|.
+name|HR_MODEL
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testAggregateMaterializationNoAggregateFuncs8
+parameter_list|()
+block|{
+name|checkNoMaterialize
+argument_list|(
+literal|"select \"empid\" from \"emps\" group by \"empid\", \"deptno\""
+argument_list|,
+literal|"select \"deptno\" from \"emps\" group by \"deptno\""
+argument_list|,
+name|JdbcTest
+operator|.
+name|HR_MODEL
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testAggregateMaterializationNoAggregateFuncs9
+parameter_list|()
+block|{
+name|checkNoMaterialize
+argument_list|(
+literal|"select \"empid\", \"deptno\" from \"emps\"\n"
+operator|+
+literal|"where \"salary\"> 1000 group by \"name\", \"empid\", \"deptno\""
+argument_list|,
+literal|"select \"empid\" from \"emps\"\n"
+operator|+
+literal|"where \"salary\"> 2000 group by \"name\", \"empid\""
+argument_list|,
+name|JdbcTest
+operator|.
+name|HR_MODEL
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testAggregateMaterializationAggregateFuncs1
+parameter_list|()
+block|{
+name|checkMaterialize
+argument_list|(
+literal|"select \"empid\", \"deptno\", count(*) as c, sum(\"empid\") as s\n"
+operator|+
+literal|"from \"emps\" group by \"empid\", \"deptno\""
+argument_list|,
+literal|"select \"deptno\" from \"emps\" group by \"deptno\""
+argument_list|,
+name|JdbcTest
+operator|.
+name|HR_MODEL
+argument_list|,
+name|CalciteAssert
+operator|.
+name|checkResultContains
+argument_list|(
+literal|"EnumerableAggregate(group=[{1}])\n"
+operator|+
+literal|"  EnumerableTableScan(table=[[hr, m0]])"
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testAggregateMaterializationAggregateFuncs2
+parameter_list|()
+block|{
+name|checkMaterialize
+argument_list|(
+literal|"select \"empid\", \"deptno\", count(*) as c, sum(\"empid\") as s\n"
+operator|+
+literal|"from \"emps\" group by \"empid\", \"deptno\""
+argument_list|,
+literal|"select \"deptno\", count(*) as c, sum(\"empid\") as s\n"
+operator|+
+literal|"from \"emps\" group by \"deptno\""
+argument_list|,
+name|JdbcTest
+operator|.
+name|HR_MODEL
+argument_list|,
+name|CalciteAssert
+operator|.
+name|checkResultContains
+argument_list|(
+literal|"EnumerableAggregate(group=[{1}], C=[$SUM0($2)], S=[$SUM0($3)])\n"
+operator|+
+literal|"  EnumerableTableScan(table=[[hr, m0]])"
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testAggregateMaterializationAggregateFuncs3
+parameter_list|()
+block|{
+name|checkMaterialize
+argument_list|(
+literal|"select \"empid\", \"deptno\", count(*) as c, sum(\"empid\") as s\n"
+operator|+
+literal|"from \"emps\" group by \"empid\", \"deptno\""
+argument_list|,
+literal|"select \"deptno\", \"empid\", sum(\"empid\") as s, count(*) as c\n"
+operator|+
+literal|"from \"emps\" group by \"empid\", \"deptno\""
+argument_list|,
+name|JdbcTest
+operator|.
+name|HR_MODEL
+argument_list|,
+name|CalciteAssert
+operator|.
+name|checkResultContains
+argument_list|(
+literal|"EnumerableCalc(expr#0..3=[{inputs}], deptno=[$t1], empid=[$t0], "
+operator|+
+literal|"S=[$t3], C=[$t2])\n"
+operator|+
+literal|"  EnumerableTableScan(table=[[hr, m0]])"
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testAggregateMaterializationAggregateFuncs4
+parameter_list|()
+block|{
+name|checkMaterialize
+argument_list|(
+literal|"select \"empid\", \"deptno\", count(*) as c, sum(\"empid\") as s\n"
+operator|+
+literal|"from \"emps\" where \"deptno\">= 10 group by \"empid\", \"deptno\""
+argument_list|,
+literal|"select \"deptno\", sum(\"empid\") as s\n"
+operator|+
+literal|"from \"emps\" where \"deptno\"> 10 group by \"deptno\""
+argument_list|,
+name|JdbcTest
+operator|.
+name|HR_MODEL
+argument_list|,
+name|CalciteAssert
+operator|.
+name|checkResultContains
+argument_list|(
+literal|"EnumerableAggregate(group=[{1}], S=[$SUM0($3)])\n"
+operator|+
+literal|"  EnumerableCalc(expr#0..3=[{inputs}], expr#4=[10], expr#5=[>($t1, $t4)], "
+operator|+
+literal|"proj#0..3=[{exprs}], $condition=[$t5])\n"
+operator|+
+literal|"    EnumerableTableScan(table=[[hr, m0]])"
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testAggregateMaterializationAggregateFuncs5
+parameter_list|()
+block|{
+name|checkMaterialize
+argument_list|(
+literal|"select \"empid\", \"deptno\", count(*) + 1 as c, sum(\"empid\") as s\n"
+operator|+
+literal|"from \"emps\" where \"deptno\">= 10 group by \"empid\", \"deptno\""
+argument_list|,
+literal|"select \"deptno\", sum(\"empid\") + 1 as s\n"
+operator|+
+literal|"from \"emps\" where \"deptno\"> 10 group by \"deptno\""
+argument_list|,
+name|JdbcTest
+operator|.
+name|HR_MODEL
+argument_list|,
+name|CalciteAssert
+operator|.
+name|checkResultContains
+argument_list|(
+literal|"EnumerableCalc(expr#0..1=[{inputs}], expr#2=[1], expr#3=[+($t1, $t2)], "
+operator|+
+literal|"deptno=[$t0], S=[$t3])\n"
+operator|+
+literal|"  EnumerableAggregate(group=[{1}], agg#0=[$SUM0($3)])\n"
+operator|+
+literal|"    EnumerableCalc(expr#0..3=[{inputs}], expr#4=[10], expr#5=[>($t1, $t4)], "
+operator|+
+literal|"proj#0..3=[{exprs}], $condition=[$t5])\n"
+operator|+
+literal|"      EnumerableTableScan(table=[[hr, m0]])"
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testAggregateMaterializationAggregateFuncs6
+parameter_list|()
+block|{
+name|checkNoMaterialize
+argument_list|(
+literal|"select \"empid\", \"deptno\", count(*) + 1 as c, sum(\"empid\") + 2 as s\n"
+operator|+
+literal|"from \"emps\" where \"deptno\">= 10 group by \"empid\", \"deptno\""
+argument_list|,
+literal|"select \"deptno\", sum(\"empid\") + 1 as s\n"
+operator|+
+literal|"from \"emps\" where \"deptno\"> 10 group by \"deptno\""
+argument_list|,
+name|JdbcTest
+operator|.
+name|HR_MODEL
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testAggregateMaterializationAggregateFuncs7
+parameter_list|()
+block|{
+name|checkMaterialize
+argument_list|(
+literal|"select \"empid\", \"deptno\", count(*) + 1 as c, sum(\"empid\") as s\n"
+operator|+
+literal|"from \"emps\" where \"deptno\">= 10 group by \"empid\", \"deptno\""
+argument_list|,
+literal|"select \"deptno\" + 1, sum(\"empid\") + 1 as s\n"
+operator|+
+literal|"from \"emps\" where \"deptno\"> 10 group by \"deptno\""
+argument_list|,
+name|JdbcTest
+operator|.
+name|HR_MODEL
+argument_list|,
+name|CalciteAssert
+operator|.
+name|checkResultContains
+argument_list|(
+literal|"EnumerableCalc(expr#0..1=[{inputs}], expr#2=[1], expr#3=[+($t0, $t2)], "
+operator|+
+literal|"expr#4=[+($t1, $t2)], EXPR$0=[$t3], S=[$t4])\n"
+operator|+
+literal|"  EnumerableAggregate(group=[{1}], agg#0=[$SUM0($3)])\n"
+operator|+
+literal|"    EnumerableCalc(expr#0..3=[{inputs}], expr#4=[10], expr#5=[>($t1, $t4)], "
+operator|+
+literal|"proj#0..3=[{exprs}], $condition=[$t5])\n"
+operator|+
+literal|"      EnumerableTableScan(table=[[hr, m0]])"
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Ignore
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testAggregateMaterializationAggregateFuncs8
+parameter_list|()
+block|{
+comment|// TODO: It should work, but top project in the query is not matched by the planner.
+comment|// It needs further checking.
+name|checkMaterialize
+argument_list|(
+literal|"select \"empid\", \"deptno\" + 1, count(*) + 1 as c, sum(\"empid\") as s\n"
+operator|+
+literal|"from \"emps\" where \"deptno\">= 10 group by \"empid\", \"deptno\""
+argument_list|,
+literal|"select \"deptno\" + 1, sum(\"empid\") + 1 as s\n"
+operator|+
+literal|"from \"emps\" where \"deptno\"> 10 group by \"deptno\""
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testJoinAggregateMaterializationNoAggregateFuncs1
+parameter_list|()
+block|{
+name|checkMaterialize
+argument_list|(
+literal|"select \"empid\", \"depts\".\"deptno\" from \"emps\"\n"
+operator|+
+literal|"join \"depts\" using (\"deptno\") where \"depts\".\"deptno\"> 10\n"
+operator|+
+literal|"group by \"empid\", \"depts\".\"deptno\""
+argument_list|,
+literal|"select \"empid\" from \"emps\"\n"
+operator|+
+literal|"join \"depts\" using (\"deptno\") where \"depts\".\"deptno\"> 20\n"
+operator|+
+literal|"group by \"empid\", \"depts\".\"deptno\""
+argument_list|,
+name|JdbcTest
+operator|.
+name|HR_MODEL
+argument_list|,
+name|CalciteAssert
+operator|.
+name|checkResultContains
+argument_list|(
+literal|"EnumerableCalc(expr#0..1=[{inputs}], expr#2=[20], expr#3=[>($t1, $t2)], "
+operator|+
+literal|"empid=[$t0], $condition=[$t3])\n"
+operator|+
+literal|"  EnumerableTableScan(table=[[hr, m0]])"
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testJoinAggregateMaterializationNoAggregateFuncs2
+parameter_list|()
+block|{
+name|checkMaterialize
+argument_list|(
+literal|"select \"depts\".\"deptno\", \"empid\" from \"depts\"\n"
+operator|+
+literal|"join \"emps\" using (\"deptno\") where \"depts\".\"deptno\"> 10\n"
+operator|+
+literal|"group by \"empid\", \"depts\".\"deptno\""
+argument_list|,
+literal|"select \"empid\" from \"emps\"\n"
+operator|+
+literal|"join \"depts\" using (\"deptno\") where \"depts\".\"deptno\"> 20\n"
+operator|+
+literal|"group by \"empid\", \"depts\".\"deptno\""
+argument_list|,
+name|JdbcTest
+operator|.
+name|HR_MODEL
+argument_list|,
+name|CalciteAssert
+operator|.
+name|checkResultContains
+argument_list|(
+literal|"EnumerableCalc(expr#0..1=[{inputs}], expr#2=[20], expr#3=[>($t0, $t2)], "
+operator|+
+literal|"empid=[$t1], $condition=[$t3])\n"
+operator|+
+literal|"  EnumerableTableScan(table=[[hr, m0]])"
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testJoinAggregateMaterializationNoAggregateFuncs3
+parameter_list|()
+block|{
+comment|// It does not match, Project on top of query
+name|checkNoMaterialize
+argument_list|(
+literal|"select \"empid\" from \"emps\"\n"
+operator|+
+literal|"join \"depts\" using (\"deptno\") where \"depts\".\"deptno\"> 10\n"
+operator|+
+literal|"group by \"empid\", \"depts\".\"deptno\""
+argument_list|,
+literal|"select \"empid\" from \"emps\"\n"
+operator|+
+literal|"join \"depts\" using (\"deptno\") where \"depts\".\"deptno\"> 20\n"
+operator|+
+literal|"group by \"empid\", \"depts\".\"deptno\""
+argument_list|,
+name|JdbcTest
+operator|.
+name|HR_MODEL
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testJoinAggregateMaterializationNoAggregateFuncs4
+parameter_list|()
+block|{
+name|checkMaterialize
+argument_list|(
+literal|"select \"empid\", \"depts\".\"deptno\" from \"emps\"\n"
+operator|+
+literal|"join \"depts\" using (\"deptno\") where \"emps\".\"deptno\"> 10\n"
+operator|+
+literal|"group by \"empid\", \"depts\".\"deptno\""
+argument_list|,
+literal|"select \"empid\" from \"emps\"\n"
+operator|+
+literal|"join \"depts\" using (\"deptno\") where \"depts\".\"deptno\"> 20\n"
+operator|+
+literal|"group by \"empid\", \"depts\".\"deptno\""
+argument_list|,
+name|JdbcTest
+operator|.
+name|HR_MODEL
+argument_list|,
+name|CalciteAssert
+operator|.
+name|checkResultContains
+argument_list|(
+literal|"EnumerableCalc(expr#0..1=[{inputs}], expr#2=[20], expr#3=[>($t1, $t2)], "
+operator|+
+literal|"empid=[$t0], $condition=[$t3])\n"
+operator|+
+literal|"  EnumerableTableScan(table=[[hr, m0]])"
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testJoinAggregateMaterializationNoAggregateFuncs5
+parameter_list|()
+block|{
+name|checkMaterialize
+argument_list|(
+literal|"select \"depts\".\"deptno\", \"emps\".\"empid\" from \"depts\"\n"
+operator|+
+literal|"join \"emps\" using (\"deptno\") where \"emps\".\"empid\"> 10\n"
+operator|+
+literal|"group by \"depts\".\"deptno\", \"emps\".\"empid\""
+argument_list|,
+literal|"select \"depts\".\"deptno\" from \"depts\"\n"
+operator|+
+literal|"join \"emps\" using (\"deptno\") where \"emps\".\"empid\"> 15\n"
+operator|+
+literal|"group by \"depts\".\"deptno\", \"emps\".\"empid\""
+argument_list|,
+name|JdbcTest
+operator|.
+name|HR_MODEL
+argument_list|,
+name|CalciteAssert
+operator|.
+name|checkResultContains
+argument_list|(
+literal|"EnumerableCalc(expr#0..1=[{inputs}], expr#2=[15], expr#3=[>($t1, $t2)], "
+operator|+
+literal|"deptno=[$t0], $condition=[$t3])\n"
+operator|+
+literal|"  EnumerableTableScan(table=[[hr, m0]])"
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testJoinAggregateMaterializationNoAggregateFuncs6
+parameter_list|()
+block|{
+name|checkMaterialize
+argument_list|(
+literal|"select \"depts\".\"deptno\", \"emps\".\"empid\" from \"depts\"\n"
+operator|+
+literal|"join \"emps\" using (\"deptno\") where \"emps\".\"empid\"> 10\n"
+operator|+
+literal|"group by \"depts\".\"deptno\", \"emps\".\"empid\""
+argument_list|,
+literal|"select \"depts\".\"deptno\" from \"depts\"\n"
+operator|+
+literal|"join \"emps\" using (\"deptno\") where \"emps\".\"empid\"> 15\n"
+operator|+
+literal|"group by \"depts\".\"deptno\""
+argument_list|,
+name|JdbcTest
+operator|.
+name|HR_MODEL
+argument_list|,
+name|CalciteAssert
+operator|.
+name|checkResultContains
+argument_list|(
+literal|"EnumerableAggregate(group=[{0}])\n"
+operator|+
+literal|"  EnumerableCalc(expr#0..1=[{inputs}], expr#2=[15], expr#3=[>($t1, $t2)], "
+operator|+
+literal|"proj#0..1=[{exprs}], $condition=[$t3])\n"
+operator|+
+literal|"    EnumerableTableScan(table=[[hr, m0]])"
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testJoinMaterialization4
+parameter_list|()
+block|{
+name|checkMaterialize
+argument_list|(
+literal|"select \"empid\" \"deptno\" from \"emps\"\n"
+operator|+
+literal|"join \"depts\" using (\"deptno\")"
+argument_list|,
+literal|"select \"empid\" \"deptno\" from \"emps\"\n"
+operator|+
+literal|"join \"depts\" using (\"deptno\") where \"empid\" = 1"
+argument_list|,
+name|JdbcTest
+operator|.
+name|HR_MODEL
+argument_list|,
+name|CalciteAssert
+operator|.
+name|checkResultContains
+argument_list|(
+literal|"EnumerableCalc(expr#0=[{inputs}], expr#1=[CAST($t0):INTEGER NOT NULL], expr#2=[1], "
+operator|+
+literal|"expr#3=[=($t1, $t2)], deptno=[$t0], $condition=[$t3])\n"
+operator|+
+literal|"  EnumerableTableScan(table=[[hr, m0]])"
 argument_list|)
 argument_list|)
 expr_stmt|;

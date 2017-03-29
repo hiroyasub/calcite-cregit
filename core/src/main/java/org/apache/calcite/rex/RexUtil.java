@@ -145,22 +145,6 @@ name|calcite
 operator|.
 name|rel
 operator|.
-name|metadata
-operator|.
-name|RelTableRef
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|rel
-operator|.
 name|type
 operator|.
 name|RelDataType
@@ -212,6 +196,22 @@ operator|.
 name|type
 operator|.
 name|RelDataTypeField
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rex
+operator|.
+name|RexTableInputRef
+operator|.
+name|RelTableRef
 import|;
 end_import
 
@@ -7774,6 +7774,7 @@ literal|true
 return|;
 block|}
 block|}
+comment|/**    * Given an expression, it will swap the table references contained in its    * {@link RexTableInputRef} using the contents in the map.    */
 specifier|public
 specifier|static
 name|RexNode
@@ -7810,6 +7811,7 @@ literal|null
 argument_list|)
 return|;
 block|}
+comment|/**    * Given an expression, it will swap its column references {@link RexTableInputRef}    * using the contents in the map (in particular, the first element of the set in the    * map value).    */
 specifier|public
 specifier|static
 name|RexNode
@@ -7849,6 +7851,7 @@ name|ec
 argument_list|)
 return|;
 block|}
+comment|/**    * Given an expression, it will swap the table references contained in its    * {@link RexTableInputRef} using the contents in the first map, and then    * it will swap the column references {@link RexTableInputRef} using the contents    * in the second map (in particular, the first element of the set in the map value).    */
 specifier|public
 specifier|static
 name|RexNode
@@ -7910,8 +7913,9 @@ condition|)
 block|{
 name|inputRef
 operator|=
-operator|new
 name|RexTableInputRef
+operator|.
+name|of
 argument_list|(
 name|tableMapping
 operator|.

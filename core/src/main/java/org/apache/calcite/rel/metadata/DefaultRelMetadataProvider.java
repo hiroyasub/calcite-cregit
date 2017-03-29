@@ -76,6 +76,10 @@ name|RelMdExpressionLineage
 operator|.
 name|SOURCE
 argument_list|,
+name|RelMdTableReferences
+operator|.
+name|SOURCE
+argument_list|,
 name|RelMdNodeTypes
 operator|.
 name|SOURCE

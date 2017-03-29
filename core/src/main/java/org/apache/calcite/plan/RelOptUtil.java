@@ -2071,7 +2071,7 @@ return|return
 name|usedTables
 return|;
 block|}
-comment|/**    * Returns a list of all tables used by this expression or its children    */
+comment|/**    * Returns a list of all table qualified names used by this expression    * or its children.    */
 specifier|public
 specifier|static
 name|List
