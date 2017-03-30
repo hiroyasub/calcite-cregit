@@ -138,6 +138,21 @@ name|SqlConformanceEnum
 operator|.
 name|PRAGMATIC_2003
 decl_stmt|;
+comment|/**    * Whether to allow aliases from the {@code SELECT} clause to be used as    * column names in the {@code GROUP BY} clause.    *    *<p>Among the built-in conformance levels, true in    * {@link SqlConformanceEnum#LENIENT};    * false otherwise.    */
+name|boolean
+name|isGroupByAlias
+parameter_list|()
+function_decl|;
+comment|/**    * Whether {@code GROUP BY 2} is interpreted to mean 'group by the 2nd column    * in the select list'.    *    *<p>Among the built-in conformance levels, true in    * {@link SqlConformanceEnum#LENIENT};    * false otherwise.    */
+name|boolean
+name|isGroupByOrdinal
+parameter_list|()
+function_decl|;
+comment|/**    * Whether to allow aliases from the {@code SELECT} clause to be used as    * column names in the {@code HAVING} clause.    *    *<p>Among the built-in conformance levels, true in    * {@link SqlConformanceEnum#LENIENT};    * false otherwise.    */
+name|boolean
+name|isHavingAlias
+parameter_list|()
+function_decl|;
 comment|/**    * Whether '{@code ORDER BY 2}' is interpreted to mean 'sort by the 2nd    * column in the select list'.    *    *<p>Among the built-in conformance levels, true in    * {@link SqlConformanceEnum#DEFAULT},    * {@link SqlConformanceEnum#LENIENT},    * {@link SqlConformanceEnum#ORACLE_10},    * {@link SqlConformanceEnum#ORACLE_12},    * {@link SqlConformanceEnum#STRICT_92},    * {@link SqlConformanceEnum#PRAGMATIC_99},    * {@link SqlConformanceEnum#PRAGMATIC_2003};    * {@link SqlConformanceEnum#SQL_SERVER_2008};    * false otherwise.    */
 name|boolean
 name|isSortByOrdinal

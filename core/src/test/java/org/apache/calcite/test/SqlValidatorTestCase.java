@@ -2028,6 +2028,7 @@ return|return
 name|this
 return|;
 block|}
+comment|/** Removes the carets from the SQL string. Useful if you want to run      * a test once at a conformance level where it fails, then run it again      * at a conformance level where it succeeds. */
 specifier|public
 name|Sql
 name|sansCarets
