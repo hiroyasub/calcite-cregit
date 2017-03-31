@@ -3323,6 +3323,23 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1732">[CALCITE-1732]    * IndexOutOfBoundsException when using LATERAL TABLE with more than one    * field</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testCollectionTableWithLateral3
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"select * from dept, lateral table(DEDUP(dept.deptno, dept.name))"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
 annotation|@
 name|Test
 specifier|public

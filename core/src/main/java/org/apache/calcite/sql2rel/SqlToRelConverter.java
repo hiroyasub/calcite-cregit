@@ -12645,7 +12645,7 @@ literal|1
 condition|)
 block|{
 comment|// The same table was referenced more than once.
-comment|// So we deduplicate
+comment|// So we deduplicate.
 name|r
 operator|=
 name|DeduplicateCorrelateVariables
@@ -12669,6 +12669,14 @@ name|correlNames
 argument_list|)
 argument_list|,
 name|r0
+argument_list|)
+expr_stmt|;
+comment|// Add new node to leaves.
+name|leaves
+operator|.
+name|add
+argument_list|(
+name|r
 argument_list|)
 expr_stmt|;
 block|}
