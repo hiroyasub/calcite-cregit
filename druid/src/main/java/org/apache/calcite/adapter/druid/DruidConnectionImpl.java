@@ -545,7 +545,7 @@ specifier|final
 name|String
 name|coordinatorUrl
 decl_stmt|;
-specifier|private
+specifier|public
 specifier|static
 specifier|final
 name|String
@@ -1660,6 +1660,8 @@ argument_list|(
 name|fieldNames
 argument_list|,
 name|fieldTypes
+argument_list|,
+name|posTimestampField
 argument_list|,
 name|rowBuilder
 argument_list|,
