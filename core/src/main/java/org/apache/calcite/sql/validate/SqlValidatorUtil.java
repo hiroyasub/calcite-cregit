@@ -1572,7 +1572,6 @@ block|}
 block|}
 block|}
 comment|/**    * Checks that there are no duplicates in a list of {@link SqlIdentifier}.    */
-specifier|public
 specifier|static
 name|void
 name|checkIdentifierListForDuplicates
