@@ -2767,9 +2767,9 @@ literal|"'descending':false,'intervals':['1900-01-09T00:00:00.000/2992-01-10T00:
 operator|+
 literal|"'filter':{'type':'and','fields':["
 operator|+
-literal|"{'type':'bound','dimension':'product_id','lower':'1500','lowerStrict':false,'alphaNumeric':false},"
+literal|"{'type':'bound','dimension':'product_id','lower':'1500','lowerStrict':false,'ordering':'lexicographic'},"
 operator|+
-literal|"{'type':'bound','dimension':'product_id','upper':'1502','upperStrict':false,'alphaNumeric':false}]},"
+literal|"{'type':'bound','dimension':'product_id','upper':'1502','upperStrict':false,'ordering':'lexicographic'}]},"
 operator|+
 literal|"'dimensions':['product_id','brand_name','product_name','SKU','SRP','gross_weight','net_weight',"
 operator|+
@@ -2938,9 +2938,9 @@ literal|"'descending':false,'intervals':['1900-01-09T00:00:00.000/2992-01-10T00:
 operator|+
 literal|"'filter':{'type':'and','fields':["
 operator|+
-literal|"{'type':'bound','dimension':'product_id','lower':'1500','lowerStrict':false,'alphaNumeric':true},"
+literal|"{'type':'bound','dimension':'product_id','lower':'1500','lowerStrict':false,'ordering':'numeric'},"
 operator|+
-literal|"{'type':'bound','dimension':'product_id','upper':'1502','upperStrict':false,'alphaNumeric':true}]},"
+literal|"{'type':'bound','dimension':'product_id','upper':'1502','upperStrict':false,'ordering':'numeric'}]},"
 operator|+
 literal|"'dimensions':['product_id','brand_name','product_name','SKU','SRP','gross_weight','net_weight',"
 operator|+

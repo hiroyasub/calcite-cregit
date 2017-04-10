@@ -705,7 +705,7 @@ literal|"{\"type\":\"bound\",\"dimension\":\"dimensionName\",\"lower\":\"lower-b
 operator|+
 literal|"\"lowerStrict\":false,\"upper\":\"upper-bound\",\"upperStrict\":false,"
 operator|+
-literal|"\"alphaNumeric\":false}"
+literal|"\"ordering\":\"lexicographic\"}"
 argument_list|)
 argument_list|)
 expr_stmt|;
