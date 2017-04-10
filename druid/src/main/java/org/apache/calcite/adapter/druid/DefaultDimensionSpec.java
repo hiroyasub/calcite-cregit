@@ -42,7 +42,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Default implementation of Dimension spec  */
+comment|/**  * Default implementation of DimensionSpec.  *  *<p>The default implementation returns dimension values as is and optionally  * renames the dimension.  */
 end_comment
 
 begin_class

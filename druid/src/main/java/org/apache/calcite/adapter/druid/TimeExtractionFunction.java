@@ -60,7 +60,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Time extraction implementation  */
+comment|/**  * Implementation of Druid time format extraction function.  *  *<p>These functions return the dimension value formatted according to the given format string,  * time zone, and locale.  *  *<p>For __time dimension values, this formats the time value bucketed by the aggregation  * granularity.  */
 end_comment
 
 begin_class
@@ -199,6 +199,7 @@ name|writeEndObject
 argument_list|()
 expr_stmt|;
 block|}
+comment|/**    * Creates the default time format extraction function.    *    * @return the time extraction function    */
 specifier|public
 specifier|static
 name|TimeExtractionFunction
@@ -219,6 +220,7 @@ literal|null
 argument_list|)
 return|;
 block|}
+comment|/**    * Creates the time format extraction function for the given granularity.    * Only YEAR, MONTH, DAY, and HOUR granularity are supported.    *    * @param granularity granularity to apply to the column    * @return the time extraction function or null if granularity is not supported    */
 specifier|public
 specifier|static
 name|TimeExtractionFunction

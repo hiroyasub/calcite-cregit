@@ -18,7 +18,7 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * Druid dimension spec interface  */
+comment|/**  * Interface for Druid DimensionSpec.  *  *<p>DimensionSpecs define how dimension values get transformed prior to aggregation.  */
 end_comment
 
 begin_interface

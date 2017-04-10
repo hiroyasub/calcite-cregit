@@ -18,7 +18,7 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * Time extraction dimension spec implementation  */
+comment|/**  * DimensionSpec implementation that uses a time format extraction function.  */
 end_comment
 
 begin_class
@@ -50,6 +50,7 @@ name|outputName
 argument_list|)
 expr_stmt|;
 block|}
+comment|/**    * Creates a time extraction DimensionSpec that renames the '__time' column    * to the given name.    *    * @param outputName name of the output column    * @return the time extraction DimensionSpec instance    */
 specifier|public
 specifier|static
 name|TimeExtractionDimensionSpec
@@ -72,6 +73,7 @@ name|outputName
 argument_list|)
 return|;
 block|}
+comment|/**    * Creates a time extraction DimensionSpec that formats the '__time' column    * according to the given granularity and outputs the column with the given    * name. Only YEAR, MONTH, and DAY granularity are supported.    *    * @param granularity granularity to apply to the column    * @param outputName name of the output column    * @return the time extraction DimensionSpec instance or null if granularity    * is not supported    */
 specifier|public
 specifier|static
 name|TimeExtractionDimensionSpec
@@ -140,6 +142,7 @@ argument_list|,
 name|outputName
 argument_list|)
 return|;
+comment|// TODO: Support other granularities
 default|default:
 return|return
 literal|null

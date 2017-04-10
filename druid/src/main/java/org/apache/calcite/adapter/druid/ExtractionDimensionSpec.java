@@ -60,7 +60,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Extraction function dimension spec implementation  */
+comment|/**  * Implementation of extraction function DimensionSpec.  *  *<p>The extraction function implementation returns dimension values transformed  * using the given extraction function.  */
 end_comment
 
 begin_class

@@ -18,7 +18,7 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * Extraction Function interface  */
+comment|/**  * Interface for Druid extraction functions.  *  *<p>Extraction functions define the transformation applied to each dimension value.  */
 end_comment
 
 begin_interface
