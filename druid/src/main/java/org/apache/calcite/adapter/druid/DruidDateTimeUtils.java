@@ -1565,7 +1565,7 @@ return|return
 literal|null
 return|;
 block|}
-comment|/**    * Extracts granularity from a call {@code FLOOR(<time> TO<timeunit>)}.    * Timeunit specifies the granularity. Returns null if it cannot    * be inferred.    *    * @param call the function call    * @return the granularity, or null if it cannot be inferred    */
+comment|/**    * Infers granularity from a timeunit.    * It support {@code FLOOR(<time> TO<timeunit>)} and {@code EXTRACT(<timeunit> FROM<time>)}.    * It returns null if it cannot be inferred.    *    * @param call the function call    * @return the granularity, or null if it cannot be inferred    */
 specifier|public
 specifier|static
 name|Granularity
@@ -1614,8 +1614,6 @@ return|;
 block|}
 name|int
 name|flagIndex
-init|=
-literal|1
 decl_stmt|;
 if|if
 condition|(
@@ -1629,9 +1627,18 @@ operator|.
 name|EXTRACT
 condition|)
 block|{
+comment|// EXTRACT
 name|flagIndex
 operator|=
 literal|0
+expr_stmt|;
+block|}
+else|else
+block|{
+comment|// FLOOR
+name|flagIndex
+operator|=
+literal|1
 expr_stmt|;
 block|}
 specifier|final

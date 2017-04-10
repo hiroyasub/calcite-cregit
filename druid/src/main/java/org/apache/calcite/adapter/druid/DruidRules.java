@@ -2822,7 +2822,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/* To be a valid Project, we allow it to contain references, and a single call      * to an FLOOR function on the timestamp column OR Valid time extract on the top of time column      * Returns the reference to the timestamp, if any. */
+comment|/* To be a valid Project, we allow it to contain references, and a single call      * to a FLOOR function on the timestamp column OR valid time EXTRACT on the timestamp column.      * Returns the reference to the timestamp, if any. */
 specifier|private
 specifier|static
 name|int

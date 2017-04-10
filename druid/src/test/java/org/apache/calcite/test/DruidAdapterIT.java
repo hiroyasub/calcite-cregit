@@ -963,9 +963,9 @@ name|druidQuery
 init|=
 literal|"{'queryType':'groupBy',"
 operator|+
-literal|"'dataSource':'wikiticker','granularity':'day',\"dimensions\":[{\"type\":\"default\","
+literal|"'dataSource':'wikiticker','granularity':'day',"
 operator|+
-literal|"\"dimension\":\"page\"}],"
+literal|"'dimensions':[{'type':'default','dimension':'page'}],"
 operator|+
 literal|"'limitSpec':{'type':'default'},"
 operator|+
@@ -1103,7 +1103,7 @@ literal|"{'queryType':'groupBy',"
 operator|+
 literal|"'dataSource':'wikiticker','granularity':'all',"
 operator|+
-literal|"\"dimensions\":[{\"type\":\"default\",\"dimension\":\"countryName\"}],'limitSpec':{'type':'default'},"
+literal|"'dimensions':[{'type':'default','dimension':'countryName'}],'limitSpec':{'type':'default'},"
 operator|+
 literal|"'filter':{'type':'selector','dimension':'page','value':'Jeremy Corbyn'},"
 operator|+
@@ -1556,7 +1556,7 @@ name|druidQuery
 init|=
 literal|"{'queryType':'groupBy','dataSource':'foodmart','granularity':'all',"
 operator|+
-literal|"\"dimensions\":[{\"type\":\"default\",\"dimension\":\"state_province\"}],'limitSpec':{'type':'default'},"
+literal|"'dimensions':[{'type':'default','dimension':'state_province'}],'limitSpec':{'type':'default'},"
 operator|+
 literal|"'aggregations':[{'type':'longSum','name':'dummy_agg','fieldName':'dummy_agg'}],"
 operator|+
@@ -1671,6 +1671,22 @@ literal|"intervals=[[1900-01-09T00:00:00.000/2992-01-10T00:00:00.000]], filter=[
 operator|+
 literal|" projects=[[$90, $1]])\n"
 decl_stmt|;
+specifier|final
+name|String
+name|druidQuery
+init|=
+literal|"{'queryType':'select','dataSource':'foodmart','descending':false,"
+operator|+
+literal|"'intervals':['1900-01-09T00:00:00.000/2992-01-10T00:00:00.000'],"
+operator|+
+literal|"'filter':{'type':'selector','dimension':'product_id','value':'1020'},"
+operator|+
+literal|"'dimensions':['product_id'],'metrics':['store_sales'],'granularity':'all',"
+operator|+
+literal|"'pagingSpec':{'threshold':16384,'fromNext':true},"
+operator|+
+literal|"'context':{'druid.query.fetch':false}}"
+decl_stmt|;
 name|sql
 argument_list|(
 name|sql
@@ -1685,21 +1701,7 @@ name|queryContains
 argument_list|(
 name|druidChecker
 argument_list|(
-literal|"{\"queryType\":\"select\",\"dataSource\":\"foodmart\","
-operator|+
-literal|"\"descending\":false,"
-operator|+
-literal|"\"intervals\":[\"1900-01-09T00:00:00.000/2992-01-10T00:00:00.000"
-operator|+
-literal|"\"],\"filter\":{\"type\":\"selector\",\"dimension\":\"product_id\","
-operator|+
-literal|"\"value\":\"1020\"},\"dimensions\":[\"product_id\"],"
-operator|+
-literal|"\"metrics\":[\"store_sales\"],\"granularity\":\"all\","
-operator|+
-literal|"\"pagingSpec\":{\"threshold\":16384,\"fromNext\":true},"
-operator|+
-literal|"\"context\":{\"druid.query.fetch\":false}}"
+name|druidQuery
 argument_list|)
 argument_list|)
 operator|.
@@ -1736,21 +1738,21 @@ specifier|final
 name|String
 name|druidQuery
 init|=
-literal|"{\"queryType\":\"groupBy\",\"dataSource\":\"foodmart\","
+literal|"{'queryType':'groupBy','dataSource':'foodmart',"
 operator|+
-literal|"\"granularity\":\"all\",\"dimensions\":[{\"type\":\"default\","
+literal|"'granularity':'all','dimensions':[{'type':'default',"
 operator|+
-literal|"\"dimension\":\"product_id\"}],"
+literal|"'dimension':'product_id'}],"
 operator|+
-literal|"\"limitSpec\":{\"type\":\"default\"},\"filter\":{\"type\":\"selector\","
+literal|"'limitSpec':{'type':'default'},'filter':{'type':'selector',"
 operator|+
-literal|"\"dimension\":\"product_id\",\"value\":\"1020\"},"
+literal|"'dimension':'product_id','value':'1020'},"
 operator|+
-literal|"\"aggregations\":[{\"type\":\"longSum\",\"name\":\"dummy_agg\","
+literal|"'aggregations':[{'type':'longSum','name':'dummy_agg',"
 operator|+
-literal|"\"fieldName\":\"dummy_agg\"}],"
+literal|"'fieldName':'dummy_agg'}],"
 operator|+
-literal|"\"intervals\":[\"1900-01-09T00:00:00.000/2992-01-10T00:00:00.000\"]}"
+literal|"'intervals':['1900-01-09T00:00:00.000/2992-01-10T00:00:00.000']}"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -1796,6 +1798,24 @@ name|innerQuery
 operator|+
 literal|") group by \"id\""
 decl_stmt|;
+specifier|final
+name|String
+name|druidQuery
+init|=
+literal|"{'queryType':'groupBy','dataSource':'foodmart',"
+operator|+
+literal|"'granularity':'all',"
+operator|+
+literal|"'dimensions':[{'type':'default','dimension':'product_id'}],"
+operator|+
+literal|"'limitSpec':{'type':'default'},"
+operator|+
+literal|"'filter':{'type':'selector','dimension':'product_id','value':'1020'},"
+operator|+
+literal|"'aggregations':[{'type':'longSum','name':'dummy_agg','fieldName':'dummy_agg'}],"
+operator|+
+literal|"'intervals':['1900-01-09T00:00:00.000/2992-01-10T00:00:00.000']}"
+decl_stmt|;
 name|sql
 argument_list|(
 name|sql
@@ -1810,21 +1830,7 @@ name|queryContains
 argument_list|(
 name|druidChecker
 argument_list|(
-literal|"{\"queryType\":\"groupBy"
-operator|+
-literal|"\",\"dataSource\":\"foodmart\",\"granularity\":\"all\","
-operator|+
-literal|"\"dimensions\":[{\"type\":\"default\",\"dimension\":\"product_id\"}],"
-operator|+
-literal|"\"limitSpec\":{\"type\":\"default\"},"
-operator|+
-literal|"\"filter\":{\"type\":\"selector\",\"dimension\":\"product_id\","
-operator|+
-literal|"\"value\":\"1020\"},\"aggregations\":[{\"type\":\"longSum\","
-operator|+
-literal|"\"name\":\"dummy_agg\",\"fieldName\":\"dummy_agg\"}],"
-operator|+
-literal|"\"intervals\":[\"1900-01-09T00:00:00.000/2992-01-10T00:00:00.000\"]}"
+name|druidQuery
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -2194,9 +2200,9 @@ name|druidQuery
 init|=
 literal|"{'queryType':'groupBy','dataSource':'foodmart',"
 operator|+
-literal|"'granularity':'all',\"dimensions\":[{\"type\":\"default\",\"dimension\":\"gender\"},"
+literal|"'granularity':'all','dimensions':[{'type':'default','dimension':'gender'},"
 operator|+
-literal|"{\"type\":\"default\",\"dimension\":\"state_province\"}],'limitSpec':{'type':'default'},"
+literal|"{'type':'default','dimension':'state_province'}],'limitSpec':{'type':'default'},"
 operator|+
 literal|"'aggregations':[{'type':'longSum','name':'dummy_agg','fieldName':'dummy_agg'}],"
 operator|+
@@ -2262,9 +2268,9 @@ name|druidQuery
 init|=
 literal|"{'queryType':'groupBy','dataSource':'foodmart',"
 operator|+
-literal|"'granularity':'all',\"dimensions\":[{\"type\":\"default\","
+literal|"'granularity':'all','dimensions':[{'type':'default','dimension':'brand_name'},"
 operator|+
-literal|"\"dimension\":\"brand_name\"},{\"type\":\"default\",\"dimension\":\"gender\"}],"
+literal|"{'type':'default','dimension':'gender'}],"
 operator|+
 literal|"'limitSpec':{'type':'default','limit':3,'columns':[{'dimension':'S','direction':'descending'}]},"
 operator|+
@@ -2367,11 +2373,9 @@ specifier|final
 name|String
 name|approxDruid
 init|=
-literal|"{'queryType':'topN','dataSource':'foodmart',"
+literal|"{'queryType':'topN','dataSource':'foodmart','granularity':'all',"
 operator|+
-literal|"'granularity':'all',\"dimension\":{\"type\":\"default\",\"dimension\":\"brand_name\"},"
-operator|+
-literal|"'metric':'S',"
+literal|"'dimension':{'type':'default','dimension':'brand_name'},'metric':'S',"
 operator|+
 literal|"'aggregations':[{'type':'longSum','name':'S','fieldName':'unit_sales'}],"
 operator|+
@@ -2385,7 +2389,7 @@ name|exactDruid
 init|=
 literal|"{'queryType':'groupBy','dataSource':'foodmart',"
 operator|+
-literal|"'granularity':'all',\"dimensions\":[{\"type\":\"default\",\"dimension\":\"brand_name\"}],"
+literal|"'granularity':'all','dimensions':[{'type':'default','dimension':'brand_name'}],"
 operator|+
 literal|"'limitSpec':{'type':'default','limit':3,"
 operator|+
@@ -2514,7 +2518,7 @@ name|druidQuery
 init|=
 literal|"{'queryType':'groupBy','dataSource':'foodmart',"
 operator|+
-literal|"'granularity':'day','dimensions':[{\"type\":\"default\",\"dimension\":\"brand_name\"}],"
+literal|"'granularity':'day','dimensions':[{'type':'default','dimension':'brand_name'}],"
 operator|+
 literal|"'limitSpec':{'type':'default'},"
 operator|+
@@ -2597,7 +2601,7 @@ name|druidQuery
 init|=
 literal|"{'queryType':'groupBy','dataSource':'foodmart',"
 operator|+
-literal|"'granularity':'day','dimensions':[{\"type\":\"default\",\"dimension\":\"brand_name\"}],"
+literal|"'granularity':'day','dimensions':[{'type':'default','dimension':'brand_name'}],"
 operator|+
 literal|"'limitSpec':{'type':'default'},"
 operator|+
@@ -2680,9 +2684,7 @@ name|druidQuery
 init|=
 literal|"{'queryType':'groupBy','dataSource':'foodmart',"
 operator|+
-literal|"'granularity':'day','dimensions':[{\"type\":\"default\","
-operator|+
-literal|"\"dimension\":\"brand_name\"}],"
+literal|"'granularity':'day','dimensions':[{'type':'default','dimension':'brand_name'}],"
 operator|+
 literal|"'limitSpec':{'type':'default'},"
 operator|+
@@ -4227,9 +4229,9 @@ name|druidQuery
 init|=
 literal|"{'queryType':'groupBy','dataSource':'foodmart',"
 operator|+
-literal|"'granularity':'month','dimensions':[{\"type\":\"default\","
+literal|"'granularity':'month',"
 operator|+
-literal|"\"dimension\":\"state_province\"}],"
+literal|"'dimensions':[{'type':'default','dimension':'state_province'}],"
 operator|+
 literal|"'limitSpec':{'type':'default'},"
 operator|+
@@ -4318,11 +4320,9 @@ specifier|final
 name|String
 name|druidQuery
 init|=
-literal|"{'queryType':'groupBy','dataSource':'foodmart',"
+literal|"{'queryType':'groupBy','dataSource':'foodmart','granularity':'day',"
 operator|+
-literal|"'granularity':'day','dimensions':[{\"type\":\"default\","
-operator|+
-literal|"\"dimension\":\"state_province\"}],"
+literal|"'dimensions':[{'type':'default','dimension':'state_province'}],"
 operator|+
 literal|"'limitSpec':{'type':'default'},"
 operator|+
@@ -4506,19 +4506,17 @@ specifier|final
 name|String
 name|druidQuery
 init|=
-literal|"{\"queryType\":\"groupBy\","
+literal|"{'queryType':'groupBy','dataSource':'foodmart',"
 operator|+
-literal|"\"dataSource\":\"foodmart\","
+literal|"'granularity':'all',"
 operator|+
-literal|"\"granularity\":\"all\","
+literal|"'dimensions':[{'type':'default','dimension':'state_province'}],"
 operator|+
-literal|"\"dimensions\":[{\"type\":\"default\",\"dimension\":\"state_province\"}],"
+literal|"'limitSpec':{'type':'default'},"
 operator|+
-literal|"\"limitSpec\":{\"type\":\"default\"},"
+literal|"'aggregations':[{'type':'cardinality','name':'$f1','fieldNames':['city']}],"
 operator|+
-literal|"\"aggregations\":[{\"type\":\"cardinality\",\"name\":\"$f1\",\"fieldNames\":[\"city\"]}],"
-operator|+
-literal|"\"intervals\":[\"1900-01-09T00:00:00.000/2992-01-10T00:00:00.000\"]}"
+literal|"'intervals':['1900-01-09T00:00:00.000/2992-01-10T00:00:00.000']}"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -4630,11 +4628,11 @@ name|druidQuery
 init|=
 literal|"{'queryType':'groupBy','dataSource':'foodmart','granularity':'all',"
 operator|+
-literal|"\"dimensions\":[{\"type\":\"default\",\"dimension\":\"state_province\"},"
+literal|"'dimensions':[{'type':'default','dimension':'state_province'},"
 operator|+
-literal|"{\"type\":\"default\",\"dimension\":\"city\"},{\"type\":\"default\","
+literal|"{'type':'default','dimension':'city'},"
 operator|+
-literal|"\"dimension\":\"product_name\"}],'limitSpec':{'type':'default'},"
+literal|"{'type':'default','dimension':'product_name'}],'limitSpec':{'type':'default'},"
 operator|+
 literal|"'filter':{'type':'and','fields':[{'type':'selector','dimension':'product_name',"
 operator|+
@@ -5018,23 +5016,23 @@ comment|// being queried after project is pushed to druid query.
 name|String
 name|druidQuery
 init|=
-literal|"{\"queryType\":\"select\","
+literal|"{'queryType':'select',"
 operator|+
-literal|"\"dataSource\":\"wikiticker\","
+literal|"'dataSource':'wikiticker',"
 operator|+
-literal|"\"descending\":false,"
+literal|"'descending':false,"
 operator|+
-literal|"\"intervals\":[\"1900-01-09T00:00:00.000/2992-01-10T00:00:00.000\"],"
+literal|"'intervals':['1900-01-09T00:00:00.000/2992-01-10T00:00:00.000'],"
 operator|+
-literal|"\"dimensions\":[\"countryName\"],"
+literal|"'dimensions':['countryName'],"
 operator|+
-literal|"\"metrics\":[],"
+literal|"'metrics':[],"
 operator|+
-literal|"\"granularity\":\"all\","
+literal|"'granularity':'all',"
 operator|+
-literal|"\"pagingSpec\":{\"threshold\":16384,\"fromNext\":true},"
+literal|"'pagingSpec':{'threshold':16384,'fromNext':true},"
 operator|+
-literal|"\"context\":{\"druid.query.fetch\":false}}"
+literal|"'context':{'druid.query.fetch':false}}"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -5120,9 +5118,9 @@ name|queryContains
 argument_list|(
 name|druidChecker
 argument_list|(
-literal|"\"type\":\"bound\",\"dimension\":\"product_id\",\"upper\":\"0.41024\""
+literal|"'type':'bound','dimension':'product_id','upper':'0.41024'"
 argument_list|,
-literal|"\"upper\":\"12223\""
+literal|"'upper':'12223'"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -5131,7 +5129,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testPushAggragateOnTime
+name|testPushAggregateOnTime
 parameter_list|()
 block|{
 name|String
@@ -5152,13 +5150,13 @@ decl_stmt|;
 name|String
 name|druidQuery
 init|=
-literal|"{\"queryType\":\"groupBy\",\"dataSource\":\"foodmart\","
+literal|"{'queryType':'groupBy','dataSource':'foodmart',"
 operator|+
-literal|"\"granularity\":\"all\",\"dimensions\":[{\"type\":\"extraction\","
+literal|"'granularity':'all','dimensions':[{'type':'extraction',"
 operator|+
-literal|"\"dimension\":\"__time\",\"outputName\":\"timestamp\","
+literal|"'dimension':'__time','outputName':'timestamp',"
 operator|+
-literal|"\"extractionFn\":{\"type\":\"timeFormat\",\"format\":\"yyyy-MM-dd"
+literal|"'extractionFn':{'type':'timeFormat','format':'yyyy-MM-dd"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -5183,13 +5181,13 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testPushAggragateOnTimeWithExtractYear
+name|testPushAggregateOnTimeWithExtractYear
 parameter_list|()
 block|{
 name|String
 name|sql
 init|=
-literal|"select EXTRACT( year from \"timestamp\") as \"year\",\"product_id\"  from "
+literal|"select EXTRACT( year from \"timestamp\") as \"year\",\"product_id\" from "
 operator|+
 literal|"\"foodmart\" where \"product_id\" = 1016 and "
 operator|+
@@ -5210,15 +5208,15 @@ name|queryContains
 argument_list|(
 name|druidChecker
 argument_list|(
-literal|",\"granularity\":\"all\""
+literal|",'granularity':'all'"
 argument_list|,
-literal|"{\"type\":\"extraction\","
+literal|"{'type':'extraction',"
 operator|+
-literal|"\"dimension\":\"__time\",\"outputName\":\"year\","
+literal|"'dimension':'__time','outputName':'extract_0',"
 operator|+
-literal|"\"extractionFn\":{\"type\":\"timeFormat\",\"format\":\"yyyy\","
+literal|"'extractionFn':{'type':'timeFormat','format':'yyyy',"
 operator|+
-literal|"\"timeZone\":\"UTC\"}}"
+literal|"'timeZone':'UTC'}}"
 argument_list|)
 argument_list|)
 operator|.
@@ -5232,13 +5230,13 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testPushAggragateOnTimeWithExtractMonth
+name|testPushAggregateOnTimeWithExtractMonth
 parameter_list|()
 block|{
 name|String
 name|sql
 init|=
-literal|"select EXTRACT( month from \"timestamp\") as \"month\",\"product_id\"  from "
+literal|"select EXTRACT( month from \"timestamp\") as \"month\",\"product_id\" from "
 operator|+
 literal|"\"foodmart\" where \"product_id\" = 1016 and "
 operator|+
@@ -5259,15 +5257,15 @@ name|queryContains
 argument_list|(
 name|druidChecker
 argument_list|(
-literal|",\"granularity\":\"all\""
+literal|",'granularity':'all'"
 argument_list|,
-literal|"{\"type\":\"extraction\","
+literal|"{'type':'extraction',"
 operator|+
-literal|"\"dimension\":\"__time\",\"outputName\":\"monthOfYear\","
+literal|"'dimension':'__time','outputName':'extract_0',"
 operator|+
-literal|"\"extractionFn\":{\"type\":\"timeFormat\",\"format\":\"MM\","
+literal|"'extractionFn':{'type':'timeFormat','format':'MM',"
 operator|+
-literal|"\"timeZone\":\"UTC\"}}"
+literal|"'timeZone':'UTC'}}"
 argument_list|)
 argument_list|)
 operator|.
@@ -5289,13 +5287,15 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testPushAggragateOnTimeWithExtractDay
+name|testPushAggregateOnTimeWithExtractDay
 parameter_list|()
 block|{
 name|String
 name|sql
 init|=
-literal|"select EXTRACT( day from \"timestamp\") as \"day\",\"product_id\"  from \"foodmart\""
+literal|"select EXTRACT( day from \"timestamp\") as \"day\","
+operator|+
+literal|"\"product_id\" from \"foodmart\""
 operator|+
 literal|" where \"product_id\" = 1016 and "
 operator|+
@@ -5316,15 +5316,15 @@ name|queryContains
 argument_list|(
 name|druidChecker
 argument_list|(
-literal|",\"granularity\":\"all\""
+literal|",'granularity':'all'"
 argument_list|,
-literal|"{\"type\":\"extraction\","
+literal|"{'type':'extraction',"
 operator|+
-literal|"\"dimension\":\"__time\",\"outputName\":\"dayOfMonth\","
+literal|"'dimension':'__time','outputName':'extract_0',"
 operator|+
-literal|"\"extractionFn\":{\"type\":\"timeFormat\",\"format\":\"dd\","
+literal|"'extractionFn':{'type':'timeFormat','format':'dd',"
 operator|+
-literal|"\"timeZone\":\"UTC\"}}"
+literal|"'timeZone':'UTC'}}"
 argument_list|)
 argument_list|)
 operator|.
@@ -5340,17 +5340,17 @@ literal|"day=16; product_id=1016"
 argument_list|)
 expr_stmt|;
 block|}
-comment|//Calcite rewrite this push as
+comment|// Calcite rewrite the extract function in the query as:
 comment|// rel#85:BindableProject.BINDABLE.[](input=rel#69:Subset#1.BINDABLE.[],
-comment|// hourOfDay=/INT(MOD(Reinterpret($0), 86400000), 3600000),product_id=$1)
-comment|// hence not sure if that is valid for hive as well.
+comment|// hourOfDay=/INT(MOD(Reinterpret($0), 86400000), 3600000),product_id=$1).
+comment|// Currently 'EXTRACT( hour from \"timestamp\")' is not pushed to Druid.
 annotation|@
 name|Ignore
 annotation|@
 name|Test
 specifier|public
 name|void
-name|testPushAggragateOnTimeWithExtractHourOfDay
+name|testPushAggregateOnTimeWithExtractHourOfDay
 parameter_list|()
 block|{
 name|String
@@ -5377,15 +5377,15 @@ name|queryContains
 argument_list|(
 name|druidChecker
 argument_list|(
-literal|",\"granularity\":\"all\""
+literal|",'granularity':'all'"
 argument_list|,
-literal|"{\"type\":\"extraction\","
+literal|"{'type':'extraction',"
 operator|+
-literal|"\"dimension\":\"__time\",\"outputName\":\"monthOfYear\","
+literal|"'dimension':'__time','outputName':'extract_0',"
 operator|+
-literal|"\"extractionFn\":{\"type\":\"timeFormat\",\"format\":\"MM\","
+literal|"'extractionFn':{'type':'timeFormat','format':'H',"
 operator|+
-literal|"\"timeZone\":\"UTC\"}}"
+literal|"'timeZone':'UTC'}}"
 argument_list|)
 argument_list|)
 operator|.
@@ -5407,7 +5407,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testPushAggragateOnTimeWithExtractYearMonthDay
+name|testPushAggregateOnTimeWithExtractYearMonthDay
 parameter_list|()
 block|{
 name|String
@@ -5438,31 +5438,31 @@ name|queryContains
 argument_list|(
 name|druidChecker
 argument_list|(
-literal|",\"granularity\":\"all\""
+literal|",'granularity':'all'"
 argument_list|,
-literal|"{\"type\":\"extraction\","
+literal|"{'type':'extraction',"
 operator|+
-literal|"\"dimension\":\"__time\",\"outputName\":\"dayOfMonth\","
+literal|"'dimension':'__time','outputName':'extract_0',"
 operator|+
-literal|"\"extractionFn\":{\"type\":\"timeFormat\",\"format\":\"dd\","
+literal|"'extractionFn':{'type':'timeFormat','format':'dd',"
 operator|+
-literal|"\"timeZone\":\"UTC\"}}"
+literal|"'timeZone':'UTC'}}"
 argument_list|,
-literal|"{\"type\":\"extraction\","
+literal|"{'type':'extraction',"
 operator|+
-literal|"\"dimension\":\"__time\",\"outputName\":\"monthOfYear\","
+literal|"'dimension':'__time','outputName':'extract_1',"
 operator|+
-literal|"\"extractionFn\":{\"type\":\"timeFormat\",\"format\":\"MM\","
+literal|"'extractionFn':{'type':'timeFormat','format':'MM',"
 operator|+
-literal|"\"timeZone\":\"UTC\"}}"
+literal|"'timeZone':'UTC'}}"
 argument_list|,
-literal|"{\"type\":\"extraction\","
+literal|"{'type':'extraction',"
 operator|+
-literal|"\"dimension\":\"__time\",\"outputName\":\"year\","
+literal|"'dimension':'__time','outputName':'extract_2',"
 operator|+
-literal|"\"extractionFn\":{\"type\":\"timeFormat\",\"format\":\"yyyy\","
+literal|"'extractionFn':{'type':'timeFormat','format':'yyyy',"
 operator|+
-literal|"\"timeZone\":\"UTC\"}}"
+literal|"'timeZone':'UTC'}}"
 argument_list|)
 argument_list|)
 operator|.
@@ -5497,7 +5497,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testPushAggragateOnTimeWithExtractYearMonthDayWithOutRenaming
+name|testPushAggregateOnTimeWithExtractYearMonthDayWithOutRenaming
 parameter_list|()
 block|{
 name|String
@@ -5505,7 +5505,7 @@ name|sql
 init|=
 literal|"select EXTRACT( day from \"timestamp\"), EXTRACT( month from "
 operator|+
-literal|"\"timestamp\"),  EXTRACT( year from \"timestamp\"),\""
+literal|"\"timestamp\"), EXTRACT( year from \"timestamp\"),\""
 operator|+
 literal|"product_id\"  from \"foodmart\" where \"product_id\" = 1016 and "
 operator|+
@@ -5528,31 +5528,31 @@ name|queryContains
 argument_list|(
 name|druidChecker
 argument_list|(
-literal|",\"granularity\":\"all\""
+literal|",'granularity':'all'"
 argument_list|,
-literal|"{\"type\":\"extraction\","
+literal|"{'type':'extraction',"
 operator|+
-literal|"\"dimension\":\"__time\",\"outputName\":\"dayOfMonth\","
+literal|"'dimension':'__time','outputName':'extract_0',"
 operator|+
-literal|"\"extractionFn\":{\"type\":\"timeFormat\",\"format\":\"dd\","
+literal|"'extractionFn':{'type':'timeFormat','format':'dd',"
 operator|+
-literal|"\"timeZone\":\"UTC\"}}"
+literal|"'timeZone':'UTC'}}"
 argument_list|,
-literal|"{\"type\":\"extraction\","
+literal|"{'type':'extraction',"
 operator|+
-literal|"\"dimension\":\"__time\",\"outputName\":\"monthOfYear\","
+literal|"'dimension':'__time','outputName':'extract_1',"
 operator|+
-literal|"\"extractionFn\":{\"type\":\"timeFormat\",\"format\":\"MM\","
+literal|"'extractionFn':{'type':'timeFormat','format':'MM',"
 operator|+
-literal|"\"timeZone\":\"UTC\"}}"
+literal|"'timeZone':'UTC'}}"
 argument_list|,
-literal|"{\"type\":\"extraction\","
+literal|"{'type':'extraction',"
 operator|+
-literal|"\"dimension\":\"__time\",\"outputName\":\"year\","
+literal|"'dimension':'__time','outputName':'extract_2',"
 operator|+
-literal|"\"extractionFn\":{\"type\":\"timeFormat\",\"format\":\"yyyy\","
+literal|"'extractionFn':{'type':'timeFormat','format':'yyyy',"
 operator|+
-literal|"\"timeZone\":\"UTC\"}}"
+literal|"'timeZone':'UTC'}}"
 argument_list|)
 argument_list|)
 operator|.
@@ -5580,6 +5580,76 @@ argument_list|,
 literal|"EXPR$0=13; EXPR$1=01; EXPR$2=1997; product_id=1016"
 argument_list|,
 literal|"EXPR$0=16; EXPR$1=01; EXPR$2=1997; product_id=1016"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testPushAggregateOnTimeWithExtractWithOutRenaming
+parameter_list|()
+block|{
+name|String
+name|sql
+init|=
+literal|"select EXTRACT( day from \"timestamp\"), "
+operator|+
+literal|"\"product_id\" as \"dayOfMonth\" from \"foodmart\" "
+operator|+
+literal|"where \"product_id\" = 1016 and \"timestamp\"< cast('1997-01-20' as timestamp) "
+operator|+
+literal|"and \"timestamp\"> cast('1997-01-01' as timestamp)"
+operator|+
+literal|" group by "
+operator|+
+literal|" EXTRACT( day from \"timestamp\"), EXTRACT( day from \"timestamp\"),"
+operator|+
+literal|" \"product_id\" "
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|druidChecker
+argument_list|(
+literal|",'granularity':'all'"
+argument_list|,
+literal|"{'type':'extraction',"
+operator|+
+literal|"'dimension':'__time','outputName':'extract_0',"
+operator|+
+literal|"'extractionFn':{'type':'timeFormat','format':'dd',"
+operator|+
+literal|"'timeZone':'UTC'}}"
+argument_list|)
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+literal|"PLAN=EnumerableInterpreter\n"
+operator|+
+literal|"  DruidQuery(table=[[foodmart, foodmart]], "
+operator|+
+literal|"intervals=[[1997-01-01T00:00:00.001/1997-01-20T00:00:00.000]], filter=[=($1, 1016)], "
+operator|+
+literal|"projects=[[EXTRACT_DATE(FLAG(DAY), /INT(Reinterpret($0), 86400000)), $1]], "
+operator|+
+literal|"groups=[{0, 1}], aggs=[[]])\n"
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"EXPR$0=02; dayOfMonth=1016"
+argument_list|,
+literal|"EXPR$0=10; dayOfMonth=1016"
+argument_list|,
+literal|"EXPR$0=13; dayOfMonth=1016"
+argument_list|,
+literal|"EXPR$0=16; dayOfMonth=1016"
 argument_list|)
 expr_stmt|;
 block|}

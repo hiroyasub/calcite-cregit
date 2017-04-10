@@ -117,6 +117,15 @@ operator|=
 name|outputName
 expr_stmt|;
 block|}
+specifier|public
+name|String
+name|getOutputName
+parameter_list|()
+block|{
+return|return
+name|outputName
+return|;
+block|}
 annotation|@
 name|Override
 specifier|public
