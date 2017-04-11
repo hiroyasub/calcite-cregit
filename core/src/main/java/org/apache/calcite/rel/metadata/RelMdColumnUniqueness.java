@@ -1992,10 +1992,6 @@ parameter_list|,
 name|RelMetadataQuery
 name|mq
 parameter_list|,
-name|boolean
-name|dummy
-parameter_list|,
-comment|// prevent method from being used
 name|ImmutableBitSet
 name|columns
 parameter_list|,
