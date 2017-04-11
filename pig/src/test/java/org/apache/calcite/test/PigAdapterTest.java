@@ -86,6 +86,7 @@ name|PigAdapterTest
 extends|extends
 name|AbstractPigTest
 block|{
+comment|// Undo the %20 replacement of a space by URL
 specifier|public
 specifier|static
 specifier|final
@@ -114,6 +115,13 @@ argument_list|)
 operator|.
 name|getPath
 argument_list|()
+operator|.
+name|replace
+argument_list|(
+literal|"%20"
+argument_list|,
+literal|" "
+argument_list|)
 argument_list|)
 decl_stmt|;
 annotation|@

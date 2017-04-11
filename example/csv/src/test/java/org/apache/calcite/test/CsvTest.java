@@ -1553,6 +1553,7 @@ operator|+
 name|path
 argument_list|)
 decl_stmt|;
+comment|// URL converts a space to %20, undo that.
 name|String
 name|s
 init|=
@@ -1560,6 +1561,13 @@ name|url
 operator|.
 name|toString
 argument_list|()
+operator|.
+name|replace
+argument_list|(
+literal|"%20"
+argument_list|,
+literal|" "
+argument_list|)
 decl_stmt|;
 if|if
 condition|(

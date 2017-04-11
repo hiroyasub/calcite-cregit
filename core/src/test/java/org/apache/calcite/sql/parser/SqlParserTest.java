@@ -21377,6 +21377,7 @@ operator|+
 name|path
 argument_list|)
 decl_stmt|;
+comment|// URL will convert spaces to %20, undo that
 name|String
 name|x
 init|=
@@ -21384,6 +21385,13 @@ name|inUrl
 operator|.
 name|getFile
 argument_list|()
+operator|.
+name|replace
+argument_list|(
+literal|"%20"
+argument_list|,
+literal|" "
+argument_list|)
 decl_stmt|;
 assert|assert
 name|x
