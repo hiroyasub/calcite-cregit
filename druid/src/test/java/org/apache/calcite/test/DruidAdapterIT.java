@@ -5651,6 +5651,85 @@ literal|"EXPR$0=16; dayOfMonth=1016"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testPushComplexFilter
+parameter_list|()
+block|{
+name|String
+name|sql
+init|=
+literal|"select sum(\"store_sales\") from \"foodmart\" "
+operator|+
+literal|"where EXTRACT( year from \"timestamp\") = 1997 and "
+operator|+
+literal|"\"cases_per_pallet\">= 8 and \"cases_per_pallet\"<= 10 and "
+operator|+
+literal|"\"units_per_case\"< 15 "
+decl_stmt|;
+name|String
+name|druidQuery
+init|=
+literal|"{'queryType':'select','dataSource':'foodmart','descending':false,"
+operator|+
+literal|"'intervals':['1900-01-09T00:00:00.000/2992-01-10T00:00:00.000'],"
+operator|+
+literal|"'filter':{'type':'and',"
+operator|+
+literal|"'fields':[{'type':'bound','dimension':'cases_per_pallet','lower':'8',"
+operator|+
+literal|"'lowerStrict':false,'ordering':'numeric'},"
+operator|+
+literal|"{'type':'bound','dimension':'cases_per_pallet','upper':'10','upperStrict':false,"
+operator|+
+literal|"'ordering':'numeric'},{'type':'bound','dimension':'units_per_case','upper':'15',"
+operator|+
+literal|"'upperStrict':true,'ordering':'numeric'}]},'dimensions':[],'metrics':['store_sales'],"
+operator|+
+literal|"'granularity':'all','pagingSpec':{'threshold':16384,'fromNext':true},"
+operator|+
+literal|"'context':{'druid.query.fetch':false}}"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|druidChecker
+argument_list|(
+name|druidQuery
+argument_list|)
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+literal|"PLAN=EnumerableInterpreter\n"
+operator|+
+literal|"  BindableAggregate(group=[{}], EXPR$0=[SUM($1)])\n"
+operator|+
+literal|"    BindableFilter(condition=[AND(>=(/INT(Reinterpret($0), 86400000), 1997-01-01), "
+operator|+
+literal|"<(/INT(Reinterpret($0), 86400000), 1998-01-01))])\n"
+operator|+
+literal|"      DruidQuery(table=[[foodmart, foodmart]], "
+operator|+
+literal|"intervals=[[1900-01-09T00:00:00.000/2992-01-10T00:00:00.000]], "
+operator|+
+literal|"filter=[AND(>=(CAST($11):BIGINT, 8),<=(CAST($11):BIGINT, 10), "
+operator|+
+literal|"<(CAST($10):BIGINT, 15))], projects=[[$0, $90]])\n"
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"EXPR$0=75364.09998679161"
+argument_list|)
+expr_stmt|;
+block|}
 block|}
 end_class
 
