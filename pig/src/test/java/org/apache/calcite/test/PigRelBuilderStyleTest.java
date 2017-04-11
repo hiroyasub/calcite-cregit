@@ -578,6 +578,11 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
+annotation|@
+name|Ignore
+argument_list|(
+literal|"CALCITE-1751"
+argument_list|)
 specifier|public
 name|void
 name|testImplWithMultipleFilters
@@ -700,6 +705,11 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
+annotation|@
+name|Ignore
+argument_list|(
+literal|"CALCITE-1751"
+argument_list|)
 specifier|public
 name|void
 name|testImplWithGroupByAndCount
@@ -910,6 +920,11 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
+annotation|@
+name|Ignore
+argument_list|(
+literal|"CALCITE-1751"
+argument_list|)
 specifier|public
 name|void
 name|testImplWithGroupByMultipleFields
