@@ -588,6 +588,8 @@ name|statement
 operator|.
 name|getConnection
 argument_list|()
+argument_list|,
+name|rootSchema
 argument_list|)
 decl_stmt|;
 specifier|final

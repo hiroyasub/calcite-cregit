@@ -139,6 +139,16 @@ name|java
 operator|.
 name|sql
 operator|.
+name|PreparedStatement
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|sql
+operator|.
 name|ResultSet
 import|;
 end_import
@@ -963,7 +973,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testSchemaCache
+name|testSchemaConsistency
 parameter_list|()
 throws|throws
 name|Exception
@@ -1059,10 +1069,6 @@ argument_list|,
 literal|""
 argument_list|)
 decl_stmt|;
-specifier|final
-name|SchemaPlus
-name|s
-init|=
 name|rootSchema
 operator|.
 name|add
@@ -1084,7 +1090,7 @@ argument_list|,
 literal|null
 argument_list|)
 argument_list|)
-decl_stmt|;
+expr_stmt|;
 name|Statement
 name|stmt3
 init|=
@@ -1158,60 +1164,47 @@ argument_list|(
 literal|"insert into table2 values('a', 'aaaa')"
 argument_list|)
 expr_stmt|;
-comment|// fails, table not visible due to caching
-try|try
-block|{
-name|rs
-operator|=
-name|stmt3
+name|PreparedStatement
+name|stmt2
+init|=
+name|connection
 operator|.
-name|executeQuery
+name|prepareStatement
 argument_list|(
 literal|"select * from db.table2"
 argument_list|)
-expr_stmt|;
-name|fail
+decl_stmt|;
+name|stmt1
+operator|.
+name|execute
 argument_list|(
-literal|"expected error, got "
-operator|+
-name|rs
+literal|"alter table table2 add column field2 varchar(10)"
 argument_list|)
 expr_stmt|;
-block|}
-catch|catch
-parameter_list|(
-name|SQLException
-name|e
-parameter_list|)
-block|{
+comment|// "field2" not visible to stmt2
+name|rs
+operator|=
+name|stmt2
+operator|.
+name|executeQuery
+argument_list|()
+expr_stmt|;
 name|assertThat
 argument_list|(
-name|e
+name|CalciteAssert
 operator|.
-name|getCause
-argument_list|()
-operator|.
-name|getCause
-argument_list|()
-operator|.
-name|getMessage
-argument_list|()
+name|toString
+argument_list|(
+name|rs
+argument_list|)
 argument_list|,
 name|equalTo
 argument_list|(
-literal|"Object 'TABLE2' not found within 'DB'"
+literal|"ID=a; FIELD1=aaaa\n"
 argument_list|)
 argument_list|)
 expr_stmt|;
-block|}
-comment|// disable caching and table becomes visible
-name|s
-operator|.
-name|setCacheEnabled
-argument_list|(
-literal|false
-argument_list|)
-expr_stmt|;
+comment|// "field2" visible to a new query
 name|rs
 operator|=
 name|stmt3
@@ -1232,7 +1225,7 @@ argument_list|)
 argument_list|,
 name|equalTo
 argument_list|(
-literal|"ID=a; FIELD1=aaaa\n"
+literal|"ID=a; FIELD1=aaaa; FIELD2=null\n"
 argument_list|)
 argument_list|)
 expr_stmt|;

@@ -138,6 +138,14 @@ name|long
 name|now
 parameter_list|)
 function_decl|;
+comment|/** Returns the snapshot of this schema as of the specified time. The    * contents of the schema snapshot should not change over time.    *    * @param now The current time in millis, as returned by    *   {@link System#currentTimeMillis()}    *    * @return the schema snapshot.    */
+name|Schema
+name|snapshot
+parameter_list|(
+name|long
+name|now
+parameter_list|)
+function_decl|;
 comment|/** Table type. */
 enum|enum
 name|TableType

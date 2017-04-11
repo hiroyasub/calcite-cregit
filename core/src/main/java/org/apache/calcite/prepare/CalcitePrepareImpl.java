@@ -4683,6 +4683,11 @@ name|columns
 argument_list|,
 name|cursorFactory
 argument_list|,
+name|context
+operator|.
+name|getRootSchema
+argument_list|()
+argument_list|,
 name|ImmutableList
 operator|.
 expr|<
@@ -5212,6 +5217,8 @@ name|CursorFactory
 operator|.
 name|OBJECT
 argument_list|,
+literal|null
+argument_list|,
 name|ImmutableList
 operator|.
 expr|<
@@ -5618,6 +5625,11 @@ argument_list|,
 name|columns
 argument_list|,
 name|cursorFactory
+argument_list|,
+name|context
+operator|.
+name|getRootSchema
+argument_list|()
 argument_list|,
 name|preparedResult
 operator|instanceof

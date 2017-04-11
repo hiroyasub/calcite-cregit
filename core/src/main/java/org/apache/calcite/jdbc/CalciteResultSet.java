@@ -500,6 +500,10 @@ name|CursorFactory
 operator|.
 name|ARRAY
 argument_list|,
+name|signature
+operator|.
+name|rootSchema
+argument_list|,
 name|ImmutableList
 operator|.
 expr|<
