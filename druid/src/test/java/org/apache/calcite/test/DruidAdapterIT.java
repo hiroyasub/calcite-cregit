@@ -5135,17 +5135,15 @@ block|{
 name|String
 name|sql
 init|=
-literal|"select \"product_id\", \"timestamp\" as \"time\" from \"foodmart\" where "
+literal|"select \"product_id\", \"timestamp\" as \"time\" from \"foodmart\" "
 operator|+
-literal|"\"product_id\" = 1016 and "
+literal|"where \"product_id\" = 1016 "
 operator|+
-literal|"\"timestamp\"< cast('1997-01-03' as timestamp) and \"timestamp\"> cast"
+literal|"and \"timestamp\"< cast('1997-01-03' as timestamp) "
 operator|+
-literal|"('1990-01-01' as timestamp)"
+literal|"and \"timestamp\"> cast('1990-01-01' as timestamp) "
 operator|+
-literal|" group by"
-operator|+
-literal|"\"timestamp\", \"product_id\" "
+literal|"group by \"timestamp\", \"product_id\" "
 decl_stmt|;
 name|String
 name|druidQuery
@@ -5154,7 +5152,7 @@ literal|"{'queryType':'groupBy','dataSource':'foodmart',"
 operator|+
 literal|"'granularity':'all','dimensions':[{'type':'extraction',"
 operator|+
-literal|"'dimension':'__time','outputName':'timestamp',"
+literal|"'dimension':'__time','outputName':'extract_0',"
 operator|+
 literal|"'extractionFn':{'type':'timeFormat','format':'yyyy-MM-dd"
 decl_stmt|;
@@ -5163,17 +5161,17 @@ argument_list|(
 name|sql
 argument_list|)
 operator|.
-name|returnsUnordered
-argument_list|(
-literal|"product_id=1016; time=1997-01-02 00:00:00"
-argument_list|)
-operator|.
 name|queryContains
 argument_list|(
 name|druidChecker
 argument_list|(
 name|druidQuery
 argument_list|)
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"product_id=1016; time=1997-01-02 00:00:00"
 argument_list|)
 expr_stmt|;
 block|}
