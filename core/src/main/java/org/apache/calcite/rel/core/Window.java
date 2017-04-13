@@ -1490,7 +1490,9 @@ operator|.
 name|getOperator
 argument_list|()
 argument_list|,
-literal|false
+name|aggCall
+operator|.
+name|distinct
 argument_list|,
 name|getProjectOrdinals
 argument_list|(
@@ -1537,7 +1539,13 @@ specifier|final
 name|int
 name|ordinal
 decl_stmt|;
-comment|/**      * Creates a RexWinAggCall.      *      * @param aggFun   Aggregate function      * @param type     Result type      * @param operands Operands to call      * @param ordinal  Ordinal within its partition      */
+comment|/** Whether to eliminate duplicates before applying aggregate function. */
+specifier|public
+specifier|final
+name|boolean
+name|distinct
+decl_stmt|;
+comment|/**      * Creates a RexWinAggCall.      *      * @param aggFun   Aggregate function      * @param type     Result type      * @param operands Operands to call      * @param ordinal  Ordinal within its partition      * @param distinct Eliminate duplicates before applying aggregate function      */
 specifier|public
 name|RexWinAggCall
 parameter_list|(
@@ -1555,6 +1563,9 @@ name|operands
 parameter_list|,
 name|int
 name|ordinal
+parameter_list|,
+name|boolean
+name|distinct
 parameter_list|)
 block|{
 name|super
@@ -1571,6 +1582,12 @@ operator|.
 name|ordinal
 operator|=
 name|ordinal
+expr_stmt|;
+name|this
+operator|.
+name|distinct
+operator|=
+name|distinct
 expr_stmt|;
 block|}
 annotation|@

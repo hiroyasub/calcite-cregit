@@ -1694,6 +1694,72 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-476">[CALCITE-476]    * DISTINCT flag in windowed aggregates</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSelectOverDistinct
+parameter_list|()
+block|{
+comment|// Checks to see if<aggregate>(DISTINCT x) is set and preserved
+comment|// as a flag for the aggregate call.
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select SUM(DISTINCT deptno)\n"
+operator|+
+literal|"over (ROWS BETWEEN 10 PRECEDING AND CURRENT ROW)\n"
+operator|+
+literal|"from emp\n"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+comment|/** As {@link #testSelectOverDistinct()} but for streaming queries. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSelectStreamPartitionDistinct
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select stream\n"
+operator|+
+literal|"  count(distinct orderId) over (partition by productId\n"
+operator|+
+literal|"    order by rowtime\n"
+operator|+
+literal|"    range interval '1' second preceding) as c,\n"
+operator|+
+literal|"  count(distinct orderId) over w as c2,\n"
+operator|+
+literal|"  count(orderId) over w as c3\n"
+operator|+
+literal|"from orders\n"
+operator|+
+literal|"window w as (partition by productId)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
 annotation|@
 name|Test
 specifier|public

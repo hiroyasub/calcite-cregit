@@ -183,6 +183,11 @@ argument_list|,
 name|clonedOperands
 argument_list|,
 name|window
+argument_list|,
+name|over
+operator|.
+name|isDistinct
+argument_list|()
 argument_list|)
 return|;
 block|}

@@ -1564,6 +1564,9 @@ name|allowPartial
 parameter_list|,
 name|boolean
 name|nullWhenCountZero
+parameter_list|,
+name|boolean
+name|distinct
 parameter_list|)
 block|{
 assert|assert
@@ -1617,6 +1620,8 @@ argument_list|,
 name|exprs
 argument_list|,
 name|window
+argument_list|,
+name|distinct
 argument_list|)
 decl_stmt|;
 name|RexNode
@@ -1671,6 +1676,8 @@ argument_list|,
 name|exprs
 argument_list|,
 name|window
+argument_list|,
+name|distinct
 argument_list|)
 argument_list|,
 name|makeLiteral
@@ -1709,6 +1716,8 @@ argument_list|,
 name|exprs
 argument_list|,
 name|window
+argument_list|,
+name|distinct
 argument_list|)
 argument_list|,
 literal|false
@@ -1786,6 +1795,8 @@ name|of
 argument_list|()
 argument_list|,
 name|window
+argument_list|,
+name|distinct
 argument_list|)
 argument_list|,
 name|makeLiteral

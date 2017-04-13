@@ -678,6 +678,17 @@ name|call
 operator|)
 operator|.
 name|ordinal
+argument_list|,
+operator|(
+operator|(
+name|Window
+operator|.
+name|RexWinAggCall
+operator|)
+name|call
+operator|)
+operator|.
+name|distinct
 argument_list|)
 return|;
 block|}
