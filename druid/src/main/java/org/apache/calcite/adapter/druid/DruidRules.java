@@ -1500,10 +1500,18 @@ condition|(
 name|intervals
 operator|==
 literal|null
+operator|||
+name|intervals
+operator|.
+name|isEmpty
+argument_list|()
 condition|)
 block|{
-comment|// We can't push anything useful to Druid.
-name|residualPreds
+comment|// Case we have an filter with extract that can not be written as interval push down
+name|triple
+operator|.
+name|getMiddle
+argument_list|()
 operator|.
 name|addAll
 argument_list|(
@@ -1514,24 +1522,6 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
-block|}
-if|if
-condition|(
-name|intervals
-operator|==
-literal|null
-operator|&&
-name|triple
-operator|.
-name|getMiddle
-argument_list|()
-operator|.
-name|isEmpty
-argument_list|()
-condition|)
-block|{
-comment|// We can't push anything useful to Druid.
-return|return;
 block|}
 name|RelNode
 name|newDruidQuery
@@ -1604,6 +1594,12 @@ condition|(
 name|intervals
 operator|!=
 literal|null
+operator|&&
+operator|!
+name|intervals
+operator|.
+name|isEmpty
+argument_list|()
 condition|)
 block|{
 name|newDruidQuery

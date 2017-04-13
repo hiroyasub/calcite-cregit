@@ -4852,13 +4852,17 @@ specifier|final
 name|String
 name|explain
 init|=
-literal|"EnumerableInterpreter\n"
+literal|"PLAN=EnumerableInterpreter\n"
 operator|+
-literal|"  BindableAggregate(group=[{}], C=[COUNT()])\n"
+literal|"  DruidQuery(table=[[foodmart, foodmart]], "
 operator|+
-literal|"    BindableFilter(condition=[AND(>=(/INT(Reinterpret($0), 86400000), 1997-01-01),<(/INT(Reinterpret($0), 86400000), 1998-01-01), OR(AND(>=(/INT(Reinterpret($0), 86400000), 1997-04-01),<(/INT(Reinterpret($0), 86400000), 1997-05-01)), AND(>=(/INT(Reinterpret($0), 86400000), 1997-06-01),<(/INT(Reinterpret($0), 86400000), 1997-07-01))))])\n"
+literal|"intervals=[[1900-01-09T00:00:00.000/2992-01-10T00:00:00.000]], filter=[AND(="
 operator|+
-literal|"      DruidQuery(table=[[foodmart, foodmart]], intervals=[[1900-01-09T00:00:00.000/2992-01-10T00:00:00.000]], projects=[[$0]])"
+literal|"(EXTRACT_DATE(FLAG(YEAR), /INT(Reinterpret($0), 86400000)), 1997), OR(=(EXTRACT_DATE"
+operator|+
+literal|"(FLAG(MONTH), /INT(Reinterpret($0), 86400000)), 4), =(EXTRACT_DATE(FLAG(MONTH), /INT"
+operator|+
+literal|"(Reinterpret($0), 86400000)), 6)))], groups=[{}], aggs=[[COUNT()]])"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -5214,7 +5218,7 @@ literal|"'dimension':'__time','outputName':'extract_0',"
 operator|+
 literal|"'extractionFn':{'type':'timeFormat','format':'yyyy',"
 operator|+
-literal|"'timeZone':'UTC'}}"
+literal|"'timeZone':'UTC','locale':'en-US'}}"
 argument_list|)
 argument_list|)
 operator|.
@@ -5261,23 +5265,23 @@ literal|"{'type':'extraction',"
 operator|+
 literal|"'dimension':'__time','outputName':'extract_0',"
 operator|+
-literal|"'extractionFn':{'type':'timeFormat','format':'MM',"
+literal|"'extractionFn':{'type':'timeFormat','format':'M',"
 operator|+
-literal|"'timeZone':'UTC'}}"
+literal|"'timeZone':'UTC','locale':'en-US'}}"
 argument_list|)
 argument_list|)
 operator|.
 name|returnsUnordered
 argument_list|(
-literal|"month=01; product_id=1016"
+literal|"month=1; product_id=1016"
 argument_list|,
-literal|"month=02; product_id=1016"
+literal|"month=2; product_id=1016"
 argument_list|,
-literal|"month=03; product_id=1016"
+literal|"month=3; product_id=1016"
 argument_list|,
-literal|"month=04; product_id=1016"
+literal|"month=4; product_id=1016"
 argument_list|,
-literal|"month=05; product_id=1016"
+literal|"month=5; product_id=1016"
 argument_list|)
 expr_stmt|;
 block|}
@@ -5320,15 +5324,15 @@ literal|"{'type':'extraction',"
 operator|+
 literal|"'dimension':'__time','outputName':'extract_0',"
 operator|+
-literal|"'extractionFn':{'type':'timeFormat','format':'dd',"
+literal|"'extractionFn':{'type':'timeFormat','format':'d',"
 operator|+
-literal|"'timeZone':'UTC'}}"
+literal|"'timeZone':'UTC','locale':'en-US'}}"
 argument_list|)
 argument_list|)
 operator|.
 name|returnsUnordered
 argument_list|(
-literal|"day=02; product_id=1016"
+literal|"day=2; product_id=1016"
 argument_list|,
 literal|"day=10; product_id=1016"
 argument_list|,
@@ -5442,17 +5446,17 @@ literal|"{'type':'extraction',"
 operator|+
 literal|"'dimension':'__time','outputName':'extract_0',"
 operator|+
-literal|"'extractionFn':{'type':'timeFormat','format':'dd',"
+literal|"'extractionFn':{'type':'timeFormat','format':'d',"
 operator|+
-literal|"'timeZone':'UTC'}}"
+literal|"'timeZone':'UTC','locale':'en-US'}}"
 argument_list|,
 literal|"{'type':'extraction',"
 operator|+
 literal|"'dimension':'__time','outputName':'extract_1',"
 operator|+
-literal|"'extractionFn':{'type':'timeFormat','format':'MM',"
+literal|"'extractionFn':{'type':'timeFormat','format':'M',"
 operator|+
-literal|"'timeZone':'UTC'}}"
+literal|"'timeZone':'UTC','locale':'en-US'}}"
 argument_list|,
 literal|"{'type':'extraction',"
 operator|+
@@ -5460,7 +5464,7 @@ literal|"'dimension':'__time','outputName':'extract_2',"
 operator|+
 literal|"'extractionFn':{'type':'timeFormat','format':'yyyy',"
 operator|+
-literal|"'timeZone':'UTC'}}"
+literal|"'timeZone':'UTC','locale':'en-US'}}"
 argument_list|)
 argument_list|)
 operator|.
@@ -5481,13 +5485,13 @@ argument_list|)
 operator|.
 name|returnsUnordered
 argument_list|(
-literal|"day=02; month=01; year=1997; product_id=1016"
+literal|"day=2; month=1; year=1997; product_id=1016"
 argument_list|,
-literal|"day=10; month=01; year=1997; product_id=1016"
+literal|"day=10; month=1; year=1997; product_id=1016"
 argument_list|,
-literal|"day=13; month=01; year=1997; product_id=1016"
+literal|"day=13; month=1; year=1997; product_id=1016"
 argument_list|,
-literal|"day=16; month=01; year=1997; product_id=1016"
+literal|"day=16; month=1; year=1997; product_id=1016"
 argument_list|)
 expr_stmt|;
 block|}
@@ -5532,17 +5536,17 @@ literal|"{'type':'extraction',"
 operator|+
 literal|"'dimension':'__time','outputName':'extract_0',"
 operator|+
-literal|"'extractionFn':{'type':'timeFormat','format':'dd',"
+literal|"'extractionFn':{'type':'timeFormat','format':'d',"
 operator|+
-literal|"'timeZone':'UTC'}}"
+literal|"'timeZone':'UTC','locale':'en-US'}}"
 argument_list|,
 literal|"{'type':'extraction',"
 operator|+
 literal|"'dimension':'__time','outputName':'extract_1',"
 operator|+
-literal|"'extractionFn':{'type':'timeFormat','format':'MM',"
+literal|"'extractionFn':{'type':'timeFormat','format':'M',"
 operator|+
-literal|"'timeZone':'UTC'}}"
+literal|"'timeZone':'UTC','locale':'en-US'}}"
 argument_list|,
 literal|"{'type':'extraction',"
 operator|+
@@ -5550,7 +5554,7 @@ literal|"'dimension':'__time','outputName':'extract_2',"
 operator|+
 literal|"'extractionFn':{'type':'timeFormat','format':'yyyy',"
 operator|+
-literal|"'timeZone':'UTC'}}"
+literal|"'timeZone':'UTC','locale':'en-US'}}"
 argument_list|)
 argument_list|)
 operator|.
@@ -5571,13 +5575,13 @@ argument_list|)
 operator|.
 name|returnsUnordered
 argument_list|(
-literal|"EXPR$0=02; EXPR$1=01; EXPR$2=1997; product_id=1016"
+literal|"EXPR$0=2; EXPR$1=1; EXPR$2=1997; product_id=1016"
 argument_list|,
-literal|"EXPR$0=10; EXPR$1=01; EXPR$2=1997; product_id=1016"
+literal|"EXPR$0=10; EXPR$1=1; EXPR$2=1997; product_id=1016"
 argument_list|,
-literal|"EXPR$0=13; EXPR$1=01; EXPR$2=1997; product_id=1016"
+literal|"EXPR$0=13; EXPR$1=1; EXPR$2=1997; product_id=1016"
 argument_list|,
-literal|"EXPR$0=16; EXPR$1=01; EXPR$2=1997; product_id=1016"
+literal|"EXPR$0=16; EXPR$1=1; EXPR$2=1997; product_id=1016"
 argument_list|)
 expr_stmt|;
 block|}
@@ -5620,9 +5624,9 @@ literal|"{'type':'extraction',"
 operator|+
 literal|"'dimension':'__time','outputName':'extract_0',"
 operator|+
-literal|"'extractionFn':{'type':'timeFormat','format':'dd',"
+literal|"'extractionFn':{'type':'timeFormat','format':'d',"
 operator|+
-literal|"'timeZone':'UTC'}}"
+literal|"'timeZone':'UTC','locale':'en-US'}}"
 argument_list|)
 argument_list|)
 operator|.
@@ -5641,7 +5645,7 @@ argument_list|)
 operator|.
 name|returnsUnordered
 argument_list|(
-literal|"EXPR$0=02; dayOfMonth=1016"
+literal|"EXPR$0=2; dayOfMonth=1016"
 argument_list|,
 literal|"EXPR$0=10; dayOfMonth=1016"
 argument_list|,
@@ -5672,29 +5676,50 @@ decl_stmt|;
 name|String
 name|druidQuery
 init|=
-literal|"{'queryType':'select','dataSource':'foodmart','descending':false,"
+literal|"{'queryType':'timeseries','dataSource':'foodmart',"
 operator|+
-literal|"'intervals':['1900-01-09T00:00:00.000/2992-01-10T00:00:00.000'],"
-operator|+
-literal|"'filter':{'type':'and',"
+literal|"'descending':false,'granularity':'all','filter':{'type':'and',"
 operator|+
 literal|"'fields':[{'type':'bound','dimension':'cases_per_pallet','lower':'8',"
 operator|+
-literal|"'lowerStrict':false,'ordering':'numeric'},"
+literal|"'lowerStrict':false,'ordering':'numeric'},{'type':'bound',"
 operator|+
-literal|"{'type':'bound','dimension':'cases_per_pallet','upper':'10','upperStrict':false,"
+literal|"'dimension':'cases_per_pallet','upper':'10','upperStrict':false,"
 operator|+
-literal|"'ordering':'numeric'},{'type':'bound','dimension':'units_per_case','upper':'15',"
+literal|"'ordering':'numeric'},{'type':'bound','dimension':'units_per_case',"
 operator|+
-literal|"'upperStrict':true,'ordering':'numeric'}]},'dimensions':[],'metrics':['store_sales'],"
+literal|"'upper':'15','upperStrict':true,'ordering':'numeric'},"
 operator|+
-literal|"'granularity':'all','pagingSpec':{'threshold':16384,'fromNext':true},"
+literal|"{'type':'selector','dimension':'__time','value':'1997',"
 operator|+
-literal|"'context':{'druid.query.fetch':false}}"
+literal|"'extractionFn':{'type':'timeFormat','format':'yyyy','timeZone':'UTC',"
+operator|+
+literal|"'locale':'en-US'}}]},'aggregations':[{'type':'doubleSum',"
+operator|+
+literal|"'name':'EXPR$0','fieldName':'store_sales'}],"
+operator|+
+literal|"'intervals':['1900-01-09T00:00:00.000/2992-01-10T00:00:00.000'],"
+operator|+
+literal|"'context':{'skipEmptyBuckets':true}}"
 decl_stmt|;
 name|sql
 argument_list|(
 name|sql
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+literal|"PLAN=EnumerableInterpreter\n"
+operator|+
+literal|"  DruidQuery(table=[[foodmart, foodmart]], "
+operator|+
+literal|"intervals=[[1900-01-09T00:00:00.000/2992-01-10T00:00:00.000]], filter=[AND(>=(CAST"
+operator|+
+literal|"($11):BIGINT, 8),<=(CAST($11):BIGINT, 10),<(CAST($10):BIGINT, 15), =(EXTRACT_DATE"
+operator|+
+literal|"(FLAG(YEAR), /INT(Reinterpret($0), 86400000)), 1997))], groups=[{}], "
+operator|+
+literal|"aggs=[[SUM($90)]])"
 argument_list|)
 operator|.
 name|queryContains
@@ -5705,28 +5730,314 @@ name|druidQuery
 argument_list|)
 argument_list|)
 operator|.
-name|explainContains
+name|returnsUnordered
 argument_list|(
-literal|"PLAN=EnumerableInterpreter\n"
+literal|"EXPR$0=75364.09998679161"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testPushOfFilterExtractionOnDayAndMonth
+parameter_list|()
+block|{
+name|String
+name|sql
+init|=
+literal|"SELECT \"product_id\" , EXTRACT(day from \"timestamp\"), EXTRACT(month from "
 operator|+
-literal|"  BindableAggregate(group=[{}], EXPR$0=[SUM($1)])\n"
+literal|"\"timestamp\") from \"foodmart\" WHERE  EXTRACT(day from \"timestamp\")>= 30 AND "
 operator|+
-literal|"    BindableFilter(condition=[AND(>=(/INT(Reinterpret($0), 86400000), 1997-01-01), "
+literal|"EXTRACT(month from \"timestamp\") = 11 "
 operator|+
-literal|"<(/INT(Reinterpret($0), 86400000), 1998-01-01))])\n"
+literal|"AND  \"product_id\">= 1549 group by \"product_id\", EXTRACT(day from "
 operator|+
-literal|"      DruidQuery(table=[[foodmart, foodmart]], "
+literal|"\"timestamp\"), EXTRACT(month from \"timestamp\")"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|druidChecker
+argument_list|(
+literal|"{'queryType':'groupBy','dataSource':'foodmart',"
 operator|+
-literal|"intervals=[[1900-01-09T00:00:00.000/2992-01-10T00:00:00.000]], "
+literal|"'granularity':'all','dimensions':[{'type':'default',"
 operator|+
-literal|"filter=[AND(>=(CAST($11):BIGINT, 8),<=(CAST($11):BIGINT, 10), "
+literal|"'dimension':'product_id'},{'type':'extraction','dimension':'__time',"
 operator|+
-literal|"<(CAST($10):BIGINT, 15))], projects=[[$0, $90]])\n"
+literal|"'outputName':'extract_0','extractionFn':{'type':'timeFormat',"
+operator|+
+literal|"'format':'d','timeZone':'UTC','locale':'en-US'}},{'type':'extraction',"
+operator|+
+literal|"'dimension':'__time','outputName':'extract_1',"
+operator|+
+literal|"'extractionFn':{'type':'timeFormat','format':'M','timeZone':'UTC',"
+operator|+
+literal|"'locale':'en-US'}}],'limitSpec':{'type':'default'},"
+operator|+
+literal|"'filter':{'type':'and','fields':[{'type':'bound',"
+operator|+
+literal|"'dimension':'product_id','lower':'1549','lowerStrict':false,"
+operator|+
+literal|"'ordering':'numeric'},{'type':'bound','dimension':'__time',"
+operator|+
+literal|"'lower':'30','lowerStrict':false,'ordering':'numeric',"
+operator|+
+literal|"'extractionFn':{'type':'timeFormat','format':'d','timeZone':'UTC',"
+operator|+
+literal|"'locale':'en-US'}},{'type':'selector','dimension':'__time',"
+operator|+
+literal|"'value':'11','extractionFn':{'type':'timeFormat','format':'M',"
+operator|+
+literal|"'timeZone':'UTC','locale':'en-US'}}]},'aggregations':[{'type':'longSum',"
+operator|+
+literal|"'name':'dummy_agg','fieldName':'dummy_agg'}],"
+operator|+
+literal|"'intervals':['1900-01-09T00:00:00.000/2992-01-10T00:00:00.000']}"
+argument_list|)
 argument_list|)
 operator|.
 name|returnsUnordered
 argument_list|(
-literal|"EXPR$0=75364.09998679161"
+literal|"product_id=1549; EXPR$1=30; EXPR$2=11"
+argument_list|,
+literal|"product_id=1553; EXPR$1=30; EXPR$2=11"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testPushOfFilterExtractionOnDayAndMonthAndYear
+parameter_list|()
+block|{
+name|String
+name|sql
+init|=
+literal|"SELECT \"product_id\" , EXTRACT(day from \"timestamp\"), EXTRACT(month from "
+operator|+
+literal|"\"timestamp\") , EXTRACT(year from \"timestamp\") from \"foodmart\" "
+operator|+
+literal|"WHERE  EXTRACT(day from \"timestamp\")>= 30 AND EXTRACT(month from \"timestamp\") = 11 "
+operator|+
+literal|"AND  \"product_id\">= 1549 AND EXTRACT(year from \"timestamp\") = 1997"
+operator|+
+literal|"group by \"product_id\", EXTRACT(day from \"timestamp\"), "
+operator|+
+literal|"EXTRACT(month from \"timestamp\"), EXTRACT(year from \"timestamp\")"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|druidChecker
+argument_list|(
+literal|"{'queryType':'groupBy','dataSource':'foodmart',"
+operator|+
+literal|"'granularity':'all','dimensions':[{'type':'default',"
+operator|+
+literal|"'dimension':'product_id'},{'type':'extraction','dimension':'__time',"
+operator|+
+literal|"'outputName':'extract_0','extractionFn':{'type':'timeFormat',"
+operator|+
+literal|"'format':'d','timeZone':'UTC','locale':'en-US'}},{'type':'extraction',"
+operator|+
+literal|"'dimension':'__time','outputName':'extract_1',"
+operator|+
+literal|"'extractionFn':{'type':'timeFormat','format':'M','timeZone':'UTC',"
+operator|+
+literal|"'locale':'en-US'}},{'type':'extraction','dimension':'__time',"
+operator|+
+literal|"'outputName':'extract_2','extractionFn':{'type':'timeFormat',"
+operator|+
+literal|"'format':'yyyy','timeZone':'UTC','locale':'en-US'}}],"
+operator|+
+literal|"'limitSpec':{'type':'default'},'filter':{'type':'and',"
+operator|+
+literal|"'fields':[{'type':'bound','dimension':'product_id','lower':'1549',"
+operator|+
+literal|"'lowerStrict':false,'ordering':'numeric'},{'type':'bound',"
+operator|+
+literal|"'dimension':'__time','lower':'30','lowerStrict':false,"
+operator|+
+literal|"'ordering':'numeric','extractionFn':{'type':'timeFormat','format':'d',"
+operator|+
+literal|"'timeZone':'UTC','locale':'en-US'}},{'type':'selector',"
+operator|+
+literal|"'dimension':'__time','value':'11','extractionFn':{'type':'timeFormat',"
+operator|+
+literal|"'format':'M','timeZone':'UTC','locale':'en-US'}},{'type':'selector',"
+operator|+
+literal|"'dimension':'__time','value':'1997','extractionFn':{'type':'timeFormat',"
+operator|+
+literal|"'format':'yyyy','timeZone':'UTC','locale':'en-US'}}]},"
+operator|+
+literal|"'aggregations':[{'type':'longSum','name':'dummy_agg',"
+operator|+
+literal|"'fieldName':'dummy_agg'}],"
+operator|+
+literal|"'intervals':['1900-01-09T00:00:00.000/2992-01-10T00:00:00.000']}"
+argument_list|)
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"product_id=1549; EXPR$1=30; EXPR$2=11; EXPR$3=1997"
+argument_list|,
+literal|"product_id=1553; EXPR$1=30; EXPR$2=11; EXPR$3=1997"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testFilterExtractionOnMonthWithBetween
+parameter_list|()
+block|{
+name|String
+name|sqlQuery
+init|=
+literal|"SELECT \"product_id\", EXTRACT(month from \"timestamp\") FROM \"foodmart\""
+operator|+
+literal|" WHERE EXTRACT(month from \"timestamp\") BETWEEN 10 AND 11 AND  \"product_id\">= 1558"
+operator|+
+literal|" GROUP BY \"product_id\", EXTRACT(month from \"timestamp\")"
+decl_stmt|;
+name|String
+name|druidQuery
+init|=
+literal|"{'queryType':'groupBy','dataSource':'foodmart',"
+operator|+
+literal|"'granularity':'all','dimensions':[{'type':'default',"
+operator|+
+literal|"'dimension':'product_id'},{'type':'extraction','dimension':'__time',"
+operator|+
+literal|"'outputName':'extract_0','extractionFn':{'type':'timeFormat',"
+operator|+
+literal|"'format':'M','timeZone':'UTC','locale':'en-US'}}],"
+operator|+
+literal|"'limitSpec':{'type':'default'},'filter':{'type':'and',"
+operator|+
+literal|"'fields':[{'type':'bound','dimension':'product_id','lower':'1558',"
+operator|+
+literal|"'lowerStrict':false,'ordering':'numeric'},{'type':'bound',"
+operator|+
+literal|"'dimension':'__time','lower':'10','lowerStrict':false,"
+operator|+
+literal|"'ordering':'numeric','extractionFn':{'type':'timeFormat','format':'M',"
+operator|+
+literal|"'timeZone':'UTC','locale':'en-US'}},{'type':'bound',"
+operator|+
+literal|"'dimension':'__time','upper':'11','upperStrict':false,"
+operator|+
+literal|"'ordering':'numeric','extractionFn':{'type':'timeFormat','format':'M',"
+operator|+
+literal|"'timeZone':'UTC','locale':'en-US'}}]},'aggregations':[{'type':'longSum',"
+operator|+
+literal|"'name':'dummy_agg','fieldName':'dummy_agg'}],"
+operator|+
+literal|"'intervals':['1900-01-09T00:00:00.000/2992-01-10T00:00:00.000']}"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sqlQuery
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"product_id=1558; EXPR$1=10"
+argument_list|,
+literal|"product_id=1558; EXPR$1=11"
+argument_list|,
+literal|"product_id=1559; EXPR$1=11"
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|druidChecker
+argument_list|(
+name|druidQuery
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testFilterExtractionOnMonthWithIn
+parameter_list|()
+block|{
+name|String
+name|sqlQuery
+init|=
+literal|"SELECT \"product_id\", EXTRACT(month from \"timestamp\") FROM \"foodmart\""
+operator|+
+literal|" WHERE EXTRACT(month from \"timestamp\") IN (10, 11) AND  \"product_id\">= 1558"
+operator|+
+literal|" GROUP BY \"product_id\", EXTRACT(month from \"timestamp\")"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sqlQuery
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|druidChecker
+argument_list|(
+literal|"{'queryType':'groupBy',"
+operator|+
+literal|"'dataSource':'foodmart','granularity':'all',"
+operator|+
+literal|"'dimensions':[{'type':'default','dimension':'product_id'},"
+operator|+
+literal|"{'type':'extraction','dimension':'__time','outputName':'extract_0',"
+operator|+
+literal|"'extractionFn':{'type':'timeFormat','format':'M','timeZone':'UTC',"
+operator|+
+literal|"'locale':'en-US'}}],'limitSpec':{'type':'default'},"
+operator|+
+literal|"'filter':{'type':'and','fields':[{'type':'bound',"
+operator|+
+literal|"'dimension':'product_id','lower':'1558','lowerStrict':false,"
+operator|+
+literal|"'ordering':'numeric'},{'type':'or','fields':[{'type':'selector',"
+operator|+
+literal|"'dimension':'__time','value':'10','extractionFn':{'type':'timeFormat',"
+operator|+
+literal|"'format':'M','timeZone':'UTC','locale':'en-US'}},{'type':'selector',"
+operator|+
+literal|"'dimension':'__time','value':'11','extractionFn':{'type':'timeFormat',"
+operator|+
+literal|"'format':'M','timeZone':'UTC','locale':'en-US'}}]}]},"
+operator|+
+literal|"'aggregations':[{'type':'longSum','name':'dummy_agg',"
+operator|+
+literal|"'fieldName':'dummy_agg'}],"
+operator|+
+literal|"'intervals':['1900-01-09T00:00:00.000/2992-01-10T00:00:00.000']}"
+argument_list|)
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"product_id=1558; EXPR$1=10"
+argument_list|,
+literal|"product_id=1558; EXPR$1=11"
+argument_list|,
+literal|"product_id=1559; EXPR$1=11"
 argument_list|)
 expr_stmt|;
 block|}
