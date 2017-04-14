@@ -27223,15 +27223,13 @@ specifier|final
 name|String
 name|sql
 init|=
-literal|"select * \n"
+literal|"select *\n"
 operator|+
-literal|"  from emp match_recognize \n"
-operator|+
-literal|"  (\n"
+literal|"  from emp match_recognize (\n"
 operator|+
 literal|"    pattern (strt down+ up+)\n"
 operator|+
-literal|"    define \n"
+literal|"    define\n"
 operator|+
 literal|"      down as down.sal< PREV(down.sal),\n"
 operator|+
@@ -27263,15 +27261,13 @@ specifier|final
 name|String
 name|sql
 init|=
-literal|"select * \n"
+literal|"select *\n"
 operator|+
-literal|"  from emp match_recognize \n"
-operator|+
-literal|"  (\n"
+literal|"  from emp match_recognize (\n"
 operator|+
 literal|"    pattern (strt down+ up+)\n"
 operator|+
-literal|"    define \n"
+literal|"    define\n"
 operator|+
 literal|"      down as down.sal< PREV(down.sal),\n"
 operator|+
@@ -27303,15 +27299,13 @@ specifier|final
 name|String
 name|sql
 init|=
-literal|"select * \n"
+literal|"select *\n"
 operator|+
-literal|"  from emp match_recognize \n"
-operator|+
-literal|"  (\n"
+literal|"  from emp match_recognize (\n"
 operator|+
 literal|"    pattern (strt down+ up+)\n"
 operator|+
-literal|"    define \n"
+literal|"    define\n"
 operator|+
 literal|"      down as down.sal< PREV(down.sal),\n"
 operator|+
@@ -28727,17 +28721,13 @@ name|sql
 init|=
 literal|"select *\n"
 operator|+
-literal|"  from emp match_recognize\n"
+literal|"  from emp match_recognize (\n"
 operator|+
-literal|"  (\n"
+literal|"    measures STRT.sal as start_sal,"
 operator|+
-literal|"   measures "
+literal|"      ^LAST(null)^ as bottom_sal,"
 operator|+
-literal|"   STRT.sal as start_sal,"
-operator|+
-literal|"   ^LAST(null)^ as bottom_sal,"
-operator|+
-literal|"   LAST(up.ts) as end_sal"
+literal|"      LAST(up.ts) as end_sal"
 operator|+
 literal|"    pattern (strt down+ up+)\n"
 operator|+
@@ -28757,6 +28747,98 @@ operator|.
 name|fails
 argument_list|(
 literal|"Null parameters in 'LAST\\(NULL, 0\\)'"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testMatchRecognizeSkipTo1
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"  from emp match_recognize (\n"
+operator|+
+literal|"    after match skip to ^null^\n"
+operator|+
+literal|"    measures\n"
+operator|+
+literal|"      STRT.sal as start_sal,\n"
+operator|+
+literal|"      LAST(up.ts) as end_sal\n"
+operator|+
+literal|"    pattern (strt down+ up+)\n"
+operator|+
+literal|"    define\n"
+operator|+
+literal|"      down as down.sal< PREV(down.sal),\n"
+operator|+
+literal|"      up as up.sal> prev(up.sal)\n"
+operator|+
+literal|"  ) mr"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"(?s).*Encountered \"to null\" at .*"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testMatchRecognizeSkipTo2
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"  from emp match_recognize (\n"
+operator|+
+literal|"    after match skip to ^no_exists^\n"
+operator|+
+literal|"    measures\n"
+operator|+
+literal|"      STRT.sal as start_sal,"
+operator|+
+literal|"      LAST(up.ts) as end_sal"
+operator|+
+literal|"    pattern (strt down+ up+)\n"
+operator|+
+literal|"    define\n"
+operator|+
+literal|"      down as down.sal< PREV(down.sal),\n"
+operator|+
+literal|"      up as up.sal> prev(up.sal)\n"
+operator|+
+literal|"  ) mr"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"(?s).*Encountered \"measures\" at .*"
 argument_list|)
 expr_stmt|;
 block|}

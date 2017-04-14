@@ -24747,6 +24747,306 @@ name|expected
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testMatchRecognizePatternSkip1
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"  from t match_recognize\n"
+operator|+
+literal|"  (\n"
+operator|+
+literal|"     after match skip to next row\n"
+operator|+
+literal|"    pattern (strt down+ up+)\n"
+operator|+
+literal|"    define\n"
+operator|+
+literal|"      down as down.price< PREV(down.price),\n"
+operator|+
+literal|"      up as up.price> prev(up.price)\n"
+operator|+
+literal|"  ) mr"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM `T` MATCH_RECOGNIZE(\n"
+operator|+
+literal|"AFTER MATCH SKIP TO NEXT ROW\n"
+operator|+
+literal|"PATTERN (((`STRT` (`DOWN` +)) (`UP` +)))\n"
+operator|+
+literal|"DEFINE "
+operator|+
+literal|"`DOWN` AS (`DOWN`.`PRICE`< PREV(`DOWN`.`PRICE`, 1)), "
+operator|+
+literal|"`UP` AS (`UP`.`PRICE`> PREV(`UP`.`PRICE`, 1))"
+operator|+
+literal|") AS `MR`"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testMatchRecognizePatternSkip2
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"  from t match_recognize\n"
+operator|+
+literal|"  (\n"
+operator|+
+literal|"     after match skip past last row\n"
+operator|+
+literal|"    pattern (strt down+ up+)\n"
+operator|+
+literal|"    define\n"
+operator|+
+literal|"      down as down.price< PREV(down.price),\n"
+operator|+
+literal|"      up as up.price> prev(up.price)\n"
+operator|+
+literal|"  ) mr"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM `T` MATCH_RECOGNIZE(\n"
+operator|+
+literal|"AFTER MATCH SKIP PAST LAST ROW\n"
+operator|+
+literal|"PATTERN (((`STRT` (`DOWN` +)) (`UP` +)))\n"
+operator|+
+literal|"DEFINE "
+operator|+
+literal|"`DOWN` AS (`DOWN`.`PRICE`< PREV(`DOWN`.`PRICE`, 1)), "
+operator|+
+literal|"`UP` AS (`UP`.`PRICE`> PREV(`UP`.`PRICE`, 1))"
+operator|+
+literal|") AS `MR`"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testMatchRecognizePatternSkip3
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"  from t match_recognize\n"
+operator|+
+literal|"  (\n"
+operator|+
+literal|"     after match skip to FIRST down\n"
+operator|+
+literal|"    pattern (strt down+ up+)\n"
+operator|+
+literal|"    define\n"
+operator|+
+literal|"      down as down.price< PREV(down.price),\n"
+operator|+
+literal|"      up as up.price> prev(up.price)\n"
+operator|+
+literal|"  ) mr"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM `T` MATCH_RECOGNIZE(\n"
+operator|+
+literal|"AFTER MATCH SKIP TO FIRST `DOWN`\n"
+operator|+
+literal|"PATTERN (((`STRT` (`DOWN` +)) (`UP` +)))\n"
+operator|+
+literal|"DEFINE "
+operator|+
+literal|"`DOWN` AS (`DOWN`.`PRICE`< PREV(`DOWN`.`PRICE`, 1)), "
+operator|+
+literal|"`UP` AS (`UP`.`PRICE`> PREV(`UP`.`PRICE`, 1))"
+operator|+
+literal|") AS `MR`"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testMatchRecognizePatternSkip4
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"  from t match_recognize\n"
+operator|+
+literal|"  (\n"
+operator|+
+literal|"     after match skip to LAST down\n"
+operator|+
+literal|"    pattern (strt down+ up+)\n"
+operator|+
+literal|"    define\n"
+operator|+
+literal|"      down as down.price< PREV(down.price),\n"
+operator|+
+literal|"      up as up.price> prev(up.price)\n"
+operator|+
+literal|"  ) mr"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM `T` MATCH_RECOGNIZE(\n"
+operator|+
+literal|"AFTER MATCH SKIP TO LAST `DOWN`\n"
+operator|+
+literal|"PATTERN (((`STRT` (`DOWN` +)) (`UP` +)))\n"
+operator|+
+literal|"DEFINE "
+operator|+
+literal|"`DOWN` AS (`DOWN`.`PRICE`< PREV(`DOWN`.`PRICE`, 1)), "
+operator|+
+literal|"`UP` AS (`UP`.`PRICE`> PREV(`UP`.`PRICE`, 1))"
+operator|+
+literal|") AS `MR`"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testMatchRecognizePatternSkip5
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"  from t match_recognize\n"
+operator|+
+literal|"  (\n"
+operator|+
+literal|"     after match skip to down\n"
+operator|+
+literal|"    pattern (strt down+ up+)\n"
+operator|+
+literal|"    define\n"
+operator|+
+literal|"      down as down.price< PREV(down.price),\n"
+operator|+
+literal|"      up as up.price> prev(up.price)\n"
+operator|+
+literal|"  ) mr"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM `T` MATCH_RECOGNIZE(\n"
+operator|+
+literal|"AFTER MATCH SKIP TO LAST `DOWN`\n"
+operator|+
+literal|"PATTERN (((`STRT` (`DOWN` +)) (`UP` +)))\n"
+operator|+
+literal|"DEFINE "
+operator|+
+literal|"`DOWN` AS (`DOWN`.`PRICE`< PREV(`DOWN`.`PRICE`, 1)), "
+operator|+
+literal|"`UP` AS (`UP`.`PRICE`> PREV(`UP`.`PRICE`, 1))"
+operator|+
+literal|") AS `MR`"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
 comment|//~ Inner Interfaces -------------------------------------------------------
 comment|/**    * Callback to control how test actions are performed.    */
 specifier|protected

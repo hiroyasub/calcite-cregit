@@ -294,6 +294,12 @@ name|CLASSIFIER
 block|,
 name|MATCH_NUMBER
 block|,
+comment|/**    * The "SKIP TO FIRST" qualifier of restarting point in a MATCH_RECOGNIZE    * clause.    */
+name|SKIP_TO_FIRST
+block|,
+comment|/**    * The "SKIP TO LAST" qualifier of restarting point in a MATCH_RECOGNIZE    * clause.    */
+name|SKIP_TO_LAST
+block|,
 comment|// postfix operators
 comment|/**    * DESC in ORDER BY. A parse tree, not a true expression.    */
 name|DESCENDING
@@ -907,6 +913,10 @@ argument_list|,
 name|WITH
 argument_list|,
 name|WITH_ITEM
+argument_list|,
+name|SKIP_TO_FIRST
+argument_list|,
+name|SKIP_TO_LAST
 argument_list|)
 argument_list|,
 name|AGGREGATE

@@ -441,6 +441,11 @@ name|strictEnd
 decl_stmt|;
 specifier|protected
 specifier|final
+name|RexNode
+name|after
+decl_stmt|;
+specifier|protected
+specifier|final
 name|ImmutableMap
 argument_list|<
 name|String
@@ -471,7 +476,7 @@ argument_list|>
 name|aggregateCallsPreVar
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------
-comment|/**    * Creates a Match.    *    * @param cluster Cluster    * @param traitSet Trait set    * @param input Input relational expression    * @param pattern Regular expression that defines pattern variables    * @param strictStart Whether it is a strict start pattern    * @param strictEnd Whether it is a strict end pattern    * @param patternDefinitions Pattern definitions    * @param measures Measure definitions    * @param rowType Row type    */
+comment|/**    * Creates a Match.    *    * @param cluster Cluster    * @param traitSet Trait set    * @param input Input relational expression    * @param pattern Regular expression that defines pattern variables    * @param strictStart Whether it is a strict start pattern    * @param strictEnd Whether it is a strict end pattern    * @param patternDefinitions Pattern definitions    * @param measures Measure definitions    * @param after After match definitions    * @param rowType Row type    */
 specifier|protected
 name|Match
 parameter_list|(
@@ -508,6 +513,9 @@ argument_list|,
 name|RexNode
 argument_list|>
 name|measures
+parameter_list|,
+name|RexNode
+name|after
 parameter_list|,
 name|RelDataType
 name|rowType
@@ -572,7 +580,12 @@ name|this
 operator|.
 name|rowType
 operator|=
+name|Preconditions
+operator|.
+name|checkNotNull
+argument_list|(
 name|rowType
+argument_list|)
 expr_stmt|;
 name|this
 operator|.
@@ -583,6 +596,17 @@ operator|.
 name|copyOf
 argument_list|(
 name|measures
+argument_list|)
+expr_stmt|;
+name|this
+operator|.
+name|after
+operator|=
+name|Preconditions
+operator|.
+name|checkNotNull
+argument_list|(
+name|after
 argument_list|)
 expr_stmt|;
 specifier|final
@@ -799,6 +823,15 @@ return|;
 block|}
 specifier|public
 name|RexNode
+name|getAfter
+parameter_list|()
+block|{
+return|return
+name|after
+return|;
+block|}
+specifier|public
+name|RexNode
 name|getPattern
 parameter_list|()
 block|{
@@ -871,6 +904,9 @@ name|RexNode
 argument_list|>
 name|measures
 parameter_list|,
+name|RexNode
+name|after
+parameter_list|,
 name|RelDataType
 name|rowType
 parameter_list|)
@@ -930,6 +966,8 @@ argument_list|,
 name|patternDefinitions
 argument_list|,
 name|measures
+argument_list|,
+name|after
 argument_list|,
 name|rowType
 argument_list|)

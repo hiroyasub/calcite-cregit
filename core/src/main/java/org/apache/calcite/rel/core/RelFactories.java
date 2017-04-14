@@ -1538,6 +1538,9 @@ name|RexNode
 argument_list|>
 name|measures
 parameter_list|,
+name|RexNode
+name|after
+parameter_list|,
 name|RelDataType
 name|rowType
 parameter_list|)
@@ -1583,6 +1586,9 @@ name|RexNode
 argument_list|>
 name|measures
 parameter_list|,
+name|RexNode
+name|after
+parameter_list|,
 name|RelDataType
 name|rowType
 parameter_list|)
@@ -1603,6 +1609,8 @@ argument_list|,
 name|patternDefinitions
 argument_list|,
 name|measures
+argument_list|,
+name|after
 argument_list|,
 name|rowType
 argument_list|)
