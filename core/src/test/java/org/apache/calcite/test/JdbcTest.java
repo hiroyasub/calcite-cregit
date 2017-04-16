@@ -2744,7 +2744,7 @@ argument_list|()
 expr_stmt|;
 name|modelWithView
 argument_list|(
-literal|"select \"name\", \"empid\" as e, \"salary\", \"empid\" + 3 as e3, 1 as one\n"
+literal|"select \"name\", \"empid\" as e, \"salary\", \"empid\" + 3 as e3, 1 as uno\n"
 operator|+
 literal|"from \"MUTABLE_EMPLOYEES\"\n"
 operator|+

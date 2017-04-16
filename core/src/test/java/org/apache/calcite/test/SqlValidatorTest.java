@@ -15303,7 +15303,7 @@ block|{
 comment|// Sub-queries require alias
 name|checkFails
 argument_list|(
-literal|"select * from (select 1 as one from emp)\n"
+literal|"select * from (select 1 as uno from emp)\n"
 operator|+
 literal|"join (values (1), (2)) on true"
 argument_list|,
@@ -15693,9 +15693,9 @@ literal|" dept2 as (select * from dept),\n"
 operator|+
 literal|" empDept as (select emp2.empno, dept2.deptno from dept2 join emp2 using (deptno))\n"
 operator|+
-literal|"select 1 as one from empDept"
+literal|"select 1 as uno from empDept"
 argument_list|,
-literal|"RecordType(INTEGER NOT NULL ONE) NOT NULL"
+literal|"RecordType(INTEGER NOT NULL UNO) NOT NULL"
 argument_list|)
 expr_stmt|;
 block|}
@@ -15786,9 +15786,9 @@ literal|"  (\n"
 operator|+
 literal|"    with empDept as (select emp2.empno, dept2.deptno from dept2 join emp2 using (deptno))\n"
 operator|+
-literal|"    select 1 as one from empDept))"
+literal|"    select 1 as uno from empDept))"
 argument_list|,
-literal|"RecordType(INTEGER NOT NULL ONE) NOT NULL"
+literal|"RecordType(INTEGER NOT NULL UNO) NOT NULL"
 argument_list|)
 expr_stmt|;
 comment|// WITH inside WHERE can see enclosing tables
@@ -15842,13 +15842,13 @@ literal|"join (\n"
 operator|+
 literal|"  with dept2 as (select * from dept where dept.deptno> 10)\n"
 operator|+
-literal|"  select deptno, 1 as one from dept2) as d using (deptno)"
+literal|"  select deptno, 1 as uno from dept2) as d using (deptno)"
 argument_list|,
 literal|"RecordType(INTEGER NOT NULL EMPNO,"
 operator|+
 literal|" INTEGER NOT NULL DEPTNO,"
 operator|+
-literal|" INTEGER NOT NULL ONE) NOT NULL"
+literal|" INTEGER NOT NULL UNO) NOT NULL"
 argument_list|)
 expr_stmt|;
 name|checkFails
@@ -15859,7 +15859,7 @@ literal|"join (\n"
 operator|+
 literal|"  with dept2 as (select * from dept where dept.deptno> 10)\n"
 operator|+
-literal|"  select deptno, 1 as one from dept2) as d using (deptno)"
+literal|"  select deptno, 1 as uno from dept2) as d using (deptno)"
 argument_list|,
 literal|"Table 'E' not found"
 argument_list|)
@@ -21133,7 +21133,7 @@ name|tester
 operator|.
 name|checkFieldOrigin
 argument_list|(
-literal|"select distinct emp.empno, hiredate, 1 as one,\n"
+literal|"select distinct emp.empno, hiredate, 1 as uno,\n"
 operator|+
 literal|" emp.empno * 2 as twiceEmpno\n"
 operator|+

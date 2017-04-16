@@ -1328,7 +1328,7 @@ specifier|final
 name|String
 name|sql
 init|=
-literal|"select * from sales.empty"
+literal|"select * from sales.\"EMPTY\""
 decl_stmt|;
 name|checkSql
 argument_list|(

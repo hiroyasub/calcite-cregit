@@ -660,7 +660,11 @@ literal|"KEYWORD(HOUR)"
 argument_list|,
 literal|"KEYWORD(INTERVAL)"
 argument_list|,
+literal|"KEYWORD(LAG)"
+argument_list|,
 literal|"KEYWORD(LAST_VALUE)"
+argument_list|,
+literal|"KEYWORD(LEAD)"
 argument_list|,
 literal|"KEYWORD(LN)"
 argument_list|,
@@ -687,6 +691,8 @@ argument_list|,
 literal|"KEYWORD(NEXT)"
 argument_list|,
 literal|"KEYWORD(NOT)"
+argument_list|,
+literal|"KEYWORD(NTILE)"
 argument_list|,
 literal|"KEYWORD(NULL)"
 argument_list|,
@@ -743,6 +749,8 @@ argument_list|,
 literal|"KEYWORD(TRIM)"
 argument_list|,
 literal|"KEYWORD(TRUE)"
+argument_list|,
+literal|"KEYWORD(TRUNCATE)"
 argument_list|,
 literal|"KEYWORD(UNKNOWN)"
 argument_list|,

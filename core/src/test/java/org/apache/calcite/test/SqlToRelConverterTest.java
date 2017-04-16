@@ -585,7 +585,7 @@ name|sql
 init|=
 literal|"select a + b from (\n"
 operator|+
-literal|"  select deptno, 1 as one, name from dept\n"
+literal|"  select deptno, 1 as uno, name from dept\n"
 operator|+
 literal|") as d(a, b, c)\n"
 operator|+
