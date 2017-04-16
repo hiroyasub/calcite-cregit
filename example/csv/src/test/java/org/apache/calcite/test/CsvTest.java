@@ -133,6 +133,20 @@ end_import
 
 begin_import
 import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|collect
+operator|.
+name|Ordering
+import|;
+end_import
+
+begin_import
+import|import
 name|org
 operator|.
 name|junit
@@ -298,6 +312,16 @@ operator|.
 name|util
 operator|.
 name|Arrays
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Collections
 import|;
 end_import
 
@@ -1492,6 +1516,123 @@ block|}
 block|}
 return|;
 block|}
+comment|/** Returns a function that checks the contents of a result set against an    * expected string. */
+specifier|private
+specifier|static
+name|Function
+argument_list|<
+name|ResultSet
+argument_list|,
+name|Void
+argument_list|>
+name|expectUnordered
+parameter_list|(
+name|String
+modifier|...
+name|expected
+parameter_list|)
+block|{
+specifier|final
+name|List
+argument_list|<
+name|String
+argument_list|>
+name|expectedLines
+init|=
+name|Ordering
+operator|.
+name|natural
+argument_list|()
+operator|.
+name|immutableSortedCopy
+argument_list|(
+name|Arrays
+operator|.
+name|asList
+argument_list|(
+name|expected
+argument_list|)
+argument_list|)
+decl_stmt|;
+return|return
+operator|new
+name|Function
+argument_list|<
+name|ResultSet
+argument_list|,
+name|Void
+argument_list|>
+argument_list|()
+block|{
+specifier|public
+name|Void
+name|apply
+parameter_list|(
+name|ResultSet
+name|resultSet
+parameter_list|)
+block|{
+try|try
+block|{
+specifier|final
+name|List
+argument_list|<
+name|String
+argument_list|>
+name|lines
+init|=
+operator|new
+name|ArrayList
+argument_list|<>
+argument_list|()
+decl_stmt|;
+name|CsvTest
+operator|.
+name|collect
+argument_list|(
+name|lines
+argument_list|,
+name|resultSet
+argument_list|)
+expr_stmt|;
+name|Collections
+operator|.
+name|sort
+argument_list|(
+name|lines
+argument_list|)
+expr_stmt|;
+name|Assert
+operator|.
+name|assertEquals
+argument_list|(
+name|expectedLines
+argument_list|,
+name|lines
+argument_list|)
+expr_stmt|;
+block|}
+catch|catch
+parameter_list|(
+name|SQLException
+name|e
+parameter_list|)
+block|{
+throw|throw
+operator|new
+name|RuntimeException
+argument_list|(
+name|e
+argument_list|)
+throw|;
+block|}
+return|return
+literal|null
+return|;
+block|}
+block|}
+return|;
+block|}
 specifier|private
 name|void
 name|checkSql
@@ -1971,6 +2112,83 @@ argument_list|(
 literal|"joined at=2005-09-07; naME=Wilma"
 argument_list|,
 literal|"joined at=2007-01-01; naME=Alice"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1754">[CALCITE-1754]    * In Csv adapter, convert DATE and TIME values to int, and TIMESTAMP values    * to long</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testGroupByTimestampAdd
+parameter_list|()
+throws|throws
+name|SQLException
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select count(*) as c,\n"
+operator|+
+literal|"  {fn timestampadd(SQL_TSI_DAY, 1, JOINEDAT) } as t\n"
+operator|+
+literal|"from EMPS group by {fn timestampadd(SQL_TSI_DAY, 1, JOINEDAT ) } "
+decl_stmt|;
+name|sql
+argument_list|(
+literal|"model"
+argument_list|,
+name|sql
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"C=1; T=1996-08-04"
+argument_list|,
+literal|"C=1; T=2002-05-04"
+argument_list|,
+literal|"C=1; T=2005-09-08"
+argument_list|,
+literal|"C=1; T=2007-01-02"
+argument_list|,
+literal|"C=1; T=2001-01-02"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+specifier|final
+name|String
+name|sql2
+init|=
+literal|"select count(*) as c,\n"
+operator|+
+literal|"  {fn timestampadd(SQL_TSI_MONTH, 1, JOINEDAT) } as t\n"
+operator|+
+literal|"from EMPS group by {fn timestampadd(SQL_TSI_MONTH, 1, JOINEDAT ) } "
+decl_stmt|;
+name|sql
+argument_list|(
+literal|"model"
+argument_list|,
+name|sql2
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"C=1; T=2002-06-03"
+argument_list|,
+literal|"C=1; T=2005-10-07"
+argument_list|,
+literal|"C=1; T=2007-02-01"
+argument_list|,
+literal|"C=1; T=2001-02-01"
+argument_list|,
+literal|"C=1; T=1996-09-03"
 argument_list|)
 operator|.
 name|ok
@@ -4203,6 +4421,25 @@ return|return
 name|checking
 argument_list|(
 name|expect
+argument_list|(
+name|expectedLines
+argument_list|)
+argument_list|)
+return|;
+block|}
+comment|/** Sets the rows that are expected to be returned from the SQL query,      * in no particular order. */
+name|Fluent
+name|returnsUnordered
+parameter_list|(
+name|String
+modifier|...
+name|expectedLines
+parameter_list|)
+block|{
+return|return
+name|checking
+argument_list|(
+name|expectUnordered
 argument_list|(
 name|expectedLines
 argument_list|)
