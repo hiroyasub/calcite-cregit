@@ -195,7 +195,7 @@ case|:
 return|return
 name|TimeExtractionFunction
 operator|.
-name|createFromGranularity
+name|createExtractFromGranularity
 argument_list|(
 name|Granularity
 operator|.
@@ -208,7 +208,7 @@ case|:
 return|return
 name|TimeExtractionFunction
 operator|.
-name|createFromGranularity
+name|createExtractFromGranularity
 argument_list|(
 name|Granularity
 operator|.
@@ -221,7 +221,7 @@ case|:
 return|return
 name|TimeExtractionFunction
 operator|.
-name|createFromGranularity
+name|createExtractFromGranularity
 argument_list|(
 name|Granularity
 operator|.

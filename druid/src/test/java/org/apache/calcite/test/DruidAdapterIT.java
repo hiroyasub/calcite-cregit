@@ -947,31 +947,15 @@ specifier|final
 name|String
 name|explain
 init|=
-literal|"PLAN="
+literal|"PLAN=EnumerableInterpreter\n"
 operator|+
-literal|"EnumerableInterpreter\n"
+literal|"  BindableProject(s=[$2], page=[$0], day=[$1])\n"
 operator|+
-literal|"  BindableSort(sort0=[$0], dir0=[DESC])\n"
+literal|"    DruidQuery(table=[[wiki, wikiticker]], "
 operator|+
-literal|"    BindableProject(s=[$2], page=[$0], day=[$1])\n"
+literal|"intervals=[[1900-01-01T00:00:00.000/3000-01-01T00:00:00.000]], projects=[[$17, FLOOR"
 operator|+
-literal|"      DruidQuery(table=[[wiki, wikiticker]], intervals=[[1900-01-01T00:00:00.000/3000-01-01T00:00:00.000]], projects=[[$17, FLOOR($0, FLAG(DAY)), $1]], groups=[{0, 1}], aggs=[[SUM($2)]])\n"
-decl_stmt|;
-specifier|final
-name|String
-name|druidQuery
-init|=
-literal|"{'queryType':'groupBy',"
-operator|+
-literal|"'dataSource':'wikiticker','granularity':'day',"
-operator|+
-literal|"'dimensions':[{'type':'default','dimension':'page'}],"
-operator|+
-literal|"'limitSpec':{'type':'default'},"
-operator|+
-literal|"'aggregations':[{'type':'longSum','name':'s','fieldName':'added'}],"
-operator|+
-literal|"'intervals':['1900-01-01T00:00:00.000/3000-01-01T00:00:00.000']}"
+literal|"($0, FLAG(DAY)), $1]], groups=[{0, 1}], aggs=[[SUM($2)]], sort0=[2], dir0=[DESC])"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -1001,7 +985,11 @@ name|queryContains
 argument_list|(
 name|druidChecker
 argument_list|(
-name|druidQuery
+literal|"'queryType':'groupBy'"
+argument_list|,
+literal|"'limitSpec':{'type':'default',"
+operator|+
+literal|"'columns':[{'dimension':'s','direction':'descending'}]}"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -1216,12 +1204,6 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Test case for    *<a href="https://github.com/druid-io/druid/issues/3905">DRUID-3905</a>. */
-annotation|@
-name|Ignore
-argument_list|(
-literal|"[DRUID-3905]"
-argument_list|)
 annotation|@
 name|Test
 specifier|public
@@ -1251,23 +1233,19 @@ literal|"  DruidQuery(table=[[wiki, wikiticker]], "
 operator|+
 literal|"intervals=[[1900-01-01T00:00:00.000/2015-10-12T00:00:00.000]], "
 operator|+
-literal|"projects=[[$0]], groups=[{0}], aggs=[[]])\n"
+literal|"groups=[{0}], aggs=[[]])\n"
 decl_stmt|;
 specifier|final
 name|String
-name|druidQuery
+name|subDruidQuery
 init|=
-literal|"{'queryType':'select',"
+literal|"{'queryType':'groupBy','dataSource':'wikiticker',"
 operator|+
-literal|"'dataSource':'wikiticker','descending':false,"
+literal|"'granularity':'all','dimensions':[{'type':'extraction',"
 operator|+
-literal|"'intervals':['1900-01-01T00:00:00.000/2015-10-12T00:00:00.000'],"
+literal|"'dimension':'__time','outputName':'extract',"
 operator|+
-literal|"'dimensions':[],'metrics':[],'granularity':'all',"
-operator|+
-literal|"'pagingSpec':{'threshold':16384,'fromNext':true},"
-operator|+
-literal|"'context':{'druid.query.fetch':false}}"
+literal|"'extractionFn':{'type':'timeFormat'"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -1297,7 +1275,7 @@ name|queryContains
 argument_list|(
 name|druidChecker
 argument_list|(
-name|druidQuery
+name|subDruidQuery
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -1989,18 +1967,17 @@ name|void
 name|testSort
 parameter_list|()
 block|{
-comment|// Note: We do not push down SORT yet
 specifier|final
 name|String
 name|explain
 init|=
-literal|"PLAN="
+literal|"PLAN=EnumerableInterpreter\n"
 operator|+
-literal|"EnumerableInterpreter\n"
+literal|"  DruidQuery(table=[[foodmart, foodmart]], "
 operator|+
-literal|"  BindableSort(sort0=[$1], sort1=[$0], dir0=[ASC], dir1=[DESC])\n"
+literal|"intervals=[[1900-01-09T00:00:00.000/2992-01-10T00:00:00.000]], projects=[[$39, $30]], "
 operator|+
-literal|"    DruidQuery(table=[[foodmart, foodmart]], intervals=[[1900-01-09T00:00:00.000/2992-01-10T00:00:00.000]], projects=[[$39, $30]], groups=[{0, 1}], aggs=[[]])"
+literal|"groups=[{0, 1}], aggs=[[]], sort0=[1], sort1=[0], dir0=[ASC], dir1=[DESC])"
 decl_stmt|;
 specifier|final
 name|String
@@ -2030,6 +2007,30 @@ argument_list|,
 literal|"gender=F; state_province=WA"
 argument_list|)
 operator|.
+name|queryContains
+argument_list|(
+name|druidChecker
+argument_list|(
+literal|"{'queryType':'groupBy','dataSource':'foodmart',"
+operator|+
+literal|"'granularity':'all','dimensions':[{'type':'default',"
+operator|+
+literal|"'dimension':'gender'},{'type':'default',"
+operator|+
+literal|"'dimension':'state_province'}],'limitSpec':{'type':'default',"
+operator|+
+literal|"'columns':[{'dimension':'state_province','direction':'ascending'},"
+operator|+
+literal|"{'dimension':'gender','direction':'descending'}]},"
+operator|+
+literal|"'aggregations':[{'type':'longSum','name':'dummy_agg',"
+operator|+
+literal|"'fieldName':'dummy_agg'}],"
+operator|+
+literal|"'intervals':['1900-01-09T00:00:00.000/2992-01-10T00:00:00.000']}"
+argument_list|)
+argument_list|)
+operator|.
 name|explainContains
 argument_list|(
 name|explain
@@ -2043,18 +2044,19 @@ name|void
 name|testSortLimit
 parameter_list|()
 block|{
-comment|// Note: We do not push down SORT-LIMIT into Druid "groupBy" query yet
 specifier|final
 name|String
 name|explain
 init|=
-literal|"PLAN="
+literal|"PLAN=EnumerableLimit(offset=[2], fetch=[3])\n"
 operator|+
-literal|"EnumerableInterpreter\n"
+literal|"  EnumerableInterpreter\n"
 operator|+
-literal|"  BindableSort(sort0=[$1], sort1=[$0], dir0=[ASC], dir1=[DESC], offset=[2], fetch=[3])\n"
+literal|"    DruidQuery(table=[[foodmart, foodmart]], "
 operator|+
-literal|"    DruidQuery(table=[[foodmart, foodmart]], intervals=[[1900-01-09T00:00:00.000/2992-01-10T00:00:00.000]], projects=[[$39, $30]], groups=[{0, 1}], aggs=[[]])"
+literal|"intervals=[[1900-01-09T00:00:00.000/2992-01-10T00:00:00.000]], projects=[[$39, $30]], "
+operator|+
+literal|"groups=[{0, 1}], aggs=[[]], sort0=[1], sort1=[0], dir0=[ASC], dir1=[DESC])"
 decl_stmt|;
 specifier|final
 name|String
@@ -2185,7 +2187,6 @@ name|void
 name|testDistinctLimit
 parameter_list|()
 block|{
-comment|// We do not yet push LIMIT into a Druid "groupBy" query.
 specifier|final
 name|String
 name|sql
@@ -2202,7 +2203,9 @@ literal|"{'queryType':'groupBy','dataSource':'foodmart',"
 operator|+
 literal|"'granularity':'all','dimensions':[{'type':'default','dimension':'gender'},"
 operator|+
-literal|"{'type':'default','dimension':'state_province'}],'limitSpec':{'type':'default'},"
+literal|"{'type':'default','dimension':'state_province'}],'limitSpec':{'type':'default',"
+operator|+
+literal|"'limit':3,'columns':[]},"
 operator|+
 literal|"'aggregations':[{'type':'longSum','name':'dummy_agg','fieldName':'dummy_agg'}],"
 operator|+
@@ -2212,13 +2215,13 @@ specifier|final
 name|String
 name|explain
 init|=
-literal|"PLAN="
+literal|"PLAN=EnumerableInterpreter\n"
 operator|+
-literal|"EnumerableLimit(fetch=[3])\n"
+literal|"  DruidQuery(table=[[foodmart, foodmart]], "
 operator|+
-literal|"  EnumerableInterpreter\n"
+literal|"intervals=[[1900-01-09T00:00:00.000/2992-01-10T00:00:00.000]], projects=[[$39, $30]], "
 operator|+
-literal|"    DruidQuery(table=[[foodmart, foodmart]], intervals=[[1900-01-09T00:00:00.000/2992-01-10T00:00:00.000]], projects=[[$39, $30]], groups=[{0, 1}], aggs=[[]])"
+literal|"groups=[{0, 1}], aggs=[[]], fetch=[3])"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -2239,6 +2242,15 @@ name|druidChecker
 argument_list|(
 name|druidQuery
 argument_list|)
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"gender=F; state_province=CA"
+argument_list|,
+literal|"gender=F; state_province=OR"
+argument_list|,
+literal|"gender=F; state_province=WA"
 argument_list|)
 expr_stmt|;
 block|}
@@ -2532,15 +2544,13 @@ name|explain
 init|=
 literal|"PLAN=EnumerableInterpreter\n"
 operator|+
-literal|"  BindableSort(sort0=[$2], dir0=[DESC], fetch=[30])\n"
+literal|"  DruidQuery(table=[[foodmart, foodmart]], "
 operator|+
-literal|"    DruidQuery(table=[[foodmart, foodmart]], "
+literal|"intervals=[[1900-01-09T00:00:00.000/2992-01-10T00:00:00.000]], projects=[[$2, FLOOR"
 operator|+
-literal|"intervals=[[1900-01-09T00:00:00.000/2992-01-10T00:00:00.000]], "
+literal|"($0, FLAG(DAY)), $89]], groups=[{0, 1}], aggs=[[SUM($2)]], sort0=[2], dir0=[DESC], "
 operator|+
-literal|"projects=[[$2, FLOOR($0, FLAG(DAY)), $89]], groups=[{0, 1}], "
-operator|+
-literal|"aggs=[[SUM($2)]])\n"
+literal|"fetch=[30])"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -2568,7 +2578,13 @@ name|queryContains
 argument_list|(
 name|druidChecker
 argument_list|(
-name|druidQuery
+literal|"'queryType':'groupBy'"
+argument_list|,
+literal|"'granularity':'all'"
+argument_list|,
+literal|"'limitSpec"
+operator|+
+literal|"':{'type':'default','limit':30,'columns':[{'dimension':'S','direction':'descending'}]}"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -2597,13 +2613,25 @@ literal|"order by s desc limit 30"
 decl_stmt|;
 specifier|final
 name|String
-name|druidQuery
+name|druidQueryPart1
 init|=
 literal|"{'queryType':'groupBy','dataSource':'foodmart',"
 operator|+
-literal|"'granularity':'day','dimensions':[{'type':'default','dimension':'brand_name'}],"
+literal|"'granularity':'all','dimensions':[{'type':'default',"
 operator|+
-literal|"'limitSpec':{'type':'default'},"
+literal|"'dimension':'brand_name'},{'type':'extraction','dimension':'__time',"
+operator|+
+literal|"'outputName':'floor_day','extractionFn':{'type':'timeFormat'"
+decl_stmt|;
+specifier|final
+name|String
+name|druidQueryPart2
+init|=
+literal|"'granularity':'day',"
+operator|+
+literal|"'timeZone':'UTC','locale':'en-US'}}],'limitSpec':{'type':'default',"
+operator|+
+literal|"'limit':30,'columns':[{'dimension':'S','direction':'descending'}]},"
 operator|+
 literal|"'aggregations':[{'type':'longSum','name':'S','fieldName':'unit_sales'}],"
 operator|+
@@ -2615,15 +2643,13 @@ name|explain
 init|=
 literal|"PLAN=EnumerableInterpreter\n"
 operator|+
-literal|"  BindableSort(sort0=[$2], dir0=[DESC], fetch=[30])\n"
+literal|"  DruidQuery(table=[[foodmart, foodmart]], "
 operator|+
-literal|"    DruidQuery(table=[[foodmart, foodmart]], "
+literal|"intervals=[[1900-01-09T00:00:00.000/2992-01-10T00:00:00.000]], projects=[[$2, FLOOR"
 operator|+
-literal|"intervals=[[1900-01-09T00:00:00.000/2992-01-10T00:00:00.000]], "
+literal|"($0, FLAG(DAY)), $89]], groups=[{0, 1}], aggs=[[SUM($2)]], sort0=[2], dir0=[DESC], "
 operator|+
-literal|"projects=[[$2, FLOOR($0, FLAG(DAY)), $89]], groups=[{0, 1}], "
-operator|+
-literal|"aggs=[[SUM($2)]])\n"
+literal|"fetch=[30])"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -2651,7 +2677,9 @@ name|queryContains
 argument_list|(
 name|druidChecker
 argument_list|(
-name|druidQuery
+name|druidQueryPart1
+argument_list|,
+name|druidQueryPart2
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -2680,17 +2708,15 @@ literal|"order by \"brand_name\""
 decl_stmt|;
 specifier|final
 name|String
-name|druidQuery
+name|subDruidQuery
 init|=
 literal|"{'queryType':'groupBy','dataSource':'foodmart',"
 operator|+
-literal|"'granularity':'day','dimensions':[{'type':'default','dimension':'brand_name'}],"
+literal|"'granularity':'all','dimensions':[{'type':'default',"
 operator|+
-literal|"'limitSpec':{'type':'default'},"
+literal|"'dimension':'brand_name'},{'type':'extraction','dimension':'__time',"
 operator|+
-literal|"'aggregations':[{'type':'longSum','name':'S','fieldName':'unit_sales'}],"
-operator|+
-literal|"'intervals':['1900-01-09T00:00:00.000/2992-01-10T00:00:00.000']}"
+literal|"'outputName':'floor_day','extractionFn':{'type':'timeFormat'"
 decl_stmt|;
 specifier|final
 name|String
@@ -2698,15 +2724,11 @@ name|explain
 init|=
 literal|"PLAN=EnumerableInterpreter\n"
 operator|+
-literal|"  BindableSort(sort0=[$0], dir0=[ASC])\n"
+literal|"  DruidQuery(table=[[foodmart, foodmart]], "
 operator|+
-literal|"    DruidQuery(table=[[foodmart, foodmart]], "
+literal|"intervals=[[1900-01-09T00:00:00.000/2992-01-10T00:00:00.000]], projects=[[$2, FLOOR"
 operator|+
-literal|"intervals=[[1900-01-09T00:00:00.000/2992-01-10T00:00:00.000]], "
-operator|+
-literal|"projects=[[$2, FLOOR($0, FLAG(DAY)), $89]], groups=[{0, 1}], "
-operator|+
-literal|"aggs=[[SUM($2)]])\n"
+literal|"($0, FLAG(DAY)), $89]], groups=[{0, 1}], aggs=[[SUM($2)]], sort0=[0], dir0=[ASC])"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -2734,7 +2756,7 @@ name|queryContains
 argument_list|(
 name|druidChecker
 argument_list|(
-name|druidQuery
+name|subDruidQuery
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -3721,9 +3743,11 @@ name|explain
 init|=
 literal|"PLAN=EnumerableInterpreter\n"
 operator|+
-literal|"  BindableSort(sort0=[$0], dir0=[ASC])\n"
+literal|"  DruidQuery(table=[[foodmart, foodmart]], "
 operator|+
-literal|"    DruidQuery(table=[[foodmart, foodmart]], intervals=[[1900-01-09T00:00:00.000/2992-01-10T00:00:00.000]], groups=[{30}], aggs=[[COUNT()]])"
+literal|"intervals=[[1900-01-09T00:00:00.000/2992-01-10T00:00:00.000]], groups=[{30}], "
+operator|+
+literal|"aggs=[[COUNT()]], sort0=[0], dir0=[ASC])"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -3943,19 +3967,15 @@ specifier|final
 name|String
 name|explain
 init|=
-literal|"PLAN="
+literal|"PLAN=EnumerableInterpreter\n"
 operator|+
-literal|"EnumerableInterpreter\n"
+literal|"  DruidQuery(table=[[foodmart, foodmart]], "
 operator|+
-literal|"  BindableSort(sort0=[$0], dir0=[ASC])\n"
+literal|"intervals=[[1900-01-09T00:00:00.000/2992-01-10T00:00:00.000]], projects=[[FLOOR($0, "
 operator|+
-literal|"    DruidQuery(table=[[foodmart, foodmart]], "
+literal|"FLAG(MONTH)), $89, $71]], groups=[{0}], aggs=[[SUM($1), COUNT($2)]], sort0=[0], "
 operator|+
-literal|"intervals=[[1900-01-09T00:00:00.000/2992-01-10T00:00:00.000]], "
-operator|+
-literal|"projects=[[FLOOR($0, FLAG(MONTH)), $89, $71]], groups=[{0}], "
-operator|+
-literal|"aggs=[[SUM($1), COUNT($2)]])"
+literal|"dir0=[ASC])"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -4022,19 +4042,17 @@ specifier|final
 name|String
 name|explain
 init|=
-literal|"PLAN="
+literal|"PLAN=EnumerableLimit(fetch=[3])\n"
 operator|+
-literal|"EnumerableInterpreter\n"
-operator|+
-literal|"  BindableSort(sort0=[$0], dir0=[ASC], fetch=[3])\n"
+literal|"  EnumerableInterpreter\n"
 operator|+
 literal|"    DruidQuery(table=[[foodmart, foodmart]], "
 operator|+
-literal|"intervals=[[1900-01-09T00:00:00.000/2992-01-10T00:00:00.000]], "
+literal|"intervals=[[1900-01-09T00:00:00.000/2992-01-10T00:00:00.000]], projects=[[FLOOR($0, "
 operator|+
-literal|"projects=[[FLOOR($0, FLAG(MONTH)), $89, $71]], groups=[{0}], "
+literal|"FLAG(MONTH)), $89, $71]], groups=[{0}], aggs=[[SUM($1), COUNT($2)]], sort0=[0], "
 operator|+
-literal|"aggs=[[SUM($1), COUNT($2)]])"
+literal|"dir0=[ASC])"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -4213,27 +4231,39 @@ specifier|final
 name|String
 name|explain
 init|=
-literal|"PLAN="
+literal|"PLAN=EnumerableInterpreter\n"
 operator|+
-literal|"EnumerableInterpreter\n"
+literal|"  BindableProject(S=[$2], M=[$3], P=[$0])\n"
 operator|+
-literal|"  BindableSort(sort0=[$0], dir0=[DESC], fetch=[3])\n"
+literal|"    DruidQuery(table=[[foodmart, foodmart]], "
 operator|+
-literal|"    BindableProject(S=[$2], M=[$3], P=[$0])\n"
+literal|"intervals=[[1900-01-09T00:00:00.000/2992-01-10T00:00:00.000]], projects=[[$30, FLOOR"
 operator|+
-literal|"      DruidQuery(table=[[foodmart, foodmart]], intervals=[[1900-01-09T00:00:00.000/2992-01-10T00:00:00.000]], projects=[[$30, FLOOR($0, FLAG(MONTH)), $89]], groups=[{0, 1}], aggs=[[SUM($2), MAX($2)]])"
+literal|"($0, FLAG(MONTH)), $89]], groups=[{0, 1}], aggs=[[SUM($2), MAX($2)]], sort0=[2], "
+operator|+
+literal|"dir0=[DESC], fetch=[3])"
 decl_stmt|;
 specifier|final
 name|String
-name|druidQuery
+name|druidQueryPart1
 init|=
 literal|"{'queryType':'groupBy','dataSource':'foodmart',"
 operator|+
-literal|"'granularity':'month',"
+literal|"'granularity':'all','dimensions':[{'type':'default',"
 operator|+
-literal|"'dimensions':[{'type':'default','dimension':'state_province'}],"
+literal|"'dimension':'state_province'},{'type':'extraction','dimension':'__time',"
 operator|+
-literal|"'limitSpec':{'type':'default'},"
+literal|"'outputName':'floor_month','extractionFn':{'type':'timeFormat','format'"
+decl_stmt|;
+specifier|final
+name|String
+name|druidQueryPart2
+init|=
+literal|"'granularity':'month','timeZone':'UTC',"
+operator|+
+literal|"'locale':'en-US'}}],'limitSpec':{'type':'default','limit':3,"
+operator|+
+literal|"'columns':[{'dimension':'S','direction':'descending'}]},"
 operator|+
 literal|"'aggregations':[{'type':'longSum','name':'S','fieldName':'unit_sales'},"
 operator|+
@@ -4264,7 +4294,9 @@ name|queryContains
 argument_list|(
 name|druidChecker
 argument_list|(
-name|druidQuery
+name|druidQueryPart1
+argument_list|,
+name|druidQueryPart2
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -4300,37 +4332,33 @@ specifier|final
 name|String
 name|explain
 init|=
-literal|"PLAN="
+literal|"PLAN=EnumerableInterpreter\n"
 operator|+
-literal|"EnumerableInterpreter\n"
+literal|"  BindableProject(S=[$2], M=[$3], P=[$0])\n"
 operator|+
-literal|"  BindableSort(sort0=[$0], dir0=[DESC], fetch=[6])\n"
+literal|"    DruidQuery(table=[[foodmart, foodmart]], "
 operator|+
-literal|"    BindableProject(S=[$2], M=[$3], P=[$0])\n"
+literal|"intervals=[[1997-01-01T00:00:00.000/1997-09-01T00:00:00.000]], projects=[[$30, FLOOR"
 operator|+
-literal|"      DruidQuery(table=[[foodmart, foodmart]], "
+literal|"($0, FLAG(DAY)), $89]], groups=[{0, 1}], aggs=[[SUM($2), MAX($2)]], sort0=[2], "
 operator|+
-literal|"intervals=[[1997-01-01T00:00:00.000/1997-09-01T00:00:00.000]], "
-operator|+
-literal|"projects=[[$30, FLOOR($0, FLAG(DAY)), $89]], groups=[{0, 1}], "
-operator|+
-literal|"aggs=[[SUM($2), MAX($2)]]"
+literal|"dir0=[DESC], fetch=[6])"
 decl_stmt|;
 specifier|final
 name|String
-name|druidQuery
+name|druidQueryType
 init|=
-literal|"{'queryType':'groupBy','dataSource':'foodmart','granularity':'day',"
+literal|"{'queryType':'groupBy','dataSource':'foodmart',"
 operator|+
-literal|"'dimensions':[{'type':'default','dimension':'state_province'}],"
+literal|"'granularity':'all','dimensions'"
+decl_stmt|;
+specifier|final
+name|String
+name|limitSpec
+init|=
+literal|"'limitSpec':{'type':'default','limit':6,"
 operator|+
-literal|"'limitSpec':{'type':'default'},"
-operator|+
-literal|"'aggregations':[{'type':'longSum','name':'S','fieldName':'unit_sales'},"
-operator|+
-literal|"{'type':'longMax','name':'M','fieldName':'unit_sales'}],"
-operator|+
-literal|"'intervals':['1997-01-01T00:00:00.000/1997-09-01T00:00:00.000']}"
+literal|"'columns':[{'dimension':'S','direction':'descending'}]}"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -4361,7 +4389,9 @@ name|queryContains
 argument_list|(
 name|druidChecker
 argument_list|(
-name|druidQuery
+name|druidQueryType
+argument_list|,
+name|limitSpec
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -5156,7 +5186,7 @@ literal|"{'queryType':'groupBy','dataSource':'foodmart',"
 operator|+
 literal|"'granularity':'all','dimensions':[{'type':'extraction',"
 operator|+
-literal|"'dimension':'__time','outputName':'extract_0',"
+literal|"'dimension':'__time','outputName':'extract',"
 operator|+
 literal|"'extractionFn':{'type':'timeFormat','format':'yyyy-MM-dd"
 decl_stmt|;
@@ -5214,7 +5244,7 @@ literal|",'granularity':'all'"
 argument_list|,
 literal|"{'type':'extraction',"
 operator|+
-literal|"'dimension':'__time','outputName':'extract_0',"
+literal|"'dimension':'__time','outputName':'extract_year',"
 operator|+
 literal|"'extractionFn':{'type':'timeFormat','format':'yyyy',"
 operator|+
@@ -5263,7 +5293,7 @@ literal|",'granularity':'all'"
 argument_list|,
 literal|"{'type':'extraction',"
 operator|+
-literal|"'dimension':'__time','outputName':'extract_0',"
+literal|"'dimension':'__time','outputName':'extract_month',"
 operator|+
 literal|"'extractionFn':{'type':'timeFormat','format':'M',"
 operator|+
@@ -5322,7 +5352,7 @@ literal|",'granularity':'all'"
 argument_list|,
 literal|"{'type':'extraction',"
 operator|+
-literal|"'dimension':'__time','outputName':'extract_0',"
+literal|"'dimension':'__time','outputName':'extract_day',"
 operator|+
 literal|"'extractionFn':{'type':'timeFormat','format':'d',"
 operator|+
@@ -5444,7 +5474,7 @@ literal|",'granularity':'all'"
 argument_list|,
 literal|"{'type':'extraction',"
 operator|+
-literal|"'dimension':'__time','outputName':'extract_0',"
+literal|"'dimension':'__time','outputName':'extract_day',"
 operator|+
 literal|"'extractionFn':{'type':'timeFormat','format':'d',"
 operator|+
@@ -5452,7 +5482,7 @@ literal|"'timeZone':'UTC','locale':'en-US'}}"
 argument_list|,
 literal|"{'type':'extraction',"
 operator|+
-literal|"'dimension':'__time','outputName':'extract_1',"
+literal|"'dimension':'__time','outputName':'extract_month',"
 operator|+
 literal|"'extractionFn':{'type':'timeFormat','format':'M',"
 operator|+
@@ -5460,7 +5490,7 @@ literal|"'timeZone':'UTC','locale':'en-US'}}"
 argument_list|,
 literal|"{'type':'extraction',"
 operator|+
-literal|"'dimension':'__time','outputName':'extract_2',"
+literal|"'dimension':'__time','outputName':'extract_year',"
 operator|+
 literal|"'extractionFn':{'type':'timeFormat','format':'yyyy',"
 operator|+
@@ -5534,7 +5564,7 @@ literal|",'granularity':'all'"
 argument_list|,
 literal|"{'type':'extraction',"
 operator|+
-literal|"'dimension':'__time','outputName':'extract_0',"
+literal|"'dimension':'__time','outputName':'extract_day',"
 operator|+
 literal|"'extractionFn':{'type':'timeFormat','format':'d',"
 operator|+
@@ -5542,7 +5572,7 @@ literal|"'timeZone':'UTC','locale':'en-US'}}"
 argument_list|,
 literal|"{'type':'extraction',"
 operator|+
-literal|"'dimension':'__time','outputName':'extract_1',"
+literal|"'dimension':'__time','outputName':'extract_month',"
 operator|+
 literal|"'extractionFn':{'type':'timeFormat','format':'M',"
 operator|+
@@ -5550,7 +5580,7 @@ literal|"'timeZone':'UTC','locale':'en-US'}}"
 argument_list|,
 literal|"{'type':'extraction',"
 operator|+
-literal|"'dimension':'__time','outputName':'extract_2',"
+literal|"'dimension':'__time','outputName':'extract_year',"
 operator|+
 literal|"'extractionFn':{'type':'timeFormat','format':'yyyy',"
 operator|+
@@ -5622,7 +5652,7 @@ literal|",'granularity':'all'"
 argument_list|,
 literal|"{'type':'extraction',"
 operator|+
-literal|"'dimension':'__time','outputName':'extract_0',"
+literal|"'dimension':'__time','outputName':'extract_day',"
 operator|+
 literal|"'extractionFn':{'type':'timeFormat','format':'d',"
 operator|+
@@ -5771,11 +5801,11 @@ literal|"'granularity':'all','dimensions':[{'type':'default',"
 operator|+
 literal|"'dimension':'product_id'},{'type':'extraction','dimension':'__time',"
 operator|+
-literal|"'outputName':'extract_0','extractionFn':{'type':'timeFormat',"
+literal|"'outputName':'extract_day','extractionFn':{'type':'timeFormat',"
 operator|+
 literal|"'format':'d','timeZone':'UTC','locale':'en-US'}},{'type':'extraction',"
 operator|+
-literal|"'dimension':'__time','outputName':'extract_1',"
+literal|"'dimension':'__time','outputName':'extract_month',"
 operator|+
 literal|"'extractionFn':{'type':'timeFormat','format':'M','timeZone':'UTC',"
 operator|+
@@ -5848,17 +5878,17 @@ literal|"'granularity':'all','dimensions':[{'type':'default',"
 operator|+
 literal|"'dimension':'product_id'},{'type':'extraction','dimension':'__time',"
 operator|+
-literal|"'outputName':'extract_0','extractionFn':{'type':'timeFormat',"
+literal|"'outputName':'extract_day','extractionFn':{'type':'timeFormat',"
 operator|+
 literal|"'format':'d','timeZone':'UTC','locale':'en-US'}},{'type':'extraction',"
 operator|+
-literal|"'dimension':'__time','outputName':'extract_1',"
+literal|"'dimension':'__time','outputName':'extract_month',"
 operator|+
 literal|"'extractionFn':{'type':'timeFormat','format':'M','timeZone':'UTC',"
 operator|+
 literal|"'locale':'en-US'}},{'type':'extraction','dimension':'__time',"
 operator|+
-literal|"'outputName':'extract_2','extractionFn':{'type':'timeFormat',"
+literal|"'outputName':'extract_year','extractionFn':{'type':'timeFormat',"
 operator|+
 literal|"'format':'yyyy','timeZone':'UTC','locale':'en-US'}}],"
 operator|+
@@ -5923,7 +5953,7 @@ literal|"'granularity':'all','dimensions':[{'type':'default',"
 operator|+
 literal|"'dimension':'product_id'},{'type':'extraction','dimension':'__time',"
 operator|+
-literal|"'outputName':'extract_0','extractionFn':{'type':'timeFormat',"
+literal|"'outputName':'extract_month','extractionFn':{'type':'timeFormat',"
 operator|+
 literal|"'format':'M','timeZone':'UTC','locale':'en-US'}}],"
 operator|+
@@ -6003,7 +6033,7 @@ literal|"'dataSource':'foodmart','granularity':'all',"
 operator|+
 literal|"'dimensions':[{'type':'default','dimension':'product_id'},"
 operator|+
-literal|"{'type':'extraction','dimension':'__time','outputName':'extract_0',"
+literal|"{'type':'extraction','dimension':'__time','outputName':'extract_month',"
 operator|+
 literal|"'extractionFn':{'type':'timeFormat','format':'M','timeZone':'UTC',"
 operator|+
@@ -6038,6 +6068,457 @@ argument_list|,
 literal|"product_id=1558; EXPR$1=11"
 argument_list|,
 literal|"product_id=1559; EXPR$1=11"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testPushofOrderByWithMonthExtract
+parameter_list|()
+block|{
+name|String
+name|sqlQuery
+init|=
+literal|"SELECT  extract(month from \"timestamp\") as m , \"product_id\", SUM"
+operator|+
+literal|"(\"unit_sales\") as s FROM \"foodmart\""
+operator|+
+literal|" WHERE \"product_id\">= 1558"
+operator|+
+literal|" GROUP BY extract(month from \"timestamp\"), \"product_id\" order by m, s, "
+operator|+
+literal|"\"product_id\""
+decl_stmt|;
+name|sql
+argument_list|(
+name|sqlQuery
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|druidChecker
+argument_list|(
+literal|"{'queryType':'groupBy',"
+operator|+
+literal|"'dataSource':'foodmart','granularity':'all',"
+operator|+
+literal|"'dimensions':[{'type':'extraction','dimension':'__time',"
+operator|+
+literal|"'outputName':'extract_month','extractionFn':{'type':'timeFormat',"
+operator|+
+literal|"'format':'M','timeZone':'UTC','locale':'en-US'}},{'type':'default',"
+operator|+
+literal|"'dimension':'product_id'}],'limitSpec':{'type':'default',"
+operator|+
+literal|"'columns':[{'dimension':'extract_month','direction':'ascending'},"
+operator|+
+literal|"{'dimension':'S','direction':'ascending'},{'dimension':'product_id',"
+operator|+
+literal|"'direction':'ascending'}]},'filter':{'type':'bound',"
+operator|+
+literal|"'dimension':'product_id','lower':'1558','lowerStrict':false,"
+operator|+
+literal|"'ordering':'numeric'},'aggregations':[{'type':'longSum','name':'S',"
+operator|+
+literal|"'fieldName':'unit_sales'}],"
+operator|+
+literal|"'intervals':['1900-01-09T00:00:00.000/2992-01-10T00:00:00.000']}"
+argument_list|)
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+literal|"PLAN=EnumerableInterpreter\n"
+operator|+
+literal|"  DruidQuery(table=[[foodmart, foodmart]], "
+operator|+
+literal|"intervals=[[1900-01-09T00:00:00.000/2992-01-10T00:00:00.000]], filter=[>=(CAST($1)"
+operator|+
+literal|":BIGINT, 1558)], projects=[[EXTRACT_DATE(FLAG(MONTH), /INT(Reinterpret($0), "
+operator|+
+literal|"86400000)), $1, $89]], groups=[{0, 1}], aggs=[[SUM($2)]], sort0=[0], sort1=[2], "
+operator|+
+literal|"sort2=[1], dir0=[ASC], dir1=[ASC], dir2=[ASC])"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testGroupByFloorTimeWithoutLimit
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select  floor(\"timestamp\" to MONTH) as \"month\"\n"
+operator|+
+literal|"from \"foodmart\"\n"
+operator|+
+literal|"group by floor(\"timestamp\" to MONTH)\n"
+operator|+
+literal|"order by \"month\" DESC"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+literal|"PLAN=EnumerableInterpreter\n"
+operator|+
+literal|"  DruidQuery(table=[[foodmart, foodmart]], "
+operator|+
+literal|"intervals=[[1900-01-09T00:00:00.000/2992-01-10T00:00:00.000]], projects=[[FLOOR($0, "
+operator|+
+literal|"FLAG(MONTH))]], groups=[{0}], aggs=[[]], sort0=[0], dir0=[DESC])"
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|druidChecker
+argument_list|(
+literal|"'queryType':'timeseries'"
+argument_list|,
+literal|"'descending':true"
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testGroupByFloorTimeWithLimit
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select  floor(\"timestamp\" to MONTH) as \"floor_month\"\n"
+operator|+
+literal|"from \"foodmart\"\n"
+operator|+
+literal|"group by floor(\"timestamp\" to MONTH)\n"
+operator|+
+literal|"order by \"floor_month\" DESC LIMIT 3"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+literal|"PLAN=EnumerableLimit(fetch=[3])\n"
+operator|+
+literal|"  EnumerableInterpreter\n"
+operator|+
+literal|"    DruidQuery(table=[[foodmart, foodmart]], "
+operator|+
+literal|"intervals=[[1900-01-09T00:00:00.000/2992-01-10T00:00:00.000]], projects=[[FLOOR($0, "
+operator|+
+literal|"FLAG(MONTH))]], groups=[{0}], aggs=[[]], sort0=[0], dir0=[DESC])"
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|druidChecker
+argument_list|(
+literal|"'queryType':'timeseries'"
+argument_list|,
+literal|"'descending':true"
+argument_list|)
+argument_list|)
+operator|.
+name|returnsOrdered
+argument_list|(
+literal|"floor_month=1997-12-01 00:00:00"
+argument_list|,
+literal|"floor_month=1997-11-01 00:00:00"
+argument_list|,
+literal|"floor_month=1997-10-01 00:00:00"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testPushofOrderByYearWithYearMonthExtract
+parameter_list|()
+block|{
+name|String
+name|sqlQuery
+init|=
+literal|"SELECT year(\"timestamp\") as y, extract(month from \"timestamp\") as m , "
+operator|+
+literal|"\"product_id\", SUM"
+operator|+
+literal|"(\"unit_sales\") as s FROM \"foodmart\""
+operator|+
+literal|" WHERE \"product_id\">= 1558"
+operator|+
+literal|" GROUP BY year(\"timestamp\"), extract(month from \"timestamp\"), \"product_id\" order"
+operator|+
+literal|" by y DESC, m ASC, s DESC, \"product_id\" LIMIT 3"
+decl_stmt|;
+specifier|final
+name|String
+name|expectedPlan
+init|=
+literal|"PLAN=EnumerableInterpreter\n"
+operator|+
+literal|"  DruidQuery(table=[[foodmart, foodmart]], "
+operator|+
+literal|"intervals=[[1900-01-09T00:00:00.000/2992-01-10T00:00:00.000]], filter=[>=(CAST($1)"
+operator|+
+literal|":BIGINT, 1558)], projects=[[EXTRACT_DATE(FLAG(YEAR), /INT(Reinterpret($0), 86400000)),"
+operator|+
+literal|" EXTRACT_DATE(FLAG(MONTH), /INT(Reinterpret($0), 86400000)), $1, $89]], groups=[{0, 1,"
+operator|+
+literal|" 2}], aggs=[[SUM($3)]], sort0=[0], sort1=[1], sort2=[3], sort3=[2], dir0=[DESC], "
+operator|+
+literal|"dir1=[ASC], dir2=[DESC], dir3=[ASC], fetch=[3])"
+decl_stmt|;
+specifier|final
+name|String
+name|expectedDruidQuery
+init|=
+literal|"{'queryType':'groupBy','dataSource':'foodmart',"
+operator|+
+literal|"'granularity':'all','dimensions':[{'type':'extraction',"
+operator|+
+literal|"'dimension':'__time','outputName':'extract_year',"
+operator|+
+literal|"'extractionFn':{'type':'timeFormat','format':'yyyy','timeZone':'UTC',"
+operator|+
+literal|"'locale':'en-US'}},{'type':'extraction','dimension':'__time',"
+operator|+
+literal|"'outputName':'extract_month','extractionFn':{'type':'timeFormat',"
+operator|+
+literal|"'format':'M','timeZone':'UTC','locale':'en-US'}},{'type':'default',"
+operator|+
+literal|"'dimension':'product_id'}],'limitSpec':{'type':'default','limit':3,"
+operator|+
+literal|"'columns':[{'dimension':'extract_year','direction':'descending'},"
+operator|+
+literal|"{'dimension':'extract_month','direction':'ascending'},{'dimension':'S',"
+operator|+
+literal|"'direction':'descending'},{'dimension':'product_id',"
+operator|+
+literal|"'direction':'ascending'}]},'filter':{'type':'bound',"
+operator|+
+literal|"'dimension':'product_id','lower':'1558','lowerStrict':false,"
+operator|+
+literal|"'ordering':'numeric'},'aggregations':[{'type':'longSum','name':'S',"
+operator|+
+literal|"'fieldName':'unit_sales'}],"
+operator|+
+literal|"'intervals':['1900-01-09T00:00:00.000/2992-01-10T00:00:00.000']}"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sqlQuery
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+name|expectedPlan
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|druidChecker
+argument_list|(
+name|expectedDruidQuery
+argument_list|)
+argument_list|)
+operator|.
+name|returnsOrdered
+argument_list|(
+literal|"Y=1997; M=1; product_id=1558; S=6"
+argument_list|,
+literal|"Y=1997; M=1; product_id=1559; S=6"
+argument_list|,
+literal|"Y=1997; M=10; product_id=1558; S=9"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testPushofOrderByMetricWithYearMonthExtract
+parameter_list|()
+block|{
+name|String
+name|sqlQuery
+init|=
+literal|"SELECT year(\"timestamp\") as y, extract(month from \"timestamp\") as m , "
+operator|+
+literal|"\"product_id\", SUM(\"unit_sales\") as s FROM \"foodmart\""
+operator|+
+literal|" WHERE \"product_id\">= 1558"
+operator|+
+literal|" GROUP BY year(\"timestamp\"), extract(month from \"timestamp\"), \"product_id\" order"
+operator|+
+literal|" by s DESC, m DESC, \"product_id\" LIMIT 3"
+decl_stmt|;
+specifier|final
+name|String
+name|expectedPlan
+init|=
+literal|"PLAN=EnumerableInterpreter\n"
+operator|+
+literal|"  DruidQuery(table=[[foodmart, foodmart]], "
+operator|+
+literal|"intervals=[[1900-01-09T00:00:00.000/2992-01-10T00:00:00.000]], filter=[>=(CAST($1)"
+operator|+
+literal|":BIGINT, 1558)], projects=[[EXTRACT_DATE(FLAG(YEAR), /INT(Reinterpret($0), 86400000)),"
+operator|+
+literal|" EXTRACT_DATE(FLAG(MONTH), /INT(Reinterpret($0), 86400000)), $1, $89]], groups=[{0, 1,"
+operator|+
+literal|" 2}], aggs=[[SUM($3)]], sort0=[3], sort1=[1], sort2=[2], dir0=[DESC], dir1=[DESC], "
+operator|+
+literal|"dir2=[ASC], fetch=[3])"
+decl_stmt|;
+specifier|final
+name|String
+name|expectedDruidQuery
+init|=
+literal|"{'queryType':'groupBy','dataSource':'foodmart',"
+operator|+
+literal|"'granularity':'all','dimensions':[{'type':'extraction',"
+operator|+
+literal|"'dimension':'__time','outputName':'extract_year',"
+operator|+
+literal|"'extractionFn':{'type':'timeFormat','format':'yyyy','timeZone':'UTC',"
+operator|+
+literal|"'locale':'en-US'}},{'type':'extraction','dimension':'__time',"
+operator|+
+literal|"'outputName':'extract_month','extractionFn':{'type':'timeFormat',"
+operator|+
+literal|"'format':'M','timeZone':'UTC','locale':'en-US'}},{'type':'default',"
+operator|+
+literal|"'dimension':'product_id'}],'limitSpec':{'type':'default','limit':3,"
+operator|+
+literal|"'columns':[{'dimension':'S','direction':'descending'},"
+operator|+
+literal|"{'dimension':'extract_month','direction':'descending'},"
+operator|+
+literal|"{'dimension':'product_id','direction':'ascending'}]},"
+operator|+
+literal|"'filter':{'type':'bound','dimension':'product_id','lower':'1558',"
+operator|+
+literal|"'lowerStrict':false,'ordering':'numeric'},"
+operator|+
+literal|"'aggregations':[{'type':'longSum','name':'S','fieldName':'unit_sales'}],"
+operator|+
+literal|"'intervals':['1900-01-09T00:00:00.000/2992-01-10T00:00:00.000']}"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sqlQuery
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+name|expectedPlan
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|druidChecker
+argument_list|(
+name|expectedDruidQuery
+argument_list|)
+argument_list|)
+operator|.
+name|returnsOrdered
+argument_list|(
+literal|"Y=1997; M=12; product_id=1558; S=30"
+argument_list|,
+literal|"Y=1997; M=3; product_id=1558; S=29"
+argument_list|,
+literal|"Y=1997; M=5; product_id=1558; S=27"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testGroupByTimeSortOverMetrics
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sqlQuery
+init|=
+literal|"SELECT count(*) as c , SUM(\"unit_sales\") as s, floor(\"timestamp\""
+operator|+
+literal|" to month) FROM \"foodmart\" group by floor(\"timestamp\" to month) order by s DESC"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sqlQuery
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+literal|"PLAN=EnumerableInterpreter\n"
+operator|+
+literal|"  BindableSort(sort0=[$1], dir0=[DESC])\n"
+operator|+
+literal|"    BindableProject(C=[$1], S=[$2], EXPR$2=[$0])\n"
+operator|+
+literal|"      DruidQuery(table=[[foodmart, foodmart]], "
+operator|+
+literal|"intervals=[[1900-01-09T00:00:00.000/2992-01-10T00:00:00.000]], projects=[[FLOOR($0, "
+operator|+
+literal|"FLAG(MONTH)), $89]], groups=[{0}], aggs=[[COUNT(), SUM($1)]])"
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|druidChecker
+argument_list|(
+literal|"'queryType':'timeseries'"
+argument_list|)
+argument_list|)
+operator|.
+name|returnsOrdered
+argument_list|(
+literal|"C=8716; S=26796; EXPR$2=1997-12-01 00:00:00"
+argument_list|,
+literal|"C=8231; S=25270; EXPR$2=1997-11-01 00:00:00"
+argument_list|,
+literal|"C=7752; S=23763; EXPR$2=1997-07-01 00:00:00"
+argument_list|,
+literal|"C=7710; S=23706; EXPR$2=1997-03-01 00:00:00"
+argument_list|,
+literal|"C=7038; S=21697; EXPR$2=1997-08-01 00:00:00"
+argument_list|,
+literal|"C=7033; S=21628; EXPR$2=1997-01-01 00:00:00"
+argument_list|,
+literal|"C=6912; S=21350; EXPR$2=1997-06-01 00:00:00"
+argument_list|,
+literal|"C=6865; S=21081; EXPR$2=1997-05-01 00:00:00"
+argument_list|,
+literal|"C=6844; S=20957; EXPR$2=1997-02-01 00:00:00"
+argument_list|,
+literal|"C=6662; S=20388; EXPR$2=1997-09-01 00:00:00"
+argument_list|,
+literal|"C=6588; S=20179; EXPR$2=1997-04-01 00:00:00"
+argument_list|,
+literal|"C=6478; S=19958; EXPR$2=1997-10-01 00:00:00"
 argument_list|)
 expr_stmt|;
 block|}

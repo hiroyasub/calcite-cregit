@@ -81,6 +81,14 @@ implements|implements
 name|ExtractionFunction
 block|{
 specifier|private
+specifier|static
+specifier|final
+name|String
+name|ISO_TIME_FORMAT
+init|=
+literal|"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+decl_stmt|;
+specifier|private
 specifier|final
 name|String
 name|format
@@ -220,7 +228,7 @@ return|return
 operator|new
 name|TimeExtractionFunction
 argument_list|(
-literal|"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+name|ISO_TIME_FORMAT
 argument_list|,
 literal|null
 argument_list|,
@@ -230,11 +238,11 @@ literal|null
 argument_list|)
 return|;
 block|}
-comment|/**    * Creates the time format extraction function for the given granularity.    * Only YEAR, MONTH, DAY, and HOUR granularity are supported.    *    * @param granularity granularity to apply to the column    * @return the time extraction function or null if granularity is not supported    */
+comment|/**    * Creates the time format extraction function for the given granularity.    * Only YEAR, MONTH, and DAY granularity are supported.    *    * @param granularity granularity to apply to the column    * @return the time extraction function or null if granularity is not supported    */
 specifier|public
 specifier|static
 name|TimeExtractionFunction
-name|createFromGranularity
+name|createExtractFromGranularity
 parameter_list|(
 name|Granularity
 name|granularity
@@ -326,6 +334,38 @@ literal|" is not valid"
 argument_list|)
 throw|;
 block|}
+block|}
+comment|/**    * Creates time format floor time extraction function using a given granularity.    *    * @param granularity granularity to apply to the column    * @return the time extraction function or null if granularity is not supported    */
+specifier|public
+specifier|static
+name|TimeExtractionFunction
+name|createFloorFromGranularity
+parameter_list|(
+name|Granularity
+name|granularity
+parameter_list|)
+block|{
+return|return
+operator|new
+name|TimeExtractionFunction
+argument_list|(
+name|ISO_TIME_FORMAT
+argument_list|,
+name|granularity
+operator|.
+name|value
+argument_list|,
+literal|"UTC"
+argument_list|,
+name|Locale
+operator|.
+name|getDefault
+argument_list|()
+operator|.
+name|toLanguageTag
+argument_list|()
+argument_list|)
+return|;
 block|}
 block|}
 end_class

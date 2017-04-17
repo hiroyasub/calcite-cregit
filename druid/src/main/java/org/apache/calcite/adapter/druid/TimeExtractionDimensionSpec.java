@@ -50,7 +50,7 @@ name|outputName
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Creates a time extraction DimensionSpec that renames the '__time' column    * to the given name.    *    * @param outputName name of the output column    * @return the time extraction DimensionSpec instance    */
+comment|/**    * Creates a time extraction DimensionSpec that renames the '__time' column    * to the given name.    *    * @param outputName name of the output column    *    * @return the time extraction DimensionSpec instance    */
 specifier|public
 specifier|static
 name|TimeExtractionDimensionSpec
@@ -73,7 +73,7 @@ name|outputName
 argument_list|)
 return|;
 block|}
-comment|/**    * Creates a time extraction DimensionSpec that formats the '__time' column    * according to the given granularity and outputs the column with the given    * name. Only YEAR, MONTH, and DAY granularity are supported.    *    * @param granularity granularity to apply to the column    * @param outputName name of the output column    * @return the time extraction DimensionSpec instance or null if granularity    * is not supported    */
+comment|/**    * Creates a time extraction DimensionSpec that formats the '__time' column    * according to the given granularity and outputs the column with the given    * name. Only YEAR, MONTH, and DAY granularity are supported.    *    * @param granularity granularity to apply to the column    * @param outputName  name of the output column    *    * @return time field extraction DimensionSpec instance or null if granularity    * is not supported    */
 specifier|public
 specifier|static
 name|TimeExtractionDimensionSpec
@@ -100,7 +100,7 @@ name|TimeExtractionDimensionSpec
 argument_list|(
 name|TimeExtractionFunction
 operator|.
-name|createFromGranularity
+name|createExtractFromGranularity
 argument_list|(
 name|granularity
 argument_list|)
@@ -117,7 +117,7 @@ name|TimeExtractionDimensionSpec
 argument_list|(
 name|TimeExtractionFunction
 operator|.
-name|createFromGranularity
+name|createExtractFromGranularity
 argument_list|(
 name|granularity
 argument_list|)
@@ -134,7 +134,7 @@ name|TimeExtractionDimensionSpec
 argument_list|(
 name|TimeExtractionFunction
 operator|.
-name|createFromGranularity
+name|createExtractFromGranularity
 argument_list|(
 name|granularity
 argument_list|)
@@ -148,6 +148,39 @@ return|return
 literal|null
 return|;
 block|}
+block|}
+comment|/**    * Creates floor time extraction dimension spec from Granularity with a given output name    * @param granularity granularity to apply to the time column    * @param outputName name of the output column    *    * @return floor time extraction DimensionSpec instance.    */
+specifier|public
+specifier|static
+name|TimeExtractionDimensionSpec
+name|makeFloor
+parameter_list|(
+name|Granularity
+name|granularity
+parameter_list|,
+name|String
+name|outputName
+parameter_list|)
+block|{
+name|ExtractionFunction
+name|fn
+init|=
+name|TimeExtractionFunction
+operator|.
+name|createFloorFromGranularity
+argument_list|(
+name|granularity
+argument_list|)
+decl_stmt|;
+return|return
+operator|new
+name|TimeExtractionDimensionSpec
+argument_list|(
+name|fn
+argument_list|,
+name|outputName
+argument_list|)
+return|;
 block|}
 block|}
 end_class
