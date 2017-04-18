@@ -69,22 +69,6 @@ name|apache
 operator|.
 name|calcite
 operator|.
-name|linq4j
-operator|.
-name|function
-operator|.
-name|Function1
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
 name|schema
 operator|.
 name|Schema
@@ -116,6 +100,20 @@ operator|.
 name|util
 operator|.
 name|Util
+import|;
+end_import
+
+begin_import
+import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|base
+operator|.
+name|Function
 import|;
 end_import
 
@@ -850,12 +848,15 @@ parameter_list|()
 throws|throws
 name|SQLException
 block|{
-name|checkSql
+name|sql
 argument_list|(
 literal|"model"
 argument_list|,
 literal|"select * from EMPS"
 argument_list|)
+operator|.
+name|ok
+argument_list|()
 expr_stmt|;
 block|}
 annotation|@
@@ -867,12 +868,15 @@ parameter_list|()
 throws|throws
 name|SQLException
 block|{
-name|checkSql
+name|sql
 argument_list|(
 literal|"smart"
 argument_list|,
 literal|"select name from EMPS"
 argument_list|)
+operator|.
+name|ok
+argument_list|()
 expr_stmt|;
 block|}
 annotation|@
@@ -884,12 +888,15 @@ parameter_list|()
 throws|throws
 name|SQLException
 block|{
-name|checkSql
+name|sql
 argument_list|(
 literal|"smart"
 argument_list|,
 literal|"select name from DEPTS"
 argument_list|)
+operator|.
+name|ok
+argument_list|()
 expr_stmt|;
 block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-898">[CALCITE-898]    * Type inference multiplying Java long by SQL INTEGER</a>. */
@@ -910,14 +917,17 @@ literal|"select empno * 3 as e3\n"
 operator|+
 literal|"from long_emps where empno = 100"
 decl_stmt|;
-name|checkSql
-argument_list|(
 name|sql
-argument_list|,
+argument_list|(
 literal|"bug"
 argument_list|,
+name|sql
+argument_list|)
+operator|.
+name|checking
+argument_list|(
 operator|new
-name|Function1
+name|Function
 argument_list|<
 name|ResultSet
 argument_list|,
@@ -1005,6 +1015,9 @@ block|}
 block|}
 block|}
 argument_list|)
+operator|.
+name|ok
+argument_list|()
 expr_stmt|;
 block|}
 annotation|@
@@ -1016,12 +1029,15 @@ parameter_list|()
 throws|throws
 name|SQLException
 block|{
-name|checkSql
+name|sql
 argument_list|(
 literal|"model-with-custom-table"
 argument_list|,
 literal|"select * from CUSTOM_TABLE.EMPS"
 argument_list|)
+operator|.
+name|ok
+argument_list|()
 expr_stmt|;
 block|}
 annotation|@
@@ -1034,16 +1050,34 @@ throws|throws
 name|SQLException
 block|{
 comment|// rule does not fire, because we're using 'dumb' tables in simple model
-name|checkSql
-argument_list|(
-literal|"model"
-argument_list|,
+specifier|final
+name|String
+name|sql
+init|=
 literal|"explain plan for select * from EMPS"
-argument_list|,
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
 literal|"PLAN=EnumerableInterpreter\n"
 operator|+
 literal|"  BindableTableScan(table=[[SALES, EMPS]])\n"
+decl_stmt|;
+name|sql
+argument_list|(
+literal|"model"
+argument_list|,
+name|sql
 argument_list|)
+operator|.
+name|returns
+argument_list|(
+name|expected
+argument_list|)
+operator|.
+name|ok
+argument_list|()
 expr_stmt|;
 block|}
 annotation|@
@@ -1055,14 +1089,34 @@ parameter_list|()
 throws|throws
 name|SQLException
 block|{
-name|checkSql
+specifier|final
+name|String
+name|sql
+init|=
+literal|"explain plan for select * from EMPS"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"PLAN=CsvTableScan(table=[[SALES, EMPS]], "
+operator|+
+literal|"fields=[[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]])\n"
+decl_stmt|;
+name|sql
 argument_list|(
 literal|"smart"
 argument_list|,
-literal|"explain plan for select * from EMPS"
-argument_list|,
-literal|"PLAN=CsvTableScan(table=[[SALES, EMPS]], fields=[[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]])\n"
+name|sql
 argument_list|)
+operator|.
+name|returns
+argument_list|(
+name|expected
+argument_list|)
+operator|.
+name|ok
+argument_list|()
 expr_stmt|;
 block|}
 annotation|@
@@ -1074,22 +1128,31 @@ parameter_list|()
 throws|throws
 name|SQLException
 block|{
-name|checkSql
+name|sql
 argument_list|(
 literal|"smart"
 argument_list|,
 literal|"explain plan for select name, empno from EMPS"
-argument_list|,
+argument_list|)
+operator|.
+name|returns
+argument_list|(
 literal|"PLAN=CsvTableScan(table=[[SALES, EMPS]], fields=[[1, 0]])\n"
 argument_list|)
+operator|.
+name|ok
+argument_list|()
 expr_stmt|;
 comment|// make sure that it works...
-name|checkSql
+name|sql
 argument_list|(
 literal|"smart"
 argument_list|,
 literal|"select name, empno from EMPS"
-argument_list|,
+argument_list|)
+operator|.
+name|returns
+argument_list|(
 literal|"NAME=Fred; EMPNO=100"
 argument_list|,
 literal|"NAME=Eric; EMPNO=110"
@@ -1100,6 +1163,9 @@ literal|"NAME=Wilma; EMPNO=120"
 argument_list|,
 literal|"NAME=Alice; EMPNO=130"
 argument_list|)
+operator|.
+name|ok
+argument_list|()
 expr_stmt|;
 block|}
 annotation|@
@@ -1111,12 +1177,15 @@ parameter_list|()
 throws|throws
 name|SQLException
 block|{
-name|checkSql
+name|sql
 argument_list|(
 literal|"filterable-model"
 argument_list|,
 literal|"select name from EMPS"
 argument_list|)
+operator|.
+name|ok
+argument_list|()
 expr_stmt|;
 block|}
 annotation|@
@@ -1128,12 +1197,15 @@ parameter_list|()
 throws|throws
 name|SQLException
 block|{
-name|checkSql
+name|sql
 argument_list|(
 literal|"filterable-model"
 argument_list|,
 literal|"select * from EMPS"
 argument_list|)
+operator|.
+name|ok
+argument_list|()
 expr_stmt|;
 block|}
 comment|/** Filter that can be fully handled by CsvFilterableTable. */
@@ -1146,14 +1218,26 @@ parameter_list|()
 throws|throws
 name|SQLException
 block|{
-name|checkSql
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select empno, gender, name from EMPS where name = 'John'"
+decl_stmt|;
+name|sql
 argument_list|(
 literal|"filterable-model"
 argument_list|,
-literal|"select empno, gender, name from EMPS where name = 'John'"
-argument_list|,
+name|sql
+argument_list|)
+operator|.
+name|returns
+argument_list|(
 literal|"EMPNO=110; GENDER=M; NAME=John"
 argument_list|)
+operator|.
+name|ok
+argument_list|()
 expr_stmt|;
 block|}
 comment|/** Filter that can be partly handled by CsvFilterableTable. */
@@ -1166,14 +1250,28 @@ parameter_list|()
 throws|throws
 name|SQLException
 block|{
-name|checkSql
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select empno, gender, name from EMPS\n"
+operator|+
+literal|" where gender = 'F' and empno> 125"
+decl_stmt|;
+name|sql
 argument_list|(
 literal|"filterable-model"
 argument_list|,
-literal|"select empno, gender, name from EMPS where gender = 'F' and empno> 125"
-argument_list|,
+name|sql
+argument_list|)
+operator|.
+name|returns
+argument_list|(
 literal|"EMPNO=130; GENDER=F; NAME=Alice"
 argument_list|)
+operator|.
+name|ok
+argument_list|()
 expr_stmt|;
 block|}
 annotation|@
@@ -1185,10 +1283,10 @@ parameter_list|()
 throws|throws
 name|SQLException
 block|{
-name|checkSql
-argument_list|(
-literal|"bug"
-argument_list|,
+specifier|final
+name|String
+name|sql
+init|=
 literal|"select _MAP['id'] as id,\n"
 operator|+
 literal|" _MAP['title'] as title,\n"
@@ -1196,16 +1294,28 @@ operator|+
 literal|" CHAR_LENGTH(CAST(_MAP['title'] AS VARCHAR(30))) as len\n"
 operator|+
 literal|" from \"archers\"\n"
+decl_stmt|;
+name|sql
+argument_list|(
+literal|"bug"
 argument_list|,
+name|sql
+argument_list|)
+operator|.
+name|returns
+argument_list|(
 literal|"ID=19990101; TITLE=Tractor trouble.; LEN=16"
 argument_list|,
 literal|"ID=19990103; TITLE=Charlie's surprise.; LEN=19"
 argument_list|)
+operator|.
+name|ok
+argument_list|()
 expr_stmt|;
 block|}
 specifier|private
-name|void
-name|checkSql
+name|Fluent
+name|sql
 parameter_list|(
 name|String
 name|model
@@ -1213,22 +1323,22 @@ parameter_list|,
 name|String
 name|sql
 parameter_list|)
-throws|throws
-name|SQLException
 block|{
-name|checkSql
+return|return
+operator|new
+name|Fluent
 argument_list|(
-name|sql
-argument_list|,
 name|model
+argument_list|,
+name|sql
 argument_list|,
 name|output
 argument_list|()
 argument_list|)
-expr_stmt|;
+return|;
 block|}
 specifier|private
-name|Function1
+name|Function
 argument_list|<
 name|ResultSet
 argument_list|,
@@ -1239,7 +1349,7 @@ parameter_list|()
 block|{
 return|return
 operator|new
-name|Function1
+name|Function
 argument_list|<
 name|ResultSet
 argument_list|,
@@ -1288,41 +1398,10 @@ block|}
 block|}
 return|;
 block|}
-specifier|private
-name|void
-name|checkSql
-parameter_list|(
-name|String
-name|model
-parameter_list|,
-name|String
-name|sql
-parameter_list|,
-specifier|final
-name|String
-modifier|...
-name|expected
-parameter_list|)
-throws|throws
-name|SQLException
-block|{
-name|checkSql
-argument_list|(
-name|sql
-argument_list|,
-name|model
-argument_list|,
-name|expect
-argument_list|(
-name|expected
-argument_list|)
-argument_list|)
-expr_stmt|;
-block|}
 comment|/** Returns a function that checks the contents of a result set against an    * expected string. */
 specifier|private
 specifier|static
-name|Function1
+name|Function
 argument_list|<
 name|ResultSet
 argument_list|,
@@ -1338,7 +1417,7 @@ parameter_list|)
 block|{
 return|return
 operator|new
-name|Function1
+name|Function
 argument_list|<
 name|ResultSet
 argument_list|,
@@ -1423,7 +1502,7 @@ parameter_list|,
 name|String
 name|model
 parameter_list|,
-name|Function1
+name|Function
 argument_list|<
 name|ResultSet
 argument_list|,
@@ -1823,12 +1902,23 @@ parameter_list|()
 throws|throws
 name|SQLException
 block|{
-name|checkSql
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select * from emps\n"
+operator|+
+literal|"join depts on emps.name = depts.name"
+decl_stmt|;
+name|sql
 argument_list|(
 literal|"smart"
 argument_list|,
-literal|"select * from emps join depts on emps.name = depts.name"
+name|sql
 argument_list|)
+operator|.
+name|ok
+argument_list|()
 expr_stmt|;
 block|}
 annotation|@
@@ -1840,29 +1930,51 @@ parameter_list|()
 throws|throws
 name|SQLException
 block|{
-name|checkSql
-argument_list|(
+specifier|final
+name|String
+name|sql
+init|=
 literal|"select * from wacky_column_names where false"
-argument_list|,
-literal|"bug"
-argument_list|,
-name|expect
-argument_list|()
-argument_list|)
-expr_stmt|;
-name|checkSql
+decl_stmt|;
+name|sql
 argument_list|(
-literal|"select \"joined at\", \"naME\" from wacky_column_names where \"2gender\" = 'F'"
-argument_list|,
 literal|"bug"
 argument_list|,
-name|expect
+name|sql
+argument_list|)
+operator|.
+name|returns
+argument_list|()
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+specifier|final
+name|String
+name|sql2
+init|=
+literal|"select \"joined at\", \"naME\"\n"
+operator|+
+literal|"from wacky_column_names\n"
+operator|+
+literal|"where \"2gender\" = 'F'"
+decl_stmt|;
+name|sql
+argument_list|(
+literal|"bug"
+argument_list|,
+name|sql2
+argument_list|)
+operator|.
+name|returns
 argument_list|(
 literal|"joined at=2005-09-07; naME=Wilma"
 argument_list|,
 literal|"joined at=2007-01-01; naME=Alice"
 argument_list|)
-argument_list|)
+operator|.
+name|ok
+argument_list|()
 expr_stmt|;
 block|}
 annotation|@
@@ -1874,14 +1986,20 @@ parameter_list|()
 throws|throws
 name|SQLException
 block|{
-name|checkSql
+name|sql
 argument_list|(
 literal|"smart"
 argument_list|,
 literal|"select empno, slacker from emps where slacker"
-argument_list|,
+argument_list|)
+operator|.
+name|returns
+argument_list|(
 literal|"EMPNO=100; SLACKER=true"
 argument_list|)
+operator|.
+name|ok
+argument_list|()
 expr_stmt|;
 block|}
 annotation|@
@@ -1893,8 +2011,10 @@ parameter_list|()
 throws|throws
 name|SQLException
 block|{
-name|checkSql
-argument_list|(
+specifier|final
+name|String
+name|sql
+init|=
 literal|"SELECT d.name, COUNT(*) cnt"
 operator|+
 literal|" FROM emps AS e"
@@ -1902,16 +2022,23 @@ operator|+
 literal|" JOIN depts AS d ON e.deptno = d.deptno"
 operator|+
 literal|" GROUP BY d.name"
-argument_list|,
+decl_stmt|;
+name|sql
+argument_list|(
 literal|"smart"
 argument_list|,
-name|expect
+name|sql
+argument_list|)
+operator|.
+name|returns
 argument_list|(
 literal|"NAME=Sales; CNT=1"
 argument_list|,
 literal|"NAME=Marketing; CNT=2"
 argument_list|)
-argument_list|)
+operator|.
+name|ok
+argument_list|()
 expr_stmt|;
 block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-824">[CALCITE-824]    * Type inference when converting IN clause to semijoin</a>. */
@@ -1944,8 +2071,10 @@ name|SqlToRelConverter
 operator|.
 name|DEFAULT_IN_SUB_QUERY_THRESHOLD
 decl_stmt|;
-name|checkSql
+name|sql
 argument_list|(
+literal|"smart"
+argument_list|,
 name|sql
 operator|+
 name|range
@@ -1956,17 +2085,20 @@ name|threshold
 operator|-
 literal|5
 argument_list|)
-argument_list|,
-literal|"smart"
-argument_list|,
-name|expect
+argument_list|)
+operator|.
+name|returns
 argument_list|(
 literal|"NAME=Alice"
 argument_list|)
-argument_list|)
+operator|.
+name|ok
+argument_list|()
 expr_stmt|;
-name|checkSql
+name|sql
 argument_list|(
+literal|"smart"
+argument_list|,
 name|sql
 operator|+
 name|range
@@ -1975,17 +2107,20 @@ literal|130
 argument_list|,
 name|threshold
 argument_list|)
-argument_list|,
-literal|"smart"
-argument_list|,
-name|expect
+argument_list|)
+operator|.
+name|returns
 argument_list|(
 literal|"NAME=Alice"
 argument_list|)
-argument_list|)
+operator|.
+name|ok
+argument_list|()
 expr_stmt|;
-name|checkSql
+name|sql
 argument_list|(
+literal|"smart"
+argument_list|,
 name|sql
 operator|+
 name|range
@@ -1996,14 +2131,15 @@ name|threshold
 operator|+
 literal|1000
 argument_list|)
-argument_list|,
-literal|"smart"
-argument_list|,
-name|expect
+argument_list|)
+operator|.
+name|returns
 argument_list|(
 literal|"NAME=Alice"
 argument_list|)
-argument_list|)
+operator|.
+name|ok
+argument_list|()
 expr_stmt|;
 block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1051">[CALCITE-1051]    * Underflow exception due to scaling IN clause literals</a>. */
@@ -2035,17 +2171,20 @@ operator|.
 name|DEFAULT_IN_SUB_QUERY_THRESHOLD
 argument_list|)
 decl_stmt|;
-name|checkSql
-argument_list|(
 name|sql
-argument_list|,
+argument_list|(
 literal|"smart"
 argument_list|,
-name|expect
+name|sql
+argument_list|)
+operator|.
+name|returns
 argument_list|(
 literal|"NAME=Alice"
 argument_list|)
-argument_list|)
+operator|.
+name|ok
+argument_list|()
 expr_stmt|;
 block|}
 specifier|private
@@ -3185,7 +3324,7 @@ operator|.
 name|executeQuery
 argument_list|()
 decl_stmt|;
-name|Function1
+name|Function
 argument_list|<
 name|ResultSet
 argument_list|,
@@ -3928,6 +4067,147 @@ parameter_list|)
 block|{
 comment|// ignore
 block|}
+block|}
+block|}
+comment|/** Fluent API to perform test actions. */
+specifier|private
+class|class
+name|Fluent
+block|{
+specifier|private
+specifier|final
+name|String
+name|model
+decl_stmt|;
+specifier|private
+specifier|final
+name|String
+name|sql
+decl_stmt|;
+specifier|private
+specifier|final
+name|Function
+argument_list|<
+name|ResultSet
+argument_list|,
+name|Void
+argument_list|>
+name|expect
+decl_stmt|;
+name|Fluent
+parameter_list|(
+name|String
+name|model
+parameter_list|,
+name|String
+name|sql
+parameter_list|,
+name|Function
+argument_list|<
+name|ResultSet
+argument_list|,
+name|Void
+argument_list|>
+name|expect
+parameter_list|)
+block|{
+name|this
+operator|.
+name|model
+operator|=
+name|model
+expr_stmt|;
+name|this
+operator|.
+name|sql
+operator|=
+name|sql
+expr_stmt|;
+name|this
+operator|.
+name|expect
+operator|=
+name|expect
+expr_stmt|;
+block|}
+comment|/** Runs the test. */
+name|Fluent
+name|ok
+parameter_list|()
+block|{
+try|try
+block|{
+name|checkSql
+argument_list|(
+name|sql
+argument_list|,
+name|model
+argument_list|,
+name|expect
+argument_list|)
+expr_stmt|;
+return|return
+name|this
+return|;
+block|}
+catch|catch
+parameter_list|(
+name|SQLException
+name|e
+parameter_list|)
+block|{
+throw|throw
+operator|new
+name|RuntimeException
+argument_list|(
+name|e
+argument_list|)
+throw|;
+block|}
+block|}
+comment|/** Assigns a function to call to test whether output is correct. */
+name|Fluent
+name|checking
+parameter_list|(
+name|Function
+argument_list|<
+name|ResultSet
+argument_list|,
+name|Void
+argument_list|>
+name|expect
+parameter_list|)
+block|{
+return|return
+operator|new
+name|Fluent
+argument_list|(
+name|model
+argument_list|,
+name|sql
+argument_list|,
+name|expect
+argument_list|)
+return|;
+block|}
+comment|/** Sets the rows that are expected to be returned from the SQL query. */
+name|Fluent
+name|returns
+parameter_list|(
+name|String
+modifier|...
+name|expectedLines
+parameter_list|)
+block|{
+return|return
+name|checking
+argument_list|(
+name|expect
+argument_list|(
+name|expectedLines
+argument_list|)
+argument_list|)
+return|;
 block|}
 block|}
 block|}

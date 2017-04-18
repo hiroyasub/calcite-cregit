@@ -168,21 +168,64 @@ name|SqlTest
 block|{
 comment|// helper functions
 specifier|private
-name|void
-name|checkSql
+name|Fluent
+name|sql
 parameter_list|(
 name|String
 name|model
 parameter_list|,
 name|String
 name|sql
-parameter_list|,
+parameter_list|)
+block|{
+return|return
+operator|new
+name|Fluent
+argument_list|(
+name|model
+argument_list|,
+name|sql
+argument_list|,
+operator|new
+name|Function
+argument_list|<
+name|ResultSet
+argument_list|,
+name|Void
+argument_list|>
+argument_list|()
+block|{
+specifier|public
+name|Void
+name|apply
+parameter_list|(
+name|ResultSet
+name|input
+parameter_list|)
+block|{
+throw|throw
+operator|new
+name|AssertionError
+argument_list|()
+throw|;
+block|}
+block|}
+argument_list|)
+return|;
+block|}
+specifier|private
+name|Function
+argument_list|<
+name|ResultSet
+argument_list|,
+name|Void
+argument_list|>
+name|expect
+parameter_list|(
 name|String
 modifier|...
 name|expectedLines
 parameter_list|)
-throws|throws
-name|SQLException
 block|{
 specifier|final
 name|StringBuilder
@@ -222,12 +265,7 @@ operator|.
 name|toString
 argument_list|()
 decl_stmt|;
-name|checkSql
-argument_list|(
-name|sql
-argument_list|,
-name|model
-argument_list|,
+return|return
 operator|new
 name|Function
 argument_list|<
@@ -331,8 +369,7 @@ literal|null
 return|;
 block|}
 block|}
-argument_list|)
-expr_stmt|;
+return|;
 block|}
 specifier|private
 name|void
@@ -629,14 +666,20 @@ name|sql
 init|=
 literal|"select H1 from T1 where H0 = 'R1C0'"
 decl_stmt|;
-name|checkSql
+name|sql
 argument_list|(
 literal|"testModel"
 argument_list|,
 name|sql
-argument_list|,
+argument_list|)
+operator|.
+name|returns
+argument_list|(
 literal|"H1=R1C1"
 argument_list|)
+operator|.
+name|ok
+argument_list|()
 expr_stmt|;
 block|}
 comment|/** Reads from a local file without table headers&lt;TH&gt; and checks the    * result. */
@@ -665,14 +708,20 @@ name|sql
 init|=
 literal|"select \"col1\" from T1_NO_TH where \"col0\" like 'R0%'"
 decl_stmt|;
-name|checkSql
+name|sql
 argument_list|(
 literal|"testModel"
 argument_list|,
 name|sql
-argument_list|,
+argument_list|)
+operator|.
+name|returns
+argument_list|(
 literal|"col1=R0C1"
 argument_list|)
+operator|.
+name|ok
+argument_list|()
 expr_stmt|;
 block|}
 comment|/** Reads from a local file - finds larger table even without&lt;TH&gt;    * elements. */
@@ -691,14 +740,20 @@ name|sql
 init|=
 literal|"select \"col4\" from TABLEX2 where \"col0\" like 'R1%'"
 decl_stmt|;
-name|checkSql
+name|sql
 argument_list|(
 literal|"testModel"
 argument_list|,
 name|sql
-argument_list|,
+argument_list|)
+operator|.
+name|returns
+argument_list|(
 literal|"col4=R1C4"
 argument_list|)
+operator|.
+name|ok
+argument_list|()
 expr_stmt|;
 block|}
 comment|/** Reads from a URL and checks the result. */
@@ -729,14 +784,20 @@ literal|"select \"State\", \"Statehood\" from \"States_as_of\"\n"
 operator|+
 literal|"where \"State\" = 'California'"
 decl_stmt|;
-name|checkSql
+name|sql
 argument_list|(
 literal|"wiki"
 argument_list|,
 name|sql
-argument_list|,
+argument_list|)
+operator|.
+name|returns
+argument_list|(
 literal|"State=California; Statehood=1850-09-09"
 argument_list|)
+operator|.
+name|ok
+argument_list|()
 expr_stmt|;
 block|}
 comment|/** Reads the EMPS table. */
@@ -755,12 +816,15 @@ name|sql
 init|=
 literal|"select * from sales.emps"
 decl_stmt|;
-name|checkSql
+name|sql
 argument_list|(
 literal|"sales"
 argument_list|,
 name|sql
-argument_list|,
+argument_list|)
+operator|.
+name|returns
+argument_list|(
 literal|"EMPNO=100; NAME=Fred; DEPTNO=30"
 argument_list|,
 literal|"EMPNO=110; NAME=Eric; DEPTNO=20"
@@ -771,6 +835,9 @@ literal|"EMPNO=120; NAME=Wilma; DEPTNO=20"
 argument_list|,
 literal|"EMPNO=130; NAME=Alice; DEPTNO=40"
 argument_list|)
+operator|.
+name|ok
+argument_list|()
 expr_stmt|;
 block|}
 comment|/** Reads the DEPTS table. */
@@ -789,18 +856,24 @@ name|sql
 init|=
 literal|"select * from sales.depts"
 decl_stmt|;
-name|checkSql
+name|sql
 argument_list|(
 literal|"sales"
 argument_list|,
 name|sql
-argument_list|,
+argument_list|)
+operator|.
+name|returns
+argument_list|(
 literal|"DEPTNO=10; NAME=Sales"
 argument_list|,
 literal|"DEPTNO=20; NAME=Marketing"
 argument_list|,
 literal|"DEPTNO=30; NAME=Accounts"
 argument_list|)
+operator|.
+name|ok
+argument_list|()
 expr_stmt|;
 block|}
 comment|/** Reads the DEPTS table from the CSV schema. */
@@ -819,18 +892,24 @@ name|sql
 init|=
 literal|"select * from sales.depts"
 decl_stmt|;
-name|checkSql
+name|sql
 argument_list|(
 literal|"sales-csv"
 argument_list|,
 name|sql
-argument_list|,
+argument_list|)
+operator|.
+name|returns
+argument_list|(
 literal|"DEPTNO=10; NAME=Sales"
 argument_list|,
 literal|"DEPTNO=20; NAME=Marketing"
 argument_list|,
 literal|"DEPTNO=30; NAME=Accounts"
 argument_list|)
+operator|.
+name|ok
+argument_list|()
 expr_stmt|;
 block|}
 comment|/** Reads the EMPS table from the CSV schema. */
@@ -849,22 +928,37 @@ name|sql
 init|=
 literal|"select * from sales.emps"
 decl_stmt|;
-name|checkSql
+specifier|final
+name|String
+index|[]
+name|lines
+init|=
+block|{
+literal|"EMPNO=100; NAME=Fred; DEPTNO=10; GENDER=; CITY=; EMPID=30; AGE=25; SLACKER=true; MANAGER=false; JOINEDAT=1996-08-03"
+block|,
+literal|"EMPNO=110; NAME=Eric; DEPTNO=20; GENDER=M; CITY=San Francisco; EMPID=3; AGE=80; SLACKER=null; MANAGER=false; JOINEDAT=2001-01-01"
+block|,
+literal|"EMPNO=110; NAME=John; DEPTNO=40; GENDER=M; CITY=Vancouver; EMPID=2; AGE=null; SLACKER=false; MANAGER=true; JOINEDAT=2002-05-03"
+block|,
+literal|"EMPNO=120; NAME=Wilma; DEPTNO=20; GENDER=F; CITY=; EMPID=1; AGE=5; SLACKER=null; MANAGER=true; JOINEDAT=2005-09-07"
+block|,
+literal|"EMPNO=130; NAME=Alice; DEPTNO=40; GENDER=F; CITY=Vancouver; EMPID=2; AGE=null; SLACKER=false; MANAGER=true; JOINEDAT=2007-01-01"
+block|,     }
+decl_stmt|;
+name|sql
 argument_list|(
 literal|"sales-csv"
 argument_list|,
 name|sql
-argument_list|,
-literal|"EMPNO=100; NAME=Fred; DEPTNO=10; GENDER=; CITY=; EMPID=30; AGE=25; SLACKER=true; MANAGER=false; JOINEDAT=1996-08-03"
-argument_list|,
-literal|"EMPNO=110; NAME=Eric; DEPTNO=20; GENDER=M; CITY=San Francisco; EMPID=3; AGE=80; SLACKER=null; MANAGER=false; JOINEDAT=2001-01-01"
-argument_list|,
-literal|"EMPNO=110; NAME=John; DEPTNO=40; GENDER=M; CITY=Vancouver; EMPID=2; AGE=null; SLACKER=false; MANAGER=true; JOINEDAT=2002-05-03"
-argument_list|,
-literal|"EMPNO=120; NAME=Wilma; DEPTNO=20; GENDER=F; CITY=; EMPID=1; AGE=5; SLACKER=null; MANAGER=true; JOINEDAT=2005-09-07"
-argument_list|,
-literal|"EMPNO=130; NAME=Alice; DEPTNO=40; GENDER=F; CITY=Vancouver; EMPID=2; AGE=null; SLACKER=false; MANAGER=true; JOINEDAT=2007-01-01"
 argument_list|)
+operator|.
+name|returns
+argument_list|(
+name|lines
+argument_list|)
+operator|.
+name|ok
+argument_list|()
 expr_stmt|;
 block|}
 comment|/** Reads the HEADER_ONLY table from the CSV schema. The CSV file has one    * line - the column headers - but no rows of data. */
@@ -883,12 +977,18 @@ name|sql
 init|=
 literal|"select * from sales.header_only"
 decl_stmt|;
-name|checkSql
+name|sql
 argument_list|(
 literal|"sales-csv"
 argument_list|,
 name|sql
 argument_list|)
+operator|.
+name|returns
+argument_list|()
+operator|.
+name|ok
+argument_list|()
 expr_stmt|;
 block|}
 comment|/** Reads the EMPTY table from the CSV schema. The CSV file has no lines,    * therefore the table has a system-generated column called    * "EmptyFileHasNoColumns". */
@@ -1028,6 +1128,147 @@ block|}
 block|}
 argument_list|)
 expr_stmt|;
+block|}
+comment|/** Fluent API to perform test actions. */
+specifier|private
+class|class
+name|Fluent
+block|{
+specifier|private
+specifier|final
+name|String
+name|model
+decl_stmt|;
+specifier|private
+specifier|final
+name|String
+name|sql
+decl_stmt|;
+specifier|private
+specifier|final
+name|Function
+argument_list|<
+name|ResultSet
+argument_list|,
+name|Void
+argument_list|>
+name|expect
+decl_stmt|;
+name|Fluent
+parameter_list|(
+name|String
+name|model
+parameter_list|,
+name|String
+name|sql
+parameter_list|,
+name|Function
+argument_list|<
+name|ResultSet
+argument_list|,
+name|Void
+argument_list|>
+name|expect
+parameter_list|)
+block|{
+name|this
+operator|.
+name|model
+operator|=
+name|model
+expr_stmt|;
+name|this
+operator|.
+name|sql
+operator|=
+name|sql
+expr_stmt|;
+name|this
+operator|.
+name|expect
+operator|=
+name|expect
+expr_stmt|;
+block|}
+comment|/** Runs the test. */
+name|Fluent
+name|ok
+parameter_list|()
+block|{
+try|try
+block|{
+name|checkSql
+argument_list|(
+name|sql
+argument_list|,
+name|model
+argument_list|,
+name|expect
+argument_list|)
+expr_stmt|;
+return|return
+name|this
+return|;
+block|}
+catch|catch
+parameter_list|(
+name|SQLException
+name|e
+parameter_list|)
+block|{
+throw|throw
+operator|new
+name|RuntimeException
+argument_list|(
+name|e
+argument_list|)
+throw|;
+block|}
+block|}
+comment|/** Assigns a function to call to test whether output is correct. */
+name|Fluent
+name|checking
+parameter_list|(
+name|Function
+argument_list|<
+name|ResultSet
+argument_list|,
+name|Void
+argument_list|>
+name|expect
+parameter_list|)
+block|{
+return|return
+operator|new
+name|Fluent
+argument_list|(
+name|model
+argument_list|,
+name|sql
+argument_list|,
+name|expect
+argument_list|)
+return|;
+block|}
+comment|/** Sets the rows that are expected to be returned from the SQL query. */
+name|Fluent
+name|returns
+parameter_list|(
+name|String
+modifier|...
+name|expectedLines
+parameter_list|)
+block|{
+return|return
+name|checking
+argument_list|(
+name|expect
+argument_list|(
+name|expectedLines
+argument_list|)
+argument_list|)
+return|;
+block|}
 block|}
 block|}
 end_class
