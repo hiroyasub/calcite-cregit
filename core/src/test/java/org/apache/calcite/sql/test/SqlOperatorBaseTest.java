@@ -22996,6 +22996,40 @@ argument_list|,
 literal|"DATE"
 argument_list|)
 expr_stmt|;
+comment|// Round to the last day of previous month
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"timestampadd(MONTH, 1, date '2016-05-31')"
+argument_list|,
+literal|"2016-06-30"
+argument_list|,
+literal|"DATE NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"timestampadd(MONTH, 5, date '2016-01-31')"
+argument_list|,
+literal|"2016-06-30"
+argument_list|,
+literal|"DATE NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"timestampadd(MONTH, -1, date '2016-03-31')"
+argument_list|,
+literal|"2016-02-29"
+argument_list|,
+literal|"DATE NOT NULL"
+argument_list|)
+expr_stmt|;
 block|}
 annotation|@
 name|Test
