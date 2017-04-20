@@ -83,6 +83,20 @@ name|calcite
 operator|.
 name|rel
 operator|.
+name|RelReferentialConstraint
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
 name|RelRoot
 import|;
 end_import
@@ -236,6 +250,14 @@ parameter_list|(
 name|ImmutableBitSet
 name|columns
 parameter_list|)
+function_decl|;
+comment|/**    * Returns the referential constraints existing for this table. These constraints    * are represented over other tables using {@link RelReferentialConstraint} nodes.    */
+name|List
+argument_list|<
+name|RelReferentialConstraint
+argument_list|>
+name|getReferentialConstraints
+parameter_list|()
 function_decl|;
 comment|/**    * Generates code for this table.    *    * @param clazz The desired collection class; for example {@code Queryable}.    */
 name|Expression

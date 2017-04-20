@@ -826,9 +826,6 @@ name|rel
 operator|.
 name|getTable
 argument_list|()
-operator|.
-name|getQualifiedName
-argument_list|()
 argument_list|,
 literal|0
 argument_list|)
@@ -1534,7 +1531,7 @@ name|of
 argument_list|(
 name|rightRef
 operator|.
-name|getQualifiedName
+name|getTable
 argument_list|()
 argument_list|,
 name|shift
@@ -1893,7 +1890,7 @@ name|of
 argument_list|(
 name|tableRef
 operator|.
-name|getQualifiedName
+name|getTable
 argument_list|()
 argument_list|,
 name|shift

@@ -23,6 +23,22 @@ name|apache
 operator|.
 name|calcite
 operator|.
+name|adapter
+operator|.
+name|java
+operator|.
+name|ReflectiveSchema
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
 name|jdbc
 operator|.
 name|JavaTypeFactoryImpl
@@ -124,6 +140,34 @@ operator|.
 name|rel
 operator|.
 name|RelNode
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|RelReferentialConstraint
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|RelReferentialConstraintImpl
 import|;
 end_import
 
@@ -311,11 +355,103 @@ name|apache
 operator|.
 name|calcite
 operator|.
+name|schema
+operator|.
+name|QueryableTable
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|schema
+operator|.
+name|TranslatableTable
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
 name|sql
 operator|.
 name|fun
 operator|.
 name|SqlStdOperatorTable
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|test
+operator|.
+name|JdbcTest
+operator|.
+name|Department
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|test
+operator|.
+name|JdbcTest
+operator|.
+name|Dependent
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|test
+operator|.
+name|JdbcTest
+operator|.
+name|Employee
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|test
+operator|.
+name|JdbcTest
+operator|.
+name|Location
 import|;
 end_import
 
@@ -371,7 +507,37 @@ name|calcite
 operator|.
 name|util
 operator|.
+name|Smalls
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|util
+operator|.
 name|TryThreadLocal
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|util
+operator|.
+name|mapping
+operator|.
+name|IntPair
 import|;
 end_import
 
@@ -464,6 +630,16 @@ operator|.
 name|util
 operator|.
 name|ArrayList
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Arrays
 import|;
 end_import
 
@@ -670,6 +846,68 @@ operator|.
 name|lexicographical
 argument_list|()
 decl_stmt|;
+specifier|private
+specifier|static
+specifier|final
+name|String
+name|HR_FKUK_SCHEMA
+init|=
+literal|"{\n"
+operator|+
+literal|"       type: 'custom',\n"
+operator|+
+literal|"       name: 'hr',\n"
+operator|+
+literal|"       factory: '"
+operator|+
+name|ReflectiveSchema
+operator|.
+name|Factory
+operator|.
+name|class
+operator|.
+name|getName
+argument_list|()
+operator|+
+literal|"',\n"
+operator|+
+literal|"       operand: {\n"
+operator|+
+literal|"         class: '"
+operator|+
+name|HrFKUKSchema
+operator|.
+name|class
+operator|.
+name|getName
+argument_list|()
+operator|+
+literal|"'\n"
+operator|+
+literal|"       }\n"
+operator|+
+literal|"     }\n"
+decl_stmt|;
+specifier|private
+specifier|static
+specifier|final
+name|String
+name|HR_FKUK_MODEL
+init|=
+literal|"{\n"
+operator|+
+literal|"  version: '1.0',\n"
+operator|+
+literal|"  defaultSchema: 'hr',\n"
+operator|+
+literal|"   schemas: [\n"
+operator|+
+name|HR_FKUK_SCHEMA
+operator|+
+literal|"   ]\n"
+operator|+
+literal|"}"
+decl_stmt|;
 specifier|final
 name|JavaTypeFactoryImpl
 name|typeFactory
@@ -824,9 +1062,7 @@ argument_list|()
 operator|.
 name|withMaterializations
 argument_list|(
-name|JdbcTest
-operator|.
-name|HR_MODEL
+name|HR_FKUK_MODEL
 argument_list|,
 literal|"m0"
 argument_list|,
@@ -889,9 +1125,7 @@ argument_list|()
 operator|.
 name|withMaterializations
 argument_list|(
-name|JdbcTest
-operator|.
-name|HR_MODEL
+name|HR_FKUK_MODEL
 argument_list|,
 literal|"m0"
 argument_list|,
@@ -936,9 +1170,7 @@ name|materialize
 argument_list|,
 name|query
 argument_list|,
-name|JdbcTest
-operator|.
-name|HR_MODEL
+name|HR_FKUK_MODEL
 argument_list|,
 name|CONTAINS_M0
 argument_list|,
@@ -978,9 +1210,7 @@ name|materialize
 argument_list|,
 name|query
 argument_list|,
-name|JdbcTest
-operator|.
-name|HR_MODEL
+name|HR_FKUK_MODEL
 argument_list|,
 name|CONTAINS_M0
 argument_list|,
@@ -1336,9 +1566,7 @@ literal|"select \"deptno\" - 10 as \"x\", \"empid\" + 1, \"name\" from \"emps\""
 argument_list|,
 literal|"select \"name\" from \"emps\" where \"deptno\" + 10 = 20"
 argument_list|,
-name|JdbcTest
-operator|.
-name|HR_MODEL
+name|HR_FKUK_MODEL
 argument_list|)
 expr_stmt|;
 block|}
@@ -1360,9 +1588,7 @@ literal|"select \"name\", \"empid\" + 1 as e\n"
 operator|+
 literal|"from \"emps\" where \"deptno\" - 10 = 2"
 argument_list|,
-name|JdbcTest
-operator|.
-name|HR_MODEL
+name|HR_FKUK_MODEL
 argument_list|,
 name|CalciteAssert
 operator|.
@@ -1370,7 +1596,7 @@ name|checkResultContains
 argument_list|(
 literal|"EnumerableCalc(expr#0..2=[{inputs}], expr#3=[2], "
 operator|+
-literal|"expr#4=[=($t0, $t3)], name=[$t2], E=[$t1], $condition=[$t4])\n"
+literal|"expr#4=[=($t0, $t3)], name=[$t2], EE=[$t1], $condition=[$t4])\n"
 operator|+
 literal|"  EnumerableTableScan(table=[[hr, m0]]"
 argument_list|)
@@ -1391,9 +1617,7 @@ literal|"select \"deptno\" - 10 as \"x\", \"empid\"  from \"emps\""
 argument_list|,
 literal|"select \"name\" from \"emps\" where \"deptno\" - 10 = 0"
 argument_list|,
-name|JdbcTest
-operator|.
-name|HR_MODEL
+name|HR_FKUK_MODEL
 argument_list|)
 expr_stmt|;
 block|}
@@ -1411,9 +1635,7 @@ literal|"select \"deptno\" - 10 as \"x\", \"empid\" + 1, \"name\" from \"emps\""
 argument_list|,
 literal|"select \"name\", \"empid\" + 2 from \"emps\" where \"deptno\" - 10 = 0"
 argument_list|,
-name|JdbcTest
-operator|.
-name|HR_MODEL
+name|HR_FKUK_MODEL
 argument_list|)
 expr_stmt|;
 block|}
@@ -1640,9 +1862,7 @@ literal|"where \"deptno\" = 10 or \"deptno\" = 20 or \"empid\"< 160"
 argument_list|,
 literal|"select \"empid\" + 1 as x, \"name\" from \"emps\" where \"deptno\" = 10"
 argument_list|,
-name|JdbcTest
-operator|.
-name|HR_MODEL
+name|HR_FKUK_MODEL
 argument_list|,
 name|CalciteAssert
 operator|.
@@ -1745,9 +1965,7 @@ literal|"select \"name\", \"deptno\" from \"emps\" where \"deptno\"> 10"
 argument_list|,
 literal|"select \"name\", \"empid\" from \"emps\" where \"deptno\"> 30"
 argument_list|,
-name|JdbcTest
-operator|.
-name|HR_MODEL
+name|HR_FKUK_MODEL
 argument_list|)
 expr_stmt|;
 block|}
@@ -1767,9 +1985,7 @@ literal|"select \"name\", \"empid\" from \"emps\" "
 operator|+
 literal|"where \"deptno\"> 30 or \"empid\"> 10"
 argument_list|,
-name|JdbcTest
-operator|.
-name|HR_MODEL
+name|HR_FKUK_MODEL
 argument_list|)
 expr_stmt|;
 block|}
@@ -1791,9 +2007,7 @@ literal|"select \"name\", \"empid\" from \"emps\" where \"deptno\"> 30 "
 operator|+
 literal|"or \"empid\"> 10"
 argument_list|,
-name|JdbcTest
-operator|.
-name|HR_MODEL
+name|HR_FKUK_MODEL
 argument_list|)
 expr_stmt|;
 block|}
@@ -1815,9 +2029,7 @@ literal|"or (\"empid\"> 400 and \"salary\"> 5000)"
 argument_list|,
 literal|"select \"name\" from \"emps\" where \"deptno\"> 30 and \"salary\"> 3000"
 argument_list|,
-name|JdbcTest
-operator|.
-name|HR_MODEL
+name|HR_FKUK_MODEL
 argument_list|)
 expr_stmt|;
 block|}
@@ -1835,9 +2047,7 @@ literal|"select \"name\", \"deptno\" from \"emps\" where \"salary\"> 2000.5"
 argument_list|,
 literal|"select \"name\" from \"emps\" where \"deptno\"> 30 and \"salary\"> 3000"
 argument_list|,
-name|JdbcTest
-operator|.
-name|HR_MODEL
+name|HR_FKUK_MODEL
 argument_list|)
 expr_stmt|;
 block|}
@@ -1861,9 +2071,7 @@ literal|"select \"name\" from \"emps\" where \"salary\"> 1000 "
 operator|+
 literal|"or (\"deptno\"> 30 and \"salary\"> 3000)"
 argument_list|,
-name|JdbcTest
-operator|.
-name|HR_MODEL
+name|HR_FKUK_MODEL
 argument_list|)
 expr_stmt|;
 block|}
@@ -1957,9 +2165,7 @@ literal|"group by \"empid\", \"deptno\""
 argument_list|,
 literal|"select count(*) + 1 as c, \"deptno\" from \"emps\" group by \"deptno\""
 argument_list|,
-name|JdbcTest
-operator|.
-name|HR_MODEL
+name|HR_FKUK_MODEL
 argument_list|,
 name|CalciteAssert
 operator|.
@@ -1997,9 +2203,7 @@ literal|"select \"deptno\", count(*) as c, \"empid\" + 2, sum(\"empid\") as s fr
 argument_list|,
 literal|"select count(*) + 1 as c, \"deptno\" from \"emps\" group by \"deptno\""
 argument_list|,
-name|JdbcTest
-operator|.
-name|HR_MODEL
+name|HR_FKUK_MODEL
 argument_list|,
 name|CalciteAssert
 operator|.
@@ -3524,9 +3728,7 @@ name|q
 argument_list|,
 name|q
 argument_list|,
-name|JdbcTest
-operator|.
-name|HR_MODEL
+name|HR_FKUK_MODEL
 argument_list|)
 expr_stmt|;
 block|}
@@ -3660,9 +3862,7 @@ name|m
 argument_list|,
 name|q
 argument_list|,
-name|JdbcTest
-operator|.
-name|HR_MODEL
+name|HR_FKUK_MODEL
 argument_list|,
 name|CalciteAssert
 operator|.
@@ -3688,9 +3888,7 @@ literal|"select \"empid\", \"deptno\" from \"emps\" group by \"empid\", \"deptno
 argument_list|,
 literal|"select \"empid\", \"deptno\" from \"emps\" group by \"empid\", \"deptno\""
 argument_list|,
-name|JdbcTest
-operator|.
-name|HR_MODEL
+name|HR_FKUK_MODEL
 argument_list|,
 name|CalciteAssert
 operator|.
@@ -3714,9 +3912,7 @@ literal|"select \"empid\", \"deptno\" from \"emps\" group by \"empid\", \"deptno
 argument_list|,
 literal|"select \"deptno\" from \"emps\" group by \"deptno\""
 argument_list|,
-name|JdbcTest
-operator|.
-name|HR_MODEL
+name|HR_FKUK_MODEL
 argument_list|,
 name|CalciteAssert
 operator|.
@@ -3742,9 +3938,7 @@ literal|"select \"deptno\" from \"emps\" group by \"deptno\""
 argument_list|,
 literal|"select \"empid\", \"deptno\" from \"emps\" group by \"empid\", \"deptno\""
 argument_list|,
-name|JdbcTest
-operator|.
-name|HR_MODEL
+name|HR_FKUK_MODEL
 argument_list|)
 expr_stmt|;
 block|}
@@ -3761,9 +3955,7 @@ literal|"select \"empid\", \"deptno\" from \"emps\" where \"deptno\" = 10 group 
 argument_list|,
 literal|"select \"deptno\" from \"emps\" where \"deptno\" = 10 group by \"deptno\""
 argument_list|,
-name|JdbcTest
-operator|.
-name|HR_MODEL
+name|HR_FKUK_MODEL
 argument_list|,
 name|CalciteAssert
 operator|.
@@ -3789,9 +3981,7 @@ literal|"select \"empid\", \"deptno\" from \"emps\" where \"deptno\" = 5 group b
 argument_list|,
 literal|"select \"deptno\" from \"emps\" where \"deptno\" = 10 group by \"deptno\""
 argument_list|,
-name|JdbcTest
-operator|.
-name|HR_MODEL
+name|HR_FKUK_MODEL
 argument_list|)
 expr_stmt|;
 block|}
@@ -3808,9 +3998,7 @@ literal|"select \"empid\", \"deptno\" from \"emps\" where \"deptno\"> 5 group by
 argument_list|,
 literal|"select \"deptno\" from \"emps\" where \"deptno\"> 10 group by \"deptno\""
 argument_list|,
-name|JdbcTest
-operator|.
-name|HR_MODEL
+name|HR_FKUK_MODEL
 argument_list|,
 name|CalciteAssert
 operator|.
@@ -3840,9 +4028,7 @@ literal|"select \"empid\", \"deptno\" from \"emps\" where \"deptno\"> 5 group by
 argument_list|,
 literal|"select \"deptno\" from \"emps\" where \"deptno\"< 10 group by \"deptno\""
 argument_list|,
-name|JdbcTest
-operator|.
-name|HR_MODEL
+name|HR_FKUK_MODEL
 argument_list|)
 expr_stmt|;
 block|}
@@ -3859,9 +4045,7 @@ literal|"select \"empid\" from \"emps\" group by \"empid\", \"deptno\""
 argument_list|,
 literal|"select \"deptno\" from \"emps\" group by \"deptno\""
 argument_list|,
-name|JdbcTest
-operator|.
-name|HR_MODEL
+name|HR_FKUK_MODEL
 argument_list|)
 expr_stmt|;
 block|}
@@ -3882,9 +4066,7 @@ literal|"select \"empid\" from \"emps\"\n"
 operator|+
 literal|"where \"salary\"> 2000 group by \"name\", \"empid\""
 argument_list|,
-name|JdbcTest
-operator|.
-name|HR_MODEL
+name|HR_FKUK_MODEL
 argument_list|)
 expr_stmt|;
 block|}
@@ -3903,9 +4085,7 @@ literal|"from \"emps\" group by \"empid\", \"deptno\""
 argument_list|,
 literal|"select \"deptno\" from \"emps\" group by \"deptno\""
 argument_list|,
-name|JdbcTest
-operator|.
-name|HR_MODEL
+name|HR_FKUK_MODEL
 argument_list|,
 name|CalciteAssert
 operator|.
@@ -3935,9 +4115,7 @@ literal|"select \"deptno\", count(*) as c, sum(\"empid\") as s\n"
 operator|+
 literal|"from \"emps\" group by \"deptno\""
 argument_list|,
-name|JdbcTest
-operator|.
-name|HR_MODEL
+name|HR_FKUK_MODEL
 argument_list|,
 name|CalciteAssert
 operator|.
@@ -3967,9 +4145,7 @@ literal|"select \"deptno\", \"empid\", sum(\"empid\") as s, count(*) as c\n"
 operator|+
 literal|"from \"emps\" group by \"empid\", \"deptno\""
 argument_list|,
-name|JdbcTest
-operator|.
-name|HR_MODEL
+name|HR_FKUK_MODEL
 argument_list|,
 name|CalciteAssert
 operator|.
@@ -4001,9 +4177,7 @@ literal|"select \"deptno\", sum(\"empid\") as s\n"
 operator|+
 literal|"from \"emps\" where \"deptno\"> 10 group by \"deptno\""
 argument_list|,
-name|JdbcTest
-operator|.
-name|HR_MODEL
+name|HR_FKUK_MODEL
 argument_list|,
 name|CalciteAssert
 operator|.
@@ -4037,9 +4211,7 @@ literal|"select \"deptno\", sum(\"empid\") + 1 as s\n"
 operator|+
 literal|"from \"emps\" where \"deptno\"> 10 group by \"deptno\""
 argument_list|,
-name|JdbcTest
-operator|.
-name|HR_MODEL
+name|HR_FKUK_MODEL
 argument_list|,
 name|CalciteAssert
 operator|.
@@ -4077,9 +4249,7 @@ literal|"select \"deptno\", sum(\"empid\") + 1 as s\n"
 operator|+
 literal|"from \"emps\" where \"deptno\"> 10 group by \"deptno\""
 argument_list|,
-name|JdbcTest
-operator|.
-name|HR_MODEL
+name|HR_FKUK_MODEL
 argument_list|)
 expr_stmt|;
 block|}
@@ -4100,9 +4270,7 @@ literal|"select \"deptno\" + 1, sum(\"empid\") + 1 as s\n"
 operator|+
 literal|"from \"emps\" where \"deptno\"> 10 group by \"deptno\""
 argument_list|,
-name|JdbcTest
-operator|.
-name|HR_MODEL
+name|HR_FKUK_MODEL
 argument_list|,
 name|CalciteAssert
 operator|.
@@ -4167,9 +4335,7 @@ literal|"join \"depts\" using (\"deptno\") where \"depts\".\"deptno\"> 20\n"
 operator|+
 literal|"group by \"empid\", \"depts\".\"deptno\""
 argument_list|,
-name|JdbcTest
-operator|.
-name|HR_MODEL
+name|HR_FKUK_MODEL
 argument_list|,
 name|CalciteAssert
 operator|.
@@ -4205,9 +4371,7 @@ literal|"join \"depts\" using (\"deptno\") where \"depts\".\"deptno\"> 20\n"
 operator|+
 literal|"group by \"empid\", \"depts\".\"deptno\""
 argument_list|,
-name|JdbcTest
-operator|.
-name|HR_MODEL
+name|HR_FKUK_MODEL
 argument_list|,
 name|CalciteAssert
 operator|.
@@ -4244,9 +4408,7 @@ literal|"join \"depts\" using (\"deptno\") where \"depts\".\"deptno\"> 20\n"
 operator|+
 literal|"group by \"empid\", \"depts\".\"deptno\""
 argument_list|,
-name|JdbcTest
-operator|.
-name|HR_MODEL
+name|HR_FKUK_MODEL
 argument_list|)
 expr_stmt|;
 block|}
@@ -4271,9 +4433,7 @@ literal|"join \"depts\" using (\"deptno\") where \"depts\".\"deptno\"> 20\n"
 operator|+
 literal|"group by \"empid\", \"depts\".\"deptno\""
 argument_list|,
-name|JdbcTest
-operator|.
-name|HR_MODEL
+name|HR_FKUK_MODEL
 argument_list|,
 name|CalciteAssert
 operator|.
@@ -4309,9 +4469,7 @@ literal|"join \"emps\" using (\"deptno\") where \"emps\".\"empid\"> 15\n"
 operator|+
 literal|"group by \"depts\".\"deptno\", \"emps\".\"empid\""
 argument_list|,
-name|JdbcTest
-operator|.
-name|HR_MODEL
+name|HR_FKUK_MODEL
 argument_list|,
 name|CalciteAssert
 operator|.
@@ -4347,9 +4505,7 @@ literal|"join \"emps\" using (\"deptno\") where \"emps\".\"empid\"> 15\n"
 operator|+
 literal|"group by \"depts\".\"deptno\""
 argument_list|,
-name|JdbcTest
-operator|.
-name|HR_MODEL
+name|HR_FKUK_MODEL
 argument_list|,
 name|CalciteAssert
 operator|.
@@ -4362,6 +4518,186 @@ operator|+
 literal|"proj#0..1=[{exprs}], $condition=[$t3])\n"
 operator|+
 literal|"    EnumerableTableScan(table=[[hr, m0]])"
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testJoinAggregateMaterializationAggregateFuncs1
+parameter_list|()
+block|{
+comment|// This test relies on FK-UK relationship
+name|checkMaterialize
+argument_list|(
+literal|"select \"empid\", \"depts\".\"deptno\", count(*) as c, sum(\"empid\") as s\n"
+operator|+
+literal|"from \"emps\" join \"depts\" using (\"deptno\")\n"
+operator|+
+literal|"group by \"empid\", \"depts\".\"deptno\""
+argument_list|,
+literal|"select \"deptno\" from \"emps\" group by \"deptno\""
+argument_list|,
+name|HR_FKUK_MODEL
+argument_list|,
+name|CalciteAssert
+operator|.
+name|checkResultContains
+argument_list|(
+literal|"EnumerableAggregate(group=[{1}])\n"
+operator|+
+literal|"  EnumerableTableScan(table=[[hr, m0]])"
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testJoinAggregateMaterializationAggregateFuncs2
+parameter_list|()
+block|{
+name|checkMaterialize
+argument_list|(
+literal|"select \"empid\", \"emps\".\"deptno\", count(*) as c, sum(\"empid\") as s\n"
+operator|+
+literal|"from \"emps\" join \"depts\" using (\"deptno\")\n"
+operator|+
+literal|"group by \"empid\", \"emps\".\"deptno\""
+argument_list|,
+literal|"select \"depts\".\"deptno\", count(*) as c, sum(\"empid\") as s\n"
+operator|+
+literal|"from \"emps\" join \"depts\" using (\"deptno\")\n"
+operator|+
+literal|"group by \"depts\".\"deptno\""
+argument_list|,
+name|HR_FKUK_MODEL
+argument_list|,
+name|CalciteAssert
+operator|.
+name|checkResultContains
+argument_list|(
+literal|"EnumerableAggregate(group=[{1}], C=[$SUM0($2)], S=[$SUM0($3)])\n"
+operator|+
+literal|"  EnumerableTableScan(table=[[hr, m0]])"
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testJoinAggregateMaterializationAggregateFuncs3
+parameter_list|()
+block|{
+comment|// This test relies on FK-UK relationship
+name|checkMaterialize
+argument_list|(
+literal|"select \"empid\", \"depts\".\"deptno\", count(*) as c, sum(\"empid\") as s\n"
+operator|+
+literal|"from \"emps\" join \"depts\" using (\"deptno\")\n"
+operator|+
+literal|"group by \"empid\", \"depts\".\"deptno\""
+argument_list|,
+literal|"select \"deptno\", \"empid\", sum(\"empid\") as s, count(*) as c\n"
+operator|+
+literal|"from \"emps\" group by \"empid\", \"deptno\""
+argument_list|,
+name|HR_FKUK_MODEL
+argument_list|,
+name|CalciteAssert
+operator|.
+name|checkResultContains
+argument_list|(
+literal|"EnumerableCalc(expr#0..3=[{inputs}], deptno=[$t1], empid=[$t0], "
+operator|+
+literal|"S=[$t3], C=[$t2])\n"
+operator|+
+literal|"  EnumerableTableScan(table=[[hr, m0]])"
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testJoinAggregateMaterializationAggregateFuncs4
+parameter_list|()
+block|{
+name|checkMaterialize
+argument_list|(
+literal|"select \"empid\", \"emps\".\"deptno\", count(*) as c, sum(\"empid\") as s\n"
+operator|+
+literal|"from \"emps\" join \"depts\" using (\"deptno\")\n"
+operator|+
+literal|"where \"emps\".\"deptno\">= 10 group by \"empid\", \"emps\".\"deptno\""
+argument_list|,
+literal|"select \"depts\".\"deptno\", sum(\"empid\") as s\n"
+operator|+
+literal|"from \"emps\" join \"depts\" using (\"deptno\")\n"
+operator|+
+literal|"where \"emps\".\"deptno\"> 10 group by \"depts\".\"deptno\""
+argument_list|,
+name|HR_FKUK_MODEL
+argument_list|,
+name|CalciteAssert
+operator|.
+name|checkResultContains
+argument_list|(
+literal|"EnumerableAggregate(group=[{1}], S=[$SUM0($3)])\n"
+operator|+
+literal|"  EnumerableCalc(expr#0..3=[{inputs}], expr#4=[10], expr#5=[>($t1, $t4)], "
+operator|+
+literal|"proj#0..3=[{exprs}], $condition=[$t5])\n"
+operator|+
+literal|"    EnumerableTableScan(table=[[hr, m0]])"
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testJoinAggregateMaterializationAggregateFuncs5
+parameter_list|()
+block|{
+name|checkMaterialize
+argument_list|(
+literal|"select \"empid\", \"depts\".\"deptno\", count(*) + 1 as c, sum(\"empid\") as s\n"
+operator|+
+literal|"from \"emps\" join \"depts\" using (\"deptno\")\n"
+operator|+
+literal|"where \"depts\".\"deptno\">= 10 group by \"empid\", \"depts\".\"deptno\""
+argument_list|,
+literal|"select \"depts\".\"deptno\", sum(\"empid\") + 1 as s\n"
+operator|+
+literal|"from \"emps\" join \"depts\" using (\"deptno\")\n"
+operator|+
+literal|"where \"depts\".\"deptno\"> 10 group by \"depts\".\"deptno\""
+argument_list|,
+name|HR_FKUK_MODEL
+argument_list|,
+name|CalciteAssert
+operator|.
+name|checkResultContains
+argument_list|(
+literal|"EnumerableCalc(expr#0..1=[{inputs}], expr#2=[1], expr#3=[+($t1, $t2)], "
+operator|+
+literal|"deptno=[$t0], S=[$t3])\n"
+operator|+
+literal|"  EnumerableAggregate(group=[{1}], agg#0=[$SUM0($3)])\n"
+operator|+
+literal|"    EnumerableCalc(expr#0..3=[{inputs}], expr#4=[10], expr#5=[>($t1, $t4)], "
+operator|+
+literal|"proj#0..3=[{exprs}], $condition=[$t5])\n"
+operator|+
+literal|"      EnumerableTableScan(table=[[hr, m0]])"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -4383,9 +4719,7 @@ literal|"select \"empid\" \"deptno\" from \"emps\"\n"
 operator|+
 literal|"join \"depts\" using (\"deptno\") where \"empid\" = 1"
 argument_list|,
-name|JdbcTest
-operator|.
-name|HR_MODEL
+name|HR_FKUK_MODEL
 argument_list|,
 name|CalciteAssert
 operator|.
@@ -4394,6 +4728,167 @@ argument_list|(
 literal|"EnumerableCalc(expr#0=[{inputs}], expr#1=[CAST($t0):INTEGER NOT NULL], expr#2=[1], "
 operator|+
 literal|"expr#3=[=($t1, $t2)], deptno=[$t0], $condition=[$t3])\n"
+operator|+
+literal|"  EnumerableTableScan(table=[[hr, m0]])"
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testJoinMaterializationUKFK1
+parameter_list|()
+block|{
+name|checkMaterialize
+argument_list|(
+literal|"select \"a\".\"empid\" \"deptno\" from\n"
+operator|+
+literal|"(select * from \"emps\" where \"empid\" = 1) \"a\"\n"
+operator|+
+literal|"join \"depts\" using (\"deptno\")\n"
+operator|+
+literal|"join \"dependents\" using (\"empid\")"
+argument_list|,
+literal|"select \"a\".\"empid\" from \n"
+operator|+
+literal|"(select * from \"emps\" where \"empid\" = 1) \"a\"\n"
+operator|+
+literal|"join \"dependents\" using (\"empid\")\n"
+argument_list|,
+name|HR_FKUK_MODEL
+argument_list|,
+name|CalciteAssert
+operator|.
+name|checkResultContains
+argument_list|(
+literal|"PLAN=EnumerableTableScan(table=[[hr, m0]])"
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testJoinMaterializationUKFK2
+parameter_list|()
+block|{
+name|checkMaterialize
+argument_list|(
+literal|"select \"a\".\"empid\", \"a\".\"deptno\" from\n"
+operator|+
+literal|"(select * from \"emps\" where \"empid\" = 1) \"a\"\n"
+operator|+
+literal|"join \"depts\" using (\"deptno\")\n"
+operator|+
+literal|"join \"dependents\" using (\"empid\")"
+argument_list|,
+literal|"select \"a\".\"empid\" from \n"
+operator|+
+literal|"(select * from \"emps\" where \"empid\" = 1) \"a\"\n"
+operator|+
+literal|"join \"dependents\" using (\"empid\")\n"
+argument_list|,
+name|HR_FKUK_MODEL
+argument_list|,
+name|CalciteAssert
+operator|.
+name|checkResultContains
+argument_list|(
+literal|"EnumerableCalc(expr#0..1=[{inputs}], empid=[$t0])\n"
+operator|+
+literal|"  EnumerableTableScan(table=[[hr, m0]])"
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testJoinMaterializationUKFK3
+parameter_list|()
+block|{
+name|checkNoMaterialize
+argument_list|(
+literal|"select \"a\".\"empid\", \"a\".\"deptno\" from\n"
+operator|+
+literal|"(select * from \"emps\" where \"empid\" = 1) \"a\"\n"
+operator|+
+literal|"join \"depts\" using (\"deptno\")\n"
+operator|+
+literal|"join \"dependents\" using (\"empid\")"
+argument_list|,
+literal|"select \"a\".\"name\" from \n"
+operator|+
+literal|"(select * from \"emps\" where \"empid\" = 1) \"a\"\n"
+operator|+
+literal|"join \"dependents\" using (\"empid\")\n"
+argument_list|,
+name|HR_FKUK_MODEL
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testJoinMaterializationUKFK4
+parameter_list|()
+block|{
+name|checkMaterialize
+argument_list|(
+literal|"select \"empid\" \"deptno\" from\n"
+operator|+
+literal|"(select * from \"emps\" where \"empid\" = 1)\n"
+operator|+
+literal|"join \"depts\" using (\"deptno\")"
+argument_list|,
+literal|"select \"empid\" from \"emps\" where \"empid\" = 1\n"
+argument_list|,
+name|HR_FKUK_MODEL
+argument_list|,
+name|CalciteAssert
+operator|.
+name|checkResultContains
+argument_list|(
+literal|"PLAN=EnumerableTableScan(table=[[hr, m0]])"
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testJoinMaterializationUKFK5
+parameter_list|()
+block|{
+name|checkMaterialize
+argument_list|(
+literal|"select \"emps\".\"empid\", \"emps\".\"deptno\" from \"emps\"\n"
+operator|+
+literal|"join \"depts\" using (\"deptno\")\n"
+operator|+
+literal|"join \"dependents\" using (\"empid\")"
+operator|+
+literal|"where \"emps\".\"empid\" = 1"
+argument_list|,
+literal|"select \"emps\".\"empid\" from \"emps\"\n"
+operator|+
+literal|"join \"dependents\" using (\"empid\")\n"
+operator|+
+literal|"where \"emps\".\"empid\" = 1"
+argument_list|,
+name|HR_FKUK_MODEL
+argument_list|,
+name|CalciteAssert
+operator|.
+name|checkResultContains
+argument_list|(
+literal|"EnumerableCalc(expr#0..1=[{inputs}], empid=[$t0])\n"
 operator|+
 literal|"  EnumerableTableScan(table=[[hr, m0]])"
 argument_list|)
@@ -4430,9 +4925,7 @@ name|m
 argument_list|,
 name|q
 argument_list|,
-name|JdbcTest
-operator|.
-name|HR_MODEL
+name|HR_FKUK_MODEL
 argument_list|,
 name|CalciteAssert
 operator|.
@@ -4518,9 +5011,7 @@ argument_list|()
 operator|.
 name|withMaterializations
 argument_list|(
-name|JdbcTest
-operator|.
-name|HR_MODEL
+name|HR_FKUK_MODEL
 argument_list|,
 literal|"m0"
 argument_list|,
@@ -4665,9 +5156,7 @@ argument_list|()
 operator|.
 name|withMaterializations
 argument_list|(
-name|JdbcTest
-operator|.
-name|HR_MODEL
+name|HR_FKUK_MODEL
 argument_list|,
 operator|new
 name|Function
@@ -4974,9 +5463,7 @@ name|m
 argument_list|,
 name|q
 argument_list|,
-name|JdbcTest
-operator|.
-name|HR_MODEL
+name|HR_FKUK_MODEL
 argument_list|,
 name|CalciteAssert
 operator|.
@@ -5035,9 +5522,7 @@ argument_list|()
 operator|.
 name|withMaterializations
 argument_list|(
-name|JdbcTest
-operator|.
-name|HR_MODEL
+name|HR_FKUK_MODEL
 argument_list|,
 literal|"m0"
 argument_list|,
@@ -5120,9 +5605,7 @@ argument_list|()
 operator|.
 name|withMaterializations
 argument_list|(
-name|JdbcTest
-operator|.
-name|HR_MODEL
+name|HR_FKUK_MODEL
 argument_list|,
 literal|"m0"
 argument_list|,
@@ -5203,9 +5686,7 @@ argument_list|()
 operator|.
 name|withMaterializations
 argument_list|(
-name|JdbcTest
-operator|.
-name|HR_MODEL
+name|HR_FKUK_MODEL
 argument_list|,
 literal|"m0"
 argument_list|,
@@ -5426,9 +5907,7 @@ argument_list|()
 operator|.
 name|withMaterializations
 argument_list|(
-name|JdbcTest
-operator|.
-name|HR_MODEL
+name|HR_FKUK_MODEL
 argument_list|,
 literal|"m0"
 argument_list|,
@@ -5803,9 +6282,7 @@ argument_list|()
 operator|.
 name|withMaterializations
 argument_list|(
-name|JdbcTest
-operator|.
-name|HR_MODEL
+name|HR_FKUK_MODEL
 argument_list|,
 literal|"m0"
 argument_list|,
@@ -6145,6 +6622,301 @@ argument_list|,
 name|parent
 argument_list|)
 expr_stmt|;
+block|}
+block|}
+comment|/**    * Hr schema with FK-UK relationship.    */
+specifier|public
+specifier|static
+class|class
+name|HrFKUKSchema
+block|{
+annotation|@
+name|Override
+specifier|public
+name|String
+name|toString
+parameter_list|()
+block|{
+return|return
+literal|"HrFKUKSchema"
+return|;
+block|}
+specifier|public
+specifier|final
+name|Employee
+index|[]
+name|emps
+init|=
+block|{
+operator|new
+name|Employee
+argument_list|(
+literal|100
+argument_list|,
+literal|10
+argument_list|,
+literal|"Bill"
+argument_list|,
+literal|10000
+argument_list|,
+literal|1000
+argument_list|)
+block|,
+operator|new
+name|Employee
+argument_list|(
+literal|200
+argument_list|,
+literal|20
+argument_list|,
+literal|"Eric"
+argument_list|,
+literal|8000
+argument_list|,
+literal|500
+argument_list|)
+block|,
+operator|new
+name|Employee
+argument_list|(
+literal|150
+argument_list|,
+literal|10
+argument_list|,
+literal|"Sebastian"
+argument_list|,
+literal|7000
+argument_list|,
+literal|null
+argument_list|)
+block|,
+operator|new
+name|Employee
+argument_list|(
+literal|110
+argument_list|,
+literal|10
+argument_list|,
+literal|"Theodore"
+argument_list|,
+literal|11500
+argument_list|,
+literal|250
+argument_list|)
+block|,     }
+decl_stmt|;
+specifier|public
+specifier|final
+name|Department
+index|[]
+name|depts
+init|=
+block|{
+operator|new
+name|Department
+argument_list|(
+literal|10
+argument_list|,
+literal|"Sales"
+argument_list|,
+name|Arrays
+operator|.
+name|asList
+argument_list|(
+name|emps
+index|[
+literal|0
+index|]
+argument_list|,
+name|emps
+index|[
+literal|2
+index|]
+argument_list|,
+name|emps
+index|[
+literal|3
+index|]
+argument_list|)
+argument_list|,
+operator|new
+name|Location
+argument_list|(
+operator|-
+literal|122
+argument_list|,
+literal|38
+argument_list|)
+argument_list|)
+block|,
+operator|new
+name|Department
+argument_list|(
+literal|30
+argument_list|,
+literal|"Marketing"
+argument_list|,
+name|Collections
+operator|.
+expr|<
+name|Employee
+operator|>
+name|emptyList
+argument_list|()
+argument_list|,
+operator|new
+name|Location
+argument_list|(
+literal|0
+argument_list|,
+literal|52
+argument_list|)
+argument_list|)
+block|,
+operator|new
+name|Department
+argument_list|(
+literal|20
+argument_list|,
+literal|"HR"
+argument_list|,
+name|Collections
+operator|.
+name|singletonList
+argument_list|(
+name|emps
+index|[
+literal|1
+index|]
+argument_list|)
+argument_list|,
+literal|null
+argument_list|)
+block|,     }
+decl_stmt|;
+specifier|public
+specifier|final
+name|Dependent
+index|[]
+name|dependents
+init|=
+block|{
+operator|new
+name|Dependent
+argument_list|(
+literal|10
+argument_list|,
+literal|"Michael"
+argument_list|)
+block|,
+operator|new
+name|Dependent
+argument_list|(
+literal|10
+argument_list|,
+literal|"Jane"
+argument_list|)
+block|,     }
+decl_stmt|;
+specifier|public
+specifier|final
+name|Dependent
+index|[]
+name|locations
+init|=
+block|{
+operator|new
+name|Dependent
+argument_list|(
+literal|10
+argument_list|,
+literal|"San Francisco"
+argument_list|)
+block|,
+operator|new
+name|Dependent
+argument_list|(
+literal|20
+argument_list|,
+literal|"San Diego"
+argument_list|)
+block|,     }
+decl_stmt|;
+specifier|public
+specifier|final
+name|RelReferentialConstraint
+name|rcs0
+init|=
+name|RelReferentialConstraintImpl
+operator|.
+name|of
+argument_list|(
+name|ImmutableList
+operator|.
+name|of
+argument_list|(
+literal|"hr"
+argument_list|,
+literal|"emps"
+argument_list|)
+argument_list|,
+name|ImmutableList
+operator|.
+name|of
+argument_list|(
+literal|"hr"
+argument_list|,
+literal|"depts"
+argument_list|)
+argument_list|,
+name|ImmutableList
+operator|.
+name|of
+argument_list|(
+name|IntPair
+operator|.
+name|of
+argument_list|(
+literal|1
+argument_list|,
+literal|0
+argument_list|)
+argument_list|)
+argument_list|)
+decl_stmt|;
+specifier|public
+name|QueryableTable
+name|foo
+parameter_list|(
+name|int
+name|count
+parameter_list|)
+block|{
+return|return
+name|Smalls
+operator|.
+name|generateStrings
+argument_list|(
+name|count
+argument_list|)
+return|;
+block|}
+specifier|public
+name|TranslatableTable
+name|view
+parameter_list|(
+name|String
+name|s
+parameter_list|)
+block|{
+return|return
+name|Smalls
+operator|.
+name|view
+argument_list|(
+name|s
+argument_list|)
+return|;
 block|}
 block|}
 block|}

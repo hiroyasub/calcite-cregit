@@ -11,7 +11,7 @@ name|apache
 operator|.
 name|calcite
 operator|.
-name|schema
+name|rel
 package|;
 end_package
 
@@ -23,51 +23,11 @@ name|apache
 operator|.
 name|calcite
 operator|.
-name|rel
-operator|.
-name|RelCollation
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|rel
-operator|.
-name|RelDistribution
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|rel
-operator|.
-name|RelReferentialConstraint
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
 name|util
 operator|.
-name|ImmutableBitSet
+name|mapping
+operator|.
+name|IntPair
 import|;
 end_import
 
@@ -82,53 +42,49 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Statistics about a {@link Table}.  *  *<p>Each of the methods may return {@code null} meaning "not known".</p>  *  * @see Statistics  */
+comment|/**  * Interface for a referential constraint, i.e., Foreign-Key - Unique-Key relationship,  * between two tables.  */
 end_comment
 
 begin_interface
 specifier|public
 interface|interface
-name|Statistic
-block|{
-comment|/** Returns the approximate number of rows in the table. */
-name|Double
-name|getRowCount
-parameter_list|()
-function_decl|;
-comment|/** Returns whether the given set of columns is a unique key, or a superset    * of a unique key, of the table.    */
-name|boolean
-name|isKey
-parameter_list|(
-name|ImmutableBitSet
-name|columns
-parameter_list|)
-function_decl|;
-comment|/** Returns the collection of referential constraints (foreign-keys)    * for this table. */
-name|List
-argument_list|<
 name|RelReferentialConstraint
-argument_list|>
-name|getReferentialConstraints
+block|{
+comment|//~ Methods ----------------------------------------------------------------
+comment|/**    * Returns the number of columns in the keys.    */
+name|int
+name|getNumColumns
 parameter_list|()
 function_decl|;
-comment|/** Returns the collections of columns on which this table is sorted. */
+comment|/**The qualified name of the referencing table, e.g. DEPT. */
 name|List
 argument_list|<
-name|RelCollation
+name|String
 argument_list|>
-name|getCollations
+name|getSourceQualifiedName
 parameter_list|()
 function_decl|;
-comment|/** Returns the distribution of the data in this table. */
-name|RelDistribution
-name|getDistribution
+comment|/** The qualified name of the referenced table, e.g. EMP. */
+name|List
+argument_list|<
+name|String
+argument_list|>
+name|getTargetQualifiedName
+parameter_list|()
+function_decl|;
+comment|/** The (source, target) column ordinals. */
+name|List
+argument_list|<
+name|IntPair
+argument_list|>
+name|getColumnPairs
 parameter_list|()
 function_decl|;
 block|}
 end_interface
 
 begin_comment
-comment|// End Statistic.java
+comment|// End RelReferentialConstraint.java
 end_comment
 
 end_unit
