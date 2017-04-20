@@ -9761,11 +9761,12 @@ literal|"(timestamp '1-2-3 4:5:6', timestamp '1-2-3 4:5:6' ) overlaps (cast(null
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-715">[CALCITE-715]    * Add PERIOD type constructor and period operators (CONTAINS, PRECEDES,    * etc.)</a>.    *    *<p>Tests OVERLAP and similar period operators CONTAINS, EQUALS, PRECEDES,    * SUCCEEDS, IMMEDIATELY PRECEDES, IMMEDIATELY SUCCEEDS for DATE, TIME and    * TIMESTAMP values. */
 annotation|@
 name|Test
 specifier|public
 name|void
-name|testOverlapsEtc
+name|testPeriodOperators
 parameter_list|()
 block|{
 name|String
@@ -9848,6 +9849,13 @@ parameter_list|)
 block|{
 name|c
 operator|.
+name|isTrue
+argument_list|(
+literal|"($0,$0) OVERLAPS ($0,$0)"
+argument_list|)
+expr_stmt|;
+name|c
+operator|.
 name|isFalse
 argument_list|(
 literal|"($0,$1) OVERLAPS ($2,$3)"
@@ -9907,6 +9915,734 @@ operator|.
 name|isTrue
 argument_list|(
 literal|"($3,$2) OVERLAPS ($2,$0)"
+argument_list|)
+expr_stmt|;
+name|c
+operator|.
+name|isTrue
+argument_list|(
+literal|"($0,$2) OVERLAPS ($2,$0)"
+argument_list|)
+expr_stmt|;
+name|c
+operator|.
+name|isTrue
+argument_list|(
+literal|"($0,$3) OVERLAPS ($1,$3)"
+argument_list|)
+expr_stmt|;
+name|c
+operator|.
+name|isTrue
+argument_list|(
+literal|"($0,$3) OVERLAPS ($3,$3)"
+argument_list|)
+expr_stmt|;
+name|c
+operator|.
+name|isTrue
+argument_list|(
+literal|"($0,$0) CONTAINS ($0,$0)"
+argument_list|)
+expr_stmt|;
+name|c
+operator|.
+name|isFalse
+argument_list|(
+literal|"($0,$1) CONTAINS ($2,$3)"
+argument_list|)
+expr_stmt|;
+name|c
+operator|.
+name|isFalse
+argument_list|(
+literal|"($0,$1) CONTAINS ($1,$2)"
+argument_list|)
+expr_stmt|;
+name|c
+operator|.
+name|isFalse
+argument_list|(
+literal|"($0,$2) CONTAINS ($1,$3)"
+argument_list|)
+expr_stmt|;
+name|c
+operator|.
+name|isFalse
+argument_list|(
+literal|"($0,$2) CONTAINS ($3,$1)"
+argument_list|)
+expr_stmt|;
+name|c
+operator|.
+name|isFalse
+argument_list|(
+literal|"($2,$0) CONTAINS ($3,$1)"
+argument_list|)
+expr_stmt|;
+name|c
+operator|.
+name|isFalse
+argument_list|(
+literal|"($3,$2) CONTAINS ($1,$0)"
+argument_list|)
+expr_stmt|;
+name|c
+operator|.
+name|isFalse
+argument_list|(
+literal|"($2,$3) CONTAINS ($0,$2)"
+argument_list|)
+expr_stmt|;
+name|c
+operator|.
+name|isFalse
+argument_list|(
+literal|"($2,$3) CONTAINS ($2,$0)"
+argument_list|)
+expr_stmt|;
+name|c
+operator|.
+name|isFalse
+argument_list|(
+literal|"($3,$2) CONTAINS ($2,$0)"
+argument_list|)
+expr_stmt|;
+name|c
+operator|.
+name|isTrue
+argument_list|(
+literal|"($0,$2) CONTAINS ($2,$0)"
+argument_list|)
+expr_stmt|;
+name|c
+operator|.
+name|isTrue
+argument_list|(
+literal|"($0,$3) CONTAINS ($1,$3)"
+argument_list|)
+expr_stmt|;
+name|c
+operator|.
+name|isTrue
+argument_list|(
+literal|"($0,$3) CONTAINS ($3,$3)"
+argument_list|)
+expr_stmt|;
+name|c
+operator|.
+name|isTrue
+argument_list|(
+literal|"($3,$0) CONTAINS ($3,$3)"
+argument_list|)
+expr_stmt|;
+name|c
+operator|.
+name|isTrue
+argument_list|(
+literal|"($3,$0) CONTAINS ($0,$0)"
+argument_list|)
+expr_stmt|;
+name|c
+operator|.
+name|isTrue
+argument_list|(
+literal|"($0,$0) CONTAINS $0"
+argument_list|)
+expr_stmt|;
+name|c
+operator|.
+name|isTrue
+argument_list|(
+literal|"($3,$0) CONTAINS $0"
+argument_list|)
+expr_stmt|;
+name|c
+operator|.
+name|isTrue
+argument_list|(
+literal|"($3,$0) CONTAINS $1"
+argument_list|)
+expr_stmt|;
+name|c
+operator|.
+name|isTrue
+argument_list|(
+literal|"($3,$0) CONTAINS $2"
+argument_list|)
+expr_stmt|;
+name|c
+operator|.
+name|isTrue
+argument_list|(
+literal|"($3,$0) CONTAINS $3"
+argument_list|)
+expr_stmt|;
+name|c
+operator|.
+name|isTrue
+argument_list|(
+literal|"($0,$3) CONTAINS $0"
+argument_list|)
+expr_stmt|;
+name|c
+operator|.
+name|isTrue
+argument_list|(
+literal|"($0,$3) CONTAINS $1"
+argument_list|)
+expr_stmt|;
+name|c
+operator|.
+name|isTrue
+argument_list|(
+literal|"($0,$3) CONTAINS $2"
+argument_list|)
+expr_stmt|;
+name|c
+operator|.
+name|isTrue
+argument_list|(
+literal|"($0,$3) CONTAINS $3"
+argument_list|)
+expr_stmt|;
+name|c
+operator|.
+name|isFalse
+argument_list|(
+literal|"($1,$3) CONTAINS $0"
+argument_list|)
+expr_stmt|;
+name|c
+operator|.
+name|isFalse
+argument_list|(
+literal|"($1,$2) CONTAINS $3"
+argument_list|)
+expr_stmt|;
+name|c
+operator|.
+name|isTrue
+argument_list|(
+literal|"($0,$0) EQUALS ($0,$0)"
+argument_list|)
+expr_stmt|;
+name|c
+operator|.
+name|isFalse
+argument_list|(
+literal|"($0,$1) EQUALS ($2,$3)"
+argument_list|)
+expr_stmt|;
+name|c
+operator|.
+name|isFalse
+argument_list|(
+literal|"($0,$1) EQUALS ($1,$2)"
+argument_list|)
+expr_stmt|;
+name|c
+operator|.
+name|isFalse
+argument_list|(
+literal|"($0,$2) EQUALS ($1,$3)"
+argument_list|)
+expr_stmt|;
+name|c
+operator|.
+name|isFalse
+argument_list|(
+literal|"($0,$2) EQUALS ($3,$1)"
+argument_list|)
+expr_stmt|;
+name|c
+operator|.
+name|isFalse
+argument_list|(
+literal|"($2,$0) EQUALS ($3,$1)"
+argument_list|)
+expr_stmt|;
+name|c
+operator|.
+name|isFalse
+argument_list|(
+literal|"($3,$2) EQUALS ($1,$0)"
+argument_list|)
+expr_stmt|;
+name|c
+operator|.
+name|isFalse
+argument_list|(
+literal|"($2,$3) EQUALS ($0,$2)"
+argument_list|)
+expr_stmt|;
+name|c
+operator|.
+name|isFalse
+argument_list|(
+literal|"($2,$3) EQUALS ($2,$0)"
+argument_list|)
+expr_stmt|;
+name|c
+operator|.
+name|isFalse
+argument_list|(
+literal|"($3,$2) EQUALS ($2,$0)"
+argument_list|)
+expr_stmt|;
+name|c
+operator|.
+name|isTrue
+argument_list|(
+literal|"($0,$2) EQUALS ($2,$0)"
+argument_list|)
+expr_stmt|;
+name|c
+operator|.
+name|isFalse
+argument_list|(
+literal|"($0,$3) EQUALS ($1,$3)"
+argument_list|)
+expr_stmt|;
+name|c
+operator|.
+name|isFalse
+argument_list|(
+literal|"($0,$3) EQUALS ($3,$3)"
+argument_list|)
+expr_stmt|;
+name|c
+operator|.
+name|isFalse
+argument_list|(
+literal|"($3,$0) EQUALS ($3,$3)"
+argument_list|)
+expr_stmt|;
+name|c
+operator|.
+name|isFalse
+argument_list|(
+literal|"($3,$0) EQUALS ($0,$0)"
+argument_list|)
+expr_stmt|;
+name|c
+operator|.
+name|isTrue
+argument_list|(
+literal|"($0,$0) PRECEDES ($0,$0)"
+argument_list|)
+expr_stmt|;
+name|c
+operator|.
+name|isTrue
+argument_list|(
+literal|"($0,$1) PRECEDES ($2,$3)"
+argument_list|)
+expr_stmt|;
+name|c
+operator|.
+name|isTrue
+argument_list|(
+literal|"($0,$1) PRECEDES ($1,$2)"
+argument_list|)
+expr_stmt|;
+name|c
+operator|.
+name|isFalse
+argument_list|(
+literal|"($0,$2) PRECEDES ($1,$3)"
+argument_list|)
+expr_stmt|;
+name|c
+operator|.
+name|isFalse
+argument_list|(
+literal|"($0,$2) PRECEDES ($3,$1)"
+argument_list|)
+expr_stmt|;
+name|c
+operator|.
+name|isFalse
+argument_list|(
+literal|"($2,$0) PRECEDES ($3,$1)"
+argument_list|)
+expr_stmt|;
+name|c
+operator|.
+name|isFalse
+argument_list|(
+literal|"($3,$2) PRECEDES ($1,$0)"
+argument_list|)
+expr_stmt|;
+name|c
+operator|.
+name|isFalse
+argument_list|(
+literal|"($2,$3) PRECEDES ($0,$2)"
+argument_list|)
+expr_stmt|;
+name|c
+operator|.
+name|isFalse
+argument_list|(
+literal|"($2,$3) PRECEDES ($2,$0)"
+argument_list|)
+expr_stmt|;
+name|c
+operator|.
+name|isFalse
+argument_list|(
+literal|"($3,$2) PRECEDES ($2,$0)"
+argument_list|)
+expr_stmt|;
+name|c
+operator|.
+name|isFalse
+argument_list|(
+literal|"($0,$2) PRECEDES ($2,$0)"
+argument_list|)
+expr_stmt|;
+name|c
+operator|.
+name|isFalse
+argument_list|(
+literal|"($0,$3) PRECEDES ($1,$3)"
+argument_list|)
+expr_stmt|;
+name|c
+operator|.
+name|isTrue
+argument_list|(
+literal|"($0,$3) PRECEDES ($3,$3)"
+argument_list|)
+expr_stmt|;
+name|c
+operator|.
+name|isTrue
+argument_list|(
+literal|"($3,$0) PRECEDES ($3,$3)"
+argument_list|)
+expr_stmt|;
+name|c
+operator|.
+name|isFalse
+argument_list|(
+literal|"($3,$0) PRECEDES ($0,$0)"
+argument_list|)
+expr_stmt|;
+name|c
+operator|.
+name|isTrue
+argument_list|(
+literal|"($0,$0) SUCCEEDS ($0,$0)"
+argument_list|)
+expr_stmt|;
+name|c
+operator|.
+name|isFalse
+argument_list|(
+literal|"($0,$1) SUCCEEDS ($2,$3)"
+argument_list|)
+expr_stmt|;
+name|c
+operator|.
+name|isFalse
+argument_list|(
+literal|"($0,$1) SUCCEEDS ($1,$2)"
+argument_list|)
+expr_stmt|;
+name|c
+operator|.
+name|isFalse
+argument_list|(
+literal|"($0,$2) SUCCEEDS ($1,$3)"
+argument_list|)
+expr_stmt|;
+name|c
+operator|.
+name|isFalse
+argument_list|(
+literal|"($0,$2) SUCCEEDS ($3,$1)"
+argument_list|)
+expr_stmt|;
+name|c
+operator|.
+name|isFalse
+argument_list|(
+literal|"($2,$0) SUCCEEDS ($3,$1)"
+argument_list|)
+expr_stmt|;
+name|c
+operator|.
+name|isTrue
+argument_list|(
+literal|"($3,$2) SUCCEEDS ($1,$0)"
+argument_list|)
+expr_stmt|;
+name|c
+operator|.
+name|isTrue
+argument_list|(
+literal|"($2,$3) SUCCEEDS ($0,$2)"
+argument_list|)
+expr_stmt|;
+name|c
+operator|.
+name|isTrue
+argument_list|(
+literal|"($2,$3) SUCCEEDS ($2,$0)"
+argument_list|)
+expr_stmt|;
+name|c
+operator|.
+name|isTrue
+argument_list|(
+literal|"($3,$2) SUCCEEDS ($2,$0)"
+argument_list|)
+expr_stmt|;
+name|c
+operator|.
+name|isFalse
+argument_list|(
+literal|"($0,$2) SUCCEEDS ($2,$0)"
+argument_list|)
+expr_stmt|;
+name|c
+operator|.
+name|isFalse
+argument_list|(
+literal|"($0,$3) SUCCEEDS ($1,$3)"
+argument_list|)
+expr_stmt|;
+name|c
+operator|.
+name|isFalse
+argument_list|(
+literal|"($0,$3) SUCCEEDS ($3,$3)"
+argument_list|)
+expr_stmt|;
+name|c
+operator|.
+name|isFalse
+argument_list|(
+literal|"($3,$0) SUCCEEDS ($3,$3)"
+argument_list|)
+expr_stmt|;
+name|c
+operator|.
+name|isTrue
+argument_list|(
+literal|"($3,$0) SUCCEEDS ($0,$0)"
+argument_list|)
+expr_stmt|;
+name|c
+operator|.
+name|isTrue
+argument_list|(
+literal|"($0,$0) IMMEDIATELY PRECEDES ($0,$0)"
+argument_list|)
+expr_stmt|;
+name|c
+operator|.
+name|isFalse
+argument_list|(
+literal|"($0,$1) IMMEDIATELY PRECEDES ($2,$3)"
+argument_list|)
+expr_stmt|;
+name|c
+operator|.
+name|isTrue
+argument_list|(
+literal|"($0,$1) IMMEDIATELY PRECEDES ($1,$2)"
+argument_list|)
+expr_stmt|;
+name|c
+operator|.
+name|isFalse
+argument_list|(
+literal|"($0,$2) IMMEDIATELY PRECEDES ($1,$3)"
+argument_list|)
+expr_stmt|;
+name|c
+operator|.
+name|isFalse
+argument_list|(
+literal|"($0,$2) IMMEDIATELY PRECEDES ($3,$1)"
+argument_list|)
+expr_stmt|;
+name|c
+operator|.
+name|isFalse
+argument_list|(
+literal|"($2,$0) IMMEDIATELY PRECEDES ($3,$1)"
+argument_list|)
+expr_stmt|;
+name|c
+operator|.
+name|isFalse
+argument_list|(
+literal|"($3,$2) IMMEDIATELY PRECEDES ($1,$0)"
+argument_list|)
+expr_stmt|;
+name|c
+operator|.
+name|isFalse
+argument_list|(
+literal|"($2,$3) IMMEDIATELY PRECEDES ($0,$2)"
+argument_list|)
+expr_stmt|;
+name|c
+operator|.
+name|isFalse
+argument_list|(
+literal|"($2,$3) IMMEDIATELY PRECEDES ($2,$0)"
+argument_list|)
+expr_stmt|;
+name|c
+operator|.
+name|isFalse
+argument_list|(
+literal|"($3,$2) IMMEDIATELY PRECEDES ($2,$0)"
+argument_list|)
+expr_stmt|;
+name|c
+operator|.
+name|isFalse
+argument_list|(
+literal|"($0,$2) IMMEDIATELY PRECEDES ($2,$0)"
+argument_list|)
+expr_stmt|;
+name|c
+operator|.
+name|isFalse
+argument_list|(
+literal|"($0,$3) IMMEDIATELY PRECEDES ($1,$3)"
+argument_list|)
+expr_stmt|;
+name|c
+operator|.
+name|isTrue
+argument_list|(
+literal|"($0,$3) IMMEDIATELY PRECEDES ($3,$3)"
+argument_list|)
+expr_stmt|;
+name|c
+operator|.
+name|isTrue
+argument_list|(
+literal|"($3,$0) IMMEDIATELY PRECEDES ($3,$3)"
+argument_list|)
+expr_stmt|;
+name|c
+operator|.
+name|isFalse
+argument_list|(
+literal|"($3,$0) IMMEDIATELY PRECEDES ($0,$0)"
+argument_list|)
+expr_stmt|;
+name|c
+operator|.
+name|isTrue
+argument_list|(
+literal|"($0,$0) IMMEDIATELY SUCCEEDS ($0,$0)"
+argument_list|)
+expr_stmt|;
+name|c
+operator|.
+name|isFalse
+argument_list|(
+literal|"($0,$1) IMMEDIATELY SUCCEEDS ($2,$3)"
+argument_list|)
+expr_stmt|;
+name|c
+operator|.
+name|isFalse
+argument_list|(
+literal|"($0,$1) IMMEDIATELY SUCCEEDS ($1,$2)"
+argument_list|)
+expr_stmt|;
+name|c
+operator|.
+name|isFalse
+argument_list|(
+literal|"($0,$2) IMMEDIATELY SUCCEEDS ($1,$3)"
+argument_list|)
+expr_stmt|;
+name|c
+operator|.
+name|isFalse
+argument_list|(
+literal|"($0,$2) IMMEDIATELY SUCCEEDS ($3,$1)"
+argument_list|)
+expr_stmt|;
+name|c
+operator|.
+name|isFalse
+argument_list|(
+literal|"($2,$0) IMMEDIATELY SUCCEEDS ($3,$1)"
+argument_list|)
+expr_stmt|;
+name|c
+operator|.
+name|isFalse
+argument_list|(
+literal|"($3,$2) IMMEDIATELY SUCCEEDS ($1,$0)"
+argument_list|)
+expr_stmt|;
+name|c
+operator|.
+name|isTrue
+argument_list|(
+literal|"($2,$3) IMMEDIATELY SUCCEEDS ($0,$2)"
+argument_list|)
+expr_stmt|;
+name|c
+operator|.
+name|isTrue
+argument_list|(
+literal|"($2,$3) IMMEDIATELY SUCCEEDS ($2,$0)"
+argument_list|)
+expr_stmt|;
+name|c
+operator|.
+name|isTrue
+argument_list|(
+literal|"($3,$2) IMMEDIATELY SUCCEEDS ($2,$0)"
+argument_list|)
+expr_stmt|;
+name|c
+operator|.
+name|isFalse
+argument_list|(
+literal|"($0,$2) IMMEDIATELY SUCCEEDS ($2,$0)"
+argument_list|)
+expr_stmt|;
+name|c
+operator|.
+name|isFalse
+argument_list|(
+literal|"($0,$3) IMMEDIATELY SUCCEEDS ($1,$3)"
+argument_list|)
+expr_stmt|;
+name|c
+operator|.
+name|isFalse
+argument_list|(
+literal|"($0,$3) IMMEDIATELY SUCCEEDS ($3,$3)"
+argument_list|)
+expr_stmt|;
+name|c
+operator|.
+name|isFalse
+argument_list|(
+literal|"($3,$0) IMMEDIATELY SUCCEEDS ($3,$3)"
+argument_list|)
+expr_stmt|;
+name|c
+operator|.
+name|isTrue
+argument_list|(
+literal|"($3,$0) IMMEDIATELY SUCCEEDS ($0,$0)"
 argument_list|)
 expr_stmt|;
 block|}

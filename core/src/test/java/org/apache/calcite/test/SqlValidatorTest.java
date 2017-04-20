@@ -12920,7 +12920,7 @@ argument_list|)
 expr_stmt|;
 name|checkExpFails
 argument_list|(
-literal|"1> 5 ^or (1, 2) in (3, 4)^"
+literal|"1> 5 or ^(1, 2) in (3, 4)^"
 argument_list|,
 name|ERR_IN_OPERANDS_INCOMPATIBLE
 argument_list|)
@@ -18723,7 +18723,18 @@ parameter_list|()
 block|{
 name|checkExpType
 argument_list|(
-literal|"(date '1-2-3', date '1-2-3') overlaps (date '1-2-3', date '1-2-3')"
+literal|"(date '1-2-3', date '1-2-3')\n"
+operator|+
+literal|" overlaps (date '1-2-3', date '1-2-3')"
+argument_list|,
+literal|"BOOLEAN NOT NULL"
+argument_list|)
+expr_stmt|;
+name|checkExpType
+argument_list|(
+literal|"period (date '1-2-3', date '1-2-3')\n"
+operator|+
+literal|" overlaps period (date '1-2-3', date '1-2-3')"
 argument_list|,
 literal|"BOOLEAN NOT NULL"
 argument_list|)
@@ -18747,21 +18758,373 @@ name|checkWholeExpFails
 argument_list|(
 literal|"(timestamp '1-2-3 4:5:6', timestamp '1-2-3 4:5:6' ) overlaps (time '4:5:6', interval '1 2:3:4.5' day to second)"
 argument_list|,
-literal|"(?s).*Cannot apply 'OVERLAPS' to arguments of type '.<TIMESTAMP.0.>,<TIMESTAMP.0.>. OVERLAPS .<TIME.0.>,<INTERVAL DAY TO SECOND>.*"
+literal|"(?s).*Cannot apply 'OVERLAPS' to arguments of type .*"
 argument_list|)
 expr_stmt|;
 name|checkWholeExpFails
 argument_list|(
 literal|"(time '4:5:6', timestamp '1-2-3 4:5:6' ) overlaps (time '4:5:6', interval '1 2:3:4.5' day to second)"
 argument_list|,
-literal|"(?s).*Cannot apply 'OVERLAPS' to arguments of type '.<TIME.0.>,<TIMESTAMP.0.>. OVERLAPS .<TIME.0.>,<INTERVAL DAY TO SECOND>.'.*"
+literal|"(?s).*Cannot apply 'OVERLAPS' to arguments of type .*"
 argument_list|)
 expr_stmt|;
 name|checkWholeExpFails
 argument_list|(
 literal|"(time '4:5:6', time '4:5:6' ) overlaps (time '4:5:6', date '1-2-3')"
 argument_list|,
-literal|"(?s).*Cannot apply 'OVERLAPS' to arguments of type '.<TIME.0.>,<TIME.0.>. OVERLAPS .<TIME.0.>,<DATE>.'.*"
+literal|"(?s).*Cannot apply 'OVERLAPS' to arguments of type .*"
+argument_list|)
+expr_stmt|;
+name|checkWholeExpFails
+argument_list|(
+literal|"1 overlaps 2"
+argument_list|,
+literal|"(?s).*Cannot apply 'OVERLAPS' to arguments of type "
+operator|+
+literal|"'<INTEGER> OVERLAPS<INTEGER>'\\. Supported form.*"
+argument_list|)
+expr_stmt|;
+name|checkExpType
+argument_list|(
+literal|"true\n"
+operator|+
+literal|"or (date '1-2-3', date '1-2-3')\n"
+operator|+
+literal|"   overlaps (date '1-2-3', date '1-2-3')\n"
+operator|+
+literal|"or false"
+argument_list|,
+literal|"BOOLEAN NOT NULL"
+argument_list|)
+expr_stmt|;
+comment|// row with 3 arguments as left argument to overlaps
+name|checkExpFails
+argument_list|(
+literal|"true\n"
+operator|+
+literal|"or ^(date '1-2-3', date '1-2-3', date '1-2-3')\n"
+operator|+
+literal|"   overlaps (date '1-2-3', date '1-2-3')^\n"
+operator|+
+literal|"or false"
+argument_list|,
+literal|"(?s).*Cannot apply 'OVERLAPS' to arguments of type .*"
+argument_list|)
+expr_stmt|;
+comment|// row with 3 arguments as right argument to overlaps
+name|checkExpFails
+argument_list|(
+literal|"true\n"
+operator|+
+literal|"or ^(date '1-2-3', date '1-2-3')\n"
+operator|+
+literal|"  overlaps (date '1-2-3', date '1-2-3', date '1-2-3')^\n"
+operator|+
+literal|"or false"
+argument_list|,
+literal|"(?s).*Cannot apply 'OVERLAPS' to arguments of type .*"
+argument_list|)
+expr_stmt|;
+name|checkExpFails
+argument_list|(
+literal|"^period (date '1-2-3', date '1-2-3')\n"
+operator|+
+literal|"   overlaps (date '1-2-3', date '1-2-3', date '1-2-3')^"
+argument_list|,
+literal|"(?s).*Cannot apply 'OVERLAPS' to arguments of type .*"
+argument_list|)
+expr_stmt|;
+name|checkExpFails
+argument_list|(
+literal|"true\n"
+operator|+
+literal|"or ^(1, 2) overlaps (2, 3)^\n"
+operator|+
+literal|"or false"
+argument_list|,
+literal|"(?s).*Cannot apply 'OVERLAPS' to arguments of type .*"
+argument_list|)
+expr_stmt|;
+comment|// Other operators with similar syntax
+name|String
+index|[]
+name|ops
+init|=
+block|{
+literal|"overlaps"
+block|,
+literal|"contains"
+block|,
+literal|"equals"
+block|,
+literal|"precedes"
+block|,
+literal|"succeeds"
+block|,
+literal|"immediately precedes"
+block|,
+literal|"immediately succeeds"
+block|}
+decl_stmt|;
+for|for
+control|(
+name|String
+name|op
+range|:
+name|ops
+control|)
+block|{
+name|checkExpType
+argument_list|(
+literal|"period (date '1-2-3', date '1-2-3')\n"
+operator|+
+literal|" "
+operator|+
+name|op
+operator|+
+literal|" period (date '1-2-3', date '1-2-3')"
+argument_list|,
+literal|"BOOLEAN NOT NULL"
+argument_list|)
+expr_stmt|;
+name|checkExpType
+argument_list|(
+literal|"(date '1-2-3', date '1-2-3')\n"
+operator|+
+literal|" "
+operator|+
+name|op
+operator|+
+literal|" (date '1-2-3', date '1-2-3')"
+argument_list|,
+literal|"BOOLEAN NOT NULL"
+argument_list|)
+expr_stmt|;
+block|}
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testContains
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|cannotApply
+init|=
+literal|"(?s).*Cannot apply 'CONTAINS' to arguments of type .*"
+decl_stmt|;
+name|checkExpType
+argument_list|(
+literal|"(date '1-2-3', date '1-2-3')\n"
+operator|+
+literal|" contains (date '1-2-3', date '1-2-3')"
+argument_list|,
+literal|"BOOLEAN NOT NULL"
+argument_list|)
+expr_stmt|;
+name|checkExpType
+argument_list|(
+literal|"period (date '1-2-3', date '1-2-3')\n"
+operator|+
+literal|" contains period (date '1-2-3', date '1-2-3')"
+argument_list|,
+literal|"BOOLEAN NOT NULL"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"(date '1-2-3', date '1-2-3')\n"
+operator|+
+literal|"  contains (date '1-2-3', interval '1' year)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"(time '1:2:3', interval '1' second)\n"
+operator|+
+literal|" contains (time '23:59:59', time '1:2:3')"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"(timestamp '1-2-3 4:5:6', timestamp '1-2-3 4:5:6')\n"
+operator|+
+literal|" contains (timestamp '1-2-3 4:5:6', interval '1 2:3:4.5' day to second)"
+argument_list|)
+expr_stmt|;
+comment|// period contains point
+name|checkExp
+argument_list|(
+literal|"(date '1-2-3', date '1-2-3')\n"
+operator|+
+literal|"  contains date '1-2-3'"
+argument_list|)
+expr_stmt|;
+comment|// same, with "period" keyword
+name|checkExp
+argument_list|(
+literal|"period (date '1-2-3', date '1-2-3')\n"
+operator|+
+literal|"  contains date '1-2-3'"
+argument_list|)
+expr_stmt|;
+comment|// point contains period
+name|checkWholeExpFails
+argument_list|(
+literal|"date '1-2-3'\n"
+operator|+
+literal|"  contains (date '1-2-3', date '1-2-3')"
+argument_list|,
+name|cannotApply
+argument_list|)
+expr_stmt|;
+comment|// same, with "period" keyword
+name|checkWholeExpFails
+argument_list|(
+literal|"date '1-2-3'\n"
+operator|+
+literal|"  contains period (date '1-2-3', date '1-2-3')"
+argument_list|,
+name|cannotApply
+argument_list|)
+expr_stmt|;
+comment|// point contains point
+name|checkWholeExpFails
+argument_list|(
+literal|"date '1-2-3' contains date '1-2-3'"
+argument_list|,
+name|cannotApply
+argument_list|)
+expr_stmt|;
+name|checkWholeExpFails
+argument_list|(
+literal|"(timestamp '1-2-3 4:5:6', timestamp '1-2-3 4:5:6' )\n"
+operator|+
+literal|" contains (time '4:5:6', interval '1 2:3:4.5' day to second)"
+argument_list|,
+name|cannotApply
+argument_list|)
+expr_stmt|;
+name|checkWholeExpFails
+argument_list|(
+literal|"(time '4:5:6', timestamp '1-2-3 4:5:6' )\n"
+operator|+
+literal|" contains (time '4:5:6', interval '1 2:3:4.5' day to second)"
+argument_list|,
+name|cannotApply
+argument_list|)
+expr_stmt|;
+name|checkWholeExpFails
+argument_list|(
+literal|"(time '4:5:6', time '4:5:6' )\n"
+operator|+
+literal|"  contains (time '4:5:6', date '1-2-3')"
+argument_list|,
+name|cannotApply
+argument_list|)
+expr_stmt|;
+name|checkWholeExpFails
+argument_list|(
+literal|"1 contains 2"
+argument_list|,
+name|cannotApply
+argument_list|)
+expr_stmt|;
+comment|// row with 3 arguments
+name|checkExpFails
+argument_list|(
+literal|"true\n"
+operator|+
+literal|"or ^(date '1-2-3', date '1-2-3', date '1-2-3')\n"
+operator|+
+literal|"  contains (date '1-2-3', date '1-2-3')^\n"
+operator|+
+literal|"or false"
+argument_list|,
+name|cannotApply
+argument_list|)
+expr_stmt|;
+name|checkExpType
+argument_list|(
+literal|"true\n"
+operator|+
+literal|"or (date '1-2-3', date '1-2-3')\n"
+operator|+
+literal|"  contains (date '1-2-3', date '1-2-3')\n"
+operator|+
+literal|"or false"
+argument_list|,
+literal|"BOOLEAN NOT NULL"
+argument_list|)
+expr_stmt|;
+comment|// second argument is a point
+name|checkExpType
+argument_list|(
+literal|"true\n"
+operator|+
+literal|"or (date '1-2-3', date '1-2-3')\n"
+operator|+
+literal|"  contains date '1-2-3'\n"
+operator|+
+literal|"or false"
+argument_list|,
+literal|"BOOLEAN NOT NULL"
+argument_list|)
+expr_stmt|;
+comment|// first argument may be null, so result may be null
+name|checkExpType
+argument_list|(
+literal|"true\n"
+operator|+
+literal|"or (date '1-2-3',\n"
+operator|+
+literal|"     case 1 when 2 then date '1-2-3' else null end)\n"
+operator|+
+literal|"  contains date '1-2-3'\n"
+operator|+
+literal|"or false"
+argument_list|,
+literal|"BOOLEAN"
+argument_list|)
+expr_stmt|;
+comment|// second argument may be null, so result may be null
+name|checkExpType
+argument_list|(
+literal|"true\n"
+operator|+
+literal|"or (date '1-2-3', date '1-2-3')\n"
+operator|+
+literal|"  contains case 1 when 1 then date '1-2-3' else null end\n"
+operator|+
+literal|"or false"
+argument_list|,
+literal|"BOOLEAN"
+argument_list|)
+expr_stmt|;
+name|checkExpFails
+argument_list|(
+literal|"true\n"
+operator|+
+literal|"or ^period (date '1-2-3', date '1-2-3')\n"
+operator|+
+literal|"  contains period (date '1-2-3', time '4:5:6')^\n"
+operator|+
+literal|"or false"
+argument_list|,
+name|cannotApply
+argument_list|)
+expr_stmt|;
+name|checkExpFails
+argument_list|(
+literal|"true\n"
+operator|+
+literal|"or ^(1, 2) contains (2, 3)^\n"
+operator|+
+literal|"or false"
+argument_list|,
+name|cannotApply
 argument_list|)
 expr_stmt|;
 block|}
@@ -22671,15 +23034,27 @@ literal|"> left\n"
 operator|+
 literal|">= left\n"
 operator|+
+literal|"CONTAINS left\n"
+operator|+
+literal|"EQUALS left\n"
+operator|+
+literal|"IMMEDIATELY PRECEDES left\n"
+operator|+
+literal|"IMMEDIATELY SUCCEEDS left\n"
+operator|+
 literal|"IS DISTINCT FROM left\n"
 operator|+
 literal|"IS NOT DISTINCT FROM left\n"
 operator|+
 literal|"MEMBER OF left\n"
 operator|+
-literal|"OVERLAPS -\n"
+literal|"OVERLAPS left\n"
+operator|+
+literal|"PRECEDES left\n"
 operator|+
 literal|"SUBMULTISET OF left\n"
+operator|+
+literal|"SUCCEEDS left\n"
 operator|+
 literal|"\n"
 operator|+

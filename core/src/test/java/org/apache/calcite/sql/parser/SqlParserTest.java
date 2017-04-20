@@ -6491,51 +6491,153 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testPeriod
+parameter_list|()
+block|{
+comment|// We don't have a PERIOD constructor currently;
+comment|// ROW constructor is sufficient for now.
+name|checkExp
+argument_list|(
+literal|"period (date '1969-01-05', interval '2-3' year to month)"
+argument_list|,
+literal|"(ROW(DATE '1969-01-05', INTERVAL '2-3' YEAR TO MONTH))"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testOverlaps
 parameter_list|()
 block|{
+specifier|final
+name|String
+index|[]
+name|ops
+init|=
+block|{
+literal|"overlaps"
+block|,
+literal|"equals"
+block|,
+literal|"precedes"
+block|,
+literal|"succeeds"
+block|,
+literal|"immediately precedes"
+block|,
+literal|"immediately succeeds"
+block|}
+decl_stmt|;
+specifier|final
+name|String
+index|[]
+name|periods
+init|=
+block|{
+literal|"period "
+block|,
+literal|""
+block|}
+decl_stmt|;
+for|for
+control|(
+name|String
+name|period
+range|:
+name|periods
+control|)
+block|{
+for|for
+control|(
+name|String
+name|op
+range|:
+name|ops
+control|)
+block|{
+name|checkPeriodPredicate
+argument_list|(
+operator|new
+name|Checker
+argument_list|(
+name|op
+argument_list|,
+name|period
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+block|}
+block|}
+name|void
+name|checkPeriodPredicate
+parameter_list|(
+name|Checker
+name|checker
+parameter_list|)
+block|{
+name|checker
+operator|.
 name|checkExp
 argument_list|(
-literal|"(x,xx) overlaps (y,yy)"
+literal|"$p(x,xx) $op $p(y,yy)"
 argument_list|,
-literal|"((`X`, `XX`) OVERLAPS (`Y`, `YY`))"
+literal|"(PERIOD (`X`, `XX`) $op PERIOD (`Y`, `YY`))"
 argument_list|)
 expr_stmt|;
+name|checker
+operator|.
 name|checkExp
 argument_list|(
-literal|"(x,xx) overlaps (y,yy) or false"
+literal|"$p(x,xx) $op $p(y,yy) or false"
 argument_list|,
-literal|"(((`X`, `XX`) OVERLAPS (`Y`, `YY`)) OR FALSE)"
+literal|"((PERIOD (`X`, `XX`) $op PERIOD (`Y`, `YY`)) OR FALSE)"
 argument_list|)
 expr_stmt|;
+name|checker
+operator|.
 name|checkExp
 argument_list|(
-literal|"true and not (x,xx) overlaps (y,yy) or false"
+literal|"true and not $p(x,xx) $op $p(y,yy) or false"
 argument_list|,
-literal|"((TRUE AND (NOT ((`X`, `XX`) OVERLAPS (`Y`, `YY`)))) OR FALSE)"
+literal|"((TRUE AND (NOT (PERIOD (`X`, `XX`) $op PERIOD (`Y`, `YY`)))) OR FALSE)"
 argument_list|)
 expr_stmt|;
+if|if
+condition|(
+name|checker
+operator|.
+name|period
+operator|.
+name|isEmpty
+argument_list|()
+condition|)
+block|{
+name|checker
+operator|.
+name|checkExp
+argument_list|(
+literal|"$p(x,xx,xxx) $op $p(y,yy) or false"
+argument_list|,
+literal|"((PERIOD (`X`, `XX`) $op PERIOD (`Y`, `YY`)) OR FALSE)"
+argument_list|)
+expr_stmt|;
+block|}
+else|else
+block|{
+comment|// 3-argument rows are valid in the parser, rejected by the validator
+name|checker
+operator|.
 name|checkExpFails
 argument_list|(
-literal|"^(x,xx,xxx) overlaps (y,yy)^ or false"
+literal|"$p(x,xx^,^xxx) $op $p(y,yy) or false"
 argument_list|,
-literal|"(?s).*Illegal overlaps expression.*"
+literal|"(?s).*Encountered \",\" at .*"
 argument_list|)
 expr_stmt|;
-name|checkExpFails
-argument_list|(
-literal|"true or ^(x,xx,xxx) overlaps (y,yy,yyy)^ or false"
-argument_list|,
-literal|"(?s).*Illegal overlaps expression.*"
-argument_list|)
-expr_stmt|;
-name|checkExpFails
-argument_list|(
-literal|"^(x,xx) overlaps (y,yy,yyy)^ or false"
-argument_list|,
-literal|"(?s).*Illegal overlaps expression.*"
-argument_list|)
-expr_stmt|;
+block|}
 block|}
 annotation|@
 name|Test
@@ -26064,6 +26166,137 @@ expr_stmt|;
 return|return
 name|this
 return|;
+block|}
+block|}
+comment|/** Runs tests on period operators such as OVERLAPS, IMMEDIATELY PRECEDES. */
+specifier|private
+class|class
+name|Checker
+block|{
+specifier|final
+name|String
+name|op
+decl_stmt|;
+specifier|final
+name|String
+name|period
+decl_stmt|;
+name|Checker
+parameter_list|(
+name|String
+name|op
+parameter_list|,
+name|String
+name|period
+parameter_list|)
+block|{
+name|this
+operator|.
+name|op
+operator|=
+name|op
+expr_stmt|;
+name|this
+operator|.
+name|period
+operator|=
+name|period
+expr_stmt|;
+block|}
+specifier|public
+name|void
+name|checkExp
+parameter_list|(
+name|String
+name|sql
+parameter_list|,
+name|String
+name|expected
+parameter_list|)
+block|{
+name|SqlParserTest
+operator|.
+name|this
+operator|.
+name|checkExp
+argument_list|(
+name|sql
+operator|.
+name|replace
+argument_list|(
+literal|"$op"
+argument_list|,
+name|op
+argument_list|)
+operator|.
+name|replace
+argument_list|(
+literal|"$p"
+argument_list|,
+name|period
+argument_list|)
+argument_list|,
+name|expected
+operator|.
+name|replace
+argument_list|(
+literal|"$op"
+argument_list|,
+name|op
+operator|.
+name|toUpperCase
+argument_list|(
+name|Locale
+operator|.
+name|ROOT
+argument_list|)
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+specifier|public
+name|void
+name|checkExpFails
+parameter_list|(
+name|String
+name|sql
+parameter_list|,
+name|String
+name|expected
+parameter_list|)
+block|{
+name|SqlParserTest
+operator|.
+name|this
+operator|.
+name|checkExpFails
+argument_list|(
+name|sql
+operator|.
+name|replace
+argument_list|(
+literal|"$op"
+argument_list|,
+name|op
+argument_list|)
+operator|.
+name|replace
+argument_list|(
+literal|"$p"
+argument_list|,
+name|period
+argument_list|)
+argument_list|,
+name|expected
+operator|.
+name|replace
+argument_list|(
+literal|"$op"
+argument_list|,
+name|op
+argument_list|)
+argument_list|)
+expr_stmt|;
 block|}
 block|}
 block|}

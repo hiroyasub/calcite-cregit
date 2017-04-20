@@ -704,6 +704,8 @@ literal|"KEYWORD(OVERLAY)"
 argument_list|,
 literal|"KEYWORD(PERCENT_RANK)"
 argument_list|,
+literal|"KEYWORD(PERIOD)"
+argument_list|,
 literal|"KEYWORD(POSITION)"
 argument_list|,
 literal|"KEYWORD(POWER)"
@@ -902,6 +904,12 @@ literal|"KEYWORD(AND)"
 argument_list|,
 literal|"KEYWORD(BETWEEN)"
 argument_list|,
+literal|"KEYWORD(CONTAINS)"
+argument_list|,
+literal|"KEYWORD(EQUALS)"
+argument_list|,
+literal|"KEYWORD(IMMEDIATELY)"
+argument_list|,
 literal|"KEYWORD(IN)"
 argument_list|,
 literal|"KEYWORD(IS)"
@@ -916,9 +924,15 @@ literal|"KEYWORD(NOT)"
 argument_list|,
 literal|"KEYWORD(OR)"
 argument_list|,
+literal|"KEYWORD(OVERLAPS)"
+argument_list|,
+literal|"KEYWORD(PRECEDES)"
+argument_list|,
 literal|"KEYWORD(SIMILAR)"
 argument_list|,
 literal|"KEYWORD(SUBMULTISET)"
+argument_list|,
+literal|"KEYWORD(SUCCEEDS)"
 argument_list|,
 literal|"KEYWORD([)"
 argument_list|,

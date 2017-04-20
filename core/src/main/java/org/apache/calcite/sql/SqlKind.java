@@ -210,8 +210,35 @@ comment|// other infix
 comment|/**    * Dot    */
 name|DOT
 block|,
-comment|/**    * The "OVERLAPS" operator.    */
+comment|/**    * The "OVERLAPS" operator for periods.    */
 name|OVERLAPS
+block|,
+comment|/**    * The "CONTAINS" operator for periods.    */
+name|CONTAINS
+block|,
+comment|/**    * The "PRECEDES" operator for periods.    */
+name|PRECEDES
+block|,
+comment|/**    * The "IMMEDIATELY PRECEDES" operator for periods.    */
+name|IMMEDIATELY_PRECEDES
+argument_list|(
+literal|"IMMEDIATELY PRECEDES"
+argument_list|)
+block|,
+comment|/**    * The "SUCCEEDS" operator for periods.    */
+name|SUCCEEDS
+block|,
+comment|/**    * The "IMMEDIATELY SUCCEEDS" operator for periods.    */
+name|IMMEDIATELY_SUCCEEDS
+argument_list|(
+literal|"IMMEDIATELY SUCCEEDS"
+argument_list|)
+block|,
+comment|/**    * The "EQUALS" operator for periods.    */
+name|PERIOD_EQUALS
+argument_list|(
+literal|"EQUALS"
+argument_list|)
 block|,
 comment|/**    * The "LIKE" operator.    */
 name|LIKE
@@ -1023,6 +1050,33 @@ operator|.
 name|ROOT
 argument_list|)
 decl_stmt|;
+specifier|public
+specifier|final
+name|String
+name|sql
+decl_stmt|;
+name|SqlKind
+parameter_list|()
+block|{
+name|sql
+operator|=
+name|name
+argument_list|()
+expr_stmt|;
+block|}
+name|SqlKind
+parameter_list|(
+name|String
+name|sql
+parameter_list|)
+block|{
+name|this
+operator|.
+name|sql
+operator|=
+name|sql
+expr_stmt|;
+block|}
 comment|/** Returns the kind that corresponds to this operator but in the opposite    * direction. Or returns this, if this kind is not reversible.    *    *<p>For example, {@code GREATER_THAN.reverse()} returns {@link #LESS_THAN}.    */
 specifier|public
 name|SqlKind

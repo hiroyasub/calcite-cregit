@@ -1230,7 +1230,7 @@ literal|true
 argument_list|,
 literal|"(x,xx) overlaps (y,yy) or x is not null"
 argument_list|,
-literal|"(`X`, `XX`) OVERLAPS (`Y`, `YY`) OR `X` IS NOT NULL"
+literal|"PERIOD (`X`, `XX`) OVERLAPS PERIOD (`Y`, `YY`) OR `X` IS NOT NULL"
 argument_list|)
 expr_stmt|;
 block|}
