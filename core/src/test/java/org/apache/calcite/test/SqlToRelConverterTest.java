@@ -5284,6 +5284,36 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testTumble
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select STREAM\n"
+operator|+
+literal|"  TUMBLE_START(rowtime, INTERVAL '1' MINUTE) AS s,\n"
+operator|+
+literal|"  TUMBLE_END(rowtime, INTERVAL '1' MINUTE) AS e\n"
+operator|+
+literal|"from Shipments\n"
+operator|+
+literal|"GROUP BY TUMBLE(rowtime, INTERVAL '1' MINUTE)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testNotNotIn
 parameter_list|()
 block|{
@@ -5579,6 +5609,125 @@ decl_stmt|;
 name|sql
 argument_list|(
 name|sql2
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testTumbleTable
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select stream"
+operator|+
+literal|" tumble_end(rowtime, interval '2' hour) as rowtime, productId\n"
+operator|+
+literal|"from orders\n"
+operator|+
+literal|"group by tumble(rowtime, interval '2' hour), productId"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+comment|/** As {@link #testTumbleTable()} but on a table where "rowtime" is at    * position 1 not 0. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testTumbleTableRowtimeNotFirstColumn
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select stream\n"
+operator|+
+literal|"   tumble_end(rowtime, interval '2' hour) as rowtime, orderId\n"
+operator|+
+literal|"from shipments\n"
+operator|+
+literal|"group by tumble(rowtime, interval '2' hour), orderId"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testHopTable
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select stream hop_start(rowtime, interval '1' hour,"
+operator|+
+literal|" interval '3' hour) as rowtime,\n"
+operator|+
+literal|"  count(*) as c\n"
+operator|+
+literal|"from orders\n"
+operator|+
+literal|"group by hop(rowtime, interval '1' hour, interval '3' hour)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSessionTable
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select stream session_start(rowtime, interval '1' hour)"
+operator|+
+literal|" as rowtime,\n"
+operator|+
+literal|"  session_end(rowtime, interval '1' hour),\n"
+operator|+
+literal|"  count(*) as c\n"
+operator|+
+literal|"from orders\n"
+operator|+
+literal|"group by session(rowtime, interval '1' hour)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
 argument_list|)
 operator|.
 name|ok
@@ -6086,7 +6235,7 @@ specifier|final
 name|String
 name|sql
 init|=
-literal|"insert into empnullables \n"
+literal|"insert into empnullables\n"
 operator|+
 literal|"values (50, 'Fred')"
 decl_stmt|;
@@ -6192,7 +6341,7 @@ specifier|final
 name|String
 name|sql
 init|=
-literal|"insert into empnullables \n"
+literal|"insert into empnullables\n"
 operator|+
 literal|"values (?, ?)"
 decl_stmt|;
@@ -6274,7 +6423,7 @@ specifier|final
 name|String
 name|sql
 init|=
-literal|"insert into empnullables_20 \n"
+literal|"insert into empnullables_20\n"
 operator|+
 literal|"values (10, 'Fred')"
 decl_stmt|;

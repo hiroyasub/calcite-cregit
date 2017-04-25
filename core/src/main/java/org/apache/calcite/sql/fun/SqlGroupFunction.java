@@ -121,8 +121,32 @@ name|SqlMonotonicity
 import|;
 end_import
 
+begin_import
+import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|collect
+operator|.
+name|ImmutableList
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|List
+import|;
+end_import
+
 begin_comment
-comment|/**  * SQL function that computes keys by which rows can be partitioned and  * aggregated.  *  *<p>Group functions always occur in the GROUP BY clause. They often have  * auxiliary functions that access information about the group. For example,  * {@code HOP} is a group function, and its auxiliary functions are  * {@code HOP_START} and {@code HOP_END}. Here they are used in a streaming  * query:  *  *<blockquote><pre>  * SELECT STREAM HOP_START(rowtime, INTERVAL '1' HOUR),  *   HOP_END(rowtime, INTERVAL '1' HOUR),  *   MIN(unitPrice)  * FROM Orders  * GROUP BY HOP(rowtime, INTERVAL '1' HOUR), productId  *</pre></blockquote>  */
+comment|/**  * SQL function that computes keys by which rows can be partitioned and  * aggregated.  *  *<p>Grouped window functions always occur in the GROUP BY clause. They often  * have auxiliary functions that access information about the group. For  * example, {@code HOP} is a group function, and its auxiliary functions are  * {@code HOP_START} and {@code HOP_END}. Here they are used in a streaming  * query:  *  *<blockquote><pre>  * SELECT STREAM HOP_START(rowtime, INTERVAL '1' HOUR),  *   HOP_END(rowtime, INTERVAL '1' HOUR),  *   MIN(unitPrice)  * FROM Orders  * GROUP BY HOP(rowtime, INTERVAL '1' HOUR), productId  *</pre></blockquote>  */
 end_comment
 
 begin_class
@@ -131,7 +155,7 @@ name|SqlGroupFunction
 extends|extends
 name|SqlFunction
 block|{
-specifier|private
+comment|/** The grouped function, if this an auxiliary function; null otherwise. */
 specifier|final
 name|SqlGroupFunction
 name|groupFunction
@@ -193,7 +217,7 @@ literal|null
 assert|;
 block|}
 block|}
-comment|/** Creates an auxiliary function from this group function. */
+comment|/** Creates an auxiliary function from this grouped window function. */
 name|SqlGroupFunction
 name|auxiliary
 parameter_list|(
@@ -212,6 +236,21 @@ argument_list|,
 name|getOperandTypeChecker
 argument_list|()
 argument_list|)
+return|;
+block|}
+comment|/** Returns a list of this grouped window function's auxiliary functions. */
+name|List
+argument_list|<
+name|SqlGroupFunction
+argument_list|>
+name|getAuxiliaryFunctions
+parameter_list|()
+block|{
+return|return
+name|ImmutableList
+operator|.
+name|of
+argument_list|()
 return|;
 block|}
 annotation|@

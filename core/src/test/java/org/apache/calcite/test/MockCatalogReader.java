@@ -2788,6 +2788,7 @@ name|ordersStream
 argument_list|)
 expr_stmt|;
 comment|// Register "SHIPMENTS" stream.
+comment|// "ROWTIME" is not column 0, just to mix things up.
 name|MockTable
 name|shipmentsStream
 init|=
@@ -2812,6 +2813,17 @@ name|shipmentsStream
 operator|.
 name|addColumn
 argument_list|(
+literal|"ORDERID"
+argument_list|,
+name|f
+operator|.
+name|intType
+argument_list|)
+expr_stmt|;
+name|shipmentsStream
+operator|.
+name|addColumn
+argument_list|(
 literal|"ROWTIME"
 argument_list|,
 name|f
@@ -2824,17 +2836,6 @@ operator|.
 name|addMonotonic
 argument_list|(
 literal|"ROWTIME"
-argument_list|)
-expr_stmt|;
-name|shipmentsStream
-operator|.
-name|addColumn
-argument_list|(
-literal|"ORDERID"
-argument_list|,
-name|f
-operator|.
-name|intType
 argument_list|)
 expr_stmt|;
 name|registerTable

@@ -47,6 +47,20 @@ end_import
 
 begin_import
 import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|base
+operator|.
+name|Preconditions
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -143,7 +157,12 @@ name|this
 operator|.
 name|operator
 operator|=
+name|Preconditions
+operator|.
+name|checkNotNull
+argument_list|(
 name|operator
+argument_list|)
 expr_stmt|;
 name|this
 operator|.
@@ -220,7 +239,12 @@ name|this
 operator|.
 name|operator
 operator|=
+name|Preconditions
+operator|.
+name|checkNotNull
+argument_list|(
 name|operator
+argument_list|)
 expr_stmt|;
 block|}
 specifier|public
