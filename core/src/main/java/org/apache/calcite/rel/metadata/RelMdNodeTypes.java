@@ -367,7 +367,7 @@ operator|.
 name|DEF
 return|;
 block|}
-comment|/** Catch-all implementation for    * {@link BuiltInMetadata.NodeTypeCount#getNodeTypes()},    * invoked using reflection.    *    * @see org.apache.calcite.rel.metadata.RelMetadataQuery#getNodeTypes(RelNode)    */
+comment|/** Catch-all implementation for    * {@link BuiltInMetadata.NodeTypes#getNodeTypes()},    * invoked using reflection.    *    * @see org.apache.calcite.rel.metadata.RelMetadataQuery#getNodeTypes(RelNode)    */
 specifier|public
 name|Multimap
 argument_list|<

@@ -554,7 +554,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * RelMdExpressionLineage supplies a default implementation of  * {@link RelMetadataQuery#getExpressionLineage} for the standard logical algebra.  *  * The goal of this provider is to infer the lineage for the given expression.  *  * The output expressions might contain references to columns produced by TableScan  * operators ({@link RexTableInputRef}). In turn, each TableScan operator is identified  * uniquely by a {@link RelTableRef} containing its qualified name and an identifier.  *  * If the lineage cannot be inferred, we return null.  */
+comment|/**  * Default implementation of  * {@link RelMetadataQuery#getExpressionLineage} for the standard logical  * algebra.  *  *<p>The goal of this provider is to infer the lineage for the given expression.  *  *<p>The output expressions might contain references to columns produced by  * {@link TableScan} operators ({@link RexTableInputRef}). In turn, each  * TableScan operator is identified uniquely by a {@link RelTableRef} containing  * its qualified name and an identifier.  *  *<p>If the lineage cannot be inferred, we return null.  */
 end_comment
 
 begin_class
@@ -709,7 +709,7 @@ name|outputExpression
 argument_list|)
 return|;
 block|}
-comment|/**    * Expression lineage from TableScan.    *    * We extract the fields referenced by the expression and we express them    * using {@link RexTableInputRef}.    */
+comment|/**    * Expression lineage from {@link TableScan}.    *    *<p>We extract the fields referenced by the expression and we express them    * using {@link RexTableInputRef}.    */
 specifier|public
 name|Set
 argument_list|<
@@ -901,7 +901,7 @@ name|mapping
 argument_list|)
 return|;
 block|}
-comment|/**    * Expression lineage from Aggregate.    *    * If the expression references grouping sets or aggregation function results,    * we cannot extract the lineage and we return null.    */
+comment|/**    * Expression lineage from {@link Aggregate}.    *    *<p>If the expression references grouping sets or aggregate function    * results, we cannot extract the lineage and we return null.    */
 specifier|public
 name|Set
 argument_list|<
@@ -1131,7 +1131,7 @@ name|mapping
 argument_list|)
 return|;
 block|}
-comment|/**    * Expression lineage from Join.    *    * We only extract the lineage for INNER joins.    */
+comment|/**    * Expression lineage from {@link Join}.    *    *<p>We only extract the lineage for INNER joins.    */
 specifier|public
 name|Set
 argument_list|<
@@ -1633,7 +1633,7 @@ name|mapping
 argument_list|)
 return|;
 block|}
-comment|/**    * Expression lineage from Union.    *    * For Union operator, we might be able to extract multiple origins for the    * references in the given expression.    */
+comment|/**    * Expression lineage from {@link Union}.    *    *<p>For Union operator, we might be able to extract multiple origins for the    * references in the given expression.    */
 specifier|public
 name|Set
 argument_list|<

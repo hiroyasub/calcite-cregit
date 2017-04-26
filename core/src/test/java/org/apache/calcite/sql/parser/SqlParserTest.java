@@ -19241,7 +19241,7 @@ literal|"INTERVAL '0' SECOND(1, 0)"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Runs tests for each of the thirteen different main types of INTERVAL    * qualifiers (YEAR, YEAR TO MONTH, etc.) Tests in this section fall into    * two categories:    *    *<ul>    *<li>xxxPositive: tests that should pass parser and validator</li>    *<li>xxxFailsValidation: tests that should pass parser but fail validator    *</li>    *</ul>    *    * A substantially identical set of tests exists in SqlValidatorTest, and    * any changes here should be synchronized there.    */
+comment|/**    * Runs tests for each of the thirteen different main types of INTERVAL    * qualifiers (YEAR, YEAR TO MONTH, etc.) Tests in this section fall into    * two categories:    *    *<ul>    *<li>xxxPositive: tests that should pass parser and validator</li>    *<li>xxxFailsValidation: tests that should pass parser but fail validator    *</li>    *</ul>    *    *<p>A substantially identical set of tests exists in SqlValidatorTest, and    * any changes here should be synchronized there.    */
 annotation|@
 name|Test
 specifier|public

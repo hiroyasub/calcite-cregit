@@ -6034,7 +6034,7 @@ expr_stmt|;
 block|}
 block|}
 block|}
-comment|/**    * Returns whether the input is a 'lossless' casts, i.e., a cast from which the original    * value of the field can be certainly recovered.    *    *<p>For instance, int -> bigint is true (as you can cast back to int without loss of    * information), however bigint -> int is false.    *    *<p>The implementation of this method does not return false positives. However, it is    * not complete.    */
+comment|/**    * Returns whether the input is a 'loss-less' cast, that is, a cast from which    * the original value of the field can be certainly recovered.    *    *<p>For instance, int&rarr; bigint is loss-less (as you can cast back to    * int without loss of information), but bigint&rarr; int is not loss-less.    *    *<p>The implementation of this method does not return false positives.    * However, it is not complete.    */
 specifier|public
 specifier|static
 name|boolean
@@ -6274,7 +6274,7 @@ return|return
 literal|false
 return|;
 block|}
-comment|/** Converts an expression to conjunctive normal form (CNF).    *    *<p>The following expression is in CNF:    *    *<blockquote>(a OR b) AND (c OR d)</blockquote>    *    *<p>The following expression is not in CNF:    *    *<blockquote>(a AND b) OR c</blockquote>    *    * but can be converted to CNF:    *    *<blockquote>(a OR c) AND (b OR c)</blockquote>    *    *<p>The following expression is not in CNF:    *    *<blockquote>NOT (a OR NOT b)</blockquote>    *    * but can be converted to CNF by applying de Morgan's theorem:    *    *<blockquote>NOT a AND b</blockquote>    *    *<p>Expressions not involving AND, OR or NOT at the top level are in CNF.    */
+comment|/** Converts an expression to conjunctive normal form (CNF).    *    *<p>The following expression is in CNF:    *    *<blockquote>(a OR b) AND (c OR d)</blockquote>    *    *<p>The following expression is not in CNF:    *    *<blockquote>(a AND b) OR c</blockquote>    *    *<p>but can be converted to CNF:    *    *<blockquote>(a OR c) AND (b OR c)</blockquote>    *    *<p>The following expression is not in CNF:    *    *<blockquote>NOT (a OR NOT b)</blockquote>    *    *<p>but can be converted to CNF by applying de Morgan's theorem:    *    *<blockquote>NOT a AND b</blockquote>    *    *<p>Expressions not involving AND, OR or NOT at the top level are in CNF.    */
 specifier|public
 specifier|static
 name|RexNode
@@ -6334,7 +6334,7 @@ name|rex
 argument_list|)
 return|;
 block|}
-comment|/** Converts an expression to disjunctive normal form (DNF).    *    *<p>DNF: It is a form of logical formula which is disjunction of conjunctive    * clauses.    *    *<p>All logical formulas can be converted into DNF.    *    *<p>The following expression is in DNF:    *    *<blockquote>(a AND b) OR (c AND d)</blockquote>    *    *<p>The following expression is not in CNF:    *    *<blockquote>(a OR b) AND c</blockquote>    *    * but can be converted to DNF:    *    *<blockquote>(a AND c) OR (b AND c)</blockquote>    *    *<p>The following expression is not in CNF:    *    *<blockquote>NOT (a OR NOT b)</blockquote>    *    * but can be converted to DNF by applying de Morgan's theorem:    *    *<blockquote>NOT a AND b</blockquote>    *    *<p>Expressions not involving AND, OR or NOT at the top level are in DNF.    */
+comment|/** Converts an expression to disjunctive normal form (DNF).    *    *<p>DNF: It is a form of logical formula which is disjunction of conjunctive    * clauses.    *    *<p>All logical formulas can be converted into DNF.    *    *<p>The following expression is in DNF:    *    *<blockquote>(a AND b) OR (c AND d)</blockquote>    *    *<p>The following expression is not in CNF:    *    *<blockquote>(a OR b) AND c</blockquote>    *    *<p>but can be converted to DNF:    *    *<blockquote>(a AND c) OR (b AND c)</blockquote>    *    *<p>The following expression is not in CNF:    *    *<blockquote>NOT (a OR NOT b)</blockquote>    *    *<p>but can be converted to DNF by applying de Morgan's theorem:    *    *<blockquote>NOT a AND b</blockquote>    *    *<p>Expressions not involving AND, OR or NOT at the top level are in DNF.    */
 specifier|public
 specifier|static
 name|RexNode

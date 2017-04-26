@@ -5594,7 +5594,7 @@ return|return
 literal|true
 return|;
 block|}
-comment|/**    * Classifies each of the predicates in the list into one of these three    * categories:    *<ul>    *<li> 1-l) column equality predicates, or</li>    *<li> 2-m) range predicates, comprising<,<=,>,>=, and = between a reference    * and a constant, or</li>    *<li> 3-r) residual predicates, all the rest</li>    *</ul>    *    *<p>For each category, it creates the conjunction of the predicates. The    * result is an array of three RexNode objects corresponding to each    * category.    */
+comment|/**    * Classifies each of the predicates in the list into one of these three    * categories:    *    *<ul>    *<li> 1-l) column equality predicates, or    *<li> 2-m) range predicates, comprising&lt;,&le;,&gt;,&ge;, and =    *      between a reference and a constant, or    *<li> 3-r) residual predicates, all the rest    *</ul>    *    *<p>For each category, it creates the conjunction of the predicates. The    * result is an array of three RexNode objects corresponding to each    * category.    */
 specifier|private
 specifier|static
 name|Triple

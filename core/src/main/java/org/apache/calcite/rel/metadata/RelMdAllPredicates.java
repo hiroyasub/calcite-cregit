@@ -390,7 +390,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Utility to extract Predicates that are present in the (sub)plan  * starting at this node.  *  * This should be used to infer whether same filters are applied on  * a given plan by materialized view rewriting rules.  *  * The output predicates might contain references to columns produced  * by TableScan operators ({@link RexTableInputRef}). In turn, each TableScan  * operator is identified uniquely by its qualified name and an identifier.  *  * If the provider cannot infer the lineage for any of the expressions  * contain in any of the predicates, it will return null. Observe that  * this is different from the empty list of predicates, which means that  * there are not predicates in the (sub)plan.  *  */
+comment|/**  * Utility to extract Predicates that are present in the (sub)plan  * starting at this node.  *  *<p>This should be used to infer whether same filters are applied on  * a given plan by materialized view rewriting rules.  *  *<p>The output predicates might contain references to columns produced  * by TableScan operators ({@link RexTableInputRef}). In turn, each TableScan  * operator is identified uniquely by its qualified name and an identifier.  *  *<p>If the provider cannot infer the lineage for any of the expressions  * contain in any of the predicates, it will return null. Observe that  * this is different from the empty list of predicates, which means that  * there are not predicates in the (sub)plan.  *  */
 end_comment
 
 begin_class

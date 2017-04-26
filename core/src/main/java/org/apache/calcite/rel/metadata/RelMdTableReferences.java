@@ -338,7 +338,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * RelMdTableReferences supplies a default implementation of  * {@link RelMetadataQuery#getTableReferences} for the standard logical algebra.  *  * The goal of this provider is to return all tables used by a given expression  * identified uniquely by a {@link RelTableRef}.  *  * Each unique identifier {@link RelTableRef} of a table will equal to the  * identifier obtained running {@link RelMdExpressionLineage} over the same  * plan node for an expression that refers to the same table.  *  * If tables cannot be obtained, we return null.  */
+comment|/**  * Default implementation of {@link RelMetadataQuery#getTableReferences} for the  * standard logical algebra.  *  *<p>The goal of this provider is to return all tables used by a given  * expression identified uniquely by a {@link RelTableRef}.  *  *<p>Each unique identifier {@link RelTableRef} of a table will equal to the  * identifier obtained running {@link RelMdExpressionLineage} over the same plan  * node for an expression that refers to the same table.  *  *<p>If tables cannot be obtained, we return null.  */
 end_comment
 
 begin_class
@@ -739,7 +739,7 @@ return|return
 name|result
 return|;
 block|}
-comment|/**    * Table references from Union.    *    * For Union operator, we might be able to extract multiple table references.    */
+comment|/**    * Table references from {@link Union}.    *    *<p>For Union operator, we might be able to extract multiple table    * references.    */
 specifier|public
 name|Set
 argument_list|<
