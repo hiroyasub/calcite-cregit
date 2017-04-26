@@ -989,7 +989,7 @@ literal|"'queryType':'groupBy'"
 argument_list|,
 literal|"'limitSpec':{'type':'default',"
 operator|+
-literal|"'columns':[{'dimension':'s','direction':'descending'}]}"
+literal|"'columns':[{'dimension':'s','direction':'descending','dimensionOrder':'numeric'}]}"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -2019,9 +2019,11 @@ literal|"'dimension':'gender'},{'type':'default',"
 operator|+
 literal|"'dimension':'state_province'}],'limitSpec':{'type':'default',"
 operator|+
-literal|"'columns':[{'dimension':'state_province','direction':'ascending'},"
+literal|"'columns':[{'dimension':'state_province','direction':'ascending',"
 operator|+
-literal|"{'dimension':'gender','direction':'descending'}]},"
+literal|"'dimensionOrder':'alphanumeric'},{'dimension':'gender',"
+operator|+
+literal|"'direction':'descending','dimensionOrder':'alphanumeric'}]},"
 operator|+
 literal|"'aggregations':[{'type':'longSum','name':'dummy_agg',"
 operator|+
@@ -2280,11 +2282,13 @@ name|druidQuery
 init|=
 literal|"{'queryType':'groupBy','dataSource':'foodmart',"
 operator|+
-literal|"'granularity':'all','dimensions':[{'type':'default','dimension':'brand_name'},"
+literal|"'granularity':'all','dimensions':[{'type':'default',"
 operator|+
-literal|"{'type':'default','dimension':'gender'}],"
+literal|"'dimension':'brand_name'},{'type':'default','dimension':'gender'}],"
 operator|+
-literal|"'limitSpec':{'type':'default','limit':3,'columns':[{'dimension':'S','direction':'descending'}]},"
+literal|"'limitSpec':{'type':'default','limit':3,'columns':[{'dimension':'S',"
+operator|+
+literal|"'direction':'descending','dimensionOrder':'numeric'}]},"
 operator|+
 literal|"'aggregations':[{'type':'longSum','name':'S','fieldName':'unit_sales'}],"
 operator|+
@@ -2401,13 +2405,15 @@ name|exactDruid
 init|=
 literal|"{'queryType':'groupBy','dataSource':'foodmart',"
 operator|+
-literal|"'granularity':'all','dimensions':[{'type':'default','dimension':'brand_name'}],"
+literal|"'granularity':'all','dimensions':[{'type':'default',"
 operator|+
-literal|"'limitSpec':{'type':'default','limit':3,"
+literal|"'dimension':'brand_name'}],'limitSpec':{'type':'default','limit':3,"
 operator|+
-literal|"'columns':[{'dimension':'S','direction':'descending'}]},"
+literal|"'columns':[{'dimension':'S','direction':'descending',"
 operator|+
-literal|"'aggregations':[{'type':'longSum','name':'S','fieldName':'unit_sales'}],"
+literal|"'dimensionOrder':'numeric'}]},'aggregations':[{'type':'longSum',"
+operator|+
+literal|"'name':'S','fieldName':'unit_sales'}],"
 operator|+
 literal|"'intervals':['1900-01-09T00:00:00.000/2992-01-10T00:00:00.000']}"
 decl_stmt|;
@@ -2584,7 +2590,9 @@ literal|"'granularity':'all'"
 argument_list|,
 literal|"'limitSpec"
 operator|+
-literal|"':{'type':'default','limit':30,'columns':[{'dimension':'S','direction':'descending'}]}"
+literal|"':{'type':'default','limit':30,'columns':[{'dimension':'S',"
+operator|+
+literal|"'direction':'descending','dimensionOrder':'numeric'}]}"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -2627,13 +2635,13 @@ specifier|final
 name|String
 name|druidQueryPart2
 init|=
-literal|"'granularity':'day',"
+literal|"'limitSpec':{'type':'default','limit':30,"
 operator|+
-literal|"'timeZone':'UTC','locale':'en-US'}}],'limitSpec':{'type':'default',"
+literal|"'columns':[{'dimension':'S','direction':'descending',"
 operator|+
-literal|"'limit':30,'columns':[{'dimension':'S','direction':'descending'}]},"
+literal|"'dimensionOrder':'numeric'}]},'aggregations':[{'type':'longSum',"
 operator|+
-literal|"'aggregations':[{'type':'longSum','name':'S','fieldName':'unit_sales'}],"
+literal|"'name':'S','fieldName':'unit_sales'}],"
 operator|+
 literal|"'intervals':['1900-01-09T00:00:00.000/2992-01-10T00:00:00.000']}"
 decl_stmt|;
@@ -4259,15 +4267,15 @@ specifier|final
 name|String
 name|druidQueryPart2
 init|=
-literal|"'granularity':'month','timeZone':'UTC',"
+literal|"'limitSpec':{'type':'default','limit':3,"
 operator|+
-literal|"'locale':'en-US'}}],'limitSpec':{'type':'default','limit':3,"
+literal|"'columns':[{'dimension':'S','direction':'descending',"
 operator|+
-literal|"'columns':[{'dimension':'S','direction':'descending'}]},"
+literal|"'dimensionOrder':'numeric'}]},'aggregations':[{'type':'longSum',"
 operator|+
-literal|"'aggregations':[{'type':'longSum','name':'S','fieldName':'unit_sales'},"
+literal|"'name':'S','fieldName':'unit_sales'},{'type':'longMax','name':'M',"
 operator|+
-literal|"{'type':'longMax','name':'M','fieldName':'unit_sales'}],"
+literal|"'fieldName':'unit_sales'}],"
 operator|+
 literal|"'intervals':['1900-01-09T00:00:00.000/2992-01-10T00:00:00.000']}"
 decl_stmt|;
@@ -4358,7 +4366,7 @@ name|limitSpec
 init|=
 literal|"'limitSpec':{'type':'default','limit':6,"
 operator|+
-literal|"'columns':[{'dimension':'S','direction':'descending'}]}"
+literal|"'columns':[{'dimension':'S','direction':'descending','dimensionOrder':'numeric'}]}"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -6100,23 +6108,25 @@ name|queryContains
 argument_list|(
 name|druidChecker
 argument_list|(
-literal|"{'queryType':'groupBy',"
+literal|"{'queryType':'groupBy','dataSource':'foodmart',"
 operator|+
-literal|"'dataSource':'foodmart','granularity':'all',"
+literal|"'granularity':'all','dimensions':[{'type':'extraction',"
 operator|+
-literal|"'dimensions':[{'type':'extraction','dimension':'__time',"
+literal|"'dimension':'__time','outputName':'extract_month',"
 operator|+
-literal|"'outputName':'extract_month','extractionFn':{'type':'timeFormat',"
+literal|"'extractionFn':{'type':'timeFormat','format':'M','timeZone':'UTC',"
 operator|+
-literal|"'format':'M','timeZone':'UTC','locale':'en-US'}},{'type':'default',"
+literal|"'locale':'en-US'}},{'type':'default','dimension':'product_id'}],"
 operator|+
-literal|"'dimension':'product_id'}],'limitSpec':{'type':'default',"
+literal|"'limitSpec':{'type':'default','columns':[{'dimension':'extract_month',"
 operator|+
-literal|"'columns':[{'dimension':'extract_month','direction':'ascending'},"
+literal|"'direction':'ascending','dimensionOrder':'numeric'},{'dimension':'S',"
 operator|+
-literal|"{'dimension':'S','direction':'ascending'},{'dimension':'product_id',"
+literal|"'direction':'ascending','dimensionOrder':'numeric'},"
 operator|+
-literal|"'direction':'ascending'}]},'filter':{'type':'bound',"
+literal|"{'dimension':'product_id','direction':'ascending',"
+operator|+
+literal|"'dimensionOrder':'alphanumeric'}]},'filter':{'type':'bound',"
 operator|+
 literal|"'dimension':'product_id','lower':'1558','lowerStrict':false,"
 operator|+
@@ -6307,13 +6317,17 @@ literal|"'format':'M','timeZone':'UTC','locale':'en-US'}},{'type':'default',"
 operator|+
 literal|"'dimension':'product_id'}],'limitSpec':{'type':'default','limit':3,"
 operator|+
-literal|"'columns':[{'dimension':'extract_year','direction':'descending'},"
+literal|"'columns':[{'dimension':'extract_year','direction':'descending',"
 operator|+
-literal|"{'dimension':'extract_month','direction':'ascending'},{'dimension':'S',"
+literal|"'dimensionOrder':'numeric'},{'dimension':'extract_month',"
 operator|+
-literal|"'direction':'descending'},{'dimension':'product_id',"
+literal|"'direction':'ascending','dimensionOrder':'numeric'},{'dimension':'S',"
 operator|+
-literal|"'direction':'ascending'}]},'filter':{'type':'bound',"
+literal|"'direction':'descending','dimensionOrder':'numeric'},"
+operator|+
+literal|"{'dimension':'product_id','direction':'ascending',"
+operator|+
+literal|"'dimensionOrder':'alphanumeric'}]},'filter':{'type':'bound',"
 operator|+
 literal|"'dimension':'product_id','lower':'1558','lowerStrict':false,"
 operator|+
@@ -6347,7 +6361,7 @@ literal|"Y=1997; M=1; product_id=1558; S=6"
 argument_list|,
 literal|"Y=1997; M=1; product_id=1559; S=6"
 argument_list|,
-literal|"Y=1997; M=10; product_id=1558; S=9"
+literal|"Y=1997; M=2; product_id=1558; S=24"
 argument_list|)
 expr_stmt|;
 block|}
@@ -6409,17 +6423,21 @@ literal|"'format':'M','timeZone':'UTC','locale':'en-US'}},{'type':'default',"
 operator|+
 literal|"'dimension':'product_id'}],'limitSpec':{'type':'default','limit':3,"
 operator|+
-literal|"'columns':[{'dimension':'S','direction':'descending'},"
+literal|"'columns':[{'dimension':'S','direction':'descending',"
 operator|+
-literal|"{'dimension':'extract_month','direction':'descending'},"
+literal|"'dimensionOrder':'numeric'},{'dimension':'extract_month',"
 operator|+
-literal|"{'dimension':'product_id','direction':'ascending'}]},"
+literal|"'direction':'descending','dimensionOrder':'numeric'},"
 operator|+
-literal|"'filter':{'type':'bound','dimension':'product_id','lower':'1558',"
+literal|"{'dimension':'product_id','direction':'ascending',"
 operator|+
-literal|"'lowerStrict':false,'ordering':'numeric'},"
+literal|"'dimensionOrder':'alphanumeric'}]},'filter':{'type':'bound',"
 operator|+
-literal|"'aggregations':[{'type':'longSum','name':'S','fieldName':'unit_sales'}],"
+literal|"'dimension':'product_id','lower':'1558','lowerStrict':false,"
+operator|+
+literal|"'ordering':'numeric'},'aggregations':[{'type':'longSum','name':'S',"
+operator|+
+literal|"'fieldName':'unit_sales'}],"
 operator|+
 literal|"'intervals':['1900-01-09T00:00:00.000/2992-01-10T00:00:00.000']}"
 decl_stmt|;
@@ -6519,6 +6537,176 @@ argument_list|,
 literal|"C=6588; S=20179; EXPR$2=1997-04-01 00:00:00"
 argument_list|,
 literal|"C=6478; S=19958; EXPR$2=1997-10-01 00:00:00"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testNumericOrderingOfOrderByOperatorFullTime
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sqlQuery
+init|=
+literal|"SELECT \"timestamp\", count(*) as c, SUM(\"unit_sales\")  "
+operator|+
+literal|"as s FROM "
+operator|+
+literal|"\"foodmart\" group by \"timestamp\" order by \"timestamp\" DESC, c DESC, s LIMIT 5"
+decl_stmt|;
+specifier|final
+name|String
+name|druidSubQuery
+init|=
+literal|"'limitSpec':{'type':'default','limit':5,"
+operator|+
+literal|"'columns':[{'dimension':'extract','direction':'descending',"
+operator|+
+literal|"'dimensionOrder':'alphanumeric'},{'dimension':'C',"
+operator|+
+literal|"'direction':'descending','dimensionOrder':'numeric'},{'dimension':'S',"
+operator|+
+literal|"'direction':'ascending','dimensionOrder':'numeric'}]},"
+operator|+
+literal|"'aggregations':[{'type':'count','name':'C'},{'type':'longSum',"
+operator|+
+literal|"'name':'S','fieldName':'unit_sales'}]"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sqlQuery
+argument_list|)
+operator|.
+name|returnsOrdered
+argument_list|(
+literal|"timestamp=1997-12-30 00:00:00; C=22; S=36\ntimestamp=1997-12-29"
+operator|+
+literal|" 00:00:00; C=321; S=982\ntimestamp=1997-12-28 00:00:00; C=480; "
+operator|+
+literal|"S=1496\ntimestamp=1997-12-27 00:00:00; C=363; S=1156\ntimestamp=1997-12-26 00:00:00; "
+operator|+
+literal|"C=144; S=420"
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|druidChecker
+argument_list|(
+name|druidSubQuery
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testNumericOrderingOfOrderByOperatorTimeExtract
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sqlQuery
+init|=
+literal|"SELECT extract(day from \"timestamp\") as d, extract(month from "
+operator|+
+literal|"\"timestamp\") as m,  year(\"timestamp\") as y , count(*) as c, SUM(\"unit_sales\")  "
+operator|+
+literal|"as s FROM "
+operator|+
+literal|"\"foodmart\" group by  extract(day from \"timestamp\"), extract(month from \"timestamp\"), "
+operator|+
+literal|"year(\"timestamp\")  order by d DESC, m ASC, y DESC LIMIT 5"
+decl_stmt|;
+specifier|final
+name|String
+name|druidSubQuery
+init|=
+literal|"'limitSpec':{'type':'default','limit':5,"
+operator|+
+literal|"'columns':[{'dimension':'extract_day','direction':'descending',"
+operator|+
+literal|"'dimensionOrder':'numeric'},{'dimension':'extract_month',"
+operator|+
+literal|"'direction':'ascending','dimensionOrder':'numeric'},"
+operator|+
+literal|"{'dimension':'extract_year','direction':'descending',"
+operator|+
+literal|"'dimensionOrder':'numeric'}]}"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sqlQuery
+argument_list|)
+operator|.
+name|returnsOrdered
+argument_list|(
+literal|"D=30; M=3; Y=1997; C=114; S=351\nD=30; M=5; Y=1997; "
+operator|+
+literal|"C=24; S=34\nD=30; M=6; Y=1997; C=73; S=183\nD=30; M=7; Y=1997; C=29; S=54\nD=30; M=8; "
+operator|+
+literal|"Y=1997; C=137; S=422"
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|druidChecker
+argument_list|(
+name|druidSubQuery
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testNumericOrderingOfOrderByOperatorStringDims
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sqlQuery
+init|=
+literal|"SELECT \"brand_name\", count(*) as c, SUM(\"unit_sales\")  "
+operator|+
+literal|"as s FROM "
+operator|+
+literal|"\"foodmart\" group by \"brand_name\" order by \"brand_name\"  DESC LIMIT 5"
+decl_stmt|;
+specifier|final
+name|String
+name|druidSubQuery
+init|=
+literal|"'limitSpec':{'type':'default','limit':5,"
+operator|+
+literal|"'columns':[{'dimension':'brand_name','direction':'descending',"
+operator|+
+literal|"'dimensionOrder':'alphanumeric'}]}"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sqlQuery
+argument_list|)
+operator|.
+name|returnsOrdered
+argument_list|(
+literal|"brand_name=Washington; C=576; S=1775\nbrand_name=Walrus; C=457;"
+operator|+
+literal|" S=1399\nbrand_name=Urban; C=299; S=924\nbrand_name=Tri-State; C=2339; "
+operator|+
+literal|"S=7270\nbrand_name=Toucan; C=123; S=380"
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|druidChecker
+argument_list|(
+name|druidSubQuery
+argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
