@@ -4704,6 +4704,72 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testJoinMaterialization5
+parameter_list|()
+block|{
+name|checkMaterialize
+argument_list|(
+literal|"select cast(\"empid\" as BIGINT) from \"emps\"\n"
+operator|+
+literal|"join \"depts\" using (\"deptno\")"
+argument_list|,
+literal|"select \"empid\" \"deptno\" from \"emps\"\n"
+operator|+
+literal|"join \"depts\" using (\"deptno\") where \"empid\"> 1"
+argument_list|,
+name|HR_FKUK_MODEL
+argument_list|,
+name|CalciteAssert
+operator|.
+name|checkResultContains
+argument_list|(
+literal|"EnumerableCalc(expr#0=[{inputs}], expr#1=[CAST($t0):JavaType(int) NOT NULL], "
+operator|+
+literal|"expr#2=[1], expr#3=[>($t1, $t2)], EXPR$0=[$t1], $condition=[$t3])\n"
+operator|+
+literal|"  EnumerableTableScan(table=[[hr, m0]])"
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testJoinMaterialization6
+parameter_list|()
+block|{
+name|checkMaterialize
+argument_list|(
+literal|"select cast(\"empid\" as BIGINT) from \"emps\"\n"
+operator|+
+literal|"join \"depts\" using (\"deptno\")"
+argument_list|,
+literal|"select \"empid\" \"deptno\" from \"emps\"\n"
+operator|+
+literal|"join \"depts\" using (\"deptno\") where \"empid\" = 1"
+argument_list|,
+name|HR_FKUK_MODEL
+argument_list|,
+name|CalciteAssert
+operator|.
+name|checkResultContains
+argument_list|(
+literal|"EnumerableCalc(expr#0=[{inputs}], expr#1=[CAST($t0):JavaType(int) NOT NULL], "
+operator|+
+literal|"expr#2=[CAST($t1):INTEGER NOT NULL], expr#3=[1], expr#4=[=($t2, $t3)], "
+operator|+
+literal|"EXPR$0=[$t1], $condition=[$t4])\n"
+operator|+
+literal|"  EnumerableTableScan(table=[[hr, m0]])"
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testJoinMaterializationUKFK1
 parameter_list|()
 block|{
