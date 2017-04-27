@@ -6710,6 +6710,134 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testGroupByWeekExtract
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"SELECT extract(week from \"timestamp\") from \"foodmart\" where "
+operator|+
+literal|"\"product_id\" = 1558 and extract(week from \"timestamp\") IN (10, 11)group by extract"
+operator|+
+literal|"(week from \"timestamp\")"
+decl_stmt|;
+specifier|final
+name|String
+name|druidQuery
+init|=
+literal|"{'queryType':'groupBy','dataSource':'foodmart',"
+operator|+
+literal|"'granularity':'all','dimensions':[{'type':'extraction',"
+operator|+
+literal|"'dimension':'__time','outputName':'extract_week',"
+operator|+
+literal|"'extractionFn':{'type':'timeFormat','format':'w','timeZone':'UTC',"
+operator|+
+literal|"'locale':'en-US'}}],'limitSpec':{'type':'default'},"
+operator|+
+literal|"'filter':{'type':'and','fields':[{'type':'selector',"
+operator|+
+literal|"'dimension':'product_id','value':'1558'},{'type':'or',"
+operator|+
+literal|"'fields':[{'type':'selector','dimension':'__time','value':'10',"
+operator|+
+literal|"'extractionFn':{'type':'timeFormat','format':'w','timeZone':'UTC',"
+operator|+
+literal|"'locale':'en-US'}},{'type':'selector','dimension':'__time',"
+operator|+
+literal|"'value':'11','extractionFn':{'type':'timeFormat','format':'w',"
+operator|+
+literal|"'timeZone':'UTC','locale':'en-US'}}]}]},"
+operator|+
+literal|"'aggregations':[{'type':'longSum','name':'dummy_agg',"
+operator|+
+literal|"'fieldName':'dummy_agg'}],"
+operator|+
+literal|"'intervals':['1900-01-09T00:00:00.000/2992-01-10T00:00:00.000']}"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|returnsOrdered
+argument_list|(
+literal|"EXPR$0=10\nEXPR$0=11"
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|druidChecker
+argument_list|(
+name|druidQuery
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1765">[CALCITE-1765]    * Druid adapter: Gracefully handle granularity that cannot be pushed to    * extraction function</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testTimeExtractThatCannotBePushed
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"SELECT extract(CENTURY from \"timestamp\") from \"foodmart\" where "
+operator|+
+literal|"\"product_id\" = 1558 group by extract(CENTURY from \"timestamp\")"
+decl_stmt|;
+specifier|final
+name|String
+name|plan
+init|=
+literal|"PLAN=EnumerableInterpreter\n"
+operator|+
+literal|"  BindableAggregate(group=[{0}])\n"
+operator|+
+literal|"    BindableProject(EXPR$0=[/INT(EXTRACT_DATE(FLAG(YEAR), /INT(Reinterpret($0), "
+operator|+
+literal|"86400000)), 100)])\n"
+operator|+
+literal|"      DruidQuery(table=[[foodmart, foodmart]], "
+operator|+
+literal|"intervals=[[1900-01-09T00:00:00.000/2992-01-10T00:00:00.000]], filter=[=($1, 1558)], "
+operator|+
+literal|"projects=[[$0]])"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+name|plan
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|druidChecker
+argument_list|(
+literal|"'queryType':'select'"
+argument_list|)
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"EXPR$0=19"
+argument_list|)
+expr_stmt|;
+block|}
 block|}
 end_class
 
