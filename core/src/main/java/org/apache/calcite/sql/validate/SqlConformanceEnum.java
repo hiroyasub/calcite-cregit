@@ -31,6 +31,9 @@ block|{
 comment|/** Calcite's default SQL behavior. */
 name|DEFAULT
 block|,
+comment|/** Conformance value that allows just about everything. */
+name|LENIENT
+block|,
 comment|/** Conformance value that instructs Calcite to use SQL semantics strictly    * consistent with the SQL:92 standard. */
 name|STRICT_92
 block|,
@@ -67,6 +70,9 @@ condition|)
 block|{
 case|case
 name|DEFAULT
+case|:
+case|case
+name|LENIENT
 case|:
 case|case
 name|ORACLE_10
@@ -107,6 +113,9 @@ condition|)
 block|{
 case|case
 name|DEFAULT
+case|:
+case|case
+name|LENIENT
 case|:
 case|case
 name|ORACLE_10
@@ -187,6 +196,9 @@ name|this
 condition|)
 block|{
 case|case
+name|LENIENT
+case|:
+case|case
 name|ORACLE_10
 case|:
 case|case
@@ -214,6 +226,9 @@ name|this
 condition|)
 block|{
 case|case
+name|LENIENT
+case|:
+case|case
 name|ORACLE_10
 case|:
 case|case
@@ -238,6 +253,9 @@ condition|(
 name|this
 condition|)
 block|{
+case|case
+name|LENIENT
+case|:
 case|case
 name|SQL_SERVER_2008
 case|:
@@ -264,10 +282,35 @@ name|this
 condition|)
 block|{
 case|case
+name|LENIENT
+case|:
+case|case
 name|PRAGMATIC_99
 case|:
 case|case
 name|PRAGMATIC_2003
+case|:
+return|return
+literal|true
+return|;
+default|default:
+return|return
+literal|false
+return|;
+block|}
+block|}
+specifier|public
+name|boolean
+name|allowNiladicParentheses
+parameter_list|()
+block|{
+switch|switch
+condition|(
+name|this
+condition|)
+block|{
+case|case
+name|LENIENT
 case|:
 return|return
 literal|true

@@ -141,6 +141,20 @@ name|isInsertSubsetColumnsAllowed
 argument_list|()
 return|;
 block|}
+specifier|public
+name|boolean
+name|allowNiladicParentheses
+parameter_list|()
+block|{
+return|return
+name|SqlConformanceEnum
+operator|.
+name|DEFAULT
+operator|.
+name|allowNiladicParentheses
+argument_list|()
+return|;
+block|}
 block|}
 end_class
 

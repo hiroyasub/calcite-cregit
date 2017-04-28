@@ -22105,6 +22105,12 @@ name|call
 operator|.
 name|isExpanded
 argument_list|()
+operator|&&
+operator|!
+name|conformance
+operator|.
+name|allowNiladicParentheses
+argument_list|()
 condition|)
 block|{
 comment|// For example, "LOCALTIME()" is illegal. (It should be

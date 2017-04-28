@@ -23,6 +23,22 @@ name|apache
 operator|.
 name|calcite
 operator|.
+name|sql
+operator|.
+name|validate
+operator|.
+name|SqlConformance
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
 name|util
 operator|.
 name|Util
@@ -321,7 +337,7 @@ throw|;
 block|}
 block|}
 block|,
-comment|/**    * Function syntax which takes no parentheses if there are no arguments, for    * example "CURRENTTIME".    */
+comment|/**    * Function syntax which takes no parentheses if there are no arguments, for    * example "CURRENTTIME".    *    * @see SqlConformance#allowNiladicParentheses()    */
 name|FUNCTION_ID
 block|{
 specifier|public

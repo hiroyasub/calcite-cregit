@@ -737,7 +737,7 @@ return|return
 name|factory
 return|;
 block|}
-comment|/**    * {@inheritDoc}    *    * This default implementation does nothing.    */
+comment|/**    * {@inheritDoc}    *    *<p>This default implementation does nothing.    */
 specifier|public
 name|void
 name|close
@@ -1828,6 +1828,20 @@ literal|"conformance"
 argument_list|,
 name|conformance
 argument_list|)
+operator|.
+name|withConnectionFactory
+argument_list|(
+name|CalciteAssert
+operator|.
+name|EMPTY_CONNECTION_FACTORY
+operator|.
+name|with
+argument_list|(
+literal|"conformance"
+argument_list|,
+name|conformance
+argument_list|)
+argument_list|)
 return|;
 block|}
 specifier|public
@@ -1848,7 +1862,7 @@ argument_list|)
 return|;
 block|}
 specifier|public
-name|SqlTester
+name|SqlTesterImpl
 name|withConnectionFactory
 parameter_list|(
 name|CalciteAssert

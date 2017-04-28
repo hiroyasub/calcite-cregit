@@ -146,6 +146,20 @@ name|isInsertSubsetColumnsAllowed
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
+specifier|public
+name|boolean
+name|allowNiladicParentheses
+parameter_list|()
+block|{
+return|return
+name|delegate
+operator|.
+name|allowNiladicParentheses
+argument_list|()
+return|;
+block|}
 block|}
 end_class
 
