@@ -4931,6 +4931,102 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testJoinMaterializationUKFK6
+parameter_list|()
+block|{
+name|checkMaterialize
+argument_list|(
+literal|"select \"emps\".\"empid\", \"emps\".\"deptno\" from \"emps\"\n"
+operator|+
+literal|"join \"depts\" \"a\" on (\"emps\".\"deptno\"=\"a\".\"deptno\")\n"
+operator|+
+literal|"join \"depts\" \"b\" on (\"emps\".\"deptno\"=\"b\".\"deptno\")\n"
+operator|+
+literal|"join \"dependents\" using (\"empid\")"
+operator|+
+literal|"where \"emps\".\"empid\" = 1"
+argument_list|,
+literal|"select \"emps\".\"empid\" from \"emps\"\n"
+operator|+
+literal|"join \"dependents\" using (\"empid\")\n"
+operator|+
+literal|"where \"emps\".\"empid\" = 1"
+argument_list|,
+name|HR_FKUK_MODEL
+argument_list|,
+name|CalciteAssert
+operator|.
+name|checkResultContains
+argument_list|(
+literal|"EnumerableCalc(expr#0..1=[{inputs}], empid=[$t0])\n"
+operator|+
+literal|"  EnumerableTableScan(table=[[hr, m0]])"
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testJoinMaterializationUKFK7
+parameter_list|()
+block|{
+name|checkNoMaterialize
+argument_list|(
+literal|"select \"emps\".\"empid\", \"emps\".\"deptno\" from \"emps\"\n"
+operator|+
+literal|"join \"depts\" \"a\" on (\"emps\".\"name\"=\"a\".\"name\")\n"
+operator|+
+literal|"join \"depts\" \"b\" on (\"emps\".\"name\"=\"b\".\"name\")\n"
+operator|+
+literal|"join \"dependents\" using (\"empid\")"
+operator|+
+literal|"where \"emps\".\"empid\" = 1"
+argument_list|,
+literal|"select \"emps\".\"empid\" from \"emps\"\n"
+operator|+
+literal|"join \"dependents\" using (\"empid\")\n"
+operator|+
+literal|"where \"emps\".\"empid\" = 1"
+argument_list|,
+name|HR_FKUK_MODEL
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testJoinMaterializationUKFK8
+parameter_list|()
+block|{
+name|checkNoMaterialize
+argument_list|(
+literal|"select \"emps\".\"empid\", \"emps\".\"deptno\" from \"emps\"\n"
+operator|+
+literal|"join \"depts\" \"a\" on (\"emps\".\"deptno\"=\"a\".\"deptno\")\n"
+operator|+
+literal|"join \"depts\" \"b\" on (\"emps\".\"name\"=\"b\".\"name\")\n"
+operator|+
+literal|"join \"dependents\" using (\"empid\")"
+operator|+
+literal|"where \"emps\".\"empid\" = 1"
+argument_list|,
+literal|"select \"emps\".\"empid\" from \"emps\"\n"
+operator|+
+literal|"join \"dependents\" using (\"empid\")\n"
+operator|+
+literal|"where \"emps\".\"empid\" = 1"
+argument_list|,
+name|HR_FKUK_MODEL
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testSubQuery
 parameter_list|()
 block|{

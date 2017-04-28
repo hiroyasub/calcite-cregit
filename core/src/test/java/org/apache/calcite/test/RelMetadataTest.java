@@ -927,6 +927,22 @@ name|apache
 operator|.
 name|calcite
 operator|.
+name|rex
+operator|.
+name|RexTableInputRef
+operator|.
+name|RelTableRef
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
 name|schema
 operator|.
 name|SchemaPlus
@@ -1116,6 +1132,20 @@ operator|.
 name|collect
 operator|.
 name|Multimap
+import|;
+end_import
+
+begin_import
+import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|collect
+operator|.
+name|Sets
 import|;
 end_import
 
@@ -12537,6 +12567,244 @@ comment|// Filter on aggregate, we cannot infer lineage
 name|assertNull
 argument_list|(
 name|inputSet
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testAllPredicatesAndTablesJoin
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select x.sal, y.deptno from\n"
+operator|+
+literal|"(select a.deptno, c.sal from (select * from emp limit 7) as a\n"
+operator|+
+literal|"cross join (select * from dept limit 1) as b\n"
+operator|+
+literal|"inner join (select * from emp limit 2) as c\n"
+operator|+
+literal|"on a.deptno = c.deptno) as x\n"
+operator|+
+literal|"inner join\n"
+operator|+
+literal|"(select a.deptno, c.sal from (select * from emp limit 7) as a\n"
+operator|+
+literal|"cross join (select * from dept limit 1) as b\n"
+operator|+
+literal|"inner join (select * from emp limit 2) as c\n"
+operator|+
+literal|"on a.deptno = c.deptno) as y\n"
+operator|+
+literal|"on x.deptno = y.deptno"
+decl_stmt|;
+specifier|final
+name|RelNode
+name|rel
+init|=
+name|convertSql
+argument_list|(
+name|sql
+argument_list|)
+decl_stmt|;
+specifier|final
+name|RelMetadataQuery
+name|mq
+init|=
+name|RelMetadataQuery
+operator|.
+name|instance
+argument_list|()
+decl_stmt|;
+specifier|final
+name|RelOptPredicateList
+name|inputSet
+init|=
+name|mq
+operator|.
+name|getAllPredicates
+argument_list|(
+name|rel
+argument_list|)
+decl_stmt|;
+name|assertThat
+argument_list|(
+name|inputSet
+operator|.
+name|pulledUpPredicates
+operator|.
+name|toString
+argument_list|()
+argument_list|,
+name|equalTo
+argument_list|(
+literal|"[true, "
+operator|+
+literal|"=([CATALOG, SALES, EMP].#0.$7, [CATALOG, SALES, EMP].#1.$7), "
+operator|+
+literal|"true, "
+operator|+
+literal|"=([CATALOG, SALES, EMP].#2.$7, [CATALOG, SALES, EMP].#3.$7), "
+operator|+
+literal|"=([CATALOG, SALES, EMP].#0.$7, [CATALOG, SALES, EMP].#2.$7)]"
+argument_list|)
+argument_list|)
+expr_stmt|;
+specifier|final
+name|Set
+argument_list|<
+name|RelTableRef
+argument_list|>
+name|tableReferences
+init|=
+name|Sets
+operator|.
+name|newTreeSet
+argument_list|(
+name|mq
+operator|.
+name|getTableReferences
+argument_list|(
+name|rel
+argument_list|)
+argument_list|)
+decl_stmt|;
+name|assertThat
+argument_list|(
+name|tableReferences
+operator|.
+name|toString
+argument_list|()
+argument_list|,
+name|equalTo
+argument_list|(
+literal|"[[CATALOG, SALES, DEPT].#0, [CATALOG, SALES, DEPT].#1, "
+operator|+
+literal|"[CATALOG, SALES, EMP].#0, [CATALOG, SALES, EMP].#1, "
+operator|+
+literal|"[CATALOG, SALES, EMP].#2, [CATALOG, SALES, EMP].#3]"
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testAllPredicatesAndTableUnion
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select a.deptno, c.sal from (select * from emp limit 7) as a\n"
+operator|+
+literal|"cross join (select * from dept limit 1) as b\n"
+operator|+
+literal|"inner join (select * from emp limit 2) as c\n"
+operator|+
+literal|"on a.deptno = c.deptno\n"
+operator|+
+literal|"union all\n"
+operator|+
+literal|"select a.deptno, c.sal from (select * from emp limit 7) as a\n"
+operator|+
+literal|"cross join (select * from dept limit 1) as b\n"
+operator|+
+literal|"inner join (select * from emp limit 2) as c\n"
+operator|+
+literal|"on a.deptno = c.deptno"
+decl_stmt|;
+specifier|final
+name|RelNode
+name|rel
+init|=
+name|convertSql
+argument_list|(
+name|sql
+argument_list|)
+decl_stmt|;
+specifier|final
+name|RelMetadataQuery
+name|mq
+init|=
+name|RelMetadataQuery
+operator|.
+name|instance
+argument_list|()
+decl_stmt|;
+specifier|final
+name|RelOptPredicateList
+name|inputSet
+init|=
+name|mq
+operator|.
+name|getAllPredicates
+argument_list|(
+name|rel
+argument_list|)
+decl_stmt|;
+name|assertThat
+argument_list|(
+name|inputSet
+operator|.
+name|pulledUpPredicates
+operator|.
+name|toString
+argument_list|()
+argument_list|,
+name|equalTo
+argument_list|(
+literal|"[true, "
+operator|+
+literal|"=([CATALOG, SALES, EMP].#0.$7, [CATALOG, SALES, EMP].#1.$7), "
+operator|+
+literal|"true, "
+operator|+
+literal|"=([CATALOG, SALES, EMP].#2.$7, [CATALOG, SALES, EMP].#3.$7)]"
+argument_list|)
+argument_list|)
+expr_stmt|;
+specifier|final
+name|Set
+argument_list|<
+name|RelTableRef
+argument_list|>
+name|tableReferences
+init|=
+name|Sets
+operator|.
+name|newTreeSet
+argument_list|(
+name|mq
+operator|.
+name|getTableReferences
+argument_list|(
+name|rel
+argument_list|)
+argument_list|)
+decl_stmt|;
+name|assertThat
+argument_list|(
+name|tableReferences
+operator|.
+name|toString
+argument_list|()
+argument_list|,
+name|equalTo
+argument_list|(
+literal|"[[CATALOG, SALES, DEPT].#0, [CATALOG, SALES, DEPT].#1, "
+operator|+
+literal|"[CATALOG, SALES, EMP].#0, [CATALOG, SALES, EMP].#1, "
+operator|+
+literal|"[CATALOG, SALES, EMP].#2, [CATALOG, SALES, EMP].#3]"
+argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
