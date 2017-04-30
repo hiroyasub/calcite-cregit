@@ -6838,6 +6838,45 @@ literal|"EXPR$0=19"
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1770">[CALCITE-1770]    * Druid adapter: CAST(NULL AS ...) gives NPE</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testPushCast
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"SELECT \"product_id\"\n"
+operator|+
+literal|"from \"foodmart\"\n"
+operator|+
+literal|"where \"product_id\" = cast(NULL as varchar)\n"
+operator|+
+literal|"group by \"product_id\""
+decl_stmt|;
+name|String
+name|druidQuery
+init|=
+literal|"'filter':{'type':'selector','dimension':'product_id','value':''}"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|druidChecker
+argument_list|(
+name|druidQuery
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
 block|}
 end_class
 

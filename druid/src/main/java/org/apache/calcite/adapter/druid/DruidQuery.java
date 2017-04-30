@@ -6091,6 +6091,26 @@ return|;
 case|case
 name|LITERAL
 case|:
+if|if
+condition|(
+operator|(
+operator|(
+name|RexLiteral
+operator|)
+name|e
+operator|)
+operator|.
+name|getValue3
+argument_list|()
+operator|==
+literal|null
+condition|)
+block|{
+comment|// Druid considers null is equivalent to empty.
+return|return
+literal|""
+return|;
+block|}
 return|return
 operator|(
 operator|(
