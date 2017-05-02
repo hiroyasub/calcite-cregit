@@ -96,6 +96,9 @@ block|,
 comment|/** Called with the SQL string and parse tree, in an array. */
 name|PARSE_TREE
 block|,
+comment|/** Converts a SQL string to a    * {@link org.apache.calcite.jdbc.CalcitePrepare.Query} object. This hook is    * an opportunity to execute a {@link org.apache.calcite.rel.RelNode} query    * plan in the JDBC driver rather than the usual SQL string. */
+name|STRING_TO_QUERY
+block|,
 comment|/** Called with the generated Java plan, just before it is compiled by    * Janino. */
 name|JAVA_PLAN
 block|,
