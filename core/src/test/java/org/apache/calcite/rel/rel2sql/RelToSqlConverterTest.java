@@ -2624,6 +2624,101 @@ name|expected
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testLiteral
+parameter_list|()
+block|{
+name|checkLiteral
+argument_list|(
+literal|"DATE '1978-05-02'"
+argument_list|)
+expr_stmt|;
+name|checkLiteral
+argument_list|(
+literal|"TIME '12:34:56'"
+argument_list|)
+expr_stmt|;
+name|checkLiteral
+argument_list|(
+literal|"TIME '12:34:56.78'"
+argument_list|)
+expr_stmt|;
+name|checkLiteral
+argument_list|(
+literal|"TIMESTAMP '1978-05-02 12:34:56.78'"
+argument_list|)
+expr_stmt|;
+name|checkLiteral
+argument_list|(
+literal|"'I can''t explain'"
+argument_list|)
+expr_stmt|;
+name|checkLiteral
+argument_list|(
+literal|"''"
+argument_list|)
+expr_stmt|;
+name|checkLiteral
+argument_list|(
+literal|"TRUE"
+argument_list|)
+expr_stmt|;
+name|checkLiteral
+argument_list|(
+literal|"123"
+argument_list|)
+expr_stmt|;
+name|checkLiteral
+argument_list|(
+literal|"123.45"
+argument_list|)
+expr_stmt|;
+name|checkLiteral
+argument_list|(
+literal|"-123.45"
+argument_list|)
+expr_stmt|;
+block|}
+specifier|private
+name|void
+name|checkLiteral
+parameter_list|(
+name|String
+name|s
+parameter_list|)
+block|{
+name|sql
+argument_list|(
+literal|"VALUES "
+operator|+
+name|s
+argument_list|)
+operator|.
+name|dialect
+argument_list|(
+name|DatabaseProduct
+operator|.
+name|HSQLDB
+operator|.
+name|getDialect
+argument_list|()
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+literal|"SELECT *\n"
+operator|+
+literal|"FROM (VALUES  ("
+operator|+
+name|s
+operator|+
+literal|"))"
+argument_list|)
+expr_stmt|;
+block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1798">[CALCITE-1798]    * Generate dialect-specific SQL for FLOOR operator</a>. */
 annotation|@
 name|Test

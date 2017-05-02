@@ -459,10 +459,8 @@ operator|)
 name|node
 operator|)
 operator|.
-name|getValue
+name|isNull
 argument_list|()
-operator|==
-literal|null
 return|;
 comment|// We can only guarantee AND to return NULL if both inputs are NULL  (similar for OR)
 comment|// AND(NULL, FALSE) = FALSE

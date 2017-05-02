@@ -3131,7 +3131,7 @@ return|return
 name|s1
 return|;
 block|}
-comment|/**    * Converts an arbitrary string into a string suitable for use as a Java    * identifier.    *    *<p>The mapping is one-to-one (that is, distinct strings will produce    * distinct java identifiers). The mapping is also reversible, but the    * inverse mapping is not implemented.</p>    *    *<p>A valid Java identifier must start with a Unicode letter, underscore,    * or dollar sign ($). The other characters, if any, can be a Unicode    * letter, underscore, dollar sign, or digit.</p>    *    *<p>This method uses an algorithm similar to URL encoding. Valid    * characters are unchanged; invalid characters are converted to an    * underscore followed by the hex code of the character; and underscores are    * doubled.</p>    *    * Examples:    *    *<ul>    *<li><code>toJavaId("foo")</code> returns<code>"foo"</code>    *<li><code>toJavaId("foo bar")</code> returns<code>"foo_20_bar"</code>    *<li><code>toJavaId("foo_bar")</code> returns<code>"foo__bar"</code>    *<li><code>toJavaId("0bar")</code> returns<code>"_40_bar"</code> (digits    * are illegal as a prefix)    *<li><code>toJavaId("foo0bar")</code> returns<code>"foo0bar"</code>    *</ul>    */
+comment|/**    * Converts an arbitrary string into a string suitable for use as a Java    * identifier.    *    *<p>The mapping is one-to-one (that is, distinct strings will produce    * distinct java identifiers). The mapping is also reversible, but the    * inverse mapping is not implemented.</p>    *    *<p>A valid Java identifier must start with a Unicode letter, underscore,    * or dollar sign ($). The other characters, if any, can be a Unicode    * letter, underscore, dollar sign, or digit.</p>    *    *<p>This method uses an algorithm similar to URL encoding. Valid    * characters are unchanged; invalid characters are converted to an    * underscore followed by the hex code of the character; and underscores are    * doubled.</p>    *    *<p>Examples:    *    *<ul>    *<li><code>toJavaId("foo")</code> returns<code>"foo"</code>    *<li><code>toJavaId("foo bar")</code> returns<code>"foo_20_bar"</code>    *<li><code>toJavaId("foo_bar")</code> returns<code>"foo__bar"</code>    *<li><code>toJavaId("0bar")</code> returns<code>"_40_bar"</code> (digits    * are illegal as a prefix)    *<li><code>toJavaId("foo0bar")</code> returns<code>"foo0bar"</code>    *</ul>    */
 specifier|public
 specifier|static
 name|String
@@ -3439,7 +3439,7 @@ literal|0
 operator|)
 return|;
 block|}
-comment|/**    * Converts a list of a string, with commas between elements.    *    * For example,    *<code>commaList(Arrays.asList({"a", "b"}))</code>    * returns "a, b".    *    * @param list List    * @return String representation of string    */
+comment|/**    * Converts a list of a string, with commas between elements.    *    *<p>For example,    *<code>commaList(Arrays.asList({"a", "b"}))</code>    * returns "a, b".    *    * @param list List    * @return String representation of string    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -4019,7 +4019,7 @@ name|description
 argument_list|)
 throw|;
 block|}
-comment|/**    * Flags a piece of code as needing to be cleaned up before you check in.    *    *<p>Introduce a call to this method to indicate that a piece of code, or a    * javadoc comment, needs work before you check in. If you have an IDE which    * can easily trace references, this is an easy way to maintain a to-do    * list.    *    *<p><strong>Checked-in code must never call this method</strong>: you must    * remove all calls/references to this method before you check in.    *    *<p>The<code>argument</code> has generic type and determines the type of    * the result. This allows you to use the method inside an expression, for    * example    *    *<blockquote>    *<pre><code>int x = Util.deprecated(0, false);</code></pre>    *</blockquote>    *    * but the usual usage is to pass in a descriptive string.    *    *<h3>Examples</h3>    *    *<h4>Example #1: Using<code>deprecated</code> to fail if a piece of    * supposedly dead code is reached</h4>    *    *<blockquote>    *<pre><code>void foo(int x) {    *     if (x&lt; 0) {    *         // If this code is executed, an error will be thrown.    *         Util.deprecated(    *             "no longer need to handle negative numbers", true);    *         bar(x);    *     } else {    *         baz(x);    *     }    * }</code></pre>    *</blockquote>    *    *<h4>Example #2: Using<code>deprecated</code> to comment out dead    * code</h4>    *    *<blockquote>    *<pre>if (Util.deprecated(false, false)) {    *     // This code will not be executed, but an error will not be thrown.    *     baz();    * }</pre>    *</blockquote>    *    * @param argument Arbitrary argument to the method.    * @param fail     Whether to throw an exception if this method is called    * @return The value of the<code>argument</code>.    * @deprecated If a piece of code calls this method, it indicates that the    * code needs to be cleaned up.    */
+comment|/**    * Flags a piece of code as needing to be cleaned up before you check in.    *    *<p>Introduce a call to this method to indicate that a piece of code, or a    * javadoc comment, needs work before you check in. If you have an IDE which    * can easily trace references, this is an easy way to maintain a to-do    * list.    *    *<p><strong>Checked-in code must never call this method</strong>: you must    * remove all calls/references to this method before you check in.    *    *<p>The<code>argument</code> has generic type and determines the type of    * the result. This allows you to use the method inside an expression, for    * example    *    *<blockquote>    *<pre><code>int x = Util.deprecated(0, false);</code></pre>    *</blockquote>    *    *<p>but the usual usage is to pass in a descriptive string.    *    *<h3>Examples</h3>    *    *<h4>Example #1: Using<code>deprecated</code> to fail if a piece of    * supposedly dead code is reached</h4>    *    *<blockquote>    *<pre><code>void foo(int x) {    *     if (x&lt; 0) {    *         // If this code is executed, an error will be thrown.    *         Util.deprecated(    *             "no longer need to handle negative numbers", true);    *         bar(x);    *     } else {    *         baz(x);    *     }    * }</code></pre>    *</blockquote>    *    *<h4>Example #2: Using<code>deprecated</code> to comment out dead    * code</h4>    *    *<blockquote>    *<pre>if (Util.deprecated(false, false)) {    *     // This code will not be executed, but an error will not be thrown.    *     baz();    * }</pre>    *</blockquote>    *    * @param argument Arbitrary argument to the method.    * @param fail     Whether to throw an exception if this method is called    * @return The value of the<code>argument</code>.    * @deprecated If a piece of code calls this method, it indicates that the    * code needs to be cleaned up.    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -4818,7 +4818,7 @@ block|}
 block|}
 return|;
 block|}
-comment|/**    * Converts a Java timezone to POSIX format, so that the boost C++ library    * can instantiate timezone objects.    *    *<p><a    * href="http://www.opengroup.org/onlinepubs/000095399/basedefs/xbd_chap08.html">POSIX    * IEEE 1003.1</a> defines a format for timezone specifications.    *    *<p>The boost C++ library can read these specifications and instantiate<a    * href="http://www.boost.org/doc/html/date_time/local_time.html#date_time.local_time.posix_time_zone">    * posix_time_zone</a> objects from them. The purpose of this method,    * therefore, is to allow the C++ code such as the fennel calculator to use    * the same notion of timezone as Java code.    *    *<p>The format is as follows:    *    *<blockquote>"std offset dst [offset],start[/time],end[/time]"    *</blockquote>    *    * where:    *    *<ul>    *<li>'std' specifies the abbrev of the time zone.    *<li>'offset' is the offset from UTC, and takes the form    *<code>[+|-]hh[:mm[:ss]] {h=0-23, m/s=0-59}</code></li>    *<li>'dst' specifies the abbrev of the time zone during daylight savings    * time    *<li>The second offset is how many hours changed during DST. Default=1    *<li>'start' and 'end' are the dates when DST goes into (and out of)    *     effect.<br>    *<br>    *     They can each be one of three forms:    *    *<ol>    *<li>Mm.w.d {month=1-12, week=1-5 (5 is always last), day=0-6}    *<li>Jn {n=1-365 Feb29 is never counted}    *<li>n {n=0-365 Feb29 is counted in leap years}    *</ol>    *</li>    *    *<li>'time' has the same format as 'offset', and defaults to 02:00:00.</li>    *</ul>    *    *<p>For example:</p>    *    *<ul>    *<li>"PST-8PDT01:00:00,M4.1.0/02:00:00,M10.1.0/02:00:00"; or more tersely    *<li>"PST-8PDT,M4.1.0,M10.1.0"    *</ul>    *    *<p>(Real format strings do not contain spaces; they are in the above    * template only for readability.)    *    *<p>Boost apparently diverges from the POSIX standard in how it treats the    * sign of timezone offsets. The POSIX standard states '<i>If preceded by a    * '-', the timezone shall be east of the Prime Meridian; otherwise, it    * shall be west</i>', yet boost requires the opposite. For instance, PST    * has offset '-8' above. This method generates timezone strings consistent    * with boost's expectations.    *    * @param tz      Timezone    * @param verbose Whether to include fields which can be omitted because    *                they have their default values    * @return Timezone in POSIX format (offset sign reversed, per boost's    * idiosyncracies)    */
+comment|/**    * Converts a Java timezone to POSIX format, so that the boost C++ library    * can instantiate timezone objects.    *    *<p><a    * href="http://www.opengroup.org/onlinepubs/000095399/basedefs/xbd_chap08.html">POSIX    * IEEE 1003.1</a> defines a format for timezone specifications.    *    *<p>The boost C++ library can read these specifications and instantiate<a    * href="http://www.boost.org/doc/html/date_time/local_time.html#date_time.local_time.posix_time_zone">    * posix_time_zone</a> objects from them. The purpose of this method,    * therefore, is to allow the C++ code such as the fennel calculator to use    * the same notion of timezone as Java code.    *    *<p>The format is as follows:    *    *<blockquote>"std offset dst [offset],start[/time],end[/time]"    *</blockquote>    *    *<p>where:    *    *<ul>    *<li>'std' specifies the abbrev of the time zone.    *<li>'offset' is the offset from UTC, and takes the form    *<code>[+|-]hh[:mm[:ss]] {h=0-23, m/s=0-59}</code></li>    *<li>'dst' specifies the abbrev of the time zone during daylight savings    * time    *<li>The second offset is how many hours changed during DST. Default=1    *<li>'start' and 'end' are the dates when DST goes into (and out of)    *     effect.<br>    *<br>    *     They can each be one of three forms:    *    *<ol>    *<li>Mm.w.d {month=1-12, week=1-5 (5 is always last), day=0-6}    *<li>Jn {n=1-365 Feb29 is never counted}    *<li>n {n=0-365 Feb29 is counted in leap years}    *</ol>    *</li>    *    *<li>'time' has the same format as 'offset', and defaults to 02:00:00.</li>    *</ul>    *    *<p>For example:</p>    *    *<ul>    *<li>"PST-8PDT01:00:00,M4.1.0/02:00:00,M10.1.0/02:00:00"; or more tersely    *<li>"PST-8PDT,M4.1.0,M10.1.0"    *</ul>    *    *<p>(Real format strings do not contain spaces; they are in the above    * template only for readability.)    *    *<p>Boost apparently diverges from the POSIX standard in how it treats the    * sign of timezone offsets. The POSIX standard states '<i>If preceded by a    * '-', the timezone shall be east of the Prime Meridian; otherwise, it    * shall be west</i>', yet boost requires the opposite. For instance, PST    * has offset '-8' above. This method generates timezone strings consistent    * with boost's expectations.    *    * @param tz      Timezone    * @param verbose Whether to include fields which can be omitted because    *                they have their default values    * @return Timezone in POSIX format (offset sign reversed, per boost's    * idiosyncracies)    */
 specifier|public
 specifier|static
 name|String
@@ -6347,7 +6347,7 @@ block|}
 block|}
 return|;
 block|}
-comment|/**    * Makes a collection of untyped elements appear as a list of strictly typed    * elements, by filtering out those which are not of the correct type.    *    *<p>The returned object is an {@link Iterable},    * which makes it ideal for use with the 'foreach' construct. For example,    *    *<blockquote><code>List&lt;Number&gt; numbers = Arrays.asList(1, 2, 3.14,    * 4, null, 6E23);<br>    * for (int myInt : filter(numbers, Integer.class)) {<br>    *&nbsp;&nbsp;&nbsp;&nbsp;print(i);<br>    * }</code></blockquote>    *    * will print 1, 2, 4.    *    * @param iterable      Iterable    * @param includeFilter Class whose instances to include    */
+comment|/**    * Makes a collection of untyped elements appear as a list of strictly typed    * elements, by filtering out those which are not of the correct type.    *    *<p>The returned object is an {@link Iterable},    * which makes it ideal for use with the 'foreach' construct. For example,    *    *<blockquote><code>List&lt;Number&gt; numbers = Arrays.asList(1, 2, 3.14,    * 4, null, 6E23);<br>    * for (int myInt : filter(numbers, Integer.class)) {<br>    *&nbsp;&nbsp;&nbsp;&nbsp;print(i);<br>    * }</code></blockquote>    *    *<p>will print 1, 2, 4.    *    * @param iterable      Iterable    * @param includeFilter Class whose instances to include    */
 specifier|public
 specifier|static
 parameter_list|<
@@ -9273,7 +9273,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/** Creates a {@link Calendar} in the GMT time zone and root locale.    * Does not use the time zone or locale. */
+comment|/** Creates a {@link Calendar} in the UTC time zone and root locale.    * Does not use the time zone or locale. */
 specifier|public
 specifier|static
 name|Calendar
@@ -9293,6 +9293,33 @@ name|Locale
 operator|.
 name|ROOT
 argument_list|)
+return|;
+block|}
+comment|/** Creates a {@link Calendar} in the UTC time zone and root locale    * with a given time. */
+specifier|public
+specifier|static
+name|Calendar
+name|calendar
+parameter_list|(
+name|long
+name|millis
+parameter_list|)
+block|{
+name|Calendar
+name|calendar
+init|=
+name|calendar
+argument_list|()
+decl_stmt|;
+name|calendar
+operator|.
+name|setTimeInMillis
+argument_list|(
+name|millis
+argument_list|)
+expr_stmt|;
+return|return
+name|calendar
 return|;
 block|}
 comment|//~ Inner Classes ----------------------------------------------------------

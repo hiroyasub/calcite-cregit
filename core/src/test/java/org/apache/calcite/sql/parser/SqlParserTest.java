@@ -10010,21 +10010,21 @@ name|checkExp
 argument_list|(
 literal|"TIMESTAMP '2004-06-01 15:55:55.1234'"
 argument_list|,
-literal|"TIMESTAMP '2004-06-01 15:55:55.123'"
+literal|"TIMESTAMP '2004-06-01 15:55:55.1234'"
 argument_list|)
 expr_stmt|;
 name|checkExp
 argument_list|(
 literal|"TIMESTAMP '2004-06-01 15:55:55.1236'"
 argument_list|,
-literal|"TIMESTAMP '2004-06-01 15:55:55.123'"
+literal|"TIMESTAMP '2004-06-01 15:55:55.1236'"
 argument_list|)
 expr_stmt|;
 name|checkExp
 argument_list|(
 literal|"TIMESTAMP '2004-06-01 15:55:55.9999'"
 argument_list|,
-literal|"TIMESTAMP '2004-06-01 15:55:55.999'"
+literal|"TIMESTAMP '2004-06-01 15:55:55.9999'"
 argument_list|)
 expr_stmt|;
 name|checkExpSame
@@ -14120,6 +14120,13 @@ argument_list|,
 literal|"TIME '12:01:01.001'"
 argument_list|)
 expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"TIME '12:01:01.01023456789'"
+argument_list|,
+literal|"TIME '12:01:01.01023456789'"
+argument_list|)
+expr_stmt|;
 comment|// Timestamp literals
 name|checkExp
 argument_list|(
@@ -14140,6 +14147,18 @@ argument_list|(
 literal|"TIMESTAMP '2004-12-01 12:01:01.'"
 argument_list|,
 literal|"TIMESTAMP '2004-12-01 12:01:01'"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"TIMESTAMP  '2004-12-01 12:01:01.010234567890'"
+argument_list|,
+literal|"TIMESTAMP '2004-12-01 12:01:01.010234567890'"
+argument_list|)
+expr_stmt|;
+name|checkExpSame
+argument_list|(
+literal|"TIMESTAMP '2004-12-01 12:01:01.01023456789'"
 argument_list|)
 expr_stmt|;
 comment|// Failures.

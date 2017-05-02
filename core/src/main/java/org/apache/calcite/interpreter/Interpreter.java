@@ -1584,8 +1584,12 @@ operator|)
 name|node
 operator|)
 operator|.
-name|getValue
-argument_list|()
+name|getValueAs
+argument_list|(
+name|Comparable
+operator|.
+name|class
+argument_list|)
 return|;
 case|case
 name|INPUT_REF
