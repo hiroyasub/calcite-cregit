@@ -3167,7 +3167,7 @@ name|ExInst
 argument_list|<
 name|SqlValidatorException
 argument_list|>
-name|PatternVarAlreadyDefined
+name|patternVarAlreadyDefined
 parameter_list|(
 name|String
 name|varName
@@ -3182,7 +3182,7 @@ name|ExInst
 argument_list|<
 name|SqlValidatorException
 argument_list|>
-name|PatternPrevFunctionInMeasure
+name|patternPrevFunctionInMeasure
 parameter_list|(
 name|String
 name|call
@@ -3197,7 +3197,7 @@ name|ExInst
 argument_list|<
 name|SqlValidatorException
 argument_list|>
-name|PatternPrevFunctionOrder
+name|patternPrevFunctionOrder
 parameter_list|(
 name|String
 name|call
@@ -3212,7 +3212,7 @@ name|ExInst
 argument_list|<
 name|SqlValidatorException
 argument_list|>
-name|PatternAggregationInNavigation
+name|patternAggregationInNavigation
 parameter_list|(
 name|String
 name|call
@@ -3227,7 +3227,7 @@ name|ExInst
 argument_list|<
 name|SqlValidatorException
 argument_list|>
-name|PatternCountFunctionArg
+name|patternCountFunctionArg
 parameter_list|()
 function_decl|;
 annotation|@
@@ -3239,7 +3239,7 @@ name|ExInst
 argument_list|<
 name|SqlValidatorException
 argument_list|>
-name|PatternRunningFunctionInDefine
+name|patternRunningFunctionInDefine
 parameter_list|(
 name|String
 name|call
@@ -3254,7 +3254,7 @@ name|ExInst
 argument_list|<
 name|SqlValidatorException
 argument_list|>
-name|PatternFunctionVariableCheck
+name|patternFunctionVariableCheck
 parameter_list|(
 name|String
 name|call
@@ -3269,7 +3269,7 @@ name|ExInst
 argument_list|<
 name|SqlValidatorException
 argument_list|>
-name|FunctionMatchRecognizeOnly
+name|functionMatchRecognizeOnly
 parameter_list|(
 name|String
 name|call
@@ -3284,7 +3284,22 @@ name|ExInst
 argument_list|<
 name|SqlValidatorException
 argument_list|>
-name|PatternFunctionNullCheck
+name|patternFunctionNullCheck
+parameter_list|(
+name|String
+name|call
+parameter_list|)
+function_decl|;
+annotation|@
+name|BaseMessage
+argument_list|(
+literal|"Unknown pattern ''{0}''"
+argument_list|)
+name|ExInst
+argument_list|<
+name|SqlValidatorException
+argument_list|>
+name|unknownPattern
 parameter_list|(
 name|String
 name|call

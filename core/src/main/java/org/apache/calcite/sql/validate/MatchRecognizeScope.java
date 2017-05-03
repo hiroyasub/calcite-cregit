@@ -79,15 +79,11 @@ end_import
 
 begin_import
 import|import
-name|com
+name|java
 operator|.
-name|google
+name|util
 operator|.
-name|common
-operator|.
-name|collect
-operator|.
-name|Sets
+name|HashMap
 import|;
 end_import
 
@@ -97,7 +93,7 @@ name|java
 operator|.
 name|util
 operator|.
-name|HashMap
+name|LinkedHashSet
 import|;
 end_import
 
@@ -131,6 +127,16 @@ name|Set
 import|;
 end_import
 
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|TreeSet
+import|;
+end_import
+
 begin_comment
 comment|/**  * Scope for expressions in a {@code MATCH_RECOGNIZE} clause.  *  *<p>Defines variables and uses them as prefix of columns reference.  */
 end_comment
@@ -157,6 +163,7 @@ name|SqlMatchRecognize
 name|matchRecognize
 decl_stmt|;
 specifier|private
+specifier|final
 name|Set
 argument_list|<
 name|String
@@ -187,9 +194,36 @@ name|matchRecognize
 expr_stmt|;
 name|patternVars
 operator|=
-name|Sets
+name|validator
 operator|.
-name|newHashSet
+name|getCatalogReader
+argument_list|()
+operator|.
+name|nameMatcher
+argument_list|()
+operator|.
+name|isCaseSensitive
+argument_list|()
+condition|?
+operator|new
+name|LinkedHashSet
+argument_list|<
+name|String
+argument_list|>
+argument_list|()
+else|:
+operator|new
+name|TreeSet
+argument_list|<>
+argument_list|(
+name|String
+operator|.
+name|CASE_INSENSITIVE_ORDER
+argument_list|)
+expr_stmt|;
+name|patternVars
+operator|.
+name|add
 argument_list|(
 name|STAR
 argument_list|)

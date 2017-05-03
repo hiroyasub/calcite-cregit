@@ -479,6 +479,119 @@ literal|"(?s).*Encountered \"measures\" at .*"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testMatchRecognizeSkipTo3
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"from emp match_recognize (\n"
+operator|+
+literal|"  measures\n"
+operator|+
+literal|"    STRT.sal as start_sal,\n"
+operator|+
+literal|"    LAST(up.sal) as end_sal\n"
+operator|+
+literal|"    after match skip to ^no_exists^\n"
+operator|+
+literal|"    pattern (strt down+ up+)\n"
+operator|+
+literal|"    define\n"
+operator|+
+literal|"      down as down.sal< PREV(down.sal),\n"
+operator|+
+literal|"      up as up.sal> prev(up.sal)\n"
+operator|+
+literal|"  ) mr"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Unknown pattern 'NO_EXISTS'"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testMatchRecognizeSkipToCaseInsensitive
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"from emp match_recognize (\n"
+operator|+
+literal|"  measures\n"
+operator|+
+literal|"    STRT.sal as start_sal,\n"
+operator|+
+literal|"    LAST(up.sal) as end_sal\n"
+operator|+
+literal|"    after match skip to ^\"strt\"^\n"
+operator|+
+literal|"    pattern (strt down+ up+)\n"
+operator|+
+literal|"    define\n"
+operator|+
+literal|"      down as down.sal< PREV(down.sal),\n"
+operator|+
+literal|"      up as up.sal> prev(up.sal)\n"
+operator|+
+literal|"  ) mr"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Unknown pattern 'strt'"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|tester
+argument_list|(
+name|tester
+operator|.
+name|withCaseSensitive
+argument_list|(
+literal|false
+argument_list|)
+argument_list|)
+operator|.
+name|sansCarets
+argument_list|()
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
 block|}
 end_class
 
