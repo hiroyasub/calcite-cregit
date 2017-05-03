@@ -885,6 +885,10 @@ name|SqlValidatorTest
 operator|.
 name|class
 block|,
+name|SqlValidatorMatchTest
+operator|.
+name|class
+block|,
 name|SqlAdvisorTest
 operator|.
 name|class
