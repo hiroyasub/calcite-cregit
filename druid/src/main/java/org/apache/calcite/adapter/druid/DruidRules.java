@@ -1261,6 +1261,17 @@ name|getCondition
 argument_list|()
 argument_list|)
 decl_stmt|;
+if|if
+condition|(
+operator|!
+name|canPush
+argument_list|(
+name|cond
+argument_list|)
+condition|)
+block|{
+return|return;
+block|}
 for|for
 control|(
 name|RexNode
@@ -1900,6 +1911,25 @@ name|pushableNodes
 argument_list|,
 name|nonPushableNodes
 argument_list|)
+return|;
+block|}
+comment|/** Returns whether we can push an expression to Druid. */
+specifier|private
+specifier|static
+name|boolean
+name|canPush
+parameter_list|(
+name|RexNode
+name|cond
+parameter_list|)
+block|{
+comment|// Druid cannot implement "where false"
+return|return
+operator|!
+name|cond
+operator|.
+name|isAlwaysFalse
+argument_list|()
 return|;
 block|}
 block|}
