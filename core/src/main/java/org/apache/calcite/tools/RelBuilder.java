@@ -4654,10 +4654,24 @@ name|empty
 argument_list|()
 return|;
 block|}
+comment|// Remove cast of BOOLEAN NOT NULL to BOOLEAN or vice versa. Filter accepts
+comment|// nullable and not-nullable conditions, but a CAST might get in the way of
+comment|// other rewrites.
+specifier|final
+name|RexNode
+name|x2
+init|=
+name|simplifierUnknownAsFalse
+operator|.
+name|removeNullabilityCast
+argument_list|(
+name|x
+argument_list|)
+decl_stmt|;
 if|if
 condition|(
 operator|!
-name|x
+name|x2
 operator|.
 name|isAlwaysTrue
 argument_list|()
@@ -4684,7 +4698,7 @@ name|frame
 operator|.
 name|rel
 argument_list|,
-name|x
+name|x2
 argument_list|)
 decl_stmt|;
 name|stack

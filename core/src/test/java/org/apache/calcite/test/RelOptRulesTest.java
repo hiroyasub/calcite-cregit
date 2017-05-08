@@ -4560,6 +4560,40 @@ literal|"and upper(ename) = 'FOO'"
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1778">[CALCITE-1778]    * Query with "WHERE CASE" throws AssertionError "Cast for just nullability    * not allowed"</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testPushProjectPastFilter2
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select count(*)\n"
+operator|+
+literal|"from emp\n"
+operator|+
+literal|"where case when mgr< 10 then true else false end"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|withRule
+argument_list|(
+name|ProjectFilterTransposeRule
+operator|.
+name|INSTANCE
+argument_list|)
+operator|.
+name|check
+argument_list|()
+expr_stmt|;
+block|}
 annotation|@
 name|Test
 specifier|public
@@ -4585,7 +4619,7 @@ specifier|final
 name|String
 name|NOT_STRONG_EXPR
 init|=
-literal|"case when e.sal< 11 then 11 else -1 * e.sal end "
+literal|"case when e.sal< 11 then 11 else -1 * e.sal end"
 decl_stmt|;
 specifier|private
 specifier|static
@@ -4593,7 +4627,7 @@ specifier|final
 name|String
 name|STRONG_EXPR
 init|=
-literal|"case when e.sal< 11 then -1 * e.sal else e.sal end "
+literal|"case when e.sal< 11 then -1 * e.sal else e.sal end"
 decl_stmt|;
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1753">[CALCITE-1753]    * PushProjector should only preserve expressions if the expression is strong    * when pushing into the nullable-side of outer join</a>. */
 annotation|@
