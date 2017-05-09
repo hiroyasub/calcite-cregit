@@ -13370,6 +13370,109 @@ literal|"(?s)Cannot apply '\\+' to arguments of type.*"
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1781">[CALCITE-1781]    * Allow expression in CUBE and ROLLUP</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testCubeExpression
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select deptno + 1\n"
+operator|+
+literal|"from emp\n"
+operator|+
+literal|"group by cube(deptno + 1)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+specifier|final
+name|String
+name|sql2
+init|=
+literal|"select deptno + 2 - 2\n"
+operator|+
+literal|"from emp\n"
+operator|+
+literal|"group by cube(deptno + 2, empno)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql2
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+specifier|final
+name|String
+name|sql3
+init|=
+literal|"select ^deptno^\n"
+operator|+
+literal|"from emp\n"
+operator|+
+literal|"group by cube(deptno + 1)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql3
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Expression 'DEPTNO' is not being grouped"
+argument_list|)
+expr_stmt|;
+specifier|final
+name|String
+name|sql4
+init|=
+literal|"select ^deptno^ + 10\n"
+operator|+
+literal|"from emp\n"
+operator|+
+literal|"group by rollup(empno, deptno + 10 - 10)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql4
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Expression 'DEPTNO' is not being grouped"
+argument_list|)
+expr_stmt|;
+specifier|final
+name|String
+name|sql5
+init|=
+literal|"select deptno + 10\n"
+operator|+
+literal|"from emp\n"
+operator|+
+literal|"group by rollup(deptno + 10 - 10, deptno)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql5
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
 comment|/** Unit test for    * {@link org.apache.calcite.sql.validate.SqlValidatorUtil#rollup}. */
 annotation|@
 name|Test
