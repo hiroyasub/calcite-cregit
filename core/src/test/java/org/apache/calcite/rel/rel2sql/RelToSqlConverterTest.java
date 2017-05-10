@@ -4467,6 +4467,322 @@ name|expected
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testMatchRecognizeSubset1
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"  from \"product\" match_recognize\n"
+operator|+
+literal|"  (\n"
+operator|+
+literal|"    after match skip to down\n"
+operator|+
+literal|"    pattern (strt down+ up+)\n"
+operator|+
+literal|"    subset stdn = (strt, down)\n"
+operator|+
+literal|"    define\n"
+operator|+
+literal|"      down as down.\"net_weight\"< PREV(down.\"net_weight\"),\n"
+operator|+
+literal|"      up as up.\"net_weight\"> NEXT(up.\"net_weight\")\n"
+operator|+
+literal|"  ) mr"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM (SELECT *\n"
+operator|+
+literal|"FROM \"foodmart\".\"product\") MATCH_RECOGNIZE(\n"
+operator|+
+literal|"AFTER MATCH SKIP TO LAST \"DOWN\"\n"
+operator|+
+literal|"PATTERN (\"STRT\" \"DOWN\" + \"UP\" +)\n"
+operator|+
+literal|"SUBSET \"STDN\" = (\"DOWN\", \"STRT\")\n"
+operator|+
+literal|"DEFINE "
+operator|+
+literal|"\"DOWN\" AS PREV(\"DOWN\".\"net_weight\", 0)"
+operator|+
+literal|"< PREV(\"DOWN\".\"net_weight\", 1), "
+operator|+
+literal|"\"UP\" AS PREV(\"UP\".\"net_weight\", 0)"
+operator|+
+literal|"> NEXT(PREV(\"UP\".\"net_weight\", 0), 1))"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testMatchRecognizeSubset2
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"  from \"product\" match_recognize\n"
+operator|+
+literal|"  (\n"
+operator|+
+literal|"   measures STRT.\"net_weight\" as start_nw,"
+operator|+
+literal|"   LAST(DOWN.\"net_weight\") as bottom_nw,"
+operator|+
+literal|"   AVG(STDN.\"net_weight\") as avg_stdn"
+operator|+
+literal|"    pattern (strt down+ up+)\n"
+operator|+
+literal|"    subset stdn = (strt, down)\n"
+operator|+
+literal|"    define\n"
+operator|+
+literal|"      down as down.\"net_weight\"< PREV(down.\"net_weight\"),\n"
+operator|+
+literal|"      up as up.\"net_weight\"> prev(up.\"net_weight\")\n"
+operator|+
+literal|"  ) mr"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM (SELECT *\n"
+operator|+
+literal|"FROM \"foodmart\".\"product\") "
+operator|+
+literal|"MATCH_RECOGNIZE(\n"
+operator|+
+literal|"MEASURES "
+operator|+
+literal|"FINAL \"STRT\".\"net_weight\" AS \"START_NW\", "
+operator|+
+literal|"FINAL LAST(\"DOWN\".\"net_weight\", 0) AS \"BOTTOM_NW\", "
+operator|+
+literal|"FINAL (SUM(\"STDN\".\"net_weight\") / "
+operator|+
+literal|"COUNT(\"STDN\".\"net_weight\")) AS \"AVG_STDN\"\n"
+operator|+
+literal|"AFTER MATCH SKIP TO NEXT ROW\n"
+operator|+
+literal|"PATTERN (\"STRT\" \"DOWN\" + \"UP\" +)\n"
+operator|+
+literal|"SUBSET \"STDN\" = (\"DOWN\", \"STRT\")\n"
+operator|+
+literal|"DEFINE "
+operator|+
+literal|"\"DOWN\" AS PREV(\"DOWN\".\"net_weight\", 0)< "
+operator|+
+literal|"PREV(\"DOWN\".\"net_weight\", 1), "
+operator|+
+literal|"\"UP\" AS PREV(\"UP\".\"net_weight\", 0)> "
+operator|+
+literal|"PREV(\"UP\".\"net_weight\", 1))"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testMatchRecognizeSubset3
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"  from \"product\" match_recognize\n"
+operator|+
+literal|"  (\n"
+operator|+
+literal|"   measures STRT.\"net_weight\" as start_nw,"
+operator|+
+literal|"   LAST(DOWN.\"net_weight\") as bottom_nw,"
+operator|+
+literal|"   SUM(STDN.\"net_weight\") as avg_stdn"
+operator|+
+literal|"    pattern (strt down+ up+)\n"
+operator|+
+literal|"    subset stdn = (strt, down)\n"
+operator|+
+literal|"    define\n"
+operator|+
+literal|"      down as down.\"net_weight\"< PREV(down.\"net_weight\"),\n"
+operator|+
+literal|"      up as up.\"net_weight\"> prev(up.\"net_weight\")\n"
+operator|+
+literal|"  ) mr"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM (SELECT *\n"
+operator|+
+literal|"FROM \"foodmart\".\"product\") "
+operator|+
+literal|"MATCH_RECOGNIZE(\n"
+operator|+
+literal|"MEASURES "
+operator|+
+literal|"FINAL \"STRT\".\"net_weight\" AS \"START_NW\", "
+operator|+
+literal|"FINAL LAST(\"DOWN\".\"net_weight\", 0) AS \"BOTTOM_NW\", "
+operator|+
+literal|"FINAL SUM(\"STDN\".\"net_weight\") AS \"AVG_STDN\"\n"
+operator|+
+literal|"AFTER MATCH SKIP TO NEXT ROW\n"
+operator|+
+literal|"PATTERN (\"STRT\" \"DOWN\" + \"UP\" +)\n"
+operator|+
+literal|"SUBSET \"STDN\" = (\"DOWN\", \"STRT\")\n"
+operator|+
+literal|"DEFINE "
+operator|+
+literal|"\"DOWN\" AS PREV(\"DOWN\".\"net_weight\", 0)< "
+operator|+
+literal|"PREV(\"DOWN\".\"net_weight\", 1), "
+operator|+
+literal|"\"UP\" AS PREV(\"UP\".\"net_weight\", 0)> "
+operator|+
+literal|"PREV(\"UP\".\"net_weight\", 1))"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testMatchRecognizeSubset4
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"  from \"product\" match_recognize\n"
+operator|+
+literal|"  (\n"
+operator|+
+literal|"   measures STRT.\"net_weight\" as start_nw,"
+operator|+
+literal|"   LAST(DOWN.\"net_weight\") as bottom_nw,"
+operator|+
+literal|"   SUM(STDN.\"net_weight\") as avg_stdn"
+operator|+
+literal|"    pattern (strt down+ up+)\n"
+operator|+
+literal|"    subset stdn = (strt, down), stdn2 = (strt, down)\n"
+operator|+
+literal|"    define\n"
+operator|+
+literal|"      down as down.\"net_weight\"< PREV(down.\"net_weight\"),\n"
+operator|+
+literal|"      up as up.\"net_weight\"> prev(up.\"net_weight\")\n"
+operator|+
+literal|"  ) mr"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM (SELECT *\n"
+operator|+
+literal|"FROM \"foodmart\".\"product\") "
+operator|+
+literal|"MATCH_RECOGNIZE(\n"
+operator|+
+literal|"MEASURES "
+operator|+
+literal|"FINAL \"STRT\".\"net_weight\" AS \"START_NW\", "
+operator|+
+literal|"FINAL LAST(\"DOWN\".\"net_weight\", 0) AS \"BOTTOM_NW\", "
+operator|+
+literal|"FINAL SUM(\"STDN\".\"net_weight\") AS \"AVG_STDN\"\n"
+operator|+
+literal|"AFTER MATCH SKIP TO NEXT ROW\n"
+operator|+
+literal|"PATTERN (\"STRT\" \"DOWN\" + \"UP\" +)\n"
+operator|+
+literal|"SUBSET \"STDN\" = (\"DOWN\", \"STRT\"), \"STDN2\" = (\"DOWN\", \"STRT\")\n"
+operator|+
+literal|"DEFINE "
+operator|+
+literal|"\"DOWN\" AS PREV(\"DOWN\".\"net_weight\", 0)< "
+operator|+
+literal|"PREV(\"DOWN\".\"net_weight\", 1), "
+operator|+
+literal|"\"UP\" AS PREV(\"UP\".\"net_weight\", 0)> "
+operator|+
+literal|"PREV(\"UP\".\"net_weight\", 1))"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
 comment|/** Fluid interface to run tests. */
 specifier|private
 specifier|static

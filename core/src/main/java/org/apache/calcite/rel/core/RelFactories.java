@@ -467,6 +467,16 @@ name|Set
 import|;
 end_import
 
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|TreeSet
+import|;
+end_import
+
 begin_comment
 comment|/**  * Contains factory interface and default implementation for creating various  * rel nodes.  */
 end_comment
@@ -1541,6 +1551,17 @@ parameter_list|,
 name|RexNode
 name|after
 parameter_list|,
+name|Map
+argument_list|<
+name|String
+argument_list|,
+name|TreeSet
+argument_list|<
+name|String
+argument_list|>
+argument_list|>
+name|subsets
+parameter_list|,
 name|RelDataType
 name|rowType
 parameter_list|)
@@ -1589,6 +1610,17 @@ parameter_list|,
 name|RexNode
 name|after
 parameter_list|,
+name|Map
+argument_list|<
+name|String
+argument_list|,
+name|TreeSet
+argument_list|<
+name|String
+argument_list|>
+argument_list|>
+name|subsets
+parameter_list|,
 name|RelDataType
 name|rowType
 parameter_list|)
@@ -1611,6 +1643,8 @@ argument_list|,
 name|measures
 argument_list|,
 name|after
+argument_list|,
+name|subsets
 argument_list|,
 name|rowType
 argument_list|)

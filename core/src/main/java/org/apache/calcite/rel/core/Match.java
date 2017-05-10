@@ -475,8 +475,21 @@ argument_list|>
 argument_list|>
 name|aggregateCallsPreVar
 decl_stmt|;
+specifier|protected
+specifier|final
+name|ImmutableMap
+argument_list|<
+name|String
+argument_list|,
+name|SortedSet
+argument_list|<
+name|String
+argument_list|>
+argument_list|>
+name|subsets
+decl_stmt|;
 comment|//~ Constructors -----------------------------------------------
-comment|/**    * Creates a Match.    *    * @param cluster Cluster    * @param traitSet Trait set    * @param input Input relational expression    * @param pattern Regular expression that defines pattern variables    * @param strictStart Whether it is a strict start pattern    * @param strictEnd Whether it is a strict end pattern    * @param patternDefinitions Pattern definitions    * @param measures Measure definitions    * @param after After match definitions    * @param rowType Row type    */
+comment|/**    * Creates a Match.    *  @param cluster Cluster    * @param traitSet Trait set    * @param input Input relational expression    * @param pattern Regular expression that defines pattern variables    * @param strictStart Whether it is a strict start pattern    * @param strictEnd Whether it is a strict end pattern    * @param patternDefinitions Pattern definitions    * @param measures Measure definitions    * @param after After match definitions    * @param subsets Subsets of pattern variables    * @param rowType Row type    */
 specifier|protected
 name|Match
 parameter_list|(
@@ -516,6 +529,19 @@ name|measures
 parameter_list|,
 name|RexNode
 name|after
+parameter_list|,
+name|Map
+argument_list|<
+name|String
+argument_list|,
+name|?
+extends|extends
+name|SortedSet
+argument_list|<
+name|String
+argument_list|>
+argument_list|>
+name|subsets
 parameter_list|,
 name|RelDataType
 name|rowType
@@ -609,6 +635,15 @@ argument_list|(
 name|after
 argument_list|)
 expr_stmt|;
+name|this
+operator|.
+name|subsets
+operator|=
+name|copyMap
+argument_list|(
+name|subsets
+argument_list|)
+expr_stmt|;
 specifier|final
 name|AggregateFinder
 name|aggregateFinder
@@ -694,7 +729,7 @@ argument_list|)
 expr_stmt|;
 name|aggregateCallsPreVar
 operator|=
-name|copy
+name|copyMap
 argument_list|(
 name|aggregateFinder
 operator|.
@@ -702,7 +737,7 @@ name|aggregateCallsPerVar
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Creates an immutable copy of a map of sorted sets. */
+comment|/** Creates an immutable map of a map of sorted sets. */
 specifier|private
 specifier|static
 parameter_list|<
@@ -724,12 +759,14 @@ argument_list|<
 name|V
 argument_list|>
 argument_list|>
-name|copy
+name|copyMap
 parameter_list|(
 name|Map
 argument_list|<
 name|K
 argument_list|,
+name|?
+extends|extends
 name|SortedSet
 argument_list|<
 name|V
@@ -765,6 +802,8 @@ name|Entry
 argument_list|<
 name|K
 argument_list|,
+name|?
+extends|extends
 name|SortedSet
 argument_list|<
 name|V
@@ -872,6 +911,23 @@ name|patternDefinitions
 return|;
 block|}
 specifier|public
+name|ImmutableMap
+argument_list|<
+name|String
+argument_list|,
+name|SortedSet
+argument_list|<
+name|String
+argument_list|>
+argument_list|>
+name|getSubsets
+parameter_list|()
+block|{
+return|return
+name|subsets
+return|;
+block|}
+specifier|public
 specifier|abstract
 name|Match
 name|copy
@@ -906,6 +962,19 @@ name|measures
 parameter_list|,
 name|RexNode
 name|after
+parameter_list|,
+name|Map
+argument_list|<
+name|String
+argument_list|,
+name|?
+extends|extends
+name|SortedSet
+argument_list|<
+name|String
+argument_list|>
+argument_list|>
+name|subsets
 parameter_list|,
 name|RelDataType
 name|rowType
@@ -968,6 +1037,8 @@ argument_list|,
 name|measures
 argument_list|,
 name|after
+argument_list|,
+name|subsets
 argument_list|,
 name|rowType
 argument_list|)

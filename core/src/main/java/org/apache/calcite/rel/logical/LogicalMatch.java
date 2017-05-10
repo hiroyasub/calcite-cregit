@@ -129,6 +129,26 @@ name|Map
 import|;
 end_import
 
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|SortedSet
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|TreeSet
+import|;
+end_import
+
 begin_comment
 comment|/**  * Sub-class of {@link Match}  * not targeted at any particular engine or calling convention.  */
 end_comment
@@ -140,7 +160,7 @@ name|LogicalMatch
 extends|extends
 name|Match
 block|{
-comment|/**    * Creates a LogicalMatch.    *    * @param cluster cluster    * @param traitSet Trait set    * @param input Input relational expression    * @param pattern Regular Expression defining pattern variables    * @param strictStart Whether it is a strict start pattern    * @param strictEnd Whether it is a strict end pattern    * @param patternDefinitions Pattern definitions    * @param measures Measure definitions    * @param after After match definitions    * @param rowType Row type    */
+comment|/**    * Creates a LogicalMatch.    *    * @param cluster cluster    * @param traitSet Trait set    * @param input Input relational expression    * @param pattern Regular Expression defining pattern variables    * @param strictStart Whether it is a strict start pattern    * @param strictEnd Whether it is a strict end pattern    * @param patternDefinitions Pattern definitions    * @param measures Measure definitions    * @param after After match definitions    * @param subsets Subset definitions    * @param rowType Row type    */
 specifier|public
 name|LogicalMatch
 parameter_list|(
@@ -181,6 +201,19 @@ parameter_list|,
 name|RexNode
 name|after
 parameter_list|,
+name|Map
+argument_list|<
+name|String
+argument_list|,
+name|?
+extends|extends
+name|SortedSet
+argument_list|<
+name|String
+argument_list|>
+argument_list|>
+name|subsets
+parameter_list|,
 name|RelDataType
 name|rowType
 parameter_list|)
@@ -204,6 +237,8 @@ argument_list|,
 name|measures
 argument_list|,
 name|after
+argument_list|,
+name|subsets
 argument_list|,
 name|rowType
 argument_list|)
@@ -245,6 +280,17 @@ name|measures
 parameter_list|,
 name|RexNode
 name|after
+parameter_list|,
+name|Map
+argument_list|<
+name|String
+argument_list|,
+name|TreeSet
+argument_list|<
+name|String
+argument_list|>
+argument_list|>
+name|subsets
 parameter_list|,
 name|RelDataType
 name|rowType
@@ -293,6 +339,8 @@ argument_list|,
 name|measures
 argument_list|,
 name|after
+argument_list|,
+name|subsets
 argument_list|,
 name|rowType
 argument_list|)
@@ -336,6 +384,19 @@ parameter_list|,
 name|RexNode
 name|after
 parameter_list|,
+name|Map
+argument_list|<
+name|String
+argument_list|,
+name|?
+extends|extends
+name|SortedSet
+argument_list|<
+name|String
+argument_list|>
+argument_list|>
+name|subsets
+parameter_list|,
 name|RelDataType
 name|rowType
 parameter_list|)
@@ -376,6 +437,8 @@ argument_list|,
 name|measures
 argument_list|,
 name|after
+argument_list|,
+name|subsets
 argument_list|,
 name|rowType
 argument_list|)
