@@ -249,6 +249,7 @@ specifier|final
 name|AggregateFunction
 name|function
 decl_stmt|;
+comment|/** Creates a SqlUserDefinedAggFunction. */
 specifier|public
 name|SqlUserDefinedAggFunction
 parameter_list|(
@@ -266,6 +267,12 @@ name|operandTypeChecker
 parameter_list|,
 name|AggregateFunction
 name|function
+parameter_list|,
+name|boolean
+name|requiresOrder
+parameter_list|,
+name|boolean
+name|requiresOver
 parameter_list|)
 block|{
 name|super
@@ -295,9 +302,9 @@ name|SqlFunctionCategory
 operator|.
 name|USER_DEFINED_FUNCTION
 argument_list|,
-literal|false
+name|requiresOrder
 argument_list|,
-literal|false
+name|requiresOver
 argument_list|)
 expr_stmt|;
 name|this
