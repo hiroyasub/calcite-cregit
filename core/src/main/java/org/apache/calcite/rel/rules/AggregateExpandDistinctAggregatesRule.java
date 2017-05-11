@@ -598,7 +598,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Planner rule that expands distinct aggregates  * (such as {@code COUNT(DISTINCT x)}) from a  * {@link org.apache.calcite.rel.logical.LogicalAggregate}.  *  *<p>How this is done depends upon the arguments to the function. If all  * functions have the same argument  * (e.g. {@code COUNT(DISTINCT x), SUM(DISTINCT x)} both have the argument  * {@code x}) then one extra {@link org.apache.calcite.rel.core.Aggregate} is  * sufficient.  *  *<p>If there are multiple arguments  * (e.g. {@code COUNT(DISTINCT x), COUNT(DISTINCT y)})  * the rule creates separate {@code Aggregate}s and combines using a  * {@link org.apache.calcite.rel.core.Join}.  */
+comment|/**  * Planner rule that expands distinct aggregates  * (such as {@code COUNT(DISTINCT x)}) from a  * {@link org.apache.calcite.rel.core.Aggregate}.  *  *<p>How this is done depends upon the arguments to the function. If all  * functions have the same argument  * (e.g. {@code COUNT(DISTINCT x), SUM(DISTINCT x)} both have the argument  * {@code x}) then one extra {@link org.apache.calcite.rel.core.Aggregate} is  * sufficient.  *  *<p>If there are multiple arguments  * (e.g. {@code COUNT(DISTINCT x), COUNT(DISTINCT y)})  * the rule creates separate {@code Aggregate}s and combines using a  * {@link org.apache.calcite.rel.core.Join}.  */
 end_comment
 
 begin_class
@@ -678,7 +678,7 @@ name|Class
 argument_list|<
 name|?
 extends|extends
-name|LogicalAggregate
+name|Aggregate
 argument_list|>
 name|clazz
 parameter_list|,
@@ -4056,16 +4056,16 @@ name|getFieldList
 argument_list|()
 expr_stmt|;
 block|}
-comment|// LogicalAggregate(
+comment|// Aggregate(
 comment|//     child,
 comment|//     {COUNT(DISTINCT 1), SUM(DISTINCT 1), SUM(2)})
 comment|//
 comment|// becomes
 comment|//
-comment|// LogicalAggregate(
-comment|//     LogicalJoin(
+comment|// Aggregate(
+comment|//     Join(
 comment|//         child,
-comment|//         LogicalAggregate(child,< all columns> {}),
+comment|//         Aggregate(child,< all columns> {}),
 comment|//         INNER,
 comment|//<f2 = f5>))
 comment|//
@@ -4875,7 +4875,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**    * Given an {@link org.apache.calcite.rel.logical.LogicalAggregate}    * and the ordinals of the arguments to a    * particular call to an aggregate function, creates a 'select distinct'    * relational expression which projects the group columns and those    * arguments but nothing else.    *    *<p>For example, given    *    *<blockquote>    *<pre>select f0, count(distinct f1), count(distinct f2)    * from t group by f0</pre>    *</blockquote>    *    * and the argument list    *    *<blockquote>{2}</blockquote>    *    * returns    *    *<blockquote>    *<pre>select distinct f0, f2 from t</pre>    *</blockquote>    *    * '    *    *<p>The<code>sourceOf</code> map is populated with the source of each    * column; in this case sourceOf.get(0) = 0, and sourceOf.get(1) = 2.</p>    *    * @param relBuilder Relational expression builder    * @param aggregate Aggregate relational expression    * @param argList   Ordinals of columns to make distinct    * @param filterArg Ordinal of column to filter on, or -1    * @param sourceOf  Out parameter, is populated with a map of where each    *                  output field came from    * @return Aggregate relational expression which projects the required    * columns    */
+comment|/**    * Given an {@link org.apache.calcite.rel.core.Aggregate}    * and the ordinals of the arguments to a    * particular call to an aggregate function, creates a 'select distinct'    * relational expression which projects the group columns and those    * arguments but nothing else.    *    *<p>For example, given    *    *<blockquote>    *<pre>select f0, count(distinct f1), count(distinct f2)    * from t group by f0</pre>    *</blockquote>    *    *<p>and the argument list    *    *<blockquote>{2}</blockquote>    *    *<p>returns    *    *<blockquote>    *<pre>select distinct f0, f2 from t</pre>    *</blockquote>    *    *<p>The<code>sourceOf</code> map is populated with the source of each    * column; in this case sourceOf.get(0) = 0, and sourceOf.get(1) = 2.    *    * @param relBuilder Relational expression builder    * @param aggregate Aggregate relational expression    * @param argList   Ordinals of columns to make distinct    * @param filterArg Ordinal of column to filter on, or -1    * @param sourceOf  Out parameter, is populated with a map of where each    *                  output field came from    * @return Aggregate relational expression which projects the required    * columns    */
 specifier|private
 name|RelBuilder
 name|createSelectDistinct
