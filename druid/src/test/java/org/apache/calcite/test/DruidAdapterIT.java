@@ -6858,22 +6858,28 @@ literal|"where \"product_id\" = cast(NULL as varchar)\n"
 operator|+
 literal|"group by \"product_id\""
 decl_stmt|;
+specifier|final
 name|String
-name|druidQuery
+name|plan
 init|=
-literal|"'filter':{'type':'selector','dimension':'product_id','value':''}"
+literal|"PLAN=EnumerableInterpreter\n"
+operator|+
+literal|"  BindableAggregate(group=[{0}])\n"
+operator|+
+literal|"    BindableFilter(condition=[=($0, null)])\n"
+operator|+
+literal|"      DruidQuery(table=[[foodmart, foodmart]], "
+operator|+
+literal|"intervals=[[1900-01-09T00:00:00.000/2992-01-10T00:00:00.000]], projects=[[$1]])"
 decl_stmt|;
 name|sql
 argument_list|(
 name|sql
 argument_list|)
 operator|.
-name|queryContains
+name|explainContains
 argument_list|(
-name|druidChecker
-argument_list|(
-name|druidQuery
-argument_list|)
+name|plan
 argument_list|)
 expr_stmt|;
 block|}
