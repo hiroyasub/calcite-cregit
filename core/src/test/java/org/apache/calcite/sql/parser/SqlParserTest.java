@@ -13806,9 +13806,9 @@ argument_list|)
 expr_stmt|;
 name|checkExpFails
 argument_list|(
-literal|"1 ^+^ nullif + 3"
+literal|"1 + ^nullif^ + 3"
 argument_list|,
-literal|"(?s)Encountered \"\\+ nullif \\+\" at line 1, column 3.*"
+literal|"(?s)Encountered \"nullif \\+\" at line 1, column 5.*"
 argument_list|)
 expr_stmt|;
 block|}

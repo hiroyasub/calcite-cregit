@@ -18281,6 +18281,9 @@ decl_stmt|;
 name|checkFieldCount
 argument_list|(
 name|insert
+operator|.
+name|getTargetTable
+argument_list|()
 argument_list|,
 name|table
 argument_list|,

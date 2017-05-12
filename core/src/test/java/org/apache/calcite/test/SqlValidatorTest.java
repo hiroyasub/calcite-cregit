@@ -15011,7 +15011,7 @@ parameter_list|()
 block|{
 name|checkFails
 argument_list|(
-literal|"select * from emp cross join dept ^using (deptno)^"
+literal|"select * from emp cross join dept ^using^ (deptno)"
 argument_list|,
 literal|"Cannot specify condition \\(NATURAL keyword, or ON or USING clause\\) following CROSS JOIN"
 argument_list|)
@@ -15108,7 +15108,7 @@ name|checkFails
 argument_list|(
 literal|"select * from emp cross join dept\n"
 operator|+
-literal|" ^on emp.deptno = dept.deptno^"
+literal|" ^on^ emp.deptno = dept.deptno"
 argument_list|,
 literal|"Cannot specify condition \\(NATURAL keyword, or ON or USING clause\\) following CROSS JOIN"
 argument_list|)
@@ -19142,7 +19142,7 @@ expr_stmt|;
 comment|// in OVER clause with more than one level of nesting
 name|checkFails
 argument_list|(
-literal|"select ^avg(sum(min(sal))) OVER (partition by deptno)^\n"
+literal|"select ^avg(sum(min(sal)))^ OVER (partition by deptno)\n"
 operator|+
 literal|"from emp group by deptno"
 argument_list|,
@@ -28850,26 +28850,38 @@ name|void
 name|testInsertExtendedColumnModifiableViewFailColumnCount
 parameter_list|()
 block|{
+specifier|final
+name|String
+name|sql0
+init|=
+literal|"insert into ^EMP_MODIFIABLEVIEW2(\"rank\" INT, extra2 BOOLEAN)^"
+operator|+
+literal|" values ('nom', 1, 'job', 0, true, 0, false,"
+operator|+
+literal|" timestamp '1970-01-01 00:00:00', 1, 1,  1)"
+decl_stmt|;
 name|tester
 operator|.
 name|checkQueryFails
 argument_list|(
-literal|"insert into EMP_MODIFIABLEVIEW2(\"rank\" INT, extra2 BOOLEAN^)^"
-operator|+
-literal|" values ('nom', 1, 'job', 0, true, 0, false, timestamp '1970-01-01 00:00:00', 1, 1,"
-operator|+
-literal|"  1)"
+name|sql0
 argument_list|,
 literal|"Number of INSERT target columns \\(12\\) does not equal number of source items \\(11\\)"
 argument_list|)
 expr_stmt|;
+specifier|final
+name|String
+name|sql1
+init|=
+literal|"insert into ^EMP_MODIFIABLEVIEW2(\"rank\" INT, extra2 BOOLEAN)^"
+operator|+
+literal|" (deptno, empno, ename, extra2, \"rank\") values (?, 10, '2', true)"
+decl_stmt|;
 name|tester
 operator|.
 name|checkQueryFails
 argument_list|(
-literal|"insert into EMP_MODIFIABLEVIEW2(\"rank\" INT, extra2 BOOLEAN^)^"
-operator|+
-literal|" (deptno, empno, ename, extra2, \"rank\") values (?, 10, '2', true)"
+name|sql1
 argument_list|,
 literal|"Number of INSERT target columns \\(5\\) does not equal number of source items \\(4\\)"
 argument_list|)
