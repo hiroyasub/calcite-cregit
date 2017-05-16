@@ -1619,7 +1619,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testCartesianProduct
+name|testCartesianProductWithCommaSyntax
 parameter_list|()
 block|{
 name|String
@@ -1635,6 +1635,74 @@ operator|+
 literal|"FROM \"foodmart\".\"department\",\n"
 operator|+
 literal|"\"foodmart\".\"employee\""
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testCartesianProductWithInnerJoinSyntax
+parameter_list|()
+block|{
+name|String
+name|query
+init|=
+literal|"select * from \"department\"\n"
+operator|+
+literal|"INNER JOIN \"employee\" ON TRUE"
+decl_stmt|;
+name|String
+name|expected
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM \"foodmart\".\"department\",\n"
+operator|+
+literal|"\"foodmart\".\"employee\""
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testFullJoinOnTrueCondition
+parameter_list|()
+block|{
+name|String
+name|query
+init|=
+literal|"select * from \"department\"\n"
+operator|+
+literal|"FULL JOIN \"employee\" ON TRUE"
+decl_stmt|;
+name|String
+name|expected
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM \"foodmart\".\"department\"\n"
+operator|+
+literal|"FULL JOIN \"foodmart\".\"employee\" ON TRUE"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -2358,7 +2426,9 @@ literal|"on \"t1\".\"customer_id\" = \"t2\".\"customer_id\" or "
 operator|+
 literal|"(\"t1\".\"customer_id\" is null "
 operator|+
-literal|"and \"t2\".\"customer_id\" is null)\n"
+literal|"and \"t2\".\"customer_id\" is null) or\n"
+operator|+
+literal|"\"t2\".\"occupation\" is null\n"
 operator|+
 literal|"inner join \"foodmart\".\"product\" as \"t3\"\n"
 operator|+
@@ -2368,6 +2438,8 @@ literal|"(\"t1\".\"product_id\" is not null or "
 operator|+
 literal|"\"t3\".\"product_id\" is not null)"
 decl_stmt|;
+comment|// Some of the "IS NULL" and "IS NOT NULL" are reduced to TRUE or FALSE,
+comment|// but not all.
 name|String
 name|expected
 init|=
@@ -2377,17 +2449,17 @@ literal|"INNER JOIN \"foodmart\".\"customer\" "
 operator|+
 literal|"ON \"sales_fact_1997\".\"customer_id\" = \"customer\".\"customer_id\""
 operator|+
-literal|" OR \"sales_fact_1997\".\"customer_id\" IS NULL "
+literal|" OR FALSE AND FALSE"
 operator|+
-literal|"AND \"customer\".\"customer_id\" IS NULL\n"
+literal|" OR \"customer\".\"occupation\" IS NULL\n"
 operator|+
 literal|"INNER JOIN \"foodmart\".\"product\" "
 operator|+
-literal|"ON \"sales_fact_1997\".\"product_id\" = \"product\".\"product_id\" OR "
+literal|"ON \"sales_fact_1997\".\"product_id\" = \"product\".\"product_id\""
 operator|+
-literal|"\"sales_fact_1997\".\"product_id\" IS NOT NULL "
+literal|" OR TRUE"
 operator|+
-literal|"OR \"product\".\"product_id\" IS NOT NULL"
+literal|" OR TRUE"
 decl_stmt|;
 name|sql
 argument_list|(
