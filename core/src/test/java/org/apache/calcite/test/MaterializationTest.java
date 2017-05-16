@@ -4669,6 +4669,57 @@ argument_list|)
 expr_stmt|;
 block|}
 annotation|@
+name|Ignore
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testJoinAggregateMaterializationAggregateFuncs6
+parameter_list|()
+block|{
+comment|// This rewriting would be possible if planner generates a pre-aggregation,
+comment|// since the materialized view would match the subquery.
+comment|// Initial investigation after enabling AggregateJoinTransposeRule.EXTENDED
+comment|// shows that the rewriting with pre-aggregations is generated and the
+comment|// materialized view rewriting happens.
+comment|// However, we end up discarding the plan with the materialized view and still
+comment|// using the plan with the pre-aggregations.
+comment|// TODO: Explore and extend to choose best rewriting.
+specifier|final
+name|String
+name|m
+init|=
+literal|"select \"depts\".\"name\", sum(\"salary\") as s\n"
+operator|+
+literal|"from \"emps\"\n"
+operator|+
+literal|"join \"depts\" on (\"emps\".\"deptno\" = \"depts\".\"deptno\")\n"
+operator|+
+literal|"group by \"depts\".\"name\""
+decl_stmt|;
+specifier|final
+name|String
+name|q
+init|=
+literal|"select \"dependents\".\"empid\", sum(\"salary\") as s\n"
+operator|+
+literal|"from \"emps\"\n"
+operator|+
+literal|"join \"depts\" on (\"emps\".\"deptno\" = \"depts\".\"deptno\")\n"
+operator|+
+literal|"join \"dependents\" on (\"depts\".\"name\" = \"dependents\".\"name\")\n"
+operator|+
+literal|"group by \"dependents\".\"empid\""
+decl_stmt|;
+name|checkMaterialize
+argument_list|(
+name|m
+argument_list|,
+name|q
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
 name|Test
 specifier|public
 name|void
@@ -4763,6 +4814,133 @@ literal|"EXPR$0=[$t1], $condition=[$t4])\n"
 operator|+
 literal|"  EnumerableTableScan(table=[[hr, m0]])"
 argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testJoinMaterialization7
+parameter_list|()
+block|{
+name|checkMaterialize
+argument_list|(
+literal|"select \"depts\".\"name\"\n"
+operator|+
+literal|"from \"emps\"\n"
+operator|+
+literal|"join \"depts\" on (\"emps\".\"deptno\" = \"depts\".\"deptno\")"
+argument_list|,
+literal|"select \"dependents\".\"empid\"\n"
+operator|+
+literal|"from \"emps\"\n"
+operator|+
+literal|"join \"depts\" on (\"emps\".\"deptno\" = \"depts\".\"deptno\")\n"
+operator|+
+literal|"join \"dependents\" on (\"depts\".\"name\" = \"dependents\".\"name\")"
+argument_list|,
+name|HR_FKUK_MODEL
+argument_list|,
+name|CalciteAssert
+operator|.
+name|checkResultContains
+argument_list|(
+literal|"EnumerableCalc(expr#0..2=[{inputs}], empid0=[$t1])\n"
+operator|+
+literal|"  EnumerableJoin(condition=[=($0, $2)], joinType=[inner])\n"
+operator|+
+literal|"    EnumerableCalc(expr#0=[{inputs}], expr#1=[CAST($t0):VARCHAR CHARACTER SET \"ISO-8859-1\" "
+operator|+
+literal|"COLLATE \"ISO-8859-1$en_US$primary\"], name=[$t1])\n"
+operator|+
+literal|"      EnumerableTableScan(table=[[hr, m0]])\n"
+operator|+
+literal|"    EnumerableCalc(expr#0..1=[{inputs}], expr#2=[CAST($t1):VARCHAR CHARACTER SET \"ISO-8859-1\" "
+operator|+
+literal|"COLLATE \"ISO-8859-1$en_US$primary\"], empid=[$t0], name0=[$t2])\n"
+operator|+
+literal|"      EnumerableTableScan(table=[[hr, dependents]])"
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testJoinMaterialization8
+parameter_list|()
+block|{
+name|checkMaterialize
+argument_list|(
+literal|"select \"depts\".\"name\"\n"
+operator|+
+literal|"from \"emps\"\n"
+operator|+
+literal|"join \"depts\" on (\"emps\".\"deptno\" = \"depts\".\"deptno\")"
+argument_list|,
+literal|"select \"dependents\".\"empid\"\n"
+operator|+
+literal|"from \"depts\"\n"
+operator|+
+literal|"join \"dependents\" on (\"depts\".\"name\" = \"dependents\".\"name\")\n"
+operator|+
+literal|"join \"emps\" on (\"emps\".\"deptno\" = \"depts\".\"deptno\")"
+argument_list|,
+name|HR_FKUK_MODEL
+argument_list|,
+name|CalciteAssert
+operator|.
+name|checkResultContains
+argument_list|(
+literal|"EnumerableCalc(expr#0..4=[{inputs}], empid=[$t2])\n"
+operator|+
+literal|"  EnumerableJoin(condition=[=($1, $4)], joinType=[inner])\n"
+operator|+
+literal|"    EnumerableCalc(expr#0=[{inputs}], expr#1=[CAST($t0):VARCHAR CHARACTER SET \"ISO-8859-1\" "
+operator|+
+literal|"COLLATE \"ISO-8859-1$en_US$primary\"], proj#0..1=[{exprs}])\n"
+operator|+
+literal|"      EnumerableTableScan(table=[[hr, m0]])\n"
+operator|+
+literal|"    EnumerableCalc(expr#0..1=[{inputs}], expr#2=[CAST($t1):VARCHAR CHARACTER SET \"ISO-8859-1\" "
+operator|+
+literal|"COLLATE \"ISO-8859-1$en_US$primary\"], proj#0..2=[{exprs}])\n"
+operator|+
+literal|"      EnumerableTableScan(table=[[hr, dependents]])"
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testJoinMaterialization9
+parameter_list|()
+block|{
+name|checkMaterialize
+argument_list|(
+literal|"select \"depts\".\"name\"\n"
+operator|+
+literal|"from \"emps\"\n"
+operator|+
+literal|"join \"depts\" on (\"emps\".\"deptno\" = \"depts\".\"deptno\")"
+argument_list|,
+literal|"select \"dependents\".\"empid\"\n"
+operator|+
+literal|"from \"depts\"\n"
+operator|+
+literal|"join \"dependents\" on (\"depts\".\"name\" = \"dependents\".\"name\")\n"
+operator|+
+literal|"join \"locations\" on (\"locations\".\"name\" = \"dependents\".\"name\")\n"
+operator|+
+literal|"join \"emps\" on (\"emps\".\"deptno\" = \"depts\".\"deptno\")"
+argument_list|,
+name|HR_FKUK_MODEL
+argument_list|,
+name|CONTAINS_M0
 argument_list|)
 expr_stmt|;
 block|}
