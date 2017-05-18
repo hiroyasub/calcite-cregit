@@ -7940,6 +7940,36 @@ argument_list|,
 literal|"false"
 argument_list|)
 expr_stmt|;
+comment|// condition not satisfiable
+name|checkSimplifyFilter
+argument_list|(
+name|and
+argument_list|(
+name|gt
+argument_list|(
+name|aRef
+argument_list|,
+name|literal10
+argument_list|)
+argument_list|,
+name|ge
+argument_list|(
+name|bRef
+argument_list|,
+name|literal1
+argument_list|)
+argument_list|,
+name|lt
+argument_list|(
+name|aRef
+argument_list|,
+name|literal10
+argument_list|)
+argument_list|)
+argument_list|,
+literal|"false"
+argument_list|)
+expr_stmt|;
 comment|// case: trailing false and null, remove
 name|checkSimplifyFilter
 argument_list|(
