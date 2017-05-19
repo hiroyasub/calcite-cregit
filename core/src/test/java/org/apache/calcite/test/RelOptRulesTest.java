@@ -3972,6 +3972,55 @@ literal|" from sales.emp group by deptno"
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1293">[CALCITE-1293]    * Bad code generated when argument to COUNT(DISTINCT) is a # GROUP BY    * column</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testDistinctCount3
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select count(distinct deptno), sum(sal)"
+operator|+
+literal|" from sales.emp group by deptno"
+decl_stmt|;
+specifier|final
+name|HepProgram
+name|program
+init|=
+name|HepProgram
+operator|.
+name|builder
+argument_list|()
+operator|.
+name|addRuleInstance
+argument_list|(
+name|AggregateExpandDistinctAggregatesRule
+operator|.
+name|INSTANCE
+argument_list|)
+operator|.
+name|build
+argument_list|()
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|with
+argument_list|(
+name|program
+argument_list|)
+operator|.
+name|check
+argument_list|()
+expr_stmt|;
+block|}
 comment|/** Tests implementing multiple distinct count the old way, using a join. */
 annotation|@
 name|Test
