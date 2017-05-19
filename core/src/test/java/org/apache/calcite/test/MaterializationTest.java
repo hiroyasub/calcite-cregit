@@ -4637,6 +4637,64 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testJoinAggregateMaterializationNoAggregateFuncs10
+parameter_list|()
+block|{
+name|checkMaterialize
+argument_list|(
+literal|"select \"depts\".\"name\", \"dependents\".\"name\" as \"name2\", "
+operator|+
+literal|"\"emps\".\"deptno\", \"depts\".\"deptno\" as \"deptno2\", "
+operator|+
+literal|"\"dependents\".\"empid\"\n"
+operator|+
+literal|"from \"depts\", \"dependents\", \"emps\"\n"
+operator|+
+literal|"where \"depts\".\"deptno\"> 10\n"
+operator|+
+literal|"group by \"depts\".\"name\", \"dependents\".\"name\", "
+operator|+
+literal|"\"emps\".\"deptno\", \"depts\".\"deptno\", "
+operator|+
+literal|"\"dependents\".\"empid\""
+argument_list|,
+literal|"select \"dependents\".\"empid\"\n"
+operator|+
+literal|"from \"depts\"\n"
+operator|+
+literal|"join \"dependents\" on (\"depts\".\"name\" = \"dependents\".\"name\")\n"
+operator|+
+literal|"join \"emps\" on (\"emps\".\"deptno\" = \"depts\".\"deptno\")\n"
+operator|+
+literal|"where \"depts\".\"deptno\"> 10\n"
+operator|+
+literal|"group by \"dependents\".\"empid\""
+argument_list|,
+name|HR_FKUK_MODEL
+argument_list|,
+name|CalciteAssert
+operator|.
+name|checkResultContains
+argument_list|(
+literal|"EnumerableAggregate(group=[{4}])\n"
+operator|+
+literal|"  EnumerableCalc(expr#0..4=[{inputs}], expr#5=[=($t2, $t3)], "
+operator|+
+literal|"expr#6=[CAST($t0):VARCHAR CHARACTER SET \"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$primary\"], "
+operator|+
+literal|"expr#7=[CAST($t1):VARCHAR CHARACTER SET \"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$primary\"], "
+operator|+
+literal|"expr#8=[=($t6, $t7)], expr#9=[AND($t5, $t8)], proj#0..4=[{exprs}], $condition=[$t9])\n"
+operator|+
+literal|"    EnumerableTableScan(table=[[hr, m0]])"
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testJoinAggregateMaterializationAggregateFuncs1
 parameter_list|()
 block|{
@@ -4861,6 +4919,94 @@ argument_list|(
 name|m
 argument_list|,
 name|q
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testJoinAggregateMaterializationAggregateFuncs7
+parameter_list|()
+block|{
+name|checkMaterialize
+argument_list|(
+literal|"select \"dependents\".\"empid\", \"emps\".\"deptno\", sum(\"salary\") as s\n"
+operator|+
+literal|"from \"emps\"\n"
+operator|+
+literal|"join \"dependents\" on (\"emps\".\"empid\" = \"dependents\".\"empid\")\n"
+operator|+
+literal|"group by \"dependents\".\"empid\", \"emps\".\"deptno\""
+argument_list|,
+literal|"select \"dependents\".\"empid\", sum(\"salary\") as s\n"
+operator|+
+literal|"from \"emps\"\n"
+operator|+
+literal|"join \"depts\" on (\"emps\".\"deptno\" = \"depts\".\"deptno\")\n"
+operator|+
+literal|"join \"dependents\" on (\"emps\".\"empid\" = \"dependents\".\"empid\")\n"
+operator|+
+literal|"group by \"dependents\".\"empid\""
+argument_list|,
+name|HR_FKUK_MODEL
+argument_list|,
+name|CalciteAssert
+operator|.
+name|checkResultContains
+argument_list|(
+literal|"EnumerableAggregate(group=[{0}], S=[$SUM0($2)])\n"
+operator|+
+literal|"  EnumerableJoin(condition=[=($1, $3)], joinType=[inner])\n"
+operator|+
+literal|"    EnumerableTableScan(table=[[hr, m0]])\n"
+operator|+
+literal|"    EnumerableTableScan(table=[[hr, depts]])"
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testJoinAggregateMaterializationAggregateFuncs8
+parameter_list|()
+block|{
+name|checkMaterialize
+argument_list|(
+literal|"select \"dependents\".\"empid\", \"emps\".\"deptno\", sum(\"salary\") as s\n"
+operator|+
+literal|"from \"emps\"\n"
+operator|+
+literal|"join \"dependents\" on (\"emps\".\"empid\" = \"dependents\".\"empid\")\n"
+operator|+
+literal|"group by \"dependents\".\"empid\", \"emps\".\"deptno\""
+argument_list|,
+literal|"select \"depts\".\"name\", sum(\"salary\") as s\n"
+operator|+
+literal|"from \"emps\"\n"
+operator|+
+literal|"join \"depts\" on (\"emps\".\"deptno\" = \"depts\".\"deptno\")\n"
+operator|+
+literal|"join \"dependents\" on (\"emps\".\"empid\" = \"dependents\".\"empid\")\n"
+operator|+
+literal|"group by \"depts\".\"name\""
+argument_list|,
+name|HR_FKUK_MODEL
+argument_list|,
+name|CalciteAssert
+operator|.
+name|checkResultContains
+argument_list|(
+literal|"EnumerableAggregate(group=[{4}], S=[$SUM0($2)])\n"
+operator|+
+literal|"  EnumerableJoin(condition=[=($1, $3)], joinType=[inner])\n"
+operator|+
+literal|"    EnumerableTableScan(table=[[hr, m0]])\n"
+operator|+
+literal|"    EnumerableTableScan(table=[[hr, depts]])"
+argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
