@@ -11727,6 +11727,34 @@ name|rex
 argument_list|)
 expr_stmt|;
 block|}
+specifier|final
+name|SqlLiteral
+name|rowsPerMatch
+init|=
+name|matchRecognize
+operator|.
+name|getRowsPerMatch
+argument_list|()
+decl_stmt|;
+specifier|final
+name|boolean
+name|allRows
+init|=
+name|rowsPerMatch
+operator|!=
+literal|null
+operator|&&
+name|rowsPerMatch
+operator|.
+name|getValue
+argument_list|()
+operator|==
+name|SqlMatchRecognize
+operator|.
+name|RowsPerMatchOption
+operator|.
+name|ALL_ROWS
+decl_stmt|;
 name|matchBb
 operator|.
 name|setPatternVarRef
@@ -11785,6 +11813,8 @@ argument_list|,
 name|after
 argument_list|,
 name|subsetMap
+argument_list|,
+name|allRows
 argument_list|,
 name|rowType
 argument_list|)
@@ -24928,7 +24958,7 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/**    * Shuttle which walks over a tree of {@link RexNode}s and applies 'over' to    * all agg functions.    *    *<p>This is necessary because the returned expression is not necessarily a    * call to an agg function. For example,    *    *<blockquote><code>AVG(x)</code></blockquote>    *    * becomes    *    *<blockquote><code>SUM(x) / COUNT(x)</code></blockquote>    *    *<p>Any aggregate functions are converted to calls to the internal<code>    * $Histogram</code> aggregation function and accessors such as<code>    * $HistogramMin</code>; for example,    *    *<blockquote><code>MIN(x), MAX(x)</code></blockquote>    *    * are converted to    *    *<blockquote><code>$HistogramMin($Histogram(x)),    * $HistogramMax($Histogram(x))</code></blockquote>    *    * Common sub-expression elmination will ensure that only one histogram is    * computed.    */
+comment|/**    * Shuttle which walks over a tree of {@link RexNode}s and applies 'over' to    * all agg functions.    *    *<p>This is necessary because the returned expression is not necessarily a    * call to an agg function. For example,    *    *<blockquote><code>AVG(x)</code></blockquote>    *    *<p>becomes    *    *<blockquote><code>SUM(x) / COUNT(x)</code></blockquote>    *    *<p>Any aggregate functions are converted to calls to the internal<code>    * $Histogram</code> aggregation function and accessors such as<code>    * $HistogramMin</code>; for example,    *    *<blockquote><code>MIN(x), MAX(x)</code></blockquote>    *    *<p>are converted to    *    *<blockquote><code>$HistogramMin($Histogram(x)),    * $HistogramMax($Histogram(x))</code></blockquote>    *    *<p>Common sub-expression elimination will ensure that only one histogram is    * computed.    */
 specifier|private
 class|class
 name|HistogramShuttle

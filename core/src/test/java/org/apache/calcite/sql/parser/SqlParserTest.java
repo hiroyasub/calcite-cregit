@@ -25359,6 +25359,154 @@ name|expected
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testMatchRecognizeRowsPerMatch1
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"  from t match_recognize\n"
+operator|+
+literal|"  (\n"
+operator|+
+literal|"   measures STRT.ts as start_ts,"
+operator|+
+literal|"   LAST(DOWN.ts) as bottom_ts,"
+operator|+
+literal|"   AVG(stdn.price) as stdn_avg"
+operator|+
+literal|"   ONE ROW PER MATCH"
+operator|+
+literal|"    pattern (strt down+ up+)\n"
+operator|+
+literal|"    subset stdn = (strt, down), stdn2 = (strt, down)\n"
+operator|+
+literal|"    define\n"
+operator|+
+literal|"      down as down.price< PREV(down.price),\n"
+operator|+
+literal|"      up as up.price> prev(up.price)\n"
+operator|+
+literal|"  ) mr"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM `T` MATCH_RECOGNIZE(\n"
+operator|+
+literal|"MEASURES `STRT`.`TS` AS `START_TS`, "
+operator|+
+literal|"LAST(`DOWN`.`TS`, 0) AS `BOTTOM_TS`, "
+operator|+
+literal|"AVG(`STDN`.`PRICE`) AS `STDN_AVG`\n"
+operator|+
+literal|"ONE ROW PER MATCH\n"
+operator|+
+literal|"PATTERN (((`STRT` (`DOWN` +)) (`UP` +)))\n"
+operator|+
+literal|"SUBSET (`STDN` = (`STRT`, `DOWN`)), (`STDN2` = (`STRT`, `DOWN`))\n"
+operator|+
+literal|"DEFINE `DOWN` AS (`DOWN`.`PRICE`< PREV(`DOWN`.`PRICE`, 1)), "
+operator|+
+literal|"`UP` AS (`UP`.`PRICE`> PREV(`UP`.`PRICE`, 1))"
+operator|+
+literal|") AS `MR`"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testMatchRecognizeRowsPerMatch2
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"  from t match_recognize\n"
+operator|+
+literal|"  (\n"
+operator|+
+literal|"   measures STRT.ts as start_ts,"
+operator|+
+literal|"   LAST(DOWN.ts) as bottom_ts,"
+operator|+
+literal|"   AVG(stdn.price) as stdn_avg"
+operator|+
+literal|"   ALL ROWS PER MATCH"
+operator|+
+literal|"    pattern (strt down+ up+)\n"
+operator|+
+literal|"    subset stdn = (strt, down), stdn2 = (strt, down)\n"
+operator|+
+literal|"    define\n"
+operator|+
+literal|"      down as down.price< PREV(down.price),\n"
+operator|+
+literal|"      up as up.price> prev(up.price)\n"
+operator|+
+literal|"  ) mr"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM `T` MATCH_RECOGNIZE(\n"
+operator|+
+literal|"MEASURES `STRT`.`TS` AS `START_TS`, "
+operator|+
+literal|"LAST(`DOWN`.`TS`, 0) AS `BOTTOM_TS`, "
+operator|+
+literal|"AVG(`STDN`.`PRICE`) AS `STDN_AVG`\n"
+operator|+
+literal|"ALL ROWS PER MATCH\n"
+operator|+
+literal|"PATTERN (((`STRT` (`DOWN` +)) (`UP` +)))\n"
+operator|+
+literal|"SUBSET (`STDN` = (`STRT`, `DOWN`)), (`STDN2` = (`STRT`, `DOWN`))\n"
+operator|+
+literal|"DEFINE `DOWN` AS (`DOWN`.`PRICE`< PREV(`DOWN`.`PRICE`, 1)), "
+operator|+
+literal|"`UP` AS (`UP`.`PRICE`> PREV(`UP`.`PRICE`, 1))"
+operator|+
+literal|") AS `MR`"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
 comment|//~ Inner Interfaces -------------------------------------------------------
 comment|/**    * Callback to control how test actions are performed.    */
 specifier|protected

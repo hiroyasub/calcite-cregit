@@ -1562,6 +1562,9 @@ argument_list|>
 argument_list|>
 name|subsets
 parameter_list|,
+name|boolean
+name|allRows
+parameter_list|,
 name|RelDataType
 name|rowType
 parameter_list|)
@@ -1621,6 +1624,9 @@ argument_list|>
 argument_list|>
 name|subsets
 parameter_list|,
+name|boolean
+name|allRows
+parameter_list|,
 name|RelDataType
 name|rowType
 parameter_list|)
@@ -1645,6 +1651,8 @@ argument_list|,
 name|after
 argument_list|,
 name|subsets
+argument_list|,
+name|allRows
 argument_list|,
 name|rowType
 argument_list|)

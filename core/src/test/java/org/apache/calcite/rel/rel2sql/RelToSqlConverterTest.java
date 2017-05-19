@@ -2639,6 +2639,8 @@ literal|"FROM (SELECT *\n"
 operator|+
 literal|"FROM \"foodmart\".\"product\") MATCH_RECOGNIZE(\n"
 operator|+
+literal|"ONE ROW PER MATCH\n"
+operator|+
 literal|"AFTER MATCH SKIP TO NEXT ROW\n"
 operator|+
 literal|"PATTERN (\"STRT\" \"DOWN\" + \"UP\" +)\n"
@@ -2700,6 +2702,8 @@ operator|+
 literal|"FROM (SELECT *\n"
 operator|+
 literal|"FROM \"foodmart\".\"product\") MATCH_RECOGNIZE(\n"
+operator|+
+literal|"ONE ROW PER MATCH\n"
 operator|+
 literal|"AFTER MATCH SKIP TO NEXT ROW\n"
 operator|+
@@ -2763,6 +2767,8 @@ literal|"FROM (SELECT *\n"
 operator|+
 literal|"FROM \"foodmart\".\"product\") MATCH_RECOGNIZE(\n"
 operator|+
+literal|"ONE ROW PER MATCH\n"
+operator|+
 literal|"AFTER MATCH SKIP TO NEXT ROW\n"
 operator|+
 literal|"PATTERN (^ \"STRT\" \"DOWN\" + \"UP\" +)\n"
@@ -2824,6 +2830,8 @@ operator|+
 literal|"FROM (SELECT *\n"
 operator|+
 literal|"FROM \"foodmart\".\"product\") MATCH_RECOGNIZE(\n"
+operator|+
+literal|"ONE ROW PER MATCH\n"
 operator|+
 literal|"AFTER MATCH SKIP TO NEXT ROW\n"
 operator|+
@@ -2887,6 +2895,8 @@ literal|"FROM (SELECT *\n"
 operator|+
 literal|"FROM \"foodmart\".\"product\") MATCH_RECOGNIZE(\n"
 operator|+
+literal|"ONE ROW PER MATCH\n"
+operator|+
 literal|"AFTER MATCH SKIP TO NEXT ROW\n"
 operator|+
 literal|"PATTERN (\"STRT\" \"DOWN\" * \"UP\" ?)\n"
@@ -2948,6 +2958,8 @@ operator|+
 literal|"FROM (SELECT *\n"
 operator|+
 literal|"FROM \"foodmart\".\"product\") MATCH_RECOGNIZE(\n"
+operator|+
+literal|"ONE ROW PER MATCH\n"
 operator|+
 literal|"AFTER MATCH SKIP TO NEXT ROW\n"
 operator|+
@@ -3011,6 +3023,8 @@ literal|"FROM (SELECT *\n"
 operator|+
 literal|"FROM \"foodmart\".\"product\") MATCH_RECOGNIZE(\n"
 operator|+
+literal|"ONE ROW PER MATCH\n"
+operator|+
 literal|"AFTER MATCH SKIP TO NEXT ROW\n"
 operator|+
 literal|"PATTERN (\"STRT\" \"DOWN\" { 2 } \"UP\" { 3, })\n"
@@ -3073,6 +3087,8 @@ literal|"FROM (SELECT *\n"
 operator|+
 literal|"FROM \"foodmart\".\"product\") MATCH_RECOGNIZE(\n"
 operator|+
+literal|"ONE ROW PER MATCH\n"
+operator|+
 literal|"AFTER MATCH SKIP TO NEXT ROW\n"
 operator|+
 literal|"PATTERN (\"STRT\" \"DOWN\" { , 2 } \"UP\" { 3, 5 })\n"
@@ -3134,6 +3150,8 @@ operator|+
 literal|"FROM (SELECT *\n"
 operator|+
 literal|"FROM \"foodmart\".\"product\") MATCH_RECOGNIZE(\n"
+operator|+
+literal|"ONE ROW PER MATCH\n"
 operator|+
 literal|"AFTER MATCH SKIP TO NEXT ROW\n"
 operator|+
@@ -3199,6 +3217,8 @@ literal|"FROM (SELECT *\n"
 operator|+
 literal|"FROM \"foodmart\".\"product\") MATCH_RECOGNIZE(\n"
 operator|+
+literal|"ONE ROW PER MATCH\n"
+operator|+
 literal|"AFTER MATCH SKIP TO NEXT ROW\n"
 operator|+
 literal|"PATTERN "
@@ -3263,6 +3283,8 @@ literal|"FROM (SELECT *\n"
 operator|+
 literal|"FROM \"foodmart\".\"product\") MATCH_RECOGNIZE(\n"
 operator|+
+literal|"ONE ROW PER MATCH\n"
+operator|+
 literal|"AFTER MATCH SKIP TO NEXT ROW\n"
 operator|+
 literal|"PATTERN (\"STRT\" \"DOWN\" + \"UP\" +)\n"
@@ -3324,6 +3346,8 @@ operator|+
 literal|"FROM (SELECT *\n"
 operator|+
 literal|"FROM \"foodmart\".\"product\") MATCH_RECOGNIZE(\n"
+operator|+
+literal|"ONE ROW PER MATCH\n"
 operator|+
 literal|"AFTER MATCH SKIP TO NEXT ROW\n"
 operator|+
@@ -3423,6 +3447,8 @@ literal|"AND \"product_class\".\"product_department\" = 'Snacks') "
 operator|+
 literal|"MATCH_RECOGNIZE(\n"
 operator|+
+literal|"ONE ROW PER MATCH\n"
+operator|+
 literal|"AFTER MATCH SKIP TO NEXT ROW\n"
 operator|+
 literal|"PATTERN (\"STRT\" \"DOWN\" + \"UP\" +)\n"
@@ -3487,6 +3513,8 @@ literal|"FROM (SELECT *\n"
 operator|+
 literal|"FROM \"foodmart\".\"product\") MATCH_RECOGNIZE(\n"
 operator|+
+literal|"ONE ROW PER MATCH\n"
+operator|+
 literal|"AFTER MATCH SKIP TO NEXT ROW\n"
 operator|+
 literal|"PATTERN (\"STRT\" \"DOWN\" + \"UP\" +)\n"
@@ -3549,6 +3577,8 @@ literal|"FROM (SELECT *\n"
 operator|+
 literal|"FROM \"foodmart\".\"product\") MATCH_RECOGNIZE(\n"
 operator|+
+literal|"ONE ROW PER MATCH\n"
+operator|+
 literal|"AFTER MATCH SKIP TO NEXT ROW\n"
 operator|+
 literal|"PATTERN (\"STRT\" \"DOWN\" + \"UP\" +)\n"
@@ -3610,6 +3640,8 @@ operator|+
 literal|"FROM (SELECT *\n"
 operator|+
 literal|"FROM \"foodmart\".\"product\") MATCH_RECOGNIZE(\n"
+operator|+
+literal|"ONE ROW PER MATCH\n"
 operator|+
 literal|"AFTER MATCH SKIP TO NEXT ROW\n"
 operator|+
@@ -3674,6 +3706,8 @@ operator|+
 literal|"FROM (SELECT *\n"
 operator|+
 literal|"FROM \"foodmart\".\"product\") MATCH_RECOGNIZE(\n"
+operator|+
+literal|"ONE ROW PER MATCH\n"
 operator|+
 literal|"AFTER MATCH SKIP TO NEXT ROW\n"
 operator|+
@@ -3753,6 +3787,8 @@ literal|"FINAL LAST(\"DOWN\".\"net_weight\", 0) AS \"BOTTOM_NW\", "
 operator|+
 literal|"FINAL LAST(\"UP\".\"net_weight\", 0) AS \"END_NW\"\n"
 operator|+
+literal|"ONE ROW PER MATCH\n"
+operator|+
 literal|"AFTER MATCH SKIP TO NEXT ROW\n"
 operator|+
 literal|"PATTERN (\"STRT\" \"DOWN\" + \"UP\" +)\n"
@@ -3831,6 +3867,8 @@ literal|"FINAL LAST(\"DOWN\".\"net_weight\", 0) AS \"BOTTOM_NW\", "
 operator|+
 literal|"FINAL LAST(\"UP\".\"net_weight\", 0) AS \"END_NW\"\n"
 operator|+
+literal|"ONE ROW PER MATCH\n"
+operator|+
 literal|"AFTER MATCH SKIP TO NEXT ROW\n"
 operator|+
 literal|"PATTERN (\"STRT\" \"DOWN\" + \"UP\" +)\n"
@@ -3908,6 +3946,8 @@ operator|+
 literal|"FINAL (RUNNING LAST(\"DOWN\".\"net_weight\", 0)) AS \"BOTTOM_NW\", "
 operator|+
 literal|"FINAL LAST(\"UP\".\"net_weight\", 0) AS \"END_NW\"\n"
+operator|+
+literal|"ONE ROW PER MATCH\n"
 operator|+
 literal|"AFTER MATCH SKIP TO NEXT ROW\n"
 operator|+
@@ -3988,6 +4028,8 @@ operator|+
 literal|"FINAL COUNT(\"*\".\"net_weight\") AS \"DOWN_CNT\", "
 operator|+
 literal|"FINAL (RUNNING COUNT(\"*\".\"net_weight\")) AS \"RUNNING_CNT\"\n"
+operator|+
+literal|"ONE ROW PER MATCH\n"
 operator|+
 literal|"AFTER MATCH SKIP TO NEXT ROW\n"
 operator|+
@@ -4071,6 +4113,8 @@ literal|"FINAL (SUM(\"DOWN\".\"net_weight\") / COUNT(\"DOWN\".\"net_weight\")) "
 operator|+
 literal|"AS \"DOWN_CNT\"\n"
 operator|+
+literal|"ONE ROW PER MATCH\n"
+operator|+
 literal|"AFTER MATCH SKIP TO NEXT ROW\n"
 operator|+
 literal|"PATTERN (\"STRT\" \"DOWN\" + \"UP\" +)\n"
@@ -4148,6 +4192,8 @@ operator|+
 literal|"FINAL LAST(\"DOWN\".\"net_weight\", 0) AS \"UP_CNT\", "
 operator|+
 literal|"FINAL SUM(\"DOWN\".\"net_weight\") AS \"DOWN_CNT\"\n"
+operator|+
+literal|"ONE ROW PER MATCH\n"
 operator|+
 literal|"AFTER MATCH SKIP TO NEXT ROW\n"
 operator|+
@@ -4229,6 +4275,8 @@ literal|"FINAL LAST(\"DOWN\".\"net_weight\", 0) AS \"UP_CNT\", "
 operator|+
 literal|"FINAL SUM(\"DOWN\".\"net_weight\") AS \"DOWN_CNT\"\n"
 operator|+
+literal|"ONE ROW PER MATCH\n"
+operator|+
 literal|"AFTER MATCH SKIP TO NEXT ROW\n"
 operator|+
 literal|"PATTERN "
@@ -4297,6 +4345,8 @@ literal|"FROM (SELECT *\n"
 operator|+
 literal|"FROM \"foodmart\".\"product\") MATCH_RECOGNIZE(\n"
 operator|+
+literal|"ONE ROW PER MATCH\n"
+operator|+
 literal|"AFTER MATCH SKIP TO NEXT ROW\n"
 operator|+
 literal|"PATTERN (\"STRT\" \"DOWN\" + \"UP\" +)\n"
@@ -4360,6 +4410,8 @@ operator|+
 literal|"FROM (SELECT *\n"
 operator|+
 literal|"FROM \"foodmart\".\"product\") MATCH_RECOGNIZE(\n"
+operator|+
+literal|"ONE ROW PER MATCH\n"
 operator|+
 literal|"AFTER MATCH SKIP PAST LAST ROW\n"
 operator|+
@@ -4425,6 +4477,8 @@ literal|"FROM (SELECT *\n"
 operator|+
 literal|"FROM \"foodmart\".\"product\") MATCH_RECOGNIZE(\n"
 operator|+
+literal|"ONE ROW PER MATCH\n"
+operator|+
 literal|"AFTER MATCH SKIP TO FIRST \"DOWN\"\n"
 operator|+
 literal|"PATTERN (\"STRT\" \"DOWN\" + \"UP\" +)\n"
@@ -4489,6 +4543,8 @@ literal|"FROM (SELECT *\n"
 operator|+
 literal|"FROM \"foodmart\".\"product\") MATCH_RECOGNIZE(\n"
 operator|+
+literal|"ONE ROW PER MATCH\n"
+operator|+
 literal|"AFTER MATCH SKIP TO LAST \"DOWN\"\n"
 operator|+
 literal|"PATTERN (\"STRT\" \"DOWN\" + \"UP\" +)\n"
@@ -4552,6 +4608,8 @@ operator|+
 literal|"FROM (SELECT *\n"
 operator|+
 literal|"FROM \"foodmart\".\"product\") MATCH_RECOGNIZE(\n"
+operator|+
+literal|"ONE ROW PER MATCH\n"
 operator|+
 literal|"AFTER MATCH SKIP TO LAST \"DOWN\"\n"
 operator|+
@@ -4618,6 +4676,8 @@ operator|+
 literal|"FROM (SELECT *\n"
 operator|+
 literal|"FROM \"foodmart\".\"product\") MATCH_RECOGNIZE(\n"
+operator|+
+literal|"ONE ROW PER MATCH\n"
 operator|+
 literal|"AFTER MATCH SKIP TO LAST \"DOWN\"\n"
 operator|+
@@ -4703,6 +4763,8 @@ literal|"FINAL (SUM(\"STDN\".\"net_weight\") / "
 operator|+
 literal|"COUNT(\"STDN\".\"net_weight\")) AS \"AVG_STDN\"\n"
 operator|+
+literal|"ONE ROW PER MATCH\n"
+operator|+
 literal|"AFTER MATCH SKIP TO NEXT ROW\n"
 operator|+
 literal|"PATTERN (\"STRT\" \"DOWN\" + \"UP\" +)\n"
@@ -4785,6 +4847,8 @@ literal|"FINAL LAST(\"DOWN\".\"net_weight\", 0) AS \"BOTTOM_NW\", "
 operator|+
 literal|"FINAL SUM(\"STDN\".\"net_weight\") AS \"AVG_STDN\"\n"
 operator|+
+literal|"ONE ROW PER MATCH\n"
+operator|+
 literal|"AFTER MATCH SKIP TO NEXT ROW\n"
 operator|+
 literal|"PATTERN (\"STRT\" \"DOWN\" + \"UP\" +)\n"
@@ -4866,6 +4930,180 @@ operator|+
 literal|"FINAL LAST(\"DOWN\".\"net_weight\", 0) AS \"BOTTOM_NW\", "
 operator|+
 literal|"FINAL SUM(\"STDN\".\"net_weight\") AS \"AVG_STDN\"\n"
+operator|+
+literal|"ONE ROW PER MATCH\n"
+operator|+
+literal|"AFTER MATCH SKIP TO NEXT ROW\n"
+operator|+
+literal|"PATTERN (\"STRT\" \"DOWN\" + \"UP\" +)\n"
+operator|+
+literal|"SUBSET \"STDN\" = (\"DOWN\", \"STRT\"), \"STDN2\" = (\"DOWN\", \"STRT\")\n"
+operator|+
+literal|"DEFINE "
+operator|+
+literal|"\"DOWN\" AS PREV(\"DOWN\".\"net_weight\", 0)< "
+operator|+
+literal|"PREV(\"DOWN\".\"net_weight\", 1), "
+operator|+
+literal|"\"UP\" AS PREV(\"UP\".\"net_weight\", 0)> "
+operator|+
+literal|"PREV(\"UP\".\"net_weight\", 1))"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testMatchRecognizeRowsPerMatch1
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"  from \"product\" match_recognize\n"
+operator|+
+literal|"  (\n"
+operator|+
+literal|"   measures STRT.\"net_weight\" as start_nw,"
+operator|+
+literal|"   LAST(DOWN.\"net_weight\") as bottom_nw,"
+operator|+
+literal|"   SUM(STDN.\"net_weight\") as avg_stdn"
+operator|+
+literal|"    ONE ROW PER MATCH\n"
+operator|+
+literal|"    pattern (strt down+ up+)\n"
+operator|+
+literal|"    subset stdn = (strt, down), stdn2 = (strt, down)\n"
+operator|+
+literal|"    define\n"
+operator|+
+literal|"      down as down.\"net_weight\"< PREV(down.\"net_weight\"),\n"
+operator|+
+literal|"      up as up.\"net_weight\"> prev(up.\"net_weight\")\n"
+operator|+
+literal|"  ) mr"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM (SELECT *\n"
+operator|+
+literal|"FROM \"foodmart\".\"product\") "
+operator|+
+literal|"MATCH_RECOGNIZE(\n"
+operator|+
+literal|"MEASURES "
+operator|+
+literal|"FINAL \"STRT\".\"net_weight\" AS \"START_NW\", "
+operator|+
+literal|"FINAL LAST(\"DOWN\".\"net_weight\", 0) AS \"BOTTOM_NW\", "
+operator|+
+literal|"FINAL SUM(\"STDN\".\"net_weight\") AS \"AVG_STDN\"\n"
+operator|+
+literal|"ONE ROW PER MATCH\n"
+operator|+
+literal|"AFTER MATCH SKIP TO NEXT ROW\n"
+operator|+
+literal|"PATTERN (\"STRT\" \"DOWN\" + \"UP\" +)\n"
+operator|+
+literal|"SUBSET \"STDN\" = (\"DOWN\", \"STRT\"), \"STDN2\" = (\"DOWN\", \"STRT\")\n"
+operator|+
+literal|"DEFINE "
+operator|+
+literal|"\"DOWN\" AS PREV(\"DOWN\".\"net_weight\", 0)< "
+operator|+
+literal|"PREV(\"DOWN\".\"net_weight\", 1), "
+operator|+
+literal|"\"UP\" AS PREV(\"UP\".\"net_weight\", 0)> "
+operator|+
+literal|"PREV(\"UP\".\"net_weight\", 1))"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testMatchRecognizeRowsPerMatch2
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"  from \"product\" match_recognize\n"
+operator|+
+literal|"  (\n"
+operator|+
+literal|"   measures STRT.\"net_weight\" as start_nw,"
+operator|+
+literal|"   LAST(DOWN.\"net_weight\") as bottom_nw,"
+operator|+
+literal|"   SUM(STDN.\"net_weight\") as avg_stdn"
+operator|+
+literal|"    ALL ROWS PER MATCH\n"
+operator|+
+literal|"    pattern (strt down+ up+)\n"
+operator|+
+literal|"    subset stdn = (strt, down), stdn2 = (strt, down)\n"
+operator|+
+literal|"    define\n"
+operator|+
+literal|"      down as down.\"net_weight\"< PREV(down.\"net_weight\"),\n"
+operator|+
+literal|"      up as up.\"net_weight\"> prev(up.\"net_weight\")\n"
+operator|+
+literal|"  ) mr"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM (SELECT *\n"
+operator|+
+literal|"FROM \"foodmart\".\"product\") "
+operator|+
+literal|"MATCH_RECOGNIZE(\n"
+operator|+
+literal|"MEASURES "
+operator|+
+literal|"RUNNING \"STRT\".\"net_weight\" AS \"START_NW\", "
+operator|+
+literal|"RUNNING LAST(\"DOWN\".\"net_weight\", 0) AS \"BOTTOM_NW\", "
+operator|+
+literal|"RUNNING SUM(\"STDN\".\"net_weight\") AS \"AVG_STDN\"\n"
+operator|+
+literal|"ALL ROWS PER MATCH\n"
 operator|+
 literal|"AFTER MATCH SKIP TO NEXT ROW\n"
 operator|+

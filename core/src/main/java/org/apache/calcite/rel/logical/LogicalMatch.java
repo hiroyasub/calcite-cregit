@@ -160,8 +160,8 @@ name|LogicalMatch
 extends|extends
 name|Match
 block|{
-comment|/**    * Creates a LogicalMatch.    *    * @param cluster cluster    * @param traitSet Trait set    * @param input Input relational expression    * @param pattern Regular Expression defining pattern variables    * @param strictStart Whether it is a strict start pattern    * @param strictEnd Whether it is a strict end pattern    * @param patternDefinitions Pattern definitions    * @param measures Measure definitions    * @param after After match definitions    * @param subsets Subset definitions    * @param rowType Row type    */
-specifier|public
+comment|/**    * Creates a LogicalMatch.    *    * @param cluster cluster    * @param traitSet Trait set    * @param input Input relational expression    * @param pattern Regular Expression defining pattern variables    * @param strictStart Whether it is a strict start pattern    * @param strictEnd Whether it is a strict end pattern    * @param patternDefinitions Pattern definitions    * @param measures Measure definitions    * @param after After match definitions    * @param subsets Subset definitions    * @param allRows Whether all rows per match (false means one row per match)    * @param rowType Row type    */
+specifier|private
 name|LogicalMatch
 parameter_list|(
 name|RelOptCluster
@@ -214,6 +214,9 @@ argument_list|>
 argument_list|>
 name|subsets
 parameter_list|,
+name|boolean
+name|allRows
+parameter_list|,
 name|RelDataType
 name|rowType
 parameter_list|)
@@ -239,6 +242,8 @@ argument_list|,
 name|after
 argument_list|,
 name|subsets
+argument_list|,
+name|allRows
 argument_list|,
 name|rowType
 argument_list|)
@@ -292,6 +297,9 @@ argument_list|>
 argument_list|>
 name|subsets
 parameter_list|,
+name|boolean
+name|allRows
+parameter_list|,
 name|RelDataType
 name|rowType
 parameter_list|)
@@ -341,6 +349,8 @@ argument_list|,
 name|after
 argument_list|,
 name|subsets
+argument_list|,
+name|allRows
 argument_list|,
 name|rowType
 argument_list|)
@@ -397,6 +407,9 @@ argument_list|>
 argument_list|>
 name|subsets
 parameter_list|,
+name|boolean
+name|allRows
+parameter_list|,
 name|RelDataType
 name|rowType
 parameter_list|)
@@ -439,6 +452,8 @@ argument_list|,
 name|after
 argument_list|,
 name|subsets
+argument_list|,
+name|allRows
 argument_list|,
 name|rowType
 argument_list|)

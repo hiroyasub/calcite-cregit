@@ -441,6 +441,11 @@ name|strictEnd
 decl_stmt|;
 specifier|protected
 specifier|final
+name|boolean
+name|allRows
+decl_stmt|;
+specifier|protected
+specifier|final
 name|RexNode
 name|after
 decl_stmt|;
@@ -489,7 +494,7 @@ argument_list|>
 name|subsets
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------
-comment|/**    * Creates a Match.    *  @param cluster Cluster    * @param traitSet Trait set    * @param input Input relational expression    * @param pattern Regular expression that defines pattern variables    * @param strictStart Whether it is a strict start pattern    * @param strictEnd Whether it is a strict end pattern    * @param patternDefinitions Pattern definitions    * @param measures Measure definitions    * @param after After match definitions    * @param subsets Subsets of pattern variables    * @param rowType Row type    */
+comment|/**    * Creates a Match.    *    * @param cluster Cluster    * @param traitSet Trait set    * @param input Input relational expression    * @param pattern Regular expression that defines pattern variables    * @param strictStart Whether it is a strict start pattern    * @param strictEnd Whether it is a strict end pattern    * @param patternDefinitions Pattern definitions    * @param measures Measure definitions    * @param after After match definitions    * @param subsets Subsets of pattern variables    * @param allRows Whether all rows per match (false means one row per match)    * @param rowType Row type    */
 specifier|protected
 name|Match
 parameter_list|(
@@ -542,6 +547,9 @@ name|String
 argument_list|>
 argument_list|>
 name|subsets
+parameter_list|,
+name|boolean
+name|allRows
 parameter_list|,
 name|RelDataType
 name|rowType
@@ -643,6 +651,12 @@ name|copyMap
 argument_list|(
 name|subsets
 argument_list|)
+expr_stmt|;
+name|this
+operator|.
+name|allRows
+operator|=
+name|allRows
 expr_stmt|;
 specifier|final
 name|AggregateFinder
@@ -897,6 +911,15 @@ name|strictEnd
 return|;
 block|}
 specifier|public
+name|boolean
+name|isAllRows
+parameter_list|()
+block|{
+return|return
+name|allRows
+return|;
+block|}
+specifier|public
 name|ImmutableMap
 argument_list|<
 name|String
@@ -976,6 +999,9 @@ argument_list|>
 argument_list|>
 name|subsets
 parameter_list|,
+name|boolean
+name|allRows
+parameter_list|,
 name|RelDataType
 name|rowType
 parameter_list|)
@@ -1039,6 +1065,8 @@ argument_list|,
 name|after
 argument_list|,
 name|subsets
+argument_list|,
+name|allRows
 argument_list|,
 name|rowType
 argument_list|)
