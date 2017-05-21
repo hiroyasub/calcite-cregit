@@ -2565,6 +2565,45 @@ name|expected
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1798">[CALCITE-1798]    * Generate dialect-specific SQL for FLOOR operator</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testFloor
+parameter_list|()
+block|{
+name|String
+name|query
+init|=
+literal|"SELECT floor(\"hire_date\" TO MINUTE) FROM \"employee\""
+decl_stmt|;
+name|String
+name|expected
+init|=
+literal|"SELECT TRUNC(hire_date, 'MI')\nFROM foodmart.employee"
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|dialect
+argument_list|(
+name|DatabaseProduct
+operator|.
+name|HSQLDB
+operator|.
+name|getDialect
+argument_list|()
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
 annotation|@
 name|Test
 specifier|public

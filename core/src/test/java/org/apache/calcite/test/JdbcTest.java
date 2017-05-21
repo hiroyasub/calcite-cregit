@@ -8750,6 +8750,40 @@ block|}
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testFloorDate
+parameter_list|()
+block|{
+name|CalciteAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|CalciteAssert
+operator|.
+name|Config
+operator|.
+name|JDBC_FOODMART
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select floor(timestamp '2011-9-14 19:27:23' to month) as c \n"
+operator|+
+literal|"from \"foodmart\".\"employee\" limit 1"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"C=2011-09-01 00:00:00\n"
+argument_list|)
+expr_stmt|;
+block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-387">[CALCITE-387]    * CompileException when cast TRUE to nullable boolean</a>. */
 annotation|@
 name|Test
