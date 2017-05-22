@@ -1751,8 +1751,6 @@ name|vEC
 argument_list|,
 name|queryTableRefs
 argument_list|,
-literal|false
-argument_list|,
 name|compensationEquiColumns
 argument_list|)
 condition|)
@@ -2351,6 +2349,8 @@ name|rexBuilder
 argument_list|,
 name|mq
 argument_list|,
+name|matchModality
+argument_list|,
 name|view
 argument_list|,
 name|topProject
@@ -2801,6 +2801,8 @@ name|rexBuilder
 argument_list|,
 name|mq
 argument_list|,
+name|matchModality
+argument_list|,
 name|builder
 operator|.
 name|build
@@ -2963,6 +2965,9 @@ name|rexBuilder
 parameter_list|,
 name|RelMetadataQuery
 name|mq
+parameter_list|,
+name|MatchModality
+name|matchModality
 parameter_list|,
 name|RelNode
 name|input
@@ -3661,6 +3666,9 @@ parameter_list|,
 name|RelMetadataQuery
 name|mq
 parameter_list|,
+name|MatchModality
+name|matchModality
+parameter_list|,
 name|RelNode
 name|input
 parameter_list|,
@@ -4332,28 +4340,6 @@ argument_list|>
 name|viewTableRefs
 parameter_list|)
 block|{
-if|if
-condition|(
-operator|!
-name|compensatePartial
-argument_list|(
-name|queryTableRefs
-argument_list|,
-name|queryEC
-argument_list|,
-name|viewTableRefs
-argument_list|,
-literal|true
-argument_list|,
-literal|null
-argument_list|)
-condition|)
-block|{
-comment|// We cannot rewrite
-return|return
-literal|null
-return|;
-block|}
 comment|// Modify view to join with missing tables and add Project on top to reorder columns.
 comment|// In turn, modify view plan to join with missing tables before Aggregate operator,
 comment|// change Aggregate operator to group by previous grouping columns and columns in
@@ -5276,6 +5262,9 @@ parameter_list|,
 name|RelMetadataQuery
 name|mq
 parameter_list|,
+name|MatchModality
+name|matchModality
+parameter_list|,
 name|RelNode
 name|input
 parameter_list|,
@@ -5990,6 +5979,12 @@ name|viewAggregate
 operator|.
 name|getGroupCount
 argument_list|()
+operator|||
+name|matchModality
+operator|==
+name|MatchModality
+operator|.
+name|VIEW_PARTIAL
 condition|)
 block|{
 comment|// Target is coarser level of aggregation. Generate an aggregate.
@@ -8046,7 +8041,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/**    * It checks whether the target can be rewritten using the source even though the    * source uses additional tables. In order to do that, we need to double-check    * that every join that exists in the source and is not in the target is a    * cardinality-preserving join, i.e., it only appends columns to the row    * without changing its multiplicity. Thus, the join needs to be:    *<ul>    *<li> Equi-join</li>    *<li> Between all columns in the keys</li>    *<li> Foreign-key columns do not allow NULL values (if {@code allowNullsFK} is false)</li>    *<li> Foreign-key</li>    *<li> Unique-key</li>    *</ul>    *    *<p>If it can be rewritten, it returns true. Further, it inserts the missing equi-join    * predicates in the input {@code compensationEquiColumns} multimap if it is provided.    * If it cannot be rewritten, it returns false.    */
+comment|/**    * It checks whether the target can be rewritten using the source even though the    * source uses additional tables. In order to do that, we need to double-check    * that every join that exists in the source and is not in the target is a    * cardinality-preserving join, i.e., it only appends columns to the row    * without changing its multiplicity. Thus, the join needs to be:    *<ul>    *<li> Equi-join</li>    *<li> Between all columns in the keys</li>    *<li> Foreign-key columns do not allow NULL values</li>    *<li> Foreign-key</li>    *<li> Unique-key</li>    *</ul>    *    *<p>If it can be rewritten, it returns true. Further, it inserts the missing equi-join    * predicates in the input {@code compensationEquiColumns} multimap if it is provided.    * If it cannot be rewritten, it returns false.    */
 specifier|private
 specifier|static
 name|boolean
@@ -8066,9 +8061,6 @@ argument_list|<
 name|RelTableRef
 argument_list|>
 name|targetTableRefs
-parameter_list|,
-name|boolean
-name|allowNullsFK
 parameter_list|,
 name|Multimap
 argument_list|<
@@ -8369,15 +8361,11 @@ argument_list|)
 decl_stmt|;
 if|if
 condition|(
-operator|(
-name|allowNullsFK
-operator|||
 operator|!
 name|foreignKeyColumnType
 operator|.
 name|isNullable
 argument_list|()
-operator|)
 operator|&&
 name|sourceEC
 operator|.
