@@ -6071,9 +6071,34 @@ argument_list|()
 operator|>
 literal|1
 decl_stmt|;
+comment|// basically, we did a subSelect() since needNew is set and neededAlias is not null
+comment|// now, we need to make sure that we need to update the alias context.
+comment|// if our aliases map has a single element:<neededAlias, rowType>,
+comment|// then we don't need to rewrite the alias but otherwise, it should be updated.
 if|if
 condition|(
 name|needNew
+operator|&&
+name|neededAlias
+operator|!=
+literal|null
+operator|&&
+operator|(
+name|aliases
+operator|.
+name|size
+argument_list|()
+operator|!=
+literal|1
+operator|||
+operator|!
+name|aliases
+operator|.
+name|containsKey
+argument_list|(
+name|neededAlias
+argument_list|)
+operator|)
 condition|)
 block|{
 name|newContext

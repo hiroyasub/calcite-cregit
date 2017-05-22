@@ -2565,6 +2565,65 @@ name|expected
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1800">[CALCITE-1800]    * JDBC adapter fails to SELECT FROM a UNION query</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testUnionWrappedInASelect
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|query
+init|=
+literal|"select sum(\n"
+operator|+
+literal|"  case when \"product_id\"=0 then \"net_weight\" else 0 end)"
+operator|+
+literal|" as net_weight\n"
+operator|+
+literal|"from (\n"
+operator|+
+literal|"  select \"product_id\", \"net_weight\"\n"
+operator|+
+literal|"  from \"product\"\n"
+operator|+
+literal|"  union all\n"
+operator|+
+literal|"  select \"product_id\", 0 as \"net_weight\"\n"
+operator|+
+literal|"  from \"sales_fact_1997\") t0"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT SUM(CASE WHEN \"product_id\" = 0"
+operator|+
+literal|" THEN \"net_weight\" ELSE 0 END) AS \"NET_WEIGHT\"\n"
+operator|+
+literal|"FROM (SELECT \"product_id\", \"net_weight\"\n"
+operator|+
+literal|"FROM \"foodmart\".\"product\"\n"
+operator|+
+literal|"UNION ALL\n"
+operator|+
+literal|"SELECT \"product_id\", 0 AS \"net_weight\"\n"
+operator|+
+literal|"FROM \"foodmart\".\"sales_fact_1997\") AS \"t1\""
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1798">[CALCITE-1798]    * Generate dialect-specific SQL for FLOOR operator</a>. */
 annotation|@
 name|Test
