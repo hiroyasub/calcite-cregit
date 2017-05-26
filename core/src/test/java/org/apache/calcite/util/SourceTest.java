@@ -26,6 +26,16 @@ import|;
 end_import
 
 begin_import
+import|import
+name|java
+operator|.
+name|io
+operator|.
+name|File
+import|;
+end_import
+
+begin_import
 import|import static
 name|org
 operator|.
@@ -117,6 +127,15 @@ argument_list|,
 name|is
 argument_list|(
 literal|"/foo/bar"
+operator|.
+name|replace
+argument_list|(
+literal|'/'
+argument_list|,
+name|File
+operator|.
+name|separatorChar
+argument_list|)
 argument_list|)
 argument_list|)
 expr_stmt|;

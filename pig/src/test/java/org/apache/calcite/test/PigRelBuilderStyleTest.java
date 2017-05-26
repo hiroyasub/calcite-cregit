@@ -375,6 +375,16 @@ name|org
 operator|.
 name|junit
 operator|.
+name|Assume
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|junit
+operator|.
 name|Before
 import|;
 end_import
@@ -396,6 +406,16 @@ operator|.
 name|junit
 operator|.
 name|Test
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|io
+operator|.
+name|File
 import|;
 end_import
 
@@ -457,6 +477,20 @@ begin_import
 import|import static
 name|org
 operator|.
+name|hamcrest
+operator|.
+name|core
+operator|.
+name|Is
+operator|.
+name|is
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
 name|junit
 operator|.
 name|Assert
@@ -476,6 +510,27 @@ name|PigRelBuilderStyleTest
 extends|extends
 name|AbstractPigTest
 block|{
+specifier|public
+name|PigRelBuilderStyleTest
+parameter_list|()
+block|{
+name|Assume
+operator|.
+name|assumeThat
+argument_list|(
+literal|"Pigs don't like Windows"
+argument_list|,
+name|File
+operator|.
+name|separatorChar
+argument_list|,
+name|is
+argument_list|(
+literal|'/'
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
 annotation|@
 name|Test
 specifier|public
