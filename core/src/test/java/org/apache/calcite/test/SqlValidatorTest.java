@@ -20791,6 +20791,13 @@ argument_list|,
 literal|"CHAR(3) NOT NULL"
 argument_list|)
 expr_stmt|;
+name|checkColumnType
+argument_list|(
+literal|"select*from unnest(array['1','22',null,'22'])"
+argument_list|,
+literal|"CHAR(2)"
+argument_list|)
+expr_stmt|;
 name|checkFails
 argument_list|(
 literal|"select*from ^unnest(1)^"
@@ -20801,6 +20808,11 @@ expr_stmt|;
 name|check
 argument_list|(
 literal|"select*from unnest(array(select*from dept))"
+argument_list|)
+expr_stmt|;
+name|check
+argument_list|(
+literal|"select*from unnest(array[1,null])"
 argument_list|)
 expr_stmt|;
 name|check

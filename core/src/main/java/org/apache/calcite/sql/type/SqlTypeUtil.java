@@ -4846,6 +4846,26 @@ name|p1
 argument_list|)
 return|;
 block|}
+specifier|public
+specifier|static
+name|boolean
+name|isArray
+parameter_list|(
+name|RelDataType
+name|type
+parameter_list|)
+block|{
+return|return
+name|type
+operator|.
+name|getSqlTypeName
+argument_list|()
+operator|==
+name|SqlTypeName
+operator|.
+name|ARRAY
+return|;
+block|}
 block|}
 end_class
 
