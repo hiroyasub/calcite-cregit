@@ -1114,7 +1114,7 @@ name|utc
 init|=
 name|DateTimeUtils
 operator|.
-name|GMT_ZONE
+name|UTC_ZONE
 decl_stmt|;
 name|UTC_DATE_FORMAT
 operator|=

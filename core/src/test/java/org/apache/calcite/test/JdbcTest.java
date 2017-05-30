@@ -19026,7 +19026,7 @@ operator|.
 name|getMessage
 argument_list|()
 argument_list|,
-name|equalTo
+name|containsString
 argument_list|(
 literal|"exception while executing query: unbound parameter"
 argument_list|)

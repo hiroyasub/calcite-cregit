@@ -655,7 +655,7 @@ name|equals
 argument_list|(
 name|DateTimeUtils
 operator|.
-name|GMT_ZONE
+name|UTC_ZONE
 argument_list|)
 return|;
 case|case
@@ -1956,7 +1956,7 @@ name|tz
 init|=
 name|DateTimeUtils
 operator|.
-name|GMT_ZONE
+name|UTC_ZONE
 decl_stmt|;
 name|Calendar
 name|cal

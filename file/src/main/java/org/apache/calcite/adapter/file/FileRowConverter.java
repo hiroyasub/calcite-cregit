@@ -1750,7 +1750,7 @@ name|Parser
 argument_list|(
 name|DateTimeUtils
 operator|.
-name|GMT_ZONE
+name|UTC_ZONE
 argument_list|)
 decl_stmt|;
 name|List

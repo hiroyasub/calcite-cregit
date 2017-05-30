@@ -1615,7 +1615,7 @@ literal|true
 return|;
 block|}
 block|}
-comment|/**    * Converts a timestamp to a SQL timestamp literal, e.g.    * {@code TIMESTAMP '2009-12-17 12:34:56'}.    *    *<p>Timestamp values do not have a time zone. We therefore interpret them    * as the number of milliseconds after the UTC epoch, and the formatted    * value is that time in UTC.    *    *<p>In particular,    *    *<blockquote><code>quoteTimestampLiteral(new Timestamp(0));</code>    *</blockquote>    *    * returns {@code TIMESTAMP '1970-01-01 00:00:00'}, regardless of the JVM's    * time zone.    *    * @param timestamp Timestamp    * @return SQL timestamp literal    */
+comment|/**    * Converts a timestamp to a SQL timestamp literal, e.g.    * {@code TIMESTAMP '2009-12-17 12:34:56'}.    *    *<p>Timestamp values do not have a time zone. We therefore interpret them    * as the number of milliseconds after the UTC epoch, and the formatted    * value is that time in UTC.    *    *<p>In particular,    *    *<blockquote><code>quoteTimestampLiteral(new Timestamp(0));</code>    *</blockquote>    *    *<p>returns {@code TIMESTAMP '1970-01-01 00:00:00'}, regardless of the JVM's    * time zone.    *    * @param timestamp Timestamp    * @return SQL timestamp literal    */
 specifier|public
 name|String
 name|quoteTimestampLiteral
@@ -1644,7 +1644,7 @@ name|setTimeZone
 argument_list|(
 name|DateTimeUtils
 operator|.
-name|GMT_ZONE
+name|UTC_ZONE
 argument_list|)
 expr_stmt|;
 return|return

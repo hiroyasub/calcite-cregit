@@ -10017,14 +10017,14 @@ name|checkExp
 argument_list|(
 literal|"TIMESTAMP '2004-06-01 15:55:55.1236'"
 argument_list|,
-literal|"TIMESTAMP '2004-06-01 15:55:55.124'"
+literal|"TIMESTAMP '2004-06-01 15:55:55.123'"
 argument_list|)
 expr_stmt|;
 name|checkExp
 argument_list|(
 literal|"TIMESTAMP '2004-06-01 15:55:55.9999'"
 argument_list|,
-literal|"TIMESTAMP '2004-06-01 15:55:56.000'"
+literal|"TIMESTAMP '2004-06-01 15:55:55.999'"
 argument_list|)
 expr_stmt|;
 name|checkExpSame
@@ -14091,6 +14091,7 @@ argument_list|,
 literal|"DATE '2004-12-01'"
 argument_list|)
 expr_stmt|;
+comment|// Time literals
 name|checkExp
 argument_list|(
 literal|"TIME '12:01:01'"
@@ -14119,6 +14120,7 @@ argument_list|,
 literal|"TIME '12:01:01.001'"
 argument_list|)
 expr_stmt|;
+comment|// Timestamp literals
 name|checkExp
 argument_list|(
 literal|"TIMESTAMP '2004-12-01 12:01:01'"
@@ -14138,11 +14140,6 @@ argument_list|(
 literal|"TIMESTAMP '2004-12-01 12:01:01.'"
 argument_list|,
 literal|"TIMESTAMP '2004-12-01 12:01:01'"
-argument_list|)
-expr_stmt|;
-name|checkExpSame
-argument_list|(
-literal|"TIMESTAMP '2004-12-01 12:01:01.1'"
 argument_list|)
 expr_stmt|;
 comment|// Failures.

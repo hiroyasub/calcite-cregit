@@ -986,7 +986,7 @@ name|setTimeZone
 argument_list|(
 name|DateTimeUtils
 operator|.
-name|GMT_ZONE
+name|UTC_ZONE
 argument_list|)
 expr_stmt|;
 name|s

@@ -9287,7 +9287,7 @@ name|getInstance
 argument_list|(
 name|DateTimeUtils
 operator|.
-name|GMT_ZONE
+name|UTC_ZONE
 argument_list|,
 name|Locale
 operator|.
