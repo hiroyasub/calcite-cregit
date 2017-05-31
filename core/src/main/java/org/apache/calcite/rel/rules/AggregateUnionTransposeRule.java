@@ -726,9 +726,9 @@ specifier|final
 name|RelMetadataQuery
 name|mq
 init|=
-name|RelMetadataQuery
+name|call
 operator|.
-name|instance
+name|getMetadataQuery
 argument_list|()
 decl_stmt|;
 for|for

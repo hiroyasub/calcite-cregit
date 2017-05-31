@@ -235,6 +235,17 @@ argument_list|(
 name|rel
 argument_list|)
 expr_stmt|;
+name|rel
+argument_list|(
+literal|0
+argument_list|)
+operator|.
+name|getCluster
+argument_list|()
+operator|.
+name|invalidateMetadataQuery
+argument_list|()
+expr_stmt|;
 block|}
 name|List
 argument_list|<

@@ -217,16 +217,6 @@ name|ArrayList
 argument_list|<>
 argument_list|()
 decl_stmt|;
-specifier|protected
-specifier|final
-name|RelMetadataQuery
-name|mq
-init|=
-name|RelMetadataQuery
-operator|.
-name|instance
-argument_list|()
-decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
 specifier|public
 name|RelWriterImpl
@@ -308,6 +298,18 @@ init|=
 name|rel
 operator|.
 name|getInputs
+argument_list|()
+decl_stmt|;
+specifier|final
+name|RelMetadataQuery
+name|mq
+init|=
+name|rel
+operator|.
+name|getCluster
+argument_list|()
+operator|.
+name|getMetadataQuery
 argument_list|()
 decl_stmt|;
 if|if

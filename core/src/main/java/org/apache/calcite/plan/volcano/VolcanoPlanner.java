@@ -4111,9 +4111,12 @@ specifier|final
 name|RelMetadataQuery
 name|mq
 init|=
-name|RelMetadataQuery
+name|root
 operator|.
-name|instance
+name|getCluster
+argument_list|()
+operator|.
+name|getMetadataQuery
 argument_list|()
 decl_stmt|;
 for|for
@@ -5297,9 +5300,12 @@ specifier|final
 name|RelMetadataQuery
 name|mq
 init|=
-name|RelMetadataQuery
+name|root
 operator|.
-name|instance
+name|getCluster
+argument_list|()
+operator|.
+name|getMetadataQuery
 argument_list|()
 decl_stmt|;
 name|pw
@@ -7547,9 +7553,12 @@ specifier|final
 name|RelMetadataQuery
 name|mq
 init|=
-name|RelMetadataQuery
+name|rel
 operator|.
-name|instance
+name|getCluster
+argument_list|()
+operator|.
+name|getMetadataQuery
 argument_list|()
 decl_stmt|;
 name|subset
@@ -7734,7 +7743,7 @@ name|timestamp
 return|;
 block|}
 block|}
-comment|/**    * Normalizes references to subsets within the string representation of a    * plan.    *    *<p>This is useful when writing tests: it helps to ensure that tests don't    * break when an extra rule is introduced that generates a new subset and    * causes subsequent subset numbers to be off by one.    *    *<p>For example,    *    *<blockquote>    * FennelAggRel.FENNEL_EXEC(child=Subset#17.FENNEL_EXEC,groupCount=1,    * EXPR$1=COUNT())<br>    *&nbsp;&nbsp;FennelSortRel.FENNEL_EXEC(child=Subset#2.FENNEL_EXEC,    * key=[0], discardDuplicates=false)<br>    *&nbsp;&nbsp;&nbsp;&nbsp;FennelCalcRel.FENNEL_EXEC(    * child=Subset#4.FENNEL_EXEC, expr#0..8={inputs}, expr#9=3456,    * DEPTNO=$t7, $f0=$t9)<br>    *&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MockTableImplRel.FENNEL_EXEC(    * table=[CATALOG, SALES, EMP])</blockquote>    *    * becomes    *    *<blockquote>    * FennelAggRel.FENNEL_EXEC(child=Subset#{0}.FENNEL_EXEC, groupCount=1,    * EXPR$1=COUNT())<br>    *&nbsp;&nbsp;FennelSortRel.FENNEL_EXEC(child=Subset#{1}.FENNEL_EXEC,    * key=[0], discardDuplicates=false)<br>    *&nbsp;&nbsp;&nbsp;&nbsp;FennelCalcRel.FENNEL_EXEC(    * child=Subset#{2}.FENNEL_EXEC,expr#0..8={inputs},expr#9=3456,DEPTNO=$t7,    * $f0=$t9)<br>    *&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MockTableImplRel.FENNEL_EXEC(    * table=[CATALOG, SALES, EMP])</blockquote>    *    * @param plan Plan    * @return Normalized plan    */
+comment|/**    * Normalizes references to subsets within the string representation of a    * plan.    *    *<p>This is useful when writing tests: it helps to ensure that tests don't    * break when an extra rule is introduced that generates a new subset and    * causes subsequent subset numbers to be off by one.    *    *<p>For example,    *    *<blockquote>    * FennelAggRel.FENNEL_EXEC(child=Subset#17.FENNEL_EXEC,groupCount=1,    * EXPR$1=COUNT())<br>    *&nbsp;&nbsp;FennelSortRel.FENNEL_EXEC(child=Subset#2.FENNEL_EXEC,    * key=[0], discardDuplicates=false)<br>    *&nbsp;&nbsp;&nbsp;&nbsp;FennelCalcRel.FENNEL_EXEC(    * child=Subset#4.FENNEL_EXEC, expr#0..8={inputs}, expr#9=3456,    * DEPTNO=$t7, $f0=$t9)<br>    *&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MockTableImplRel.FENNEL_EXEC(    * table=[CATALOG, SALES, EMP])</blockquote>    *    *<p>becomes    *    *<blockquote>    * FennelAggRel.FENNEL_EXEC(child=Subset#{0}.FENNEL_EXEC, groupCount=1,    * EXPR$1=COUNT())<br>    *&nbsp;&nbsp;FennelSortRel.FENNEL_EXEC(child=Subset#{1}.FENNEL_EXEC,    * key=[0], discardDuplicates=false)<br>    *&nbsp;&nbsp;&nbsp;&nbsp;FennelCalcRel.FENNEL_EXEC(    * child=Subset#{2}.FENNEL_EXEC,expr#0..8={inputs},expr#9=3456,DEPTNO=$t7,    * $f0=$t9)<br>    *&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MockTableImplRel.FENNEL_EXEC(    * table=[CATALOG, SALES, EMP])</blockquote>    *    * @param plan Plan    * @return Normalized plan    */
 specifier|public
 specifier|static
 name|String

@@ -119,6 +119,22 @@ name|calcite
 operator|.
 name|rel
 operator|.
+name|metadata
+operator|.
+name|RelMetadataQuery
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
 name|type
 operator|.
 name|RelDataTypeFactory
@@ -257,6 +273,10 @@ specifier|private
 specifier|final
 name|RelTraitSet
 name|emptyTraitSet
+decl_stmt|;
+specifier|private
+name|RelMetadataQuery
+name|mq
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
 comment|/**    * Creates a cluster.    */
@@ -568,6 +588,42 @@ block|{
 return|return
 name|metadataFactory
 return|;
+block|}
+comment|/** Returns the current RelMetadataQuery.    *    *<p>This method might be changed or moved in future.    * If you have a {@link RelOptRuleCall} available,    * for example if you are in a {@link RelOptRule#onMatch(RelOptRuleCall)}    * method, then use {@link RelOptRuleCall#getMetadataQuery()} instead. */
+specifier|public
+name|RelMetadataQuery
+name|getMetadataQuery
+parameter_list|()
+block|{
+if|if
+condition|(
+name|mq
+operator|==
+literal|null
+condition|)
+block|{
+name|mq
+operator|=
+name|RelMetadataQuery
+operator|.
+name|instance
+argument_list|()
+expr_stmt|;
+block|}
+return|return
+name|mq
+return|;
+block|}
+comment|/**    * Should be called whenever the current {@link RelMetadataQuery} becomes    * invalid. Typically invoked from {@link RelOptRuleCall#transformTo}.    */
+specifier|public
+name|void
+name|invalidateMetadataQuery
+parameter_list|()
+block|{
+name|mq
+operator|=
+literal|null
+expr_stmt|;
 block|}
 comment|/**    * Constructs a new id for a correlating variable. It is unique within the    * whole query.    */
 specifier|public

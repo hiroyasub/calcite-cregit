@@ -548,6 +548,17 @@ argument_list|,
 name|this
 argument_list|)
 expr_stmt|;
+name|rels
+index|[
+literal|0
+index|]
+operator|.
+name|getCluster
+argument_list|()
+operator|.
+name|invalidateMetadataQuery
+argument_list|()
+expr_stmt|;
 if|if
 condition|(
 name|volcanoPlanner

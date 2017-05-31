@@ -1351,9 +1351,12 @@ specifier|final
 name|RelMetadataQuery
 name|mq
 init|=
-name|RelMetadataQuery
+name|rel
 operator|.
-name|instance
+name|getCluster
+argument_list|()
+operator|.
+name|getMetadataQuery
 argument_list|()
 decl_stmt|;
 for|for

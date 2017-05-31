@@ -1425,7 +1425,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**    * Computes the<dfn>importance</dfn> of a node. Importance is defined as    * follows:    *    *<ul>    *<li>the root {@link RelSubset} has an importance of 1</li>    *<li>the importance of any other subset is the sum of its importance to    * its parents</li>    *<li>The importance of children is pro-rated according to the cost of the    * children. Consider a node which has a cost of 3, and children with costs    * of 2 and 5. The total cost is 10. If the node has an importance of .5,    * then the children will have importance of .1 and .25. The retains .15    * importance points, to reflect the fact that work needs to be done on the    * node's algorithm.</li>    *</ul>    *    * The formula for the importance I of node n is:    *    *<blockquote>I<sub>n</sub> = Sum<sub>parents p of n</sub>{I<sub>p</sub> .    * W<sub>n, p</sub>}</blockquote>    *    * where W<sub>n, p</sub>, the weight of n within its parent p, is    *    *<blockquote>W<sub>n, p</sub> = Cost<sub>n</sub> / (SelfCost<sub>p</sub> +    * Cost<sub>n<sub>0</sub></sub> + ... + Cost<sub>n<sub>k</sub></sub>)    *</blockquote>    */
+comment|/**    * Computes the<dfn>importance</dfn> of a node. Importance is defined as    * follows:    *    *<ul>    *<li>the root {@link RelSubset} has an importance of 1</li>    *<li>the importance of any other subset is the sum of its importance to    * its parents</li>    *<li>The importance of children is pro-rated according to the cost of the    * children. Consider a node which has a cost of 3, and children with costs    * of 2 and 5. The total cost is 10. If the node has an importance of .5,    * then the children will have importance of .1 and .25. The retains .15    * importance points, to reflect the fact that work needs to be done on the    * node's algorithm.</li>    *</ul>    *    *<p>The formula for the importance I of node n is:    *    *<blockquote>I<sub>n</sub> = Sum<sub>parents p of n</sub>{I<sub>p</sub> .    * W<sub>n, p</sub>}</blockquote>    *    *<p>where W<sub>n, p</sub>, the weight of n within its parent p, is    *    *<blockquote>W<sub>n, p</sub> = Cost<sub>n</sub> / (SelfCost<sub>p</sub> +    * Cost<sub>n<sub>0</sub></sub> + ... + Cost<sub>n<sub>k</sub></sub>)    *</blockquote>    */
 name|double
 name|computeImportance
 parameter_list|(
@@ -1457,9 +1457,12 @@ specifier|final
 name|RelMetadataQuery
 name|mq
 init|=
-name|RelMetadataQuery
+name|subset
 operator|.
-name|instance
+name|getCluster
+argument_list|()
+operator|.
+name|getMetadataQuery
 argument_list|()
 decl_stmt|;
 comment|// The importance of a subset is the max of its importance to its
@@ -2048,7 +2051,7 @@ return|return
 literal|false
 return|;
 block|}
-comment|/** Recursively checks whether there are any duplicate subsets along any path    * from root of the operand tree to one of the leaves.    *    *<p>It is OK for a match to have duplicate subsets if they are not on the    * same path. For example,</p>    *    *<pre>    *   Join    *  /   \    * X     X    *</pre>    *    *<p>is a valid match.</p>    *    * @throws org.apache.calcite.util.Util.FoundOne on match    */
+comment|/** Recursively checks whether there are any duplicate subsets along any path    * from root of the operand tree to one of the leaves.    *    *<p>It is OK for a match to have duplicate subsets if they are not on the    * same path. For example,    *    *<blockquote><pre>    *   Join    *  /   \    * X     X    *</pre></blockquote>    *    *<p>is a valid match.    *    * @throws org.apache.calcite.util.Util.FoundOne on match    */
 specifier|private
 name|void
 name|checkDuplicateSubsets

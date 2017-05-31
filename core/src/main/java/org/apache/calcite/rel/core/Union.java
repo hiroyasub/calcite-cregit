@@ -209,10 +209,7 @@ name|RelMdUtil
 operator|.
 name|getUnionAllRowCount
 argument_list|(
-name|RelMetadataQuery
-operator|.
-name|instance
-argument_list|()
+name|mq
 argument_list|,
 name|this
 argument_list|)

@@ -685,8 +685,19 @@ argument_list|(
 name|multiJoinRel
 argument_list|)
 decl_stmt|;
+specifier|final
+name|RelMetadataQuery
+name|mq
+init|=
+name|call
+operator|.
+name|getMetadataQuery
+argument_list|()
+decl_stmt|;
 name|findRemovableOuterJoins
 argument_list|(
+name|mq
+argument_list|,
 name|multiJoin
 argument_list|)
 expr_stmt|;
@@ -709,6 +720,11 @@ init|=
 operator|new
 name|LoptSemiJoinOptimizer
 argument_list|(
+name|call
+operator|.
+name|getMetadataQuery
+argument_list|()
+argument_list|,
 name|multiJoin
 argument_list|,
 name|rexBuilder
@@ -771,11 +787,15 @@ argument_list|()
 expr_stmt|;
 name|findRemovableSelfJoins
 argument_list|(
+name|mq
+argument_list|,
 name|multiJoin
 argument_list|)
 expr_stmt|;
 name|findBestOrderings
 argument_list|(
+name|mq
+argument_list|,
 name|call
 operator|.
 name|builder
@@ -794,6 +814,9 @@ specifier|private
 name|void
 name|findRemovableOuterJoins
 parameter_list|(
+name|RelMetadataQuery
+name|mq
+parameter_list|,
 name|LoptMultiJoin
 name|multiJoin
 parameter_list|)
@@ -1218,15 +1241,6 @@ comment|// See if the join keys are unique.  Because the keys are
 comment|// part of an equality join condition, nulls are filtered out
 comment|// by the join.  So, it's ok if there are nulls in the join
 comment|// keys.
-specifier|final
-name|RelMetadataQuery
-name|mq
-init|=
-name|RelMetadataQuery
-operator|.
-name|instance
-argument_list|()
-decl_stmt|;
 if|if
 condition|(
 name|RelMdUtil
@@ -1461,6 +1475,9 @@ specifier|private
 name|void
 name|findRemovableSelfJoins
 parameter_list|(
+name|RelMetadataQuery
+name|mq
+parameter_list|,
 name|LoptMultiJoin
 name|multiJoin
 parameter_list|)
@@ -1476,6 +1493,8 @@ name|simpleFactors
 init|=
 name|getSimpleFactors
 argument_list|(
+name|mq
+argument_list|,
 name|multiJoin
 argument_list|)
 decl_stmt|;
@@ -1777,6 +1796,8 @@ operator|)
 operator|&&
 name|isSelfJoinFilterUnique
 argument_list|(
+name|mq
+argument_list|,
 name|multiJoin
 argument_list|,
 name|factor1
@@ -1809,6 +1830,9 @@ name|RelOptTable
 argument_list|>
 name|getSimpleFactors
 parameter_list|(
+name|RelMetadataQuery
+name|mq
+parameter_list|,
 name|LoptMultiJoin
 name|multiJoin
 parameter_list|)
@@ -1846,15 +1870,6 @@ return|return
 name|returnList
 return|;
 block|}
-specifier|final
-name|RelMetadataQuery
-name|mq
-init|=
-name|RelMetadataQuery
-operator|.
-name|instance
-argument_list|()
-decl_stmt|;
 for|for
 control|(
 name|int
@@ -1945,6 +1960,9 @@ specifier|private
 name|boolean
 name|isSelfJoinFilterUnique
 parameter_list|(
+name|RelMetadataQuery
+name|mq
+parameter_list|,
 name|LoptMultiJoin
 name|multiJoin
 parameter_list|,
@@ -2154,15 +2172,6 @@ name|adjustments
 argument_list|)
 argument_list|)
 expr_stmt|;
-specifier|final
-name|RelMetadataQuery
-name|mq
-init|=
-name|RelMetadataQuery
-operator|.
-name|instance
-argument_list|()
-decl_stmt|;
 return|return
 name|areSelfJoinKeysUnique
 argument_list|(
@@ -2181,6 +2190,9 @@ specifier|private
 name|void
 name|findBestOrderings
 parameter_list|(
+name|RelMetadataQuery
+name|mq
+parameter_list|,
 name|RelBuilder
 name|relBuilder
 parameter_list|,
@@ -2261,6 +2273,8 @@ name|joinTree
 init|=
 name|createOrdering
 argument_list|(
+name|mq
+argument_list|,
 name|relBuilder
 argument_list|,
 name|multiJoin
@@ -2669,6 +2683,9 @@ specifier|private
 name|Double
 name|computeJoinCardinality
 parameter_list|(
+name|RelMetadataQuery
+name|mq
+parameter_list|,
 name|LoptMultiJoin
 name|multiJoin
 parameter_list|,
@@ -2806,14 +2823,6 @@ return|;
 block|}
 else|else
 block|{
-specifier|final
-name|RelMetadataQuery
-name|mq
-init|=
-name|semiJoinOpt
-operator|.
-name|mq
-decl_stmt|;
 return|return
 name|mq
 operator|.
@@ -2966,6 +2975,9 @@ specifier|private
 name|LoptJoinTree
 name|createOrdering
 parameter_list|(
+name|RelMetadataQuery
+name|mq
+parameter_list|,
 name|RelBuilder
 name|relBuilder
 parameter_list|,
@@ -3120,6 +3132,8 @@ name|nextFactor
 operator|=
 name|getBestNextFactor
 argument_list|(
+name|mq
+argument_list|,
 name|multiJoin
 argument_list|,
 name|factorsToAdd
@@ -3188,6 +3202,8 @@ name|joinTree
 operator|=
 name|addFactorToTree
 argument_list|(
+name|mq
+argument_list|,
 name|relBuilder
 argument_list|,
 name|multiJoin
@@ -3252,6 +3268,9 @@ specifier|private
 name|int
 name|getBestNextFactor
 parameter_list|(
+name|RelMetadataQuery
+name|mq
+parameter_list|,
 name|LoptMultiJoin
 name|multiJoin
 parameter_list|,
@@ -3460,6 +3479,8 @@ name|cardinality
 operator|=
 name|computeJoinCardinality
 argument_list|(
+name|mq
+argument_list|,
 name|multiJoin
 argument_list|,
 name|semiJoinOpt
@@ -3582,6 +3603,9 @@ specifier|private
 name|LoptJoinTree
 name|addFactorToTree
 parameter_list|(
+name|RelMetadataQuery
+name|mq
+parameter_list|,
 name|RelBuilder
 name|relBuilder
 parameter_list|,
@@ -3610,14 +3634,6 @@ name|boolean
 name|selfJoin
 parameter_list|)
 block|{
-specifier|final
-name|RelMetadataQuery
-name|mq
-init|=
-name|semiJoinOpt
-operator|.
-name|mq
-decl_stmt|;
 comment|// if the factor corresponds to the null generating factor in an outer
 comment|// join that can be removed, then create a replacement join
 if|if
@@ -3737,6 +3753,8 @@ name|topTree
 init|=
 name|addToTop
 argument_list|(
+name|mq
+argument_list|,
 name|relBuilder
 argument_list|,
 name|multiJoin
@@ -3757,6 +3775,8 @@ name|pushDownTree
 init|=
 name|pushDownFactor
 argument_list|(
+name|mq
+argument_list|,
 name|relBuilder
 argument_list|,
 name|multiJoin
@@ -4003,6 +4023,9 @@ specifier|private
 name|LoptJoinTree
 name|pushDownFactor
 parameter_list|(
+name|RelMetadataQuery
+name|mq
+parameter_list|,
 name|RelBuilder
 name|relBuilder
 parameter_list|,
@@ -4293,6 +4316,8 @@ name|subTree
 operator|=
 name|addFactorToTree
 argument_list|(
+name|mq
+argument_list|,
 name|relBuilder
 argument_list|,
 name|multiJoin
@@ -4450,6 +4475,8 @@ comment|// create the new join tree with the factor pushed down
 return|return
 name|createJoinSubtree
 argument_list|(
+name|mq
+argument_list|,
 name|relBuilder
 argument_list|,
 name|multiJoin
@@ -4475,6 +4502,9 @@ specifier|private
 name|LoptJoinTree
 name|addToTop
 parameter_list|(
+name|RelMetadataQuery
+name|mq
+parameter_list|,
 name|RelBuilder
 name|relBuilder
 parameter_list|,
@@ -4655,6 +4685,8 @@ block|}
 return|return
 name|createJoinSubtree
 argument_list|(
+name|mq
+argument_list|,
 name|relBuilder
 argument_list|,
 name|multiJoin
@@ -5282,7 +5314,7 @@ return|return
 name|condition
 return|;
 block|}
-comment|/**    * Sets an adjustment array based on where column references for a    * particular factor end up as a result of a new join ordering.    *    *<p>If the factor is not the right factor in a removable self-join, then    * it needs to be adjusted as follows:    *    *<ul>    *<li>First subtract, based on where the factor was in the original join    * ordering.    *<li>Then add on the number of fields in the factors that now precede this    * factor in the new join ordering.    *</ul>    *    *<p>If the factor is the right factor in a removable self-join and its    * column reference can be mapped to the left factor in the self-join, then:    *    *<ul>    *<li>First subtract, based on where the column reference is in the new    * join ordering.    *<li>Then, add on the number of fields up to the start of the left factor    * in the self-join in the new join ordering.    *<li>Then, finally add on the offset of the corresponding column from the    * left factor.    *</ul>    *    * Note that this only applies if both factors in the self-join are in the    * join ordering. If they are, then the left factor always precedes the    * right factor in the join ordering.    *    * @param multiJoin join factors being optimized    * @param factor the factor whose references are being adjusted    * @param newJoinOrder the new join ordering containing the factor    * @param newPos the position of the factor in the new join ordering    * @param adjustments the adjustments array that will be set    * @param offset the starting offset within the original join ordering for    * the columns of the factor being adjusted    * @param newOffset the new starting offset in the new join ordering for the    * columns of the factor being adjusted    * @param alwaysUseDefault always use the default adjustment value    * regardless of whether the factor is the right factor in a removable    * self-join    *    * @return true if at least one column from the factor requires adjustment    */
+comment|/**    * Sets an adjustment array based on where column references for a    * particular factor end up as a result of a new join ordering.    *    *<p>If the factor is not the right factor in a removable self-join, then    * it needs to be adjusted as follows:    *    *<ul>    *<li>First subtract, based on where the factor was in the original join    * ordering.    *<li>Then add on the number of fields in the factors that now precede this    * factor in the new join ordering.    *</ul>    *    *<p>If the factor is the right factor in a removable self-join and its    * column reference can be mapped to the left factor in the self-join, then:    *    *<ul>    *<li>First subtract, based on where the column reference is in the new    * join ordering.    *<li>Then, add on the number of fields up to the start of the left factor    * in the self-join in the new join ordering.    *<li>Then, finally add on the offset of the corresponding column from the    * left factor.    *</ul>    *    *<p>Note that this only applies if both factors in the self-join are in the    * join ordering. If they are, then the left factor always precedes the    * right factor in the join ordering.    *    * @param multiJoin join factors being optimized    * @param factor the factor whose references are being adjusted    * @param newJoinOrder the new join ordering containing the factor    * @param newPos the position of the factor in the new join ordering    * @param adjustments the adjustments array that will be set    * @param offset the starting offset within the original join ordering for    * the columns of the factor being adjusted    * @param newOffset the new starting offset in the new join ordering for the    * columns of the factor being adjusted    * @param alwaysUseDefault always use the default adjustment value    * regardless of whether the factor is the right factor in a removable    * self-join    *    * @return true if at least one column from the factor requires adjustment    */
 specifier|private
 name|boolean
 name|remapJoinReferences
@@ -6246,6 +6278,9 @@ specifier|private
 name|LoptJoinTree
 name|createJoinSubtree
 parameter_list|(
+name|RelMetadataQuery
+name|mq
+parameter_list|,
 name|RelBuilder
 name|relBuilder
 parameter_list|,
@@ -6296,6 +6331,8 @@ if|if
 condition|(
 name|swapInputs
 argument_list|(
+name|mq
+argument_list|,
 name|multiJoin
 argument_list|,
 name|left
@@ -6692,6 +6729,9 @@ specifier|private
 name|boolean
 name|swapInputs
 parameter_list|(
+name|RelMetadataQuery
+name|mq
+parameter_list|,
 name|LoptMultiJoin
 name|multiJoin
 parameter_list|,
@@ -6738,15 +6778,6 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-specifier|final
-name|RelMetadataQuery
-name|mq
-init|=
-name|RelMetadataQuery
-operator|.
-name|instance
-argument_list|()
-decl_stmt|;
 specifier|final
 name|Double
 name|leftRowCount
@@ -7196,9 +7227,12 @@ specifier|final
 name|RelMetadataQuery
 name|mq
 init|=
-name|RelMetadataQuery
+name|joinRel
 operator|.
-name|instance
+name|getCluster
+argument_list|()
+operator|.
+name|getMetadataQuery
 argument_list|()
 decl_stmt|;
 specifier|final

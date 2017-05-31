@@ -418,15 +418,10 @@ specifier|final
 name|RexBuilder
 name|rexBuilder
 decl_stmt|;
-comment|/** Not thread-safe. But should be OK, because an optimizer is only used    * from within one thread.*/
+specifier|private
 specifier|final
 name|RelMetadataQuery
 name|mq
-init|=
-name|RelMetadataQuery
-operator|.
-name|instance
-argument_list|()
 decl_stmt|;
 comment|/**    * Semijoins corresponding to each join factor, if they are going to be    * filtered by semijoins. Otherwise, the entry is the original join factor.    */
 specifier|private
@@ -470,6 +465,9 @@ comment|//~ Constructors -------------------------------------------------------
 specifier|public
 name|LoptSemiJoinOptimizer
 parameter_list|(
+name|RelMetadataQuery
+name|mq
+parameter_list|,
 name|LoptMultiJoin
 name|multiJoin
 parameter_list|,
@@ -479,6 +477,12 @@ parameter_list|)
 block|{
 comment|// there are no semijoins yet, so initialize to the original
 comment|// factors
+name|this
+operator|.
+name|mq
+operator|=
+name|mq
+expr_stmt|;
 name|int
 name|nJoinFactors
 init|=
