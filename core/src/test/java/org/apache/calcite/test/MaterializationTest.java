@@ -4531,7 +4531,11 @@ name|CalciteAssert
 operator|.
 name|checkResultContains
 argument_list|(
+literal|"EnumerableAggregate(group=[{0}])"
+argument_list|,
 literal|"EnumerableUnion(all=[true])"
+argument_list|,
+literal|"EnumerableAggregate(group=[{2}])"
 argument_list|,
 literal|"EnumerableTableScan(table=[[hr, m0]])"
 argument_list|,
@@ -4624,7 +4628,11 @@ name|CalciteAssert
 operator|.
 name|checkResultContains
 argument_list|(
+literal|"EnumerableAggregate(group=[{0}])"
+argument_list|,
 literal|"EnumerableUnion(all=[true])"
+argument_list|,
+literal|"EnumerableAggregate(group=[{2}])"
 argument_list|,
 literal|"EnumerableTableScan(table=[[hr, m0]])"
 argument_list|,
@@ -5007,6 +5015,73 @@ literal|"    EnumerableTableScan(table=[[hr, m0]])\n"
 operator|+
 literal|"    EnumerableTableScan(table=[[hr, depts]])"
 argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testJoinAggregateMaterializationAggregateFuncs9
+parameter_list|()
+block|{
+name|checkMaterialize
+argument_list|(
+literal|"select \"dependents\".\"empid\", \"emps\".\"deptno\", count(distinct \"salary\") as s\n"
+operator|+
+literal|"from \"emps\"\n"
+operator|+
+literal|"join \"dependents\" on (\"emps\".\"empid\" = \"dependents\".\"empid\")\n"
+operator|+
+literal|"group by \"dependents\".\"empid\", \"emps\".\"deptno\""
+argument_list|,
+literal|"select \"emps\".\"deptno\", count(distinct \"salary\") as s\n"
+operator|+
+literal|"from \"emps\"\n"
+operator|+
+literal|"join \"dependents\" on (\"emps\".\"empid\" = \"dependents\".\"empid\")\n"
+operator|+
+literal|"group by \"dependents\".\"empid\", \"emps\".\"deptno\""
+argument_list|,
+name|HR_FKUK_MODEL
+argument_list|,
+name|CalciteAssert
+operator|.
+name|checkResultContains
+argument_list|(
+literal|"EnumerableCalc(expr#0..2=[{inputs}], deptno=[$t1], S=[$t2])\n"
+operator|+
+literal|"  EnumerableTableScan(table=[[hr, m0]])"
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testJoinAggregateMaterializationAggregateFuncs10
+parameter_list|()
+block|{
+name|checkNoMaterialize
+argument_list|(
+literal|"select \"dependents\".\"empid\", \"emps\".\"deptno\", count(distinct \"salary\") as s\n"
+operator|+
+literal|"from \"emps\"\n"
+operator|+
+literal|"join \"dependents\" on (\"emps\".\"empid\" = \"dependents\".\"empid\")\n"
+operator|+
+literal|"group by \"dependents\".\"empid\", \"emps\".\"deptno\""
+argument_list|,
+literal|"select \"emps\".\"deptno\", count(distinct \"salary\") as s\n"
+operator|+
+literal|"from \"emps\"\n"
+operator|+
+literal|"join \"dependents\" on (\"emps\".\"empid\" = \"dependents\".\"empid\")\n"
+operator|+
+literal|"group by \"emps\".\"deptno\""
+argument_list|,
+name|HR_FKUK_MODEL
 argument_list|)
 expr_stmt|;
 block|}
