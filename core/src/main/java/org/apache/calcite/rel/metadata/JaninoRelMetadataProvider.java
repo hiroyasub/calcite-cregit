@@ -2177,7 +2177,7 @@ argument_list|)
 operator|.
 name|append
 argument_list|(
-name|NoHandler
+name|Exception
 operator|.
 name|class
 operator|.
