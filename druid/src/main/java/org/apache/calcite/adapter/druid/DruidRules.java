@@ -962,6 +962,16 @@ block|{
 case|case
 name|COUNT
 case|:
+return|return
+operator|!
+name|aggregateCall
+operator|.
+name|getArgList
+argument_list|()
+operator|.
+name|isEmpty
+argument_list|()
+return|;
 case|case
 name|SUM
 case|:
