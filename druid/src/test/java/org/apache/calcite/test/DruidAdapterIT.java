@@ -7269,7 +7269,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    *<a href="https://issues.apache.org/jira/browse/CALCITE-1805">[CALCITE-1805]    * Druid adapter can not handel count column without adding support for nested queries</a>.    */
+comment|/**    *<a href="https://issues.apache.org/jira/browse/CALCITE-1805">[CALCITE-1805]    * Druid adapter cannot handle count column without adding support for nested queries</a>.    */
 annotation|@
 name|Test
 specifier|public
@@ -7328,6 +7328,50 @@ operator|+
 literal|"    DruidQuery(table=[[wiki, wikiticker]], "
 operator|+
 literal|"intervals=[[1900-01-01T00:00:00.000/3000-01-01T00:00:00.000]], projects=[[$7]])"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/**    * Test to make sure the "not" filter has only 1 field, rather than an array of fields.    */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testNotFilterForm
+parameter_list|()
+block|{
+name|String
+name|sql
+init|=
+literal|"select count(distinct \"the_month\") from "
+operator|+
+literal|"\"foodmart\" where \"the_month\"<> \'October\'"
+decl_stmt|;
+name|String
+name|druidFilter
+init|=
+literal|"'filter':{'type':'not',"
+operator|+
+literal|"'field':{'type':'selector','dimension':'the_month','value':'October'}}"
+decl_stmt|;
+comment|// Check that the filter actually worked, and that druid was responsible for the filter
+name|sql
+argument_list|(
+name|sql
+argument_list|,
+name|FOODMART
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|druidChecker
+argument_list|(
+name|druidFilter
+argument_list|)
+argument_list|)
+operator|.
+name|returnsOrdered
+argument_list|(
+literal|"EXPR$0=11"
 argument_list|)
 expr_stmt|;
 block|}
