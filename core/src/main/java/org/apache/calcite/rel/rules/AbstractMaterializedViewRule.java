@@ -1089,7 +1089,7 @@ comment|/** Whether to generate rewritings containing union if the query results
 specifier|private
 specifier|final
 name|boolean
-name|generateUnionRewrites
+name|generateUnionRewriting
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
 comment|/** Creates a AbstractMaterializedViewRule. */
@@ -1106,7 +1106,7 @@ name|String
 name|description
 parameter_list|,
 name|boolean
-name|generateUnionRewrites
+name|generateUnionRewriting
 parameter_list|)
 block|{
 name|super
@@ -1120,9 +1120,9 @@ argument_list|)
 expr_stmt|;
 name|this
 operator|.
-name|generateUnionRewrites
+name|generateUnionRewriting
 operator|=
-name|generateUnionRewrites
+name|generateUnionRewriting
 expr_stmt|;
 block|}
 comment|/**    * Rewriting logic is based on "Optimizing Queries Using Materialized Views:    * A Practical, Scalable Solution" by Goldstein and Larson.    *    *<p>On the query side, rules matches a Project-node chain or node, where node    * is either an Aggregate or a Join. Subplan rooted at the node operator must    * be composed of one or more of the following operators: TableScan, Project,    * Filter, and Join.    *    *<p>For each join MV, we need to check the following:    *<ol>    *<li> The plan rooted at the Join operator in the view produces all rows    * needed by the plan rooted at the Join operator in the query.</li>    *<li> All columns required by compensating predicates, i.e., predicates that    * need to be enforced over the view, are available at the view output.</li>    *<li> All output expressions can be computed from the output of the view.</li>    *<li> All output rows occur with the correct duplication factor. We might    * rely on existing Unique-Key - Foreign-Key relationships to extract that    * information.</li>    *</ol>    *    *<p>In turn, for each aggregate MV, we need to check the following:    *<ol>    *<li> The plan rooted at the Aggregate operator in the view produces all rows    * needed by the plan rooted at the Aggregate operator in the query.</li>    *<li> All columns required by compensating predicates, i.e., predicates that    * need to be enforced over the view, are available at the view output.</li>    *<li> The grouping columns in the query are a subset of the grouping columns    * in the view.</li>    *<li> All columns required to perform further grouping are available in the    * view output.</li>    *<li> All columns required to compute output expressions are available in the    * view output.</li>    *</ol>    *    *<p>The rule contains multiple extensions compared to the original paper. One of    * them is the possibility of creating rewritings using Union operators, e.g., if    * the result of a query is partially contained in the materialized view.    */
@@ -2200,7 +2200,7 @@ name|compensationPreds
 operator|==
 literal|null
 operator|&&
-name|generateUnionRewrites
+name|generateUnionRewriting
 condition|)
 block|{
 comment|// Attempt partial rewriting using union operator. This rewriting
@@ -2338,7 +2338,7 @@ specifier|final
 name|RelNode
 name|unionInputView
 init|=
-name|unify
+name|rewriteView
 argument_list|(
 name|call
 operator|.
@@ -2350,6 +2350,8 @@ argument_list|,
 name|mq
 argument_list|,
 name|matchModality
+argument_list|,
+literal|true
 argument_list|,
 name|view
 argument_list|,
@@ -2397,6 +2399,16 @@ argument_list|,
 name|unionInputView
 argument_list|)
 decl_stmt|;
+if|if
+condition|(
+name|result
+operator|==
+literal|null
+condition|)
+block|{
+comment|// Skip it
+continue|continue;
+block|}
 name|call
 operator|.
 name|transformTo
@@ -2643,10 +2655,11 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+specifier|final
 name|RelNode
 name|result
 init|=
-name|unify
+name|rewriteView
 argument_list|(
 name|builder
 argument_list|,
@@ -2655,6 +2668,8 @@ argument_list|,
 name|mq
 argument_list|,
 name|matchModality
+argument_list|,
+literal|false
 argument_list|,
 name|builder
 operator|.
@@ -2830,7 +2845,7 @@ comment|/**    * This method is responsible for rewriting the query using the gi
 specifier|protected
 specifier|abstract
 name|RelNode
-name|unify
+name|rewriteView
 parameter_list|(
 name|RelBuilder
 name|relBuilder
@@ -2843,6 +2858,9 @@ name|mq
 parameter_list|,
 name|MatchModality
 name|matchModality
+parameter_list|,
+name|boolean
+name|unionRewriting
 parameter_list|,
 name|RelNode
 name|input
@@ -2895,7 +2913,7 @@ name|String
 name|description
 parameter_list|,
 name|boolean
-name|generateUnionRewrites
+name|generateUnionRewriting
 parameter_list|)
 block|{
 name|super
@@ -2906,7 +2924,7 @@ name|relBuilderFactory
 argument_list|,
 name|description
 argument_list|,
-name|generateUnionRewrites
+name|generateUnionRewriting
 argument_list|)
 expr_stmt|;
 block|}
@@ -3714,7 +3732,7 @@ annotation|@
 name|Override
 specifier|protected
 name|RelNode
-name|unify
+name|rewriteView
 parameter_list|(
 name|RelBuilder
 name|relBuilder
@@ -3727,6 +3745,9 @@ name|mq
 parameter_list|,
 name|MatchModality
 name|matchModality
+parameter_list|,
+name|boolean
+name|unionRewriting
 parameter_list|,
 name|RelNode
 name|input
@@ -3944,7 +3965,7 @@ name|RelBuilderFactory
 name|relBuilderFactory
 parameter_list|,
 name|boolean
-name|generateUnionRewrites
+name|generateUnionRewriting
 parameter_list|)
 block|{
 name|super
@@ -3970,7 +3991,7 @@ name|relBuilderFactory
 argument_list|,
 literal|"MaterializedViewJoinRule(Project-Join)"
 argument_list|,
-name|generateUnionRewrites
+name|generateUnionRewriting
 argument_list|)
 expr_stmt|;
 block|}
@@ -4032,7 +4053,7 @@ name|RelBuilderFactory
 name|relBuilderFactory
 parameter_list|,
 name|boolean
-name|generateUnionRewrites
+name|generateUnionRewriting
 parameter_list|)
 block|{
 name|super
@@ -4058,7 +4079,7 @@ name|relBuilderFactory
 argument_list|,
 literal|"MaterializedViewJoinRule(Project-Filter)"
 argument_list|,
-name|generateUnionRewrites
+name|generateUnionRewriting
 argument_list|)
 expr_stmt|;
 block|}
@@ -4120,7 +4141,7 @@ name|RelBuilderFactory
 name|relBuilderFactory
 parameter_list|,
 name|boolean
-name|generateUnionRewrites
+name|generateUnionRewriting
 parameter_list|)
 block|{
 name|super
@@ -4139,7 +4160,7 @@ name|relBuilderFactory
 argument_list|,
 literal|"MaterializedViewJoinRule(Join)"
 argument_list|,
-name|generateUnionRewrites
+name|generateUnionRewriting
 argument_list|)
 expr_stmt|;
 block|}
@@ -4190,7 +4211,7 @@ name|RelBuilderFactory
 name|relBuilderFactory
 parameter_list|,
 name|boolean
-name|generateUnionRewrites
+name|generateUnionRewriting
 parameter_list|)
 block|{
 name|super
@@ -4209,7 +4230,7 @@ name|relBuilderFactory
 argument_list|,
 literal|"MaterializedViewJoinRule(Filter)"
 argument_list|,
-name|generateUnionRewrites
+name|generateUnionRewriting
 argument_list|)
 expr_stmt|;
 block|}
@@ -4269,7 +4290,7 @@ name|String
 name|description
 parameter_list|,
 name|boolean
-name|generateUnionRewrites
+name|generateUnionRewriting
 parameter_list|)
 block|{
 name|super
@@ -4280,7 +4301,7 @@ name|relBuilderFactory
 argument_list|,
 name|description
 argument_list|,
-name|generateUnionRewrites
+name|generateUnionRewriting
 argument_list|)
 expr_stmt|;
 block|}
@@ -5522,6 +5543,19 @@ argument_list|(
 name|i
 argument_list|)
 decl_stmt|;
+if|if
+condition|(
+name|aggCall
+operator|.
+name|isDistinct
+argument_list|()
+condition|)
+block|{
+comment|// Cannot ROLLUP distinct
+return|return
+literal|null
+return|;
+block|}
 name|aggregateCalls
 operator|.
 name|add
@@ -5636,7 +5670,7 @@ annotation|@
 name|Override
 specifier|protected
 name|RelNode
-name|unify
+name|rewriteView
 parameter_list|(
 name|RelBuilder
 name|relBuilder
@@ -5649,6 +5683,9 @@ name|mq
 parameter_list|,
 name|MatchModality
 name|matchModality
+parameter_list|,
+name|boolean
+name|unionRewriting
 parameter_list|,
 name|RelNode
 name|input
@@ -5716,6 +5753,9 @@ condition|(
 name|topProject
 operator|!=
 literal|null
+operator|&&
+operator|!
+name|unionRewriting
 condition|)
 block|{
 comment|// We have a Project on top, gather only what is needed
@@ -7144,6 +7184,9 @@ condition|(
 name|topProject
 operator|!=
 literal|null
+operator|&&
+operator|!
+name|unionRewriting
 condition|)
 block|{
 name|topExprs
@@ -7454,7 +7497,7 @@ name|RelBuilderFactory
 name|relBuilderFactory
 parameter_list|,
 name|boolean
-name|generateUnionRewrites
+name|generateUnionRewriting
 parameter_list|)
 block|{
 name|super
@@ -7480,7 +7523,7 @@ name|relBuilderFactory
 argument_list|,
 literal|"MaterializedViewAggregateRule(Project-Aggregate)"
 argument_list|,
-name|generateUnionRewrites
+name|generateUnionRewriting
 argument_list|)
 expr_stmt|;
 block|}
@@ -7542,7 +7585,7 @@ name|RelBuilderFactory
 name|relBuilderFactory
 parameter_list|,
 name|boolean
-name|generateUnionRewrites
+name|generateUnionRewriting
 parameter_list|)
 block|{
 name|super
@@ -7561,7 +7604,7 @@ name|relBuilderFactory
 argument_list|,
 literal|"MaterializedViewAggregateRule(Aggregate)"
 argument_list|,
-name|generateUnionRewrites
+name|generateUnionRewriting
 argument_list|)
 expr_stmt|;
 block|}

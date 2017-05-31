@@ -5089,6 +5089,109 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testJoinAggregateMaterializationAggregateFuncs11
+parameter_list|()
+block|{
+name|checkMaterialize
+argument_list|(
+literal|"select \"depts\".\"deptno\", \"dependents\".\"empid\", count(\"emps\".\"salary\") as s\n"
+operator|+
+literal|"from \"depts\"\n"
+operator|+
+literal|"join \"dependents\" on (\"depts\".\"name\" = \"dependents\".\"name\")\n"
+operator|+
+literal|"join \"locations\" on (\"locations\".\"name\" = \"dependents\".\"name\")\n"
+operator|+
+literal|"join \"emps\" on (\"emps\".\"deptno\" = \"depts\".\"deptno\")\n"
+operator|+
+literal|"where \"depts\".\"deptno\"> 11 and \"depts\".\"deptno\"< 19\n"
+operator|+
+literal|"group by \"depts\".\"deptno\", \"dependents\".\"empid\""
+argument_list|,
+literal|"select \"dependents\".\"empid\", count(\"emps\".\"salary\") + 1\n"
+operator|+
+literal|"from \"depts\"\n"
+operator|+
+literal|"join \"dependents\" on (\"depts\".\"name\" = \"dependents\".\"name\")\n"
+operator|+
+literal|"join \"locations\" on (\"locations\".\"name\" = \"dependents\".\"name\")\n"
+operator|+
+literal|"join \"emps\" on (\"emps\".\"deptno\" = \"depts\".\"deptno\")\n"
+operator|+
+literal|"where \"depts\".\"deptno\"> 10 and \"depts\".\"deptno\"< 20\n"
+operator|+
+literal|"group by \"dependents\".\"empid\""
+argument_list|,
+name|HR_FKUK_MODEL
+argument_list|,
+name|CalciteAssert
+operator|.
+name|checkResultContains
+argument_list|(
+literal|"PLAN=EnumerableCalc(expr#0..1=[{inputs}], expr#2=[1], expr#3=[+($t1, $t2)], "
+operator|+
+literal|"empid=[$t0], EXPR$1=[$t3])\n"
+operator|+
+literal|"  EnumerableAggregate(group=[{0}], agg#0=[$SUM0($1)])"
+argument_list|,
+literal|"EnumerableUnion(all=[true])"
+argument_list|,
+literal|"EnumerableAggregate(group=[{2}], agg#0=[COUNT()])"
+argument_list|,
+literal|"EnumerableAggregate(group=[{1}], agg#0=[$SUM0($2)])"
+argument_list|,
+literal|"EnumerableTableScan(table=[[hr, m0]])"
+argument_list|,
+literal|"expr#13=[OR($t10, $t12)], expr#14=[AND($t6, $t8, $t13)]"
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testJoinAggregateMaterializationAggregateFuncs12
+parameter_list|()
+block|{
+name|checkNoMaterialize
+argument_list|(
+literal|"select \"depts\".\"deptno\", \"dependents\".\"empid\", count(distinct \"emps\".\"salary\") as s\n"
+operator|+
+literal|"from \"depts\"\n"
+operator|+
+literal|"join \"dependents\" on (\"depts\".\"name\" = \"dependents\".\"name\")\n"
+operator|+
+literal|"join \"locations\" on (\"locations\".\"name\" = \"dependents\".\"name\")\n"
+operator|+
+literal|"join \"emps\" on (\"emps\".\"deptno\" = \"depts\".\"deptno\")\n"
+operator|+
+literal|"where \"depts\".\"deptno\"> 11 and \"depts\".\"deptno\"< 19\n"
+operator|+
+literal|"group by \"depts\".\"deptno\", \"dependents\".\"empid\""
+argument_list|,
+literal|"select \"dependents\".\"empid\", count(distinct \"emps\".\"salary\") + 1\n"
+operator|+
+literal|"from \"depts\"\n"
+operator|+
+literal|"join \"dependents\" on (\"depts\".\"name\" = \"dependents\".\"name\")\n"
+operator|+
+literal|"join \"locations\" on (\"locations\".\"name\" = \"dependents\".\"name\")\n"
+operator|+
+literal|"join \"emps\" on (\"emps\".\"deptno\" = \"depts\".\"deptno\")\n"
+operator|+
+literal|"where \"depts\".\"deptno\"> 10 and \"depts\".\"deptno\"< 20\n"
+operator|+
+literal|"group by \"dependents\".\"empid\""
+argument_list|,
+name|HR_FKUK_MODEL
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testJoinMaterialization4
 parameter_list|()
 block|{
