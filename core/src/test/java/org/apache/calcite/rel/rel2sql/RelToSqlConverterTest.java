@@ -1381,6 +1381,45 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testSelectQueryWithParameters
+parameter_list|()
+block|{
+name|String
+name|query
+init|=
+literal|"select * from \"product\" "
+operator|+
+literal|"where \"product_id\" = ? "
+operator|+
+literal|"AND ?>= \"shelf_width\""
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM \"foodmart\".\"product\"\n"
+operator|+
+literal|"WHERE \"product_id\" = ?"
+operator|+
+literal|"AND ?>= \"shelf_width\""
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testSelectQueryWithFetchOffsetClause
 parameter_list|()
 block|{
