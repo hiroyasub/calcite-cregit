@@ -919,6 +919,25 @@ name|TIMESTAMP
 argument_list|)
 argument_list|)
 expr_stmt|;
+comment|// Array is assignable from ...
+name|rules
+operator|.
+name|put
+argument_list|(
+name|SqlTypeName
+operator|.
+name|ARRAY
+argument_list|,
+name|EnumSet
+operator|.
+name|of
+argument_list|(
+name|SqlTypeName
+operator|.
+name|ARRAY
+argument_list|)
+argument_list|)
+expr_stmt|;
 comment|// Any is assignable from ...
 name|rule
 operator|=
