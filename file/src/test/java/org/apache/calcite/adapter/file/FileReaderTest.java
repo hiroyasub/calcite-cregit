@@ -340,6 +340,11 @@ expr_stmt|;
 block|}
 comment|/** Tests {@link FileReader} URL fetch. */
 annotation|@
+name|Ignore
+argument_list|(
+literal|"[CALCITE-1789] Wikipedia format change breaks file adapter test"
+argument_list|)
+annotation|@
 name|Test
 specifier|public
 name|void
