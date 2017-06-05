@@ -3012,6 +3012,10 @@ literal|"  from \"product\" match_recognize\n"
 operator|+
 literal|"  (\n"
 operator|+
+literal|"    partition by \"product_class_id\", \"brand_name\" \n"
+operator|+
+literal|"    order by \"product_class_id\" asc, \"brand_name\" desc \n"
+operator|+
 literal|"    pattern (strt down+ up+)\n"
 operator|+
 literal|"    define\n"
@@ -3030,6 +3034,10 @@ operator|+
 literal|"FROM (SELECT *\n"
 operator|+
 literal|"FROM \"foodmart\".\"product\") MATCH_RECOGNIZE(\n"
+operator|+
+literal|"PARTITION BY \"product_class_id\", \"brand_name\"\n"
+operator|+
+literal|"ORDER BY \"product_class_id\", \"brand_name\" DESC\n"
 operator|+
 literal|"ONE ROW PER MATCH\n"
 operator|+

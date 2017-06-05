@@ -23650,6 +23650,10 @@ literal|"  from t match_recognize\n"
 operator|+
 literal|"  (\n"
 operator|+
+literal|"    partition by type, price\n"
+operator|+
+literal|"    order by type asc, price desc\n"
+operator|+
 literal|"    pattern (strt down+ up+)\n"
 operator|+
 literal|"    define\n"
@@ -23667,6 +23671,10 @@ init|=
 literal|"SELECT *\n"
 operator|+
 literal|"FROM `T` MATCH_RECOGNIZE(\n"
+operator|+
+literal|"PARTITION BY `TYPE`, `PRICE`\n"
+operator|+
+literal|"ORDER BY `TYPE`, `PRICE` DESC\n"
 operator|+
 literal|"PATTERN (((`STRT` (`DOWN` +)) (`UP` +)))\n"
 operator|+

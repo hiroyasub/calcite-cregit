@@ -8913,6 +8913,170 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testMatchRecognize1
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"  from emp match_recognize\n"
+operator|+
+literal|"  (\n"
+operator|+
+literal|"    partition by job, sal\n"
+operator|+
+literal|"    order by job asc, sal desc, empno\n"
+operator|+
+literal|"    pattern (strt down+ up+)\n"
+operator|+
+literal|"    define\n"
+operator|+
+literal|"      down as down.mgr< PREV(down.mgr),\n"
+operator|+
+literal|"      up as up.mgr> prev(up.mgr)\n"
+operator|+
+literal|"  ) mr"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testMatchRecognizeMeasures1
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"  from emp match_recognize\n"
+operator|+
+literal|"  (\n"
+operator|+
+literal|"   partition by job, sal\n"
+operator|+
+literal|"   order by job asc, sal desc\n"
+operator|+
+literal|"   measures STRT.mgr as start_nw,"
+operator|+
+literal|"   LAST(DOWN.mgr) as bottom_nw,"
+operator|+
+literal|"   LAST(up.mgr) as end_nw"
+operator|+
+literal|"    pattern (strt down+ up+)\n"
+operator|+
+literal|"    define\n"
+operator|+
+literal|"      down as down.mgr< PREV(down.mgr),\n"
+operator|+
+literal|"      up as up.mgr> prev(up.mgr)\n"
+operator|+
+literal|"  ) mr"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testMatchRecognizePatternSkip1
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"  from emp match_recognize\n"
+operator|+
+literal|"  (\n"
+operator|+
+literal|"    after match skip to next row\n"
+operator|+
+literal|"    pattern (strt down+ up+)\n"
+operator|+
+literal|"    define\n"
+operator|+
+literal|"      down as down.mgr< PREV(down.mgr),\n"
+operator|+
+literal|"      up as up.mgr> NEXT(up.mgr)\n"
+operator|+
+literal|"  ) mr"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testMatchRecognizeSubset1
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"  from emp match_recognize\n"
+operator|+
+literal|"  (\n"
+operator|+
+literal|"    after match skip to down\n"
+operator|+
+literal|"    pattern (strt down+ up+)\n"
+operator|+
+literal|"    subset stdn = (strt, down)\n"
+operator|+
+literal|"    define\n"
+operator|+
+literal|"      down as down.mgr< PREV(down.mgr),\n"
+operator|+
+literal|"      up as up.mgr> NEXT(up.mgr)\n"
+operator|+
+literal|"  ) mr"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
 comment|/**    * Visitor that checks that every {@link RelNode} in a tree is valid.    *    * @see RelNode#isValid(Litmus, RelNode.Context)    */
 specifier|public
 specifier|static
