@@ -196,7 +196,7 @@ name|actual
 argument_list|)
 throw|;
 block|}
-comment|/**    * Converts a string (which may contain quotes and newlines) into a java    * literal.    *    *<p>For example,    *<pre><code>string with "quotes" split    * across lines</code></pre>    *    * becomes    *    *<pre><code>"string with \"quotes\" split" + NL +    *  "across lines"</code></pre>    */
+comment|/**    * Converts a string (which may contain quotes and newlines) into a java    * literal.    *    *<p>For example,    *<pre><code>string with "quotes" split    * across lines</code></pre>    *    *<p>becomes    *    *<blockquote><pre><code>"string with \"quotes\" split" + NL +    *  "across lines"</code></pre></blockquote>    */
 specifier|public
 specifier|static
 name|String
@@ -308,7 +308,7 @@ return|return
 name|s
 return|;
 block|}
-comment|/**    * Converts a string (which may contain quotes and newlines) into a java    * literal.    *    *<p>For example,</p>    *    *<pre><code>string with "quotes" split    * across lines</code></pre>    *    *<p>becomes</p>    *    *<pre><code>TestUtil.fold(    *  "string with \"quotes\" split\n",    *  + "across lines")</code></pre>    */
+comment|/**    * Converts a string (which may contain quotes and newlines) into a java    * literal.    *    *<p>For example,</p>    *    *<blockquote><pre><code>string with "quotes" split    * across lines</code></pre></blockquote>    *    *<p>becomes</p>    *    *<blockquote><pre><code>TestUtil.fold(    *  "string with \"quotes\" split\n",    *  + "across lines")</code></pre></blockquote>    */
 specifier|public
 specifier|static
 name|String

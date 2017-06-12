@@ -45,10 +45,10 @@ comment|/**    * Style of formatting sub-queries.    */
 enum|enum
 name|SubQueryStyle
 block|{
-comment|/**      * Julian's style of sub-query nesting. Like this:      *      *<pre>SELECT *      * FROM (      *     SELECT *      *     FROM t      * )      * WHERE condition</pre>      */
+comment|/**      * Julian's style of sub-query nesting. Like this:      *      *<blockquote><pre>SELECT *      * FROM (      *     SELECT *      *     FROM t      * )      * WHERE condition</pre></blockquote>      */
 name|HYDE
 block|,
-comment|/**      * Damian's style of sub-query nesting. Like this:      *      *<pre>SELECT *      * FROM      * (   SELECT *      *     FROM t      * )      * WHERE condition</pre>      */
+comment|/**      * Damian's style of sub-query nesting. Like this:      *      *<blockquote><pre>SELECT *      * FROM      * (   SELECT *      *     FROM t      * )      * WHERE condition</pre></blockquote>      */
 name|BLACK
 block|}
 comment|/**    * Enumerates the types of frame.    */

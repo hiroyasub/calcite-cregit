@@ -14747,7 +14747,7 @@ name|expected
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Matcher that succeeds for any collection that, when converted to strings    * and sorted on those strings, matches the given reference string.    *    *<p>Use it as an alternative to {@link CoreMatchers#is} if items in your    * list might occur in any order.    *    *<p>For example:    *    *<pre>List&lt;Integer&gt; ints = Arrays.asList(2, 500, 12);    * assertThat(ints, sortsAs("[12, 2, 500]");</pre>    */
+comment|/**    * Matcher that succeeds for any collection that, when converted to strings    * and sorted on those strings, matches the given reference string.    *    *<p>Use it as an alternative to {@link CoreMatchers#is} if items in your    * list might occur in any order.    *    *<p>For example:    *    *<blockquote><pre>List&lt;Integer&gt; ints = Arrays.asList(2, 500, 12);    * assertThat(ints, sortsAs("[12, 2, 500]");</pre></blockquote>    */
 specifier|static
 parameter_list|<
 name|T

@@ -74,7 +74,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * A modifiable view onto {@link ModifiableTable}.  *  *<p>It describes how its columns map onto the underlying table's columns,  * and any constraints that incoming rows must satisfy.  *  *<p>For example, given  *  *<blockquote><pre>  *   CREATE TABLE emps (empno INTEGER, gender VARCHAR(1), deptno INTEGER);  *   CREATE VIEW female_emps AS  *     SELECT empno, deptno FROM emps WHERE gender = 'F';  *</pre></blockquote>  *  * constraint is {@code $1 = 'F'}  * and column mapping is {@code [0, 2]}.  *  *<p>NOTE: The current API is inefficient and experimental. It will change  * without notice.</p>  */
+comment|/**  * A modifiable view onto {@link ModifiableTable}.  *  *<p>It describes how its columns map onto the underlying table's columns,  * and any constraints that incoming rows must satisfy.  *  *<p>For example, given  *  *<blockquote><pre>  *   CREATE TABLE emps (empno INTEGER, gender VARCHAR(1), deptno INTEGER);  *   CREATE VIEW female_emps AS  *     SELECT empno, deptno FROM emps WHERE gender = 'F';  *</pre></blockquote>  *  *<p>constraint is {@code $1 = 'F'}  * and column mapping is {@code [0, 2]}.  *  *<p>NOTE: The current API is inefficient and experimental. It will change  * without notice.</p>  */
 end_comment
 
 begin_interface
@@ -95,7 +95,7 @@ name|RelDataType
 name|tableRowType
 parameter_list|)
 function_decl|;
-comment|/** Returns the column mapping onto another table.    *    * {@code mapping[i]} contains the column of the underlying table that the    * {@code i}th column of the view comes from, or -1 if it is based on an    * expression.    */
+comment|/** Returns the column mapping onto another table.    *    *<p>{@code mapping[i]} contains the column of the underlying table that the    * {@code i}th column of the view comes from, or -1 if it is based on an    * expression.    */
 name|ImmutableIntList
 name|getColumnMapping
 parameter_list|()

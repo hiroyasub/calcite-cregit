@@ -24,7 +24,7 @@ specifier|public
 class|class
 name|JsonColumn
 block|{
-comment|/** Column name.    *    * Required, and must be unique within the table.    */
+comment|/** Column name.    *    *<p>Required, and must be unique within the table.    */
 specifier|public
 name|String
 name|name

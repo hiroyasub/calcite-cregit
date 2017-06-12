@@ -66,7 +66,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Specifies that function is deterministic (i.e. returns the same output  * given the same inputs).  *  * Deterministic functions can be factored out by optimizer to static fields.  */
+comment|/**  * Specifies that function is deterministic (i.e. returns the same output  * given the same inputs).  *  *<p>Deterministic functions can be factored out by optimizer to static fields.  */
 end_comment
 
 begin_annotation_defn

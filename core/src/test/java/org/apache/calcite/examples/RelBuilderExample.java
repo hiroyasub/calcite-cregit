@@ -321,7 +321,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/**    * Creates a relational expression for a table scan.    * It is equivalent to    *    *<pre>    * SELECT *    * FROM emp</pre>    */
+comment|/**    * Creates a relational expression for a table scan.    * It is equivalent to    *    *<blockquote><pre>SELECT *    * FROM emp</pre></blockquote>    */
 specifier|private
 name|RelBuilder
 name|example0
@@ -354,7 +354,7 @@ literal|false
 argument_list|)
 return|;
 block|}
-comment|/**    * Creates a relational expression for a table scan.    * It is equivalent to    *    *<pre>    * SELECT *    * FROM emp</pre>    */
+comment|/**    * Creates a relational expression for a table scan.    * It is equivalent to    *    *<blockquote><pre>SELECT *    * FROM emp</pre></blockquote>    */
 specifier|private
 name|RelBuilder
 name|example1
@@ -372,7 +372,7 @@ literal|"EMP"
 argument_list|)
 return|;
 block|}
-comment|/**    * Creates a relational expression for a table scan and project.    * It is equivalent to    *    *<pre>    * SELECT deptno, ename    * FROM emp</pre>    */
+comment|/**    * Creates a relational expression for a table scan and project.    * It is equivalent to    *    *<blockquote><pre>SELECT deptno, ename    * FROM emp</pre></blockquote>    */
 specifier|private
 name|RelBuilder
 name|example2
@@ -407,7 +407,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/**    * Creates a relational expression for a table scan, aggregate, filter.    * It is equivalent to    *    *<pre>    * SELECT deptno, count(*) AS c, sum(sal) AS s    * FROM emp    * GROUP BY deptno    * HAVING count(*)&gt; 10</pre>    */
+comment|/**    * Creates a relational expression for a table scan, aggregate, filter.    * It is equivalent to    *    *<blockquote><pre>SELECT deptno, count(*) AS c, sum(sal) AS s    * FROM emp    * GROUP BY deptno    * HAVING count(*)&gt; 10</pre></blockquote>    */
 specifier|private
 name|RelBuilder
 name|example3
@@ -486,7 +486,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/**    * Sometimes the stack becomes so deeply nested it gets confusing. To keep    * things straight, you can remove expressions from the stack. For example,    * here we are building a bushy join:    *    *<pre>    *                join    *              /      \    *         join          join    *       /      \      /      \    * CUSTOMERS ORDERS LINE_ITEMS PRODUCTS    *</pre>    *    *<p>We build it in three stages. Store the intermediate results in variables    * `left` and `right`, and use `push()` to put them back on the stack when it    * is time to create the final `Join`.    */
+comment|/**    * Sometimes the stack becomes so deeply nested it gets confusing. To keep    * things straight, you can remove expressions from the stack. For example,    * here we are building a bushy join:    *    *<blockquote><pre>    *                join    *              /      \    *         join          join    *       /      \      /      \    * CUSTOMERS ORDERS LINE_ITEMS PRODUCTS    *</pre></blockquote>    *    *<p>We build it in three stages. Store the intermediate results in variables    * `left` and `right`, and use `push()` to put them back on the stack when it    * is time to create the final `Join`.    */
 specifier|private
 name|RelBuilder
 name|example4

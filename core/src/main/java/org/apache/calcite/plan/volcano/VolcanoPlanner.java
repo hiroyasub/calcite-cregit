@@ -5976,8 +5976,6 @@ name|subset
 operator|!=
 literal|null
 assert|;
-comment|//boolean existed = subset.rels.remove(rel);
-comment|//assert existed : "rel was not known to its subset";
 name|boolean
 name|existed
 init|=

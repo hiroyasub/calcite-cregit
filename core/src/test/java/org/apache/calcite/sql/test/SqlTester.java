@@ -330,7 +330,7 @@ name|double
 name|delta
 parameter_list|)
 function_decl|;
-comment|/**    * Tests that a scalar SQL expression returns the expected boolean result.    * For example,    *    *<blockquote>    *<pre>checkScalarExact("TRUE AND FALSE", Boolean.TRUE);</pre>    *</blockquote>    *    * The expected result can be null:    *    *<blockquote>    *<pre>checkScalarExact("NOT UNKNOWN", null);</pre>    *</blockquote>    *    * @param expression Scalar expression    * @param result     Expected result (null signifies NULL).    */
+comment|/**    * Tests that a scalar SQL expression returns the expected boolean result.    * For example,    *    *<blockquote>    *<pre>checkScalarExact("TRUE AND FALSE", Boolean.TRUE);</pre>    *</blockquote>    *    *<p>The expected result can be null:    *    *<blockquote>    *<pre>checkScalarExact("NOT UNKNOWN", null);</pre>    *</blockquote>    *    * @param expression Scalar expression    * @param result     Expected result (null signifies NULL).    */
 name|void
 name|checkBoolean
 parameter_list|(
@@ -363,7 +363,7 @@ name|String
 name|expression
 parameter_list|)
 function_decl|;
-comment|/**    * Tests that a SQL expression has a given type. For example,    *    *<blockquote>    *<code>checkType("SUBSTR('hello' FROM 1 FOR 3)",    * "VARCHAR(3) NOT NULL");</code>    *</blockquote>    *    * This method checks length/precision, scale, and whether the type allows    * NULL values, so is more precise than the type-checking done by methods    * such as {@link #checkScalarExact}.    *    * @param expression Scalar expression    * @param type       Type string    */
+comment|/**    * Tests that a SQL expression has a given type. For example,    *    *<blockquote>    *<code>checkType("SUBSTR('hello' FROM 1 FOR 3)",    * "VARCHAR(3) NOT NULL");</code>    *</blockquote>    *    *<p>This method checks length/precision, scale, and whether the type allows    * NULL values, so is more precise than the type-checking done by methods    * such as {@link #checkScalarExact}.    *    * @param expression Scalar expression    * @param type       Type string    */
 name|void
 name|checkType
 parameter_list|(

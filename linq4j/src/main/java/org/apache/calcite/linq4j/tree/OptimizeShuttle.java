@@ -1794,7 +1794,7 @@ break|break;
 block|}
 block|}
 comment|// We might have dangling "else", however if we have just single item
-comment|// it means we have if (false) else if(false) else if (true) {...} code.
+comment|// it means we have if (false) else if (false) else if (true) {...} code.
 comment|// Then we just return statement from true branch
 if|if
 condition|(

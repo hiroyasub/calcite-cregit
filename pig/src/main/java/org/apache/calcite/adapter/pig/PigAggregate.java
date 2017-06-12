@@ -281,7 +281,6 @@ name|PigRel
 operator|.
 name|CONVENTION
 assert|;
-comment|//assert getConvention() == child.getConvention();
 block|}
 annotation|@
 name|Override

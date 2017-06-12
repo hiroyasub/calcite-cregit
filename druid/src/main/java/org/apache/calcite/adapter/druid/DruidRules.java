@@ -3798,7 +3798,7 @@ condition|)
 block|{
 continue|continue;
 block|}
-comment|//has the indexes of the columns used for sorts
+comment|// has the indexes of the columns used for sorts
 name|positionsReferenced
 operator|.
 name|set

@@ -935,7 +935,7 @@ operator|.
 name|EMPTY
 return|;
 block|}
-comment|/**    * Infers predicates for a project.    *    *<ol>    *<li>create a mapping from input to projection. Map only positions that    * directly reference an input column.    *<li>Expressions that only contain above columns are retained in the    * Project's pullExpressions list.    *<li>For e.g. expression 'a + e = 9' below will not be pulled up because 'e'    * is not in the projection list.    *    *<pre>    * inputPullUpExprs:      {a&gt; 7, b + c&lt; 10, a + e = 9}    * projectionExprs:       {a, b, c, e / 2}    * projectionPullupExprs: {a&gt; 7, b + c&lt; 10}    *</pre>    *    *</ol>    */
+comment|/**    * Infers predicates for a project.    *    *<ol>    *<li>create a mapping from input to projection. Map only positions that    * directly reference an input column.    *<li>Expressions that only contain above columns are retained in the    * Project's pullExpressions list.    *<li>For e.g. expression 'a + e = 9' below will not be pulled up because 'e'    * is not in the projection list.    *    *<blockquote><pre>    * inputPullUpExprs:      {a&gt; 7, b + c&lt; 10, a + e = 9}    * projectionExprs:       {a, b, c, e / 2}    * projectionPullupExprs: {a&gt; 7, b + c&lt; 10}    *</pre></blockquote>    *    *</ol>    */
 specifier|public
 name|RelOptPredicateList
 name|getPredicates
@@ -1794,7 +1794,7 @@ literal|false
 argument_list|)
 return|;
 block|}
-comment|/**    * Infers predicates for an Aggregate.    *    *<p>Pulls up predicates that only contains references to columns in the    * GroupSet. For e.g.    *    *<pre>    * inputPullUpExprs : { a&gt; 7, b + c&lt; 10, a + e = 9}    * groupSet         : { a, b}    * pulledUpExprs    : { a&gt; 7}    *</pre>    */
+comment|/**    * Infers predicates for an Aggregate.    *    *<p>Pulls up predicates that only contains references to columns in the    * GroupSet. For e.g.    *    *<blockquote><pre>    * inputPullUpExprs : { a&gt; 7, b + c&lt; 10, a + e = 9}    * groupSet         : { a, b}    * pulledUpExprs    : { a&gt; 7}    *</pre></blockquote>    */
 specifier|public
 name|RelOptPredicateList
 name|getPredicates

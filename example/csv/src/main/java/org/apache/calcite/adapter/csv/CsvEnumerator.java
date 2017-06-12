@@ -1697,7 +1697,7 @@ name|int
 index|[]
 name|fields
 decl_stmt|;
-comment|//whether the row to convert is from a stream
+comment|// whether the row to convert is from a stream
 specifier|private
 specifier|final
 name|boolean

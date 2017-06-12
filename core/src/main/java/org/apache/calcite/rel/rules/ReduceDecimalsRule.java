@@ -3959,7 +3959,7 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/**    * Expander that rewrites floor(decimal) expressions:    *    *<pre>    * if (value&lt; 0)    *     (value - 0.99...) / (10^scale)    * else    *     value / (10 ^ scale)    *</pre>    */
+comment|/**    * Expander that rewrites floor(decimal) expressions:    *    *<blockquote><pre>    * if (value&lt; 0)    *     (value - 0.99...) / (10^scale)    * else    *     value / (10 ^ scale)    *</pre></blockquote>    */
 specifier|private
 class|class
 name|FloorExpander
@@ -4153,7 +4153,7 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/**    * Expander that rewrites ceiling(decimal) expressions:    *    *<pre>    * if (value&gt; 0)    *     (value + 0.99...) / (10 ^ scale)    * else    *     value / (10 ^ scale)    *</pre>    */
+comment|/**    * Expander that rewrites ceiling(decimal) expressions:    *    *<blockquote><pre>    * if (value&gt; 0)    *     (value + 0.99...) / (10 ^ scale)    * else    *     value / (10 ^ scale)    *</pre></blockquote>    */
 specifier|private
 class|class
 name|CeilExpander
@@ -4346,7 +4346,7 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/**    * Expander that rewrites case expressions, in place. Starting from:    *    *<pre>(when $cond then $val)+ else $default</pre>    *    * this expander casts all values to the return type. If the target type is    * a decimal, then the values are then decoded. The result of expansion is    * that the case operator no longer deals with decimals args. (The return    * value is encoded if necessary.)    *    *<p>Note: a decimal type is returned iff arguments have decimals    */
+comment|/**    * Expander that rewrites case expressions, in place. Starting from:    *    *<blockquote><pre>(when $cond then $val)+ else $default</pre></blockquote>    *    *<p>this expander casts all values to the return type. If the target type is    * a decimal, then the values are then decoded. The result of expansion is    * that the case operator no longer deals with decimals args. (The return    * value is encoded if necessary.)    *    *<p>Note: a decimal type is returned iff arguments have decimals.    */
 specifier|private
 class|class
 name|CaseExpander

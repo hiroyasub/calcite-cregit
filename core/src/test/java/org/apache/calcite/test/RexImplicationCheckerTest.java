@@ -1189,7 +1189,7 @@ literal|false
 argument_list|)
 argument_list|)
 decl_stmt|;
-comment|//TODO: Need to support false => true
+comment|// TODO: Need to support false => true
 comment|//f.checkImplies(bEqFalse, bEqTrue);
 name|f
 operator|.

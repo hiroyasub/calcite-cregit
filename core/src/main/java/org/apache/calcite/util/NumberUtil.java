@@ -500,10 +500,10 @@ name|Float
 operator|)
 condition|)
 block|{
-comment|// For JDK 1.4 compatibility
 return|return
-operator|new
 name|BigDecimal
+operator|.
+name|valueOf
 argument_list|(
 name|number
 operator|.
@@ -511,7 +511,6 @@ name|doubleValue
 argument_list|()
 argument_list|)
 return|;
-comment|//return BigDecimal.valueOf(((Number) number).doubleValue());
 block|}
 if|else if
 condition|(

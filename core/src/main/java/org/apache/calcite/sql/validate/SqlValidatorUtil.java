@@ -1483,7 +1483,7 @@ name|RelDataType
 name|type
 parameter_list|)
 block|{
-comment|//(every charset must have a default collation)
+comment|// (every charset must have a default collation)
 if|if
 condition|(
 name|SqlTypeUtil

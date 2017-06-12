@@ -182,7 +182,7 @@ return|return
 name|pos
 return|;
 block|}
-comment|/**    * Returns a list of the token names which could have legally occurred at    * this point.    *    *<p>If some of the alternatives contain multiple tokens, returns the last    * token of only these longest sequences. (This occurs when the parser is    * maintaining more than the usual lookup.) For instance, if the possible    * tokens are    *    *<blockquote>    *<pre>    * {"IN"}    * {"BETWEEN"}    * {"LIKE"}    * {"=", "&lt;IDENTIFIER&gt;"}    * {"=", "USER"}    *</pre>    *</blockquote>    *    * returns    *    *<blockquote>    *<pre>    * "&lt;IDENTIFIER&gt;"    * "USER"    *</pre>    *</blockquote>    *    * @return list of token names which could have occurred at this point    */
+comment|/**    * Returns a list of the token names which could have legally occurred at    * this point.    *    *<p>If some of the alternatives contain multiple tokens, returns the last    * token of only these longest sequences. (This occurs when the parser is    * maintaining more than the usual lookup.) For instance, if the possible    * tokens are    *    *<blockquote>    *<pre>    * {"IN"}    * {"BETWEEN"}    * {"LIKE"}    * {"=", "&lt;IDENTIFIER&gt;"}    * {"=", "USER"}    *</pre>    *</blockquote>    *    *<p>returns    *    *<blockquote>    *<pre>    * "&lt;IDENTIFIER&gt;"    * "USER"    *</pre>    *</blockquote>    *    * @return list of token names which could have occurred at this point    */
 specifier|public
 name|Collection
 argument_list|<

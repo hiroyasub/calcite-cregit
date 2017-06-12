@@ -1020,7 +1020,7 @@ argument_list|)
 argument_list|)
 return|;
 default|default:
-comment|//TODO: Support few more supported cases
+comment|// TODO: Support few more supported cases
 name|LOGGER
 operator|.
 name|warn
@@ -1091,7 +1091,7 @@ return|;
 block|}
 block|}
 block|}
-comment|//Unsupported Arguments
+comment|// Unsupported Arguments
 return|return
 literal|null
 return|;

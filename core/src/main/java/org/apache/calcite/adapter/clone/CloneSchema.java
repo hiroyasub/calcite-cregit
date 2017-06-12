@@ -833,7 +833,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/** Schema factory that creates a    * {@link org.apache.calcite.adapter.clone.CloneSchema}.    * This allows you to create a clone schema inside a model.json file.    *    *<pre>{@code    * {    *   version: '1.0',    *   defaultSchema: 'FOODMART_CLONE',    *   schemas: [    *     {    *       name: 'FOODMART_CLONE',    *       type: 'custom',    *       factory: 'org.apache.calcite.adapter.clone.CloneSchema$Factory',    *       operand: {    *         jdbcDriver: 'com.mysql.jdbc.Driver',    *         jdbcUrl: 'jdbc:mysql://localhost/foodmart',    *         jdbcUser: 'foodmart',    *         jdbcPassword: 'foodmart'    *       }    *     }    *   ]    * }    * }</pre>    */
+comment|/** Schema factory that creates a    * {@link org.apache.calcite.adapter.clone.CloneSchema}.    * This allows you to create a clone schema inside a model.json file.    *    *<blockquote><pre>    * {    *   version: '1.0',    *   defaultSchema: 'FOODMART_CLONE',    *   schemas: [    *     {    *       name: 'FOODMART_CLONE',    *       type: 'custom',    *       factory: 'org.apache.calcite.adapter.clone.CloneSchema$Factory',    *       operand: {    *         jdbcDriver: 'com.mysql.jdbc.Driver',    *         jdbcUrl: 'jdbc:mysql://localhost/foodmart',    *         jdbcUser: 'foodmart',    *         jdbcPassword: 'foodmart'    *       }    *     }    *   ]    * }</pre></blockquote>    */
 specifier|public
 specifier|static
 class|class

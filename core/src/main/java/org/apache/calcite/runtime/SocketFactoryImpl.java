@@ -76,7 +76,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Extends the SocketFactory object with the main functionality being that the  * created sockets inherit a set of options whose values are set in the  * SocketFactoryImpl.  *  *<pre>  * 1.  SO_KEEPALIVE          - is keepalive enabled?  * 2.  OOBINLINE             - is out of band in-line enabled?  * 3.  SO_REUSEADDR          - should the address be reused?  * 4.  TCP_NODELAY           - should data buffering for tcp be used?  * 5.  SO_RCVBUF             - size of receive buffer  * 6.  SO_SNDBUF             - size of send buffer  * 7.  SO_TIMEOUT            - read timeout (millisecs)  * 8.  SO_CONNECT_TIMEOUT    - connect timeout (millisecs)  * 9.  SO_LINGER             - is lingering enabled?  * 10. LINGER                - amount of time to linger (seconds)  *  *  *</pre>  */
+comment|/**  * Extends the SocketFactory object with the main functionality being that the  * created sockets inherit a set of options whose values are set in the  * SocketFactoryImpl.  *  *<blockquote><pre>  * 1.  SO_KEEPALIVE          - is keepalive enabled?  * 2.  OOBINLINE             - is out of band in-line enabled?  * 3.  SO_REUSEADDR          - should the address be reused?  * 4.  TCP_NODELAY           - should data buffering for tcp be used?  * 5.  SO_RCVBUF             - size of receive buffer  * 6.  SO_SNDBUF             - size of send buffer  * 7.  SO_TIMEOUT            - read timeout (millisecs)  * 8.  SO_CONNECT_TIMEOUT    - connect timeout (millisecs)  * 9.  SO_LINGER             - is lingering enabled?  * 10. LINGER                - amount of time to linger (seconds)  *</pre></blockquote>  */
 end_comment
 
 begin_class

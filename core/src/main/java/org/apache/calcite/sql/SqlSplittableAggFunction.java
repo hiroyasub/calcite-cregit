@@ -594,7 +594,7 @@ name|name
 argument_list|)
 return|;
 block|}
-comment|/**      * {@inheritDoc}      *      * COUNT(*) and COUNT applied to all NOT NULL arguments become {@code 1};      * otherwise {@code CASE WHEN arg0 IS NOT NULL THEN 1 ELSE 0 END}.      */
+comment|/**      * {@inheritDoc}      *      *<p>{@code COUNT(*)}, and {@code COUNT} applied to all NOT NULL arguments,      * become {@code 1}; otherwise      * {@code CASE WHEN arg0 IS NOT NULL THEN 1 ELSE 0 END}.      */
 specifier|public
 name|RexNode
 name|singleton

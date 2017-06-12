@@ -70,7 +70,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Variable which references a column of a table occurrence in a relational plan.  *  *<p>This object is used by  * {@link org.apache.calcite.rel.metadata.BuiltInMetadata.ExpressionLineage}  * and {@link org.apache.calcite.rel.metadata.BuiltInMetadata.AllPredicates}.  *  *<p>Given a relational expression, its purpose is to be able to reference uniquely  * the provenance of a given expression. For that, it uses a unique table reference  * (contained in a {@link RelTableRef}) and an column index within the table.  *  *<p>For example, {@code A.#0.$3 + 2} column {@code $3} in the {@code 0} occurrence of  * table {@code A} in the plan.  *  * Note that this kind of {@link RexNode} is an auxiliary data structure with a very  * specific purpose and should not be used in relational expressions.  */
+comment|/**  * Variable which references a column of a table occurrence in a relational plan.  *  *<p>This object is used by  * {@link org.apache.calcite.rel.metadata.BuiltInMetadata.ExpressionLineage}  * and {@link org.apache.calcite.rel.metadata.BuiltInMetadata.AllPredicates}.  *  *<p>Given a relational expression, its purpose is to be able to reference uniquely  * the provenance of a given expression. For that, it uses a unique table reference  * (contained in a {@link RelTableRef}) and an column index within the table.  *  *<p>For example, {@code A.#0.$3 + 2} column {@code $3} in the {@code 0}  * occurrence of table {@code A} in the plan.  *  *<p>Note that this kind of {@link RexNode} is an auxiliary data structure with  * a very specific purpose and should not be used in relational expressions.  */
 end_comment
 
 begin_class

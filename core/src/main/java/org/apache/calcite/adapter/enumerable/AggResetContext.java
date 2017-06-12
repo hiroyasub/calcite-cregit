@@ -44,7 +44,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Information for a call to  * {@link AggImplementor#implementReset(AggContext, AggResetContext)}.  *  * {@link AggResetContext} provides access to the accumulator variables  * that should be reset.  */
+comment|/**  * Information for a call to  * {@link AggImplementor#implementReset(AggContext, AggResetContext)}.  *  *<p>{@link AggResetContext} provides access to the accumulator variables  * that should be reset.  */
 end_comment
 
 begin_interface

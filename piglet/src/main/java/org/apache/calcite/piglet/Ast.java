@@ -1201,7 +1201,7 @@ assert|;
 comment|// not supported yet
 block|}
 block|}
-comment|/** Parse tree node for FOREACH statement (nested).    *    *<p>Syntax:    *<blockquote><code>    * alias = FOREACH nested_alias {    *   alias = nested_op; [alias = nested_op; ]...    *   GENERATE expression [, expression]...    * };<br>    *    * nested_op ::= DISTINCT, FILTER, LIMIT, ORDER, SAMPLE    *</code>    *</blockquote>    *    * @see org.apache.calcite.piglet.Ast.ForeachStmt    */
+comment|/** Parse tree node for FOREACH statement (nested).    *    *<p>Syntax:    *    *<blockquote><code>    * alias = FOREACH nested_alias {    *   alias = nested_op; [alias = nested_op; ]...    *   GENERATE expression [, expression]...    * };<br>    *&nbsp;    * nested_op ::= DISTINCT, FILTER, LIMIT, ORDER, SAMPLE    *</code>    *</blockquote>    *    * @see org.apache.calcite.piglet.Ast.ForeachStmt    */
 specifier|public
 specifier|static
 class|class

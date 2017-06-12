@@ -1499,7 +1499,7 @@ argument_list|,
 name|LEAST_RESTRICTIVE
 argument_list|)
 decl_stmt|;
-comment|/**    * Type-inference strategy whereby the result type of a call is the decimal    * sum of two exact numeric operands where at least one of the operands is a    * decimal. Let p1, s1 be the precision and scale of the first operand Let    * p2, s2 be the precision and scale of the second operand Let p, s be the    * precision and scale of the result, Then the result type is a decimal    * with:    *    *<ul>    *<li>s = max(s1, s2)</li>    *<li>p = max(p1 - s1, p2 - s2) + s + 1</li>    *</ul>    *    * p and s are capped at their maximum values    *    * @see Glossary#SQL2003 SQL:2003 Part 2 Section 6.26    */
+comment|/**    * Type-inference strategy whereby the result type of a call is the decimal    * sum of two exact numeric operands where at least one of the operands is a    * decimal. Let p1, s1 be the precision and scale of the first operand Let    * p2, s2 be the precision and scale of the second operand Let p, s be the    * precision and scale of the result, Then the result type is a decimal    * with:    *    *<ul>    *<li>s = max(s1, s2)</li>    *<li>p = max(p1 - s1, p2 - s2) + s + 1</li>    *</ul>    *    *<p>p and s are capped at their maximum values    *    * @see Glossary#SQL2003 SQL:2003 Part 2 Section 6.26    */
 specifier|public
 specifier|static
 specifier|final
@@ -1734,7 +1734,7 @@ argument_list|,
 name|LEAST_RESTRICTIVE
 argument_list|)
 decl_stmt|;
-comment|/**    * Type-inference strategy whereby the result type of a call is    *    *<ul>    *<li>the same type as the input types but with the combined length of the    * two first types</li>    *<li>if types are of char type the type with the highest coercibility will    * be used</li>    *<li>result is varying if either input is; otherwise fixed    *</ul>    *    * Pre-requisites:    *    *<ul>    *<li>input types must be of the same string type    *<li>types must be comparable without casting    *</ul>    */
+comment|/**    * Type-inference strategy whereby the result type of a call is    *    *<ul>    *<li>the same type as the input types but with the combined length of the    * two first types</li>    *<li>if types are of char type the type with the highest coercibility will    * be used</li>    *<li>result is varying if either input is; otherwise fixed    *</ul>    *    *<p>Pre-requisites:    *    *<ul>    *<li>input types must be of the same string type    *<li>types must be comparable without casting    *</ul>    */
 specifier|public
 specifier|static
 specifier|final

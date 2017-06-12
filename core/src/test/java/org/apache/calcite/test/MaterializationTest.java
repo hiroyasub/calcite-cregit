@@ -4889,7 +4889,7 @@ name|testJoinAggregateMaterializationAggregateFuncs6
 parameter_list|()
 block|{
 comment|// This rewriting would be possible if planner generates a pre-aggregation,
-comment|// since the materialized view would match the subquery.
+comment|// since the materialized view would match the sub-query.
 comment|// Initial investigation after enabling AggregateJoinTransposeRule.EXTENDED
 comment|// shows that the rewriting with pre-aggregations is generated and the
 comment|// materialized view rewriting happens.

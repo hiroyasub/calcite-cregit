@@ -12612,7 +12612,7 @@ name|fieldAccess
 argument_list|)
 condition|)
 block|{
-comment|//for cases where different Rel nodes are referring to
+comment|// for cases where different Rel nodes are referring to
 comment|// same correlation var (e.g. in case of NOT IN)
 comment|// avoid generating another correlation var
 comment|// and record the 'rel' is using the same correlation

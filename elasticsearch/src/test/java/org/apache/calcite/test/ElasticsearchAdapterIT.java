@@ -88,7 +88,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Tests for the {@code org.apache.calcite.adapter.elasticsearch} package.  *  *<p>Before calling this test, you need to populate Elasticsearch, as follows:  *  *<blockquote><code>  * git clone https://github.com/vlsi/calcite-test-dataset<br>  * cd calcite-test-dataset<br>  * mvn install  *</code></blockquote>  *  * This will create a virtual machine with Elasticsearch and the "zips" test  * dataset.  */
+comment|/**  * Tests for the {@code org.apache.calcite.adapter.elasticsearch} package.  *  *<p>Before calling this test, you need to populate Elasticsearch, as follows:  *  *<blockquote><code>  * git clone https://github.com/vlsi/calcite-test-dataset<br>  * cd calcite-test-dataset<br>  * mvn install  *</code></blockquote>  *  *<p>This will create a virtual machine with Elasticsearch and the "zips" test  * dataset.  */
 end_comment
 
 begin_class

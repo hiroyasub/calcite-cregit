@@ -1101,7 +1101,7 @@ operator|=
 name|b
 expr_stmt|;
 block|}
-comment|/**    * Sets whether to use a fix for SELECT list indentations.    *    *<ul>    *<li>If set to "false":    *    *<pre>    * SELECT    *     A as A    *         B as B    *         C as C    *     D    *</pre>    *<li>If set to "true":    *    *<pre>    * SELECT    *     A as A    *     B as B    *     C as C    *     D    *</pre>    *</ul>    */
+comment|/**    * Sets whether to use a fix for SELECT list indentations.    *    *<ul>    *<li>If set to "false":    *    *<blockquote><pre>    * SELECT    *     A as A    *         B as B    *         C as C    *     D    *</pre></blockquote>    *    *<li>If set to "true":    *    *<blockquote><pre>    * SELECT    *     A as A    *     B as B    *     C as C    *     D    *</pre></blockquote>    *</ul>    */
 specifier|public
 name|void
 name|setSelectListExtraIndentFlag

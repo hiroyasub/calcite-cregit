@@ -142,7 +142,7 @@ name|SqlTypeName
 name|typeName
 parameter_list|)
 block|{
-comment|//Following BasicSqlType precision as the default
+comment|// Following BasicSqlType precision as the default
 switch|switch
 condition|(
 name|typeName

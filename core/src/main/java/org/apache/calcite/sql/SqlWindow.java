@@ -1657,7 +1657,7 @@ operator|.
 name|UNBOUNDED_FOLLOWING
 return|;
 block|}
-comment|/**    * Creates a new window by combining this one with another.    *    *<p>For example,    *    *<pre>WINDOW (w PARTITION BY x ORDER BY y)    *   overlay    *   WINDOW w AS (PARTITION BY z)</pre>    *    * yields    *    *<pre>WINDOW (PARTITION BY z ORDER BY y)</pre>    *    *<p>Does not alter this or the other window.    *    * @return A new window    */
+comment|/**    * Creates a new window by combining this one with another.    *    *<p>For example,    *    *<blockquote><pre>WINDOW (w PARTITION BY x ORDER BY y)    *   overlay    *   WINDOW w AS (PARTITION BY z)</pre></blockquote>    *    *<p>yields    *    *<blockquote><pre>WINDOW (PARTITION BY z ORDER BY y)</pre></blockquote>    *    *<p>Does not alter this or the other window.    *    * @return A new window    */
 specifier|public
 name|SqlWindow
 name|overlay

@@ -274,7 +274,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Relational expression that modifies a table.  *  * It is similar to {@link org.apache.calcite.rel.core.TableScan},  * but represents a request to modify a table rather than read from it.  * It takes one child which produces the modified rows. Those rows are:  *  *<ul>  *<li>For {@code INSERT}, those rows are the new values;  *<li>for {@code DELETE}, the old values;  *<li>for {@code UPDATE}, all old values plus updated new values.  *</ul>  */
+comment|/**  * Relational expression that modifies a table.  *  *<p>It is similar to {@link org.apache.calcite.rel.core.TableScan},  * but represents a request to modify a table rather than read from it.  * It takes one child which produces the modified rows. Those rows are:  *  *<ul>  *<li>For {@code INSERT}, those rows are the new values;  *<li>for {@code DELETE}, the old values;  *<li>for {@code UPDATE}, all old values plus updated new values.  *</ul>  */
 end_comment
 
 begin_class

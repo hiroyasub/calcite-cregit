@@ -18,7 +18,7 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * Holds constants associated with SQL types introduced after the earliest  * version of Java supported by Farrago (this currently means anything  * introduced in JDK 1.6 or later).  *  * Allows us to deal sanely with type constants returned by newer JDBC  * drivers when running a version of Farrago compiled under an old  * version of the JDK (i.e. 1.5).  *  * By itself, the presence of a constant here doesn't imply that farrago  * fully supports the associated type.  This is simply a mirror of the  * missing constant values.  */
+comment|/**  * Holds constants associated with SQL types introduced after the earliest  * version of Java supported by Farrago (this currently means anything  * introduced in JDK 1.6 or later).  *  *<p>Allows us to deal sanely with type constants returned by newer JDBC  * drivers when running a version of Farrago compiled under an old  * version of the JDK (i.e. 1.5).  *  *<p>By itself, the presence of a constant here doesn't imply that farrago  * fully supports the associated type.  This is simply a mirror of the  * missing constant values.  */
 end_comment
 
 begin_interface

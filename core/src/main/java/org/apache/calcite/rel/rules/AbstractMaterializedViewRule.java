@@ -2067,7 +2067,7 @@ name|getTableRef
 argument_list|()
 argument_list|)
 expr_stmt|;
-comment|//identity
+comment|// identity
 block|}
 block|}
 comment|// 4.1. Compute compensation predicates, i.e., predicates that need to be

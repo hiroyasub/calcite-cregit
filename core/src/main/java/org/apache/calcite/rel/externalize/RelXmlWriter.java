@@ -259,7 +259,6 @@ argument_list|,
 name|relType
 argument_list|)
 expr_stmt|;
-comment|//xmlOutput.attribute("id", rel.getId() + "");
 name|xmlOutput
 operator|.
 name|endBeginTag
@@ -427,7 +426,7 @@ literal|"RelNode"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Generates specific XML (sometimes called 'attribute-oriented XML'). Like    * this:    *    *<pre>    *&lt;Join condition="EMP.DEPTNO = DEPT.DEPTNO"&gt;    *&lt;Project expr1="x + y" expr2="42"&gt;    *&lt;TableAccess table="SALES.EMPS"&gt;    *&lt;/Join&gt;    *</pre>    *    * @param rel    Relational expression    * @param values List of term-value pairs    */
+comment|/**    * Generates specific XML (sometimes called 'attribute-oriented XML'). Like    * this:    *    *<blockquote><pre>    *&lt;Join condition="EMP.DEPTNO = DEPT.DEPTNO"&gt;    *&lt;Project expr1="x + y" expr2="42"&gt;    *&lt;TableAccess table="SALES.EMPS"&gt;    *&lt;/Join&gt;    *</pre></blockquote>    *    * @param rel    Relational expression    * @param values List of term-value pairs    */
 specifier|private
 name|void
 name|explainSpecific

@@ -507,7 +507,7 @@ specifier|final
 name|ImmutableBitSet
 name|strongBitmap
 decl_stmt|;
-comment|/**    * Number of fields in the RelNode that the projection is being pushed past,    * if the RelNode is not a join. If the RelNode is a join, then this is the    * number of fields in the left hand side of the join.    *    *<p>The identity    * {@code nChildFields == nSysFields + nFields + nFieldsRight}    * holds. {@code nFields} does not include {@code nSysFields}.    * The output of a join looks like this:    *    *<blockquote><pre>    * | nSysFields | nFields | nFieldsRight |    *</pre></blockquote>    *    * The output of a single-input rel looks like this:    *    *<blockquote><pre>    * | nSysFields | nFields |    *</pre></blockquote>    */
+comment|/**    * Number of fields in the RelNode that the projection is being pushed past,    * if the RelNode is not a join. If the RelNode is a join, then this is the    * number of fields in the left hand side of the join.    *    *<p>The identity    * {@code nChildFields == nSysFields + nFields + nFieldsRight}    * holds. {@code nFields} does not include {@code nSysFields}.    * The output of a join looks like this:    *    *<blockquote><pre>    * | nSysFields | nFields | nFieldsRight |    *</pre></blockquote>    *    *<p>The output of a single-input rel looks like this:    *    *<blockquote><pre>    * | nSysFields | nFields |    *</pre></blockquote>    */
 specifier|final
 name|int
 name|nFields

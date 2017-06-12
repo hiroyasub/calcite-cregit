@@ -5211,8 +5211,6 @@ name|CalcMergeRule
 operator|.
 name|INSTANCE
 argument_list|)
-comment|//.addRuleInstance(FennelCalcRule.instance);
-comment|//.addRuleInstance(FennelCartesianJoinRule.instance);
 operator|.
 name|addRuleInstance
 argument_list|(
