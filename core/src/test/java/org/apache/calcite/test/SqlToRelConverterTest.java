@@ -8974,7 +8974,11 @@ literal|"   partition by job, sal\n"
 operator|+
 literal|"   order by job asc, sal desc\n"
 operator|+
-literal|"   measures STRT.mgr as start_nw,"
+literal|"   measures  MATCH_NUMBER() as match_num, "
+operator|+
+literal|"   CLASSIFIER() as var_match, "
+operator|+
+literal|"   STRT.mgr as start_nw,"
 operator|+
 literal|"   LAST(DOWN.mgr) as bottom_nw,"
 operator|+

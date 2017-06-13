@@ -24496,7 +24496,13 @@ literal|"  from t match_recognize\n"
 operator|+
 literal|"  (\n"
 operator|+
-literal|"   measures STRT.ts as start_ts,"
+literal|"   measures "
+operator|+
+literal|"   MATCH_NUMBER() as match_num,"
+operator|+
+literal|"   CLASSIFIER() as var_match,"
+operator|+
+literal|"   STRT.ts as start_ts,"
 operator|+
 literal|"   LAST(DOWN.ts) as bottom_ts,"
 operator|+
@@ -24520,7 +24526,11 @@ literal|"SELECT *\n"
 operator|+
 literal|"FROM `T` MATCH_RECOGNIZE(\n"
 operator|+
-literal|"MEASURES `STRT`.`TS` AS `START_TS`, "
+literal|"MEASURES (MATCH_NUMBER ()) AS `MATCH_NUM`, "
+operator|+
+literal|"(CLASSIFIER()) AS `VAR_MATCH`, "
+operator|+
+literal|"`STRT`.`TS` AS `START_TS`, "
 operator|+
 literal|"LAST(`DOWN`.`TS`, 0) AS `BOTTOM_TS`, "
 operator|+

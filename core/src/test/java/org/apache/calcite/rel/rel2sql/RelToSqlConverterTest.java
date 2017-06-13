@@ -4151,7 +4151,11 @@ literal|"  from \"product\" match_recognize\n"
 operator|+
 literal|"  (\n"
 operator|+
-literal|"   measures STRT.\"net_weight\" as start_nw,"
+literal|"   measures MATCH_NUMBER() as match_num, "
+operator|+
+literal|"   CLASSIFIER() as var_match, "
+operator|+
+literal|"   STRT.\"net_weight\" as start_nw,"
 operator|+
 literal|"   LAST(DOWN.\"net_weight\") as bottom_nw,"
 operator|+
@@ -4180,6 +4184,10 @@ operator|+
 literal|"MATCH_RECOGNIZE(\n"
 operator|+
 literal|"MEASURES "
+operator|+
+literal|"FINAL MATCH_NUMBER () AS \"MATCH_NUM\", "
+operator|+
+literal|"FINAL CLASSIFIER() AS \"VAR_MATCH\", "
 operator|+
 literal|"FINAL \"STRT\".\"net_weight\" AS \"START_NW\", "
 operator|+

@@ -598,6 +598,8 @@ literal|"KEYWORD(CHARACTER_LENGTH)"
 argument_list|,
 literal|"KEYWORD(CHAR_LENGTH)"
 argument_list|,
+literal|"KEYWORD(CLASSIFIER)"
+argument_list|,
 literal|"KEYWORD(COALESCE)"
 argument_list|,
 literal|"KEYWORD(COLLECT)"
@@ -673,6 +675,8 @@ argument_list|,
 literal|"KEYWORD(LOCALTIMESTAMP)"
 argument_list|,
 literal|"KEYWORD(LOWER)"
+argument_list|,
+literal|"KEYWORD(MATCH_NUMBER)"
 argument_list|,
 literal|"KEYWORD(MAX)"
 argument_list|,
