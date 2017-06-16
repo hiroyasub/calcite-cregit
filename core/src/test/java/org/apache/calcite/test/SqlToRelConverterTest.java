@@ -3096,11 +3096,19 @@ specifier|final
 name|String
 name|sql
 init|=
-literal|"select * from EMP_MODIFIABLEVIEW extend (x varchar(5) not null)"
+literal|"select *\n"
+operator|+
+literal|"from EMP_MODIFIABLEVIEW extend (x varchar(5) not null)"
 decl_stmt|;
 name|sql
 argument_list|(
 name|sql
+argument_list|)
+operator|.
+name|with
+argument_list|(
+name|getExtendedTester
+argument_list|()
 argument_list|)
 operator|.
 name|ok
@@ -3118,11 +3126,19 @@ specifier|final
 name|String
 name|sql
 init|=
-literal|"select x, empno from EMP_MODIFIABLEVIEW extend (x varchar(5) not null)"
+literal|"select x, empno\n"
+operator|+
+literal|"from EMP_MODIFIABLEVIEW extend (x varchar(5) not null)"
 decl_stmt|;
 name|sql
 argument_list|(
 name|sql
+argument_list|)
+operator|.
+name|with
+argument_list|(
+name|getExtendedTester
+argument_list|()
 argument_list|)
 operator|.
 name|ok
@@ -3140,11 +3156,19 @@ specifier|final
 name|String
 name|sql
 init|=
-literal|"select empno + x from EMP_MODIFIABLEVIEW extend (x int not null)"
+literal|"select empno + x\n"
+operator|+
+literal|"from EMP_MODIFIABLEVIEW extend (x int not null)"
 decl_stmt|;
 name|sql
 argument_list|(
 name|sql
+argument_list|)
+operator|.
+name|with
+argument_list|(
+name|getExtendedTester
+argument_list|()
 argument_list|)
 operator|.
 name|ok
@@ -3167,6 +3191,12 @@ operator|+
 literal|" where SAL = 20"
 argument_list|)
 operator|.
+name|with
+argument_list|(
+name|getExtendedTester
+argument_list|()
+argument_list|)
+operator|.
 name|ok
 argument_list|()
 expr_stmt|;
@@ -3177,6 +3207,12 @@ operator|+
 literal|" from EMP_MODIFIABLEVIEW3 extend (SAL int)\n"
 operator|+
 literal|" where SAL = 20"
+argument_list|)
+operator|.
+name|with
+argument_list|(
+name|getExtendedTester
+argument_list|()
 argument_list|)
 operator|.
 name|ok
@@ -3199,6 +3235,12 @@ operator|+
 literal|" where \"sal\" = true"
 argument_list|)
 operator|.
+name|with
+argument_list|(
+name|getExtendedTester
+argument_list|()
+argument_list|)
+operator|.
 name|ok
 argument_list|()
 expr_stmt|;
@@ -3219,6 +3261,12 @@ operator|+
 literal|" where SAL = 20"
 argument_list|)
 operator|.
+name|with
+argument_list|(
+name|getExtendedTester
+argument_list|()
+argument_list|)
+operator|.
 name|ok
 argument_list|()
 expr_stmt|;
@@ -3229,6 +3277,12 @@ operator|+
 literal|" from EMP_MODIFIABLEVIEW2 extend (EXTRA boolean)\n"
 operator|+
 literal|" where SAL = 20"
+argument_list|)
+operator|.
+name|with
+argument_list|(
+name|getExtendedTester
+argument_list|()
 argument_list|)
 operator|.
 name|ok
@@ -3251,6 +3305,12 @@ operator|+
 literal|" where \"extra\" = false"
 argument_list|)
 operator|.
+name|with
+argument_list|(
+name|getExtendedTester
+argument_list|()
+argument_list|)
+operator|.
 name|ok
 argument_list|()
 expr_stmt|;
@@ -3271,6 +3331,12 @@ operator|+
 literal|" where SAL = 20"
 argument_list|)
 operator|.
+name|with
+argument_list|(
+name|getExtendedTester
+argument_list|()
+argument_list|)
+operator|.
 name|ok
 argument_list|()
 expr_stmt|;
@@ -3289,6 +3355,12 @@ operator|+
 literal|" from EMP_MODIFIABLEVIEW3 extend (\"comm\" int)\n"
 operator|+
 literal|" where \"comm\" = 20"
+argument_list|)
+operator|.
+name|with
+argument_list|(
+name|getExtendedTester
+argument_list|()
 argument_list|)
 operator|.
 name|ok
@@ -3351,6 +3423,12 @@ operator|+
 literal|" where empno = 10"
 argument_list|)
 operator|.
+name|with
+argument_list|(
+name|getExtendedTester
+argument_list|()
+argument_list|)
+operator|.
 name|ok
 argument_list|()
 expr_stmt|;
@@ -3369,6 +3447,12 @@ operator|+
 literal|" set deptno = 20, \"slacker\" = 100"
 operator|+
 literal|" where ename = 'Bob'"
+argument_list|)
+operator|.
+name|with
+argument_list|(
+name|getExtendedTester
+argument_list|()
 argument_list|)
 operator|.
 name|ok
@@ -3391,6 +3475,12 @@ operator|+
 literal|" where ename = 'Bob'"
 argument_list|)
 operator|.
+name|with
+argument_list|(
+name|getExtendedTester
+argument_list|()
+argument_list|)
+operator|.
 name|ok
 argument_list|()
 expr_stmt|;
@@ -3409,6 +3499,12 @@ operator|+
 literal|" set deptno = 20, \"extra\" = 100, extra = true"
 operator|+
 literal|" where ename = 'Bob'"
+argument_list|)
+operator|.
+name|with
+argument_list|(
+name|getExtendedTester
+argument_list|()
 argument_list|)
 operator|.
 name|ok
@@ -3431,6 +3527,12 @@ operator|+
 literal|" where ename = 'Bob'"
 argument_list|)
 operator|.
+name|with
+argument_list|(
+name|getExtendedTester
+argument_list|()
+argument_list|)
+operator|.
 name|ok
 argument_list|()
 expr_stmt|;
@@ -3446,11 +3548,19 @@ specifier|final
 name|String
 name|sql
 init|=
-literal|"select deptno from EMP_MODIFIABLEVIEW2 where deptno = ?"
+literal|"select deptno from EMP_MODIFIABLEVIEW2\n"
+operator|+
+literal|"where deptno = ?"
 decl_stmt|;
 name|sql
 argument_list|(
 name|sql
+argument_list|)
+operator|.
+name|with
+argument_list|(
+name|getExtendedTester
+argument_list|()
 argument_list|)
 operator|.
 name|ok
@@ -3461,7 +3571,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testModifiableViewDDLExtend
+name|testModifiableViewDdlExtend
 parameter_list|()
 block|{
 specifier|final
@@ -3473,6 +3583,12 @@ decl_stmt|;
 name|sql
 argument_list|(
 name|sql
+argument_list|)
+operator|.
+name|with
+argument_list|(
+name|getExtendedTester
+argument_list|()
 argument_list|)
 operator|.
 name|ok
@@ -6671,6 +6787,12 @@ argument_list|(
 name|sql
 argument_list|)
 operator|.
+name|with
+argument_list|(
+name|getExtendedTester
+argument_list|()
+argument_list|)
+operator|.
 name|ok
 argument_list|()
 expr_stmt|;
@@ -6695,6 +6817,12 @@ decl_stmt|;
 name|sql
 argument_list|(
 name|sql
+argument_list|)
+operator|.
+name|with
+argument_list|(
+name|getExtendedTester
+argument_list|()
 argument_list|)
 operator|.
 name|ok
@@ -6807,6 +6935,12 @@ argument_list|(
 name|sql
 argument_list|)
 operator|.
+name|with
+argument_list|(
+name|getExtendedTester
+argument_list|()
+argument_list|)
+operator|.
 name|ok
 argument_list|()
 expr_stmt|;
@@ -6822,11 +6956,19 @@ specifier|final
 name|String
 name|sql
 init|=
-literal|"delete from EMP_MODIFIABLEVIEW2(note VARCHAR) where note = ?"
+literal|"delete from EMP_MODIFIABLEVIEW2(note VARCHAR)\n"
+operator|+
+literal|"where note = ?"
 decl_stmt|;
 name|sql
 argument_list|(
 name|sql
+argument_list|)
+operator|.
+name|with
+argument_list|(
+name|getExtendedTester
+argument_list|()
 argument_list|)
 operator|.
 name|ok
@@ -6919,11 +7061,19 @@ specifier|final
 name|String
 name|sql
 init|=
-literal|"update EMP_MODIFIABLEVIEW2 set sal = sal + 5000 where slacker = false"
+literal|"update EMP_MODIFIABLEVIEW2\n"
+operator|+
+literal|"set sal = sal + 5000 where slacker = false"
 decl_stmt|;
 name|sql
 argument_list|(
 name|sql
+argument_list|)
+operator|.
+name|with
+argument_list|(
+name|getExtendedTester
+argument_list|()
 argument_list|)
 operator|.
 name|ok
@@ -6967,13 +7117,21 @@ specifier|final
 name|String
 name|sql
 init|=
-literal|"update EMP_MODIFIABLEVIEW2(updated TIMESTAMP)"
+literal|"update EMP_MODIFIABLEVIEW2(updated TIMESTAMP)\n"
 operator|+
-literal|" set updated = timestamp '2017-03-12 13:03:05', sal = sal + 5000 where slacker = false"
+literal|"set updated = timestamp '2017-03-12 13:03:05', sal = sal + 5000\n"
+operator|+
+literal|"where slacker = false"
 decl_stmt|;
 name|sql
 argument_list|(
 name|sql
+argument_list|)
+operator|.
+name|with
+argument_list|(
+name|getExtendedTester
+argument_list|()
 argument_list|)
 operator|.
 name|ok
@@ -7170,6 +7328,12 @@ argument_list|(
 name|sql
 argument_list|)
 operator|.
+name|with
+argument_list|(
+name|getExtendedTester
+argument_list|()
+argument_list|)
+operator|.
 name|ok
 argument_list|()
 expr_stmt|;
@@ -7192,6 +7356,12 @@ decl_stmt|;
 name|sql
 argument_list|(
 name|sql
+argument_list|)
+operator|.
+name|with
+argument_list|(
+name|getExtendedTester
+argument_list|()
 argument_list|)
 operator|.
 name|conformance
@@ -7225,6 +7395,12 @@ argument_list|(
 name|sql
 argument_list|)
 operator|.
+name|with
+argument_list|(
+name|getExtendedTester
+argument_list|()
+argument_list|)
+operator|.
 name|ok
 argument_list|()
 expr_stmt|;
@@ -7254,6 +7430,12 @@ argument_list|(
 name|SqlConformanceEnum
 operator|.
 name|PRAGMATIC_2003
+argument_list|)
+operator|.
+name|with
+argument_list|(
+name|getExtendedTester
+argument_list|()
 argument_list|)
 operator|.
 name|ok
@@ -8597,6 +8779,57 @@ argument_list|(
 literal|"${planConverted}"
 argument_list|)
 expr_stmt|;
+block|}
+specifier|private
+name|Tester
+name|getExtendedTester
+parameter_list|()
+block|{
+return|return
+name|tester
+operator|.
+name|withCatalogReaderFactory
+argument_list|(
+operator|new
+name|Function
+argument_list|<
+name|RelDataTypeFactory
+argument_list|,
+name|Prepare
+operator|.
+name|CatalogReader
+argument_list|>
+argument_list|()
+block|{
+specifier|public
+name|Prepare
+operator|.
+name|CatalogReader
+name|apply
+parameter_list|(
+name|RelDataTypeFactory
+name|typeFactory
+parameter_list|)
+block|{
+return|return
+operator|new
+name|MockCatalogReader
+argument_list|(
+name|typeFactory
+argument_list|,
+literal|true
+argument_list|)
+operator|.
+name|init
+argument_list|()
+operator|.
+name|init2
+argument_list|()
+return|;
+block|}
+block|}
+argument_list|)
+return|;
 block|}
 specifier|private
 name|Tester

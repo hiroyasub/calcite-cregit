@@ -450,12 +450,6 @@ literal|"TABLE(CATALOG.SALES.EMPNULLABLES)"
 argument_list|,
 literal|"TABLE(CATALOG.SALES.EMP_B)"
 argument_list|,
-literal|"TABLE(CATALOG.SALES.EMP_MODIFIABLEVIEW)"
-argument_list|,
-literal|"TABLE(CATALOG.SALES.EMP_MODIFIABLEVIEW2)"
-argument_list|,
-literal|"TABLE(CATALOG.SALES.EMP_MODIFIABLEVIEW3)"
-argument_list|,
 literal|"TABLE(CATALOG.SALES.EMP_20)"
 argument_list|,
 literal|"TABLE(CATALOG.SALES.EMPNULLABLES_20)"

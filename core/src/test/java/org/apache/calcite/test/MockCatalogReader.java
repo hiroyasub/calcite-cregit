@@ -4133,20 +4133,24 @@ name|struct10View
 argument_list|)
 expr_stmt|;
 return|return
-name|init2
-argument_list|(
-name|salesSchema
-argument_list|)
+name|this
 return|;
 block|}
-specifier|private
+comment|/** Adds some extra tables to the mock catalog. These increase the time and    * complexity of initializing the catalog (because they contain views whose    * SQL needs to be parsed) and so are not used for all tests. */
+specifier|public
 name|MockCatalogReader
 name|init2
-parameter_list|(
+parameter_list|()
+block|{
 name|MockSchema
 name|salesSchema
-parameter_list|)
-block|{
+init|=
+operator|new
+name|MockSchema
+argument_list|(
+literal|"SALES"
+argument_list|)
+decl_stmt|;
 comment|// Same as "EMP_20" except it uses ModifiableViewTable which populates
 comment|// constrained columns with default values on INSERT and has a single constraint on DEPTNO.
 name|List
