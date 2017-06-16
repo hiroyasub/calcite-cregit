@@ -13023,6 +13023,158 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testAnyList
+parameter_list|()
+block|{
+name|check
+argument_list|(
+literal|"select * from emp where empno = any (10,20)"
+argument_list|)
+expr_stmt|;
+name|check
+argument_list|(
+literal|"select * from emp\n"
+operator|+
+literal|"where empno< any (10 + deptno, cast(null as integer))"
+argument_list|)
+expr_stmt|;
+name|checkFails
+argument_list|(
+literal|"select * from emp where empno< any ^(10, '20')^"
+argument_list|,
+name|ERR_IN_VALUES_INCOMPATIBLE
+argument_list|)
+expr_stmt|;
+name|checkExpType
+argument_list|(
+literal|"1< all (2, 3, 4)"
+argument_list|,
+literal|"BOOLEAN NOT NULL"
+argument_list|)
+expr_stmt|;
+name|checkExpType
+argument_list|(
+literal|"cast(null as integer)< all (2, 3, 4)"
+argument_list|,
+literal|"BOOLEAN"
+argument_list|)
+expr_stmt|;
+name|checkExpType
+argument_list|(
+literal|"1> some (2, cast(null as integer) , 4)"
+argument_list|,
+literal|"BOOLEAN"
+argument_list|)
+expr_stmt|;
+name|checkExpType
+argument_list|(
+literal|"1> any (2.5, 3.14)"
+argument_list|,
+literal|"BOOLEAN NOT NULL"
+argument_list|)
+expr_stmt|;
+name|checkExpType
+argument_list|(
+literal|"true = any (false, unknown)"
+argument_list|,
+literal|"BOOLEAN"
+argument_list|)
+expr_stmt|;
+name|checkExpType
+argument_list|(
+literal|"true = any (false, false or unknown)"
+argument_list|,
+literal|"BOOLEAN"
+argument_list|)
+expr_stmt|;
+name|checkExpType
+argument_list|(
+literal|"true<> any (false, true)"
+argument_list|,
+literal|"BOOLEAN NOT NULL"
+argument_list|)
+expr_stmt|;
+name|checkExpType
+argument_list|(
+literal|"(1,2) = any ((1,2), (3,4))"
+argument_list|,
+literal|"BOOLEAN NOT NULL"
+argument_list|)
+expr_stmt|;
+name|checkExpType
+argument_list|(
+literal|"(1,2)< any ((1,2), (3,4))"
+argument_list|,
+literal|"BOOLEAN NOT NULL"
+argument_list|)
+expr_stmt|;
+name|checkExpType
+argument_list|(
+literal|"'abc'< any (cast(null as varchar(10)), 'bc')"
+argument_list|,
+literal|"BOOLEAN"
+argument_list|)
+expr_stmt|;
+comment|// nullability depends on nullability of both sides
+name|checkColumnType
+argument_list|(
+literal|"select empno< any (1, 2) from emp"
+argument_list|,
+literal|"BOOLEAN NOT NULL"
+argument_list|)
+expr_stmt|;
+name|checkColumnType
+argument_list|(
+literal|"select nullif(empno,empno)> all (1, 2) from emp"
+argument_list|,
+literal|"BOOLEAN"
+argument_list|)
+expr_stmt|;
+name|checkColumnType
+argument_list|(
+literal|"select empno in (1, nullif(empno,empno), 2) from emp"
+argument_list|,
+literal|"BOOLEAN"
+argument_list|)
+expr_stmt|;
+name|checkExpFails
+argument_list|(
+literal|"1 = any ^(2, 'c')^"
+argument_list|,
+name|ERR_IN_VALUES_INCOMPATIBLE
+argument_list|)
+expr_stmt|;
+name|checkExpFails
+argument_list|(
+literal|"1> all ^((2), (3,4))^"
+argument_list|,
+name|ERR_IN_VALUES_INCOMPATIBLE
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"false and 1 = any ('b', 'c')"
+argument_list|)
+expr_stmt|;
+name|checkExpFails
+argument_list|(
+literal|"false and ^1 = any (date '2012-01-02', date '2012-01-04')^"
+argument_list|,
+name|ERR_IN_OPERANDS_INCOMPATIBLE
+argument_list|)
+expr_stmt|;
+name|checkExpFails
+argument_list|(
+literal|"1> 5 or ^(1, 2)< any (3, 4)^"
+argument_list|,
+name|ERR_IN_OPERANDS_INCOMPATIBLE
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testDoubleNoAlias
 parameter_list|()
 block|{
@@ -16589,6 +16741,37 @@ comment|// Our conformance behaves like ORACLE_10 for "!=" operator.
 name|sql
 argument_list|(
 literal|"select * from (values 1) where 1 != 2"
+argument_list|)
+operator|.
+name|tester
+argument_list|(
+name|customTester
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+operator|.
+name|tester
+argument_list|(
+name|defaultTester
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Bang equal '!=' is not allowed under the current SQL conformance level"
+argument_list|)
+operator|.
+name|tester
+argument_list|(
+name|oracleTester
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select * from (values 1) where 1 != any (2, 3)"
 argument_list|)
 operator|.
 name|tester
@@ -24456,6 +24639,30 @@ operator|+
 literal|"EXISTS pre\n"
 operator|+
 literal|"\n"
+operator|+
+literal|"< ALL left\n"
+operator|+
+literal|"< SOME left\n"
+operator|+
+literal|"<= ALL left\n"
+operator|+
+literal|"<= SOME left\n"
+operator|+
+literal|"<> ALL left\n"
+operator|+
+literal|"<> SOME left\n"
+operator|+
+literal|"= ALL left\n"
+operator|+
+literal|"= SOME left\n"
+operator|+
+literal|"> ALL left\n"
+operator|+
+literal|"> SOME left\n"
+operator|+
+literal|">= ALL left\n"
+operator|+
+literal|">= SOME left\n"
 operator|+
 literal|"BETWEEN ASYMMETRIC -\n"
 operator|+

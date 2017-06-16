@@ -8837,6 +8837,199 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testSome
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select * from emp\n"
+operator|+
+literal|"where sal> some (select comm from emp)"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM `EMP`\n"
+operator|+
+literal|"WHERE (`SAL`> SOME (SELECT `COMM`\n"
+operator|+
+literal|"FROM `EMP`))"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+comment|// ANY is a synonym for SOME
+specifier|final
+name|String
+name|sql2
+init|=
+literal|"select * from emp\n"
+operator|+
+literal|"where sal> any (select comm from emp)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql2
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+specifier|final
+name|String
+name|sql3
+init|=
+literal|"select * from emp\n"
+operator|+
+literal|"where name like (select ^some^ name from emp)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql3
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"(?s).*Encountered \"some\" at .*"
+argument_list|)
+expr_stmt|;
+specifier|final
+name|String
+name|sql4
+init|=
+literal|"select * from emp\n"
+operator|+
+literal|"where name ^like^ some (select name from emp)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql4
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"(?s).*Encountered \"like some\" at .*"
+argument_list|)
+expr_stmt|;
+specifier|final
+name|String
+name|sql5
+init|=
+literal|"select * from emp where empno = any (10,20)"
+decl_stmt|;
+specifier|final
+name|String
+name|expected5
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM `EMP`\n"
+operator|+
+literal|"WHERE (`EMPNO` = SOME (10, 20))"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql5
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected5
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testAll
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select * from emp\n"
+operator|+
+literal|"where sal<= all (select comm from emp) or sal> 10"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM `EMP`\n"
+operator|+
+literal|"WHERE ((`SAL`<= ALL (SELECT `COMM`\n"
+operator|+
+literal|"FROM `EMP`)) OR (`SAL`> 10))"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testAllList
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select * from emp\n"
+operator|+
+literal|"where sal<= all (12, 20, 30)"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM `EMP`\n"
+operator|+
+literal|"WHERE (`SAL`<= ALL (12, 20, 30))"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testUnion
 parameter_list|()
 block|{

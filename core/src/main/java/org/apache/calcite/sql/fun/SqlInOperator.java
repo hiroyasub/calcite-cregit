@@ -383,31 +383,52 @@ extends|extends
 name|SqlBinaryOperator
 block|{
 comment|//~ Instance fields --------------------------------------------------------
-comment|/**    * If true the call represents 'NOT IN'.    */
-specifier|private
-specifier|final
-name|boolean
-name|isNotIn
-decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**    * Creates a SqlInOperator    *    * @param isNotIn Whether this is the 'NOT IN' operator    */
+comment|/**    * Creates a SqlInOperator.    *    * @param kind IN or NOT IN    */
 name|SqlInOperator
 parameter_list|(
-name|boolean
-name|isNotIn
+name|SqlKind
+name|kind
+parameter_list|)
+block|{
+name|this
+argument_list|(
+name|kind
+operator|.
+name|sql
+argument_list|,
+name|kind
+argument_list|)
+expr_stmt|;
+assert|assert
+name|kind
+operator|==
+name|SqlKind
+operator|.
+name|IN
+operator|||
+name|kind
+operator|==
+name|SqlKind
+operator|.
+name|NOT_IN
+assert|;
+block|}
+specifier|protected
+name|SqlInOperator
+parameter_list|(
+name|String
+name|name
+parameter_list|,
+name|SqlKind
+name|kind
 parameter_list|)
 block|{
 name|super
 argument_list|(
-name|isNotIn
-condition|?
-literal|"NOT IN"
-else|:
-literal|"IN"
+name|name
 argument_list|,
-name|SqlKind
-operator|.
-name|IN
+name|kind
 argument_list|,
 literal|32
 argument_list|,
@@ -424,22 +445,22 @@ argument_list|,
 literal|null
 argument_list|)
 expr_stmt|;
-name|this
-operator|.
-name|isNotIn
-operator|=
-name|isNotIn
-expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**    * Returns whether this is the 'NOT IN' operator    *    * @return whether this is the 'NOT IN' operator    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 name|boolean
 name|isNotIn
 parameter_list|()
 block|{
 return|return
-name|isNotIn
+name|kind
+operator|==
+name|SqlKind
+operator|.
+name|NOT_IN
 return|;
 block|}
 annotation|@

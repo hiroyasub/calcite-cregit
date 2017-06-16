@@ -339,6 +339,22 @@ name|sql
 operator|.
 name|fun
 operator|.
+name|SqlQuantifyOperator
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|fun
+operator|.
 name|SqlStdOperatorTable
 import|;
 end_import
@@ -1348,6 +1364,298 @@ name|offset
 argument_list|)
 return|;
 case|case
+name|SOME
+case|:
+comment|// Most general case, where the left and right keys might have nulls, and
+comment|// caller requires 3-valued logic return.
+comment|//
+comment|// select e.deptno, e.deptno< some (select deptno from emp) as v
+comment|// from emp as e
+comment|//
+comment|// becomes
+comment|//
+comment|// select e.deptno,
+comment|//   case
+comment|//   when q.c = 0 then false // sub-query is empty
+comment|//   when (e.deptno< q.m) is true then true
+comment|//   when q.c> q.d then unknown // sub-query has at least one null
+comment|//   else e.deptno< q.m
+comment|//   end as v
+comment|// from emp as e
+comment|// cross join (
+comment|//   select max(deptno) as m, count(*) as c, count(deptno) as d
+comment|//   from emp) as q
+comment|//
+specifier|final
+name|SqlQuantifyOperator
+name|op
+init|=
+operator|(
+name|SqlQuantifyOperator
+operator|)
+name|e
+operator|.
+name|op
+decl_stmt|;
+name|builder
+operator|.
+name|push
+argument_list|(
+name|e
+operator|.
+name|rel
+argument_list|)
+operator|.
+name|aggregate
+argument_list|(
+name|builder
+operator|.
+name|groupKey
+argument_list|()
+argument_list|,
+name|op
+operator|.
+name|comparisonKind
+operator|==
+name|SqlKind
+operator|.
+name|GREATER_THAN
+operator|||
+name|op
+operator|.
+name|comparisonKind
+operator|==
+name|SqlKind
+operator|.
+name|GREATER_THAN_OR_EQUAL
+condition|?
+name|builder
+operator|.
+name|min
+argument_list|(
+literal|"m"
+argument_list|,
+name|builder
+operator|.
+name|field
+argument_list|(
+literal|0
+argument_list|)
+argument_list|)
+else|:
+name|builder
+operator|.
+name|max
+argument_list|(
+literal|"m"
+argument_list|,
+name|builder
+operator|.
+name|field
+argument_list|(
+literal|0
+argument_list|)
+argument_list|)
+argument_list|,
+name|builder
+operator|.
+name|count
+argument_list|(
+literal|false
+argument_list|,
+literal|"c"
+argument_list|)
+argument_list|,
+name|builder
+operator|.
+name|count
+argument_list|(
+literal|false
+argument_list|,
+literal|"d"
+argument_list|,
+name|builder
+operator|.
+name|field
+argument_list|(
+literal|0
+argument_list|)
+argument_list|)
+argument_list|)
+operator|.
+name|as
+argument_list|(
+literal|"q"
+argument_list|)
+operator|.
+name|join
+argument_list|(
+name|JoinRelType
+operator|.
+name|INNER
+argument_list|)
+expr_stmt|;
+return|return
+name|builder
+operator|.
+name|call
+argument_list|(
+name|SqlStdOperatorTable
+operator|.
+name|CASE
+argument_list|,
+name|builder
+operator|.
+name|call
+argument_list|(
+name|SqlStdOperatorTable
+operator|.
+name|EQUALS
+argument_list|,
+name|builder
+operator|.
+name|field
+argument_list|(
+literal|"q"
+argument_list|,
+literal|"c"
+argument_list|)
+argument_list|,
+name|builder
+operator|.
+name|literal
+argument_list|(
+literal|0
+argument_list|)
+argument_list|)
+argument_list|,
+name|builder
+operator|.
+name|literal
+argument_list|(
+literal|false
+argument_list|)
+argument_list|,
+name|builder
+operator|.
+name|call
+argument_list|(
+name|SqlStdOperatorTable
+operator|.
+name|IS_TRUE
+argument_list|,
+name|builder
+operator|.
+name|call
+argument_list|(
+name|RelOptUtil
+operator|.
+name|op
+argument_list|(
+name|op
+operator|.
+name|comparisonKind
+argument_list|,
+literal|null
+argument_list|)
+argument_list|,
+name|e
+operator|.
+name|operands
+operator|.
+name|get
+argument_list|(
+literal|0
+argument_list|)
+argument_list|,
+name|builder
+operator|.
+name|field
+argument_list|(
+literal|"q"
+argument_list|,
+literal|"m"
+argument_list|)
+argument_list|)
+argument_list|)
+argument_list|,
+name|builder
+operator|.
+name|literal
+argument_list|(
+literal|true
+argument_list|)
+argument_list|,
+name|builder
+operator|.
+name|call
+argument_list|(
+name|SqlStdOperatorTable
+operator|.
+name|GREATER_THAN
+argument_list|,
+name|builder
+operator|.
+name|field
+argument_list|(
+literal|"q"
+argument_list|,
+literal|"c"
+argument_list|)
+argument_list|,
+name|builder
+operator|.
+name|field
+argument_list|(
+literal|"q"
+argument_list|,
+literal|"d"
+argument_list|)
+argument_list|)
+argument_list|,
+name|builder
+operator|.
+name|literal
+argument_list|(
+literal|null
+argument_list|)
+argument_list|,
+name|builder
+operator|.
+name|call
+argument_list|(
+name|RelOptUtil
+operator|.
+name|op
+argument_list|(
+name|op
+operator|.
+name|comparisonKind
+argument_list|,
+literal|null
+argument_list|)
+argument_list|,
+name|e
+operator|.
+name|operands
+operator|.
+name|get
+argument_list|(
+literal|0
+argument_list|)
+argument_list|,
+name|builder
+operator|.
+name|field
+argument_list|(
+literal|"q"
+argument_list|,
+literal|"m"
+argument_list|)
+argument_list|)
+argument_list|)
+return|;
+case|case
 name|IN
 case|:
 case|case
@@ -1357,6 +1665,7 @@ comment|// Most general case, where the left and right keys might have nulls, an
 comment|// caller requires 3-valued logic return.
 comment|//
 comment|// select e.deptno, e.deptno in (select deptno from emp)
+comment|// from emp as e
 comment|//
 comment|// becomes
 comment|//
@@ -1368,7 +1677,7 @@ comment|//   when e.deptno is null then null
 comment|//   when ct.ck< ct.c then null
 comment|//   else false
 comment|//   end
-comment|// from e
+comment|// from emp as e
 comment|// left join (
 comment|//   (select count(*) as c, count(deptno) as ck from emp) as ct
 comment|//   cross join (select distinct deptno, true as i from emp)) as dt
@@ -1381,7 +1690,7 @@ comment|//   case
 comment|//   when dt.i is not null then true
 comment|//   else false
 comment|//   end
-comment|// from e
+comment|// from emp as e
 comment|// left join (select distinct deptno, true as i from emp) as dt
 comment|//   on e.deptno = dt.deptno
 comment|//
@@ -1389,7 +1698,7 @@ comment|// We could further simplify to
 comment|//
 comment|// select e.deptno,
 comment|//   dt.i is not null
-comment|// from e
+comment|// from emp as e
 comment|// left join (select distinct deptno, true as i from emp) as dt
 comment|//   on e.deptno = dt.deptno
 comment|//
@@ -1401,7 +1710,7 @@ comment|// join:
 comment|//
 comment|// select e.deptno,
 comment|//   true
-comment|// from e
+comment|// from emp as e
 comment|// inner join (select distinct deptno from emp) as dt
 comment|//   on e.deptno = dt.deptno
 comment|//

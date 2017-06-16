@@ -13293,6 +13293,64 @@ name|check
 argument_list|()
 expr_stmt|;
 block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testAll
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select * from emp e1\n"
+operator|+
+literal|"  where e1.empno> ALL (select deptno from dept)"
+decl_stmt|;
+name|checkSubQuery
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|withLateDecorrelation
+argument_list|(
+literal|true
+argument_list|)
+operator|.
+name|check
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSome
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select * from emp e1\n"
+operator|+
+literal|"  where e1.empno> SOME (select deptno from dept)"
+decl_stmt|;
+name|checkSubQuery
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|withLateDecorrelation
+argument_list|(
+literal|true
+argument_list|)
+operator|.
+name|check
+argument_list|()
+expr_stmt|;
+block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1546">[CALCITE-1546]    * Sub-queries connected by OR</a>. */
 annotation|@
 name|Test

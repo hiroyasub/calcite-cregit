@@ -772,6 +772,26 @@ name|List
 argument_list|<
 name|String
 argument_list|>
+name|QUANTIFIERS
+init|=
+name|Arrays
+operator|.
+name|asList
+argument_list|(
+literal|"KEYWORD(ALL)"
+argument_list|,
+literal|"KEYWORD(ANY)"
+argument_list|,
+literal|"KEYWORD(SOME)"
+argument_list|)
+decl_stmt|;
+specifier|protected
+specifier|static
+specifier|final
+name|List
+argument_list|<
+name|String
+argument_list|>
 name|SELECT_KEYWORDS
 init|=
 name|Arrays
@@ -2180,6 +2200,8 @@ name|assertComplete
 argument_list|(
 name|sql
 argument_list|,
+name|QUANTIFIERS
+argument_list|,
 name|EXPR_KEYWORDS
 argument_list|)
 expr_stmt|;
@@ -2276,6 +2298,8 @@ name|sql
 argument_list|,
 name|EXPR_KEYWORDS
 argument_list|,
+name|QUANTIFIERS
+argument_list|,
 name|AB_TABLES
 argument_list|)
 expr_stmt|;
@@ -2334,6 +2358,8 @@ argument_list|,
 name|AB_TABLES
 argument_list|,
 name|EXPR_KEYWORDS
+argument_list|,
+name|QUANTIFIERS
 argument_list|)
 expr_stmt|;
 comment|// where list

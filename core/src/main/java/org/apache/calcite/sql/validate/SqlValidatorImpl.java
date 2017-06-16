@@ -4746,12 +4746,9 @@ name|TRACER
 operator|.
 name|trace
 argument_list|(
-literal|"After unconditional rewrite: "
-operator|+
+literal|"After unconditional rewrite: {}"
+argument_list|,
 name|outermostNode
-operator|.
-name|toString
-argument_list|()
 argument_list|)
 expr_stmt|;
 if|if
@@ -4818,12 +4815,9 @@ name|TRACER
 operator|.
 name|trace
 argument_list|(
-literal|"After validation: "
-operator|+
+literal|"After validation: {}"
+argument_list|,
 name|outermostNode
-operator|.
-name|toString
-argument_list|()
 argument_list|)
 expr_stmt|;
 return|return

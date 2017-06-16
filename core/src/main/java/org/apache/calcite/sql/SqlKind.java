@@ -176,23 +176,47 @@ comment|// comparison operators
 comment|/**    * The "IN" operator.    */
 name|IN
 block|,
+comment|/**    * The "NOT IN" operator.    *    *<p>Only occurs in SqlNode trees. Is expanded to NOT(IN ...) before    * entering RelNode land.    */
+name|NOT_IN
+argument_list|(
+literal|"NOT IN"
+argument_list|)
+block|,
 comment|/**    * The less-than operator, "&lt;".    */
 name|LESS_THAN
+argument_list|(
+literal|"<"
+argument_list|)
 block|,
 comment|/**    * The greater-than operator, "&gt;".    */
 name|GREATER_THAN
+argument_list|(
+literal|">"
+argument_list|)
 block|,
 comment|/**    * The less-than-or-equal operator, "&lt;=".    */
 name|LESS_THAN_OR_EQUAL
+argument_list|(
+literal|"<="
+argument_list|)
 block|,
 comment|/**    * The greater-than-or-equal operator, "&gt;=".    */
 name|GREATER_THAN_OR_EQUAL
+argument_list|(
+literal|">="
+argument_list|)
 block|,
 comment|/**    * The equals operator, "=".    */
 name|EQUALS
+argument_list|(
+literal|"="
+argument_list|)
 block|,
-comment|/**    * The not-equals operator, "&#33;=" or "&lt;&gt;".    */
+comment|/**    * The not-equals operator, "&#33;=" or "&lt;&gt;".    * The latter is standard, and preferred.    */
 name|NOT_EQUALS
+argument_list|(
+literal|"<>"
+argument_list|)
 block|,
 comment|/**    * The is-distinct-from operator.    */
 name|IS_DISTINCT_FROM
@@ -288,6 +312,12 @@ name|MINUS_PREFIX
 block|,
 comment|/**    * The "EXISTS" operator.    */
 name|EXISTS
+block|,
+comment|/**    * The "SOME" quantification operator (also called "ANY").    */
+name|SOME
+block|,
+comment|/**    * The "ALL" quantification operator.    */
+name|ALL
 block|,
 comment|/**    * The "VALUES" operator.    */
 name|VALUES
