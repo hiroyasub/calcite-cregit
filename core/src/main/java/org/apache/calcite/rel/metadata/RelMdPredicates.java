@@ -1561,6 +1561,10 @@ name|of
 argument_list|(
 name|rexBuilder
 argument_list|,
+name|RexUtil
+operator|.
+name|retainDeterministic
+argument_list|(
 name|RelOptUtil
 operator|.
 name|conjunctions
@@ -1569,6 +1573,7 @@ name|filter
 operator|.
 name|getCondition
 argument_list|()
+argument_list|)
 argument_list|)
 argument_list|)
 argument_list|)
@@ -3483,6 +3488,10 @@ argument_list|(
 name|rightChildPredicates
 argument_list|)
 argument_list|,
+name|RexUtil
+operator|.
+name|retainDeterministic
+argument_list|(
 name|RelOptUtil
 operator|.
 name|conjunctions
@@ -3491,6 +3500,7 @@ name|joinRel
 operator|.
 name|getCondition
 argument_list|()
+argument_list|)
 argument_list|)
 argument_list|,
 name|inferredPredicates
