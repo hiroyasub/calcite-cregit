@@ -815,9 +815,7 @@ specifier|final
 name|RelDataType
 name|rowType
 init|=
-name|protoRowType
-operator|.
-name|apply
+name|getRowType
 argument_list|(
 name|typeFactory
 argument_list|)
