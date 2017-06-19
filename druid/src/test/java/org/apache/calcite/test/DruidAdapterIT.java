@@ -3948,21 +3948,6 @@ literal|"group by \"state_province\"\n"
 operator|+
 literal|"order by 1"
 decl_stmt|;
-name|String
-name|druidQuery
-init|=
-literal|"'aggregations':["
-operator|+
-literal|"{'type':'longSum','name':'$f1','fieldName':'unit_sales'},"
-operator|+
-literal|"{'type':'count','name':'$f2','fieldName':'unit_sales'},"
-operator|+
-literal|"{'type':'count','name':'C','fieldName':'store_sqft'},"
-operator|+
-literal|"{'type':'count','name':'C0'}],"
-operator|+
-literal|"'intervals':['1900-01-09T00:00:00.000/2992-01-10T00:00:00.000']}"
-decl_stmt|;
 name|sql
 argument_list|(
 name|sql
@@ -3975,7 +3960,7 @@ argument_list|)
 operator|.
 name|returnsUnordered
 argument_list|(
-literal|"state_province=CA; A=3; S=74748; C=24441; C0=24441"
+literal|"state_province=CA; A=3; S=74748; C=16347; C0=24441"
 argument_list|,
 literal|"state_province=OR; A=3; S=67659; C=21610; C0=21610"
 argument_list|)
@@ -3984,7 +3969,7 @@ name|queryContains
 argument_list|(
 name|druidChecker
 argument_list|(
-name|druidQuery
+literal|"'queryType':'select'"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -6884,9 +6869,7 @@ literal|"PLAN=EnumerableInterpreter\n"
 operator|+
 literal|"  BindableAggregate(group=[{0}])\n"
 operator|+
-literal|"    BindableProject(EXPR$0=[/INT(EXTRACT_DATE(FLAG(YEAR), /INT(Reinterpret($0), "
-operator|+
-literal|"86400000)), 100)])\n"
+literal|"    BindableProject(EXPR$0=[EXTRACT_DATE(FLAG(CENTURY), /INT(Reinterpret($0), 86400000))])\n"
 operator|+
 literal|"      DruidQuery(table=[[foodmart, foodmart]], "
 operator|+
@@ -6914,7 +6897,7 @@ argument_list|)
 operator|.
 name|returnsUnordered
 argument_list|(
-literal|"EXPR$0=19"
+literal|"EXPR$0=20"
 argument_list|)
 expr_stmt|;
 block|}
