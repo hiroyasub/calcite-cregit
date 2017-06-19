@@ -159,7 +159,7 @@ parameter_list|)
 block|{
 return|return
 operator|new
-name|MySource
+name|FileSource
 argument_list|(
 name|file
 argument_list|)
@@ -245,7 +245,7 @@ argument_list|)
 decl_stmt|;
 return|return
 operator|new
-name|MySource
+name|FileSource
 argument_list|(
 name|url_
 argument_list|)
@@ -338,7 +338,7 @@ comment|/** Implementation of {@link Source}. */
 specifier|private
 specifier|static
 class|class
-name|MySource
+name|FileSource
 implements|implements
 name|Source
 block|{
@@ -353,7 +353,7 @@ name|URL
 name|url
 decl_stmt|;
 specifier|private
-name|MySource
+name|FileSource
 parameter_list|(
 name|URL
 name|url
@@ -408,7 +408,7 @@ expr_stmt|;
 block|}
 block|}
 specifier|private
-name|MySource
+name|FileSource
 parameter_list|(
 name|File
 name|file
