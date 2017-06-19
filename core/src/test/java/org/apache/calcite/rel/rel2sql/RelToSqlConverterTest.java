@@ -247,6 +247,20 @@ name|apache
 operator|.
 name|calcite
 operator|.
+name|sql2rel
+operator|.
+name|SqlToRelConverter
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
 name|test
 operator|.
 name|CalciteAssert
@@ -456,6 +470,61 @@ specifier|public
 class|class
 name|RelToSqlConverterTest
 block|{
+specifier|static
+specifier|final
+name|SqlToRelConverter
+operator|.
+name|Config
+name|DEFAULT_REL_CONFIG
+init|=
+name|SqlToRelConverter
+operator|.
+name|configBuilder
+argument_list|()
+operator|.
+name|withTrimUnusedFields
+argument_list|(
+literal|false
+argument_list|)
+operator|.
+name|withConvertTableAccess
+argument_list|(
+literal|false
+argument_list|)
+operator|.
+name|build
+argument_list|()
+decl_stmt|;
+specifier|static
+specifier|final
+name|SqlToRelConverter
+operator|.
+name|Config
+name|NO_EXPAND_CONFIG
+init|=
+name|SqlToRelConverter
+operator|.
+name|configBuilder
+argument_list|()
+operator|.
+name|withTrimUnusedFields
+argument_list|(
+literal|false
+argument_list|)
+operator|.
+name|withConvertTableAccess
+argument_list|(
+literal|false
+argument_list|)
+operator|.
+name|withExpand
+argument_list|(
+literal|false
+argument_list|)
+operator|.
+name|build
+argument_list|()
+decl_stmt|;
 comment|/** Initiates a test case with a given SQL query. */
 specifier|private
 name|Sql
@@ -480,6 +549,8 @@ argument_list|,
 name|SqlDialect
 operator|.
 name|CALCITE
+argument_list|,
+name|DEFAULT_REL_CONFIG
 argument_list|,
 name|ImmutableList
 operator|.
@@ -516,6 +587,11 @@ name|CalciteAssert
 operator|.
 name|SchemaSpec
 name|schemaSpec
+parameter_list|,
+name|SqlToRelConverter
+operator|.
+name|Config
+name|sqlToRelConf
 parameter_list|,
 name|Program
 modifier|...
@@ -562,6 +638,11 @@ operator|.
 name|traitDefs
 argument_list|(
 name|traitDefs
+argument_list|)
+operator|.
+name|sqlToRelConverterConfig
+argument_list|(
+name|sqlToRelConf
 argument_list|)
 operator|.
 name|programs
@@ -3390,6 +3471,302 @@ name|expectedMssql
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1849">[CALCITE-1849]    * Support sub-queries (RexSubQuery) in RelToSqlConverter</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testExistsWithExpand
+parameter_list|()
+block|{
+name|String
+name|query
+init|=
+literal|"select \"product_name\" from \"product\" a "
+operator|+
+literal|"where exists (select count(*) "
+operator|+
+literal|"from \"sales_fact_1997\"b "
+operator|+
+literal|"where b.\"product_id\" = a.\"product_id\")"
+decl_stmt|;
+name|String
+name|expected
+init|=
+literal|"SELECT \"product_name\"\n"
+operator|+
+literal|"FROM \"foodmart\".\"product\"\n"
+operator|+
+literal|"WHERE EXISTS (SELECT COUNT(*)\n"
+operator|+
+literal|"FROM \"foodmart\".\"sales_fact_1997\"\n"
+operator|+
+literal|"WHERE \"product_id\" = \"product\".\"product_id\")"
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|config
+argument_list|(
+name|NO_EXPAND_CONFIG
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testNotExistsWithExpand
+parameter_list|()
+block|{
+name|String
+name|query
+init|=
+literal|"select \"product_name\" from \"product\" a "
+operator|+
+literal|"where not exists (select count(*) "
+operator|+
+literal|"from \"sales_fact_1997\"b "
+operator|+
+literal|"where b.\"product_id\" = a.\"product_id\")"
+decl_stmt|;
+name|String
+name|expected
+init|=
+literal|"SELECT \"product_name\"\n"
+operator|+
+literal|"FROM \"foodmart\".\"product\"\n"
+operator|+
+literal|"WHERE NOT EXISTS (SELECT COUNT(*)\n"
+operator|+
+literal|"FROM \"foodmart\".\"sales_fact_1997\"\n"
+operator|+
+literal|"WHERE \"product_id\" = \"product\".\"product_id\")"
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|config
+argument_list|(
+name|NO_EXPAND_CONFIG
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSubQueryInWithExpand
+parameter_list|()
+block|{
+name|String
+name|query
+init|=
+literal|"select \"product_name\" from \"product\" a "
+operator|+
+literal|"where \"product_id\" in (select \"product_id\" "
+operator|+
+literal|"from \"sales_fact_1997\"b "
+operator|+
+literal|"where b.\"product_id\" = a.\"product_id\")"
+decl_stmt|;
+name|String
+name|expected
+init|=
+literal|"SELECT \"product_name\"\n"
+operator|+
+literal|"FROM \"foodmart\".\"product\"\n"
+operator|+
+literal|"WHERE \"product_id\" IN (SELECT \"product_id\"\n"
+operator|+
+literal|"FROM \"foodmart\".\"sales_fact_1997\"\n"
+operator|+
+literal|"WHERE \"product_id\" = \"product\".\"product_id\")"
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|config
+argument_list|(
+name|NO_EXPAND_CONFIG
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSubQueryInWithExpand2
+parameter_list|()
+block|{
+name|String
+name|query
+init|=
+literal|"select \"product_name\" from \"product\" a "
+operator|+
+literal|"where \"product_id\" in (1, 2)"
+decl_stmt|;
+name|String
+name|expected
+init|=
+literal|"SELECT \"product_name\"\n"
+operator|+
+literal|"FROM \"foodmart\".\"product\"\n"
+operator|+
+literal|"WHERE \"product_id\" = 1 OR \"product_id\" = 2"
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|config
+argument_list|(
+name|NO_EXPAND_CONFIG
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSubQueryNotInWithExpand
+parameter_list|()
+block|{
+name|String
+name|query
+init|=
+literal|"select \"product_name\" from \"product\" a "
+operator|+
+literal|"where \"product_id\" not in (select \"product_id\" "
+operator|+
+literal|"from \"sales_fact_1997\"b "
+operator|+
+literal|"where b.\"product_id\" = a.\"product_id\")"
+decl_stmt|;
+name|String
+name|expected
+init|=
+literal|"SELECT \"product_name\"\n"
+operator|+
+literal|"FROM \"foodmart\".\"product\"\n"
+operator|+
+literal|"WHERE \"product_id\" NOT IN (SELECT \"product_id\"\n"
+operator|+
+literal|"FROM \"foodmart\".\"sales_fact_1997\"\n"
+operator|+
+literal|"WHERE \"product_id\" = \"product\".\"product_id\")"
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|config
+argument_list|(
+name|NO_EXPAND_CONFIG
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testLike
+parameter_list|()
+block|{
+name|String
+name|query
+init|=
+literal|"select \"product_name\" from \"product\" a "
+operator|+
+literal|"where \"product_name\" like 'abc'"
+decl_stmt|;
+name|String
+name|expected
+init|=
+literal|"SELECT \"product_name\"\n"
+operator|+
+literal|"FROM \"foodmart\".\"product\"\n"
+operator|+
+literal|"WHERE \"product_name\" LIKE 'abc'"
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testNotLike
+parameter_list|()
+block|{
+name|String
+name|query
+init|=
+literal|"select \"product_name\" from \"product\" a "
+operator|+
+literal|"where \"product_name\" not like 'abc'"
+decl_stmt|;
+name|String
+name|expected
+init|=
+literal|"SELECT \"product_name\"\n"
+operator|+
+literal|"FROM \"foodmart\".\"product\"\n"
+operator|+
+literal|"WHERE \"product_name\" NOT LIKE 'abc'"
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
 annotation|@
 name|Test
 specifier|public
@@ -5971,6 +6348,13 @@ argument_list|>
 argument_list|>
 name|transforms
 decl_stmt|;
+specifier|private
+specifier|final
+name|SqlToRelConverter
+operator|.
+name|Config
+name|config
+decl_stmt|;
 name|Sql
 parameter_list|(
 name|CalciteAssert
@@ -5983,6 +6367,11 @@ name|sql
 parameter_list|,
 name|SqlDialect
 name|dialect
+parameter_list|,
+name|SqlToRelConverter
+operator|.
+name|Config
+name|config
 parameter_list|,
 name|List
 argument_list|<
@@ -6025,6 +6414,12 @@ argument_list|(
 name|transforms
 argument_list|)
 expr_stmt|;
+name|this
+operator|.
+name|config
+operator|=
+name|config
+expr_stmt|;
 block|}
 name|Sql
 name|dialect
@@ -6042,6 +6437,33 @@ argument_list|,
 name|sql
 argument_list|,
 name|dialect
+argument_list|,
+name|config
+argument_list|,
+name|transforms
+argument_list|)
+return|;
+block|}
+name|Sql
+name|config
+parameter_list|(
+name|SqlToRelConverter
+operator|.
+name|Config
+name|config
+parameter_list|)
+block|{
+return|return
+operator|new
+name|Sql
+argument_list|(
+name|schemaSpec
+argument_list|,
+name|sql
+argument_list|,
+name|dialect
+argument_list|,
+name|config
 argument_list|,
 name|transforms
 argument_list|)
@@ -6068,6 +6490,8 @@ argument_list|,
 name|sql
 argument_list|,
 name|dialect
+argument_list|,
+name|config
 argument_list|,
 name|FlatLists
 operator|.
@@ -6234,6 +6658,8 @@ operator|.
 name|DEFAULT
 argument_list|,
 name|schemaSpec
+argument_list|,
+name|config
 argument_list|)
 decl_stmt|;
 try|try
@@ -6380,6 +6806,8 @@ argument_list|,
 name|sql
 argument_list|,
 name|dialect
+argument_list|,
+name|config
 argument_list|,
 name|transforms
 argument_list|)
