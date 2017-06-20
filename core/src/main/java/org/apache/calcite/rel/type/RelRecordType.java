@@ -248,6 +248,17 @@ literal|":peek_default"
 argument_list|)
 expr_stmt|;
 break|break;
+case|case
+name|PEEK_FIELDS_NO_EXPAND
+case|:
+name|sb
+operator|.
+name|append
+argument_list|(
+literal|":peek_no_expand"
+argument_list|)
+expr_stmt|;
+break|break;
 block|}
 name|sb
 operator|.

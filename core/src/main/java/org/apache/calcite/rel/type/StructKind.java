@@ -37,6 +37,9 @@ name|PEEK_FIELDS_DEFAULT
 block|,
 comment|/** If a field has this type, you can see its fields without qualifying them    * with the name of this field.    *    *<p>For example, if {@code address} is labeled {@code PEEK_FIELDS}, you    * could write {@code zipcode} as shorthand for {@code address.zipcode}. */
 name|PEEK_FIELDS
+block|,
+comment|/** As {@link #PEEK_FIELDS}, but fields are not expanded in "SELECT *".    *    *<p>Used in Flink, not Phoenix. */
+name|PEEK_FIELDS_NO_EXPAND
 block|, }
 end_enum
 

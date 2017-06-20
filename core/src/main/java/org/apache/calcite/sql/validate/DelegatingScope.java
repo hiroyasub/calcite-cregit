@@ -826,6 +826,9 @@ case|:
 case|case
 name|PEEK_FIELDS_DEFAULT
 case|:
+case|case
+name|PEEK_FIELDS_NO_EXPAND
+case|:
 specifier|final
 name|Step
 name|path2
@@ -2030,6 +2033,9 @@ case|:
 case|case
 name|PEEK_FIELDS_DEFAULT
 case|:
+case|case
+name|PEEK_FIELDS_NO_EXPAND
+case|:
 name|columnName
 operator|=
 name|field
@@ -2912,6 +2918,9 @@ name|PEEK_FIELDS
 case|:
 case|case
 name|PEEK_FIELDS_DEFAULT
+case|:
+case|case
+name|PEEK_FIELDS_NO_EXPAND
 case|:
 name|identifier
 operator|=

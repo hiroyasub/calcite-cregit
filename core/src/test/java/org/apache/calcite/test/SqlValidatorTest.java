@@ -22198,36 +22198,72 @@ argument_list|(
 literal|"RecordType(INTEGER NOT NULL X, INTEGER NOT NULL Y) NOT NULL"
 argument_list|)
 expr_stmt|;
-comment|// Because the type of CONTACT_PEEK.COORD is marked "peek", the validator
-comment|// can see through it.
+comment|// Because the types of CONTACT_PEEK.COORD and CONTACT_PEEK.COORD_NE are
+comment|// marked "peek", the validator can see through them.
 name|sql
 argument_list|(
-literal|"SELECT c.x, c.coord.y FROM customer.contact_peek as c"
+literal|"SELECT c.x, c.coord.y, c.m, c.b FROM customer.contact_peek as c"
 argument_list|)
 operator|.
 name|type
 argument_list|(
-literal|"RecordType(INTEGER NOT NULL X, INTEGER NOT NULL Y) NOT NULL"
+literal|"RecordType(INTEGER NOT NULL X, INTEGER NOT NULL Y, INTEGER NOT NULL M,"
+operator|+
+literal|" INTEGER NOT NULL B) NOT NULL"
 argument_list|)
 expr_stmt|;
 name|sql
 argument_list|(
-literal|"SELECT c.coord.x, c.coord.y FROM customer.contact_peek as c"
+literal|"SELECT c.coord.x, c.coord.y, c.coord_ne.m FROM customer.contact_peek as c"
 argument_list|)
 operator|.
 name|type
 argument_list|(
-literal|"RecordType(INTEGER NOT NULL X, INTEGER NOT NULL Y) NOT NULL"
+literal|"RecordType(INTEGER NOT NULL X, INTEGER NOT NULL Y, INTEGER NOT NULL M) NOT NULL"
 argument_list|)
 expr_stmt|;
 name|sql
 argument_list|(
-literal|"SELECT x, c.coord.y FROM customer.contact_peek as c"
+literal|"SELECT x, a, c.coord.y FROM customer.contact_peek as c"
 argument_list|)
 operator|.
 name|type
 argument_list|(
-literal|"RecordType(INTEGER NOT NULL X, INTEGER NOT NULL Y) NOT NULL"
+literal|"RecordType(INTEGER NOT NULL X, INTEGER NOT NULL A, INTEGER NOT NULL Y) NOT NULL"
+argument_list|)
+expr_stmt|;
+comment|// Because CONTACT_PEEK.COORD_NE is marked "peek no expand",
+comment|// "select *" does not flatten it.
+name|sql
+argument_list|(
+literal|"SELECT coord_ne.* FROM customer.contact_peek as c"
+argument_list|)
+operator|.
+name|type
+argument_list|(
+literal|"RecordType(INTEGER NOT NULL M, "
+operator|+
+literal|"RecordType:peek_no_expand(INTEGER NOT NULL A, INTEGER NOT NULL B) "
+operator|+
+literal|"NOT NULL SUB) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"SELECT * FROM customer.contact_peek as c"
+argument_list|)
+operator|.
+name|type
+argument_list|(
+literal|"RecordType(INTEGER NOT NULL CONTACTNO, VARCHAR(10) NOT NULL FNAME, "
+operator|+
+literal|"VARCHAR(10) NOT NULL LNAME, VARCHAR(20) NOT NULL EMAIL, INTEGER NOT NULL X, "
+operator|+
+literal|"INTEGER NOT NULL Y, RecordType:peek_no_expand(INTEGER NOT NULL M, "
+operator|+
+literal|"RecordType:peek_no_expand(INTEGER NOT NULL A, INTEGER NOT NULL B) "
+operator|+
+literal|"NOT NULL SUB) NOT NULL COORD_NE) NOT NULL"
 argument_list|)
 expr_stmt|;
 comment|// Qualifying with schema is OK.
