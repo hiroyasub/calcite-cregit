@@ -2191,7 +2191,7 @@ argument_list|)
 operator|.
 name|throws_
 argument_list|(
-literal|"Cannot apply 'MY_SUM' to arguments of type 'MY_SUM(<JAVATYPE(CLASS JAVA.LANG.STRING)>)'. Supported form(s): 'MY_SUM(<NUMERIC>)"
+literal|"No match found for function signature MY_SUM(<CHARACTER>)"
 argument_list|)
 expr_stmt|;
 name|with
@@ -2248,6 +2248,316 @@ argument_list|(
 literal|"deptno=20; P=20"
 argument_list|,
 literal|"deptno=10; P=30"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Tests user-defined aggregate function. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testUserDefinedAggregateFunctionWithMultipleParameters
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+specifier|final
+name|String
+name|empDept
+init|=
+name|JdbcTest
+operator|.
+name|EmpDeptTableFactory
+operator|.
+name|class
+operator|.
+name|getName
+argument_list|()
+decl_stmt|;
+specifier|final
+name|String
+name|sum21
+init|=
+name|Smalls
+operator|.
+name|MyTwoParamsSumFunctionFilter1
+operator|.
+name|class
+operator|.
+name|getName
+argument_list|()
+decl_stmt|;
+specifier|final
+name|String
+name|sum22
+init|=
+name|Smalls
+operator|.
+name|MyTwoParamsSumFunctionFilter2
+operator|.
+name|class
+operator|.
+name|getName
+argument_list|()
+decl_stmt|;
+specifier|final
+name|String
+name|sum31
+init|=
+name|Smalls
+operator|.
+name|MyThreeParamsSumFunctionWithFilter1
+operator|.
+name|class
+operator|.
+name|getName
+argument_list|()
+decl_stmt|;
+specifier|final
+name|String
+name|sum32
+init|=
+name|Smalls
+operator|.
+name|MyThreeParamsSumFunctionWithFilter2
+operator|.
+name|class
+operator|.
+name|getName
+argument_list|()
+decl_stmt|;
+specifier|final
+name|CalciteAssert
+operator|.
+name|AssertThat
+name|with
+init|=
+name|CalciteAssert
+operator|.
+name|model
+argument_list|(
+literal|"{\n"
+operator|+
+literal|"  version: '1.0',\n"
+operator|+
+literal|"   schemas: [\n"
+operator|+
+literal|"     {\n"
+operator|+
+literal|"       name: 'adhoc',\n"
+operator|+
+literal|"       tables: [\n"
+operator|+
+literal|"         {\n"
+operator|+
+literal|"           name: 'EMPLOYEES',\n"
+operator|+
+literal|"           type: 'custom',\n"
+operator|+
+literal|"           factory: '"
+operator|+
+name|empDept
+operator|+
+literal|"',\n"
+operator|+
+literal|"           operand: {'foo': true, 'bar': 345}\n"
+operator|+
+literal|"         }\n"
+operator|+
+literal|"       ],\n"
+operator|+
+literal|"       functions: [\n"
+operator|+
+literal|"         {\n"
+operator|+
+literal|"           name: 'MY_SUM2',\n"
+operator|+
+literal|"           className: '"
+operator|+
+name|sum21
+operator|+
+literal|"'\n"
+operator|+
+literal|"         },\n"
+operator|+
+literal|"         {\n"
+operator|+
+literal|"           name: 'MY_SUM2',\n"
+operator|+
+literal|"           className: '"
+operator|+
+name|sum22
+operator|+
+literal|"'\n"
+operator|+
+literal|"         },\n"
+operator|+
+literal|"         {\n"
+operator|+
+literal|"           name: 'MY_SUM3',\n"
+operator|+
+literal|"           className: '"
+operator|+
+name|sum31
+operator|+
+literal|"'\n"
+operator|+
+literal|"         },\n"
+operator|+
+literal|"         {\n"
+operator|+
+literal|"           name: 'MY_SUM3',\n"
+operator|+
+literal|"           className: '"
+operator|+
+name|sum32
+operator|+
+literal|"'\n"
+operator|+
+literal|"         }\n"
+operator|+
+literal|"       ]\n"
+operator|+
+literal|"     }\n"
+operator|+
+literal|"   ]\n"
+operator|+
+literal|"}"
+argument_list|)
+operator|.
+name|withDefaultSchema
+argument_list|(
+literal|"adhoc"
+argument_list|)
+decl_stmt|;
+name|with
+operator|.
+name|withDefaultSchema
+argument_list|(
+literal|null
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select \"adhoc\".my_sum3(\"deptno\",\"name\",'Eric') as p from \"adhoc\".EMPLOYEES\n"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"P=20\n"
+argument_list|)
+expr_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"select \"adhoc\".my_sum3(\"empid\",\"deptno\",\"commission\") as p "
+operator|+
+literal|"from \"adhoc\".EMPLOYEES\n"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"P=330\n"
+argument_list|)
+expr_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"select \"adhoc\".my_sum3(\"empid\",\"deptno\",\"commission\"),\"name\" as p "
+operator|+
+literal|"from \"adhoc\".EMPLOYEES\n"
+argument_list|)
+operator|.
+name|throws_
+argument_list|(
+literal|"Expression 'name' is not being grouped"
+argument_list|)
+expr_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"select \"name\",\"adhoc\".my_sum3(\"empid\",\"deptno\",\"commission\") as p "
+operator|+
+literal|"from \"adhoc\".EMPLOYEES\n"
+operator|+
+literal|"group by \"name\""
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"name=Theodore; P=0"
+argument_list|,
+literal|"name=Eric; P=220"
+argument_list|,
+literal|"name=Bill; P=110"
+argument_list|,
+literal|"name=Sebastian; P=0"
+argument_list|)
+expr_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"select \"adhoc\".my_sum3(\"empid\",\"deptno\",\"salary\") as p "
+operator|+
+literal|"from \"adhoc\".EMPLOYEES\n"
+argument_list|)
+operator|.
+name|throws_
+argument_list|(
+literal|"No match found for function signature MY_SUM3(<NUMERIC>, "
+operator|+
+literal|"<NUMERIC>,<APPROXIMATE_NUMERIC>)"
+argument_list|)
+expr_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"select \"adhoc\".my_sum3(\"empid\",\"deptno\",\"name\") as p "
+operator|+
+literal|"from \"adhoc\".EMPLOYEES\n"
+argument_list|)
+expr_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"select \"adhoc\".my_sum2(\"commission\",250) as p "
+operator|+
+literal|"from \"adhoc\".EMPLOYEES\n"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"P=1500\n"
+argument_list|)
+expr_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"select \"adhoc\".my_sum2(\"name\",250) as p from \"adhoc\".EMPLOYEES\n"
+argument_list|)
+operator|.
+name|throws_
+argument_list|(
+literal|"No match found for function signature MY_SUM2(<CHARACTER>,<NUMERIC>)"
+argument_list|)
+expr_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"select \"adhoc\".my_sum2(\"empid\",0.0) as p from \"adhoc\".EMPLOYEES\n"
+argument_list|)
+operator|.
+name|throws_
+argument_list|(
+literal|"No match found for function signature MY_SUM2(<NUMERIC>,<NUMERIC>)"
 argument_list|)
 expr_stmt|;
 block|}
@@ -2448,11 +2758,7 @@ argument_list|)
 operator|.
 name|throws_
 argument_list|(
-literal|"Cannot apply 'MY_SUM3' to arguments of type "
-operator|+
-literal|"'MY_SUM3(<JAVATYPE(CLASS JAVA.LANG.STRING)>)'. "
-operator|+
-literal|"Supported form(s): 'MY_SUM3(<NUMERIC>)"
+literal|"No match found for function signature MY_SUM3(<CHARACTER>)"
 argument_list|)
 expr_stmt|;
 name|with

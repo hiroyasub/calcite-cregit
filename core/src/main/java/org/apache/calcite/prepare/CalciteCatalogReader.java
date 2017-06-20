@@ -2319,6 +2319,8 @@ argument_list|,
 literal|false
 argument_list|,
 literal|false
+argument_list|,
+name|typeFactory
 argument_list|)
 return|;
 block|}
