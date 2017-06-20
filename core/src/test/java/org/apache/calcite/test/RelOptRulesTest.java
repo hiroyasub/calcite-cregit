@@ -5286,6 +5286,81 @@ literal|"where deptno = 10\n"
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Tests to see if the final branch of union is missed */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testUnionMergeRule
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+name|HepProgram
+name|program
+init|=
+operator|new
+name|HepProgramBuilder
+argument_list|()
+operator|.
+name|addRuleInstance
+argument_list|(
+name|ProjectSetOpTransposeRule
+operator|.
+name|INSTANCE
+argument_list|)
+operator|.
+name|addRuleInstance
+argument_list|(
+name|ProjectRemoveRule
+operator|.
+name|INSTANCE
+argument_list|)
+operator|.
+name|addRuleInstance
+argument_list|(
+name|UnionMergeRule
+operator|.
+name|INSTANCE
+argument_list|)
+operator|.
+name|build
+argument_list|()
+decl_stmt|;
+name|checkPlanning
+argument_list|(
+name|program
+argument_list|,
+literal|"select * from (\n"
+operator|+
+literal|"select * from (\n"
+operator|+
+literal|"  select name, deptno from dept\n"
+operator|+
+literal|"  union all\n"
+operator|+
+literal|"  select name, deptno from\n"
+operator|+
+literal|"  (\n"
+operator|+
+literal|"    select name, deptno, count(1) from dept group by name, deptno\n"
+operator|+
+literal|"    union all\n"
+operator|+
+literal|"    select name, deptno, count(1) from dept group by name, deptno\n"
+operator|+
+literal|"  ) subq\n"
+operator|+
+literal|") a\n"
+operator|+
+literal|"union all\n"
+operator|+
+literal|"select name, deptno from dept\n"
+operator|+
+literal|") aa\n"
+argument_list|)
+expr_stmt|;
+block|}
 comment|/** Tests that a filters is combined are combined if they are identical,    * even if one of them originates in an ON clause of a JOIN. */
 annotation|@
 name|Test
