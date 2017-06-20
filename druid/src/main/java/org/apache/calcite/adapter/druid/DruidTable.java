@@ -697,6 +697,23 @@ argument_list|)
 argument_list|)
 return|;
 block|}
+specifier|public
+name|boolean
+name|isMetric
+parameter_list|(
+name|String
+name|name
+parameter_list|)
+block|{
+return|return
+name|metricFieldNames
+operator|.
+name|contains
+argument_list|(
+name|name
+argument_list|)
+return|;
+block|}
 comment|/** Creates a {@link RelDataType} from a map of    * field names and types. */
 specifier|private
 specifier|static

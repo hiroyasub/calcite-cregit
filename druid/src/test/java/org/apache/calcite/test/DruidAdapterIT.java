@@ -7409,6 +7409,390 @@ literal|"EXPR$0=11"
 argument_list|)
 expr_stmt|;
 block|}
+comment|/**    * Test to ensure that count(distinct ...) gets pushed to Druid when approximate results are    * acceptable    * */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testDistinctCountWhenApproxResultsAccepted
+parameter_list|()
+block|{
+name|String
+name|sql
+init|=
+literal|"select count(distinct \"customer_id\") from \"foodmart\""
+decl_stmt|;
+name|String
+name|expectedSubExplain
+init|=
+literal|"DruidQuery(table=[[foodmart, foodmart]], intervals=[[1900-01-09T00"
+operator|+
+literal|":00:00.000/2992-01-10T00:00:00.000]], groups=[{}], aggs=[[COUNT(DISTINCT $20)]])"
+decl_stmt|;
+name|String
+name|expectedAggregate
+init|=
+literal|"{'type':'cardinality','name':"
+operator|+
+literal|"'EXPR$0','fieldNames':['customer_id']}"
+decl_stmt|;
+name|testCountWithApproxDistinct
+argument_list|(
+literal|true
+argument_list|,
+name|sql
+argument_list|,
+name|expectedSubExplain
+argument_list|,
+name|expectedAggregate
+argument_list|)
+expr_stmt|;
+block|}
+comment|/**    * Test to ensure that count(distinct ...) doesn't get pushed to Druid when approximate results    * are not acceptable    */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testDistinctCountWhenApproxResultsNotAccepted
+parameter_list|()
+block|{
+name|String
+name|sql
+init|=
+literal|"select count(distinct \"customer_id\") from \"foodmart\""
+decl_stmt|;
+name|String
+name|expectedSubExplain
+init|=
+literal|"  BindableAggregate(group=[{}], EXPR$0=[COUNT($0)])\n"
+operator|+
+literal|"    DruidQuery(table=[[foodmart, foodmart]], "
+operator|+
+literal|"intervals=[[1900-01-09T00:00:00.000/2992-01-10T00:00:00.000]], "
+operator|+
+literal|"groups=[{20}], aggs=[[]])"
+decl_stmt|;
+name|testCountWithApproxDistinct
+argument_list|(
+literal|false
+argument_list|,
+name|sql
+argument_list|,
+name|expectedSubExplain
+argument_list|)
+expr_stmt|;
+block|}
+comment|/**    * Test to ensure that a count distinct on metric does not get pushed into Druid    */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testDistinctCountOnMetric
+parameter_list|()
+block|{
+name|String
+name|sql
+init|=
+literal|"select count(distinct \"store_sales\") from \"foodmart\" "
+operator|+
+literal|"where \"store_state\" = 'WA'"
+decl_stmt|;
+name|String
+name|expectedSubExplain
+init|=
+literal|"  BindableAggregate(group=[{}], EXPR$0=[COUNT($0)])\n"
+operator|+
+literal|"    BindableAggregate(group=[{1}])"
+decl_stmt|;
+name|testCountWithApproxDistinct
+argument_list|(
+literal|true
+argument_list|,
+name|sql
+argument_list|,
+name|expectedSubExplain
+argument_list|)
+expr_stmt|;
+name|testCountWithApproxDistinct
+argument_list|(
+literal|false
+argument_list|,
+name|sql
+argument_list|,
+name|expectedSubExplain
+argument_list|)
+expr_stmt|;
+block|}
+comment|/**    * Test to ensure that a count on a metric does not get pushed into Druid    */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testCountOnMetric
+parameter_list|()
+block|{
+name|String
+name|sql
+init|=
+literal|"select \"brand_name\", count(\"store_sales\") from \"foodmart\" "
+operator|+
+literal|"group by \"brand_name\""
+decl_stmt|;
+name|String
+name|expectedSubExplain
+init|=
+literal|"  BindableAggregate(group=[{0}], EXPR$1=[COUNT($1)])\n"
+operator|+
+literal|"    DruidQuery(table=[[foodmart, foodmart]], intervals=[[1900-01-09T00:00:00.000/"
+operator|+
+literal|"2992-01-10T00:00:00.000]], projects=[[$2, $90]])"
+decl_stmt|;
+name|testCountWithApproxDistinct
+argument_list|(
+literal|true
+argument_list|,
+name|sql
+argument_list|,
+name|expectedSubExplain
+argument_list|)
+expr_stmt|;
+name|testCountWithApproxDistinct
+argument_list|(
+literal|false
+argument_list|,
+name|sql
+argument_list|,
+name|expectedSubExplain
+argument_list|)
+expr_stmt|;
+block|}
+comment|/**    * Test to ensure that count(*) is pushed into Druid    */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testCountStar
+parameter_list|()
+block|{
+name|String
+name|sql
+init|=
+literal|"select count(*) from \"foodmart\""
+decl_stmt|;
+name|String
+name|expectedSubExplain
+init|=
+literal|"  DruidQuery(table=[[foodmart, foodmart]], "
+operator|+
+literal|"intervals=[[1900-01-09T00:00:00.000/2992-01-10T00:00:00.000]], "
+operator|+
+literal|"projects=[[]], groups=[{}], aggs=[[COUNT()]])"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+name|expectedSubExplain
+argument_list|)
+expr_stmt|;
+block|}
+comment|/**    * Test to ensure that count() aggregates with metric columns are not pushed into Druid    * even when the metric column has been renamed    */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testCountOnMetricRenamed
+parameter_list|()
+block|{
+name|String
+name|sql
+init|=
+literal|"select \"B\", count(\"A\") from "
+operator|+
+literal|"(select \"unit_sales\" as \"A\", \"customer_id\" as \"B\" from \"foodmart\") "
+operator|+
+literal|"group by \"B\""
+decl_stmt|;
+name|String
+name|expectedSubExplain
+init|=
+literal|"  BindableAggregate(group=[{0}], EXPR$1=[COUNT($1)])\n"
+operator|+
+literal|"    DruidQuery(table=[[foodmart, foodmart]], intervals=[[1900-01-09T00:00:00.000"
+operator|+
+literal|"/2992-01-10T00:00:00.000]], projects=[[$20, $89]])\n"
+decl_stmt|;
+name|testCountWithApproxDistinct
+argument_list|(
+literal|true
+argument_list|,
+name|sql
+argument_list|,
+name|expectedSubExplain
+argument_list|)
+expr_stmt|;
+name|testCountWithApproxDistinct
+argument_list|(
+literal|false
+argument_list|,
+name|sql
+argument_list|,
+name|expectedSubExplain
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testDistinctCountOnMetricRenamed
+parameter_list|()
+block|{
+name|String
+name|sql
+init|=
+literal|"select \"B\", count(distinct \"A\") from "
+operator|+
+literal|"(select \"unit_sales\" as \"A\", \"customer_id\" as \"B\" from \"foodmart\") "
+operator|+
+literal|"group by \"B\""
+decl_stmt|;
+name|String
+name|expectedSubExplain
+init|=
+literal|"  BindableAggregate(group=[{0}], EXPR$1=[COUNT($1)])\n"
+operator|+
+literal|"    DruidQuery(table=[[foodmart, foodmart]], intervals=[[1900-01-09T00:00:"
+operator|+
+literal|"00.000/2992-01-10T00:00:00.000]], projects=[[$20, $89]], groups=[{0, 1}], "
+operator|+
+literal|"aggs=[[]])"
+decl_stmt|;
+name|testCountWithApproxDistinct
+argument_list|(
+literal|true
+argument_list|,
+name|sql
+argument_list|,
+name|expectedSubExplain
+argument_list|)
+expr_stmt|;
+name|testCountWithApproxDistinct
+argument_list|(
+literal|false
+argument_list|,
+name|sql
+argument_list|,
+name|expectedSubExplain
+argument_list|)
+expr_stmt|;
+block|}
+specifier|private
+name|void
+name|testCountWithApproxDistinct
+parameter_list|(
+name|boolean
+name|approx
+parameter_list|,
+name|String
+name|sql
+parameter_list|,
+name|String
+name|expectedExplain
+parameter_list|)
+block|{
+name|testCountWithApproxDistinct
+argument_list|(
+name|approx
+argument_list|,
+name|sql
+argument_list|,
+name|expectedExplain
+argument_list|,
+literal|""
+argument_list|)
+expr_stmt|;
+block|}
+specifier|private
+name|void
+name|testCountWithApproxDistinct
+parameter_list|(
+name|boolean
+name|approx
+parameter_list|,
+name|String
+name|sql
+parameter_list|,
+name|String
+name|expectedExplain
+parameter_list|,
+name|String
+name|expectedDruidQuery
+parameter_list|)
+block|{
+name|CalciteAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|enable
+argument_list|(
+name|enabled
+argument_list|()
+argument_list|)
+operator|.
+name|with
+argument_list|(
+name|ImmutableMap
+operator|.
+name|of
+argument_list|(
+literal|"model"
+argument_list|,
+name|FOODMART
+operator|.
+name|getPath
+argument_list|()
+argument_list|)
+argument_list|)
+operator|.
+name|with
+argument_list|(
+name|CalciteConnectionProperty
+operator|.
+name|APPROXIMATE_DISTINCT_COUNT
+operator|.
+name|camelName
+argument_list|()
+argument_list|,
+name|approx
+argument_list|)
+operator|.
+name|query
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|runs
+argument_list|()
+operator|.
+name|explainContains
+argument_list|(
+name|expectedExplain
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|druidChecker
+argument_list|(
+name|expectedDruidQuery
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
 block|}
 end_class
 
