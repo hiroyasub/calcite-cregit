@@ -564,6 +564,16 @@ argument_list|(
 literal|2
 argument_list|)
 argument_list|)
+operator|&&
+operator|!
+name|Minus
+operator|.
+name|class
+operator|.
+name|isAssignableFrom
+argument_list|(
+name|setOpClass
+argument_list|)
 condition|)
 block|{
 name|relBuilder
