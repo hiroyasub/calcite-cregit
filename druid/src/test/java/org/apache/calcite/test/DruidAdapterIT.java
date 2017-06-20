@@ -7305,6 +7305,18 @@ literal|"SELECT count(\"countryName\") FROM (SELECT \"countryName\" FROM "
 operator|+
 literal|"\"wikiticker\") as a"
 decl_stmt|;
+specifier|final
+name|String
+name|plan2
+init|=
+literal|"PLAN=EnumerableInterpreter\n"
+operator|+
+literal|"  BindableAggregate(group=[{}], EXPR$0=[COUNT($0)])\n"
+operator|+
+literal|"    DruidQuery(table=[[wiki, wikiticker]], "
+operator|+
+literal|"intervals=[[1900-01-01T00:00:00.000/3000-01-01T00:00:00.000]], projects=[[$7]])"
+decl_stmt|;
 name|sql
 argument_list|(
 name|sql2
@@ -7319,15 +7331,37 @@ argument_list|)
 operator|.
 name|explainContains
 argument_list|(
-literal|"PLAN"
+name|plan2
+argument_list|)
+expr_stmt|;
+specifier|final
+name|String
+name|sql3
+init|=
+literal|"SELECT count(*), count(\"countryName\") FROM \"wikiticker\""
+decl_stmt|;
+specifier|final
+name|String
+name|plan3
+init|=
+literal|"PLAN=EnumerableInterpreter\n"
 operator|+
-literal|"=EnumerableInterpreter\n"
-operator|+
-literal|"  BindableAggregate(group=[{}], EXPR$0=[COUNT($0)])\n"
+literal|"  BindableAggregate(group=[{}], EXPR$0=[COUNT()], EXPR$1=[COUNT($0)])\n"
 operator|+
 literal|"    DruidQuery(table=[[wiki, wikiticker]], "
 operator|+
 literal|"intervals=[[1900-01-01T00:00:00.000/3000-01-01T00:00:00.000]], projects=[[$7]])"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql3
+argument_list|,
+name|WIKI_AUTO2
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+name|plan3
 argument_list|)
 expr_stmt|;
 block|}

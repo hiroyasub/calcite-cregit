@@ -962,7 +962,8 @@ block|{
 case|case
 name|COUNT
 case|:
-return|return
+if|if
+condition|(
 operator|!
 name|aggregateCall
 operator|.
@@ -971,7 +972,14 @@ argument_list|()
 operator|.
 name|isEmpty
 argument_list|()
+condition|)
+block|{
+comment|// Cannot handle this aggregate function
+return|return
+literal|true
 return|;
+block|}
+break|break;
 case|case
 name|SUM
 case|:
