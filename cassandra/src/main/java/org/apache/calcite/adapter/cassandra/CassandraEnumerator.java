@@ -484,7 +484,19 @@ name|DataType
 operator|.
 name|cdouble
 argument_list|()
-operator|||
+condition|)
+block|{
+return|return
+name|current
+operator|.
+name|getDouble
+argument_list|(
+name|index
+argument_list|)
+return|;
+block|}
+if|else if
+condition|(
 name|type
 operator|==
 name|DataType
@@ -496,7 +508,7 @@ block|{
 return|return
 name|current
 operator|.
-name|getDouble
+name|getFloat
 argument_list|(
 name|index
 argument_list|)
