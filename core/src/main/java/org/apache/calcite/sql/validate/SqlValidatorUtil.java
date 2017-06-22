@@ -1102,7 +1102,7 @@ name|RelDataTypeFieldImpl
 argument_list|(
 name|identifier
 operator|.
-name|getSimple
+name|toString
 argument_list|()
 argument_list|,
 name|extendedFieldOffset

@@ -12901,7 +12901,6 @@ name|void
 name|testInsertExtendedColumnList
 parameter_list|()
 block|{
-specifier|final
 name|String
 name|expected
 init|=
@@ -12914,6 +12913,30 @@ decl_stmt|;
 name|sql
 argument_list|(
 literal|"insert into emps(z boolean)(x,y) select * from emps"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+name|conformance
+operator|=
+name|SqlConformanceEnum
+operator|.
+name|LENIENT
+expr_stmt|;
+name|expected
+operator|=
+literal|"INSERT INTO `EMPS` EXTEND (`Z` BOOLEAN) (`X`, `Y`, `Z`)\n"
+operator|+
+literal|"(SELECT *\n"
+operator|+
+literal|"FROM `EMPS`)"
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"insert into emps(x, y, z boolean) select * from emps"
 argument_list|)
 operator|.
 name|ok
@@ -13009,7 +13032,6 @@ name|void
 name|testInsertCaseSensitiveExtendedColumnList
 parameter_list|()
 block|{
-specifier|final
 name|String
 name|expected
 init|=
@@ -13022,6 +13044,30 @@ decl_stmt|;
 name|sql
 argument_list|(
 literal|"insert into \"emps\"(\"z\" boolean)(\"x\",\"y\") select * from emps"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+name|conformance
+operator|=
+name|SqlConformanceEnum
+operator|.
+name|LENIENT
+expr_stmt|;
+name|expected
+operator|=
+literal|"INSERT INTO `emps` EXTEND (`z` BOOLEAN) (`x`, `y`, `z`)\n"
+operator|+
+literal|"(SELECT *\n"
+operator|+
+literal|"FROM `EMPS`)"
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"insert into \"emps\"(\"x\", \"y\", \"z\" boolean) select * from emps"
 argument_list|)
 operator|.
 name|ok

@@ -25399,6 +25399,113 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testInsertWithExtendedColumns
+parameter_list|()
+block|{
+specifier|final
+name|SqlTester
+name|lenient
+init|=
+name|tester
+operator|.
+name|withConformance
+argument_list|(
+name|SqlConformanceEnum
+operator|.
+name|LENIENT
+argument_list|)
+decl_stmt|;
+specifier|final
+name|SqlTester
+name|strict
+init|=
+name|tester
+operator|.
+name|withConformance
+argument_list|(
+name|SqlConformanceEnum
+operator|.
+name|STRICT_2003
+argument_list|)
+decl_stmt|;
+name|String
+name|sql0
+init|=
+literal|"insert into empnullables (empno, ename, \"f.dc\" varchar(10))\n"
+operator|+
+literal|"values (?, ?, ?)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql0
+argument_list|)
+operator|.
+name|tester
+argument_list|(
+name|lenient
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+operator|.
+name|bindType
+argument_list|(
+literal|"RecordType(INTEGER ?0, VARCHAR(20) ?1, VARCHAR(10) ?2)"
+argument_list|)
+operator|.
+name|tester
+argument_list|(
+name|strict
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Extended columns not allowed under "
+operator|+
+literal|"the current SQL conformance level"
+argument_list|)
+expr_stmt|;
+name|sql0
+operator|=
+literal|"insert into empnullables (empno, ename, dynamic_column double not null)\n"
+operator|+
+literal|"values (?, ?, ?)"
+expr_stmt|;
+name|sql
+argument_list|(
+name|sql0
+argument_list|)
+operator|.
+name|tester
+argument_list|(
+name|lenient
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+operator|.
+name|bindType
+argument_list|(
+literal|"RecordType(INTEGER ?0, VARCHAR(20) ?1, DOUBLE ?2)"
+argument_list|)
+operator|.
+name|tester
+argument_list|(
+name|strict
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Extended columns not allowed under "
+operator|+
+literal|"the current SQL conformance level"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testInsertBindSubset
 parameter_list|()
 block|{
