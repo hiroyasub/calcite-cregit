@@ -467,6 +467,17 @@ operator|.
 name|ARRAY
 argument_list|)
 decl|.
+name|put
+argument_list|(
+name|List
+operator|.
+name|class
+argument_list|,
+name|SqlTypeName
+operator|.
+name|ARRAY
+argument_list|)
+decl|.
 name|build
 argument_list|()
 decl_stmt|;
