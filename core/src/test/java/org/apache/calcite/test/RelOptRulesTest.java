@@ -6981,6 +6981,65 @@ literal|"select * from (values (1,2)) where 1 + 2> 3 + CAST(NULL AS INTEGER)"
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1860">[CALCITE-1860]    * Duplicate null predicates cause NullPointerException in RexUtil</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testReduceConstantsNull
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+name|HepProgram
+name|program
+init|=
+operator|new
+name|HepProgramBuilder
+argument_list|()
+operator|.
+name|addRuleInstance
+argument_list|(
+name|ReduceExpressionsRule
+operator|.
+name|FILTER_INSTANCE
+argument_list|)
+operator|.
+name|build
+argument_list|()
+decl_stmt|;
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select * from (\n"
+operator|+
+literal|"  select *\n"
+operator|+
+literal|"  from (\n"
+operator|+
+literal|"    select cast(null as integer) as n\n"
+operator|+
+literal|"    from emp)\n"
+operator|+
+literal|"  where n is null and n is null)\n"
+operator|+
+literal|"where n is null"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|with
+argument_list|(
+name|program
+argument_list|)
+operator|.
+name|check
+argument_list|()
+expr_stmt|;
+block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-566">[CALCITE-566]    * ReduceExpressionsRule requires planner to have an Executor</a>. */
 annotation|@
 name|Test
