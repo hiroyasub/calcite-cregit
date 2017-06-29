@@ -3306,12 +3306,9 @@ argument_list|(
 literal|"1 in (cast(null as integer), null)"
 argument_list|)
 expr_stmt|;
-comment|// Expression is illegal, but error message is not perfect.
-name|checkWholeExpFails
+name|checkExp
 argument_list|(
 literal|"1 in (null, null)"
-argument_list|,
-literal|"Values passed to IN operator must have compatible types"
 argument_list|)
 expr_stmt|;
 block|}

@@ -309,6 +309,11 @@ name|SqlTypeName
 name|typeName
 parameter_list|)
 function_decl|;
+comment|/**    * Creates a SQL type that represents the "unknown" type.    * It is only equal to itself, and is distinct from the NULL type.     * @return unknown type    */
+name|RelDataType
+name|createUnknownType
+parameter_list|()
+function_decl|;
 comment|/**    * Creates a SQL type with length (precision) but no scale.    *    * @param typeName  Name of the type, for example {@link SqlTypeName#VARCHAR}.    *                  Never null.    * @param precision Maximum length of the value (non-numeric types) or the    *                  precision of the value (numeric/datetime types).    *                  Must be non-negative or    *                  {@link RelDataType#PRECISION_NOT_SPECIFIED}.    * @return canonical type descriptor    */
 name|RelDataType
 name|createSqlType

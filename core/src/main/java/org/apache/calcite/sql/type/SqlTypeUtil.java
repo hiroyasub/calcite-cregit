@@ -4626,7 +4626,7 @@ return|return
 literal|true
 return|;
 block|}
-comment|// If one of the operators is of type 'ANY', return true.
+comment|// If one of the arguments is of type 'ANY', return true.
 if|if
 condition|(
 name|family1
@@ -4640,6 +4640,26 @@ operator|==
 name|SqlTypeFamily
 operator|.
 name|ANY
+condition|)
+block|{
+return|return
+literal|true
+return|;
+block|}
+comment|// If one of the arguments is of type 'NULL', return true.
+if|if
+condition|(
+name|family1
+operator|==
+name|SqlTypeFamily
+operator|.
+name|NULL
+operator|||
+name|family2
+operator|==
+name|SqlTypeFamily
+operator|.
+name|NULL
 condition|)
 block|{
 return|return

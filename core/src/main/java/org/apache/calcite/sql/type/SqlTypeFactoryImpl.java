@@ -201,7 +201,6 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|// implement RelDataTypeFactory
 specifier|public
 name|RelDataType
 name|createSqlType
@@ -255,7 +254,6 @@ name|newType
 argument_list|)
 return|;
 block|}
-comment|// implement RelDataTypeFactory
 specifier|public
 name|RelDataType
 name|createSqlType
@@ -367,7 +365,6 @@ name|newType
 argument_list|)
 return|;
 block|}
-comment|// implement RelDataTypeFactory
 specifier|public
 name|RelDataType
 name|createSqlType
@@ -462,7 +459,22 @@ name|newType
 argument_list|)
 return|;
 block|}
-comment|// implement RelDataTypeFactory
+specifier|public
+name|RelDataType
+name|createUnknownType
+parameter_list|()
+block|{
+return|return
+name|canonize
+argument_list|(
+operator|new
+name|UnknownSqlType
+argument_list|(
+name|this
+argument_list|)
+argument_list|)
+return|;
+block|}
 specifier|public
 name|RelDataType
 name|createMultisetType
@@ -564,7 +576,6 @@ name|newType
 argument_list|)
 return|;
 block|}
-comment|// implement RelDataTypeFactory
 specifier|public
 name|RelDataType
 name|createSqlIntervalType
@@ -593,7 +604,6 @@ name|newType
 argument_list|)
 return|;
 block|}
-comment|// implement RelDataTypeFactory
 specifier|public
 name|RelDataType
 name|createTypeWithCharsetAndCollation
@@ -714,7 +724,8 @@ name|newType
 argument_list|)
 return|;
 block|}
-comment|// implement RelDataTypeFactory
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|leastRestrictive
@@ -945,7 +956,8 @@ name|resultType
 return|;
 block|}
 block|}
-comment|// implement RelDataTypeFactory
+annotation|@
+name|Override
 specifier|public
 name|RelDataType
 name|createTypeWithNullability
@@ -2753,6 +2765,55 @@ block|}
 return|return
 name|type
 return|;
+block|}
+comment|/** The unknown type. Similar to the NULL type, but is only equal to    * itself. */
+specifier|private
+specifier|static
+class|class
+name|UnknownSqlType
+extends|extends
+name|BasicSqlType
+block|{
+name|UnknownSqlType
+parameter_list|(
+name|RelDataTypeFactory
+name|typeFactory
+parameter_list|)
+block|{
+name|super
+argument_list|(
+name|typeFactory
+operator|.
+name|getTypeSystem
+argument_list|()
+argument_list|,
+name|SqlTypeName
+operator|.
+name|NULL
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Override
+specifier|protected
+name|void
+name|generateTypeString
+parameter_list|(
+name|StringBuilder
+name|sb
+parameter_list|,
+name|boolean
+name|withDetail
+parameter_list|)
+block|{
+name|sb
+operator|.
+name|append
+argument_list|(
+literal|"UNKNOWN"
+argument_list|)
+expr_stmt|;
+block|}
 block|}
 block|}
 end_class

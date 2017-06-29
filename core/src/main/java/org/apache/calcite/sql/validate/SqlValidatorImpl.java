@@ -1748,6 +1748,7 @@ specifier|final
 name|RelDataTypeFactory
 name|typeFactory
 decl_stmt|;
+comment|/** The type of dynamic parameters until a type is imposed on them. */
 specifier|protected
 specifier|final
 name|RelDataType
@@ -1933,18 +1934,12 @@ argument_list|(
 name|conformance
 argument_list|)
 expr_stmt|;
-comment|// NOTE jvs 23-Dec-2003:  This is used as the type for dynamic
-comment|// parameters and null literals until a real type is imposed for them.
 name|unknownType
 operator|=
 name|typeFactory
 operator|.
-name|createSqlType
-argument_list|(
-name|SqlTypeName
-operator|.
-name|NULL
-argument_list|)
+name|createUnknownType
+argument_list|()
 expr_stmt|;
 name|booleanType
 operator|=
