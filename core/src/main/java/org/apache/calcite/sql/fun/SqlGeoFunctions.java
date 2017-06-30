@@ -125,6 +125,22 @@ name|apache
 operator|.
 name|calcite
 operator|.
+name|runtime
+operator|.
+name|Geometries
+operator|.
+name|Geom
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
 name|schema
 operator|.
 name|ScannableTable
@@ -298,7 +314,7 @@ parameter_list|()
 block|{
 block|}
 comment|// Geometry table functions =================================================
-comment|/** Calculates a regular grid of polygons based on {@code geom}.    *    * @see GeoFunctions#ST_MakeGrid */
+comment|/** Calculates a regular grid of polygons based on {@code geom}.    *    * @see GeoFunctions ST_MakeGrid */
 annotation|@
 name|SuppressWarnings
 argument_list|(
@@ -314,8 +330,6 @@ name|ScannableTable
 name|ST_MakeGrid
 parameter_list|(
 specifier|final
-name|GeoFunctions
-operator|.
 name|Geom
 name|geom
 parameter_list|,
@@ -342,7 +356,7 @@ literal|false
 argument_list|)
 return|;
 block|}
-comment|/** Calculates a regular grid of points based on {@code geom}.    *    * @see GeoFunctions#ST_MakeGridPoints */
+comment|/** Calculates a regular grid of points based on {@code geom}.    *    * @see GeoFunctions ST_MakeGridPoints */
 annotation|@
 name|SuppressWarnings
 argument_list|(
@@ -358,8 +372,6 @@ name|ScannableTable
 name|ST_MakeGridPoints
 parameter_list|(
 specifier|final
-name|GeoFunctions
-operator|.
 name|Geom
 name|geom
 parameter_list|,
@@ -396,8 +408,6 @@ name|ScannableTable
 block|{
 specifier|private
 specifier|final
-name|GeoFunctions
-operator|.
 name|Geom
 name|geom
 decl_stmt|;
@@ -417,8 +427,6 @@ name|point
 decl_stmt|;
 name|GridTable
 parameter_list|(
-name|GeoFunctions
-operator|.
 name|Geom
 name|geom
 parameter_list|,

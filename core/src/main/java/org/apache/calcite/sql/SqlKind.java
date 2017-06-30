@@ -771,6 +771,27 @@ block|,
 comment|/** {@code FOREIGN KEY} constraint. */
 name|FOREIGN_KEY
 block|,
+comment|// Spatial functions. They are registered as "user-defined functions" but it
+comment|// is convenient to have a "kind" so that we can quickly match them in planner
+comment|// rules.
+comment|/** The {@code ST_DWithin} geo-spatial function. */
+name|ST_DWITHIN
+block|,
+comment|/** The {@code ST_Point} function. */
+name|ST_POINT
+block|,
+comment|/** The {@code ST_Point} function that makes a 3D point. */
+name|ST_POINT3
+block|,
+comment|/** The {@code ST_MakeLine} function that makes a line. */
+name|ST_MAKE_LINE
+block|,
+comment|/** The {@code ST_Contains} function that tests whether one geometry contains    * another. */
+name|ST_CONTAINS
+block|,
+comment|/** The {@code Hilbert} function that converts (x, y) to a position on a    * Hilbert space-filling curve. */
+name|HILBERT
+block|,
 comment|// DDL and session control statements follow. The list is not exhaustive: feel
 comment|// free to add more.
 comment|/** {@code COMMIT} session control statement. */

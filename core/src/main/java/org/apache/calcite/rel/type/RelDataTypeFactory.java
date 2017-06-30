@@ -833,6 +833,12 @@ specifier|final
 name|RelDataTypeFactory
 name|typeFactory
 decl_stmt|;
+specifier|private
+name|boolean
+name|nullableRecord
+init|=
+literal|false
+decl_stmt|;
 comment|/**      * Creates a Builder with the given type factory.      */
 specifier|public
 name|Builder
@@ -1252,6 +1258,25 @@ return|return
 name|this
 return|;
 block|}
+comment|/** Sets whether the record type will be nullable. */
+specifier|public
+name|Builder
+name|nullableRecord
+parameter_list|(
+name|boolean
+name|nullableRecord
+parameter_list|)
+block|{
+name|this
+operator|.
+name|nullableRecord
+operator|=
+name|nullableRecord
+expr_stmt|;
+return|return
+name|this
+return|;
+block|}
 comment|/**      * Makes sure that field names are unique.      */
 specifier|public
 name|Builder
@@ -1313,6 +1338,10 @@ block|{
 return|return
 name|typeFactory
 operator|.
+name|createTypeWithNullability
+argument_list|(
+name|typeFactory
+operator|.
 name|createStructType
 argument_list|(
 name|kind
@@ -1320,6 +1349,9 @@ argument_list|,
 name|types
 argument_list|,
 name|names
+argument_list|)
+argument_list|,
+name|nullableRecord
 argument_list|)
 return|;
 block|}

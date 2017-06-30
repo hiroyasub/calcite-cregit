@@ -477,7 +477,7 @@ name|sql
 operator|.
 name|util
 operator|.
-name|ChainedSqlOperatorTable
+name|SqlOperatorTables
 import|;
 end_import
 
@@ -1985,9 +1985,9 @@ specifier|final
 name|SqlOperatorTable
 name|opTab
 init|=
-name|ChainedSqlOperatorTable
+name|SqlOperatorTables
 operator|.
-name|of
+name|chain
 argument_list|(
 name|operatorTable
 argument_list|,

@@ -518,7 +518,6 @@ operator|.
 name|build
 argument_list|()
 decl_stmt|;
-empty_stmt|;
 specifier|final
 name|RelDataType
 name|skillRecordType

@@ -296,8 +296,8 @@ name|MockCatalogReader
 block|{
 specifier|private
 specifier|final
-name|Fixture
-name|fixture
+name|ObjectSqlType
+name|addressType
 decl_stmt|;
 comment|/**    * Creates a MockCatalogReader.    *    *<p>Caller must then call {@link #init} to populate with data.</p>    *    * @param typeFactory   Type factory    * @param caseSensitive case sensitivity    */
 specifier|public
@@ -317,13 +317,15 @@ argument_list|,
 name|caseSensitive
 argument_list|)
 expr_stmt|;
-name|fixture
+name|addressType
 operator|=
 operator|new
 name|Fixture
 argument_list|(
 name|typeFactory
 argument_list|)
+operator|.
+name|addressType
 expr_stmt|;
 block|}
 annotation|@
@@ -342,8 +344,6 @@ name|typeName
 operator|.
 name|equalsDeep
 argument_list|(
-name|fixture
-operator|.
 name|addressType
 operator|.
 name|getSqlIdentifier
@@ -356,8 +356,6 @@ argument_list|)
 condition|)
 block|{
 return|return
-name|fixture
-operator|.
 name|addressType
 return|;
 block|}
@@ -380,12 +378,15 @@ name|MockCatalogReader
 name|init
 parameter_list|()
 block|{
-name|ObjectSqlType
-name|addressType
-init|=
+specifier|final
+name|Fixture
 name|fixture
-operator|.
-name|addressType
+init|=
+operator|new
+name|Fixture
+argument_list|(
+name|typeFactory
+argument_list|)
 decl_stmt|;
 comment|// Register "SALES" schema.
 name|MockSchema

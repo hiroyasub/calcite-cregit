@@ -43,7 +43,7 @@ name|calcite
 operator|.
 name|runtime
 operator|.
-name|GeoFunctions
+name|Geometries
 import|;
 end_import
 
@@ -450,7 +450,7 @@ argument_list|)
 decl|.
 name|put
 argument_list|(
-name|GeoFunctions
+name|Geometries
 operator|.
 name|Geom
 operator|.

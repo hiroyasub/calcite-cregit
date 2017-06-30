@@ -199,7 +199,7 @@ name|calcite
 operator|.
 name|runtime
 operator|.
-name|GeoFunctions
+name|Geometries
 import|;
 end_import
 
@@ -1393,7 +1393,7 @@ case|case
 name|GEOMETRY
 case|:
 return|return
-name|GeoFunctions
+name|Geometries
 operator|.
 name|Geom
 operator|.

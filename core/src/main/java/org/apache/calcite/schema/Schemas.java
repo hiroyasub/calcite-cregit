@@ -2945,6 +2945,8 @@ name|isEmpty
 argument_list|()
 condition|)
 block|{
+comment|// If path starts with the name of the root schema, ignore the first step
+comment|// in the path.
 name|Preconditions
 operator|.
 name|checkState

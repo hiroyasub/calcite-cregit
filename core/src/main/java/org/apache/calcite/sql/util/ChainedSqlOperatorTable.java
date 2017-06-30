@@ -138,7 +138,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * ChainedSqlOperatorTable implements the {@link SqlOperatorTable} interface by  * chaining together any number of underlying operator table instances.  */
+comment|/**  * ChainedSqlOperatorTable implements the {@link SqlOperatorTable} interface by  * chaining together any number of underlying operator table instances.  *  *<p>To create, call {@link SqlOperatorTables#chain}.  */
 end_comment
 
 begin_class
@@ -158,11 +158,35 @@ argument_list|>
 name|tableList
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**    * Creates a table based on a given list.    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 name|ChainedSqlOperatorTable
 parameter_list|(
 name|List
+argument_list|<
+name|SqlOperatorTable
+argument_list|>
+name|tableList
+parameter_list|)
+block|{
+name|this
+argument_list|(
+name|ImmutableList
+operator|.
+name|copyOf
+argument_list|(
+name|tableList
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Internal constructor; call {@link SqlOperatorTables#chain}. */
+specifier|protected
+name|ChainedSqlOperatorTable
+parameter_list|(
+name|ImmutableList
 argument_list|<
 name|SqlOperatorTable
 argument_list|>
@@ -181,32 +205,10 @@ name|tableList
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Creates a {@code ChainedSqlOperatorTable}. */
-specifier|public
-specifier|static
-name|SqlOperatorTable
-name|of
-parameter_list|(
-name|SqlOperatorTable
-modifier|...
-name|tables
-parameter_list|)
-block|{
-return|return
-operator|new
-name|ChainedSqlOperatorTable
-argument_list|(
-name|ImmutableList
-operator|.
-name|copyOf
-argument_list|(
-name|tables
-argument_list|)
-argument_list|)
-return|;
-block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**    * Adds an underlying table. The order in which tables are added is    * significant; tables added earlier have higher lookup precedence. A table    * is not added if it is already on the list.    *    * @param table table to add    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 name|void
 name|add

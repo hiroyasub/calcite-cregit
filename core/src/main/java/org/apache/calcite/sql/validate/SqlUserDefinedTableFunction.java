@@ -183,6 +183,20 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|util
+operator|.
+name|Util
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|lang
@@ -269,6 +283,13 @@ else|:
 literal|null
 argument_list|,
 name|function
+argument_list|)
+expr_stmt|;
+name|Util
+operator|.
+name|discard
+argument_list|(
+name|paramTypes
 argument_list|)
 expr_stmt|;
 block|}

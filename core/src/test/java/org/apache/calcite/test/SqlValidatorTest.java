@@ -31629,7 +31629,7 @@ argument_list|)
 expr_stmt|;
 name|sql
 argument_list|(
-literal|"select * from (values (1)) group by ^ramp(3)^"
+literal|"select 0 from (values (1)) group by ^ramp(3)^"
 argument_list|)
 operator|.
 name|fails

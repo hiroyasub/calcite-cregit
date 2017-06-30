@@ -857,7 +857,7 @@ name|sql
 operator|.
 name|util
 operator|.
-name|ChainedSqlOperatorTable
+name|ListSqlOperatorTable
 import|;
 end_import
 
@@ -873,7 +873,7 @@ name|sql
 operator|.
 name|util
 operator|.
-name|ListSqlOperatorTable
+name|SqlOperatorTables
 import|;
 end_import
 
@@ -1657,9 +1657,9 @@ decl_stmt|;
 name|SqlOperatorTable
 name|opTab
 init|=
-name|ChainedSqlOperatorTable
+name|SqlOperatorTables
 operator|.
-name|of
+name|chain
 argument_list|(
 name|stdOpTab
 argument_list|,

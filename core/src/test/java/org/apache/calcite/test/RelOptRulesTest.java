@@ -979,6 +979,22 @@ name|rel
 operator|.
 name|rules
 operator|.
+name|SpatialRules
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|rules
+operator|.
 name|UnionMergeRule
 import|;
 end_import
@@ -1289,6 +1305,22 @@ name|sql
 operator|.
 name|validate
 operator|.
+name|SqlConformanceEnum
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|validate
+operator|.
 name|SqlMonotonicity
 import|;
 end_import
@@ -1350,6 +1382,22 @@ operator|.
 name|catalog
 operator|.
 name|MockCatalogReader
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|test
+operator|.
+name|catalog
+operator|.
+name|MockCatalogReaderExtended
 import|;
 end_import
 
@@ -1599,14 +1647,15 @@ name|RelOptTestBase
 block|{
 comment|//~ Methods ----------------------------------------------------------------
 specifier|private
-specifier|final
-name|PushProjector
-operator|.
-name|ExprCondition
+specifier|static
+name|boolean
 name|skipItem
-init|=
+parameter_list|(
+name|RexNode
 name|expr
-lambda|->
+parameter_list|)
+block|{
+return|return
 name|expr
 operator|instanceof
 name|RexCall
@@ -1628,7 +1677,8 @@ operator|.
 name|getName
 argument_list|()
 argument_list|)
-decl_stmt|;
+return|;
+block|}
 specifier|protected
 name|DiffRepository
 name|getDiffRepos
@@ -7702,6 +7752,8 @@ name|DEFAULT
 operator|.
 name|withPreserveExprCondition
 argument_list|(
+name|RelOptRulesTest
+operator|::
 name|skipItem
 argument_list|)
 operator|.
@@ -8322,6 +8374,8 @@ name|DEFAULT
 operator|.
 name|withPreserveExprCondition
 argument_list|(
+name|RelOptRulesTest
+operator|::
 name|skipItem
 argument_list|)
 operator|.
@@ -12090,19 +12144,51 @@ name|check
 argument_list|()
 expr_stmt|;
 block|}
+comment|/** Creates an environment for testing multi-join queries. */
 specifier|private
-name|void
-name|checkPlanning
+name|Sql
+name|multiJoin
 parameter_list|(
 name|String
 name|query
 parameter_list|)
 block|{
-specifier|final
-name|Tester
-name|tester1
+name|HepProgram
+name|program
 init|=
-name|tester
+operator|new
+name|HepProgramBuilder
+argument_list|()
+operator|.
+name|addMatchOrder
+argument_list|(
+name|HepMatchOrder
+operator|.
+name|BOTTOM_UP
+argument_list|)
+operator|.
+name|addRuleInstance
+argument_list|(
+name|CoreRules
+operator|.
+name|PROJECT_REMOVE
+argument_list|)
+operator|.
+name|addRuleInstance
+argument_list|(
+name|CoreRules
+operator|.
+name|JOIN_TO_MULTI_JOIN
+argument_list|)
+operator|.
+name|build
+argument_list|()
+decl_stmt|;
+return|return
+name|sql
+argument_list|(
+name|query
+argument_list|)
 operator|.
 name|withCatalogReaderFactory
 argument_list|(
@@ -12218,70 +12304,22 @@ argument_list|(
 name|table
 argument_list|)
 expr_stmt|;
-block_content|}
-block|return this
-empty_stmt|;
+block|}
+return|return
+name|this
+return|;
 block|}
 comment|// CHECKSTYLE: IGNORE 1
 block|}
-block|)
-class|;
 end_class
 
-begin_decl_stmt
-name|HepProgram
-name|program
-init|=
-operator|new
-name|HepProgramBuilder
-argument_list|()
-operator|.
-name|addMatchOrder
-argument_list|(
-name|HepMatchOrder
-operator|.
-name|BOTTOM_UP
-argument_list|)
-operator|.
-name|addRuleInstance
-argument_list|(
-name|CoreRules
-operator|.
-name|PROJECT_REMOVE
-argument_list|)
-operator|.
-name|addRuleInstance
-argument_list|(
-name|CoreRules
-operator|.
-name|JOIN_TO_MULTI_JOIN
-argument_list|)
-operator|.
-name|build
-argument_list|()
-decl_stmt|;
-end_decl_stmt
-
 begin_expr_stmt
-name|sql
-argument_list|(
-name|query
-argument_list|)
-operator|.
-name|withTester
-argument_list|(
-name|t
-lambda|->
-name|tester1
-argument_list|)
+unit|)
 operator|.
 name|with
 argument_list|(
 name|program
 argument_list|)
-operator|.
-name|check
-argument_list|()
 expr_stmt|;
 end_expr_stmt
 
@@ -12292,8 +12330,10 @@ name|void
 name|testConvertMultiJoinRuleOuterJoins
 parameter_list|()
 block|{
-name|checkPlanning
-argument_list|(
+specifier|final
+name|String
+name|sql
+init|=
 literal|"select * from "
 operator|+
 literal|"    (select * from "
@@ -12327,7 +12367,14 @@ operator|+
 literal|"    (select * from I inner join J on i = j) "
 operator|+
 literal|"    on a = i and h = j"
+decl_stmt|;
+name|multiJoin
+argument_list|(
+name|sql
 argument_list|)
+operator|.
+name|check
+argument_list|()
 expr_stmt|;
 block|}
 end_function
@@ -12341,10 +12388,13 @@ parameter_list|()
 block|{
 comment|// in (A right join B) join C, pushing C is not allowed;
 comment|// therefore there should be 2 MultiJoin
-name|checkPlanning
+name|multiJoin
 argument_list|(
 literal|"select * from A right join B on a = b join C on b = c"
 argument_list|)
+operator|.
+name|check
+argument_list|()
 expr_stmt|;
 block|}
 end_function
@@ -12358,10 +12408,13 @@ parameter_list|()
 block|{
 comment|// in (A join B) left join C, pushing C is allowed;
 comment|// therefore there should be 1 MultiJoin
-name|checkPlanning
+name|multiJoin
 argument_list|(
 literal|"select * from A join B on a = b left join C on b = c"
 argument_list|)
+operator|.
+name|check
+argument_list|()
 expr_stmt|;
 block|}
 end_function
@@ -12375,10 +12428,13 @@ parameter_list|()
 block|{
 comment|// in (A join B) right join C, pushing C is not allowed;
 comment|// therefore there should be 2 MultiJoin
-name|checkPlanning
+name|multiJoin
 argument_list|(
 literal|"select * from A join B on a = b right join C on b = c"
 argument_list|)
+operator|.
+name|check
+argument_list|()
 expr_stmt|;
 block|}
 end_function
@@ -26455,6 +26511,337 @@ expr_stmt|;
 block|}
 end_function
 
+begin_comment
+comment|/** Creates an environment for testing spatial queries. */
+end_comment
+
+begin_function
+specifier|private
+name|Sql
+name|spatial
+parameter_list|(
+name|String
+name|sql
+parameter_list|)
+block|{
+specifier|final
+name|HepProgram
+name|program
+init|=
+operator|new
+name|HepProgramBuilder
+argument_list|()
+operator|.
+name|addRuleInstance
+argument_list|(
+name|CoreRules
+operator|.
+name|PROJECT_REDUCE_EXPRESSIONS
+argument_list|)
+operator|.
+name|addRuleInstance
+argument_list|(
+name|CoreRules
+operator|.
+name|FILTER_REDUCE_EXPRESSIONS
+argument_list|)
+operator|.
+name|addRuleInstance
+argument_list|(
+name|SpatialRules
+operator|.
+name|INSTANCE
+argument_list|)
+operator|.
+name|build
+argument_list|()
+decl_stmt|;
+return|return
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|withCatalogReaderFactory
+argument_list|(
+parameter_list|(
+name|typeFactory
+parameter_list|,
+name|caseSensitive
+parameter_list|)
+lambda|->
+operator|new
+name|MockCatalogReaderExtended
+argument_list|(
+name|typeFactory
+argument_list|,
+name|caseSensitive
+argument_list|)
+operator|.
+name|init
+argument_list|()
+argument_list|)
+operator|.
+name|withConformance
+argument_list|(
+name|SqlConformanceEnum
+operator|.
+name|LENIENT
+argument_list|)
+operator|.
+name|with
+argument_list|(
+name|program
+argument_list|)
+return|;
+block|}
+end_function
+
+begin_comment
+comment|/** Tests that a call to {@code ST_DWithin}    * is rewritten with an additional range predicate. */
+end_comment
+
+begin_function
+annotation|@
+name|Test
+name|void
+name|testSpatialDWithinToHilbert
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"from GEO.Restaurants as r\n"
+operator|+
+literal|"where ST_DWithin(ST_Point(10.0, 20.0),\n"
+operator|+
+literal|"                 ST_Point(r.longitude, r.latitude), 10)"
+decl_stmt|;
+name|spatial
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|check
+argument_list|()
+expr_stmt|;
+block|}
+end_function
+
+begin_comment
+comment|/** Tests that a call to {@code ST_DWithin}    * is rewritten with an additional range predicate. */
+end_comment
+
+begin_function
+annotation|@
+name|Test
+name|void
+name|testSpatialDWithinToHilbertZero
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"from GEO.Restaurants as r\n"
+operator|+
+literal|"where ST_DWithin(ST_Point(10.0, 20.0),\n"
+operator|+
+literal|"                 ST_Point(r.longitude, r.latitude), 0)"
+decl_stmt|;
+name|spatial
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|check
+argument_list|()
+expr_stmt|;
+block|}
+end_function
+
+begin_function
+annotation|@
+name|Test
+name|void
+name|testSpatialDWithinToHilbertNegative
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"from GEO.Restaurants as r\n"
+operator|+
+literal|"where ST_DWithin(ST_Point(10.0, 20.0),\n"
+operator|+
+literal|"                 ST_Point(r.longitude, r.latitude), -2)"
+decl_stmt|;
+name|spatial
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|check
+argument_list|()
+expr_stmt|;
+block|}
+end_function
+
+begin_comment
+comment|/** As {@link #testSpatialDWithinToHilbert()} but arguments reversed. */
+end_comment
+
+begin_function
+annotation|@
+name|Test
+name|void
+name|testSpatialDWithinReversed
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"from GEO.Restaurants as r\n"
+operator|+
+literal|"where ST_DWithin(ST_Point(r.longitude, r.latitude),\n"
+operator|+
+literal|"                 ST_Point(10.0, 20.0), 6)"
+decl_stmt|;
+name|spatial
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|check
+argument_list|()
+expr_stmt|;
+block|}
+end_function
+
+begin_comment
+comment|/** Points within a given distance of a line. */
+end_comment
+
+begin_function
+annotation|@
+name|Test
+name|void
+name|testSpatialDWithinLine
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"from GEO.Restaurants as r\n"
+operator|+
+literal|"where ST_DWithin(\n"
+operator|+
+literal|"  ST_MakeLine(ST_Point(8.0, 20.0), ST_Point(12.0, 20.0)),\n"
+operator|+
+literal|"  ST_Point(r.longitude, r.latitude), 4)"
+decl_stmt|;
+name|spatial
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|check
+argument_list|()
+expr_stmt|;
+block|}
+end_function
+
+begin_comment
+comment|/** Points near a constant point, using ST_Contains and ST_Buffer. */
+end_comment
+
+begin_function
+annotation|@
+name|Test
+name|void
+name|testSpatialContainsPoint
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"from GEO.Restaurants as r\n"
+operator|+
+literal|"where ST_Contains(\n"
+operator|+
+literal|"  ST_Buffer(ST_Point(10.0, 20.0), 6),\n"
+operator|+
+literal|"  ST_Point(r.longitude, r.latitude))"
+decl_stmt|;
+name|spatial
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|check
+argument_list|()
+expr_stmt|;
+block|}
+end_function
+
+begin_comment
+comment|/** Constant reduction on geo-spatial expression. */
+end_comment
+
+begin_function
+annotation|@
+name|Test
+name|void
+name|testSpatialReduce
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select\n"
+operator|+
+literal|"  ST_Buffer(ST_Point(0.0, 1.0), 2) as b\n"
+operator|+
+literal|"from GEO.Restaurants as r"
+decl_stmt|;
+name|spatial
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|withProperty
+argument_list|(
+name|Hook
+operator|.
+name|REL_BUILDER_SIMPLIFY
+argument_list|,
+literal|false
+argument_list|)
+operator|.
+name|check
+argument_list|()
+expr_stmt|;
+block|}
+end_function
+
 begin_function
 annotation|@
 name|Test
@@ -29223,6 +29610,8 @@ argument_list|)
 operator|.
 name|withPreserveExprCondition
 argument_list|(
+name|RelOptRulesTest
+operator|::
 name|skipItem
 argument_list|)
 operator|.
