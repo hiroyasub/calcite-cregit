@@ -18162,6 +18162,58 @@ argument_list|()
 expr_stmt|;
 name|sql
 argument_list|(
+literal|"select ^empno^, count(*) from emp group by 1 order by 1"
+argument_list|)
+operator|.
+name|tester
+argument_list|(
+name|strict
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Expression 'EMPNO' is not being grouped"
+argument_list|)
+operator|.
+name|tester
+argument_list|(
+name|lenient
+argument_list|)
+operator|.
+name|sansCarets
+argument_list|()
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select ^empno^ eno, count(*) from emp group by 1 order by 1"
+argument_list|)
+operator|.
+name|tester
+argument_list|(
+name|strict
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Expression 'EMPNO' is not being grouped"
+argument_list|)
+operator|.
+name|tester
+argument_list|(
+name|lenient
+argument_list|)
+operator|.
+name|sansCarets
+argument_list|()
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|sql
+argument_list|(
 literal|"select count(*) from (select 1 from emp"
 operator|+
 literal|" group by substring(ename from 2 for 3))"

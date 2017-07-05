@@ -25867,6 +25867,10 @@ operator|-
 literal|1
 decl_stmt|;
 return|return
+name|SqlUtil
+operator|.
+name|stripAs
+argument_list|(
 name|select
 operator|.
 name|getSelectList
@@ -25875,6 +25879,7 @@ operator|.
 name|get
 argument_list|(
 name|ordinal
+argument_list|)
 argument_list|)
 return|;
 block|}
