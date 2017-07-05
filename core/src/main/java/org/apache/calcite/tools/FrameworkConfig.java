@@ -147,6 +147,20 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql2rel
+operator|.
+name|SqlToRelConverter
+import|;
+end_import
+
+begin_import
+import|import
 name|com
 operator|.
 name|google
@@ -173,6 +187,13 @@ name|SqlParser
 operator|.
 name|Config
 name|getParserConfig
+parameter_list|()
+function_decl|;
+comment|/**    * The configuration of {@link SqlToRelConverter}.    */
+name|SqlToRelConverter
+operator|.
+name|Config
+name|getSqlToRelConverterConfig
 parameter_list|()
 function_decl|;
 comment|/**    * Returns the default schema that should be checked before looking at the    * root schema.  Returns null to only consult the root schema.    */
