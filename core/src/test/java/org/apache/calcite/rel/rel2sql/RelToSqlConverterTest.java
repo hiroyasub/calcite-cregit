@@ -3035,6 +3035,132 @@ name|expected
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1826">[CALCITE-1826]    * JDBC dialect-specific FLOOR fails when in GROUP BY</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testFloorWithGroupBy
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|query
+init|=
+literal|"SELECT floor(\"hire_date\" TO MINUTE)\n"
+operator|+
+literal|"FROM \"employee\"\n"
+operator|+
+literal|"GROUP BY floor(\"hire_date\" TO MINUTE)"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT TRUNC(hire_date, 'MI')\n"
+operator|+
+literal|"FROM foodmart.employee\n"
+operator|+
+literal|"GROUP BY TRUNC(hire_date, 'MI')"
+decl_stmt|;
+specifier|final
+name|String
+name|expectedOracle
+init|=
+literal|"SELECT TRUNC(\"hire_date\", 'MINUTE')\n"
+operator|+
+literal|"FROM \"foodmart\".\"employee\"\n"
+operator|+
+literal|"GROUP BY TRUNC(\"hire_date\", 'MINUTE')"
+decl_stmt|;
+specifier|final
+name|String
+name|expectedPostgresql
+init|=
+literal|"SELECT DATE_TRUNC('MINUTE', \"hire_date\")\n"
+operator|+
+literal|"FROM \"foodmart\".\"employee\"\n"
+operator|+
+literal|"GROUP BY DATE_TRUNC('MINUTE', \"hire_date\")"
+decl_stmt|;
+specifier|final
+name|String
+name|expectedMysql
+init|=
+literal|"SELECT"
+operator|+
+literal|" DATE_FORMAT(`hire_date`, '%Y-%m-%d %k:%i:00')\n"
+operator|+
+literal|"FROM `foodmart`.`employee`\n"
+operator|+
+literal|"GROUP BY DATE_FORMAT(`hire_date`, '%Y-%m-%d %k:%i:00')"
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|dialect
+argument_list|(
+name|DatabaseProduct
+operator|.
+name|HSQLDB
+operator|.
+name|getDialect
+argument_list|()
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+operator|.
+name|dialect
+argument_list|(
+name|DatabaseProduct
+operator|.
+name|ORACLE
+operator|.
+name|getDialect
+argument_list|()
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expectedOracle
+argument_list|)
+operator|.
+name|dialect
+argument_list|(
+name|DatabaseProduct
+operator|.
+name|POSTGRESQL
+operator|.
+name|getDialect
+argument_list|()
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expectedPostgresql
+argument_list|)
+operator|.
+name|dialect
+argument_list|(
+name|DatabaseProduct
+operator|.
+name|MYSQL
+operator|.
+name|getDialect
+argument_list|()
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expectedMysql
+argument_list|)
+expr_stmt|;
+block|}
 annotation|@
 name|Test
 specifier|public

@@ -493,6 +493,10 @@ operator|.
 name|class
 argument_list|)
 decl_stmt|;
+specifier|final
+name|SqlCall
+name|call2
+decl_stmt|;
 switch|switch
 condition|(
 name|writer
@@ -507,6 +511,8 @@ block|{
 case|case
 name|ORACLE
 case|:
+name|call2
+operator|=
 name|replaceTimeUnitOperand
 argument_list|(
 name|call
@@ -526,7 +532,7 @@ name|unparseDatetimeFunction
 argument_list|(
 name|writer
 argument_list|,
-name|call
+name|call2
 argument_list|,
 literal|"TRUNC"
 argument_list|,
@@ -537,6 +543,7 @@ break|break;
 case|case
 name|HSQLDB
 case|:
+specifier|final
 name|String
 name|translatedLit
 init|=
@@ -545,6 +552,8 @@ argument_list|(
 name|timeUnit
 argument_list|)
 decl_stmt|;
+name|call2
+operator|=
 name|replaceTimeUnitOperand
 argument_list|(
 name|call
@@ -561,7 +570,7 @@ name|unparseDatetimeFunction
 argument_list|(
 name|writer
 argument_list|,
-name|call
+name|call2
 argument_list|,
 literal|"TRUNC"
 argument_list|,
@@ -572,6 +581,8 @@ break|break;
 case|case
 name|POSTGRESQL
 case|:
+name|call2
+operator|=
 name|replaceTimeUnitOperand
 argument_list|(
 name|call
@@ -591,7 +602,7 @@ name|unparseDatetimeFunction
 argument_list|(
 name|writer
 argument_list|,
-name|call
+name|call2
 argument_list|,
 literal|"DATE_TRUNC"
 argument_list|,
@@ -631,8 +642,9 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+comment|/**    * Copies a {@link SqlCall}, replacing the time unit operand with the given    * literal.    *    * @param call Call    * @param literal Literal to replace time unit with    * @param pos Parser position    * @return Modified call    */
 specifier|private
-name|void
+name|SqlCall
 name|replaceTimeUnitOperand
 parameter_list|(
 name|SqlCall
@@ -659,15 +671,34 @@ argument_list|,
 name|pos
 argument_list|)
 decl_stmt|;
+return|return
 name|call
 operator|.
-name|setOperand
+name|getOperator
+argument_list|()
+operator|.
+name|createCall
 argument_list|(
-literal|1
+name|call
+operator|.
+name|getFunctionQuantifier
+argument_list|()
+argument_list|,
+name|pos
+argument_list|,
+name|call
+operator|.
+name|getOperandList
+argument_list|()
+operator|.
+name|get
+argument_list|(
+literal|0
+argument_list|)
 argument_list|,
 name|literalNode
 argument_list|)
-expr_stmt|;
+return|;
 block|}
 comment|/**    * Default datetime unparse method if the specific dialect was not matched.    *    * @param writer SqlWriter    * @param call SqlCall    */
 specifier|private
