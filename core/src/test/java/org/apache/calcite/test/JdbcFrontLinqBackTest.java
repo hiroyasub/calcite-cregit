@@ -552,13 +552,11 @@ name|explainContains
 argument_list|(
 literal|""
 operator|+
-literal|"EnumerableCalc(expr#0..1=[{inputs}], expr#2=[UPPER($t1)], UN=[$t2], deptno=[$t0], name=[$t1])\n"
+literal|"EnumerableCalc(expr#0..4=[{inputs}], expr#5=[UPPER($t2)], UN=[$t5], deptno=[$t1], name=[$t2])\n"
 operator|+
-literal|"  EnumerableSort(sort0=[$0], sort1=[$1], dir0=[ASC], dir1=[DESC])\n"
+literal|"  EnumerableSort(sort0=[$1], sort1=[$2], dir0=[ASC], dir1=[DESC])\n"
 operator|+
-literal|"    EnumerableCalc(expr#0..4=[{inputs}], deptno=[$t1], name=[$t2])\n"
-operator|+
-literal|"      EnumerableTableScan(table=[[hr, emps]])"
+literal|"    EnumerableTableScan(table=[[hr, emps]])"
 argument_list|)
 operator|.
 name|returns

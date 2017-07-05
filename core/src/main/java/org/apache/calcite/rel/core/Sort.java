@@ -656,6 +656,7 @@ parameter_list|)
 block|{
 comment|// Higher cost if rows are wider discourages pushing a project through a
 comment|// sort.
+specifier|final
 name|double
 name|rowCount
 init|=
@@ -666,6 +667,7 @@ argument_list|(
 name|this
 argument_list|)
 decl_stmt|;
+specifier|final
 name|double
 name|bytesPerRow
 init|=
@@ -677,14 +679,10 @@ argument_list|()
 operator|*
 literal|4
 decl_stmt|;
-return|return
-name|planner
-operator|.
-name|getCostFactory
-argument_list|()
-operator|.
-name|makeCost
-argument_list|(
+specifier|final
+name|double
+name|cpu
+init|=
 name|Util
 operator|.
 name|nLogN
@@ -693,8 +691,18 @@ name|rowCount
 argument_list|)
 operator|*
 name|bytesPerRow
-argument_list|,
+decl_stmt|;
+return|return
+name|planner
+operator|.
+name|getCostFactory
+argument_list|()
+operator|.
+name|makeCost
+argument_list|(
 name|rowCount
+argument_list|,
+name|cpu
 argument_list|,
 literal|0
 argument_list|)
