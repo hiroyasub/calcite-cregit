@@ -1302,7 +1302,7 @@ block|}
 block|}
 return|;
 block|}
-comment|/**    * Method to be shared with {@code RemoteDriverTest}.    *    * @param initialData record to be presented in table    * @return java.sql.Connection    * @throws Exception    */
+comment|/**    * Method to be shared with {@code RemoteDriverTest}.    *    * @param initialData record to be presented in table    */
 specifier|public
 specifier|static
 name|Connection

@@ -22649,6 +22649,7 @@ literal|" is only supported if expand = false"
 argument_list|)
 throw|;
 block|}
+comment|// fall through
 case|case
 name|CURSOR
 case|:

@@ -1519,6 +1519,7 @@ argument_list|)
 return|;
 block|}
 block|}
+comment|// fall through
 default|default:
 name|calls
 operator|.

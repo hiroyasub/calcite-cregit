@@ -1275,7 +1275,7 @@ name|def
 argument_list|)
 return|;
 block|}
-comment|/**    * Returns the    * {@link BuiltInMetadata.NodeTypes#getNodeTypes()}    * statistic.    *    * @param rel the relational expression    * @return    */
+comment|/**    * Returns the    * {@link BuiltInMetadata.NodeTypes#getNodeTypes()}    * statistic.    *    * @param rel the relational expression    */
 specifier|public
 name|Multimap
 argument_list|<

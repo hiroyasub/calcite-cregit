@@ -79,7 +79,7 @@ name|getCurrentStatement
 parameter_list|()
 function_decl|;
 block|}
-comment|/**    * Implement this method to extend functionality of mtsql.    *    * @param testContext Exposed context for plugin to run in.    * @throws IOException    */
+comment|/**    * Implement this method to extend functionality of mtsql.    *    * @param testContext Exposed context for plugin to run in.    */
 name|void
 name|execute
 parameter_list|(

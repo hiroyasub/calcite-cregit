@@ -2011,7 +2011,7 @@ return|return
 name|ret
 return|;
 block|}
-comment|/**    * Validates an INTERVAL literal against a YEAR interval qualifier.    *    * @throws org.apache.calcite.runtime.CalciteContextException    * if the interval value is illegal    */
+comment|/**    * Validates an INTERVAL literal against a YEAR interval qualifier.    *    * @throws org.apache.calcite.runtime.CalciteContextException if the interval    * value is illegal    */
 specifier|private
 name|int
 index|[]
@@ -2133,7 +2133,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/**    * Validates an INTERVAL literal against a YEAR TO MONTH interval qualifier.    *    * @throws org.apache.calcite.runtime.CalciteContextException    * if the interval value is illegal    */
+comment|/**    * Validates an INTERVAL literal against a YEAR TO MONTH interval qualifier.    *    * @throws org.apache.calcite.runtime.CalciteContextException if the interval    * value is illegal    */
 specifier|private
 name|int
 index|[]
@@ -2291,7 +2291,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/**    * Validates an INTERVAL literal against a MONTH interval qualifier.    *    * @throws org.apache.calcite.runtime.CalciteContextException    * if the interval value is illegal    */
+comment|/**    * Validates an INTERVAL literal against a MONTH interval qualifier.    *    * @throws org.apache.calcite.runtime.CalciteContextException if the interval    * value is illegal    */
 specifier|private
 name|int
 index|[]
@@ -2413,7 +2413,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/**    * Validates an INTERVAL literal against a DAY interval qualifier.    *    * @throws org.apache.calcite.runtime.CalciteContextException    * if the interval value is illegal    */
+comment|/**    * Validates an INTERVAL literal against a DAY interval qualifier.    *    * @throws org.apache.calcite.runtime.CalciteContextException if the interval    * value is illegal    */
 specifier|private
 name|int
 index|[]
@@ -2541,7 +2541,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/**    * Validates an INTERVAL literal against a DAY TO HOUR interval qualifier.    *    * @throws org.apache.calcite.runtime.CalciteContextException    * if the interval value is illegal    */
+comment|/**    * Validates an INTERVAL literal against a DAY TO HOUR interval qualifier.    *    * @throws org.apache.calcite.runtime.CalciteContextException if the interval    * value is illegal    */
 specifier|private
 name|int
 index|[]
@@ -2705,7 +2705,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/**    * Validates an INTERVAL literal against a DAY TO MINUTE interval qualifier.    *    * @throws org.apache.calcite.runtime.CalciteContextException    * if the interval value is illegal    */
+comment|/**    * Validates an INTERVAL literal against a DAY TO MINUTE interval qualifier.    *    * @throws org.apache.calcite.runtime.CalciteContextException if the interval    * value is illegal    */
 specifier|private
 name|int
 index|[]
@@ -2893,7 +2893,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/**    * Validates an INTERVAL literal against a DAY TO SECOND interval qualifier.    *    * @throws org.apache.calcite.runtime.CalciteContextException    * if the interval value is illegal    */
+comment|/**    * Validates an INTERVAL literal against a DAY TO SECOND interval qualifier.    *    * @throws org.apache.calcite.runtime.CalciteContextException if the interval    * value is illegal    */
 specifier|private
 name|int
 index|[]
@@ -3198,7 +3198,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/**    * Validates an INTERVAL literal against an HOUR interval qualifier.    *    * @throws org.apache.calcite.runtime.CalciteContextException    * if the interval value is illegal    */
+comment|/**    * Validates an INTERVAL literal against an HOUR interval qualifier.    *    * @throws org.apache.calcite.runtime.CalciteContextException if the interval    * value is illegal    */
 specifier|private
 name|int
 index|[]
@@ -3326,7 +3326,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/**    * Validates an INTERVAL literal against an HOUR TO MINUTE interval    * qualifier.    *    * @throws org.apache.calcite.runtime.CalciteContextException    * if the interval value is illegal    */
+comment|/**    * Validates an INTERVAL literal against an HOUR TO MINUTE interval    * qualifier.    *    * @throws org.apache.calcite.runtime.CalciteContextException if the interval    * value is illegal    */
 specifier|private
 name|int
 index|[]
@@ -3490,7 +3490,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/**    * Validates an INTERVAL literal against an HOUR TO SECOND interval    * qualifier.    *    * @throws org.apache.calcite.runtime.CalciteContextException    * if the interval value is illegal    */
+comment|/**    * Validates an INTERVAL literal against an HOUR TO SECOND interval    * qualifier.    *    * @throws org.apache.calcite.runtime.CalciteContextException if the interval    * value is illegal    */
 specifier|private
 name|int
 index|[]
@@ -3771,7 +3771,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/**    * Validates an INTERVAL literal against an MINUTE interval qualifier.    *    * @throws org.apache.calcite.runtime.CalciteContextException    * if the interval value is illegal    */
+comment|/**    * Validates an INTERVAL literal against an MINUTE interval qualifier.    *    * @throws org.apache.calcite.runtime.CalciteContextException if the interval    * value is illegal    */
 specifier|private
 name|int
 index|[]
@@ -3899,7 +3899,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/**    * Validates an INTERVAL literal against an MINUTE TO SECOND interval    * qualifier.    *    * @throws org.apache.calcite.runtime.CalciteContextException    * if the interval value is illegal    */
+comment|/**    * Validates an INTERVAL literal against an MINUTE TO SECOND interval    * qualifier.    *    * @throws org.apache.calcite.runtime.CalciteContextException if the interval    * value is illegal    */
 specifier|private
 name|int
 index|[]
@@ -4156,7 +4156,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/**    * Validates an INTERVAL literal against an SECOND interval qualifier.    *    * @throws org.apache.calcite.runtime.CalciteContextException    * if the interval value is illegal    */
+comment|/**    * Validates an INTERVAL literal against an SECOND interval qualifier.    *    * @throws org.apache.calcite.runtime.CalciteContextException if the interval    * value is illegal    */
 specifier|private
 name|int
 index|[]
@@ -4389,7 +4389,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/**    * Validates an INTERVAL literal according to the rules specified by the    * interval qualifier. The assumption is made that the interval qualifier has    * been validated prior to calling this method. Evaluating against an    * invalid qualifier could lead to strange results.    *    * @return field values, never null    *    * @throws org.apache.calcite.runtime.CalciteContextException    * if the interval value is illegal    */
+comment|/**    * Validates an INTERVAL literal according to the rules specified by the    * interval qualifier. The assumption is made that the interval qualifier has    * been validated prior to calling this method. Evaluating against an    * invalid qualifier could lead to strange results.    *    * @return field values, never null    *    * @throws org.apache.calcite.runtime.CalciteContextException if the interval    * value is illegal    */
 specifier|public
 name|int
 index|[]

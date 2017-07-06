@@ -424,7 +424,7 @@ name|col2
 argument_list|)
 return|;
 block|}
-comment|/**    * Returns the collating sequence (the collation name) and the coercibility    * for the resulting value of a dyadic operator.    *    * @param col1 first operand for the dyadic operation    * @param col2 second operand for the dyadic operation    * @return the resulting collation sequence    *    * @throws org.apache.calcite.runtime.CalciteException    *   {@link org.apache.calcite.runtime.CalciteResource#invalidCompare} or    *   {@link org.apache.calcite.runtime.CalciteResource#differentCollations}    *   if no collating sequence can be deduced    *    * @see Glossary#SQL99 SQL:1999 Part 2 Section 4.2.3 Table 2    */
+comment|/**    * Returns the collating sequence (the collation name) and the coercibility    * for the resulting value of a dyadic operator.    *    * @param col1 first operand for the dyadic operation    * @param col2 second operand for the dyadic operation    * @return the resulting collation sequence    *    * @throws org.apache.calcite.runtime.CalciteException from    *   {@link org.apache.calcite.runtime.CalciteResource#invalidCompare} or    *   {@link org.apache.calcite.runtime.CalciteResource#differentCollations}    *   if no collating sequence can be deduced    *    * @see Glossary#SQL99 SQL:1999 Part 2 Section 4.2.3 Table 2    */
 specifier|public
 specifier|static
 name|SqlCollation
