@@ -7659,6 +7659,36 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1799">[CALCITE-1799]    * "OR .. IN" sub-query conversion wrong</a>.    *    *<p>The problem is only fixed if you have {@code expand = false}.    */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSubQueryOr
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select * from emp where deptno = 10 or deptno in (\n"
+operator|+
+literal|"    select dept.deptno from dept where deptno< 5)\n"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|expand
+argument_list|(
+literal|false
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
 comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-695">[CALCITE-695]    * SqlSingleValueAggFunction is created when it may not be needed</a>.    */
 annotation|@
 name|Test

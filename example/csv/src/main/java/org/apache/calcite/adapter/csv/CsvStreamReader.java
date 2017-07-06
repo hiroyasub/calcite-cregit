@@ -503,7 +503,7 @@ return|return
 name|result
 return|;
 block|}
-comment|/**    * Reads the next line from the file.    *    * @return the next line from the file without trailing newline    * @throws IOException    *             if bad things happen during the read    */
+comment|/**    * Reads the next line from the file.    *    * @return the next line from the file without trailing newline    *    * @throws IOException if bad things happen during the read    */
 specifier|private
 name|String
 name|getNextLine
