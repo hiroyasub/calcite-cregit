@@ -558,6 +558,68 @@ literal|"}\n"
 decl_stmt|;
 specifier|private
 specifier|static
+specifier|final
+name|String
+name|AUTO_LATTICE
+init|=
+literal|"{\n"
+operator|+
+literal|"  name: 'star',\n"
+operator|+
+literal|"  sql: [\n"
+operator|+
+literal|"    'select 1 from \"foodmart\".\"sales_fact_1997\" as \"s\"',\n"
+operator|+
+literal|"    'join \"foodmart\".\"product\" as \"p\" using (\"product_id\")',\n"
+operator|+
+literal|"    'join \"foodmart\".\"time_by_day\" as \"t\" using (\"time_id\")',\n"
+operator|+
+literal|"    'join \"foodmart\".\"product_class\" as \"pc\" on \"p\".\"product_class_id\" = \"pc\".\"product_class_id\"'\n"
+operator|+
+literal|"  ],\n"
+operator|+
+literal|"  auto: false,\n"
+operator|+
+literal|"  algorithm: true,\n"
+operator|+
+literal|"  algorithmMaxMillis: 10000,\n"
+operator|+
+literal|"  rowCountEstimate: 86837,\n"
+operator|+
+literal|"  defaultMeasures: [ {\n"
+operator|+
+literal|"    agg: 'count'\n"
+operator|+
+literal|"  } ],\n"
+operator|+
+literal|"  tiles: [ {\n"
+operator|+
+literal|"    dimensions: [ 'the_year', ['t', 'quarter'] ],\n"
+operator|+
+literal|"   measures: [ {\n"
+operator|+
+literal|"      agg: 'sum',\n"
+operator|+
+literal|"      args: 'unit_sales'\n"
+operator|+
+literal|"    }, {\n"
+operator|+
+literal|"      agg: 'sum',\n"
+operator|+
+literal|"      args: 'store_sales'\n"
+operator|+
+literal|"    }, {\n"
+operator|+
+literal|"      agg: 'count'\n"
+operator|+
+literal|"    } ]\n"
+operator|+
+literal|"  } ]\n"
+operator|+
+literal|"}\n"
+decl_stmt|;
+specifier|private
+specifier|static
 name|CalciteAssert
 operator|.
 name|AssertThat
@@ -915,6 +977,207 @@ block|}
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Tests some of the properties of the {@link Lattice} data structure. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testLattice
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+name|modelWithLattice
+argument_list|(
+literal|"star"
+argument_list|,
+literal|"select 1 from \"foodmart\".\"sales_fact_1997\" as s\n"
+operator|+
+literal|"join \"foodmart\".\"product\" as p using (\"product_id\")\n"
+operator|+
+literal|"join \"foodmart\".\"time_by_day\" as t on t.\"time_id\" = s.\"time_id\""
+argument_list|)
+operator|.
+name|doWithConnection
+argument_list|(
+name|c
+lambda|->
+block|{
+specifier|final
+name|SchemaPlus
+name|schema
+init|=
+name|c
+operator|.
+name|getRootSchema
+argument_list|()
+decl_stmt|;
+specifier|final
+name|SchemaPlus
+name|adhoc
+init|=
+name|schema
+operator|.
+name|getSubSchema
+argument_list|(
+literal|"adhoc"
+argument_list|)
+decl_stmt|;
+name|assertThat
+argument_list|(
+name|adhoc
+operator|.
+name|getTableNames
+argument_list|()
+operator|.
+name|contains
+argument_list|(
+literal|"EMPLOYEES"
+argument_list|)
+argument_list|,
+name|is
+argument_list|(
+literal|true
+argument_list|)
+argument_list|)
+expr_stmt|;
+specifier|final
+name|Map
+operator|.
+name|Entry
+argument_list|<
+name|String
+argument_list|,
+name|CalciteSchema
+operator|.
+name|LatticeEntry
+argument_list|>
+name|entry
+init|=
+name|adhoc
+operator|.
+name|unwrap
+argument_list|(
+name|CalciteSchema
+operator|.
+name|class
+argument_list|)
+operator|.
+name|getLatticeMap
+argument_list|()
+operator|.
+name|firstEntry
+argument_list|()
+decl_stmt|;
+specifier|final
+name|Lattice
+name|lattice
+init|=
+name|entry
+operator|.
+name|getValue
+argument_list|()
+operator|.
+name|getLattice
+argument_list|()
+decl_stmt|;
+name|assertThat
+argument_list|(
+name|lattice
+operator|.
+name|firstColumn
+argument_list|(
+literal|"S"
+argument_list|)
+argument_list|,
+name|is
+argument_list|(
+literal|10
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|assertThat
+argument_list|(
+name|lattice
+operator|.
+name|firstColumn
+argument_list|(
+literal|"P"
+argument_list|)
+argument_list|,
+name|is
+argument_list|(
+literal|18
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|assertThat
+argument_list|(
+name|lattice
+operator|.
+name|firstColumn
+argument_list|(
+literal|"T"
+argument_list|)
+argument_list|,
+name|is
+argument_list|(
+literal|0
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|assertThat
+argument_list|(
+name|lattice
+operator|.
+name|firstColumn
+argument_list|(
+literal|"PC"
+argument_list|)
+argument_list|,
+name|is
+argument_list|(
+operator|-
+literal|1
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|assertThat
+argument_list|(
+name|lattice
+operator|.
+name|defaultMeasures
+operator|.
+name|size
+argument_list|()
+argument_list|,
+name|is
+argument_list|(
+literal|1
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|assertThat
+argument_list|(
+name|lattice
+operator|.
+name|rootNode
+operator|.
+name|descendants
+operator|.
+name|size
+argument_list|()
+argument_list|,
+name|is
+argument_list|(
+literal|3
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+argument_list|)
+expr_stmt|;
+block|}
 comment|/** Tests that it's OK for a lattice to have the same name as a table in the    * schema. */
 annotation|@
 name|Test
@@ -1124,6 +1387,31 @@ operator|.
 name|connectThrows
 argument_list|(
 literal|"only inner join allowed, but got LEFT"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Each lattice table must have a parent. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testLatticeInvalidSql3
+parameter_list|()
+block|{
+name|modelWithLattice
+argument_list|(
+literal|"star"
+argument_list|,
+literal|"select 1 from \"foodmart\".\"sales_fact_1997\" as s\n"
+operator|+
+literal|"join \"foodmart\".\"product\" as p using (\"product_id\")\n"
+operator|+
+literal|"join \"foodmart\".\"time_by_day\" as t on s.\"product_id\" = p.\"product_id\""
+argument_list|)
+operator|.
+name|connectThrows
+argument_list|(
+literal|"child node must have precisely one parent"
 argument_list|)
 expr_stmt|;
 block|}
@@ -1475,7 +1763,7 @@ argument_list|)
 operator|.
 name|explainContains
 argument_list|(
-literal|"EnumerableTableScan(table=[[adhoc, m{27, 31}"
+literal|"EnumerableTableScan(table=[[adhoc, m{32, 36}"
 argument_list|)
 operator|.
 name|returnsCount
@@ -1517,7 +1805,7 @@ literal|""
 operator|+
 literal|"EnumerableCalc(expr#0..4=[{inputs}], proj#0..2=[{exprs}])\n"
 operator|+
-literal|"  EnumerableTableScan(table=[[adhoc, m{27, 31}"
+literal|"  EnumerableTableScan(table=[[adhoc, m{32, 36}"
 argument_list|)
 operator|.
 name|returnsUnordered
@@ -1576,7 +1864,7 @@ literal|"EnumerableCalc(expr#0..3=[{inputs}], expr#4=[10], expr#5=[*($t3, $t4)],
 operator|+
 literal|"  EnumerableAggregate(group=[{0}], C=[$SUM0($2)], Q=[MIN($1)], agg#2=[$SUM0($4)])\n"
 operator|+
-literal|"    EnumerableTableScan(table=[[adhoc, m{27, 31}"
+literal|"    EnumerableTableScan(table=[[adhoc, m{32, 36}"
 argument_list|)
 operator|.
 name|enable
@@ -1615,7 +1903,7 @@ name|explain
 init|=
 literal|"EnumerableAggregate(group=[{2, 3}])\n"
 operator|+
-literal|"  EnumerableTableScan(table=[[adhoc, m{16, 17, 27, 31, 32, 37}]])"
+literal|"  EnumerableTableScan(table=[[adhoc, m{16, 17, 32, 36, 37}]])"
 decl_stmt|;
 name|checkTileAlgorithm
 argument_list|(
@@ -1646,9 +1934,9 @@ specifier|final
 name|String
 name|explain
 init|=
-literal|"EnumerableAggregate(group=[{0, 1}])\n"
+literal|"EnumerableAggregate(group=[{4, 5}])\n"
 operator|+
-literal|"  EnumerableTableScan(table=[[adhoc, m{27, 31, 32, 36, 37}]"
+literal|"  EnumerableTableScan(table=[[adhoc, m{16, 17, 27, 31, 32, 36, 37}]"
 decl_stmt|;
 name|checkTileAlgorithm
 argument_list|(
@@ -1691,9 +1979,9 @@ specifier|final
 name|String
 name|explain
 init|=
-literal|"EnumerableAggregate(group=[{0, 1}])\n"
+literal|"EnumerableAggregate(group=[{4, 5}])\n"
 operator|+
-literal|"  EnumerableTableScan(table=[[adhoc, m{27, 31, 32, 36, 37}]"
+literal|"  EnumerableTableScan(table=[[adhoc, m{16, 17, 27, 31, 32, 36, 37}]"
 decl_stmt|;
 name|checkTileAlgorithm
 argument_list|(
@@ -2268,7 +2556,7 @@ literal|"EnumerableCalc(expr#0..1=[{inputs}], C=[$t1])\n"
 operator|+
 literal|"  EnumerableAggregate(group=[{0}], C=[COUNT($1)])\n"
 operator|+
-literal|"    EnumerableTableScan(table=[[adhoc, m{27, 31}]])"
+literal|"    EnumerableTableScan(table=[[adhoc, m{32, 36}]])"
 argument_list|)
 operator|.
 name|returnsUnordered
@@ -2311,7 +2599,7 @@ literal|"  EnumerableAggregate(group=[{0}], C=[COUNT($0)])\n"
 operator|+
 literal|"    EnumerableAggregate(group=[{0}])\n"
 operator|+
-literal|"      EnumerableTableScan(table=[[adhoc, m{27, 31}]])"
+literal|"      EnumerableTableScan(table=[[adhoc, m{32, 36}]])"
 argument_list|)
 operator|.
 name|returnsUnordered
@@ -2471,17 +2759,21 @@ throws|throws
 name|IOException
 block|{
 specifier|final
-name|FoodmartTest
-operator|.
-name|FoodmartQuery
-name|query
+name|FoodMartQuerySet
+name|set
 init|=
-name|FoodmartTest
-operator|.
 name|FoodMartQuerySet
 operator|.
 name|instance
 argument_list|()
+decl_stmt|;
+specifier|final
+name|FoodMartQuerySet
+operator|.
+name|FoodmartQuery
+name|query
+init|=
+name|set
 operator|.
 name|queries
 operator|.
@@ -2893,6 +3185,137 @@ literal|"EXPR$0=1\n"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSuggester
+parameter_list|()
+block|{
+specifier|final
+name|Class
+argument_list|<
+name|JdbcTest
+operator|.
+name|EmpDeptTableFactory
+argument_list|>
+name|clazz
+init|=
+name|JdbcTest
+operator|.
+name|EmpDeptTableFactory
+operator|.
+name|class
+decl_stmt|;
+specifier|final
+name|String
+name|model
+init|=
+literal|""
+operator|+
+literal|"{\n"
+operator|+
+literal|"  version: '1.0',\n"
+operator|+
+literal|"   schemas: [\n"
+operator|+
+name|JdbcTest
+operator|.
+name|FOODMART_SCHEMA
+operator|+
+literal|",\n"
+operator|+
+literal|"     {\n"
+operator|+
+literal|"       name: 'adhoc',\n"
+operator|+
+literal|"       tables: [\n"
+operator|+
+literal|"         {\n"
+operator|+
+literal|"           name: 'EMPLOYEES',\n"
+operator|+
+literal|"           type: 'custom',\n"
+operator|+
+literal|"           factory: '"
+operator|+
+name|clazz
+operator|.
+name|getName
+argument_list|()
+operator|+
+literal|"',\n"
+operator|+
+literal|"           operand: {'foo': true, 'bar': 345}\n"
+operator|+
+literal|"         }\n"
+operator|+
+literal|"       ],\n"
+operator|+
+literal|"       \"autoLattice\": true"
+operator|+
+literal|"     }\n"
+operator|+
+literal|"   ]\n"
+operator|+
+literal|"}"
+decl_stmt|;
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select count(*)\n"
+operator|+
+literal|"from \"sales_fact_1997\"\n"
+operator|+
+literal|"join \"time_by_day\" using (\"time_id\")\n"
+decl_stmt|;
+specifier|final
+name|String
+name|explain
+init|=
+literal|"PLAN=JdbcToEnumerableConverter\n"
+operator|+
+literal|"  JdbcAggregate(group=[{}], EXPR$0=[COUNT()])\n"
+operator|+
+literal|"    JdbcJoin(condition=[=($1, $0)], joinType=[inner])\n"
+operator|+
+literal|"      JdbcProject(time_id=[$0])\n"
+operator|+
+literal|"        JdbcTableScan(table=[[foodmart, time_by_day]])\n"
+operator|+
+literal|"      JdbcProject(time_id=[$1])\n"
+operator|+
+literal|"        JdbcTableScan(table=[[foodmart, sales_fact_1997]])\n"
+decl_stmt|;
+name|CalciteAssert
+operator|.
+name|model
+argument_list|(
+name|model
+argument_list|)
+operator|.
+name|withDefaultSchema
+argument_list|(
+literal|"foodmart"
+argument_list|)
+operator|.
+name|query
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"EXPR$0=86837\n"
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+name|explain
+argument_list|)
+expr_stmt|;
+block|}
 specifier|private
 specifier|static
 name|CalciteAssert
@@ -2905,18 +3328,28 @@ modifier|...
 name|extras
 parameter_list|)
 block|{
-return|return
-name|modelWithLattice
-argument_list|(
-literal|"star"
-argument_list|,
-literal|"select 1 from \"foodmart\".\"sales_fact_1997\" as \"s\"\n"
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select 1\n"
+operator|+
+literal|"from \"foodmart\".\"sales_fact_1997\" as \"s\"\n"
 operator|+
 literal|"join \"foodmart\".\"product\" as \"p\" using (\"product_id\")\n"
 operator|+
 literal|"join \"foodmart\".\"time_by_day\" as \"t\" using (\"time_id\")\n"
 operator|+
-literal|"join \"foodmart\".\"product_class\" as \"pc\" on \"p\".\"product_class_id\" = \"pc\".\"product_class_id\""
+literal|"join \"foodmart\".\"product_class\" as \"pc\"\n"
+operator|+
+literal|"  on \"p\".\"product_class_id\" = \"pc\".\"product_class_id\""
+decl_stmt|;
+return|return
+name|modelWithLattice
+argument_list|(
+literal|"star"
+argument_list|,
+name|sql
 argument_list|,
 name|extras
 argument_list|)
@@ -2997,7 +3430,7 @@ argument_list|()
 operator|.
 name|executeQuery
 argument_list|(
-literal|"select * from \"adhoc\".\"m{27, 31}\""
+literal|"select * from \"adhoc\".\"m{32, 36}\""
 argument_list|)
 decl_stmt|;
 name|System

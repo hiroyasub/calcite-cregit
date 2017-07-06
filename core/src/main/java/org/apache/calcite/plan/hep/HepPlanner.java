@@ -610,6 +610,7 @@ name|AbstractRelOptPlanner
 block|{
 comment|//~ Instance fields --------------------------------------------------------
 specifier|private
+specifier|final
 name|HepProgram
 name|mainProgram
 decl_stmt|;
@@ -626,6 +627,7 @@ name|RelTraitSet
 name|requestedRootTraits
 decl_stmt|;
 specifier|private
+specifier|final
 name|Map
 argument_list|<
 name|String
@@ -633,7 +635,14 @@ argument_list|,
 name|HepRelVertex
 argument_list|>
 name|mapDigestToVertex
+init|=
+operator|new
+name|HashMap
+argument_list|<>
+argument_list|()
 decl_stmt|;
+comment|// NOTE jvs 24-Apr-2006:  We use LinkedHashSet
+comment|// in order to provide deterministic behavior.
 specifier|private
 specifier|final
 name|Set
@@ -641,6 +650,11 @@ argument_list|<
 name|RelOptRule
 argument_list|>
 name|allRules
+init|=
+operator|new
+name|LinkedHashSet
+argument_list|<>
+argument_list|()
 decl_stmt|;
 specifier|private
 name|int
@@ -655,11 +669,13 @@ name|int
 name|nTransformationsLastGC
 decl_stmt|;
 specifier|private
+specifier|final
 name|boolean
-name|noDAG
+name|noDag
 decl_stmt|;
 comment|/**    * Query graph, with edges directed from parent to child. This is a    * single-rooted DAG, possibly with additional roots corresponding to    * discarded plan fragments which remain to be garbage-collected.    */
 specifier|private
+specifier|final
 name|DirectedGraph
 argument_list|<
 name|HepRelVertex
@@ -667,6 +683,11 @@ argument_list|,
 name|DefaultEdge
 argument_list|>
 name|graph
+init|=
+name|DefaultDirectedGraph
+operator|.
+name|create
+argument_list|()
 decl_stmt|;
 specifier|private
 specifier|final
@@ -745,7 +766,7 @@ name|FACTORY
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Creates a new HepPlanner with the option to keep the graph a    * tree(noDAG=true) or allow DAG(noDAG=false).    *    * @param program    program controlling rule application    * @param onCopyHook Function to call when a node is copied    */
+comment|/**    * Creates a new HepPlanner with the option to keep the graph a    * tree (noDag = true) or allow DAG (noDag = false).    *    * @param noDag      If false, create shared nodes if expressions are    *                   identical    * @param program    Program controlling rule application    * @param onCopyHook Function to call when a node is copied    */
 specifier|public
 name|HepPlanner
 parameter_list|(
@@ -756,7 +777,7 @@ name|Context
 name|context
 parameter_list|,
 name|boolean
-name|noDAG
+name|noDag
 parameter_list|,
 name|Function2
 argument_list|<
@@ -801,34 +822,11 @@ name|ignore2
 argument_list|()
 argument_list|)
 expr_stmt|;
-name|mapDigestToVertex
-operator|=
-operator|new
-name|HashMap
-argument_list|<>
-argument_list|()
-expr_stmt|;
-name|graph
-operator|=
-name|DefaultDirectedGraph
-operator|.
-name|create
-argument_list|()
-expr_stmt|;
-comment|// NOTE jvs 24-Apr-2006:  We use LinkedHashSet here and below
-comment|// in order to provide deterministic behavior.
-name|allRules
-operator|=
-operator|new
-name|LinkedHashSet
-argument_list|<>
-argument_list|()
-expr_stmt|;
 name|this
 operator|.
-name|noDAG
+name|noDag
 operator|=
-name|noDAG
+name|noDag
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
@@ -3588,7 +3586,7 @@ comment|// try to find equivalent rel only if DAG is allowed
 if|if
 condition|(
 operator|!
-name|noDAG
+name|noDag
 condition|)
 block|{
 comment|// Now, check if an equivalent vertex already exists in graph.

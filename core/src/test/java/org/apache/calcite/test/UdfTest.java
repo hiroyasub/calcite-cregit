@@ -2613,6 +2613,13 @@ literal|"select \"adhoc\".my_sum3(\"empid\",\"deptno\",\"name\") as p "
 operator|+
 literal|"from \"adhoc\".EMPLOYEES\n"
 argument_list|)
+operator|.
+name|throws_
+argument_list|(
+literal|"No match found for function signature MY_SUM3(<NUMERIC>, "
+operator|+
+literal|"<NUMERIC>,<CHARACTER>)"
+argument_list|)
 expr_stmt|;
 name|with
 operator|.

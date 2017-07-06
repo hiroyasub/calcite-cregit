@@ -527,6 +527,7 @@ argument_list|,
 name|lattice
 operator|.
 name|uniqueColumnNames
+argument_list|()
 argument_list|)
 return|;
 block|}

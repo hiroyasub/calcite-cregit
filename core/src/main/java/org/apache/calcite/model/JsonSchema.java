@@ -192,6 +192,11 @@ specifier|public
 name|Boolean
 name|cache
 decl_stmt|;
+comment|/** Whether to create lattices in this schema based on queries occurring in    * other schemas. Default value is {@code false}. */
+specifier|public
+name|Boolean
+name|autoLattice
+decl_stmt|;
 specifier|public
 specifier|abstract
 name|void

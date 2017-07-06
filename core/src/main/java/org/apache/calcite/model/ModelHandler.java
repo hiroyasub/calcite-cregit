@@ -3313,6 +3313,13 @@ operator|!=
 literal|null
 assert|;
 specifier|final
+name|boolean
+name|distinct
+init|=
+literal|false
+decl_stmt|;
+comment|// no distinct field in JsonMeasure.yet
+specifier|final
 name|Lattice
 operator|.
 name|Measure
@@ -3325,6 +3332,8 @@ argument_list|(
 name|jsonMeasure
 operator|.
 name|agg
+argument_list|,
+name|distinct
 argument_list|,
 name|jsonMeasure
 operator|.

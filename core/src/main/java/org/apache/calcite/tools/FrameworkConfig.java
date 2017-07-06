@@ -23,6 +23,20 @@ name|apache
 operator|.
 name|calcite
 operator|.
+name|materialize
+operator|.
+name|SqlStatisticProvider
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
 name|plan
 operator|.
 name|Context
@@ -245,6 +259,16 @@ function_decl|;
 comment|/**    * Returns the type system.    */
 name|RelDataTypeSystem
 name|getTypeSystem
+parameter_list|()
+function_decl|;
+comment|/**    * Returns whether the lattice suggester should try to widen a lattice when a    * new query arrives that doesn't quite fit, as opposed to creating a new    * lattice.    */
+name|boolean
+name|isEvolveLattice
+parameter_list|()
+function_decl|;
+comment|/**    * Returns the source of statistics about tables and columns to be used    * by the lattice suggester to deduce primary keys, foreign keys, and the    * direction of relationships.    */
+name|SqlStatisticProvider
+name|getStatisticProvider
 parameter_list|()
 function_decl|;
 block|}
