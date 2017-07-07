@@ -614,7 +614,7 @@ argument_list|,
 name|schema
 argument_list|)
 argument_list|,
-literal|"t = LOAD 'data.txt"
+literal|"t = LOAD 'target/data.txt"
 operator|+
 literal|"' USING PigStorage() AS (tc0:chararray, tc1:chararray);\n"
 operator|+
@@ -743,7 +743,7 @@ argument_list|,
 name|schema
 argument_list|)
 argument_list|,
-literal|"t = LOAD 'data.txt"
+literal|"t = LOAD 'target/data.txt"
 operator|+
 literal|"' USING PigStorage() AS (tc0:chararray, tc1:chararray);\n"
 operator|+
@@ -846,7 +846,7 @@ argument_list|,
 name|schema
 argument_list|)
 argument_list|,
-literal|"t = LOAD 'data.txt"
+literal|"t = LOAD 'target/data.txt"
 operator|+
 literal|"' USING PigStorage() AS (tc0:chararray, tc1:chararray);\n"
 operator|+
@@ -952,7 +952,7 @@ argument_list|,
 name|schema
 argument_list|)
 argument_list|,
-literal|"t = LOAD 'data.txt"
+literal|"t = LOAD 'target/data.txt"
 operator|+
 literal|"' USING PigStorage() AS (tc0:chararray, tc1:chararray);\n"
 operator|+
@@ -1063,7 +1063,7 @@ argument_list|,
 name|schema
 argument_list|)
 argument_list|,
-literal|"t = LOAD 'data.txt"
+literal|"t = LOAD 'target/data.txt"
 operator|+
 literal|"' USING PigStorage() AS (tc0:chararray, tc1:chararray);\n"
 operator|+
@@ -1173,7 +1173,7 @@ argument_list|,
 name|schema
 argument_list|)
 argument_list|,
-literal|"t = LOAD 'data.txt"
+literal|"t = LOAD 'target/data.txt"
 operator|+
 literal|"' USING PigStorage() AS (tc0:chararray, tc1:chararray);\n"
 operator|+
@@ -1322,13 +1322,13 @@ argument_list|,
 name|schema
 argument_list|)
 argument_list|,
-literal|"t = LOAD 'data.txt"
+literal|"t = LOAD 'target/data.txt"
 operator|+
 literal|"' USING PigStorage() AS (tc0:chararray, tc1:chararray);\n"
 operator|+
 literal|"t = FILTER t BY (tc0> 'a');\n"
 operator|+
-literal|"s = LOAD 'data2.txt"
+literal|"s = LOAD 'target/data2.txt"
 operator|+
 literal|"' USING PigStorage() AS (sc0:chararray, sc1:chararray);\n"
 operator|+
@@ -1496,13 +1496,13 @@ argument_list|,
 name|schema
 argument_list|)
 argument_list|,
-literal|"t = LOAD 'data.txt"
+literal|"t = LOAD 'target/data.txt"
 operator|+
 literal|"' USING PigStorage() AS (tc0:chararray, tc1:chararray);\n"
 operator|+
 literal|"t = FILTER t BY (tc0> 'abc');\n"
 operator|+
-literal|"s = LOAD 'data2.txt"
+literal|"s = LOAD 'target/data2.txt"
 operator|+
 literal|"' USING PigStorage() AS (sc0:chararray, sc1:chararray);\n"
 operator|+
@@ -1551,7 +1551,7 @@ argument_list|,
 operator|new
 name|PigTable
 argument_list|(
-literal|"data.txt"
+literal|"target/data.txt"
 argument_list|,
 operator|new
 name|String
@@ -1573,7 +1573,7 @@ argument_list|,
 operator|new
 name|PigTable
 argument_list|(
-literal|"data2.txt"
+literal|"target/data2.txt"
 argument_list|,
 operator|new
 name|String
@@ -1932,6 +1932,7 @@ operator|.
 name|getCluster
 argument_list|()
 decl_stmt|;
+comment|// Put the data files in target/ so they don't dirty the local git checkout
 name|cluster
 operator|.
 name|update
@@ -1948,7 +1949,7 @@ argument_list|,
 operator|new
 name|Path
 argument_list|(
-literal|"data.txt"
+literal|"target/data.txt"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -1968,7 +1969,7 @@ argument_list|,
 operator|new
 name|Path
 argument_list|(
-literal|"data2.txt"
+literal|"target/data2.txt"
 argument_list|)
 argument_list|)
 expr_stmt|;
