@@ -9440,6 +9440,96 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testMRPrevLast
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM emp\n"
+operator|+
+literal|"MATCH_RECOGNIZE (\n"
+operator|+
+literal|"  MEASURES\n"
+operator|+
+literal|"    STRT.mgr AS start_mgr,\n"
+operator|+
+literal|"    LAST(DOWN.mgr) AS bottom_mgr,\n"
+operator|+
+literal|"    LAST(UP.mgr) AS end_mgr\n"
+operator|+
+literal|"  ONE ROW PER MATCH\n"
+operator|+
+literal|"  PATTERN (STRT DOWN+ UP+)\n"
+operator|+
+literal|"  DEFINE\n"
+operator|+
+literal|"    DOWN AS DOWN.mgr< PREV(DOWN.mgr),\n"
+operator|+
+literal|"    UP AS UP.mgr> PREV(LAST(DOWN.mgr, 1), 1)\n"
+operator|+
+literal|") AS T"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testMRPrevDown
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM emp\n"
+operator|+
+literal|"MATCH_RECOGNIZE (\n"
+operator|+
+literal|"  MEASURES\n"
+operator|+
+literal|"    STRT.mgr AS start_mgr,\n"
+operator|+
+literal|"    LAST(DOWN.mgr) AS up_days,\n"
+operator|+
+literal|"    LAST(UP.mgr) AS total_days\n"
+operator|+
+literal|"  PATTERN (STRT DOWN+ UP+)\n"
+operator|+
+literal|"  DEFINE\n"
+operator|+
+literal|"    DOWN AS DOWN.mgr< PREV(DOWN.mgr),\n"
+operator|+
+literal|"    UP AS UP.mgr> PREV(DOWN.mgr)\n"
+operator|+
+literal|") AS T"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
 comment|/**    * Visitor that checks that every {@link RelNode} in a tree is valid.    *    * @see RelNode#isValid(Litmus, RelNode.Context)    */
 specifier|public
 specifier|static
