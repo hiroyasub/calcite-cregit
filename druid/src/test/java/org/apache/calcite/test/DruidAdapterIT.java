@@ -7269,6 +7269,896 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+comment|/**    * Tests whether an aggregate with a filter clause has it's filter factored out    * when there is no outer filter    */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testFilterClauseFactoredOut
+parameter_list|()
+block|{
+comment|// Logically equivalent to
+comment|// select sum("store_sales") from "foodmart" where "the_year">= 1997
+name|String
+name|sql
+init|=
+literal|"select sum(\"store_sales\") "
+operator|+
+literal|"filter (where \"the_year\">= 1997) from \"foodmart\""
+decl_stmt|;
+name|String
+name|expectedQuery
+init|=
+literal|"{'queryType':'timeseries','dataSource':'foodmart','descending':false,"
+operator|+
+literal|"'granularity':'all','filter':{'type':'bound','dimension':'the_year','lower':'1997',"
+operator|+
+literal|"'lowerStrict':false,'ordering':'numeric'},'aggregations':[{'type':'doubleSum','name'"
+operator|+
+literal|":'EXPR$0','fieldName':'store_sales'}],'intervals':['1900-01-09T00:00:00.000/2992-01"
+operator|+
+literal|"-10T00:00:00.000'],'context':{'skipEmptyBuckets':true}}"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|druidChecker
+argument_list|(
+name|expectedQuery
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+comment|/**    * Tests whether filter clauses with filters that are always true disappear or not    */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testFilterClauseAlwaysTrueGone
+parameter_list|()
+block|{
+comment|// Logically equivalent to
+comment|// select sum("store_sales") from "foodmart"
+name|String
+name|sql
+init|=
+literal|"select sum(\"store_sales\") filter (where 1 = 1) from \"foodmart\""
+decl_stmt|;
+name|String
+name|expectedQuery
+init|=
+literal|"{'queryType':'timeseries','dataSource':'foodmart','descending':false,"
+operator|+
+literal|"'granularity':'all','aggregations':[{'type':'doubleSum','name':'EXPR$0','fieldName':"
+operator|+
+literal|"'store_sales'}],'intervals':['1900-01-09T00:00:00.000/2992-01-10T00:00:00.000'],"
+operator|+
+literal|"'context':{'skipEmptyBuckets':true}}"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|druidChecker
+argument_list|(
+name|expectedQuery
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+comment|/**    * Tests whether filter clauses with filters that are always true disappear in the presence    * of another aggregate without a filter clause    */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testFilterClauseAlwaysTrueWithAggGone1
+parameter_list|()
+block|{
+comment|// Logically equivalent to
+comment|// select sum("store_sales"), sum("store_cost") from "foodmart"
+name|String
+name|sql
+init|=
+literal|"select sum(\"store_sales\") filter (where 1 = 1), "
+operator|+
+literal|"sum(\"store_cost\") from \"foodmart\""
+decl_stmt|;
+name|String
+name|expectedQuery
+init|=
+literal|"{'queryType':'timeseries','dataSource':'foodmart','descending':false,"
+operator|+
+literal|"'granularity':'all','aggregations':[{'type':'doubleSum','name':'EXPR$0','fieldName':"
+operator|+
+literal|"'store_sales'},{'type':'doubleSum','name':'EXPR$1','fieldName':'store_cost'}],"
+operator|+
+literal|"'intervals':['1900-01-09T00:00:00.000/2992-01-10T00:00:00.000'],"
+operator|+
+literal|"'context':{'skipEmptyBuckets':true}}"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|druidChecker
+argument_list|(
+name|expectedQuery
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+comment|/**    * Tests whether filter clauses with filters that are always true disappear in the presence    * of another aggregate with a filter clause    */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testFilterClauseAlwaysTrueWithAggGone2
+parameter_list|()
+block|{
+comment|// Logically equivalent to
+comment|// select sum("store_sales"),
+comment|// sum("store_cost") filter (where "store_state" = 'CA') from "foodmart"
+name|String
+name|sql
+init|=
+literal|"select sum(\"store_sales\") filter (where 1 = 1), "
+operator|+
+literal|"sum(\"store_cost\") filter (where \"store_state\" = 'CA') "
+operator|+
+literal|"from \"foodmart\""
+decl_stmt|;
+name|String
+name|expectedQuery
+init|=
+literal|"{'queryType':'timeseries','dataSource':'foodmart','descending':false,"
+operator|+
+literal|"'granularity':'all','aggregations':[{'type':'doubleSum','name':'EXPR$0','fieldName'"
+operator|+
+literal|":'store_sales'},{'type':'filtered','filter':{'type':'selector','dimension':"
+operator|+
+literal|"'store_state','value':'CA'},'aggregator':{'type':'doubleSum','name':'EXPR$1',"
+operator|+
+literal|"'fieldName':'store_cost'}}],'intervals':"
+operator|+
+literal|"['1900-01-09T00:00:00.000/2992-01-10T00:00:00.000'],"
+operator|+
+literal|"'context':{'skipEmptyBuckets':true}}"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|druidChecker
+argument_list|(
+name|expectedQuery
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+comment|/**    * Tests whether an existing outer filter is untouched when an aggregate has a filter clause    * that is always true    */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testOuterFilterRemainsWithAlwaysTrueClause
+parameter_list|()
+block|{
+comment|// Logically equivalent to
+comment|// select sum("store_sales"), sum("store_cost") from "foodmart" where "store_city" = 'Seattle'
+name|String
+name|sql
+init|=
+literal|"select sum(\"store_sales\") filter (where 1 = 1), sum(\"store_cost\") "
+operator|+
+literal|"from \"foodmart\" where \"store_city\" = 'Seattle'"
+decl_stmt|;
+name|String
+name|expectedQuery
+init|=
+literal|"{'queryType':'timeseries','dataSource':'foodmart','descending':false,"
+operator|+
+literal|"'granularity':'all','filter':{'type':'selector','dimension':'store_city',"
+operator|+
+literal|"'value':'Seattle'},'aggregations':[{'type':'doubleSum','name':'EXPR$0',"
+operator|+
+literal|"'fieldName':'store_sales'},{'type':'doubleSum','name':'EXPR$1',"
+operator|+
+literal|"'fieldName':'store_cost'}],'intervals':"
+operator|+
+literal|"['1900-01-09T00:00:00.000/2992-01-10T00:00:00.000'],"
+operator|+
+literal|"'context':{'skipEmptyBuckets':true}}"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|druidChecker
+argument_list|(
+name|expectedQuery
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+comment|/**    * Tests that an aggregate with a filter clause that is always false does not get pushed in    */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testFilterClauseAlwaysFalseNotPushed
+parameter_list|()
+block|{
+name|String
+name|sql
+init|=
+literal|"select sum(\"store_sales\") filter (where 1> 1) from \"foodmart\""
+decl_stmt|;
+comment|// Calcite takes care of the unsatisfiable filter
+name|String
+name|expectedSubExplain
+init|=
+literal|"  BindableAggregate(group=[{}], EXPR$0=[SUM($0) FILTER $1])\n"
+operator|+
+literal|"    BindableProject(store_sales=[$0], $f1=[false])\n"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+name|expectedSubExplain
+argument_list|)
+expr_stmt|;
+block|}
+comment|/**    * Tests that an aggregate with a filter clause that is always false does not get pushed when    * there is already an outer filter    */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testFilterClauseAlwaysFalseNotPushedWithFilter
+parameter_list|()
+block|{
+name|String
+name|sql
+init|=
+literal|"select sum(\"store_sales\") filter (where 1> 1) "
+operator|+
+literal|"from \"foodmart\" where \"store_city\" = 'Seattle'"
+decl_stmt|;
+name|String
+name|expectedSubExplain
+init|=
+literal|"  BindableAggregate(group=[{}], EXPR$0=[SUM($0) FILTER $1])\n"
+operator|+
+literal|"    BindableProject(store_sales=[$0], $f1=[false])\n"
+operator|+
+literal|"      DruidQuery(table=[[foodmart, foodmart]], "
+operator|+
+literal|"intervals=[[1900-01-09T00:00:00.000/2992-01-10T00:00:00.000]], "
+comment|// Make sure the original filter is still there
+operator|+
+literal|"filter=[=($62, 'Seattle')], projects=[[$90]])"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+name|expectedSubExplain
+argument_list|)
+expr_stmt|;
+block|}
+comment|/**    * Tests that an aggregate with a filter clause that is the same as the outer filter has no    * references to that filter, and that the original outer filter remains    */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testFilterClauseSameAsOuterFilterGone
+parameter_list|()
+block|{
+comment|// Logically equivalent to
+comment|// select sum("store_sales") from "foodmart" where "store_city" = 'Seattle'
+name|String
+name|sql
+init|=
+literal|"select sum(\"store_sales\") filter (where \"store_city\" = 'Seattle') "
+operator|+
+literal|"from \"foodmart\" where \"store_city\" = 'Seattle'"
+decl_stmt|;
+name|String
+name|expectedQuery
+init|=
+literal|"{'queryType':'timeseries','dataSource':'foodmart','descending':false,"
+operator|+
+literal|"'granularity':'all','filter':{'type':'selector','dimension':'store_city','value':"
+operator|+
+literal|"'Seattle'},'aggregations':[{'type':'doubleSum','name':'EXPR$0','fieldName':"
+operator|+
+literal|"'store_sales'}],'intervals':['1900-01-09T00:00:00.000/2992-01-10T00:00:00.000'],"
+operator|+
+literal|"'context':{'skipEmptyBuckets':true}}"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|druidChecker
+argument_list|(
+name|expectedQuery
+argument_list|)
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"EXPR$0=52644.07004201412"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/**    * Test to ensure that an aggregate with a filter clause in the presence of another aggregate    * without a filter clause does not have it's filter factored out into the outer filter    */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testFilterClauseNotFactoredOut1
+parameter_list|()
+block|{
+name|String
+name|sql
+init|=
+literal|"select sum(\"store_sales\") filter (where \"store_state\" = 'CA'), "
+operator|+
+literal|"sum(\"store_cost\") from \"foodmart\""
+decl_stmt|;
+name|String
+name|expectedQuery
+init|=
+literal|"{'queryType':'timeseries','dataSource':'foodmart','descending':false,"
+operator|+
+literal|"'granularity':'all','aggregations':[{'type':'filtered','filter':{'type':'selector',"
+operator|+
+literal|"'dimension':'store_state','value':'CA'},'aggregator':{'type':'doubleSum','name':"
+operator|+
+literal|"'EXPR$0','fieldName':'store_sales'}},{'type':'doubleSum','name':'EXPR$1','fieldName'"
+operator|+
+literal|":'store_cost'}],'intervals':['1900-01-09T00:00:00.000/2992-01-10T00:00:00.000'],"
+operator|+
+literal|"'context':{'skipEmptyBuckets':true}}"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|druidChecker
+argument_list|(
+name|expectedQuery
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+comment|/**    * Test to ensure that an aggregate with a filter clause in the presence of another aggregate    * without a filter clause, and an outer filter does not have it's    * filter factored out into the outer filter    */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testFilterClauseNotFactoredOut2
+parameter_list|()
+block|{
+name|String
+name|sql
+init|=
+literal|"select sum(\"store_sales\") filter (where \"store_state\" = 'CA'), "
+operator|+
+literal|"sum(\"store_cost\") from \"foodmart\" where \"the_year\">= 1997"
+decl_stmt|;
+name|String
+name|expectedQuery
+init|=
+literal|"{'queryType':'timeseries','dataSource':'foodmart','descending':false,"
+operator|+
+literal|"'granularity':'all','filter':{'type':'bound','dimension':'the_year','lower':'1997',"
+operator|+
+literal|"'lowerStrict':false,'ordering':'numeric'},'aggregations':[{'type':'filtered',"
+operator|+
+literal|"'filter':{'type':'selector','dimension':'store_state','value':'CA'},'aggregator':{"
+operator|+
+literal|"'type':'doubleSum','name':'EXPR$0','fieldName':'store_sales'}},{'type':'doubleSum',"
+operator|+
+literal|"'name':'EXPR$1','fieldName':'store_cost'}],"
+operator|+
+literal|"'intervals':['1900-01-09T00:00:00.000/2992-01-10T00:00:00.000'],"
+operator|+
+literal|"'context':{'skipEmptyBuckets':true}}"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|druidChecker
+argument_list|(
+name|expectedQuery
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+comment|/**    * Test to ensure that multiple aggregates with filter clauses have their filters extracted to    * the outer filter field for data pruning    */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testFilterClausesFactoredForPruning1
+parameter_list|()
+block|{
+name|String
+name|sql
+init|=
+literal|"select "
+operator|+
+literal|"sum(\"store_sales\") filter (where \"store_state\" = 'CA'), "
+operator|+
+literal|"sum(\"store_sales\") filter (where \"store_state\" = 'WA') "
+operator|+
+literal|"from \"foodmart\""
+decl_stmt|;
+name|String
+name|expectedQuery
+init|=
+literal|"{'queryType':'timeseries','dataSource':'foodmart','descending':false,"
+operator|+
+literal|"'granularity':'all','filter':{'type':'or','fields':[{'type':'selector','dimension':"
+operator|+
+literal|"'store_state','value':'CA'},{'type':'selector','dimension':'store_state',"
+operator|+
+literal|"'value':'WA'}]},'aggregations':[{'type':'filtered','filter':{'type':'selector',"
+operator|+
+literal|"'dimension':'store_state','value':'CA'},'aggregator':{'type':'doubleSum','name':"
+operator|+
+literal|"'EXPR$0','fieldName':'store_sales'}},{'type':'filtered','filter':{'type':'selector',"
+operator|+
+literal|"'dimension':'store_state','value':'WA'},'aggregator':{'type':'doubleSum','name':"
+operator|+
+literal|"'EXPR$1','fieldName':'store_sales'}}],'intervals':"
+operator|+
+literal|"['1900-01-09T00:00:00.000/2992-01-10T00:00:00.000'],"
+operator|+
+literal|"'context':{'skipEmptyBuckets':true}}"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|druidChecker
+argument_list|(
+name|expectedQuery
+argument_list|)
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"EXPR$0=159167.840144217; EXPR$1=263793.2202244997"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/**    * Test to ensure that multiple aggregates with filter clauses have their filters extracted to    * the outer filter field for data pruning in the presence of an outer filter    */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testFilterClausesFactoredForPruning2
+parameter_list|()
+block|{
+name|String
+name|sql
+init|=
+literal|"select "
+operator|+
+literal|"sum(\"store_sales\") filter (where \"store_state\" = 'CA'), "
+operator|+
+literal|"sum(\"store_sales\") filter (where \"store_state\" = 'WA') "
+operator|+
+literal|"from \"foodmart\" where \"brand_name\" = 'Super'"
+decl_stmt|;
+name|String
+name|expectedQuery
+init|=
+literal|"{'queryType':'timeseries','dataSource':'foodmart','descending':false,"
+operator|+
+literal|"'granularity':'all','filter':{'type':'and','fields':[{'type':'or','fields':[{'type':"
+operator|+
+literal|"'selector','dimension':'store_state','value':'CA'},{'type':'selector','dimension':"
+operator|+
+literal|"'store_state','value':'WA'}]},{'type':'selector','dimension':'brand_name','value':"
+operator|+
+literal|"'Super'}]},'aggregations':[{'type':'filtered','filter':{'type':'selector',"
+operator|+
+literal|"'dimension':'store_state','value':'CA'},'aggregator':{'type':'doubleSum','name':"
+operator|+
+literal|"'EXPR$0','fieldName':'store_sales'}},{'type':'filtered','filter':{'type':'selector',"
+operator|+
+literal|"'dimension':'store_state','value':'WA'},'aggregator':{'type':'doubleSum','name':"
+operator|+
+literal|"'EXPR$1','fieldName':'store_sales'}}],'intervals':"
+operator|+
+literal|"['1900-01-09T00:00:00.000/2992-01-10T00:00:00.000'],"
+operator|+
+literal|"'context':{'skipEmptyBuckets':true}}"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|druidChecker
+argument_list|(
+name|expectedQuery
+argument_list|)
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"EXPR$0=2600.0099930763245; EXPR$1=4486.439979553223"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/**    * Test to ensure that multiple aggregates with the same filter clause have them factored    * out in the presence of an outer filter, and that they no longer refer to those filters    */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testMultipleFiltersFactoredOutWithOuterFilter
+parameter_list|()
+block|{
+comment|// Logically Equivalent to
+comment|// select sum("store_sales"), sum("store_cost")
+comment|// from "foodmart" where "brand_name" = 'Super' and "store_state" = 'CA'
+name|String
+name|sql
+init|=
+literal|"select "
+operator|+
+literal|"sum(\"store_sales\") filter (where \"store_state\" = 'CA'), "
+operator|+
+literal|"sum(\"store_cost\") filter (where \"store_state\" = 'CA') "
+operator|+
+literal|"from \"foodmart\" "
+operator|+
+literal|"where \"brand_name\" = 'Super'"
+decl_stmt|;
+comment|// Aggregates should lose reference to any filter clause
+name|String
+name|expectedAggregateExplain
+init|=
+literal|"aggs=[[SUM($0), SUM($2)]]"
+decl_stmt|;
+name|String
+name|expectedQuery
+init|=
+literal|"{'queryType':'timeseries','dataSource':'foodmart','descending':false,"
+operator|+
+literal|"'granularity':'all','filter':{'type':'and','fields':[{'type':'selector','dimension':"
+operator|+
+literal|"'store_state','value':'CA'},{'type':'selector','dimension':'brand_name','value':"
+operator|+
+literal|"'Super'}]},'aggregations':[{'type':'doubleSum','name':'EXPR$0','fieldName':"
+operator|+
+literal|"'store_sales'},{'type':'doubleSum','name':'EXPR$1','fieldName':'store_cost'}],"
+operator|+
+literal|"'intervals':['1900-01-09T00:00:00.000/2992-01-10T00:00:00.000'],"
+operator|+
+literal|"'context':{'skipEmptyBuckets':true}}"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|druidChecker
+argument_list|(
+name|expectedQuery
+argument_list|)
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+name|expectedAggregateExplain
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"EXPR$0=2600.0099930763245; EXPR$1=1013.1619997620583"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/**    * Tests that when the resulting filter from factoring filter clauses out is always false,    * that they are still pushed to Druid to handle.    */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testOuterFilterFalseAfterFactorSimplification
+parameter_list|()
+block|{
+comment|// Normally we would factor out "the_year"> 1997 into the outer filter to prune the data
+comment|// before aggregation and simplify the expression, but in this case that would produce:
+comment|// "the_year"> 1997 AND "the_year"<= 1997 -> false (after simplification)
+comment|// Since Druid cannot handle a "false" filter, we revert back to the
+comment|// pre-simplified version. i.e the filter should be "the_year"> 1997 and "the_year"<= 1997
+comment|// and let Druid handle an unsatisfiable expression
+name|String
+name|sql
+init|=
+literal|"select sum(\"store_sales\") filter (where \"the_year\"> 1997) "
+operator|+
+literal|"from \"foodmart\" where \"the_year\"<= 1997"
+decl_stmt|;
+name|String
+name|expectedFilter
+init|=
+literal|"filter':{'type':'and','fields':[{'type':'bound','dimension':'the_year'"
+operator|+
+literal|",'lower':'1997','lowerStrict':true,'ordering':'numeric'},{'type':'bound',"
+operator|+
+literal|"'dimension':'the_year','upper':'1997','upperStrict':false,'ordering':'numeric'}]}"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|druidChecker
+argument_list|(
+name|expectedFilter
+argument_list|)
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|""
+argument_list|)
+expr_stmt|;
+block|}
+comment|/**    * Test to ensure that aggregates with filter clauses that Druid cannot handle are not pushed in    * as filtered aggregates.    */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testFilterClauseNotPushable
+parameter_list|()
+block|{
+comment|// Currently the adapter does not support the LIKE operator
+name|String
+name|sql
+init|=
+literal|"select sum(\"store_sales\") "
+operator|+
+literal|"filter (where \"the_year\" like '199_') from \"foodmart\""
+decl_stmt|;
+name|String
+name|expectedSubExplain
+init|=
+literal|"  BindableAggregate(group=[{}], EXPR$0=[SUM($0) FILTER $1])\n"
+operator|+
+literal|"    BindableProject(store_sales=[$1], $f1=[IS TRUE(LIKE($0, '199_'))])"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+name|expectedSubExplain
+argument_list|)
+expr_stmt|;
+block|}
+comment|/**    * Test to ensure that aggregations with metrics as filters do not get pushed into Druid    */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testFilterClauseWithMetricRef
+parameter_list|()
+block|{
+name|String
+name|sql
+init|=
+literal|"select sum(\"store_sales\") filter (where \"store_cost\"> 10) from \"foodmart\""
+decl_stmt|;
+name|String
+name|expectedSubExplain
+init|=
+literal|"  BindableAggregate(group=[{}], EXPR$0=[SUM($0) FILTER $1])\n"
+operator|+
+literal|"    BindableProject(store_sales=[$0], $f1=[IS TRUE(>($1, 10))])\n"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+name|expectedSubExplain
+argument_list|)
+expr_stmt|;
+block|}
+comment|/**    * Test to ensure that an aggregate with a nested filter clause has it's filter factored out    */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testNestedFilterClauseFactored
+parameter_list|()
+block|{
+comment|// Logically equivalent to
+comment|// select sum("store_sales") from "foodmart" where "store_state" in ('CA', 'OR')
+name|String
+name|sql
+init|=
+literal|"select sum(\"store_sales\") "
+operator|+
+literal|"filter (where \"store_state\" = 'CA' or \"store_state\" = 'OR') from \"foodmart\""
+decl_stmt|;
+name|String
+name|expectedFilterJson
+init|=
+literal|"filter':{'type':'or','fields':[{'type':'selector','dimension':"
+operator|+
+literal|"'store_state','value':'CA'},{'type':'selector',"
+operator|+
+literal|"'dimension':'store_state','value':'OR'}]}"
+decl_stmt|;
+name|String
+name|expectedAggregateJson
+init|=
+literal|"'aggregations':[{'type':'doubleSum',"
+operator|+
+literal|"'name':'EXPR$0','fieldName':'store_sales'}]"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|druidChecker
+argument_list|(
+name|expectedFilterJson
+argument_list|)
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|druidChecker
+argument_list|(
+name|expectedAggregateJson
+argument_list|)
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"EXPR$0=301444.910279572"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/**    * Test to ensure that aggregates with nested filters have their filters factored out    * into the outer filter for data pruning while still holding a reference to the filter clause    */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testNestedFilterClauseInAggregates
+parameter_list|()
+block|{
+name|String
+name|sql
+init|=
+literal|"select "
+operator|+
+literal|"sum(\"store_sales\") filter "
+operator|+
+literal|"(where \"store_state\" = 'CA' and \"the_month\" = 'October'), "
+operator|+
+literal|"sum(\"store_cost\") filter "
+operator|+
+literal|"(where \"store_state\" = 'CA' and \"the_day\" = 'Monday') "
+operator|+
+literal|"from \"foodmart\""
+decl_stmt|;
+comment|// (store_state = CA AND the_month = October) OR (store_state = CA AND the_day = Monday)
+name|String
+name|expectedFilterJson
+init|=
+literal|"filter':{'type':'or','fields':[{'type':'and','fields':[{'type':"
+operator|+
+literal|"'selector','dimension':'store_state','value':'CA'},{'type':'selector','dimension':"
+operator|+
+literal|"'the_month','value':'October'}]},{'type':'and','fields':[{'type':'selector',"
+operator|+
+literal|"'dimension':'store_state','value':'CA'},{'type':'selector','dimension':'the_day',"
+operator|+
+literal|"'value':'Monday'}]}]}"
+decl_stmt|;
+name|String
+name|expectedAggregatesJson
+init|=
+literal|"'aggregations':[{'type':'filtered','filter':{'type':'and',"
+operator|+
+literal|"'fields':[{'type':'selector','dimension':'store_state','value':'CA'},{'type':"
+operator|+
+literal|"'selector','dimension':'the_month','value':'October'}]},'aggregator':{'type':"
+operator|+
+literal|"'doubleSum','name':'EXPR$0','fieldName':'store_sales'}},{'type':'filtered',"
+operator|+
+literal|"'filter':{'type':'and','fields':[{'type':'selector','dimension':'store_state',"
+operator|+
+literal|"'value':'CA'},{'type':'selector','dimension':'the_day','value':'Monday'}]},"
+operator|+
+literal|"'aggregator':{'type':'doubleSum','name':'EXPR$1','fieldName':'store_cost'}}]"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|druidChecker
+argument_list|(
+name|expectedFilterJson
+argument_list|)
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|druidChecker
+argument_list|(
+name|expectedAggregatesJson
+argument_list|)
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"EXPR$0=13077.79001301527; EXPR$1=9830.779905691743"
+argument_list|)
+expr_stmt|;
+block|}
 comment|/**    *<a href="https://issues.apache.org/jira/browse/CALCITE-1805">[CALCITE-1805]    * Druid adapter cannot handle count column without adding support for nested queries</a>.    */
 annotation|@
 name|Test
