@@ -526,6 +526,14 @@ argument_list|(
 name|SqlTypeName
 operator|.
 name|TIMESTAMP
+argument_list|,
+name|SqlTypeName
+operator|.
+name|DATE
+argument_list|,
+name|SqlTypeName
+operator|.
+name|TIME
 argument_list|)
 argument_list|)
 decl|.
