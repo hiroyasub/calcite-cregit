@@ -2154,9 +2154,9 @@ specifier|final
 name|String
 name|explain
 init|=
-literal|"PLAN=EnumerableLimit(offset=[2], fetch=[3])\n"
+literal|"PLAN=EnumerableInterpreter\n"
 operator|+
-literal|"  EnumerableInterpreter\n"
+literal|"  BindableSort(sort0=[$1], sort1=[$0], dir0=[ASC], dir1=[DESC], offset=[2], fetch=[3])\n"
 operator|+
 literal|"    DruidQuery(table=[[foodmart, foodmart]], "
 operator|+
@@ -4300,9 +4300,11 @@ specifier|final
 name|String
 name|explain
 init|=
-literal|"PLAN=EnumerableInterpreter\n"
+literal|"PLAN="
 operator|+
-literal|"  BindableProject(S=[$2], M=[$3], P=[$0])\n"
+literal|"EnumerableCalc(expr#0..3=[{inputs}], S=[$t2], M=[$t3], P=[$t0])\n"
+operator|+
+literal|"  EnumerableInterpreter\n"
 operator|+
 literal|"    DruidQuery(table=[[foodmart, foodmart]], "
 operator|+
@@ -6284,6 +6286,22 @@ literal|"group by floor(\"timestamp\" to MONTH)\n"
 operator|+
 literal|"order by \"floor_month\" DESC LIMIT 3"
 decl_stmt|;
+specifier|final
+name|String
+name|explain
+init|=
+literal|"PLAN=EnumerableInterpreter\n"
+operator|+
+literal|"  BindableSort(sort0=[$0], dir0=[DESC], fetch=[3])\n"
+operator|+
+literal|"    DruidQuery(table=[[foodmart, foodmart]], "
+operator|+
+literal|"intervals=[[1900-01-09T00:00:00.000/2992-01-10T00:00:00.000]], "
+operator|+
+literal|"projects=[[FLOOR($0, FLAG(MONTH))]], groups=[{0}], aggs=[[]], "
+operator|+
+literal|"sort0=[0], dir0=[DESC])"
+decl_stmt|;
 name|sql
 argument_list|(
 name|sql
@@ -6291,15 +6309,7 @@ argument_list|)
 operator|.
 name|explainContains
 argument_list|(
-literal|"PLAN=EnumerableLimit(fetch=[3])\n"
-operator|+
-literal|"  EnumerableInterpreter\n"
-operator|+
-literal|"    DruidQuery(table=[[foodmart, foodmart]], "
-operator|+
-literal|"intervals=[[1900-01-09T00:00:00.000/2992-01-10T00:00:00.000]], projects=[[FLOOR($0, "
-operator|+
-literal|"FLAG(MONTH))]], groups=[{0}], aggs=[[]], sort0=[0], dir0=[DESC])"
+name|explain
 argument_list|)
 operator|.
 name|queryContains

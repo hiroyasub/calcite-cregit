@@ -627,13 +627,13 @@ if|if
 condition|(
 name|LOGGER
 operator|.
-name|isInfoEnabled
+name|isDebugEnabled
 argument_list|()
 condition|)
 block|{
 name|LOGGER
 operator|.
-name|info
+name|debug
 argument_list|(
 literal|"Converted time ranges "
 operator|+
