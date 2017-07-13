@@ -7279,6 +7279,1318 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testPlusArithmeticOperation
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sqlQuery
+init|=
+literal|"select sum(\"store_sales\") + sum(\"store_cost\") as a, "
+operator|+
+literal|"\"store_state\" from \"foodmart\"  group by \"store_state\" order by a desc"
+decl_stmt|;
+name|String
+name|postAggString
+init|=
+literal|"'postAggregations':[{'type':'arithmetic','name':'postagg#0','fn':'+',"
+operator|+
+literal|"'fields':[{'type':'fieldAccess','name':'','fieldName':'$f1'},{'type':'fieldAccess','"
+operator|+
+literal|"name':'','fieldName':'$f2'}]}]"
+decl_stmt|;
+specifier|final
+name|String
+name|plan
+init|=
+literal|"PLAN=EnumerableInterpreter\n"
+operator|+
+literal|"  DruidQuery(table=[[foodmart, foodmart]], "
+operator|+
+literal|"intervals=[[1900-01-09T00:00:00.000/2992-01-10T00:00:00.000]], "
+operator|+
+literal|"groups=[{63}], aggs=[[SUM($90), SUM($91)]], post_projects=[[+($1, $2), $0]], "
+operator|+
+literal|"sort0=[0], dir0=[DESC]"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sqlQuery
+argument_list|,
+name|FOODMART
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+name|plan
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|druidChecker
+argument_list|(
+name|postAggString
+argument_list|)
+argument_list|)
+operator|.
+name|returnsOrdered
+argument_list|(
+literal|"A=369117.525390625; store_state=WA"
+argument_list|,
+literal|"A=222698.26513671875; store_state=CA"
+argument_list|,
+literal|"A=199049.57055664062; store_state=OR"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testDivideArithmeticOperation
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sqlQuery
+init|=
+literal|"select \"store_state\", sum(\"store_sales\") / sum(\"store_cost\") "
+operator|+
+literal|"as a from \"foodmart\"  group by \"store_state\" order by a desc"
+decl_stmt|;
+name|String
+name|postAggString
+init|=
+literal|"'postAggregations':[{'type':'arithmetic','name':'postagg#0',"
+operator|+
+literal|"'fn':'quotient','fields':[{'type':'fieldAccess','name':'','fieldName':'$f1'},"
+operator|+
+literal|"{'type':'fieldAccess','name':'','fieldName':'$f2'}]}]"
+decl_stmt|;
+specifier|final
+name|String
+name|plan
+init|=
+literal|"PLAN=EnumerableInterpreter\n"
+operator|+
+literal|"  DruidQuery(table=[[foodmart, foodmart]], "
+operator|+
+literal|"intervals=[[1900-01-09T00:00:00.000/2992-01-10T00:00:00.000]], "
+operator|+
+literal|"groups=[{63}], aggs=[[SUM($90), SUM($91)]], post_projects=[[$0, /($1, $2)]], "
+operator|+
+literal|"sort0=[1], dir0=[DESC]"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sqlQuery
+argument_list|,
+name|FOODMART
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+name|plan
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|druidChecker
+argument_list|(
+name|postAggString
+argument_list|)
+argument_list|)
+operator|.
+name|returnsOrdered
+argument_list|(
+literal|"store_state=OR; A=2.5060913241562606"
+argument_list|,
+literal|"store_state=CA; A=2.505379731203625"
+argument_list|,
+literal|"store_state=WA; A=2.5045805694710124"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testMultiplyArithmeticOperation
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sqlQuery
+init|=
+literal|"select \"store_state\", sum(\"store_sales\") * sum(\"store_cost\") "
+operator|+
+literal|"as a from \"foodmart\"  group by \"store_state\" order by a desc"
+decl_stmt|;
+name|String
+name|postAggString
+init|=
+literal|"'postAggregations':[{'type':'arithmetic','name':'postagg#0',"
+operator|+
+literal|"'fn':'*','fields':[{'type':'fieldAccess','name':'','fieldName':'$f1'},"
+operator|+
+literal|"{'type':'fieldAccess','name':'','fieldName':'$f2'}]}]"
+decl_stmt|;
+specifier|final
+name|String
+name|plan
+init|=
+literal|"PLAN=EnumerableInterpreter\n"
+operator|+
+literal|"  DruidQuery(table=[[foodmart, foodmart]], "
+operator|+
+literal|"intervals=[[1900-01-09T00:00:00.000/2992-01-10T00:00:00.000]], "
+operator|+
+literal|"groups=[{63}], aggs=[[SUM($90), SUM($91)]], post_projects=[[$0, *($1, $2)]], "
+operator|+
+literal|"sort0=[1], dir0=[DESC]"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sqlQuery
+argument_list|,
+name|FOODMART
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+name|plan
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|druidChecker
+argument_list|(
+name|postAggString
+argument_list|)
+argument_list|)
+operator|.
+name|returnsOrdered
+argument_list|(
+literal|"store_state=WA; A=2.778383817085206E10"
+argument_list|,
+literal|"store_state=CA; A=1.0112000558236574E10"
+argument_list|,
+literal|"store_state=OR; A=8.077425009052019E9"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testMinusArithmeticOperation
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sqlQuery
+init|=
+literal|"select \"store_state\", sum(\"store_sales\") - sum(\"store_cost\") "
+operator|+
+literal|"as a from \"foodmart\"  group by \"store_state\" order by a desc"
+decl_stmt|;
+name|String
+name|postAggString
+init|=
+literal|"'postAggregations':[{'type':'arithmetic','name':'postagg#0',"
+operator|+
+literal|"'fn':'-','fields':[{'type':'fieldAccess','name':'','fieldName':'$f1'},"
+operator|+
+literal|"{'type':'fieldAccess','name':'','fieldName':'$f2'}]}]"
+decl_stmt|;
+specifier|final
+name|String
+name|plan
+init|=
+literal|"PLAN=EnumerableInterpreter\n"
+operator|+
+literal|"  DruidQuery(table=[[foodmart, foodmart]], "
+operator|+
+literal|"intervals=[[1900-01-09T00:00:00.000/2992-01-10T00:00:00.000]], "
+operator|+
+literal|"groups=[{63}], aggs=[[SUM($90), SUM($91)]], post_projects=[[$0, -($1, $2)]], "
+operator|+
+literal|"sort0=[1], dir0=[DESC]"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sqlQuery
+argument_list|,
+name|FOODMART
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+name|plan
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|druidChecker
+argument_list|(
+name|postAggString
+argument_list|)
+argument_list|)
+operator|.
+name|returnsOrdered
+argument_list|(
+literal|"store_state=WA; A=158468.908203125"
+argument_list|,
+literal|"store_state=CA; A=95637.41455078125"
+argument_list|,
+literal|"store_state=OR; A=85504.57006835938"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testConstantPostAggregator
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sqlQuery
+init|=
+literal|"select \"store_state\", sum(\"store_sales\") + 100 as a from "
+operator|+
+literal|"\"foodmart\"  group by \"store_state\" order by a desc"
+decl_stmt|;
+name|String
+name|postAggString
+init|=
+literal|"{'type':'constant','name':'','value':100.0}"
+decl_stmt|;
+specifier|final
+name|String
+name|plan
+init|=
+literal|"PLAN=EnumerableInterpreter\n"
+operator|+
+literal|"  DruidQuery(table=[[foodmart, foodmart]], "
+operator|+
+literal|"intervals=[[1900-01-09T00:00:00.000/2992-01-10T00:00:00.000]], "
+operator|+
+literal|"groups=[{63}], aggs=[[SUM($90)]], post_projects=[[$0, +($1, 100)]], "
+operator|+
+literal|"sort0=[1], dir0=[DESC]"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sqlQuery
+argument_list|,
+name|FOODMART
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+name|plan
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|druidChecker
+argument_list|(
+name|postAggString
+argument_list|)
+argument_list|)
+operator|.
+name|returnsOrdered
+argument_list|(
+literal|"store_state=WA; A=263893.216796875"
+argument_list|,
+literal|"store_state=CA; A=159267.83984375"
+argument_list|,
+literal|"store_state=OR; A=142377.0703125"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testRecursiveArithmeticOperation
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sqlQuery
+init|=
+literal|"select \"store_state\", -1 * (a + b) as c from (select "
+operator|+
+literal|"(sum(\"store_sales\")-sum(\"store_cost\")) / (count(*) * 3) "
+operator|+
+literal|"AS a,sum(\"unit_sales\") AS b, \"store_state\"  from \"foodmart\"  group "
+operator|+
+literal|"by \"store_state\") order by c desc"
+decl_stmt|;
+name|String
+name|postAggString
+init|=
+literal|"'postAggregations':[{'type':'arithmetic','name':'postagg#0',"
+operator|+
+literal|"'fn':'*','fields':[{'type':'constant','name':'','value':-1.0},{'type':"
+operator|+
+literal|"'arithmetic','name':'','fn':'+','fields':[{'type':'arithmetic','name':"
+operator|+
+literal|"'','fn':'quotient','fields':[{'type':'arithmetic','name':'','fn':'-',"
+operator|+
+literal|"'fields':[{'type':'fieldAccess','name':'','fieldName':'$f1'},{'type':"
+operator|+
+literal|"'fieldAccess','name':'','fieldName':'$f2'}]},{'type':'arithmetic','name':"
+operator|+
+literal|"'','fn':'*','fields':[{'type':'fieldAccess','name':'','fieldName':'$f3'},"
+operator|+
+literal|"{'type':'constant','name':'','value':3.0}]}]},{'type':'fieldAccess','name'"
+operator|+
+literal|":'','fieldName':'B'}]}]}]"
+decl_stmt|;
+specifier|final
+name|String
+name|plan
+init|=
+literal|"PLAN=EnumerableInterpreter\n"
+operator|+
+literal|"  DruidQuery(table=[[foodmart, foodmart]], "
+operator|+
+literal|"intervals=[[1900-01-09T00:00:00.000/2992-01-10T00:00:00.000]], groups=[{63}], "
+operator|+
+literal|"aggs=[[SUM($90), SUM($91), COUNT(), SUM($89)]], "
+operator|+
+literal|"post_projects=[[$0, *(-1, +(/(-($1, $2), *($3, 3)), $4))]], sort0=[1], dir0=[DESC])"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sqlQuery
+argument_list|,
+name|FOODMART
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+name|plan
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|druidChecker
+argument_list|(
+name|postAggString
+argument_list|)
+argument_list|)
+operator|.
+name|returnsOrdered
+argument_list|(
+literal|"store_state=OR; C=-67660.31890436632"
+argument_list|,
+literal|"store_state=CA; C=-74749.30433035406"
+argument_list|,
+literal|"store_state=WA; C=-124367.29537911131"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/**    * Turn on now count(distinct ) will get pushed after CALC-1853    */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testHyperUniquePostAggregator
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sqlQuery
+init|=
+literal|"select \"store_state\", sum(\"store_cost\") / count(distinct "
+operator|+
+literal|"\"brand_name\") as a from \"foodmart\"  group by \"store_state\" order by a desc"
+decl_stmt|;
+name|String
+name|postAggString
+init|=
+literal|"'postAggregations':[{'type':'arithmetic','name':'postagg#0','fn':"
+operator|+
+literal|"'quotient','fields':[{'type':'fieldAccess','name':'','fieldName':'$f1'},"
+operator|+
+literal|"{'type':'hyperUniqueCardinality','name':'','fieldName':'$f2'}]}]"
+decl_stmt|;
+specifier|final
+name|String
+name|plan
+init|=
+literal|"PLAN=EnumerableInterpreter\n"
+operator|+
+literal|"  DruidQuery(table=[[foodmart, foodmart]], intervals="
+operator|+
+literal|"[[1900-01-09T00:00:00.000/2992-01-10T00:00:00.000]], groups=[{63}], "
+decl_stmt|;
+name|CalciteAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|enable
+argument_list|(
+name|enabled
+argument_list|()
+argument_list|)
+operator|.
+name|with
+argument_list|(
+name|ImmutableMap
+operator|.
+name|of
+argument_list|(
+literal|"model"
+argument_list|,
+name|FOODMART
+operator|.
+name|getPath
+argument_list|()
+argument_list|)
+argument_list|)
+operator|.
+name|with
+argument_list|(
+name|CalciteConnectionProperty
+operator|.
+name|APPROXIMATE_DISTINCT_COUNT
+operator|.
+name|camelName
+argument_list|()
+argument_list|,
+literal|true
+argument_list|)
+operator|.
+name|query
+argument_list|(
+name|sqlQuery
+argument_list|)
+operator|.
+name|runs
+argument_list|()
+operator|.
+name|explainContains
+argument_list|(
+name|plan
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|druidChecker
+argument_list|(
+name|postAggString
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testExtractFilterWorkWithPostAggregations
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"SELECT \"store_state\", \"brand_name\", sum(\"store_sales\") - "
+operator|+
+literal|"sum(\"store_cost\") as a  from \"foodmart\" where extract (week from \"timestamp\")"
+operator|+
+literal|" IN (10,11) and \"brand_name\"='Bird Call' group by \"store_state\", \"brand_name\""
+decl_stmt|;
+specifier|final
+name|String
+name|druidQuery
+init|=
+literal|"'filter':{'type':'and','fields':[{'type':'selector','dimension'"
+operator|+
+literal|":'brand_name','value':'Bird Call'},{'type':'or','fields':[{'type':'selector',"
+operator|+
+literal|"'dimension':'__time','value':'10','extractionFn':{'type':'timeFormat','format'"
+operator|+
+literal|":'w','timeZone':'UTC','locale':'en-US'}},{'type':'selector','dimension':'__time'"
+operator|+
+literal|",'value':'11','extractionFn':{'type':'timeFormat','format':'w','timeZone':'UTC'"
+operator|+
+literal|",'locale':'en-US'}}]}]},'aggregations':[{'type':'doubleSum','name':'$f2',"
+operator|+
+literal|"'fieldName':'store_sales'},{'type':'doubleSum','name':'$f3','fieldName':"
+operator|+
+literal|"'store_cost'}],'postAggregations':[{'type':'arithmetic','name':'postagg#0'"
+operator|+
+literal|",'fn':'-','fields':[{'type':'fieldAccess','name':'','fieldName':'$f2'},"
+operator|+
+literal|"{'type':'fieldAccess','name':'','fieldName':'$f3'}]}]"
+decl_stmt|;
+specifier|final
+name|String
+name|plan
+init|=
+literal|"PLAN=EnumerableInterpreter\n"
+operator|+
+literal|"  DruidQuery(table=[[foodmart, foodmart]], "
+operator|+
+literal|"intervals=[[1900-01-09T00:00:00.000/2992-01-10T00:00:00.000]], filter=[AND(=("
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|,
+name|FOODMART
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+name|plan
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|druidChecker
+argument_list|(
+name|druidQuery
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSingleAverageFunction
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sqlQuery
+init|=
+literal|"select \"store_state\", sum(\"store_cost\") / count(*) as a from "
+operator|+
+literal|"\"foodmart\" group by \"store_state\" order by a desc"
+decl_stmt|;
+name|String
+name|postAggString
+init|=
+literal|"'aggregations':[{'type':'doubleSum','name':'$f1','fieldName':"
+operator|+
+literal|"'store_cost'},{'type':'count','name':'$f2'}],"
+operator|+
+literal|"'postAggregations':[{'type':'arithmetic','name':'postagg#0','fn':'quotient'"
+operator|+
+literal|",'fields':[{'type':'fieldAccess','name':'','fieldName':'$f1'},"
+operator|+
+literal|"{'type':'fieldAccess','name':'','fieldName':'$f2'}]}]"
+decl_stmt|;
+specifier|final
+name|String
+name|plan
+init|=
+literal|"PLAN=EnumerableInterpreter\n"
+operator|+
+literal|"  DruidQuery(table=[[foodmart, foodmart]], "
+operator|+
+literal|"intervals=[[1900-01-09T00:00:00.000/2992-01-10T00:00:00.000]], "
+operator|+
+literal|"groups=[{63}], aggs=[[SUM($91), COUNT()]], post_projects=[[$0, /($1, $2)]], "
+operator|+
+literal|"sort0=[1], dir0=[DESC]"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sqlQuery
+argument_list|,
+name|FOODMART
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+name|plan
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|druidChecker
+argument_list|(
+name|postAggString
+argument_list|)
+argument_list|)
+operator|.
+name|returnsOrdered
+argument_list|(
+literal|"store_state=OR; A=2.627140224161991"
+argument_list|,
+literal|"store_state=CA; A=2.5993382141879935"
+argument_list|,
+literal|"store_state=WA; A=2.5828708762997206"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testPartiallyPostAggregation
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sqlQuery
+init|=
+literal|"select \"store_state\", sum(\"store_sales\") / sum(\"store_cost\")"
+operator|+
+literal|" as a, case when sum(\"unit_sales\")=0 then 1.0 else sum(\"unit_sales\") "
+operator|+
+literal|"end as b from \"foodmart\"  group by \"store_state\" order by a desc"
+decl_stmt|;
+name|String
+name|postAggString
+init|=
+literal|"'postAggregations':[{'type':'arithmetic','name':'postagg#0',"
+operator|+
+literal|"'fn':'quotient','fields':[{'type':'fieldAccess','name':'','fieldName':'$f1'}"
+operator|+
+literal|",{'type':'fieldAccess','name':'','fieldName':'$f2'}]}]"
+decl_stmt|;
+specifier|final
+name|String
+name|plan
+init|=
+literal|"PLAN=EnumerableInterpreter\n"
+operator|+
+literal|"  BindableProject(store_state=[$0], A=[$1], B=[CASE(=($2, 0), "
+operator|+
+literal|"1.0, CAST($2):DECIMAL(19, 0))])\n"
+operator|+
+literal|"    DruidQuery(table=[[foodmart, foodmart]], "
+operator|+
+literal|"intervals=[[1900-01-09T00:00:00.000/2992-01-10T00:00:00.000]], "
+operator|+
+literal|"groups=[{63}], aggs=[[SUM($90), SUM($91), SUM($89)]], "
+operator|+
+literal|"post_projects=[[$0, /($1, $2), $3]], sort0=[1], dir0=[DESC]"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sqlQuery
+argument_list|,
+name|FOODMART
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+name|plan
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|druidChecker
+argument_list|(
+name|postAggString
+argument_list|)
+argument_list|)
+operator|.
+name|returnsOrdered
+argument_list|(
+literal|"store_state=OR; A=2.5060913241562606; B=67659"
+argument_list|,
+literal|"store_state=CA; A=2.505379731203625; B=74748"
+argument_list|,
+literal|"store_state=WA; A=2.5045805694710124; B=124366"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testDuplicateReferenceOnPostAggregation
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sqlQuery
+init|=
+literal|"select \"store_state\", a, a - b as c from (select \"store_state\", "
+operator|+
+literal|"sum(\"store_sales\") + 100 as a, sum(\"store_cost\") as b from \"foodmart\"  group by "
+operator|+
+literal|"\"store_state\") order by a desc"
+decl_stmt|;
+name|String
+name|postAggString
+init|=
+literal|"'postAggregations':[{'type':'arithmetic','name':'postagg#0',"
+operator|+
+literal|"'fn':'+','fields':[{'type':'fieldAccess','name':'','fieldName':'$f1'},"
+operator|+
+literal|"{'type':'constant','name':'','value':100.0}]},{'type':'arithmetic',"
+operator|+
+literal|"'name':'postagg#1','fn':'-','fields':[{'type':'arithmetic','name':'',"
+operator|+
+literal|"'fn':'+','fields':[{'type':'fieldAccess','name':'','fieldName':'$f1'},"
+operator|+
+literal|"{'type':'constant','name':'','value':100.0}]},{'type':'fieldAccess',"
+operator|+
+literal|"'name':'','fieldName':'B'}]}]"
+decl_stmt|;
+specifier|final
+name|String
+name|plan
+init|=
+literal|"PLAN=EnumerableInterpreter\n"
+operator|+
+literal|"  DruidQuery(table=[[foodmart, foodmart]], "
+operator|+
+literal|"intervals=[[1900-01-09T00:00:00.000/2992-01-10T00:00:00.000]], groups=[{63}], "
+operator|+
+literal|"aggs=[[SUM($90), SUM($91)]], post_projects=[[$0, +($1, 100), -(+($1, 100), $2)]], "
+operator|+
+literal|"sort0=[1], dir0=[DESC]"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sqlQuery
+argument_list|,
+name|FOODMART
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+name|plan
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|druidChecker
+argument_list|(
+name|postAggString
+argument_list|)
+argument_list|)
+operator|.
+name|returnsOrdered
+argument_list|(
+literal|"store_state=WA; A=263893.216796875; C=158568.908203125"
+argument_list|,
+literal|"store_state=CA; A=159267.83984375; C=95737.41455078125"
+argument_list|,
+literal|"store_state=OR; A=142377.0703125; C=85604.57006835938"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testDivideByZeroDoubleTypeInfinity
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sqlQuery
+init|=
+literal|"select \"store_state\", sum(\"store_cost\") / 0 as a from "
+operator|+
+literal|"\"foodmart\"  group by \"store_state\" order by a desc"
+decl_stmt|;
+name|String
+name|postAggString
+init|=
+literal|"'postAggregations':[{'type':'arithmetic','name':'postagg#0',"
+operator|+
+literal|"'fn':'quotient','fields':[{'type':'fieldAccess','name':'','fieldName':'$f1'},"
+operator|+
+literal|"{'type':'constant','name':'','value':0.0}]}]"
+decl_stmt|;
+specifier|final
+name|String
+name|plan
+init|=
+literal|"PLAN=EnumerableInterpreter\n"
+operator|+
+literal|"  DruidQuery(table=[[foodmart, foodmart]], "
+operator|+
+literal|"intervals=[[1900-01-09T00:00:00.000/2992-01-10T00:00:00.000]], "
+operator|+
+literal|"groups=[{63}], aggs=[[SUM($91)]], post_projects=[[$0, /($1, 0)]]"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sqlQuery
+argument_list|,
+name|FOODMART
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+name|plan
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|druidChecker
+argument_list|(
+name|postAggString
+argument_list|)
+argument_list|)
+operator|.
+name|returnsOrdered
+argument_list|(
+literal|"store_state=CA; A=Infinity"
+argument_list|,
+literal|"store_state=OR; A=Infinity"
+argument_list|,
+literal|"store_state=WA; A=Infinity"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testDivideByZeroDoubleTypeNegInfinity
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sqlQuery
+init|=
+literal|"select \"store_state\", -1.0 * sum(\"store_cost\") / 0 as "
+operator|+
+literal|"a from \"foodmart\"  group by \"store_state\" order by a desc"
+decl_stmt|;
+name|String
+name|postAggString
+init|=
+literal|"'postAggregations':[{'type':'arithmetic','name':'postagg#0',"
+operator|+
+literal|"'fn':'quotient','fields':[{'type':'arithmetic','name':'',"
+operator|+
+literal|"'fn':'*','fields':[{'type':'constant','name':'','value':-1.0},"
+operator|+
+literal|"{'type':'fieldAccess','name':'','fieldName':'$f1'}]},"
+operator|+
+literal|"{'type':'constant','name':'','value':0.0}]}]"
+decl_stmt|;
+specifier|final
+name|String
+name|plan
+init|=
+literal|"PLAN=EnumerableInterpreter\n"
+operator|+
+literal|"  DruidQuery(table=[[foodmart, foodmart]], "
+operator|+
+literal|"intervals=[[1900-01-09T00:00:00.000/2992-01-10T00:00:00.000]], "
+operator|+
+literal|"groups=[{63}], aggs=[[SUM($91)]], post_projects=[[$0, /(*(-1.0, $1), 0)]]"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sqlQuery
+argument_list|,
+name|FOODMART
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+name|plan
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|druidChecker
+argument_list|(
+name|postAggString
+argument_list|)
+argument_list|)
+operator|.
+name|returnsOrdered
+argument_list|(
+literal|"store_state=CA; A=-Infinity"
+argument_list|,
+literal|"store_state=OR; A=-Infinity"
+argument_list|,
+literal|"store_state=WA; A=-Infinity"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testDivideByZeroDoubleTypeNaN
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sqlQuery
+init|=
+literal|"select \"store_state\", (sum(\"store_cost\") - sum(\"store_cost\")) "
+operator|+
+literal|"/ 0 as a from \"foodmart\"  group by \"store_state\" order by a desc"
+decl_stmt|;
+name|String
+name|postAggString
+init|=
+literal|"'postAggregations':[{'type':'arithmetic','name':'postagg#0',"
+operator|+
+literal|"'fn':'quotient','fields':[{'type':'arithmetic','name':'','fn':'-',"
+operator|+
+literal|"'fields':[{'type':'fieldAccess','name':'','fieldName':'$f1'},"
+operator|+
+literal|"{'type':'fieldAccess','name':'','fieldName':'$f1'}]},"
+operator|+
+literal|"{'type':'constant','name':'','value':0.0}]}]"
+decl_stmt|;
+specifier|final
+name|String
+name|plan
+init|=
+literal|"PLAN=EnumerableInterpreter\n"
+operator|+
+literal|"  DruidQuery(table=[[foodmart, foodmart]], "
+operator|+
+literal|"intervals=[[1900-01-09T00:00:00.000/2992-01-10T00:00:00.000]], "
+operator|+
+literal|"groups=[{63}], aggs=[[SUM($91)]], post_projects=[[$0, /(-($1, $1), 0)]], "
+operator|+
+literal|"sort0=[1], dir0=[DESC]"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sqlQuery
+argument_list|,
+name|FOODMART
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+name|plan
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|druidChecker
+argument_list|(
+name|postAggString
+argument_list|)
+argument_list|)
+operator|.
+name|returnsOrdered
+argument_list|(
+literal|"store_state=CA; A=NaN"
+argument_list|,
+literal|"store_state=OR; A=NaN"
+argument_list|,
+literal|"store_state=WA; A=NaN"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testDivideByZeroIntegerType
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sqlQuery
+init|=
+literal|"select \"store_state\", (count(*) - "
+operator|+
+literal|"count(*)) / 0 as a from \"foodmart\"  group by \"store_state\" "
+operator|+
+literal|"order by a desc"
+decl_stmt|;
+specifier|final
+name|String
+name|plan
+init|=
+literal|"PLAN=EnumerableInterpreter\n"
+operator|+
+literal|"  DruidQuery(table=[[foodmart, foodmart]], "
+operator|+
+literal|"intervals=[[1900-01-09T00:00:00.000/2992-01-10T00:00:00.000]], "
+operator|+
+literal|"groups=[{63}], aggs=[[COUNT()]], post_projects=[[$0, /(-($1, $1), 0)]]"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sqlQuery
+argument_list|,
+name|FOODMART
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+name|plan
+argument_list|)
+operator|.
+name|throws_
+argument_list|(
+literal|"/ by zero"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testInterleaveBetweenAggregateAndGroupOrderByOnMetrics
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sqlQuery
+init|=
+literal|"select \"store_state\", \"brand_name\", \"A\" from (\n"
+operator|+
+literal|"  select sum(\"store_sales\")-sum(\"store_cost\") as a, \"store_state\""
+operator|+
+literal|", \"brand_name\"\n"
+operator|+
+literal|"  from \"foodmart\"\n"
+operator|+
+literal|"  group by \"store_state\", \"brand_name\" ) subq\n"
+operator|+
+literal|"order by \"A\" limit 5"
+decl_stmt|;
+name|String
+name|postAggString
+init|=
+literal|"'limitSpec':{'type':'default','limit':5,'columns':[{'dimension':"
+operator|+
+literal|"'postagg#0','direction':'ascending','dimensionOrder':'numeric'}]},"
+operator|+
+literal|"'aggregations':[{'type':'doubleSum','name':'$f2','fieldName':'store_sales'},"
+operator|+
+literal|"{'type':'doubleSum','name':'$f3','fieldName':'store_cost'}],'postAggregations':"
+operator|+
+literal|"[{'type':'arithmetic','name':'postagg#0','fn':'-','fields':"
+operator|+
+literal|"[{'type':'fieldAccess','name':'','fieldName':'$f2'},"
+operator|+
+literal|"{'type':'fieldAccess','name':'','fieldName':'$f3'}]}]"
+decl_stmt|;
+specifier|final
+name|String
+name|plan
+init|=
+literal|"PLAN=EnumerableInterpreter\n"
+operator|+
+literal|"  DruidQuery(table=[[foodmart, foodmart]], "
+operator|+
+literal|"intervals=[[1900-01-09T00:00:00.000/2992-01-10T00:00:00.000]], "
+operator|+
+literal|"groups=[{2, 63}], aggs=[[SUM($90), SUM($91)]], "
+operator|+
+literal|"post_projects=[[$1, $0, -($2, $3)]], sort0=[2], dir0=[ASC], fetch=[5]"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sqlQuery
+argument_list|,
+name|FOODMART
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+name|plan
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|druidChecker
+argument_list|(
+name|postAggString
+argument_list|)
+argument_list|)
+operator|.
+name|returnsOrdered
+argument_list|(
+literal|"store_state=CA; brand_name=King; A=21.46319955587387"
+argument_list|,
+literal|"store_state=OR; brand_name=Symphony; A=32.17600071430206"
+argument_list|,
+literal|"store_state=CA; brand_name=Toretti; A=32.24650126695633"
+argument_list|,
+literal|"store_state=WA; brand_name=King; A=34.61040019989014"
+argument_list|,
+literal|"store_state=OR; brand_name=Toretti; A=36.300002098083496"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testInterleaveBetweenAggregateAndGroupOrderByOnDimension
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sqlQuery
+init|=
+literal|"select \"store_state\", \"brand_name\", \"A\" from \n"
+operator|+
+literal|"(select \"store_state\", sum(\"store_sales\")+sum(\"store_cost\") "
+operator|+
+literal|"as a, \"brand_name\" from \"foodmart\" group by \"store_state\", \"brand_name\") "
+operator|+
+literal|"order by \"brand_name\", \"store_state\" limit 5"
+decl_stmt|;
+name|String
+name|postAggString
+init|=
+literal|"'limitSpec':{'type':'default','limit':5,'columns':[{'dimension':"
+operator|+
+literal|"'brand_name','direction':'ascending','dimensionOrder':'alphanumeric'},{'dimension':"
+operator|+
+literal|"'store_state','direction':'ascending','dimensionOrder':'alphanumeric'}]},"
+operator|+
+literal|"'aggregations':[{'type':'doubleSum','name':'$f2','fieldName':'store_sales'},"
+operator|+
+literal|"{'type':'doubleSum','name':'$f3','fieldName':'store_cost'}],'postAggregations':"
+operator|+
+literal|"[{'type':'arithmetic','name':'postagg#0','fn':'+','fields':"
+operator|+
+literal|"[{'type':'fieldAccess','name':'','fieldName':'$f2'},"
+operator|+
+literal|"{'type':'fieldAccess','name':'','fieldName':'$f3'}]}]"
+decl_stmt|;
+specifier|final
+name|String
+name|plan
+init|=
+literal|"PLAN=EnumerableInterpreter\n"
+operator|+
+literal|"  DruidQuery(table=[[foodmart, foodmart]], "
+operator|+
+literal|"intervals=[[1900-01-09T00:00:00.000/2992-01-10T00:00:00.000]], "
+operator|+
+literal|"projects=[[$63, $2, $90, $91]], "
+operator|+
+literal|"groups=[{0, 1}], aggs=[[SUM($2), SUM($3)]], "
+operator|+
+literal|"post_projects=[[$0, $1, +($2, $3)]], sort0=[1], sort1=[0], dir0=[ASC], dir1=[ASC]"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sqlQuery
+argument_list|,
+name|FOODMART
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+name|plan
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|druidChecker
+argument_list|(
+name|postAggString
+argument_list|)
+argument_list|)
+operator|.
+name|returnsOrdered
+argument_list|(
+literal|"store_state=CA; brand_name=ADJ; A=222.15239667892456"
+argument_list|,
+literal|"store_state=OR; brand_name=ADJ; A=186.6035966873169"
+argument_list|,
+literal|"store_state=WA; brand_name=ADJ; A=216.99119639396667"
+argument_list|,
+literal|"store_state=CA; brand_name=Akron; A=250.3489989042282"
+argument_list|,
+literal|"store_state=OR; brand_name=Akron; A=278.6972026824951"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testOrderByOnMetricsInSelectDruidQuery
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sqlQuery
+init|=
+literal|"select \"store_sales\" as a, \"store_cost\" as b, \"store_sales\" - "
+operator|+
+literal|"\"store_cost\" as c from \"foodmart\" where \"timestamp\" "
+operator|+
+literal|">= '1997-01-01 00:00:00' and \"timestamp\"< '1997-09-01 00:00:00' order by c "
+operator|+
+literal|"limit 5"
+decl_stmt|;
+name|String
+name|postAggString
+init|=
+literal|"'queryType':'select'"
+decl_stmt|;
+specifier|final
+name|String
+name|plan
+init|=
+literal|"PLAN=EnumerableInterpreter\n"
+operator|+
+literal|"  BindableSort(sort0=[$2], dir0=[ASC], fetch=[5])\n"
+operator|+
+literal|"    BindableProject(A=[$0], B=[$1], C=[-($0, $1)])\n"
+operator|+
+literal|"      DruidQuery("
+decl_stmt|;
+name|sql
+argument_list|(
+name|sqlQuery
+argument_list|,
+name|FOODMART
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+name|plan
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|druidChecker
+argument_list|(
+name|postAggString
+argument_list|)
+argument_list|)
+operator|.
+name|returnsOrdered
+argument_list|(
+literal|"A=0.5099999904632568; B=0.24480000138282776; C=0.2651999890804291"
+argument_list|,
+literal|"A=0.5099999904632568; B=0.23970000445842743; C=0.2702999860048294"
+argument_list|,
+literal|"A=0.5699999928474426; B=0.2849999964237213; C=0.2849999964237213"
+argument_list|,
+literal|"A=0.5; B=0.20999999344348907; C=0.2900000065565109"
+argument_list|,
+literal|"A=0.5099999904632568; B=0.21930000185966492; C=0.2906999886035919"
+argument_list|)
+expr_stmt|;
+block|}
 comment|/**    * Tests whether an aggregate with a filter clause has it's filter factored out    * when there is no outer filter    */
 annotation|@
 name|Test
