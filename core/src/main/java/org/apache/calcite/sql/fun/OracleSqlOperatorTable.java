@@ -508,6 +508,35 @@ operator|.
 name|STRING
 argument_list|)
 decl_stmt|;
+comment|/** Oracle's "SUBSTR(string, position [, substringLength ])" function.    *    *<p>It has similar semantics to standard SQL's    * {@link SqlStdOperatorTable#SUBSTRING} function but different syntax. */
+specifier|public
+specifier|static
+specifier|final
+name|SqlFunction
+name|SUBSTR
+init|=
+operator|new
+name|SqlFunction
+argument_list|(
+literal|"SUBSTR"
+argument_list|,
+name|SqlKind
+operator|.
+name|OTHER_FUNCTION
+argument_list|,
+name|ReturnTypes
+operator|.
+name|ARG0_NULLABLE_VARYING
+argument_list|,
+literal|null
+argument_list|,
+literal|null
+argument_list|,
+name|SqlFunctionCategory
+operator|.
+name|STRING
+argument_list|)
+decl_stmt|;
 comment|/** The "GREATEST(value, value)" function. */
 specifier|public
 specifier|static
