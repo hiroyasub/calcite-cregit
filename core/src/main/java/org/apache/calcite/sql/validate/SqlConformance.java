@@ -203,6 +203,11 @@ name|boolean
 name|allowExtend
 parameter_list|()
 function_decl|;
+comment|/**    * Whether to allow the SQL syntax "{@code LIMIT start, count}".    *    *<p>The equivalent syntax in standard SQL is    * "{@code OFFSET start ROW FETCH FIRST count ROWS ONLY}",    * and in PostgreSQL "{@code LIMIT count OFFSET start}".    *    *<p>MySQL and CUBRID allow this behavior.    *    *<p>Among the built-in conformance levels, true in    * {@link SqlConformanceEnum#LENIENT},    * {@link SqlConformanceEnum#MYSQL_5};    * false otherwise.    */
+name|boolean
+name|isLimitStartCountAllowed
+parameter_list|()
+function_decl|;
 block|}
 end_interface
 

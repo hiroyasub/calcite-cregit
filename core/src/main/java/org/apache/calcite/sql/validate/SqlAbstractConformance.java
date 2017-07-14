@@ -211,6 +211,20 @@ name|allowExtend
 argument_list|()
 return|;
 block|}
+specifier|public
+name|boolean
+name|isLimitStartCountAllowed
+parameter_list|()
+block|{
+return|return
+name|SqlConformanceEnum
+operator|.
+name|DEFAULT
+operator|.
+name|isLimitStartCountAllowed
+argument_list|()
+return|;
+block|}
 block|}
 end_class
 

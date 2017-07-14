@@ -10786,6 +10786,162 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testLimitStartCount
+parameter_list|()
+block|{
+name|conformance
+operator|=
+name|SqlConformanceEnum
+operator|.
+name|DEFAULT
+expr_stmt|;
+specifier|final
+name|String
+name|error
+init|=
+literal|"'LIMIT start, count' is not allowed under the "
+operator|+
+literal|"current SQL conformance level"
+decl_stmt|;
+name|sql
+argument_list|(
+literal|"select a from foo limit 1,2"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+name|error
+argument_list|)
+expr_stmt|;
+comment|// "limit all" is equivalent to no limit
+specifier|final
+name|String
+name|expected0
+init|=
+literal|"SELECT `A`\n"
+operator|+
+literal|"FROM `FOO`"
+decl_stmt|;
+name|sql
+argument_list|(
+literal|"select a from foo limit all"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected0
+argument_list|)
+expr_stmt|;
+specifier|final
+name|String
+name|expected1
+init|=
+literal|"SELECT `A`\n"
+operator|+
+literal|"FROM `FOO`\n"
+operator|+
+literal|"ORDER BY `X`"
+decl_stmt|;
+name|sql
+argument_list|(
+literal|"select a from foo order by x limit all"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected1
+argument_list|)
+expr_stmt|;
+name|conformance
+operator|=
+name|SqlConformanceEnum
+operator|.
+name|LENIENT
+expr_stmt|;
+specifier|final
+name|String
+name|expected2
+init|=
+literal|"SELECT `A`\n"
+operator|+
+literal|"FROM `FOO`\n"
+operator|+
+literal|"OFFSET 2 ROWS\n"
+operator|+
+literal|"FETCH NEXT 3 ROWS ONLY"
+decl_stmt|;
+name|sql
+argument_list|(
+literal|"select a from foo limit 2,3"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected2
+argument_list|)
+expr_stmt|;
+comment|// "offset 4" overrides the earlier "2"
+specifier|final
+name|String
+name|expected3
+init|=
+literal|"SELECT `A`\n"
+operator|+
+literal|"FROM `FOO`\n"
+operator|+
+literal|"OFFSET 4 ROWS\n"
+operator|+
+literal|"FETCH NEXT 3 ROWS ONLY"
+decl_stmt|;
+name|sql
+argument_list|(
+literal|"select a from foo limit 2,3 offset 4"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected3
+argument_list|)
+expr_stmt|;
+comment|// "fetch next 4" overrides the earlier "limit 3"
+specifier|final
+name|String
+name|expected4
+init|=
+literal|"SELECT `A`\n"
+operator|+
+literal|"FROM `FOO`\n"
+operator|+
+literal|"OFFSET 2 ROWS\n"
+operator|+
+literal|"FETCH NEXT 4 ROWS ONLY"
+decl_stmt|;
+name|sql
+argument_list|(
+literal|"select a from foo limit 2,3 fetch next 4 rows only"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected4
+argument_list|)
+expr_stmt|;
+comment|// "limit start, all" is not valid
+name|sql
+argument_list|(
+literal|"select a from foo limit 2, ^all^"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"(?s).*Encountered \"all\" at line 1.*"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testSqlInlineComment
 parameter_list|()
 block|{
