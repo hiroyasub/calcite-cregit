@@ -138,27 +138,27 @@ name|SqlConformanceEnum
 operator|.
 name|PRAGMATIC_2003
 decl_stmt|;
-comment|/**    * Whether to allow aliases from the {@code SELECT} clause to be used as    * column names in the {@code GROUP BY} clause.    *    *<p>Among the built-in conformance levels, true in    * {@link SqlConformanceEnum#LENIENT};    * false otherwise.    */
+comment|/**    * Whether to allow aliases from the {@code SELECT} clause to be used as    * column names in the {@code GROUP BY} clause.    *    *<p>Among the built-in conformance levels, true in    * {@link SqlConformanceEnum#LENIENT},    * {@link SqlConformanceEnum#MYSQL_5};    * false otherwise.    */
 name|boolean
 name|isGroupByAlias
 parameter_list|()
 function_decl|;
-comment|/**    * Whether {@code GROUP BY 2} is interpreted to mean 'group by the 2nd column    * in the select list'.    *    *<p>Among the built-in conformance levels, true in    * {@link SqlConformanceEnum#LENIENT};    * false otherwise.    */
+comment|/**    * Whether {@code GROUP BY 2} is interpreted to mean 'group by the 2nd column    * in the select list'.    *    *<p>Among the built-in conformance levels, true in    * {@link SqlConformanceEnum#LENIENT},    * {@link SqlConformanceEnum#MYSQL_5};    * false otherwise.    */
 name|boolean
 name|isGroupByOrdinal
 parameter_list|()
 function_decl|;
-comment|/**    * Whether to allow aliases from the {@code SELECT} clause to be used as    * column names in the {@code HAVING} clause.    *    *<p>Among the built-in conformance levels, true in    * {@link SqlConformanceEnum#LENIENT};    * false otherwise.    */
+comment|/**    * Whether to allow aliases from the {@code SELECT} clause to be used as    * column names in the {@code HAVING} clause.    *    *<p>Among the built-in conformance levels, true in    * {@link SqlConformanceEnum#LENIENT},    * {@link SqlConformanceEnum#MYSQL_5};    * false otherwise.    */
 name|boolean
 name|isHavingAlias
 parameter_list|()
 function_decl|;
-comment|/**    * Whether '{@code ORDER BY 2}' is interpreted to mean 'sort by the 2nd    * column in the select list'.    *    *<p>Among the built-in conformance levels, true in    * {@link SqlConformanceEnum#DEFAULT},    * {@link SqlConformanceEnum#LENIENT},    * {@link SqlConformanceEnum#ORACLE_10},    * {@link SqlConformanceEnum#ORACLE_12},    * {@link SqlConformanceEnum#STRICT_92},    * {@link SqlConformanceEnum#PRAGMATIC_99},    * {@link SqlConformanceEnum#PRAGMATIC_2003};    * {@link SqlConformanceEnum#SQL_SERVER_2008};    * false otherwise.    */
+comment|/**    * Whether '{@code ORDER BY 2}' is interpreted to mean 'sort by the 2nd    * column in the select list'.    *    *<p>Among the built-in conformance levels, true in    * {@link SqlConformanceEnum#DEFAULT},    * {@link SqlConformanceEnum#LENIENT},    * {@link SqlConformanceEnum#MYSQL_5},    * {@link SqlConformanceEnum#ORACLE_10},    * {@link SqlConformanceEnum#ORACLE_12},    * {@link SqlConformanceEnum#STRICT_92},    * {@link SqlConformanceEnum#PRAGMATIC_99},    * {@link SqlConformanceEnum#PRAGMATIC_2003};    * {@link SqlConformanceEnum#SQL_SERVER_2008};    * false otherwise.    */
 name|boolean
 name|isSortByOrdinal
 parameter_list|()
 function_decl|;
-comment|/**    * Whether '{@code ORDER BY x}' is interpreted to mean 'sort by the select    * list item whose alias is x' even if there is a column called x.    *    *<p>Among the built-in conformance levels, true in    * {@link SqlConformanceEnum#DEFAULT},    * {@link SqlConformanceEnum#LENIENT},    * {@link SqlConformanceEnum#ORACLE_10},    * {@link SqlConformanceEnum#ORACLE_12},    * {@link SqlConformanceEnum#STRICT_92};    * {@link SqlConformanceEnum#SQL_SERVER_2008};    * false otherwise.    */
+comment|/**    * Whether '{@code ORDER BY x}' is interpreted to mean 'sort by the select    * list item whose alias is x' even if there is a column called x.    *    *<p>Among the built-in conformance levels, true in    * {@link SqlConformanceEnum#DEFAULT},    * {@link SqlConformanceEnum#LENIENT},    * {@link SqlConformanceEnum#MYSQL_5},    * {@link SqlConformanceEnum#ORACLE_10},    * {@link SqlConformanceEnum#ORACLE_12},    * {@link SqlConformanceEnum#STRICT_92};    * {@link SqlConformanceEnum#SQL_SERVER_2008};    * false otherwise.    */
 name|boolean
 name|isSortByAlias
 parameter_list|()
@@ -173,12 +173,12 @@ name|boolean
 name|isFromRequired
 parameter_list|()
 function_decl|;
-comment|/**    * Whether the bang-equal token != is allowed as an alternative to&lt;&gt; in    * the parser.    *    *<p>Among the built-in conformance levels, true in    * {@link SqlConformanceEnum#LENIENT},    * {@link SqlConformanceEnum#ORACLE_10};    * {@link SqlConformanceEnum#ORACLE_12};    * false otherwise.    */
+comment|/**    * Whether the bang-equal token != is allowed as an alternative to&lt;&gt; in    * the parser.    *    *<p>Among the built-in conformance levels, true in    * {@link SqlConformanceEnum#LENIENT},    * {@link SqlConformanceEnum#MYSQL_5},    * {@link SqlConformanceEnum#ORACLE_10};    * {@link SqlConformanceEnum#ORACLE_12};    * false otherwise.    */
 name|boolean
 name|isBangEqualAllowed
 parameter_list|()
 function_decl|;
-comment|/**    * Whether {@code MINUS} is allowed as an alternative to {@code EXCEPT} in    * the parser.    *    *<p>Among the built-in conformance levels, true in    * {@link SqlConformanceEnum#LENIENT},    * {@link SqlConformanceEnum#ORACLE_10};    * {@link SqlConformanceEnum#ORACLE_12};    * false otherwise.    */
+comment|/**    * Whether {@code MINUS} is allowed as an alternative to {@code EXCEPT} in    * the parser.    *    *<p>Among the built-in conformance levels, true in    * {@link SqlConformanceEnum#LENIENT},    * {@link SqlConformanceEnum#ORACLE_10};    * {@link SqlConformanceEnum#ORACLE_12};    * false otherwise.    *    *<p>Note: MySQL does not support {@code MINUS} or {@code EXCEPT} (as of    * version 5.5).    */
 name|boolean
 name|isMinusAllowed
 parameter_list|()
@@ -193,7 +193,7 @@ name|boolean
 name|isInsertSubsetColumnsAllowed
 parameter_list|()
 function_decl|;
-comment|/**    * Whether to allow parentheses to be specified in calls to niladic functions    * and procedures (that is, functions and procedures with no parameters).    *    *<p>For example, {@code CURRENT_DATE} is a niladic system function. In    * standard SQL it must be invoked without parentheses:    *    *<blockquote><code>VALUES CURRENT_DATE</code></blockquote>    *    *<p>If {@code allowNiladicParentheses}, the following syntax is also valid:    *    *<blockquote><code>VALUES CURRENT_DATE()</code></blockquote>    *    *<p>Of the popular databases, MySQL, Apache Phoenix and VoltDB allow this    * behavior;    * Apache Hive, HSQLDB, IBM DB2, Microsoft SQL Server, Oracle, PostgreSQL do    * not.    *    *<p>Among the built-in conformance levels, true in    * {@link SqlConformanceEnum#LENIENT};    * false otherwise.    */
+comment|/**    * Whether to allow parentheses to be specified in calls to niladic functions    * and procedures (that is, functions and procedures with no parameters).    *    *<p>For example, {@code CURRENT_DATE} is a niladic system function. In    * standard SQL it must be invoked without parentheses:    *    *<blockquote><code>VALUES CURRENT_DATE</code></blockquote>    *    *<p>If {@code allowNiladicParentheses}, the following syntax is also valid:    *    *<blockquote><code>VALUES CURRENT_DATE()</code></blockquote>    *    *<p>Of the popular databases, MySQL, Apache Phoenix and VoltDB allow this    * behavior;    * Apache Hive, HSQLDB, IBM DB2, Microsoft SQL Server, Oracle, PostgreSQL do    * not.    *    *<p>Among the built-in conformance levels, true in    * {@link SqlConformanceEnum#LENIENT},    * {@link SqlConformanceEnum#MYSQL_5};    * false otherwise.    */
 name|boolean
 name|allowNiladicParentheses
 parameter_list|()

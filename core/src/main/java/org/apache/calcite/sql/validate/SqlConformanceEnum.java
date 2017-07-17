@@ -43,6 +43,9 @@ block|,
 comment|/** Conformance value that instructs Calcite to use SQL semantics    * consistent with the SQL:99 standard, but ignoring its more    * inconvenient or controversial dicta. */
 name|PRAGMATIC_99
 block|,
+comment|/** Conformance value that instructs Calcite to use SQL semantics    * consistent with MySQL version 5.x. */
+name|MYSQL_5
+block|,
 comment|/** Conformance value that instructs Calcite to use SQL semantics    * consistent with Oracle version 10. */
 name|ORACLE_10
 block|,
@@ -71,6 +74,9 @@ block|{
 case|case
 name|LENIENT
 case|:
+case|case
+name|MYSQL_5
+case|:
 return|return
 literal|true
 return|;
@@ -93,6 +99,9 @@ block|{
 case|case
 name|LENIENT
 case|:
+case|case
+name|MYSQL_5
+case|:
 return|return
 literal|true
 return|;
@@ -114,6 +123,9 @@ condition|)
 block|{
 case|case
 name|LENIENT
+case|:
+case|case
+name|MYSQL_5
 case|:
 return|return
 literal|true
@@ -139,6 +151,9 @@ name|DEFAULT
 case|:
 case|case
 name|LENIENT
+case|:
+case|case
+name|MYSQL_5
 case|:
 case|case
 name|ORACLE_10
@@ -182,6 +197,9 @@ name|DEFAULT
 case|:
 case|case
 name|LENIENT
+case|:
+case|case
+name|MYSQL_5
 case|:
 case|case
 name|ORACLE_10
@@ -263,6 +281,9 @@ condition|)
 block|{
 case|case
 name|LENIENT
+case|:
+case|case
+name|MYSQL_5
 case|:
 case|case
 name|ORACLE_10
@@ -377,6 +398,9 @@ condition|)
 block|{
 case|case
 name|LENIENT
+case|:
+case|case
+name|MYSQL_5
 case|:
 return|return
 literal|true
