@@ -3407,6 +3407,9 @@ name|input
 argument_list|)
 expr_stmt|;
 block|}
+name|nTransformations
+operator|++
+expr_stmt|;
 return|return
 name|newVertex
 return|;
