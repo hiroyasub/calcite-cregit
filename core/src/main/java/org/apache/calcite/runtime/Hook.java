@@ -87,6 +87,9 @@ block|{
 comment|/** Called to get the current time. Use this to return a predictable time    * in tests. */
 name|CURRENT_TIME
 block|,
+comment|/** Called to get stdin, stdout, stderr.    * Use this to re-assign streams in tests. */
+name|STANDARD_STREAMS
+block|,
 comment|/** Returns a boolean value, whether RelBuilder should simplify expressions.    * Default true. */
 name|REL_BUILDER_SIMPLIFY
 block|,

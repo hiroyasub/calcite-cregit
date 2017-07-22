@@ -228,7 +228,7 @@ argument_list|()
 return|;
 block|}
 comment|/**    * Appends a JSON object to a string builder.    */
-specifier|private
+specifier|public
 name|void
 name|append
 parameter_list|(
