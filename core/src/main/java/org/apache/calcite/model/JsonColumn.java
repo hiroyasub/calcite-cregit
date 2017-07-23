@@ -29,6 +29,22 @@ specifier|public
 name|String
 name|name
 decl_stmt|;
+specifier|public
+name|void
+name|accept
+parameter_list|(
+name|ModelHandler
+name|handler
+parameter_list|)
+block|{
+name|handler
+operator|.
+name|visit
+argument_list|(
+name|this
+argument_list|)
+expr_stmt|;
+block|}
 block|}
 end_class
 

@@ -995,6 +995,87 @@ literal|"is not a SemiMutableSchema"
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1899">[CALCITE-1899]    * When reading model, give error if mandatory JSON attributes are    * missing</a>.    *    *<p>Schema without name should give useful error, not    * NullPointerException. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSchemaWithoutName
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+specifier|final
+name|String
+name|model
+init|=
+literal|"{\n"
+operator|+
+literal|"  version: '1.0',\n"
+operator|+
+literal|"  defaultSchema: 'adhoc',\n"
+operator|+
+literal|"  schemas: [ {\n"
+operator|+
+literal|"  } ]\n"
+operator|+
+literal|"}"
+decl_stmt|;
+name|CalciteAssert
+operator|.
+name|model
+argument_list|(
+name|model
+argument_list|)
+operator|.
+name|connectThrows
+argument_list|(
+literal|"Field 'name' is required in JsonMapSchema"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testCustomSchemaWithoutFactory
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+specifier|final
+name|String
+name|model
+init|=
+literal|"{\n"
+operator|+
+literal|"  version: '1.0',\n"
+operator|+
+literal|"  defaultSchema: 'adhoc',\n"
+operator|+
+literal|"  schemas: [ {\n"
+operator|+
+literal|"    type: 'custom',\n"
+operator|+
+literal|"    name: 'my_custom_schema'\n"
+operator|+
+literal|"  } ]\n"
+operator|+
+literal|"}"
+decl_stmt|;
+name|CalciteAssert
+operator|.
+name|model
+argument_list|(
+name|model
+argument_list|)
+operator|.
+name|connectThrows
+argument_list|(
+literal|"Field 'factory' is required in JsonCustomSchema"
+argument_list|)
+expr_stmt|;
+block|}
 comment|/** Tests a model containing a lattice and some views. */
 annotation|@
 name|Test
