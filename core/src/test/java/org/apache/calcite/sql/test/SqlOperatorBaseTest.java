@@ -14491,6 +14491,48 @@ name|FALSE
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1898">[CALCITE-1898]    * LIKE must match '.' (period) literally</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testLikeDot
+parameter_list|()
+block|{
+name|tester
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"'abc' like 'a.c'"
+argument_list|,
+name|Boolean
+operator|.
+name|FALSE
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"'abcde' like '%c.e'"
+argument_list|,
+name|Boolean
+operator|.
+name|FALSE
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"'abc.e' like '%c.e'"
+argument_list|,
+name|Boolean
+operator|.
+name|TRUE
+argument_list|)
+expr_stmt|;
+block|}
 annotation|@
 name|Test
 specifier|public
@@ -15531,6 +15573,73 @@ argument_list|,
 name|Boolean
 operator|.
 name|TRUE
+argument_list|)
+expr_stmt|;
+comment|// dot is a wildcard for SIMILAR TO but not LIKE
+name|tester
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"'abc' similar to 'a.c'"
+argument_list|,
+name|Boolean
+operator|.
+name|TRUE
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"'a.c' similar to 'a.c'"
+argument_list|,
+name|Boolean
+operator|.
+name|TRUE
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"'abcd' similar to 'a.*d'"
+argument_list|,
+name|Boolean
+operator|.
+name|TRUE
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"'abc' like 'a.c'"
+argument_list|,
+name|Boolean
+operator|.
+name|FALSE
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"'a.c' like 'a.c'"
+argument_list|,
+name|Boolean
+operator|.
+name|TRUE
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"'abcd' like 'a.*d'"
+argument_list|,
+name|Boolean
+operator|.
+name|FALSE
 argument_list|)
 expr_stmt|;
 comment|// The following two tests throws exception(They probably should).

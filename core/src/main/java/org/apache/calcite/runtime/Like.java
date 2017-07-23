@@ -30,7 +30,7 @@ specifier|final
 name|String
 name|JAVA_REGEX_SPECIALS
 init|=
-literal|"[]()|^-+*?{}$\\"
+literal|"[]()|^-+*?{}$\\."
 decl_stmt|;
 specifier|private
 specifier|static
