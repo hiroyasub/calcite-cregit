@@ -25,6 +25,20 @@ name|apache
 operator|.
 name|calcite
 operator|.
+name|config
+operator|.
+name|CalciteConnectionConfig
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
 name|jdbc
 operator|.
 name|CalciteSchema
@@ -214,6 +228,11 @@ function_decl|;
 comment|/** Returns the root namespace for name resolution. */
 name|CalciteSchema
 name|getRootSchema
+parameter_list|()
+function_decl|;
+comment|/** Returns Config settings */
+name|CalciteConnectionConfig
+name|getConfig
 parameter_list|()
 function_decl|;
 block|}

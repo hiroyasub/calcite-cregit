@@ -592,6 +592,128 @@ block|}
 block|}
 return|;
 block|}
+comment|/**    * Creates a query against FOODMART with approximate parameters    * */
+specifier|private
+name|CalciteAssert
+operator|.
+name|AssertQuery
+name|foodmartApprox
+parameter_list|(
+name|String
+name|sql
+parameter_list|)
+block|{
+return|return
+name|approxQuery
+argument_list|(
+name|FOODMART
+argument_list|,
+name|sql
+argument_list|)
+return|;
+block|}
+comment|/**    * Creates a query against WIKI with approximate parameters    * */
+specifier|private
+name|CalciteAssert
+operator|.
+name|AssertQuery
+name|wikiApprox
+parameter_list|(
+name|String
+name|sql
+parameter_list|)
+block|{
+return|return
+name|approxQuery
+argument_list|(
+name|WIKI
+argument_list|,
+name|sql
+argument_list|)
+return|;
+block|}
+specifier|private
+name|CalciteAssert
+operator|.
+name|AssertQuery
+name|approxQuery
+parameter_list|(
+name|URL
+name|url
+parameter_list|,
+name|String
+name|sql
+parameter_list|)
+block|{
+return|return
+name|CalciteAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|enable
+argument_list|(
+name|enabled
+argument_list|()
+argument_list|)
+operator|.
+name|with
+argument_list|(
+name|ImmutableMap
+operator|.
+name|of
+argument_list|(
+literal|"model"
+argument_list|,
+name|url
+operator|.
+name|getPath
+argument_list|()
+argument_list|)
+argument_list|)
+operator|.
+name|with
+argument_list|(
+name|CalciteConnectionProperty
+operator|.
+name|APPROXIMATE_DISTINCT_COUNT
+operator|.
+name|camelName
+argument_list|()
+argument_list|,
+literal|true
+argument_list|)
+operator|.
+name|with
+argument_list|(
+name|CalciteConnectionProperty
+operator|.
+name|APPROXIMATE_TOP_N
+operator|.
+name|camelName
+argument_list|()
+argument_list|,
+literal|true
+argument_list|)
+operator|.
+name|with
+argument_list|(
+name|CalciteConnectionProperty
+operator|.
+name|APPROXIMATE_DECIMAL
+operator|.
+name|camelName
+argument_list|()
+argument_list|,
+literal|true
+argument_list|)
+operator|.
+name|query
+argument_list|(
+name|sql
+argument_list|)
+return|;
+block|}
 comment|/** Creates a query against a data set given by a map. */
 specifier|private
 name|CalciteAssert
@@ -2885,7 +3007,7 @@ specifier|final
 name|String
 name|sql
 init|=
-literal|"select * from \"foodmart\"\n"
+literal|"select \"product_name\" from \"foodmart\"\n"
 operator|+
 literal|"where \"product_id\" BETWEEN '1500' AND '1502'\n"
 operator|+
@@ -2905,33 +3027,9 @@ literal|"{'type':'bound','dimension':'product_id','lower':'1500','lowerStrict':f
 operator|+
 literal|"{'type':'bound','dimension':'product_id','upper':'1502','upperStrict':false,'ordering':'lexicographic'}]},"
 operator|+
-literal|"'dimensions':['product_id','brand_name','product_name','SKU','SRP','gross_weight','net_weight',"
+literal|"'dimensions':['product_name','state_province','product_id'],"
 operator|+
-literal|"'recyclable_package','low_fat','units_per_case','cases_per_pallet','shelf_width','shelf_height',"
-operator|+
-literal|"'shelf_depth','product_class_id','product_subcategory','product_category','product_department',"
-operator|+
-literal|"'product_family','customer_id','account_num','lname','fname','mi','address1','address2','address3',"
-operator|+
-literal|"'address4','city','state_province','postal_code','country','customer_region_id','phone1','phone2',"
-operator|+
-literal|"'birthdate','marital_status','yearly_income','gender','total_children','num_children_at_home',"
-operator|+
-literal|"'education','date_accnt_opened','member_card','occupation','houseowner','num_cars_owned',"
-operator|+
-literal|"'fullname','promotion_id','promotion_district_id','promotion_name','media_type','cost','start_date',"
-operator|+
-literal|"'end_date','store_id','store_type','region_id','store_name','store_number','store_street_address',"
-operator|+
-literal|"'store_city','store_state','store_postal_code','store_country','store_manager','store_phone',"
-operator|+
-literal|"'store_fax','first_opened_date','last_remodel_date','store_sqft','grocery_sqft','frozen_sqft',"
-operator|+
-literal|"'meat_sqft','coffee_bar','video_store','salad_bar','prepared_food','florist','time_id','the_day',"
-operator|+
-literal|"'the_month','the_year','day_of_month','week_of_year','month_of_year','quarter','fiscal_period'],"
-operator|+
-literal|"'metrics':['unit_sales','store_sales','store_cost'],'granularity':'all',"
+literal|"'metrics':[],'granularity':'all',"
 operator|+
 literal|"'pagingSpec':{'threshold':16384,'fromNext':true},'context':{'druid.query.fetch':false}}"
 decl_stmt|;
@@ -3056,7 +3154,7 @@ specifier|final
 name|String
 name|sql
 init|=
-literal|"select * from \"foodmart\"\n"
+literal|"select \"product_name\" from \"foodmart\"\n"
 operator|+
 literal|"where \"product_id\" BETWEEN 1500 AND 1502\n"
 operator|+
@@ -3066,45 +3164,19 @@ specifier|final
 name|String
 name|druidQuery
 init|=
-literal|"{'queryType':'select','dataSource':'foodmart',"
+literal|"{'queryType':'select','dataSource':'foodmart','descending':false,"
 operator|+
-literal|"'descending':false,'intervals':['1900-01-09T00:00:00.000/2992-01-10T00:00:00.000'],"
+literal|"'intervals':['1900-01-09T00:00:00.000/2992-01-10T00:00:00.000'],'filter':{'type':"
 operator|+
-literal|"'filter':{'type':'and','fields':["
+literal|"'and','fields':[{'type':'bound','dimension':'product_id','lower':'1500',"
 operator|+
-literal|"{'type':'bound','dimension':'product_id','lower':'1500','lowerStrict':false,'ordering':'numeric'},"
+literal|"'lowerStrict':false,'ordering':'numeric'},{'type':'bound','dimension':'product_id',"
 operator|+
-literal|"{'type':'bound','dimension':'product_id','upper':'1502','upperStrict':false,'ordering':'numeric'}]},"
+literal|"'upper':'1502','upperStrict':false,'ordering':'numeric'}]},'dimensions':"
 operator|+
-literal|"'dimensions':['product_id','brand_name','product_name','SKU','SRP','gross_weight','net_weight',"
+literal|"['product_name','state_province','product_id'],'metrics':[],'granularity':'all','pagingSpec':"
 operator|+
-literal|"'recyclable_package','low_fat','units_per_case','cases_per_pallet','shelf_width','shelf_height',"
-operator|+
-literal|"'shelf_depth','product_class_id','product_subcategory','product_category','product_department',"
-operator|+
-literal|"'product_family','customer_id','account_num','lname','fname','mi','address1','address2','address3',"
-operator|+
-literal|"'address4','city','state_province','postal_code','country','customer_region_id','phone1','phone2',"
-operator|+
-literal|"'birthdate','marital_status','yearly_income','gender','total_children','num_children_at_home',"
-operator|+
-literal|"'education','date_accnt_opened','member_card','occupation','houseowner','num_cars_owned',"
-operator|+
-literal|"'fullname','promotion_id','promotion_district_id','promotion_name','media_type','cost','start_date',"
-operator|+
-literal|"'end_date','store_id','store_type','region_id','store_name','store_number','store_street_address',"
-operator|+
-literal|"'store_city','store_state','store_postal_code','store_country','store_manager','store_phone',"
-operator|+
-literal|"'store_fax','first_opened_date','last_remodel_date','store_sqft','grocery_sqft','frozen_sqft',"
-operator|+
-literal|"'meat_sqft','coffee_bar','video_store','salad_bar','prepared_food','florist','time_id','the_day',"
-operator|+
-literal|"'the_month','the_year','day_of_month','week_of_year','month_of_year','quarter','fiscal_period'],"
-operator|+
-literal|"'metrics':['unit_sales','store_sales','store_cost'],'granularity':'all',"
-operator|+
-literal|"'pagingSpec':{'threshold':16384,'fromNext':true},'context':{'druid.query.fetch':false}}"
+literal|"{'threshold':16384,'fromNext':true},'context':{'druid.query.fetch':false}}"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -3227,7 +3299,7 @@ specifier|final
 name|String
 name|sql
 init|=
-literal|"select * from \"foodmart\"\n"
+literal|"select \"product_name\" from \"foodmart\"\n"
 operator|+
 literal|"where \"product_id\" = -1"
 decl_stmt|;
@@ -3241,43 +3313,9 @@ literal|"'descending':false,'intervals':['1900-01-09T00:00:00.000/2992-01-10T00:
 operator|+
 literal|"'filter':{'type':'selector','dimension':'product_id','value':'-1'},"
 operator|+
-literal|"'dimensions':['product_id','brand_name','product_name','SKU','SRP',"
+literal|"'dimensions':['product_name'],"
 operator|+
-literal|"'gross_weight','net_weight','recyclable_package','low_fat','units_per_case',"
-operator|+
-literal|"'cases_per_pallet','shelf_width','shelf_height','shelf_depth',"
-operator|+
-literal|"'product_class_id','product_subcategory','product_category',"
-operator|+
-literal|"'product_department','product_family','customer_id','account_num',"
-operator|+
-literal|"'lname','fname','mi','address1','address2','address3','address4',"
-operator|+
-literal|"'city','state_province','postal_code','country','customer_region_id',"
-operator|+
-literal|"'phone1','phone2','birthdate','marital_status','yearly_income','gender',"
-operator|+
-literal|"'total_children','num_children_at_home','education','date_accnt_opened',"
-operator|+
-literal|"'member_card','occupation','houseowner','num_cars_owned','fullname',"
-operator|+
-literal|"'promotion_id','promotion_district_id','promotion_name','media_type','cost',"
-operator|+
-literal|"'start_date','end_date','store_id','store_type','region_id','store_name',"
-operator|+
-literal|"'store_number','store_street_address','store_city','store_state',"
-operator|+
-literal|"'store_postal_code','store_country','store_manager','store_phone',"
-operator|+
-literal|"'store_fax','first_opened_date','last_remodel_date','store_sqft','grocery_sqft',"
-operator|+
-literal|"'frozen_sqft','meat_sqft','coffee_bar','video_store','salad_bar','prepared_food',"
-operator|+
-literal|"'florist','time_id','the_day','the_month','the_year','day_of_month',"
-operator|+
-literal|"'week_of_year','month_of_year','quarter','fiscal_period'],"
-operator|+
-literal|"'metrics':['unit_sales','store_sales','store_cost'],'granularity':'all',"
+literal|"'metrics':[],'granularity':'all',"
 operator|+
 literal|"'pagingSpec':{'threshold':16384,'fromNext':true},'context':{'druid.query.fetch':false}}"
 decl_stmt|;
@@ -3315,7 +3353,7 @@ specifier|final
 name|String
 name|sql
 init|=
-literal|"select * from \"foodmart\"\n"
+literal|"select \"product_name\" from \"foodmart\"\n"
 operator|+
 literal|"where cast(\"product_id\" as integer) - 1500 BETWEEN 0 AND 2\n"
 operator|+
@@ -3329,35 +3367,9 @@ literal|"{'queryType':'select','dataSource':'foodmart',"
 operator|+
 literal|"'descending':false,'intervals':['1900-01-09T00:00:00.000/2992-01-10T00:00:00.000'],"
 operator|+
-literal|"'dimensions':['product_id','brand_name','product_name','SKU','SRP','gross_weight',"
+literal|"'dimensions':['product_id','product_name','state_province'],"
 operator|+
-literal|"'net_weight','recyclable_package','low_fat','units_per_case','cases_per_pallet',"
-operator|+
-literal|"'shelf_width','shelf_height','shelf_depth','product_class_id','product_subcategory',"
-operator|+
-literal|"'product_category','product_department','product_family','customer_id','account_num',"
-operator|+
-literal|"'lname','fname','mi','address1','address2','address3','address4','city','state_province',"
-operator|+
-literal|"'postal_code','country','customer_region_id','phone1','phone2','birthdate','marital_status',"
-operator|+
-literal|"'yearly_income','gender','total_children','num_children_at_home','education',"
-operator|+
-literal|"'date_accnt_opened','member_card','occupation','houseowner','num_cars_owned','fullname',"
-operator|+
-literal|"'promotion_id','promotion_district_id','promotion_name','media_type','cost','start_date',"
-operator|+
-literal|"'end_date','store_id','store_type','region_id','store_name','store_number','store_street_address',"
-operator|+
-literal|"'store_city','store_state','store_postal_code','store_country','store_manager','store_phone',"
-operator|+
-literal|"'store_fax','first_opened_date','last_remodel_date','store_sqft','grocery_sqft','frozen_sqft',"
-operator|+
-literal|"'meat_sqft','coffee_bar','video_store','salad_bar','prepared_food','florist','time_id','the_day',"
-operator|+
-literal|"'the_month','the_year','day_of_month','week_of_year','month_of_year','quarter','fiscal_period'],"
-operator|+
-literal|"'metrics':['unit_sales','store_sales','store_cost'],'granularity':'all',"
+literal|"'metrics':[],'granularity':'all',"
 operator|+
 literal|"'pagingSpec':{'threshold':16384,'fromNext':true},'context':{'druid.query.fetch':false}}"
 decl_stmt|;
@@ -7699,7 +7711,7 @@ literal|"store_state=WA; C=-124367.29537911131"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Turn on now count(distinct ) will get pushed after CALC-1853    */
+comment|/**    * Turn on now count(distinct )    */
 annotation|@
 name|Test
 specifier|public
@@ -7734,45 +7746,7 @@ literal|"  DruidQuery(table=[[foodmart, foodmart]], intervals="
 operator|+
 literal|"[[1900-01-09T00:00:00.000/2992-01-10T00:00:00.000]], groups=[{63}], "
 decl_stmt|;
-name|CalciteAssert
-operator|.
-name|that
-argument_list|()
-operator|.
-name|enable
-argument_list|(
-name|enabled
-argument_list|()
-argument_list|)
-operator|.
-name|with
-argument_list|(
-name|ImmutableMap
-operator|.
-name|of
-argument_list|(
-literal|"model"
-argument_list|,
-name|FOODMART
-operator|.
-name|getPath
-argument_list|()
-argument_list|)
-argument_list|)
-operator|.
-name|with
-argument_list|(
-name|CalciteConnectionProperty
-operator|.
-name|APPROXIMATE_DISTINCT_COUNT
-operator|.
-name|camelName
-argument_list|()
-argument_list|,
-literal|true
-argument_list|)
-operator|.
-name|query
+name|foodmartApprox
 argument_list|(
 name|sqlQuery
 argument_list|)
@@ -9632,21 +9606,21 @@ block|{
 name|String
 name|sql
 init|=
-literal|"select count(distinct \"customer_id\") from \"foodmart\""
+literal|"select count(distinct \"store_state\") from \"foodmart\""
 decl_stmt|;
 name|String
 name|expectedSubExplain
 init|=
 literal|"DruidQuery(table=[[foodmart, foodmart]], intervals=[[1900-01-09T00"
 operator|+
-literal|":00:00.000/2992-01-10T00:00:00.000]], groups=[{}], aggs=[[COUNT(DISTINCT $20)]])"
+literal|":00:00.000/2992-01-10T00:00:00.000]], groups=[{}], aggs=[[COUNT(DISTINCT $63)]])"
 decl_stmt|;
 name|String
 name|expectedAggregate
 init|=
 literal|"{'type':'cardinality','name':"
 operator|+
-literal|"'EXPR$0','fieldNames':['customer_id']}"
+literal|"'EXPR$0','fieldNames':['store_state']}"
 decl_stmt|;
 name|testCountWithApproxDistinct
 argument_list|(
@@ -9671,7 +9645,7 @@ block|{
 name|String
 name|sql
 init|=
-literal|"select count(distinct \"customer_id\") from \"foodmart\""
+literal|"select count(distinct \"store_state\") from \"foodmart\""
 decl_stmt|;
 name|String
 name|expectedSubExplain
@@ -9682,7 +9656,7 @@ literal|"    DruidQuery(table=[[foodmart, foodmart]], "
 operator|+
 literal|"intervals=[[1900-01-09T00:00:00.000/2992-01-10T00:00:00.000]], "
 operator|+
-literal|"groups=[{20}], aggs=[[]])"
+literal|"groups=[{63}], aggs=[[]])"
 decl_stmt|;
 name|testCountWithApproxDistinct
 argument_list|(
@@ -9824,7 +9798,7 @@ name|sql
 init|=
 literal|"select \"B\", count(\"A\") from "
 operator|+
-literal|"(select \"unit_sales\" as \"A\", \"customer_id\" as \"B\" from \"foodmart\") "
+literal|"(select \"unit_sales\" as \"A\", \"store_state\" as \"B\" from \"foodmart\") "
 operator|+
 literal|"group by \"B\""
 decl_stmt|;
@@ -9835,7 +9809,7 @@ literal|"  BindableAggregate(group=[{0}], EXPR$1=[COUNT($1)])\n"
 operator|+
 literal|"    DruidQuery(table=[[foodmart, foodmart]], intervals=[[1900-01-09T00:00:00.000"
 operator|+
-literal|"/2992-01-10T00:00:00.000]], projects=[[$20, $89]])\n"
+literal|"/2992-01-10T00:00:00.000]], projects=[[$63, $89]])\n"
 decl_stmt|;
 name|testCountWithApproxDistinct
 argument_list|(
@@ -9868,7 +9842,7 @@ name|sql
 init|=
 literal|"select \"B\", count(distinct \"A\") from "
 operator|+
-literal|"(select \"unit_sales\" as \"A\", \"customer_id\" as \"B\" from \"foodmart\") "
+literal|"(select \"unit_sales\" as \"A\", \"store_state\" as \"B\" from \"foodmart\") "
 operator|+
 literal|"group by \"B\""
 decl_stmt|;
@@ -9879,7 +9853,7 @@ literal|"  BindableAggregate(group=[{0}], EXPR$1=[COUNT($1)])\n"
 operator|+
 literal|"    DruidQuery(table=[[foodmart, foodmart]], intervals=[[1900-01-09T00:00:"
 operator|+
-literal|"00.000/2992-01-10T00:00:00.000]], projects=[[$20, $89]], groups=[{0, 1}], "
+literal|"00.000/2992-01-10T00:00:00.000]], projects=[[$63, $89]], groups=[{0, 1}], "
 operator|+
 literal|"aggs=[[]])"
 decl_stmt|;
@@ -10001,6 +9975,378 @@ argument_list|(
 name|druidChecker
 argument_list|(
 name|expectedDruidQuery
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+comment|/**    * Tests the use of count(distinct ...) on a complex metric column in SELECT    * */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testCountDistinctOnComplexColumn
+parameter_list|()
+block|{
+comment|// Because approximate distinct count has not been enabled
+name|sql
+argument_list|(
+literal|"select count(distinct \"user_id\") from \"wiki\""
+argument_list|,
+name|WIKI
+argument_list|)
+operator|.
+name|failsAtValidation
+argument_list|(
+literal|"Rolled up column 'user_id' is not allowed in COUNT"
+argument_list|)
+expr_stmt|;
+name|foodmartApprox
+argument_list|(
+literal|"select count(distinct \"customer_id\") from \"foodmart\""
+argument_list|)
+comment|// customer_id gets transformed into it's actual underlying sketch column,
+comment|// customer_id_ts. The thetaSketch aggregation is used to compute the count distinct.
+operator|.
+name|queryContains
+argument_list|(
+name|druidChecker
+argument_list|(
+literal|"{'queryType':'timeseries','dataSource':"
+operator|+
+literal|"'foodmart','descending':false,'granularity':'all','aggregations':[{'type':"
+operator|+
+literal|"'thetaSketch','name':'EXPR$0','fieldName':'customer_id_ts'}],"
+operator|+
+literal|"'intervals':['1900-01-09T00:00:00.000/2992-01-10T00:00:00.000'],"
+operator|+
+literal|"'context':{'skipEmptyBuckets':true}}"
+argument_list|)
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"EXPR$0=5581"
+argument_list|)
+expr_stmt|;
+name|foodmartApprox
+argument_list|(
+literal|"select sum(\"store_sales\"), "
+operator|+
+literal|"count(distinct \"customer_id\") filter (where \"store_state\" = 'CA') "
+operator|+
+literal|"from \"foodmart\" where \"the_month\" = 'October'"
+argument_list|)
+comment|// Check that filtered aggregations work correctly
+operator|.
+name|queryContains
+argument_list|(
+name|druidChecker
+argument_list|(
+literal|"{'type':'filtered','filter':"
+operator|+
+literal|"{'type':'selector','dimension':'store_state','value':'CA'},'aggregator':"
+operator|+
+literal|"{'type':'thetaSketch','name':'EXPR$1','fieldName':'customer_id_ts'}}]"
+argument_list|)
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"EXPR$0=42342.27003854513; EXPR$1=459"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/**    * Tests the use of other aggregations with complex columns    * */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testAggregationsWithComplexColumns
+parameter_list|()
+block|{
+name|wikiApprox
+argument_list|(
+literal|"select count(\"user_id\") from \"wiki\""
+argument_list|)
+operator|.
+name|failsAtValidation
+argument_list|(
+literal|"Rolled up column 'user_id' is not allowed in COUNT"
+argument_list|)
+expr_stmt|;
+name|wikiApprox
+argument_list|(
+literal|"select sum(\"user_id\") from \"wiki\""
+argument_list|)
+operator|.
+name|failsAtValidation
+argument_list|(
+literal|"Cannot apply 'SUM' to arguments of type "
+operator|+
+literal|"'SUM(<VARBINARY>)'. Supported form(s): 'SUM(<NUMERIC>)'"
+argument_list|)
+expr_stmt|;
+name|wikiApprox
+argument_list|(
+literal|"select avg(\"user_id\") from \"wiki\""
+argument_list|)
+operator|.
+name|failsAtValidation
+argument_list|(
+literal|"Cannot apply 'AVG' to arguments of type "
+operator|+
+literal|"'AVG(<VARBINARY>)'. Supported form(s): 'AVG(<NUMERIC>)'"
+argument_list|)
+expr_stmt|;
+name|wikiApprox
+argument_list|(
+literal|"select max(\"user_id\") from \"wiki\""
+argument_list|)
+operator|.
+name|failsAtValidation
+argument_list|(
+literal|"Rolled up column 'user_id' is not allowed in MAX"
+argument_list|)
+expr_stmt|;
+name|wikiApprox
+argument_list|(
+literal|"select min(\"user_id\") from \"wiki\""
+argument_list|)
+operator|.
+name|failsAtValidation
+argument_list|(
+literal|"Rolled up column 'user_id' is not allowed in MIN"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/**    * Test post aggregation support with +, -, /, * operators    * */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testPostAggregationWithComplexColumns
+parameter_list|()
+block|{
+name|foodmartApprox
+argument_list|(
+literal|"select "
+operator|+
+literal|"(count(distinct \"customer_id\") * 2) + "
+operator|+
+literal|"count(distinct \"customer_id\") - "
+operator|+
+literal|"(3 * count(distinct \"customer_id\")) "
+operator|+
+literal|"from \"foodmart\""
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|druidChecker
+argument_list|(
+literal|"'aggregations':[{'type':'thetaSketch','name':'$f0',"
+operator|+
+literal|"'fieldName':'customer_id_ts'}],'postAggregations':[{'type':"
+operator|+
+literal|"'arithmetic','name':'postagg#0','fn':'-','fields':[{'type':"
+operator|+
+literal|"'arithmetic','name':'','fn':'+','fields':[{'type':'arithmetic','"
+operator|+
+literal|"name':'','fn':'*','fields':[{'type':'thetaSketchEstimate','name':"
+operator|+
+literal|"'','field':{'type':'fieldAccess','name':'','fieldName':'$f0'}},"
+operator|+
+literal|"{'type':'constant','name':'','value':2.0}]},{'type':"
+operator|+
+literal|"'thetaSketchEstimate','name':'','field':{'type':'fieldAccess',"
+operator|+
+literal|"'name':'','fieldName':'$f0'}}]},{'type':'arithmetic','name':'',"
+operator|+
+literal|"'fn':'*','fields':[{'type':'constant','name':'','value':3.0},"
+operator|+
+literal|"{'type':'thetaSketchEstimate','name':'','field':{'type':"
+operator|+
+literal|"'fieldAccess','name':'','fieldName':'$f0'}}]}]}]"
+argument_list|)
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"EXPR$0=0"
+argument_list|)
+expr_stmt|;
+name|foodmartApprox
+argument_list|(
+literal|"select "
+operator|+
+literal|"\"the_month\" as \"month\", "
+operator|+
+literal|"sum(\"store_sales\") / count(distinct \"customer_id\") as \"avg$\" "
+operator|+
+literal|"from \"foodmart\" group by \"the_month\""
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|druidChecker
+argument_list|(
+literal|"'aggregations':[{'type':'doubleSum','name':"
+operator|+
+literal|"'$f1','fieldName':'store_sales'},{'type':'thetaSketch','name':'$f2',"
+operator|+
+literal|"'fieldName':'customer_id_ts'}],'postAggregations':[{'type':'arithmetic',"
+operator|+
+literal|"'name':'postagg#0','fn':'quotient','fields':[{'type':'fieldAccess','name':"
+operator|+
+literal|"'','fieldName':'$f1'},{'type':'thetaSketchEstimate','name':'','field':"
+operator|+
+literal|"{'type':'fieldAccess','name':'','fieldName':'$f2'}}]}]"
+argument_list|)
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"month=January; avg$=32.621555448603154"
+argument_list|,
+literal|"month=February; avg$=33.102020332456796"
+argument_list|,
+literal|"month=March; avg$=33.84970980632612"
+argument_list|,
+literal|"month=April; avg$=32.55751708428246"
+argument_list|,
+literal|"month=May; avg$=32.426177288475564"
+argument_list|,
+literal|"month=June; avg$=33.93093597960329"
+argument_list|,
+literal|"month=July; avg$=34.36859022315321"
+argument_list|,
+literal|"month=August; avg$=32.81181751598012"
+argument_list|,
+literal|"month=September; avg$=33.32773288973384"
+argument_list|,
+literal|"month=October; avg$=32.74730822215777"
+argument_list|,
+literal|"month=November; avg$=34.51727744987063"
+argument_list|,
+literal|"month=December; avg$=33.62788702774498"
+argument_list|)
+expr_stmt|;
+name|wikiApprox
+argument_list|(
+literal|"select (count(distinct \"user_id\") + 100) - "
+operator|+
+literal|"(count(distinct \"user_id\") * 2) from \"wiki\""
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|druidChecker
+argument_list|(
+literal|"'aggregations':[{'type':'hyperUnique','name':'$f0',"
+operator|+
+literal|"'fieldName':'user_unique'}],'postAggregations':[{'type':"
+operator|+
+literal|"'arithmetic','name':'postagg#0','fn':'-','fields':[{'type':"
+operator|+
+literal|"'arithmetic','name':'','fn':'+','fields':[{'type':"
+operator|+
+literal|"'hyperUniqueCardinality','name':'','fieldName':'$f0'},"
+operator|+
+literal|"{'type':'constant','name':'','value':100.0}]},{'type':"
+operator|+
+literal|"'arithmetic','name':'','fn':'*','fields':[{'type':"
+operator|+
+literal|"'hyperUniqueCardinality','name':'','fieldName':'$f0'},"
+operator|+
+literal|"{'type':'constant','name':'','value':2.0}]}]}]"
+argument_list|)
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"EXPR$0=-10590"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/**    * Test to make sure that if a complex metric is also a dimension, then    * {@link org.apache.calcite.adapter.druid.DruidTable} should allow it to be used like any other    * column.    * */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testComplexMetricAlsoDimension
+parameter_list|()
+block|{
+name|foodmartApprox
+argument_list|(
+literal|"select \"customer_id\" from \"foodmart\""
+argument_list|)
+operator|.
+name|runs
+argument_list|()
+expr_stmt|;
+name|foodmartApprox
+argument_list|(
+literal|"select count(distinct \"the_month\"), \"customer_id\" "
+operator|+
+literal|"from \"foodmart\" group by \"customer_id\""
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|druidChecker
+argument_list|(
+literal|"{'queryType':'groupBy','dataSource':'foodmart',"
+operator|+
+literal|"'granularity':'all','dimensions':[{'type':'default','dimension':"
+operator|+
+literal|"'customer_id'}],'limitSpec':{'type':'default'},'aggregations':[{"
+operator|+
+literal|"'type':'cardinality','name':'EXPR$0','fieldNames':['the_month']}],"
+operator|+
+literal|"'intervals':['1900-01-09T00:00:00.000/2992-01-10T00:00:00.000']}"
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+comment|/**    * Test to make sure that SELECT * doesn't fail, and that the rolled up column is not requested    * in the JSON query.    * */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSelectStarWithRollUp
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select * from \"wiki\" limit 5"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|,
+name|WIKI
+argument_list|)
+comment|// make sure user_id column is not present
+operator|.
+name|queryContains
+argument_list|(
+name|druidChecker
+argument_list|(
+literal|"{'queryType':'select','dataSource':'wikiticker',"
+operator|+
+literal|"'descending':false,'intervals':['1900-01-09T00:00:00.000/2992-01-10T00:00:00.000'],"
+operator|+
+literal|"'dimensions':['channel','cityName','comment','countryIsoCode','countryName',"
+operator|+
+literal|"'isAnonymous','isMinor','isNew','isRobot','isUnpatrolled','metroCode',"
+operator|+
+literal|"'namespace','page','regionIsoCode','regionName'],'metrics':['count','added',"
+operator|+
+literal|"'deleted','delta'],'granularity':'all','pagingSpec':{'threshold':5,'fromNext'"
+operator|+
+literal|":true},'context':{'druid.query.fetch':true}}"
 argument_list|)
 argument_list|)
 expr_stmt|;

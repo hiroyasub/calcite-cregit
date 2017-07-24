@@ -471,6 +471,10 @@ argument_list|,
 literal|"TABLE(CATALOG.SALES.PRODUCTS)"
 argument_list|,
 literal|"TABLE(CATALOG.SALES.SUPPLIERS)"
+argument_list|,
+literal|"TABLE(CATALOG.SALES.EMP_R)"
+argument_list|,
+literal|"TABLE(CATALOG.SALES.DEPT_R)"
 argument_list|)
 decl_stmt|;
 specifier|private

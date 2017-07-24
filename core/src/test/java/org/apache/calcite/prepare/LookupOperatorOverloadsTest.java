@@ -1003,8 +1003,6 @@ operator|.
 name|getRootSchema
 argument_list|()
 argument_list|,
-literal|false
-argument_list|,
 name|ImmutableList
 operator|.
 expr|<
@@ -1014,6 +1012,11 @@ name|of
 argument_list|()
 argument_list|,
 name|typeFactory
+argument_list|,
+name|prepareContext
+operator|.
+name|config
+argument_list|()
 argument_list|)
 decl_stmt|;
 specifier|final

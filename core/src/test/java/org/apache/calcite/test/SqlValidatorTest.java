@@ -32215,6 +32215,511 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSelectRolledUpColumn
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|error
+init|=
+literal|"Rolled up column 'SLACKINGMIN' is not allowed in SELECT"
+decl_stmt|;
+name|sql
+argument_list|(
+literal|"select ^slackingmin^ from emp_r"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+name|error
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select a from (select ^slackingmin^ from emp_r)"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+name|error
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select ^slackingmin^ as b from emp_r"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+name|error
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select empno, ^slackingmin^ from emp_r"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+name|error
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select slackingmin from (select empno as slackingmin from emp_r)"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select ^emp_r.slackingmin^ from emp_r"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+name|error
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select ^sales.emp_r.slackingmin^ from sales.emp_r"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+name|error
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select ^sales.emp_r.slackingmin^ from emp_r"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+name|error
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select ^catalog.sales.emp_r.slackingmin^ from emp_r"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+name|error
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select (select ^slackingmin^ from emp_r), a from (select empno as a from emp_r)"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+name|error
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select (((^slackingmin^))) from emp_r"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+name|error
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSelectAggregateOnRolledUpColumn
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|maxError
+init|=
+literal|"Rolled up column 'SLACKINGMIN' is not allowed in MAX"
+decl_stmt|;
+specifier|final
+name|String
+name|plusError
+init|=
+literal|"Rolled up column 'SLACKINGMIN' is not allowed in PLUS"
+decl_stmt|;
+name|sql
+argument_list|(
+literal|"select max(^slackingmin^) from emp_r"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+name|maxError
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select count(slackingmin) from emp_r"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select count(empno, deptno, slackingmin) from emp_r"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select sum(slackingmin) from emp_r"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select empno, min(slackingmin) from emp_r group by empno"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select count(distinct slackingmin) from emp_r"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select sum(empno + ^slackingmin^) from emp_r"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+name|plusError
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select max(^slackingmin^) over t as a "
+operator|+
+literal|"from emp_r window t as (partition by empno order by empno)"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+name|maxError
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testRolledUpColumnInWhere
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|error
+init|=
+literal|"Rolled up column 'SLACKINGMIN' is not allowed in GREATER_THAN"
+decl_stmt|;
+comment|// Fire these slackers!!
+name|sql
+argument_list|(
+literal|"select empno from emp_r where slacker and ^slackingmin^> 60"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+name|error
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select sum(slackingmin) filter (where slacker and ^slackingmin^> 60) from emp_r"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+name|error
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testRolledUpColumnInHaving
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|error
+init|=
+literal|"Rolled up column 'SLACKINGMIN' is not allowed in SUM"
+decl_stmt|;
+name|sql
+argument_list|(
+literal|"select deptno, sum(slackingmin) from emp_r group "
+operator|+
+literal|"by deptno having sum(^slackingmin^)> 1000"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+name|error
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testRollUpInWindow
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|partitionError
+init|=
+literal|"Rolled up column 'SLACKINGMIN' is not allowed in PARTITION BY"
+decl_stmt|;
+specifier|final
+name|String
+name|orderByError
+init|=
+literal|"Rolled up column 'SLACKINGMIN' is not allowed in ORDER BY"
+decl_stmt|;
+name|sql
+argument_list|(
+literal|"select empno, sum(slackingmin) over (partition by ^slackingmin^) from emp_r"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+name|partitionError
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select empno, sum(slackingmin) over (partition by empno, ^slackingmin^) from emp_r"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+name|partitionError
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select empno, sum(slackingmin) over (partition by empno order by ^slackingmin^) "
+operator|+
+literal|"from emp_r"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+name|orderByError
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select empno, sum(slackingmin) over slackingmin "
+operator|+
+literal|"from emp_r window slackingmin as (partition by ^slackingmin^)"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+name|partitionError
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select sum(slackingmin) over t "
+operator|+
+literal|"from emp_r window t as (partition by empno order by ^slackingmin^, empno)"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+name|orderByError
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select sum(slackingmin) over t as a "
+operator|+
+literal|"from emp_r window t as (partition by empno order by ^slackingmin^, empno)"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+name|orderByError
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testRollUpInGroupBy
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|error
+init|=
+literal|"Rolled up column 'SLACKINGMIN' is not allowed in GROUP BY"
+decl_stmt|;
+name|sql
+argument_list|(
+literal|"select empno, count(distinct empno) from emp_r group by empno, ^slackingmin^"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+name|error
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select empno from emp_r group by grouping sets (empno, ^slackingmin^)"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+name|error
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testRollUpInOrderBy
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|error
+init|=
+literal|"Rolled up column 'SLACKINGMIN' is not allowed in ORDER BY"
+decl_stmt|;
+name|sql
+argument_list|(
+literal|"select empno from emp_r order by ^slackingmin^ asc"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+name|error
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select slackingmin from (select empno as slackingmin from emp_r) order by slackingmin"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select empno, sum(slackingmin) from emp_r group by empno order by sum(slackingmin)"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testRollUpInJoin
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|onError
+init|=
+literal|"Rolled up column 'SLACKINGMIN' is not allowed in ON"
+decl_stmt|;
+specifier|final
+name|String
+name|usingError
+init|=
+literal|"Rolled up column 'SLACKINGMIN' is not allowed in USING"
+decl_stmt|;
+specifier|final
+name|String
+name|selectError
+init|=
+literal|"Rolled up column 'SLACKINGMIN' is not allowed in SELECT"
+decl_stmt|;
+name|sql
+argument_list|(
+literal|"select * from (select deptno, ^slackingmin^ from emp_r) join dept using (deptno)"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+name|selectError
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select * from dept as a join (select deptno, ^slackingmin^ from emp_r) using (deptno)"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+name|selectError
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select * from emp_r as a join dept_r as b using (deptno, ^slackingmin^)"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+name|usingError
+argument_list|)
+expr_stmt|;
+comment|// Even though the emp_r.slackingmin column will be under the SqlNode for '=',
+comment|// The error should say it happened in 'ON' instead
+name|sql
+argument_list|(
+literal|"select * from emp_r join dept_r on (^emp_r.slackingmin^ = dept_r.slackingmin)"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+name|onError
+argument_list|)
+expr_stmt|;
+block|}
 block|}
 end_class
 

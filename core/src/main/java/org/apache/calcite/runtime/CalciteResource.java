@@ -3347,6 +3347,24 @@ argument_list|>
 name|extendNotAllowed
 parameter_list|()
 function_decl|;
+annotation|@
+name|BaseMessage
+argument_list|(
+literal|"Rolled up column ''{0}'' is not allowed in {1}"
+argument_list|)
+name|ExInst
+argument_list|<
+name|SqlValidatorException
+argument_list|>
+name|rolledUpNotAllowed
+parameter_list|(
+name|String
+name|column
+parameter_list|,
+name|String
+name|context
+parameter_list|)
+function_decl|;
 block|}
 end_interface
 
