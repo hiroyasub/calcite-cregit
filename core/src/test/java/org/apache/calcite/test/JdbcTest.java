@@ -21010,6 +21010,255 @@ literal|"name=Theodore\n"
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1900">[CALCITE-1900]    * Improve error message for cyclic views</a>.    * Previously got a {@link StackOverflowError}. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSelfReferentialView
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+specifier|final
+name|CalciteAssert
+operator|.
+name|AssertThat
+name|with
+init|=
+name|modelWithView
+argument_list|(
+literal|"select * from \"V\""
+argument_list|,
+literal|null
+argument_list|)
+decl_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"select \"name\" from \"adhoc\".V"
+argument_list|)
+operator|.
+name|throws_
+argument_list|(
+literal|"Cannot resolve 'adhoc.V'; it references view 'adhoc.V', "
+operator|+
+literal|"whose definition is cyclic"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSelfReferentialView2
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+specifier|final
+name|String
+name|model
+init|=
+literal|"{\n"
+operator|+
+literal|"  version: '1.0',\n"
+operator|+
+literal|"  defaultSchema: 'adhoc',\n"
+operator|+
+literal|"  schemas: [ {\n"
+operator|+
+literal|"    name: 'adhoc',\n"
+operator|+
+literal|"    tables: [ {\n"
+operator|+
+literal|"      name: 'A',\n"
+operator|+
+literal|"      type: 'view',\n"
+operator|+
+literal|"      sql: "
+operator|+
+operator|new
+name|JsonBuilder
+argument_list|()
+operator|.
+name|toJsonString
+argument_list|(
+literal|"select * from B"
+argument_list|)
+operator|+
+literal|"\n"
+operator|+
+literal|"    }, {\n"
+operator|+
+literal|"      name: 'B',\n"
+operator|+
+literal|"      type: 'view',\n"
+operator|+
+literal|"      sql: "
+operator|+
+operator|new
+name|JsonBuilder
+argument_list|()
+operator|.
+name|toJsonString
+argument_list|(
+literal|"select * from C"
+argument_list|)
+operator|+
+literal|"\n"
+operator|+
+literal|"    }, {\n"
+operator|+
+literal|"      name: 'C',\n"
+operator|+
+literal|"      type: 'view',\n"
+operator|+
+literal|"      sql: "
+operator|+
+operator|new
+name|JsonBuilder
+argument_list|()
+operator|.
+name|toJsonString
+argument_list|(
+literal|"select * from D, B"
+argument_list|)
+operator|+
+literal|"\n"
+operator|+
+literal|"    }, {\n"
+operator|+
+literal|"      name: 'D',\n"
+operator|+
+literal|"      type: 'view',\n"
+operator|+
+literal|"      sql: "
+operator|+
+operator|new
+name|JsonBuilder
+argument_list|()
+operator|.
+name|toJsonString
+argument_list|(
+literal|"select * from (values (1, 'a')) as t(x, y)"
+argument_list|)
+operator|+
+literal|"\n"
+operator|+
+literal|"    } ]\n"
+operator|+
+literal|"  } ]\n"
+operator|+
+literal|"}"
+decl_stmt|;
+specifier|final
+name|CalciteAssert
+operator|.
+name|AssertThat
+name|with
+init|=
+name|CalciteAssert
+operator|.
+name|model
+argument_list|(
+name|model
+argument_list|)
+decl_stmt|;
+comment|//
+comment|//       +-----+
+comment|//       V     |
+comment|// A --> B --> C --> D
+comment|//
+comment|// A is not in a cycle, but depends on cyclic views
+comment|// B is cyclic
+comment|// C is cyclic
+comment|// D is not cyclic
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"select x from \"adhoc\".a"
+argument_list|)
+operator|.
+name|throws_
+argument_list|(
+literal|"Cannot resolve 'adhoc.A'; it references view 'adhoc.B', "
+operator|+
+literal|"whose definition is cyclic"
+argument_list|)
+expr_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"select x from \"adhoc\".b"
+argument_list|)
+operator|.
+name|throws_
+argument_list|(
+literal|"Cannot resolve 'adhoc.B'; it references view 'adhoc.B', "
+operator|+
+literal|"whose definition is cyclic"
+argument_list|)
+expr_stmt|;
+comment|// as previous, but implicit schema
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"select x from b"
+argument_list|)
+operator|.
+name|throws_
+argument_list|(
+literal|"Cannot resolve 'B'; it references view 'adhoc.B', "
+operator|+
+literal|"whose definition is cyclic"
+argument_list|)
+expr_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"select x from \"adhoc\".c"
+argument_list|)
+operator|.
+name|throws_
+argument_list|(
+literal|"Cannot resolve 'adhoc.C'; it references view 'adhoc.C', "
+operator|+
+literal|"whose definition is cyclic"
+argument_list|)
+expr_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"select x from \"adhoc\".d"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"X=1\n"
+argument_list|)
+expr_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"select x from \"adhoc\".d except select x from \"adhoc\".a"
+argument_list|)
+operator|.
+name|throws_
+argument_list|(
+literal|"Cannot resolve 'adhoc.A'; it references view 'adhoc.B', "
+operator|+
+literal|"whose definition is cyclic"
+argument_list|)
+expr_stmt|;
+block|}
 comment|/** Tests saving query results into temporary tables, per    * {@link org.apache.calcite.avatica.Handler.ResultSink}. */
 annotation|@
 name|Test

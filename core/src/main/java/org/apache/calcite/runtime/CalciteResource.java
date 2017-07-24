@@ -2999,6 +2999,24 @@ function_decl|;
 annotation|@
 name|BaseMessage
 argument_list|(
+literal|"Cannot resolve ''{0}''; it references view ''{1}'', whose definition is cyclic"
+argument_list|)
+name|ExInst
+argument_list|<
+name|SqlValidatorException
+argument_list|>
+name|cyclicDefinition
+parameter_list|(
+name|String
+name|id
+parameter_list|,
+name|String
+name|view
+parameter_list|)
+function_decl|;
+annotation|@
+name|BaseMessage
+argument_list|(
 literal|"Modifiable view must be based on a single table"
 argument_list|)
 name|ExInst
