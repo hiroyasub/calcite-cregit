@@ -486,6 +486,15 @@ argument_list|,
 literal|"select * from table(\"stdin\"(true))"
 argument_list|)
 expr_stmt|;
+name|addView
+argument_list|(
+name|b
+argument_list|,
+literal|"vmstat"
+argument_list|,
+literal|"select * from table(\"vmstat\"(true))"
+argument_list|)
+expr_stmt|;
 name|b
 operator|.
 name|append
@@ -549,6 +558,17 @@ argument_list|,
 literal|"stdin"
 argument_list|,
 name|StdinTableFunction
+operator|.
+name|class
+argument_list|)
+expr_stmt|;
+name|addFunction
+argument_list|(
+name|b
+argument_list|,
+literal|"vmstat"
+argument_list|,
+name|VmstatTableFunction
 operator|.
 name|class
 argument_list|)
