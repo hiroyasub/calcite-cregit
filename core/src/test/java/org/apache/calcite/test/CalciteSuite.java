@@ -978,6 +978,10 @@ name|UdfTest
 operator|.
 name|class
 block|,
+name|TableFunctionTest
+operator|.
+name|class
+block|,
 name|PlannerTest
 operator|.
 name|class
