@@ -657,11 +657,8 @@ name|type
 operator|.
 name|getSqlTypeName
 argument_list|()
-operator|.
-name|equals
-argument_list|(
+operator|==
 name|typeName
-argument_list|)
 assert|;
 block|}
 return|return

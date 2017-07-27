@@ -2408,7 +2408,6 @@ literal|null
 condition|)
 block|{
 return|return
-operator|!
 name|initializerExpressionFactory
 operator|.
 name|newColumnDefaultValue
@@ -2425,13 +2424,10 @@ argument_list|()
 operator|.
 name|getSqlTypeName
 argument_list|()
-operator|.
-name|equals
-argument_list|(
+operator|!=
 name|SqlTypeName
 operator|.
 name|NULL
-argument_list|)
 return|;
 block|}
 block|}

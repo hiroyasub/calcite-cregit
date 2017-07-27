@@ -5954,11 +5954,8 @@ argument_list|()
 operator|||
 operator|(
 name|maxClause
-operator|.
-name|equals
-argument_list|(
+operator|==
 name|clause
-argument_list|)
 operator|&&
 operator|!
 name|nonWrapSet

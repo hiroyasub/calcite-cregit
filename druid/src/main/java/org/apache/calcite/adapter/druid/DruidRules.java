@@ -6287,13 +6287,10 @@ name|call
 operator|.
 name|getKind
 argument_list|()
-operator|.
-name|equals
-argument_list|(
+operator|==
 name|SqlKind
 operator|.
 name|FLOOR
-argument_list|)
 condition|)
 block|{
 name|newSet

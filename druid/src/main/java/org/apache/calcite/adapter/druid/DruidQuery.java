@@ -6014,13 +6014,10 @@ argument_list|()
 operator|.
 name|getKind
 argument_list|()
-operator|.
-name|equals
-argument_list|(
+operator|==
 name|SqlKind
 operator|.
 name|COUNT
-argument_list|)
 condition|)
 block|{
 comment|// Will be a hyper unique cardinality column.

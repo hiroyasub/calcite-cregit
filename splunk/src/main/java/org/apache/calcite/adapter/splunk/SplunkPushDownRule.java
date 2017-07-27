@@ -2175,13 +2175,10 @@ block|}
 if|else if
 condition|(
 name|litSqlType
-operator|.
-name|equals
-argument_list|(
+operator|==
 name|SqlTypeName
 operator|.
 name|CHAR
-argument_list|)
 condition|)
 block|{
 name|value

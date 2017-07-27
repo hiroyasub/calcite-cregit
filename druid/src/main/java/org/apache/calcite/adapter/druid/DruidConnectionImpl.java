@@ -1932,11 +1932,8 @@ operator|.
 name|Rep
 operator|.
 name|JAVA_SQL_TIMESTAMP
-operator|.
-name|equals
-argument_list|(
+operator|==
 name|type
-argument_list|)
 condition|)
 block|{
 try|try

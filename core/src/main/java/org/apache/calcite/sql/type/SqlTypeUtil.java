@@ -1171,21 +1171,15 @@ return|return
 name|SqlTypeName
 operator|.
 name|ANY
-operator|.
-name|equals
-argument_list|(
+operator|==
 name|typeName
-argument_list|)
 operator|||
 name|typeName
-operator|.
-name|equals
-argument_list|(
+operator|==
 name|type
 operator|.
 name|getSqlTypeName
 argument_list|()
-argument_list|)
 return|;
 block|}
 comment|/**    * Returns true if any element in<code>typeNames</code> matches    * type.getSqlTypeName().    *    * @see #isOfSameTypeName(SqlTypeName, RelDataType)    */
