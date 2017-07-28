@@ -414,6 +414,16 @@ import|;
 end_import
 
 begin_import
+import|import
+name|junit
+operator|.
+name|framework
+operator|.
+name|AssertionFailedError
+import|;
+end_import
+
+begin_import
 import|import static
 name|org
 operator|.
@@ -3200,14 +3210,6 @@ literal|"SELECT SUBSTRING(`brand_name` FROM 2)\n"
 operator|+
 literal|"FROM `foodmart`.`product`"
 decl_stmt|;
-specifier|final
-name|String
-name|expectedMssql
-init|=
-literal|"SELECT SUBSTRING([brand_name] FROM 2)\n"
-operator|+
-literal|"FROM [foodmart].[product]"
-decl_stmt|;
 name|sql
 argument_list|(
 name|query
@@ -3267,10 +3269,11 @@ operator|.
 name|getDialect
 argument_list|()
 argument_list|)
+comment|// mssql does not support this syntax and so should fail
 operator|.
-name|ok
+name|throws_
 argument_list|(
-name|expectedMssql
+literal|"MSSQL SUBSTRING requires FROM and FOR arguments"
 argument_list|)
 expr_stmt|;
 block|}
@@ -3317,7 +3320,7 @@ specifier|final
 name|String
 name|expectedMssql
 init|=
-literal|"SELECT SUBSTRING([brand_name] FROM 2 FOR 3)\n"
+literal|"SELECT SUBSTRING([brand_name], 2, 3)\n"
 operator|+
 literal|"FROM [foodmart].[product]"
 decl_stmt|;
@@ -6143,6 +6146,79 @@ name|String
 name|expectedQuery
 parameter_list|)
 block|{
+name|assertThat
+argument_list|(
+name|exec
+argument_list|()
+argument_list|,
+name|is
+argument_list|(
+name|expectedQuery
+argument_list|)
+argument_list|)
+expr_stmt|;
+return|return
+name|this
+return|;
+block|}
+name|Sql
+name|throws_
+parameter_list|(
+name|String
+name|errorMessage
+parameter_list|)
+block|{
+try|try
+block|{
+specifier|final
+name|String
+name|s
+init|=
+name|exec
+argument_list|()
+decl_stmt|;
+throw|throw
+operator|new
+name|AssertionFailedError
+argument_list|(
+literal|"Expected exception with message `"
+operator|+
+name|errorMessage
+operator|+
+literal|"` but nothing was thrown; got "
+operator|+
+name|s
+argument_list|)
+throw|;
+block|}
+catch|catch
+parameter_list|(
+name|Exception
+name|e
+parameter_list|)
+block|{
+name|assertThat
+argument_list|(
+name|e
+operator|.
+name|getMessage
+argument_list|()
+argument_list|,
+name|is
+argument_list|(
+name|errorMessage
+argument_list|)
+argument_list|)
+expr_stmt|;
+return|return
+name|this
+return|;
+block|}
+block|}
+name|String
+name|exec
+parameter_list|()
+block|{
 specifier|final
 name|Planner
 name|planner
@@ -6243,8 +6319,7 @@ operator|.
 name|asStatement
 argument_list|()
 decl_stmt|;
-name|assertThat
-argument_list|(
+return|return
 name|Util
 operator|.
 name|toLinux
@@ -6259,13 +6334,7 @@ operator|.
 name|getSql
 argument_list|()
 argument_list|)
-argument_list|,
-name|is
-argument_list|(
-name|expectedQuery
-argument_list|)
-argument_list|)
-expr_stmt|;
+return|;
 block|}
 catch|catch
 parameter_list|(
@@ -6291,9 +6360,6 @@ name|e
 argument_list|)
 throw|;
 block|}
-return|return
-name|this
-return|;
 block|}
 specifier|public
 name|Sql
