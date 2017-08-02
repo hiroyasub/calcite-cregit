@@ -1257,6 +1257,13 @@ name|clazz
 operator|.
 name|getPackage
 argument_list|()
+operator|!=
+literal|null
+operator|&&
+name|clazz
+operator|.
+name|getPackage
+argument_list|()
 operator|.
 name|getName
 argument_list|()
