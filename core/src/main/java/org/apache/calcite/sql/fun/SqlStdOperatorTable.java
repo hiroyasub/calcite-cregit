@@ -609,6 +609,22 @@ name|sql
 operator|.
 name|validate
 operator|.
+name|SqlConformance
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|validate
+operator|.
 name|SqlModality
 import|;
 end_import
@@ -1168,6 +1184,37 @@ argument_list|,
 name|OperandTypes
 operator|.
 name|DIVISION_OPERATOR
+argument_list|)
+decl_stmt|;
+comment|/**    * Arithmetic remainder operator, '<code>%</code>',    * an alternative to {@link #MOD} allowed if under certain conformance levels.    *    * @see SqlConformance#isPercentRemainderAllowed    */
+specifier|public
+specifier|static
+specifier|final
+name|SqlBinaryOperator
+name|PERCENT_REMAINDER
+init|=
+operator|new
+name|SqlBinaryOperator
+argument_list|(
+literal|"%"
+argument_list|,
+name|SqlKind
+operator|.
+name|MOD
+argument_list|,
+literal|60
+argument_list|,
+literal|true
+argument_list|,
+name|ReturnTypes
+operator|.
+name|ARG1_NULLABLE
+argument_list|,
+literal|null
+argument_list|,
+name|OperandTypes
+operator|.
+name|EXACT_NUMERIC_EXACT_NUMERIC
 argument_list|)
 decl_stmt|;
 comment|/** The {@code RAND_INTEGER([seed, ] bound)} function, which yields a random    * integer, optionally with seed. */
@@ -4111,6 +4158,7 @@ operator|.
 name|NUMERIC
 argument_list|)
 decl_stmt|;
+comment|/**    * Arithmetic remainder function {@code MOD}.    *    * @see #PERCENT_REMAINDER    */
 specifier|public
 specifier|static
 specifier|final
@@ -4126,7 +4174,7 @@ literal|"MOD"
 argument_list|,
 name|SqlKind
 operator|.
-name|OTHER_FUNCTION
+name|MOD
 argument_list|,
 name|ReturnTypes
 operator|.

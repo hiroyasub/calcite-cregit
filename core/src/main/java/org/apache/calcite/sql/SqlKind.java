@@ -160,6 +160,9 @@ block|,
 comment|/**    * The arithmetic division operator, "/".    */
 name|DIVIDE
 block|,
+comment|/**    * The arithmetic remainder operator, "MOD" (and "%" in some dialects).    */
+name|MOD
+block|,
 comment|/**    * The arithmetic plus operator, "+".    *    * @see #PLUS_PREFIX    */
 name|PLUS
 block|,

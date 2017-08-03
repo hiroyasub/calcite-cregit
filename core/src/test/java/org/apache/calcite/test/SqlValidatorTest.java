@@ -24670,6 +24670,8 @@ literal|"| left\n"
 operator|+
 literal|"\n"
 operator|+
+literal|"% left\n"
+operator|+
 literal|"* left\n"
 operator|+
 literal|"/ left\n"

@@ -177,6 +177,18 @@ argument_list|,
 literal|false
 argument_list|)
 block|,
+comment|/**    * A percent remainder operation, such as (a % b), for numeric    * operands.    */
+name|Mod
+argument_list|(
+literal|" % "
+argument_list|,
+literal|false
+argument_list|,
+literal|3
+argument_list|,
+literal|false
+argument_list|)
+block|,
 comment|/**    * A node that represents an equality comparison, such as {@code a == b} in    * Java.    */
 name|Equal
 argument_list|(

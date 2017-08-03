@@ -150,6 +150,18 @@ function_decl|;
 annotation|@
 name|BaseMessage
 argument_list|(
+literal|"Percent remainder ''%'' is not allowed under the current SQL conformance level"
+argument_list|)
+name|ExInst
+argument_list|<
+name|CalciteException
+argument_list|>
+name|percentRemainderNotAllowed
+parameter_list|()
+function_decl|;
+annotation|@
+name|BaseMessage
+argument_list|(
 literal|"''LIMIT start, count'' is not allowed under the current SQL conformance level"
 argument_list|)
 name|ExInst

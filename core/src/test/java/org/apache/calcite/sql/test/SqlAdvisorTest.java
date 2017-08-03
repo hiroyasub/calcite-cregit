@@ -908,6 +908,8 @@ literal|"KEYWORD(.)"
 argument_list|,
 literal|"KEYWORD(/)"
 argument_list|,
+literal|"KEYWORD(%)"
+argument_list|,
 literal|"KEYWORD(<)"
 argument_list|,
 literal|"KEYWORD(<=)"

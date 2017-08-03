@@ -996,6 +996,17 @@ operator|.
 name|IS_NOT_NULL
 argument_list|)
 expr_stmt|;
+name|addAlias
+argument_list|(
+name|SqlStdOperatorTable
+operator|.
+name|PERCENT_REMAINDER
+argument_list|,
+name|SqlStdOperatorTable
+operator|.
+name|MOD
+argument_list|)
+expr_stmt|;
 comment|// Register convertlets for specific objects.
 name|registerOp
 argument_list|(

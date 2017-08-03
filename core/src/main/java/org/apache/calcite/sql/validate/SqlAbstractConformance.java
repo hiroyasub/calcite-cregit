@@ -225,6 +225,20 @@ name|isLimitStartCountAllowed
 argument_list|()
 return|;
 block|}
+specifier|public
+name|boolean
+name|isPercentRemainderAllowed
+parameter_list|()
+block|{
+return|return
+name|SqlConformanceEnum
+operator|.
+name|DEFAULT
+operator|.
+name|isPercentRemainderAllowed
+argument_list|()
+return|;
+block|}
 block|}
 end_class
 

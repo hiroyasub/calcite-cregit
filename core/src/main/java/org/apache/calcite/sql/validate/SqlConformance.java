@@ -178,6 +178,11 @@ name|boolean
 name|isBangEqualAllowed
 parameter_list|()
 function_decl|;
+comment|/**    * Whether the "%" operator is allowed by the parser as an alternative to the    * {@code mod} function.    *    *<p>Among the built-in conformance levels, true in    * {@link SqlConformanceEnum#LENIENT},    * {@link SqlConformanceEnum#MYSQL_5};    * false otherwise.    */
+name|boolean
+name|isPercentRemainderAllowed
+parameter_list|()
+function_decl|;
 comment|/**    * Whether {@code MINUS} is allowed as an alternative to {@code EXCEPT} in    * the parser.    *    *<p>Among the built-in conformance levels, true in    * {@link SqlConformanceEnum#LENIENT},    * {@link SqlConformanceEnum#ORACLE_10};    * {@link SqlConformanceEnum#ORACLE_12};    * false otherwise.    *    *<p>Note: MySQL does not support {@code MINUS} or {@code EXCEPT} (as of    * version 5.5).    */
 name|boolean
 name|isMinusAllowed

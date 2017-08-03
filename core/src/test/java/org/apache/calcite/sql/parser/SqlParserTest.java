@@ -7590,7 +7590,7 @@ name|checkExp
 argument_list|(
 literal|"MOD(5             ,\t\f\r\n2)"
 argument_list|,
-literal|"MOD(5, 2)"
+literal|"(MOD(5, 2))"
 argument_list|)
 expr_stmt|;
 name|checkExp
@@ -7771,7 +7771,7 @@ name|checkExp
 argument_list|(
 literal|"log10(1)\r\n+power(2, mod(\r\n3\n\t\t\f\n,ln(4))*log10(5)-6*log10(7/abs(8)+9))*power(10,11)"
 argument_list|,
-literal|"(LOG10(1) + (POWER(2, ((MOD(3, LN(4)) * LOG10(5)) - (6 * LOG10(((7 / ABS(8)) + 9))))) * POWER(10, 11)))"
+literal|"(LOG10(1) + (POWER(2, (((MOD(3, LN(4))) * LOG10(5)) - (6 * LOG10(((7 / ABS(8)) + 9))))) * POWER(10, 11)))"
 argument_list|)
 expr_stmt|;
 block|}
