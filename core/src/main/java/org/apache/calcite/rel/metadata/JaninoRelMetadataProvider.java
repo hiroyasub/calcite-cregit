@@ -2057,6 +2057,36 @@ argument_list|)
 operator|.
 name|append
 argument_list|(
+literal|"      if (v == "
+argument_list|)
+operator|.
+name|append
+argument_list|(
+name|NullSentinel
+operator|.
+name|class
+operator|.
+name|getName
+argument_list|()
+argument_list|)
+operator|.
+name|append
+argument_list|(
+literal|".INSTANCE) {\n"
+argument_list|)
+operator|.
+name|append
+argument_list|(
+literal|"        return null;\n"
+argument_list|)
+operator|.
+name|append
+argument_list|(
+literal|"      }\n"
+argument_list|)
+operator|.
+name|append
+argument_list|(
 literal|"      return ("
 argument_list|)
 operator|.
@@ -2162,7 +2192,22 @@ argument_list|)
 operator|.
 name|append
 argument_list|(
-literal|"      mq.map.put(key, x);\n"
+literal|"      mq.map.put(key, "
+argument_list|)
+operator|.
+name|append
+argument_list|(
+name|NullSentinel
+operator|.
+name|class
+operator|.
+name|getName
+argument_list|()
+argument_list|)
+operator|.
+name|append
+argument_list|(
+literal|".mask(x));\n"
 argument_list|)
 operator|.
 name|append
