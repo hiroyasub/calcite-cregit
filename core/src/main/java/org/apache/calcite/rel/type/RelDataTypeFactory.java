@@ -1028,6 +1028,24 @@ name|names
 argument_list|)
 return|;
 block|}
+comment|/** Returns whether a field exists with the given name. */
+specifier|public
+name|boolean
+name|nameExists
+parameter_list|(
+name|String
+name|name
+parameter_list|)
+block|{
+return|return
+name|names
+operator|.
+name|contains
+argument_list|(
+name|name
+argument_list|)
+return|;
+block|}
 block|}
 block|}
 end_interface

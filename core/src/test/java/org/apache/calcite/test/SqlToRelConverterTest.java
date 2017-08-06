@@ -9362,6 +9362,109 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1909">[CALCITE-1909]    * Output rowType of Match should include PARTITION BY and ORDER BY    * columns</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testMatchRecognizeMeasures2
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"  from emp match_recognize\n"
+operator|+
+literal|"  (\n"
+operator|+
+literal|"   partition by job\n"
+operator|+
+literal|"   order by sal\n"
+operator|+
+literal|"   measures  MATCH_NUMBER() as match_num, "
+operator|+
+literal|"   CLASSIFIER() as var_match, "
+operator|+
+literal|"   STRT.mgr as start_nw,"
+operator|+
+literal|"   LAST(DOWN.mgr) as bottom_nw,"
+operator|+
+literal|"   LAST(up.mgr) as end_nw"
+operator|+
+literal|"    pattern (strt down+ up+)\n"
+operator|+
+literal|"    define\n"
+operator|+
+literal|"      down as down.mgr< PREV(down.mgr),\n"
+operator|+
+literal|"      up as up.mgr> prev(up.mgr)\n"
+operator|+
+literal|"  ) mr"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testMatchRecognizeMeasures3
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"  from emp match_recognize\n"
+operator|+
+literal|"  (\n"
+operator|+
+literal|"   partition by job\n"
+operator|+
+literal|"   order by sal\n"
+operator|+
+literal|"   measures  MATCH_NUMBER() as match_num, "
+operator|+
+literal|"   CLASSIFIER() as var_match, "
+operator|+
+literal|"   STRT.mgr as start_nw,"
+operator|+
+literal|"   LAST(DOWN.mgr) as bottom_nw,"
+operator|+
+literal|"   LAST(up.mgr) as end_nw"
+operator|+
+literal|"   ALL ROWS PER MATCH"
+operator|+
+literal|"    pattern (strt down+ up+)\n"
+operator|+
+literal|"    define\n"
+operator|+
+literal|"      down as down.mgr< PREV(down.mgr),\n"
+operator|+
+literal|"      up as up.mgr> prev(up.mgr)\n"
+operator|+
+literal|"  ) mr"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
 annotation|@
 name|Test
 specifier|public
