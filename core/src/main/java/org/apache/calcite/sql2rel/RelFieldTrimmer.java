@@ -1793,7 +1793,7 @@ decl_stmt|;
 specifier|final
 name|RelDataTypeFactory
 operator|.
-name|FieldInfoBuilder
+name|Builder
 name|typeBuilder
 init|=
 name|relBuilder

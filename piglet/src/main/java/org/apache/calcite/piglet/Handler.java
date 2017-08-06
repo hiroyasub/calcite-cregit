@@ -1659,7 +1659,7 @@ block|{
 specifier|final
 name|RelDataTypeFactory
 operator|.
-name|FieldInfoBuilder
+name|Builder
 name|typeBuilder
 init|=
 name|builder
@@ -1987,7 +1987,7 @@ decl_stmt|;
 specifier|final
 name|RelDataTypeFactory
 operator|.
-name|FieldInfoBuilder
+name|Builder
 name|builder
 init|=
 name|typeFactory

@@ -1322,7 +1322,7 @@ block|}
 block|}
 comment|// recursively compute column-wise least restrictive
 specifier|final
-name|FieldInfoBuilder
+name|Builder
 name|builder
 init|=
 name|builder
@@ -2616,6 +2616,11 @@ name|getDefaultCharset
 argument_list|()
 return|;
 block|}
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"deprecation"
+argument_list|)
 specifier|public
 name|FieldInfoBuilder
 name|builder

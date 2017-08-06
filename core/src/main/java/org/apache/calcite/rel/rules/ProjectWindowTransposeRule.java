@@ -444,7 +444,7 @@ decl_stmt|;
 specifier|final
 name|RelDataTypeFactory
 operator|.
-name|FieldInfoBuilder
+name|Builder
 name|builder
 init|=
 name|cluster
@@ -721,7 +721,7 @@ decl_stmt|;
 specifier|final
 name|RelDataTypeFactory
 operator|.
-name|FieldInfoBuilder
+name|Builder
 name|outputBuilder
 init|=
 name|cluster

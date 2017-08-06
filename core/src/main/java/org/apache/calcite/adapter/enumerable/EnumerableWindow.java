@@ -1433,7 +1433,7 @@ comment|// The output from this stage is the input plus the aggregate functions.
 specifier|final
 name|RelDataTypeFactory
 operator|.
-name|FieldInfoBuilder
+name|Builder
 name|typeBuilder
 init|=
 name|typeFactory

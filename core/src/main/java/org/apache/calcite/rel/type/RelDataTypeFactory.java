@@ -111,6 +111,20 @@ end_import
 
 begin_import
 import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|base
+operator|.
+name|Preconditions
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|nio
@@ -412,7 +426,12 @@ name|RelDataType
 name|type2
 parameter_list|)
 function_decl|;
-comment|/**    * Creates a    * {@link org.apache.calcite.rel.type.RelDataTypeFactory.FieldInfoBuilder}.    */
+comment|/**    * Creates a    * {@link org.apache.calcite.rel.type.RelDataTypeFactory.FieldInfoBuilder}.    * But since {@code FieldInfoBuilder} is deprecated, we recommend that you use    * its base class {@link Builder}, which is not deprecated.    */
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"deprecation"
+argument_list|)
 name|FieldInfoBuilder
 name|builder
 parameter_list|()
@@ -449,14 +468,36 @@ function_decl|;
 block|}
 comment|/**    * Implementation of {@link FieldInfo} that provides a fluid API to build    * a list of fields.    */
 annotation|@
+name|Deprecated
+annotation|@
 name|SuppressWarnings
 argument_list|(
 literal|"deprecation"
 argument_list|)
 class|class
 name|FieldInfoBuilder
+extends|extends
+name|Builder
 implements|implements
 name|FieldInfo
+block|{
+specifier|public
+name|FieldInfoBuilder
+parameter_list|(
+name|RelDataTypeFactory
+name|typeFactory
+parameter_list|)
+block|{
+name|super
+argument_list|(
+name|typeFactory
+argument_list|)
+expr_stmt|;
+block|}
+block|}
+comment|/** Fluid API to build a list of fields. */
+class|class
+name|Builder
 block|{
 specifier|private
 specifier|final
@@ -497,9 +538,9 @@ specifier|final
 name|RelDataTypeFactory
 name|typeFactory
 decl_stmt|;
-comment|/**      * Creates a FieldInfoBuilder with the given type factory.      */
+comment|/**      * Creates a Builder with the given type factory.      */
 specifier|public
-name|FieldInfoBuilder
+name|Builder
 parameter_list|(
 name|RelDataTypeFactory
 name|typeFactory
@@ -509,14 +550,15 @@ name|this
 operator|.
 name|typeFactory
 operator|=
+name|Preconditions
+operator|.
+name|checkNotNull
+argument_list|(
 name|typeFactory
+argument_list|)
 expr_stmt|;
-assert|assert
-name|typeFactory
-operator|!=
-literal|null
-assert|;
 block|}
+comment|/**      * Returns the number of fields.      *      * @return number of fields      */
 specifier|public
 name|int
 name|getFieldCount
@@ -529,6 +571,7 @@ name|size
 argument_list|()
 return|;
 block|}
+comment|/**      * Returns the name of a given field.      *      * @param index Ordinal of field      * @return Name of given field      */
 specifier|public
 name|String
 name|getFieldName
@@ -546,6 +589,7 @@ name|index
 argument_list|)
 return|;
 block|}
+comment|/**      * Returns the type of a given field.      *      * @param index Ordinal of field      * @return Type of given field      */
 specifier|public
 name|RelDataType
 name|getFieldType
@@ -565,7 +609,7 @@ return|;
 block|}
 comment|/**      * Adds a field with given name and type.      */
 specifier|public
-name|FieldInfoBuilder
+name|Builder
 name|add
 parameter_list|(
 name|String
@@ -595,7 +639,7 @@ return|;
 block|}
 comment|/**      * Adds a field with a type created using      * {@link org.apache.calcite.rel.type.RelDataTypeFactory#createSqlType(org.apache.calcite.sql.type.SqlTypeName)}.      */
 specifier|public
-name|FieldInfoBuilder
+name|Builder
 name|add
 parameter_list|(
 name|String
@@ -623,7 +667,7 @@ return|;
 block|}
 comment|/**      * Adds a field with a type created using      * {@link org.apache.calcite.rel.type.RelDataTypeFactory#createSqlType(org.apache.calcite.sql.type.SqlTypeName, int)}.      */
 specifier|public
-name|FieldInfoBuilder
+name|Builder
 name|add
 parameter_list|(
 name|String
@@ -656,7 +700,7 @@ return|;
 block|}
 comment|/**      * Adds a field with a type created using      * {@link org.apache.calcite.rel.type.RelDataTypeFactory#createSqlType(org.apache.calcite.sql.type.SqlTypeName, int, int)}.      */
 specifier|public
-name|FieldInfoBuilder
+name|Builder
 name|add
 parameter_list|(
 name|String
@@ -694,7 +738,7 @@ return|;
 block|}
 comment|/**      * Adds a field with an interval type.      */
 specifier|public
-name|FieldInfoBuilder
+name|Builder
 name|add
 parameter_list|(
 name|String
@@ -751,7 +795,7 @@ return|;
 block|}
 comment|/**      * Changes the nullability of the last field added.      *      * @throws java.lang.IndexOutOfBoundsException if no fields have been      *                                             added      */
 specifier|public
-name|FieldInfoBuilder
+name|Builder
 name|nullable
 parameter_list|(
 name|boolean
@@ -817,7 +861,7 @@ return|;
 block|}
 comment|/**      * Adds a field. Field's ordinal is ignored.      */
 specifier|public
-name|FieldInfoBuilder
+name|Builder
 name|add
 parameter_list|(
 name|RelDataTypeField
@@ -843,7 +887,7 @@ return|;
 block|}
 comment|/**      * Adds all fields in a collection.      */
 specifier|public
-name|FieldInfoBuilder
+name|Builder
 name|addAll
 parameter_list|(
 name|Iterable
@@ -896,7 +940,7 @@ name|this
 return|;
 block|}
 specifier|public
-name|FieldInfoBuilder
+name|Builder
 name|kind
 parameter_list|(
 name|StructKind
@@ -915,7 +959,7 @@ return|;
 block|}
 comment|/**      * Makes sure that field names are unique.      */
 specifier|public
-name|FieldInfoBuilder
+name|Builder
 name|uniquify
 parameter_list|()
 block|{

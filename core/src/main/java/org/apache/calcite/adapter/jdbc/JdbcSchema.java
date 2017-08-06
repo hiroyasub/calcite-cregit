@@ -1547,7 +1547,7 @@ decl_stmt|;
 specifier|final
 name|RelDataTypeFactory
 operator|.
-name|FieldInfoBuilder
+name|Builder
 name|fieldInfo
 init|=
 name|typeFactory
