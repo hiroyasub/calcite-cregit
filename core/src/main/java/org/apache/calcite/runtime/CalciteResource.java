@@ -3350,6 +3350,45 @@ function_decl|;
 annotation|@
 name|BaseMessage
 argument_list|(
+literal|"Interval must be non-negative ''{0}''"
+argument_list|)
+name|ExInst
+argument_list|<
+name|SqlValidatorException
+argument_list|>
+name|intervalMustBeNonNegative
+parameter_list|(
+name|String
+name|call
+parameter_list|)
+function_decl|;
+annotation|@
+name|BaseMessage
+argument_list|(
+literal|"Must contain an ORDER BY clause when WITHIN is used"
+argument_list|)
+name|ExInst
+argument_list|<
+name|SqlValidatorException
+argument_list|>
+name|cannotUseWithinWithoutOrderBy
+parameter_list|()
+function_decl|;
+annotation|@
+name|BaseMessage
+argument_list|(
+literal|"First column of ORDER BY must be of type TIMESTAMP"
+argument_list|)
+name|ExInst
+argument_list|<
+name|SqlValidatorException
+argument_list|>
+name|firstColumnOfOrderByMustBeTimestamp
+parameter_list|()
+function_decl|;
+annotation|@
+name|BaseMessage
+argument_list|(
 literal|"Extended columns not allowed under the current SQL conformance level"
 argument_list|)
 name|ExInst

@@ -1526,6 +1526,9 @@ parameter_list|,
 name|RexNode
 name|pattern
 parameter_list|,
+name|RelDataType
+name|rowType
+parameter_list|,
 name|boolean
 name|strictStart
 parameter_list|,
@@ -1574,8 +1577,8 @@ parameter_list|,
 name|RelCollation
 name|orderKeys
 parameter_list|,
-name|RelDataType
-name|rowType
+name|RexNode
+name|interval
 parameter_list|)
 function_decl|;
 block|}
@@ -1597,6 +1600,9 @@ parameter_list|,
 name|RexNode
 name|pattern
 parameter_list|,
+name|RelDataType
+name|rowType
+parameter_list|,
 name|boolean
 name|strictStart
 parameter_list|,
@@ -1645,8 +1651,8 @@ parameter_list|,
 name|RelCollation
 name|orderKeys
 parameter_list|,
-name|RelDataType
-name|rowType
+name|RexNode
+name|interval
 parameter_list|)
 block|{
 return|return
@@ -1655,6 +1661,8 @@ operator|.
 name|create
 argument_list|(
 name|input
+argument_list|,
+name|rowType
 argument_list|,
 name|pattern
 argument_list|,
@@ -1676,7 +1684,7 @@ name|partitionKeys
 argument_list|,
 name|orderKeys
 argument_list|,
-name|rowType
+name|interval
 argument_list|)
 return|;
 block|}

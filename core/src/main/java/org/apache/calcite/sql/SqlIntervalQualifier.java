@@ -1434,7 +1434,7 @@ name|yearMonth
 return|;
 block|}
 comment|/**    * @return 1 or -1    */
-specifier|private
+specifier|public
 name|int
 name|getIntervalSign
 parameter_list|(

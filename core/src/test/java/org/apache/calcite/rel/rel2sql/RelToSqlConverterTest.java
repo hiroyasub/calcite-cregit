@@ -2766,6 +2766,13 @@ argument_list|(
 literal|"DATE '1978-05-02'"
 argument_list|)
 expr_stmt|;
+name|checkLiteral2
+argument_list|(
+literal|"DATE '1978-5-2'"
+argument_list|,
+literal|"DATE '1978-05-02'"
+argument_list|)
+expr_stmt|;
 name|checkLiteral
 argument_list|(
 literal|"TIME '12:34:56'"
@@ -2776,9 +2783,23 @@ argument_list|(
 literal|"TIME '12:34:56.78'"
 argument_list|)
 expr_stmt|;
+name|checkLiteral2
+argument_list|(
+literal|"TIME '1:4:6.080'"
+argument_list|,
+literal|"TIME '01:04:06.080'"
+argument_list|)
+expr_stmt|;
 name|checkLiteral
 argument_list|(
 literal|"TIMESTAMP '1978-05-02 12:34:56.78'"
+argument_list|)
+expr_stmt|;
+name|checkLiteral2
+argument_list|(
+literal|"TIMESTAMP '1978-5-2 2:4:6.80'"
+argument_list|,
+literal|"TIMESTAMP '1978-05-02 02:04:06.80'"
 argument_list|)
 expr_stmt|;
 name|checkLiteral
@@ -2811,20 +2832,197 @@ argument_list|(
 literal|"-123.45"
 argument_list|)
 expr_stmt|;
+name|checkLiteral
+argument_list|(
+literal|"INTERVAL '1-2' YEAR TO MONTH"
+argument_list|)
+expr_stmt|;
+name|checkLiteral
+argument_list|(
+literal|"INTERVAL -'1-2' YEAR TO MONTH"
+argument_list|)
+expr_stmt|;
+name|checkLiteral
+argument_list|(
+literal|"INTERVAL '12-11' YEAR TO MONTH"
+argument_list|)
+expr_stmt|;
+name|checkLiteral
+argument_list|(
+literal|"INTERVAL '1' YEAR"
+argument_list|)
+expr_stmt|;
+name|checkLiteral
+argument_list|(
+literal|"INTERVAL '1' MONTH"
+argument_list|)
+expr_stmt|;
+name|checkLiteral
+argument_list|(
+literal|"INTERVAL '12' DAY"
+argument_list|)
+expr_stmt|;
+name|checkLiteral
+argument_list|(
+literal|"INTERVAL -'12' DAY"
+argument_list|)
+expr_stmt|;
+name|checkLiteral2
+argument_list|(
+literal|"INTERVAL '1 2' DAY TO HOUR"
+argument_list|,
+literal|"INTERVAL '1 02' DAY TO HOUR"
+argument_list|)
+expr_stmt|;
+name|checkLiteral2
+argument_list|(
+literal|"INTERVAL '1 2:10' DAY TO MINUTE"
+argument_list|,
+literal|"INTERVAL '1 02:10' DAY TO MINUTE"
+argument_list|)
+expr_stmt|;
+name|checkLiteral2
+argument_list|(
+literal|"INTERVAL '1 2:00' DAY TO MINUTE"
+argument_list|,
+literal|"INTERVAL '1 02:00' DAY TO MINUTE"
+argument_list|)
+expr_stmt|;
+name|checkLiteral2
+argument_list|(
+literal|"INTERVAL '1 2:34:56' DAY TO SECOND"
+argument_list|,
+literal|"INTERVAL '1 02:34:56' DAY TO SECOND"
+argument_list|)
+expr_stmt|;
+name|checkLiteral2
+argument_list|(
+literal|"INTERVAL '1 2:34:56.789' DAY TO SECOND"
+argument_list|,
+literal|"INTERVAL '1 02:34:56.789' DAY TO SECOND"
+argument_list|)
+expr_stmt|;
+name|checkLiteral2
+argument_list|(
+literal|"INTERVAL '1 2:34:56.78' DAY TO SECOND"
+argument_list|,
+literal|"INTERVAL '1 02:34:56.78' DAY TO SECOND"
+argument_list|)
+expr_stmt|;
+name|checkLiteral2
+argument_list|(
+literal|"INTERVAL '1 2:34:56.078' DAY TO SECOND"
+argument_list|,
+literal|"INTERVAL '1 02:34:56.078' DAY TO SECOND"
+argument_list|)
+expr_stmt|;
+name|checkLiteral2
+argument_list|(
+literal|"INTERVAL -'1 2:34:56.078' DAY TO SECOND"
+argument_list|,
+literal|"INTERVAL -'1 02:34:56.078' DAY TO SECOND"
+argument_list|)
+expr_stmt|;
+name|checkLiteral2
+argument_list|(
+literal|"INTERVAL '1 2:3:5.070' DAY TO SECOND"
+argument_list|,
+literal|"INTERVAL '1 02:03:05.07' DAY TO SECOND"
+argument_list|)
+expr_stmt|;
+name|checkLiteral
+argument_list|(
+literal|"INTERVAL '1:23' HOUR TO MINUTE"
+argument_list|)
+expr_stmt|;
+name|checkLiteral
+argument_list|(
+literal|"INTERVAL '1:02' HOUR TO MINUTE"
+argument_list|)
+expr_stmt|;
+name|checkLiteral
+argument_list|(
+literal|"INTERVAL -'1:02' HOUR TO MINUTE"
+argument_list|)
+expr_stmt|;
+name|checkLiteral
+argument_list|(
+literal|"INTERVAL '1:23:45' HOUR TO SECOND"
+argument_list|)
+expr_stmt|;
+name|checkLiteral
+argument_list|(
+literal|"INTERVAL '1:03:05' HOUR TO SECOND"
+argument_list|)
+expr_stmt|;
+name|checkLiteral
+argument_list|(
+literal|"INTERVAL '1:23:45.678' HOUR TO SECOND"
+argument_list|)
+expr_stmt|;
+name|checkLiteral
+argument_list|(
+literal|"INTERVAL '1:03:05.06' HOUR TO SECOND"
+argument_list|)
+expr_stmt|;
+name|checkLiteral
+argument_list|(
+literal|"INTERVAL '12' MINUTE"
+argument_list|)
+expr_stmt|;
+name|checkLiteral
+argument_list|(
+literal|"INTERVAL '12:34' MINUTE TO SECOND"
+argument_list|)
+expr_stmt|;
+name|checkLiteral
+argument_list|(
+literal|"INTERVAL '12:34.567' MINUTE TO SECOND"
+argument_list|)
+expr_stmt|;
+name|checkLiteral
+argument_list|(
+literal|"INTERVAL '12' SECOND"
+argument_list|)
+expr_stmt|;
+name|checkLiteral
+argument_list|(
+literal|"INTERVAL '12.345' SECOND"
+argument_list|)
+expr_stmt|;
 block|}
 specifier|private
 name|void
 name|checkLiteral
 parameter_list|(
 name|String
-name|s
+name|expression
+parameter_list|)
+block|{
+name|checkLiteral2
+argument_list|(
+name|expression
+argument_list|,
+name|expression
+argument_list|)
+expr_stmt|;
+block|}
+specifier|private
+name|void
+name|checkLiteral2
+parameter_list|(
+name|String
+name|expression
+parameter_list|,
+name|String
+name|expected
 parameter_list|)
 block|{
 name|sql
 argument_list|(
 literal|"VALUES "
 operator|+
-name|s
+name|expression
 argument_list|)
 operator|.
 name|dialect
@@ -2843,7 +3041,7 @@ literal|"SELECT *\n"
 operator|+
 literal|"FROM (VALUES  ("
 operator|+
-name|s
+name|expected
 operator|+
 literal|"))"
 argument_list|)
@@ -6301,6 +6499,78 @@ operator|+
 literal|"\"UP\" AS \"UP\".\"net_weight\"> "
 operator|+
 literal|"PREV(\"UP\".\"net_weight\", 1))"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testMatchRecognizeWithin
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"  from \"employee\" match_recognize\n"
+operator|+
+literal|"  (\n"
+operator|+
+literal|"   order by \"hire_date\"\n"
+operator|+
+literal|"   ALL ROWS PER MATCH\n"
+operator|+
+literal|"   pattern (strt down+ up+) within interval '3:12:22.123' hour to second\n"
+operator|+
+literal|"   define\n"
+operator|+
+literal|"     down as down.\"salary\"< PREV(down.\"salary\"),\n"
+operator|+
+literal|"     up as up.\"salary\"> prev(up.\"salary\")\n"
+operator|+
+literal|"  ) mr"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM (SELECT *\n"
+operator|+
+literal|"FROM \"foodmart\".\"employee\") "
+operator|+
+literal|"MATCH_RECOGNIZE(\n"
+operator|+
+literal|"ORDER BY \"hire_date\"\n"
+operator|+
+literal|"ALL ROWS PER MATCH\n"
+operator|+
+literal|"AFTER MATCH SKIP TO NEXT ROW\n"
+operator|+
+literal|"PATTERN (\"STRT\" \"DOWN\" + \"UP\" +) WITHIN INTERVAL '3:12:22.123' HOUR TO SECOND\n"
+operator|+
+literal|"DEFINE "
+operator|+
+literal|"\"DOWN\" AS \"DOWN\".\"salary\"< "
+operator|+
+literal|"PREV(\"DOWN\".\"salary\", 1), "
+operator|+
+literal|"\"UP\" AS \"UP\".\"salary\"> "
+operator|+
+literal|"PREV(\"UP\".\"salary\", 1))"
 decl_stmt|;
 name|sql
 argument_list|(

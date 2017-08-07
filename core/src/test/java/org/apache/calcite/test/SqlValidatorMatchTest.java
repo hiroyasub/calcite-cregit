@@ -672,6 +672,84 @@ literal|"Pattern variable 'STRT' has already been defined"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testMatchRecognizeWithin
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"from emp match_recognize (\n"
+operator|+
+literal|"    pattern (strt down+ up+) within ^interval '3:10' minute to second^\n"
+operator|+
+literal|"    define\n"
+operator|+
+literal|"      down as down.sal< PREV(down.sal),\n"
+operator|+
+literal|"      up as up.sal> prev(up.sal)\n"
+operator|+
+literal|"  ) mr"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Must contain an ORDER BY clause when WITHIN is used"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testMatchRecognizeWithin2
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"from emp match_recognize (\n"
+operator|+
+literal|"    order by sal\n"
+operator|+
+literal|"    pattern (strt down+ up+) within ^interval '3:10' minute to second^\n"
+operator|+
+literal|"    define\n"
+operator|+
+literal|"      down as down.sal< PREV(down.sal),\n"
+operator|+
+literal|"      up as up.sal> prev(up.sal)\n"
+operator|+
+literal|"  ) mr"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"First column of ORDER BY must be of type TIMESTAMP"
+argument_list|)
+expr_stmt|;
+block|}
 block|}
 end_class
 

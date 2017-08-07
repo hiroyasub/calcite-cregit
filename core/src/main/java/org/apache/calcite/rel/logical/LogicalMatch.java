@@ -97,6 +97,20 @@ name|calcite
 operator|.
 name|rel
 operator|.
+name|RelShuttle
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
 name|core
 operator|.
 name|Match
@@ -184,7 +198,7 @@ name|LogicalMatch
 extends|extends
 name|Match
 block|{
-comment|/**    * Creates a LogicalMatch.    *    * @param cluster cluster    * @param traitSet Trait set    * @param input Input relational expression    * @param pattern Regular Expression defining pattern variables    * @param strictStart Whether it is a strict start pattern    * @param strictEnd Whether it is a strict end pattern    * @param patternDefinitions Pattern definitions    * @param measures Measure definitions    * @param after After match definitions    * @param subsets Subset definitions    * @param allRows Whether all rows per match (false means one row per match)    * @param partitionKeys Partition by columns    * @param orderKeys Order by columns    * @param rowType Row type    */
+comment|/**    * Creates a LogicalMatch.    *    * @param cluster cluster    * @param traitSet Trait set    * @param input Input relational expression    * @param rowType Row type    * @param pattern Regular Expression defining pattern variables    * @param strictStart Whether it is a strict start pattern    * @param strictEnd Whether it is a strict end pattern    * @param patternDefinitions Pattern definitions    * @param measures Measure definitions    * @param after After match definitions    * @param subsets Subset definitions    * @param allRows Whether all rows per match (false means one row per match)    * @param partitionKeys Partition by columns    * @param orderKeys Order by columns    * @param interval Interval definition, null if WITHIN clause is not defined    */
 specifier|private
 name|LogicalMatch
 parameter_list|(
@@ -196,6 +210,9 @@ name|traitSet
 parameter_list|,
 name|RelNode
 name|input
+parameter_list|,
+name|RelDataType
+name|rowType
 parameter_list|,
 name|RexNode
 name|pattern
@@ -250,8 +267,8 @@ parameter_list|,
 name|RelCollation
 name|orderKeys
 parameter_list|,
-name|RelDataType
-name|rowType
+name|RexNode
+name|interval
 parameter_list|)
 block|{
 name|super
@@ -261,6 +278,8 @@ argument_list|,
 name|traitSet
 argument_list|,
 name|input
+argument_list|,
+name|rowType
 argument_list|,
 name|pattern
 argument_list|,
@@ -282,7 +301,7 @@ name|partitionKeys
 argument_list|,
 name|orderKeys
 argument_list|,
-name|rowType
+name|interval
 argument_list|)
 expr_stmt|;
 block|}
@@ -294,6 +313,9 @@ name|create
 parameter_list|(
 name|RelNode
 name|input
+parameter_list|,
+name|RelDataType
+name|rowType
 parameter_list|,
 name|RexNode
 name|pattern
@@ -346,8 +368,8 @@ parameter_list|,
 name|RelCollation
 name|orderKeys
 parameter_list|,
-name|RelDataType
-name|rowType
+name|RexNode
+name|interval
 parameter_list|)
 block|{
 specifier|final
@@ -382,6 +404,8 @@ name|traitSet
 argument_list|,
 name|input
 argument_list|,
+name|rowType
+argument_list|,
 name|pattern
 argument_list|,
 name|strictStart
@@ -402,7 +426,7 @@ name|partitionKeys
 argument_list|,
 name|orderKeys
 argument_list|,
-name|rowType
+name|interval
 argument_list|)
 return|;
 block|}
@@ -415,6 +439,9 @@ name|copy
 parameter_list|(
 name|RelNode
 name|input
+parameter_list|,
+name|RelDataType
+name|rowType
 parameter_list|,
 name|RexNode
 name|pattern
@@ -469,8 +496,8 @@ parameter_list|,
 name|RelCollation
 name|orderKeys
 parameter_list|,
-name|RelDataType
-name|rowType
+name|RexNode
+name|interval
 parameter_list|)
 block|{
 specifier|final
@@ -498,6 +525,8 @@ name|traitSet
 argument_list|,
 name|input
 argument_list|,
+name|rowType
+argument_list|,
 name|pattern
 argument_list|,
 name|strictStart
@@ -518,7 +547,26 @@ name|partitionKeys
 argument_list|,
 name|orderKeys
 argument_list|,
-name|rowType
+name|interval
+argument_list|)
+return|;
+block|}
+annotation|@
+name|Override
+specifier|public
+name|RelNode
+name|accept
+parameter_list|(
+name|RelShuttle
+name|shuttle
+parameter_list|)
+block|{
+return|return
+name|shuttle
+operator|.
+name|visit
+argument_list|(
+name|this
 argument_list|)
 return|;
 block|}
