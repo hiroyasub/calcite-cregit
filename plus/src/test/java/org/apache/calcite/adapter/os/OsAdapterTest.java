@@ -105,6 +105,20 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|util
+operator|.
+name|Util
+import|;
+end_import
+
+begin_import
+import|import
 name|com
 operator|.
 name|google
@@ -124,6 +138,16 @@ operator|.
 name|hamcrest
 operator|.
 name|CoreMatchers
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|junit
+operator|.
+name|Assume
 import|;
 end_import
 
@@ -286,6 +310,26 @@ specifier|public
 class|class
 name|OsAdapterTest
 block|{
+specifier|private
+specifier|static
+name|boolean
+name|isWindows
+parameter_list|()
+block|{
+return|return
+name|System
+operator|.
+name|getProperty
+argument_list|(
+literal|"os.name"
+argument_list|)
+operator|.
+name|startsWith
+argument_list|(
+literal|"Windows"
+argument_list|)
+return|;
+block|}
 annotation|@
 name|Test
 specifier|public
@@ -546,6 +590,16 @@ name|void
 name|testFiles
 parameter_list|()
 block|{
+name|Assume
+operator|.
+name|assumeFalse
+argument_list|(
+literal|"Skip: the 'files' table does not work on Windows"
+argument_list|,
+name|isWindows
+argument_list|()
+argument_list|)
+expr_stmt|;
 name|sql
 argument_list|(
 literal|"select distinct type from files"
@@ -566,6 +620,16 @@ name|void
 name|testPs
 parameter_list|()
 block|{
+name|Assume
+operator|.
+name|assumeFalse
+argument_list|(
+literal|"Skip: the 'ps' table does not work on Windows"
+argument_list|,
+name|isWindows
+argument_list|()
+argument_list|)
+expr_stmt|;
 name|sql
 argument_list|(
 literal|"select * from ps"
@@ -714,6 +778,16 @@ name|void
 name|testPsDistinct
 parameter_list|()
 block|{
+name|Assume
+operator|.
+name|assumeFalse
+argument_list|(
+literal|"Skip: the 'ps' table does not work on Windows"
+argument_list|,
+name|isWindows
+argument_list|()
+argument_list|)
+expr_stmt|;
 name|sql
 argument_list|(
 literal|"select distinct `user` from ps"
@@ -930,6 +1004,16 @@ name|void
 name|testVmstat
 parameter_list|()
 block|{
+name|Assume
+operator|.
+name|assumeFalse
+argument_list|(
+literal|"Skip: the 'files' table does not work on Windows"
+argument_list|,
+name|isWindows
+argument_list|()
+argument_list|)
+expr_stmt|;
 name|sql
 argument_list|(
 literal|"select * from vmstat"
@@ -1674,10 +1758,15 @@ name|run
 argument_list|()
 expr_stmt|;
 return|return
+name|Util
+operator|.
+name|toLinux
+argument_list|(
 name|outSw
 operator|.
 name|toString
 argument_list|()
+argument_list|)
 return|;
 block|}
 annotation|@

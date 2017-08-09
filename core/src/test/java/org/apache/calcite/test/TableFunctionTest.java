@@ -885,6 +885,8 @@ name|SQLException
 throws|,
 name|ClassNotFoundException
 block|{
+try|try
+init|(
 name|Connection
 name|connection
 init|=
@@ -894,7 +896,16 @@ name|getConnection
 argument_list|(
 literal|"jdbc:calcite:"
 argument_list|)
-decl_stmt|;
+init|;
+name|Statement
+name|statement
+init|=
+name|connection
+operator|.
+name|createStatement
+argument_list|()
+init|)
+block|{
 name|CalciteConnection
 name|calciteConnection
 init|=
@@ -1002,15 +1013,6 @@ init|=
 literal|"select *\n"
 operator|+
 literal|"from table(\"s\".\"Maze\"(5, 3, 1))"
-decl_stmt|;
-specifier|final
-name|Statement
-name|statement
-init|=
-name|connection
-operator|.
-name|createStatement
-argument_list|()
 decl_stmt|;
 name|ResultSet
 name|resultSet
@@ -1149,11 +1151,7 @@ literal|"S=generate3(foo=a)\n"
 argument_list|)
 argument_list|)
 expr_stmt|;
-name|connection
-operator|.
-name|close
-argument_list|()
-expr_stmt|;
+block|}
 block|}
 comment|/**    * Tests a table function that returns different row type based on    * actual call arguments.    */
 annotation|@
@@ -1415,6 +1413,8 @@ name|SQLException
 throws|,
 name|ClassNotFoundException
 block|{
+try|try
+init|(
 name|Connection
 name|connection
 init|=
@@ -1424,7 +1424,8 @@ name|getConnection
 argument_list|(
 literal|"jdbc:calcite:"
 argument_list|)
-decl_stmt|;
+init|)
+block|{
 name|CalciteConnection
 name|calciteConnection
 init|=
@@ -1561,6 +1562,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+block|}
 comment|/**    * Tests a table function that takes multiple cursor inputs.    */
 annotation|@
 name|Ignore
@@ -1580,12 +1582,15 @@ name|SQLException
 throws|,
 name|ClassNotFoundException
 block|{
+try|try
+init|(
 name|Connection
 name|connection
 init|=
 name|getConnectionWithMultiplyFunction
 argument_list|()
-decl_stmt|;
+init|)
+block|{
 name|CalciteConnection
 name|calciteConnection
 init|=
@@ -1727,6 +1732,7 @@ literal|"u=9\n"
 argument_list|)
 argument_list|)
 expr_stmt|;
+block|}
 block|}
 annotation|@
 name|Test
