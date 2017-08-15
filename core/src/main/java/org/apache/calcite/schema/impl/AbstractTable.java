@@ -116,7 +116,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Abstract base class for implementing {@link Table}.  *  * Subclasses should override {@link #isRolledUp}  * and {@link Table#rolledUpColumnValidInsideAgg(String, SqlCall, SqlNode, CalciteConnectionConfig)}  * if their table can potentially contain rolled up values.  * This information is used by the validator to check for illegal uses of these columns.  */
+comment|/**  * Abstract base class for implementing {@link Table}.  *  *<p>Sub-classes should override {@link #isRolledUp} and  * {@link Table#rolledUpColumnValidInsideAgg(String, SqlCall, SqlNode, CalciteConnectionConfig)}  * if their table can potentially contain rolled up values. This information is  * used by the validator to check for illegal uses of these columns.  */
 end_comment
 
 begin_class

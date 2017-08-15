@@ -19508,7 +19508,7 @@ argument_list|)
 operator|.
 name|fails
 argument_list|(
-literal|"Expression 'EMP.EMPNO' is not being grouped"
+literal|"Expression 'EMPNO' is not being grouped"
 argument_list|)
 expr_stmt|;
 name|sql

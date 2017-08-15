@@ -8788,12 +8788,12 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
-comment|/**    * Test case for Dynamic Table / Dynamic Star support    *<a href="https://issues.apache.org/jira/browse/CALCITE-1150">[CALCITE-1150]</a>    */
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1150">[CALCITE-1150]    * Create the a new DynamicRecordType, avoiding star expansion when working    * with this type</a>. */
 annotation|@
 name|Test
 specifier|public
 name|void
-name|testSelStarOrderBy
+name|testSelectDynamicStarOrderBy
 parameter_list|()
 throws|throws
 name|Exception
@@ -8831,11 +8831,11 @@ specifier|final
 name|String
 name|sql
 init|=
-literal|"SELECT empno"
+literal|"SELECT empno\n"
 operator|+
-literal|" FROM emp AS e"
+literal|"FROM emp AS e\n"
 operator|+
-literal|" WHERE cast(e.empno as bigint) in (130, 131, 132, 133, 134)"
+literal|"WHERE cast(e.empno as bigint) in (130, 131, 132, 133, 134)"
 decl_stmt|;
 comment|// No conversion to join since less than IN-list size threshold 10
 name|SqlToRelConverter
@@ -8904,6 +8904,41 @@ name|convertsTo
 argument_list|(
 literal|"${planConverted}"
 argument_list|)
+expr_stmt|;
+block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1944">[CALCITE-1944]    * Window function applied to sub-query with dynamic star gets wrong    * plan</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testWindowOnDynamicStar
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"SELECT SUM(n_nationkey) OVER w\n"
+operator|+
+literal|"FROM (SELECT * FROM SALES.NATION) subQry\n"
+operator|+
+literal|"WINDOW w AS (PARTITION BY REGION ORDER BY n_nationkey)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|with
+argument_list|(
+name|getTesterWithDynamicTable
+argument_list|()
+argument_list|)
+operator|.
+name|ok
+argument_list|()
 expr_stmt|;
 block|}
 specifier|private
@@ -9547,7 +9582,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testMRPrevLast
+name|testMatchRecognizePrevLast
 parameter_list|()
 block|{
 specifier|final
@@ -9593,7 +9628,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testMRPrevDown
+name|testMatchRecognizePrevDown
 parameter_list|()
 block|{
 specifier|final
