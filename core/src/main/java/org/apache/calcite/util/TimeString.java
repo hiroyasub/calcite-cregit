@@ -160,7 +160,7 @@ parameter_list|)
 block|{
 name|this
 argument_list|(
-name|TimestampString
+name|DateTimeStringUtils
 operator|.
 name|hms
 argument_list|(
@@ -205,7 +205,7 @@ expr_stmt|;
 return|return
 name|withFraction
 argument_list|(
-name|TimestampString
+name|DateTimeStringUtils
 operator|.
 name|pad
 argument_list|(
@@ -241,7 +241,7 @@ expr_stmt|;
 return|return
 name|withFraction
 argument_list|(
-name|TimestampString
+name|DateTimeStringUtils
 operator|.
 name|pad
 argument_list|(

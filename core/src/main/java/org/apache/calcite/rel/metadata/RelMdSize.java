@@ -1726,6 +1726,9 @@ case|case
 name|TIME
 case|:
 case|case
+name|TIME_WITH_LOCAL_TIME_ZONE
+case|:
+case|case
 name|INTERVAL_YEAR
 case|:
 case|case
@@ -1749,6 +1752,9 @@ case|:
 comment|// sic
 case|case
 name|TIMESTAMP
+case|:
+case|case
+name|TIMESTAMP_WITH_LOCAL_TIME_ZONE
 case|:
 case|case
 name|INTERVAL_DAY
@@ -1951,6 +1957,9 @@ case|case
 name|TIME
 case|:
 case|case
+name|TIME_WITH_LOCAL_TIME_ZONE
+case|:
+case|case
 name|INTERVAL_YEAR
 case|:
 case|case
@@ -1970,6 +1979,9 @@ name|DOUBLE
 case|:
 case|case
 name|TIMESTAMP
+case|:
+case|case
+name|TIMESTAMP_WITH_LOCAL_TIME_ZONE
 case|:
 case|case
 name|INTERVAL_DAY

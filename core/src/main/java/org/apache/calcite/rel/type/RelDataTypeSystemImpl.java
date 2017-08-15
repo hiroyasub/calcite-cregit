@@ -268,6 +268,9 @@ case|case
 name|TIME
 case|:
 case|case
+name|TIME_WITH_LOCAL_TIME_ZONE
+case|:
+case|case
 name|DATE
 case|:
 return|return
@@ -276,6 +279,9 @@ return|;
 comment|// SQL99 part 2 section 6.1 syntax rule 30
 case|case
 name|TIMESTAMP
+case|:
+case|case
+name|TIMESTAMP_WITH_LOCAL_TIME_ZONE
 case|:
 comment|// farrago supports only 0 (see
 comment|// SqlTypeName.getDefaultPrecision), but it should be 6
@@ -334,7 +340,13 @@ case|case
 name|TIME
 case|:
 case|case
+name|TIME_WITH_LOCAL_TIME_ZONE
+case|:
+case|case
 name|TIMESTAMP
+case|:
+case|case
+name|TIMESTAMP_WITH_LOCAL_TIME_ZONE
 case|:
 return|return
 name|SqlTypeName
@@ -467,6 +479,16 @@ else|:
 literal|"'"
 return|;
 case|case
+name|TIMESTAMP_WITH_LOCAL_TIME_ZONE
+case|:
+return|return
+name|isPrefix
+condition|?
+literal|"TIMESTAMP WITH LOCAL TIME ZONE '"
+else|:
+literal|"'"
+return|;
+case|case
 name|INTERVAL_DAY
 case|:
 case|case
@@ -526,6 +548,16 @@ return|return
 name|isPrefix
 condition|?
 literal|"TIME '"
+else|:
+literal|"'"
+return|;
+case|case
+name|TIME_WITH_LOCAL_TIME_ZONE
+case|:
+return|return
+name|isPrefix
+condition|?
+literal|"TIME WITH LOCAL TIME ZONE '"
 else|:
 literal|"'"
 return|;

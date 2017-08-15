@@ -501,16 +501,6 @@ name|Map
 import|;
 end_import
 
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|TimeZone
-import|;
-end_import
-
 begin_comment
 comment|/**  * Utility functions for schemas.  */
 end_comment
@@ -3305,14 +3295,7 @@ operator|,
 name|Object
 operator|>
 name|of
-argument_list|(
-literal|"timeZone"
-argument_list|,
-name|TimeZone
-operator|.
-name|getDefault
 argument_list|()
-argument_list|)
 expr_stmt|;
 block|}
 specifier|public

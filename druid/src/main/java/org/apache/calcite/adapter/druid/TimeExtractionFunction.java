@@ -338,7 +338,10 @@ specifier|public
 specifier|static
 name|TimeExtractionFunction
 name|createDefault
-parameter_list|()
+parameter_list|(
+name|String
+name|timeZone
+parameter_list|)
 block|{
 return|return
 operator|new
@@ -348,7 +351,7 @@ name|ISO_TIME_FORMAT
 argument_list|,
 literal|null
 argument_list|,
-literal|"UTC"
+name|timeZone
 argument_list|,
 literal|null
 argument_list|)
@@ -362,6 +365,9 @@ name|createExtractFromGranularity
 parameter_list|(
 name|Granularity
 name|granularity
+parameter_list|,
+name|String
+name|timeZone
 parameter_list|)
 block|{
 switch|switch
@@ -380,7 +386,7 @@ literal|"d"
 argument_list|,
 literal|null
 argument_list|,
-literal|"UTC"
+name|timeZone
 argument_list|,
 name|Locale
 operator|.
@@ -402,7 +408,7 @@ literal|"M"
 argument_list|,
 literal|null
 argument_list|,
-literal|"UTC"
+name|timeZone
 argument_list|,
 name|Locale
 operator|.
@@ -424,7 +430,7 @@ literal|"yyyy"
 argument_list|,
 literal|null
 argument_list|,
-literal|"UTC"
+name|timeZone
 argument_list|,
 name|Locale
 operator|.
@@ -446,7 +452,7 @@ literal|"w"
 argument_list|,
 literal|null
 argument_list|,
-literal|"UTC"
+name|timeZone
 argument_list|,
 name|Locale
 operator|.
@@ -479,6 +485,9 @@ name|createFloorFromGranularity
 parameter_list|(
 name|Granularity
 name|granularity
+parameter_list|,
+name|String
+name|timeZone
 parameter_list|)
 block|{
 return|return
@@ -491,7 +500,7 @@ name|granularity
 operator|.
 name|value
 argument_list|,
-literal|"UTC"
+name|timeZone
 argument_list|,
 name|Locale
 operator|.

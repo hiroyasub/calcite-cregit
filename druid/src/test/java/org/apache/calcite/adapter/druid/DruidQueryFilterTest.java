@@ -820,6 +820,8 @@ argument_list|(
 name|druidTable
 argument_list|,
 name|varcharRowType
+argument_list|,
+literal|"UTC"
 argument_list|)
 decl_stmt|;
 block|}

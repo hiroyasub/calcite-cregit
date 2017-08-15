@@ -1237,6 +1237,9 @@ case|case
 name|TIME
 case|:
 case|case
+name|TIME_WITH_LOCAL_TIME_ZONE
+case|:
+case|case
 name|INTEGER
 case|:
 case|case
@@ -1264,6 +1267,9 @@ name|class
 return|;
 case|case
 name|TIMESTAMP
+case|:
+case|case
+name|TIMESTAMP_WITH_LOCAL_TIME_ZONE
 case|:
 case|case
 name|BIGINT

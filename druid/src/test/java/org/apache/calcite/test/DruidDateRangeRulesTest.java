@@ -925,11 +925,9 @@ name|DruidDateTimeUtils
 operator|.
 name|createInterval
 argument_list|(
-name|f
-operator|.
-name|timeStampDataType
-argument_list|,
 name|e
+argument_list|,
+literal|"UTC"
 argument_list|)
 decl_stmt|;
 name|assertThat
@@ -1064,11 +1062,9 @@ name|DruidDateTimeUtils
 operator|.
 name|createInterval
 argument_list|(
-name|f
-operator|.
-name|timeStampDataType
-argument_list|,
 name|e2
+argument_list|,
+literal|"UTC"
 argument_list|)
 decl_stmt|;
 if|if

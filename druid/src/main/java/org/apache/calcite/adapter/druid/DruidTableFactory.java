@@ -355,7 +355,7 @@ name|timestampColumnName
 argument_list|,
 name|SqlTypeName
 operator|.
-name|TIMESTAMP
+name|TIMESTAMP_WITH_LOCAL_TIME_ZONE
 argument_list|)
 expr_stmt|;
 specifier|final

@@ -58,6 +58,9 @@ name|makeFullTimeExtract
 parameter_list|(
 name|String
 name|outputName
+parameter_list|,
+name|String
+name|timeZone
 parameter_list|)
 block|{
 return|return
@@ -67,7 +70,9 @@ argument_list|(
 name|TimeExtractionFunction
 operator|.
 name|createDefault
-argument_list|()
+argument_list|(
+name|timeZone
+argument_list|)
 argument_list|,
 name|outputName
 argument_list|)
@@ -84,6 +89,9 @@ name|granularity
 parameter_list|,
 name|String
 name|outputName
+parameter_list|,
+name|String
+name|timeZone
 parameter_list|)
 block|{
 return|return
@@ -95,6 +103,8 @@ operator|.
 name|createExtractFromGranularity
 argument_list|(
 name|granularity
+argument_list|,
+name|timeZone
 argument_list|)
 argument_list|,
 name|outputName
@@ -112,6 +122,9 @@ name|granularity
 parameter_list|,
 name|String
 name|outputName
+parameter_list|,
+name|String
+name|timeZone
 parameter_list|)
 block|{
 name|ExtractionFunction
@@ -122,6 +135,8 @@ operator|.
 name|createFloorFromGranularity
 argument_list|(
 name|granularity
+argument_list|,
+name|timeZone
 argument_list|)
 decl_stmt|;
 return|return
