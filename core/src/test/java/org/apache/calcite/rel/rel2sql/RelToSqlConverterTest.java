@@ -4016,11 +4016,11 @@ literal|"PATTERN (\"STRT\" \"DOWN\" + \"UP\" +)\n"
 operator|+
 literal|"DEFINE "
 operator|+
-literal|"\"DOWN\" AS \"DOWN\".\"net_weight\"< "
+literal|"\"DOWN\" AS PREV(\"DOWN\".\"net_weight\", 0)< "
 operator|+
 literal|"PREV(\"DOWN\".\"net_weight\", 1), "
 operator|+
-literal|"\"UP\" AS \"UP\".\"net_weight\"> "
+literal|"\"UP\" AS PREV(\"UP\".\"net_weight\", 0)> "
 operator|+
 literal|"PREV(\"UP\".\"net_weight\", 1))"
 decl_stmt|;
@@ -4080,11 +4080,11 @@ literal|"PATTERN (\"STRT\" \"DOWN\" + \"UP\" + $)\n"
 operator|+
 literal|"DEFINE "
 operator|+
-literal|"\"DOWN\" AS \"DOWN\".\"net_weight\"< "
+literal|"\"DOWN\" AS PREV(\"DOWN\".\"net_weight\", 0)< "
 operator|+
 literal|"PREV(\"DOWN\".\"net_weight\", 1), "
 operator|+
-literal|"\"UP\" AS \"UP\".\"net_weight\"> "
+literal|"\"UP\" AS PREV(\"UP\".\"net_weight\", 0)> "
 operator|+
 literal|"PREV(\"UP\".\"net_weight\", 1))"
 decl_stmt|;
@@ -4144,11 +4144,11 @@ literal|"PATTERN (^ \"STRT\" \"DOWN\" + \"UP\" +)\n"
 operator|+
 literal|"DEFINE "
 operator|+
-literal|"\"DOWN\" AS \"DOWN\".\"net_weight\"< "
+literal|"\"DOWN\" AS PREV(\"DOWN\".\"net_weight\", 0)< "
 operator|+
 literal|"PREV(\"DOWN\".\"net_weight\", 1), "
 operator|+
-literal|"\"UP\" AS \"UP\".\"net_weight\"> "
+literal|"\"UP\" AS PREV(\"UP\".\"net_weight\", 0)> "
 operator|+
 literal|"PREV(\"UP\".\"net_weight\", 1))"
 decl_stmt|;
@@ -4208,11 +4208,11 @@ literal|"PATTERN (^ \"STRT\" \"DOWN\" + \"UP\" + $)\n"
 operator|+
 literal|"DEFINE "
 operator|+
-literal|"\"DOWN\" AS \"DOWN\".\"net_weight\"< "
+literal|"\"DOWN\" AS PREV(\"DOWN\".\"net_weight\", 0)< "
 operator|+
 literal|"PREV(\"DOWN\".\"net_weight\", 1), "
 operator|+
-literal|"\"UP\" AS \"UP\".\"net_weight\"> "
+literal|"\"UP\" AS PREV(\"UP\".\"net_weight\", 0)> "
 operator|+
 literal|"PREV(\"UP\".\"net_weight\", 1))"
 decl_stmt|;
@@ -4272,11 +4272,11 @@ literal|"PATTERN (\"STRT\" \"DOWN\" * \"UP\" ?)\n"
 operator|+
 literal|"DEFINE "
 operator|+
-literal|"\"DOWN\" AS \"DOWN\".\"net_weight\"< "
+literal|"\"DOWN\" AS PREV(\"DOWN\".\"net_weight\", 0)< "
 operator|+
 literal|"PREV(\"DOWN\".\"net_weight\", 1), "
 operator|+
-literal|"\"UP\" AS \"UP\".\"net_weight\"> "
+literal|"\"UP\" AS PREV(\"UP\".\"net_weight\", 0)> "
 operator|+
 literal|"PREV(\"UP\".\"net_weight\", 1))"
 decl_stmt|;
@@ -4336,11 +4336,11 @@ literal|"PATTERN (\"STRT\" {- \"DOWN\" -} \"UP\" ?)\n"
 operator|+
 literal|"DEFINE "
 operator|+
-literal|"\"DOWN\" AS \"DOWN\".\"net_weight\"< "
+literal|"\"DOWN\" AS PREV(\"DOWN\".\"net_weight\", 0)< "
 operator|+
 literal|"PREV(\"DOWN\".\"net_weight\", 1), "
 operator|+
-literal|"\"UP\" AS \"UP\".\"net_weight\"> "
+literal|"\"UP\" AS PREV(\"UP\".\"net_weight\", 0)> "
 operator|+
 literal|"PREV(\"UP\".\"net_weight\", 1))"
 decl_stmt|;
@@ -4400,11 +4400,11 @@ literal|"PATTERN (\"STRT\" \"DOWN\" { 2 } \"UP\" { 3, })\n"
 operator|+
 literal|"DEFINE "
 operator|+
-literal|"\"DOWN\" AS \"DOWN\".\"net_weight\"< "
+literal|"\"DOWN\" AS PREV(\"DOWN\".\"net_weight\", 0)< "
 operator|+
 literal|"PREV(\"DOWN\".\"net_weight\", 1), "
 operator|+
-literal|"\"UP\" AS \"UP\".\"net_weight\"> "
+literal|"\"UP\" AS PREV(\"UP\".\"net_weight\", 0)> "
 operator|+
 literal|"PREV(\"UP\".\"net_weight\", 1))"
 decl_stmt|;
@@ -4464,11 +4464,11 @@ literal|"PATTERN (\"STRT\" \"DOWN\" { , 2 } \"UP\" { 3, 5 })\n"
 operator|+
 literal|"DEFINE "
 operator|+
-literal|"\"DOWN\" AS \"DOWN\".\"net_weight\"< "
+literal|"\"DOWN\" AS PREV(\"DOWN\".\"net_weight\", 0)< "
 operator|+
 literal|"PREV(\"DOWN\".\"net_weight\", 1), "
 operator|+
-literal|"\"UP\" AS \"UP\".\"net_weight\"> "
+literal|"\"UP\" AS PREV(\"UP\".\"net_weight\", 0)> "
 operator|+
 literal|"PREV(\"UP\".\"net_weight\", 1))"
 decl_stmt|;
@@ -4528,11 +4528,11 @@ literal|"PATTERN (\"STRT\" {- \"DOWN\" + -} {- \"UP\" * -})\n"
 operator|+
 literal|"DEFINE "
 operator|+
-literal|"\"DOWN\" AS \"DOWN\".\"net_weight\"< "
+literal|"\"DOWN\" AS PREV(\"DOWN\".\"net_weight\", 0)< "
 operator|+
 literal|"PREV(\"DOWN\".\"net_weight\", 1), "
 operator|+
-literal|"\"UP\" AS \"UP\".\"net_weight\"> "
+literal|"\"UP\" AS PREV(\"UP\".\"net_weight\", 0)> "
 operator|+
 literal|"PREV(\"UP\".\"net_weight\", 1))"
 decl_stmt|;
@@ -4598,11 +4598,11 @@ literal|"| \"B\" \"C\" \"A\" | \"C\" \"A\" \"B\" | \"C\" \"B\" \"A\")\n"
 operator|+
 literal|"DEFINE "
 operator|+
-literal|"\"A\" AS \"A\".\"net_weight\"< PREV(\"A\".\"net_weight\", 1), "
+literal|"\"A\" AS PREV(\"A\".\"net_weight\", 0)< PREV(\"A\".\"net_weight\", 1), "
 operator|+
-literal|"\"B\" AS \"B\".\"net_weight\"> PREV(\"B\".\"net_weight\", 1), "
+literal|"\"B\" AS PREV(\"B\".\"net_weight\", 0)> PREV(\"B\".\"net_weight\", 1), "
 operator|+
-literal|"\"C\" AS \"C\".\"net_weight\"< PREV(\"C\".\"net_weight\", 1))"
+literal|"\"C\" AS PREV(\"C\".\"net_weight\", 0)< PREV(\"C\".\"net_weight\", 1))"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -4660,11 +4660,11 @@ literal|"PATTERN (\"STRT\" \"DOWN\" + \"UP\" +)\n"
 operator|+
 literal|"DEFINE "
 operator|+
-literal|"\"DOWN\" AS \"DOWN\".\"net_weight\"< "
+literal|"\"DOWN\" AS PREV(\"DOWN\".\"net_weight\", 0)< "
 operator|+
 literal|"PREV(\"DOWN\".\"net_weight\", 1), "
 operator|+
-literal|"\"UP\" AS \"UP\".\"net_weight\"> "
+literal|"\"UP\" AS PREV(\"UP\".\"net_weight\", 0)> "
 operator|+
 literal|"PREV(\"UP\".\"net_weight\", 1))"
 decl_stmt|;
@@ -4724,11 +4724,11 @@ literal|"PATTERN (\"STRT\" \"DOWN\" + \"UP\" +)\n"
 operator|+
 literal|"DEFINE "
 operator|+
-literal|"\"DOWN\" AS \"DOWN\".\"net_weight\"< "
+literal|"\"DOWN\" AS PREV(\"DOWN\".\"net_weight\", 0)< "
 operator|+
 literal|"PREV(\"DOWN\".\"net_weight\", 1), "
 operator|+
-literal|"\"UP\" AS \"UP\".\"net_weight\"> "
+literal|"\"UP\" AS PREV(\"UP\".\"net_weight\", 0)> "
 operator|+
 literal|"PREV(\"UP\".\"net_weight\", 1))\n"
 operator|+
@@ -4824,11 +4824,11 @@ literal|"PATTERN (\"STRT\" \"DOWN\" + \"UP\" +)\n"
 operator|+
 literal|"DEFINE "
 operator|+
-literal|"\"DOWN\" AS \"DOWN\".\"net_weight\"< "
+literal|"\"DOWN\" AS PREV(\"DOWN\".\"net_weight\", 0)< "
 operator|+
 literal|"PREV(\"DOWN\".\"net_weight\", 1), "
 operator|+
-literal|"\"UP\" AS \"UP\".\"net_weight\"> "
+literal|"\"UP\" AS PREV(\"UP\".\"net_weight\", 0)> "
 operator|+
 literal|"PREV(\"UP\".\"net_weight\", 1))\n"
 operator|+
@@ -4890,13 +4890,13 @@ literal|"PATTERN (\"STRT\" \"DOWN\" + \"UP\" +)\n"
 operator|+
 literal|"DEFINE "
 operator|+
-literal|"\"DOWN\" AS \"DOWN\".\"net_weight\"< "
+literal|"\"DOWN\" AS PREV(\"DOWN\".\"net_weight\", 0)< "
 operator|+
 literal|"PREV(\"DOWN\".\"net_weight\", 1), "
 operator|+
-literal|"\"UP\" AS \"UP\".\"net_weight\"> "
+literal|"\"UP\" AS PREV(\"UP\".\"net_weight\", 0)> "
 operator|+
-literal|"NEXT(\"UP\".\"net_weight\", 1))"
+literal|"NEXT(PREV(\"UP\".\"net_weight\", 0), 1))"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -4954,11 +4954,11 @@ literal|"PATTERN (\"STRT\" \"DOWN\" + \"UP\" +)\n"
 operator|+
 literal|"DEFINE "
 operator|+
-literal|"\"DOWN\" AS \"DOWN\".\"net_weight\"< "
+literal|"\"DOWN\" AS PREV(\"DOWN\".\"net_weight\", 0)< "
 operator|+
 literal|"FIRST(\"DOWN\".\"net_weight\", 0), "
 operator|+
-literal|"\"UP\" AS \"UP\".\"net_weight\"> "
+literal|"\"UP\" AS PREV(\"UP\".\"net_weight\", 0)> "
 operator|+
 literal|"LAST(\"UP\".\"net_weight\", 0))"
 decl_stmt|;
@@ -5018,13 +5018,13 @@ literal|"PATTERN (\"STRT\" \"DOWN\" + \"UP\" +)\n"
 operator|+
 literal|"DEFINE "
 operator|+
-literal|"\"DOWN\" AS \"DOWN\".\"net_weight\"< "
+literal|"\"DOWN\" AS PREV(\"DOWN\".\"net_weight\", 0)< "
 operator|+
 literal|"PREV(\"DOWN\".\"net_weight\", 1), "
 operator|+
-literal|"\"UP\" AS \"UP\".\"net_weight\"> "
+literal|"\"UP\" AS PREV(\"UP\".\"net_weight\", 0)> "
 operator|+
-literal|"LAST(\"UP\".\"net_weight\" + \"UP\".\"gross_weight\", 0))"
+literal|"LAST(\"UP\".\"net_weight\", 0) + LAST(\"UP\".\"gross_weight\", 0))"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -5084,15 +5084,15 @@ literal|"PATTERN (\"STRT\" \"DOWN\" + \"UP\" +)\n"
 operator|+
 literal|"DEFINE "
 operator|+
-literal|"\"DOWN\" AS \"DOWN\".\"net_weight\"< "
+literal|"\"DOWN\" AS PREV(\"DOWN\".\"net_weight\", 0)< "
 operator|+
 literal|"PREV(\"DOWN\".\"net_weight\", 1), "
 operator|+
-literal|"\"UP\" AS \"UP\".\"net_weight\"> "
+literal|"\"UP\" AS PREV(\"UP\".\"net_weight\", 0)> "
 operator|+
-literal|"PREV(LAST(\"UP\".\"net_weight\" + "
+literal|"PREV(LAST(\"UP\".\"net_weight\", 0) + "
 operator|+
-literal|"\"UP\".\"gross_weight\", 0), 3))"
+literal|"LAST(\"UP\".\"gross_weight\", 0), 3))"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -5156,15 +5156,15 @@ literal|"MATCH_RECOGNIZE(\n"
 operator|+
 literal|"MEASURES "
 operator|+
-literal|"MATCH_NUMBER () AS \"MATCH_NUM\", "
+literal|"FINAL MATCH_NUMBER () AS \"MATCH_NUM\", "
 operator|+
-literal|"CLASSIFIER() AS \"VAR_MATCH\", "
+literal|"FINAL CLASSIFIER() AS \"VAR_MATCH\", "
 operator|+
-literal|"\"STRT\".\"net_weight\" AS \"START_NW\", "
+literal|"FINAL \"STRT\".\"net_weight\" AS \"START_NW\", "
 operator|+
-literal|"LAST(\"DOWN\".\"net_weight\", 0) AS \"BOTTOM_NW\", "
+literal|"FINAL LAST(\"DOWN\".\"net_weight\", 0) AS \"BOTTOM_NW\", "
 operator|+
-literal|"LAST(\"UP\".\"net_weight\", 0) AS \"END_NW\"\n"
+literal|"FINAL LAST(\"UP\".\"net_weight\", 0) AS \"END_NW\"\n"
 operator|+
 literal|"ONE ROW PER MATCH\n"
 operator|+
@@ -5174,11 +5174,11 @@ literal|"PATTERN (\"STRT\" \"DOWN\" + \"UP\" +)\n"
 operator|+
 literal|"DEFINE "
 operator|+
-literal|"\"DOWN\" AS \"DOWN\".\"net_weight\"< "
+literal|"\"DOWN\" AS PREV(\"DOWN\".\"net_weight\", 0)< "
 operator|+
 literal|"PREV(\"DOWN\".\"net_weight\", 1), "
 operator|+
-literal|"\"UP\" AS \"UP\".\"net_weight\"> "
+literal|"\"UP\" AS PREV(\"UP\".\"net_weight\", 0)> "
 operator|+
 literal|"PREV(\"UP\".\"net_weight\", 1))"
 decl_stmt|;
@@ -5240,11 +5240,11 @@ literal|"MATCH_RECOGNIZE(\n"
 operator|+
 literal|"MEASURES "
 operator|+
-literal|"\"STRT\".\"net_weight\" AS \"START_NW\", "
+literal|"FINAL \"STRT\".\"net_weight\" AS \"START_NW\", "
 operator|+
 literal|"FINAL LAST(\"DOWN\".\"net_weight\", 0) AS \"BOTTOM_NW\", "
 operator|+
-literal|"LAST(\"UP\".\"net_weight\", 0) AS \"END_NW\"\n"
+literal|"FINAL LAST(\"UP\".\"net_weight\", 0) AS \"END_NW\"\n"
 operator|+
 literal|"ONE ROW PER MATCH\n"
 operator|+
@@ -5254,11 +5254,11 @@ literal|"PATTERN (\"STRT\" \"DOWN\" + \"UP\" +)\n"
 operator|+
 literal|"DEFINE "
 operator|+
-literal|"\"DOWN\" AS \"DOWN\".\"net_weight\"< "
+literal|"\"DOWN\" AS PREV(\"DOWN\".\"net_weight\", 0)< "
 operator|+
 literal|"PREV(\"DOWN\".\"net_weight\", 1), "
 operator|+
-literal|"\"UP\" AS \"UP\".\"net_weight\"> "
+literal|"\"UP\" AS PREV(\"UP\".\"net_weight\", 0)> "
 operator|+
 literal|"PREV(\"UP\".\"net_weight\", 1))"
 decl_stmt|;
@@ -5320,11 +5320,11 @@ literal|"MATCH_RECOGNIZE(\n"
 operator|+
 literal|"MEASURES "
 operator|+
-literal|"\"STRT\".\"net_weight\" AS \"START_NW\", "
+literal|"FINAL \"STRT\".\"net_weight\" AS \"START_NW\", "
 operator|+
-literal|"RUNNING LAST(\"DOWN\".\"net_weight\", 0) AS \"BOTTOM_NW\", "
+literal|"FINAL (RUNNING LAST(\"DOWN\".\"net_weight\", 0)) AS \"BOTTOM_NW\", "
 operator|+
-literal|"LAST(\"UP\".\"net_weight\", 0) AS \"END_NW\"\n"
+literal|"FINAL LAST(\"UP\".\"net_weight\", 0) AS \"END_NW\"\n"
 operator|+
 literal|"ONE ROW PER MATCH\n"
 operator|+
@@ -5334,11 +5334,11 @@ literal|"PATTERN (\"STRT\" \"DOWN\" + \"UP\" +)\n"
 operator|+
 literal|"DEFINE "
 operator|+
-literal|"\"DOWN\" AS \"DOWN\".\"net_weight\"< "
+literal|"\"DOWN\" AS PREV(\"DOWN\".\"net_weight\", 0)< "
 operator|+
 literal|"PREV(\"DOWN\".\"net_weight\", 1), "
 operator|+
-literal|"\"UP\" AS \"UP\".\"net_weight\"> "
+literal|"\"UP\" AS PREV(\"UP\".\"net_weight\", 0)> "
 operator|+
 literal|"PREV(\"UP\".\"net_weight\", 1))"
 decl_stmt|;
@@ -5402,13 +5402,13 @@ literal|"MATCH_RECOGNIZE(\n"
 operator|+
 literal|"MEASURES "
 operator|+
-literal|"\"STRT\".\"net_weight\" AS \"START_NW\", "
+literal|"FINAL \"STRT\".\"net_weight\" AS \"START_NW\", "
 operator|+
 literal|"FINAL COUNT(\"UP\".\"net_weight\") AS \"UP_CNT\", "
 operator|+
 literal|"FINAL COUNT(\"*\".\"net_weight\") AS \"DOWN_CNT\", "
 operator|+
-literal|"RUNNING COUNT(\"*\".\"net_weight\") AS \"RUNNING_CNT\"\n"
+literal|"FINAL (RUNNING COUNT(\"*\".\"net_weight\")) AS \"RUNNING_CNT\"\n"
 operator|+
 literal|"ONE ROW PER MATCH\n"
 operator|+
@@ -5418,11 +5418,11 @@ literal|"PATTERN (\"STRT\" \"DOWN\" + \"UP\" +)\n"
 operator|+
 literal|"DEFINE "
 operator|+
-literal|"\"DOWN\" AS \"DOWN\".\"net_weight\"< "
+literal|"\"DOWN\" AS PREV(\"DOWN\".\"net_weight\", 0)< "
 operator|+
 literal|"PREV(\"DOWN\".\"net_weight\", 1), "
 operator|+
-literal|"\"UP\" AS \"UP\".\"net_weight\"> "
+literal|"\"UP\" AS PREV(\"UP\".\"net_weight\", 0)> "
 operator|+
 literal|"PREV(\"UP\".\"net_weight\", 1))"
 decl_stmt|;
@@ -5486,13 +5486,13 @@ literal|"MATCH_RECOGNIZE(\n"
 operator|+
 literal|"MEASURES "
 operator|+
-literal|"FIRST(\"STRT\".\"net_weight\", 0) AS \"START_NW\", "
+literal|"FINAL FIRST(\"STRT\".\"net_weight\", 0) AS \"START_NW\", "
 operator|+
-literal|"LAST(\"UP\".\"net_weight\", 0) AS \"UP_CNT\", "
+literal|"FINAL LAST(\"UP\".\"net_weight\", 0) AS \"UP_CNT\", "
 operator|+
-literal|"SUM(\"DOWN\".\"net_weight\") / "
+literal|"FINAL (SUM(\"DOWN\".\"net_weight\") / "
 operator|+
-literal|"COUNT(\"DOWN\".\"net_weight\") AS \"DOWN_CNT\"\n"
+literal|"COUNT(\"DOWN\".\"net_weight\")) AS \"DOWN_CNT\"\n"
 operator|+
 literal|"ONE ROW PER MATCH\n"
 operator|+
@@ -5502,11 +5502,11 @@ literal|"PATTERN (\"STRT\" \"DOWN\" + \"UP\" +)\n"
 operator|+
 literal|"DEFINE "
 operator|+
-literal|"\"DOWN\" AS \"DOWN\".\"net_weight\"< "
+literal|"\"DOWN\" AS PREV(\"DOWN\".\"net_weight\", 0)< "
 operator|+
 literal|"PREV(\"DOWN\".\"net_weight\", 1), "
 operator|+
-literal|"\"UP\" AS \"UP\".\"net_weight\"> "
+literal|"\"UP\" AS PREV(\"UP\".\"net_weight\", 0)> "
 operator|+
 literal|"PREV(\"UP\".\"net_weight\", 1))"
 decl_stmt|;
@@ -5568,9 +5568,9 @@ literal|"FROM \"foodmart\".\"product\") MATCH_RECOGNIZE(\n"
 operator|+
 literal|"MEASURES "
 operator|+
-literal|"FIRST(\"STRT\".\"net_weight\", 0) AS \"START_NW\", "
+literal|"FINAL FIRST(\"STRT\".\"net_weight\", 0) AS \"START_NW\", "
 operator|+
-literal|"LAST(\"DOWN\".\"net_weight\", 0) AS \"UP_CNT\", "
+literal|"FINAL LAST(\"DOWN\".\"net_weight\", 0) AS \"UP_CNT\", "
 operator|+
 literal|"FINAL SUM(\"DOWN\".\"net_weight\") AS \"DOWN_CNT\"\n"
 operator|+
@@ -5584,11 +5584,11 @@ literal|"(\"STRT\" \"DOWN\" + \"UP\" +)\n"
 operator|+
 literal|"DEFINE "
 operator|+
-literal|"\"DOWN\" AS \"DOWN\".\"net_weight\"< "
+literal|"\"DOWN\" AS PREV(\"DOWN\".\"net_weight\", 0)< "
 operator|+
 literal|"PREV(\"DOWN\".\"net_weight\", 1), "
 operator|+
-literal|"\"UP\" AS \"UP\".\"net_weight\"> "
+literal|"\"UP\" AS PREV(\"UP\".\"net_weight\", 0)> "
 operator|+
 literal|"PREV(\"UP\".\"net_weight\", 1))"
 decl_stmt|;
@@ -5650,9 +5650,9 @@ literal|"FROM \"foodmart\".\"product\") MATCH_RECOGNIZE(\n"
 operator|+
 literal|"MEASURES "
 operator|+
-literal|"FIRST(\"STRT\".\"net_weight\", 0) AS \"START_NW\", "
+literal|"FINAL FIRST(\"STRT\".\"net_weight\", 0) AS \"START_NW\", "
 operator|+
-literal|"LAST(\"DOWN\".\"net_weight\", 0) AS \"UP_CNT\", "
+literal|"FINAL LAST(\"DOWN\".\"net_weight\", 0) AS \"UP_CNT\", "
 operator|+
 literal|"FINAL SUM(\"DOWN\".\"net_weight\") AS \"DOWN_CNT\"\n"
 operator|+
@@ -5666,11 +5666,11 @@ literal|"(\"STRT\" \"DOWN\" + \"UP\" +)\n"
 operator|+
 literal|"DEFINE "
 operator|+
-literal|"\"DOWN\" AS \"DOWN\".\"net_weight\"< "
+literal|"\"DOWN\" AS PREV(\"DOWN\".\"net_weight\", 0)< "
 operator|+
 literal|"PREV(\"DOWN\".\"net_weight\", 1), "
 operator|+
-literal|"\"UP\" AS \"UP\".\"net_weight\"> "
+literal|"\"UP\" AS PREV(\"UP\".\"net_weight\", 0)> "
 operator|+
 literal|"PREV(\"UP\".\"net_weight\", 1))\n"
 operator|+
@@ -5734,13 +5734,13 @@ literal|"PATTERN (\"STRT\" \"DOWN\" + \"UP\" +)\n"
 operator|+
 literal|"DEFINE "
 operator|+
-literal|"\"DOWN\" AS \"DOWN\".\"net_weight\"< "
+literal|"\"DOWN\" AS PREV(\"DOWN\".\"net_weight\", 0)< "
 operator|+
 literal|"PREV(\"DOWN\".\"net_weight\", 1), "
 operator|+
-literal|"\"UP\" AS \"UP\".\"net_weight\"> "
+literal|"\"UP\" AS PREV(\"UP\".\"net_weight\", 0)> "
 operator|+
-literal|"NEXT(\"UP\".\"net_weight\", 1))"
+literal|"NEXT(PREV(\"UP\".\"net_weight\", 0), 1))"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -5800,13 +5800,13 @@ literal|"PATTERN (\"STRT\" \"DOWN\" + \"UP\" +)\n"
 operator|+
 literal|"DEFINE "
 operator|+
-literal|"\"DOWN\" AS \"DOWN\".\"net_weight\"< "
+literal|"\"DOWN\" AS PREV(\"DOWN\".\"net_weight\", 0)< "
 operator|+
 literal|"PREV(\"DOWN\".\"net_weight\", 1), "
 operator|+
-literal|"\"UP\" AS \"UP\".\"net_weight\"> "
+literal|"\"UP\" AS PREV(\"UP\".\"net_weight\", 0)> "
 operator|+
-literal|"NEXT(\"UP\".\"net_weight\", 1))"
+literal|"NEXT(PREV(\"UP\".\"net_weight\", 0), 1))"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -5864,13 +5864,13 @@ literal|"AFTER MATCH SKIP TO FIRST \"DOWN\"\n"
 operator|+
 literal|"PATTERN (\"STRT\" \"DOWN\" + \"UP\" +)\n"
 operator|+
-literal|"DEFINE \"DOWN\" AS \"DOWN\".\"net_weight\"< "
+literal|"DEFINE \"DOWN\" AS PREV(\"DOWN\".\"net_weight\", 0)< "
 operator|+
 literal|"PREV(\"DOWN\".\"net_weight\", 1), "
 operator|+
-literal|"\"UP\" AS \"UP\".\"net_weight\"> "
+literal|"\"UP\" AS PREV(\"UP\".\"net_weight\", 0)> "
 operator|+
-literal|"NEXT(\"UP\".\"net_weight\", 1))"
+literal|"NEXT(PREV(\"UP\".\"net_weight\", 0), 1))"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -5930,13 +5930,13 @@ literal|"PATTERN (\"STRT\" \"DOWN\" + \"UP\" +)\n"
 operator|+
 literal|"DEFINE "
 operator|+
-literal|"\"DOWN\" AS \"DOWN\".\"net_weight\"< "
+literal|"\"DOWN\" AS PREV(\"DOWN\".\"net_weight\", 0)< "
 operator|+
 literal|"PREV(\"DOWN\".\"net_weight\", 1), "
 operator|+
-literal|"\"UP\" AS \"UP\".\"net_weight\"> "
+literal|"\"UP\" AS PREV(\"UP\".\"net_weight\", 0)> "
 operator|+
-literal|"NEXT(\"UP\".\"net_weight\", 1))"
+literal|"NEXT(PREV(\"UP\".\"net_weight\", 0), 1))"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -5996,13 +5996,13 @@ literal|"PATTERN (\"STRT\" \"DOWN\" + \"UP\" +)\n"
 operator|+
 literal|"DEFINE "
 operator|+
-literal|"\"DOWN\" AS \"DOWN\".\"net_weight\"< "
+literal|"\"DOWN\" AS PREV(\"DOWN\".\"net_weight\", 0)< "
 operator|+
 literal|"PREV(\"DOWN\".\"net_weight\", 1), "
 operator|+
-literal|"\"UP\" AS \"UP\".\"net_weight\"> "
+literal|"\"UP\" AS PREV(\"UP\".\"net_weight\", 0)> "
 operator|+
-literal|"NEXT(\"UP\".\"net_weight\", 1))"
+literal|"NEXT(PREV(\"UP\".\"net_weight\", 0), 1))"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -6066,13 +6066,13 @@ literal|"SUBSET \"STDN\" = (\"DOWN\", \"STRT\")\n"
 operator|+
 literal|"DEFINE "
 operator|+
-literal|"\"DOWN\" AS \"DOWN\".\"net_weight\"< "
+literal|"\"DOWN\" AS PREV(\"DOWN\".\"net_weight\", 0)< "
 operator|+
 literal|"PREV(\"DOWN\".\"net_weight\", 1), "
 operator|+
-literal|"\"UP\" AS \"UP\".\"net_weight\"> "
+literal|"\"UP\" AS PREV(\"UP\".\"net_weight\", 0)> "
 operator|+
-literal|"NEXT(\"UP\".\"net_weight\", 1))"
+literal|"NEXT(PREV(\"UP\".\"net_weight\", 0), 1))"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -6134,13 +6134,13 @@ literal|"MATCH_RECOGNIZE(\n"
 operator|+
 literal|"MEASURES "
 operator|+
-literal|"\"STRT\".\"net_weight\" AS \"START_NW\", "
+literal|"FINAL \"STRT\".\"net_weight\" AS \"START_NW\", "
 operator|+
-literal|"LAST(\"DOWN\".\"net_weight\", 0) AS \"BOTTOM_NW\", "
+literal|"FINAL LAST(\"DOWN\".\"net_weight\", 0) AS \"BOTTOM_NW\", "
 operator|+
-literal|"SUM(\"STDN\".\"net_weight\") / "
+literal|"FINAL (SUM(\"STDN\".\"net_weight\") / "
 operator|+
-literal|"COUNT(\"STDN\".\"net_weight\") AS \"AVG_STDN\"\n"
+literal|"COUNT(\"STDN\".\"net_weight\")) AS \"AVG_STDN\"\n"
 operator|+
 literal|"ONE ROW PER MATCH\n"
 operator|+
@@ -6152,11 +6152,11 @@ literal|"SUBSET \"STDN\" = (\"DOWN\", \"STRT\")\n"
 operator|+
 literal|"DEFINE "
 operator|+
-literal|"\"DOWN\" AS \"DOWN\".\"net_weight\"< "
+literal|"\"DOWN\" AS PREV(\"DOWN\".\"net_weight\", 0)< "
 operator|+
 literal|"PREV(\"DOWN\".\"net_weight\", 1), "
 operator|+
-literal|"\"UP\" AS \"UP\".\"net_weight\"> "
+literal|"\"UP\" AS PREV(\"UP\".\"net_weight\", 0)> "
 operator|+
 literal|"PREV(\"UP\".\"net_weight\", 1))"
 decl_stmt|;
@@ -6220,11 +6220,11 @@ literal|"MATCH_RECOGNIZE(\n"
 operator|+
 literal|"MEASURES "
 operator|+
-literal|"\"STRT\".\"net_weight\" AS \"START_NW\", "
+literal|"FINAL \"STRT\".\"net_weight\" AS \"START_NW\", "
 operator|+
-literal|"LAST(\"DOWN\".\"net_weight\", 0) AS \"BOTTOM_NW\", "
+literal|"FINAL LAST(\"DOWN\".\"net_weight\", 0) AS \"BOTTOM_NW\", "
 operator|+
-literal|"SUM(\"STDN\".\"net_weight\") AS \"AVG_STDN\"\n"
+literal|"FINAL SUM(\"STDN\".\"net_weight\") AS \"AVG_STDN\"\n"
 operator|+
 literal|"ONE ROW PER MATCH\n"
 operator|+
@@ -6236,11 +6236,11 @@ literal|"SUBSET \"STDN\" = (\"DOWN\", \"STRT\")\n"
 operator|+
 literal|"DEFINE "
 operator|+
-literal|"\"DOWN\" AS \"DOWN\".\"net_weight\"< "
+literal|"\"DOWN\" AS PREV(\"DOWN\".\"net_weight\", 0)< "
 operator|+
 literal|"PREV(\"DOWN\".\"net_weight\", 1), "
 operator|+
-literal|"\"UP\" AS \"UP\".\"net_weight\"> "
+literal|"\"UP\" AS PREV(\"UP\".\"net_weight\", 0)> "
 operator|+
 literal|"PREV(\"UP\".\"net_weight\", 1))"
 decl_stmt|;
@@ -6304,11 +6304,11 @@ literal|"MATCH_RECOGNIZE(\n"
 operator|+
 literal|"MEASURES "
 operator|+
-literal|"\"STRT\".\"net_weight\" AS \"START_NW\", "
+literal|"FINAL \"STRT\".\"net_weight\" AS \"START_NW\", "
 operator|+
-literal|"LAST(\"DOWN\".\"net_weight\", 0) AS \"BOTTOM_NW\", "
+literal|"FINAL LAST(\"DOWN\".\"net_weight\", 0) AS \"BOTTOM_NW\", "
 operator|+
-literal|"SUM(\"STDN\".\"net_weight\") AS \"AVG_STDN\"\n"
+literal|"FINAL SUM(\"STDN\".\"net_weight\") AS \"AVG_STDN\"\n"
 operator|+
 literal|"ONE ROW PER MATCH\n"
 operator|+
@@ -6320,11 +6320,11 @@ literal|"SUBSET \"STDN\" = (\"DOWN\", \"STRT\"), \"STDN2\" = (\"DOWN\", \"STRT\"
 operator|+
 literal|"DEFINE "
 operator|+
-literal|"\"DOWN\" AS \"DOWN\".\"net_weight\"< "
+literal|"\"DOWN\" AS PREV(\"DOWN\".\"net_weight\", 0)< "
 operator|+
 literal|"PREV(\"DOWN\".\"net_weight\", 1), "
 operator|+
-literal|"\"UP\" AS \"UP\".\"net_weight\"> "
+literal|"\"UP\" AS PREV(\"UP\".\"net_weight\", 0)> "
 operator|+
 literal|"PREV(\"UP\".\"net_weight\", 1))"
 decl_stmt|;
@@ -6390,11 +6390,11 @@ literal|"MATCH_RECOGNIZE(\n"
 operator|+
 literal|"MEASURES "
 operator|+
-literal|"\"STRT\".\"net_weight\" AS \"START_NW\", "
+literal|"FINAL \"STRT\".\"net_weight\" AS \"START_NW\", "
 operator|+
-literal|"LAST(\"DOWN\".\"net_weight\", 0) AS \"BOTTOM_NW\", "
+literal|"FINAL LAST(\"DOWN\".\"net_weight\", 0) AS \"BOTTOM_NW\", "
 operator|+
-literal|"SUM(\"STDN\".\"net_weight\") AS \"AVG_STDN\"\n"
+literal|"FINAL SUM(\"STDN\".\"net_weight\") AS \"AVG_STDN\"\n"
 operator|+
 literal|"ONE ROW PER MATCH\n"
 operator|+
@@ -6406,11 +6406,11 @@ literal|"SUBSET \"STDN\" = (\"DOWN\", \"STRT\"), \"STDN2\" = (\"DOWN\", \"STRT\"
 operator|+
 literal|"DEFINE "
 operator|+
-literal|"\"DOWN\" AS \"DOWN\".\"net_weight\"< "
+literal|"\"DOWN\" AS PREV(\"DOWN\".\"net_weight\", 0)< "
 operator|+
 literal|"PREV(\"DOWN\".\"net_weight\", 1), "
 operator|+
-literal|"\"UP\" AS \"UP\".\"net_weight\"> "
+literal|"\"UP\" AS PREV(\"UP\".\"net_weight\", 0)> "
 operator|+
 literal|"PREV(\"UP\".\"net_weight\", 1))"
 decl_stmt|;
@@ -6476,11 +6476,11 @@ literal|"MATCH_RECOGNIZE(\n"
 operator|+
 literal|"MEASURES "
 operator|+
-literal|"\"STRT\".\"net_weight\" AS \"START_NW\", "
+literal|"RUNNING \"STRT\".\"net_weight\" AS \"START_NW\", "
 operator|+
-literal|"LAST(\"DOWN\".\"net_weight\", 0) AS \"BOTTOM_NW\", "
+literal|"RUNNING LAST(\"DOWN\".\"net_weight\", 0) AS \"BOTTOM_NW\", "
 operator|+
-literal|"SUM(\"STDN\".\"net_weight\") AS \"AVG_STDN\"\n"
+literal|"RUNNING SUM(\"STDN\".\"net_weight\") AS \"AVG_STDN\"\n"
 operator|+
 literal|"ALL ROWS PER MATCH\n"
 operator|+
@@ -6492,11 +6492,11 @@ literal|"SUBSET \"STDN\" = (\"DOWN\", \"STRT\"), \"STDN2\" = (\"DOWN\", \"STRT\"
 operator|+
 literal|"DEFINE "
 operator|+
-literal|"\"DOWN\" AS \"DOWN\".\"net_weight\"< "
+literal|"\"DOWN\" AS PREV(\"DOWN\".\"net_weight\", 0)< "
 operator|+
 literal|"PREV(\"DOWN\".\"net_weight\", 1), "
 operator|+
-literal|"\"UP\" AS \"UP\".\"net_weight\"> "
+literal|"\"UP\" AS PREV(\"UP\".\"net_weight\", 0)> "
 operator|+
 literal|"PREV(\"UP\".\"net_weight\", 1))"
 decl_stmt|;
@@ -6564,11 +6564,11 @@ literal|"PATTERN (\"STRT\" \"DOWN\" + \"UP\" +) WITHIN INTERVAL '3:12:22.123' HO
 operator|+
 literal|"DEFINE "
 operator|+
-literal|"\"DOWN\" AS \"DOWN\".\"salary\"< "
+literal|"\"DOWN\" AS PREV(\"DOWN\".\"salary\", 0)< "
 operator|+
 literal|"PREV(\"DOWN\".\"salary\", 1), "
 operator|+
-literal|"\"UP\" AS \"UP\".\"salary\"> "
+literal|"\"UP\" AS PREV(\"UP\".\"salary\", 0)> "
 operator|+
 literal|"PREV(\"UP\".\"salary\", 1))"
 decl_stmt|;
