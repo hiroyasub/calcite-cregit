@@ -1996,6 +1996,35 @@ literal|true
 return|;
 block|}
 block|}
+comment|/**    * Returns whether the dialect supports nested aggregations, for instance    * {@code SELECT SUM(SUM(1)) }.    */
+specifier|public
+name|boolean
+name|supportsNestedAggregations
+parameter_list|()
+block|{
+switch|switch
+condition|(
+name|databaseProduct
+condition|)
+block|{
+case|case
+name|MYSQL
+case|:
+case|case
+name|VERTICA
+case|:
+case|case
+name|POSTGRESQL
+case|:
+return|return
+literal|false
+return|;
+default|default:
+return|return
+literal|true
+return|;
+block|}
+block|}
 comment|/** Returns how NULL values are sorted if an ORDER BY item does not contain    * NULLS ASCENDING or NULLS DESCENDING. */
 specifier|public
 name|NullCollation

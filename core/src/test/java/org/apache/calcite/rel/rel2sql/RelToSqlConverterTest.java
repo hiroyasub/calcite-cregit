@@ -1035,6 +1035,147 @@ name|expected
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1946">[CALCITE-1946]    * JDBC adapter should generate sub-SELECT if dialect does not support nested    * aggregate functions</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testNestedAggregates
+parameter_list|()
+block|{
+comment|// PostgreSQL, MySQL, Vertica do not support nested aggregate functions, so
+comment|// for these, the JDBC adapter generates a SELECT in the FROM clause.
+comment|// Oracle can do it in a single SELECT.
+specifier|final
+name|String
+name|query
+init|=
+literal|"select\n"
+operator|+
+literal|"    SUM(\"net_weight1\") as \"net_weight_converted\"\n"
+operator|+
+literal|"  from ("
+operator|+
+literal|"    select\n"
+operator|+
+literal|"       SUM(\"net_weight\") as \"net_weight1\"\n"
+operator|+
+literal|"    from \"foodmart\".\"product\"\n"
+operator|+
+literal|"    group by \"product_id\")"
+decl_stmt|;
+specifier|final
+name|String
+name|expectedOracle
+init|=
+literal|"SELECT SUM(SUM(\"net_weight\")) \"net_weight_converted\"\n"
+operator|+
+literal|"FROM \"foodmart\".\"product\"\n"
+operator|+
+literal|"GROUP BY \"product_id\""
+decl_stmt|;
+specifier|final
+name|String
+name|expectedMySQL
+init|=
+literal|"SELECT SUM(`net_weight1`) AS `net_weight_converted`\n"
+operator|+
+literal|"FROM (SELECT SUM(`net_weight`) AS `net_weight1`\n"
+operator|+
+literal|"FROM `foodmart`.`product`\n"
+operator|+
+literal|"GROUP BY `product_id`) AS `t1`"
+decl_stmt|;
+specifier|final
+name|String
+name|expectedVertica
+init|=
+literal|"SELECT SUM(\"net_weight1\") AS \"net_weight_converted\"\n"
+operator|+
+literal|"FROM (SELECT SUM(\"net_weight\") AS \"net_weight1\"\n"
+operator|+
+literal|"FROM \"foodmart\".\"product\"\n"
+operator|+
+literal|"GROUP BY \"product_id\") AS \"t1\""
+decl_stmt|;
+specifier|final
+name|String
+name|expectedPostgresql
+init|=
+literal|"SELECT SUM(\"net_weight1\") AS \"net_weight_converted\"\n"
+operator|+
+literal|"FROM (SELECT SUM(\"net_weight\") AS \"net_weight1\"\n"
+operator|+
+literal|"FROM \"foodmart\".\"product\"\n"
+operator|+
+literal|"GROUP BY \"product_id\") AS \"t1\""
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|dialect
+argument_list|(
+name|DatabaseProduct
+operator|.
+name|ORACLE
+operator|.
+name|getDialect
+argument_list|()
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expectedOracle
+argument_list|)
+operator|.
+name|dialect
+argument_list|(
+name|DatabaseProduct
+operator|.
+name|MYSQL
+operator|.
+name|getDialect
+argument_list|()
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expectedMySQL
+argument_list|)
+operator|.
+name|dialect
+argument_list|(
+name|DatabaseProduct
+operator|.
+name|VERTICA
+operator|.
+name|getDialect
+argument_list|()
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expectedVertica
+argument_list|)
+operator|.
+name|dialect
+argument_list|(
+name|DatabaseProduct
+operator|.
+name|POSTGRESQL
+operator|.
+name|getDialect
+argument_list|()
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expectedPostgresql
+argument_list|)
+expr_stmt|;
+block|}
 annotation|@
 name|Test
 specifier|public
