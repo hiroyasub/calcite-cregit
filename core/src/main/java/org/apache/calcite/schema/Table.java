@@ -126,7 +126,7 @@ name|String
 name|column
 parameter_list|)
 function_decl|;
-comment|/**    * Determines whether the given rolled up column can be used inside the given aggregate function.    * You can assume that {@code isRolledUp(column)} is {@code true}.    *    * @param column The column name for which {@code isRolledUp} is true    * @param call The aggregate call    * @param parent Parent node of {@param call} in the {@link SqlNode} tree    * @param config Config settings. May be null    * @return true iff the given aggregate call is valid    * */
+comment|/**    * Determines whether the given rolled up column can be used inside the given aggregate function.    * You can assume that {@code isRolledUp(column)} is {@code true}.    *    * @param column The column name for which {@code isRolledUp} is true    * @param call The aggregate call    * @param parent Parent node of {@code call} in the {@link SqlNode} tree    * @param config Config settings. May be null    * @return true iff the given aggregate call is valid    * */
 name|boolean
 name|rolledUpColumnValidInsideAgg
 parameter_list|(
