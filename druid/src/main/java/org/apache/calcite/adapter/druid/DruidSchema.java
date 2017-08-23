@@ -478,8 +478,6 @@ name|DruidTable
 operator|.
 name|DEFAULT_TIMESTAMP_COLUMN
 argument_list|,
-name|connection
-argument_list|,
 name|complexMetrics
 argument_list|)
 return|;

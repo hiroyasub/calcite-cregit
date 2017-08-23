@@ -656,7 +656,7 @@ name|allFields
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Creates a {@link DruidTable}    *    * @param druidSchema Druid schema    * @param dataSourceName Data source name in Druid, also table name    * @param intervals Intervals, or null to use default    * @param fieldMap Mutable map of fields (dimensions plus metrics);    *        may be partially populated already    * @param metricNameSet Mutable set of metric names;    *        may be partially populated already    * @param timestampColumnName Name of timestamp column, or null    * @param connection connection used to find column definitions. Must be non-null.    *    * @return A table    */
+comment|/** Creates a {@link DruidTable} by using the given {@link DruidConnectionImpl}    * to populate the other parameters. The parameters may be partially populated.    *    * @param druidSchema Druid schema    * @param dataSourceName Data source name in Druid, also table name    * @param intervals Intervals, or null to use default    * @param fieldMap Partially populated map of fields (dimensions plus metrics)    * @param metricNameSet Partially populated set of metric names    * @param timestampColumnName Name of timestamp column, or null    * @param connection Connection used to find column definitions; Must be non-null    * @param complexMetrics List of complex metrics in Druid (thetaSketch, hyperUnique)    *    * @return A table    */
 specifier|static
 name|Table
 name|create
@@ -748,7 +748,7 @@ name|complexMetrics
 argument_list|)
 return|;
 block|}
-comment|/** Creates a {@link DruidTable}    *    * @param druidSchema Druid schema    * @param dataSourceName Data source name in Druid, also table name    * @param intervals Intervals, or null to use default    * @param fieldMap Mutable map of fields (dimensions plus metrics);    *        may be partially populated already    * @param metricNameSet Mutable set of metric names;    *        may be partially populated already    * @param timestampColumnName Name of timestamp column, or null    * @return A table    */
+comment|/** Creates a {@link DruidTable} by copying the given parameters.    *    * @param druidSchema Druid schema    * @param dataSourceName Data source name in Druid, also table name    * @param intervals Intervals, or null to use default    * @param fieldMap Fully populated map of fields (dimensions plus metrics)    * @param metricNameSet Fully populated set of metric names    * @param timestampColumnName Name of timestamp column, or null    * @param complexMetrics List of complex metrics in Druid (thetaSketch, hyperUnique)    *    * @return A table    */
 specifier|static
 name|Table
 name|create
