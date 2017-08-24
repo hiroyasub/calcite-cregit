@@ -2122,7 +2122,6 @@ specifier|final
 name|Strong
 name|strong
 decl_stmt|;
-specifier|public
 name|InputSpecialOpFinder
 parameter_list|(
 name|BitSet
@@ -2510,7 +2509,6 @@ specifier|final
 name|int
 name|firstRightRef
 decl_stmt|;
-specifier|public
 name|RefAndExprConverter
 parameter_list|(
 name|RexBuilder
@@ -2888,7 +2886,6 @@ argument_list|>
 name|operatorSet
 decl_stmt|;
 comment|/**      * Creates an OperatorExprCondition.      *      * @param operatorSet Set of operators      */
-specifier|public
 name|OperatorExprCondition
 parameter_list|(
 name|Iterable

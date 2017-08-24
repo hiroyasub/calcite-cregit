@@ -282,7 +282,7 @@ name|sparkContext
 argument_list|()
 return|;
 block|}
-comment|/** Combines linq4j {@link org.apache.calcite.linq4j.function.Function}    * and Spark {@link org.apache.spark.api.java.function.FlatMapFunction}. */
+comment|/** Combines linq4j {@link org.apache.calcite.linq4j.function.Function}    * and Spark {@link org.apache.spark.api.java.function.FlatMapFunction}.    *    * @param<T> argument type    * @param<R> result type */
 specifier|public
 specifier|abstract
 specifier|static

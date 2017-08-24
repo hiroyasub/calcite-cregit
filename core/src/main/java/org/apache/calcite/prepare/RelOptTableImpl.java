@@ -2038,7 +2038,6 @@ specifier|final
 name|Schema
 name|schema
 decl_stmt|;
-specifier|public
 name|MySchemaPlus
 parameter_list|(
 name|SchemaPlus

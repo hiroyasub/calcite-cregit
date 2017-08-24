@@ -384,7 +384,7 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-comment|/** Implementation of {@link Queryable} backed by a {@link SplunkTable}.    * Generated code uses this get a Splunk connection for executing arbitrary    * Splunk queries. */
+comment|/** Implementation of {@link Queryable} backed by a {@link SplunkTable}.    * Generated code uses this get a Splunk connection for executing arbitrary    * Splunk queries.    *    * @param<T> element type */
 specifier|public
 specifier|static
 class|class
@@ -398,7 +398,6 @@ argument_list|<
 name|T
 argument_list|>
 block|{
-specifier|public
 name|SplunkTableQueryable
 parameter_list|(
 name|QueryProvider

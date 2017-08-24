@@ -327,7 +327,7 @@ name|function
 argument_list|)
 return|;
 block|}
-comment|/**    * {@link AbstractSet} substitute without the potentially-quadratic    * {@code removeAll} implementation.    */
+comment|/**    * {@link AbstractSet} substitute without the potentially-quadratic    * {@code removeAll} implementation.    *    * @param<E> element type    */
 specifier|abstract
 specifier|static
 class|class
@@ -573,7 +573,7 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/** ImprovedAbstractMap. */
+comment|/** ImprovedAbstractMap.    *    * @param<K> key type    * @param<V> value type */
 specifier|abstract
 specifier|static
 class|class
@@ -873,7 +873,7 @@ block|}
 block|}
 return|;
 block|}
-comment|/** KeySet. */
+comment|/** KeySet.    *    * @param<K> key type    * @param<V> value type */
 specifier|abstract
 specifier|static
 class|class
@@ -1198,7 +1198,7 @@ block|}
 block|}
 return|;
 block|}
-comment|/** AsMapView. */
+comment|/** AsMapView.    *    * @param<K> key type    * @param<V> value type */
 specifier|private
 specifier|static
 class|class
@@ -1551,7 +1551,7 @@ block|}
 return|;
 block|}
 block|}
-comment|/** EntrySet. */
+comment|/** EntrySet.    *    * @param<K> key type    * @param<V> value type */
 specifier|abstract
 specifier|static
 class|class
@@ -2026,7 +2026,7 @@ block|}
 block|}
 return|;
 block|}
-comment|/** Values. */
+comment|/** Values.    *    * @param<K> key type    * @param<V> value type */
 specifier|abstract
 specifier|static
 class|class
@@ -2435,7 +2435,7 @@ argument_list|()
 expr_stmt|;
 block|}
 block|}
-comment|/** TransformedIterator. */
+comment|/** TransformedIterator.    *    * @param<F> from type    * @param<T> to type */
 specifier|abstract
 specifier|static
 class|class

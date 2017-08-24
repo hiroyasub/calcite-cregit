@@ -2243,7 +2243,6 @@ name|TestSingleRel
 implements|implements
 name|FooRel
 block|{
-specifier|public
 name|IterSingleRel
 parameter_list|(
 name|RelOptCluster
@@ -2826,7 +2825,6 @@ name|PhysToIteratorConverterRule
 extends|extends
 name|ConverterRule
 block|{
-specifier|public
 name|PhysToIteratorConverterRule
 parameter_list|()
 block|{
@@ -2876,7 +2874,6 @@ name|PhysToIteratorConverter
 extends|extends
 name|ConverterImpl
 block|{
-specifier|public
 name|PhysToIteratorConverter
 parameter_list|(
 name|RelOptCluster
@@ -2947,7 +2944,6 @@ name|IterSinglePhysMergeRule
 extends|extends
 name|RelOptRule
 block|{
-specifier|public
 name|IterSinglePhysMergeRule
 parameter_list|()
 block|{
@@ -3020,7 +3016,6 @@ name|TestLeafRel
 implements|implements
 name|FooRel
 block|{
-specifier|public
 name|IterMergedRel
 parameter_list|(
 name|RelOptCluster

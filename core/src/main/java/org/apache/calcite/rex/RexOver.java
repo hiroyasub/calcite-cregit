@@ -641,7 +641,6 @@ argument_list|<
 name|Void
 argument_list|>
 block|{
-specifier|public
 name|Finder
 parameter_list|()
 block|{

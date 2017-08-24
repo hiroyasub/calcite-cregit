@@ -4049,7 +4049,6 @@ name|AdvisorTesterFactory
 extends|extends
 name|DelegatingSqlTestFactory
 block|{
-specifier|public
 name|AdvisorTesterFactory
 parameter_list|()
 block|{

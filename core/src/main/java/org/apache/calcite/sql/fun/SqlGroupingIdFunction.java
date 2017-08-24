@@ -90,7 +90,6 @@ name|SqlGroupingIdFunction
 extends|extends
 name|SqlAbstractGroupFunction
 block|{
-specifier|public
 name|SqlGroupingIdFunction
 parameter_list|()
 block|{

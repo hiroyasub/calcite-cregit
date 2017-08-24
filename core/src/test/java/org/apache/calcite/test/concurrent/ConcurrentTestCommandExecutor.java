@@ -615,7 +615,6 @@ specifier|private
 name|int
 name|numWaiting
 decl_stmt|;
-specifier|public
 name|Sync
 parameter_list|(
 name|int

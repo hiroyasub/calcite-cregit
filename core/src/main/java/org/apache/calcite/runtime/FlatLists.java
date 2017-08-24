@@ -1461,7 +1461,7 @@ name|build
 argument_list|()
 return|;
 block|}
-comment|/** Base class for flat lists. */
+comment|/** Base class for flat lists.    *    * @param<T> element type */
 specifier|public
 specifier|abstract
 specifier|static
@@ -5598,7 +5598,7 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/** Empty list that implements the {@link Comparable} interface. */
+comment|/** Empty list that implements the {@link Comparable} interface.    *    * @param<T> element type */
 specifier|private
 specifier|static
 class|class
@@ -5706,7 +5706,7 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/** List that is also comparable.    *    *<p>You can create an instance whose type    * parameter {@code T} does not extend {@link Comparable}, but you will get a    * {@link ClassCastException} at runtime when you call    * {@link #compareTo(Object)} if the elements of the list do not implement    * {@code Comparable}.    */
+comment|/** List that is also comparable.    *    *<p>You can create an instance whose type    * parameter {@code T} does not extend {@link Comparable}, but you will get a    * {@link ClassCastException} at runtime when you call    * {@link #compareTo(Object)} if the elements of the list do not implement    * {@code Comparable}.    *    * @param<T> element type    */
 specifier|public
 interface|interface
 name|ComparableList
@@ -5724,7 +5724,7 @@ argument_list|<
 name|List
 argument_list|>
 block|{   }
-comment|/** Wrapper around a list that makes it implement the {@link Comparable}    * interface using lexical ordering. The elements must be comparable. */
+comment|/** Wrapper around a list that makes it implement the {@link Comparable}    * interface using lexical ordering. The elements must be comparable.    *    * @param<T> element type */
 specifier|static
 class|class
 name|ComparableListImpl

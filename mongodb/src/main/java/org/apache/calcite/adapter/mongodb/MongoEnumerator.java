@@ -175,7 +175,6 @@ name|Object
 name|current
 decl_stmt|;
 comment|/** Creates a MongoEnumerator.    *    * @param cursor Mongo iterator (usually a {@link com.mongodb.DBCursor})    * @param getter Converts an object into a list of fields    */
-specifier|public
 name|MongoEnumerator
 parameter_list|(
 name|Iterator

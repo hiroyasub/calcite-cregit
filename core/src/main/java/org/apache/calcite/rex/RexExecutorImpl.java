@@ -847,7 +847,6 @@ specifier|final
 name|RelDataType
 name|rowType
 decl_stmt|;
-specifier|public
 name|DataContextInputGetter
 parameter_list|(
 name|RelDataType

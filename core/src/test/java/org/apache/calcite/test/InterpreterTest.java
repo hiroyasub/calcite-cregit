@@ -302,7 +302,6 @@ specifier|final
 name|Planner
 name|planner
 decl_stmt|;
-specifier|public
 name|MyDataContext
 parameter_list|(
 name|Planner

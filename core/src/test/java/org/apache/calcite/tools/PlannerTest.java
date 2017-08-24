@@ -4694,7 +4694,6 @@ name|TableScan
 implements|implements
 name|JdbcRel
 block|{
-specifier|public
 name|MockJdbcTableScan
 parameter_list|(
 name|RelOptCluster

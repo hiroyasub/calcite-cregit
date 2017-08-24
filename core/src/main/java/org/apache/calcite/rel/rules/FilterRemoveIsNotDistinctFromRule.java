@@ -346,7 +346,6 @@ block|{
 name|RexBuilder
 name|rexBuilder
 decl_stmt|;
-specifier|public
 name|RemoveIsNotDistinctFromRexShuttle
 parameter_list|(
 name|RexBuilder

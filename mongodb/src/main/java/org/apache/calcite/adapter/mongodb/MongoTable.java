@@ -1183,7 +1183,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/** Implementation of {@link org.apache.calcite.linq4j.Queryable} based on    * a {@link org.apache.calcite.adapter.mongodb.MongoTable}. */
+comment|/** Implementation of {@link org.apache.calcite.linq4j.Queryable} based on    * a {@link org.apache.calcite.adapter.mongodb.MongoTable}.    *    * @param<T> element type */
 specifier|public
 specifier|static
 class|class

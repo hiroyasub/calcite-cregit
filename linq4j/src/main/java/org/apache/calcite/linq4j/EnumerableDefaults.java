@@ -14114,7 +14114,7 @@ return|return
 name|sink
 return|;
 block|}
-comment|/** Enumerable that implements take-while. */
+comment|/** Enumerable that implements take-while.    *    * @param<TSource> element type */
 specifier|static
 class|class
 name|TakeWhileEnumerator
@@ -14156,7 +14156,6 @@ init|=
 operator|-
 literal|1
 decl_stmt|;
-specifier|public
 name|TakeWhileEnumerator
 parameter_list|(
 name|Enumerator
@@ -14279,7 +14278,7 @@ argument_list|()
 expr_stmt|;
 block|}
 block|}
-comment|/** Enumerable that implements take-while. */
+comment|/** Enumerable that implements take-while.    *    * @param<TSource> element type */
 specifier|static
 class|class
 name|TakeWhileLongEnumerator
@@ -14321,7 +14320,6 @@ init|=
 operator|-
 literal|1
 decl_stmt|;
-specifier|public
 name|TakeWhileLongEnumerator
 parameter_list|(
 name|Enumerator
@@ -14444,7 +14442,7 @@ argument_list|()
 expr_stmt|;
 block|}
 block|}
-comment|/** Enumerator that implements skip-while. */
+comment|/** Enumerator that implements skip-while.    *    * @param<TSource> element type */
 specifier|static
 class|class
 name|SkipWhileEnumerator
@@ -14486,7 +14484,6 @@ init|=
 operator|-
 literal|1
 decl_stmt|;
-specifier|public
 name|SkipWhileEnumerator
 parameter_list|(
 name|Enumerator
@@ -14621,7 +14618,7 @@ argument_list|()
 expr_stmt|;
 block|}
 block|}
-comment|/** Enumerator that casts each value. */
+comment|/** Enumerator that casts each value.    *    * @param<T> element type */
 specifier|static
 class|class
 name|CastingEnumerator
@@ -14650,7 +14647,6 @@ name|T
 argument_list|>
 name|clazz
 decl_stmt|;
-specifier|public
 name|CastingEnumerator
 parameter_list|(
 name|Enumerator
@@ -14731,7 +14727,7 @@ argument_list|()
 expr_stmt|;
 block|}
 block|}
-comment|/** Value wrapped with a comparer. */
+comment|/** Value wrapped with a comparer.    *    * @param<T> element type */
 specifier|private
 specifier|static
 class|class
@@ -14876,7 +14872,7 @@ name|element
 return|;
 block|}
 block|}
-comment|/** Map that wraps each value. */
+comment|/** Map that wraps each value.    *    * @param<K> key type    * @param<V> value type */
 specifier|private
 specifier|static
 class|class
@@ -15277,7 +15273,7 @@ argument_list|()
 return|;
 block|}
 block|}
-comment|/** Reads a populated map, applying a selector function. */
+comment|/** Reads a populated map, applying a selector function.    *    * @param<TResult> result type    * @param<TKey> key type    * @param<TAccumulate> accumulator type */
 specifier|private
 specifier|static
 class|class
@@ -15317,7 +15313,6 @@ name|TResult
 argument_list|>
 name|resultSelector
 decl_stmt|;
-specifier|public
 name|LookupResultEnumerable
 parameter_list|(
 name|Map
@@ -15455,7 +15450,7 @@ block|}
 return|;
 block|}
 block|}
-comment|/** Enumerator that performs a merge join on its sorted inputs. */
+comment|/** Enumerator that performs a merge join on its sorted inputs.    *    * @param<TResult> result type    * @param<TSource> left input record type    * @param<TKey> key type    * @param<TInner> right input record type */
 specifier|private
 specifier|static
 class|class

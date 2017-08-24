@@ -589,7 +589,7 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
-comment|/** List of {@link Ord} backed by a list of elements. */
+comment|/** List of {@link Ord} backed by a list of elements.    *    * @param<E> element type */
 specifier|private
 specifier|static
 class|class
@@ -616,7 +616,6 @@ name|E
 argument_list|>
 name|elements
 decl_stmt|;
-specifier|public
 name|OrdList
 parameter_list|(
 name|List
@@ -673,7 +672,7 @@ argument_list|()
 return|;
 block|}
 block|}
-comment|/** List of {@link Ord} backed by a random-access list of elements. */
+comment|/** List of {@link Ord} backed by a random-access list of elements.    *    * @param<E> element type */
 specifier|private
 specifier|static
 class|class
@@ -689,7 +688,6 @@ argument_list|>
 implements|implements
 name|RandomAccess
 block|{
-specifier|public
 name|OrdRandomAccessList
 parameter_list|(
 name|List
@@ -708,7 +706,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/** List of {@link Ord} backed by an array of elements. */
+comment|/** List of {@link Ord} backed by an array of elements.    *    * @param<E> element type */
 specifier|private
 specifier|static
 class|class
@@ -733,7 +731,6 @@ name|E
 index|[]
 name|elements
 decl_stmt|;
-specifier|public
 name|OrdArrayList
 parameter_list|(
 name|E

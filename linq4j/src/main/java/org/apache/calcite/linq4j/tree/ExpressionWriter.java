@@ -106,7 +106,6 @@ specifier|final
 name|boolean
 name|generics
 decl_stmt|;
-specifier|public
 name|ExpressionWriter
 parameter_list|()
 block|{
@@ -116,7 +115,6 @@ literal|true
 argument_list|)
 expr_stmt|;
 block|}
-specifier|public
 name|ExpressionWriter
 parameter_list|(
 name|boolean
@@ -817,7 +815,6 @@ argument_list|<
 name|String
 argument_list|>
 block|{
-specifier|public
 name|Indent
 parameter_list|(
 name|int

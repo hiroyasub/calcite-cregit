@@ -156,7 +156,6 @@ specifier|final
 name|PrintWriter
 name|writer
 decl_stmt|;
-specifier|public
 name|CalciteHandler
 parameter_list|(
 name|PigRelBuilder

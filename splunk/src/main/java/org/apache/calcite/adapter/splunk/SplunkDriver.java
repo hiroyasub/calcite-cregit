@@ -525,7 +525,6 @@ specifier|final
 name|SplunkConnection
 name|connection
 decl_stmt|;
-specifier|public
 name|WrappingSplunkConnection
 parameter_list|(
 name|SplunkConnection

@@ -2178,7 +2178,6 @@ name|int
 index|[]
 name|refCounts
 decl_stmt|;
-specifier|public
 name|InputReferenceCounter
 parameter_list|(
 name|int

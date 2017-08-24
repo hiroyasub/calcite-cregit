@@ -563,7 +563,6 @@ specifier|final
 name|EnumerableRelImplementor
 name|implementor
 decl_stmt|;
-specifier|public
 name|SparkImplementorImpl
 parameter_list|(
 name|EnumerableRelImplementor

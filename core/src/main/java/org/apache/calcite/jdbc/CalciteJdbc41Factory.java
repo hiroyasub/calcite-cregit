@@ -597,7 +597,6 @@ name|CalciteJdbc41Statement
 extends|extends
 name|CalciteStatement
 block|{
-specifier|public
 name|CalciteJdbc41Statement
 parameter_list|(
 name|CalciteConnectionImpl

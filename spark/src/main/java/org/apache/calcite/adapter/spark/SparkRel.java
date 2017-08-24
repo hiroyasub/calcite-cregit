@@ -142,7 +142,6 @@ name|class
 argument_list|)
 decl_stmt|;
 comment|/** Extension to {@link JavaRelImplementor} that can handle Spark relational    * expressions. */
-specifier|public
 specifier|abstract
 class|class
 name|Implementor
@@ -189,7 +188,6 @@ parameter_list|)
 function_decl|;
 block|}
 comment|/** Result of generating Java code to implement a Spark relational    * expression. */
-specifier|public
 class|class
 name|Result
 block|{

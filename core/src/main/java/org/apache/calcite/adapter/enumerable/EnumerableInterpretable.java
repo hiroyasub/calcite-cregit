@@ -1181,7 +1181,6 @@ specifier|final
 name|Sink
 name|sink
 decl_stmt|;
-specifier|public
 name|EnumerableNode
 parameter_list|(
 name|Enumerable

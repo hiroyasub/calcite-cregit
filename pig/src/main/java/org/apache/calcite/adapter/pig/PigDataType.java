@@ -92,7 +92,6 @@ specifier|private
 name|SqlTypeName
 name|sqlType
 decl_stmt|;
-specifier|private
 name|PigDataType
 parameter_list|(
 name|byte

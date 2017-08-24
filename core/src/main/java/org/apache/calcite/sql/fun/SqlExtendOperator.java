@@ -139,7 +139,6 @@ name|SqlExtendOperator
 extends|extends
 name|SqlInternalOperator
 block|{
-specifier|public
 name|SqlExtendOperator
 parameter_list|()
 block|{

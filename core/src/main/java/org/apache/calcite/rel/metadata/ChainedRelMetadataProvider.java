@@ -599,7 +599,6 @@ name|Metadata
 argument_list|>
 name|metadataList
 decl_stmt|;
-specifier|public
 name|ChainedInvocationHandler
 parameter_list|(
 name|List

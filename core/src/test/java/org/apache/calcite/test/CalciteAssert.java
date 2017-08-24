@@ -6286,7 +6286,6 @@ specifier|final
 name|ConnectionFactory
 name|factory
 decl_stmt|;
-specifier|public
 name|PoolingConnectionFactory
 parameter_list|(
 specifier|final

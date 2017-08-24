@@ -772,7 +772,6 @@ name|String
 index|[]
 name|args
 decl_stmt|;
-specifier|public
 name|ProcessFactory
 parameter_list|(
 name|String

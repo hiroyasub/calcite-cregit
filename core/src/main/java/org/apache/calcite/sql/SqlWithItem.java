@@ -241,7 +241,6 @@ operator|new
 name|SqlWithItemOperator
 argument_list|()
 decl_stmt|;
-specifier|public
 name|SqlWithItemOperator
 parameter_list|()
 block|{

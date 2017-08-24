@@ -3393,7 +3393,7 @@ name|accumulator
 return|;
 block|}
 block|}
-comment|/** A generic interface for defining user defined aggregate functions */
+comment|/** A generic interface for defining user defined aggregate functions    *    * @param<A> accumulator type    * @param<V> value type    * @param<R> result type */
 specifier|private
 interface|interface
 name|MyGenericAggFunction

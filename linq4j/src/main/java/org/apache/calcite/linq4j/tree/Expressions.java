@@ -10600,7 +10600,7 @@ comment|/** Symbol document info. */
 interface|interface
 name|SymbolDocumentInfo
 block|{   }
-comment|/** Fluent list. */
+comment|/** Fluent list.    *    * @param<T> element type */
 specifier|public
 interface|interface
 name|FluentList
@@ -10671,7 +10671,7 @@ name|ts
 parameter_list|)
 function_decl|;
 block|}
-comment|/** Fluent array list. */
+comment|/** Fluent array list.    *    * @param<T> element type */
 specifier|private
 specifier|static
 class|class
@@ -10690,7 +10690,6 @@ argument_list|<
 name|T
 argument_list|>
 block|{
-specifier|public
 name|FluentArrayList
 parameter_list|()
 block|{
@@ -10698,7 +10697,6 @@ name|super
 argument_list|()
 expr_stmt|;
 block|}
-specifier|public
 name|FluentArrayList
 parameter_list|(
 name|Collection

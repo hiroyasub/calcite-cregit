@@ -683,7 +683,7 @@ block|}
 block|}
 return|;
 block|}
-comment|/**    * Implementation of {@link org.apache.calcite.linq4j.Queryable} based on    * a {@link org.apache.calcite.adapter.elasticsearch.ElasticsearchTable}.    */
+comment|/**    * Implementation of {@link org.apache.calcite.linq4j.Queryable} based on    * a {@link org.apache.calcite.adapter.elasticsearch.ElasticsearchTable}.    *    * @param<T> element type    */
 specifier|public
 specifier|static
 class|class

@@ -1427,7 +1427,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/** The result of preparing a query. It gives the Avatica driver framework    * the information it needs to create a prepared statement, or to execute a    * statement directly, without an explicit prepare step. */
+comment|/** The result of preparing a query. It gives the Avatica driver framework    * the information it needs to create a prepared statement, or to execute a    * statement directly, without an explicit prepare step.    *    * @param<T> element type */
 class|class
 name|CalciteSignature
 parameter_list|<
@@ -1740,7 +1740,7 @@ name|collationList
 return|;
 block|}
 block|}
-comment|/** A union type of the three possible ways of expressing a query: as a SQL    * string, a {@link Queryable} or a {@link RelNode}. Exactly one must be    * provided. */
+comment|/** A union type of the three possible ways of expressing a query: as a SQL    * string, a {@link Queryable} or a {@link RelNode}. Exactly one must be    * provided.    *    * @param<T> element type */
 class|class
 name|Query
 parameter_list|<

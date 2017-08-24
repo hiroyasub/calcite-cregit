@@ -355,7 +355,6 @@ name|fields
 argument_list|)
 expr_stmt|;
 block|}
-specifier|public
 name|TableNamespace
 parameter_list|(
 name|SqlValidatorImpl

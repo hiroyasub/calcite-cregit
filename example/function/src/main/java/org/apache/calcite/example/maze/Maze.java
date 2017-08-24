@@ -167,7 +167,6 @@ name|spiral
 init|=
 literal|false
 decl_stmt|;
-specifier|public
 name|Maze
 parameter_list|(
 name|int

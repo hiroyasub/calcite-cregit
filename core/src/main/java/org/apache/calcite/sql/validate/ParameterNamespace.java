@@ -64,7 +64,6 @@ name|RelDataType
 name|type
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-specifier|public
 name|ParameterNamespace
 parameter_list|(
 name|SqlValidatorImpl

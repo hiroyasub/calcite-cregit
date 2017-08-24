@@ -129,7 +129,6 @@ name|Object
 argument_list|>
 name|enumerator
 decl_stmt|;
-specifier|public
 name|JsonEnumerator
 parameter_list|(
 name|Source

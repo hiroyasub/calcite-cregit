@@ -410,7 +410,6 @@ specifier|final
 name|Metadata
 name|metadata
 decl_stmt|;
-specifier|public
 name|CachingInvocationHandler
 parameter_list|(
 name|Metadata

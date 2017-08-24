@@ -727,7 +727,6 @@ specifier|final
 name|RelDataType
 name|type
 decl_stmt|;
-specifier|public
 name|RexCastCallBinding
 parameter_list|(
 name|RelDataTypeFactory

@@ -6847,7 +6847,6 @@ specifier|private
 name|SqlValidator
 name|sqlValidator
 decl_stmt|;
-specifier|public
 name|CalcitePreparingStmt
 parameter_list|(
 name|CalcitePrepareImpl
@@ -8114,7 +8113,6 @@ name|Prepare
 operator|.
 name|PreparedExplain
 block|{
-specifier|public
 name|CalcitePreparedExplain
 parameter_list|(
 name|RelDataType
@@ -8276,7 +8274,6 @@ specifier|final
 name|RexBuilder
 name|rexBuilder
 decl_stmt|;
-specifier|public
 name|EmptyScalarTranslator
 parameter_list|(
 name|RexBuilder
@@ -8969,7 +8966,6 @@ name|RexNode
 argument_list|>
 name|values
 decl_stmt|;
-specifier|public
 name|LambdaScalarTranslator
 parameter_list|(
 name|RexBuilder

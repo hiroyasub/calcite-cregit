@@ -9810,7 +9810,6 @@ argument_list|,
 name|RelDataTypeField
 argument_list|>
 block|{
-specifier|public
 name|Field
 parameter_list|(
 name|ImmutableSet

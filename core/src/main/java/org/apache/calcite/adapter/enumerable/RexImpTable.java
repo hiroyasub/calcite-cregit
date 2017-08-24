@@ -12598,7 +12598,6 @@ specifier|final
 name|boolean
 name|negate
 decl_stmt|;
-specifier|public
 name|IsXxxImplementor
 parameter_list|(
 name|Boolean
@@ -12733,7 +12732,6 @@ specifier|final
 name|NotNullImplementor
 name|implementor
 decl_stmt|;
-specifier|public
 name|NotImplementor
 parameter_list|(
 name|NotNullImplementor

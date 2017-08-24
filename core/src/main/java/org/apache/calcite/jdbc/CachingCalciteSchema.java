@@ -1373,7 +1373,7 @@ name|enabled
 parameter_list|)
 function_decl|;
 block|}
-comment|/** Implementation of {@link CachingCalciteSchema.Cached}    * that drives from {@link CachingCalciteSchema#cache}. */
+comment|/** Implementation of {@link CachingCalciteSchema.Cached}    * that drives from {@link CachingCalciteSchema#cache}.    *    * @param<T> element type */
 specifier|private
 specifier|abstract
 class|class

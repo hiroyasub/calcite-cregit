@@ -87,7 +87,6 @@ name|SqlGroupIdFunction
 extends|extends
 name|SqlAbstractGroupFunction
 block|{
-specifier|public
 name|SqlGroupIdFunction
 parameter_list|()
 block|{

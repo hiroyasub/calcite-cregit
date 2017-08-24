@@ -1223,7 +1223,7 @@ throw|;
 block|}
 block|}
 block|}
-comment|/** Iterable enumerator. */
+comment|/** Iterable enumerator.    *    * @param<T> element type */
 annotation|@
 name|SuppressWarnings
 argument_list|(
@@ -1402,7 +1402,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/** Composite enumerable. */
+comment|/** Composite enumerable.    *    * @param<E> element type */
 specifier|static
 class|class
 name|CompositeEnumerable
@@ -1578,7 +1578,7 @@ block|}
 return|;
 block|}
 block|}
-comment|/** Iterable enumerable. */
+comment|/** Iterable enumerable.    *    * @param<T> element type */
 specifier|static
 class|class
 name|IterableEnumerable
@@ -1648,7 +1648,7 @@ argument_list|()
 return|;
 block|}
 block|}
-comment|/** Collection enumerable. */
+comment|/** Collection enumerable.    *    * @param<T> element type */
 specifier|static
 class|class
 name|CollectionEnumerable
@@ -1761,7 +1761,7 @@ argument_list|()
 return|;
 block|}
 block|}
-comment|/** List enumerable. */
+comment|/** List enumerable.    *    * @param<T> element type */
 specifier|static
 class|class
 name|ListEnumerable
@@ -1979,7 +1979,7 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/** Enumerator that returns one element. */
+comment|/** Enumerator that returns one element.    *    * @param<E> element type */
 specifier|private
 specifier|static
 class|class
@@ -2053,7 +2053,7 @@ parameter_list|()
 block|{
 block|}
 block|}
-comment|/** Enumerator that returns one null element. */
+comment|/** Enumerator that returns one null element.    *    * @param<E> element type */
 specifier|private
 specifier|static
 class|class
@@ -2110,7 +2110,7 @@ parameter_list|()
 block|{
 block|}
 block|}
-comment|/** Iterator that reads from an underlying {@link Enumerator}. */
+comment|/** Iterator that reads from an underlying {@link Enumerator}.    *    * @param<T> element type */
 specifier|private
 specifier|static
 class|class
@@ -2216,7 +2216,7 @@ argument_list|()
 expr_stmt|;
 block|}
 block|}
-comment|/** Enumerator optimized for random-access list. */
+comment|/** Enumerator optimized for random-access list.    *    * @param<V> element type */
 specifier|private
 specifier|static
 class|class
@@ -2311,7 +2311,7 @@ parameter_list|()
 block|{
 block|}
 block|}
-comment|/** Enumerates over the cartesian product of the given lists, returning    * a list for each row. */
+comment|/** Enumerates over the cartesian product of the given lists, returning    * a list for each row.    *    * @param<E> element type */
 specifier|private
 specifier|static
 class|class

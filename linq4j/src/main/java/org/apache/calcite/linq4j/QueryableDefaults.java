@@ -4452,7 +4452,7 @@ name|todo
 argument_list|()
 throw|;
 block|}
-comment|/** Replayable. */
+comment|/** Replayable.    *    * @param<T> element type */
 specifier|public
 interface|interface
 name|Replayable
@@ -4476,7 +4476,7 @@ name|factory
 parameter_list|)
 function_decl|;
 block|}
-comment|/** Replayable queryable. */
+comment|/** Replayable queryable.    *    * @param<T> element type */
 specifier|public
 specifier|abstract
 specifier|static
@@ -4606,7 +4606,7 @@ name|this
 return|;
 block|}
 block|}
-comment|/** Non-leaf replayable queryable. */
+comment|/** Non-leaf replayable queryable.    *    * @param<T> element type */
 specifier|public
 specifier|abstract
 specifier|static

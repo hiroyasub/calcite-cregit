@@ -2069,7 +2069,7 @@ operator|.
 name|toString
 argument_list|()
 argument_list|,
-name|equalTo
+name|is
 argument_list|(
 literal|"returnCount=4, projects=[2]"
 argument_list|)

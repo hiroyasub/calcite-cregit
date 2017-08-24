@@ -401,7 +401,7 @@ name|config
 argument_list|)
 return|;
 block|}
-comment|/** Piece of code to be run in a context where a planner is available. The    * planner is accessible from the {@code cluster} parameter, as are several    * other useful objects. */
+comment|/** Piece of code to be run in a context where a planner is available. The    * planner is accessible from the {@code cluster} parameter, as are several    * other useful objects.    *    * @param<R> result type */
 specifier|public
 interface|interface
 name|PlannerAction
@@ -423,7 +423,7 @@ name|rootSchema
 parameter_list|)
 function_decl|;
 block|}
-comment|/** Piece of code to be run in a context where a planner and statement are    * available. The planner is accessible from the {@code cluster} parameter, as    * are several other useful objects. The connection and    * {@link org.apache.calcite.DataContext} are accessible from the    * statement. */
+comment|/** Piece of code to be run in a context where a planner and statement are    * available. The planner is accessible from the {@code cluster} parameter, as    * are several other useful objects. The connection and    * {@link org.apache.calcite.DataContext} are accessible from the    * statement.    *    * @param<R> result type */
 specifier|public
 specifier|abstract
 specifier|static
@@ -1375,7 +1375,6 @@ specifier|final
 name|RexExecutor
 name|executor
 decl_stmt|;
-specifier|public
 name|StdFrameworkConfig
 parameter_list|(
 name|Context

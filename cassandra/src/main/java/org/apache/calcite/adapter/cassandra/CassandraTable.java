@@ -1410,7 +1410,7 @@ literal|null
 argument_list|)
 return|;
 block|}
-comment|/** Implementation of {@link org.apache.calcite.linq4j.Queryable} based on    * a {@link org.apache.calcite.adapter.cassandra.CassandraTable}. */
+comment|/** Implementation of {@link org.apache.calcite.linq4j.Queryable} based on    * a {@link org.apache.calcite.adapter.cassandra.CassandraTable}.    *    * @param<T> element type */
 specifier|public
 specifier|static
 class|class

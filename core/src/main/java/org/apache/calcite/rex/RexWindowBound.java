@@ -236,7 +236,6 @@ specifier|final
 name|SqlNode
 name|node
 decl_stmt|;
-specifier|public
 name|RexWindowBoundUnbounded
 parameter_list|(
 name|SqlNode
@@ -506,7 +505,6 @@ specifier|final
 name|RexNode
 name|offset
 decl_stmt|;
-specifier|public
 name|RexWindowBoundBounded
 parameter_list|(
 name|RexNode

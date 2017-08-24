@@ -957,7 +957,7 @@ argument_list|>
 argument_list|()
 return|;
 block|}
-comment|/**    * A builder for creating immutable nullable list instances.    */
+comment|/**    * A builder for creating immutable nullable list instances.    *    * @param<E> element type    */
 specifier|public
 specifier|static
 specifier|final

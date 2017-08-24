@@ -103,9 +103,7 @@ parameter_list|)
 function_decl|;
 comment|//~ Inner Classes ----------------------------------------------------------
 comment|/**    * Event class for abstract event dealing with a relational expression. The    * source of an event is typically the RelOptPlanner which initiated it.    */
-specifier|public
 specifier|abstract
-specifier|static
 class|class
 name|RelEvent
 extends|extends
@@ -149,8 +147,6 @@ return|;
 block|}
 block|}
 comment|/** Event indicating that a relational expression has been chosen. */
-specifier|public
-specifier|static
 class|class
 name|RelChosenEvent
 extends|extends
@@ -176,8 +172,6 @@ expr_stmt|;
 block|}
 block|}
 comment|/** Event indicating that a relational expression has been found to    * be equivalent to an equivalence class. */
-specifier|public
-specifier|static
 class|class
 name|RelEquivalenceEvent
 extends|extends
@@ -249,8 +243,6 @@ return|;
 block|}
 block|}
 comment|/** Event indicating that a relational expression has been discarded. */
-specifier|public
-specifier|static
 class|class
 name|RelDiscardedEvent
 extends|extends
@@ -276,9 +268,7 @@ expr_stmt|;
 block|}
 block|}
 comment|/** Event indicating that a planner rule has fired. */
-specifier|public
 specifier|abstract
-specifier|static
 class|class
 name|RuleEvent
 extends|extends
@@ -327,8 +317,6 @@ return|;
 block|}
 block|}
 comment|/** Event indicating that a planner rule has been attemptedd. */
-specifier|public
-specifier|static
 class|class
 name|RuleAttemptedEvent
 extends|extends
@@ -382,8 +370,6 @@ return|;
 block|}
 block|}
 comment|/** Event indicating that a planner rule has produced a result. */
-specifier|public
-specifier|static
 class|class
 name|RuleProductionEvent
 extends|extends

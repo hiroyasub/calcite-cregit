@@ -1922,7 +1922,7 @@ throw|;
 block|}
 block|}
 block|}
-comment|/** Table based on a Java field. */
+comment|/** Table based on a Java field.    *    * @param<T> element type */
 specifier|private
 specifier|static
 class|class

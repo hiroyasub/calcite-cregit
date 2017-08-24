@@ -1803,7 +1803,6 @@ specifier|final
 name|RelOptTable
 name|parent
 decl_stmt|;
-specifier|public
 name|DelegatingRelOptTable
 parameter_list|(
 name|RelOptTable
@@ -3379,7 +3378,6 @@ name|FarragoTestValidator
 extends|extends
 name|SqlValidatorImpl
 block|{
-specifier|public
 name|FarragoTestValidator
 parameter_list|(
 name|SqlOperatorTable

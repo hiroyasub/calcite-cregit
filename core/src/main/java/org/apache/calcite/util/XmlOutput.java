@@ -1548,7 +1548,6 @@ name|StringEscaper
 name|URL_ESCAPER
 decl_stmt|;
 comment|/**      * Identity transform      */
-specifier|public
 name|StringEscaper
 parameter_list|()
 block|{

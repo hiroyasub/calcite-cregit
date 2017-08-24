@@ -3406,7 +3406,6 @@ specifier|final
 name|RelType
 name|relType
 decl_stmt|;
-specifier|public
 name|ImplementTester
 parameter_list|(
 name|RelType
@@ -3602,7 +3601,6 @@ name|RexNode
 index|[]
 name|allExprs
 decl_stmt|;
-specifier|public
 name|InputToCommonExprConverter
 parameter_list|(
 name|int
@@ -3922,7 +3920,6 @@ specifier|private
 name|int
 name|currentLevel
 decl_stmt|;
-specifier|public
 name|HighestUsageFinder
 parameter_list|(
 name|RexNode

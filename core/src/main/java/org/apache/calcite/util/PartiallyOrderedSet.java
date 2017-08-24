@@ -3461,7 +3461,6 @@ specifier|final
 name|E
 name|e
 decl_stmt|;
-specifier|public
 name|Node
 parameter_list|(
 name|E
@@ -3509,7 +3508,6 @@ specifier|final
 name|String
 name|description
 decl_stmt|;
-specifier|public
 name|TopBottomNode
 parameter_list|(
 name|boolean
@@ -3589,7 +3587,6 @@ argument_list|>
 argument_list|>
 name|list
 decl_stmt|;
-specifier|public
 name|StripList
 parameter_list|(
 name|List

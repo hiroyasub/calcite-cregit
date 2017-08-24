@@ -147,7 +147,6 @@ name|SqlDefaultOperator
 extends|extends
 name|SqlSpecialOperator
 block|{
-specifier|public
 name|SqlDefaultOperator
 parameter_list|()
 block|{

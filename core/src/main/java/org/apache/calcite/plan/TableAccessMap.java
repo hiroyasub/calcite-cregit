@@ -133,7 +133,6 @@ block|{
 comment|//~ Enums ------------------------------------------------------------------
 comment|/** Access mode. */
 specifier|public
-specifier|static
 enum|enum
 name|Mode
 block|{

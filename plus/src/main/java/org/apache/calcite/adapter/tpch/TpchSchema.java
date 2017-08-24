@@ -515,7 +515,7 @@ return|return
 name|tableMap
 return|;
 block|}
-comment|/** Definition of a table in the TPC-H schema. */
+comment|/** Definition of a table in the TPC-H schema.    *    * @param<E> entity type */
 specifier|private
 class|class
 name|TpchQueryableTable

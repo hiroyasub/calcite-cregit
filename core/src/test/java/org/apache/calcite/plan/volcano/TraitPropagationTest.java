@@ -2125,7 +2125,6 @@ name|Aggregate
 implements|implements
 name|Phys
 block|{
-specifier|public
 name|PhysAgg
 parameter_list|(
 name|RelOptCluster
@@ -2262,7 +2261,6 @@ name|Project
 implements|implements
 name|Phys
 block|{
-specifier|public
 name|PhysProj
 parameter_list|(
 name|RelOptCluster
@@ -2481,7 +2479,6 @@ name|Sort
 implements|implements
 name|Phys
 block|{
-specifier|public
 name|PhysSort
 parameter_list|(
 name|RelOptCluster
@@ -2596,7 +2593,6 @@ name|AbstractRelNode
 implements|implements
 name|Phys
 block|{
-specifier|public
 name|PhysTable
 parameter_list|(
 name|RelOptCluster

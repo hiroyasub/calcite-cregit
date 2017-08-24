@@ -4792,7 +4792,6 @@ specifier|final
 name|Table
 name|calciteTable
 decl_stmt|;
-specifier|public
 name|CalciteMetaTable
 parameter_list|(
 name|Table
@@ -4851,7 +4850,6 @@ specifier|final
 name|CalciteSchema
 name|calciteSchema
 decl_stmt|;
-specifier|public
 name|CalciteMetaSchema
 parameter_list|(
 name|CalciteSchema
@@ -4879,7 +4877,7 @@ name|calciteSchema
 expr_stmt|;
 block|}
 block|}
-comment|/** Table whose contents are metadata. */
+comment|/** Table whose contents are metadata.    *    * @param<E> element type */
 specifier|abstract
 specifier|static
 class|class
@@ -4890,7 +4888,6 @@ parameter_list|>
 extends|extends
 name|AbstractQueryableTable
 block|{
-specifier|public
 name|MetadataTable
 parameter_list|(
 name|Class
@@ -5060,7 +5057,7 @@ block|}
 return|;
 block|}
 block|}
-comment|/** Iterator that returns at most {@code limit} rows from an underlying    * {@link Iterator}. */
+comment|/** Iterator that returns at most {@code limit} rows from an underlying    * {@link Iterator}.    *    * @param<E> element type */
 specifier|private
 specifier|static
 class|class

@@ -9000,7 +9000,6 @@ specifier|final
 name|RelDataType
 name|inputRowType
 decl_stmt|;
-specifier|public
 name|ForwardRefFinder
 parameter_list|(
 name|RelDataType
@@ -10739,7 +10738,6 @@ specifier|final
 name|int
 name|offset
 decl_stmt|;
-specifier|public
 name|RexShiftShuttle
 parameter_list|(
 name|int

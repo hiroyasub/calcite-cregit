@@ -3380,7 +3380,6 @@ name|RexNode
 argument_list|>
 name|localExprList
 decl_stmt|;
-specifier|public
 name|RegisterOutputShuttle
 parameter_list|(
 name|List

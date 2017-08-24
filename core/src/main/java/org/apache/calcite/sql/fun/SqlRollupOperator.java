@@ -111,7 +111,6 @@ name|SqlRollupOperator
 extends|extends
 name|SqlInternalOperator
 block|{
-specifier|public
 name|SqlRollupOperator
 parameter_list|(
 name|String

@@ -600,7 +600,6 @@ specifier|final
 name|Convention
 name|out
 decl_stmt|;
-specifier|public
 name|CassandraConverterRule
 parameter_list|(
 name|Class
@@ -631,7 +630,6 @@ name|description
 argument_list|)
 expr_stmt|;
 block|}
-specifier|public
 parameter_list|<
 name|R
 extends|extends

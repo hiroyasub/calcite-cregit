@@ -1930,7 +1930,6 @@ decl_stmt|;
 name|Node
 name|node
 decl_stmt|;
-specifier|public
 name|NodeInfo
 parameter_list|(
 name|RelNode
@@ -1997,7 +1996,6 @@ name|Row
 argument_list|>
 name|enumerator
 decl_stmt|;
-specifier|public
 name|EnumeratorSource
 parameter_list|(
 specifier|final
@@ -2199,7 +2197,6 @@ name|Row
 argument_list|>
 name|list
 decl_stmt|;
-specifier|public
 name|ListSource
 parameter_list|(
 name|ListSink

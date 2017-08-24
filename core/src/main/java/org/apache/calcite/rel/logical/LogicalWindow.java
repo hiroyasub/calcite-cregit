@@ -1804,7 +1804,6 @@ specifier|final
 name|RexWindowBound
 name|upperBound
 decl_stmt|;
-specifier|public
 name|WindowKey
 parameter_list|(
 name|ImmutableBitSet

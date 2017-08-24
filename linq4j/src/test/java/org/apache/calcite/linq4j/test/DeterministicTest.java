@@ -462,7 +462,6 @@ name|MyDeterministicCodeOptimizer
 extends|extends
 name|DeterministicCodeOptimizer
 block|{
-specifier|public
 name|MyDeterministicCodeOptimizer
 parameter_list|()
 block|{

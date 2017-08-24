@@ -388,7 +388,6 @@ specifier|final
 name|JavaTypeFactory
 name|typeFactory
 decl_stmt|;
-specifier|public
 name|LixToRelTranslator
 parameter_list|(
 name|RelOptCluster

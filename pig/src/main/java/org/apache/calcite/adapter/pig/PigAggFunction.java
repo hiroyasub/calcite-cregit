@@ -69,7 +69,6 @@ name|boolean
 name|star
 decl_stmt|;
 comment|// as in COUNT(*)
-specifier|private
 name|PigAggFunction
 parameter_list|(
 name|SqlKind
@@ -84,7 +83,6 @@ literal|false
 argument_list|)
 expr_stmt|;
 block|}
-specifier|private
 name|PigAggFunction
 parameter_list|(
 name|SqlKind

@@ -678,7 +678,7 @@ return|return
 name|tableMap
 return|;
 block|}
-comment|/** Definition of a table in the TPC-DS schema. */
+comment|/** Definition of a table in the TPC-DS schema.    *    * @param<E> entity type */
 specifier|private
 class|class
 name|TpcdsQueryableTable

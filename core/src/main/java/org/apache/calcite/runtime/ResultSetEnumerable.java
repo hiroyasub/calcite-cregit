@@ -916,7 +916,7 @@ block|}
 block|}
 block|}
 block|}
-comment|/** Implementation of {@link Enumerator} that reads from a    * {@link ResultSet}. */
+comment|/** Implementation of {@link Enumerator} that reads from a    * {@link ResultSet}.    *    * @param<T> element type */
 specifier|private
 specifier|static
 class|class
@@ -942,7 +942,6 @@ specifier|private
 name|ResultSet
 name|resultSet
 decl_stmt|;
-specifier|public
 name|ResultSetEnumerator
 parameter_list|(
 name|ResultSet

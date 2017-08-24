@@ -87,7 +87,6 @@ name|SqlGroupingFunction
 extends|extends
 name|SqlAbstractGroupFunction
 block|{
-specifier|public
 name|SqlGroupingFunction
 parameter_list|(
 name|String

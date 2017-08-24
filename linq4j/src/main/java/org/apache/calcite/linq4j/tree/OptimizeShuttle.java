@@ -1112,7 +1112,7 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|// drop down
+comment|// fall through
 case|case
 name|AndAlso
 case|:

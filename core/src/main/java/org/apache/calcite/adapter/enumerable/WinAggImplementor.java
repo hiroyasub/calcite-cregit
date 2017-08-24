@@ -29,7 +29,6 @@ extends|extends
 name|AggImplementor
 block|{
 comment|/**    * Allows to access rows in window partition relative to first/last and    * current row.    */
-specifier|public
 enum|enum
 name|SeekType
 block|{

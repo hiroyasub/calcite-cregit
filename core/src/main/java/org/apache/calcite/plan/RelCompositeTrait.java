@@ -600,7 +600,7 @@ operator|.
 name|length
 return|;
 block|}
-comment|/** Composite trait with 0 elements. */
+comment|/** Composite trait with 0 elements.    *    * @param<T> trait type */
 specifier|private
 specifier|static
 class|class

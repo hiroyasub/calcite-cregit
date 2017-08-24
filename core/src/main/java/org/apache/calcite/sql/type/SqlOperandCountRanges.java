@@ -151,7 +151,6 @@ specifier|final
 name|int
 name|max
 decl_stmt|;
-specifier|public
 name|RangeImpl
 parameter_list|(
 name|int

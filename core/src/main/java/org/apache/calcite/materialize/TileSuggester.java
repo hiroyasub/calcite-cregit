@@ -703,7 +703,6 @@ name|AttributeImpl
 argument_list|>
 name|attributes
 decl_stmt|;
-specifier|public
 name|SchemaImpl
 parameter_list|(
 name|Lattice
@@ -1044,7 +1043,6 @@ specifier|final
 name|Lattice
 name|lattice
 decl_stmt|;
-specifier|public
 name|StatisticsProviderImpl
 parameter_list|(
 name|Lattice

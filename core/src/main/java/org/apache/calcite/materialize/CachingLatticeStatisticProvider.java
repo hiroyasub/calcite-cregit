@@ -141,7 +141,6 @@ argument_list|>
 name|cache
 decl_stmt|;
 comment|/** Creates a CachingStatisticProvider. */
-specifier|public
 name|CachingLatticeStatisticProvider
 parameter_list|(
 specifier|final

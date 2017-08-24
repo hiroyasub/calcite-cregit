@@ -51,7 +51,6 @@ specifier|final
 name|String
 name|queryName
 decl_stmt|;
-specifier|private
 name|QueryType
 parameter_list|(
 name|String

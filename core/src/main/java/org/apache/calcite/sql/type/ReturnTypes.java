@@ -1032,6 +1032,7 @@ name|RelDataType
 argument_list|>
 argument_list|()
 block|{
+comment|// CHECKSTYLE: IGNORE 12
 specifier|public
 name|RelDataType
 name|get
@@ -1074,7 +1075,6 @@ name|getOperandCount
 argument_list|()
 return|;
 block|}
-comment|// CHECKSTYLE: IGNORE 1
 block|}
 argument_list|)
 decl_stmt|;

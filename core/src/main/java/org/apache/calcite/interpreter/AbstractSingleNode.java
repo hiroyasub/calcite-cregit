@@ -60,7 +60,6 @@ specifier|final
 name|T
 name|rel
 decl_stmt|;
-specifier|public
 name|AbstractSingleNode
 parameter_list|(
 name|Interpreter

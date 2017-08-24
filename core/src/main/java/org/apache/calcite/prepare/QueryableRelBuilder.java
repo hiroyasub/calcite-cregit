@@ -544,7 +544,6 @@ specifier|private
 name|RelNode
 name|rel
 decl_stmt|;
-specifier|public
 name|QueryableRelBuilder
 parameter_list|(
 name|LixToRelTranslator

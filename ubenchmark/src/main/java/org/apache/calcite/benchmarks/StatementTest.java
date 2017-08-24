@@ -899,7 +899,7 @@ name|SQLException
 name|e
 parameter_list|)
 block|{
-comment|/**/
+comment|// ignore
 block|}
 block|}
 if|if
@@ -923,7 +923,7 @@ name|SQLException
 name|e
 parameter_list|)
 block|{
-comment|/**/
+comment|// ignore
 block|}
 block|}
 block|}

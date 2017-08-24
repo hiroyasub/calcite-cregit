@@ -535,7 +535,6 @@ name|FeatureTesterFactory
 extends|extends
 name|DelegatingSqlTestFactory
 block|{
-specifier|public
 name|FeatureTesterFactory
 parameter_list|()
 block|{

@@ -1988,7 +1988,6 @@ name|Metadata
 argument_list|>
 name|metadataClass0
 decl_stmt|;
-specifier|public
 name|Space2
 parameter_list|(
 name|Class

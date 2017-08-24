@@ -2640,7 +2640,6 @@ specifier|final
 name|RexNode
 name|rightChildPredicates
 decl_stmt|;
-specifier|public
 name|JoinConditionBasedPredicateInference
 parameter_list|(
 name|Join

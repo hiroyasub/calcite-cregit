@@ -28765,7 +28765,6 @@ name|Pattern
 index|[]
 name|patterns
 decl_stmt|;
-specifier|public
 name|ExceptionResultChecker
 parameter_list|(
 name|Pattern
@@ -28884,7 +28883,6 @@ name|Pattern
 index|[]
 name|patterns
 decl_stmt|;
-specifier|public
 name|ValueOrExceptionResultChecker
 parameter_list|(
 name|Object

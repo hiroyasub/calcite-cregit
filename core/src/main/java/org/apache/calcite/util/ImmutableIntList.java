@@ -1418,7 +1418,7 @@ argument_list|()
 return|;
 block|}
 block|}
-comment|/** Extension to {@link com.google.common.collect.UnmodifiableListIterator}    * that operates by index. */
+comment|/** Extension to {@link com.google.common.collect.UnmodifiableListIterator}    * that operates by index.    *    * @param<E> element type */
 specifier|private
 specifier|abstract
 specifier|static

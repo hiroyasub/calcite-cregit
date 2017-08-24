@@ -850,7 +850,7 @@ name|INCLUDE
 argument_list|,
 name|SETUP_STATE
 argument_list|)
-block|,         }
+block|,           }
 argument_list|)
 block|,
 operator|new
@@ -912,7 +912,7 @@ name|INCLUDE
 argument_list|,
 name|CLEANUP_STATE
 argument_list|)
-block|,         }
+block|,           }
 argument_list|)
 block|,
 operator|new
@@ -3631,7 +3631,6 @@ argument_list|(
 literal|"\\$((\\$)|([A-Za-z]\\w*)|\\{([A-Za-z]\\w*)\\})"
 argument_list|)
 decl_stmt|;
-specifier|public
 name|VariableTable
 parameter_list|()
 block|{
@@ -3650,7 +3649,6 @@ name|Excn
 extends|extends
 name|IllegalArgumentException
 block|{
-specifier|public
 name|Excn
 parameter_list|(
 name|String
@@ -4115,7 +4113,6 @@ specifier|final
 name|String
 name|val
 decl_stmt|;
-specifier|public
 name|Binding
 parameter_list|(
 name|String
@@ -4139,7 +4136,6 @@ name|val
 expr_stmt|;
 block|}
 comment|// @param phrase has form VAR=VAL
-specifier|public
 name|Binding
 parameter_list|(
 name|String
@@ -4199,7 +4195,6 @@ name|ArrayList
 argument_list|<>
 argument_list|()
 decl_stmt|;
-specifier|public
 name|CommandParser
 parameter_list|()
 block|{
@@ -10066,7 +10061,6 @@ argument_list|>
 name|files
 decl_stmt|;
 comment|// FILE
-specifier|public
 name|Tool
 parameter_list|()
 block|{

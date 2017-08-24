@@ -7888,7 +7888,6 @@ name|Integer
 argument_list|>
 name|isCount
 decl_stmt|;
-specifier|public
 name|RemoveCorrelationRexShuttle
 parameter_list|(
 name|RexBuilder
@@ -8557,7 +8556,6 @@ name|RemoveSingleAggregateRule
 extends|extends
 name|RelOptRule
 block|{
-specifier|public
 name|RemoveSingleAggregateRule
 parameter_list|()
 block|{
@@ -8792,7 +8790,6 @@ name|RemoveCorrelationForScalarProjectRule
 extends|extends
 name|RelOptRule
 block|{
-specifier|public
 name|RemoveCorrelationForScalarProjectRule
 parameter_list|()
 block|{
@@ -9538,7 +9535,6 @@ name|RemoveCorrelationForScalarAggregateRule
 extends|extends
 name|RelOptRule
 block|{
-specifier|public
 name|RemoveCorrelationForScalarAggregateRule
 parameter_list|()
 block|{
@@ -10882,7 +10878,6 @@ specifier|final
 name|boolean
 name|flavor
 decl_stmt|;
-specifier|public
 name|AdjustProjectForCountAggregateRule
 parameter_list|(
 name|boolean

@@ -3082,7 +3082,6 @@ specifier|static
 class|class
 name|LcsIndexOptimizer
 block|{
-specifier|public
 name|LcsIndexOptimizer
 parameter_list|(
 name|LcsTableScan

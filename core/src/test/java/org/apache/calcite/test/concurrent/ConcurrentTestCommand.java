@@ -60,8 +60,6 @@ parameter_list|()
 function_decl|;
 comment|//~ Inner Classes ----------------------------------------------------------
 comment|/**    * Indicates that a command should have failed, but instead succeeded, which    * is a test error    */
-specifier|public
-specifier|static
 class|class
 name|ShouldHaveFailedException
 extends|extends

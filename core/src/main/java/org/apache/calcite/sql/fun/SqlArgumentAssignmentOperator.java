@@ -131,7 +131,6 @@ name|SqlArgumentAssignmentOperator
 extends|extends
 name|SqlAsOperator
 block|{
-specifier|public
 name|SqlArgumentAssignmentOperator
 parameter_list|()
 block|{

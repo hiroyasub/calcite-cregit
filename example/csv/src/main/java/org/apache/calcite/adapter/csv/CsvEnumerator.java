@@ -346,7 +346,6 @@ name|gmt
 argument_list|)
 expr_stmt|;
 block|}
-specifier|public
 name|CsvEnumerator
 parameter_list|(
 name|Source
@@ -380,7 +379,6 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-specifier|public
 name|CsvEnumerator
 parameter_list|(
 name|Source
@@ -426,7 +424,6 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-specifier|public
 name|CsvEnumerator
 parameter_list|(
 name|Source
@@ -1294,7 +1291,7 @@ return|return
 name|integers
 return|;
 block|}
-comment|/** Row converter. */
+comment|/** Row converter.    *    * @param<E> element type */
 specifier|abstract
 specifier|static
 class|class

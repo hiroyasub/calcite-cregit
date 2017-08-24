@@ -174,7 +174,7 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
-comment|/**    * Binds an expression to this query provider.    */
+comment|/**    * Binds an expression to this query provider.    *    * @param<T> element type    */
 specifier|public
 specifier|static
 class|class

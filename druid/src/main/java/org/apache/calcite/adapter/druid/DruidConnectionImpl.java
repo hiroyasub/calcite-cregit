@@ -3564,7 +3564,7 @@ name|Sink
 extends|,
 name|Runnable
 block|{   }
-comment|/** An {@link Enumerator} that gets its rows from a {@link BlockingQueue}.    * There are other fields to signal errors and end-of-data. */
+comment|/** An {@link Enumerator} that gets its rows from a {@link BlockingQueue}.    * There are other fields to signal errors and end-of-data.    *    * @param<E> element type */
 specifier|private
 specifier|static
 class|class

@@ -7238,7 +7238,6 @@ specifier|final
 name|SqlKind
 name|kind
 decl_stmt|;
-specifier|public
 name|AvgVarianceConvertlet
 parameter_list|(
 name|SqlKind
@@ -7749,7 +7748,6 @@ operator|.
 name|Flag
 name|flag
 decl_stmt|;
-specifier|public
 name|TrimConvertlet
 parameter_list|(
 name|SqlTrimFunction

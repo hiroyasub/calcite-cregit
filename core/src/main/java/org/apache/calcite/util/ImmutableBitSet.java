@@ -3596,7 +3596,6 @@ operator|.
 name|newTreeMap
 argument_list|()
 decl_stmt|;
-specifier|public
 name|Closure
 parameter_list|(
 name|SortedMap

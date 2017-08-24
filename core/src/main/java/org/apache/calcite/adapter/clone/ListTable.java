@@ -295,7 +295,6 @@ name|List
 name|list
 decl_stmt|;
 comment|/** Creates a ListTable. */
-specifier|public
 name|ListTable
 parameter_list|(
 name|Type

@@ -2074,7 +2074,6 @@ name|PhysToIteratorConverter
 extends|extends
 name|ConverterImpl
 block|{
-specifier|public
 name|PhysToIteratorConverter
 parameter_list|(
 name|RelOptCluster

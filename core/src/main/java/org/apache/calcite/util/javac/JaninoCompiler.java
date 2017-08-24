@@ -484,7 +484,6 @@ specifier|private
 name|int
 name|nBytes
 decl_stmt|;
-specifier|public
 name|AccountingClassLoader
 parameter_list|(
 name|ClassLoader

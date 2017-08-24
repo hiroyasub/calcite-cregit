@@ -453,7 +453,6 @@ argument_list|>
 name|supplier
 decl_stmt|;
 comment|/** Creates an ArrayTable. */
-specifier|public
 name|ArrayTable
 parameter_list|(
 name|Type
@@ -1024,7 +1023,6 @@ specifier|final
 name|int
 name|ordinal
 decl_stmt|;
-specifier|public
 name|ObjectArray
 parameter_list|(
 name|int
@@ -1299,7 +1297,6 @@ specifier|final
 name|Primitive
 name|p
 decl_stmt|;
-specifier|public
 name|PrimitiveArray
 parameter_list|(
 name|int
@@ -1507,7 +1504,6 @@ name|PrimitiveDictionary
 implements|implements
 name|Representation
 block|{
-specifier|public
 name|PrimitiveDictionary
 parameter_list|()
 block|{
@@ -1655,7 +1651,6 @@ specifier|final
 name|Representation
 name|representation
 decl_stmt|;
-specifier|public
 name|ObjectDictionary
 parameter_list|(
 name|int
@@ -2090,7 +2085,6 @@ name|StringDictionary
 implements|implements
 name|Representation
 block|{
-specifier|public
 name|StringDictionary
 parameter_list|()
 block|{
@@ -2239,7 +2233,6 @@ name|ByteStringDictionary
 implements|implements
 name|Representation
 block|{
-specifier|public
 name|ByteStringDictionary
 parameter_list|()
 block|{
@@ -2390,7 +2383,6 @@ specifier|final
 name|int
 name|ordinal
 decl_stmt|;
-specifier|public
 name|Constant
 parameter_list|(
 name|int
@@ -3890,7 +3882,6 @@ name|RelCollation
 argument_list|>
 name|collations
 decl_stmt|;
-specifier|public
 name|Content
 parameter_list|(
 name|List
@@ -3945,7 +3936,6 @@ block|}
 annotation|@
 name|Deprecated
 comment|// to be removed before 2.0
-specifier|public
 name|Content
 parameter_list|(
 name|List
@@ -4104,7 +4094,6 @@ init|=
 operator|-
 literal|1
 decl_stmt|;
-specifier|public
 name|ObjectEnumerator
 parameter_list|(
 name|int
@@ -4212,7 +4201,6 @@ init|=
 operator|-
 literal|1
 decl_stmt|;
-specifier|public
 name|ArrayEnumerator
 parameter_list|(
 name|int

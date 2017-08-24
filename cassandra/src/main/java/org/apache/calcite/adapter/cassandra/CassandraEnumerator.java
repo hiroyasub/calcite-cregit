@@ -221,7 +221,6 @@ argument_list|>
 name|fieldTypes
 decl_stmt|;
 comment|/** Creates a CassandraEnumerator.    *    * @param results Cassandra result set ({@link com.datastax.driver.core.ResultSet})    * @param protoRowType The type of resulting rows    */
-specifier|public
 name|CassandraEnumerator
 parameter_list|(
 name|ResultSet

@@ -3112,7 +3112,6 @@ specifier|private
 name|Project
 name|rel
 decl_stmt|;
-specifier|public
 name|CardOfProjExpr
 parameter_list|(
 name|RelMetadataQuery

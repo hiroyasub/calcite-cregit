@@ -702,7 +702,6 @@ operator|.
 name|TableType
 name|jdbcTableType
 decl_stmt|;
-specifier|public
 name|JdbcTable
 parameter_list|(
 name|JdbcSchema
@@ -922,14 +921,14 @@ argument_list|>
 name|apply
 parameter_list|(
 name|RelDataTypeField
-name|field
+name|f
 parameter_list|)
 block|{
 specifier|final
 name|RelDataType
 name|type
 init|=
-name|field
+name|f
 operator|.
 name|getType
 argument_list|()
@@ -1375,7 +1374,7 @@ name|flattened
 argument_list|)
 return|;
 block|}
-comment|/** Enumerable that returns the contents of a {@link JdbcTable} by connecting    * to the JDBC data source. */
+comment|/** Enumerable that returns the contents of a {@link JdbcTable} by connecting    * to the JDBC data source.    *    * @param<T> element type */
 specifier|private
 class|class
 name|JdbcTableQueryable
@@ -1388,7 +1387,6 @@ argument_list|<
 name|T
 argument_list|>
 block|{
-specifier|public
 name|JdbcTableQueryable
 parameter_list|(
 name|QueryProvider

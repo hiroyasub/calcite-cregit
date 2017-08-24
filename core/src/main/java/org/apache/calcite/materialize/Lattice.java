@@ -3016,7 +3016,6 @@ operator|.
 name|newArrayList
 argument_list|()
 decl_stmt|;
-specifier|public
 name|Edge
 parameter_list|(
 name|RelNode

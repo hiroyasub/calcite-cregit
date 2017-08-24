@@ -316,7 +316,7 @@ name|AggregateCall
 name|aggregateCall
 parameter_list|)
 function_decl|;
-comment|/** Collection in which one can register an element. Registering may return    * a reference to an existing element. */
+comment|/** Collection in which one can register an element. Registering may return    * a reference to an existing element.    *    * @param<E> element type */
 interface|interface
 name|Registry
 parameter_list|<

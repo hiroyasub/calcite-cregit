@@ -84,7 +84,6 @@ specifier|final
 name|int
 name|inverseOrdinal
 decl_stmt|;
-specifier|private
 name|MappingType
 parameter_list|()
 block|{

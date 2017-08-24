@@ -135,7 +135,6 @@ name|RelOptRule
 argument_list|>
 name|rules
 decl_stmt|;
-specifier|public
 name|ListRuleSet
 parameter_list|(
 name|ImmutableList

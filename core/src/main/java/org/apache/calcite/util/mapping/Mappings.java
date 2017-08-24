@@ -5361,7 +5361,6 @@ name|int
 index|[]
 name|targets
 decl_stmt|;
-specifier|public
 name|PartialFunctionImpl
 parameter_list|(
 name|int

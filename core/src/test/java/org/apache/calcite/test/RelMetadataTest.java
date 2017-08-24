@@ -15566,7 +15566,6 @@ operator|.
 name|Handler
 name|colTypeHandler
 decl_stmt|;
-specifier|public
 name|MyRelMetadataQuery
 parameter_list|()
 block|{

@@ -89,7 +89,7 @@ name|planner
 parameter_list|)
 function_decl|;
 comment|//~ Inner Classes ----------------------------------------------------------
-comment|/** Instruction that executes all rules of a given class. */
+comment|/** Instruction that executes all rules of a given class.    *    * @param<R> rule type */
 specifier|static
 class|class
 name|RuleClass

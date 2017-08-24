@@ -1674,7 +1674,6 @@ specifier|final
 name|Convention
 name|out
 decl_stmt|;
-specifier|public
 name|MongoConverterRule
 parameter_list|(
 name|Class

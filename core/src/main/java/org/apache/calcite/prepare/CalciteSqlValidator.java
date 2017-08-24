@@ -117,7 +117,6 @@ name|CalciteSqlValidator
 extends|extends
 name|SqlValidatorImpl
 block|{
-specifier|public
 name|CalciteSqlValidator
 parameter_list|(
 name|SqlOperatorTable

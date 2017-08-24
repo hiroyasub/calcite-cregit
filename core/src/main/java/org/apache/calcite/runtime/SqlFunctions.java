@@ -10729,23 +10729,20 @@ name|Comparable
 argument_list|,
 name|Comparable
 argument_list|>
-name|entry
+name|e
 parameter_list|)
 block|{
 return|return
 name|FlatLists
 operator|.
-expr|<
-name|Comparable
-operator|>
 name|of
 argument_list|(
-name|entry
+name|e
 operator|.
 name|getKey
 argument_list|()
 argument_list|,
-name|entry
+name|e
 operator|.
 name|getValue
 argument_list|()
@@ -11369,7 +11366,7 @@ return|return
 name|x
 return|;
 block|}
-comment|/** Enumerates over the cartesian product of the given lists, returning    * a comparable list for each row. */
+comment|/** Enumerates over the cartesian product of the given lists, returning    * a comparable list for each row.    *    * @param<E> element type */
 specifier|private
 specifier|static
 class|class

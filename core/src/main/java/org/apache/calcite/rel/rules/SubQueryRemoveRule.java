@@ -2548,7 +2548,6 @@ specifier|final
 name|RexNode
 name|replacement
 decl_stmt|;
-specifier|public
 name|ReplaceSubQueryShuttle
 parameter_list|(
 name|RexSubQuery

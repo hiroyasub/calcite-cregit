@@ -8553,6 +8553,12 @@ operator|.
 name|createStatement
 argument_list|()
 decl_stmt|;
+specifier|final
+name|String
+name|sql
+init|=
+literal|"SELECT ID, VALS FROM ARR_TABLE"
+decl_stmt|;
 name|ResultSet
 name|rs
 init|=
@@ -8560,7 +8566,7 @@ name|calciteStatement
 operator|.
 name|executeQuery
 argument_list|(
-literal|"SELECT ID, VALS FROM ARR_TABLE"
+name|sql
 argument_list|)
 decl_stmt|;
 name|assertTrue

@@ -2472,7 +2472,6 @@ specifier|final
 name|Comparable
 name|key
 decl_stmt|;
-specifier|public
 name|Kev
 parameter_list|(
 name|int

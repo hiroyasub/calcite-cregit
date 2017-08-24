@@ -2204,7 +2204,7 @@ argument_list|()
 return|;
 block|}
 block|}
-comment|/** Selector equality comparer. */
+comment|/** Selector equality comparer.    *    * @param<T> element type    * @param<T2> target type */
 specifier|private
 specifier|static
 specifier|final
@@ -2598,7 +2598,7 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/** Ignore. */
+comment|/** Ignore.    *    * @param<R> result type    * @param<T0> first argument type    * @param<T1> second argument type */
 specifier|private
 specifier|static
 specifier|final
@@ -2679,7 +2679,7 @@ name|Ignore
 argument_list|()
 decl_stmt|;
 block|}
-comment|/** List that generates each element using a function. */
+comment|/** List that generates each element using a function.    *    * @param<E> element type */
 specifier|private
 specifier|static
 class|class
@@ -2710,7 +2710,6 @@ name|E
 argument_list|>
 name|fn
 decl_stmt|;
-specifier|public
 name|GeneratingList
 parameter_list|(
 name|int

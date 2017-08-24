@@ -285,7 +285,7 @@ literal|null
 return|;
 block|}
 comment|//~ Inner Interfaces -------------------------------------------------------
-comment|/** Argument handler. */
+comment|/** Argument handler.    *    * @param<R> result type */
 specifier|public
 interface|interface
 name|ArgHandler
@@ -320,7 +320,7 @@ parameter_list|)
 function_decl|;
 block|}
 comment|//~ Inner Classes ----------------------------------------------------------
-comment|/**    * Default implementation of {@link ArgHandler} which merely calls    * {@link SqlNode#accept} on each operand.    */
+comment|/**    * Default implementation of {@link ArgHandler} which merely calls    * {@link SqlNode#accept} on each operand.    *    * @param<R> result type    */
 specifier|public
 specifier|static
 class|class

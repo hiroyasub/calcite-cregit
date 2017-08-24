@@ -2468,7 +2468,7 @@ name|inputRefUse
 return|;
 block|}
 block|}
-comment|/**    * Usage of a {@link RexInputRef} in an expression.    */
+comment|/**    * Usage of a {@link RexInputRef} in an expression.    *    * @param<T1> left type    * @param<T2> right type */
 specifier|private
 specifier|static
 class|class

@@ -315,7 +315,6 @@ name|ANY
 argument_list|)
 argument_list|)
 decl_stmt|;
-specifier|public
 name|SqlItemOperator
 parameter_list|()
 block|{

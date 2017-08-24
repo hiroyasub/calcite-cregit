@@ -1161,7 +1161,6 @@ specifier|final
 name|JdbcConvention
 name|out
 decl_stmt|;
-specifier|public
 name|JdbcConverterRule
 parameter_list|(
 name|Class

@@ -25325,7 +25325,6 @@ specifier|final
 name|SqlInsert
 name|node
 decl_stmt|;
-specifier|public
 name|InsertNamespace
 parameter_list|(
 name|SqlValidatorImpl
@@ -25390,7 +25389,6 @@ specifier|final
 name|SqlUpdate
 name|node
 decl_stmt|;
-specifier|public
 name|UpdateNamespace
 parameter_list|(
 name|SqlValidatorImpl
@@ -25455,7 +25453,6 @@ specifier|final
 name|SqlDelete
 name|node
 decl_stmt|;
-specifier|public
 name|DeleteNamespace
 parameter_list|(
 name|SqlValidatorImpl
@@ -25520,7 +25517,6 @@ specifier|final
 name|SqlMerge
 name|node
 decl_stmt|;
-specifier|public
 name|MergeNamespace
 parameter_list|(
 name|SqlValidatorImpl
@@ -25586,7 +25582,6 @@ specifier|private
 name|MatchRecognizeScope
 name|scope
 decl_stmt|;
-specifier|public
 name|PatternVarVisitor
 parameter_list|(
 name|MatchRecognizeScope
@@ -25791,7 +25786,6 @@ specifier|final
 name|SqlValidatorScope
 name|scope
 decl_stmt|;
-specifier|public
 name|DeriveTypeVisitor
 parameter_list|(
 name|SqlValidatorScope
@@ -27767,12 +27761,10 @@ decl_stmt|;
 name|SqlNode
 name|currentOffset
 decl_stmt|;
-specifier|public
 name|NavigationExpander
 parameter_list|()
 block|{
 block|}
-specifier|public
 name|NavigationExpander
 parameter_list|(
 name|SqlOperator
@@ -28111,7 +28103,6 @@ specifier|final
 name|String
 name|alpha
 decl_stmt|;
-specifier|public
 name|NavigationReplacer
 parameter_list|(
 name|String

@@ -2116,7 +2116,6 @@ specifier|final
 name|int
 name|modifiers
 decl_stmt|;
-specifier|public
 name|RecordFieldImpl
 parameter_list|(
 name|SyntheticRecordType

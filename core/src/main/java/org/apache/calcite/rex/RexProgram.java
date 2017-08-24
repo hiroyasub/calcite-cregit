@@ -3184,7 +3184,6 @@ argument_list|>
 name|internalExprTypeList
 decl_stmt|;
 comment|/**      * Creates a Checker.      *      * @param inputRowType         Types of the input fields      * @param internalExprTypeList Types of the internal expressions      * @param context              Context of the enclosing {@link RelNode},      *                             or null      * @param litmus               Whether to fail      */
-specifier|public
 name|Checker
 parameter_list|(
 name|RelDataType
@@ -3333,7 +3332,6 @@ name|RexNode
 argument_list|>
 name|exprs
 decl_stmt|;
-specifier|public
 name|ExpansionShuttle
 parameter_list|(
 name|List

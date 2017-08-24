@@ -232,7 +232,6 @@ specifier|final
 name|String
 name|pig
 decl_stmt|;
-specifier|public
 name|Fluent
 parameter_list|(
 name|String

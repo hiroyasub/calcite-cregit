@@ -2028,7 +2028,7 @@ return|return
 name|factory
 return|;
 block|}
-comment|/** Implementation of Queryable. */
+comment|/** Implementation of Queryable.    *    * @param<T> element type */
 specifier|static
 class|class
 name|CalciteQueryable

@@ -2044,7 +2044,6 @@ name|IdentityHashMap
 argument_list|<>
 argument_list|()
 decl_stmt|;
-specifier|public
 name|SubstituteVariableVisitor
 parameter_list|(
 name|Map

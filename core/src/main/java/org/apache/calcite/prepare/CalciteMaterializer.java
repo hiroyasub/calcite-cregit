@@ -549,7 +549,6 @@ name|CalcitePrepareImpl
 operator|.
 name|CalcitePreparingStmt
 block|{
-specifier|public
 name|CalciteMaterializer
 parameter_list|(
 name|CalcitePrepareImpl
