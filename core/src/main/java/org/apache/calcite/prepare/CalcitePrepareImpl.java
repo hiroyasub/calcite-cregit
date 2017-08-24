@@ -5006,6 +5006,14 @@ operator|.
 name|conformance
 argument_list|()
 argument_list|)
+operator|.
+name|setCaseSensitive
+argument_list|(
+name|config
+operator|.
+name|caseSensitive
+argument_list|()
+argument_list|)
 decl_stmt|;
 specifier|final
 name|SqlParserImplFactory

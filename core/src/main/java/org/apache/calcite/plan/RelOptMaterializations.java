@@ -906,7 +906,7 @@ if|if
 condition|(
 name|materialization
 operator|.
-name|table
+name|qualifiedTableName
 operator|!=
 literal|null
 operator|&&
@@ -926,10 +926,7 @@ name|qname
 init|=
 name|materialization
 operator|.
-name|table
-operator|.
-name|getQualifiedName
-argument_list|()
+name|qualifiedTableName
 decl_stmt|;
 name|qnameMap
 operator|.
@@ -1079,7 +1076,7 @@ name|usesTable
 argument_list|(
 name|materialization
 operator|.
-name|table
+name|qualifiedTableName
 argument_list|,
 name|queryTablesUsed
 argument_list|,
@@ -1299,8 +1296,11 @@ specifier|static
 name|boolean
 name|usesTable
 parameter_list|(
-name|RelOptTable
-name|table
+name|List
+argument_list|<
+name|String
+argument_list|>
+name|qualifiedName
 parameter_list|,
 name|Set
 argument_list|<
@@ -1341,10 +1341,7 @@ operator|.
 name|getQualifiedName
 argument_list|()
 argument_list|,
-name|table
-operator|.
-name|getQualifiedName
-argument_list|()
+name|qualifiedName
 argument_list|)
 operator|!=
 literal|null

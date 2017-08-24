@@ -834,6 +834,8 @@ operator|.
 name|TableEntry
 name|tableEntry
 decl_stmt|;
+comment|// If the user says the materialization exists, first try to find a table
+comment|// with the name and if none can be found, lookup a view in the schema
 if|if
 condition|(
 name|existing
@@ -850,6 +852,25 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
+if|if
+condition|(
+name|tableEntry
+operator|==
+literal|null
+condition|)
+block|{
+name|tableEntry
+operator|=
+name|schema
+operator|.
+name|getTableBasedOnNullaryFunction
+argument_list|(
+name|suggestedTableName
+argument_list|,
+literal|true
+argument_list|)
+expr_stmt|;
+block|}
 block|}
 else|else
 block|{
