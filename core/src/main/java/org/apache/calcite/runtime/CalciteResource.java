@@ -249,6 +249,18 @@ function_decl|;
 annotation|@
 name|BaseMessage
 argument_list|(
+literal|"Geo-spatial extensions and the GEOMETRY data type are not enabled"
+argument_list|)
+name|ExInst
+argument_list|<
+name|SqlValidatorException
+argument_list|>
+name|geometryDisabled
+parameter_list|()
+function_decl|;
+annotation|@
+name|BaseMessage
+argument_list|(
 literal|"Illegal INTERVAL literal {0}; at {1}"
 argument_list|)
 annotation|@

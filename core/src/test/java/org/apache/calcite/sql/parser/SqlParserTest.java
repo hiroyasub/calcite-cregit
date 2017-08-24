@@ -21276,6 +21276,34 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testGeometry
+parameter_list|()
+block|{
+name|checkExpFails
+argument_list|(
+literal|"cast(null as geometry)"
+argument_list|,
+literal|"Geo-spatial extensions and the GEOMETRY data type are not enabled"
+argument_list|)
+expr_stmt|;
+name|conformance
+operator|=
+name|SqlConformanceEnum
+operator|.
+name|LENIENT
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"cast(null as geometry)"
+argument_list|,
+literal|"CAST(NULL AS GEOMETRY)"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testIntervalArithmetics
 parameter_list|()
 block|{

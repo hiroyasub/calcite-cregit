@@ -213,6 +213,11 @@ name|boolean
 name|isLimitStartCountAllowed
 parameter_list|()
 function_decl|;
+comment|/**    * Whether to allow geo-spatial extensions, including the GEOMETRY type.    *    *<p>Among the built-in conformance levels, true in    * {@link SqlConformanceEnum#LENIENT},    * {@link SqlConformanceEnum#MYSQL_5},    * {@link SqlConformanceEnum#SQL_SERVER_2008};    * false otherwise.    */
+name|boolean
+name|allowGeometry
+parameter_list|()
+function_decl|;
 block|}
 end_interface
 

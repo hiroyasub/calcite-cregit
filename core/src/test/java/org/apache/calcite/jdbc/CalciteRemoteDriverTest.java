@@ -1933,7 +1933,7 @@ name|checkResultCount
 argument_list|(
 name|is
 argument_list|(
-literal|42
+literal|43
 argument_list|)
 argument_list|)
 argument_list|)

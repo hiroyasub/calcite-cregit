@@ -77,6 +77,13 @@ name|TIMESTAMP_WITH_TIMEZONE
 init|=
 literal|2014
 decl_stmt|;
+comment|// From OpenGIS
+name|int
+name|GEOMETRY
+init|=
+literal|2015
+decl_stmt|;
+comment|// TODO: confirm
 block|}
 end_interface
 
