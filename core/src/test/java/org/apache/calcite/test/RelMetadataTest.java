@@ -8769,6 +8769,102 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1960">[CALCITE-1960]    * RelMdPredicates.getPredicates is slow if there are many equivalent    * columns</a>. Since this is a performance problem, the test result does not    * change, but takes over 15 minutes before the fix and 6 seconds after. */
+annotation|@
+name|Test
+argument_list|(
+name|timeout
+operator|=
+literal|20_000
+argument_list|)
+specifier|public
+name|void
+name|testPullUpPredicatesForExprsItr
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select a.EMPNO, a.ENAME\n"
+operator|+
+literal|"from (select * from sales.emp ) a\n"
+operator|+
+literal|"join (select * from sales.emp  ) b\n"
+operator|+
+literal|"on a.empno = b.deptno\n"
+operator|+
+literal|"  and a.comm = b.comm\n"
+operator|+
+literal|"  and a.mgr=b.mgr\n"
+operator|+
+literal|"  and (a.empno< 10 or a.comm< 3 or a.deptno< 10\n"
+operator|+
+literal|"    or a.job ='abc' or a.ename='abc' or a.sal='30' or a.mgr>3\n"
+operator|+
+literal|"    or a.slacker is not null  or a.HIREDATE is not null\n"
+operator|+
+literal|"    or b.empno< 9 or b.comm< 3 or b.deptno< 10 or b.job ='abc'\n"
+operator|+
+literal|"    or b.ename='abc' or b.sal='30' or b.mgr>3 or b.slacker )\n"
+operator|+
+literal|"join emp c\n"
+operator|+
+literal|"on b.mgr =a.mgr and a.empno =b.deptno and a.comm=b.comm\n"
+operator|+
+literal|"  and a.deptno=b.deptno and a.job=b.job and a.ename=b.ename\n"
+operator|+
+literal|"  and a.mgr=b.deptno and a.slacker=b.slacker"
+decl_stmt|;
+specifier|final
+name|RelNode
+name|rel
+init|=
+name|convertSql
+argument_list|(
+name|sql
+argument_list|)
+decl_stmt|;
+specifier|final
+name|RelMetadataQuery
+name|mq
+init|=
+name|RelMetadataQuery
+operator|.
+name|instance
+argument_list|()
+decl_stmt|;
+name|RelOptPredicateList
+name|inputSet
+init|=
+name|mq
+operator|.
+name|getPulledUpPredicates
+argument_list|(
+name|rel
+operator|.
+name|getInput
+argument_list|(
+literal|0
+argument_list|)
+argument_list|)
+decl_stmt|;
+name|assertThat
+argument_list|(
+name|inputSet
+operator|.
+name|pulledUpPredicates
+operator|.
+name|size
+argument_list|()
+argument_list|,
+name|is
+argument_list|(
+literal|131089
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
 annotation|@
 name|Test
 specifier|public
