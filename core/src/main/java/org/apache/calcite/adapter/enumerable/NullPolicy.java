@@ -29,6 +29,9 @@ block|{
 comment|/** Returns null if and only if one of the arguments are null. */
 name|STRICT
 block|,
+comment|/** Returns null if one of the arguments is null, and possibly other times. */
+name|SEMI_STRICT
+block|,
 comment|/** If any of the arguments are null, return null. */
 name|ANY
 block|,

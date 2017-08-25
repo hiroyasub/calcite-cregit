@@ -878,12 +878,16 @@ name|containsType
 argument_list|(
 name|type1
 argument_list|)
+operator|:
+name|type1
 assert|;
 assert|assert
 name|containsType
 argument_list|(
 name|type2
 argument_list|)
+operator|:
+name|type2
 assert|;
 name|int
 name|p1

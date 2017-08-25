@@ -4989,6 +4989,9 @@ case|:
 case|case
 name|STRICT
 case|:
+case|case
+name|SEMI_STRICT
+case|:
 return|return
 operator|new
 name|CallImplementor
@@ -6548,15 +6551,14 @@ name|IS_NOT_NULL
 case|:
 comment|// If "f" is strict, then "f(a0, a1) IS NOT NULL" is
 comment|// equivalent to "a0 IS NOT NULL AND a1 IS NOT NULL".
-if|if
+switch|switch
 condition|(
 name|nullPolicy
-operator|==
-name|NullPolicy
-operator|.
-name|STRICT
 condition|)
 block|{
+case|case
+name|STRICT
+case|:
 return|return
 name|Expressions
 operator|.
@@ -6582,15 +6584,14 @@ name|IS_NULL
 case|:
 comment|// If "f" is strict, then "f(a0, a1) IS NULL" is
 comment|// equivalent to "a0 IS NULL OR a1 IS NULL".
-if|if
+switch|switch
 condition|(
 name|nullPolicy
-operator|==
-name|NullPolicy
-operator|.
-name|STRICT
 condition|)
 block|{
+case|case
+name|STRICT
+case|:
 return|return
 name|Expressions
 operator|.
@@ -7043,15 +7044,14 @@ name|HashMap
 argument_list|<>
 argument_list|()
 decl_stmt|;
-if|if
+switch|switch
 condition|(
 name|nullPolicy
-operator|==
-name|NullPolicy
-operator|.
-name|STRICT
 condition|)
 block|{
+case|case
+name|STRICT
+case|:
 comment|// The arguments should be not nullable if STRICT operator is computed
 comment|// in nulls NOT_POSSIBLE mode
 for|for

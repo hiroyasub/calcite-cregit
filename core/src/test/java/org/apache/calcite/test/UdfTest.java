@@ -119,6 +119,22 @@ name|calcite
 operator|.
 name|linq4j
 operator|.
+name|function
+operator|.
+name|SemiStrict
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|linq4j
+operator|.
 name|tree
 operator|.
 name|Expression
@@ -771,6 +787,44 @@ literal|"         },\n"
 operator|+
 literal|"         {\n"
 operator|+
+literal|"           name: 'NULL4',\n"
+operator|+
+literal|"           className: '"
+operator|+
+name|Smalls
+operator|.
+name|Null4Function
+operator|.
+name|class
+operator|.
+name|getName
+argument_list|()
+operator|+
+literal|"'\n"
+operator|+
+literal|"         },\n"
+operator|+
+literal|"         {\n"
+operator|+
+literal|"           name: 'NULL8',\n"
+operator|+
+literal|"           className: '"
+operator|+
+name|Smalls
+operator|.
+name|Null8Function
+operator|.
+name|class
+operator|.
+name|getName
+argument_list|()
+operator|+
+literal|"'\n"
+operator|+
+literal|"         },\n"
+operator|+
+literal|"         {\n"
+operator|+
 literal|"           className: '"
 operator|+
 name|Smalls
@@ -1386,6 +1440,111 @@ operator|.
 name|returns
 argument_list|(
 literal|""
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Tests that we generate the appropriate checks for a "semi-strict"    * function.    *    *<p>The difference between "strict" and "semi-strict" functions is that a    * "semi-strict" function might return null even if none of its arguments    * are null. (Both always return null if one of their arguments is null.)    * Thus, a nasty function is more unpredictable.    *    * @see SemiStrict */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSemiStrict
+parameter_list|()
+block|{
+specifier|final
+name|CalciteAssert
+operator|.
+name|AssertThat
+name|with
+init|=
+name|withUdf
+argument_list|()
+decl_stmt|;
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select\n"
+operator|+
+literal|"  \"adhoc\".null4(upper(\"name\")) as p\n"
+operator|+
+literal|" from \"adhoc\".EMPLOYEES"
+decl_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"P=null"
+argument_list|,
+literal|"P=null"
+argument_list|,
+literal|"P=SEBASTIAN"
+argument_list|,
+literal|"P=THEODORE"
+argument_list|)
+expr_stmt|;
+comment|// my_str is non-strict; it must be called when args are null
+specifier|final
+name|String
+name|sql2
+init|=
+literal|"select\n"
+operator|+
+literal|"  \"adhoc\".my_str(upper(\"adhoc\".null4(\"name\"))) as p\n"
+operator|+
+literal|" from \"adhoc\".EMPLOYEES"
+decl_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+name|sql2
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"P=<null>"
+argument_list|,
+literal|"P=<null>"
+argument_list|,
+literal|"P=<SEBASTIAN>"
+argument_list|,
+literal|"P=<THEODORE>"
+argument_list|)
+expr_stmt|;
+comment|// null8 throws NPE if its argument is null,
+comment|// so we had better know that null4 might return null
+specifier|final
+name|String
+name|sql3
+init|=
+literal|"select\n"
+operator|+
+literal|"  \"adhoc\".null8(\"adhoc\".null4(\"name\")) as p\n"
+operator|+
+literal|" from \"adhoc\".EMPLOYEES"
+decl_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+name|sql3
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"P=null"
+argument_list|,
+literal|"P=null"
+argument_list|,
+literal|"P=Sebastian"
+argument_list|,
+literal|"P=null"
 argument_list|)
 expr_stmt|;
 block|}
