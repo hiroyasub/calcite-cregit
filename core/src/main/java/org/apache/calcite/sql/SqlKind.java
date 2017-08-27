@@ -1038,6 +1038,31 @@ argument_list|,
 name|JDBC_FN
 argument_list|)
 decl_stmt|;
+comment|/**    * Category of SqlAvgAggFunction.    *    *<p>Consists of {@link #AVG}, {@link #STDDEV_POP}, {@link #STDDEV_SAMP},    * {@link #VAR_POP}, {@link #VAR_SAMP}.    */
+specifier|public
+specifier|static
+specifier|final
+name|Set
+argument_list|<
+name|SqlKind
+argument_list|>
+name|AVG_AGG_FUNCTIONS
+init|=
+name|EnumSet
+operator|.
+name|of
+argument_list|(
+name|AVG
+argument_list|,
+name|STDDEV_POP
+argument_list|,
+name|STDDEV_SAMP
+argument_list|,
+name|VAR_POP
+argument_list|,
+name|VAR_SAMP
+argument_list|)
+decl_stmt|;
 comment|/**    * Category of comparison operators.    *    *<p>Consists of:    * {@link #IN},    * {@link #EQUALS},    * {@link #NOT_EQUALS},    * {@link #LESS_THAN},    * {@link #GREATER_THAN},    * {@link #LESS_THAN_OR_EQUAL},    * {@link #GREATER_THAN_OR_EQUAL}.    */
 specifier|public
 specifier|static

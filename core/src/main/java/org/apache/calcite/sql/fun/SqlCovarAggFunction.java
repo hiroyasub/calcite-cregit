@@ -155,7 +155,7 @@ name|kind
 argument_list|,
 name|ReturnTypes
 operator|.
-name|ARG0_NULLABLE_IF_EMPTY
+name|COVAR_FUNCTION
 argument_list|,
 literal|null
 argument_list|,

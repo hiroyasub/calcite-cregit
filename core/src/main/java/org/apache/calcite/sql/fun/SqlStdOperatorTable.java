@@ -3023,6 +3023,23 @@ operator|.
 name|STDDEV_SAMP
 argument_list|)
 decl_stmt|;
+comment|/**    *<code>STDDEV</code> aggregate function.    */
+specifier|public
+specifier|static
+specifier|final
+name|SqlAggFunction
+name|STDDEV
+init|=
+operator|new
+name|SqlAvgAggFunction
+argument_list|(
+literal|"STDDEV"
+argument_list|,
+name|SqlKind
+operator|.
+name|STDDEV_SAMP
+argument_list|)
+decl_stmt|;
 comment|/**    *<code>VAR_POP</code> aggregate function.    */
 specifier|public
 specifier|static
@@ -3048,6 +3065,23 @@ init|=
 operator|new
 name|SqlAvgAggFunction
 argument_list|(
+name|SqlKind
+operator|.
+name|VAR_SAMP
+argument_list|)
+decl_stmt|;
+comment|/**    *<code>VARIANCE</code> aggregate function.    */
+specifier|public
+specifier|static
+specifier|final
+name|SqlAggFunction
+name|VARIANCE
+init|=
+operator|new
+name|SqlAvgAggFunction
+argument_list|(
+literal|"VARIANCE"
+argument_list|,
 name|SqlKind
 operator|.
 name|VAR_SAMP

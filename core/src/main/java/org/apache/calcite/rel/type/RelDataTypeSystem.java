@@ -120,7 +120,7 @@ name|SqlTypeName
 name|typeName
 parameter_list|)
 function_decl|;
-comment|/**    * Returns the return type of a call to the {@code SUM} aggregate function    * inferred from its argument type.    */
+comment|/** Returns the return type of a call to the {@code SUM} aggregate function,    * inferred from its argument type. */
 name|RelDataType
 name|deriveSumType
 parameter_list|(
@@ -129,6 +129,31 @@ name|typeFactory
 parameter_list|,
 name|RelDataType
 name|argumentType
+parameter_list|)
+function_decl|;
+comment|/** Returns the return type of a call to the {@code AVG}, {@code STDDEV} or    * {@code VAR} aggregate functions, inferred from its argument type.    */
+name|RelDataType
+name|deriveAvgAggType
+parameter_list|(
+name|RelDataTypeFactory
+name|typeFactory
+parameter_list|,
+name|RelDataType
+name|argumentType
+parameter_list|)
+function_decl|;
+comment|/** Returns the return type of a call to the {@code COVAR} aggregate function,    * inferred from its argument types. */
+name|RelDataType
+name|deriveCovarType
+parameter_list|(
+name|RelDataTypeFactory
+name|typeFactory
+parameter_list|,
+name|RelDataType
+name|arg0Type
+parameter_list|,
+name|RelDataType
+name|arg1Type
 parameter_list|)
 function_decl|;
 comment|/** Returns the return type of the {@code CUME_DIST} and {@code PERCENT_RANK}    * aggregate functions. */
