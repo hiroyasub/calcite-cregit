@@ -390,14 +390,20 @@ name|String
 name|toString
 parameter_list|()
 block|{
+comment|// This data race is intentional
+name|String
+name|localDigest
+init|=
+name|digest
+decl_stmt|;
 if|if
 condition|(
-name|digest
+name|localDigest
 operator|==
 literal|null
 condition|)
 block|{
-name|digest
+name|localDigest
 operator|=
 name|computeDigest
 argument_list|(
@@ -416,9 +422,13 @@ name|NEW_SPECIFICATION
 argument_list|)
 argument_list|)
 expr_stmt|;
+name|digest
+operator|=
+name|localDigest
+expr_stmt|;
 block|}
 return|return
-name|digest
+name|localDigest
 return|;
 block|}
 specifier|public
