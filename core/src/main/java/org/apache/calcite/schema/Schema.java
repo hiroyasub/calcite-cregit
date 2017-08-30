@@ -127,23 +127,12 @@ name|boolean
 name|isMutable
 parameter_list|()
 function_decl|;
-comment|/** Returns whether the contents of this schema have changed since a given    * time. The time is a millisecond value, as returned by    * {@link System#currentTimeMillis()}. If this method returns true, and    * caching is enabled, Calcite will re-build caches.    *    *<p>The default implementation in    * {@link org.apache.calcite.schema.impl.AbstractSchema} always returns    * {@code false}.</p>    *    *<p>To control whether Calcite caches the contents of a schema, use the    * "cache" JSON attribute. The default value is "true".</p>    *    * @param lastCheck The last time that Calcite called this method, or    *   {@link Long#MIN_VALUE} if this is the first call    * @param now The current time in millis, as returned by    *   {@link System#currentTimeMillis()}    *    * @return Whether contents changed after {@code lastCheckMillis}.    */
-name|boolean
-name|contentsHaveChangedSince
-parameter_list|(
-name|long
-name|lastCheck
-parameter_list|,
-name|long
-name|now
-parameter_list|)
-function_decl|;
-comment|/** Returns the snapshot of this schema as of the specified time. The    * contents of the schema snapshot should not change over time.    *    * @param now The current time in millis, as returned by    *   {@link System#currentTimeMillis()}    *    * @return the schema snapshot.    */
+comment|/** Returns the snapshot of this schema as of the specified time. The    * contents of the schema snapshot should not change over time.    *    * @param version The current schema version    *    * @return the schema snapshot.    */
 name|Schema
 name|snapshot
 parameter_list|(
-name|long
-name|now
+name|SchemaVersion
+name|version
 parameter_list|)
 function_decl|;
 comment|/** Table type. */

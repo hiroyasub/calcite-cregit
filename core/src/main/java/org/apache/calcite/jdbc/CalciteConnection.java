@@ -53,6 +53,22 @@ name|apache
 operator|.
 name|calcite
 operator|.
+name|jdbc
+operator|.
+name|CalcitePrepare
+operator|.
+name|Context
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
 name|linq4j
 operator|.
 name|QueryProvider
@@ -150,6 +166,11 @@ name|SQLException
 function_decl|;
 name|CalciteConnectionConfig
 name|config
+parameter_list|()
+function_decl|;
+comment|/** Creates a context for preparing a statement for execution. */
+name|Context
+name|createPrepareContext
 parameter_list|()
 function_decl|;
 block|}

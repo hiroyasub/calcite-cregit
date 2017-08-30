@@ -731,7 +731,7 @@ name|DataContext
 name|getDataContext
 parameter_list|()
 function_decl|;
-comment|/** Returns the path of the object being analyzed, or null.      *      *<p>The object is being analyzed is typically a view. If it is already      * being analyzed further up the stack, the view definition can be deduced      * to be cylic. */
+comment|/** Returns the path of the object being analyzed, or null.      *      *<p>The object is being analyzed is typically a view. If it is already      * being analyzed further up the stack, the view definition can be deduced      * to be cyclic. */
 name|List
 argument_list|<
 name|String
