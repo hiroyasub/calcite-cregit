@@ -1820,6 +1820,34 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testAggFilterWithIn
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select\n"
+operator|+
+literal|"  deptno, sum(sal * 2) filter (where empno not in (1, 2)), count(*)\n"
+operator|+
+literal|"from emp\n"
+operator|+
+literal|"group by deptno"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testFakeStar
 parameter_list|()
 block|{
