@@ -1304,7 +1304,7 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Tests    * {@link RexBuilder#makeTimestampWithLocalTimeZoneLiteral(TimestampWithTimeZoneString, int)}. */
+comment|/** Tests    * {@link RexBuilder#makeTimestampWithLocalTimeZoneLiteral(TimestampString, int)}. */
 annotation|@
 name|Test
 specifier|public
