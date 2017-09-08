@@ -63,6 +63,20 @@ name|annotation
 operator|.
 name|ElementType
 operator|.
+name|CONSTRUCTOR
+import|;
+end_import
+
+begin_import
+import|import static
+name|java
+operator|.
+name|lang
+operator|.
+name|annotation
+operator|.
+name|ElementType
+operator|.
 name|FIELD
 import|;
 end_import
@@ -125,6 +139,8 @@ block|,
 name|FIELD
 block|,
 name|METHOD
+block|,
+name|CONSTRUCTOR
 block|}
 argument_list|)
 annotation|@

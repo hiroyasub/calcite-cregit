@@ -53,6 +53,22 @@ name|apache
 operator|.
 name|calcite
 operator|.
+name|linq4j
+operator|.
+name|function
+operator|.
+name|Experimental
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
 name|rel
 operator|.
 name|RelFieldCollation
@@ -564,9 +580,7 @@ name|DEFAULT_HANDLER
 argument_list|)
 expr_stmt|;
 block|}
-annotation|@
-name|Deprecated
-comment|// to be removed before 2.0
+comment|/** Creates a SqlDialect with the default handler. */
 specifier|public
 name|SqlDialect
 parameter_list|(
@@ -598,6 +612,8 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/**    * Creates a SqlDialect.    *    * @param databaseProduct       Database product; may be UNKNOWN, never null    * @param databaseProductName   Database product name from JDBC driver    * @param identifierQuoteString String to quote identifiers. Null if quoting    *                              is not supported. If "[", close quote is    *                              deemed to be "]".    * @param nullCollation         Whether NULL values appear first or last    * @param handler               Handler for un-parsing    */
+annotation|@
+name|Experimental
 specifier|public
 name|SqlDialect
 parameter_list|(
@@ -2674,6 +2690,8 @@ return|;
 block|}
 block|}
 comment|/**    * A handler for converting {@link SqlNode} into SQL text of a particular    * dialect.    *    *<p>Instances are stateless and therefore immutable.    */
+annotation|@
+name|Experimental
 specifier|public
 interface|interface
 name|Handler
@@ -2696,6 +2714,8 @@ parameter_list|)
 function_decl|;
 block|}
 comment|/** Base class for dialect handlers. */
+annotation|@
+name|Experimental
 specifier|public
 specifier|static
 class|class

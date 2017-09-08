@@ -1009,11 +1009,7 @@ name|CURRENT_TIMESTAMP
 operator|.
 name|camelName
 argument_list|,
-operator|new
-name|Long
-argument_list|(
 literal|1311120000000L
-argument_list|)
 argument_list|)
 expr_stmt|;
 block|}

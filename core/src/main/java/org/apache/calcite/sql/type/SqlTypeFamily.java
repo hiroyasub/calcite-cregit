@@ -373,7 +373,7 @@ argument_list|)
 decl|.
 name|put
 argument_list|(
-name|Types
+name|ExtraSqlTypes
 operator|.
 name|TIME_WITH_TIMEZONE
 argument_list|,
@@ -391,7 +391,7 @@ argument_list|)
 decl|.
 name|put
 argument_list|(
-name|Types
+name|ExtraSqlTypes
 operator|.
 name|TIMESTAMP_WITH_TIMEZONE
 argument_list|,
