@@ -314,7 +314,7 @@ return|return
 name|this
 return|;
 block|}
-comment|/** Creates a LogicalTableScan.    *  @param cluster Cluster    * @param relOptTable Table    */
+comment|/** Creates a LogicalTableScan.    *    * @param cluster Cluster    * @param relOptTable Table    */
 specifier|public
 specifier|static
 name|LogicalTableScan

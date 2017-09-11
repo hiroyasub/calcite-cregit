@@ -2709,7 +2709,7 @@ name|build
 argument_list|()
 return|;
 block|}
-comment|/** Returns a bit set with all the bits in this set that are not in    * another.    *    *  @see BitSet#andNot(java.util.BitSet) */
+comment|/** Returns a bit set with all the bits in this set that are not in    * another.    *    * @see BitSet#andNot(java.util.BitSet) */
 specifier|public
 name|ImmutableBitSet
 name|except
@@ -2739,7 +2739,7 @@ name|build
 argument_list|()
 return|;
 block|}
-comment|/** Returns a bit set with all the bits set in both this set and in    *  another.    *    *  @see BitSet#and */
+comment|/** Returns a bit set with all the bits set in both this set and in    * another.    *    * @see BitSet#and */
 specifier|public
 name|ImmutableBitSet
 name|intersect

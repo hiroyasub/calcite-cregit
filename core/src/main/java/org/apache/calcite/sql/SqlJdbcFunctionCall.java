@@ -1134,7 +1134,7 @@ name|int
 index|[]
 name|order
 decl_stmt|;
-comment|/**      * Creates a MakeCall strategy object with reordering of operands.      *      *<p>The reordering is specified by an int array where the value of      * element at position<code>i</code> indicates to which element in a      * new SqlNode[] array the operand goes.      *  @param operator Operator      * @param order    Order      */
+comment|/**      * Creates a MakeCall strategy object with reordering of operands.      *      *<p>The reordering is specified by an int array where the value of      * element at position<code>i</code> indicates to which element in a      * new SqlNode[] array the operand goes.      *      * @param operator Operator      * @param order Order      */
 name|PermutingMakeCall
 parameter_list|(
 name|SqlOperator
