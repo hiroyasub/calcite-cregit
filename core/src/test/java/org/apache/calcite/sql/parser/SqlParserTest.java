@@ -5673,6 +5673,27 @@ literal|"Lexical error at line 1, column 10\\.  Encountered: \"#\" \\(35\\), aft
 argument_list|)
 expr_stmt|;
 block|}
+comment|// TODO: should fail in parser
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testStarAsFails
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"select * as x from emp"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+literal|"SELECT * AS `X`\n"
+operator|+
+literal|"FROM `EMP`"
+argument_list|)
+expr_stmt|;
+block|}
 annotation|@
 name|Test
 specifier|public
