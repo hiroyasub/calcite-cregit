@@ -8324,6 +8324,29 @@ argument_list|,
 literal|"CAST(OR(?0.a, ?0.b)):BOOLEAN"
 argument_list|)
 expr_stmt|;
+comment|// condition with null value for range
+name|checkSimplifyFilter
+argument_list|(
+name|and
+argument_list|(
+name|gt
+argument_list|(
+name|aRef
+argument_list|,
+name|unknownLiteral
+argument_list|)
+argument_list|,
+name|ge
+argument_list|(
+name|bRef
+argument_list|,
+name|literal1
+argument_list|)
+argument_list|)
+argument_list|,
+literal|"false"
+argument_list|)
+expr_stmt|;
 block|}
 comment|/** Unit test for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1289">[CALCITE-1289]    * RexUtil.simplifyCase() should account for nullability</a>. */
 annotation|@

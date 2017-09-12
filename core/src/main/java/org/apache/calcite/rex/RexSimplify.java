@@ -3691,9 +3691,6 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
-comment|// Check for equality on different constants. If the same ref or CAST(ref)
-comment|// is equal to different constants, this condition cannot be satisfied,
-comment|// and hence it can be evaluated to FALSE
 specifier|final
 name|boolean
 name|leftRef
@@ -3746,6 +3743,50 @@ operator|.
 name|LITERAL
 argument_list|)
 decl_stmt|;
+comment|// Check for comparison with null values
+if|if
+condition|(
+name|leftConstant
+operator|&&
+operator|(
+operator|(
+name|RexLiteral
+operator|)
+name|left
+operator|)
+operator|.
+name|getValue
+argument_list|()
+operator|==
+literal|null
+operator|||
+name|rightConstant
+operator|&&
+operator|(
+operator|(
+name|RexLiteral
+operator|)
+name|right
+operator|)
+operator|.
+name|getValue
+argument_list|()
+operator|==
+literal|null
+condition|)
+block|{
+return|return
+name|rexBuilder
+operator|.
+name|makeLiteral
+argument_list|(
+literal|false
+argument_list|)
+return|;
+block|}
+comment|// Check for equality on different constants. If the same ref or CAST(ref)
+comment|// is equal to different constants, this condition cannot be satisfied,
+comment|// and hence it can be evaluated to FALSE
 if|if
 condition|(
 name|term
