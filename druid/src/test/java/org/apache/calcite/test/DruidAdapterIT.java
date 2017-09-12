@@ -10403,6 +10403,124 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testPushEqualsCastDimension
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sqlQuery
+init|=
+literal|"select sum(\"store_cost\") as a "
+operator|+
+literal|"from \"foodmart\" "
+operator|+
+literal|"where cast(\"customer_id\" as double) = 1.0"
+decl_stmt|;
+specifier|final
+name|String
+name|plan
+init|=
+literal|"PLAN=EnumerableInterpreter\n"
+operator|+
+literal|"  DruidQuery(table=[[foodmart, foodmart]], intervals=[[1900-01-09T00:00:00.000/2992-01-10T00:00:00.000]], "
+operator|+
+literal|"filter=[=(CAST($20):DOUBLE, 1.0)], groups=[{}], aggs=[[SUM($91)]])"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sqlQuery
+argument_list|,
+name|FOODMART
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+name|plan
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|druidChecker
+argument_list|(
+literal|"{'queryType':'timeseries','dataSource':'foodmart','descending':false,'granularity':'all',"
+operator|+
+literal|"'filter':{'type':'bound','dimension':'customer_id','lower':'1.0','lowerStrict':true,"
+operator|+
+literal|"'upper':'1.0','upperStrict':true,'ordering':'numeric'},"
+operator|+
+literal|"'aggregations':[{'type':'doubleSum','name':'A','fieldName':'store_cost'}],"
+operator|+
+literal|"'intervals':['1900-01-09T00:00:00.000/2992-01-10T00:00:00.000'],"
+operator|+
+literal|"'context':{'skipEmptyBuckets':true}}"
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testPushNotEqualsCastDimension
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sqlQuery
+init|=
+literal|"select sum(\"store_cost\") as a "
+operator|+
+literal|"from \"foodmart\" "
+operator|+
+literal|"where cast(\"customer_id\" as double)<> 1.0"
+decl_stmt|;
+specifier|final
+name|String
+name|plan
+init|=
+literal|"PLAN=EnumerableInterpreter\n"
+operator|+
+literal|"  DruidQuery(table=[[foodmart, foodmart]], intervals=[[1900-01-09T00:00:00.000/2992-01-10T00:00:00.000]], "
+operator|+
+literal|"filter=[<>(CAST($20):DOUBLE, 1.0)], groups=[{}], aggs=[[SUM($91)]])"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sqlQuery
+argument_list|,
+name|FOODMART
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+name|plan
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|druidChecker
+argument_list|(
+literal|"{'queryType':'timeseries','dataSource':'foodmart','descending':false,'granularity':'all',"
+operator|+
+literal|"'filter':{'type':'or','fields':[{'type':'bound','dimension':'customer_id','lower':'1.0',"
+operator|+
+literal|"'lowerStrict':false,'ordering':'numeric'},{'type':'bound','dimension':'customer_id',"
+operator|+
+literal|"'upper':'1.0','upperStrict':false,'ordering':'numeric'}]},"
+operator|+
+literal|"'aggregations':[{'type':'doubleSum','name':'A','fieldName':'store_cost'}],"
+operator|+
+literal|"'intervals':['1900-01-09T00:00:00.000/2992-01-10T00:00:00.000'],"
+operator|+
+literal|"'context':{'skipEmptyBuckets':true}}"
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
 block|}
 end_class
 
