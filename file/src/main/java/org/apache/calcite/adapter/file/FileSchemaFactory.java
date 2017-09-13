@@ -104,7 +104,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Factory that creates a {@link FileSchema}.  *  *<p>Allows a custom schema to be included in a model.json file.  * See<a href="http://calcite.apache.org/docs/file.html">File adapter</a>.  */
+comment|/**  * Factory that creates a {@link FileSchema}.  *  *<p>Allows a custom schema to be included in a model.json file.  * See<a href="http://calcite.apache.org/docs/file_adapter.html">File adapter</a>.  */
 end_comment
 
 begin_class
