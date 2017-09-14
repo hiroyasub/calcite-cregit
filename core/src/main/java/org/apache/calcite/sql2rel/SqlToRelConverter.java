@@ -12130,7 +12130,7 @@ name|rel
 init|=
 name|factory
 operator|.
-name|createMatchRecognize
+name|createMatch
 argument_list|(
 name|input
 argument_list|,

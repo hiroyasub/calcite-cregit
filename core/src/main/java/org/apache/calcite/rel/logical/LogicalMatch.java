@@ -177,16 +177,6 @@ name|SortedSet
 import|;
 end_import
 
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|TreeSet
-import|;
-end_import
-
 begin_comment
 comment|/**  * Sub-class of {@link Match}  * not targeted at any particular engine or calling convention.  */
 end_comment
@@ -349,7 +339,9 @@ name|Map
 argument_list|<
 name|String
 argument_list|,
-name|TreeSet
+name|?
+extends|extends
+name|SortedSet
 argument_list|<
 name|String
 argument_list|>

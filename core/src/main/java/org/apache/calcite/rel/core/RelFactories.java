@@ -473,7 +473,7 @@ name|java
 operator|.
 name|util
 operator|.
-name|TreeSet
+name|SortedSet
 import|;
 end_import
 
@@ -1523,7 +1523,7 @@ name|MatchFactory
 block|{
 comment|/** Creates a {@link Match}. */
 name|RelNode
-name|createMatchRecognize
+name|createMatch
 parameter_list|(
 name|RelNode
 name|input
@@ -1563,7 +1563,9 @@ name|Map
 argument_list|<
 name|String
 argument_list|,
-name|TreeSet
+name|?
+extends|extends
+name|SortedSet
 argument_list|<
 name|String
 argument_list|>
@@ -1597,7 +1599,7 @@ name|MatchFactory
 block|{
 specifier|public
 name|RelNode
-name|createMatchRecognize
+name|createMatch
 parameter_list|(
 name|RelNode
 name|input
@@ -1637,7 +1639,9 @@ name|Map
 argument_list|<
 name|String
 argument_list|,
-name|TreeSet
+name|?
+extends|extends
+name|SortedSet
 argument_list|<
 name|String
 argument_list|>
