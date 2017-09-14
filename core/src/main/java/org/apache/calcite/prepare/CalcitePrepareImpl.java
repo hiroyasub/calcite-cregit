@@ -7095,10 +7095,6 @@ name|RelDataType
 name|resultType
 parameter_list|)
 block|{
-name|queryString
-operator|=
-literal|null
-expr_stmt|;
 name|Class
 name|runtimeContextClass
 init|=

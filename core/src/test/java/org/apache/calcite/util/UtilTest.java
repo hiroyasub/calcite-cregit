@@ -241,7 +241,9 @@ name|calcite
 operator|.
 name|sql
 operator|.
-name|SqlDialect
+name|dialect
+operator|.
+name|CalciteSqlDialect
 import|;
 end_import
 
@@ -4059,9 +4061,9 @@ init|=
 operator|new
 name|SqlBuilder
 argument_list|(
-name|SqlDialect
+name|CalciteSqlDialect
 operator|.
-name|CALCITE
+name|DEFAULT
 argument_list|)
 decl_stmt|;
 name|assertEquals
@@ -4145,9 +4147,9 @@ argument_list|()
 decl_stmt|;
 name|assertEquals
 argument_list|(
-name|SqlDialect
+name|CalciteSqlDialect
 operator|.
-name|CALCITE
+name|DEFAULT
 argument_list|,
 name|sqlString
 operator|.

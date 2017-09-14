@@ -103,7 +103,7 @@ name|calcite
 operator|.
 name|sql
 operator|.
-name|SqlDialect
+name|SqlLiteral
 import|;
 end_import
 
@@ -117,7 +117,9 @@ name|calcite
 operator|.
 name|sql
 operator|.
-name|SqlLiteral
+name|dialect
+operator|.
+name|AnsiSqlDialect
 import|;
 end_import
 
@@ -1051,9 +1053,9 @@ name|literal
 operator|.
 name|toSqlString
 argument_list|(
-name|SqlDialect
+name|AnsiSqlDialect
 operator|.
-name|DUMMY
+name|DEFAULT
 argument_list|)
 argument_list|)
 expr_stmt|;

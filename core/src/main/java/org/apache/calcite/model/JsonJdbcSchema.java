@@ -31,6 +31,11 @@ specifier|public
 name|String
 name|jdbcDriver
 decl_stmt|;
+comment|/** The FQN of the {@link org.apache.calcite.sql.SqlDialectFactory} implementation.    *    *<p>Optional. If not specified, uses whichever class the JDBC    * {@link java.sql.DriverManager} chooses.    */
+specifier|public
+name|String
+name|sqlDialectFactory
+decl_stmt|;
 comment|/** JDBC connect string, for example "jdbc:mysql://localhost/foodmart".    *    *<p>Optional.    */
 specifier|public
 name|String

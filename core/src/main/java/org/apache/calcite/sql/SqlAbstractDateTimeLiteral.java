@@ -98,6 +98,7 @@ comment|/**  * A SQL literal representing a DATE, TIME or TIMESTAMP value.  *  *
 end_comment
 
 begin_class
+specifier|public
 specifier|abstract
 class|class
 name|SqlAbstractDateTimeLiteral

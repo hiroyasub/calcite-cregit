@@ -43,6 +43,20 @@ name|calcite
 operator|.
 name|sql
 operator|.
+name|SqlAbstractDateTimeLiteral
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
 name|SqlCall
 import|;
 end_import
@@ -178,29 +192,41 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Defines how a SQL parse tree should be unparsed to SQL  * for execution against a Microsoft SQL Server database.  *  *<p>It reverts to the unparse method of the operator  * if this database's implementation is standard.  */
+comment|/**  * A<code>SqlDialect</code> implementation for the Microsoft SQL Server  * database.  */
 end_comment
 
 begin_class
 specifier|public
 class|class
-name|MssqlHandler
+name|MssqlSqlDialect
 extends|extends
 name|SqlDialect
-operator|.
-name|BaseHandler
 block|{
 specifier|public
 specifier|static
 specifier|final
-name|MssqlHandler
-name|INSTANCE
+name|SqlDialect
+name|DEFAULT
 init|=
 operator|new
-name|MssqlHandler
-argument_list|()
+name|MssqlSqlDialect
+argument_list|(
+name|EMPTY_CONTEXT
+operator|.
+name|withDatabaseProduct
+argument_list|(
+name|DatabaseProduct
+operator|.
+name|MSSQL
+argument_list|)
+operator|.
+name|withIdentifierQuoteString
+argument_list|(
+literal|"["
+argument_list|)
+argument_list|)
 decl_stmt|;
-specifier|public
+specifier|private
 specifier|static
 specifier|final
 name|SqlFunction
@@ -228,6 +254,54 @@ operator|.
 name|STRING
 argument_list|)
 decl_stmt|;
+comment|/** Creates a MssqlSqlDialect. */
+specifier|public
+name|MssqlSqlDialect
+parameter_list|(
+name|Context
+name|context
+parameter_list|)
+block|{
+name|super
+argument_list|(
+name|context
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Override
+specifier|public
+name|void
+name|unparseDateTimeLiteral
+parameter_list|(
+name|SqlWriter
+name|writer
+parameter_list|,
+name|SqlAbstractDateTimeLiteral
+name|literal
+parameter_list|,
+name|int
+name|leftPrec
+parameter_list|,
+name|int
+name|rightPrec
+parameter_list|)
+block|{
+name|writer
+operator|.
+name|literal
+argument_list|(
+literal|"'"
+operator|+
+name|literal
+operator|.
+name|toFormattedString
+argument_list|()
+operator|+
+literal|"'"
+argument_list|)
+expr_stmt|;
+block|}
 annotation|@
 name|Override
 specifier|public
@@ -657,7 +731,7 @@ block|}
 end_class
 
 begin_comment
-comment|// End MssqlHandler.java
+comment|// End MssqlSqlDialect.java
 end_comment
 
 end_unit

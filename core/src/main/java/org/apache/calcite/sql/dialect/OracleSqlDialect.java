@@ -152,28 +152,76 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Defines how a SQL parse tree should be unparsed to SQL  * for execution against an Oracle database.  *  *<p>It reverts to the unparse method of the operator  * if this database's implementation is standard.  */
+comment|/**  * A<code>SqlDialect</code> implementation for the Oracle database.  */
 end_comment
 
 begin_class
 specifier|public
 class|class
-name|OracleHandler
+name|OracleSqlDialect
 extends|extends
 name|SqlDialect
-operator|.
-name|BaseHandler
 block|{
 specifier|public
 specifier|static
 specifier|final
-name|OracleHandler
-name|INSTANCE
+name|SqlDialect
+name|DEFAULT
 init|=
 operator|new
-name|OracleHandler
-argument_list|()
+name|OracleSqlDialect
+argument_list|(
+name|EMPTY_CONTEXT
+operator|.
+name|withDatabaseProduct
+argument_list|(
+name|DatabaseProduct
+operator|.
+name|ORACLE
+argument_list|)
+operator|.
+name|withIdentifierQuoteString
+argument_list|(
+literal|"\""
+argument_list|)
+argument_list|)
 decl_stmt|;
+comment|/** Creates an OracleSqlDialect. */
+specifier|public
+name|OracleSqlDialect
+parameter_list|(
+name|Context
+name|context
+parameter_list|)
+block|{
+name|super
+argument_list|(
+name|context
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Override
+specifier|public
+name|boolean
+name|supportsCharSet
+parameter_list|()
+block|{
+return|return
+literal|false
+return|;
+block|}
+annotation|@
+name|Override
+specifier|protected
+name|boolean
+name|allowsAs
+parameter_list|()
+block|{
+return|return
+literal|false
+return|;
+block|}
 annotation|@
 name|Override
 specifier|public
@@ -336,7 +384,7 @@ block|}
 end_class
 
 begin_comment
-comment|// End OracleHandler.java
+comment|// End OracleSqlDialect.java
 end_comment
 
 end_unit

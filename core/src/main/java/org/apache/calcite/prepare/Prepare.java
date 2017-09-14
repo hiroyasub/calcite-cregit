@@ -868,12 +868,6 @@ specifier|final
 name|CatalogReader
 name|catalogReader
 decl_stmt|;
-specifier|protected
-name|String
-name|queryString
-init|=
-literal|null
-decl_stmt|;
 comment|/**    * Convention via which results should be returned by execution.    */
 specifier|protected
 specifier|final
@@ -1517,13 +1511,6 @@ name|boolean
 name|needsValidation
 parameter_list|)
 block|{
-name|queryString
-operator|=
-name|sqlQuery
-operator|.
-name|toString
-argument_list|()
-expr_stmt|;
 name|init
 argument_list|(
 name|runtimeContextClass

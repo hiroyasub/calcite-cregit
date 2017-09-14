@@ -481,7 +481,7 @@ name|calcite
 operator|.
 name|sql
 operator|.
-name|SqlDialect
+name|SqlNode
 import|;
 end_import
 
@@ -495,7 +495,9 @@ name|calcite
 operator|.
 name|sql
 operator|.
-name|SqlNode
+name|dialect
+operator|.
+name|CalciteSqlDialect
 import|;
 end_import
 
@@ -2275,9 +2277,9 @@ block|}
 argument_list|,
 literal|"values ("
 operator|+
-name|SqlDialect
+name|CalciteSqlDialect
 operator|.
-name|CALCITE
+name|DEFAULT
 operator|.
 name|quoteStringLiteral
 argument_list|(
@@ -2398,9 +2400,9 @@ block|}
 argument_list|,
 literal|"values "
 operator|+
-name|SqlDialect
+name|CalciteSqlDialect
 operator|.
-name|CALCITE
+name|DEFAULT
 operator|.
 name|quoteStringLiteral
 argument_list|(
@@ -2412,9 +2414,9 @@ argument_list|)
 operator|+
 literal|", "
 operator|+
-name|SqlDialect
+name|CalciteSqlDialect
 operator|.
-name|CALCITE
+name|DEFAULT
 operator|.
 name|quoteStringLiteral
 argument_list|(

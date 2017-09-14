@@ -15,6 +15,22 @@ name|sql
 package|;
 end_package
 
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|dialect
+operator|.
+name|CalciteSqlDialect
+import|;
+end_import
+
 begin_comment
 comment|/**  * Specification of a SQL sample.  *  *<p>For example, the query</p>  *  *<blockquote>  *<pre>SELECT *  * FROM emp TABLESAMPLE SUBSTITUTE('medium')</pre>  *</blockquote>  *  *<p>declares a sample which is created using {@link #createNamed}.</p>  *  *<p>A sample is not a {@link SqlNode}. To include it in a parse tree, wrap it  * as a literal, viz:  * {@link SqlLiteral#createSample(SqlSampleSpec, org.apache.calcite.sql.parser.SqlParserPos)}.  */
 end_comment
@@ -146,9 +162,9 @@ block|{
 return|return
 literal|"SUBSTITUTE("
 operator|+
-name|SqlDialect
+name|CalciteSqlDialect
 operator|.
-name|CALCITE
+name|DEFAULT
 operator|.
 name|quoteStringLiteral
 argument_list|(
