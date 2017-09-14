@@ -4994,13 +4994,11 @@ name|explain
 init|=
 literal|"DruidQuery(table=[[foodmart, foodmart]], "
 operator|+
-literal|"intervals=[[1900-01-09T00:00:00.000/2992-01-10T00:00:00.000]], filter=[AND(="
+literal|"intervals=[[1900-01-09T00:00:00.000/2992-01-10T00:00:00.000]], "
 operator|+
-literal|"(EXTRACT_DATE(FLAG(YEAR), /INT(CAST(Reinterpret($0)):TIMESTAMP(0), 86400000)), 1997), OR(=(EXTRACT_DATE"
+literal|"filter=[AND(=(EXTRACT(FLAG(YEAR), $0), 1997), OR(=(EXTRACT(FLAG(MONTH), $0), 4), "
 operator|+
-literal|"(FLAG(MONTH), /INT(CAST(Reinterpret($0)):TIMESTAMP(0), 86400000)), 4), =(EXTRACT_DATE(FLAG(MONTH), "
-operator|+
-literal|"/INT(CAST(Reinterpret($0)):TIMESTAMP(0), 86400000)), 6)))], groups=[{}], aggs=[[COUNT()]])"
+literal|"=(EXTRACT(FLAG(MONTH), $0), 6)))], groups=[{}], aggs=[[COUNT()]])"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -5614,13 +5612,11 @@ literal|"PLAN=EnumerableInterpreter\n"
 operator|+
 literal|"  DruidQuery(table=[[foodmart, foodmart]], "
 operator|+
-literal|"intervals=[[1997-01-01T00:00:00.001/1997-01-20T00:00:00.000]], filter=[=($1, 1016)"
+literal|"intervals=[[1997-01-01T00:00:00.001/1997-01-20T00:00:00.000]], "
 operator|+
-literal|"], projects=[[EXTRACT_DATE(FLAG(DAY), /INT(CAST(Reinterpret($0)):TIMESTAMP(0), 86400000)), "
+literal|"filter=[=($1, 1016)], projects=[[EXTRACT(FLAG(DAY), $0), EXTRACT(FLAG(MONTH), $0), "
 operator|+
-literal|"EXTRACT_DATE(FLAG(MONTH), /INT(CAST(Reinterpret($0)):TIMESTAMP(0), 86400000)), EXTRACT_DATE(FLAG"
-operator|+
-literal|"(YEAR), /INT(CAST(Reinterpret($0)):TIMESTAMP(0), 86400000)), $1]], groups=[{0, 1, 2, 3}], aggs=[[]])\n"
+literal|"EXTRACT(FLAG(YEAR), $0), $1]], groups=[{0, 1, 2, 3}], aggs=[[]])\n"
 argument_list|)
 operator|.
 name|returnsUnordered
@@ -5704,13 +5700,11 @@ literal|"PLAN=EnumerableInterpreter\n"
 operator|+
 literal|"  DruidQuery(table=[[foodmart, foodmart]], "
 operator|+
-literal|"intervals=[[1997-01-01T00:00:00.001/1997-01-20T00:00:00.000]], filter=[=($1, 1016)"
+literal|"intervals=[[1997-01-01T00:00:00.001/1997-01-20T00:00:00.000]], "
 operator|+
-literal|"], projects=[[EXTRACT_DATE(FLAG(DAY), /INT(CAST(Reinterpret($0)):TIMESTAMP(0), 86400000)), "
+literal|"filter=[=($1, 1016)], projects=[[EXTRACT(FLAG(DAY), $0), EXTRACT(FLAG(MONTH), $0), "
 operator|+
-literal|"EXTRACT_DATE(FLAG(MONTH), /INT(CAST(Reinterpret($0)):TIMESTAMP(0), 86400000)), EXTRACT_DATE(FLAG"
-operator|+
-literal|"(YEAR), /INT(CAST(Reinterpret($0)):TIMESTAMP(0), 86400000)), $1]], groups=[{0, 1, 2, 3}], aggs=[[]])\n"
+literal|"EXTRACT(FLAG(YEAR), $0), $1]], groups=[{0, 1, 2, 3}], aggs=[[]])\n"
 argument_list|)
 operator|.
 name|returnsUnordered
@@ -5776,9 +5770,9 @@ literal|"PLAN=EnumerableInterpreter\n"
 operator|+
 literal|"  DruidQuery(table=[[foodmart, foodmart]], "
 operator|+
-literal|"intervals=[[1997-01-01T00:00:00.001/1997-01-20T00:00:00.000]], filter=[=($1, 1016)], "
+literal|"intervals=[[1997-01-01T00:00:00.001/1997-01-20T00:00:00.000]], "
 operator|+
-literal|"projects=[[EXTRACT_DATE(FLAG(DAY), /INT(CAST(Reinterpret($0)):TIMESTAMP(0), 86400000)), $1]], "
+literal|"filter=[=($1, 1016)], projects=[[EXTRACT(FLAG(DAY), $0), $1]], "
 operator|+
 literal|"groups=[{0, 1}], aggs=[[]])\n"
 argument_list|)
@@ -5853,13 +5847,13 @@ literal|"PLAN=EnumerableInterpreter\n"
 operator|+
 literal|"  DruidQuery(table=[[foodmart, foodmart]], "
 operator|+
-literal|"intervals=[[1900-01-09T00:00:00.000/2992-01-10T00:00:00.000]], filter=[AND(>=(CAST"
+literal|"intervals=[[1900-01-09T00:00:00.000/2992-01-10T00:00:00.000]], "
 operator|+
-literal|"($11):BIGINT, 8),<=(CAST($11):BIGINT, 10),<(CAST($10):BIGINT, 15), =(EXTRACT_DATE"
+literal|"filter=[AND(>=(CAST($11):BIGINT, 8),<=(CAST($11):BIGINT, 10), "
 operator|+
-literal|"(FLAG(YEAR), /INT(CAST(Reinterpret($0)):TIMESTAMP(0), 86400000)), 1997))], groups=[{}], "
+literal|"<(CAST($10):BIGINT, 15), =(EXTRACT(FLAG(YEAR), $0), 1997))], groups=[{}], "
 operator|+
-literal|"aggs=[[SUM($90)]])"
+literal|"aggs=[[SUM($90)]])\n"
 argument_list|)
 operator|.
 name|queryContains
@@ -6246,13 +6240,13 @@ literal|"PLAN=EnumerableInterpreter\n"
 operator|+
 literal|"  DruidQuery(table=[[foodmart, foodmart]], "
 operator|+
-literal|"intervals=[[1900-01-09T00:00:00.000/2992-01-10T00:00:00.000]], filter=[>=(CAST($1)"
+literal|"intervals=[[1900-01-09T00:00:00.000/2992-01-10T00:00:00.000]], "
 operator|+
-literal|":BIGINT, 1558)], projects=[[EXTRACT_DATE(FLAG(MONTH), /INT(CAST(Reinterpret($0)):TIMESTAMP(0), "
+literal|"filter=[>=(CAST($1):BIGINT, 1558)], projects=[[EXTRACT(FLAG(MONTH), $0), $1, $89]], "
 operator|+
-literal|"86400000)), $1, $89]], groups=[{0, 1}], aggs=[[SUM($2)]], sort0=[0], sort1=[2], "
+literal|"groups=[{0, 1}], aggs=[[SUM($2)]], sort0=[0], sort1=[2], sort2=[1], "
 operator|+
-literal|"sort2=[1], dir0=[ASC], dir1=[ASC], dir2=[ASC])"
+literal|"dir0=[ASC], dir1=[ASC], dir2=[ASC])"
 argument_list|)
 expr_stmt|;
 block|}
@@ -6393,13 +6387,13 @@ literal|"PLAN=EnumerableInterpreter\n"
 operator|+
 literal|"  DruidQuery(table=[[foodmart, foodmart]], "
 operator|+
-literal|"intervals=[[1900-01-09T00:00:00.000/2992-01-10T00:00:00.000]], filter=[>=(CAST($1)"
+literal|"intervals=[[1900-01-09T00:00:00.000/2992-01-10T00:00:00.000]], "
 operator|+
-literal|":BIGINT, 1558)], projects=[[EXTRACT_DATE(FLAG(YEAR), /INT(CAST(Reinterpret($0)):TIMESTAMP(0), 86400000)),"
+literal|"filter=[>=(CAST($1):BIGINT, 1558)], projects=[[EXTRACT(FLAG(YEAR), $0), "
 operator|+
-literal|" EXTRACT_DATE(FLAG(MONTH), /INT(CAST(Reinterpret($0)):TIMESTAMP(0), 86400000)), $1, $89]], groups=[{0, 1,"
+literal|"EXTRACT(FLAG(MONTH), $0), $1, $89]], groups=[{0, 1, 2}], aggs=[[SUM($3)]], sort0=[0], "
 operator|+
-literal|" 2}], aggs=[[SUM($3)]], sort0=[0], sort1=[1], sort2=[3], sort3=[2], dir0=[DESC], "
+literal|"sort1=[1], sort2=[3], sort3=[2], dir0=[DESC], "
 operator|+
 literal|"dir1=[ASC], dir2=[DESC], dir3=[ASC], fetch=[3])"
 decl_stmt|;
@@ -6499,15 +6493,13 @@ literal|"PLAN=EnumerableInterpreter\n"
 operator|+
 literal|"  DruidQuery(table=[[foodmart, foodmart]], "
 operator|+
-literal|"intervals=[[1900-01-09T00:00:00.000/2992-01-10T00:00:00.000]], filter=[>=(CAST($1)"
+literal|"intervals=[[1900-01-09T00:00:00.000/2992-01-10T00:00:00.000]], "
 operator|+
-literal|":BIGINT, 1558)], projects=[[EXTRACT_DATE(FLAG(YEAR), /INT(CAST(Reinterpret($0)):TIMESTAMP(0), 86400000)),"
+literal|"filter=[>=(CAST($1):BIGINT, 1558)], projects=[[EXTRACT(FLAG(YEAR), $0), "
 operator|+
-literal|" EXTRACT_DATE(FLAG(MONTH), /INT(CAST(Reinterpret($0)):TIMESTAMP(0), 86400000)), $1, $89]], groups=[{0, 1,"
+literal|"EXTRACT(FLAG(MONTH), $0), $1, $89]], groups=[{0, 1, 2}], aggs=[[SUM($3)]], "
 operator|+
-literal|" 2}], aggs=[[SUM($3)]], sort0=[3], sort1=[1], sort2=[2], dir0=[DESC], dir1=[DESC], "
-operator|+
-literal|"dir2=[ASC], fetch=[3])"
+literal|"sort0=[3], sort1=[1], sort2=[2], dir0=[DESC], dir1=[DESC], dir2=[ASC], fetch=[3])"
 decl_stmt|;
 specifier|final
 name|String
@@ -6912,13 +6904,13 @@ literal|"PLAN=EnumerableInterpreter\n"
 operator|+
 literal|"  BindableAggregate(group=[{0}])\n"
 operator|+
-literal|"    BindableProject(EXPR$0=[EXTRACT_DATE(FLAG(CENTURY), /INT(CAST(Reinterpret($0)):TIMESTAMP(0), 86400000))])\n"
+literal|"    BindableProject(EXPR$0=[EXTRACT(FLAG(CENTURY), $0)])\n"
 operator|+
 literal|"      DruidQuery(table=[[foodmart, foodmart]], "
 operator|+
-literal|"intervals=[[1900-01-09T00:00:00.000/2992-01-10T00:00:00.000]], filter=[=($1, 1558)], "
+literal|"intervals=[[1900-01-09T00:00:00.000/2992-01-10T00:00:00.000]], "
 operator|+
-literal|"projects=[[$0]])"
+literal|"filter=[=($1, 1558)], projects=[[$0]])\n"
 decl_stmt|;
 name|sql
 argument_list|(

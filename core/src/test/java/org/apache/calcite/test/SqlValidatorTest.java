@@ -25102,8 +25102,6 @@ literal|"\n"
 operator|+
 literal|"$throw -\n"
 operator|+
-literal|"EXTRACT_DATE -\n"
-operator|+
 literal|"FILTER left\n"
 operator|+
 literal|"Reinterpret -\n"

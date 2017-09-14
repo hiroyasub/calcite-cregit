@@ -353,7 +353,7 @@ name|e
 argument_list|,
 name|is
 argument_list|(
-literal|"AND(>=($8, 2014-01-01),<($8, 2015-01-01))"
+literal|"AND(>=($9, 2014-01-01),<($9, 2015-01-01))"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -379,7 +379,7 @@ argument_list|)
 argument_list|,
 name|is
 argument_list|(
-literal|"AND(>=($8, 2014-01-01),<($8, 2015-01-01))"
+literal|"AND(>=($9, 2014-01-01),<($9, 2015-01-01))"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -405,7 +405,7 @@ argument_list|)
 argument_list|,
 name|is
 argument_list|(
-literal|">=($8, 2014-01-01)"
+literal|">=($9, 2014-01-01)"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -431,7 +431,7 @@ argument_list|)
 argument_list|,
 name|is
 argument_list|(
-literal|">=($8, 2015-01-01)"
+literal|">=($9, 2015-01-01)"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -457,7 +457,7 @@ argument_list|)
 argument_list|,
 name|is
 argument_list|(
-literal|"<($8, 2014-01-01)"
+literal|"<($9, 2014-01-01)"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -483,7 +483,7 @@ argument_list|)
 argument_list|,
 name|is
 argument_list|(
-literal|"<($8, 2015-01-01)"
+literal|"<($9, 2015-01-01)"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -509,7 +509,7 @@ argument_list|)
 argument_list|,
 name|is
 argument_list|(
-literal|"<>(EXTRACT_DATE(FLAG(YEAR), $8), 2014)"
+literal|"<>(EXTRACT(FLAG(YEAR), $9), 2014)"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -539,7 +539,7 @@ name|eq
 argument_list|(
 name|f
 operator|.
-name|exYearTs
+name|exYear
 argument_list|,
 name|f
 operator|.
@@ -565,7 +565,7 @@ name|ge
 argument_list|(
 name|f
 operator|.
-name|exYearTs
+name|exYear
 argument_list|,
 name|f
 operator|.
@@ -591,7 +591,7 @@ name|gt
 argument_list|(
 name|f
 operator|.
-name|exYearTs
+name|exYear
 argument_list|,
 name|f
 operator|.
@@ -617,7 +617,7 @@ name|lt
 argument_list|(
 name|f
 operator|.
-name|exYearTs
+name|exYear
 argument_list|,
 name|f
 operator|.
@@ -643,7 +643,7 @@ name|le
 argument_list|(
 name|f
 operator|.
-name|exYearTs
+name|exYear
 argument_list|,
 name|f
 operator|.
@@ -669,7 +669,7 @@ name|ne
 argument_list|(
 name|f
 operator|.
-name|exYearTs
+name|exYear
 argument_list|,
 name|f
 operator|.
@@ -744,16 +744,16 @@ argument_list|)
 argument_list|,
 name|is
 argument_list|(
-literal|"AND(AND(>=($8, 2014-01-01),<($8, 2015-01-01)),"
+literal|"AND(AND(>=($9, 2014-01-01),<($9, 2015-01-01)),"
 operator|+
-literal|" AND(>=($8, 2014-06-01),<($8, 2014-07-01)))"
+literal|" AND(>=($9, 2014-06-01),<($9, 2014-07-01)))"
 argument_list|)
 argument_list|,
 name|is
 argument_list|(
-literal|"AND(>=($8, 2014-01-01),<($8, 2015-01-01),"
+literal|"AND(>=($9, 2014-01-01),<($9, 2015-01-01),"
 operator|+
-literal|">=($8, 2014-06-01),<($8, 2014-07-01))"
+literal|">=($9, 2014-06-01),<($9, 2014-07-01))"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -780,29 +780,29 @@ name|s1
 init|=
 literal|"AND("
 operator|+
-literal|"AND(>=($8, 2000-01-01),<($8, 2001-01-01)),"
+literal|"AND(>=($9, 2000-01-01),<($9, 2001-01-01)),"
 operator|+
 literal|" OR("
 operator|+
-literal|"AND(>=($8, 2000-02-01),<($8, 2000-03-01)), "
+literal|"AND(>=($9, 2000-02-01),<($9, 2000-03-01)), "
 operator|+
-literal|"AND(>=($8, 2000-03-01),<($8, 2000-04-01)), "
+literal|"AND(>=($9, 2000-03-01),<($9, 2000-04-01)), "
 operator|+
-literal|"AND(>=($8, 2000-05-01),<($8, 2000-06-01))))"
+literal|"AND(>=($9, 2000-05-01),<($9, 2000-06-01))))"
 decl_stmt|;
 specifier|final
 name|String
 name|s2
 init|=
-literal|"AND(>=($8, 2000-01-01),<($8, 2001-01-01),"
+literal|"AND(>=($9, 2000-01-01),<($9, 2001-01-01),"
 operator|+
 literal|" OR("
 operator|+
-literal|"AND(>=($8, 2000-02-01),<($8, 2000-03-01)), "
+literal|"AND(>=($9, 2000-02-01),<($9, 2000-03-01)), "
 operator|+
-literal|"AND(>=($8, 2000-03-01),<($8, 2000-04-01)), "
+literal|"AND(>=($9, 2000-03-01),<($9, 2000-04-01)), "
 operator|+
-literal|"AND(>=($8, 2000-05-01),<($8, 2000-06-01))))"
+literal|"AND(>=($9, 2000-05-01),<($9, 2000-06-01))))"
 decl_stmt|;
 specifier|final
 name|RexNode
@@ -958,21 +958,21 @@ argument_list|)
 argument_list|,
 name|is
 argument_list|(
-literal|"AND(AND(>=($8, 2010-01-01),<($8, 2011-01-01)),"
+literal|"AND(AND(>=($9, 2010-01-01),<($9, 2011-01-01)),"
 operator|+
-literal|" OR(AND(>=($8, 2010-01-31),<($8, 2010-02-01)),"
+literal|" OR(AND(>=($9, 2010-01-31),<($9, 2010-02-01)),"
 operator|+
-literal|" AND(>=($8, 2010-03-31),<($8, 2010-04-01)),"
+literal|" AND(>=($9, 2010-03-31),<($9, 2010-04-01)),"
 operator|+
-literal|" AND(>=($8, 2010-05-31),<($8, 2010-06-01)),"
+literal|" AND(>=($9, 2010-05-31),<($9, 2010-06-01)),"
 operator|+
-literal|" AND(>=($8, 2010-07-31),<($8, 2010-08-01)),"
+literal|" AND(>=($9, 2010-07-31),<($9, 2010-08-01)),"
 operator|+
-literal|" AND(>=($8, 2010-08-31),<($8, 2010-09-01)),"
+literal|" AND(>=($9, 2010-08-31),<($9, 2010-09-01)),"
 operator|+
-literal|" AND(>=($8, 2010-10-31),<($8, 2010-11-01)),"
+literal|" AND(>=($9, 2010-10-31),<($9, 2010-11-01)),"
 operator|+
-literal|" AND(>=($8, 2010-12-31),<($8, 2011-01-01))))"
+literal|" AND(>=($9, 2010-12-31),<($9, 2011-01-01))))"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -996,7 +996,7 @@ comment|// The following condition finds the 2 leap days between 2010 and 2020,
 comment|// namely 29th February 2012 and 2016.
 comment|//
 comment|// Currently there are redundant conditions, e.g.
-comment|// "AND(>=($8, 2011-01-01),<($8, 2020-01-01))". We should remove them by
+comment|// "AND(>=($9, 2011-01-01),<($9, 2020-01-01))". We should remove them by
 comment|// folding intervals.
 name|checkDateRange
 argument_list|(
@@ -1073,31 +1073,31 @@ argument_list|)
 argument_list|,
 name|is
 argument_list|(
-literal|"AND(>=($8, 2011-01-01),"
+literal|"AND(>=($9, 2011-01-01),"
 operator|+
-literal|" AND(>=($8, 2011-01-01),<($8, 2020-01-01)),"
+literal|" AND(>=($9, 2011-01-01),<($9, 2020-01-01)),"
 operator|+
-literal|" OR(AND(>=($8, 2011-02-01),<($8, 2011-03-01)),"
+literal|" OR(AND(>=($9, 2011-02-01),<($9, 2011-03-01)),"
 operator|+
-literal|" AND(>=($8, 2012-02-01),<($8, 2012-03-01)),"
+literal|" AND(>=($9, 2012-02-01),<($9, 2012-03-01)),"
 operator|+
-literal|" AND(>=($8, 2013-02-01),<($8, 2013-03-01)),"
+literal|" AND(>=($9, 2013-02-01),<($9, 2013-03-01)),"
 operator|+
-literal|" AND(>=($8, 2014-02-01),<($8, 2014-03-01)),"
+literal|" AND(>=($9, 2014-02-01),<($9, 2014-03-01)),"
 operator|+
-literal|" AND(>=($8, 2015-02-01),<($8, 2015-03-01)),"
+literal|" AND(>=($9, 2015-02-01),<($9, 2015-03-01)),"
 operator|+
-literal|" AND(>=($8, 2016-02-01),<($8, 2016-03-01)),"
+literal|" AND(>=($9, 2016-02-01),<($9, 2016-03-01)),"
 operator|+
-literal|" AND(>=($8, 2017-02-01),<($8, 2017-03-01)),"
+literal|" AND(>=($9, 2017-02-01),<($9, 2017-03-01)),"
 operator|+
-literal|" AND(>=($8, 2018-02-01),<($8, 2018-03-01)),"
+literal|" AND(>=($9, 2018-02-01),<($9, 2018-03-01)),"
 operator|+
-literal|" AND(>=($8, 2019-02-01),<($8, 2019-03-01))),"
+literal|" AND(>=($9, 2019-02-01),<($9, 2019-03-01))),"
 operator|+
-literal|" OR(AND(>=($8, 2012-02-29),<($8, 2012-03-01)),"
+literal|" OR(AND(>=($9, 2012-02-29),<($9, 2012-03-01)),"
 operator|+
-literal|" AND(>=($8, 2016-02-29),<($8, 2016-03-01))))"
+literal|" AND(>=($9, 2016-02-29),<($9, 2016-03-01))))"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -1131,7 +1131,7 @@ name|gt
 argument_list|(
 name|f
 operator|.
-name|exYearTs
+name|exYear
 argument_list|,
 name|f
 operator|.
@@ -1147,7 +1147,7 @@ name|lt
 argument_list|(
 name|f
 operator|.
-name|exYearTs
+name|exYear
 argument_list|,
 name|f
 operator|.
@@ -1163,7 +1163,7 @@ name|eq
 argument_list|(
 name|f
 operator|.
-name|exMonthTs
+name|exMonth
 argument_list|,
 name|f
 operator|.
@@ -1179,7 +1179,7 @@ name|eq
 argument_list|(
 name|f
 operator|.
-name|exDayTs
+name|exDay
 argument_list|,
 name|f
 operator|.
@@ -1432,21 +1432,6 @@ specifier|final
 name|RexNode
 name|exDay
 decl_stmt|;
-specifier|private
-specifier|final
-name|RexNode
-name|exYearTs
-decl_stmt|;
-specifier|private
-specifier|final
-name|RexNode
-name|exMonthTs
-decl_stmt|;
-specifier|private
-specifier|final
-name|RexNode
-name|exDayTs
-decl_stmt|;
 name|Fixture2
 parameter_list|()
 block|{
@@ -1456,11 +1441,9 @@ name|rexBuilder
 operator|.
 name|makeCall
 argument_list|(
-name|intRelDataType
-argument_list|,
 name|SqlStdOperatorTable
 operator|.
-name|EXTRACT_DATE
+name|EXTRACT
 argument_list|,
 name|ImmutableList
 operator|.
@@ -1475,7 +1458,7 @@ operator|.
 name|YEAR
 argument_list|)
 argument_list|,
-name|dt
+name|ts
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -1489,7 +1472,7 @@ name|intRelDataType
 argument_list|,
 name|SqlStdOperatorTable
 operator|.
-name|EXTRACT_DATE
+name|EXTRACT
 argument_list|,
 name|ImmutableList
 operator|.
@@ -1504,96 +1487,11 @@ operator|.
 name|MONTH
 argument_list|)
 argument_list|,
-name|dt
+name|ts
 argument_list|)
 argument_list|)
 expr_stmt|;
 name|exDay
-operator|=
-name|rexBuilder
-operator|.
-name|makeCall
-argument_list|(
-name|intRelDataType
-argument_list|,
-name|SqlStdOperatorTable
-operator|.
-name|EXTRACT_DATE
-argument_list|,
-name|ImmutableList
-operator|.
-name|of
-argument_list|(
-name|rexBuilder
-operator|.
-name|makeFlag
-argument_list|(
-name|TimeUnitRange
-operator|.
-name|DAY
-argument_list|)
-argument_list|,
-name|dt
-argument_list|)
-argument_list|)
-expr_stmt|;
-name|exYearTs
-operator|=
-name|rexBuilder
-operator|.
-name|makeCall
-argument_list|(
-name|SqlStdOperatorTable
-operator|.
-name|EXTRACT
-argument_list|,
-name|ImmutableList
-operator|.
-name|of
-argument_list|(
-name|rexBuilder
-operator|.
-name|makeFlag
-argument_list|(
-name|TimeUnitRange
-operator|.
-name|YEAR
-argument_list|)
-argument_list|,
-name|ts
-argument_list|)
-argument_list|)
-expr_stmt|;
-name|exMonthTs
-operator|=
-name|rexBuilder
-operator|.
-name|makeCall
-argument_list|(
-name|intRelDataType
-argument_list|,
-name|SqlStdOperatorTable
-operator|.
-name|EXTRACT
-argument_list|,
-name|ImmutableList
-operator|.
-name|of
-argument_list|(
-name|rexBuilder
-operator|.
-name|makeFlag
-argument_list|(
-name|TimeUnitRange
-operator|.
-name|MONTH
-argument_list|)
-argument_list|,
-name|ts
-argument_list|)
-argument_list|)
-expr_stmt|;
-name|exDayTs
 operator|=
 name|rexBuilder
 operator|.
