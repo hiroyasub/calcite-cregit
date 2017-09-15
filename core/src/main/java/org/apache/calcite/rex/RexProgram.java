@@ -279,6 +279,20 @@ end_import
 
 begin_import
 import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|collect
+operator|.
+name|Ordering
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|io
@@ -2075,7 +2089,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/**    * Given a list of collations which hold for the input to this program,    * returns a list of collations which hold for its output. The result is    * mutable.    */
+comment|/**    * Given a list of collations which hold for the input to this program,    * returns a list of collations which hold for its output. The result is    * mutable and sorted.    */
 specifier|public
 name|List
 argument_list|<
@@ -2090,6 +2104,7 @@ argument_list|>
 name|inputCollations
 parameter_list|)
 block|{
+specifier|final
 name|List
 argument_list|<
 name|RelCollation
@@ -2099,9 +2114,7 @@ init|=
 operator|new
 name|ArrayList
 argument_list|<>
-argument_list|(
-literal|1
-argument_list|)
+argument_list|()
 decl_stmt|;
 name|deduceCollations
 argument_list|(
@@ -2121,7 +2134,7 @@ return|return
 name|outputCollations
 return|;
 block|}
-comment|/**    * Given a list of expressions and a description of which are ordered,    * computes a list of collations. The result is mutable.    */
+comment|/**    * Given a list of expressions and a description of which are ordered,    * populates a list of collations, sorted in natural order.    */
 specifier|public
 specifier|static
 name|void
@@ -2328,6 +2341,18 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+name|Collections
+operator|.
+name|sort
+argument_list|(
+name|outputCollations
+argument_list|,
+name|Ordering
+operator|.
+name|natural
+argument_list|()
+argument_list|)
+expr_stmt|;
 block|}
 comment|/**    * Returns whether the fields on the leading edge of the project list are    * the input fields.    *    * @param fail Whether to throw an assert failure if does not project    *             identity    */
 specifier|public

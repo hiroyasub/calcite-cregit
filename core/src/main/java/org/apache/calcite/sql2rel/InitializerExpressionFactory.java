@@ -67,6 +67,20 @@ name|apache
 operator|.
 name|calcite
 operator|.
+name|schema
+operator|.
+name|ColumnStrategy
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
 name|sql
 operator|.
 name|SqlFunction
@@ -93,9 +107,23 @@ interface|interface
 name|InitializerExpressionFactory
 block|{
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**    * Whether a column is always generated. If a column is always generated,    * then non-generated values cannot be inserted into the column.    */
+comment|/**    * Whether a column is always generated. If a column is always generated,    * then non-generated values cannot be inserted into the column.    *    * @see #generationStrategy(RelOptTable, int)    *    * @deprecated Use {@code c.generationStrategy(t, i) == VIRTUAL    * || c.generationStrategy(t, i) == STORED}    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 name|boolean
 name|isGeneratedAlways
+parameter_list|(
+name|RelOptTable
+name|table
+parameter_list|,
+name|int
+name|iColumn
+parameter_list|)
+function_decl|;
+comment|/**    * Returns how a column is populated.    *    * @param table   the table containing the column    * @param iColumn the 0-based offset of the column in the table    *    * @return generation strategy, never null    *    * @see RelOptTable#getColumnStrategies()    */
+name|ColumnStrategy
+name|generationStrategy
 parameter_list|(
 name|RelOptTable
 name|table

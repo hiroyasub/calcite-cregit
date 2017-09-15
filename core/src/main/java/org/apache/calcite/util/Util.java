@@ -1276,16 +1276,24 @@ block|}
 comment|/**    * Does nothing with its argument. Call this method when you have a value    * you are not interested in, but you don't want the compiler to warn that    * you are not using it.    */
 specifier|public
 specifier|static
-name|boolean
+name|void
 name|discard
 parameter_list|(
 name|boolean
 name|b
 parameter_list|)
 block|{
-return|return
+if|if
+condition|(
+literal|false
+condition|)
+block|{
+name|discard
+argument_list|(
 name|b
-return|;
+argument_list|)
+expr_stmt|;
+block|}
 block|}
 comment|/**    * Does nothing with its argument. Call this method when you have a value    * you are not interested in, but you don't want the compiler to warn that    * you are not using it.    */
 specifier|public

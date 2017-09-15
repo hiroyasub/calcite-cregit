@@ -413,6 +413,20 @@ name|calcite
 operator|.
 name|schema
 operator|.
+name|ColumnStrategy
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|schema
+operator|.
 name|ExtensibleTable
 import|;
 end_import
@@ -2346,6 +2360,11 @@ name|AbstractPreparingTable
 implements|implements
 name|PreparingTable
 block|{
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"deprecation"
+argument_list|)
 specifier|public
 name|boolean
 name|columnHasDefaultValue
@@ -2360,6 +2379,7 @@ name|InitializerContext
 name|initializerContext
 parameter_list|)
 block|{
+comment|// This method is no longer used
 specifier|final
 name|Table
 name|table
@@ -2635,6 +2655,25 @@ name|Table
 name|extendedTable
 parameter_list|)
 function_decl|;
+specifier|public
+name|List
+argument_list|<
+name|ColumnStrategy
+argument_list|>
+name|getColumnStrategies
+parameter_list|()
+block|{
+return|return
+name|RelOptTableImpl
+operator|.
+name|columnStrategies
+argument_list|(
+name|AbstractPreparingTable
+operator|.
+name|this
+argument_list|)
+return|;
+block|}
 block|}
 comment|/**    * PreparedExplanation is a PreparedResult for an EXPLAIN PLAN statement.    * It's always good to have an explanation prepared.    */
 specifier|public

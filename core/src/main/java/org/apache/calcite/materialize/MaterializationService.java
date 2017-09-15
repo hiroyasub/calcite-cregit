@@ -2039,6 +2039,24 @@ return|return
 name|INSTANCE
 return|;
 block|}
+specifier|public
+name|void
+name|removeMaterialization
+parameter_list|(
+name|MaterializationKey
+name|key
+parameter_list|)
+block|{
+name|actor
+operator|.
+name|keyMap
+operator|.
+name|remove
+argument_list|(
+name|key
+argument_list|)
+expr_stmt|;
+block|}
 comment|/**    * Creates tables that represent a materialized view.    */
 specifier|public
 interface|interface

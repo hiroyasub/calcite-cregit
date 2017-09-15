@@ -7894,45 +7894,78 @@ name|void
 name|testFunctionDefaultArgument
 parameter_list|()
 block|{
-name|checkExp
+name|sql
 argument_list|(
 literal|"foo(1, DEFAULT, default, 'default', \"default\", 3)"
-argument_list|,
+argument_list|)
+operator|.
+name|expression
+argument_list|()
+operator|.
+name|ok
+argument_list|(
 literal|"`FOO`(1, DEFAULT, DEFAULT, 'default', `default`, 3)"
 argument_list|)
 expr_stmt|;
-name|checkExp
+name|sql
 argument_list|(
 literal|"foo(DEFAULT)"
-argument_list|,
+argument_list|)
+operator|.
+name|expression
+argument_list|()
+operator|.
+name|ok
+argument_list|(
 literal|"`FOO`(DEFAULT)"
 argument_list|)
 expr_stmt|;
-name|checkExp
+name|sql
 argument_list|(
 literal|"foo(x => 1, DEFAULT)"
-argument_list|,
+argument_list|)
+operator|.
+name|expression
+argument_list|()
+operator|.
+name|ok
+argument_list|(
 literal|"`FOO`(`X` => 1, DEFAULT)"
 argument_list|)
 expr_stmt|;
-name|checkExp
+name|sql
 argument_list|(
 literal|"foo(y => DEFAULT, x => 1)"
-argument_list|,
+argument_list|)
+operator|.
+name|expression
+argument_list|()
+operator|.
+name|ok
+argument_list|(
 literal|"`FOO`(`Y` => DEFAULT, `X` => 1)"
 argument_list|)
 expr_stmt|;
-name|checkExp
+name|sql
 argument_list|(
 literal|"foo(x => 1, y => DEFAULT)"
-argument_list|,
+argument_list|)
+operator|.
+name|expression
+argument_list|()
+operator|.
+name|ok
+argument_list|(
 literal|"`FOO`(`X` => 1, `Y` => DEFAULT)"
 argument_list|)
 expr_stmt|;
-name|check
+name|sql
 argument_list|(
 literal|"select sum(DISTINCT DEFAULT) from t group by x"
-argument_list|,
+argument_list|)
+operator|.
+name|ok
+argument_list|(
 literal|"SELECT SUM(DISTINCT DEFAULT)\n"
 operator|+
 literal|"FROM `T`\n"
@@ -7959,6 +7992,122 @@ argument_list|(
 literal|"foo(0, DEFAULT ^+^ y)"
 argument_list|,
 literal|"(?s).*Encountered \"\\+\" at .*"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testDefault
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"select ^DEFAULT^ from emp"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"(?s)Encountered \"DEFAULT\" at .*"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select cast(empno ^+^ DEFAULT as double) from emp"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"(?s)Encountered \"\\+ DEFAULT\" at .*"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select empno ^+^ DEFAULT + deptno from emp"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"(?s)Encountered \"\\+ DEFAULT\" at .*"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select power(0, DEFAULT ^+^ empno) from emp"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"(?s)Encountered \"\\+\" at .*"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select * from emp join dept ^on^ DEFAULT"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"(?s)Encountered \"on DEFAULT\" at .*"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select * from emp where empno ^>^ DEFAULT or deptno< 10"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"(?s)Encountered \"> DEFAULT\" at .*"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select * from emp order by ^DEFAULT^ desc"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"(?s)Encountered \"DEFAULT\" at .*"
+argument_list|)
+expr_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"INSERT INTO `DEPT` (`NAME`, `DEPTNO`)\n"
+operator|+
+literal|"VALUES (ROW('a', DEFAULT))"
+decl_stmt|;
+name|sql
+argument_list|(
+literal|"insert into dept (name, deptno) values ('a', DEFAULT)"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"insert into dept (name, deptno) values ('a', 1 ^+^ DEFAULT)"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"(?s)Encountered \"\\+ DEFAULT\" at .*"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"insert into dept (name, deptno) select 'a'^,^ DEFAULT from (values 0)"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"(?s)Encountered \", DEFAULT\" at .*"
 argument_list|)
 expr_stmt|;
 block|}
@@ -13193,6 +13342,86 @@ decl_stmt|;
 name|sql
 argument_list|(
 literal|"insert into emps values (1,'Fredkin')"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+operator|.
+name|node
+argument_list|(
+name|not
+argument_list|(
+name|isDdl
+argument_list|()
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testInsertValuesDefault
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|expected
+init|=
+literal|"INSERT INTO `EMPS`\n"
+operator|+
+literal|"VALUES (ROW(1, DEFAULT, 'Fredkin'))"
+decl_stmt|;
+name|sql
+argument_list|(
+literal|"insert into emps values (1,DEFAULT,'Fredkin')"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+operator|.
+name|node
+argument_list|(
+name|not
+argument_list|(
+name|isDdl
+argument_list|()
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testInsertValuesRawDefault
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|expected
+init|=
+literal|"INSERT INTO `EMPS`\n"
+operator|+
+literal|"VALUES (ROW(DEFAULT))"
+decl_stmt|;
+name|sql
+argument_list|(
+literal|"insert into emps ^values^ default"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"(?s).*Encountered \"values default\" at .*"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"insert into emps values (default)"
 argument_list|)
 operator|.
 name|ok
@@ -27009,6 +27238,11 @@ specifier|final
 name|String
 name|sql
 decl_stmt|;
+specifier|private
+specifier|final
+name|boolean
+name|expression
+decl_stmt|;
 name|Sql
 parameter_list|(
 name|String
@@ -27016,10 +27250,33 @@ name|sql
 parameter_list|)
 block|{
 name|this
+argument_list|(
+name|sql
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+block|}
+name|Sql
+parameter_list|(
+name|String
+name|sql
+parameter_list|,
+name|boolean
+name|expression
+parameter_list|)
+block|{
+name|this
 operator|.
 name|sql
 operator|=
 name|sql
+expr_stmt|;
+name|this
+operator|.
+name|expression
+operator|=
+name|expression
 expr_stmt|;
 block|}
 specifier|public
@@ -27029,6 +27286,24 @@ parameter_list|(
 name|String
 name|expected
 parameter_list|)
+block|{
+if|if
+condition|(
+name|expression
+condition|)
+block|{
+name|getTester
+argument_list|()
+operator|.
+name|checkExp
+argument_list|(
+name|sql
+argument_list|,
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+else|else
 block|{
 name|getTester
 argument_list|()
@@ -27040,6 +27315,7 @@ argument_list|,
 name|expected
 argument_list|)
 expr_stmt|;
+block|}
 return|return
 name|this
 return|;
@@ -27052,6 +27328,24 @@ name|String
 name|expectedMsgPattern
 parameter_list|)
 block|{
+if|if
+condition|(
+name|expression
+condition|)
+block|{
+name|getTester
+argument_list|()
+operator|.
+name|checkExpFails
+argument_list|(
+name|sql
+argument_list|,
+name|expectedMsgPattern
+argument_list|)
+expr_stmt|;
+block|}
+else|else
+block|{
 name|getTester
 argument_list|()
 operator|.
@@ -27062,6 +27356,7 @@ argument_list|,
 name|expectedMsgPattern
 argument_list|)
 expr_stmt|;
+block|}
 return|return
 name|this
 return|;
@@ -27089,6 +27384,26 @@ argument_list|)
 expr_stmt|;
 return|return
 name|this
+return|;
+block|}
+comment|/** Flags that this is an expression, not a whole query. */
+specifier|public
+name|Sql
+name|expression
+parameter_list|()
+block|{
+return|return
+name|expression
+condition|?
+name|this
+else|:
+operator|new
+name|Sql
+argument_list|(
+name|sql
+argument_list|,
+literal|true
+argument_list|)
 return|;
 block|}
 block|}

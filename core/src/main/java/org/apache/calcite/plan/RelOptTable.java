@@ -159,6 +159,20 @@ name|calcite
 operator|.
 name|schema
 operator|.
+name|ColumnStrategy
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|schema
+operator|.
 name|Wrapper
 import|;
 end_import
@@ -277,6 +291,14 @@ name|RelDataTypeField
 argument_list|>
 name|extendedFields
 parameter_list|)
+function_decl|;
+comment|/** Returns a list describing how each column is populated. The list has the    *  same number of entries as there are fields, and is immutable. */
+name|List
+argument_list|<
+name|ColumnStrategy
+argument_list|>
+name|getColumnStrategies
+parameter_list|()
 function_decl|;
 comment|/** Can expand a view into relational expressions. */
 interface|interface

@@ -382,7 +382,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  *<code>MaterializationOptUtil</code> defines static utility methods for using  * materialized views and lattices for queries.  */
+comment|/**  * Utility methods for using  * materialized views and lattices for queries.  */
 end_comment
 
 begin_class

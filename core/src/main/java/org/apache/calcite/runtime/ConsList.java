@@ -136,6 +136,8 @@ name|first
 parameter_list|,
 name|List
 argument_list|<
+name|?
+extends|extends
 name|E
 argument_list|>
 name|rest
@@ -158,6 +160,7 @@ name|isEmpty
 argument_list|()
 condition|)
 block|{
+comment|//noinspection unchecked
 return|return
 operator|new
 name|ConsList
@@ -165,6 +168,12 @@ argument_list|<>
 argument_list|(
 name|first
 argument_list|,
+operator|(
+name|List
+argument_list|<
+name|E
+argument_list|>
+operator|)
 name|rest
 argument_list|)
 return|;

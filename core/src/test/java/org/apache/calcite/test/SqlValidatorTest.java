@@ -25664,7 +25664,9 @@ argument_list|)
 expr_stmt|;
 name|assertThat
 argument_list|(
-literal|"Missing non-NULL column generates a call to factory"
+literal|"Should not check for default value, even if if column is missing"
+operator|+
+literal|"from INSERT and nullable"
 argument_list|,
 name|MockCatalogReader
 operator|.
@@ -25681,8 +25683,50 @@ argument_list|,
 name|is
 argument_list|(
 name|c
+argument_list|)
+argument_list|)
+expr_stmt|;
+comment|// Now remove DEPTNO, which has a default value, from the target list.
+comment|// Will generate an extra call to newColumnDefaultValue at sql-to-rel time,
+comment|// just not yet.
+specifier|final
+name|String
+name|sql4
+init|=
+literal|"insert into ^emp^ (empno, ename, job, mgr, hiredate,\n"
 operator|+
-literal|1
+literal|"  sal, comm, slacker)\n"
+operator|+
+literal|"values(1, 'nom', 'job', 0,\n"
+operator|+
+literal|"  timestamp '1970-01-01 00:00:00', 1, 1, false)"
+decl_stmt|;
+name|pragmaticTester
+operator|.
+name|checkQuery
+argument_list|(
+name|sql4
+argument_list|)
+expr_stmt|;
+name|assertThat
+argument_list|(
+literal|"Missing DEFAULT column generates a call to factory"
+argument_list|,
+name|MockCatalogReader
+operator|.
+name|CountingFactory
+operator|.
+name|THREAD_CALL_COUNT
+operator|.
+name|get
+argument_list|()
+operator|.
+name|get
+argument_list|()
+argument_list|,
+name|is
+argument_list|(
+name|c
 argument_list|)
 argument_list|)
 expr_stmt|;

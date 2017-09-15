@@ -41,6 +41,20 @@ name|apache
 operator|.
 name|calcite
 operator|.
+name|schema
+operator|.
+name|Wrapper
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
 name|sql
 operator|.
 name|SqlAccessType
@@ -79,6 +93,8 @@ begin_interface
 specifier|public
 interface|interface
 name|SqlValidatorTable
+extends|extends
+name|Wrapper
 block|{
 comment|//~ Methods ----------------------------------------------------------------
 name|RelDataType
@@ -113,6 +129,9 @@ name|modality
 parameter_list|)
 function_decl|;
 comment|/**    * Returns whether the ordinal column has a default value.    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 name|boolean
 name|columnHasDefaultValue
 parameter_list|(
@@ -124,20 +143,6 @@ name|ordinal
 parameter_list|,
 name|InitializerContext
 name|initializerContext
-parameter_list|)
-function_decl|;
-comment|/**    * Finds an interface implemented by this table.    */
-parameter_list|<
-name|T
-parameter_list|>
-name|T
-name|unwrap
-parameter_list|(
-name|Class
-argument_list|<
-name|T
-argument_list|>
-name|clazz
 parameter_list|)
 function_decl|;
 block|}

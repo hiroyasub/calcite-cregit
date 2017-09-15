@@ -1048,7 +1048,7 @@ name|JdbcTest
 operator|.
 name|class
 block|,
-name|QuidemTest
+name|CoreQuidemTest
 operator|.
 name|class
 block|,

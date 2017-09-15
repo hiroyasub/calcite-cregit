@@ -635,6 +635,21 @@ block|,
 comment|/** The {@code SESSION_END} auxiliary function of    * the {@link #SESSION} group function. */
 name|SESSION_END
 block|,
+comment|/** Column declaration. */
+name|COLUMN_DECL
+block|,
+comment|/** {@code CHECK} constraint. */
+name|CHECK
+block|,
+comment|/** {@code UNIQUE} constraint. */
+name|UNIQUE
+block|,
+comment|/** {@code PRIMARY KEY} constraint. */
+name|PRIMARY_KEY
+block|,
+comment|/** {@code FOREIGN KEY} constraint. */
+name|FOREIGN_KEY
+block|,
 comment|// DDL and session control statements follow. The list is not exhaustive: feel
 comment|// free to add more.
 comment|/** {@code COMMIT} session control statement. */
@@ -645,6 +660,15 @@ name|ROLLBACK
 block|,
 comment|/** {@code ALTER SESSION} DDL statement. */
 name|ALTER_SESSION
+block|,
+comment|/** {@code CREATE SCHEMA} DDL statement. */
+name|CREATE_SCHEMA
+block|,
+comment|/** {@code CREATE FOREIGN SCHEMA} DDL statement. */
+name|CREATE_FOREIGN_SCHEMA
+block|,
+comment|/** {@code DROP SCHEMA} DDL statement. */
+name|DROP_SCHEMA
 block|,
 comment|/** {@code CREATE TABLE} DDL statement. */
 name|CREATE_TABLE
@@ -663,6 +687,15 @@ name|ALTER_VIEW
 block|,
 comment|/** {@code DROP VIEW} DDL statement. */
 name|DROP_VIEW
+block|,
+comment|/** {@code CREATE MATERIALIZED VIEW} DDL statement. */
+name|CREATE_MATERIALIZED_VIEW
+block|,
+comment|/** {@code ALTER MATERIALIZED VIEW} DDL statement. */
+name|ALTER_MATERIALIZED_VIEW
+block|,
+comment|/** {@code DROP MATERIALIZED VIEW} DDL statement. */
+name|DROP_MATERIALIZED_VIEW
 block|,
 comment|/** {@code CREATE SEQUENCE} DDL statement. */
 name|CREATE_SEQUENCE
@@ -823,6 +856,12 @@ name|ROLLBACK
 argument_list|,
 name|ALTER_SESSION
 argument_list|,
+name|CREATE_SCHEMA
+argument_list|,
+name|CREATE_FOREIGN_SCHEMA
+argument_list|,
+name|DROP_SCHEMA
+argument_list|,
 name|CREATE_TABLE
 argument_list|,
 name|ALTER_TABLE
@@ -834,6 +873,12 @@ argument_list|,
 name|ALTER_VIEW
 argument_list|,
 name|DROP_VIEW
+argument_list|,
+name|CREATE_MATERIALIZED_VIEW
+argument_list|,
+name|ALTER_MATERIALIZED_VIEW
+argument_list|,
+name|DROP_MATERIALIZED_VIEW
 argument_list|,
 name|CREATE_SEQUENCE
 argument_list|,

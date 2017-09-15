@@ -134,7 +134,7 @@ name|String
 name|bestString
 parameter_list|()
 function_decl|;
-comment|/** Finds a field with a given name, using the currenct case-sensitivity,    * returning null if not found.    *    * @param rowType    Row type    * @param fieldName Field name    * @return Field, or null if not found    */
+comment|/** Finds a field with a given name, using the current case-sensitivity,    * returning null if not found.    *    * @param rowType    Row type    * @param fieldName Field name    * @return Field, or null if not found    */
 name|RelDataTypeField
 name|field
 parameter_list|(

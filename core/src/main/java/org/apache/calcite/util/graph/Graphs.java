@@ -25,20 +25,6 @@ name|apache
 operator|.
 name|calcite
 operator|.
-name|runtime
-operator|.
-name|ConsList
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
 name|util
 operator|.
 name|Pair
@@ -126,6 +112,22 @@ operator|.
 name|util
 operator|.
 name|Set
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|util
+operator|.
+name|Static
+operator|.
+name|cons
 import|;
 end_import
 
@@ -527,9 +529,7 @@ name|put
 argument_list|(
 name|key
 argument_list|,
-name|ConsList
-operator|.
-name|of
+name|cons
 argument_list|(
 name|graph1
 operator|.

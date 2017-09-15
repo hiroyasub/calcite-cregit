@@ -547,7 +547,7 @@ literal|"CREATE TABLE"
 argument_list|,
 name|SqlKind
 operator|.
-name|OTHER_DDL
+name|CREATE_TABLE
 argument_list|)
 decl_stmt|;
 comment|/** Creates a SqlCreateTable. */
@@ -566,7 +566,11 @@ parameter_list|)
 block|{
 name|super
 argument_list|(
+name|OPERATOR
+argument_list|,
 name|pos
+argument_list|,
+literal|false
 argument_list|,
 literal|false
 argument_list|)
@@ -583,17 +587,6 @@ name|columnList
 operator|=
 name|columnList
 expr_stmt|;
-block|}
-annotation|@
-name|Override
-specifier|public
-name|SqlOperator
-name|getOperator
-parameter_list|()
-block|{
-return|return
-name|OPERATOR
-return|;
 block|}
 annotation|@
 name|Override

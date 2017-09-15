@@ -29,11 +29,29 @@ name|CalcitePrepare
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|linq4j
+operator|.
+name|function
+operator|.
+name|Experimental
+import|;
+end_import
+
 begin_comment
 comment|/**  * Mix-in interface for {@link SqlNode} that allows DDL commands to be  * executed directly.  *  *<p>NOTE: Subject to change without notice.  */
 end_comment
 
 begin_interface
+annotation|@
+name|Experimental
 specifier|public
 interface|interface
 name|SqlExecutableStatement

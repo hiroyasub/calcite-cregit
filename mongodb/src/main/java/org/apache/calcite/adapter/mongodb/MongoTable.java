@@ -201,20 +201,6 @@ name|apache
 operator|.
 name|calcite
 operator|.
-name|runtime
-operator|.
-name|ConsList
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
 name|schema
 operator|.
 name|SchemaPlus
@@ -414,6 +400,22 @@ operator|.
 name|util
 operator|.
 name|Map
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|util
+operator|.
+name|Static
+operator|.
+name|cons
 import|;
 end_import
 
@@ -1172,9 +1174,7 @@ name|dbCollection
 operator|.
 name|aggregate
 argument_list|(
-name|ConsList
-operator|.
-name|of
+name|cons
 argument_list|(
 name|first
 argument_list|,

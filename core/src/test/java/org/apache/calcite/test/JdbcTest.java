@@ -4308,7 +4308,7 @@ argument_list|)
 expr_stmt|;
 name|statement
 operator|.
-name|executeQuery
+name|executeUpdate
 argument_list|(
 literal|"COMMIT"
 argument_list|)

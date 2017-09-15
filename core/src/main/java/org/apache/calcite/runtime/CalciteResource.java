@@ -2081,6 +2081,18 @@ function_decl|;
 annotation|@
 name|BaseMessage
 argument_list|(
+literal|"DEFAULT not allowed here"
+argument_list|)
+name|ExInst
+argument_list|<
+name|SqlValidatorException
+argument_list|>
+name|defaultNotAllowed
+parameter_list|()
+function_decl|;
+annotation|@
+name|BaseMessage
+argument_list|(
 literal|"Not allowed to perform {0} on {1}"
 argument_list|)
 name|ExInst
@@ -2444,11 +2456,11 @@ function_decl|;
 annotation|@
 name|BaseMessage
 argument_list|(
-literal|"Cannot explicitly insert value into IDENTITY column ''{0}'' which is ALWAYS GENERATED"
+literal|"Cannot INSERT into generated column ''{0}''"
 argument_list|)
 name|ExInst
 argument_list|<
-name|CalciteException
+name|SqlValidatorException
 argument_list|>
 name|insertIntoAlwaysGenerated
 parameter_list|(
@@ -3414,6 +3426,129 @@ name|column
 parameter_list|,
 name|String
 name|context
+parameter_list|)
+function_decl|;
+annotation|@
+name|BaseMessage
+argument_list|(
+literal|"Schema ''{0}'' already exists"
+argument_list|)
+name|ExInst
+argument_list|<
+name|SqlValidatorException
+argument_list|>
+name|schemaExists
+parameter_list|(
+name|String
+name|name
+parameter_list|)
+function_decl|;
+annotation|@
+name|BaseMessage
+argument_list|(
+literal|"Invalid schema type ''{0}''; valid values: {1}"
+argument_list|)
+name|ExInst
+argument_list|<
+name|SqlValidatorException
+argument_list|>
+name|schemaInvalidType
+parameter_list|(
+name|String
+name|type
+parameter_list|,
+name|String
+name|values
+parameter_list|)
+function_decl|;
+annotation|@
+name|BaseMessage
+argument_list|(
+literal|"Table ''{0}'' already exists"
+argument_list|)
+name|ExInst
+argument_list|<
+name|SqlValidatorException
+argument_list|>
+name|tableExists
+parameter_list|(
+name|String
+name|name
+parameter_list|)
+function_decl|;
+comment|// If CREATE TABLE does not have "AS query", there must be a column list
+annotation|@
+name|BaseMessage
+argument_list|(
+literal|"Missing column list"
+argument_list|)
+name|ExInst
+argument_list|<
+name|SqlValidatorException
+argument_list|>
+name|createTableRequiresColumnList
+parameter_list|()
+function_decl|;
+comment|// If CREATE TABLE does not have "AS query", a type must be specified for each
+comment|// column
+annotation|@
+name|BaseMessage
+argument_list|(
+literal|"Type required for column ''{0}'' in CREATE TABLE without AS"
+argument_list|)
+name|ExInst
+argument_list|<
+name|SqlValidatorException
+argument_list|>
+name|createTableRequiresColumnTypes
+parameter_list|(
+name|String
+name|columnName
+parameter_list|)
+function_decl|;
+annotation|@
+name|BaseMessage
+argument_list|(
+literal|"View ''{0}'' already exists and REPLACE not specified"
+argument_list|)
+name|ExInst
+argument_list|<
+name|SqlValidatorException
+argument_list|>
+name|viewExists
+parameter_list|(
+name|String
+name|name
+parameter_list|)
+function_decl|;
+annotation|@
+name|BaseMessage
+argument_list|(
+literal|"Schema ''{0}'' not found"
+argument_list|)
+name|ExInst
+argument_list|<
+name|SqlValidatorException
+argument_list|>
+name|schemaNotFound
+parameter_list|(
+name|String
+name|name
+parameter_list|)
+function_decl|;
+annotation|@
+name|BaseMessage
+argument_list|(
+literal|"View ''{0}'' not found"
+argument_list|)
+name|ExInst
+argument_list|<
+name|SqlValidatorException
+argument_list|>
+name|viewNotFound
+parameter_list|(
+name|String
+name|name
 parameter_list|)
 function_decl|;
 block|}

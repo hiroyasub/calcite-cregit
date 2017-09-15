@@ -105,7 +105,6 @@ begin_interface
 specifier|public
 interface|interface
 name|RelDataType
-comment|/*extends Type*/
 block|{
 name|int
 name|SCALE_NOT_SPECIFIED
