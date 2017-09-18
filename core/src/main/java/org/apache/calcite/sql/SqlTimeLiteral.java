@@ -143,8 +143,10 @@ operator|)
 name|value
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
-name|SqlNode
+name|SqlTimeLiteral
 name|clone
 parameter_list|(
 name|SqlParserPos

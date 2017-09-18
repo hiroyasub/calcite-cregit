@@ -231,8 +231,10 @@ name|getCollation
 argument_list|()
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
-name|SqlNode
+name|SqlCharStringLiteral
 name|clone
 parameter_list|(
 name|SqlParserPos

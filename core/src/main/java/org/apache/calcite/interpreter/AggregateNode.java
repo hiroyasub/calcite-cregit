@@ -2155,6 +2155,7 @@ block|}
 block|}
 comment|/**    * A list of accumulators used during grouping.    */
 specifier|private
+specifier|static
 class|class
 name|AccumulatorList
 extends|extends

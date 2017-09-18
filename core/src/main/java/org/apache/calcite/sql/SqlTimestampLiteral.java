@@ -130,8 +130,10 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
+annotation|@
+name|Override
 specifier|public
-name|SqlNode
+name|SqlTimestampLiteral
 name|clone
 parameter_list|(
 name|SqlParserPos

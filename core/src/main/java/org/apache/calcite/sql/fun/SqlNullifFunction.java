@@ -346,12 +346,7 @@ name|whenList
 argument_list|,
 name|thenList
 argument_list|,
-name|operands
-operator|.
-name|get
-argument_list|(
-literal|0
-argument_list|)
+name|SqlNode
 operator|.
 name|clone
 argument_list|(
@@ -361,9 +356,6 @@ name|get
 argument_list|(
 literal|0
 argument_list|)
-operator|.
-name|getParserPosition
-argument_list|()
 argument_list|)
 argument_list|)
 return|;

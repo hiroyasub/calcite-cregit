@@ -673,7 +673,7 @@ throw|;
 block|}
 block|}
 specifier|public
-name|SqlNode
+name|SqlLiteral
 name|clone
 parameter_list|(
 name|SqlParserPos

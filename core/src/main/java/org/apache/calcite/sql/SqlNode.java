@@ -268,6 +268,14 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
+comment|/** @deprecated Please use {@link #clone(SqlNode)}; this method brings    * along too much baggage from early versions of Java */
+annotation|@
+name|Deprecated
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"MethodDoesntCallSuperMethod"
+argument_list|)
 specifier|public
 name|Object
 name|clone
@@ -278,6 +286,36 @@ name|clone
 argument_list|(
 name|getParserPosition
 argument_list|()
+argument_list|)
+return|;
+block|}
+comment|/** Creates a copy of a SqlNode. */
+specifier|public
+specifier|static
+parameter_list|<
+name|E
+extends|extends
+name|SqlNode
+parameter_list|>
+name|E
+name|clone
+parameter_list|(
+name|E
+name|e
+parameter_list|)
+block|{
+comment|//noinspection unchecked
+return|return
+operator|(
+name|E
+operator|)
+name|e
+operator|.
+name|clone
+argument_list|(
+name|e
+operator|.
+name|pos
 argument_list|)
 return|;
 block|}
@@ -386,13 +424,12 @@ index|[
 name|i
 index|]
 operator|=
-operator|(
 name|SqlNode
-operator|)
-name|node
 operator|.
 name|clone
-argument_list|()
+argument_list|(
+name|node
+argument_list|)
 expr_stmt|;
 block|}
 block|}

@@ -211,8 +211,10 @@ return|return
 name|isExact
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
-name|SqlNode
+name|SqlNumericLiteral
 name|clone
 parameter_list|(
 name|SqlParserPos

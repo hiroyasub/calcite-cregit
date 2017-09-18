@@ -186,6 +186,8 @@ name|Comparable
 argument_list|<
 name|NlsString
 argument_list|>
+implements|,
+name|Cloneable
 block|{
 comment|//~ Instance fields --------------------------------------------------------
 specifier|private
@@ -209,7 +211,7 @@ name|SqlCollation
 name|collation
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**    * Creates a string in a specfied character set.    *    * @param value       String constant, must not be null    * @param charsetName Name of the character set, may be null    * @param collation   Collation, may be null    * @throws IllegalCharsetNameException If the given charset name is illegal    * @throws UnsupportedCharsetException If no support for the named charset    *     is available in this instance of the Java virtual machine    * @throws RuntimeException If the given value cannot be represented in the    *     given charset    */
+comment|/**    * Creates a string in a specified character set.    *    * @param value       String constant, must not be null    * @param charsetName Name of the character set, may be null    * @param collation   Collation, may be null    * @throws IllegalCharsetNameException If the given charset name is illegal    * @throws UnsupportedCharsetException If no support for the named charset    *     is available in this instance of the Java virtual machine    * @throws RuntimeException If the given value cannot be represented in the    *     given charset    */
 specifier|public
 name|NlsString
 parameter_list|(
@@ -367,17 +369,27 @@ name|Object
 name|clone
 parameter_list|()
 block|{
+try|try
+block|{
 return|return
-operator|new
-name|NlsString
-argument_list|(
-name|value
-argument_list|,
-name|charsetName
-argument_list|,
-name|collation
-argument_list|)
+name|super
+operator|.
+name|clone
+argument_list|()
 return|;
+block|}
+catch|catch
+parameter_list|(
+name|CloneNotSupportedException
+name|e
+parameter_list|)
+block|{
+throw|throw
+operator|new
+name|AssertionError
+argument_list|()
+throw|;
+block|}
 block|}
 specifier|public
 name|int
