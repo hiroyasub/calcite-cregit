@@ -25,7 +25,7 @@ name|calcite
 operator|.
 name|plan
 operator|.
-name|RelTrait
+name|RelMultipleTrait
 import|;
 end_import
 
@@ -74,7 +74,7 @@ specifier|public
 interface|interface
 name|RelDistribution
 extends|extends
-name|RelTrait
+name|RelMultipleTrait
 block|{
 comment|/** Returns the type of distribution. */
 annotation|@
