@@ -2352,6 +2352,14 @@ name|EXECUTOR
 argument_list|)
 decl_stmt|;
 specifier|final
+name|RelOptPredicateList
+name|predicates
+init|=
+name|RelOptPredicateList
+operator|.
+name|EMPTY
+decl_stmt|;
+specifier|final
 name|RexSimplify
 name|simplify
 init|=
@@ -2359,6 +2367,8 @@ operator|new
 name|RexSimplify
 argument_list|(
 name|rB
+argument_list|,
+name|predicates
 argument_list|,
 literal|true
 argument_list|,

@@ -2398,6 +2398,8 @@ name|RexSimplify
 argument_list|(
 name|rexBuilder
 argument_list|,
+name|predicates
+argument_list|,
 name|unknownAsFalse
 argument_list|,
 name|executor

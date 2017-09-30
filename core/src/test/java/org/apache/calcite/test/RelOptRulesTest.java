@@ -11276,6 +11276,24 @@ name|FILTER_INSTANCE
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1995">[CALCITE-1995]    * Remove predicates from Filter if they can be proved to be always true or    * false</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSimplifyFilter
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+name|transitiveInference
+argument_list|(
+name|ReduceExpressionsRule
+operator|.
+name|FILTER_INSTANCE
+argument_list|)
+expr_stmt|;
+block|}
 annotation|@
 name|Test
 specifier|public

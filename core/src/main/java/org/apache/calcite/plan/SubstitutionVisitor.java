@@ -1185,6 +1185,14 @@ operator|.
 name|EXECUTOR
 argument_list|)
 decl_stmt|;
+specifier|final
+name|RelOptPredicateList
+name|predicates
+init|=
+name|RelOptPredicateList
+operator|.
+name|EMPTY
+decl_stmt|;
 name|this
 operator|.
 name|simplify
@@ -1196,6 +1204,8 @@ name|cluster
 operator|.
 name|getRexBuilder
 argument_list|()
+argument_list|,
+name|predicates
 argument_list|,
 literal|false
 argument_list|,
