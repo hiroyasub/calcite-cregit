@@ -53,6 +53,22 @@ name|apache
 operator|.
 name|calcite
 operator|.
+name|linq4j
+operator|.
+name|function
+operator|.
+name|Experimental
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
 name|rel
 operator|.
 name|RelFieldCollation
@@ -2050,6 +2066,18 @@ operator|.
 name|UNSPECIFIED
 return|;
 block|}
+block|}
+comment|/**    * Returns whether the dialect supports VALUES in a sub-query with    * and an "AS t(column, ...)" values to define column names.    *    *<p>Currently, only Oracle does not. For this, we generate "SELECT v0 AS c0,    * v1 AS c1 ... UNION ALL ...". We may need to refactor this method when we    * support VALUES for other dialects. */
+annotation|@
+name|Experimental
+specifier|public
+name|boolean
+name|supportsAliasedValues
+parameter_list|()
+block|{
+return|return
+literal|true
+return|;
 block|}
 comment|/**    * A few utility functions copied from org.apache.calcite.util.Util. We have    * copied them because we wish to keep SqlDialect's dependencies to a    * minimum.    */
 specifier|public

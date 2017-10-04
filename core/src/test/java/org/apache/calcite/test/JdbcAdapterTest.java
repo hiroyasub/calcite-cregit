@@ -285,7 +285,7 @@ name|explain
 init|=
 literal|"PLAN="
 operator|+
-literal|"EnumerableCalc(expr#0..2=[{inputs}], day=[$t1], week_day=[$t2], EXPR$0=[$t0])\n"
+literal|"EnumerableCalc(expr#0..2=[{inputs}], day=[$t1], week_day=[$t2], C=[$t0])\n"
 operator|+
 literal|"  EnumerableJoin(condition=[true], joinType=[inner])\n"
 operator|+
