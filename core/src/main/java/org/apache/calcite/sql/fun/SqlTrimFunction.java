@@ -669,7 +669,7 @@ case|case
 literal|3
 case|:
 return|return
-literal|"{0}([BOTH|LEADING|TRAILING} {1} FROM {2})"
+literal|"{0}([BOTH|LEADING|TRAILING] {1} FROM {2})"
 return|;
 default|default:
 throw|throw
