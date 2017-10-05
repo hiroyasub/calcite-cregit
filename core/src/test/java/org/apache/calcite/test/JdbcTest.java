@@ -12189,13 +12189,74 @@ literal|"customer_id=1; postal_code=15057\n"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Tests ORDER BY ... DESC NULLS FIRST. */
+comment|/** Tests ORDER BY with all combinations of ASC, DESC, NULLS FIRST,    * NULLS LAST. */
 annotation|@
 name|Test
 specifier|public
 name|void
-name|testOrderByDescNullsFirst
+name|testOrderByNulls
 parameter_list|()
+block|{
+name|checkOrderByNulls
+argument_list|(
+name|CalciteAssert
+operator|.
+name|Config
+operator|.
+name|FOODMART_CLONE
+argument_list|)
+expr_stmt|;
+name|checkOrderByNulls
+argument_list|(
+name|CalciteAssert
+operator|.
+name|Config
+operator|.
+name|JDBC_FOODMART
+argument_list|)
+expr_stmt|;
+block|}
+specifier|private
+name|void
+name|checkOrderByNulls
+parameter_list|(
+name|CalciteAssert
+operator|.
+name|Config
+name|clone
+parameter_list|)
+block|{
+name|checkOrderByDescNullsFirst
+argument_list|(
+name|clone
+argument_list|)
+expr_stmt|;
+name|checkOrderByNullsFirst
+argument_list|(
+name|clone
+argument_list|)
+expr_stmt|;
+name|checkOrderByDescNullsLast
+argument_list|(
+name|clone
+argument_list|)
+expr_stmt|;
+name|checkOrderByNullsLast
+argument_list|(
+name|clone
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Tests ORDER BY ... DESC NULLS FIRST. */
+specifier|private
+name|void
+name|checkOrderByDescNullsFirst
+parameter_list|(
+name|CalciteAssert
+operator|.
+name|Config
+name|config
+parameter_list|)
 block|{
 name|CalciteAssert
 operator|.
@@ -12204,16 +12265,14 @@ argument_list|()
 operator|.
 name|with
 argument_list|(
-name|CalciteAssert
-operator|.
-name|Config
-operator|.
-name|FOODMART_CLONE
+name|config
 argument_list|)
 operator|.
 name|query
 argument_list|(
-literal|"select \"store_id\", \"grocery_sqft\" from \"store\"\n"
+literal|"select \"store_id\", \"grocery_sqft\"\n"
+operator|+
+literal|"from \"foodmart\".\"store\"\n"
 operator|+
 literal|"where \"store_id\"< 3 order by 2 desc nulls first"
 argument_list|)
@@ -12229,12 +12288,15 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/** Tests ORDER BY ... NULLS FIRST. */
-annotation|@
-name|Test
-specifier|public
+specifier|private
 name|void
-name|testOrderByNullsFirst
-parameter_list|()
+name|checkOrderByNullsFirst
+parameter_list|(
+name|CalciteAssert
+operator|.
+name|Config
+name|config
+parameter_list|)
 block|{
 name|CalciteAssert
 operator|.
@@ -12243,16 +12305,14 @@ argument_list|()
 operator|.
 name|with
 argument_list|(
-name|CalciteAssert
-operator|.
-name|Config
-operator|.
-name|FOODMART_CLONE
+name|config
 argument_list|)
 operator|.
 name|query
 argument_list|(
-literal|"select \"store_id\", \"grocery_sqft\" from \"store\"\n"
+literal|"select \"store_id\", \"grocery_sqft\"\n"
+operator|+
+literal|"from \"foodmart\".\"store\"\n"
 operator|+
 literal|"where \"store_id\"< 3 order by 2 nulls first"
 argument_list|)
@@ -12268,12 +12328,15 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/** Tests ORDER BY ... DESC NULLS LAST. */
-annotation|@
-name|Test
-specifier|public
+specifier|private
 name|void
-name|testOrderByDescNullsLast
-parameter_list|()
+name|checkOrderByDescNullsLast
+parameter_list|(
+name|CalciteAssert
+operator|.
+name|Config
+name|config
+parameter_list|)
 block|{
 name|CalciteAssert
 operator|.
@@ -12282,16 +12345,14 @@ argument_list|()
 operator|.
 name|with
 argument_list|(
-name|CalciteAssert
-operator|.
-name|Config
-operator|.
-name|FOODMART_CLONE
+name|config
 argument_list|)
 operator|.
 name|query
 argument_list|(
-literal|"select \"store_id\", \"grocery_sqft\" from \"store\"\n"
+literal|"select \"store_id\", \"grocery_sqft\"\n"
+operator|+
+literal|"from \"foodmart\".\"store\"\n"
 operator|+
 literal|"where \"store_id\"< 3 order by 2 desc nulls last"
 argument_list|)
@@ -12307,12 +12368,15 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/** Tests ORDER BY ... NULLS LAST. */
-annotation|@
-name|Test
-specifier|public
+specifier|private
 name|void
-name|testOrderByNullsLast
-parameter_list|()
+name|checkOrderByNullsLast
+parameter_list|(
+name|CalciteAssert
+operator|.
+name|Config
+name|config
+parameter_list|)
 block|{
 name|CalciteAssert
 operator|.
@@ -12321,16 +12385,14 @@ argument_list|()
 operator|.
 name|with
 argument_list|(
-name|CalciteAssert
-operator|.
-name|Config
-operator|.
-name|FOODMART_CLONE
+name|config
 argument_list|)
 operator|.
 name|query
 argument_list|(
-literal|"select \"store_id\", \"grocery_sqft\" from \"store\"\n"
+literal|"select \"store_id\", \"grocery_sqft\"\n"
+operator|+
+literal|"from \"foodmart\".\"store\"\n"
 operator|+
 literal|"where \"store_id\"< 3 order by 2 nulls last"
 argument_list|)

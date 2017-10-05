@@ -342,6 +342,32 @@ name|UNSPECIFIED
 return|;
 block|}
 block|}
+comment|/** Returns whether this is {@link #DESCENDING} or      * {@link #STRICTLY_DESCENDING}. */
+specifier|public
+name|boolean
+name|isDescending
+parameter_list|()
+block|{
+switch|switch
+condition|(
+name|this
+condition|)
+block|{
+case|case
+name|DESCENDING
+case|:
+case|case
+name|STRICTLY_DESCENDING
+case|:
+return|return
+literal|true
+return|;
+default|default:
+return|return
+literal|false
+return|;
+block|}
+block|}
 block|}
 comment|/**    * Ordering of nulls.    */
 specifier|public
