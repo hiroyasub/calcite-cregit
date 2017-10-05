@@ -17530,7 +17530,7 @@ name|CalciteAssert
 operator|.
 name|checkResultContains
 argument_list|(
-literal|"tableSchem=metadata; tableName=COLUMNS; tableType=SYSTEM_TABLE; "
+literal|"tableSchem=metadata; tableName=COLUMNS; tableType=SYSTEM TABLE; "
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -19568,6 +19568,39 @@ argument_list|)
 argument_list|)
 argument_list|)
 expr_stmt|;
+comment|// including system tables; note that table type is "SYSTEM TABLE"
+comment|// not "SYSTEM_TABLE"
+name|assertEquals
+argument_list|(
+literal|"TABLE_CAT=null; TABLE_SCHEM=adhoc; TABLE_NAME=EMPLOYEES; TABLE_TYPE=TABLE; REMARKS=null; TYPE_CAT=null; TYPE_SCHEM=null; TYPE_NAME=null; SELF_REFERENCING_COL_NAME=null; REF_GENERATION=null\n"
+operator|+
+literal|"TABLE_CAT=null; TABLE_SCHEM=adhoc; TABLE_NAME=MUTABLE_EMPLOYEES; TABLE_TYPE=TABLE; REMARKS=null; TYPE_CAT=null; TYPE_SCHEM=null; TYPE_NAME=null; SELF_REFERENCING_COL_NAME=null; REF_GENERATION=null\n"
+operator|+
+literal|"TABLE_CAT=null; TABLE_SCHEM=adhoc; TABLE_NAME=V; TABLE_TYPE=VIEW; REMARKS=null; TYPE_CAT=null; TYPE_SCHEM=null; TYPE_NAME=null; SELF_REFERENCING_COL_NAME=null; REF_GENERATION=null\n"
+operator|+
+literal|"TABLE_CAT=null; TABLE_SCHEM=metadata; TABLE_NAME=COLUMNS; TABLE_TYPE=SYSTEM TABLE; REMARKS=null; TYPE_CAT=null; TYPE_SCHEM=null; TYPE_NAME=null; SELF_REFERENCING_COL_NAME=null; REF_GENERATION=null\n"
+operator|+
+literal|"TABLE_CAT=null; TABLE_SCHEM=metadata; TABLE_NAME=TABLES; TABLE_TYPE=SYSTEM TABLE; REMARKS=null; TYPE_CAT=null; TYPE_SCHEM=null; TYPE_NAME=null; SELF_REFERENCING_COL_NAME=null; REF_GENERATION=null\n"
+argument_list|,
+name|CalciteAssert
+operator|.
+name|toString
+argument_list|(
+name|metaData
+operator|.
+name|getTables
+argument_list|(
+literal|null
+argument_list|,
+literal|null
+argument_list|,
+literal|null
+argument_list|,
+literal|null
+argument_list|)
+argument_list|)
+argument_list|)
+expr_stmt|;
 comment|// views only
 name|assertEquals
 argument_list|(
@@ -19597,8 +19630,7 @@ name|TableType
 operator|.
 name|VIEW
 operator|.
-name|name
-argument_list|()
+name|jdbcName
 block|}
 argument_list|)
 argument_list|)

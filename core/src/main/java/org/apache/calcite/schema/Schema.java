@@ -237,7 +237,32 @@ name|TYPED_VIEW
 block|,
 comment|/** Table type not known to Calcite.      *      *<p>If you get one of these, please fix the problem by adding an enum      * value. */
 name|OTHER
-block|,   }
+block|;
+comment|/** The name used in JDBC. For example "SYSTEM TABLE" rather than      * "SYSTEM_TABLE". */
+specifier|public
+specifier|final
+name|String
+name|jdbcName
+decl_stmt|;
+name|TableType
+parameter_list|()
+block|{
+name|this
+operator|.
+name|jdbcName
+operator|=
+name|name
+argument_list|()
+operator|.
+name|replace
+argument_list|(
+literal|'_'
+argument_list|,
+literal|' '
+argument_list|)
+expr_stmt|;
+block|}
+block|}
 block|}
 end_interface
 

@@ -4820,8 +4820,7 @@ operator|.
 name|getJdbcTableType
 argument_list|()
 operator|.
-name|name
-argument_list|()
+name|jdbcName
 argument_list|)
 expr_stmt|;
 name|this
