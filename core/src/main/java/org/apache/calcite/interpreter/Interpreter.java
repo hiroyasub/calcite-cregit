@@ -1963,21 +1963,25 @@ name|rowEnumerable
 operator|=
 name|rowEnumerable
 expr_stmt|;
-assert|assert
+name|Preconditions
+operator|.
+name|checkArgument
+argument_list|(
 operator|(
 name|sink
-operator|!=
+operator|==
 literal|null
 operator|)
 operator|!=
 operator|(
 name|rowEnumerable
-operator|!=
+operator|==
 literal|null
 operator|)
-operator|:
+argument_list|,
 literal|"one or the other"
-assert|;
+argument_list|)
+expr_stmt|;
 block|}
 block|}
 comment|/**    * A {@link Source} that is just backed by an {@link Enumerator}. The {@link Enumerator} is closed    * when it is finished or by calling {@link #close()}.    */

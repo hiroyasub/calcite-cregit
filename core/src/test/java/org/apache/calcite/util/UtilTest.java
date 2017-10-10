@@ -15721,7 +15721,12 @@ literal|"</root>\n"
 decl_stmt|;
 name|assertThat
 argument_list|(
+name|Util
+operator|.
+name|toLinux
+argument_list|(
 name|s
+argument_list|)
 argument_list|,
 name|is
 argument_list|(

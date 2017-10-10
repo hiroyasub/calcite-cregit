@@ -1241,6 +1241,28 @@ begin_import
 import|import
 name|org
 operator|.
+name|hamcrest
+operator|.
+name|core
+operator|.
+name|Is
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|junit
+operator|.
+name|Assume
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
 name|junit
 operator|.
 name|Ignore
@@ -1254,6 +1276,16 @@ operator|.
 name|junit
 operator|.
 name|Test
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|io
+operator|.
+name|File
 import|;
 end_import
 
@@ -8782,6 +8814,38 @@ argument_list|)
 specifier|public
 name|void
 name|testPullUpPredicatesForExprsItr
+parameter_list|()
+block|{
+comment|// If we're running Windows, we are probably in a VM and the test may
+comment|// exceed timeout by a small margin.
+name|Assume
+operator|.
+name|assumeThat
+argument_list|(
+literal|"Too slow on Windows"
+argument_list|,
+name|File
+operator|.
+name|separatorChar
+argument_list|,
+name|Is
+operator|.
+name|is
+argument_list|(
+literal|'/'
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|testPullUpPredicatesForExprsItrNoTimeout
+argument_list|()
+expr_stmt|;
+block|}
+comment|/** As {@link #testPullUpPredicatesForExprsItr} but no timeout; can run on    * all platforms, even slow VMs. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testPullUpPredicatesForExprsItrNoTimeout
 parameter_list|()
 block|{
 specifier|final

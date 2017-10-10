@@ -49,6 +49,20 @@ begin_import
 import|import
 name|org
 operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|util
+operator|.
+name|TestUtil
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
 name|jsoup
 operator|.
 name|select
@@ -1171,6 +1185,15 @@ argument_list|()
 decl_stmt|;
 specifier|final
 name|String
+name|path
+init|=
+name|resourcePath
+argument_list|(
+literal|"sales-csv"
+argument_list|)
+decl_stmt|;
+specifier|final
+name|String
 name|model
 init|=
 literal|"inline:"
@@ -1193,14 +1216,16 @@ literal|"      \"factory\": \"org.apache.calcite.adapter.file.FileSchemaFactory\
 operator|+
 literal|"      \"operand\": {\n"
 operator|+
-literal|"        \"directory\": \""
+literal|"        \"directory\": "
 operator|+
-name|resourcePath
+name|TestUtil
+operator|.
+name|escapeString
 argument_list|(
-literal|"sales-csv"
+name|path
 argument_list|)
 operator|+
-literal|"\"\n"
+literal|"\n"
 operator|+
 literal|"      }\n"
 operator|+
