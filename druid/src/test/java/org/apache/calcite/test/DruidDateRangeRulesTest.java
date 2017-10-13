@@ -39,22 +39,6 @@ name|apache
 operator|.
 name|calcite
 operator|.
-name|adapter
-operator|.
-name|druid
-operator|.
-name|LocalInterval
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
 name|avatica
 operator|.
 name|util
@@ -202,6 +186,18 @@ operator|.
 name|hamcrest
 operator|.
 name|Matcher
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|joda
+operator|.
+name|time
+operator|.
+name|Interval
 import|;
 end_import
 
@@ -363,7 +359,7 @@ argument_list|)
 argument_list|,
 name|is
 argument_list|(
-literal|"[2014-06-01T00:00:00.000/2014-07-01T00:00:00.000]"
+literal|"[2014-06-01T00:00:00.000Z/2014-07-01T00:00:00.000Z]"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -434,19 +430,19 @@ argument_list|)
 argument_list|,
 name|is
 argument_list|(
-literal|"[2010-01-31T00:00:00.000/2010-02-01T00:00:00.000, "
+literal|"[2010-01-31T00:00:00.000Z/2010-02-01T00:00:00.000Z, "
 operator|+
-literal|"2010-03-31T00:00:00.000/2010-04-01T00:00:00.000, "
+literal|"2010-03-31T00:00:00.000Z/2010-04-01T00:00:00.000Z, "
 operator|+
-literal|"2010-05-31T00:00:00.000/2010-06-01T00:00:00.000, "
+literal|"2010-05-31T00:00:00.000Z/2010-06-01T00:00:00.000Z, "
 operator|+
-literal|"2010-07-31T00:00:00.000/2010-08-01T00:00:00.000, "
+literal|"2010-07-31T00:00:00.000Z/2010-08-01T00:00:00.000Z, "
 operator|+
-literal|"2010-08-31T00:00:00.000/2010-09-01T00:00:00.000, "
+literal|"2010-08-31T00:00:00.000Z/2010-09-01T00:00:00.000Z, "
 operator|+
-literal|"2010-10-31T00:00:00.000/2010-11-01T00:00:00.000, "
+literal|"2010-10-31T00:00:00.000Z/2010-11-01T00:00:00.000Z, "
 operator|+
-literal|"2010-12-31T00:00:00.000/2011-01-01T00:00:00.000]"
+literal|"2010-12-31T00:00:00.000Z/2011-01-01T00:00:00.000Z]"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -554,9 +550,9 @@ argument_list|)
 argument_list|,
 name|is
 argument_list|(
-literal|"[2012-02-29T00:00:00.000/2012-03-01T00:00:00.000, "
+literal|"[2012-02-29T00:00:00.000Z/2012-03-01T00:00:00.000Z, "
 operator|+
-literal|"2016-02-29T00:00:00.000/2016-03-01T00:00:00.000]"
+literal|"2016-02-29T00:00:00.000Z/2016-03-01T00:00:00.000Z]"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -664,9 +660,9 @@ argument_list|)
 argument_list|,
 name|is
 argument_list|(
-literal|"[2012-02-29T00:00:00.000/2012-03-01T00:00:00.000, "
+literal|"[2012-02-29T00:00:00.000Z/2012-03-01T00:00:00.000Z, "
 operator|+
-literal|"2016-02-29T00:00:00.000/2016-03-01T00:00:00.000]"
+literal|"2016-02-29T00:00:00.000Z/2016-03-01T00:00:00.000Z]"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -816,7 +812,7 @@ argument_list|)
 argument_list|,
 name|is
 argument_list|(
-literal|"[2010-01-01T00:00:00.000/2011-01-01T00:00:00.000]"
+literal|"[2010-01-01T00:00:00.000Z/2011-01-01T00:00:00.000Z]"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -917,7 +913,7 @@ block|}
 specifier|final
 name|List
 argument_list|<
-name|LocalInterval
+name|Interval
 argument_list|>
 name|intervals
 init|=
@@ -1054,7 +1050,7 @@ argument_list|)
 decl_stmt|;
 name|List
 argument_list|<
-name|LocalInterval
+name|Interval
 argument_list|>
 name|intervals
 init|=

@@ -815,6 +815,18 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|joda
+operator|.
+name|time
+operator|.
+name|Interval
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|io
@@ -959,7 +971,7 @@ decl_stmt|;
 specifier|final
 name|ImmutableList
 argument_list|<
-name|LocalInterval
+name|Interval
 argument_list|>
 name|intervals
 decl_stmt|;
@@ -1025,7 +1037,7 @@ name|druidTable
 parameter_list|,
 name|List
 argument_list|<
-name|LocalInterval
+name|Interval
 argument_list|>
 name|intervals
 parameter_list|,
@@ -2054,7 +2066,7 @@ name|druidTable
 parameter_list|,
 name|List
 argument_list|<
-name|LocalInterval
+name|Interval
 argument_list|>
 name|intervals
 parameter_list|,
@@ -2176,7 +2188,7 @@ name|query
 parameter_list|,
 name|List
 argument_list|<
-name|LocalInterval
+name|Interval
 argument_list|>
 name|intervals
 parameter_list|)
@@ -6475,7 +6487,7 @@ if|else if
 condition|(
 name|o
 operator|instanceof
-name|LocalInterval
+name|Interval
 condition|)
 block|{
 name|generator
@@ -6576,7 +6588,7 @@ name|dataSourceName
 parameter_list|,
 name|List
 argument_list|<
-name|LocalInterval
+name|Interval
 argument_list|>
 name|intervals
 parameter_list|)
