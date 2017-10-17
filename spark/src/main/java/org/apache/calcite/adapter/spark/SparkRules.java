@@ -775,6 +775,16 @@ name|java
 operator|.
 name|util
 operator|.
+name|Iterator
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
 name|List
 import|;
 end_import
@@ -2582,7 +2592,7 @@ argument_list|>
 argument_list|()
 block|{
 specifier|public
-name|List
+name|Iterator
 argument_list|<
 name|Pair
 argument_list|<
@@ -2611,7 +2621,7 @@ block|{
 return|return
 name|Collections
 operator|.
-name|emptyList
+name|emptyIterator
 argument_list|()
 return|;
 block|}
@@ -2639,6 +2649,9 @@ name|length
 argument_list|()
 argument_list|)
 argument_list|)
+operator|.
+name|iterator
+argument_list|()
 return|;
 block|}
 block|}
