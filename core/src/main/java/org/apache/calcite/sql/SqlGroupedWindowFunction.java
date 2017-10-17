@@ -12,66 +12,8 @@ operator|.
 name|calcite
 operator|.
 name|sql
-operator|.
-name|fun
 package|;
 end_package
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|sql
-operator|.
-name|SqlFunction
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|sql
-operator|.
-name|SqlFunctionCategory
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|sql
-operator|.
-name|SqlKind
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|sql
-operator|.
-name|SqlOperatorBinding
-import|;
-end_import
 
 begin_import
 import|import
@@ -150,23 +92,29 @@ comment|/**  * SQL function that computes keys by which rows can be partitioned 
 end_comment
 
 begin_class
+specifier|public
 class|class
-name|SqlGroupFunction
+name|SqlGroupedWindowFunction
 extends|extends
 name|SqlFunction
 block|{
 comment|/** The grouped function, if this an auxiliary function; null otherwise. */
+specifier|public
 specifier|final
-name|SqlGroupFunction
+name|SqlGroupedWindowFunction
 name|groupFunction
 decl_stmt|;
-comment|/** Creates a SqlGroupFunction.    *    * @param kind Kind; also determines function name    * @param groupFunction Group function, if this is an auxiliary;    *                      null, if this is a group function    * @param operandTypeChecker Operand type checker    */
-name|SqlGroupFunction
+comment|/** Creates a SqlGroupedWindowFunction.    *    * @param name Function name    * @param kind Kind    * @param groupFunction Group function, if this is an auxiliary;    *                      null, if this is a group function    * @param operandTypeChecker Operand type checker    */
+specifier|public
+name|SqlGroupedWindowFunction
 parameter_list|(
+name|String
+name|name
+parameter_list|,
 name|SqlKind
 name|kind
 parameter_list|,
-name|SqlGroupFunction
+name|SqlGroupedWindowFunction
 name|groupFunction
 parameter_list|,
 name|SqlOperandTypeChecker
@@ -175,10 +123,7 @@ parameter_list|)
 block|{
 name|super
 argument_list|(
-name|kind
-operator|.
 name|name
-argument_list|()
 argument_list|,
 name|kind
 argument_list|,
@@ -217,8 +162,38 @@ literal|null
 assert|;
 block|}
 block|}
-comment|/** Creates an auxiliary function from this grouped window function. */
-name|SqlGroupFunction
+comment|/** Creates a SqlGroupedWindowFunction.    *    * @param kind Kind; also determines function name    * @param groupFunction Group function, if this is an auxiliary;    *                      null, if this is a group function    * @param operandTypeChecker Operand type checker    */
+specifier|public
+name|SqlGroupedWindowFunction
+parameter_list|(
+name|SqlKind
+name|kind
+parameter_list|,
+name|SqlGroupedWindowFunction
+name|groupFunction
+parameter_list|,
+name|SqlOperandTypeChecker
+name|operandTypeChecker
+parameter_list|)
+block|{
+name|this
+argument_list|(
+name|kind
+operator|.
+name|name
+argument_list|()
+argument_list|,
+name|kind
+argument_list|,
+name|groupFunction
+argument_list|,
+name|operandTypeChecker
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Creates an auxiliary function from this grouped window function.    *    * @param kind Kind; also determines function name    */
+specifier|public
+name|SqlGroupedWindowFunction
 name|auxiliary
 parameter_list|(
 name|SqlKind
@@ -226,9 +201,35 @@ name|kind
 parameter_list|)
 block|{
 return|return
-operator|new
-name|SqlGroupFunction
+name|auxiliary
 argument_list|(
+name|kind
+operator|.
+name|name
+argument_list|()
+argument_list|,
+name|kind
+argument_list|)
+return|;
+block|}
+comment|/** Creates an auxiliary function from this grouped window function.    *    * @param name Function name    * @param kind Kind    */
+specifier|public
+name|SqlGroupedWindowFunction
+name|auxiliary
+parameter_list|(
+name|String
+name|name
+parameter_list|,
+name|SqlKind
+name|kind
+parameter_list|)
+block|{
+return|return
+operator|new
+name|SqlGroupedWindowFunction
+argument_list|(
+name|name
+argument_list|,
 name|kind
 argument_list|,
 name|this
@@ -239,9 +240,10 @@ argument_list|)
 return|;
 block|}
 comment|/** Returns a list of this grouped window function's auxiliary functions. */
+specifier|public
 name|List
 argument_list|<
-name|SqlGroupFunction
+name|SqlGroupedWindowFunction
 argument_list|>
 name|getAuxiliaryFunctions
 parameter_list|()
@@ -311,7 +313,7 @@ block|}
 end_class
 
 begin_comment
-comment|// End SqlGroupFunction.java
+comment|// End SqlGroupedWindowFunction.java
 end_comment
 
 end_unit
