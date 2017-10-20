@@ -1211,7 +1211,7 @@ name|explain
 init|=
 literal|"PLAN=EnumerableInterpreter\n"
 operator|+
-literal|"  BindableProject(s=[$2], page=[$0], day=[CAST($1):TIMESTAMP(0)])\n"
+literal|"  BindableProject(s=[$2], page=[$0], day=[CAST($1):TIMESTAMP(0) NOT NULL])\n"
 operator|+
 literal|"    DruidQuery(table=[[wiki, wikiticker]], "
 operator|+
@@ -1489,7 +1489,7 @@ literal|"PLAN="
 operator|+
 literal|"EnumerableInterpreter\n"
 operator|+
-literal|"  BindableProject(__time=[CAST($0):TIMESTAMP(0)])\n"
+literal|"  BindableProject(__time=[CAST($0):TIMESTAMP(0) NOT NULL)\n"
 operator|+
 literal|"    DruidQuery(table=[[wiki, wikiticker]], "
 operator|+
@@ -1687,7 +1687,7 @@ name|map
 operator|.
 name|get
 argument_list|(
-literal|"TIMESTAMP_WITH_LOCAL_TIME_ZONE(0)"
+literal|"TIMESTAMP_WITH_LOCAL_TIME_ZONE(0) NOT NULL"
 argument_list|)
 operator|.
 name|size
@@ -5158,7 +5158,7 @@ literal|"    BindableSort(sort0=[$2], dir0=[ASC], fetch=[5])\n"
 operator|+
 literal|"      BindableAggregate(group=[{0, 1}], agg#0=[COUNT()])\n"
 operator|+
-literal|"        BindableProject(countryName=[$1], EXPR$1=[FLOOR(CAST($0):TIMESTAMP(0), FLAG(DAY))])\n"
+literal|"        BindableProject(countryName=[$1], EXPR$1=[FLOOR(CAST($0):TIMESTAMP(0) NOT NULL, FLAG(DAY))])\n"
 operator|+
 literal|"          BindableFilter(condition=[AND(>=(FLOOR($0, FLAG(DAY)), 1997-01-01 00:00:00),<(FLOOR($0, FLAG(DAY)), 1997-09-01 00:00:00))])\n"
 operator|+
@@ -6608,7 +6608,7 @@ literal|"PLAN=EnumerableInterpreter\n"
 operator|+
 literal|"  BindableSort(sort0=[$1], dir0=[DESC])\n"
 operator|+
-literal|"    BindableProject(C=[$1], S=[$2], EXPR$2=[CAST($0):TIMESTAMP(0)])\n"
+literal|"    BindableProject(C=[$1], S=[$2], EXPR$2=[CAST($0):TIMESTAMP(0) NOT NULL])\n"
 operator|+
 literal|"      DruidQuery(table=[[foodmart, foodmart]], "
 operator|+
@@ -9574,6 +9574,44 @@ operator|.
 name|explainContains
 argument_list|(
 name|plan3
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testCountWithNonNull
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select count(\"timestamp\") from \"foodmart\"\n"
+decl_stmt|;
+specifier|final
+name|String
+name|druidQuery
+init|=
+literal|"{'queryType':'timeseries','dataSource':'foodmart'"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"EXPR$0=86829"
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|druidChecker
+argument_list|(
+name|druidQuery
+argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
