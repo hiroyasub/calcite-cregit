@@ -926,7 +926,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/** Conver the value of a literal to a string.      *      * @param literal Literal to translate      * @return String representation of the literal      */
+comment|/** Convert the value of a literal to a string.      *      * @param literal Literal to translate      * @return String representation of the literal      */
 specifier|private
 specifier|static
 name|String

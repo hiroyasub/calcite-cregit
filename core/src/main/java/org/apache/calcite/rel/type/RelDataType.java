@@ -147,7 +147,7 @@ argument_list|>
 name|getFieldNames
 parameter_list|()
 function_decl|;
-comment|/**    * Returns the number of fields in a struct type.    *    *<p>This method is equivalent to<code>{@link #getFieldList}    * ().size()</code>.    */
+comment|/**    * Returns the number of fields in a struct type.    *    *<p>This method is equivalent to    *<code>{@link #getFieldList}.size()</code>.    */
 name|int
 name|getFieldCount
 parameter_list|()
