@@ -7709,6 +7709,80 @@ literal|"full_name=Terry Anderson\n"
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2029">[CALCITE-2029]    * Query with "is distinct from" condition in where or join clause fails    * with AssertionError: Cast for just nullability not allowed</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testIsNotDistinctInFilter
+parameter_list|()
+block|{
+name|CalciteAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|CalciteAssert
+operator|.
+name|Config
+operator|.
+name|JDBC_FOODMART
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select *\n"
+operator|+
+literal|"  from \"foodmart\".\"employee\" as e1\n"
+operator|+
+literal|"  where e1.\"last_name\" is distinct from e1.\"last_name\""
+argument_list|)
+operator|.
+name|runs
+argument_list|()
+expr_stmt|;
+block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2029">[CALCITE-2029]    * Query with "is distinct from" condition in where or join clause fails    * with AssertionError: Cast for just nullability not allowed</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testMixedEqualAndIsNotDistinctJoin
+parameter_list|()
+block|{
+name|CalciteAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|CalciteAssert
+operator|.
+name|Config
+operator|.
+name|JDBC_FOODMART
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select *\n"
+operator|+
+literal|"  from \"foodmart\".\"employee\" as e1\n"
+operator|+
+literal|"  join \"foodmart\".\"employee\" as e2 on\n"
+operator|+
+literal|"  e1.\"first_name\" = e1.\"first_name\"\n"
+operator|+
+literal|"  and e1.\"last_name\" is distinct from e2.\"last_name\""
+argument_list|)
+operator|.
+name|runs
+argument_list|()
+expr_stmt|;
+block|}
 comment|/** A join that has both equi and non-equi conditions.    *    *<p>Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-371">[CALCITE-371]    * Cannot implement JOIN whose ON clause contains mixed equi and theta</a>. */
 annotation|@
 name|Test

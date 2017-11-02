@@ -5618,7 +5618,11 @@ specifier|final
 name|String
 name|sql
 init|=
-literal|"select 1 is distinct from 2 from (values(true))"
+literal|"select empno is distinct from deptno\n"
+operator|+
+literal|"from (values (cast(null as int), 1),\n"
+operator|+
+literal|"             (2, cast(null as int))) as emp(empno, deptno)"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -5640,7 +5644,11 @@ specifier|final
 name|String
 name|sql
 init|=
-literal|"select 1 is not distinct from 2 from (values(true))"
+literal|"select empno is not distinct from deptno\n"
+operator|+
+literal|"from (values (cast(null as int), 1),\n"
+operator|+
+literal|"             (2, cast(null as int))) as emp(empno, deptno)"
 decl_stmt|;
 name|sql
 argument_list|(

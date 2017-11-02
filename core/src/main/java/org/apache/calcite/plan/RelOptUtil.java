@@ -9594,27 +9594,21 @@ expr_stmt|;
 block|}
 comment|// The result of IS DISTINCT FROM is NOT NULL because it can
 comment|// only return TRUE or FALSE.
+assert|assert
 name|ret
-operator|=
-name|rexBuilder
+operator|!=
+literal|null
+assert|;
+assert|assert
+operator|!
+name|ret
 operator|.
-name|makeCast
-argument_list|(
-name|rexBuilder
-operator|.
-name|getTypeFactory
+name|getType
 argument_list|()
 operator|.
-name|createSqlType
-argument_list|(
-name|SqlTypeName
-operator|.
-name|BOOLEAN
-argument_list|)
-argument_list|,
-name|ret
-argument_list|)
-expr_stmt|;
+name|isNullable
+argument_list|()
+assert|;
 return|return
 name|ret
 return|;
@@ -9676,6 +9670,8 @@ operator|.
 name|NOT_EQUALS
 expr_stmt|;
 block|}
+comment|// By the time the ELSE is reached, x and y are known to be not null;
+comment|// therefore the whole CASE is not null.
 name|RexNode
 index|[]
 name|whenThenElse
@@ -9732,9 +9728,19 @@ name|makeCall
 argument_list|(
 name|eqOp
 argument_list|,
+name|rexBuilder
+operator|.
+name|makeNotNull
+argument_list|(
 name|x
+argument_list|)
 argument_list|,
+name|rexBuilder
+operator|.
+name|makeNotNull
+argument_list|(
 name|y
+argument_list|)
 argument_list|)
 block|}
 decl_stmt|;
