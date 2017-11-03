@@ -14305,6 +14305,44 @@ name|check
 argument_list|()
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2028">[CALCITE-2028]    * Un-correlated IN sub-query should be converted into a Join,    * rather than a Correlate without correlation variables</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testDecorrelateUncorrelatedInAndCorrelatedExists
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select * from sales.emp\n"
+operator|+
+literal|"WHERE job in (\n"
+operator|+
+literal|"  select job from emp ee where ee.sal=34)"
+operator|+
+literal|"AND EXISTS (\n"
+operator|+
+literal|"  select * from emp e where emp.deptno = e.deptno)\n"
+decl_stmt|;
+name|checkSubQuery
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|withLateDecorrelation
+argument_list|(
+literal|true
+argument_list|)
+operator|.
+name|check
+argument_list|()
+expr_stmt|;
+block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1537">[CALCITE-1537]    * Unnecessary project expression in multi-sub-query plan</a>. */
 annotation|@
 name|Test
