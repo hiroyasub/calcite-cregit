@@ -21470,7 +21470,11 @@ literal|"RecordType(INTEGER NOT NULL DEPTNO,"
 operator|+
 literal|" INTEGER NOT NULL EMPNO,"
 operator|+
-literal|" VARCHAR(10) NOT NULL ENAME) NOT NULL"
+literal|" VARCHAR(10) NOT NULL ENAME,"
+operator|+
+literal|" RecordType(VARCHAR(10) NOT NULL TYPE, VARCHAR(20) NOT NULL DESC)"
+operator|+
+literal|" NOT NULL ARRAY NOT NULL SKILLS) NOT NULL"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -22644,6 +22648,44 @@ argument_list|(
 literal|"SELECT customer.contact.coord.x, customer.contact.email, contact.coord.y FROM customer.contact"
 argument_list|,
 literal|"RecordType(INTEGER NOT NULL X, VARCHAR(20) NOT NULL EMAIL, INTEGER NOT NULL Y) NOT NULL"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testArrayOfRecordType
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"SELECT name, dept_nested.employees[1].ne as ne from dept_nested"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Unknown field 'NE'"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"SELECT name, dept_nested.employees[1].ename as ename from dept_nested"
+argument_list|)
+operator|.
+name|type
+argument_list|(
+literal|"RecordType(VARCHAR(10) NOT NULL NAME, VARCHAR(10) ENAME) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"SELECT dept_nested.employees[1].skills[1].desc as DESCRIPTION from dept_nested"
+argument_list|)
+operator|.
+name|type
+argument_list|(
+literal|"RecordType(VARCHAR(20) DESCRIPTION) NOT NULL"
 argument_list|)
 expr_stmt|;
 block|}
@@ -24882,6 +24924,8 @@ literal|"CURRENT_VALUE -\n"
 operator|+
 literal|"DEFAULT -\n"
 operator|+
+literal|"DOT -\n"
+operator|+
 literal|"ITEM -\n"
 operator|+
 literal|"NEXT_VALUE -\n"
@@ -24903,8 +24947,6 @@ operator|+
 literal|"+ pre\n"
 operator|+
 literal|"- pre\n"
-operator|+
-literal|". left\n"
 operator|+
 literal|"FINAL pre\n"
 operator|+
