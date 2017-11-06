@@ -697,7 +697,7 @@ literal|false
 return|;
 block|}
 comment|/** Returns the operands to a call permuted into the same order as the    * formal parameters of the function. */
-specifier|public
+specifier|private
 name|List
 argument_list|<
 name|SqlNode
@@ -1064,11 +1064,20 @@ block|}
 annotation|@
 name|Override
 specifier|public
-name|Comparable
+parameter_list|<
+name|T
+parameter_list|>
+name|T
 name|getOperandLiteralValue
 parameter_list|(
 name|int
 name|ordinal
+parameter_list|,
+name|Class
+argument_list|<
+name|T
+argument_list|>
+name|clazz
 parameter_list|)
 block|{
 try|try
@@ -1087,9 +1096,14 @@ decl_stmt|;
 return|return
 name|SqlLiteral
 operator|.
-name|value
+name|unchain
 argument_list|(
 name|node
+argument_list|)
+operator|.
+name|getValueAs
+argument_list|(
+name|clazz
 argument_list|)
 return|;
 block|}

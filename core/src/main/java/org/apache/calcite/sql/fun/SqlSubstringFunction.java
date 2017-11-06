@@ -1070,15 +1070,10 @@ operator|.
 name|getOperandLiteralValue
 argument_list|(
 literal|1
-argument_list|)
-operator|instanceof
+argument_list|,
 name|BigDecimal
-operator|&&
-name|call
 operator|.
-name|getOperandLiteralValue
-argument_list|(
-literal|1
+name|class
 argument_list|)
 operator|.
 name|equals

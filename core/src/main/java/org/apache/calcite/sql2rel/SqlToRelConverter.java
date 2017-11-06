@@ -12543,12 +12543,9 @@ specifier|final
 name|String
 name|sampleName
 init|=
-operator|(
-name|String
-operator|)
 name|SqlLiteral
 operator|.
-name|value
+name|unchain
 argument_list|(
 name|call
 operator|.
@@ -12556,6 +12553,13 @@ name|operand
 argument_list|(
 literal|0
 argument_list|)
+argument_list|)
+operator|.
+name|getValueAs
+argument_list|(
+name|String
+operator|.
+name|class
 argument_list|)
 decl_stmt|;
 name|datasetStack

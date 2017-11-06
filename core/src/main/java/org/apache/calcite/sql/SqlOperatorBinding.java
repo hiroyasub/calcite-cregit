@@ -251,7 +251,33 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
-comment|/**    * Gets the value of a literal operand.    *    *<p>Cases:    *<ul>    *<li>If the operand is not a literal, the value is null.    *    *<li>If the operand is a string literal,    * the value will be of type {@link org.apache.calcite.util.NlsString}.    *    *<li>If the operand is a numeric literal,    * the value will be of type {@link java.math.BigDecimal}.    *    *<li>If the operand is an interval qualifier,    * the value will be of type {@link SqlIntervalQualifier}</li>    *    *<li>Otherwise the type is undefined, and the value may be null.    *</ul>    *    * @param ordinal zero-based ordinal of operand of interest    * @return value of operand    */
+comment|/**    * Gets the value of a literal operand.    *    *<p>Cases:    *<ul>    *<li>If the operand is not a literal, the value is null.    *    *<li>If the operand is a string literal,    * the value will be of type {@link org.apache.calcite.util.NlsString}.    *    *<li>If the operand is a numeric literal,    * the value will be of type {@link java.math.BigDecimal}.    *    *<li>If the operand is an interval qualifier,    * the value will be of type {@link SqlIntervalQualifier}</li>    *    *<li>Otherwise the type is undefined, and the value may be null.    *</ul>    *    * @param ordinal zero-based ordinal of operand of interest    * @param clazz Desired valued type    *    * @return value of operand    */
+specifier|public
+parameter_list|<
+name|T
+parameter_list|>
+name|T
+name|getOperandLiteralValue
+parameter_list|(
+name|int
+name|ordinal
+parameter_list|,
+name|Class
+argument_list|<
+name|T
+argument_list|>
+name|clazz
+parameter_list|)
+block|{
+throw|throw
+operator|new
+name|UnsupportedOperationException
+argument_list|()
+throw|;
+block|}
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 name|Comparable
 name|getOperandLiteralValue
@@ -260,11 +286,16 @@ name|int
 name|ordinal
 parameter_list|)
 block|{
-throw|throw
-operator|new
-name|UnsupportedOperationException
-argument_list|()
-throw|;
+return|return
+name|getOperandLiteralValue
+argument_list|(
+name|ordinal
+argument_list|,
+name|Comparable
+operator|.
+name|class
+argument_list|)
+return|;
 block|}
 comment|/**    * Determines whether a bound operand is NULL.    *    *<p>This is only relevant for SQL validation.    *    * @param ordinal   zero-based ordinal of operand of interest    * @param allowCast whether to regard CAST(constant) as a constant    * @return whether operand is null; false for everything except SQL    * validation    */
 specifier|public
