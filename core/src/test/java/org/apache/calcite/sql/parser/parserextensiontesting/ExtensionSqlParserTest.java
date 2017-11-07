@@ -29,6 +29,20 @@ name|calcite
 operator|.
 name|sql
 operator|.
+name|SqlNode
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
 name|parser
 operator|.
 name|SqlParseException
@@ -64,6 +78,18 @@ operator|.
 name|parser
 operator|.
 name|SqlParserTest
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|hamcrest
+operator|.
+name|core
+operator|.
+name|IsNull
 import|;
 end_import
 
@@ -151,6 +177,39 @@ operator|.
 name|ok
 argument_list|(
 literal|"CREATE TABLE `FOO`.`BAZ` (`I` INTEGER, `J` VARCHAR(10) NOT NULL)"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testExtendedSqlStmt
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"DESCRIBE SPACE POWER"
+argument_list|)
+operator|.
+name|node
+argument_list|(
+operator|new
+name|IsNull
+argument_list|<
+name|SqlNode
+argument_list|>
+argument_list|()
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"DESCRIBE SEA ^POWER^"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"(?s)Encountered \"POWER\" at line 1, column 14..*"
 argument_list|)
 expr_stmt|;
 block|}
