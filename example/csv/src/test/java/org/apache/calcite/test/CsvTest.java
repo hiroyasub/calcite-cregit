@@ -1216,6 +1216,151 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testPushDownProjectAggregate
+parameter_list|()
+throws|throws
+name|SQLException
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"explain plan for\n"
+operator|+
+literal|"select gender, count(*) from EMPS group by gender"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"PLAN="
+operator|+
+literal|"EnumerableAggregate(group=[{0}], EXPR$1=[COUNT()])\n"
+operator|+
+literal|"  CsvTableScan(table=[[SALES, EMPS]], fields=[[3]])\n"
+decl_stmt|;
+name|sql
+argument_list|(
+literal|"smart"
+argument_list|,
+name|sql
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+name|expected
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testPushDownProjectAggregateWithFilter
+parameter_list|()
+throws|throws
+name|SQLException
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"explain plan for\n"
+operator|+
+literal|"select max(empno) from EMPS where gender='F'"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"PLAN="
+operator|+
+literal|"EnumerableAggregate(group=[{}], EXPR$0=[MAX($0)])\n"
+operator|+
+literal|"  EnumerableCalc(expr#0..1=[{inputs}], expr#2=['F'], "
+operator|+
+literal|"expr#3=[=($t1, $t2)], proj#0..1=[{exprs}], $condition=[$t3])\n"
+operator|+
+literal|"    CsvTableScan(table=[[SALES, EMPS]], fields=[[0, 3]])\n"
+decl_stmt|;
+name|sql
+argument_list|(
+literal|"smart"
+argument_list|,
+name|sql
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+name|expected
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testPushDownProjectAggregateNested
+parameter_list|()
+throws|throws
+name|SQLException
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"explain plan for\n"
+operator|+
+literal|"select gender, max(qty)\n"
+operator|+
+literal|"from (\n"
+operator|+
+literal|"  select name, gender, count(*) qty\n"
+operator|+
+literal|"  from EMPS\n"
+operator|+
+literal|"  group by name, gender) t\n"
+operator|+
+literal|"group by gender"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"PLAN="
+operator|+
+literal|"EnumerableAggregate(group=[{1}], EXPR$1=[MAX($2)])\n"
+operator|+
+literal|"  EnumerableAggregate(group=[{0, 1}], QTY=[COUNT()])\n"
+operator|+
+literal|"    CsvTableScan(table=[[SALES, EMPS]], fields=[[1, 3]])\n"
+decl_stmt|;
+name|sql
+argument_list|(
+literal|"smart"
+argument_list|,
+name|sql
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+name|expected
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testFilterableSelect
 parameter_list|()
 throws|throws
