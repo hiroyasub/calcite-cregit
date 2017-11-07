@@ -10295,17 +10295,10 @@ argument_list|,
 literal|"month=December; avg$=33.62788702774498"
 argument_list|)
 expr_stmt|;
-name|wikiApprox
-argument_list|(
-literal|"select (count(distinct \"user_id\") + 100) - "
-operator|+
-literal|"(count(distinct \"user_id\") * 2) from \"wiki\""
-argument_list|)
-operator|.
-name|queryContains
-argument_list|(
-name|druidChecker
-argument_list|(
+specifier|final
+name|String
+name|druid
+init|=
 literal|"'aggregations':[{'type':'hyperUnique','name':'$f0',"
 operator|+
 literal|"'fieldName':'user_unique'}],'postAggregations':[{'type':"
@@ -10323,6 +10316,55 @@ operator|+
 literal|"'hyperUniqueCardinality','name':'','fieldName':'$f0'},"
 operator|+
 literal|"{'type':'constant','name':'','value':2.0}]}]}]"
+decl_stmt|;
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select (count(distinct \"user_id\") + 100) - "
+operator|+
+literal|"(count(distinct \"user_id\") * 2) from \"wiki\""
+decl_stmt|;
+name|wikiApprox
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|druidChecker
+argument_list|(
+name|druid
+argument_list|)
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"EXPR$0=-10590"
+argument_list|)
+expr_stmt|;
+comment|// Change COUNT(DISTINCT ...) to APPROX_COUNT_DISTINCT(...) and get
+comment|// same result even if approximation is off by default.
+specifier|final
+name|String
+name|sql2
+init|=
+literal|"select (approx_count_distinct(\"user_id\") + 100) - "
+operator|+
+literal|"(approx_count_distinct(\"user_id\") * 2) from \"wiki\""
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql2
+argument_list|,
+name|WIKI
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|druidChecker
+argument_list|(
+name|druid
 argument_list|)
 argument_list|)
 operator|.

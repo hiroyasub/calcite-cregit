@@ -391,6 +391,8 @@ name|COUNT
 argument_list|,
 literal|false
 argument_list|,
+literal|false
+argument_list|,
 name|ImmutableIntList
 operator|.
 name|of
@@ -571,6 +573,8 @@ argument_list|(
 name|SqlStdOperatorTable
 operator|.
 name|SUM0
+argument_list|,
+literal|false
 argument_list|,
 literal|false
 argument_list|,
@@ -1048,6 +1052,8 @@ name|COUNT
 argument_list|,
 literal|false
 argument_list|,
+literal|false
+argument_list|,
 name|ImmutableIntList
 operator|.
 name|of
@@ -1277,6 +1283,8 @@ argument_list|(
 name|SqlStdOperatorTable
 operator|.
 name|SUM
+argument_list|,
+literal|false
 argument_list|,
 literal|false
 argument_list|,

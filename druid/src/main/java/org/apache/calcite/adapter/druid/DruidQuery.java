@@ -5619,6 +5619,11 @@ condition|)
 block|{
 if|if
 condition|(
+name|aggCall
+operator|.
+name|isApproximate
+argument_list|()
+operator|||
 name|config
 operator|.
 name|approximateDistinctCount

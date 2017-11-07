@@ -2816,7 +2816,22 @@ name|COUNT
 init|=
 operator|new
 name|SqlCountAggFunction
-argument_list|()
+argument_list|(
+literal|"COUNT"
+argument_list|)
+decl_stmt|;
+comment|/**    *<code>APPROX_COUNT_DISTINCT</code> aggregate function.    */
+specifier|public
+specifier|static
+specifier|final
+name|SqlAggFunction
+name|APPROX_COUNT_DISTINCT
+init|=
+operator|new
+name|SqlCountAggFunction
+argument_list|(
+literal|"APPROX_COUNT_DISTINCT"
+argument_list|)
 decl_stmt|;
 comment|/**    *<code>MIN</code> aggregate function.    */
 specifier|public

@@ -1525,6 +1525,11 @@ name|roll
 argument_list|,
 literal|false
 argument_list|,
+name|aggregateCall
+operator|.
+name|isApproximate
+argument_list|()
+argument_list|,
 name|ImmutableList
 operator|.
 name|of
@@ -1617,6 +1622,11 @@ argument_list|(
 name|aggregation
 argument_list|,
 literal|false
+argument_list|,
+name|aggregateCall
+operator|.
+name|isApproximate
+argument_list|()
 argument_list|,
 name|newArgs
 argument_list|,

@@ -6468,6 +6468,11 @@ operator|.
 name|isDistinct
 argument_list|()
 argument_list|,
+name|aggregateCall
+operator|.
+name|isApproximate
+argument_list|()
+argument_list|,
 name|ImmutableList
 operator|.
 name|of

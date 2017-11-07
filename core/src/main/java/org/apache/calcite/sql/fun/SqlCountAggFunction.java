@@ -251,11 +251,14 @@ block|{
 comment|//~ Constructors -----------------------------------------------------------
 specifier|public
 name|SqlCountAggFunction
-parameter_list|()
+parameter_list|(
+name|String
+name|name
+parameter_list|)
 block|{
 name|super
 argument_list|(
-literal|"COUNT"
+name|name
 argument_list|,
 literal|null
 argument_list|,

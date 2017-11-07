@@ -199,7 +199,7 @@ name|sql
 operator|.
 name|fun
 operator|.
-name|SqlCountAggFunction
+name|SqlMinMaxAggFunction
 import|;
 end_import
 
@@ -215,7 +215,7 @@ name|sql
 operator|.
 name|fun
 operator|.
-name|SqlMinMaxAggFunction
+name|SqlStdOperatorTable
 import|;
 end_import
 
@@ -1434,9 +1434,9 @@ name|COUNT
 case|:
 name|aggFunction
 operator|=
-operator|new
-name|SqlCountAggFunction
-argument_list|()
+name|SqlStdOperatorTable
+operator|.
+name|COUNT
 expr_stmt|;
 break|break;
 default|default:

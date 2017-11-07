@@ -3197,6 +3197,8 @@ name|MIN
 argument_list|,
 literal|false
 argument_list|,
+literal|false
+argument_list|,
 name|ImmutableList
 operator|.
 name|of
@@ -3502,6 +3504,8 @@ argument_list|(
 name|SqlStdOperatorTable
 operator|.
 name|MIN
+argument_list|,
+literal|false
 argument_list|,
 literal|false
 argument_list|,
@@ -4411,6 +4415,8 @@ argument_list|(
 name|SqlStdOperatorTable
 operator|.
 name|SINGLE_VALUE
+argument_list|,
+literal|false
 argument_list|,
 literal|false
 argument_list|,

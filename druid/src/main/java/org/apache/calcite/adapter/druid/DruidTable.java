@@ -293,6 +293,22 @@ name|calcite
 operator|.
 name|sql
 operator|.
+name|fun
+operator|.
+name|SqlStdOperatorTable
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
 name|type
 operator|.
 name|SqlTypeName
@@ -957,6 +973,8 @@ assert|;
 comment|// Our rolled up columns are only allowed in COUNT(DISTINCT ...) aggregate functions.
 comment|// We only allow this when approximate results are acceptable.
 return|return
+operator|(
+operator|(
 name|config
 operator|!=
 literal|null
@@ -970,6 +988,17 @@ name|isCountDistinct
 argument_list|(
 name|call
 argument_list|)
+operator|)
+operator|||
+name|call
+operator|.
+name|getOperator
+argument_list|()
+operator|==
+name|SqlStdOperatorTable
+operator|.
+name|APPROX_COUNT_DISTINCT
+operator|)
 operator|&&
 name|call
 operator|.

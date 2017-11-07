@@ -694,6 +694,8 @@ name|COUNT
 argument_list|,
 literal|true
 argument_list|,
+literal|false
+argument_list|,
 name|ImmutableList
 operator|.
 name|of
@@ -716,6 +718,8 @@ argument_list|(
 name|SqlStdOperatorTable
 operator|.
 name|COUNT
+argument_list|,
+literal|false
 argument_list|,
 literal|false
 argument_list|,

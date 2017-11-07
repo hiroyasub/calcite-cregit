@@ -2671,6 +2671,8 @@ name|SUM
 argument_list|,
 literal|false
 argument_list|,
+literal|false
+argument_list|,
 literal|null
 argument_list|,
 literal|null
@@ -3610,6 +3612,8 @@ name|COUNT
 argument_list|,
 literal|true
 argument_list|,
+literal|false
+argument_list|,
 literal|null
 argument_list|,
 literal|"C"
@@ -3732,6 +3736,8 @@ name|COUNT
 argument_list|,
 literal|false
 argument_list|,
+literal|false
+argument_list|,
 literal|null
 argument_list|,
 literal|"C"
@@ -3744,6 +3750,8 @@ argument_list|(
 name|SqlStdOperatorTable
 operator|.
 name|SUM
+argument_list|,
+literal|false
 argument_list|,
 literal|false
 argument_list|,
@@ -3876,6 +3884,8 @@ name|COUNT
 argument_list|,
 literal|false
 argument_list|,
+literal|false
+argument_list|,
 name|builder
 operator|.
 name|call
@@ -3994,6 +4004,8 @@ name|SUM
 argument_list|,
 literal|false
 argument_list|,
+literal|false
+argument_list|,
 name|builder
 operator|.
 name|field
@@ -4101,6 +4113,8 @@ argument_list|(
 name|SqlStdOperatorTable
 operator|.
 name|SUM
+argument_list|,
+literal|false
 argument_list|,
 literal|false
 argument_list|,
@@ -4712,6 +4726,8 @@ name|GROUPING
 argument_list|,
 literal|false
 argument_list|,
+literal|false
+argument_list|,
 literal|null
 argument_list|,
 literal|"g"
@@ -4806,6 +4822,8 @@ operator|.
 name|GROUPING
 argument_list|,
 literal|true
+argument_list|,
+literal|false
 argument_list|,
 literal|null
 argument_list|,
@@ -4904,6 +4922,8 @@ argument_list|(
 name|SqlStdOperatorTable
 operator|.
 name|GROUPING
+argument_list|,
+literal|false
 argument_list|,
 literal|false
 argument_list|,
@@ -7412,6 +7432,8 @@ argument_list|(
 name|SqlStdOperatorTable
 operator|.
 name|SUM
+argument_list|,
+literal|false
 argument_list|,
 literal|false
 argument_list|,

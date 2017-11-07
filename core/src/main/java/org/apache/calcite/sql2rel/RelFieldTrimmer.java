@@ -4550,6 +4550,11 @@ operator|.
 name|isDistinct
 argument_list|()
 argument_list|,
+name|aggCall
+operator|.
+name|isApproximate
+argument_list|()
+argument_list|,
 name|filterArg
 argument_list|,
 name|aggCall
