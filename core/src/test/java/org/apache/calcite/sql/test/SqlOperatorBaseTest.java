@@ -5001,11 +5001,7 @@ literal|"cast(null as boolean)"
 argument_list|)
 expr_stmt|;
 block|}
-annotation|@
-name|Ignore
-argument_list|(
-literal|"[CALCITE-1439] Handling errors during constant reduction"
-argument_list|)
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1439">[CALCITE-1439]    * Handling errors during constant reduction</a>. */
 annotation|@
 name|Test
 specifier|public
@@ -5013,9 +5009,9 @@ name|void
 name|testCastInvalid
 parameter_list|()
 block|{
-comment|// Constant reduction kicks in and generates Java constants that throw
-comment|// when the class is loaded, thus ExceptionInInitializerError. We don't have
-comment|// a fix yet.
+comment|// Before CALCITE-1439 was fixed, constant reduction would kick in and
+comment|// generate Java constants that throw when the class is loaded, thus
+comment|// ExceptionInInitializerError.
 name|tester
 operator|.
 name|checkScalarExact
