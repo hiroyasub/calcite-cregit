@@ -281,6 +281,22 @@ name|rel
 operator|.
 name|core
 operator|.
+name|RelFactories
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|core
+operator|.
 name|Union
 import|;
 end_import
@@ -9718,6 +9734,10 @@ operator|.
 name|class
 argument_list|,
 literal|false
+argument_list|,
+name|RelFactories
+operator|.
+name|LOGICAL_BUILDER
 argument_list|)
 argument_list|)
 comment|// Convert projects to calcs, merge two calcs, and then

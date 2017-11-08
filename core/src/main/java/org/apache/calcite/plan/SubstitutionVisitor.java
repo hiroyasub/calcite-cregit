@@ -7904,11 +7904,19 @@ name|INSTANCE
 init|=
 operator|new
 name|FilterOnProjectRule
-argument_list|()
+argument_list|(
+name|RelFactories
+operator|.
+name|LOGICAL_BUILDER
+argument_list|)
 decl_stmt|;
-specifier|private
+comment|/**      * Creates a FilterOnProjectRule.      *      * @param relBuilderFactory Builder for relational expressions      */
+specifier|public
 name|FilterOnProjectRule
-parameter_list|()
+parameter_list|(
+name|RelBuilderFactory
+name|relBuilderFactory
+parameter_list|)
 block|{
 name|super
 argument_list|(
@@ -7935,6 +7943,10 @@ argument_list|()
 argument_list|)
 argument_list|)
 argument_list|)
+argument_list|,
+name|relBuilderFactory
+argument_list|,
+literal|null
 argument_list|)
 expr_stmt|;
 block|}

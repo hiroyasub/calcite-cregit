@@ -71,6 +71,22 @@ name|calcite
 operator|.
 name|rel
 operator|.
+name|core
+operator|.
+name|RelFactories
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
 name|logical
 operator|.
 name|LogicalCalc
@@ -135,6 +151,20 @@ name|RexProgramBuilder
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|tools
+operator|.
+name|RelBuilderFactory
+import|;
+end_import
+
 begin_comment
 comment|/**  * Planner rule that merges a  * {@link org.apache.calcite.rel.logical.LogicalFilter} and a  * {@link org.apache.calcite.rel.logical.LogicalCalc}. The  * result is a {@link org.apache.calcite.rel.logical.LogicalCalc}  * whose filter condition is the logical AND of the two.  *  * @see FilterMergeRule  */
 end_comment
@@ -155,12 +185,20 @@ name|INSTANCE
 init|=
 operator|new
 name|FilterCalcMergeRule
-argument_list|()
+argument_list|(
+name|RelFactories
+operator|.
+name|LOGICAL_BUILDER
+argument_list|)
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-specifier|private
+comment|/**    * Creates a FilterCalcMergeRule.    *    * @param relBuilderFactory Builder for relational expressions    */
+specifier|public
 name|FilterCalcMergeRule
-parameter_list|()
+parameter_list|(
+name|RelBuilderFactory
+name|relBuilderFactory
+parameter_list|)
 block|{
 name|super
 argument_list|(
@@ -180,6 +218,10 @@ name|any
 argument_list|()
 argument_list|)
 argument_list|)
+argument_list|,
+name|relBuilderFactory
+argument_list|,
+literal|null
 argument_list|)
 expr_stmt|;
 block|}

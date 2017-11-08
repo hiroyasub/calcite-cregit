@@ -369,7 +369,8 @@ name|LOGICAL_BUILDER
 argument_list|)
 expr_stmt|;
 block|}
-specifier|protected
+comment|/** Creates an AggregateFilterTransposeRule. */
+specifier|public
 name|AggregateFilterTransposeRule
 parameter_list|(
 name|RelOptRuleOperand

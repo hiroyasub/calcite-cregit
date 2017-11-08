@@ -131,6 +131,22 @@ name|rel
 operator|.
 name|core
 operator|.
+name|RelFactories
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|core
+operator|.
 name|TableScan
 import|;
 end_import
@@ -174,6 +190,20 @@ operator|.
 name|schema
 operator|.
 name|ProjectableFilterableTable
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|tools
+operator|.
+name|RelBuilderFactory
 import|;
 end_import
 
@@ -353,6 +383,10 @@ argument_list|()
 argument_list|)
 argument_list|)
 argument_list|,
+name|RelFactories
+operator|.
+name|LOGICAL_BUILDER
+argument_list|,
 literal|"ProjectScanRule"
 argument_list|)
 block|{
@@ -438,6 +472,10 @@ argument_list|)
 argument_list|)
 argument_list|)
 argument_list|,
+name|RelFactories
+operator|.
+name|LOGICAL_BUILDER
+argument_list|,
 literal|"ProjectScanRule:interpreter"
 argument_list|)
 block|{
@@ -486,12 +524,15 @@ block|}
 block|}
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/** Creates a ProjectScanRule. */
-specifier|private
+comment|/** Creates a ProjectTableScanRule. */
+specifier|public
 name|ProjectTableScanRule
 parameter_list|(
 name|RelOptRuleOperand
 name|operand
+parameter_list|,
+name|RelBuilderFactory
+name|relBuilderFactory
 parameter_list|,
 name|String
 name|description
@@ -500,6 +541,8 @@ block|{
 name|super
 argument_list|(
 name|operand
+argument_list|,
+name|relBuilderFactory
 argument_list|,
 name|description
 argument_list|)

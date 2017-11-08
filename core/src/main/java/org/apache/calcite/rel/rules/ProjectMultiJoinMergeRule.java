@@ -146,7 +146,7 @@ argument_list|)
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
 comment|/** Creates a ProjectMultiJoinMergeRule. */
-specifier|private
+specifier|public
 name|ProjectMultiJoinMergeRule
 parameter_list|(
 name|RelBuilderFactory

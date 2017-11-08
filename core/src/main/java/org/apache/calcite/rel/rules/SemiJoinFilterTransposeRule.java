@@ -107,6 +107,20 @@ name|LogicalFilter
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|tools
+operator|.
+name|RelBuilderFactory
+import|;
+end_import
+
 begin_comment
 comment|/**  * Planner rule that pushes  * {@link org.apache.calcite.rel.core.SemiJoin}s down in a tree past  * a {@link org.apache.calcite.rel.core.Filter}.  *  *<p>The intention is to trigger other rules that will convert  * {@code SemiJoin}s.  *  *<p>SemiJoin(LogicalFilter(X), Y)&rarr; LogicalFilter(SemiJoin(X, Y))  *  * @see SemiJoinProjectTransposeRule  */
 end_comment
@@ -126,13 +140,20 @@ name|INSTANCE
 init|=
 operator|new
 name|SemiJoinFilterTransposeRule
-argument_list|()
+argument_list|(
+name|RelFactories
+operator|.
+name|LOGICAL_BUILDER
+argument_list|)
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
 comment|/**    * Creates a SemiJoinFilterTransposeRule.    */
-specifier|private
+specifier|public
 name|SemiJoinFilterTransposeRule
-parameter_list|()
+parameter_list|(
+name|RelBuilderFactory
+name|relBuilderFactory
+parameter_list|)
 block|{
 name|super
 argument_list|(
@@ -155,6 +176,10 @@ argument_list|()
 argument_list|)
 argument_list|)
 argument_list|)
+argument_list|,
+name|relBuilderFactory
+argument_list|,
+literal|null
 argument_list|)
 expr_stmt|;
 block|}

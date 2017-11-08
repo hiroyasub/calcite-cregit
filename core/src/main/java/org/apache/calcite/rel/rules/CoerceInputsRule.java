@@ -97,9 +97,39 @@ name|calcite
 operator|.
 name|rel
 operator|.
+name|core
+operator|.
+name|RelFactories
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
 name|type
 operator|.
 name|RelDataType
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|tools
+operator|.
+name|RelBuilderFactory
 import|;
 end_import
 
@@ -124,7 +154,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * CoerceInputsRule precasts inputs to a particular type. This can be used to  * assist operator implementations which impose requirements on their input  * types.  */
+comment|/**  * CoerceInputsRule pre-casts inputs to a particular type. This can be used to  * assist operator implementations which impose requirements on their input  * types.  */
 end_comment
 
 begin_class
@@ -146,7 +176,9 @@ name|boolean
 name|coerceNames
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**    * Constructs the rule.    *    * @param consumerRelClass the RelNode class which will consume the inputs    * @param coerceNames      if true, coerce names and types; if false, coerce    *                         type only    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 name|CoerceInputsRule
 parameter_list|(
@@ -162,6 +194,37 @@ name|boolean
 name|coerceNames
 parameter_list|)
 block|{
+name|this
+argument_list|(
+name|consumerRelClass
+argument_list|,
+name|coerceNames
+argument_list|,
+name|RelFactories
+operator|.
+name|LOGICAL_BUILDER
+argument_list|)
+expr_stmt|;
+block|}
+comment|/**    * Creates a CoerceInputsRule.    *    * @param consumerRelClass  Class of RelNode that will consume the inputs    * @param coerceNames       If true, coerce names and types; if false, coerce    *                          type only    * @param relBuilderFactory Builder for relational expressions    */
+specifier|public
+name|CoerceInputsRule
+parameter_list|(
+name|Class
+argument_list|<
+name|?
+extends|extends
+name|RelNode
+argument_list|>
+name|consumerRelClass
+parameter_list|,
+name|boolean
+name|coerceNames
+parameter_list|,
+name|RelBuilderFactory
+name|relBuilderFactory
+parameter_list|)
+block|{
 name|super
 argument_list|(
 name|operand
@@ -171,6 +234,8 @@ argument_list|,
 name|any
 argument_list|()
 argument_list|)
+argument_list|,
+name|relBuilderFactory
 argument_list|,
 literal|"CoerceInputsRule:"
 operator|+
@@ -194,7 +259,8 @@ name|coerceNames
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|// implement RelOptRule
+annotation|@
+name|Override
 specifier|public
 name|Convention
 name|getOutConvention
@@ -206,7 +272,6 @@ operator|.
 name|NONE
 return|;
 block|}
-comment|// implement RelOptRule
 specifier|public
 name|void
 name|onMatch
@@ -257,9 +322,7 @@ name|newInputs
 init|=
 operator|new
 name|ArrayList
-argument_list|<
-name|RelNode
-argument_list|>
+argument_list|<>
 argument_list|(
 name|inputs
 argument_list|)

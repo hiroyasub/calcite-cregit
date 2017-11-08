@@ -501,7 +501,8 @@ name|LOGICAL_BUILDER
 argument_list|)
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-specifier|protected
+comment|/** Creates an AggregateReduceFunctionsRule. */
+specifier|public
 name|AggregateReduceFunctionsRule
 parameter_list|(
 name|RelOptRuleOperand

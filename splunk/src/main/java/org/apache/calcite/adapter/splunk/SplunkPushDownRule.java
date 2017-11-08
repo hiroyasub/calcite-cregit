@@ -115,6 +115,22 @@ name|calcite
 operator|.
 name|rel
 operator|.
+name|core
+operator|.
+name|RelFactories
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
 name|logical
 operator|.
 name|LogicalFilter
@@ -310,6 +326,20 @@ operator|.
 name|type
 operator|.
 name|SqlTypeName
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|tools
+operator|.
+name|RelBuilderFactory
 import|;
 end_import
 
@@ -529,6 +559,10 @@ argument_list|)
 argument_list|)
 argument_list|)
 argument_list|,
+name|RelFactories
+operator|.
+name|LOGICAL_BUILDER
+argument_list|,
 literal|"proj on filter on proj"
 argument_list|)
 decl_stmt|;
@@ -565,6 +599,10 @@ argument_list|)
 argument_list|)
 argument_list|)
 argument_list|,
+name|RelFactories
+operator|.
+name|LOGICAL_BUILDER
+argument_list|,
 literal|"filter on proj"
 argument_list|)
 decl_stmt|;
@@ -593,6 +631,10 @@ name|none
 argument_list|()
 argument_list|)
 argument_list|)
+argument_list|,
+name|RelFactories
+operator|.
+name|LOGICAL_BUILDER
 argument_list|,
 literal|"filter"
 argument_list|)
@@ -623,10 +665,16 @@ argument_list|()
 argument_list|)
 argument_list|)
 argument_list|,
+name|RelFactories
+operator|.
+name|LOGICAL_BUILDER
+argument_list|,
 literal|"proj"
 argument_list|)
 decl_stmt|;
-comment|/** Creates a SplunkPushDownRule. */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|protected
 name|SplunkPushDownRule
 parameter_list|(
@@ -637,9 +685,37 @@ name|String
 name|id
 parameter_list|)
 block|{
+name|this
+argument_list|(
+name|rule
+argument_list|,
+name|RelFactories
+operator|.
+name|LOGICAL_BUILDER
+argument_list|,
+name|id
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Creates a SplunkPushDownRule. */
+specifier|protected
+name|SplunkPushDownRule
+parameter_list|(
+name|RelOptRuleOperand
+name|rule
+parameter_list|,
+name|RelBuilderFactory
+name|relBuilderFactory
+parameter_list|,
+name|String
+name|id
+parameter_list|)
+block|{
 name|super
 argument_list|(
 name|rule
+argument_list|,
+name|relBuilderFactory
 argument_list|,
 literal|"SplunkPushDownRule: "
 operator|+
@@ -648,7 +724,6 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|// ~ Methods --------------------------------------------------------------
-comment|// implement RelOptRule
 specifier|public
 name|void
 name|onMatch

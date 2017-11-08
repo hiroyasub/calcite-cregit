@@ -175,6 +175,22 @@ name|rel
 operator|.
 name|core
 operator|.
+name|RelFactories
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|core
+operator|.
 name|Sort
 import|;
 end_import
@@ -243,6 +259,20 @@ name|RelMetadataQuery
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|tools
+operator|.
+name|RelBuilderFactory
+import|;
+end_import
+
 begin_comment
 comment|/**  * Planner rule that pushes a {@link org.apache.calcite.rel.core.Sort} past a  * {@link org.apache.calcite.rel.core.Join}.  *  *<p>At the moment, we only consider left/right outer joins.  * However, an extension for full outer joins for this rule could be envisioned.  * Special attention should be paid to null values for correctness issues.  */
 end_comment
@@ -270,10 +300,17 @@ argument_list|,
 name|LogicalJoin
 operator|.
 name|class
+argument_list|,
+name|RelFactories
+operator|.
+name|LOGICAL_BUILDER
 argument_list|)
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
 comment|/** Creates a SortJoinTransposeRule. */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 name|SortJoinTransposeRule
 parameter_list|(
@@ -294,6 +331,42 @@ argument_list|>
 name|joinClass
 parameter_list|)
 block|{
+name|this
+argument_list|(
+name|sortClass
+argument_list|,
+name|joinClass
+argument_list|,
+name|RelFactories
+operator|.
+name|LOGICAL_BUILDER
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Creates a SortJoinTransposeRule. */
+specifier|public
+name|SortJoinTransposeRule
+parameter_list|(
+name|Class
+argument_list|<
+name|?
+extends|extends
+name|Sort
+argument_list|>
+name|sortClass
+parameter_list|,
+name|Class
+argument_list|<
+name|?
+extends|extends
+name|Join
+argument_list|>
+name|joinClass
+parameter_list|,
+name|RelBuilderFactory
+name|relBuilderFactory
+parameter_list|)
+block|{
 name|super
 argument_list|(
 name|operand
@@ -308,6 +381,10 @@ name|any
 argument_list|()
 argument_list|)
 argument_list|)
+argument_list|,
+name|relBuilderFactory
+argument_list|,
+literal|null
 argument_list|)
 expr_stmt|;
 block|}

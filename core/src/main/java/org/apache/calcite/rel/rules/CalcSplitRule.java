@@ -188,7 +188,8 @@ operator|.
 name|LOGICAL_BUILDER
 argument_list|)
 decl_stmt|;
-specifier|private
+comment|/**    * Creates a CalcSplitRule.    *    * @param relBuilderFactory Builder for relational expressions    */
+specifier|public
 name|CalcSplitRule
 parameter_list|(
 name|RelBuilderFactory

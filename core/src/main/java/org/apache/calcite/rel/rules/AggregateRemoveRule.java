@@ -85,6 +85,22 @@ name|calcite
 operator|.
 name|rel
 operator|.
+name|core
+operator|.
+name|RelFactories
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
 name|logical
 operator|.
 name|LogicalAggregate
@@ -135,6 +151,20 @@ name|RelBuilder
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|tools
+operator|.
+name|RelBuilderFactory
+import|;
+end_import
+
 begin_comment
 comment|/**  * Planner rule that removes  * a {@link org.apache.calcite.rel.core.Aggregate}  * if it computes no aggregate functions  * (that is, it is implementing {@code SELECT DISTINCT})  * and the underlying relational expression is already distinct.  */
 end_comment
@@ -158,10 +188,16 @@ argument_list|(
 name|LogicalAggregate
 operator|.
 name|class
+argument_list|,
+name|RelFactories
+operator|.
+name|LOGICAL_BUILDER
 argument_list|)
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**    * Creates a AggregateRemoveRule.    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 name|AggregateRemoveRule
 parameter_list|(
@@ -172,6 +208,32 @@ extends|extends
 name|Aggregate
 argument_list|>
 name|aggregateClass
+parameter_list|)
+block|{
+name|this
+argument_list|(
+name|aggregateClass
+argument_list|,
+name|RelFactories
+operator|.
+name|LOGICAL_BUILDER
+argument_list|)
+expr_stmt|;
+block|}
+comment|/**    * Creates an AggregateRemoveRule.    */
+specifier|public
+name|AggregateRemoveRule
+parameter_list|(
+name|Class
+argument_list|<
+name|?
+extends|extends
+name|Aggregate
+argument_list|>
+name|aggregateClass
+parameter_list|,
+name|RelBuilderFactory
+name|relBuilderFactory
 parameter_list|)
 block|{
 comment|// REVIEW jvs 14-Mar-2006: We have to explicitly mention the child here
@@ -196,6 +258,10 @@ name|any
 argument_list|()
 argument_list|)
 argument_list|)
+argument_list|,
+name|relBuilderFactory
+argument_list|,
+literal|null
 argument_list|)
 expr_stmt|;
 block|}

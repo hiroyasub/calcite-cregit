@@ -87,6 +87,36 @@ name|RelNode
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|core
+operator|.
+name|RelFactories
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|tools
+operator|.
+name|RelBuilderFactory
+import|;
+end_import
+
 begin_comment
 comment|/**  * TraitMatchingRule adapts a converter rule, restricting it to fire only when  * its input already matches the expected output trait. This can be used with  * {@link org.apache.calcite.plan.hep.HepPlanner} in cases where alternate  * implementations are available and it is desirable to minimize converters.  */
 end_comment
@@ -105,12 +135,35 @@ name|ConverterRule
 name|converter
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**    * Creates a new TraitMatchingRule.    *    * @param converterRule rule to be restricted; rule must take a single    *                      operand expecting a single input    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 name|TraitMatchingRule
 parameter_list|(
 name|ConverterRule
 name|converterRule
+parameter_list|)
+block|{
+name|this
+argument_list|(
+name|converterRule
+argument_list|,
+name|RelFactories
+operator|.
+name|LOGICAL_BUILDER
+argument_list|)
+expr_stmt|;
+block|}
+comment|/**    * Creates a TraitMatchingRule.    *    * @param converterRule     Rule to be restricted; rule must take a single    *                          operand expecting a single input    * @param relBuilderFactory Builder for relational expressions    */
+specifier|public
+name|TraitMatchingRule
+parameter_list|(
+name|ConverterRule
+name|converterRule
+parameter_list|,
+name|RelBuilderFactory
+name|relBuilderFactory
 parameter_list|)
 block|{
 name|super
@@ -135,6 +188,8 @@ name|any
 argument_list|()
 argument_list|)
 argument_list|)
+argument_list|,
+name|relBuilderFactory
 argument_list|,
 literal|"TraitMatchingRule: "
 operator|+
@@ -161,7 +216,8 @@ name|converterRule
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|// implement RelOptRule
+annotation|@
+name|Override
 specifier|public
 name|Convention
 name|getOutConvention

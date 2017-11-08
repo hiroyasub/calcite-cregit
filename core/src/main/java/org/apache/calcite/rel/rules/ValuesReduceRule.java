@@ -99,6 +99,22 @@ name|rel
 operator|.
 name|core
 operator|.
+name|RelFactories
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|core
+operator|.
 name|Values
 import|;
 end_import
@@ -259,6 +275,20 @@ name|apache
 operator|.
 name|calcite
 operator|.
+name|tools
+operator|.
+name|RelBuilderFactory
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
 name|util
 operator|.
 name|Util
@@ -382,6 +412,10 @@ argument_list|()
 argument_list|)
 argument_list|)
 argument_list|,
+name|RelFactories
+operator|.
+name|LOGICAL_BUILDER
+argument_list|,
 literal|"ValuesReduceRule(Filter)"
 argument_list|)
 block|{
@@ -459,6 +493,10 @@ name|none
 argument_list|()
 argument_list|)
 argument_list|)
+argument_list|,
+name|RelFactories
+operator|.
+name|LOGICAL_BUILDER
 argument_list|,
 literal|"ValuesReduceRule(Project)"
 argument_list|)
@@ -545,6 +583,10 @@ argument_list|)
 argument_list|)
 argument_list|)
 argument_list|,
+name|RelFactories
+operator|.
+name|LOGICAL_BUILDER
+argument_list|,
 literal|"ValuesReduceRule(Project-Filter)"
 argument_list|)
 block|{
@@ -601,12 +643,15 @@ block|}
 block|}
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**    * Creates a ValuesReduceRule.    *    * @param operand class of rels to which this rule should apply    */
-specifier|private
+comment|/**    * Creates a ValuesReduceRule.    *    * @param operand           Class of rels to which this rule should apply    * @param relBuilderFactory Builder for relational expressions    * @param desc              Description, or null to guess description    */
+specifier|public
 name|ValuesReduceRule
 parameter_list|(
 name|RelOptRuleOperand
 name|operand
+parameter_list|,
+name|RelBuilderFactory
+name|relBuilderFactory
 parameter_list|,
 name|String
 name|desc
@@ -615,6 +660,8 @@ block|{
 name|super
 argument_list|(
 name|operand
+argument_list|,
+name|relBuilderFactory
 argument_list|,
 name|desc
 argument_list|)

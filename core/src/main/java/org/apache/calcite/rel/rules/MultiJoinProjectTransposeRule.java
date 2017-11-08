@@ -83,6 +83,22 @@ name|calcite
 operator|.
 name|rel
 operator|.
+name|core
+operator|.
+name|RelFactories
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
 name|logical
 operator|.
 name|LogicalJoin
@@ -102,6 +118,20 @@ operator|.
 name|logical
 operator|.
 name|LogicalProject
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|tools
+operator|.
+name|RelBuilderFactory
 import|;
 end_import
 
@@ -167,6 +197,10 @@ argument_list|)
 argument_list|)
 argument_list|)
 argument_list|,
+name|RelFactories
+operator|.
+name|LOGICAL_BUILDER
+argument_list|,
 literal|"MultiJoinProjectTransposeRule: with two LogicalProject children"
 argument_list|)
 decl_stmt|;
@@ -205,6 +239,10 @@ argument_list|)
 argument_list|)
 argument_list|)
 argument_list|)
+argument_list|,
+name|RelFactories
+operator|.
+name|LOGICAL_BUILDER
 argument_list|,
 literal|"MultiJoinProjectTransposeRule: with LogicalProject on left"
 argument_list|)
@@ -252,10 +290,17 @@ argument_list|)
 argument_list|)
 argument_list|)
 argument_list|,
+name|RelFactories
+operator|.
+name|LOGICAL_BUILDER
+argument_list|,
 literal|"MultiJoinProjectTransposeRule: with LogicalProject on right"
 argument_list|)
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 name|MultiJoinProjectTransposeRule
 parameter_list|(
@@ -266,11 +311,41 @@ name|String
 name|description
 parameter_list|)
 block|{
+name|this
+argument_list|(
+name|operand
+argument_list|,
+name|RelFactories
+operator|.
+name|LOGICAL_BUILDER
+argument_list|,
+name|description
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Creates a MultiJoinProjectTransposeRule. */
+specifier|public
+name|MultiJoinProjectTransposeRule
+parameter_list|(
+name|RelOptRuleOperand
+name|operand
+parameter_list|,
+name|RelBuilderFactory
+name|relBuilderFactory
+parameter_list|,
+name|String
+name|description
+parameter_list|)
+block|{
 name|super
 argument_list|(
 name|operand
 argument_list|,
 name|description
+argument_list|,
+literal|false
+argument_list|,
+name|relBuilderFactory
 argument_list|)
 expr_stmt|;
 block|}

@@ -304,8 +304,8 @@ name|LOGICAL_BUILDER
 argument_list|)
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**    * Private constructor; use singleton {@link #INSTANCE}.    */
-specifier|protected
+comment|/**    * Creates a JoinToCorrelateRule.    */
+specifier|public
 name|JoinToCorrelateRule
 parameter_list|(
 name|RelBuilderFactory

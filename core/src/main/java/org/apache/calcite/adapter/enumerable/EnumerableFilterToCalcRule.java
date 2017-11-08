@@ -117,6 +117,20 @@ name|RexProgramBuilder
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|tools
+operator|.
+name|RelBuilderFactory
+import|;
+end_import
+
 begin_comment
 comment|/** Variant of {@link org.apache.calcite.rel.rules.FilterToCalcRule} for  * {@link org.apache.calcite.adapter.enumerable.EnumerableConvention enumerable calling convention}. */
 end_comment
@@ -128,8 +142,13 @@ name|EnumerableFilterToCalcRule
 extends|extends
 name|RelOptRule
 block|{
+comment|/**    * Creates an EnumerableFilterToCalcRule.    *    * @param relBuilderFactory Builder for relational expressions    */
+specifier|public
 name|EnumerableFilterToCalcRule
-parameter_list|()
+parameter_list|(
+name|RelBuilderFactory
+name|relBuilderFactory
+parameter_list|)
 block|{
 name|super
 argument_list|(
@@ -142,6 +161,10 @@ argument_list|,
 name|any
 argument_list|()
 argument_list|)
+argument_list|,
+name|relBuilderFactory
+argument_list|,
+literal|null
 argument_list|)
 expr_stmt|;
 block|}

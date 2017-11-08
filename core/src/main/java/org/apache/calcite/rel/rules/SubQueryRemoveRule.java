@@ -1201,7 +1201,8 @@ expr_stmt|;
 block|}
 block|}
 decl_stmt|;
-specifier|private
+comment|/**    * Creates a SubQueryRemoveRule.    *    * @param operand     root operand, must not be null    * @param description Description, or null to guess description    * @param relBuilderFactory Builder for relational expressions    */
+specifier|public
 name|SubQueryRemoveRule
 parameter_list|(
 name|RelOptRuleOperand

@@ -363,7 +363,7 @@ name|LOGICAL_BUILDER
 argument_list|)
 decl_stmt|;
 comment|/** Creates a UnionPullUpConstantsRule. */
-specifier|protected
+specifier|public
 name|UnionPullUpConstantsRule
 parameter_list|(
 name|Class

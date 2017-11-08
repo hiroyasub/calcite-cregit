@@ -157,6 +157,22 @@ name|calcite
 operator|.
 name|rel
 operator|.
+name|core
+operator|.
+name|RelFactories
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
 name|logical
 operator|.
 name|LogicalCalc
@@ -344,6 +360,20 @@ operator|.
 name|tools
 operator|.
 name|RelBuilder
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|tools
+operator|.
+name|RelBuilderFactory
 import|;
 end_import
 
@@ -660,7 +690,6 @@ return|;
 block|}
 block|}
 decl_stmt|;
-comment|/**    * Instance of the rule that applies to a    * {@link org.apache.calcite.rel.core.Calc} that contains    * windowed aggregates and converts it into a mixture of    * {@link org.apache.calcite.rel.logical.LogicalWindow} and {@code Calc}.    */
 specifier|public
 specifier|static
 specifier|final
@@ -668,7 +697,70 @@ name|ProjectToWindowRule
 name|INSTANCE
 init|=
 operator|new
+name|CalcToWindowRule
+argument_list|(
+name|RelFactories
+operator|.
+name|LOGICAL_BUILDER
+argument_list|)
+decl_stmt|;
+specifier|public
+specifier|static
+specifier|final
 name|ProjectToWindowRule
+name|PROJECT
+init|=
+operator|new
+name|ProjectToLogicalProjectAndWindowRule
+argument_list|(
+name|RelFactories
+operator|.
+name|LOGICAL_BUILDER
+argument_list|)
+decl_stmt|;
+comment|//~ Constructors -----------------------------------------------------------
+comment|/**    * Creates a ProjectToWindowRule.    *    * @param operand           Root operand, must not be null    * @param description       Description, or null to guess description    * @param relBuilderFactory Builder for relational expressions    */
+specifier|public
+name|ProjectToWindowRule
+parameter_list|(
+name|RelOptRuleOperand
+name|operand
+parameter_list|,
+name|RelBuilderFactory
+name|relBuilderFactory
+parameter_list|,
+name|String
+name|description
+parameter_list|)
+block|{
+name|super
+argument_list|(
+name|operand
+argument_list|,
+name|relBuilderFactory
+argument_list|,
+name|description
+argument_list|)
+expr_stmt|;
+block|}
+comment|//~ Inner Classes ----------------------------------------------------------
+comment|/**    * Instance of the rule that applies to a    * {@link org.apache.calcite.rel.core.Calc} that contains    * windowed aggregates and converts it into a mixture of    * {@link org.apache.calcite.rel.logical.LogicalWindow} and {@code Calc}.    */
+specifier|public
+specifier|static
+class|class
+name|CalcToWindowRule
+extends|extends
+name|ProjectToWindowRule
+block|{
+comment|/**      * Creates a CalcToWindowRule.      *      * @param relBuilderFactory Builder for relational expressions      */
+specifier|public
+name|CalcToWindowRule
+parameter_list|(
+name|RelBuilderFactory
+name|relBuilderFactory
+parameter_list|)
+block|{
+name|super
 argument_list|(
 name|operand
 argument_list|(
@@ -684,9 +776,12 @@ name|any
 argument_list|()
 argument_list|)
 argument_list|,
+name|relBuilderFactory
+argument_list|,
 literal|"ProjectToWindowRule"
 argument_list|)
-block|{
+expr_stmt|;
+block|}
 specifier|public
 name|void
 name|onMatch
@@ -748,16 +843,23 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-decl_stmt|;
 comment|/**    * Instance of the rule that can be applied to a    * {@link org.apache.calcite.rel.core.Project} and that produces, in turn,    * a mixture of {@code LogicalProject}    * and {@link org.apache.calcite.rel.logical.LogicalWindow}.    */
 specifier|public
 specifier|static
-specifier|final
+class|class
+name|ProjectToLogicalProjectAndWindowRule
+extends|extends
 name|ProjectToWindowRule
-name|PROJECT
-init|=
-operator|new
-name|ProjectToWindowRule
+block|{
+comment|/**      * Creates a ProjectToWindowRule.      *      * @param relBuilderFactory Builder for relational expressions      */
+specifier|public
+name|ProjectToLogicalProjectAndWindowRule
+parameter_list|(
+name|RelBuilderFactory
+name|relBuilderFactory
+parameter_list|)
+block|{
+name|super
 argument_list|(
 name|operand
 argument_list|(
@@ -773,9 +875,12 @@ name|any
 argument_list|()
 argument_list|)
 argument_list|,
+name|relBuilderFactory
+argument_list|,
 literal|"ProjectToWindowRule:project"
 argument_list|)
-block|{
+expr_stmt|;
+block|}
 annotation|@
 name|Override
 specifier|public
@@ -1046,28 +1151,6 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-decl_stmt|;
-comment|//~ Constructors -----------------------------------------------------------
-comment|/** Creates a ProjectToWindowRule. */
-specifier|private
-name|ProjectToWindowRule
-parameter_list|(
-name|RelOptRuleOperand
-name|operand
-parameter_list|,
-name|String
-name|description
-parameter_list|)
-block|{
-name|super
-argument_list|(
-name|operand
-argument_list|,
-name|description
-argument_list|)
-expr_stmt|;
-block|}
-comment|//~ Inner Classes ----------------------------------------------------------
 comment|/**    * Splitter that distinguishes between windowed aggregation expressions    * (calls to {@link RexOver}) and ordinary expressions.    */
 specifier|static
 class|class

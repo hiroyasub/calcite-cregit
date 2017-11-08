@@ -123,6 +123,20 @@ name|LogicalJoin
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|tools
+operator|.
+name|RelBuilderFactory
+import|;
+end_import
+
 begin_comment
 comment|/**  * Rule to convert an  * {@link org.apache.calcite.rel.logical.LogicalJoin inner join} to a  * {@link org.apache.calcite.rel.logical.LogicalFilter filter} on top of a  * {@link org.apache.calcite.rel.logical.LogicalJoin cartesian inner join}.  *  *<p>One benefit of this transformation is that after it, the join condition  * can be combined with conditions and expressions above the join. It also makes  * the<code>FennelCartesianJoinRule</code> applicable.  *  *<p>The constructor is parameterized to allow any sub-class of  * {@link org.apache.calcite.rel.core.Join}, not just  * {@link org.apache.calcite.rel.logical.LogicalJoin}.</p>  */
 end_comment
@@ -149,10 +163,17 @@ argument_list|(
 name|LogicalJoin
 operator|.
 name|class
+argument_list|,
+name|RelFactories
+operator|.
+name|LOGICAL_BUILDER
 argument_list|)
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
 comment|/**    * Creates an JoinExtractFilterRule.    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 name|JoinExtractFilterRule
 parameter_list|(
@@ -165,6 +186,32 @@ argument_list|>
 name|clazz
 parameter_list|)
 block|{
+name|this
+argument_list|(
+name|clazz
+argument_list|,
+name|RelFactories
+operator|.
+name|LOGICAL_BUILDER
+argument_list|)
+expr_stmt|;
+block|}
+comment|/**    * Creates a JoinExtractFilterRule.    */
+specifier|public
+name|JoinExtractFilterRule
+parameter_list|(
+name|Class
+argument_list|<
+name|?
+extends|extends
+name|Join
+argument_list|>
+name|clazz
+parameter_list|,
+name|RelBuilderFactory
+name|relBuilderFactory
+parameter_list|)
+block|{
 name|super
 argument_list|(
 name|operand
@@ -174,6 +221,10 @@ argument_list|,
 name|any
 argument_list|()
 argument_list|)
+argument_list|,
+name|relBuilderFactory
+argument_list|,
+literal|null
 argument_list|)
 expr_stmt|;
 block|}

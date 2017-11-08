@@ -57,6 +57,22 @@ name|rel
 operator|.
 name|core
 operator|.
+name|RelFactories
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|core
+operator|.
 name|Union
 import|;
 end_import
@@ -74,6 +90,20 @@ operator|.
 name|logical
 operator|.
 name|LogicalUnion
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|tools
+operator|.
+name|RelBuilderFactory
 import|;
 end_import
 
@@ -100,11 +130,15 @@ argument_list|(
 name|LogicalUnion
 operator|.
 name|class
+argument_list|,
+name|RelFactories
+operator|.
+name|LOGICAL_BUILDER
 argument_list|)
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
 comment|/**    * Creates a UnionEliminatorRule.    */
-specifier|private
+specifier|public
 name|UnionEliminatorRule
 parameter_list|(
 name|Class
@@ -114,6 +148,9 @@ extends|extends
 name|Union
 argument_list|>
 name|clazz
+parameter_list|,
+name|RelBuilderFactory
+name|relBuilderFactory
 parameter_list|)
 block|{
 name|super
@@ -125,6 +162,10 @@ argument_list|,
 name|any
 argument_list|()
 argument_list|)
+argument_list|,
+name|relBuilderFactory
+argument_list|,
+literal|null
 argument_list|)
 expr_stmt|;
 block|}

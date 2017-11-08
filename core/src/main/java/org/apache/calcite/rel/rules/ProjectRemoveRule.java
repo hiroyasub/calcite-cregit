@@ -85,6 +85,22 @@ name|calcite
 operator|.
 name|rel
 operator|.
+name|core
+operator|.
+name|RelFactories
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
 name|type
 operator|.
 name|RelDataType
@@ -130,6 +146,20 @@ operator|.
 name|runtime
 operator|.
 name|PredicateImpl
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|tools
+operator|.
+name|RelBuilderFactory
 import|;
 end_import
 
@@ -210,13 +240,20 @@ name|INSTANCE
 init|=
 operator|new
 name|ProjectRemoveRule
-argument_list|()
+argument_list|(
+name|RelFactories
+operator|.
+name|LOGICAL_BUILDER
+argument_list|)
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/** Creates a ProjectRemoveRule. */
-specifier|private
+comment|/**    * Creates a ProjectRemoveRule.    *    * @param relBuilderFactory Builder for relational expressions    */
+specifier|public
 name|ProjectRemoveRule
-parameter_list|()
+parameter_list|(
+name|RelBuilderFactory
+name|relBuilderFactory
+parameter_list|)
 block|{
 comment|// Create a specialized operand to detect non-matches early. This keeps
 comment|// the rule queue short.
@@ -235,6 +272,10 @@ argument_list|,
 name|any
 argument_list|()
 argument_list|)
+argument_list|,
+name|relBuilderFactory
+argument_list|,
+literal|null
 argument_list|)
 expr_stmt|;
 block|}

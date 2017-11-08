@@ -342,7 +342,7 @@ argument_list|()
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
 comment|/** Creates a MaterializedViewFilterScanRule. */
-specifier|protected
+specifier|public
 name|MaterializedViewFilterScanRule
 parameter_list|(
 name|RelBuilderFactory
