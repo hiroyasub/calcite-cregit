@@ -1505,6 +1505,53 @@ name|RelMetadataQuery
 name|mq
 parameter_list|)
 block|{
+comment|// Cost factor for pushing filters
+name|double
+name|f
+init|=
+name|filters
+operator|.
+name|isEmpty
+argument_list|()
+condition|?
+literal|1d
+else|:
+literal|0.5d
+decl_stmt|;
+comment|// Cost factor for pushing fields
+comment|// The "+ 2d" on top and bottom keeps the function fairly smooth.
+name|double
+name|p
+init|=
+operator|(
+operator|(
+name|double
+operator|)
+name|projects
+operator|.
+name|size
+argument_list|()
+operator|+
+literal|2d
+operator|)
+operator|/
+operator|(
+operator|(
+name|double
+operator|)
+name|table
+operator|.
+name|getRowType
+argument_list|()
+operator|.
+name|getFieldCount
+argument_list|()
+operator|+
+literal|2d
+operator|)
+decl_stmt|;
+comment|// Multiply the cost by a factor that makes a scan more attractive if
+comment|// filters and projects are pushed to the table scan
 return|return
 name|super
 operator|.
@@ -1517,6 +1564,10 @@ argument_list|)
 operator|.
 name|multiplyBy
 argument_list|(
+name|f
+operator|*
+name|p
+operator|*
 literal|0.01d
 argument_list|)
 return|;
