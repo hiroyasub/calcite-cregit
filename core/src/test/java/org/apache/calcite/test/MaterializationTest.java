@@ -5265,6 +5265,35 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testJoinAggregateMaterializationAggregateFuncs13
+parameter_list|()
+block|{
+name|checkNoMaterialize
+argument_list|(
+literal|"select \"dependents\".\"empid\", \"emps\".\"deptno\", count(distinct \"salary\") as s\n"
+operator|+
+literal|"from \"emps\"\n"
+operator|+
+literal|"join \"dependents\" on (\"emps\".\"empid\" = \"dependents\".\"empid\")\n"
+operator|+
+literal|"group by \"dependents\".\"empid\", \"emps\".\"deptno\""
+argument_list|,
+literal|"select \"emps\".\"deptno\", count(\"salary\") as s\n"
+operator|+
+literal|"from \"emps\"\n"
+operator|+
+literal|"join \"dependents\" on (\"emps\".\"empid\" = \"dependents\".\"empid\")\n"
+operator|+
+literal|"group by \"dependents\".\"empid\", \"emps\".\"deptno\""
+argument_list|,
+name|HR_FKUK_MODEL
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testJoinMaterialization4
 parameter_list|()
 block|{
@@ -6672,6 +6701,170 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testAggregateMaterializationOnCountDistinctQuery1
+parameter_list|()
+block|{
+comment|// The column empid is already unique, thus DISTINCT is not
+comment|// in the COUNT of the resulting rewriting
+name|checkMaterialize
+argument_list|(
+literal|"select \"deptno\", \"empid\", \"salary\"\n"
+operator|+
+literal|"from \"emps\"\n"
+operator|+
+literal|"group by \"deptno\", \"empid\", \"salary\""
+argument_list|,
+literal|"select \"deptno\", count(distinct \"empid\") as c from (\n"
+operator|+
+literal|"select \"deptno\", \"empid\"\n"
+operator|+
+literal|"from \"emps\"\n"
+operator|+
+literal|"group by \"deptno\", \"empid\")\n"
+operator|+
+literal|"group by \"deptno\""
+argument_list|,
+name|HR_FKUK_MODEL
+argument_list|,
+name|CalciteAssert
+operator|.
+name|checkResultContains
+argument_list|(
+literal|"EnumerableAggregate(group=[{0}], C=[COUNT($1)])\n"
+operator|+
+literal|"  EnumerableTableScan(table=[[hr, m0]]"
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testAggregateMaterializationOnCountDistinctQuery2
+parameter_list|()
+block|{
+comment|// The column empid is already unique, thus DISTINCT is not
+comment|// in the COUNT of the resulting rewriting
+name|checkMaterialize
+argument_list|(
+literal|"select \"deptno\", \"salary\", \"empid\"\n"
+operator|+
+literal|"from \"emps\"\n"
+operator|+
+literal|"group by \"deptno\", \"salary\", \"empid\""
+argument_list|,
+literal|"select \"deptno\", count(distinct \"empid\") as c from (\n"
+operator|+
+literal|"select \"deptno\", \"empid\"\n"
+operator|+
+literal|"from \"emps\"\n"
+operator|+
+literal|"group by \"deptno\", \"empid\")\n"
+operator|+
+literal|"group by \"deptno\""
+argument_list|,
+name|HR_FKUK_MODEL
+argument_list|,
+name|CalciteAssert
+operator|.
+name|checkResultContains
+argument_list|(
+literal|"EnumerableAggregate(group=[{0}], C=[COUNT($2)])\n"
+operator|+
+literal|"  EnumerableTableScan(table=[[hr, m0]]"
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testAggregateMaterializationOnCountDistinctQuery3
+parameter_list|()
+block|{
+comment|// The column salary is not unique, thus we end up with
+comment|// a different rewriting
+name|checkMaterialize
+argument_list|(
+literal|"select \"deptno\", \"empid\", \"salary\"\n"
+operator|+
+literal|"from \"emps\"\n"
+operator|+
+literal|"group by \"deptno\", \"empid\", \"salary\""
+argument_list|,
+literal|"select \"deptno\", count(distinct \"salary\") from (\n"
+operator|+
+literal|"select \"deptno\", \"salary\"\n"
+operator|+
+literal|"from \"emps\"\n"
+operator|+
+literal|"group by \"deptno\", \"salary\")\n"
+operator|+
+literal|"group by \"deptno\""
+argument_list|,
+name|HR_FKUK_MODEL
+argument_list|,
+name|CalciteAssert
+operator|.
+name|checkResultContains
+argument_list|(
+literal|"EnumerableAggregate(group=[{0}], EXPR$1=[COUNT($1)])\n"
+operator|+
+literal|"  EnumerableAggregate(group=[{0, 2}])\n"
+operator|+
+literal|"    EnumerableTableScan(table=[[hr, m0]]"
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testAggregateMaterializationOnCountDistinctQuery4
+parameter_list|()
+block|{
+comment|// Although there is no DISTINCT in the COUNT, this is
+comment|// equivalent to previous query
+name|checkMaterialize
+argument_list|(
+literal|"select \"deptno\", \"salary\", \"empid\"\n"
+operator|+
+literal|"from \"emps\"\n"
+operator|+
+literal|"group by \"deptno\", \"salary\", \"empid\""
+argument_list|,
+literal|"select \"deptno\", count(\"salary\") from (\n"
+operator|+
+literal|"select \"deptno\", \"salary\"\n"
+operator|+
+literal|"from \"emps\"\n"
+operator|+
+literal|"group by \"deptno\", \"salary\")\n"
+operator|+
+literal|"group by \"deptno\""
+argument_list|,
+name|HR_FKUK_MODEL
+argument_list|,
+name|CalciteAssert
+operator|.
+name|checkResultContains
+argument_list|(
+literal|"EnumerableAggregate(group=[{0}], EXPR$1=[COUNT()])\n"
+operator|+
+literal|"  EnumerableAggregate(group=[{0, 1}])\n"
+operator|+
+literal|"    EnumerableTableScan(table=[[hr, m0]]"
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testMaterializationSubstitution
 parameter_list|()
 block|{
@@ -7645,7 +7838,7 @@ literal|10
 argument_list|,
 literal|"Theodore"
 argument_list|,
-literal|11500
+literal|10000
 argument_list|,
 literal|250
 argument_list|)
