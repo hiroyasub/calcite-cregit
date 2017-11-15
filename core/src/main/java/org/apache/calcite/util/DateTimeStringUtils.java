@@ -91,6 +91,7 @@ name|toString
 argument_list|()
 return|;
 block|}
+comment|/** Appends hour:minute:second to a buffer; assumes they are valid. */
 specifier|static
 name|StringBuilder
 name|hms
@@ -147,6 +148,7 @@ return|return
 name|b
 return|;
 block|}
+comment|/** Appends year-month-day and hour:minute:second to a buffer; assumes they    * are valid. */
 specifier|static
 name|StringBuilder
 name|ymdhms
@@ -206,6 +208,7 @@ return|return
 name|b
 return|;
 block|}
+comment|/** Appends year-month-day to a buffer; assumes they are valid. */
 specifier|static
 name|StringBuilder
 name|ymd
