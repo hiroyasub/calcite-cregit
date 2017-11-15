@@ -3468,18 +3468,21 @@ name|build
 argument_list|()
 argument_list|)
 decl_stmt|;
-comment|// When no input get visited, it means all project can be treated as post-aggregation.
-comment|// Then the whole project can be get pushed in.
+comment|// If the whole project is pushed, we do not need to do anything else.
 if|if
 condition|(
-name|visitor
+name|project
 operator|.
-name|inputPosReferenced
+name|getNamedProjects
+argument_list|()
 operator|.
 name|size
 argument_list|()
 operator|==
-literal|0
+name|nameMap
+operator|.
+name|size
+argument_list|()
 condition|)
 block|{
 return|return
@@ -3733,6 +3736,11 @@ decl_stmt|;
 for|for
 control|(
 name|Pair
+argument_list|<
+name|RexNode
+argument_list|,
+name|String
+argument_list|>
 name|namedProject
 range|:
 name|project
@@ -3744,9 +3752,6 @@ block|{
 name|RexNode
 name|rex
 init|=
-operator|(
-name|RexNode
-operator|)
 name|namedProject
 operator|.
 name|left
@@ -3754,9 +3759,6 @@ decl_stmt|;
 name|String
 name|name
 init|=
-operator|(
-name|String
-operator|)
 name|namedProject
 operator|.
 name|right

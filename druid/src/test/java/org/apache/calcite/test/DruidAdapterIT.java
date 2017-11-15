@@ -7864,6 +7864,92 @@ argument_list|(
 name|druidQuery
 argument_list|)
 argument_list|)
+operator|.
+name|returnsOrdered
+argument_list|(
+literal|"store_state=CA; brand_name=Bird Call; A=34.364601135253906"
+argument_list|,
+literal|"store_state=OR; brand_name=Bird Call; A=39.16360282897949"
+argument_list|,
+literal|"store_state=WA; brand_name=Bird Call; A=53.74250030517578"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testExtractFilterWorkWithPostAggregationsWithConstant
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"SELECT \"store_state\", 'Bird Call' as \"brand_name\", "
+operator|+
+literal|"sum(\"store_sales\") - sum(\"store_cost\") as a  from \"foodmart\" "
+operator|+
+literal|"where extract (week from \"timestamp\")"
+operator|+
+literal|" IN (10,11) and \"brand_name\"='Bird Call' group by \"store_state\""
+decl_stmt|;
+specifier|final
+name|String
+name|druidQuery
+init|=
+literal|"'aggregations':[{'type':'doubleSum','name':'$f1','fieldName':"
+operator|+
+literal|"'store_sales'},{'type':'doubleSum','name':'$f2','fieldName':'store_cost'}],"
+operator|+
+literal|"'postAggregations':[{'type':'arithmetic','name':'postagg#0','fn':'-',"
+operator|+
+literal|"'fields':[{'type':'fieldAccess','name':'','fieldName':'$f1'},{'type':'fieldAccess',"
+operator|+
+literal|"'name':'','fieldName':'$f2'}]}],"
+operator|+
+literal|"'intervals':['1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z']}"
+decl_stmt|;
+specifier|final
+name|String
+name|plan
+init|=
+literal|"PLAN=EnumerableInterpreter\n"
+operator|+
+literal|"  BindableProject(store_state=[$0], brand_name=['Bird Call'], A=[$1])\n"
+operator|+
+literal|"    DruidQuery(table=[[foodmart, foodmart]], "
+operator|+
+literal|"intervals=[[1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z]], filter=[AND(=("
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|,
+name|FOODMART
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+name|plan
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|druidChecker
+argument_list|(
+name|druidQuery
+argument_list|)
+argument_list|)
+operator|.
+name|returnsOrdered
+argument_list|(
+literal|"store_state=CA; brand_name=Bird Call; A=34.364601135253906"
+argument_list|,
+literal|"store_state=OR; brand_name=Bird Call; A=39.16360282897949"
+argument_list|,
+literal|"store_state=WA; brand_name=Bird Call; A=53.74250030517578"
+argument_list|)
 expr_stmt|;
 block|}
 annotation|@
