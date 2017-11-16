@@ -1948,6 +1948,102 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2039">[CALCITE-2039]    * AssertionError when pushing project to ProjectableFilterableTable</a>.    * Cannot push down a project if it is not a permutation of columns; in this    * case, it contains a literal. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testCannotPushProject
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+specifier|final
+name|StringBuilder
+name|buf
+init|=
+operator|new
+name|StringBuilder
+argument_list|()
+decl_stmt|;
+specifier|final
+name|Table
+name|table
+init|=
+operator|new
+name|BeatlesProjectableFilterableTable
+argument_list|(
+name|buf
+argument_list|,
+literal|true
+argument_list|)
+decl_stmt|;
+specifier|final
+name|String
+name|explain
+init|=
+literal|"PLAN="
+operator|+
+literal|"EnumerableCalc(expr#0..2=[{inputs}], expr#3=[3], k=[$t2], j=[$t1], "
+operator|+
+literal|"i=[$t0], EXPR$3=[$t3])\n"
+operator|+
+literal|"  EnumerableInterpreter\n"
+operator|+
+literal|"    BindableTableScan(table=[[s, beatles]])"
+decl_stmt|;
+name|CalciteAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|newSchema
+argument_list|(
+literal|"s"
+argument_list|,
+literal|"beatles"
+argument_list|,
+name|table
+argument_list|)
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select \"k\",\"j\",\"i\",3 from \"s\".\"beatles\""
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+name|explain
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"k=1940; j=John; i=4; EXPR$3=3"
+argument_list|,
+literal|"k=1940; j=Ringo; i=5; EXPR$3=3"
+argument_list|,
+literal|"k=1942; j=Paul; i=4; EXPR$3=3"
+argument_list|,
+literal|"k=1943; j=George; i=6; EXPR$3=3"
+argument_list|)
+expr_stmt|;
+name|assertThat
+argument_list|(
+name|buf
+operator|.
+name|toString
+argument_list|()
+argument_list|,
+name|is
+argument_list|(
+literal|"returnCount=4"
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1031">[CALCITE-1031]    * In prepared statement, CsvScannableTable.scan is called twice</a>. */
 annotation|@
 name|Test

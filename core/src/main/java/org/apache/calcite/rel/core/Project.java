@@ -1330,6 +1330,21 @@ argument_list|>
 name|projects
 parameter_list|)
 block|{
+if|if
+condition|(
+name|inputFieldCount
+operator|<
+name|projects
+operator|.
+name|size
+argument_list|()
+condition|)
+block|{
+return|return
+literal|null
+return|;
+comment|// surjection is not possible
+block|}
 name|Mappings
 operator|.
 name|TargetMapping
