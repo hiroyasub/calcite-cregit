@@ -7403,6 +7403,30 @@ argument_list|()
 expr_stmt|;
 block|}
 annotation|@
+name|Test
+specifier|public
+name|void
+name|testUpdateBind2
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"update emp"
+operator|+
+literal|" set sal = ? where slacker = false"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
 name|Ignore
 argument_list|(
 literal|"CALCITE-1708"
