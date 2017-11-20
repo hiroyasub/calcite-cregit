@@ -639,7 +639,12 @@ argument_list|>
 name|argHandler
 parameter_list|)
 block|{
-comment|// Do not visit operands[1] here.
+if|if
+condition|(
+name|onlyExpressions
+condition|)
+block|{
+comment|// Do not visit operands[1] -- it is not an expression.
 name|argHandler
 operator|.
 name|visitChild
@@ -658,6 +663,23 @@ literal|0
 argument_list|)
 argument_list|)
 expr_stmt|;
+block|}
+else|else
+block|{
+name|super
+operator|.
+name|acceptCall
+argument_list|(
+name|visitor
+argument_list|,
+name|call
+argument_list|,
+name|onlyExpressions
+argument_list|,
+name|argHandler
+argument_list|)
+expr_stmt|;
+block|}
 block|}
 annotation|@
 name|Override
