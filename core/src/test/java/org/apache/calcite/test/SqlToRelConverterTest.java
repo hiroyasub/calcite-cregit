@@ -2495,6 +2495,30 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testOrderOffsetFetchWithDynamicParameter
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select empno from emp\n"
+operator|+
+literal|"order by empno offset ? rows fetch next ? rows only"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testOffsetFetch
 parameter_list|()
 block|{
@@ -2505,6 +2529,30 @@ init|=
 literal|"select empno from emp\n"
 operator|+
 literal|"offset 10 rows fetch next 5 rows only"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testOffsetFetchWithDynamicParameter
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select empno from emp\n"
+operator|+
+literal|"offset ? rows fetch next ? rows only"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -2541,6 +2589,28 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testOffsetWithDynamicParameter
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select empno from emp offset ? rows"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testFetch
 parameter_list|()
 block|{
@@ -2549,6 +2619,28 @@ name|String
 name|sql
 init|=
 literal|"select empno from emp fetch next 5 rows only"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testFetchWithDynamicParameter
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select empno from emp fetch next ? rows only"
 decl_stmt|;
 name|sql
 argument_list|(

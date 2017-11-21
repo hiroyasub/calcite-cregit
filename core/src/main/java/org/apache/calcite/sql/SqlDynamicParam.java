@@ -213,7 +213,7 @@ name|writer
 operator|.
 name|setNeedWhitespace
 argument_list|(
-literal|false
+literal|true
 argument_list|)
 expr_stmt|;
 block|}

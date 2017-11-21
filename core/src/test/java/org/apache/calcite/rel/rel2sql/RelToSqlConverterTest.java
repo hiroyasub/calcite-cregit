@@ -2760,7 +2760,7 @@ literal|"SELECT *\n"
 operator|+
 literal|"FROM \"foodmart\".\"product\"\n"
 operator|+
-literal|"WHERE \"product_id\" = ?"
+literal|"WHERE \"product_id\" = ? "
 operator|+
 literal|"AND ?>= \"shelf_width\""
 decl_stmt|;

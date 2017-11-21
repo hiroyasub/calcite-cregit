@@ -4918,6 +4918,11 @@ operator|==
 literal|null
 operator|||
 operator|(
+name|offset
+operator|instanceof
+name|SqlLiteral
+operator|&&
+operator|(
 operator|(
 name|SqlLiteral
 operator|)
@@ -4933,6 +4938,7 @@ name|BigDecimal
 operator|.
 name|ZERO
 argument_list|)
+operator|)
 operator|)
 operator|&&
 name|fetch

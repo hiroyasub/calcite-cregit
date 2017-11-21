@@ -23043,6 +23043,58 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testRewriteWithLimitWithDynamicParameters
+parameter_list|()
+block|{
+name|SqlValidator
+name|validator
+init|=
+name|tester
+operator|.
+name|getValidator
+argument_list|()
+decl_stmt|;
+name|validator
+operator|.
+name|setIdentifierExpansion
+argument_list|(
+literal|false
+argument_list|)
+expr_stmt|;
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select name from dept offset ? rows fetch next ? rows only"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT `NAME`\n"
+operator|+
+literal|"FROM `DEPT`\n"
+operator|+
+literal|"OFFSET ? ROWS\n"
+operator|+
+literal|"FETCH NEXT ? ROWS ONLY"
+decl_stmt|;
+name|tester
+operator|.
+name|checkRewrite
+argument_list|(
+name|validator
+argument_list|,
+name|sql
+argument_list|,
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testRewriteWithOffsetWithoutOrderBy
 parameter_list|()
 block|{

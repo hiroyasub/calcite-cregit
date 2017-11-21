@@ -10828,6 +10828,20 @@ operator|+
 literal|"FETCH NEXT 3 ROWS ONLY"
 argument_list|)
 expr_stmt|;
+comment|// OFFSET and FETCH, with dynamic parameters
+name|check
+argument_list|(
+literal|"select a from foo offset ? row fetch next ? rows only"
+argument_list|,
+literal|"SELECT `A`\n"
+operator|+
+literal|"FROM `FOO`\n"
+operator|+
+literal|"OFFSET ? ROWS\n"
+operator|+
+literal|"FETCH NEXT ? ROWS ONLY"
+argument_list|)
+expr_stmt|;
 comment|// missing ROWS after FETCH
 name|checkFails
 argument_list|(
