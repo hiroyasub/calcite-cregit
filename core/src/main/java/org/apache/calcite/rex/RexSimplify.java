@@ -4928,6 +4928,38 @@ argument_list|()
 argument_list|)
 condition|)
 block|{
+if|if
+condition|(
+name|range2
+operator|.
+name|lowerBoundType
+argument_list|()
+operator|==
+name|BoundType
+operator|.
+name|OPEN
+operator|||
+name|range2
+operator|.
+name|upperBoundType
+argument_list|()
+operator|==
+name|BoundType
+operator|.
+name|OPEN
+condition|)
+block|{
+comment|// range is a point, but does not include its endpoint, therefore is
+comment|// effectively empty
+return|return
+name|rexBuilder
+operator|.
+name|makeLiteral
+argument_list|(
+literal|false
+argument_list|)
+return|;
+block|}
 comment|// range is now a point; it's worth simplifying
 return|return
 name|rexBuilder
