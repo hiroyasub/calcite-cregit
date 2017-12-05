@@ -10586,6 +10586,52 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testAggregateFunctionInOver
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select sum(deptno) over (order by count(empno))\n"
+operator|+
+literal|"from emp\n"
+operator|+
+literal|"group by deptno"
+decl_stmt|;
+name|winSql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+specifier|final
+name|String
+name|sql2
+init|=
+literal|"select sum(^empno^) over (order by count(empno))\n"
+operator|+
+literal|"from emp\n"
+operator|+
+literal|"group by deptno"
+decl_stmt|;
+name|winSql
+argument_list|(
+name|sql2
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Expression 'EMPNO' is not being grouped"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testWindowFunctions
 parameter_list|()
 block|{

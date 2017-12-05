@@ -24780,10 +24780,63 @@ name|OVER
 condition|)
 block|{
 comment|// Track aggregate nesting levels only within an OVER operator.
+name|List
+argument_list|<
+name|SqlNode
+argument_list|>
+name|operandList
+init|=
+name|call
+operator|.
+name|getOperandList
+argument_list|()
+decl_stmt|;
+assert|assert
+name|operandList
+operator|.
+name|size
+argument_list|()
+operator|==
+literal|2
+assert|;
+comment|// Ignore the top level window aggregates and ranking functions
+comment|// positioned as the first operand of a OVER operator
 name|inOver
 operator|=
 literal|true
 expr_stmt|;
+name|operandList
+operator|.
+name|get
+argument_list|(
+literal|0
+argument_list|)
+operator|.
+name|accept
+argument_list|(
+name|this
+argument_list|)
+expr_stmt|;
+comment|// Normal translation for the second operand of a OVER operator
+name|inOver
+operator|=
+literal|false
+expr_stmt|;
+name|operandList
+operator|.
+name|get
+argument_list|(
+literal|1
+argument_list|)
+operator|.
+name|accept
+argument_list|(
+name|this
+argument_list|)
+expr_stmt|;
+return|return
+literal|null
+return|;
 block|}
 comment|// Do not translate the top level window aggregate. Only do so for
 comment|// nested aggregates, if present
