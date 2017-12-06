@@ -1438,6 +1438,20 @@ import|;
 end_import
 
 begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|concurrent
+operator|.
+name|locks
+operator|.
+name|ReentrantLock
+import|;
+end_import
+
+begin_import
 import|import static
 name|org
 operator|.
@@ -1718,6 +1732,17 @@ literal|"SALES"
 argument_list|,
 literal|"EMP"
 argument_list|)
+decl_stmt|;
+comment|/** Ensures that tests that use a lot of memory do not run at the same    * time. */
+specifier|private
+specifier|static
+specifier|final
+name|ReentrantLock
+name|LOCK
+init|=
+operator|new
+name|ReentrantLock
+argument_list|()
 decl_stmt|;
 comment|//~ Methods ----------------------------------------------------------------
 comment|// ----------------------------------------------------------------------
@@ -8964,7 +8989,7 @@ name|Assume
 operator|.
 name|assumeThat
 argument_list|(
-literal|"Too slow on Windows"
+literal|"Too slow to run on Windows"
 argument_list|,
 name|File
 operator|.
@@ -8978,18 +9003,6 @@ literal|'/'
 argument_list|)
 argument_list|)
 expr_stmt|;
-name|testPullUpPredicatesForExprsItrNoTimeout
-argument_list|()
-expr_stmt|;
-block|}
-comment|/** As {@link #testPullUpPredicatesForExprsItr} but no timeout; can run on    * all platforms, even slow VMs. */
-annotation|@
-name|Test
-specifier|public
-name|void
-name|testPullUpPredicatesForExprsItrNoTimeout
-parameter_list|()
-block|{
 specifier|final
 name|String
 name|sql
@@ -9024,6 +9037,25 @@ literal|"  and a.deptno=b.deptno and a.job=b.job and a.ename=b.ename\n"
 operator|+
 literal|"  and a.mgr=b.deptno and a.slacker=b.slacker"
 decl_stmt|;
+comment|// Lock to ensure that only one test is using this method at a time.
+try|try
+init|(
+specifier|final
+name|JdbcAdapterTest
+operator|.
+name|LockWrapper
+name|ignore
+init|=
+name|JdbcAdapterTest
+operator|.
+name|LockWrapper
+operator|.
+name|lock
+argument_list|(
+name|LOCK
+argument_list|)
+init|)
+block|{
 specifier|final
 name|RelNode
 name|rel
@@ -9072,6 +9104,7 @@ literal|131089
 argument_list|)
 argument_list|)
 expr_stmt|;
+block|}
 block|}
 annotation|@
 name|Test
