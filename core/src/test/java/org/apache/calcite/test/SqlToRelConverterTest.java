@@ -8713,6 +8713,43 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2080">[CALCITE-2080]    * Query with NOT IN operator and literal fails throws AssertionError: 'Cast    * for just nullability not allowed'</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testNotInWithLiteral
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM SALES.NATION\n"
+operator|+
+literal|"WHERE n_name NOT IN\n"
+operator|+
+literal|"    (SELECT ''\n"
+operator|+
+literal|"     FROM SALES.NATION)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|with
+argument_list|(
+name|getTesterWithDynamicTable
+argument_list|()
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
 comment|/**    * Test case for Dynamic Table / Dynamic Star support    *<a href="https://issues.apache.org/jira/browse/CALCITE-1150">[CALCITE-1150]</a>    */
 annotation|@
 name|Test
@@ -9502,9 +9539,7 @@ literal|"    define\n"
 operator|+
 literal|"      down as down.mgr< PREV(down.mgr),\n"
 operator|+
-literal|"      up as up.mgr> prev(up.mgr)\n"
-operator|+
-literal|"  ) mr"
+literal|"      up as up.mgr> prev(up.mgr)) as mr"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -9528,33 +9563,29 @@ name|sql
 init|=
 literal|"select *\n"
 operator|+
-literal|"  from emp match_recognize\n"
+literal|"from emp match_recognize (\n"
 operator|+
-literal|"  (\n"
+literal|"  partition by job, sal\n"
 operator|+
-literal|"   partition by job, sal\n"
+literal|"  order by job asc, sal desc\n"
 operator|+
-literal|"   order by job asc, sal desc\n"
+literal|"  measures MATCH_NUMBER() as match_num,\n"
 operator|+
-literal|"   measures  MATCH_NUMBER() as match_num, "
+literal|"    CLASSIFIER() as var_match,\n"
 operator|+
-literal|"   CLASSIFIER() as var_match, "
+literal|"    STRT.mgr as start_nw,\n"
 operator|+
-literal|"   STRT.mgr as start_nw,"
+literal|"    LAST(DOWN.mgr) as bottom_nw,\n"
 operator|+
-literal|"   LAST(DOWN.mgr) as bottom_nw,"
+literal|"    LAST(up.mgr) as end_nw\n"
 operator|+
-literal|"   LAST(up.mgr) as end_nw"
+literal|"  pattern (strt down+ up+)\n"
 operator|+
-literal|"    pattern (strt down+ up+)\n"
+literal|"  define\n"
 operator|+
-literal|"    define\n"
+literal|"    down as down.mgr< PREV(down.mgr),\n"
 operator|+
-literal|"      down as down.mgr< PREV(down.mgr),\n"
-operator|+
-literal|"      up as up.mgr> prev(up.mgr)\n"
-operator|+
-literal|"  ) mr"
+literal|"    up as up.mgr> prev(up.mgr)) as mr"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -9579,33 +9610,29 @@ name|sql
 init|=
 literal|"select *\n"
 operator|+
-literal|"  from emp match_recognize\n"
+literal|"from emp match_recognize (\n"
 operator|+
-literal|"  (\n"
+literal|"  partition by job\n"
 operator|+
-literal|"   partition by job\n"
+literal|"  order by sal\n"
 operator|+
-literal|"   order by sal\n"
+literal|"  measures MATCH_NUMBER() as match_num,\n"
 operator|+
-literal|"   measures  MATCH_NUMBER() as match_num, "
+literal|"    CLASSIFIER() as var_match,\n"
 operator|+
-literal|"   CLASSIFIER() as var_match, "
+literal|"    STRT.mgr as start_nw,\n"
 operator|+
-literal|"   STRT.mgr as start_nw,"
+literal|"    LAST(DOWN.mgr) as bottom_nw,\n"
 operator|+
-literal|"   LAST(DOWN.mgr) as bottom_nw,"
+literal|"    LAST(up.mgr) as end_nw\n"
 operator|+
-literal|"   LAST(up.mgr) as end_nw"
+literal|"  pattern (strt down+ up+)\n"
 operator|+
-literal|"    pattern (strt down+ up+)\n"
+literal|"  define\n"
 operator|+
-literal|"    define\n"
+literal|"    down as down.mgr< PREV(down.mgr),\n"
 operator|+
-literal|"      down as down.mgr< PREV(down.mgr),\n"
-operator|+
-literal|"      up as up.mgr> prev(up.mgr)\n"
-operator|+
-literal|"  ) mr"
+literal|"    up as up.mgr> prev(up.mgr)) as mr"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -9629,35 +9656,31 @@ name|sql
 init|=
 literal|"select *\n"
 operator|+
-literal|"  from emp match_recognize\n"
+literal|"from emp match_recognize (\n"
 operator|+
-literal|"  (\n"
+literal|"  partition by job\n"
 operator|+
-literal|"   partition by job\n"
+literal|"  order by sal\n"
 operator|+
-literal|"   order by sal\n"
+literal|"  measures MATCH_NUMBER() as match_num,\n"
 operator|+
-literal|"   measures  MATCH_NUMBER() as match_num, "
+literal|"    CLASSIFIER() as var_match,\n"
 operator|+
-literal|"   CLASSIFIER() as var_match, "
+literal|"    STRT.mgr as start_nw,\n"
 operator|+
-literal|"   STRT.mgr as start_nw,"
+literal|"    LAST(DOWN.mgr) as bottom_nw,\n"
 operator|+
-literal|"   LAST(DOWN.mgr) as bottom_nw,"
+literal|"    LAST(up.mgr) as end_nw\n"
 operator|+
-literal|"   LAST(up.mgr) as end_nw"
+literal|"  ALL ROWS PER MATCH\n"
 operator|+
-literal|"   ALL ROWS PER MATCH"
+literal|"  pattern (strt down+ up+)\n"
 operator|+
-literal|"    pattern (strt down+ up+)\n"
+literal|"  define\n"
 operator|+
-literal|"    define\n"
+literal|"    down as down.mgr< PREV(down.mgr),\n"
 operator|+
-literal|"      down as down.mgr< PREV(down.mgr),\n"
-operator|+
-literal|"      up as up.mgr> prev(up.mgr)\n"
-operator|+
-literal|"  ) mr"
+literal|"    up as up.mgr> prev(up.mgr)) as mr"
 decl_stmt|;
 name|sql
 argument_list|(

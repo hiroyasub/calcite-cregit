@@ -5888,10 +5888,23 @@ argument_list|(
 name|newWhere
 argument_list|)
 decl_stmt|;
+specifier|final
+name|RexNode
+name|convertedWhere2
+init|=
+name|RexUtil
+operator|.
+name|removeNullabilityCast
+argument_list|(
+name|typeFactory
+argument_list|,
+name|convertedWhere
+argument_list|)
+decl_stmt|;
 comment|// only allocate filter if the condition is not TRUE
 if|if
 condition|(
-name|convertedWhere
+name|convertedWhere2
 operator|.
 name|isAlwaysTrue
 argument_list|()
@@ -5921,7 +5934,7 @@ name|bb
 operator|.
 name|root
 argument_list|,
-name|convertedWhere
+name|convertedWhere2
 argument_list|)
 decl_stmt|;
 specifier|final
