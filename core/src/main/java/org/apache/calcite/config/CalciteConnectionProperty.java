@@ -330,7 +330,7 @@ argument_list|,
 literal|false
 argument_list|)
 block|,
-comment|/** Collection of built-in functions and operators. Valid values include    * "standard" and "oracle". */
+comment|/** Collection of built-in functions and operators. Valid values include    * "standard", "oracle" and "spatial", and also comma-separated lists, for    * example "oracle,spatial". */
 name|FUN
 argument_list|(
 literal|"fun"

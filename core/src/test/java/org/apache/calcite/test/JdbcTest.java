@@ -24039,6 +24039,75 @@ literal|"No match found for function signature NVL(<NUMERIC>,<NUMERIC>)"
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2072">[CALCITE-2072]    * Enable spatial operator table by adding 'fun=spatial'to JDBC URL</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testFunSpatial
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select distinct\n"
+operator|+
+literal|"  ST_PointFromText('POINT(-71.0642.28)') as c\n"
+operator|+
+literal|"from \"hr\".\"emps\""
+decl_stmt|;
+name|CalciteAssert
+operator|.
+name|that
+argument_list|(
+name|CalciteAssert
+operator|.
+name|Config
+operator|.
+name|REGULAR
+argument_list|)
+operator|.
+name|with
+argument_list|(
+literal|"fun"
+argument_list|,
+literal|"spatial"
+argument_list|)
+operator|.
+name|query
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"C={\"x\":-71.0642,\"y\":0.28}"
+argument_list|)
+expr_stmt|;
+comment|// NVL is present in the Oracle operator table, but not spatial or core
+name|CalciteAssert
+operator|.
+name|that
+argument_list|(
+name|CalciteAssert
+operator|.
+name|Config
+operator|.
+name|REGULAR
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select nvl(\"commission\", -99) as c from \"hr\".\"emps\""
+argument_list|)
+operator|.
+name|throws_
+argument_list|(
+literal|"No match found for function signature NVL(<NUMERIC>,<NUMERIC>)"
+argument_list|)
+expr_stmt|;
+block|}
 comment|/** Tests that {@link Hook#PARSE_TREE} works. */
 annotation|@
 name|Test

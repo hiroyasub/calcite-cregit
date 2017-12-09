@@ -39,6 +39,22 @@ name|apache
 operator|.
 name|calcite
 operator|.
+name|linq4j
+operator|.
+name|function
+operator|.
+name|Experimental
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
 name|rel
 operator|.
 name|type
@@ -305,6 +321,9 @@ specifier|final
 name|AggregateFunction
 name|function
 decl_stmt|;
+comment|/** This field is is technical debt; see [CALCITE-2082] Remove    * RelDataTypeFactory argument from SqlUserDefinedAggFunction constructor. */
+annotation|@
+name|Experimental
 specifier|public
 specifier|final
 name|RelDataTypeFactory
