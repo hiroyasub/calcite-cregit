@@ -442,6 +442,8 @@ name|asList
 argument_list|(
 literal|"SCHEMA(CATALOG.SALES)"
 argument_list|,
+literal|"SCHEMA(CATALOG.SALES.NEST)"
+argument_list|,
 literal|"TABLE(CATALOG.SALES.EMP)"
 argument_list|,
 literal|"TABLE(CATALOG.SALES.EMPDEFAULTS)"
@@ -499,6 +501,8 @@ argument_list|,
 literal|"SCHEMA(CATALOG.STRUCT)"
 argument_list|,
 literal|"SCHEMA(CATALOG.CUSTOMER)"
+argument_list|,
+literal|"SCHEMA(CATALOG.SALES.NEST)"
 argument_list|)
 decl_stmt|;
 specifier|private

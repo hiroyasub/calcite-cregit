@@ -32766,6 +32766,16 @@ argument_list|(
 name|error
 argument_list|)
 expr_stmt|;
+name|sql
+argument_list|(
+literal|"select ^slackingmin^ from nest.emp_r"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+name|error
+argument_list|)
+expr_stmt|;
 block|}
 annotation|@
 name|Test
