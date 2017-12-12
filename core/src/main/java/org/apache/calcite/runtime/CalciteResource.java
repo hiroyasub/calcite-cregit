@@ -3368,6 +3368,36 @@ function_decl|;
 annotation|@
 name|BaseMessage
 argument_list|(
+literal|"The system time period specification expects Timestamp type but is ''{0}''"
+argument_list|)
+name|ExInst
+argument_list|<
+name|SqlValidatorException
+argument_list|>
+name|illegalExpressionForTemporal
+parameter_list|(
+name|String
+name|type
+parameter_list|)
+function_decl|;
+annotation|@
+name|BaseMessage
+argument_list|(
+literal|"Table ''{0}'' is not a temporal table, can not be queried in system time period specification"
+argument_list|)
+name|ExInst
+argument_list|<
+name|SqlValidatorException
+argument_list|>
+name|notTemporalTable
+parameter_list|(
+name|String
+name|tableName
+parameter_list|)
+function_decl|;
+annotation|@
+name|BaseMessage
+argument_list|(
 literal|"Cannot use RUNNING/FINAL in DEFINE ''{0}''"
 argument_list|)
 name|ExInst

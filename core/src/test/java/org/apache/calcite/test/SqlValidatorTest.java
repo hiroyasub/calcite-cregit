@@ -23466,6 +23466,54 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testTemporalTable
+parameter_list|()
+block|{
+name|checkFails
+argument_list|(
+literal|"select stream * from orders, ^products^ for system_time as of"
+operator|+
+literal|" TIMESTAMP '2011-01-02 00:00:00'"
+argument_list|,
+literal|"Table 'PRODUCTS' is not a temporal table, "
+operator|+
+literal|"can not be queried in system time period specification"
+argument_list|)
+expr_stmt|;
+name|checkFails
+argument_list|(
+literal|"select stream * from orders, products_temporal "
+operator|+
+literal|"for system_time as of ^'2011-01-02 00:00:00'^"
+argument_list|,
+literal|"The system time period specification expects Timestamp type but is 'CHAR'"
+argument_list|)
+expr_stmt|;
+comment|// verify inner join with a specific timestamp
+name|check
+argument_list|(
+literal|"select stream * from orders join products_temporal "
+operator|+
+literal|"for system_time as of timestamp '2011-01-02 00:00:00' "
+operator|+
+literal|"on orders.productid = products_temporal.productid"
+argument_list|)
+expr_stmt|;
+comment|// verify left join with a timestamp expression
+name|check
+argument_list|(
+literal|"select stream * from orders left join products_temporal "
+operator|+
+literal|"for system_time as of orders.rowtime "
+operator|+
+literal|"on orders.productid = products_temporal.productid"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testScalarSubQuery
 parameter_list|()
 block|{

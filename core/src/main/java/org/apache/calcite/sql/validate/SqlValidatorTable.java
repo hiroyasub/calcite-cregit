@@ -128,6 +128,11 @@ name|SqlModality
 name|modality
 parameter_list|)
 function_decl|;
+comment|/**    * Returns whether the table is temporal.    */
+name|boolean
+name|isTemporal
+parameter_list|()
+function_decl|;
 comment|/**    * Returns whether the ordinal column has a default value.    */
 annotation|@
 name|Deprecated

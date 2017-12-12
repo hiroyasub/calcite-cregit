@@ -1355,6 +1355,31 @@ name|getCollationList
 argument_list|()
 return|;
 block|}
+comment|/** Helper method to determine a    * {@link org.apache.calcite.rel.core.Snapshot}'s collation. */
+specifier|public
+specifier|static
+name|List
+argument_list|<
+name|RelCollation
+argument_list|>
+name|snapshot
+parameter_list|(
+name|RelMetadataQuery
+name|mq
+parameter_list|,
+name|RelNode
+name|input
+parameter_list|)
+block|{
+return|return
+name|mq
+operator|.
+name|collations
+argument_list|(
+name|input
+argument_list|)
+return|;
+block|}
 comment|/** Helper method to determine a    * {@link org.apache.calcite.rel.core.Sort}'s collation. */
 specifier|public
 specifier|static

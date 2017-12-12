@@ -4041,6 +4041,86 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSnapshotOnTemporalTable
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select * from products_temporal "
+operator|+
+literal|"for system_time as of TIMESTAMP '2011-01-02 00:00:00'"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testJoinTemporalTableOnSpecificTime
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select stream *\n"
+operator|+
+literal|"from orders,\n"
+operator|+
+literal|"  products_temporal for system_time as of\n"
+operator|+
+literal|"    TIMESTAMP '2011-01-02 00:00:00'"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testJoinTemporalTableOnColumnReference
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select stream *\n"
+operator|+
+literal|"from orders\n"
+operator|+
+literal|"join products_temporal for system_time as of orders.rowtime\n"
+operator|+
+literal|"on orders.productid = products_temporal.productid"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1732">[CALCITE-1732]    * IndexOutOfBoundsException when using LATERAL TABLE with more than one    * field</a>. */
 annotation|@
 name|Test

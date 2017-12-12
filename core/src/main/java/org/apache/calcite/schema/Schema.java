@@ -267,6 +267,9 @@ block|,
 comment|/** A typed view.      *      *<p>Used by DB2.      */
 name|TYPED_VIEW
 block|,
+comment|/**      * A temporal table.      *      *<p>Used by MS SQL, Oracle and others      */
+name|TEMPORAL_TABLE
+block|,
 comment|/** Table type not known to Calcite.      *      *<p>If you get one of these, please fix the problem by adding an enum      * value. */
 name|OTHER
 block|;

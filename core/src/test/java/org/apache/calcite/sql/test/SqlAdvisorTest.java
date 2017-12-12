@@ -483,6 +483,8 @@ literal|"TABLE(CATALOG.SALES.SHIPMENTS)"
 argument_list|,
 literal|"TABLE(CATALOG.SALES.PRODUCTS)"
 argument_list|,
+literal|"TABLE(CATALOG.SALES.PRODUCTS_TEMPORAL)"
+argument_list|,
 literal|"TABLE(CATALOG.SALES.SUPPLIERS)"
 argument_list|,
 literal|"TABLE(CATALOG.SALES.EMP_R)"
@@ -1078,6 +1080,8 @@ operator|.
 name|asList
 argument_list|(
 literal|"KEYWORD(FETCH)"
+argument_list|,
+literal|"KEYWORD(FOR)"
 argument_list|,
 literal|"KEYWORD(OFFSET)"
 argument_list|,

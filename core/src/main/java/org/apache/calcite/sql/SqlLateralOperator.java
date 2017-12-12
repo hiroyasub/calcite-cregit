@@ -120,6 +120,7 @@ argument_list|()
 operator|==
 literal|1
 operator|&&
+operator|(
 name|call
 operator|.
 name|getOperandList
@@ -136,6 +137,24 @@ operator|==
 name|SqlKind
 operator|.
 name|COLLECTION_TABLE
+operator|||
+name|call
+operator|.
+name|getOperandList
+argument_list|()
+operator|.
+name|get
+argument_list|(
+literal|0
+argument_list|)
+operator|.
+name|getKind
+argument_list|()
+operator|==
+name|SqlKind
+operator|.
+name|SNAPSHOT
+operator|)
 condition|)
 block|{
 comment|// do not create ( ) around the following TABLE clause

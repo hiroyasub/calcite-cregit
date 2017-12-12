@@ -159,6 +159,9 @@ block|,
 comment|/**    * MATCH_RECOGNIZE clause    */
 name|MATCH_RECOGNIZE
 block|,
+comment|/**    * SNAPSHOT operator    */
+name|SNAPSHOT
+block|,
 comment|// binary operators
 comment|/**    * The arithmetic multiplication operator, "*".    */
 name|TIMES

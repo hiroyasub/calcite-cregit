@@ -2171,6 +2171,11 @@ specifier|final
 name|ColumnResolver
 name|resolver
 decl_stmt|;
+specifier|private
+specifier|final
+name|boolean
+name|temporal
+decl_stmt|;
 specifier|protected
 specifier|final
 name|InitializerExpressionFactory
@@ -2207,6 +2212,9 @@ parameter_list|,
 name|boolean
 name|stream
 parameter_list|,
+name|boolean
+name|temporal
+parameter_list|,
 name|double
 name|rowCount
 parameter_list|,
@@ -2233,6 +2241,8 @@ name|name
 argument_list|)
 argument_list|,
 name|stream
+argument_list|,
+name|temporal
 argument_list|,
 name|rowCount
 argument_list|,
@@ -2273,6 +2283,9 @@ parameter_list|,
 name|boolean
 name|stream
 parameter_list|,
+name|boolean
+name|temporal
+parameter_list|,
 name|double
 name|rowCount
 parameter_list|,
@@ -2294,6 +2307,12 @@ operator|.
 name|stream
 operator|=
 name|stream
+expr_stmt|;
+name|this
+operator|.
+name|temporal
+operator|=
+name|temporal
 expr_stmt|;
 name|this
 operator|.
@@ -2329,6 +2348,9 @@ name|catalogReader
 parameter_list|,
 name|boolean
 name|stream
+parameter_list|,
+name|boolean
+name|temporal
 parameter_list|,
 name|double
 name|rowCount
@@ -2394,6 +2416,12 @@ operator|.
 name|stream
 operator|=
 name|stream
+expr_stmt|;
+name|this
+operator|.
+name|temporal
+operator|=
+name|temporal
 expr_stmt|;
 name|this
 operator|.
@@ -2754,6 +2782,8 @@ name|names
 argument_list|,
 name|stream
 argument_list|,
+name|temporal
+argument_list|,
 name|rowCount
 argument_list|,
 name|resolver
@@ -2851,6 +2881,8 @@ name|names
 argument_list|,
 name|stream
 argument_list|,
+literal|false
+argument_list|,
 name|rowCount
 argument_list|,
 literal|null
@@ -2903,6 +2935,8 @@ argument_list|,
 name|NullInitializerExpressionFactory
 operator|.
 name|INSTANCE
+argument_list|,
+literal|false
 argument_list|)
 return|;
 block|}
@@ -2931,6 +2965,9 @@ name|resolver
 parameter_list|,
 name|InitializerExpressionFactory
 name|initializerExpressionFactory
+parameter_list|,
+name|boolean
+name|temporal
 parameter_list|)
 block|{
 name|MockTable
@@ -2953,6 +2990,8 @@ argument_list|,
 name|name
 argument_list|,
 name|stream
+argument_list|,
+name|temporal
 argument_list|,
 name|rowCount
 argument_list|,
@@ -3213,6 +3252,17 @@ name|SqlModality
 operator|.
 name|RELATION
 operator|)
+return|;
+block|}
+annotation|@
+name|Override
+specifier|public
+name|boolean
+name|isTemporal
+parameter_list|()
+block|{
+return|return
+name|temporal
 return|;
 block|}
 specifier|public
@@ -3564,6 +3614,8 @@ argument_list|)
 argument_list|,
 name|stream
 argument_list|,
+literal|false
+argument_list|,
 name|rowCount
 argument_list|,
 name|resolver
@@ -3650,6 +3702,8 @@ name|catalogReader
 argument_list|,
 name|stream
 argument_list|,
+literal|false
+argument_list|,
 name|rowCount
 argument_list|,
 name|columnList
@@ -3725,10 +3779,6 @@ specifier|final
 name|InitializerExpressionFactory
 name|initializerExpressionFactory
 init|=
-name|underlying
-operator|!=
-literal|null
-operator|&&
 name|underlying
 operator|instanceof
 name|Wrapper
@@ -4276,6 +4326,8 @@ argument_list|,
 name|name
 argument_list|,
 name|stream
+argument_list|,
+literal|false
 argument_list|,
 name|rowCount
 argument_list|,
@@ -5021,6 +5073,8 @@ argument_list|,
 name|name
 argument_list|,
 name|stream
+argument_list|,
+literal|false
 argument_list|,
 name|rowCount
 argument_list|,
