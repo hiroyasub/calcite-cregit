@@ -4281,6 +4281,50 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2071">[CALCITE-2071]    * Query with IN and OR in WHERE clause returns wrong result</a>.    * More cases in sub-query.iq. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testWhereInOr
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select \"empid\"\n"
+operator|+
+literal|"from \"hr\".\"emps\" t\n"
+operator|+
+literal|"where (\"empid\" in (select \"empid\" from \"hr\".\"emps\")\n"
+operator|+
+literal|"    or \"empid\" in (1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11,\n"
+operator|+
+literal|"        12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25))\n"
+operator|+
+literal|"and \"empid\" in (100, 200, 150)"
+decl_stmt|;
+name|CalciteAssert
+operator|.
+name|hr
+argument_list|()
+operator|.
+name|query
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"empid=100"
+argument_list|,
+literal|"empid=200"
+argument_list|,
+literal|"empid=150"
+argument_list|)
+expr_stmt|;
+block|}
 comment|/** Tests that a driver can be extended with its own parser and can execute    * its own flavor of DDL. */
 annotation|@
 name|Test

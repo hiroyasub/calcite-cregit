@@ -3298,6 +3298,8 @@ name|UNKNOWN_AS_TRUE
 case|:
 if|if
 condition|(
+name|notIn
+operator|&&
 operator|!
 name|containsNullableFields
 argument_list|(

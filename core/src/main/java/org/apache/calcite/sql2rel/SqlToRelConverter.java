@@ -9287,6 +9287,35 @@ operator|instanceof
 name|SqlCall
 condition|)
 block|{
+switch|switch
+condition|(
+name|kind
+condition|)
+block|{
+comment|// Do no change logic for AND, IN and NOT IN expressions;
+comment|// but do change logic for OR, NOT and others;
+comment|// EXISTS was handled already.
+case|case
+name|AND
+case|:
+case|case
+name|IN
+case|:
+case|case
+name|NOT_IN
+case|:
+break|break;
+default|default:
+name|logic
+operator|=
+name|RelOptUtil
+operator|.
+name|Logic
+operator|.
+name|TRUE_FALSE_UNKNOWN
+expr_stmt|;
+break|break;
+block|}
 for|for
 control|(
 name|SqlNode
