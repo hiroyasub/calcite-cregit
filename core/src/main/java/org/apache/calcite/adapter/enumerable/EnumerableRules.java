@@ -391,6 +391,16 @@ decl_stmt|;
 specifier|public
 specifier|static
 specifier|final
+name|EnumerableMatchRule
+name|ENUMERABLE_MATCH_RULE
+init|=
+operator|new
+name|EnumerableMatchRule
+argument_list|()
+decl_stmt|;
+specifier|public
+specifier|static
+specifier|final
 name|List
 argument_list|<
 name|RelOptRule
@@ -480,6 +490,10 @@ argument_list|,
 name|EnumerableRules
 operator|.
 name|ENUMERABLE_TABLE_FUNCTION_SCAN_RULE
+argument_list|,
+name|EnumerableRules
+operator|.
+name|ENUMERABLE_MATCH_RULE
 argument_list|)
 decl_stmt|;
 specifier|public

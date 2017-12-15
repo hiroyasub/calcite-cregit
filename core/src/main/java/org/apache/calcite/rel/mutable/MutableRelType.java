@@ -41,6 +41,8 @@ name|INTERSECT
 block|,
 name|JOIN
 block|,
+name|MATCH
+block|,
 name|MINUS
 block|,
 name|PROJECT

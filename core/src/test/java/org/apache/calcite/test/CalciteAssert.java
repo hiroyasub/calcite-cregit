@@ -5197,6 +5197,83 @@ literal|null
 argument_list|)
 argument_list|)
 expr_stmt|;
+name|post
+operator|.
+name|add
+argument_list|(
+literal|"TICKER"
+argument_list|,
+name|ViewTable
+operator|.
+name|viewMacro
+argument_list|(
+name|post
+argument_list|,
+literal|"select * from (values\n"
+operator|+
+literal|"    ('ACME', '2017-12-01', 12),\n"
+operator|+
+literal|"    ('ACME', '2017-12-02', 17),\n"
+operator|+
+literal|"    ('ACME', '2017-12-03', 19),\n"
+operator|+
+literal|"    ('ACME', '2017-12-04', 21),\n"
+operator|+
+literal|"    ('ACME', '2017-12-05', 25),\n"
+operator|+
+literal|"    ('ACME', '2017-12-06', 12),\n"
+operator|+
+literal|"    ('ACME', '2017-12-07', 15),\n"
+operator|+
+literal|"    ('ACME', '2017-12-08', 20),\n"
+operator|+
+literal|"    ('ACME', '2017-12-09', 24),\n"
+operator|+
+literal|"    ('ACME', '2017-12-10', 25),\n"
+operator|+
+literal|"    ('ACME', '2017-12-11', 19),\n"
+operator|+
+literal|"    ('ACME', '2017-12-12', 15),\n"
+operator|+
+literal|"    ('ACME', '2017-12-13', 25),\n"
+operator|+
+literal|"    ('ACME', '2017-12-14', 25),\n"
+operator|+
+literal|"    ('ACME', '2017-12-15', 14),\n"
+operator|+
+literal|"    ('ACME', '2017-12-16', 12),\n"
+operator|+
+literal|"    ('ACME', '2017-12-17', 14),\n"
+operator|+
+literal|"    ('ACME', '2017-12-18', 24),\n"
+operator|+
+literal|"    ('ACME', '2017-12-19', 23),\n"
+operator|+
+literal|"    ('ACME', '2017-12-20', 22))\n"
+operator|+
+literal|" as t(SYMBOL, tstamp, price)"
+argument_list|,
+name|ImmutableList
+operator|.
+expr|<
+name|String
+operator|>
+name|of
+argument_list|()
+argument_list|,
+name|ImmutableList
+operator|.
+name|of
+argument_list|(
+literal|"POST"
+argument_list|,
+literal|"TICKER"
+argument_list|)
+argument_list|,
+literal|null
+argument_list|)
+argument_list|)
+expr_stmt|;
 return|return
 name|post
 return|;
