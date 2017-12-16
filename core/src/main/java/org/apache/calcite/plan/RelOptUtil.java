@@ -15287,7 +15287,9 @@ name|build
 argument_list|()
 return|;
 block|}
-comment|/**    * Pushes down expressions in "equal" join condition, using the default    * builder.    *    * @see #pushDownJoinConditions(Join, RelBuilder)    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 specifier|static
 name|RelNode

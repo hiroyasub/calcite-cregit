@@ -7340,9 +7340,7 @@ argument_list|,
 name|rexBuilder
 argument_list|)
 decl_stmt|;
-name|SqlToRelConverter
-name|sqlToRelConverter
-init|=
+return|return
 operator|new
 name|SqlToRelConverter
 argument_list|(
@@ -7358,9 +7356,6 @@ name|convertletTable
 argument_list|,
 name|config
 argument_list|)
-decl_stmt|;
-return|return
-name|sqlToRelConverter
 return|;
 block|}
 annotation|@
