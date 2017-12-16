@@ -1840,11 +1840,6 @@ argument_list|)
 expr_stmt|;
 block|}
 annotation|@
-name|Ignore
-argument_list|(
-literal|"TODO: fix invalid cast from Integer to Long"
-argument_list|)
-annotation|@
 name|Test
 specifier|public
 name|void
@@ -1855,11 +1850,17 @@ specifier|final
 name|String
 name|explain
 init|=
-literal|"PLAN="
+literal|"PLAN=EnumerableInterpreter\n"
 operator|+
-literal|"EnumerableInterpreter\n"
+literal|"  BindableAggregate(group=[{0}], U=[SUM($1)])\n"
 operator|+
-literal|"  DruidQuery(table=[[foodmart, foodmart]], projects=[[$29, CAST($88):INTEGER]], groups=[{0}], aggs=[[SUM($1)]])"
+literal|"    BindableProject(state_province=[$0], $f1=[CAST($1):INTEGER])\n"
+operator|+
+literal|"      DruidQuery(table=[[foodmart, foodmart]], "
+operator|+
+literal|"intervals=[[1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z]],"
+operator|+
+literal|" projects=[[$30, $89]])"
 decl_stmt|;
 specifier|final
 name|String
@@ -1912,29 +1913,29 @@ specifier|final
 name|String
 name|plan
 init|=
-literal|"PLAN=EnumerableInterpreter\n  BindableAggregate(group=[{0, 1}])\n"
+literal|"PLAN=EnumerableInterpreter\n"
 operator|+
-literal|"    DruidQuery(table=[[foodmart, foodmart]], "
+literal|"  DruidQuery(table=[[foodmart, foodmart]], "
 operator|+
 literal|"intervals=[[1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z]], filter=[=($1, 1020)],"
 operator|+
-literal|" projects=[[$90, $1]])\n"
+literal|" projects=[[$90, $1]], groups=[{0, 1}], aggs=[[]])"
 decl_stmt|;
 specifier|final
 name|String
 name|druidQuery
 init|=
-literal|"{'queryType':'select','dataSource':'foodmart','descending':false,"
+literal|"{'queryType':'groupBy','dataSource':'foodmart','granularity':'all',"
 operator|+
-literal|"'intervals':['1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z'],"
+literal|"'dimensions':[{'type':'default','dimension':'store_sales'},"
 operator|+
-literal|"'filter':{'type':'selector','dimension':'product_id','value':'1020'},"
+literal|"{'type':'default','dimension':'product_id'}],'limitSpec':{'type':'default'},'"
 operator|+
-literal|"'dimensions':['product_id'],'metrics':['store_sales'],'granularity':'all',"
+literal|"filter':{'type':'selector','dimension':'product_id','value':'1020'},"
 operator|+
-literal|"'pagingSpec':{'threshold':16384,'fromNext':true},"
+literal|"'aggregations':[],"
 operator|+
-literal|"'context':{'druid.query.fetch':false}}"
+literal|"'intervals':['1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z']}"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -5254,7 +5255,7 @@ name|queryContains
 argument_list|(
 name|druidChecker
 argument_list|(
-literal|"{\"queryType\":\"select\""
+literal|"{\"queryType\":\"groupBy\""
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -9429,7 +9430,6 @@ name|expectedSubExplain
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Test to ensure that aggregations with metrics as filters do not get pushed into Druid    */
 annotation|@
 name|Test
 specifier|public
@@ -9445,9 +9445,15 @@ decl_stmt|;
 name|String
 name|expectedSubExplain
 init|=
-literal|"  BindableAggregate(group=[{}], EXPR$0=[SUM($0) FILTER $1])\n"
+literal|"PLAN=EnumerableInterpreter\n"
 operator|+
-literal|"    BindableProject(store_sales=[$0], $f1=[IS TRUE(>($1, 10))])\n"
+literal|"  DruidQuery(table=[[foodmart, foodmart]], "
+operator|+
+literal|"intervals=[[1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z]], filter=[>"
+operator|+
+literal|"($91, 10)], projects=[[$90, IS TRUE(>($91, 10))]], groups=[{}], aggs=[[SUM($0)"
+operator|+
+literal|"]])"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -9457,6 +9463,135 @@ operator|.
 name|explainContains
 argument_list|(
 name|expectedSubExplain
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|druidChecker
+argument_list|(
+literal|"\"queryType\":\"timeseries\""
+argument_list|,
+literal|"\"filter\":{\"type\":\"bound\","
+operator|+
+literal|"\"dimension\":\"store_cost\",\"lower\":\"10\",\"lowerStrict\":true,"
+operator|+
+literal|"\"ordering\":\"numeric\"}"
+argument_list|)
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"EXPR$0=25.060000000000002"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testFilterClauseWithMetricRefAndAggregates
+parameter_list|()
+block|{
+name|String
+name|sql
+init|=
+literal|"select sum(\"store_sales\"), \"product_id\" "
+operator|+
+literal|"from \"foodmart\" where \"product_id\"> 1553 and \"store_cost\"> 5 group by \"product_id\""
+decl_stmt|;
+name|String
+name|expectedSubExplain
+init|=
+literal|"PLAN=EnumerableInterpreter\n"
+operator|+
+literal|"  BindableProject(EXPR$0=[$1], product_id=[$0])\n"
+operator|+
+literal|"    DruidQuery(table=[[foodmart, foodmart]], "
+operator|+
+literal|"intervals=[[1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z]], filter=[AND(>"
+operator|+
+literal|"(CAST($1):BIGINT, 1553),>($91, 5))], groups=[{1}], aggs=[[SUM($90)]])"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+name|expectedSubExplain
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|druidChecker
+argument_list|(
+literal|"\"queryType\":\"groupBy\""
+argument_list|,
+literal|"{\"type\":\"bound\","
+operator|+
+literal|"\"dimension\":\"store_cost\",\"lower\":\"5\",\"lowerStrict\":true,"
+operator|+
+literal|"\"ordering\":\"numeric\"}"
+argument_list|)
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"EXPR$0=10.16; product_id=1554\n"
+operator|+
+literal|"EXPR$0=45.05; product_id=1556\n"
+operator|+
+literal|"EXPR$0=88.5; product_id=1555"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testFilterClauseWithMetricAndTimeAndAggregates
+parameter_list|()
+block|{
+name|String
+name|sql
+init|=
+literal|"select sum(\"store_sales\"), \"product_id\""
+operator|+
+literal|"from \"foodmart\" where \"product_id\"> 1555 and \"store_cost\"> 5 and extract(year "
+operator|+
+literal|"from \"timestamp\") = 1997 "
+operator|+
+literal|"group by floor(\"timestamp\" to DAY),\"product_id\""
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|druidChecker
+argument_list|(
+literal|"\"queryType\":\"groupBy\""
+argument_list|,
+literal|"{\"type\":\"bound\","
+operator|+
+literal|"\"dimension\":\"store_cost\",\"lower\":\"5\",\"lowerStrict\":true,"
+operator|+
+literal|"\"ordering\":\"numeric\"}"
+argument_list|)
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"EXPR$0=10.6; product_id=1556\n"
+operator|+
+literal|"EXPR$0=10.6; product_id=1556\n"
+operator|+
+literal|"EXPR$0=10.6; product_id=1556\n"
+operator|+
+literal|"EXPR$0=13.25; product_id=1556"
 argument_list|)
 expr_stmt|;
 block|}
@@ -9906,9 +10041,15 @@ decl_stmt|;
 name|String
 name|expectedSubExplain
 init|=
+literal|"PLAN=EnumerableInterpreter\n"
+operator|+
 literal|"  BindableAggregate(group=[{}], EXPR$0=[COUNT($0)])\n"
 operator|+
-literal|"    BindableAggregate(group=[{1}])"
+literal|"    DruidQuery(table=[[foodmart, foodmart]], "
+operator|+
+literal|"intervals=[[1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z]], filter=[=($63, 'WA')"
+operator|+
+literal|"], groups=[{90}], aggs=[[]])"
 decl_stmt|;
 name|testCountWithApproxDistinct
 argument_list|(
@@ -9917,6 +10058,8 @@ argument_list|,
 name|sql
 argument_list|,
 name|expectedSubExplain
+argument_list|,
+literal|"\"queryType\":\"groupBy\""
 argument_list|)
 expr_stmt|;
 name|testCountWithApproxDistinct
@@ -9926,6 +10069,8 @@ argument_list|,
 name|sql
 argument_list|,
 name|expectedSubExplain
+argument_list|,
+literal|"\"queryType\":\"groupBy\""
 argument_list|)
 expr_stmt|;
 block|}
@@ -10071,11 +10216,13 @@ decl_stmt|;
 name|String
 name|expectedSubExplain
 init|=
+literal|"PLAN=EnumerableInterpreter\n"
+operator|+
 literal|"  BindableAggregate(group=[{0}], EXPR$1=[COUNT($1)])\n"
 operator|+
-literal|"    DruidQuery(table=[[foodmart, foodmart]], intervals=[[1900-01-09T00:00:"
+literal|"    DruidQuery(table=[[foodmart, foodmart]], "
 operator|+
-literal|"00.000Z/2992-01-10T00:00:00.000Z]], projects=[[$63, $89]], groups=[{0, 1}], "
+literal|"intervals=[[1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z]], groups=[{63, 89}], "
 operator|+
 literal|"aggs=[[]])"
 decl_stmt|;
@@ -10086,6 +10233,8 @@ argument_list|,
 name|sql
 argument_list|,
 name|expectedSubExplain
+argument_list|,
+literal|"\"queryType\":\"groupBy\""
 argument_list|)
 expr_stmt|;
 name|testCountWithApproxDistinct
@@ -10095,6 +10244,8 @@ argument_list|,
 name|sql
 argument_list|,
 name|expectedSubExplain
+argument_list|,
+literal|"\"queryType\":\"groupBy\""
 argument_list|)
 expr_stmt|;
 block|}
