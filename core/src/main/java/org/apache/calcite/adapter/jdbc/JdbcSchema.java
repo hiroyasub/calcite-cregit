@@ -694,9 +694,9 @@ name|name
 argument_list|,
 name|dataSource
 argument_list|,
-operator|new
 name|SqlDialectFactoryImpl
-argument_list|()
+operator|.
+name|INSTANCE
 argument_list|,
 name|catalog
 argument_list|,
@@ -1057,9 +1057,9 @@ block|{
 return|return
 name|createDialect
 argument_list|(
-operator|new
 name|SqlDialectFactoryImpl
-argument_list|()
+operator|.
+name|INSTANCE
 argument_list|,
 name|dataSource
 argument_list|)

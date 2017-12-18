@@ -36,7 +36,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  *<code>SqlDialectFactory</code> constructs a<code>SqlDialect</code> appropriate  * for a given database metadata object.  */
+comment|/**  * Creates a<code>SqlDialect</code> appropriate  * for a given database metadata object.  */
 end_comment
 
 begin_interface
@@ -44,7 +44,7 @@ specifier|public
 interface|interface
 name|SqlDialectFactory
 block|{
-comment|/**    * Creates a<code>SqlDialect</code> from a DatabaseMetaData.    *    *<p>Does not maintain a reference to the DatabaseMetaData -- or, more    * importantly, to its {@link Connection} -- after this call has    * returned.    *    * @param databaseMetaData used to determine which dialect of SQL to    *                         generate    */
+comment|/**    * Creates a<code>SqlDialect</code> from a DatabaseMetaData.    *    *<p>Does not maintain a reference to the DatabaseMetaData -- or, more    * importantly, to its {@link Connection} -- after this call has    * returned.    *    * @param databaseMetaData used to determine which dialect of SQL to    *                         generate    *    * @throws RuntimeException if there was an error creating the dialect    */
 name|SqlDialect
 name|create
 parameter_list|(

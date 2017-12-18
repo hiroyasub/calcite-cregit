@@ -126,6 +126,7 @@ name|TableScan
 implements|implements
 name|JdbcRel
 block|{
+specifier|protected
 specifier|final
 name|JdbcTable
 name|jdbcTable

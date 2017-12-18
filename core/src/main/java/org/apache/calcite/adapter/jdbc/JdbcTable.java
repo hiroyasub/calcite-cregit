@@ -660,6 +660,7 @@ comment|/**  * Queryable that gets its data from a table within a JDBC connectio
 end_comment
 
 begin_class
+specifier|public
 class|class
 name|JdbcTable
 extends|extends
