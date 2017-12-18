@@ -941,7 +941,7 @@ literal|"'dimensions':[{'type':'default','dimension':'countryName'}],'limitSpec'
 operator|+
 literal|"'filter':{'type':'selector','dimension':'page','value':'Jeremy Corbyn'},"
 operator|+
-literal|"'aggregations':[{'type':'longSum','name':'dummy_agg','fieldName':'dummy_agg'}],"
+literal|"'aggregations':[],"
 operator|+
 literal|"'intervals':['1900-01-01T00:00:00.000Z/3000-01-01T00:00:00.000Z']}"
 decl_stmt|;
@@ -1357,7 +1357,7 @@ literal|"'dimensions':[{'type':'default','dimension':'countryName'}],'limitSpec'
 operator|+
 literal|"'filter':{'type':'selector','dimension':'page','value':'Jeremy Corbyn'},"
 operator|+
-literal|"'aggregations':[{'type':'longSum','name':'dummy_agg','fieldName':'dummy_agg'}],"
+literal|"'aggregations':[],"
 operator|+
 literal|"'intervals':['1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z']}"
 decl_stmt|;
@@ -1807,7 +1807,7 @@ literal|"{'queryType':'groupBy','dataSource':'foodmart','granularity':'all',"
 operator|+
 literal|"'dimensions':[{'type':'default','dimension':'state_province'}],'limitSpec':{'type':'default'},"
 operator|+
-literal|"'aggregations':[{'type':'longSum','name':'dummy_agg','fieldName':'dummy_agg'}],"
+literal|"'aggregations':[],"
 operator|+
 literal|"'intervals':['1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z']}"
 decl_stmt|;
@@ -1997,9 +1997,7 @@ literal|"'limitSpec':{'type':'default'},'filter':{'type':'selector',"
 operator|+
 literal|"'dimension':'product_id','value':'1020'},"
 operator|+
-literal|"'aggregations':[{'type':'longSum','name':'dummy_agg',"
-operator|+
-literal|"'fieldName':'dummy_agg'}],"
+literal|"'aggregations':[],"
 operator|+
 literal|"'intervals':['1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z']}"
 decl_stmt|;
@@ -2061,7 +2059,7 @@ literal|"'limitSpec':{'type':'default'},"
 operator|+
 literal|"'filter':{'type':'selector','dimension':'product_id','value':'1020'},"
 operator|+
-literal|"'aggregations':[{'type':'longSum','name':'dummy_agg','fieldName':'dummy_agg'}],"
+literal|"'aggregations':[],"
 operator|+
 literal|"'intervals':['1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z']}"
 decl_stmt|;
@@ -2296,9 +2294,7 @@ literal|"'dimensionOrder':'alphanumeric'},{'dimension':'gender',"
 operator|+
 literal|"'direction':'descending','dimensionOrder':'alphanumeric'}]},"
 operator|+
-literal|"'aggregations':[{'type':'longSum','name':'dummy_agg',"
-operator|+
-literal|"'fieldName':'dummy_agg'}],"
+literal|"'aggregations':[],"
 operator|+
 literal|"'intervals':['1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z']}"
 argument_list|)
@@ -2480,7 +2476,7 @@ literal|"{'type':'default','dimension':'state_province'}],'limitSpec':{'type':'d
 operator|+
 literal|"'limit':3,'columns':[]},"
 operator|+
-literal|"'aggregations':[{'type':'longSum','name':'dummy_agg','fieldName':'dummy_agg'}],"
+literal|"'aggregations':[],"
 operator|+
 literal|"'intervals':['1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z']}"
 decl_stmt|;
@@ -3632,7 +3628,7 @@ literal|"'aggregations':[{'type':'count','name':'EXPR$0'}],"
 operator|+
 literal|"'intervals':['1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z'],"
 operator|+
-literal|"'context':{'skipEmptyBuckets':true}}"
+literal|"'context':{'skipEmptyBuckets':false}}"
 decl_stmt|;
 specifier|final
 name|String
@@ -4652,9 +4648,7 @@ literal|"'granularity':'all','dimensions':[{'type':'default','dimension':'city'}
 operator|+
 literal|"{'type':'default','dimension':'state_province'}],"
 operator|+
-literal|"'limitSpec':{'type':'default'},'aggregations':[{'type':'longSum',"
-operator|+
-literal|"'name':'dummy_agg','fieldName':'dummy_agg'}],"
+literal|"'limitSpec':{'type':'default'},'aggregations':[],"
 operator|+
 literal|"'intervals':['1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z']}"
 decl_stmt|;
@@ -4782,7 +4776,7 @@ literal|"'dimension':'quarter','value':'Q2'},{'type':'selector','dimension':'qua
 operator|+
 literal|"'value':'Q3'}]},{'type':'selector','dimension':'state_province','value':'WA'}]},"
 operator|+
-literal|"'aggregations':[{'type':'longSum','name':'dummy_agg','fieldName':'dummy_agg'}],"
+literal|"'aggregations':[],"
 operator|+
 literal|"'intervals':['1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z']}"
 decl_stmt|;
@@ -5942,9 +5936,7 @@ literal|"'locale':'en-US'}},{'type':'selector','dimension':'__time',"
 operator|+
 literal|"'value':'11','extractionFn':{'type':'timeFormat','format':'M',"
 operator|+
-literal|"'timeZone':'UTC','locale':'en-US'}}]},'aggregations':[{'type':'longSum',"
-operator|+
-literal|"'name':'dummy_agg','fieldName':'dummy_agg'}],"
+literal|"'timeZone':'UTC','locale':'en-US'}}]},'aggregations':[],"
 operator|+
 literal|"'intervals':['1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z']}"
 argument_list|)
@@ -6029,9 +6021,7 @@ literal|"'dimension':'__time','value':'1997','extractionFn':{'type':'timeFormat'
 operator|+
 literal|"'format':'yyyy','timeZone':'UTC','locale':'en-US'}}]},"
 operator|+
-literal|"'aggregations':[{'type':'longSum','name':'dummy_agg',"
-operator|+
-literal|"'fieldName':'dummy_agg'}],"
+literal|"'aggregations':[],"
 operator|+
 literal|"'intervals':['1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z']}"
 argument_list|)
@@ -6090,9 +6080,7 @@ literal|"'dimension':'__time','upper':'11','upperStrict':false,"
 operator|+
 literal|"'ordering':'numeric','extractionFn':{'type':'timeFormat','format':'M',"
 operator|+
-literal|"'timeZone':'UTC','locale':'en-US'}}]},'aggregations':[{'type':'longSum',"
-operator|+
-literal|"'name':'dummy_agg','fieldName':'dummy_agg'}],"
+literal|"'timeZone':'UTC','locale':'en-US'}}]},'aggregations':[],"
 operator|+
 literal|"'intervals':['1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z']}"
 decl_stmt|;
@@ -6170,9 +6158,7 @@ literal|"'dimension':'__time','value':'11','extractionFn':{'type':'timeFormat',"
 operator|+
 literal|"'format':'M','timeZone':'UTC','locale':'en-US'}}]}]},"
 operator|+
-literal|"'aggregations':[{'type':'longSum','name':'dummy_agg',"
-operator|+
-literal|"'fieldName':'dummy_agg'}],"
+literal|"'aggregations':[],"
 operator|+
 literal|"'intervals':['1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z']}"
 argument_list|)
@@ -6868,9 +6854,7 @@ literal|"'value':'11','extractionFn':{'type':'timeFormat','format':'w',"
 operator|+
 literal|"'timeZone':'UTC','locale':'en-US'}}]}]},"
 operator|+
-literal|"'aggregations':[{'type':'longSum','name':'dummy_agg',"
-operator|+
-literal|"'fieldName':'dummy_agg'}],"
+literal|"'aggregations':[],"
 operator|+
 literal|"'intervals':['1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z']}"
 decl_stmt|;
@@ -7011,9 +6995,40 @@ argument_list|(
 name|sql
 argument_list|)
 operator|.
+name|queryContains
+argument_list|(
+name|druidChecker
+argument_list|(
+literal|"\"filter\":{\"type\":\"expression\",\"expression\":\"1 == 2\"}"
+argument_list|)
+argument_list|)
+operator|.
 name|returnsUnordered
 argument_list|(
 literal|"C=0"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testTrueFilter
+parameter_list|()
+block|{
+name|String
+name|sql
+init|=
+literal|"Select count(*) as c from \"foodmart\" where true"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"C=86829"
 argument_list|)
 expr_stmt|;
 block|}
@@ -7306,7 +7321,9 @@ comment|// Should return one row, "c=0"; logged
 comment|// [CALCITE-1775] "GROUP BY ()" on empty relation should return 1 row
 operator|.
 name|returnsUnordered
-argument_list|()
+argument_list|(
+literal|"c=0"
+argument_list|)
 operator|.
 name|queryContains
 argument_list|(
@@ -10799,7 +10816,7 @@ literal|"'aggregations':[{'type':'count','name':'C'}],"
 operator|+
 literal|"'intervals':['1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z'],"
 operator|+
-literal|"'context':{'skipEmptyBuckets':true}}"
+literal|"'context':{'skipEmptyBuckets':false}}"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -10816,9 +10833,14 @@ name|druidQuery
 argument_list|)
 argument_list|)
 operator|.
+name|returnsUnordered
+argument_list|(
+literal|"C=0"
+argument_list|)
+operator|.
 name|returnsCount
 argument_list|(
-literal|0
+literal|1
 argument_list|)
 expr_stmt|;
 block|}
@@ -10851,7 +10873,7 @@ literal|"'aggregations':[{'type':'count','name':'C'}],"
 operator|+
 literal|"'intervals':['1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z'],"
 operator|+
-literal|"'context':{'skipEmptyBuckets':true}}"
+literal|"'context':{'skipEmptyBuckets':false}}"
 decl_stmt|;
 name|sql
 argument_list|(
