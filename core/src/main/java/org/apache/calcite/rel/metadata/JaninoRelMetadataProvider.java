@@ -1960,13 +1960,6 @@ literal|")"
 argument_list|)
 expr_stmt|;
 block|}
-name|buff
-operator|.
-name|append
-argument_list|(
-literal|", r"
-argument_list|)
-expr_stmt|;
 name|safeArgList
 argument_list|(
 name|buff
@@ -1983,7 +1976,7 @@ argument_list|)
 operator|.
 name|append
 argument_list|(
-literal|"    final Object v = mq.map.get(key);\n"
+literal|"    final Object v = mq.map.get(r, key);\n"
 argument_list|)
 operator|.
 name|append
@@ -2096,7 +2089,7 @@ argument_list|)
 operator|.
 name|append
 argument_list|(
-literal|"    mq.map.put(key,"
+literal|"    mq.map.put(r, key,"
 argument_list|)
 operator|.
 name|append
@@ -2173,7 +2166,7 @@ argument_list|)
 operator|.
 name|append
 argument_list|(
-literal|"      mq.map.put(key, "
+literal|"      mq.map.put(r, key, "
 argument_list|)
 operator|.
 name|append
@@ -2218,7 +2211,7 @@ argument_list|)
 operator|.
 name|append
 argument_list|(
-literal|"      mq.map.remove(key);\n"
+literal|"      mq.map.row(r).clear();\n"
 argument_list|)
 operator|.
 name|append

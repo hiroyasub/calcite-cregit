@@ -97,7 +97,7 @@ name|calcite
 operator|.
 name|plan
 operator|.
-name|RelOptMaterialization
+name|RelOptCluster
 import|;
 end_import
 
@@ -111,7 +111,7 @@ name|calcite
 operator|.
 name|plan
 operator|.
-name|RelOptPlanner
+name|RelOptMaterialization
 import|;
 end_import
 
@@ -589,11 +589,11 @@ parameter_list|,
 name|CalciteSchema
 name|schema
 parameter_list|,
-name|RelOptPlanner
-name|planner
-parameter_list|,
 name|SqlRexConvertletTable
 name|convertletTable
+parameter_list|,
+name|RelOptCluster
+name|cluster
 parameter_list|)
 block|{
 name|super
@@ -617,13 +617,13 @@ name|Prefer
 operator|.
 name|ANY
 argument_list|,
-name|planner
-argument_list|,
 name|BindableConvention
 operator|.
 name|INSTANCE
 argument_list|,
 name|convertletTable
+argument_list|,
+name|cluster
 argument_list|)
 expr_stmt|;
 block|}

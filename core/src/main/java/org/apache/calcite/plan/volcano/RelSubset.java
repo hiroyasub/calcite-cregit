@@ -953,23 +953,12 @@ name|parent
 argument_list|)
 control|)
 block|{
+comment|// see usage of this method in propagateCostImprovements0()
 if|if
 condition|(
 name|rel
-operator|.
-name|set
 operator|==
-name|set
-operator|&&
-name|traitSet
-operator|.
-name|satisfies
-argument_list|(
-name|rel
-operator|.
-name|getTraitSet
-argument_list|()
-argument_list|)
+name|this
 condition|)
 block|{
 name|list
@@ -1742,6 +1731,14 @@ name|best
 operator|=
 name|rel
 expr_stmt|;
+comment|// since best was changed, cached metadata for this subset should be removed
+name|mq
+operator|.
+name|clearCache
+argument_list|(
+name|this
+argument_list|)
+expr_stmt|;
 comment|// Recompute subset's importance and propagate cost change to parents
 name|planner
 operator|.
@@ -1761,6 +1758,14 @@ name|getParents
 argument_list|()
 control|)
 block|{
+comment|// removes parent cached metadata since its input was changed
+name|mq
+operator|.
+name|clearCache
+argument_list|(
+name|parent
+argument_list|)
+expr_stmt|;
 specifier|final
 name|RelSubset
 name|parentSubset

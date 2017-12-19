@@ -3984,6 +3984,30 @@ return|return
 literal|true
 return|;
 block|}
+comment|/**    * Removes cached metadata values for specified RelNode.    *    * @param rel RelNode whose cached metadata should be removed    */
+specifier|public
+specifier|static
+name|void
+name|clearCache
+parameter_list|(
+name|RelNode
+name|rel
+parameter_list|)
+block|{
+name|rel
+operator|.
+name|getCluster
+argument_list|()
+operator|.
+name|getMetadataQuery
+argument_list|()
+operator|.
+name|clearCache
+argument_list|(
+name|rel
+argument_list|)
+expr_stmt|;
+block|}
 block|}
 end_class
 

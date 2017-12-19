@@ -947,6 +947,8 @@ name|map
 operator|.
 name|put
 argument_list|(
+name|rel
+argument_list|,
 name|key1
 argument_list|,
 name|NullSentinel
@@ -1013,6 +1015,8 @@ name|map
 operator|.
 name|remove
 argument_list|(
+name|rel
+argument_list|,
 name|key1
 argument_list|)
 expr_stmt|;
