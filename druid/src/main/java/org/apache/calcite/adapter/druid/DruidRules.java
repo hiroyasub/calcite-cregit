@@ -1173,10 +1173,13 @@ block|{
 case|case
 name|COUNT
 case|:
-comment|// Druid can handle 2 scenarios:
+comment|// Druid count aggregator can handle 3 scenarios:
 comment|// 1. count(distinct col) when approximate results
-comment|//    are acceptable and col is not a metric
+comment|//    are acceptable and col is not a metric.
+comment|//    Note that exact count(distinct column) is handled
+comment|//    by being rewritten into group by followed by count
 comment|// 2. count(*)
+comment|// 3. count(column)
 if|if
 condition|(
 name|checkAggregateOnMetric
@@ -1201,9 +1204,45 @@ return|return
 literal|true
 return|;
 block|}
+comment|// case count(*)
 if|if
 condition|(
-operator|(
+name|aggregateCall
+operator|.
+name|getArgList
+argument_list|()
+operator|.
+name|isEmpty
+argument_list|()
+condition|)
+block|{
+continue|continue;
+block|}
+comment|// case count(column)
+if|if
+condition|(
+name|aggregateCall
+operator|.
+name|getArgList
+argument_list|()
+operator|.
+name|size
+argument_list|()
+operator|==
+literal|1
+operator|&&
+operator|!
+name|aggregateCall
+operator|.
+name|isDistinct
+argument_list|()
+condition|)
+block|{
+continue|continue;
+block|}
+comment|// case count(distinct and is approximate)
+if|if
+condition|(
 name|aggregateCall
 operator|.
 name|isDistinct
@@ -1220,15 +1259,6 @@ operator|.
 name|approximateDistinctCount
 argument_list|()
 operator|)
-operator|)
-operator|||
-name|aggregateCall
-operator|.
-name|getArgList
-argument_list|()
-operator|.
-name|isEmpty
-argument_list|()
 condition|)
 block|{
 continue|continue;
