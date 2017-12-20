@@ -2048,6 +2048,59 @@ operator|.
 name|ok
 argument_list|()
 expr_stmt|;
+comment|// duplicate field is dropped, so plan is same
+specifier|final
+name|String
+name|sql2
+init|=
+literal|"select empno from emp order by empno, empno asc"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql2
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+comment|// ditto
+specifier|final
+name|String
+name|sql3
+init|=
+literal|"select empno from emp order by empno, empno desc"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql3
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+comment|/** Tests that if a column occurs twice in ORDER BY, only the first key is    * kept. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testOrderBasedRepeatFields
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select empno from emp order by empno DESC, empno ASC"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
 block|}
 annotation|@
 name|Test
@@ -2358,7 +2411,7 @@ name|sql
 init|=
 literal|"select empno from emp, dept\n"
 operator|+
-literal|"order by sal + empno desc, sal * empno, sal + empno"
+literal|"order by sal + empno desc, sal * empno, sal + empno desc"
 decl_stmt|;
 name|sql
 argument_list|(
