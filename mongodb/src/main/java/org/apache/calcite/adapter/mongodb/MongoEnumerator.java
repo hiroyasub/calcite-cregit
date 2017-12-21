@@ -85,17 +85,19 @@ name|com
 operator|.
 name|mongodb
 operator|.
-name|DBCursor
+name|client
+operator|.
+name|MongoCursor
 import|;
 end_import
 
 begin_import
 import|import
-name|com
+name|org
 operator|.
-name|mongodb
+name|bson
 operator|.
-name|DBObject
+name|Document
 import|;
 end_import
 
@@ -156,7 +158,7 @@ specifier|private
 specifier|final
 name|Iterator
 argument_list|<
-name|DBObject
+name|Document
 argument_list|>
 name|cursor
 decl_stmt|;
@@ -164,7 +166,7 @@ specifier|private
 specifier|final
 name|Function1
 argument_list|<
-name|DBObject
+name|Document
 argument_list|,
 name|Object
 argument_list|>
@@ -179,13 +181,13 @@ name|MongoEnumerator
 parameter_list|(
 name|Iterator
 argument_list|<
-name|DBObject
+name|Document
 argument_list|>
 name|cursor
 parameter_list|,
 name|Function1
 argument_list|<
-name|DBObject
+name|Document
 argument_list|,
 name|Object
 argument_list|>
@@ -229,7 +231,7 @@ name|hasNext
 argument_list|()
 condition|)
 block|{
-name|DBObject
+name|Document
 name|map
 init|=
 name|cursor
@@ -296,12 +298,12 @@ if|if
 condition|(
 name|cursor
 operator|instanceof
-name|DBCursor
+name|MongoCursor
 condition|)
 block|{
 operator|(
 operator|(
-name|DBCursor
+name|MongoCursor
 operator|)
 name|cursor
 operator|)
@@ -316,7 +318,7 @@ block|}
 specifier|static
 name|Function1
 argument_list|<
-name|DBObject
+name|Document
 argument_list|,
 name|Map
 argument_list|>
@@ -327,7 +329,7 @@ return|return
 operator|new
 name|Function1
 argument_list|<
-name|DBObject
+name|Document
 argument_list|,
 name|Map
 argument_list|>
@@ -337,7 +339,7 @@ specifier|public
 name|Map
 name|apply
 parameter_list|(
-name|DBObject
+name|Document
 name|a0
 parameter_list|)
 block|{
@@ -354,7 +356,7 @@ block|}
 specifier|static
 name|Function1
 argument_list|<
-name|DBObject
+name|Document
 argument_list|,
 name|Object
 argument_list|>
@@ -373,7 +375,7 @@ return|return
 operator|new
 name|Function1
 argument_list|<
-name|DBObject
+name|Document
 argument_list|,
 name|Object
 argument_list|>
@@ -383,7 +385,7 @@ specifier|public
 name|Object
 name|apply
 parameter_list|(
-name|DBObject
+name|Document
 name|a0
 parameter_list|)
 block|{
@@ -408,7 +410,7 @@ comment|/**    * @param fields List of fields to project; or null to return map 
 specifier|static
 name|Function1
 argument_list|<
-name|DBObject
+name|Document
 argument_list|,
 name|Object
 index|[]
@@ -434,7 +436,7 @@ return|return
 operator|new
 name|Function1
 argument_list|<
-name|DBObject
+name|Document
 argument_list|,
 name|Object
 index|[]
@@ -446,7 +448,7 @@ name|Object
 index|[]
 name|apply
 parameter_list|(
-name|DBObject
+name|Document
 name|a0
 parameter_list|)
 block|{
@@ -539,7 +541,7 @@ block|}
 specifier|static
 name|Function1
 argument_list|<
-name|DBObject
+name|Document
 argument_list|,
 name|Object
 argument_list|>
