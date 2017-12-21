@@ -10846,8 +10846,6 @@ specifier|public
 name|void
 name|testPullAggregateThroughUnion
 parameter_list|()
-throws|throws
-name|Exception
 block|{
 name|HepProgram
 name|program
@@ -10866,10 +10864,10 @@ operator|.
 name|build
 argument_list|()
 decl_stmt|;
-name|checkPlanning
-argument_list|(
-name|program
-argument_list|,
+specifier|final
+name|String
+name|sql
+init|=
 literal|"select deptno, job from"
 operator|+
 literal|" (select deptno, job from emp as e1"
@@ -10883,7 +10881,82 @@ operator|+
 literal|" group by deptno,job)"
 operator|+
 literal|" group by deptno,job"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
 argument_list|)
+operator|.
+name|with
+argument_list|(
+name|program
+argument_list|)
+operator|.
+name|check
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testPullAggregateThroughUnion2
+parameter_list|()
+block|{
+name|HepProgram
+name|program
+init|=
+operator|new
+name|HepProgramBuilder
+argument_list|()
+operator|.
+name|addRuleInstance
+argument_list|(
+name|AggregateUnionAggregateRule
+operator|.
+name|AGG_ON_SECOND_INPUT
+argument_list|)
+operator|.
+name|addRuleInstance
+argument_list|(
+name|AggregateUnionAggregateRule
+operator|.
+name|AGG_ON_FIRST_INPUT
+argument_list|)
+operator|.
+name|build
+argument_list|()
+decl_stmt|;
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select deptno, job from"
+operator|+
+literal|" (select deptno, job from emp as e1"
+operator|+
+literal|" group by deptno,job"
+operator|+
+literal|"  union all"
+operator|+
+literal|" select deptno, job from emp as e2"
+operator|+
+literal|" group by deptno,job)"
+operator|+
+literal|" group by deptno,job"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|with
+argument_list|(
+name|program
+argument_list|)
+operator|.
+name|check
+argument_list|()
 expr_stmt|;
 block|}
 specifier|private

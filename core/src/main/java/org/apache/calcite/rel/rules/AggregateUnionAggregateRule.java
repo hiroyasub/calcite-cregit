@@ -178,6 +178,73 @@ name|AggregateUnionAggregateRule
 extends|extends
 name|RelOptRule
 block|{
+comment|/** Instance that matches an {@code Aggregate} as the left input of    * {@code Union}. */
+specifier|public
+specifier|static
+specifier|final
+name|AggregateUnionAggregateRule
+name|AGG_ON_FIRST_INPUT
+init|=
+operator|new
+name|AggregateUnionAggregateRule
+argument_list|(
+name|LogicalAggregate
+operator|.
+name|class
+argument_list|,
+name|LogicalUnion
+operator|.
+name|class
+argument_list|,
+name|LogicalAggregate
+operator|.
+name|class
+argument_list|,
+name|RelNode
+operator|.
+name|class
+argument_list|,
+name|RelFactories
+operator|.
+name|LOGICAL_BUILDER
+argument_list|,
+literal|"AggregateUnionAggregateRule:first-input-agg"
+argument_list|)
+decl_stmt|;
+comment|/** Instance that matches an {@code Aggregate} as the right input of    * {@code Union}. */
+specifier|public
+specifier|static
+specifier|final
+name|AggregateUnionAggregateRule
+name|AGG_ON_SECOND_INPUT
+init|=
+operator|new
+name|AggregateUnionAggregateRule
+argument_list|(
+name|LogicalAggregate
+operator|.
+name|class
+argument_list|,
+name|LogicalUnion
+operator|.
+name|class
+argument_list|,
+name|RelNode
+operator|.
+name|class
+argument_list|,
+name|LogicalAggregate
+operator|.
+name|class
+argument_list|,
+name|RelFactories
+operator|.
+name|LOGICAL_BUILDER
+argument_list|,
+literal|"AggregateUnionAggregateRule:second-input-agg"
+argument_list|)
+decl_stmt|;
+comment|/** Instance that matches an {@code Aggregate} as either input of    * {@link Union}.    *    *<p>Because it matches {@link RelNode} for each input of {@code Union}, it    * will create O(N ^ 2) matches, which may cost too much during the popMatch    * phase in VolcanoPlanner. If efficiency is a concern, we recommend that you    * use {@link #AGG_ON_FIRST_INPUT} and {@link #AGG_ON_SECOND_INPUT} instead. */
 specifier|public
 specifier|static
 specifier|final
@@ -195,9 +262,19 @@ name|LogicalUnion
 operator|.
 name|class
 argument_list|,
+name|RelNode
+operator|.
+name|class
+argument_list|,
+name|RelNode
+operator|.
+name|class
+argument_list|,
 name|RelFactories
 operator|.
 name|LOGICAL_BUILDER
+argument_list|,
+literal|"AggregateUnionAggregateRule"
 argument_list|)
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
@@ -221,8 +298,27 @@ name|Union
 argument_list|>
 name|unionClass
 parameter_list|,
+name|Class
+argument_list|<
+name|?
+extends|extends
+name|RelNode
+argument_list|>
+name|firstUnionInputClass
+parameter_list|,
+name|Class
+argument_list|<
+name|?
+extends|extends
+name|RelNode
+argument_list|>
+name|secondUnionInputClass
+parameter_list|,
 name|RelBuilderFactory
 name|relBuilderFactory
+parameter_list|,
+name|String
+name|desc
 parameter_list|)
 block|{
 name|super
@@ -243,9 +339,7 @@ name|unionClass
 argument_list|,
 name|operand
 argument_list|(
-name|RelNode
-operator|.
-name|class
+name|firstUnionInputClass
 argument_list|,
 name|any
 argument_list|()
@@ -253,9 +347,7 @@ argument_list|)
 argument_list|,
 name|operand
 argument_list|(
-name|RelNode
-operator|.
-name|class
+name|secondUnionInputClass
 argument_list|,
 name|any
 argument_list|()
@@ -265,7 +357,7 @@ argument_list|)
 argument_list|,
 name|relBuilderFactory
 argument_list|,
-literal|null
+name|desc
 argument_list|)
 expr_stmt|;
 block|}
@@ -308,6 +400,14 @@ name|aggregateClass
 argument_list|,
 name|unionClass
 argument_list|,
+name|RelNode
+operator|.
+name|class
+argument_list|,
+name|RelNode
+operator|.
+name|class
+argument_list|,
 name|RelBuilder
 operator|.
 name|proto
@@ -316,6 +416,8 @@ name|aggregateFactory
 argument_list|,
 name|setOpFactory
 argument_list|)
+argument_list|,
+literal|"AggregateUnionAggregateRule"
 argument_list|)
 expr_stmt|;
 block|}
@@ -361,11 +463,6 @@ condition|)
 block|{
 return|return;
 block|}
-comment|// We want to apply this rule on the pattern where the LogicalAggregate
-comment|// is the second input into the Union first.  Hence, that's why the
-comment|// rule pattern matches on generic RelNodes rather than explicit
-comment|// UnionRels.  By doing so, and firing this rule in a bottom-up order,
-comment|// it allows us to only specify a single pattern for this rule.
 specifier|final
 name|RelBuilder
 name|relBuilder
@@ -391,6 +488,7 @@ operator|instanceof
 name|Aggregate
 condition|)
 block|{
+comment|// Aggregate is the second input
 name|bottomAggRel
 operator|=
 name|call
@@ -440,6 +538,7 @@ operator|instanceof
 name|Aggregate
 condition|)
 block|{
+comment|// Aggregate is the first input
 name|bottomAggRel
 operator|=
 name|call
