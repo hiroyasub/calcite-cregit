@@ -45,6 +45,11 @@ name|TIMESERIES
 argument_list|(
 literal|"timeseries"
 argument_list|)
+block|,
+name|SCAN
+argument_list|(
+literal|"scan"
+argument_list|)
 block|;
 specifier|private
 specifier|final
