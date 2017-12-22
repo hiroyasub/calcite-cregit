@@ -12040,8 +12040,6 @@ specifier|public
 name|void
 name|testPushAggregateThroughJoin1
 parameter_list|()
-throws|throws
-name|Exception
 block|{
 specifier|final
 name|HepProgram
@@ -12113,8 +12111,6 @@ specifier|public
 name|void
 name|testPushAggregateThroughJoin2
 parameter_list|()
-throws|throws
-name|Exception
 block|{
 specifier|final
 name|HepProgram
@@ -12188,8 +12184,6 @@ specifier|public
 name|void
 name|testPushAggregateThroughJoin3
 parameter_list|()
-throws|throws
-name|Exception
 block|{
 specifier|final
 name|HepProgram
@@ -12264,8 +12258,6 @@ specifier|public
 name|void
 name|testPushAggregateThroughJoin4
 parameter_list|()
-throws|throws
-name|Exception
 block|{
 specifier|final
 name|HepProgram
@@ -12338,8 +12330,6 @@ specifier|public
 name|void
 name|testPushAggregateThroughJoin5
 parameter_list|()
-throws|throws
-name|Exception
 block|{
 specifier|final
 name|HepProgram
@@ -12413,8 +12403,6 @@ specifier|public
 name|void
 name|testPushAggregateSumThroughJoin
 parameter_list|()
-throws|throws
-name|Exception
 block|{
 specifier|final
 name|HepProgram
@@ -12480,6 +12468,76 @@ name|sql
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2105">[CALCITE-2105]    * AggregateJoinTransposeRule incorrectly makes a SUM NOT NULL when Aggregate    * has no group keys</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testPushAggregateSumWithoutGroupKeyThroughJoin
+parameter_list|()
+block|{
+specifier|final
+name|HepProgram
+name|preProgram
+init|=
+operator|new
+name|HepProgramBuilder
+argument_list|()
+operator|.
+name|addRuleInstance
+argument_list|(
+name|AggregateProjectMergeRule
+operator|.
+name|INSTANCE
+argument_list|)
+operator|.
+name|build
+argument_list|()
+decl_stmt|;
+specifier|final
+name|HepProgram
+name|program
+init|=
+operator|new
+name|HepProgramBuilder
+argument_list|()
+operator|.
+name|addRuleInstance
+argument_list|(
+name|AggregateJoinTransposeRule
+operator|.
+name|EXTENDED
+argument_list|)
+operator|.
+name|build
+argument_list|()
+decl_stmt|;
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select sum(sal)\n"
+operator|+
+literal|"from (select * from sales.emp where empno = 10) as e\n"
+operator|+
+literal|"join sales.dept as d on e.job = d.name"
+decl_stmt|;
+name|checkPlanning
+argument_list|(
+name|tester
+argument_list|,
+name|preProgram
+argument_list|,
+operator|new
+name|HepPlanner
+argument_list|(
+name|program
+argument_list|)
+argument_list|,
+name|sql
+argument_list|)
+expr_stmt|;
+block|}
 comment|/** Push a variety of aggregate functions. */
 annotation|@
 name|Test
@@ -12487,8 +12545,6 @@ specifier|public
 name|void
 name|testPushAggregateFunctionsThroughJoin
 parameter_list|()
-throws|throws
-name|Exception
 block|{
 specifier|final
 name|HepProgram
@@ -12569,8 +12625,6 @@ specifier|public
 name|void
 name|testPushAggregateThroughJoinDistinct
 parameter_list|()
-throws|throws
-name|Exception
 block|{
 specifier|final
 name|HepProgram
@@ -12647,8 +12701,6 @@ specifier|public
 name|void
 name|testPushAggregateSumNoGroup
 parameter_list|()
-throws|throws
-name|Exception
 block|{
 specifier|final
 name|HepProgram
@@ -12714,8 +12766,6 @@ specifier|public
 name|void
 name|testSwapOuterJoin
 parameter_list|()
-throws|throws
-name|Exception
 block|{
 specifier|final
 name|HepProgram
