@@ -326,7 +326,7 @@ name|cast
 argument_list|(
 name|SqlSplittableAggFunction
 operator|.
-name|SumSplitter
+name|Sum0Splitter
 operator|.
 name|INSTANCE
 argument_list|)
