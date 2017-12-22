@@ -3328,6 +3328,26 @@ name|materializationsEnabled
 argument_list|)
 argument_list|)
 expr_stmt|;
+if|if
+condition|(
+operator|!
+name|calciteConnection
+operator|.
+name|getProperties
+argument_list|()
+operator|.
+name|containsKey
+argument_list|(
+name|CalciteConnectionProperty
+operator|.
+name|TIME_ZONE
+operator|.
+name|camelName
+argument_list|()
+argument_list|)
+condition|)
+block|{
+comment|// Do not override id some test has already set this property.
 name|calciteConnection
 operator|.
 name|getProperties
@@ -3350,6 +3370,7 @@ name|getID
 argument_list|()
 argument_list|)
 expr_stmt|;
+block|}
 block|}
 for|for
 control|(

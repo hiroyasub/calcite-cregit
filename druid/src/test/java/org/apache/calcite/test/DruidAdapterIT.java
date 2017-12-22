@@ -5141,17 +5141,17 @@ comment|// the project can still be pushed in order to prune extra columns.
 name|String
 name|sql
 init|=
-literal|"select \"countryName\", floor(CAST(\"time\" AS TIMESTAMP) to DAY),\n"
+literal|"select \"countryName\", ceil(CAST(\"time\" AS TIMESTAMP) to DAY),\n"
 operator|+
 literal|"  cast(count(*) as integer) as c\n"
 operator|+
 literal|"from \"wiki\"\n"
 operator|+
-literal|"where floor(\"time\" to DAY)>= '1997-01-01 00:00:00 UTC'\n"
+literal|"where ceil(\"time\" to DAY)>= '1997-01-01 00:00:00 UTC'\n"
 operator|+
-literal|"and floor(\"time\" to DAY)< '1997-09-01 00:00:00 UTC'\n"
+literal|"and ceil(\"time\" to DAY)< '1997-09-01 00:00:00 UTC'\n"
 operator|+
-literal|"group by \"countryName\", floor(CAST(\"time\" AS TIMESTAMP) TO DAY)\n"
+literal|"group by \"countryName\", ceil(CAST(\"time\" AS TIMESTAMP) TO DAY)\n"
 operator|+
 literal|"order by c limit 5"
 decl_stmt|;
@@ -5164,9 +5164,9 @@ literal|"    BindableSort(sort0=[$2], dir0=[ASC], fetch=[5])\n"
 operator|+
 literal|"      BindableAggregate(group=[{0, 1}], agg#0=[COUNT()])\n"
 operator|+
-literal|"        BindableProject(countryName=[$1], EXPR$1=[FLOOR(CAST($0):TIMESTAMP(0) NOT NULL, FLAG(DAY))])\n"
+literal|"        BindableProject(countryName=[$1], EXPR$1=[CEIL(CAST($0):TIMESTAMP(0) NOT NULL, FLAG(DAY))])\n"
 operator|+
-literal|"          BindableFilter(condition=[AND(>=(FLOOR($0, FLAG(DAY)), 1997-01-01 00:00:00),<(FLOOR($0, FLAG(DAY)), 1997-09-01 00:00:00))])\n"
+literal|"          BindableFilter(condition=[AND(>=(CEIL($0, FLAG(DAY)), 1997-01-01 00:00:00),<(CEIL($0, FLAG(DAY)), 1997-09-01 00:00:00))])\n"
 operator|+
 literal|"            DruidQuery(table=[[wiki, wiki]], intervals=[[1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z]], projects=[[$0, $5]])"
 decl_stmt|;
@@ -11087,6 +11087,411 @@ operator|.
 name|returnsUnordered
 argument_list|(
 literal|"C=86829"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testFilterwithFloorOnTime
+parameter_list|()
+block|{
+comment|// Test filter on floor on time column is pushed to druid
+specifier|final
+name|String
+name|sql
+init|=
+literal|"Select cast(floor(\"timestamp\" to MONTH) as timestamp) as t from \"foodmart\" where "
+operator|+
+literal|"floor(\"timestamp\" to MONTH) between '1997-01-01 00:00:00 UTC'"
+operator|+
+literal|"and '1997-03-01 00:00:00 UTC' order by t limit 2"
+decl_stmt|;
+specifier|final
+name|String
+name|druidQueryPart1
+init|=
+literal|"\"filter\":{\"type\":\"and\",\"fields\":"
+operator|+
+literal|"[{\"type\":\"bound\",\"dimension\":\"__time\",\"lower\":\"1997-01-01T00:00:00.000Z\","
+operator|+
+literal|"\"lowerStrict\":false,\"ordering\":\"lexicographic\","
+operator|+
+literal|"\"extractionFn\":{\"type\":\"timeFormat\",\"format\":\"yyyy-MM-dd"
+decl_stmt|;
+specifier|final
+name|String
+name|druidQueryPart2
+init|=
+literal|"HH:mm:ss.SSS"
+decl_stmt|;
+specifier|final
+name|String
+name|druidQueryPart3
+init|=
+literal|",\"granularity\":\"month\",\"timeZone\":\"UTC\","
+operator|+
+literal|"\"locale\":\"en-US\"}},{\"type\":\"bound\",\"dimension\":\"__time\""
+operator|+
+literal|",\"upper\":\"1997-03-01T00:00:00.000Z\",\"upperStrict\":false,"
+operator|+
+literal|"\"ordering\":\"lexicographic\",\"extractionFn\":{\"type\":\"timeFormat\""
+decl_stmt|;
+specifier|final
+name|String
+name|druidQueryPart4
+init|=
+literal|"\"columns\":[\"__time\"],\"granularity\":\"all\""
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|,
+name|FOODMART
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|druidChecker
+argument_list|(
+name|druidQueryPart1
+argument_list|,
+name|druidQueryPart2
+argument_list|,
+name|druidQueryPart3
+argument_list|,
+name|druidQueryPart4
+argument_list|)
+argument_list|)
+operator|.
+name|returnsOrdered
+argument_list|(
+literal|"T=1997-01-01 00:00:00"
+argument_list|,
+literal|"T=1997-01-01 00:00:00"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSelectFloorOnTimeWithFilterOnFloorOnTime
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"Select cast(floor(\"timestamp\" to MONTH) as timestamp) as t from "
+operator|+
+literal|"\"foodmart\" where floor(\"timestamp\" to MONTH)>= '1997-05-01 00:00:00 UTC' order by t"
+operator|+
+literal|" limit 1"
+decl_stmt|;
+specifier|final
+name|String
+name|druidQueryPart1
+init|=
+literal|"filter\":{\"type\":\"bound\",\"dimension\":\"__time\","
+operator|+
+literal|"\"lower\":\"1997-05-01T00:00:00.000Z\",\"lowerStrict\":false,"
+operator|+
+literal|"\"ordering\":\"lexicographic\",\"extractionFn\":{\"type\":\"timeFormat\","
+operator|+
+literal|"\"format\":\"yyyy-MM-dd"
+decl_stmt|;
+specifier|final
+name|String
+name|druidQueryPart2
+init|=
+literal|"\"granularity\":\"month\",\"timeZone\":\"UTC\","
+operator|+
+literal|"\"locale\":\"en-US\"}},\"columns\":[\"__time\"],\"granularity\":\"all\""
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|,
+name|FOODMART
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|druidChecker
+argument_list|(
+name|druidQueryPart1
+argument_list|,
+name|druidQueryPart2
+argument_list|)
+argument_list|)
+operator|.
+name|returnsOrdered
+argument_list|(
+literal|"T=1997-05-01 00:00:00"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testTmeWithFilterOnFloorOnTimeAndCastToTimestamp
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"Select cast(floor(\"timestamp\" to MONTH) as timestamp) as t from "
+operator|+
+literal|"\"foodmart\" where floor(\"timestamp\" to MONTH)>= cast('1997-05-01 00:00:00' as TIMESTAMP) order by t"
+operator|+
+literal|" limit 1"
+decl_stmt|;
+specifier|final
+name|String
+name|druidQueryPart1
+init|=
+literal|"filter\":{\"type\":\"bound\",\"dimension\":\"__time\","
+operator|+
+literal|"\"lower\":\"1997-05-01T00:00:00.000Z\",\"lowerStrict\":false,"
+operator|+
+literal|"\"ordering\":\"lexicographic\",\"extractionFn\":{\"type\":\"timeFormat\","
+operator|+
+literal|"\"format\":\"yyyy-MM-dd"
+decl_stmt|;
+specifier|final
+name|String
+name|druidQueryPart2
+init|=
+literal|"\"granularity\":\"month\",\"timeZone\":\"UTC\","
+operator|+
+literal|"\"locale\":\"en-US\"}},\"columns\":[\"__time\"],\"granularity\":\"all\""
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|,
+name|FOODMART
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|druidChecker
+argument_list|(
+name|druidQueryPart1
+argument_list|,
+name|druidQueryPart2
+argument_list|)
+argument_list|)
+operator|.
+name|returnsOrdered
+argument_list|(
+literal|"T=1997-05-01 00:00:00"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testTmeWithFilterOnFloorOnTimeWithTimezone
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"Select cast(floor(\"timestamp\" to MONTH) as timestamp) as t from "
+operator|+
+literal|"\"foodmart\" where floor(\"timestamp\" to MONTH)>= cast('1997-05-01 00:00:00'"
+operator|+
+literal|" as TIMESTAMP) order by t limit 1"
+decl_stmt|;
+specifier|final
+name|String
+name|druidQueryPart1
+init|=
+literal|"filter\":{\"type\":\"bound\",\"dimension\":\"__time\","
+operator|+
+literal|"\"lower\":\"1997-05-01T00:00:00.000Z\",\"lowerStrict\":false,"
+operator|+
+literal|"\"ordering\":\"lexicographic\",\"extractionFn\":{\"type\":\"timeFormat\","
+operator|+
+literal|"\"format\":\"yyyy-MM-dd"
+decl_stmt|;
+specifier|final
+name|String
+name|druidQueryPart2
+init|=
+literal|"\"granularity\":\"month\",\"timeZone\":\"IST\","
+operator|+
+literal|"\"locale\":\"en-US\"}},\"columns\":[\"__time\"],\"granularity\":\"all\""
+decl_stmt|;
+name|CalciteAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|enable
+argument_list|(
+name|enabled
+argument_list|()
+argument_list|)
+operator|.
+name|with
+argument_list|(
+name|ImmutableMap
+operator|.
+name|of
+argument_list|(
+literal|"model"
+argument_list|,
+name|FOODMART
+operator|.
+name|getPath
+argument_list|()
+argument_list|)
+argument_list|)
+operator|.
+name|with
+argument_list|(
+name|CalciteConnectionProperty
+operator|.
+name|TIME_ZONE
+operator|.
+name|camelName
+argument_list|()
+argument_list|,
+literal|"IST"
+argument_list|)
+operator|.
+name|query
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|runs
+argument_list|()
+operator|.
+name|queryContains
+argument_list|(
+name|druidChecker
+argument_list|(
+name|druidQueryPart1
+argument_list|,
+name|druidQueryPart2
+argument_list|)
+argument_list|)
+comment|// NOTE: this return value is not as expected
+comment|// see https://issues.apache.org/jira/browse/CALCITE-2107
+operator|.
+name|returnsOrdered
+argument_list|(
+literal|"T=1997-05-01 05:30:00"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testTmeWithFilterOnFloorOnTimeWithTimezoneConversion
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"Select cast(floor(\"timestamp\" to MONTH) as timestamp) as t from "
+operator|+
+literal|"\"foodmart\" where floor(\"timestamp\" to MONTH)>= '1997-04-30 18:30:00 UTC' order by t"
+operator|+
+literal|" limit 1"
+decl_stmt|;
+specifier|final
+name|String
+name|druidQueryPart1
+init|=
+literal|"filter\":{\"type\":\"bound\",\"dimension\":\"__time\","
+operator|+
+literal|"\"lower\":\"1997-05-01T00:00:00.000Z\",\"lowerStrict\":false,"
+operator|+
+literal|"\"ordering\":\"lexicographic\",\"extractionFn\":{\"type\":\"timeFormat\","
+operator|+
+literal|"\"format\":\"yyyy-MM-dd"
+decl_stmt|;
+specifier|final
+name|String
+name|druidQueryPart2
+init|=
+literal|"\"granularity\":\"month\",\"timeZone\":\"IST\","
+operator|+
+literal|"\"locale\":\"en-US\"}},\"columns\":[\"__time\"],\"granularity\":\"all\""
+decl_stmt|;
+name|CalciteAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|enable
+argument_list|(
+name|enabled
+argument_list|()
+argument_list|)
+operator|.
+name|with
+argument_list|(
+name|ImmutableMap
+operator|.
+name|of
+argument_list|(
+literal|"model"
+argument_list|,
+name|FOODMART
+operator|.
+name|getPath
+argument_list|()
+argument_list|)
+argument_list|)
+operator|.
+name|with
+argument_list|(
+name|CalciteConnectionProperty
+operator|.
+name|TIME_ZONE
+operator|.
+name|camelName
+argument_list|()
+argument_list|,
+literal|"IST"
+argument_list|)
+operator|.
+name|query
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|runs
+argument_list|()
+operator|.
+name|queryContains
+argument_list|(
+name|druidChecker
+argument_list|(
+name|druidQueryPart1
+argument_list|,
+name|druidQueryPart2
+argument_list|)
+argument_list|)
+comment|// NOTE: this return value is not as expected
+comment|// see https://issues.apache.org/jira/browse/CALCITE-2107
+operator|.
+name|returnsOrdered
+argument_list|(
+literal|"T=1997-05-01 05:30:00"
 argument_list|)
 expr_stmt|;
 block|}

@@ -1640,7 +1640,7 @@ literal|null
 return|;
 block|}
 block|}
-specifier|private
+specifier|protected
 specifier|static
 name|TimestampString
 name|literalValue
