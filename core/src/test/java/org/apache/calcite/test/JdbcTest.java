@@ -20167,18 +20167,11 @@ name|getMetaData
 argument_list|()
 decl_stmt|;
 comment|// all table types
-name|assertEquals
-argument_list|(
-literal|"TABLE_CAT=null; TABLE_SCHEM=adhoc; TABLE_NAME=EMPLOYEES; TABLE_TYPE=TABLE; REMARKS=null; TYPE_CAT=null; TYPE_SCHEM=null; TYPE_NAME=null; SELF_REFERENCING_COL_NAME=null; REF_GENERATION=null\n"
-operator|+
-literal|"TABLE_CAT=null; TABLE_SCHEM=adhoc; TABLE_NAME=MUTABLE_EMPLOYEES; TABLE_TYPE=TABLE; REMARKS=null; TYPE_CAT=null; TYPE_SCHEM=null; TYPE_NAME=null; SELF_REFERENCING_COL_NAME=null; REF_GENERATION=null\n"
-operator|+
-literal|"TABLE_CAT=null; TABLE_SCHEM=adhoc; TABLE_NAME=V; TABLE_TYPE=VIEW; REMARKS=null; TYPE_CAT=null; TYPE_SCHEM=null; TYPE_NAME=null; SELF_REFERENCING_COL_NAME=null; REF_GENERATION=null\n"
-argument_list|,
-name|CalciteAssert
-operator|.
-name|toString
-argument_list|(
+try|try
+init|(
+name|ResultSet
+name|r
+init|=
 name|metaData
 operator|.
 name|getTables
@@ -20191,11 +20184,46 @@ literal|null
 argument_list|,
 literal|null
 argument_list|)
+init|)
+block|{
+name|assertEquals
+argument_list|(
+literal|"TABLE_CAT=null; TABLE_SCHEM=adhoc; TABLE_NAME=EMPLOYEES; TABLE_TYPE=TABLE; REMARKS=null; TYPE_CAT=null; TYPE_SCHEM=null; TYPE_NAME=null; SELF_REFERENCING_COL_NAME=null; REF_GENERATION=null\n"
+operator|+
+literal|"TABLE_CAT=null; TABLE_SCHEM=adhoc; TABLE_NAME=MUTABLE_EMPLOYEES; TABLE_TYPE=TABLE; REMARKS=null; TYPE_CAT=null; TYPE_SCHEM=null; TYPE_NAME=null; SELF_REFERENCING_COL_NAME=null; REF_GENERATION=null\n"
+operator|+
+literal|"TABLE_CAT=null; TABLE_SCHEM=adhoc; TABLE_NAME=V; TABLE_TYPE=VIEW; REMARKS=null; TYPE_CAT=null; TYPE_SCHEM=null; TYPE_NAME=null; SELF_REFERENCING_COL_NAME=null; REF_GENERATION=null\n"
+argument_list|,
+name|CalciteAssert
+operator|.
+name|toString
+argument_list|(
+name|r
 argument_list|)
 argument_list|)
 expr_stmt|;
+block|}
 comment|// including system tables; note that table type is "SYSTEM TABLE"
 comment|// not "SYSTEM_TABLE"
+try|try
+init|(
+name|ResultSet
+name|r
+init|=
+name|metaData
+operator|.
+name|getTables
+argument_list|(
+literal|null
+argument_list|,
+literal|null
+argument_list|,
+literal|null
+argument_list|,
+literal|null
+argument_list|)
+init|)
+block|{
 name|assertEquals
 argument_list|(
 literal|"TABLE_CAT=null; TABLE_SCHEM=adhoc; TABLE_NAME=EMPLOYEES; TABLE_TYPE=TABLE; REMARKS=null; TYPE_CAT=null; TYPE_SCHEM=null; TYPE_NAME=null; SELF_REFERENCING_COL_NAME=null; REF_GENERATION=null\n"
@@ -20212,30 +20240,17 @@ name|CalciteAssert
 operator|.
 name|toString
 argument_list|(
-name|metaData
-operator|.
-name|getTables
-argument_list|(
-literal|null
-argument_list|,
-literal|null
-argument_list|,
-literal|null
-argument_list|,
-literal|null
-argument_list|)
+name|r
 argument_list|)
 argument_list|)
 expr_stmt|;
+block|}
 comment|// views only
-name|assertEquals
-argument_list|(
-literal|"TABLE_CAT=null; TABLE_SCHEM=adhoc; TABLE_NAME=V; TABLE_TYPE=VIEW; REMARKS=null; TYPE_CAT=null; TYPE_SCHEM=null; TYPE_NAME=null; SELF_REFERENCING_COL_NAME=null; REF_GENERATION=null\n"
-argument_list|,
-name|CalciteAssert
-operator|.
-name|toString
-argument_list|(
+try|try
+init|(
+name|ResultSet
+name|r
+init|=
 name|metaData
 operator|.
 name|getTables
@@ -20259,10 +20274,41 @@ operator|.
 name|jdbcName
 block|}
 argument_list|)
+init|)
+block|{
+name|assertEquals
+argument_list|(
+literal|"TABLE_CAT=null; TABLE_SCHEM=adhoc; TABLE_NAME=V; TABLE_TYPE=VIEW; REMARKS=null; TYPE_CAT=null; TYPE_SCHEM=null; TYPE_NAME=null; SELF_REFERENCING_COL_NAME=null; REF_GENERATION=null\n"
+argument_list|,
+name|CalciteAssert
+operator|.
+name|toString
+argument_list|(
+name|r
 argument_list|)
 argument_list|)
 expr_stmt|;
+block|}
 comment|// columns
+try|try
+init|(
+name|ResultSet
+name|r
+init|=
+name|metaData
+operator|.
+name|getColumns
+argument_list|(
+literal|null
+argument_list|,
+literal|"adhoc"
+argument_list|,
+literal|"V"
+argument_list|,
+literal|null
+argument_list|)
+init|)
+block|{
 name|assertEquals
 argument_list|(
 literal|"TABLE_CAT=null; TABLE_SCHEM=adhoc; TABLE_NAME=V; COLUMN_NAME=empid; DATA_TYPE=4; TYPE_NAME=JavaType(int) NOT NULL; COLUMN_SIZE=-1; BUFFER_LENGTH=null; DECIMAL_DIGITS=null; NUM_PREC_RADIX=10; NULLABLE=0; REMARKS=null; COLUMN_DEF=null; SQL_DATA_TYPE=null; SQL_DATETIME_SUB=null; CHAR_OCTET_LENGTH=-1; ORDINAL_POSITION=1; IS_NULLABLE=NO; SCOPE_CATALOG=null; SCOPE_SCHEMA=null; SCOPE_TABLE=null; SOURCE_DATA_TYPE=null; IS_AUTOINCREMENT=; IS_GENERATEDCOLUMN=\n"
@@ -20279,22 +20325,23 @@ name|CalciteAssert
 operator|.
 name|toString
 argument_list|(
-name|metaData
-operator|.
-name|getColumns
-argument_list|(
-literal|null
-argument_list|,
-literal|"adhoc"
-argument_list|,
-literal|"V"
-argument_list|,
-literal|null
-argument_list|)
+name|r
 argument_list|)
 argument_list|)
 expr_stmt|;
+block|}
 comment|// catalog
+try|try
+init|(
+name|ResultSet
+name|r
+init|=
+name|metaData
+operator|.
+name|getCatalogs
+argument_list|()
+init|)
+block|{
 name|assertEquals
 argument_list|(
 literal|"TABLE_CAT=null\n"
@@ -20303,14 +20350,23 @@ name|CalciteAssert
 operator|.
 name|toString
 argument_list|(
-name|metaData
-operator|.
-name|getCatalogs
-argument_list|()
+name|r
 argument_list|)
 argument_list|)
 expr_stmt|;
+block|}
 comment|// schemas
+try|try
+init|(
+name|ResultSet
+name|r
+init|=
+name|metaData
+operator|.
+name|getSchemas
+argument_list|()
+init|)
+block|{
 name|assertEquals
 argument_list|(
 literal|"TABLE_SCHEM=adhoc; TABLE_CATALOG=null\n"
@@ -20321,22 +20377,17 @@ name|CalciteAssert
 operator|.
 name|toString
 argument_list|(
-name|metaData
-operator|.
-name|getSchemas
-argument_list|()
+name|r
 argument_list|)
 argument_list|)
 expr_stmt|;
+block|}
 comment|// schemas (qualified)
-name|assertEquals
-argument_list|(
-literal|"TABLE_SCHEM=adhoc; TABLE_CATALOG=null\n"
-argument_list|,
-name|CalciteAssert
-operator|.
-name|toString
-argument_list|(
+try|try
+init|(
+name|ResultSet
+name|r
+init|=
 name|metaData
 operator|.
 name|getSchemas
@@ -20345,10 +20396,33 @@ literal|null
 argument_list|,
 literal|"adhoc"
 argument_list|)
+init|)
+block|{
+name|assertEquals
+argument_list|(
+literal|"TABLE_SCHEM=adhoc; TABLE_CATALOG=null\n"
+argument_list|,
+name|CalciteAssert
+operator|.
+name|toString
+argument_list|(
+name|r
 argument_list|)
 argument_list|)
 expr_stmt|;
+block|}
 comment|// table types
+try|try
+init|(
+name|ResultSet
+name|r
+init|=
+name|metaData
+operator|.
+name|getTableTypes
+argument_list|()
+init|)
+block|{
 name|assertEquals
 argument_list|(
 literal|"TABLE_TYPE=TABLE\n"
@@ -20359,13 +20433,11 @@ name|CalciteAssert
 operator|.
 name|toString
 argument_list|(
-name|metaData
-operator|.
-name|getTableTypes
-argument_list|()
+name|r
 argument_list|)
 argument_list|)
 expr_stmt|;
+block|}
 return|return
 literal|null
 return|;
