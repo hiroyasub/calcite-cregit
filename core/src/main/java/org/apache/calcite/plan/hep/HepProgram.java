@@ -132,7 +132,7 @@ name|matchOrder
 operator|=
 name|HepMatchOrder
 operator|.
-name|ARBITRARY
+name|DEPTH_FIRST
 expr_stmt|;
 name|group
 operator|=

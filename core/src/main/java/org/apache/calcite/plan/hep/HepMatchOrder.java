@@ -26,7 +26,7 @@ specifier|public
 enum|enum
 name|HepMatchOrder
 block|{
-comment|/**    * Match in arbitrary order. This is the default because it is the most    * efficient, and most rules don't care about order.    */
+comment|/**    * Match in arbitrary order. This is the default because it is    * efficient, and most rules don't care about order.    */
 name|ARBITRARY
 block|,
 comment|/**    * Match from leaves up. A match attempt at a descendant precedes all match    * attempts at its ancestors.    */
@@ -34,6 +34,9 @@ name|BOTTOM_UP
 block|,
 comment|/**    * Match from root down. A match attempt at an ancestor always precedes all    * match attempts at its descendants.    */
 name|TOP_DOWN
+block|,
+comment|/**    * Match in depth-first order.    *    *<p>It avoids applying a rule to the previous    * {@link org.apache.calcite.rel.RelNode} repeatedly after new vertex is    * generated in one rule application. It can therefore be more efficient than    * {@link #ARBITRARY} in cases such as    * {@link org.apache.calcite.rel.core.Union} with large fan-out.    */
+name|DEPTH_FIRST
 block|}
 end_enum
 
