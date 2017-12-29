@@ -1043,10 +1043,8 @@ name|FILTER
 argument_list|,
 name|PROJECT_FILTER_TRANSPOSE
 argument_list|,
-comment|// Disabled, per
-comment|//   [CALCITE-1706] DruidAggregateFilterTransposeRule
-comment|//   causes very fine-grained aggregations to be pushed to Druid
-comment|// AGGREGATE_FILTER_TRANSPOSE,
+name|AGGREGATE_FILTER_TRANSPOSE
+argument_list|,
 name|AGGREGATE_PROJECT
 argument_list|,
 name|PROJECT

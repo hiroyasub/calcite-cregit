@@ -6957,7 +6957,7 @@ literal|"from \"foodmart\"\n"
 operator|+
 literal|"where \"product_id\" = cast(NULL as varchar)\n"
 operator|+
-literal|"group by \"product_id\""
+literal|"group by \"product_id\" order by \"product_id\" limit 5"
 decl_stmt|;
 specifier|final
 name|String
@@ -6965,13 +6965,19 @@ name|plan
 init|=
 literal|"PLAN=EnumerableInterpreter\n"
 operator|+
-literal|"  BindableAggregate(group=[{0}])\n"
+literal|"  BindableSort(sort0=[$0], dir0=[ASC], fetch=[5])\n"
 operator|+
 literal|"    BindableFilter(condition=[=($0, null)])\n"
 operator|+
-literal|"      DruidQuery(table=[[foodmart, foodmart]], "
+literal|"      DruidQuery(table=[[foodmart, foodmart]], intervals="
 operator|+
-literal|"intervals=[[1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z]], projects=[[$1]])"
+literal|"[[1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z]], groups=[{1}], aggs=[[]])"
+decl_stmt|;
+specifier|final
+name|String
+name|query
+init|=
+literal|"{\"queryType\":\"groupBy\""
 decl_stmt|;
 name|sql
 argument_list|(
@@ -6981,6 +6987,14 @@ operator|.
 name|explainContains
 argument_list|(
 name|plan
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|druidChecker
+argument_list|(
+name|query
+argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
