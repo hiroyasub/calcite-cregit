@@ -10176,9 +10176,9 @@ literal|"PLAN=EnumerableInterpreter\n"
 operator|+
 literal|"  DruidQuery(table=[[foodmart, foodmart]], "
 operator|+
-literal|"intervals=[[1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z]], projects=[[$63, "
+literal|"intervals=[[1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z]], projects=[[$89, "
 operator|+
-literal|"$89]], groups=[{0}], aggs=[[COUNT($1)]]"
+literal|"$63]], groups=[{1}], aggs=[[COUNT($0)]]"
 decl_stmt|;
 name|testCountWithApproxDistinct
 argument_list|(
