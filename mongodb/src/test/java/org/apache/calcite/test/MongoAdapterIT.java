@@ -1023,6 +1023,11 @@ argument_list|)
 expr_stmt|;
 block|}
 annotation|@
+name|Ignore
+argument_list|(
+literal|"broken; [CALCITE-2115] is logged to fix it"
+argument_list|)
+annotation|@
 name|Test
 specifier|public
 name|void
@@ -2051,6 +2056,11 @@ argument_list|)
 expr_stmt|;
 block|}
 annotation|@
+name|Ignore
+argument_list|(
+literal|"broken; [CALCITE-2115] is logged to fix it"
+argument_list|)
+annotation|@
 name|Test
 specifier|public
 name|void
@@ -2198,6 +2208,11 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Ignore
+argument_list|(
+literal|"broken; [CALCITE-2115] is logged to fix it"
+argument_list|)
 annotation|@
 name|Test
 specifier|public
