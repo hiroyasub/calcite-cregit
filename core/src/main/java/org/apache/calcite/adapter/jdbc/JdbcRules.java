@@ -447,6 +447,22 @@ name|rel
 operator|.
 name|core
 operator|.
+name|SemiJoin
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|core
+operator|.
 name|Sort
 import|;
 end_import
@@ -1004,6 +1020,19 @@ name|RelNode
 name|rel
 parameter_list|)
 block|{
+if|if
+condition|(
+name|rel
+operator|instanceof
+name|SemiJoin
+condition|)
+block|{
+comment|// It's not possible to convert semi-joins. They have fewer columns
+comment|// than regular joins.
+return|return
+literal|null
+return|;
+block|}
 return|return
 name|convert
 argument_list|(

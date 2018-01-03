@@ -440,6 +440,7 @@ name|getTraitDef
 argument_list|()
 return|;
 block|}
+comment|/** Converts a relational expression to the target trait(s) of this rule.    *    *<p>Returns null if conversion is not possible. */
 specifier|public
 specifier|abstract
 name|RelNode
