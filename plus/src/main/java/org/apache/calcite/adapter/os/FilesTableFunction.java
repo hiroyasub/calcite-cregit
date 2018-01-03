@@ -510,16 +510,6 @@ comment|// %s file's size in bytes
 operator|.
 name|add
 argument_list|(
-literal|"sparseness"
-argument_list|,
-name|SqlTypeName
-operator|.
-name|FLOAT
-argument_list|)
-comment|// %S sparseness
-operator|.
-name|add
-argument_list|(
 literal|"mod_time"
 argument_list|,
 name|SqlTypeName
@@ -638,9 +628,6 @@ operator|+
 literal|"%s\\0"
 comment|// size
 operator|+
-literal|"%S\\0"
-comment|// sparseness
-operator|+
 literal|"%T@\\0"
 comment|// mod_time
 operator|+
@@ -753,9 +740,6 @@ comment|// path
 operator|+
 literal|"%z%n"
 comment|// size
-operator|+
-literal|"0%n"
-comment|// sparseness: not supported by macOS stat
 operator|+
 literal|"%m%n"
 comment|// mod_time
@@ -1219,48 +1203,6 @@ literal|""
 expr_stmt|;
 comment|// dir_name
 block|}
-comment|// In Linux, sparseness = (BLOCKSIZE * st_blocks / st_size)
-specifier|final
-name|Integer
-name|blocks
-init|=
-operator|(
-name|Integer
-operator|)
-name|current
-index|[
-literal|1
-index|]
-decl_stmt|;
-specifier|final
-name|Long
-name|bytes
-init|=
-operator|(
-name|Long
-operator|)
-name|current
-index|[
-literal|15
-index|]
-decl_stmt|;
-name|current
-index|[
-literal|16
-index|]
-operator|=
-name|blocks
-operator|.
-name|floatValue
-argument_list|()
-operator|*
-literal|512f
-operator|/
-name|bytes
-operator|.
-name|floatValue
-argument_list|()
-expr_stmt|;
 comment|// Make type values more like those on Linux
 specifier|final
 name|String
@@ -1271,12 +1213,12 @@ name|String
 operator|)
 name|current
 index|[
-literal|20
+literal|19
 index|]
 decl_stmt|;
 name|current
 index|[
-literal|20
+literal|19
 index|]
 operator|=
 name|type
@@ -1480,17 +1422,6 @@ argument_list|)
 operator|.
 name|longValue
 argument_list|()
-return|;
-case|case
-literal|"sparseness"
-case|:
-return|return
-name|Float
-operator|.
-name|valueOf
-argument_list|(
-name|value
-argument_list|)
 return|;
 default|default:
 return|return
