@@ -3537,6 +3537,13 @@ name|rel
 argument_list|)
 expr_stmt|;
 block|}
+comment|// Compute digest first time we add to DAG,
+comment|// otherwise can't get equivVertex for common sub-expression
+name|rel
+operator|.
+name|recomputeDigest
+argument_list|()
+expr_stmt|;
 comment|// try to find equivalent rel only if DAG is allowed
 if|if
 condition|(
@@ -3861,7 +3868,7 @@ name|newDigest
 init|=
 name|rel
 operator|.
-name|recomputeDigest
+name|getDigest
 argument_list|()
 decl_stmt|;
 comment|// When a transformation happened in one rule apply, support
