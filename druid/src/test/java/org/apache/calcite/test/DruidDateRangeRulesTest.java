@@ -702,7 +702,7 @@ argument_list|(
 name|c
 argument_list|)
 decl_stmt|;
-comment|// dt>= 2010-01-01 AND dt< 2011-01-01
+comment|// d>= 2010-01-01 AND d< 2011-01-01
 name|checkDateRangeNoSimplify
 argument_list|(
 name|f
@@ -717,7 +717,7 @@ name|ge
 argument_list|(
 name|f
 operator|.
-name|dt
+name|d
 argument_list|,
 name|f
 operator|.
@@ -725,7 +725,7 @@ name|cast
 argument_list|(
 name|f
 operator|.
-name|timeStampDataType
+name|timestampDataType
 argument_list|,
 name|f
 operator|.
@@ -742,7 +742,7 @@ name|lt
 argument_list|(
 name|f
 operator|.
-name|dt
+name|d
 argument_list|,
 name|f
 operator|.
@@ -750,7 +750,7 @@ name|cast
 argument_list|(
 name|f
 operator|.
-name|timeStampDataType
+name|timestampDataType
 argument_list|,
 name|f
 operator|.

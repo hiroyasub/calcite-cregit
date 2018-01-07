@@ -1607,13 +1607,11 @@ name|ge
 argument_list|(
 name|f
 operator|.
-name|dt
+name|d
 argument_list|,
 name|f
 operator|.
-name|rexBuilder
-operator|.
-name|makeDateLiteral
+name|dateLiteral
 argument_list|(
 name|d
 argument_list|)
@@ -1629,13 +1627,11 @@ name|eq
 argument_list|(
 name|f
 operator|.
-name|dt
+name|d
 argument_list|,
 name|f
 operator|.
-name|rexBuilder
-operator|.
-name|makeDateLiteral
+name|dateLiteral
 argument_list|(
 name|d
 argument_list|)
@@ -1693,13 +1689,11 @@ name|lt
 argument_list|(
 name|f
 operator|.
-name|dt
+name|d
 argument_list|,
 name|f
 operator|.
-name|rexBuilder
-operator|.
-name|makeDateLiteral
+name|dateLiteral
 argument_list|(
 name|dBeforeEpoch1
 argument_list|)
@@ -1715,13 +1709,11 @@ name|lt
 argument_list|(
 name|f
 operator|.
-name|dt
+name|d
 argument_list|,
 name|f
 operator|.
-name|rexBuilder
-operator|.
-name|makeDateLiteral
+name|dateLiteral
 argument_list|(
 name|dBeforeEpoch2
 argument_list|)
@@ -3345,7 +3337,7 @@ decl_stmt|;
 specifier|public
 specifier|final
 name|RelDataType
-name|timeStampDataType
+name|timestampDataType
 decl_stmt|;
 specifier|public
 specifier|final
@@ -3362,61 +3354,73 @@ specifier|final
 name|RexNode
 name|bl
 decl_stmt|;
+comment|// a field of Java type "Boolean"
 specifier|public
 specifier|final
 name|RexNode
 name|i
 decl_stmt|;
+comment|// a field of Java type "Integer"
 specifier|public
 specifier|final
 name|RexNode
 name|dec
 decl_stmt|;
+comment|// a field of Java type "Double"
 specifier|public
 specifier|final
 name|RexNode
 name|lg
 decl_stmt|;
+comment|// a field of Java type "Long"
 specifier|public
 specifier|final
 name|RexNode
 name|sh
 decl_stmt|;
+comment|// a  field of Java type "Short"
 specifier|public
 specifier|final
 name|RexNode
 name|by
 decl_stmt|;
+comment|// a field of Java type "Byte"
 specifier|public
 specifier|final
 name|RexNode
 name|fl
 decl_stmt|;
+comment|// a field of Java type "Float" (not a SQL FLOAT)
 specifier|public
 specifier|final
 name|RexNode
-name|dt
+name|d
 decl_stmt|;
+comment|// a field of Java type "Date"
 specifier|public
 specifier|final
 name|RexNode
 name|ch
 decl_stmt|;
+comment|// a field of Java type "Character"
 specifier|public
 specifier|final
 name|RexNode
 name|ts
 decl_stmt|;
+comment|// a field of Java type "Timestamp"
 specifier|public
 specifier|final
 name|RexNode
 name|t
 decl_stmt|;
+comment|// a field of Java type "Time"
 specifier|public
 specifier|final
 name|RexNode
 name|str
 decl_stmt|;
+comment|// a field of Java type "String"
 specifier|public
 specifier|final
 name|RexImplicationChecker
@@ -3558,7 +3562,7 @@ operator|.
 name|class
 argument_list|)
 expr_stmt|;
-name|timeStampDataType
+name|timestampDataType
 operator|=
 name|typeFactory
 operator|.
@@ -3665,7 +3669,7 @@ argument_list|,
 name|charDataType
 argument_list|)
 expr_stmt|;
-name|dt
+name|d
 operator|=
 name|ref
 argument_list|(
@@ -3680,7 +3684,7 @@ name|ref
 argument_list|(
 literal|9
 argument_list|,
-name|timeStampDataType
+name|timestampDataType
 argument_list|)
 expr_stmt|;
 name|t
@@ -3777,7 +3781,7 @@ name|add
 argument_list|(
 literal|"timestamp"
 argument_list|,
-name|timeStampDataType
+name|timestampDataType
 argument_list|)
 operator|.
 name|add
@@ -4293,6 +4297,23 @@ return|;
 block|}
 specifier|public
 name|RexNode
+name|dateLiteral
+parameter_list|(
+name|DateString
+name|d
+parameter_list|)
+block|{
+return|return
+name|rexBuilder
+operator|.
+name|makeDateLiteral
+argument_list|(
+name|d
+argument_list|)
+return|;
+block|}
+specifier|public
+name|RexNode
 name|timestampLiteral
 parameter_list|(
 name|TimestampString
@@ -4306,7 +4327,7 @@ name|makeTimestampLiteral
 argument_list|(
 name|ts
 argument_list|,
-name|timeStampDataType
+name|timestampDataType
 operator|.
 name|getPrecision
 argument_list|()

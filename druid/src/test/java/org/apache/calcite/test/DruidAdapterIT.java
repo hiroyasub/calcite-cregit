@@ -11108,7 +11108,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testFilterwithFloorOnTime
+name|testFilterWithFloorOnTime
 parameter_list|()
 block|{
 comment|// Test filter on floor on time column is pushed to druid
@@ -11506,6 +11506,43 @@ operator|.
 name|returnsOrdered
 argument_list|(
 literal|"T=1997-05-01 05:30:00"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2122">[CALCITE-2122]    * DateRangeRules issues</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testCombinationOfValidAndNotValidAndInterval
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"SELECT COUNT(*) FROM \"foodmart\" "
+operator|+
+literal|"WHERE  \"timestamp\"< CAST('1998-01-02' as TIMESTAMP) AND "
+operator|+
+literal|"EXTRACT(MONTH FROM \"timestamp\") = 01 AND EXTRACT(YEAR FROM \"timestamp\") = 1996 "
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|,
+name|FOODMART
+argument_list|)
+operator|.
+name|runs
+argument_list|()
+operator|.
+name|queryContains
+argument_list|(
+name|druidChecker
+argument_list|(
+literal|"{\"queryType\":\"timeseries\""
+argument_list|)
 argument_list|)
 expr_stmt|;
 block|}

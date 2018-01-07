@@ -5549,6 +5549,28 @@ argument_list|,
 literal|"TIMESTAMP(0) NOT NULL"
 argument_list|)
 expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"cast('1945-12-31' as TIMESTAMP)"
+argument_list|,
+literal|"1945-12-31 00:00:00"
+argument_list|,
+literal|"TIMESTAMP(0) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"cast('2004-02-29' as TIMESTAMP)"
+argument_list|,
+literal|"2004-02-29 00:00:00"
+argument_list|,
+literal|"TIMESTAMP(0) NOT NULL"
+argument_list|)
+expr_stmt|;
 if|if
 condition|(
 name|Bug
