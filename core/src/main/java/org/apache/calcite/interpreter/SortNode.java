@@ -162,8 +162,8 @@ block|{
 specifier|public
 name|SortNode
 parameter_list|(
-name|Interpreter
-name|interpreter
+name|Compiler
+name|compiler
 parameter_list|,
 name|Sort
 name|rel
@@ -171,7 +171,7 @@ parameter_list|)
 block|{
 name|super
 argument_list|(
-name|interpreter
+name|compiler
 argument_list|,
 name|rel
 argument_list|)

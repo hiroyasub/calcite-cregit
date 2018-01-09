@@ -546,8 +546,8 @@ decl_stmt|;
 specifier|public
 name|AggregateNode
 parameter_list|(
-name|Interpreter
-name|interpreter
+name|Compiler
+name|compiler
 parameter_list|,
 name|Aggregate
 name|rel
@@ -555,7 +555,7 @@ parameter_list|)
 block|{
 name|super
 argument_list|(
-name|interpreter
+name|compiler
 argument_list|,
 name|rel
 argument_list|)
@@ -564,7 +564,7 @@ name|this
 operator|.
 name|dataContext
 operator|=
-name|interpreter
+name|compiler
 operator|.
 name|getDataContext
 argument_list|()

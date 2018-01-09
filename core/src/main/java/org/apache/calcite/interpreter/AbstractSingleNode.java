@@ -62,8 +62,8 @@ name|rel
 decl_stmt|;
 name|AbstractSingleNode
 parameter_list|(
-name|Interpreter
-name|interpreter
+name|Compiler
+name|compiler
 parameter_list|,
 name|T
 name|rel
@@ -79,7 +79,7 @@ name|this
 operator|.
 name|source
 operator|=
-name|interpreter
+name|compiler
 operator|.
 name|source
 argument_list|(
@@ -92,7 +92,7 @@ name|this
 operator|.
 name|sink
 operator|=
-name|interpreter
+name|compiler
 operator|.
 name|sink
 argument_list|(

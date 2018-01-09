@@ -72,8 +72,8 @@ decl_stmt|;
 specifier|public
 name|FilterNode
 parameter_list|(
-name|Interpreter
-name|interpreter
+name|Compiler
+name|compiler
 parameter_list|,
 name|Filter
 name|rel
@@ -81,7 +81,7 @@ parameter_list|)
 block|{
 name|super
 argument_list|(
-name|interpreter
+name|compiler
 argument_list|,
 name|rel
 argument_list|)
@@ -90,7 +90,7 @@ name|this
 operator|.
 name|condition
 operator|=
-name|interpreter
+name|compiler
 operator|.
 name|compile
 argument_list|(
@@ -114,7 +114,7 @@ name|this
 operator|.
 name|context
 operator|=
-name|interpreter
+name|compiler
 operator|.
 name|createContext
 argument_list|()

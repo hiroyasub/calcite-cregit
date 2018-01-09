@@ -2904,7 +2904,7 @@ name|DruidQueryNode
 argument_list|(
 name|implementor
 operator|.
-name|interpreter
+name|compiler
 argument_list|,
 name|this
 argument_list|)

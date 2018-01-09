@@ -101,8 +101,8 @@ decl_stmt|;
 specifier|public
 name|UnionNode
 parameter_list|(
-name|Interpreter
-name|interpreter
+name|Compiler
+name|compiler
 parameter_list|,
 name|Union
 name|rel
@@ -146,7 +146,7 @@ name|builder
 operator|.
 name|add
 argument_list|(
-name|interpreter
+name|compiler
 operator|.
 name|source
 argument_list|(
@@ -170,7 +170,7 @@ name|this
 operator|.
 name|sink
 operator|=
-name|interpreter
+name|compiler
 operator|.
 name|sink
 argument_list|(

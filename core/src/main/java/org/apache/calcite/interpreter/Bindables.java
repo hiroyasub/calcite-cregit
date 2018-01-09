@@ -2063,7 +2063,7 @@ name|FilterNode
 argument_list|(
 name|implementor
 operator|.
-name|interpreter
+name|compiler
 argument_list|,
 name|this
 argument_list|)
@@ -2326,7 +2326,7 @@ name|ProjectNode
 argument_list|(
 name|implementor
 operator|.
-name|interpreter
+name|compiler
 argument_list|,
 name|this
 argument_list|)
@@ -2609,7 +2609,7 @@ name|SortNode
 argument_list|(
 name|implementor
 operator|.
-name|interpreter
+name|compiler
 argument_list|,
 name|this
 argument_list|)
@@ -2980,7 +2980,7 @@ name|JoinNode
 argument_list|(
 name|implementor
 operator|.
-name|interpreter
+name|compiler
 argument_list|,
 name|this
 argument_list|)
@@ -3222,7 +3222,7 @@ name|UnionNode
 argument_list|(
 name|implementor
 operator|.
-name|interpreter
+name|compiler
 argument_list|,
 name|this
 argument_list|)
@@ -3360,7 +3360,7 @@ name|ValuesNode
 argument_list|(
 name|implementor
 operator|.
-name|interpreter
+name|compiler
 argument_list|,
 name|this
 argument_list|)
@@ -3716,7 +3716,7 @@ name|AggregateNode
 argument_list|(
 name|implementor
 operator|.
-name|interpreter
+name|compiler
 argument_list|,
 name|this
 argument_list|)
@@ -4042,7 +4042,7 @@ name|WindowNode
 argument_list|(
 name|implementor
 operator|.
-name|interpreter
+name|compiler
 argument_list|,
 name|this
 argument_list|)

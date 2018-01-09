@@ -129,8 +129,8 @@ decl_stmt|;
 specifier|public
 name|ValuesNode
 parameter_list|(
-name|Interpreter
-name|interpreter
+name|Compiler
+name|compiler
 parameter_list|,
 name|Values
 name|rel
@@ -140,7 +140,7 @@ name|this
 operator|.
 name|sink
 operator|=
-name|interpreter
+name|compiler
 operator|.
 name|sink
 argument_list|(
@@ -165,7 +165,7 @@ name|rows
 operator|=
 name|createRows
 argument_list|(
-name|interpreter
+name|compiler
 argument_list|,
 name|rel
 operator|.
@@ -181,8 +181,8 @@ name|Row
 argument_list|>
 name|createRows
 parameter_list|(
-name|Interpreter
-name|interpreter
+name|Compiler
+name|compiler
 parameter_list|,
 name|ImmutableList
 argument_list|<
@@ -229,7 +229,7 @@ specifier|final
 name|Scalar
 name|scalar
 init|=
-name|interpreter
+name|compiler
 operator|.
 name|compile
 argument_list|(
@@ -256,7 +256,7 @@ specifier|final
 name|Context
 name|context
 init|=
-name|interpreter
+name|compiler
 operator|.
 name|createContext
 argument_list|()

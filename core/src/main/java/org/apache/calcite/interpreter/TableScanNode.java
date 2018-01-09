@@ -507,8 +507,8 @@ block|{
 specifier|private
 name|TableScanNode
 parameter_list|(
-name|Interpreter
-name|interpreter
+name|Compiler
+name|compiler
 parameter_list|,
 name|TableScan
 name|rel
@@ -520,7 +520,7 @@ argument_list|>
 name|enumerable
 parameter_list|)
 block|{
-name|interpreter
+name|compiler
 operator|.
 name|enumerable
 argument_list|(
@@ -534,8 +534,6 @@ specifier|public
 name|void
 name|run
 parameter_list|()
-throws|throws
-name|InterruptedException
 block|{
 comment|// nothing to do
 block|}
@@ -544,8 +542,8 @@ specifier|static
 name|TableScanNode
 name|create
 parameter_list|(
-name|Interpreter
-name|interpreter
+name|Compiler
+name|compiler
 parameter_list|,
 name|TableScan
 name|rel
@@ -592,7 +590,7 @@ block|{
 return|return
 name|createProjectableFilterable
 argument_list|(
-name|interpreter
+name|compiler
 argument_list|,
 name|rel
 argument_list|,
@@ -627,7 +625,7 @@ block|{
 return|return
 name|createFilterable
 argument_list|(
-name|interpreter
+name|compiler
 argument_list|,
 name|rel
 argument_list|,
@@ -662,7 +660,7 @@ block|{
 return|return
 name|createScannable
 argument_list|(
-name|interpreter
+name|compiler
 argument_list|,
 name|rel
 argument_list|,
@@ -701,7 +699,7 @@ block|{
 return|return
 name|createEnumerable
 argument_list|(
-name|interpreter
+name|compiler
 argument_list|,
 name|rel
 argument_list|,
@@ -738,7 +736,7 @@ block|{
 return|return
 name|createQueryable
 argument_list|(
-name|interpreter
+name|compiler
 argument_list|,
 name|rel
 argument_list|,
@@ -767,8 +765,8 @@ specifier|static
 name|TableScanNode
 name|createScannable
 parameter_list|(
-name|Interpreter
-name|interpreter
+name|Compiler
+name|compiler
 parameter_list|,
 name|TableScan
 name|rel
@@ -801,7 +799,7 @@ name|scannableTable
 operator|.
 name|scan
 argument_list|(
-name|interpreter
+name|compiler
 operator|.
 name|getDataContext
 argument_list|()
@@ -811,7 +809,7 @@ decl_stmt|;
 return|return
 name|createEnumerable
 argument_list|(
-name|interpreter
+name|compiler
 argument_list|,
 name|rel
 argument_list|,
@@ -830,8 +828,8 @@ specifier|static
 name|TableScanNode
 name|createQueryable
 parameter_list|(
-name|Interpreter
-name|interpreter
+name|Compiler
+name|compiler
 parameter_list|,
 name|TableScan
 name|rel
@@ -853,7 +851,7 @@ specifier|final
 name|DataContext
 name|root
 init|=
-name|interpreter
+name|compiler
 operator|.
 name|getDataContext
 argument_list|()
@@ -1157,7 +1155,7 @@ block|}
 return|return
 name|createEnumerable
 argument_list|(
-name|interpreter
+name|compiler
 argument_list|,
 name|rel
 argument_list|,
@@ -1176,8 +1174,8 @@ specifier|static
 name|TableScanNode
 name|createFilterable
 parameter_list|(
-name|Interpreter
-name|interpreter
+name|Compiler
+name|compiler
 parameter_list|,
 name|TableScan
 name|rel
@@ -1199,7 +1197,7 @@ specifier|final
 name|DataContext
 name|root
 init|=
-name|interpreter
+name|compiler
 operator|.
 name|getDataContext
 argument_list|()
@@ -1287,7 +1285,7 @@ decl_stmt|;
 return|return
 name|createEnumerable
 argument_list|(
-name|interpreter
+name|compiler
 argument_list|,
 name|rel
 argument_list|,
@@ -1306,8 +1304,8 @@ specifier|static
 name|TableScanNode
 name|createProjectableFilterable
 parameter_list|(
-name|Interpreter
-name|interpreter
+name|Compiler
+name|compiler
 parameter_list|,
 name|TableScan
 name|rel
@@ -1329,7 +1327,7 @@ specifier|final
 name|DataContext
 name|root
 init|=
-name|interpreter
+name|compiler
 operator|.
 name|getDataContext
 argument_list|()
@@ -1596,7 +1594,7 @@ block|}
 return|return
 name|createEnumerable
 argument_list|(
-name|interpreter
+name|compiler
 argument_list|,
 name|rel
 argument_list|,
@@ -1616,8 +1614,8 @@ specifier|static
 name|TableScanNode
 name|createEnumerable
 parameter_list|(
-name|Interpreter
-name|interpreter
+name|Compiler
+name|compiler
 parameter_list|,
 name|TableScan
 name|rel
@@ -1673,6 +1671,11 @@ argument_list|,
 literal|false
 argument_list|)
 decl_stmt|;
+assert|assert
+name|filter
+operator|!=
+literal|null
+assert|;
 comment|// Re-map filter for the projects that have been applied already
 specifier|final
 name|RexNode
@@ -1804,7 +1807,7 @@ specifier|final
 name|Scalar
 name|condition
 init|=
-name|interpreter
+name|compiler
 operator|.
 name|compile
 argument_list|(
@@ -1822,7 +1825,7 @@ specifier|final
 name|Context
 name|context
 init|=
-name|interpreter
+name|compiler
 operator|.
 name|createContext
 argument_list|()
@@ -1991,7 +1994,7 @@ return|return
 operator|new
 name|TableScanNode
 argument_list|(
-name|interpreter
+name|compiler
 argument_list|,
 name|rel
 argument_list|,

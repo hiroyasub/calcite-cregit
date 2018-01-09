@@ -113,8 +113,8 @@ decl_stmt|;
 specifier|public
 name|JoinNode
 parameter_list|(
-name|Interpreter
-name|interpreter
+name|Compiler
+name|compiler
 parameter_list|,
 name|Join
 name|rel
@@ -124,7 +124,7 @@ name|this
 operator|.
 name|leftSource
 operator|=
-name|interpreter
+name|compiler
 operator|.
 name|source
 argument_list|(
@@ -137,7 +137,7 @@ name|this
 operator|.
 name|rightSource
 operator|=
-name|interpreter
+name|compiler
 operator|.
 name|source
 argument_list|(
@@ -150,7 +150,7 @@ name|this
 operator|.
 name|sink
 operator|=
-name|interpreter
+name|compiler
 operator|.
 name|sink
 argument_list|(
@@ -161,7 +161,7 @@ name|this
 operator|.
 name|condition
 operator|=
-name|interpreter
+name|compiler
 operator|.
 name|compile
 argument_list|(
@@ -175,7 +175,7 @@ name|getCondition
 argument_list|()
 argument_list|)
 argument_list|,
-name|interpreter
+name|compiler
 operator|.
 name|combinedRowType
 argument_list|(
@@ -196,7 +196,7 @@ name|this
 operator|.
 name|context
 operator|=
-name|interpreter
+name|compiler
 operator|.
 name|createContext
 argument_list|()
