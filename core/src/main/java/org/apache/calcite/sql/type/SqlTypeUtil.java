@@ -3271,7 +3271,9 @@ init|=
 name|SqlTypeAssignmentRules
 operator|.
 name|instance
-argument_list|()
+argument_list|(
+name|coerce
+argument_list|)
 decl_stmt|;
 return|return
 name|rules
@@ -3281,8 +3283,6 @@ argument_list|(
 name|toTypeName
 argument_list|,
 name|fromTypeName
-argument_list|,
-name|coerce
 argument_list|)
 return|;
 block|}
