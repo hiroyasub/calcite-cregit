@@ -17,6 +17,16 @@ name|druid
 package|;
 end_package
 
+begin_import
+import|import
+name|javax
+operator|.
+name|annotation
+operator|.
+name|Nullable
+import|;
+end_import
+
 begin_comment
 comment|/**  * Interface for Druid DimensionSpec.  *  *<p>DimensionSpecs define how dimension values get transformed prior to aggregation.  */
 end_comment
@@ -26,10 +36,27 @@ specifier|public
 interface|interface
 name|DimensionSpec
 extends|extends
-name|DruidQuery
-operator|.
-name|Json
-block|{ }
+name|DruidJson
+block|{
+name|String
+name|getOutputName
+parameter_list|()
+function_decl|;
+name|DruidType
+name|getOutputType
+parameter_list|()
+function_decl|;
+annotation|@
+name|Nullable
+name|ExtractionFunction
+name|getExtractionFn
+parameter_list|()
+function_decl|;
+name|String
+name|getDimension
+parameter_list|()
+function_decl|;
+block|}
 end_interface
 
 begin_comment

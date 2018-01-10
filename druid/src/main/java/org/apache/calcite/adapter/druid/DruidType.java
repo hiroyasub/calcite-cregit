@@ -49,9 +49,14 @@ operator|.
 name|BIGINT
 argument_list|)
 block|,
-comment|// SQL DOUBLE and FLOAT types are both 64 bit, but we use DOUBLE because
-comment|// people find FLOAT confusing.
 name|FLOAT
+argument_list|(
+name|SqlTypeName
+operator|.
+name|FLOAT
+argument_list|)
+block|,
+name|DOUBLE
 argument_list|(
 name|SqlTypeName
 operator|.
@@ -63,6 +68,13 @@ argument_list|(
 name|SqlTypeName
 operator|.
 name|VARCHAR
+argument_list|)
+block|,
+name|COMPLEX
+argument_list|(
+name|SqlTypeName
+operator|.
+name|OTHER
 argument_list|)
 block|,
 name|HYPER_UNIQUE
@@ -112,10 +124,14 @@ operator|||
 name|this
 operator|==
 name|HYPER_UNIQUE
+operator|||
+name|this
+operator|==
+name|COMPLEX
 return|;
 block|}
 comment|/**    * Returns a DruidType matching the given String type from a Druid metric    * */
-specifier|public
+specifier|protected
 specifier|static
 name|DruidType
 name|getTypeFromMetric
@@ -189,6 +205,20 @@ argument_list|)
 condition|)
 block|{
 return|return
+name|DOUBLE
+return|;
+block|}
+if|else if
+condition|(
+name|type
+operator|.
+name|startsWith
+argument_list|(
+literal|"float"
+argument_list|)
+condition|)
+block|{
+return|return
 name|FLOAT
 return|;
 block|}
@@ -203,7 +233,7 @@ argument_list|)
 throw|;
 block|}
 comment|/**    * Returns a DruidType matching the String from a meta data query    * */
-specifier|public
+specifier|protected
 specifier|static
 name|DruidType
 name|getTypeFromMetaData
@@ -233,6 +263,12 @@ literal|"FLOAT"
 case|:
 return|return
 name|FLOAT
+return|;
+case|case
+literal|"DOUBLE"
+case|:
+return|return
+name|DOUBLE
 return|;
 case|case
 literal|"STRING"

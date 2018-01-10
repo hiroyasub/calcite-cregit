@@ -26,9 +26,7 @@ specifier|public
 interface|interface
 name|ExtractionFunction
 extends|extends
-name|DruidQuery
-operator|.
-name|Json
+name|DruidJson
 block|{ }
 end_interface
 

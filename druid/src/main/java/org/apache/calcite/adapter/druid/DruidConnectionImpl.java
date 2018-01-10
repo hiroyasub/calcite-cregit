@@ -313,6 +313,20 @@ name|google
 operator|.
 name|common
 operator|.
+name|base
+operator|.
+name|Throwables
+import|;
+end_import
+
+begin_import
+import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
 name|collect
 operator|.
 name|ImmutableMap
@@ -581,6 +595,12 @@ specifier|final
 name|SimpleDateFormat
 name|UTC_TIMESTAMP_FORMAT
 decl_stmt|;
+specifier|private
+specifier|static
+specifier|final
+name|SimpleDateFormat
+name|TIMESTAMP_FORMAT
+decl_stmt|;
 static|static
 block|{
 specifier|final
@@ -604,6 +624,25 @@ name|ROOT
 argument_list|)
 expr_stmt|;
 name|UTC_TIMESTAMP_FORMAT
+operator|.
+name|setTimeZone
+argument_list|(
+name|utc
+argument_list|)
+expr_stmt|;
+name|TIMESTAMP_FORMAT
+operator|=
+operator|new
+name|SimpleDateFormat
+argument_list|(
+literal|"yyyy-MM-dd HH:mm:ss"
+argument_list|,
+name|Locale
+operator|.
+name|ROOT
+argument_list|)
+expr_stmt|;
+name|TIMESTAMP_FORMAT
 operator|.
 name|setTimeZone
 argument_list|(
@@ -928,6 +967,7 @@ name|i
 operator|++
 control|)
 block|{
+comment|/*@TODO This need to be revisited. The logic seems implying that only       one column of type timestamp is present, this is not necessarily true,       see https://issues.apache.org/jira/browse/CALCITE-2175       */
 if|if
 condition|(
 name|fieldTypes
@@ -2206,11 +2246,18 @@ operator|==
 name|type
 condition|)
 block|{
-try|try
-block|{
 specifier|final
-name|long
-name|timeInMillis
+name|int
+name|fieldPos
+init|=
+name|posTimestampField
+operator|!=
+operator|-
+literal|1
+condition|?
+name|posTimestampField
+else|:
+name|i
 decl_stmt|;
 if|if
 condition|(
@@ -2221,24 +2268,42 @@ operator|.
 name|VALUE_NUMBER_INT
 condition|)
 block|{
-name|timeInMillis
-operator|=
+name|rowBuilder
+operator|.
+name|set
+argument_list|(
+name|posTimestampField
+argument_list|,
 name|parser
 operator|.
 name|getLongValue
 argument_list|()
+argument_list|)
 expr_stmt|;
+return|return;
 block|}
 else|else
 block|{
-comment|// synchronized block to avoid race condition
+comment|// We don't have any way to figure out the format of time upfront since we only have
+comment|// org.apache.calcite.avatica.ColumnMetaData.Rep.JAVA_SQL_TIMESTAMP as type to represent
+comment|// both timestamp and timestamp with local timezone.
+comment|// Logic where type is inferred can be found at DruidQuery.DruidQueryNode.getPrimitive()
+comment|// Thus need to guess via try and catch
 synchronized|synchronized
 init|(
 name|UTC_TIMESTAMP_FORMAT
 init|)
 block|{
-name|timeInMillis
-operator|=
+comment|// synchronized block to avoid race condition
+try|try
+block|{
+comment|//First try to pars as Timestamp with timezone.
+name|rowBuilder
+operator|.
+name|set
+argument_list|(
+name|fieldPos
+argument_list|,
 name|UTC_TIMESTAMP_FORMAT
 operator|.
 name|parse
@@ -2251,27 +2316,8 @@ argument_list|)
 operator|.
 name|getTime
 argument_list|()
-expr_stmt|;
-block|}
-block|}
-if|if
-condition|(
-name|posTimestampField
-operator|!=
-operator|-
-literal|1
-condition|)
-block|{
-name|rowBuilder
-operator|.
-name|set
-argument_list|(
-name|posTimestampField
-argument_list|,
-name|timeInMillis
 argument_list|)
 expr_stmt|;
-block|}
 block|}
 catch|catch
 parameter_list|(
@@ -2279,9 +2325,49 @@ name|ParseException
 name|e
 parameter_list|)
 block|{
-comment|// ignore bad value
+comment|// swallow the exception and try timestamp format
+try|try
+block|{
+name|rowBuilder
+operator|.
+name|set
+argument_list|(
+name|fieldPos
+argument_list|,
+name|TIMESTAMP_FORMAT
+operator|.
+name|parse
+argument_list|(
+name|parser
+operator|.
+name|getText
+argument_list|()
+argument_list|)
+operator|.
+name|getTime
+argument_list|()
+argument_list|)
+expr_stmt|;
+block|}
+catch|catch
+parameter_list|(
+name|ParseException
+name|e2
+parameter_list|)
+block|{
+comment|// unknown format should not happen
+name|Throwables
+operator|.
+name|propagate
+argument_list|(
+name|e2
+argument_list|)
+expr_stmt|;
+block|}
+block|}
 block|}
 return|return;
+block|}
 block|}
 switch|switch
 condition|(
@@ -2304,7 +2390,7 @@ name|ColumnMetaData
 operator|.
 name|Rep
 operator|.
-name|INTEGER
+name|LONG
 expr_stmt|;
 block|}
 comment|// fall through

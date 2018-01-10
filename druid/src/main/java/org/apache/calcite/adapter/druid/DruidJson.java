@@ -17,19 +17,53 @@ name|druid
 package|;
 end_package
 
+begin_import
+import|import
+name|com
+operator|.
+name|fasterxml
+operator|.
+name|jackson
+operator|.
+name|core
+operator|.
+name|JsonGenerator
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|io
+operator|.
+name|IOException
+import|;
+end_import
+
 begin_comment
-comment|/**  * Created by jhyde on 3/9/16.  */
+comment|/** Object that knows how to write itself to a  * {@link com.fasterxml.jackson.core.JsonGenerator}. */
 end_comment
 
-begin_class
+begin_interface
 specifier|public
-class|class
-name|DruidResultEnumerator
-block|{ }
-end_class
+interface|interface
+name|DruidJson
+block|{
+name|void
+name|write
+parameter_list|(
+name|JsonGenerator
+name|generator
+parameter_list|)
+throws|throws
+name|IOException
+function_decl|;
+block|}
+end_interface
 
 begin_comment
-comment|// End DruidResultEnumerator.java
+comment|// End DruidJson.java
 end_comment
 
 end_unit

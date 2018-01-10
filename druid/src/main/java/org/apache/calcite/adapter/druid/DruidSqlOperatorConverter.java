@@ -19,11 +19,45 @@ end_package
 
 begin_import
 import|import
-name|java
+name|org
 operator|.
-name|util
+name|apache
 operator|.
-name|Locale
+name|calcite
+operator|.
+name|rel
+operator|.
+name|type
+operator|.
+name|RelDataType
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rex
+operator|.
+name|RexNode
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|SqlOperator
 import|;
 end_import
 
@@ -33,71 +67,45 @@ name|javax
 operator|.
 name|annotation
 operator|.
-name|Nonnull
+name|Nullable
 import|;
 end_import
 
 begin_comment
-comment|/**  * A strategy by which Druid rolls up rows into sub-totals based on their  * timestamp values.  *  *<p>Typical granularities are based upon time units (e.g. 1 day or  * 15 minutes). A special granularity, all, combines all rows into a single  * total.  *  *<p>A Granularity instance is immutable, and generates a JSON string as  * part of a Druid query.  *  * @see Granularities  */
+comment|/**  * Defines how to convert RexNode with a given calcite SQL operator to Druid expressions  */
 end_comment
 
 begin_interface
 specifier|public
 interface|interface
-name|Granularity
-extends|extends
-name|DruidJson
+name|DruidSqlOperatorConverter
 block|{
-comment|/** Type of supported periods for granularity. */
-enum|enum
-name|Type
-block|{
-name|ALL
-block|,
-name|YEAR
-block|,
-name|QUARTER
-block|,
-name|MONTH
-block|,
-name|WEEK
-block|,
-name|DAY
-block|,
-name|HOUR
-block|,
-name|MINUTE
-block|,
-name|SECOND
-block|;
-comment|/** Lower-case name, e.g. "all", "minute". */
-specifier|public
-specifier|final
-name|String
-name|lowerName
-init|=
-name|name
-argument_list|()
-operator|.
-name|toLowerCase
-argument_list|(
-name|Locale
-operator|.
-name|ROOT
-argument_list|)
-decl_stmt|;
-block|}
-annotation|@
-name|Nonnull
-name|Type
-name|getType
+comment|/**    * Returns the calcite SQL operator corresponding to Druid operator.    *    * @return operator    */
+name|SqlOperator
+name|calciteOperator
 parameter_list|()
+function_decl|;
+comment|/**    * Translate rexNode to valid Druid expression.    * @param rexNode rexNode to translate to Druid expression    * @param rowType row type associated with rexNode    * @param druidQuery druid query used to figure out configs/fields related like timeZone    *    * @return valid Druid expression or null if it can not convert the rexNode    */
+annotation|@
+name|Nullable
+name|String
+name|toDruidExpression
+parameter_list|(
+name|RexNode
+name|rexNode
+parameter_list|,
+name|RelDataType
+name|rowType
+parameter_list|,
+name|DruidQuery
+name|druidQuery
+parameter_list|)
 function_decl|;
 block|}
 end_interface
 
 begin_comment
-comment|// End Granularity.java
+comment|// End DruidSqlOperatorConverter.java
 end_comment
 
 end_unit
