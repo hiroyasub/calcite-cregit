@@ -109,7 +109,7 @@ name|calcite
 operator|.
 name|interpreter
 operator|.
-name|Interpreter
+name|Compiler
 import|;
 end_import
 
@@ -8653,7 +8653,7 @@ name|querySpec
 decl_stmt|;
 name|DruidQueryNode
 parameter_list|(
-name|Interpreter
+name|Compiler
 name|interpreter
 parameter_list|,
 name|DruidQuery
