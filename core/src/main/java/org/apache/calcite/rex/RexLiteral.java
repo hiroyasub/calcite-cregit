@@ -3467,6 +3467,33 @@ argument_list|()
 argument_list|)
 return|;
 block|}
+if|else if
+condition|(
+name|clazz
+operator|==
+name|Calendar
+operator|.
+name|class
+condition|)
+block|{
+comment|// Note: Nanos are ignored
+return|return
+name|clazz
+operator|.
+name|cast
+argument_list|(
+operator|(
+operator|(
+name|TimestampString
+operator|)
+name|value
+operator|)
+operator|.
+name|toCalendar
+argument_list|()
+argument_list|)
+return|;
+block|}
 break|break;
 case|case
 name|INTERVAL_YEAR

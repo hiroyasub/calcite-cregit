@@ -5151,6 +5151,8 @@ literal|"where ceil(\"time\" to DAY)>= '1997-01-01 00:00:00 UTC'\n"
 operator|+
 literal|"and ceil(\"time\" to DAY)< '1997-09-01 00:00:00 UTC'\n"
 operator|+
+literal|"and \"time\" + INTERVAL '1' DAY> '1997-01-01'\n"
+operator|+
 literal|"group by \"countryName\", ceil(CAST(\"time\" AS TIMESTAMP) TO DAY)\n"
 operator|+
 literal|"order by c limit 5"
@@ -5166,7 +5168,7 @@ literal|"      BindableAggregate(group=[{0, 1}], agg#0=[COUNT()])\n"
 operator|+
 literal|"        BindableProject(countryName=[$1], EXPR$1=[CEIL(CAST($0):TIMESTAMP(0) NOT NULL, FLAG(DAY))])\n"
 operator|+
-literal|"          BindableFilter(condition=[AND(>=(CEIL($0, FLAG(DAY)), 1997-01-01 00:00:00),<(CEIL($0, FLAG(DAY)), 1997-09-01 00:00:00))])\n"
+literal|"          BindableFilter(condition=[AND(>($0, 1996-12-31 00:00:00),<=($0, 1997-08-31 00:00:00),>(+($0, 86400000), CAST('1997-01-01'):TIMESTAMP_WITH_LOCAL_TIME_ZONE(0) NOT NULL))])\n"
 operator|+
 literal|"            DruidQuery(table=[[wiki, wiki]], intervals=[[1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z]], projects=[[$0, $5]])"
 decl_stmt|;
