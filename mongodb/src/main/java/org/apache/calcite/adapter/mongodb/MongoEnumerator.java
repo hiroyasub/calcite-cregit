@@ -603,6 +603,9 @@ name|getValue
 argument_list|()
 argument_list|)
 else|:
+operator|(
+name|Function1
+operator|)
 name|listGetter
 argument_list|(
 name|fields
