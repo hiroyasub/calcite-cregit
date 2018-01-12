@@ -935,7 +935,7 @@ name|druidQuery
 init|=
 literal|"{'queryType':'groupBy',"
 operator|+
-literal|"'dataSource':'wikiticker','granularity':'all',"
+literal|"'dataSource':'wikiticker','granularity':{'type':'all'},"
 operator|+
 literal|"'dimensions':[{'type':'default','dimension':'countryName'}],'limitSpec':{'type':'default'},"
 operator|+
@@ -1023,7 +1023,7 @@ name|druidQuery
 init|=
 literal|"{'queryType':'timeseries',"
 operator|+
-literal|"'dataSource':'wikiticker','descending':false,'granularity':'day',"
+literal|"'dataSource':'wikiticker','descending':false,'granularity':{'type':'period','period':'P1D','timeZone':'UTC'},"
 operator|+
 literal|"'aggregations':[{'type':'longSum','name':'EXPR$0','fieldName':'added'}],"
 operator|+
@@ -1087,7 +1087,7 @@ literal|"'dataSource':'wikiticker',"
 operator|+
 literal|"'intervals':['1900-01-01T00:00:00.000Z/3000-01-01T00:00:00.000Z'],"
 operator|+
-literal|"'columns':['__time'],'granularity':'all',"
+literal|"'columns':['__time'],'granularity':{'type':'all'},"
 operator|+
 literal|"'resultFormat':'compactedList','limit':1}"
 decl_stmt|;
@@ -1148,7 +1148,7 @@ name|druidQuery
 init|=
 literal|"{'queryType':'timeseries',"
 operator|+
-literal|"'dataSource':'wikiticker','descending':false,'granularity':'day',"
+literal|"'dataSource':'wikiticker','descending':false,'granularity':{'type':'period','period':'P1D','timeZone':'UTC'},"
 operator|+
 literal|"'aggregations':[{'type':'longSum','name':'EXPR$1','fieldName':'added'}],"
 operator|+
@@ -1281,7 +1281,7 @@ name|druidQuery
 init|=
 literal|"{'queryType':'timeseries',"
 operator|+
-literal|"'dataSource':'wikiticker','descending':false,'granularity':'second',"
+literal|"'dataSource':'wikiticker','descending':false,'granularity':{'type':'period','period':'PT1S','timeZone':'UTC'},"
 operator|+
 literal|"'filter':{'type':'selector','dimension':'page','value':'Jeremy Corbyn'},"
 operator|+
@@ -1351,7 +1351,7 @@ name|druidQuery
 init|=
 literal|"{'queryType':'groupBy',"
 operator|+
-literal|"'dataSource':'wikiticker','granularity':'all',"
+literal|"'dataSource':'wikiticker','granularity':{'type':'all'},"
 operator|+
 literal|"'dimensions':[{'type':'default','dimension':'countryName'}],'limitSpec':{'type':'default'},"
 operator|+
@@ -1423,7 +1423,7 @@ literal|"'dataSource':'wikiticker',"
 operator|+
 literal|"'intervals':['1900-01-01T00:00:00.000Z/2015-10-12T00:00:00.000Z'],"
 operator|+
-literal|"'columns':['__time'],'granularity':'all',"
+literal|"'columns':['__time'],'granularity':{'type':'all'},"
 operator|+
 literal|"'resultFormat':'compactedList'"
 decl_stmt|;
@@ -1501,7 +1501,7 @@ name|subDruidQuery
 init|=
 literal|"{'queryType':'groupBy','dataSource':'wikiticker',"
 operator|+
-literal|"'granularity':'all','dimensions':[{'type':'extraction',"
+literal|"'granularity':{'type':'all'},'dimensions':[{'type':'extraction',"
 operator|+
 literal|"'dimension':'__time','outputName':'extract',"
 operator|+
@@ -1801,7 +1801,9 @@ specifier|final
 name|String
 name|druidQuery
 init|=
-literal|"{'queryType':'groupBy','dataSource':'foodmart','granularity':'all',"
+literal|"{'queryType':'groupBy','dataSource':'foodmart',"
+operator|+
+literal|"'granularity':{'type':'all'},"
 operator|+
 literal|"'dimensions':[{'type':'default','dimension':'state_province'}],'limitSpec':{'type':'default'},"
 operator|+
@@ -1923,7 +1925,9 @@ specifier|final
 name|String
 name|druidQuery
 init|=
-literal|"{'queryType':'groupBy','dataSource':'foodmart','granularity':'all',"
+literal|"{'queryType':'groupBy','dataSource':'foodmart',"
+operator|+
+literal|"'granularity':{'type':'all'},"
 operator|+
 literal|"'dimensions':[{'type':'default','dimension':'store_sales'},"
 operator|+
@@ -1988,7 +1992,7 @@ name|druidQuery
 init|=
 literal|"{'queryType':'groupBy','dataSource':'foodmart',"
 operator|+
-literal|"'granularity':'all','dimensions':[{'type':'default',"
+literal|"'granularity':{'type':'all'},'dimensions':[{'type':'default',"
 operator|+
 literal|"'dimension':'product_id'}],"
 operator|+
@@ -2050,7 +2054,7 @@ name|druidQuery
 init|=
 literal|"{'queryType':'groupBy','dataSource':'foodmart',"
 operator|+
-literal|"'granularity':'all',"
+literal|"'granularity':{'type':'all'},"
 operator|+
 literal|"'dimensions':[{'type':'default','dimension':'product_id'}],"
 operator|+
@@ -2281,7 +2285,7 @@ name|druidChecker
 argument_list|(
 literal|"{'queryType':'groupBy','dataSource':'foodmart',"
 operator|+
-literal|"'granularity':'all','dimensions':[{'type':'default',"
+literal|"'granularity':{'type':'all'},'dimensions':[{'type':'default',"
 operator|+
 literal|"'dimension':'gender'},{'type':'default',"
 operator|+
@@ -2383,7 +2387,7 @@ literal|"{'queryType':'scan','dataSource':'foodmart',"
 operator|+
 literal|"'intervals':['1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z'],"
 operator|+
-literal|"'columns':['state_province','product_name'],'granularity':'all',"
+literal|"'columns':['state_province','product_name'],'granularity':{'type':'all'},"
 operator|+
 literal|"'resultFormat':'compactedList'}"
 decl_stmt|;
@@ -2427,7 +2431,7 @@ literal|"{'queryType':'scan','dataSource':'foodmart',"
 operator|+
 literal|"'intervals':['1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z'],"
 operator|+
-literal|"'columns':['gender','state_province'],'granularity':'all',"
+literal|"'columns':['gender','state_province'],'granularity':{'type':'all'},"
 operator|+
 literal|"'resultFormat':'compactedList','limit':3"
 decl_stmt|;
@@ -2469,7 +2473,7 @@ name|druidQuery
 init|=
 literal|"{'queryType':'groupBy','dataSource':'foodmart',"
 operator|+
-literal|"'granularity':'all','dimensions':[{'type':'default','dimension':'gender'},"
+literal|"'granularity':{'type':'all'},'dimensions':[{'type':'default','dimension':'gender'},"
 operator|+
 literal|"{'type':'default','dimension':'state_province'}],'limitSpec':{'type':'default',"
 operator|+
@@ -2548,7 +2552,7 @@ name|druidQuery
 init|=
 literal|"{'queryType':'groupBy','dataSource':'foodmart',"
 operator|+
-literal|"'granularity':'all','dimensions':[{'type':'default',"
+literal|"'granularity':{'type':'all'},'dimensions':[{'type':'default',"
 operator|+
 literal|"'dimension':'brand_name'},{'type':'default','dimension':'gender'}],"
 operator|+
@@ -2655,7 +2659,9 @@ specifier|final
 name|String
 name|approxDruid
 init|=
-literal|"{'queryType':'topN','dataSource':'foodmart','granularity':'all',"
+literal|"{'queryType':'topN','dataSource':'foodmart',"
+operator|+
+literal|"'granularity':{'type':'all'},"
 operator|+
 literal|"'dimension':{'type':'default','dimension':'brand_name'},'metric':'S',"
 operator|+
@@ -2671,7 +2677,7 @@ name|exactDruid
 init|=
 literal|"{'queryType':'groupBy','dataSource':'foodmart',"
 operator|+
-literal|"'granularity':'all','dimensions':[{'type':'default',"
+literal|"'granularity':{'type':'all'},'dimensions':[{'type':'default',"
 operator|+
 literal|"'dimension':'brand_name'}],'limitSpec':{'type':'default','limit':3,"
 operator|+
@@ -2838,7 +2844,7 @@ name|druidChecker
 argument_list|(
 literal|"'queryType':'groupBy'"
 argument_list|,
-literal|"'granularity':'all'"
+literal|"'granularity':{'type':'all'}"
 argument_list|,
 literal|"'limitSpec"
 operator|+
@@ -2879,7 +2885,7 @@ name|druidQueryPart1
 init|=
 literal|"{'queryType':'groupBy','dataSource':'foodmart',"
 operator|+
-literal|"'granularity':'all','dimensions':[{'type':'default',"
+literal|"'granularity':{'type':'all'},'dimensions':[{'type':'default',"
 operator|+
 literal|"'dimension':'brand_name'},{'type':'extraction','dimension':'__time',"
 operator|+
@@ -2972,7 +2978,7 @@ name|subDruidQuery
 init|=
 literal|"{'queryType':'groupBy','dataSource':'foodmart',"
 operator|+
-literal|"'granularity':'all','dimensions':[{'type':'default',"
+literal|"'granularity':{'type':'all'},'dimensions':[{'type':'default',"
 operator|+
 literal|"'dimension':'brand_name'},{'type':'extraction','dimension':'__time',"
 operator|+
@@ -3051,7 +3057,7 @@ literal|"{'type':'bound','dimension':'product_id','lower':'1500','lowerStrict':f
 operator|+
 literal|"{'type':'bound','dimension':'product_id','upper':'1502','upperStrict':false,'ordering':'lexicographic'}]},"
 operator|+
-literal|"'columns':['product_name','state_province','product_id'],'granularity':'all',"
+literal|"'columns':['product_name','state_province','product_id'],'granularity':{'type':'all'},"
 operator|+
 literal|"'resultFormat':'compactedList'"
 decl_stmt|;
@@ -3196,7 +3202,7 @@ literal|"{'type':'bound','dimension':'product_id','lower':'1500','lowerStrict':f
 operator|+
 literal|"{'type':'bound','dimension':'product_id','upper':'1502','upperStrict':false,'ordering':'numeric'}]},"
 operator|+
-literal|"'columns':['product_name','state_province','product_id'],'granularity':'all',"
+literal|"'columns':['product_name','state_province','product_id'],'granularity':{'type':'all'},"
 operator|+
 literal|"'resultFormat':'compactedList'"
 decl_stmt|;
@@ -3335,7 +3341,7 @@ literal|"'intervals':['1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z'],"
 operator|+
 literal|"'filter':{'type':'selector','dimension':'product_id','value':'-1'},"
 operator|+
-literal|"'columns':['product_name'],'granularity':'all',"
+literal|"'columns':['product_name'],'granularity':{'type':'all'},"
 operator|+
 literal|"'resultFormat':'compactedList'}"
 decl_stmt|;
@@ -3387,7 +3393,7 @@ literal|"{'queryType':'scan','dataSource':'foodmart',"
 operator|+
 literal|"'intervals':['1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z'],"
 operator|+
-literal|"'columns':['product_id','product_name','state_province'],'granularity':'all',"
+literal|"'columns':['product_id','product_name','state_province'],'granularity':{'type':'all'},"
 operator|+
 literal|"'resultFormat':'compactedList'}"
 decl_stmt|;
@@ -3621,7 +3627,7 @@ name|druidQuery
 init|=
 literal|"{'queryType':'timeseries','dataSource':'foodmart',"
 operator|+
-literal|"'descending':false,'granularity':'all',"
+literal|"'descending':false,'granularity':{'type':'all'},"
 operator|+
 literal|"'aggregations':[{'type':'count','name':'EXPR$0'}],"
 operator|+
@@ -4367,7 +4373,7 @@ name|druidQueryPart1
 init|=
 literal|"{'queryType':'groupBy','dataSource':'foodmart',"
 operator|+
-literal|"'granularity':'all','dimensions':[{'type':'default',"
+literal|"'granularity':{'type':'all'},'dimensions':[{'type':'default',"
 operator|+
 literal|"'dimension':'state_province'},{'type':'extraction','dimension':'__time',"
 operator|+
@@ -4468,7 +4474,7 @@ name|druidQueryType
 init|=
 literal|"{'queryType':'groupBy','dataSource':'foodmart',"
 operator|+
-literal|"'granularity':'all','dimensions'"
+literal|"'granularity':{'type':'all'},'dimensions'"
 decl_stmt|;
 specifier|final
 name|String
@@ -4660,7 +4666,7 @@ name|druidQuery
 init|=
 literal|"{'queryType':'groupBy','dataSource':'foodmart',"
 operator|+
-literal|"'granularity':'all','dimensions':[{'type':'default','dimension':'city'},"
+literal|"'granularity':{'type':'all'},'dimensions':[{'type':'default','dimension':'city'},"
 operator|+
 literal|"{'type':'default','dimension':'state_province'}],"
 operator|+
@@ -4776,7 +4782,9 @@ specifier|final
 name|String
 name|druidQuery
 init|=
-literal|"{'queryType':'groupBy','dataSource':'foodmart','granularity':'all',"
+literal|"{'queryType':'groupBy','dataSource':'foodmart',"
+operator|+
+literal|"'granularity':{'type':'all'},"
 operator|+
 literal|"'dimensions':[{'type':'default','dimension':'state_province'},"
 operator|+
@@ -4903,7 +4911,7 @@ literal|"{'type':'selector','dimension':'state_province','value':'WA'}]},"
 operator|+
 literal|"'columns':['state_province','city','product_name'],"
 operator|+
-literal|"'granularity':'all',"
+literal|"'granularity':{'type':'all'},"
 operator|+
 literal|"'resultFormat':'compactedList'}"
 decl_stmt|;
@@ -5185,7 +5193,7 @@ literal|"'intervals':['1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z'],"
 operator|+
 literal|"'columns':['__time','countryName'],"
 operator|+
-literal|"'granularity':'all',"
+literal|"'granularity':{'type':'all'},"
 operator|+
 literal|"'resultFormat':'compactedList'"
 decl_stmt|;
@@ -5307,7 +5315,7 @@ name|druidQuery
 init|=
 literal|"{'queryType':'groupBy','dataSource':'foodmart',"
 operator|+
-literal|"'granularity':'all','dimensions':[{'type':'extraction',"
+literal|"'granularity':{'type':'all'},'dimensions':[{'type':'extraction',"
 operator|+
 literal|"'dimension':'__time','outputName':'extract',"
 operator|+
@@ -5363,7 +5371,7 @@ name|queryContains
 argument_list|(
 name|druidChecker
 argument_list|(
-literal|",'granularity':'all'"
+literal|",'granularity':{'type':'all'}"
 argument_list|,
 literal|"{'type':'extraction',"
 operator|+
@@ -5412,7 +5420,7 @@ name|queryContains
 argument_list|(
 name|druidChecker
 argument_list|(
-literal|",'granularity':'all'"
+literal|",'granularity':{'type':'all'}"
 argument_list|,
 literal|"{'type':'extraction',"
 operator|+
@@ -5471,7 +5479,7 @@ name|queryContains
 argument_list|(
 name|druidChecker
 argument_list|(
-literal|",'granularity':'all'"
+literal|",'granularity':{'type':'all'}"
 argument_list|,
 literal|"{'type':'extraction',"
 operator|+
@@ -5532,7 +5540,7 @@ name|queryContains
 argument_list|(
 name|druidChecker
 argument_list|(
-literal|",'granularity':'all'"
+literal|",'granularity':{'type':'all'}"
 argument_list|,
 literal|"{'type':'extraction',"
 operator|+
@@ -5593,7 +5601,7 @@ name|queryContains
 argument_list|(
 name|druidChecker
 argument_list|(
-literal|",'granularity':'all'"
+literal|",'granularity':{'type':'all'}"
 argument_list|,
 literal|"{'type':'extraction',"
 operator|+
@@ -5681,7 +5689,7 @@ name|queryContains
 argument_list|(
 name|druidChecker
 argument_list|(
-literal|",'granularity':'all'"
+literal|",'granularity':{'type':'all'}"
 argument_list|,
 literal|"{'type':'extraction',"
 operator|+
@@ -5767,7 +5775,7 @@ name|queryContains
 argument_list|(
 name|druidChecker
 argument_list|(
-literal|",'granularity':'all'"
+literal|",'granularity':{'type':'all'}"
 argument_list|,
 literal|"{'type':'extraction',"
 operator|+
@@ -5827,7 +5835,7 @@ name|druidQuery
 init|=
 literal|"{'queryType':'timeseries','dataSource':'foodmart',"
 operator|+
-literal|"'descending':false,'granularity':'all','filter':{'type':'and',"
+literal|"'descending':false,'granularity':{'type':'all'},'filter':{'type':'and',"
 operator|+
 literal|"'fields':[{'type':'bound','dimension':'cases_per_pallet','lower':'8',"
 operator|+
@@ -5916,7 +5924,7 @@ name|druidChecker
 argument_list|(
 literal|"{'queryType':'groupBy','dataSource':'foodmart',"
 operator|+
-literal|"'granularity':'all','dimensions':[{'type':'default',"
+literal|"'granularity':{'type':'all'},'dimensions':[{'type':'default',"
 operator|+
 literal|"'dimension':'product_id'},{'type':'extraction','dimension':'__time',"
 operator|+
@@ -5991,7 +5999,7 @@ name|druidChecker
 argument_list|(
 literal|"{'queryType':'groupBy','dataSource':'foodmart',"
 operator|+
-literal|"'granularity':'all','dimensions':[{'type':'default',"
+literal|"'granularity':{'type':'all'},'dimensions':[{'type':'default',"
 operator|+
 literal|"'dimension':'product_id'},{'type':'extraction','dimension':'__time',"
 operator|+
@@ -6064,7 +6072,7 @@ name|druidQuery
 init|=
 literal|"{'queryType':'groupBy','dataSource':'foodmart',"
 operator|+
-literal|"'granularity':'all','dimensions':[{'type':'default',"
+literal|"'granularity':{'type':'all'},'dimensions':[{'type':'default',"
 operator|+
 literal|"'dimension':'product_id'},{'type':'extraction','dimension':'__time',"
 operator|+
@@ -6142,7 +6150,7 @@ name|druidChecker
 argument_list|(
 literal|"{'queryType':'groupBy',"
 operator|+
-literal|"'dataSource':'foodmart','granularity':'all',"
+literal|"'dataSource':'foodmart','granularity':{'type':'all'},"
 operator|+
 literal|"'dimensions':[{'type':'default','dimension':'product_id'},"
 operator|+
@@ -6213,7 +6221,7 @@ name|druidChecker
 argument_list|(
 literal|"{'queryType':'groupBy','dataSource':'foodmart',"
 operator|+
-literal|"'granularity':'all','dimensions':[{'type':'extraction',"
+literal|"'granularity':{'type':'all'},'dimensions':[{'type':'extraction',"
 operator|+
 literal|"'dimension':'__time','outputName':'extract_month',"
 operator|+
@@ -6410,7 +6418,7 @@ name|expectedDruidQuery
 init|=
 literal|"{'queryType':'groupBy','dataSource':'foodmart',"
 operator|+
-literal|"'granularity':'all','dimensions':[{'type':'extraction',"
+literal|"'granularity':{'type':'all'},'dimensions':[{'type':'extraction',"
 operator|+
 literal|"'dimension':'__time','outputName':'extract_year',"
 operator|+
@@ -6514,7 +6522,7 @@ name|expectedDruidQuery
 init|=
 literal|"{'queryType':'groupBy','dataSource':'foodmart',"
 operator|+
-literal|"'granularity':'all','dimensions':[{'type':'extraction',"
+literal|"'granularity':{'type':'all'},'dimensions':[{'type':'extraction',"
 operator|+
 literal|"'dimension':'__time','outputName':'extract_year',"
 operator|+
@@ -6840,7 +6848,7 @@ name|druidQuery
 init|=
 literal|"{'queryType':'groupBy','dataSource':'foodmart',"
 operator|+
-literal|"'granularity':'all','dimensions':[{'type':'extraction',"
+literal|"'granularity':{'type':'all'},'dimensions':[{'type':'extraction',"
 operator|+
 literal|"'dimension':'__time','outputName':'extract_week',"
 operator|+
@@ -8738,7 +8746,7 @@ name|expectedQuery
 init|=
 literal|"{'queryType':'timeseries','dataSource':'foodmart','descending':false,"
 operator|+
-literal|"'granularity':'all','filter':{'type':'bound','dimension':'the_year','lower':'1997',"
+literal|"'granularity':{'type':'all'},'filter':{'type':'bound','dimension':'the_year','lower':'1997',"
 operator|+
 literal|"'lowerStrict':false,'ordering':'numeric'},'aggregations':[{'type':'doubleSum','name'"
 operator|+
@@ -8780,7 +8788,7 @@ name|expectedQuery
 init|=
 literal|"{'queryType':'timeseries','dataSource':'foodmart','descending':false,"
 operator|+
-literal|"'granularity':'all','aggregations':[{'type':'doubleSum','name':'EXPR$0','fieldName':"
+literal|"'granularity':{'type':'all'},'aggregations':[{'type':'doubleSum','name':'EXPR$0','fieldName':"
 operator|+
 literal|"'store_sales'}],'intervals':['1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z'],"
 operator|+
@@ -8822,7 +8830,7 @@ name|expectedQuery
 init|=
 literal|"{'queryType':'timeseries','dataSource':'foodmart','descending':false,"
 operator|+
-literal|"'granularity':'all','aggregations':[{'type':'doubleSum','name':'EXPR$0','fieldName':"
+literal|"'granularity':{'type':'all'},'aggregations':[{'type':'doubleSum','name':'EXPR$0','fieldName':"
 operator|+
 literal|"'store_sales'},{'type':'doubleSum','name':'EXPR$1','fieldName':'store_cost'}],"
 operator|+
@@ -8869,7 +8877,7 @@ name|expectedQuery
 init|=
 literal|"{'queryType':'timeseries','dataSource':'foodmart','descending':false,"
 operator|+
-literal|"'granularity':'all','aggregations':[{'type':'doubleSum','name':'EXPR$0','fieldName'"
+literal|"'granularity':{'type':'all'},'aggregations':[{'type':'doubleSum','name':'EXPR$0','fieldName'"
 operator|+
 literal|":'store_sales'},{'type':'filtered','filter':{'type':'selector','dimension':"
 operator|+
@@ -8917,7 +8925,7 @@ name|expectedQuery
 init|=
 literal|"{'queryType':'timeseries','dataSource':'foodmart','descending':false,"
 operator|+
-literal|"'granularity':'all','filter':{'type':'selector','dimension':'store_city',"
+literal|"'granularity':{'type':'all'},'filter':{'type':'selector','dimension':'store_city',"
 operator|+
 literal|"'value':'Seattle'},'aggregations':[{'type':'doubleSum','name':'EXPR$0',"
 operator|+
@@ -9037,7 +9045,7 @@ name|expectedQuery
 init|=
 literal|"{'queryType':'timeseries','dataSource':'foodmart','descending':false,"
 operator|+
-literal|"'granularity':'all','filter':{'type':'selector','dimension':'store_city','value':"
+literal|"'granularity':{'type':'all'},'filter':{'type':'selector','dimension':'store_city','value':"
 operator|+
 literal|"'Seattle'},'aggregations':[{'type':'doubleSum','name':'EXPR$0','fieldName':"
 operator|+
@@ -9084,7 +9092,7 @@ name|expectedQuery
 init|=
 literal|"{'queryType':'timeseries','dataSource':'foodmart','descending':false,"
 operator|+
-literal|"'granularity':'all','aggregations':[{'type':'filtered','filter':{'type':'selector',"
+literal|"'granularity':{'type':'all'},'aggregations':[{'type':'filtered','filter':{'type':'selector',"
 operator|+
 literal|"'dimension':'store_state','value':'CA'},'aggregator':{'type':'doubleSum','name':"
 operator|+
@@ -9128,7 +9136,7 @@ name|expectedQuery
 init|=
 literal|"{'queryType':'timeseries','dataSource':'foodmart','descending':false,"
 operator|+
-literal|"'granularity':'all','filter':{'type':'bound','dimension':'the_year','lower':'1997',"
+literal|"'granularity':{'type':'all'},'filter':{'type':'bound','dimension':'the_year','lower':'1997',"
 operator|+
 literal|"'lowerStrict':false,'ordering':'numeric'},'aggregations':[{'type':'filtered',"
 operator|+
@@ -9180,7 +9188,7 @@ name|expectedQuery
 init|=
 literal|"{'queryType':'timeseries','dataSource':'foodmart','descending':false,"
 operator|+
-literal|"'granularity':'all','filter':{'type':'or','fields':[{'type':'selector','dimension':"
+literal|"'granularity':{'type':'all'},'filter':{'type':'or','fields':[{'type':'selector','dimension':"
 operator|+
 literal|"'store_state','value':'CA'},{'type':'selector','dimension':'store_state',"
 operator|+
@@ -9241,7 +9249,7 @@ name|expectedQuery
 init|=
 literal|"{'queryType':'timeseries','dataSource':'foodmart','descending':false,"
 operator|+
-literal|"'granularity':'all','filter':{'type':'and','fields':[{'type':'or','fields':[{'type':"
+literal|"'granularity':{'type':'all'},'filter':{'type':'and','fields':[{'type':'or','fields':[{'type':"
 operator|+
 literal|"'selector','dimension':'store_state','value':'CA'},{'type':'selector','dimension':"
 operator|+
@@ -9315,7 +9323,7 @@ name|expectedQuery
 init|=
 literal|"{'queryType':'timeseries','dataSource':'foodmart','descending':false,"
 operator|+
-literal|"'granularity':'all','filter':{'type':'and','fields':[{'type':'selector','dimension':"
+literal|"'granularity':{'type':'all'},'filter':{'type':'and','fields':[{'type':'selector','dimension':"
 operator|+
 literal|"'store_state','value':'CA'},{'type':'selector','dimension':'brand_name','value':"
 operator|+
@@ -10390,7 +10398,7 @@ name|druidChecker
 argument_list|(
 literal|"{'queryType':'timeseries','dataSource':"
 operator|+
-literal|"'foodmart','descending':false,'granularity':'all','aggregations':[{'type':"
+literal|"'foodmart','descending':false,'granularity':{'type':'all'},'aggregations':[{'type':"
 operator|+
 literal|"'thetaSketch','name':'EXPR$0','fieldName':'customer_id_ts'}],"
 operator|+
@@ -10716,7 +10724,7 @@ name|druidChecker
 argument_list|(
 literal|"{'queryType':'groupBy','dataSource':'foodmart',"
 operator|+
-literal|"'granularity':'all','dimensions':[{'type':'default','dimension':"
+literal|"'granularity':{'type':'all'},'dimensions':[{'type':'default','dimension':"
 operator|+
 literal|"'customer_id'}],'limitSpec':{'type':'default'},'aggregations':[{"
 operator|+
@@ -10763,7 +10771,7 @@ literal|"'isAnonymous','isMinor','isNew','isRobot','isUnpatrolled','metroCode',"
 operator|+
 literal|"'namespace','page','regionIsoCode','regionName','count','added',"
 operator|+
-literal|"'deleted','delta'],'granularity':'all',"
+literal|"'deleted','delta'],'granularity':{'type':'all'},"
 operator|+
 literal|"'resultFormat':'compactedList','limit':5"
 argument_list|)
@@ -10840,7 +10848,7 @@ specifier|final
 name|String
 name|druidQuery
 init|=
-literal|"{'queryType':'timeseries','dataSource':'foodmart','descending':false,'granularity':'all',"
+literal|"{'queryType':'timeseries','dataSource':'foodmart','descending':false,'granularity':{'type':'all'},"
 operator|+
 literal|"'filter':{'type':'bound','dimension':'product_id','lower':'1016.0',"
 operator|+
@@ -10933,7 +10941,7 @@ specifier|final
 name|String
 name|druidQuery
 init|=
-literal|"{'queryType':'timeseries','dataSource':'foodmart','descending':false,'granularity':'all',"
+literal|"{'queryType':'timeseries','dataSource':'foodmart','descending':false,'granularity':{'type':'all'},"
 operator|+
 literal|"'filter':{'type':'or','fields':[{'type':'bound','dimension':'product_id','lower':'1016.0',"
 operator|+
@@ -11018,7 +11026,7 @@ specifier|final
 name|String
 name|druidQuery
 init|=
-literal|"{'queryType':'timeseries','dataSource':'foodmart','descending':false,'granularity':'all',"
+literal|"{'queryType':'timeseries','dataSource':'foodmart','descending':false,'granularity':{'type':'all'},"
 operator|+
 literal|"'filter':{'type':'selector','dimension':'product_id','value':null},"
 operator|+
@@ -11075,7 +11083,7 @@ specifier|final
 name|String
 name|druidQuery
 init|=
-literal|"{'queryType':'timeseries','dataSource':'foodmart','descending':false,'granularity':'all',"
+literal|"{'queryType':'timeseries','dataSource':'foodmart','descending':false,'granularity':{'type':'all'},"
 operator|+
 literal|"'filter':{'type':'not','field':{'type':'selector','dimension':'product_id','value':null}},"
 operator|+
@@ -11146,7 +11154,9 @@ specifier|final
 name|String
 name|druidQueryPart3
 init|=
-literal|",\"granularity\":\"month\",\"timeZone\":\"UTC\","
+literal|",\"granularity\":{\"type\":\"period\",\"period\":\"P1M\","
+operator|+
+literal|"\"timeZone\":\"UTC\"},\"timeZone\":\"UTC\","
 operator|+
 literal|"\"locale\":\"en-US\"}},{\"type\":\"bound\",\"dimension\":\"__time\""
 operator|+
@@ -11158,7 +11168,7 @@ specifier|final
 name|String
 name|druidQueryPart4
 init|=
-literal|"\"columns\":[\"__time\"],\"granularity\":\"all\""
+literal|"\"columns\":[\"__time\"],\"granularity\":{\"type\":\"all\"}"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -11222,9 +11232,11 @@ specifier|final
 name|String
 name|druidQueryPart2
 init|=
-literal|"\"granularity\":\"month\",\"timeZone\":\"UTC\","
+literal|"\"granularity\":{\"type\":\"period\",\"period\":\"P1M\","
 operator|+
-literal|"\"locale\":\"en-US\"}},\"columns\":[\"__time\"],\"granularity\":\"all\""
+literal|"\"timeZone\":\"UTC\"},\"timeZone\":\"UTC\","
+operator|+
+literal|"\"locale\":\"en-US\"}},\"columns\":[\"__time\"],\"granularity\":{\"type\":\"all\"}"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -11253,7 +11265,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testTmeWithFilterOnFloorOnTimeAndCastToTimestamp
+name|testTimeWithFilterOnFloorOnTimeAndCastToTimestamp
 parameter_list|()
 block|{
 specifier|final
@@ -11282,9 +11294,11 @@ specifier|final
 name|String
 name|druidQueryPart2
 init|=
-literal|"\"granularity\":\"month\",\"timeZone\":\"UTC\","
+literal|"\"granularity\":{\"type\":\"period\",\"period\":\"P1M\","
 operator|+
-literal|"\"locale\":\"en-US\"}},\"columns\":[\"__time\"],\"granularity\":\"all\""
+literal|"\"timeZone\":\"UTC\"},\"timeZone\":\"UTC\","
+operator|+
+literal|"\"locale\":\"en-US\"}},\"columns\":[\"__time\"],\"granularity\":{\"type\":\"all\"}"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -11313,16 +11327,16 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testTmeWithFilterOnFloorOnTimeWithTimezone
+name|testTimeWithFilterOnFloorOnTimeWithTimezone
 parameter_list|()
 block|{
 specifier|final
 name|String
 name|sql
 init|=
-literal|"Select cast(floor(\"timestamp\" to MONTH) as timestamp) as t from "
+literal|"Select cast(\"__time\" as timestamp) as t from "
 operator|+
-literal|"\"foodmart\" where floor(\"timestamp\" to MONTH)>= cast('1997-05-01 00:00:00'"
+literal|"\"wikiticker\" where floor(\"__time\" to HOUR)>= cast('2015-09-12 08:00:00'"
 operator|+
 literal|" as TIMESTAMP) order by t limit 1"
 decl_stmt|;
@@ -11332,7 +11346,7 @@ name|druidQueryPart1
 init|=
 literal|"filter\":{\"type\":\"bound\",\"dimension\":\"__time\","
 operator|+
-literal|"\"lower\":\"1997-05-01T00:00:00.000Z\",\"lowerStrict\":false,"
+literal|"\"lower\":\"2015-09-12T08:00:00.000Z\",\"lowerStrict\":false,"
 operator|+
 literal|"\"ordering\":\"lexicographic\",\"extractionFn\":{\"type\":\"timeFormat\","
 operator|+
@@ -11342,9 +11356,11 @@ specifier|final
 name|String
 name|druidQueryPart2
 init|=
-literal|"\"granularity\":\"month\",\"timeZone\":\"IST\","
+literal|"\"granularity\":{\"type\":\"period\",\"period\":\"PT1H\","
 operator|+
-literal|"\"locale\":\"en-US\"}},\"columns\":[\"__time\"],\"granularity\":\"all\""
+literal|"\"timeZone\":\"IST\"},\"timeZone\":\"IST\","
+operator|+
+literal|"\"locale\":\"en-US\"}},\"columns\":[\"__time\"],\"granularity\":{\"type\":\"all\"}"
 decl_stmt|;
 name|CalciteAssert
 operator|.
@@ -11365,7 +11381,7 @@ name|of
 argument_list|(
 literal|"model"
 argument_list|,
-name|FOODMART
+name|WIKI_AUTO2
 operator|.
 name|getPath
 argument_list|()
@@ -11401,12 +11417,10 @@ argument_list|,
 name|druidQueryPart2
 argument_list|)
 argument_list|)
-comment|// NOTE: this return value is not as expected
-comment|// see https://issues.apache.org/jira/browse/CALCITE-2107
 operator|.
 name|returnsOrdered
 argument_list|(
-literal|"T=1997-05-01 05:30:00"
+literal|"T=2015-09-12 08:00:02"
 argument_list|)
 expr_stmt|;
 block|}
@@ -11414,18 +11428,20 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testTmeWithFilterOnFloorOnTimeWithTimezoneConversion
+name|testTimeWithFilterOnFloorOnTimeWithTimezoneConversion
 parameter_list|()
 block|{
 specifier|final
 name|String
 name|sql
 init|=
-literal|"Select cast(floor(\"timestamp\" to MONTH) as timestamp) as t from "
+literal|"Select cast(\"__time\" as timestamp) as t, \"countryName\" as s, "
 operator|+
-literal|"\"foodmart\" where floor(\"timestamp\" to MONTH)>= '1997-04-30 18:30:00 UTC' order by t"
+literal|"count(*) as c from \"wikiticker\" where floor(\"__time\" to HOUR)"
 operator|+
-literal|" limit 1"
+literal|">= '2015-09-12 08:00:00 IST' group by cast(\"__time\" as timestamp), \"countryName\""
+operator|+
+literal|" order by t limit 4"
 decl_stmt|;
 specifier|final
 name|String
@@ -11433,7 +11449,7 @@ name|druidQueryPart1
 init|=
 literal|"filter\":{\"type\":\"bound\",\"dimension\":\"__time\","
 operator|+
-literal|"\"lower\":\"1997-05-01T00:00:00.000Z\",\"lowerStrict\":false,"
+literal|"\"lower\":\"2015-09-12T08:00:00.000Z\",\"lowerStrict\":false,"
 operator|+
 literal|"\"ordering\":\"lexicographic\",\"extractionFn\":{\"type\":\"timeFormat\","
 operator|+
@@ -11443,9 +11459,13 @@ specifier|final
 name|String
 name|druidQueryPart2
 init|=
-literal|"\"granularity\":\"month\",\"timeZone\":\"IST\","
+literal|"\"granularity\":{\"type\":\"period\",\"period\":\"PT1H\","
 operator|+
-literal|"\"locale\":\"en-US\"}},\"columns\":[\"__time\"],\"granularity\":\"all\""
+literal|"\"timeZone\":\"IST\"},\"timeZone\":\"IST\","
+operator|+
+literal|"\"locale\":\"en-US\"}},\"columns\":[\"__time\",\"countryName\"],"
+operator|+
+literal|"\"granularity\":{\"type\":\"all\"}"
 decl_stmt|;
 name|CalciteAssert
 operator|.
@@ -11466,7 +11486,7 @@ name|of
 argument_list|(
 literal|"model"
 argument_list|,
-name|FOODMART
+name|WIKI_AUTO2
 operator|.
 name|getPath
 argument_list|()
@@ -11502,12 +11522,16 @@ argument_list|,
 name|druidQueryPart2
 argument_list|)
 argument_list|)
-comment|// NOTE: this return value is not as expected
-comment|// see https://issues.apache.org/jira/browse/CALCITE-2107
 operator|.
 name|returnsOrdered
 argument_list|(
-literal|"T=1997-05-01 05:30:00"
+literal|"T=2015-09-12 08:00:02; S=null; C=1"
+argument_list|,
+literal|"T=2015-09-12 08:00:04; S=null; C=1"
+argument_list|,
+literal|"T=2015-09-12 08:00:05; S=null; C=1"
+argument_list|,
+literal|"T=2015-09-12 08:00:07; S=null; C=1"
 argument_list|)
 expr_stmt|;
 block|}

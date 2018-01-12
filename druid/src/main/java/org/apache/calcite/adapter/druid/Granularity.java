@@ -27,14 +27,32 @@ name|Locale
 import|;
 end_import
 
+begin_import
+import|import
+name|javax
+operator|.
+name|annotation
+operator|.
+name|Nonnull
+import|;
+end_import
+
 begin_comment
-comment|/** Granularity of a Druid query. */
+comment|/**  * A strategy by which Druid rolls up rows into sub-totals based on their  * timestamp values.  *  *<p>Typical granularities are based upon time units (e.g. 1 day or  * 15 minutes). A special granularity, all, combines all rows into a single  * total.  *  *<p>A Granularity instance is immutable, and generates a JSON string as  * part of a Druid query.  *  * @see Granularities  */
 end_comment
 
-begin_enum
+begin_interface
 specifier|public
-enum|enum
+interface|interface
 name|Granularity
+extends|extends
+name|DruidQuery
+operator|.
+name|Json
+block|{
+comment|/** Type of supported periods for granularity. */
+enum|enum
+name|Type
 block|{
 name|ALL
 block|,
@@ -53,14 +71,12 @@ block|,
 name|MINUTE
 block|,
 name|SECOND
-block|,
-name|NONE
 block|;
-comment|/** JSON attribute value in a Druid query. */
+comment|/** Lower-case name, e.g. "all", "minute". */
 specifier|public
 specifier|final
 name|String
-name|value
+name|lowerName
 init|=
 name|name
 argument_list|()
@@ -73,7 +89,14 @@ name|ROOT
 argument_list|)
 decl_stmt|;
 block|}
-end_enum
+annotation|@
+name|Nonnull
+name|Type
+name|getType
+parameter_list|()
+function_decl|;
+block|}
+end_interface
 
 begin_comment
 comment|// End Granularity.java
