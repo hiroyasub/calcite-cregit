@@ -2690,6 +2690,9 @@ name|n
 range|:
 name|Ord
 operator|.
+expr|<
+name|Node
+operator|>
 name|zip
 argument_list|(
 name|list

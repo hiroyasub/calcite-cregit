@@ -7601,6 +7601,107 @@ literal|"C=3\n"
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1188">[CALCITE-1188]    * NullPointerException when EXTRACT is applied to NULL date field</a>.    * The problem occurs when EXTRACT appears in both SELECT and WHERE ... IN    * clauses, the latter with at least two values. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testExtractOnNullDateField
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select\n"
+operator|+
+literal|"  extract(year from \"end_date\"), \"hire_date\", \"birth_date\"\n"
+operator|+
+literal|"from \"foodmart\".\"employee\"\n"
+operator|+
+literal|"where extract(year from \"end_date\") in (1994, 1995, 1996)\n"
+operator|+
+literal|"group by\n"
+operator|+
+literal|"  extract(year from \"end_date\"), \"hire_date\", \"birth_date\"\n"
+decl_stmt|;
+specifier|final
+name|String
+name|sql2
+init|=
+name|sql
+operator|+
+literal|"\n"
+operator|+
+literal|"limit 10000"
+decl_stmt|;
+specifier|final
+name|String
+name|sql3
+init|=
+literal|"select *\n"
+operator|+
+literal|"from \"foodmart\".\"employee\"\n"
+operator|+
+literal|"where extract(year from \"end_date\") in (1994, 1995, 1996)"
+decl_stmt|;
+specifier|final
+name|CalciteAssert
+operator|.
+name|AssertThat
+name|with
+init|=
+name|CalciteAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|CalciteAssert
+operator|.
+name|Config
+operator|.
+name|FOODMART_CLONE
+argument_list|)
+decl_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|""
+argument_list|)
+expr_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+name|sql2
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|""
+argument_list|)
+expr_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+name|sql3
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|""
+argument_list|)
+expr_stmt|;
+block|}
 annotation|@
 name|Test
 specifier|public
