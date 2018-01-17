@@ -5713,7 +5713,7 @@ name|CalciteAssert
 operator|.
 name|checkResultContains
 argument_list|(
-literal|"EnumerableCalc(expr#0..1=[{inputs}], empid=[$t0])\n"
+literal|"EnumerableCalc(expr#0..1=[{inputs}], empid0=[$t0])\n"
 operator|+
 literal|"  EnumerableTableScan(table=[[hr, m0]])"
 argument_list|)
@@ -5751,7 +5751,7 @@ name|CalciteAssert
 operator|.
 name|checkResultContains
 argument_list|(
-literal|"EnumerableCalc(expr#0..1=[{inputs}], empid=[$t0])\n"
+literal|"EnumerableCalc(expr#0..1=[{inputs}], empid0=[$t0])\n"
 operator|+
 literal|"  EnumerableTableScan(table=[[hr, m0]])"
 argument_list|)
@@ -5813,6 +5813,40 @@ operator|+
 literal|"where \"emps\".\"empid\" = 1"
 argument_list|,
 name|HR_FKUK_MODEL
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testJoinMaterializationUKFK9
+parameter_list|()
+block|{
+name|checkMaterialize
+argument_list|(
+literal|"select * from \"emps\"\n"
+operator|+
+literal|"join \"dependents\" using (\"empid\")"
+argument_list|,
+literal|"select \"emps\".\"empid\", \"dependents\".\"empid\", \"emps\".\"deptno\"\n"
+operator|+
+literal|"from \"emps\"\n"
+operator|+
+literal|"join \"dependents\" using (\"empid\")"
+operator|+
+literal|"join \"depts\" \"a\" on (\"emps\".\"deptno\"=\"a\".\"deptno\")\n"
+operator|+
+literal|"where \"emps\".\"name\" = 'Bill'"
+argument_list|,
+name|HR_FKUK_MODEL
+argument_list|,
+name|CalciteAssert
+operator|.
+name|checkResultContains
+argument_list|(
+literal|"EnumerableTableScan(table=[[hr, m0]])"
+argument_list|)
 argument_list|)
 expr_stmt|;
 block|}

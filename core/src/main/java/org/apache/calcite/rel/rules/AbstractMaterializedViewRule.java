@@ -3885,10 +3885,18 @@ argument_list|()
 operator|==
 literal|1
 assert|;
+comment|// Rewrite expr. Take first element from the corresponding equivalence class
+comment|// (no need to swap the table references following the table mapping)
 name|exprsLineage
 operator|.
 name|add
 argument_list|(
+name|RexUtil
+operator|.
+name|swapColumnReferences
+argument_list|(
+name|rexBuilder
+argument_list|,
 name|s
 operator|.
 name|iterator
@@ -3896,6 +3904,12 @@ argument_list|()
 operator|.
 name|next
 argument_list|()
+argument_list|,
+name|queryEC
+operator|.
+name|getEquivalenceClassesMap
+argument_list|()
+argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
