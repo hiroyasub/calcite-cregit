@@ -4049,7 +4049,7 @@ name|timeUnit
 argument_list|)
 return|;
 block|}
-comment|/**      * Commputes floor of given calendar object to provided timeunit      * @return returns a copy of calendar, floored to the given timeunit      */
+comment|/**      * Computes floor of a calendar to a given time unit.      *      * @return returns a copy of calendar, floored to the given time unit      */
 specifier|private
 name|Calendar
 name|floor
@@ -4097,8 +4097,7 @@ operator|.
 name|JANUARY
 argument_list|)
 expr_stmt|;
-comment|// Ignore checkstyle failure for Fall through from previous branch of the switch statement.
-comment|// CHECKSTYLE: IGNORE 10
+comment|// fall through; need to zero out lower time units
 case|case
 name|MONTH
 case|:
@@ -4118,6 +4117,7 @@ argument_list|,
 literal|1
 argument_list|)
 expr_stmt|;
+comment|// fall through; need to zero out lower time units
 case|case
 name|DAY
 case|:
@@ -4137,6 +4137,7 @@ argument_list|,
 literal|0
 argument_list|)
 expr_stmt|;
+comment|// fall through; need to zero out lower time units
 case|case
 name|HOUR
 case|:
@@ -4156,6 +4157,7 @@ argument_list|,
 literal|0
 argument_list|)
 expr_stmt|;
+comment|// fall through; need to zero out lower time units
 case|case
 name|MINUTE
 case|:
@@ -4175,6 +4177,7 @@ argument_list|,
 literal|0
 argument_list|)
 expr_stmt|;
+comment|// fall through; need to zero out lower time units
 case|case
 name|SECOND
 case|:
