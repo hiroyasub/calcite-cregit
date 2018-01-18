@@ -1460,6 +1460,11 @@ argument_list|()
 operator|.
 name|getRowType
 argument_list|()
+argument_list|,
+name|e
+operator|.
+name|getRowType
+argument_list|()
 argument_list|)
 condition|)
 block|{

@@ -7701,6 +7701,105 @@ name|expectedOracle
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2118">[CALCITE-2118]    * RelToSqlConverter should only generate "*" if field names match</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testPreserveAlias
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select \"warehouse_class_id\" as \"id\",\n"
+operator|+
+literal|" \"description\"\n"
+operator|+
+literal|"from \"warehouse_class\""
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|""
+operator|+
+literal|"SELECT \"warehouse_class_id\" AS \"id\", \"description\"\n"
+operator|+
+literal|"FROM \"foodmart\".\"warehouse_class\""
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+specifier|final
+name|String
+name|sql2
+init|=
+literal|"select \"warehouse_class_id\", \"description\"\n"
+operator|+
+literal|"from \"warehouse_class\""
+decl_stmt|;
+specifier|final
+name|String
+name|expected2
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM \"foodmart\".\"warehouse_class\""
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql2
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected2
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testPreservePermutation
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select \"description\", \"warehouse_class_id\"\n"
+operator|+
+literal|"from \"warehouse_class\""
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT \"description\", \"warehouse_class_id\"\n"
+operator|+
+literal|"FROM \"foodmart\".\"warehouse_class\""
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
 comment|/** Fluid interface to run tests. */
 specifier|private
 specifier|static
