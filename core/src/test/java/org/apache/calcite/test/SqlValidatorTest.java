@@ -10632,6 +10632,84 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testAggregateInsideOverClause
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select ^empno^,\n"
+operator|+
+literal|"  sum(empno) over (partition by min(sal)) empno_sum\n"
+operator|+
+literal|"from emp"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Expression 'EMPNO' is not being grouped"
+argument_list|)
+expr_stmt|;
+specifier|final
+name|String
+name|sql2
+init|=
+literal|"select ^empno^,\n"
+operator|+
+literal|"  sum(empno) over (partition by min(sal)) empno_sum\n"
+operator|+
+literal|"from emp\n"
+operator|+
+literal|"group by empno"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql2
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testAggregateInsideOverClause2
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select ^empno^,\n"
+operator|+
+literal|"  sum(empno) over ()\n"
+operator|+
+literal|"  + sum(empno) over (partition by min(sal)) empno_sum\n"
+operator|+
+literal|"from emp"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Expression 'EMPNO' is not being grouped"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testWindowFunctions
 parameter_list|()
 block|{
