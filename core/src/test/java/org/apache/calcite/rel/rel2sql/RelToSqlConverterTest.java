@@ -7800,6 +7800,68 @@ name|expected
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testFieldNamesWithAggregateSubQuery
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|query
+init|=
+literal|"select mytable.\"city\",\n"
+operator|+
+literal|"  sum(mytable.\"store_sales\") as \"my-alias\"\n"
+operator|+
+literal|"from (select c.\"city\", s.\"store_sales\"\n"
+operator|+
+literal|"  from \"sales_fact_1997\" as s\n"
+operator|+
+literal|"    join \"customer\" as c using (\"customer_id\")\n"
+operator|+
+literal|"  group by c.\"city\", s.\"store_sales\") AS mytable\n"
+operator|+
+literal|"group by mytable.\"city\""
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT \"t0\".\"city\","
+operator|+
+literal|" SUM(\"t0\".\"store_sales\") AS \"my-alias\"\n"
+operator|+
+literal|"FROM (SELECT \"customer\".\"city\","
+operator|+
+literal|" \"sales_fact_1997\".\"store_sales\"\n"
+operator|+
+literal|"FROM \"foodmart\".\"sales_fact_1997\"\n"
+operator|+
+literal|"INNER JOIN \"foodmart\".\"customer\""
+operator|+
+literal|" ON \"sales_fact_1997\".\"customer_id\""
+operator|+
+literal|" = \"customer\".\"customer_id\"\n"
+operator|+
+literal|"GROUP BY \"customer\".\"city\","
+operator|+
+literal|" \"sales_fact_1997\".\"store_sales\") AS \"t0\"\n"
+operator|+
+literal|"GROUP BY \"t0\".\"city\""
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
 comment|/** Fluid interface to run tests. */
 specifier|private
 specifier|static
