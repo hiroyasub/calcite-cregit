@@ -1313,13 +1313,98 @@ name|void
 name|testGroupingSets
 parameter_list|()
 block|{
+specifier|final
+name|String
 name|sql
-argument_list|(
+init|=
 literal|"select deptno, ename, sum(sal) from emp\n"
 operator|+
 literal|"group by grouping sets ((deptno), (ename, deptno))\n"
 operator|+
 literal|"order by 2"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2147">[CALCITE-2147]    * Incorrect plan in with with ROLLUP inside GROUPING SETS</a>.    *    *<p>Equivalence example:    *<blockquote>GROUP BY GROUPING SETS (ROLLUP(A, B), CUBE(C,D))</blockquote>    *<p>is equal to    *<blockquote>GROUP BY GROUPING SETS ((A,B), (A), (),    * (C,D), (C), (D) )</blockquote>    */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testGroupingSetsWithRollup
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select deptno, ename, sum(sal) from emp\n"
+operator|+
+literal|"group by grouping sets ( rollup(deptno), (ename, deptno))\n"
+operator|+
+literal|"order by 2"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testGroupingSetsWithCube
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select deptno, ename, sum(sal) from emp\n"
+operator|+
+literal|"group by grouping sets ( (deptno), CUBE(ename, deptno))\n"
+operator|+
+literal|"order by 2"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testGroupingSetsWithRollupCube
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select deptno, ename, sum(sal) from emp\n"
+operator|+
+literal|"group by grouping sets ( CUBE(deptno), ROLLUP(ename, deptno))\n"
+operator|+
+literal|"order by 2"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
 argument_list|)
 operator|.
 name|ok
