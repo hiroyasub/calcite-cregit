@@ -7594,6 +7594,30 @@ literal|"select extract(month from interval '2-3' year to month) as c \n"
 operator|+
 literal|"from \"foodmart\".\"employee\" where \"employee_id\"=1"
 argument_list|)
+comment|// disable for MySQL, H2; cannot handle EXTRACT yet
+operator|.
+name|enable
+argument_list|(
+name|CalciteAssert
+operator|.
+name|DB
+operator|!=
+name|CalciteAssert
+operator|.
+name|DatabaseInstance
+operator|.
+name|MYSQL
+operator|&&
+name|CalciteAssert
+operator|.
+name|DB
+operator|!=
+name|CalciteAssert
+operator|.
+name|DatabaseInstance
+operator|.
+name|H2
+argument_list|)
 operator|.
 name|returns
 argument_list|(
@@ -7728,6 +7752,31 @@ argument_list|(
 literal|"select floor(timestamp '2011-9-14 19:27:23' to month) as c \n"
 operator|+
 literal|"from \"foodmart\".\"employee\" limit 1"
+argument_list|)
+comment|// disable for MySQL; birth_date suffers timezone shift
+comment|// disable for H2; Calcite generates incorrect FLOOR syntax
+operator|.
+name|enable
+argument_list|(
+name|CalciteAssert
+operator|.
+name|DB
+operator|!=
+name|CalciteAssert
+operator|.
+name|DatabaseInstance
+operator|.
+name|MYSQL
+operator|&&
+name|CalciteAssert
+operator|.
+name|DB
+operator|!=
+name|CalciteAssert
+operator|.
+name|DatabaseInstance
+operator|.
+name|H2
 argument_list|)
 operator|.
 name|returns
@@ -7872,6 +7921,20 @@ operator|+
 literal|"  join \"foodmart\".\"employee\" as e2 on e1.\"first_name\" = e2.\"last_name\"\n"
 operator|+
 literal|"order by e1.\"last_name\" limit 3"
+argument_list|)
+comment|// disable for H2; gives "Unexpected code path" internal error
+operator|.
+name|enable
+argument_list|(
+name|CalciteAssert
+operator|.
+name|DB
+operator|!=
+name|CalciteAssert
+operator|.
+name|DatabaseInstance
+operator|.
+name|H2
 argument_list|)
 operator|.
 name|returns
@@ -10907,6 +10970,20 @@ operator|.
 name|query
 argument_list|(
 literal|"select \"hire_date\", \"end_date\", \"birth_date\" from \"foodmart\".\"employee\" where \"employee_id\" = 1"
+argument_list|)
+comment|// disable for MySQL; birth_date suffers timezone shift
+operator|.
+name|enable
+argument_list|(
+name|CalciteAssert
+operator|.
+name|DB
+operator|!=
+name|CalciteAssert
+operator|.
+name|DatabaseInstance
+operator|.
+name|MYSQL
 argument_list|)
 operator|.
 name|returns2

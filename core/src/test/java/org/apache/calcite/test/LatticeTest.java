@@ -1850,6 +1850,31 @@ name|enableMaterializations
 argument_list|(
 literal|true
 argument_list|)
+comment|// disable for MySQL; times out running star-join query
+comment|// disable for H2; it thinks our generated SQL has invalid syntax
+operator|.
+name|enable
+argument_list|(
+name|CalciteAssert
+operator|.
+name|DB
+operator|!=
+name|CalciteAssert
+operator|.
+name|DatabaseInstance
+operator|.
+name|MYSQL
+operator|&&
+name|CalciteAssert
+operator|.
+name|DB
+operator|!=
+name|CalciteAssert
+operator|.
+name|DatabaseInstance
+operator|.
+name|H2
+argument_list|)
 operator|.
 name|explainContains
 argument_list|(
@@ -2686,6 +2711,32 @@ operator|new
 name|AtomicInteger
 argument_list|()
 decl_stmt|;
+comment|// disable for MySQL; times out running star-join query
+comment|// disable for H2; it thinks our generated SQL has invalid syntax
+specifier|final
+name|boolean
+name|enabled
+init|=
+name|CalciteAssert
+operator|.
+name|DB
+operator|!=
+name|CalciteAssert
+operator|.
+name|DatabaseInstance
+operator|.
+name|MYSQL
+operator|&&
+name|CalciteAssert
+operator|.
+name|DB
+operator|!=
+name|CalciteAssert
+operator|.
+name|DatabaseInstance
+operator|.
+name|H2
+decl_stmt|;
 name|modelWithLattices
 argument_list|(
 name|SALES_LATTICE
@@ -2707,6 +2758,11 @@ argument_list|(
 literal|true
 argument_list|)
 operator|.
+name|enable
+argument_list|(
+name|enabled
+argument_list|)
+operator|.
 name|substitutionMatches
 argument_list|(
 name|CalciteAssert
@@ -2723,6 +2779,11 @@ name|counter
 argument_list|)
 argument_list|)
 expr_stmt|;
+if|if
+condition|(
+name|enabled
+condition|)
+block|{
 name|assertThat
 argument_list|(
 name|counter
@@ -2730,12 +2791,13 @@ operator|.
 name|intValue
 argument_list|()
 argument_list|,
-name|equalTo
+name|is
 argument_list|(
 literal|1
 argument_list|)
 argument_list|)
 expr_stmt|;
+block|}
 block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-787">[CALCITE-787]    * Star table wrongly assigned to materialized view</a>. */
 annotation|@
