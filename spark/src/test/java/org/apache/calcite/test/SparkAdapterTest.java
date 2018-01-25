@@ -126,9 +126,9 @@ argument_list|)
 operator|.
 name|explainContains
 argument_list|(
-literal|"SparkToEnumerableConverter\n"
+literal|"PLAN="
 operator|+
-literal|"  SparkValues(tuples=[[{ 1, 'a' }, { 2, 'b' }]])"
+literal|"EnumerableValues(tuples=[[{ 1, 'a' }, { 2, 'b' }]])"
 argument_list|)
 expr_stmt|;
 block|}
@@ -172,11 +172,11 @@ argument_list|)
 operator|.
 name|explainContains
 argument_list|(
-literal|"PLAN=SparkToEnumerableConverter\n"
+literal|"PLAN="
 operator|+
-literal|"  SparkCalc(expr#0..1=[{inputs}], expr#2=[2], expr#3=[<($t0, $t2)], proj#0..1=[{exprs}], $condition=[$t3])\n"
+literal|"EnumerableCalc(expr#0..1=[{inputs}], expr#2=[2], expr#3=[<($t0, $t2)], proj#0..1=[{exprs}], $condition=[$t3])\n"
 operator|+
-literal|"    SparkValues(tuples=[[{ 1, 'a' }, { 2, 'b' }]])\n"
+literal|"  EnumerableValues(tuples=[[{ 1, 'a' }, { 2, 'b' }]])\n"
 argument_list|)
 expr_stmt|;
 block|}

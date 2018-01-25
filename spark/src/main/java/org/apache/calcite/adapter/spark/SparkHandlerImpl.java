@@ -315,7 +315,7 @@ init|=
 operator|new
 name|File
 argument_list|(
-literal|"spark/target/classes"
+literal|"target/classes"
 argument_list|)
 decl_stmt|;
 comment|/** Creates a SparkHandlerImpl. */
@@ -466,6 +466,9 @@ name|SparkRel
 operator|.
 name|CONVENTION
 argument_list|)
+operator|.
+name|simplify
+argument_list|()
 argument_list|)
 decl_stmt|;
 return|return
@@ -478,6 +481,9 @@ argument_list|,
 name|rootRel
 operator|.
 name|getTraitSet
+argument_list|()
+operator|.
+name|simplify
 argument_list|()
 argument_list|)
 return|;
