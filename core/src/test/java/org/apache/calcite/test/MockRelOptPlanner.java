@@ -39,6 +39,20 @@ name|calcite
 operator|.
 name|plan
 operator|.
+name|Context
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
 name|RelOptCostImpl
 import|;
 end_import
@@ -257,7 +271,10 @@ comment|//~ Methods ------------------------------------------------------------
 comment|/** Creates MockRelOptPlanner. */
 specifier|public
 name|MockRelOptPlanner
-parameter_list|()
+parameter_list|(
+name|Context
+name|context
+parameter_list|)
 block|{
 name|super
 argument_list|(
@@ -265,7 +282,7 @@ name|RelOptCostImpl
 operator|.
 name|FACTORY
 argument_list|,
-literal|null
+name|context
 argument_list|)
 expr_stmt|;
 name|setExecutor

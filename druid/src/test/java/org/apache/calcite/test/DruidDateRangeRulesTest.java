@@ -800,6 +800,8 @@ operator|.
 name|rexBuilder
 argument_list|,
 name|e
+argument_list|,
+literal|"UTC"
 argument_list|)
 expr_stmt|;
 specifier|final
@@ -865,6 +867,8 @@ operator|.
 name|rexBuilder
 argument_list|,
 name|e
+argument_list|,
+literal|"UTC"
 argument_list|)
 expr_stmt|;
 specifier|final
