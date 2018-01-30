@@ -1438,6 +1438,19 @@ return|;
 case|case
 literal|"APACHE DERBY"
 case|:
+return|return
+name|DatabaseProduct
+operator|.
+name|DERBY
+return|;
+case|case
+literal|"CLICKHOUSE"
+case|:
+return|return
+name|DatabaseProduct
+operator|.
+name|CLICKHOUSE
+return|;
 case|case
 literal|"DBMS:CLOUDSCAPE"
 case|:
@@ -4670,6 +4683,17 @@ argument_list|,
 name|NullCollation
 operator|.
 name|HIGH
+argument_list|)
+block|,
+name|CLICKHOUSE
+argument_list|(
+literal|"ClickHouse"
+argument_list|,
+literal|"`"
+argument_list|,
+name|NullCollation
+operator|.
+name|LOW
 argument_list|)
 block|,
 name|MSSQL

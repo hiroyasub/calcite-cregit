@@ -9470,6 +9470,55 @@ block|}
 annotation|@
 name|Test
 name|void
+name|testCastToVarchar
+parameter_list|()
+block|{
+name|String
+name|query
+init|=
+literal|"select cast(\"product_id\" as varchar) from \"product\""
+decl_stmt|;
+specifier|final
+name|String
+name|expectedClickHouse
+init|=
+literal|"SELECT CAST(`product_id` AS `String`)\n"
+operator|+
+literal|"FROM `foodmart`.`product`"
+decl_stmt|;
+specifier|final
+name|String
+name|expectedMysql
+init|=
+literal|"SELECT CAST(`product_id` AS CHAR)\n"
+operator|+
+literal|"FROM `foodmart`.`product`"
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|withClickHouse
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expectedClickHouse
+argument_list|)
+operator|.
+name|withMysql
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expectedMysql
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
 name|testSelectQueryWithLimitClauseWithoutOrder
 parameter_list|()
 block|{
@@ -9490,6 +9539,16 @@ literal|"OFFSET 10 ROWS\n"
 operator|+
 literal|"FETCH NEXT 100 ROWS ONLY"
 decl_stmt|;
+specifier|final
+name|String
+name|expectedClickHouse
+init|=
+literal|"SELECT `product_id`\n"
+operator|+
+literal|"FROM `foodmart`.`product`\n"
+operator|+
+literal|"LIMIT 10, 100"
+decl_stmt|;
 name|sql
 argument_list|(
 name|query
@@ -9498,6 +9557,14 @@ operator|.
 name|ok
 argument_list|(
 name|expected
+argument_list|)
+operator|.
+name|withClickHouse
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expectedClickHouse
 argument_list|)
 expr_stmt|;
 block|}
@@ -11868,6 +11935,36 @@ block|}
 annotation|@
 name|Test
 name|void
+name|testFloorClickHouse
+parameter_list|()
+block|{
+name|String
+name|query
+init|=
+literal|"SELECT floor(\"hire_date\" TO MINUTE) FROM \"employee\""
+decl_stmt|;
+name|String
+name|expected
+init|=
+literal|"SELECT toStartOfMinute(`hire_date`)\nFROM `foodmart`.`employee`"
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|withClickHouse
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
 name|testFloorPostgres
 parameter_list|()
 block|{
@@ -12020,6 +12117,77 @@ operator|.
 name|ok
 argument_list|(
 name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testFloorWeek
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|query
+init|=
+literal|"SELECT floor(\"hire_date\" TO WEEK) FROM \"employee\""
+decl_stmt|;
+specifier|final
+name|String
+name|expectedClickHouse
+init|=
+literal|"SELECT toMonday(`hire_date`)\n"
+operator|+
+literal|"FROM `foodmart`.`employee`"
+decl_stmt|;
+specifier|final
+name|String
+name|expectedMssql
+init|=
+literal|"SELECT CONVERT(DATETIME, CONVERT(VARCHAR(10), "
+operator|+
+literal|"DATEADD(day, - (6 + DATEPART(weekday, [hire_date] )) % 7, [hire_date] ), 126))\n"
+operator|+
+literal|"FROM [foodmart].[employee]"
+decl_stmt|;
+specifier|final
+name|String
+name|expectedMysql
+init|=
+literal|"SELECT STR_TO_DATE(DATE_FORMAT(`hire_date` , '%x%v-1'), "
+operator|+
+literal|"'%x%v-%w')\n"
+operator|+
+literal|"FROM `foodmart`.`employee`"
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|withClickHouse
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expectedClickHouse
+argument_list|)
+operator|.
+name|withMssql
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expectedMssql
+argument_list|)
+operator|.
+name|withMysql
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expectedMysql
 argument_list|)
 expr_stmt|;
 block|}
@@ -12457,6 +12625,75 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
+specifier|public
+name|void
+name|testFloorMonth
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|query
+init|=
+literal|"SELECT floor(\"hire_date\" TO MONTH) FROM \"employee\""
+decl_stmt|;
+specifier|final
+name|String
+name|expectedClickHouse
+init|=
+literal|"SELECT toStartOfMonth(`hire_date`)\n"
+operator|+
+literal|"FROM `foodmart`.`employee`"
+decl_stmt|;
+specifier|final
+name|String
+name|expectedMssql
+init|=
+literal|"SELECT CONVERT(DATETIME, CONVERT(VARCHAR(7), [hire_date] , "
+operator|+
+literal|"126)+'-01')\n"
+operator|+
+literal|"FROM [foodmart].[employee]"
+decl_stmt|;
+specifier|final
+name|String
+name|expectedMysql
+init|=
+literal|"SELECT DATE_FORMAT(`hire_date`, '%Y-%m-01')\n"
+operator|+
+literal|"FROM `foodmart`.`employee`"
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|withClickHouse
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expectedClickHouse
+argument_list|)
+operator|.
+name|withMssql
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expectedMssql
+argument_list|)
+operator|.
+name|withMysql
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expectedMysql
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
 name|void
 name|testFloorMysqlHour
 parameter_list|()
@@ -12580,6 +12817,16 @@ literal|"GROUP BY TRUNC(hire_date, 'MI')"
 decl_stmt|;
 specifier|final
 name|String
+name|expectedClickHouse
+init|=
+literal|"SELECT toStartOfMinute(`hire_date`)\n"
+operator|+
+literal|"FROM `foodmart`.`employee`\n"
+operator|+
+literal|"GROUP BY toStartOfMinute(`hire_date`)"
+decl_stmt|;
+specifier|final
+name|String
 name|expectedOracle
 init|=
 literal|"SELECT TRUNC(\"hire_date\", 'MINUTE')\n"
@@ -12623,6 +12870,14 @@ argument_list|(
 name|expected
 argument_list|)
 operator|.
+name|withClickHouse
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expectedClickHouse
+argument_list|)
+operator|.
 name|withOracle
 argument_list|()
 operator|.
@@ -12664,6 +12919,14 @@ literal|"from \"product\"\n"
 decl_stmt|;
 specifier|final
 name|String
+name|expectedClickHouse
+init|=
+literal|"SELECT substring(`brand_name`, 2)\n"
+operator|+
+literal|"FROM `foodmart`.`product`"
+decl_stmt|;
+specifier|final
+name|String
 name|expectedOracle
 init|=
 literal|"SELECT SUBSTR(\"brand_name\", 2)\n"
@@ -12701,6 +12964,14 @@ decl_stmt|;
 name|sql
 argument_list|(
 name|query
+argument_list|)
+operator|.
+name|withClickHouse
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expectedClickHouse
 argument_list|)
 operator|.
 name|withOracle
@@ -12769,6 +13040,14 @@ literal|"from \"product\"\n"
 decl_stmt|;
 specifier|final
 name|String
+name|expectedClickHouse
+init|=
+literal|"SELECT substring(`brand_name`, 2, 3)\n"
+operator|+
+literal|"FROM `foodmart`.`product`"
+decl_stmt|;
+specifier|final
+name|String
 name|expectedOracle
 init|=
 literal|"SELECT SUBSTR(\"brand_name\", 2, 3)\n"
@@ -12814,6 +13093,14 @@ decl_stmt|;
 name|sql
 argument_list|(
 name|query
+argument_list|)
+operator|.
+name|withClickHouse
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expectedClickHouse
 argument_list|)
 operator|.
 name|withOracle
@@ -19376,6 +19663,24 @@ operator|.
 name|DatabaseProduct
 operator|.
 name|CALCITE
+operator|.
+name|getDialect
+argument_list|()
+argument_list|)
+return|;
+block|}
+name|Sql
+name|withClickHouse
+parameter_list|()
+block|{
+return|return
+name|dialect
+argument_list|(
+name|SqlDialect
+operator|.
+name|DatabaseProduct
+operator|.
+name|CLICKHOUSE
 operator|.
 name|getDialect
 argument_list|()
