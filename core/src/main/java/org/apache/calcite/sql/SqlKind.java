@@ -638,6 +638,9 @@ block|,
 comment|/** Column declaration. */
 name|COLUMN_DECL
 block|,
+comment|/** Attribute definition. */
+name|ATTRIBUTE_DEF
+block|,
 comment|/** {@code CHECK} constraint. */
 name|CHECK
 block|,
@@ -714,6 +717,12 @@ name|ALTER_INDEX
 block|,
 comment|/** {@code DROP INDEX} DDL statement. */
 name|DROP_INDEX
+block|,
+comment|/** {@code CREATE TYPE} DDL statement. */
+name|CREATE_TYPE
+block|,
+comment|/** {@code DROP TYPE} DDL statement. */
+name|DROP_TYPE
 block|,
 comment|/** DDL statement not handled above.    *    *<p><b>Note to other projects</b>: If you are extending Calcite's SQL parser    * and have your own object types you no doubt want to define CREATE and DROP    * commands for them. Use OTHER_DDL in the short term, but we are happy to add    * new enum values for your object types. Just ask!    */
 name|OTHER_DDL
@@ -891,6 +900,10 @@ argument_list|,
 name|ALTER_INDEX
 argument_list|,
 name|DROP_INDEX
+argument_list|,
+name|CREATE_TYPE
+argument_list|,
+name|DROP_TYPE
 argument_list|,
 name|SET_OPTION
 argument_list|,

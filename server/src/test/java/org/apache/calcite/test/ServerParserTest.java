@@ -240,6 +240,60 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testCreateTypeWithAttributeList
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"create type x.mytype1 as (i int not null, j varchar(5) null)"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+literal|"CREATE TYPE `X`.`MYTYPE1` AS (`I` INTEGER NOT NULL, `J` VARCHAR(5))"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testCreateTypeWithBaseType
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"create type mytype1 as varchar(5)"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+literal|"CREATE TYPE `MYTYPE1` AS VARCHAR(5)"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testCreateOrReplaceTypeWith
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"create or replace type mytype1 as varchar(5)"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+literal|"CREATE OR REPLACE TYPE `MYTYPE1` AS VARCHAR(5)"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testCreateTable
 parameter_list|()
 block|{
@@ -649,6 +703,60 @@ operator|.
 name|ok
 argument_list|(
 literal|"DROP FOREIGN SCHEMA `X`"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testDropType
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"drop type X"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+literal|"DROP TYPE `X`"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testDropTypeIfExists
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"drop type if exists X"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+literal|"DROP TYPE IF EXISTS `X`"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testDropTypeTrailingIfExistsFails
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"drop type X ^if^ exists"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"(?s)Encountered \"if\" at.*"
 argument_list|)
 expr_stmt|;
 block|}

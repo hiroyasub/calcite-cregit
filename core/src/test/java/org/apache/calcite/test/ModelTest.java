@@ -137,6 +137,20 @@ name|calcite
 operator|.
 name|model
 operator|.
+name|JsonTypeAttribute
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|model
+operator|.
 name|JsonView
 import|;
 end_import
@@ -357,6 +371,28 @@ literal|"     {\n"
 operator|+
 literal|"       name: 'FoodMart',\n"
 operator|+
+literal|"       types: [\n"
+operator|+
+literal|"         {\n"
+operator|+
+literal|"           name: 'mytype1',\n"
+operator|+
+literal|"           attributes: [\n"
+operator|+
+literal|"             {\n"
+operator|+
+literal|"               name: 'f1',\n"
+operator|+
+literal|"               type: 'BIGINT'\n"
+operator|+
+literal|"             }\n"
+operator|+
+literal|"           ]\n"
+operator|+
+literal|"         }\n"
+operator|+
+literal|"       ],\n"
+operator|+
 literal|"       tables: [\n"
 operator|+
 literal|"         {\n"
@@ -448,6 +484,64 @@ argument_list|,
 name|schema
 operator|.
 name|name
+argument_list|)
+expr_stmt|;
+name|assertEquals
+argument_list|(
+literal|1
+argument_list|,
+name|schema
+operator|.
+name|types
+operator|.
+name|size
+argument_list|()
+argument_list|)
+expr_stmt|;
+specifier|final
+name|List
+argument_list|<
+name|JsonTypeAttribute
+argument_list|>
+name|attributes
+init|=
+name|schema
+operator|.
+name|types
+operator|.
+name|get
+argument_list|(
+literal|0
+argument_list|)
+operator|.
+name|attributes
+decl_stmt|;
+name|assertEquals
+argument_list|(
+literal|"f1"
+argument_list|,
+name|attributes
+operator|.
+name|get
+argument_list|(
+literal|0
+argument_list|)
+operator|.
+name|name
+argument_list|)
+expr_stmt|;
+name|assertEquals
+argument_list|(
+literal|"BIGINT"
+argument_list|,
+name|attributes
+operator|.
+name|get
+argument_list|(
+literal|0
+argument_list|)
+operator|.
+name|type
 argument_list|)
 expr_stmt|;
 name|assertEquals

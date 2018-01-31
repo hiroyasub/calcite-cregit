@@ -4063,6 +4063,26 @@ name|javaClass
 argument_list|)
 return|;
 block|}
+if|else if
+condition|(
+name|javaClass
+operator|==
+name|double
+operator|.
+name|class
+condition|)
+block|{
+return|return
+name|Expressions
+operator|.
+name|constant
+argument_list|(
+name|bd
+argument_list|,
+name|javaClass
+argument_list|)
+return|;
+block|}
 assert|assert
 name|javaClass
 operator|==

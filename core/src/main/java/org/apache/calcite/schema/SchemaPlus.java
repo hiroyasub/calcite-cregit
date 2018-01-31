@@ -37,6 +37,22 @@ name|apache
 operator|.
 name|calcite
 operator|.
+name|rel
+operator|.
+name|type
+operator|.
+name|RelProtoDataType
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
 name|util
 operator|.
 name|Bug
@@ -133,6 +149,17 @@ name|name
 parameter_list|,
 name|Function
 name|function
+parameter_list|)
+function_decl|;
+comment|/** Adds a type to this schema.  */
+name|void
+name|add
+parameter_list|(
+name|String
+name|name
+parameter_list|,
+name|RelProtoDataType
+name|type
 parameter_list|)
 function_decl|;
 comment|/** Adds a lattice to this schema. */

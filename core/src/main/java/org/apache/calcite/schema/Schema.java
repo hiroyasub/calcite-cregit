@@ -33,6 +33,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|type
+operator|.
+name|RelProtoDataType
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -74,6 +90,22 @@ argument_list|<
 name|String
 argument_list|>
 name|getTableNames
+parameter_list|()
+function_decl|;
+comment|/**    * Returns a type with a given name, or null if not found.    *    * @param name Table name    * @return Table, or null    */
+name|RelProtoDataType
+name|getType
+parameter_list|(
+name|String
+name|name
+parameter_list|)
+function_decl|;
+comment|/**    * Returns the names of the types in this schema.    *    * @return Names of the tables in this schema    */
+name|Set
+argument_list|<
+name|String
+argument_list|>
+name|getTypeNames
 parameter_list|()
 function_decl|;
 comment|/**    * Returns a list of functions in this schema with the given name, or    * an empty list if there is no such function.    *    * @param name Name of function    * @return List of functions with given name, or empty list    */

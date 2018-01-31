@@ -3680,6 +3680,35 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testCastRegisteredType
+parameter_list|()
+block|{
+name|checkExpFails
+argument_list|(
+literal|"cast(123 as customBigInt)"
+argument_list|,
+literal|"class org.apache.calcite.sql.SqlIdentifier: CUSTOMBIGINT"
+argument_list|)
+expr_stmt|;
+name|checkExpType
+argument_list|(
+literal|"cast(123 as sales.customBigInt)"
+argument_list|,
+literal|"BIGINT NOT NULL"
+argument_list|)
+expr_stmt|;
+name|checkExpType
+argument_list|(
+literal|"cast(123 as catalog.sales.customBigInt)"
+argument_list|,
+literal|"BIGINT NOT NULL"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testCastFails
 parameter_list|()
 block|{
@@ -3687,7 +3716,7 @@ name|checkExpFails
 argument_list|(
 literal|"cast('foo' as ^bar^)"
 argument_list|,
-literal|"(?s).*Unknown datatype name 'BAR'"
+literal|"class org.apache.calcite.sql.SqlIdentifier: BAR"
 argument_list|)
 expr_stmt|;
 name|checkWholeExpFails

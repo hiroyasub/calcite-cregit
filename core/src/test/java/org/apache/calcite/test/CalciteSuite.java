@@ -1010,6 +1010,10 @@ name|UdfTest
 operator|.
 name|class
 block|,
+name|UdtTest
+operator|.
+name|class
+block|,
 name|TableFunctionTest
 operator|.
 name|class

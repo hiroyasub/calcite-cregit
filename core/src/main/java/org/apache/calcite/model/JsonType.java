@@ -36,60 +36,38 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * JSON object representing a schema whose tables are explicitly specified.  *  *<p>Like the base class {@link JsonSchema},  * occurs within {@link JsonRoot#schemas}.  *  * @see JsonRoot Description of JSON schema elements  */
+comment|/**  * Type schema element.  *  *<p>Occurs within {@link JsonMapSchema#tables}.  *  * @see JsonRoot Description of schema elements  */
 end_comment
 
 begin_class
 specifier|public
 class|class
-name|JsonMapSchema
-extends|extends
-name|JsonSchema
-block|{
-comment|/** Tables in this schema.    *    *<p>The list may be empty.    */
-specifier|public
-specifier|final
-name|List
-argument_list|<
-name|JsonTable
-argument_list|>
-name|tables
-init|=
-operator|new
-name|ArrayList
-argument_list|<>
-argument_list|()
-decl_stmt|;
-comment|/** Types in this schema.    *    *<p>The list may be empty.    */
-specifier|public
-specifier|final
-name|List
-argument_list|<
 name|JsonType
-argument_list|>
-name|types
-init|=
-operator|new
-name|ArrayList
-argument_list|<>
-argument_list|()
+block|{
+comment|/** Name of this type.    *    *<p>Required.    */
+specifier|public
+name|String
+name|name
 decl_stmt|;
-comment|/** Functions in this schema.    *    *<p>The list may be empty.    */
+comment|/** Type if this is not a struct.    */
+specifier|public
+name|String
+name|type
+decl_stmt|;
+comment|/** Definition of the attributes of this type.    */
 specifier|public
 specifier|final
 name|List
 argument_list|<
-name|JsonFunction
+name|JsonTypeAttribute
 argument_list|>
-name|functions
+name|attributes
 init|=
 operator|new
 name|ArrayList
 argument_list|<>
 argument_list|()
 decl_stmt|;
-annotation|@
-name|Override
 specifier|public
 name|void
 name|accept
@@ -106,77 +84,11 @@ name|this
 argument_list|)
 expr_stmt|;
 block|}
-annotation|@
-name|Override
-specifier|public
-name|void
-name|visitChildren
-parameter_list|(
-name|ModelHandler
-name|modelHandler
-parameter_list|)
-block|{
-name|super
-operator|.
-name|visitChildren
-argument_list|(
-name|modelHandler
-argument_list|)
-expr_stmt|;
-for|for
-control|(
-name|JsonTable
-name|jsonTable
-range|:
-name|tables
-control|)
-block|{
-name|jsonTable
-operator|.
-name|accept
-argument_list|(
-name|modelHandler
-argument_list|)
-expr_stmt|;
-block|}
-for|for
-control|(
-name|JsonFunction
-name|jsonFunction
-range|:
-name|functions
-control|)
-block|{
-name|jsonFunction
-operator|.
-name|accept
-argument_list|(
-name|modelHandler
-argument_list|)
-expr_stmt|;
-block|}
-for|for
-control|(
-name|JsonType
-name|jsonType
-range|:
-name|types
-control|)
-block|{
-name|jsonType
-operator|.
-name|accept
-argument_list|(
-name|modelHandler
-argument_list|)
-expr_stmt|;
-block|}
-block|}
 block|}
 end_class
 
 begin_comment
-comment|// End JsonMapSchema.java
+comment|// End JsonType.java
 end_comment
 
 end_unit
