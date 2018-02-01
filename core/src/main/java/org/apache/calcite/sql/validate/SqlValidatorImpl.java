@@ -15544,6 +15544,8 @@ name|DOT
 condition|)
 block|{
 return|return
+name|stripDot
+argument_list|(
 operator|(
 operator|(
 name|SqlCall
@@ -15554,6 +15556,7 @@ operator|.
 name|operand
 argument_list|(
 literal|0
+argument_list|)
 argument_list|)
 return|;
 block|}

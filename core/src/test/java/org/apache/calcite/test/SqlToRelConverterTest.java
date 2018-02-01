@@ -4174,7 +4174,7 @@ parameter_list|()
 block|{
 name|sql
 argument_list|(
-literal|"select employees[1].skills[2+3].desc from dept_nested"
+literal|"select employees[1].detail.skills[2+3].desc from dept_nested"
 argument_list|)
 operator|.
 name|ok

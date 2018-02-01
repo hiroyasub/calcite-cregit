@@ -21596,9 +21596,11 @@ literal|" INTEGER NOT NULL EMPNO,"
 operator|+
 literal|" VARCHAR(10) NOT NULL ENAME,"
 operator|+
-literal|" RecordType(VARCHAR(10) NOT NULL TYPE, VARCHAR(20) NOT NULL DESC)"
+literal|" RecordType(RecordType(VARCHAR(10) NOT NULL TYPE, VARCHAR(20) NOT NULL DESC,"
 operator|+
-literal|" NOT NULL ARRAY NOT NULL SKILLS) NOT NULL"
+literal|" RecordType(VARCHAR(10) NOT NULL A, VARCHAR(10) NOT NULL B) NOT NULL OTHERS)"
+operator|+
+literal|" NOT NULL ARRAY NOT NULL SKILLS) NOT NULL DETAIL) NOT NULL"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -22804,12 +22806,26 @@ argument_list|)
 expr_stmt|;
 name|sql
 argument_list|(
-literal|"SELECT dept_nested.employees[1].skills[1].desc as DESCRIPTION from dept_nested"
+literal|"SELECT dept_nested.employees[1].detail.skills[1].desc as DESCRIPTION\n"
+operator|+
+literal|"from dept_nested"
 argument_list|)
 operator|.
 name|type
 argument_list|(
 literal|"RecordType(VARCHAR(20) DESCRIPTION) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"SELECT dept_nested.employees[1].detail.skills[1].others.a as oa\n"
+operator|+
+literal|"from dept_nested"
+argument_list|)
+operator|.
+name|type
+argument_list|(
+literal|"RecordType(VARCHAR(10) OA) NOT NULL"
 argument_list|)
 expr_stmt|;
 block|}
