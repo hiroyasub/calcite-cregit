@@ -3875,6 +3875,96 @@ literal|"EXPR$0=4800000\n"
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2053">[CALCITE-2053]    * Overloaded user-defined functions that have Double and BigDecimal arguments    * will goes wrong</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testBigDecimalAndLong
+parameter_list|()
+block|{
+specifier|final
+name|CalciteAssert
+operator|.
+name|AssertThat
+name|with
+init|=
+name|withUdf
+argument_list|()
+decl_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"values \"adhoc\".\"toDouble\"(cast(1.0 as double))"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"EXPR$0=1.0\n"
+argument_list|)
+expr_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"values \"adhoc\".\"toDouble\"(cast(1.0 as decimal))"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"EXPR$0=1.0\n"
+argument_list|)
+expr_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"values \"adhoc\".\"toDouble\"(cast(1 as double))"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"EXPR$0=1.0\n"
+argument_list|)
+expr_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"values \"adhoc\".\"toDouble\"(cast(1 as decimal))"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"EXPR$0=1.0\n"
+argument_list|)
+expr_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"values \"adhoc\".\"toDouble\"(cast(1 as float))"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"EXPR$0=1.0\n"
+argument_list|)
+expr_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"values \"adhoc\".\"toDouble\"(cast(1.0 as float))"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"EXPR$0=1.0\n"
+argument_list|)
+expr_stmt|;
+block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1041">[CALCITE-1041]    * User-defined function returns DATE or TIMESTAMP value</a>. */
 annotation|@
 name|Test
