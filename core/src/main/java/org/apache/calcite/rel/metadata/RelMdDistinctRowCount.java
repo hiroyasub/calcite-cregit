@@ -485,7 +485,7 @@ name|RexNode
 name|predicate
 parameter_list|)
 block|{
-name|Double
+name|double
 name|rowCount
 init|=
 literal|0.0
@@ -1173,7 +1173,7 @@ literal|1D
 return|;
 block|}
 block|}
-name|Double
+name|double
 name|selectivity
 init|=
 name|RelMdUtil
@@ -1184,7 +1184,7 @@ name|predicate
 argument_list|)
 decl_stmt|;
 comment|// assume half the rows are duplicates
-name|Double
+name|double
 name|nRows
 init|=
 name|rel

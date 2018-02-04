@@ -2546,7 +2546,7 @@ return|return
 literal|0
 return|;
 block|}
-name|Double
+name|double
 name|dimRows
 init|=
 name|dimCost

@@ -111,6 +111,10 @@ name|InlinerTest
 operator|.
 name|class
 block|,
+name|LookupImplTest
+operator|.
+name|class
+block|,
 name|DeterministicTest
 operator|.
 name|class

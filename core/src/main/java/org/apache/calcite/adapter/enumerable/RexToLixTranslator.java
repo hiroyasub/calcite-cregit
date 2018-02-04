@@ -3002,12 +3002,6 @@ name|targetPrecision
 argument_list|)
 operator|>=
 literal|0
-operator|&&
-name|targetPrecision
-operator|!=
-name|RelDataType
-operator|.
-name|PRECISION_NOT_SPECIFIED
 condition|)
 block|{
 name|pad

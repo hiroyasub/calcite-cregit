@@ -1429,6 +1429,16 @@ expr_stmt|;
 block|}
 else|else
 block|{
+assert|assert
+name|srcFields
+operator|!=
+literal|null
+assert|;
+assert|assert
+name|destFields
+operator|!=
+literal|null
+assert|;
 name|int
 name|nFields
 init|=

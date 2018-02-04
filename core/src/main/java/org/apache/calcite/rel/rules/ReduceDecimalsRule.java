@@ -2960,17 +2960,9 @@ else|else
 block|{
 if|if
 condition|(
-operator|(
 name|toDigits
 operator|==
 name|fromDigits
-operator|)
-operator|&&
-operator|(
-name|toScale
-operator|<
-name|fromScale
-operator|)
 condition|)
 block|{
 comment|// rounding away from zero may cause an overflow

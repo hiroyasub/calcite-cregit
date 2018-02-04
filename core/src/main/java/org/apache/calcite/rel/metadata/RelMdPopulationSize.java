@@ -387,7 +387,7 @@ name|ImmutableBitSet
 name|groupKey
 parameter_list|)
 block|{
-name|Double
+name|double
 name|population
 init|=
 literal|0.0

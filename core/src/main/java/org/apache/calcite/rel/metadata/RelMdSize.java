@@ -558,7 +558,7 @@ return|return
 literal|null
 return|;
 block|}
-name|Double
+name|double
 name|d
 init|=
 literal|0d
@@ -1859,7 +1859,7 @@ return|;
 case|case
 name|ROW
 case|:
-name|Double
+name|double
 name|average
 init|=
 literal|0.0

@@ -377,8 +377,11 @@ argument_list|()
 decl_stmt|;
 assert|assert
 name|pop
-operator|==
+operator|.
+name|equals
+argument_list|(
 name|quoteChar
+argument_list|)
 assert|;
 name|writeQuote
 argument_list|(
