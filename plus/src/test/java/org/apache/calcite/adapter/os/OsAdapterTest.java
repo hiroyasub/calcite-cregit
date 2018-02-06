@@ -2086,9 +2086,6 @@ argument_list|(
 name|CalciteConnectionProperty
 operator|.
 name|LEX
-operator|.
-name|camelName
-argument_list|()
 argument_list|,
 name|Lex
 operator|.
@@ -2100,9 +2097,6 @@ argument_list|(
 name|CalciteConnectionProperty
 operator|.
 name|CONFORMANCE
-operator|.
-name|camelName
-argument_list|()
 argument_list|,
 name|SqlConformanceEnum
 operator|.
