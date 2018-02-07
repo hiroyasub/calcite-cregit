@@ -13278,11 +13278,7 @@ specifier|final
 name|SqlNameMatcher
 name|nameMatcher
 init|=
-name|lookup
-operator|.
 name|bb
-operator|.
-name|scope
 operator|.
 name|getValidator
 argument_list|()
@@ -13392,11 +13388,14 @@ decl_stmt|;
 name|boolean
 name|correlInCurrentScope
 init|=
-name|ancestorScope
-operator|==
 name|bb
 operator|.
 name|scope
+operator|.
+name|isWithin
+argument_list|(
+name|ancestorScope
+argument_list|)
 decl_stmt|;
 if|if
 condition|(
@@ -26850,6 +26849,7 @@ specifier|final
 name|ImmutableBitSet
 name|requiredColumns
 decl_stmt|;
+comment|/** The relational expression that uses the variable. */
 specifier|private
 specifier|final
 name|RelNode

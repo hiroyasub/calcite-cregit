@@ -2128,7 +2128,7 @@ parameter_list|()
 block|{
 specifier|final
 name|String
-name|q
+name|q1
 init|=
 literal|"select *\n"
 operator|+
@@ -2136,6 +2136,31 @@ literal|"from (values 2, 5) as t (c)\n"
 operator|+
 literal|"cross apply table(\"s\".\"fibonacci2\"(c))"
 decl_stmt|;
+specifier|final
+name|String
+name|q2
+init|=
+literal|"select *\n"
+operator|+
+literal|"from (values 2, 5) as t (c)\n"
+operator|+
+literal|"cross apply table(\"s\".\"fibonacci2\"(t.c))"
+decl_stmt|;
+for|for
+control|(
+name|String
+name|q
+range|:
+operator|new
+name|String
+index|[]
+block|{
+name|q1
+block|,
+name|q2
+block|}
+control|)
+block|{
 name|with
 argument_list|()
 operator|.
@@ -2157,9 +2182,24 @@ argument_list|)
 operator|.
 name|returnsUnordered
 argument_list|(
-literal|"C=7"
+literal|"C=2; N=1"
+argument_list|,
+literal|"C=2; N=1"
+argument_list|,
+literal|"C=2; N=2"
+argument_list|,
+literal|"C=5; N=1"
+argument_list|,
+literal|"C=5; N=1"
+argument_list|,
+literal|"C=5; N=2"
+argument_list|,
+literal|"C=5; N=3"
+argument_list|,
+literal|"C=5; N=5"
 argument_list|)
 expr_stmt|;
+block|}
 block|}
 block|}
 end_class

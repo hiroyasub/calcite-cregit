@@ -1442,10 +1442,11 @@ else|else
 block|{
 if|if
 condition|(
+name|expectedMsgPattern
+operator|!=
+literal|null
+operator|&&
 name|actualMessage
-operator|.
-name|toString
-argument_list|()
 operator|.
 name|matches
 argument_list|(

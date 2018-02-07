@@ -10034,6 +10034,81 @@ literal|"empid=150; deptno=10; name=Sebastian; salary=7000.0; commission=null; d
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-531">[CALCITE-531]    * Window function does not work in LATERAL</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testLateralWithOver
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select \"emps\".\"name\", d.\"deptno\", d.m\n"
+operator|+
+literal|"from \"hr\".\"emps\",\n"
+operator|+
+literal|"  LATERAL (\n"
+operator|+
+literal|"    select \"depts\".\"deptno\",\n"
+operator|+
+literal|"      max(\"deptno\" + \"emps\".\"empid\") over (\n"
+operator|+
+literal|"        partition by \"emps\".\"deptno\") as m\n"
+operator|+
+literal|"     from \"hr\".\"depts\"\n"
+operator|+
+literal|"     where \"emps\".\"deptno\" = \"depts\".\"deptno\") as d"
+decl_stmt|;
+name|CalciteAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|CalciteAssert
+operator|.
+name|Config
+operator|.
+name|REGULAR
+argument_list|)
+operator|.
+name|query
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"name=Bill; deptno=10; M=190"
+argument_list|,
+literal|"name=Bill; deptno=30; M=190"
+argument_list|,
+literal|"name=Bill; deptno=40; M=190"
+argument_list|,
+literal|"name=Eric; deptno=10; M=240"
+argument_list|,
+literal|"name=Eric; deptno=30; M=240"
+argument_list|,
+literal|"name=Eric; deptno=40; M=240"
+argument_list|,
+literal|"name=Sebastian; deptno=10; M=190"
+argument_list|,
+literal|"name=Sebastian; deptno=30; M=190"
+argument_list|,
+literal|"name=Sebastian; deptno=40; M=190"
+argument_list|,
+literal|"name=Theodore; deptno=10; M=190"
+argument_list|,
+literal|"name=Theodore; deptno=30; M=190"
+argument_list|,
+literal|"name=Theodore; deptno=40; M=190"
+argument_list|)
+expr_stmt|;
+block|}
 comment|/** Per SQL std, UNNEST is implicitly LATERAL. */
 annotation|@
 name|Test

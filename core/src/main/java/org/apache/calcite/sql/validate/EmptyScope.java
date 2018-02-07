@@ -1020,7 +1020,7 @@ name|namespace
 argument_list|,
 literal|false
 argument_list|,
-name|this
+literal|null
 argument_list|,
 name|path
 argument_list|,
@@ -1053,7 +1053,7 @@ name|namespace
 argument_list|,
 literal|false
 argument_list|,
-name|this
+literal|null
 argument_list|,
 name|path
 argument_list|,

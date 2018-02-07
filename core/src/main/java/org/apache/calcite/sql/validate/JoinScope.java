@@ -228,6 +228,37 @@ return|return
 name|usingScope
 return|;
 block|}
+annotation|@
+name|Override
+specifier|public
+name|boolean
+name|isWithin
+parameter_list|(
+name|SqlValidatorScope
+name|scope2
+parameter_list|)
+block|{
+if|if
+condition|(
+name|this
+operator|==
+name|scope2
+condition|)
+block|{
+return|return
+literal|true
+return|;
+block|}
+comment|// go from the JOIN to the enclosing SELECT
+return|return
+name|usingScope
+operator|.
+name|isWithin
+argument_list|(
+name|scope2
+argument_list|)
+return|;
+block|}
 block|}
 end_class
 

@@ -13124,10 +13124,11 @@ literal|"RecordType(CHAR(2) NOT NULL A, INTEGER NOT NULL B) NOT NULL"
 argument_list|)
 expr_stmt|;
 block|}
-comment|// todo: implement IN
+annotation|@
+name|Test
 specifier|public
 name|void
-name|_testAmbiguousColumnInIn
+name|testAmbiguousColumnInIn
 parameter_list|()
 block|{
 comment|// ok: cyclic reference
@@ -21867,7 +21868,7 @@ parameter_list|()
 block|{
 specifier|final
 name|String
-name|sql
+name|sql1
 init|=
 literal|"select d.deptno, e.*\n"
 operator|+
@@ -21893,7 +21894,28 @@ literal|" NOT NULL ARRAY NOT NULL SKILLS) NOT NULL DETAIL) NOT NULL"
 decl_stmt|;
 name|sql
 argument_list|(
+name|sql1
+argument_list|)
+operator|.
+name|type
+argument_list|(
+name|type
+argument_list|)
+expr_stmt|;
+comment|// equivalent query without table alias
+specifier|final
+name|String
+name|sql1b
+init|=
+literal|"select d.deptno, e.*\n"
+operator|+
+literal|"from dept_nested as d,\n"
+operator|+
+literal|" UNNEST(employees) as e"
+decl_stmt|;
 name|sql
+argument_list|(
+name|sql1b
 argument_list|)
 operator|.
 name|type
@@ -21915,6 +21937,27 @@ decl_stmt|;
 name|sql
 argument_list|(
 name|sql2
+argument_list|)
+operator|.
+name|type
+argument_list|(
+name|type
+argument_list|)
+expr_stmt|;
+comment|// equivalent query using CROSS JOIN, without table alias
+specifier|final
+name|String
+name|sql2b
+init|=
+literal|"select d.deptno, e.*\n"
+operator|+
+literal|"from dept_nested as d CROSS JOIN\n"
+operator|+
+literal|" UNNEST(employees) as e"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql2b
 argument_list|)
 operator|.
 name|type
