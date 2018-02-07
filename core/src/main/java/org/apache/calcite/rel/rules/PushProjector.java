@@ -1736,12 +1736,15 @@ return|return
 operator|(
 name|Project
 operator|)
-name|RelOptUtil
+name|relBuilder
 operator|.
-name|createProject
+name|push
 argument_list|(
 name|projChild
-argument_list|,
+argument_list|)
+operator|.
+name|projectNamed
+argument_list|(
 name|Pair
 operator|.
 name|left
@@ -1756,10 +1759,11 @@ argument_list|(
 name|newProjects
 argument_list|)
 argument_list|,
-literal|false
-argument_list|,
-name|relBuilder
+literal|true
 argument_list|)
+operator|.
+name|build
+argument_list|()
 return|;
 block|}
 comment|/**    * Determines how much each input reference needs to be adjusted as a result    * of projection    *    * @return array indicating how much each input needs to be adjusted by    */
@@ -2038,12 +2042,15 @@ expr_stmt|;
 block|}
 block|}
 return|return
-name|RelOptUtil
+name|relBuilder
 operator|.
-name|createProject
+name|push
 argument_list|(
 name|projChild
-argument_list|,
+argument_list|)
+operator|.
+name|project
+argument_list|(
 name|Pair
 operator|.
 name|left
@@ -2057,12 +2064,10 @@ name|right
 argument_list|(
 name|projects
 argument_list|)
-argument_list|,
-literal|true
-comment|/* optimize to avoid trivial projections, as per javadoc */
-argument_list|,
-name|relBuilder
 argument_list|)
+operator|.
+name|build
+argument_list|()
 return|;
 block|}
 comment|//~ Inner Classes ----------------------------------------------------------
