@@ -388,19 +388,6 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|// Once the first input has chosen its format, ask for the same for
-comment|// other inputs.
-name|pref
-operator|=
-name|pref
-operator|.
-name|of
-argument_list|(
-name|result
-operator|.
-name|format
-argument_list|)
-expr_stmt|;
 block|}
 name|builder
 operator|.
