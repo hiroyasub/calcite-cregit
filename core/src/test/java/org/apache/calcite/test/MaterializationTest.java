@@ -449,6 +449,22 @@ name|test
 operator|.
 name|JdbcTest
 operator|.
+name|Event
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|test
+operator|.
+name|JdbcTest
+operator|.
 name|Location
 import|;
 end_import
@@ -618,6 +634,16 @@ operator|.
 name|sql
 operator|.
 name|ResultSet
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|sql
+operator|.
+name|Timestamp
 import|;
 end_import
 
@@ -2230,7 +2256,7 @@ name|checkResultContains
 argument_list|(
 literal|"EnumerableCalc(expr#0..1=[{inputs}], expr#2=[1], "
 operator|+
-literal|"expr#3=[+($t1, $t2)], C=[$t3], deptno=[$t0])\n"
+literal|"expr#3=[+($t1, $t2)], $f0=[$t3], deptno=[$t0])\n"
 operator|+
 literal|"  EnumerableAggregate(group=[{1}], agg#0=[$SUM0($2)])\n"
 operator|+
@@ -4256,9 +4282,9 @@ name|CalciteAssert
 operator|.
 name|checkResultContains
 argument_list|(
-literal|"EnumerableCalc(expr#0..1=[{inputs}], expr#2=[1], expr#3=[+($t1, $t2)], "
+literal|"EnumerableCalc(expr#0..1=[{inputs}], expr#2=[1], expr#3=[+($t1, $t2)],"
 operator|+
-literal|"deptno=[$t0], S=[$t3])\n"
+literal|" deptno=[$t0], $f1=[$t3])\n"
 operator|+
 literal|"  EnumerableAggregate(group=[{1}], agg#0=[$SUM0($3)])\n"
 operator|+
@@ -4317,13 +4343,13 @@ name|checkResultContains
 argument_list|(
 literal|"EnumerableCalc(expr#0..1=[{inputs}], expr#2=[1], expr#3=[+($t0, $t2)], "
 operator|+
-literal|"expr#4=[+($t1, $t2)], EXPR$0=[$t3], S=[$t4])\n"
+literal|"expr#4=[+($t1, $t2)], $f0=[$t3], $f1=[$t4])\n"
 operator|+
 literal|"  EnumerableAggregate(group=[{1}], agg#0=[$SUM0($3)])\n"
 operator|+
-literal|"    EnumerableCalc(expr#0..3=[{inputs}], expr#4=[10], expr#5=[>($t1, $t4)], "
+literal|"    EnumerableCalc(expr#0..3=[{inputs}], expr#4=[10], "
 operator|+
-literal|"proj#0..3=[{exprs}], $condition=[$t5])\n"
+literal|"expr#5=[>($t1, $t4)], proj#0..3=[{exprs}], $condition=[$t5])\n"
 operator|+
 literal|"      EnumerableTableScan(table=[[hr, m0]])"
 argument_list|)
@@ -4350,6 +4376,224 @@ argument_list|,
 literal|"select \"deptno\" + 1, sum(\"empid\") + 1 as s\n"
 operator|+
 literal|"from \"emps\" where \"deptno\"> 10 group by \"deptno\""
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testAggregateMaterializationAggregateFuncs9
+parameter_list|()
+block|{
+name|checkMaterialize
+argument_list|(
+literal|"select \"empid\", floor(cast('1997-01-20 12:34:56' as timestamp) to month), count(*) + 1 as c, sum(\"empid\") as s\n"
+operator|+
+literal|"from \"emps\" group by \"empid\", floor(cast('1997-01-20 12:34:56' as timestamp) to month)"
+argument_list|,
+literal|"select floor(cast('1997-01-20 12:34:56' as timestamp) to year), sum(\"empid\") as s\n"
+operator|+
+literal|"from \"emps\" group by floor(cast('1997-01-20 12:34:56' as timestamp) to year)"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testAggregateMaterializationAggregateFuncs10
+parameter_list|()
+block|{
+name|checkMaterialize
+argument_list|(
+literal|"select \"empid\", floor(cast('1997-01-20 12:34:56' as timestamp) to month), count(*) + 1 as c, sum(\"empid\") as s\n"
+operator|+
+literal|"from \"emps\" group by \"empid\", floor(cast('1997-01-20 12:34:56' as timestamp) to month)"
+argument_list|,
+literal|"select floor(cast('1997-01-20 12:34:56' as timestamp) to year), sum(\"empid\") + 1 as s\n"
+operator|+
+literal|"from \"emps\" group by floor(cast('1997-01-20 12:34:56' as timestamp) to year)"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testAggregateMaterializationAggregateFuncs11
+parameter_list|()
+block|{
+name|checkMaterialize
+argument_list|(
+literal|"select \"empid\", floor(cast('1997-01-20 12:34:56' as timestamp) to second), count(*) + 1 as c, sum(\"empid\") as s\n"
+operator|+
+literal|"from \"emps\" group by \"empid\", floor(cast('1997-01-20 12:34:56' as timestamp) to second)"
+argument_list|,
+literal|"select floor(cast('1997-01-20 12:34:56' as timestamp) to minute), sum(\"empid\") as s\n"
+operator|+
+literal|"from \"emps\" group by floor(cast('1997-01-20 12:34:56' as timestamp) to minute)"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testAggregateMaterializationAggregateFuncs12
+parameter_list|()
+block|{
+name|checkMaterialize
+argument_list|(
+literal|"select \"empid\", floor(cast('1997-01-20 12:34:56' as timestamp) to second), count(*) + 1 as c, sum(\"empid\") as s\n"
+operator|+
+literal|"from \"emps\" group by \"empid\", floor(cast('1997-01-20 12:34:56' as timestamp) to second)"
+argument_list|,
+literal|"select floor(cast('1997-01-20 12:34:56' as timestamp) to month), sum(\"empid\") as s\n"
+operator|+
+literal|"from \"emps\" group by floor(cast('1997-01-20 12:34:56' as timestamp) to month)"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testAggregateMaterializationAggregateFuncs13
+parameter_list|()
+block|{
+name|checkMaterialize
+argument_list|(
+literal|"select \"empid\", cast('1997-01-20 12:34:56' as timestamp), count(*) + 1 as c, sum(\"empid\") as s\n"
+operator|+
+literal|"from \"emps\" group by \"empid\", cast('1997-01-20 12:34:56' as timestamp)"
+argument_list|,
+literal|"select floor(cast('1997-01-20 12:34:56' as timestamp) to year), sum(\"empid\") as s\n"
+operator|+
+literal|"from \"emps\" group by floor(cast('1997-01-20 12:34:56' as timestamp) to year)"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testAggregateMaterializationAggregateFuncs14
+parameter_list|()
+block|{
+name|checkMaterialize
+argument_list|(
+literal|"select \"empid\", floor(cast('1997-01-20 12:34:56' as timestamp) to month), count(*) + 1 as c, sum(\"empid\") as s\n"
+operator|+
+literal|"from \"emps\" group by \"empid\", floor(cast('1997-01-20 12:34:56' as timestamp) to month)"
+argument_list|,
+literal|"select floor(cast('1997-01-20 12:34:56' as timestamp) to hour), sum(\"empid\") as s\n"
+operator|+
+literal|"from \"emps\" group by floor(cast('1997-01-20 12:34:56' as timestamp) to hour)"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testAggregateMaterializationAggregateFuncs15
+parameter_list|()
+block|{
+name|checkMaterialize
+argument_list|(
+literal|"select \"eventid\", floor(cast(\"ts\" as timestamp) to second), count(*) + 1 as c, sum(\"eventid\") as s\n"
+operator|+
+literal|"from \"events\" group by \"eventid\", floor(cast(\"ts\" as timestamp) to second)"
+argument_list|,
+literal|"select floor(cast(\"ts\" as timestamp) to minute), sum(\"eventid\") as s\n"
+operator|+
+literal|"from \"events\" group by floor(cast(\"ts\" as timestamp) to minute)"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testAggregateMaterializationAggregateFuncs16
+parameter_list|()
+block|{
+name|checkMaterialize
+argument_list|(
+literal|"select \"eventid\", cast(\"ts\" as timestamp), count(*) + 1 as c, sum(\"eventid\") as s\n"
+operator|+
+literal|"from \"events\" group by \"eventid\", cast(\"ts\" as timestamp)"
+argument_list|,
+literal|"select floor(cast(\"ts\" as timestamp) to year), sum(\"eventid\") as s\n"
+operator|+
+literal|"from \"events\" group by floor(cast(\"ts\" as timestamp) to year)"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testAggregateMaterializationAggregateFuncs17
+parameter_list|()
+block|{
+name|checkMaterialize
+argument_list|(
+literal|"select \"eventid\", floor(cast(\"ts\" as timestamp) to month), count(*) + 1 as c, sum(\"eventid\") as s\n"
+operator|+
+literal|"from \"events\" group by \"eventid\", floor(cast(\"ts\" as timestamp) to month)"
+argument_list|,
+literal|"select floor(cast(\"ts\" as timestamp) to hour), sum(\"eventid\") as s\n"
+operator|+
+literal|"from \"events\" group by floor(cast(\"ts\" as timestamp) to hour)"
+argument_list|,
+name|HR_FKUK_MODEL
+argument_list|,
+name|CalciteAssert
+operator|.
+name|checkResultContains
+argument_list|(
+literal|"EnumerableTableScan(table=[[hr, events]])"
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testAggregateMaterializationAggregateFuncs18
+parameter_list|()
+block|{
+name|checkMaterialize
+argument_list|(
+literal|"select \"empid\", \"deptno\", count(*) + 1 as c, sum(\"empid\") as s\n"
+operator|+
+literal|"from \"emps\" group by \"empid\", \"deptno\""
+argument_list|,
+literal|"select \"empid\"*\"deptno\", sum(\"empid\") as s\n"
+operator|+
+literal|"from \"emps\" group by \"empid\"*\"deptno\""
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testAggregateMaterializationAggregateFuncs19
+parameter_list|()
+block|{
+name|checkMaterialize
+argument_list|(
+literal|"select \"empid\", \"deptno\", count(*) as c, sum(\"empid\") as s\n"
+operator|+
+literal|"from \"emps\" group by \"empid\", \"deptno\""
+argument_list|,
+literal|"select \"empid\" + 10, count(*) + 1 as c\n"
+operator|+
+literal|"from \"emps\" group by \"empid\" + 10"
 argument_list|)
 expr_stmt|;
 block|}
@@ -8012,6 +8256,58 @@ argument_list|(
 literal|20
 argument_list|,
 literal|"San Diego"
+argument_list|)
+block|,     }
+decl_stmt|;
+specifier|public
+specifier|final
+name|Event
+index|[]
+name|events
+init|=
+block|{
+operator|new
+name|Event
+argument_list|(
+literal|100
+argument_list|,
+operator|new
+name|Timestamp
+argument_list|(
+literal|0
+argument_list|)
+argument_list|)
+block|,
+operator|new
+name|Event
+argument_list|(
+literal|200
+argument_list|,
+operator|new
+name|Timestamp
+argument_list|(
+literal|0
+argument_list|)
+argument_list|)
+block|,
+operator|new
+name|Event
+argument_list|(
+literal|150
+argument_list|,
+operator|new
+name|Timestamp
+argument_list|(
+literal|0
+argument_list|)
+argument_list|)
+block|,
+operator|new
+name|Event
+argument_list|(
+literal|110
+argument_list|,
+literal|null
 argument_list|)
 block|,     }
 decl_stmt|;

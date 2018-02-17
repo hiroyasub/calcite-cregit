@@ -254,14 +254,17 @@ name|RexLiteral
 name|literal
 parameter_list|)
 block|{
+comment|// Get the value as is
 return|return
 operator|new
 name|RexLiteral
 argument_list|(
-name|literal
+name|RexLiteral
 operator|.
-name|getValue
-argument_list|()
+name|value
+argument_list|(
+name|literal
+argument_list|)
 argument_list|,
 name|copy
 argument_list|(
