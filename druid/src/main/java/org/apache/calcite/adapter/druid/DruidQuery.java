@@ -2747,7 +2747,7 @@ argument_list|()
 argument_list|)
 condition|)
 block|{
-comment|//same type it is okay to push it
+comment|// same type it is okay to push it
 return|return
 literal|true
 return|;
@@ -2824,7 +2824,7 @@ return|return
 literal|null
 return|;
 block|}
-comment|//calcite has this un-direct renaming of timestampFieldName to native druid `__time`
+comment|// calcite has this un-direct renaming of timestampFieldName to native druid `__time`
 if|if
 condition|(
 name|query
@@ -3845,7 +3845,7 @@ argument_list|(
 name|getQueryTypeCostMultiplier
 argument_list|()
 argument_list|)
-comment|//A Scan leaf filter is better than having filter spec if possible.
+comment|// A Scan leaf filter is better than having filter spec if possible.
 operator|.
 name|multiplyBy
 argument_list|(
@@ -5117,7 +5117,7 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-comment|/**    * @param projectNode Project under the Aggregates if any    * @param groupSet ids of grouping keys as they are listed in {@code projects} list    * @param inputRowType Input row type under the project    * @param druidQuery Druid Query    *    * @return Pair of: Ordered {@link List<DimensionSpec>} containing the group by dimensions    * and {@link List<VirtualColumn>} containing Druid virtual column projections or Null,    * if translation is not possible. Note that the size of lists can be different.    */
+comment|/**    * Computes the project group set.    *    * @param projectNode Project under the Aggregates if any    * @param groupSet Ids of grouping keys as they are listed in {@code projects} list    * @param inputRowType Input row type under the project    * @param druidQuery Druid Query    *    * @return A list of {@link DimensionSpec} containing the group by dimensions,    * and a list of {@link VirtualColumn} containing Druid virtual column    * projections; or null, if translation is not possible.    * Note that the size of lists can be different.    */
 annotation|@
 name|Nullable
 specifier|protected
@@ -5269,7 +5269,7 @@ operator|==
 literal|null
 condition|)
 block|{
-comment|//SIMPLE INPUT REF
+comment|// SIMPLE INPUT REF
 name|dimensionSpec
 operator|=
 operator|new
@@ -5600,7 +5600,7 @@ name|virtualColumnList
 argument_list|)
 return|;
 block|}
-comment|/**    * Translates Aggregators Calls to Druid Json Aggregators when possible.    *    * @param aggCalls List of Agg Calls to translate    * @param aggNames Lit of Agg names    * @param project Input project under the Agg Calls, if null means we have TableScan->Agg    * @param druidQuery Druid Query Rel    *    * @return List of Valid Druid Json Aggregate or null if any of the aggregates is not supported    */
+comment|/**    * Translates aggregate calls to Druid {@link JsonAggregation}s when    * possible.    *    * @param aggCalls List of AggregateCalls to translate    * @param aggNames List of aggregate names    * @param project Input project under the aggregate calls,    *               or null if we have {@link TableScan} immediately under the    *               {@link Aggregate}    * @param druidQuery Druid Query Rel    *    * @return List of valid Druid {@link JsonAggregation}s, or null if any of the    * aggregates is not supported    */
 annotation|@
 name|Nullable
 specifier|protected
@@ -5985,7 +5985,7 @@ literal|null
 expr_stmt|;
 block|}
 block|}
-comment|//One should be not null and the other should be null.
+comment|// One should be not null and the other should be null.
 assert|assert
 name|expression
 operator|==
@@ -6114,7 +6114,7 @@ operator|==
 literal|null
 condition|)
 block|{
-comment|//It is Scan Query since no Grouping
+comment|// It is Scan Query since no Grouping
 assert|assert
 name|aggCalls
 operator|==
@@ -6171,7 +6171,7 @@ operator|!=
 literal|null
 condition|)
 block|{
-comment|//project some fields only
+comment|// project some fields only
 name|Pair
 argument_list|<
 name|List
@@ -6219,7 +6219,7 @@ expr_stmt|;
 block|}
 else|else
 block|{
-comment|//Scan all the fields
+comment|// Scan all the fields
 name|scanColumnNames
 operator|=
 name|rowType
@@ -6479,7 +6479,7 @@ operator|=
 literal|null
 expr_stmt|;
 block|}
-comment|//Then we handle projects after aggregates as Druid Post Aggregates
+comment|// Then we handle projects after aggregates as Druid Post Aggregates
 specifier|final
 name|List
 argument_list|<
@@ -6650,7 +6650,7 @@ operator|!=
 literal|null
 condition|)
 block|{
-comment|//simple input ref or Druid runtime identity cast will skip it, since it is here already
+comment|// simple input ref or Druid runtime identity cast will skip it, since it is here already
 name|postProjectDimListBuilder
 operator|.
 name|add
@@ -6713,7 +6713,7 @@ name|aggregateStageFieldNames
 else|:
 name|postAggregateStageFieldNames
 decl_stmt|;
-comment|//handle sort all together
+comment|// handle sort all together
 name|limit
 operator|=
 name|computeSort
@@ -6785,8 +6785,8 @@ operator|!=
 literal|null
 condition|)
 block|{
-comment|//Case we have transformed the group by time to druid timeseries with Granularity
-comment|//Need to replace the name of the column with druid timestamp field name
+comment|// Case we have transformed the group by time to druid timeseries with Granularity.
+comment|// Need to replace the name of the column with druid timestamp field name.
 specifier|final
 name|List
 argument_list|<
@@ -7220,7 +7220,7 @@ operator|>
 literal|1
 condition|)
 block|{
-comment|//it has multiple sort columns
+comment|// it has multiple sort columns
 return|return
 literal|null
 return|;
@@ -7255,7 +7255,6 @@ name|isEmpty
 argument_list|()
 operator|||
 operator|!
-operator|(
 name|limit
 operator|.
 name|collations
@@ -7279,10 +7278,9 @@ operator|.
 name|getOutputName
 argument_list|()
 argument_list|)
-operator|)
 condition|)
 block|{
-comment|//sort column is not time column
+comment|// sort column is not time column
 return|return
 literal|null
 return|;
@@ -7342,7 +7340,7 @@ argument_list|(
 name|dimensionSpec
 argument_list|)
 decl_stmt|;
-comment|//case we have project expression on the top of the time extract then can not use timeseries
+comment|// case we have project expression on the top of the time extract then can not use timeseries
 name|boolean
 name|hasExpressionOnTopOfTimeExtract
 init|=
@@ -7610,7 +7608,7 @@ operator|.
 name|writeStartObject
 argument_list|()
 expr_stmt|;
-comment|//Count(*) returns 0 if result set is empty thus need to set skipEmptyBuckets to false
+comment|// Count(*) returns 0 if result set is empty thus need to set skipEmptyBuckets to false
 name|generator
 operator|.
 name|writeBooleanField
@@ -7796,7 +7794,7 @@ literal|"ascending"
 argument_list|)
 condition|)
 block|{
-comment|//Only DESC is allowed
+comment|// Only DESC is allowed
 return|return
 literal|null
 return|;
@@ -9017,7 +9015,7 @@ operator|==
 literal|null
 condition|)
 block|{
-comment|//can not translate filter
+comment|// can not translate filter
 return|return
 literal|null
 return|;
