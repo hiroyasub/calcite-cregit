@@ -313,20 +313,6 @@ name|google
 operator|.
 name|common
 operator|.
-name|base
-operator|.
-name|Throwables
-import|;
-end_import
-
-begin_import
-import|import
-name|com
-operator|.
-name|google
-operator|.
-name|common
-operator|.
 name|collect
 operator|.
 name|ImmutableMap
@@ -2297,7 +2283,7 @@ block|{
 comment|// synchronized block to avoid race condition
 try|try
 block|{
-comment|//First try to pars as Timestamp with timezone.
+comment|// First try to parse as Timestamp with timezone.
 name|rowBuilder
 operator|.
 name|set
@@ -2356,13 +2342,13 @@ name|e2
 parameter_list|)
 block|{
 comment|// unknown format should not happen
-name|Throwables
-operator|.
-name|propagate
+throw|throw
+operator|new
+name|RuntimeException
 argument_list|(
 name|e2
 argument_list|)
-expr_stmt|;
+throw|;
 block|}
 block|}
 block|}
