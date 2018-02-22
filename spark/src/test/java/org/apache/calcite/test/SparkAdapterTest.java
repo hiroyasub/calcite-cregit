@@ -78,7 +78,7 @@ specifier|private
 specifier|static
 specifier|final
 name|String
-name|commonValuesExpr0
+name|VALUES0
 init|=
 literal|"(values (1, 'a'), (2, 'b'))"
 decl_stmt|;
@@ -86,7 +86,7 @@ specifier|private
 specifier|static
 specifier|final
 name|String
-name|commonValuesExpr1
+name|VALUES1
 init|=
 literal|"(values (1, 'a'), (2, 'b')) as t(x, y)"
 decl_stmt|;
@@ -94,7 +94,7 @@ specifier|private
 specifier|static
 specifier|final
 name|String
-name|commonValuesExpr2
+name|VALUES2
 init|=
 literal|"(values (1, 'a'), (2, 'b'), (1, 'b'), (2, 'c'), (2, 'c')) as t(x, y)"
 decl_stmt|;
@@ -102,7 +102,7 @@ specifier|private
 specifier|static
 specifier|final
 name|String
-name|commonValuesExpr3
+name|VALUES3
 init|=
 literal|"(values (1, 'a'), (2, 'b')) as v(w, z)"
 decl_stmt|;
@@ -110,126 +110,10 @@ specifier|private
 specifier|static
 specifier|final
 name|String
-name|commonValuesExpr4
+name|VALUES4
 init|=
 literal|"(values (1, 'a'), (2, 'b'), (3, 'b'), (4, 'c'), (2, 'c')) as t(x, y)"
 decl_stmt|;
-comment|/**    * Tests a VALUES query evaluated using Spark.    * There are no data sources.    */
-annotation|@
-name|Test
-specifier|public
-name|void
-name|testValues
-parameter_list|()
-block|{
-comment|// Insert a spurious reference to a class in Calcite's Spark adapter.
-comment|// Otherwise this test doesn't depend on the Spark module at all, and
-comment|// Javadoc gets confused.
-name|Util
-operator|.
-name|discard
-argument_list|(
-name|SparkRel
-operator|.
-name|class
-argument_list|)
-expr_stmt|;
-specifier|final
-name|String
-name|sql
-init|=
-literal|"select *\n"
-operator|+
-literal|"from "
-operator|+
-name|commonValuesExpr0
-decl_stmt|;
-specifier|final
-name|String
-name|plan
-init|=
-literal|"PLAN="
-operator|+
-literal|"EnumerableValues(tuples=[[{ 1, 'a' }, { 2, 'b' }]])"
-decl_stmt|;
-specifier|final
-name|String
-name|expectedResult
-init|=
-literal|"EXPR$0=1; EXPR$1=a\n"
-operator|+
-literal|"EXPR$0=2; EXPR$1=b"
-decl_stmt|;
-name|sql
-argument_list|(
-name|sql
-argument_list|)
-operator|.
-name|returnsUnordered
-argument_list|(
-name|expectedResult
-argument_list|)
-operator|.
-name|explainContains
-argument_list|(
-name|plan
-argument_list|)
-expr_stmt|;
-block|}
-comment|/** Tests values followed by filter, evaluated by Spark. */
-annotation|@
-name|Test
-specifier|public
-name|void
-name|testValuesFilter
-parameter_list|()
-block|{
-specifier|final
-name|String
-name|sql
-init|=
-literal|"select *\n"
-operator|+
-literal|"from "
-operator|+
-name|commonValuesExpr1
-operator|+
-literal|"\n"
-operator|+
-literal|"where x< 2"
-decl_stmt|;
-specifier|final
-name|String
-name|plan
-init|=
-literal|"PLAN="
-operator|+
-literal|"EnumerableCalc(expr#0..1=[{inputs}], expr#2=[2], expr#3=[<($t0, $t2)], proj#0..1=[{exprs}], $condition=[$t3])\n"
-operator|+
-literal|"  EnumerableValues(tuples=[[{ 1, 'a' }, { 2, 'b' }]])\n"
-decl_stmt|;
-specifier|final
-name|String
-name|expectedResult
-init|=
-literal|"X=1; Y=a"
-decl_stmt|;
-name|sql
-argument_list|(
-name|sql
-argument_list|)
-operator|.
-name|returnsUnordered
-argument_list|(
-name|expectedResult
-argument_list|)
-operator|.
-name|explainContains
-argument_list|(
-name|plan
-argument_list|)
-expr_stmt|;
-block|}
 specifier|private
 name|CalciteAssert
 operator|.
@@ -261,6 +145,122 @@ name|sql
 argument_list|)
 return|;
 block|}
+comment|/**    * Tests a VALUES query evaluated using Spark.    * There are no data sources.    */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testValues
+parameter_list|()
+block|{
+comment|// Insert a spurious reference to a class in Calcite's Spark adapter.
+comment|// Otherwise this test doesn't depend on the Spark module at all, and
+comment|// Javadoc gets confused.
+name|Util
+operator|.
+name|discard
+argument_list|(
+name|SparkRel
+operator|.
+name|class
+argument_list|)
+expr_stmt|;
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"from "
+operator|+
+name|VALUES0
+decl_stmt|;
+specifier|final
+name|String
+name|plan
+init|=
+literal|"PLAN="
+operator|+
+literal|"EnumerableValues(tuples=[[{ 1, 'a' }, { 2, 'b' }]])"
+decl_stmt|;
+specifier|final
+name|String
+name|expectedResult
+init|=
+literal|"EXPR$0=1; EXPR$1=a\n"
+operator|+
+literal|"EXPR$0=2; EXPR$1=b\n"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+name|expectedResult
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+name|plan
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Tests values followed by filter, evaluated by Spark. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testValuesFilter
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"from "
+operator|+
+name|VALUES1
+operator|+
+literal|"\n"
+operator|+
+literal|"where x< 2"
+decl_stmt|;
+specifier|final
+name|String
+name|expectedResult
+init|=
+literal|"X=1; Y=a\n"
+decl_stmt|;
+specifier|final
+name|String
+name|plan
+init|=
+literal|"PLAN="
+operator|+
+literal|"EnumerableCalc(expr#0..1=[{inputs}], expr#2=[2], expr#3=[<($t0, $t2)], proj#0..1=[{exprs}], $condition=[$t3])\n"
+operator|+
+literal|"  EnumerableValues(tuples=[[{ 1, 'a' }, { 2, 'b' }]])\n"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+name|expectedResult
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+name|plan
+argument_list|)
+expr_stmt|;
+block|}
 annotation|@
 name|Test
 specifier|public
@@ -276,7 +276,7 @@ literal|"select distinct *\n"
 operator|+
 literal|"from "
 operator|+
-name|commonValuesExpr2
+name|VALUES2
 decl_stmt|;
 specifier|final
 name|String
@@ -316,7 +316,7 @@ name|plan
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Tests about grouping and aggregation functions. */
+comment|// Tests about grouping and aggregate functions
 annotation|@
 name|Test
 specifier|public
@@ -334,7 +334,7 @@ literal|"count(*) as CNT_Y, count(distinct y) as CNT_DIST_Y\n"
 operator|+
 literal|"from "
 operator|+
-name|commonValuesExpr2
+name|VALUES2
 operator|+
 literal|"\n"
 operator|+
@@ -397,7 +397,7 @@ literal|"count(*) as CNT_Y, count(distinct y) as CNT_DIST_Y\n"
 operator|+
 literal|"from "
 operator|+
-name|commonValuesExpr2
+name|VALUES2
 decl_stmt|;
 specifier|final
 name|String
@@ -452,7 +452,7 @@ literal|"select x, count(*) as CNT_Y\n"
 operator|+
 literal|"from "
 operator|+
-name|commonValuesExpr2
+name|VALUES2
 operator|+
 literal|"\n"
 operator|+
@@ -507,7 +507,7 @@ literal|"count(distinct y) as CNT_DIST_Y\n"
 operator|+
 literal|"from "
 operator|+
-name|commonValuesExpr2
+name|VALUES2
 operator|+
 literal|"\n"
 operator|+
@@ -574,7 +574,7 @@ literal|"count(distinct y) as CNT_DIST_Y\n"
 operator|+
 literal|"from "
 operator|+
-name|commonValuesExpr2
+name|VALUES2
 operator|+
 literal|"\n"
 operator|+
@@ -639,7 +639,7 @@ literal|"select x\n"
 operator|+
 literal|"from "
 operator|+
-name|commonValuesExpr2
+name|VALUES2
 operator|+
 literal|"\n"
 operator|+
@@ -681,7 +681,7 @@ name|plan
 argument_list|)
 expr_stmt|;
 block|}
-comment|// Tests about set operators (union, union all, intersect).
+comment|// Tests about set operators (UNION, UNION ALL, INTERSECT)
 annotation|@
 name|Test
 specifier|public
@@ -697,7 +697,7 @@ literal|"select *\n"
 operator|+
 literal|"from "
 operator|+
-name|commonValuesExpr1
+name|VALUES1
 operator|+
 literal|"\n"
 operator|+
@@ -707,7 +707,7 @@ literal|"select *\n"
 operator|+
 literal|"from "
 operator|+
-name|commonValuesExpr2
+name|VALUES2
 decl_stmt|;
 specifier|final
 name|String
@@ -770,7 +770,7 @@ literal|"select *\n"
 operator|+
 literal|"from "
 operator|+
-name|commonValuesExpr1
+name|VALUES1
 operator|+
 literal|"\n"
 operator|+
@@ -780,7 +780,7 @@ literal|"select *\n"
 operator|+
 literal|"from "
 operator|+
-name|commonValuesExpr2
+name|VALUES2
 decl_stmt|;
 specifier|final
 name|String
@@ -837,7 +837,7 @@ literal|"select *\n"
 operator|+
 literal|"from "
 operator|+
-name|commonValuesExpr1
+name|VALUES1
 operator|+
 literal|"\n"
 operator|+
@@ -847,7 +847,7 @@ literal|"select *\n"
 operator|+
 literal|"from "
 operator|+
-name|commonValuesExpr2
+name|VALUES2
 decl_stmt|;
 specifier|final
 name|String
@@ -901,7 +901,7 @@ literal|"select y\n"
 operator|+
 literal|"from "
 operator|+
-name|commonValuesExpr2
+name|VALUES2
 operator|+
 literal|"\n"
 operator|+
@@ -964,7 +964,7 @@ literal|"select y\n"
 operator|+
 literal|"from "
 operator|+
-name|commonValuesExpr2
+name|VALUES2
 operator|+
 literal|"\n"
 operator|+
@@ -1027,7 +1027,7 @@ literal|"select y\n"
 operator|+
 literal|"from "
 operator|+
-name|commonValuesExpr2
+name|VALUES2
 operator|+
 literal|"\n"
 operator|+
@@ -1090,7 +1090,7 @@ literal|"select y\n"
 operator|+
 literal|"from "
 operator|+
-name|commonValuesExpr2
+name|VALUES2
 operator|+
 literal|"\n"
 operator|+
@@ -1138,7 +1138,7 @@ name|plan
 argument_list|)
 expr_stmt|;
 block|}
-comment|// Tests involving joins.
+comment|// Tests involving joins
 annotation|@
 name|Test
 specifier|public
@@ -1154,13 +1154,13 @@ literal|"select t.y, v.z\n"
 operator|+
 literal|"from "
 operator|+
-name|commonValuesExpr2
+name|VALUES2
 operator|+
 literal|"\n"
 operator|+
 literal|"  join "
 operator|+
-name|commonValuesExpr3
+name|VALUES3
 operator|+
 literal|" on t.x = v.w"
 decl_stmt|;
@@ -1227,13 +1227,13 @@ literal|"  select *\n"
 operator|+
 literal|"  from "
 operator|+
-name|commonValuesExpr2
+name|VALUES2
 operator|+
 literal|"\n"
 operator|+
 literal|"    join "
 operator|+
-name|commonValuesExpr3
+name|VALUES3
 operator|+
 literal|" on t.x = v.w) as r"
 decl_stmt|;
@@ -1281,7 +1281,7 @@ name|plan
 argument_list|)
 expr_stmt|;
 block|}
-comment|// Tests involving limit/offset.
+comment|// Tests involving LIMIT/OFFSET
 annotation|@
 name|Test
 specifier|public
@@ -1297,7 +1297,7 @@ literal|"select *\n"
 operator|+
 literal|"from "
 operator|+
-name|commonValuesExpr2
+name|VALUES2
 operator|+
 literal|"\n"
 operator|+
@@ -1354,7 +1354,7 @@ literal|"select *\n"
 operator|+
 literal|"from "
 operator|+
-name|commonValuesExpr2
+name|VALUES2
 operator|+
 literal|"\n"
 operator|+
@@ -1409,7 +1409,7 @@ literal|"select *\n"
 operator|+
 literal|"from "
 operator|+
-name|commonValuesExpr2
+name|VALUES2
 operator|+
 literal|"\n"
 operator|+
@@ -1469,7 +1469,7 @@ literal|"select *\n"
 operator|+
 literal|"from "
 operator|+
-name|commonValuesExpr4
+name|VALUES4
 operator|+
 literal|"\n"
 operator|+
@@ -1524,7 +1524,7 @@ literal|"select *\n"
 operator|+
 literal|"from "
 operator|+
-name|commonValuesExpr4
+name|VALUES4
 operator|+
 literal|"\n"
 operator|+
@@ -1579,7 +1579,7 @@ literal|"select *\n"
 operator|+
 literal|"from "
 operator|+
-name|commonValuesExpr2
+name|VALUES2
 operator|+
 literal|"\n"
 operator|+
@@ -1638,7 +1638,7 @@ literal|"select *\n"
 operator|+
 literal|"from "
 operator|+
-name|commonValuesExpr2
+name|VALUES2
 operator|+
 literal|"\n"
 operator|+
@@ -1691,7 +1691,7 @@ literal|"select *\n"
 operator|+
 literal|"from "
 operator|+
-name|commonValuesExpr2
+name|VALUES2
 operator|+
 literal|"\n"
 operator|+
@@ -1752,7 +1752,7 @@ literal|"select *\n"
 operator|+
 literal|"from "
 operator|+
-name|commonValuesExpr2
+name|VALUES2
 operator|+
 literal|"\n"
 operator|+
@@ -1811,7 +1811,7 @@ literal|"select *\n"
 operator|+
 literal|"from "
 operator|+
-name|commonValuesExpr2
+name|VALUES2
 operator|+
 literal|"\n"
 operator|+
@@ -1849,7 +1849,7 @@ name|plan
 argument_list|)
 expr_stmt|;
 block|}
-comment|// Tests on more complex queries as union operands.
+comment|// Tests on more complex queries as UNION operands
 annotation|@
 name|Test
 specifier|public
@@ -1865,7 +1865,7 @@ literal|"select *\n"
 operator|+
 literal|"from "
 operator|+
-name|commonValuesExpr1
+name|VALUES1
 operator|+
 literal|"\n"
 operator|+
@@ -1877,7 +1877,7 @@ literal|"select *\n"
 operator|+
 literal|"from "
 operator|+
-name|commonValuesExpr2
+name|VALUES2
 operator|+
 literal|"\n"
 operator|+
@@ -1942,7 +1942,7 @@ literal|"select x\n"
 operator|+
 literal|"from "
 operator|+
-name|commonValuesExpr1
+name|VALUES1
 operator|+
 literal|"\n"
 operator|+
@@ -1954,7 +1954,7 @@ literal|"select x\n"
 operator|+
 literal|"from "
 operator|+
-name|commonValuesExpr2
+name|VALUES2
 operator|+
 literal|"\n"
 operator|+
@@ -1998,7 +1998,7 @@ name|plan
 argument_list|)
 expr_stmt|;
 block|}
-comment|// Tests involving arithmetic operators.
+comment|// Tests involving arithmetic operators
 annotation|@
 name|Test
 specifier|public
@@ -2014,7 +2014,7 @@ literal|"select x\n"
 operator|+
 literal|"from "
 operator|+
-name|commonValuesExpr1
+name|VALUES1
 operator|+
 literal|"\n"
 operator|+
@@ -2069,7 +2069,7 @@ literal|"select x\n"
 operator|+
 literal|"from "
 operator|+
-name|commonValuesExpr1
+name|VALUES1
 operator|+
 literal|"\n"
 operator|+
@@ -2122,7 +2122,7 @@ literal|"select x\n"
 operator|+
 literal|"from "
 operator|+
-name|commonValuesExpr1
+name|VALUES1
 operator|+
 literal|"\n"
 operator|+
@@ -2175,7 +2175,7 @@ literal|"select x\n"
 operator|+
 literal|"from "
 operator|+
-name|commonValuesExpr1
+name|VALUES1
 operator|+
 literal|"\n"
 operator|+
@@ -2215,7 +2215,7 @@ name|plan
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Tests involving subqueries (both correlated and non correlated). */
+comment|// Tests involving sub-queries (both correlated and non correlated)
 annotation|@
 name|Ignore
 argument_list|(
@@ -2236,7 +2236,7 @@ literal|"select *\n"
 operator|+
 literal|"from "
 operator|+
-name|commonValuesExpr4
+name|VALUES4
 operator|+
 literal|"\n"
 operator|+
@@ -2246,7 +2246,7 @@ literal|"  select *\n"
 operator|+
 literal|"  from "
 operator|+
-name|commonValuesExpr3
+name|VALUES3
 operator|+
 literal|"\n"
 operator|+
@@ -2308,7 +2308,7 @@ literal|"select *\n"
 operator|+
 literal|"from "
 operator|+
-name|commonValuesExpr4
+name|VALUES4
 operator|+
 literal|"\n"
 operator|+
@@ -2318,7 +2318,7 @@ literal|"  select *\n"
 operator|+
 literal|"  from "
 operator|+
-name|commonValuesExpr3
+name|VALUES3
 operator|+
 literal|"\n"
 operator|+
@@ -2363,7 +2363,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testSubqueryAny
+name|testSubQueryAny
 parameter_list|()
 block|{
 specifier|final
@@ -2374,7 +2374,7 @@ literal|"select x\n"
 operator|+
 literal|"from "
 operator|+
-name|commonValuesExpr1
+name|VALUES1
 operator|+
 literal|"\n"
 operator|+
@@ -2384,7 +2384,7 @@ literal|"  select x\n"
 operator|+
 literal|"  from "
 operator|+
-name|commonValuesExpr2
+name|VALUES2
 operator|+
 literal|"\n"
 operator|+
@@ -2429,7 +2429,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testSubqueryAll
+name|testSubQueryAll
 parameter_list|()
 block|{
 specifier|final
@@ -2440,7 +2440,7 @@ literal|"select x\n"
 operator|+
 literal|"from "
 operator|+
-name|commonValuesExpr1
+name|VALUES1
 operator|+
 literal|"\n"
 operator|+
@@ -2450,7 +2450,7 @@ literal|"  select x\n"
 operator|+
 literal|"  from "
 operator|+
-name|commonValuesExpr2
+name|VALUES2
 operator|+
 literal|"\n"
 operator|+
