@@ -1017,33 +1017,6 @@ return|return
 literal|null
 return|;
 block|}
-comment|// If it does not contain table references, nothing needs to be done
-if|if
-condition|(
-operator|!
-name|RexUtil
-operator|.
-name|containsTableInputRef
-argument_list|(
-name|inputPreds
-operator|.
-name|pulledUpPredicates
-argument_list|)
-condition|)
-block|{
-name|newPreds
-operator|=
-name|newPreds
-operator|.
-name|union
-argument_list|(
-name|rexBuilder
-argument_list|,
-name|inputPreds
-argument_list|)
-expr_stmt|;
-continue|continue;
-block|}
 comment|// Gather table references
 specifier|final
 name|Set
@@ -1566,33 +1539,6 @@ comment|// Bail out
 return|return
 literal|null
 return|;
-block|}
-comment|// If it does not contain table references, nothing needs to be done
-if|if
-condition|(
-operator|!
-name|RexUtil
-operator|.
-name|containsTableInputRef
-argument_list|(
-name|inputPreds
-operator|.
-name|pulledUpPredicates
-argument_list|)
-condition|)
-block|{
-name|newPreds
-operator|=
-name|newPreds
-operator|.
-name|union
-argument_list|(
-name|rexBuilder
-argument_list|,
-name|inputPreds
-argument_list|)
-expr_stmt|;
-continue|continue;
 block|}
 comment|// Gather table references
 specifier|final
