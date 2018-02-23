@@ -3178,12 +3178,12 @@ name|SqlStdOperatorTable
 operator|.
 name|EQUALS
 argument_list|,
-name|x
-argument_list|,
 name|i1
+argument_list|,
+name|x
 argument_list|)
 decl_stmt|;
-comment|// $0 = 1 again
+comment|// 1 = $0
 specifier|final
 name|RexNode
 name|x_eq_2
@@ -3242,7 +3242,58 @@ name|RexNode
 name|newFilter
 decl_stmt|;
 comment|// Example 1.
-comment|// TODO:
+comment|//   condition: x = 1 or y = 2
+comment|//   target:    y = 2 or 1 = x
+comment|// yields
+comment|//   residue:   true
+name|newFilter
+operator|=
+name|SubstitutionVisitor
+operator|.
+name|splitFilter
+argument_list|(
+name|simplify
+argument_list|,
+name|rexBuilder
+operator|.
+name|makeCall
+argument_list|(
+name|SqlStdOperatorTable
+operator|.
+name|OR
+argument_list|,
+name|x_eq_1
+argument_list|,
+name|y_eq_2
+argument_list|)
+argument_list|,
+name|rexBuilder
+operator|.
+name|makeCall
+argument_list|(
+name|SqlStdOperatorTable
+operator|.
+name|OR
+argument_list|,
+name|y_eq_2
+argument_list|,
+name|x_eq_1_b
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|assertThat
+argument_list|(
+name|newFilter
+operator|.
+name|isAlwaysTrue
+argument_list|()
+argument_list|,
+name|equalTo
+argument_list|(
+literal|true
+argument_list|)
+argument_list|)
+expr_stmt|;
 comment|// Example 2.
 comment|//   condition: x = 1,
 comment|//   target:    x = 1 or z = 3
@@ -4071,7 +4122,7 @@ name|checkResultContains
 argument_list|(
 literal|"EnumerableAggregate(group=[{1}])\n"
 operator|+
-literal|"  EnumerableCalc(expr#0..1=[{inputs}], expr#2=[10], expr#3=[>($t1, $t2)], "
+literal|"  EnumerableCalc(expr#0..1=[{inputs}], expr#2=[10], expr#3=[<($t2, $t1)], "
 operator|+
 literal|"proj#0..1=[{exprs}], $condition=[$t3])\n"
 operator|+
@@ -4250,7 +4301,7 @@ name|checkResultContains
 argument_list|(
 literal|"EnumerableAggregate(group=[{1}], S=[$SUM0($3)])\n"
 operator|+
-literal|"  EnumerableCalc(expr#0..3=[{inputs}], expr#4=[10], expr#5=[>($t1, $t4)], "
+literal|"  EnumerableCalc(expr#0..3=[{inputs}], expr#4=[10], expr#5=[<($t4, $t1)], "
 operator|+
 literal|"proj#0..3=[{exprs}], $condition=[$t5])\n"
 operator|+
@@ -4288,7 +4339,7 @@ literal|" deptno=[$t0], $f1=[$t3])\n"
 operator|+
 literal|"  EnumerableAggregate(group=[{1}], agg#0=[$SUM0($3)])\n"
 operator|+
-literal|"    EnumerableCalc(expr#0..3=[{inputs}], expr#4=[10], expr#5=[>($t1, $t4)], "
+literal|"    EnumerableCalc(expr#0..3=[{inputs}], expr#4=[10], expr#5=[<($t4, $t1)], "
 operator|+
 literal|"proj#0..3=[{exprs}], $condition=[$t5])\n"
 operator|+
@@ -4347,9 +4398,9 @@ literal|"expr#4=[+($t1, $t2)], $f0=[$t3], $f1=[$t4])\n"
 operator|+
 literal|"  EnumerableAggregate(group=[{1}], agg#0=[$SUM0($3)])\n"
 operator|+
-literal|"    EnumerableCalc(expr#0..3=[{inputs}], expr#4=[10], "
+literal|"    EnumerableCalc(expr#0..3=[{inputs}], expr#4=[10], expr#5=[<($t4, $t1)], "
 operator|+
-literal|"expr#5=[>($t1, $t4)], proj#0..3=[{exprs}], $condition=[$t5])\n"
+literal|"proj#0..3=[{exprs}], $condition=[$t5])\n"
 operator|+
 literal|"      EnumerableTableScan(table=[[hr, m0]])"
 argument_list|)
@@ -4624,7 +4675,7 @@ name|CalciteAssert
 operator|.
 name|checkResultContains
 argument_list|(
-literal|"EnumerableCalc(expr#0..1=[{inputs}], expr#2=[20], expr#3=[>($t1, $t2)], "
+literal|"EnumerableCalc(expr#0..1=[{inputs}], expr#2=[20], expr#3=[<($t2, $t1)], "
 operator|+
 literal|"empid=[$t0], $condition=[$t3])\n"
 operator|+
@@ -4660,7 +4711,7 @@ name|CalciteAssert
 operator|.
 name|checkResultContains
 argument_list|(
-literal|"EnumerableCalc(expr#0..1=[{inputs}], expr#2=[20], expr#3=[>($t0, $t2)], "
+literal|"EnumerableCalc(expr#0..1=[{inputs}], expr#2=[20], expr#3=[<($t2, $t0)], "
 operator|+
 literal|"empid=[$t1], $condition=[$t3])\n"
 operator|+
@@ -4722,7 +4773,7 @@ name|CalciteAssert
 operator|.
 name|checkResultContains
 argument_list|(
-literal|"EnumerableCalc(expr#0..1=[{inputs}], expr#2=[20], expr#3=[>($t1, $t2)], "
+literal|"EnumerableCalc(expr#0..1=[{inputs}], expr#2=[20], expr#3=[<($t2, $t1)], "
 operator|+
 literal|"empid=[$t0], $condition=[$t3])\n"
 operator|+
@@ -4758,7 +4809,7 @@ name|CalciteAssert
 operator|.
 name|checkResultContains
 argument_list|(
-literal|"EnumerableCalc(expr#0..1=[{inputs}], expr#2=[15], expr#3=[>($t1, $t2)], "
+literal|"EnumerableCalc(expr#0..1=[{inputs}], expr#2=[15], expr#3=[<($t2, $t1)], "
 operator|+
 literal|"deptno=[$t0], $condition=[$t3])\n"
 operator|+
@@ -4796,7 +4847,7 @@ name|checkResultContains
 argument_list|(
 literal|"EnumerableAggregate(group=[{0}])\n"
 operator|+
-literal|"  EnumerableCalc(expr#0..1=[{inputs}], expr#2=[15], expr#3=[>($t1, $t2)], "
+literal|"  EnumerableCalc(expr#0..1=[{inputs}], expr#2=[15], expr#3=[<($t2, $t1)], "
 operator|+
 literal|"proj#0..1=[{exprs}], $condition=[$t3])\n"
 operator|+
@@ -4856,7 +4907,7 @@ literal|"EnumerableAggregate(group=[{2}])"
 argument_list|,
 literal|"EnumerableTableScan(table=[[hr, m0]])"
 argument_list|,
-literal|"expr#5=[10], expr#6=[>($t0, $t5)], expr#7=[11], expr#8=[<=($t0, $t7)]"
+literal|"expr#5=[10], expr#6=[>($t0, $t5)], expr#7=[11], expr#8=[>=($t7, $t0)]"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -5005,9 +5056,9 @@ literal|"EnumerableAggregate(group=[{4}])\n"
 operator|+
 literal|"  EnumerableCalc(expr#0..4=[{inputs}], expr#5=[=($t2, $t3)], "
 operator|+
-literal|"expr#6=[CAST($t0):VARCHAR CHARACTER SET \"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$primary\"], "
+literal|"expr#6=[CAST($t1):VARCHAR CHARACTER SET \"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$primary\"], "
 operator|+
-literal|"expr#7=[CAST($t1):VARCHAR CHARACTER SET \"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$primary\"], "
+literal|"expr#7=[CAST($t0):VARCHAR CHARACTER SET \"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$primary\"], "
 operator|+
 literal|"expr#8=[=($t6, $t7)], expr#9=[AND($t5, $t8)], proj#0..4=[{exprs}], $condition=[$t9])\n"
 operator|+
@@ -5145,7 +5196,7 @@ name|checkResultContains
 argument_list|(
 literal|"EnumerableAggregate(group=[{1}], S=[$SUM0($3)])\n"
 operator|+
-literal|"  EnumerableCalc(expr#0..3=[{inputs}], expr#4=[10], expr#5=[>($t1, $t4)], "
+literal|"  EnumerableCalc(expr#0..3=[{inputs}], expr#4=[10], expr#5=[<($t4, $t1)], "
 operator|+
 literal|"proj#0..3=[{exprs}], $condition=[$t5])\n"
 operator|+
@@ -5187,7 +5238,7 @@ literal|"deptno=[$t0], S=[$t3])\n"
 operator|+
 literal|"  EnumerableAggregate(group=[{1}], agg#0=[$SUM0($3)])\n"
 operator|+
-literal|"    EnumerableCalc(expr#0..3=[{inputs}], expr#4=[10], expr#5=[>($t1, $t4)], "
+literal|"    EnumerableCalc(expr#0..3=[{inputs}], expr#4=[10], expr#5=[<($t4, $t1)], "
 operator|+
 literal|"proj#0..3=[{exprs}], $condition=[$t5])\n"
 operator|+
@@ -5798,7 +5849,7 @@ literal|"EnumerableUnion(all=[true])"
 argument_list|,
 literal|"EnumerableTableScan(table=[[hr, m0]])"
 argument_list|,
-literal|"expr#5=[10], expr#6=[>($t0, $t5)], expr#7=[30], expr#8=[<=($t0, $t7)]"
+literal|"expr#5=[10], expr#6=[>($t0, $t5)], expr#7=[30], expr#8=[>=($t7, $t0)]"
 argument_list|)
 argument_list|)
 expr_stmt|;
