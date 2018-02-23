@@ -622,15 +622,6 @@ name|EnumerableRelImplementor
 extends|extends
 name|JavaRelImplementor
 block|{
-comment|/** Maximum number of arguments to a constructor. See    *<a href="https://issues.apache.org/jira/browse/CALCITE-1097">[CALCITE-1097]    * Exception when executing query with too many aggregation columns</a> for    * details. */
-specifier|private
-specifier|static
-specifier|final
-name|int
-name|MAX_CONSTRUCTOR_ARG_COUNT
-init|=
-literal|10
-decl_stmt|;
 specifier|public
 specifier|final
 name|Map
@@ -672,6 +663,11 @@ name|Maps
 operator|.
 name|newIdentityHashMap
 argument_list|()
+decl_stmt|;
+name|int
+name|windowCount
+init|=
+literal|0
 decl_stmt|;
 specifier|protected
 specifier|final
