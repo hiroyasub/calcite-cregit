@@ -6658,9 +6658,18 @@ operator|&&
 name|unique
 condition|)
 block|{
-comment|// Rel is already unique. Nothing to do.
+comment|// Rel is already unique.
 return|return
-name|this
+name|project
+argument_list|(
+name|fields
+argument_list|(
+name|groupSet
+operator|.
+name|asList
+argument_list|()
+argument_list|)
+argument_list|)
 return|;
 block|}
 block|}
