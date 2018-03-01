@@ -121,6 +121,22 @@ begin_import
 import|import static
 name|org
 operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|test
+operator|.
+name|Matchers
+operator|.
+name|isLinux
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
 name|hamcrest
 operator|.
 name|CoreMatchers
@@ -754,7 +770,7 @@ argument_list|(
 literal|1
 argument_list|)
 argument_list|,
-name|is
+name|isLinux
 argument_list|(
 name|plan
 argument_list|)
@@ -1643,7 +1659,7 @@ argument_list|(
 literal|1
 argument_list|)
 argument_list|,
-name|is
+name|isLinux
 argument_list|(
 name|plan
 argument_list|)

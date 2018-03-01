@@ -1605,6 +1605,22 @@ name|apache
 operator|.
 name|calcite
 operator|.
+name|test
+operator|.
+name|Matchers
+operator|.
+name|isLinux
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
 name|util
 operator|.
 name|Static
@@ -2341,19 +2357,14 @@ argument_list|)
 expr_stmt|;
 name|assertThat
 argument_list|(
-name|Util
-operator|.
-name|toLinux
-argument_list|(
 name|resultSet
 operator|.
 name|getString
 argument_list|(
 literal|1
 argument_list|)
-argument_list|)
 argument_list|,
-name|is
+name|isLinux
 argument_list|(
 literal|"EnumerableTableModify(table=[[adhoc, MUTABLE_EMPLOYEES]], operation=[INSERT], flattened=[false])\n"
 operator|+
@@ -24649,17 +24660,12 @@ name|HSQLDB
 case|:
 name|assertThat
 argument_list|(
-name|Util
-operator|.
-name|toLinux
-argument_list|(
 name|sqls
 index|[
 literal|0
 index|]
-argument_list|)
 argument_list|,
-name|equalTo
+name|isLinux
 argument_list|(
 literal|"SELECT COUNT(*) AS \"C\"\n"
 operator|+

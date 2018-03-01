@@ -1324,6 +1324,9 @@ name|project
 range|:
 name|Ord
 operator|.
+expr|<
+name|RexNode
+operator|>
 name|zip
 argument_list|(
 name|projects

@@ -537,8 +537,6 @@ name|RelFieldCollation
 argument_list|,
 name|Comparator
 argument_list|<
-name|?
-super|super
 name|Row
 argument_list|>
 argument_list|>
@@ -547,8 +545,6 @@ block|{
 specifier|public
 name|Comparator
 argument_list|<
-name|?
-super|super
 name|Row
 argument_list|>
 name|apply

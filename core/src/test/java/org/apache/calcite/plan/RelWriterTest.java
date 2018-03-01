@@ -289,20 +289,6 @@ end_import
 
 begin_import
 import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|util
-operator|.
-name|Util
-import|;
-end_import
-
-begin_import
-import|import
 name|com
 operator|.
 name|google
@@ -352,6 +338,22 @@ operator|.
 name|util
 operator|.
 name|Arrays
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|test
+operator|.
+name|Matchers
+operator|.
+name|isLinux
 import|;
 end_import
 
@@ -894,14 +896,9 @@ argument_list|)
 decl_stmt|;
 name|assertThat
 argument_list|(
-name|Util
-operator|.
-name|toLinux
-argument_list|(
 name|s
-argument_list|)
 argument_list|,
-name|is
+name|isLinux
 argument_list|(
 literal|"LogicalAggregate(group=[{0}], agg#0=[COUNT(DISTINCT $1)], agg#1=[COUNT()])\n"
 operator|+

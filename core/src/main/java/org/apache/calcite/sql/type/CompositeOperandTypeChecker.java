@@ -407,6 +407,9 @@ name|ord
 range|:
 name|Ord
 operator|.
+expr|<
+name|SqlOperandTypeChecker
+operator|>
 name|zip
 argument_list|(
 name|allowedRules
@@ -1051,6 +1054,9 @@ name|ord
 range|:
 name|Ord
 operator|.
+expr|<
+name|SqlOperandTypeChecker
+operator|>
 name|zip
 argument_list|(
 name|allowedRules
@@ -1117,6 +1123,9 @@ name|ord
 range|:
 name|Ord
 operator|.
+expr|<
+name|SqlOperandTypeChecker
+operator|>
 name|zip
 argument_list|(
 name|allowedRules
@@ -1165,6 +1174,9 @@ name|ord
 range|:
 name|Ord
 operator|.
+expr|<
+name|SqlOperandTypeChecker
+operator|>
 name|zip
 argument_list|(
 name|allowedRules

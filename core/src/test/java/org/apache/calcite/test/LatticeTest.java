@@ -171,20 +171,6 @@ end_import
 
 begin_import
 import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|util
-operator|.
-name|Util
-import|;
-end_import
-
-begin_import
-import|import
 name|com
 operator|.
 name|google
@@ -360,6 +346,22 @@ operator|.
 name|atomic
 operator|.
 name|AtomicInteger
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|test
+operator|.
+name|Matchers
+operator|.
+name|containsStringLinux
 import|;
 end_import
 
@@ -1396,16 +1398,11 @@ expr_stmt|;
 name|String
 name|s
 init|=
-name|Util
-operator|.
-name|toLinux
-argument_list|(
 name|RelOptUtil
 operator|.
 name|toString
 argument_list|(
 name|relNode
-argument_list|)
 argument_list|)
 decl_stmt|;
 name|assertThat
@@ -1414,7 +1411,7 @@ name|s
 argument_list|,
 name|anyOf
 argument_list|(
-name|containsString
+name|containsStringLinux
 argument_list|(
 literal|"LogicalProject(brand_name=[$1], customer_id=[$0])\n"
 operator|+
@@ -1423,7 +1420,7 @@ operator|+
 literal|"    LogicalTableScan(table=[[adhoc, star]])\n"
 argument_list|)
 argument_list|,
-name|containsString
+name|containsStringLinux
 argument_list|(
 literal|"LogicalAggregate(group=[{2, 10}])\n"
 operator|+

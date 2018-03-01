@@ -445,20 +445,6 @@ end_import
 
 begin_import
 import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|util
-operator|.
-name|Util
-import|;
-end_import
-
-begin_import
-import|import
 name|com
 operator|.
 name|google
@@ -512,6 +498,22 @@ operator|.
 name|framework
 operator|.
 name|AssertionFailedError
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|test
+operator|.
+name|Matchers
+operator|.
+name|isLinux
 import|;
 end_import
 
@@ -8408,7 +8410,7 @@ argument_list|(
 name|exec
 argument_list|()
 argument_list|,
-name|is
+name|isLinux
 argument_list|(
 name|expectedQuery
 argument_list|)
@@ -8579,10 +8581,6 @@ name|asStatement
 argument_list|()
 decl_stmt|;
 return|return
-name|Util
-operator|.
-name|toLinux
-argument_list|(
 name|sqlNode
 operator|.
 name|toSqlString
@@ -8592,7 +8590,6 @@ argument_list|)
 operator|.
 name|getSql
 argument_list|()
-argument_list|)
 return|;
 block|}
 catch|catch
