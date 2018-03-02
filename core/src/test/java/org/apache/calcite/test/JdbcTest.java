@@ -1541,16 +1541,6 @@ name|java
 operator|.
 name|util
 operator|.
-name|NoSuchElementException
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
 name|Objects
 import|;
 end_import
@@ -7424,21 +7414,23 @@ name|SQLException
 name|e
 parameter_list|)
 block|{
-throw|throw
-operator|new
-name|RuntimeException
+name|assertThat
 argument_list|(
 name|e
+operator|.
+name|getMessage
+argument_list|()
+argument_list|,
+name|is
+argument_list|(
+literal|"java.util.NoSuchElementException: Expecting cursor "
+operator|+
+literal|"position to be Position.OK, actual "
+operator|+
+literal|"is Position.BEFORE_START"
 argument_list|)
-throw|;
-block|}
-catch|catch
-parameter_list|(
-name|NoSuchElementException
-name|e
-parameter_list|)
-block|{
-comment|// ok
+argument_list|)
+expr_stmt|;
 block|}
 try|try
 block|{
