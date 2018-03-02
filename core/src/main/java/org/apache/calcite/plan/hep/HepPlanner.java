@@ -1776,10 +1776,16 @@ decl_stmt|;
 if|if
 condition|(
 name|newVertex
-operator|!=
+operator|==
 literal|null
+operator|||
+name|newVertex
+operator|==
+name|vertex
 condition|)
 block|{
+continue|continue;
+block|}
 operator|++
 name|nMatches
 expr_stmt|;
@@ -1824,7 +1830,6 @@ name|nMatches
 argument_list|)
 expr_stmt|;
 break|break;
-block|}
 block|}
 block|}
 return|return
@@ -1908,7 +1913,7 @@ init|=
 literal|0
 decl_stmt|;
 name|boolean
-name|fixpoint
+name|fixedPoint
 decl_stmt|;
 do|do
 block|{
@@ -1923,7 +1928,7 @@ argument_list|(
 name|root
 argument_list|)
 decl_stmt|;
-name|fixpoint
+name|fixedPoint
 operator|=
 literal|true
 expr_stmt|;
@@ -1966,10 +1971,16 @@ decl_stmt|;
 if|if
 condition|(
 name|newVertex
-operator|!=
+operator|==
 literal|null
+operator|||
+name|newVertex
+operator|==
+name|vertex
 condition|)
 block|{
+continue|continue;
+block|}
 operator|++
 name|nMatches
 expr_stmt|;
@@ -2047,7 +2058,7 @@ block|}
 block|}
 comment|// Remember to go around again since we're
 comment|// skipping some stuff.
-name|fixpoint
+name|fixedPoint
 operator|=
 literal|false
 expr_stmt|;
@@ -2056,11 +2067,10 @@ break|break;
 block|}
 block|}
 block|}
-block|}
 do|while
 condition|(
 operator|!
-name|fixpoint
+name|fixedPoint
 condition|)
 do|;
 block|}
