@@ -4558,6 +4558,315 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testUnparseSqlIntervalQualifierDb2
+parameter_list|()
+block|{
+name|String
+name|queryDatePlus
+init|=
+literal|"select  * from \"employee\" where  \"hire_date\" + "
+operator|+
+literal|"INTERVAL '19800' SECOND(5)> TIMESTAMP '2005-10-17 00:00:00' "
+decl_stmt|;
+name|String
+name|expectedDatePlus
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM foodmart.employee AS employee\n"
+operator|+
+literal|"WHERE (employee.hire_date + 19800 SECOND)"
+operator|+
+literal|"> TIMESTAMP '2005-10-17 00:00:00'"
+decl_stmt|;
+name|sql
+argument_list|(
+name|queryDatePlus
+argument_list|)
+operator|.
+name|withDb2
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expectedDatePlus
+argument_list|)
+expr_stmt|;
+name|String
+name|queryDateMinus
+init|=
+literal|"select  * from \"employee\" where  \"hire_date\" - "
+operator|+
+literal|"INTERVAL '19800' SECOND(5)> TIMESTAMP '2005-10-17 00:00:00' "
+decl_stmt|;
+name|String
+name|expectedDateMinus
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM foodmart.employee AS employee\n"
+operator|+
+literal|"WHERE (employee.hire_date - 19800 SECOND)"
+operator|+
+literal|"> TIMESTAMP '2005-10-17 00:00:00'"
+decl_stmt|;
+name|sql
+argument_list|(
+name|queryDateMinus
+argument_list|)
+operator|.
+name|withDb2
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expectedDateMinus
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testUnparseSqlIntervalQualifierMySql
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql0
+init|=
+literal|"select  * from \"employee\" where  \"hire_date\" - "
+operator|+
+literal|"INTERVAL '19800' SECOND(5)> TIMESTAMP '2005-10-17 00:00:00' "
+decl_stmt|;
+specifier|final
+name|String
+name|expect0
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM `foodmart`.`employee`\n"
+operator|+
+literal|"WHERE (`hire_date` - INTERVAL '19800' SECOND)"
+operator|+
+literal|"> TIMESTAMP '2005-10-17 00:00:00'"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql0
+argument_list|)
+operator|.
+name|withMysql
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expect0
+argument_list|)
+expr_stmt|;
+specifier|final
+name|String
+name|sql1
+init|=
+literal|"select  * from \"employee\" where  \"hire_date\" + "
+operator|+
+literal|"INTERVAL '10' HOUR> TIMESTAMP '2005-10-17 00:00:00' "
+decl_stmt|;
+specifier|final
+name|String
+name|expect1
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM `foodmart`.`employee`\n"
+operator|+
+literal|"WHERE (`hire_date` + INTERVAL '10' HOUR)"
+operator|+
+literal|"> TIMESTAMP '2005-10-17 00:00:00'"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql1
+argument_list|)
+operator|.
+name|withMysql
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expect1
+argument_list|)
+expr_stmt|;
+specifier|final
+name|String
+name|sql2
+init|=
+literal|"select  * from \"employee\" where  \"hire_date\" + "
+operator|+
+literal|"INTERVAL '1-2' year to month> TIMESTAMP '2005-10-17 00:00:00' "
+decl_stmt|;
+specifier|final
+name|String
+name|expect2
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM `foodmart`.`employee`\n"
+operator|+
+literal|"WHERE (`hire_date` + INTERVAL '1-2' YEAR_MONTH)"
+operator|+
+literal|"> TIMESTAMP '2005-10-17 00:00:00'"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql2
+argument_list|)
+operator|.
+name|withMysql
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expect2
+argument_list|)
+expr_stmt|;
+specifier|final
+name|String
+name|sql3
+init|=
+literal|"select  * from \"employee\" "
+operator|+
+literal|"where  \"hire_date\" + INTERVAL '39:12' MINUTE TO SECOND"
+operator|+
+literal|"> TIMESTAMP '2005-10-17 00:00:00' "
+decl_stmt|;
+specifier|final
+name|String
+name|expect3
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM `foodmart`.`employee`\n"
+operator|+
+literal|"WHERE (`hire_date` + INTERVAL '39:12' MINUTE_SECOND)"
+operator|+
+literal|"> TIMESTAMP '2005-10-17 00:00:00'"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql3
+argument_list|)
+operator|.
+name|withMysql
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expect3
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testUnparseSqlIntervalQualifierMsSql
+parameter_list|()
+block|{
+name|String
+name|queryDatePlus
+init|=
+literal|"select  * from \"employee\" where  \"hire_date\" +"
+operator|+
+literal|"INTERVAL '19800' SECOND(5)> TIMESTAMP '2005-10-17 00:00:00' "
+decl_stmt|;
+name|String
+name|expectedDatePlus
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM [foodmart].[employee]\n"
+operator|+
+literal|"WHERE DATEADD(SECOND, 19800, [hire_date])> '2005-10-17 00:00:00'"
+decl_stmt|;
+name|sql
+argument_list|(
+name|queryDatePlus
+argument_list|)
+operator|.
+name|withMssql
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expectedDatePlus
+argument_list|)
+expr_stmt|;
+name|String
+name|queryDateMinus
+init|=
+literal|"select  * from \"employee\" where  \"hire_date\" -"
+operator|+
+literal|"INTERVAL '19800' SECOND(5)> TIMESTAMP '2005-10-17 00:00:00' "
+decl_stmt|;
+name|String
+name|expectedDateMinus
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM [foodmart].[employee]\n"
+operator|+
+literal|"WHERE DATEADD(SECOND, -19800, [hire_date])> '2005-10-17 00:00:00'"
+decl_stmt|;
+name|sql
+argument_list|(
+name|queryDateMinus
+argument_list|)
+operator|.
+name|withMssql
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expectedDateMinus
+argument_list|)
+expr_stmt|;
+name|String
+name|queryDateMinusNegate
+init|=
+literal|"select  * from \"employee\" "
+operator|+
+literal|"where  \"hire_date\" -INTERVAL '-19800' SECOND(5)"
+operator|+
+literal|"> TIMESTAMP '2005-10-17 00:00:00' "
+decl_stmt|;
+name|String
+name|expectedDateMinusNegate
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM [foodmart].[employee]\n"
+operator|+
+literal|"WHERE DATEADD(SECOND, 19800, [hire_date])> '2005-10-17 00:00:00'"
+decl_stmt|;
+name|sql
+argument_list|(
+name|queryDateMinusNegate
+argument_list|)
+operator|.
+name|withMssql
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expectedDateMinusNegate
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testFloorMysqlWeek
 parameter_list|()
 block|{

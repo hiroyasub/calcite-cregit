@@ -25164,11 +25164,11 @@ literal|"\n"
 operator|+
 literal|"+ left\n"
 operator|+
+literal|"+ -\n"
+operator|+
 literal|"- left\n"
 operator|+
 literal|"- -\n"
-operator|+
-literal|"DATETIME_PLUS -\n"
 operator|+
 literal|"EXISTS pre\n"
 operator|+

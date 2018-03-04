@@ -29,6 +29,22 @@ name|avatica
 operator|.
 name|util
 operator|.
+name|TimeUnit
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|avatica
+operator|.
+name|util
+operator|.
 name|TimeUnitRange
 import|;
 end_import
@@ -60,6 +76,22 @@ operator|.
 name|type
 operator|.
 name|RelDataType
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|type
+operator|.
+name|RelDataTypeSystem
 import|;
 end_import
 
@@ -158,6 +190,20 @@ operator|.
 name|sql
 operator|.
 name|SqlIdentifier
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|SqlIntervalQualifier
 import|;
 end_import
 
@@ -1154,6 +1200,185 @@ argument_list|(
 name|frame
 argument_list|)
 expr_stmt|;
+block|}
+annotation|@
+name|Override
+specifier|public
+name|void
+name|unparseSqlIntervalQualifier
+parameter_list|(
+name|SqlWriter
+name|writer
+parameter_list|,
+name|SqlIntervalQualifier
+name|qualifier
+parameter_list|,
+name|RelDataTypeSystem
+name|typeSystem
+parameter_list|)
+block|{
+comment|//  Unit Value         | Expected Format
+comment|// --------------------+-------------------------------------------
+comment|//  MICROSECOND        | MICROSECONDS
+comment|//  SECOND             | SECONDS
+comment|//  MINUTE             | MINUTES
+comment|//  HOUR               | HOURS
+comment|//  DAY                | DAYS
+comment|//  WEEK               | WEEKS
+comment|//  MONTH              | MONTHS
+comment|//  QUARTER            | QUARTERS
+comment|//  YEAR               | YEARS
+comment|//  MINUTE_SECOND      | 'MINUTES:SECONDS'
+comment|//  HOUR_MINUTE        | 'HOURS:MINUTES'
+comment|//  DAY_HOUR           | 'DAYS HOURS'
+comment|//  YEAR_MONTH         | 'YEARS-MONTHS'
+comment|//  MINUTE_MICROSECOND | 'MINUTES:SECONDS.MICROSECONDS'
+comment|//  HOUR_MICROSECOND   | 'HOURS:MINUTES:SECONDS.MICROSECONDS'
+comment|//  SECOND_MICROSECOND | 'SECONDS.MICROSECONDS'
+comment|//  DAY_MINUTE         | 'DAYS HOURS:MINUTES'
+comment|//  DAY_MICROSECOND    | 'DAYS HOURS:MINUTES:SECONDS.MICROSECONDS'
+comment|//  DAY_SECOND         | 'DAYS HOURS:MINUTES:SECONDS'
+comment|//  HOUR_SECOND        | 'HOURS:MINUTES:SECONDS'
+if|if
+condition|(
+operator|!
+name|qualifier
+operator|.
+name|useDefaultFractionalSecondPrecision
+argument_list|()
+condition|)
+block|{
+throw|throw
+operator|new
+name|AssertionError
+argument_list|(
+literal|"Fractional second precision is not supported now "
+argument_list|)
+throw|;
+block|}
+specifier|final
+name|String
+name|start
+init|=
+name|validate
+argument_list|(
+name|qualifier
+operator|.
+name|timeUnitRange
+operator|.
+name|startUnit
+argument_list|)
+operator|.
+name|name
+argument_list|()
+decl_stmt|;
+if|if
+condition|(
+name|qualifier
+operator|.
+name|timeUnitRange
+operator|.
+name|startUnit
+operator|==
+name|TimeUnit
+operator|.
+name|SECOND
+operator|||
+name|qualifier
+operator|.
+name|timeUnitRange
+operator|.
+name|endUnit
+operator|==
+literal|null
+condition|)
+block|{
+name|writer
+operator|.
+name|keyword
+argument_list|(
+name|start
+argument_list|)
+expr_stmt|;
+block|}
+else|else
+block|{
+name|writer
+operator|.
+name|keyword
+argument_list|(
+name|start
+operator|+
+literal|"_"
+operator|+
+name|qualifier
+operator|.
+name|timeUnitRange
+operator|.
+name|endUnit
+operator|.
+name|name
+argument_list|()
+argument_list|)
+expr_stmt|;
+block|}
+block|}
+specifier|private
+name|TimeUnit
+name|validate
+parameter_list|(
+name|TimeUnit
+name|timeUnit
+parameter_list|)
+block|{
+switch|switch
+condition|(
+name|timeUnit
+condition|)
+block|{
+case|case
+name|MICROSECOND
+case|:
+case|case
+name|SECOND
+case|:
+case|case
+name|MINUTE
+case|:
+case|case
+name|HOUR
+case|:
+case|case
+name|DAY
+case|:
+case|case
+name|WEEK
+case|:
+case|case
+name|MONTH
+case|:
+case|case
+name|QUARTER
+case|:
+case|case
+name|YEAR
+case|:
+return|return
+name|timeUnit
+return|;
+default|default:
+throw|throw
+operator|new
+name|AssertionError
+argument_list|(
+literal|" Time unit "
+operator|+
+name|timeUnit
+operator|+
+literal|"is not supported now."
+argument_list|)
+throw|;
+block|}
 block|}
 block|}
 end_class
