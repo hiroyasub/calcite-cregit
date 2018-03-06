@@ -8486,7 +8486,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Unit test for    * {@link org.apache.calcite.rel.metadata.RelMdPredicates#getPredicates(SemiJoin, RelMetadataQuery)}. */
+comment|/** Unit test for    * {@link org.apache.calcite.rel.metadata.RelMdPredicates#getPredicates(Join, RelMetadataQuery)}. */
 annotation|@
 name|Test
 specifier|public
@@ -9421,7 +9421,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1960">[CALCITE-1960]    * RelMdPredicates.getPredicates is slow if there are many equivalent    * columns</a>. Since this is a performance problem, the test result does not    * change, but takes over 15 minutes before the fix and 6 seconds after. */
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1960">[CALCITE-1960]    * RelMdPredicates.getPredicates is slow if there are many equivalent    * columns</a>. There are much less duplicates after    *<a href="https://issues.apache.org/jira/browse/CALCITE-2205">[CALCITE-2205]</a>.    * Since this is a performance problem, the test result does not    * change, but takes over 15 minutes before the fix and 6 seconds after. */
 annotation|@
 name|Test
 argument_list|(
@@ -9551,7 +9551,7 @@ argument_list|()
 argument_list|,
 name|is
 argument_list|(
-literal|131089
+literal|18
 argument_list|)
 argument_list|)
 expr_stmt|;

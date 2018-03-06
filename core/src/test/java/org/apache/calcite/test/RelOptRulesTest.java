@@ -13110,6 +13110,7 @@ name|check
 argument_list|()
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2200">[CALCITE-2200]    * Infinite loop for JoinPushTransitivePredicatesRule</a>. */
 annotation|@
 name|Test
 specifier|public
@@ -13189,6 +13190,89 @@ name|hepPlanner
 argument_list|)
 operator|.
 name|checkUnchanged
+argument_list|()
+expr_stmt|;
+block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2205">[CALCITE-2205]    * One more infinite loop for JoinPushTransitivePredicatesRule</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testJoinPushTransitivePredicatesRule2
+parameter_list|()
+block|{
+name|HepProgram
+name|hepProgram
+init|=
+operator|new
+name|HepProgramBuilder
+argument_list|()
+operator|.
+name|addRuleInstance
+argument_list|(
+name|FilterJoinRule
+operator|.
+name|FILTER_ON_JOIN
+argument_list|)
+operator|.
+name|addRuleInstance
+argument_list|(
+name|FilterJoinRule
+operator|.
+name|JOIN
+argument_list|)
+operator|.
+name|addRuleInstance
+argument_list|(
+name|JoinPushTransitivePredicatesRule
+operator|.
+name|INSTANCE
+argument_list|)
+operator|.
+name|build
+argument_list|()
+decl_stmt|;
+name|HepPlanner
+name|hepPlanner
+init|=
+operator|new
+name|HepPlanner
+argument_list|(
+name|hepProgram
+argument_list|)
+decl_stmt|;
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select n1.SAL\n"
+operator|+
+literal|"from EMPNULLABLES_20 n1\n"
+operator|+
+literal|"where n1.SAL IN (\n"
+operator|+
+literal|"  select n2.SAL\n"
+operator|+
+literal|"  from EMPNULLABLES_20 n2\n"
+operator|+
+literal|"  where n1.SAL = n2.SAL or n1.SAL = 4)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|withDecorrelation
+argument_list|(
+literal|true
+argument_list|)
+operator|.
+name|with
+argument_list|(
+name|hepPlanner
+argument_list|)
+operator|.
+name|check
 argument_list|()
 expr_stmt|;
 block|}

@@ -7712,6 +7712,51 @@ literal|false
 return|;
 block|}
 block|}
+comment|/**    * Combines predicates AND, optimizes, and returns null if the result is    * always false.    *    * @param predicates Filter condition predicates    * @return simplified conjunction of predicates for the filter, null if always false    */
+specifier|public
+name|RexNode
+name|simplifyFilterPredicates
+parameter_list|(
+name|Iterable
+argument_list|<
+name|?
+extends|extends
+name|RexNode
+argument_list|>
+name|predicates
+parameter_list|)
+block|{
+specifier|final
+name|RexNode
+name|simplifiedAnds
+init|=
+name|simplifyAnds
+argument_list|(
+name|predicates
+argument_list|)
+decl_stmt|;
+if|if
+condition|(
+name|simplifiedAnds
+operator|.
+name|isAlwaysFalse
+argument_list|()
+condition|)
+block|{
+return|return
+literal|null
+return|;
+block|}
+comment|// Remove cast of BOOLEAN NOT NULL to BOOLEAN or vice versa. Filter accepts
+comment|// nullable and not-nullable conditions, but a CAST might get in the way of
+comment|// other rewrites.
+return|return
+name|removeNullabilityCast
+argument_list|(
+name|simplifiedAnds
+argument_list|)
+return|;
+block|}
 block|}
 end_class
 
