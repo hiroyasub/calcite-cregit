@@ -253,6 +253,17 @@ block|}
 annotation|@
 name|Override
 specifier|public
+name|boolean
+name|supportsWindowFunctions
+parameter_list|()
+block|{
+return|return
+literal|false
+return|;
+block|}
+annotation|@
+name|Override
+specifier|public
 name|void
 name|unparseCall
 parameter_list|(

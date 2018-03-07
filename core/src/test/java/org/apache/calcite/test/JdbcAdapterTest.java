@@ -1601,6 +1601,83 @@ name|close
 argument_list|()
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2206">[CALCITE-2206]    * JDBC adapter incorrectly pushes windowed aggregates down to HSQLDB</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testOverNonSupportedDialect
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select \"store_id\", \"account_id\", \"exp_date\",\n"
+operator|+
+literal|" \"time_id\", \"category_id\", \"currency_id\", \"amount\",\n"
+operator|+
+literal|" last_value(\"time_id\") over () as \"last_version\"\n"
+operator|+
+literal|"from \"expense_fact\""
+decl_stmt|;
+specifier|final
+name|String
+name|explain
+init|=
+literal|"PLAN="
+operator|+
+literal|"EnumerableWindow(window#0=[window(partition {} "
+operator|+
+literal|"order by [] range between UNBOUNDED PRECEDING and "
+operator|+
+literal|"UNBOUNDED FOLLOWING aggs [LAST_VALUE($3)])])\n"
+operator|+
+literal|"  JdbcToEnumerableConverter\n"
+operator|+
+literal|"    JdbcTableScan(table=[[foodmart, expense_fact]])\n"
+decl_stmt|;
+name|CalciteAssert
+operator|.
+name|model
+argument_list|(
+name|JdbcTest
+operator|.
+name|FOODMART_MODEL
+argument_list|)
+operator|.
+name|enable
+argument_list|(
+name|CalciteAssert
+operator|.
+name|DB
+operator|==
+name|DatabaseInstance
+operator|.
+name|HSQLDB
+argument_list|)
+operator|.
+name|query
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+name|explain
+argument_list|)
+operator|.
+name|runs
+argument_list|()
+operator|.
+name|planHasSql
+argument_list|(
+literal|"SELECT *\n"
+operator|+
+literal|"FROM \"foodmart\".\"expense_fact\""
+argument_list|)
+expr_stmt|;
+block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1506">[CALCITE-1506]    * Push OVER Clause to underlying SQL via JDBC adapter</a>.    *    *<p>Test runs only on Postgres; the default database, Hsqldb, does not    * support OVER. */
 annotation|@
 name|Test

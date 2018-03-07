@@ -2444,6 +2444,16 @@ return|return
 literal|false
 return|;
 block|}
+comment|/** Returns whether this dialect supports window functions (OVER clause). */
+specifier|public
+name|boolean
+name|supportsWindowFunctions
+parameter_list|()
+block|{
+return|return
+literal|true
+return|;
+block|}
 comment|/** Returns whether this dialect supports a given function or operator. */
 specifier|public
 name|boolean
