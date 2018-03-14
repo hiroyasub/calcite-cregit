@@ -215,11 +215,11 @@ argument_list|)
 operator|.
 name|explainContains
 argument_list|(
-literal|"PLAN=GeodeToEnumerableConverterRel\n"
+literal|"PLAN=GeodeToEnumerableConverter\n"
 operator|+
-literal|"  GeodeFilterRel(condition=[=(CAST($0):INTEGER, 123)])\n"
+literal|"  GeodeFilter(condition=[=(CAST($0):INTEGER, 123)])\n"
 operator|+
-literal|"    GeodeTableScanRel(table=[[TEST, BookMaster]])"
+literal|"    GeodeTableScan(table=[[TEST, BookMaster]])"
 argument_list|)
 expr_stmt|;
 block|}
@@ -269,11 +269,11 @@ argument_list|)
 operator|.
 name|explainContains
 argument_list|(
-literal|"PLAN=GeodeToEnumerableConverterRel\n"
+literal|"PLAN=GeodeToEnumerableConverter\n"
 operator|+
-literal|"  GeodeFilterRel(condition=[AND(>($0, 122),<=($0, 123))])\n"
+literal|"  GeodeFilter(condition=[AND(>($0, 122),<=($0, 123))])\n"
 operator|+
-literal|"    GeodeTableScanRel(table=[[TEST, BookMaster]])"
+literal|"    GeodeTableScan(table=[[TEST, BookMaster]])"
 argument_list|)
 expr_stmt|;
 block|}
@@ -321,15 +321,15 @@ argument_list|)
 operator|.
 name|explainContains
 argument_list|(
-literal|"PLAN=GeodeToEnumerableConverterRel\n"
+literal|"PLAN=GeodeToEnumerableConverter\n"
 operator|+
-literal|"  GeodeProjectRel(author=[$4])\n"
+literal|"  GeodeProject(author=[$4])\n"
 operator|+
-literal|"    GeodeFilterRel(condition=[OR(=(CAST($0):INTEGER, 123), "
+literal|"    GeodeFilter(condition=[OR(=(CAST($0):INTEGER, 123), "
 operator|+
 literal|"=(CAST($0):INTEGER, 789))])\n"
 operator|+
-literal|"      GeodeTableScanRel(table=[[TEST, BookMaster]])\n"
+literal|"      GeodeTableScan(table=[[TEST, BookMaster]])\n"
 argument_list|)
 expr_stmt|;
 block|}
@@ -379,17 +379,17 @@ argument_list|)
 operator|.
 name|explainContains
 argument_list|(
-literal|"PLAN=GeodeToEnumerableConverterRel\n"
+literal|"PLAN=GeodeToEnumerableConverter\n"
 operator|+
-literal|"  GeodeProjectRel(author=[$4])\n"
+literal|"  GeodeProject(author=[$4])\n"
 operator|+
-literal|"    GeodeFilterRel(condition=[OR(AND(>($0, 123), =(CAST($0):INTEGER, 789)), "
+literal|"    GeodeFilter(condition=[OR(AND(>($0, 123), =(CAST($0):INTEGER, 789)), "
 operator|+
 literal|"=(CAST($4):VARCHAR CHARACTER SET \"ISO-8859-1\" "
 operator|+
 literal|"COLLATE \"ISO-8859-1$en_US$primary\", 'Daisy Mae West'))])\n"
 operator|+
-literal|"      GeodeTableScanRel(table=[[TEST, BookMaster]])\n"
+literal|"      GeodeTableScan(table=[[TEST, BookMaster]])\n"
 operator|+
 literal|"\n"
 argument_list|)
@@ -486,13 +486,13 @@ argument_list|)
 operator|.
 name|explainContains
 argument_list|(
-literal|"PLAN=GeodeToEnumerableConverterRel\n"
+literal|"PLAN=GeodeToEnumerableConverter\n"
 operator|+
-literal|"  GeodeProjectRel(author=[$4])\n"
+literal|"  GeodeProject(author=[$4])\n"
 operator|+
-literal|"    GeodeFilterRel(condition=[>($0, 123)])\n"
+literal|"    GeodeFilter(condition=[>($0, 123)])\n"
 operator|+
-literal|"      GeodeTableScanRel(table=[[TEST, BookMaster]])"
+literal|"      GeodeTableScan(table=[[TEST, BookMaster]])"
 argument_list|)
 expr_stmt|;
 block|}
@@ -540,11 +540,11 @@ argument_list|)
 operator|.
 name|explainContains
 argument_list|(
-literal|"PLAN=GeodeToEnumerableConverterRel\n"
+literal|"PLAN=GeodeToEnumerableConverter\n"
 operator|+
-literal|"  GeodeSortRel(fetch=[1])\n"
+literal|"  GeodeSort(fetch=[1])\n"
 operator|+
-literal|"    GeodeTableScanRel(table=[[TEST, BookMaster]])"
+literal|"    GeodeTableScan(table=[[TEST, BookMaster]])"
 argument_list|)
 expr_stmt|;
 block|}
@@ -592,13 +592,13 @@ argument_list|)
 operator|.
 name|explainContains
 argument_list|(
-literal|"PLAN=GeodeToEnumerableConverterRel\n"
+literal|"PLAN=GeodeToEnumerableConverter\n"
 operator|+
-literal|"  GeodeSortRel(sort0=[$0], dir0=[ASC])\n"
+literal|"  GeodeSort(sort0=[$0], dir0=[ASC])\n"
 operator|+
-literal|"    GeodeProjectRel(yearPublished=[$3])\n"
+literal|"    GeodeProject(yearPublished=[$3])\n"
 operator|+
-literal|"      GeodeTableScanRel(table=[[TEST, BookMaster]])\n"
+literal|"      GeodeTableScan(table=[[TEST, BookMaster]])\n"
 argument_list|)
 expr_stmt|;
 block|}
@@ -646,13 +646,13 @@ argument_list|)
 operator|.
 name|explainContains
 argument_list|(
-literal|"PLAN=GeodeToEnumerableConverterRel\n"
+literal|"PLAN=GeodeToEnumerableConverter\n"
 operator|+
-literal|"  GeodeProjectRel(yearPublished=[$3])\n"
+literal|"  GeodeProject(yearPublished=[$3])\n"
 operator|+
-literal|"    GeodeSortRel(sort0=[$3], dir0=[ASC], fetch=[2])\n"
+literal|"    GeodeSort(sort0=[$3], dir0=[ASC], fetch=[2])\n"
 operator|+
-literal|"      GeodeTableScanRel(table=[[TEST, BookMaster]])\n"
+literal|"      GeodeTableScan(table=[[TEST, BookMaster]])\n"
 argument_list|)
 expr_stmt|;
 block|}
@@ -702,13 +702,13 @@ argument_list|)
 operator|.
 name|explainContains
 argument_list|(
-literal|"PLAN=GeodeToEnumerableConverterRel\n"
+literal|"PLAN=GeodeToEnumerableConverter\n"
 operator|+
-literal|"  GeodeProjectRel(yearPublished=[$3], itemNumber=[$0])\n"
+literal|"  GeodeProject(yearPublished=[$3], itemNumber=[$0])\n"
 operator|+
-literal|"    GeodeSortRel(sort0=[$3], sort1=[$0], dir0=[ASC], dir1=[DESC])\n"
+literal|"    GeodeSort(sort0=[$3], sort1=[$0], dir0=[ASC], dir1=[DESC])\n"
 operator|+
-literal|"      GeodeTableScanRel(table=[[TEST, BookMaster]])\n"
+literal|"      GeodeTableScan(table=[[TEST, BookMaster]])\n"
 argument_list|)
 expr_stmt|;
 block|}
@@ -762,13 +762,13 @@ argument_list|)
 operator|.
 name|explainContains
 argument_list|(
-literal|"PLAN=GeodeToEnumerableConverterRel\n"
+literal|"PLAN=GeodeToEnumerableConverter\n"
 operator|+
-literal|"  GeodeProjectRel(yearPublished=[$0])\n"
+literal|"  GeodeProject(yearPublished=[$0])\n"
 operator|+
-literal|"    GeodeAggregateRel(group=[{3, 4}])\n"
+literal|"    GeodeAggregate(group=[{3, 4}])\n"
 operator|+
-literal|"      GeodeTableScanRel(table=[[TEST, BookMaster]])"
+literal|"      GeodeTableScan(table=[[TEST, BookMaster]])"
 argument_list|)
 expr_stmt|;
 block|}
@@ -815,11 +815,11 @@ argument_list|)
 operator|.
 name|explainContains
 argument_list|(
-literal|"PLAN=GeodeToEnumerableConverterRel\n"
+literal|"PLAN=GeodeToEnumerableConverter\n"
 operator|+
-literal|"  GeodeAggregateRel(group=[{3}])\n"
+literal|"  GeodeAggregate(group=[{3}])\n"
 operator|+
-literal|"    GeodeTableScanRel(table=[[TEST, BookMaster]])"
+literal|"    GeodeTableScan(table=[[TEST, BookMaster]])"
 argument_list|)
 expr_stmt|;
 block|}
@@ -868,11 +868,11 @@ argument_list|)
 operator|.
 name|explainContains
 argument_list|(
-literal|"PLAN=GeodeToEnumerableConverterRel\n"
+literal|"PLAN=GeodeToEnumerableConverter\n"
 operator|+
-literal|"  GeodeAggregateRel(group=[{3}], EXPR$1=[MAX($2)])\n"
+literal|"  GeodeAggregate(group=[{3}], EXPR$1=[MAX($2)])\n"
 operator|+
-literal|"    GeodeTableScanRel(table=[[TEST, BookMaster]])"
+literal|"    GeodeTableScan(table=[[TEST, BookMaster]])"
 argument_list|)
 expr_stmt|;
 block|}
@@ -921,11 +921,11 @@ argument_list|)
 operator|.
 name|explainContains
 argument_list|(
-literal|"PLAN=GeodeToEnumerableConverterRel\n"
+literal|"PLAN=GeodeToEnumerableConverter\n"
 operator|+
-literal|"  GeodeAggregateRel(group=[{}], EXPR$0=[COUNT($2)])\n"
+literal|"  GeodeAggregate(group=[{}], EXPR$0=[COUNT($2)])\n"
 operator|+
-literal|"    GeodeTableScanRel(table=[[TEST, BookMaster]])\n"
+literal|"    GeodeTableScan(table=[[TEST, BookMaster]])\n"
 argument_list|)
 expr_stmt|;
 block|}
@@ -969,11 +969,11 @@ argument_list|)
 operator|.
 name|explainContains
 argument_list|(
-literal|"PLAN=GeodeToEnumerableConverterRel\n"
+literal|"PLAN=GeodeToEnumerableConverter\n"
 operator|+
-literal|"  GeodeAggregateRel(group=[{}], EXPR$0=[COUNT()])\n"
+literal|"  GeodeAggregate(group=[{}], EXPR$0=[COUNT()])\n"
 operator|+
-literal|"    GeodeTableScanRel(table=[[TEST, BookMaster]])\n"
+literal|"    GeodeTableScan(table=[[TEST, BookMaster]])\n"
 argument_list|)
 expr_stmt|;
 block|}
@@ -1021,11 +1021,11 @@ argument_list|)
 operator|.
 name|explainContains
 argument_list|(
-literal|"PLAN=GeodeToEnumerableConverterRel\n"
+literal|"PLAN=GeodeToEnumerableConverter\n"
 operator|+
-literal|"  GeodeAggregateRel(group=[{3}], EXPR$1=[COUNT($2)])\n"
+literal|"  GeodeAggregate(group=[{3}], EXPR$1=[COUNT($2)])\n"
 operator|+
-literal|"    GeodeTableScanRel(table=[[TEST, BookMaster]])\n"
+literal|"    GeodeTableScan(table=[[TEST, BookMaster]])\n"
 argument_list|)
 expr_stmt|;
 block|}
@@ -1073,13 +1073,13 @@ argument_list|)
 operator|.
 name|explainContains
 argument_list|(
-literal|"PLAN=GeodeToEnumerableConverterRel\n"
+literal|"PLAN=GeodeToEnumerableConverter\n"
 operator|+
-literal|"  GeodeAggregateRel(group=[{}], EXPR$0=[MAX($2)], EXPR$1=[MIN($2)], EXPR$2=[SUM($2)"
+literal|"  GeodeAggregate(group=[{}], EXPR$0=[MAX($2)], EXPR$1=[MIN($2)], EXPR$2=[SUM($2)"
 operator|+
 literal|"], EXPR$3=[AVG($2)])\n"
 operator|+
-literal|"    GeodeTableScanRel(table=[[TEST, BookMaster]])\n"
+literal|"    GeodeTableScan(table=[[TEST, BookMaster]])\n"
 argument_list|)
 expr_stmt|;
 block|}
@@ -1133,13 +1133,13 @@ argument_list|)
 operator|.
 name|explainContains
 argument_list|(
-literal|"PLAN=GeodeToEnumerableConverterRel\n"
+literal|"PLAN=GeodeToEnumerableConverter\n"
 operator|+
-literal|"  GeodeAggregateRel(group=[{3}], EXPR$1=[MAX($2)], EXPR$2=[MIN($2)], EXPR$3=[SUM($2)"
+literal|"  GeodeAggregate(group=[{3}], EXPR$1=[MAX($2)], EXPR$2=[MIN($2)], EXPR$3=[SUM($2)"
 operator|+
 literal|"], EXPR$4=[AVG($2)])\n"
 operator|+
-literal|"    GeodeTableScanRel(table=[[TEST, BookMaster]])\n"
+literal|"    GeodeTableScan(table=[[TEST, BookMaster]])\n"
 argument_list|)
 expr_stmt|;
 block|}
@@ -1189,13 +1189,13 @@ argument_list|)
 operator|.
 name|explainContains
 argument_list|(
-literal|"PLAN=GeodeToEnumerableConverterRel\n"
+literal|"PLAN=GeodeToEnumerableConverter\n"
 operator|+
-literal|"  GeodeProjectRel(yearPublished=[$0], MAXCOST=[$2], author=[$1])\n"
+literal|"  GeodeProject(yearPublished=[$0], MAXCOST=[$2], author=[$1])\n"
 operator|+
-literal|"    GeodeAggregateRel(group=[{3, 4}], MAXCOST=[MAX($2)])\n"
+literal|"    GeodeAggregate(group=[{3, 4}], MAXCOST=[MAX($2)])\n"
 operator|+
-literal|"      GeodeTableScanRel(table=[[TEST, BookMaster]])\n"
+literal|"      GeodeTableScan(table=[[TEST, BookMaster]])\n"
 argument_list|)
 expr_stmt|;
 block|}
@@ -1234,11 +1234,11 @@ argument_list|)
 operator|.
 name|explainContains
 argument_list|(
-literal|"PLAN=GeodeToEnumerableConverterRel\n"
+literal|"PLAN=GeodeToEnumerableConverter\n"
 operator|+
-literal|"  GeodeSortRel(fetch=[2])\n"
+literal|"  GeodeSort(fetch=[2])\n"
 operator|+
-literal|"    GeodeTableScanRel(table=[[TEST, BookCustomer]])\n"
+literal|"    GeodeTableScan(table=[[TEST, BookCustomer]])\n"
 argument_list|)
 expr_stmt|;
 block|}
@@ -1288,13 +1288,13 @@ argument_list|)
 operator|.
 name|explainContains
 argument_list|(
-literal|"PLAN=GeodeToEnumerableConverterRel\n"
+literal|"PLAN=GeodeToEnumerableConverter\n"
 operator|+
-literal|"  GeodeProjectRel(primaryAddress=[$3])\n"
+literal|"  GeodeProject(primaryAddress=[$3])\n"
 operator|+
-literal|"    GeodeSortRel(fetch=[2])\n"
+literal|"    GeodeSort(fetch=[2])\n"
 operator|+
-literal|"      GeodeTableScanRel(table=[[TEST, BookCustomer]])\n"
+literal|"      GeodeTableScan(table=[[TEST, BookCustomer]])\n"
 argument_list|)
 expr_stmt|;
 block|}
@@ -1340,13 +1340,13 @@ argument_list|)
 operator|.
 name|explainContains
 argument_list|(
-literal|"PLAN=GeodeToEnumerableConverterRel\n"
+literal|"PLAN=GeodeToEnumerableConverter\n"
 operator|+
-literal|"  GeodeProjectRel(city=[ITEM($3, 'city')])\n"
+literal|"  GeodeProject(city=[ITEM($3, 'city')])\n"
 operator|+
-literal|"    GeodeSortRel(fetch=[2])\n"
+literal|"    GeodeSort(fetch=[2])\n"
 operator|+
-literal|"      GeodeTableScanRel(table=[[TEST, BookCustomer]])\n"
+literal|"      GeodeTableScan(table=[[TEST, BookCustomer]])\n"
 argument_list|)
 expr_stmt|;
 block|}
@@ -1394,13 +1394,13 @@ argument_list|)
 operator|.
 name|explainContains
 argument_list|(
-literal|"PLAN=GeodeToEnumerableConverterRel\n"
+literal|"PLAN=GeodeToEnumerableConverter\n"
 operator|+
-literal|"  GeodeProjectRel(EXPR$0=[ITEM($3, 'addressLine2')])\n"
+literal|"  GeodeProject(EXPR$0=[ITEM($3, 'addressLine2')])\n"
 operator|+
-literal|"    GeodeSortRel(fetch=[2])\n"
+literal|"    GeodeSort(fetch=[2])\n"
 operator|+
-literal|"      GeodeTableScanRel(table=[[TEST, BookCustomer]])\n"
+literal|"      GeodeTableScan(table=[[TEST, BookCustomer]])\n"
 argument_list|)
 expr_stmt|;
 block|}
@@ -1452,13 +1452,13 @@ argument_list|)
 operator|.
 name|explainContains
 argument_list|(
-literal|"PLAN=GeodeToEnumerableConverterRel\n"
+literal|"PLAN=GeodeToEnumerableConverter\n"
 operator|+
-literal|"  GeodeProjectRel(postalCode=[ITEM($3, 'postalCode')])\n"
+literal|"  GeodeProject(postalCode=[ITEM($3, 'postalCode')])\n"
 operator|+
-literal|"    GeodeFilterRel(condition=[>(ITEM($3, 'postalCode'), '0')])\n"
+literal|"    GeodeFilter(condition=[>(ITEM($3, 'postalCode'), '0')])\n"
 operator|+
-literal|"      GeodeTableScanRel(table=[[TEST, BookCustomer]])\n"
+literal|"      GeodeTableScan(table=[[TEST, BookCustomer]])\n"
 argument_list|)
 expr_stmt|;
 block|}

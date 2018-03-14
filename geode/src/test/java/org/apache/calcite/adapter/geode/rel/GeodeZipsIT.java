@@ -176,15 +176,15 @@ argument_list|)
 operator|.
 name|explainContains
 argument_list|(
-literal|"PLAN=GeodeToEnumerableConverterRel\n"
+literal|"PLAN=GeodeToEnumerableConverter\n"
 operator|+
-literal|"  GeodeAggregateRel(group=[{1}], EXPR$1=[SUM($0)])\n"
+literal|"  GeodeAggregate(group=[{1}], EXPR$1=[SUM($0)])\n"
 operator|+
-literal|"    GeodeProjectRel(pop=[CAST($3):INTEGER], state=[CAST($4):VARCHAR(2) CHARACTER SET"
+literal|"    GeodeProject(pop=[CAST($3):INTEGER], state=[CAST($4):VARCHAR(2) CHARACTER SET"
 operator|+
 literal|" \"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$primary\"])\n"
 operator|+
-literal|"      GeodeTableScanRel(table=[[geode_raw, Zips]])\n"
+literal|"      GeodeTableScan(table=[[geode_raw, Zips]])\n"
 argument_list|)
 expr_stmt|;
 block|}
@@ -227,15 +227,15 @@ argument_list|)
 operator|.
 name|explainContains
 argument_list|(
-literal|"PLAN=GeodeToEnumerableConverterRel\n"
+literal|"PLAN=GeodeToEnumerableConverter\n"
 operator|+
-literal|"  GeodeAggregateRel(group=[{1}], po=[SUM($0)])\n"
+literal|"  GeodeAggregate(group=[{1}], po=[SUM($0)])\n"
 operator|+
-literal|"    GeodeProjectRel(pop=[CAST($3):INTEGER], state=[CAST($4):VARCHAR(2) CHARACTER SET"
+literal|"    GeodeProject(pop=[CAST($3):INTEGER], state=[CAST($4):VARCHAR(2) CHARACTER SET"
 operator|+
 literal|" \"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$primary\"])\n"
 operator|+
-literal|"      GeodeTableScanRel(table=[[geode_raw, Zips]])\n"
+literal|"      GeodeTableScan(table=[[geode_raw, Zips]])\n"
 argument_list|)
 expr_stmt|;
 block|}
@@ -278,11 +278,11 @@ argument_list|)
 operator|.
 name|explainContains
 argument_list|(
-literal|"PLAN=GeodeToEnumerableConverterRel\n"
+literal|"PLAN=GeodeToEnumerableConverter\n"
 operator|+
-literal|"  GeodeAggregateRel(group=[{4}], po=[SUM($3)])\n"
+literal|"  GeodeAggregate(group=[{4}], po=[SUM($3)])\n"
 operator|+
-literal|"    GeodeTableScanRel(table=[[geode_raw, Zips]])\n"
+literal|"    GeodeTableScan(table=[[geode_raw, Zips]])\n"
 argument_list|)
 expr_stmt|;
 block|}
@@ -325,11 +325,11 @@ argument_list|)
 operator|.
 name|explainContains
 argument_list|(
-literal|"PLAN=GeodeToEnumerableConverterRel\n"
+literal|"PLAN=GeodeToEnumerableConverter\n"
 operator|+
-literal|"  GeodeAggregateRel(group=[{4}], po=[SUM($3)])\n"
+literal|"  GeodeAggregate(group=[{4}], po=[SUM($3)])\n"
 operator|+
-literal|"    GeodeTableScanRel(table=[[geode_raw, Zips]])\n"
+literal|"    GeodeTableScan(table=[[geode_raw, Zips]])\n"
 argument_list|)
 expr_stmt|;
 block|}
@@ -368,11 +368,11 @@ argument_list|)
 operator|.
 name|explainContains
 argument_list|(
-literal|"PLAN=GeodeToEnumerableConverterRel\n"
+literal|"PLAN=GeodeToEnumerableConverter\n"
 operator|+
-literal|"  GeodeAggregateRel(group=[{}], EXPR$0=[MAX($3)])\n"
+literal|"  GeodeAggregate(group=[{}], EXPR$0=[MAX($3)])\n"
 operator|+
-literal|"    GeodeTableScanRel(table=[[geode_raw, Zips]])\n"
+literal|"    GeodeTableScan(table=[[geode_raw, Zips]])\n"
 argument_list|)
 expr_stmt|;
 block|}
@@ -419,21 +419,21 @@ literal|"  EnumerableLimit(fetch=[1])\n"
 operator|+
 literal|"    EnumerableJoin(condition=[=($1, $2)], joinType=[inner])\n"
 operator|+
-literal|"      GeodeToEnumerableConverterRel\n"
+literal|"      GeodeToEnumerableConverter\n"
 operator|+
-literal|"        GeodeProjectRel(_id=[$0], _id0=[CAST($0):VARCHAR CHARACTER SET "
+literal|"        GeodeProject(_id=[$0], _id0=[CAST($0):VARCHAR CHARACTER SET "
 operator|+
 literal|"\"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$primary\"])\n"
 operator|+
-literal|"          GeodeTableScanRel(table=[[geode_raw, Zips]])\n"
+literal|"          GeodeTableScan(table=[[geode_raw, Zips]])\n"
 operator|+
-literal|"      GeodeToEnumerableConverterRel\n"
+literal|"      GeodeToEnumerableConverter\n"
 operator|+
-literal|"        GeodeProjectRel(_id0=[CAST($0):VARCHAR CHARACTER SET \"ISO-8859-1\" COLLATE "
+literal|"        GeodeProject(_id0=[CAST($0):VARCHAR CHARACTER SET \"ISO-8859-1\" COLLATE "
 operator|+
 literal|"\"ISO-8859-1$en_US$primary\"])\n"
 operator|+
-literal|"          GeodeTableScanRel(table=[[geode_raw, Zips]])\n"
+literal|"          GeodeTableScan(table=[[geode_raw, Zips]])\n"
 argument_list|)
 expr_stmt|;
 block|}
@@ -479,13 +479,13 @@ argument_list|)
 operator|.
 name|explainContains
 argument_list|(
-literal|"PLAN=GeodeToEnumerableConverterRel\n"
+literal|"PLAN=GeodeToEnumerableConverter\n"
 operator|+
-literal|"  GeodeProjectRel(lat=[ITEM($2, 0)], lon=[ITEM($2, 1)])\n"
+literal|"  GeodeProject(lat=[ITEM($2, 0)], lon=[ITEM($2, 1)])\n"
 operator|+
-literal|"    GeodeSortRel(fetch=[1])\n"
+literal|"    GeodeSort(fetch=[1])\n"
 operator|+
-literal|"      GeodeTableScanRel(table=[[geode_raw, Zips]])\n"
+literal|"      GeodeTableScan(table=[[geode_raw, Zips]])\n"
 argument_list|)
 expr_stmt|;
 block|}
@@ -531,15 +531,15 @@ argument_list|)
 operator|.
 name|explainContains
 argument_list|(
-literal|"PLAN=GeodeToEnumerableConverterRel\n"
+literal|"PLAN=GeodeToEnumerableConverter\n"
 operator|+
-literal|"  GeodeProjectRel(lat=[ITEM($2, 0)], lon=[ITEM($2, 1)])\n"
+literal|"  GeodeProject(lat=[ITEM($2, 0)], lon=[ITEM($2, 1)])\n"
 operator|+
-literal|"    GeodeSortRel(fetch=[1])\n"
+literal|"    GeodeSort(fetch=[1])\n"
 operator|+
-literal|"      GeodeFilterRel(condition=[<(ITEM($2, 0), 0)])\n"
+literal|"      GeodeFilter(condition=[<(ITEM($2, 0), 0)])\n"
 operator|+
-literal|"        GeodeTableScanRel(table=[[geode_raw, Zips]])\n"
+literal|"        GeodeTableScan(table=[[geode_raw, Zips]])\n"
 argument_list|)
 expr_stmt|;
 name|CalciteAssert
@@ -572,15 +572,15 @@ argument_list|)
 operator|.
 name|explainContains
 argument_list|(
-literal|"PLAN=GeodeToEnumerableConverterRel\n"
+literal|"PLAN=GeodeToEnumerableConverter\n"
 operator|+
-literal|"  GeodeProjectRel(lat=[ITEM($2, 0)], lon=[ITEM($2, 1)])\n"
+literal|"  GeodeProject(lat=[ITEM($2, 0)], lon=[ITEM($2, 1)])\n"
 operator|+
-literal|"    GeodeSortRel(fetch=[1])\n"
+literal|"    GeodeSort(fetch=[1])\n"
 operator|+
-literal|"      GeodeFilterRel(condition=[>(ITEM($2, 0), 0)])\n"
+literal|"      GeodeFilter(condition=[>(ITEM($2, 0), 0)])\n"
 operator|+
-literal|"        GeodeTableScanRel(table=[[geode_raw, Zips]])\n"
+literal|"        GeodeTableScan(table=[[geode_raw, Zips]])\n"
 argument_list|)
 expr_stmt|;
 block|}
