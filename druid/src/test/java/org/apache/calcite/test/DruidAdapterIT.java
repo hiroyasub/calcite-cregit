@@ -13267,6 +13267,108 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSubStringWithNonConstantIndexes
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"SELECT COUNT(*) FROM "
+operator|+
+name|FOODMART_TABLE
+operator|+
+literal|" WHERE SUBSTRING(\"product_id\" from CAST(\"store_cost\" as INT)/1000 + 2  "
+operator|+
+literal|"for CAST(\"product_id\" as INT)) like '1%'"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|,
+name|FOODMART
+argument_list|)
+operator|.
+name|returnsOrdered
+argument_list|(
+literal|"EXPR$0=10893"
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|druidChecker
+argument_list|(
+literal|"\"queryType\":\"timeseries\""
+argument_list|,
+literal|"like(substring(\\\"product_id\\\""
+argument_list|)
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+literal|"PLAN=EnumerableInterpreter\n  DruidQuery(table=[[foodmart, foodmart]], "
+operator|+
+literal|"intervals=[[1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z]], "
+operator|+
+literal|"filter=[LIKE(SUBSTRING($1, +(/(CAST($91):INTEGER, 1000), 2), CAST($1):INTEGER), '1%')], "
+operator|+
+literal|"groups=[{}], aggs=[[COUNT()]])\n\n"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSubStringWithNonConstantIndex
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"SELECT COUNT(*) FROM "
+operator|+
+name|FOODMART_TABLE
+operator|+
+literal|" WHERE SUBSTRING(\"product_id\" from CAST(\"store_cost\" as INT)/1000 + 1) like '1%'"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|,
+name|FOODMART
+argument_list|)
+operator|.
+name|returnsOrdered
+argument_list|(
+literal|"EXPR$0=36839"
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|druidChecker
+argument_list|(
+literal|"like(substring(\\\"product_id\\\""
+argument_list|)
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+literal|"PLAN=EnumerableInterpreter\n  DruidQuery(table=[[foodmart, foodmart]], "
+operator|+
+literal|"intervals=[[1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z]], "
+operator|+
+literal|"filter=[LIKE(SUBSTRING($1, +(/(CAST($91):INTEGER, 1000), 1)), '1%')],"
+operator|+
+literal|" groups=[{}], aggs=[[COUNT()]])\n\n"
+argument_list|)
+expr_stmt|;
+block|}
 comment|/**    * Test case for https://issues.apache.org/jira/browse/CALCITE-2098.    * Need to make sure that when there we have a valid filter with no conjunction we still push    * all the valid filters.    */
 annotation|@
 name|Test
