@@ -2219,6 +2219,17 @@ name|deptNestedTable
 operator|.
 name|addColumn
 argument_list|(
+literal|"SKILL"
+argument_list|,
+name|f
+operator|.
+name|skillRecordType
+argument_list|)
+expr_stmt|;
+name|deptNestedTable
+operator|.
+name|addColumn
+argument_list|(
 literal|"EMPLOYEES"
 argument_list|,
 name|f

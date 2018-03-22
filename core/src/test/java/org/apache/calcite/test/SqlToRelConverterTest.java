@@ -4185,6 +4185,22 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testFlattenRecords
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"select employees[1] from dept_nested"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testUnnestArray
 parameter_list|()
 block|{
