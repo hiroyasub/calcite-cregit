@@ -14920,6 +14920,188 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testFloorQuarter
+parameter_list|()
+block|{
+name|String
+name|sql
+init|=
+literal|"SELECT floor(\"timestamp\" TO quarter), SUM(\"store_sales\") FROM "
+operator|+
+name|FOODMART_TABLE
+operator|+
+literal|" GROUP BY floor(\"timestamp\" TO quarter)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|,
+name|FOODMART
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|druidChecker
+argument_list|(
+literal|"{\"queryType\":\"timeseries\",\"dataSource\":\"foodmart\",\"descending\":false,"
+operator|+
+literal|"\"granularity\":{\"type\":\"period\",\"period\":\"P3M\",\"timeZone\":\"UTC\"},"
+operator|+
+literal|"\"aggregations\":[{\"type\":\"doubleSum\",\"name\":\"EXPR$1\",\"fieldName\":\"store_sales\"}],"
+operator|+
+literal|"\"intervals\":[\"1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z\"],\"context\":{\"skipEmptyBuckets\":true}}"
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testFloorQuarterPlusDim
+parameter_list|()
+block|{
+name|String
+name|sql
+init|=
+literal|"SELECT floor(\"timestamp\" TO quarter),\"product_id\",  SUM(\"store_sales\") FROM "
+operator|+
+name|FOODMART_TABLE
+operator|+
+literal|" GROUP BY floor(\"timestamp\" TO quarter), \"product_id\""
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|,
+name|FOODMART
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|druidChecker
+argument_list|(
+literal|"{\"queryType\":\"groupBy\",\"dataSource\":\"foodmart\",\"granularity\":\"all\",\"dimensions\":"
+operator|+
+literal|"[{\"type\":\"extraction\",\"dimension\":\"__time\",\"outputName\":\"floor_quarter\",\"extractionFn\":{\"type\":\"timeFormat\""
+argument_list|,
+literal|"\"granularity\":{\"type\":\"period\",\"period\":\"P3M\",\"timeZone\":\"UTC\"},\"timeZone\":\"UTC\",\"locale\":\"und\"}},"
+operator|+
+literal|"{\"type\":\"default\",\"dimension\":\"product_id\",\"outputName\":\"product_id\",\"outputType\":\"STRING\"}],"
+operator|+
+literal|"\"limitSpec\":{\"type\":\"default\"},\"aggregations\":[{\"type\":\"doubleSum\",\"name\":\"EXPR$2\",\"fieldName\":\"store_sales\"}],"
+operator|+
+literal|"\"intervals\":[\"1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z\"]}"
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testExtractQuarterPlusDim
+parameter_list|()
+block|{
+name|String
+name|sql
+init|=
+literal|"SELECT EXTRACT(quarter from \"timestamp\"),\"product_id\",  SUM(\"store_sales\") FROM "
+operator|+
+name|FOODMART_TABLE
+operator|+
+literal|" WHERE \"product_id\" = 1"
+operator|+
+literal|" GROUP BY EXTRACT(quarter from \"timestamp\"), \"product_id\""
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|,
+name|FOODMART
+argument_list|)
+operator|.
+name|returnsOrdered
+argument_list|(
+literal|"EXPR$0=1; product_id=1; EXPR$2=37.050000000000004\n"
+operator|+
+literal|"EXPR$0=2; product_id=1; EXPR$2=62.7\n"
+operator|+
+literal|"EXPR$0=3; product_id=1; EXPR$2=88.35\n"
+operator|+
+literal|"EXPR$0=4; product_id=1; EXPR$2=48.45"
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|druidChecker
+argument_list|(
+literal|"{\"queryType\":\"groupBy\",\"dataSource\":\"foodmart\",\"granularity\":\"all\",\"dimensions\":"
+operator|+
+literal|"[{\"type\":\"default\",\"dimension\":\"vc\",\"outputName\":\"vc\",\"outputType\":\"LONG\"},"
+operator|+
+literal|"{\"type\":\"default\",\"dimension\":\"product_id\",\"outputName\":\"product_id\",\"outputType\":\"STRING\"}],"
+operator|+
+literal|"\"virtualColumns\":[{\"type\":\"expression\",\"name\":\"vc\",\"expression\":\"timestamp_extract(\\\"__time\\\","
+argument_list|,
+literal|"QUARTER"
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testExtractQuarter
+parameter_list|()
+block|{
+name|String
+name|sql
+init|=
+literal|"SELECT EXTRACT(quarter from \"timestamp\"),  SUM(\"store_sales\") FROM "
+operator|+
+name|FOODMART_TABLE
+operator|+
+literal|" GROUP BY EXTRACT(quarter from \"timestamp\")"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|,
+name|FOODMART
+argument_list|)
+operator|.
+name|returnsOrdered
+argument_list|(
+literal|"EXPR$0=1; EXPR$1=139628.34999999971\n"
+operator|+
+literal|"EXPR$0=2; EXPR$1=132666.26999999944\n"
+operator|+
+literal|"EXPR$0=3; EXPR$1=140271.88999999964\n"
+operator|+
+literal|"EXPR$0=4; EXPR$1=152671.61999999985"
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|druidChecker
+argument_list|(
+literal|"{\"queryType\":\"groupBy\",\"dataSource\":\"foodmart\",\"granularity\":\"all\","
+operator|+
+literal|"\"dimensions\":[{\"type\":\"default\",\"dimension\":\"vc\",\"outputName\":\"vc\",\"outputType\":\"LONG\"}],"
+operator|+
+literal|"\"virtualColumns\":[{\"type\":\"expression\",\"name\":\"vc\",\"expression\":\"timestamp_extract(\\\"__time\\\","
+argument_list|,
+literal|"QUARTER"
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
 block|}
 end_class
 

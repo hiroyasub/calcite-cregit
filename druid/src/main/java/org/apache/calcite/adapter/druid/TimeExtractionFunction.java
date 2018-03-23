@@ -293,6 +293,10 @@ name|YEAR
 argument_list|,
 name|TimeUnitRange
 operator|.
+name|QUARTER
+argument_list|,
+name|TimeUnitRange
+operator|.
 name|MONTH
 argument_list|,
 name|TimeUnitRange
