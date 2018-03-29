@@ -651,7 +651,7 @@ name|sql
 init|=
 literal|"select * from \"scott\".emp\n"
 operator|+
-literal|"join \"scott\".dept using (deptno)"
+literal|"join \"scott\".dept on emp.deptno = dept.deptno"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -1595,7 +1595,7 @@ name|sql
 init|=
 literal|"select * from \"scott\".emp\n"
 operator|+
-literal|"join \"scott\".dept using (deptno)"
+literal|"join \"scott\".dept on emp.deptno = dept.deptno"
 decl_stmt|;
 return|return
 name|sql

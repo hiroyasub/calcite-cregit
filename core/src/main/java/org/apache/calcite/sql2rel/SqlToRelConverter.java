@@ -10859,6 +10859,11 @@ name|SqlValidatorUtil
 operator|.
 name|deriveNaturalJoinColumnList
 argument_list|(
+name|catalogReader
+operator|.
+name|nameMatcher
+argument_list|()
+argument_list|,
 name|leftRowType
 argument_list|,
 name|rightRowType

@@ -69,6 +69,16 @@ name|Map
 import|;
 end_import
 
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Set
+import|;
+end_import
+
 begin_comment
 comment|/**  * Checks whether two names are the same according to a case-sensitivity policy.  *  * @see SqlNameMatchers  */
 end_comment
@@ -144,6 +154,28 @@ parameter_list|,
 name|String
 name|fieldName
 parameter_list|)
+function_decl|;
+comment|/** Returns how many times a string occurs in a collection.    *    *<p>Similar to {@link java.util.Collections#frequency}. */
+name|int
+name|frequency
+parameter_list|(
+name|Iterable
+argument_list|<
+name|String
+argument_list|>
+name|names
+parameter_list|,
+name|String
+name|name
+parameter_list|)
+function_decl|;
+comment|/** Creates a set that has the same case-sensitivity as this matcher. */
+name|Set
+argument_list|<
+name|String
+argument_list|>
+name|createSet
+parameter_list|()
 function_decl|;
 block|}
 end_interface

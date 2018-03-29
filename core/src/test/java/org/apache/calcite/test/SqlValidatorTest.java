@@ -15636,9 +15636,55 @@ name|void
 name|testJoinUsing
 parameter_list|()
 block|{
-name|check
+specifier|final
+name|String
+name|empDeptType
+init|=
+literal|"RecordType(INTEGER NOT NULL DEPTNO,"
+operator|+
+literal|" INTEGER NOT NULL EMPNO,"
+operator|+
+literal|" VARCHAR(20) NOT NULL ENAME,"
+operator|+
+literal|" VARCHAR(10) NOT NULL JOB,"
+operator|+
+literal|" INTEGER MGR,"
+operator|+
+literal|" TIMESTAMP(0) NOT NULL HIREDATE,"
+operator|+
+literal|" INTEGER NOT NULL SAL,"
+operator|+
+literal|" INTEGER NOT NULL COMM,"
+operator|+
+literal|" BOOLEAN NOT NULL SLACKER,"
+operator|+
+literal|" VARCHAR(10) NOT NULL NAME) NOT NULL"
+decl_stmt|;
+name|sql
 argument_list|(
 literal|"select * from emp join dept using (deptno)"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+operator|.
+name|type
+argument_list|(
+name|empDeptType
+argument_list|)
+expr_stmt|;
+comment|// NATURAL has same effect as USING
+name|sql
+argument_list|(
+literal|"select * from emp natural join dept"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+operator|.
+name|type
+argument_list|(
+name|empDeptType
 argument_list|)
 expr_stmt|;
 comment|// fail: comm exists on one side not the other
@@ -15681,9 +15727,23 @@ literal|"Column 'deptno' not found in any table"
 argument_list|)
 expr_stmt|;
 comment|// ok to repeat (ok in Oracle10g too)
-name|check
-argument_list|(
+specifier|final
+name|String
+name|sql
+init|=
 literal|"select * from emp join dept using (deptno, deptno)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+operator|.
+name|type
+argument_list|(
+name|empDeptType
 argument_list|)
 expr_stmt|;
 comment|// inherited column, not found in either side of the join, in the
@@ -15777,6 +15837,73 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testNaturalJoinCaseSensitive
+parameter_list|()
+block|{
+comment|// With case-insensitive match, more columns are recognized as join columns
+comment|// and therefore "*" expands to fewer columns.
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"from (select empno, deptno from emp)\n"
+operator|+
+literal|"natural join (select deptno as \"deptno\", name from dept)"
+decl_stmt|;
+specifier|final
+name|String
+name|type0
+init|=
+literal|"RecordType(INTEGER NOT NULL EMPNO,"
+operator|+
+literal|" INTEGER NOT NULL DEPTNO,"
+operator|+
+literal|" INTEGER NOT NULL deptno,"
+operator|+
+literal|" VARCHAR(10) NOT NULL NAME) NOT NULL"
+decl_stmt|;
+specifier|final
+name|String
+name|type1
+init|=
+literal|"RecordType(INTEGER NOT NULL DEPTNO,"
+operator|+
+literal|" INTEGER NOT NULL EMPNO,"
+operator|+
+literal|" VARCHAR(10) NOT NULL NAME) NOT NULL"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|type
+argument_list|(
+name|type0
+argument_list|)
+operator|.
+name|tester
+argument_list|(
+name|tester
+operator|.
+name|withCaseSensitive
+argument_list|(
+literal|false
+argument_list|)
+argument_list|)
+operator|.
+name|type
+argument_list|(
+name|type1
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testNaturalJoinIncompatibleDatatype
 parameter_list|()
 block|{
@@ -15794,21 +15921,27 @@ literal|"Column 'DEPTNO' matched using NATURAL keyword or USING clause has incom
 argument_list|)
 expr_stmt|;
 comment|// INTEGER and VARCHAR are comparable: VARCHAR implicit converts to INTEGER
-name|check
+name|sql
 argument_list|(
 literal|"select * from emp natural ^join^\n"
 operator|+
 literal|"(select deptno, name as sal from dept)"
 argument_list|)
+operator|.
+name|ok
+argument_list|()
 expr_stmt|;
 comment|// make sal occur more than once on rhs, it is ignored and therefore
 comment|// there is no error about incompatible types
-name|check
+name|sql
 argument_list|(
 literal|"select * from emp natural join\n"
 operator|+
 literal|" (select deptno, name as sal, 'foo' as sal from dept)"
 argument_list|)
+operator|.
+name|ok
+argument_list|()
 expr_stmt|;
 block|}
 annotation|@
@@ -15830,12 +15963,21 @@ literal|"Column 'DEPTNO' matched using NATURAL keyword or USING clause has incom
 argument_list|)
 expr_stmt|;
 comment|// INTEGER and VARCHAR are comparable: VARCHAR implicit converts to INTEGER
-name|check
-argument_list|(
+specifier|final
+name|String
+name|sql
+init|=
 literal|"select * from emp\n"
 operator|+
 literal|"join (select deptno, name as sal from dept) using (deptno, sal)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
 argument_list|)
+operator|.
+name|ok
+argument_list|()
 expr_stmt|;
 block|}
 annotation|@
@@ -16181,8 +16323,10 @@ name|void
 name|testJoinUsingThreeWay
 parameter_list|()
 block|{
-name|check
-argument_list|(
+specifier|final
+name|String
+name|sql0
+init|=
 literal|"select *\n"
 operator|+
 literal|"from emp as e\n"
@@ -16190,10 +16334,19 @@ operator|+
 literal|"join dept as d using (deptno)\n"
 operator|+
 literal|"join emp as e2 using (empno)"
-argument_list|)
-expr_stmt|;
-name|checkFails
+decl_stmt|;
+name|sql
 argument_list|(
+name|sql0
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+specifier|final
+name|String
+name|sql1
+init|=
 literal|"select *\n"
 operator|+
 literal|"from emp as e\n"
@@ -16201,8 +16354,115 @@ operator|+
 literal|"join dept as d using (deptno)\n"
 operator|+
 literal|"join dept as d2 using (^deptno^)"
-argument_list|,
-literal|"Column name 'DEPTNO' in USING clause is not unique on one side of join"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"Column name 'DEPTNO' in USING clause is not "
+operator|+
+literal|"unique on one side of join"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql1
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+specifier|final
+name|String
+name|sql2
+init|=
+literal|"select *\n"
+operator|+
+literal|"from emp as e\n"
+operator|+
+literal|"join dept as d using (deptno)"
+decl_stmt|;
+specifier|final
+name|String
+name|type2
+init|=
+literal|"RecordType(INTEGER NOT NULL DEPTNO,"
+operator|+
+literal|" INTEGER NOT NULL EMPNO,"
+operator|+
+literal|" VARCHAR(20) NOT NULL ENAME,"
+operator|+
+literal|" VARCHAR(10) NOT NULL JOB,"
+operator|+
+literal|" INTEGER MGR,"
+operator|+
+literal|" TIMESTAMP(0) NOT NULL HIREDATE,"
+operator|+
+literal|" INTEGER NOT NULL SAL,"
+operator|+
+literal|" INTEGER NOT NULL COMM,"
+operator|+
+literal|" BOOLEAN NOT NULL SLACKER,"
+operator|+
+literal|" VARCHAR(10) NOT NULL NAME) NOT NULL"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql2
+argument_list|)
+operator|.
+name|type
+argument_list|(
+name|type2
+argument_list|)
+expr_stmt|;
+specifier|final
+name|String
+name|sql3
+init|=
+literal|"select *\n"
+operator|+
+literal|"from emp as e\n"
+operator|+
+literal|"join dept as d using (deptno)\n"
+operator|+
+literal|"join (values (10, 1000)) as b (empno, bonus) using (empno)"
+decl_stmt|;
+specifier|final
+name|String
+name|type3
+init|=
+literal|"RecordType(INTEGER NOT NULL EMPNO,"
+operator|+
+literal|" INTEGER NOT NULL DEPTNO,"
+operator|+
+literal|" VARCHAR(20) NOT NULL ENAME,"
+operator|+
+literal|" VARCHAR(10) NOT NULL JOB,"
+operator|+
+literal|" INTEGER MGR,"
+operator|+
+literal|" TIMESTAMP(0) NOT NULL HIREDATE,"
+operator|+
+literal|" INTEGER NOT NULL SAL,"
+operator|+
+literal|" INTEGER NOT NULL COMM,"
+operator|+
+literal|" BOOLEAN NOT NULL SLACKER,"
+operator|+
+literal|" VARCHAR(10) NOT NULL NAME,"
+operator|+
+literal|" INTEGER NOT NULL BONUS) NOT NULL"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql3
+argument_list|)
+operator|.
+name|type
+argument_list|(
+name|type3
 argument_list|)
 expr_stmt|;
 block|}

@@ -6487,9 +6487,13 @@ literal|"select *\n"
 operator|+
 literal|"from \"sales_fact_1997\" as s\n"
 operator|+
-literal|"  join \"customer\" as c using (\"customer_id\")\n"
+literal|"join \"customer\" as c\n"
 operator|+
-literal|"  join \"product\" as p using (\"product_id\")\n"
+literal|"  on s.\"customer_id\" = c.\"customer_id\"\n"
+operator|+
+literal|"join \"product\" as p\n"
+operator|+
+literal|"  on s.\"product_id\" = p.\"product_id\"\n"
 operator|+
 literal|"where c.\"city\" = 'San Francisco'\n"
 operator|+

@@ -2299,7 +2299,7 @@ name|sql
 init|=
 literal|"select *\n"
 operator|+
-literal|"from dept left join emp using (deptno)\n"
+literal|"from dept left join emp on dept.deptno = emp.deptno\n"
 operator|+
 literal|"where emp.deptno is not null and emp.sal> 100"
 decl_stmt|;
@@ -9605,16 +9605,28 @@ name|build
 argument_list|()
 decl_stmt|;
 comment|// Plan should be empty
-name|checkPlanning
-argument_list|(
-name|program
-argument_list|,
+specifier|final
+name|String
+name|sql
+init|=
 literal|"select * from (\n"
 operator|+
-literal|"select * from emp where false)\n"
+literal|"select * from emp where false) as e\n"
 operator|+
-literal|"join dept using (deptno)"
+literal|"join dept as d on e.deptno = d.deptno"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
 argument_list|)
+operator|.
+name|with
+argument_list|(
+name|program
+argument_list|)
+operator|.
+name|check
+argument_list|()
 expr_stmt|;
 block|}
 annotation|@
@@ -9663,16 +9675,28 @@ name|build
 argument_list|()
 decl_stmt|;
 comment|// Plan should be empty
-name|checkPlanning
-argument_list|(
-name|program
-argument_list|,
+specifier|final
+name|String
+name|sql
+init|=
 literal|"select * from (\n"
 operator|+
-literal|"select * from emp where false)\n"
+literal|"  select * from emp where false) e\n"
 operator|+
-literal|"left join dept using (deptno)"
+literal|"left join dept d on e.deptno = d.deptno"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
 argument_list|)
+operator|.
+name|with
+argument_list|(
+name|program
+argument_list|)
+operator|.
+name|check
+argument_list|()
 expr_stmt|;
 block|}
 annotation|@
@@ -9722,16 +9746,28 @@ argument_list|()
 decl_stmt|;
 comment|// Plan should be equivalent to "select * from emp join dept".
 comment|// Cannot optimize away the join because of RIGHT.
-name|checkPlanning
-argument_list|(
-name|program
-argument_list|,
+specifier|final
+name|String
+name|sql
+init|=
 literal|"select * from (\n"
 operator|+
-literal|"select * from emp where false)\n"
+literal|"  select * from emp where false) e\n"
 operator|+
-literal|"right join dept using (deptno)"
+literal|"right join dept d on e.deptno = d.deptno"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
 argument_list|)
+operator|.
+name|with
+argument_list|(
+name|program
+argument_list|)
+operator|.
+name|check
+argument_list|()
 expr_stmt|;
 block|}
 annotation|@
@@ -14079,7 +14115,7 @@ name|sql
 init|=
 literal|"select * from sales.emp e left join (\n"
 operator|+
-literal|"select * from sales.dept d) using (deptno)\n"
+literal|"  select * from sales.dept d) d on e.deptno = d.deptno\n"
 operator|+
 literal|"order by sal limit 10"
 decl_stmt|;
@@ -14148,7 +14184,7 @@ name|sql
 init|=
 literal|"select * from sales.emp e right join (\n"
 operator|+
-literal|"select * from sales.dept d) using (deptno)\n"
+literal|"  select * from sales.dept d) d on e.deptno = d.deptno\n"
 operator|+
 literal|"order by name"
 decl_stmt|;
@@ -14216,9 +14252,9 @@ specifier|final
 name|String
 name|sql
 init|=
-literal|"select * from sales.emp left join (\n"
+literal|"select * from sales.emp e left join (\n"
 operator|+
-literal|"select * from sales.dept) using (deptno)\n"
+literal|"  select * from sales.dept) d on e.deptno = d.deptno\n"
 operator|+
 literal|"order by sal, name limit 10"
 decl_stmt|;
@@ -14383,7 +14419,7 @@ name|sql
 init|=
 literal|"select * from sales.emp e right join (\n"
 operator|+
-literal|"select * from sales.dept d) using (deptno)\n"
+literal|"  select * from sales.dept d) d on e.deptno = d.deptno\n"
 operator|+
 literal|"order by name"
 decl_stmt|;
@@ -14468,7 +14504,7 @@ name|sql
 init|=
 literal|"select * from sales.emp e right join (\n"
 operator|+
-literal|"select * from sales.dept d) using (deptno)\n"
+literal|"  select * from sales.dept d) d on e.deptno = d.deptno\n"
 operator|+
 literal|"limit 10"
 decl_stmt|;

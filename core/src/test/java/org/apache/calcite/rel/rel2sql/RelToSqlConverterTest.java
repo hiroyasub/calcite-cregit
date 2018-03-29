@@ -3054,6 +3054,71 @@ literal|"select *\n"
 operator|+
 literal|"from \"sales_fact_1997\" as s\n"
 operator|+
+literal|"join \"customer\" as c on s.\"customer_id\" = c.\"customer_id\"\n"
+operator|+
+literal|"join \"product\" as p on s.\"product_id\" = p.\"product_id\"\n"
+operator|+
+literal|"join \"product_class\" as pc\n"
+operator|+
+literal|"  on p.\"product_class_id\" = pc.\"product_class_id\"\n"
+operator|+
+literal|"where c.\"city\" = 'San Francisco'\n"
+operator|+
+literal|"and pc.\"product_department\" = 'Snacks'\n"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM \"foodmart\".\"sales_fact_1997\"\n"
+operator|+
+literal|"INNER JOIN \"foodmart\".\"customer\" "
+operator|+
+literal|"ON \"sales_fact_1997\".\"customer_id\" = \"customer\""
+operator|+
+literal|".\"customer_id\"\n"
+operator|+
+literal|"INNER JOIN \"foodmart\".\"product\" "
+operator|+
+literal|"ON \"sales_fact_1997\".\"product_id\" = \"product\".\"product_id\"\n"
+operator|+
+literal|"INNER JOIN \"foodmart\".\"product_class\" "
+operator|+
+literal|"ON \"product\".\"product_class_id\" = \"product_class\""
+operator|+
+literal|".\"product_class_id\"\n"
+operator|+
+literal|"WHERE \"customer\".\"city\" = 'San Francisco' AND "
+operator|+
+literal|"\"product_class\".\"product_department\" = 'Snacks'"
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSimpleJoinUsing
+parameter_list|()
+block|{
+name|String
+name|query
+init|=
+literal|"select *\n"
+operator|+
+literal|"from \"sales_fact_1997\" as s\n"
+operator|+
 literal|"  join \"customer\" as c using (\"customer_id\")\n"
 operator|+
 literal|"  join \"product\" as p using (\"product_id\")\n"
@@ -3068,7 +3133,117 @@ specifier|final
 name|String
 name|expected
 init|=
-literal|"SELECT *\nFROM \"foodmart\".\"sales_fact_1997\"\n"
+literal|"SELECT"
+operator|+
+literal|" \"product\".\"product_class_id\","
+operator|+
+literal|" \"sales_fact_1997\".\"product_id\","
+operator|+
+literal|" \"sales_fact_1997\".\"customer_id\","
+operator|+
+literal|" \"sales_fact_1997\".\"time_id\","
+operator|+
+literal|" \"sales_fact_1997\".\"promotion_id\","
+operator|+
+literal|" \"sales_fact_1997\".\"store_id\","
+operator|+
+literal|" \"sales_fact_1997\".\"store_sales\","
+operator|+
+literal|" \"sales_fact_1997\".\"store_cost\","
+operator|+
+literal|" \"sales_fact_1997\".\"unit_sales\","
+operator|+
+literal|" \"customer\".\"account_num\","
+operator|+
+literal|" \"customer\".\"lname\","
+operator|+
+literal|" \"customer\".\"fname\","
+operator|+
+literal|" \"customer\".\"mi\","
+operator|+
+literal|" \"customer\".\"address1\","
+operator|+
+literal|" \"customer\".\"address2\","
+operator|+
+literal|" \"customer\".\"address3\","
+operator|+
+literal|" \"customer\".\"address4\","
+operator|+
+literal|" \"customer\".\"city\","
+operator|+
+literal|" \"customer\".\"state_province\","
+operator|+
+literal|" \"customer\".\"postal_code\","
+operator|+
+literal|" \"customer\".\"country\","
+operator|+
+literal|" \"customer\".\"customer_region_id\","
+operator|+
+literal|" \"customer\".\"phone1\","
+operator|+
+literal|" \"customer\".\"phone2\","
+operator|+
+literal|" \"customer\".\"birthdate\","
+operator|+
+literal|" \"customer\".\"marital_status\","
+operator|+
+literal|" \"customer\".\"yearly_income\","
+operator|+
+literal|" \"customer\".\"gender\","
+operator|+
+literal|" \"customer\".\"total_children\","
+operator|+
+literal|" \"customer\".\"num_children_at_home\","
+operator|+
+literal|" \"customer\".\"education\","
+operator|+
+literal|" \"customer\".\"date_accnt_opened\","
+operator|+
+literal|" \"customer\".\"member_card\","
+operator|+
+literal|" \"customer\".\"occupation\","
+operator|+
+literal|" \"customer\".\"houseowner\","
+operator|+
+literal|" \"customer\".\"num_cars_owned\","
+operator|+
+literal|" \"customer\".\"fullname\","
+operator|+
+literal|" \"product\".\"brand_name\","
+operator|+
+literal|" \"product\".\"product_name\","
+operator|+
+literal|" \"product\".\"SKU\","
+operator|+
+literal|" \"product\".\"SRP\","
+operator|+
+literal|" \"product\".\"gross_weight\","
+operator|+
+literal|" \"product\".\"net_weight\","
+operator|+
+literal|" \"product\".\"recyclable_package\","
+operator|+
+literal|" \"product\".\"low_fat\","
+operator|+
+literal|" \"product\".\"units_per_case\","
+operator|+
+literal|" \"product\".\"cases_per_pallet\","
+operator|+
+literal|" \"product\".\"shelf_width\","
+operator|+
+literal|" \"product\".\"shelf_height\","
+operator|+
+literal|" \"product\".\"shelf_depth\","
+operator|+
+literal|" \"product_class\".\"product_subcategory\","
+operator|+
+literal|" \"product_class\".\"product_category\","
+operator|+
+literal|" \"product_class\".\"product_department\","
+operator|+
+literal|" \"product_class\".\"product_family\"\n"
+operator|+
+literal|"FROM \"foodmart\".\"sales_fact_1997\"\n"
 operator|+
 literal|"INNER JOIN \"foodmart\".\"customer\" "
 operator|+
@@ -6252,11 +6427,17 @@ literal|"select *\n"
 operator|+
 literal|"from \"sales_fact_1997\" as s\n"
 operator|+
-literal|"join \"customer\" as c using (\"customer_id\")\n"
+literal|"join \"customer\" as c\n"
 operator|+
-literal|"join \"product\" as p using (\"product_id\")\n"
+literal|"  on s.\"customer_id\" = c.\"customer_id\"\n"
 operator|+
-literal|"join \"product_class\" as pc using (\"product_class_id\")\n"
+literal|"join \"product\" as p\n"
+operator|+
+literal|"  on s.\"product_id\" = p.\"product_id\"\n"
+operator|+
+literal|"join \"product_class\" as pc\n"
+operator|+
+literal|"  on p.\"product_class_id\" = pc.\"product_class_id\"\n"
 operator|+
 literal|"where c.\"city\" = 'San Francisco'\n"
 operator|+

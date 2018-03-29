@@ -603,16 +603,6 @@ name|java
 operator|.
 name|util
 operator|.
-name|Collections
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
 name|HashMap
 import|;
 end_import
@@ -3143,7 +3133,7 @@ return|return
 literal|null
 return|;
 block|}
-comment|/**    * Derives the list of column names suitable for NATURAL JOIN. These are the    * columns that occur exactly once on each side of the join.    *    * @param leftRowType  Row type of left input to the join    * @param rightRowType Row type of right input to the join    * @return List of columns that occur once on each side    */
+comment|/**    * Derives the list of column names suitable for NATURAL JOIN. These are the    * columns that occur exactly once on each side of the join.    *    * @param nameMatcher Whether matches are case-sensitive    * @param leftRowType  Row type of left input to the join    * @param rightRowType Row type of right input to the join    * @return List of columns that occur once on each side    */
 specifier|public
 specifier|static
 name|List
@@ -3152,6 +3142,9 @@ name|String
 argument_list|>
 name|deriveNaturalJoinColumnList
 parameter_list|(
+name|SqlNameMatcher
+name|nameMatcher
+parameter_list|,
 name|RelDataType
 name|leftRowType
 parameter_list|,
@@ -3205,8 +3198,7 @@ control|)
 block|{
 if|if
 condition|(
-operator|(
-name|Collections
+name|nameMatcher
 operator|.
 name|frequency
 argument_list|(
@@ -3216,10 +3208,8 @@ name|name
 argument_list|)
 operator|==
 literal|1
-operator|)
 operator|&&
-operator|(
-name|Collections
+name|nameMatcher
 operator|.
 name|frequency
 argument_list|(
@@ -3229,7 +3219,6 @@ name|name
 argument_list|)
 operator|==
 literal|1
-operator|)
 condition|)
 block|{
 name|naturalColumnNames

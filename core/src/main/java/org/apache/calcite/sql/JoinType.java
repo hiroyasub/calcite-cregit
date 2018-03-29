@@ -84,6 +84,38 @@ operator|.
 name|ROOT
 argument_list|)
 decl_stmt|;
+comment|/**    * Returns whether a join of this type may generate NULL values on the    * left-hand side.    */
+specifier|public
+name|boolean
+name|generatesNullsOnLeft
+parameter_list|()
+block|{
+return|return
+name|this
+operator|==
+name|RIGHT
+operator|||
+name|this
+operator|==
+name|FULL
+return|;
+block|}
+comment|/**    * Returns whether a join of this type may generate NULL values on the    * right-hand side.    */
+specifier|public
+name|boolean
+name|generatesNullsOnRight
+parameter_list|()
+block|{
+return|return
+name|this
+operator|==
+name|LEFT
+operator|||
+name|this
+operator|==
+name|FULL
+return|;
+block|}
 comment|/**    * Creates a parse-tree node representing an occurrence of this    * condition type keyword at a particular position in the parsed    * text.    */
 specifier|public
 name|SqlLiteral
