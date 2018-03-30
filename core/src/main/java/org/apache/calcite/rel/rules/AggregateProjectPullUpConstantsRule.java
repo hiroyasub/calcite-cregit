@@ -863,13 +863,28 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
-if|else if
+else|else
+block|{
+name|int
+name|pos
+init|=
+name|aggregate
+operator|.
+name|getGroupSet
+argument_list|()
+operator|.
+name|nth
+argument_list|(
+name|i
+argument_list|)
+decl_stmt|;
+if|if
 condition|(
 name|map
 operator|.
 name|containsKey
 argument_list|(
-name|i
+name|pos
 argument_list|)
 condition|)
 block|{
@@ -907,7 +922,7 @@ name|map
 operator|.
 name|get
 argument_list|(
-name|i
+name|pos
 argument_list|)
 operator|.
 name|getType
@@ -927,7 +942,7 @@ name|map
 operator|.
 name|get
 argument_list|(
-name|i
+name|pos
 argument_list|)
 argument_list|,
 literal|true
@@ -942,7 +957,7 @@ name|map
 operator|.
 name|get
 argument_list|(
-name|i
+name|pos
 argument_list|)
 expr_stmt|;
 block|}
@@ -963,6 +978,7 @@ expr_stmt|;
 operator|++
 name|source
 expr_stmt|;
+block|}
 block|}
 name|projects
 operator|.
