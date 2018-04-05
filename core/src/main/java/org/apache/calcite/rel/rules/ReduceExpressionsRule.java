@@ -2812,7 +2812,14 @@ name|RelOptPredicateList
 name|predicates
 parameter_list|)
 block|{
+name|boolean
+name|changed
+init|=
+literal|false
+decl_stmt|;
 comment|// Replace predicates on CASE to CASE on predicates.
+name|changed
+operator||=
 operator|new
 name|CaseShuttle
 argument_list|()
@@ -2895,7 +2902,7 @@ argument_list|()
 condition|)
 block|{
 return|return
-literal|false
+name|changed
 return|;
 block|}
 comment|// Remove redundant casts before reducing constant expressions.
@@ -3040,22 +3047,6 @@ argument_list|>
 argument_list|>
 name|pairs
 init|=
-operator|(
-name|List
-argument_list|<
-name|Map
-operator|.
-name|Entry
-argument_list|<
-name|RexNode
-argument_list|,
-name|RexNode
-argument_list|>
-argument_list|>
-operator|)
-operator|(
-name|List
-operator|)
 name|Lists
 operator|.
 name|newArrayList
@@ -3141,7 +3132,7 @@ comment|// final RexExecutorImpl executor =
 comment|//   new RexExecutorImpl(Schemas.createDataContext(null));
 comment|// rootRel.getCluster().getPlanner().setExecutor(executor);
 return|return
-literal|false
+name|changed
 return|;
 block|}
 specifier|final
@@ -3192,7 +3183,7 @@ argument_list|)
 condition|)
 block|{
 return|return
-literal|false
+name|changed
 return|;
 block|}
 comment|// For Project, we have to be sure to preserve the result
