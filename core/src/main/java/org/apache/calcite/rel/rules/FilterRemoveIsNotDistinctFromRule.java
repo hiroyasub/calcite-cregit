@@ -85,7 +85,7 @@ name|rel
 operator|.
 name|core
 operator|.
-name|RelFactories
+name|Filter
 import|;
 end_import
 
@@ -99,9 +99,9 @@ name|calcite
 operator|.
 name|rel
 operator|.
-name|logical
+name|core
 operator|.
-name|LogicalFilter
+name|RelFactories
 import|;
 end_import
 
@@ -201,12 +201,26 @@ name|calcite
 operator|.
 name|tools
 operator|.
+name|RelBuilder
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|tools
+operator|.
 name|RelBuilderFactory
 import|;
 end_import
 
 begin_comment
-comment|/**  * Planner rule that replaces {@code IS NOT DISTINCT FROM}  * in a {@link org.apache.calcite.rel.logical.LogicalFilter}  * with logically equivalent operations.  *  * @see org.apache.calcite.sql.fun.SqlStdOperatorTable#IS_NOT_DISTINCT_FROM  */
+comment|/**  * Planner rule that replaces {@code IS NOT DISTINCT FROM}  * in a {@link Filter} with logically equivalent operations.  *  * @see org.apache.calcite.sql.fun.SqlStdOperatorTable#IS_NOT_DISTINCT_FROM  */
 end_comment
 
 begin_class
@@ -246,7 +260,7 @@ name|super
 argument_list|(
 name|operand
 argument_list|(
-name|LogicalFilter
+name|Filter
 operator|.
 name|class
 argument_list|,
@@ -269,7 +283,7 @@ name|RelOptRuleCall
 name|call
 parameter_list|)
 block|{
-name|LogicalFilter
+name|Filter
 name|oldFilter
 init|=
 name|call
@@ -324,27 +338,30 @@ argument_list|()
 argument_list|)
 decl_stmt|;
 specifier|final
-name|RelFactories
-operator|.
-name|FilterFactory
-name|factory
+name|RelBuilder
+name|relBuilder
 init|=
-name|RelFactories
+name|call
 operator|.
-name|DEFAULT_FILTER_FACTORY
+name|builder
+argument_list|()
 decl_stmt|;
+specifier|final
 name|RelNode
 name|newFilterRel
 init|=
-name|factory
+name|relBuilder
 operator|.
-name|createFilter
+name|push
 argument_list|(
 name|oldFilter
 operator|.
 name|getInput
 argument_list|()
-argument_list|,
+argument_list|)
+operator|.
+name|filter
+argument_list|(
 name|oldFilterCond
 operator|.
 name|accept
@@ -352,6 +369,9 @@ argument_list|(
 name|rewriteShuttle
 argument_list|)
 argument_list|)
+operator|.
+name|build
+argument_list|()
 decl_stmt|;
 name|call
 operator|.
