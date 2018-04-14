@@ -2315,7 +2315,7 @@ name|dialect
 operator|.
 name|supportsWindowFunctions
 argument_list|()
-operator|&&
+operator|||
 operator|!
 name|RexOver
 operator|.
