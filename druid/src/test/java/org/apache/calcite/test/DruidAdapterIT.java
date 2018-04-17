@@ -5772,7 +5772,7 @@ literal|"'upperStrict':true,'ordering':'numeric'}]},'aggregations':[{'type':'dou
 operator|+
 literal|"'name':'EXPR$0','fieldName':'store_sales'}],'intervals':['1997-01-01T00:00:00.000Z/"
 operator|+
-literal|"1998-01-01T00:00:00.000Z'],'context':{'skipEmptyBuckets':true}}"
+literal|"1998-01-01T00:00:00.000Z'],'context':{'skipEmptyBuckets':false}}"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -8418,7 +8418,7 @@ literal|"'lowerStrict':false,'ordering':'numeric'},'aggregations':[{'type':'doub
 operator|+
 literal|":'EXPR$0','fieldName':'store_sales'}],'intervals':['1900-01-09T00:00:00.000Z/2992-01"
 operator|+
-literal|"-10T00:00:00.000Z'],'context':{'skipEmptyBuckets':true}}"
+literal|"-10T00:00:00.000Z'],'context':{'skipEmptyBuckets':false}}"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -8458,7 +8458,7 @@ literal|"'granularity':'all','aggregations':[{'type':'doubleSum','name':'EXPR$0'
 operator|+
 literal|"'store_sales'}],'intervals':['1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z'],"
 operator|+
-literal|"'context':{'skipEmptyBuckets':true}}"
+literal|"'context':{'skipEmptyBuckets':false}}"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -8502,7 +8502,7 @@ literal|"'store_sales'},{'type':'doubleSum','name':'EXPR$1','fieldName':'store_c
 operator|+
 literal|"'intervals':['1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z'],"
 operator|+
-literal|"'context':{'skipEmptyBuckets':true}}"
+literal|"'context':{'skipEmptyBuckets':false}}"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -8553,7 +8553,7 @@ literal|"'fieldName':'store_cost'}}],'intervals':"
 operator|+
 literal|"['1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z'],"
 operator|+
-literal|"'context':{'skipEmptyBuckets':true}}"
+literal|"'context':{'skipEmptyBuckets':false}}"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -8601,7 +8601,7 @@ literal|"'fieldName':'store_cost'}],'intervals':"
 operator|+
 literal|"['1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z'],"
 operator|+
-literal|"'context':{'skipEmptyBuckets':true}}"
+literal|"'context':{'skipEmptyBuckets':false}}"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -8663,7 +8663,7 @@ literal|"\"fieldName\":\"store_sales\"}],"
 operator|+
 literal|"\"intervals\":[\"1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z\"],"
 operator|+
-literal|"\"context\":{\"skipEmptyBuckets\":true}}"
+literal|"\"context\":{\"skipEmptyBuckets\":false}}"
 argument_list|)
 argument_list|)
 operator|.
@@ -8704,11 +8704,6 @@ decl_stmt|;
 name|sql
 argument_list|(
 name|sql
-argument_list|)
-operator|.
-name|returnsOrdered
-argument_list|(
-literal|""
 argument_list|)
 operator|.
 name|explainContains
@@ -8757,7 +8752,7 @@ literal|"'Seattle'},'aggregations':[{'type':'doubleSum','name':'EXPR$0','fieldNa
 operator|+
 literal|"'store_sales'}],'intervals':['1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z'],"
 operator|+
-literal|"'context':{'skipEmptyBuckets':true}}"
+literal|"'context':{'skipEmptyBuckets':false}}"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -8806,7 +8801,7 @@ literal|"'EXPR$0','fieldName':'store_sales'}},{'type':'doubleSum','name':'EXPR$1
 operator|+
 literal|":'store_cost'}],'intervals':['1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z'],"
 operator|+
-literal|"'context':{'skipEmptyBuckets':true}}"
+literal|"'context':{'skipEmptyBuckets':false}}"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -8854,7 +8849,7 @@ literal|"'name':'EXPR$1','fieldName':'store_cost'}],"
 operator|+
 literal|"'intervals':['1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z'],"
 operator|+
-literal|"'context':{'skipEmptyBuckets':true}}"
+literal|"'context':{'skipEmptyBuckets':false}}"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -8910,7 +8905,7 @@ literal|"'EXPR$1','fieldName':'store_sales'}}],'intervals':"
 operator|+
 literal|"['1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z'],"
 operator|+
-literal|"'context':{'skipEmptyBuckets':true}}"
+literal|"'context':{'skipEmptyBuckets':false}}"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -8973,7 +8968,7 @@ literal|"'EXPR$1','fieldName':'store_sales'}}],'intervals':"
 operator|+
 literal|"['1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z'],"
 operator|+
-literal|"'context':{'skipEmptyBuckets':true}}"
+literal|"'context':{'skipEmptyBuckets':false}}"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -9039,7 +9034,7 @@ literal|"'store_sales'},{'type':'doubleSum','name':'EXPR$1','fieldName':'store_c
 operator|+
 literal|"'intervals':['1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z'],"
 operator|+
-literal|"'context':{'skipEmptyBuckets':true}}"
+literal|"'context':{'skipEmptyBuckets':false}}"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -9095,6 +9090,11 @@ literal|",'lower':'1997','lowerStrict':true,'ordering':'numeric'},{'type':'bound
 operator|+
 literal|"'dimension':'the_year','upper':'1997','upperStrict':false,'ordering':'numeric'}]}"
 decl_stmt|;
+name|String
+name|context
+init|=
+literal|"'skipEmptyBuckets':false"
+decl_stmt|;
 name|sql
 argument_list|(
 name|sql
@@ -9105,12 +9105,9 @@ argument_list|(
 name|druidChecker
 argument_list|(
 name|expectedFilter
+argument_list|,
+name|context
 argument_list|)
-argument_list|)
-operator|.
-name|returnsUnordered
-argument_list|(
-literal|""
 argument_list|)
 expr_stmt|;
 block|}
@@ -10148,7 +10145,7 @@ literal|"'thetaSketch','name':'EXPR$0','fieldName':'customer_id_ts'}],"
 operator|+
 literal|"'intervals':['1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z'],"
 operator|+
-literal|"'context':{'skipEmptyBuckets':true}}"
+literal|"'context':{'skipEmptyBuckets':false}}"
 argument_list|)
 argument_list|)
 operator|.
@@ -10564,7 +10561,7 @@ literal|"'aggregations':[{'type':'doubleSum','name':'A','fieldName':'store_cost'
 operator|+
 literal|"'intervals':['1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z'],"
 operator|+
-literal|"'context':{'skipEmptyBuckets':true}}"
+literal|"'context':{'skipEmptyBuckets':false}}"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -10655,7 +10652,7 @@ literal|"lower':'1016.0','lowerStrict':false,'upper':'1016.0','upperStrict':fals
 operator|+
 literal|"'aggregations':[{'type':'doubleSum','name':'A','fieldName':'store_cost'}],"
 operator|+
-literal|"'intervals':['1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z'],'context':{'skipEmptyBuckets':true}}"
+literal|"'intervals':['1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z'],'context':{'skipEmptyBuckets':false}}"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -14231,7 +14228,7 @@ literal|"{'type':'count','name':'EXPR$0','fieldName':'product_id'}}},"
 operator|+
 literal|"{'type':'count','name':'EXPR$1'}],'intervals':['1900-01-09T00:00:00.000Z/"
 operator|+
-literal|"2992-01-10T00:00:00.000Z'],'context':{'skipEmptyBuckets':true}}"
+literal|"2992-01-10T00:00:00.000Z'],'context':{'skipEmptyBuckets':false}}"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -15200,6 +15197,45 @@ operator|+
 literal|"\"virtualColumns\":[{\"type\":\"expression\",\"name\":\"vc\",\"expression\":\"timestamp_extract(\\\"__time\\\","
 argument_list|,
 literal|"QUARTER"
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+comment|// Case https://issues.apache.org/jira/browse/CALCITE-2262
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSelectCountStarPlusOtherAggs
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"SELECT COUNT(*), SUM(\"store_sales\"), COUNT(\"store_sales\") FROM "
+operator|+
+name|FOODMART_TABLE
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|,
+name|FOODMART
+argument_list|)
+operator|.
+name|returnsOrdered
+argument_list|(
+literal|"EXPR$0=86829; EXPR$1=565238.1299999986; EXPR$2=86829"
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|druidChecker
+argument_list|(
+literal|"{'queryType':'timeseries'"
+argument_list|,
+literal|"'context':{'skipEmptyBuckets':false}}"
 argument_list|)
 argument_list|)
 expr_stmt|;
