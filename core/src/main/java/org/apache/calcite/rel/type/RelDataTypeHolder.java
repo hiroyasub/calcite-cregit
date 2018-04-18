@@ -197,6 +197,33 @@ literal|false
 argument_list|)
 return|;
 block|}
+comment|// A dynamic star field matches any field
+if|if
+condition|(
+name|f
+operator|.
+name|getType
+argument_list|()
+operator|.
+name|getSqlTypeName
+argument_list|()
+operator|==
+name|SqlTypeName
+operator|.
+name|DYNAMIC_STAR
+condition|)
+block|{
+return|return
+name|Pair
+operator|.
+name|of
+argument_list|(
+name|f
+argument_list|,
+literal|false
+argument_list|)
+return|;
+block|}
 block|}
 specifier|final
 name|SqlTypeName
@@ -217,7 +244,7 @@ name|SqlTypeName
 operator|.
 name|ANY
 decl_stmt|;
-comment|// This field does not exist in our field list add it
+comment|// This field does not exist in our field list; add it
 name|RelDataTypeField
 name|newField
 init|=

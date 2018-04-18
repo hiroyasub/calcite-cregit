@@ -469,9 +469,10 @@ name|Config
 operator|.
 name|DEFAULT
 argument_list|,
-name|SqlConformanceEnum
+name|tester
 operator|.
-name|DEFAULT
+name|getConformance
+argument_list|()
 argument_list|)
 return|;
 block|}
@@ -4159,6 +4160,103 @@ decl_stmt|;
 name|sql
 argument_list|(
 name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testUnnestArrayAggPlan
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select d.deptno, e2.empno_avg\n"
+operator|+
+literal|"from dept_nested as d outer apply\n"
+operator|+
+literal|" (select avg(e.empno) as empno_avg from UNNEST(d.employees) as e) e2"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|conformance
+argument_list|(
+name|SqlConformanceEnum
+operator|.
+name|LENIENT
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testUnnestArrayPlan
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select d.deptno, e2.empno\n"
+operator|+
+literal|"from dept_nested as d,\n"
+operator|+
+literal|" UNNEST(d.employees) e2"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|with
+argument_list|(
+name|getExtendedTester
+argument_list|()
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testUnnestArrayPlanAs
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select d.deptno, e2.empno\n"
+operator|+
+literal|"from dept_nested as d,\n"
+operator|+
+literal|" UNNEST(d.employees) as e2(empno, y, z)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|with
+argument_list|(
+name|getExtendedTester
+argument_list|()
 argument_list|)
 operator|.
 name|ok
@@ -8964,6 +9062,74 @@ decl_stmt|;
 name|sql
 argument_list|(
 name|sql
+argument_list|)
+operator|.
+name|with
+argument_list|(
+name|getTesterWithDynamicTable
+argument_list|()
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testDynamicNestedColumn
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select t3.fake_q1['fake_col2'] as fake2\n"
+operator|+
+literal|"from (\n"
+operator|+
+literal|"  select t2.fake_col as fake_q1\n"
+operator|+
+literal|"  from SALES.CUSTOMER as t2) as t3"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|with
+argument_list|(
+name|getTesterWithDynamicTable
+argument_list|()
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testDynamicSchemaUnnest
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql3
+init|=
+literal|"select t1.c_nationkey, t3.fake_col3\n"
+operator|+
+literal|"from SALES.CUSTOMER as t1,\n"
+operator|+
+literal|"lateral (select t2.fake_col2 as fake_col3\n"
+operator|+
+literal|"         from unnest(t1.fake_col) as t2) as t3"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql3
 argument_list|)
 operator|.
 name|with
