@@ -463,6 +463,20 @@ name|Set
 import|;
 end_import
 
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|concurrent
+operator|.
+name|atomic
+operator|.
+name|AtomicInteger
+import|;
+end_import
+
 begin_comment
 comment|/**  * Base class for every relational expression ({@link RelNode}).  */
 end_comment
@@ -476,14 +490,18 @@ implements|implements
 name|RelNode
 block|{
 comment|//~ Static fields/initializers ---------------------------------------------
-comment|// TODO jvs 10-Oct-2003:  Make this thread safe.  Either synchronize, or
-comment|// keep this per-VolcanoPlanner.
 comment|/** Generator for {@link #id} values. */
+specifier|private
 specifier|static
-name|int
-name|nextId
+specifier|final
+name|AtomicInteger
+name|NEXT_ID
 init|=
+operator|new
+name|AtomicInteger
+argument_list|(
 literal|0
+argument_list|)
 decl_stmt|;
 specifier|private
 specifier|static
@@ -519,6 +537,7 @@ name|cluster
 decl_stmt|;
 comment|/**    * unique id of this object -- for debugging    */
 specifier|protected
+specifier|final
 name|int
 name|id
 decl_stmt|;
@@ -563,8 +582,10 @@ name|this
 operator|.
 name|id
 operator|=
-name|nextId
-operator|++
+name|NEXT_ID
+operator|.
+name|getAndIncrement
+argument_list|()
 expr_stmt|;
 name|this
 operator|.
