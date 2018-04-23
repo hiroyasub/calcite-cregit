@@ -15827,6 +15827,9 @@ case|:
 case|case
 name|LITERAL
 case|:
+case|case
+name|NOT
+case|:
 return|return
 name|node
 return|;
