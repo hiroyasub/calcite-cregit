@@ -13596,6 +13596,84 @@ name|check
 argument_list|()
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2278">[CALCITE-2278]    * AggregateJoinTransposeRule fails to split aggregate call if input contains    * an aggregate call and has distinct rows</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testPushAggregateThroughJoinWithUniqueInput
+parameter_list|()
+block|{
+specifier|final
+name|HepProgram
+name|preProgram
+init|=
+operator|new
+name|HepProgramBuilder
+argument_list|()
+operator|.
+name|addRuleInstance
+argument_list|(
+name|AggregateProjectMergeRule
+operator|.
+name|INSTANCE
+argument_list|)
+operator|.
+name|build
+argument_list|()
+decl_stmt|;
+specifier|final
+name|HepProgram
+name|program
+init|=
+operator|new
+name|HepProgramBuilder
+argument_list|()
+operator|.
+name|addRuleInstance
+argument_list|(
+name|AggregateJoinTransposeRule
+operator|.
+name|EXTENDED
+argument_list|)
+operator|.
+name|build
+argument_list|()
+decl_stmt|;
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select A.job, B.mgr, A.deptno,\n"
+operator|+
+literal|"max(B.hiredate1) as hiredate1, sum(B.comm1) as comm1\n"
+operator|+
+literal|"from sales.emp as A\n"
+operator|+
+literal|"join (select mgr, sal, max(hiredate) as hiredate1,\n"
+operator|+
+literal|"    sum(comm) as comm1 from sales.emp group by mgr, sal) as B\n"
+operator|+
+literal|"on A.sal=B.sal\n"
+operator|+
+literal|"group by A.job, B.mgr, A.deptno"
+decl_stmt|;
+name|checkPlanning
+argument_list|(
+name|tester
+argument_list|,
+name|preProgram
+argument_list|,
+operator|new
+name|HepPlanner
+argument_list|(
+name|program
+argument_list|)
+argument_list|,
+name|sql
+argument_list|)
+expr_stmt|;
+block|}
 comment|/** SUM is the easiest aggregate function to split. */
 annotation|@
 name|Test
