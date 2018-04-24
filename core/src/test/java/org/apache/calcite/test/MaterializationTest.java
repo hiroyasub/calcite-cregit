@@ -5858,6 +5858,27 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testJoinMaterialization11
+parameter_list|()
+block|{
+name|checkNoMaterialize
+argument_list|(
+literal|"select \"empid\" from \"emps\"\n"
+operator|+
+literal|"join \"depts\" using (\"deptno\")"
+argument_list|,
+literal|"select \"empid\" from \"emps\"\n"
+operator|+
+literal|"where \"deptno\" in (select \"deptno\" from \"depts\")"
+argument_list|,
+name|HR_FKUK_MODEL
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testJoinMaterializationUKFK1
 parameter_list|()
 block|{

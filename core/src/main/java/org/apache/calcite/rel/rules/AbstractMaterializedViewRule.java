@@ -375,6 +375,22 @@ name|rel
 operator|.
 name|core
 operator|.
+name|SemiJoin
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|core
+operator|.
 name|TableScan
 import|;
 end_import
@@ -10398,6 +10414,7 @@ argument_list|(
 name|c
 argument_list|)
 operator|&&
+operator|(
 operator|!
 name|Join
 operator|.
@@ -10407,6 +10424,16 @@ name|isAssignableFrom
 argument_list|(
 name|c
 argument_list|)
+operator|||
+name|SemiJoin
+operator|.
+name|class
+operator|.
+name|isAssignableFrom
+argument_list|(
+name|c
+argument_list|)
+operator|)
 condition|)
 block|{
 comment|// Skip it
