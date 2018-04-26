@@ -1528,14 +1528,6 @@ argument_list|()
 argument_list|,
 literal|false
 argument_list|)
-argument_list|,
-name|query
-operator|.
-name|getConnectionConfig
-argument_list|()
-operator|.
-name|timeZone
-argument_list|()
 argument_list|)
 expr_stmt|;
 if|if

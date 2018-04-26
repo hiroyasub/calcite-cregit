@@ -816,8 +816,6 @@ operator|.
 name|createInterval
 argument_list|(
 name|e
-argument_list|,
-literal|"UTC"
 argument_list|)
 decl_stmt|;
 name|assertThat
@@ -895,8 +893,6 @@ operator|.
 name|createInterval
 argument_list|(
 name|e2
-argument_list|,
-literal|"UTC"
 argument_list|)
 decl_stmt|;
 if|if

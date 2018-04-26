@@ -408,7 +408,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Tests for the {@code org.apache.calcite.adapter.druid} package.  *  *<p>Before calling this test, you need to populate Druid, as follows:  *  *<blockquote><code>  * git clone https://github.com/vlsi/calcite-test-dataset<br>  * cd calcite-test-dataset<br>  * mvn install  *</code></blockquote>  *  *<p>This will create a virtual machine with Druid and test data set.  *  *<p>Features not yet implemented:  *<ul>  *<li>push LIMIT into "select" query</li>  *<li>push SORT and/or LIMIT into "groupBy" query</li>  *<li>push HAVING into "groupBy" query</li>  *</ul>  */
+comment|/**  * Tests for the {@code org.apache.calcite.adapter.druid} package.  *  *<p>Before calling this test, you need to populate Druid, as follows:  *  *<blockquote><code>  * git clone https://github.com/vlsi/calcite-test-dataset<br>  * cd calcite-test-dataset<br>  * mvn install  *</code></blockquote>  *  *<p>This will create a virtual machine with Druid and test data set.  *  *<p>Features not yet implemented:  *<ul>  *<li>push LIMIT into "select" query</li>  *<li>push SORT and/or LIMIT into "groupBy" query</li>  *<li>push HAVING into "groupBy" query</li>  *</ul>  *  * These tests use "timestamp with local time zone" type for the  * Druid timestamp column, instead of "timestamp" type  as  * {@link DruidAdapterIT2}.  */
 end_comment
 
 begin_class
@@ -1419,9 +1419,7 @@ literal|"'dataSource':'wikiticker',"
 operator|+
 literal|"'intervals':['1900-01-01T00:00:00.000Z/2015-10-12T00:00:00.000Z'],"
 operator|+
-literal|"'virtualColumns':[{'type':'expression','name':'vc','expression':'\\'__time\\'','outputType':'LONG'}],'columns':['vc'],"
-operator|+
-literal|"'resultFormat':'compactedList'"
+literal|"'virtualColumns':[{'type':'expression','name':'vc','expression':"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -10839,7 +10837,7 @@ literal|"{'queryType':'scan','dataSource':'foodmart','intervals':"
 operator|+
 literal|"['1997-01-01T00:00:00.000Z/1997-04-01T00:00:00.000Z'],'virtualColumns':"
 operator|+
-literal|"[{'type':'expression','name':'vc','expression':'timestamp_floor(\\'__time\\'"
+literal|"[{'type':'expression','name':'vc','expression':'timestamp_floor("
 decl_stmt|;
 name|sql
 argument_list|(
@@ -10998,7 +10996,7 @@ name|druidQueryPart2
 init|=
 literal|"\"granularity\":{\"type\":\"period\",\"period\":\"PT1H\","
 operator|+
-literal|"\"timeZone\":\"IST\"},\"timeZone\":\"IST\","
+literal|"\"timeZone\":\"Asia/Kolkata\"},\"timeZone\":\"UTC\","
 operator|+
 literal|"\"locale\":\"und\"}}"
 decl_stmt|;
@@ -11037,7 +11035,7 @@ operator|.
 name|camelName
 argument_list|()
 argument_list|,
-literal|"IST"
+literal|"Asia/Kolkata"
 argument_list|)
 operator|.
 name|query
@@ -11060,7 +11058,7 @@ argument_list|)
 operator|.
 name|returnsOrdered
 argument_list|(
-literal|"T=2015-09-12 02:30:02"
+literal|"T=2015-09-12 14:00:01"
 argument_list|)
 expr_stmt|;
 block|}
@@ -11079,7 +11077,7 @@ literal|"Select cast(\"__time\" as timestamp) as t, \"countryName\" as s, "
 operator|+
 literal|"count(*) as c from \"wikiticker\" where floor(\"__time\" to HOUR)"
 operator|+
-literal|">= '2015-09-12 08:00:00 IST' group by cast(\"__time\" as timestamp), \"countryName\""
+literal|">= '2015-09-12 08:00:00 Asia/Kolkata' group by cast(\"__time\" as timestamp), \"countryName\""
 operator|+
 literal|" order by t limit 4"
 decl_stmt|;
@@ -11089,7 +11087,7 @@ name|druidQueryPart1
 init|=
 literal|"filter\":{\"type\":\"bound\",\"dimension\":\"__time\","
 operator|+
-literal|"\"lower\":\"2015-09-12T08:00:00.000Z\",\"lowerStrict\":false,"
+literal|"\"lower\":\"2015-09-12T02:30:00.000Z\",\"lowerStrict\":false,"
 operator|+
 literal|"\"ordering\":\"lexicographic\",\"extractionFn\":{\"type\":\"timeFormat\","
 operator|+
@@ -11101,7 +11099,7 @@ name|druidQueryPart2
 init|=
 literal|"\"granularity\":{\"type\":\"period\",\"period\":\"PT1H\","
 operator|+
-literal|"\"timeZone\":\"IST\"},\"timeZone\":\"IST\","
+literal|"\"timeZone\":\"Asia/Kolkata\"},\"timeZone\":\"UTC\","
 operator|+
 literal|"\"locale\":\"und\"}}"
 decl_stmt|;
@@ -11140,7 +11138,116 @@ operator|.
 name|camelName
 argument_list|()
 argument_list|,
-literal|"IST"
+literal|"Asia/Kolkata"
+argument_list|)
+operator|.
+name|query
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|runs
+argument_list|()
+operator|.
+name|queryContains
+argument_list|(
+name|druidChecker
+argument_list|(
+name|druidQueryPart1
+argument_list|,
+name|druidQueryPart2
+argument_list|)
+argument_list|)
+operator|.
+name|returnsOrdered
+argument_list|(
+literal|"T=2015-09-12 08:00:02; S=null; C=1"
+argument_list|,
+literal|"T=2015-09-12 08:00:04; S=null; C=1"
+argument_list|,
+literal|"T=2015-09-12 08:00:05; S=null; C=1"
+argument_list|,
+literal|"T=2015-09-12 08:00:07; S=null; C=1"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testTimeWithFilterOnFloorOnTimeWithTimezoneConversionCast
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"Select cast(\"__time\" as timestamp) as t, \"countryName\" as s, "
+operator|+
+literal|"count(*) as c from \"wikiticker\" where floor(\"__time\" to HOUR)"
+operator|+
+literal|">= '2015-09-12 08:00:00 Asia/Kolkata' group by cast(\"__time\" as timestamp), \"countryName\""
+operator|+
+literal|" order by t limit 4"
+decl_stmt|;
+specifier|final
+name|String
+name|druidQueryPart1
+init|=
+literal|"filter\":{\"type\":\"bound\",\"dimension\":\"__time\","
+operator|+
+literal|"\"lower\":\"2015-09-12T02:30:00.000Z\",\"lowerStrict\":false,"
+operator|+
+literal|"\"ordering\":\"lexicographic\",\"extractionFn\":{\"type\":\"timeFormat\","
+operator|+
+literal|"\"format\":\"yyyy-MM-dd"
+decl_stmt|;
+specifier|final
+name|String
+name|druidQueryPart2
+init|=
+literal|"\"granularity\":{\"type\":\"period\",\"period\":\"PT1H\","
+operator|+
+literal|"\"timeZone\":\"Asia/Kolkata\"},\"timeZone\":\"UTC\","
+operator|+
+literal|"\"locale\":\"und\"}}"
+decl_stmt|;
+name|CalciteAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|enable
+argument_list|(
+name|enabled
+argument_list|()
+argument_list|)
+operator|.
+name|with
+argument_list|(
+name|ImmutableMap
+operator|.
+name|of
+argument_list|(
+literal|"model"
+argument_list|,
+name|WIKI_AUTO2
+operator|.
+name|getPath
+argument_list|()
+argument_list|)
+argument_list|)
+operator|.
+name|with
+argument_list|(
+name|CalciteConnectionProperty
+operator|.
+name|TIME_ZONE
+operator|.
+name|camelName
+argument_list|()
+argument_list|,
+literal|"Asia/Kolkata"
 argument_list|)
 operator|.
 name|query
@@ -11237,7 +11344,7 @@ literal|"{\"queryType\":\"scan\",\"dataSource\":\"foodmart\",\"intervals\":"
 operator|+
 literal|"[\"1997-04-30T18:30:00.000Z/1997-05-31T18:30:00.000Z\"],\"virtualColumns\":[{\"type\":"
 operator|+
-literal|"\"expression\",\"name\":\"vc\",\"expression\":\"timestamp_floor(\\\"__time\\\""
+literal|"\"expression\",\"name\":\"vc\",\"expression\":\"timestamp_parse"
 decl_stmt|;
 name|CalciteAssert
 operator|.
@@ -11295,7 +11402,7 @@ argument_list|)
 operator|.
 name|returnsOrdered
 argument_list|(
-literal|"T=1997-04-30 18:30:00"
+literal|"T=1997-05-01 00:00:00"
 argument_list|)
 expr_stmt|;
 block|}
@@ -12146,7 +12253,7 @@ name|druidChecker
 argument_list|(
 literal|"{\"type\":\"expression\","
 operator|+
-literal|"\"expression\":\"(timestamp_format(timestamp_floor(\\\"__time\\\""
+literal|"\"expression\":\"(timestamp_format(timestamp_floor("
 argument_list|)
 argument_list|)
 operator|.
@@ -12389,6 +12496,199 @@ name|Test
 specifier|public
 name|void
 name|testExtractHourFilterExpression
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"SELECT EXTRACT(HOUR from \"timestamp\") "
+operator|+
+literal|"from \"foodmart\" WHERE EXTRACT(HOUR from \"timestamp\") = 17 "
+operator|+
+literal|"group by EXTRACT(HOUR from \"timestamp\") "
+decl_stmt|;
+name|CalciteAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|enable
+argument_list|(
+name|enabled
+argument_list|()
+argument_list|)
+operator|.
+name|with
+argument_list|(
+name|ImmutableMap
+operator|.
+name|of
+argument_list|(
+literal|"model"
+argument_list|,
+name|FOODMART
+operator|.
+name|getPath
+argument_list|()
+argument_list|)
+argument_list|)
+operator|.
+name|with
+argument_list|(
+name|CalciteConnectionProperty
+operator|.
+name|TIME_ZONE
+operator|.
+name|camelName
+argument_list|()
+argument_list|,
+literal|"America/Los_Angeles"
+argument_list|)
+operator|.
+name|query
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|runs
+argument_list|()
+operator|.
+name|returnsOrdered
+argument_list|(
+literal|"EXPR$0=17"
+argument_list|)
+expr_stmt|;
+specifier|final
+name|String
+name|sql2
+init|=
+literal|"SELECT EXTRACT(HOUR from \"timestamp\") "
+operator|+
+literal|"from \"foodmart\" WHERE"
+operator|+
+literal|" EXTRACT(HOUR from \"timestamp\") = 19 "
+operator|+
+literal|"group by EXTRACT(HOUR from \"timestamp\") "
+decl_stmt|;
+name|CalciteAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|enable
+argument_list|(
+name|enabled
+argument_list|()
+argument_list|)
+operator|.
+name|with
+argument_list|(
+name|ImmutableMap
+operator|.
+name|of
+argument_list|(
+literal|"model"
+argument_list|,
+name|FOODMART
+operator|.
+name|getPath
+argument_list|()
+argument_list|)
+argument_list|)
+operator|.
+name|with
+argument_list|(
+name|CalciteConnectionProperty
+operator|.
+name|TIME_ZONE
+operator|.
+name|camelName
+argument_list|()
+argument_list|,
+literal|"EST"
+argument_list|)
+operator|.
+name|query
+argument_list|(
+name|sql2
+argument_list|)
+operator|.
+name|runs
+argument_list|()
+operator|.
+name|returnsOrdered
+argument_list|(
+literal|"EXPR$0=19"
+argument_list|)
+expr_stmt|;
+specifier|final
+name|String
+name|sql3
+init|=
+literal|"SELECT EXTRACT(HOUR from \"timestamp\") "
+operator|+
+literal|"from \"foodmart\" WHERE EXTRACT(HOUR from \"timestamp\") = 0 "
+operator|+
+literal|"group by EXTRACT(HOUR from \"timestamp\") "
+decl_stmt|;
+name|CalciteAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|enable
+argument_list|(
+name|enabled
+argument_list|()
+argument_list|)
+operator|.
+name|with
+argument_list|(
+name|ImmutableMap
+operator|.
+name|of
+argument_list|(
+literal|"model"
+argument_list|,
+name|FOODMART
+operator|.
+name|getPath
+argument_list|()
+argument_list|)
+argument_list|)
+operator|.
+name|with
+argument_list|(
+name|CalciteConnectionProperty
+operator|.
+name|TIME_ZONE
+operator|.
+name|camelName
+argument_list|()
+argument_list|,
+literal|"UTC"
+argument_list|)
+operator|.
+name|query
+argument_list|(
+name|sql3
+argument_list|)
+operator|.
+name|runs
+argument_list|()
+operator|.
+name|returnsOrdered
+argument_list|(
+literal|"EXPR$0=0"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testExtractHourFilterExpressionWithCast
 parameter_list|()
 block|{
 specifier|final
@@ -12671,7 +12971,7 @@ literal|"\"filter\":{\"type\":\"expression\",\"expression\":\""
 operator|+
 literal|"(timestamp_floor(timestamp_parse(concat(concat("
 argument_list|,
-literal|"== timestamp_floor(\\\"__time\\\""
+literal|"== timestamp_floor("
 argument_list|)
 argument_list|)
 expr_stmt|;
