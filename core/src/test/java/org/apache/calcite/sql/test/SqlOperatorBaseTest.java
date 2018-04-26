@@ -871,6 +871,18 @@ name|fail
 import|;
 end_import
 
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|Assume
+operator|.
+name|assumeTrue
+import|;
+end_import
+
 begin_comment
 comment|/**  * Contains unit tests for all operators. Each of the methods is named after an  * operator.  *  *<p>The class is abstract. It contains a test for every operator, but does not  * provide a mechanism to execute the tests: parse, validate, and execute  * expressions on the operators. This is left to a {@link SqlTester} object  * which the derived class must provide.</p>  *  *<p>Different implementations of {@link SqlTester} are possible, such as:</p>  *  *<ul>  *<li>Execute against a real farrago database  *<li>Execute in pure java (parsing and validation can be done, but expression  * evaluation is not possible)  *<li>Generate a SQL script.  *<li>Analyze which operators are adequately tested.  *</ul>  *  *<p>A typical method will be named after the operator it is testing (say  *<code>testSubstringFunc</code>). It first calls  * {@link SqlTester#setFor(org.apache.calcite.sql.SqlOperator, org.apache.calcite.sql.test.SqlTester.VmName...)}  * to declare which operator it is testing.  *  *<blockquote>  *<pre><code>  * public void testSubstringFunc() {  *     tester.setFor(SqlStdOperatorTable.substringFunc);  *     tester.checkScalar("sin(0)", "0");  *     tester.checkScalar("sin(1.5707)", "1");  * }</code></pre>  *</blockquote>  *  *<p>The rest of the method contains calls to the various {@code checkXxx}  * methods in the {@link SqlTester} interface. For an operator  * to be adequately tested, there need to be tests for:  *  *<ul>  *<li>Parsing all of its the syntactic variants.  *<li>Deriving the type of in all combinations of arguments.  *  *<ul>  *<li>Pay particular attention to nullability. For example, the result of the  * "+" operator is NOT NULL if and only if both of its arguments are NOT  * NULL.</li>  *<li>Also pay attention to precision/scale/length. For example, the maximum  * length of the "||" operator is the sum of the maximum lengths of its  * arguments.</li>  *</ul>  *</li>  *<li>Executing the function. Pay particular attention to corner cases such as  * null arguments or null results.</li>  *</ul>  */
 end_comment
@@ -26542,6 +26554,68 @@ argument_list|,
 literal|"2016-02-29"
 argument_list|,
 literal|"DATE NOT NULL"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testTimestampAddFractionalSeconds
+parameter_list|()
+block|{
+name|tester
+operator|.
+name|setFor
+argument_list|(
+name|SqlStdOperatorTable
+operator|.
+name|TIMESTAMP_ADD
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkType
+argument_list|(
+literal|"timestampadd(SQL_TSI_FRAC_SECOND, 2, timestamp '2016-02-24 12:42:25.000000')"
+argument_list|,
+comment|// "2016-02-24 12:42:25.000002",
+literal|"TIMESTAMP(3) NOT NULL"
+argument_list|)
+expr_stmt|;
+comment|// The following test would correctly return "TIMESTAMP(6) NOT NULL" if max
+comment|// precision were 6 or higher
+name|assumeTrue
+argument_list|(
+name|tester
+operator|.
+name|getValidator
+argument_list|()
+operator|.
+name|getTypeFactory
+argument_list|()
+operator|.
+name|getTypeSystem
+argument_list|()
+operator|.
+name|getMaxPrecision
+argument_list|(
+name|SqlTypeName
+operator|.
+name|TIMESTAMP
+argument_list|)
+operator|==
+literal|3
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkType
+argument_list|(
+literal|"timestampadd(MICROSECOND, 2, timestamp '2016-02-24 12:42:25.000000')"
+argument_list|,
+comment|// "2016-02-24 12:42:25.000002",
+literal|"TIMESTAMP(3) NOT NULL"
 argument_list|)
 expr_stmt|;
 block|}
