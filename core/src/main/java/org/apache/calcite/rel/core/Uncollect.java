@@ -127,22 +127,6 @@ name|rel
 operator|.
 name|type
 operator|.
-name|DynamicRecordType
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|rel
-operator|.
-name|type
-operator|.
 name|RelDataType
 import|;
 end_import
@@ -611,16 +595,22 @@ operator|.
 name|ANY
 condition|)
 block|{
-comment|// Component type is unknown to Uncollect, build dynamic star record
-comment|// type. Only consider ONE field case for unknown type.
+comment|// Component type is unknown to Uncollect, build a row type with input column name
+comment|// and Any type.
 return|return
 name|builder
 operator|.
 name|add
 argument_list|(
-name|DynamicRecordType
+name|fields
 operator|.
-name|DYNAMIC_STAR_PREFIX
+name|get
+argument_list|(
+literal|0
+argument_list|)
+operator|.
+name|getName
+argument_list|()
 argument_list|,
 name|SqlTypeName
 operator|.

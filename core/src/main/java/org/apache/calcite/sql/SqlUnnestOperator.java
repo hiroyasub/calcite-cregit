@@ -27,22 +27,6 @@ name|rel
 operator|.
 name|type
 operator|.
-name|DynamicRecordType
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|rel
-operator|.
-name|type
-operator|.
 name|RelDataType
 import|;
 end_import
@@ -331,20 +315,18 @@ operator|.
 name|ANY
 condition|)
 block|{
-comment|// When there is one operand with unknown type (ANY), the return type
-comment|// is dynamic star
+comment|// Unnest Operator in schema less systems returns one column as the output
+comment|// $unnest is a place holder to specify that one column with type ANY is output.
 return|return
 name|builder
 operator|.
 name|add
 argument_list|(
-name|DynamicRecordType
-operator|.
-name|DYNAMIC_STAR_PREFIX
+literal|"$unnest"
 argument_list|,
 name|SqlTypeName
 operator|.
-name|DYNAMIC_STAR
+name|ANY
 argument_list|)
 operator|.
 name|nullable
@@ -352,7 +334,7 @@ argument_list|(
 literal|true
 argument_list|)
 operator|.
-name|buildDynamic
+name|build
 argument_list|()
 return|;
 block|}
