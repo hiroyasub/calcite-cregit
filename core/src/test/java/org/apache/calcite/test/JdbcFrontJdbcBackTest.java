@@ -654,11 +654,6 @@ operator|.
 name|JDBC_FOODMART
 argument_list|)
 operator|.
-name|withDefaultSchema
-argument_list|(
-literal|"foodmart"
-argument_list|)
-operator|.
 name|query
 argument_list|(
 literal|"select\n"

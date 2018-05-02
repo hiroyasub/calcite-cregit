@@ -31,8 +31,11 @@ block|{
 comment|/** Calcite's default SQL behavior. */
 name|DEFAULT
 block|,
-comment|/** Conformance value that allows just about everything. */
+comment|/** Conformance value that allows just about everything supported by    * Calcite. */
 name|LENIENT
+block|,
+comment|/** Conformance value that allows anything supported by any dialect.    * Even more liberal than {@link #LENIENT}. */
+name|BABEL
 block|,
 comment|/** Conformance value that instructs Calcite to use SQL semantics strictly    * consistent with the SQL:92 standard. */
 name|STRICT_92
@@ -63,6 +66,28 @@ name|SQL_SERVER_2008
 block|;
 specifier|public
 name|boolean
+name|isLiberal
+parameter_list|()
+block|{
+switch|switch
+condition|(
+name|this
+condition|)
+block|{
+case|case
+name|BABEL
+case|:
+return|return
+literal|true
+return|;
+default|default:
+return|return
+literal|false
+return|;
+block|}
+block|}
+specifier|public
+name|boolean
 name|isGroupByAlias
 parameter_list|()
 block|{
@@ -71,6 +96,9 @@ condition|(
 name|this
 condition|)
 block|{
+case|case
+name|BABEL
+case|:
 case|case
 name|LENIENT
 case|:
@@ -97,6 +125,9 @@ name|this
 condition|)
 block|{
 case|case
+name|BABEL
+case|:
+case|case
 name|LENIENT
 case|:
 case|case
@@ -121,6 +152,9 @@ condition|(
 name|this
 condition|)
 block|{
+case|case
+name|BABEL
+case|:
 case|case
 name|LENIENT
 case|:
@@ -148,6 +182,9 @@ condition|)
 block|{
 case|case
 name|DEFAULT
+case|:
+case|case
+name|BABEL
 case|:
 case|case
 name|LENIENT
@@ -194,6 +231,9 @@ condition|)
 block|{
 case|case
 name|DEFAULT
+case|:
+case|case
+name|BABEL
 case|:
 case|case
 name|LENIENT
@@ -283,6 +323,9 @@ case|case
 name|LENIENT
 case|:
 case|case
+name|BABEL
+case|:
+case|case
 name|MYSQL_5
 case|:
 case|case
@@ -312,6 +355,9 @@ condition|(
 name|this
 condition|)
 block|{
+case|case
+name|BABEL
+case|:
 case|case
 name|LENIENT
 case|:
@@ -343,6 +389,9 @@ name|this
 condition|)
 block|{
 case|case
+name|BABEL
+case|:
+case|case
 name|LENIENT
 case|:
 case|case
@@ -367,6 +416,9 @@ condition|(
 name|this
 condition|)
 block|{
+case|case
+name|BABEL
+case|:
 case|case
 name|LENIENT
 case|:
@@ -396,6 +448,9 @@ name|this
 condition|)
 block|{
 case|case
+name|BABEL
+case|:
+case|case
 name|LENIENT
 case|:
 case|case
@@ -423,6 +478,9 @@ condition|(
 name|this
 condition|)
 block|{
+case|case
+name|BABEL
+case|:
 case|case
 name|LENIENT
 case|:
@@ -474,6 +532,9 @@ name|this
 condition|)
 block|{
 case|case
+name|BABEL
+case|:
+case|case
 name|LENIENT
 case|:
 return|return
@@ -495,6 +556,9 @@ condition|(
 name|this
 condition|)
 block|{
+case|case
+name|BABEL
+case|:
 case|case
 name|LENIENT
 case|:
@@ -520,6 +584,9 @@ condition|(
 name|this
 condition|)
 block|{
+case|case
+name|BABEL
+case|:
 case|case
 name|LENIENT
 case|:

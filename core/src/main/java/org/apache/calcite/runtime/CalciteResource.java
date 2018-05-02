@@ -3566,6 +3566,21 @@ name|String
 name|name
 parameter_list|)
 function_decl|;
+annotation|@
+name|BaseMessage
+argument_list|(
+literal|"Dialect does not support feature: ''{0}''"
+argument_list|)
+name|ExInst
+argument_list|<
+name|SqlValidatorException
+argument_list|>
+name|dialectDoesNotSupportFeature
+parameter_list|(
+name|String
+name|featureName
+parameter_list|)
+function_decl|;
 block|}
 end_interface
 
