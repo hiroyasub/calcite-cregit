@@ -1142,7 +1142,7 @@ name|q
 init|=
 literal|"select author from git_commits\n"
 operator|+
-literal|"group by 1 order by count(*) desc limit 1"
+literal|"group by 1 order by count(*) desc limit 2"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -1152,6 +1152,8 @@ operator|.
 name|returnsUnordered
 argument_list|(
 literal|"author=Julian Hyde<julianhyde@gmail.com>"
+argument_list|,
+literal|"author=Julian Hyde<jhyde@apache.org>"
 argument_list|)
 expr_stmt|;
 block|}
