@@ -14714,6 +14714,36 @@ name|joinType
 condition|)
 block|{
 case|case
+name|LEFT_SEMI_JOIN
+case|:
+if|if
+condition|(
+operator|!
+name|conformance
+operator|.
+name|isLiberal
+argument_list|()
+condition|)
+block|{
+throw|throw
+name|newValidationError
+argument_list|(
+name|join
+operator|.
+name|getJoinTypeNode
+argument_list|()
+argument_list|,
+name|RESOURCE
+operator|.
+name|dialectDoesNotSupportFeature
+argument_list|(
+literal|"LEFT SEMI JOIN"
+argument_list|)
+argument_list|)
+throw|;
+block|}
+comment|// fall through
+case|case
 name|INNER
 case|:
 case|case

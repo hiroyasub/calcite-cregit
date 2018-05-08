@@ -828,6 +828,19 @@ argument_list|)
 expr_stmt|;
 break|break;
 case|case
+name|LEFT_SEMI_JOIN
+case|:
+name|writer
+operator|.
+name|sep
+argument_list|(
+name|natural
+operator|+
+literal|"LEFT SEMI JOIN"
+argument_list|)
+expr_stmt|;
+break|break;
+case|case
 name|RIGHT
 case|:
 name|writer

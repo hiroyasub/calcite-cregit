@@ -65,6 +65,9 @@ block|,
 comment|/**    * Right outer join.    */
 name|RIGHT
 block|,
+comment|/**    * Left semi join.    *    *<p>Not used by Calcite; only in Babel's Hive dialect.    */
+name|LEFT_SEMI_JOIN
+block|,
 comment|/**    * Comma join: the good old-fashioned SQL<code>FROM</code> clause,    * where table expressions are specified with commas between them, and    * join conditions are specified in the<code>WHERE</code> clause.    */
 name|COMMA
 block|;
