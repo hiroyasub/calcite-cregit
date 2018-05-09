@@ -1751,6 +1751,58 @@ literal|"FROM \"foodmart\".\"expense_fact\""
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2305">[CALCITE-2305]    * JDBC adapter generates invalid casts on PostgreSQL, because PostgreSQL does    * not have TINYINT and DOUBLE types</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testCast
+parameter_list|()
+block|{
+name|CalciteAssert
+operator|.
+name|model
+argument_list|(
+name|JdbcTest
+operator|.
+name|FOODMART_MODEL
+argument_list|)
+operator|.
+name|enable
+argument_list|(
+name|CalciteAssert
+operator|.
+name|DB
+operator|==
+name|CalciteAssert
+operator|.
+name|DatabaseInstance
+operator|.
+name|POSTGRESQL
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select cast(\"store_id\" as TINYINT),"
+operator|+
+literal|"cast(\"store_id\" as DOUBLE)"
+operator|+
+literal|" from \"expense_fact\""
+argument_list|)
+operator|.
+name|runs
+argument_list|()
+operator|.
+name|planHasSql
+argument_list|(
+literal|"SELECT CAST(\"store_id\" AS SMALLINT),"
+operator|+
+literal|" CAST(\"store_id\" AS DOUBLE PRECISION)\n"
+operator|+
+literal|"FROM \"foodmart\".\"expense_fact\""
+argument_list|)
+expr_stmt|;
+block|}
 annotation|@
 name|Test
 specifier|public
