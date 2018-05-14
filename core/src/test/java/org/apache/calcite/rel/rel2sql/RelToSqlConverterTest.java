@@ -1650,6 +1650,42 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testHiveSelectCharset
+parameter_list|()
+block|{
+name|String
+name|query
+init|=
+literal|"select \"hire_date\", cast(\"hire_date\" as varchar(10)) "
+operator|+
+literal|"from \"foodmart\".\"reserve_employee\""
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT hire_date, CAST(hire_date AS VARCHAR(10))\n"
+operator|+
+literal|"FROM foodmart.reserve_employee"
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|withHive
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testSelectQueryWithLimitClause
 parameter_list|()
 block|{
