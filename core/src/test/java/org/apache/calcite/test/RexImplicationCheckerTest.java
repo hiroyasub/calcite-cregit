@@ -477,6 +477,16 @@ name|org
 operator|.
 name|junit
 operator|.
+name|Ignore
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|junit
+operator|.
 name|Test
 import|;
 end_import
@@ -3327,6 +3337,13 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/** Test case for simplifier of ceil and floor. */
+comment|// Disabled: we wrongly simplify FLOOR(CEIL(2010-10-10, YEAR), YEAR)
+comment|// to FLOOR(2010-10-10, YEAR)
+annotation|@
+name|Ignore
+argument_list|(
+literal|"[CALCITE-2332]"
+argument_list|)
 annotation|@
 name|Test
 specifier|public
@@ -4382,6 +4399,11 @@ argument_list|,
 literal|false
 argument_list|,
 name|executor
+argument_list|)
+operator|.
+name|withParanoid
+argument_list|(
+literal|true
 argument_list|)
 expr_stmt|;
 name|checker

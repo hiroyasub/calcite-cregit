@@ -28,6 +28,19 @@ name|NullSentinel
 block|{
 comment|/** Placeholder for a null value. */
 name|INSTANCE
+block|{
+annotation|@
+name|Override
+specifier|public
+name|String
+name|toString
+parameter_list|()
+block|{
+return|return
+literal|"NULL"
+return|;
+block|}
+block|}
 block|,
 comment|/** Placeholder that means that a request for metadata is already active,    * therefore this request forms a cycle. */
 name|ACTIVE

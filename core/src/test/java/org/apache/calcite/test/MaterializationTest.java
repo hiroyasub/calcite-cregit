@@ -975,6 +975,11 @@ name|RexUtil
 operator|.
 name|EXECUTOR
 argument_list|)
+operator|.
+name|withParanoid
+argument_list|(
+literal|true
+argument_list|)
 decl_stmt|;
 annotation|@
 name|Test
