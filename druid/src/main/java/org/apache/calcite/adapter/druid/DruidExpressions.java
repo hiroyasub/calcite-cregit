@@ -396,6 +396,30 @@ name|STRING
 argument_list|)
 expr_stmt|;
 block|}
+comment|// booleans in expressions are returned from druid as long.
+comment|// Druid will return 0 for false, non-zero value for true and null for absent value.
+for|for
+control|(
+name|SqlTypeName
+name|type
+range|:
+name|SqlTypeName
+operator|.
+name|BOOLEAN_TYPES
+control|)
+block|{
+name|builder
+operator|.
+name|put
+argument_list|(
+name|type
+argument_list|,
+name|DruidType
+operator|.
+name|LONG
+argument_list|)
+expr_stmt|;
+block|}
 comment|// Timestamps are treated as longs (millis since the epoch) in Druid expressions.
 name|builder
 operator|.

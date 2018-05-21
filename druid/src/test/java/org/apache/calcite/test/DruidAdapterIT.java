@@ -12877,7 +12877,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-comment|//Boolean cast are not pushed for now.
 specifier|public
 name|void
 name|testBooleanFilterExpressions
@@ -12904,22 +12903,16 @@ name|explainContains
 argument_list|(
 literal|"PLAN=EnumerableInterpreter\n"
 operator|+
-literal|"  BindableAggregate(group=[{}], EXPR$0=[$SUM0($1)])\n"
+literal|"  DruidQuery(table=[[foodmart, foodmart]], intervals=[[1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z]],"
 operator|+
-literal|"    BindableFilter(condition=[IS TRUE(CAST(<>($0, '1')):BOOLEAN)])\n"
-operator|+
-literal|"      DruidQuery(table=[[foodmart, foodmart]], "
-operator|+
-literal|"intervals=[[1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z]], "
-operator|+
-literal|"groups=[{1}], aggs=[[COUNT()]])"
+literal|" filter=[IS TRUE(CAST(<>($1, '1')):BOOLEAN)], groups=[{}], aggs=[[COUNT()]])"
 argument_list|)
 operator|.
 name|queryContains
 argument_list|(
 name|druidChecker
 argument_list|(
-literal|"\"queryType\":\"groupBy\""
+literal|"\"queryType\":\"timeseries\""
 argument_list|)
 argument_list|)
 operator|.
@@ -12933,7 +12926,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testCombinationOfValidAndNotValidFilterts
+name|testCombinationOfValidAndNotValidFilters
 parameter_list|()
 block|{
 specifier|final
@@ -12954,15 +12947,13 @@ literal|"AND \"product_id\" like '1%' AND \"store_cost\"> 1 "
 operator|+
 literal|"AND EXTRACT(MONTH FROM \"timestamp\") = 01 AND EXTRACT(DAY FROM \"timestamp\") = 01 "
 operator|+
-literal|"AND EXTRACT(MONTH FROM \"timestamp\") / 4 + 1 = 1"
+literal|"AND EXTRACT(MONTH FROM \"timestamp\") / 4 + 1 = 1 "
 decl_stmt|;
 specifier|final
 name|String
 name|queryType
 init|=
-literal|"{'queryType':'groupBy','dataSource':'foodmart','granularity':'all',"
-operator|+
-literal|"'dimensions':[{'type':'default','dimension':'store_sales','outputName':'store_sales','outputType':'DOUBLE'}],"
+literal|"{'queryType':'timeseries','dataSource':'foodmart'"
 decl_stmt|;
 specifier|final
 name|String
@@ -13054,25 +13045,29 @@ literal|"/ 4) + 1) == 1)'}]}"
 decl_stmt|;
 specifier|final
 name|String
+name|booleanAsFilter
+init|=
+literal|"> 0"
+decl_stmt|;
+specifier|final
+name|String
 name|plan
 init|=
 literal|"PLAN=EnumerableInterpreter\n"
 operator|+
-literal|"  BindableAggregate(group=[{}], EXPR$0=[$SUM0($1)])\n"
-operator|+
-literal|"    BindableFilter(condition=[IS TRUE(CAST(>($0, 0)):BOOLEAN)])\n"
-operator|+
-literal|"      DruidQuery(table=[[foodmart, foodmart]], "
+literal|"  DruidQuery(table=[[foodmart, foodmart]], "
 operator|+
 literal|"intervals=[[1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z]], "
 operator|+
 literal|"filter=[AND(<=(/(+(CAST($1):INTEGER, *(1, $90)), -($91, 5)), +(*(FLOOR($90), 25), 2)),"
 operator|+
-literal|" LIKE($1, '1%'),>($91, 1),<($0, 1997-01-02 00:00:00), =(EXTRACT(FLAG(MONTH), $0), 1), "
+literal|" IS TRUE(CAST(>($90, 0)):BOOLEAN), "
+operator|+
+literal|"LIKE($1, '1%'),>($91, 1),<($0, 1997-01-02 00:00:00), =(EXTRACT(FLAG(MONTH), $0), 1), "
 operator|+
 literal|"=(EXTRACT(FLAG(DAY), $0), 1), =(+(/(EXTRACT(FLAG(MONTH), $0), 4), 1), 1))], "
 operator|+
-literal|"groups=[{90}], aggs=[[COUNT()]])"
+literal|"groups=[{}], aggs=[[COUNT()]])"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -13120,6 +13115,8 @@ argument_list|,
 name|quarterAsExpressionFilter2
 argument_list|,
 name|quarterAsExpressionFilter3
+argument_list|,
+name|booleanAsFilter
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -15236,6 +15233,48 @@ argument_list|(
 literal|"{'queryType':'timeseries'"
 argument_list|,
 literal|"'context':{'skipEmptyBuckets':false}}"
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testGroupByWithBooleanExpression
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"SELECT \"product_id\"> 1000 as pid_category, COUNT(\"store_sales\") FROM "
+operator|+
+name|FOODMART_TABLE
+operator|+
+literal|"GROUP BY \"product_id\"> 1000"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|,
+name|FOODMART
+argument_list|)
+operator|.
+name|returnsOrdered
+argument_list|(
+literal|"PID_CATEGORY=0; EXPR$1=55789"
+argument_list|,
+literal|"PID_CATEGORY=1; EXPR$1=31040"
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|druidChecker
+argument_list|(
+literal|"{\"queryType\":\"groupBy\""
+argument_list|,
+literal|"\"dimension\":\"vc\",\"outputName\":\"vc\",\"outputType\":\"LONG\"}]"
 argument_list|)
 argument_list|)
 expr_stmt|;
