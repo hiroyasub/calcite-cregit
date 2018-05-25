@@ -267,6 +267,20 @@ name|allowGeometry
 argument_list|()
 return|;
 block|}
+specifier|public
+name|boolean
+name|shouldConvertRaggedUnionTypesToVarying
+parameter_list|()
+block|{
+return|return
+name|SqlConformanceEnum
+operator|.
+name|DEFAULT
+operator|.
+name|shouldConvertRaggedUnionTypesToVarying
+argument_list|()
+return|;
+block|}
 block|}
 end_class
 

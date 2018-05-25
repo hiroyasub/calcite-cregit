@@ -1194,7 +1194,6 @@ block|}
 argument_list|)
 return|;
 block|}
-comment|// implement RelDataTypeFactory
 specifier|public
 name|RelDataType
 name|leastRestrictive

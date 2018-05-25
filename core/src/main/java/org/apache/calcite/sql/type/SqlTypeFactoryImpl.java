@@ -135,20 +135,6 @@ name|calcite
 operator|.
 name|util
 operator|.
-name|Glossary
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|util
-operator|.
 name|Util
 import|;
 end_import
@@ -1628,7 +1614,9 @@ argument_list|()
 decl_stmt|;
 if|if
 condition|(
-name|shouldRaggedFixedLengthValueUnionBeVariable
+name|typeSystem
+operator|.
+name|shouldConvertRaggedUnionTypesToVarying
 argument_list|()
 condition|)
 block|{
@@ -2461,18 +2449,6 @@ expr_stmt|;
 block|}
 return|return
 name|resultType
-return|;
-block|}
-comment|/**    * Controls behavior discussed<a    * href="http://sf.net/mailarchive/message.php?msg_id=13337379">here</a>.    *    * @return false (the default) to provide strict SQL:2003 behavior; true to    * provide pragmatic behavior    *    * @see Glossary#SQL2003 SQL:2003 Part 2 Section 9.3 Syntax Rule 3.a.iii.3    */
-specifier|protected
-name|boolean
-name|shouldRaggedFixedLengthValueUnionBeVariable
-parameter_list|()
-block|{
-comment|// TODO jvs 30-Nov-2006:  implement SQL-Flagger support
-comment|// for warning about non-standard usage
-return|return
-literal|false
 return|;
 block|}
 specifier|private

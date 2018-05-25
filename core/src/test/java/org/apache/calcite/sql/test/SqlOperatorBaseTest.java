@@ -449,6 +449,22 @@ name|sql
 operator|.
 name|validate
 operator|.
+name|SqlConformance
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|validate
+operator|.
 name|SqlConformanceEnum
 import|;
 end_import
@@ -1545,6 +1561,91 @@ argument_list|(
 literal|"fun"
 argument_list|,
 literal|"oracle"
+argument_list|)
+argument_list|)
+return|;
+block|}
+specifier|protected
+name|SqlTester
+name|oracleTester
+parameter_list|(
+name|SqlConformance
+name|conformance
+parameter_list|)
+block|{
+if|if
+condition|(
+name|conformance
+operator|==
+literal|null
+condition|)
+block|{
+name|conformance
+operator|=
+name|SqlConformanceEnum
+operator|.
+name|DEFAULT
+expr_stmt|;
+block|}
+return|return
+name|tester
+operator|.
+name|withConformance
+argument_list|(
+name|conformance
+argument_list|)
+operator|.
+name|withOperatorTable
+argument_list|(
+name|ChainedSqlOperatorTable
+operator|.
+name|of
+argument_list|(
+name|OracleSqlOperatorTable
+operator|.
+name|instance
+argument_list|()
+argument_list|,
+name|SqlStdOperatorTable
+operator|.
+name|instance
+argument_list|()
+argument_list|)
+argument_list|)
+operator|.
+name|withConnectionFactory
+argument_list|(
+name|CalciteAssert
+operator|.
+name|EMPTY_CONNECTION_FACTORY
+operator|.
+name|with
+argument_list|(
+operator|new
+name|CalciteAssert
+operator|.
+name|AddSchemaSpecPostProcessor
+argument_list|(
+name|CalciteAssert
+operator|.
+name|SchemaSpec
+operator|.
+name|HR
+argument_list|)
+argument_list|)
+operator|.
+name|with
+argument_list|(
+literal|"fun"
+argument_list|,
+literal|"oracle"
+argument_list|)
+operator|.
+name|with
+argument_list|(
+literal|"conformance"
+argument_list|,
+name|conformance
 argument_list|)
 argument_list|)
 return|;
@@ -6389,6 +6490,176 @@ argument_list|,
 literal|"none of the above"
 argument_list|,
 literal|"CHAR(17) NOT NULL"
+argument_list|)
+expr_stmt|;
+comment|// tests with SqlConformance
+specifier|final
+name|SqlTester
+name|tester2
+init|=
+name|tester
+operator|.
+name|withConformance
+argument_list|(
+name|SqlConformanceEnum
+operator|.
+name|PRAGMATIC_2003
+argument_list|)
+decl_stmt|;
+name|tester2
+operator|.
+name|checkString
+argument_list|(
+literal|"case 2 when 1 then 'a' when 2 then 'bcd' end"
+argument_list|,
+literal|"bcd"
+argument_list|,
+literal|"VARCHAR(3)"
+argument_list|)
+expr_stmt|;
+name|tester2
+operator|.
+name|checkString
+argument_list|(
+literal|"case 1 when 1 then 'a' when 2 then 'bcd' end"
+argument_list|,
+literal|"a"
+argument_list|,
+literal|"VARCHAR(3)"
+argument_list|)
+expr_stmt|;
+name|tester2
+operator|.
+name|checkString
+argument_list|(
+literal|"case 1 when 1 then cast('a' as varchar(1)) "
+operator|+
+literal|"when 2 then cast('bcd' as varchar(3)) end"
+argument_list|,
+literal|"a"
+argument_list|,
+literal|"VARCHAR(3)"
+argument_list|)
+expr_stmt|;
+name|tester2
+operator|.
+name|checkString
+argument_list|(
+literal|"case cast(null as int) when cast(null as int)"
+operator|+
+literal|" then 'nulls match'"
+operator|+
+literal|" else 'nulls do not match' end"
+argument_list|,
+literal|"nulls do not match"
+argument_list|,
+literal|"VARCHAR(18) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester2
+operator|.
+name|checkScalarExact
+argument_list|(
+literal|"case when 'a'=cast(null as varchar(1)) then 1 else 2 end"
+argument_list|,
+literal|"2"
+argument_list|)
+expr_stmt|;
+comment|// equivalent to "nullif('a',cast(null as varchar(1)))"
+name|tester2
+operator|.
+name|checkString
+argument_list|(
+literal|"case when 'a' = cast(null as varchar(1)) then null else 'a' end"
+argument_list|,
+literal|"a"
+argument_list|,
+literal|"CHAR(1)"
+argument_list|)
+expr_stmt|;
+comment|// multiple values in some cases (introduced in SQL:2011)
+name|tester2
+operator|.
+name|checkString
+argument_list|(
+literal|"case 1 "
+operator|+
+literal|"when 1, 2 then '1 or 2' "
+operator|+
+literal|"when 2 then 'not possible' "
+operator|+
+literal|"when 3, 2 then '3' "
+operator|+
+literal|"else 'none of the above' "
+operator|+
+literal|"end"
+argument_list|,
+literal|"1 or 2"
+argument_list|,
+literal|"VARCHAR(17) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester2
+operator|.
+name|checkString
+argument_list|(
+literal|"case 2 "
+operator|+
+literal|"when 1, 2 then '1 or 2' "
+operator|+
+literal|"when 2 then 'not possible' "
+operator|+
+literal|"when 3, 2 then '3' "
+operator|+
+literal|"else 'none of the above' "
+operator|+
+literal|"end"
+argument_list|,
+literal|"1 or 2"
+argument_list|,
+literal|"VARCHAR(17) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester2
+operator|.
+name|checkString
+argument_list|(
+literal|"case 3 "
+operator|+
+literal|"when 1, 2 then '1 or 2' "
+operator|+
+literal|"when 2 then 'not possible' "
+operator|+
+literal|"when 3, 2 then '3' "
+operator|+
+literal|"else 'none of the above' "
+operator|+
+literal|"end"
+argument_list|,
+literal|"3"
+argument_list|,
+literal|"VARCHAR(17) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester2
+operator|.
+name|checkString
+argument_list|(
+literal|"case 4 "
+operator|+
+literal|"when 1, 2 then '1 or 2' "
+operator|+
+literal|"when 2 then 'not possible' "
+operator|+
+literal|"when 3, 2 then '3' "
+operator|+
+literal|"else 'none of the above' "
+operator|+
+literal|"end"
+argument_list|,
+literal|"none of the above"
+argument_list|,
+literal|"VARCHAR(17) NOT NULL"
 argument_list|)
 expr_stmt|;
 comment|// TODO: Check case with multisets
@@ -21457,6 +21728,39 @@ argument_list|,
 literal|"BOOLEAN NOT NULL"
 argument_list|)
 expr_stmt|;
+specifier|final
+name|SqlTester
+name|tester2
+init|=
+name|oracleTester
+argument_list|(
+name|SqlConformanceEnum
+operator|.
+name|ORACLE_12
+argument_list|)
+decl_stmt|;
+name|tester2
+operator|.
+name|checkString
+argument_list|(
+literal|"greatest('on', 'earth')"
+argument_list|,
+literal|"on"
+argument_list|,
+literal|"VARCHAR(5) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester2
+operator|.
+name|checkString
+argument_list|(
+literal|"greatest('show', 'on', 'earth')"
+argument_list|,
+literal|"show"
+argument_list|,
+literal|"VARCHAR(5) NOT NULL"
+argument_list|)
+expr_stmt|;
 block|}
 annotation|@
 name|Test
@@ -21523,6 +21827,39 @@ argument_list|,
 literal|false
 argument_list|,
 literal|"BOOLEAN NOT NULL"
+argument_list|)
+expr_stmt|;
+specifier|final
+name|SqlTester
+name|tester2
+init|=
+name|oracleTester
+argument_list|(
+name|SqlConformanceEnum
+operator|.
+name|ORACLE_12
+argument_list|)
+decl_stmt|;
+name|tester2
+operator|.
+name|checkString
+argument_list|(
+literal|"least('on', 'earth')"
+argument_list|,
+literal|"earth"
+argument_list|,
+literal|"VARCHAR(5) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester2
+operator|.
+name|checkString
+argument_list|(
+literal|"least('show', 'on', 'earth')"
+argument_list|,
+literal|"earth"
+argument_list|,
+literal|"VARCHAR(5) NOT NULL"
 argument_list|)
 expr_stmt|;
 block|}
@@ -21638,6 +21975,68 @@ literal|"VARCHAR(20) NOT NULL"
 argument_list|)
 expr_stmt|;
 name|tester1
+operator|.
+name|checkNull
+argument_list|(
+literal|"nvl(CAST(NULL AS VARCHAR(6)), cast(NULL AS VARCHAR(4)))"
+argument_list|)
+expr_stmt|;
+specifier|final
+name|SqlTester
+name|tester2
+init|=
+name|oracleTester
+argument_list|(
+name|SqlConformanceEnum
+operator|.
+name|ORACLE_12
+argument_list|)
+decl_stmt|;
+name|tester2
+operator|.
+name|checkString
+argument_list|(
+literal|"nvl('abc', 'de')"
+argument_list|,
+literal|"abc"
+argument_list|,
+literal|"VARCHAR(3) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester2
+operator|.
+name|checkString
+argument_list|(
+literal|"nvl('abc', 'defg')"
+argument_list|,
+literal|"abc"
+argument_list|,
+literal|"VARCHAR(4) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester2
+operator|.
+name|checkString
+argument_list|(
+literal|"nvl('abc', CAST(NULL AS VARCHAR(20)))"
+argument_list|,
+literal|"abc"
+argument_list|,
+literal|"VARCHAR(20) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester2
+operator|.
+name|checkString
+argument_list|(
+literal|"nvl(CAST(NULL AS VARCHAR(20)), 'abc')"
+argument_list|,
+literal|"abc"
+argument_list|,
+literal|"VARCHAR(20) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester2
 operator|.
 name|checkNull
 argument_list|(
@@ -24013,6 +24412,30 @@ argument_list|(
 literal|"map['washington', 1, 'obama', 44]"
 argument_list|,
 literal|"(CHAR(10) NOT NULL, INTEGER NOT NULL) MAP NOT NULL"
+argument_list|,
+literal|"{washington=1, obama=44}"
+argument_list|)
+expr_stmt|;
+specifier|final
+name|SqlTester
+name|tester2
+init|=
+name|tester
+operator|.
+name|withConformance
+argument_list|(
+name|SqlConformanceEnum
+operator|.
+name|PRAGMATIC_2003
+argument_list|)
+decl_stmt|;
+name|tester2
+operator|.
+name|checkScalarExact
+argument_list|(
+literal|"map['washington', 1, 'obama', 44]"
+argument_list|,
+literal|"(VARCHAR(10) NOT NULL, INTEGER NOT NULL) MAP NOT NULL"
 argument_list|,
 literal|"{washington=1, obama=44}"
 argument_list|)
