@@ -24156,6 +24156,28 @@ name|tester
 operator|.
 name|checkScalar
 argument_list|(
+literal|"extract(millisecond from interval '4-2' year to month)"
+argument_list|,
+literal|"0"
+argument_list|,
+literal|"BIGINT NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"extract(microsecond from interval '4-2' year to month)"
+argument_list|,
+literal|"0"
+argument_list|,
+literal|"BIGINT NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
 literal|"extract(minute from interval '4-2' year to month)"
 argument_list|,
 literal|"0"
@@ -24186,8 +24208,8 @@ literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
 block|}
-comment|// Postgres doesn't support DOW, DOY and WEEK on INTERVAL YEAR MONTH type.
-comment|// SQL standard doesn't have extract units for DOW, DOY and WEEK.
+comment|// Postgres doesn't support DOW, ISODOW, DOY and WEEK on INTERVAL YEAR MONTH type.
+comment|// SQL standard doesn't have extract units for DOW, ISODOW, DOY and WEEK.
 name|tester
 operator|.
 name|checkFails
@@ -24215,6 +24237,17 @@ operator|.
 name|checkFails
 argument_list|(
 literal|"^extract(week from interval '4-2' year to month)^"
+argument_list|,
+name|INVALID_EXTRACT_UNIT_VALIDATION_ERROR
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkFails
+argument_list|(
+literal|"^extract(isodow from interval '4-2' year to month)^"
 argument_list|,
 name|INVALID_EXTRACT_UNIT_VALIDATION_ERROR
 argument_list|,
@@ -24332,6 +24365,28 @@ name|tester
 operator|.
 name|checkScalar
 argument_list|(
+literal|"extract(millisecond from interval '2 3:4:5.678' day to second)"
+argument_list|,
+literal|"5678"
+argument_list|,
+literal|"BIGINT NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"extract(microsecond from interval '2 3:4:5.678' day to second)"
+argument_list|,
+literal|"5678000"
+argument_list|,
+literal|"BIGINT NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
 literal|"extract(second from interval '2 3:4:5.678' day to second)"
 argument_list|,
 literal|"5"
@@ -24372,8 +24427,8 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-comment|// Postgres doesn't support DOW, DOY and WEEK on INTERVAL DAY TIME type.
-comment|// SQL standard doesn't have extract units for DOW, DOY and WEEK.
+comment|// Postgres doesn't support DOW, ISODOW, DOY and WEEK on INTERVAL DAY TIME type.
+comment|// SQL standard doesn't have extract units for DOW, ISODOW, DOY and WEEK.
 name|tester
 operator|.
 name|checkFails
@@ -24401,6 +24456,17 @@ operator|.
 name|checkFails
 argument_list|(
 literal|"extract(week from interval '2 3:4:5.678' day to second)"
+argument_list|,
+name|INVALID_EXTRACT_UNIT_CONVERTLET_ERROR
+argument_list|,
+literal|true
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkFails
+argument_list|(
+literal|"extract(isodow from interval '2 3:4:5.678' day to second)"
 argument_list|,
 name|INVALID_EXTRACT_UNIT_CONVERTLET_ERROR
 argument_list|,
@@ -24446,6 +24512,21 @@ argument_list|,
 literal|"(?s)Cannot apply 'EXTRACT' to arguments of type 'EXTRACT\\(<INTERVAL "
 operator|+
 literal|"YEAR> FROM<INTERVAL DAY TO SECOND>\\)'\\. Supported "
+operator|+
+literal|"form\\(s\\):.*"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkFails
+argument_list|(
+literal|"^extract(isoyear from interval '2 3:4:5.678' day to second)^"
+argument_list|,
+literal|"(?s)Cannot apply 'EXTRACT' to arguments of type 'EXTRACT\\(<INTERVAL "
+operator|+
+literal|"ISOYEAR> FROM<INTERVAL DAY TO SECOND>\\)'\\. Supported "
 operator|+
 literal|"form\\(s\\):.*"
 argument_list|,
@@ -24604,6 +24685,17 @@ name|tester
 operator|.
 name|checkScalar
 argument_list|(
+literal|"extract(isoyear from date '2008-2-23')"
+argument_list|,
+literal|"2008"
+argument_list|,
+literal|"BIGINT NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
 literal|"extract(doy from date '2008-2-23')"
 argument_list|,
 literal|"54"
@@ -24629,6 +24721,28 @@ argument_list|(
 literal|"extract(dow from date '2008-2-24')"
 argument_list|,
 literal|"1"
+argument_list|,
+literal|"BIGINT NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"extract(isodow from date '2008-2-23')"
+argument_list|,
+literal|"6"
+argument_list|,
+literal|"BIGINT NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"extract(isodow from date '2008-2-24')"
+argument_list|,
+literal|"7"
 argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
@@ -24825,6 +24939,28 @@ name|tester
 operator|.
 name|checkScalar
 argument_list|(
+literal|"extract(millisecond from timestamp '2008-2-23 12:34:56')"
+argument_list|,
+literal|"56000"
+argument_list|,
+literal|"BIGINT NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"extract(microsecond from timestamp '2008-2-23 12:34:56')"
+argument_list|,
+literal|"56000000"
+argument_list|,
+literal|"BIGINT NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
 literal|"extract(minute from timestamp '2008-2-23 12:34:56')"
 argument_list|,
 literal|"34"
@@ -24881,6 +25017,17 @@ operator|.
 name|checkScalar
 argument_list|(
 literal|"extract(year from timestamp '2008-2-23 12:34:56')"
+argument_list|,
+literal|"2008"
+argument_list|,
+literal|"BIGINT NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"extract(isoyear from timestamp '2008-2-23 12:34:56')"
 argument_list|,
 literal|"2008"
 argument_list|,
@@ -25068,6 +25215,28 @@ argument_list|)
 expr_stmt|;
 name|tester
 operator|.
+name|checkScalar
+argument_list|(
+literal|"extract(millisecond from interval '2 3:4:5.678' day to second)"
+argument_list|,
+literal|"5678"
+argument_list|,
+literal|"BIGINT NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"extract(microsecond from interval '2 3:4:5.678' day to second)"
+argument_list|,
+literal|"5678000"
+argument_list|,
+literal|"BIGINT NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
 name|checkNull
 argument_list|(
 literal|"extract(month from cast(null as interval year))"
@@ -25099,6 +25268,17 @@ operator|.
 name|checkScalar
 argument_list|(
 literal|"extract(year from date '2008-2-23')"
+argument_list|,
+literal|"2008"
+argument_list|,
+literal|"BIGINT NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"extract(isoyear from date '2008-2-23')"
 argument_list|,
 literal|"2008"
 argument_list|,
@@ -25168,6 +25348,20 @@ operator|.
 name|checkNull
 argument_list|(
 literal|"extract(second from cast(null as time))"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkNull
+argument_list|(
+literal|"extract(millisecond from cast(null as time))"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkNull
+argument_list|(
+literal|"extract(microsecond from cast(null as time))"
 argument_list|)
 expr_stmt|;
 block|}

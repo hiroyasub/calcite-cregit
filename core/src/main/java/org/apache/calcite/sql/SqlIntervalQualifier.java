@@ -452,6 +452,9 @@ case|case
 name|YEAR
 case|:
 case|case
+name|ISOYEAR
+case|:
+case|case
 name|CENTURY
 case|:
 case|case
@@ -486,6 +489,9 @@ name|INTERVAL_MONTH
 return|;
 case|case
 name|DOW
+case|:
+case|case
+name|ISODOW
 case|:
 case|case
 name|DOY
