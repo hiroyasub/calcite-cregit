@@ -868,10 +868,13 @@ name|e
 argument_list|)
 return|;
 case|case
+name|CEIL
+case|:
+case|case
 name|FLOOR
 case|:
 return|return
-name|simplifyFloor
+name|simplifyCeilFloor
 argument_list|(
 operator|(
 name|RexCall
@@ -6833,10 +6836,10 @@ name|e
 return|;
 block|}
 block|}
-comment|/** Tries to simplify FLOOR function on top of FLOOR.    *    *<p>Examples:    *<ul>    *    *<li>{@code floor(floor($0, flag(hour)), flag(day))} returns {@code floor($0, flag(day))}    *    *<li>{@code floor(floor($0, flag(second)), flag(day))} returns {@code floor($0, flag(day))}    *    *<li>{@code floor(floor($0, flag(day)), flag(second))} does not change    *    *</ul>    */
+comment|/** Tries to simplify CEIL/FLOOR function on top of CEIL/FLOOR.    *    *<p>Examples:    *<ul>    *    *<li>{@code floor(floor($0, flag(hour)), flag(day))} returns {@code floor($0, flag(day))}    *    *<li>{@code ceil(ceil($0, flag(second)), flag(day))} returns {@code ceil($0, flag(day))}    *    *<li>{@code floor(floor($0, flag(day)), flag(second))} does not change    *    *</ul>    */
 specifier|private
 name|RexNode
-name|simplifyFloor
+name|simplifyCeilFloor
 parameter_list|(
 name|RexCall
 name|e
@@ -6877,18 +6880,39 @@ literal|0
 argument_list|)
 argument_list|)
 decl_stmt|;
-switch|switch
+if|if
 condition|(
+name|e
+operator|.
+name|getKind
+argument_list|()
+operator|==
 name|operand
 operator|.
 name|getKind
 argument_list|()
 condition|)
 block|{
-case|case
+assert|assert
+name|e
+operator|.
+name|getKind
+argument_list|()
+operator|==
+name|SqlKind
+operator|.
+name|CEIL
+operator|||
+name|e
+operator|.
+name|getKind
+argument_list|()
+operator|==
+name|SqlKind
+operator|.
 name|FLOOR
-case|:
-comment|// FLOOR on top of FLOOR
+assert|;
+comment|// CEIL/FLOOR on top of CEIL/FLOOR
 specifier|final
 name|RexCall
 name|child
@@ -6911,7 +6935,7 @@ operator|!=
 literal|2
 condition|)
 block|{
-comment|// Bail out since we only simplify floor<date>
+comment|// Bail out since we only simplify ceil/floor<date>
 return|return
 name|e
 return|;
