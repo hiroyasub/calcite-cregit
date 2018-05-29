@@ -868,13 +868,10 @@ name|e
 argument_list|)
 return|;
 case|case
-name|CEIL
-case|:
-case|case
 name|FLOOR
 case|:
 return|return
-name|simplifyCeilFloor
+name|simplifyFloor
 argument_list|(
 operator|(
 name|RexCall
@@ -6836,10 +6833,10 @@ name|e
 return|;
 block|}
 block|}
-comment|/** Tries to simplify CEIL/FLOOR function on top of CEIL/FLOOR.    *    *<p>Examples:    *<ul>    *    *<li>{@code ceil(floor($0, flag(hour)), flag(day))} returns {@code ceil($0, flag(day))}    *    *<li>{@code floor(floor($0, flag(second)), flag(day))} returns {@code floor($0, flag(day))}    *    *<li>{@code floor(ceil($0, flag(day)), flag(second))} does not change    *    *</ul>    */
+comment|/** Tries to simplify FLOOR function on top of FLOOR.    *    *<p>Examples:    *<ul>    *    *<li>{@code floor(floor($0, flag(hour)), flag(day))} returns {@code floor($0, flag(day))}    *    *<li>{@code floor(floor($0, flag(second)), flag(day))} returns {@code floor($0, flag(day))}    *    *<li>{@code floor(floor($0, flag(day)), flag(second))} does not change    *    *</ul>    */
 specifier|private
 name|RexNode
-name|simplifyCeilFloor
+name|simplifyFloor
 parameter_list|(
 name|RexCall
 name|e
@@ -6858,7 +6855,7 @@ operator|!=
 literal|2
 condition|)
 block|{
-comment|// Bail out since we only simplify ceil/floor<date>
+comment|// Bail out since we only simplify floor<date>
 return|return
 name|e
 return|;
@@ -6889,12 +6886,9 @@ argument_list|()
 condition|)
 block|{
 case|case
-name|CEIL
-case|:
-case|case
 name|FLOOR
 case|:
-comment|// CEIL/FLOOR on top of CEIL/FLOOR
+comment|// FLOOR on top of FLOOR
 specifier|final
 name|RexCall
 name|child
@@ -6917,7 +6911,7 @@ operator|!=
 literal|2
 condition|)
 block|{
-comment|// Bail out since we only simplify ceil/floor<date>
+comment|// Bail out since we only simplify floor<date>
 return|return
 name|e
 return|;

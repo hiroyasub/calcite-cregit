@@ -477,16 +477,6 @@ name|org
 operator|.
 name|junit
 operator|.
-name|Ignore
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|junit
-operator|.
 name|Test
 import|;
 end_import
@@ -3336,14 +3326,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Test case for simplifier of ceil and floor. */
-comment|// Disabled: we wrongly simplify FLOOR(CEIL(2010-10-10, YEAR), YEAR)
-comment|// to FLOOR(2010-10-10, YEAR)
-annotation|@
-name|Ignore
-argument_list|(
-literal|"[CALCITE-2332]"
-argument_list|)
+comment|/** Test case for simplifier of floor. */
 annotation|@
 name|Test
 specifier|public
@@ -3351,6 +3334,9 @@ name|void
 name|testSimplifyFloor
 parameter_list|()
 block|{
+comment|// We can add more time units here once they are supported in
+comment|// RexInterpreter, e.g., TimeUnitRange.HOUR, TimeUnitRange.MINUTE,
+comment|// TimeUnitRange.SECOND.
 specifier|final
 name|ImmutableList
 argument_list|<
@@ -3364,43 +3350,11 @@ name|of
 argument_list|(
 name|TimeUnitRange
 operator|.
-name|WEEK
-argument_list|,
-name|TimeUnitRange
-operator|.
 name|YEAR
 argument_list|,
 name|TimeUnitRange
 operator|.
-name|QUARTER
-argument_list|,
-name|TimeUnitRange
-operator|.
 name|MONTH
-argument_list|,
-name|TimeUnitRange
-operator|.
-name|DAY
-argument_list|,
-name|TimeUnitRange
-operator|.
-name|HOUR
-argument_list|,
-name|TimeUnitRange
-operator|.
-name|MINUTE
-argument_list|,
-name|TimeUnitRange
-operator|.
-name|SECOND
-argument_list|,
-name|TimeUnitRange
-operator|.
-name|MILLISECOND
-argument_list|,
-name|TimeUnitRange
-operator|.
-name|MICROSECOND
 argument_list|)
 decl_stmt|;
 specifier|final
@@ -3444,13 +3398,12 @@ literal|"2010-10-10 00:00:00"
 argument_list|)
 argument_list|)
 decl_stmt|;
-comment|// Exclude WEEK as it is only used for the negative tests
 for|for
 control|(
 name|int
 name|i
 init|=
-literal|1
+literal|0
 init|;
 name|i
 operator|<
@@ -3475,7 +3428,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|CEIL
+name|FLOOR
 argument_list|,
 name|literalTs
 argument_list|,
@@ -3499,7 +3452,7 @@ control|(
 name|int
 name|j
 init|=
-literal|1
+literal|0
 init|;
 name|j
 operator|<=
@@ -3716,7 +3669,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|CEIL
+name|FLOOR
 argument_list|,
 name|innerFloorCall
 argument_list|,
