@@ -470,6 +470,9 @@ name|checkOperandTypes
 parameter_list|(
 name|SqlOperatorBinding
 name|operatorBinding
+parameter_list|,
+name|SqlCallBinding
+name|callBinding
 parameter_list|)
 block|{
 return|return

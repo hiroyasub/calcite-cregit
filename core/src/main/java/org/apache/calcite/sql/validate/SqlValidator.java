@@ -389,6 +389,24 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|validate
+operator|.
+name|implicit
+operator|.
+name|TypeCoercion
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -1074,6 +1092,32 @@ parameter_list|(
 name|SqlNode
 name|withItem
 parameter_list|)
+function_decl|;
+comment|/**    * Set if implicit type coercion is allowed when the validator does validation.    * See {@link org.apache.calcite.sql.validate.implicit.TypeCoercionImpl} for the details.    * @param enabled default as true.    */
+name|SqlValidator
+name|setEnableTypeCoercion
+parameter_list|(
+name|boolean
+name|enabled
+parameter_list|)
+function_decl|;
+comment|/** Get if this validator supports implicit type coercion. */
+name|boolean
+name|isTypeCoercionEnabled
+parameter_list|()
+function_decl|;
+comment|/**    * Set an instance of type coercion, you can customize the coercion rules to    * override the default ones    * in {@link org.apache.calcite.sql.validate.implicit.TypeCoercionImpl}.    * @param typeCoercion instance of {@link TypeCoercion}.    */
+name|void
+name|setTypeCoercion
+parameter_list|(
+name|TypeCoercion
+name|typeCoercion
+parameter_list|)
+function_decl|;
+comment|/** Get the type coercion instance. */
+name|TypeCoercion
+name|getTypeCoercion
+parameter_list|()
 function_decl|;
 block|}
 end_interface

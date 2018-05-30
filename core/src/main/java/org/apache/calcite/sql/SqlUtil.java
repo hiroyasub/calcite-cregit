@@ -1943,7 +1943,7 @@ name|lits
 argument_list|)
 return|;
 block|}
-comment|/**    * Looks up a (possibly overloaded) routine based on name and argument    * types.    *    * @param opTab         operator table to search    * @param funcName      name of function being invoked    * @param argTypes      argument types    * @param argNames      argument names, or null if call by position    * @param category      whether a function or a procedure. (If a procedure is    *                      being invoked, the overload rules are simpler.)    * @param nameMatcher   Whether to look up the function case-sensitively    * @return matching routine, or null if none found    *    * @see Glossary#SQL99 SQL:1999 Part 2 Section 10.4    */
+comment|/**    * Looks up a (possibly overloaded) routine based on name and argument    * types.    *    * @param opTab         operator table to search    * @param funcName      name of function being invoked    * @param argTypes      argument types    * @param argNames      argument names, or null if call by position    * @param category      whether a function or a procedure. (If a procedure is    *                      being invoked, the overload rules are simpler.)    * @param nameMatcher   Whether to look up the function case-sensitively    * @param coerce        Whether to allow type coercion when do filter routines    *                      by parameter types    * @return matching routine, or null if none found    *    * @see Glossary#SQL99 SQL:1999 Part 2 Section 10.4    */
 specifier|public
 specifier|static
 name|SqlOperator
@@ -1978,6 +1978,9 @@ name|sqlKind
 parameter_list|,
 name|SqlNameMatcher
 name|nameMatcher
+parameter_list|,
+name|boolean
+name|coerce
 parameter_list|)
 block|{
 name|Iterator
@@ -2003,6 +2006,8 @@ argument_list|,
 name|category
 argument_list|,
 name|nameMatcher
+argument_list|,
+name|coerce
 argument_list|)
 decl_stmt|;
 if|if
@@ -2067,7 +2072,7 @@ name|sqlKind
 argument_list|)
 return|;
 block|}
-comment|/**    * Looks up all subject routines matching the given name and argument types.    *    * @param opTab     operator table to search    * @param funcName  name of function being invoked    * @param argTypes  argument types    * @param argNames  argument names, or null if call by position    * @param sqlSyntax the SqlSyntax of the SqlOperator being looked up    * @param sqlKind   the SqlKind of the SqlOperator being looked up    * @param category  Category of routine to look up    * @param nameMatcher Whether to look up the function case-sensitively    * @return list of matching routines    * @see Glossary#SQL99 SQL:1999 Part 2 Section 10.4    */
+comment|/**    * Looks up all subject routines matching the given name and argument types.    *    * @param opTab       operator table to search    * @param funcName    name of function being invoked    * @param argTypes    argument types    * @param argNames    argument names, or null if call by position    * @param sqlSyntax   the SqlSyntax of the SqlOperator being looked up    * @param sqlKind     the SqlKind of the SqlOperator being looked up    * @param category    Category of routine to look up    * @param nameMatcher Whether to look up the function case-sensitively    * @param coerce      Whether to allow type coercion when do filter routine    *                    by parameter types    * @return list of matching routines    * @see Glossary#SQL99 SQL:1999 Part 2 Section 10.4    */
 specifier|public
 specifier|static
 name|Iterator
@@ -2105,6 +2110,9 @@ name|category
 parameter_list|,
 name|SqlNameMatcher
 name|nameMatcher
+parameter_list|,
+name|boolean
+name|coerce
 parameter_list|)
 block|{
 comment|// start with all routines matching by name
@@ -2166,10 +2174,13 @@ argument_list|,
 name|argTypes
 argument_list|,
 name|argNames
+argument_list|,
+name|coerce
 argument_list|)
 expr_stmt|;
 comment|// see if we can stop now; this is necessary for the case
-comment|// of builtin functions where we don't have param type info
+comment|// of builtin functions where we don't have param type info,
+comment|// or UDF whose operands can make type coercion.
 specifier|final
 name|List
 argument_list|<
@@ -2199,6 +2210,8 @@ name|size
 argument_list|()
 operator|<
 literal|2
+operator|||
+name|coerce
 condition|)
 block|{
 return|return
@@ -2486,6 +2499,10 @@ argument_list|<
 name|String
 argument_list|>
 name|argNames
+parameter_list|,
+specifier|final
+name|boolean
+name|coerce
 parameter_list|)
 block|{
 if|if
@@ -2530,12 +2547,7 @@ name|RelDataType
 argument_list|>
 name|paramTypes
 init|=
-name|Objects
-operator|.
-name|requireNonNull
-argument_list|(
 name|function
-argument_list|)
 operator|.
 name|getParamTypes
 argument_list|()
@@ -2547,7 +2559,8 @@ operator|==
 literal|null
 condition|)
 block|{
-comment|// no parameter information for builtins; keep for now
+comment|// no parameter information for builtins; keep for now,
+comment|// the type coerce will not work here.
 return|return
 literal|true
 return|;
@@ -2769,7 +2782,7 @@ name|paramType
 argument_list|,
 name|argType
 argument_list|,
-literal|false
+name|coerce
 argument_list|)
 condition|)
 block|{

@@ -508,14 +508,10 @@ parameter_list|()
 block|{
 try|try
 block|{
+comment|// implicit type coercion.
 name|runQuery
 argument_list|(
 literal|"select \"name\" - \"id\" from \"entries\""
-argument_list|)
-expr_stmt|;
-name|fail
-argument_list|(
-literal|"Query with semantic error should fail"
 argument_list|)
 expr_stmt|;
 block|}

@@ -594,6 +594,20 @@ name|DEFAULT
 argument_list|,
 literal|false
 argument_list|)
+block|,
+comment|/** Whether to make implicit type coercion when type mismatch    * for validation, default true. */
+name|TYPE_COERCION
+argument_list|(
+literal|"typeCoercion"
+argument_list|,
+name|Type
+operator|.
+name|BOOLEAN
+argument_list|,
+literal|true
+argument_list|,
+literal|false
+argument_list|)
 block|;
 specifier|private
 specifier|final

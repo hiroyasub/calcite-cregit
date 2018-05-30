@@ -478,6 +478,14 @@ name|SqlTypeName
 operator|.
 name|ANY
 return|;
+case|case
+name|NULL
+case|:
+return|return
+name|SqlTypeName
+operator|.
+name|NULL
+return|;
 default|default:
 throw|throw
 name|Util

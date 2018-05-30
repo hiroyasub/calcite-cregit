@@ -505,6 +505,17 @@ operator|.
 name|ARRAY
 argument_list|)
 decl|.
+name|put
+argument_list|(
+name|Void
+operator|.
+name|class
+argument_list|,
+name|SqlTypeName
+operator|.
+name|NULL
+argument_list|)
+decl|.
 name|build
 argument_list|()
 decl_stmt|;

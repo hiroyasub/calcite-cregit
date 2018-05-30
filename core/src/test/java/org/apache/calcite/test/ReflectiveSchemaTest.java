@@ -3269,7 +3269,9 @@ argument_list|)
 operator|.
 name|planContains
 argument_list|(
-literal|"return inp13_ == null ? (Long) null : Long.valueOf(inp13_.longValue() / current.primitiveLong);"
+literal|"return inp13_ == null ? (Long) null "
+operator|+
+literal|": Long.valueOf(inp13_.longValue() / current.primitiveLong);"
 argument_list|)
 operator|.
 name|returns
@@ -3321,7 +3323,9 @@ argument_list|)
 operator|.
 name|planContains
 argument_list|(
-literal|"return inp13_ == null ? (Long) null : Long.valueOf(inp13_.longValue() / inp13_.longValue());"
+literal|"return inp13_ == null ? (Long) null "
+operator|+
+literal|": Long.valueOf(inp13_.longValue() / inp13_.longValue());"
 argument_list|)
 operator|.
 name|returns
@@ -3375,7 +3379,11 @@ argument_list|)
 operator|.
 name|planContains
 argument_list|(
-literal|"return inp13_ == null ? (Long) null : Long.valueOf(inp13_.longValue() / inp13_.longValue() + inp13_.longValue() / inp13_.longValue());"
+literal|"return inp13_ == null ? (Long) null "
+operator|+
+literal|": Long.valueOf(inp13_.longValue() / inp13_.longValue() "
+operator|+
+literal|"+ inp13_.longValue() / inp13_.longValue());"
 argument_list|)
 operator|.
 name|returns

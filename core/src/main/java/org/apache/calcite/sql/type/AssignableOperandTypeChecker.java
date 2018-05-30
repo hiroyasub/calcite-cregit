@@ -329,6 +329,7 @@ name|argType
 argument_list|)
 condition|)
 block|{
+comment|// TODO: add in unresolved function type cast.
 if|if
 condition|(
 name|throwOnFailure

@@ -1372,8 +1372,6 @@ name|Connection
 name|getConnectionWithMultiplyFunction
 parameter_list|()
 throws|throws
-name|ClassNotFoundException
-throws|,
 name|SQLException
 block|{
 name|Connection
@@ -1898,13 +1896,16 @@ literal|"from table(\"s\".\"multiplication\"('2', 3, 100))\n"
 operator|+
 literal|"where c1 + 2< c2"
 decl_stmt|;
+comment|// With type coercion, a cast node with null as argument would be
+comment|// passed to the function to infer the table row type, we use
+comment|// SqlUserDefinedTableMacro#convertArguments to decide the type.
+comment|// For this table function: multiplication,
+comment|// it will just throw IllegalArgumentException.
 specifier|final
 name|String
 name|e
 init|=
-literal|"No match found for function signature "
-operator|+
-literal|"multiplication(<CHARACTER>,<NUMERIC>,<NUMERIC>)"
+literal|"java.lang.IllegalArgumentException"
 decl_stmt|;
 name|with
 argument_list|()

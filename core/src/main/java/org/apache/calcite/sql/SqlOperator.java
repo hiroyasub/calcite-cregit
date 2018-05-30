@@ -1422,6 +1422,8 @@ argument_list|,
 literal|false
 argument_list|)
 decl_stmt|;
+comment|// Always disable type coercion for builtin operator operands,
+comment|// they are handled by the TypeCoercion specifically.
 specifier|final
 name|SqlOperator
 name|sqlOperator
@@ -1457,6 +1459,8 @@ argument_list|()
 operator|.
 name|nameMatcher
 argument_list|()
+argument_list|,
+literal|false
 argument_list|)
 decl_stmt|;
 operator|(

@@ -1050,6 +1050,14 @@ name|ModelTest
 operator|.
 name|class
 block|,
+name|TypeCoercionTest
+operator|.
+name|class
+block|,
+name|TypeCoercionConverterTest
+operator|.
+name|class
+block|,
 name|SqlValidatorFeatureTest
 operator|.
 name|class

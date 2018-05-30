@@ -962,6 +962,19 @@ init|=
 name|createTester
 argument_list|()
 decl_stmt|;
+comment|// Same as tester but without implicit type coercion.
+specifier|protected
+specifier|final
+name|Tester
+name|strictTester
+init|=
+name|tester
+operator|.
+name|enableTypeCoercion
+argument_list|(
+literal|false
+argument_list|)
+decl_stmt|;
 comment|//~ Methods ----------------------------------------------------------------
 specifier|public
 name|SqlToRelTestBase
@@ -990,6 +1003,8 @@ argument_list|,
 literal|true
 argument_list|,
 literal|false
+argument_list|,
+literal|true
 argument_list|,
 literal|null
 argument_list|,
@@ -1034,6 +1049,8 @@ argument_list|,
 literal|true
 argument_list|,
 literal|false
+argument_list|,
+literal|true
 argument_list|,
 literal|null
 argument_list|,
@@ -1251,6 +1268,14 @@ name|withConformance
 parameter_list|(
 name|SqlConformance
 name|conformance
+parameter_list|)
+function_decl|;
+comment|/** Returns a tester with a specified if allows type coercion. */
+name|Tester
+name|enableTypeCoercion
+parameter_list|(
+name|boolean
+name|typeCoercion
 parameter_list|)
 function_decl|;
 name|Tester
@@ -2396,6 +2421,11 @@ name|enableExpand
 decl_stmt|;
 specifier|private
 specifier|final
+name|boolean
+name|enableTypeCoercion
+decl_stmt|;
+specifier|private
+specifier|final
 name|SqlConformance
 name|conformance
 decl_stmt|;
@@ -2451,6 +2481,9 @@ parameter_list|,
 name|boolean
 name|enableLateDecorrelate
 parameter_list|,
+name|boolean
+name|enableTypeCoercion
+parameter_list|,
 name|SqlTestFactory
 operator|.
 name|MockCatalogReaderFactory
@@ -2476,6 +2509,8 @@ argument_list|,
 name|enableExpand
 argument_list|,
 name|enableLateDecorrelate
+argument_list|,
+name|enableTypeCoercion
 argument_list|,
 name|catalogReaderFactory
 argument_list|,
@@ -2515,6 +2550,9 @@ name|enableExpand
 parameter_list|,
 name|boolean
 name|enableLateDecorrelate
+parameter_list|,
+name|boolean
+name|enableTypeCoercion
 parameter_list|,
 name|SqlTestFactory
 operator|.
@@ -2570,6 +2608,12 @@ operator|.
 name|enableLateDecorrelate
 operator|=
 name|enableLateDecorrelate
+expr_stmt|;
+name|this
+operator|.
+name|enableTypeCoercion
+operator|=
+name|enableTypeCoercion
 expr_stmt|;
 name|this
 operator|.
@@ -3118,7 +3162,10 @@ name|RelDataTypeFactory
 name|typeFactory
 parameter_list|)
 block|{
-return|return
+specifier|final
+name|SqlValidator
+name|validator
+init|=
 operator|new
 name|FarragoTestValidator
 argument_list|(
@@ -3132,6 +3179,18 @@ argument_list|,
 name|getConformance
 argument_list|()
 argument_list|)
+decl_stmt|;
+comment|// the connection config may be null, set up the flag
+comment|// separately.
+name|validator
+operator|.
+name|setEnableTypeCoercion
+argument_list|(
+name|enableTypeCoercion
+argument_list|)
+expr_stmt|;
+return|return
+name|validator
 return|;
 block|}
 specifier|public
@@ -3495,6 +3554,8 @@ name|enableExpand
 argument_list|,
 name|enableLateDecorrelate
 argument_list|,
+name|enableTypeCoercion
+argument_list|,
 name|catalogReaderFactory
 argument_list|,
 name|clusterFactory
@@ -3536,6 +3597,8 @@ argument_list|,
 name|enableExpand
 argument_list|,
 name|enableLateDecorrelate
+argument_list|,
+name|enableTypeCoercion
 argument_list|,
 name|catalogReaderFactory
 argument_list|,
@@ -3581,6 +3644,8 @@ name|enableExpand
 argument_list|,
 name|enableLateDecorrelate
 argument_list|,
+name|enableTypeCoercion
+argument_list|,
 name|catalogReaderFactory
 argument_list|,
 name|clusterFactory
@@ -3622,6 +3687,8 @@ argument_list|,
 name|enableExpand
 argument_list|,
 name|enableLateDecorrelate
+argument_list|,
+name|enableTypeCoercion
 argument_list|,
 name|catalogReaderFactory
 argument_list|,
@@ -3665,6 +3732,8 @@ name|enableExpand
 argument_list|,
 name|enableLateDecorrelate
 argument_list|,
+name|enableTypeCoercion
+argument_list|,
 name|catalogReaderFactory
 argument_list|,
 name|clusterFactory
@@ -3698,6 +3767,44 @@ argument_list|,
 name|enableExpand
 argument_list|,
 name|enableLateDecorrelate
+argument_list|,
+name|enableTypeCoercion
+argument_list|,
+name|catalogReaderFactory
+argument_list|,
+name|clusterFactory
+argument_list|,
+name|config
+argument_list|,
+name|conformance
+argument_list|,
+name|context
+argument_list|)
+return|;
+block|}
+specifier|public
+name|Tester
+name|enableTypeCoercion
+parameter_list|(
+name|boolean
+name|enableTypeCoercion
+parameter_list|)
+block|{
+return|return
+operator|new
+name|TesterImpl
+argument_list|(
+name|diffRepos
+argument_list|,
+name|enableDecorrelate
+argument_list|,
+literal|false
+argument_list|,
+name|enableExpand
+argument_list|,
+name|enableLateDecorrelate
+argument_list|,
+name|enableTypeCoercion
 argument_list|,
 name|catalogReaderFactory
 argument_list|,
@@ -3734,6 +3841,8 @@ argument_list|,
 name|enableExpand
 argument_list|,
 name|enableLateDecorrelate
+argument_list|,
+name|enableTypeCoercion
 argument_list|,
 name|factory
 argument_list|,
@@ -3774,6 +3883,8 @@ name|enableExpand
 argument_list|,
 name|enableLateDecorrelate
 argument_list|,
+name|enableTypeCoercion
+argument_list|,
 name|catalogReaderFactory
 argument_list|,
 name|clusterFactory
@@ -3807,6 +3918,8 @@ argument_list|,
 name|enableExpand
 argument_list|,
 name|enableLateDecorrelate
+argument_list|,
+name|enableTypeCoercion
 argument_list|,
 name|catalogReaderFactory
 argument_list|,

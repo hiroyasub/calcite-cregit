@@ -431,6 +431,14 @@ name|RelDataType
 name|type2
 parameter_list|)
 function_decl|;
+comment|/**    * Create a decimal type equivalent to the numeric {@code type},    * this is related to specific system implementation,    * you can override this logic if it is required.    *    * @param type the numeric type to create decimal type with    * @return decimal equivalence of the numeric type.    */
+name|RelDataType
+name|decimalOf
+parameter_list|(
+name|RelDataType
+name|type
+parameter_list|)
+function_decl|;
 comment|/**    * Creates a    * {@link org.apache.calcite.rel.type.RelDataTypeFactory.FieldInfoBuilder}.    * But since {@code FieldInfoBuilder} is deprecated, we recommend that you use    * its base class {@link Builder}, which is not deprecated.    */
 annotation|@
 name|SuppressWarnings

@@ -1573,6 +1573,13 @@ argument_list|(
 literal|"SELECT ^-'abc'^ from (values(true))"
 argument_list|,
 literal|"(?s).*Cannot apply '-' to arguments of type '-<CHAR.3.>'.*"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+name|check
+argument_list|(
+literal|"SELECT -'abc' from (values(true))"
 argument_list|)
 expr_stmt|;
 name|checkFails
@@ -1580,6 +1587,13 @@ argument_list|(
 literal|"SELECT ^+'abc'^ from (values(true))"
 argument_list|,
 literal|"(?s).*Cannot apply '\\+' to arguments of type '\\+<CHAR.3.>'.*"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+name|check
+argument_list|(
+literal|"SELECT +'abc' from (values(true))"
 argument_list|)
 expr_stmt|;
 block|}
@@ -1816,11 +1830,18 @@ literal|"''=.1"
 argument_list|)
 expr_stmt|;
 comment|// compare CHAR, DECIMAL ok
+name|checkExp
+argument_list|(
+literal|"true<>1e-1"
+argument_list|)
+expr_stmt|;
 name|checkExpFails
 argument_list|(
 literal|"^true<>1e-1^"
 argument_list|,
 literal|"(?s).*Cannot apply '<>' to arguments of type '<BOOLEAN><><DOUBLE>'.*"
+argument_list|,
+literal|false
 argument_list|)
 expr_stmt|;
 name|checkExp
@@ -1883,11 +1904,20 @@ name|void
 name|testBinaryStringFails
 parameter_list|()
 block|{
+name|checkExpType
+argument_list|(
+literal|"select x'ffee'='abc' from (values(true))"
+argument_list|,
+literal|"BOOLEAN"
+argument_list|)
+expr_stmt|;
 name|assertExceptionIsThrown
 argument_list|(
 literal|"select ^x'ffee'='abc'^ from (values(true))"
 argument_list|,
 literal|"(?s).*Cannot apply '=' to arguments of type '<BINARY.2.> =<CHAR.3.>'.*"
+argument_list|,
+literal|false
 argument_list|)
 expr_stmt|;
 name|assertExceptionIsThrown
@@ -2044,6 +2074,15 @@ argument_list|(
 literal|"^power(2,'abc')^"
 argument_list|,
 literal|"(?s).*Cannot apply 'POWER' to arguments of type 'POWER.<INTEGER>,<CHAR.3.>.*"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+name|checkExpType
+argument_list|(
+literal|"power(2,'abc')"
+argument_list|,
+literal|"DOUBLE NOT NULL"
 argument_list|)
 expr_stmt|;
 name|checkExpFails
@@ -2072,6 +2111,8 @@ argument_list|(
 literal|"^abs(x'')^"
 argument_list|,
 literal|"(?s).*Cannot apply 'ABS' to arguments of type 'ABS.<BINARY.0.>.*"
+argument_list|,
+literal|false
 argument_list|)
 expr_stmt|;
 name|checkExpFails
@@ -2093,6 +2134,15 @@ argument_list|(
 literal|"^exp('abc')^"
 argument_list|,
 literal|"(?s).*Cannot apply 'EXP' to arguments of type 'EXP.<CHAR.3.>.*"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+name|checkExpType
+argument_list|(
+literal|"exp('abc')"
+argument_list|,
+literal|"DOUBLE NOT NULL"
 argument_list|)
 expr_stmt|;
 block|}
@@ -2247,11 +2297,20 @@ name|testCaseExpressionFails
 parameter_list|()
 block|{
 comment|// varchar not comparable with bit string
+name|checkExpType
+argument_list|(
+literal|"case 'string' when x'01' then 'zero one' else 'something' end"
+argument_list|,
+literal|"CHAR(9) NOT NULL"
+argument_list|)
+expr_stmt|;
 name|checkWholeExpFails
 argument_list|(
 literal|"case 'string' when x'01' then 'zero one' else 'something' end"
 argument_list|,
 literal|"(?s).*Cannot apply '=' to arguments of type '<CHAR.6.> =<BINARY.1.>'.*"
+argument_list|,
+literal|false
 argument_list|)
 expr_stmt|;
 comment|// all thens and else return null
@@ -2260,6 +2319,15 @@ argument_list|(
 literal|"case 1 when 1 then null else null end"
 argument_list|,
 literal|"(?s).*ELSE clause or at least one THEN clause must be non-NULL.*"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+name|checkExpType
+argument_list|(
+literal|"case 1 when 1 then null else null end"
+argument_list|,
+literal|"NULL"
 argument_list|)
 expr_stmt|;
 comment|// all thens and else return null
@@ -2268,6 +2336,15 @@ argument_list|(
 literal|"case 1 when 1 then null end"
 argument_list|,
 literal|"(?s).*ELSE clause or at least one THEN clause must be non-NULL.*"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+name|checkExpType
+argument_list|(
+literal|"case 1 when 1 then null end"
+argument_list|,
+literal|"NULL"
 argument_list|)
 expr_stmt|;
 name|checkWholeExpFails
@@ -2366,6 +2443,15 @@ argument_list|(
 literal|"coalesce('a',1)"
 argument_list|,
 literal|"Illegal mixing of types in CASE or COALESCE statement"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+name|checkExpType
+argument_list|(
+literal|"coalesce('a',1)"
+argument_list|,
+literal|"VARCHAR NOT NULL"
 argument_list|)
 expr_stmt|;
 name|checkWholeExpFails
@@ -2373,6 +2459,15 @@ argument_list|(
 literal|"coalesce('a','b',1)"
 argument_list|,
 literal|"Illegal mixing of types in CASE or COALESCE statement"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+name|checkExpType
+argument_list|(
+literal|"coalesce('a','b',1)"
+argument_list|,
+literal|"VARCHAR NOT NULL"
 argument_list|)
 expr_stmt|;
 block|}
@@ -2994,6 +3089,15 @@ argument_list|(
 literal|"upper(123)"
 argument_list|,
 literal|"(?s).*Cannot apply 'UPPER' to arguments of type 'UPPER.<INTEGER>.'.*"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+name|checkExpType
+argument_list|(
+literal|"upper(123)"
+argument_list|,
+literal|"VARCHAR NOT NULL"
 argument_list|)
 expr_stmt|;
 block|}
@@ -3130,6 +3234,15 @@ argument_list|(
 literal|"trim(123 FROM 'beard')"
 argument_list|,
 literal|"(?s).*Cannot apply 'TRIM' to arguments of type.*"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+name|checkExpType
+argument_list|(
+literal|"trim(123 FROM 'beard')"
+argument_list|,
+literal|"VARCHAR(5) NOT NULL"
 argument_list|)
 expr_stmt|;
 name|checkWholeExpFails
@@ -3137,6 +3250,15 @@ argument_list|(
 literal|"trim('a' FROM 123)"
 argument_list|,
 literal|"(?s).*Cannot apply 'TRIM' to arguments of type.*"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+name|checkExpType
+argument_list|(
+literal|"trim('a' FROM 123)"
+argument_list|,
+literal|"VARCHAR NOT NULL"
 argument_list|)
 expr_stmt|;
 name|checkWholeExpFails
@@ -3219,6 +3341,15 @@ argument_list|(
 literal|"translate('abc', 'ab', 123)"
 argument_list|,
 literal|"(?s)Cannot apply 'TRANSLATE3' to arguments of type 'TRANSLATE3\\(<CHAR\\(3\\)>,<CHAR\\(2\\)>,<INTEGER>\\)'\\. .*"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+name|checkExpType
+argument_list|(
+literal|"translate('abc', 'ab', 123)"
+argument_list|,
+literal|"VARCHAR(3) NOT NULL"
 argument_list|)
 expr_stmt|;
 name|checkWholeExpFails
@@ -3251,6 +3382,15 @@ argument_list|(
 literal|"overlay('ABCdef' placing 'abc' from '1' for 3)"
 argument_list|,
 literal|"(?s).*OVERLAY\\(<STRING> PLACING<STRING> FROM<INTEGER>\\).*"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+name|checkExpType
+argument_list|(
+literal|"overlay('ABCdef' placing 'abc' from '1' for 3)"
+argument_list|,
+literal|"VARCHAR(9) NOT NULL"
 argument_list|)
 expr_stmt|;
 name|checkExpType
@@ -3480,11 +3620,159 @@ name|void
 name|testNull
 parameter_list|()
 block|{
-name|checkFails
+name|checkExp
+argument_list|(
+literal|"nullif(null, 1)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"values 1.0 + ^NULL^"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"1.0 + ^NULL^"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"case when 1> 0 then null else 0 end"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"1> 0 and null"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"position(null in 'abc' from 1)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"substring(null from 1)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"trim(null from 'ab')"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"trim(null from null)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"null || 'a'"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"not(null)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"+null"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"-null"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"upper(null)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"lower(null)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"initcap(null)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"mod(null, 2) + 1"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"abs(null)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"round(null,1)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"sign(null) + 1"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"truncate(null,1) + 1"
+argument_list|)
+expr_stmt|;
+name|check
+argument_list|(
+literal|"select null as a from emp"
+argument_list|)
+expr_stmt|;
+name|check
+argument_list|(
+literal|"select avg(null) from emp"
+argument_list|)
+expr_stmt|;
+name|check
+argument_list|(
+literal|"select bit_and(null) from emp"
+argument_list|)
+expr_stmt|;
+name|check
+argument_list|(
+literal|"select bit_or(null) from emp"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"substring(null from 1) + 1"
+argument_list|)
+expr_stmt|;
+name|checkExpFails
+argument_list|(
+literal|"substring(^NULL^ from 1)"
+argument_list|,
+literal|"(?s).*Illegal use of .NULL.*"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+name|checkExpFails
 argument_list|(
 literal|"values 1.0 + ^NULL^"
 argument_list|,
 literal|"(?s).*Illegal use of .NULL.*"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+name|checkExpType
+argument_list|(
+literal|"values 1.0 + NULL"
+argument_list|,
+literal|"DECIMAL(2, 1)"
 argument_list|)
 expr_stmt|;
 name|checkExpFails
@@ -3492,6 +3780,15 @@ argument_list|(
 literal|"1.0 + ^NULL^"
 argument_list|,
 literal|"(?s).*Illegal use of .NULL.*"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+name|checkExpType
+argument_list|(
+literal|"1.0 + NULL"
+argument_list|,
+literal|"DECIMAL(2, 1)"
 argument_list|)
 expr_stmt|;
 comment|// FIXME: SQL:2003 does not allow raw NULL in IN clause
@@ -3879,6 +4176,36 @@ argument_list|,
 literal|"INTEGER NOT NULL MULTISET NOT NULL"
 argument_list|)
 expr_stmt|;
+name|checkExpType
+argument_list|(
+literal|"cast(1 as boolean)"
+argument_list|,
+literal|"BOOLEAN NOT NULL"
+argument_list|)
+expr_stmt|;
+name|checkExpType
+argument_list|(
+literal|"cast(1.0e1 as boolean)"
+argument_list|,
+literal|"BOOLEAN NOT NULL"
+argument_list|)
+expr_stmt|;
+name|checkExpType
+argument_list|(
+literal|"cast(true as numeric)"
+argument_list|,
+literal|"DECIMAL(19, 0) NOT NULL"
+argument_list|)
+expr_stmt|;
+comment|// It's a runtime error that 'TRUE' cannot fit into CHAR(3), but at
+comment|// validate time this expression is OK.
+name|checkExpType
+argument_list|(
+literal|"cast(true as char(3))"
+argument_list|,
+literal|"CHAR(3) NOT NULL"
+argument_list|)
+expr_stmt|;
 comment|// test cast to time type.
 name|checkExpType
 argument_list|(
@@ -4025,27 +4352,6 @@ argument_list|)
 expr_stmt|;
 name|checkWholeExpFails
 argument_list|(
-literal|"cast(1 as boolean)"
-argument_list|,
-literal|"(?s).*Cast function cannot convert value of type INTEGER to type BOOLEAN.*"
-argument_list|)
-expr_stmt|;
-name|checkWholeExpFails
-argument_list|(
-literal|"cast(1.0e1 as boolean)"
-argument_list|,
-literal|"(?s).*Cast function cannot convert value of type DOUBLE to type BOOLEAN.*"
-argument_list|)
-expr_stmt|;
-name|checkWholeExpFails
-argument_list|(
-literal|"cast(true as numeric)"
-argument_list|,
-literal|"(?s).*Cast function cannot convert value of type BOOLEAN to type DECIMAL.*"
-argument_list|)
-expr_stmt|;
-name|checkWholeExpFails
-argument_list|(
 literal|"cast(DATE '1243-12-01' as TIME)"
 argument_list|,
 literal|"(?s).*Cast function cannot convert value of type DATE to type TIME.*"
@@ -4056,13 +4362,6 @@ argument_list|(
 literal|"cast(TIME '12:34:01' as DATE)"
 argument_list|,
 literal|"(?s).*Cast function cannot convert value of type TIME\\(0\\) to type DATE.*"
-argument_list|)
-expr_stmt|;
-comment|// It's a runtime error that 'TRUE' cannot fit into CHAR(3), but at
-comment|// validate time this expression is OK.
-name|checkExp
-argument_list|(
-literal|"cast(true as char(3))"
 argument_list|)
 expr_stmt|;
 block|}
@@ -4179,6 +4478,15 @@ argument_list|(
 literal|"LOCALTIME(NULL)"
 argument_list|,
 literal|"Argument to function 'LOCALTIME' must not be NULL"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+name|checkWholeExpFails
+argument_list|(
+literal|"LOCALTIME(NULL)"
+argument_list|,
+literal|"Argument to function 'LOCALTIME' must not be NULL"
 argument_list|)
 expr_stmt|;
 name|checkWholeExpFails
@@ -4229,6 +4537,15 @@ argument_list|(
 literal|"LOCALTIME('foo')"
 argument_list|,
 literal|"(?s).*Cannot apply.*"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+name|checkWholeExpFails
+argument_list|(
+literal|"LOCALTIME('foo')"
+argument_list|,
+literal|"Argument to function 'LOCALTIME' must be a literal"
 argument_list|)
 expr_stmt|;
 comment|// LOCALTIMESTAMP
@@ -4291,6 +4608,15 @@ argument_list|(
 literal|"LOCALTIMESTAMP('foo')"
 argument_list|,
 literal|"(?s).*Cannot apply.*"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+name|checkWholeExpFails
+argument_list|(
+literal|"LOCALTIMESTAMP('foo')"
+argument_list|,
+literal|"Argument to function 'LOCALTIMESTAMP' must be a literal"
 argument_list|)
 expr_stmt|;
 comment|// CURRENT_DATE
@@ -4404,6 +4730,15 @@ argument_list|(
 literal|"current_time('foo')"
 argument_list|,
 literal|"(?s).*Cannot apply.*"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+name|checkWholeExpFails
+argument_list|(
+literal|"current_time('foo')"
+argument_list|,
+literal|"Argument to function 'CURRENT_TIME' must be a literal"
 argument_list|)
 expr_stmt|;
 comment|// current_timestamp
@@ -4479,6 +4814,15 @@ argument_list|(
 literal|"CURRENT_TIMESTAMP('foo')"
 argument_list|,
 literal|"(?s).*Cannot apply.*"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+name|checkWholeExpFails
+argument_list|(
+literal|"CURRENT_TIMESTAMP('foo')"
+argument_list|,
+literal|"Argument to function 'CURRENT_TIMESTAMP' must be a literal"
 argument_list|)
 expr_stmt|;
 comment|// Date literals
@@ -4680,13 +5024,24 @@ argument_list|,
 literal|"Invalid number of arguments to function 'TO_DATE'. Was expecting 2 arguments"
 argument_list|)
 expr_stmt|;
+name|checkExpType
+argument_list|(
+literal|"TO_DATE(2000, 'YYYY')"
+argument_list|,
+literal|"DATE NOT NULL"
+argument_list|)
+expr_stmt|;
 name|checkWholeExpFails
 argument_list|(
 literal|"TO_DATE(2000, 'YYYY')"
 argument_list|,
-literal|"Cannot apply 'TO_DATE' to arguments of type 'TO_DATE\\(<INTEGER>,<CHAR\\(4\\)>\\)'\\. "
+literal|"Cannot apply 'TO_DATE' to arguments of type "
+operator|+
+literal|"'TO_DATE\\(<INTEGER>,<CHAR\\(4\\)>\\)'\\. "
 operator|+
 literal|"Supported form\\(s\\): 'TO_DATE\\(<STRING>,<STRING>\\)'"
+argument_list|,
+literal|false
 argument_list|)
 expr_stmt|;
 name|checkWholeExpFails
@@ -4747,13 +5102,24 @@ argument_list|,
 literal|"Invalid number of arguments to function 'TO_TIMESTAMP'. Was expecting 2 arguments"
 argument_list|)
 expr_stmt|;
+name|checkExpType
+argument_list|(
+literal|"TO_TIMESTAMP(2000, 'YYYY')"
+argument_list|,
+literal|"DATE NOT NULL"
+argument_list|)
+expr_stmt|;
 name|checkWholeExpFails
 argument_list|(
 literal|"TO_TIMESTAMP(2000, 'YYYY')"
 argument_list|,
-literal|"Cannot apply 'TO_TIMESTAMP' to arguments of type 'TO_TIMESTAMP\\(<INTEGER>,<CHAR\\(4\\)>\\)'\\. "
+literal|"Cannot apply 'TO_TIMESTAMP' to arguments of type "
+operator|+
+literal|"'TO_TIMESTAMP\\(<INTEGER>,<CHAR\\(4\\)>\\)'\\. "
 operator|+
 literal|"Supported form\\(s\\): 'TO_TIMESTAMP\\(<STRING>,<STRING>\\)'"
+argument_list|,
+literal|false
 argument_list|)
 expr_stmt|;
 name|checkWholeExpFails
@@ -4832,6 +5198,13 @@ argument_list|(
 literal|"{fn insert('','',1,2)}"
 argument_list|,
 literal|"(?s).*.*"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"{fn insert('','',1,2)}"
 argument_list|)
 expr_stmt|;
 name|checkWholeExpFails
@@ -4851,6 +5224,13 @@ argument_list|(
 literal|"{fn log10('1')}"
 argument_list|,
 literal|"(?s).*Cannot apply.*fn LOG10..<CHAR.1.>.*"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"{fn log10('1')}"
 argument_list|)
 expr_stmt|;
 specifier|final
@@ -11071,6 +11451,42 @@ argument_list|,
 literal|"DECIMAL(19, 0) NOT NULL"
 argument_list|)
 expr_stmt|;
+name|checkExpType
+argument_list|(
+literal|"4/3"
+argument_list|,
+literal|"INTEGER NOT NULL"
+argument_list|)
+expr_stmt|;
+name|checkExpType
+argument_list|(
+literal|"-4.0/3"
+argument_list|,
+literal|"DECIMAL(13, 12) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|checkExpType
+argument_list|(
+literal|"4/3.0"
+argument_list|,
+literal|"DECIMAL(17, 6) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|checkExpType
+argument_list|(
+literal|"cast(2.3 as float)/3"
+argument_list|,
+literal|"FLOAT NOT NULL"
+argument_list|)
+expr_stmt|;
+comment|// null
+name|checkExpType
+argument_list|(
+literal|"cast(2.3 as float)/null"
+argument_list|,
+literal|"FLOAT"
+argument_list|)
+expr_stmt|;
 block|}
 annotation|@
 name|Test
@@ -12788,11 +13204,18 @@ expr_stmt|;
 name|winExp2
 argument_list|(
 literal|"sum(sal) over (partition by ^empno + ename^ order by empno range 5 preceding)"
+argument_list|,
+literal|false
 argument_list|)
 operator|.
 name|fails
 argument_list|(
 literal|"(?s)Cannot apply '\\+' to arguments of type '<INTEGER> \\+<VARCHAR\\(20\\)>'.*"
+argument_list|)
+expr_stmt|;
+name|winExp2
+argument_list|(
+literal|"sum(sal) over (partition by empno + ename order by empno range 5 preceding)"
 argument_list|)
 expr_stmt|;
 block|}
@@ -14177,11 +14600,18 @@ operator|+
 literal|"where empno in (10 + deptno, cast(null as integer))"
 argument_list|)
 expr_stmt|;
+name|check
+argument_list|(
+literal|"select * from emp where empno in (10, '20')"
+argument_list|)
+expr_stmt|;
 name|checkFails
 argument_list|(
 literal|"select * from emp where empno in ^(10, '20')^"
 argument_list|,
 name|ERR_IN_VALUES_INCOMPATIBLE
+argument_list|,
+literal|false
 argument_list|)
 expr_stmt|;
 name|checkExpType
@@ -14269,11 +14699,18 @@ argument_list|,
 literal|"BOOLEAN"
 argument_list|)
 expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"1 in (2, 'c')"
+argument_list|)
+expr_stmt|;
 name|checkExpFails
 argument_list|(
 literal|"1 in ^(2, 'c')^"
 argument_list|,
 name|ERR_IN_VALUES_INCOMPATIBLE
+argument_list|,
+literal|false
 argument_list|)
 expr_stmt|;
 name|checkExpFails
@@ -14354,11 +14791,18 @@ operator|+
 literal|"where empno< any (10 + deptno, cast(null as integer))"
 argument_list|)
 expr_stmt|;
+name|check
+argument_list|(
+literal|"select * from emp where empno< any (10, '20')"
+argument_list|)
+expr_stmt|;
 name|checkFails
 argument_list|(
 literal|"select * from emp where empno< any ^(10, '20')^"
 argument_list|,
 name|ERR_IN_VALUES_INCOMPATIBLE
+argument_list|,
+literal|false
 argument_list|)
 expr_stmt|;
 name|checkExpType
@@ -14453,11 +14897,18 @@ argument_list|,
 literal|"BOOLEAN"
 argument_list|)
 expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"1 = any (2, 'c')"
+argument_list|)
+expr_stmt|;
 name|checkExpFails
 argument_list|(
 literal|"1 = any ^(2, 'c')^"
 argument_list|,
 name|ERR_IN_VALUES_INCOMPATIBLE
+argument_list|,
+literal|false
 argument_list|)
 expr_stmt|;
 name|checkExpFails
@@ -14869,12 +15320,22 @@ block|{
 name|sql
 argument_list|(
 literal|"select count(*) from emp group by ^deptno + 'a'^"
+argument_list|,
+literal|false
 argument_list|)
 operator|.
 name|fails
 argument_list|(
 literal|"(?s)Cannot apply '\\+' to arguments of type.*"
 argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select count(*) from emp group by deptno + 'a'"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
 expr_stmt|;
 block|}
 annotation|@
@@ -14891,12 +15352,26 @@ operator|+
 literal|"from emp\n"
 operator|+
 literal|"group by rollup(deptno / 2, sal), rollup(empno, ^deptno + 'a'^)"
+argument_list|,
+literal|false
 argument_list|)
 operator|.
 name|fails
 argument_list|(
 literal|"(?s)Cannot apply '\\+' to arguments of type.*"
 argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select deptno / 2 + 1, count(*) as c\n"
+operator|+
+literal|"from emp\n"
+operator|+
+literal|"group by rollup(deptno / 2, sal), rollup(empno, ^deptno + 'a'^)"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
 expr_stmt|;
 block|}
 comment|/**    * Test case for<a href="https://issues.apache.org/jira/browse/CALCITE-3003">[CALCITE-3003]    * AssertionError when GROUP BY nested field</a>.    *    *<p>Make sure table name of GROUP BY item with nested field could be    * properly validated.    */
@@ -16347,6 +16822,15 @@ argument_list|(
 literal|"select ^sum(ename)^, deptno from emp group by deptno"
 argument_list|,
 literal|"(?s)Cannot apply 'SUM' to arguments of type 'SUM\\(<VARCHAR\\(20\\)>\\)'\\. .*"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+name|checkResultType
+argument_list|(
+literal|"select sum(ename), deptno from emp group by deptno"
+argument_list|,
+literal|"RecordType(DECIMAL(19, 19) NOT NULL EXPR$0, INTEGER NOT NULL DEPTNO) NOT NULL"
 argument_list|)
 expr_stmt|;
 block|}
@@ -16560,6 +17044,13 @@ argument_list|(
 literal|"select 1, ^2^ from emp union select deptno, name from dept"
 argument_list|,
 literal|"Type mismatch in column 2 of UNION"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+name|check
+argument_list|(
+literal|"select 1, 2 from emp union select deptno, ^name^ from dept"
 argument_list|)
 expr_stmt|;
 name|checkFails
@@ -16567,6 +17058,13 @@ argument_list|(
 literal|"select ^slacker^ from emp union select name from dept"
 argument_list|,
 literal|"Type mismatch in column 1 of UNION"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+name|check
+argument_list|(
+literal|"select ^slacker^ from emp union select name from dept"
 argument_list|)
 expr_stmt|;
 block|}
@@ -16582,6 +17080,13 @@ argument_list|(
 literal|"select ^*^ from dept union select 1, 2 from emp"
 argument_list|,
 literal|"Type mismatch in column 2 of UNION"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+name|check
+argument_list|(
+literal|"select * from dept union select 1, 2 from emp"
 argument_list|)
 expr_stmt|;
 name|checkFails
@@ -16589,6 +17094,13 @@ argument_list|(
 literal|"select ^dept.*^ from dept union select 1, 2 from emp"
 argument_list|,
 literal|"Type mismatch in column 2 of UNION"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+name|check
+argument_list|(
+literal|"select dept.* from dept union select 1, 2 from emp"
 argument_list|)
 expr_stmt|;
 block|}
@@ -16606,6 +17118,15 @@ operator|+
 literal|"select deptno, name, deptno from dept"
 argument_list|,
 literal|"Type mismatch in column 2 of UNION"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+name|check
+argument_list|(
+literal|"values (1, 2, 3), (3, 4, 5), (6, 7, 8) union\n"
+operator|+
+literal|"select deptno, ^name^, deptno from dept"
 argument_list|)
 expr_stmt|;
 name|checkFails
@@ -16615,6 +17136,15 @@ operator|+
 literal|"select 'a' from (values ('y'))"
 argument_list|,
 literal|"Type mismatch in column 1 of UNION"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+name|check
+argument_list|(
+literal|"select 1 from (values ('x')) union\n"
+operator|+
+literal|"select 'a' from (values ('y'))"
 argument_list|)
 expr_stmt|;
 name|checkFails
@@ -16624,6 +17154,15 @@ operator|+
 literal|"(values ('a'))"
 argument_list|,
 literal|"Type mismatch in column 1 of UNION"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+name|check
+argument_list|(
+literal|"select 1 from (values ('x')) union\n"
+operator|+
+literal|"(values ('a'))"
 argument_list|)
 expr_stmt|;
 name|checkFails
@@ -16633,6 +17172,15 @@ operator|+
 literal|"select deptno, name, deptno from dept"
 argument_list|,
 literal|"Type mismatch in column 2 of UNION"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+name|check
+argument_list|(
+literal|"select 1, 2, 3 union\n "
+operator|+
+literal|"select deptno, name, deptno from dept"
 argument_list|)
 expr_stmt|;
 block|}
@@ -18691,6 +19239,13 @@ argument_list|(
 literal|"select 'foo' as empno from emp order by ^empno + 5^"
 argument_list|,
 literal|"(?s)Cannot apply '\\+' to arguments of type '<CHAR\\(3\\)> \\+<INTEGER>'\\..*"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+name|check
+argument_list|(
+literal|"select 'foo' as empno from emp order by empno + 5"
 argument_list|)
 expr_stmt|;
 block|}
@@ -24344,6 +24899,15 @@ argument_list|(
 literal|"select * from table(^ramp('3')^)"
 argument_list|,
 literal|"Cannot apply 'RAMP' to arguments of type 'RAMP\\(<CHAR\\(1\\)>\\)'\\. Supported form\\(s\\): 'RAMP\\(<NUMERIC>\\)'"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+name|checkResultType
+argument_list|(
+literal|"select * from table(ramp('3'))"
+argument_list|,
+literal|"RecordType(INTEGER NOT NULL I) NOT NULL"
 argument_list|)
 expr_stmt|;
 name|checkFails
@@ -24425,11 +24989,27 @@ expr_stmt|;
 name|sql
 argument_list|(
 literal|"select * from dept, lateral table(^ramp(dept.name)^)"
+argument_list|,
+literal|false
 argument_list|)
 operator|.
 name|fails
 argument_list|(
 literal|"(?s)Cannot apply 'RAMP' to arguments of type 'RAMP\\(<VARCHAR\\(10\\)>\\)'.*"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select * from dept, lateral table(ramp(dept.name))"
+argument_list|)
+operator|.
+name|type
+argument_list|(
+literal|"RecordType(INTEGER NOT NULL DEPTNO, "
+operator|+
+literal|"VARCHAR(10) NOT NULL NAME, "
+operator|+
+literal|"INTEGER NOT NULL I) NOT NULL"
 argument_list|)
 expr_stmt|;
 name|sql
@@ -35590,11 +36170,20 @@ argument_list|,
 literal|"ANY"
 argument_list|)
 expr_stmt|;
+name|checkExpType
+argument_list|(
+literal|"null format json"
+argument_list|,
+literal|"ANY"
+argument_list|)
+expr_stmt|;
 name|checkExpFails
 argument_list|(
 literal|"^null^ format json"
 argument_list|,
 literal|"(?s).*Illegal use of .NULL.*"
+argument_list|,
+literal|false
 argument_list|)
 expr_stmt|;
 block|}
@@ -35671,13 +36260,13 @@ argument_list|,
 literal|"INTEGER"
 argument_list|)
 expr_stmt|;
-name|checkExpFails
+name|checkExpType
 argument_list|(
-literal|"^json_value('{\"foo\":true}', 'lax $.foo'"
+literal|"json_value('{\"foo\":true}', 'lax $.foo'"
 operator|+
-literal|"returning boolean default 100 on empty default 100 on error)^"
+literal|"returning boolean default 100 on empty default 100 on error)"
 argument_list|,
-literal|"(?s).*cannot convert value of type INTEGER to type BOOLEAN*"
+literal|"BOOLEAN"
 argument_list|)
 expr_stmt|;
 comment|// test type inference of default value
@@ -35688,13 +36277,13 @@ argument_list|,
 literal|"VARCHAR(2000)"
 argument_list|)
 expr_stmt|;
-name|checkExpFails
+name|checkExpType
 argument_list|(
-literal|"^json_value('{\"foo\":100}', 'lax $.foo' returning boolean"
+literal|"json_value('{\"foo\":100}', 'lax $.foo' returning boolean"
 operator|+
-literal|" default 100 on empty)^"
+literal|" default 100 on empty)"
 argument_list|,
-literal|"(?s).*Cast function cannot convert value.*"
+literal|"BOOLEAN"
 argument_list|)
 expr_stmt|;
 block|}
@@ -35861,6 +36450,13 @@ argument_list|(
 literal|"select json_pretty(^NULL^) from emp"
 argument_list|,
 literal|"(?s).*Illegal use of .NULL.*"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+name|check
+argument_list|(
+literal|"select json_pretty(NULL) from emp"
 argument_list|)
 expr_stmt|;
 if|if
@@ -36099,11 +36695,18 @@ argument_list|(
 literal|"select json_objectagg(ename: empno) from emp"
 argument_list|)
 expr_stmt|;
+name|check
+argument_list|(
+literal|"select json_objectagg(empno: ename) from emp"
+argument_list|)
+expr_stmt|;
 name|checkFails
 argument_list|(
 literal|"select ^json_objectagg(empno: ename)^ from emp"
 argument_list|,
 literal|"(?s).*Cannot apply.*"
+argument_list|,
+literal|false
 argument_list|)
 expr_stmt|;
 name|checkExpType
@@ -36191,11 +36794,20 @@ argument_list|,
 literal|"BOOLEAN NOT NULL"
 argument_list|)
 expr_stmt|;
+name|checkExpType
+argument_list|(
+literal|"100 is json value"
+argument_list|,
+literal|"BOOLEAN NOT NULL"
+argument_list|)
+expr_stmt|;
 name|checkExpFails
 argument_list|(
 literal|"^100 is json value^"
 argument_list|,
 literal|"(?s).*Cannot apply.*"
+argument_list|,
+literal|false
 argument_list|)
 expr_stmt|;
 block|}

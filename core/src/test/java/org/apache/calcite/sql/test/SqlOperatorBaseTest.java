@@ -1535,6 +1535,12 @@ specifier|final
 name|SqlTester
 name|tester
 decl_stmt|;
+comment|// same with tester but without implicit type coercion.
+specifier|protected
+specifier|final
+name|SqlTester
+name|strictTester
+decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
 comment|/**    * Creates a SqlOperatorBaseTest.    *    * @param enable Whether to run "failing" tests.    * @param tester Means to validate, execute various statements.    */
 specifier|protected
@@ -1564,6 +1570,17 @@ name|tester
 operator|!=
 literal|null
 assert|;
+name|this
+operator|.
+name|strictTester
+operator|=
+name|tester
+operator|.
+name|enableTypeCoercion
+argument_list|(
+literal|false
+argument_list|)
+expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
 annotation|@
@@ -9064,6 +9081,8 @@ name|checkScalarExact
 argument_list|(
 literal|"10 / 5"
 argument_list|,
+literal|"INTEGER NOT NULL"
+argument_list|,
 literal|"2"
 argument_list|)
 expr_stmt|;
@@ -9073,6 +9092,8 @@ name|checkScalarExact
 argument_list|(
 literal|"-10 / 5"
 argument_list|,
+literal|"INTEGER NOT NULL"
+argument_list|,
 literal|"-2"
 argument_list|)
 expr_stmt|;
@@ -9080,9 +9101,11 @@ name|tester
 operator|.
 name|checkScalarExact
 argument_list|(
-literal|"1 / 3"
+literal|"-10 / 5.0"
 argument_list|,
-literal|"0"
+literal|"DECIMAL(17, 6) NOT NULL"
+argument_list|,
+literal|"-2"
 argument_list|)
 expr_stmt|;
 name|tester
@@ -9102,11 +9125,11 @@ name|tester
 operator|.
 name|checkScalarApprox
 argument_list|(
-literal|" cast(10.0 as real) / 5"
+literal|" cast(10.0 as real) / 4"
 argument_list|,
 literal|"REAL NOT NULL"
 argument_list|,
-literal|2.0
+literal|2.5
 argument_list|,
 literal|0
 argument_list|)
@@ -15420,7 +15443,7 @@ operator|.
 name|UNARY_MINUS
 argument_list|)
 expr_stmt|;
-name|tester
+name|strictTester
 operator|.
 name|checkFails
 argument_list|(
@@ -15429,6 +15452,15 @@ argument_list|,
 literal|"(?s)Cannot apply '-' to arguments of type '-<CHAR\\(1\\)>'.*"
 argument_list|,
 literal|false
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkType
+argument_list|(
+literal|"'a' + - 'b' + 'c'"
+argument_list|,
+literal|"DECIMAL(19, 19) NOT NULL"
 argument_list|)
 expr_stmt|;
 name|tester
@@ -20177,7 +20209,7 @@ name|FALSE
 argument_list|)
 expr_stmt|;
 comment|// nulls
-name|tester
+name|strictTester
 operator|.
 name|checkFails
 argument_list|(
@@ -20188,6 +20220,17 @@ argument_list|,
 literal|"(?s).*Illegal use of 'NULL'.*"
 argument_list|,
 literal|false
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"json_exists(null, 'lax $' unknown on error)"
+argument_list|,
+literal|null
+argument_list|,
+literal|"BOOLEAN"
 argument_list|)
 expr_stmt|;
 name|tester
@@ -20545,7 +20588,7 @@ literal|"VARCHAR(2000)"
 argument_list|)
 expr_stmt|;
 comment|// nulls
-name|tester
+name|strictTester
 operator|.
 name|checkFails
 argument_list|(
@@ -20554,6 +20597,17 @@ argument_list|,
 literal|"(?s).*Illegal use of 'NULL'.*"
 argument_list|,
 literal|false
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"json_value(null, 'strict $')"
+argument_list|,
+literal|null
+argument_list|,
+literal|"VARCHAR(2000)"
 argument_list|)
 expr_stmt|;
 name|tester
@@ -20964,7 +21018,7 @@ literal|"VARCHAR(2000)"
 argument_list|)
 expr_stmt|;
 comment|// nulls
-name|tester
+name|strictTester
 operator|.
 name|checkFails
 argument_list|(
@@ -20973,6 +21027,17 @@ argument_list|,
 literal|"(?s).*Illegal use of 'NULL'.*"
 argument_list|,
 literal|false
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"json_query(null, 'lax $')"
+argument_list|,
+literal|null
+argument_list|,
+literal|"VARCHAR(2000)"
 argument_list|)
 expr_stmt|;
 name|tester
@@ -21024,7 +21089,7 @@ literal|"VARCHAR(2000)"
 argument_list|)
 expr_stmt|;
 comment|// nulls
-name|tester
+name|strictTester
 operator|.
 name|checkFails
 argument_list|(
@@ -21033,6 +21098,17 @@ argument_list|,
 literal|"(?s).*Illegal use of 'NULL'.*"
 argument_list|,
 literal|false
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"json_pretty(null)"
+argument_list|,
+literal|null
+argument_list|,
+literal|"VARCHAR(2000)"
 argument_list|)
 expr_stmt|;
 name|tester
@@ -21128,7 +21204,7 @@ literal|"INTEGER"
 argument_list|)
 expr_stmt|;
 comment|// nulls
-name|tester
+name|strictTester
 operator|.
 name|checkFails
 argument_list|(
@@ -21137,6 +21213,17 @@ argument_list|,
 literal|"(?s).*Illegal use of 'NULL'.*"
 argument_list|,
 literal|false
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"json_storage_size(null)"
+argument_list|,
+literal|null
+argument_list|,
+literal|"INTEGER"
 argument_list|)
 expr_stmt|;
 name|tester
@@ -21270,7 +21357,7 @@ literal|"VARCHAR(20)"
 argument_list|)
 expr_stmt|;
 comment|// nulls
-name|tester
+name|strictTester
 operator|.
 name|checkFails
 argument_list|(
@@ -21279,6 +21366,17 @@ argument_list|,
 literal|"(?s).*Illegal use of 'NULL'.*"
 argument_list|,
 literal|false
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"json_type(null)"
+argument_list|,
+literal|null
+argument_list|,
+literal|"VARCHAR(20)"
 argument_list|)
 expr_stmt|;
 name|tester
@@ -21438,7 +21536,7 @@ literal|"INTEGER"
 argument_list|)
 expr_stmt|;
 comment|// nulls
-name|tester
+name|strictTester
 operator|.
 name|checkFails
 argument_list|(
@@ -21447,6 +21545,17 @@ argument_list|,
 literal|"(?s).*Illegal use of 'NULL'.*"
 argument_list|,
 literal|false
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"json_depth(null)"
+argument_list|,
+literal|null
+argument_list|,
+literal|"INTEGER"
 argument_list|)
 expr_stmt|;
 name|tester
@@ -21689,7 +21798,7 @@ literal|true
 argument_list|)
 expr_stmt|;
 comment|// nulls
-name|tester
+name|strictTester
 operator|.
 name|checkFails
 argument_list|(
@@ -21698,6 +21807,17 @@ argument_list|,
 literal|"(?s).*Illegal use of 'NULL'.*"
 argument_list|,
 literal|false
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"json_length(null)"
+argument_list|,
+literal|null
+argument_list|,
+literal|"INTEGER"
 argument_list|)
 expr_stmt|;
 name|tester
@@ -21940,7 +22060,7 @@ literal|true
 argument_list|)
 expr_stmt|;
 comment|// nulls
-name|tester
+name|strictTester
 operator|.
 name|checkFails
 argument_list|(
@@ -21949,6 +22069,17 @@ argument_list|,
 literal|"(?s).*Illegal use of 'NULL'.*"
 argument_list|,
 literal|false
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"json_keys(null)"
+argument_list|,
+literal|null
+argument_list|,
+literal|"VARCHAR(2000)"
 argument_list|)
 expr_stmt|;
 name|tester
@@ -22033,7 +22164,7 @@ literal|true
 argument_list|)
 expr_stmt|;
 comment|// nulls
-name|tester
+name|strictTester
 operator|.
 name|checkFails
 argument_list|(
@@ -22042,6 +22173,17 @@ argument_list|,
 literal|"(?s).*Illegal use of 'NULL'.*"
 argument_list|,
 literal|false
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"json_remove(null, '$')"
+argument_list|,
+literal|null
+argument_list|,
+literal|"VARCHAR(2000)"
 argument_list|)
 expr_stmt|;
 name|tester
@@ -22184,7 +22326,16 @@ argument_list|,
 literal|"VARCHAR(2000) NOT NULL"
 argument_list|)
 expr_stmt|;
+name|checkAggType
+argument_list|(
 name|tester
+argument_list|,
+literal|"json_objectagg(100: 'bar')"
+argument_list|,
+literal|"VARCHAR(2000) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|strictTester
 operator|.
 name|checkFails
 argument_list|(
@@ -22308,7 +22459,7 @@ argument_list|,
 literal|"ANY NOT NULL"
 argument_list|)
 expr_stmt|;
-name|tester
+name|strictTester
 operator|.
 name|checkFails
 argument_list|(
@@ -22799,7 +22950,7 @@ literal|"initcap(cast(null as varchar(1)))"
 argument_list|)
 expr_stmt|;
 comment|// dtbug 232
-name|tester
+name|strictTester
 operator|.
 name|checkFails
 argument_list|(
@@ -22808,6 +22959,15 @@ argument_list|,
 literal|"Cannot apply 'INITCAP' to arguments of type 'INITCAP\\(<DATE>\\)'\\. Supported form\\(s\\): 'INITCAP\\(<CHARACTER>\\)'"
 argument_list|,
 literal|false
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkType
+argument_list|(
+literal|"initcap(cast(null as date))"
+argument_list|,
+literal|"VARCHAR"
 argument_list|)
 expr_stmt|;
 block|}
@@ -22916,7 +23076,7 @@ argument_list|,
 literal|"DOUBLE"
 argument_list|)
 expr_stmt|;
-name|tester
+name|strictTester
 operator|.
 name|checkFails
 argument_list|(
@@ -22925,6 +23085,15 @@ argument_list|,
 literal|"Cannot apply 'SQRT' to arguments of type 'SQRT\\(<CHAR\\(3\\)>\\)'\\. Supported form\\(s\\): 'SQRT\\(<NUMERIC>\\)'"
 argument_list|,
 literal|false
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkType
+argument_list|(
+literal|"sqrt('abc')"
+argument_list|,
+literal|"DOUBLE NOT NULL"
 argument_list|)
 expr_stmt|;
 name|tester
@@ -23761,7 +23930,7 @@ argument_list|,
 literal|"DOUBLE"
 argument_list|)
 expr_stmt|;
-name|tester
+name|strictTester
 operator|.
 name|checkFails
 argument_list|(
@@ -23770,6 +23939,15 @@ argument_list|,
 literal|"Cannot apply 'ACOS' to arguments of type 'ACOS\\(<CHAR\\(3\\)>\\)'\\. Supported form\\(s\\): 'ACOS\\(<NUMERIC>\\)'"
 argument_list|,
 literal|false
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkType
+argument_list|(
+literal|"acos('abc')"
+argument_list|,
+literal|"DOUBLE NOT NULL"
 argument_list|)
 expr_stmt|;
 name|tester
@@ -23856,7 +24034,7 @@ argument_list|,
 literal|"DOUBLE"
 argument_list|)
 expr_stmt|;
-name|tester
+name|strictTester
 operator|.
 name|checkFails
 argument_list|(
@@ -23865,6 +24043,15 @@ argument_list|,
 literal|"Cannot apply 'ASIN' to arguments of type 'ASIN\\(<CHAR\\(3\\)>\\)'\\. Supported form\\(s\\): 'ASIN\\(<NUMERIC>\\)'"
 argument_list|,
 literal|false
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkType
+argument_list|(
+literal|"asin('abc')"
+argument_list|,
+literal|"DOUBLE NOT NULL"
 argument_list|)
 expr_stmt|;
 name|tester
@@ -23951,7 +24138,7 @@ argument_list|,
 literal|"DOUBLE"
 argument_list|)
 expr_stmt|;
-name|tester
+name|strictTester
 operator|.
 name|checkFails
 argument_list|(
@@ -23960,6 +24147,15 @@ argument_list|,
 literal|"Cannot apply 'ATAN' to arguments of type 'ATAN\\(<CHAR\\(3\\)>\\)'\\. Supported form\\(s\\): 'ATAN\\(<NUMERIC>\\)'"
 argument_list|,
 literal|false
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkType
+argument_list|(
+literal|"atan('abc')"
+argument_list|,
+literal|"DOUBLE NOT NULL"
 argument_list|)
 expr_stmt|;
 name|tester
@@ -24050,7 +24246,7 @@ argument_list|,
 literal|"DOUBLE"
 argument_list|)
 expr_stmt|;
-name|tester
+name|strictTester
 operator|.
 name|checkFails
 argument_list|(
@@ -24059,6 +24255,15 @@ argument_list|,
 literal|"Cannot apply 'ATAN2' to arguments of type 'ATAN2\\(<CHAR\\(3\\)>,<CHAR\\(3\\)>\\)'\\. Supported form\\(s\\): 'ATAN2\\(<NUMERIC>,<NUMERIC>\\)'"
 argument_list|,
 literal|false
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkType
+argument_list|(
+literal|"atan2('abc', 'def')"
+argument_list|,
+literal|"DOUBLE NOT NULL"
 argument_list|)
 expr_stmt|;
 name|tester
@@ -24145,7 +24350,7 @@ argument_list|,
 literal|"DOUBLE"
 argument_list|)
 expr_stmt|;
-name|tester
+name|strictTester
 operator|.
 name|checkFails
 argument_list|(
@@ -24154,6 +24359,15 @@ argument_list|,
 literal|"Cannot apply 'COS' to arguments of type 'COS\\(<CHAR\\(3\\)>\\)'\\. Supported form\\(s\\): 'COS\\(<NUMERIC>\\)'"
 argument_list|,
 literal|false
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkType
+argument_list|(
+literal|"cos('abc')"
+argument_list|,
+literal|"DOUBLE NOT NULL"
 argument_list|)
 expr_stmt|;
 name|tester
@@ -24240,7 +24454,7 @@ argument_list|,
 literal|"DOUBLE"
 argument_list|)
 expr_stmt|;
-name|tester
+name|strictTester
 operator|.
 name|checkFails
 argument_list|(
@@ -24249,6 +24463,15 @@ argument_list|,
 literal|"Cannot apply 'COT' to arguments of type 'COT\\(<CHAR\\(3\\)>\\)'\\. Supported form\\(s\\): 'COT\\(<NUMERIC>\\)'"
 argument_list|,
 literal|false
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkType
+argument_list|(
+literal|"cot('abc')"
+argument_list|,
+literal|"DOUBLE NOT NULL"
 argument_list|)
 expr_stmt|;
 name|tester
@@ -24335,7 +24558,7 @@ argument_list|,
 literal|"DOUBLE"
 argument_list|)
 expr_stmt|;
-name|tester
+name|strictTester
 operator|.
 name|checkFails
 argument_list|(
@@ -24344,6 +24567,15 @@ argument_list|,
 literal|"Cannot apply 'DEGREES' to arguments of type 'DEGREES\\(<CHAR\\(3\\)>\\)'\\. Supported form\\(s\\): 'DEGREES\\(<NUMERIC>\\)'"
 argument_list|,
 literal|false
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkType
+argument_list|(
+literal|"degrees('abc')"
+argument_list|,
+literal|"DOUBLE NOT NULL"
 argument_list|)
 expr_stmt|;
 name|tester
@@ -24486,7 +24718,7 @@ argument_list|,
 literal|"DOUBLE"
 argument_list|)
 expr_stmt|;
-name|tester
+name|strictTester
 operator|.
 name|checkFails
 argument_list|(
@@ -24495,6 +24727,15 @@ argument_list|,
 literal|"Cannot apply 'RADIANS' to arguments of type 'RADIANS\\(<CHAR\\(3\\)>\\)'\\. Supported form\\(s\\): 'RADIANS\\(<NUMERIC>\\)'"
 argument_list|,
 literal|false
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkType
+argument_list|(
+literal|"radians('abc')"
+argument_list|,
+literal|"DOUBLE NOT NULL"
 argument_list|)
 expr_stmt|;
 name|tester
@@ -24581,7 +24822,7 @@ argument_list|,
 literal|"INTEGER"
 argument_list|)
 expr_stmt|;
-name|tester
+name|strictTester
 operator|.
 name|checkFails
 argument_list|(
@@ -24590,6 +24831,15 @@ argument_list|,
 literal|"Cannot apply 'ROUND' to arguments of type 'ROUND\\(<CHAR\\(3\\)>,<CHAR\\(3\\)>\\)'\\. Supported form\\(s\\): 'ROUND\\(<NUMERIC>,<INTEGER>\\)'"
 argument_list|,
 literal|false
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkType
+argument_list|(
+literal|"round('abc', 'def')"
+argument_list|,
+literal|"DECIMAL(19, 19) NOT NULL"
 argument_list|)
 expr_stmt|;
 name|tester
@@ -24777,7 +25027,7 @@ argument_list|,
 literal|"INTEGER"
 argument_list|)
 expr_stmt|;
-name|tester
+name|strictTester
 operator|.
 name|checkFails
 argument_list|(
@@ -24786,6 +25036,15 @@ argument_list|,
 literal|"Cannot apply 'SIGN' to arguments of type 'SIGN\\(<CHAR\\(3\\)>\\)'\\. Supported form\\(s\\): 'SIGN\\(<NUMERIC>\\)'"
 argument_list|,
 literal|false
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkType
+argument_list|(
+literal|"sign('abc')"
+argument_list|,
+literal|"DECIMAL(19, 19) NOT NULL"
 argument_list|)
 expr_stmt|;
 name|tester
@@ -24885,7 +25144,7 @@ argument_list|,
 literal|"DOUBLE"
 argument_list|)
 expr_stmt|;
-name|tester
+name|strictTester
 operator|.
 name|checkFails
 argument_list|(
@@ -24894,6 +25153,15 @@ argument_list|,
 literal|"Cannot apply 'SIN' to arguments of type 'SIN\\(<CHAR\\(3\\)>\\)'\\. Supported form\\(s\\): 'SIN\\(<NUMERIC>\\)'"
 argument_list|,
 literal|false
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkType
+argument_list|(
+literal|"sin('abc')"
+argument_list|,
+literal|"DOUBLE NOT NULL"
 argument_list|)
 expr_stmt|;
 name|tester
@@ -24980,7 +25248,7 @@ argument_list|,
 literal|"DOUBLE"
 argument_list|)
 expr_stmt|;
-name|tester
+name|strictTester
 operator|.
 name|checkFails
 argument_list|(
@@ -24989,6 +25257,15 @@ argument_list|,
 literal|"Cannot apply 'TAN' to arguments of type 'TAN\\(<CHAR\\(3\\)>\\)'\\. Supported form\\(s\\): 'TAN\\(<NUMERIC>\\)'"
 argument_list|,
 literal|false
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkType
+argument_list|(
+literal|"tan('abc')"
+argument_list|,
+literal|"DOUBLE NOT NULL"
 argument_list|)
 expr_stmt|;
 name|tester
@@ -25075,7 +25352,7 @@ argument_list|,
 literal|"INTEGER"
 argument_list|)
 expr_stmt|;
-name|tester
+name|strictTester
 operator|.
 name|checkFails
 argument_list|(
@@ -25084,6 +25361,15 @@ argument_list|,
 literal|"Cannot apply 'TRUNCATE' to arguments of type 'TRUNCATE\\(<CHAR\\(3\\)>,<CHAR\\(3\\)>\\)'\\. Supported form\\(s\\): 'TRUNCATE\\(<NUMERIC>,<INTEGER>\\)'"
 argument_list|,
 literal|false
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkType
+argument_list|(
+literal|"truncate('abc', 'def')"
+argument_list|,
+literal|"DECIMAL(19, 19) NOT NULL"
 argument_list|)
 expr_stmt|;
 name|tester
@@ -25505,7 +25791,7 @@ argument_list|,
 literal|"3"
 argument_list|)
 expr_stmt|;
-name|tester
+name|strictTester
 operator|.
 name|checkFails
 argument_list|(
@@ -25514,6 +25800,15 @@ argument_list|,
 literal|"Illegal mixing of types in CASE or COALESCE statement"
 argument_list|,
 literal|false
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkType
+argument_list|(
+literal|"1 + coalesce('a', 'b', 1, null) + 2"
+argument_list|,
+literal|"INTEGER"
 argument_list|)
 expr_stmt|;
 block|}
@@ -29072,7 +29367,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testListaggFunc
+name|testListAggFunc
 parameter_list|()
 block|{
 name|tester
@@ -29099,7 +29394,16 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
+name|checkAggType
+argument_list|(
 name|tester
+argument_list|,
+literal|"listagg(12)"
+argument_list|,
+literal|"VARCHAR NOT NULL"
+argument_list|)
+expr_stmt|;
+name|strictTester
 operator|.
 name|checkFails
 argument_list|(
@@ -29110,7 +29414,16 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
+name|checkAggType
+argument_list|(
 name|tester
+argument_list|,
+literal|"listagg(cast(12 as double))"
+argument_list|,
+literal|"VARCHAR NOT NULL"
+argument_list|)
+expr_stmt|;
+name|strictTester
 operator|.
 name|checkFails
 argument_list|(
@@ -31890,7 +32203,7 @@ name|void
 name|testFloorFuncDateTime
 parameter_list|()
 block|{
-name|tester
+name|strictTester
 operator|.
 name|checkFails
 argument_list|(
@@ -31907,6 +32220,15 @@ operator|+
 literal|"'FLOOR\\(<TIMESTAMP> TO<TIME_UNIT>\\)'"
 argument_list|,
 literal|false
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkType
+argument_list|(
+literal|"floor('12:34:56')"
+argument_list|,
+literal|"DECIMAL(19, 0) NOT NULL"
 argument_list|)
 expr_stmt|;
 name|tester
@@ -32034,7 +32356,7 @@ name|void
 name|testCeilFuncDateTime
 parameter_list|()
 block|{
-name|tester
+name|strictTester
 operator|.
 name|checkFails
 argument_list|(
@@ -32051,6 +32373,15 @@ operator|+
 literal|"'CEIL\\(<TIMESTAMP> TO<TIME_UNIT>\\)'"
 argument_list|,
 literal|false
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkType
+argument_list|(
+literal|"ceil('12:34:56')"
+argument_list|,
+literal|"DECIMAL(19, 0) NOT NULL"
 argument_list|)
 expr_stmt|;
 name|tester
@@ -33718,7 +34049,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|strictTester
 operator|.
 name|checkFails
 argument_list|(
@@ -33727,6 +34058,15 @@ argument_list|,
 literal|"(?s)Cannot apply 'SUM' to arguments of type 'SUM\\(<CHAR\\(4\\)>\\)'\\. Supported form\\(s\\): 'SUM\\(<NUMERIC>\\)'.*"
 argument_list|,
 literal|false
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkType
+argument_list|(
+literal|"sum('name')"
+argument_list|,
+literal|"DECIMAL(19, 19)"
 argument_list|)
 expr_stmt|;
 name|checkAggType
@@ -33778,7 +34118,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|strictTester
 operator|.
 name|checkFails
 argument_list|(
@@ -33787,6 +34127,15 @@ argument_list|,
 literal|"(?s)Cannot apply 'SUM' to arguments of type 'SUM\\(<VARCHAR\\(2\\)>\\)'\\. Supported form\\(s\\): 'SUM\\(<NUMERIC>\\)'.*"
 argument_list|,
 literal|false
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkType
+argument_list|(
+literal|"sum(cast(null as varchar(2)))"
+argument_list|,
+literal|"DECIMAL(19, 19)"
 argument_list|)
 expr_stmt|;
 specifier|final
@@ -33948,7 +34297,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|strictTester
 operator|.
 name|checkFails
 argument_list|(
@@ -33957,6 +34306,15 @@ argument_list|,
 literal|"(?s)Cannot apply 'AVG' to arguments of type 'AVG\\(<VARCHAR\\(2\\)>\\)'\\. Supported form\\(s\\): 'AVG\\(<NUMERIC>\\)'.*"
 argument_list|,
 literal|false
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkType
+argument_list|(
+literal|"avg(cast(null as varchar(2)))"
+argument_list|,
+literal|"DECIMAL(19, 19)"
 argument_list|)
 expr_stmt|;
 name|tester
@@ -34102,7 +34460,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|strictTester
 operator|.
 name|checkFails
 argument_list|(
@@ -34111,6 +34469,15 @@ argument_list|,
 literal|"(?s)Cannot apply 'COVAR_POP' to arguments of type 'COVAR_POP\\(<VARCHAR\\(2\\)>,<VARCHAR\\(2\\)>\\)'\\. Supported form\\(s\\): 'COVAR_POP\\(<NUMERIC>,<NUMERIC>\\)'.*"
 argument_list|,
 literal|false
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkType
+argument_list|(
+literal|"covar_pop(cast(null as varchar(2)),cast(null as varchar(2)))"
+argument_list|,
+literal|"DECIMAL(19, 19)"
 argument_list|)
 expr_stmt|;
 name|tester
@@ -34186,7 +34553,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|strictTester
 operator|.
 name|checkFails
 argument_list|(
@@ -34195,6 +34562,15 @@ argument_list|,
 literal|"(?s)Cannot apply 'COVAR_SAMP' to arguments of type 'COVAR_SAMP\\(<VARCHAR\\(2\\)>,<VARCHAR\\(2\\)>\\)'\\. Supported form\\(s\\): 'COVAR_SAMP\\(<NUMERIC>,<NUMERIC>\\)'.*"
 argument_list|,
 literal|false
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkType
+argument_list|(
+literal|"covar_samp(cast(null as varchar(2)),cast(null as varchar(2)))"
+argument_list|,
+literal|"DECIMAL(19, 19)"
 argument_list|)
 expr_stmt|;
 name|tester
@@ -34270,7 +34646,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|strictTester
 operator|.
 name|checkFails
 argument_list|(
@@ -34279,6 +34655,15 @@ argument_list|,
 literal|"(?s)Cannot apply 'REGR_SXX' to arguments of type 'REGR_SXX\\(<VARCHAR\\(2\\)>,<VARCHAR\\(2\\)>\\)'\\. Supported form\\(s\\): 'REGR_SXX\\(<NUMERIC>,<NUMERIC>\\)'.*"
 argument_list|,
 literal|false
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkType
+argument_list|(
+literal|"regr_sxx(cast(null as varchar(2)), cast(null as varchar(2)))"
+argument_list|,
+literal|"DECIMAL(19, 19)"
 argument_list|)
 expr_stmt|;
 name|tester
@@ -34354,7 +34739,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|strictTester
 operator|.
 name|checkFails
 argument_list|(
@@ -34363,6 +34748,15 @@ argument_list|,
 literal|"(?s)Cannot apply 'REGR_SYY' to arguments of type 'REGR_SYY\\(<VARCHAR\\(2\\)>,<VARCHAR\\(2\\)>\\)'\\. Supported form\\(s\\): 'REGR_SYY\\(<NUMERIC>,<NUMERIC>\\)'.*"
 argument_list|,
 literal|false
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkType
+argument_list|(
+literal|"regr_syy(cast(null as varchar(2)), cast(null as varchar(2)))"
+argument_list|,
+literal|"DECIMAL(19, 19)"
 argument_list|)
 expr_stmt|;
 name|tester
@@ -34438,7 +34832,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|strictTester
 operator|.
 name|checkFails
 argument_list|(
@@ -34447,6 +34841,15 @@ argument_list|,
 literal|"(?s)Cannot apply 'STDDEV_POP' to arguments of type 'STDDEV_POP\\(<VARCHAR\\(2\\)>\\)'\\. Supported form\\(s\\): 'STDDEV_POP\\(<NUMERIC>\\)'.*"
 argument_list|,
 literal|false
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkType
+argument_list|(
+literal|"stddev_pop(cast(null as varchar(2)))"
+argument_list|,
+literal|"DECIMAL(19, 19)"
 argument_list|)
 expr_stmt|;
 name|tester
@@ -34595,7 +34998,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|strictTester
 operator|.
 name|checkFails
 argument_list|(
@@ -34604,6 +35007,15 @@ argument_list|,
 literal|"(?s)Cannot apply 'STDDEV_SAMP' to arguments of type 'STDDEV_SAMP\\(<VARCHAR\\(2\\)>\\)'\\. Supported form\\(s\\): 'STDDEV_SAMP\\(<NUMERIC>\\)'.*"
 argument_list|,
 literal|false
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkType
+argument_list|(
+literal|"stddev_samp(cast(null as varchar(2)))"
+argument_list|,
+literal|"DECIMAL(19, 19)"
 argument_list|)
 expr_stmt|;
 name|tester
@@ -34752,7 +35164,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|strictTester
 operator|.
 name|checkFails
 argument_list|(
@@ -34761,6 +35173,15 @@ argument_list|,
 literal|"(?s)Cannot apply 'STDDEV' to arguments of type 'STDDEV\\(<VARCHAR\\(2\\)>\\)'\\. Supported form\\(s\\): 'STDDEV\\(<NUMERIC>\\)'.*"
 argument_list|,
 literal|false
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkType
+argument_list|(
+literal|"stddev(cast(null as varchar(2)))"
+argument_list|,
+literal|"DECIMAL(19, 19)"
 argument_list|)
 expr_stmt|;
 name|tester
@@ -34862,7 +35283,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|strictTester
 operator|.
 name|checkFails
 argument_list|(
@@ -34871,6 +35292,15 @@ argument_list|,
 literal|"(?s)Cannot apply 'VAR_POP' to arguments of type 'VAR_POP\\(<VARCHAR\\(2\\)>\\)'\\. Supported form\\(s\\): 'VAR_POP\\(<NUMERIC>\\)'.*"
 argument_list|,
 literal|false
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkType
+argument_list|(
+literal|"var_pop(cast(null as varchar(2)))"
+argument_list|,
+literal|"DECIMAL(19, 19)"
 argument_list|)
 expr_stmt|;
 name|tester
@@ -35021,7 +35451,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|strictTester
 operator|.
 name|checkFails
 argument_list|(
@@ -35030,6 +35460,15 @@ argument_list|,
 literal|"(?s)Cannot apply 'VAR_SAMP' to arguments of type 'VAR_SAMP\\(<VARCHAR\\(2\\)>\\)'\\. Supported form\\(s\\): 'VAR_SAMP\\(<NUMERIC>\\)'.*"
 argument_list|,
 literal|false
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkType
+argument_list|(
+literal|"var_samp(cast(null as varchar(2)))"
+argument_list|,
+literal|"DECIMAL(19, 19)"
 argument_list|)
 expr_stmt|;
 name|tester
@@ -35180,7 +35619,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
-name|tester
+name|strictTester
 operator|.
 name|checkFails
 argument_list|(
@@ -35189,6 +35628,15 @@ argument_list|,
 literal|"(?s)Cannot apply 'VARIANCE' to arguments of type 'VARIANCE\\(<VARCHAR\\(2\\)>\\)'\\. Supported form\\(s\\): 'VARIANCE\\(<NUMERIC>\\)'.*"
 argument_list|,
 literal|false
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkType
+argument_list|(
+literal|"variance(cast(null as varchar(2)))"
+argument_list|,
+literal|"DECIMAL(19, 19)"
 argument_list|)
 expr_stmt|;
 name|tester

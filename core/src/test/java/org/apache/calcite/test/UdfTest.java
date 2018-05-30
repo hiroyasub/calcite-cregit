@@ -865,6 +865,9 @@ operator|.
 name|MyPlusFunction
 operator|.
 name|INSTANCE_COUNT
+operator|.
+name|get
+argument_list|()
 decl_stmt|;
 specifier|final
 name|int
@@ -943,6 +946,9 @@ operator|.
 name|MyDeterministicPlusFunction
 operator|.
 name|INSTANCE_COUNT
+operator|.
+name|get
+argument_list|()
 decl_stmt|;
 specifier|final
 name|int
@@ -1034,6 +1040,86 @@ operator|.
 name|returns
 argument_list|(
 name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testUserDefinedFunctionWithNull
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select \"adhoc\".my_det_plus(\"deptno\", 1 + null) as p\n"
+operator|+
+literal|"from \"adhoc\".EMPLOYEES where 1> 0 or nullif(null, 1) is null"
+decl_stmt|;
+specifier|final
+name|AtomicInteger
+name|c
+init|=
+name|Smalls
+operator|.
+name|MyDeterministicPlusFunction
+operator|.
+name|INSTANCE_COUNT
+operator|.
+name|get
+argument_list|()
+decl_stmt|;
+specifier|final
+name|int
+name|before
+init|=
+name|c
+operator|.
+name|get
+argument_list|()
+decl_stmt|;
+name|withUdf
+argument_list|()
+operator|.
+name|query
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"P=null"
+argument_list|,
+literal|"P=null"
+argument_list|,
+literal|"P=null"
+argument_list|,
+literal|"P=null"
+argument_list|)
+expr_stmt|;
+specifier|final
+name|int
+name|after
+init|=
+name|c
+operator|.
+name|get
+argument_list|()
+decl_stmt|;
+name|assertThat
+argument_list|(
+name|after
+argument_list|,
+name|is
+argument_list|(
+name|before
+operator|+
+literal|1
+argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
@@ -1849,7 +1935,7 @@ argument_list|(
 literal|"No match found for function signature MY_LEFT(s =><CHARACTER>)"
 argument_list|)
 expr_stmt|;
-comment|// arguments of wrong type
+comment|// arguments of wrong type, will do implicitly type coercion.
 name|with
 operator|.
 name|query
@@ -1859,9 +1945,19 @@ argument_list|)
 operator|.
 name|throws_
 argument_list|(
-literal|"No match found for function signature "
-operator|+
-literal|"MY_LEFT(n =><CHARACTER>, s =><CHARACTER>)"
+literal|"java.lang.NumberFormatException: For input string: \"hello\""
+argument_list|)
+expr_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"values (\"adhoc\".my_left(\"n\" => '1', \"s\" => 'x'))"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"EXPR$0=x\n"
 argument_list|)
 expr_stmt|;
 name|with
@@ -1871,11 +1967,9 @@ argument_list|(
 literal|"values (\"adhoc\".my_left(\"n\" => 1, \"s\" => 0))"
 argument_list|)
 operator|.
-name|throws_
+name|returns
 argument_list|(
-literal|"No match found for function signature "
-operator|+
-literal|"MY_LEFT(n =><NUMERIC>, s =><NUMERIC>)"
+literal|"EXPR$0=0\n"
 argument_list|)
 expr_stmt|;
 block|}
@@ -2016,6 +2110,7 @@ argument_list|(
 literal|"EXPR$0={a: 1, b: null, c: 3, d: null, e: null}\n"
 argument_list|)
 expr_stmt|;
+comment|// implicit type coercion.
 name|with
 operator|.
 name|query
@@ -2025,7 +2120,19 @@ argument_list|)
 operator|.
 name|throws_
 argument_list|(
-literal|"No match found for function signature ABCDE(<NUMERIC>,<ANY>,<CHARACTER>)"
+literal|"java.lang.NumberFormatException: For input string: \"abcde\""
+argument_list|)
+expr_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"values (\"adhoc\".abcde(1,DEFAULT,'123'))"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"EXPR$0={a: 1, b: null, c: 123, d: null, e: null}\n"
 argument_list|)
 expr_stmt|;
 name|with
@@ -2403,6 +2510,7 @@ argument_list|(
 literal|"P=50\n"
 argument_list|)
 expr_stmt|;
+comment|// implicit type coercion.
 name|with
 operator|.
 name|query
@@ -2412,7 +2520,7 @@ argument_list|)
 operator|.
 name|throws_
 argument_list|(
-literal|"No match found for function signature MY_SUM(<CHARACTER>)"
+literal|"java.lang.NumberFormatException: For input string: \"Bill\""
 argument_list|)
 expr_stmt|;
 name|with
@@ -2718,6 +2826,7 @@ argument_list|,
 literal|"name=Sebastian; P=0"
 argument_list|)
 expr_stmt|;
+comment|// implicit type coercion.
 name|with
 operator|.
 name|query
@@ -2725,13 +2834,6 @@ argument_list|(
 literal|"select \"adhoc\".my_sum3(\"empid\",\"deptno\",\"salary\") as p "
 operator|+
 literal|"from \"adhoc\".EMPLOYEES\n"
-argument_list|)
-operator|.
-name|throws_
-argument_list|(
-literal|"No match found for function signature MY_SUM3(<NUMERIC>, "
-operator|+
-literal|"<NUMERIC>,<APPROXIMATE_NUMERIC>)"
 argument_list|)
 expr_stmt|;
 name|with
@@ -2741,13 +2843,6 @@ argument_list|(
 literal|"select \"adhoc\".my_sum3(\"empid\",\"deptno\",\"name\") as p "
 operator|+
 literal|"from \"adhoc\".EMPLOYEES\n"
-argument_list|)
-operator|.
-name|throws_
-argument_list|(
-literal|"No match found for function signature MY_SUM3(<NUMERIC>, "
-operator|+
-literal|"<NUMERIC>,<CHARACTER>)"
 argument_list|)
 expr_stmt|;
 name|with
@@ -2764,6 +2859,7 @@ argument_list|(
 literal|"P=1500\n"
 argument_list|)
 expr_stmt|;
+comment|// implicit type coercion.
 name|with
 operator|.
 name|query
@@ -2773,9 +2869,10 @@ argument_list|)
 operator|.
 name|throws_
 argument_list|(
-literal|"No match found for function signature MY_SUM2(<CHARACTER>,<NUMERIC>)"
+literal|"java.lang.NumberFormatException: For input string: \"Bill\""
 argument_list|)
 expr_stmt|;
+comment|// implicit type coercion.
 name|with
 operator|.
 name|query
@@ -2783,9 +2880,9 @@ argument_list|(
 literal|"select \"adhoc\".my_sum2(\"empid\",0.0) as p from \"adhoc\".EMPLOYEES\n"
 argument_list|)
 operator|.
-name|throws_
+name|returns
 argument_list|(
-literal|"No match found for function signature MY_SUM2(<NUMERIC>,<NUMERIC>)"
+literal|"P=560\n"
 argument_list|)
 expr_stmt|;
 block|}
@@ -2977,6 +3074,7 @@ argument_list|(
 literal|"P=50\n"
 argument_list|)
 expr_stmt|;
+comment|// implicit type coercion.
 name|with
 operator|.
 name|query
@@ -2986,7 +3084,7 @@ argument_list|)
 operator|.
 name|throws_
 argument_list|(
-literal|"No match found for function signature MY_SUM3(<CHARACTER>)"
+literal|"java.lang.NumberFormatException: For input string: \"Bill\""
 argument_list|)
 expr_stmt|;
 name|with

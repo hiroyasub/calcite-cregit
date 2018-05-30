@@ -5902,7 +5902,27 @@ condition|)
 block|{
 comment|// E.g. from "int" to "BigDecimal".
 comment|// Generate "new BigDecimal(x)"
+comment|// Fix CALCITE-2325, we should decide null here for int type.
 return|return
+name|Expressions
+operator|.
+name|condition
+argument_list|(
+name|Expressions
+operator|.
+name|equal
+argument_list|(
+name|operand
+argument_list|,
+name|RexImpTable
+operator|.
+name|NULL_EXPR
+argument_list|)
+argument_list|,
+name|RexImpTable
+operator|.
+name|NULL_EXPR
+argument_list|,
 name|Expressions
 operator|.
 name|new_
@@ -5912,6 +5932,7 @@ operator|.
 name|class
 argument_list|,
 name|operand
+argument_list|)
 argument_list|)
 return|;
 block|}

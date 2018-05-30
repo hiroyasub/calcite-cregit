@@ -256,6 +256,14 @@ name|SqlConformance
 name|conformance
 parameter_list|)
 function_decl|;
+comment|/** Returns a tester that tests with implicit type coercion on/off. */
+name|SqlTester
+name|enableTypeCoercion
+parameter_list|(
+name|boolean
+name|enabled
+parameter_list|)
+function_decl|;
 comment|/** Returns a tester that gets connections from a given factory. */
 name|SqlTester
 name|withConnectionFactory

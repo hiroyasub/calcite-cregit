@@ -320,9 +320,24 @@ operator|.
 name|PRECISION_NOT_SPECIFIED
 operator|)
 assert|;
+comment|// Does not check precision when typeName is SqlTypeName#NULL.
 name|RelDataType
 name|newType
 init|=
+name|precision
+operator|==
+name|RelDataType
+operator|.
+name|PRECISION_NOT_SPECIFIED
+condition|?
+operator|new
+name|BasicSqlType
+argument_list|(
+name|typeSystem
+argument_list|,
+name|typeName
+argument_list|)
+else|:
 operator|new
 name|BasicSqlType
 argument_list|(

@@ -274,6 +274,11 @@ name|String
 name|locale
 parameter_list|()
 function_decl|;
+comment|/** @see CalciteConnectionProperty#TYPE_COERCION */
+name|boolean
+name|typeCoercion
+parameter_list|()
+function_decl|;
 block|}
 end_interface
 

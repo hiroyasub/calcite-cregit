@@ -1399,6 +1399,14 @@ name|Object
 operator|.
 name|class
 return|;
+case|case
+name|NULL
+case|:
+return|return
+name|Void
+operator|.
+name|class
+return|;
 block|}
 block|}
 switch|switch
