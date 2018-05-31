@@ -453,6 +453,17 @@ literal|null
 argument_list|)
 return|;
 block|}
+comment|/**    * In ES 5.x scripted fields start with {@code params._source.foo} while in ES2.x    * {@code _source.foo}. Helper method to build correct query based on runtime version of elastic.    *    * @see<a href="https://github.com/elastic/elasticsearch/issues/20068">_source variable</a>    * @see<a href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting-fields.html">Scripted Fields</a>    */
+specifier|protected
+name|String
+name|scriptedFieldPrefix
+parameter_list|()
+block|{
+comment|// this is default pattern starting 5.x
+return|return
+literal|"params._source"
+return|;
+block|}
 comment|/** Executes a "find" operation on the underlying type.    *    *<p>For example,    *<code>client.prepareSearch(index).setTypes(type)    * .setSource("{\"fields\" : [\"state\"]}")</code></p>    *    * @param index Elasticsearch index    * @param ops List of operations represented as Json strings.    * @param fields List of fields to project; or null to return map    * @return Enumerator of results    */
 specifier|protected
 specifier|abstract

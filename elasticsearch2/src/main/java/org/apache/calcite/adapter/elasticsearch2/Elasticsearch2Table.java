@@ -203,6 +203,18 @@ operator|=
 name|client
 expr_stmt|;
 block|}
+comment|/**    * ES version 2.x. To access document attributes ES2 uses {@code _source.foo} syntax.    */
+annotation|@
+name|Override
+specifier|protected
+name|String
+name|scriptedFieldPrefix
+parameter_list|()
+block|{
+return|return
+literal|"_source"
+return|;
+block|}
 annotation|@
 name|Override
 specifier|protected
