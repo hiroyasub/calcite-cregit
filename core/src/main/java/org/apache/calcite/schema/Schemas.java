@@ -3085,7 +3085,10 @@ name|isEmpty
 argument_list|()
 condition|)
 block|{
-assert|assert
+name|Preconditions
+operator|.
+name|checkState
+argument_list|(
 name|rootSchema
 operator|.
 name|name
@@ -3097,7 +3100,8 @@ operator|.
 name|next
 argument_list|()
 argument_list|)
-assert|;
+argument_list|)
+expr_stmt|;
 block|}
 for|for
 control|(
