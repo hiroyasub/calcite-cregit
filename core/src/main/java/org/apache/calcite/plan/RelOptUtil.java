@@ -2577,10 +2577,12 @@ argument_list|()
 operator|+
 literal|"\nexpression is "
 operator|+
-name|newRel
+name|RelOptUtil
 operator|.
 name|toString
-argument_list|()
+argument_list|(
+name|newRel
+argument_list|)
 decl_stmt|;
 throw|throw
 operator|new

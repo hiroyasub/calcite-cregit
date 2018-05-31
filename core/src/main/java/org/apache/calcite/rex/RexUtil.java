@@ -1806,35 +1806,6 @@ operator|.
 name|getOperands
 argument_list|()
 decl_stmt|;
-if|if
-condition|(
-name|operands
-operator|.
-name|size
-argument_list|()
-operator|!=
-literal|2
-operator|&&
-name|predicate
-operator|.
-name|getKind
-argument_list|()
-operator|==
-name|SqlKind
-operator|.
-name|EQUALS
-condition|)
-block|{
-name|decompose
-argument_list|(
-name|excludeSet
-argument_list|,
-name|predicate
-argument_list|)
-expr_stmt|;
-return|return;
-block|}
-comment|// if it reaches here, we have rexNode equals rexNode
 specifier|final
 name|RexNode
 name|left
@@ -1876,6 +1847,7 @@ expr_stmt|;
 block|}
 else|else
 block|{
+comment|// is null
 name|left
 operator|=
 name|operands
@@ -1885,6 +1857,21 @@ argument_list|(
 literal|0
 argument_list|)
 expr_stmt|;
+if|if
+condition|(
+operator|!
+name|left
+operator|.
+name|getType
+argument_list|()
+operator|.
+name|isNullable
+argument_list|()
+condition|)
+block|{
+comment|// There's no sense in inferring $0=null when $0 is not nullable
+return|return;
+block|}
 name|right
 operator|=
 name|rexBuilder
