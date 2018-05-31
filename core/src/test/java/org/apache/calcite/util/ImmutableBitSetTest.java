@@ -145,6 +145,18 @@ name|hamcrest
 operator|.
 name|CoreMatchers
 operator|.
+name|anyOf
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|hamcrest
+operator|.
+name|CoreMatchers
+operator|.
 name|equalTo
 import|;
 end_import
@@ -4500,9 +4512,17 @@ operator|.
 name|getMessage
 argument_list|()
 argument_list|,
+name|anyOf
+argument_list|(
 name|is
 argument_list|(
 literal|"-1"
+argument_list|)
+argument_list|,
+name|is
+argument_list|(
+literal|"Index -1 out of bounds for length 0"
+argument_list|)
 argument_list|)
 argument_list|)
 expr_stmt|;
