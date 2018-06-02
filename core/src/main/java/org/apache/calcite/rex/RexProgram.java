@@ -382,7 +382,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * A collection of expressions which read inputs, compute output expressions,  * and optionally use a condition to filter rows.  *  *<p>Programs are immutable. It may help to use a {@link RexProgramBuilder},  * which has the same relationship to {@link RexProgram} as {@link StringBuffer}  * does has to {@link String}.  *  *<p>A program can contain aggregate functions. If it does, the arguments to  * each aggregate function must be an {@link RexInputRef}.  *  * @see RexProgramBuilder  */
+comment|/**  * A collection of expressions which read inputs, compute output expressions,  * and optionally use a condition to filter rows.  *  *<p>Programs are immutable. It may help to use a {@link RexProgramBuilder},  * which has the same relationship to {@link RexProgram} as {@link StringBuffer}  * has to {@link String}.  *  *<p>A program can contain aggregate functions. If it does, the arguments to  * each aggregate function must be an {@link RexInputRef}.  *  * @see RexProgramBuilder  */
 end_comment
 
 begin_class
