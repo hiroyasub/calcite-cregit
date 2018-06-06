@@ -1449,6 +1449,16 @@ operator|.
 name|COUNT
 expr_stmt|;
 break|break;
+case|case
+name|ANY_VALUE
+case|:
+name|aggFunction
+operator|=
+name|SqlStdOperatorTable
+operator|.
+name|ANY_VALUE
+expr_stmt|;
+break|break;
 default|default:
 for|for
 control|(

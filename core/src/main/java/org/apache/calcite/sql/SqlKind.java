@@ -553,6 +553,9 @@ block|,
 comment|/** The {@code LAST_VALUE} aggregate function. */
 name|LAST_VALUE
 block|,
+comment|/** The {@code ANY_VALUE} aggregate function. */
+name|ANY_VALUE
+block|,
 comment|/** The {@code COVAR_POP} aggregate function. */
 name|COVAR_POP
 block|,

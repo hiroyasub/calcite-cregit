@@ -6961,6 +6961,12 @@ operator|==
 name|SqlStdOperatorTable
 operator|.
 name|SUM0
+operator|||
+name|aggregation
+operator|==
+name|SqlStdOperatorTable
+operator|.
+name|ANY_VALUE
 condition|)
 block|{
 return|return

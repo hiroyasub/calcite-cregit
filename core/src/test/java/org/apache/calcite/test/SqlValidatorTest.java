@@ -22521,6 +22521,19 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testAnyValueFunction
+parameter_list|()
+block|{
+name|check
+argument_list|(
+literal|"SELECT any_value(ename) from emp"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testFunctionalDistinct
 parameter_list|()
 block|{

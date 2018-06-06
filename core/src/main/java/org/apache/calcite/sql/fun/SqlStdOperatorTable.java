@@ -2790,6 +2790,21 @@ operator|.
 name|LAST_VALUE
 argument_list|)
 decl_stmt|;
+comment|/**    *<code>ANY_VALUE</code> aggregate function.    */
+specifier|public
+specifier|static
+specifier|final
+name|SqlAggFunction
+name|ANY_VALUE
+init|=
+operator|new
+name|SqlAnyValueAggFunction
+argument_list|(
+name|SqlKind
+operator|.
+name|ANY_VALUE
+argument_list|)
+decl_stmt|;
 comment|/**    *<code>FIRST_VALUE</code> aggregate function.    */
 specifier|public
 specifier|static
