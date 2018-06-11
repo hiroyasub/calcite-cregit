@@ -118,7 +118,7 @@ return|return
 name|isRepeatable
 return|;
 block|}
-comment|/**    * If {@link #isRepeatable()} returns<tt>true</tt>, this method returns a    * user-specified seed value. Samples of the same, unmodified relation    * should be identical if the sampling mode, sampling percentage and    * repeatable seed are the same.    *    * @return seed value for repeatable samples    */
+comment|/**    * If {@link #isRepeatable()} returns<code>true</code>, this method returns a    * user-specified seed value. Samples of the same, unmodified relation    * should be identical if the sampling mode, sampling percentage and    * repeatable seed are the same.    *    * @return seed value for repeatable samples    */
 specifier|public
 name|int
 name|getRepeatableSeed
