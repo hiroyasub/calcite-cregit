@@ -793,29 +793,29 @@ argument_list|,
 literal|true
 argument_list|)
 decl_stmt|;
-comment|/**    * The "MULTISET UNION" operator.    */
+comment|/**    * The {@code MULTISET UNION DISTINCT} operator.    */
 specifier|public
 specifier|static
 specifier|final
 name|SqlMultisetSetOperator
-name|MULTISET_UNION
+name|MULTISET_UNION_DISTINCT
 init|=
 operator|new
 name|SqlMultisetSetOperator
 argument_list|(
-literal|"MULTISET UNION"
+literal|"MULTISET UNION DISTINCT"
 argument_list|,
 literal|14
 argument_list|,
 literal|false
 argument_list|)
 decl_stmt|;
-comment|/**    * The "MULTISET UNION ALL" operator.    */
+comment|/**    * The {@code MULTISET UNION [ALL]} operator.    */
 specifier|public
 specifier|static
 specifier|final
 name|SqlMultisetSetOperator
-name|MULTISET_UNION_ALL
+name|MULTISET_UNION
 init|=
 operator|new
 name|SqlMultisetSetOperator
@@ -827,29 +827,29 @@ argument_list|,
 literal|true
 argument_list|)
 decl_stmt|;
-comment|/**    * The "MULTISET EXCEPT" operator.    */
+comment|/**    * The {@code MULTISET EXCEPT DISTINCT} operator.    */
 specifier|public
 specifier|static
 specifier|final
 name|SqlMultisetSetOperator
-name|MULTISET_EXCEPT
+name|MULTISET_EXCEPT_DISTINCT
 init|=
 operator|new
 name|SqlMultisetSetOperator
 argument_list|(
-literal|"MULTISET EXCEPT"
+literal|"MULTISET EXCEPT DISTINCT"
 argument_list|,
 literal|14
 argument_list|,
 literal|false
 argument_list|)
 decl_stmt|;
-comment|/**    * The "MULTISET EXCEPT ALL" operator.    */
+comment|/**    * The {@code MULTISET EXCEPT [ALL]} operator.    */
 specifier|public
 specifier|static
 specifier|final
 name|SqlMultisetSetOperator
-name|MULTISET_EXCEPT_ALL
+name|MULTISET_EXCEPT
 init|=
 operator|new
 name|SqlMultisetSetOperator
@@ -861,29 +861,29 @@ argument_list|,
 literal|true
 argument_list|)
 decl_stmt|;
-comment|/**    * The "MULTISET INTERSECT" operator.    */
+comment|/**    * The {@code MULTISET INTERSECT DISTINCT} operator.    */
 specifier|public
 specifier|static
 specifier|final
 name|SqlMultisetSetOperator
-name|MULTISET_INTERSECT
+name|MULTISET_INTERSECT_DISTINCT
 init|=
 operator|new
 name|SqlMultisetSetOperator
 argument_list|(
-literal|"MULTISET INTERSECT"
+literal|"MULTISET INTERSECT DISTINCT"
 argument_list|,
 literal|18
 argument_list|,
 literal|false
 argument_list|)
 decl_stmt|;
-comment|/**    * The "MULTISET INTERSECT ALL" operator.    */
+comment|/**    * The {@code MULTISET INTERSECT [ALL]} operator.    */
 specifier|public
 specifier|static
 specifier|final
 name|SqlMultisetSetOperator
-name|MULTISET_INTERSECT_ALL
+name|MULTISET_INTERSECT
 init|=
 operator|new
 name|SqlMultisetSetOperator
@@ -1967,6 +1967,37 @@ operator|.
 name|MULTISET_MULTISET
 argument_list|)
 decl_stmt|;
+specifier|public
+specifier|static
+specifier|final
+name|SqlBinaryOperator
+name|NOT_SUBMULTISET_OF
+init|=
+comment|// TODO: check if precedence is correct
+operator|new
+name|SqlBinaryOperator
+argument_list|(
+literal|"NOT SUBMULTISET OF"
+argument_list|,
+name|SqlKind
+operator|.
+name|OTHER
+argument_list|,
+literal|30
+argument_list|,
+literal|true
+argument_list|,
+name|ReturnTypes
+operator|.
+name|BOOLEAN_NULLABLE
+argument_list|,
+literal|null
+argument_list|,
+name|OperandTypes
+operator|.
+name|MULTISET_MULTISET
+argument_list|)
+decl_stmt|;
 comment|//-------------------------------------------------------------
 comment|//                   POSTFIX OPERATORS
 comment|//-------------------------------------------------------------
@@ -2326,6 +2357,90 @@ argument_list|,
 name|OperandTypes
 operator|.
 name|MULTISET
+argument_list|)
+decl_stmt|;
+specifier|public
+specifier|static
+specifier|final
+name|SqlPostfixOperator
+name|IS_NOT_A_SET
+init|=
+operator|new
+name|SqlPostfixOperator
+argument_list|(
+literal|"IS NOT A SET"
+argument_list|,
+name|SqlKind
+operator|.
+name|OTHER
+argument_list|,
+literal|28
+argument_list|,
+name|ReturnTypes
+operator|.
+name|BOOLEAN
+argument_list|,
+literal|null
+argument_list|,
+name|OperandTypes
+operator|.
+name|MULTISET
+argument_list|)
+decl_stmt|;
+specifier|public
+specifier|static
+specifier|final
+name|SqlPostfixOperator
+name|IS_EMPTY
+init|=
+operator|new
+name|SqlPostfixOperator
+argument_list|(
+literal|"IS EMPTY"
+argument_list|,
+name|SqlKind
+operator|.
+name|OTHER
+argument_list|,
+literal|28
+argument_list|,
+name|ReturnTypes
+operator|.
+name|BOOLEAN
+argument_list|,
+literal|null
+argument_list|,
+name|OperandTypes
+operator|.
+name|COLLECTION_OR_MAP
+argument_list|)
+decl_stmt|;
+specifier|public
+specifier|static
+specifier|final
+name|SqlPostfixOperator
+name|IS_NOT_EMPTY
+init|=
+operator|new
+name|SqlPostfixOperator
+argument_list|(
+literal|"IS NOT EMPTY"
+argument_list|,
+name|SqlKind
+operator|.
+name|OTHER
+argument_list|,
+literal|28
+argument_list|,
+name|ReturnTypes
+operator|.
+name|BOOLEAN
+argument_list|,
+literal|null
+argument_list|,
+name|OperandTypes
+operator|.
+name|COLLECTION_OR_MAP
 argument_list|)
 decl_stmt|;
 comment|//-------------------------------------------------------------
@@ -5562,7 +5677,7 @@ comment|/**    * The FUSION operator. Multiset aggregator function.    */
 specifier|public
 specifier|static
 specifier|final
-name|SqlFunction
+name|SqlAggFunction
 name|FUSION
 init|=
 operator|new

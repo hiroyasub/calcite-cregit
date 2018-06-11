@@ -137,7 +137,7 @@ name|ELEMENT_SLICE
 argument_list|,
 name|SqlStdOperatorTable
 operator|.
-name|MULTISET_EXCEPT_ALL
+name|MULTISET_EXCEPT_DISTINCT
 argument_list|,
 name|SqlStdOperatorTable
 operator|.
@@ -145,7 +145,7 @@ name|MULTISET_EXCEPT
 argument_list|,
 name|SqlStdOperatorTable
 operator|.
-name|MULTISET_INTERSECT_ALL
+name|MULTISET_INTERSECT_DISTINCT
 argument_list|,
 name|SqlStdOperatorTable
 operator|.
@@ -153,7 +153,7 @@ name|MULTISET_INTERSECT
 argument_list|,
 name|SqlStdOperatorTable
 operator|.
-name|MULTISET_UNION_ALL
+name|MULTISET_UNION_DISTINCT
 argument_list|,
 name|SqlStdOperatorTable
 operator|.
@@ -165,7 +165,15 @@ name|IS_A_SET
 argument_list|,
 name|SqlStdOperatorTable
 operator|.
+name|IS_NOT_A_SET
+argument_list|,
+name|SqlStdOperatorTable
+operator|.
 name|MEMBER_OF
+argument_list|,
+name|SqlStdOperatorTable
+operator|.
+name|NOT_SUBMULTISET_OF
 argument_list|,
 name|SqlStdOperatorTable
 operator|.

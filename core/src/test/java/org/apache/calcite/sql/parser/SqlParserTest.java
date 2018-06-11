@@ -16011,7 +16011,7 @@ name|checkExp
 argument_list|(
 literal|"a multiset union b"
 argument_list|,
-literal|"(`A` MULTISET UNION `B`)"
+literal|"(`A` MULTISET UNION ALL `B`)"
 argument_list|)
 expr_stmt|;
 name|checkExp
@@ -16025,7 +16025,7 @@ name|checkExp
 argument_list|(
 literal|"a multiset union distinct b"
 argument_list|,
-literal|"(`A` MULTISET UNION `B`)"
+literal|"(`A` MULTISET UNION DISTINCT `B`)"
 argument_list|)
 expr_stmt|;
 block|}
@@ -16040,7 +16040,7 @@ name|checkExp
 argument_list|(
 literal|"a multiset EXCEPT b"
 argument_list|,
-literal|"(`A` MULTISET EXCEPT `B`)"
+literal|"(`A` MULTISET EXCEPT ALL `B`)"
 argument_list|)
 expr_stmt|;
 name|checkExp
@@ -16054,7 +16054,7 @@ name|checkExp
 argument_list|(
 literal|"a multiset EXCEPT distinct b"
 argument_list|,
-literal|"(`A` MULTISET EXCEPT `B`)"
+literal|"(`A` MULTISET EXCEPT DISTINCT `B`)"
 argument_list|)
 expr_stmt|;
 block|}
@@ -16069,7 +16069,7 @@ name|checkExp
 argument_list|(
 literal|"a multiset INTERSECT b"
 argument_list|,
-literal|"(`A` MULTISET INTERSECT `B`)"
+literal|"(`A` MULTISET INTERSECT ALL `B`)"
 argument_list|)
 expr_stmt|;
 name|checkExp
@@ -16083,7 +16083,7 @@ name|checkExp
 argument_list|(
 literal|"a multiset INTERSECT distinct b"
 argument_list|,
-literal|"(`A` MULTISET INTERSECT `B`)"
+literal|"(`A` MULTISET INTERSECT DISTINCT `B`)"
 argument_list|)
 expr_stmt|;
 block|}
@@ -16098,14 +16098,14 @@ name|checkExp
 argument_list|(
 literal|"multiset[1] MULTISET union b"
 argument_list|,
-literal|"((MULTISET[1]) MULTISET UNION `B`)"
+literal|"((MULTISET[1]) MULTISET UNION ALL `B`)"
 argument_list|)
 expr_stmt|;
 name|checkExp
 argument_list|(
 literal|"a MULTISET union b multiset intersect c multiset except d multiset union e"
 argument_list|,
-literal|"(((`A` MULTISET UNION (`B` MULTISET INTERSECT `C`)) MULTISET EXCEPT `D`) MULTISET UNION `E`)"
+literal|"(((`A` MULTISET UNION ALL (`B` MULTISET INTERSECT ALL `C`)) MULTISET EXCEPT ALL `D`) MULTISET UNION ALL `E`)"
 argument_list|)
 expr_stmt|;
 block|}

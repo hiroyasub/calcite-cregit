@@ -25537,6 +25537,8 @@ literal|"IS NOT DISTINCT FROM left\n"
 operator|+
 literal|"MEMBER OF left\n"
 operator|+
+literal|"NOT SUBMULTISET OF left\n"
+operator|+
 literal|"OVERLAPS left\n"
 operator|+
 literal|"PRECEDES left\n"
@@ -25549,7 +25551,13 @@ literal|"\n"
 operator|+
 literal|"IS A SET post\n"
 operator|+
+literal|"IS EMPTY post\n"
+operator|+
 literal|"IS FALSE post\n"
+operator|+
+literal|"IS NOT A SET post\n"
+operator|+
+literal|"IS NOT EMPTY post\n"
 operator|+
 literal|"IS NOT FALSE post\n"
 operator|+
@@ -25595,9 +25603,9 @@ literal|"INTERSECT left\n"
 operator|+
 literal|"INTERSECT ALL left\n"
 operator|+
-literal|"MULTISET INTERSECT left\n"
-operator|+
 literal|"MULTISET INTERSECT ALL left\n"
+operator|+
+literal|"MULTISET INTERSECT DISTINCT left\n"
 operator|+
 literal|"NULLS FIRST post\n"
 operator|+
@@ -25609,13 +25617,13 @@ literal|"EXCEPT left\n"
 operator|+
 literal|"EXCEPT ALL left\n"
 operator|+
-literal|"MULTISET EXCEPT left\n"
-operator|+
 literal|"MULTISET EXCEPT ALL left\n"
 operator|+
-literal|"MULTISET UNION left\n"
+literal|"MULTISET EXCEPT DISTINCT left\n"
 operator|+
 literal|"MULTISET UNION ALL left\n"
+operator|+
+literal|"MULTISET UNION DISTINCT left\n"
 operator|+
 literal|"UNION left\n"
 operator|+

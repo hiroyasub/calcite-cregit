@@ -14238,6 +14238,503 @@ argument_list|,
 name|VM_EXPAND
 argument_list|)
 expr_stmt|;
+name|tester
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"multiset[1] is a set"
+argument_list|,
+name|Boolean
+operator|.
+name|TRUE
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"multiset[1, 1] is a set"
+argument_list|,
+name|Boolean
+operator|.
+name|FALSE
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"multiset[cast(null as boolean), cast(null as boolean)] is a set"
+argument_list|,
+name|Boolean
+operator|.
+name|FALSE
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"multiset[cast(null as boolean)] is a set"
+argument_list|,
+name|Boolean
+operator|.
+name|TRUE
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"multiset['a'] is a set"
+argument_list|,
+name|Boolean
+operator|.
+name|TRUE
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"multiset['a', 'b'] is a set"
+argument_list|,
+name|Boolean
+operator|.
+name|TRUE
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"multiset['a', 'b', 'a'] is a set"
+argument_list|,
+name|Boolean
+operator|.
+name|FALSE
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testIsNotASetOperator
+parameter_list|()
+block|{
+name|tester
+operator|.
+name|setFor
+argument_list|(
+name|SqlStdOperatorTable
+operator|.
+name|IS_NOT_A_SET
+argument_list|,
+name|VM_EXPAND
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"multiset[1] is not a set"
+argument_list|,
+name|Boolean
+operator|.
+name|FALSE
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"multiset[1, 1] is not a set"
+argument_list|,
+name|Boolean
+operator|.
+name|TRUE
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"multiset[cast(null as boolean), cast(null as boolean)] is not a set"
+argument_list|,
+name|Boolean
+operator|.
+name|TRUE
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"multiset[cast(null as boolean)] is not a set"
+argument_list|,
+name|Boolean
+operator|.
+name|FALSE
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"multiset['a'] is not a set"
+argument_list|,
+name|Boolean
+operator|.
+name|FALSE
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"multiset['a', 'b'] is not a set"
+argument_list|,
+name|Boolean
+operator|.
+name|FALSE
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"multiset['a', 'b', 'a'] is not a set"
+argument_list|,
+name|Boolean
+operator|.
+name|TRUE
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testIntersectOperator
+parameter_list|()
+block|{
+name|tester
+operator|.
+name|setFor
+argument_list|(
+name|SqlStdOperatorTable
+operator|.
+name|MULTISET_INTERSECT
+argument_list|,
+name|VM_EXPAND
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"multiset[1] multiset intersect multiset[1]"
+argument_list|,
+literal|"[1]"
+argument_list|,
+literal|"INTEGER NOT NULL MULTISET NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"multiset[2] multiset intersect all multiset[1]"
+argument_list|,
+literal|"[]"
+argument_list|,
+literal|"INTEGER NOT NULL MULTISET NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"multiset[2] multiset intersect distinct multiset[1]"
+argument_list|,
+literal|"[]"
+argument_list|,
+literal|"INTEGER NOT NULL MULTISET NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"multiset[1, 1] multiset intersect distinct multiset[1, 1]"
+argument_list|,
+literal|"[1]"
+argument_list|,
+literal|"INTEGER NOT NULL MULTISET NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"multiset[1, 1] multiset intersect all multiset[1, 1]"
+argument_list|,
+literal|"[1, 1]"
+argument_list|,
+literal|"INTEGER NOT NULL MULTISET NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"multiset[1, 1] multiset intersect distinct multiset[1, 1]"
+argument_list|,
+literal|"[1]"
+argument_list|,
+literal|"INTEGER NOT NULL MULTISET NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"multiset[cast(null as integer), cast(null as integer)] "
+operator|+
+literal|"multiset intersect distinct multiset[cast(null as integer)]"
+argument_list|,
+literal|"[null]"
+argument_list|,
+literal|"INTEGER MULTISET NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"multiset[cast(null as integer), cast(null as integer)] "
+operator|+
+literal|"multiset intersect all multiset[cast(null as integer)]"
+argument_list|,
+literal|"[null]"
+argument_list|,
+literal|"INTEGER MULTISET NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"multiset[cast(null as integer), cast(null as integer)] "
+operator|+
+literal|"multiset intersect distinct multiset[cast(null as integer)]"
+argument_list|,
+literal|"[null]"
+argument_list|,
+literal|"INTEGER MULTISET NOT NULL"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testExceptOperator
+parameter_list|()
+block|{
+name|tester
+operator|.
+name|setFor
+argument_list|(
+name|SqlStdOperatorTable
+operator|.
+name|MULTISET_EXCEPT
+argument_list|,
+name|VM_EXPAND
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"multiset[1] multiset except multiset[1]"
+argument_list|,
+literal|"[]"
+argument_list|,
+literal|"INTEGER NOT NULL MULTISET NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"multiset[1] multiset except distinct multiset[1]"
+argument_list|,
+literal|"[]"
+argument_list|,
+literal|"INTEGER NOT NULL MULTISET NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"multiset[2] multiset except multiset[1]"
+argument_list|,
+literal|"[2]"
+argument_list|,
+literal|"INTEGER NOT NULL MULTISET NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"multiset[1,2,3] multiset except multiset[1]"
+argument_list|,
+literal|"[2, 3]"
+argument_list|,
+literal|"INTEGER NOT NULL MULTISET NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"cardinality(multiset[1,2,3,2] multiset except distinct multiset[1])"
+argument_list|,
+literal|"2"
+argument_list|,
+literal|"INTEGER NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"cardinality(multiset[1,2,3,2] multiset except all multiset[1])"
+argument_list|,
+literal|"3"
+argument_list|,
+literal|"INTEGER NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"(multiset[1,2,3,2] multiset except distinct multiset[1]) submultiset of multiset[2, 3]"
+argument_list|,
+name|Boolean
+operator|.
+name|TRUE
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"(multiset[1,2,3,2] multiset except distinct multiset[1]) submultiset of multiset[2, 3]"
+argument_list|,
+name|Boolean
+operator|.
+name|TRUE
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"(multiset[1,2,3,2] multiset except all multiset[1]) submultiset of multiset[2, 2, 3]"
+argument_list|,
+name|Boolean
+operator|.
+name|TRUE
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"(multiset[1,2,3] multiset except multiset[1]) is empty"
+argument_list|,
+name|Boolean
+operator|.
+name|FALSE
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"(multiset[1] multiset except multiset[1]) is empty"
+argument_list|,
+name|Boolean
+operator|.
+name|TRUE
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testIsEmptyOperator
+parameter_list|()
+block|{
+name|tester
+operator|.
+name|setFor
+argument_list|(
+name|SqlStdOperatorTable
+operator|.
+name|IS_EMPTY
+argument_list|,
+name|VM_EXPAND
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"multiset[1] is empty"
+argument_list|,
+name|Boolean
+operator|.
+name|FALSE
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testIsNotEmptyOperator
+parameter_list|()
+block|{
+name|tester
+operator|.
+name|setFor
+argument_list|(
+name|SqlStdOperatorTable
+operator|.
+name|IS_NOT_EMPTY
+argument_list|,
+name|VM_EXPAND
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"multiset[1] is not empty"
+argument_list|,
+name|Boolean
+operator|.
+name|TRUE
+argument_list|)
+expr_stmt|;
 block|}
 annotation|@
 name|Test
@@ -22206,30 +22703,24 @@ argument_list|,
 name|VM_JAVA
 argument_list|)
 expr_stmt|;
-if|if
-condition|(
-name|TODO
-condition|)
-block|{
 name|tester
 operator|.
 name|checkString
 argument_list|(
-literal|"element(multiset['abc']))"
+literal|"element(multiset['abc'])"
 argument_list|,
 literal|"abc"
 argument_list|,
-literal|"char(3) not null"
+literal|"CHAR(3) NOT NULL"
 argument_list|)
 expr_stmt|;
 name|tester
 operator|.
 name|checkNull
 argument_list|(
-literal|"element(multiset[cast(null as integer)]))"
+literal|"element(multiset[cast(null as integer)])"
 argument_list|)
 expr_stmt|;
-block|}
 block|}
 annotation|@
 name|Test
@@ -22251,21 +22742,15 @@ argument_list|,
 name|VM_JAVA
 argument_list|)
 expr_stmt|;
-if|if
-condition|(
-name|TODO
-condition|)
-block|{
 name|tester
 operator|.
 name|checkScalarExact
 argument_list|(
-literal|"cardinality(multiset[cast(null as integer),2]))"
+literal|"cardinality(multiset[cast(null as integer),2])"
 argument_list|,
 literal|"2"
 argument_list|)
 expr_stmt|;
-block|}
 if|if
 condition|(
 operator|!
@@ -22315,11 +22800,6 @@ argument_list|,
 name|VM_JAVA
 argument_list|)
 expr_stmt|;
-if|if
-condition|(
-name|TODO
-condition|)
-block|{
 name|tester
 operator|.
 name|checkBoolean
@@ -22376,6 +22856,518 @@ name|FALSE
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testMultisetUnionOperator
+parameter_list|()
+block|{
+name|tester
+operator|.
+name|setFor
+argument_list|(
+name|SqlStdOperatorTable
+operator|.
+name|MULTISET_UNION_DISTINCT
+argument_list|,
+name|VM_FENNEL
+argument_list|,
+name|VM_JAVA
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"multiset[1,2] submultiset of (multiset[2] multiset union multiset[1])"
+argument_list|,
+name|Boolean
+operator|.
+name|TRUE
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"cardinality(multiset[1, 2, 3, 4, 2] "
+operator|+
+literal|"multiset union distinct multiset[1, 4, 5, 7, 8])"
+argument_list|,
+literal|"7"
+argument_list|,
+literal|"INTEGER NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"cardinality(multiset[1, 2, 3, 4, 2] "
+operator|+
+literal|"multiset union distinct multiset[1, 4, 5, 7, 8])"
+argument_list|,
+literal|"7"
+argument_list|,
+literal|"INTEGER NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"(multiset[1, 2, 3, 4, 2] "
+operator|+
+literal|"multiset union distinct multiset[1, 4, 5, 7, 8]) "
+operator|+
+literal|"submultiset of multiset[1, 2, 3, 4, 5, 7, 8]"
+argument_list|,
+name|Boolean
+operator|.
+name|TRUE
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"(multiset[1, 2, 3, 4, 2] "
+operator|+
+literal|"multiset union distinct multiset[1, 4, 5, 7, 8]) "
+operator|+
+literal|"submultiset of multiset[1, 2, 3, 4, 5, 7, 8]"
+argument_list|,
+name|Boolean
+operator|.
+name|TRUE
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"cardinality(multiset['a', 'b', 'c'] "
+operator|+
+literal|"multiset union distinct multiset['c', 'd', 'e'])"
+argument_list|,
+literal|"5"
+argument_list|,
+literal|"INTEGER NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"cardinality(multiset['a', 'b', 'c'] "
+operator|+
+literal|"multiset union distinct multiset['c', 'd', 'e'])"
+argument_list|,
+literal|"5"
+argument_list|,
+literal|"INTEGER NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"(multiset['a', 'b', 'c'] "
+operator|+
+literal|"multiset union distinct multiset['c', 'd', 'e'])"
+operator|+
+literal|" submultiset of multiset['a', 'b', 'c', 'd', 'e']"
+argument_list|,
+name|Boolean
+operator|.
+name|TRUE
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"(multiset['a', 'b', 'c'] "
+operator|+
+literal|"multiset union distinct multiset['c', 'd', 'e'])"
+operator|+
+literal|" submultiset of multiset['a', 'b', 'c', 'd', 'e']"
+argument_list|,
+name|Boolean
+operator|.
+name|TRUE
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"multiset[cast(null as double)] multiset union multiset[cast(null as double)]"
+argument_list|,
+literal|"[null, null]"
+argument_list|,
+literal|"DOUBLE MULTISET NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"multiset[cast(null as boolean)] multiset union multiset[cast(null as boolean)]"
+argument_list|,
+literal|"[null, null]"
+argument_list|,
+literal|"BOOLEAN MULTISET NOT NULL"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testMultisetUnionAllOperator
+parameter_list|()
+block|{
+name|tester
+operator|.
+name|setFor
+argument_list|(
+name|SqlStdOperatorTable
+operator|.
+name|MULTISET_UNION
+argument_list|,
+name|VM_FENNEL
+argument_list|,
+name|VM_JAVA
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"cardinality(multiset[1, 2, 3, 4, 2] "
+operator|+
+literal|"multiset union all multiset[1, 4, 5, 7, 8])"
+argument_list|,
+literal|"10"
+argument_list|,
+literal|"INTEGER NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"(multiset[1, 2, 3, 4, 2] "
+operator|+
+literal|"multiset union all multiset[1, 4, 5, 7, 8]) "
+operator|+
+literal|"submultiset of multiset[1, 2, 3, 4, 5, 7, 8]"
+argument_list|,
+name|Boolean
+operator|.
+name|FALSE
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"(multiset[1, 2, 3, 4, 2] "
+operator|+
+literal|"multiset union all multiset[1, 4, 5, 7, 8]) "
+operator|+
+literal|"submultiset of multiset[1, 1, 2, 2, 3, 4, 4, 5, 7, 8]"
+argument_list|,
+name|Boolean
+operator|.
+name|TRUE
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"cardinality(multiset['a', 'b', 'c'] "
+operator|+
+literal|"multiset union all multiset['c', 'd', 'e'])"
+argument_list|,
+literal|"6"
+argument_list|,
+literal|"INTEGER NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"(multiset['a', 'b', 'c'] "
+operator|+
+literal|"multiset union all multiset['c', 'd', 'e']) "
+operator|+
+literal|"submultiset of multiset['a', 'b', 'c', 'd', 'e']"
+argument_list|,
+name|Boolean
+operator|.
+name|FALSE
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"(multiset['a', 'b', 'c'] "
+operator|+
+literal|"multiset union distinct multiset['c', 'd', 'e']) "
+operator|+
+literal|"submultiset of multiset['a', 'b', 'c', 'd', 'e', 'c']"
+argument_list|,
+name|Boolean
+operator|.
+name|TRUE
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"multiset[cast(null as double)] multiset union all multiset[cast(null as double)]"
+argument_list|,
+literal|"[null, null]"
+argument_list|,
+literal|"DOUBLE MULTISET NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"multiset[cast(null as boolean)] multiset union all multiset[cast(null as boolean)]"
+argument_list|,
+literal|"[null, null]"
+argument_list|,
+literal|"BOOLEAN MULTISET NOT NULL"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSubMultisetOfOperator
+parameter_list|()
+block|{
+name|tester
+operator|.
+name|setFor
+argument_list|(
+name|SqlStdOperatorTable
+operator|.
+name|SUBMULTISET_OF
+argument_list|,
+name|VM_FENNEL
+argument_list|,
+name|VM_JAVA
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"multiset[2] submultiset of multiset[1]"
+argument_list|,
+name|Boolean
+operator|.
+name|FALSE
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"multiset[1] submultiset of multiset[1]"
+argument_list|,
+name|Boolean
+operator|.
+name|TRUE
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"multiset[1, 2] submultiset of multiset[1]"
+argument_list|,
+name|Boolean
+operator|.
+name|FALSE
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"multiset[1] submultiset of multiset[1, 2]"
+argument_list|,
+name|Boolean
+operator|.
+name|TRUE
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"multiset[1, 2] submultiset of multiset[1, 2]"
+argument_list|,
+name|Boolean
+operator|.
+name|TRUE
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"multiset['a', 'b'] submultiset of multiset['c', 'd', 's', 'a']"
+argument_list|,
+name|Boolean
+operator|.
+name|FALSE
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"multiset['a', 'd'] submultiset of multiset['c', 's', 'a', 'w', 'd']"
+argument_list|,
+name|Boolean
+operator|.
+name|TRUE
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"multiset['q', 'a'] submultiset of multiset['a', 'q']"
+argument_list|,
+name|Boolean
+operator|.
+name|TRUE
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testNotSubMultisetOfOperator
+parameter_list|()
+block|{
+name|tester
+operator|.
+name|setFor
+argument_list|(
+name|SqlStdOperatorTable
+operator|.
+name|NOT_SUBMULTISET_OF
+argument_list|,
+name|VM_FENNEL
+argument_list|,
+name|VM_JAVA
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"multiset[2] not submultiset of multiset[1]"
+argument_list|,
+name|Boolean
+operator|.
+name|TRUE
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"multiset[1] not submultiset of multiset[1]"
+argument_list|,
+name|Boolean
+operator|.
+name|FALSE
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"multiset[1, 2] not submultiset of multiset[1]"
+argument_list|,
+name|Boolean
+operator|.
+name|TRUE
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"multiset[1] not submultiset of multiset[1, 2]"
+argument_list|,
+name|Boolean
+operator|.
+name|FALSE
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"multiset[1, 2] not submultiset of multiset[1, 2]"
+argument_list|,
+name|Boolean
+operator|.
+name|FALSE
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"multiset['a', 'b'] not submultiset of multiset['c', 'd', 's', 'a']"
+argument_list|,
+name|Boolean
+operator|.
+name|TRUE
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"multiset['a', 'd'] not submultiset of multiset['c', 's', 'a', 'w', 'd']"
+argument_list|,
+name|Boolean
+operator|.
+name|FALSE
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"multiset['q', 'a'] not submultiset of multiset['a', 'q']"
+argument_list|,
+name|Boolean
+operator|.
+name|FALSE
+argument_list|)
+expr_stmt|;
 block|}
 annotation|@
 name|Test
