@@ -23509,13 +23509,6 @@ comment|// '1970-01-01 00:00:00' for given date
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-if|if
-condition|(
-name|TODO
-condition|)
-block|{
-comment|// Looks like there is a bug in current execution code which returns 13
-comment|// instead of 0
 name|tester
 operator|.
 name|checkScalar
@@ -23527,7 +23520,28 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-block|}
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"extract(minute from date '9999-2-23')"
+argument_list|,
+literal|"0"
+argument_list|,
+literal|"BIGINT NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"extract(minute from date '0001-1-1')"
+argument_list|,
+literal|"0"
+argument_list|,
+literal|"BIGINT NOT NULL"
+argument_list|)
+expr_stmt|;
 name|tester
 operator|.
 name|checkScalar
