@@ -311,6 +311,18 @@ argument_list|,
 name|operandExpression
 argument_list|,
 name|toType
+argument_list|,
+name|druidQuery
+operator|.
+name|getConnectionConfig
+argument_list|()
+operator|.
+name|nullIsEmpty
+argument_list|()
+condition|?
+literal|""
+else|:
+literal|null
 argument_list|)
 return|;
 block|}
@@ -494,6 +506,9 @@ parameter_list|,
 specifier|final
 name|SqlTypeName
 name|toType
+parameter_list|,
+name|String
+name|format
 parameter_list|)
 block|{
 comment|// Cast strings to date times by parsing them from SQL format.
@@ -517,7 +532,7 @@ name|DruidExpressions
 operator|.
 name|stringLiteral
 argument_list|(
-literal|""
+name|format
 argument_list|)
 argument_list|,
 name|DruidExpressions

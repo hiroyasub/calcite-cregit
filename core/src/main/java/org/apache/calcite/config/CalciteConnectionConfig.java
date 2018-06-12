@@ -117,6 +117,11 @@ name|boolean
 name|approximateDecimal
 parameter_list|()
 function_decl|;
+comment|/** @see CalciteConnectionProperty#NULL_IS_EMPTY */
+name|boolean
+name|nullIsEmpty
+parameter_list|()
+function_decl|;
 comment|/** @see CalciteConnectionProperty#AUTO_TEMP */
 name|boolean
 name|autoTemp

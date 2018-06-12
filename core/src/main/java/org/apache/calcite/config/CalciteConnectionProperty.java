@@ -224,6 +224,20 @@ argument_list|,
 literal|false
 argument_list|)
 block|,
+comment|/**    * Whether to treat empty strings as null for Druid Adapter.    */
+name|NULL_IS_EMPTY
+argument_list|(
+literal|"nullIsEmpty"
+argument_list|,
+name|Type
+operator|.
+name|BOOLEAN
+argument_list|,
+literal|true
+argument_list|,
+literal|false
+argument_list|)
+block|,
 comment|/** Whether to store query results in temporary tables. */
 name|AUTO_TEMP
 argument_list|(
