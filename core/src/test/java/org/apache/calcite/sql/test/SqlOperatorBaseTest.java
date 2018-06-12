@@ -3947,6 +3947,138 @@ argument_list|,
 literal|"5"
 argument_list|)
 expr_stmt|;
+name|tester
+operator|.
+name|checkScalarExact
+argument_list|(
+literal|"cast(INTERVAL '1' year as integer)"
+argument_list|,
+literal|"INTEGER NOT NULL"
+argument_list|,
+literal|"1"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalarExact
+argument_list|(
+literal|"cast((INTERVAL '1' year - INTERVAL '2' year) as integer)"
+argument_list|,
+literal|"INTEGER NOT NULL"
+argument_list|,
+literal|"-1"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalarExact
+argument_list|(
+literal|"cast(INTERVAL '1' month as integer)"
+argument_list|,
+literal|"INTEGER NOT NULL"
+argument_list|,
+literal|"1"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalarExact
+argument_list|(
+literal|"cast((INTERVAL '1' month - INTERVAL '2' month) as integer)"
+argument_list|,
+literal|"INTEGER NOT NULL"
+argument_list|,
+literal|"-1"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalarExact
+argument_list|(
+literal|"cast(INTERVAL '1' day as integer)"
+argument_list|,
+literal|"INTEGER NOT NULL"
+argument_list|,
+literal|"1"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalarExact
+argument_list|(
+literal|"cast((INTERVAL '1' day - INTERVAL '2' day) as integer)"
+argument_list|,
+literal|"INTEGER NOT NULL"
+argument_list|,
+literal|"-1"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalarExact
+argument_list|(
+literal|"cast(INTERVAL '1' hour as integer)"
+argument_list|,
+literal|"INTEGER NOT NULL"
+argument_list|,
+literal|"1"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalarExact
+argument_list|(
+literal|"cast((INTERVAL '1' hour - INTERVAL '2' hour) as integer)"
+argument_list|,
+literal|"INTEGER NOT NULL"
+argument_list|,
+literal|"-1"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalarExact
+argument_list|(
+literal|"cast(INTERVAL '1' hour as integer)"
+argument_list|,
+literal|"INTEGER NOT NULL"
+argument_list|,
+literal|"1"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalarExact
+argument_list|(
+literal|"cast((INTERVAL '1' minute - INTERVAL '2' minute) as integer)"
+argument_list|,
+literal|"INTEGER NOT NULL"
+argument_list|,
+literal|"-1"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalarExact
+argument_list|(
+literal|"cast(INTERVAL '1' minute as integer)"
+argument_list|,
+literal|"INTEGER NOT NULL"
+argument_list|,
+literal|"1"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalarExact
+argument_list|(
+literal|"cast((INTERVAL '1' second - INTERVAL '2' second) as integer)"
+argument_list|,
+literal|"INTEGER NOT NULL"
+argument_list|,
+literal|"-1"
+argument_list|)
+expr_stmt|;
 block|}
 annotation|@
 name|Test

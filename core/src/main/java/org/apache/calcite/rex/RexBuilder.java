@@ -2058,6 +2058,15 @@ name|typeName
 condition|)
 block|{
 case|case
+name|INTERVAL_YEAR
+case|:
+case|case
+name|INTERVAL_YEAR_MONTH
+case|:
+case|case
+name|INTERVAL_MONTH
+case|:
+case|case
 name|INTERVAL_DAY
 case|:
 case|case
