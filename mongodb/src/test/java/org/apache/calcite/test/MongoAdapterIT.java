@@ -54,7 +54,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Used to trigger integration tests from maven (thus class name is suffixed with {@code IT}).  *  *<p>If you want to run integration tests from IDE manually set  * {@code -Dcalcite.integrationTest=true} system property.  *  * For command line use:  *<pre>  *     $ mvn install -Pit  *</pre>  *</p>  */
+comment|/**  * Used to trigger integration tests from maven (thus class name is suffixed with {@code IT}).  *  * If you want to run integration tests from IDE manually set  * {@code -Dcalcite.integrationTest=true} system property.  *<br>  * For command line use:  *<pre>  *     $ mvn install -Pit  *</pre>  */
 end_comment
 
 begin_class
