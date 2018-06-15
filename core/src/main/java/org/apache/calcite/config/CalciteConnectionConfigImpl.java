@@ -356,13 +356,13 @@ annotation|@
 name|Override
 specifier|public
 name|boolean
-name|nullIsEmpty
+name|nullEqualToEmpty
 parameter_list|()
 block|{
 return|return
 name|CalciteConnectionProperty
 operator|.
-name|NULL_IS_EMPTY
+name|NULL_EQUAL_TO_EMPTY
 operator|.
 name|wrap
 argument_list|(

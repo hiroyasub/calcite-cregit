@@ -317,7 +317,7 @@ operator|.
 name|getConnectionConfig
 argument_list|()
 operator|.
-name|nullIsEmpty
+name|nullEqualToEmpty
 argument_list|()
 condition|?
 literal|""

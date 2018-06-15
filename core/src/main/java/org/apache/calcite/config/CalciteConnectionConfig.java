@@ -117,9 +117,9 @@ name|boolean
 name|approximateDecimal
 parameter_list|()
 function_decl|;
-comment|/** @see CalciteConnectionProperty#NULL_IS_EMPTY */
+comment|/** @see CalciteConnectionProperty#NULL_EQUAL_TO_EMPTY */
 name|boolean
-name|nullIsEmpty
+name|nullEqualToEmpty
 parameter_list|()
 function_decl|;
 comment|/** @see CalciteConnectionProperty#AUTO_TEMP */
