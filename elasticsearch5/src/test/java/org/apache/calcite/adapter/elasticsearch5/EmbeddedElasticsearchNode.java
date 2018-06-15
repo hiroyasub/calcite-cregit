@@ -554,7 +554,7 @@ literal|0
 index|]
 return|;
 block|}
-comment|/**    * Exposes elastic    *<a href="https://www.elastic.co/guide/en/elasticsearch/client/java-api/current/transport-client.html">transport client</a>    * (use of HTTP client is preferred).    *    * @return ES client API on a running instance    */
+comment|/**    * Exposes an Elasticsearch    *<a href="https://www.elastic.co/guide/en/elasticsearch/client/java-api/current/transport-client.html">transport client</a>    * (use of HTTP client is preferred).    *    * @return ES client API on a running instance    */
 specifier|public
 name|Client
 name|client

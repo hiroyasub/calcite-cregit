@@ -92,12 +92,12 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Instantiates new connection to fongo (or mongo) database depending on current profile  * (unit or integration tests).  *  * By default, this rule is executed as part of a unit test and in-memory database  *<a href="https://github.com/fakemongo/fongo">fongo</a> is used.  *  *<p>However, if maven profile is set to {@code IT} (eg. via command line  * {@code $ mvn -Pit install}) this rule will connect to existing (external)  * mongo instance ({@code localhost})</p>  *  */
+comment|/**  * Instantiates a new connection to Fongo (or Mongo) database depending on the  * current profile (unit or integration tests).  *  *<p>By default, this rule is executed as part of a unit test and in-memory database  *<a href="https://github.com/fakemongo/fongo">Fongo</a> is used.  *  *<p>However, if the maven profile is set to {@code IT} (eg. via command line  * {@code $ mvn -Pit install}) this rule will connect to an existing (external)  * Mongo instance ({@code localhost}).  */
 end_comment
 
 begin_class
 class|class
-name|MongoDatabaseRule
+name|MongoDatabasePolicy
 extends|extends
 name|ExternalResource
 block|{
@@ -120,7 +120,7 @@ name|MongoClient
 name|client
 decl_stmt|;
 specifier|private
-name|MongoDatabaseRule
+name|MongoDatabasePolicy
 parameter_list|(
 name|MongoClient
 name|client
@@ -151,9 +151,9 @@ name|DB_NAME
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Create an instance based on current maven profile (as defined by {@code -Pit}).    * @return new instance of the rule to be used by unit tests    */
+comment|/**    * Creates an instance based on current maven profile (as defined by {@code -Pit}).    *    * @return new instance of the policy to be used by unit tests    */
 specifier|static
-name|MongoDatabaseRule
+name|MongoDatabasePolicy
 name|create
 parameter_list|()
 block|{
@@ -191,7 +191,7 @@ operator|=
 operator|new
 name|Fongo
 argument_list|(
-name|MongoDatabaseRule
+name|MongoDatabasePolicy
 operator|.
 name|class
 operator|.
@@ -215,7 +215,7 @@ throw|;
 block|}
 return|return
 operator|new
-name|MongoDatabaseRule
+name|MongoDatabasePolicy
 argument_list|(
 name|client
 argument_list|)
@@ -246,7 +246,7 @@ block|}
 end_class
 
 begin_comment
-comment|// End MongoDatabaseRule.java
+comment|// End MongoDatabasePolicy.java
 end_comment
 
 end_unit

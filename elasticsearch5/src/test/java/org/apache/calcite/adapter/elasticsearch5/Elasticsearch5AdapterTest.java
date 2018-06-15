@@ -101,7 +101,7 @@ name|calcite
 operator|.
 name|test
 operator|.
-name|ElasticChecker
+name|ElasticsearchChecker
 import|;
 end_import
 
@@ -344,24 +344,24 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Set of tests for ES adapter. Uses real instance via {@link EmbeddedElasticRule}. Document  * source is local {@code zips-mini.json} file (located in the classpath).  */
+comment|/**  * Set of tests for the Elasticsearch 5 adapter.  *  *<p>Uses a real instance via {@link EmbeddedElasticsearchPolicy}.  * The document source is a local {@code zips-mini.json} file  * (located in the classpath).  */
 end_comment
 
 begin_class
 specifier|public
 class|class
-name|ElasticSearch5AdapterTest
+name|Elasticsearch5AdapterTest
 block|{
 annotation|@
 name|ClassRule
-comment|//init once for all tests
+comment|// init once for all tests
 specifier|public
 specifier|static
 specifier|final
-name|EmbeddedElasticRule
-name|NODE
+name|EmbeddedElasticsearchPolicy
+name|POLICY
 init|=
-name|EmbeddedElasticRule
+name|EmbeddedElasticsearchPolicy
 operator|.
 name|create
 argument_list|()
@@ -468,7 +468,7 @@ name|endObject
 argument_list|()
 decl_stmt|;
 comment|// create index
-name|NODE
+name|POLICY
 operator|.
 name|client
 argument_list|()
@@ -497,7 +497,7 @@ expr_stmt|;
 name|BulkRequestBuilder
 name|bulk
 init|=
-name|NODE
+name|POLICY
 operator|.
 name|client
 argument_list|()
@@ -519,7 +519,7 @@ name|Resources
 operator|.
 name|readLines
 argument_list|(
-name|ElasticSearch5AdapterTest
+name|Elasticsearch5AdapterTest
 operator|.
 name|class
 operator|.
@@ -567,7 +567,7 @@ name|bulk
 operator|.
 name|add
 argument_list|(
-name|NODE
+name|POLICY
 operator|.
 name|client
 argument_list|()
@@ -666,7 +666,7 @@ argument_list|()
 argument_list|,
 literal|"Failed to populate %s:\n%s"
 argument_list|,
-name|NODE
+name|POLICY
 operator|.
 name|httpAddress
 argument_list|()
@@ -766,7 +766,7 @@ argument_list|,
 operator|new
 name|Elasticsearch5Schema
 argument_list|(
-name|NODE
+name|POLICY
 operator|.
 name|client
 argument_list|()
@@ -1133,7 +1133,7 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|ElasticChecker
+name|ElasticsearchChecker
 operator|.
 name|elasticsearchChecker
 argument_list|(
@@ -1176,7 +1176,7 @@ argument_list|()
 operator|.
 name|queryContains
 argument_list|(
-name|ElasticChecker
+name|ElasticsearchChecker
 operator|.
 name|elasticsearchChecker
 argument_list|(
@@ -1217,7 +1217,7 @@ argument_list|()
 operator|.
 name|queryContains
 argument_list|(
-name|ElasticChecker
+name|ElasticsearchChecker
 operator|.
 name|elasticsearchChecker
 argument_list|(
@@ -1284,7 +1284,7 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|ElasticChecker
+name|ElasticsearchChecker
 operator|.
 name|elasticsearchChecker
 argument_list|(
@@ -1384,7 +1384,7 @@ argument_list|()
 operator|.
 name|queryContains
 argument_list|(
-name|ElasticChecker
+name|ElasticsearchChecker
 operator|.
 name|elasticsearchChecker
 argument_list|(
@@ -1456,7 +1456,7 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|ElasticChecker
+name|ElasticsearchChecker
 operator|.
 name|elasticsearchChecker
 argument_list|(
@@ -1525,7 +1525,7 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|ElasticChecker
+name|ElasticsearchChecker
 operator|.
 name|elasticsearchChecker
 argument_list|(
@@ -1641,7 +1641,7 @@ block|}
 end_class
 
 begin_comment
-comment|// End ElasticSearch5AdapterTest.java
+comment|// End Elasticsearch5AdapterTest.java
 end_comment
 
 end_unit

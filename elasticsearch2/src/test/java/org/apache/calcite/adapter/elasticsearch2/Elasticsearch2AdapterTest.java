@@ -101,7 +101,7 @@ name|calcite
 operator|.
 name|test
 operator|.
-name|ElasticChecker
+name|ElasticsearchChecker
 import|;
 end_import
 
@@ -316,24 +316,24 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Set of tests for ES adapter. Uses real instance via {@link EmbeddedElasticRule}. Document  * source is local {@code zips-mini.json} file (located in the classpath).  */
+comment|/**  * Set of tests for the Elasticsearch 2 adapter.  *  *<p>Uses a real instance via {@link EmbeddedElasticsearchPolicy}.  * The document source is a local {@code zips-mini.json} file  * (located in the classpath).  */
 end_comment
 
 begin_class
 specifier|public
 class|class
-name|ElasticSearch2AdapterTest
+name|Elasticsearch2AdapterTest
 block|{
 annotation|@
 name|ClassRule
-comment|//init once for all tests
+comment|// init once for all tests
 specifier|public
 specifier|static
 specifier|final
-name|EmbeddedElasticRule
+name|EmbeddedElasticsearchPolicy
 name|NODE
 init|=
-name|EmbeddedElasticRule
+name|EmbeddedElasticsearchPolicy
 operator|.
 name|create
 argument_list|()
@@ -487,7 +487,7 @@ name|Resources
 operator|.
 name|readLines
 argument_list|(
-name|ElasticSearch2AdapterTest
+name|Elasticsearch2AdapterTest
 operator|.
 name|class
 operator|.
@@ -1090,7 +1090,7 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|ElasticChecker
+name|ElasticsearchChecker
 operator|.
 name|elasticsearchChecker
 argument_list|(
@@ -1133,7 +1133,7 @@ argument_list|()
 operator|.
 name|queryContains
 argument_list|(
-name|ElasticChecker
+name|ElasticsearchChecker
 operator|.
 name|elasticsearchChecker
 argument_list|(
@@ -1174,7 +1174,7 @@ argument_list|()
 operator|.
 name|queryContains
 argument_list|(
-name|ElasticChecker
+name|ElasticsearchChecker
 operator|.
 name|elasticsearchChecker
 argument_list|(
@@ -1241,7 +1241,7 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|ElasticChecker
+name|ElasticsearchChecker
 operator|.
 name|elasticsearchChecker
 argument_list|(
@@ -1341,7 +1341,7 @@ argument_list|()
 operator|.
 name|queryContains
 argument_list|(
-name|ElasticChecker
+name|ElasticsearchChecker
 operator|.
 name|elasticsearchChecker
 argument_list|(
@@ -1413,7 +1413,7 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|ElasticChecker
+name|ElasticsearchChecker
 operator|.
 name|elasticsearchChecker
 argument_list|(
@@ -1482,7 +1482,7 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|ElasticChecker
+name|ElasticsearchChecker
 operator|.
 name|elasticsearchChecker
 argument_list|(
@@ -1598,7 +1598,7 @@ block|}
 end_class
 
 begin_comment
-comment|// End ElasticSearch2AdapterTest.java
+comment|// End Elasticsearch2AdapterTest.java
 end_comment
 
 end_unit

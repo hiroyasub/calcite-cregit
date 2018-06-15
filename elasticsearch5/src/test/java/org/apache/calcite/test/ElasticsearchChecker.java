@@ -50,20 +50,20 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Internal util methods for ElasticSearch tests  */
+comment|/**  * Utility methods for Elasticsearch tests.  */
 end_comment
 
 begin_class
 specifier|public
 class|class
-name|ElasticChecker
+name|ElasticsearchChecker
 block|{
 specifier|private
-name|ElasticChecker
+name|ElasticsearchChecker
 parameter_list|()
 block|{
 block|}
-comment|/** Returns a function that checks that a particular Elasticsearch pipeline is    * generated to implement a query.    *    * @param strings list of expected queries    * @return function to perform the check    */
+comment|/**    * Returns a function that checks that a particular Elasticsearch pipeline is    * generated to implement a query.    *    * @param strings expected expressions    * @return validation function    */
 specifier|public
 specifier|static
 name|Function
@@ -156,7 +156,7 @@ block|}
 end_class
 
 begin_comment
-comment|// End ElasticChecker.java
+comment|// End ElasticsearchChecker.java
 end_comment
 
 end_unit

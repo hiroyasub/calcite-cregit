@@ -434,7 +434,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Testing mongo adapter functionality. By default runs with  *<a href="https://github.com/fakemongo/fongo">Fongo</a> unless {@code IT} maven profile is enabled  * (via {@code $ mvn -Pit install}).  */
+comment|/**  * Testing mongo adapter functionality. By default runs with  *<a href="https://github.com/fakemongo/fongo">Fongo</a> unless {@code IT} maven profile is enabled  * (via {@code $ mvn -Pit install}).  *  * @see MongoDatabasePolicy  */
 end_comment
 
 begin_class
@@ -474,10 +474,10 @@ name|ClassRule
 specifier|public
 specifier|static
 specifier|final
-name|MongoDatabaseRule
-name|RULE
+name|MongoDatabasePolicy
+name|POLICY
 init|=
-name|MongoDatabaseRule
+name|MongoDatabasePolicy
 operator|.
 name|create
 argument_list|()
@@ -500,7 +500,7 @@ block|{
 name|MongoDatabase
 name|database
 init|=
-name|RULE
+name|POLICY
 operator|.
 name|database
 argument_list|()
@@ -620,8 +620,7 @@ literal|"yyyy-MM-dd"
 argument_list|,
 name|Locale
 operator|.
-name|getDefault
-argument_list|()
+name|ROOT
 argument_list|)
 operator|.
 name|parse
@@ -1563,8 +1562,7 @@ name|format
 argument_list|(
 name|Locale
 operator|.
-name|getDefault
-argument_list|()
+name|ROOT
 argument_list|,
 literal|"EXPR$0=%d\n"
 argument_list|,
@@ -1621,8 +1619,7 @@ name|format
 argument_list|(
 name|Locale
 operator|.
-name|getDefault
-argument_list|()
+name|ROOT
 argument_list|,
 literal|"EXPR$0=%d\n"
 argument_list|,

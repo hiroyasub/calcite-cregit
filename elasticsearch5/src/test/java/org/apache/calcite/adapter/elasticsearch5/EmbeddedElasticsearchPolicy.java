@@ -13,7 +13,7 @@ name|calcite
 operator|.
 name|adapter
 operator|.
-name|elasticsearch2
+name|elasticsearch5
 package|;
 end_package
 
@@ -70,12 +70,12 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Used to initialize a single elastic node. For performance reasons (node startup costs),  * same instance is usually shared across multiple tests.  *  * This rule should be used as follows:  *<pre>  *  *  public class MyTest {  *&#64;ClassRule  *    public static final ElasticSearchRule RULE = ElasticSearchRule.create();  *  *&#64;BeforeClass  *    public static void setup() {  *       // ... populate instance  *    }  *  *&#64;Test  *    public void myTest() {  *      TransportAddress address = RULE.httpAddress();  *      // .... (connect)  *    }  * }  *</pre>  *  * @see ExternalResource  */
+comment|/**  * Junit rule that is used to initialize a single Elasticsearch node for tests.  *  *<p>For performance reasons (node startup costs),  * the same instance is usually shared across multiple tests.  *  *<p>This rule should be used as follows:  *<pre>  *  *  public class MyTest {  *&#64;ClassRule  *    public static final ElasticSearchRule RULE = ElasticSearchRule.create();  *  *&#64;BeforeClass  *    public static void setup() {  *       // ... populate instance  *    }  *  *&#64;Test  *    public void myTest() {  *      TransportAddress address = RULE.httpAddress();  *      // .... (connect to ES)  *    }  *  }  *</pre>  *  * @see ExternalResource  */
 end_comment
 
 begin_class
 class|class
-name|EmbeddedElasticRule
+name|EmbeddedElasticsearchPolicy
 extends|extends
 name|ExternalResource
 block|{
@@ -151,58 +151,11 @@ throw|;
 block|}
 block|}
 comment|/**    * Factory method to create this rule.    *    * @return new rule instance to be used in unit tests    */
-operator|<<
-operator|<<
-operator|<<
-operator|<
-name|HEAD
-operator|:
-name|elasticsearch2
-operator|/
-name|src
-operator|/
-name|test
-operator|/
-name|java
-operator|/
-name|org
-operator|/
-name|apache
-operator|/
-name|calcite
-operator|/
-name|adapter
-operator|/
-name|elasticsearch2
-operator|/
-name|EmbeddedElasticRule
-operator|.
-name|java
-specifier|public
-specifier|static
-name|EmbeddedElasticRule
-name|create
-argument_list|()
-block|{
-return|return
-operator|new
-name|EmbeddedElasticRule
-argument_list|(
-name|EmbeddedElasticNode
-operator|.
-name|create
-argument_list|()
-argument_list|)
-return|;
-operator|==
-operator|==
-operator|==
-operator|=
 specifier|public
 specifier|static
 name|EmbeddedElasticsearchPolicy
 name|create
-argument_list|()
+parameter_list|()
 block|{
 return|return
 operator|new
@@ -214,40 +167,11 @@ name|create
 argument_list|()
 argument_list|)
 return|;
-operator|>>>
-operator|>>>
-operator|>
-literal|54c598206
-operator|...
-name|more
-literal|2380
-operator|:
-name|elasticsearch5
-operator|/
-name|src
-operator|/
-name|test
-operator|/
-name|java
-operator|/
-name|org
-operator|/
-name|apache
-operator|/
-name|calcite
-operator|/
-name|adapter
-operator|/
-name|elasticsearch5
-operator|/
-name|EmbeddedElasticsearchPolicy
-operator|.
-name|java
 block|}
-comment|/**    * Exposes current ES transport client.    *    * @return initialized instance of ES    */
+comment|/**    * Exposes current ES transport client.    * @return running (and initialized) instance of ES node    */
 name|Client
 name|client
-argument_list|()
+parameter_list|()
 block|{
 return|return
 name|node
@@ -256,10 +180,10 @@ name|client
 argument_list|()
 return|;
 block|}
-comment|/**    * HTTP address for rest clients (can be ES native or any other).    *<<<<<<< HEAD:elasticsearch2/src/test/java/org/apache/calcite/adapter/elasticsearch2/EmbeddedElasticRule.java    * @return HTTP hostname/port to connect to this ES instance =======    * @return {@code HTTP} connection parameters>>>>>>> 54c598206... more 2380:elasticsearch5/src/test/java/org/apache/calcite/adapter/elasticsearch5/EmbeddedElasticsearchPolicy.java    */
+comment|/**    * HTTP address for rest clients (can be ES native or any other).    *    * @return {@code HTTP} connection parameters    */
 name|TransportAddress
 name|httpAddress
-argument_list|()
+parameter_list|()
 block|{
 return|return
 name|node
@@ -272,7 +196,7 @@ block|}
 end_class
 
 begin_comment
-comment|// End EmbeddedElasticRule.java
+comment|// End EmbeddedElasticsearchPolicy.java
 end_comment
 
 end_unit

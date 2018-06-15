@@ -590,8 +590,7 @@ name|format
 argument_list|(
 name|Locale
 operator|.
-name|getDefault
-argument_list|()
+name|ROOT
 argument_list|,
 literal|"No result for %s"
 argument_list|,

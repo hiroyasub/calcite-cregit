@@ -5113,6 +5113,10 @@ block|,
 name|Locale
 operator|.
 name|TRADITIONAL_CHINESE
+block|,
+name|Locale
+operator|.
+name|ROOT
 block|,     }
 decl_stmt|;
 for|for
