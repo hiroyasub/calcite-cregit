@@ -508,7 +508,9 @@ name|path
 operator|.
 name|replace
 argument_list|(
-literal|'/'
+name|File
+operator|.
+name|separatorChar
 argument_list|,
 literal|'_'
 argument_list|)
