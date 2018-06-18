@@ -475,6 +475,16 @@ name|void
 name|testDu
 parameter_list|()
 block|{
+name|Assume
+operator|.
+name|assumeFalse
+argument_list|(
+literal|"Skip: the 'du' table does not work on Windows"
+argument_list|,
+name|isWindows
+argument_list|()
+argument_list|)
+expr_stmt|;
 name|sql
 argument_list|(
 literal|"select * from du"
@@ -587,6 +597,16 @@ name|void
 name|testDuFilterSortLimit
 parameter_list|()
 block|{
+name|Assume
+operator|.
+name|assumeFalse
+argument_list|(
+literal|"Skip: the 'du' table does not work on Windows"
+argument_list|,
+name|isWindows
+argument_list|()
+argument_list|)
+expr_stmt|;
 name|sql
 argument_list|(
 literal|"select * from du where path like '%/src/test/java/%'\n"
