@@ -848,8 +848,6 @@ name|testScannableTableFunction
 parameter_list|()
 throws|throws
 name|SQLException
-throws|,
-name|ClassNotFoundException
 block|{
 name|Connection
 name|connection
@@ -972,8 +970,6 @@ name|testScannableTableFunctionWithNamedParameters
 parameter_list|()
 throws|throws
 name|SQLException
-throws|,
-name|ClassNotFoundException
 block|{
 name|Connection
 name|connection
@@ -1175,8 +1171,6 @@ name|testMultipleScannableTableFunctionWithNamedParameters
 parameter_list|()
 throws|throws
 name|SQLException
-throws|,
-name|ClassNotFoundException
 block|{
 try|try
 init|(
@@ -1454,8 +1448,6 @@ name|testTableFunctionDynamicStructure
 parameter_list|()
 throws|throws
 name|SQLException
-throws|,
-name|ClassNotFoundException
 block|{
 name|Connection
 name|connection
@@ -1526,8 +1518,6 @@ name|testTableFunctionNonNullableMustBeLiterals
 parameter_list|()
 throws|throws
 name|SQLException
-throws|,
-name|ClassNotFoundException
 block|{
 name|Connection
 name|connection
@@ -1698,8 +1688,6 @@ name|testTableFunctionCursorInputs
 parameter_list|()
 throws|throws
 name|SQLException
-throws|,
-name|ClassNotFoundException
 block|{
 try|try
 init|(
@@ -1866,8 +1854,6 @@ name|testTableFunctionCursorsInputs
 parameter_list|()
 throws|throws
 name|SQLException
-throws|,
-name|ClassNotFoundException
 block|{
 try|try
 init|(
@@ -2021,6 +2007,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+comment|/** Tests a query with a table function in the FROM clause.    *    * @see Smalls#multiplicationTable */
 annotation|@
 name|Test
 name|void
@@ -2053,6 +2040,7 @@ literal|"row_name=row 2; c1=103; c2=106"
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Tests a query with a table function in the FROM clause,    * attempting to reference a column from the table function in the WHERE    * clause but getting the case wrong.    *    * @see Smalls#multiplicationTable */
 annotation|@
 name|Test
 name|void
@@ -2083,6 +2071,7 @@ literal|"Column 'C1' not found in any table; did you mean 'c1'?"
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Tests a query with a table function in the FROM clause,    * referencing columns in the WHERE clause.    *    * @see Smalls#multiplicationTable */
 annotation|@
 name|Test
 name|void
@@ -2113,6 +2102,7 @@ literal|"c1=103"
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** As {@link #testUserDefinedTableFunction3()}, but provides a character    * literal argument for an integer parameter. */
 annotation|@
 name|Test
 name|void

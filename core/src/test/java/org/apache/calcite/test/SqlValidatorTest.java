@@ -31513,12 +31513,148 @@ argument_list|)
 expr_stmt|;
 name|sql
 argument_list|(
+literal|"select * from table(abs(-1))"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"(?s)Encountered \"abs\" at .*"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select * from table(1 + 2)"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"(?s)Encountered \"1\" at .*"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
 literal|"select * from table(^nonExistentRamp('3')^)"
 argument_list|)
 operator|.
 name|fails
 argument_list|(
 literal|"No match found for function signature NONEXISTENTRAMP\\(<CHARACTER>\\)"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select * from table(^bad_ramp(3)^)"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Argument must be a table function: BAD_RAMP"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select * from table(^bad_table_function(3)^)"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Table function should have CURSOR type, not"
+operator|+
+literal|" RecordType\\(INTEGER I\\)"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Tests that Calcite gives an error if a table function is used anywhere    * that a scalar expression is expected. */
+annotation|@
+name|Test
+name|void
+name|testTableFunctionAsExpression
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"select ^ramp(3)^ from (values (1))"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Cannot call table function here: 'RAMP'"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select * from (values (1)) where ^ramp(3)^"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"WHERE clause must be a condition"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select * from (values (1)) where ^ramp(3) and 1 = 1^"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Cannot apply 'AND' to arguments of type '<CURSOR> AND "
+operator|+
+literal|"<BOOLEAN>'\\. Supported form\\(s\\): '<BOOLEAN> AND<BOOLEAN>'"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select * from (values (1)) where ^ramp(3) is not null^"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Cannot apply 'IS NOT NULL' to arguments of type '<CURSOR> IS"
+operator|+
+literal|" NOT NULL'\\. Supported form\\(s\\): '<ANY> IS NOT NULL'"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select ^sum(ramp(3))^ from (values (1))"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Cannot apply 'SUM' to arguments of type 'SUM\\(<CURSOR>\\)'\\. "
+operator|+
+literal|"Supported form\\(s\\): 'SUM\\(<NUMERIC>\\)'"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select * from (values (1)) group by ^ramp(3)^"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Cannot call table function here: 'RAMP'"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select count(*) from (values (1)) having ^ramp(3)^"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"HAVING clause must be a condition"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select * from (values (1)) order by ^ramp(3)^ asc, 1 desc"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Cannot call table function here: 'RAMP'"
 argument_list|)
 expr_stmt|;
 block|}
@@ -45503,7 +45639,7 @@ argument_list|)
 operator|.
 name|type
 argument_list|(
-literal|"RecordType(BIGINT A, BIGINT B) NOT NULL"
+literal|"RecordType(BIGINT NOT NULL A, BIGINT B) NOT NULL"
 argument_list|)
 expr_stmt|;
 block|}

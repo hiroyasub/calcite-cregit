@@ -275,6 +275,24 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+comment|/**    * Gets the value of a literal operand as a Calcite type.    *    * @param ordinal zero-based ordinal of operand of interest    * @param type Desired valued type    *    * @return value of operand    */
+specifier|public
+name|Object
+name|getOperandLiteralValue
+parameter_list|(
+name|int
+name|ordinal
+parameter_list|,
+name|RelDataType
+name|type
+parameter_list|)
+block|{
+throw|throw
+operator|new
+name|UnsupportedOperationException
+argument_list|()
+throw|;
+block|}
 annotation|@
 name|Deprecated
 comment|// to be removed before 2.0

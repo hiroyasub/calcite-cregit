@@ -229,6 +229,9 @@ block|,
 name|COLUMN_LIST
 block|,
 name|GEO
+block|,
+comment|/** Like ANY, but do not even validate the operand. It may not be an    * expression. */
+name|IGNORE
 block|;
 specifier|private
 specifier|static

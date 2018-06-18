@@ -2594,6 +2594,21 @@ function_decl|;
 annotation|@
 name|BaseMessage
 argument_list|(
+literal|"Cannot call table function here: ''{0}''"
+argument_list|)
+name|ExInst
+argument_list|<
+name|CalciteException
+argument_list|>
+name|cannotCallTableFunctionHere
+parameter_list|(
+name|String
+name|a0
+parameter_list|)
+function_decl|;
+annotation|@
+name|BaseMessage
+argument_list|(
 literal|"''{0}'' is not a valid datetime format"
 argument_list|)
 name|ExInst

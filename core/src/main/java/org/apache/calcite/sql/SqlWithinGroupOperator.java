@@ -146,7 +146,7 @@ literal|null
 argument_list|,
 name|OperandTypes
 operator|.
-name|ANY_ANY
+name|ANY_IGNORE
 argument_list|)
 expr_stmt|;
 block|}
@@ -228,17 +228,12 @@ argument_list|(
 literal|"ORDER BY"
 argument_list|)
 expr_stmt|;
-operator|(
-operator|(
-name|SqlNodeList
-operator|)
 name|call
 operator|.
 name|operand
 argument_list|(
 literal|1
 argument_list|)
-operator|)
 operator|.
 name|unparse
 argument_list|(

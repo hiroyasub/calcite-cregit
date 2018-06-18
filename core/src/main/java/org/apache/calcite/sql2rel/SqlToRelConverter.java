@@ -13409,12 +13409,7 @@ name|udf
 operator|.
 name|getTable
 argument_list|(
-name|typeFactory
-argument_list|,
 name|callBinding
-operator|.
-name|operands
-argument_list|()
 argument_list|)
 decl_stmt|;
 specifier|final
@@ -13497,12 +13492,7 @@ name|udtf
 operator|.
 name|getElementType
 argument_list|(
-name|typeFactory
-argument_list|,
 name|callBinding
-operator|.
-name|operands
-argument_list|()
 argument_list|)
 expr_stmt|;
 block|}

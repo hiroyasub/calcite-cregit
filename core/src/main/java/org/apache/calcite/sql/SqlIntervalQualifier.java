@@ -246,6 +246,16 @@ import|;
 end_import
 
 begin_import
+import|import
+name|javax
+operator|.
+name|annotation
+operator|.
+name|Nonnull
+import|;
+end_import
+
+begin_import
 import|import static
 name|org
 operator|.
@@ -434,6 +444,21 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
+annotation|@
+name|Nonnull
+annotation|@
+name|Override
+specifier|public
+name|SqlKind
+name|getKind
+parameter_list|()
+block|{
+return|return
+name|SqlKind
+operator|.
+name|INTERVAL_QUALIFIER
+return|;
+block|}
 specifier|public
 name|SqlTypeName
 name|typeName

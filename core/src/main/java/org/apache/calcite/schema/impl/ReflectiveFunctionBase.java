@@ -454,6 +454,36 @@ operator|new
 name|FunctionParameter
 argument_list|()
 block|{
+annotation|@
+name|Override
+specifier|public
+name|String
+name|toString
+parameter_list|()
+block|{
+return|return
+name|ordinal
+operator|+
+literal|": "
+operator|+
+name|name
+operator|+
+literal|" "
+operator|+
+name|type
+operator|.
+name|getSimpleName
+argument_list|()
+operator|+
+operator|(
+name|optional
+condition|?
+literal|"?"
+else|:
+literal|""
+operator|)
+return|;
+block|}
 specifier|public
 name|int
 name|getOrdinal

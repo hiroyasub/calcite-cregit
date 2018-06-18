@@ -140,7 +140,7 @@ literal|null
 argument_list|,
 name|OperandTypes
 operator|.
-name|ANY
+name|CURSOR
 argument_list|)
 expr_stmt|;
 name|this

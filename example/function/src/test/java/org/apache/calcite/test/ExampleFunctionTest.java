@@ -367,8 +367,6 @@ name|maze
 parameter_list|)
 throws|throws
 name|SQLException
-throws|,
-name|ClassNotFoundException
 block|{
 name|Connection
 name|connection

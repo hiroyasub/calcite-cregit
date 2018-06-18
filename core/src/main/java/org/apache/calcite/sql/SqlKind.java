@@ -113,6 +113,9 @@ block|,
 comment|/** A literal. */
 name|LITERAL
 block|,
+comment|/** Interval qualifier. */
+name|INTERVAL_QUALIFIER
+block|,
 comment|/**    * Function that is not a special function.    *    * @see #FUNCTION    */
 name|OTHER_FUNCTION
 block|,

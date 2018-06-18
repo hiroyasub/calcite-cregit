@@ -156,7 +156,7 @@ name|RETURN_TYPE
 argument_list|,
 name|OperandTypes
 operator|.
-name|ANY_ANY
+name|ANY_IGNORE
 argument_list|)
 expr_stmt|;
 block|}
