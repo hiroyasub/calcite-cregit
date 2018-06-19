@@ -984,13 +984,13 @@ operator|+
 literal|"order by state, id offset 2 rows fetch next 3 rows only"
 argument_list|)
 operator|.
-name|returns
+name|returnsOrdered
 argument_list|(
-literal|"STATE=AK; ID=99801\n"
-operator|+
-literal|"STATE=AL; ID=35215\n"
-operator|+
-literal|"STATE=AL; ID=35401\n"
+literal|"STATE=AK; ID=99801"
+argument_list|,
+literal|"STATE=AL; ID=35215"
+argument_list|,
+literal|"STATE=AL; ID=35401"
 argument_list|)
 operator|.
 name|queryContains
@@ -1190,15 +1190,15 @@ argument_list|(
 literal|4
 argument_list|)
 operator|.
-name|returns
+name|returnsOrdered
 argument_list|(
-literal|"CITY=BECKLEY; LONGITUDE=null; LATITUDE=null; POP=45196; STATE=WV; ID=25801\n"
-operator|+
-literal|"CITY=ROCKERVILLE; LONGITUDE=null; LATITUDE=null; POP=45328; STATE=SD; ID=57701\n"
-operator|+
-literal|"CITY=PAWTUCKET; LONGITUDE=null; LATITUDE=null; POP=45442; STATE=RI; ID=02860\n"
-operator|+
-literal|"CITY=LAWTON; LONGITUDE=null; LATITUDE=null; POP=45542; STATE=OK; ID=73505\n"
+literal|"CITY=BECKLEY; LONGITUDE=null; LATITUDE=null; POP=45196; STATE=WV; ID=25801"
+argument_list|,
+literal|"CITY=ROCKERVILLE; LONGITUDE=null; LATITUDE=null; POP=45328; STATE=SD; ID=57701"
+argument_list|,
+literal|"CITY=PAWTUCKET; LONGITUDE=null; LATITUDE=null; POP=45442; STATE=RI; ID=02860"
+argument_list|,
+literal|"CITY=LAWTON; LONGITUDE=null; LATITUDE=null; POP=45542; STATE=OK; ID=73505"
 argument_list|)
 expr_stmt|;
 block|}
@@ -1665,11 +1665,11 @@ argument_list|(
 literal|2
 argument_list|)
 operator|.
-name|returns
+name|returnsUnordered
 argument_list|(
-literal|"EXPR$0=2\n"
-operator|+
-literal|"EXPR$0=2\n"
+literal|"EXPR$0=2"
+argument_list|,
+literal|"EXPR$0=2"
 argument_list|)
 operator|.
 name|queryContains
@@ -1708,12 +1708,12 @@ argument_list|)
 operator|.
 name|limit
 argument_list|(
-literal|2
+literal|3
 argument_list|)
 operator|.
 name|returns
 argument_list|(
-literal|"STATE=AK; C=3\nSTATE=AL; C=3\n"
+literal|"STATE=AK; C=3\nSTATE=AL; C=3\nSTATE=AR; C=3\n"
 argument_list|)
 operator|.
 name|queryContains
@@ -2187,20 +2187,22 @@ literal|"from zips\n"
 operator|+
 literal|"group by state\n"
 operator|+
-literal|"order by cdc desc limit 5"
+literal|"order by cdc desc, state\n"
+operator|+
+literal|"limit 5"
 argument_list|)
 operator|.
 name|returns
 argument_list|(
-literal|"STATE=VA; CDC=3\n"
+literal|"STATE=AK; CDC=3\n"
 operator|+
-literal|"STATE=NY; CDC=3\n"
+literal|"STATE=AL; CDC=3\n"
 operator|+
-literal|"STATE=SC; CDC=3\n"
+literal|"STATE=AR; CDC=3\n"
 operator|+
-literal|"STATE=RI; CDC=3\n"
+literal|"STATE=AZ; CDC=3\n"
 operator|+
-literal|"STATE=WV; CDC=3\n"
+literal|"STATE=CA; CDC=3\n"
 argument_list|)
 operator|.
 name|queryContains
@@ -2217,7 +2219,7 @@ literal|"{$group: {_id: '$STATE', CDC: {$sum: {$cond: [ {$eq: ['CITY', null]}, 0
 argument_list|,
 literal|"{$project: {STATE: '$_id', CDC: '$CDC'}}"
 argument_list|,
-literal|"{$sort: {CDC: -1}}"
+literal|"{$sort: {CDC: -1, STATE: 1}}"
 argument_list|,
 literal|"{$limit: 5}"
 argument_list|)
@@ -2290,14 +2292,16 @@ argument_list|)
 operator|.
 name|limit
 argument_list|(
-literal|2
+literal|3
 argument_list|)
 operator|.
-name|returns
+name|returnsUnordered
 argument_list|(
-literal|"STATE=CA; CITY=LOS ANGELES\n"
-operator|+
-literal|"STATE=CA; CITY=BELL GARDENS\n"
+literal|"STATE=CA; CITY=LOS ANGELES"
+argument_list|,
+literal|"STATE=CA; CITY=BELL GARDENS"
+argument_list|,
+literal|"STATE=CA; CITY=NORWALK"
 argument_list|)
 operator|.
 name|explainContains
@@ -2327,17 +2331,21 @@ argument_list|)
 operator|.
 name|query
 argument_list|(
-literal|"select state, city from zips where 'WI'< state"
+literal|"select state, city from zips where 'WI'< state order by state, city"
 argument_list|)
 operator|.
 name|limit
 argument_list|(
-literal|2
+literal|3
 argument_list|)
 operator|.
-name|returns
+name|returnsOrdered
 argument_list|(
-literal|"STATE=WV; CITY=BECKLEY\nSTATE=WV; CITY=ELM GROVE\n"
+literal|"STATE=WV; CITY=BECKLEY"
+argument_list|,
+literal|"STATE=WV; CITY=ELM GROVE"
+argument_list|,
+literal|"STATE=WV; CITY=STAR CITY"
 argument_list|)
 expr_stmt|;
 name|assertModel
@@ -2347,19 +2355,21 @@ argument_list|)
 operator|.
 name|query
 argument_list|(
-literal|"select state, city from zips where state> 'WI'"
+literal|"select state, city from zips where state> 'WI' order by state, city"
 argument_list|)
 operator|.
 name|limit
 argument_list|(
-literal|2
+literal|3
 argument_list|)
 operator|.
-name|returns
+name|returnsOrdered
 argument_list|(
-literal|"STATE=WV; CITY=BECKLEY\n"
-operator|+
-literal|"STATE=WV; CITY=ELM GROVE\n"
+literal|"STATE=WV; CITY=BECKLEY"
+argument_list|,
+literal|"STATE=WV; CITY=ELM GROVE"
+argument_list|,
+literal|"STATE=WV; CITY=STAR CITY"
 argument_list|)
 expr_stmt|;
 block|}
