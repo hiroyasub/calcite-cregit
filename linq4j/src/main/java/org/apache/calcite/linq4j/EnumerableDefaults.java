@@ -5692,6 +5692,11 @@ name|list
 argument_list|)
 expr_stmt|;
 name|outers
+operator|.
+name|close
+argument_list|()
+expr_stmt|;
+name|outers
 operator|=
 name|Linq4j
 operator|.
