@@ -317,8 +317,7 @@ specifier|final
 name|Client
 name|client
 decl_stmt|;
-comment|/**    * Creates an Elasticsearch5Table.    */
-specifier|public
+comment|/**    * Creates an Elasticsearch5Table.    * @param client existing ES instance    * @param indexName ES index name    * @param typeName ES type    */
 name|Elasticsearch5Table
 parameter_list|(
 name|Client

@@ -1072,7 +1072,7 @@ name|operations
 argument_list|)
 return|;
 block|}
-comment|/** Called via code-generation.      *      * @see org.apache.calcite.adapter.mongodb.MongoMethod#MONGO_QUERYABLE_FIND      */
+comment|/** Called via code-generation.      *      * @param filterJson Filter document      * @param projectJson Projection document      * @param fields List of expected fields (and their types)      * @return result of mongo query      *      * @see org.apache.calcite.adapter.mongodb.MongoMethod#MONGO_QUERYABLE_FIND      */
 annotation|@
 name|SuppressWarnings
 argument_list|(

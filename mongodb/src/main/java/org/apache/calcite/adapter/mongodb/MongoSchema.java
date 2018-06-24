@@ -176,8 +176,7 @@ specifier|final
 name|MongoDatabase
 name|mongoDb
 decl_stmt|;
-comment|/**    * Creates a MongoDB schema.    *    * @param host Mongo host, e.g. "localhost"    * @param database Mongo database name, e.g. "foodmart"    */
-specifier|public
+comment|/**    * Creates a MongoDB schema.    *    * @param host Mongo host, e.g. "localhost"    * @param credentialsList Optional credentials (empty list for none)    * @param options Mongo connection options    * @param database Mongo database name, e.g. "foodmart"    */
 name|MongoSchema
 parameter_list|(
 name|String

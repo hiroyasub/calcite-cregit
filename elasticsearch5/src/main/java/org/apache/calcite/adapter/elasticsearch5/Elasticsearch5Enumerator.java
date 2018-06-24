@@ -391,7 +391,7 @@ block|}
 block|}
 return|;
 block|}
-comment|/**    * Function that extracts a given set of fields from {@link SearchHit}    * objects.    *    * @param fields List of fields to project    */
+comment|/**    * Function that extracts a given set of fields from {@link SearchHit}    * objects.    *    * @param fields List of fields to project    * @return conversion function to transform ES search result into a generic array    */
 specifier|private
 specifier|static
 name|Function1

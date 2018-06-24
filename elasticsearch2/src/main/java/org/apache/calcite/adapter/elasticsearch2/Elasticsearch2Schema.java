@@ -517,7 +517,7 @@ literal|null
 expr_stmt|;
 block|}
 block|}
-comment|/**    * Allows schema to be instantiated from existing elastic search client.    * This constructor is used in tests.    */
+comment|/**    * Allows schema to be instantiated from existing elastic search client.    * This constructor is used in tests.    *    * @param client Existing (injectable) client instance    * @param index Index name    */
 annotation|@
 name|VisibleForTesting
 name|Elasticsearch2Schema

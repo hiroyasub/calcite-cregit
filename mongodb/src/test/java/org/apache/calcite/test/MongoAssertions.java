@@ -171,7 +171,7 @@ name|MongoAssertions
 parameter_list|()
 block|{
 block|}
-comment|/** Similar to {@link CalciteAssert#checkResultUnordered}, but filters strings    * before comparing them. */
+comment|/**    * Similar to {@link CalciteAssert#checkResultUnordered}, but filters strings    * before comparing them.    *    * @param lines Expected expressions    * @return validation function    */
 specifier|public
 specifier|static
 name|Function
@@ -350,7 +350,7 @@ block|}
 block|}
 return|;
 block|}
-comment|/**    * Whether to run Mongo integration tests. Enabled by default, however test is only    * included if "it" profile is activated ({@code -Pit}). To disable,    * specify {@code -Dcalcite.test.mongodb=false} on the Java command line.    */
+comment|/**    * Whether to run Mongo integration tests. Enabled by default, however test is only    * included if "it" profile is activated ({@code -Pit}). To disable,    * specify {@code -Dcalcite.test.mongodb=false} on the Java command line.    *    * @return Whether current tests should use an external mongo instance    */
 specifier|public
 specifier|static
 name|boolean
@@ -375,7 +375,7 @@ literal|true
 argument_list|)
 return|;
 block|}
-comment|/**    * Checks wherever tests should use Fongo instead of Mongo. Opposite of {@link #useMongo()}.    */
+comment|/**    * Checks wherever tests should use Fongo instead of Mongo. Opposite of {@link #useMongo()}.    *    * @return Whether current tests should use embedded    *<a href="https://github.com/fakemongo/fongo">Fongo</a> instance    */
 specifier|public
 specifier|static
 name|boolean

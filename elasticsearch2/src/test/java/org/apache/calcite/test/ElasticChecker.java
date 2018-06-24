@@ -63,7 +63,7 @@ name|ElasticChecker
 parameter_list|()
 block|{
 block|}
-comment|/** Returns a function that checks that a particular Elasticsearch pipeline is    * generated to implement a query. */
+comment|/** Returns a function that checks that a particular Elasticsearch pipeline is    * generated to implement a query.    *    * @param strings list of expected queries    * @return function to perform the check    */
 specifier|public
 specifier|static
 name|Function

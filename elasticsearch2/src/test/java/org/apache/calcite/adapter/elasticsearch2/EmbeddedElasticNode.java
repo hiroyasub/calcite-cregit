@@ -314,7 +314,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**    * Creates an instance with existing settings    */
+comment|/**    * Creates an instance with existing settings    *    * @param settings ES settings for the node    * @return un-started node; call {@link #start()} to start the instance    */
 specifier|private
 specifier|static
 name|EmbeddedElasticNode
@@ -351,7 +351,7 @@ name|node
 argument_list|)
 return|;
 block|}
-comment|/**    * Creates elastic node as single member of a cluster. Node will not be started    * unless {@link #start()} is explicitly called.    */
+comment|/**    * Creates elastic node as single member of a cluster. Node will not be started    * unless {@link #start()} is explicitly called.    *    * @return node with default configuration    */
 specifier|public
 specifier|static
 name|EmbeddedElasticNode
@@ -501,7 +501,7 @@ operator|=
 literal|true
 expr_stmt|;
 block|}
-comment|/**    * Returns current address to connect to with HTTP client.    */
+comment|/**    * Returns the current address to connect to with HTTP client.    *    * @return {@code HTTP} address (hostname / port)    */
 specifier|public
 name|TransportAddress
 name|httpAddress
@@ -591,7 +591,7 @@ literal|0
 index|]
 return|;
 block|}
-comment|/**    * Exposes elastic    *<a href="https://www.elastic.co/guide/en/elasticsearch/client/java-api/current/transport-client.html">transport client</a>    *    * (use of HTTP client is preferred).    */
+comment|/**    * Exposes elastic    *<a href="https://www.elastic.co/guide/en/elasticsearch/client/java-api/current/transport-client.html">transport client</a>    * (use of HTTP client is preferred).    *    * @return client API to access ES functionality    */
 specifier|public
 name|Client
 name|client

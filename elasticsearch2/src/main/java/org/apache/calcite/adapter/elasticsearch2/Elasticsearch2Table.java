@@ -175,8 +175,7 @@ specifier|final
 name|Client
 name|client
 decl_stmt|;
-comment|/**    * Creates an Elasticsearch2Table.    */
-specifier|public
+comment|/**    * Creates an Elasticsearch2Table.    *    * @param client Existing ES instance    * @param indexName Name of the index    * @param typeName Index type    */
 name|Elasticsearch2Table
 parameter_list|(
 name|Client

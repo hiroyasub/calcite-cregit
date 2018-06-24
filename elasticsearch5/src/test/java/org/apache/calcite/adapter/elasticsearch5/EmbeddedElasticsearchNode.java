@@ -233,7 +233,7 @@ end_comment
 
 begin_class
 class|class
-name|EmbeddedElasticNode
+name|EmbeddedElasticsearchNode
 implements|implements
 name|AutoCloseable
 block|{
@@ -248,7 +248,7 @@ name|boolean
 name|isStarted
 decl_stmt|;
 specifier|private
-name|EmbeddedElasticNode
+name|EmbeddedElasticsearchNode
 parameter_list|(
 name|Node
 name|node
@@ -268,10 +268,10 @@ literal|"node"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Creates an instance with existing settings    */
+comment|/**    * Creates an instance with existing settings    *    * @param settings ES configuration    * @return un-initialized node. Use {@link #start()} explicitly.    */
 specifier|private
 specifier|static
-name|EmbeddedElasticNode
+name|EmbeddedElasticsearchNode
 name|create
 parameter_list|(
 name|Settings
@@ -303,16 +303,16 @@ argument_list|)
 decl_stmt|;
 return|return
 operator|new
-name|EmbeddedElasticNode
+name|EmbeddedElasticsearchNode
 argument_list|(
 name|node
 argument_list|)
 return|;
 block|}
-comment|/**    * Creates elastic node as single member of a cluster. Node will not be started    * unless {@link #start()} is explicitly called.    */
+comment|/**    * Creates elastic node as single member of a cluster. Node will not be started    * unless {@link #start()} is explicitly called.    *    * @return un-initialized node. Use {@link #start()} explicitly.    */
 specifier|public
 specifier|static
-name|EmbeddedElasticNode
+name|EmbeddedElasticsearchNode
 name|create
 parameter_list|()
 block|{
@@ -461,8 +461,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/**    * Returns current address to connect to with HTTP client.    */
-specifier|public
+comment|/**    * Returns the current address to connect to with HTTP client.    *    * @return {@code HTTP} protocol connection parameters    */
 name|TransportAddress
 name|httpAddress
 parameter_list|()
@@ -555,7 +554,7 @@ literal|0
 index|]
 return|;
 block|}
-comment|/**    * Exposes elastic    *<a href="https://www.elastic.co/guide/en/elasticsearch/client/java-api/current/transport-client.html">transport client</a>    *    * (use of HTTP client is preferred).    */
+comment|/**    * Exposes elastic    *<a href="https://www.elastic.co/guide/en/elasticsearch/client/java-api/current/transport-client.html">transport client</a>    * (use of HTTP client is preferred).    *    * @return ES client API on a running instance    */
 specifier|public
 name|Client
 name|client
@@ -702,7 +701,7 @@ block|}
 end_class
 
 begin_comment
-comment|// End EmbeddedElasticNode.java
+comment|// End EmbeddedElasticsearchNode.java
 end_comment
 
 end_unit

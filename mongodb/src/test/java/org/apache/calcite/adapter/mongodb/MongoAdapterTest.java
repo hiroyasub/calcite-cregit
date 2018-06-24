@@ -2684,7 +2684,7 @@ block|}
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Returns a function that checks that a particular MongoDB pipeline is    * generated to implement a query. */
+comment|/**    * Returns a function that checks that a particular MongoDB pipeline is    * generated to implement a query.    *    * @param strings Expected expressions    * @return validation function    */
 specifier|private
 specifier|static
 name|Function

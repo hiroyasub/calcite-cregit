@@ -70,7 +70,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Used to initialize a single elastic node. For performance reasons (node startup costs),  * same instance is usually shared across multiple tests.  *  * This rule should be used as follows:  *<pre>  *  {@code  *  *  public class MyTest {  *    @literal @ClassRule  *    public static final ElasticSearchRule RULE = ElasticSearchRule.create();  *  *    @literal @BeforeClass  *    public void setup() {  *       // ... populate instance  *    }  *  *    @literal @Test  *    public void myTest() {  *      TransportAddress address = RULE.httpAddress();  *      // ....  *    }  *  }  *  }  *</pre>  *  * @see ExternalResource  */
+comment|/**  * Used to initialize a single elastic node. For performance reasons (node startup costs),  * same instance is usually shared across multiple tests.  *  * This rule should be used as follows:  *<pre>  *  *  public class MyTest {  *&#64;ClassRule  *    public static final ElasticSearchRule RULE = ElasticSearchRule.create();  *  *&#64;BeforeClass  *    public static void setup() {  *       // ... populate instance  *    }  *  *&#64;Test  *    public void myTest() {  *      TransportAddress address = RULE.httpAddress();  *      // .... (connect)  *    }  * }  *</pre>  *  * @see ExternalResource  */
 end_comment
 
 begin_class
@@ -81,13 +81,13 @@ name|ExternalResource
 block|{
 specifier|private
 specifier|final
-name|EmbeddedElasticNode
+name|EmbeddedElasticsearchNode
 name|node
 decl_stmt|;
 specifier|private
-name|EmbeddedElasticRule
+name|EmbeddedElasticsearchPolicy
 parameter_list|(
-name|EmbeddedElasticNode
+name|EmbeddedElasticsearchNode
 name|resource
 parameter_list|)
 block|{
@@ -150,12 +150,39 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/**    * Factory method to create this rule.    */
+comment|/**    * Factory method to create this rule.    *    * @return new rule instance to be used in unit tests    */
+operator|<<
+operator|<<
+operator|<<
+operator|<
+name|HEAD
+operator|:
+name|elasticsearch2
+operator|/
+name|src
+operator|/
+name|test
+operator|/
+name|java
+operator|/
+name|org
+operator|/
+name|apache
+operator|/
+name|calcite
+operator|/
+name|adapter
+operator|/
+name|elasticsearch2
+operator|/
+name|EmbeddedElasticRule
+operator|.
+name|java
 specifier|public
 specifier|static
 name|EmbeddedElasticRule
 name|create
-parameter_list|()
+argument_list|()
 block|{
 return|return
 operator|new
@@ -167,11 +194,60 @@ name|create
 argument_list|()
 argument_list|)
 return|;
+operator|==
+operator|==
+operator|==
+operator|=
+specifier|public
+specifier|static
+name|EmbeddedElasticsearchPolicy
+name|create
+argument_list|()
+block|{
+return|return
+operator|new
+name|EmbeddedElasticsearchPolicy
+argument_list|(
+name|EmbeddedElasticsearchNode
+operator|.
+name|create
+argument_list|()
+argument_list|)
+return|;
+operator|>>>
+operator|>>>
+operator|>
+literal|54c598206
+operator|...
+name|more
+literal|2380
+operator|:
+name|elasticsearch5
+operator|/
+name|src
+operator|/
+name|test
+operator|/
+name|java
+operator|/
+name|org
+operator|/
+name|apache
+operator|/
+name|calcite
+operator|/
+name|adapter
+operator|/
+name|elasticsearch5
+operator|/
+name|EmbeddedElasticsearchPolicy
+operator|.
+name|java
 block|}
-comment|/**    * Exposes current ES transport client.    */
+comment|/**    * Exposes current ES transport client.    *    * @return initialized instance of ES    */
 name|Client
 name|client
-parameter_list|()
+argument_list|()
 block|{
 return|return
 name|node
@@ -180,10 +256,10 @@ name|client
 argument_list|()
 return|;
 block|}
-comment|/**    * HTTP address for rest clients (can be ES native or any other).    */
+comment|/**    * HTTP address for rest clients (can be ES native or any other).    *<<<<<<< HEAD:elasticsearch2/src/test/java/org/apache/calcite/adapter/elasticsearch2/EmbeddedElasticRule.java    * @return HTTP hostname/port to connect to this ES instance =======    * @return {@code HTTP} connection parameters>>>>>>> 54c598206... more 2380:elasticsearch5/src/test/java/org/apache/calcite/adapter/elasticsearch5/EmbeddedElasticsearchPolicy.java    */
 name|TransportAddress
 name|httpAddress
-parameter_list|()
+argument_list|()
 block|{
 return|return
 name|node

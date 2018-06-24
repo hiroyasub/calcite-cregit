@@ -151,7 +151,7 @@ name|DB_NAME
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Create an instance based on current maven profile (as defined by {@code -Pit}).    */
+comment|/**    * Create an instance based on current maven profile (as defined by {@code -Pit}).    * @return new instance of the rule to be used by unit tests    */
 specifier|static
 name|MongoDatabaseRule
 name|create

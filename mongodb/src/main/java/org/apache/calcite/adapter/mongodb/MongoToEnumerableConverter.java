@@ -888,7 +888,7 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-comment|/** E.g. {@code constantArrayList("x", "y")} returns    * "Arrays.asList('x', 'y')". */
+comment|/** E.g. {@code constantArrayList("x", "y")} returns    * "Arrays.asList('x', 'y')".    *    * @param values List of values    * @param clazz Type of values    * @return expression    */
 specifier|private
 specifier|static
 parameter_list|<

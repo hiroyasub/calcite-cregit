@@ -346,7 +346,7 @@ name|ZIPS
 init|=
 literal|"zips"
 decl_stmt|;
-comment|/**    * Used to create {@code zips} index and insert some data    */
+comment|/**    * Used to create {@code zips} index and insert some data    *    * @throws Exception when couldn't create the instance    */
 annotation|@
 name|BeforeClass
 specifier|public
@@ -824,8 +824,6 @@ specifier|public
 name|void
 name|view
 parameter_list|()
-throws|throws
-name|Exception
 block|{
 name|calciteAssert
 argument_list|()
