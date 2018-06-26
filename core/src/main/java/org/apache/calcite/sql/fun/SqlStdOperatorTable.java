@@ -2805,6 +2805,21 @@ operator|.
 name|FIRST_VALUE
 argument_list|)
 decl_stmt|;
+comment|/**    *<code>NTH_VALUE</code> aggregate function.    */
+specifier|public
+specifier|static
+specifier|final
+name|SqlAggFunction
+name|NTH_VALUE
+init|=
+operator|new
+name|SqlNthValueAggFunction
+argument_list|(
+name|SqlKind
+operator|.
+name|NTH_VALUE
+argument_list|)
+decl_stmt|;
 comment|/**    *<code>LEAD</code> aggregate function.    */
 specifier|public
 specifier|static

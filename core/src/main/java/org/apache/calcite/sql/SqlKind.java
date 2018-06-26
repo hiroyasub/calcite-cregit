@@ -583,6 +583,9 @@ block|,
 comment|/** The {@code NTILE} aggregate function. */
 name|NTILE
 block|,
+comment|/** The {@code NTH_VALUE} aggregate function. */
+name|NTH_VALUE
+block|,
 comment|/** The {@code COLLECT} aggregate function. */
 name|COLLECT
 block|,

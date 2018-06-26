@@ -10617,11 +10617,11 @@ parameter_list|()
 block|{
 name|winSql
 argument_list|(
-literal|"select sum(empno) \n"
+literal|"select sum(empno)\n"
 operator|+
-literal|"from emp \n"
+literal|"from emp\n"
 operator|+
-literal|"group by deptno \n"
+literal|"group by deptno\n"
 operator|+
 literal|"order by ^row_number()^"
 argument_list|)
@@ -10633,7 +10633,7 @@ argument_list|)
 expr_stmt|;
 name|winSql
 argument_list|(
-literal|"select ^rank()^ \n"
+literal|"select ^rank()^\n"
 operator|+
 literal|"from emp"
 argument_list|)
@@ -10653,6 +10653,18 @@ operator|+
 literal|"from emp \n"
 operator|+
 literal|"window w as (partition by deptno order by deptno)"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"OVER clause is necessary for window functions"
+argument_list|)
+expr_stmt|;
+name|winSql
+argument_list|(
+literal|"select ^nth_value(sal, 2)^\n"
+operator|+
+literal|"from emp"
 argument_list|)
 operator|.
 name|fails
@@ -11107,6 +11119,14 @@ expr_stmt|;
 name|winExp
 argument_list|(
 literal|"cume_dist() over (order by empno)"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|winExp
+argument_list|(
+literal|"nth_value(sal, 2) over (order by empno)"
 argument_list|)
 operator|.
 name|ok
@@ -22446,6 +22466,16 @@ expr_stmt|;
 name|check
 argument_list|(
 literal|"select FIRST_VALUE(ename) over (order by empno) from emp"
+argument_list|)
+expr_stmt|;
+name|check
+argument_list|(
+literal|"select NTH_VALUE(sal, 2) over (order by empno) from emp"
+argument_list|)
+expr_stmt|;
+name|check
+argument_list|(
+literal|"select NTH_VALUE(ename, 2) over (order by empno) from emp"
 argument_list|)
 expr_stmt|;
 block|}

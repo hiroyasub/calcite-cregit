@@ -698,6 +698,8 @@ literal|"KEYWORD(NEXT)"
 argument_list|,
 literal|"KEYWORD(NOT)"
 argument_list|,
+literal|"KEYWORD(NTH_VALUE)"
+argument_list|,
 literal|"KEYWORD(NTILE)"
 argument_list|,
 literal|"KEYWORD(NULL)"
