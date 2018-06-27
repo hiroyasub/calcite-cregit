@@ -387,9 +387,9 @@ begin_import
 import|import
 name|java
 operator|.
-name|text
+name|time
 operator|.
-name|SimpleDateFormat
+name|Instant
 import|;
 end_import
 
@@ -397,9 +397,19 @@ begin_import
 import|import
 name|java
 operator|.
-name|util
+name|time
 operator|.
-name|Date
+name|LocalDate
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|time
+operator|.
+name|ZoneOffset
 import|;
 end_import
 
@@ -610,23 +620,29 @@ operator|new
 name|BsonDocument
 argument_list|()
 decl_stmt|;
-name|Date
-name|date
+name|Instant
+name|instant
 init|=
-operator|new
-name|SimpleDateFormat
+name|LocalDate
+operator|.
+name|of
 argument_list|(
-literal|"yyyy-MM-dd"
+literal|2012
 argument_list|,
-name|Locale
-operator|.
-name|ROOT
+literal|9
+argument_list|,
+literal|5
 argument_list|)
 operator|.
-name|parse
+name|atStartOfDay
 argument_list|(
-literal|"2012-09-05"
+name|ZoneOffset
+operator|.
+name|UTC
 argument_list|)
+operator|.
+name|toInstant
+argument_list|()
 decl_stmt|;
 name|doc
 operator|.
@@ -637,9 +653,9 @@ argument_list|,
 operator|new
 name|BsonDateTime
 argument_list|(
-name|date
+name|instant
 operator|.
-name|getTime
+name|toEpochMilli
 argument_list|()
 argument_list|)
 argument_list|)
@@ -2524,21 +2540,6 @@ name|void
 name|testDate
 parameter_list|()
 block|{
-comment|// Assumes that you have created the following collection before running
-comment|// this test:
-comment|//
-comment|// $ mongo
-comment|//> use test
-comment|// switched to db test
-comment|//> db.createCollection("datatypes")
-comment|// { "ok" : 1 }
-comment|//> db.datatypes.insert( {
-comment|//     "_id" : ObjectId("53655599e4b0c980df0a8c27"),
-comment|//     "_class" : "com.ericblue.Test",
-comment|//     "date" : ISODate("2012-09-05T07:00:00Z"),
-comment|//     "value" : 1231,
-comment|//     "ownerId" : "531e7789e4b0853ddb861313"
-comment|//   } )
 name|assertModel
 argument_list|(
 literal|"{\n"
