@@ -224,6 +224,7 @@ name|ObjectMapper
 name|mapper
 decl_stmt|;
 comment|/**    * Allows schema to be instantiated from existing elastic search client.    * This constructor is used in tests.    * @param client existing client instance    * @param mapper mapper for JSON (de)serialization    * @param index name of ES index    */
+specifier|public
 name|ElasticsearchSchema
 parameter_list|(
 name|RestClient
@@ -329,6 +330,8 @@ name|ElasticsearchTable
 argument_list|(
 name|client
 argument_list|,
+name|mapper
+argument_list|,
 name|index
 argument_list|,
 name|type
@@ -377,6 +380,8 @@ specifier|final
 name|String
 name|endpoint
 init|=
+literal|"/"
+operator|+
 name|index
 operator|+
 literal|"/_mapping"

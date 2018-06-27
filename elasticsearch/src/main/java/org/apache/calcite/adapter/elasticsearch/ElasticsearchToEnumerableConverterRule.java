@@ -144,6 +144,7 @@ name|LOGICAL_BUILDER
 argument_list|)
 decl_stmt|;
 comment|/**    * Creates an ElasticsearchToEnumerableConverterRule.    *    * @param relBuilderFactory Builder for relational expressions    */
+specifier|private
 name|ElasticsearchToEnumerableConverterRule
 parameter_list|(
 name|RelBuilderFactory

@@ -294,16 +294,14 @@ specifier|final
 name|ElasticsearchVersion
 name|version
 decl_stmt|;
-specifier|private
-specifier|final
-name|ObjectMapper
-name|mapper
-decl_stmt|;
-comment|/**    * Creates an ElasticsearchTable.    * @param client low-level ES rest client    * @param indexName elastic search index    * @param typeName elastic searh index type    */
+comment|/**    * Creates an ElasticsearchTable.    * @param client low-level ES rest client    * @param mapper Jackson API    * @param indexName elastic search index    * @param typeName elastic searh index type    */
 name|ElasticsearchTable
 parameter_list|(
 name|RestClient
 name|client
+parameter_list|,
+name|ObjectMapper
+name|mapper
 parameter_list|,
 name|String
 name|indexName
@@ -317,6 +315,15 @@ argument_list|(
 name|indexName
 argument_list|,
 name|typeName
+argument_list|,
+name|Objects
+operator|.
+name|requireNonNull
+argument_list|(
+name|mapper
+argument_list|,
+literal|"mapper"
+argument_list|)
 argument_list|)
 expr_stmt|;
 name|this
@@ -331,14 +338,6 @@ name|client
 argument_list|,
 literal|"client"
 argument_list|)
-expr_stmt|;
-name|this
-operator|.
-name|mapper
-operator|=
-operator|new
-name|ObjectMapper
-argument_list|()
 expr_stmt|;
 try|try
 block|{
@@ -474,9 +473,13 @@ name|ElasticsearchVersion
 operator|.
 name|ES2
 condition|?
-literal|"_source"
+name|ElasticsearchConstants
+operator|.
+name|SOURCE_GROOVY
 else|:
-literal|"params._source"
+name|ElasticsearchConstants
+operator|.
+name|SOURCE_PAINLESS
 return|;
 block|}
 annotation|@

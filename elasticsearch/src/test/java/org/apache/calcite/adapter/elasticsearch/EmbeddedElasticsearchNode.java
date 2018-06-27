@@ -288,7 +288,7 @@ name|Settings
 name|settings
 parameter_list|)
 block|{
-comment|// ensure GroovyPlugin is installed or otherwise scripted fields would not work
+comment|// ensure PainlessPlugin is installed or otherwise scripted fields would not work
 name|Node
 name|node
 init|=
@@ -319,9 +319,10 @@ name|node
 argument_list|)
 return|;
 block|}
-comment|/**    * Creates elastic node as single member of a cluster. Node will not be started    * unless {@link #start()} is explicitly called.    * @return instance which needs to be explicitly started (using {@link #start()})    */
+comment|/**    * Creates elastic node as single member of a cluster. Node will not be started    * unless {@link #start()} is explicitly called.    *<p>Need {@code synchronized} because of static caches inside ES (which are not thread safe).    * @return instance which needs to be explicitly started (using {@link #start()})    */
 specifier|public
 specifier|static
+specifier|synchronized
 name|EmbeddedElasticsearchNode
 name|create
 parameter_list|()
@@ -392,6 +393,21 @@ argument_list|(
 literal|"http.type"
 argument_list|,
 literal|"netty4"
+argument_list|)
+comment|// allow multiple instances to run in parallel
+operator|.
+name|put
+argument_list|(
+literal|"transport.tcp.port"
+argument_list|,
+literal|0
+argument_list|)
+operator|.
+name|put
+argument_list|(
+literal|"http.port"
+argument_list|,
+literal|0
 argument_list|)
 operator|.
 name|put

@@ -225,6 +225,20 @@ end_import
 
 begin_import
 import|import
+name|com
+operator|.
+name|fasterxml
+operator|.
+name|jackson
+operator|.
+name|databind
+operator|.
+name|ObjectMapper
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -274,7 +288,11 @@ specifier|final
 name|String
 name|typeName
 decl_stmt|;
-comment|/**    * Creates an ElasticsearchTable.    * @param indexName Elastic Search index    * @param typeName Elastic Search index type    */
+specifier|final
+name|ObjectMapper
+name|mapper
+decl_stmt|;
+comment|/**    * Creates an ElasticsearchTable.    * @param indexName Elastic Search index    * @param typeName Elastic Search index type    * @param mapper Jackson API to parse (and created) JSON documents    */
 name|AbstractElasticsearchTable
 parameter_list|(
 name|String
@@ -282,6 +300,9 @@ name|indexName
 parameter_list|,
 name|String
 name|typeName
+parameter_list|,
+name|ObjectMapper
+name|mapper
 parameter_list|)
 block|{
 name|super
@@ -316,6 +337,19 @@ argument_list|(
 name|typeName
 argument_list|,
 literal|"typeName"
+argument_list|)
+expr_stmt|;
+name|this
+operator|.
+name|mapper
+operator|=
+name|Objects
+operator|.
+name|requireNonNull
+argument_list|(
+name|mapper
+argument_list|,
+literal|"mapper"
 argument_list|)
 expr_stmt|;
 block|}
