@@ -13319,6 +13319,42 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testCastTimestamp
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"Select cast(cast(\"timestamp\" as timestamp) as varchar) as t"
+operator|+
+literal|" from \"foodmart\" order by t limit 1"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|,
+name|FOODMART
+argument_list|)
+operator|.
+name|returnsOrdered
+argument_list|(
+literal|"T=1997-01-01 00:00:00"
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|druidChecker
+argument_list|(
+literal|"UTC"
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
 block|}
 end_class
 
