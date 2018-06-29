@@ -2919,6 +2919,21 @@ operator|.
 name|STDDEV_POP
 argument_list|)
 decl_stmt|;
+comment|/**    *<code>REGR_COUNT</code> aggregate function.    */
+specifier|public
+specifier|static
+specifier|final
+name|SqlAggFunction
+name|REGR_COUNT
+init|=
+operator|new
+name|SqlRegrCountAggFunction
+argument_list|(
+name|SqlKind
+operator|.
+name|REGR_COUNT
+argument_list|)
+decl_stmt|;
 comment|/**    *<code>REGR_SXX</code> aggregate function.    */
 specifier|public
 specifier|static

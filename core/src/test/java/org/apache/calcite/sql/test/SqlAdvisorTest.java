@@ -613,6 +613,8 @@ literal|"KEYWORD(PREV)"
 argument_list|,
 literal|"KEYWORD(RANK)"
 argument_list|,
+literal|"KEYWORD(REGR_COUNT)"
+argument_list|,
 literal|"KEYWORD(REGR_SXX)"
 argument_list|,
 literal|"KEYWORD(REGR_SYY)"

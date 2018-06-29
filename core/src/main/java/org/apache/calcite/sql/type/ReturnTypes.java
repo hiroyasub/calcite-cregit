@@ -2678,7 +2678,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlReturnTypeInference
-name|COVAR_FUNCTION
+name|COVAR_REGR_FUNCTION
 init|=
 name|opBinding
 lambda|->

@@ -519,10 +519,10 @@ block|,
 comment|/** The {@code GROUP_ID()} function. */
 name|GROUP_ID
 block|,
-comment|/**    * the internal permute function in match_recognize cluse    */
+comment|/** The internal "permute" function in a MATCH_RECOGNIZE clause. */
 name|PATTERN_PERMUTE
 block|,
-comment|/**    * the special patterns to exclude enclosing pattern from output in match_recognize clause    */
+comment|/** The special patterns to exclude enclosing pattern from output in a    * MATCH_RECOGNIZE clause. */
 name|PATTERN_EXCLUDED
 block|,
 comment|// Aggregate functions
@@ -561,6 +561,9 @@ name|COVAR_POP
 block|,
 comment|/** The {@code COVAR_SAMP} aggregate function. */
 name|COVAR_SAMP
+block|,
+comment|/** The {@code REGR_COUNT} aggregate function. */
+name|REGR_COUNT
 block|,
 comment|/** The {@code REGR_SXX} aggregate function. */
 name|REGR_SXX
@@ -792,6 +795,8 @@ argument_list|,
 name|COVAR_POP
 argument_list|,
 name|COVAR_SAMP
+argument_list|,
+name|REGR_COUNT
 argument_list|,
 name|REGR_SXX
 argument_list|,
@@ -1125,6 +1130,31 @@ argument_list|,
 name|VAR_POP
 argument_list|,
 name|VAR_SAMP
+argument_list|)
+decl_stmt|;
+comment|/**    * Category of SqlCovarAggFunction.    *    *<p>Consists of {@link #COVAR_POP}, {@link #COVAR_SAMP}, {@link #REGR_SXX},    * {@link #REGR_SYY}.    */
+specifier|public
+specifier|static
+specifier|final
+name|Set
+argument_list|<
+name|SqlKind
+argument_list|>
+name|COVAR_AVG_AGG_FUNCTIONS
+init|=
+name|EnumSet
+operator|.
+name|of
+argument_list|(
+name|COVAR_POP
+argument_list|,
+name|COVAR_SAMP
+argument_list|,
+name|REGR_COUNT
+argument_list|,
+name|REGR_SXX
+argument_list|,
+name|REGR_SYY
 argument_list|)
 decl_stmt|;
 comment|/**    * Category of comparison operators.    *    *<p>Consists of:    * {@link #IN},    * {@link #EQUALS},    * {@link #NOT_EQUALS},    * {@link #LESS_THAN},    * {@link #GREATER_THAN},    * {@link #LESS_THAN_OR_EQUAL},    * {@link #GREATER_THAN_OR_EQUAL}.    */
