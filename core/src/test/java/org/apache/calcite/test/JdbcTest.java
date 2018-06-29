@@ -3912,7 +3912,7 @@ argument_list|()
 argument_list|,
 name|containsString
 argument_list|(
-literal|"next() called on closed cursor"
+literal|"ResultSet closed"
 argument_list|)
 argument_list|)
 expr_stmt|;

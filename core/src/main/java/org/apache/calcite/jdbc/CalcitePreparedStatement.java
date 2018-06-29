@@ -115,6 +115,8 @@ specifier|public
 name|CalciteConnectionImpl
 name|getConnection
 parameter_list|()
+throws|throws
+name|SQLException
 block|{
 return|return
 operator|(

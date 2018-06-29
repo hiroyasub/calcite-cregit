@@ -791,7 +791,8 @@ throws|throws
 name|SQLException
 block|{
 return|return
-name|remoteConnection
+name|getRemoteConnection
+argument_list|()
 return|;
 block|}
 block|}
@@ -1096,11 +1097,6 @@ name|localConnection
 decl_stmt|;
 specifier|private
 specifier|static
-name|Connection
-name|remoteConnection
-decl_stmt|;
-specifier|private
-specifier|static
 name|HttpServer
 name|start
 decl_stmt|;
@@ -1168,6 +1164,15 @@ block|}
 block|}
 argument_list|)
 expr_stmt|;
+block|}
+specifier|protected
+specifier|static
+name|Connection
+name|getRemoteConnection
+parameter_list|()
+throws|throws
+name|SQLException
+block|{
 specifier|final
 name|int
 name|port
@@ -1177,8 +1182,7 @@ operator|.
 name|getPort
 argument_list|()
 decl_stmt|;
-name|remoteConnection
-operator|=
+return|return
 name|DriverManager
 operator|.
 name|getConnection
@@ -1187,7 +1191,7 @@ literal|"jdbc:avatica:remote:url=http://localhost:"
 operator|+
 name|port
 argument_list|)
-expr_stmt|;
+return|;
 block|}
 annotation|@
 name|AfterClass
@@ -2013,6 +2017,15 @@ parameter_list|()
 throws|throws
 name|Exception
 block|{
+try|try
+init|(
+name|Connection
+name|remoteConnection
+init|=
+name|getRemoteConnection
+argument_list|()
+init|)
+block|{
 specifier|final
 name|Statement
 name|statement
@@ -2023,6 +2036,12 @@ name|createStatement
 argument_list|()
 decl_stmt|;
 specifier|final
+name|String
+name|sql
+init|=
+literal|"values (1, 'a'), (cast(null as integer), 'b')"
+decl_stmt|;
+specifier|final
 name|ResultSet
 name|resultSet
 init|=
@@ -2030,7 +2049,7 @@ name|statement
 operator|.
 name|executeQuery
 argument_list|(
-literal|"values (1, 'a'), (cast(null as integer), 'b')"
+name|sql
 argument_list|)
 decl_stmt|;
 name|int
@@ -2060,6 +2079,7 @@ literal|2
 argument_list|)
 argument_list|)
 expr_stmt|;
+block|}
 block|}
 comment|/** For each (source, destination) type, make sure that we can convert bind    * variables. */
 annotation|@
@@ -3128,6 +3148,15 @@ parameter_list|()
 throws|throws
 name|Exception
 block|{
+try|try
+init|(
+name|Connection
+name|remoteConnection
+init|=
+name|getRemoteConnection
+argument_list|()
+init|)
+block|{
 specifier|final
 name|Statement
 name|statement
@@ -3195,6 +3224,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+block|}
 annotation|@
 name|Test
 argument_list|(
@@ -3211,6 +3241,15 @@ parameter_list|()
 throws|throws
 name|Exception
 block|{
+try|try
+init|(
+name|Connection
+name|remoteConnection
+init|=
+name|getRemoteConnection
+argument_list|()
+init|)
+block|{
 name|remoteConnection
 operator|.
 name|isValid
@@ -3219,6 +3258,7 @@ operator|-
 literal|1
 argument_list|)
 expr_stmt|;
+block|}
 block|}
 annotation|@
 name|Test
@@ -3235,6 +3275,15 @@ name|testAvaticaStatementException
 parameter_list|()
 throws|throws
 name|Exception
+block|{
+try|try
+init|(
+name|Connection
+name|remoteConnection
+init|=
+name|getRemoteConnection
+argument_list|()
+init|)
 block|{
 try|try
 init|(
@@ -3256,6 +3305,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+block|}
 annotation|@
 name|Test
 specifier|public
@@ -3264,6 +3314,15 @@ name|testAvaticaStatementGetMoreResults
 parameter_list|()
 throws|throws
 name|Exception
+block|{
+try|try
+init|(
+name|Connection
+name|remoteConnection
+init|=
+name|getRemoteConnection
+argument_list|()
+init|)
 block|{
 try|try
 init|(
@@ -3291,6 +3350,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+block|}
 annotation|@
 name|Test
 specifier|public
@@ -3299,6 +3359,15 @@ name|testRemoteExecute
 parameter_list|()
 throws|throws
 name|Exception
+block|{
+try|try
+init|(
+name|Connection
+name|remoteConnection
+init|=
+name|getRemoteConnection
+argument_list|()
+init|)
 block|{
 name|ResultSet
 name|resultSet
@@ -3343,6 +3412,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+block|}
 annotation|@
 name|Test
 specifier|public
@@ -3351,6 +3421,15 @@ name|testRemoteExecuteMaxRow
 parameter_list|()
 throws|throws
 name|Exception
+block|{
+try|try
+init|(
+name|Connection
+name|remoteConnection
+init|=
+name|getRemoteConnection
+argument_list|()
+init|)
 block|{
 name|Statement
 name|statement
@@ -3405,6 +3484,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-661">[CALCITE-661]    * Remote fetch in Calcite JDBC driver</a>. */
 annotation|@
 name|Test
@@ -3414,6 +3494,15 @@ name|testRemotePrepareExecute
 parameter_list|()
 throws|throws
 name|Exception
+block|{
+try|try
+init|(
+name|Connection
+name|remoteConnection
+init|=
+name|getRemoteConnection
+argument_list|()
+init|)
 block|{
 specifier|final
 name|PreparedStatement
@@ -3463,6 +3552,7 @@ literal|true
 argument_list|)
 argument_list|)
 expr_stmt|;
+block|}
 block|}
 specifier|public
 specifier|static

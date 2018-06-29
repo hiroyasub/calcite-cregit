@@ -477,6 +477,8 @@ operator|.
 name|Frame
 name|firstFrame
 parameter_list|)
+throws|throws
+name|SQLException
 block|{
 specifier|final
 name|ResultSetMetaData

@@ -282,6 +282,8 @@ operator|.
 name|Frame
 name|firstFrame
 parameter_list|)
+throws|throws
+name|SQLException
 block|{
 name|super
 argument_list|(
@@ -396,6 +398,8 @@ name|Object
 argument_list|>
 name|iterable
 parameter_list|)
+throws|throws
+name|SQLException
 block|{
 specifier|final
 name|List
@@ -682,6 +686,8 @@ comment|// do not make public
 name|CalciteConnectionImpl
 name|getCalciteConnection
 parameter_list|()
+throws|throws
+name|SQLException
 block|{
 return|return
 operator|(
