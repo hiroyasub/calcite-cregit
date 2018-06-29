@@ -143,7 +143,7 @@ name|apache
 operator|.
 name|commons
 operator|.
-name|dbcp
+name|dbcp2
 operator|.
 name|BasicDataSource
 import|;
