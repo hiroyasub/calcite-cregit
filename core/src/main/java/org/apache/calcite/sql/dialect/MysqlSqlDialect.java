@@ -1106,7 +1106,7 @@ name|HOUR
 case|:
 name|format
 operator|=
-literal|"%Y-%m-%d %k:00:00"
+literal|"%Y-%m-%d %H:00:00"
 expr_stmt|;
 break|break;
 case|case
@@ -1114,7 +1114,7 @@ name|MINUTE
 case|:
 name|format
 operator|=
-literal|"%Y-%m-%d %k:%i:00"
+literal|"%Y-%m-%d %H:%i:00"
 expr_stmt|;
 break|break;
 case|case
@@ -1122,7 +1122,7 @@ name|SECOND
 case|:
 name|format
 operator|=
-literal|"%Y-%m-%d %k:%i:%s"
+literal|"%Y-%m-%d %H:%i:%s"
 expr_stmt|;
 break|break;
 default|default:

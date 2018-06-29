@@ -5101,6 +5101,105 @@ name|expected
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testFloorMysqlHour
+parameter_list|()
+block|{
+name|String
+name|query
+init|=
+literal|"SELECT floor(\"hire_date\" TO HOUR) FROM \"employee\""
+decl_stmt|;
+name|String
+name|expected
+init|=
+literal|"SELECT DATE_FORMAT(`hire_date`, '%Y-%m-%d %H:00:00')\n"
+operator|+
+literal|"FROM `foodmart`.`employee`"
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|withMysql
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testFloorMysqlMinute
+parameter_list|()
+block|{
+name|String
+name|query
+init|=
+literal|"SELECT floor(\"hire_date\" TO MINUTE) FROM \"employee\""
+decl_stmt|;
+name|String
+name|expected
+init|=
+literal|"SELECT DATE_FORMAT(`hire_date`, '%Y-%m-%d %H:%i:00')\n"
+operator|+
+literal|"FROM `foodmart`.`employee`"
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|withMysql
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testFloorMysqlSecond
+parameter_list|()
+block|{
+name|String
+name|query
+init|=
+literal|"SELECT floor(\"hire_date\" TO SECOND) FROM \"employee\""
+decl_stmt|;
+name|String
+name|expected
+init|=
+literal|"SELECT DATE_FORMAT(`hire_date`, '%Y-%m-%d %H:%i:%s')\n"
+operator|+
+literal|"FROM `foodmart`.`employee`"
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|withMysql
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1826">[CALCITE-1826]    * JDBC dialect-specific FLOOR fails when in GROUP BY</a>. */
 annotation|@
 name|Test
@@ -5155,11 +5254,11 @@ name|expectedMysql
 init|=
 literal|"SELECT"
 operator|+
-literal|" DATE_FORMAT(`hire_date`, '%Y-%m-%d %k:%i:00')\n"
+literal|" DATE_FORMAT(`hire_date`, '%Y-%m-%d %H:%i:00')\n"
 operator|+
 literal|"FROM `foodmart`.`employee`\n"
 operator|+
-literal|"GROUP BY DATE_FORMAT(`hire_date`, '%Y-%m-%d %k:%i:00')"
+literal|"GROUP BY DATE_FORMAT(`hire_date`, '%Y-%m-%d %H:%i:00')"
 decl_stmt|;
 name|sql
 argument_list|(
