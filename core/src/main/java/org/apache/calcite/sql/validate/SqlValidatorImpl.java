@@ -10672,7 +10672,7 @@ name|parentScope
 argument_list|,
 name|usingScope
 argument_list|,
-literal|true
+name|register
 argument_list|,
 operator|(
 operator|(

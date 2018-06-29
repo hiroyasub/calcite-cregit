@@ -81,6 +81,20 @@ name|calcite
 operator|.
 name|schema
 operator|.
+name|Table
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|schema
+operator|.
 name|TableFunction
 import|;
 end_import
@@ -472,9 +486,9 @@ name|testTableFunction
 parameter_list|()
 throws|throws
 name|SQLException
-throws|,
-name|ClassNotFoundException
 block|{
+try|try
+init|(
 name|Connection
 name|connection
 init|=
@@ -484,7 +498,8 @@ name|getConnection
 argument_list|(
 literal|"jdbc:calcite:"
 argument_list|)
-decl_stmt|;
+init|)
+block|{
 name|CalciteConnection
 name|calciteConnection
 init|=
@@ -541,6 +556,16 @@ argument_list|,
 name|table
 argument_list|)
 expr_stmt|;
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"from table(\"s\".\"GenerateStrings\"(5)) as t(n, c)\n"
+operator|+
+literal|"where char_length(c)> 3"
+decl_stmt|;
 name|ResultSet
 name|resultSet
 init|=
@@ -551,11 +576,7 @@ argument_list|()
 operator|.
 name|executeQuery
 argument_list|(
-literal|"select *\n"
-operator|+
-literal|"from table(\"s\".\"GenerateStrings\"(5)) as t(n, c)\n"
-operator|+
-literal|"where char_length(c)> 3"
+name|sql
 argument_list|)
 decl_stmt|;
 name|assertThat
@@ -573,6 +594,7 @@ literal|"N=4; C=abcd\n"
 argument_list|)
 argument_list|)
 expr_stmt|;
+block|}
 block|}
 comment|/**    * Tests a table function that implements {@link ScannableTable} and returns    * a single column.    */
 annotation|@
@@ -2197,6 +2219,157 @@ argument_list|,
 literal|"C=5; N=3"
 argument_list|,
 literal|"C=5; N=5"
+argument_list|)
+expr_stmt|;
+block|}
+block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2382">[CALCITE-2382]    * Sub-query lateral joined to table function</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testInlineViewLateralTableFunction
+parameter_list|()
+throws|throws
+name|SQLException
+block|{
+try|try
+init|(
+name|Connection
+name|connection
+init|=
+name|DriverManager
+operator|.
+name|getConnection
+argument_list|(
+literal|"jdbc:calcite:"
+argument_list|)
+init|)
+block|{
+name|CalciteConnection
+name|calciteConnection
+init|=
+name|connection
+operator|.
+name|unwrap
+argument_list|(
+name|CalciteConnection
+operator|.
+name|class
+argument_list|)
+decl_stmt|;
+name|SchemaPlus
+name|rootSchema
+init|=
+name|calciteConnection
+operator|.
+name|getRootSchema
+argument_list|()
+decl_stmt|;
+name|SchemaPlus
+name|schema
+init|=
+name|rootSchema
+operator|.
+name|add
+argument_list|(
+literal|"s"
+argument_list|,
+operator|new
+name|AbstractSchema
+argument_list|()
+argument_list|)
+decl_stmt|;
+specifier|final
+name|TableFunction
+name|table
+init|=
+name|TableFunctionImpl
+operator|.
+name|create
+argument_list|(
+name|Smalls
+operator|.
+name|GENERATE_STRINGS_METHOD
+argument_list|)
+decl_stmt|;
+name|schema
+operator|.
+name|add
+argument_list|(
+literal|"GenerateStrings"
+argument_list|,
+name|table
+argument_list|)
+expr_stmt|;
+name|Table
+name|tbl
+init|=
+operator|new
+name|ScannableTableTest
+operator|.
+name|SimpleTable
+argument_list|()
+decl_stmt|;
+name|schema
+operator|.
+name|add
+argument_list|(
+literal|"t"
+argument_list|,
+name|tbl
+argument_list|)
+expr_stmt|;
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"from (select 5 as f0 from \"s\".\"t\") \"a\",\n"
+operator|+
+literal|"  lateral table(\"s\".\"GenerateStrings\"(f0)) as t(n, c)\n"
+operator|+
+literal|"where char_length(c)> 3"
+decl_stmt|;
+name|ResultSet
+name|resultSet
+init|=
+name|connection
+operator|.
+name|createStatement
+argument_list|()
+operator|.
+name|executeQuery
+argument_list|(
+name|sql
+argument_list|)
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"F0=5; N=4; C=abcd\n"
+operator|+
+literal|"F0=5; N=4; C=abcd\n"
+operator|+
+literal|"F0=5; N=4; C=abcd\n"
+operator|+
+literal|"F0=5; N=4; C=abcd\n"
+decl_stmt|;
+name|assertThat
+argument_list|(
+name|CalciteAssert
+operator|.
+name|toString
+argument_list|(
+name|resultSet
+argument_list|)
+argument_list|,
+name|equalTo
+argument_list|(
+name|expected
+argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
