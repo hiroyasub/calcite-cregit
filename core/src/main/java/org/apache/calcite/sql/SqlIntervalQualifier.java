@@ -579,6 +579,9 @@ case|:
 case|case
 name|MICROSECOND
 case|:
+case|case
+name|NANOSECOND
+case|:
 return|return
 name|SqlTypeName
 operator|.

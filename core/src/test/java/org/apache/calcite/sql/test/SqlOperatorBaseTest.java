@@ -26471,7 +26471,40 @@ name|tester
 operator|.
 name|checkScalar
 argument_list|(
+literal|"timestampadd(MICROSECOND, 2000000, timestamp '2016-02-24 12:42:25')"
+argument_list|,
+literal|"2016-02-24 12:42:27"
+argument_list|,
+literal|"TIMESTAMP(3) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
 literal|"timestampadd(SQL_TSI_SECOND, 2, timestamp '2016-02-24 12:42:25')"
+argument_list|,
+literal|"2016-02-24 12:42:27"
+argument_list|,
+literal|"TIMESTAMP(0) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"timestampadd(NANOSECOND, 3000000000, timestamp '2016-02-24 12:42:25')"
+argument_list|,
+literal|"2016-02-24 12:42:28"
+argument_list|,
+literal|"TIMESTAMP(0) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"timestampadd(SQL_TSI_FRAC_SECOND, 2000000000, timestamp '2016-02-24 12:42:25')"
 argument_list|,
 literal|"2016-02-24 12:42:27"
 argument_list|,
@@ -26780,9 +26813,24 @@ literal|"timestamp '2016-02-24 12:42:25', "
 operator|+
 literal|"timestamp '2016-02-24 12:42:20')"
 argument_list|,
-literal|"-5000000"
+literal|"-5000000000"
 argument_list|,
-literal|"INTEGER NOT NULL"
+literal|"BIGINT NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"timestampdiff(NANOSECOND, "
+operator|+
+literal|"timestamp '2016-02-24 12:42:25', "
+operator|+
+literal|"timestamp '2016-02-24 12:42:20')"
+argument_list|,
+literal|"-5000000000"
+argument_list|,
+literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
 name|tester
