@@ -9969,6 +9969,40 @@ literal|"empid=150; deptno=10; name=Sebastian; salary=7000.0; commission=null"
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2381">[CALCITE-2391]    * Aggregate query with UNNEST or LATERAL fails with    * ClassCastException</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testAggUnnestColumn
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select count(d.\"name\") as c\n"
+operator|+
+literal|"from \"hr\".\"depts\" as d,\n"
+operator|+
+literal|" UNNEST(d.\"employees\") as e"
+decl_stmt|;
+name|CalciteAssert
+operator|.
+name|hr
+argument_list|()
+operator|.
+name|query
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"C=3"
+argument_list|)
+expr_stmt|;
+block|}
 annotation|@
 name|Test
 specifier|public
