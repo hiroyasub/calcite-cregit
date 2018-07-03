@@ -9200,6 +9200,94 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testDatetimePlusNullInterval
+parameter_list|()
+block|{
+name|expr
+argument_list|(
+literal|"TIME '8:8:8' + cast(NULL AS interval hour)"
+argument_list|)
+operator|.
+name|columnType
+argument_list|(
+literal|"TIME(0)"
+argument_list|)
+expr_stmt|;
+name|expr
+argument_list|(
+literal|"TIME '8:8:8' + cast(NULL AS interval YEAR)"
+argument_list|)
+operator|.
+name|columnType
+argument_list|(
+literal|"TIME(0)"
+argument_list|)
+expr_stmt|;
+name|expr
+argument_list|(
+literal|"TIMESTAMP '1990-12-12 12:12:12' + cast(NULL AS interval hour)"
+argument_list|)
+operator|.
+name|columnType
+argument_list|(
+literal|"TIMESTAMP(0)"
+argument_list|)
+expr_stmt|;
+name|expr
+argument_list|(
+literal|"TIMESTAMP '1990-12-12 12:12:12' + cast(NULL AS interval YEAR)"
+argument_list|)
+operator|.
+name|columnType
+argument_list|(
+literal|"TIMESTAMP(0)"
+argument_list|)
+expr_stmt|;
+name|expr
+argument_list|(
+literal|"cast(NULL AS interval hour) + TIME '8:8:8'"
+argument_list|)
+operator|.
+name|columnType
+argument_list|(
+literal|"TIME(0)"
+argument_list|)
+expr_stmt|;
+name|expr
+argument_list|(
+literal|"cast(NULL AS interval YEAR) + TIME '8:8:8'"
+argument_list|)
+operator|.
+name|columnType
+argument_list|(
+literal|"TIME(0)"
+argument_list|)
+expr_stmt|;
+name|expr
+argument_list|(
+literal|"cast(NULL AS interval hour) + TIMESTAMP '1990-12-12 12:12:12'"
+argument_list|)
+operator|.
+name|columnType
+argument_list|(
+literal|"TIMESTAMP(0)"
+argument_list|)
+expr_stmt|;
+name|expr
+argument_list|(
+literal|"cast(NULL AS interval YEAR) + TIMESTAMP '1990-12-12 12:12:12'"
+argument_list|)
+operator|.
+name|columnType
+argument_list|(
+literal|"TIMESTAMP(0)"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testIntervalLiterals
 parameter_list|()
 block|{
@@ -9842,6 +9930,38 @@ argument_list|(
 literal|"timestampdiff(incorrect, current_timestamp, current_timestamp)"
 argument_list|,
 literal|"(?s).*Was expecting one of.*"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testTimestampAddNullInterval
+parameter_list|()
+block|{
+name|expr
+argument_list|(
+literal|"timestampadd(SQL_TSI_SECOND, cast(NULL AS INTEGER),"
+operator|+
+literal|" current_timestamp)"
+argument_list|)
+operator|.
+name|columnType
+argument_list|(
+literal|"TIMESTAMP(0)"
+argument_list|)
+expr_stmt|;
+name|expr
+argument_list|(
+literal|"timestampadd(SQL_TSI_DAY, cast(NULL AS INTEGER),"
+operator|+
+literal|" current_timestamp)"
+argument_list|)
+operator|.
+name|columnType
+argument_list|(
+literal|"TIMESTAMP(0)"
 argument_list|)
 expr_stmt|;
 block|}

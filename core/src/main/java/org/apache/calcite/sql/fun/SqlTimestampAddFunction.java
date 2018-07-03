@@ -267,6 +267,10 @@ name|RelDataType
 name|operandType2
 parameter_list|)
 block|{
+specifier|final
+name|RelDataType
+name|type
+decl_stmt|;
 switch|switch
 condition|(
 name|timeUnit
@@ -287,10 +291,6 @@ case|:
 case|case
 name|MICROSECOND
 case|:
-specifier|final
-name|RelDataType
-name|type
-decl_stmt|;
 switch|switch
 condition|(
 name|timeUnit
@@ -343,6 +343,13 @@ name|TIMESTAMP
 argument_list|)
 expr_stmt|;
 block|}
+break|break;
+default|default:
+name|type
+operator|=
+name|operandType2
+expr_stmt|;
+block|}
 return|return
 name|typeFactory
 operator|.
@@ -361,11 +368,6 @@ name|isNullable
 argument_list|()
 argument_list|)
 return|;
-default|default:
-return|return
-name|operandType2
-return|;
-block|}
 block|}
 comment|/** Creates a SqlTimestampAddFunction. */
 name|SqlTimestampAddFunction
