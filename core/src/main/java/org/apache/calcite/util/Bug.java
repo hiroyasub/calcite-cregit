@@ -209,6 +209,15 @@ name|CALCITE_2400_FIXED
 init|=
 literal|false
 decl_stmt|;
+comment|/** Whether    *<a href="https://issues.apache.org/jira/browse/CALCITE-2401">[CALCITE-2401]    * Improve RelMdPredicates performance</a>    */
+specifier|public
+specifier|static
+specifier|final
+name|boolean
+name|CALCITE_2401_FIXED
+init|=
+literal|false
+decl_stmt|;
 comment|/**    * Use this to flag temporary code.    */
 specifier|public
 specifier|static
