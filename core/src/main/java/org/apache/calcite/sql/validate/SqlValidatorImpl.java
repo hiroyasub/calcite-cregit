@@ -2815,6 +2815,11 @@ block|{
 case|case
 literal|1
 case|:
+name|boolean
+name|hasDynamicStruct
+init|=
+literal|false
+decl_stmt|;
 for|for
 control|(
 name|ScopeChild
@@ -2847,6 +2852,10 @@ name|isDynamicStruct
 argument_list|()
 condition|)
 block|{
+name|hasDynamicStruct
+operator|=
+literal|true
+expr_stmt|;
 comment|// don't expand star if the underneath table is dynamic.
 comment|// Treat this star as a special field in validation/conversion and
 comment|// wait until execution time to expand this star.
@@ -3093,6 +3102,16 @@ block|}
 block|}
 comment|// If NATURAL JOIN or USING is present, move key fields to the front of
 comment|// the list.
+if|if
+condition|(
+operator|!
+name|hasDynamicStruct
+operator|||
+name|Bug
+operator|.
+name|CALCITE_2400_FIXED
+condition|)
+block|{
 operator|new
 name|Permute
 argument_list|(
@@ -3114,6 +3133,7 @@ argument_list|,
 name|fields
 argument_list|)
 expr_stmt|;
+block|}
 return|return
 literal|true
 return|;

@@ -200,6 +200,15 @@ name|CALCITE_1045_FIXED
 init|=
 literal|false
 decl_stmt|;
+comment|/** Whether    *<a href="https://issues.apache.org/jira/browse/CALCITE-2400">[CALCITE-2400]    * Allow standards-compliant column ordering for NATURAL JOIN and JOIN USING    * when dynamic tables are used</a> is fixed. */
+specifier|public
+specifier|static
+specifier|final
+name|boolean
+name|CALCITE_2400_FIXED
+init|=
+literal|false
+decl_stmt|;
 comment|/**    * Use this to flag temporary code.    */
 specifier|public
 specifier|static

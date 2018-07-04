@@ -663,6 +663,38 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testJoinUsingDynamicTable
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select * from SALES.NATION t1\n"
+operator|+
+literal|"join SALES.NATION t2\n"
+operator|+
+literal|"using (n_nationkey)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|with
+argument_list|(
+name|getTesterWithDynamicTable
+argument_list|()
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
 comment|/**    * Tests that AND(x, AND(y, z)) gets flattened to AND(x, y, z).    */
 annotation|@
 name|Test
