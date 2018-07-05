@@ -159,15 +159,11 @@ end_import
 
 begin_import
 import|import
-name|com
+name|java
 operator|.
-name|google
+name|io
 operator|.
-name|common
-operator|.
-name|base
-operator|.
-name|Preconditions
+name|StringReader
 import|;
 end_import
 
@@ -175,9 +171,9 @@ begin_import
 import|import
 name|java
 operator|.
-name|io
+name|util
 operator|.
-name|StringReader
+name|Objects
 import|;
 end_import
 
@@ -828,9 +824,9 @@ name|this
 operator|.
 name|quotedCasing
 operator|=
-name|Preconditions
+name|Objects
 operator|.
-name|checkNotNull
+name|requireNonNull
 argument_list|(
 name|quotedCasing
 argument_list|)
@@ -851,9 +847,9 @@ name|this
 operator|.
 name|unquotedCasing
 operator|=
-name|Preconditions
+name|Objects
 operator|.
-name|checkNotNull
+name|requireNonNull
 argument_list|(
 name|unquotedCasing
 argument_list|)
@@ -874,9 +870,9 @@ name|this
 operator|.
 name|quoting
 operator|=
-name|Preconditions
+name|Objects
 operator|.
-name|checkNotNull
+name|requireNonNull
 argument_list|(
 name|quoting
 argument_list|)
@@ -1005,9 +1001,9 @@ name|this
 operator|.
 name|parserFactory
 operator|=
-name|Preconditions
+name|Objects
 operator|.
-name|checkNotNull
+name|requireNonNull
 argument_list|(
 name|factory
 argument_list|)
@@ -1167,9 +1163,9 @@ name|this
 operator|.
 name|conformance
 operator|=
-name|Preconditions
+name|Objects
 operator|.
-name|checkNotNull
+name|requireNonNull
 argument_list|(
 name|conformance
 argument_list|)
@@ -1178,9 +1174,9 @@ name|this
 operator|.
 name|quotedCasing
 operator|=
-name|Preconditions
+name|Objects
 operator|.
-name|checkNotNull
+name|requireNonNull
 argument_list|(
 name|quotedCasing
 argument_list|)
@@ -1189,9 +1185,9 @@ name|this
 operator|.
 name|unquotedCasing
 operator|=
-name|Preconditions
+name|Objects
 operator|.
-name|checkNotNull
+name|requireNonNull
 argument_list|(
 name|unquotedCasing
 argument_list|)
@@ -1200,9 +1196,9 @@ name|this
 operator|.
 name|quoting
 operator|=
-name|Preconditions
+name|Objects
 operator|.
-name|checkNotNull
+name|requireNonNull
 argument_list|(
 name|quoting
 argument_list|)
@@ -1211,9 +1207,9 @@ name|this
 operator|.
 name|parserFactory
 operator|=
-name|Preconditions
+name|Objects
 operator|.
-name|checkNotNull
+name|requireNonNull
 argument_list|(
 name|parserFactory
 argument_list|)

@@ -111,6 +111,16 @@ name|List
 import|;
 end_import
 
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+import|;
+end_import
+
 begin_comment
 comment|/**  * Call to an aggregate function over a window.  */
 end_comment
@@ -189,9 +199,9 @@ name|this
 operator|.
 name|window
 operator|=
-name|Preconditions
+name|Objects
 operator|.
-name|checkNotNull
+name|requireNonNull
 argument_list|(
 name|window
 argument_list|)

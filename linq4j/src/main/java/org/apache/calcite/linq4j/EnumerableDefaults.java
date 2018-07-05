@@ -311,20 +311,6 @@ name|common
 operator|.
 name|collect
 operator|.
-name|Lists
-import|;
-end_import
-
-begin_import
-import|import
-name|com
-operator|.
-name|google
-operator|.
-name|common
-operator|.
-name|collect
-operator|.
 name|Sets
 import|;
 end_import
@@ -1693,9 +1679,6 @@ name|enumerable
 argument_list|,
 name|Functions
 operator|.
-expr|<
-name|TSource
-operator|>
 name|truePredicate1
 argument_list|()
 argument_list|)
@@ -1812,22 +1795,8 @@ name|Linq4j
 operator|.
 name|asEnumerable
 argument_list|(
-operator|new
-name|Iterable
-argument_list|<
-name|TSource
-argument_list|>
-argument_list|()
-block|{
-specifier|public
-name|Iterator
-argument_list|<
-name|TSource
-argument_list|>
-name|iterator
 parameter_list|()
-block|{
-return|return
+lambda|->
 operator|new
 name|Iterator
 argument_list|<
@@ -1838,7 +1807,7 @@ block|{
 specifier|private
 name|boolean
 name|nonFirst
-decl_stmt|;
+argument_list|;
 specifier|private
 name|Iterator
 argument_list|<
@@ -1921,11 +1890,8 @@ argument_list|)
 throw|;
 block|}
 block|}
-return|;
-block|}
-block|}
-argument_list|)
-return|;
+block_content|)
+empty_stmt|;
 block|}
 else|else
 block|{
@@ -1939,9 +1905,15 @@ argument_list|)
 return|;
 block|}
 block|}
-block|}
+end_class
+
+begin_comment
+unit|}
 comment|/**    * Returns distinct elements from a sequence by using    * the default {@link EqualityComparer} to compare values.    */
-specifier|public
+end_comment
+
+begin_function
+unit|public
 specifier|static
 parameter_list|<
 name|TSource
@@ -2016,7 +1988,13 @@ name|set
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Returns distinct elements from a sequence by using    * a specified {@link EqualityComparer} to compare values.    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -2129,7 +2107,13 @@ name|unwrapper
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Returns the element at a specified index in a    * sequence.    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -2257,7 +2241,13 @@ expr_stmt|;
 block|}
 block|}
 block|}
+end_function
+
+begin_comment
 comment|/**    * Returns the element at a specified index in a    * sequence or a default value if the index is out of    * range.    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -2402,7 +2392,13 @@ return|return
 literal|null
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Produces the set difference of two sequences by    * using the default equality comparer to compare values. (Defined    * by Enumerable.)    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -2493,7 +2489,13 @@ argument_list|)
 return|;
 block|}
 block|}
+end_function
+
+begin_comment
 comment|/**    * Produces the set difference of two sequences by    * using the specified {@code EqualityComparer<TSource>} to compare    * values.    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -2663,7 +2665,13 @@ name|unwrapper
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Returns the first element of a sequence. (Defined    * by Enumerable.)    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -2715,7 +2723,13 @@ argument_list|()
 throw|;
 block|}
 block|}
+end_function
+
+begin_comment
 comment|/**    * Returns the first element in a sequence that    * satisfies a specified condition.    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -2766,7 +2780,13 @@ name|NoSuchElementException
 argument_list|()
 throw|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Returns the first element of a sequence, or a    * default value if the sequence contains no elements.    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -2816,7 +2836,13 @@ literal|null
 return|;
 block|}
 block|}
+end_function
+
+begin_comment
 comment|/**    * Returns the first element of the sequence that    * satisfies a condition or a default value if no such element is    * found.    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -2865,7 +2891,13 @@ return|return
 literal|null
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Groups the elements of a sequence according to a    * specified key selector function.    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -2910,7 +2942,13 @@ name|keySelector
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Groups the elements of a sequence according to a    * specified key selector function and compares the keys by using    * a specified comparer.    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -2961,7 +2999,13 @@ name|comparer
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Groups the elements of a sequence according to a    * specified key selector function and projects the elements for    * each group by using a specified function.    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -3016,7 +3060,13 @@ name|elementSelector
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Groups the elements of a sequence according to a    * key selector function. The keys are compared by using a    * comparer and each group's elements are projected by using a    * specified function.    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -3079,7 +3129,13 @@ name|comparer
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Groups the elements of a sequence according to a    * specified key selector function and creates a result value from    * each group and its key.    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -3134,34 +3190,8 @@ argument_list|)
 operator|.
 name|select
 argument_list|(
-operator|new
-name|Function1
-argument_list|<
-name|Grouping
-argument_list|<
-name|TKey
-argument_list|,
-name|TSource
-argument_list|>
-argument_list|,
-name|TResult
-argument_list|>
-argument_list|()
-block|{
-specifier|public
-name|TResult
-name|apply
-parameter_list|(
-name|Grouping
-argument_list|<
-name|TKey
-argument_list|,
-name|TSource
-argument_list|>
 name|group
-parameter_list|)
-block|{
-return|return
+lambda|->
 name|resultSelector
 operator|.
 name|apply
@@ -3173,13 +3203,16 @@ argument_list|()
 argument_list|,
 name|group
 argument_list|)
-return|;
-block|}
-block|}
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Groups the elements of a sequence according to a    * specified key selector function and creates a result value from    * each group and its key. The keys are compared by using a    * specified comparer.    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -3242,34 +3275,8 @@ argument_list|)
 operator|.
 name|select
 argument_list|(
-operator|new
-name|Function1
-argument_list|<
-name|Grouping
-argument_list|<
-name|TKey
-argument_list|,
-name|TSource
-argument_list|>
-argument_list|,
-name|TResult
-argument_list|>
-argument_list|()
-block|{
-specifier|public
-name|TResult
-name|apply
-parameter_list|(
-name|Grouping
-argument_list|<
-name|TKey
-argument_list|,
-name|TSource
-argument_list|>
 name|group
-parameter_list|)
-block|{
-return|return
+lambda|->
 name|resultSelector
 operator|.
 name|apply
@@ -3281,13 +3288,16 @@ argument_list|()
 argument_list|,
 name|group
 argument_list|)
-return|;
-block|}
-block|}
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Groups the elements of a sequence according to a    * specified key selector function and creates a result value from    * each group and its key. The elements of each group are    * projected by using a specified function.    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -3354,34 +3364,8 @@ argument_list|)
 operator|.
 name|select
 argument_list|(
-operator|new
-name|Function1
-argument_list|<
-name|Grouping
-argument_list|<
-name|TKey
-argument_list|,
-name|TElement
-argument_list|>
-argument_list|,
-name|TResult
-argument_list|>
-argument_list|()
-block|{
-specifier|public
-name|TResult
-name|apply
-parameter_list|(
-name|Grouping
-argument_list|<
-name|TKey
-argument_list|,
-name|TElement
-argument_list|>
 name|group
-parameter_list|)
-block|{
-return|return
+lambda|->
 name|resultSelector
 operator|.
 name|apply
@@ -3393,13 +3377,16 @@ argument_list|()
 argument_list|,
 name|group
 argument_list|)
-return|;
-block|}
-block|}
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Groups the elements of a sequence according to a    * specified key selector function and creates a result value from    * each group and its key. Key values are compared by using a    * specified comparer, and the elements of each group are    * projected by using a specified function.    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -3474,34 +3461,8 @@ argument_list|)
 operator|.
 name|select
 argument_list|(
-operator|new
-name|Function1
-argument_list|<
-name|Grouping
-argument_list|<
-name|TKey
-argument_list|,
-name|TElement
-argument_list|>
-argument_list|,
-name|TResult
-argument_list|>
-argument_list|()
-block|{
-specifier|public
-name|TResult
-name|apply
-parameter_list|(
-name|Grouping
-argument_list|<
-name|TKey
-argument_list|,
-name|TElement
-argument_list|>
 name|group
-parameter_list|)
-block|{
-return|return
+lambda|->
 name|resultSelector
 operator|.
 name|apply
@@ -3513,13 +3474,16 @@ argument_list|()
 argument_list|,
 name|group
 argument_list|)
-return|;
-block|}
-block|}
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Groups the elements of a sequence according to a    * specified key selector function, initializing an accumulator for each    * group and adding to it each time an element with the same key is seen.    * Creates a result value from each accumulator and its key using a    * specified function.    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -3603,7 +3567,13 @@ name|resultSelector
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Groups the elements of a sequence according to a list of    * specified key selector functions, initializing an accumulator for each    * group and adding to it each time an element with the same key is seen.    * Creates a result value from each accumulator and its key using a    * specified function.    *    *<p>This method exists to support SQL {@code GROUPING SETS}.    * It does not correspond to any method in {@link Enumerable}.    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -3690,7 +3660,13 @@ name|resultSelector
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Groups the elements of a sequence according to a    * specified key selector function, initializing an accumulator for each    * group and adding to it each time an element with the same key is seen.    * Creates a result value from each accumulator and its key using a    * specified function. Key values are compared by using a    * specified comparer.    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -3814,6 +3790,9 @@ name|resultSelector
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_function
 specifier|private
 specifier|static
 parameter_list|<
@@ -4016,6 +3995,9 @@ name|resultSelector
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_function
 specifier|private
 specifier|static
 parameter_list|<
@@ -4235,6 +4217,9 @@ name|resultSelector
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_function
 specifier|private
 specifier|static
 parameter_list|<
@@ -4344,7 +4329,13 @@ name|resultSelector
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Correlates the elements of two sequences based on    * equality of keys and groups the results. The default equality    * comparer is used to compare keys.    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -4543,9 +4534,6 @@ literal|null
 condition|?
 name|Linq4j
 operator|.
-expr|<
-name|TInner
-operator|>
 name|emptyEnumerable
 argument_list|()
 else|:
@@ -4588,7 +4576,13 @@ block|}
 block|}
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Correlates the elements of two sequences based on    * key equality and groups the results. A specified    * {@code EqualityComparer<TSource>} is used to compare keys.    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -4798,9 +4792,6 @@ literal|null
 condition|?
 name|Linq4j
 operator|.
-expr|<
-name|TInner
-operator|>
 name|emptyEnumerable
 argument_list|()
 else|:
@@ -4843,7 +4834,13 @@ block|}
 block|}
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Produces the set intersection of two sequences by    * using the default equality comparer to compare values. (Defined    * by Enumerable.)    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -4956,7 +4953,13 @@ name|set1
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Produces the set intersection of two sequences by    * using the specified {@code EqualityComparer<TSource>} to compare    * values.    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -5151,7 +5154,13 @@ name|unwrapper
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Correlates the elements of two sequences based on    * matching keys. The default equality comparer is used to compare    * keys.    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -5234,7 +5243,13 @@ literal|false
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Correlates the elements of two sequences based on    * matching keys. A specified {@code EqualityComparer<TSource>} is used to    * compare keys.    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -5318,7 +5333,13 @@ literal|false
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Correlates the elements of two sequences based on    * matching keys. A specified {@code EqualityComparer<TSource>} is used to    * compare keys.    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -5408,7 +5429,13 @@ name|generateNullsOnRight
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/** Implementation of join that builds the right input and probes with the    * left. */
+end_comment
+
+begin_function
 specifier|private
 specifier|static
 parameter_list|<
@@ -5875,7 +5902,13 @@ block|}
 block|}
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Returns elements of {@code outer} for which there is a member of    * {@code inner} with a matching key. A specified    * {@code EqualityComparer<TSource>} is used to compare keys.    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -6251,7 +6284,13 @@ block|}
 block|}
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Returns the last element of a sequence. (Defined    * by Enumerable.)    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -6394,7 +6433,13 @@ name|NoSuchElementException
 argument_list|()
 throw|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Returns elements of {@code outer} for which there is a member of    * {@code inner} with a matching key.    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -6458,7 +6503,13 @@ literal|null
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Returns elements of {@code outer} for which there is a member of    * {@code inner} with a matching key. A specified    * {@code EqualityComparer<TSource>} is used to compare keys.    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -6573,20 +6624,8 @@ operator|.
 name|enumerator
 argument_list|()
 argument_list|,
-operator|new
-name|Predicate1
-argument_list|<
-name|TSource
-argument_list|>
-argument_list|()
-block|{
-specifier|public
-name|boolean
-name|apply
-parameter_list|(
-name|TSource
 name|v0
-parameter_list|)
+lambda|->
 block|{
 specifier|final
 name|TKey
@@ -6608,14 +6647,19 @@ name|key
 argument_list|)
 return|;
 block|}
-block|}
 argument_list|)
 return|;
 block|}
 block|}
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Correlates the elements of two sequences based on a predicate.    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -6681,9 +6725,9 @@ name|TResult
 argument_list|>
 name|result
 init|=
-name|Lists
-operator|.
-name|newArrayList
+operator|new
+name|ArrayList
+argument_list|<>
 argument_list|()
 decl_stmt|;
 specifier|final
@@ -6929,7 +6973,13 @@ name|result
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/** Joins two inputs that are sorted on the key. */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -7056,7 +7106,13 @@ block|}
 block|}
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Returns the last element of a sequence that    * satisfies a specified condition.    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -7259,7 +7315,13 @@ name|NoSuchElementException
 argument_list|()
 throw|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Returns the last element of a sequence, or a    * default value if the sequence contains no elements.    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -7400,7 +7462,13 @@ return|return
 literal|null
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Returns the last element of a sequence that    * satisfies a condition or a default value if no such element is    * found.    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -7601,7 +7669,13 @@ return|return
 literal|null
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Returns an long that represents the total number    * of elements in a sequence.    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -7624,15 +7698,18 @@ name|source
 argument_list|,
 name|Functions
 operator|.
-expr|<
-name|TSource
-operator|>
 name|truePredicate1
 argument_list|()
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Returns an long that represents how many elements    * in a sequence satisfy a condition.    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -7735,7 +7812,13 @@ return|return
 name|n
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Returns the maximum value in a generic    * sequence.    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -7780,7 +7863,13 @@ name|max
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Invokes a transform function on each element of a    * sequence and returns the maximum Decimal value.    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -7831,7 +7920,13 @@ name|max
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Invokes a transform function on each element of a    * sequence and returns the maximum nullable Decimal    * value.    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -7882,7 +7977,13 @@ name|max
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Invokes a transform function on each element of a    * sequence and returns the maximum Double value.    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -7925,7 +8026,13 @@ name|DOUBLE_MAX
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Invokes a transform function on each element of a    * sequence and returns the maximum nullable Double    * value.    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -7965,7 +8072,13 @@ name|DOUBLE_MAX
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Invokes a transform function on each element of a    * sequence and returns the maximum int value.    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -8008,7 +8121,13 @@ name|INTEGER_MAX
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Invokes a transform function on each element of a    * sequence and returns the maximum nullable int value. (Defined    * by Enumerable.)    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -8048,7 +8167,13 @@ name|INTEGER_MAX
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Invokes a transform function on each element of a    * sequence and returns the maximum long value.    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -8091,7 +8216,13 @@ name|LONG_MAX
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Invokes a transform function on each element of a    * sequence and returns the maximum nullable long value. (Defined    * by Enumerable.)    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -8131,7 +8262,13 @@ name|LONG_MAX
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Invokes a transform function on each element of a    * sequence and returns the maximum Float value.    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -8174,7 +8311,13 @@ name|FLOAT_MAX
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Invokes a transform function on each element of a    * sequence and returns the maximum nullable Float    * value.    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -8214,7 +8357,13 @@ name|FLOAT_MAX
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Invokes a transform function on each element of a    * generic sequence and returns the maximum resulting    * value.    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -8274,7 +8423,13 @@ name|max
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Returns the minimum value in a generic    * sequence.    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -8319,6 +8474,9 @@ name|min
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|SuppressWarnings
 argument_list|(
@@ -8355,12 +8513,18 @@ name|TSource
 argument_list|,
 name|TSource
 argument_list|>
+operator|)
+operator|(
+name|Function2
 operator|)
 name|Extensions
 operator|.
 name|COMPARABLE_MIN
 return|;
 block|}
+end_function
+
+begin_function
 annotation|@
 name|SuppressWarnings
 argument_list|(
@@ -8398,12 +8562,21 @@ argument_list|,
 name|TSource
 argument_list|>
 operator|)
+operator|(
+name|Function2
+operator|)
 name|Extensions
 operator|.
 name|COMPARABLE_MAX
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Invokes a transform function on each element of a    * sequence and returns the minimum Decimal value.    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -8454,7 +8627,13 @@ name|min
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Invokes a transform function on each element of a    * sequence and returns the minimum nullable Decimal    * value.    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -8505,7 +8684,13 @@ name|min
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Invokes a transform function on each element of a    * sequence and returns the minimum Double value.    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -8548,7 +8733,13 @@ name|DOUBLE_MIN
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Invokes a transform function on each element of a    * sequence and returns the minimum nullable Double    * value.    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -8588,7 +8779,13 @@ name|DOUBLE_MIN
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Invokes a transform function on each element of a    * sequence and returns the minimum int value.    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -8631,7 +8828,13 @@ name|INTEGER_MIN
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Invokes a transform function on each element of a    * sequence and returns the minimum nullable int value. (Defined    * by Enumerable.)    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -8671,7 +8874,13 @@ name|INTEGER_MIN
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Invokes a transform function on each element of a    * sequence and returns the minimum long value.    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -8714,7 +8923,13 @@ name|LONG_MIN
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Invokes a transform function on each element of a    * sequence and returns the minimum nullable long value. (Defined    * by Enumerable.)    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -8754,7 +8969,13 @@ name|LONG_MIN
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Invokes a transform function on each element of a    * sequence and returns the minimum Float value.    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -8797,7 +9018,13 @@ name|FLOAT_MIN
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Invokes a transform function on each element of a    * sequence and returns the minimum nullable Float    * value.    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -8837,7 +9064,13 @@ name|FLOAT_MIN
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Invokes a transform function on each element of a    * generic sequence and returns the minimum resulting    * value.    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -8897,7 +9130,13 @@ name|min
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Filters the elements of an Enumerable based on a    * specified type.    *    *<p>Analogous to LINQ's Enumerable.OfType extension method.</p>    *    * @param clazz Target type    * @param<TResult> Target type    *    * @return Collection of T2    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -8935,11 +9174,6 @@ name|enumerable
 argument_list|,
 name|Functions
 operator|.
-expr|<
-name|TSource
-argument_list|,
-name|TResult
-operator|>
 name|ofTypePredicate
 argument_list|(
 name|clazz
@@ -8947,7 +9181,13 @@ argument_list|)
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Sorts the elements of a sequence in ascending    * order according to a key.    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -8989,7 +9229,13 @@ literal|null
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Sorts the elements of a sequence in ascending    * order by using a specified comparer.    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -9064,9 +9310,6 @@ name|keySelector
 argument_list|,
 name|Functions
 operator|.
-expr|<
-name|TSource
-operator|>
 name|identitySelector
 argument_list|()
 argument_list|)
@@ -9078,7 +9321,13 @@ name|valuesEnumerable
 argument_list|()
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Sorts the elements of a sequence in descending    * order according to a key.    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -9118,15 +9367,18 @@ name|keySelector
 argument_list|,
 name|Collections
 operator|.
-expr|<
-name|TKey
-operator|>
 name|reverseOrder
 argument_list|()
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Sorts the elements of a sequence in descending    * order by using a specified comparer.    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -9177,7 +9429,13 @@ argument_list|)
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Inverts the order of the elements in a    * sequence.    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -9263,7 +9521,13 @@ block|}
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Projects each element of a sequence into a new form.    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -9408,7 +9672,13 @@ block|}
 block|}
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Projects each element of a sequence into a new    * form by incorporating the element's index.    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -9557,7 +9827,13 @@ block|}
 block|}
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Projects each element of a sequence to an    * {@code Enumerable<TSource>} and flattens the resulting sequences into one    * sequence.    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -9742,7 +10018,13 @@ block|}
 block|}
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Projects each element of a sequence to an    * {@code Enumerable<TSource>}, and flattens the resulting sequences into one    * sequence. The index of each source element is used in the    * projected form of that element.    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -9941,7 +10223,13 @@ block|}
 block|}
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Projects each element of a sequence to an    * {@code Enumerable<TSource>}, flattens the resulting sequences into one    * sequence, and invokes a result selector function on each    * element therein. The index of each source element is used in    * the intermediate projected form of that element.    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -10204,7 +10492,13 @@ block|}
 block|}
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Projects each element of a sequence to an    * {@code Enumerable<TSource>}, flattens the resulting sequences into one    * sequence, and invokes a result selector function on each    * element therein.    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -10458,7 +10752,13 @@ block|}
 block|}
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Determines whether two sequences are equal by    * comparing the elements by using the default equality comparer    * for their type.    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -10491,7 +10791,13 @@ literal|null
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Determines whether two sequences are equal by    * comparing their elements by using a specified    * {@code EqualityComparer<TSource>}.    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -10749,7 +11055,13 @@ argument_list|()
 return|;
 block|}
 block|}
+end_function
+
+begin_comment
 comment|/**    * Returns the only element of a sequence, and throws    * an exception if there is not exactly one element in the    * sequence.    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -10832,7 +11144,13 @@ argument_list|()
 throw|;
 block|}
 block|}
+end_function
+
+begin_comment
 comment|/**    * Returns the only element of a sequence that    * satisfies a specified condition, and throws an exception if    * more than one such element exists.    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -10937,7 +11255,13 @@ argument_list|()
 throw|;
 block|}
 block|}
+end_function
+
+begin_comment
 comment|/**    * Returns the only element of a sequence, or a    * default value if the sequence is empty; this method throws an    * exception if there is more than one element in the    * sequence.    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -11005,7 +11329,13 @@ name|toRet
 return|;
 block|}
 block|}
+end_function
+
+begin_comment
 comment|/**    * Returns the only element of a sequence that    * satisfies a specified condition or a default value if no such    * element exists; this method throws an exception if more than    * one element satisfies the condition.    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -11074,7 +11404,13 @@ return|return
 name|toRet
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Bypasses a specified number of elements in a    * sequence and then returns the remaining elements.    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -11102,25 +11438,12 @@ name|skipWhile
 argument_list|(
 name|source
 argument_list|,
-operator|new
-name|Predicate2
-argument_list|<
-name|TSource
-argument_list|,
-name|Integer
-argument_list|>
-argument_list|()
-block|{
-specifier|public
-name|boolean
-name|apply
 parameter_list|(
-name|TSource
 name|v1
 parameter_list|,
-name|Integer
 name|v2
 parameter_list|)
+lambda|->
 block|{
 comment|// Count is 1-based
 return|return
@@ -11129,11 +11452,16 @@ operator|<
 name|count
 return|;
 block|}
-block|}
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Bypasses elements in a sequence as long as a    * specified condition is true and then returns the remaining    * elements.    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -11165,11 +11493,6 @@ name|source
 argument_list|,
 name|Functions
 operator|.
-expr|<
-name|TSource
-argument_list|,
-name|Integer
-operator|>
 name|toPredicate2
 argument_list|(
 name|predicate
@@ -11177,7 +11500,13 @@ argument_list|)
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Bypasses elements in a sequence as long as a    * specified condition is true and then returns the remaining    * elements. The element's index is used in the logic of the    * predicate function.    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -11239,7 +11568,13 @@ block|}
 block|}
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Computes the sum of the sequence of Decimal values    * that are obtained by invoking a transform function on each    * element of the input sequence.    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -11281,7 +11616,13 @@ name|BIG_DECIMAL_SUM
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Computes the sum of the sequence of nullable    * Decimal values that are obtained by invoking a transform    * function on each element of the input sequence.    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -11323,7 +11664,13 @@ name|BIG_DECIMAL_SUM
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Computes the sum of the sequence of Double values    * that are obtained by invoking a transform function on each    * element of the input sequence.    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -11366,7 +11713,13 @@ name|DOUBLE_SUM
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Computes the sum of the sequence of nullable    * Double values that are obtained by invoking a transform    * function on each element of the input sequence.    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -11406,7 +11759,13 @@ name|DOUBLE_SUM
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Computes the sum of the sequence of int values    * that are obtained by invoking a transform function on each    * element of the input sequence.    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -11449,7 +11808,13 @@ name|INTEGER_SUM
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Computes the sum of the sequence of nullable int    * values that are obtained by invoking a transform function on    * each element of the input sequence.    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -11489,7 +11854,13 @@ name|INTEGER_SUM
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Computes the sum of the sequence of long values    * that are obtained by invoking a transform function on each    * element of the input sequence.    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -11532,7 +11903,13 @@ name|LONG_SUM
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Computes the sum of the sequence of nullable long    * values that are obtained by invoking a transform function on    * each element of the input sequence.    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -11572,7 +11949,13 @@ name|LONG_SUM
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Computes the sum of the sequence of Float values    * that are obtained by invoking a transform function on each    * element of the input sequence.    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -11615,7 +11998,13 @@ name|FLOAT_SUM
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Computes the sum of the sequence of nullable    * Float values that are obtained by invoking a transform    * function on each element of the input sequence.    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -11655,7 +12044,13 @@ name|FLOAT_SUM
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Returns a specified number of contiguous elements    * from the start of a sequence.    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -11683,25 +12078,12 @@ name|takeWhile
 argument_list|(
 name|source
 argument_list|,
-operator|new
-name|Predicate2
-argument_list|<
-name|TSource
-argument_list|,
-name|Integer
-argument_list|>
-argument_list|()
-block|{
-specifier|public
-name|boolean
-name|apply
 parameter_list|(
-name|TSource
 name|v1
 parameter_list|,
-name|Integer
 name|v2
 parameter_list|)
+lambda|->
 block|{
 comment|// Count is 1-based
 return|return
@@ -11710,11 +12092,16 @@ operator|<
 name|count
 return|;
 block|}
-block|}
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Returns a specified number of contiguous elements    * from the start of a sequence.    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -11742,25 +12129,12 @@ name|takeWhileLong
 argument_list|(
 name|source
 argument_list|,
-operator|new
-name|Predicate2
-argument_list|<
-name|TSource
-argument_list|,
-name|Long
-argument_list|>
-argument_list|()
-block|{
-specifier|public
-name|boolean
-name|apply
 parameter_list|(
-name|TSource
 name|v1
 parameter_list|,
-name|Long
 name|v2
 parameter_list|)
+lambda|->
 block|{
 comment|// Count is 1-based
 return|return
@@ -11769,11 +12143,16 @@ operator|<
 name|count
 return|;
 block|}
-block|}
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Returns elements from a sequence as long as a    * specified condition is true.    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -11806,11 +12185,6 @@ name|source
 argument_list|,
 name|Functions
 operator|.
-expr|<
-name|TSource
-argument_list|,
-name|Integer
-operator|>
 name|toPredicate2
 argument_list|(
 name|predicate
@@ -11818,7 +12192,13 @@ argument_list|)
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Returns elements from a sequence as long as a    * specified condition is true. The element's index is used in the    * logic of the predicate function.    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -11880,7 +12260,13 @@ block|}
 block|}
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Returns elements from a sequence as long as a    * specified condition is true. The element's index is used in the    * logic of the predicate function.    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -11942,7 +12328,13 @@ block|}
 block|}
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Performs a subsequent ordering of the elements in a sequence according    * to a key.    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -11987,7 +12379,13 @@ name|todo
 argument_list|()
 throw|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Performs a subsequent ordering of the elements in a sequence in    * ascending order according to a key.    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -12030,9 +12428,6 @@ name|keySelector
 argument_list|,
 name|Extensions
 operator|.
-expr|<
-name|TKey
-operator|>
 name|comparableComparator
 argument_list|()
 argument_list|,
@@ -12040,7 +12435,13 @@ literal|false
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Performs a subsequent ordering of the elements in a sequence in    * ascending order according to a key, using a specified comparator.    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -12088,7 +12489,13 @@ literal|false
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Performs a subsequent ordering of the elements in a sequence in    * descending order according to a key.    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -12131,9 +12538,6 @@ name|keySelector
 argument_list|,
 name|Extensions
 operator|.
-expr|<
-name|TKey
-operator|>
 name|comparableComparator
 argument_list|()
 argument_list|,
@@ -12141,7 +12545,13 @@ literal|true
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Performs a subsequent ordering of the elements in a sequence in    * descending order according to a key, using a specified comparator.    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -12189,7 +12599,13 @@ literal|true
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Creates a Map&lt;TKey, TValue&gt; from an    * Enumerable&lt;TSource&gt; according to a specified key selector    * function.    *    *<p>NOTE: Called {@code toDictionary} in LINQ.NET.</p>    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -12229,15 +12645,18 @@ name|keySelector
 argument_list|,
 name|Functions
 operator|.
-expr|<
-name|TSource
-operator|>
 name|identitySelector
 argument_list|()
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Creates a {@code Map<TKey, TValue>} from an    * {@code Enumerable<TSource>} according to a specified key selector function    * and key comparer.    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -12283,9 +12702,6 @@ name|keySelector
 argument_list|,
 name|Functions
 operator|.
-expr|<
-name|TSource
-operator|>
 name|identitySelector
 argument_list|()
 argument_list|,
@@ -12293,7 +12709,13 @@ name|comparer
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Creates a {@code Map<TKey, TValue>} from an    * {@code Enumerable<TSource>} according to specified key selector and element    * selector functions.    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -12405,7 +12827,13 @@ return|return
 name|map
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Creates a {@code Map<TKey, TValue>} from an    * {@code Enumerable<TSource>} according to a specified key selector function,    * a comparer, and an element selector function.    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -12562,7 +12990,13 @@ return|return
 name|map
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Creates a {@code List<TSource>} from an {@code Enumerable<TSource>}.    */
+end_comment
+
+begin_function
 annotation|@
 name|SuppressWarnings
 argument_list|(
@@ -12645,7 +13079,13 @@ argument_list|)
 return|;
 block|}
 block|}
+end_function
+
+begin_comment
 comment|/**    * Creates a Lookup&lt;TKey, TElement&gt; from an    * Enumerable&lt;TSource&gt; according to a specified key selector    * function.    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -12685,15 +13125,18 @@ name|keySelector
 argument_list|,
 name|Functions
 operator|.
-expr|<
-name|TSource
-operator|>
 name|identitySelector
 argument_list|()
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Creates a {@code Lookup<TKey, TElement>} from an    * {@code Enumerable<TSource>} according to a specified key selector function    * and key comparer.    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -12739,9 +13182,6 @@ name|keySelector
 argument_list|,
 name|Functions
 operator|.
-expr|<
-name|TSource
-operator|>
 name|identitySelector
 argument_list|()
 argument_list|,
@@ -12749,7 +13189,13 @@ name|comparer
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Creates a {@code Lookup<TKey, TElement>} from an    * {@code Enumerable<TSource>} according to specified key selector and element    * selector functions.    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -12820,6 +13266,9 @@ name|elementSelector
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_function
 specifier|static
 parameter_list|<
 name|TSource
@@ -13018,7 +13467,13 @@ name|map
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Creates a {@code Lookup<TKey, TElement>} from an    * {@code Enumerable<TSource>} according to a specified key selector function,    * a comparer and an element selector function.    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -13126,7 +13581,13 @@ name|elementSelector
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Produces the set union of two sequences by using    * the default equality comparer.    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -13185,7 +13646,13 @@ name|set
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Produces the set union of two sequences by using a    * specified EqualityComparer&lt;TSource&gt;.    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -13318,6 +13785,9 @@ name|unwrapper
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_function
 specifier|private
 specifier|static
 parameter_list|<
@@ -13336,38 +13806,16 @@ name|unwrapper
 parameter_list|()
 block|{
 return|return
-operator|new
-name|Function1
-argument_list|<
-name|Wrapped
-argument_list|<
-name|TSource
-argument_list|>
-argument_list|,
-name|TSource
-argument_list|>
-argument_list|()
-block|{
-specifier|public
-name|TSource
-name|apply
-parameter_list|(
-name|Wrapped
-argument_list|<
-name|TSource
-argument_list|>
 name|a0
-parameter_list|)
-block|{
-return|return
+lambda|->
 name|a0
 operator|.
 name|element
 return|;
 block|}
-block|}
-return|;
-block|}
+end_function
+
+begin_function
 specifier|private
 specifier|static
 parameter_list|<
@@ -13393,30 +13841,8 @@ name|comparer
 parameter_list|)
 block|{
 return|return
-operator|new
-name|Function1
-argument_list|<
-name|TSource
-argument_list|,
-name|Wrapped
-argument_list|<
-name|TSource
-argument_list|>
-argument_list|>
-argument_list|()
-block|{
-specifier|public
-name|Wrapped
-argument_list|<
-name|TSource
-argument_list|>
-name|apply
-parameter_list|(
-name|TSource
 name|a0
-parameter_list|)
-block|{
-return|return
+lambda|->
 name|Wrapped
 operator|.
 name|upAs
@@ -13427,10 +13853,13 @@ name|a0
 argument_list|)
 return|;
 block|}
-block|}
-return|;
-block|}
+end_function
+
+begin_comment
 comment|/**    * Filters a sequence of values based on a    * predicate.    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -13504,6 +13933,9 @@ block|}
 block|}
 return|;
 block|}
+end_function
+
+begin_function
 specifier|private
 specifier|static
 parameter_list|<
@@ -13610,7 +14042,13 @@ block|}
 block|}
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Filters a sequence of values based on a    * predicate. Each element's index is used in the logic of the    * predicate function.    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -13766,7 +14204,13 @@ block|}
 block|}
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Applies a specified function to the corresponding    * elements of two sequences, producing a sequence of the    * results.    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -13933,6 +14377,9 @@ block|}
 block|}
 return|;
 block|}
+end_function
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -13986,7 +14433,13 @@ literal|null
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/** Default implementation of {@link ExtendedEnumerable#into(Collection)}. */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -14057,7 +14510,13 @@ return|return
 name|sink
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/** Default implementation of {@link ExtendedEnumerable#removeAll(Collection)}. */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 parameter_list|<
@@ -14114,7 +14573,13 @@ return|return
 name|sink
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/** Enumerable that implements take-while.    *    * @param<TSource> element type */
+end_comment
+
+begin_class
 specifier|static
 class|class
 name|TakeWhileEnumerator
@@ -14278,7 +14743,13 @@ argument_list|()
 expr_stmt|;
 block|}
 block|}
+end_class
+
+begin_comment
 comment|/** Enumerable that implements take-while.    *    * @param<TSource> element type */
+end_comment
+
+begin_class
 specifier|static
 class|class
 name|TakeWhileLongEnumerator
@@ -14442,7 +14913,13 @@ argument_list|()
 expr_stmt|;
 block|}
 block|}
+end_class
+
+begin_comment
 comment|/** Enumerator that implements skip-while.    *    * @param<TSource> element type */
+end_comment
+
+begin_class
 specifier|static
 class|class
 name|SkipWhileEnumerator
@@ -14618,7 +15095,13 @@ argument_list|()
 expr_stmt|;
 block|}
 block|}
+end_class
+
+begin_comment
 comment|/** Enumerator that casts each value.    *    * @param<T> element type */
+end_comment
+
+begin_class
 specifier|static
 class|class
 name|CastingEnumerator
@@ -14727,7 +15210,13 @@ argument_list|()
 expr_stmt|;
 block|}
 block|}
+end_class
+
+begin_comment
 comment|/** Value wrapped with a comparer.    *    * @param<T> element type */
+end_comment
+
+begin_class
 specifier|private
 specifier|static
 class|class
@@ -14872,7 +15361,13 @@ name|element
 return|;
 block|}
 block|}
+end_class
+
+begin_comment
 comment|/** Map that wraps each value.    *    * @param<K> key type    * @param<V> value type */
+end_comment
+
+begin_class
 specifier|private
 specifier|static
 class|class
@@ -15273,7 +15768,13 @@ argument_list|()
 return|;
 block|}
 block|}
+end_class
+
+begin_comment
 comment|/** Reads a populated map, applying a selector function.    *    * @param<TResult> result type    * @param<TKey> key type    * @param<TAccumulate> accumulator type */
+end_comment
+
+begin_class
 specifier|private
 specifier|static
 class|class
@@ -15450,7 +15951,13 @@ block|}
 return|;
 block|}
 block|}
+end_class
+
+begin_comment
 comment|/** Enumerator that performs a merge join on its sorted inputs.    *    * @param<TResult> result type    * @param<TSource> left input record type    * @param<TKey> key type    * @param<TInner> right input record type */
+end_comment
+
+begin_class
 specifier|private
 specifier|static
 class|class
@@ -15996,9 +16503,6 @@ name|of
 argument_list|(
 name|Linq4j
 operator|.
-expr|<
-name|Object
-operator|>
 name|enumerator
 argument_list|(
 name|lefts
@@ -16006,9 +16510,6 @@ argument_list|)
 argument_list|,
 name|Linq4j
 operator|.
-expr|<
-name|Object
-operator|>
 name|enumerator
 argument_list|(
 name|rights
@@ -16161,10 +16662,10 @@ parameter_list|()
 block|{
 block|}
 block|}
-block|}
 end_class
 
 begin_comment
+unit|}
 comment|// End EnumerableDefaults.java
 end_comment
 

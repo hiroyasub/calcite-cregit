@@ -99,20 +99,6 @@ name|google
 operator|.
 name|common
 operator|.
-name|base
-operator|.
-name|Preconditions
-import|;
-end_import
-
-begin_import
-import|import
-name|com
-operator|.
-name|google
-operator|.
-name|common
-operator|.
 name|collect
 operator|.
 name|ImmutableList
@@ -341,6 +327,16 @@ name|Map
 import|;
 end_import
 
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+import|;
+end_import
+
 begin_comment
 comment|/**  * Schema mapped onto an index of ELASTICSEARCH types.  *  *<p>Each table in the schema is an ELASTICSEARCH type in that index.  */
 end_comment
@@ -533,9 +529,9 @@ name|this
 operator|.
 name|client
 operator|=
-name|Preconditions
+name|Objects
 operator|.
-name|checkNotNull
+name|requireNonNull
 argument_list|(
 name|client
 argument_list|,
@@ -546,9 +542,9 @@ name|this
 operator|.
 name|index
 operator|=
-name|Preconditions
+name|Objects
 operator|.
-name|checkNotNull
+name|requireNonNull
 argument_list|(
 name|index
 argument_list|,

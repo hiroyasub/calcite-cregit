@@ -83,21 +83,17 @@ name|common
 operator|.
 name|collect
 operator|.
-name|Maps
+name|Multimap
 import|;
 end_import
 
 begin_import
 import|import
-name|com
+name|java
 operator|.
-name|google
+name|util
 operator|.
-name|common
-operator|.
-name|collect
-operator|.
-name|Multimap
+name|HashMap
 import|;
 end_import
 
@@ -150,9 +146,9 @@ name|Materialization
 argument_list|>
 name|keyMap
 init|=
-name|Maps
-operator|.
-name|newHashMap
+operator|new
+name|HashMap
+argument_list|<>
 argument_list|()
 decl_stmt|;
 specifier|final
@@ -164,9 +160,9 @@ name|MaterializationKey
 argument_list|>
 name|keyBySql
 init|=
-name|Maps
-operator|.
-name|newHashMap
+operator|new
+name|HashMap
+argument_list|<>
 argument_list|()
 decl_stmt|;
 specifier|final
@@ -178,9 +174,9 @@ name|MaterializationKey
 argument_list|>
 name|keyByTile
 init|=
-name|Maps
-operator|.
-name|newHashMap
+operator|new
+name|HashMap
+argument_list|<>
 argument_list|()
 decl_stmt|;
 comment|/** Tiles grouped by dimensionality. We use a    *  {@link TileKey} with no measures to represent a    *  dimensionality. */
@@ -268,9 +264,9 @@ name|this
 operator|.
 name|rootSchema
 operator|=
-name|Preconditions
+name|Objects
 operator|.
-name|checkNotNull
+name|requireNonNull
 argument_list|(
 name|rootSchema
 argument_list|)

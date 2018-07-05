@@ -427,20 +427,6 @@ name|google
 operator|.
 name|common
 operator|.
-name|base
-operator|.
-name|Function
-import|;
-end_import
-
-begin_import
-import|import
-name|com
-operator|.
-name|google
-operator|.
-name|common
-operator|.
 name|collect
 operator|.
 name|ImmutableList
@@ -594,6 +580,18 @@ operator|.
 name|util
 operator|.
 name|Objects
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|function
+operator|.
+name|Consumer
 import|;
 end_import
 
@@ -16895,33 +16893,9 @@ name|checkLarge
 argument_list|(
 literal|700
 argument_list|,
-operator|new
-name|Function
-argument_list|<
-name|String
-argument_list|,
-name|Void
-argument_list|>
-argument_list|()
-block|{
-specifier|public
-name|Void
-name|apply
-parameter_list|(
-name|String
-name|input
-parameter_list|)
-block|{
+name|this
+operator|::
 name|check
-argument_list|(
-name|input
-argument_list|)
-expr_stmt|;
-return|return
-literal|null
-return|;
-block|}
-block|}
 argument_list|)
 expr_stmt|;
 block|}
@@ -16932,11 +16906,9 @@ parameter_list|(
 name|int
 name|x
 parameter_list|,
-name|Function
+name|Consumer
 argument_list|<
 name|String
-argument_list|,
-name|Void
 argument_list|>
 name|f
 parameter_list|)
@@ -16978,7 +16950,7 @@ argument_list|)
 decl_stmt|;
 name|f
 operator|.
-name|apply
+name|accept
 argument_list|(
 literal|"select "
 operator|+
@@ -16989,7 +16961,7 @@ argument_list|)
 expr_stmt|;
 name|f
 operator|.
-name|apply
+name|accept
 argument_list|(
 literal|"select distinct "
 operator|+
@@ -17000,7 +16972,7 @@ argument_list|)
 expr_stmt|;
 name|f
 operator|.
-name|apply
+name|accept
 argument_list|(
 literal|"select "
 operator|+
@@ -17013,7 +16985,7 @@ argument_list|)
 expr_stmt|;
 name|f
 operator|.
-name|apply
+name|accept
 argument_list|(
 literal|"select * from emp where "
 operator|+
@@ -17024,7 +16996,7 @@ argument_list|)
 expr_stmt|;
 name|f
 operator|.
-name|apply
+name|accept
 argument_list|(
 literal|"select * from emp order by "
 operator|+
@@ -17035,7 +17007,7 @@ argument_list|)
 expr_stmt|;
 name|f
 operator|.
-name|apply
+name|accept
 argument_list|(
 literal|"select "
 operator|+
@@ -17046,7 +17018,7 @@ argument_list|)
 expr_stmt|;
 name|f
 operator|.
-name|apply
+name|accept
 argument_list|(
 literal|"select distinct "
 operator|+
@@ -17060,7 +17032,7 @@ expr_stmt|;
 comment|// E.g. "in (0, 1, 2, ...)"
 name|f
 operator|.
-name|apply
+name|accept
 argument_list|(
 literal|"select * from emp where deptno in ("
 operator|+
@@ -17079,7 +17051,7 @@ expr_stmt|;
 comment|// E.g. "where x = 1 or x = 2 or x = 3 ..."
 name|f
 operator|.
-name|apply
+name|accept
 argument_list|(
 literal|"select * from emp where "
 operator|+
@@ -17098,7 +17070,7 @@ comment|// select 'a' as x1, 'a' as x2, ... from emp union
 comment|// select 'bb' as x1, 'bb' as x2, ... from dept)"
 name|f
 operator|.
-name|apply
+name|accept
 argument_list|(
 literal|"select "
 operator|+
@@ -25143,23 +25115,12 @@ name|SqlOperator
 argument_list|>
 name|comparator
 init|=
-operator|new
-name|Comparator
-argument_list|<
-name|SqlOperator
-argument_list|>
-argument_list|()
-block|{
-specifier|public
-name|int
-name|compare
 parameter_list|(
-name|SqlOperator
 name|o1
 parameter_list|,
-name|SqlOperator
 name|o2
 parameter_list|)
+lambda|->
 block|{
 name|int
 name|c
@@ -25231,7 +25192,6 @@ name|getSyntax
 argument_list|()
 argument_list|)
 return|;
-block|}
 block|}
 decl_stmt|;
 specifier|final

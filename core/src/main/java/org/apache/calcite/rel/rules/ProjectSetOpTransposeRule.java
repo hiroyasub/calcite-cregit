@@ -191,11 +191,9 @@ init|=
 operator|new
 name|ProjectSetOpTransposeRule
 argument_list|(
-name|PushProjector
-operator|.
-name|ExprCondition
-operator|.
-name|FALSE
+name|expr
+lambda|->
+literal|false
 argument_list|,
 name|RelFactories
 operator|.

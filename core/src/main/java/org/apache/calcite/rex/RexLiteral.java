@@ -531,9 +531,9 @@ name|this
 operator|.
 name|type
 operator|=
-name|Preconditions
+name|Objects
 operator|.
-name|checkNotNull
+name|requireNonNull
 argument_list|(
 name|type
 argument_list|)
@@ -542,9 +542,9 @@ name|this
 operator|.
 name|typeName
 operator|=
-name|Preconditions
+name|Objects
 operator|.
-name|checkNotNull
+name|requireNonNull
 argument_list|(
 name|typeName
 argument_list|)

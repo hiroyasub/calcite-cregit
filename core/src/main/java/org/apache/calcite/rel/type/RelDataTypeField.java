@@ -19,20 +19,6 @@ end_package
 
 begin_import
 import|import
-name|com
-operator|.
-name|google
-operator|.
-name|common
-operator|.
-name|base
-operator|.
-name|Function
-import|;
-end_import
-
-begin_import
-import|import
 name|java
 operator|.
 name|util
@@ -59,10 +45,21 @@ argument_list|,
 name|RelDataType
 argument_list|>
 block|{
-comment|/**    * Function to transform a set of {@link RelDataTypeField} to    * a set of {@link Integer} of the field keys.    */
+comment|/**    * Function to transform a set of {@link RelDataTypeField} to    * a set of {@link Integer} of the field keys.    *    * @deprecated Use {@code RelDataTypeField::getIndex}    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 class|class
 name|ToFieldIndex
 implements|implements
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|base
+operator|.
 name|Function
 argument_list|<
 name|RelDataTypeField
@@ -88,10 +85,21 @@ argument_list|()
 return|;
 block|}
 block|}
-comment|/**    * Function to transform a set of {@link RelDataTypeField} to    * a set of {@link String} of the field names.    */
+comment|/**    * Function to transform a set of {@link RelDataTypeField} to    * a set of {@link String} of the field names.    *    * @deprecated Use {@code RelDataTypeField::getName}    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 class|class
 name|ToFieldName
 implements|implements
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|base
+operator|.
 name|Function
 argument_list|<
 name|RelDataTypeField

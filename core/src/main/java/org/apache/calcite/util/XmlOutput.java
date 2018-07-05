@@ -1654,9 +1654,6 @@ name|addAll
 argument_list|(
 name|Collections
 operator|.
-expr|<
-name|String
-operator|>
 name|nCopies
 argument_list|(
 name|count
@@ -1691,10 +1688,7 @@ argument_list|(
 operator|new
 name|String
 index|[
-name|translationVector
-operator|.
-name|size
-argument_list|()
+literal|0
 index|]
 argument_list|)
 expr_stmt|;

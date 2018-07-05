@@ -169,20 +169,6 @@ name|common
 operator|.
 name|base
 operator|.
-name|Supplier
-import|;
-end_import
-
-begin_import
-import|import
-name|com
-operator|.
-name|google
-operator|.
-name|common
-operator|.
-name|base
-operator|.
 name|Suppliers
 import|;
 end_import
@@ -270,6 +256,18 @@ import|;
 end_import
 
 begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|function
+operator|.
+name|Supplier
+import|;
+end_import
+
+begin_import
 import|import static
 name|org
 operator|.
@@ -329,17 +327,8 @@ name|Suppliers
 operator|.
 name|memoize
 argument_list|(
-operator|new
-name|Supplier
-argument_list|<
-name|Resolved
-argument_list|>
-argument_list|()
-block|{
-specifier|public
-name|Resolved
-name|get
 parameter_list|()
+lambda|->
 block|{
 assert|assert
 name|temporaryGroupExprList
@@ -368,8 +357,9 @@ literal|null
 expr_stmt|;
 block|}
 block|}
-block|}
 argument_list|)
+operator|::
+name|get
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
 comment|/**    * Creates an AggregatingSelectScope    *    * @param selectScope Parent scope    * @param select      Enclosing SELECT node    * @param distinct    Whether SELECT is DISTINCT    */
@@ -686,9 +676,6 @@ name|of
 argument_list|(
 name|ImmutableList
 operator|.
-expr|<
-name|SqlNode
-operator|>
 name|of
 argument_list|()
 argument_list|,
@@ -724,9 +711,6 @@ name|of
 argument_list|(
 name|ImmutableList
 operator|.
-expr|<
-name|SqlNode
-operator|>
 name|of
 argument_list|()
 argument_list|,
@@ -777,17 +761,11 @@ name|of
 argument_list|(
 name|ImmutableList
 operator|.
-expr|<
-name|SqlNode
-operator|>
 name|of
 argument_list|()
 argument_list|,
 name|ImmutableList
 operator|.
-expr|<
-name|SqlNode
-operator|>
 name|of
 argument_list|()
 argument_list|)

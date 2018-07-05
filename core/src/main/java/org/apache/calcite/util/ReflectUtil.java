@@ -988,9 +988,6 @@ name|visitMethodName
 argument_list|,
 name|Collections
 operator|.
-expr|<
-name|Class
-operator|>
 name|emptyList
 argument_list|()
 argument_list|)
@@ -1530,9 +1527,6 @@ name|visitMethodName
 argument_list|,
 name|Collections
 operator|.
-expr|<
-name|Class
-operator|>
 name|emptyList
 argument_list|()
 argument_list|)

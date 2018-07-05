@@ -785,10 +785,7 @@ argument_list|(
 operator|new
 name|Class
 index|[
-name|classes
-operator|.
-name|size
-argument_list|()
+literal|0
 index|]
 argument_list|)
 return|;
@@ -850,10 +847,7 @@ argument_list|(
 operator|new
 name|Class
 index|[
-name|classes
-operator|.
-name|size
-argument_list|()
+literal|0
 index|]
 argument_list|)
 return|;
@@ -2681,10 +2675,7 @@ argument_list|(
 operator|new
 name|Type
 index|[
-name|typeArguments
-operator|.
-name|size
-argument_list|()
+literal|0
 index|]
 argument_list|)
 return|;

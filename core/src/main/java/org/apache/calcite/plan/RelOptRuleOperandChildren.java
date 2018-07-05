@@ -62,9 +62,6 @@ name|ANY
 argument_list|,
 name|ImmutableList
 operator|.
-expr|<
-name|RelOptRuleOperand
-operator|>
 name|of
 argument_list|()
 argument_list|)
@@ -83,9 +80,6 @@ name|LEAF
 argument_list|,
 name|ImmutableList
 operator|.
-expr|<
-name|RelOptRuleOperand
-operator|>
 name|of
 argument_list|()
 argument_list|)

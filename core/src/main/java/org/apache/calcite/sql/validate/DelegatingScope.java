@@ -2751,14 +2751,12 @@ return|;
 block|}
 block|}
 decl_stmt|;
-name|Collections
-operator|.
-name|sort
-argument_list|(
 name|resolved
 operator|.
 name|resolves
-argument_list|,
+operator|.
+name|sort
+argument_list|(
 name|c
 argument_list|)
 expr_stmt|;

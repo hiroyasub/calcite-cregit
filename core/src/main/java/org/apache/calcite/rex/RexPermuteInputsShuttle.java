@@ -186,9 +186,6 @@ name|mapping
 argument_list|,
 name|ImmutableList
 operator|.
-expr|<
-name|RelDataTypeField
-operator|>
 name|of
 argument_list|()
 argument_list|)

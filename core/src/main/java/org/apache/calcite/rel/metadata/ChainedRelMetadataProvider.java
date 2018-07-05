@@ -83,20 +83,6 @@ name|common
 operator|.
 name|collect
 operator|.
-name|Lists
-import|;
-end_import
-
-begin_import
-import|import
-name|com
-operator|.
-name|google
-operator|.
-name|common
-operator|.
-name|collect
-operator|.
 name|Multimap
 import|;
 end_import
@@ -379,23 +365,12 @@ argument_list|)
 return|;
 default|default:
 return|return
-operator|new
-name|UnboundMetadata
-argument_list|<
-name|M
-argument_list|>
-argument_list|()
-block|{
-specifier|public
-name|M
-name|bind
 parameter_list|(
-name|RelNode
 name|rel
 parameter_list|,
-name|RelMetadataQuery
 name|mq
 parameter_list|)
+lambda|->
 block|{
 specifier|final
 name|List
@@ -404,9 +379,9 @@ name|Metadata
 argument_list|>
 name|metadataList
 init|=
-name|Lists
-operator|.
-name|newArrayList
+operator|new
+name|ArrayList
+argument_list|<>
 argument_list|()
 decl_stmt|;
 for|for
@@ -469,21 +444,22 @@ index|[]
 block|{
 name|metadataClass
 block|}
-argument_list|,
+operator|,
 operator|new
 name|ChainedInvocationHandler
 argument_list|(
 name|metadataList
 argument_list|)
-argument_list|)
-argument_list|)
-return|;
+block_content|)
+block_content|)
+empty_stmt|;
 block|}
+empty_stmt|;
 block|}
-return|;
-block|}
-block|}
-specifier|public
+end_class
+
+begin_function
+unit|}    public
 parameter_list|<
 name|M
 extends|extends
@@ -557,7 +533,13 @@ name|build
 argument_list|()
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/** Creates a chain. */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 name|RelMetadataProvider
@@ -583,7 +565,13 @@ argument_list|)
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/** Invocation handler that calls a list of {@link Metadata} objects,    * returning the first non-null value. */
+end_comment
+
+begin_class
 specifier|private
 specifier|static
 class|class
@@ -717,10 +705,10 @@ literal|null
 return|;
 block|}
 block|}
-block|}
 end_class
 
 begin_comment
+unit|}
 comment|// End ChainedRelMetadataProvider.java
 end_comment
 

@@ -285,19 +285,9 @@ specifier|final
 name|TypeChecker
 name|ANY_TYPE_CHECKER
 init|=
-operator|new
-name|TypeChecker
-argument_list|()
-block|{
-specifier|public
-name|void
-name|checkType
-parameter_list|(
-name|RelDataType
 name|type
-parameter_list|)
+lambda|->
 block|{
-block|}
 block|}
 decl_stmt|;
 comment|/**    * Checker that allows any number or type of parameters.    */
@@ -307,19 +297,9 @@ specifier|final
 name|ParameterChecker
 name|ANY_PARAMETER_CHECKER
 init|=
-operator|new
-name|ParameterChecker
-argument_list|()
-block|{
-specifier|public
-name|void
-name|checkParameters
-parameter_list|(
-name|RelDataType
 name|parameterRowType
-parameter_list|)
+lambda|->
 block|{
-block|}
 block|}
 decl_stmt|;
 comment|/**    * Helper function to get the string representation of a RelDataType    * (include precision/scale but no charset or collation)    *    * @param sqlType Type    * @return String representation of type    */
@@ -1804,28 +1784,6 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/** Result checker that accepts any result. */
-specifier|public
-specifier|static
-specifier|final
-name|ResultChecker
-name|ANY_RESULT_CHECKER
-init|=
-operator|new
-name|ResultChecker
-argument_list|()
-block|{
-specifier|public
-name|void
-name|checkResult
-parameter_list|(
-name|ResultSet
-name|result
-parameter_list|)
-block|{
-block|}
-block|}
-decl_stmt|;
 block|}
 end_class
 

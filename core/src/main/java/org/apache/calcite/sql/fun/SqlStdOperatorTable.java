@@ -6898,11 +6898,6 @@ name|add
 argument_list|(
 name|Pair
 operator|.
-expr|<
-name|SqlNode
-argument_list|,
-name|AuxiliaryConverter
-operator|>
 name|of
 argument_list|(
 name|copy
@@ -6975,10 +6970,7 @@ argument_list|(
 operator|new
 name|SqlNode
 index|[
-name|list
-operator|.
-name|size
-argument_list|()
+literal|0
 index|]
 argument_list|)
 argument_list|,

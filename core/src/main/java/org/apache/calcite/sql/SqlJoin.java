@@ -99,6 +99,16 @@ name|List
 import|;
 end_import
 
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+import|;
+end_import
+
 begin_comment
 comment|/**  * Parse tree node representing a {@code JOIN} clause.  */
 end_comment
@@ -182,9 +192,9 @@ name|this
 operator|.
 name|natural
 operator|=
-name|Preconditions
+name|Objects
 operator|.
-name|checkNotNull
+name|requireNonNull
 argument_list|(
 name|natural
 argument_list|)
@@ -193,9 +203,9 @@ name|this
 operator|.
 name|joinType
 operator|=
-name|Preconditions
+name|Objects
 operator|.
-name|checkNotNull
+name|requireNonNull
 argument_list|(
 name|joinType
 argument_list|)
@@ -210,9 +220,9 @@ name|this
 operator|.
 name|conditionType
 operator|=
-name|Preconditions
+name|Objects
 operator|.
-name|checkNotNull
+name|requireNonNull
 argument_list|(
 name|conditionType
 argument_list|)
@@ -237,9 +247,9 @@ operator|.
 name|BOOLEAN
 argument_list|)
 expr_stmt|;
-name|Preconditions
+name|Objects
 operator|.
-name|checkNotNull
+name|requireNonNull
 argument_list|(
 name|conditionType
 operator|.
@@ -251,9 +261,9 @@ name|class
 argument_list|)
 argument_list|)
 expr_stmt|;
-name|Preconditions
+name|Objects
 operator|.
-name|checkNotNull
+name|requireNonNull
 argument_list|(
 name|joinType
 operator|.

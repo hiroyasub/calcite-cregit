@@ -203,15 +203,11 @@ end_import
 
 begin_import
 import|import
-name|com
+name|java
 operator|.
-name|google
+name|math
 operator|.
-name|common
-operator|.
-name|base
-operator|.
-name|Preconditions
+name|BigDecimal
 import|;
 end_import
 
@@ -219,9 +215,9 @@ begin_import
 import|import
 name|java
 operator|.
-name|math
+name|util
 operator|.
-name|BigDecimal
+name|Objects
 import|;
 end_import
 
@@ -383,9 +379,9 @@ name|TimeUnitRange
 operator|.
 name|of
 argument_list|(
-name|Preconditions
+name|Objects
 operator|.
-name|checkNotNull
+name|requireNonNull
 argument_list|(
 name|startUnit
 argument_list|)

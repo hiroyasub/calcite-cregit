@@ -362,9 +362,6 @@ literal|null
 condition|?
 name|ImmutableList
 operator|.
-expr|<
-name|RelOptRule
-operator|>
 name|of
 argument_list|()
 else|:
@@ -522,10 +519,7 @@ argument_list|(
 operator|new
 name|RelNode
 index|[
-name|bindings
-operator|.
-name|size
-argument_list|()
+literal|0
 index|]
 argument_list|)
 argument_list|)
@@ -891,14 +885,6 @@ name|rels
 argument_list|,
 name|Collections
 operator|.
-expr|<
-name|RelNode
-argument_list|,
-name|List
-argument_list|<
-name|RelNode
-argument_list|>
-operator|>
 name|emptyMap
 argument_list|()
 argument_list|)

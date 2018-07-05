@@ -79,15 +79,11 @@ end_import
 
 begin_import
 import|import
-name|com
+name|java
 operator|.
-name|google
+name|util
 operator|.
-name|common
-operator|.
-name|collect
-operator|.
-name|Lists
+name|ArrayList
 import|;
 end_import
 
@@ -285,9 +281,9 @@ name|SqlNode
 argument_list|>
 name|operandList
 init|=
-name|Lists
-operator|.
-name|newArrayList
+operator|new
+name|ArrayList
+argument_list|<>
 argument_list|()
 decl_stmt|;
 if|if

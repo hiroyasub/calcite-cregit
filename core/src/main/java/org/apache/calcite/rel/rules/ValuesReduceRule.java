@@ -395,7 +395,7 @@ name|LogicalFilter
 operator|.
 name|class
 argument_list|,
-name|operand
+name|operandJ
 argument_list|(
 name|LogicalValues
 operator|.
@@ -404,8 +404,8 @@ argument_list|,
 literal|null
 argument_list|,
 name|Values
-operator|.
-name|IS_NOT_EMPTY
+operator|::
+name|isNotEmpty
 argument_list|,
 name|none
 argument_list|()
@@ -477,7 +477,7 @@ name|LogicalProject
 operator|.
 name|class
 argument_list|,
-name|operand
+name|operandJ
 argument_list|(
 name|LogicalValues
 operator|.
@@ -486,8 +486,8 @@ argument_list|,
 literal|null
 argument_list|,
 name|Values
-operator|.
-name|IS_NOT_EMPTY
+operator|::
+name|isNotEmpty
 argument_list|,
 name|none
 argument_list|()
@@ -565,7 +565,7 @@ name|LogicalFilter
 operator|.
 name|class
 argument_list|,
-name|operand
+name|operandJ
 argument_list|(
 name|LogicalValues
 operator|.
@@ -574,8 +574,8 @@ argument_list|,
 literal|null
 argument_list|,
 name|Values
-operator|.
-name|IS_NOT_EMPTY
+operator|::
+name|isNotEmpty
 argument_list|,
 name|none
 argument_list|()

@@ -189,22 +189,8 @@ name|root
 parameter_list|)
 block|{
 return|return
-operator|new
-name|Iterable
-argument_list|<
-name|V
-argument_list|>
-argument_list|()
-block|{
-specifier|public
-name|Iterator
-argument_list|<
-name|V
-argument_list|>
-name|iterator
 parameter_list|()
-block|{
-return|return
+lambda|->
 operator|new
 name|BreadthFirstIterator
 argument_list|<
@@ -217,9 +203,6 @@ name|graph
 argument_list|,
 name|root
 argument_list|)
-return|;
-block|}
-block|}
 return|;
 block|}
 comment|/** Populates a set with the nodes reachable from a given node. */

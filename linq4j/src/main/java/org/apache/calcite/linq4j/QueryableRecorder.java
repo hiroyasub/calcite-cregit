@@ -501,9 +501,6 @@ expr_stmt|;
 block|}
 block|}
 operator|.
-operator|<
-name|TAccumulate
-operator|>
 name|castSingle
 argument_list|()
 return|;
@@ -593,9 +590,6 @@ expr_stmt|;
 block|}
 block|}
 operator|.
-operator|<
-name|TResult
-operator|>
 name|castSingle
 argument_list|()
 return|;
@@ -2010,9 +2004,6 @@ expr_stmt|;
 block|}
 block|}
 operator|.
-operator|<
-name|T
-operator|>
 name|castSingle
 argument_list|()
 return|;
@@ -2067,9 +2058,6 @@ expr_stmt|;
 block|}
 block|}
 operator|.
-operator|<
-name|T
-operator|>
 name|castSingle
 argument_list|()
 return|;
@@ -4119,9 +4107,6 @@ expr_stmt|;
 block|}
 block|}
 operator|.
-operator|<
-name|T
-operator|>
 name|castSingle
 argument_list|()
 return|;
@@ -4192,9 +4177,6 @@ expr_stmt|;
 block|}
 block|}
 operator|.
-operator|<
-name|TResult
-operator|>
 name|castSingle
 argument_list|()
 return|;
@@ -4243,9 +4225,6 @@ expr_stmt|;
 block|}
 block|}
 operator|.
-operator|<
-name|T
-operator|>
 name|castSingle
 argument_list|()
 return|;
@@ -4316,9 +4295,6 @@ expr_stmt|;
 block|}
 block|}
 operator|.
-operator|<
-name|TResult
-operator|>
 name|castSingle
 argument_list|()
 return|;

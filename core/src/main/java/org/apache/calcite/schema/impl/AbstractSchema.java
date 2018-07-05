@@ -220,7 +220,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Abstract implementation of {@link Schema}.  *  *<p>Behavior is as follows:</p>  *<ul>  *<li>The schema has no tables unless you override  *       {@link #getTableMap()}.</li>  *<li>The schema has no functions unless you override  *       {@link #getFunctionMultimap()}.</li>  *<li>The schema has no sub-schemas unless you override  *       {@link #getSubSchemaMap()}.</li>  *<li>The schema is mutable unless you override  *       {@link #isMutable()}.</li>  *<li>The name and parent schema are as specified in the constructor  *       arguments.</li>  *</ul>  *  *<p>For constructing custom maps and multi-maps, we recommend  * {@link com.google.common.base.Suppliers} and  * {@link com.google.common.collect.Maps}.</p>  */
+comment|/**  * Abstract implementation of {@link Schema}.  *  *<p>Behavior is as follows:</p>  *<ul>  *<li>The schema has no tables unless you override  *       {@link #getTableMap()}.</li>  *<li>The schema has no functions unless you override  *       {@link #getFunctionMultimap()}.</li>  *<li>The schema has no sub-schemas unless you override  *       {@link #getSubSchemaMap()}.</li>  *<li>The schema is mutable unless you override  *       {@link #isMutable()}.</li>  *<li>The name and parent schema are as specified in the constructor  *       arguments.</li>  *</ul>  */
 end_comment
 
 begin_class

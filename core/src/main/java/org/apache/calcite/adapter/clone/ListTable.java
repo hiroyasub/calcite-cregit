@@ -211,20 +211,6 @@ end_import
 
 begin_import
 import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|util
-operator|.
-name|ImmutableBitSet
-import|;
-end_import
-
-begin_import
-import|import
 name|com
 operator|.
 name|google
@@ -368,9 +354,6 @@ argument_list|()
 argument_list|,
 name|ImmutableList
 operator|.
-expr|<
-name|ImmutableBitSet
-operator|>
 name|of
 argument_list|()
 argument_list|)

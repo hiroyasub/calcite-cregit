@@ -57,15 +57,21 @@ end_import
 
 begin_import
 import|import
-name|com
+name|java
 operator|.
-name|google
+name|util
 operator|.
-name|common
+name|HashMap
+import|;
+end_import
+
+begin_import
+import|import
+name|java
 operator|.
-name|collect
+name|util
 operator|.
-name|Maps
+name|LinkedHashMap
 import|;
 end_import
 
@@ -127,9 +133,9 @@ name|Object
 argument_list|>
 name|internalParameters
 init|=
-name|Maps
-operator|.
-name|newLinkedHashMap
+operator|new
+name|LinkedHashMap
+argument_list|<>
 argument_list|()
 decl_stmt|;
 specifier|public
@@ -157,9 +163,9 @@ argument_list|>
 argument_list|>
 name|relSinks
 init|=
-name|Maps
-operator|.
-name|newHashMap
+operator|new
+name|HashMap
+argument_list|<>
 argument_list|()
 decl_stmt|;
 specifier|public

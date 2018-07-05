@@ -583,11 +583,6 @@ name|rel
 argument_list|,
 name|ImmutableMap
 operator|.
-expr|<
-name|RelNode
-argument_list|,
-name|RelNode
-operator|>
 name|of
 argument_list|()
 argument_list|)

@@ -9433,9 +9433,6 @@ literal|1
 argument_list|,
 name|ImmutableList
 operator|.
-expr|<
-name|RexNode
-operator|>
 name|of
 argument_list|()
 argument_list|)

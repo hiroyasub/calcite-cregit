@@ -57,20 +57,6 @@ name|apache
 operator|.
 name|calcite
 operator|.
-name|runtime
-operator|.
-name|PredicateImpl
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
 name|sql
 operator|.
 name|SqlCallBinding
@@ -155,34 +141,6 @@ name|google
 operator|.
 name|common
 operator|.
-name|base
-operator|.
-name|Predicate
-import|;
-end_import
-
-begin_import
-import|import
-name|com
-operator|.
-name|google
-operator|.
-name|common
-operator|.
-name|base
-operator|.
-name|Predicates
-import|;
-end_import
-
-begin_import
-import|import
-name|com
-operator|.
-name|google
-operator|.
-name|common
-operator|.
 name|collect
 operator|.
 name|ImmutableList
@@ -206,6 +164,18 @@ operator|.
 name|util
 operator|.
 name|List
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|function
+operator|.
+name|Predicate
 import|;
 end_import
 
@@ -262,13 +232,9 @@ argument_list|(
 name|families
 argument_list|)
 argument_list|,
-name|Predicates
-operator|.
-expr|<
-name|Integer
-operator|>
-name|alwaysFalse
-argument_list|()
+name|i
+lambda|->
+literal|false
 argument_list|)
 return|;
 block|}
@@ -319,13 +285,9 @@ name|family
 argument_list|(
 name|families
 argument_list|,
-name|Predicates
-operator|.
-expr|<
-name|Integer
-operator|>
-name|alwaysFalse
-argument_list|()
+name|i
+lambda|->
+literal|false
 argument_list|)
 return|;
 block|}
@@ -736,28 +698,11 @@ name|INTEGER
 argument_list|)
 argument_list|,
 comment|// Second operand optional (operand index 0, 1)
-operator|new
-name|PredicateImpl
-argument_list|<
-name|Integer
-argument_list|>
-argument_list|()
-block|{
-specifier|public
-name|boolean
-name|test
-parameter_list|(
-name|Integer
 name|number
-parameter_list|)
-block|{
-return|return
+lambda|->
 name|number
 operator|==
 literal|1
-return|;
-block|}
-block|}
 argument_list|)
 decl_stmt|;
 specifier|public
@@ -1092,31 +1037,27 @@ operator|.
 name|INTEGER
 argument_list|)
 argument_list|,
-name|Predicates
-operator|.
-expr|<
-name|Integer
-operator|>
-name|alwaysFalse
-argument_list|()
+name|i
+lambda|->
+literal|false
 argument_list|)
 block|{
 specifier|public
 name|boolean
 name|checkSingleOperandType
-parameter_list|(
+argument_list|(
 name|SqlCallBinding
 name|callBinding
-parameter_list|,
+argument_list|,
 name|SqlNode
 name|node
-parameter_list|,
+argument_list|,
 name|int
 name|iFormalOperand
-parameter_list|,
+argument_list|,
 name|boolean
 name|throwOnFailure
-parameter_list|)
+argument_list|)
 block|{
 if|if
 condition|(
@@ -1138,32 +1079,24 @@ block|{
 return|return
 literal|false
 return|;
-block|}
-if|if
-condition|(
-operator|!
-name|super
-operator|.
-name|checkSingleOperandType
-argument_list|(
-name|callBinding
-argument_list|,
+block_content|}
+block|if (!super.checkSingleOperandType(               callBinding
+operator|,
 name|node
-argument_list|,
+operator|,
 name|iFormalOperand
-argument_list|,
+operator|,
 name|throwOnFailure
-argument_list|)
-condition|)
+block|))
 block|{
 return|return
 literal|false
 return|;
 block|}
-specifier|final
+name|final
 name|SqlLiteral
 name|arg
-init|=
+operator|=
 operator|(
 name|SqlLiteral
 operator|)
@@ -1278,7 +1211,13 @@ return|return
 literal|true
 return|;
 block|}
+end_class
+
+begin_comment
 comment|/** Returns whether a number has any fractional part.          *          * @see BigDecimal#longValueExact() */
+end_comment
+
+begin_function
 specifier|private
 name|boolean
 name|hasFractionalPart
@@ -1301,9 +1240,14 @@ operator|<=
 literal|0
 return|;
 block|}
-block|}
-decl_stmt|;
+end_function
+
+begin_comment
+unit|};
 comment|/**    * Operand type-checking strategy where two operands must both be in the    * same type family.    */
+end_comment
+
+begin_decl_stmt
 specifier|public
 specifier|static
 specifier|final
@@ -1316,6 +1260,9 @@ argument_list|(
 literal|2
 argument_list|)
 decl_stmt|;
+end_decl_stmt
+
+begin_decl_stmt
 specifier|public
 specifier|static
 specifier|final
@@ -1330,7 +1277,13 @@ argument_list|,
 literal|"INTEGER"
 argument_list|)
 decl_stmt|;
+end_decl_stmt
+
+begin_comment
 comment|/**    * Operand type-checking strategy where three operands must all be in the    * same type family.    */
+end_comment
+
+begin_decl_stmt
 specifier|public
 specifier|static
 specifier|final
@@ -1343,7 +1296,13 @@ argument_list|(
 literal|3
 argument_list|)
 decl_stmt|;
+end_decl_stmt
+
+begin_comment
 comment|/**    * Operand type-checking strategy where any number of operands must all be    * in the same type family.    */
+end_comment
+
+begin_decl_stmt
 specifier|public
 specifier|static
 specifier|final
@@ -1357,7 +1316,13 @@ operator|-
 literal|1
 argument_list|)
 decl_stmt|;
+end_decl_stmt
+
+begin_comment
 comment|/**    * Operand type-checking strategy where operand types must allow ordered    * comparisons.    */
+end_comment
+
+begin_decl_stmt
 specifier|public
 specifier|static
 specifier|final
@@ -1380,7 +1345,13 @@ operator|.
 name|COMPARE
 argument_list|)
 decl_stmt|;
+end_decl_stmt
+
+begin_comment
 comment|/**    * Operand type-checking strategy where operand type must allow ordered    * comparisons. Used when instance comparisons are made on single operand    * functions    */
+end_comment
+
+begin_decl_stmt
 specifier|public
 specifier|static
 specifier|final
@@ -1403,7 +1374,13 @@ operator|.
 name|NONE
 argument_list|)
 decl_stmt|;
+end_decl_stmt
+
+begin_comment
 comment|/**    * Operand type-checking strategy where operand types must allow unordered    * comparisons.    */
+end_comment
+
+begin_decl_stmt
 specifier|public
 specifier|static
 specifier|final
@@ -1426,7 +1403,13 @@ operator|.
 name|LEAST_RESTRICTIVE
 argument_list|)
 decl_stmt|;
+end_decl_stmt
+
+begin_comment
 comment|/**    * Operand type-checking strategy where two operands must both be in the    * same string type family.    */
+end_comment
+
+begin_decl_stmt
 specifier|public
 specifier|static
 specifier|final
@@ -1442,7 +1425,13 @@ argument_list|,
 name|SAME_SAME
 argument_list|)
 decl_stmt|;
+end_decl_stmt
+
+begin_comment
 comment|/**    * Operand type-checking strategy where three operands must all be in the    * same string type family.    */
+end_comment
+
+begin_decl_stmt
 specifier|public
 specifier|static
 specifier|final
@@ -1458,6 +1447,9 @@ argument_list|,
 name|SAME_SAME_SAME
 argument_list|)
 decl_stmt|;
+end_decl_stmt
+
+begin_decl_stmt
 specifier|public
 specifier|static
 specifier|final
@@ -1479,6 +1471,9 @@ operator|.
 name|INTEGER
 argument_list|)
 decl_stmt|;
+end_decl_stmt
+
+begin_decl_stmt
 specifier|public
 specifier|static
 specifier|final
@@ -1504,7 +1499,13 @@ operator|.
 name|INTEGER
 argument_list|)
 decl_stmt|;
+end_decl_stmt
+
+begin_comment
 comment|/**    * Operand type-checking strategy where two operands must both be in the    * same string type family and last type is INTEGER.    */
+end_comment
+
+begin_decl_stmt
 specifier|public
 specifier|static
 specifier|final
@@ -1520,6 +1521,9 @@ argument_list|,
 name|SAME_SAME_INTEGER
 argument_list|)
 decl_stmt|;
+end_decl_stmt
+
+begin_decl_stmt
 specifier|public
 specifier|static
 specifier|final
@@ -1533,6 +1537,9 @@ operator|.
 name|ANY
 argument_list|)
 decl_stmt|;
+end_decl_stmt
+
+begin_decl_stmt
 specifier|public
 specifier|static
 specifier|final
@@ -1550,6 +1557,9 @@ operator|.
 name|ANY
 argument_list|)
 decl_stmt|;
+end_decl_stmt
+
+begin_decl_stmt
 specifier|public
 specifier|static
 specifier|final
@@ -1567,7 +1577,13 @@ operator|.
 name|NUMERIC
 argument_list|)
 decl_stmt|;
+end_decl_stmt
+
+begin_comment
 comment|/**    * Parameter type-checking strategy type must a nullable time interval,    * nullable time interval    */
+end_comment
+
+begin_decl_stmt
 specifier|public
 specifier|static
 specifier|final
@@ -1583,6 +1599,9 @@ argument_list|,
 name|SAME_SAME
 argument_list|)
 decl_stmt|;
+end_decl_stmt
+
+begin_decl_stmt
 specifier|public
 specifier|static
 specifier|final
@@ -1600,6 +1619,9 @@ operator|.
 name|DATETIME_INTERVAL
 argument_list|)
 decl_stmt|;
+end_decl_stmt
+
+begin_decl_stmt
 specifier|public
 specifier|static
 specifier|final
@@ -1617,6 +1639,9 @@ operator|.
 name|NUMERIC
 argument_list|)
 decl_stmt|;
+end_decl_stmt
+
+begin_decl_stmt
 specifier|public
 specifier|static
 specifier|final
@@ -1634,6 +1659,9 @@ operator|.
 name|DATETIME_INTERVAL
 argument_list|)
 decl_stmt|;
+end_decl_stmt
+
+begin_decl_stmt
 specifier|public
 specifier|static
 specifier|final
@@ -1655,6 +1683,9 @@ operator|.
 name|DATETIME_INTERVAL
 argument_list|)
 decl_stmt|;
+end_decl_stmt
+
+begin_decl_stmt
 specifier|public
 specifier|static
 specifier|final
@@ -1680,6 +1711,9 @@ operator|.
 name|TIME
 argument_list|)
 decl_stmt|;
+end_decl_stmt
+
+begin_decl_stmt
 specifier|public
 specifier|static
 specifier|final
@@ -1701,6 +1735,9 @@ operator|.
 name|TIME
 argument_list|)
 decl_stmt|;
+end_decl_stmt
+
+begin_decl_stmt
 specifier|public
 specifier|static
 specifier|final
@@ -1718,6 +1755,9 @@ operator|.
 name|DATETIME
 argument_list|)
 decl_stmt|;
+end_decl_stmt
+
+begin_decl_stmt
 specifier|public
 specifier|static
 specifier|final
@@ -1733,8 +1773,17 @@ argument_list|,
 name|INTERVAL_DATETIME
 argument_list|)
 decl_stmt|;
+end_decl_stmt
+
+begin_comment
 comment|// TODO: datetime+interval checking missing
+end_comment
+
+begin_comment
 comment|// TODO: interval+datetime checking missing
+end_comment
+
+begin_decl_stmt
 specifier|public
 specifier|static
 specifier|final
@@ -1754,7 +1803,13 @@ argument_list|,
 name|INTERVAL_DATETIME
 argument_list|)
 decl_stmt|;
+end_decl_stmt
+
+begin_comment
 comment|/**    * Type checking strategy for the "*" operator    */
+end_comment
+
+begin_decl_stmt
 specifier|public
 specifier|static
 specifier|final
@@ -1772,7 +1827,13 @@ argument_list|,
 name|NUMERIC_INTERVAL
 argument_list|)
 decl_stmt|;
+end_decl_stmt
+
+begin_comment
 comment|/**    * Type checking strategy for the "/" operator    */
+end_comment
+
+begin_decl_stmt
 specifier|public
 specifier|static
 specifier|final
@@ -1788,6 +1849,9 @@ argument_list|,
 name|INTERVAL_NUMERIC
 argument_list|)
 decl_stmt|;
+end_decl_stmt
+
+begin_decl_stmt
 specifier|public
 specifier|static
 specifier|final
@@ -1806,6 +1870,9 @@ argument_list|,
 name|DATETIME_INTERVAL
 argument_list|)
 decl_stmt|;
+end_decl_stmt
+
+begin_decl_stmt
 specifier|public
 specifier|static
 specifier|final
@@ -1832,25 +1899,21 @@ operator|.
 name|DATETIME_INTERVAL
 argument_list|)
 argument_list|,
-name|Predicates
-operator|.
-expr|<
-name|Integer
-operator|>
-name|alwaysFalse
-argument_list|()
+name|i
+lambda|->
+literal|false
 argument_list|)
 block|{
 specifier|public
 name|boolean
 name|checkOperandTypes
-parameter_list|(
+argument_list|(
 name|SqlCallBinding
 name|callBinding
-parameter_list|,
+argument_list|,
 name|boolean
 name|throwOnFailure
-parameter_list|)
+argument_list|)
 block|{
 if|if
 condition|(
@@ -1868,20 +1931,20 @@ block|{
 return|return
 literal|false
 return|;
-block|}
-return|return
-name|SAME_SAME
-operator|.
-name|checkOperandTypes
-argument_list|(
-name|callBinding
-argument_list|,
+block_content|}
+block|return SAME_SAME.checkOperandTypes(callBinding
+operator|,
 name|throwOnFailure
-argument_list|)
-return|;
-block|}
-block|}
-decl_stmt|;
+block|)
+empty_stmt|;
+end_decl_stmt
+
+begin_empty_stmt
+unit|}       }
+empty_stmt|;
+end_empty_stmt
+
+begin_decl_stmt
 specifier|public
 specifier|static
 specifier|final
@@ -1897,6 +1960,9 @@ argument_list|,
 name|INTERVAL
 argument_list|)
 decl_stmt|;
+end_decl_stmt
+
+begin_decl_stmt
 specifier|public
 specifier|static
 specifier|final
@@ -1912,7 +1978,13 @@ argument_list|,
 name|STRING
 argument_list|)
 decl_stmt|;
+end_decl_stmt
+
+begin_comment
 comment|/** Checker that returns whether a value is a multiset of records or an    * array of records.    *    * @see #COLLECTION */
+end_comment
+
+begin_decl_stmt
 specifier|public
 specifier|static
 specifier|final
@@ -2144,7 +2216,13 @@ return|;
 block|}
 block|}
 decl_stmt|;
+end_decl_stmt
+
+begin_comment
 comment|/** Checker that returns whether a value is a collection (multiset or array)    * of scalar or record values. */
+end_comment
+
+begin_decl_stmt
 specifier|public
 specifier|static
 specifier|final
@@ -2160,6 +2238,9 @@ argument_list|,
 name|RECORD_COLLECTION
 argument_list|)
 decl_stmt|;
+end_decl_stmt
+
+begin_decl_stmt
 specifier|public
 specifier|static
 specifier|final
@@ -2175,6 +2256,9 @@ argument_list|,
 name|RECORD_COLLECTION
 argument_list|)
 decl_stmt|;
+end_decl_stmt
+
+begin_decl_stmt
 specifier|public
 specifier|static
 specifier|final
@@ -2185,7 +2269,13 @@ operator|new
 name|MultisetOperandTypeChecker
 argument_list|()
 decl_stmt|;
+end_decl_stmt
+
+begin_comment
 comment|/**    * Operand type-checking strategy for a set operator (UNION, INTERSECT,    * EXCEPT).    */
+end_comment
+
+begin_decl_stmt
 specifier|public
 specifier|static
 specifier|final
@@ -2196,6 +2286,9 @@ operator|new
 name|SetopOperandTypeChecker
 argument_list|()
 decl_stmt|;
+end_decl_stmt
+
+begin_decl_stmt
 specifier|public
 specifier|static
 specifier|final
@@ -2399,7 +2492,13 @@ return|;
 block|}
 block|}
 decl_stmt|;
+end_decl_stmt
+
+begin_comment
 comment|/** Operand type checker that accepts period types:    * PERIOD (DATETIME, DATETIME)    * PERIOD (DATETIME, INTERVAL)    * [ROW] (DATETIME, DATETIME)    * [ROW] (DATETIME, INTERVAL) */
+end_comment
+
+begin_class
 specifier|private
 specifier|static
 class|class
@@ -2677,10 +2776,10 @@ name|NONE
 return|;
 block|}
 block|}
-block|}
 end_class
 
 begin_comment
+unit|}
 comment|// End OperandTypes.java
 end_comment
 

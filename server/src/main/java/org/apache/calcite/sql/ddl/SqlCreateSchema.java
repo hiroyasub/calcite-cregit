@@ -261,15 +261,11 @@ end_import
 
 begin_import
 import|import
-name|com
+name|java
 operator|.
-name|google
+name|util
 operator|.
-name|common
-operator|.
-name|base
-operator|.
-name|Preconditions
+name|List
 import|;
 end_import
 
@@ -279,7 +275,7 @@ name|java
 operator|.
 name|util
 operator|.
-name|List
+name|Objects
 import|;
 end_import
 
@@ -364,9 +360,9 @@ name|this
 operator|.
 name|name
 operator|=
-name|Preconditions
+name|Objects
 operator|.
-name|checkNotNull
+name|requireNonNull
 argument_list|(
 name|name
 argument_list|)
@@ -385,9 +381,6 @@ block|{
 return|return
 name|ImmutableNullableList
 operator|.
-expr|<
-name|SqlNode
-operator|>
 name|of
 argument_list|(
 name|name

@@ -371,20 +371,6 @@ name|google
 operator|.
 name|common
 operator|.
-name|base
-operator|.
-name|Function
-import|;
-end_import
-
-begin_import
-import|import
-name|com
-operator|.
-name|google
-operator|.
-name|common
-operator|.
 name|collect
 operator|.
 name|ImmutableList
@@ -1010,37 +996,12 @@ name|transform
 argument_list|(
 name|exps
 argument_list|,
-operator|new
-name|Function
-argument_list|<
 name|RexNode
-argument_list|,
-name|Object
-argument_list|>
-argument_list|()
-block|{
-specifier|public
-name|Object
-name|apply
-parameter_list|(
-name|RexNode
-name|a0
-parameter_list|)
-block|{
-return|return
-name|a0
-operator|.
+operator|::
 name|toString
-argument_list|()
-return|;
-block|}
-block|}
-block_content|)
-block|)
-end_class
-
-begin_block
-unit|)
+argument_list|)
+argument_list|)
+condition|)
 block|{
 comment|// Projecting the same expression twice is usually a bad idea,
 comment|// because it may create expressions downstream which are equivalent
@@ -1059,19 +1020,14 @@ name|exps
 argument_list|)
 return|;
 block|}
-end_block
-
-begin_return
 return|return
 name|litmus
 operator|.
 name|succeed
 argument_list|()
 return|;
-end_return
-
-begin_function
-unit|}    @
+block|}
+annotation|@
 name|Override
 specifier|public
 name|RelOptCost
@@ -1126,9 +1082,6 @@ name|dIo
 argument_list|)
 return|;
 block|}
-end_function
-
-begin_function
 specifier|public
 name|RelWriter
 name|explainTerms
@@ -1274,13 +1227,7 @@ return|return
 name|pw
 return|;
 block|}
-end_function
-
-begin_comment
 comment|/**    * Returns a mapping, or null if this projection is not a mapping.    *    * @return Mapping, or null if this projection is not a mapping    */
-end_comment
-
-begin_function
 specifier|public
 name|Mappings
 operator|.
@@ -1304,13 +1251,7 @@ name|exps
 argument_list|)
 return|;
 block|}
-end_function
-
-begin_comment
 comment|/**    * Returns a mapping of a set of project expressions.    *    *<p>The mapping is an inverse surjection.    * Every target has a source field, but    * a source field may appear as zero, one, or more target fields.    * Thus you can safely call    * {@link org.apache.calcite.util.mapping.Mappings.TargetMapping#getTarget(int)}.    *    * @param inputFieldCount Number of input fields    * @param projects Project expressions    * @return Mapping of a set of project expressions, or null if projection is    * not a mapping    */
-end_comment
-
-begin_function
 specifier|public
 specifier|static
 name|Mappings
@@ -1427,13 +1368,7 @@ return|return
 name|mapping
 return|;
 block|}
-end_function
-
-begin_comment
 comment|/**    * Returns a partial mapping of a set of project expressions.    *    *<p>The mapping is an inverse function.    * Every target has a source field, but    * a source might have 0, 1 or more targets.    * Project expressions that do not consist of    * a mapping are ignored.    *    * @param inputFieldCount Number of input fields    * @param projects Project expressions    * @return Mapping of a set of project expressions, never null    */
-end_comment
-
-begin_function
 specifier|public
 specifier|static
 name|Mappings
@@ -1529,13 +1464,7 @@ return|return
 name|mapping
 return|;
 block|}
-end_function
-
-begin_comment
 comment|/**    * Returns a permutation, if this projection is merely a permutation of its    * input fields; otherwise null.    *    * @return Permutation, if this projection is merely a permutation of its    *   input fields; otherwise null    */
-end_comment
-
-begin_function
 specifier|public
 name|Permutation
 name|getPermutation
@@ -1557,13 +1486,7 @@ name|exps
 argument_list|)
 return|;
 block|}
-end_function
-
-begin_comment
 comment|/**    * Returns a permutation, if this projection is merely a permutation of its    * input fields; otherwise null.    */
-end_comment
-
-begin_function
 specifier|public
 specifier|static
 name|Permutation
@@ -1708,13 +1631,7 @@ return|return
 name|permutation
 return|;
 block|}
-end_function
-
-begin_comment
 comment|/**    * Checks whether this is a functional mapping.    * Every output is a source field, but    * a source field may appear as zero, one, or more output fields.    */
-end_comment
-
-begin_function
 specifier|public
 name|boolean
 name|isMapping
@@ -1747,17 +1664,8 @@ return|return
 literal|true
 return|;
 block|}
-end_function
-
-begin_comment
 comment|//~ Inner Classes ----------------------------------------------------------
-end_comment
-
-begin_comment
 comment|/** No longer used. */
-end_comment
-
-begin_class
 annotation|@
 name|Deprecated
 comment|// to be removed before 2.0
@@ -1791,10 +1699,10 @@ init|=
 literal|0
 decl_stmt|;
 block|}
+block|}
 end_class
 
 begin_comment
-unit|}
 comment|// End Project.java
 end_comment
 

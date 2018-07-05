@@ -17,20 +17,6 @@ end_package
 
 begin_import
 import|import
-name|com
-operator|.
-name|google
-operator|.
-name|common
-operator|.
-name|base
-operator|.
-name|Function
-import|;
-end_import
-
-begin_import
-import|import
 name|java
 operator|.
 name|util
@@ -41,11 +27,13 @@ end_import
 
 begin_import
 import|import
-name|javax
+name|java
 operator|.
-name|annotation
+name|util
 operator|.
-name|Nullable
+name|function
+operator|.
+name|Consumer
 import|;
 end_import
 
@@ -63,14 +51,12 @@ name|ElasticsearchChecker
 parameter_list|()
 block|{
 block|}
-comment|/**    * Returns a function that checks that a particular Elasticsearch pipeline is    * generated to implement a query.    *    * @param strings expected expressions    * @return validation function    */
+comment|/** Returns a function that checks that a particular Elasticsearch pipeline is    * generated to implement a query.    *    * @param strings list of expected queries    * @return function to perform the check    */
 specifier|public
 specifier|static
-name|Function
+name|Consumer
 argument_list|<
 name|List
-argument_list|,
-name|Void
 argument_list|>
 name|elasticsearchChecker
 parameter_list|(
@@ -81,28 +67,8 @@ name|strings
 parameter_list|)
 block|{
 return|return
-operator|new
-name|Function
-argument_list|<
-name|List
-argument_list|,
-name|Void
-argument_list|>
-argument_list|()
-block|{
-annotation|@
-name|Nullable
-annotation|@
-name|Override
-specifier|public
-name|Void
-name|apply
-parameter_list|(
-annotation|@
-name|Nullable
-name|List
 name|actual
-parameter_list|)
+lambda|->
 block|{
 name|Object
 index|[]
@@ -145,10 +111,6 @@ argument_list|,
 name|actualArray
 argument_list|)
 expr_stmt|;
-return|return
-literal|null
-return|;
-block|}
 block|}
 return|;
 block|}

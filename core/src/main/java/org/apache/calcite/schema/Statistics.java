@@ -166,9 +166,6 @@ block|{
 return|return
 name|ImmutableList
 operator|.
-expr|<
-name|RelReferentialConstraint
-operator|>
 name|of
 argument_list|()
 return|;
@@ -225,9 +222,6 @@ literal|null
 argument_list|,
 name|ImmutableList
 operator|.
-expr|<
-name|ImmutableBitSet
-operator|>
 name|of
 argument_list|()
 argument_list|,
@@ -235,9 +229,6 @@ name|referentialConstraints
 argument_list|,
 name|ImmutableList
 operator|.
-expr|<
-name|RelCollation
-operator|>
 name|of
 argument_list|()
 argument_list|)
@@ -270,17 +261,11 @@ name|keys
 argument_list|,
 name|ImmutableList
 operator|.
-expr|<
-name|RelReferentialConstraint
-operator|>
 name|of
 argument_list|()
 argument_list|,
 name|ImmutableList
 operator|.
-expr|<
-name|RelCollation
-operator|>
 name|of
 argument_list|()
 argument_list|)
@@ -320,9 +305,6 @@ name|keys
 argument_list|,
 name|ImmutableList
 operator|.
-expr|<
-name|RelReferentialConstraint
-operator|>
 name|of
 argument_list|()
 argument_list|,

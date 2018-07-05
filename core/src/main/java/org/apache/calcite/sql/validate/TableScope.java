@@ -47,15 +47,11 @@ end_import
 
 begin_import
 import|import
-name|com
+name|java
 operator|.
-name|google
+name|util
 operator|.
-name|common
-operator|.
-name|base
-operator|.
-name|Preconditions
+name|Objects
 import|;
 end_import
 
@@ -88,9 +84,9 @@ parameter_list|)
 block|{
 name|super
 argument_list|(
-name|Preconditions
+name|Objects
 operator|.
-name|checkNotNull
+name|requireNonNull
 argument_list|(
 name|parent
 argument_list|)
@@ -100,9 +96,9 @@ name|this
 operator|.
 name|node
 operator|=
-name|Preconditions
+name|Objects
 operator|.
-name|checkNotNull
+name|requireNonNull
 argument_list|(
 name|node
 argument_list|)

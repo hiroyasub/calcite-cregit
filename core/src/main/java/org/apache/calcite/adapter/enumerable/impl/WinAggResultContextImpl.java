@@ -117,15 +117,11 @@ end_import
 
 begin_import
 import|import
-name|com
+name|java
 operator|.
-name|google
+name|util
 operator|.
-name|common
-operator|.
-name|base
-operator|.
-name|Function
+name|List
 import|;
 end_import
 
@@ -135,7 +131,9 @@ name|java
 operator|.
 name|util
 operator|.
-name|List
+name|function
+operator|.
+name|Function
 import|;
 end_import
 
@@ -163,7 +161,7 @@ name|WinAggFrameResultContext
 argument_list|>
 name|frame
 decl_stmt|;
-comment|/**    * Creates window aggregate result context.    * @param block code block that will contain the added initialization    * @param accumulator accumulator variables that store the intermediate    *                    aggregate state    */
+comment|/**    * Creates window aggregate result context.    *    * @param block code block that will contain the added initialization    * @param accumulator accumulator variables that store the intermediate    *                    aggregate state    */
 specifier|public
 name|WinAggResultContextImpl
 parameter_list|(
@@ -203,6 +201,63 @@ operator|.
 name|frame
 operator|=
 name|frameContextBuilder
+expr_stmt|;
+block|}
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"Guava"
+argument_list|)
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
+specifier|public
+name|WinAggResultContextImpl
+parameter_list|(
+name|BlockBuilder
+name|block
+parameter_list|,
+name|List
+argument_list|<
+name|Expression
+argument_list|>
+name|accumulator
+parameter_list|,
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|base
+operator|.
+name|Function
+argument_list|<
+name|BlockBuilder
+argument_list|,
+name|WinAggFrameResultContext
+argument_list|>
+name|frameContextBuilder
+parameter_list|)
+block|{
+name|this
+argument_list|(
+name|block
+argument_list|,
+name|accumulator
+argument_list|,
+operator|(
+name|Function
+argument_list|<
+name|BlockBuilder
+argument_list|,
+name|WinAggFrameResultContext
+argument_list|>
+operator|)
+name|frameContextBuilder
+operator|::
+name|apply
+argument_list|)
 expr_stmt|;
 block|}
 specifier|private

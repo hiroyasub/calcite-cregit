@@ -79,15 +79,11 @@ end_import
 
 begin_import
 import|import
-name|com
+name|java
 operator|.
-name|google
+name|util
 operator|.
-name|common
-operator|.
-name|base
-operator|.
-name|Preconditions
+name|List
 import|;
 end_import
 
@@ -97,7 +93,7 @@ name|java
 operator|.
 name|util
 operator|.
-name|List
+name|Objects
 import|;
 end_import
 
@@ -228,9 +224,9 @@ name|this
 operator|.
 name|keywordList
 operator|=
-name|Preconditions
+name|Objects
 operator|.
-name|checkNotNull
+name|requireNonNull
 argument_list|(
 name|keywordList
 operator|!=
@@ -279,9 +275,9 @@ name|this
 operator|.
 name|windowDecls
 operator|=
-name|Preconditions
+name|Objects
 operator|.
-name|checkNotNull
+name|requireNonNull
 argument_list|(
 name|windowDecls
 operator|!=
@@ -400,9 +396,9 @@ literal|0
 case|:
 name|keywordList
 operator|=
-name|Preconditions
+name|Objects
 operator|.
-name|checkNotNull
+name|requireNonNull
 argument_list|(
 operator|(
 name|SqlNodeList
@@ -462,9 +458,9 @@ literal|6
 case|:
 name|windowDecls
 operator|=
-name|Preconditions
+name|Objects
 operator|.
-name|checkNotNull
+name|requireNonNull
 argument_list|(
 operator|(
 name|SqlNodeList

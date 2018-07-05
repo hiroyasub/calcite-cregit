@@ -689,34 +689,6 @@ name|google
 operator|.
 name|common
 operator|.
-name|base
-operator|.
-name|Function
-import|;
-end_import
-
-begin_import
-import|import
-name|com
-operator|.
-name|google
-operator|.
-name|common
-operator|.
-name|base
-operator|.
-name|Preconditions
-import|;
-end_import
-
-begin_import
-import|import
-name|com
-operator|.
-name|google
-operator|.
-name|common
-operator|.
 name|collect
 operator|.
 name|ImmutableList
@@ -754,6 +726,28 @@ operator|.
 name|util
 operator|.
 name|List
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|function
+operator|.
+name|Function
 import|;
 end_import
 
@@ -916,28 +910,8 @@ name|tester
 operator|.
 name|withCatalogReaderFactory
 argument_list|(
-operator|new
-name|Function
-argument_list|<
-name|RelDataTypeFactory
-argument_list|,
-name|Prepare
-operator|.
-name|CatalogReader
-argument_list|>
-argument_list|()
-block|{
-specifier|public
-name|Prepare
-operator|.
-name|CatalogReader
-name|apply
-parameter_list|(
-name|RelDataTypeFactory
 name|typeFactory
-parameter_list|)
-block|{
-return|return
+lambda|->
 operator|new
 name|MockCatalogReader
 argument_list|(
@@ -946,33 +920,29 @@ argument_list|,
 literal|true
 argument_list|)
 block|{
-annotation|@
-name|Override
-specifier|public
-name|MockCatalogReader
-name|init
-parameter_list|()
+block_content|@Override public MockCatalogReader init(
+argument_list|)
 block|{
 comment|// CREATE SCHEMA "SALES;
 comment|// CREATE DYNAMIC TABLE "NATION"
 comment|// CREATE DYNAMIC TABLE "CUSTOMER"
 name|MockSchema
 name|schema
-init|=
+operator|=
 operator|new
 name|MockSchema
 argument_list|(
 literal|"SALES"
 argument_list|)
-decl_stmt|;
+block|;
 name|registerSchema
 argument_list|(
 name|schema
 argument_list|)
-expr_stmt|;
+block|;
 name|MockTable
 name|nationTable
-init|=
+operator|=
 operator|new
 name|MockDynamicTable
 argument_list|(
@@ -994,15 +964,15 @@ literal|false
 argument_list|,
 literal|100
 argument_list|)
-decl_stmt|;
+block|;
 name|registerTable
 argument_list|(
 name|nationTable
 argument_list|)
-expr_stmt|;
+block|;
 name|MockTable
 name|customerTable
-init|=
+operator|=
 operator|new
 name|MockDynamicTable
 argument_list|(
@@ -1024,17 +994,17 @@ literal|false
 argument_list|,
 literal|100
 argument_list|)
-decl_stmt|;
+block|;
 name|registerTable
 argument_list|(
 name|customerTable
 argument_list|)
-expr_stmt|;
+block|;
 comment|// CREATE TABLE "REGION" - static table with known schema.
-specifier|final
+name|final
 name|RelDataType
 name|intType
-init|=
+operator|=
 name|typeFactory
 operator|.
 name|createSqlType
@@ -1043,11 +1013,11 @@ name|SqlTypeName
 operator|.
 name|INTEGER
 argument_list|)
-decl_stmt|;
-specifier|final
+block|;
+name|final
 name|RelDataType
 name|varcharType
-init|=
+operator|=
 name|typeFactory
 operator|.
 name|createSqlType
@@ -1056,10 +1026,10 @@ name|SqlTypeName
 operator|.
 name|VARCHAR
 argument_list|)
-decl_stmt|;
+block|;
 name|MockTable
 name|regionTable
-init|=
+operator|=
 name|MockTable
 operator|.
 name|create
@@ -1074,7 +1044,7 @@ literal|false
 argument_list|,
 literal|100
 argument_list|)
-decl_stmt|;
+block|;
 name|regionTable
 operator|.
 name|addColumn
@@ -1083,7 +1053,7 @@ literal|"R_REGIONKEY"
 argument_list|,
 name|intType
 argument_list|)
-expr_stmt|;
+block|;
 name|regionTable
 operator|.
 name|addColumn
@@ -1092,7 +1062,7 @@ literal|"R_NAME"
 argument_list|,
 name|varcharType
 argument_list|)
-expr_stmt|;
+block|;
 name|regionTable
 operator|.
 name|addColumn
@@ -1101,12 +1071,12 @@ literal|"R_COMMENT"
 argument_list|,
 name|varcharType
 argument_list|)
-expr_stmt|;
+block|;
 name|registerTable
 argument_list|(
 name|regionTable
 argument_list|)
-expr_stmt|;
+block|;
 return|return
 name|this
 return|;
@@ -1116,14 +1086,17 @@ block|}
 operator|.
 name|init
 argument_list|()
-return|;
-block|}
-block|}
-argument_list|)
-return|;
-block|}
+block|)
+class|;
+end_class
+
+begin_comment
+unit|}
 comment|/**    * Returns the default diff repository for this test, or null if there is    * no repository.    *    *<p>The default implementation returns null.    *    *<p>Sub-classes that want to use a diff repository can override.    * Sub-sub-classes can override again, inheriting test cases and overriding    * selected test results.    *    *<p>And individual test cases can override by providing a different    * tester object.    *    * @return Diff repository    */
-specifier|protected
+end_comment
+
+begin_function
+unit|protected
 name|DiffRepository
 name|getDiffRepos
 parameter_list|()
@@ -1132,7 +1105,13 @@ return|return
 literal|null
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Checks that every node of a relational expression is valid.    *    * @param rel Relational expression    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 name|void
@@ -1170,8 +1149,17 @@ name|invalidCount
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|//~ Inner Interfaces -------------------------------------------------------
+end_comment
+
+begin_comment
 comment|/**    * Helper class which contains default implementations of methods used for    * running sql-to-rel conversion tests.    */
+end_comment
+
+begin_interface
 specifier|public
 interface|interface
 name|Tester
@@ -1352,8 +1340,17 @@ name|context
 parameter_list|)
 function_decl|;
 block|}
+end_interface
+
+begin_comment
 comment|//~ Inner Classes ----------------------------------------------------------
+end_comment
+
+begin_comment
 comment|/**    * Mock implementation of {@link RelOptSchema}.    */
+end_comment
+
+begin_class
 specifier|protected
 specifier|static
 class|class
@@ -2157,7 +2154,13 @@ return|;
 block|}
 block|}
 block|}
+end_class
+
+begin_comment
 comment|/** Table that delegates to a given table. */
+end_comment
+
+begin_class
 specifier|private
 specifier|static
 class|class
@@ -2410,7 +2413,13 @@ argument_list|()
 return|;
 block|}
 block|}
+end_class
+
+begin_comment
 comment|/**    * Default implementation of {@link Tester}, using mock classes    * {@link MockRelOptSchema} and {@link MockRelOptPlanner}.    */
+end_comment
+
+begin_class
 specifier|public
 specifier|static
 class|class
@@ -2682,9 +2691,9 @@ name|String
 name|sql
 parameter_list|)
 block|{
-name|Preconditions
+name|Objects
 operator|.
-name|checkNotNull
+name|requireNonNull
 argument_list|(
 name|sql
 argument_list|)
@@ -3876,7 +3885,13 @@ name|enableLateDecorrelate
 return|;
 block|}
 block|}
+end_class
+
+begin_comment
 comment|/** Validator for testing. */
+end_comment
+
+begin_class
 specifier|private
 specifier|static
 class|class
@@ -3922,10 +3937,10 @@ literal|true
 return|;
 block|}
 block|}
-block|}
 end_class
 
 begin_comment
+unit|}
 comment|// End SqlToRelTestBase.java
 end_comment
 

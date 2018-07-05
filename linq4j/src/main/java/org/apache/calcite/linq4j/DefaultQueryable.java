@@ -335,9 +335,6 @@ name|this
 argument_list|(
 name|QueryableRecorder
 operator|.
-expr|<
-name|T
-operator|>
 name|instance
 argument_list|()
 argument_list|)

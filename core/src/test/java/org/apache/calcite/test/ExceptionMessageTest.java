@@ -120,16 +120,6 @@ import|;
 end_import
 
 begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|Iterator
-import|;
-end_import
-
-begin_import
 import|import static
 name|org
 operator|.
@@ -231,20 +221,8 @@ name|Entry
 argument_list|>
 name|badEntries
 init|=
-operator|new
-name|Iterable
-argument_list|<
-name|Entry
-argument_list|>
-argument_list|()
-block|{
-specifier|public
-name|Iterator
-argument_list|<
-name|Entry
-argument_list|>
-name|iterator
 parameter_list|()
+lambda|->
 block|{
 throw|throw
 operator|new
@@ -253,7 +231,6 @@ argument_list|(
 literal|"Can't iterate over badEntries"
 argument_list|)
 throw|;
-block|}
 block|}
 decl_stmt|;
 block|}

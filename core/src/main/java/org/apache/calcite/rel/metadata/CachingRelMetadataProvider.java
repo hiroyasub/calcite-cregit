@@ -53,20 +53,6 @@ name|google
 operator|.
 name|common
 operator|.
-name|base
-operator|.
-name|Preconditions
-import|;
-end_import
-
-begin_import
-import|import
-name|com
-operator|.
-name|google
-operator|.
-name|common
-operator|.
 name|collect
 operator|.
 name|ImmutableList
@@ -162,6 +148,16 @@ operator|.
 name|util
 operator|.
 name|Map
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
 import|;
 end_import
 
@@ -287,23 +283,12 @@ block|}
 comment|// TODO jvs 30-Mar-2006: Use meta-metadata to decide which metadata
 comment|// query results can stay fresh until the next Ice Age.
 return|return
-operator|new
-name|UnboundMetadata
-argument_list|<
-name|M
-argument_list|>
-argument_list|()
-block|{
-specifier|public
-name|M
-name|bind
 parameter_list|(
-name|RelNode
 name|rel
 parameter_list|,
-name|RelMetadataQuery
 name|mq
 parameter_list|)
+lambda|->
 block|{
 specifier|final
 name|Metadata
@@ -338,20 +323,24 @@ index|[]
 block|{
 name|metadataClass
 block|}
-argument_list|,
+operator|,
 operator|new
 name|CachingInvocationHandler
 argument_list|(
 name|metadata
 argument_list|)
-argument_list|)
-argument_list|)
-return|;
+block_content|)
+block_content|)
+function|;
 block|}
-block|}
-return|;
-block|}
-specifier|public
+end_class
+
+begin_empty_stmt
+empty_stmt|;
+end_empty_stmt
+
+begin_function
+unit|}    public
 parameter_list|<
 name|M
 extends|extends
@@ -384,8 +373,17 @@ name|def
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|//~ Inner Classes ----------------------------------------------------------
+end_comment
+
+begin_comment
 comment|/** An entry in the cache. Consists of the cached object and the timestamp    * when the entry is valid. If read at a later timestamp, the entry will be    * invalid and will be re-computed as if it did not exist. The net effect is a    * lazy-flushing cache. */
+end_comment
+
+begin_class
 specifier|private
 specifier|static
 class|class
@@ -398,7 +396,13 @@ name|Object
 name|result
 decl_stmt|;
 block|}
+end_class
+
+begin_comment
 comment|/** Implementation of {@link InvocationHandler} for calls to a    * {@link CachingRelMetadataProvider}. Each request first looks in the cache;    * if the cache entry is present and not expired, returns the cache entry,    * otherwise computes the value and stores in the cache. */
+end_comment
+
+begin_class
 specifier|private
 class|class
 name|CachingInvocationHandler
@@ -420,9 +424,9 @@ name|this
 operator|.
 name|metadata
 operator|=
-name|Preconditions
+name|Objects
 operator|.
-name|checkNotNull
+name|requireNonNull
 argument_list|(
 name|metadata
 argument_list|)
@@ -634,10 +638,10 @@ throw|;
 block|}
 block|}
 block|}
-block|}
 end_class
 
 begin_comment
+unit|}
 comment|// End CachingRelMetadataProvider.java
 end_comment
 

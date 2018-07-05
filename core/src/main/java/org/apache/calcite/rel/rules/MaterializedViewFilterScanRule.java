@@ -463,9 +463,6 @@ argument_list|()
 else|:
 name|ImmutableList
 operator|.
-expr|<
-name|RelOptMaterialization
-operator|>
 name|of
 argument_list|()
 decl_stmt|;

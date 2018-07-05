@@ -189,20 +189,6 @@ end_import
 
 begin_import
 import|import
-name|com
-operator|.
-name|google
-operator|.
-name|common
-operator|.
-name|base
-operator|.
-name|Preconditions
-import|;
-end_import
-
-begin_import
-import|import
 name|java
 operator|.
 name|nio
@@ -1514,9 +1500,9 @@ block|{
 name|String
 name|javaCharSetName
 init|=
-name|Preconditions
+name|Objects
 operator|.
-name|checkNotNull
+name|requireNonNull
 argument_list|(
 name|SqlUtil
 operator|.
@@ -1572,9 +1558,9 @@ specifier|final
 name|SqlTypeName
 name|collectionsSqlTypeName
 init|=
-name|Preconditions
+name|Objects
 operator|.
-name|checkNotNull
+name|requireNonNull
 argument_list|(
 name|SqlTypeName
 operator|.

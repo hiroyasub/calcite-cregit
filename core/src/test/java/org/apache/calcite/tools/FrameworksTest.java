@@ -67,20 +67,6 @@ name|apache
 operator|.
 name|calcite
 operator|.
-name|jdbc
-operator|.
-name|CalciteConnection
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
 name|linq4j
 operator|.
 name|Enumerable
@@ -298,20 +284,6 @@ operator|.
 name|prepare
 operator|.
 name|Prepare
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|rel
-operator|.
-name|RelCollation
 import|;
 end_import
 
@@ -827,20 +799,6 @@ name|google
 operator|.
 name|common
 operator|.
-name|base
-operator|.
-name|Function
-import|;
-end_import
-
-begin_import
-import|import
-name|com
-operator|.
-name|google
-operator|.
-name|common
-operator|.
 name|collect
 operator|.
 name|ImmutableList
@@ -992,28 +950,14 @@ name|Frameworks
 operator|.
 name|withPlanner
 argument_list|(
-operator|new
-name|Frameworks
-operator|.
-name|PlannerAction
-argument_list|<
-name|RelNode
-argument_list|>
-argument_list|()
-block|{
-specifier|public
-name|RelNode
-name|apply
 parameter_list|(
-name|RelOptCluster
 name|cluster
 parameter_list|,
-name|RelOptSchema
 name|relOptSchema
 parameter_list|,
-name|SchemaPlus
 name|rootSchema
 parameter_list|)
+lambda|->
 block|{
 specifier|final
 name|RelDataTypeFactory
@@ -1111,7 +1055,7 @@ argument_list|(
 name|typeFactory
 argument_list|)
 argument_list|)
-block|{             }
+block|{           }
 decl_stmt|;
 specifier|final
 name|EnumerableTableScan
@@ -1245,7 +1189,6 @@ operator|.
 name|findBestExp
 argument_list|()
 return|;
-block|}
 block|}
 argument_list|)
 decl_stmt|;
@@ -1900,22 +1843,8 @@ argument_list|)
 operator|.
 name|doWithConnection
 argument_list|(
-operator|new
-name|Function
-argument_list|<
-name|CalciteConnection
-argument_list|,
-name|Void
-argument_list|>
-argument_list|()
-block|{
-specifier|public
-name|Void
-name|apply
-parameter_list|(
-name|CalciteConnection
-name|conn
-parameter_list|)
+name|connection
+lambda|->
 block|{
 try|try
 block|{
@@ -1930,7 +1859,7 @@ argument_list|()
 operator|.
 name|defaultSchema
 argument_list|(
-name|conn
+name|connection
 operator|.
 name|getRootSchema
 argument_list|()
@@ -1954,7 +1883,7 @@ specifier|final
 name|RelRunner
 name|runner
 init|=
-name|conn
+name|connection
 operator|.
 name|unwrap
 argument_list|(
@@ -1976,16 +1905,16 @@ name|String
 index|[]
 block|{
 literal|"a"
-block|,
+operator|,
 literal|"b"
 block|}
-argument_list|,
+operator|,
 literal|"X"
-argument_list|,
+operator|,
 literal|1
-argument_list|,
+operator|,
 literal|"Y"
-argument_list|,
+operator|,
 literal|2
 argument_list|)
 operator|.
@@ -2001,7 +1930,7 @@ argument_list|)
 operator|.
 name|build
 argument_list|()
-decl_stmt|;
+expr_stmt|;
 comment|// If you run the "values" query before the "scan" query,
 comment|// everything works fine. JdbcValues is never instantiated in any
 comment|// of the 3 queries.
@@ -2056,7 +1985,7 @@ comment|// running this after the scott query causes the exception
 name|RelRunner
 name|runner2
 init|=
-name|conn
+name|connection
 operator|.
 name|unwrap
 argument_list|(
@@ -2075,9 +2004,6 @@ operator|.
 name|executeQuery
 argument_list|()
 expr_stmt|;
-return|return
-literal|null
-return|;
 block|}
 catch|catch
 parameter_list|(
@@ -2094,12 +2020,20 @@ argument_list|)
 throw|;
 block|}
 block|}
-block|}
-argument_list|)
-expr_stmt|;
-block|}
+end_class
+
+begin_empty_stmt
+unit|)
+empty_stmt|;
+end_empty_stmt
+
+begin_comment
+unit|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2039">[CALCITE-2039]    * AssertionError when pushing project to ProjectableFilterableTable</a>    * using UPDATE via {@link Frameworks}. */
-annotation|@
+end_comment
+
+begin_function
+unit|@
 name|Test
 specifier|public
 name|void
@@ -2268,6 +2202,9 @@ name|DEBUG
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 specifier|private
 name|void
 name|executeQuery
@@ -2503,7 +2440,13 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+end_function
+
+begin_comment
 comment|/** Modifiable, filterable table. */
+end_comment
+
+begin_class
 specifier|private
 specifier|static
 class|class
@@ -2591,9 +2534,6 @@ argument_list|)
 argument_list|,
 name|ImmutableList
 operator|.
-expr|<
-name|RelCollation
-operator|>
 name|of
 argument_list|()
 argument_list|)
@@ -2756,7 +2696,13 @@ argument_list|()
 throw|;
 block|}
 block|}
+end_class
+
+begin_comment
 comment|/** Dummy type system, similar to Hive's, accessed via an INSTANCE member. */
+end_comment
+
+begin_class
 specifier|public
 specifier|static
 class|class
@@ -2799,7 +2745,13 @@ literal|25
 return|;
 block|}
 block|}
+end_class
+
+begin_comment
 comment|/** Dummy type system, similar to Hive's, accessed via a public default    * constructor. */
+end_comment
+
+begin_class
 specifier|public
 specifier|static
 class|class
@@ -2832,10 +2784,10 @@ literal|38
 return|;
 block|}
 block|}
-block|}
 end_class
 
 begin_comment
+unit|}
 comment|// End FrameworksTest.java
 end_comment
 

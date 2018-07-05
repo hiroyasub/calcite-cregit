@@ -469,15 +469,11 @@ end_import
 
 begin_import
 import|import
-name|com
+name|java
 operator|.
-name|google
+name|util
 operator|.
-name|common
-operator|.
-name|collect
-operator|.
-name|Lists
+name|ArrayList
 import|;
 end_import
 
@@ -511,7 +507,7 @@ init|=
 operator|new
 name|AggregateStarTableRule
 argument_list|(
-name|operand
+name|operandJ
 argument_list|(
 name|Aggregate
 operator|.
@@ -520,8 +516,8 @@ argument_list|,
 literal|null
 argument_list|,
 name|Aggregate
-operator|.
-name|IS_SIMPLE
+operator|::
+name|isSimple
 argument_list|,
 name|some
 argument_list|(
@@ -555,7 +551,7 @@ init|=
 operator|new
 name|AggregateStarTableRule
 argument_list|(
-name|operand
+name|operandJ
 argument_list|(
 name|Aggregate
 operator|.
@@ -564,8 +560,8 @@ argument_list|,
 literal|null
 argument_list|,
 name|Aggregate
-operator|.
-name|IS_SIMPLE
+operator|::
+name|isSimple
 argument_list|,
 name|operand
 argument_list|(
@@ -1152,9 +1148,9 @@ name|AggregateCall
 argument_list|>
 name|aggCalls
 init|=
-name|Lists
-operator|.
-name|newArrayList
+operator|new
+name|ArrayList
+argument_list|<>
 argument_list|()
 decl_stmt|;
 name|ImmutableBitSet
@@ -1676,9 +1672,9 @@ name|Integer
 argument_list|>
 name|newArgs
 init|=
-name|Lists
-operator|.
-name|newArrayList
+operator|new
+name|ArrayList
+argument_list|<>
 argument_list|()
 decl_stmt|;
 for|for

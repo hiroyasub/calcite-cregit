@@ -33,15 +33,11 @@ end_import
 
 begin_import
 import|import
-name|com
+name|java
 operator|.
-name|google
+name|io
 operator|.
-name|common
-operator|.
-name|base
-operator|.
-name|Preconditions
+name|IOException
 import|;
 end_import
 
@@ -49,9 +45,9 @@ begin_import
 import|import
 name|java
 operator|.
-name|io
+name|util
 operator|.
-name|IOException
+name|Objects
 import|;
 end_import
 
@@ -179,9 +175,9 @@ name|this
 operator|.
 name|dimension
 operator|=
-name|Preconditions
+name|Objects
 operator|.
-name|checkNotNull
+name|requireNonNull
 argument_list|(
 name|dimension
 argument_list|)
@@ -190,9 +186,9 @@ name|this
 operator|.
 name|extractionFunction
 operator|=
-name|Preconditions
+name|Objects
 operator|.
-name|checkNotNull
+name|requireNonNull
 argument_list|(
 name|extractionFunction
 argument_list|)

@@ -19,20 +19,6 @@ end_package
 
 begin_import
 import|import
-name|com
-operator|.
-name|google
-operator|.
-name|common
-operator|.
-name|base
-operator|.
-name|Preconditions
-import|;
-end_import
-
-begin_import
-import|import
 name|org
 operator|.
 name|elasticsearch
@@ -69,6 +55,16 @@ name|ExternalResource
 import|;
 end_import
 
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+import|;
+end_import
+
 begin_comment
 comment|/**  * Junit rule that is used to initialize a single Elasticsearch node for tests.  *  *<p>For performance reasons (node startup costs),  * the same instance is usually shared across multiple tests.  *  *<p>This rule should be used as follows:  *<pre>  *  *  public class MyTest {  *&#64;ClassRule  *    public static final EmbeddedElasticsearchPolicy POLICY =  *        EmbeddedElasticsearchPolicy.create();  *  *&#64;BeforeClass  *    public static void setup() {  *       // ... populate instance  *    }  *  *&#64;Test  *    public void myTest() {  *      TransportAddress address = POLICY.httpAddress();  *      // .... (connect)  *    }  * }  *</pre>  *  * @see ExternalResource  */
 end_comment
@@ -95,9 +91,9 @@ name|this
 operator|.
 name|node
 operator|=
-name|Preconditions
+name|Objects
 operator|.
-name|checkNotNull
+name|requireNonNull
 argument_list|(
 name|resource
 argument_list|,

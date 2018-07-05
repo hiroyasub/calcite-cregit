@@ -662,22 +662,13 @@ specifier|final
 name|SqlReturnTypeInference
 name|BOOLEAN_NULLABLE_OPTIMIZED
 init|=
-operator|new
-name|SqlReturnTypeInference
-argument_list|()
+name|opBinding
+lambda|->
 block|{
 comment|// Equivalent to
 comment|//   cascade(ARG0, SqlTypeTransforms.TO_NULLABLE);
 comment|// but implemented by hand because used in AND, which is a very common
 comment|// operator.
-specifier|public
-name|RelDataType
-name|inferReturnType
-parameter_list|(
-name|SqlOperatorBinding
-name|opBinding
-parameter_list|)
-block|{
 specifier|final
 name|int
 name|n
@@ -730,7 +721,6 @@ block|}
 return|return
 name|type1
 return|;
-block|}
 block|}
 decl_stmt|;
 comment|/**    * Type-inference strategy whereby the result type of a call is Boolean    * not null.    */
@@ -968,19 +958,8 @@ specifier|final
 name|SqlReturnTypeInference
 name|LEAST_RESTRICTIVE
 init|=
-operator|new
-name|SqlReturnTypeInference
-argument_list|()
-block|{
-specifier|public
-name|RelDataType
-name|inferReturnType
-parameter_list|(
-name|SqlOperatorBinding
 name|opBinding
-parameter_list|)
-block|{
-return|return
+lambda|->
 name|opBinding
 operator|.
 name|getTypeFactory
@@ -993,9 +972,6 @@ operator|.
 name|collectOperandTypes
 argument_list|()
 argument_list|)
-return|;
-block|}
-block|}
 decl_stmt|;
 comment|/**    * Returns the same type as the multiset carries. The multiset type returned    * is the least restrictive of the call's multiset operands    */
 specifier|public
@@ -1004,18 +980,8 @@ specifier|final
 name|SqlReturnTypeInference
 name|MULTISET
 init|=
-operator|new
-name|SqlReturnTypeInference
-argument_list|()
-block|{
-specifier|public
-name|RelDataType
-name|inferReturnType
-parameter_list|(
-specifier|final
-name|SqlOperatorBinding
 name|opBinding
-parameter_list|)
+lambda|->
 block|{
 name|ExplicitOperatorBinding
 name|newBinding
@@ -1103,7 +1069,6 @@ literal|1
 argument_list|)
 return|;
 block|}
-block|}
 decl_stmt|;
 comment|/**    * Returns a multiset type.    *    *<p>For example, given<code>INTEGER</code>, returns    *<code>INTEGER MULTISET</code>.    */
 specifier|public
@@ -1190,17 +1155,8 @@ specifier|final
 name|SqlReturnTypeInference
 name|DECIMAL_SCALE0
 init|=
-operator|new
-name|SqlReturnTypeInference
-argument_list|()
-block|{
-specifier|public
-name|RelDataType
-name|inferReturnType
-parameter_list|(
-name|SqlOperatorBinding
 name|opBinding
-parameter_list|)
+lambda|->
 block|{
 name|RelDataType
 name|type1
@@ -1299,7 +1255,6 @@ return|return
 literal|null
 return|;
 block|}
-block|}
 decl_stmt|;
 comment|/**    * Type-inference strategy whereby the result type of a call is    * {@link #DECIMAL_SCALE0} with a fallback to {@link #ARG0} This rule    * is used for floor, ceiling.    */
 specifier|public
@@ -1322,17 +1277,8 @@ specifier|final
 name|SqlReturnTypeInference
 name|DECIMAL_PRODUCT
 init|=
-operator|new
-name|SqlReturnTypeInference
-argument_list|()
-block|{
-specifier|public
-name|RelDataType
-name|inferReturnType
-parameter_list|(
-name|SqlOperatorBinding
 name|opBinding
-parameter_list|)
+lambda|->
 block|{
 name|RelDataTypeFactory
 name|typeFactory
@@ -1372,7 +1318,6 @@ argument_list|,
 name|type2
 argument_list|)
 return|;
-block|}
 block|}
 decl_stmt|;
 comment|/**    * Same as {@link #DECIMAL_PRODUCT} but returns with nullability if any of    * the operands is nullable by using    * {@link org.apache.calcite.sql.type.SqlTypeTransforms#TO_NULLABLE}    */
@@ -1414,17 +1359,8 @@ specifier|final
 name|SqlReturnTypeInference
 name|DECIMAL_QUOTIENT
 init|=
-operator|new
-name|SqlReturnTypeInference
-argument_list|()
-block|{
-specifier|public
-name|RelDataType
-name|inferReturnType
-parameter_list|(
-name|SqlOperatorBinding
 name|opBinding
-parameter_list|)
+lambda|->
 block|{
 name|RelDataTypeFactory
 name|typeFactory
@@ -1464,7 +1400,6 @@ argument_list|,
 name|type2
 argument_list|)
 return|;
-block|}
 block|}
 decl_stmt|;
 comment|/**    * Same as {@link #DECIMAL_QUOTIENT} but returns with nullability if any of    * the operands is nullable by using    * {@link org.apache.calcite.sql.type.SqlTypeTransforms#TO_NULLABLE}    */
@@ -1506,17 +1441,8 @@ specifier|final
 name|SqlReturnTypeInference
 name|DECIMAL_SUM
 init|=
-operator|new
-name|SqlReturnTypeInference
-argument_list|()
-block|{
-specifier|public
-name|RelDataType
-name|inferReturnType
-parameter_list|(
-name|SqlOperatorBinding
 name|opBinding
-parameter_list|)
+lambda|->
 block|{
 name|RelDataType
 name|type1
@@ -1701,7 +1627,6 @@ return|return
 literal|null
 return|;
 block|}
-block|}
 decl_stmt|;
 comment|/**    * Same as {@link #DECIMAL_SUM} but returns with nullability if any    * of the operands is nullable by using    * {@link org.apache.calcite.sql.type.SqlTypeTransforms#TO_NULLABLE}.    */
 specifier|public
@@ -1741,17 +1666,8 @@ specifier|final
 name|SqlReturnTypeInference
 name|DYADIC_STRING_SUM_PRECISION
 init|=
-operator|new
-name|SqlReturnTypeInference
-argument_list|()
-block|{
-specifier|public
-name|RelDataType
-name|inferReturnType
-parameter_list|(
-name|SqlOperatorBinding
 name|opBinding
-parameter_list|)
+lambda|->
 block|{
 specifier|final
 name|RelDataType
@@ -2132,7 +2048,6 @@ return|return
 name|ret
 return|;
 block|}
-block|}
 decl_stmt|;
 comment|/**    * Same as {@link #DYADIC_STRING_SUM_PRECISION} and using    * {@link org.apache.calcite.sql.type.SqlTypeTransforms#TO_NULLABLE},    * {@link org.apache.calcite.sql.type.SqlTypeTransforms#TO_VARYING}.    */
 specifier|public
@@ -2177,17 +2092,8 @@ specifier|final
 name|SqlReturnTypeInference
 name|SCOPE
 init|=
-operator|new
-name|SqlReturnTypeInference
-argument_list|()
-block|{
-specifier|public
-name|RelDataType
-name|inferReturnType
-parameter_list|(
-name|SqlOperatorBinding
 name|opBinding
-parameter_list|)
+lambda|->
 block|{
 name|SqlCallBinding
 name|callBinding
@@ -2215,7 +2121,6 @@ name|getRowType
 argument_list|()
 return|;
 block|}
-block|}
 decl_stmt|;
 comment|/**    * Returns a multiset of column #0 of a multiset. For example, given    *<code>RECORD(x INTEGER, y DATE) MULTISET</code>, returns<code>INTEGER    * MULTISET</code>.    */
 specifier|public
@@ -2224,17 +2129,8 @@ specifier|final
 name|SqlReturnTypeInference
 name|MULTISET_PROJECT0
 init|=
-operator|new
-name|SqlReturnTypeInference
-argument_list|()
-block|{
-specifier|public
-name|RelDataType
-name|inferReturnType
-parameter_list|(
-name|SqlOperatorBinding
 name|opBinding
-parameter_list|)
+lambda|->
 block|{
 assert|assert
 name|opBinding
@@ -2321,7 +2217,6 @@ literal|1
 argument_list|)
 return|;
 block|}
-block|}
 decl_stmt|;
 comment|/**    * Returns a multiset of the first column of a multiset. For example, given    *<code>INTEGER MULTISET</code>, returns<code>RECORD(x INTEGER)    * MULTISET</code>.    */
 specifier|public
@@ -2330,17 +2225,8 @@ specifier|final
 name|SqlReturnTypeInference
 name|MULTISET_RECORD
 init|=
-operator|new
-name|SqlReturnTypeInference
-argument_list|()
-block|{
-specifier|public
-name|RelDataType
-name|inferReturnType
-parameter_list|(
-name|SqlOperatorBinding
 name|opBinding
-parameter_list|)
+lambda|->
 block|{
 assert|assert
 name|opBinding
@@ -2423,7 +2309,6 @@ literal|1
 argument_list|)
 return|;
 block|}
-block|}
 decl_stmt|;
 comment|/**    * Returns the field type of a structured type which has only one field. For    * example, given {@code RECORD(x INTEGER)} returns {@code INTEGER}.    */
 specifier|public
@@ -2432,17 +2317,8 @@ specifier|final
 name|SqlReturnTypeInference
 name|RECORD_TO_SCALAR
 init|=
-operator|new
-name|SqlReturnTypeInference
-argument_list|()
-block|{
-specifier|public
-name|RelDataType
-name|inferReturnType
-parameter_list|(
-name|SqlOperatorBinding
 name|opBinding
-parameter_list|)
+lambda|->
 block|{
 assert|assert
 name|opBinding
@@ -2533,7 +2409,6 @@ literal|true
 argument_list|)
 return|;
 block|}
-block|}
 decl_stmt|;
 comment|/**    * Type-inference strategy for SUM aggregate function inferred from the    * operand type, and nullable if the call occurs within a "GROUP BY ()"    * query. E.g. in "select sum(x) as s from empty", s may be null. Also,    * with the default implementation of RelDataTypeSystem, s has the same    * type name as x.    */
 specifier|public
@@ -2542,19 +2417,8 @@ specifier|final
 name|SqlReturnTypeInference
 name|AGG_SUM
 init|=
-operator|new
-name|SqlReturnTypeInference
-argument_list|()
-block|{
-annotation|@
-name|Override
-specifier|public
-name|RelDataType
-name|inferReturnType
-parameter_list|(
-name|SqlOperatorBinding
 name|opBinding
-parameter_list|)
+lambda|->
 block|{
 specifier|final
 name|RelDataTypeFactory
@@ -2619,7 +2483,6 @@ name|type
 return|;
 block|}
 block|}
-block|}
 decl_stmt|;
 comment|/**    * Type-inference strategy for $SUM0 aggregate function inferred from the    * operand type. By default the inferred type is identical to the operand    * type. E.g. in "select $sum0(x) as s from empty", s has the same type as    * x.    */
 specifier|public
@@ -2628,19 +2491,8 @@ specifier|final
 name|SqlReturnTypeInference
 name|AGG_SUM_EMPTY_IS_ZERO
 init|=
-operator|new
-name|SqlReturnTypeInference
-argument_list|()
-block|{
-annotation|@
-name|Override
-specifier|public
-name|RelDataType
-name|inferReturnType
-parameter_list|(
-name|SqlOperatorBinding
 name|opBinding
-parameter_list|)
+lambda|->
 block|{
 specifier|final
 name|RelDataTypeFactory
@@ -2684,7 +2536,6 @@ literal|false
 argument_list|)
 return|;
 block|}
-block|}
 decl_stmt|;
 comment|/**    * Type-inference strategy for the {@code CUME_DIST} and {@code PERCENT_RANK}    * aggregate functions.    */
 specifier|public
@@ -2693,19 +2544,8 @@ specifier|final
 name|SqlReturnTypeInference
 name|FRACTIONAL_RANK
 init|=
-operator|new
-name|SqlReturnTypeInference
-argument_list|()
-block|{
-annotation|@
-name|Override
-specifier|public
-name|RelDataType
-name|inferReturnType
-parameter_list|(
-name|SqlOperatorBinding
 name|opBinding
-parameter_list|)
+lambda|->
 block|{
 specifier|final
 name|RelDataTypeFactory
@@ -2728,7 +2568,6 @@ name|typeFactory
 argument_list|)
 return|;
 block|}
-block|}
 decl_stmt|;
 comment|/**    * Type-inference strategy for the {@code NTILE}, {@code RANK},    * {@code DENSE_RANK}, and {@code ROW_NUMBER} aggregate functions.    */
 specifier|public
@@ -2737,19 +2576,8 @@ specifier|final
 name|SqlReturnTypeInference
 name|RANK
 init|=
-operator|new
-name|SqlReturnTypeInference
-argument_list|()
-block|{
-annotation|@
-name|Override
-specifier|public
-name|RelDataType
-name|inferReturnType
-parameter_list|(
-name|SqlOperatorBinding
 name|opBinding
-parameter_list|)
+lambda|->
 block|{
 specifier|final
 name|RelDataTypeFactory
@@ -2772,7 +2600,6 @@ name|typeFactory
 argument_list|)
 return|;
 block|}
-block|}
 decl_stmt|;
 specifier|public
 specifier|static
@@ -2780,19 +2607,8 @@ specifier|final
 name|SqlReturnTypeInference
 name|AVG_AGG_FUNCTION
 init|=
-operator|new
-name|SqlReturnTypeInference
-argument_list|()
-block|{
-annotation|@
-name|Override
-specifier|public
-name|RelDataType
-name|inferReturnType
-parameter_list|(
-name|SqlOperatorBinding
 name|opBinding
-parameter_list|)
+lambda|->
 block|{
 specifier|final
 name|RelDataTypeFactory
@@ -2857,7 +2673,6 @@ name|relDataType
 return|;
 block|}
 block|}
-block|}
 decl_stmt|;
 specifier|public
 specifier|static
@@ -2865,19 +2680,8 @@ specifier|final
 name|SqlReturnTypeInference
 name|COVAR_FUNCTION
 init|=
-operator|new
-name|SqlReturnTypeInference
-argument_list|()
-block|{
-annotation|@
-name|Override
-specifier|public
-name|RelDataType
-name|inferReturnType
-parameter_list|(
-name|SqlOperatorBinding
 name|opBinding
-parameter_list|)
+lambda|->
 block|{
 specifier|final
 name|RelDataTypeFactory
@@ -2947,7 +2751,6 @@ block|{
 return|return
 name|relDataType
 return|;
-block|}
 block|}
 block|}
 decl_stmt|;

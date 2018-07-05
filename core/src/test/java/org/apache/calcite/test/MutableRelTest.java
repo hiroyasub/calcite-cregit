@@ -437,9 +437,6 @@ literal|false
 argument_list|,
 name|ImmutableList
 operator|.
-expr|<
-name|RelOptRule
-operator|>
 name|of
 argument_list|(
 name|FilterToCalcRule
@@ -466,9 +463,6 @@ literal|false
 argument_list|,
 name|ImmutableList
 operator|.
-expr|<
-name|RelOptRule
-operator|>
 name|of
 argument_list|(
 name|ProjectToWindowRule

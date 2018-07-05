@@ -295,14 +295,6 @@ index|]
 argument_list|,
 name|ImmutableMap
 operator|.
-expr|<
-name|RelNode
-argument_list|,
-name|List
-argument_list|<
-name|RelNode
-argument_list|>
-operator|>
 name|of
 argument_list|()
 argument_list|)

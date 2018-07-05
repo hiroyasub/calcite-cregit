@@ -770,13 +770,6 @@ name|onCopyHook
 argument_list|,
 name|Functions
 operator|.
-expr|<
-name|RelNode
-argument_list|,
-name|RelNode
-argument_list|,
-name|Void
-operator|>
 name|ignore2
 argument_list|()
 argument_list|)
@@ -2467,10 +2460,7 @@ argument_list|(
 operator|new
 name|RelNode
 index|[
-name|bindings
-operator|.
-name|size
-argument_list|()
+literal|0
 index|]
 argument_list|)
 argument_list|,

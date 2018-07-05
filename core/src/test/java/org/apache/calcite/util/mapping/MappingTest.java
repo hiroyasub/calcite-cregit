@@ -1272,9 +1272,6 @@ name|bijection
 argument_list|(
 name|Collections
 operator|.
-expr|<
-name|Integer
-operator|>
 name|emptyList
 argument_list|()
 argument_list|)

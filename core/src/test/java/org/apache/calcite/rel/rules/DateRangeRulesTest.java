@@ -5952,9 +5952,6 @@ name|FLOOR
 argument_list|,
 name|ImmutableList
 operator|.
-expr|<
-name|RexNode
-operator|>
 name|of
 argument_list|(
 name|ts
@@ -5984,9 +5981,6 @@ name|FLOOR
 argument_list|,
 name|ImmutableList
 operator|.
-expr|<
-name|RexNode
-operator|>
 name|of
 argument_list|(
 name|ts
@@ -6016,9 +6010,6 @@ name|FLOOR
 argument_list|,
 name|ImmutableList
 operator|.
-expr|<
-name|RexNode
-operator|>
 name|of
 argument_list|(
 name|ts
@@ -6048,9 +6039,6 @@ name|FLOOR
 argument_list|,
 name|ImmutableList
 operator|.
-expr|<
-name|RexNode
-operator|>
 name|of
 argument_list|(
 name|ts
@@ -6080,9 +6068,6 @@ name|FLOOR
 argument_list|,
 name|ImmutableList
 operator|.
-expr|<
-name|RexNode
-operator|>
 name|of
 argument_list|(
 name|ts
@@ -6112,9 +6097,6 @@ name|CEIL
 argument_list|,
 name|ImmutableList
 operator|.
-expr|<
-name|RexNode
-operator|>
 name|of
 argument_list|(
 name|ts
@@ -6144,9 +6126,6 @@ name|CEIL
 argument_list|,
 name|ImmutableList
 operator|.
-expr|<
-name|RexNode
-operator|>
 name|of
 argument_list|(
 name|ts
@@ -6176,9 +6155,6 @@ name|CEIL
 argument_list|,
 name|ImmutableList
 operator|.
-expr|<
-name|RexNode
-operator|>
 name|of
 argument_list|(
 name|ts
@@ -6208,9 +6184,6 @@ name|CEIL
 argument_list|,
 name|ImmutableList
 operator|.
-expr|<
-name|RexNode
-operator|>
 name|of
 argument_list|(
 name|ts
@@ -6240,9 +6213,6 @@ name|CEIL
 argument_list|,
 name|ImmutableList
 operator|.
-expr|<
-name|RexNode
-operator|>
 name|of
 argument_list|(
 name|ts

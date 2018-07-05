@@ -291,9 +291,6 @@ name|DETERMINISTIC_CLASSES
 init|=
 name|ImmutableSet
 operator|.
-expr|<
-name|Class
-operator|>
 name|of
 argument_list|(
 name|Byte

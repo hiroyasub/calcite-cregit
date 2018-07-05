@@ -190,28 +190,8 @@ name|iterable
 parameter_list|)
 block|{
 return|return
-operator|new
-name|Iterable
-argument_list|<
-name|Ord
-argument_list|<
-name|E
-argument_list|>
-argument_list|>
-argument_list|()
-block|{
-specifier|public
-name|Iterator
-argument_list|<
-name|Ord
-argument_list|<
-name|E
-argument_list|>
-argument_list|>
-name|iterator
 parameter_list|()
-block|{
-return|return
+lambda|->
 name|zip
 argument_list|(
 name|iterable
@@ -219,9 +199,6 @@ operator|.
 name|iterator
 argument_list|()
 argument_list|)
-return|;
-block|}
-block|}
 return|;
 block|}
 comment|/**    * Creates an iterator of {@code Ord}s over an iterator.    */
@@ -460,28 +437,8 @@ name|elements
 argument_list|)
 decl_stmt|;
 return|return
-operator|new
-name|Iterable
-argument_list|<
-name|Ord
-argument_list|<
-name|E
-argument_list|>
-argument_list|>
-argument_list|()
-block|{
-specifier|public
-name|Iterator
-argument_list|<
-name|Ord
-argument_list|<
-name|E
-argument_list|>
-argument_list|>
-name|iterator
 parameter_list|()
-block|{
-return|return
+lambda|->
 operator|new
 name|Iterator
 argument_list|<
@@ -494,14 +451,14 @@ argument_list|()
 block|{
 name|int
 name|i
-init|=
+operator|=
 name|elementList
 operator|.
 name|size
 argument_list|()
 operator|-
 literal|1
-decl_stmt|;
+return|;
 specifier|public
 name|boolean
 name|hasNext
@@ -552,11 +509,11 @@ argument_list|)
 throw|;
 block|}
 block|}
-return|;
+empty_stmt|;
 block|}
-block|}
-return|;
-block|}
+end_class
+
+begin_function
 specifier|public
 name|Integer
 name|getKey
@@ -566,6 +523,9 @@ return|return
 name|i
 return|;
 block|}
+end_function
+
+begin_function
 specifier|public
 name|E
 name|getValue
@@ -575,6 +535,9 @@ return|return
 name|e
 return|;
 block|}
+end_function
+
+begin_function
 specifier|public
 name|E
 name|setValue
@@ -589,7 +552,13 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
+end_function
+
+begin_comment
 comment|/** List of {@link Ord} backed by a list of elements.    *    * @param<E> element type */
+end_comment
+
+begin_class
 specifier|private
 specifier|static
 class|class
@@ -672,7 +641,13 @@ argument_list|()
 return|;
 block|}
 block|}
+end_class
+
+begin_comment
 comment|/** List of {@link Ord} backed by a random-access list of elements.    *    * @param<E> element type */
+end_comment
+
+begin_class
 specifier|private
 specifier|static
 class|class
@@ -706,7 +681,13 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+end_class
+
+begin_comment
 comment|/** List of {@link Ord} backed by an array of elements.    *    * @param<E> element type */
+end_comment
+
+begin_class
 specifier|private
 specifier|static
 class|class
@@ -786,10 +767,10 @@ name|length
 return|;
 block|}
 block|}
-block|}
 end_class
 
 begin_comment
+unit|}
 comment|// End Ord.java
 end_comment
 

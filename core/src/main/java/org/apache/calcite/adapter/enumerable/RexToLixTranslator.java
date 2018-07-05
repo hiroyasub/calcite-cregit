@@ -743,11 +743,6 @@ name|JAVA_TO_SQL_METHOD_MAP
 init|=
 name|Util
 operator|.
-expr|<
-name|Method
-decl_stmt|,
-name|SqlOperator
-decl|>
 name|mapOf
 argument_list|(
 name|findMethod
@@ -975,11 +970,6 @@ name|list
 argument_list|,
 name|Collections
 operator|.
-expr|<
-name|RexNode
-argument_list|,
-name|Boolean
-operator|>
 name|emptyMap
 argument_list|()
 argument_list|,
@@ -6191,11 +6181,6 @@ name|block
 argument_list|,
 name|ImmutableMap
 operator|.
-expr|<
-name|RexNode
-argument_list|,
-name|Boolean
-operator|>
 name|of
 argument_list|()
 argument_list|,
@@ -6249,11 +6234,6 @@ name|list
 argument_list|,
 name|Collections
 operator|.
-expr|<
-name|RexNode
-argument_list|,
-name|Boolean
-operator|>
 name|emptyMap
 argument_list|()
 argument_list|,

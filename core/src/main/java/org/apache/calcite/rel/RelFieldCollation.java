@@ -33,20 +33,6 @@ end_import
 
 begin_import
 import|import
-name|com
-operator|.
-name|google
-operator|.
-name|common
-operator|.
-name|base
-operator|.
-name|Preconditions
-import|;
-end_import
-
-begin_import
-import|import
 name|java
 operator|.
 name|util
@@ -495,9 +481,9 @@ name|this
 operator|.
 name|direction
 operator|=
-name|Preconditions
+name|Objects
 operator|.
-name|checkNotNull
+name|requireNonNull
 argument_list|(
 name|direction
 argument_list|)
@@ -506,9 +492,9 @@ name|this
 operator|.
 name|nullDirection
 operator|=
-name|Preconditions
+name|Objects
 operator|.
-name|checkNotNull
+name|requireNonNull
 argument_list|(
 name|nullDirection
 argument_list|)

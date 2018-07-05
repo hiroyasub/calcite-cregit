@@ -115,9 +115,6 @@ name|key
 argument_list|,
 name|Ordering
 operator|.
-expr|<
-name|Integer
-operator|>
 name|natural
 argument_list|()
 argument_list|)
@@ -152,9 +149,6 @@ name|key
 argument_list|,
 name|Ordering
 operator|.
-expr|<
-name|Integer
-operator|>
 name|natural
 argument_list|()
 argument_list|)

@@ -445,20 +445,6 @@ name|google
 operator|.
 name|common
 operator|.
-name|base
-operator|.
-name|Preconditions
-import|;
-end_import
-
-begin_import
-import|import
-name|com
-operator|.
-name|google
-operator|.
-name|common
-operator|.
 name|collect
 operator|.
 name|ImmutableList
@@ -645,6 +631,16 @@ name|NoSuchElementException
 import|;
 end_import
 
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+import|;
+end_import
+
 begin_comment
 comment|/**  * Interpreter.  *  *<p>Contains the context for interpreting relational expressions. In  * particular it holds working state while the data flow graph is being  * assembled.  */
 end_comment
@@ -697,9 +693,9 @@ name|this
 operator|.
 name|dataContext
 operator|=
-name|Preconditions
+name|Objects
 operator|.
-name|checkNotNull
+name|requireNonNull
 argument_list|(
 name|dataContext
 argument_list|)
@@ -1773,9 +1769,9 @@ name|this
 operator|.
 name|enumerator
 operator|=
-name|Preconditions
+name|Objects
 operator|.
-name|checkNotNull
+name|requireNonNull
 argument_list|(
 name|enumerator
 argument_list|)

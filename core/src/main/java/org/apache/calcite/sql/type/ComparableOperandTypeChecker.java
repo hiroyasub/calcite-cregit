@@ -79,15 +79,11 @@ end_import
 
 begin_import
 import|import
-name|com
+name|java
 operator|.
-name|google
+name|util
 operator|.
-name|common
-operator|.
-name|base
-operator|.
-name|Preconditions
+name|Objects
 import|;
 end_import
 
@@ -167,9 +163,9 @@ name|this
 operator|.
 name|consistency
 operator|=
-name|Preconditions
+name|Objects
 operator|.
-name|checkNotNull
+name|requireNonNull
 argument_list|(
 name|consistency
 argument_list|)

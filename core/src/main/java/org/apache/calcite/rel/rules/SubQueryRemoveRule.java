@@ -2556,7 +2556,7 @@ parameter_list|)
 block|{
 name|super
 argument_list|(
-name|operand
+name|operandJ
 argument_list|(
 name|Project
 operator|.
@@ -2567,8 +2567,8 @@ argument_list|,
 name|RexUtil
 operator|.
 name|SubQueryFinder
-operator|.
-name|PROJECT_PREDICATE
+operator|::
+name|containsSubQuery
 argument_list|,
 name|any
 argument_list|()
@@ -2764,7 +2764,7 @@ parameter_list|)
 block|{
 name|super
 argument_list|(
-name|operand
+name|operandJ
 argument_list|(
 name|Filter
 operator|.
@@ -2775,8 +2775,8 @@ argument_list|,
 name|RexUtil
 operator|.
 name|SubQueryFinder
-operator|.
-name|FILTER_PREDICATE
+operator|::
+name|containsSubQuery
 argument_list|,
 name|any
 argument_list|()
@@ -3020,7 +3020,7 @@ parameter_list|)
 block|{
 name|super
 argument_list|(
-name|operand
+name|operandJ
 argument_list|(
 name|Join
 operator|.
@@ -3031,8 +3031,8 @@ argument_list|,
 name|RexUtil
 operator|.
 name|SubQueryFinder
-operator|.
-name|JOIN_PREDICATE
+operator|::
+name|containsSubQuery
 argument_list|,
 name|any
 argument_list|()

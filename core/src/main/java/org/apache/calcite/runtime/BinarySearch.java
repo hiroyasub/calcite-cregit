@@ -114,9 +114,6 @@ literal|1
 argument_list|,
 name|Functions
 operator|.
-expr|<
-name|T
-operator|>
 name|identitySelector
 argument_list|()
 argument_list|,
@@ -164,9 +161,6 @@ literal|1
 argument_list|,
 name|Functions
 operator|.
-expr|<
-name|T
-operator|>
 name|identitySelector
 argument_list|()
 argument_list|,
@@ -324,9 +318,6 @@ name|imax
 argument_list|,
 name|Functions
 operator|.
-expr|<
-name|T
-operator|>
 name|identitySelector
 argument_list|()
 argument_list|,
@@ -376,9 +367,6 @@ name|imax
 argument_list|,
 name|Functions
 operator|.
-expr|<
-name|T
-operator|>
 name|identitySelector
 argument_list|()
 argument_list|,

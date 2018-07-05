@@ -772,9 +772,6 @@ name|rightKeys
 argument_list|,
 name|ImmutableSet
 operator|.
-expr|<
-name|CorrelationId
-operator|>
 name|of
 argument_list|()
 argument_list|,

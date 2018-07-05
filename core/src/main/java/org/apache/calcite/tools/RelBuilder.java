@@ -243,7 +243,87 @@ name|rel
 operator|.
 name|core
 operator|.
+name|Filter
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|core
+operator|.
+name|Intersect
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|core
+operator|.
+name|Join
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|core
+operator|.
 name|JoinRelType
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|core
+operator|.
+name|Match
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|core
+operator|.
+name|Minus
 import|;
 end_import
 
@@ -291,6 +371,22 @@ name|rel
 operator|.
 name|core
 operator|.
+name|SemiJoin
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|core
+operator|.
 name|Sort
 import|;
 end_import
@@ -323,7 +419,55 @@ name|rel
 operator|.
 name|core
 operator|.
+name|Union
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|core
+operator|.
 name|Values
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|logical
+operator|.
+name|LogicalFilter
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|logical
+operator|.
+name|LogicalProject
 import|;
 end_import
 
@@ -847,34 +991,6 @@ name|common
 operator|.
 name|base
 operator|.
-name|Function
-import|;
-end_import
-
-begin_import
-import|import
-name|com
-operator|.
-name|google
-operator|.
-name|common
-operator|.
-name|base
-operator|.
-name|Joiner
-import|;
-end_import
-
-begin_import
-import|import
-name|com
-operator|.
-name|google
-operator|.
-name|common
-operator|.
-name|base
-operator|.
 name|Preconditions
 import|;
 end_import
@@ -1116,7 +1232,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Builder for relational expressions.  *  *<p>{@code RelBuilder} does not make possible anything that you could not  * also accomplish by calling the factory methods of the particular relational  * expression. But it makes common tasks more straightforward and concise.  *  *<p>{@code RelBuilder} uses factories to create relational expressions.  * By default, it uses the default factories, which create logical relational  * expressions ({@link org.apache.calcite.rel.logical.LogicalFilter},  * {@link org.apache.calcite.rel.logical.LogicalProject} and so forth).  * But you could override those factories so that, say, {@code filter} creates  * instead a {@code HiveFilter}.  *  *<p>It is not thread-safe.  */
+comment|/**  * Builder for relational expressions.  *  *<p>{@code RelBuilder} does not make possible anything that you could not  * also accomplish by calling the factory methods of the particular relational  * expression. But it makes common tasks more straightforward and concise.  *  *<p>{@code RelBuilder} uses factories to create relational expressions.  * By default, it uses the default factories, which create logical relational  * expressions ({@link LogicalFilter},  * {@link LogicalProject} and so forth).  * But you could override those factories so that, say, {@code filter} creates  * instead a {@code HiveFilter}.  *  *<p>It is not thread-safe.  */
 end_comment
 
 begin_class
@@ -1124,47 +1240,6 @@ specifier|public
 class|class
 name|RelBuilder
 block|{
-specifier|private
-specifier|static
-specifier|final
-name|Function
-argument_list|<
-name|RexNode
-argument_list|,
-name|String
-argument_list|>
-name|FN_TYPE
-init|=
-operator|new
-name|Function
-argument_list|<
-name|RexNode
-argument_list|,
-name|String
-argument_list|>
-argument_list|()
-block|{
-specifier|public
-name|String
-name|apply
-parameter_list|(
-name|RexNode
-name|input
-parameter_list|)
-block|{
-return|return
-name|input
-operator|+
-literal|": "
-operator|+
-name|input
-operator|.
-name|getType
-argument_list|()
-return|;
-block|}
-block|}
-decl_stmt|;
 specifier|protected
 specifier|final
 name|RelOptCluster
@@ -1818,22 +1893,12 @@ name|context
 parameter_list|)
 block|{
 return|return
-operator|new
-name|RelBuilderFactory
-argument_list|()
-block|{
-specifier|public
-name|RelBuilder
-name|create
 parameter_list|(
-name|RelOptCluster
 name|cluster
 parameter_list|,
-name|RelOptSchema
 name|schema
 parameter_list|)
-block|{
-return|return
+lambda|->
 operator|new
 name|RelBuilder
 argument_list|(
@@ -1843,9 +1908,6 @@ name|cluster
 argument_list|,
 name|schema
 argument_list|)
-return|;
-block|}
-block|}
 return|;
 block|}
 comment|/** Creates a {@link RelBuilderFactory} that uses a given set of factories. */
@@ -2728,16 +2790,16 @@ name|String
 name|fieldName
 parameter_list|)
 block|{
-name|Preconditions
+name|Objects
 operator|.
-name|checkNotNull
+name|requireNonNull
 argument_list|(
 name|alias
 argument_list|)
 expr_stmt|;
-name|Preconditions
+name|Objects
 operator|.
-name|checkNotNull
+name|requireNonNull
 argument_list|(
 name|fieldName
 argument_list|)
@@ -3432,7 +3494,16 @@ name|transform
 argument_list|(
 name|operandList
 argument_list|,
-name|FN_TYPE
+name|e
+lambda|->
+name|e
+operator|+
+literal|": "
+operator|+
+name|e
+operator|.
+name|getType
+argument_list|()
 argument_list|)
 argument_list|)
 throw|;
@@ -3921,9 +3992,6 @@ name|groupKey
 argument_list|(
 name|ImmutableList
 operator|.
-expr|<
-name|RexNode
-operator|>
 name|of
 argument_list|()
 argument_list|)
@@ -4284,45 +4352,20 @@ name|transform
 argument_list|(
 name|groupSets
 argument_list|,
-operator|new
-name|Function
-argument_list|<
-name|ImmutableBitSet
-argument_list|,
-name|ImmutableList
-argument_list|<
-name|RexNode
-argument_list|>
-argument_list|>
-argument_list|()
-block|{
-specifier|public
-name|ImmutableList
-argument_list|<
-name|RexNode
-argument_list|>
-name|apply
-parameter_list|(
-name|ImmutableBitSet
-name|input
-parameter_list|)
-block|{
-return|return
+name|bitSet
+lambda|->
 name|fields
 argument_list|(
 name|ImmutableIntList
 operator|.
 name|of
 argument_list|(
-name|input
+name|bitSet
 operator|.
 name|toArray
 argument_list|()
 argument_list|)
 argument_list|)
-return|;
-block|}
-block|}
 argument_list|)
 decl_stmt|;
 return|return
@@ -5174,7 +5217,7 @@ argument_list|)
 return|;
 block|}
 comment|// Methods that create relational expressions
-comment|/** Creates a {@link org.apache.calcite.rel.core.TableScan} of the table    * with a given name.    *    *<p>Throws if the table does not exist.    *    *<p>Returns this builder.    *    * @param tableNames Name of table (can optionally be qualified)    */
+comment|/** Creates a {@link TableScan} of the table    * with a given name.    *    *<p>Throws if the table does not exist.    *    *<p>Returns this builder.    *    * @param tableNames Name of table (can optionally be qualified)    */
 specifier|public
 name|RelBuilder
 name|scan
@@ -5223,15 +5266,12 @@ name|RESOURCE
 operator|.
 name|tableNotFound
 argument_list|(
-name|Joiner
-operator|.
-name|on
-argument_list|(
-literal|"."
-argument_list|)
+name|String
 operator|.
 name|join
 argument_list|(
+literal|"."
+argument_list|,
 name|names
 argument_list|)
 argument_list|)
@@ -5262,7 +5302,7 @@ return|return
 name|this
 return|;
 block|}
-comment|/** Creates a {@link org.apache.calcite.rel.core.TableScan} of the table    * with a given name.    *    *<p>Throws if the table does not exist.    *    *<p>Returns this builder.    *    * @param tableNames Name of table (can optionally be qualified)    */
+comment|/** Creates a {@link TableScan} of the table    * with a given name.    *    *<p>Throws if the table does not exist.    *    *<p>Returns this builder.    *    * @param tableNames Name of table (can optionally be qualified)    */
 specifier|public
 name|RelBuilder
 name|scan
@@ -5284,7 +5324,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/** Creates a {@link org.apache.calcite.rel.core.Filter} of an array of    * predicates.    *    *<p>The predicates are combined using AND,    * and optimized in a similar way to the {@link #and} method.    * If the result is TRUE no filter is created. */
+comment|/** Creates a {@link Filter} of an array of    * predicates.    *    *<p>The predicates are combined using AND,    * and optimized in a similar way to the {@link #and} method.    * If the result is TRUE no filter is created. */
 specifier|public
 name|RelBuilder
 name|filter
@@ -5306,7 +5346,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/** Creates a {@link org.apache.calcite.rel.core.Filter} of a list of    * predicates.    *    *<p>The predicates are combined using AND,    * and optimized in a similar way to the {@link #and} method.    * If the result is TRUE no filter is created. */
+comment|/** Creates a {@link Filter} of a list of    * predicates.    *    *<p>The predicates are combined using AND,    * and optimized in a similar way to the {@link #and} method.    * If the result is TRUE no filter is created. */
 specifier|public
 name|RelBuilder
 name|filter
@@ -5396,7 +5436,7 @@ return|return
 name|this
 return|;
 block|}
-comment|/** Creates a {@link org.apache.calcite.rel.core.Project} of the given list    * of expressions.    *    *<p>Infers names as would {@link #project(Iterable, Iterable)} if all    * suggested names were null.    *    * @param nodes Expressions    */
+comment|/** Creates a {@link Project} of the given list    * of expressions.    *    *<p>Infers names as would {@link #project(Iterable, Iterable)} if all    * suggested names were null.    *    * @param nodes Expressions    */
 specifier|public
 name|RelBuilder
 name|project
@@ -5417,15 +5457,12 @@ name|nodes
 argument_list|,
 name|ImmutableList
 operator|.
-expr|<
-name|String
-operator|>
 name|of
 argument_list|()
 argument_list|)
 return|;
 block|}
-comment|/** Creates a {@link org.apache.calcite.rel.core.Project} of the given list    * of expressions and field names.    *    * @param nodes Expressions    * @param fieldNames field names for expressions    */
+comment|/** Creates a {@link Project} of the given list    * of expressions and field names.    *    * @param nodes Expressions    * @param fieldNames field names for expressions    */
 specifier|public
 name|RelBuilder
 name|project
@@ -5456,7 +5493,7 @@ literal|false
 argument_list|)
 return|;
 block|}
-comment|/** Creates a {@link org.apache.calcite.rel.core.Project} of the given list    * of expressions, using the given names.    *    *<p>Names are deduced as follows:    *<ul>    *<li>If the length of {@code fieldNames} is greater than the index of    *     the current entry in {@code nodes}, and the entry in    *     {@code fieldNames} is not null, uses it; otherwise    *<li>If an expression projects an input field,    *     or is a cast an input field,    *     uses the input field name; otherwise    *<li>If an expression is a call to    *     {@link org.apache.calcite.sql.fun.SqlStdOperatorTable#AS}    *     (see {@link #alias}), removes the call but uses the intended alias.    *</ul>    *    *<p>After the field names have been inferred, makes the    * field names unique by appending numeric suffixes.    *    * @param nodes Expressions    * @param fieldNames Suggested field names    * @param force create project even if it is identity    */
+comment|/** Creates a {@link Project} of the given list    * of expressions, using the given names.    *    *<p>Names are deduced as follows:    *<ul>    *<li>If the length of {@code fieldNames} is greater than the index of    *     the current entry in {@code nodes}, and the entry in    *     {@code fieldNames} is not null, uses it; otherwise    *<li>If an expression projects an input field,    *     or is a cast an input field,    *     uses the input field name; otherwise    *<li>If an expression is a call to    *     {@link SqlStdOperatorTable#AS}    *     (see {@link #alias}), removes the call but uses the intended alias.    *</ul>    *    *<p>After the field names have been inferred, makes the    * field names unique by appending numeric suffixes.    *    * @param nodes Expressions    * @param fieldNames Suggested field names    * @param force create project even if it is identity    */
 specifier|public
 name|RelBuilder
 name|project
@@ -5816,9 +5853,6 @@ name|Field
 argument_list|(
 name|ImmutableSet
 operator|.
-expr|<
-name|String
-operator|>
 name|of
 argument_list|()
 argument_list|,
@@ -5963,7 +5997,7 @@ return|return
 name|this
 return|;
 block|}
-comment|/** Creates a {@link org.apache.calcite.rel.core.Project} of the given    * expressions. */
+comment|/** Creates a {@link Project} of the given    * expressions. */
 specifier|public
 name|RelBuilder
 name|project
@@ -5985,7 +6019,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/** Creates a {@link org.apache.calcite.rel.core.Project} of the given    * expressions and field names, and optionally optimizing.    *    *<p>If {@code fieldNames} is null, or if a particular entry in    * {@code fieldNames} is null, derives field names from the input    * expressions.    *    *<p>If {@code force} is false,    * and the input is a {@code Project},    * and the expressions  make the trivial projection ($0, $1, ...),    * modifies the input.    *    * @param nodes       Expressions    * @param fieldNames  Suggested field names, or null to generate    * @param force       Whether to create a renaming Project if the    *                    projections are trivial    */
+comment|/** Creates a {@link Project} of the given    * expressions and field names, and optionally optimizing.    *    *<p>If {@code fieldNames} is null, or if a particular entry in    * {@code fieldNames} is null, derives field names from the input    * expressions.    *    *<p>If {@code force} is false,    * and the input is a {@code Project},    * and the expressions  make the trivial projection ($0, $1, ...),    * modifies the input.    *    * @param nodes       Expressions    * @param fieldNames  Suggested field names, or null to generate    * @param force       Whether to create a renaming Project if the    *                    projections are trivial    */
 specifier|public
 name|RelBuilder
 name|projectNamed
@@ -6656,7 +6690,7 @@ literal|null
 return|;
 block|}
 block|}
-comment|/** Creates an {@link org.apache.calcite.rel.core.Aggregate} that makes the    * relational expression distinct on all fields. */
+comment|/** Creates an {@link Aggregate} that makes the    * relational expression distinct on all fields. */
 specifier|public
 name|RelBuilder
 name|distinct
@@ -6673,7 +6707,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/** Creates an {@link org.apache.calcite.rel.core.Aggregate} with an array of    * calls. */
+comment|/** Creates an {@link Aggregate} with an array of    * calls. */
 specifier|public
 name|RelBuilder
 name|aggregate
@@ -6700,7 +6734,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/** Creates an {@link org.apache.calcite.rel.core.Aggregate} with a list of    * calls. */
+comment|/** Creates an {@link Aggregate} with a list of    * calls. */
 specifier|public
 name|RelBuilder
 name|aggregate
@@ -7545,9 +7579,6 @@ name|Field
 argument_list|(
 name|ImmutableSet
 operator|.
-expr|<
-name|String
-operator|>
 name|of
 argument_list|()
 argument_list|,
@@ -7627,9 +7658,6 @@ name|Field
 argument_list|(
 name|ImmutableSet
 operator|.
-expr|<
-name|String
-operator|>
 name|of
 argument_list|()
 argument_list|,
@@ -7710,9 +7738,6 @@ name|Field
 argument_list|(
 name|ImmutableSet
 operator|.
-expr|<
-name|String
-operator|>
 name|of
 argument_list|()
 argument_list|,
@@ -7870,7 +7895,7 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/** Creates a {@link org.apache.calcite.rel.core.Union} of the two most recent    * relational expressions on the stack.    *    * @param all Whether to create UNION ALL    */
+comment|/** Creates a {@link Union} of the two most recent    * relational expressions on the stack.    *    * @param all Whether to create UNION ALL    */
 specifier|public
 name|RelBuilder
 name|union
@@ -7888,7 +7913,7 @@ literal|2
 argument_list|)
 return|;
 block|}
-comment|/** Creates a {@link org.apache.calcite.rel.core.Union} of the {@code n}    * most recent relational expressions on the stack.    *    * @param all Whether to create UNION ALL    * @param n Number of inputs to the UNION operator    */
+comment|/** Creates a {@link Union} of the {@code n}    * most recent relational expressions on the stack.    *    * @param all Whether to create UNION ALL    * @param n Number of inputs to the UNION operator    */
 specifier|public
 name|RelBuilder
 name|union
@@ -7913,7 +7938,7 @@ name|n
 argument_list|)
 return|;
 block|}
-comment|/** Creates an {@link org.apache.calcite.rel.core.Intersect} of the two most    * recent relational expressions on the stack.    *    * @param all Whether to create INTERSECT ALL    */
+comment|/** Creates an {@link Intersect} of the two most    * recent relational expressions on the stack.    *    * @param all Whether to create INTERSECT ALL    */
 specifier|public
 name|RelBuilder
 name|intersect
@@ -7931,7 +7956,7 @@ literal|2
 argument_list|)
 return|;
 block|}
-comment|/** Creates an {@link org.apache.calcite.rel.core.Intersect} of the {@code n}    * most recent relational expressions on the stack.    *    * @param all Whether to create INTERSECT ALL    * @param n Number of inputs to the INTERSECT operator    */
+comment|/** Creates an {@link Intersect} of the {@code n}    * most recent relational expressions on the stack.    *    * @param all Whether to create INTERSECT ALL    * @param n Number of inputs to the INTERSECT operator    */
 specifier|public
 name|RelBuilder
 name|intersect
@@ -7956,7 +7981,7 @@ name|n
 argument_list|)
 return|;
 block|}
-comment|/** Creates a {@link org.apache.calcite.rel.core.Minus} of the two most recent    * relational expressions on the stack.    *    * @param all Whether to create EXCEPT ALL    */
+comment|/** Creates a {@link Minus} of the two most recent    * relational expressions on the stack.    *    * @param all Whether to create EXCEPT ALL    */
 specifier|public
 name|RelBuilder
 name|minus
@@ -7974,7 +7999,7 @@ literal|2
 argument_list|)
 return|;
 block|}
-comment|/** Creates a {@link org.apache.calcite.rel.core.Minus} of the {@code n}    * most recent relational expressions on the stack.    *    * @param all Whether to create EXCEPT ALL    */
+comment|/** Creates a {@link Minus} of the {@code n}    * most recent relational expressions on the stack.    *    * @param all Whether to create EXCEPT ALL    */
 specifier|public
 name|RelBuilder
 name|minus
@@ -7999,7 +8024,7 @@ name|n
 argument_list|)
 return|;
 block|}
-comment|/** Creates a {@link org.apache.calcite.rel.core.Join}. */
+comment|/** Creates a {@link Join}. */
 specifier|public
 name|RelBuilder
 name|join
@@ -8031,7 +8056,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/** Creates a {@link org.apache.calcite.rel.core.Join} with multiple    * conditions. */
+comment|/** Creates a {@link Join} with multiple    * conditions. */
 specifier|public
 name|RelBuilder
 name|join
@@ -8060,9 +8085,6 @@ argument_list|)
 argument_list|,
 name|ImmutableSet
 operator|.
-expr|<
-name|CorrelationId
-operator|>
 name|of
 argument_list|()
 argument_list|)
@@ -8088,15 +8110,12 @@ name|condition
 argument_list|,
 name|ImmutableSet
 operator|.
-expr|<
-name|CorrelationId
-operator|>
 name|of
 argument_list|()
 argument_list|)
 return|;
 block|}
-comment|/** Creates a {@link org.apache.calcite.rel.core.Join} with correlating    * variables. */
+comment|/** Creates a {@link Join} with correlating    * variables. */
 specifier|public
 name|RelBuilder
 name|join
@@ -8380,7 +8399,7 @@ return|return
 name|this
 return|;
 block|}
-comment|/** Creates a {@link org.apache.calcite.rel.core.Join} using USING syntax.    *    *<p>For each of the field names, both left and right inputs must have a    * field of that name. Constructs a join condition that the left and right    * fields are equal.    *    * @param joinType Join type    * @param fieldNames Field names    */
+comment|/** Creates a {@link Join} using USING syntax.    *    *<p>For each of the field names, both left and right inputs must have a    * field of that name. Constructs a join condition that the left and right    * fields are equal.    *    * @param joinType Join type    * @param fieldNames Field names    */
 specifier|public
 name|RelBuilder
 name|join
@@ -8453,7 +8472,7 @@ name|conditions
 argument_list|)
 return|;
 block|}
-comment|/** Creates a {@link org.apache.calcite.rel.core.SemiJoin}. */
+comment|/** Creates a {@link SemiJoin}. */
 specifier|public
 name|RelBuilder
 name|semiJoin
@@ -8506,7 +8525,7 @@ return|return
 name|this
 return|;
 block|}
-comment|/** Creates a {@link org.apache.calcite.rel.core.SemiJoin}. */
+comment|/** Creates a {@link SemiJoin}. */
 specifier|public
 name|RelBuilder
 name|semiJoin
@@ -8561,34 +8580,15 @@ name|pair
 operator|.
 name|fields
 argument_list|,
-operator|new
-name|Function
-argument_list|<
-name|Field
-argument_list|,
-name|Field
-argument_list|>
-argument_list|()
-block|{
-specifier|public
-name|Field
-name|apply
-parameter_list|(
-name|Field
 name|field
-parameter_list|)
-block|{
-return|return
+lambda|->
 operator|new
 name|Field
 argument_list|(
 name|ImmutableSet
 operator|.
-expr|<
-name|String
-operator|>
-name|builder
-argument_list|()
+block_content|<String>builder(
+argument_list|)
 operator|.
 name|addAll
 argument_list|(
@@ -8604,16 +8604,13 @@ argument_list|)
 operator|.
 name|build
 argument_list|()
-argument_list|,
+decl_stmt|,
 name|field
 operator|.
 name|right
-argument_list|)
-return|;
-block|}
-block|}
-argument_list|)
-decl_stmt|;
+decl_stmt|)
+block_content|)
+function|;
 name|stack
 operator|.
 name|push
@@ -8638,7 +8635,13 @@ return|return
 name|this
 return|;
 block|}
+end_class
+
+begin_comment
 comment|/** Creates a {@link Values}.    *    *<p>The {@code values} array must have the same number of entries as    * {@code fieldNames}, or an integer multiple if you wish to create multiple    * rows.    *    *<p>If there are zero rows, or if all values of a any column are    * null, this method cannot deduce the type of columns. For these cases,    * call {@link #values(Iterable, RelDataType)}.    *    * @param fieldNames Field names    * @param values Values    */
+end_comment
+
+begin_function
 specifier|public
 name|RelBuilder
 name|values
@@ -8908,6 +8911,9 @@ name|rowType
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_function
 specifier|private
 name|ImmutableList
 argument_list|<
@@ -9032,7 +9038,13 @@ name|build
 argument_list|()
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/** Returns whether all values for a given column are null. */
+end_comment
+
+begin_function
 specifier|private
 name|boolean
 name|allNull
@@ -9085,7 +9097,13 @@ return|return
 literal|true
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/** Creates a relational expression that reads from an input and throws    * all of the rows away.    *    *<p>Note that this method always pops one relational expression from the    * stack. {@code values}, in contrast, does not pop any relational    * expressions, and always produces a leaf.    *    *<p>The default implementation creates a {@link Values} with the same    * specified row type as the input, and ignores the input entirely.    * But schema-on-query systems such as Drill might override this method to    * create a relation expression that retains the input, just to read its    * schema.    */
+end_comment
+
+begin_function
 specifier|public
 name|RelBuilder
 name|empty
@@ -9112,7 +9130,13 @@ argument_list|()
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/** Creates a {@link Values} with a specified row type.    *    *<p>This method can handle cases that {@link #values(String[], Object...)}    * cannot, such as all values of a column being null, or there being zero    * rows.    *    * @param rowType Row type    * @param columnValues Values    */
+end_comment
+
+begin_function
 specifier|public
 name|RelBuilder
 name|values
@@ -9173,7 +9197,13 @@ return|return
 name|this
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/** Creates a {@link Values} with a specified row type.    *    *<p>This method can handle cases that {@link #values(String[], Object...)}    * cannot, such as all values of a column being null, or there being zero    * rows.    *    * @param tupleList Tuple list    * @param rowType Row type    */
+end_comment
+
+begin_function
 specifier|public
 name|RelBuilder
 name|values
@@ -9219,7 +9249,13 @@ return|return
 name|this
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/** Creates a {@link Values} with a specified row type and    * zero rows.    *    * @param rowType Row type    */
+end_comment
+
+begin_function
 specifier|public
 name|RelBuilder
 name|values
@@ -9246,7 +9282,13 @@ name|rowType
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/** Converts an iterable of lists into an immutable list of immutable lists    * with the same contents. Returns the same object if possible. */
+end_comment
+
+begin_function
 specifier|private
 specifier|static
 parameter_list|<
@@ -9368,7 +9410,13 @@ name|build
 argument_list|()
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/** Creates a limit without a sort. */
+end_comment
+
+begin_function
 specifier|public
 name|RelBuilder
 name|limit
@@ -9389,15 +9437,18 @@ name|fetch
 argument_list|,
 name|ImmutableList
 operator|.
-expr|<
-name|RexNode
-operator|>
 name|of
 argument_list|()
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/** Creates a {@link Sort} by field ordinals.    *    *<p>Negative fields mean descending: -1 means field(0) descending,    * -2 means field(1) descending, etc.    */
+end_comment
+
+begin_function
 specifier|public
 name|RelBuilder
 name|sort
@@ -9471,7 +9522,13 @@ argument_list|()
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/** Creates a {@link Sort} by expressions. */
+end_comment
+
+begin_function
 specifier|public
 name|RelBuilder
 name|sort
@@ -9499,7 +9556,13 @@ argument_list|)
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/** Creates a {@link Sort} by expressions. */
+end_comment
+
+begin_function
 specifier|public
 name|RelBuilder
 name|sort
@@ -9526,7 +9589,13 @@ name|nodes
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/** Creates a {@link Sort} by expressions, with limit and offset. */
+end_comment
+
+begin_function
 specifier|public
 name|RelBuilder
 name|sortLimit
@@ -9558,7 +9627,13 @@ argument_list|)
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/** Creates a {@link Sort} by a list of expressions, with limit and offset.    *    * @param offset Number of rows to skip; non-positive means don't skip any    * @param fetch Maximum number of rows to fetch; negative means no limit    * @param nodes Sort expressions    */
+end_comment
+
+begin_function
 specifier|public
 name|RelBuilder
 name|sortLimit
@@ -9998,6 +10073,9 @@ return|return
 name|this
 return|;
 block|}
+end_function
+
+begin_function
 specifier|private
 specifier|static
 name|RelFieldCollation
@@ -10199,7 +10277,13 @@ argument_list|)
 return|;
 block|}
 block|}
+end_function
+
+begin_comment
 comment|/**    * Creates a projection that converts the current relational expression's    * output to a desired row type.    *    * @param castRowType row type after cast    * @param rename      if true, use field names from castRowType; if false,    *                    preserve field names from rel    */
+end_comment
+
+begin_function
 specifier|public
 name|RelBuilder
 name|convert
@@ -10244,6 +10328,9 @@ return|return
 name|this
 return|;
 block|}
+end_function
+
+begin_function
 specifier|public
 name|RelBuilder
 name|permute
@@ -10289,9 +10376,9 @@ name|RexNode
 argument_list|>
 name|exprList
 init|=
-name|Lists
-operator|.
-name|newArrayList
+operator|new
+name|ArrayList
+argument_list|<>
 argument_list|()
 decl_stmt|;
 for|for
@@ -10335,6 +10422,9 @@ name|exprList
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_function
 specifier|public
 name|RelBuilder
 name|aggregate
@@ -10360,37 +10450,20 @@ name|transform
 argument_list|(
 name|aggregateCalls
 argument_list|,
-operator|new
-name|Function
-argument_list|<
-name|AggregateCall
-argument_list|,
-name|AggCall
-argument_list|>
-argument_list|()
-block|{
-specifier|public
-name|AggCall
-name|apply
-parameter_list|(
-name|AggregateCall
-name|input
-parameter_list|)
-block|{
-return|return
-operator|new
 name|AggCallImpl2
-argument_list|(
-name|input
-argument_list|)
-return|;
-block|}
-block|}
+operator|::
+operator|new
 argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/** Creates a {@link org.apache.calcite.rel.core.Match}. */
+end_function
+
+begin_comment
+comment|/** Creates a {@link Match}. */
+end_comment
+
+begin_function
 specifier|public
 name|RelBuilder
 name|match
@@ -10862,7 +10935,13 @@ return|return
 name|this
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/** Clears the stack.    *    *<p>The builder's state is now the same as when it was created. */
+end_comment
+
+begin_function
 specifier|public
 name|void
 name|clear
@@ -10874,12 +10953,24 @@ name|clear
 argument_list|()
 expr_stmt|;
 block|}
+end_function
+
+begin_comment
 comment|/** Information necessary to create a call to an aggregate function.    *    * @see RelBuilder#aggregateCall */
+end_comment
+
+begin_interface
 specifier|public
 interface|interface
 name|AggCall
 block|{   }
+end_interface
+
+begin_comment
 comment|/** Information necessary to create the GROUP BY clause of an Aggregate.    *    * @see RelBuilder#groupKey */
+end_comment
+
+begin_interface
 specifier|public
 interface|interface
 name|GroupKey
@@ -10893,7 +10984,13 @@ name|alias
 parameter_list|)
 function_decl|;
 block|}
-comment|/** Implementation of {@link RelBuilder.GroupKey}. */
+end_interface
+
+begin_comment
+comment|/** Implementation of {@link GroupKey}. */
+end_comment
+
+begin_class
 specifier|protected
 specifier|static
 class|class
@@ -10954,9 +11051,9 @@ name|this
 operator|.
 name|nodes
 operator|=
-name|Preconditions
+name|Objects
 operator|.
-name|checkNotNull
+name|requireNonNull
 argument_list|(
 name|nodes
 argument_list|)
@@ -11044,7 +11141,13 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/** Implementation of {@link RelBuilder.AggCall}. */
+end_class
+
+begin_comment
+comment|/** Implementation of {@link AggCall}. */
+end_comment
+
+begin_class
 specifier|private
 specifier|static
 class|class
@@ -11147,7 +11250,13 @@ name|operands
 expr_stmt|;
 block|}
 block|}
-comment|/** Implementation of {@link RelBuilder.AggCall} that wraps an    * {@link AggregateCall}. */
+end_class
+
+begin_comment
+comment|/** Implementation of {@link AggCall} that wraps an    * {@link AggregateCall}. */
+end_comment
+
+begin_class
 specifier|private
 specifier|static
 class|class
@@ -11170,16 +11279,22 @@ name|this
 operator|.
 name|aggregateCall
 operator|=
-name|Preconditions
+name|Objects
 operator|.
-name|checkNotNull
+name|requireNonNull
 argument_list|(
 name|aggregateCall
 argument_list|)
 expr_stmt|;
 block|}
 block|}
+end_class
+
+begin_comment
 comment|/** Collects the extra expressions needed for {@link #aggregate}.    *    *<p>The extra expressions come from the group key and as arguments to    * aggregate calls, and later there will be a {@link #project} or a    * {@link #rename(List)} if necessary. */
+end_comment
+
+begin_class
 specifier|private
 specifier|static
 class|class
@@ -11373,7 +11488,13 @@ name|builder
 return|;
 block|}
 block|}
+end_class
+
+begin_comment
 comment|/** Builder stack frame.    *    *<p>Describes a previously created relational expression and    * information about how table aliases map into its row type. */
+end_comment
+
+begin_class
 specifier|private
 specifier|static
 class|class
@@ -11456,9 +11577,6 @@ literal|null
 condition|?
 name|ImmutableSet
 operator|.
-expr|<
-name|String
-operator|>
 name|of
 argument_list|()
 else|:
@@ -11584,7 +11702,13 @@ argument_list|)
 return|;
 block|}
 block|}
+end_class
+
+begin_comment
 comment|/** A field that belongs to a stack {@link Frame}. */
+end_comment
+
+begin_class
 specifier|private
 specifier|static
 class|class
@@ -11621,7 +11745,13 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/** Shuttle that shifts a predicate's inputs to the left, replacing early    * ones with references to a    * {@link org.apache.calcite.rex.RexCorrelVariable}. */
+end_class
+
+begin_comment
+comment|/** Shuttle that shifts a predicate's inputs to the left, replacing early    * ones with references to a    * {@link RexCorrelVariable}. */
+end_comment
+
+begin_class
 specifier|private
 class|class
 name|Shifter
@@ -11764,10 +11894,10 @@ return|;
 block|}
 block|}
 block|}
-block|}
 end_class
 
 begin_comment
+unit|}
 comment|// End RelBuilder.java
 end_comment
 

@@ -45,6 +45,16 @@ name|Preconditions
 import|;
 end_import
 
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+import|;
+end_import
+
 begin_comment
 comment|/**  * Definition of the SQL<code>ALL</code> and<code>SOME</code>operators.  *  *<p>Each is used in combination with a relational operator:  *<code>&lt;</code>,<code>&le;</code>,  *<code>&gt;</code>,<code>&ge;</code>,  *<code>=</code>,<code>&lt;&gt;</code>.  *  *<p><code>ANY</code> is a synonym for<code>SOME</code>.  */
 end_comment
@@ -90,9 +100,9 @@ name|this
 operator|.
 name|comparisonKind
 operator|=
-name|Preconditions
+name|Objects
 operator|.
-name|checkNotNull
+name|requireNonNull
 argument_list|(
 name|comparisonKind
 argument_list|)

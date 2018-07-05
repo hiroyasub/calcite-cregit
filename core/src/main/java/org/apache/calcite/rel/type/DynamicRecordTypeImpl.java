@@ -65,11 +65,15 @@ end_import
 
 begin_import
 import|import
-name|java
+name|com
 operator|.
-name|util
+name|google
 operator|.
-name|Collections
+name|common
+operator|.
+name|collect
+operator|.
+name|ImmutableList
 import|;
 end_import
 
@@ -245,12 +249,9 @@ return|return
 operator|new
 name|SqlTypeExplicitPrecedenceList
 argument_list|(
-name|Collections
+name|ImmutableList
 operator|.
-expr|<
-name|SqlTypeName
-operator|>
-name|emptyList
+name|of
 argument_list|()
 argument_list|)
 return|;

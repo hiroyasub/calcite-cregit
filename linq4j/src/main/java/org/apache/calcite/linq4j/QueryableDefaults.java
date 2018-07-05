@@ -3450,11 +3450,6 @@ name|lambda
 argument_list|(
 name|Functions
 operator|.
-expr|<
-name|T
-argument_list|,
-name|Integer
-operator|>
 name|toPredicate2
 argument_list|(
 name|predicate
@@ -3951,11 +3946,6 @@ name|lambda
 argument_list|(
 name|Functions
 operator|.
-expr|<
-name|T
-argument_list|,
-name|Integer
-operator|>
 name|toPredicate2
 argument_list|(
 name|predicate

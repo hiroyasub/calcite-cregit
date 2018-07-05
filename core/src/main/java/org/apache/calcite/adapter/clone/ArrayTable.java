@@ -351,20 +351,6 @@ end_import
 
 begin_import
 import|import
-name|com
-operator|.
-name|google
-operator|.
-name|common
-operator|.
-name|collect
-operator|.
-name|Lists
-import|;
-end_import
-
-begin_import
-import|import
 name|java
 operator|.
 name|lang
@@ -394,6 +380,16 @@ operator|.
 name|util
 operator|.
 name|AbstractList
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|ArrayList
 import|;
 end_import
 
@@ -515,9 +511,9 @@ name|ImmutableBitSet
 argument_list|>
 name|keys
 init|=
-name|Lists
-operator|.
-name|newArrayList
+operator|new
+name|ArrayList
+argument_list|<>
 argument_list|()
 decl_stmt|;
 specifier|final
@@ -1099,10 +1095,7 @@ argument_list|(
 operator|new
 name|Comparable
 index|[
-name|list
-operator|.
-name|size
-argument_list|()
+literal|0
 index|]
 argument_list|)
 return|;
@@ -3972,9 +3965,6 @@ argument_list|)
 else|:
 name|ImmutableList
 operator|.
-expr|<
-name|RelCollation
-operator|>
 name|of
 argument_list|()
 argument_list|)

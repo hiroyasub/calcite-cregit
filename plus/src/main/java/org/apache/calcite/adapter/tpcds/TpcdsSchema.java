@@ -225,15 +225,15 @@ end_import
 
 begin_import
 import|import
-name|org
+name|com
 operator|.
-name|apache
+name|google
 operator|.
-name|calcite
+name|common
 operator|.
-name|util
+name|collect
 operator|.
-name|ImmutableBitSet
+name|ImmutableList
 import|;
 end_import
 
@@ -294,16 +294,6 @@ operator|.
 name|sql
 operator|.
 name|Date
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|Collections
 import|;
 end_import
 
@@ -764,12 +754,9 @@ name|of
 argument_list|(
 name|rowCount
 argument_list|,
-name|Collections
+name|ImmutableList
 operator|.
-expr|<
-name|ImmutableBitSet
-operator|>
-name|emptyList
+name|of
 argument_list|()
 argument_list|)
 return|;

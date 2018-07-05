@@ -789,22 +789,8 @@ name|enumeration
 parameter_list|)
 block|{
 return|return
-operator|new
-name|Iterable
-argument_list|<
-name|E
-argument_list|>
-argument_list|()
-block|{
-specifier|public
-name|Iterator
-argument_list|<
-name|E
-argument_list|>
-name|iterator
 parameter_list|()
-block|{
-return|return
+lambda|->
 operator|new
 name|Iterator
 argument_list|<
@@ -815,15 +801,15 @@ block|{
 specifier|public
 name|boolean
 name|hasNext
-parameter_list|()
-block|{
-return|return
-name|enumeration
-operator|.
-name|hasMoreElements
 argument_list|()
-return|;
+block|{
+block_content|return enumeration.hasMoreElements(
+block_content|)
+function|;
 block|}
+end_class
+
+begin_function
 specifier|public
 name|E
 name|next
@@ -836,6 +822,9 @@ name|nextElement
 argument_list|()
 return|;
 block|}
+end_function
+
+begin_function
 specifier|public
 name|void
 name|remove
@@ -847,13 +836,10 @@ name|UnsupportedOperationException
 argument_list|()
 throw|;
 block|}
-block|}
-return|;
-block|}
-block|}
-return|;
-block|}
-specifier|private
+end_function
+
+begin_function
+unit|};   }    private
 specifier|static
 name|void
 name|logWarning
@@ -872,10 +858,10 @@ name|s
 argument_list|)
 expr_stmt|;
 block|}
-block|}
-end_class
+end_function
 
 begin_comment
+unit|}
 comment|// End HttpServer.java
 end_comment
 

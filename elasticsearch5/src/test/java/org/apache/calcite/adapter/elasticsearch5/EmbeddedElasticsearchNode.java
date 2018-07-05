@@ -227,6 +227,16 @@ name|Collection
 import|;
 end_import
 
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+import|;
+end_import
+
 begin_comment
 comment|/**  * Represents a single elastic search node which can run embedded in a java application.  * Intended for unit and integration tests. Settings and plugins are crafted for Calcite.  */
 end_comment
@@ -258,9 +268,9 @@ name|this
 operator|.
 name|node
 operator|=
-name|Preconditions
+name|Objects
 operator|.
-name|checkNotNull
+name|requireNonNull
 argument_list|(
 name|node
 argument_list|,

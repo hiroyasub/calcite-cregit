@@ -248,9 +248,6 @@ block|{
 return|return
 name|ImmutableNullableList
 operator|.
-expr|<
-name|SqlNode
-operator|>
 name|of
 argument_list|(
 name|schema

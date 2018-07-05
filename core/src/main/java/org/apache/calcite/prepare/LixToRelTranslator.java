@@ -694,9 +694,6 @@ argument_list|)
 argument_list|,
 name|ImmutableList
 operator|.
-expr|<
-name|String
-operator|>
 name|of
 argument_list|()
 argument_list|,
@@ -748,9 +745,6 @@ argument_list|)
 argument_list|,
 name|ImmutableList
 operator|.
-expr|<
-name|String
-operator|>
 name|of
 argument_list|()
 argument_list|,

@@ -17,15 +17,11 @@ end_package
 
 begin_import
 import|import
-name|com
+name|java
 operator|.
-name|google
+name|util
 operator|.
-name|common
-operator|.
-name|base
-operator|.
-name|Function
+name|List
 import|;
 end_import
 
@@ -35,7 +31,9 @@ name|java
 operator|.
 name|util
 operator|.
-name|List
+name|function
+operator|.
+name|Function
 import|;
 end_import
 

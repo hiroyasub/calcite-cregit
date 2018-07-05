@@ -807,10 +807,7 @@ argument_list|(
 operator|new
 name|SqlNode
 index|[
-name|list
-operator|.
-name|size
-argument_list|()
+literal|0
 index|]
 argument_list|)
 return|;

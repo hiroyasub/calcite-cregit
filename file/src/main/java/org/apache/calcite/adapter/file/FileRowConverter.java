@@ -83,20 +83,6 @@ begin_import
 import|import
 name|com
 operator|.
-name|google
-operator|.
-name|common
-operator|.
-name|base
-operator|.
-name|Joiner
-import|;
-end_import
-
-begin_import
-import|import
-name|com
-operator|.
 name|joestelmach
 operator|.
 name|natty
@@ -1460,15 +1446,12 @@ block|}
 name|String
 name|cellString
 init|=
-name|Joiner
-operator|.
-name|on
-argument_list|(
-literal|" "
-argument_list|)
+name|String
 operator|.
 name|join
 argument_list|(
+literal|" "
+argument_list|,
 name|cellText
 argument_list|)
 operator|.

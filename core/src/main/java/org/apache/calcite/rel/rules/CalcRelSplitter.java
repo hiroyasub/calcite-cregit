@@ -739,10 +739,7 @@ argument_list|(
 operator|new
 name|RexNode
 index|[
-name|exprList
-operator|.
-name|size
-argument_list|()
+literal|0
 index|]
 argument_list|)
 decl_stmt|;

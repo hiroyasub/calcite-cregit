@@ -295,29 +295,21 @@ end_import
 
 begin_import
 import|import
-name|com
+name|java
 operator|.
-name|google
+name|util
 operator|.
-name|common
-operator|.
-name|collect
-operator|.
-name|Lists
+name|ArrayList
 import|;
 end_import
 
 begin_import
 import|import
-name|com
+name|java
 operator|.
-name|google
+name|util
 operator|.
-name|common
-operator|.
-name|collect
-operator|.
-name|Maps
+name|HashMap
 import|;
 end_import
 
@@ -496,9 +488,9 @@ name|ImmutableBitSet
 argument_list|>
 name|projFieldsList
 init|=
-name|Lists
-operator|.
-name|newArrayList
+operator|new
+name|ArrayList
+argument_list|<>
 argument_list|()
 decl_stmt|;
 specifier|final
@@ -509,9 +501,9 @@ index|[]
 argument_list|>
 name|joinFieldRefCountsList
 init|=
-name|Lists
-operator|.
-name|newArrayList
+operator|new
+name|ArrayList
+argument_list|<>
 argument_list|()
 decl_stmt|;
 specifier|final
@@ -549,9 +541,9 @@ argument_list|>
 argument_list|>
 name|joinSpecs
 init|=
-name|Lists
-operator|.
-name|newArrayList
+operator|new
+name|ArrayList
+argument_list|<>
 argument_list|()
 decl_stmt|;
 name|combineOuterJoins
@@ -757,9 +749,9 @@ name|RelNode
 argument_list|>
 name|newInputs
 init|=
-name|Lists
-operator|.
-name|newArrayList
+operator|new
+name|ArrayList
+argument_list|<>
 argument_list|()
 decl_stmt|;
 comment|// leave the null generating sides of an outer join intact; don't
@@ -1581,9 +1573,9 @@ name|RexNode
 argument_list|>
 name|filters
 init|=
-name|Lists
-operator|.
-name|newArrayList
+operator|new
+name|ArrayList
+argument_list|<>
 argument_list|()
 decl_stmt|;
 if|if
@@ -1931,9 +1923,9 @@ index|[]
 argument_list|>
 name|refCountsMap
 init|=
-name|Maps
-operator|.
-name|newHashMap
+operator|new
+name|HashMap
+argument_list|<>
 argument_list|()
 decl_stmt|;
 name|int
@@ -2169,9 +2161,9 @@ name|RexNode
 argument_list|>
 name|filters
 init|=
-name|Lists
-operator|.
-name|newArrayList
+operator|new
+name|ArrayList
+argument_list|<>
 argument_list|()
 decl_stmt|;
 if|if

@@ -1724,10 +1724,7 @@ argument_list|(
 operator|new
 name|CsvFieldType
 index|[
-name|fieldTypes
-operator|.
-name|size
-argument_list|()
+literal|0
 index|]
 argument_list|)
 expr_stmt|;
@@ -1771,10 +1768,7 @@ argument_list|(
 operator|new
 name|CsvFieldType
 index|[
-name|fieldTypes
-operator|.
-name|size
-argument_list|()
+literal|0
 index|]
 argument_list|)
 expr_stmt|;

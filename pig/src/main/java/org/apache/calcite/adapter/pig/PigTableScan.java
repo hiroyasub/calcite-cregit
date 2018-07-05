@@ -181,20 +181,6 @@ end_import
 
 begin_import
 import|import
-name|com
-operator|.
-name|google
-operator|.
-name|common
-operator|.
-name|base
-operator|.
-name|Joiner
-import|;
-end_import
-
-begin_import
-import|import
 name|java
 operator|.
 name|util
@@ -441,15 +427,12 @@ argument_list|)
 expr_stmt|;
 block|}
 return|return
-name|Joiner
-operator|.
-name|on
-argument_list|(
-literal|", "
-argument_list|)
+name|String
 operator|.
 name|join
 argument_list|(
+literal|", "
+argument_list|,
 name|fieldNamesAndTypes
 argument_list|)
 return|;

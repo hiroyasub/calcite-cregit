@@ -36,6 +36,8 @@ comment|/**  * Metadata that needs to be bound to a {@link RelNode} and  * {@lin
 end_comment
 
 begin_interface
+annotation|@
+name|FunctionalInterface
 specifier|public
 interface|interface
 name|UnboundMetadata

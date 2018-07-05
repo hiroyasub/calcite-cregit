@@ -161,22 +161,8 @@ expr_stmt|;
 block|}
 block|}
 return|return
-operator|new
-name|Iterable
-argument_list|<
-name|ConcurrentTestCommand
-argument_list|>
-argument_list|()
-block|{
-specifier|public
-name|Iterator
-argument_list|<
-name|ConcurrentTestCommand
-argument_list|>
-name|iterator
 parameter_list|()
-block|{
-return|return
+lambda|->
 operator|new
 name|TimedIterator
 argument_list|<
@@ -190,9 +176,6 @@ argument_list|)
 argument_list|,
 name|endTimeMillis
 argument_list|)
-return|;
-block|}
-block|}
 return|;
 block|}
 comment|/**    * Outputs command sequence and notes how long the sequence will be    * repeated.    */

@@ -17,20 +17,6 @@ end_package
 
 begin_import
 import|import
-name|com
-operator|.
-name|google
-operator|.
-name|common
-operator|.
-name|collect
-operator|.
-name|Maps
-import|;
-end_import
-
-begin_import
-import|import
 name|org
 operator|.
 name|junit
@@ -76,6 +62,16 @@ operator|.
 name|util
 operator|.
 name|SortedMap
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|TreeMap
 import|;
 end_import
 
@@ -1289,9 +1285,9 @@ name|BitSet
 argument_list|>
 name|empty
 init|=
-name|Maps
-operator|.
-name|newTreeMap
+operator|new
+name|TreeMap
+argument_list|<>
 argument_list|()
 decl_stmt|;
 name|assertThat
@@ -1319,9 +1315,9 @@ name|BitSet
 argument_list|>
 name|map
 init|=
-name|Maps
-operator|.
-name|newTreeMap
+operator|new
+name|TreeMap
+argument_list|<>
 argument_list|()
 decl_stmt|;
 name|map
@@ -1546,9 +1542,9 @@ name|BitSet
 argument_list|>
 name|map2
 init|=
-name|Maps
-operator|.
-name|newTreeMap
+operator|new
+name|TreeMap
+argument_list|<>
 argument_list|()
 decl_stmt|;
 name|map2

@@ -259,7 +259,7 @@ name|common
 operator|.
 name|collect
 operator|.
-name|Multimap
+name|ImmutableSet
 import|;
 end_import
 
@@ -273,7 +273,7 @@ name|common
 operator|.
 name|collect
 operator|.
-name|Sets
+name|Multimap
 import|;
 end_import
 
@@ -496,9 +496,9 @@ name|mq
 parameter_list|)
 block|{
 return|return
-name|Sets
+name|ImmutableSet
 operator|.
-name|newHashSet
+name|of
 argument_list|(
 name|RelTableRef
 operator|.

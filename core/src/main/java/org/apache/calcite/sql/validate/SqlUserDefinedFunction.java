@@ -360,8 +360,8 @@ name|getParameters
 argument_list|()
 argument_list|,
 name|FunctionParameter
-operator|.
-name|NAME_FN
+operator|::
+name|getName
 argument_list|)
 return|;
 block|}

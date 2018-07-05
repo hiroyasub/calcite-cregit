@@ -515,15 +515,11 @@ end_import
 
 begin_import
 import|import
-name|com
+name|java
 operator|.
-name|google
+name|util
 operator|.
-name|common
-operator|.
-name|collect
-operator|.
-name|Lists
+name|ArrayList
 import|;
 end_import
 
@@ -881,9 +877,9 @@ name|Callback
 argument_list|>
 name|list
 init|=
-name|Lists
-operator|.
-name|newArrayList
+operator|new
+name|ArrayList
+argument_list|<>
 argument_list|()
 decl_stmt|;
 specifier|final

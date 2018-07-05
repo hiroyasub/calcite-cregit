@@ -107,15 +107,13 @@ end_import
 
 begin_import
 import|import
-name|com
+name|java
 operator|.
-name|google
+name|util
 operator|.
-name|common
+name|function
 operator|.
-name|base
-operator|.
-name|Predicates
+name|Predicate
 import|;
 end_import
 
@@ -144,13 +142,15 @@ name|LogicalCorrelate
 operator|.
 name|class
 argument_list|,
-name|Predicates
-operator|.
-expr|<
+operator|(
+name|Predicate
+argument_list|<
 name|RelNode
-operator|>
-name|alwaysTrue
-argument_list|()
+argument_list|>
+operator|)
+name|r
+lambda|->
+literal|true
 argument_list|,
 name|Convention
 operator|.

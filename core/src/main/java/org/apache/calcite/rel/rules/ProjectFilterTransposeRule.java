@@ -227,11 +227,9 @@ name|RelFactories
 operator|.
 name|LOGICAL_BUILDER
 argument_list|,
-name|PushProjector
-operator|.
-name|ExprCondition
-operator|.
-name|FALSE
+name|expr
+lambda|->
+literal|false
 argument_list|)
 decl_stmt|;
 comment|//~ Instance fields --------------------------------------------------------

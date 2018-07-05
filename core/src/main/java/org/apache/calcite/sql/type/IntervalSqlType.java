@@ -175,15 +175,11 @@ end_import
 
 begin_import
 import|import
-name|com
+name|java
 operator|.
-name|google
+name|util
 operator|.
-name|common
-operator|.
-name|base
-operator|.
-name|Preconditions
+name|Objects
 import|;
 end_import
 
@@ -240,9 +236,9 @@ name|this
 operator|.
 name|typeSystem
 operator|=
-name|Preconditions
+name|Objects
 operator|.
-name|checkNotNull
+name|requireNonNull
 argument_list|(
 name|typeSystem
 argument_list|)
@@ -251,9 +247,9 @@ name|this
 operator|.
 name|intervalQualifier
 operator|=
-name|Preconditions
+name|Objects
 operator|.
-name|checkNotNull
+name|requireNonNull
 argument_list|(
 name|intervalQualifier
 argument_list|)
@@ -407,9 +403,9 @@ decl_stmt|;
 name|TimeUnit
 name|thisStart
 init|=
-name|Preconditions
+name|Objects
 operator|.
-name|checkNotNull
+name|requireNonNull
 argument_list|(
 name|typeName
 operator|.
@@ -429,9 +425,9 @@ specifier|final
 name|TimeUnit
 name|thatStart
 init|=
-name|Preconditions
+name|Objects
 operator|.
-name|checkNotNull
+name|requireNonNull
 argument_list|(
 name|that
 operator|.

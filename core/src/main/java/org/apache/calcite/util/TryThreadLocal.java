@@ -114,14 +114,8 @@ name|value
 argument_list|)
 expr_stmt|;
 return|return
-operator|new
-name|Memo
-argument_list|()
-block|{
-specifier|public
-name|void
-name|close
 parameter_list|()
+lambda|->
 block|{
 if|if
 condition|(
@@ -141,7 +135,6 @@ argument_list|(
 name|previous
 argument_list|)
 expr_stmt|;
-block|}
 block|}
 block|}
 return|;

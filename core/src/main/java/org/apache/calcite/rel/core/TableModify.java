@@ -273,6 +273,16 @@ name|List
 import|;
 end_import
 
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+import|;
+end_import
+
 begin_comment
 comment|/**  * Relational expression that modifies a table.  *  *<p>It is similar to {@link org.apache.calcite.rel.core.TableScan},  * but represents a request to modify a table rather than read from it.  * It takes one child which produces the modified rows. Those rows are:  *  *<ul>  *<li>For {@code INSERT}, those rows are the new values;  *<li>for {@code DELETE}, the old values;  *<li>for {@code UPDATE}, all old values plus updated new values.  *</ul>  */
 end_comment
@@ -432,16 +442,16 @@ operator|.
 name|UPDATE
 condition|)
 block|{
-name|Preconditions
+name|Objects
 operator|.
-name|checkNotNull
+name|requireNonNull
 argument_list|(
 name|updateColumnList
 argument_list|)
 expr_stmt|;
-name|Preconditions
+name|Objects
 operator|.
-name|checkNotNull
+name|requireNonNull
 argument_list|(
 name|sourceExpressionList
 argument_list|)

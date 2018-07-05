@@ -207,11 +207,9 @@ init|=
 operator|new
 name|ProjectJoinTransposeRule
 argument_list|(
-name|PushProjector
-operator|.
-name|ExprCondition
-operator|.
-name|TRUE
+name|expr
+lambda|->
+literal|true
 argument_list|,
 name|RelFactories
 operator|.

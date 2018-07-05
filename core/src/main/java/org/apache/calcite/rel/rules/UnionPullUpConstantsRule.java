@@ -821,11 +821,6 @@ name|add
 argument_list|(
 name|Pair
 operator|.
-expr|<
-name|RexNode
-argument_list|,
-name|String
-operator|>
 name|of
 argument_list|(
 name|rexBuilder

@@ -151,20 +151,6 @@ end_import
 
 begin_import
 import|import
-name|com
-operator|.
-name|google
-operator|.
-name|common
-operator|.
-name|base
-operator|.
-name|Joiner
-import|;
-end_import
-
-begin_import
-import|import
 name|java
 operator|.
 name|util
@@ -526,15 +512,12 @@ name|relAlias
 operator|+
 literal|" BY ("
 operator|+
-name|Joiner
-operator|.
-name|on
-argument_list|(
-literal|", "
-argument_list|)
+name|String
 operator|.
 name|join
 argument_list|(
+literal|", "
+argument_list|,
 name|groupedFieldNames
 argument_list|)
 operator|+
@@ -592,15 +575,12 @@ name|relAlias
 operator|+
 literal|" {\n"
 operator|+
-name|Joiner
-operator|.
-name|on
-argument_list|(
-literal|";\n"
-argument_list|)
+name|String
 operator|.
 name|join
 argument_list|(
+literal|";\n"
+argument_list|,
 name|distinctCalls
 argument_list|)
 operator|+
@@ -746,15 +726,12 @@ expr_stmt|;
 return|return
 literal|"  GENERATE "
 operator|+
-name|Joiner
-operator|.
-name|on
-argument_list|(
-literal|", "
-argument_list|)
+name|String
 operator|.
 name|join
 argument_list|(
+literal|", "
+argument_list|,
 name|allFields
 argument_list|)
 operator|+
@@ -858,15 +835,12 @@ specifier|final
 name|String
 name|fields
 init|=
-name|Joiner
-operator|.
-name|on
-argument_list|(
-literal|", "
-argument_list|)
+name|String
 operator|.
 name|join
 argument_list|(
+literal|", "
+argument_list|,
 name|getArgNames
 argument_list|(
 name|relAlias

@@ -1656,9 +1656,9 @@ name|AggregateCall
 argument_list|>
 name|topAggregateCalls
 init|=
-name|Lists
-operator|.
-name|newArrayList
+operator|new
+name|ArrayList
+argument_list|<>
 argument_list|()
 decl_stmt|;
 comment|// Use the remapped arguments for the (non)distinct aggregate calls
@@ -3743,9 +3743,9 @@ name|RexNode
 argument_list|>
 name|conditions
 init|=
-name|Lists
-operator|.
-name|newArrayList
+operator|new
+name|ArrayList
+argument_list|<>
 argument_list|()
 decl_stmt|;
 for|for
@@ -4385,9 +4385,6 @@ literal|null
 argument_list|,
 name|ImmutableList
 operator|.
-expr|<
-name|AggregateCall
-operator|>
 name|of
 argument_list|()
 argument_list|)

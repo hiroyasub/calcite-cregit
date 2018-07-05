@@ -443,15 +443,11 @@ end_import
 
 begin_import
 import|import
-name|com
+name|java
 operator|.
-name|google
+name|util
 operator|.
-name|common
-operator|.
-name|collect
-operator|.
-name|Lists
+name|ArrayList
 import|;
 end_import
 
@@ -827,7 +823,7 @@ name|Delta
 operator|.
 name|class
 argument_list|,
-name|operand
+name|operandJ
 argument_list|(
 name|Aggregate
 operator|.
@@ -836,8 +832,8 @@ argument_list|,
 literal|null
 argument_list|,
 name|Aggregate
-operator|.
-name|NO_INDICATOR
+operator|::
+name|noIndicator
 argument_list|,
 name|any
 argument_list|()
@@ -1150,9 +1146,9 @@ name|RelNode
 argument_list|>
 name|newInputs
 init|=
-name|Lists
-operator|.
-name|newArrayList
+operator|new
+name|ArrayList
+argument_list|<>
 argument_list|()
 decl_stmt|;
 for|for
@@ -1754,9 +1750,9 @@ name|RelNode
 argument_list|>
 name|inputsToUnion
 init|=
-name|Lists
-operator|.
-name|newArrayList
+operator|new
+name|ArrayList
+argument_list|<>
 argument_list|()
 decl_stmt|;
 name|inputsToUnion

@@ -804,6 +804,16 @@ import|;
 end_import
 
 begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+import|;
+end_import
+
+begin_import
 import|import static
 name|org
 operator|.
@@ -900,9 +910,9 @@ name|this
 operator|.
 name|name
 operator|=
-name|Preconditions
+name|Objects
 operator|.
-name|checkNotNull
+name|requireNonNull
 argument_list|(
 name|name
 argument_list|)
@@ -1987,9 +1997,9 @@ name|this
 operator|.
 name|strategy
 operator|=
-name|Preconditions
+name|Objects
 operator|.
-name|checkNotNull
+name|requireNonNull
 argument_list|(
 name|strategy
 argument_list|)
@@ -2181,9 +2191,9 @@ name|this
 operator|.
 name|protoStoredRowType
 operator|=
-name|Preconditions
+name|Objects
 operator|.
-name|checkNotNull
+name|requireNonNull
 argument_list|(
 name|protoStoredRowType
 argument_list|)
@@ -2192,9 +2202,9 @@ name|this
 operator|.
 name|protoRowType
 operator|=
-name|Preconditions
+name|Objects
 operator|.
-name|checkNotNull
+name|requireNonNull
 argument_list|(
 name|protoRowType
 argument_list|)
@@ -2203,9 +2213,9 @@ name|this
 operator|.
 name|initializerExpressionFactory
 operator|=
-name|Preconditions
+name|Objects
 operator|.
-name|checkNotNull
+name|requireNonNull
 argument_list|(
 name|initializerExpressionFactory
 argument_list|)

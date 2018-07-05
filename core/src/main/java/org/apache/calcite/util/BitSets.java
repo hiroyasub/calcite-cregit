@@ -248,22 +248,8 @@ name|bitSet
 parameter_list|)
 block|{
 return|return
-operator|new
-name|Iterable
-argument_list|<
-name|Integer
-argument_list|>
-argument_list|()
-block|{
-specifier|public
-name|Iterator
-argument_list|<
-name|Integer
-argument_list|>
-name|iterator
 parameter_list|()
-block|{
-return|return
+lambda|->
 operator|new
 name|Iterator
 argument_list|<
@@ -273,14 +259,14 @@ argument_list|()
 block|{
 name|int
 name|i
-init|=
+operator|=
 name|bitSet
 operator|.
 name|nextSetBit
 argument_list|(
 literal|0
 argument_list|)
-decl_stmt|;
+return|;
 specifier|public
 name|boolean
 name|hasNext
@@ -329,11 +315,11 @@ argument_list|()
 throw|;
 block|}
 block|}
-return|;
+empty_stmt|;
 block|}
-block|}
-return|;
-block|}
+end_class
+
+begin_function
 specifier|public
 specifier|static
 name|Iterable
@@ -351,7 +337,13 @@ return|return
 name|bitSet
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Converts a bitset to a list.    *    *<p>The list is mutable, and future changes to the list do not affect the    * contents of the bit set.    *    * @param bitSet Bit set    * @return List of set bits    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 name|List
@@ -417,7 +409,13 @@ return|return
 name|list
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Converts a BitSet to an array.    *    * @param bitSet Bit set    * @return Array of set bits    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 name|int
@@ -489,7 +487,13 @@ return|return
 name|integers
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Creates a bitset with given bits set.    *    *<p>For example, {@code of(0, 3)} returns a bit set with bits {0, 3}    * set.    *    * @param bits Array of bits to set    * @return Bit set    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 name|BitSet
@@ -528,7 +532,13 @@ return|return
 name|bitSet
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Creates a BitSet with given bits set.    *    *<p>For example, {@code of(new Integer[] {0, 3})} returns a bit set    * with bits {0, 3} set.    *    * @param bits Array of bits to set    * @return Bit set    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 name|BitSet
@@ -567,7 +577,13 @@ return|return
 name|bitSet
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Creates a BitSet with given bits set.    *    *<p>For example, {@code of(Arrays.asList(0, 3)) } returns a bit set    * with bits {0, 3} set.    *    * @param bits Collection of bits to set    * @return Bit set    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 name|BitSet
@@ -613,7 +629,13 @@ return|return
 name|bitSet
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Creates a BitSet with given bits set.    *    *<p>For example, {@code of(ImmutableIntList.of(0, 3))} returns a bit set    * with bits {0, 3} set.    *    * @param bits Collection of bits to set    * @return Bit set    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 name|BitSet
@@ -670,7 +692,13 @@ return|return
 name|bitSet
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/**    * Creates a bitset with bits from {@code fromIndex} (inclusive) to    * specified {@code toIndex} (exclusive) set to {@code true}.    *    *<p>For example, {@code range(0, 3)} returns a bit set with bits    * {0, 1, 2} set.    *    * @param fromIndex Index of the first bit to be set.    * @param toIndex   Index after the last bit to be set.    * @return Bit set    */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 name|BitSet
@@ -714,7 +742,13 @@ return|return
 name|bitSet
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/** Creates a BitSet with bits between 0 and {@code toIndex} set. */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 name|BitSet
@@ -733,7 +767,13 @@ name|toIndex
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/** Sets all bits in a given BitSet corresponding to integers from a list. */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 name|void
@@ -771,7 +811,13 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+end_function
+
+begin_comment
 comment|/** Returns a BitSet that is the union of the given BitSets. Does not modify    * any of the inputs. */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 name|BitSet
@@ -817,7 +863,13 @@ return|return
 name|s
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/** Returns the previous clear bit.    *    *<p>Has same behavior as {@link BitSet#previousClearBit}, but that method    * does not exist before 1.7. */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 name|int
@@ -875,7 +927,13 @@ operator|-
 literal|1
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/** Computes the closure of a map from integers to bits.    *    *<p>The input must have an entry for each position.    *    *<p>Does not modify the input map or its bit sets. */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 name|SortedMap
@@ -1039,7 +1097,13 @@ operator|.
 name|closure
 return|;
 block|}
+end_function
+
+begin_comment
 comment|/** Populates a {@link BitSet} from an iterable, such as a list of integer. */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 name|void
@@ -1077,7 +1141,13 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+end_function
+
+begin_comment
 comment|/** Populates a {@link BitSet} from an    *  {@link ImmutableIntList}. */
+end_comment
+
+begin_function
 specifier|public
 specifier|static
 name|void
@@ -1122,7 +1192,13 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+end_function
+
+begin_comment
 comment|/**    * Setup equivalence Sets for each position. If i and j are equivalent then    * they will have the same equivalence Set. The algorithm computes the    * closure relation at each position for the position wrt to positions    * greater than it. Once a closure is computed for a position, the closure    * Set is set on all its descendants. So the closure computation bubbles up    * from lower positions and the final equivalence Set is propagated down    * from the lowest element in the Set.    */
+end_comment
+
+begin_class
 specifier|private
 specifier|static
 class|class
@@ -1343,10 +1419,10 @@ name|o
 return|;
 block|}
 block|}
-block|}
 end_class
 
 begin_comment
+unit|}
 comment|// End BitSets.java
 end_comment
 

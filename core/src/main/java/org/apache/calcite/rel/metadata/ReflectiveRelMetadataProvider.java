@@ -137,20 +137,6 @@ name|google
 operator|.
 name|common
 operator|.
-name|base
-operator|.
-name|Preconditions
-import|;
-end_import
-
-begin_import
-import|import
-name|com
-operator|.
-name|google
-operator|.
-name|common
-operator|.
 name|collect
 operator|.
 name|ImmutableList
@@ -182,18 +168,6 @@ operator|.
 name|collect
 operator|.
 name|Multimap
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|lang
-operator|.
-name|reflect
-operator|.
-name|InvocationHandler
 import|;
 end_import
 
@@ -314,6 +288,16 @@ operator|.
 name|util
 operator|.
 name|Map
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
 import|;
 end_import
 
@@ -636,24 +620,12 @@ specifier|final
 name|UnboundMetadata
 name|function
 init|=
-operator|new
-name|UnboundMetadata
-argument_list|()
-block|{
-specifier|public
-name|Metadata
-name|bind
 parameter_list|(
-specifier|final
-name|RelNode
 name|rel
 parameter_list|,
-specifier|final
-name|RelMetadataQuery
 name|mq
 parameter_list|)
-block|{
-return|return
+lambda|->
 operator|(
 name|Metadata
 operator|)
@@ -677,26 +649,14 @@ operator|.
 name|metadataClass0
 block|}
 argument_list|,
-operator|new
-name|InvocationHandler
-argument_list|()
-block|{
-specifier|public
-name|Object
-name|invoke
 parameter_list|(
-name|Object
 name|proxy
 parameter_list|,
-name|Method
 name|method
 parameter_list|,
-name|Object
-index|[]
 name|args
 parameter_list|)
-throws|throws
-name|Throwable
+lambda|->
 block|{
 comment|// Suppose we are an implementation of Selectivity
 comment|// that wraps "filter", a LogicalFilter. Then we
@@ -704,19 +664,9 @@ comment|// implement
 comment|//   Selectivity.selectivity(rex)
 comment|// by calling method
 comment|//   new SelectivityImpl().selectivity(filter, rex)
-if|if
-condition|(
-name|method
-operator|.
-name|equals
-argument_list|(
-name|BuiltInMethod
-operator|.
-name|METADATA_REL
-operator|.
-name|method
-argument_list|)
-condition|)
+block_content|if (method.equals(BuiltInMethod.METADATA_REL.method
+init|)
+decl_stmt|)
 block|{
 return|return
 name|rel
@@ -821,7 +771,7 @@ name|args1
 decl_stmt|;
 specifier|final
 name|List
-name|key
+name|key1
 decl_stmt|;
 if|if
 condition|(
@@ -841,7 +791,7 @@ block|,
 name|mq
 block|}
 expr_stmt|;
-name|key
+name|key1
 operator|=
 name|FlatLists
 operator|.
@@ -979,7 +929,7 @@ argument_list|()
 expr_stmt|;
 block|}
 block|}
-name|key
+name|key1
 operator|=
 name|FlatLists
 operator|.
@@ -997,7 +947,7 @@ name|map
 operator|.
 name|put
 argument_list|(
-name|key
+name|key1
 argument_list|,
 name|NullSentinel
 operator|.
@@ -1063,27 +1013,26 @@ name|map
 operator|.
 name|remove
 argument_list|(
-name|key
+name|key1
 argument_list|)
 expr_stmt|;
 block|}
 block|}
-block|}
-argument_list|)
-return|;
-block|}
-block|}
-decl_stmt|;
+block_content|)
+function|;
 name|methodsMap
 operator|.
 name|put
-argument_list|(
+parameter_list|(
 name|key
-argument_list|,
+parameter_list|,
 name|function
-argument_list|)
-expr_stmt|;
+parameter_list|)
+constructor_decl|;
 block|}
+end_class
+
+begin_return
 return|return
 operator|new
 name|ReflectiveRelMetadataProvider
@@ -1099,8 +1048,10 @@ operator|.
 name|providerMap
 argument_list|)
 return|;
-block|}
-specifier|public
+end_return
+
+begin_function
+unit|}    public
 parameter_list|<
 name|M
 extends|extends
@@ -1201,6 +1152,9 @@ name|build
 argument_list|()
 return|;
 block|}
+end_function
+
+begin_function
 specifier|private
 specifier|static
 name|boolean
@@ -1343,7 +1297,13 @@ argument_list|)
 argument_list|)
 return|;
 block|}
+end_function
+
+begin_comment
 comment|//~ Methods ----------------------------------------------------------------
+end_comment
+
+begin_function
 specifier|public
 parameter_list|<
 name|M
@@ -1394,6 +1354,9 @@ literal|null
 return|;
 block|}
 block|}
+end_function
+
+begin_function
 annotation|@
 name|SuppressWarnings
 argument_list|(
@@ -1616,7 +1579,13 @@ return|;
 block|}
 block|}
 block|}
+end_function
+
+begin_comment
 comment|/** Workspace for computing which methods can act as handlers for    * given metadata methods. */
+end_comment
+
+begin_class
 specifier|static
 class|class
 name|Space
@@ -1831,9 +1800,9 @@ name|Method
 name|method
 parameter_list|)
 block|{
-name|Preconditions
+name|Objects
 operator|.
-name|checkNotNull
+name|requireNonNull
 argument_list|(
 name|relNodeClass
 argument_list|)
@@ -1974,7 +1943,13 @@ block|}
 block|}
 block|}
 block|}
+end_class
+
+begin_comment
 comment|/** Extended work space. */
+end_comment
+
+begin_class
 specifier|static
 class|class
 name|Space2
@@ -2142,10 +2117,10 @@ argument_list|)
 return|;
 block|}
 block|}
-block|}
 end_class
 
 begin_comment
+unit|}
 comment|// End ReflectiveRelMetadataProvider.java
 end_comment
 

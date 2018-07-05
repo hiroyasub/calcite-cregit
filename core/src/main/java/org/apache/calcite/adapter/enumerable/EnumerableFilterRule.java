@@ -107,6 +107,18 @@ name|LogicalFilter
 import|;
 end_import
 
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|function
+operator|.
+name|Predicate
+import|;
+end_import
+
 begin_comment
 comment|/**  * Rule to convert a {@link org.apache.calcite.rel.logical.LogicalFilter} to an  * {@link EnumerableFilter}.  */
 end_comment
@@ -126,9 +138,15 @@ name|LogicalFilter
 operator|.
 name|class
 argument_list|,
+operator|(
+name|Predicate
+argument_list|<
+name|LogicalFilter
+argument_list|>
+operator|)
 name|RelOptUtil
-operator|.
-name|FILTER_PREDICATE
+operator|::
+name|containsMultisetOrWindowedAgg
 argument_list|,
 name|Convention
 operator|.

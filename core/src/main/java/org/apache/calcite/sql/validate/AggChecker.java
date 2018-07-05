@@ -970,9 +970,6 @@ literal|true
 argument_list|,
 name|ArgHandlerImpl
 operator|.
-expr|<
-name|Void
-operator|>
 name|instance
 argument_list|()
 argument_list|)

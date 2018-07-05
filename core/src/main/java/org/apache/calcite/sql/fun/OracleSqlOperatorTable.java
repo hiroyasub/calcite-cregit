@@ -101,20 +101,6 @@ name|calcite
 operator|.
 name|sql
 operator|.
-name|SqlOperatorBinding
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|sql
-operator|.
 name|type
 operator|.
 name|OperandTypes
@@ -230,17 +216,8 @@ specifier|final
 name|SqlReturnTypeInference
 name|DECODE_RETURN_TYPE
 init|=
-operator|new
-name|SqlReturnTypeInference
-argument_list|()
-block|{
-specifier|public
-name|RelDataType
-name|inferReturnType
-parameter_list|(
-name|SqlOperatorBinding
 name|opBinding
-parameter_list|)
+lambda|->
 block|{
 specifier|final
 name|List
@@ -348,7 +325,6 @@ block|}
 return|return
 name|type
 return|;
-block|}
 block|}
 decl_stmt|;
 comment|/** The "DECODE(v, v1, result1, [v2, result2, ...], resultN)" function. */

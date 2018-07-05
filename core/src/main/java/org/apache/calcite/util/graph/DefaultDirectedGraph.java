@@ -220,9 +220,6 @@ name|create
 argument_list|(
 name|DefaultEdge
 operator|.
-expr|<
-name|V
-operator|>
 name|factory
 argument_list|()
 argument_list|)

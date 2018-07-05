@@ -260,9 +260,6 @@ block|{
 return|return
 name|ImmutableList
 operator|.
-expr|<
-name|SqlNode
-operator|>
 name|of
 argument_list|(
 name|name

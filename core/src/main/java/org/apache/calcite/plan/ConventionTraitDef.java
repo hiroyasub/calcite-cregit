@@ -219,16 +219,6 @@ name|List
 import|;
 end_import
 
-begin_import
-import|import
-name|javax
-operator|.
-name|annotation
-operator|.
-name|Nonnull
-import|;
-end_import
-
 begin_comment
 comment|/**  * Definition of the the convention trait.  * A new set of conversion information is created for  * each planner that registers at least one {@link ConverterRule} instance.  *  *<p>Conversion data is held in a {@link LoadingCache}  * with weak keys so that the JVM's garbage  * collector may reclaim the conversion data after the planner itself has been  * garbage collected. The conversion information consists of a graph of  * conversions (from one calling convention to another) and a map of graph arcs  * to {@link ConverterRule}s.  */
 end_comment
@@ -276,32 +266,14 @@ argument_list|()
 operator|.
 name|build
 argument_list|(
-operator|new
 name|CacheLoader
-argument_list|<
-name|RelOptPlanner
-argument_list|,
+operator|.
+name|from
+argument_list|(
 name|ConversionData
-argument_list|>
-argument_list|()
-block|{
-specifier|public
-name|ConversionData
-name|load
-parameter_list|(
-annotation|@
-name|Nonnull
-name|RelOptPlanner
-name|key
-parameter_list|)
-block|{
-return|return
+operator|::
 operator|new
-name|ConversionData
-argument_list|()
-return|;
-block|}
-block|}
+argument_list|)
 argument_list|)
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------

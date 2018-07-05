@@ -915,16 +915,6 @@ name|ExecutionException
 import|;
 end_import
 
-begin_import
-import|import
-name|javax
-operator|.
-name|annotation
-operator|.
-name|Nonnull
-import|;
-end_import
-
 begin_comment
 comment|/**  * Implementation of the {@link RelMetadataProvider} interface that generates  * a class that dispatches to the underlying providers.  */
 end_comment
@@ -977,6 +967,11 @@ argument_list|<>
 argument_list|()
 decl_stmt|;
 comment|/** Cache of pre-generated handlers by provider and kind of metadata.    * For the cache to be effective, providers should implement identity    * correctly. */
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"unchecked"
+argument_list|)
 specifier|private
 specifier|static
 specifier|final
@@ -1008,27 +1003,12 @@ argument_list|)
 operator|.
 name|build
 argument_list|(
-operator|new
 name|CacheLoader
-argument_list|<
-name|Key
-argument_list|,
-name|MetadataHandler
-argument_list|>
-argument_list|()
-block|{
-specifier|public
-name|MetadataHandler
-name|load
-parameter_list|(
-annotation|@
-name|Nonnull
-name|Key
+operator|.
+name|from
+argument_list|(
 name|key
-parameter_list|)
-block|{
-comment|//noinspection unchecked
-return|return
+lambda|->
 name|load3
 argument_list|(
 name|key
@@ -1050,9 +1030,7 @@ name|key
 operator|.
 name|relClasses
 argument_list|)
-return|;
-block|}
-block|}
+argument_list|)
 argument_list|)
 decl_stmt|;
 comment|// Pre-register the most common relational operators, to reduce the number of
