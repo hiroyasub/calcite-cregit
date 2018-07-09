@@ -1124,7 +1124,7 @@ name|LOGGER
 operator|.
 name|trace
 argument_list|(
-literal|"Setting match limit to {}"
+literal|"Setting match order to {}"
 argument_list|,
 name|instruction
 operator|.
