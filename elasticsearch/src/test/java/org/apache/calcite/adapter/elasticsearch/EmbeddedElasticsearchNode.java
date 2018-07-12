@@ -238,7 +238,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Represents a single elastic search node which can run embedded in a java application.  * Intended for unit and integration tests. Settings and plugins are crafted for Calcite.  */
+comment|/**  * Represents a single elastic search node which can run embedded in a java application.  *  *<p>Intended for unit and integration tests. Settings and plugins are crafted for Calcite.  */
 end_comment
 
 begin_class
@@ -550,7 +550,7 @@ literal|0
 index|]
 return|;
 block|}
-comment|/**    * Exposes elastic    *<a href="https://www.elastic.co/guide/en/elasticsearch/client/java-api/current/transport-client.html">transport client</a>    *    * (use of HTTP client is preferred).    * @return current elastic search client    */
+comment|/**    * Exposes elastic    *<a href="https://www.elastic.co/guide/en/elasticsearch/client/java-api/current/transport-client.html">transport client</a>    * (use of HTTP client is preferred).    *    * @return current elastic search client    */
 specifier|public
 name|Client
 name|client

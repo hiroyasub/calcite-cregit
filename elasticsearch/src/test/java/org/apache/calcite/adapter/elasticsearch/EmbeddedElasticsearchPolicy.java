@@ -106,7 +106,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Used to initialize a single elastic node. For performance reasons (node startup costs),  * same instance is usually shared across multiple tests.  *  * This rule should be used as follows:  *<pre>  *  public class MyTest {  *&#64;ClassRule  *    public static final EmbeddedElasticsearchPolicy RULE = EmbeddedElasticsearchPolicy.create();  *  *&#64;BeforeClass  *    public static void setup() {  *       // ... populate instance  *    }  *  *&#64;Test  *    public void myTest() {  *      TransportAddress address = RULE.httpAddress();  *      // ....  *    }  *  }  *</pre>  * @see ExternalResource  */
+comment|/**  * Used to initialize a single elastic node. For performance reasons (node startup costs),  * same instance is usually shared across multiple tests.  *  *<p>This rule should be used as follows:  *<pre>  *  public class MyTest {  *&#64;ClassRule  *    public static final EmbeddedElasticsearchPolicy RULE = EmbeddedElasticsearchPolicy.create();  *  *&#64;BeforeClass  *    public static void setup() {  *       // ... populate instance  *    }  *  *&#64;Test  *    public void myTest() {  *      RestClient client = RULE.restClient();  *      // ....  *    }  *  }  *</pre>  * @see ExternalResource  */
 end_comment
 
 begin_class
@@ -233,7 +233,7 @@ return|return
 name|mapper
 return|;
 block|}
-comment|/**    * Low-level http rest client to elastic search    * @return current ES rest client    */
+comment|/**    * Low-level http rest client connected to current embedded elastic search instance.    * @return http client connected to ES cluster    */
 name|RestClient
 name|restClient
 parameter_list|()
@@ -298,6 +298,7 @@ name|client
 return|;
 block|}
 comment|/**    * HTTP address for rest clients (can be ES native or any other).    * @return http address to connect to    */
+specifier|private
 name|TransportAddress
 name|httpAddress
 parameter_list|()
