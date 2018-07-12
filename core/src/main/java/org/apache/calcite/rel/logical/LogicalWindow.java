@@ -317,15 +317,15 @@ end_import
 
 begin_import
 import|import
-name|com
+name|org
 operator|.
-name|google
+name|apache
 operator|.
-name|common
+name|calcite
 operator|.
-name|collect
+name|util
 operator|.
-name|Iterables
+name|Util
 import|;
 end_import
 
@@ -1972,7 +1972,7 @@ name|Lists
 operator|.
 name|newArrayList
 argument_list|(
-name|Iterables
+name|Util
 operator|.
 name|filter
 argument_list|(

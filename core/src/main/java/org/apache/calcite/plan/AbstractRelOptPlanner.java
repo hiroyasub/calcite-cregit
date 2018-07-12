@@ -107,15 +107,15 @@ end_import
 
 begin_import
 import|import
-name|com
+name|org
 operator|.
-name|google
+name|apache
 operator|.
-name|common
+name|calcite
 operator|.
-name|collect
+name|util
 operator|.
-name|ImmutableList
+name|Util
 import|;
 end_import
 
@@ -129,7 +129,7 @@ name|common
 operator|.
 name|collect
 operator|.
-name|Iterables
+name|ImmutableList
 import|;
 end_import
 
@@ -1474,7 +1474,7 @@ name|clazz
 parameter_list|)
 block|{
 return|return
-name|Iterables
+name|Util
 operator|.
 name|filter
 argument_list|(
