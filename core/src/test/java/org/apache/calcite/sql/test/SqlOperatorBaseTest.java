@@ -8043,6 +8043,71 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testComplexLiteral
+parameter_list|()
+block|{
+name|tester
+operator|.
+name|check
+argument_list|(
+literal|"select 2 * 2 * x from (select 2 as x)"
+argument_list|,
+operator|new
+name|SqlTests
+operator|.
+name|StringTypeChecker
+argument_list|(
+literal|"INTEGER NOT NULL"
+argument_list|)
+argument_list|,
+literal|"8"
+argument_list|,
+literal|0
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|check
+argument_list|(
+literal|"select 1 * 2 * 3 * x from (select 2 as x)"
+argument_list|,
+operator|new
+name|SqlTests
+operator|.
+name|StringTypeChecker
+argument_list|(
+literal|"INTEGER NOT NULL"
+argument_list|)
+argument_list|,
+literal|"12"
+argument_list|,
+literal|0
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|check
+argument_list|(
+literal|"select 1 + 2 + 3 + 4 + x from (select 2 as x)"
+argument_list|,
+operator|new
+name|SqlTests
+operator|.
+name|StringTypeChecker
+argument_list|(
+literal|"INTEGER NOT NULL"
+argument_list|)
+argument_list|,
+literal|"12"
+argument_list|,
+literal|0
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testRow
 parameter_list|()
 block|{

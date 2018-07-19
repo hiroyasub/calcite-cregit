@@ -1897,7 +1897,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/**    * Converts a chained string literals into regular literals; returns regular    * literals unchanged.    */
+comment|/**    * Converts a chained string literals into regular literals; returns regular    * literals unchanged.    * @throws IllegalArgumentException if {@code node} is not a string literal    * and cannot be unchained.    */
 specifier|public
 specifier|static
 name|SqlLiteral
@@ -1993,7 +1993,7 @@ else|else
 block|{
 throw|throw
 operator|new
-name|AssertionError
+name|IllegalArgumentException
 argument_list|(
 literal|"invalid literal: "
 operator|+
