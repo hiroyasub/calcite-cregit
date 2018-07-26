@@ -9230,6 +9230,37 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testStarDynamicSchemaUnnestNestedSubquery
+parameter_list|()
+block|{
+name|String
+name|sql3
+init|=
+literal|"select t2.c1\n"
+operator|+
+literal|"from (select * from SALES.CUSTOMER) as t1,\n"
+operator|+
+literal|"unnest(t1.fake_col) as t2(c1)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql3
+argument_list|)
+operator|.
+name|with
+argument_list|(
+name|getTesterWithDynamicTable
+argument_list|()
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
 comment|/**    * Test case for Dynamic Table / Dynamic Star support    *<a href="https://issues.apache.org/jira/browse/CALCITE-1150">[CALCITE-1150]</a>    */
 annotation|@
 name|Test
