@@ -2856,6 +2856,32 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testSqlAdvisorNonStructColumn
+parameter_list|()
+throws|throws
+name|SQLException
+throws|,
+name|ClassNotFoundException
+block|{
+name|adviseSql
+argument_list|(
+literal|"select e.\"empid\".^ from \"hr\".\"emps\" e"
+argument_list|,
+name|CalciteAssert
+operator|.
+name|checkResultUnordered
+argument_list|(
+literal|"id=*; names=[*]; type=KEYWORD"
+argument_list|,
+literal|"id=; names=null; type=MATCH"
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testSqlAdvisorTableInSchema
 parameter_list|()
 throws|throws

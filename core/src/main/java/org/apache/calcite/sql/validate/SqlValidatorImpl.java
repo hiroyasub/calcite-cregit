@@ -4424,6 +4424,14 @@ operator|.
 name|getRowType
 argument_list|()
 decl_stmt|;
+if|if
+condition|(
+name|rowType
+operator|.
+name|isStruct
+argument_list|()
+condition|)
+block|{
 for|for
 control|(
 name|RelDataTypeField
@@ -4453,6 +4461,7 @@ name|COLUMN
 argument_list|)
 argument_list|)
 expr_stmt|;
+block|}
 block|}
 block|}
 comment|// builtin function names are valid completion hints when the
