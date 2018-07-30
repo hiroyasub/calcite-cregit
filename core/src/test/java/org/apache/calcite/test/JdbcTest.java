@@ -2882,6 +2882,40 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testSqlAdvisorSubSchema
+parameter_list|()
+throws|throws
+name|SQLException
+throws|,
+name|ClassNotFoundException
+block|{
+name|adviseSql
+argument_list|(
+literal|"select * from \"hr\".^.test_test_test"
+argument_list|,
+name|CalciteAssert
+operator|.
+name|checkResultUnordered
+argument_list|(
+literal|"id=; names=null; type=MATCH"
+argument_list|,
+literal|"id=hr.dependents; names=[hr, dependents]; type=TABLE"
+argument_list|,
+literal|"id=hr.depts; names=[hr, depts]; type=TABLE"
+argument_list|,
+literal|"id=hr.emps; names=[hr, emps]; type=TABLE"
+argument_list|,
+literal|"id=hr.locations; names=[hr, locations]; type=TABLE"
+argument_list|,
+literal|"id=hr; names=[hr]; type=SCHEMA"
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testSqlAdvisorTableInSchema
 parameter_list|()
 throws|throws

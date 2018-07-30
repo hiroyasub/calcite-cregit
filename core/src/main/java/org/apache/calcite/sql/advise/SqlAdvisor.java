@@ -1106,10 +1106,6 @@ name|input
 operator|instanceof
 name|SqlIdentifier
 operator|&&
-name|Util
-operator|.
-name|last
-argument_list|(
 operator|(
 operator|(
 name|SqlIdentifier
@@ -1118,9 +1114,8 @@ name|input
 operator|)
 operator|.
 name|names
-argument_list|)
 operator|.
-name|equals
+name|contains
 argument_list|(
 name|UPPER_HINT_TOKEN
 argument_list|)
