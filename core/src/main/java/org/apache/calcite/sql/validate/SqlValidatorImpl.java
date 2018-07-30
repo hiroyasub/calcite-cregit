@@ -23131,6 +23131,17 @@ argument_list|,
 name|name
 argument_list|)
 decl_stmt|;
+if|if
+condition|(
+name|field
+operator|==
+literal|null
+condition|)
+block|{
+return|return
+literal|null
+return|;
+block|}
 return|return
 operator|new
 name|FieldNamespace
