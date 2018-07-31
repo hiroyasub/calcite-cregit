@@ -23,6 +23,20 @@ name|apache
 operator|.
 name|calcite
 operator|.
+name|config
+operator|.
+name|CalciteConnectionProperty
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
 name|model
 operator|.
 name|JsonColumn
@@ -200,6 +214,16 @@ operator|.
 name|io
 operator|.
 name|IOException
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|net
+operator|.
+name|URL
 import|;
 end_import
 
@@ -1652,7 +1676,7 @@ argument_list|()
 decl_stmt|;
 name|fail
 argument_list|(
-literal|"exprcted error, got "
+literal|"expected error, got "
 operator|+
 name|s
 argument_list|)
@@ -1678,6 +1702,154 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testYamlInlineDetection
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+comment|// yaml model with different line endings
+specifier|final
+name|String
+name|yamlModel
+init|=
+literal|"version: 1.0\r\n"
+operator|+
+literal|"schemas: \n"
+operator|+
+literal|"- type: custom\r\n"
+operator|+
+literal|"  name: 'MyCustomSchema'\n"
+operator|+
+literal|"  factory: "
+operator|+
+name|JdbcTest
+operator|.
+name|MySchemaFactory
+operator|.
+name|class
+operator|.
+name|getName
+argument_list|()
+operator|+
+literal|"\r\n"
+decl_stmt|;
+name|CalciteAssert
+operator|.
+name|model
+argument_list|(
+name|yamlModel
+argument_list|)
+operator|.
+name|doWithConnection
+argument_list|(
+name|calciteConnection
+lambda|->
+literal|null
+argument_list|)
+expr_stmt|;
+comment|// with a comment
+name|CalciteAssert
+operator|.
+name|model
+argument_list|(
+literal|"\n  \r\n# comment\n "
+operator|+
+name|yamlModel
+argument_list|)
+operator|.
+name|doWithConnection
+argument_list|(
+name|calciteConnection
+lambda|->
+literal|null
+argument_list|)
+expr_stmt|;
+comment|// if starts with { => treated as json
+name|CalciteAssert
+operator|.
+name|model
+argument_list|(
+literal|"  { "
+operator|+
+name|yamlModel
+operator|+
+literal|" }"
+argument_list|)
+operator|.
+name|connectThrows
+argument_list|(
+literal|"Unexpected character ('s' (code 115)): "
+operator|+
+literal|"was expecting comma to separate Object entries"
+argument_list|)
+expr_stmt|;
+comment|// if starts with /* => treated as json
+name|CalciteAssert
+operator|.
+name|model
+argument_list|(
+literal|"  /* "
+operator|+
+name|yamlModel
+argument_list|)
+operator|.
+name|connectThrows
+argument_list|(
+literal|"Unexpected end-of-input in a comment"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testYamlFileDetection
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+specifier|final
+name|URL
+name|inUrl
+init|=
+name|ModelTest
+operator|.
+name|class
+operator|.
+name|getResource
+argument_list|(
+literal|"/empty-model.yaml"
+argument_list|)
+decl_stmt|;
+name|CalciteAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|CalciteConnectionProperty
+operator|.
+name|MODEL
+argument_list|,
+name|inUrl
+operator|.
+name|getFile
+argument_list|()
+argument_list|)
+operator|.
+name|doWithConnection
+argument_list|(
+name|calciteConnection
+lambda|->
+literal|null
+argument_list|)
+expr_stmt|;
 block|}
 block|}
 end_class
