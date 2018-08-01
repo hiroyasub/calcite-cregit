@@ -399,6 +399,22 @@ name|apache
 operator|.
 name|calcite
 operator|.
+name|test
+operator|.
+name|catalog
+operator|.
+name|CountingFactory
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
 name|util
 operator|.
 name|Bug
@@ -26191,8 +26207,6 @@ specifier|final
 name|int
 name|c
 init|=
-name|MockCatalogReader
-operator|.
 name|CountingFactory
 operator|.
 name|THREAD_CALL_COUNT
@@ -26235,8 +26249,6 @@ name|assertThat
 argument_list|(
 literal|"Should not check for default value if column is in INSERT"
 argument_list|,
-name|MockCatalogReader
-operator|.
 name|CountingFactory
 operator|.
 name|THREAD_CALL_COUNT
@@ -26277,8 +26289,6 @@ name|assertThat
 argument_list|(
 literal|"Should not check for default value if column is in INSERT"
 argument_list|,
-name|MockCatalogReader
-operator|.
 name|CountingFactory
 operator|.
 name|THREAD_CALL_COUNT
@@ -26323,8 +26333,6 @@ literal|"Should not check for default value, even if if column is missing"
 operator|+
 literal|"from INSERT and nullable"
 argument_list|,
-name|MockCatalogReader
-operator|.
 name|CountingFactory
 operator|.
 name|THREAD_CALL_COUNT
@@ -26367,8 +26375,6 @@ name|assertThat
 argument_list|(
 literal|"Missing DEFAULT column generates a call to factory"
 argument_list|,
-name|MockCatalogReader
-operator|.
 name|CountingFactory
 operator|.
 name|THREAD_CALL_COUNT

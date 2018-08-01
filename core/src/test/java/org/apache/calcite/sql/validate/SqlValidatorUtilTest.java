@@ -87,7 +87,7 @@ name|sql
 operator|.
 name|test
 operator|.
-name|DefaultSqlTestFactory
+name|SqlTestFactory
 import|;
 end_import
 
@@ -921,7 +921,7 @@ init|=
 operator|new
 name|SqlTesterImpl
 argument_list|(
-name|DefaultSqlTestFactory
+name|SqlTestFactory
 operator|.
 name|INSTANCE
 argument_list|)
