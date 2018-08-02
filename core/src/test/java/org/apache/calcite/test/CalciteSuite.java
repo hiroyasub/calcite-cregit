@@ -1104,6 +1104,10 @@ name|ReflectiveSchemaTest
 operator|.
 name|class
 block|,
+name|SqlAdvisorJdbcTest
+operator|.
+name|class
+block|,
 name|JdbcTest
 operator|.
 name|class
