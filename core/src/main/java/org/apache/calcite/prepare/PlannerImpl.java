@@ -1584,17 +1584,6 @@ literal|true
 argument_list|)
 expr_stmt|;
 specifier|final
-name|SqlNode
-name|validatedSqlNode
-init|=
-name|validator
-operator|.
-name|validate
-argument_list|(
-name|sqlNode
-argument_list|)
-decl_stmt|;
-specifier|final
 name|RexBuilder
 name|rexBuilder
 init|=
@@ -1671,7 +1660,7 @@ name|sqlToRelConverter
 operator|.
 name|convertQuery
 argument_list|(
-name|validatedSqlNode
+name|sqlNode
 argument_list|,
 literal|true
 argument_list|,

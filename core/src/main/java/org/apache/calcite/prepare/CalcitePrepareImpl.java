@@ -7412,16 +7412,6 @@ argument_list|(
 name|catalogReader
 argument_list|)
 decl_stmt|;
-name|SqlNode
-name|sqlNode1
-init|=
-name|validator
-operator|.
-name|validate
-argument_list|(
-name|sqlNode
-argument_list|)
-decl_stmt|;
 specifier|final
 name|SqlToRelConverter
 operator|.
@@ -7460,7 +7450,7 @@ name|sqlToRelConverter
 operator|.
 name|convertQuery
 argument_list|(
-name|sqlNode1
+name|sqlNode
 argument_list|,
 literal|true
 argument_list|,

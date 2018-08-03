@@ -24405,6 +24405,114 @@ block|}
 end_function
 
 begin_comment
+comment|/** Unit test for LATERAL CROSS JOIN to table function. */
+end_comment
+
+begin_function
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testLateralJoin
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM AUX.SIMPLETABLE ST\n"
+operator|+
+literal|"CROSS JOIN LATERAL TABLE(AUX.TBLFUN(ST.INTCOL))"
+decl_stmt|;
+name|CalciteAssert
+operator|.
+name|that
+argument_list|(
+name|CalciteAssert
+operator|.
+name|Config
+operator|.
+name|AUX
+argument_list|)
+operator|.
+name|query
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"STRCOL=ABC; INTCOL=1; n=0; s="
+argument_list|,
+literal|"STRCOL=DEF; INTCOL=2; n=0; s="
+argument_list|,
+literal|"STRCOL=DEF; INTCOL=2; n=1; s=a"
+argument_list|,
+literal|"STRCOL=GHI; INTCOL=3; n=0; s="
+argument_list|,
+literal|"STRCOL=GHI; INTCOL=3; n=1; s=a"
+argument_list|,
+literal|"STRCOL=GHI; INTCOL=3; n=2; s=ab"
+argument_list|)
+expr_stmt|;
+block|}
+end_function
+
+begin_comment
+comment|/** Unit test for view expansion with lateral join. */
+end_comment
+
+begin_function
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testExpandViewWithLateralJoin
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"SELECT * FROM AUX.VIEWLATERAL"
+decl_stmt|;
+name|CalciteAssert
+operator|.
+name|that
+argument_list|(
+name|CalciteAssert
+operator|.
+name|Config
+operator|.
+name|AUX
+argument_list|)
+operator|.
+name|query
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"STRCOL=ABC; INTCOL=1; n=0; s="
+argument_list|,
+literal|"STRCOL=DEF; INTCOL=2; n=0; s="
+argument_list|,
+literal|"STRCOL=DEF; INTCOL=2; n=1; s=a"
+argument_list|,
+literal|"STRCOL=GHI; INTCOL=3; n=0; s="
+argument_list|,
+literal|"STRCOL=GHI; INTCOL=3; n=1; s=a"
+argument_list|,
+literal|"STRCOL=GHI; INTCOL=3; n=2; s=ab"
+argument_list|)
+expr_stmt|;
+block|}
+end_function
+
+begin_comment
 comment|/** Tests that {@link Hook#PARSE_TREE} works. */
 end_comment
 
