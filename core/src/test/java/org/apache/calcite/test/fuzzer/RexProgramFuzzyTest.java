@@ -624,11 +624,6 @@ expr_stmt|;
 block|}
 comment|/**    * Verifies {@code IS TRUE(IS NULL(null))} kind of expressions up to 4 level deep.    */
 annotation|@
-name|Ignore
-argument_list|(
-literal|"[CALCITE-2556] RexSimplify: not(trueLiteral) could be simplified to false"
-argument_list|)
-annotation|@
 name|Test
 specifier|public
 name|void

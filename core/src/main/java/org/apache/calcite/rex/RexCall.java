@@ -525,7 +525,10 @@ name|isNullable
 argument_list|()
 return|;
 case|case
-name|IS_NOT_FALSE
+name|IS_NOT_TRUE
+case|:
+case|case
+name|IS_FALSE
 case|:
 case|case
 name|NOT
@@ -542,10 +545,10 @@ name|isAlwaysFalse
 argument_list|()
 return|;
 case|case
-name|IS_NOT_TRUE
+name|IS_NOT_FALSE
 case|:
 case|case
-name|IS_FALSE
+name|IS_TRUE
 case|:
 case|case
 name|CAST
@@ -600,6 +603,9 @@ argument_list|()
 return|;
 case|case
 name|IS_NOT_TRUE
+case|:
+case|case
+name|IS_FALSE
 case|:
 case|case
 name|NOT
