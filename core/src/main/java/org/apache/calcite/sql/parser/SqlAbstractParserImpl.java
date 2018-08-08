@@ -113,6 +113,20 @@ name|calcite
 operator|.
 name|sql
 operator|.
+name|SqlNodeList
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
 name|SqlOperator
 import|;
 end_import
@@ -1154,6 +1168,15 @@ specifier|public
 specifier|abstract
 name|SqlNode
 name|parseSqlStmtEof
+parameter_list|()
+throws|throws
+name|Exception
+function_decl|;
+comment|/**    * Parses a list of SQL statements separated by semicolon and constructs a    * parse tree. The semicolon is required between statements, but is    * optional at the end.    *    * @return constructed list of SQL statements.    */
+specifier|public
+specifier|abstract
+name|SqlNodeList
+name|parseSqlStmtList
 parameter_list|()
 throws|throws
 name|Exception
