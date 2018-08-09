@@ -62,16 +62,27 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|current
+name|javaMajorVersionExceeds6
 parameter_list|()
 block|{
 comment|// shouldn't throw any exceptions (for current JDK)
-name|assertTrue
-argument_list|(
+name|int
+name|majorVersion
+init|=
 name|TestUtil
 operator|.
 name|getJavaMajorVersion
 argument_list|()
+decl_stmt|;
+name|assertTrue
+argument_list|(
+literal|"current JavaMajorVersion == "
+operator|+
+name|majorVersion
+operator|+
+literal|" is expected to exceed 6"
+argument_list|,
+name|majorVersion
 operator|>
 literal|6
 argument_list|)
