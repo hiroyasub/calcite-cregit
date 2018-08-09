@@ -552,16 +552,6 @@ name|EnumerableConvention
 operator|.
 name|INSTANCE
 argument_list|)
-operator|.
-name|replace
-argument_list|(
-name|planRoot
-operator|.
-name|collation
-argument_list|)
-operator|.
-name|simplify
-argument_list|()
 decl_stmt|;
 name|RelNode
 name|planAfter

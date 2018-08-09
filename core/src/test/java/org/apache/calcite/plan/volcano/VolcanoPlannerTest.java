@@ -972,8 +972,6 @@ name|sort
 argument_list|(
 literal|"NoneSingleRel:Subset#0.NONE"
 argument_list|,
-literal|"PhysSingleRel:Subset#0.NONE"
-argument_list|,
 literal|"PhysSingleRel:Subset#0.PHYS"
 argument_list|)
 argument_list|)
