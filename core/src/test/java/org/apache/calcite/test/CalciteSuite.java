@@ -23,6 +23,18 @@ name|apache
 operator|.
 name|calcite
 operator|.
+name|TestKtTest
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
 name|adapter
 operator|.
 name|clone
@@ -794,6 +806,10 @@ name|SuiteClasses
 argument_list|(
 block|{
 comment|// very fast tests (under 0.1s)
+name|TestKtTest
+operator|.
+name|class
+block|,
 name|ArrayTableTest
 operator|.
 name|class
