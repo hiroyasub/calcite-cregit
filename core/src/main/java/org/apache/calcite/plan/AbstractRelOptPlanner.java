@@ -722,6 +722,21 @@ block|{
 comment|// ignore - this planner does not support materializations
 block|}
 specifier|public
+name|List
+argument_list|<
+name|RelOptMaterialization
+argument_list|>
+name|getMaterializations
+parameter_list|()
+block|{
+return|return
+name|ImmutableList
+operator|.
+name|of
+argument_list|()
+return|;
+block|}
+specifier|public
 name|void
 name|addLattice
 parameter_list|(

@@ -283,6 +283,14 @@ name|RelOptMaterialization
 name|materialization
 parameter_list|)
 function_decl|;
+comment|/**    * Returns the materializations that have been registered with the planner.    */
+name|List
+argument_list|<
+name|RelOptMaterialization
+argument_list|>
+name|getMaterializations
+parameter_list|()
+function_decl|;
 comment|/**    * Defines a lattice.    *    *<p>The lattice may have materializations; it is not necessary to call    * {@link #addMaterialization} for these; they are registered implicitly.    */
 name|void
 name|addLattice

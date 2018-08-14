@@ -1514,8 +1514,10 @@ return|return
 name|root
 return|;
 block|}
+annotation|@
+name|Override
 specifier|public
-name|ImmutableList
+name|List
 argument_list|<
 name|RelOptMaterialization
 argument_list|>
