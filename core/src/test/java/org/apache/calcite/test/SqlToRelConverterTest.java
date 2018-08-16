@@ -9191,7 +9191,7 @@ specifier|final
 name|String
 name|sql3
 init|=
-literal|"select * \n"
+literal|"select *\n"
 operator|+
 literal|"from SALES.CUSTOMER as t1,\n"
 operator|+
@@ -9225,7 +9225,7 @@ specifier|final
 name|String
 name|sql3
 init|=
-literal|"select * \n"
+literal|"select *\n"
 operator|+
 literal|"from SALES.CUSTOMER as t1,\n"
 operator|+

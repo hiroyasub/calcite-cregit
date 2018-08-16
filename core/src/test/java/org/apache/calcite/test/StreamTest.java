@@ -1229,17 +1229,15 @@ name|convertContains
 argument_list|(
 literal|"LogicalDelta\n"
 operator|+
-literal|"  LogicalProject(ROWTIME=[$0], ORDERID=[$1], SUPPLIERID=[$5])\n"
+literal|"  LogicalProject(ROWTIME=[$0], ORDERID=[$1], SUPPLIERID=[$6])\n"
 operator|+
-literal|"    LogicalProject(ROWTIME=[$0], ID=[$1], PRODUCT=[$2], UNITS=[$3], ID0=[$5], SUPPLIER=[$6])\n"
+literal|"    LogicalJoin(condition=[=($4, $5)], joinType=[inner])\n"
 operator|+
-literal|"      LogicalJoin(condition=[=($4, $5)], joinType=[inner])\n"
+literal|"      LogicalProject(ROWTIME=[$0], ID=[$1], PRODUCT=[$2], UNITS=[$3], PRODUCT0=[CAST($2):VARCHAR(32) CHARACTER SET \"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$primary\" NOT NULL])\n"
 operator|+
-literal|"        LogicalProject(ROWTIME=[$0], ID=[$1], PRODUCT=[$2], UNITS=[$3], PRODUCT0=[CAST($2):VARCHAR(32) CHARACTER SET \"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$primary\" NOT NULL])\n"
+literal|"        LogicalTableScan(table=[[STREAM_JOINS, ORDERS]])\n"
 operator|+
-literal|"          LogicalTableScan(table=[[STREAM_JOINS, ORDERS]])\n"
-operator|+
-literal|"        LogicalTableScan(table=[[STREAM_JOINS, PRODUCTS]])\n"
+literal|"      LogicalTableScan(table=[[STREAM_JOINS, PRODUCTS]])\n"
 argument_list|)
 operator|.
 name|explainContains

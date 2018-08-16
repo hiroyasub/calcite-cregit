@@ -182,8 +182,6 @@ comment|/** Adds a handler for this Hook.    *    *<p>Returns a {@link Hook.Clos
 specifier|public
 parameter_list|<
 name|T
-parameter_list|,
-name|R
 parameter_list|>
 name|Closeable
 name|add
@@ -219,7 +217,7 @@ name|handler
 argument_list|)
 return|;
 block|}
-comment|/** @deprecated Use {@link #addThread(Consumer)}. */
+comment|/** @deprecated Use {@link #add(Consumer)}. */
 annotation|@
 name|SuppressWarnings
 argument_list|(

@@ -1804,7 +1804,7 @@ name|queryContains
 argument_list|(
 name|mongoChecker
 argument_list|(
-literal|"{$project: {POP: '$pop', STATE: '$state'}}"
+literal|"{$project: {STATE: '$state', POP: '$pop'}}"
 argument_list|,
 literal|"{$group: {_id: '$STATE', A: {$avg: '$POP'}}}"
 argument_list|,
@@ -2021,7 +2021,7 @@ name|queryContains
 argument_list|(
 name|mongoChecker
 argument_list|(
-literal|"{$project: {POP: '$pop', STATE: '$state'}}"
+literal|"{$project: {STATE: '$state', POP: '$pop'}}"
 argument_list|,
 literal|"{$group: {_id: '$STATE', C: {$sum: 1}, MIN_POP: {$min: '$POP'}, MAX_POP: {$max: '$POP'}, SUM_POP: {$sum: '$POP'}}}"
 argument_list|,
@@ -2068,11 +2068,11 @@ name|queryContains
 argument_list|(
 name|mongoChecker
 argument_list|(
-literal|"{$project: {CITY: '$city', STATE: '$state'}}"
+literal|"{$project: {STATE: '$state', CITY: '$city'}}"
 argument_list|,
-literal|"{$group: {_id: {CITY: '$CITY', STATE: '$STATE'}, C: {$sum: 1}}}"
+literal|"{$group: {_id: {STATE: '$STATE', CITY: '$CITY'}, C: {$sum: 1}}}"
 argument_list|,
-literal|"{$project: {_id: 0, CITY: '$_id.CITY', STATE: '$_id.STATE', C: '$C'}}"
+literal|"{$project: {_id: 0, STATE: '$_id.STATE', CITY: '$_id.CITY', C: '$C'}}"
 argument_list|,
 literal|"{$sort: {C: -1, CITY: 1}}"
 argument_list|,

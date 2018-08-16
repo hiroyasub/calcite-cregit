@@ -5483,13 +5483,11 @@ literal|"LogicalSort(sort0=[$0], dir0=[ASC])\n"
 operator|+
 literal|"  LogicalProject(psPartkey=[$0])\n"
 operator|+
-literal|"    LogicalProject(psPartkey=[$0])\n"
+literal|"    LogicalSort(sort0=[$0], sort1=[$1], dir0=[ASC], dir1=[ASC])\n"
 operator|+
-literal|"      LogicalSort(sort0=[$0], sort1=[$1], dir0=[ASC], dir1=[ASC])\n"
+literal|"      LogicalProject(psPartkey=[$0], psSupplyCost=[$1])\n"
 operator|+
-literal|"        LogicalProject(psPartkey=[$0], psSupplyCost=[$1])\n"
-operator|+
-literal|"          EnumerableTableScan(table=[[tpch, partsupp]])\n"
+literal|"        EnumerableTableScan(table=[[tpch, partsupp]])\n"
 argument_list|)
 argument_list|)
 expr_stmt|;

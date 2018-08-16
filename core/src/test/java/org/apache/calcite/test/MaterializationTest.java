@@ -5687,7 +5687,7 @@ name|CalciteAssert
 operator|.
 name|checkResultContains
 argument_list|(
-literal|"EnumerableCalc(expr#0..2=[{inputs}], empid0=[$t1])\n"
+literal|"EnumerableCalc(expr#0..2=[{inputs}], empid=[$t1])\n"
 operator|+
 literal|"  EnumerableJoin(condition=[=($0, $2)], joinType=[inner])\n"
 operator|+

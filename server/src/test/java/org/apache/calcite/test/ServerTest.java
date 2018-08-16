@@ -1983,7 +1983,7 @@ name|plan
 init|=
 literal|""
 operator|+
-literal|"EnumerableCalc(expr#0..1=[{inputs}], expr#2=[1], expr#3=[+($t1, $t2)], proj#0..1=[{exprs}], $f2=[$t3])\n"
+literal|"EnumerableCalc(expr#0..1=[{inputs}], expr#2=[1], expr#3=[+($t1, $t2)], proj#0..1=[{exprs}], J=[$t3])\n"
 operator|+
 literal|"  EnumerableTableScan(table=[[T]])\n"
 decl_stmt|;
