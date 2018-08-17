@@ -1406,6 +1406,17 @@ case|:
 return|return
 name|IS_NOT_TRUE
 return|;
+comment|// (NOT x) IS NULL => x IS NULL
+comment|// Similarly (NOT x) IS NOT NULL => x IS NOT NULL
+case|case
+name|IS_NOT_NULL
+case|:
+case|case
+name|IS_NULL
+case|:
+return|return
+name|this
+return|;
 default|default:
 return|return
 name|this

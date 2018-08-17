@@ -7593,6 +7593,64 @@ argument_list|,
 literal|"COALESCE(?0.i, +(?0.i, ?0.h), 1)"
 argument_list|)
 expr_stmt|;
+comment|// "(not x) is null" to "x is null"
+name|checkSimplify
+argument_list|(
+name|isNull
+argument_list|(
+name|not
+argument_list|(
+name|vBool
+argument_list|()
+argument_list|)
+argument_list|)
+argument_list|,
+literal|"IS NULL(?0.bool0)"
+argument_list|)
+expr_stmt|;
+name|checkSimplify
+argument_list|(
+name|isNull
+argument_list|(
+name|not
+argument_list|(
+name|vBoolNotNull
+argument_list|()
+argument_list|)
+argument_list|)
+argument_list|,
+literal|"false"
+argument_list|)
+expr_stmt|;
+comment|// "(not x) is not null" to "x is not null"
+name|checkSimplify
+argument_list|(
+name|isNotNull
+argument_list|(
+name|not
+argument_list|(
+name|vBool
+argument_list|()
+argument_list|)
+argument_list|)
+argument_list|,
+literal|"IS NOT NULL(?0.bool0)"
+argument_list|)
+expr_stmt|;
+name|checkSimplify
+argument_list|(
+name|isNotNull
+argument_list|(
+name|not
+argument_list|(
+name|vBoolNotNull
+argument_list|()
+argument_list|)
+argument_list|)
+argument_list|,
+literal|"true"
+argument_list|)
+expr_stmt|;
 block|}
 annotation|@
 name|Test
