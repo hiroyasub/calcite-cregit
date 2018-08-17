@@ -2151,7 +2151,7 @@ name|builder
 operator|.
 name|addExpr
 argument_list|(
-name|unknownLiteral
+name|nullBool
 argument_list|)
 decl_stmt|;
 comment|// $t13 = case when $t8 then $t9 when $t10 then $t11 else $t12 end
@@ -2475,7 +2475,7 @@ name|Strong
 operator|.
 name|isNull
 argument_list|(
-name|nullLiteral
+name|nullInt
 argument_list|,
 name|c
 argument_list|)
@@ -2492,7 +2492,7 @@ name|Strong
 operator|.
 name|isNull
 argument_list|(
-name|nullLiteral
+name|nullInt
 argument_list|,
 name|c13
 argument_list|)
@@ -2509,7 +2509,7 @@ name|Strong
 operator|.
 name|isNull
 argument_list|(
-name|unknownLiteral
+name|nullBool
 argument_list|,
 name|c13
 argument_list|)
@@ -2527,7 +2527,7 @@ name|andUnknownTrue
 init|=
 name|and
 argument_list|(
-name|unknownLiteral
+name|nullBool
 argument_list|,
 name|trueLiteral
 argument_list|)
@@ -2540,7 +2540,7 @@ name|and
 argument_list|(
 name|trueLiteral
 argument_list|,
-name|unknownLiteral
+name|nullBool
 argument_list|)
 decl_stmt|;
 specifier|final
@@ -2898,9 +2898,9 @@ name|isNull
 argument_list|(
 name|nullIf
 argument_list|(
-name|nullLiteral
+name|nullInt
 argument_list|,
-name|nullLiteral
+name|nullInt
 argument_list|)
 argument_list|,
 name|c
@@ -2920,7 +2920,7 @@ name|isNull
 argument_list|(
 name|nullIf
 argument_list|(
-name|nullLiteral
+name|nullInt
 argument_list|,
 name|trueLiteral
 argument_list|)
@@ -2988,7 +2988,7 @@ name|nullIf
 argument_list|(
 name|trueLiteral
 argument_list|,
-name|nullLiteral
+name|nullInt
 argument_list|)
 argument_list|,
 name|c
@@ -3009,7 +3009,7 @@ name|isNull
 argument_list|(
 name|isNull
 argument_list|(
-name|nullLiteral
+name|nullInt
 argument_list|)
 argument_list|,
 name|c01
@@ -3058,7 +3058,7 @@ argument_list|,
 name|i1
 argument_list|)
 argument_list|,
-name|nullLiteral
+name|nullInt
 argument_list|,
 name|ge
 argument_list|(
@@ -3067,9 +3067,9 @@ argument_list|,
 name|i1
 argument_list|)
 argument_list|,
-name|nullLiteral
+name|nullInt
 argument_list|,
-name|nullLiteral
+name|nullInt
 argument_list|)
 argument_list|,
 name|c01
@@ -3105,9 +3105,9 @@ argument_list|,
 name|i1
 argument_list|)
 argument_list|,
-name|nullLiteral
+name|nullInt
 argument_list|,
-name|nullLiteral
+name|nullInt
 argument_list|)
 argument_list|,
 name|c01
@@ -3143,9 +3143,9 @@ argument_list|,
 name|i1
 argument_list|)
 argument_list|,
-name|nullLiteral
+name|nullInt
 argument_list|,
-name|nullLiteral
+name|nullInt
 argument_list|)
 argument_list|,
 name|c1
@@ -3172,7 +3172,7 @@ argument_list|,
 name|i1
 argument_list|)
 argument_list|,
-name|nullLiteral
+name|nullInt
 argument_list|,
 name|ge
 argument_list|(
@@ -3183,7 +3183,7 @@ argument_list|)
 argument_list|,
 name|i0
 argument_list|,
-name|nullLiteral
+name|nullInt
 argument_list|)
 argument_list|,
 name|c01
@@ -3210,7 +3210,7 @@ argument_list|,
 name|i1
 argument_list|)
 argument_list|,
-name|nullLiteral
+name|nullInt
 argument_list|,
 name|ge
 argument_list|(
@@ -3221,7 +3221,7 @@ argument_list|)
 argument_list|,
 name|i0
 argument_list|,
-name|nullLiteral
+name|nullInt
 argument_list|)
 argument_list|,
 name|c1
@@ -3248,7 +3248,7 @@ argument_list|,
 name|i1
 argument_list|)
 argument_list|,
-name|nullLiteral
+name|nullInt
 argument_list|,
 name|ge
 argument_list|(
@@ -3257,7 +3257,7 @@ argument_list|,
 name|i1
 argument_list|)
 argument_list|,
-name|nullLiteral
+name|nullInt
 argument_list|,
 name|i0
 argument_list|)
@@ -3286,7 +3286,7 @@ argument_list|,
 name|i1
 argument_list|)
 argument_list|,
-name|nullLiteral
+name|nullInt
 argument_list|,
 name|ge
 argument_list|(
@@ -3295,7 +3295,7 @@ argument_list|,
 name|i1
 argument_list|)
 argument_list|,
-name|nullLiteral
+name|nullInt
 argument_list|,
 name|i0
 argument_list|)
@@ -4438,7 +4438,7 @@ argument_list|)
 expr_stmt|;
 name|checkCnf
 argument_list|(
-name|unknownLiteral
+name|nullBool
 argument_list|,
 literal|"null"
 argument_list|)
@@ -5848,7 +5848,7 @@ argument_list|)
 expr_stmt|;
 name|checkPullFactors
 argument_list|(
-name|unknownLiteral
+name|nullBool
 argument_list|,
 literal|"null"
 argument_list|)
@@ -6737,7 +6737,7 @@ name|cRef
 argument_list|,
 name|falseLiteral
 argument_list|,
-name|unknownLiteral
+name|nullBool
 argument_list|)
 argument_list|,
 literal|"CASE(?0.a, true, ?0.b, true, ?0.c, false, null)"
@@ -8041,7 +8041,7 @@ name|fRef
 argument_list|,
 name|falseLiteral
 argument_list|,
-name|unknownLiteral
+name|nullBool
 argument_list|)
 argument_list|,
 literal|"CAST(OR(?0.c, ?0.d)):BOOLEAN"
@@ -8056,7 +8056,7 @@ name|gt
 argument_list|(
 name|aRef
 argument_list|,
-name|unknownLiteral
+name|nullBool
 argument_list|)
 argument_list|,
 name|ge
@@ -9445,7 +9445,7 @@ argument_list|,
 name|literal1
 argument_list|)
 argument_list|,
-name|nullLiteral
+name|nullInt
 argument_list|)
 argument_list|,
 literal|"AND(=(?0.a, 1), null)"
@@ -9459,7 +9459,7 @@ name|and
 argument_list|(
 name|trueLiteral
 argument_list|,
-name|nullLiteral
+name|nullInt
 argument_list|)
 argument_list|,
 literal|"null"
@@ -9473,7 +9473,7 @@ name|and
 argument_list|(
 name|falseLiteral
 argument_list|,
-name|nullLiteral
+name|nullInt
 argument_list|)
 argument_list|,
 literal|"false"
@@ -9485,7 +9485,7 @@ name|checkSimplify2
 argument_list|(
 name|and
 argument_list|(
-name|nullLiteral
+name|nullInt
 argument_list|,
 name|eq
 argument_list|(
@@ -9511,7 +9511,7 @@ argument_list|,
 name|literal1
 argument_list|)
 argument_list|,
-name|nullLiteral
+name|nullInt
 argument_list|)
 argument_list|,
 literal|"OR(=(?0.a, 1), null)"
@@ -9525,7 +9525,7 @@ name|or
 argument_list|(
 name|trueLiteral
 argument_list|,
-name|nullLiteral
+name|nullInt
 argument_list|)
 argument_list|,
 literal|"true"
@@ -9539,7 +9539,7 @@ name|or
 argument_list|(
 name|falseLiteral
 argument_list|,
-name|nullLiteral
+name|nullInt
 argument_list|)
 argument_list|,
 literal|"null"
@@ -13902,7 +13902,7 @@ name|assertThat
 argument_list|(
 name|eval
 argument_list|(
-name|nullLiteral
+name|nullInt
 argument_list|)
 argument_list|,
 name|is
@@ -13919,9 +13919,9 @@ name|eval
 argument_list|(
 name|eq
 argument_list|(
-name|nullLiteral
+name|nullInt
 argument_list|,
-name|nullLiteral
+name|nullInt
 argument_list|)
 argument_list|)
 argument_list|,
@@ -13943,7 +13943,7 @@ name|this
 operator|.
 name|trueLiteral
 argument_list|,
-name|nullLiteral
+name|nullInt
 argument_list|)
 argument_list|)
 argument_list|,
@@ -13999,7 +13999,7 @@ name|ne
 argument_list|(
 name|falseLiteral
 argument_list|,
-name|nullLiteral
+name|nullInt
 argument_list|)
 argument_list|)
 argument_list|,
