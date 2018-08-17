@@ -4883,24 +4883,6 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-specifier|public
-specifier|static
-name|double
-name|exp
-parameter_list|(
-name|long
-name|b0
-parameter_list|)
-block|{
-return|return
-name|Math
-operator|.
-name|exp
-argument_list|(
-name|b0
-argument_list|)
-return|;
-block|}
 comment|// POWER
 comment|/** SQL<code>POWER</code> operator applied to double values. */
 specifier|public
@@ -4957,10 +4939,10 @@ specifier|static
 name|double
 name|power
 parameter_list|(
-name|long
+name|BigDecimal
 name|b0
 parameter_list|,
-name|long
+name|double
 name|b1
 parameter_list|)
 block|{
@@ -4970,6 +4952,9 @@ operator|.
 name|pow
 argument_list|(
 name|b0
+operator|.
+name|doubleValue
+argument_list|()
 argument_list|,
 name|b1
 argument_list|)
@@ -5001,58 +4986,6 @@ name|b1
 operator|.
 name|doubleValue
 argument_list|()
-argument_list|)
-return|;
-block|}
-specifier|public
-specifier|static
-name|double
-name|power
-parameter_list|(
-name|long
-name|b0
-parameter_list|,
-name|BigDecimal
-name|b1
-parameter_list|)
-block|{
-return|return
-name|Math
-operator|.
-name|pow
-argument_list|(
-name|b0
-argument_list|,
-name|b1
-operator|.
-name|doubleValue
-argument_list|()
-argument_list|)
-return|;
-block|}
-specifier|public
-specifier|static
-name|double
-name|power
-parameter_list|(
-name|BigDecimal
-name|b0
-parameter_list|,
-name|long
-name|b1
-parameter_list|)
-block|{
-return|return
-name|Math
-operator|.
-name|pow
-argument_list|(
-name|b0
-operator|.
-name|doubleValue
-argument_list|()
-argument_list|,
-name|b1
 argument_list|)
 return|;
 block|}
@@ -5073,25 +5006,6 @@ operator|.
 name|log
 argument_list|(
 name|d
-argument_list|)
-return|;
-block|}
-comment|/** SQL {@code LN(number)} function applied to long values. */
-specifier|public
-specifier|static
-name|double
-name|ln
-parameter_list|(
-name|long
-name|b0
-parameter_list|)
-block|{
-return|return
-name|Math
-operator|.
-name|log
-argument_list|(
-name|b0
 argument_list|)
 return|;
 block|}
@@ -5125,25 +5039,6 @@ name|double
 name|log10
 parameter_list|(
 name|double
-name|b0
-parameter_list|)
-block|{
-return|return
-name|Math
-operator|.
-name|log10
-argument_list|(
-name|b0
-argument_list|)
-return|;
-block|}
-comment|/** SQL {@code LOG10(number)} function applied to long values. */
-specifier|public
-specifier|static
-name|double
-name|log10
-parameter_list|(
-name|long
 name|b0
 parameter_list|)
 block|{
@@ -6101,25 +5996,6 @@ argument_list|()
 return|;
 block|}
 comment|// ACOS
-comment|/** SQL<code>ACOS</code> operator applied to long values. */
-specifier|public
-specifier|static
-name|double
-name|acos
-parameter_list|(
-name|long
-name|b0
-parameter_list|)
-block|{
-return|return
-name|Math
-operator|.
-name|acos
-argument_list|(
-name|b0
-argument_list|)
-return|;
-block|}
 comment|/** SQL<code>ACOS</code> operator applied to BigDecimal values. */
 specifier|public
 specifier|static
@@ -6162,25 +6038,6 @@ argument_list|)
 return|;
 block|}
 comment|// ASIN
-comment|/** SQL<code>ASIN</code> operator applied to long values. */
-specifier|public
-specifier|static
-name|double
-name|asin
-parameter_list|(
-name|long
-name|b0
-parameter_list|)
-block|{
-return|return
-name|Math
-operator|.
-name|asin
-argument_list|(
-name|b0
-argument_list|)
-return|;
-block|}
 comment|/** SQL<code>ASIN</code> operator applied to BigDecimal values. */
 specifier|public
 specifier|static
@@ -6223,25 +6080,6 @@ argument_list|)
 return|;
 block|}
 comment|// ATAN
-comment|/** SQL<code>ATAN</code> operator applied to long values. */
-specifier|public
-specifier|static
-name|double
-name|atan
-parameter_list|(
-name|long
-name|b0
-parameter_list|)
-block|{
-return|return
-name|Math
-operator|.
-name|atan
-argument_list|(
-name|b0
-argument_list|)
-return|;
-block|}
 comment|/** SQL<code>ATAN</code> operator applied to BigDecimal values. */
 specifier|public
 specifier|static
@@ -6284,37 +6122,13 @@ argument_list|)
 return|;
 block|}
 comment|// ATAN2
-comment|/** SQL<code>ATAN2</code> operator applied to long values. */
+comment|/** SQL<code>ATAN2</code> operator applied to double/BigDecimal values. */
 specifier|public
 specifier|static
 name|double
 name|atan2
 parameter_list|(
-name|long
-name|b0
-parameter_list|,
-name|long
-name|b1
-parameter_list|)
-block|{
-return|return
-name|Math
-operator|.
-name|atan2
-argument_list|(
-name|b0
-argument_list|,
-name|b1
-argument_list|)
-return|;
-block|}
-comment|/** SQL<code>ATAN2</code> operator applied to long/BigDecimal values. */
-specifier|public
-specifier|static
 name|double
-name|atan2
-parameter_list|(
-name|long
 name|b0
 parameter_list|,
 name|BigDecimal
@@ -6335,7 +6149,7 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-comment|/** SQL<code>ATAN2</code> operator applied to BigDecimal/long values. */
+comment|/** SQL<code>ATAN2</code> operator applied to BigDecimal/double values. */
 specifier|public
 specifier|static
 name|double
@@ -6344,7 +6158,7 @@ parameter_list|(
 name|BigDecimal
 name|b0
 parameter_list|,
-name|long
+name|double
 name|b1
 parameter_list|)
 block|{
@@ -6417,25 +6231,6 @@ argument_list|)
 return|;
 block|}
 comment|// COS
-comment|/** SQL<code>COS</code> operator applied to long values. */
-specifier|public
-specifier|static
-name|double
-name|cos
-parameter_list|(
-name|long
-name|b0
-parameter_list|)
-block|{
-return|return
-name|Math
-operator|.
-name|cos
-argument_list|(
-name|b0
-argument_list|)
-return|;
-block|}
 comment|/** SQL<code>COS</code> operator applied to BigDecimal values. */
 specifier|public
 specifier|static
@@ -6478,27 +6273,6 @@ argument_list|)
 return|;
 block|}
 comment|// COT
-comment|/** SQL<code>COT</code> operator applied to long values. */
-specifier|public
-specifier|static
-name|double
-name|cot
-parameter_list|(
-name|long
-name|b0
-parameter_list|)
-block|{
-return|return
-literal|1.0d
-operator|/
-name|Math
-operator|.
-name|tan
-argument_list|(
-name|b0
-argument_list|)
-return|;
-block|}
 comment|/** SQL<code>COT</code> operator applied to BigDecimal values. */
 specifier|public
 specifier|static
@@ -6545,25 +6319,6 @@ argument_list|)
 return|;
 block|}
 comment|// DEGREES
-comment|/** SQL<code>DEGREES</code> operator applied to long values. */
-specifier|public
-specifier|static
-name|double
-name|degrees
-parameter_list|(
-name|long
-name|b0
-parameter_list|)
-block|{
-return|return
-name|Math
-operator|.
-name|toDegrees
-argument_list|(
-name|b0
-argument_list|)
-return|;
-block|}
 comment|/** SQL<code>DEGREES</code> operator applied to BigDecimal values. */
 specifier|public
 specifier|static
@@ -6606,25 +6361,6 @@ argument_list|)
 return|;
 block|}
 comment|// RADIANS
-comment|/** SQL<code>RADIANS</code> operator applied to long values. */
-specifier|public
-specifier|static
-name|double
-name|radians
-parameter_list|(
-name|long
-name|b0
-parameter_list|)
-block|{
-return|return
-name|Math
-operator|.
-name|toRadians
-argument_list|(
-name|b0
-argument_list|)
-return|;
-block|}
 comment|/** SQL<code>RADIANS</code> operator applied to BigDecimal values. */
 specifier|public
 specifier|static
@@ -7149,25 +6885,6 @@ argument_list|)
 return|;
 block|}
 comment|// SIN
-comment|/** SQL<code>SIN</code> operator applied to long values. */
-specifier|public
-specifier|static
-name|double
-name|sin
-parameter_list|(
-name|long
-name|b0
-parameter_list|)
-block|{
-return|return
-name|Math
-operator|.
-name|sin
-argument_list|(
-name|b0
-argument_list|)
-return|;
-block|}
 comment|/** SQL<code>SIN</code> operator applied to BigDecimal values. */
 specifier|public
 specifier|static
@@ -7210,25 +6927,6 @@ argument_list|)
 return|;
 block|}
 comment|// TAN
-comment|/** SQL<code>TAN</code> operator applied to long values. */
-specifier|public
-specifier|static
-name|double
-name|tan
-parameter_list|(
-name|long
-name|b0
-parameter_list|)
-block|{
-return|return
-name|Math
-operator|.
-name|tan
-argument_list|(
-name|b0
-argument_list|)
-return|;
-block|}
 comment|/** SQL<code>TAN</code> operator applied to BigDecimal values. */
 specifier|public
 specifier|static

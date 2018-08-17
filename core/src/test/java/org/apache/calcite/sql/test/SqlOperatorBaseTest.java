@@ -20926,11 +20926,15 @@ argument_list|)
 expr_stmt|;
 name|tester
 operator|.
-name|checkType
+name|checkScalarApprox
 argument_list|(
 literal|"atan2(cast(1 as float), -1)"
 argument_list|,
 literal|"DOUBLE NOT NULL"
+argument_list|,
+literal|2.3562d
+argument_list|,
+literal|0.0001d
 argument_list|)
 expr_stmt|;
 name|tester

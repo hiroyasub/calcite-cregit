@@ -342,7 +342,7 @@ name|Float
 operator|.
 name|class
 argument_list|,
-literal|3
+literal|2
 argument_list|,
 literal|0F
 argument_list|,
@@ -379,7 +379,7 @@ name|Double
 operator|.
 name|class
 argument_list|,
-literal|3
+literal|2
 argument_list|,
 literal|0D
 argument_list|,
@@ -416,7 +416,7 @@ name|Void
 operator|.
 name|class
 argument_list|,
-literal|4
+literal|3
 argument_list|,
 literal|null
 argument_list|,
@@ -438,7 +438,7 @@ literal|null
 argument_list|,
 literal|null
 argument_list|,
-literal|5
+literal|4
 argument_list|,
 literal|null
 argument_list|,
