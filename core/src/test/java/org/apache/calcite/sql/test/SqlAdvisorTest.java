@@ -3985,6 +3985,38 @@ argument_list|,
 name|expected
 argument_list|)
 expr_stmt|;
+comment|// skip comments
+name|sql
+operator|=
+literal|"select -- here is from clause\n 'cat' as foobar, 1 as x from t group by t.^ order by 123"
+expr_stmt|;
+name|expected
+operator|=
+literal|"SELECT * FROM t GROUP BY t. _suggest_"
+expr_stmt|;
+name|assertSimplify
+argument_list|(
+name|sql
+argument_list|,
+name|expected
+argument_list|)
+expr_stmt|;
+comment|// skip comments
+name|sql
+operator|=
+literal|"-- test test \nselect -- here is from \n 'cat' as foobar, 1 as x from t group by t.^ order by 123"
+expr_stmt|;
+name|expected
+operator|=
+literal|"SELECT * FROM t GROUP BY t. _suggest_"
+expr_stmt|;
+name|assertSimplify
+argument_list|(
+name|sql
+argument_list|,
+name|expected
+argument_list|)
+expr_stmt|;
 block|}
 annotation|@
 name|WithLex
