@@ -201,6 +201,16 @@ name|org
 operator|.
 name|junit
 operator|.
+name|Ignore
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|junit
+operator|.
 name|Rule
 import|;
 end_import
@@ -2526,6 +2536,90 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testSimlifySubqueryStar
+parameter_list|()
+block|{
+name|String
+name|sql
+decl_stmt|;
+name|sql
+operator|=
+literal|"select ax^ from (select (select * from dummy) axc from dummy a)"
+expr_stmt|;
+name|assertSimplify
+argument_list|(
+name|sql
+argument_list|,
+literal|"SELECT ax _suggest_ FROM ( SELECT ( SELECT * FROM dummy ) axc FROM dummy a )"
+argument_list|)
+expr_stmt|;
+name|assertComplete
+argument_list|(
+name|sql
+argument_list|,
+literal|"COLUMN(AXC)\n"
+argument_list|,
+literal|"ax"
+argument_list|)
+expr_stmt|;
+name|sql
+operator|=
+literal|"select ax^ from (select a.x+0 axa, b.x axb, (select * from dummy) axbc from dummy a, dummy b)"
+expr_stmt|;
+name|assertSimplify
+argument_list|(
+name|sql
+argument_list|,
+literal|"SELECT ax _suggest_ FROM ( SELECT a.x+0 axa , b.x axb , ( SELECT * FROM dummy ) axbc FROM dummy a , dummy b )"
+argument_list|)
+expr_stmt|;
+name|assertComplete
+argument_list|(
+name|sql
+argument_list|,
+literal|"COLUMN(AXA)\nCOLUMN(AXB)\nCOLUMN(AXBC)\n"
+argument_list|,
+literal|"ax"
+argument_list|)
+expr_stmt|;
+name|sql
+operator|=
+literal|"select ^ from (select * from dummy)"
+expr_stmt|;
+name|assertSimplify
+argument_list|(
+name|sql
+argument_list|,
+literal|"SELECT _suggest_ FROM ( SELECT * FROM dummy )"
+argument_list|)
+expr_stmt|;
+name|sql
+operator|=
+literal|"select ^ from (select x.* from dummy x)"
+expr_stmt|;
+name|assertSimplify
+argument_list|(
+name|sql
+argument_list|,
+literal|"SELECT _suggest_ FROM ( SELECT x.* FROM dummy x )"
+argument_list|)
+expr_stmt|;
+name|sql
+operator|=
+literal|"select ^ from (select a.x + b.y from dummy a, dummy b)"
+expr_stmt|;
+name|assertSimplify
+argument_list|(
+name|sql
+argument_list|,
+literal|"SELECT _suggest_ FROM ( SELECT a.x + b.y FROM dummy a , dummy b )"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testSimlifyMinus
 parameter_list|()
 block|{
@@ -4776,6 +4870,11 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Ignore
+argument_list|(
+literal|"Inserts are not supported by SimpleParser yet"
+argument_list|)
 annotation|@
 name|Test
 specifier|public

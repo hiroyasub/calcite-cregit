@@ -663,23 +663,16 @@ argument_list|()
 expr_stmt|;
 block|}
 block|}
+comment|// Combine SELECT ... UNION SELECT..., so keep trying consumeSelect
 break|break;
-case|case
-name|RPAREN
-case|:
+default|default:
+comment|// Unknown token detected => end of query detected
 name|iter
 operator|.
 name|previous
 argument_list|()
 expr_stmt|;
 return|return;
-default|default:
-name|iter
-operator|.
-name|previous
-argument_list|()
-expr_stmt|;
-break|break;
 block|}
 block|}
 block|}
