@@ -9250,7 +9250,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testStarDynamicSchemaUnnestNestedSubquery
+name|testStarDynamicSchemaUnnestNestedSubQuery
 parameter_list|()
 block|{
 name|String

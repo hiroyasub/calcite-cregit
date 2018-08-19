@@ -1856,7 +1856,7 @@ argument_list|)
 return|;
 block|}
 comment|// Variables
-comment|/**    * Generates input ref with given type and index.    *    * Prefer {@link #vBool()}, {@link #vInt()} and so on.    *    * The problem with "input refs" is {@code input(tInt(), 0).toString()} yields {@code $0},    * so the type of the expression is not printed, and it makes it hard to analyze the expressions.    * @param type desired type of the node    * @param arg argument index (0-based)    * @return input ref with given type and index    */
+comment|/**    * Generates input ref with given type and index.    *    *<p>Prefer {@link #vBool()}, {@link #vInt()} and so on.    *    *<p>The problem with "input refs" is {@code input(tInt(), 0).toString()}    * yields {@code $0}, so the type of the expression is not printed, and it    * makes it hard to analyze the expressions.    *    * @param type desired type of the node    * @param arg argument index (0-based)    * @return input ref with given type and index    */
 specifier|protected
 name|RexNode
 name|input
