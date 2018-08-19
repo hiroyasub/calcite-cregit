@@ -2504,6 +2504,28 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testSimplifyStarAlias
+parameter_list|()
+block|{
+name|String
+name|sql
+decl_stmt|;
+name|sql
+operator|=
+literal|"select ax^ from (select * from dummy a)"
+expr_stmt|;
+name|assertSimplify
+argument_list|(
+name|sql
+argument_list|,
+literal|"SELECT ax _suggest_ FROM ( SELECT * FROM dummy a )"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testSimlifyMinus
 parameter_list|()
 block|{
@@ -3286,7 +3308,7 @@ expr_stmt|;
 name|String
 name|simplified
 init|=
-literal|"SELECT * FROM ( SELECT 0 AS x , 0 AS y FROM ( SELECT 0 AS x FROM sales.emp ) ) as t WHERE _suggest_"
+literal|"SELECT * FROM ( SELECT 1 as x , 2 as y FROM ( SELECT x FROM sales.emp ) ) as t WHERE _suggest_"
 decl_stmt|;
 name|assertSimplify
 argument_list|(
@@ -3789,7 +3811,7 @@ name|expected
 operator|=
 literal|"SELECT t. _suggest_ "
 operator|+
-literal|"FROM ( SELECT 0 AS x , 0 AS y FROM sales.emp ) as t"
+literal|"FROM ( SELECT 1 as x , 2 as y FROM sales.emp ) as t"
 expr_stmt|;
 name|assertSimplify
 argument_list|(
@@ -3806,9 +3828,9 @@ literal|"(select x from sales.emp)) as t where ^"
 expr_stmt|;
 name|expected
 operator|=
-literal|"SELECT * FROM ( SELECT 0 AS x , 0 AS y FROM "
+literal|"SELECT * FROM ( SELECT 1 as x , 2 as y FROM "
 operator|+
-literal|"( SELECT 0 AS x FROM sales.emp ) ) as t WHERE _suggest_"
+literal|"( SELECT x FROM sales.emp ) ) as t WHERE _suggest_"
 expr_stmt|;
 name|assertSimplify
 argument_list|(
@@ -3827,9 +3849,9 @@ literal|"where t.dummy=1"
 expr_stmt|;
 name|expected
 operator|=
-literal|"SELECT _suggest_ FROM ( SELECT 0 AS x , 0 AS y FROM sales.emp ) "
+literal|"SELECT _suggest_ FROM ( SELECT 1 as x , 2 as y FROM sales.emp ) "
 operator|+
-literal|", ( SELECT 0 AS y FROM ( SELECT 0 AS m FROM n ) ) as t"
+literal|", ( SELECT 2 as y FROM ( SELECT m FROM n ) ) as t"
 expr_stmt|;
 name|assertSimplify
 argument_list|(
@@ -3861,7 +3883,7 @@ literal|"select t.^ from (select 1 as x, 2 as y from sales)"
 expr_stmt|;
 name|expected
 operator|=
-literal|"SELECT t. _suggest_ FROM ( SELECT 0 AS x , 0 AS y FROM sales )"
+literal|"SELECT t. _suggest_ FROM ( SELECT 1 as x , 2 as y FROM sales )"
 expr_stmt|;
 name|assertSimplify
 argument_list|(
@@ -3885,7 +3907,7 @@ literal|"where x in (select deptno from emp where foo + t.^< 10)"
 expr_stmt|;
 name|expected
 operator|=
-literal|"SELECT * FROM ( SELECT 0 AS x , 0 AS y FROM sales ) as t "
+literal|"SELECT * FROM ( SELECT 1 as x , 2 as y FROM sales ) as t "
 operator|+
 literal|"WHERE x in ( SELECT * FROM emp WHERE foo + t. _suggest_< 10 )"
 expr_stmt|;

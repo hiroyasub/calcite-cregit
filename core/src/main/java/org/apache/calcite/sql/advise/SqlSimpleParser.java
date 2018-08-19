@@ -2415,9 +2415,9 @@ case|:
 comment|// Indicates that the expression to be simplified is
 comment|// outside this sub-query. Preserve a simplified SELECT
 comment|// clause.
-name|purgeSelectExprsKeepAliases
-argument_list|()
-expr_stmt|;
+comment|// It might be a good idea to purge select expressions, however
+comment|// purgeSelectExprsKeepAliases might end up with<<0 as "*">> which is not valid.
+comment|// purgeSelectExprsKeepAliases();
 name|purgeWhere
 argument_list|()
 expr_stmt|;
@@ -2869,6 +2869,7 @@ operator|.
 name|ID
 condition|)
 block|{
+comment|// This might produce<<0 as "a.x+b.y">>, or<<0 as "*">>, or even<<0 as "a.*">>
 name|newSelectClause
 operator|.
 name|add
