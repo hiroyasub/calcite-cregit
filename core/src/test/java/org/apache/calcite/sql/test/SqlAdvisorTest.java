@@ -2620,6 +2620,41 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testSimlifySubqueryMultipleFrom
+parameter_list|()
+block|{
+name|String
+name|sql
+decl_stmt|;
+comment|// "dummy b" should be removed
+name|sql
+operator|=
+literal|"select axc from (select (select ^ from dummy) axc from dummy a), dummy b"
+expr_stmt|;
+name|assertSimplify
+argument_list|(
+name|sql
+argument_list|,
+literal|"SELECT * FROM ( SELECT ( SELECT _suggest_ FROM dummy ) axc FROM dummy a )"
+argument_list|)
+expr_stmt|;
+comment|// "dummy b" should be removed
+name|sql
+operator|=
+literal|"select axc from dummy b, (select (select ^ from dummy) axc from dummy a)"
+expr_stmt|;
+name|assertSimplify
+argument_list|(
+name|sql
+argument_list|,
+literal|"SELECT * FROM ( SELECT ( SELECT _suggest_ FROM dummy ) axc FROM dummy a )"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testSimlifyMinus
 parameter_list|()
 block|{
