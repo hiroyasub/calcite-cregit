@@ -159,6 +159,8 @@ name|INTERSECT
 block|,
 name|EXCEPT
 block|,
+name|MINUS
+block|,
 comment|/**      * left parenthesis      */
 name|LPAREN
 block|{
@@ -597,6 +599,9 @@ case|:
 case|case
 name|EXCEPT
 case|:
+case|case
+name|MINUS
+case|:
 name|outList
 operator|.
 name|add
@@ -805,6 +810,9 @@ name|INTERSECT
 case|:
 case|case
 name|EXCEPT
+case|:
+case|case
+name|MINUS
 case|:
 name|subQueryList
 operator|.

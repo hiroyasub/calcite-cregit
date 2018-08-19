@@ -2504,6 +2504,39 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testSimlifyMinus
+parameter_list|()
+block|{
+name|String
+name|sql
+decl_stmt|;
+name|sql
+operator|=
+literal|"select ^ from dummy a minus select * from dummy b"
+expr_stmt|;
+name|assertSimplify
+argument_list|(
+name|sql
+argument_list|,
+literal|"SELECT _suggest_ FROM dummy a"
+argument_list|)
+expr_stmt|;
+name|sql
+operator|=
+literal|"select * from dummy a minus select ^ from dummy b"
+expr_stmt|;
+name|assertSimplify
+argument_list|(
+name|sql
+argument_list|,
+literal|"SELECT _suggest_ FROM dummy b"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testOnCondition
 parameter_list|()
 throws|throws
