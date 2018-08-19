@@ -3926,6 +3926,16 @@ argument_list|>
 name|hintList
 parameter_list|)
 block|{
+if|if
+condition|(
+name|node
+operator|==
+literal|null
+condition|)
+block|{
+comment|// This can happen in cases like "select * _suggest_", so from clause is absent
+return|return;
+block|}
 specifier|final
 name|SqlValidatorNamespace
 name|ns
