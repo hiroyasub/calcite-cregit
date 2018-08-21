@@ -695,6 +695,31 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+comment|/** Test case for:    *<a href="https://issues.apache.org/jira/browse/CALCITE-2468">[CALCITE-2468]    * struct type alias should not cause IOOBE.</a>.    */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testStructTypeAlias
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select t.r AS myRow \n"
+operator|+
+literal|"from (select row(row(1)) r from dept) t"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
 annotation|@
 name|Test
 specifier|public
