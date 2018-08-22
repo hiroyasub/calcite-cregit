@@ -4194,11 +4194,11 @@ argument_list|>
 name|columns
 decl_stmt|;
 specifier|public
-name|int
+name|long
 name|size
 decl_stmt|;
 specifier|public
-name|int
+name|long
 name|numRows
 decl_stmt|;
 specifier|public
