@@ -656,11 +656,6 @@ name|IdentityHashMap
 argument_list|<>
 argument_list|()
 decl_stmt|;
-name|int
-name|windowCount
-init|=
-literal|0
-decl_stmt|;
 specifier|protected
 specifier|final
 name|Function1

@@ -4593,7 +4593,9 @@ literal|"  final int _c = 1 + 3;\n"
 operator|+
 literal|"  final int _d = 1 + 4;\n"
 operator|+
-literal|"  org.apache.calcite.linq4j.test.ExpressionTest.bar(1, _b, _c, _d, org.apache.calcite.linq4j.test.ExpressionTest.foo(_c));\n"
+literal|"  final int _b0 = 1 + 3;\n"
+operator|+
+literal|"  org.apache.calcite.linq4j.test.ExpressionTest.bar(1, _b, _c, _d, org.apache.calcite.linq4j.test.ExpressionTest.foo(_b0));\n"
 operator|+
 literal|"}\n"
 argument_list|,

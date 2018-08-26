@@ -9317,6 +9317,21 @@ name|Expression
 name|initializer
 parameter_list|)
 block|{
+assert|assert
+name|initializer
+operator|!=
+literal|null
+operator|:
+literal|"empty initializer for variable declaration with name '"
+operator|+
+name|name
+operator|+
+literal|"', modifiers "
+operator|+
+name|modifiers
+operator|+
+literal|". Please use declare(int, ParameterExpression, initializer) instead"
+assert|;
 return|return
 name|declare
 argument_list|(

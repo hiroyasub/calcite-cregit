@@ -1207,15 +1207,6 @@ name|result
 operator|.
 name|physType
 decl_stmt|;
-specifier|final
-name|int
-name|w
-init|=
-name|implementor
-operator|.
-name|windowCount
-operator|++
-decl_stmt|;
 name|ParameterExpression
 name|prevStart
 init|=
@@ -1232,8 +1223,6 @@ operator|.
 name|newName
 argument_list|(
 literal|"prevStart"
-operator|+
-name|w
 argument_list|)
 argument_list|)
 decl_stmt|;
@@ -1253,8 +1242,6 @@ operator|.
 name|newName
 argument_list|(
 literal|"prevEnd"
-operator|+
-name|w
 argument_list|)
 argument_list|)
 decl_stmt|;
