@@ -197,16 +197,6 @@ begin_import
 import|import
 name|java
 operator|.
-name|net
-operator|.
-name|URL
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
 name|sql
 operator|.
 name|Connection
@@ -344,10 +334,11 @@ parameter_list|)
 throws|throws
 name|Exception
 block|{
-specifier|final
-name|URL
-name|url
-init|=
+return|return
+name|Sources
+operator|.
+name|of
+argument_list|(
 name|FileReaderTest
 operator|.
 name|class
@@ -358,22 +349,10 @@ literal|"/"
 operator|+
 name|path
 argument_list|)
-decl_stmt|;
-specifier|final
-name|File
-name|file
-init|=
-operator|new
-name|File
-argument_list|(
-name|url
-operator|.
-name|toURI
-argument_list|()
 argument_list|)
-decl_stmt|;
-return|return
+operator|.
 name|file
+argument_list|()
 operator|.
 name|getAbsolutePath
 argument_list|()
@@ -415,10 +394,22 @@ argument_list|(
 literal|"java.runtime.name"
 argument_list|)
 decl_stmt|;
+comment|// http://openjdk.java.net/jeps/319 => root certificates are bundled with JEP 10
 name|Assume
 operator|.
 name|assumeTrue
 argument_list|(
+literal|"Java 10+ should have root certificates (JEP 319). Runtime is "
+operator|+
+name|r
+operator|+
+literal|", Jave major version is "
+operator|+
+name|TestUtil
+operator|.
+name|getJavaMajorVersion
+argument_list|()
+argument_list|,
 operator|!
 name|r
 operator|.
@@ -426,6 +417,13 @@ name|equals
 argument_list|(
 literal|"OpenJDK Runtime Environment"
 argument_list|)
+operator|||
+name|TestUtil
+operator|.
+name|getJavaMajorVersion
+argument_list|()
+operator|>
+literal|10
 argument_list|)
 expr_stmt|;
 name|FileReader
@@ -577,7 +575,7 @@ literal|"bad"
 operator|+
 name|CITIES_SOURCE
 operator|.
-name|path
+name|url
 argument_list|()
 argument_list|)
 decl_stmt|;
