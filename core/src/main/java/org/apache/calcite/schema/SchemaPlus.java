@@ -47,20 +47,6 @@ end_import
 
 begin_import
 import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|util
-operator|.
-name|Bug
-import|;
-end_import
-
-begin_import
-import|import
 name|com
 operator|.
 name|google
@@ -95,29 +81,13 @@ name|getName
 parameter_list|()
 function_decl|;
 comment|// override with stricter return
-specifier|default
 name|SchemaPlus
 name|getSubSchema
 parameter_list|(
 name|String
 name|name
 parameter_list|)
-block|{
-name|Bug
-operator|.
-name|upgrade
-argument_list|(
-literal|"janino 2.7.6 does not work without this method,"
-operator|+
-literal|"see https://github.com/janino-compiler/janino/issues/47"
-argument_list|)
-expr_stmt|;
-throw|throw
-operator|new
-name|UnsupportedOperationException
-argument_list|()
-throw|;
-block|}
+function_decl|;
 comment|/** Adds a schema as a sub-schema of this schema, and returns the wrapped    * object. */
 name|SchemaPlus
 name|add
