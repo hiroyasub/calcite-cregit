@@ -4166,6 +4166,11 @@ comment|//
 comment|// Example #1. x AND y AND z AND NOT (x AND y)  - not satisfiable
 comment|// Example #2. x AND y AND NOT (x AND y)        - not satisfiable
 comment|// Example #3. x AND y AND NOT (x AND y AND z)  - may be satisfiable
+name|RexNode
+name|bestNotDisjunction
+init|=
+literal|null
+decl_stmt|;
 for|for
 control|(
 name|RexNode
@@ -4190,6 +4195,7 @@ argument_list|)
 decl_stmt|;
 if|if
 condition|(
+operator|!
 name|terms
 operator|.
 name|containsAll
@@ -4198,6 +4204,22 @@ name|terms2
 argument_list|)
 condition|)
 block|{
+comment|// may be satisfiable ==> check other terms
+continue|continue;
+block|}
+if|if
+condition|(
+operator|!
+name|notDisjunction
+operator|.
+name|getType
+argument_list|()
+operator|.
+name|isNullable
+argument_list|()
+condition|)
+block|{
+comment|// x is NOT nullable, then x AND NOT(x) ==> FALSE
 return|return
 name|rexBuilder
 operator|.
@@ -4207,6 +4229,83 @@ literal|false
 argument_list|)
 return|;
 block|}
+comment|// x AND NOT(x) is UNKNOWN for NULL input
+comment|// So we search for the shortest notDisjunction then convert
+comment|// original expression to NULL and x IS NULL
+if|if
+condition|(
+name|bestNotDisjunction
+operator|==
+literal|null
+operator|||
+name|bestNotDisjunction
+operator|.
+name|toString
+argument_list|()
+operator|.
+name|length
+argument_list|()
+operator|>
+name|notDisjunction
+operator|.
+name|toString
+argument_list|()
+operator|.
+name|length
+argument_list|()
+condition|)
+block|{
+name|bestNotDisjunction
+operator|=
+name|notDisjunction
+expr_stmt|;
+block|}
+block|}
+if|if
+condition|(
+name|bestNotDisjunction
+operator|!=
+literal|null
+condition|)
+block|{
+comment|// NULL AND (x IS NULL)
+return|return
+name|rexBuilder
+operator|.
+name|makeCall
+argument_list|(
+name|SqlStdOperatorTable
+operator|.
+name|AND
+argument_list|,
+name|rexBuilder
+operator|.
+name|makeNullLiteral
+argument_list|(
+name|bestNotDisjunction
+operator|.
+name|getType
+argument_list|()
+argument_list|)
+argument_list|,
+name|simplifyIs
+argument_list|(
+operator|(
+name|RexCall
+operator|)
+name|rexBuilder
+operator|.
+name|makeCall
+argument_list|(
+name|SqlStdOperatorTable
+operator|.
+name|IS_NULL
+argument_list|,
+name|bestNotDisjunction
+argument_list|)
+argument_list|)
+argument_list|)
+return|;
 block|}
 comment|// Add the NOT disjunctions back in.
 for|for
