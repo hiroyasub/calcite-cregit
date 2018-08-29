@@ -13771,6 +13771,43 @@ literal|"..."
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Ignore
+argument_list|(
+literal|"[CALCITE-2505] java.lang.AssertionError: result mismatch"
+argument_list|)
+annotation|@
+name|Test
+specifier|public
+name|void
+name|coalescePlusNull
+parameter_list|()
+block|{
+comment|// when applied to {?0.int0=-1},
+comment|// COALESCE(+(null), +(?0.int0)) yielded -1,
+comment|// and +(null) yielded NULL
+name|checkSimplify2
+argument_list|(
+name|coalesce
+argument_list|(
+name|unaryPlus
+argument_list|(
+name|nullInt
+argument_list|)
+argument_list|,
+name|unaryPlus
+argument_list|(
+name|vInt
+argument_list|()
+argument_list|)
+argument_list|)
+argument_list|,
+literal|"..."
+argument_list|,
+literal|"..."
+argument_list|)
+expr_stmt|;
+block|}
 comment|/** Converts a map to a string, sorting on the string representation of its    * keys. */
 specifier|private
 specifier|static
