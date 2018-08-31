@@ -2772,8 +2772,8 @@ return|;
 case|case
 name|ANY
 case|:
-comment|// "f" is a strong operator, so "f(operand) IS NOT NULL" simplifies to
-comment|// "operand IS NOT NULL"
+comment|// "f" is a strong operator, so "f(operand0, operand1) IS NOT NULL"
+comment|// simplifies to "operand0 IS NOT NULL AND operand1 IS NOT NULL"
 specifier|final
 name|List
 argument_list|<
@@ -2985,8 +2985,8 @@ return|;
 case|case
 name|ANY
 case|:
-comment|// "f" is a strong operator, so "f(operand) IS NULL" simplifies to
-comment|// "operand IS NULL"
+comment|// "f" is a strong operator, so "f(operand0, operand1) IS NULL" simplifies
+comment|// to "operand0 IS NULL OR operand1 IS NULL"
 specifier|final
 name|List
 argument_list|<
@@ -3048,23 +3048,6 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-if|else if
-condition|(
-name|simplified
-operator|.
-name|isAlwaysFalse
-argument_list|()
-condition|)
-block|{
-return|return
-name|rexBuilder
-operator|.
-name|makeLiteral
-argument_list|(
-literal|false
-argument_list|)
-return|;
-block|}
 else|else
 block|{
 name|operands
@@ -3079,7 +3062,7 @@ block|}
 return|return
 name|RexUtil
 operator|.
-name|composeConjunction
+name|composeDisjunction
 argument_list|(
 name|rexBuilder
 argument_list|,
