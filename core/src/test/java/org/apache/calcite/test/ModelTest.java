@@ -1831,16 +1831,9 @@ operator|.
 name|that
 argument_list|()
 operator|.
-name|with
+name|withModel
 argument_list|(
-name|CalciteConnectionProperty
-operator|.
-name|MODEL
-argument_list|,
 name|inUrl
-operator|.
-name|getFile
-argument_list|()
 argument_list|)
 operator|.
 name|doWithConnection
