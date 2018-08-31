@@ -12253,6 +12253,8 @@ name|String
 name|s
 parameter_list|)
 block|{
+comment|// Note this does not support some unicode characters
+comment|// however it is fine for testing purposes
 return|return
 name|set
 operator|.
