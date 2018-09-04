@@ -541,31 +541,7 @@ name|junit
 operator|.
 name|Assert
 operator|.
-name|assertFalse
-import|;
-end_import
-
-begin_import
-import|import static
-name|org
-operator|.
-name|junit
-operator|.
-name|Assert
-operator|.
 name|assertThat
-import|;
-end_import
-
-begin_import
-import|import static
-name|org
-operator|.
-name|junit
-operator|.
-name|Assert
-operator|.
-name|assertTrue
 import|;
 end_import
 
@@ -5502,7 +5478,45 @@ literal|"c"
 argument_list|)
 return|;
 block|}
-specifier|private
+comment|/** Returns whether a word is reserved in this parser. This method can be    * used to disable tests that behave differently with different collections    * of reserved words. */
+specifier|protected
+name|boolean
+name|isReserved
+parameter_list|(
+name|String
+name|word
+parameter_list|)
+block|{
+name|SqlAbstractParserImpl
+operator|.
+name|Metadata
+name|metadata
+init|=
+name|getSqlParser
+argument_list|(
+literal|""
+argument_list|)
+operator|.
+name|getMetadata
+argument_list|()
+decl_stmt|;
+return|return
+name|metadata
+operator|.
+name|isReservedWord
+argument_list|(
+name|word
+operator|.
+name|toUpperCase
+argument_list|(
+name|Locale
+operator|.
+name|ROOT
+argument_list|)
+argument_list|)
+return|;
+block|}
+specifier|protected
 specifier|static
 name|SortedSet
 argument_list|<
@@ -7708,6 +7722,14 @@ argument_list|,
 literal|"VALUES (ROW((`A` SIMILAR TO (`B` LIKE (`C` SIMILAR TO `D` ESCAPE `E`) ESCAPE `F`))))"
 argument_list|)
 expr_stmt|;
+if|if
+condition|(
+name|isReserved
+argument_list|(
+literal|"ESCAPE"
+argument_list|)
+condition|)
+block|{
 comment|// FIXME should fail at "escape"
 name|checkFails
 argument_list|(
@@ -7716,6 +7738,7 @@ argument_list|,
 literal|"(?s).*Encountered \"where escape\" at .*"
 argument_list|)
 expr_stmt|;
+block|}
 comment|// LIKE with +
 name|check
 argument_list|(
@@ -7733,6 +7756,14 @@ literal|"VALUES (ROW((`A` LIKE (`B` || `C`) ESCAPE `D`)))"
 argument_list|)
 expr_stmt|;
 comment|// ESCAPE with no expression
+if|if
+condition|(
+name|isReserved
+argument_list|(
+literal|"ESCAPE"
+argument_list|)
+condition|)
+block|{
 comment|// FIXME should fail at "escape"
 name|checkFails
 argument_list|(
@@ -7741,7 +7772,16 @@ argument_list|,
 literal|"(?s).*Encountered \"like escape\" at .*"
 argument_list|)
 expr_stmt|;
+block|}
 comment|// ESCAPE with no expression
+if|if
+condition|(
+name|isReserved
+argument_list|(
+literal|"ESCAPE"
+argument_list|)
+condition|)
+block|{
 name|checkFails
 argument_list|(
 literal|"values a like b || c ^escape^ and false"
@@ -7749,6 +7789,7 @@ argument_list|,
 literal|"(?s).*Encountered \"escape and\" at line 1, column 22.*"
 argument_list|)
 expr_stmt|;
+block|}
 comment|// basic SIMILAR TO
 name|check
 argument_list|(
@@ -13981,9 +14022,23 @@ literal|"UPSERT INTO `EMPS`\n"
 operator|+
 literal|"VALUES (ROW(1, 'Fredkin'))"
 decl_stmt|;
+specifier|final
+name|String
+name|sql
+init|=
+literal|"upsert into emps values (1,'Fredkin')"
+decl_stmt|;
+if|if
+condition|(
+name|isReserved
+argument_list|(
+literal|"UPSERT"
+argument_list|)
+condition|)
+block|{
 name|sql
 argument_list|(
-literal|"upsert into emps values (1,'Fredkin')"
+name|sql
 argument_list|)
 operator|.
 name|ok
@@ -14001,6 +14056,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+block|}
 annotation|@
 name|Test
 specifier|public
@@ -14008,20 +14064,41 @@ name|void
 name|testUpsertSelect
 parameter_list|()
 block|{
+specifier|final
+name|String
 name|sql
-argument_list|(
+init|=
 literal|"upsert into emps select * from emp as e"
-argument_list|)
-operator|.
-name|ok
-argument_list|(
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
 literal|"UPSERT INTO `EMPS`\n"
 operator|+
 literal|"(SELECT *\n"
 operator|+
 literal|"FROM `EMP` AS `E`)"
+decl_stmt|;
+if|if
+condition|(
+name|isReserved
+argument_list|(
+literal|"UPSERT"
+argument_list|)
+condition|)
+block|{
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
 argument_list|)
 expr_stmt|;
+block|}
 block|}
 annotation|@
 name|Test
@@ -14030,20 +14107,43 @@ name|void
 name|testExplainUpsert
 parameter_list|()
 block|{
+specifier|final
+name|String
 name|sql
-argument_list|(
+init|=
 literal|"explain plan for upsert into emps1 values (1, 2)"
-argument_list|)
-operator|.
-name|ok
-argument_list|(
-literal|"EXPLAIN PLAN INCLUDING ATTRIBUTES WITH IMPLEMENTATION FOR\n"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"EXPLAIN PLAN INCLUDING ATTRIBUTES"
+operator|+
+literal|" WITH IMPLEMENTATION FOR\n"
 operator|+
 literal|"UPSERT INTO `EMPS1`\n"
 operator|+
 literal|"VALUES (ROW(1, 2))"
+decl_stmt|;
+if|if
+condition|(
+name|isReserved
+argument_list|(
+literal|"UPSERT"
+argument_list|)
+condition|)
+block|{
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
 argument_list|)
 expr_stmt|;
+block|}
 block|}
 annotation|@
 name|Test
@@ -14699,6 +14799,14 @@ argument_list|,
 literal|"(NULLIF(`V1`, `V2`))"
 argument_list|)
 expr_stmt|;
+if|if
+condition|(
+name|isReserved
+argument_list|(
+literal|"NULLIF"
+argument_list|)
+condition|)
+block|{
 name|checkExpFails
 argument_list|(
 literal|"1 + ^nullif^ + 3"
@@ -14706,6 +14814,7 @@ argument_list|,
 literal|"(?s)Encountered \"nullif \\+\" at line 1, column 5.*"
 argument_list|)
 expr_stmt|;
+block|}
 block|}
 annotation|@
 name|Test
@@ -14852,6 +14961,104 @@ argument_list|(
 literal|"replace('x', 'y', 'z')"
 argument_list|,
 literal|"REPLACE('x', 'y', 'z')"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testDateLiteral
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT DATE '1980-01-01'\n"
+operator|+
+literal|"FROM `T`"
+decl_stmt|;
+name|sql
+argument_list|(
+literal|"select date '1980-01-01' from t"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+specifier|final
+name|String
+name|expected1
+init|=
+literal|"SELECT TIME '00:00:00'\n"
+operator|+
+literal|"FROM `T`"
+decl_stmt|;
+name|sql
+argument_list|(
+literal|"select time '00:00:00' from t"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected1
+argument_list|)
+expr_stmt|;
+specifier|final
+name|String
+name|expected2
+init|=
+literal|"SELECT TIMESTAMP '1980-01-01 00:00:00'\n"
+operator|+
+literal|"FROM `T`"
+decl_stmt|;
+name|sql
+argument_list|(
+literal|"select timestamp '1980-01-01 00:00:00' from t"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected2
+argument_list|)
+expr_stmt|;
+specifier|final
+name|String
+name|expected3
+init|=
+literal|"SELECT INTERVAL '3' DAY\n"
+operator|+
+literal|"FROM `T`"
+decl_stmt|;
+name|sql
+argument_list|(
+literal|"select interval '3' day from t"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected3
+argument_list|)
+expr_stmt|;
+specifier|final
+name|String
+name|expected4
+init|=
+literal|"SELECT INTERVAL '5:6' HOUR TO MINUTE\n"
+operator|+
+literal|"FROM `T`"
+decl_stmt|;
+name|sql
+argument_list|(
+literal|"select interval '5:6' hour to minute from t"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected4
 argument_list|)
 expr_stmt|;
 block|}
@@ -22827,7 +23034,7 @@ operator|.
 name|getMetadata
 argument_list|()
 decl_stmt|;
-name|assertTrue
+name|assertThat
 argument_list|(
 name|metadata
 operator|.
@@ -22835,9 +23042,14 @@ name|isReservedFunctionName
 argument_list|(
 literal|"ABS"
 argument_list|)
+argument_list|,
+name|is
+argument_list|(
+literal|true
+argument_list|)
 argument_list|)
 expr_stmt|;
-name|assertFalse
+name|assertThat
 argument_list|(
 name|metadata
 operator|.
@@ -22845,9 +23057,14 @@ name|isReservedFunctionName
 argument_list|(
 literal|"FOO"
 argument_list|)
+argument_list|,
+name|is
+argument_list|(
+literal|false
+argument_list|)
 argument_list|)
 expr_stmt|;
-name|assertTrue
+name|assertThat
 argument_list|(
 name|metadata
 operator|.
@@ -22855,9 +23072,14 @@ name|isContextVariableName
 argument_list|(
 literal|"CURRENT_USER"
 argument_list|)
+argument_list|,
+name|is
+argument_list|(
+literal|true
+argument_list|)
 argument_list|)
 expr_stmt|;
-name|assertTrue
+name|assertThat
 argument_list|(
 name|metadata
 operator|.
@@ -22865,9 +23087,14 @@ name|isContextVariableName
 argument_list|(
 literal|"CURRENT_CATALOG"
 argument_list|)
+argument_list|,
+name|is
+argument_list|(
+literal|true
+argument_list|)
 argument_list|)
 expr_stmt|;
-name|assertTrue
+name|assertThat
 argument_list|(
 name|metadata
 operator|.
@@ -22875,9 +23102,14 @@ name|isContextVariableName
 argument_list|(
 literal|"CURRENT_SCHEMA"
 argument_list|)
+argument_list|,
+name|is
+argument_list|(
+literal|true
+argument_list|)
 argument_list|)
 expr_stmt|;
-name|assertFalse
+name|assertThat
 argument_list|(
 name|metadata
 operator|.
@@ -22885,9 +23117,14 @@ name|isContextVariableName
 argument_list|(
 literal|"ABS"
 argument_list|)
+argument_list|,
+name|is
+argument_list|(
+literal|false
+argument_list|)
 argument_list|)
 expr_stmt|;
-name|assertFalse
+name|assertThat
 argument_list|(
 name|metadata
 operator|.
@@ -22895,9 +23132,14 @@ name|isContextVariableName
 argument_list|(
 literal|"FOO"
 argument_list|)
+argument_list|,
+name|is
+argument_list|(
+literal|false
+argument_list|)
 argument_list|)
 expr_stmt|;
-name|assertTrue
+name|assertThat
 argument_list|(
 name|metadata
 operator|.
@@ -22905,9 +23147,14 @@ name|isNonReservedKeyword
 argument_list|(
 literal|"A"
 argument_list|)
+argument_list|,
+name|is
+argument_list|(
+literal|true
+argument_list|)
 argument_list|)
 expr_stmt|;
-name|assertTrue
+name|assertThat
 argument_list|(
 name|metadata
 operator|.
@@ -22915,9 +23162,14 @@ name|isNonReservedKeyword
 argument_list|(
 literal|"KEY"
 argument_list|)
+argument_list|,
+name|is
+argument_list|(
+literal|true
+argument_list|)
 argument_list|)
 expr_stmt|;
-name|assertFalse
+name|assertThat
 argument_list|(
 name|metadata
 operator|.
@@ -22925,9 +23177,14 @@ name|isNonReservedKeyword
 argument_list|(
 literal|"SELECT"
 argument_list|)
+argument_list|,
+name|is
+argument_list|(
+literal|false
+argument_list|)
 argument_list|)
 expr_stmt|;
-name|assertFalse
+name|assertThat
 argument_list|(
 name|metadata
 operator|.
@@ -22935,9 +23192,14 @@ name|isNonReservedKeyword
 argument_list|(
 literal|"FOO"
 argument_list|)
+argument_list|,
+name|is
+argument_list|(
+literal|false
+argument_list|)
 argument_list|)
 expr_stmt|;
-name|assertFalse
+name|assertThat
 argument_list|(
 name|metadata
 operator|.
@@ -22945,9 +23207,14 @@ name|isNonReservedKeyword
 argument_list|(
 literal|"ABS"
 argument_list|)
+argument_list|,
+name|is
+argument_list|(
+literal|false
+argument_list|)
 argument_list|)
 expr_stmt|;
-name|assertTrue
+name|assertThat
 argument_list|(
 name|metadata
 operator|.
@@ -22955,9 +23222,14 @@ name|isKeyword
 argument_list|(
 literal|"ABS"
 argument_list|)
+argument_list|,
+name|is
+argument_list|(
+literal|true
+argument_list|)
 argument_list|)
 expr_stmt|;
-name|assertTrue
+name|assertThat
 argument_list|(
 name|metadata
 operator|.
@@ -22965,9 +23237,14 @@ name|isKeyword
 argument_list|(
 literal|"CURRENT_USER"
 argument_list|)
+argument_list|,
+name|is
+argument_list|(
+literal|true
+argument_list|)
 argument_list|)
 expr_stmt|;
-name|assertTrue
+name|assertThat
 argument_list|(
 name|metadata
 operator|.
@@ -22975,9 +23252,14 @@ name|isKeyword
 argument_list|(
 literal|"CURRENT_CATALOG"
 argument_list|)
+argument_list|,
+name|is
+argument_list|(
+literal|true
+argument_list|)
 argument_list|)
 expr_stmt|;
-name|assertTrue
+name|assertThat
 argument_list|(
 name|metadata
 operator|.
@@ -22985,9 +23267,14 @@ name|isKeyword
 argument_list|(
 literal|"CURRENT_SCHEMA"
 argument_list|)
+argument_list|,
+name|is
+argument_list|(
+literal|true
+argument_list|)
 argument_list|)
 expr_stmt|;
-name|assertTrue
+name|assertThat
 argument_list|(
 name|metadata
 operator|.
@@ -22995,9 +23282,14 @@ name|isKeyword
 argument_list|(
 literal|"KEY"
 argument_list|)
+argument_list|,
+name|is
+argument_list|(
+literal|true
+argument_list|)
 argument_list|)
 expr_stmt|;
-name|assertTrue
+name|assertThat
 argument_list|(
 name|metadata
 operator|.
@@ -23005,9 +23297,14 @@ name|isKeyword
 argument_list|(
 literal|"SELECT"
 argument_list|)
+argument_list|,
+name|is
+argument_list|(
+literal|true
+argument_list|)
 argument_list|)
 expr_stmt|;
-name|assertTrue
+name|assertThat
 argument_list|(
 name|metadata
 operator|.
@@ -23015,9 +23312,14 @@ name|isKeyword
 argument_list|(
 literal|"HAVING"
 argument_list|)
+argument_list|,
+name|is
+argument_list|(
+literal|true
+argument_list|)
 argument_list|)
 expr_stmt|;
-name|assertTrue
+name|assertThat
 argument_list|(
 name|metadata
 operator|.
@@ -23025,9 +23327,14 @@ name|isKeyword
 argument_list|(
 literal|"A"
 argument_list|)
+argument_list|,
+name|is
+argument_list|(
+literal|true
+argument_list|)
 argument_list|)
 expr_stmt|;
-name|assertFalse
+name|assertThat
 argument_list|(
 name|metadata
 operator|.
@@ -23035,9 +23342,14 @@ name|isKeyword
 argument_list|(
 literal|"BAR"
 argument_list|)
+argument_list|,
+name|is
+argument_list|(
+literal|false
+argument_list|)
 argument_list|)
 expr_stmt|;
-name|assertTrue
+name|assertThat
 argument_list|(
 name|metadata
 operator|.
@@ -23045,9 +23357,14 @@ name|isReservedWord
 argument_list|(
 literal|"SELECT"
 argument_list|)
+argument_list|,
+name|is
+argument_list|(
+literal|true
+argument_list|)
 argument_list|)
 expr_stmt|;
-name|assertTrue
+name|assertThat
 argument_list|(
 name|metadata
 operator|.
@@ -23055,9 +23372,14 @@ name|isReservedWord
 argument_list|(
 literal|"CURRENT_CATALOG"
 argument_list|)
+argument_list|,
+name|is
+argument_list|(
+literal|true
+argument_list|)
 argument_list|)
 expr_stmt|;
-name|assertTrue
+name|assertThat
 argument_list|(
 name|metadata
 operator|.
@@ -23065,15 +23387,25 @@ name|isReservedWord
 argument_list|(
 literal|"CURRENT_SCHEMA"
 argument_list|)
+argument_list|,
+name|is
+argument_list|(
+literal|true
+argument_list|)
 argument_list|)
 expr_stmt|;
-name|assertFalse
+name|assertThat
 argument_list|(
 name|metadata
 operator|.
 name|isReservedWord
 argument_list|(
 literal|"KEY"
+argument_list|)
+argument_list|,
+name|is
+argument_list|(
+literal|false
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -23085,7 +23417,7 @@ operator|.
 name|getJdbcKeywords
 argument_list|()
 decl_stmt|;
-name|assertTrue
+name|assertThat
 argument_list|(
 name|jdbcKeywords
 operator|.
@@ -23093,9 +23425,14 @@ name|contains
 argument_list|(
 literal|",COLLECT,"
 argument_list|)
+argument_list|,
+name|is
+argument_list|(
+literal|true
+argument_list|)
 argument_list|)
 expr_stmt|;
-name|assertTrue
+name|assertThat
 argument_list|(
 operator|!
 name|jdbcKeywords
@@ -23103,6 +23440,11 @@ operator|.
 name|contains
 argument_list|(
 literal|",SELECT,"
+argument_list|)
+argument_list|,
+name|is
+argument_list|(
+literal|true
 argument_list|)
 argument_list|)
 expr_stmt|;
