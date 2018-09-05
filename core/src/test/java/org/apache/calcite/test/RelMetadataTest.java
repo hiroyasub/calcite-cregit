@@ -4117,6 +4117,17 @@ name|Assume
 operator|.
 name|assumeTrue
 argument_list|(
+literal|"too slow to run every day, and it does not reproduce the issue"
+argument_list|,
+name|CalciteAssert
+operator|.
+name|ENABLE_SLOW
+argument_list|)
+expr_stmt|;
+name|Assume
+operator|.
+name|assumeTrue
+argument_list|(
 literal|"If cache size is too large, this test may fail and the "
 operator|+
 literal|"test won't be to blame"
