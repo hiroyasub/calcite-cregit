@@ -9247,14 +9247,18 @@ name|tester
 operator|.
 name|withCatalogReaderFactory
 argument_list|(
+parameter_list|(
 name|typeFactory
+parameter_list|,
+name|caseSensitive
+parameter_list|)
 lambda|->
 operator|new
 name|MockCatalogReader
 argument_list|(
 name|typeFactory
 argument_list|,
-literal|true
+name|caseSensitive
 argument_list|)
 block|{
 block_content|@Override public MockCatalogReader init(
@@ -9361,9 +9365,6 @@ empty_stmt|;
 block|}
 comment|// CHECKSTYLE: IGNORE 1
 block|}
-operator|.
-name|init
-argument_list|()
 block|)
 class|;
 end_class
