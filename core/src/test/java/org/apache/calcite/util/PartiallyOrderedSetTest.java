@@ -1289,6 +1289,17 @@ name|void
 name|testPosetBitsLarge
 parameter_list|()
 block|{
+name|Assume
+operator|.
+name|assumeTrue
+argument_list|(
+literal|"it takes 80 seconds, and the computations are exactly the same every time"
+argument_list|,
+name|CalciteAssert
+operator|.
+name|ENABLE_SLOW
+argument_list|)
+expr_stmt|;
 specifier|final
 name|PartiallyOrderedSet
 argument_list|<
