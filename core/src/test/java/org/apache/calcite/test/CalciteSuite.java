@@ -955,6 +955,10 @@ name|SqlValidatorTest
 operator|.
 name|class
 block|,
+name|SqlValidatorDynamicTest
+operator|.
+name|class
+block|,
 name|SqlValidatorMatchTest
 operator|.
 name|class
