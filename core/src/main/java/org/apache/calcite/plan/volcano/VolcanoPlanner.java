@@ -3944,6 +3944,8 @@ argument_list|,
 name|set
 argument_list|)
 decl_stmt|;
+comment|// Checking if tree is valid considerably slows down planning
+comment|// Only doing it if logger level is debug or finer
 if|if
 condition|(
 name|LOGGER
@@ -3952,9 +3954,14 @@ name|isDebugEnabled
 argument_list|()
 condition|)
 block|{
-name|validate
-argument_list|()
-expr_stmt|;
+assert|assert
+name|isValid
+argument_list|(
+name|Litmus
+operator|.
+name|THROW
+argument_list|)
+assert|;
 block|}
 return|return
 name|subset
@@ -4045,9 +4052,12 @@ block|}
 block|}
 comment|/**    * Checks internal consistency.    */
 specifier|protected
-name|void
-name|validate
-parameter_list|()
+name|boolean
+name|isValid
+parameter_list|(
+name|Litmus
+name|litmus
+parameter_list|)
 block|{
 for|for
 control|(
@@ -4066,17 +4076,16 @@ operator|!=
 literal|null
 condition|)
 block|{
-throw|throw
-operator|new
-name|AssertionError
+return|return
+name|litmus
+operator|.
+name|fail
 argument_list|(
-literal|"set ["
-operator|+
+literal|"set [{}] has been merged: it should not be in the list"
+argument_list|,
 name|set
-operator|+
-literal|"] has been merged: it should not be in the list"
 argument_list|)
-throw|;
+return|;
 block|}
 for|for
 control|(
@@ -4097,24 +4106,21 @@ operator|!=
 name|set
 condition|)
 block|{
-throw|throw
-operator|new
-name|AssertionError
+return|return
+name|litmus
+operator|.
+name|fail
 argument_list|(
-literal|"subset ["
-operator|+
+literal|"subset [{}] is in wrong set [{}]"
+argument_list|,
 name|subset
 operator|.
 name|getDescription
 argument_list|()
-operator|+
-literal|"] is in wrong set ["
-operator|+
+argument_list|,
 name|set
-operator|+
-literal|"]"
 argument_list|)
-throw|;
+return|;
 block|}
 for|for
 control|(
@@ -4155,41 +4161,40 @@ name|bestCost
 argument_list|)
 condition|)
 block|{
-throw|throw
-operator|new
-name|AssertionError
+return|return
+name|litmus
+operator|.
+name|fail
 argument_list|(
-literal|"rel ["
-operator|+
+literal|"rel [{}] has lower cost {} than best cost {} of subset [{}]"
+argument_list|,
 name|rel
 operator|.
 name|getDescription
 argument_list|()
-operator|+
-literal|"] has lower cost "
-operator|+
+argument_list|,
 name|relCost
-operator|+
-literal|" than best cost "
-operator|+
+argument_list|,
 name|subset
 operator|.
 name|bestCost
-operator|+
-literal|" of subset ["
-operator|+
+argument_list|,
 name|subset
 operator|.
 name|getDescription
 argument_list|()
-operator|+
-literal|"]"
 argument_list|)
-throw|;
+return|;
 block|}
 block|}
 block|}
 block|}
+return|return
+name|litmus
+operator|.
+name|succeed
+argument_list|()
+return|;
 block|}
 specifier|public
 name|void
