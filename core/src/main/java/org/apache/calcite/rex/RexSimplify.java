@@ -2043,10 +2043,6 @@ argument_list|(
 name|negateKind
 argument_list|)
 argument_list|,
-name|ImmutableList
-operator|.
-name|of
-argument_list|(
 operator|(
 operator|(
 name|RexCall
@@ -2056,12 +2052,6 @@ operator|)
 operator|.
 name|getOperands
 argument_list|()
-operator|.
-name|get
-argument_list|(
-literal|0
-argument_list|)
-argument_list|)
 argument_list|)
 argument_list|)
 return|;

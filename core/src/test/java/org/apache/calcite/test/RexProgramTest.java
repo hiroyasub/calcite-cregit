@@ -13964,11 +13964,6 @@ argument_list|)
 expr_stmt|;
 block|}
 annotation|@
-name|Ignore
-argument_list|(
-literal|"[CALCITE-2505] java.lang.AssertionError: wrong operand count 1 for IS DISTINCT FROM"
-argument_list|)
-annotation|@
 name|Test
 specifier|public
 name|void
@@ -13993,9 +13988,9 @@ argument_list|)
 argument_list|)
 argument_list|)
 argument_list|,
-literal|"..."
+literal|"IS DISTINCT FROM(?0.bool0, ?0.bool1)"
 argument_list|,
-literal|"..."
+literal|"IS DISTINCT FROM(?0.bool0, ?0.bool1)"
 argument_list|)
 expr_stmt|;
 block|}
