@@ -59,7 +59,7 @@ name|sql
 operator|.
 name|test
 operator|.
-name|SqlTesterImpl
+name|SqlValidatorTester
 import|;
 end_import
 
@@ -289,7 +289,7 @@ comment|// Dymamic schema should not be reused since it is mutable, so
 comment|// we create new SqlTestFactory for each test
 return|return
 operator|new
-name|SqlTesterImpl
+name|SqlValidatorTester
 argument_list|(
 name|SqlTestFactory
 operator|.

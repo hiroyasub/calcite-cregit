@@ -2711,6 +2711,13 @@ argument_list|,
 literal|"VARCHAR(10) NOT NULL"
 argument_list|)
 expr_stmt|;
+if|if
+condition|(
+name|Bug
+operator|.
+name|CALCITE_2539_FIXED
+condition|)
+block|{
 name|tester
 operator|.
 name|checkFails
@@ -2722,6 +2729,7 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
+block|}
 name|tester
 operator|.
 name|checkString
@@ -2826,6 +2834,13 @@ literal|"-1E-1"
 argument_list|)
 expr_stmt|;
 block|}
+if|if
+condition|(
+name|Bug
+operator|.
+name|CALCITE_2539_FIXED
+condition|)
+block|{
 name|tester
 operator|.
 name|checkFails
@@ -2848,6 +2863,7 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
+block|}
 comment|// string
 name|checkCastToString
 argument_list|(
@@ -3101,6 +3117,13 @@ argument_list|,
 literal|"FALSE"
 argument_list|)
 expr_stmt|;
+if|if
+condition|(
+name|Bug
+operator|.
+name|CALCITE_2539_FIXED
+condition|)
+block|{
 name|tester
 operator|.
 name|checkFails
@@ -3145,6 +3168,7 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
+block|}
 block|}
 annotation|@
 name|Test
@@ -3279,6 +3303,13 @@ expr_stmt|;
 block|}
 else|else
 block|{
+if|if
+condition|(
+name|Bug
+operator|.
+name|CALCITE_2539_FIXED
+condition|)
+block|{
 name|checkCastFails
 argument_list|(
 name|MAX_OVERFLOW_NUMERIC_STRINGS
@@ -3307,6 +3338,7 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
+block|}
 block|}
 comment|// Convert from string to type
 name|checkCastToScalarOkay
@@ -3347,6 +3379,13 @@ name|i
 index|]
 argument_list|)
 expr_stmt|;
+if|if
+condition|(
+name|Bug
+operator|.
+name|CALCITE_2539_FIXED
+condition|)
+block|{
 name|checkCastFails
 argument_list|(
 literal|"'"
@@ -3383,6 +3422,7 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
+block|}
 comment|// Convert from type to string
 name|checkCastToString
 argument_list|(
@@ -3432,6 +3472,13 @@ argument_list|,
 literal|null
 argument_list|)
 expr_stmt|;
+if|if
+condition|(
+name|Bug
+operator|.
+name|CALCITE_2539_FIXED
+condition|)
+block|{
 name|checkCastFails
 argument_list|(
 literal|"'notnumeric'"
@@ -3443,6 +3490,7 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
+block|}
 block|}
 block|}
 annotation|@
@@ -5268,6 +5316,13 @@ argument_list|,
 literal|"15"
 argument_list|)
 expr_stmt|;
+if|if
+condition|(
+name|Bug
+operator|.
+name|CALCITE_2539_FIXED
+condition|)
+block|{
 name|tester
 operator|.
 name|checkFails
@@ -5356,6 +5411,7 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
+block|}
 block|}
 annotation|@
 name|Test
@@ -5669,6 +5725,13 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
+if|if
+condition|(
+name|Bug
+operator|.
+name|CALCITE_2539_FIXED
+condition|)
+block|{
 name|tester
 operator|.
 name|checkFails
@@ -5724,6 +5787,7 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
+block|}
 comment|// timestamp<-> string
 name|checkCastToString
 argument_list|(
@@ -5846,6 +5910,13 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
+if|if
+condition|(
+name|Bug
+operator|.
+name|CALCITE_2539_FIXED
+condition|)
+block|{
 name|tester
 operator|.
 name|checkFails
@@ -5890,6 +5961,7 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
+block|}
 comment|// date<-> string
 name|checkCastToString
 argument_list|(
@@ -5953,6 +6025,13 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
+if|if
+condition|(
+name|Bug
+operator|.
+name|CALCITE_2539_FIXED
+condition|)
+block|{
 name|tester
 operator|.
 name|checkFails
@@ -5975,6 +6054,7 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
+block|}
 comment|// cast null
 name|tester
 operator|.
@@ -7611,6 +7691,13 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
+if|if
+condition|(
+name|Bug
+operator|.
+name|CALCITE_2539_FIXED
+condition|)
+block|{
 name|tester
 operator|.
 name|checkFails
@@ -7633,6 +7720,7 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
+block|}
 name|tester
 operator|.
 name|checkScalar
@@ -7742,6 +7830,13 @@ argument_list|,
 literal|"INTEGER NOT NULL"
 argument_list|)
 expr_stmt|;
+if|if
+condition|(
+name|Bug
+operator|.
+name|CALCITE_2539_FIXED
+condition|)
+block|{
 name|tester
 operator|.
 name|checkFails
@@ -7753,6 +7848,7 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
+block|}
 name|tester
 operator|.
 name|checkScalar
@@ -8804,6 +8900,13 @@ argument_list|(
 literal|"1e1 / cast(null as float)"
 argument_list|)
 expr_stmt|;
+if|if
+condition|(
+name|Bug
+operator|.
+name|CALCITE_2539_FIXED
+condition|)
+block|{
 name|tester
 operator|.
 name|checkFails
@@ -8815,6 +8918,7 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
+block|}
 block|}
 annotation|@
 name|Test
@@ -16997,6 +17101,13 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
+if|if
+condition|(
+name|Bug
+operator|.
+name|CALCITE_2539_FIXED
+condition|)
+block|{
 name|tester
 operator|.
 name|checkFails
@@ -17019,6 +17130,7 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
+block|}
 comment|// all the following tests wrong results due to missing functionality
 comment|// or defect (FRG-375, 377).
 if|if
@@ -24015,6 +24127,13 @@ argument_list|,
 name|VM_JAVA
 argument_list|)
 expr_stmt|;
+if|if
+condition|(
+name|Bug
+operator|.
+name|CALCITE_2539_FIXED
+condition|)
+block|{
 comment|// TODO: Not implemented in operator test execution code
 name|tester
 operator|.
@@ -24039,6 +24158,7 @@ literal|true
 argument_list|)
 expr_stmt|;
 block|}
+block|}
 annotation|@
 name|Test
 specifier|public
@@ -24059,6 +24179,13 @@ argument_list|,
 name|VM_JAVA
 argument_list|)
 expr_stmt|;
+if|if
+condition|(
+name|Bug
+operator|.
+name|CALCITE_2539_FIXED
+condition|)
+block|{
 comment|// TODO: Not implemented in operator test execution code
 name|tester
 operator|.
@@ -24082,6 +24209,7 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
+block|}
 block|}
 annotation|@
 name|Test
@@ -24142,6 +24270,13 @@ argument_list|,
 name|VM_JAVA
 argument_list|)
 expr_stmt|;
+if|if
+condition|(
+name|Bug
+operator|.
+name|CALCITE_2539_FIXED
+condition|)
+block|{
 comment|// TODO: Not implemented in operator test execution code
 name|tester
 operator|.
@@ -24165,6 +24300,7 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
+block|}
 block|}
 annotation|@
 name|Test
@@ -24611,6 +24747,13 @@ argument_list|)
 expr_stmt|;
 comment|// Postgres doesn't support DOW, ISODOW, DOY and WEEK on INTERVAL DAY TIME type.
 comment|// SQL standard doesn't have extract units for DOW, ISODOW, DOY and WEEK.
+if|if
+condition|(
+name|Bug
+operator|.
+name|CALCITE_2539_FIXED
+condition|)
+block|{
 name|tester
 operator|.
 name|checkFails
@@ -24655,6 +24798,7 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
+block|}
 name|tester
 operator|.
 name|checkFails
@@ -25216,6 +25360,13 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
+if|if
+condition|(
+name|Bug
+operator|.
+name|CALCITE_2539_FIXED
+condition|)
+block|{
 comment|// TODO: Not implemented in operator test execution code
 name|tester
 operator|.
@@ -25252,6 +25403,7 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
+block|}
 name|tester
 operator|.
 name|checkScalar
@@ -27868,7 +28020,7 @@ name|tester
 operator|.
 name|checkColumnType
 argument_list|(
-name|SqlTesterImpl
+name|AbstractSqlTester
 operator|.
 name|buildQueryAgg
 argument_list|(
@@ -30414,6 +30566,13 @@ comment|// they are truncated. See testCastTruncates().
 block|}
 else|else
 block|{
+if|if
+condition|(
+name|Bug
+operator|.
+name|CALCITE_2539_FIXED
+condition|)
+block|{
 comment|// Value outside legal bound should fail at runtime (not
 comment|// validate time).
 comment|//
@@ -30438,6 +30597,7 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
+block|}
 block|}
 block|}
 block|}
@@ -31163,7 +31323,7 @@ else|else
 block|{
 name|query
 operator|=
-name|SqlTesterImpl
+name|AbstractSqlTester
 operator|.
 name|buildQuery
 argument_list|(
@@ -31638,7 +31798,7 @@ specifier|static
 class|class
 name|TesterImpl
 extends|extends
-name|SqlTesterImpl
+name|SqlRuntimeTester
 block|{
 specifier|public
 name|TesterImpl
@@ -31771,16 +31931,11 @@ block|}
 annotation|@
 name|Override
 specifier|protected
-name|TesterImpl
+name|SqlTester
 name|with
 parameter_list|(
-specifier|final
-name|String
-name|name
-parameter_list|,
-specifier|final
-name|Object
-name|value
+name|SqlTestFactory
+name|factory
 parameter_list|)
 block|{
 return|return
@@ -31788,13 +31943,6 @@ operator|new
 name|TesterImpl
 argument_list|(
 name|factory
-operator|.
-name|with
-argument_list|(
-name|name
-argument_list|,
-name|value
-argument_list|)
 argument_list|)
 return|;
 block|}

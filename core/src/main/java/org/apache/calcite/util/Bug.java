@@ -218,6 +218,15 @@ name|CALCITE_2401_FIXED
 init|=
 literal|false
 decl_stmt|;
+comment|/** Whether    *<a href="https://issues.apache.org/jira/browse/CALCITE-2539">[CALCITE-2539]    * Several test case not passed in CalciteSqlOperatorTest.java</a> is fixed. */
+specifier|public
+specifier|static
+specifier|final
+name|boolean
+name|CALCITE_2539_FIXED
+init|=
+literal|false
+decl_stmt|;
 comment|/**    * Use this to flag temporary code.    */
 specifier|public
 specifier|static

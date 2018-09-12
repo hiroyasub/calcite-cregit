@@ -692,13 +692,14 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Implementation of {@link org.apache.calcite.test.SqlValidatorTestCase.Tester}  * that talks to a mock catalog.  */
+comment|/**  * Abstract implementation of  * {@link org.apache.calcite.test.SqlValidatorTestCase.Tester}  * that talks to a mock catalog.  *  *<p>This is to implement the default behavior: testing is only against the  * {@link SqlValidator}.  */
 end_comment
 
 begin_class
 specifier|public
+specifier|abstract
 class|class
-name|SqlTesterImpl
+name|AbstractSqlTester
 implements|implements
 name|SqlTester
 implements|,
@@ -710,7 +711,7 @@ name|SqlTestFactory
 name|factory
 decl_stmt|;
 specifier|public
-name|SqlTesterImpl
+name|AbstractSqlTester
 parameter_list|(
 name|SqlTestFactory
 name|factory
@@ -783,12 +784,15 @@ name|String
 name|expectedMsgPattern
 parameter_list|)
 block|{
+specifier|final
 name|SqlValidator
 name|validator
 decl_stmt|;
+specifier|final
 name|SqlNode
 name|sqlNode
 decl_stmt|;
+specifier|final
 name|SqlParserUtil
 operator|.
 name|StringAndPos
@@ -820,95 +824,22 @@ expr_stmt|;
 block|}
 catch|catch
 parameter_list|(
-name|SqlParseException
-name|e
-parameter_list|)
-block|{
-name|String
-name|errMessage
-init|=
-name|e
-operator|.
-name|getMessage
-argument_list|()
-decl_stmt|;
-if|if
-condition|(
-name|expectedMsgPattern
-operator|==
-literal|null
-condition|)
-block|{
-throw|throw
-operator|new
-name|RuntimeException
-argument_list|(
-literal|"Error while parsing query:"
-operator|+
-name|sap
-operator|.
-name|sql
-argument_list|,
-name|e
-argument_list|)
-throw|;
-block|}
-if|else if
-condition|(
-name|errMessage
-operator|==
-literal|null
-operator|||
-operator|!
-name|errMessage
-operator|.
-name|matches
-argument_list|(
-name|expectedMsgPattern
-argument_list|)
-condition|)
-block|{
-throw|throw
-operator|new
-name|RuntimeException
-argument_list|(
-literal|"Error did not match expected ["
-operator|+
-name|expectedMsgPattern
-operator|+
-literal|"] while parsing query ["
-operator|+
-name|sap
-operator|.
-name|sql
-operator|+
-literal|"]"
-argument_list|,
-name|e
-argument_list|)
-throw|;
-block|}
-return|return;
-block|}
-catch|catch
-parameter_list|(
 name|Throwable
 name|e
 parameter_list|)
 block|{
-throw|throw
-operator|new
-name|RuntimeException
+name|checkParseEx
 argument_list|(
-literal|"Error while parsing query: "
-operator|+
+name|e
+argument_list|,
+name|expectedMsgPattern
+argument_list|,
 name|sap
 operator|.
 name|sql
-argument_list|,
-name|e
 argument_list|)
-throw|;
+expr_stmt|;
+return|return;
 block|}
 name|Throwable
 name|thrown
@@ -947,6 +878,112 @@ argument_list|,
 name|sap
 argument_list|)
 expr_stmt|;
+block|}
+specifier|protected
+name|void
+name|checkParseEx
+parameter_list|(
+name|Throwable
+name|e
+parameter_list|,
+name|String
+name|expectedMsgPattern
+parameter_list|,
+name|String
+name|sql
+parameter_list|)
+block|{
+try|try
+block|{
+throw|throw
+name|e
+throw|;
+block|}
+catch|catch
+parameter_list|(
+name|SqlParseException
+name|spe
+parameter_list|)
+block|{
+name|String
+name|errMessage
+init|=
+name|spe
+operator|.
+name|getMessage
+argument_list|()
+decl_stmt|;
+if|if
+condition|(
+name|expectedMsgPattern
+operator|==
+literal|null
+condition|)
+block|{
+throw|throw
+operator|new
+name|RuntimeException
+argument_list|(
+literal|"Error while parsing query:"
+operator|+
+name|sql
+argument_list|,
+name|spe
+argument_list|)
+throw|;
+block|}
+if|else if
+condition|(
+name|errMessage
+operator|==
+literal|null
+operator|||
+operator|!
+name|errMessage
+operator|.
+name|matches
+argument_list|(
+name|expectedMsgPattern
+argument_list|)
+condition|)
+block|{
+throw|throw
+operator|new
+name|RuntimeException
+argument_list|(
+literal|"Error did not match expected ["
+operator|+
+name|expectedMsgPattern
+operator|+
+literal|"] while parsing query ["
+operator|+
+name|sql
+operator|+
+literal|"]"
+argument_list|,
+name|spe
+argument_list|)
+throw|;
+block|}
+block|}
+catch|catch
+parameter_list|(
+name|Throwable
+name|t
+parameter_list|)
+block|{
+throw|throw
+operator|new
+name|RuntimeException
+argument_list|(
+literal|"Error while parsing query: "
+operator|+
+name|sql
+argument_list|,
+name|t
+argument_list|)
+throw|;
+block|}
 block|}
 specifier|public
 name|RelDataType
@@ -1686,7 +1723,7 @@ block|}
 block|}
 block|}
 specifier|public
-name|SqlTesterImpl
+name|SqlTester
 name|withQuoting
 parameter_list|(
 name|Quoting
@@ -1792,7 +1829,7 @@ argument_list|)
 return|;
 block|}
 specifier|public
-name|SqlTesterImpl
+name|SqlTester
 name|withConformance
 parameter_list|(
 name|SqlConformance
@@ -1814,7 +1851,7 @@ name|DEFAULT
 expr_stmt|;
 block|}
 specifier|final
-name|SqlTesterImpl
+name|SqlTester
 name|tester
 init|=
 name|with
@@ -1876,7 +1913,7 @@ argument_list|)
 return|;
 block|}
 specifier|public
-name|SqlTesterImpl
+name|SqlTester
 name|withConnectionFactory
 parameter_list|(
 name|CalciteAssert
@@ -1895,7 +1932,8 @@ argument_list|)
 return|;
 block|}
 specifier|protected
-name|SqlTesterImpl
+specifier|final
+name|SqlTester
 name|with
 parameter_list|(
 specifier|final
@@ -1908,8 +1946,7 @@ name|value
 parameter_list|)
 block|{
 return|return
-operator|new
-name|SqlTesterImpl
+name|with
 argument_list|(
 name|factory
 operator|.
@@ -1922,6 +1959,15 @@ argument_list|)
 argument_list|)
 return|;
 block|}
+specifier|protected
+specifier|abstract
+name|SqlTester
+name|with
+parameter_list|(
+name|SqlTestFactory
+name|factory
+parameter_list|)
+function_decl|;
 comment|// SqlTester methods
 specifier|public
 name|void
@@ -2839,7 +2885,7 @@ literal|" from (values (1)) as t(x) group by x"
 return|;
 block|}
 comment|/**    * Builds a query that extracts all literals as columns in an underlying    * select.    *    *<p>For example,</p>    *    *<blockquote>{@code 1< 5}</blockquote>    *    *<p>becomes</p>    *    *<blockquote>{@code SELECT p0< p1    * FROM (VALUES (1, 5)) AS t(p0, p1)}</blockquote>    *    *<p>Null literals don't have enough type information to be extracted.    * We push down {@code CAST(NULL AS type)} but raw nulls such as    * {@code CASE 1 WHEN 2 THEN 'a' ELSE NULL END} are left as is.</p>    *    * @param expression Scalar expression    * @return Query that evaluates a scalar expression    */
-specifier|private
+specifier|protected
 name|String
 name|buildQuery2
 parameter_list|(
@@ -3492,7 +3538,7 @@ end_class
 
 begin_comment
 unit|}
-comment|// End SqlTesterImpl.java
+comment|// End AbstractSqlTester.java
 end_comment
 
 end_unit

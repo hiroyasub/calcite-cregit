@@ -73,7 +73,7 @@ name|sql
 operator|.
 name|test
 operator|.
-name|SqlTesterImpl
+name|SqlValidatorTester
 import|;
 end_import
 
@@ -575,7 +575,7 @@ parameter_list|()
 block|{
 return|return
 operator|new
-name|SqlTesterImpl
+name|SqlValidatorTester
 argument_list|(
 name|SPOOLER_VALIDATOR
 argument_list|)

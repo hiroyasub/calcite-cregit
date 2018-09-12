@@ -2146,7 +2146,7 @@ parameter_list|()
 block|{
 return|return
 operator|new
-name|SqlTesterImpl
+name|SqlValidatorTester
 argument_list|(
 name|ADVISOR_TEST_FACTORY
 argument_list|)
