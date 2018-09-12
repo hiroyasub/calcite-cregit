@@ -204,6 +204,18 @@ import|;
 end_import
 
 begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|concurrent
+operator|.
+name|TimeUnit
+import|;
+end_import
+
+begin_import
 import|import static
 name|org
 operator|.
@@ -380,6 +392,26 @@ block|}
 block|}
 return|;
 block|}
+name|String
+name|configurationFileName
+init|=
+literal|null
+decl_stmt|;
+comment|// use default one
+comment|// Apache Jenkins often fails with
+comment|// CassandraAdapterTest Cassandra daemon did not start within timeout (20 sec by default)
+name|long
+name|startUpTimeoutMillis
+init|=
+name|TimeUnit
+operator|.
+name|SECONDS
+operator|.
+name|toMillis
+argument_list|(
+literal|60
+argument_list|)
+decl_stmt|;
 name|CassandraCQLUnit
 name|rule
 init|=
@@ -391,6 +423,10 @@ name|ClassPathCQLDataSet
 argument_list|(
 literal|"twissandra.cql"
 argument_list|)
+argument_list|,
+name|configurationFileName
+argument_list|,
+name|startUpTimeoutMillis
 argument_list|)
 decl_stmt|;
 comment|// This static init is necessary otherwise tests fail with CassandraUnit in IntelliJ (jdk10)
