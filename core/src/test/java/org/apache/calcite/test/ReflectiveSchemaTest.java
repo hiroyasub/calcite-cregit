@@ -4836,9 +4836,6 @@ name|Integer
 index|[]
 name|primesBoxed
 init|=
-operator|new
-name|Integer
-index|[]
 block|{
 literal|1
 block|,
@@ -4853,9 +4850,6 @@ name|int
 index|[]
 name|primes
 init|=
-operator|new
-name|int
-index|[]
 block|{
 literal|1
 block|,
@@ -4870,9 +4864,6 @@ name|IntHolder
 index|[]
 name|primesCustomBoxed
 init|=
-operator|new
-name|IntHolder
-index|[]
 block|{
 operator|new
 name|IntHolder
@@ -4899,9 +4890,6 @@ name|IntAndString
 index|[]
 name|nullables
 init|=
-operator|new
-name|IntAndString
-index|[]
 block|{
 operator|new
 name|IntAndString
@@ -4942,9 +4930,6 @@ name|IntAndString
 index|[]
 name|bools
 init|=
-operator|new
-name|IntAndString
-index|[]
 block|{
 operator|new
 name|IntAndString

@@ -11004,9 +11004,6 @@ name|int
 index|[]
 name|indexRef
 init|=
-operator|new
-name|int
-index|[]
 block|{
 literal|0
 block|}
@@ -11193,9 +11190,6 @@ name|int
 index|[]
 name|indexRef
 init|=
-operator|new
-name|int
-index|[]
 block|{
 literal|0
 block|}

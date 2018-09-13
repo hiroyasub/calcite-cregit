@@ -1998,9 +1998,6 @@ name|String
 index|[]
 name|items
 operator|=
-operator|new
-name|String
-index|[]
 block|{
 literal|"paint"
 block|,

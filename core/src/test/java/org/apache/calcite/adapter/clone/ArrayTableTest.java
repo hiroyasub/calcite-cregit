@@ -195,9 +195,6 @@ name|long
 index|[]
 name|values
 init|=
-operator|new
-name|long
-index|[]
 block|{
 literal|0
 block|,
