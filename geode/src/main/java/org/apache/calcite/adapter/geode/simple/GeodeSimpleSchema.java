@@ -137,7 +137,7 @@ name|util
 operator|.
 name|GeodeUtils
 operator|.
-name|createRelDataType
+name|autodetectRelTypeFromRegion
 import|;
 end_import
 
@@ -292,31 +292,11 @@ name|region
 init|=
 name|GeodeUtils
 operator|.
-name|createRegionProxy
+name|createRegion
 argument_list|(
 name|clientCache
 argument_list|,
 name|regionName
-argument_list|)
-decl_stmt|;
-comment|// TODO: What if the region is empty
-name|Object
-name|regionEntry
-init|=
-name|region
-operator|.
-name|get
-argument_list|(
-name|region
-operator|.
-name|keySetOnServer
-argument_list|()
-operator|.
-name|iterator
-argument_list|()
-operator|.
-name|next
-argument_list|()
 argument_list|)
 decl_stmt|;
 name|Table
@@ -327,9 +307,9 @@ name|GeodeSimpleScannableTable
 argument_list|(
 name|regionName
 argument_list|,
-name|createRelDataType
+name|autodetectRelTypeFromRegion
 argument_list|(
-name|regionEntry
+name|region
 argument_list|)
 argument_list|,
 name|clientCache

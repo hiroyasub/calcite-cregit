@@ -27,6 +27,34 @@ name|apache
 operator|.
 name|calcite
 operator|.
+name|jdbc
+operator|.
+name|CalciteConnection
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|schema
+operator|.
+name|SchemaPlus
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
 name|test
 operator|.
 name|CalciteAssert
@@ -39,11 +67,11 @@ name|org
 operator|.
 name|apache
 operator|.
-name|calcite
+name|geode
 operator|.
-name|util
+name|cache
 operator|.
-name|Sources
+name|Cache
 import|;
 end_import
 
@@ -53,25 +81,21 @@ name|org
 operator|.
 name|apache
 operator|.
-name|calcite
+name|geode
 operator|.
-name|util
+name|cache
 operator|.
-name|Util
+name|Region
 import|;
 end_import
 
 begin_import
 import|import
-name|com
+name|org
 operator|.
-name|google
+name|junit
 operator|.
-name|common
-operator|.
-name|collect
-operator|.
-name|ImmutableMap
+name|BeforeClass
 import|;
 end_import
 
@@ -85,78 +109,244 @@ name|Test
 import|;
 end_import
 
+begin_import
+import|import
+name|java
+operator|.
+name|sql
+operator|.
+name|Connection
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|sql
+operator|.
+name|DriverManager
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|sql
+operator|.
+name|SQLException
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Arrays
+import|;
+end_import
+
 begin_comment
-comment|/**  * Tests for the {@code org.apache.calcite.adapter.geode} package.  *  *<p>Before calling this rel, you need to populate Geode, as follows:  *  *<blockquote><code>  * git clone https://github.com/vlsi/calcite-test-dataset<br>  * cd calcite-rel-dataset<br>  * mvn install  *</code></blockquote>  *  *<p>This will create a virtual machine with Geode and the "bookshop"  * and "zips" rel dataset.  */
+comment|/**  * Tests using {@code Bookshop} schema.  */
 end_comment
 
 begin_class
 specifier|public
 class|class
-name|GeodeAdapterBookshopIT
+name|GeodeBookstoreTest
+extends|extends
+name|AbstractGeodeTest
 block|{
-comment|/**    * Connection factory based on the "geode relational " model.    */
+annotation|@
+name|BeforeClass
 specifier|public
 specifier|static
-specifier|final
-name|ImmutableMap
+name|void
+name|setUp
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+name|Cache
+name|cache
+init|=
+name|POLICY
+operator|.
+name|cache
+argument_list|()
+decl_stmt|;
+name|Region
 argument_list|<
-name|String
+name|?
 argument_list|,
-name|String
+name|?
 argument_list|>
-name|GEODE
+name|bookMaster
 init|=
-name|ImmutableMap
+name|cache
 operator|.
-name|of
-argument_list|(
-literal|"model"
-argument_list|,
-name|Sources
-operator|.
-name|of
-argument_list|(
-name|GeodeAdapterBookshopIT
-operator|.
-name|class
-operator|.
-name|getResource
-argument_list|(
-literal|"/model-bookshop.json"
-argument_list|)
-argument_list|)
-operator|.
-name|file
+expr|<
+name|String
+decl_stmt|,
+name|Object
+decl|>
+name|createRegionFactory
 argument_list|()
-operator|.
-name|getAbsolutePath
-argument_list|()
+decl|.
+name|create
+argument_list|(
+literal|"BookMaster"
 argument_list|)
 decl_stmt|;
-comment|/**    * Whether to run Geode tests. Enabled by default, however rel is only    * included if "it" profile is activated ({@code -Pit}). To disable,    * specify {@code -Dcalcite.rel.geode=false} on the Java command line.    */
-specifier|public
-specifier|static
-specifier|final
-name|boolean
-name|ENABLED
-init|=
-name|Util
-operator|.
-name|getBooleanProperty
+operator|new
+name|JsonLoader
 argument_list|(
-literal|"calcite.rel.geode"
+name|bookMaster
+argument_list|)
+operator|.
+name|loadClasspathResource
+argument_list|(
+literal|"/book_master.json"
+argument_list|)
+expr_stmt|;
+name|Region
+argument_list|<
+name|?
 argument_list|,
-literal|true
+name|?
+argument_list|>
+name|bookCustomer
+init|=
+name|cache
+operator|.
+expr|<
+name|String
+decl_stmt|,
+name|Object
+decl|>
+name|createRegionFactory
+argument_list|()
+decl|.
+name|create
+argument_list|(
+literal|"BookCustomer"
 argument_list|)
 decl_stmt|;
-comment|/**    * Whether to run this rel.    */
-specifier|protected
-name|boolean
-name|enabled
+operator|new
+name|JsonLoader
+argument_list|(
+name|bookCustomer
+argument_list|)
+operator|.
+name|loadClasspathResource
+argument_list|(
+literal|"/book_customer.json"
+argument_list|)
+expr_stmt|;
+block|}
+specifier|private
+name|CalciteAssert
+operator|.
+name|ConnectionFactory
+name|newConnectionFactory
 parameter_list|()
 block|{
 return|return
-name|ENABLED
+operator|new
+name|CalciteAssert
+operator|.
+name|ConnectionFactory
+argument_list|()
+block|{
+annotation|@
+name|Override
+specifier|public
+name|Connection
+name|createConnection
+parameter_list|()
+throws|throws
+name|SQLException
+block|{
+specifier|final
+name|Connection
+name|connection
+init|=
+name|DriverManager
+operator|.
+name|getConnection
+argument_list|(
+literal|"jdbc:calcite:lex=JAVA"
+argument_list|)
+decl_stmt|;
+specifier|final
+name|SchemaPlus
+name|root
+init|=
+name|connection
+operator|.
+name|unwrap
+argument_list|(
+name|CalciteConnection
+operator|.
+name|class
+argument_list|)
+operator|.
+name|getRootSchema
+argument_list|()
+decl_stmt|;
+name|root
+operator|.
+name|add
+argument_list|(
+literal|"geode"
+argument_list|,
+operator|new
+name|GeodeSchema
+argument_list|(
+name|POLICY
+operator|.
+name|cache
+argument_list|()
+argument_list|,
+name|Arrays
+operator|.
+name|asList
+argument_list|(
+literal|"BookMaster"
+argument_list|,
+literal|"BookCustomer"
+argument_list|)
+argument_list|)
+argument_list|)
+expr_stmt|;
+return|return
+name|connection
+return|;
+block|}
+block|}
+return|;
+block|}
+specifier|private
+name|CalciteAssert
+operator|.
+name|AssertThat
+name|calciteAssert
+parameter_list|()
+block|{
+return|return
+name|CalciteAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|newConnectionFactory
+argument_list|()
+argument_list|)
 return|;
 block|}
 annotation|@
@@ -166,25 +356,12 @@ name|void
 name|testSelect
 parameter_list|()
 block|{
-name|CalciteAssert
-operator|.
-name|that
+name|calciteAssert
 argument_list|()
-operator|.
-name|enable
-argument_list|(
-name|enabled
-argument_list|()
-argument_list|)
-operator|.
-name|with
-argument_list|(
-name|GEODE
-argument_list|)
 operator|.
 name|query
 argument_list|(
-literal|"select * from \"BookMaster\""
+literal|"select * from geode.BookMaster"
 argument_list|)
 operator|.
 name|returnsCount
@@ -200,25 +377,12 @@ name|void
 name|testWhereEqual
 parameter_list|()
 block|{
-name|CalciteAssert
-operator|.
-name|that
+name|calciteAssert
 argument_list|()
-operator|.
-name|enable
-argument_list|(
-name|enabled
-argument_list|()
-argument_list|)
-operator|.
-name|with
-argument_list|(
-name|GEODE
-argument_list|)
 operator|.
 name|query
 argument_list|(
-literal|"select * from \"BookMaster\" WHERE \"itemNumber\" = 123"
+literal|"select * from geode.BookMaster WHERE itemNumber = 123"
 argument_list|)
 operator|.
 name|returnsCount
@@ -241,7 +405,7 @@ literal|"PLAN=GeodeToEnumerableConverter\n"
 operator|+
 literal|"  GeodeFilter(condition=[=(CAST($0):INTEGER, 123)])\n"
 operator|+
-literal|"    GeodeTableScan(table=[[TEST, BookMaster]])"
+literal|"    GeodeTableScan(table=[[geode, BookMaster]])"
 argument_list|)
 expr_stmt|;
 block|}
@@ -252,27 +416,14 @@ name|void
 name|testWhereWithAnd
 parameter_list|()
 block|{
-name|CalciteAssert
-operator|.
-name|that
+name|calciteAssert
 argument_list|()
-operator|.
-name|enable
-argument_list|(
-name|enabled
-argument_list|()
-argument_list|)
-operator|.
-name|with
-argument_list|(
-name|GEODE
-argument_list|)
 operator|.
 name|query
 argument_list|(
-literal|"select * from \"BookMaster\" WHERE \"itemNumber\"> 122 "
+literal|"select * from geode.BookMaster WHERE itemNumber> 122 "
 operator|+
-literal|"AND \"itemNumber\"<= 123"
+literal|"AND itemNumber<= 123"
 argument_list|)
 operator|.
 name|returnsCount
@@ -295,7 +446,7 @@ literal|"PLAN=GeodeToEnumerableConverter\n"
 operator|+
 literal|"  GeodeFilter(condition=[AND(>($0, 122),<=($0, 123))])\n"
 operator|+
-literal|"    GeodeTableScan(table=[[TEST, BookMaster]])"
+literal|"    GeodeTableScan(table=[[geode, BookMaster]])"
 argument_list|)
 expr_stmt|;
 block|}
@@ -306,27 +457,14 @@ name|void
 name|testWhereWithOr
 parameter_list|()
 block|{
-name|CalciteAssert
-operator|.
-name|that
+name|calciteAssert
 argument_list|()
-operator|.
-name|enable
-argument_list|(
-name|enabled
-argument_list|()
-argument_list|)
-operator|.
-name|with
-argument_list|(
-name|GEODE
-argument_list|)
 operator|.
 name|query
 argument_list|(
-literal|"select \"author\" from \"BookMaster\" "
+literal|"select author from geode.BookMaster "
 operator|+
-literal|"WHERE \"itemNumber\" = 123 OR \"itemNumber\" = 789"
+literal|"WHERE itemNumber = 123 OR itemNumber = 789"
 argument_list|)
 operator|.
 name|returnsCount
@@ -351,7 +489,7 @@ literal|"    GeodeFilter(condition=[OR(=(CAST($0):INTEGER, 123), "
 operator|+
 literal|"=(CAST($0):INTEGER, 789))])\n"
 operator|+
-literal|"      GeodeTableScan(table=[[TEST, BookMaster]])\n"
+literal|"      GeodeTableScan(table=[[geode, BookMaster]])\n"
 argument_list|)
 expr_stmt|;
 block|}
@@ -362,29 +500,16 @@ name|void
 name|testWhereWithAndOr
 parameter_list|()
 block|{
-name|CalciteAssert
-operator|.
-name|that
+name|calciteAssert
 argument_list|()
-operator|.
-name|enable
-argument_list|(
-name|enabled
-argument_list|()
-argument_list|)
-operator|.
-name|with
-argument_list|(
-name|GEODE
-argument_list|)
 operator|.
 name|query
 argument_list|(
-literal|"SELECT \"author\" from \"BookMaster\" "
+literal|"SELECT author from geode.BookMaster "
 operator|+
-literal|"WHERE (\"itemNumber\"> 123 AND \"itemNumber\" = 789) "
+literal|"WHERE (itemNumber> 123 AND itemNumber = 789) "
 operator|+
-literal|"OR \"author\"='Daisy Mae West'"
+literal|"OR author='Daisy Mae West'"
 argument_list|)
 operator|.
 name|returnsCount
@@ -411,7 +536,7 @@ literal|"=(CAST($4):VARCHAR CHARACTER SET \"ISO-8859-1\" "
 operator|+
 literal|"COLLATE \"ISO-8859-1$en_US$primary\", 'Daisy Mae West'))])\n"
 operator|+
-literal|"      GeodeTableScan(table=[[TEST, BookMaster]])\n"
+literal|"      GeodeTableScan(table=[[geode, BookMaster]])\n"
 operator|+
 literal|"\n"
 argument_list|)
@@ -425,29 +550,16 @@ name|void
 name|testWhereWithOrAnd
 parameter_list|()
 block|{
-name|CalciteAssert
-operator|.
-name|that
+name|calciteAssert
 argument_list|()
-operator|.
-name|enable
-argument_list|(
-name|enabled
-argument_list|()
-argument_list|)
-operator|.
-name|with
-argument_list|(
-name|GEODE
-argument_list|)
 operator|.
 name|query
 argument_list|(
-literal|"SELECT \"author\" from \"BookMaster\" "
+literal|"SELECT author from geode.BookMaster "
 operator|+
-literal|"WHERE (\"itemNumber\"> 100 OR \"itemNumber\" = 789) "
+literal|"WHERE (itemNumber> 100 OR itemNumber = 789) "
 operator|+
-literal|"AND \"author\"='Daisy Mae West'"
+literal|"AND author='Daisy Mae West'"
 argument_list|)
 operator|.
 name|returnsCount
@@ -473,25 +585,12 @@ name|void
 name|testProjectionsAndWhereGreatThan
 parameter_list|()
 block|{
-name|CalciteAssert
-operator|.
-name|that
+name|calciteAssert
 argument_list|()
-operator|.
-name|enable
-argument_list|(
-name|enabled
-argument_list|()
-argument_list|)
-operator|.
-name|with
-argument_list|(
-name|GEODE
-argument_list|)
 operator|.
 name|query
 argument_list|(
-literal|"select \"author\" from \"BookMaster\" WHERE \"itemNumber\"> 123"
+literal|"select author from geode.BookMaster WHERE itemNumber> 123"
 argument_list|)
 operator|.
 name|returnsCount
@@ -514,7 +613,7 @@ literal|"  GeodeProject(author=[$4])\n"
 operator|+
 literal|"    GeodeFilter(condition=[>($0, 123)])\n"
 operator|+
-literal|"      GeodeTableScan(table=[[TEST, BookMaster]])"
+literal|"      GeodeTableScan(table=[[geode, BookMaster]])"
 argument_list|)
 expr_stmt|;
 block|}
@@ -525,25 +624,12 @@ name|void
 name|testLimit
 parameter_list|()
 block|{
-name|CalciteAssert
-operator|.
-name|that
+name|calciteAssert
 argument_list|()
-operator|.
-name|enable
-argument_list|(
-name|enabled
-argument_list|()
-argument_list|)
-operator|.
-name|with
-argument_list|(
-name|GEODE
-argument_list|)
 operator|.
 name|query
 argument_list|(
-literal|"select * from \"BookMaster\" LIMIT 1"
+literal|"select * from geode.BookMaster LIMIT 1"
 argument_list|)
 operator|.
 name|returnsCount
@@ -566,7 +652,7 @@ literal|"PLAN=GeodeToEnumerableConverter\n"
 operator|+
 literal|"  GeodeSort(fetch=[1])\n"
 operator|+
-literal|"    GeodeTableScan(table=[[TEST, BookMaster]])"
+literal|"    GeodeTableScan(table=[[geode, BookMaster]])"
 argument_list|)
 expr_stmt|;
 block|}
@@ -577,25 +663,12 @@ name|void
 name|testSortWithProjection
 parameter_list|()
 block|{
-name|CalciteAssert
-operator|.
-name|that
+name|calciteAssert
 argument_list|()
-operator|.
-name|enable
-argument_list|(
-name|enabled
-argument_list|()
-argument_list|)
-operator|.
-name|with
-argument_list|(
-name|GEODE
-argument_list|)
 operator|.
 name|query
 argument_list|(
-literal|"select \"yearPublished\" from \"BookMaster\" ORDER BY \"yearPublished\" ASC"
+literal|"select yearPublished from geode.BookMaster ORDER BY yearPublished ASC"
 argument_list|)
 operator|.
 name|returnsCount
@@ -620,7 +693,7 @@ literal|"  GeodeSort(sort0=[$0], dir0=[ASC])\n"
 operator|+
 literal|"    GeodeProject(yearPublished=[$3])\n"
 operator|+
-literal|"      GeodeTableScan(table=[[TEST, BookMaster]])\n"
+literal|"      GeodeTableScan(table=[[geode, BookMaster]])\n"
 argument_list|)
 expr_stmt|;
 block|}
@@ -631,25 +704,12 @@ name|void
 name|testSortWithProjectionAndLimit
 parameter_list|()
 block|{
-name|CalciteAssert
-operator|.
-name|that
+name|calciteAssert
 argument_list|()
-operator|.
-name|enable
-argument_list|(
-name|enabled
-argument_list|()
-argument_list|)
-operator|.
-name|with
-argument_list|(
-name|GEODE
-argument_list|)
 operator|.
 name|query
 argument_list|(
-literal|"select \"yearPublished\" from \"BookMaster\" ORDER BY \"yearPublished\" "
+literal|"select yearPublished from geode.BookMaster ORDER BY yearPublished "
 operator|+
 literal|"LIMIT 2"
 argument_list|)
@@ -674,7 +734,7 @@ literal|"  GeodeProject(yearPublished=[$3])\n"
 operator|+
 literal|"    GeodeSort(sort0=[$3], dir0=[ASC], fetch=[2])\n"
 operator|+
-literal|"      GeodeTableScan(table=[[TEST, BookMaster]])\n"
+literal|"      GeodeTableScan(table=[[geode, BookMaster]])\n"
 argument_list|)
 expr_stmt|;
 block|}
@@ -685,27 +745,14 @@ name|void
 name|testSortBy2Columns
 parameter_list|()
 block|{
-name|CalciteAssert
-operator|.
-name|that
+name|calciteAssert
 argument_list|()
-operator|.
-name|enable
-argument_list|(
-name|enabled
-argument_list|()
-argument_list|)
-operator|.
-name|with
-argument_list|(
-name|GEODE
-argument_list|)
 operator|.
 name|query
 argument_list|(
-literal|"select \"yearPublished\", \"itemNumber\" from \"BookMaster\" ORDER BY "
+literal|"select yearPublished, itemNumber from geode.BookMaster ORDER BY "
 operator|+
-literal|"\"yearPublished\" ASC, \"itemNumber\" DESC"
+literal|"yearPublished ASC, itemNumber DESC"
 argument_list|)
 operator|.
 name|returnsCount
@@ -722,20 +769,23 @@ operator|+
 literal|"yearPublished=2011; itemNumber=123\n"
 argument_list|)
 operator|.
-name|explainContains
+name|queryContains
 argument_list|(
-literal|"PLAN=GeodeToEnumerableConverter\n"
+name|GeodeAssertions
+operator|.
+name|query
+argument_list|(
+literal|"SELECT yearPublished AS yearPublished, "
 operator|+
-literal|"  GeodeProject(yearPublished=[$3], itemNumber=[$0])\n"
+literal|"itemNumber AS itemNumber "
 operator|+
-literal|"    GeodeSort(sort0=[$3], sort1=[$0], dir0=[ASC], dir1=[DESC])\n"
-operator|+
-literal|"      GeodeTableScan(table=[[TEST, BookMaster]])\n"
+literal|"FROM /BookMaster ORDER BY yearPublished ASC, itemNumber DESC"
+argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
 comment|//
-comment|// TEST Group By and Aggregation Function Support
+comment|// geode Group By and Aggregation Function Support
 comment|//
 comment|/**    * OQL Error: Query contains group by columns not present in projected fields    * Solution: Automatically expand the projections to include all missing GROUP By columns.    */
 annotation|@
@@ -745,27 +795,14 @@ name|void
 name|testAddMissingGroupByColumnToProjectedFields
 parameter_list|()
 block|{
-name|CalciteAssert
-operator|.
-name|that
+name|calciteAssert
 argument_list|()
-operator|.
-name|enable
-argument_list|(
-name|enabled
-argument_list|()
-argument_list|)
-operator|.
-name|with
-argument_list|(
-name|GEODE
-argument_list|)
 operator|.
 name|query
 argument_list|(
-literal|"select \"yearPublished\" from \"BookMaster\" GROUP BY  \"yearPublished\", "
+literal|"select yearPublished from geode.BookMaster GROUP BY  yearPublished, "
 operator|+
-literal|"\"author\""
+literal|"author"
 argument_list|)
 operator|.
 name|returnsCount
@@ -790,7 +827,7 @@ literal|"  GeodeProject(yearPublished=[$0])\n"
 operator|+
 literal|"    GeodeAggregate(group=[{3, 4}])\n"
 operator|+
-literal|"      GeodeTableScan(table=[[TEST, BookMaster]])"
+literal|"      GeodeTableScan(table=[[geode, BookMaster]])"
 argument_list|)
 expr_stmt|;
 block|}
@@ -802,25 +839,12 @@ name|void
 name|testMissingProjectRelationOnGroupByColumnMatchingProjectedFields
 parameter_list|()
 block|{
-name|CalciteAssert
-operator|.
-name|that
+name|calciteAssert
 argument_list|()
-operator|.
-name|enable
-argument_list|(
-name|enabled
-argument_list|()
-argument_list|)
-operator|.
-name|with
-argument_list|(
-name|GEODE
-argument_list|)
 operator|.
 name|query
 argument_list|(
-literal|"select \"yearPublished\" from \"BookMaster\" GROUP BY \"yearPublished\""
+literal|"select yearPublished from geode.BookMaster GROUP BY yearPublished"
 argument_list|)
 operator|.
 name|returnsCount
@@ -841,7 +865,7 @@ literal|"PLAN=GeodeToEnumerableConverter\n"
 operator|+
 literal|"  GeodeAggregate(group=[{3}])\n"
 operator|+
-literal|"    GeodeTableScan(table=[[TEST, BookMaster]])"
+literal|"    GeodeTableScan(table=[[geode, BookMaster]])"
 argument_list|)
 expr_stmt|;
 block|}
@@ -853,27 +877,14 @@ name|void
 name|testMissingProjectRelationOnGroupByColumnMatchingProjectedFields2
 parameter_list|()
 block|{
-name|CalciteAssert
-operator|.
-name|that
+name|calciteAssert
 argument_list|()
-operator|.
-name|enable
-argument_list|(
-name|enabled
-argument_list|()
-argument_list|)
-operator|.
-name|with
-argument_list|(
-name|GEODE
-argument_list|)
 operator|.
 name|query
 argument_list|(
-literal|"select \"yearPublished\", MAX(\"retailCost\") from \"BookMaster\" GROUP BY "
+literal|"select yearPublished, MAX(retailCost) from geode.BookMaster GROUP BY "
 operator|+
-literal|"\"yearPublished\""
+literal|"yearPublished"
 argument_list|)
 operator|.
 name|returnsCount
@@ -894,7 +905,7 @@ literal|"PLAN=GeodeToEnumerableConverter\n"
 operator|+
 literal|"  GeodeAggregate(group=[{3}], EXPR$1=[MAX($2)])\n"
 operator|+
-literal|"    GeodeTableScan(table=[[TEST, BookMaster]])"
+literal|"    GeodeTableScan(table=[[geode, BookMaster]])"
 argument_list|)
 expr_stmt|;
 block|}
@@ -905,25 +916,12 @@ name|void
 name|testCount
 parameter_list|()
 block|{
-name|CalciteAssert
-operator|.
-name|that
+name|calciteAssert
 argument_list|()
-operator|.
-name|enable
-argument_list|(
-name|enabled
-argument_list|()
-argument_list|)
-operator|.
-name|with
-argument_list|(
-name|GEODE
-argument_list|)
 operator|.
 name|query
 argument_list|(
-literal|"select COUNT(\"retailCost\") from \"BookMaster\""
+literal|"select COUNT(retailCost) from geode.BookMaster"
 argument_list|)
 operator|.
 name|returnsCount
@@ -947,7 +945,7 @@ literal|"PLAN=GeodeToEnumerableConverter\n"
 operator|+
 literal|"  GeodeAggregate(group=[{}], EXPR$0=[COUNT($2)])\n"
 operator|+
-literal|"    GeodeTableScan(table=[[TEST, BookMaster]])\n"
+literal|"    GeodeTableScan(table=[[geode, BookMaster]])\n"
 argument_list|)
 expr_stmt|;
 block|}
@@ -958,25 +956,12 @@ name|void
 name|testCountStar
 parameter_list|()
 block|{
-name|CalciteAssert
-operator|.
-name|that
+name|calciteAssert
 argument_list|()
-operator|.
-name|enable
-argument_list|(
-name|enabled
-argument_list|()
-argument_list|)
-operator|.
-name|with
-argument_list|(
-name|GEODE
-argument_list|)
 operator|.
 name|query
 argument_list|(
-literal|"select COUNT(*) from \"BookMaster\""
+literal|"select COUNT(*) from geode.BookMaster"
 argument_list|)
 operator|.
 name|returnsCount
@@ -995,7 +980,7 @@ literal|"PLAN=GeodeToEnumerableConverter\n"
 operator|+
 literal|"  GeodeAggregate(group=[{}], EXPR$0=[COUNT()])\n"
 operator|+
-literal|"    GeodeTableScan(table=[[TEST, BookMaster]])\n"
+literal|"    GeodeTableScan(table=[[geode, BookMaster]])\n"
 argument_list|)
 expr_stmt|;
 block|}
@@ -1006,27 +991,14 @@ name|void
 name|testCountInGroupBy
 parameter_list|()
 block|{
-name|CalciteAssert
-operator|.
-name|that
+name|calciteAssert
 argument_list|()
-operator|.
-name|enable
-argument_list|(
-name|enabled
-argument_list|()
-argument_list|)
-operator|.
-name|with
-argument_list|(
-name|GEODE
-argument_list|)
 operator|.
 name|query
 argument_list|(
-literal|"select \"yearPublished\", COUNT(\"retailCost\") from \"BookMaster\" GROUP BY "
+literal|"select yearPublished, COUNT(retailCost) from geode.BookMaster GROUP BY "
 operator|+
-literal|"\"yearPublished\""
+literal|"yearPublished"
 argument_list|)
 operator|.
 name|returnsCount
@@ -1047,7 +1019,7 @@ literal|"PLAN=GeodeToEnumerableConverter\n"
 operator|+
 literal|"  GeodeAggregate(group=[{3}], EXPR$1=[COUNT($2)])\n"
 operator|+
-literal|"    GeodeTableScan(table=[[TEST, BookMaster]])\n"
+literal|"    GeodeTableScan(table=[[geode, BookMaster]])\n"
 argument_list|)
 expr_stmt|;
 block|}
@@ -1058,27 +1030,14 @@ name|void
 name|testMaxMinSumAvg
 parameter_list|()
 block|{
-name|CalciteAssert
-operator|.
-name|that
+name|calciteAssert
 argument_list|()
-operator|.
-name|enable
-argument_list|(
-name|enabled
-argument_list|()
-argument_list|)
-operator|.
-name|with
-argument_list|(
-name|GEODE
-argument_list|)
 operator|.
 name|query
 argument_list|(
-literal|"select MAX(\"retailCost\"), MIN(\"retailCost\"), SUM(\"retailCost\"), AVG"
+literal|"select MAX(retailCost), MIN(retailCost), SUM(retailCost), AVG"
 operator|+
-literal|"(\"retailCost\") from \"BookMaster\""
+literal|"(retailCost) from geode.BookMaster"
 argument_list|)
 operator|.
 name|returnsCount
@@ -1101,7 +1060,7 @@ literal|"  GeodeAggregate(group=[{}], EXPR$0=[MAX($2)], EXPR$1=[MIN($2)], EXPR$2
 operator|+
 literal|"], EXPR$3=[AVG($2)])\n"
 operator|+
-literal|"    GeodeTableScan(table=[[TEST, BookMaster]])\n"
+literal|"    GeodeTableScan(table=[[geode, BookMaster]])\n"
 argument_list|)
 expr_stmt|;
 block|}
@@ -1112,29 +1071,16 @@ name|void
 name|testMaxMinSumAvgInGroupBy
 parameter_list|()
 block|{
-name|CalciteAssert
-operator|.
-name|that
+name|calciteAssert
 argument_list|()
-operator|.
-name|enable
-argument_list|(
-name|enabled
-argument_list|()
-argument_list|)
-operator|.
-name|with
-argument_list|(
-name|GEODE
-argument_list|)
 operator|.
 name|query
 argument_list|(
-literal|"select \"yearPublished\", MAX(\"retailCost\"), MIN(\"retailCost\"), SUM"
+literal|"select yearPublished, MAX(retailCost), MIN(retailCost), SUM"
 operator|+
-literal|"(\"retailCost\"), AVG(\"retailCost\") from \"BookMaster\" "
+literal|"(retailCost), AVG(retailCost) from geode.BookMaster "
 operator|+
-literal|"GROUP BY  \"yearPublished\""
+literal|"GROUP BY  yearPublished"
 argument_list|)
 operator|.
 name|returnsCount
@@ -1161,7 +1107,7 @@ literal|"  GeodeAggregate(group=[{3}], EXPR$1=[MAX($2)], EXPR$2=[MIN($2)], EXPR$
 operator|+
 literal|"], EXPR$4=[AVG($2)])\n"
 operator|+
-literal|"    GeodeTableScan(table=[[TEST, BookMaster]])\n"
+literal|"    GeodeTableScan(table=[[geode, BookMaster]])\n"
 argument_list|)
 expr_stmt|;
 block|}
@@ -1172,27 +1118,14 @@ name|void
 name|testGroupBy
 parameter_list|()
 block|{
-name|CalciteAssert
-operator|.
-name|that
+name|calciteAssert
 argument_list|()
-operator|.
-name|enable
-argument_list|(
-name|enabled
-argument_list|()
-argument_list|)
-operator|.
-name|with
-argument_list|(
-name|GEODE
-argument_list|)
 operator|.
 name|query
 argument_list|(
-literal|"select \"yearPublished\", MAX(\"retailCost\") AS MAXCOST, \"author\" from "
+literal|"select yearPublished, MAX(retailCost) AS MAXCOST, author from "
 operator|+
-literal|"\"BookMaster\" GROUP BY \"yearPublished\", \"author\""
+literal|"geode.BookMaster GROUP BY yearPublished, author"
 argument_list|)
 operator|.
 name|returnsCount
@@ -1200,13 +1133,13 @@ argument_list|(
 literal|3
 argument_list|)
 operator|.
-name|returns
+name|returnsUnordered
 argument_list|(
-literal|"yearPublished=2011; MAXCOST=59.99; author=Jim Heavisides\n"
-operator|+
-literal|"yearPublished=1971; MAXCOST=11.99; author=Clarence Meeks\n"
-operator|+
-literal|"yearPublished=2011; MAXCOST=34.99; author=Daisy Mae West\n"
+literal|"yearPublished=2011; MAXCOST=59.99; author=Jim Heavisides"
+argument_list|,
+literal|"yearPublished=1971; MAXCOST=11.99; author=Clarence Meeks"
+argument_list|,
+literal|"yearPublished=2011; MAXCOST=34.99; author=Daisy Mae West"
 argument_list|)
 operator|.
 name|explainContains
@@ -1217,7 +1150,7 @@ literal|"  GeodeProject(yearPublished=[$0], MAXCOST=[$2], author=[$1])\n"
 operator|+
 literal|"    GeodeAggregate(group=[{3, 4}], MAXCOST=[MAX($2)])\n"
 operator|+
-literal|"      GeodeTableScan(table=[[TEST, BookMaster]])\n"
+literal|"      GeodeTableScan(table=[[geode, BookMaster]])\n"
 argument_list|)
 expr_stmt|;
 block|}
@@ -1228,25 +1161,12 @@ name|void
 name|testSelectWithNestedPdx
 parameter_list|()
 block|{
-name|CalciteAssert
-operator|.
-name|that
+name|calciteAssert
 argument_list|()
-operator|.
-name|enable
-argument_list|(
-name|enabled
-argument_list|()
-argument_list|)
-operator|.
-name|with
-argument_list|(
-name|GEODE
-argument_list|)
 operator|.
 name|query
 argument_list|(
-literal|"select * from \"BookCustomer\" limit 2"
+literal|"select * from geode.BookCustomer limit 2"
 argument_list|)
 operator|.
 name|returnsCount
@@ -1260,7 +1180,7 @@ literal|"PLAN=GeodeToEnumerableConverter\n"
 operator|+
 literal|"  GeodeSort(fetch=[2])\n"
 operator|+
-literal|"    GeodeTableScan(table=[[TEST, BookCustomer]])\n"
+literal|"    GeodeTableScan(table=[[geode, BookCustomer]])\n"
 argument_list|)
 expr_stmt|;
 block|}
@@ -1271,25 +1191,12 @@ name|void
 name|testSelectWithNestedPdx2
 parameter_list|()
 block|{
-name|CalciteAssert
-operator|.
-name|that
+name|calciteAssert
 argument_list|()
-operator|.
-name|enable
-argument_list|(
-name|enabled
-argument_list|()
-argument_list|)
-operator|.
-name|with
-argument_list|(
-name|GEODE
-argument_list|)
 operator|.
 name|query
 argument_list|(
-literal|"select \"primaryAddress\" from \"BookCustomer\" limit 2"
+literal|"select primaryAddress from geode.BookCustomer limit 2"
 argument_list|)
 operator|.
 name|returnsCount
@@ -1316,7 +1223,7 @@ literal|"  GeodeProject(primaryAddress=[$3])\n"
 operator|+
 literal|"    GeodeSort(fetch=[2])\n"
 operator|+
-literal|"      GeodeTableScan(table=[[TEST, BookCustomer]])\n"
+literal|"      GeodeTableScan(table=[[geode, BookCustomer]])\n"
 argument_list|)
 expr_stmt|;
 block|}
@@ -1327,25 +1234,12 @@ name|void
 name|testSelectWithNestedPdxFieldAccess
 parameter_list|()
 block|{
-name|CalciteAssert
-operator|.
-name|that
+name|calciteAssert
 argument_list|()
-operator|.
-name|enable
-argument_list|(
-name|enabled
-argument_list|()
-argument_list|)
-operator|.
-name|with
-argument_list|(
-name|GEODE
-argument_list|)
 operator|.
 name|query
 argument_list|(
-literal|"select \"primaryAddress\"['city'] as \"city\" from \"BookCustomer\" limit 2"
+literal|"select primaryAddress['city'] as city from geode.BookCustomer limit 2"
 argument_list|)
 operator|.
 name|returnsCount
@@ -1368,7 +1262,7 @@ literal|"  GeodeProject(city=[ITEM($3, 'city')])\n"
 operator|+
 literal|"    GeodeSort(fetch=[2])\n"
 operator|+
-literal|"      GeodeTableScan(table=[[TEST, BookCustomer]])\n"
+literal|"      GeodeTableScan(table=[[geode, BookCustomer]])\n"
 argument_list|)
 expr_stmt|;
 block|}
@@ -1379,25 +1273,12 @@ name|void
 name|testSelectWithNullFieldValue
 parameter_list|()
 block|{
-name|CalciteAssert
-operator|.
-name|that
+name|calciteAssert
 argument_list|()
-operator|.
-name|enable
-argument_list|(
-name|enabled
-argument_list|()
-argument_list|)
-operator|.
-name|with
-argument_list|(
-name|GEODE
-argument_list|)
 operator|.
 name|query
 argument_list|(
-literal|"select \"primaryAddress\"['addressLine2'] from \"BookCustomer\" limit"
+literal|"select primaryAddress['addressLine2'] from geode.BookCustomer limit"
 operator|+
 literal|" 2"
 argument_list|)
@@ -1422,7 +1303,7 @@ literal|"  GeodeProject(EXPR$0=[ITEM($3, 'addressLine2')])\n"
 operator|+
 literal|"    GeodeSort(fetch=[2])\n"
 operator|+
-literal|"      GeodeTableScan(table=[[TEST, BookCustomer]])\n"
+literal|"      GeodeTableScan(table=[[geode, BookCustomer]])\n"
 argument_list|)
 expr_stmt|;
 block|}
@@ -1433,29 +1314,16 @@ name|void
 name|testFilterWithNestedField
 parameter_list|()
 block|{
-name|CalciteAssert
-operator|.
-name|that
+name|calciteAssert
 argument_list|()
-operator|.
-name|enable
-argument_list|(
-name|enabled
-argument_list|()
-argument_list|)
-operator|.
-name|with
-argument_list|(
-name|GEODE
-argument_list|)
 operator|.
 name|query
 argument_list|(
-literal|"SELECT \"primaryAddress\"['postalCode'] AS \"postalCode\"\n"
+literal|"SELECT primaryAddress['postalCode'] AS postalCode\n"
 operator|+
-literal|"FROM \"TEST\".\"BookCustomer\"\n"
+literal|"FROM geode.BookCustomer\n"
 operator|+
-literal|"WHERE \"primaryAddress\"['postalCode']> '0'\n"
+literal|"WHERE primaryAddress['postalCode']> '0'\n"
 argument_list|)
 operator|.
 name|returnsCount
@@ -1480,15 +1348,239 @@ literal|"  GeodeProject(postalCode=[ITEM($3, 'postalCode')])\n"
 operator|+
 literal|"    GeodeFilter(condition=[>(ITEM($3, 'postalCode'), '0')])\n"
 operator|+
-literal|"      GeodeTableScan(table=[[TEST, BookCustomer]])\n"
+literal|"      GeodeTableScan(table=[[geode, BookCustomer]])\n"
 argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSqlSimple
+parameter_list|()
+throws|throws
+name|SQLException
+block|{
+name|calciteAssert
+argument_list|()
+operator|.
+name|query
+argument_list|(
+literal|"SELECT itemNumber FROM geode.BookMaster WHERE itemNumber> 123"
+argument_list|)
+operator|.
+name|runs
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSqlSingleNumberWhereFilter
+parameter_list|()
+throws|throws
+name|SQLException
+block|{
+name|calciteAssert
+argument_list|()
+operator|.
+name|query
+argument_list|(
+literal|"SELECT * FROM geode.BookMaster "
+operator|+
+literal|"WHERE itemNumber = 123"
+argument_list|)
+operator|.
+name|runs
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSqlDistinctSort
+parameter_list|()
+throws|throws
+name|SQLException
+block|{
+name|calciteAssert
+argument_list|()
+operator|.
+name|query
+argument_list|(
+literal|"SELECT DISTINCT itemNumber, author "
+operator|+
+literal|"FROM geode.BookMaster ORDER BY itemNumber, author"
+argument_list|)
+operator|.
+name|runs
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSqlDistinctSort2
+parameter_list|()
+throws|throws
+name|SQLException
+block|{
+name|calciteAssert
+argument_list|()
+operator|.
+name|query
+argument_list|(
+literal|"SELECT itemNumber, author "
+operator|+
+literal|"FROM geode.BookMaster GROUP BY itemNumber, author ORDER BY itemNumber, "
+operator|+
+literal|"author"
+argument_list|)
+operator|.
+name|runs
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSqlDistinctSort3
+parameter_list|()
+throws|throws
+name|SQLException
+block|{
+name|calciteAssert
+argument_list|()
+operator|.
+name|query
+argument_list|(
+literal|"SELECT DISTINCT * FROM geode.BookMaster"
+argument_list|)
+operator|.
+name|runs
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSqlLimit2
+parameter_list|()
+throws|throws
+name|SQLException
+block|{
+name|calciteAssert
+argument_list|()
+operator|.
+name|query
+argument_list|(
+literal|"SELECT DISTINCT * FROM geode.BookMaster LIMIT 2"
+argument_list|)
+operator|.
+name|runs
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSqlDisjunciton
+parameter_list|()
+throws|throws
+name|SQLException
+block|{
+name|calciteAssert
+argument_list|()
+operator|.
+name|query
+argument_list|(
+literal|"SELECT author FROM geode.BookMaster "
+operator|+
+literal|"WHERE itemNumber = 789 OR itemNumber = 123"
+argument_list|)
+operator|.
+name|runs
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSqlConjunciton
+parameter_list|()
+throws|throws
+name|SQLException
+block|{
+name|calciteAssert
+argument_list|()
+operator|.
+name|query
+argument_list|(
+literal|"SELECT author FROM geode.BookMaster "
+operator|+
+literal|"WHERE itemNumber = 789 AND author = 'Jim Heavisides'"
+argument_list|)
+operator|.
+name|runs
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSqlBookMasterWhere
+parameter_list|()
+throws|throws
+name|SQLException
+block|{
+name|calciteAssert
+argument_list|()
+operator|.
+name|query
+argument_list|(
+literal|"select author, title from geode.BookMaster "
+operator|+
+literal|"WHERE author = 'Jim Heavisides' LIMIT 2"
+argument_list|)
+operator|.
+name|runs
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSqlBookMasterCount
+parameter_list|()
+throws|throws
+name|SQLException
+block|{
+name|calciteAssert
+argument_list|()
+operator|.
+name|query
+argument_list|(
+literal|"select count(*) from geode.BookMaster"
+argument_list|)
+operator|.
+name|runs
+argument_list|()
 expr_stmt|;
 block|}
 block|}
 end_class
 
 begin_comment
-comment|// End GeodeAdapterBookshopIT.java
+comment|// End GeodeBookstoreTest.java
 end_comment
 
 end_unit

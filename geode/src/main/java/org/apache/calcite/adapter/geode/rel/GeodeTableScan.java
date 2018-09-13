@@ -167,7 +167,6 @@ name|RelDataType
 name|projectRowType
 decl_stmt|;
 comment|/**    * Creates a GeodeTableScan.    *    * @param cluster        Cluster    * @param traitSet       Traits    * @param table          Table    * @param geodeTable     Geode table    * @param projectRowType Fields and types to project; null to project raw row    */
-specifier|protected
 name|GeodeTableScan
 parameter_list|(
 name|RelOptCluster

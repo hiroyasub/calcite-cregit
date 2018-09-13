@@ -339,7 +339,6 @@ specifier|final
 name|String
 name|match
 decl_stmt|;
-specifier|public
 name|GeodeFilter
 parameter_list|(
 name|RelOptCluster
@@ -476,17 +475,12 @@ name|geodeImplementContext
 parameter_list|)
 block|{
 comment|// first call the input down the tree.
-operator|(
-operator|(
-name|GeodeRel
-operator|)
+name|geodeImplementContext
+operator|.
+name|visitChild
+argument_list|(
 name|getInput
 argument_list|()
-operator|)
-operator|.
-name|implement
-argument_list|(
-name|geodeImplementContext
 argument_list|)
 expr_stmt|;
 name|geodeImplementContext

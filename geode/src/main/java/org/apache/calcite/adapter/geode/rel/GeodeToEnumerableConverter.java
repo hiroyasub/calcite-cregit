@@ -323,9 +323,11 @@ name|apache
 operator|.
 name|calcite
 operator|.
-name|runtime
+name|rel
 operator|.
-name|Hook
+name|type
+operator|.
+name|RelDataType
 import|;
 end_import
 
@@ -587,7 +589,7 @@ name|List
 operator|.
 name|class
 argument_list|,
-name|String
+name|Long
 operator|.
 name|class
 argument_list|)
@@ -628,6 +630,13 @@ argument_list|(
 name|geodeImplementContext
 argument_list|)
 expr_stmt|;
+specifier|final
+name|RelDataType
+name|rowType
+init|=
+name|getRowType
+argument_list|()
+decl_stmt|;
 comment|// PhysType is Enumerable Adapter class that maps SQL types (getRowType)
 comment|// with physical Java types (getJavaTypes())
 specifier|final
@@ -731,6 +740,7 @@ argument_list|)
 argument_list|,
 name|GEODE_QUERY_METHOD
 argument_list|,
+comment|// fields
 name|constantArrayList
 argument_list|(
 name|Pair
@@ -750,7 +760,7 @@ operator|.
 name|class
 argument_list|)
 argument_list|,
-comment|// physical fields
+comment|// selected fields
 name|constantArrayList
 argument_list|(
 name|toListMapPairs
@@ -765,7 +775,7 @@ operator|.
 name|class
 argument_list|)
 argument_list|,
-comment|// selected fields
+comment|// aggregate functions
 name|constantArrayList
 argument_list|(
 name|toListMapPairs
@@ -824,15 +834,6 @@ argument_list|)
 argument_list|)
 argument_list|)
 decl_stmt|;
-name|Hook
-operator|.
-name|QUERY_PLAN
-operator|.
-name|run
-argument_list|(
-name|geodeImplementContext
-argument_list|)
-expr_stmt|;
 return|return
 name|implementor
 operator|.

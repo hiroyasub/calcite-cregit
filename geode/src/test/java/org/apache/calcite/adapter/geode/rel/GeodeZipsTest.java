@@ -27,6 +27,66 @@ name|apache
 operator|.
 name|calcite
 operator|.
+name|jdbc
+operator|.
+name|CalciteConnection
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|schema
+operator|.
+name|SchemaPlus
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|schema
+operator|.
+name|impl
+operator|.
+name|ViewTable
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|schema
+operator|.
+name|impl
+operator|.
+name|ViewTableMacro
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
 name|test
 operator|.
 name|CalciteAssert
@@ -39,11 +99,11 @@ name|org
 operator|.
 name|apache
 operator|.
-name|calcite
+name|geode
 operator|.
-name|util
+name|cache
 operator|.
-name|Sources
+name|Cache
 import|;
 end_import
 
@@ -53,25 +113,31 @@ name|org
 operator|.
 name|apache
 operator|.
-name|calcite
+name|geode
 operator|.
-name|util
+name|cache
 operator|.
-name|Util
+name|Region
 import|;
 end_import
 
 begin_import
 import|import
-name|com
+name|org
 operator|.
-name|google
+name|junit
 operator|.
-name|common
+name|BeforeClass
+import|;
+end_import
+
+begin_import
+import|import
+name|org
 operator|.
-name|collect
+name|junit
 operator|.
-name|ImmutableMap
+name|Ignore
 import|;
 end_import
 
@@ -85,82 +151,268 @@ name|Test
 import|;
 end_import
 
+begin_import
+import|import
+name|java
+operator|.
+name|sql
+operator|.
+name|Connection
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|sql
+operator|.
+name|DriverManager
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|sql
+operator|.
+name|SQLException
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Arrays
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Collections
+import|;
+end_import
+
 begin_comment
-comment|/**  * Tests for the {@code org.apache.calcite.adapter.geode} package.  *  *<p>Before calling this rel, you need to populate Geode, as follows:  *  *<blockquote><code>  * git clone https://github.com/vlsi/calcite-test-dataset<br>  * cd calcite-rel-dataset<br>  * mvn install  *</code></blockquote>  *  *<p>This will create a virtual machine with Geode and the "bookshop" and "zips" rel dataset.  */
+comment|/**  * Tests based on {@code zips-min.json} dataset. Runs automatically as part of CI.  */
 end_comment
 
 begin_class
 specifier|public
 class|class
-name|GeodeZipsIT
+name|GeodeZipsTest
+extends|extends
+name|AbstractGeodeTest
 block|{
-comment|/**    * Connection factory based on the "geode relational " model.    */
+annotation|@
+name|BeforeClass
 specifier|public
 specifier|static
-specifier|final
-name|ImmutableMap
+name|void
+name|setUp
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+name|Cache
+name|cache
+init|=
+name|POLICY
+operator|.
+name|cache
+argument_list|()
+decl_stmt|;
+name|Region
 argument_list|<
-name|String
+name|?
 argument_list|,
-name|String
+name|?
 argument_list|>
-name|GEODE_ZIPS
+name|region
 init|=
-name|ImmutableMap
+name|cache
 operator|.
-name|of
-argument_list|(
-literal|"CONFORMANCE"
-argument_list|,
-literal|"LENIENT"
-argument_list|,
-literal|"model"
-argument_list|,
-name|Sources
-operator|.
-name|of
-argument_list|(
-name|GeodeZipsIT
-operator|.
-name|class
-operator|.
-name|getResource
-argument_list|(
-literal|"/model-zips.json"
-argument_list|)
-argument_list|)
-operator|.
-name|file
+expr|<
+name|String
+decl_stmt|,
+name|Object
+decl|>
+name|createRegionFactory
 argument_list|()
-operator|.
-name|getAbsolutePath
-argument_list|()
+decl|.
+name|create
+argument_list|(
+literal|"zips"
 argument_list|)
 decl_stmt|;
-comment|/**    * Whether to run Geode tests. Enabled by default, however rel is only    * included if "it" profile is activated ({@code -Pit}). To disable,    * specify {@code -Dcalcite.rel.geode=false} on the Java command line.    */
-specifier|public
-specifier|static
-specifier|final
-name|boolean
-name|ENABLED
-init|=
-name|Util
-operator|.
-name|getBooleanProperty
+operator|new
+name|JsonLoader
 argument_list|(
-literal|"calcite.rel.geode"
-argument_list|,
-literal|true
+name|region
 argument_list|)
-decl_stmt|;
-comment|/**    * Whether to run this rel.    */
-specifier|protected
-name|boolean
-name|enabled
+operator|.
+name|loadClasspathResource
+argument_list|(
+literal|"/zips-mini.json"
+argument_list|)
+expr_stmt|;
+block|}
+specifier|private
+name|CalciteAssert
+operator|.
+name|ConnectionFactory
+name|newConnectionFactory
 parameter_list|()
 block|{
 return|return
-name|ENABLED
+operator|new
+name|CalciteAssert
+operator|.
+name|ConnectionFactory
+argument_list|()
+block|{
+annotation|@
+name|Override
+specifier|public
+name|Connection
+name|createConnection
+parameter_list|()
+throws|throws
+name|SQLException
+block|{
+specifier|final
+name|Connection
+name|connection
+init|=
+name|DriverManager
+operator|.
+name|getConnection
+argument_list|(
+literal|"jdbc:calcite:lex=JAVA"
+argument_list|)
+decl_stmt|;
+specifier|final
+name|SchemaPlus
+name|root
+init|=
+name|connection
+operator|.
+name|unwrap
+argument_list|(
+name|CalciteConnection
+operator|.
+name|class
+argument_list|)
+operator|.
+name|getRootSchema
+argument_list|()
+decl_stmt|;
+name|root
+operator|.
+name|add
+argument_list|(
+literal|"geode"
+argument_list|,
+operator|new
+name|GeodeSchema
+argument_list|(
+name|POLICY
+operator|.
+name|cache
+argument_list|()
+argument_list|,
+name|Collections
+operator|.
+name|singleton
+argument_list|(
+literal|"zips"
+argument_list|)
+argument_list|)
+argument_list|)
+expr_stmt|;
+comment|// add calcite view programmatically
+specifier|final
+name|String
+name|viewSql
+init|=
+literal|"select \"_id\" AS \"id\", \"city\", \"loc\", "
+operator|+
+literal|"cast(\"pop\" AS integer) AS \"pop\", cast(\"state\" AS varchar(2)) AS \"state\" "
+operator|+
+literal|"from \"geode\".\"zips\""
+decl_stmt|;
+name|ViewTableMacro
+name|macro
+init|=
+name|ViewTable
+operator|.
+name|viewMacro
+argument_list|(
+name|root
+argument_list|,
+name|viewSql
+argument_list|,
+name|Collections
+operator|.
+name|singletonList
+argument_list|(
+literal|"geode"
+argument_list|)
+argument_list|,
+name|Arrays
+operator|.
+name|asList
+argument_list|(
+literal|"geode"
+argument_list|,
+literal|"view"
+argument_list|)
+argument_list|,
+literal|false
+argument_list|)
+decl_stmt|;
+name|root
+operator|.
+name|add
+argument_list|(
+literal|"view"
+argument_list|,
+name|macro
+argument_list|)
+expr_stmt|;
+return|return
+name|connection
+return|;
+block|}
+block|}
+return|;
+block|}
+specifier|private
+name|CalciteAssert
+operator|.
+name|AssertThat
+name|calciteAssert
+parameter_list|()
+block|{
+return|return
+name|CalciteAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|newConnectionFactory
+argument_list|()
+argument_list|)
 return|;
 block|}
 annotation|@
@@ -170,25 +422,12 @@ name|void
 name|testGroupByView
 parameter_list|()
 block|{
-name|CalciteAssert
-operator|.
-name|that
+name|calciteAssert
 argument_list|()
-operator|.
-name|enable
-argument_list|(
-name|enabled
-argument_list|()
-argument_list|)
-operator|.
-name|with
-argument_list|(
-name|GEODE_ZIPS
-argument_list|)
 operator|.
 name|query
 argument_list|(
-literal|"SELECT \"state\", SUM(\"pop\") FROM \"geode\".\"ZIPS\" GROUP BY \"state\""
+literal|"SELECT state, SUM(pop) FROM view GROUP BY state"
 argument_list|)
 operator|.
 name|returnsCount
@@ -196,50 +435,49 @@ argument_list|(
 literal|51
 argument_list|)
 operator|.
-name|explainContains
+name|queryContains
 argument_list|(
-literal|"PLAN=GeodeToEnumerableConverter\n"
+name|GeodeAssertions
+operator|.
+name|query
+argument_list|(
+literal|"SELECT state AS state, "
 operator|+
-literal|"  GeodeAggregate(group=[{1}], EXPR$1=[SUM($0)])\n"
-operator|+
-literal|"    GeodeProject(pop=[CAST($3):INTEGER], state=[CAST($4):VARCHAR(2) CHARACTER SET"
-operator|+
-literal|" \"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$primary\"])\n"
-operator|+
-literal|"      GeodeTableScan(table=[[geode_raw, Zips]])\n"
+literal|"SUM(pop) AS EXPR$1 FROM /zips GROUP BY state"
+argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
 annotation|@
 name|Test
+annotation|@
+name|Ignore
+argument_list|(
+literal|"Currently fails"
+argument_list|)
 specifier|public
 name|void
 name|testGroupByViewWithAliases
 parameter_list|()
 block|{
-name|CalciteAssert
-operator|.
-name|that
+name|calciteAssert
 argument_list|()
-operator|.
-name|enable
-argument_list|(
-name|enabled
-argument_list|()
-argument_list|)
-operator|.
-name|with
-argument_list|(
-name|GEODE_ZIPS
-argument_list|)
 operator|.
 name|query
 argument_list|(
-literal|"SELECT \"state\" as \"st\", SUM(\"pop\") \"po\" "
+literal|"SELECT state as st, SUM(pop) po "
 operator|+
-literal|"FROM \"geode\".\"ZIPS\" GROUP BY "
-operator|+
-literal|"\"state\""
+literal|"FROM view GROUP BY state"
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|GeodeAssertions
+operator|.
+name|query
+argument_list|(
+literal|"SELECT state, SUM(pop) AS po FROM /zips GROUP BY state"
+argument_list|)
 argument_list|)
 operator|.
 name|returnsCount
@@ -257,7 +495,7 @@ literal|"    GeodeProject(pop=[CAST($3):INTEGER], state=[CAST($4):VARCHAR(2) CHA
 operator|+
 literal|" \"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$primary\"])\n"
 operator|+
-literal|"      GeodeTableScan(table=[[geode_raw, Zips]])\n"
+literal|"      GeodeTableScan(table=[[geode, zips]])\n"
 argument_list|)
 expr_stmt|;
 block|}
@@ -268,29 +506,14 @@ name|void
 name|testGroupByRaw
 parameter_list|()
 block|{
-name|CalciteAssert
-operator|.
-name|that
+name|calciteAssert
 argument_list|()
-operator|.
-name|enable
-argument_list|(
-name|enabled
-argument_list|()
-argument_list|)
-operator|.
-name|with
-argument_list|(
-name|GEODE_ZIPS
-argument_list|)
 operator|.
 name|query
 argument_list|(
-literal|"SELECT \"state\" as \"st\", SUM(\"pop\") \"po\" "
+literal|"SELECT state as st, SUM(pop) po "
 operator|+
-literal|"FROM \"geode_raw\".\"Zips\" GROUP"
-operator|+
-literal|" BY \"state\""
+literal|"FROM geode.zips GROUP BY state"
 argument_list|)
 operator|.
 name|returnsCount
@@ -304,7 +527,7 @@ literal|"PLAN=GeodeToEnumerableConverter\n"
 operator|+
 literal|"  GeodeAggregate(group=[{4}], po=[SUM($3)])\n"
 operator|+
-literal|"    GeodeTableScan(table=[[geode_raw, Zips]])\n"
+literal|"    GeodeTableScan(table=[[geode, zips]])\n"
 argument_list|)
 expr_stmt|;
 block|}
@@ -315,29 +538,14 @@ name|void
 name|testGroupByRawWithAliases
 parameter_list|()
 block|{
-name|CalciteAssert
-operator|.
-name|that
+name|calciteAssert
 argument_list|()
-operator|.
-name|enable
-argument_list|(
-name|enabled
-argument_list|()
-argument_list|)
-operator|.
-name|with
-argument_list|(
-name|GEODE_ZIPS
-argument_list|)
 operator|.
 name|query
 argument_list|(
-literal|"SELECT \"state\" AS \"st\", SUM(\"pop\") AS \"po\" "
+literal|"SELECT state AS st, SUM(pop) AS po "
 operator|+
-literal|"FROM \"geode_raw\".\"Zips\" "
-operator|+
-literal|"GROUP BY \"state\""
+literal|"FROM geode.zips GROUP BY state"
 argument_list|)
 operator|.
 name|returnsCount
@@ -351,7 +559,7 @@ literal|"PLAN=GeodeToEnumerableConverter\n"
 operator|+
 literal|"  GeodeAggregate(group=[{4}], po=[SUM($3)])\n"
 operator|+
-literal|"    GeodeTableScan(table=[[geode_raw, Zips]])\n"
+literal|"    GeodeTableScan(table=[[geode, zips]])\n"
 argument_list|)
 expr_stmt|;
 block|}
@@ -362,70 +570,50 @@ name|void
 name|testMaxRaw
 parameter_list|()
 block|{
-name|CalciteAssert
-operator|.
-name|that
+name|calciteAssert
 argument_list|()
-operator|.
-name|enable
-argument_list|(
-name|enabled
-argument_list|()
-argument_list|)
-operator|.
-name|with
-argument_list|(
-name|GEODE_ZIPS
-argument_list|)
 operator|.
 name|query
 argument_list|(
-literal|"SELECT MAX(\"pop\") FROM \"geode_raw\".\"Zips\""
+literal|"SELECT MAX(pop) FROM view"
 argument_list|)
 operator|.
-name|returnsCount
+name|returns
 argument_list|(
-literal|1
+literal|"EXPR$0=112047\n"
 argument_list|)
 operator|.
-name|explainContains
+name|queryContains
 argument_list|(
-literal|"PLAN=GeodeToEnumerableConverter\n"
-operator|+
-literal|"  GeodeAggregate(group=[{}], EXPR$0=[MAX($3)])\n"
-operator|+
-literal|"    GeodeTableScan(table=[[geode_raw, Zips]])\n"
+name|GeodeAssertions
+operator|.
+name|query
+argument_list|(
+literal|"SELECT MAX(pop) AS EXPR$0 FROM /zips"
+argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
 annotation|@
 name|Test
+annotation|@
+name|Ignore
+argument_list|(
+literal|"Currently fails"
+argument_list|)
 specifier|public
 name|void
 name|testJoin
 parameter_list|()
 block|{
-name|CalciteAssert
-operator|.
-name|that
+name|calciteAssert
 argument_list|()
-operator|.
-name|enable
-argument_list|(
-name|enabled
-argument_list|()
-argument_list|)
-operator|.
-name|with
-argument_list|(
-name|GEODE_ZIPS
-argument_list|)
 operator|.
 name|query
 argument_list|(
-literal|"SELECT \"r\".\"_id\" FROM \"geode_raw\".\"Zips\" AS \"v\" JOIN \"geode_raw\""
+literal|"SELECT r._id FROM geode.zips AS v "
 operator|+
-literal|".\"Zips\" AS \"r\" ON \"v\".\"_id\" = \"r\".\"_id\" LIMIT 1"
+literal|"JOIN geode.zips AS r ON v._id = r._id LIMIT 1"
 argument_list|)
 operator|.
 name|returnsCount
@@ -447,7 +635,7 @@ literal|"        GeodeProject(_id=[$0], _id0=[CAST($0):VARCHAR CHARACTER SET "
 operator|+
 literal|"\"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$primary\"])\n"
 operator|+
-literal|"          GeodeTableScan(table=[[geode_raw, Zips]])\n"
+literal|"          GeodeTableScan(table=[[geode, zips]])\n"
 operator|+
 literal|"      GeodeToEnumerableConverter\n"
 operator|+
@@ -455,7 +643,7 @@ literal|"        GeodeProject(_id0=[CAST($0):VARCHAR CHARACTER SET \"ISO-8859-1\
 operator|+
 literal|"\"ISO-8859-1$en_US$primary\"])\n"
 operator|+
-literal|"          GeodeTableScan(table=[[geode_raw, Zips]])\n"
+literal|"          GeodeTableScan(table=[[geode, zips]])\n"
 argument_list|)
 expr_stmt|;
 block|}
@@ -466,37 +654,19 @@ name|void
 name|testSelectLocItem
 parameter_list|()
 block|{
-name|CalciteAssert
-operator|.
-name|that
+name|calciteAssert
 argument_list|()
-operator|.
-name|enable
-argument_list|(
-name|enabled
-argument_list|()
-argument_list|)
-operator|.
-name|with
-argument_list|(
-name|GEODE_ZIPS
-argument_list|)
 operator|.
 name|query
 argument_list|(
-literal|"SELECT \"loc\"[0] as \"lat\", \"loc\"[1] as \"lon\" "
+literal|"SELECT loc[0] as lat, loc[1] as lon "
 operator|+
-literal|"FROM \"geode_raw\".\"Zips\" LIMIT 1"
-argument_list|)
-operator|.
-name|returnsCount
-argument_list|(
-literal|1
+literal|"FROM view LIMIT 1"
 argument_list|)
 operator|.
 name|returns
 argument_list|(
-literal|"lat=-74.700748; lon=41.65158\n"
+literal|"lat=-105.007985; lon=39.840562\n"
 argument_list|)
 operator|.
 name|explainContains
@@ -507,7 +677,7 @@ literal|"  GeodeProject(lat=[ITEM($2, 0)], lon=[ITEM($2, 1)])\n"
 operator|+
 literal|"    GeodeSort(fetch=[1])\n"
 operator|+
-literal|"      GeodeTableScan(table=[[geode_raw, Zips]])\n"
+literal|"      GeodeTableScan(table=[[geode, zips]])\n"
 argument_list|)
 expr_stmt|;
 block|}
@@ -518,27 +688,14 @@ name|void
 name|testItemPredicate
 parameter_list|()
 block|{
-name|CalciteAssert
-operator|.
-name|that
+name|calciteAssert
 argument_list|()
-operator|.
-name|enable
-argument_list|(
-name|enabled
-argument_list|()
-argument_list|)
-operator|.
-name|with
-argument_list|(
-name|GEODE_ZIPS
-argument_list|)
 operator|.
 name|query
 argument_list|(
-literal|"SELECT \"loc\"[0] as \"lat\", \"loc\"[1] as \"lon\" "
+literal|"SELECT loc[0] as lat, loc[1] as lon "
 operator|+
-literal|"FROM \"geode_raw\".\"Zips\" WHERE \"loc\"[0]< 0 LIMIT 1"
+literal|"FROM view WHERE loc[0]< 0 LIMIT 1"
 argument_list|)
 operator|.
 name|returnsCount
@@ -548,7 +705,7 @@ argument_list|)
 operator|.
 name|returns
 argument_list|(
-literal|"lat=-74.700748; lon=41.65158\n"
+literal|"lat=-105.007985; lon=39.840562\n"
 argument_list|)
 operator|.
 name|explainContains
@@ -561,30 +718,17 @@ literal|"    GeodeSort(fetch=[1])\n"
 operator|+
 literal|"      GeodeFilter(condition=[<(ITEM($2, 0), 0)])\n"
 operator|+
-literal|"        GeodeTableScan(table=[[geode_raw, Zips]])\n"
+literal|"        GeodeTableScan(table=[[geode, zips]])\n"
 argument_list|)
 expr_stmt|;
-name|CalciteAssert
-operator|.
-name|that
+name|calciteAssert
 argument_list|()
-operator|.
-name|enable
-argument_list|(
-name|enabled
-argument_list|()
-argument_list|)
-operator|.
-name|with
-argument_list|(
-name|GEODE_ZIPS
-argument_list|)
 operator|.
 name|query
 argument_list|(
-literal|"SELECT \"loc\"[0] as \"lat\", \"loc\"[1] as \"lon\" "
+literal|"SELECT loc[0] as lat, loc[1] as lon "
 operator|+
-literal|"FROM \"geode_raw\".\"Zips\" WHERE \"loc\"[0]> 0 LIMIT 1"
+literal|"FROM view WHERE loc[0]> 0 LIMIT 1"
 argument_list|)
 operator|.
 name|returnsCount
@@ -602,7 +746,7 @@ literal|"    GeodeSort(fetch=[1])\n"
 operator|+
 literal|"      GeodeFilter(condition=[>(ITEM($2, 0), 0)])\n"
 operator|+
-literal|"        GeodeTableScan(table=[[geode_raw, Zips]])\n"
+literal|"        GeodeTableScan(table=[[geode, zips]])\n"
 argument_list|)
 expr_stmt|;
 block|}
@@ -610,7 +754,7 @@ block|}
 end_class
 
 begin_comment
-comment|// End GeodeZipsIT.java
+comment|// End GeodeZipsTest.java
 end_comment
 
 end_unit

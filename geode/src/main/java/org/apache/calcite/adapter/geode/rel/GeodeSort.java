@@ -227,7 +227,6 @@ init|=
 literal|"DESC"
 decl_stmt|;
 comment|/** Creates a GeodeSort. */
-specifier|public
 name|GeodeSort
 parameter_list|(
 name|RelOptCluster
@@ -376,17 +375,12 @@ name|GeodeImplementContext
 name|geodeImplementContext
 parameter_list|)
 block|{
-operator|(
-operator|(
-name|GeodeRel
-operator|)
+name|geodeImplementContext
+operator|.
+name|visitChild
+argument_list|(
 name|getInput
 argument_list|()
-operator|)
-operator|.
-name|implement
-argument_list|(
-name|geodeImplementContext
 argument_list|)
 expr_stmt|;
 name|List
@@ -484,11 +478,12 @@ operator|)
 name|fetch
 operator|)
 operator|.
-name|getValue
-argument_list|()
+name|getValueAs
+argument_list|(
+name|Long
 operator|.
-name|toString
-argument_list|()
+name|class
+argument_list|)
 argument_list|)
 expr_stmt|;
 block|}

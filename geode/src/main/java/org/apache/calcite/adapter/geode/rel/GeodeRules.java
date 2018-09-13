@@ -396,7 +396,6 @@ specifier|public
 class|class
 name|GeodeRules
 block|{
-specifier|public
 specifier|static
 specifier|final
 name|RelOptRule
@@ -404,6 +403,10 @@ index|[]
 name|RULES
 init|=
 block|{
+name|GeodeSortLimitRule
+operator|.
+name|INSTANCE
+block|,
 name|GeodeFilterRule
 operator|.
 name|INSTANCE
@@ -412,14 +415,10 @@ name|GeodeProjectRule
 operator|.
 name|INSTANCE
 block|,
-name|GeodeSortLimitRule
-operator|.
-name|INSTANCE
-block|,
 name|GeodeAggregateRule
 operator|.
 name|INSTANCE
-block|}
+block|,   }
 decl_stmt|;
 specifier|private
 name|GeodeRules
