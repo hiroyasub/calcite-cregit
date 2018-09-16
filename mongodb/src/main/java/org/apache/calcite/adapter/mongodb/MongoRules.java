@@ -905,11 +905,7 @@ name|MONGO_OPERATORS
 init|=
 operator|new
 name|HashMap
-argument_list|<
-name|SqlOperator
-argument_list|,
-name|String
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 static|static
@@ -1630,9 +1626,7 @@ name|strings
 init|=
 operator|new
 name|ArrayList
-argument_list|<
-name|String
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 for|for

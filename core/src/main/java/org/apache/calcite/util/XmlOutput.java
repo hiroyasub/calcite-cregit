@@ -1598,9 +1598,7 @@ name|translationVector
 operator|=
 operator|new
 name|ArrayList
-argument_list|<
-name|String
-argument_list|>
+argument_list|<>
 argument_list|()
 expr_stmt|;
 block|}
@@ -1840,13 +1838,10 @@ operator|.
 name|append
 argument_list|(
 name|s
-operator|.
-name|substring
-argument_list|(
+argument_list|,
 literal|0
 argument_list|,
 name|i
-argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
@@ -1905,9 +1900,7 @@ name|translationVector
 operator|=
 operator|new
 name|ArrayList
-argument_list|<
-name|String
-argument_list|>
+argument_list|<>
 argument_list|(
 name|translationVector
 argument_list|)

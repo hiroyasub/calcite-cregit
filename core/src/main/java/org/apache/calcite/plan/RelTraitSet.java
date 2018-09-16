@@ -1818,14 +1818,7 @@ name|map
 init|=
 operator|new
 name|HashMap
-argument_list|<
-name|List
-argument_list|<
-name|RelTrait
-argument_list|>
-argument_list|,
-name|RelTraitSet
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 name|Cache

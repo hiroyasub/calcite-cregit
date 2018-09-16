@@ -181,12 +181,6 @@ specifier|public
 name|JaninoCompiler
 parameter_list|()
 block|{
-name|args
-operator|=
-operator|new
-name|JaninoCompilerArgs
-argument_list|()
-expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
 comment|// implement JavaCompiler
@@ -252,12 +246,7 @@ name|sourceMap
 init|=
 operator|new
 name|HashMap
-argument_list|<
-name|String
-argument_list|,
-name|byte
-index|[]
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 name|sourceMap

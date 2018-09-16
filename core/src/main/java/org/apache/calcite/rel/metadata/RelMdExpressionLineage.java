@@ -2380,11 +2380,7 @@ name|mapping
 argument_list|,
 operator|new
 name|HashMap
-argument_list|<
-name|RexInputRef
-argument_list|,
-name|RexNode
-argument_list|>
+argument_list|<>
 argument_list|()
 argument_list|)
 return|;

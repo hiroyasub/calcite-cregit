@@ -585,16 +585,6 @@ operator|.
 name|parseLong
 argument_list|(
 name|value
-operator|.
-name|substring
-argument_list|(
-literal|0
-argument_list|,
-name|value
-operator|.
-name|length
-argument_list|()
-argument_list|)
 argument_list|)
 return|;
 block|}

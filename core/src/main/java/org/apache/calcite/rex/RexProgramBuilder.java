@@ -708,6 +708,7 @@ name|assertionsEnabled
 init|=
 literal|false
 decl_stmt|;
+comment|//noinspection AssertWithSideEffects
 assert|assert
 name|assertionsEnabled
 operator|=

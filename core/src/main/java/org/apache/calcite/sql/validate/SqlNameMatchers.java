@@ -673,9 +673,7 @@ argument_list|()
 condition|?
 operator|new
 name|LinkedHashSet
-argument_list|<
-name|String
-argument_list|>
+argument_list|<>
 argument_list|()
 else|:
 operator|new

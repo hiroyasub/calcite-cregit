@@ -83,11 +83,7 @@ block|{
 return|return
 operator|new
 name|TopologicalOrderIterator
-argument_list|<
-name|V
-argument_list|,
-name|E
-argument_list|>
+argument_list|<>
 argument_list|(
 name|graph
 argument_list|)

@@ -261,9 +261,7 @@ name|nameList
 init|=
 operator|new
 name|ArrayList
-argument_list|<
-name|String
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 specifier|final
@@ -458,9 +456,7 @@ name|typeList
 init|=
 operator|new
 name|ArrayList
-argument_list|<
-name|RelDataType
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 for|for

@@ -91,9 +91,7 @@ block|{
 return|return
 operator|new
 name|Holder
-argument_list|<
-name|E
-argument_list|>
+argument_list|<>
 argument_list|(
 name|e
 argument_list|)

@@ -3462,9 +3462,7 @@ comment|//noinspection unchecked
 return|return
 operator|new
 name|FunctionExpression
-argument_list|<
-name|F
-argument_list|>
+argument_list|<>
 argument_list|(
 name|function
 argument_list|)
@@ -3535,9 +3533,7 @@ decl_stmt|;
 return|return
 operator|new
 name|FunctionExpression
-argument_list|<
-name|F
-argument_list|>
+argument_list|<>
 argument_list|(
 name|type
 argument_list|,
@@ -3711,9 +3707,7 @@ block|{
 return|return
 operator|new
 name|FunctionExpression
-argument_list|<
-name|F
-argument_list|>
+argument_list|<>
 argument_list|(
 name|type
 argument_list|,
@@ -9671,13 +9665,13 @@ block|{
 return|return
 operator|new
 name|FluentArrayList
-argument_list|<
-name|T
-argument_list|>
+argument_list|<>
 argument_list|()
 return|;
 block|}
 comment|/**    * Creates a fluent list with given elements.    */
+annotation|@
+name|SafeVarargs
 specifier|public
 specifier|static
 parameter_list|<
@@ -9697,9 +9691,7 @@ block|{
 return|return
 operator|new
 name|FluentArrayList
-argument_list|<
-name|T
-argument_list|>
+argument_list|<>
 argument_list|(
 name|Arrays
 operator|.
@@ -9732,9 +9724,7 @@ block|{
 return|return
 operator|new
 name|FluentArrayList
-argument_list|<
-name|T
-argument_list|>
+argument_list|<>
 argument_list|(
 name|toList
 argument_list|(
@@ -9896,9 +9886,7 @@ name|list
 init|=
 operator|new
 name|ArrayList
-argument_list|<
-name|T
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 for|for
@@ -10150,9 +10138,7 @@ name|statements1
 init|=
 operator|new
 name|ArrayList
-argument_list|<
-name|Statement
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 for|for
@@ -10260,9 +10246,7 @@ name|statements1
 init|=
 operator|new
 name|ArrayList
-argument_list|<
-name|Node
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 for|for
@@ -10332,9 +10316,7 @@ name|parameterExpressions1
 init|=
 operator|new
 name|ArrayList
-argument_list|<
-name|Expression
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 for|for
@@ -10405,9 +10387,7 @@ name|declarations1
 init|=
 operator|new
 name|ArrayList
-argument_list|<
-name|DeclarationStatement
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 for|for
@@ -10478,9 +10458,7 @@ name|memberDeclarations1
 init|=
 operator|new
 name|ArrayList
-argument_list|<
-name|MemberDeclaration
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 for|for

@@ -258,9 +258,7 @@ name|columnMappings
 operator|=
 operator|new
 name|HashSet
-argument_list|<
-name|RelColumnMapping
-argument_list|>
+argument_list|<>
 argument_list|()
 expr_stmt|;
 name|RelDataType
@@ -284,9 +282,7 @@ name|expandedOutputTypes
 init|=
 operator|new
 name|ArrayList
-argument_list|<
-name|RelDataType
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 name|List
@@ -297,9 +293,7 @@ name|expandedFieldNames
 init|=
 operator|new
 name|ArrayList
-argument_list|<
-name|String
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 for|for
@@ -452,9 +446,7 @@ name|columnNames
 init|=
 operator|new
 name|ArrayList
-argument_list|<
-name|String
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 name|RelDataType

@@ -184,9 +184,7 @@ decl_stmt|;
 return|return
 operator|new
 name|CompositeList
-argument_list|<
-name|T
-argument_list|>
+argument_list|<>
 argument_list|(
 name|list
 argument_list|)

@@ -113,16 +113,7 @@ block|}
 catch|catch
 parameter_list|(
 name|NoSuchMethodException
-name|e
-parameter_list|)
-block|{
-name|matchingMethod
-operator|=
-literal|null
-expr_stmt|;
-block|}
-catch|catch
-parameter_list|(
+decl||
 name|SecurityException
 name|e
 parameter_list|)

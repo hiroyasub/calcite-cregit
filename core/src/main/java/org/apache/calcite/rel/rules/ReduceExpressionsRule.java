@@ -2765,14 +2765,7 @@ condition|)
 block|{
 name|expList
 operator|.
-name|remove
-argument_list|(
-name|i
-argument_list|)
-expr_stmt|;
-name|expList
-operator|.
-name|add
+name|set
 argument_list|(
 name|i
 argument_list|,

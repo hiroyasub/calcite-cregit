@@ -1176,9 +1176,7 @@ name|tmp
 init|=
 operator|new
 name|ArrayList
-argument_list|<
-name|RelDataTypeField
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 name|List
@@ -1279,14 +1277,7 @@ name|renames
 init|=
 operator|new
 name|LinkedList
-argument_list|<
-name|Pair
-argument_list|<
-name|String
-argument_list|,
-name|String
-argument_list|>
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 comment|// handle top projection (ie reordering and renaming)
@@ -1326,9 +1317,7 @@ name|newFields
 operator|=
 operator|new
 name|ArrayList
-argument_list|<
-name|RelDataTypeField
-argument_list|>
+argument_list|<>
 argument_list|()
 expr_stmt|;
 name|int

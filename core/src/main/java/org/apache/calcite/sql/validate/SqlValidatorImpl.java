@@ -23492,8 +23492,6 @@ argument_list|)
 expr_stmt|;
 name|SqlIdentifier
 name|identifier
-init|=
-literal|null
 decl_stmt|;
 if|if
 condition|(

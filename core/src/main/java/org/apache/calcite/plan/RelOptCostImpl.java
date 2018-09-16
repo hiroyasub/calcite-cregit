@@ -15,20 +15,6 @@ name|plan
 package|;
 end_package
 
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|runtime
-operator|.
-name|Utilities
-import|;
-end_import
-
 begin_comment
 comment|/**  * RelOptCostImpl provides a default implementation for the {@link RelOptCost}  * interface. It it defined in terms of a single scalar quantity; somewhat  * arbitrarily, it returns this scalar for rows processed and zero for both CPU  * and I/O.  */
 end_comment
@@ -163,7 +149,7 @@ name|hashCode
 parameter_list|()
 block|{
 return|return
-name|Utilities
+name|Double
 operator|.
 name|hashCode
 argument_list|(

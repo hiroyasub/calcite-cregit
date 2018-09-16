@@ -6712,9 +6712,7 @@ name|InputFinder
 argument_list|(
 operator|new
 name|LinkedHashSet
-argument_list|<
-name|RelDataTypeField
-argument_list|>
+argument_list|<>
 argument_list|()
 argument_list|)
 decl_stmt|;

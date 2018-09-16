@@ -262,9 +262,7 @@ comment|//noinspection unchecked
 return|return
 operator|new
 name|ImmutableNullableList
-argument_list|<
-name|E
-argument_list|>
+argument_list|<>
 argument_list|(
 operator|(
 name|E
@@ -436,9 +434,7 @@ comment|//noinspection unchecked
 return|return
 operator|new
 name|ImmutableNullableList
-argument_list|<
-name|E
-argument_list|>
+argument_list|<>
 argument_list|(
 name|elements
 operator|.
@@ -895,9 +891,7 @@ comment|//noinspection unchecked
 return|return
 operator|new
 name|ImmutableNullableList
-argument_list|<
-name|E
-argument_list|>
+argument_list|<>
 argument_list|(
 operator|(
 name|E
@@ -953,9 +947,7 @@ block|{
 return|return
 operator|new
 name|Builder
-argument_list|<
-name|E
-argument_list|>
+argument_list|<>
 argument_list|()
 return|;
 block|}

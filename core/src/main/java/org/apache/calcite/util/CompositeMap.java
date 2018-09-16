@@ -142,10 +142,7 @@ block|}
 comment|/** Creates a CompositeMap. */
 comment|// Would like to use '@SafeVarargs' but JDK 1.6 doesn't support it.
 annotation|@
-name|SuppressWarnings
-argument_list|(
-literal|"varargs"
-argument_list|)
+name|SafeVarargs
 specifier|public
 specifier|static
 parameter_list|<
@@ -182,11 +179,7 @@ block|{
 return|return
 operator|new
 name|CompositeMap
-argument_list|<
-name|K
-argument_list|,
-name|V
-argument_list|>
+argument_list|<>
 argument_list|(
 name|list
 argument_list|(
@@ -521,9 +514,7 @@ name|keys
 init|=
 operator|new
 name|LinkedHashSet
-argument_list|<
-name|K
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 for|for
@@ -588,9 +579,7 @@ name|keys
 init|=
 operator|new
 name|LinkedHashSet
-argument_list|<
-name|K
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 for|for

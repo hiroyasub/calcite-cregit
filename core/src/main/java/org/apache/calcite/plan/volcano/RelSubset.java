@@ -1183,6 +1183,11 @@ argument_list|(
 name|rel
 argument_list|)
 expr_stmt|;
+if|if
+condition|(
+literal|false
+condition|)
+block|{
 name|Set
 argument_list|<
 name|CorrelationId
@@ -1207,11 +1212,6 @@ operator|.
 name|getVariablesSet
 argument_list|()
 decl_stmt|;
-if|if
-condition|(
-literal|false
-condition|)
-block|{
 name|Set
 argument_list|<
 name|CorrelationId

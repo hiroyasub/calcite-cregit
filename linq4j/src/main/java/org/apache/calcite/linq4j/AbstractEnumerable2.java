@@ -46,9 +46,7 @@ operator|new
 name|Linq4j
 operator|.
 name|IterableEnumerator
-argument_list|<
-name|T
-argument_list|>
+argument_list|<>
 argument_list|(
 name|this
 argument_list|)

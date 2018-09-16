@@ -26,7 +26,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Comparator that compares all strings differently, but if two strings are  * equal in case-insensitive match they are right next to each other.  *  *<p>Note: strings that differ only in upper-lower case are treated by this comparator  * as distinct.  *  *<p>In a collection sorted on this comparator, we can find case-insensitive matches  * for a given string using  * {@link org.apache.calcite.util.CaseInsensitiveComparator#floorKey(java.lang.String)}  * and {@link org.apache.calcite.util.CaseInsensitiveComparator#ceilingKey(java.lang.String)}.  */
+comment|/**  * Comparator that compares all strings differently, but if two strings are  * equal in case-insensitive match they are right next to each other.  *  *<p>Note: strings that differ only in upper-lower case are treated by this comparator  * as distinct.  *  *<p>In a collection sorted on this comparator, we can find case-insensitive matches  * for a given string using  * {@link #floorKey(java.lang.String)}  * and {@link #ceilingKey(java.lang.String)}.  */
 end_comment
 
 begin_class
@@ -96,7 +96,6 @@ name|value
 return|;
 block|}
 block|}
-specifier|static
 name|Object
 name|floorKey
 parameter_list|(
@@ -115,7 +114,6 @@ literal|1
 argument_list|)
 return|;
 block|}
-specifier|static
 name|Object
 name|ceilingKey
 parameter_list|(

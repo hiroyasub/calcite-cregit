@@ -1208,9 +1208,7 @@ argument_list|)
 else|:
 operator|new
 name|ArrayList
-argument_list|<
-name|ComplexMetric
-argument_list|>
+argument_list|<>
 argument_list|()
 return|;
 block|}

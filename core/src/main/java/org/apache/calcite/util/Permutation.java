@@ -1292,6 +1292,12 @@ return|return
 literal|false
 return|;
 block|}
+name|occurCount
+index|[
+name|target
+index|]
+operator|++
+expr_stmt|;
 block|}
 return|return
 literal|true

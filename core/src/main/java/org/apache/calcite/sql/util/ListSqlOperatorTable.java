@@ -150,9 +150,7 @@ name|this
 argument_list|(
 operator|new
 name|ArrayList
-argument_list|<
-name|SqlOperator
-argument_list|>
+argument_list|<>
 argument_list|()
 argument_list|)
 expr_stmt|;

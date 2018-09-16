@@ -11006,9 +11006,7 @@ name|result
 init|=
 operator|new
 name|HashSet
-argument_list|<
-name|E
-argument_list|>
+argument_list|<>
 argument_list|(
 name|c1
 argument_list|)
@@ -11023,9 +11021,7 @@ expr_stmt|;
 return|return
 operator|new
 name|ArrayList
-argument_list|<
-name|E
-argument_list|>
+argument_list|<>
 argument_list|(
 name|result
 argument_list|)

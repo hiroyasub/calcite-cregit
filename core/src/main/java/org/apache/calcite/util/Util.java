@@ -5931,9 +5931,7 @@ block|{
 return|return
 operator|new
 name|CastingList
-argument_list|<
-name|E
-argument_list|>
+argument_list|<>
 argument_list|(
 name|list
 argument_list|,

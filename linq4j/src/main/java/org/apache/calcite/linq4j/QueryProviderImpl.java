@@ -87,9 +87,7 @@ block|{
 return|return
 operator|new
 name|QueryableImpl
-argument_list|<
-name|T
-argument_list|>
+argument_list|<>
 argument_list|(
 name|this
 argument_list|,
@@ -119,9 +117,7 @@ block|{
 return|return
 operator|new
 name|QueryableImpl
-argument_list|<
-name|T
-argument_list|>
+argument_list|<>
 argument_list|(
 name|this
 argument_list|,

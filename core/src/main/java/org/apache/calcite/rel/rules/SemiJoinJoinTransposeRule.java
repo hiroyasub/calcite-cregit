@@ -390,9 +390,7 @@ name|fields
 init|=
 operator|new
 name|ArrayList
-argument_list|<
-name|RelDataTypeField
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 comment|// create a list of fields for the full join result; note that

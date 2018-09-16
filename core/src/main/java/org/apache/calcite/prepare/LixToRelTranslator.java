@@ -491,9 +491,7 @@ name|translatorQueryable
 init|=
 operator|new
 name|QueryableRelBuilder
-argument_list|<
-name|T
-argument_list|>
+argument_list|<>
 argument_list|(
 name|this
 argument_list|)
@@ -853,9 +851,7 @@ name|rexList
 init|=
 operator|new
 name|ArrayList
-argument_list|<
-name|RexNode
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 specifier|final
@@ -961,9 +957,7 @@ name|list
 init|=
 operator|new
 name|ArrayList
-argument_list|<
-name|RexNode
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 name|RexBuilder
@@ -1041,9 +1035,7 @@ name|list
 init|=
 operator|new
 name|ArrayList
-argument_list|<
-name|RexNode
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 name|RexBuilder

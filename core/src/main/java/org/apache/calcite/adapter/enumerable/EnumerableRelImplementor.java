@@ -1264,9 +1264,7 @@ argument_list|)
 argument_list|,
 operator|new
 name|ArrayList
-argument_list|<
-name|MemberDeclaration
-argument_list|>
+argument_list|<>
 argument_list|()
 argument_list|)
 decl_stmt|;

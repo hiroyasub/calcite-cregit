@@ -108,9 +108,7 @@ name|deque
 init|=
 operator|new
 name|ArrayDeque
-argument_list|<
-name|V
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 specifier|private
@@ -123,9 +121,7 @@ name|set
 init|=
 operator|new
 name|HashSet
-argument_list|<
-name|V
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 specifier|public
@@ -193,11 +189,7 @@ parameter_list|()
 lambda|->
 operator|new
 name|BreadthFirstIterator
-argument_list|<
-name|V
-argument_list|,
-name|E
-argument_list|>
+argument_list|<>
 argument_list|(
 name|graph
 argument_list|,
@@ -247,9 +239,7 @@ name|deque
 init|=
 operator|new
 name|ArrayDeque
-argument_list|<
-name|V
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 name|deque

@@ -154,9 +154,7 @@ name|transformableOperators
 init|=
 operator|new
 name|HashSet
-argument_list|<
-name|SqlOperator
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
@@ -642,9 +640,7 @@ name|operands
 init|=
 operator|new
 name|ArrayList
-argument_list|<
-name|RexNode
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 for|for

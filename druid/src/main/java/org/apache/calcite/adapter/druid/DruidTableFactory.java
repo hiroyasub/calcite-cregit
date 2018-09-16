@@ -626,9 +626,7 @@ name|metric
 argument_list|,
 operator|new
 name|ArrayList
-argument_list|<
-name|ComplexMetric
-argument_list|>
+argument_list|<>
 argument_list|()
 argument_list|)
 expr_stmt|;

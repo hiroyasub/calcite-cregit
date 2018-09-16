@@ -1156,9 +1156,7 @@ name|translatedConstants
 init|=
 operator|new
 name|ArrayList
-argument_list|<
-name|Expression
-argument_list|>
+argument_list|<>
 argument_list|(
 name|constants
 operator|.
@@ -1379,9 +1377,7 @@ name|aggs
 init|=
 operator|new
 name|ArrayList
-argument_list|<
-name|AggImpState
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 name|List
@@ -1793,9 +1789,7 @@ name|outputRow
 init|=
 operator|new
 name|ArrayList
-argument_list|<
-name|Expression
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 name|int
@@ -2856,9 +2850,7 @@ name|args
 init|=
 operator|new
 name|ArrayList
-argument_list|<
-name|RexNode
-argument_list|>
+argument_list|<>
 argument_list|(
 name|inputTypes
 operator|.
@@ -4731,9 +4723,7 @@ name|decls
 init|=
 operator|new
 name|ArrayList
-argument_list|<
-name|Expression
-argument_list|>
+argument_list|<>
 argument_list|(
 name|state
 operator|.

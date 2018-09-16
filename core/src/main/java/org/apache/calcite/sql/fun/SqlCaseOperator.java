@@ -868,9 +868,7 @@ name|nullList
 init|=
 operator|new
 name|ArrayList
-argument_list|<
-name|SqlNode
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 name|List
@@ -881,9 +879,7 @@ name|argTypes
 init|=
 operator|new
 name|ArrayList
-argument_list|<
-name|RelDataType
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 for|for
@@ -1106,9 +1102,7 @@ name|thenTypes
 init|=
 operator|new
 name|ArrayList
-argument_list|<
-name|RelDataType
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 for|for

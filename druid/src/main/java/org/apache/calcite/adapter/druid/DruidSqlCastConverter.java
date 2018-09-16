@@ -885,7 +885,7 @@ if|else if
 condition|(
 name|sqlTypeName
 operator|==
-name|sqlTypeName
+name|SqlTypeName
 operator|.
 name|TIMESTAMP_WITH_LOCAL_TIME_ZONE
 condition|)

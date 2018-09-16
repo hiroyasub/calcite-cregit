@@ -438,9 +438,7 @@ name|clusteringKeys
 operator|=
 operator|new
 name|ArrayList
-argument_list|<
-name|String
-argument_list|>
+argument_list|<>
 argument_list|(
 name|clusteringKeys
 argument_list|)
@@ -724,9 +722,7 @@ name|partitionKeys
 operator|=
 operator|new
 name|HashSet
-argument_list|<
-name|String
-argument_list|>
+argument_list|<>
 argument_list|(
 name|partitionKeys
 argument_list|)
@@ -792,9 +788,7 @@ name|fieldCollations
 init|=
 operator|new
 name|ArrayList
-argument_list|<
-name|RelFieldCollation
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 for|for
@@ -982,9 +976,7 @@ name|predicates
 init|=
 operator|new
 name|ArrayList
-argument_list|<
-name|String
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 for|for

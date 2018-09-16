@@ -270,9 +270,7 @@ name|list
 argument_list|,
 operator|new
 name|HashSet
-argument_list|<
-name|V
-argument_list|>
+argument_list|<>
 argument_list|()
 argument_list|,
 name|graph

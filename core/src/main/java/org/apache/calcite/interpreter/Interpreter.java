@@ -3205,9 +3205,7 @@ name|ListSink
 argument_list|(
 operator|new
 name|ArrayDeque
-argument_list|<
-name|Row
-argument_list|>
+argument_list|<>
 argument_list|()
 argument_list|)
 argument_list|)

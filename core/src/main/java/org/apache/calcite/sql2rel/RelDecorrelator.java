@@ -6047,6 +6047,7 @@ operator|.
 name|getFieldCount
 argument_list|()
 decl_stmt|;
+comment|//noinspection AssertWithSideEffects
 assert|assert
 name|rel
 operator|.
@@ -6335,6 +6336,7 @@ operator|.
 name|getFieldCount
 argument_list|()
 decl_stmt|;
+comment|//noinspection AssertWithSideEffects
 assert|assert
 name|rel
 operator|.

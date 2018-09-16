@@ -65,9 +65,7 @@ name|listeners
 operator|=
 operator|new
 name|ArrayList
-argument_list|<
-name|RelOptListener
-argument_list|>
+argument_list|<>
 argument_list|()
 expr_stmt|;
 block|}

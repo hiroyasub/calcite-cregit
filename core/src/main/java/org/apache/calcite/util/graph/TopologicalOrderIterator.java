@@ -110,12 +110,7 @@ name|countMap
 init|=
 operator|new
 name|HashMap
-argument_list|<
-name|V
-argument_list|,
-name|int
-index|[]
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 specifier|final
@@ -127,9 +122,7 @@ name|empties
 init|=
 operator|new
 name|ArrayList
-argument_list|<
-name|V
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 specifier|private
@@ -206,11 +199,7 @@ parameter_list|()
 lambda|->
 operator|new
 name|TopologicalOrderIterator
-argument_list|<
-name|V
-argument_list|,
-name|E
-argument_list|>
+argument_list|<>
 argument_list|(
 name|graph
 argument_list|)

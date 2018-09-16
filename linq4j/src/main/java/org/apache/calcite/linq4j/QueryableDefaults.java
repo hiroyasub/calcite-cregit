@@ -997,9 +997,7 @@ operator|new
 name|EnumerableDefaults
 operator|.
 name|CastingEnumerator
-argument_list|<
-name|T2
-argument_list|>
+argument_list|<>
 argument_list|(
 name|source
 operator|.
@@ -3529,9 +3527,7 @@ operator|new
 name|EnumerableDefaults
 operator|.
 name|SkipWhileEnumerator
-argument_list|<
-name|T
-argument_list|>
+argument_list|<>
 argument_list|(
 name|source
 operator|.
@@ -4025,9 +4021,7 @@ operator|new
 name|EnumerableDefaults
 operator|.
 name|TakeWhileEnumerator
-argument_list|<
-name|T
-argument_list|>
+argument_list|<>
 argument_list|(
 name|source
 operator|.

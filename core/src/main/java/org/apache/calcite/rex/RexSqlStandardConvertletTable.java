@@ -918,9 +918,7 @@ name|operandList
 init|=
 operator|new
 name|ArrayList
-argument_list|<
-name|SqlNode
-argument_list|>
+argument_list|<>
 argument_list|(
 name|Arrays
 operator|.

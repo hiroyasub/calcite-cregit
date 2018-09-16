@@ -328,9 +328,7 @@ block|{
 return|return
 operator|new
 name|SplunkTableQueryable
-argument_list|<
-name|T
-argument_list|>
+argument_list|<>
 argument_list|(
 name|queryProvider
 argument_list|,
@@ -497,9 +495,7 @@ decl_stmt|;
 return|return
 operator|new
 name|SplunkQuery
-argument_list|<
-name|T
-argument_list|>
+argument_list|<>
 argument_list|(
 name|splunkSchema
 operator|.

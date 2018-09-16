@@ -386,7 +386,8 @@ name|result
 init|=
 literal|null
 decl_stmt|;
-specifier|final
+try|try
+init|(
 name|Enumerator
 argument_list|<
 name|T
@@ -395,8 +396,7 @@ name|enumerator
 init|=
 name|enumerator
 argument_list|()
-decl_stmt|;
-try|try
+init|)
 block|{
 while|while
 condition|(
@@ -427,14 +427,6 @@ block|}
 return|return
 name|result
 return|;
-block|}
-finally|finally
-block|{
-name|enumerator
-operator|.
-name|close
-argument_list|()
-expr_stmt|;
 block|}
 block|}
 specifier|public

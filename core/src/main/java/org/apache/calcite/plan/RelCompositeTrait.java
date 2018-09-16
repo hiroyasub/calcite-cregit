@@ -224,9 +224,7 @@ name|compositeTrait
 operator|=
 operator|new
 name|EmptyCompositeTrait
-argument_list|<
-name|T
-argument_list|>
+argument_list|<>
 argument_list|(
 name|def
 argument_list|)
@@ -290,9 +288,7 @@ name|compositeTrait
 operator|=
 operator|new
 name|RelCompositeTrait
-argument_list|<
-name|T
-argument_list|>
+argument_list|<>
 argument_list|(
 name|def
 argument_list|,
@@ -557,9 +553,7 @@ comment|// TODO: cache duplicate composites
 return|return
 operator|new
 name|RelCompositeTrait
-argument_list|<
-name|T
-argument_list|>
+argument_list|<>
 argument_list|(
 name|traitDef
 argument_list|,

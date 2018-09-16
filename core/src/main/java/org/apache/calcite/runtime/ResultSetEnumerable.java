@@ -410,9 +410,7 @@ name|list
 init|=
 operator|new
 name|ArrayList
-argument_list|<
-name|Object
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 for|for
@@ -667,9 +665,7 @@ block|{
 return|return
 operator|new
 name|ResultSetEnumerable
-argument_list|<
-name|T
-argument_list|>
+argument_list|<>
 argument_list|(
 name|dataSource
 argument_list|,
@@ -767,9 +763,7 @@ expr_stmt|;
 return|return
 operator|new
 name|ResultSetEnumerator
-argument_list|<
-name|T
-argument_list|>
+argument_list|<>
 argument_list|(
 name|resultSet
 argument_list|,
@@ -1213,9 +1207,7 @@ name|list
 init|=
 operator|new
 name|ArrayList
-argument_list|<
-name|Object
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 for|for

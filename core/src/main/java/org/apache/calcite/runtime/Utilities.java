@@ -35,6 +35,16 @@ name|List
 import|;
 end_import
 
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+import|;
+end_import
+
 begin_comment
 comment|/**  * Utility methods called by generated code.  */
 end_comment
@@ -71,18 +81,12 @@ block|{
 comment|// Same as java.lang.Objects.equals (JDK 1.7 and later)
 comment|// and com.google.common.base.Objects.equal
 return|return
-name|o0
-operator|==
-name|o1
-operator|||
-name|o0
-operator|!=
-literal|null
-operator|&&
-name|o0
+name|Objects
 operator|.
 name|equals
 argument_list|(
+name|o0
+argument_list|,
 name|o1
 argument_list|)
 return|;
@@ -109,7 +113,10 @@ name|hashCode
 argument_list|()
 return|;
 block|}
-comment|/** Computes the hash code of a {@code double} value. Equivalent to    * {@link Double}{@code .hashCode(double)}, but that method was only    * introduced in JDK 1.8.    *    * @param v Value    * @return Hash code    */
+comment|/** Computes the hash code of a {@code double} value. Equivalent to    * {@link Double}{@code .hashCode(double)}, but that method was only    * introduced in JDK 1.8.    *    * @param v Value    * @return Hash code    * @deprecated Use {@link Double#hashCode(double)}    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 specifier|static
 name|int
@@ -119,24 +126,19 @@ name|double
 name|v
 parameter_list|)
 block|{
-name|long
-name|bits
-init|=
+return|return
 name|Double
 operator|.
-name|doubleToLongBits
+name|hashCode
 argument_list|(
 name|v
 argument_list|)
-decl_stmt|;
-return|return
-name|hashCode
-argument_list|(
-name|bits
-argument_list|)
 return|;
 block|}
-comment|/** Computes the hash code of a {@code float} value. Equivalent to    * {@link Float}{@code .hashCode(float)}, but that method was only    * introduced in JDK 1.8.    *    * @param v Value    * @return Hash code    */
+comment|/** Computes the hash code of a {@code float} value. Equivalent to    * {@link Float}{@code .hashCode(float)}, but that method was only    * introduced in JDK 1.8.    *    * @param v Value    * @return Hash code    * @deprecated Use {@link Float#hashCode(float)}    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 specifier|static
 name|int
@@ -149,13 +151,16 @@ block|{
 return|return
 name|Float
 operator|.
-name|floatToIntBits
+name|hashCode
 argument_list|(
 name|v
 argument_list|)
 return|;
 block|}
-comment|/** Computes the hash code of a {@code long} value. Equivalent to    * {@link Long}{@code .hashCode(long)}, but that method was only    * introduced in JDK 1.8.    *    * @param v Value    * @return Hash code    */
+comment|/** Computes the hash code of a {@code long} value. Equivalent to    * {@link Long}{@code .hashCode(long)}, but that method was only    * introduced in JDK 1.8.    *    * @param v Value    * @return Hash code    * @deprecated Use {@link Long#hashCode(long)}    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 specifier|static
 name|int
@@ -166,21 +171,18 @@ name|v
 parameter_list|)
 block|{
 return|return
-operator|(
-name|int
-operator|)
-operator|(
+name|Long
+operator|.
+name|hashCode
+argument_list|(
 name|v
-operator|^
-operator|(
-name|v
-operator|>>>
-literal|32
-operator|)
-operator|)
+argument_list|)
 return|;
 block|}
-comment|/** Computes the hash code of a {@code boolean} value. Equivalent to    * {@link Boolean}{@code .hashCode(boolean)}, but that method was only    * introduced in JDK 1.8.    *    * @param v Value    * @return Hash code    */
+comment|/** Computes the hash code of a {@code boolean} value. Equivalent to    * {@link Boolean}{@code .hashCode(boolean)}, but that method was only    * introduced in JDK 1.8.    *    * @param v Value    * @return Hash code    * @deprecated Use {@link Boolean#hashCode(boolean)}    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 specifier|static
 name|int
@@ -191,11 +193,12 @@ name|v
 parameter_list|)
 block|{
 return|return
+name|Boolean
+operator|.
+name|hashCode
+argument_list|(
 name|v
-condition|?
-literal|1231
-else|:
-literal|1237
+argument_list|)
 return|;
 block|}
 specifier|public
@@ -318,6 +321,8 @@ name|h
 operator|*
 literal|31
 operator|+
+name|Long
+operator|.
 name|hashCode
 argument_list|(
 name|v
@@ -341,6 +346,8 @@ name|hash
 argument_list|(
 name|h
 argument_list|,
+name|Float
+operator|.
 name|hashCode
 argument_list|(
 name|v
@@ -365,6 +372,8 @@ name|hash
 argument_list|(
 name|h
 argument_list|,
+name|Double
+operator|.
 name|hashCode
 argument_list|(
 name|v
@@ -415,24 +424,15 @@ name|boolean
 name|v1
 parameter_list|)
 block|{
-comment|// Same as Boolean.compare (introduced in JDK 1.7)
 return|return
-operator|(
+name|Boolean
+operator|.
+name|compare
+argument_list|(
 name|v0
-operator|==
+argument_list|,
 name|v1
-operator|)
-condition|?
-literal|0
-else|:
-operator|(
-name|v0
-condition|?
-literal|1
-else|:
-operator|-
-literal|1
-operator|)
+argument_list|)
 return|;
 block|}
 specifier|public
@@ -447,11 +447,15 @@ name|byte
 name|v1
 parameter_list|)
 block|{
-comment|// Same as Byte.compare (introduced in JDK 1.7)
 return|return
+name|Byte
+operator|.
+name|compare
+argument_list|(
 name|v0
-operator|-
+argument_list|,
 name|v1
+argument_list|)
 return|;
 block|}
 specifier|public
@@ -466,11 +470,15 @@ name|char
 name|v1
 parameter_list|)
 block|{
-comment|// Same as Character.compare (introduced in JDK 1.7)
 return|return
+name|Character
+operator|.
+name|compare
+argument_list|(
 name|v0
-operator|-
+argument_list|,
 name|v1
+argument_list|)
 return|;
 block|}
 specifier|public
@@ -485,11 +493,15 @@ name|short
 name|v1
 parameter_list|)
 block|{
-comment|// Same as Short.compare (introduced in JDK 1.7)
 return|return
+name|Short
+operator|.
+name|compare
+argument_list|(
 name|v0
-operator|-
+argument_list|,
 name|v1
+argument_list|)
 return|;
 block|}
 specifier|public
@@ -504,28 +516,15 @@ name|int
 name|v1
 parameter_list|)
 block|{
-comment|// Same as Integer.compare (introduced in JDK 1.7)
 return|return
-operator|(
+name|Integer
+operator|.
+name|compare
+argument_list|(
 name|v0
-operator|<
+argument_list|,
 name|v1
-operator|)
-condition|?
-operator|-
-literal|1
-else|:
-operator|(
-operator|(
-name|v0
-operator|==
-name|v1
-operator|)
-condition|?
-literal|0
-else|:
-literal|1
-operator|)
+argument_list|)
 return|;
 block|}
 specifier|public
@@ -540,28 +539,15 @@ name|long
 name|v1
 parameter_list|)
 block|{
-comment|// Same as Long.compare (introduced in JDK 1.7)
 return|return
-operator|(
+name|Long
+operator|.
+name|compare
+argument_list|(
 name|v0
-operator|<
+argument_list|,
 name|v1
-operator|)
-condition|?
-operator|-
-literal|1
-else|:
-operator|(
-operator|(
-name|v0
-operator|==
-name|v1
-operator|)
-condition|?
-literal|0
-else|:
-literal|1
-operator|)
+argument_list|)
 return|;
 block|}
 specifier|public

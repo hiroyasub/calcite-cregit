@@ -161,9 +161,7 @@ name|list
 operator|=
 operator|new
 name|ArrayList
-argument_list|<
-name|V
-argument_list|>
+argument_list|<>
 argument_list|(
 name|list
 argument_list|)
@@ -337,11 +335,7 @@ name|multiMap
 init|=
 operator|new
 name|SortedMultiMap
-argument_list|<
-name|Object
-argument_list|,
-name|V
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 name|multiMap

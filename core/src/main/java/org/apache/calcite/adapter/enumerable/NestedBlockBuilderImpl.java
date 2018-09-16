@@ -118,9 +118,7 @@ name|blocks
 init|=
 operator|new
 name|ArrayList
-argument_list|<
-name|BlockBuilder
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 specifier|private
@@ -138,14 +136,7 @@ name|nullables
 init|=
 operator|new
 name|ArrayList
-argument_list|<
-name|Map
-argument_list|<
-name|RexNode
-argument_list|,
-name|Boolean
-argument_list|>
-argument_list|>
+argument_list|<>
 argument_list|()
 decl_stmt|;
 comment|/**    * Constructs nested block builders starting of a given code block.    * @param block root code block    */
@@ -308,11 +299,7 @@ name|next
 operator|=
 operator|new
 name|HashMap
-argument_list|<
-name|RexNode
-argument_list|,
-name|Boolean
-argument_list|>
+argument_list|<>
 argument_list|(
 name|nullables
 argument_list|)
