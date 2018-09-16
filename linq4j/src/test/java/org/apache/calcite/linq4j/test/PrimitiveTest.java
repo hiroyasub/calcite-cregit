@@ -1400,8 +1400,9 @@ name|assertEquals
 argument_list|(
 literal|"bcdefga"
 argument_list|,
-operator|new
 name|String
+operator|.
+name|valueOf
 argument_list|(
 operator|(
 name|char

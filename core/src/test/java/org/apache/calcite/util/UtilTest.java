@@ -1533,6 +1533,7 @@ argument_list|,
 literal|"EUC-JP"
 argument_list|)
 argument_list|,
+comment|// CHECKSTYLE: IGNORE 0
 literal|0
 argument_list|)
 argument_list|)
@@ -1588,6 +1589,7 @@ argument_list|,
 literal|"UTF-16"
 argument_list|)
 argument_list|,
+comment|// CHECKSTYLE: IGNORE 0
 literal|0
 argument_list|)
 argument_list|)

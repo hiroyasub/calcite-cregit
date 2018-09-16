@@ -631,7 +631,6 @@ operator|.
 name|UTF_8
 argument_list|)
 init|;
-specifier|final
 name|PrintWriter
 name|out
 init|=

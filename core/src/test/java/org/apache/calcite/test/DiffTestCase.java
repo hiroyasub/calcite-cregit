@@ -2006,7 +2006,6 @@ index|]
 decl_stmt|;
 try|try
 init|(
-specifier|final
 name|FileInputStream
 name|reader
 init|=

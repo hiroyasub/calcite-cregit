@@ -2207,7 +2207,6 @@ argument_list|)
 expr_stmt|;
 try|try
 init|(
-specifier|final
 name|TryThreadLocal
 operator|.
 name|Memo
@@ -2528,7 +2527,6 @@ argument_list|)
 expr_stmt|;
 try|try
 init|(
-specifier|final
 name|TryThreadLocal
 operator|.
 name|Memo
@@ -3427,7 +3425,6 @@ block|}
 decl_stmt|;
 try|try
 init|(
-specifier|final
 name|TryThreadLocal
 operator|.
 name|Memo
@@ -13573,7 +13570,6 @@ parameter_list|()
 block|{
 try|try
 init|(
-specifier|final
 name|TryThreadLocal
 operator|.
 name|Memo
@@ -15806,7 +15802,6 @@ name|Exception
 block|{
 try|try
 init|(
-specifier|final
 name|TryThreadLocal
 operator|.
 name|Memo
@@ -15861,7 +15856,6 @@ name|Exception
 block|{
 try|try
 init|(
-specifier|final
 name|TryThreadLocal
 operator|.
 name|Memo
@@ -17009,7 +17003,6 @@ parameter_list|()
 block|{
 try|try
 init|(
-specifier|final
 name|TryThreadLocal
 operator|.
 name|Memo
@@ -17453,7 +17446,6 @@ parameter_list|()
 block|{
 try|try
 init|(
-specifier|final
 name|TryThreadLocal
 operator|.
 name|Memo
@@ -18140,7 +18132,6 @@ literal|"order by \"empid\" offset ? fetch next ? rows only"
 decl_stmt|;
 try|try
 init|(
-specifier|final
 name|PreparedStatement
 name|p
 init|=
@@ -18228,7 +18219,6 @@ argument_list|)
 expr_stmt|;
 try|try
 init|(
-specifier|final
 name|ResultSet
 name|r
 init|=
@@ -18799,7 +18789,6 @@ argument_list|)
 decl_stmt|;
 try|try
 init|(
-specifier|final
 name|PrintWriter
 name|pw
 init|=

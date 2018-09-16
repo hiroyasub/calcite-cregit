@@ -10915,7 +10915,6 @@ argument_list|()
 decl_stmt|;
 try|try
 init|(
-specifier|final
 name|PreparedStatement
 name|preparedStatement
 init|=
@@ -11026,7 +11025,6 @@ comment|// Note that because the table has been resolved in the RelNode tree
 comment|// we do not need to supply a "schema" as context to the runner.
 try|try
 init|(
-specifier|final
 name|PreparedStatement
 name|preparedStatement
 init|=

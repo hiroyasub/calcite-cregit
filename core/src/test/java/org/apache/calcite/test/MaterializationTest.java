@@ -1124,7 +1124,6 @@ parameter_list|()
 block|{
 try|try
 init|(
-specifier|final
 name|TryThreadLocal
 operator|.
 name|Memo
@@ -1365,7 +1364,6 @@ parameter_list|)
 block|{
 try|try
 init|(
-specifier|final
 name|TryThreadLocal
 operator|.
 name|Memo
@@ -1495,7 +1493,6 @@ parameter_list|)
 block|{
 try|try
 init|(
-specifier|final
 name|TryThreadLocal
 operator|.
 name|Memo
@@ -1707,7 +1704,6 @@ parameter_list|()
 block|{
 try|try
 init|(
-specifier|final
 name|TryThreadLocal
 operator|.
 name|Memo
@@ -6280,7 +6276,6 @@ argument_list|()
 decl_stmt|;
 try|try
 init|(
-specifier|final
 name|TryThreadLocal
 operator|.
 name|Memo
@@ -6410,7 +6405,6 @@ literal|"select \"deptno\" from \"emps\""
 decl_stmt|;
 try|try
 init|(
-specifier|final
 name|TryThreadLocal
 operator|.
 name|Memo
@@ -6537,7 +6531,6 @@ parameter_list|()
 block|{
 try|try
 init|(
-specifier|final
 name|TryThreadLocal
 operator|.
 name|Memo
@@ -6752,7 +6745,6 @@ literal|"join (select \"deptno\", count(*) as c from \"emps\" group by \"deptno\
 decl_stmt|;
 try|try
 init|(
-specifier|final
 name|TryThreadLocal
 operator|.
 name|Memo
@@ -6835,7 +6827,6 @@ literal|"join \"depts\" using (\"deptno\") where \"empid\"< 300 "
 decl_stmt|;
 try|try
 init|(
-specifier|final
 name|TryThreadLocal
 operator|.
 name|Memo
@@ -6916,7 +6907,6 @@ literal|"and \"depts\".\"deptno\"> 200"
 decl_stmt|;
 try|try
 init|(
-specifier|final
 name|TryThreadLocal
 operator|.
 name|Memo
@@ -7283,7 +7273,6 @@ block|}
 decl_stmt|;
 try|try
 init|(
-specifier|final
 name|TryThreadLocal
 operator|.
 name|Memo
@@ -7641,7 +7630,6 @@ block|}
 decl_stmt|;
 try|try
 init|(
-specifier|final
 name|TryThreadLocal
 operator|.
 name|Memo

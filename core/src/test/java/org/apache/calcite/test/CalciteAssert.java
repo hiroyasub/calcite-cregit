@@ -3074,7 +3074,6 @@ name|limit
 decl_stmt|;
 try|try
 init|(
-specifier|final
 name|Closer
 name|closer
 init|=
@@ -7393,7 +7392,6 @@ parameter_list|)
 block|{
 try|try
 init|(
-specifier|final
 name|Connection
 name|connection
 init|=
@@ -7505,7 +7503,6 @@ parameter_list|)
 block|{
 try|try
 init|(
-specifier|final
 name|Connection
 name|connection
 init|=
@@ -7636,7 +7633,6 @@ parameter_list|)
 block|{
 try|try
 init|(
-specifier|final
 name|Connection
 name|connection
 init|=
@@ -7702,7 +7698,6 @@ parameter_list|)
 block|{
 try|try
 init|(
-specifier|final
 name|Connection
 name|connection
 init|=
@@ -7777,7 +7772,6 @@ parameter_list|()
 block|{
 try|try
 init|(
-specifier|final
 name|Connection
 name|connection
 init|=
@@ -7839,7 +7833,6 @@ parameter_list|)
 block|{
 try|try
 init|(
-specifier|final
 name|Connection
 name|connection
 init|=
@@ -7933,7 +7926,6 @@ parameter_list|)
 block|{
 try|try
 init|(
-specifier|final
 name|Connection
 name|connection
 init|=
@@ -7997,7 +7989,6 @@ parameter_list|)
 block|{
 try|try
 init|(
-specifier|final
 name|Connection
 name|connection
 init|=
@@ -8307,7 +8298,6 @@ argument_list|)
 expr_stmt|;
 try|try
 init|(
-specifier|final
 name|Connection
 name|connection
 init|=
@@ -8398,7 +8388,6 @@ argument_list|)
 expr_stmt|;
 try|try
 init|(
-specifier|final
 name|Connection
 name|connection
 init|=
@@ -8885,7 +8874,6 @@ parameter_list|)
 block|{
 try|try
 init|(
-specifier|final
 name|Connection
 name|c
 init|=

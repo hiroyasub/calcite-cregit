@@ -894,15 +894,6 @@ argument_list|,
 literal|' '
 argument_list|)
 expr_stmt|;
-name|String
-name|bigString
-init|=
-operator|new
-name|String
-argument_list|(
-name|chars
-argument_list|)
-decl_stmt|;
 name|clear
 argument_list|()
 expr_stmt|;
@@ -923,10 +914,12 @@ control|)
 block|{
 name|add
 argument_list|(
-name|bigString
+name|String
 operator|.
-name|substring
+name|valueOf
 argument_list|(
+name|chars
+argument_list|,
 literal|0
 argument_list|,
 name|i

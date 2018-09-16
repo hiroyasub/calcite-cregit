@@ -3468,7 +3468,6 @@ argument_list|)
 expr_stmt|;
 try|try
 init|(
-specifier|final
 name|Connection
 name|connection
 init|=
@@ -4838,7 +4837,6 @@ block|}
 decl_stmt|;
 try|try
 init|(
-specifier|final
 name|Connection
 name|connection
 init|=
@@ -4851,7 +4849,6 @@ operator|+
 name|model
 argument_list|)
 init|;
-specifier|final
 name|PrintWriter
 name|pw
 init|=
@@ -4862,7 +4859,6 @@ argument_list|(
 name|file
 argument_list|)
 init|;
-specifier|final
 name|Worker
 argument_list|<
 name|Void

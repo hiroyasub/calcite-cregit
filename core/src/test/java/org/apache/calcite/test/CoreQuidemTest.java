@@ -199,7 +199,6 @@ return|return;
 block|}
 try|try
 init|(
-specifier|final
 name|TryThreadLocal
 operator|.
 name|Memo
@@ -232,7 +231,6 @@ name|Exception
 block|{
 try|try
 init|(
-specifier|final
 name|TryThreadLocal
 operator|.
 name|Memo
@@ -266,7 +264,6 @@ name|Exception
 block|{
 try|try
 init|(
-specifier|final
 name|TryThreadLocal
 operator|.
 name|Memo

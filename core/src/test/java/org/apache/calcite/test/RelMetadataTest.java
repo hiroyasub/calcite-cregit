@@ -9301,7 +9301,6 @@ decl_stmt|;
 comment|// Lock to ensure that only one test is using this method at a time.
 try|try
 init|(
-specifier|final
 name|JdbcAdapterTest
 operator|.
 name|LockWrapper

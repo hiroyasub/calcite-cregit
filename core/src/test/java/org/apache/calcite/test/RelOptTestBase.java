@@ -1587,7 +1587,6 @@ parameter_list|)
 block|{
 try|try
 init|(
-specifier|final
 name|Closer
 name|closer
 init|=

@@ -2073,7 +2073,6 @@ argument_list|)
 expr_stmt|;
 try|try
 init|(
-specifier|final
 name|Connection
 name|connection
 init|=

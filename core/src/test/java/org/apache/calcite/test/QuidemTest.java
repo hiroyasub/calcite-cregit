@@ -942,7 +942,6 @@ argument_list|)
 expr_stmt|;
 try|try
 init|(
-specifier|final
 name|Reader
 name|reader
 init|=
@@ -953,7 +952,6 @@ argument_list|(
 name|inFile
 argument_list|)
 init|;
-specifier|final
 name|Writer
 name|writer
 init|=
@@ -964,7 +962,6 @@ argument_list|(
 name|outFile
 argument_list|)
 init|;
-specifier|final
 name|Closer
 name|closer
 init|=

@@ -193,7 +193,6 @@ parameter_list|)
 block|{
 try|try
 init|(
-specifier|final
 name|PreparedStatement
 name|preparedStatement
 init|=

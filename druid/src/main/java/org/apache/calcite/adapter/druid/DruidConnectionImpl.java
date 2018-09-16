@@ -901,6 +901,7 @@ name|UTF_8
 argument_list|)
 argument_list|)
 expr_stmt|;
+comment|// CHECKSTYLE: IGNORE 0
 name|in
 operator|=
 operator|new
@@ -975,7 +976,6 @@ block|}
 block|}
 try|try
 init|(
-specifier|final
 name|JsonParser
 name|parser
 init|=
@@ -3906,6 +3906,7 @@ name|UTF_8
 argument_list|)
 argument_list|)
 expr_stmt|;
+comment|// CHECKSTYLE: IGNORE 0
 name|in
 operator|=
 operator|new
