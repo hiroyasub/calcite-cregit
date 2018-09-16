@@ -13716,13 +13716,21 @@ argument_list|()
 condition|)
 block|{
 comment|// We swap them to merge
+name|Set
+argument_list|<
+name|RexTableInputRef
+argument_list|>
+name|c2Temp
+init|=
+name|c2
+decl_stmt|;
+name|c2
+operator|=
+name|c1
+expr_stmt|;
 name|c1
 operator|=
-name|c2
-expr_stmt|;
-name|p1
-operator|=
-name|p2
+name|c2Temp
 expr_stmt|;
 block|}
 for|for
