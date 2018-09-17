@@ -8825,7 +8825,7 @@ name|sql
 init|=
 literal|"select * from (values (1,2)) where 1 + 2> 3 + CAST(NULL AS INTEGER)"
 decl_stmt|;
-name|checkPlanUnchanged
+name|checkPlanning
 argument_list|(
 operator|new
 name|HepPlanner

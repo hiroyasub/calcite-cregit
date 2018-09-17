@@ -181,16 +181,6 @@ name|Map
 import|;
 end_import
 
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|Objects
-import|;
-end_import
-
 begin_comment
 comment|/** Utilities for strong predicates.  *  *<p>A predicate is strong (or null-rejecting) if it is UNKNOWN if any of its  * inputs is UNKNOWN.</p>  *  *<p>By the way, UNKNOWN is just the boolean form of NULL.</p>  *  *<p>Examples:</p>  *<ul>  *<li>{@code UNKNOWN} is strong in [] (definitely null)  *<li>{@code c = 1} is strong in [c] (definitely null if and only if c is  *   null)  *<li>{@code c IS NULL} is not strong (always returns TRUE or FALSE, never  *   null)  *<li>{@code p1 AND p2} is strong in [p1, p2] (definitely null if either p1  *   is null or p2 is null)  *<li>{@code p1 OR p2} is strong if p1 and p2 are strong  *<li>{@code c1 = 1 OR c2 IS NULL} is strong in [c1] (definitely null if c1  *   is null)  *</ul>  */
 end_comment
@@ -324,21 +314,15 @@ name|kind
 parameter_list|)
 block|{
 return|return
-name|Objects
-operator|.
-name|requireNonNull
-argument_list|(
 name|MAP
 operator|.
-name|get
+name|getOrDefault
 argument_list|(
 name|kind
-argument_list|)
 argument_list|,
-name|kind
+name|Policy
 operator|.
-name|toString
-argument_list|()
+name|AS_IS
 argument_list|)
 return|;
 block|}
@@ -398,9 +382,7 @@ specifier|final
 name|Policy
 name|policy
 init|=
-name|MAP
-operator|.
-name|get
+name|policy
 argument_list|(
 name|node
 operator|.
