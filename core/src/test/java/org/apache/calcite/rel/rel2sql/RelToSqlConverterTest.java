@@ -1877,7 +1877,7 @@ name|assertThat
 argument_list|(
 name|sql
 argument_list|,
-name|is
+name|isLinux
 argument_list|(
 name|expectedSql
 argument_list|)
@@ -1956,7 +1956,7 @@ name|assertThat
 argument_list|(
 name|sql
 argument_list|,
-name|is
+name|isLinux
 argument_list|(
 name|expectedSql
 argument_list|)
@@ -2060,7 +2060,7 @@ name|assertThat
 argument_list|(
 name|sql
 argument_list|,
-name|is
+name|isLinux
 argument_list|(
 name|expectedSql
 argument_list|)
@@ -2187,7 +2187,7 @@ name|assertThat
 argument_list|(
 name|sql
 argument_list|,
-name|is
+name|isLinux
 argument_list|(
 name|expectedSql
 argument_list|)
