@@ -4725,6 +4725,11 @@ expr_stmt|;
 block|}
 block|}
 annotation|@
+name|Ignore
+argument_list|(
+literal|"CALCITE-1894: there's a bug in the test code, so it does not test what it should"
+argument_list|)
+annotation|@
 name|Test
 argument_list|(
 name|timeout
