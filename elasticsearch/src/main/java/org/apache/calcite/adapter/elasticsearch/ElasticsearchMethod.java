@@ -79,7 +79,7 @@ name|ElasticsearchMethod
 block|{
 name|ELASTICSEARCH_QUERYABLE_FIND
 argument_list|(
-name|AbstractElasticsearchTable
+name|ElasticsearchTable
 operator|.
 name|ElasticsearchQueryable
 operator|.
@@ -91,9 +91,36 @@ name|List
 operator|.
 name|class
 argument_list|,
+comment|// ops  - projections and other stuff
 name|List
 operator|.
 name|class
+argument_list|,
+comment|// fields
+name|List
+operator|.
+name|class
+argument_list|,
+comment|// sort
+name|List
+operator|.
+name|class
+argument_list|,
+comment|// groupBy
+name|List
+operator|.
+name|class
+argument_list|,
+comment|// aggregations
+name|Long
+operator|.
+name|class
+argument_list|,
+comment|// offset
+name|Long
+operator|.
+name|class
+comment|// fetch
 argument_list|)
 block|;
 specifier|public

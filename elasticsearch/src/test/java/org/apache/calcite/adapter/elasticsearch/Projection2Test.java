@@ -222,13 +222,13 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Test of different boolean expressions (some more complex than others).  */
+comment|/**  * Checks renaming of fields (also upper, lower cases) during projections  */
 end_comment
 
 begin_class
 specifier|public
 class|class
-name|BooleanLogicTest
+name|Projection2Test
 block|{
 annotation|@
 name|ClassRule
@@ -249,9 +249,8 @@ specifier|final
 name|String
 name|NAME
 init|=
-literal|"docs"
+literal|"nested"
 decl_stmt|;
-comment|/**    * Used to create {@code zips} index and insert some data    * @throws Exception when ES node setup failed    */
 annotation|@
 name|BeforeClass
 specifier|public
@@ -269,27 +268,27 @@ name|String
 argument_list|,
 name|String
 argument_list|>
-name|mapping
+name|mappings
 init|=
 name|ImmutableMap
 operator|.
 name|of
 argument_list|(
-literal|"A"
-argument_list|,
-literal|"keyword"
-argument_list|,
-literal|"b"
-argument_list|,
-literal|"keyword"
-argument_list|,
-literal|"c"
-argument_list|,
-literal|"keyword"
-argument_list|,
-literal|"int"
+literal|"a"
 argument_list|,
 literal|"long"
+argument_list|,
+literal|"b.a"
+argument_list|,
+literal|"long"
+argument_list|,
+literal|"b.b"
+argument_list|,
+literal|"long"
+argument_list|,
+literal|"b.c.a"
+argument_list|,
+literal|"keyword"
 argument_list|)
 decl_stmt|;
 name|NODE
@@ -298,13 +297,13 @@ name|createIndex
 argument_list|(
 name|NAME
 argument_list|,
-name|mapping
+name|mappings
 argument_list|)
 expr_stmt|;
 name|String
 name|doc
 init|=
-literal|"{'a': 'a', 'b':'b', 'c':'c', 'int': 42}"
+literal|"{'a': 1, 'b':{'a': 2, 'b':'3', 'c':{'a': 'foo'}}}"
 operator|.
 name|replace
 argument_list|(
@@ -420,13 +419,13 @@ name|Locale
 operator|.
 name|ROOT
 argument_list|,
-literal|"select cast(_MAP['a'] AS varchar(2)) AS a, "
+literal|"select _MAP['a'] AS \"a\", "
 operator|+
-literal|" cast(_MAP['b'] AS varchar(2)) AS b, "
+literal|" _MAP['b.a']  AS \"b.a\", "
 operator|+
-literal|" cast(_MAP['c'] AS varchar(2)) AS c, "
+literal|" _MAP['b.b'] AS \"b.b\", "
 operator|+
-literal|" cast(_MAP['int'] AS integer) AS num"
+literal|" _MAP['b.c.a'] AS \"b.c.a\" "
 operator|+
 literal|" from \"elastic\".\"%s\""
 argument_list|,
@@ -483,225 +482,56 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|expressions
+name|projection
 parameter_list|()
 block|{
-name|assertSingle
+name|CalciteAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
 argument_list|(
-literal|"select * from view"
+name|newConnectionFactory
+argument_list|()
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select \"a\", \"b.a\", \"b.b\", \"b.c.a\" from view"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"a=1; b.a=2; b.b=3; b.c.a=foo\n"
 argument_list|)
 expr_stmt|;
-name|assertSingle
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|projection2
+parameter_list|()
+block|{
+name|String
+name|sql
+init|=
+name|String
+operator|.
+name|format
 argument_list|(
-literal|"select * from view where a = 'a'"
-argument_list|)
-expr_stmt|;
-name|assertEmpty
-argument_list|(
-literal|"select * from view where a<> 'a'"
-argument_list|)
-expr_stmt|;
-name|assertSingle
-argument_list|(
-literal|"select * from view where  'a' = a"
-argument_list|)
-expr_stmt|;
-name|assertEmpty
-argument_list|(
-literal|"select * from view where a = 'b'"
-argument_list|)
-expr_stmt|;
-name|assertEmpty
-argument_list|(
-literal|"select * from view where 'b' = a"
-argument_list|)
-expr_stmt|;
-name|assertSingle
-argument_list|(
-literal|"select * from view where a in ('a', 'b')"
-argument_list|)
-expr_stmt|;
-name|assertSingle
-argument_list|(
-literal|"select * from view where a in ('a', 'c') and b = 'b'"
-argument_list|)
-expr_stmt|;
-name|assertSingle
-argument_list|(
-literal|"select * from view where (a = 'ZZ' or a = 'a')  and b = 'b'"
-argument_list|)
-expr_stmt|;
-name|assertSingle
-argument_list|(
-literal|"select * from view where b = 'b' and a in ('a', 'c')"
-argument_list|)
-expr_stmt|;
-name|assertSingle
-argument_list|(
-literal|"select * from view where num = 42 and a in ('a', 'c')"
-argument_list|)
-expr_stmt|;
-name|assertEmpty
-argument_list|(
-literal|"select * from view where a in ('a', 'c') and b = 'c'"
-argument_list|)
-expr_stmt|;
-name|assertSingle
-argument_list|(
-literal|"select * from view where a in ('a', 'c') and b = 'b' and num = 42"
-argument_list|)
-expr_stmt|;
-name|assertSingle
-argument_list|(
-literal|"select * from view where a in ('a', 'c') and b = 'b' and num>= 42"
-argument_list|)
-expr_stmt|;
-name|assertEmpty
-argument_list|(
-literal|"select * from view where a in ('a', 'c') and b = 'b' and num<> 42"
-argument_list|)
-expr_stmt|;
-name|assertEmpty
-argument_list|(
-literal|"select * from view where a in ('a', 'c') and b = 'b' and num> 42"
-argument_list|)
-expr_stmt|;
-name|assertSingle
-argument_list|(
-literal|"select * from view where num = 42"
-argument_list|)
-expr_stmt|;
-name|assertSingle
-argument_list|(
-literal|"select * from view where 42 = num"
-argument_list|)
-expr_stmt|;
-name|assertEmpty
-argument_list|(
-literal|"select * from view where num> 42"
-argument_list|)
-expr_stmt|;
-name|assertEmpty
-argument_list|(
-literal|"select * from view where 42> num"
-argument_list|)
-expr_stmt|;
-name|assertEmpty
-argument_list|(
-literal|"select * from view where num> 42 and num> 42"
-argument_list|)
-expr_stmt|;
-name|assertEmpty
-argument_list|(
-literal|"select * from view where num> 42 and num< 42"
-argument_list|)
-expr_stmt|;
-name|assertEmpty
-argument_list|(
-literal|"select * from view where num> 42 and num< 42 and num<> 42"
-argument_list|)
-expr_stmt|;
-name|assertEmpty
-argument_list|(
-literal|"select * from view where num> 42 and num< 42 and num = 42"
-argument_list|)
-expr_stmt|;
-name|assertEmpty
-argument_list|(
-literal|"select * from view where num> 42 or num< 42 and num = 42"
-argument_list|)
-expr_stmt|;
-name|assertSingle
-argument_list|(
-literal|"select * from view where num> 42 and num< 42 or num = 42"
-argument_list|)
-expr_stmt|;
-name|assertSingle
-argument_list|(
-literal|"select * from view where num> 42 or num< 42 or num = 42"
-argument_list|)
-expr_stmt|;
-name|assertSingle
-argument_list|(
-literal|"select * from view where num>= 42 and num<= 42 and num = 42"
-argument_list|)
-expr_stmt|;
-name|assertEmpty
-argument_list|(
-literal|"select * from view where num>= 42 and num<= 42 and num<> 42"
-argument_list|)
-expr_stmt|;
-name|assertEmpty
-argument_list|(
-literal|"select * from view where num< 42"
-argument_list|)
-expr_stmt|;
-name|assertEmpty
-argument_list|(
-literal|"select * from view where num<> 42"
-argument_list|)
-expr_stmt|;
-name|assertSingle
-argument_list|(
-literal|"select * from view where num>= 42"
-argument_list|)
-expr_stmt|;
-name|assertSingle
-argument_list|(
-literal|"select * from view where num<= 42"
-argument_list|)
-expr_stmt|;
-name|assertSingle
-argument_list|(
-literal|"select * from view where num< 43"
-argument_list|)
-expr_stmt|;
-name|assertSingle
-argument_list|(
-literal|"select * from view where num< 50"
-argument_list|)
-expr_stmt|;
-name|assertSingle
-argument_list|(
-literal|"select * from view where num> 41"
-argument_list|)
-expr_stmt|;
-name|assertSingle
-argument_list|(
-literal|"select * from view where num> 0"
-argument_list|)
-expr_stmt|;
-name|assertSingle
-argument_list|(
-literal|"select * from view where (a = 'a' and b = 'b') or (num = 42 and c = 'c')"
-argument_list|)
-expr_stmt|;
-name|assertSingle
-argument_list|(
-literal|"select * from view where c = 'c' and (a in ('a', 'b') or num in (41, 42))"
-argument_list|)
-expr_stmt|;
-name|assertSingle
-argument_list|(
-literal|"select * from view where (a = 'a' or b = 'b') or (num = 42 and c = 'c')"
-argument_list|)
-expr_stmt|;
-name|assertSingle
-argument_list|(
-literal|"select * from view where a = 'a' and (b = '0' or (b = 'b' and "
+name|Locale
+operator|.
+name|ROOT
+argument_list|,
+literal|"select _MAP['a'], _MAP['b.a'], _MAP['b.b'], "
 operator|+
-literal|"(c = '0' or (c = 'c' and num = 42))))"
+literal|"_MAP['b.c.a'], _MAP['missing'], _MAP['b.missing'] from \"elastic\".\"%s\""
+argument_list|,
+name|NAME
 argument_list|)
-expr_stmt|;
-block|}
-specifier|private
-name|void
-name|assertSingle
-parameter_list|(
-name|String
-name|query
-parameter_list|)
-block|{
+decl_stmt|;
 name|CalciteAssert
 operator|.
 name|that
@@ -715,42 +545,12 @@ argument_list|)
 operator|.
 name|query
 argument_list|(
-name|query
+name|sql
 argument_list|)
 operator|.
 name|returns
 argument_list|(
-literal|"A=a; B=b; C=c; NUM=42\n"
-argument_list|)
-expr_stmt|;
-block|}
-specifier|private
-name|void
-name|assertEmpty
-parameter_list|(
-name|String
-name|query
-parameter_list|)
-block|{
-name|CalciteAssert
-operator|.
-name|that
-argument_list|()
-operator|.
-name|with
-argument_list|(
-name|newConnectionFactory
-argument_list|()
-argument_list|)
-operator|.
-name|query
-argument_list|(
-name|query
-argument_list|)
-operator|.
-name|returns
-argument_list|(
-literal|""
+literal|"EXPR$0=1; EXPR$1=2; EXPR$2=3; EXPR$3=foo; EXPR$4=null; EXPR$5=null\n"
 argument_list|)
 expr_stmt|;
 block|}
@@ -758,7 +558,7 @@ block|}
 end_class
 
 begin_comment
-comment|// End BooleanLogicTest.java
+comment|// End Projection2Test.java
 end_comment
 
 end_unit

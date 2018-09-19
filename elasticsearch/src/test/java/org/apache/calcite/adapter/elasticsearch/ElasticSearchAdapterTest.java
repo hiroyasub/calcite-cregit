@@ -537,7 +537,7 @@ name|DriverManager
 operator|.
 name|getConnection
 argument_list|(
-literal|"jdbc:calcite:"
+literal|"jdbc:calcite:lex=JAVA"
 argument_list|)
 decl_stmt|;
 specifier|final
@@ -632,7 +632,7 @@ name|root
 operator|.
 name|add
 argument_list|(
-literal|"ZIPS"
+literal|"zips"
 argument_list|,
 name|macro
 argument_list|)
@@ -677,7 +677,7 @@ argument_list|()
 operator|.
 name|query
 argument_list|(
-literal|"select * from zips where \"city\" = 'BROOKLYN'"
+literal|"select * from zips where city = 'BROOKLYN'"
 argument_list|)
 operator|.
 name|returns
@@ -734,7 +734,7 @@ argument_list|)
 operator|.
 name|query
 argument_list|(
-literal|"select * from \"elastic\".\"zips\" where _MAP['Foo'] = '_MISSING_'"
+literal|"select * from elastic.zips where _MAP['Foo'] = '_MISSING_'"
 argument_list|)
 operator|.
 name|returnsCount
@@ -749,9 +749,27 @@ specifier|public
 name|void
 name|basic
 parameter_list|()
-throws|throws
-name|Exception
 block|{
+name|CalciteAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|newConnectionFactory
+argument_list|()
+argument_list|)
+comment|// by default elastic returns max 10 records
+operator|.
+name|query
+argument_list|(
+literal|"select * from elastic.zips"
+argument_list|)
+operator|.
+name|runs
+argument_list|()
+expr_stmt|;
 name|CalciteAssert
 operator|.
 name|that
@@ -765,7 +783,7 @@ argument_list|)
 operator|.
 name|query
 argument_list|(
-literal|"select * from \"elastic\".\"zips\" where _MAP['city'] = 'BROOKLYN'"
+literal|"select * from elastic.zips where _MAP['city'] = 'BROOKLYN'"
 argument_list|)
 operator|.
 name|returnsCount
@@ -786,7 +804,7 @@ argument_list|)
 operator|.
 name|query
 argument_list|(
-literal|"select * from \"elastic\".\"zips\" where"
+literal|"select * from elastic.zips where"
 operator|+
 literal|" _MAP['city'] in ('BROOKLYN', 'WASHINGTON')"
 argument_list|)
@@ -810,7 +828,7 @@ argument_list|)
 operator|.
 name|query
 argument_list|(
-literal|"select * from \"elastic\".\"zips\" where "
+literal|"select * from elastic.zips where "
 operator|+
 literal|"_MAP['city'] in ('brooklyn', 'Brooklyn', 'BROOK') "
 argument_list|)
@@ -834,7 +852,7 @@ argument_list|)
 operator|.
 name|query
 argument_list|(
-literal|"select * from \"elastic\".\"zips\" where _MAP['CITY'] = 'BROOKLYN'"
+literal|"select * from elastic.zips where _MAP['CITY'] = 'BROOKLYN'"
 argument_list|)
 operator|.
 name|returnsCount
@@ -856,12 +874,34 @@ argument_list|)
 operator|.
 name|query
 argument_list|(
-literal|"select * from \"elastic\".\"zips\" limit 42"
+literal|"select * from elastic.zips limit 42"
 argument_list|)
 operator|.
 name|returnsCount
 argument_list|(
 literal|42
+argument_list|)
+expr_stmt|;
+comment|// limit 0
+name|CalciteAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|newConnectionFactory
+argument_list|()
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select * from elastic.zips limit 0"
+argument_list|)
+operator|.
+name|returnsCount
+argument_list|(
+literal|0
 argument_list|)
 expr_stmt|;
 block|}
@@ -889,7 +929,7 @@ argument_list|()
 operator|.
 name|query
 argument_list|(
-literal|"select * from zips order by \"state\""
+literal|"select * from zips order by state"
 argument_list|)
 operator|.
 name|returnsCount
@@ -914,9 +954,9 @@ specifier|final
 name|String
 name|sql
 init|=
-literal|"select \"state\", \"pop\" from zips\n"
+literal|"select state, pop from zips\n"
 operator|+
-literal|"order by \"state\", \"pop\" offset 2 rows fetch next 3 rows only"
+literal|"order by state, pop offset 2 rows fetch next 3 rows only"
 decl_stmt|;
 name|calciteAssert
 argument_list|()
@@ -941,13 +981,61 @@ name|ElasticsearchChecker
 operator|.
 name|elasticsearchChecker
 argument_list|(
-literal|"\"_source\" : [\"state\", \"pop\"]"
+literal|"'_source' : ['state', 'pop']"
 argument_list|,
-literal|"\"sort\": [ {\"state\": \"asc\"}, {\"pop\": \"asc\"}]"
+literal|"sort: [ {state: 'asc'}, {pop: 'asc'}]"
 argument_list|,
-literal|"\"from\": 2"
+literal|"from: 2"
 argument_list|,
-literal|"\"size\": 3"
+literal|"size: 3"
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+comment|/**    * Sort by multiple fields (in different direction: asc/desc)    */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|sortAscDesc
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select city, state, pop from zips\n"
+operator|+
+literal|"order by pop desc, state asc, city desc limit 3"
+decl_stmt|;
+name|calciteAssert
+argument_list|()
+operator|.
+name|query
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|returnsOrdered
+argument_list|(
+literal|"city=CHICAGO; state=IL; pop=112047"
+argument_list|,
+literal|"city=BROOKLYN; state=NY; pop=111396"
+argument_list|,
+literal|"city=NEW YORK; state=NY; pop=106564"
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|ElasticsearchChecker
+operator|.
+name|elasticsearchChecker
+argument_list|(
+literal|"'_source':['city','state','pop']"
+argument_list|,
+literal|"sort:[{pop:'desc'}, {state:'asc'}, {city:'desc'}]"
+argument_list|,
+literal|"size:3"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -963,7 +1051,7 @@ specifier|final
 name|String
 name|sql
 init|=
-literal|"select \"state\", \"id\" from zips\n"
+literal|"select state, id from zips\n"
 operator|+
 literal|"offset 2 fetch next 3 rows only"
 decl_stmt|;
@@ -978,17 +1066,22 @@ operator|.
 name|runs
 argument_list|()
 operator|.
+name|returnsCount
+argument_list|(
+literal|3
+argument_list|)
+operator|.
 name|queryContains
 argument_list|(
 name|ElasticsearchChecker
 operator|.
 name|elasticsearchChecker
 argument_list|(
-literal|"\"from\": 2"
+literal|"_source : ['state', 'id']"
 argument_list|,
-literal|"\"size\": 3"
+literal|"from: 2"
 argument_list|,
-literal|"\"_source\" : [\"state\", \"id\"]"
+literal|"size: 3"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -1004,7 +1097,7 @@ specifier|final
 name|String
 name|sql
 init|=
-literal|"select \"state\", \"id\" from zips\n"
+literal|"select state, id from zips\n"
 operator|+
 literal|"fetch next 3 rows only"
 decl_stmt|;
@@ -1019,15 +1112,62 @@ operator|.
 name|runs
 argument_list|()
 operator|.
+name|returnsCount
+argument_list|(
+literal|3
+argument_list|)
+operator|.
 name|queryContains
 argument_list|(
 name|ElasticsearchChecker
 operator|.
 name|elasticsearchChecker
 argument_list|(
-literal|"\"size\": 3"
+literal|"'_source':['state','id']"
 argument_list|,
-literal|"\"_source\" : [\"state\", \"id\"]"
+literal|"size:3"
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|limit2
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select id from zips limit 5"
+decl_stmt|;
+name|calciteAssert
+argument_list|()
+operator|.
+name|query
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|runs
+argument_list|()
+operator|.
+name|returnsCount
+argument_list|(
+literal|5
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|ElasticsearchChecker
+operator|.
+name|elasticsearchChecker
+argument_list|(
+literal|"'_source':['id']"
+argument_list|,
+literal|"size:5"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -1045,9 +1185,9 @@ name|sql
 init|=
 literal|"select * from zips\n"
 operator|+
-literal|"where \"state\" = 'CA' and \"pop\">= 94000\n"
+literal|"where state = 'CA' and pop>= 94000\n"
 operator|+
-literal|"order by \"state\", \"pop\""
+literal|"order by state, pop"
 decl_stmt|;
 specifier|final
 name|String
@@ -1092,27 +1232,27 @@ name|ElasticsearchChecker
 operator|.
 name|elasticsearchChecker
 argument_list|(
-literal|"\"query\" : "
+literal|"'query' : "
 operator|+
-literal|"{\"constant_score\":{\"filter\":{\"bool\":"
+literal|"{'constant_score':{filter:{bool:"
 operator|+
-literal|"{\"must\":[{\"term\":{\"state\":\"CA\"}},"
+literal|"{must:[{term:{state:'CA'}},"
 operator|+
-literal|"{\"range\":{\"pop\":{\"gte\":94000}}}]}}}}"
+literal|"{range:{pop:{gte:94000}}}]}}}}"
 argument_list|,
-literal|"\"script_fields\": {\"longitude\":{\"script\":\"params._source.loc[0]\"}, "
+literal|"'script_fields': {longitude:{script:'params._source.loc[0]'}, "
 operator|+
-literal|"\"latitude\":{\"script\":\"params._source.loc[1]\"}, "
+literal|"latitude:{script:'params._source.loc[1]'}, "
 operator|+
-literal|"\"city\":{\"script\": \"params._source.city\"}, "
+literal|"city:{script: 'params._source.city'}, "
 operator|+
-literal|"\"pop\":{\"script\": \"params._source.pop\"}, "
+literal|"pop:{script: 'params._source.pop'}, "
 operator|+
-literal|"\"state\":{\"script\": \"params._source.state\"}, "
+literal|"state:{script: 'params._source.state'}, "
 operator|+
-literal|"\"id\":{\"script\": \"params._source.id\"}}"
+literal|"id:{script: 'params._source.id'}}"
 argument_list|,
-literal|"\"sort\": [ {\"state\": \"asc\"}, {\"pop\": \"asc\"}]"
+literal|"sort: [ {state: 'asc'}, {pop: 'asc'}]"
 argument_list|)
 argument_list|)
 operator|.
@@ -1135,9 +1275,9 @@ name|sql
 init|=
 literal|"select * from zips\n"
 operator|+
-literal|"where \"pop\" BETWEEN 95000 AND 100000\n"
+literal|"where pop BETWEEN 95000 AND 100000\n"
 operator|+
-literal|"order by \"state\" desc, \"pop\""
+literal|"order by state desc, pop"
 decl_stmt|;
 name|calciteAssert
 argument_list|()
@@ -1161,64 +1301,6 @@ argument_list|)
 expr_stmt|;
 block|}
 annotation|@
-name|Ignore
-argument_list|(
-literal|"Known issue when predicate analyzer doesn't simplify the expression (a = 1 and a> 0) "
-argument_list|)
-annotation|@
-name|Test
-specifier|public
-name|void
-name|testFilterRedundant
-parameter_list|()
-block|{
-comment|// known issue when PredicateAnalyzer doesn't simplify expressions
-comment|// (a< 3 and and a> 0 and a = 1) equivalent to (a = 1)
-specifier|final
-name|String
-name|sql
-init|=
-literal|"select * from zips\n"
-operator|+
-literal|"where \"state\"> 'CA' and \"state\"< 'AZ' and \"state\" = 'OK'"
-decl_stmt|;
-name|calciteAssert
-argument_list|()
-operator|.
-name|query
-argument_list|(
-name|sql
-argument_list|)
-operator|.
-name|runs
-argument_list|()
-operator|.
-name|queryContains
-argument_list|(
-name|ElasticsearchChecker
-operator|.
-name|elasticsearchChecker
-argument_list|(
-literal|""
-operator|+
-literal|"\"query\" : {\"constant_score\":{\"filter\":{\"bool\":"
-operator|+
-literal|"{\"must\":[{\"term\":{\"state\":\"OK\"}}]}}}}"
-argument_list|,
-literal|"\"script_fields\": {\"longitude\":{\"script\":\"params._source.loc[0]\"}, "
-operator|+
-literal|"\"latitude\":{\"script\":\"params._source.loc[1]\"}, "
-operator|+
-literal|"\"city\":{\"script\": \"params._source.city\"}, "
-operator|+
-literal|"\"pop\":{\"script\": \"params._source.pop\"}, \"state\":{\"script\": \"params._source.state\"}, "
-operator|+
-literal|"\"id\":{\"script\": \"params._source.id\"}}"
-argument_list|)
-argument_list|)
-expr_stmt|;
-block|}
-annotation|@
 name|Test
 specifier|public
 name|void
@@ -1231,21 +1313,21 @@ index|[]
 name|searches
 init|=
 block|{
-literal|"\"query\" : {\"constant_score\":{\"filter\":{\"bool\":{\"should\":"
+literal|"'query' : {'constant_score':{filter:{bool:{should:"
 operator|+
-literal|"[{\"term\":{\"pop\":96074}},{\"term\":{\"pop\":99568}}]}}}}"
+literal|"[{term:{pop:96074}},{term:{pop:99568}}]}}}}"
 block|,
-literal|"\"script_fields\": {\"longitude\":{\"script\":\"params._source.loc[0]\"}, "
+literal|"'script_fields': {longitude:{script:'params._source.loc[0]'}, "
 operator|+
-literal|"\"latitude\":{\"script\":\"params._source.loc[1]\"}, "
+literal|"latitude:{script:'params._source.loc[1]'}, "
 operator|+
-literal|"\"city\":{\"script\": \"params._source.city\"}, "
+literal|"city:{script: 'params._source.city'}, "
 operator|+
-literal|"\"pop\":{\"script\": \"params._source.pop\"}, "
+literal|"pop:{script: 'params._source.pop'}, "
 operator|+
-literal|"\"state\":{\"script\": \"params._source.state\"}, "
+literal|"state:{script: 'params._source.state'}, "
 operator|+
-literal|"\"id\":{\"script\": \"params._source.id\"}}"
+literal|"id:{script: 'params._source.id'}}"
 block|}
 decl_stmt|;
 name|calciteAssert
@@ -1253,7 +1335,7 @@ argument_list|()
 operator|.
 name|query
 argument_list|(
-literal|"select * from zips where \"pop\" in (96074, 99568)"
+literal|"select * from zips where pop in (96074, 99568)"
 argument_list|)
 operator|.
 name|returnsUnordered
@@ -1286,7 +1368,7 @@ argument_list|()
 operator|.
 name|query
 argument_list|(
-literal|"select \"state\", \"city\" from zips"
+literal|"select state, city from zips"
 argument_list|)
 operator|.
 name|returnsCount
@@ -1306,11 +1388,11 @@ specifier|final
 name|String
 name|sql
 init|=
-literal|"select \"state\", \"city\", 0 as \"zero\"\n"
+literal|"select state, city, 0 as zero\n"
 operator|+
 literal|"from zips\n"
 operator|+
-literal|"order by \"state\", \"city\""
+literal|"order by state, city"
 decl_stmt|;
 name|calciteAssert
 argument_list|()
@@ -1338,15 +1420,15 @@ name|ElasticsearchChecker
 operator|.
 name|elasticsearchChecker
 argument_list|(
-literal|"\"script_fields\": "
+literal|"script_fields:"
 operator|+
-literal|"{\"zero\":{\"script\": \"0\"}, "
+literal|"{zero:{script:'0'},"
 operator|+
-literal|"\"state\":{\"script\": \"params._source.state\"}, "
+literal|"state:{script:'params._source.state'},"
 operator|+
-literal|"\"city\":{\"script\": \"params._source.city\"}}"
+literal|"city:{script:'params._source.city'}}"
 argument_list|,
-literal|"\"sort\": [ {\"state\": \"asc\"}, {\"city\": \"asc\"}]"
+literal|"sort:[{state:'asc'},{city:'asc'}]"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -1375,7 +1457,7 @@ argument_list|()
 operator|.
 name|query
 argument_list|(
-literal|"select \"state\", \"city\" from zips where \"state\" = 'CA'"
+literal|"select state, city from zips where state = 'CA'"
 argument_list|)
 operator|.
 name|limit
@@ -1410,7 +1492,7 @@ argument_list|()
 operator|.
 name|query
 argument_list|(
-literal|"select \"state\", \"city\" from zips where 'WI'< \"state\" order by \"city\""
+literal|"select state, city from zips where 'WI'< state order by city"
 argument_list|)
 operator|.
 name|limit
@@ -1430,7 +1512,7 @@ argument_list|()
 operator|.
 name|query
 argument_list|(
-literal|"select \"state\", \"city\" from zips where \"state\"> 'WI' order by \"city\""
+literal|"select state, city from zips where state> 'WI' order by city"
 argument_list|)
 operator|.
 name|limit
@@ -1443,6 +1525,348 @@ argument_list|(
 literal|"state=WV; city=BECKLEY"
 argument_list|,
 literal|"state=WY; city=CHEYENNE"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|agg1
+parameter_list|()
+block|{
+name|calciteAssert
+argument_list|()
+operator|.
+name|query
+argument_list|(
+literal|"select count(*) from zips"
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|ElasticsearchChecker
+operator|.
+name|elasticsearchChecker
+argument_list|(
+literal|"'_source':false"
+argument_list|,
+literal|"size:0"
+argument_list|)
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"EXPR$0=149\n"
+argument_list|)
+expr_stmt|;
+comment|// check with limit (should still return correct result).
+name|calciteAssert
+argument_list|()
+operator|.
+name|query
+argument_list|(
+literal|"select count(*) from zips limit 1"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"EXPR$0=149\n"
+argument_list|)
+expr_stmt|;
+name|calciteAssert
+argument_list|()
+operator|.
+name|query
+argument_list|(
+literal|"select count(*) as cnt from zips"
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|ElasticsearchChecker
+operator|.
+name|elasticsearchChecker
+argument_list|(
+literal|"'_source':false"
+argument_list|,
+literal|"size:0"
+argument_list|)
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"cnt=149\n"
+argument_list|)
+expr_stmt|;
+name|calciteAssert
+argument_list|()
+operator|.
+name|query
+argument_list|(
+literal|"select min(pop), max(pop) from zips"
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|ElasticsearchChecker
+operator|.
+name|elasticsearchChecker
+argument_list|(
+literal|"'_source':false"
+argument_list|,
+literal|"size:0"
+argument_list|,
+literal|"aggregations:{'EXPR$0':{min:{field:'pop'}},'EXPR$1':{max:"
+operator|+
+literal|"{field:'pop'}}}"
+argument_list|)
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"EXPR$0=21; EXPR$1=112047\n"
+argument_list|)
+expr_stmt|;
+name|calciteAssert
+argument_list|()
+operator|.
+name|query
+argument_list|(
+literal|"select min(pop) as min1, max(pop) as max1 from zips"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"min1=21; max1=112047\n"
+argument_list|)
+expr_stmt|;
+name|calciteAssert
+argument_list|()
+operator|.
+name|query
+argument_list|(
+literal|"select count(*), max(pop), min(pop), sum(pop), avg(pop) from zips"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"EXPR$0=149; EXPR$1=112047; EXPR$2=21; EXPR$3=7865489; EXPR$4=52788\n"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|groupBy
+parameter_list|()
+block|{
+comment|// ascending
+name|calciteAssert
+argument_list|()
+operator|.
+name|query
+argument_list|(
+literal|"select min(pop), max(pop), state from zips group by state "
+operator|+
+literal|"order by state limit 3"
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|ElasticsearchChecker
+operator|.
+name|elasticsearchChecker
+argument_list|(
+literal|"'_source':false"
+argument_list|,
+literal|"size:0"
+argument_list|,
+literal|"aggregations:{'g_state':{terms:{field:'state',missing:'__MISSING__',size:3,"
+operator|+
+literal|" order:{'_key':'asc'}}"
+argument_list|,
+literal|"aggregations:{'EXPR$0':{min:{field:'pop'}},'EXPR$1':{max:{field:'pop'}}}}}"
+argument_list|)
+argument_list|)
+operator|.
+name|returnsOrdered
+argument_list|(
+literal|"EXPR$0=23238; EXPR$1=32383; state=AK"
+argument_list|,
+literal|"EXPR$0=42124; EXPR$1=44165; state=AL"
+argument_list|,
+literal|"EXPR$0=37428; EXPR$1=53532; state=AR"
+argument_list|)
+expr_stmt|;
+comment|// just one aggregation function
+name|calciteAssert
+argument_list|()
+operator|.
+name|query
+argument_list|(
+literal|"select min(pop), state from zips group by state"
+operator|+
+literal|" order by state limit 3"
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|ElasticsearchChecker
+operator|.
+name|elasticsearchChecker
+argument_list|(
+literal|"'_source':false"
+argument_list|,
+literal|"size:0"
+argument_list|,
+literal|"aggregations:{'g_state':{terms:{field:'state',missing:'__MISSING__',"
+operator|+
+literal|"size:3, order:{'_key':'asc'}}"
+argument_list|,
+literal|"aggregations:{'EXPR$0':{min:{field:'pop'}} }}}"
+argument_list|)
+argument_list|)
+operator|.
+name|returnsOrdered
+argument_list|(
+literal|"EXPR$0=23238; state=AK"
+argument_list|,
+literal|"EXPR$0=42124; state=AL"
+argument_list|,
+literal|"EXPR$0=37428; state=AR"
+argument_list|)
+expr_stmt|;
+comment|// group by count
+name|calciteAssert
+argument_list|()
+operator|.
+name|query
+argument_list|(
+literal|"select count(city), state from zips group by state "
+operator|+
+literal|"order by state limit 3"
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|ElasticsearchChecker
+operator|.
+name|elasticsearchChecker
+argument_list|(
+literal|"'_source':false"
+argument_list|,
+literal|"size:0"
+argument_list|,
+literal|"aggregations:{'g_state':{terms:{field:'state',missing:'__MISSING__',"
+operator|+
+literal|" size:3, order:{'_key':'asc'}}"
+argument_list|,
+literal|"aggregations:{'EXPR$0':{'value_count':{field:'city'}} }}}"
+argument_list|)
+argument_list|)
+operator|.
+name|returnsOrdered
+argument_list|(
+literal|"EXPR$0=3; state=AK"
+argument_list|,
+literal|"EXPR$0=3; state=AL"
+argument_list|,
+literal|"EXPR$0=3; state=AR"
+argument_list|)
+expr_stmt|;
+comment|// descending
+name|calciteAssert
+argument_list|()
+operator|.
+name|query
+argument_list|(
+literal|"select min(pop), max(pop), state from zips group by state "
+operator|+
+literal|" order by state desc limit 3"
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|ElasticsearchChecker
+operator|.
+name|elasticsearchChecker
+argument_list|(
+literal|"'_source':false"
+argument_list|,
+literal|"size:0"
+argument_list|,
+literal|"aggregations:{'g_state':{terms:{field:'state',missing:'__MISSING__',"
+operator|+
+literal|"size:3, order:{'_key':'desc'}}"
+argument_list|,
+literal|"aggregations:{'EXPR$0':{min:{field:'pop'}},'EXPR$1':"
+operator|+
+literal|"{max:{field:'pop'}}}}}"
+argument_list|)
+argument_list|)
+operator|.
+name|returnsOrdered
+argument_list|(
+literal|"EXPR$0=25968; EXPR$1=33107; state=WY"
+argument_list|,
+literal|"EXPR$0=45196; EXPR$1=70185; state=WV"
+argument_list|,
+literal|"EXPR$0=51008; EXPR$1=57187; state=WI"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/**    * Checks    *<a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-cardinality-aggregation.html">Cardinality</a>    * aggregation {@code approx_count_distinct}    */
+annotation|@
+name|Test
+annotation|@
+name|Ignore
+specifier|public
+name|void
+name|approximateCount
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+comment|// approx_count_distinct is converted into two aggregations. needs investigation
+comment|// ElasticsearchAggregate(group=[{1}], EXPR$0=[COUNT($0)])\r
+comment|//  ElasticsearchAggregate(group=[{0, 1}])\r
+name|calciteAssert
+argument_list|()
+operator|.
+name|query
+argument_list|(
+literal|"select approx_count_distinct(city), state from zips group by state "
+operator|+
+literal|"order by state limit 3"
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|ElasticsearchChecker
+operator|.
+name|elasticsearchChecker
+argument_list|(
+literal|"'_source':false"
+argument_list|,
+literal|"size:0"
+argument_list|,
+literal|"aggregations:{'g_state':{terms:{field:state, size:3, "
+operator|+
+literal|"order:{'_key':'asc'}}"
+argument_list|,
+literal|"aggregations:{'EXPR$0':{cardinality:{field:city}} }}}"
+argument_list|)
+argument_list|)
+operator|.
+name|returnsOrdered
+argument_list|(
+literal|"EXPR$0=3; state=AK"
+argument_list|,
+literal|"EXPR$0=3; state=AL"
+argument_list|,
+literal|"EXPR$0=3; state=AR"
 argument_list|)
 expr_stmt|;
 block|}

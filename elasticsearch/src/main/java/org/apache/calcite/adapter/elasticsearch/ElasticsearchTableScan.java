@@ -198,7 +198,7 @@ name|ElasticsearchRel
 block|{
 specifier|private
 specifier|final
-name|AbstractElasticsearchTable
+name|ElasticsearchTable
 name|elasticsearchTable
 decl_stmt|;
 specifier|private
@@ -218,7 +218,7 @@ parameter_list|,
 name|RelOptTable
 name|table
 parameter_list|,
-name|AbstractElasticsearchTable
+name|ElasticsearchTable
 name|elasticsearchTable
 parameter_list|,
 name|RelDataType
@@ -243,6 +243,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|elasticsearchTable
+argument_list|,
+literal|"elasticsearchTable"
 argument_list|)
 expr_stmt|;
 name|this

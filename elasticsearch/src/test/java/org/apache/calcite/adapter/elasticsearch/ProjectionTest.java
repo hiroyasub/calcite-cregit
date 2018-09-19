@@ -419,13 +419,13 @@ name|Locale
 operator|.
 name|ROOT
 argument_list|,
-literal|"select cast(_MAP['A'] AS varchar(2)) AS \"a\", "
+literal|"select cast(_MAP['A'] AS varchar(2)) AS a,"
 operator|+
-literal|" cast(_MAP['b'] AS varchar(2)) AS \"b\", "
+literal|" cast(_MAP['b'] AS varchar(2)) AS b, "
 operator|+
-literal|" cast(_MAP['cCC'] AS varchar(2)) AS \"c\", "
+literal|" cast(_MAP['cCC'] AS varchar(2)) AS c, "
 operator|+
-literal|" cast(_MAP['DDd'] AS varchar(2)) AS \"d\" "
+literal|" cast(_MAP['DDd'] AS varchar(2)) AS d "
 operator|+
 literal|" from \"elastic\".\"%s\""
 argument_list|,
@@ -503,7 +503,112 @@ argument_list|)
 operator|.
 name|returns
 argument_list|(
-literal|"a=aa; b=bb; c=cc; d=dd\n"
+literal|"A=aa; B=bb; C=cc; D=dd\n"
+argument_list|)
+expr_stmt|;
+name|CalciteAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|newConnectionFactory
+argument_list|()
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select a, b, c, d from view"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"A=aa; B=bb; C=cc; D=dd\n"
+argument_list|)
+expr_stmt|;
+name|CalciteAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|newConnectionFactory
+argument_list|()
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select d, c, b, a from view"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"D=dd; C=cc; B=bb; A=aa\n"
+argument_list|)
+expr_stmt|;
+name|CalciteAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|newConnectionFactory
+argument_list|()
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select a from view"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"A=aa\n"
+argument_list|)
+expr_stmt|;
+name|CalciteAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|newConnectionFactory
+argument_list|()
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select a, b from view"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"A=aa; B=bb\n"
+argument_list|)
+expr_stmt|;
+name|CalciteAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|newConnectionFactory
+argument_list|()
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select b, a from view"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"B=bb; A=aa\n"
 argument_list|)
 expr_stmt|;
 block|}

@@ -96,7 +96,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Util functions which convert  * {@link org.apache.calcite.adapter.elasticsearch.ElasticsearchSearchResult.SearchHit}  * into calcite specific return type (map, object[], list etc.)  */
+comment|/**  * Util functions which convert  * {@link ElasticsearchJson.SearchHit}  * into calcite specific return type (map, object[], list etc.)  */
 end_comment
 
 begin_class
@@ -112,7 +112,7 @@ specifier|private
 specifier|static
 name|Function1
 argument_list|<
-name|ElasticsearchSearchResult
+name|ElasticsearchJson
 operator|.
 name|SearchHit
 argument_list|,
@@ -125,7 +125,7 @@ return|return
 operator|new
 name|Function1
 argument_list|<
-name|ElasticsearchSearchResult
+name|ElasticsearchJson
 operator|.
 name|SearchHit
 argument_list|,
@@ -137,7 +137,7 @@ specifier|public
 name|Map
 name|apply
 parameter_list|(
-name|ElasticsearchSearchResult
+name|ElasticsearchJson
 operator|.
 name|SearchHit
 name|hits
@@ -157,7 +157,7 @@ specifier|private
 specifier|static
 name|Function1
 argument_list|<
-name|ElasticsearchSearchResult
+name|ElasticsearchJson
 operator|.
 name|SearchHit
 argument_list|,
@@ -178,7 +178,7 @@ return|return
 operator|new
 name|Function1
 argument_list|<
-name|ElasticsearchSearchResult
+name|ElasticsearchJson
 operator|.
 name|SearchHit
 argument_list|,
@@ -190,7 +190,7 @@ specifier|public
 name|Object
 name|apply
 parameter_list|(
-name|ElasticsearchSearchResult
+name|ElasticsearchJson
 operator|.
 name|SearchHit
 name|hits
@@ -201,8 +201,10 @@ name|convert
 argument_list|(
 name|hits
 operator|.
-name|sourceOrFields
-argument_list|()
+name|valueOrNull
+argument_list|(
+name|fieldName
+argument_list|)
 argument_list|,
 name|fieldClass
 argument_list|)
@@ -216,7 +218,7 @@ specifier|private
 specifier|static
 name|Function1
 argument_list|<
-name|ElasticsearchSearchResult
+name|ElasticsearchJson
 operator|.
 name|SearchHit
 argument_list|,
@@ -244,7 +246,7 @@ return|return
 operator|new
 name|Function1
 argument_list|<
-name|ElasticsearchSearchResult
+name|ElasticsearchJson
 operator|.
 name|SearchHit
 argument_list|,
@@ -258,7 +260,7 @@ name|Object
 index|[]
 name|apply
 parameter_list|(
-name|ElasticsearchSearchResult
+name|ElasticsearchJson
 operator|.
 name|SearchHit
 name|hit
@@ -340,7 +342,7 @@ name|convert
 argument_list|(
 name|hit
 operator|.
-name|value
+name|valueOrNull
 argument_list|(
 name|name
 argument_list|)
@@ -359,7 +361,7 @@ block|}
 specifier|static
 name|Function1
 argument_list|<
-name|ElasticsearchSearchResult
+name|ElasticsearchJson
 operator|.
 name|SearchHit
 argument_list|,
@@ -382,24 +384,59 @@ name|fields
 parameter_list|)
 block|{
 comment|//noinspection unchecked
-return|return
+specifier|final
+name|Function1
+name|getter
+decl_stmt|;
+if|if
+condition|(
 name|fields
 operator|==
 literal|null
-condition|?
-operator|(
-name|Function1
-operator|)
-name|mapGetter
-argument_list|()
-else|:
+operator|||
 name|fields
 operator|.
 name|size
 argument_list|()
 operator|==
 literal|1
-condition|?
+operator|&&
+literal|"_MAP"
+operator|.
+name|equals
+argument_list|(
+name|fields
+operator|.
+name|get
+argument_list|(
+literal|0
+argument_list|)
+operator|.
+name|getKey
+argument_list|()
+argument_list|)
+condition|)
+block|{
+comment|// select * from table
+name|getter
+operator|=
+name|mapGetter
+argument_list|()
+expr_stmt|;
+block|}
+if|else if
+condition|(
+name|fields
+operator|.
+name|size
+argument_list|()
+operator|==
+literal|1
+condition|)
+block|{
+comment|// select foo from table
+name|getter
+operator|=
 name|singletonGetter
 argument_list|(
 name|fields
@@ -422,14 +459,21 @@ operator|.
 name|getValue
 argument_list|()
 argument_list|)
-else|:
-operator|(
-name|Function1
-operator|)
+expr_stmt|;
+block|}
+else|else
+block|{
+comment|// select a, b, c from table
+name|getter
+operator|=
 name|listGetter
 argument_list|(
 name|fields
 argument_list|)
+expr_stmt|;
+block|}
+return|return
+name|getter
 return|;
 block|}
 specifier|private
