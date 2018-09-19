@@ -2002,16 +2002,16 @@ return|;
 block|}
 block|}
 return|return
-name|Compatible
-operator|.
-name|INSTANCE
-operator|.
-name|getParameterName
-argument_list|(
 name|method
-argument_list|,
+operator|.
+name|getParameters
+argument_list|()
+index|[
 name|i
-argument_list|)
+index|]
+operator|.
+name|getName
+argument_list|()
 return|;
 block|}
 comment|/** Derives whether the {@code i}th parameter of a method is optional. */

@@ -203,20 +203,6 @@ name|calcite
 operator|.
 name|util
 operator|.
-name|Compatible
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|util
-operator|.
 name|NameMap
 import|;
 end_import
@@ -1712,17 +1698,10 @@ name|builder
 argument_list|)
 expr_stmt|;
 return|return
-name|Compatible
-operator|.
-name|INSTANCE
-operator|.
-name|navigableMap
-argument_list|(
 name|builder
 operator|.
 name|build
 argument_list|()
-argument_list|)
 return|;
 block|}
 comment|/** Returns a collection of lattices.    *    *<p>All are explicit (defined using {@link #add(String, Lattice)}). */
@@ -1799,17 +1778,10 @@ name|builder
 argument_list|)
 expr_stmt|;
 return|return
-name|Compatible
-operator|.
-name|INSTANCE
-operator|.
-name|navigableSet
-argument_list|(
 name|builder
 operator|.
 name|build
 argument_list|()
-argument_list|)
 return|;
 block|}
 comment|/** Returns the set of all types names. */
@@ -1863,17 +1835,10 @@ name|builder
 argument_list|)
 expr_stmt|;
 return|return
-name|Compatible
-operator|.
-name|INSTANCE
-operator|.
-name|navigableSet
-argument_list|(
 name|builder
 operator|.
 name|build
 argument_list|()
-argument_list|)
 return|;
 block|}
 comment|/** Returns a type, explicit and implicit, with a given    * name. Never null. */
@@ -2060,17 +2025,10 @@ name|builder
 argument_list|)
 expr_stmt|;
 return|return
-name|Compatible
-operator|.
-name|INSTANCE
-operator|.
-name|navigableSet
-argument_list|(
 name|builder
 operator|.
 name|build
 argument_list|()
-argument_list|)
 return|;
 block|}
 comment|/** Returns tables derived from explicit and implicit functions    * that take zero parameters. */
@@ -2195,17 +2153,10 @@ name|builder
 argument_list|)
 expr_stmt|;
 return|return
-name|Compatible
-operator|.
-name|INSTANCE
-operator|.
-name|navigableMap
-argument_list|(
 name|builder
 operator|.
 name|build
 argument_list|()
-argument_list|)
 return|;
 block|}
 comment|/** Returns a tables derived from explicit and implicit functions    * that take zero parameters. */
