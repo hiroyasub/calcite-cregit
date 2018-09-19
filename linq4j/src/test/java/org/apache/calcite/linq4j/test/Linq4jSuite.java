@@ -134,6 +134,10 @@ block|,
 name|CorrelateJoinTest
 operator|.
 name|class
+block|,
+name|JoinPreserveOrderTest
+operator|.
+name|class
 block|}
 argument_list|)
 specifier|public
