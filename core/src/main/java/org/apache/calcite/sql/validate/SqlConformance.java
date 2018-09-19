@@ -233,6 +233,11 @@ name|boolean
 name|shouldConvertRaggedUnionTypesToVarying
 parameter_list|()
 function_decl|;
+comment|/**    * Whether TRIM should support more than one trim character.    *    *<p>For example, consider the query    *    *<blockquote><pre>SELECT TRIM('eh' FROM 'hehe__hehe')</pre></blockquote>    *    *<p>Under strict behavior, if the length of trim character is not 1,    * TRIM throws an exception, and the query fails.    * However many implementations (in databases such as MySQL and SQL Server)    * trim all the characters, resulting in a return value of '__'.    *    *<p>Among the built-in conformance levels, true in    * {@link SqlConformanceEnum#BABEL},    * {@link SqlConformanceEnum#LENIENT},    * {@link SqlConformanceEnum#MYSQL_5},    * {@link SqlConformanceEnum#SQL_SERVER_2008};    * false otherwise.    */
+name|boolean
+name|allowExtendedTrim
+parameter_list|()
+function_decl|;
 block|}
 end_interface
 

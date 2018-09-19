@@ -1086,6 +1086,11 @@ argument_list|,
 name|implementor
 operator|.
 name|allCorrelateVariables
+argument_list|,
+name|implementor
+operator|.
+name|getConformance
+argument_list|()
 argument_list|)
 argument_list|)
 argument_list|)

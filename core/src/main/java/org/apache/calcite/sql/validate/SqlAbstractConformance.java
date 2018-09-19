@@ -295,6 +295,20 @@ name|shouldConvertRaggedUnionTypesToVarying
 argument_list|()
 return|;
 block|}
+specifier|public
+name|boolean
+name|allowExtendedTrim
+parameter_list|()
+block|{
+return|return
+name|SqlConformanceEnum
+operator|.
+name|DEFAULT
+operator|.
+name|allowExtendedTrim
+argument_list|()
+return|;
+block|}
 block|}
 end_class
 

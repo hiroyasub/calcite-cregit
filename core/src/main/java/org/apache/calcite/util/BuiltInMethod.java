@@ -3341,6 +3341,10 @@ argument_list|,
 name|String
 operator|.
 name|class
+argument_list|,
+name|boolean
+operator|.
+name|class
 argument_list|)
 block|,
 name|REPLACE

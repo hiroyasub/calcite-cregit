@@ -523,6 +523,11 @@ argument_list|,
 name|bb
 argument_list|,
 literal|null
+argument_list|,
+name|implementor
+operator|.
+name|getConformance
+argument_list|()
 argument_list|)
 decl_stmt|;
 name|t

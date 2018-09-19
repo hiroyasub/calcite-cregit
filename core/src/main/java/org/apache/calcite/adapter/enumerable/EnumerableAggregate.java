@@ -1797,6 +1797,11 @@ name|inputPhysType
 argument_list|)
 argument_list|)
 argument_list|)
+argument_list|,
+name|implementor
+operator|.
+name|getConformance
+argument_list|()
 argument_list|)
 operator|.
 name|setNullable

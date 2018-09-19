@@ -29,6 +29,22 @@ name|RelNode
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|validate
+operator|.
+name|SqlConformance
+import|;
+end_import
+
 begin_comment
 comment|/**  * This is a marker interface for a callback used to convert a tree of  * {@link RelNode relational expressions} into a plan. Calling  * conventions typically have their own protocol for walking over a  * tree, and correspondingly have their own implementors  */
 end_comment
@@ -37,7 +53,13 @@ begin_interface
 specifier|public
 interface|interface
 name|RelImplementor
-block|{ }
+block|{
+comment|/** Returns the desired SQL conformance. */
+name|SqlConformance
+name|getConformance
+parameter_list|()
+function_decl|;
+block|}
 end_interface
 
 begin_comment

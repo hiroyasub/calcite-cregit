@@ -10924,7 +10924,7 @@ literal|"org.apache.calcite.runtime.SqlFunctions.trim(true, true, \" \", "
 operator|+
 literal|"org.apache.calcite.runtime.SqlFunctions.substring(inp2_, "
 operator|+
-literal|"inp1_ * 0 + 1)), (v5 ? 4 : 5) - 2);"
+literal|"inp1_ * 0 + 1), true), (v5 ? 4 : 5) - 2);"
 argument_list|)
 operator|.
 name|returns
@@ -11022,7 +11022,7 @@ literal|"org.apache.calcite.runtime.SqlFunctions.trim(true, true, \" \", "
 operator|+
 literal|"org.apache.calcite.runtime.SqlFunctions.substring(inp2_, "
 operator|+
-literal|"inp1_ * 0 + 1)), $L4J$C$5_2);"
+literal|"inp1_ * 0 + 1), true), $L4J$C$5_2);"
 argument_list|)
 operator|.
 name|returns

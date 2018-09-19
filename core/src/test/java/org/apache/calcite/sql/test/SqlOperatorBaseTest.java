@@ -22494,13 +22494,6 @@ argument_list|(
 literal|"trim('a' from cast(null as varchar(1)))"
 argument_list|)
 expr_stmt|;
-if|if
-condition|(
-name|Bug
-operator|.
-name|FNL3_FIXED
-condition|)
-block|{
 comment|// SQL:2003 6.29.9: trim string must have length=1. Failure occurs
 comment|// at runtime.
 comment|//
@@ -22514,13 +22507,7 @@ name|checkFails
 argument_list|(
 literal|"trim('xy' from 'abcde')"
 argument_list|,
-literal|"could not calculate results for the following row:\n"
-operator|+
-literal|"\\[ 0 \\]\n"
-operator|+
-literal|"Messages:\n"
-operator|+
-literal|"\\[0\\]:PC=0 Code=22027 "
+literal|"trim error: trim character must be exactly 1 character"
 argument_list|,
 literal|true
 argument_list|)
@@ -22531,18 +22518,57 @@ name|checkFails
 argument_list|(
 literal|"trim('' from 'abcde')"
 argument_list|,
-literal|"could not calculate results for the following row:\n"
-operator|+
-literal|"\\[ 0 \\]\n"
-operator|+
-literal|"Messages:\n"
-operator|+
-literal|"\\[0\\]:PC=0 Code=22027 "
+literal|"trim error: trim character must be exactly 1 character"
 argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
-block|}
+specifier|final
+name|SqlTester
+name|tester1
+init|=
+name|tester
+operator|.
+name|withConformance
+argument_list|(
+name|SqlConformanceEnum
+operator|.
+name|MYSQL_5
+argument_list|)
+decl_stmt|;
+name|tester1
+operator|.
+name|checkString
+argument_list|(
+literal|"trim(leading 'eh' from 'hehe__hehe')"
+argument_list|,
+literal|"__hehe"
+argument_list|,
+literal|"VARCHAR(10) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester1
+operator|.
+name|checkString
+argument_list|(
+literal|"trim(trailing 'eh' from 'hehe__hehe')"
+argument_list|,
+literal|"hehe__"
+argument_list|,
+literal|"VARCHAR(10) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester1
+operator|.
+name|checkString
+argument_list|(
+literal|"trim('eh' from 'hehe__hehe')"
+argument_list|,
+literal|"__"
+argument_list|,
+literal|"VARCHAR(10) NOT NULL"
+argument_list|)
+expr_stmt|;
 block|}
 annotation|@
 name|Test
