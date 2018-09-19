@@ -7651,6 +7651,17 @@ argument_list|,
 literal|"true"
 argument_list|)
 expr_stmt|;
+comment|// "null is null" to "true"
+name|checkSimplify
+argument_list|(
+name|isNull
+argument_list|(
+name|nullBool
+argument_list|)
+argument_list|,
+literal|"true"
+argument_list|)
+expr_stmt|;
 comment|// "(x + y) is null" simplifies to "x is null or y is null"
 name|checkSimplify
 argument_list|(
