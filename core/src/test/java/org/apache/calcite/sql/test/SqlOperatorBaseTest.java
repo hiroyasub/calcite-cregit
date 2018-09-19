@@ -22186,7 +22186,95 @@ name|tester
 operator|.
 name|checkString
 argument_list|(
+literal|"substring('abc' from 2 for 8)"
+argument_list|,
+literal|"bc"
+argument_list|,
+literal|"VARCHAR(3) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"substring('abc' from 0 for 2)"
+argument_list|,
+literal|"a"
+argument_list|,
+literal|"VARCHAR(3) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"substring('abc' from 0 for 0)"
+argument_list|,
+literal|""
+argument_list|,
+literal|"VARCHAR(3) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"substring('abc' from 8 for 2)"
+argument_list|,
+literal|""
+argument_list|,
+literal|"VARCHAR(3) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkFails
+argument_list|(
+literal|"substring('abc' from 1 for -1)"
+argument_list|,
+literal|"substring error: negative substring length not allowed"
+argument_list|,
+literal|true
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
 literal|"substring('abc' from 2)"
+argument_list|,
+literal|"bc"
+argument_list|,
+literal|"VARCHAR(3) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"substring('abc' from 0)"
+argument_list|,
+literal|"abc"
+argument_list|,
+literal|"VARCHAR(3) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"substring('abc' from 8)"
+argument_list|,
+literal|""
+argument_list|,
+literal|"VARCHAR(3) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"substring('abc' from -2)"
 argument_list|,
 literal|"bc"
 argument_list|,
@@ -22208,7 +22296,95 @@ name|tester
 operator|.
 name|checkString
 argument_list|(
+literal|"substring(x'aabbcc' from 2 for 8)"
+argument_list|,
+literal|"bbcc"
+argument_list|,
+literal|"VARBINARY(3) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"substring(x'aabbcc' from 0 for 2)"
+argument_list|,
+literal|"aa"
+argument_list|,
+literal|"VARBINARY(3) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"substring(x'aabbcc' from 0 for 0)"
+argument_list|,
+literal|""
+argument_list|,
+literal|"VARBINARY(3) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"substring(x'aabbcc' from 8 for 2)"
+argument_list|,
+literal|""
+argument_list|,
+literal|"VARBINARY(3) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkFails
+argument_list|(
+literal|"substring(x'aabbcc' from 1 for -1)"
+argument_list|,
+literal|"substring error: negative substring length not allowed"
+argument_list|,
+literal|true
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
 literal|"substring(x'aabbcc' from 2)"
+argument_list|,
+literal|"bbcc"
+argument_list|,
+literal|"VARBINARY(3) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"substring(x'aabbcc' from 0)"
+argument_list|,
+literal|"aabbcc"
+argument_list|,
+literal|"VARBINARY(3) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"substring(x'aabbcc' from 8)"
+argument_list|,
+literal|""
+argument_list|,
+literal|"VARBINARY(3) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"substring(x'aabbcc' from -2)"
 argument_list|,
 literal|"bbcc"
 argument_list|,
