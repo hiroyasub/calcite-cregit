@@ -666,12 +666,14 @@ name|close
 argument_list|()
 expr_stmt|;
 return|return
-literal|"\"query\" : "
+literal|"{\"query\" : "
 operator|+
 name|writer
 operator|.
 name|toString
 argument_list|()
+operator|+
+literal|"}"
 return|;
 block|}
 block|}

@@ -304,6 +304,10 @@ argument_list|,
 name|SqlKind
 operator|.
 name|SUM
+argument_list|,
+name|SqlKind
+operator|.
+name|ANY_VALUE
 argument_list|)
 decl_stmt|;
 comment|/** Creates a ElasticsearchAggregate */
@@ -760,6 +764,28 @@ argument_list|(
 literal|0
 argument_list|)
 decl_stmt|;
+comment|// for ANY_VALUE return just a single result
+specifier|final
+name|String
+name|size
+init|=
+name|aggCall
+operator|.
+name|getAggregation
+argument_list|()
+operator|.
+name|getKind
+argument_list|()
+operator|==
+name|SqlKind
+operator|.
+name|ANY_VALUE
+condition|?
+literal|", \"size\": 1"
+else|:
+literal|""
+decl_stmt|;
+specifier|final
 name|String
 name|op
 init|=
@@ -771,7 +797,7 @@ name|Locale
 operator|.
 name|ROOT
 argument_list|,
-literal|"\"%s\":{\"field\": \"%s\"}"
+literal|"{\"%s\":{\"field\": \"%s\" %s}}"
 argument_list|,
 name|toElasticAggregate
 argument_list|(
@@ -779,6 +805,8 @@ name|aggCall
 argument_list|)
 argument_list|,
 name|name
+argument_list|,
+name|size
 argument_list|)
 decl_stmt|;
 name|implementor
@@ -856,6 +884,12 @@ name|AVG
 case|:
 return|return
 literal|"avg"
+return|;
+case|case
+name|ANY_VALUE
+case|:
+return|return
+literal|"terms"
 return|;
 default|default:
 throw|throw

@@ -719,10 +719,14 @@ name|implementor
 operator|.
 name|add
 argument_list|(
+literal|"{"
+operator|+
 name|query
 operator|.
 name|toString
 argument_list|()
+operator|+
+literal|"}"
 argument_list|)
 expr_stmt|;
 block|}

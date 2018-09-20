@@ -1028,6 +1028,90 @@ literal|"cat1=b; cat3=z; EXPR$2=7.0; EXPR$3=42.0"
 argument_list|)
 expr_stmt|;
 block|}
+comment|/**    * Testing {@link org.apache.calcite.sql.SqlKind#ANY_VALUE} aggregate function    */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|anyValue
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+name|CalciteAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|newConnectionFactory
+argument_list|()
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select cat1, any_value(cat2) from view group by cat1"
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"cat1=a; EXPR$1=g"
+argument_list|,
+literal|"cat1=null; EXPR$1=g"
+argument_list|,
+literal|"cat1=b; EXPR$1=h"
+argument_list|)
+expr_stmt|;
+name|CalciteAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|newConnectionFactory
+argument_list|()
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select cat2, any_value(cat1) from view group by cat2"
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"cat2=g; EXPR$1=a"
+argument_list|,
+comment|// EXPR$1=null is also valid
+literal|"cat2=h; EXPR$1=b"
+argument_list|)
+expr_stmt|;
+name|CalciteAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|newConnectionFactory
+argument_list|()
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select cat2, any_value(cat3) from view group by cat2"
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"cat2=g; EXPR$1=y"
+argument_list|,
+comment|// EXPR$1=null is also valid
+literal|"cat2=h; EXPR$1=z"
+argument_list|)
+expr_stmt|;
+block|}
 annotation|@
 name|Test
 specifier|public
