@@ -9848,6 +9848,25 @@ argument_list|,
 literal|"OR(IS NOT NULL(?0.b), IS NULL(?0.c))"
 argument_list|)
 expr_stmt|;
+comment|// "b is null or b is not false" unchanged
+name|checkSimplifyFilter
+argument_list|(
+name|or
+argument_list|(
+name|isNull
+argument_list|(
+name|bRef
+argument_list|)
+argument_list|,
+name|isNotFalse
+argument_list|(
+name|bRef
+argument_list|)
+argument_list|)
+argument_list|,
+literal|"OR(IS NULL(?0.b), IS NOT FALSE(?0.b))"
+argument_list|)
+expr_stmt|;
 comment|// multiple predicates are handled correctly
 name|checkSimplifyFilter
 argument_list|(

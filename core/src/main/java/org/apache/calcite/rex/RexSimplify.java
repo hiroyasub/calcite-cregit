@@ -2518,17 +2518,6 @@ literal|true
 argument_list|)
 return|;
 block|}
-else|else
-block|{
-return|return
-name|rexBuilder
-operator|.
-name|makeLiteral
-argument_list|(
-literal|false
-argument_list|)
-return|;
-block|}
 block|}
 return|return
 literal|null
