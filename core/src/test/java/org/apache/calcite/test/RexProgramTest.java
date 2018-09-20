@@ -14236,6 +14236,33 @@ literal|"..."
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|simplifyNull
+parameter_list|()
+block|{
+name|checkSimplify2
+argument_list|(
+name|nullBool
+argument_list|,
+literal|"null"
+argument_list|,
+literal|"false"
+argument_list|)
+expr_stmt|;
+comment|// null int must not be simplified to false
+name|checkSimplify2
+argument_list|(
+name|nullInt
+argument_list|,
+literal|"null"
+argument_list|,
+literal|"null"
+argument_list|)
+expr_stmt|;
+block|}
 comment|/** Converts a map to a string, sorting on the string representation of its    * keys. */
 specifier|private
 specifier|static

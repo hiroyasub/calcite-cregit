@@ -892,9 +892,22 @@ name|e
 argument_list|)
 condition|)
 block|{
+comment|// NULL integer must not be converted to FALSE even in unknownAsFalse mode
 if|if
 condition|(
 name|unknownAsFalse
+operator|&&
+name|e
+operator|.
+name|getType
+argument_list|()
+operator|.
+name|getSqlTypeName
+argument_list|()
+operator|==
+name|SqlTypeName
+operator|.
+name|BOOLEAN
 condition|)
 block|{
 return|return
