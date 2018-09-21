@@ -1817,6 +1817,81 @@ literal|"EXPR$0=51008; EXPR$1=57187; state=WI"
 argument_list|)
 expr_stmt|;
 block|}
+comment|/**    * Testing {@code NOT} operator    */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|notOperator
+parameter_list|()
+block|{
+comment|// largest zips (states) in mini-zip by pop (sorted) : IL, NY, CA, MI
+name|calciteAssert
+argument_list|()
+operator|.
+name|query
+argument_list|(
+literal|"select count(*), max(pop) from zips where state not in ('IL')"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"EXPR$0=146; EXPR$1=111396\n"
+argument_list|)
+expr_stmt|;
+name|calciteAssert
+argument_list|()
+operator|.
+name|query
+argument_list|(
+literal|"select count(*), max(pop) from zips where not state in ('IL')"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"EXPR$0=146; EXPR$1=111396\n"
+argument_list|)
+expr_stmt|;
+name|calciteAssert
+argument_list|()
+operator|.
+name|query
+argument_list|(
+literal|"select count(*), max(pop) from zips where not state not in ('IL')"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"EXPR$0=3; EXPR$1=112047\n"
+argument_list|)
+expr_stmt|;
+name|calciteAssert
+argument_list|()
+operator|.
+name|query
+argument_list|(
+literal|"select count(*), max(pop) from zips where state not in ('IL', 'NY')"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"EXPR$0=143; EXPR$1=99568\n"
+argument_list|)
+expr_stmt|;
+name|calciteAssert
+argument_list|()
+operator|.
+name|query
+argument_list|(
+literal|"select count(*), max(pop) from zips where state not in ('IL', 'NY', 'CA')"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"EXPR$0=140; EXPR$1=84712\n"
+argument_list|)
+expr_stmt|;
+block|}
 comment|/**    * Checks    *<a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-cardinality-aggregation.html">Cardinality</a>    * aggregation {@code approx_count_distinct}    */
 annotation|@
 name|Test

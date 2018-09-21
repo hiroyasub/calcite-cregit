@@ -694,6 +694,135 @@ literal|"(c = '0' or (c = 'c' and num = 42))))"
 argument_list|)
 expr_stmt|;
 block|}
+comment|/**    * Tests negations ({@code NOT} operator).    */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|notExpression
+parameter_list|()
+block|{
+name|assertEmpty
+argument_list|(
+literal|"select * from view where not a = 'a'"
+argument_list|)
+expr_stmt|;
+name|assertSingle
+argument_list|(
+literal|"select * from view where not not a = 'a'"
+argument_list|)
+expr_stmt|;
+name|assertEmpty
+argument_list|(
+literal|"select * from view where not not not a = 'a'"
+argument_list|)
+expr_stmt|;
+name|assertSingle
+argument_list|(
+literal|"select * from view where not a<> 'a'"
+argument_list|)
+expr_stmt|;
+name|assertSingle
+argument_list|(
+literal|"select * from view where not not not a<> 'a'"
+argument_list|)
+expr_stmt|;
+name|assertEmpty
+argument_list|(
+literal|"select * from view where not 'a' = a"
+argument_list|)
+expr_stmt|;
+name|assertSingle
+argument_list|(
+literal|"select * from view where not 'a'<> a"
+argument_list|)
+expr_stmt|;
+name|assertSingle
+argument_list|(
+literal|"select * from view where not a = 'b'"
+argument_list|)
+expr_stmt|;
+name|assertSingle
+argument_list|(
+literal|"select * from view where not 'b' = a"
+argument_list|)
+expr_stmt|;
+name|assertEmpty
+argument_list|(
+literal|"select * from view where not a in ('a')"
+argument_list|)
+expr_stmt|;
+name|assertEmpty
+argument_list|(
+literal|"select * from view where a not in ('a')"
+argument_list|)
+expr_stmt|;
+name|assertSingle
+argument_list|(
+literal|"select * from view where not a not in ('a')"
+argument_list|)
+expr_stmt|;
+name|assertEmpty
+argument_list|(
+literal|"select * from view where not a not in ('b')"
+argument_list|)
+expr_stmt|;
+name|assertEmpty
+argument_list|(
+literal|"select * from view where not not a not in ('a')"
+argument_list|)
+expr_stmt|;
+name|assertSingle
+argument_list|(
+literal|"select * from view where not not a not in ('b')"
+argument_list|)
+expr_stmt|;
+name|assertEmpty
+argument_list|(
+literal|"select * from view where not a in ('a', 'b')"
+argument_list|)
+expr_stmt|;
+name|assertEmpty
+argument_list|(
+literal|"select * from view where a not in ('a', 'b')"
+argument_list|)
+expr_stmt|;
+name|assertEmpty
+argument_list|(
+literal|"select * from view where not a not in ('z')"
+argument_list|)
+expr_stmt|;
+name|assertEmpty
+argument_list|(
+literal|"select * from view where not a not in ('z')"
+argument_list|)
+expr_stmt|;
+name|assertSingle
+argument_list|(
+literal|"select * from view where not a in ('z')"
+argument_list|)
+expr_stmt|;
+name|assertSingle
+argument_list|(
+literal|"select * from view where not (not num = 42 or not a in ('a', 'c'))"
+argument_list|)
+expr_stmt|;
+name|assertEmpty
+argument_list|(
+literal|"select * from view where not num> 0"
+argument_list|)
+expr_stmt|;
+name|assertEmpty
+argument_list|(
+literal|"select * from view where num = 42 and a not in ('a', 'c')"
+argument_list|)
+expr_stmt|;
+name|assertSingle
+argument_list|(
+literal|"select * from view where not (num> 42 or num< 42 and num = 42)"
+argument_list|)
+expr_stmt|;
+block|}
 specifier|private
 name|void
 name|assertSingle
