@@ -411,7 +411,7 @@ name|getLong
 argument_list|(
 literal|"rex.fuzzing.iterations"
 argument_list|,
-literal|20
+literal|18
 argument_list|)
 decl_stmt|;
 comment|// Stop fuzzing after detecting MAX_FAILURES errors
@@ -460,7 +460,7 @@ name|getLong
 argument_list|(
 literal|"rex.fuzzing.seed"
 argument_list|,
-literal|43
+literal|44
 argument_list|)
 decl_stmt|;
 specifier|private
@@ -1664,7 +1664,13 @@ operator|new
 name|TopN
 argument_list|<>
 argument_list|(
-name|TOPN_SLOWEST
+name|topnSlowest
+operator|>
+literal|0
+condition|?
+name|topnSlowest
+else|:
+literal|1
 argument_list|)
 expr_stmt|;
 name|Random

@@ -240,6 +240,15 @@ name|put
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
+name|CASE
+argument_list|,
+literal|"case_"
+argument_list|)
+decl|.
+name|put
+argument_list|(
+name|SqlStdOperatorTable
+operator|.
 name|COALESCE
 argument_list|,
 literal|"coalesce"
