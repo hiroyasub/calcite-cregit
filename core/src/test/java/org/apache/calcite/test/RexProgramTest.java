@@ -9488,6 +9488,81 @@ argument_list|,
 literal|">(?0.a, 10)"
 argument_list|)
 expr_stmt|;
+comment|// "null AND NOT(null OR x)" => "null AND NOT(x)"
+name|checkSimplify2
+argument_list|(
+name|and
+argument_list|(
+name|nullBool
+argument_list|,
+name|not
+argument_list|(
+name|or
+argument_list|(
+name|nullBool
+argument_list|,
+name|vBool
+argument_list|()
+argument_list|)
+argument_list|)
+argument_list|)
+argument_list|,
+literal|"AND(null, NOT(?0.bool0))"
+argument_list|,
+literal|"false"
+argument_list|)
+expr_stmt|;
+comment|// "x1 AND x2 AND x3 AND NOT(x1) AND NOT(x2) AND NOT(x0)" =>
+comment|// "x3 AND null AND x1 IS NULL AND x2 IS NULL AND NOT(x0)"
+name|checkSimplify2
+argument_list|(
+name|and
+argument_list|(
+name|vBool
+argument_list|(
+literal|1
+argument_list|)
+argument_list|,
+name|vBool
+argument_list|(
+literal|2
+argument_list|)
+argument_list|,
+name|vBool
+argument_list|(
+literal|3
+argument_list|)
+argument_list|,
+name|not
+argument_list|(
+name|vBool
+argument_list|(
+literal|1
+argument_list|)
+argument_list|)
+argument_list|,
+name|not
+argument_list|(
+name|vBool
+argument_list|(
+literal|2
+argument_list|)
+argument_list|)
+argument_list|,
+name|not
+argument_list|(
+name|vBool
+argument_list|()
+argument_list|)
+argument_list|)
+argument_list|,
+literal|"AND(?0.bool3, null, IS NULL(?0.bool1),"
+operator|+
+literal|" IS NULL(?0.bool2), NOT(?0.bool0))"
+argument_list|,
+literal|"false"
+argument_list|)
+expr_stmt|;
 block|}
 annotation|@
 name|Test

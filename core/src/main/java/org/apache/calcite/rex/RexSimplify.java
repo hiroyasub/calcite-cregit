@@ -4517,6 +4517,7 @@ operator|!=
 literal|null
 condition|)
 block|{
+comment|// Remove the intersection of "terms" and "notTerms"
 name|terms
 operator|.
 name|removeAll
@@ -4524,6 +4525,14 @@ argument_list|(
 name|notSatisfiableNullables
 argument_list|)
 expr_stmt|;
+name|notTerms
+operator|.
+name|removeAll
+argument_list|(
+name|notSatisfiableNullables
+argument_list|)
+expr_stmt|;
+comment|// The intersection simplify to "null and x1 is null and x2 is null..."
 name|terms
 operator|.
 name|add
@@ -4575,19 +4584,6 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|// NULL AND (x IS NULL)
-return|return
-name|rexBuilder
-operator|.
-name|makeCall
-argument_list|(
-name|SqlStdOperatorTable
-operator|.
-name|AND
-argument_list|,
-name|terms
-argument_list|)
-return|;
 block|}
 comment|// Add the NOT disjunctions back in.
 for|for
