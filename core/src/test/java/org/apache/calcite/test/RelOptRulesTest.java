@@ -11291,9 +11291,13 @@ name|build
 argument_list|()
 decl_stmt|;
 comment|// The resulting plan should have no cast expressions
-name|checkPlanning
+name|checkPlanUnchanged
+argument_list|(
+operator|new
+name|HepPlanner
 argument_list|(
 name|program
+argument_list|)
 argument_list|,
 literal|"select cast(d.name as varchar(128)), cast(e.empno as integer) "
 operator|+
