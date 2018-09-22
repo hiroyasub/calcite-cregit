@@ -3174,21 +3174,6 @@ name|QueryBuilder
 name|builder
 parameter_list|()
 block|{
-if|if
-condition|(
-name|builder
-operator|==
-literal|null
-condition|)
-block|{
-throw|throw
-operator|new
-name|IllegalStateException
-argument_list|(
-literal|"builder was not set"
-argument_list|)
-throw|;
-block|}
 return|return
 name|builder
 return|;
