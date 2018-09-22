@@ -14434,7 +14434,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testSimplifyNot
+name|testSimplifyFalse
 parameter_list|()
 block|{
 specifier|final
@@ -14461,9 +14461,7 @@ specifier|final
 name|RexNode
 name|booleanInput
 init|=
-name|rexBuilder
-operator|.
-name|makeInputRef
+name|input
 argument_list|(
 name|booleanNullableType
 argument_list|,
@@ -14474,14 +14472,8 @@ specifier|final
 name|RexNode
 name|isFalse
 init|=
-name|rexBuilder
-operator|.
-name|makeCall
+name|isFalse
 argument_list|(
-name|SqlStdOperatorTable
-operator|.
-name|IS_FALSE
-argument_list|,
 name|booleanInput
 argument_list|)
 decl_stmt|;
@@ -14522,9 +14514,6 @@ argument_list|()
 argument_list|,
 name|is
 argument_list|(
-operator|(
-name|SqlOperator
-operator|)
 name|SqlStdOperatorTable
 operator|.
 name|IS_FALSE
@@ -14572,14 +14561,8 @@ specifier|final
 name|RexNode
 name|isFalseIsFalse
 init|=
-name|rexBuilder
-operator|.
-name|makeCall
+name|isFalse
 argument_list|(
-name|SqlStdOperatorTable
-operator|.
-name|IS_FALSE
-argument_list|,
 name|isFalse
 argument_list|)
 decl_stmt|;
@@ -14620,9 +14603,6 @@ argument_list|()
 argument_list|,
 name|is
 argument_list|(
-operator|(
-name|SqlOperator
-operator|)
 name|SqlStdOperatorTable
 operator|.
 name|IS_NOT_FALSE
@@ -14661,6 +14641,155 @@ name|is
 argument_list|(
 name|booleanInput
 argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSimplifyNot
+parameter_list|()
+block|{
+comment|// "NOT(NOT(x))" => "x"
+name|checkSimplify
+argument_list|(
+name|not
+argument_list|(
+name|not
+argument_list|(
+name|vBool
+argument_list|()
+argument_list|)
+argument_list|)
+argument_list|,
+literal|"?0.bool0"
+argument_list|)
+expr_stmt|;
+comment|// "NOT(true)"  => "false"
+name|checkSimplify
+argument_list|(
+name|not
+argument_list|(
+name|trueLiteral
+argument_list|)
+argument_list|,
+literal|"false"
+argument_list|)
+expr_stmt|;
+comment|// "NOT(false)" => "true"
+name|checkSimplify
+argument_list|(
+name|not
+argument_list|(
+name|falseLiteral
+argument_list|)
+argument_list|,
+literal|"true"
+argument_list|)
+expr_stmt|;
+comment|// "NOT(IS FALSE(x))" => "IS NOT FALSE(x)"
+name|checkSimplify
+argument_list|(
+name|not
+argument_list|(
+name|isFalse
+argument_list|(
+name|vBool
+argument_list|()
+argument_list|)
+argument_list|)
+argument_list|,
+literal|"IS NOT FALSE(?0.bool0)"
+argument_list|)
+expr_stmt|;
+comment|// "NOT(IS TRUE(x))" => "IS NOT TRUE(x)"
+name|checkSimplify
+argument_list|(
+name|not
+argument_list|(
+name|isTrue
+argument_list|(
+name|vBool
+argument_list|()
+argument_list|)
+argument_list|)
+argument_list|,
+literal|"IS NOT TRUE(?0.bool0)"
+argument_list|)
+expr_stmt|;
+comment|// "NOT(IS NULL(x))" => "IS NOT NULL(x)"
+name|checkSimplify
+argument_list|(
+name|not
+argument_list|(
+name|isNull
+argument_list|(
+name|vBool
+argument_list|()
+argument_list|)
+argument_list|)
+argument_list|,
+literal|"IS NOT NULL(?0.bool0)"
+argument_list|)
+expr_stmt|;
+comment|// "NOT(IS NOT NULL(x)) => "IS NULL(x)"
+name|checkSimplify
+argument_list|(
+name|not
+argument_list|(
+name|isNotNull
+argument_list|(
+name|vBool
+argument_list|()
+argument_list|)
+argument_list|)
+argument_list|,
+literal|"IS NULL(?0.bool0)"
+argument_list|)
+expr_stmt|;
+comment|// "NOT(AND(x0,x1))" => "OR(NOT(x0),NOT(x1))"
+name|checkSimplify
+argument_list|(
+name|not
+argument_list|(
+name|and
+argument_list|(
+name|vBool
+argument_list|(
+literal|0
+argument_list|)
+argument_list|,
+name|vBool
+argument_list|(
+literal|1
+argument_list|)
+argument_list|)
+argument_list|)
+argument_list|,
+literal|"OR(NOT(?0.bool0), NOT(?0.bool1))"
+argument_list|)
+expr_stmt|;
+comment|// "NOT(OR(x0,x1))" => "AND(NOT(x0),NOT(x1))"
+name|checkSimplify
+argument_list|(
+name|not
+argument_list|(
+name|or
+argument_list|(
+name|vBool
+argument_list|(
+literal|0
+argument_list|)
+argument_list|,
+name|vBool
+argument_list|(
+literal|1
+argument_list|)
+argument_list|)
+argument_list|)
+argument_list|,
+literal|"AND(NOT(?0.bool0), NOT(?0.bool1))"
 argument_list|)
 expr_stmt|;
 block|}
