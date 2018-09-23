@@ -10112,6 +10112,35 @@ argument_list|,
 literal|"AND(=(?0.b, 2), =(?0.a, 3))"
 argument_list|)
 expr_stmt|;
+name|checkSimplify2
+argument_list|(
+name|or
+argument_list|(
+name|lt
+argument_list|(
+name|vInt
+argument_list|()
+argument_list|,
+name|nullInt
+argument_list|)
+argument_list|,
+name|ne
+argument_list|(
+name|literal
+argument_list|(
+literal|0
+argument_list|)
+argument_list|,
+name|vInt
+argument_list|()
+argument_list|)
+argument_list|)
+argument_list|,
+literal|"OR(null,<>(0, ?0.int0))"
+argument_list|,
+literal|"<>(0, ?0.int0)"
+argument_list|)
+expr_stmt|;
 block|}
 annotation|@
 name|Test
