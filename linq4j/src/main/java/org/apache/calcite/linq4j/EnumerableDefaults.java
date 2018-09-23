@@ -7022,18 +7022,32 @@ name|boolean
 name|generateNullsOnRight
 parameter_list|)
 block|{
-assert|assert
-operator|!
+if|if
+condition|(
 name|generateNullsOnLeft
-operator|:
-literal|"not implemented"
-assert|;
-assert|assert
-operator|!
+condition|)
+block|{
+throw|throw
+operator|new
+name|UnsupportedOperationException
+argument_list|(
+literal|"not implemented, mergeJoin with generateNullsOnLeft"
+argument_list|)
+throw|;
+block|}
+if|if
+condition|(
 name|generateNullsOnRight
-operator|:
-literal|"not implemented"
-assert|;
+condition|)
+block|{
+throw|throw
+operator|new
+name|UnsupportedOperationException
+argument_list|(
+literal|"not implemented, mergeJoin with generateNullsOnRight"
+argument_list|)
+throw|;
+block|}
 return|return
 operator|new
 name|AbstractEnumerable
@@ -16309,13 +16323,29 @@ operator|!=
 literal|0
 condition|)
 block|{
-assert|assert
+if|if
+condition|(
 name|c
-operator|<
+operator|>
 literal|0
-operator|:
-literal|"not sorted"
-assert|;
+condition|)
+block|{
+throw|throw
+operator|new
+name|IllegalStateException
+argument_list|(
+literal|"mergeJoin assumes inputs sorted in ascending order, "
+operator|+
+literal|"however "
+operator|+
+name|leftKey
+operator|+
+literal|" is greater than "
+operator|+
+name|leftKey2
+argument_list|)
+throw|;
+block|}
 break|break;
 block|}
 name|lefts
@@ -16393,13 +16423,29 @@ operator|!=
 literal|0
 condition|)
 block|{
-assert|assert
+if|if
+condition|(
 name|c
-operator|<
+operator|>
 literal|0
-operator|:
-literal|"not sorted"
-assert|;
+condition|)
+block|{
+throw|throw
+operator|new
+name|IllegalStateException
+argument_list|(
+literal|"mergeJoin assumes input sorted in ascending order, "
+operator|+
+literal|"however "
+operator|+
+name|rightKey
+operator|+
+literal|" is greater than "
+operator|+
+name|rightKey2
+argument_list|)
+throw|;
+block|}
 break|break;
 block|}
 name|rights
