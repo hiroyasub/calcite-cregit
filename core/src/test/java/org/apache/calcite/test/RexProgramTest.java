@@ -7037,6 +7037,34 @@ argument_list|,
 literal|"OR(?0.a, AND(?0.d, NOT(?0.b), NOT(?0.c)), AND(NOT(?0.b), NOT(?0.c), NOT(?0.e)))"
 argument_list|)
 expr_stmt|;
+name|checkSimplify
+argument_list|(
+name|case_
+argument_list|(
+name|eq
+argument_list|(
+name|falseLiteral
+argument_list|,
+name|falseLiteral
+argument_list|)
+argument_list|,
+name|falseLiteral
+argument_list|,
+name|eq
+argument_list|(
+name|falseLiteral
+argument_list|,
+name|falseLiteral
+argument_list|)
+argument_list|,
+name|trueLiteral
+argument_list|,
+name|trueLiteral
+argument_list|)
+argument_list|,
+literal|"false"
+argument_list|)
+expr_stmt|;
 comment|// is null, applied to not-null value
 name|checkSimplify
 argument_list|(

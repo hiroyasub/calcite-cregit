@@ -4093,7 +4093,6 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-specifier|final
 name|RexNode
 name|disjunction
 init|=
@@ -4123,7 +4122,8 @@ argument_list|()
 argument_list|)
 condition|)
 block|{
-return|return
+name|disjunction
+operator|=
 name|rexBuilder
 operator|.
 name|makeCast
@@ -4135,10 +4135,13 @@ argument_list|()
 argument_list|,
 name|disjunction
 argument_list|)
-return|;
+expr_stmt|;
 block|}
 return|return
+name|simplify_
+argument_list|(
 name|disjunction
+argument_list|)
 return|;
 block|}
 if|if
