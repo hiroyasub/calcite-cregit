@@ -7734,6 +7734,25 @@ argument_list|,
 literal|"COALESCE(?0.i, +(?0.i, ?0.h), 1)"
 argument_list|)
 expr_stmt|;
+name|checkSimplify2
+argument_list|(
+name|coalesce
+argument_list|(
+name|gt
+argument_list|(
+name|nullInt
+argument_list|,
+name|nullInt
+argument_list|)
+argument_list|,
+name|trueLiteral
+argument_list|)
+argument_list|,
+literal|"COALESCE(null, true)"
+argument_list|,
+literal|"COALESCE(null, true)"
+argument_list|)
+expr_stmt|;
 comment|// "(not x) is null" to "x is null"
 name|checkSimplify
 argument_list|(

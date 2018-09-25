@@ -3241,6 +3241,15 @@ name|ArrayList
 argument_list|<>
 argument_list|()
 decl_stmt|;
+specifier|final
+name|RexSimplify
+name|simplify
+init|=
+name|withUnknownAsFalse
+argument_list|(
+literal|false
+argument_list|)
+decl_stmt|;
 for|for
 control|(
 name|RexNode
@@ -3254,6 +3263,8 @@ control|)
 block|{
 name|operand
 operator|=
+name|simplify
+operator|.
 name|simplify_
 argument_list|(
 name|operand
