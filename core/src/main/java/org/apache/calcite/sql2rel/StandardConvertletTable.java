@@ -1637,12 +1637,8 @@ operator|.
 name|getRexBuilder
 argument_list|()
 operator|.
-name|makeCall
+name|makeFieldAccess
 argument_list|(
-name|SqlStdOperatorTable
-operator|.
-name|DOT
-argument_list|,
 name|cx
 operator|.
 name|convertExpression
@@ -1655,13 +1651,6 @@ literal|0
 argument_list|)
 argument_list|)
 argument_list|,
-name|cx
-operator|.
-name|getRexBuilder
-argument_list|()
-operator|.
-name|makeLiteral
-argument_list|(
 name|call
 operator|.
 name|operand
@@ -1671,7 +1660,8 @@ argument_list|)
 operator|.
 name|toString
 argument_list|()
-argument_list|)
+argument_list|,
+literal|false
 argument_list|)
 argument_list|)
 expr_stmt|;

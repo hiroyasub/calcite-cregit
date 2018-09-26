@@ -5649,6 +5649,23 @@ return|;
 block|}
 block|}
 decl_stmt|;
+comment|/**    * The internal {@code $STRUCT_ACCESS} operator is used to access a field of a record.    *    * In contrast with {@link #DOT} operator it never appears in an {@link SqlNode} tree and allows    * to access fields by position and not by name.    */
+specifier|public
+specifier|static
+specifier|final
+name|SqlInternalOperator
+name|STRUCT_ACCESS
+init|=
+operator|new
+name|SqlInternalOperator
+argument_list|(
+literal|"$STRUCT_ACCESS"
+argument_list|,
+name|SqlKind
+operator|.
+name|OTHER
+argument_list|)
+decl_stmt|;
 comment|/**    * The CARDINALITY operator, used to retrieve the number of elements in a    * MULTISET, ARRAY or MAP.    */
 specifier|public
 specifier|static
