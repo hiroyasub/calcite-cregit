@@ -1513,6 +1513,10 @@ argument_list|,
 operator|-
 literal|1
 argument_list|,
+name|RelCollations
+operator|.
+name|EMPTY
+argument_list|,
 name|aggCall
 operator|.
 name|getType

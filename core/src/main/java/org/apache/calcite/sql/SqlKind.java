@@ -141,6 +141,9 @@ block|,
 comment|/**    * FILTER operator    */
 name|FILTER
 block|,
+comment|/**    * WITHIN_GROUP operator    */
+name|WITHIN_GROUP
+block|,
 comment|/**    * Window specification    */
 name|WINDOW
 block|,

@@ -1580,6 +1580,48 @@ function_decl|;
 annotation|@
 name|BaseMessage
 argument_list|(
+literal|"WITHIN GROUP must not contain aggregate expression"
+argument_list|)
+name|ExInst
+argument_list|<
+name|SqlValidatorException
+argument_list|>
+name|aggregateInWithinGroupIllegal
+parameter_list|()
+function_decl|;
+annotation|@
+name|BaseMessage
+argument_list|(
+literal|"Aggregate expression ''{0}'' must contain a within group clause"
+argument_list|)
+name|ExInst
+argument_list|<
+name|SqlValidatorException
+argument_list|>
+name|aggregateMissingWithinGroupClause
+parameter_list|(
+name|String
+name|a0
+parameter_list|)
+function_decl|;
+annotation|@
+name|BaseMessage
+argument_list|(
+literal|"Aggregate expression ''{0}'' must not contain a within group clause"
+argument_list|)
+name|ExInst
+argument_list|<
+name|SqlValidatorException
+argument_list|>
+name|withinGroupClauseIllegalInAggregate
+parameter_list|(
+name|String
+name|a0
+parameter_list|)
+function_decl|;
+annotation|@
+name|BaseMessage
+argument_list|(
 literal|"Aggregate expression is illegal in ORDER BY clause of non-aggregating SELECT"
 argument_list|)
 name|ExInst
@@ -2034,6 +2076,21 @@ argument_list|<
 name|SqlValidatorException
 argument_list|>
 name|functionQuantifierNotAllowed
+parameter_list|(
+name|String
+name|a0
+parameter_list|)
+function_decl|;
+annotation|@
+name|BaseMessage
+argument_list|(
+literal|"WITHIN GROUP not allowed with {0} function"
+argument_list|)
+name|ExInst
+argument_list|<
+name|SqlValidatorException
+argument_list|>
+name|withinGroupNotAllowed
 parameter_list|(
 name|String
 name|a0

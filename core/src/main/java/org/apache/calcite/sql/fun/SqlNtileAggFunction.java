@@ -91,6 +91,20 @@ name|ReturnTypes
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|util
+operator|.
+name|Optionality
+import|;
+end_import
+
 begin_comment
 comment|/**  *<code>NTILE</code> aggregate function  * return the value of given expression evaluated at given offset.  */
 end_comment
@@ -133,6 +147,10 @@ argument_list|,
 literal|false
 argument_list|,
 literal|true
+argument_list|,
+name|Optionality
+operator|.
+name|FORBIDDEN
 argument_list|)
 expr_stmt|;
 block|}

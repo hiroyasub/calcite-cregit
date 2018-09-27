@@ -6471,6 +6471,7 @@ name|aggregateCalls
 operator|.
 name|add
 argument_list|(
+comment|// TODO: handle aggregate ordering
 name|relBuilder
 operator|.
 name|aggregateCall
@@ -8265,6 +8266,7 @@ name|aggregateCalls
 operator|.
 name|add
 argument_list|(
+comment|// TODO: handle aggregate ordering
 name|relBuilder
 operator|.
 name|aggregateCall

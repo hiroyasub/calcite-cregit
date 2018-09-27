@@ -1647,6 +1647,10 @@ argument_list|,
 operator|-
 literal|1
 argument_list|,
+name|aggregateCall
+operator|.
+name|collation
+argument_list|,
 name|groupCount
 argument_list|,
 name|relBuilder
@@ -1737,6 +1741,10 @@ name|newArgs
 argument_list|,
 operator|-
 literal|1
+argument_list|,
+name|aggregateCall
+operator|.
+name|collation
 argument_list|,
 name|groupCount
 argument_list|,

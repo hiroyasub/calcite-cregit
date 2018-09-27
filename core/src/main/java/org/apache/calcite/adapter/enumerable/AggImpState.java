@@ -99,6 +99,10 @@ argument_list|>
 name|state
 decl_stmt|;
 specifier|public
+name|Expression
+name|accumulatorAdder
+decl_stmt|;
+specifier|public
 name|AggImpState
 parameter_list|(
 name|int

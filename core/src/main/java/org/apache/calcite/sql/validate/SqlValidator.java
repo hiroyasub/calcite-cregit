@@ -619,7 +619,7 @@ name|SqlValidatorScope
 name|scope
 parameter_list|)
 function_decl|;
-comment|/**    * Validates parameters for aggregate function.    *    * @param aggCall     Function containing COLUMN_LIST parameter    * @param filter      Filter, or null    * @param scope       Syntactic scope    */
+comment|/**    * Validates parameters for aggregate function.    *    * @param aggCall     Call to aggregate function    * @param filter      Filter ({@code FILTER (WHERE)} clause), or null    * @param orderList   Ordering specification ({@code WITHING GROUP} clause),    *                    or null    * @param scope       Syntactic scope    */
 name|void
 name|validateAggregateParams
 parameter_list|(
@@ -628,6 +628,9 @@ name|aggCall
 parameter_list|,
 name|SqlNode
 name|filter
+parameter_list|,
+name|SqlNodeList
+name|orderList
 parameter_list|,
 name|SqlValidatorScope
 name|scope

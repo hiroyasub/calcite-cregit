@@ -27113,6 +27113,268 @@ expr_stmt|;
 block|}
 end_function
 
+begin_comment
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2224">[CALCITE-2224]    * WITHIN GROUP clause for aggregate functions</a>. */
+end_comment
+
+begin_function
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testWithinGroupClause1
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select X,\n"
+operator|+
+literal|" collect(Y) within group (order by Y desc) as \"SET\"\n"
+operator|+
+literal|"from (values (1, 'a'), (1, 'b'),\n"
+operator|+
+literal|"             (3, 'c'), (3, 'd')) AS t(X, Y)\n"
+operator|+
+literal|"group by X\n"
+operator|+
+literal|"limit 10"
+decl_stmt|;
+name|CalciteAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|query
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"X=1; SET=[b, a]"
+argument_list|,
+literal|"X=3; SET=[d, c]"
+argument_list|)
+expr_stmt|;
+block|}
+end_function
+
+begin_function
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testWithinGroupClause2
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select X,\n"
+operator|+
+literal|" collect(Y) within group (order by Y desc) as SET_1,\n"
+operator|+
+literal|" collect(Y) within group (order by Y asc) as SET_2\n"
+operator|+
+literal|"from (values (1, 'a'), (1, 'b'), (3, 'c'), (3, 'd')) AS t(X, Y)\n"
+operator|+
+literal|"group by X\n"
+operator|+
+literal|"limit 10"
+decl_stmt|;
+name|CalciteAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|query
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"X=1; SET_1=[b, a]; SET_2=[a, b]"
+argument_list|,
+literal|"X=3; SET_1=[d, c]; SET_2=[c, d]"
+argument_list|)
+expr_stmt|;
+block|}
+end_function
+
+begin_function
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testWithinGroupClause3
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select"
+operator|+
+literal|" collect(Y) within group (order by Y desc) as SET_1,\n"
+operator|+
+literal|" collect(Y) within group (order by Y asc) as SET_2\n"
+operator|+
+literal|"from (values (1, 'a'), (1, 'b'), (3, 'c'), (3, 'd')) AS t(X, Y)\n"
+operator|+
+literal|"limit 10"
+decl_stmt|;
+name|CalciteAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|query
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"SET_1=[d, c, b, a]; SET_2=[a, b, c, d]\n"
+argument_list|)
+expr_stmt|;
+block|}
+end_function
+
+begin_function
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testWithinGroupClause4
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select"
+operator|+
+literal|" collect(Y) within group (order by Y desc) as SET_1,\n"
+operator|+
+literal|" collect(Y) within group (order by Y asc) as SET_2\n"
+operator|+
+literal|"from (values (1, 'a'), (1, 'b'), (3, 'c'), (3, 'd')) AS t(X, Y)\n"
+operator|+
+literal|"group by X\n"
+operator|+
+literal|"limit 10"
+decl_stmt|;
+name|CalciteAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|query
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"SET_1=[b, a]; SET_2=[a, b]"
+argument_list|,
+literal|"SET_1=[d, c]; SET_2=[c, d]"
+argument_list|)
+expr_stmt|;
+block|}
+end_function
+
+begin_function
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testWithinGroupClause5
+parameter_list|()
+block|{
+name|CalciteAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|query
+argument_list|(
+literal|"select collect(array[X, Y])\n"
+operator|+
+literal|" within group (order by Y desc) as \"SET\"\n"
+operator|+
+literal|"from (values ('b', 'a'), ('a', 'b'), ('a', 'c'),\n"
+operator|+
+literal|"             ('a', 'd')) AS t(X, Y)\n"
+operator|+
+literal|"limit 10"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"SET=[[a, d], [a, c], [a, b], [b, a]]\n"
+argument_list|)
+expr_stmt|;
+block|}
+end_function
+
+begin_function
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testWithinGroupClause6
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select collect(\"commission\")"
+operator|+
+literal|" within group (order by \"commission\")\n"
+operator|+
+literal|"from \"hr\".\"emps\""
+decl_stmt|;
+name|CalciteAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|CalciteAssert
+operator|.
+name|Config
+operator|.
+name|REGULAR
+argument_list|)
+operator|.
+name|query
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+literal|"EnumerableAggregate(group=[{}], "
+operator|+
+literal|"EXPR$0=[COLLECT($4) WITHIN GROUP ([4])])"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"EXPR$0=[250, 500, 1000]\n"
+argument_list|)
+expr_stmt|;
+block|}
+end_function
+
 begin_function
 specifier|private
 specifier|static

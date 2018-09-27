@@ -23981,6 +23981,27 @@ operator|)
 literal|0
 argument_list|)
 expr_stmt|;
+name|tester
+operator|.
+name|checkAgg
+argument_list|(
+literal|"collect(x) within group(order by x desc)"
+argument_list|,
+name|values
+argument_list|,
+name|Collections
+operator|.
+name|singletonList
+argument_list|(
+literal|"[2, 2, 0]"
+argument_list|)
+argument_list|,
+operator|(
+name|double
+operator|)
+literal|0
+argument_list|)
+expr_stmt|;
 name|Object
 name|result1
 init|=

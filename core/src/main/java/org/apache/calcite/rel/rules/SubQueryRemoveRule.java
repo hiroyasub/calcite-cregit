@@ -1826,12 +1826,8 @@ argument_list|)
 argument_list|,
 name|builder
 operator|.
-name|aggregateCall
+name|count
 argument_list|(
-name|SqlStdOperatorTable
-operator|.
-name|COUNT
-argument_list|,
 name|builder
 operator|.
 name|fields

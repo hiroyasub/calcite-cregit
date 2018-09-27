@@ -10425,6 +10425,98 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testWithinGroup1
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select deptno,\n"
+operator|+
+literal|" collect(empno) within group (order by deptno, hiredate desc)\n"
+operator|+
+literal|"from emp\n"
+operator|+
+literal|"group by deptno"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testWithinGroup2
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select dept.deptno,\n"
+operator|+
+literal|" collect(sal) within group (order by sal desc) as s,\n"
+operator|+
+literal|" collect(sal) within group (order by 1)as s1,\n"
+operator|+
+literal|" collect(sal) within group (order by sal)\n"
+operator|+
+literal|"  filter (where sal> 2000) as s2\n"
+operator|+
+literal|"from emp\n"
+operator|+
+literal|"join dept using (deptno)\n"
+operator|+
+literal|"group by dept.deptno"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testWithinGroup3
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select deptno,\n"
+operator|+
+literal|" collect(empno) within group (order by empno not in (1, 2)), count(*)\n"
+operator|+
+literal|"from emp\n"
+operator|+
+literal|"group by deptno"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
 comment|/**    * Visitor that checks that every {@link RelNode} in a tree is valid.    *    * @see RelNode#isValid(Litmus, RelNode.Context)    */
 specifier|public
 specifier|static

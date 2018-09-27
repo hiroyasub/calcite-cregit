@@ -449,6 +449,20 @@ name|calcite
 operator|.
 name|sql
 operator|.
+name|SqlWithinGroupOperator
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
 name|SqlWriter
 import|;
 end_import
@@ -606,6 +620,20 @@ operator|.
 name|util
 operator|.
 name|Litmus
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|util
+operator|.
+name|Optionality
 import|;
 end_import
 
@@ -973,6 +1001,17 @@ name|FILTER
 init|=
 operator|new
 name|SqlFilterOperator
+argument_list|()
+decl_stmt|;
+comment|/**<code>WITHIN_GROUP</code> operator performs aggregations on ordered data input. */
+specifier|public
+specifier|static
+specifier|final
+name|SqlWithinGroupOperator
+name|WITHIN_GROUP
+init|=
+operator|new
+name|SqlWithinGroupOperator
 argument_list|()
 decl_stmt|;
 comment|/** {@code CUBE} operator, occurs within {@code GROUP BY} clause    * or nested within a {@code GROUPING SETS}. */
@@ -5732,6 +5771,10 @@ argument_list|,
 literal|false
 argument_list|,
 literal|false
+argument_list|,
+name|Optionality
+operator|.
+name|OPTIONAL
 argument_list|)
 block|{       }
 decl_stmt|;
@@ -5770,6 +5813,10 @@ argument_list|,
 literal|false
 argument_list|,
 literal|false
+argument_list|,
+name|Optionality
+operator|.
+name|FORBIDDEN
 argument_list|)
 block|{       }
 decl_stmt|;

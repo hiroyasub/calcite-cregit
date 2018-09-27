@@ -53,6 +53,20 @@ name|calcite
 operator|.
 name|rel
 operator|.
+name|RelCollations
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
 name|RelHomogeneousShuttle
 import|;
 end_import
@@ -3019,6 +3033,10 @@ argument_list|,
 operator|-
 literal|1
 argument_list|,
+name|RelCollations
+operator|.
+name|EMPTY
+argument_list|,
 literal|0
 argument_list|,
 name|ret
@@ -3390,6 +3408,10 @@ argument_list|)
 argument_list|,
 operator|-
 literal|1
+argument_list|,
+name|RelCollations
+operator|.
+name|EMPTY
 argument_list|,
 name|projectedKeyCount
 argument_list|,
@@ -4259,7 +4281,6 @@ name|RelNode
 name|rel
 parameter_list|)
 block|{
-comment|// assert (rel.getRowType().getFieldCount() == 1);
 specifier|final
 name|int
 name|aggCallCnt
@@ -4324,6 +4345,10 @@ argument_list|)
 argument_list|,
 operator|-
 literal|1
+argument_list|,
+name|RelCollations
+operator|.
+name|EMPTY
 argument_list|,
 literal|0
 argument_list|,

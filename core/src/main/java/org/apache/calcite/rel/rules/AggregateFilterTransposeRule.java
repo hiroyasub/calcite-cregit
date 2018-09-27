@@ -866,6 +866,10 @@ literal|1
 argument_list|,
 name|aggregateCall
 operator|.
+name|collation
+argument_list|,
+name|aggregateCall
+operator|.
 name|type
 argument_list|,
 name|aggregateCall

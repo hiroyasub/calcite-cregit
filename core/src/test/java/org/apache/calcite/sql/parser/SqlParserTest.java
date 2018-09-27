@@ -26896,6 +26896,208 @@ name|expected
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testWithinGroupClause1
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select col1,\n"
+operator|+
+literal|" collect(col2) within group (order by col3)\n"
+operator|+
+literal|"from t\n"
+operator|+
+literal|"order by col1 limit 10"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT `COL1`,"
+operator|+
+literal|" (COLLECT(`COL2`) WITHIN GROUP (ORDER BY `COL3`))\n"
+operator|+
+literal|"FROM `T`\n"
+operator|+
+literal|"ORDER BY `COL1`\n"
+operator|+
+literal|"FETCH NEXT 10 ROWS ONLY"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testWithinGroupClause2
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select collect(col2) within group (order by col3)\n"
+operator|+
+literal|"from t\n"
+operator|+
+literal|"order by col1 limit 10"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT"
+operator|+
+literal|" (COLLECT(`COL2`) WITHIN GROUP (ORDER BY `COL3`))\n"
+operator|+
+literal|"FROM `T`\n"
+operator|+
+literal|"ORDER BY `COL1`\n"
+operator|+
+literal|"FETCH NEXT 10 ROWS ONLY"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testWithinGroupClause3
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select collect(col2) within group (^)^ "
+operator|+
+literal|"from t order by col1 limit 10"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"(?s).*Encountered \"\\)\" at line 1, column 36\\..*"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testWithinGroupClause4
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select col1,\n"
+operator|+
+literal|" collect(col2) within group (order by col3, col4)\n"
+operator|+
+literal|"from t\n"
+operator|+
+literal|"order by col1 limit 10"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT `COL1`,"
+operator|+
+literal|" (COLLECT(`COL2`) WITHIN GROUP (ORDER BY `COL3`, `COL4`))\n"
+operator|+
+literal|"FROM `T`\n"
+operator|+
+literal|"ORDER BY `COL1`\n"
+operator|+
+literal|"FETCH NEXT 10 ROWS ONLY"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testWithinGroupClause5
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select col1,\n"
+operator|+
+literal|" collect(col2) within group (\n"
+operator|+
+literal|"  order by col3 desc nulls first, col4 asc nulls last)\n"
+operator|+
+literal|"from t\n"
+operator|+
+literal|"order by col1 limit 10"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT `COL1`, (COLLECT(`COL2`) "
+operator|+
+literal|"WITHIN GROUP (ORDER BY `COL3` DESC NULLS FIRST, `COL4` NULLS LAST))\n"
+operator|+
+literal|"FROM `T`\n"
+operator|+
+literal|"ORDER BY `COL1`\n"
+operator|+
+literal|"FETCH NEXT 10 ROWS ONLY"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
 comment|//~ Inner Interfaces -------------------------------------------------------
 comment|/**    * Callback to control how test actions are performed.    */
 specifier|protected

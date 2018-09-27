@@ -1525,18 +1525,17 @@ name|SqlStdOperatorTable
 operator|.
 name|SUM0
 argument_list|,
-literal|false
-argument_list|,
-literal|null
-argument_list|,
-literal|"s"
-argument_list|,
 name|builder
 operator|.
 name|field
 argument_list|(
 literal|3
 argument_list|)
+argument_list|)
+operator|.
+name|as
+argument_list|(
+literal|"s"
 argument_list|)
 argument_list|)
 operator|.
@@ -9857,6 +9856,169 @@ name|is
 argument_list|(
 literal|true
 argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testWithinGroup1
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|query
+init|=
+literal|"select \"product_class_id\", collect(\"net_weight\") "
+operator|+
+literal|"within group (order by \"net_weight\" desc) "
+operator|+
+literal|"from \"product\" group by \"product_class_id\""
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT \"product_class_id\", COLLECT(\"net_weight\") "
+operator|+
+literal|"WITHIN GROUP (ORDER BY \"net_weight\" DESC)\n"
+operator|+
+literal|"FROM \"foodmart\".\"product\"\n"
+operator|+
+literal|"GROUP BY \"product_class_id\""
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testWithinGroup2
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|query
+init|=
+literal|"select \"product_class_id\", collect(\"net_weight\") "
+operator|+
+literal|"within group (order by \"low_fat\", \"net_weight\" desc nulls last) "
+operator|+
+literal|"from \"product\" group by \"product_class_id\""
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT \"product_class_id\", COLLECT(\"net_weight\") "
+operator|+
+literal|"WITHIN GROUP (ORDER BY \"low_fat\", \"net_weight\" DESC NULLS LAST)\n"
+operator|+
+literal|"FROM \"foodmart\".\"product\"\n"
+operator|+
+literal|"GROUP BY \"product_class_id\""
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testWithinGroup3
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|query
+init|=
+literal|"select \"product_class_id\", collect(\"net_weight\") "
+operator|+
+literal|"within group (order by \"net_weight\" desc), "
+operator|+
+literal|"min(\"low_fat\")"
+operator|+
+literal|"from \"product\" group by \"product_class_id\""
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT \"product_class_id\", COLLECT(\"net_weight\") "
+operator|+
+literal|"WITHIN GROUP (ORDER BY \"net_weight\" DESC), MIN(\"low_fat\")\n"
+operator|+
+literal|"FROM \"foodmart\".\"product\"\n"
+operator|+
+literal|"GROUP BY \"product_class_id\""
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testWithinGroup4
+parameter_list|()
+block|{
+comment|// filter in AggregateCall is not unparsed
+specifier|final
+name|String
+name|query
+init|=
+literal|"select \"product_class_id\", collect(\"net_weight\") "
+operator|+
+literal|"within group (order by \"net_weight\" desc) filter (where \"net_weight\"> 0)"
+operator|+
+literal|"from \"product\" group by \"product_class_id\""
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT \"product_class_id\", COLLECT(\"net_weight\") "
+operator|+
+literal|"WITHIN GROUP (ORDER BY \"net_weight\" DESC)\n"
+operator|+
+literal|"FROM \"foodmart\".\"product\"\n"
+operator|+
+literal|"GROUP BY \"product_class_id\""
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
 argument_list|)
 expr_stmt|;
 block|}

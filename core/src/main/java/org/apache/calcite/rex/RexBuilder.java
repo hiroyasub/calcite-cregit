@@ -1346,6 +1346,10 @@ argument_list|,
 name|aggCall
 operator|.
 name|filterArg
+argument_list|,
+name|aggCall
+operator|.
+name|collation
 argument_list|)
 expr_stmt|;
 block|}

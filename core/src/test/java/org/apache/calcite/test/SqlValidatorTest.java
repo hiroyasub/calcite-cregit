@@ -20790,6 +20790,130 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testWithinGroup
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"select deptno,\n"
+operator|+
+literal|" collect(empno) within group(order by 1)\n"
+operator|+
+literal|"from emp\n"
+operator|+
+literal|"group by deptno"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select collect(empno) within group(order by 1)\n"
+operator|+
+literal|"from emp\n"
+operator|+
+literal|"group by ()"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select deptno,\n"
+operator|+
+literal|" collect(empno) within group(order by deptno)\n"
+operator|+
+literal|"from emp\n"
+operator|+
+literal|"group by deptno"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select deptno,\n"
+operator|+
+literal|" collect(empno) within group(order by deptno, hiredate desc)\n"
+operator|+
+literal|"from emp\n"
+operator|+
+literal|"group by deptno"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select deptno,\n"
+operator|+
+literal|" collect(empno) within group(\n"
+operator|+
+literal|"  order by cast(deptno as varchar), hiredate desc)\n"
+operator|+
+literal|"from emp\n"
+operator|+
+literal|"group by deptno"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select collect(empno) within group(order by 1)\n"
+operator|+
+literal|"from emp\n"
+operator|+
+literal|"group by deptno"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select collect(empno) within group(order by 1)\n"
+operator|+
+literal|"from emp"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select ^power(deptno, 1) within group(order by 1)^ from emp"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"(?s).*WITHIN GROUP not allowed with POWER function.*"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select ^collect(empno)^ within group(order by count(*))\n"
+operator|+
+literal|"from emp\n"
+operator|+
+literal|"group by deptno"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"WITHIN GROUP must not contain aggregate expression"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testCorrelatingVariables
 parameter_list|()
 block|{
@@ -25596,6 +25720,8 @@ operator|+
 literal|"PATTERN_EXCLUDE -\n"
 operator|+
 literal|"PATTERN_PERMUTE -\n"
+operator|+
+literal|"WITHIN GROUP left\n"
 operator|+
 literal|"\n"
 operator|+
