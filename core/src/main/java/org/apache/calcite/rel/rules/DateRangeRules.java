@@ -635,6 +635,16 @@ name|Predicate
 import|;
 end_import
 
+begin_import
+import|import
+name|javax
+operator|.
+name|annotation
+operator|.
+name|Nonnull
+import|;
+end_import
+
 begin_comment
 comment|/**  * Collection of planner rules that convert  * {@code EXTRACT(timeUnit FROM dateTime) = constant},  * {@code FLOOR(dateTime to timeUnit} = constant} and  * {@code CEIL(dateTime to timeUnit} = constant} to  * {@code dateTime BETWEEN lower AND upper}.  *  *<p>The rules allow conversion of queries on time dimension tables, such as  *  *<blockquote>SELECT ... FROM sales JOIN time_by_day USING (time_id)  * WHERE time_by_day.the_year = 1997  * AND time_by_day.the_month IN (4, 5, 6)</blockquote>  *  *<p>into  *  *<blockquote>SELECT ... FROM sales JOIN time_by_day USING (time_id)  * WHERE the_date BETWEEN DATE '2016-04-01' AND DATE '2016-06-30'</blockquote>  *  *<p>and is especially useful for Druid, which has a single timestamp column.  */
 end_comment
@@ -3020,6 +3030,8 @@ return|;
 block|}
 block|}
 specifier|private
+annotation|@
+name|Nonnull
 name|RexNode
 name|toRex
 parameter_list|(
@@ -3165,8 +3177,6 @@ argument_list|(
 name|rexBuilder
 argument_list|,
 name|nodes
-argument_list|,
-literal|false
 argument_list|)
 return|;
 block|}

@@ -8640,8 +8640,6 @@ argument_list|(
 name|rexBuilder
 argument_list|,
 name|andList
-argument_list|,
-literal|false
 argument_list|)
 argument_list|)
 expr_stmt|;

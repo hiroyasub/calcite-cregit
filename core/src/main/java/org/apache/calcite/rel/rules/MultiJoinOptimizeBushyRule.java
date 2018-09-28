@@ -1207,8 +1207,6 @@ argument_list|(
 name|rexBuilder
 argument_list|,
 name|conditions
-argument_list|,
-literal|false
 argument_list|)
 argument_list|)
 decl_stmt|;
@@ -1646,8 +1644,6 @@ argument_list|,
 name|joinVertex
 operator|.
 name|conditions
-argument_list|,
-literal|false
 argument_list|)
 decl_stmt|;
 specifier|final

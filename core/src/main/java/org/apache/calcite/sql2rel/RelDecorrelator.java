@@ -6122,8 +6122,6 @@ name|getRexBuilder
 argument_list|()
 argument_list|,
 name|conditions
-argument_list|,
-literal|false
 argument_list|)
 decl_stmt|;
 name|RelNode

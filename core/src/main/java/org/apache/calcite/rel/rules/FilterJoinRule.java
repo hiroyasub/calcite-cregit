@@ -1081,8 +1081,6 @@ name|joinFilters
 argument_list|,
 name|fieldTypes
 argument_list|)
-argument_list|,
-literal|false
 argument_list|)
 decl_stmt|;
 comment|// If nothing actually got pushed and there is nothing leftover,

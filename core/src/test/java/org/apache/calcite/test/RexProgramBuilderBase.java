@@ -591,8 +591,6 @@ name|RelOptPredicateList
 operator|.
 name|EMPTY
 argument_list|,
-literal|false
-argument_list|,
 name|executor
 argument_list|)
 operator|.

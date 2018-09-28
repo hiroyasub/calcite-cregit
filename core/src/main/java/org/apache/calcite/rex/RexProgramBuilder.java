@@ -1231,8 +1231,6 @@ name|RelOptPredicateList
 operator|.
 name|EMPTY
 argument_list|,
-literal|false
-argument_list|,
 name|RexUtil
 operator|.
 name|EXECUTOR
@@ -1870,8 +1868,6 @@ argument_list|,
 name|RelOptPredicateList
 operator|.
 name|EMPTY
-argument_list|,
-literal|false
 argument_list|,
 name|RexUtil
 operator|.

@@ -3189,8 +3189,6 @@ name|rexBuilder
 argument_list|,
 name|predicates
 argument_list|,
-literal|false
-argument_list|,
 name|RexUtil
 operator|.
 name|EXECUTOR

@@ -1961,8 +1961,6 @@ argument_list|(
 name|rexBuilder
 argument_list|,
 name|nodes
-argument_list|,
-literal|false
 argument_list|)
 return|;
 block|}
@@ -2252,8 +2250,6 @@ argument_list|(
 name|rexBuilder
 argument_list|,
 name|nodes
-argument_list|,
-literal|false
 argument_list|)
 return|;
 block|}

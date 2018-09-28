@@ -1505,6 +1505,16 @@ name|Supplier
 import|;
 end_import
 
+begin_import
+import|import
+name|javax
+operator|.
+name|annotation
+operator|.
+name|Nonnull
+import|;
+end_import
+
 begin_comment
 comment|/**  *<code>RelOptUtil</code> defines static utility methods for use in optimizing  * {@link RelNode}s.  */
 end_comment
@@ -4596,6 +4606,8 @@ block|}
 comment|/**    * Splits out the equi-join components of a join condition, and returns    * what's left. For example, given the condition    *    *<blockquote><code>L.A = R.X AND L.B = L.C AND (L.D = 5 OR L.E =    * R.Y)</code></blockquote>    *    *<p>returns    *    *<ul>    *<li>leftKeys = {A}    *<li>rightKeys = {X}    *<li>rest = L.B = L.C AND (L.D = 5 OR L.E = R.Y)</li>    *</ul>    *    * @param left      left input to join    * @param right     right input to join    * @param condition join condition    * @param leftKeys  The ordinals of the fields from the left input which are    *                  equi-join keys    * @param rightKeys The ordinals of the fields from the right input which    *                  are equi-join keys    * @param filterNulls List of boolean values for each join key position    *                    indicating whether the operator filters out nulls or not.    *                    Value is true if the operator is EQUALS and false if the    *                    operator is IS NOT DISTINCT FROM (or an expanded version).    *                    If<code>filterNulls</code> is null, only join conditions    *                    with EQUALS operators are considered equi-join components.    *                    Rest (including IS NOT DISTINCT FROM) are returned in    *                    remaining join condition.    *    * @return remaining join filters that are not equijoins; may return a    * {@link RexLiteral} true, but never null    */
 specifier|public
 specifier|static
+annotation|@
+name|Nonnull
 name|RexNode
 name|splitJoinCondition
 parameter_list|(
@@ -4682,8 +4694,6 @@ name|getRexBuilder
 argument_list|()
 argument_list|,
 name|nonEquiList
-argument_list|,
-literal|false
 argument_list|)
 return|;
 block|}
@@ -4871,6 +4881,8 @@ block|}
 comment|/**    * Splits out the equi-join (and optionally, a single non-equi) components    * of a join condition, and returns what's left. Projection might be    * required by the caller to provide join keys that are not direct field    * references.    *    * @param sysFieldList  list of system fields    * @param inputs        join inputs    * @param condition     join condition    * @param joinKeys      The join keys from the inputs which are equi-join    *                      keys    * @param filterNulls   The join key positions for which null values will not    *                      match. null values only match for the "is not distinct    *                      from" condition.    * @param rangeOp       if null, only locate equi-joins; otherwise, locate a    *                      single non-equi join predicate and return its operator    *                      in this list; join keys associated with the non-equi    *                      join predicate are at the end of the key lists    *                      returned    * @return What's left, never null    */
 specifier|public
 specifier|static
+annotation|@
+name|Nonnull
 name|RexNode
 name|splitJoinCondition
 parameter_list|(
@@ -4960,8 +4972,6 @@ name|getRexBuilder
 argument_list|()
 argument_list|,
 name|nonEquiList
-argument_list|,
-literal|false
 argument_list|)
 return|;
 block|}
@@ -6288,6 +6298,8 @@ block|}
 comment|/** Builds an equi-join condition from a set of left and right keys. */
 specifier|public
 specifier|static
+annotation|@
+name|Nonnull
 name|RexNode
 name|createEquiJoinCondition
 parameter_list|(
@@ -6457,8 +6469,6 @@ argument_list|()
 return|;
 block|}
 block|}
-argument_list|,
-literal|false
 argument_list|)
 return|;
 block|}
@@ -16142,8 +16152,6 @@ argument_list|,
 name|predicates
 operator|.
 name|pulledUpPredicates
-argument_list|,
-literal|false
 argument_list|)
 decl_stmt|;
 specifier|final
@@ -16157,8 +16165,6 @@ argument_list|(
 name|rexBuilder
 argument_list|,
 name|list
-argument_list|,
-literal|false
 argument_list|)
 decl_stmt|;
 comment|// Suppose we have EMP(empno INT NOT NULL, mgr INT),

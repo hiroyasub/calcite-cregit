@@ -1636,15 +1636,8 @@ name|getRexBuilder
 argument_list|()
 argument_list|,
 name|rejectedFilters
-argument_list|,
-literal|false
 argument_list|)
 decl_stmt|;
-assert|assert
-name|filter
-operator|!=
-literal|null
-assert|;
 comment|// Re-map filter for the projects that have been applied already
 specifier|final
 name|RexNode

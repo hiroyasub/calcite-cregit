@@ -840,8 +840,6 @@ argument_list|(
 name|rexBuilder
 argument_list|,
 name|newBottomList
-argument_list|,
-literal|false
 argument_list|)
 decl_stmt|;
 specifier|final
@@ -971,8 +969,6 @@ argument_list|(
 name|rexBuilder
 argument_list|,
 name|newTopList
-argument_list|,
-literal|false
 argument_list|)
 decl_stmt|;
 annotation|@
@@ -1400,8 +1396,6 @@ argument_list|(
 name|rexBuilder
 argument_list|,
 name|newBottomList
-argument_list|,
-literal|false
 argument_list|)
 decl_stmt|;
 specifier|final
@@ -1531,8 +1525,6 @@ argument_list|(
 name|rexBuilder
 argument_list|,
 name|newTopList
-argument_list|,
-literal|false
 argument_list|)
 decl_stmt|;
 annotation|@

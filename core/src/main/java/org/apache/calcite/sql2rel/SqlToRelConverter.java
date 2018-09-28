@@ -2588,6 +2588,16 @@ import|;
 end_import
 
 begin_import
+import|import
+name|javax
+operator|.
+name|annotation
+operator|.
+name|Nonnull
+import|;
+end_import
+
+begin_import
 import|import static
 name|org
 operator|.
@@ -8033,8 +8043,6 @@ argument_list|)
 argument_list|)
 argument_list|)
 argument_list|)
-argument_list|,
-literal|false
 argument_list|)
 expr_stmt|;
 block|}
@@ -14015,6 +14023,8 @@ block|}
 block|}
 comment|/**    * Returns an expression for matching columns of a USING clause or inferred    * from NATURAL JOIN. "a JOIN b USING (x, y)" becomes "a.x = b.x AND a.y =    * b.y". Returns null if the column list is empty.    *    * @param leftNamespace Namespace of left input to join    * @param rightNamespace Namespace of right input to join    * @param nameList List of column names to join on    * @return Expression to match columns from name list, or true if name list    * is empty    */
 specifier|private
+annotation|@
+name|Nonnull
 name|RexNode
 name|convertUsing
 parameter_list|(
@@ -14171,8 +14181,6 @@ argument_list|(
 name|rexBuilder
 argument_list|,
 name|list
-argument_list|,
-literal|false
 argument_list|)
 return|;
 block|}

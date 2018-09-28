@@ -981,6 +981,20 @@ name|common
 operator|.
 name|collect
 operator|.
+name|Iterables
+import|;
+end_import
+
+begin_import
+import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|collect
+operator|.
 name|Multimap
 import|;
 end_import
@@ -1421,8 +1435,6 @@ name|rexBuilder
 argument_list|,
 name|predicates
 argument_list|,
-literal|true
-argument_list|,
 name|executor
 argument_list|)
 decl_stmt|;
@@ -1548,7 +1560,7 @@ name|pred
 init|=
 name|simplify
 operator|.
-name|simplify
+name|simplifyUnknownAsFalse
 argument_list|(
 name|RexUtil
 operator|.
@@ -1559,8 +1571,6 @@ argument_list|,
 name|queryPredicateList
 operator|.
 name|pulledUpPredicates
-argument_list|,
-literal|false
 argument_list|)
 argument_list|)
 decl_stmt|;
@@ -1767,7 +1777,7 @@ name|viewPred
 init|=
 name|simplify
 operator|.
-name|simplify
+name|simplifyUnknownAsFalse
 argument_list|(
 name|RexUtil
 operator|.
@@ -1778,8 +1788,6 @@ argument_list|,
 name|viewPredicateList
 operator|.
 name|pulledUpPredicates
-argument_list|,
-literal|false
 argument_list|)
 argument_list|)
 decl_stmt|;
@@ -2479,8 +2487,6 @@ operator|.
 name|getRight
 argument_list|()
 argument_list|)
-argument_list|,
-literal|false
 argument_list|)
 decl_stmt|;
 assert|assert
@@ -2666,8 +2672,6 @@ operator|.
 name|getRight
 argument_list|()
 argument_list|)
-argument_list|,
-literal|false
 argument_list|)
 decl_stmt|;
 comment|// a. Compute final compensation predicate.
@@ -2824,8 +2828,6 @@ name|compensationColumnsEquiPred
 argument_list|,
 name|otherCompensationPred
 argument_list|)
-argument_list|,
-literal|false
 argument_list|)
 decl_stmt|;
 comment|// b. Generate final rewriting if possible.
@@ -2858,7 +2860,7 @@ name|newPred
 init|=
 name|simplify
 operator|.
-name|simplify
+name|simplifyUnknownAsFalse
 argument_list|(
 name|viewCompensationPred
 argument_list|)
@@ -3118,7 +3120,7 @@ name|RelNode
 name|unionInputView
 parameter_list|)
 function_decl|;
-comment|/**    * This method is responsible for rewriting the query using the given view query.    *    *<p>The input node is a Scan on the view table and possibly a compensation Filter    * on top. If a rewriting can be produced, we return that rewriting. If it cannot    * be produced, we will return null.    */
+comment|/**    * Rewrites the query using the given view query.    *    *<p>The input node is a Scan on the view table and possibly a compensation Filter    * on top. If a rewriting can be produced, we return that rewriting. If it cannot    * be produced, we will return null.    */
 specifier|protected
 specifier|abstract
 name|RelNode
@@ -3866,8 +3868,6 @@ name|compensationColumnsEquiPred
 argument_list|,
 name|otherCompensationPred
 argument_list|)
-argument_list|,
-literal|false
 argument_list|)
 argument_list|)
 decl_stmt|;
@@ -3886,7 +3886,7 @@ name|filter
 argument_list|(
 name|simplify
 operator|.
-name|simplify
+name|simplifyUnknownAsFalse
 argument_list|(
 name|queryCompensationPred
 argument_list|)
@@ -6076,8 +6076,6 @@ name|compensationColumnsEquiPred
 argument_list|,
 name|otherCompensationPred
 argument_list|)
-argument_list|,
-literal|false
 argument_list|)
 argument_list|)
 decl_stmt|;
@@ -6096,7 +6094,7 @@ name|filter
 argument_list|(
 name|simplify
 operator|.
-name|simplify
+name|simplifyUnknownAsFalse
 argument_list|(
 name|queryCompensationPred
 argument_list|)
@@ -8965,15 +8963,29 @@ continue|continue;
 block|}
 comment|// We only support project - filter - join, thus it should map to
 comment|// a single expression
-assert|assert
-name|s
+specifier|final
+name|RexNode
+name|e
+init|=
+name|Iterables
 operator|.
-name|size
-argument_list|()
-operator|==
-literal|1
-assert|;
+name|getOnlyElement
+argument_list|(
+name|s
+argument_list|)
+decl_stmt|;
 comment|// Rewrite expr to be expressed on query tables
+specifier|final
+name|RexNode
+name|simplified
+init|=
+name|simplify
+operator|.
+name|simplifyUnknownAsFalse
+argument_list|(
+name|e
+argument_list|)
+decl_stmt|;
 name|RexNode
 name|expr
 init|=
@@ -8983,18 +8995,7 @@ name|swapTableColumnReferences
 argument_list|(
 name|rexBuilder
 argument_list|,
-name|simplify
-operator|.
-name|simplify
-argument_list|(
-name|s
-operator|.
-name|iterator
-argument_list|()
-operator|.
-name|next
-argument_list|()
-argument_list|)
+name|simplified
 argument_list|,
 name|tableMapping
 operator|.
@@ -9125,16 +9126,22 @@ argument_list|)
 expr_stmt|;
 comment|// Then we simplify the expression and we add it to the expressions lineage so we
 comment|// can try to find a match
+specifier|final
+name|RexNode
+name|simplified
+init|=
+name|simplify
+operator|.
+name|simplifyUnknownAsFalse
+argument_list|(
+name|ceilExpr
+argument_list|)
+decl_stmt|;
 name|exprsLineage
 operator|.
 name|put
 argument_list|(
-name|simplify
-operator|.
-name|simplify
-argument_list|(
-name|ceilExpr
-argument_list|)
+name|simplified
 operator|.
 name|toString
 argument_list|()
@@ -9210,16 +9217,22 @@ argument_list|)
 expr_stmt|;
 comment|// Then we simplify the expression and we add it to the expressions lineage so we
 comment|// can try to find a match
+specifier|final
+name|RexNode
+name|simplified
+init|=
+name|simplify
+operator|.
+name|simplifyUnknownAsFalse
+argument_list|(
+name|floorExpr
+argument_list|)
+decl_stmt|;
 name|exprsLineage
 operator|.
 name|put
 argument_list|(
-name|simplify
-operator|.
-name|simplify
-argument_list|(
-name|floorExpr
-argument_list|)
+name|simplified
 operator|.
 name|toString
 argument_list|()
@@ -9287,15 +9300,29 @@ return|;
 block|}
 comment|// We only support project - filter - join, thus it should map to
 comment|// a single expression
-assert|assert
-name|s
+specifier|final
+name|RexNode
+name|e
+init|=
+name|Iterables
 operator|.
-name|size
-argument_list|()
-operator|==
-literal|1
-assert|;
+name|getOnlyElement
+argument_list|(
+name|s
+argument_list|)
+decl_stmt|;
 comment|// Rewrite expr to be expressed on query tables
+specifier|final
+name|RexNode
+name|simplified
+init|=
+name|simplify
+operator|.
+name|simplifyUnknownAsFalse
+argument_list|(
+name|e
+argument_list|)
+decl_stmt|;
 name|RexNode
 name|targetExpr
 init|=
@@ -9305,18 +9332,7 @@ name|swapColumnReferences
 argument_list|(
 name|rexBuilder
 argument_list|,
-name|simplify
-operator|.
-name|simplify
-argument_list|(
-name|s
-operator|.
-name|iterator
-argument_list|()
-operator|.
-name|next
-argument_list|()
-argument_list|)
+name|simplified
 argument_list|,
 name|equivalenceClassesMap
 argument_list|)
@@ -10749,8 +10765,6 @@ argument_list|(
 name|rexBuilder
 argument_list|,
 name|equiColumnsPreds
-argument_list|,
-literal|false
 argument_list|)
 argument_list|,
 name|RexUtil
@@ -10760,8 +10774,6 @@ argument_list|(
 name|rexBuilder
 argument_list|,
 name|rangePreds
-argument_list|,
-literal|false
 argument_list|)
 argument_list|,
 name|RexUtil
@@ -10771,8 +10783,6 @@ argument_list|(
 name|rexBuilder
 argument_list|,
 name|residualPreds
-argument_list|,
-literal|false
 argument_list|)
 argument_list|)
 return|;

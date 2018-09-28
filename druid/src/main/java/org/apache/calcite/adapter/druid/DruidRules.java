@@ -1183,8 +1183,6 @@ name|rexBuilder
 argument_list|,
 name|predicates
 argument_list|,
-literal|true
-argument_list|,
 name|executor
 argument_list|)
 decl_stmt|;
@@ -1194,7 +1192,7 @@ name|cond
 init|=
 name|simplify
 operator|.
-name|simplify
+name|simplifyUnknownAsFalse
 argument_list|(
 name|filter
 operator|.
@@ -1422,8 +1420,6 @@ name|triple
 operator|.
 name|getLeft
 argument_list|()
-argument_list|,
-literal|false
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -1499,8 +1495,6 @@ name|triple
 operator|.
 name|getMiddle
 argument_list|()
-argument_list|,
-literal|false
 argument_list|)
 argument_list|)
 decl_stmt|;
@@ -3569,8 +3563,6 @@ name|builder
 argument_list|,
 name|predicates
 argument_list|,
-literal|true
-argument_list|,
 name|executor
 argument_list|)
 decl_stmt|;
@@ -3853,7 +3845,7 @@ name|filterNode
 operator|=
 name|simplify
 operator|.
-name|simplify
+name|simplifyUnknownAsFalse
 argument_list|(
 name|filterNode
 argument_list|)
