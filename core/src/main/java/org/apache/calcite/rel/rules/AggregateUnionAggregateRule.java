@@ -623,8 +623,6 @@ name|topAggRel
 operator|.
 name|getGroupSet
 argument_list|()
-argument_list|,
-literal|null
 argument_list|)
 argument_list|,
 name|topAggRel

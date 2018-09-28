@@ -6512,8 +6512,6 @@ operator|.
 name|groupKey
 argument_list|(
 name|groupSet
-argument_list|,
-literal|null
 argument_list|)
 argument_list|,
 name|aggregateCalls
@@ -8349,8 +8347,6 @@ operator|.
 name|groupKey
 argument_list|(
 name|groupSet
-argument_list|,
-literal|null
 argument_list|)
 argument_list|,
 name|aggregateCalls

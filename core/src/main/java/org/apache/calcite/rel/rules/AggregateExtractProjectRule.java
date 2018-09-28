@@ -575,16 +575,12 @@ argument_list|()
 argument_list|)
 decl_stmt|;
 specifier|final
-name|ImmutableList
+name|Iterable
 argument_list|<
 name|ImmutableBitSet
 argument_list|>
 name|newGroupSets
 init|=
-name|ImmutableList
-operator|.
-name|copyOf
-argument_list|(
 name|Iterables
 operator|.
 name|transform
@@ -603,7 +599,6 @@ argument_list|(
 name|mapping
 argument_list|,
 name|bitSet
-argument_list|)
 argument_list|)
 argument_list|)
 decl_stmt|;

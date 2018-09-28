@@ -785,8 +785,6 @@ operator|.
 name|groupKey
 argument_list|(
 name|newGroupSet
-argument_list|,
-literal|null
 argument_list|)
 argument_list|,
 name|newAggCalls

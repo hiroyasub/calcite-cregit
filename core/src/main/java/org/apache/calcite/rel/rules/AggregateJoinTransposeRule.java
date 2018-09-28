@@ -1917,8 +1917,6 @@ operator|.
 name|groupKey
 argument_list|(
 name|belowAggregateKey
-argument_list|,
-literal|null
 argument_list|)
 argument_list|,
 name|belowAggCalls
