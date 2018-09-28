@@ -66,7 +66,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Registers dynamic tables.  *  * Non thread-safe.  */
+comment|/**  * Registers dynamic tables.  *  *<p>Not thread-safe.  */
 end_comment
 
 begin_class

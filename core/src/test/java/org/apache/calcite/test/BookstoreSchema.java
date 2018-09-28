@@ -56,7 +56,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * A Schema representing a bookstore.  *  * It contains a single table with various levels/types of nesting, and is used mainly for testing  * parts of code that rely on nested structures.  *  * New authors can be added but attention should be made to update appropriately tests that might  * fail.  *  * The Schema is meant to be used with {@link org.apache.calcite.adapter.java.ReflectiveSchema} thus  * all fields, and methods, should be public.  */
+comment|/**  * A Schema representing a bookstore.  *  *<p>It contains a single table with various levels/types of nesting,  * and is used mainly for testing parts of code that rely on nested  * structures.  *  *<p>New authors can be added but attention should be made to update  * appropriately tests that might fail.  *  *<p>The Schema is meant to be used with  * {@link org.apache.calcite.adapter.java.ReflectiveSchema} thus all  * fields, and methods, should be public.  */
 end_comment
 
 begin_class

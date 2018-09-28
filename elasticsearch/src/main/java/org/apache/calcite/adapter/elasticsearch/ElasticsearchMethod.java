@@ -120,9 +120,9 @@ comment|// offset
 name|Long
 operator|.
 name|class
-comment|// fetch
 argument_list|)
 block|;
+comment|// fetch
 specifier|public
 specifier|final
 name|Method

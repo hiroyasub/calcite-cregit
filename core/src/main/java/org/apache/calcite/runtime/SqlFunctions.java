@@ -12546,7 +12546,7 @@ return|return
 name|x
 return|;
 block|}
-comment|/**    * Implements the {@code .} (field access) operator on an object whose type is not known until    * runtime.    *    * A struct object can be represented in various ways by the runtime and depends on the    * {@link org.apache.calcite.adapter.enumerable.JavaRowFormat}.    */
+comment|/**    * Implements the {@code .} (field access) operator on an object    * whose type is not known until runtime.    *    *<p>A struct object can be represented in various ways by the    * runtime and depends on the    * {@link org.apache.calcite.adapter.enumerable.JavaRowFormat}.    */
 annotation|@
 name|Experimental
 specifier|public

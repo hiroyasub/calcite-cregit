@@ -30,7 +30,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Base class which allows sharing same geode instance across all tests. Also due to legacy  * reasons there can't be more than one Geode instance (running in parallel) for a single JVM.  */
+comment|/**  * Base class that allows sharing same geode instance across all tests.  *  *<p>Also, due to legacy reasons, there can't be more than one Geode  * instance (running in parallel) for a single JVM.  */
 end_comment
 
 begin_class

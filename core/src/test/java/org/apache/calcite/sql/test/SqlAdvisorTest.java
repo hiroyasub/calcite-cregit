@@ -2534,7 +2534,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testSimlifySubqueryStar
+name|testSimlifySubQueryStar
 parameter_list|()
 block|{
 name|String
@@ -2618,7 +2618,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testSimlifySubqueryMultipleFrom
+name|testSimlifySubQueryMultipleFrom
 parameter_list|()
 block|{
 name|String

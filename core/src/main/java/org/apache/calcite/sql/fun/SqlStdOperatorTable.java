@@ -5649,7 +5649,7 @@ return|;
 block|}
 block|}
 decl_stmt|;
-comment|/**    * The internal {@code $STRUCT_ACCESS} operator is used to access a field of a record.    *    * In contrast with {@link #DOT} operator it never appears in an {@link SqlNode} tree and allows    * to access fields by position and not by name.    */
+comment|/**    * The internal {@code $STRUCT_ACCESS} operator is used to access a    * field of a record.    *    *<p>In contrast with {@link #DOT} operator, it never appears in an    * {@link SqlNode} tree and allows to access fields by position and    * not by name.    */
 specifier|public
 specifier|static
 specifier|final

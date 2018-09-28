@@ -4931,7 +4931,7 @@ literal|false
 return|;
 block|}
 block|}
-comment|/** Analyzes a given {@link RexNode} and decides whenever its safe to unwind.   *   * CaseSafe means that it only contains a combination of known good operators.   *   * The division is an unsafe operator, consider:   *<pre>case when a&gt; 0 then 1/a else null end</pre>   */
+comment|/** Analyzes a given {@link RexNode} and decides whenever it is safe to    * unwind.   *   *<p>"Safe" means that it only contains a combination of known good operators.   *   *<p>Division is an unsafe operator; consider the following:   *<pre>case when a&gt; 0 then 1 / a else null end</pre>   */
 specifier|static
 name|boolean
 name|isSafeExpression
@@ -5134,7 +5134,7 @@ return|return
 name|result
 return|;
 block|}
-comment|/**    * Generic boolean case simplification.    *    * Rewrites:    *<pre>    * CASE    *   WHEN p1 THEN x    *   WHEN p2 THEN y    *   ELSE z    * END    *</pre>    * to    *<pre>(p1 and x) or (p2 and y and not(p1)) or (true and z and not(p1) and not(p2))</pre>    */
+comment|/**    * Generic boolean case simplification.    *    *<p>Rewrites:    *<pre>    * CASE    *   WHEN p1 THEN x    *   WHEN p2 THEN y    *   ELSE z    * END    *</pre>    * to    *<pre>(p1 and x) or (p2 and y and not(p1)) or (true and z and not(p1) and not(p2))</pre>    */
 specifier|private
 specifier|static
 name|RexNode
