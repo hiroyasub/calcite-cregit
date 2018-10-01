@@ -3278,7 +3278,8 @@ name|add
 argument_list|(
 name|operand
 operator|.
-name|digest
+name|toString
+argument_list|()
 argument_list|)
 condition|)
 block|{
