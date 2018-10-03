@@ -1150,6 +1150,130 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testSelectQueryWithGroupByEmpty
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql0
+init|=
+literal|"select count(*) from \"product\" group by ()"
+decl_stmt|;
+specifier|final
+name|String
+name|sql1
+init|=
+literal|"select count(*) from \"product\""
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT COUNT(*)\n"
+operator|+
+literal|"FROM \"foodmart\".\"product\""
+decl_stmt|;
+specifier|final
+name|String
+name|expectedMySql
+init|=
+literal|"SELECT COUNT(*)\n"
+operator|+
+literal|"FROM `foodmart`.`product`"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql0
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+operator|.
+name|withMysql
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expectedMySql
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+name|sql1
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+operator|.
+name|withMysql
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expectedMySql
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSelectQueryWithGroupByEmpty2
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|query
+init|=
+literal|"select 42 as c from \"product\" group by ()"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT 42 AS \"C\"\n"
+operator|+
+literal|"FROM \"foodmart\".\"product\"\n"
+operator|+
+literal|"GROUP BY ()"
+decl_stmt|;
+specifier|final
+name|String
+name|expectedMySql
+init|=
+literal|"SELECT 42 AS `C`\n"
+operator|+
+literal|"FROM `foodmart`.`product`\n"
+operator|+
+literal|"GROUP BY ()"
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+operator|.
+name|withMysql
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expectedMySql
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testSelectQueryWithMinAggregateFunction
 parameter_list|()
 block|{
@@ -1357,6 +1481,180 @@ operator|.
 name|ok
 argument_list|(
 name|expected
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1174">[CALCITE-1174]    * When generating SQL, translate SUM0(x) to COALESCE(SUM(x), 0)</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSum0BecomesCoalesce
+parameter_list|()
+block|{
+specifier|final
+name|RelBuilder
+name|builder
+init|=
+name|relBuilder
+argument_list|()
+decl_stmt|;
+specifier|final
+name|RelNode
+name|root
+init|=
+name|builder
+operator|.
+name|scan
+argument_list|(
+literal|"EMP"
+argument_list|)
+operator|.
+name|aggregate
+argument_list|(
+name|builder
+operator|.
+name|groupKey
+argument_list|()
+argument_list|,
+name|builder
+operator|.
+name|aggregateCall
+argument_list|(
+name|SqlStdOperatorTable
+operator|.
+name|SUM0
+argument_list|,
+literal|false
+argument_list|,
+literal|false
+argument_list|,
+literal|null
+argument_list|,
+literal|"s"
+argument_list|,
+name|builder
+operator|.
+name|field
+argument_list|(
+literal|3
+argument_list|)
+argument_list|)
+argument_list|)
+operator|.
+name|build
+argument_list|()
+decl_stmt|;
+specifier|final
+name|String
+name|expectedMysql
+init|=
+literal|"SELECT COALESCE(SUM(`MGR`), 0) AS `s`\n"
+operator|+
+literal|"FROM `scott`.`EMP`"
+decl_stmt|;
+name|assertThat
+argument_list|(
+name|toSql
+argument_list|(
+name|root
+argument_list|,
+name|SqlDialect
+operator|.
+name|DatabaseProduct
+operator|.
+name|MYSQL
+operator|.
+name|getDialect
+argument_list|()
+argument_list|)
+argument_list|,
+name|isLinux
+argument_list|(
+name|expectedMysql
+argument_list|)
+argument_list|)
+expr_stmt|;
+specifier|final
+name|String
+name|expectedPostgresql
+init|=
+literal|"SELECT COALESCE(SUM(\"MGR\"), 0) AS \"s\"\n"
+operator|+
+literal|"FROM \"scott\".\"EMP\""
+decl_stmt|;
+name|assertThat
+argument_list|(
+name|toSql
+argument_list|(
+name|root
+argument_list|,
+name|SqlDialect
+operator|.
+name|DatabaseProduct
+operator|.
+name|POSTGRESQL
+operator|.
+name|getDialect
+argument_list|()
+argument_list|)
+argument_list|,
+name|isLinux
+argument_list|(
+name|expectedPostgresql
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** As {@link #testSum0BecomesCoalesce()} but for windowed aggregates. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testWindowedSum0BecomesCoalesce
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|query
+init|=
+literal|"select\n"
+operator|+
+literal|"  AVG(\"net_weight\") OVER (order by \"product_id\" rows 3 preceding)\n"
+operator|+
+literal|"from \"foodmart\".\"product\""
+decl_stmt|;
+specifier|final
+name|String
+name|expectedPostgresql
+init|=
+literal|"SELECT CASE WHEN (COUNT(\"net_weight\")"
+operator|+
+literal|" OVER (ORDER BY \"product_id\" ROWS BETWEEN 3 PRECEDING AND CURRENT ROW))> 0 "
+operator|+
+literal|"THEN CAST(COALESCE(SUM(\"net_weight\")"
+operator|+
+literal|" OVER (ORDER BY \"product_id\" ROWS BETWEEN 3 PRECEDING AND CURRENT ROW), 0)"
+operator|+
+literal|" AS DOUBLE PRECISION) "
+operator|+
+literal|"ELSE NULL END / (COUNT(\"net_weight\")"
+operator|+
+literal|" OVER (ORDER BY \"product_id\" ROWS BETWEEN 3 PRECEDING AND CURRENT ROW))\n"
+operator|+
+literal|"FROM \"foodmart\".\"product\""
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|withPostgresql
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expectedPostgresql
 argument_list|)
 expr_stmt|;
 block|}
