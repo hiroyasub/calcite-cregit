@@ -9964,7 +9964,7 @@ name|checkSimplifyFilter
 argument_list|(
 name|neOrEq
 argument_list|,
-literal|"OR(<>(?0.b, 1), IS NOT NULL(?0.b))"
+literal|"OR(<>(?0.b, 1), =(?0.b, 1))"
 argument_list|)
 expr_stmt|;
 comment|// Careful of the excluded middle!
@@ -9997,7 +9997,7 @@ argument_list|()
 argument_list|,
 name|equalTo
 argument_list|(
-literal|"OR(<>(?0.b, 1), IS NOT NULL(?0.b))"
+literal|"OR(<>(?0.b, 1), =(?0.b, 1))"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -10182,6 +10182,72 @@ argument_list|,
 literal|"<>(0, ?0.int0)"
 argument_list|,
 literal|"true"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSimplifyNotAnd
+parameter_list|()
+block|{
+specifier|final
+name|RexNode
+name|e
+init|=
+name|or
+argument_list|(
+name|le
+argument_list|(
+name|vBool
+argument_list|(
+literal|1
+argument_list|)
+argument_list|,
+name|literal
+argument_list|(
+literal|true
+argument_list|)
+argument_list|)
+argument_list|,
+name|eq
+argument_list|(
+name|literal
+argument_list|(
+literal|false
+argument_list|)
+argument_list|,
+name|eq
+argument_list|(
+name|literal
+argument_list|(
+literal|false
+argument_list|)
+argument_list|,
+name|vBool
+argument_list|(
+literal|1
+argument_list|)
+argument_list|)
+argument_list|)
+argument_list|)
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"OR(<=(?0.bool1, true), =(false, =(false, ?0.bool1)))"
+decl_stmt|;
+name|checkSimplify3
+argument_list|(
+name|e
+argument_list|,
+name|expected
+argument_list|,
+name|expected
+argument_list|,
+name|expected
 argument_list|)
 expr_stmt|;
 block|}

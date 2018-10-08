@@ -2184,7 +2184,7 @@ name|makeCall
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|NOT
+name|IS_NOT_TRUE
 argument_list|,
 name|t2
 argument_list|)
