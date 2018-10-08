@@ -5052,6 +5052,39 @@ comment|// 1970-04-11
 block|}
 decl_stmt|;
 block|}
+comment|/** CALCITE-2611 unknown on one side of an or may lead to uncompilable code */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testUnknownInOr
+parameter_list|()
+block|{
+name|CalciteAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|withSchema
+argument_list|(
+literal|"s"
+argument_list|,
+name|CATCHALL
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select (\"value\" = 3 and unknown) or ( \"value\"  = 3 ) "
+operator|+
+literal|"from \"s\".\"primesCustomBoxed\""
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"EXPR$0=false\nEXPR$0=false\nEXPR$0=true"
+argument_list|)
+expr_stmt|;
+block|}
 block|}
 end_class
 
