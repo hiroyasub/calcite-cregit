@@ -990,15 +990,46 @@ name|String
 name|expected
 parameter_list|)
 block|{
-name|checkSimplify2
+specifier|final
+name|String
+name|nodeString
+init|=
+name|node
+operator|.
+name|toString
+argument_list|()
+decl_stmt|;
+name|checkSimplify3_
 argument_list|(
 name|node
 argument_list|,
 name|expected
 argument_list|,
 name|expected
+argument_list|,
+name|expected
 argument_list|)
 expr_stmt|;
+if|if
+condition|(
+name|expected
+operator|.
+name|equals
+argument_list|(
+name|nodeString
+argument_list|)
+condition|)
+block|{
+throw|throw
+operator|new
+name|AssertionError
+argument_list|(
+literal|"expected == node.toString(); "
+operator|+
+literal|"use checkSimplifyUnchanged"
+argument_list|)
+throw|;
+block|}
 block|}
 comment|/** Simplifies an expression and checks that the result is unchanged. */
 specifier|private
@@ -1009,14 +1040,24 @@ name|RexNode
 name|node
 parameter_list|)
 block|{
-name|checkSimplify
-argument_list|(
-name|node
-argument_list|,
+specifier|final
+name|String
+name|expected
+init|=
 name|node
 operator|.
 name|toString
 argument_list|()
+decl_stmt|;
+name|checkSimplify3_
+argument_list|(
+name|node
+argument_list|,
+name|expected
+argument_list|,
+name|expected
+argument_list|,
+name|expected
 argument_list|)
 expr_stmt|;
 block|}
@@ -1035,7 +1076,7 @@ name|String
 name|expectedFalse
 parameter_list|)
 block|{
-name|checkSimplify3
+name|checkSimplify3_
 argument_list|(
 name|node
 argument_list|,
@@ -1046,10 +1087,102 @@ argument_list|,
 name|expected
 argument_list|)
 expr_stmt|;
+if|if
+condition|(
+name|expected
+operator|.
+name|equals
+argument_list|(
+name|expectedFalse
+argument_list|)
+condition|)
+block|{
+throw|throw
+operator|new
+name|AssertionError
+argument_list|(
+literal|"expected == expectedFalse; use checkSimplify"
+argument_list|)
+throw|;
+block|}
 block|}
 specifier|private
 name|void
 name|checkSimplify3
+parameter_list|(
+name|RexNode
+name|node
+parameter_list|,
+name|String
+name|expected
+parameter_list|,
+name|String
+name|expectedFalse
+parameter_list|,
+name|String
+name|expectedTrue
+parameter_list|)
+block|{
+name|checkSimplify3_
+argument_list|(
+name|node
+argument_list|,
+name|expected
+argument_list|,
+name|expectedFalse
+argument_list|,
+name|expectedTrue
+argument_list|)
+expr_stmt|;
+if|if
+condition|(
+name|expected
+operator|.
+name|equals
+argument_list|(
+name|expectedFalse
+argument_list|)
+operator|&&
+name|expected
+operator|.
+name|equals
+argument_list|(
+name|expectedTrue
+argument_list|)
+condition|)
+block|{
+throw|throw
+operator|new
+name|AssertionError
+argument_list|(
+literal|"expected == expectedFalse == expectedTrue; "
+operator|+
+literal|"use checkSimplify"
+argument_list|)
+throw|;
+block|}
+if|if
+condition|(
+name|expected
+operator|.
+name|equals
+argument_list|(
+name|expectedTrue
+argument_list|)
+condition|)
+block|{
+throw|throw
+operator|new
+name|AssertionError
+argument_list|(
+literal|"expected == expectedTrue; use checkSimplify2"
+argument_list|)
+throw|;
+block|}
+block|}
+specifier|private
+name|void
+name|checkSimplify3_
 parameter_list|(
 name|RexNode
 name|node
@@ -3612,7 +3745,7 @@ argument_list|,
 literal|"false"
 argument_list|)
 expr_stmt|;
-name|checkSimplify2
+name|checkSimplify
 argument_list|(
 name|and
 argument_list|(
@@ -3638,8 +3771,6 @@ literal|1
 argument_list|)
 argument_list|)
 argument_list|)
-argument_list|,
-literal|"false"
 argument_list|,
 literal|"false"
 argument_list|)
@@ -4420,7 +4551,7 @@ argument_list|,
 literal|"?0.int0"
 argument_list|)
 expr_stmt|;
-name|checkSimplify
+name|checkSimplifyUnchanged
 argument_list|(
 name|cast
 argument_list|(
@@ -4430,11 +4561,9 @@ argument_list|,
 name|tInt
 argument_list|()
 argument_list|)
-argument_list|,
-literal|"CAST(?0.int0):INTEGER NOT NULL"
 argument_list|)
 expr_stmt|;
-name|checkSimplify
+name|checkSimplifyUnchanged
 argument_list|(
 name|cast
 argument_list|(
@@ -4447,8 +4576,6 @@ name|tInt
 argument_list|()
 argument_list|)
 argument_list|)
-argument_list|,
-literal|"CAST(?0.notNullInt0):INTEGER"
 argument_list|)
 expr_stmt|;
 name|checkSimplify
@@ -4486,7 +4613,7 @@ argument_list|,
 literal|"CAST(?0.varchar0):INTEGER NOT NULL"
 argument_list|)
 expr_stmt|;
-name|checkSimplify
+name|checkSimplifyUnchanged
 argument_list|(
 name|cast
 argument_list|(
@@ -4502,10 +4629,6 @@ argument_list|,
 name|tVarchar
 argument_list|()
 argument_list|)
-argument_list|,
-literal|"CAST(CAST(?0.varchar0):INTEGER NOT NULL):VARCHAR CHARACTER SET \"ISO-8859-1\" "
-operator|+
-literal|"COLLATE \"ISO-8859-1$en_US$primary\" NOT NULL"
 argument_list|)
 expr_stmt|;
 block|}
@@ -7477,7 +7600,7 @@ argument_list|,
 literal|"IS NOT NULL(?0.i)"
 argument_list|)
 expr_stmt|;
-name|checkSimplify
+name|checkSimplifyUnchanged
 argument_list|(
 name|eq
 argument_list|(
@@ -7485,8 +7608,6 @@ name|iRef
 argument_list|,
 name|hRef
 argument_list|)
-argument_list|,
-literal|"=(?0.i, ?0.h)"
 argument_list|)
 expr_stmt|;
 comment|// "x<= x" simplifies to "x is not null"
@@ -7528,7 +7649,7 @@ argument_list|,
 literal|"IS NOT NULL(?0.i)"
 argument_list|)
 expr_stmt|;
-name|checkSimplify
+name|checkSimplifyUnchanged
 argument_list|(
 name|le
 argument_list|(
@@ -7536,8 +7657,6 @@ name|iRef
 argument_list|,
 name|hRef
 argument_list|)
-argument_list|,
-literal|"<=(?0.i, ?0.h)"
 argument_list|)
 expr_stmt|;
 comment|// "x>= x" simplifies to "x is not null"
@@ -7579,7 +7698,7 @@ argument_list|,
 literal|"IS NOT NULL(?0.i)"
 argument_list|)
 expr_stmt|;
-name|checkSimplify
+name|checkSimplifyUnchanged
 argument_list|(
 name|ge
 argument_list|(
@@ -7587,8 +7706,6 @@ name|iRef
 argument_list|,
 name|hRef
 argument_list|)
-argument_list|,
-literal|">=(?0.i, ?0.h)"
 argument_list|)
 expr_stmt|;
 comment|// "x != x" simplifies to "false"
@@ -7630,7 +7747,7 @@ argument_list|,
 literal|"false"
 argument_list|)
 expr_stmt|;
-name|checkSimplify
+name|checkSimplifyUnchanged
 argument_list|(
 name|ne
 argument_list|(
@@ -7638,8 +7755,6 @@ name|iRef
 argument_list|,
 name|hRef
 argument_list|)
-argument_list|,
-literal|"<>(?0.i, ?0.h)"
 argument_list|)
 expr_stmt|;
 comment|// "x< x" simplifies to "false"
@@ -7681,7 +7796,7 @@ argument_list|,
 literal|"false"
 argument_list|)
 expr_stmt|;
-name|checkSimplify
+name|checkSimplifyUnchanged
 argument_list|(
 name|lt
 argument_list|(
@@ -7689,8 +7804,6 @@ name|iRef
 argument_list|,
 name|hRef
 argument_list|)
-argument_list|,
-literal|"<(?0.i, ?0.h)"
 argument_list|)
 expr_stmt|;
 comment|// "x> x" simplifies to "false"
@@ -7732,7 +7845,7 @@ argument_list|,
 literal|"false"
 argument_list|)
 expr_stmt|;
-name|checkSimplify
+name|checkSimplifyUnchanged
 argument_list|(
 name|gt
 argument_list|(
@@ -7740,8 +7853,6 @@ name|iRef
 argument_list|,
 name|hRef
 argument_list|)
-argument_list|,
-literal|">(?0.i, ?0.h)"
 argument_list|)
 expr_stmt|;
 comment|// "(not x) is null" to "x is null"
@@ -10233,21 +10344,9 @@ argument_list|)
 argument_list|)
 argument_list|)
 decl_stmt|;
-specifier|final
-name|String
-name|expected
-init|=
-literal|"OR(<=(?0.bool1, true), =(false, =(false, ?0.bool1)))"
-decl_stmt|;
-name|checkSimplify3
+name|checkSimplifyUnchanged
 argument_list|(
 name|e
-argument_list|,
-name|expected
-argument_list|,
-name|expected
-argument_list|,
-name|expected
 argument_list|)
 expr_stmt|;
 block|}
@@ -10367,7 +10466,7 @@ argument_list|,
 literal|"false"
 argument_list|)
 expr_stmt|;
-name|checkSimplify2
+name|checkSimplify
 argument_list|(
 name|and
 argument_list|(
@@ -10375,8 +10474,6 @@ name|falseLiteral
 argument_list|,
 name|nullBool
 argument_list|)
-argument_list|,
-literal|"false"
 argument_list|,
 literal|"false"
 argument_list|)
@@ -10421,7 +10518,7 @@ argument_list|,
 literal|"true"
 argument_list|)
 expr_stmt|;
-name|checkSimplify2
+name|checkSimplify
 argument_list|(
 name|or
 argument_list|(
@@ -10429,8 +10526,6 @@ name|trueLiteral
 argument_list|,
 name|nullBool
 argument_list|)
-argument_list|,
-literal|"true"
 argument_list|,
 literal|"true"
 argument_list|)
@@ -10523,7 +10618,7 @@ literal|0
 argument_list|)
 decl_stmt|;
 comment|// in the case of 3-valued logic, the result must be unknown if a is unknown
-name|checkSimplify3
+name|checkSimplify2
 argument_list|(
 name|and
 argument_list|(
@@ -10538,8 +10633,6 @@ argument_list|,
 literal|"AND(null, IS NULL(?0.a))"
 argument_list|,
 literal|"false"
-argument_list|,
-literal|"AND(null, IS NULL(?0.a))"
 argument_list|)
 expr_stmt|;
 block|}
@@ -10612,7 +10705,7 @@ name|void
 name|testSimplifyDynamicParam
 parameter_list|()
 block|{
-name|checkSimplify2
+name|checkSimplify
 argument_list|(
 name|or
 argument_list|(
@@ -10622,8 +10715,6 @@ argument_list|,
 name|vBool
 argument_list|()
 argument_list|)
-argument_list|,
-literal|"?0.bool0"
 argument_list|,
 literal|"?0.bool0"
 argument_list|)
@@ -11264,7 +11355,7 @@ name|void
 name|testSimplifyCaseCompactionDiv
 parameter_list|()
 block|{
-comment|// FIXME: RexInterpreter currently evaluates childs beforehand.
+comment|// FIXME: RexInterpreter currently evaluates children beforehand.
 name|simplify
 operator|=
 name|simplify
@@ -11320,15 +11411,13 @@ argument_list|)
 argument_list|)
 decl_stmt|;
 comment|// expectation here is that the 2 branches are not merged.
-name|checkSimplify
+name|checkSimplifyUnchanged
 argument_list|(
 name|caseNode
-argument_list|,
-literal|"CASE(?0.bool0, ?0.int0, =(/(3, ?0.notNullInt0), 11), ?0.int0, ?0.int1)"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/* case value branch contains division */
+comment|/** Tests a CASE value branch that contains division. */
 annotation|@
 name|Test
 specifier|public
@@ -11336,7 +11425,7 @@ name|void
 name|testSimplifyCaseDiv1
 parameter_list|()
 block|{
-comment|// FIXME: RexInterpreter currently evaluates childs beforehand.
+comment|// FIXME: RexInterpreter currently evaluates children beforehand.
 name|simplify
 operator|=
 name|simplify
@@ -11384,15 +11473,13 @@ argument_list|,
 name|falseLiteral
 argument_list|)
 decl_stmt|;
-name|checkSimplify
+name|checkSimplifyUnchanged
 argument_list|(
 name|caseNode
-argument_list|,
-literal|"CASE(<>(?0.notNullInt0, 0), =(/(3, ?0.notNullInt0), 11), false)"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/* case condition contains division */
+comment|/** Tests a CASE condition that contains division, */
 annotation|@
 name|Test
 specifier|public
@@ -11400,7 +11487,7 @@ name|void
 name|testSimplifyCaseDiv2
 parameter_list|()
 block|{
-comment|// FIXME: RexInterpreter currently evaluates childs beforehand.
+comment|// FIXME: RexInterpreter currently evaluates children beforehand.
 name|simplify
 operator|=
 name|simplify
@@ -11452,11 +11539,9 @@ argument_list|,
 name|falseLiteral
 argument_list|)
 decl_stmt|;
-name|checkSimplify
+name|checkSimplifyUnchanged
 argument_list|(
 name|caseNode
-argument_list|,
-literal|"CASE(=(?0.notNullInt0, 0), true,>(/(3, ?0.notNullInt0), 1), true, false)"
 argument_list|)
 expr_stmt|;
 block|}
@@ -13033,7 +13118,7 @@ name|intType
 argument_list|)
 argument_list|)
 expr_stmt|;
-name|checkSimplify
+name|checkSimplifyUnchanged
 argument_list|(
 name|cast
 argument_list|(
@@ -13041,11 +13126,9 @@ name|literalOne
 argument_list|,
 name|intType
 argument_list|)
-argument_list|,
-literal|"1"
 argument_list|)
 expr_stmt|;
-name|checkSimplify
+name|checkSimplifyUnchanged
 argument_list|(
 name|cast
 argument_list|(
@@ -13053,8 +13136,6 @@ name|literalAbc
 argument_list|,
 name|varcharType
 argument_list|)
-argument_list|,
-literal|"'abc'"
 argument_list|)
 expr_stmt|;
 name|checkSimplify
@@ -13426,7 +13507,7 @@ argument_list|,
 literal|"11:34:45"
 argument_list|)
 expr_stmt|;
-name|checkSimplify
+name|checkSimplifyUnchanged
 argument_list|(
 name|cast
 argument_list|(
@@ -13434,8 +13515,6 @@ name|literalTimeLTZ
 argument_list|,
 name|timeLTZType
 argument_list|)
-argument_list|,
-literal|"01:23:45"
 argument_list|)
 expr_stmt|;
 name|checkSimplify
@@ -13474,7 +13553,7 @@ argument_list|,
 literal|"2011-07-20 12:34:56"
 argument_list|)
 expr_stmt|;
-name|checkSimplify
+name|checkSimplifyUnchanged
 argument_list|(
 name|cast
 argument_list|(
@@ -13482,8 +13561,6 @@ name|literalTimestampLTZ
 argument_list|,
 name|timestampLTZType
 argument_list|)
-argument_list|,
-literal|"2011-07-20 08:23:45"
 argument_list|)
 expr_stmt|;
 name|checkSimplify
@@ -14963,7 +15040,7 @@ name|void
 name|notDistinct
 parameter_list|()
 block|{
-name|checkSimplify2
+name|checkSimplify
 argument_list|(
 name|isFalse
 argument_list|(
@@ -14980,8 +15057,6 @@ literal|1
 argument_list|)
 argument_list|)
 argument_list|)
-argument_list|,
-literal|"IS DISTINCT FROM(?0.bool0, ?0.bool1)"
 argument_list|,
 literal|"IS DISTINCT FROM(?0.bool0, ?0.bool1)"
 argument_list|)
@@ -15010,7 +15085,7 @@ comment|// first arg not null
 literal|"?0.notNullInt0"
 argument_list|)
 expr_stmt|;
-name|checkSimplify
+name|checkSimplifyUnchanged
 argument_list|(
 name|coalesce
 argument_list|(
@@ -15020,8 +15095,6 @@ argument_list|,
 name|vIntNotNull
 argument_list|()
 argument_list|)
-argument_list|,
-literal|"COALESCE(?0.int0, ?0.notNullInt0)"
 argument_list|)
 expr_stmt|;
 name|checkSimplify
@@ -15070,7 +15143,7 @@ argument_list|,
 literal|"?0.notNullInt0"
 argument_list|)
 expr_stmt|;
-name|checkSimplify
+name|checkSimplifyUnchanged
 argument_list|(
 name|coalesce
 argument_list|(
@@ -15082,8 +15155,6 @@ argument_list|(
 literal|1
 argument_list|)
 argument_list|)
-argument_list|,
-literal|"COALESCE(?0.int0, 1)"
 argument_list|)
 expr_stmt|;
 name|checkSimplify
@@ -15114,7 +15185,7 @@ argument_list|,
 literal|"COALESCE(?0.int0, +(?0.int0, ?0.notNullInt0), 1)"
 argument_list|)
 expr_stmt|;
-name|checkSimplify2
+name|checkSimplify
 argument_list|(
 name|coalesce
 argument_list|(
@@ -15129,11 +15200,9 @@ name|trueLiteral
 argument_list|)
 argument_list|,
 literal|"true"
-argument_list|,
-literal|"true"
 argument_list|)
 expr_stmt|;
-name|checkSimplify2
+name|checkSimplify
 argument_list|(
 name|coalesce
 argument_list|(
@@ -15150,11 +15219,9 @@ argument_list|)
 argument_list|)
 argument_list|,
 literal|"+(?0.int0)"
-argument_list|,
-literal|"+(?0.int0)"
 argument_list|)
 expr_stmt|;
-name|checkSimplify
+name|checkSimplifyUnchanged
 argument_list|(
 name|coalesce
 argument_list|(
@@ -15172,8 +15239,6 @@ name|vInt
 argument_list|()
 argument_list|)
 argument_list|)
-argument_list|,
-literal|"COALESCE(+(?0.int1), +(?0.int0))"
 argument_list|)
 expr_stmt|;
 name|checkSimplify
@@ -15227,11 +15292,9 @@ literal|"true"
 argument_list|)
 expr_stmt|;
 comment|// null int must not be simplified to false
-name|checkSimplify
+name|checkSimplifyUnchanged
 argument_list|(
 name|nullInt
-argument_list|,
-literal|"null"
 argument_list|)
 expr_stmt|;
 block|}
