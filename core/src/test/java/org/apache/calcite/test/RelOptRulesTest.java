@@ -2184,7 +2184,7 @@ argument_list|(
 name|hepPlanner
 argument_list|)
 operator|.
-name|check
+name|checkUnchanged
 argument_list|()
 expr_stmt|;
 block|}
@@ -2252,7 +2252,7 @@ argument_list|(
 name|hepPlanner
 argument_list|)
 operator|.
-name|check
+name|checkUnchanged
 argument_list|()
 expr_stmt|;
 block|}
@@ -8340,9 +8340,13 @@ operator|.
 name|build
 argument_list|()
 decl_stmt|;
-name|checkPlanning
+name|checkPlanUnchanged
+argument_list|(
+operator|new
+name|HepPlanner
 argument_list|(
 name|program
+argument_list|)
 argument_list|,
 literal|"select p1 is not distinct from p0 from (values (2, cast(null as integer))) as t(p0, p1)"
 argument_list|)

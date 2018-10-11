@@ -9480,7 +9480,7 @@ name|pulledUpPredicates
 argument_list|,
 name|sortsAs
 argument_list|(
-literal|"[IS NOT DISTINCT FROM($0, CASE(=(1, 1), null, 1))]"
+literal|"[IS NULL($0)]"
 argument_list|)
 argument_list|)
 expr_stmt|;
