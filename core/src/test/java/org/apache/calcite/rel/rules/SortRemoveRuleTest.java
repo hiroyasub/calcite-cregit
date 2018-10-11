@@ -825,7 +825,7 @@ name|INSTANCE
 argument_list|,
 name|JoinToCorrelateRule
 operator|.
-name|INSTANCE
+name|JOIN
 argument_list|,
 name|EnumerableRules
 operator|.
