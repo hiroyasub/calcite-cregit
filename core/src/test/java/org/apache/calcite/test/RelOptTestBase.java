@@ -1027,7 +1027,7 @@ name|AssertionError
 argument_list|(
 literal|"Expected plan before and after is the same.\n"
 operator|+
-literal|"You must use unchanged=true or call checkPlanUnchanged"
+literal|"You must use unchanged=true or call checkUnchanged"
 argument_list|)
 throw|;
 block|}

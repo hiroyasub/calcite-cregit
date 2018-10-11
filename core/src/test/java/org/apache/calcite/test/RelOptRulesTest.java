@@ -291,6 +291,22 @@ name|rel
 operator|.
 name|core
 operator|.
+name|Filter
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|core
+operator|.
 name|Intersect
 import|;
 end_import
@@ -6288,6 +6304,174 @@ literal|"from DEPT_NESTED as t1, "
 operator|+
 literal|"unnest(t1.employees) as t2"
 argument_list|)
+expr_stmt|;
+block|}
+comment|/** Tests that the default instance of {@link FilterProjectTransposeRule}    * does not push a Filter that contains a correlating variable.    *    * @see #testFilterProjectTranspose() */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testFilterProjectTransposePreventedByCorrelation
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"SELECT e.empno\n"
+operator|+
+literal|"FROM emp as e\n"
+operator|+
+literal|"WHERE exists (\n"
+operator|+
+literal|"  SELECT *\n"
+operator|+
+literal|"  FROM (\n"
+operator|+
+literal|"    SELECT deptno * 2 AS twiceDeptno\n"
+operator|+
+literal|"    FROM dept) AS d\n"
+operator|+
+literal|"  WHERE e.deptno = d.twiceDeptno)"
+decl_stmt|;
+name|HepProgram
+name|program
+init|=
+operator|new
+name|HepProgramBuilder
+argument_list|()
+operator|.
+name|addRuleInstance
+argument_list|(
+name|FilterProjectTransposeRule
+operator|.
+name|INSTANCE
+argument_list|)
+operator|.
+name|build
+argument_list|()
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|withDecorrelation
+argument_list|(
+literal|false
+argument_list|)
+operator|.
+name|expand
+argument_list|(
+literal|true
+argument_list|)
+operator|.
+name|with
+argument_list|(
+name|program
+argument_list|)
+operator|.
+name|checkUnchanged
+argument_list|()
+expr_stmt|;
+block|}
+comment|/** Tests a variant of {@link FilterProjectTransposeRule}    * that pushes a Filter that contains a correlating variable. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testFilterProjectTranspose
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"SELECT e.empno\n"
+operator|+
+literal|"FROM emp as e\n"
+operator|+
+literal|"WHERE exists (\n"
+operator|+
+literal|"  SELECT *\n"
+operator|+
+literal|"  FROM (\n"
+operator|+
+literal|"    SELECT deptno * 2 AS twiceDeptno\n"
+operator|+
+literal|"    FROM dept) AS d\n"
+operator|+
+literal|"  WHERE e.deptno = d.twiceDeptno)"
+decl_stmt|;
+specifier|final
+name|FilterProjectTransposeRule
+name|filterProjectTransposeRule
+init|=
+operator|new
+name|FilterProjectTransposeRule
+argument_list|(
+name|Filter
+operator|.
+name|class
+argument_list|,
+name|filter
+lambda|->
+literal|true
+argument_list|,
+name|Project
+operator|.
+name|class
+argument_list|,
+name|project
+lambda|->
+literal|true
+argument_list|,
+literal|true
+argument_list|,
+literal|true
+argument_list|,
+name|RelFactories
+operator|.
+name|LOGICAL_BUILDER
+argument_list|)
+decl_stmt|;
+name|HepProgram
+name|program
+init|=
+operator|new
+name|HepProgramBuilder
+argument_list|()
+operator|.
+name|addRuleInstance
+argument_list|(
+name|filterProjectTransposeRule
+argument_list|)
+operator|.
+name|build
+argument_list|()
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|withDecorrelation
+argument_list|(
+literal|false
+argument_list|)
+operator|.
+name|expand
+argument_list|(
+literal|true
+argument_list|)
+operator|.
+name|with
+argument_list|(
+name|program
+argument_list|)
+operator|.
+name|check
+argument_list|()
 expr_stmt|;
 block|}
 specifier|private

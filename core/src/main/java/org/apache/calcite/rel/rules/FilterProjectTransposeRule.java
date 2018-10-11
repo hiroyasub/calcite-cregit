@@ -205,8 +205,20 @@ name|RelBuilderFactory
 import|;
 end_import
 
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|function
+operator|.
+name|Predicate
+import|;
+end_import
+
 begin_comment
-comment|/**  * Planner rule that pushes  * a {@link org.apache.calcite.rel.logical.LogicalFilter}  * past a {@link org.apache.calcite.rel.logical.LogicalProject}.  */
+comment|/**  * Planner rule that pushes  * a {@link org.apache.calcite.rel.core.Filter}  * past a {@link org.apache.calcite.rel.core.Project}.  */
 end_comment
 
 begin_class
@@ -216,7 +228,7 @@ name|FilterProjectTransposeRule
 extends|extends
 name|RelOptRule
 block|{
-comment|/** The default instance of    * {@link org.apache.calcite.rel.rules.FilterProjectTransposeRule}.    *    *<p>It matches any kind of join or filter, and generates the same kind of    * join and filter. */
+comment|/** The default instance of    * {@link org.apache.calcite.rel.rules.FilterProjectTransposeRule}.    *    *<p>It matches any kind of {@link org.apache.calcite.rel.core.Join} or    * {@link org.apache.calcite.rel.core.Filter}, and generates the same kind of    * Join and Filter.    *    *<p>It does not allow a Filter to be pushed past the Project if    * {@link RexUtil#containsCorrelation there is a correlation condition})    * anywhere in the Filter, since in some cases it can prevent a    * {@link org.apache.calcite.rel.core.Correlate} from being de-correlated.    */
 specifier|public
 specifier|static
 specifier|final
@@ -254,7 +266,7 @@ name|boolean
 name|copyProject
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**    * Creates a FilterProjectTransposeRule.    *    *<p>If {@code filterFactory} is null, creates the same kind of filter as    * matched in the rule. Similarly {@code projectFactory}.</p>    */
+comment|/**    * Creates a FilterProjectTransposeRule.    *    *<p>Equivalent to the rule created by    * {@link #FilterProjectTransposeRule(Class, Predicate, Class, Predicate, boolean, boolean, RelBuilderFactory)}    * with some default predicates that do not allow a filter to be pushed    * past the project if there is a correlation condition anywhere in the    * filter (since in some cases it can prevent a    * {@link org.apache.calcite.rel.core.Correlate} from being de-correlated).    */
 specifier|public
 name|FilterProjectTransposeRule
 parameter_list|(
@@ -286,13 +298,103 @@ parameter_list|)
 block|{
 name|this
 argument_list|(
-name|operand
+name|filterClass
+argument_list|,
+name|filter
+lambda|->
+operator|!
+name|RexUtil
+operator|.
+name|containsCorrelation
+argument_list|(
+name|filter
+operator|.
+name|getCondition
+argument_list|()
+argument_list|)
+argument_list|,
+name|projectClass
+argument_list|,
+name|project
+lambda|->
+literal|true
+argument_list|,
+name|copyFilter
+argument_list|,
+name|copyProject
+argument_list|,
+name|relBuilderFactory
+argument_list|)
+expr_stmt|;
+block|}
+comment|/**    * Creates a FilterProjectTransposeRule.    *    *<p>If {@code copyFilter} is true, creates the same kind of Filter as    * matched in the rule, otherwise it creates a Filter using the RelBuilder    * obtained by the {@code relBuilderFactory}.    * Similarly for {@code copyProject}.    *    *<p>Defining predicates for the Filter (using {@code filterPredicate})    * and/or the Project (using {@code projectPredicate} allows making the rule    * more restrictive.    */
+specifier|public
+parameter_list|<
+name|F
+extends|extends
+name|Filter
+parameter_list|,
+name|P
+extends|extends
+name|Project
+parameter_list|>
+name|FilterProjectTransposeRule
+parameter_list|(
+name|Class
+argument_list|<
+name|F
+argument_list|>
+name|filterClass
+parameter_list|,
+name|Predicate
+argument_list|<
+name|?
+super|super
+name|F
+argument_list|>
+name|filterPredicate
+parameter_list|,
+name|Class
+argument_list|<
+name|P
+argument_list|>
+name|projectClass
+parameter_list|,
+name|Predicate
+argument_list|<
+name|?
+super|super
+name|P
+argument_list|>
+name|projectPredicate
+parameter_list|,
+name|boolean
+name|copyFilter
+parameter_list|,
+name|boolean
+name|copyProject
+parameter_list|,
+name|RelBuilderFactory
+name|relBuilderFactory
+parameter_list|)
+block|{
+name|this
+argument_list|(
+name|operandJ
 argument_list|(
 name|filterClass
 argument_list|,
-name|operand
+literal|null
+argument_list|,
+name|filterPredicate
+argument_list|,
+name|operandJ
 argument_list|(
 name|projectClass
+argument_list|,
+literal|null
+argument_list|,
+name|projectPredicate
 argument_list|,
 name|any
 argument_list|()
@@ -344,7 +446,24 @@ name|this
 argument_list|(
 name|filterClass
 argument_list|,
+name|filter
+lambda|->
+operator|!
+name|RexUtil
+operator|.
+name|containsCorrelation
+argument_list|(
+name|filter
+operator|.
+name|getCondition
+argument_list|()
+argument_list|)
+argument_list|,
 name|projectClass
+argument_list|,
+name|project
+lambda|->
+literal|true
 argument_list|,
 name|filterFactory
 operator|==
@@ -455,24 +574,6 @@ comment|// the results of the windowing invocation.
 comment|//
 comment|// When the filter is on the PARTITION BY expression of the OVER clause
 comment|// it can be pushed down. For now we don't support this.
-return|return;
-block|}
-if|if
-condition|(
-name|RexUtil
-operator|.
-name|containsCorrelation
-argument_list|(
-name|filter
-operator|.
-name|getCondition
-argument_list|()
-argument_list|)
-condition|)
-block|{
-comment|// If there is a correlation condition anywhere in the filter, don't
-comment|// push this filter past project since in some cases it can prevent a
-comment|// Correlate from being de-correlated.
 return|return;
 block|}
 comment|// convert the filter to one that references the child of the project
