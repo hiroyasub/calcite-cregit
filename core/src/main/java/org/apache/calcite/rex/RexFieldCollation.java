@@ -73,6 +73,20 @@ end_import
 
 begin_import
 import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|collect
+operator|.
+name|Sets
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -117,9 +131,9 @@ name|super
 argument_list|(
 name|left
 argument_list|,
-name|ImmutableSet
+name|Sets
 operator|.
-name|copyOf
+name|immutableEnumSet
 argument_list|(
 name|right
 argument_list|)
