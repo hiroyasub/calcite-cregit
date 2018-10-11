@@ -3539,6 +3539,14 @@ argument_list|)
 expr_stmt|;
 if|if
 condition|(
+operator|!
+name|RexUtil
+operator|.
+name|isNull
+argument_list|(
+name|operand
+argument_list|)
+operator|&&
 name|digests
 operator|.
 name|add

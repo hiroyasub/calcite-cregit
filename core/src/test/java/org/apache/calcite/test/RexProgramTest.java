@@ -15128,9 +15128,9 @@ argument_list|,
 name|trueLiteral
 argument_list|)
 argument_list|,
-literal|"COALESCE(null, true)"
+literal|"true"
 argument_list|,
-literal|"COALESCE(null, true)"
+literal|"true"
 argument_list|)
 expr_stmt|;
 name|checkSimplify2
@@ -15149,9 +15149,9 @@ argument_list|()
 argument_list|)
 argument_list|)
 argument_list|,
-literal|"COALESCE(null, +(?0.int0))"
+literal|"+(?0.int0)"
 argument_list|,
-literal|"COALESCE(null, +(?0.int0))"
+literal|"+(?0.int0)"
 argument_list|)
 expr_stmt|;
 name|checkSimplify
@@ -15174,6 +15174,37 @@ argument_list|)
 argument_list|)
 argument_list|,
 literal|"COALESCE(+(?0.int1), +(?0.int0))"
+argument_list|)
+expr_stmt|;
+name|checkSimplify
+argument_list|(
+name|coalesce
+argument_list|(
+name|nullInt
+argument_list|,
+name|vInt
+argument_list|()
+argument_list|)
+argument_list|,
+literal|"?0.int0"
+argument_list|)
+expr_stmt|;
+name|checkSimplify
+argument_list|(
+name|coalesce
+argument_list|(
+name|vInt
+argument_list|()
+argument_list|,
+name|nullInt
+argument_list|,
+name|vInt
+argument_list|(
+literal|1
+argument_list|)
+argument_list|)
+argument_list|,
+literal|"COALESCE(?0.int0, ?0.int1)"
 argument_list|)
 expr_stmt|;
 block|}
