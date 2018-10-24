@@ -18552,6 +18552,50 @@ expr_stmt|;
 block|}
 end_function
 
+begin_function
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testOversimplifiedCaseStatement
+parameter_list|()
+block|{
+name|HepProgram
+name|program
+init|=
+operator|new
+name|HepProgramBuilder
+argument_list|()
+operator|.
+name|addRuleInstance
+argument_list|(
+name|ReduceExpressionsRule
+operator|.
+name|FILTER_INSTANCE
+argument_list|)
+operator|.
+name|build
+argument_list|()
+decl_stmt|;
+name|String
+name|sql
+init|=
+literal|"select * from emp "
+operator|+
+literal|"where MGR> 0 and "
+operator|+
+literal|"case when MGR> 0 then deptno / MGR else null end> 1"
+decl_stmt|;
+name|checkPlanning
+argument_list|(
+name|program
+argument_list|,
+name|sql
+argument_list|)
+expr_stmt|;
+block|}
+end_function
+
 begin_comment
 unit|}
 comment|// End RelOptRulesTest.java
