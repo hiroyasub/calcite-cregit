@@ -69,7 +69,7 @@ name|calcite
 operator|.
 name|plan
 operator|.
-name|RelOptUtil
+name|ViewExpanders
 import|;
 end_import
 
@@ -216,9 +216,9 @@ argument_list|()
 operator|.
 name|toRel
 argument_list|(
-name|RelOptUtil
+name|ViewExpanders
 operator|.
-name|getContext
+name|simpleContext
 argument_list|(
 name|oldRel
 operator|.

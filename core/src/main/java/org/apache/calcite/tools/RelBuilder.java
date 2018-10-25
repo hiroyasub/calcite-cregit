@@ -5505,6 +5505,17 @@ argument_list|(
 name|scan
 argument_list|)
 expr_stmt|;
+name|rename
+argument_list|(
+name|relOptTable
+operator|.
+name|getRowType
+argument_list|()
+operator|.
+name|getFieldNames
+argument_list|()
+argument_list|)
+expr_stmt|;
 return|return
 name|this
 return|;

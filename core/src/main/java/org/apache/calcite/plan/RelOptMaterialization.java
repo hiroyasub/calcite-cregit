@@ -720,9 +720,9 @@ name|starRelOptTable
 operator|.
 name|toRel
 argument_list|(
-name|RelOptUtil
+name|ViewExpanders
 operator|.
-name|getContext
+name|simpleContext
 argument_list|(
 name|cluster
 argument_list|)

@@ -181,7 +181,7 @@ name|calcite
 operator|.
 name|plan
 operator|.
-name|RelOptUtil
+name|SubstitutionVisitor
 import|;
 end_import
 
@@ -195,7 +195,7 @@ name|calcite
 operator|.
 name|plan
 operator|.
-name|SubstitutionVisitor
+name|ViewExpanders
 import|;
 end_import
 
@@ -1035,9 +1035,9 @@ name|aggregateRelOptTable
 operator|.
 name|toRel
 argument_list|(
-name|RelOptUtil
+name|ViewExpanders
 operator|.
-name|getContext
+name|simpleContext
 argument_list|(
 name|cluster
 argument_list|)

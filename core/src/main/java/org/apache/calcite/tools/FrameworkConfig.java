@@ -67,6 +67,20 @@ name|calcite
 operator|.
 name|plan
 operator|.
+name|RelOptTable
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
 name|RelTraitDef
 import|;
 end_import
@@ -269,6 +283,13 @@ function_decl|;
 comment|/**    * Returns the source of statistics about tables and columns to be used    * by the lattice suggester to deduce primary keys, foreign keys, and the    * direction of relationships.    */
 name|SqlStatisticProvider
 name|getStatisticProvider
+parameter_list|()
+function_decl|;
+comment|/**    * Returns a view expander.    */
+name|RelOptTable
+operator|.
+name|ViewExpander
+name|getViewExpander
 parameter_list|()
 function_decl|;
 block|}

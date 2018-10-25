@@ -687,6 +687,9 @@ operator|.
 name|toRel
 argument_list|(
 name|translator
+operator|.
+name|toRelContext
+argument_list|()
 argument_list|,
 name|relOptTable
 argument_list|)

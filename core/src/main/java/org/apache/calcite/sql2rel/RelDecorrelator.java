@@ -1227,16 +1227,6 @@ name|java
 operator|.
 name|util
 operator|.
-name|ArrayDeque
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
 name|ArrayList
 import|;
 end_import
@@ -1258,16 +1248,6 @@ operator|.
 name|util
 operator|.
 name|Collections
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|Deque
 import|;
 end_import
 
@@ -12344,18 +12324,6 @@ name|int
 name|corrIdGenerator
 init|=
 literal|0
-decl_stmt|;
-specifier|final
-name|Deque
-argument_list|<
-name|RelNode
-argument_list|>
-name|stack
-init|=
-operator|new
-name|ArrayDeque
-argument_list|<>
-argument_list|()
 decl_stmt|;
 comment|/** Creates a CorelMap by iterating over a {@link RelNode} tree. */
 name|CorelMap

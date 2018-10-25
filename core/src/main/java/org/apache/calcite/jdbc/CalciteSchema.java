@@ -3474,11 +3474,6 @@ argument_list|,
 name|sqls
 argument_list|)
 expr_stmt|;
-assert|assert
-name|table
-operator|!=
-literal|null
-assert|;
 name|this
 operator|.
 name|table
