@@ -485,6 +485,10 @@ name|list
 operator|.
 name|build
 argument_list|()
+argument_list|,
+name|key
+operator|.
+name|nullable
 argument_list|)
 return|;
 block|}
@@ -925,6 +929,45 @@ argument_list|>
 name|fieldNameList
 parameter_list|)
 block|{
+return|return
+name|createStructType
+argument_list|(
+name|kind
+argument_list|,
+name|typeList
+argument_list|,
+name|fieldNameList
+argument_list|,
+literal|false
+argument_list|)
+return|;
+block|}
+specifier|private
+name|RelDataType
+name|createStructType
+parameter_list|(
+name|StructKind
+name|kind
+parameter_list|,
+specifier|final
+name|List
+argument_list|<
+name|RelDataType
+argument_list|>
+name|typeList
+parameter_list|,
+specifier|final
+name|List
+argument_list|<
+name|String
+argument_list|>
+name|fieldNameList
+parameter_list|,
+specifier|final
+name|boolean
+name|nullable
+parameter_list|)
+block|{
 assert|assert
 name|typeList
 operator|.
@@ -944,6 +987,8 @@ argument_list|,
 name|fieldNameList
 argument_list|,
 name|typeList
+argument_list|,
+name|nullable
 argument_list|)
 return|;
 block|}
@@ -1079,6 +1124,39 @@ name|fieldList
 parameter_list|)
 block|{
 return|return
+name|createStructType
+argument_list|(
+name|fieldList
+argument_list|,
+literal|false
+argument_list|)
+return|;
+block|}
+specifier|private
+name|RelDataType
+name|createStructType
+parameter_list|(
+specifier|final
+name|List
+argument_list|<
+name|?
+extends|extends
+name|Map
+operator|.
+name|Entry
+argument_list|<
+name|String
+argument_list|,
+name|RelDataType
+argument_list|>
+argument_list|>
+name|fieldList
+parameter_list|,
+name|boolean
+name|nullable
+parameter_list|)
+block|{
+return|return
 name|canonize
 argument_list|(
 name|StructKind
@@ -1174,6 +1252,8 @@ argument_list|()
 return|;
 block|}
 block|}
+argument_list|,
+name|nullable
 argument_list|)
 return|;
 block|}
@@ -1526,9 +1606,6 @@ name|boolean
 name|nullable
 parameter_list|)
 block|{
-comment|// REVIEW: angel 18-Aug-2005 dtbug336
-comment|// Shouldn't null refer to the nullability of the record type
-comment|// not the individual field types?
 comment|// For flattening and outer joins, it is desirable to change
 comment|// the nullability of the individual fields.
 return|return
@@ -1616,6 +1693,8 @@ name|type
 operator|.
 name|getFieldNames
 argument_list|()
+argument_list|,
+name|nullable
 argument_list|)
 return|;
 block|}
@@ -1628,29 +1707,6 @@ name|RelDataType
 name|type
 parameter_list|)
 block|{
-if|if
-condition|(
-name|type
-operator|instanceof
-name|RelRecordType
-condition|)
-block|{
-return|return
-name|copyRecordType
-argument_list|(
-operator|(
-name|RelRecordType
-operator|)
-name|type
-argument_list|,
-literal|true
-argument_list|,
-literal|false
-argument_list|)
-return|;
-block|}
-else|else
-block|{
 return|return
 name|createTypeWithNullability
 argument_list|(
@@ -1662,7 +1718,6 @@ name|isNullable
 argument_list|()
 argument_list|)
 return|;
-block|}
 block|}
 comment|// implement RelDataTypeFactory
 specifier|public
@@ -1713,47 +1768,30 @@ block|{
 comment|// REVIEW: angel 18-Aug-2005 dtbug 336 workaround
 comment|// Changed to ignore nullable parameter if nullable is false since
 comment|// copyRecordType implementation is doubtful
-if|if
-condition|(
+comment|// - If nullable -> Do a deep copy, setting all fields of the record type
+comment|// to be nullable regardless of initial nullability.
+comment|// - If not nullable -> Do a deep copy, setting not nullable at top RelRecordType
+comment|// level only, keeping its fields' nullability as before.
+comment|// According to the SQL standard, nullability for struct types can be defined only for
+comment|// columns, which translates to top level structs. Nested struct attributes are always
+comment|// nullable, so in principle we could always set the nested attributes to be nullable.
+comment|// However, this might create regressions so we will not do it and we will keep previous
+comment|// behavior.
+name|newType
+operator|=
+name|copyRecordType
+argument_list|(
+operator|(
+name|RelRecordType
+operator|)
+name|type
+argument_list|,
+operator|!
 name|nullable
-condition|)
-block|{
-comment|// Do a deep copy, setting all fields of the record type
-comment|// to be nullable regardless of initial nullability
-name|newType
-operator|=
-name|copyRecordType
-argument_list|(
-operator|(
-name|RelRecordType
-operator|)
-name|type
 argument_list|,
-literal|false
-argument_list|,
-literal|true
+name|nullable
 argument_list|)
 expr_stmt|;
-block|}
-else|else
-block|{
-comment|// Keep same type as before, ignore nullable parameter
-comment|// RelRecordType currently always returns a nullability of false
-name|newType
-operator|=
-name|copyRecordType
-argument_list|(
-operator|(
-name|RelRecordType
-operator|)
-name|type
-argument_list|,
-literal|true
-argument_list|,
-literal|false
-argument_list|)
-expr_stmt|;
-block|}
 block|}
 else|else
 block|{
@@ -1815,6 +1853,10 @@ argument_list|<
 name|RelDataType
 argument_list|>
 name|types
+parameter_list|,
+specifier|final
+name|boolean
+name|nullable
 parameter_list|)
 block|{
 specifier|final
@@ -1833,6 +1875,8 @@ argument_list|,
 name|names
 argument_list|,
 name|types
+argument_list|,
+name|nullable
 argument_list|)
 argument_list|)
 decl_stmt|;
@@ -1888,7 +1932,45 @@ argument_list|,
 name|names2
 argument_list|,
 name|types2
+argument_list|,
+name|nullable
 argument_list|)
+argument_list|)
+return|;
+block|}
+specifier|protected
+name|RelDataType
+name|canonize
+parameter_list|(
+specifier|final
+name|StructKind
+name|kind
+parameter_list|,
+specifier|final
+name|List
+argument_list|<
+name|String
+argument_list|>
+name|names
+parameter_list|,
+specifier|final
+name|List
+argument_list|<
+name|RelDataType
+argument_list|>
+name|types
+parameter_list|)
+block|{
+return|return
+name|canonize
+argument_list|(
+name|kind
+argument_list|,
+name|names
+argument_list|,
+name|types
+argument_list|,
+literal|false
 argument_list|)
 return|;
 block|}
@@ -2951,6 +3033,11 @@ name|RelDataType
 argument_list|>
 name|types
 decl_stmt|;
+specifier|private
+specifier|final
+name|boolean
+name|nullable
+decl_stmt|;
 name|Key
 parameter_list|(
 name|StructKind
@@ -2967,6 +3054,9 @@ argument_list|<
 name|RelDataType
 argument_list|>
 name|types
+parameter_list|,
+name|boolean
+name|nullable
 parameter_list|)
 block|{
 name|this
@@ -2987,6 +3077,12 @@ name|types
 operator|=
 name|types
 expr_stmt|;
+name|this
+operator|.
+name|nullable
+operator|=
+name|nullable
+expr_stmt|;
 block|}
 annotation|@
 name|Override
@@ -3005,6 +3101,8 @@ argument_list|,
 name|names
 argument_list|,
 name|types
+argument_list|,
+name|nullable
 argument_list|)
 return|;
 block|}
@@ -3065,6 +3163,17 @@ operator|)
 operator|.
 name|types
 argument_list|)
+operator|&&
+name|nullable
+operator|==
+operator|(
+operator|(
+name|Key
+operator|)
+name|obj
+operator|)
+operator|.
+name|nullable
 return|;
 block|}
 block|}

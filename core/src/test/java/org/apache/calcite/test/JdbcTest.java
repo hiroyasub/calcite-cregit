@@ -17292,6 +17292,40 @@ literal|"deptno=null; deptno=40"
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2464">[CALCITE-2464]    * Allow to set nullability for columns of structured types</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testLeftJoinWhereStructIsNotNull
+parameter_list|()
+block|{
+name|CalciteAssert
+operator|.
+name|hr
+argument_list|()
+operator|.
+name|query
+argument_list|(
+literal|"select e.\"deptno\", d.\"deptno\"\n"
+operator|+
+literal|"from \"hr\".\"emps\" as e\n"
+operator|+
+literal|"  left join \"hr\".\"depts\" as d using (\"deptno\")"
+operator|+
+literal|"where d.\"location\" is not null"
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"deptno=10; deptno=10"
+argument_list|,
+literal|"deptno=10; deptno=10"
+argument_list|,
+literal|"deptno=10; deptno=10"
+argument_list|)
+expr_stmt|;
+block|}
 comment|/** Various queries against EMP and DEPT, in particular involving composite    * join conditions in various flavors of outer join. Results are verified    * against MySQL (except full join, which MySQL does not support). */
 annotation|@
 name|Test

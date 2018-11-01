@@ -96,8 +96,13 @@ specifier|final
 name|StructKind
 name|kind
 decl_stmt|;
+specifier|private
+specifier|final
+name|boolean
+name|nullable
+decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**    * Creates a<code>RecordType</code>. This should only be called from a    * factory method.    */
+comment|/**    * Creates a<code>RecordType</code>. This should only be called from a    * factory method.    * @param kind Name resolution policy    * @param fields List of fields    * @param nullable Whether this record type allows null values    */
 specifier|public
 name|RelRecordType
 parameter_list|(
@@ -109,12 +114,21 @@ argument_list|<
 name|RelDataTypeField
 argument_list|>
 name|fields
+parameter_list|,
+name|boolean
+name|nullable
 parameter_list|)
 block|{
 name|super
 argument_list|(
 name|fields
 argument_list|)
+expr_stmt|;
+name|this
+operator|.
+name|nullable
+operator|=
+name|nullable
 expr_stmt|;
 name|this
 operator|.
@@ -131,6 +145,31 @@ name|computeDigest
 argument_list|()
 expr_stmt|;
 block|}
+comment|/**    * Creates a<code>RecordType</code>. This should only be called from a    * factory method.    * Shorthand for<code>RelRecordType(kind, fields, false)</code>.    */
+specifier|public
+name|RelRecordType
+parameter_list|(
+name|StructKind
+name|kind
+parameter_list|,
+name|List
+argument_list|<
+name|RelDataTypeField
+argument_list|>
+name|fields
+parameter_list|)
+block|{
+name|this
+argument_list|(
+name|kind
+argument_list|,
+name|fields
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+block|}
+comment|/**    * Creates a<code>RecordType</code>. This should only be called from a    * factory method.    * Shorthand for<code>RelRecordType(StructKind.FULLY_QUALIFIED, fields, false)</code>.    */
 specifier|public
 name|RelRecordType
 parameter_list|(
@@ -148,6 +187,8 @@ operator|.
 name|FULLY_QUALIFIED
 argument_list|,
 name|fields
+argument_list|,
+literal|false
 argument_list|)
 expr_stmt|;
 block|}
@@ -173,7 +214,7 @@ name|isNullable
 parameter_list|()
 block|{
 return|return
-literal|false
+name|nullable
 return|;
 block|}
 annotation|@
