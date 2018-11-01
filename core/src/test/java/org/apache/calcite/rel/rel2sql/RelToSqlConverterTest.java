@@ -593,6 +593,18 @@ begin_import
 import|import static
 name|org
 operator|.
+name|hamcrest
+operator|.
+name|CoreMatchers
+operator|.
+name|notNullValue
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
 name|junit
 operator|.
 name|Assert
@@ -4497,6 +4509,55 @@ argument_list|(
 name|expected
 argument_list|)
 expr_stmt|;
+block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2652">[CALCITE-2652]    * SqlNode to SQL conversion fails if the join condition references a BOOLEAN    * column</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testJoinOnBoolean
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"SELECT 1\n"
+operator|+
+literal|"from emps\n"
+operator|+
+literal|"join emp on (emp.deptno = emps.empno and manager)"
+decl_stmt|;
+specifier|final
+name|String
+name|s
+init|=
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|schema
+argument_list|(
+name|CalciteAssert
+operator|.
+name|SchemaSpec
+operator|.
+name|POST
+argument_list|)
+operator|.
+name|exec
+argument_list|()
+decl_stmt|;
+name|assertThat
+argument_list|(
+name|s
+argument_list|,
+name|notNullValue
+argument_list|()
+argument_list|)
+expr_stmt|;
+comment|// sufficient that conversion did not throw
 block|}
 annotation|@
 name|Test
