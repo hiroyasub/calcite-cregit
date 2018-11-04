@@ -1469,14 +1469,14 @@ name|SortedSet
 argument_list|<
 name|Integer
 argument_list|>
-name|bottomGroupSet
+name|bottomGroups
 init|=
 operator|new
 name|TreeSet
 argument_list|<>
 argument_list|()
 decl_stmt|;
-name|bottomGroupSet
+name|bottomGroups
 operator|.
 name|addAll
 argument_list|(
@@ -1505,7 +1505,7 @@ name|isDistinct
 argument_list|()
 condition|)
 block|{
-name|bottomGroupSet
+name|bottomGroups
 operator|.
 name|addAll
 argument_list|(
@@ -1519,6 +1519,17 @@ break|break;
 comment|// since we only have single distinct call
 block|}
 block|}
+specifier|final
+name|ImmutableBitSet
+name|bottomGroupSet
+init|=
+name|ImmutableBitSet
+operator|.
+name|of
+argument_list|(
+name|bottomGroups
+argument_list|)
+decl_stmt|;
 comment|// Generate the intermediate aggregate B, the one on the bottom that converts
 comment|// a distinct call to group by call.
 comment|// Bottom aggregate is the same as the original aggregate, except that
@@ -1582,12 +1593,7 @@ argument_list|,
 operator|-
 literal|1
 argument_list|,
-name|ImmutableBitSet
-operator|.
-name|of
-argument_list|(
 name|bottomGroupSet
-argument_list|)
 operator|.
 name|cardinality
 argument_list|()
@@ -1634,12 +1640,7 @@ argument_list|()
 argument_list|,
 literal|false
 argument_list|,
-name|ImmutableBitSet
-operator|.
-name|of
-argument_list|(
 name|bottomGroupSet
-argument_list|)
 argument_list|,
 literal|null
 argument_list|,
@@ -1713,7 +1714,7 @@ name|newArgList
 operator|.
 name|add
 argument_list|(
-name|bottomGroupSet
+name|bottomGroups
 operator|.
 name|headSet
 argument_list|(
@@ -1784,7 +1785,7 @@ name|Lists
 operator|.
 name|newArrayList
 argument_list|(
-name|bottomGroupSet
+name|bottomGroups
 operator|.
 name|size
 argument_list|()
@@ -1934,7 +1935,7 @@ control|(
 name|int
 name|bottomGroup
 range|:
-name|bottomGroupSet
+name|bottomGroups
 control|)
 block|{
 if|if
