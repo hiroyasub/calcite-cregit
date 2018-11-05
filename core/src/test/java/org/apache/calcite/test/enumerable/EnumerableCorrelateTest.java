@@ -27,6 +27,22 @@ name|calcite
 operator|.
 name|adapter
 operator|.
+name|enumerable
+operator|.
+name|EnumerableRules
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|adapter
+operator|.
 name|java
 operator|.
 name|ReflectiveSchema
@@ -69,6 +85,50 @@ name|apache
 operator|.
 name|calcite
 operator|.
+name|plan
+operator|.
+name|RelOptPlanner
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|rules
+operator|.
+name|JoinToCorrelateRule
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|runtime
+operator|.
+name|Hook
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
 name|test
 operator|.
 name|CalciteAssert
@@ -99,6 +159,18 @@ name|Test
 import|;
 end_import
 
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|function
+operator|.
+name|Consumer
+import|;
+end_import
+
 begin_comment
 comment|/**  * Unit test for  * {@link org.apache.calcite.adapter.enumerable.EnumerableCorrelate}.  */
 end_comment
@@ -108,6 +180,96 @@ specifier|public
 class|class
 name|EnumerableCorrelateTest
 block|{
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2605">[CALCITE-2605]    * NullPointerException when left outer join implemented with EnumerableCorrelate</a> */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|leftOuterJoinCorrelate
+parameter_list|()
+block|{
+name|tester
+argument_list|(
+literal|false
+argument_list|,
+operator|new
+name|JdbcTest
+operator|.
+name|HrSchema
+argument_list|()
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select e.empid, e.name, d.name as dept from emps e left outer join depts d on e.deptno=d.deptno"
+argument_list|)
+operator|.
+name|withHook
+argument_list|(
+name|Hook
+operator|.
+name|PLANNER
+argument_list|,
+operator|(
+name|Consumer
+argument_list|<
+name|RelOptPlanner
+argument_list|>
+operator|)
+name|planner
+lambda|->
+block|{
+comment|// force the left outer join to run via EnumerableCorrelate instead of EnumerableJoin
+name|planner
+operator|.
+name|addRule
+argument_list|(
+name|JoinToCorrelateRule
+operator|.
+name|INSTANCE
+argument_list|)
+expr_stmt|;
+name|planner
+operator|.
+name|removeRule
+argument_list|(
+name|EnumerableRules
+operator|.
+name|ENUMERABLE_JOIN_RULE
+argument_list|)
+expr_stmt|;
+block|}
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+literal|""
+operator|+
+literal|"EnumerableCalc(expr#0..4=[{inputs}], empid=[$t0], name=[$t2], dept=[$t4])\n"
+operator|+
+literal|"  EnumerableCorrelate(correlation=[$cor0], joinType=[left], requiredColumns=[{1}])\n"
+operator|+
+literal|"    EnumerableCalc(expr#0..4=[{inputs}], proj#0..2=[{exprs}])\n"
+operator|+
+literal|"      EnumerableTableScan(table=[[s, emps]])\n"
+operator|+
+literal|"    EnumerableCalc(expr#0..3=[{inputs}], expr#4=[$cor0], expr#5=[$t4.deptno], expr#6=[=($t5, $t0)], proj#0..1=[{exprs}], $condition=[$t6])\n"
+operator|+
+literal|"      EnumerableTableScan(table=[[s, depts]])"
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"empid=100; name=Bill; dept=Sales"
+argument_list|,
+literal|"empid=110; name=Theodore; dept=Sales"
+argument_list|,
+literal|"empid=150; name=Sebastian; dept=Sales"
+argument_list|,
+literal|"empid=200; name=Eric; dept=null"
+argument_list|)
+expr_stmt|;
+block|}
 annotation|@
 name|Test
 specifier|public
