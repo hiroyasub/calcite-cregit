@@ -122,7 +122,7 @@ specifier|public
 class|class
 name|CalciteConnectionProvider
 block|{
-specifier|private
+specifier|public
 specifier|static
 specifier|final
 name|String
@@ -151,7 +151,7 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-specifier|private
+specifier|public
 name|Properties
 name|provideConnectionInfo
 parameter_list|()

@@ -273,6 +273,14 @@ name|String
 name|name
 parameter_list|)
 function_decl|;
+comment|/**    * Prints a dynamic parameter (e.g. {@code ?} for default JDBC)    */
+name|void
+name|dynamicParam
+parameter_list|(
+name|int
+name|index
+parameter_list|)
+function_decl|;
 comment|/**    * Prints the OFFSET/FETCH clause.    */
 name|void
 name|fetchOffset

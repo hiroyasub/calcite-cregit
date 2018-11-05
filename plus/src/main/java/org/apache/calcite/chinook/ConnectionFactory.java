@@ -100,7 +100,7 @@ throws|throws
 name|Exception
 block|{
 return|return
-name|DBWrapper
+name|DatabaseWrapper
 operator|.
 name|valueOf
 argument_list|(
@@ -112,9 +112,9 @@ argument_list|()
 return|;
 block|}
 comment|/**    * Wrapping with Fairy environmental decoration    */
-specifier|private
+specifier|public
 enum|enum
-name|DBWrapper
+name|DatabaseWrapper
 block|{
 name|CALCITE_AS_ADMIN
 block|{

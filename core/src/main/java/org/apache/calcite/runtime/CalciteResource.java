@@ -4010,6 +4010,21 @@ argument_list|>
 name|nullKeyOfJsonObjectNotAllowed
 parameter_list|()
 function_decl|;
+annotation|@
+name|BaseMessage
+argument_list|(
+literal|"While executing SQL [{0}] on JDBC sub-schema"
+argument_list|)
+name|ExInst
+argument_list|<
+name|RuntimeException
+argument_list|>
+name|exceptionWhilePerformingQueryOnJdbcSubSchema
+parameter_list|(
+name|String
+name|sql
+parameter_list|)
+function_decl|;
 block|}
 end_interface
 

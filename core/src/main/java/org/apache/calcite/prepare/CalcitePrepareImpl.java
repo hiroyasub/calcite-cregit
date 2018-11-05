@@ -6230,8 +6230,14 @@ name|type
 parameter_list|)
 block|{
 return|return
-literal|null
+name|Object
+operator|.
+name|class
+operator|.
+name|getName
+argument_list|()
 return|;
+comment|// CALCITE-2613
 block|}
 specifier|private
 specifier|static

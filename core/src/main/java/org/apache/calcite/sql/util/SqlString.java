@@ -31,6 +31,20 @@ name|SqlDialect
 import|;
 end_import
 
+begin_import
+import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|collect
+operator|.
+name|ImmutableList
+import|;
+end_import
+
 begin_comment
 comment|/**  * String that represents a kocher SQL statement, expression, or fragment.  *  *<p>A SqlString just contains a regular Java string, but the SqlString wrapper  * indicates that the string has been created carefully guarding against all SQL  * dialect and injection issues.  *  *<p>The easiest way to do build a SqlString is to use a {@link SqlBuilder}.  */
 end_comment
@@ -43,13 +57,20 @@ block|{
 specifier|private
 specifier|final
 name|String
-name|s
+name|sql
 decl_stmt|;
 specifier|private
 name|SqlDialect
 name|dialect
 decl_stmt|;
-comment|/**    * Creates a SqlString.    *    * @param s Contents of string    */
+specifier|private
+name|ImmutableList
+argument_list|<
+name|Integer
+argument_list|>
+name|dynamicParameters
+decl_stmt|;
+comment|/**    * Creates a SqlString.    */
 specifier|public
 name|SqlString
 parameter_list|(
@@ -57,7 +78,37 @@ name|SqlDialect
 name|dialect
 parameter_list|,
 name|String
-name|s
+name|sql
+parameter_list|)
+block|{
+name|this
+argument_list|(
+name|dialect
+argument_list|,
+name|sql
+argument_list|,
+name|ImmutableList
+operator|.
+name|of
+argument_list|()
+argument_list|)
+expr_stmt|;
+block|}
+comment|/**    * Creates a SqlString. The SQL might contain dynamic parameters, dynamicParameters    * designate the order of the parameters.    *    * @param sql text    * @param dynamicParameters indices    */
+specifier|public
+name|SqlString
+parameter_list|(
+name|SqlDialect
+name|dialect
+parameter_list|,
+name|String
+name|sql
+parameter_list|,
+name|ImmutableList
+argument_list|<
+name|Integer
+argument_list|>
+name|dynamicParameters
 parameter_list|)
 block|{
 name|this
@@ -68,19 +119,29 @@ name|dialect
 expr_stmt|;
 name|this
 operator|.
-name|s
+name|sql
 operator|=
-name|s
+name|sql
+expr_stmt|;
+name|this
+operator|.
+name|dynamicParameters
+operator|=
+name|dynamicParameters
 expr_stmt|;
 assert|assert
-name|s
+name|sql
 operator|!=
 literal|null
+operator|:
+literal|"sql must be NOT null"
 assert|;
 assert|assert
 name|dialect
 operator|!=
 literal|null
+operator|:
+literal|"dialect must be NOT null"
 assert|;
 block|}
 annotation|@
@@ -91,7 +152,7 @@ name|hashCode
 parameter_list|()
 block|{
 return|return
-name|s
+name|sql
 operator|.
 name|hashCode
 argument_list|()
@@ -116,7 +177,7 @@ name|obj
 operator|instanceof
 name|SqlString
 operator|&&
-name|s
+name|sql
 operator|.
 name|equals
 argument_list|(
@@ -127,7 +188,7 @@ operator|)
 name|obj
 operator|)
 operator|.
-name|s
+name|sql
 argument_list|)
 return|;
 block|}
@@ -140,7 +201,7 @@ name|toString
 parameter_list|()
 block|{
 return|return
-name|s
+name|sql
 return|;
 block|}
 comment|/**    * Returns the SQL string.    *    * @return SQL string    */
@@ -150,7 +211,20 @@ name|getSql
 parameter_list|()
 block|{
 return|return
-name|s
+name|sql
+return|;
+block|}
+comment|/**    * Returns indices of dynamic parameters.    *    * @return indices of dynamic parameters    */
+specifier|public
+name|ImmutableList
+argument_list|<
+name|Integer
+argument_list|>
+name|getDynamicParameters
+parameter_list|()
+block|{
+return|return
+name|dynamicParameters
 return|;
 block|}
 comment|/**    * Returns the dialect.    */
