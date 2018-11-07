@@ -440,17 +440,13 @@ comment|// To do that, we would need to take a RexBuilder and
 comment|// watch out for special operators like CAST and NEW where
 comment|// the type is embedded in the original call.
 return|return
-operator|new
-name|RexCall
+name|call
+operator|.
+name|clone
 argument_list|(
 name|call
 operator|.
 name|getType
-argument_list|()
-argument_list|,
-name|call
-operator|.
-name|getOperator
 argument_list|()
 argument_list|,
 name|clonedOperands
