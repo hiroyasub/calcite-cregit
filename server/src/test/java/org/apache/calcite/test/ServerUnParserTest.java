@@ -11,26 +11,24 @@ name|apache
 operator|.
 name|calcite
 operator|.
-name|sql
-operator|.
-name|parser
+name|test
 package|;
 end_package
 
 begin_comment
-comment|/**  * Extension to {@link SqlParserTest} which ensures that every expression can  * un-parse successfully.  */
+comment|/**  * Extension to {@link ServerParserTest} that ensures that every expression can  * un-parse successfully.  */
 end_comment
 
 begin_class
 specifier|public
 class|class
-name|SqlUnParserTest
+name|ServerUnParserTest
 extends|extends
-name|SqlParserTest
+name|ServerParserTest
 block|{
 comment|//~ Constructors -----------------------------------------------------------
 specifier|public
-name|SqlUnParserTest
+name|ServerUnParserTest
 parameter_list|()
 block|{
 block|}
@@ -63,7 +61,7 @@ block|}
 end_class
 
 begin_comment
-comment|// End SqlUnParserTest.java
+comment|// End ServerUnParserTest.java
 end_comment
 
 end_unit

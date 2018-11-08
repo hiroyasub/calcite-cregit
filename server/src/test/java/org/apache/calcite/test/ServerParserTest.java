@@ -656,6 +656,88 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testCreateOrReplaceFunction
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"create or replace function if not exists x.udf\n"
+operator|+
+literal|" as 'org.apache.calcite.udf.TableFun.demoUdf'\n"
+operator|+
+literal|"using jar 'file:/path/udf/udf-0.0.1-SNAPSHOT.jar',\n"
+operator|+
+literal|" jar 'file:/path/udf/udf2-0.0.1-SNAPSHOT.jar',\n"
+operator|+
+literal|" file 'file:/path/udf/logback.xml'"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"CREATE OR REPLACE FUNCTION"
+operator|+
+literal|" IF NOT EXISTS `X`.`UDF`"
+operator|+
+literal|" AS 'org.apache.calcite.udf.TableFun.demoUdf'"
+operator|+
+literal|" USING JAR 'file:/path/udf/udf-0.0.1-SNAPSHOT.jar',"
+operator|+
+literal|" JAR 'file:/path/udf/udf2-0.0.1-SNAPSHOT.jar',"
+operator|+
+literal|" FILE 'file:/path/udf/logback.xml'"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testCreateOrReplaceFunction2
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"create function \"my Udf\"\n"
+operator|+
+literal|" as 'org.apache.calcite.udf.TableFun.demoUdf'"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"CREATE FUNCTION `my Udf`"
+operator|+
+literal|" AS 'org.apache.calcite.udf.TableFun.demoUdf'"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testDropSchema
 parameter_list|()
 block|{
@@ -865,6 +947,66 @@ operator|.
 name|ok
 argument_list|(
 literal|"DROP MATERIALIZED VIEW IF EXISTS `X`"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testDropFunction
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"drop function x.udf"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"DROP FUNCTION `X`.`UDF`"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testDropFunctionIfExists
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"drop function if exists \"my udf\""
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"DROP FUNCTION IF EXISTS `my udf`"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
 argument_list|)
 expr_stmt|;
 block|}

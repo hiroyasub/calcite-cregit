@@ -748,6 +748,12 @@ block|,
 comment|/** {@code DROP TYPE} DDL statement. */
 name|DROP_TYPE
 block|,
+comment|/** {@code CREATE FUNCTION} DDL statement. */
+name|CREATE_FUNCTION
+block|,
+comment|/** {@code DROP FUNCTION} DDL statement. */
+name|DROP_FUNCTION
+block|,
 comment|/** DDL statement not handled above.    *    *<p><b>Note to other projects</b>: If you are extending Calcite's SQL parser    * and have your own object types you no doubt want to define CREATE and DROP    * commands for them. Use OTHER_DDL in the short term, but we are happy to add    * new enum values for your object types. Just ask!    */
 name|OTHER_DDL
 block|;

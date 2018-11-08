@@ -553,6 +553,18 @@ name|junit
 operator|.
 name|Assume
 operator|.
+name|assumeFalse
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|Assume
+operator|.
 name|assumeTrue
 import|;
 end_import
@@ -6743,18 +6755,15 @@ argument_list|(
 name|whereExpected
 argument_list|)
 expr_stmt|;
-if|if
-condition|(
-name|this
-operator|instanceof
-name|SqlUnParserTest
-condition|)
-block|{
 comment|// After this point, SqlUnparserTest has problems.
 comment|// We generate ROW in a dialect that does not allow ROW in all contexts.
 comment|// So bail out.
-return|return;
-block|}
+name|assumeFalse
+argument_list|(
+name|isUnparserTest
+argument_list|()
+argument_list|)
+expr_stmt|;
 name|conformance
 operator|=
 name|SqlConformanceEnum
@@ -6774,6 +6783,16 @@ argument_list|(
 name|whereExpected
 argument_list|)
 expr_stmt|;
+block|}
+comment|/** Whether this is a sub-class that tests un-parsing as well as parsing. */
+specifier|protected
+name|boolean
+name|isUnparserTest
+parameter_list|()
+block|{
+return|return
+literal|false
+return|;
 block|}
 annotation|@
 name|Test
