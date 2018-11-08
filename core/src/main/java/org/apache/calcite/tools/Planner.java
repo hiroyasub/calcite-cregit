@@ -133,6 +133,30 @@ name|Pair
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|util
+operator|.
+name|SourceStringReader
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|io
+operator|.
+name|Reader
+import|;
+end_import
+
 begin_comment
 comment|/**  * A fa&ccedil;ade that covers Calcite's query planning process: parse SQL,  * validate the parse tree, convert the parse tree to a relational expression,  * and optimize the relational expression.  *  *<p>Planner is NOT thread safe. However, it can be reused for  * different queries. The consumer of this interface is responsible for calling  * reset() after each use of Planner that corresponds to a different  * query.  */
 end_comment
@@ -145,11 +169,33 @@ extends|extends
 name|AutoCloseable
 block|{
 comment|/**    * Parses and validates a SQL statement.    *    * @param sql The SQL statement to parse.    * @return The root node of the SQL parse tree.    * @throws org.apache.calcite.sql.parser.SqlParseException on parse error    */
+specifier|default
 name|SqlNode
 name|parse
 parameter_list|(
 name|String
 name|sql
+parameter_list|)
+throws|throws
+name|SqlParseException
+block|{
+return|return
+name|parse
+argument_list|(
+operator|new
+name|SourceStringReader
+argument_list|(
+name|sql
+argument_list|)
+argument_list|)
+return|;
+block|}
+comment|/**    * Parses and validates a SQL statement.    *    * @param source A reader which will provide the SQL statement to parse.    *    * @return The root node of the SQL parse tree.    * @throws org.apache.calcite.sql.parser.SqlParseException on parse error    */
+name|SqlNode
+name|parse
+parameter_list|(
+name|Reader
+name|source
 parameter_list|)
 throws|throws
 name|SqlParseException

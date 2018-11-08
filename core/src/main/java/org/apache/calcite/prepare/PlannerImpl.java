@@ -553,6 +553,16 @@ begin_import
 import|import
 name|java
 operator|.
+name|io
+operator|.
+name|Reader
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
 name|util
 operator|.
 name|List
@@ -1005,8 +1015,8 @@ name|SqlNode
 name|parse
 parameter_list|(
 specifier|final
-name|String
-name|sql
+name|Reader
+name|reader
 parameter_list|)
 throws|throws
 name|SqlParseException
@@ -1040,7 +1050,7 @@ name|SqlParser
 operator|.
 name|create
 argument_list|(
-name|sql
+name|reader
 argument_list|,
 name|parserConfig
 argument_list|)

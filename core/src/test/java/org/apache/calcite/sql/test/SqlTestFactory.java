@@ -331,6 +331,20 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|util
+operator|.
+name|SourceStringReader
+import|;
+end_import
+
+begin_import
+import|import
 name|com
 operator|.
 name|google
@@ -793,7 +807,11 @@ name|SqlParser
 operator|.
 name|create
 argument_list|(
+operator|new
+name|SourceStringReader
+argument_list|(
 name|sql
+argument_list|)
 argument_list|,
 name|parserConfig
 operator|.
