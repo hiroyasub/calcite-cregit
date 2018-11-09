@@ -18071,6 +18071,1492 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testJsonExists
+parameter_list|()
+block|{
+name|tester
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"json_exists('{\"foo\":\"bar\"}', "
+operator|+
+literal|"'strict $.foo' false on error)"
+argument_list|,
+name|Boolean
+operator|.
+name|TRUE
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"json_exists('{\"foo\":\"bar\"}', "
+operator|+
+literal|"'strict $.foo' true on error)"
+argument_list|,
+name|Boolean
+operator|.
+name|TRUE
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"json_exists('{\"foo\":\"bar\"}', "
+operator|+
+literal|"'strict $.foo' unknown on error)"
+argument_list|,
+name|Boolean
+operator|.
+name|TRUE
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"json_exists('{\"foo\":\"bar\"}', "
+operator|+
+literal|"'lax $.foo' false on error)"
+argument_list|,
+name|Boolean
+operator|.
+name|TRUE
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"json_exists('{\"foo\":\"bar\"}', "
+operator|+
+literal|"'lax $.foo' true on error)"
+argument_list|,
+name|Boolean
+operator|.
+name|TRUE
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"json_exists('{\"foo\":\"bar\"}', "
+operator|+
+literal|"'lax $.foo' unknown on error)"
+argument_list|,
+name|Boolean
+operator|.
+name|TRUE
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"json_exists('{}', "
+operator|+
+literal|"'invalid $.foo' false on error)"
+argument_list|,
+name|Boolean
+operator|.
+name|FALSE
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"json_exists('{}', "
+operator|+
+literal|"'invalid $.foo' true on error)"
+argument_list|,
+name|Boolean
+operator|.
+name|TRUE
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"json_exists('{}', "
+operator|+
+literal|"'invalid $.foo' unknown on error)"
+argument_list|,
+literal|null
+argument_list|)
+expr_stmt|;
+comment|// not exists
+name|tester
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"json_exists('{\"foo\":\"bar\"}', "
+operator|+
+literal|"'strict $.foo1' false on error)"
+argument_list|,
+name|Boolean
+operator|.
+name|FALSE
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"json_exists('{\"foo\":\"bar\"}', "
+operator|+
+literal|"'strict $.foo1' true on error)"
+argument_list|,
+name|Boolean
+operator|.
+name|TRUE
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"json_exists('{\"foo\":\"bar\"}', "
+operator|+
+literal|"'strict $.foo1' unknown on error)"
+argument_list|,
+literal|null
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"json_exists('{\"foo\":\"bar\"}', "
+operator|+
+literal|"'lax $.foo1' true on error)"
+argument_list|,
+name|Boolean
+operator|.
+name|FALSE
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"json_exists('{\"foo\":\"bar\"}', "
+operator|+
+literal|"'lax $.foo1' false on error)"
+argument_list|,
+name|Boolean
+operator|.
+name|FALSE
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"json_exists('{\"foo\":\"bar\"}', "
+operator|+
+literal|"'lax $.foo1' error on error)"
+argument_list|,
+name|Boolean
+operator|.
+name|FALSE
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"json_exists('{\"foo\":\"bar\"}', "
+operator|+
+literal|"'lax $.foo1' unknown on error)"
+argument_list|,
+name|Boolean
+operator|.
+name|FALSE
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testJsonValue
+parameter_list|()
+block|{
+comment|// type casting test
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"json_value('{\"foo\":100}', 'strict $.foo')"
+argument_list|,
+literal|"100"
+argument_list|,
+literal|"VARCHAR(2000)"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"json_value('{\"foo\":100}', 'strict $.foo' returning integer)"
+argument_list|,
+literal|100
+argument_list|,
+literal|"INTEGER"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkFails
+argument_list|(
+literal|"json_value('{\"foo\":\"100\"}', 'strict $.foo' returning boolean)"
+argument_list|,
+name|INVALID_CHAR_MESSAGE
+argument_list|,
+literal|true
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"json_value('{\"foo\":100}', 'lax $.foo1' returning integer "
+operator|+
+literal|"null on empty)"
+argument_list|,
+literal|null
+argument_list|,
+literal|"INTEGER"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"json_value('{\"foo\":\"100\"}', 'strict $.foo1' returning boolean "
+operator|+
+literal|"null on error)"
+argument_list|,
+literal|null
+argument_list|,
+literal|"BOOLEAN"
+argument_list|)
+expr_stmt|;
+comment|// lax test
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"json_value('{\"foo\":100}', 'lax $.foo' null on empty)"
+argument_list|,
+literal|"100"
+argument_list|,
+literal|"VARCHAR(2000)"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"json_value('{\"foo\":100}', 'lax $.foo' error on empty)"
+argument_list|,
+literal|"100"
+argument_list|,
+literal|"VARCHAR(2000)"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"json_value('{\"foo\":100}', 'lax $.foo' default 'empty' on empty)"
+argument_list|,
+literal|"100"
+argument_list|,
+literal|"VARCHAR(2000)"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"json_value('{\"foo\":100}', 'lax $.foo1' null on empty)"
+argument_list|,
+literal|null
+argument_list|,
+literal|"VARCHAR(2000)"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkFails
+argument_list|(
+literal|"json_value('{\"foo\":100}', 'lax $.foo1' error on empty)"
+argument_list|,
+literal|"(?s).*Empty result of JSON_VALUE function is not allowed.*"
+argument_list|,
+literal|true
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"json_value('{\"foo\":100}', 'lax $.foo1' default 'empty' on empty)"
+argument_list|,
+literal|"empty"
+argument_list|,
+literal|"VARCHAR(2000)"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"json_value('{\"foo\":{}}', 'lax $.foo' null on empty)"
+argument_list|,
+literal|null
+argument_list|,
+literal|"VARCHAR(2000)"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkFails
+argument_list|(
+literal|"json_value('{\"foo\":{}}', 'lax $.foo' error on empty)"
+argument_list|,
+literal|"(?s).*Empty result of JSON_VALUE function is not allowed.*"
+argument_list|,
+literal|true
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"json_value('{\"foo\":{}}', 'lax $.foo' default 'empty' on empty)"
+argument_list|,
+literal|"empty"
+argument_list|,
+literal|"VARCHAR(2000)"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"json_value('{\"foo\":100}', 'lax $.foo' null on error)"
+argument_list|,
+literal|"100"
+argument_list|,
+literal|"VARCHAR(2000)"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"json_value('{\"foo\":100}', 'lax $.foo' error on error)"
+argument_list|,
+literal|"100"
+argument_list|,
+literal|"VARCHAR(2000)"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"json_value('{\"foo\":100}', 'lax $.foo' default 'empty' on error)"
+argument_list|,
+literal|"100"
+argument_list|,
+literal|"VARCHAR(2000)"
+argument_list|)
+expr_stmt|;
+comment|// path error test
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"json_value('{\"foo\":100}', 'invalid $.foo' null on error)"
+argument_list|,
+literal|null
+argument_list|,
+literal|"VARCHAR(2000)"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkFails
+argument_list|(
+literal|"json_value('{\"foo\":100}', 'invalid $.foo' error on error)"
+argument_list|,
+literal|"(?s).*Illegal jsonpath spec.*"
+argument_list|,
+literal|true
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"json_value('{\"foo\":100}', "
+operator|+
+literal|"'invalid $.foo' default 'empty' on error)"
+argument_list|,
+literal|"empty"
+argument_list|,
+literal|"VARCHAR(2000)"
+argument_list|)
+expr_stmt|;
+comment|// strict test
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"json_value('{\"foo\":100}', 'strict $.foo' null on empty)"
+argument_list|,
+literal|"100"
+argument_list|,
+literal|"VARCHAR(2000)"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"json_value('{\"foo\":100}', 'strict $.foo' error on empty)"
+argument_list|,
+literal|"100"
+argument_list|,
+literal|"VARCHAR(2000)"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"json_value('{\"foo\":100}', "
+operator|+
+literal|"'strict $.foo' default 'empty' on empty)"
+argument_list|,
+literal|"100"
+argument_list|,
+literal|"VARCHAR(2000)"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"json_value('{\"foo\":100}', 'strict $.foo1' null on error)"
+argument_list|,
+literal|null
+argument_list|,
+literal|"VARCHAR(2000)"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkFails
+argument_list|(
+literal|"json_value('{\"foo\":100}', 'strict $.foo1' error on error)"
+argument_list|,
+literal|"(?s).*No results for path: \\$\\['foo1'\\].*"
+argument_list|,
+literal|true
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"json_value('{\"foo\":100}', "
+operator|+
+literal|"'strict $.foo1' default 'empty' on error)"
+argument_list|,
+literal|"empty"
+argument_list|,
+literal|"VARCHAR(2000)"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"json_value('{\"foo\":{}}', 'strict $.foo' null on error)"
+argument_list|,
+literal|null
+argument_list|,
+literal|"VARCHAR(2000)"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkFails
+argument_list|(
+literal|"json_value('{\"foo\":{}}', 'strict $.foo' error on error)"
+argument_list|,
+literal|"(?s).*Strict jsonpath mode requires scalar value, "
+operator|+
+literal|"and the actual value is: '\\{\\}'.*"
+argument_list|,
+literal|true
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"json_value('{\"foo\":{}}', "
+operator|+
+literal|"'strict $.foo' default 'empty' on error)"
+argument_list|,
+literal|"empty"
+argument_list|,
+literal|"VARCHAR(2000)"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testJsonQuery
+parameter_list|()
+block|{
+comment|// lax test
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"json_query('{\"foo\":100}', 'lax $' null on empty)"
+argument_list|,
+literal|"{\"foo\":100}"
+argument_list|,
+literal|"VARCHAR(2000)"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"json_query('{\"foo\":100}', 'lax $' error on empty)"
+argument_list|,
+literal|"{\"foo\":100}"
+argument_list|,
+literal|"VARCHAR(2000)"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"json_query('{\"foo\":100}', 'lax $' empty array on empty)"
+argument_list|,
+literal|"{\"foo\":100}"
+argument_list|,
+literal|"VARCHAR(2000)"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"json_query('{\"foo\":100}', 'lax $' empty object on empty)"
+argument_list|,
+literal|"{\"foo\":100}"
+argument_list|,
+literal|"VARCHAR(2000)"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"json_query('{\"foo\":100}', 'lax $.foo' null on empty)"
+argument_list|,
+literal|null
+argument_list|,
+literal|"VARCHAR(2000)"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkFails
+argument_list|(
+literal|"json_query('{\"foo\":100}', 'lax $.foo' error on empty)"
+argument_list|,
+literal|"(?s).*Empty result of JSON_QUERY function is not allowed.*"
+argument_list|,
+literal|true
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"json_query('{\"foo\":100}', 'lax $.foo' empty array on empty)"
+argument_list|,
+literal|"[]"
+argument_list|,
+literal|"VARCHAR(2000)"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"json_query('{\"foo\":100}', 'lax $.foo' empty object on empty)"
+argument_list|,
+literal|"{}"
+argument_list|,
+literal|"VARCHAR(2000)"
+argument_list|)
+expr_stmt|;
+comment|// path error test
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"json_query('{\"foo\":100}', 'invalid $.foo' null on error)"
+argument_list|,
+literal|null
+argument_list|,
+literal|"VARCHAR(2000)"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkFails
+argument_list|(
+literal|"json_query('{\"foo\":100}', 'invalid $.foo' error on error)"
+argument_list|,
+literal|"(?s).*Illegal jsonpath spec.*"
+argument_list|,
+literal|true
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"json_query('{\"foo\":100}', "
+operator|+
+literal|"'invalid $.foo' empty array on error)"
+argument_list|,
+literal|"[]"
+argument_list|,
+literal|"VARCHAR(2000)"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"json_query('{\"foo\":100}', "
+operator|+
+literal|"'invalid $.foo' empty object on error)"
+argument_list|,
+literal|"{}"
+argument_list|,
+literal|"VARCHAR(2000)"
+argument_list|)
+expr_stmt|;
+comment|// strict test
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"json_query('{\"foo\":100}', 'strict $' null on empty)"
+argument_list|,
+literal|"{\"foo\":100}"
+argument_list|,
+literal|"VARCHAR(2000)"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"json_query('{\"foo\":100}', 'strict $' error on empty)"
+argument_list|,
+literal|"{\"foo\":100}"
+argument_list|,
+literal|"VARCHAR(2000)"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"json_query('{\"foo\":100}', 'strict $' empty array on error)"
+argument_list|,
+literal|"{\"foo\":100}"
+argument_list|,
+literal|"VARCHAR(2000)"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"json_query('{\"foo\":100}', 'strict $' empty object on error)"
+argument_list|,
+literal|"{\"foo\":100}"
+argument_list|,
+literal|"VARCHAR(2000)"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"json_query('{\"foo\":100}', 'strict $.foo1' null on error)"
+argument_list|,
+literal|null
+argument_list|,
+literal|"VARCHAR(2000)"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkFails
+argument_list|(
+literal|"json_query('{\"foo\":100}', 'strict $.foo1' error on error)"
+argument_list|,
+literal|"(?s).*No results for path: \\$\\['foo1'\\].*"
+argument_list|,
+literal|true
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"json_query('{\"foo\":100}', 'strict $.foo1' empty array on error)"
+argument_list|,
+literal|"[]"
+argument_list|,
+literal|"VARCHAR(2000)"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"json_query('{\"foo\":100}', 'strict $.foo1' empty object on error)"
+argument_list|,
+literal|"{}"
+argument_list|,
+literal|"VARCHAR(2000)"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"json_query('{\"foo\":100}', 'strict $.foo' null on error)"
+argument_list|,
+literal|null
+argument_list|,
+literal|"VARCHAR(2000)"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkFails
+argument_list|(
+literal|"json_query('{\"foo\":100}', 'strict $.foo' error on error)"
+argument_list|,
+literal|"(?s).*Strict jsonpath mode requires array or object value, "
+operator|+
+literal|"and the actual value is: '100'.*"
+argument_list|,
+literal|true
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"json_query('{\"foo\":100}', 'strict $.foo' empty array on error)"
+argument_list|,
+literal|"[]"
+argument_list|,
+literal|"VARCHAR(2000)"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"json_query('{\"foo\":100}', 'strict $.foo' empty object on error)"
+argument_list|,
+literal|"{}"
+argument_list|,
+literal|"VARCHAR(2000)"
+argument_list|)
+expr_stmt|;
+comment|// array wrapper test
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"json_query('{\"foo\":100}', 'strict $.foo' without wrapper)"
+argument_list|,
+literal|null
+argument_list|,
+literal|"VARCHAR(2000)"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"json_query('{\"foo\":100}', 'strict $.foo' without array wrapper)"
+argument_list|,
+literal|null
+argument_list|,
+literal|"VARCHAR(2000)"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"json_query('{\"foo\":100}', 'strict $.foo' with wrapper)"
+argument_list|,
+literal|"[100]"
+argument_list|,
+literal|"VARCHAR(2000)"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"json_query('{\"foo\":100}', 'strict $.foo' "
+operator|+
+literal|"with unconditional wrapper)"
+argument_list|,
+literal|"[100]"
+argument_list|,
+literal|"VARCHAR(2000)"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"json_query('{\"foo\":100}', 'strict $.foo' "
+operator|+
+literal|"with conditional wrapper)"
+argument_list|,
+literal|"[100]"
+argument_list|,
+literal|"VARCHAR(2000)"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"json_query('{\"foo\":[100]}', 'strict $.foo' without wrapper)"
+argument_list|,
+literal|"[100]"
+argument_list|,
+literal|"VARCHAR(2000)"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"json_query('{\"foo\":[100]}', 'strict $.foo' without array wrapper)"
+argument_list|,
+literal|"[100]"
+argument_list|,
+literal|"VARCHAR(2000)"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"json_query('{\"foo\":[100]}', 'strict $.foo' with wrapper)"
+argument_list|,
+literal|"[[100]]"
+argument_list|,
+literal|"VARCHAR(2000)"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"json_query('{\"foo\":[100]}', 'strict $.foo' "
+operator|+
+literal|"with unconditional wrapper)"
+argument_list|,
+literal|"[[100]]"
+argument_list|,
+literal|"VARCHAR(2000)"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"json_query('{\"foo\":[100]}', 'strict $.foo' "
+operator|+
+literal|"with conditional wrapper)"
+argument_list|,
+literal|"[100]"
+argument_list|,
+literal|"VARCHAR(2000)"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testJsonObject
+parameter_list|()
+block|{
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"json_object()"
+argument_list|,
+literal|"{}"
+argument_list|,
+literal|"VARCHAR(2000) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"json_object('foo': 'bar')"
+argument_list|,
+literal|"{\"foo\":\"bar\"}"
+argument_list|,
+literal|"VARCHAR(2000) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"json_object('foo': 'bar', 'foo2': 'bar2')"
+argument_list|,
+literal|"{\"foo\":\"bar\",\"foo2\":\"bar2\"}"
+argument_list|,
+literal|"VARCHAR(2000) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"json_object('foo': null)"
+argument_list|,
+literal|"{\"foo\":null}"
+argument_list|,
+literal|"VARCHAR(2000) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"json_object('foo': null null on null)"
+argument_list|,
+literal|"{\"foo\":null}"
+argument_list|,
+literal|"VARCHAR(2000) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"json_object('foo': null absent on null)"
+argument_list|,
+literal|"{}"
+argument_list|,
+literal|"VARCHAR(2000) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"json_object('foo': 100)"
+argument_list|,
+literal|"{\"foo\":100}"
+argument_list|,
+literal|"VARCHAR(2000) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"json_object('foo': json_object('foo': 'bar'))"
+argument_list|,
+literal|"{\"foo\":\"{\\\"foo\\\":\\\"bar\\\"}\"}"
+argument_list|,
+literal|"VARCHAR(2000) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"json_object('foo': json_object('foo': 'bar') format json)"
+argument_list|,
+literal|"{\"foo\":{\"foo\":\"bar\"}}"
+argument_list|,
+literal|"VARCHAR(2000) NOT NULL"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testJsonObjectAgg
+parameter_list|()
+block|{
+name|checkAggType
+argument_list|(
+name|tester
+argument_list|,
+literal|"json_objectagg('foo': 'bar')"
+argument_list|,
+literal|"VARCHAR(2000) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkFails
+argument_list|(
+literal|"^json_objectagg(100: 'bar')^"
+argument_list|,
+literal|"(?s).*Cannot apply.*"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+specifier|final
+name|String
+index|[]
+index|[]
+name|values
+init|=
+block|{
+block|{
+literal|"'foo'"
+block|,
+literal|"'bar'"
+block|}
+block|,
+block|{
+literal|"'foo2'"
+block|,
+literal|"cast(null as varchar(2000))"
+block|}
+block|,
+block|{
+literal|"'foo3'"
+block|,
+literal|"'bar3'"
+block|}
+block|}
+decl_stmt|;
+name|tester
+operator|.
+name|checkAggWithMultipleArgs
+argument_list|(
+literal|"json_objectagg(x: x2)"
+argument_list|,
+name|values
+argument_list|,
+literal|"{\"foo\":\"bar\",\"foo2\":null,\"foo3\":\"bar3\"}"
+argument_list|,
+literal|0.0D
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkAggWithMultipleArgs
+argument_list|(
+literal|"json_objectagg(x: x2 null on null)"
+argument_list|,
+name|values
+argument_list|,
+literal|"{\"foo\":\"bar\",\"foo2\":null,\"foo3\":\"bar3\"}"
+argument_list|,
+literal|0.0D
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkAggWithMultipleArgs
+argument_list|(
+literal|"json_objectagg(x: x2 absent on null)"
+argument_list|,
+name|values
+argument_list|,
+literal|"{\"foo\":\"bar\",\"foo3\":\"bar3\"}"
+argument_list|,
+literal|0.0D
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testJsonArray
+parameter_list|()
+block|{
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"json_array()"
+argument_list|,
+literal|"[]"
+argument_list|,
+literal|"VARCHAR(2000) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"json_array('foo')"
+argument_list|,
+literal|"[\"foo\"]"
+argument_list|,
+literal|"VARCHAR(2000) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"json_array('foo', 'bar')"
+argument_list|,
+literal|"[\"foo\",\"bar\"]"
+argument_list|,
+literal|"VARCHAR(2000) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"json_array(null)"
+argument_list|,
+literal|"[]"
+argument_list|,
+literal|"VARCHAR(2000) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"json_array(null null on null)"
+argument_list|,
+literal|"[null]"
+argument_list|,
+literal|"VARCHAR(2000) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"json_array(null absent on null)"
+argument_list|,
+literal|"[]"
+argument_list|,
+literal|"VARCHAR(2000) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"json_array(100)"
+argument_list|,
+literal|"[100]"
+argument_list|,
+literal|"VARCHAR(2000) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"json_array(json_array('foo'))"
+argument_list|,
+literal|"[\"[\\\"foo\\\"]\"]"
+argument_list|,
+literal|"VARCHAR(2000) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"json_array(json_array('foo') format json)"
+argument_list|,
+literal|"[[\"foo\"]]"
+argument_list|,
+literal|"VARCHAR(2000) NOT NULL"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testJsonArrayAgg
+parameter_list|()
+block|{
+name|checkAggType
+argument_list|(
+name|tester
+argument_list|,
+literal|"json_arrayagg('foo')"
+argument_list|,
+literal|"VARCHAR(2000) NOT NULL"
+argument_list|)
+expr_stmt|;
+specifier|final
+name|String
+index|[]
+name|values
+init|=
+block|{
+literal|"'foo'"
+block|,
+literal|"cast(null as varchar(2000))"
+block|,
+literal|"'foo3'"
+block|}
+decl_stmt|;
+name|tester
+operator|.
+name|checkAgg
+argument_list|(
+literal|"json_arrayagg(x)"
+argument_list|,
+name|values
+argument_list|,
+literal|"[\"foo\",\"foo3\"]"
+argument_list|,
+literal|0.0D
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkAgg
+argument_list|(
+literal|"json_arrayagg(x null on null)"
+argument_list|,
+name|values
+argument_list|,
+literal|"[\"foo\",null,\"foo3\"]"
+argument_list|,
+literal|0.0D
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkAgg
+argument_list|(
+literal|"json_arrayagg(x absent on null)"
+argument_list|,
+name|values
+argument_list|,
+literal|"[\"foo\",\"foo3\"]"
+argument_list|,
+literal|0.0D
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testJsonPredicate
+parameter_list|()
+block|{
+name|tester
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"'{}' is json value"
+argument_list|,
+literal|true
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"'{]' is json value"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"'{}' is json object"
+argument_list|,
+literal|true
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"'[]' is json object"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"'{}' is json array"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"'[]' is json array"
+argument_list|,
+literal|true
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"'100' is json scalar"
+argument_list|,
+literal|true
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"'[]' is json scalar"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"'{}' is not json value"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"'{]' is not json value"
+argument_list|,
+literal|true
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"'{}' is not json object"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"'[]' is not json object"
+argument_list|,
+literal|true
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"'{}' is not json array"
+argument_list|,
+literal|true
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"'[]' is not json array"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"'100' is not json scalar"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"'[]' is not json scalar"
+argument_list|,
+literal|true
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testLowerFunc
 parameter_list|()
 block|{
@@ -22232,7 +23718,7 @@ name|checkFails
 argument_list|(
 literal|"substring('abc' from 1 for -1)"
 argument_list|,
-literal|"substring error: negative substring length not allowed"
+literal|"Substring error: negative substring length not allowed"
 argument_list|,
 literal|true
 argument_list|)
@@ -22342,7 +23828,7 @@ name|checkFails
 argument_list|(
 literal|"substring(x'aabbcc' from 1 for -1)"
 argument_list|,
-literal|"substring error: negative substring length not allowed"
+literal|"Substring error: negative substring length not allowed"
 argument_list|,
 literal|true
 argument_list|)
@@ -22507,7 +23993,7 @@ name|checkFails
 argument_list|(
 literal|"trim('xy' from 'abcde')"
 argument_list|,
-literal|"trim error: trim character must be exactly 1 character"
+literal|"Trim error: trim character must be exactly 1 character"
 argument_list|,
 literal|true
 argument_list|)
@@ -22518,7 +24004,7 @@ name|checkFails
 argument_list|(
 literal|"trim('' from 'abcde')"
 argument_list|,
-literal|"trim error: trim character must be exactly 1 character"
+literal|"Trim error: trim character must be exactly 1 character"
 argument_list|,
 literal|true
 argument_list|)

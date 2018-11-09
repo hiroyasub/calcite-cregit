@@ -464,6 +464,18 @@ block|,
 comment|/**    * The MULTISET query constructor.    */
 name|MULTISET_QUERY_CONSTRUCTOR
 block|,
+comment|/**    * The JSON value expression.    */
+name|JSON_VALUE_EXPRESSION
+block|,
+comment|/**    * The JSON API common syntax.    */
+name|JSON_API_COMMON_SYNTAX
+block|,
+comment|/**    * The {@code JSON_ARRAYAGG} aggregate function.    */
+name|JSON_ARRAYAGG
+block|,
+comment|/**    * The {@code JSON_OBJECTAGG} aggregate function.    */
+name|JSON_OBJECTAGG
+block|,
 comment|/**    * The "UNNEST" operator.    */
 name|UNNEST
 block|,
@@ -832,6 +844,10 @@ argument_list|,
 name|DENSE_RANK
 argument_list|,
 name|CUME_DIST
+argument_list|,
+name|JSON_ARRAYAGG
+argument_list|,
+name|JSON_OBJECTAGG
 argument_list|)
 decl_stmt|;
 comment|/**    * Category consisting of all DML operators.    *    *<p>Consists of:    * {@link #INSERT},    * {@link #UPDATE},    * {@link #DELETE},    * {@link #MERGE},    * {@link #PROCEDURE_CALL}.    *    *<p>NOTE jvs 1-June-2006: For now we treat procedure calls as DML;    * this makes it easy for JDBC clients to call execute or    * executeUpdate and not have to process dummy cursor results.  If    * in the future we support procedures which return results sets,    * we'll need to refine this.    */
@@ -1052,6 +1068,10 @@ argument_list|,
 name|SKIP_TO_FIRST
 argument_list|,
 name|SKIP_TO_LAST
+argument_list|,
+name|JSON_VALUE_EXPRESSION
+argument_list|,
+name|JSON_API_COMMON_SYNTAX
 argument_list|)
 argument_list|,
 name|AGGREGATE

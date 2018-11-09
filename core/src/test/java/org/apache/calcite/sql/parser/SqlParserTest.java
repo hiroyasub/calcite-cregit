@@ -2669,6 +2669,34 @@ literal|"2014"
 argument_list|,
 literal|"c"
 argument_list|,
+literal|"JSON_ARRAY"
+argument_list|,
+literal|"c"
+argument_list|,
+literal|"JSON_ARRAYAGG"
+argument_list|,
+literal|"c"
+argument_list|,
+literal|"JSON_EXISTS"
+argument_list|,
+literal|"c"
+argument_list|,
+literal|"JSON_OBJECT"
+argument_list|,
+literal|"c"
+argument_list|,
+literal|"JSON_OBJECTAGG"
+argument_list|,
+literal|"c"
+argument_list|,
+literal|"JSON_QUERY"
+argument_list|,
+literal|"c"
+argument_list|,
+literal|"JSON_VALUE"
+argument_list|,
+literal|"c"
+argument_list|,
 literal|"KEEP"
 argument_list|,
 literal|"2011"
@@ -27095,6 +27123,443 @@ operator|.
 name|ok
 argument_list|(
 name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testJsonExists
+parameter_list|()
+block|{
+name|checkExp
+argument_list|(
+literal|"json_exists('{\"foo\": \"bar\"}', 'lax $.foo')"
+argument_list|,
+literal|"JSON_EXISTS('{\"foo\": \"bar\"}' FORMAT JSON, 'lax $.foo')"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"json_exists('{\"foo\": \"bar\"}', 'lax $.foo' error on error)"
+argument_list|,
+literal|"JSON_EXISTS('{\"foo\": \"bar\"}' FORMAT JSON, 'lax $.foo' ERROR ON ERROR)"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testJsonValue
+parameter_list|()
+block|{
+name|checkExp
+argument_list|(
+literal|"json_value('{\"foo\": \"100\"}', 'lax $.foo' "
+operator|+
+literal|"returning integer)"
+argument_list|,
+literal|"JSON_VALUE('{\"foo\": \"100\"}' FORMAT JSON, 'lax $.foo' "
+operator|+
+literal|"RETURNING INTEGER NULL ON EMPTY NULL ON ERROR)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"json_value('{\"foo\": \"100\"}', 'lax $.foo' "
+operator|+
+literal|"returning integer default 10 on empty error on error)"
+argument_list|,
+literal|"JSON_VALUE('{\"foo\": \"100\"}' FORMAT JSON, 'lax $.foo' "
+operator|+
+literal|"RETURNING INTEGER DEFAULT 10 ON EMPTY ERROR ON ERROR)"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testJsonQuery
+parameter_list|()
+block|{
+name|checkExp
+argument_list|(
+literal|"json_query('{\"foo\": \"bar\"}', 'lax $' WITHOUT ARRAY WRAPPER)"
+argument_list|,
+literal|"JSON_QUERY('{\"foo\": \"bar\"}' FORMAT JSON, "
+operator|+
+literal|"'lax $' WITHOUT ARRAY WRAPPER NULL ON EMPTY NULL ON ERROR)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"json_query('{\"foo\": \"bar\"}', 'lax $' WITH WRAPPER)"
+argument_list|,
+literal|"JSON_QUERY('{\"foo\": \"bar\"}' FORMAT JSON, "
+operator|+
+literal|"'lax $' WITH UNCONDITIONAL ARRAY WRAPPER NULL ON EMPTY NULL ON ERROR)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"json_query('{\"foo\": \"bar\"}', 'lax $' WITH UNCONDITIONAL WRAPPER)"
+argument_list|,
+literal|"JSON_QUERY('{\"foo\": \"bar\"}' FORMAT JSON, "
+operator|+
+literal|"'lax $' WITH UNCONDITIONAL ARRAY WRAPPER NULL ON EMPTY NULL ON ERROR)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"json_query('{\"foo\": \"bar\"}', 'lax $' WITH CONDITIONAL WRAPPER)"
+argument_list|,
+literal|"JSON_QUERY('{\"foo\": \"bar\"}' FORMAT JSON, "
+operator|+
+literal|"'lax $' WITH CONDITIONAL ARRAY WRAPPER NULL ON EMPTY NULL ON ERROR)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"json_query('{\"foo\": \"bar\"}', 'lax $' NULL ON EMPTY)"
+argument_list|,
+literal|"JSON_QUERY('{\"foo\": \"bar\"}' FORMAT JSON, "
+operator|+
+literal|"'lax $' WITHOUT ARRAY WRAPPER NULL ON EMPTY NULL ON ERROR)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"json_query('{\"foo\": \"bar\"}', 'lax $' ERROR ON EMPTY)"
+argument_list|,
+literal|"JSON_QUERY('{\"foo\": \"bar\"}' FORMAT JSON, "
+operator|+
+literal|"'lax $' WITHOUT ARRAY WRAPPER ERROR ON EMPTY NULL ON ERROR)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"json_query('{\"foo\": \"bar\"}', 'lax $' EMPTY ARRAY ON EMPTY)"
+argument_list|,
+literal|"JSON_QUERY('{\"foo\": \"bar\"}' FORMAT JSON, "
+operator|+
+literal|"'lax $' WITHOUT ARRAY WRAPPER EMPTY ARRAY ON EMPTY NULL ON ERROR)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"json_query('{\"foo\": \"bar\"}', 'lax $' EMPTY OBJECT ON EMPTY)"
+argument_list|,
+literal|"JSON_QUERY('{\"foo\": \"bar\"}' FORMAT JSON, "
+operator|+
+literal|"'lax $' WITHOUT ARRAY WRAPPER EMPTY OBJECT ON EMPTY NULL ON ERROR)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"json_query('{\"foo\": \"bar\"}', 'lax $' NULL ON ERROR)"
+argument_list|,
+literal|"JSON_QUERY('{\"foo\": \"bar\"}' FORMAT JSON, "
+operator|+
+literal|"'lax $' WITHOUT ARRAY WRAPPER NULL ON EMPTY NULL ON ERROR)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"json_query('{\"foo\": \"bar\"}', 'lax $' ERROR ON ERROR)"
+argument_list|,
+literal|"JSON_QUERY('{\"foo\": \"bar\"}' FORMAT JSON, "
+operator|+
+literal|"'lax $' WITHOUT ARRAY WRAPPER NULL ON EMPTY ERROR ON ERROR)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"json_query('{\"foo\": \"bar\"}', 'lax $' EMPTY ARRAY ON ERROR)"
+argument_list|,
+literal|"JSON_QUERY('{\"foo\": \"bar\"}' FORMAT JSON, "
+operator|+
+literal|"'lax $' WITHOUT ARRAY WRAPPER NULL ON EMPTY EMPTY ARRAY ON ERROR)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"json_query('{\"foo\": \"bar\"}', 'lax $' EMPTY OBJECT ON ERROR)"
+argument_list|,
+literal|"JSON_QUERY('{\"foo\": \"bar\"}' FORMAT JSON, "
+operator|+
+literal|"'lax $' WITHOUT ARRAY WRAPPER NULL ON EMPTY EMPTY OBJECT ON ERROR)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"json_query('{\"foo\": \"bar\"}', 'lax $' EMPTY ARRAY ON EMPTY "
+operator|+
+literal|"EMPTY OBJECT ON ERROR)"
+argument_list|,
+literal|"JSON_QUERY('{\"foo\": \"bar\"}' FORMAT JSON, "
+operator|+
+literal|"'lax $' WITHOUT ARRAY WRAPPER EMPTY ARRAY ON EMPTY EMPTY OBJECT ON ERROR)"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testJsonObject
+parameter_list|()
+block|{
+name|checkExp
+argument_list|(
+literal|"json_object('foo': 'bar')"
+argument_list|,
+literal|"JSON_OBJECT(KEY 'foo' VALUE 'bar' NULL ON NULL)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"json_object('foo': 'bar', 'foo2': 'bar2')"
+argument_list|,
+literal|"JSON_OBJECT(KEY 'foo' VALUE 'bar', KEY 'foo2' VALUE 'bar2' NULL ON NULL)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"json_object('foo' value 'bar')"
+argument_list|,
+literal|"JSON_OBJECT(KEY 'foo' VALUE 'bar' NULL ON NULL)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"json_object(key 'foo' value 'bar')"
+argument_list|,
+literal|"JSON_OBJECT(KEY 'foo' VALUE 'bar' NULL ON NULL)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"json_object('foo': null)"
+argument_list|,
+literal|"JSON_OBJECT(KEY 'foo' VALUE NULL NULL ON NULL)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"json_object('foo': null absent on null)"
+argument_list|,
+literal|"JSON_OBJECT(KEY 'foo' VALUE NULL ABSENT ON NULL)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"json_object('foo': json_object('foo': 'bar') format json)"
+argument_list|,
+literal|"JSON_OBJECT(KEY 'foo' VALUE "
+operator|+
+literal|"JSON_OBJECT(KEY 'foo' VALUE 'bar' NULL ON NULL) "
+operator|+
+literal|"FORMAT JSON NULL ON NULL)"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testJsonObjectAgg
+parameter_list|()
+block|{
+name|checkExp
+argument_list|(
+literal|"json_objectagg(k_column: v_column)"
+argument_list|,
+literal|"JSON_OBJECTAGG(KEY `K_COLUMN` VALUE `V_COLUMN` NULL ON NULL)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"json_objectagg(k_column value v_column)"
+argument_list|,
+literal|"JSON_OBJECTAGG(KEY `K_COLUMN` VALUE `V_COLUMN` NULL ON NULL)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"json_objectagg(key k_column value v_column)"
+argument_list|,
+literal|"JSON_OBJECTAGG(KEY `K_COLUMN` VALUE `V_COLUMN` NULL ON NULL)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"json_objectagg(k_column: null)"
+argument_list|,
+literal|"JSON_OBJECTAGG(KEY `K_COLUMN` VALUE NULL NULL ON NULL)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"json_objectagg(k_column: null absent on null)"
+argument_list|,
+literal|"JSON_OBJECTAGG(KEY `K_COLUMN` VALUE NULL ABSENT ON NULL)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"json_objectagg(k_column: json_object(k_column: v_column) format json)"
+argument_list|,
+literal|"JSON_OBJECTAGG(KEY `K_COLUMN` VALUE "
+operator|+
+literal|"JSON_OBJECT(KEY `K_COLUMN` VALUE `V_COLUMN` NULL ON NULL) "
+operator|+
+literal|"FORMAT JSON NULL ON NULL)"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testJsonArray
+parameter_list|()
+block|{
+name|checkExp
+argument_list|(
+literal|"json_array('foo')"
+argument_list|,
+literal|"JSON_ARRAY('foo' ABSENT ON NULL)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"json_array(null)"
+argument_list|,
+literal|"JSON_ARRAY(NULL ABSENT ON NULL)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"json_array(null null on null)"
+argument_list|,
+literal|"JSON_ARRAY(NULL NULL ON NULL)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"json_array(json_array('foo', 'bar') format json)"
+argument_list|,
+literal|"JSON_ARRAY(JSON_ARRAY('foo', 'bar' ABSENT ON NULL) FORMAT JSON ABSENT ON NULL)"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testJsonArrayAgg
+parameter_list|()
+block|{
+name|checkExp
+argument_list|(
+literal|"json_arrayagg(\"column\")"
+argument_list|,
+literal|"JSON_ARRAYAGG(`column` ABSENT ON NULL)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"json_arrayagg(\"column\" null on null)"
+argument_list|,
+literal|"JSON_ARRAYAGG(`column` NULL ON NULL)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"json_arrayagg(json_array(\"column\") format json)"
+argument_list|,
+literal|"JSON_ARRAYAGG(JSON_ARRAY(`column` ABSENT ON NULL) FORMAT JSON ABSENT ON NULL)"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testJsonPredicate
+parameter_list|()
+block|{
+name|checkExp
+argument_list|(
+literal|"'{}' is json"
+argument_list|,
+literal|"('{}' IS JSON VALUE)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"'{}' is json value"
+argument_list|,
+literal|"('{}' IS JSON VALUE)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"'{}' is json object"
+argument_list|,
+literal|"('{}' IS JSON OBJECT)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"'[]' is json array"
+argument_list|,
+literal|"('[]' IS JSON ARRAY)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"'100' is json scalar"
+argument_list|,
+literal|"('100' IS JSON SCALAR)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"'{}' is not json"
+argument_list|,
+literal|"('{}' IS NOT JSON VALUE)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"'{}' is not json value"
+argument_list|,
+literal|"('{}' IS NOT JSON VALUE)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"'{}' is not json object"
+argument_list|,
+literal|"('{}' IS NOT JSON OBJECT)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"'[]' is not json array"
+argument_list|,
+literal|"('[]' IS NOT JSON ARRAY)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"'100' is not json scalar"
+argument_list|,
+literal|"('100' IS NOT JSON SCALAR)"
 argument_list|)
 expr_stmt|;
 block|}

@@ -898,6 +898,10 @@ name|SqlFunctionsTest
 operator|.
 name|class
 block|,
+name|SqlJsonFunctionsTest
+operator|.
+name|class
+block|,
 name|SqlTypeNameTest
 operator|.
 name|class

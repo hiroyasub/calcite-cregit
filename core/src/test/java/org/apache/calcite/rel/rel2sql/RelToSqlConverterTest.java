@@ -10083,6 +10083,305 @@ name|expected
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testJsonExists
+parameter_list|()
+block|{
+name|String
+name|query
+init|=
+literal|"select json_exists(\"product_name\", 'lax $') from \"product\""
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT JSON_EXISTS(\"product_name\" FORMAT JSON, 'lax $')\n"
+operator|+
+literal|"FROM \"foodmart\".\"product\""
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testJsonValue
+parameter_list|()
+block|{
+name|String
+name|query
+init|=
+literal|"select json_value(\"product_name\", 'lax $') from \"product\""
+decl_stmt|;
+comment|// todo translate to JSON_VALUE rather than CAST
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT CAST(JSON_VALUE_ANY(\"product_name\" FORMAT JSON, "
+operator|+
+literal|"'lax $' NULL ON EMPTY NULL ON ERROR) AS VARCHAR(2000) CHARACTER SET \"ISO-8859-1\")\n"
+operator|+
+literal|"FROM \"foodmart\".\"product\""
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testJsonQuery
+parameter_list|()
+block|{
+name|String
+name|query
+init|=
+literal|"select json_query(\"product_name\", 'lax $') from \"product\""
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT JSON_QUERY(\"product_name\" FORMAT JSON, 'lax $' "
+operator|+
+literal|"WITHOUT ARRAY WRAPPER NULL ON EMPTY NULL ON ERROR)\n"
+operator|+
+literal|"FROM \"foodmart\".\"product\""
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testJsonArray
+parameter_list|()
+block|{
+name|String
+name|query
+init|=
+literal|"select json_array(\"product_name\", \"product_name\") from \"product\""
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT JSON_ARRAY(\"product_name\", \"product_name\" ABSENT ON NULL)\n"
+operator|+
+literal|"FROM \"foodmart\".\"product\""
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testJsonArrayAgg
+parameter_list|()
+block|{
+name|String
+name|query
+init|=
+literal|"select json_arrayagg(\"product_name\") from \"product\""
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT JSON_ARRAYAGG(\"product_name\" ABSENT ON NULL)\n"
+operator|+
+literal|"FROM \"foodmart\".\"product\""
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testJsonObject
+parameter_list|()
+block|{
+name|String
+name|query
+init|=
+literal|"select json_object(\"product_name\": \"product_id\") from \"product\""
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT "
+operator|+
+literal|"JSON_OBJECT(KEY \"product_name\" VALUE \"product_id\" NULL ON NULL)\n"
+operator|+
+literal|"FROM \"foodmart\".\"product\""
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testJsonObjectAgg
+parameter_list|()
+block|{
+name|String
+name|query
+init|=
+literal|"select json_objectagg(\"product_name\": \"product_id\") from \"product\""
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT "
+operator|+
+literal|"JSON_OBJECTAGG(KEY \"product_name\" VALUE \"product_id\" NULL ON NULL)\n"
+operator|+
+literal|"FROM \"foodmart\".\"product\""
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testJsonPredicate
+parameter_list|()
+block|{
+name|String
+name|query
+init|=
+literal|"select "
+operator|+
+literal|"\"product_name\" is json, "
+operator|+
+literal|"\"product_name\" is json value, "
+operator|+
+literal|"\"product_name\" is json object, "
+operator|+
+literal|"\"product_name\" is json array, "
+operator|+
+literal|"\"product_name\" is json scalar, "
+operator|+
+literal|"\"product_name\" is not json, "
+operator|+
+literal|"\"product_name\" is not json value, "
+operator|+
+literal|"\"product_name\" is not json object, "
+operator|+
+literal|"\"product_name\" is not json array, "
+operator|+
+literal|"\"product_name\" is not json scalar "
+operator|+
+literal|"from \"product\""
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT "
+operator|+
+literal|"\"product_name\" IS JSON VALUE, "
+operator|+
+literal|"\"product_name\" IS JSON VALUE, "
+operator|+
+literal|"\"product_name\" IS JSON OBJECT, "
+operator|+
+literal|"\"product_name\" IS JSON ARRAY, "
+operator|+
+literal|"\"product_name\" IS JSON SCALAR, "
+operator|+
+literal|"\"product_name\" IS NOT JSON VALUE, "
+operator|+
+literal|"\"product_name\" IS NOT JSON VALUE, "
+operator|+
+literal|"\"product_name\" IS NOT JSON OBJECT, "
+operator|+
+literal|"\"product_name\" IS NOT JSON ARRAY, "
+operator|+
+literal|"\"product_name\" IS NOT JSON SCALAR\n"
+operator|+
+literal|"FROM \"foodmart\".\"product\""
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
 comment|/** Fluid interface to run tests. */
 specifier|static
 class|class

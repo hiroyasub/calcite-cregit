@@ -57,6 +57,20 @@ name|calcite
 operator|.
 name|runtime
 operator|.
+name|CalciteException
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|runtime
+operator|.
 name|SqlFunctions
 import|;
 end_import
@@ -5453,7 +5467,7 @@ expr_stmt|;
 block|}
 catch|catch
 parameter_list|(
-name|IllegalArgumentException
+name|CalciteException
 name|e
 parameter_list|)
 block|{
@@ -5824,7 +5838,7 @@ expr_stmt|;
 block|}
 catch|catch
 parameter_list|(
-name|IllegalArgumentException
+name|CalciteException
 name|e
 parameter_list|)
 block|{
@@ -6039,7 +6053,7 @@ expr_stmt|;
 block|}
 catch|catch
 parameter_list|(
-name|IllegalArgumentException
+name|CalciteException
 name|e
 parameter_list|)
 block|{
@@ -6410,7 +6424,7 @@ expr_stmt|;
 block|}
 catch|catch
 parameter_list|(
-name|IllegalArgumentException
+name|CalciteException
 name|e
 parameter_list|)
 block|{
@@ -6684,7 +6698,7 @@ expr_stmt|;
 block|}
 catch|catch
 parameter_list|(
-name|IllegalArgumentException
+name|CalciteException
 name|e
 parameter_list|)
 block|{
@@ -6958,7 +6972,7 @@ expr_stmt|;
 block|}
 catch|catch
 parameter_list|(
-name|IllegalArgumentException
+name|CalciteException
 name|e
 parameter_list|)
 block|{
@@ -7232,7 +7246,7 @@ expr_stmt|;
 block|}
 catch|catch
 parameter_list|(
-name|IllegalArgumentException
+name|CalciteException
 name|e
 parameter_list|)
 block|{
@@ -7506,7 +7520,7 @@ expr_stmt|;
 block|}
 catch|catch
 parameter_list|(
-name|IllegalArgumentException
+name|CalciteException
 name|e
 parameter_list|)
 block|{
