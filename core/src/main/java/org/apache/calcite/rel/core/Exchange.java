@@ -301,7 +301,7 @@ operator|.
 name|ANY
 assert|;
 block|}
-comment|/**    * Creates a Exchange by parsing serialized output.    */
+comment|/**    * Creates an Exchange by parsing serialized output.    */
 specifier|public
 name|Exchange
 parameter_list|(
