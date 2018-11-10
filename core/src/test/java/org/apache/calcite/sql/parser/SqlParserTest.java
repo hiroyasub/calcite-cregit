@@ -14648,6 +14648,13 @@ argument_list|,
 literal|"_ISO-8859-1'bye'\n' bye'"
 argument_list|)
 expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"_utf8'hi'"
+argument_list|,
+literal|"_UTF8'hi'"
+argument_list|)
+expr_stmt|;
 comment|// newline in string literal
 name|checkExp
 argument_list|(
