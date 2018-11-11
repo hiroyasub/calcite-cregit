@@ -10997,6 +10997,80 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testReduceConstantsWindow
+parameter_list|()
+block|{
+name|HepProgram
+name|program
+init|=
+operator|new
+name|HepProgramBuilder
+argument_list|()
+operator|.
+name|addRuleInstance
+argument_list|(
+name|ProjectToWindowRule
+operator|.
+name|PROJECT
+argument_list|)
+operator|.
+name|addRuleInstance
+argument_list|(
+name|ProjectMergeRule
+operator|.
+name|INSTANCE
+argument_list|)
+operator|.
+name|addRuleInstance
+argument_list|(
+name|ProjectWindowTransposeRule
+operator|.
+name|INSTANCE
+argument_list|)
+operator|.
+name|addRuleInstance
+argument_list|(
+name|ReduceExpressionsRule
+operator|.
+name|WINDOW_INSTANCE
+argument_list|)
+operator|.
+name|build
+argument_list|()
+decl_stmt|;
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select col1, col2, col3\n"
+operator|+
+literal|"from (\n"
+operator|+
+literal|"  select empno,\n"
+operator|+
+literal|"    sum(100) over (partition by deptno, sal order by sal) as col1,\n"
+operator|+
+literal|"    sum(100) over (partition by sal order by deptno) as col2,\n"
+operator|+
+literal|"    sum(sal) over (partition by deptno order by sal) as col3\n"
+operator|+
+literal|"  from emp where sal = 5000)"
+decl_stmt|;
+name|checkPlanning
+argument_list|(
+name|program
+argument_list|,
+name|sql
+argument_list|)
+expr_stmt|;
+block|}
+end_function
+
+begin_function
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testEmptyFilterProjectUnion
 parameter_list|()
 throws|throws

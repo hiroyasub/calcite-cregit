@@ -2312,6 +2312,10 @@ name|CALC_INSTANCE
 argument_list|,
 name|ReduceExpressionsRule
 operator|.
+name|WINDOW_INSTANCE
+argument_list|,
+name|ReduceExpressionsRule
+operator|.
 name|JOIN_INSTANCE
 argument_list|,
 name|ValuesReduceRule
