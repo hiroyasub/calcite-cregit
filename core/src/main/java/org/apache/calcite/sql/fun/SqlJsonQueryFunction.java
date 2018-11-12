@@ -351,6 +351,7 @@ argument_list|,
 literal|0
 argument_list|)
 expr_stmt|;
+specifier|final
 name|SqlJsonQueryWrapperBehavior
 name|wrapperBehavior
 init|=

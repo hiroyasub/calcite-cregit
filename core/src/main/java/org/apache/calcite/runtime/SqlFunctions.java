@@ -13484,6 +13484,7 @@ name|Object
 name|defaultValueOnError
 parameter_list|)
 block|{
+specifier|final
 name|PathContext
 name|context
 init|=
@@ -13492,6 +13493,7 @@ name|PathContext
 operator|)
 name|input
 decl_stmt|;
+specifier|final
 name|Exception
 name|exc
 decl_stmt|;
@@ -13688,6 +13690,7 @@ name|SqlJsonQueryEmptyOrErrorBehavior
 name|errorBehavior
 parameter_list|)
 block|{
+specifier|final
 name|PathContext
 name|context
 init|=
@@ -13696,6 +13699,7 @@ name|PathContext
 operator|)
 name|input
 decl_stmt|;
+specifier|final
 name|Exception
 name|exc
 decl_stmt|;
@@ -14851,7 +14855,7 @@ literal|'}'
 return|;
 block|}
 block|}
-comment|/**    * Path spec has two different modes: lax mode and strict mode. Lax mode suppress any thrown    * exception and return null; where strict mode throws exceptions.    */
+comment|/**    * Path spec has two different modes: lax mode and strict mode.    * Lax mode suppresses any thrown exception and returns null,    * whereas strict mode throws exceptions.    */
 specifier|public
 enum|enum
 name|PathMode

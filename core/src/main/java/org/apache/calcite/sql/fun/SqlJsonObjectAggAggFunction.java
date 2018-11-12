@@ -204,11 +204,6 @@ name|SqlAggFunction
 block|{
 specifier|private
 specifier|final
-name|String
-name|name
-decl_stmt|;
-specifier|private
-specifier|final
 name|SqlJsonConstructorNullClause
 name|nullClause
 decl_stmt|;
@@ -263,12 +258,6 @@ name|Optionality
 operator|.
 name|FORBIDDEN
 argument_list|)
-expr_stmt|;
-name|this
-operator|.
-name|name
-operator|=
-name|name
 expr_stmt|;
 name|this
 operator|.

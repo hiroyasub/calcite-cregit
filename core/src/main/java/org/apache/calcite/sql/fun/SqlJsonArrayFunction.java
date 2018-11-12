@@ -401,6 +401,7 @@ name|operandsCount
 operator|>=
 literal|1
 assert|;
+specifier|final
 name|StringBuilder
 name|sb
 init|=

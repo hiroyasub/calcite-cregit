@@ -723,7 +723,7 @@ name|type1
 return|;
 block|}
 decl_stmt|;
-comment|/**    * Type-inference strategy whereby the result type of a call is a nullable Boolean.    */
+comment|/**    * Type-inference strategy whereby the result type of a call is a nullable    * Boolean.    */
 specifier|public
 specifier|static
 specifier|final

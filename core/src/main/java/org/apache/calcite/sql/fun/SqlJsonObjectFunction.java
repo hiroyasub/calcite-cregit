@@ -388,6 +388,7 @@ name|boolean
 name|throwOnFailure
 parameter_list|)
 block|{
+specifier|final
 name|int
 name|count
 init|=

@@ -185,18 +185,6 @@ begin_import
 import|import
 name|org
 operator|.
-name|jetbrains
-operator|.
-name|annotations
-operator|.
-name|NotNull
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
 name|junit
 operator|.
 name|Test
@@ -298,6 +286,16 @@ import|;
 end_import
 
 begin_import
+import|import
+name|javax
+operator|.
+name|annotation
+operator|.
+name|Nonnull
+import|;
+end_import
+
+begin_import
 import|import static
 name|org
 operator|.
@@ -346,7 +344,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * `  * Unit test for the methods in {@link SqlFunctions} that implement JSON processing functions.  */
+comment|/**  * Unit test for the methods in {@link SqlFunctions} that implement JSON processing functions.  */
 end_comment
 
 begin_class
@@ -1167,7 +1165,9 @@ argument_list|(
 operator|new
 name|CalciteException
 argument_list|(
-literal|"Empty result of JSON_VALUE function is not allowed"
+literal|"Empty result of JSON_VALUE function is not "
+operator|+
+literal|"allowed"
 argument_list|,
 literal|null
 argument_list|)
@@ -1285,7 +1285,9 @@ argument_list|(
 operator|new
 name|CalciteException
 argument_list|(
-literal|"Empty result of JSON_VALUE function is not allowed"
+literal|"Empty result of JSON_VALUE function is not "
+operator|+
+literal|"allowed"
 argument_list|,
 literal|null
 argument_list|)
@@ -1504,7 +1506,9 @@ argument_list|(
 operator|new
 name|CalciteException
 argument_list|(
-literal|"Strict jsonpath mode requires scalar value, and the actual value is: '[]'"
+literal|"Strict jsonpath mode requires scalar value, "
+operator|+
+literal|"and the actual value is: '[]'"
 argument_list|,
 literal|null
 argument_list|)
@@ -1696,7 +1700,9 @@ argument_list|(
 operator|new
 name|CalciteException
 argument_list|(
-literal|"Empty result of JSON_QUERY function is not allowed"
+literal|"Empty result of JSON_QUERY function is not "
+operator|+
+literal|"allowed"
 argument_list|,
 literal|null
 argument_list|)
@@ -1840,7 +1846,9 @@ argument_list|(
 operator|new
 name|CalciteException
 argument_list|(
-literal|"Empty result of JSON_QUERY function is not allowed"
+literal|"Empty result of JSON_QUERY function is not "
+operator|+
+literal|"allowed"
 argument_list|,
 literal|null
 argument_list|)
@@ -2052,9 +2060,9 @@ argument_list|(
 operator|new
 name|CalciteException
 argument_list|(
-literal|"Strict jsonpath mode requires array or object value, "
+literal|"Strict jsonpath mode requires array or "
 operator|+
-literal|"and the actual value is: 'bar'"
+literal|"object value, and the actual value is: 'bar'"
 argument_list|,
 literal|null
 argument_list|)
@@ -2268,6 +2276,18 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 comment|// expect exception thrown
+specifier|final
+name|String
+name|message
+init|=
+literal|"com.fasterxml.jackson.core.JsonParseException: "
+operator|+
+literal|"Unexpected close marker '}': expected ']' (for Array starting at "
+operator|+
+literal|"[Source: (String)\"[}\"; line: 1, column: 1])\n at [Source: "
+operator|+
+literal|"(String)\"[}\"; line: 1, column: 3]"
+decl_stmt|;
 name|assertDejsonizeFailed
 argument_list|(
 literal|"[}"
@@ -2277,13 +2297,7 @@ argument_list|(
 operator|new
 name|InvalidJsonException
 argument_list|(
-literal|"com.fasterxml.jackson.core.JsonParseException: "
-operator|+
-literal|"Unexpected close marker '}': expected ']' "
-operator|+
-literal|"(for Array starting at [Source: (String)\"[}\"; line: 1, column: 1])\n"
-operator|+
-literal|" at [Source: (String)\"[}\"; line: 1, column: 3]"
+name|message
 argument_list|)
 argument_list|)
 argument_list|)
@@ -3907,7 +3921,7 @@ block|}
 return|;
 block|}
 annotation|@
-name|NotNull
+name|Nonnull
 specifier|private
 name|BaseMatcher
 argument_list|<

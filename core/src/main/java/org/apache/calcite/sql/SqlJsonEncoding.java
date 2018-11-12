@@ -16,7 +16,7 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * SqlJsonEncoding lists the supported json encodings that could be passed to JsonValueExpression.  */
+comment|/**  * Supported json encodings that could be passed to a  * {@code JsonValueExpression}.  */
 end_comment
 
 begin_enum

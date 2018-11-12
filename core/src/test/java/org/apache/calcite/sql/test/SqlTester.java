@@ -460,7 +460,7 @@ name|double
 name|delta
 parameter_list|)
 function_decl|;
-comment|/**    * Checks that an aggregate expression with multiple args returns the expected result.    *    * @param expr        Aggregate expression, e.g.<code>AGG_FUNC(x, x2, x3)</code>    * @param inputValues Nested array of input values, e.g.<code>[    *                    ["1", null, "2"]    *                    ["3", "4", null]    *                    ]</code>.    * @param result      Expected result    * @param delta       Allowable variance from expected result    */
+comment|/**    * Checks that an aggregate expression with multiple args returns the expected    * result.    *    * @param expr        Aggregate expression, e.g.<code>AGG_FUNC(x, x2, x3)</code>    * @param inputValues Nested array of input values, e.g.<code>[    *                    ["1", null, "2"]    *                    ["3", "4", null]    *                    ]</code>.    * @param result      Expected result    * @param delta       Allowable variance from expected result    */
 name|void
 name|checkAggWithMultipleArgs
 parameter_list|(
