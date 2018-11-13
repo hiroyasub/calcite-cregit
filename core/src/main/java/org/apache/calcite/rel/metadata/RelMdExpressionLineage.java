@@ -537,6 +537,16 @@ name|Collectors
 import|;
 end_import
 
+begin_import
+import|import
+name|javax
+operator|.
+name|annotation
+operator|.
+name|Nullable
+import|;
+end_import
+
 begin_comment
 comment|/**  * Default implementation of  * {@link RelMetadataQuery#getExpressionLineage} for the standard logical  * algebra.  *  *<p>The goal of this provider is to infer the lineage for the given expression.  *  *<p>The output expressions might contain references to columns produced by  * {@link TableScan} operators ({@link RexTableInputRef}). In turn, each  * TableScan operator is identified uniquely by a {@link RelTableRef} containing  * its qualified name and an identifier.  *  *<p>If the lineage cannot be inferred, we return null.  */
 end_comment
@@ -2260,6 +2270,8 @@ argument_list|)
 return|;
 block|}
 comment|/**    * Given an expression, it will create all equivalent expressions resulting    * from replacing all possible combinations of references in the mapping by    * the corresponding expressions.    *    * @param rexBuilder rexBuilder    * @param expr expression    * @param mapping mapping    * @return set of resulting expressions equivalent to the input expression    */
+annotation|@
+name|Nullable
 specifier|protected
 specifier|static
 name|Set
@@ -2314,6 +2326,8 @@ name|expr
 argument_list|)
 return|;
 block|}
+try|try
+block|{
 return|return
 name|createAllPossibleExpressions
 argument_list|(
@@ -2331,6 +2345,18 @@ argument_list|<>
 argument_list|()
 argument_list|)
 return|;
+block|}
+catch|catch
+parameter_list|(
+name|UnsupportedOperationException
+name|e
+parameter_list|)
+block|{
+comment|// There may be a RexNode unsupported by RexCopier, just return null
+return|return
+literal|null
+return|;
+block|}
 block|}
 specifier|private
 specifier|static
