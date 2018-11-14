@@ -54,7 +54,7 @@ name|format
 argument_list|(
 name|Locale
 operator|.
-name|ENGLISH
+name|ROOT
 argument_list|,
 literal|"SqlJsonValueEmptyOrErrorBehavior[%s]"
 argument_list|,

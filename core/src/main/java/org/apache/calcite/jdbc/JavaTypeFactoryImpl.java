@@ -1419,6 +1419,14 @@ operator|.
 name|class
 return|;
 case|case
+name|SYMBOL
+case|:
+return|return
+name|Enum
+operator|.
+name|class
+return|;
+case|case
 name|ANY
 case|:
 return|return

@@ -1024,7 +1024,7 @@ name|StringBuilder
 argument_list|(
 name|aggFunction
 operator|.
-name|getName
+name|toString
 argument_list|()
 argument_list|)
 decl_stmt|;

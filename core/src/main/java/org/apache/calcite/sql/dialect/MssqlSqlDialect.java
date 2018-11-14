@@ -972,6 +972,7 @@ name|int
 name|sign
 parameter_list|)
 block|{
+specifier|final
 name|SqlIntervalLiteral
 operator|.
 name|IntervalValue

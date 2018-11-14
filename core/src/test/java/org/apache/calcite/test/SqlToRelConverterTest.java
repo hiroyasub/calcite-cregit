@@ -10498,6 +10498,218 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testJsonExists
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select json_exists(ename, 'lax $')\n"
+operator|+
+literal|"from emp"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testJsonValue
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select json_value(ename, 'lax $')\n"
+operator|+
+literal|"from emp"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testJsonQuery
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select json_query(ename, 'lax $')\n"
+operator|+
+literal|"from emp"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testJsonArray
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select json_array(ename, ename)\n"
+operator|+
+literal|"from emp"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testJsonArrayAgg
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select json_arrayagg(ename)\n"
+operator|+
+literal|"from emp"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testJsonObject
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select json_object(ename: deptno, ename: deptno)\n"
+operator|+
+literal|"from emp"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testJsonObjectAgg
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select json_objectagg(ename: deptno)\n"
+operator|+
+literal|"from emp"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testJsonPredicate
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select\n"
+operator|+
+literal|"ename is json,\n"
+operator|+
+literal|"ename is json value,\n"
+operator|+
+literal|"ename is json object,\n"
+operator|+
+literal|"ename is json array,\n"
+operator|+
+literal|"ename is json scalar,\n"
+operator|+
+literal|"ename is not json,\n"
+operator|+
+literal|"ename is not json value,\n"
+operator|+
+literal|"ename is not json object,\n"
+operator|+
+literal|"ename is not json array,\n"
+operator|+
+literal|"ename is not json scalar\n"
+operator|+
+literal|"from emp"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testWithinGroup1
 parameter_list|()
 block|{

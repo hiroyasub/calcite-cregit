@@ -25,8 +25,33 @@ enum|enum
 name|SqlJsonConstructorNullClause
 block|{
 name|NULL_ON_NULL
+argument_list|(
+literal|"NULL ON NULL"
+argument_list|)
 block|,
 name|ABSENT_ON_NULL
+argument_list|(
+literal|"ABSENT ON NULL"
+argument_list|)
+block|;
+specifier|public
+specifier|final
+name|String
+name|sql
+decl_stmt|;
+name|SqlJsonConstructorNullClause
+parameter_list|(
+name|String
+name|sql
+parameter_list|)
+block|{
+name|this
+operator|.
+name|sql
+operator|=
+name|sql
+expr_stmt|;
+block|}
 block|}
 end_enum
 
