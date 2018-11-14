@@ -561,6 +561,20 @@ name|calcite
 operator|.
 name|sql
 operator|.
+name|SqlWithinDistinctOperator
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
 name|SqlWithinGroupOperator
 import|;
 end_import
@@ -1186,6 +1200,17 @@ name|WITHIN_GROUP
 init|=
 operator|new
 name|SqlWithinGroupOperator
+argument_list|()
+decl_stmt|;
+comment|/**<code>WITHIN_DISTINCT</code> operator performs aggregations on distinct    * data input. */
+specifier|public
+specifier|static
+specifier|final
+name|SqlWithinDistinctOperator
+name|WITHIN_DISTINCT
+init|=
+operator|new
+name|SqlWithinDistinctOperator
 argument_list|()
 decl_stmt|;
 comment|/** {@code CUBE} operator, occurs within {@code GROUP BY} clause    * or nested within a {@code GROUPING SETS}. */

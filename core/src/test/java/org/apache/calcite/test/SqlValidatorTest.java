@@ -36653,6 +36653,8 @@ literal|"PATTERN_EXCLUDE -\n"
 operator|+
 literal|"PATTERN_PERMUTE -\n"
 operator|+
+literal|"WITHIN DISTINCT left\n"
+operator|+
 literal|"WITHIN GROUP left\n"
 operator|+
 literal|"\n"

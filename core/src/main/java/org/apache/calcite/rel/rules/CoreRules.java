@@ -662,6 +662,22 @@ operator|.
 name|toRule
 argument_list|()
 decl_stmt|;
+comment|/** Rule that rewrites a {@link LogicalAggregate} that contains    * {@code WITHIN DISTINCT} aggregate functions to one that does not. */
+specifier|public
+specifier|static
+specifier|final
+name|AggregateExpandWithinDistinctRule
+name|AGGREGATE_EXPAND_WITHIN_DISTINCT
+init|=
+name|AggregateExpandWithinDistinctRule
+operator|.
+name|Config
+operator|.
+name|DEFAULT
+operator|.
+name|toRule
+argument_list|()
+decl_stmt|;
 comment|/** Rule that matches an {@link Aggregate}    * on a {@link Filter} and transposes them,    * pushing the aggregate below the filter. */
 specifier|public
 specifier|static

@@ -1158,6 +1158,10 @@ name|filterArg
 argument_list|,
 name|sum
 operator|.
+name|distinctKeys
+argument_list|,
+name|sum
+operator|.
 name|collation
 argument_list|,
 name|typeFactory

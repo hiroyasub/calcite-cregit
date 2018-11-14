@@ -719,6 +719,8 @@ name|count
 operator|.
 name|filterArg
 argument_list|,
+literal|null
+argument_list|,
 name|count
 operator|.
 name|collation

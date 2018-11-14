@@ -2194,6 +2194,8 @@ literal|1
 else|:
 name|filterOperand
 argument_list|,
+literal|null
+argument_list|,
 name|RelCollations
 operator|.
 name|EMPTY

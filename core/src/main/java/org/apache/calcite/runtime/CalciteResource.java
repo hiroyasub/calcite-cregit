@@ -1725,7 +1725,19 @@ function_decl|;
 annotation|@
 name|BaseMessage
 argument_list|(
-literal|"Aggregate expression ''{0}'' must contain a within group clause"
+literal|"WITHIN DISTINCT must not contain aggregate expression"
+argument_list|)
+name|ExInst
+argument_list|<
+name|SqlValidatorException
+argument_list|>
+name|aggregateInWithinDistinctIllegal
+parameter_list|()
+function_decl|;
+annotation|@
+name|BaseMessage
+argument_list|(
+literal|"Aggregate expression ''{0}'' must contain a WITHIN GROUP clause"
 argument_list|)
 name|ExInst
 argument_list|<
@@ -1740,7 +1752,7 @@ function_decl|;
 annotation|@
 name|BaseMessage
 argument_list|(
-literal|"Aggregate expression ''{0}'' must not contain a within group clause"
+literal|"Aggregate expression ''{0}'' must not contain a WITHIN GROUP clause"
 argument_list|)
 name|ExInst
 argument_list|<
@@ -2224,6 +2236,21 @@ argument_list|<
 name|SqlValidatorException
 argument_list|>
 name|withinGroupNotAllowed
+parameter_list|(
+name|String
+name|a0
+parameter_list|)
+function_decl|;
+annotation|@
+name|BaseMessage
+argument_list|(
+literal|"WITHIN DISTINCT not allowed with {0} function"
+argument_list|)
+name|ExInst
+argument_list|<
+name|SqlValidatorException
+argument_list|>
+name|withinDistinctNotAllowed
 parameter_list|(
 name|String
 name|a0

@@ -340,6 +340,10 @@ name|AGGREGATE_EXPAND_DISTINCT_AGGREGATES
 argument_list|,
 name|CoreRules
 operator|.
+name|AGGREGATE_EXPAND_WITHIN_DISTINCT
+argument_list|,
+name|CoreRules
+operator|.
 name|AGGREGATE_CASE_TO_FILTER
 argument_list|,
 name|CoreRules

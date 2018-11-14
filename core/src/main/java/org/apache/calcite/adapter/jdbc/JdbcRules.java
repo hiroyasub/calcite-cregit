@@ -713,20 +713,6 @@ name|calcite
 operator|.
 name|sql
 operator|.
-name|SqlAggFunction
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|sql
-operator|.
 name|SqlDialect
 import|;
 end_import
@@ -3976,8 +3962,8 @@ specifier|static
 name|boolean
 name|canImplement
 parameter_list|(
-name|SqlAggFunction
-name|aggregation
+name|AggregateCall
+name|aggregateCall
 parameter_list|,
 name|SqlDialect
 name|sqlDialect
@@ -3988,11 +3974,20 @@ name|sqlDialect
 operator|.
 name|supportsAggregateFunction
 argument_list|(
-name|aggregation
+name|aggregateCall
+operator|.
+name|getAggregation
+argument_list|()
 operator|.
 name|getKind
 argument_list|()
 argument_list|)
+operator|&&
+name|aggregateCall
+operator|.
+name|distinctKeys
+operator|==
+literal|null
 return|;
 block|}
 comment|/** Aggregate operator implemented in JDBC convention. */
@@ -4103,9 +4098,6 @@ operator|!
 name|canImplement
 argument_list|(
 name|aggCall
-operator|.
-name|getAggregation
-argument_list|()
 argument_list|,
 name|dialect
 argument_list|)
@@ -4118,9 +4110,6 @@ argument_list|(
 literal|"cannot implement aggregate function "
 operator|+
 name|aggCall
-operator|.
-name|getAggregation
-argument_list|()
 argument_list|)
 throw|;
 block|}

@@ -10776,6 +10776,10 @@ literal|1
 argument_list|,
 name|aggregateCall
 operator|.
+name|distinctKeys
+argument_list|,
+name|aggregateCall
+operator|.
 name|collation
 argument_list|,
 name|aggregateCall
@@ -10883,6 +10887,10 @@ argument_list|)
 argument_list|,
 operator|-
 literal|1
+argument_list|,
+name|aggregateCall
+operator|.
+name|distinctKeys
 argument_list|,
 name|aggregateCall
 operator|.

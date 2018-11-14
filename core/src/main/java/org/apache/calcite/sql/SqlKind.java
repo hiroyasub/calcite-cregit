@@ -197,6 +197,9 @@ block|,
 comment|/** {@code WITHIN GROUP} operator. */
 name|WITHIN_GROUP
 block|,
+comment|/** {@code WITHIN DISTINCT} operator. */
+name|WITHIN_DISTINCT
+block|,
 comment|/** Window specification. */
 name|WINDOW
 block|,

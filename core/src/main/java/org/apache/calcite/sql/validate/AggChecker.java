@@ -732,6 +732,9 @@ case|:
 case|case
 name|IGNORE_NULLS
 case|:
+case|case
+name|WITHIN_DISTINCT
+case|:
 name|call
 operator|.
 name|operand

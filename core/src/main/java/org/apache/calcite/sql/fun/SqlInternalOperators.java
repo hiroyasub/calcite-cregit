@@ -443,6 +443,23 @@ expr_stmt|;
 block|}
 block|}
 decl_stmt|;
+comment|/** "$THROW_UNLESS(condition, message)" throws an error with the given message    * if condition is not TRUE, otherwise returns TRUE. */
+specifier|public
+specifier|static
+specifier|final
+name|SqlInternalOperator
+name|THROW_UNLESS
+init|=
+operator|new
+name|SqlInternalOperator
+argument_list|(
+literal|"$THROW_UNLESS"
+argument_list|,
+name|SqlKind
+operator|.
+name|OTHER
+argument_list|)
+decl_stmt|;
 comment|/** An IN operator for Druid.    *    *<p>Unlike the regular    * {@link SqlStdOperatorTable#IN} operator it may    * be used in {@link RexCall}. It does not require that    * its operands have consistent types. */
 specifier|public
 specifier|static

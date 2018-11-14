@@ -1128,6 +1128,10 @@ literal|1
 argument_list|,
 name|origCall
 operator|.
+name|distinctKeys
+argument_list|,
+name|origCall
+operator|.
 name|collation
 argument_list|,
 name|groupCount

@@ -138,27 +138,27 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * An operator that applies a sort operation before rows are included in an aggregate function.  *  *<p>Operands are as follows:</p>  *  *<ul>  *<li>0: a call to an aggregate function ({@link SqlCall})  *<li>1: order operation list  *</ul>  */
+comment|/**  * An operator that applies a distinct operation before rows are included in an  * aggregate function.  *  *<p>Operands are as follows:  *  *<ul>  *<li>0: a call to an aggregate function ({@link SqlCall})  *<li>1: expressions to make distinct  *</ul>  */
 end_comment
 
 begin_class
 specifier|public
 class|class
-name|SqlWithinGroupOperator
+name|SqlWithinDistinctOperator
 extends|extends
 name|SqlBinaryOperator
 block|{
 specifier|public
-name|SqlWithinGroupOperator
+name|SqlWithinDistinctOperator
 parameter_list|()
 block|{
 name|super
 argument_list|(
-literal|"WITHIN GROUP"
+literal|"WITHIN DISTINCT"
 argument_list|,
 name|SqlKind
 operator|.
-name|WITHIN_GROUP
+name|WITHIN_DISTINCT
 argument_list|,
 literal|100
 argument_list|,
@@ -223,7 +223,7 @@ name|writer
 operator|.
 name|keyword
 argument_list|(
-literal|"WITHIN GROUP"
+literal|"WITHIN DISTINCT"
 argument_list|)
 expr_stmt|;
 specifier|final
@@ -240,20 +240,13 @@ name|SqlWriter
 operator|.
 name|FrameTypeEnum
 operator|.
-name|ORDER_BY_LIST
+name|GROUP_BY_LIST
 argument_list|,
 literal|"("
 argument_list|,
 literal|")"
 argument_list|)
 decl_stmt|;
-name|writer
-operator|.
-name|keyword
-argument_list|(
-literal|"ORDER BY"
-argument_list|)
-expr_stmt|;
 name|call
 operator|.
 name|operand
@@ -349,7 +342,7 @@ name|call
 argument_list|,
 name|RESOURCE
 operator|.
-name|withinGroupNotAllowed
+name|withinDistinctNotAllowed
 argument_list|(
 name|flat
 operator|.
@@ -375,7 +368,7 @@ name|requireNonNull
 argument_list|(
 name|flat
 operator|.
-name|orderList
+name|distinctList
 argument_list|)
 control|)
 block|{

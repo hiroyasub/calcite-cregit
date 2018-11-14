@@ -764,7 +764,7 @@ name|SqlValidatorScope
 name|scope
 parameter_list|)
 function_decl|;
-comment|/**    * Validates parameters for aggregate function.    *    * @param aggCall     Call to aggregate function    * @param filter      Filter ({@code FILTER (WHERE)} clause), or null    * @param orderList   Ordering specification ({@code WITHING GROUP} clause),    *                    or null    * @param scope       Syntactic scope    */
+comment|/**    * Validates parameters for aggregate function.    *    * @param aggCall      Call to aggregate function    * @param filter       Filter ({@code FILTER (WHERE)} clause), or null    * @param distinctList Distinct specification ({@code WITHIN DISTINCT}    *                     clause), or null    * @param orderList    Ordering specification ({@code WITHIN GROUP} clause),    *                     or null    * @param scope        Syntactic scope    */
 name|void
 name|validateAggregateParams
 parameter_list|(
@@ -775,6 +775,11 @@ annotation|@
 name|Nullable
 name|SqlNode
 name|filter
+parameter_list|,
+annotation|@
+name|Nullable
+name|SqlNodeList
+name|distinctList
 parameter_list|,
 annotation|@
 name|Nullable

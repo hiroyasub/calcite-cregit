@@ -36496,6 +36496,98 @@ block|}
 annotation|@
 name|Test
 name|void
+name|testWithinDistinct
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select col1,\n"
+operator|+
+literal|" sum(col2) within distinct (col3 + col4, col5)\n"
+operator|+
+literal|"from t\n"
+operator|+
+literal|"order by col1 limit 10"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT `COL1`,"
+operator|+
+literal|" (SUM(`COL2`) WITHIN DISTINCT ((`COL3` + `COL4`), `COL5`))\n"
+operator|+
+literal|"FROM `T`\n"
+operator|+
+literal|"ORDER BY `COL1`\n"
+operator|+
+literal|"FETCH NEXT 10 ROWS ONLY"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testWithinDistinct2
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select col1,\n"
+operator|+
+literal|" sum(col2) within distinct (col3 + col4, col5)\n"
+operator|+
+literal|"   within group (order by col6 desc)\n"
+operator|+
+literal|"   filter (where col7< col8) as sum2\n"
+operator|+
+literal|"from t\n"
+operator|+
+literal|"group by col9"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT `COL1`,"
+operator|+
+literal|" (SUM(`COL2`) WITHIN DISTINCT ((`COL3` + `COL4`), `COL5`))"
+operator|+
+literal|" WITHIN GROUP (ORDER BY `COL6` DESC)"
+operator|+
+literal|" FILTER (WHERE (`COL7`< `COL8`)) AS `SUM2`\n"
+operator|+
+literal|"FROM `T`\n"
+operator|+
+literal|"GROUP BY `COL9`"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
 name|testJsonValueExpressionOperator
 parameter_list|()
 block|{

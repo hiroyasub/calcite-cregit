@@ -4361,6 +4361,23 @@ literal|"distinct aggregation not supported"
 argument_list|)
 throw|;
 block|}
+if|if
+condition|(
+name|aggCall
+operator|.
+name|distinctKeys
+operator|!=
+literal|null
+condition|)
+block|{
+throw|throw
+operator|new
+name|InvalidRelException
+argument_list|(
+literal|"within-distinct aggregation not supported"
+argument_list|)
+throw|;
+block|}
 name|AggImplementor
 name|implementor2
 init|=
