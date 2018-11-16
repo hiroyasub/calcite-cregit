@@ -250,6 +250,8 @@ operator|)
 name|getInput
 argument_list|()
 decl_stmt|;
+comment|// REVIEW zabetak January 7, 2019: Even if we ask the implementor to provide a result
+comment|// where records are represented as arrays (Prefer.ARRAY) this may not be respected.
 specifier|final
 name|Result
 name|result
@@ -290,8 +292,9 @@ operator|.
 name|LIST
 argument_list|)
 decl_stmt|;
-comment|// final Enumerable<Employee> child =<<child adapter>>;
-comment|// final List<Employee> list = child.toList();
+comment|// final Enumerable child =<<child adapter>>;
+comment|// final Enumerable<Object[]> converted = child.select(<<conversion code>>);
+comment|// final List<Object[]> list = converted.toList();
 name|Expression
 name|child_
 init|=
@@ -304,6 +307,35 @@ argument_list|,
 name|result
 operator|.
 name|block
+argument_list|)
+decl_stmt|;
+comment|// In the internal representation of multisets , every element must be a record. In case the
+comment|// result above is a scalar type we have to wrap it around a physical type capable of
+comment|// representing records. For this reason the following conversion is necessary.
+comment|// REVIEW zabetak January 7, 2019: If we can ensure that the input to this operator
+comment|// has the correct physical type (e.g., respecting the Prefer.ARRAY above) then this conversion
+comment|// can be removed.
+name|Expression
+name|conv_
+init|=
+name|builder
+operator|.
+name|append
+argument_list|(
+literal|"converted"
+argument_list|,
+name|result
+operator|.
+name|physType
+operator|.
+name|convertTo
+argument_list|(
+name|child_
+argument_list|,
+name|JavaRowFormat
+operator|.
+name|ARRAY
+argument_list|)
 argument_list|)
 decl_stmt|;
 name|Expression
@@ -319,7 +351,7 @@ name|Expressions
 operator|.
 name|call
 argument_list|(
-name|child_
+name|conv_
 argument_list|,
 name|BuiltInMethod
 operator|.

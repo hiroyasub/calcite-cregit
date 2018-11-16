@@ -603,6 +603,14 @@ name|Bug
 operator|.
 name|CALCITE_1048_FIXED
 return|;
+case|case
+literal|"calcite2776"
+case|:
+return|return
+name|Bug
+operator|.
+name|CALCITE_2776_FIXED
+return|;
 block|}
 return|return
 literal|null

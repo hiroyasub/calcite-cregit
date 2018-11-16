@@ -2319,6 +2319,9 @@ argument_list|(
 name|childExp
 argument_list|,
 name|physType
+operator|.
+name|getFormat
+argument_list|()
 argument_list|)
 argument_list|,
 name|BuiltInMethod
