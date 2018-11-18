@@ -1884,13 +1884,113 @@ name|void
 name|groupBy
 parameter_list|()
 block|{
+comment|// distinct
+name|calciteAssert
+argument_list|()
+operator|.
+name|query
+argument_list|(
+literal|"select distinct state\n"
+operator|+
+literal|"from zips\n"
+operator|+
+literal|"limit 6"
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|ElasticsearchChecker
+operator|.
+name|elasticsearchChecker
+argument_list|(
+literal|"_source:false"
+argument_list|,
+literal|"size:0"
+argument_list|,
+literal|"aggregations:{'g_state':{'terms':{'field':'state','missing':'__MISSING__', 'size' : 6}}}"
+argument_list|)
+argument_list|)
+operator|.
+name|returnsOrdered
+argument_list|(
+literal|"state=AK"
+argument_list|,
+literal|"state=AL"
+argument_list|,
+literal|"state=AR"
+argument_list|,
+literal|"state=AZ"
+argument_list|,
+literal|"state=CA"
+argument_list|,
+literal|"state=CO"
+argument_list|)
+expr_stmt|;
+comment|// without aggregate function
+name|calciteAssert
+argument_list|()
+operator|.
+name|query
+argument_list|(
+literal|"select state, city\n"
+operator|+
+literal|"from zips\n"
+operator|+
+literal|"group by state, city\n"
+operator|+
+literal|"order by city limit 10"
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|ElasticsearchChecker
+operator|.
+name|elasticsearchChecker
+argument_list|(
+literal|"'_source':false"
+argument_list|,
+literal|"size:0"
+argument_list|,
+literal|"aggregations:{'g_city':{'terms':{'field':'city','missing':'__MISSING__','size':10,'order':{'_key':'asc'}}"
+argument_list|,
+literal|"aggregations:{'g_state':{'terms':{'field':'state','missing':'__MISSING__','size':10}}}}}}"
+argument_list|)
+argument_list|)
+operator|.
+name|returnsOrdered
+argument_list|(
+literal|"state=SD; city=ABERDEEN"
+argument_list|,
+literal|"state=SC; city=AIKEN"
+argument_list|,
+literal|"state=TX; city=ALTON"
+argument_list|,
+literal|"state=IA; city=AMES"
+argument_list|,
+literal|"state=AK; city=ANCHORAGE"
+argument_list|,
+literal|"state=MD; city=BALTIMORE"
+argument_list|,
+literal|"state=ME; city=BANGOR"
+argument_list|,
+literal|"state=KS; city=BAVARIA"
+argument_list|,
+literal|"state=NJ; city=BAYONNE"
+argument_list|,
+literal|"state=OR; city=BEAVERTON"
+argument_list|)
+expr_stmt|;
 comment|// ascending
 name|calciteAssert
 argument_list|()
 operator|.
 name|query
 argument_list|(
-literal|"select min(pop), max(pop), state from zips group by state "
+literal|"select min(pop), max(pop), state\n"
+operator|+
+literal|"from zips\n"
+operator|+
+literal|"group by state\n"
 operator|+
 literal|"order by state limit 3"
 argument_list|)
@@ -1928,9 +2028,13 @@ argument_list|()
 operator|.
 name|query
 argument_list|(
-literal|"select min(pop), state from zips group by state"
+literal|"select min(pop), state\n"
 operator|+
-literal|" order by state limit 3"
+literal|"from zips\n"
+operator|+
+literal|"group by state\n"
+operator|+
+literal|"order by state limit 3"
 argument_list|)
 operator|.
 name|queryContains
@@ -1966,7 +2070,11 @@ argument_list|()
 operator|.
 name|query
 argument_list|(
-literal|"select count(city), state from zips group by state "
+literal|"select count(city), state\n"
+operator|+
+literal|"from zips\n"
+operator|+
+literal|"group by state\n"
 operator|+
 literal|"order by state limit 3"
 argument_list|)
@@ -2004,9 +2112,13 @@ argument_list|()
 operator|.
 name|query
 argument_list|(
-literal|"select min(pop), max(pop), state from zips group by state "
+literal|"select min(pop), max(pop), state\n"
 operator|+
-literal|" order by state desc limit 3"
+literal|"from zips\n"
+operator|+
+literal|"group by state\n"
+operator|+
+literal|"order by state desc limit 3"
 argument_list|)
 operator|.
 name|queryContains

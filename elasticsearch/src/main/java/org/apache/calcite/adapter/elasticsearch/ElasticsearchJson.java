@@ -183,6 +183,20 @@ end_import
 
 begin_import
 import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|collect
+operator|.
+name|ImmutableSet
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|io
@@ -227,16 +241,6 @@ name|java
 operator|.
 name|util
 operator|.
-name|Arrays
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
 name|Collections
 import|;
 end_import
@@ -248,16 +252,6 @@ operator|.
 name|util
 operator|.
 name|Deque
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|HashSet
 import|;
 end_import
 
@@ -520,6 +514,75 @@ name|v
 parameter_list|)
 lambda|->
 block|{
+if|if
+condition|(
+name|v
+operator|.
+name|stream
+argument_list|()
+operator|.
+name|anyMatch
+argument_list|(
+name|val
+lambda|->
+name|val
+operator|instanceof
+name|GroupValue
+argument_list|)
+condition|)
+block|{
+name|v
+operator|.
+name|forEach
+argument_list|(
+name|tuple
+lambda|->
+block|{
+name|Map
+argument_list|<
+name|String
+argument_list|,
+name|Object
+argument_list|>
+name|groupRow
+operator|=
+operator|new
+name|LinkedHashMap
+argument_list|<>
+argument_list|(
+name|k
+operator|.
+name|keys
+argument_list|)
+argument_list|;
+name|groupRow
+operator|.
+name|put
+argument_list|(
+name|tuple
+operator|.
+name|getName
+argument_list|()
+argument_list|,
+name|tuple
+operator|.
+name|value
+argument_list|()
+argument_list|)
+empty_stmt|;
+name|consumer
+operator|.
+name|accept
+argument_list|(
+name|groupRow
+argument_list|)
+expr_stmt|;
+block|}
+argument_list|)
+expr_stmt|;
+block|}
+else|else
+block|{
 name|Map
 argument_list|<
 name|String
@@ -567,11 +630,21 @@ name|row
 argument_list|)
 expr_stmt|;
 block|}
-argument_list|)
-expr_stmt|;
 block|}
+end_class
+
+begin_empty_stmt
+unit|)
+empty_stmt|;
+end_empty_stmt
+
+begin_comment
+unit|}
 comment|/**    * Visits Elasticsearch    *<a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping.html">mapping    * properties</a> and calls consumer for each {@code field / type} pair.    * Nested fields are represented as {@code foo.bar.qux}.    */
-specifier|static
+end_comment
+
+begin_function
+unit|static
 name|void
 name|visitMappingProperties
 parameter_list|(
@@ -618,6 +691,9 @@ name|consumer
 argument_list|)
 expr_stmt|;
 block|}
+end_function
+
+begin_function
 specifier|private
 specifier|static
 name|void
@@ -804,7 +880,13 @@ argument_list|()
 expr_stmt|;
 block|}
 block|}
+end_function
+
+begin_comment
 comment|/**    * Identifies a calcite row (as in relational algebra)    */
+end_comment
+
+begin_class
 specifier|private
 specifier|static
 class|class
@@ -1028,6 +1110,9 @@ name|hashCode
 return|;
 block|}
 block|}
+end_class
+
+begin_function
 specifier|private
 specifier|static
 name|void
@@ -1108,7 +1193,7 @@ block|{
 comment|// bucket with no aggregations is also considered a leaf node
 name|visitValueNodes
 argument_list|(
-name|MultiValue
+name|GroupValue
 operator|.
 name|of
 argument_list|(
@@ -1240,7 +1325,13 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+end_function
+
+begin_comment
 comment|/**    * Response from Elastic    */
+end_comment
+
+begin_class
 annotation|@
 name|JsonIgnoreProperties
 argument_list|(
@@ -1388,7 +1479,13 @@ argument_list|)
 return|;
 block|}
 block|}
+end_class
+
+begin_comment
 comment|/**    * Similar to {@code SearchHits} in ES. Container for {@link SearchHit}    */
+end_comment
+
+begin_class
 annotation|@
 name|JsonIgnoreProperties
 argument_list|(
@@ -1483,7 +1580,13 @@ name|total
 return|;
 block|}
 block|}
+end_class
+
+begin_comment
 comment|/**    * Concrete result record which matched the query. Similar to {@code SearchHit} in ES.    */
+end_comment
+
+begin_class
 annotation|@
 name|JsonIgnoreProperties
 argument_list|(
@@ -1948,7 +2051,13 @@ name|fields
 return|;
 block|}
 block|}
+end_class
+
+begin_comment
 comment|/**    * {@link Aggregation} container.    */
+end_comment
+
+begin_class
 annotation|@
 name|JsonDeserialize
 argument_list|(
@@ -2220,7 +2329,13 @@ argument_list|)
 return|;
 block|}
 block|}
+end_class
+
+begin_comment
 comment|/**    * Identifies all aggregations    */
+end_comment
+
+begin_interface
 interface|interface
 name|Aggregation
 block|{
@@ -2230,7 +2345,13 @@ name|getName
 parameter_list|()
 function_decl|;
 block|}
+end_interface
+
+begin_comment
 comment|/**    * Allows traversing aggregations tree    */
+end_comment
+
+begin_interface
 interface|interface
 name|HasAggregations
 block|{
@@ -2239,7 +2360,13 @@ name|getAggregations
 parameter_list|()
 function_decl|;
 block|}
+end_interface
+
+begin_comment
 comment|/**    * An aggregation that returns multiple buckets    */
+end_comment
+
+begin_class
 specifier|static
 class|class
 name|MultiBucketsAggregation
@@ -2310,7 +2437,13 @@ name|name
 return|;
 block|}
 block|}
+end_class
+
+begin_comment
 comment|/**    * A bucket represents a criteria to which all documents that fall in it adhere to.    * It is also uniquely identified    * by a key, and can potentially hold sub-aggregations computed over all documents in it.    */
+end_comment
+
+begin_class
 specifier|static
 class|class
 name|Bucket
@@ -2446,7 +2579,13 @@ name|name
 return|;
 block|}
 block|}
+end_class
+
+begin_comment
 comment|/**    * Multi value aggregatoin like    *<a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-stats-aggregation.html">Stats</a>    */
+end_comment
+
+begin_class
 specifier|static
 class|class
 name|MultiValue
@@ -2589,9 +2728,45 @@ literal|"value"
 argument_list|)
 return|;
 block|}
-comment|/**      * Constructs a {@link MultiValue} instance with a single value.      */
+block|}
+end_class
+
+begin_comment
+comment|/**    * Distinguishes from {@link MultiValue}.    * In order that rows which have the same key can be put into result map.    */
+end_comment
+
+begin_class
 specifier|static
+class|class
+name|GroupValue
+extends|extends
 name|MultiValue
+block|{
+name|GroupValue
+parameter_list|(
+name|String
+name|name
+parameter_list|,
+name|Map
+argument_list|<
+name|String
+argument_list|,
+name|Object
+argument_list|>
+name|values
+parameter_list|)
+block|{
+name|super
+argument_list|(
+name|name
+argument_list|,
+name|values
+argument_list|)
+expr_stmt|;
+block|}
+comment|/**      * Constructs a {@link GroupValue} instance with a single value.      */
+specifier|static
+name|GroupValue
 name|of
 parameter_list|(
 name|String
@@ -2603,7 +2778,7 @@ parameter_list|)
 block|{
 return|return
 operator|new
-name|MultiValue
+name|GroupValue
 argument_list|(
 name|name
 argument_list|,
@@ -2619,7 +2794,13 @@ argument_list|)
 return|;
 block|}
 block|}
+end_class
+
+begin_comment
 comment|/**    * Allows to de-serialize nested aggregation structures.    */
+end_comment
+
+begin_class
 specifier|static
 class|class
 name|AggregationsDeserializer
@@ -2638,13 +2819,9 @@ name|String
 argument_list|>
 name|IGNORE_TOKENS
 init|=
-operator|new
-name|HashSet
-argument_list|<>
-argument_list|(
-name|Arrays
+name|ImmutableSet
 operator|.
-name|asList
+name|of
 argument_list|(
 literal|"meta"
 argument_list|,
@@ -2661,7 +2838,6 @@ argument_list|,
 literal|"key"
 argument_list|,
 literal|"key_as_string"
-argument_list|)
 argument_list|)
 decl_stmt|;
 name|AggregationsDeserializer
@@ -3166,10 +3342,10 @@ argument_list|)
 return|;
 block|}
 block|}
-block|}
 end_class
 
 begin_comment
+unit|}
 comment|// End ElasticsearchJson.java
 end_comment
 
