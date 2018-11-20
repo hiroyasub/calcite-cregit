@@ -6873,6 +6873,28 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testRowWitDot
+parameter_list|()
+block|{
+name|check
+argument_list|(
+literal|"select (1,2).a from c.t"
+argument_list|,
+literal|"SELECT ((ROW(1, 2)).`A`)\nFROM `C`.`T`"
+argument_list|)
+expr_stmt|;
+name|check
+argument_list|(
+literal|"select row(1,2).a from c.t"
+argument_list|,
+literal|"SELECT ((ROW(1, 2)).`A`)\nFROM `C`.`T`"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testPeriod
 parameter_list|()
 block|{
@@ -8230,6 +8252,21 @@ argument_list|,
 literal|"SELECT COUNT(1), COUNT(DISTINCT 2)\n"
 operator|+
 literal|"FROM `EMP`"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testFunctionCallWithDot
+parameter_list|()
+block|{
+name|checkExp
+argument_list|(
+literal|"foo(a,b).c"
+argument_list|,
+literal|"(`FOO`(`A`, `B`).`C`)"
 argument_list|)
 expr_stmt|;
 block|}
@@ -10951,24 +10988,6 @@ argument_list|(
 literal|"SELECT `EMP`.* AS `FOO`\n"
 operator|+
 literal|"FROM `EMP`"
-argument_list|)
-expr_stmt|;
-block|}
-annotation|@
-name|Test
-specifier|public
-name|void
-name|testTableStarColumnFails
-parameter_list|()
-block|{
-name|sql
-argument_list|(
-literal|"select emp.*^.^xx from emp"
-argument_list|)
-operator|.
-name|fails
-argument_list|(
-literal|"(?s).*Encountered \".\" .*"
 argument_list|)
 expr_stmt|;
 block|}
@@ -20733,6 +20752,8 @@ operator|+
 literal|"Was expecting one of:\n"
 operator|+
 literal|"<EOF> \n"
+operator|+
+literal|"    \"\\.\" \\.\\.\\.\n"
 operator|+
 literal|"    \"NOT\" \\.\\.\\..*"
 argument_list|)

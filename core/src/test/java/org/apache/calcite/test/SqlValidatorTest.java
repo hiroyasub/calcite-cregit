@@ -4560,6 +4560,72 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testRowWitValidDot
+parameter_list|()
+block|{
+name|checkColumnType
+argument_list|(
+literal|"select ((1,2),(3,4,5)).\"EXPR$1\".\"EXPR$2\"\n from dept"
+argument_list|,
+literal|"INTEGER NOT NULL"
+argument_list|)
+expr_stmt|;
+name|checkColumnType
+argument_list|(
+literal|"select row(1,2).\"EXPR$1\" from dept"
+argument_list|,
+literal|"INTEGER NOT NULL"
+argument_list|)
+expr_stmt|;
+name|checkColumnType
+argument_list|(
+literal|"select t.a.\"EXPR$1\" from (select row(1,2) as a from (values (1))) as t"
+argument_list|,
+literal|"INTEGER NOT NULL"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testRowWithInvalidDotOperation
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select t.^s.\"EXPR$1\"^ from (\n"
+operator|+
+literal|"  select 1 AS s from (values (1))) as t"
+decl_stmt|;
+name|checkExpFails
+argument_list|(
+name|sql
+argument_list|,
+literal|"(?s).*Column 'S\\.EXPR\\$1' not found in table 'T'.*"
+argument_list|)
+expr_stmt|;
+name|checkExpFails
+argument_list|(
+literal|"select ^array[1, 2, 3]^.\"EXPR$1\" from dept"
+argument_list|,
+literal|"(?s).*Incompatible types.*"
+argument_list|)
+expr_stmt|;
+name|checkExpFails
+argument_list|(
+literal|"select ^'mystr'^.\"EXPR$1\" from dept"
+argument_list|,
+literal|"(?s).*Incompatible types.*"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testMultiset
 parameter_list|()
 block|{
@@ -13213,12 +13279,22 @@ block|{
 comment|// Fails in parser
 name|sql
 argument_list|(
+literal|"select emp.^*^.\"EXPR$1\" from emp"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"(?s).*Unknown field '\\*'"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
 literal|"select emp.^*^.foo from emp"
 argument_list|)
 operator|.
 name|fails
 argument_list|(
-literal|"(?s).*Encountered \".\" at .*"
+literal|"(?s).*Unknown field '\\*'"
 argument_list|)
 expr_stmt|;
 comment|// Parser does not allow star dot identifier.
@@ -23393,7 +23469,7 @@ parameter_list|()
 block|{
 name|sql
 argument_list|(
-literal|"SELECT name, dept_nested.employees[1].ne as ne from dept_nested"
+literal|"SELECT name, dept_nested.employees[1].^ne^ as ne from dept_nested"
 argument_list|)
 operator|.
 name|fails
