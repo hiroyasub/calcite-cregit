@@ -2271,9 +2271,9 @@ argument_list|()
 argument_list|,
 name|is
 argument_list|(
-literal|"cannot derive type: +; "
+literal|"Cannot infer return type for +; "
 operator|+
-literal|"operands: [$1: VARCHAR(10), $3: SMALLINT]"
+literal|"operand types: [VARCHAR(10), SMALLINT]"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -11309,7 +11309,7 @@ argument_list|()
 argument_list|,
 name|containsString
 argument_list|(
-literal|"cannot derive type"
+literal|"Cannot infer return type"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -11351,7 +11351,7 @@ argument_list|()
 argument_list|,
 name|containsString
 argument_list|(
-literal|"cannot derive type"
+literal|"Cannot infer return type"
 argument_list|)
 argument_list|)
 expr_stmt|;

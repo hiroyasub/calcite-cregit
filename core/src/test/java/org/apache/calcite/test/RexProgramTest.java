@@ -739,6 +739,18 @@ name|assertThat
 import|;
 end_import
 
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|Assert
+operator|.
+name|fail
+import|;
+end_import
+
 begin_comment
 comment|/**  * Unit tests for {@link RexProgram} and  * {@link org.apache.calcite.rex.RexProgramBuilder}.  */
 end_comment
@@ -4633,6 +4645,69 @@ argument_list|()
 argument_list|)
 argument_list|)
 expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testNoCommonReturnTypeFails
+parameter_list|()
+block|{
+try|try
+block|{
+specifier|final
+name|RexNode
+name|node
+init|=
+name|coalesce
+argument_list|(
+name|vVarchar
+argument_list|(
+literal|1
+argument_list|)
+argument_list|,
+name|vInt
+argument_list|(
+literal|2
+argument_list|)
+argument_list|)
+decl_stmt|;
+name|fail
+argument_list|(
+literal|"expected exception, got "
+operator|+
+name|node
+argument_list|)
+expr_stmt|;
+block|}
+catch|catch
+parameter_list|(
+name|IllegalArgumentException
+name|e
+parameter_list|)
+block|{
+specifier|final
+name|String
+name|expected
+init|=
+literal|"Cannot infer return type for COALESCE;"
+operator|+
+literal|" operand types: [VARCHAR, INTEGER]"
+decl_stmt|;
+name|assertThat
+argument_list|(
+name|e
+operator|.
+name|getMessage
+argument_list|()
+argument_list|,
+name|is
+argument_list|(
+name|expected
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
 block|}
 comment|/** Unit test for {@link org.apache.calcite.rex.RexUtil#toCnf}. */
 annotation|@

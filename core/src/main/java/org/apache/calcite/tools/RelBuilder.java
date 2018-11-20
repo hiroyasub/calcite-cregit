@@ -3598,43 +3598,6 @@ argument_list|,
 name|operandList
 argument_list|)
 decl_stmt|;
-if|if
-condition|(
-name|type
-operator|==
-literal|null
-condition|)
-block|{
-throw|throw
-operator|new
-name|IllegalArgumentException
-argument_list|(
-literal|"cannot derive type: "
-operator|+
-name|operator
-operator|+
-literal|"; operands: "
-operator|+
-name|Lists
-operator|.
-name|transform
-argument_list|(
-name|operandList
-argument_list|,
-name|e
-lambda|->
-name|e
-operator|+
-literal|": "
-operator|+
-name|e
-operator|.
-name|getType
-argument_list|()
-argument_list|)
-argument_list|)
-throw|;
-block|}
 return|return
 name|builder
 operator|.

@@ -1278,13 +1278,45 @@ operator|!=
 literal|null
 condition|)
 block|{
-return|return
+name|RelDataType
+name|returnType
+init|=
 name|returnTypeInference
 operator|.
 name|inferReturnType
 argument_list|(
 name|opBinding
 argument_list|)
+decl_stmt|;
+if|if
+condition|(
+name|returnType
+operator|==
+literal|null
+condition|)
+block|{
+throw|throw
+operator|new
+name|IllegalArgumentException
+argument_list|(
+literal|"Cannot infer return type for "
+operator|+
+name|opBinding
+operator|.
+name|getOperator
+argument_list|()
+operator|+
+literal|"; operand types: "
+operator|+
+name|opBinding
+operator|.
+name|collectOperandTypes
+argument_list|()
+argument_list|)
+throw|;
+block|}
+return|return
+name|returnType
 return|;
 block|}
 comment|// Derived type should have overridden this method, since it didn't
