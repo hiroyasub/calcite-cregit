@@ -1320,18 +1320,33 @@ argument_list|,
 name|name
 argument_list|)
 expr_stmt|;
+name|transport
+operator|.
+name|mapping
+operator|.
+name|missingValueFor
+argument_list|(
+name|name
+argument_list|)
+operator|.
+name|ifPresent
+argument_list|(
+name|m
+lambda|->
+block|{
+comment|// expose missing terms. each type has a different missing value
 name|terms
 operator|.
 name|set
 argument_list|(
 literal|"missing"
 argument_list|,
-name|ElasticsearchJson
-operator|.
-name|MISSING_VALUE
+name|m
 argument_list|)
 expr_stmt|;
-comment|// expose missing terms
+block|}
+argument_list|)
+expr_stmt|;
 if|if
 condition|(
 name|fetch
@@ -1376,7 +1391,6 @@ name|ifPresent
 argument_list|(
 name|s
 lambda|->
-block|{
 name|terms
 operator|.
 name|with
@@ -1400,10 +1414,8 @@ literal|"desc"
 else|:
 literal|"asc"
 argument_list|)
-argument_list|;
-block|}
-block_content|)
-function|;
+argument_list|)
+expr_stmt|;
 name|parent
 operator|=
 name|section
@@ -1414,13 +1426,7 @@ name|AGGREGATIONS
 argument_list|)
 expr_stmt|;
 block|}
-end_class
-
-begin_comment
 comment|// simple version for queries like "select count(*), max(col1) from table" (no GROUP BY cols)
-end_comment
-
-begin_if_stmt
 if|if
 condition|(
 operator|!
@@ -1483,21 +1489,12 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-end_if_stmt
-
-begin_comment
 comment|// cleanup query. remove empty AGGREGATIONS element (if empty)
-end_comment
-
-begin_decl_stmt
 name|JsonNode
 name|agg
 init|=
 name|query
 decl_stmt|;
-end_decl_stmt
-
-begin_while
 while|while
 condition|(
 name|agg
@@ -1531,9 +1528,6 @@ name|AGGREGATIONS
 argument_list|)
 expr_stmt|;
 block|}
-end_while
-
-begin_expr_stmt
 operator|(
 operator|(
 name|ObjectNode
@@ -1546,9 +1540,6 @@ argument_list|(
 name|AGGREGATIONS
 argument_list|)
 expr_stmt|;
-end_expr_stmt
-
-begin_decl_stmt
 name|ElasticsearchJson
 operator|.
 name|Result
@@ -1569,9 +1560,6 @@ argument_list|(
 name|query
 argument_list|)
 decl_stmt|;
-end_decl_stmt
-
-begin_decl_stmt
 specifier|final
 name|List
 argument_list|<
@@ -1589,9 +1577,6 @@ name|ArrayList
 argument_list|<>
 argument_list|()
 decl_stmt|;
-end_decl_stmt
-
-begin_if_stmt
 if|if
 condition|(
 name|res
@@ -1686,17 +1671,8 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
-end_if_stmt
-
-begin_comment
 comment|// elastic exposes total number of documents matching a query in "/hits/total" path
-end_comment
-
-begin_comment
 comment|// this can be used for simple "select count(*) from table"
-end_comment
-
-begin_decl_stmt
 specifier|final
 name|long
 name|total
@@ -1709,9 +1685,6 @@ operator|.
 name|total
 argument_list|()
 decl_stmt|;
-end_decl_stmt
-
-begin_if_stmt
 if|if
 condition|(
 name|groupBy
@@ -1747,9 +1720,6 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-end_if_stmt
-
-begin_decl_stmt
 specifier|final
 name|Function1
 argument_list|<
@@ -1768,9 +1738,6 @@ argument_list|(
 name|fields
 argument_list|)
 decl_stmt|;
-end_decl_stmt
-
-begin_decl_stmt
 name|ElasticsearchJson
 operator|.
 name|SearchHits
@@ -1814,9 +1781,6 @@ argument_list|()
 argument_list|)
 argument_list|)
 decl_stmt|;
-end_decl_stmt
-
-begin_return
 return|return
 name|Linq4j
 operator|.
@@ -1833,10 +1797,8 @@ argument_list|(
 name|getter
 argument_list|)
 return|;
-end_return
-
-begin_function
-unit|}    @
+block|}
+annotation|@
 name|Override
 specifier|public
 name|RelDataType
@@ -1897,9 +1859,6 @@ name|build
 argument_list|()
 return|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Override
 specifier|public
@@ -1919,9 +1878,6 @@ operator|+
 literal|"}"
 return|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Override
 specifier|public
@@ -1959,9 +1915,6 @@ name|tableName
 argument_list|)
 return|;
 block|}
-end_function
-
-begin_function
 annotation|@
 name|Override
 specifier|public
@@ -2009,13 +1962,7 @@ literal|null
 argument_list|)
 return|;
 block|}
-end_function
-
-begin_comment
 comment|/**    * Implementation of {@link Queryable} based on    * a {@link ElasticsearchTable}.    *    * @param<T> element type    */
-end_comment
-
-begin_class
 specifier|public
 specifier|static
 class|class
@@ -2200,10 +2147,10 @@ throw|;
 block|}
 block|}
 block|}
+block|}
 end_class
 
 begin_comment
-unit|}
 comment|// End ElasticsearchTable.java
 end_comment
 

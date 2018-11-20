@@ -275,7 +275,7 @@ name|ImmutableMap
 operator|.
 name|of
 argument_list|(
-literal|"A"
+literal|"a"
 argument_list|,
 literal|"keyword"
 argument_list|,

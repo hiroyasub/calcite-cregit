@@ -113,6 +113,34 @@ name|fasterxml
 operator|.
 name|jackson
 operator|.
+name|core
+operator|.
+name|JsonParser
+import|;
+end_import
+
+begin_import
+import|import
+name|com
+operator|.
+name|fasterxml
+operator|.
+name|jackson
+operator|.
+name|databind
+operator|.
+name|ObjectMapper
+import|;
+end_import
+
+begin_import
+import|import
+name|com
+operator|.
+name|fasterxml
+operator|.
+name|jackson
+operator|.
 name|databind
 operator|.
 name|node
@@ -256,7 +284,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Testing Elastic Search aggregation transformations.  */
+comment|/**  * Testing Elasticsearch aggregation transformations.  */
 end_comment
 
 begin_class
@@ -306,28 +334,65 @@ name|mappings
 init|=
 name|ImmutableMap
 operator|.
-name|of
+expr|<
+name|String
+decl_stmt|,
+name|String
+decl|>
+name|builder
+argument_list|()
+decl|.
+name|put
 argument_list|(
 literal|"cat1"
 argument_list|,
 literal|"keyword"
-argument_list|,
+argument_list|)
+decl|.
+name|put
+argument_list|(
 literal|"cat2"
 argument_list|,
 literal|"keyword"
-argument_list|,
+argument_list|)
+decl|.
+name|put
+argument_list|(
 literal|"cat3"
 argument_list|,
 literal|"keyword"
+argument_list|)
+decl|.
+name|put
+argument_list|(
+literal|"cat4"
 argument_list|,
+literal|"date"
+argument_list|)
+decl|.
+name|put
+argument_list|(
+literal|"cat5"
+argument_list|,
+literal|"integer"
+argument_list|)
+decl|.
+name|put
+argument_list|(
 literal|"val1"
 argument_list|,
 literal|"long"
-argument_list|,
+argument_list|)
+decl|.
+name|put
+argument_list|(
 literal|"val2"
 argument_list|,
 literal|"long"
 argument_list|)
+decl|.
+name|build
+argument_list|()
 decl_stmt|;
 name|NODE
 operator|.
@@ -341,39 +406,47 @@ expr_stmt|;
 name|String
 name|doc1
 init|=
-literal|"{'cat1': 'a', 'cat2': 'g', 'val1': 1 }"
-operator|.
-name|replace
-argument_list|(
-literal|'\''
-argument_list|,
-literal|'"'
-argument_list|)
+literal|"{cat1:'a', cat2:'g', val1:1, cat4:'2018-01-01', cat5:1}"
 decl_stmt|;
 name|String
 name|doc2
 init|=
-literal|"{'cat2': 'g', 'cat3': 'y', 'val2': 5 }"
-operator|.
-name|replace
-argument_list|(
-literal|'\''
-argument_list|,
-literal|'"'
-argument_list|)
+literal|"{cat2:'g', cat3:'y', val2:5, cat4:'2019-12-12'}"
 decl_stmt|;
 name|String
 name|doc3
 init|=
-literal|"{'cat1': 'b', 'cat2':'h', 'cat3': 'z', 'val1': 7, 'val2': '42'}"
+literal|"{cat1:'b', cat2:'h', cat3:'z', cat5:2, val1:7, val2:42}"
+decl_stmt|;
+specifier|final
+name|ObjectMapper
+name|mapper
+init|=
+operator|new
+name|ObjectMapper
+argument_list|()
 operator|.
-name|replace
+name|enable
 argument_list|(
-literal|'\''
-argument_list|,
-literal|'"'
+name|JsonParser
+operator|.
+name|Feature
+operator|.
+name|ALLOW_UNQUOTED_FIELD_NAMES
+argument_list|)
+comment|// user-friendly settings to
+operator|.
+name|enable
+argument_list|(
+name|JsonParser
+operator|.
+name|Feature
+operator|.
+name|ALLOW_SINGLE_QUOTES
 argument_list|)
 decl_stmt|;
+comment|// avoid too much quoting
+specifier|final
 name|List
 argument_list|<
 name|ObjectNode
@@ -409,10 +482,7 @@ argument_list|(
 operator|(
 name|ObjectNode
 operator|)
-name|NODE
-operator|.
 name|mapper
-argument_list|()
 operator|.
 name|readTree
 argument_list|(
@@ -522,6 +592,10 @@ operator|+
 literal|" _MAP['cat2']  AS \"cat2\", "
 operator|+
 literal|" _MAP['cat3'] AS \"cat3\", "
+operator|+
+literal|" _MAP['cat4'] AS \"cat4\", "
+operator|+
+literal|" _MAP['cat5'] AS \"cat5\", "
 operator|+
 literal|" _MAP['val1'] AS \"val1\", "
 operator|+
@@ -665,8 +739,6 @@ specifier|public
 name|void
 name|all
 parameter_list|()
-throws|throws
-name|Exception
 block|{
 name|CalciteAssert
 operator|.
@@ -749,8 +821,6 @@ specifier|public
 name|void
 name|cat1
 parameter_list|()
-throws|throws
-name|Exception
 block|{
 name|CalciteAssert
 operator|.
@@ -860,8 +930,6 @@ specifier|public
 name|void
 name|cat2
 parameter_list|()
-throws|throws
-name|Exception
 block|{
 name|CalciteAssert
 operator|.
@@ -939,8 +1007,6 @@ specifier|public
 name|void
 name|cat1Cat2
 parameter_list|()
-throws|throws
-name|Exception
 block|{
 name|CalciteAssert
 operator|.
@@ -999,8 +1065,6 @@ specifier|public
 name|void
 name|cat1Cat3
 parameter_list|()
-throws|throws
-name|Exception
 block|{
 name|CalciteAssert
 operator|.
@@ -1035,8 +1099,6 @@ specifier|public
 name|void
 name|anyValue
 parameter_list|()
-throws|throws
-name|Exception
 block|{
 name|CalciteAssert
 operator|.
@@ -1118,8 +1180,6 @@ specifier|public
 name|void
 name|cat1Cat2Cat3
 parameter_list|()
-throws|throws
-name|Exception
 block|{
 name|CalciteAssert
 operator|.
@@ -1146,6 +1206,74 @@ argument_list|,
 literal|"cat1=b; cat2=h; cat3=z; EXPR$3=1; EXPR$4=7.0; EXPR$5=42.0"
 argument_list|,
 literal|"cat1=null; cat2=g; cat3=y; EXPR$3=1; EXPR$4=0.0; EXPR$5=5.0"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/**    * Group by    *<a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/date.html">    * date</a> data type.    */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|dateCat
+parameter_list|()
+block|{
+name|CalciteAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|newConnectionFactory
+argument_list|()
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select cat4, sum(val1) from view group by cat4"
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"cat4=1514764800000; EXPR$1=1.0"
+argument_list|,
+literal|"cat4=1576108800000; EXPR$1=0.0"
+argument_list|,
+literal|"cat4=null; EXPR$1=7.0"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/**    * Group by    *<a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/number.html">    * number</a> data type.    */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|integerCat
+parameter_list|()
+block|{
+name|CalciteAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|newConnectionFactory
+argument_list|()
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select cat5, sum(val1) from view group by cat5"
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"cat5=1; EXPR$1=1.0"
+argument_list|,
+literal|"cat5=null; EXPR$1=0.0"
+argument_list|,
+literal|"cat5=2; EXPR$1=7.0"
 argument_list|)
 expr_stmt|;
 block|}
