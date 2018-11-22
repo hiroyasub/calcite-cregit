@@ -1240,7 +1240,7 @@ name|expr
 operator|=
 name|simplify
 operator|.
-name|simplify
+name|simplifyPreservingType
 argument_list|(
 name|expr
 argument_list|)
