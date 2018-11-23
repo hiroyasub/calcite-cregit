@@ -985,29 +985,6 @@ argument_list|(
 name|result
 argument_list|)
 expr_stmt|;
-comment|// The following is a workaround to
-comment|// http://jira.codehaus.org/browse/JANINO-169. Otherwise we'd remove the
-comment|// member variable, rename the "root0" parameter as "root", and reference it
-comment|// directly from inner classes.
-specifier|final
-name|ParameterExpression
-name|root0_
-init|=
-name|Expressions
-operator|.
-name|parameter
-argument_list|(
-name|Modifier
-operator|.
-name|FINAL
-argument_list|,
-name|DataContext
-operator|.
-name|class
-argument_list|,
-literal|"root0"
-argument_list|)
-decl_stmt|;
 comment|// This creates the following code
 comment|// final Integer v1stashed = (Integer) root.get("v1stashed")
 comment|// It is convenient for passing non-literal "compile-time" constants
@@ -1086,27 +1063,6 @@ name|Iterables
 operator|.
 name|concat
 argument_list|(
-name|ImmutableList
-operator|.
-name|of
-argument_list|(
-name|Expressions
-operator|.
-name|statement
-argument_list|(
-name|Expressions
-operator|.
-name|assign
-argument_list|(
-name|DataContext
-operator|.
-name|ROOT
-argument_list|,
-name|root0_
-argument_list|)
-argument_list|)
-argument_list|)
-argument_list|,
 name|stashed
 argument_list|,
 name|result
@@ -1117,24 +1073,6 @@ name|statements
 argument_list|)
 argument_list|)
 decl_stmt|;
-name|memberDeclarations
-operator|.
-name|add
-argument_list|(
-name|Expressions
-operator|.
-name|fieldDecl
-argument_list|(
-literal|0
-argument_list|,
-name|DataContext
-operator|.
-name|ROOT
-argument_list|,
-literal|null
-argument_list|)
-argument_list|)
-expr_stmt|;
 name|memberDeclarations
 operator|.
 name|add
@@ -1164,7 +1102,9 @@ name|Expressions
 operator|.
 name|list
 argument_list|(
-name|root0_
+name|DataContext
+operator|.
+name|ROOT
 argument_list|)
 argument_list|,
 name|block
