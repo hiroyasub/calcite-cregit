@@ -172,7 +172,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * The<code>TIMESTAMPADD</code> function, which adds an interval to a  * timestamp.  *  *<p>The SQL syntax is  *  *<blockquote>  *<code>TIMESTAMPADD(<i>timestamp interval</i>,<i>quantity</i>,  *<i>timestamp</i>)</code>  *</blockquote>  *  *<p>The interval time unit can one of the following literals:<ul>  *<li>NANOSECOND (and synonym SQL_TSI_FRAC_SECOND)  *<li>MICROSECOND (and synonyms SQL_TSI_MICROSECOND, FRAC_SECOND)  *<li>SECOND (and synonym SQL_TSI_SECOND)  *<li>MINUTE (and synonym  SQL_TSI_MINUTE)  *<li>HOUR (and synonym  SQL_TSI_HOUR)  *<li>DAY (and synonym SQL_TSI_DAY)  *<li>WEEK (and synonym  SQL_TSI_WEEK)  *<li>MONTH (and synonym SQL_TSI_MONTH)  *<li>QUARTER (and synonym SQL_TSI_QUARTER)  *<li>YEAR (and synonym  SQL_TSI_YEAR)  *</ul>  *  *<p>Returns modified timestamp.  */
+comment|/**  * The<code>TIMESTAMPADD</code> function, which adds an interval to a  * datetime (TIMESTAMP, TIME or DATE).  *  *<p>The SQL syntax is  *  *<blockquote>  *<code>TIMESTAMPADD(<i>timestamp interval</i>,<i>quantity</i>,  *<i>datetime</i>)</code>  *</blockquote>  *  *<p>The interval time unit can one of the following literals:<ul>  *<li>NANOSECOND (and synonym SQL_TSI_FRAC_SECOND)  *<li>MICROSECOND (and synonyms SQL_TSI_MICROSECOND, FRAC_SECOND)  *<li>SECOND (and synonym SQL_TSI_SECOND)  *<li>MINUTE (and synonym  SQL_TSI_MINUTE)  *<li>HOUR (and synonym  SQL_TSI_HOUR)  *<li>DAY (and synonym SQL_TSI_DAY)  *<li>WEEK (and synonym  SQL_TSI_WEEK)  *<li>MONTH (and synonym SQL_TSI_MONTH)  *<li>QUARTER (and synonym SQL_TSI_QUARTER)  *<li>YEAR (and synonym  SQL_TSI_YEAR)  *</ul>  *  *<p>Returns modified datetime.  */
 end_comment
 
 begin_class
@@ -331,6 +331,32 @@ argument_list|)
 expr_stmt|;
 break|break;
 default|default:
+if|if
+condition|(
+name|operandType2
+operator|.
+name|getSqlTypeName
+argument_list|()
+operator|==
+name|SqlTypeName
+operator|.
+name|TIME
+condition|)
+block|{
+name|type
+operator|=
+name|typeFactory
+operator|.
+name|createSqlType
+argument_list|(
+name|SqlTypeName
+operator|.
+name|TIME
+argument_list|)
+expr_stmt|;
+block|}
+else|else
+block|{
 name|type
 operator|=
 name|typeFactory
@@ -342,6 +368,7 @@ operator|.
 name|TIMESTAMP
 argument_list|)
 expr_stmt|;
+block|}
 block|}
 break|break;
 default|default:

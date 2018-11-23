@@ -28620,6 +28620,195 @@ argument_list|,
 literal|"DATE NOT NULL"
 argument_list|)
 expr_stmt|;
+comment|// TIMESTAMPADD with time; returns a time value.The interval is positive.
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"timestampadd(SECOND, 1, time '23:59:59')"
+argument_list|,
+literal|"00:00:00"
+argument_list|,
+literal|"TIME(0) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"timestampadd(MINUTE, 1, time '00:00:00')"
+argument_list|,
+literal|"00:01:00"
+argument_list|,
+literal|"TIME(0) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"timestampadd(MINUTE, 1, time '23:59:59')"
+argument_list|,
+literal|"00:00:59"
+argument_list|,
+literal|"TIME(0) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"timestampadd(HOUR, 1, time '23:59:59')"
+argument_list|,
+literal|"00:59:59"
+argument_list|,
+literal|"TIME(0) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"timestampadd(DAY, 15, time '23:59:59')"
+argument_list|,
+literal|"23:59:59"
+argument_list|,
+literal|"TIME(0) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"timestampadd(WEEK, 3, time '23:59:59')"
+argument_list|,
+literal|"23:59:59"
+argument_list|,
+literal|"TIME(0) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"timestampadd(MONTH, 6, time '23:59:59')"
+argument_list|,
+literal|"23:59:59"
+argument_list|,
+literal|"TIME(0) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"timestampadd(QUARTER, 1, time '23:59:59')"
+argument_list|,
+literal|"23:59:59"
+argument_list|,
+literal|"TIME(0) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"timestampadd(YEAR, 10, time '23:59:59')"
+argument_list|,
+literal|"23:59:59"
+argument_list|,
+literal|"TIME(0) NOT NULL"
+argument_list|)
+expr_stmt|;
+comment|// TIMESTAMPADD with time; returns a time value .The interval is negative.
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"timestampadd(SECOND, -1, time '00:00:00')"
+argument_list|,
+literal|"23:59:59"
+argument_list|,
+literal|"TIME(0) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"timestampadd(MINUTE, -1, time '00:00:00')"
+argument_list|,
+literal|"23:59:00"
+argument_list|,
+literal|"TIME(0) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"timestampadd(HOUR, -1, time '00:00:00')"
+argument_list|,
+literal|"23:00:00"
+argument_list|,
+literal|"TIME(0) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"timestampadd(DAY, -1, time '23:59:59')"
+argument_list|,
+literal|"23:59:59"
+argument_list|,
+literal|"TIME(0) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"timestampadd(WEEK, -1, time '23:59:59')"
+argument_list|,
+literal|"23:59:59"
+argument_list|,
+literal|"TIME(0) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"timestampadd(MONTH, -1, time '23:59:59')"
+argument_list|,
+literal|"23:59:59"
+argument_list|,
+literal|"TIME(0) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"timestampadd(QUARTER, -1, time '23:59:59')"
+argument_list|,
+literal|"23:59:59"
+argument_list|,
+literal|"TIME(0) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"timestampadd(YEAR, -1, time '23:59:59')"
+argument_list|,
+literal|"23:59:59"
+argument_list|,
+literal|"TIME(0) NOT NULL"
+argument_list|)
+expr_stmt|;
 block|}
 annotation|@
 name|Test
