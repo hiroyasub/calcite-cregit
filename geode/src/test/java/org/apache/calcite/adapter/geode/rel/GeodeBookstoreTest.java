@@ -377,6 +377,11 @@ name|void
 name|testWhereEqual
 parameter_list|()
 block|{
+name|String
+name|expectedQuery
+init|=
+literal|"SELECT * FROM /BookMaster WHERE itemNumber = 123"
+decl_stmt|;
 name|calciteAssert
 argument_list|()
 operator|.
@@ -406,6 +411,16 @@ operator|+
 literal|"  GeodeFilter(condition=[=(CAST($0):INTEGER, 123)])\n"
 operator|+
 literal|"    GeodeTableScan(table=[[geode, BookMaster]])"
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|GeodeAssertions
+operator|.
+name|query
+argument_list|(
+name|expectedQuery
+argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
@@ -448,6 +463,18 @@ literal|"  GeodeFilter(condition=[AND(>($0, 122),<=($0, 123))])\n"
 operator|+
 literal|"    GeodeTableScan(table=[[geode, BookMaster]])"
 argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|GeodeAssertions
+operator|.
+name|query
+argument_list|(
+literal|"SELECT * FROM /BookMaster "
+operator|+
+literal|"WHERE itemNumber> 122 AND itemNumber<= 123"
+argument_list|)
+argument_list|)
 expr_stmt|;
 block|}
 annotation|@
@@ -457,6 +484,13 @@ name|void
 name|testWhereWithOr
 parameter_list|()
 block|{
+name|String
+name|expectedQuery
+init|=
+literal|"SELECT author AS author FROM /BookMaster "
+operator|+
+literal|"WHERE itemNumber IN SET(123, 789)"
+decl_stmt|;
 name|calciteAssert
 argument_list|()
 operator|.
@@ -490,6 +524,16 @@ operator|+
 literal|"=(CAST($0):INTEGER, 789))])\n"
 operator|+
 literal|"      GeodeTableScan(table=[[geode, BookMaster]])\n"
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|GeodeAssertions
+operator|.
+name|query
+argument_list|(
+name|expectedQuery
+argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
@@ -539,6 +583,18 @@ operator|+
 literal|"      GeodeTableScan(table=[[geode, BookMaster]])\n"
 operator|+
 literal|"\n"
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|GeodeAssertions
+operator|.
+name|query
+argument_list|(
+literal|"SELECT author AS author FROM /BookMaster "
+operator|+
+literal|"WHERE (itemNumber> 123 AND itemNumber = 789) OR author = 'Daisy Mae West'"
+argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
@@ -614,6 +670,18 @@ operator|+
 literal|"    GeodeFilter(condition=[>($0, 123)])\n"
 operator|+
 literal|"      GeodeTableScan(table=[[geode, BookMaster]])"
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|GeodeAssertions
+operator|.
+name|query
+argument_list|(
+literal|"SELECT author AS author "
+operator|+
+literal|"FROM /BookMaster WHERE itemNumber> 123"
+argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
@@ -1350,6 +1418,18 @@ literal|"    GeodeFilter(condition=[>(ITEM($3, 'postalCode'), '0')])\n"
 operator|+
 literal|"      GeodeTableScan(table=[[geode, BookCustomer]])\n"
 argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|GeodeAssertions
+operator|.
+name|query
+argument_list|(
+literal|"SELECT primaryAddress.postalCode AS postalCode "
+operator|+
+literal|"FROM /BookCustomer WHERE primaryAddress.postalCode> '0'"
+argument_list|)
+argument_list|)
 expr_stmt|;
 block|}
 annotation|@
@@ -1358,8 +1438,6 @@ specifier|public
 name|void
 name|testSqlSimple
 parameter_list|()
-throws|throws
-name|SQLException
 block|{
 name|calciteAssert
 argument_list|()
@@ -1371,6 +1449,18 @@ argument_list|)
 operator|.
 name|runs
 argument_list|()
+operator|.
+name|queryContains
+argument_list|(
+name|GeodeAssertions
+operator|.
+name|query
+argument_list|(
+literal|"SELECT itemNumber AS itemNumber "
+operator|+
+literal|"FROM /BookMaster WHERE itemNumber> 123"
+argument_list|)
+argument_list|)
 expr_stmt|;
 block|}
 annotation|@
@@ -1379,8 +1469,6 @@ specifier|public
 name|void
 name|testSqlSingleNumberWhereFilter
 parameter_list|()
-throws|throws
-name|SQLException
 block|{
 name|calciteAssert
 argument_list|()
@@ -1394,6 +1482,18 @@ argument_list|)
 operator|.
 name|runs
 argument_list|()
+operator|.
+name|queryContains
+argument_list|(
+name|GeodeAssertions
+operator|.
+name|query
+argument_list|(
+literal|"SELECT * FROM /BookMaster "
+operator|+
+literal|"WHERE itemNumber = 123"
+argument_list|)
+argument_list|)
 expr_stmt|;
 block|}
 annotation|@
@@ -1402,8 +1502,6 @@ specifier|public
 name|void
 name|testSqlDistinctSort
 parameter_list|()
-throws|throws
-name|SQLException
 block|{
 name|calciteAssert
 argument_list|()
@@ -1425,8 +1523,6 @@ specifier|public
 name|void
 name|testSqlDistinctSort2
 parameter_list|()
-throws|throws
-name|SQLException
 block|{
 name|calciteAssert
 argument_list|()
@@ -1450,8 +1546,6 @@ specifier|public
 name|void
 name|testSqlDistinctSort3
 parameter_list|()
-throws|throws
-name|SQLException
 block|{
 name|calciteAssert
 argument_list|()
@@ -1471,8 +1565,6 @@ specifier|public
 name|void
 name|testSqlLimit2
 parameter_list|()
-throws|throws
-name|SQLException
 block|{
 name|calciteAssert
 argument_list|()
@@ -1490,11 +1582,16 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testSqlDisjunciton
+name|testSqlDisjunction
 parameter_list|()
-throws|throws
-name|SQLException
 block|{
+name|String
+name|expectedQuery
+init|=
+literal|"SELECT author AS author FROM /BookMaster "
+operator|+
+literal|"WHERE itemNumber IN SET(789, 123)"
+decl_stmt|;
 name|calciteAssert
 argument_list|()
 operator|.
@@ -1507,16 +1604,24 @@ argument_list|)
 operator|.
 name|runs
 argument_list|()
+operator|.
+name|queryContains
+argument_list|(
+name|GeodeAssertions
+operator|.
+name|query
+argument_list|(
+name|expectedQuery
+argument_list|)
+argument_list|)
 expr_stmt|;
 block|}
 annotation|@
 name|Test
 specifier|public
 name|void
-name|testSqlConjunciton
+name|testSqlConjunction
 parameter_list|()
-throws|throws
-name|SQLException
 block|{
 name|calciteAssert
 argument_list|()
@@ -1530,6 +1635,18 @@ argument_list|)
 operator|.
 name|runs
 argument_list|()
+operator|.
+name|queryContains
+argument_list|(
+name|GeodeAssertions
+operator|.
+name|query
+argument_list|(
+literal|"SELECT author AS author FROM /BookMaster "
+operator|+
+literal|"WHERE itemNumber = 789 AND author = 'Jim Heavisides'"
+argument_list|)
+argument_list|)
 expr_stmt|;
 block|}
 annotation|@
@@ -1538,8 +1655,6 @@ specifier|public
 name|void
 name|testSqlBookMasterWhere
 parameter_list|()
-throws|throws
-name|SQLException
 block|{
 name|calciteAssert
 argument_list|()
@@ -1553,6 +1668,18 @@ argument_list|)
 operator|.
 name|runs
 argument_list|()
+operator|.
+name|queryContains
+argument_list|(
+name|GeodeAssertions
+operator|.
+name|query
+argument_list|(
+literal|"SELECT author AS author, title AS title FROM /BookMaster "
+operator|+
+literal|"WHERE author = 'Jim Heavisides' LIMIT 2"
+argument_list|)
+argument_list|)
 expr_stmt|;
 block|}
 annotation|@
@@ -1561,8 +1688,6 @@ specifier|public
 name|void
 name|testSqlBookMasterCount
 parameter_list|()
-throws|throws
-name|SQLException
 block|{
 name|calciteAssert
 argument_list|()
@@ -1574,6 +1699,48 @@ argument_list|)
 operator|.
 name|runs
 argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testInSetFilterWithNestedStringField
+parameter_list|()
+block|{
+name|String
+name|expectedQuery
+init|=
+literal|"SELECT primaryAddress.city AS city FROM /BookCustomer "
+operator|+
+literal|"WHERE primaryAddress.city IN SET('Topeka', 'San Francisco')"
+decl_stmt|;
+name|calciteAssert
+argument_list|()
+operator|.
+name|query
+argument_list|(
+literal|"SELECT primaryAddress['city'] AS city\n"
+operator|+
+literal|"FROM geode.BookCustomer\n"
+operator|+
+literal|"WHERE primaryAddress['city'] = 'Topeka' OR primaryAddress['city'] = 'San Francisco'\n"
+argument_list|)
+operator|.
+name|returnsCount
+argument_list|(
+literal|3
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|GeodeAssertions
+operator|.
+name|query
+argument_list|(
+name|expectedQuery
+argument_list|)
+argument_list|)
 expr_stmt|;
 block|}
 block|}
