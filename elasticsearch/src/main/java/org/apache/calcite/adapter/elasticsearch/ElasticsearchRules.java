@@ -1016,9 +1016,6 @@ argument_list|(
 literal|"Translation of "
 operator|+
 name|call
-operator|.
-name|toString
-argument_list|()
 operator|+
 literal|" is not supported by ElasticsearchProject"
 argument_list|)

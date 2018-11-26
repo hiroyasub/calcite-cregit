@@ -667,7 +667,7 @@ name|Map
 argument_list|<
 name|Pair
 argument_list|<
-name|String
+name|RexNode
 argument_list|,
 name|String
 argument_list|>
@@ -682,7 +682,7 @@ name|Map
 argument_list|<
 name|Pair
 argument_list|<
-name|String
+name|RexNode
 argument_list|,
 name|String
 argument_list|>
@@ -837,7 +837,7 @@ parameter_list|)
 block|{
 name|Pair
 argument_list|<
-name|String
+name|RexNode
 argument_list|,
 name|String
 argument_list|>
@@ -891,7 +891,7 @@ parameter_list|)
 block|{
 name|Pair
 argument_list|<
-name|String
+name|RexNode
 argument_list|,
 name|String
 argument_list|>

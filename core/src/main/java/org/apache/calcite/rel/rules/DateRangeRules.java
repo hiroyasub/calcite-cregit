@@ -1101,7 +1101,7 @@ block|}
 specifier|final
 name|Map
 argument_list|<
-name|String
+name|RexNode
 argument_list|,
 name|RangeSet
 argument_list|<
@@ -1267,12 +1267,10 @@ argument_list|)
 decl_stmt|;
 if|if
 condition|(
-name|RexUtil
-operator|.
-name|eq
-argument_list|(
 name|condition
-argument_list|,
+operator|.
+name|equals
+argument_list|(
 name|filter
 operator|.
 name|getCondition
@@ -1531,7 +1529,7 @@ specifier|private
 specifier|final
 name|Map
 argument_list|<
-name|String
+name|RexNode
 argument_list|,
 name|RangeSet
 argument_list|<
@@ -1578,7 +1576,7 @@ name|timeUnit
 parameter_list|,
 name|Map
 argument_list|<
-name|String
+name|RexNode
 argument_list|,
 name|RangeSet
 argument_list|<
@@ -2123,9 +2121,6 @@ operator|.
 name|get
 argument_list|(
 name|operand
-operator|.
-name|toString
-argument_list|()
 argument_list|)
 decl_stmt|;
 if|if
@@ -2271,7 +2266,7 @@ block|}
 specifier|final
 name|Map
 argument_list|<
-name|String
+name|RexNode
 argument_list|,
 name|RangeSet
 argument_list|<
@@ -2489,9 +2484,6 @@ operator|.
 name|get
 argument_list|(
 name|operand
-operator|.
-name|toString
-argument_list|()
 argument_list|)
 decl_stmt|;
 if|if
@@ -2743,9 +2735,6 @@ operator|.
 name|put
 argument_list|(
 name|operand
-operator|.
-name|toString
-argument_list|()
 argument_list|,
 name|ImmutableRangeSet
 operator|.
@@ -3582,9 +3571,6 @@ operator|.
 name|get
 argument_list|(
 name|operand
-operator|.
-name|toString
-argument_list|()
 argument_list|)
 decl_stmt|;
 if|if
@@ -3679,9 +3665,6 @@ operator|.
 name|put
 argument_list|(
 name|operand
-operator|.
-name|toString
-argument_list|()
 argument_list|,
 name|ImmutableRangeSet
 operator|.

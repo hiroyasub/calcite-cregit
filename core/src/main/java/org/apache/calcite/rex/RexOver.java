@@ -121,6 +121,16 @@ name|Objects
 import|;
 end_import
 
+begin_import
+import|import
+name|javax
+operator|.
+name|annotation
+operator|.
+name|Nonnull
+import|;
+end_import
+
 begin_comment
 comment|/**  * Call to an aggregate function over a window.  */
 end_comment
@@ -249,6 +259,8 @@ block|}
 annotation|@
 name|Override
 specifier|protected
+annotation|@
+name|Nonnull
 name|String
 name|computeDigest
 parameter_list|(
@@ -322,24 +334,16 @@ literal|", "
 argument_list|)
 expr_stmt|;
 block|}
-name|RexNode
-name|operand
-init|=
+name|sb
+operator|.
+name|append
+argument_list|(
 name|operands
 operator|.
 name|get
 argument_list|(
 name|i
 argument_list|)
-decl_stmt|;
-name|sb
-operator|.
-name|append
-argument_list|(
-name|operand
-operator|.
-name|toString
-argument_list|()
 argument_list|)
 expr_stmt|;
 block|}

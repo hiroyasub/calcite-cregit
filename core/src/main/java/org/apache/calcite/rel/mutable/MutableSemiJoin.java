@@ -219,9 +219,6 @@ name|MutableSemiJoin
 operator|&&
 name|condition
 operator|.
-name|toString
-argument_list|()
-operator|.
 name|equals
 argument_list|(
 operator|(
@@ -232,9 +229,6 @@ name|obj
 operator|)
 operator|.
 name|condition
-operator|.
-name|toString
-argument_list|()
 argument_list|)
 operator|&&
 name|leftKeys
@@ -311,9 +305,6 @@ argument_list|,
 name|right
 argument_list|,
 name|condition
-operator|.
-name|toString
-argument_list|()
 argument_list|,
 name|leftKeys
 argument_list|,

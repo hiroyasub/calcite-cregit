@@ -490,12 +490,10 @@ parameter_list|)
 block|{
 if|if
 condition|(
-name|RexUtil
-operator|.
-name|eq
-argument_list|(
 name|node
-argument_list|,
+operator|.
+name|equals
+argument_list|(
 name|seek
 argument_list|)
 condition|)

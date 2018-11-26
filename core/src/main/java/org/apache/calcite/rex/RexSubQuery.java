@@ -191,6 +191,16 @@ name|List
 import|;
 end_import
 
+begin_import
+import|import
+name|javax
+operator|.
+name|annotation
+operator|.
+name|Nonnull
+import|;
+end_import
+
 begin_comment
 comment|/**  * Scalar expression that represents an IN, EXISTS or scalar sub-query.  */
 end_comment
@@ -663,6 +673,8 @@ block|}
 annotation|@
 name|Override
 specifier|protected
+annotation|@
+name|Nonnull
 name|String
 name|computeDigest
 parameter_list|(
@@ -670,6 +682,7 @@ name|boolean
 name|withType
 parameter_list|)
 block|{
+specifier|final
 name|StringBuilder
 name|sb
 init|=
@@ -702,9 +715,6 @@ operator|.
 name|append
 argument_list|(
 name|operand
-operator|.
-name|toString
-argument_list|()
 argument_list|)
 expr_stmt|;
 name|sb

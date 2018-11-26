@@ -208,7 +208,7 @@ name|Map
 argument_list|<
 name|Pair
 argument_list|<
-name|String
+name|RexNode
 argument_list|,
 name|String
 argument_list|>
@@ -1251,7 +1251,7 @@ decl_stmt|;
 specifier|final
 name|Pair
 argument_list|<
-name|String
+name|RexNode
 argument_list|,
 name|String
 argument_list|>

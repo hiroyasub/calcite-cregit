@@ -745,12 +745,10 @@ block|}
 comment|// E.g. "x is null" implies "x is null".
 if|if
 condition|(
-name|RexUtil
-operator|.
-name|eq
-argument_list|(
 name|first
-argument_list|,
+operator|.
+name|equals
+argument_list|(
 name|second
 argument_list|)
 condition|)
@@ -815,12 +813,10 @@ name|node
 parameter_list|)
 block|{
 return|return
-name|RexUtil
-operator|.
-name|eq
-argument_list|(
 name|node
-argument_list|,
+operator|.
+name|equals
+argument_list|(
 name|operand
 argument_list|)
 operator|||

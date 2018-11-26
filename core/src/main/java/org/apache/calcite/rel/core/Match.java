@@ -1625,15 +1625,9 @@ if|if
 condition|(
 name|rex
 operator|.
-name|toString
-argument_list|()
-operator|.
 name|equals
 argument_list|(
 name|aggCall
-operator|.
-name|toString
-argument_list|()
 argument_list|)
 condition|)
 block|{

@@ -6926,7 +6926,7 @@ block|{
 specifier|final
 name|Map
 argument_list|<
-name|String
+name|RexNode
 argument_list|,
 name|Integer
 argument_list|>
@@ -6952,9 +6952,6 @@ operator|.
 name|put
 argument_list|(
 name|e
-operator|.
-name|toString
-argument_list|()
 argument_list|,
 name|map
 operator|.
@@ -6987,9 +6984,6 @@ operator|.
 name|get
 argument_list|(
 name|ref
-operator|.
-name|getName
-argument_list|()
 argument_list|)
 decl_stmt|;
 if|if
@@ -7037,9 +7031,6 @@ operator|.
 name|get
 argument_list|(
 name|call
-operator|.
-name|toString
-argument_list|()
 argument_list|)
 decl_stmt|;
 if|if

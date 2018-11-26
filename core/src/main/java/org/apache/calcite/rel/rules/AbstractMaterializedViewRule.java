@@ -7508,9 +7508,10 @@ argument_list|()
 expr_stmt|;
 block|}
 comment|// Generate result rewriting
+specifier|final
 name|List
 argument_list|<
-name|String
+name|RexNode
 argument_list|>
 name|additionalViewExprs
 init|=
@@ -7720,7 +7721,7 @@ comment|// We need to rollup this expression
 specifier|final
 name|Multimap
 argument_list|<
-name|String
+name|RexNode
 argument_list|,
 name|Integer
 argument_list|>
@@ -7808,6 +7809,7 @@ condition|)
 block|{
 continue|continue;
 block|}
+specifier|final
 name|int
 name|ref
 init|=
@@ -7835,16 +7837,13 @@ argument_list|(
 operator|new
 name|RexInputRef
 argument_list|(
-name|childTargetIdx
+name|ref
 argument_list|,
 name|targetNode
 operator|.
 name|getType
 argument_list|()
 argument_list|)
-operator|.
-name|toString
-argument_list|()
 argument_list|,
 name|k
 argument_list|)
@@ -7904,9 +7903,6 @@ operator|.
 name|getType
 argument_list|()
 argument_list|)
-operator|.
-name|toString
-argument_list|()
 argument_list|)
 expr_stmt|;
 comment|// We need to create the rollup expression
@@ -8653,7 +8649,7 @@ comment|// Available in view.
 specifier|final
 name|Multimap
 argument_list|<
-name|String
+name|RexNode
 argument_list|,
 name|Integer
 argument_list|>
@@ -8685,9 +8681,6 @@ operator|.
 name|put
 argument_list|(
 name|viewExpr
-operator|.
-name|toString
-argument_list|()
 argument_list|,
 name|numberViewExprs
 operator|++
@@ -8696,7 +8689,7 @@ expr_stmt|;
 block|}
 for|for
 control|(
-name|String
+name|RexNode
 name|additionalViewExpr
 range|:
 name|additionalViewExprs
@@ -8910,7 +8903,7 @@ argument_list|()
 decl_stmt|;
 name|Multimap
 argument_list|<
-name|String
+name|RexNode
 argument_list|,
 name|Integer
 argument_list|>
@@ -9034,9 +9027,6 @@ operator|.
 name|put
 argument_list|(
 name|expr
-operator|.
-name|toString
-argument_list|()
 argument_list|,
 name|i
 argument_list|)
@@ -9166,9 +9156,6 @@ operator|.
 name|put
 argument_list|(
 name|simplified
-operator|.
-name|toString
-argument_list|()
 argument_list|,
 name|target
 operator|.
@@ -9257,9 +9244,6 @@ operator|.
 name|put
 argument_list|(
 name|simplified
-operator|.
-name|toString
-argument_list|()
 argument_list|,
 name|target
 operator|.
@@ -9361,6 +9345,7 @@ argument_list|,
 name|equivalenceClassesMap
 argument_list|)
 decl_stmt|;
+specifier|final
 name|Collection
 argument_list|<
 name|Integer
@@ -9372,9 +9357,6 @@ operator|.
 name|get
 argument_list|(
 name|targetExpr
-operator|.
-name|toString
-argument_list|()
 argument_list|)
 decl_stmt|;
 if|if
@@ -12510,9 +12492,10 @@ argument_list|>
 name|nodeExprs
 parameter_list|)
 block|{
+specifier|final
 name|Map
 argument_list|<
-name|String
+name|RexNode
 argument_list|,
 name|Integer
 argument_list|>
@@ -12523,9 +12506,10 @@ name|HashMap
 argument_list|<>
 argument_list|()
 decl_stmt|;
+specifier|final
 name|Map
 argument_list|<
-name|String
+name|RexNode
 argument_list|,
 name|Integer
 argument_list|>
@@ -12628,9 +12612,6 @@ operator|.
 name|put
 argument_list|(
 name|e
-operator|.
-name|toString
-argument_list|()
 argument_list|,
 name|i
 argument_list|)
@@ -12663,9 +12644,6 @@ name|get
 argument_list|(
 literal|0
 argument_list|)
-operator|.
-name|toString
-argument_list|()
 argument_list|,
 name|i
 argument_list|)
@@ -12673,9 +12651,8 @@ expr_stmt|;
 block|}
 block|}
 return|return
+operator|new
 name|NodeLineage
-operator|.
-name|of
 argument_list|(
 name|exprsLineage
 argument_list|,
@@ -12716,9 +12693,10 @@ argument_list|>
 name|nodeExprs
 parameter_list|)
 block|{
+specifier|final
 name|Map
 argument_list|<
-name|String
+name|RexNode
 argument_list|,
 name|Integer
 argument_list|>
@@ -12729,9 +12707,10 @@ name|HashMap
 argument_list|<>
 argument_list|()
 decl_stmt|;
+specifier|final
 name|Map
 argument_list|<
-name|String
+name|RexNode
 argument_list|,
 name|Integer
 argument_list|>
@@ -12793,14 +12772,17 @@ continue|continue;
 block|}
 comment|// We only support project - filter - join, thus it should map to
 comment|// a single expression
-assert|assert
-name|s
+specifier|final
+name|RexNode
+name|node2
+init|=
+name|Iterables
 operator|.
-name|size
-argument_list|()
-operator|==
-literal|1
-assert|;
+name|getOnlyElement
+argument_list|(
+name|s
+argument_list|)
+decl_stmt|;
 comment|// Rewrite expr. First we take first element from the corresponding equivalence class,
 comment|// then we swap the table references following the table mapping
 specifier|final
@@ -12813,13 +12795,7 @@ name|swapColumnTableReferences
 argument_list|(
 name|rexBuilder
 argument_list|,
-name|s
-operator|.
-name|iterator
-argument_list|()
-operator|.
-name|next
-argument_list|()
+name|node2
 argument_list|,
 name|ec
 operator|.
@@ -12834,9 +12810,6 @@ operator|.
 name|put
 argument_list|(
 name|e
-operator|.
-name|toString
-argument_list|()
 argument_list|,
 name|i
 argument_list|)
@@ -12869,9 +12842,6 @@ name|get
 argument_list|(
 literal|0
 argument_list|)
-operator|.
-name|toString
-argument_list|()
 argument_list|,
 name|i
 argument_list|)
@@ -12879,9 +12849,8 @@ expr_stmt|;
 block|}
 block|}
 return|return
+operator|new
 name|NodeLineage
-operator|.
-name|of
 argument_list|(
 name|exprsLineage
 argument_list|,
@@ -13007,9 +12976,6 @@ operator|.
 name|get
 argument_list|(
 name|e
-operator|.
-name|toString
-argument_list|()
 argument_list|)
 decl_stmt|;
 if|if
@@ -13040,9 +13006,6 @@ operator|.
 name|get
 argument_list|(
 name|e
-operator|.
-name|toString
-argument_list|()
 argument_list|)
 expr_stmt|;
 if|if
@@ -13204,7 +13167,7 @@ literal|null
 return|;
 block|}
 block|}
-comment|/**    * Replaces all the possible subexpressions by input references    * to the input node.    */
+comment|/**    * Replaces all the possible sub-expressions by input references    * to the input node.    */
 specifier|private
 specifier|static
 name|RexNode
@@ -13221,7 +13184,7 @@ parameter_list|,
 specifier|final
 name|Multimap
 argument_list|<
-name|String
+name|RexNode
 argument_list|,
 name|Integer
 argument_list|>
@@ -13243,7 +13206,7 @@ literal|null
 argument_list|)
 return|;
 block|}
-comment|/**    * Replaces all the possible subexpressions by input references    * to the input node. If available, it uses the rewriting mapping    * to change the position to reference. Takes the reference type    * from the input node.    */
+comment|/**    * Replaces all the possible sub-expressions by input references    * to the input node. If available, it uses the rewriting mapping    * to change the position to reference. Takes the reference type    * from the input node.    */
 specifier|private
 specifier|static
 name|RexNode
@@ -13260,7 +13223,7 @@ parameter_list|,
 specifier|final
 name|Multimap
 argument_list|<
-name|String
+name|RexNode
 argument_list|,
 name|Integer
 argument_list|>
@@ -13305,9 +13268,6 @@ operator|.
 name|get
 argument_list|(
 name|ref
-operator|.
-name|toString
-argument_list|()
 argument_list|)
 decl_stmt|;
 if|if
@@ -13425,9 +13385,6 @@ operator|.
 name|get
 argument_list|(
 name|inputRef
-operator|.
-name|toString
-argument_list|()
 argument_list|)
 decl_stmt|;
 if|if
@@ -13546,9 +13503,6 @@ operator|.
 name|get
 argument_list|(
 name|call
-operator|.
-name|toString
-argument_list|()
 argument_list|)
 decl_stmt|;
 if|if
@@ -14171,7 +14125,7 @@ name|newEc
 return|;
 block|}
 block|}
-comment|/**    * Class to encapsulate expression lineage details    */
+comment|/** Expression lineage details. */
 specifier|private
 specifier|static
 class|class
@@ -14181,7 +14135,7 @@ specifier|private
 specifier|final
 name|Map
 argument_list|<
-name|String
+name|RexNode
 argument_list|,
 name|Integer
 argument_list|>
@@ -14191,7 +14145,7 @@ specifier|private
 specifier|final
 name|Map
 argument_list|<
-name|String
+name|RexNode
 argument_list|,
 name|Integer
 argument_list|>
@@ -14202,7 +14156,7 @@ name|NodeLineage
 parameter_list|(
 name|Map
 argument_list|<
-name|String
+name|RexNode
 argument_list|,
 name|Integer
 argument_list|>
@@ -14210,7 +14164,7 @@ name|exprsLineage
 parameter_list|,
 name|Map
 argument_list|<
-name|String
+name|RexNode
 argument_list|,
 name|Integer
 argument_list|>
@@ -14221,9 +14175,9 @@ name|this
 operator|.
 name|exprsLineage
 operator|=
-name|Collections
+name|ImmutableMap
 operator|.
-name|unmodifiableMap
+name|copyOf
 argument_list|(
 name|exprsLineage
 argument_list|)
@@ -14232,45 +14186,13 @@ name|this
 operator|.
 name|exprsLineageLosslessCasts
 operator|=
-name|Collections
+name|ImmutableMap
 operator|.
-name|unmodifiableMap
+name|copyOf
 argument_list|(
 name|exprsLineageLosslessCasts
 argument_list|)
 expr_stmt|;
-block|}
-specifier|protected
-specifier|static
-name|NodeLineage
-name|of
-parameter_list|(
-name|Map
-argument_list|<
-name|String
-argument_list|,
-name|Integer
-argument_list|>
-name|exprsLineage
-parameter_list|,
-name|Map
-argument_list|<
-name|String
-argument_list|,
-name|Integer
-argument_list|>
-name|exprsLineageLosslessCasts
-parameter_list|)
-block|{
-return|return
-operator|new
-name|NodeLineage
-argument_list|(
-name|exprsLineage
-argument_list|,
-name|exprsLineageLosslessCasts
-argument_list|)
-return|;
 block|}
 block|}
 comment|/** Edge for graph */

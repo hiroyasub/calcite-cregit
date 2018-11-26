@@ -194,6 +194,27 @@ name|P
 name|arg
 parameter_list|)
 function_decl|;
+comment|/** {@inheritDoc}    *    *<p>Every node must implement {@link #equals} based on its content    */
+annotation|@
+name|Override
+specifier|public
+specifier|abstract
+name|boolean
+name|equals
+parameter_list|(
+name|Object
+name|obj
+parameter_list|)
+function_decl|;
+comment|/** {@inheritDoc}    *    *<p>Every node must implement {@link #hashCode} consistent with    * {@link #equals}    */
+annotation|@
+name|Override
+specifier|public
+specifier|abstract
+name|int
+name|hashCode
+parameter_list|()
+function_decl|;
 block|}
 end_class
 
