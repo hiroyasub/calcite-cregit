@@ -579,7 +579,7 @@ class|class
 name|SqlParserTest
 block|{
 comment|//~ Static fields/initializers ---------------------------------------------
-comment|/**    * List of reserved keywords.    *    *<p>Each keyword is followed by tokens indicating whether it is reserved in    * the SQL:92, SQL:99, SQL:2003, SQL:2011, SQL:2014 standards and in Calcite.    *    *<p>The standard keywords are derived from    *<a href="http://developer.mimer.com/validator/sql-reserved-words.tml">Mimer</a>    * and from the specification.    *    *<p>If a new<b>reserved</b> keyword is added to the parser, include it in    * this list, flagged "c". If the keyword is not intended to be a reserved    * keyword, add it to the non-reserved keyword list in the parser.    */
+comment|/**    * List of reserved keywords.    *    *<p>Each keyword is followed by tokens indicating whether it is reserved in    * the SQL:92, SQL:99, SQL:2003, SQL:2011, SQL:2014 standards and in Calcite.    *    *<p>The standard keywords are derived from    *<a href="https://developer.mimer.com/wp-content/uploads/2018/05/Standard-SQL-Reserved-Words-Summary.pdf">Mimer</a>    * and from the specification.    *    *<p>If a new<b>reserved</b> keyword is added to the parser, include it in    * this list, flagged "c". If the keyword is not intended to be a reserved    * keyword, add it to the non-reserved keyword list in the parser.    */
 specifier|private
 specifier|static
 specifier|final
@@ -5778,6 +5778,81 @@ operator|+
 literal|"FROM `EMP` AS `E` (`EMPNO`, `GENDER`)\n"
 operator|+
 literal|"INNER JOIN `DEPT` AS `D` (`DEPTNO`, `DNAME`) ON (`EMP`.`DEPTNO` = `DEPT`.`DEPTNO`)"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Test case that does not reproduce but is related to    *<a href="https://issues.apache.org/jira/browse/CALCITE-2637">[CALCITE-2637]    * Prefix '-' operator failed between BETWEEN and AND</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testBetweenAnd
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select * from emp\n"
+operator|+
+literal|"where deptno between - DEPTNO + 1 and 5"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM `EMP`\n"
+operator|+
+literal|"WHERE (`DEPTNO` BETWEEN ASYMMETRIC ((- `DEPTNO`) + 1) AND 5)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testBetweenAnd2
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select * from emp\n"
+operator|+
+literal|"where deptno between - DEPTNO + 1 and - empno - 3"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM `EMP`\n"
+operator|+
+literal|"WHERE (`DEPTNO` BETWEEN ASYMMETRIC ((- `DEPTNO`) + 1)"
+operator|+
+literal|" AND ((- `EMPNO`) - 3))"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
 argument_list|)
 expr_stmt|;
 block|}
