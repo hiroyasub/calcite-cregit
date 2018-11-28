@@ -2334,6 +2334,43 @@ name|expected
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2715">[CALCITE-2715]    * MS SQL Server does not support character set as part of data type</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testMssqlCharacterSet
+parameter_list|()
+block|{
+name|String
+name|query
+init|=
+literal|"select \"hire_date\", cast(\"hire_date\" as varchar(10))\n"
+operator|+
+literal|"from \"foodmart\".\"reserve_employee\""
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT [hire_date], CAST([hire_date] AS VARCHAR(10))\n"
+operator|+
+literal|"FROM [foodmart].[reserve_employee]"
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|withMssql
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
 comment|/**    * Tests that IN can be un-parsed.    *    *<p>This cannot be tested using "sql", because because Calcite's SQL parser    * replaces INs with ORs or sub-queries.    */
 annotation|@
 name|Test

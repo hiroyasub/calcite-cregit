@@ -484,6 +484,17 @@ expr_stmt|;
 block|}
 block|}
 block|}
+annotation|@
+name|Override
+specifier|public
+name|boolean
+name|supportsCharSet
+parameter_list|()
+block|{
+return|return
+literal|false
+return|;
+block|}
 comment|/**    * Unparses datetime floor for Microsoft SQL Server.    * There is no TRUNC function, so simulate this using calls to CONVERT.    *    * @param writer Writer    * @param call Call    */
 specifier|private
 name|void
