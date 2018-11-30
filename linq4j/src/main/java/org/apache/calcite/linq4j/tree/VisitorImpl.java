@@ -310,6 +310,14 @@ return|return
 name|fieldDeclaration
 operator|.
 name|initializer
+operator|==
+literal|null
+condition|?
+literal|null
+else|:
+name|fieldDeclaration
+operator|.
+name|initializer
 operator|.
 name|accept
 argument_list|(
