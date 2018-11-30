@@ -1888,6 +1888,23 @@ block|{
 comment|// Determine the simple origin of the first column in the
 comment|// RelNode.  If it's simple, then that means that the underlying
 comment|// table is also simple, even if the column itself is derived.
+if|if
+condition|(
+name|rel
+operator|.
+name|getRowType
+argument_list|()
+operator|.
+name|getFieldCount
+argument_list|()
+operator|==
+literal|0
+condition|)
+block|{
+return|return
+literal|null
+return|;
+block|}
 specifier|final
 name|Set
 argument_list|<
