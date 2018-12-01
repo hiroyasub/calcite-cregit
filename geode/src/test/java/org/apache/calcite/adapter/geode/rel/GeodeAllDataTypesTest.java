@@ -91,6 +91,34 @@ end_import
 
 begin_import
 import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|collect
+operator|.
+name|ImmutableList
+import|;
+end_import
+
+begin_import
+import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|collect
+operator|.
+name|ImmutableMap
+import|;
+end_import
+
+begin_import
+import|import
 name|org
 operator|.
 name|junit
@@ -175,27 +203,7 @@ name|java
 operator|.
 name|util
 operator|.
-name|Arrays
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
 name|Collections
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|HashMap
 import|;
 end_import
 
@@ -238,6 +246,7 @@ name|void
 name|setUp
 parameter_list|()
 block|{
+specifier|final
 name|Cache
 name|cache
 init|=
@@ -246,6 +255,7 @@ operator|.
 name|cache
 argument_list|()
 decl_stmt|;
+specifier|final
 name|Region
 argument_list|<
 name|?
@@ -269,9 +279,15 @@ argument_list|(
 literal|"allDataTypesRegion"
 argument_list|)
 decl_stmt|;
+specifier|final
 name|List
 argument_list|<
 name|Map
+argument_list|<
+name|String
+argument_list|,
+name|Object
+argument_list|>
 argument_list|>
 name|mapList
 init|=
@@ -295,27 +311,37 @@ specifier|static
 name|List
 argument_list|<
 name|Map
+argument_list|<
+name|String
+argument_list|,
+name|Object
+argument_list|>
 argument_list|>
 name|createMapList
 parameter_list|()
 block|{
 return|return
-name|Arrays
+name|ImmutableList
 operator|.
-name|asList
+name|of
 argument_list|(
-operator|new
-name|HashMap
+name|ImmutableMap
+operator|.
+expr|<
+name|String
+argument_list|,
+name|Object
+operator|>
+name|builder
 argument_list|()
-block|{
-block|{
+operator|.
 name|put
 argument_list|(
 literal|"booleanValue"
 argument_list|,
 literal|true
 argument_list|)
-expr_stmt|;
+operator|.
 name|put
 argument_list|(
 literal|"dateValue"
@@ -327,7 +353,7 @@ argument_list|(
 literal|"2018-02-03"
 argument_list|)
 argument_list|)
-expr_stmt|;
+operator|.
 name|put
 argument_list|(
 literal|"timeValue"
@@ -339,7 +365,7 @@ argument_list|(
 literal|"02:22:23"
 argument_list|)
 argument_list|)
-expr_stmt|;
+operator|.
 name|put
 argument_list|(
 literal|"timestampValue"
@@ -351,36 +377,41 @@ argument_list|(
 literal|"2018-02-03 02:22:33"
 argument_list|)
 argument_list|)
-expr_stmt|;
+operator|.
 name|put
 argument_list|(
 literal|"stringValue"
 argument_list|,
 literal|"abc"
 argument_list|)
-expr_stmt|;
+operator|.
 name|put
 argument_list|(
 literal|"floatValue"
 argument_list|,
 literal|1.5678
 argument_list|)
-expr_stmt|;
-block|}
-block|}
-argument_list|,
-operator|new
-name|HashMap
+operator|.
+name|build
 argument_list|()
-block|{
-block|{
+argument_list|,
+name|ImmutableMap
+operator|.
+expr|<
+name|String
+argument_list|,
+name|Object
+operator|>
+name|builder
+argument_list|()
+operator|.
 name|put
 argument_list|(
 literal|"booleanValue"
 argument_list|,
 literal|false
 argument_list|)
-expr_stmt|;
+operator|.
 name|put
 argument_list|(
 literal|"dateValue"
@@ -392,7 +423,7 @@ argument_list|(
 literal|"2018-02-04"
 argument_list|)
 argument_list|)
-expr_stmt|;
+operator|.
 name|put
 argument_list|(
 literal|"timeValue"
@@ -404,7 +435,7 @@ argument_list|(
 literal|"03:22:23"
 argument_list|)
 argument_list|)
-expr_stmt|;
+operator|.
 name|put
 argument_list|(
 literal|"timestampValue"
@@ -416,36 +447,41 @@ argument_list|(
 literal|"2018-02-04 04:22:33"
 argument_list|)
 argument_list|)
-expr_stmt|;
+operator|.
 name|put
 argument_list|(
 literal|"stringValue"
 argument_list|,
 literal|"def"
 argument_list|)
-expr_stmt|;
+operator|.
 name|put
 argument_list|(
 literal|"floatValue"
 argument_list|,
 literal|3.5678
 argument_list|)
-expr_stmt|;
-block|}
-block|}
-argument_list|,
-operator|new
-name|HashMap
+operator|.
+name|build
 argument_list|()
-block|{
-block|{
+argument_list|,
+name|ImmutableMap
+operator|.
+expr|<
+name|String
+argument_list|,
+name|Object
+operator|>
+name|builder
+argument_list|()
+operator|.
 name|put
 argument_list|(
 literal|"booleanValue"
 argument_list|,
 literal|true
 argument_list|)
-expr_stmt|;
+operator|.
 name|put
 argument_list|(
 literal|"dateValue"
@@ -457,7 +493,7 @@ argument_list|(
 literal|"2018-02-05"
 argument_list|)
 argument_list|)
-expr_stmt|;
+operator|.
 name|put
 argument_list|(
 literal|"timeValue"
@@ -469,7 +505,7 @@ argument_list|(
 literal|"04:22:23"
 argument_list|)
 argument_list|)
-expr_stmt|;
+operator|.
 name|put
 argument_list|(
 literal|"timestampValue"
@@ -481,23 +517,23 @@ argument_list|(
 literal|"2018-02-05 04:22:33"
 argument_list|)
 argument_list|)
-expr_stmt|;
+operator|.
 name|put
 argument_list|(
 literal|"stringValue"
 argument_list|,
 literal|"ghi"
 argument_list|)
-expr_stmt|;
+operator|.
 name|put
 argument_list|(
 literal|"floatValue"
 argument_list|,
 literal|8.9267
 argument_list|)
-expr_stmt|;
-block|}
-block|}
+operator|.
+name|build
+argument_list|()
 argument_list|)
 return|;
 block|}
@@ -708,6 +744,495 @@ operator|+
 literal|"FROM /allDataTypesRegion WHERE "
 operator|+
 literal|"stringValue IN SET('abc', 'def') OR floatValue IN SET(1.5678, null) "
+operator|+
+literal|"OR booleanValue IN SET(true, false, null)"
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSqlSingleDateWhereFilter
+parameter_list|()
+block|{
+name|calciteAssert
+argument_list|()
+operator|.
+name|query
+argument_list|(
+literal|"SELECT dateValue\n"
+operator|+
+literal|"FROM geode.allDataTypesRegion\n"
+operator|+
+literal|"WHERE dateValue = DATE '2018-02-03'"
+argument_list|)
+operator|.
+name|returnsCount
+argument_list|(
+literal|1
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|GeodeAssertions
+operator|.
+name|query
+argument_list|(
+literal|"SELECT dateValue AS dateValue "
+operator|+
+literal|"FROM /allDataTypesRegion "
+operator|+
+literal|"WHERE dateValue = DATE '2018-02-03'"
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|calciteAssert
+argument_list|()
+operator|.
+name|query
+argument_list|(
+literal|"SELECT dateValue\n"
+operator|+
+literal|"FROM geode.allDataTypesRegion\n"
+operator|+
+literal|"WHERE dateValue> DATE '2018-02-03'"
+argument_list|)
+operator|.
+name|returnsCount
+argument_list|(
+literal|2
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|GeodeAssertions
+operator|.
+name|query
+argument_list|(
+literal|"SELECT dateValue AS dateValue "
+operator|+
+literal|"FROM /allDataTypesRegion "
+operator|+
+literal|"WHERE dateValue> DATE '2018-02-03'"
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|calciteAssert
+argument_list|()
+operator|.
+name|query
+argument_list|(
+literal|"SELECT dateValue\n"
+operator|+
+literal|"FROM geode.allDataTypesRegion\n"
+operator|+
+literal|"WHERE dateValue< DATE '2018-02-03'"
+argument_list|)
+operator|.
+name|returnsCount
+argument_list|(
+literal|0
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|GeodeAssertions
+operator|.
+name|query
+argument_list|(
+literal|"SELECT dateValue AS dateValue "
+operator|+
+literal|"FROM /allDataTypesRegion "
+operator|+
+literal|"WHERE dateValue< DATE '2018-02-03'"
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSqlMultipleDateWhereFilter
+parameter_list|()
+block|{
+name|calciteAssert
+argument_list|()
+operator|.
+name|query
+argument_list|(
+literal|"SELECT dateValue\n"
+operator|+
+literal|"FROM geode.allDataTypesRegion\n"
+operator|+
+literal|"WHERE dateValue = DATE '2018-02-03'\n"
+operator|+
+literal|"  OR dateValue = DATE '2018-02-04'"
+argument_list|)
+operator|.
+name|returnsCount
+argument_list|(
+literal|2
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|GeodeAssertions
+operator|.
+name|query
+argument_list|(
+literal|"SELECT dateValue AS dateValue "
+operator|+
+literal|"FROM /allDataTypesRegion "
+operator|+
+literal|"WHERE dateValue IN SET(DATE '2018-02-03',"
+operator|+
+literal|" DATE '2018-02-04')"
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSqlSingleTimeWhereFilter
+parameter_list|()
+block|{
+name|calciteAssert
+argument_list|()
+operator|.
+name|query
+argument_list|(
+literal|"SELECT timeValue\n"
+operator|+
+literal|"FROM geode.allDataTypesRegion\n"
+operator|+
+literal|"WHERE timeValue = TIME '02:22:23'"
+argument_list|)
+operator|.
+name|returnsCount
+argument_list|(
+literal|1
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|GeodeAssertions
+operator|.
+name|query
+argument_list|(
+literal|"SELECT timeValue AS timeValue "
+operator|+
+literal|"FROM /allDataTypesRegion "
+operator|+
+literal|"WHERE timeValue = TIME '02:22:23'"
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|calciteAssert
+argument_list|()
+operator|.
+name|query
+argument_list|(
+literal|"SELECT timeValue\n"
+operator|+
+literal|"FROM geode.allDataTypesRegion\n"
+operator|+
+literal|"WHERE timeValue> TIME '02:22:23'"
+argument_list|)
+operator|.
+name|returnsCount
+argument_list|(
+literal|2
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|GeodeAssertions
+operator|.
+name|query
+argument_list|(
+literal|"SELECT timeValue AS timeValue "
+operator|+
+literal|"FROM /allDataTypesRegion "
+operator|+
+literal|"WHERE timeValue> TIME '02:22:23'"
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|calciteAssert
+argument_list|()
+operator|.
+name|query
+argument_list|(
+literal|"SELECT timeValue\n"
+operator|+
+literal|"FROM geode.allDataTypesRegion\n"
+operator|+
+literal|"WHERE timeValue< TIME '02:22:23'"
+argument_list|)
+operator|.
+name|returnsCount
+argument_list|(
+literal|0
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|GeodeAssertions
+operator|.
+name|query
+argument_list|(
+literal|"SELECT timeValue AS timeValue "
+operator|+
+literal|"FROM /allDataTypesRegion "
+operator|+
+literal|"WHERE timeValue< TIME '02:22:23'"
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSqlMultipleTimeWhereFilter
+parameter_list|()
+block|{
+name|calciteAssert
+argument_list|()
+operator|.
+name|query
+argument_list|(
+literal|"SELECT timeValue\n"
+operator|+
+literal|"FROM geode.allDataTypesRegion\n"
+operator|+
+literal|"WHERE timeValue = TIME '02:22:23'\n"
+operator|+
+literal|"  OR timeValue = TIME '03:22:23'"
+argument_list|)
+operator|.
+name|returnsCount
+argument_list|(
+literal|2
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|GeodeAssertions
+operator|.
+name|query
+argument_list|(
+literal|"SELECT timeValue AS timeValue "
+operator|+
+literal|"FROM /allDataTypesRegion "
+operator|+
+literal|"WHERE timeValue IN SET(TIME '02:22:23', TIME '03:22:23')"
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSqlSingleTimestampWhereFilter
+parameter_list|()
+block|{
+name|calciteAssert
+argument_list|()
+operator|.
+name|query
+argument_list|(
+literal|"SELECT timestampValue\n"
+operator|+
+literal|"FROM geode.allDataTypesRegion\n"
+operator|+
+literal|"WHERE timestampValue = TIMESTAMP '2018-02-03 02:22:33'"
+argument_list|)
+operator|.
+name|returnsCount
+argument_list|(
+literal|1
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|GeodeAssertions
+operator|.
+name|query
+argument_list|(
+literal|"SELECT timestampValue AS timestampValue "
+operator|+
+literal|"FROM /allDataTypesRegion "
+operator|+
+literal|"WHERE timestampValue = TIMESTAMP '2018-02-03 02:22:33'"
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|calciteAssert
+argument_list|()
+operator|.
+name|query
+argument_list|(
+literal|"SELECT timestampValue\n"
+operator|+
+literal|"FROM geode.allDataTypesRegion\n"
+operator|+
+literal|"WHERE timestampValue> TIMESTAMP '2018-02-03 02:22:33'"
+argument_list|)
+operator|.
+name|returnsCount
+argument_list|(
+literal|2
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|GeodeAssertions
+operator|.
+name|query
+argument_list|(
+literal|"SELECT timestampValue AS timestampValue "
+operator|+
+literal|"FROM /allDataTypesRegion "
+operator|+
+literal|"WHERE timestampValue> TIMESTAMP '2018-02-03 02:22:33'"
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|calciteAssert
+argument_list|()
+operator|.
+name|query
+argument_list|(
+literal|"SELECT timestampValue\n"
+operator|+
+literal|"FROM geode.allDataTypesRegion\n"
+operator|+
+literal|"WHERE timestampValue< TIMESTAMP '2018-02-03 02:22:33'"
+argument_list|)
+operator|.
+name|returnsCount
+argument_list|(
+literal|0
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|GeodeAssertions
+operator|.
+name|query
+argument_list|(
+literal|"SELECT timestampValue AS timestampValue "
+operator|+
+literal|"FROM /allDataTypesRegion "
+operator|+
+literal|"WHERE timestampValue< TIMESTAMP '2018-02-03 02:22:33'"
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSqlMultipleTimestampWhereFilter
+parameter_list|()
+block|{
+name|calciteAssert
+argument_list|()
+operator|.
+name|query
+argument_list|(
+literal|"SELECT timestampValue\n"
+operator|+
+literal|"FROM geode.allDataTypesRegion\n"
+operator|+
+literal|"WHERE timestampValue = TIMESTAMP '2018-02-03 02:22:33'\n"
+operator|+
+literal|"  OR timestampValue = TIMESTAMP '2018-02-05 04:22:33'"
+argument_list|)
+operator|.
+name|returnsCount
+argument_list|(
+literal|2
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|GeodeAssertions
+operator|.
+name|query
+argument_list|(
+literal|"SELECT timestampValue AS timestampValue "
+operator|+
+literal|"FROM /allDataTypesRegion "
+operator|+
+literal|"WHERE timestampValue IN SET("
+operator|+
+literal|"TIMESTAMP '2018-02-03 02:22:33', "
+operator|+
+literal|"TIMESTAMP '2018-02-05 04:22:33')"
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSqlWhereWithMultipleOrForAllFields
+parameter_list|()
+block|{
+name|calciteAssert
+argument_list|()
+operator|.
+name|query
+argument_list|(
+literal|"SELECT stringValue "
+operator|+
+literal|"FROM geode.allDataTypesRegion WHERE (stringValue = 'abc' OR stringValue = 'def') OR "
+operator|+
+literal|"(floatValue = 1.5678 OR floatValue = null) OR "
+operator|+
+literal|"(dateValue = DATE '2018-02-05' OR dateValue = DATE '2018-02-06' ) OR "
+operator|+
+literal|"(timeValue = TIME '03:22:23' OR timeValue = TIME '07:22:23') OR "
+operator|+
+literal|"(timestampValue = TIMESTAMP '2018-02-05 04:22:33' OR "
+operator|+
+literal|"timestampValue = TIMESTAMP '2017-02-05 04:22:33') OR "
+operator|+
+literal|"(booleanValue = true OR booleanValue = false OR booleanValue = null)"
+argument_list|)
+operator|.
+name|returnsCount
+argument_list|(
+literal|3
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|GeodeAssertions
+operator|.
+name|query
+argument_list|(
+literal|"SELECT stringValue AS stringValue "
+operator|+
+literal|"FROM /allDataTypesRegion WHERE "
+operator|+
+literal|"stringValue IN SET('abc', 'def') OR floatValue IN SET(1.5678, null) OR dateValue "
+operator|+
+literal|"IN SET(DATE '2018-02-05', DATE '2018-02-06') OR timeValue "
+operator|+
+literal|"IN SET(TIME '03:22:23', TIME '07:22:23') OR timestampValue "
+operator|+
+literal|"IN SET(TIMESTAMP '2018-02-05 04:22:33', TIMESTAMP '2017-02-05 04:22:33') "
 operator|+
 literal|"OR booleanValue IN SET(true, false, null)"
 argument_list|)
