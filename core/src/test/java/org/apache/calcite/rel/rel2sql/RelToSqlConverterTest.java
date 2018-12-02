@@ -3190,6 +3190,84 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testMysqlCastToBigint
+parameter_list|()
+block|{
+comment|// MySQL does not allow cast to BIGINT; instead cast to SIGNED.
+specifier|final
+name|String
+name|query
+init|=
+literal|"select cast(\"product_id\" as bigint) from \"product\""
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT CAST(`product_id` AS SIGNED)\n"
+operator|+
+literal|"FROM `foodmart`.`product`"
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|withMysql
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testMysqlCastToInteger
+parameter_list|()
+block|{
+comment|// MySQL does not allow cast to INTEGER; instead cast to SIGNED.
+specifier|final
+name|String
+name|query
+init|=
+literal|"select \"employee_id\",\n"
+operator|+
+literal|"  cast(\"salary_paid\" * 10000 as integer)\n"
+operator|+
+literal|"from \"salary\""
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT `employee_id`,"
+operator|+
+literal|" CAST(`salary_paid` * 10000 AS SIGNED)\n"
+operator|+
+literal|"FROM `foodmart`.`salary`"
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|withMysql
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testHiveSelectQueryWithOrderByDescAndHighNullsWithVersionGreaterThanOrEq21
 parameter_list|()
 block|{

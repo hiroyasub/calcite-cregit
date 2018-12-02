@@ -661,6 +661,9 @@ return|;
 case|case
 name|INTEGER
 case|:
+case|case
+name|BIGINT
+case|:
 return|return
 operator|new
 name|SqlDataTypeSpec
@@ -668,7 +671,7 @@ argument_list|(
 operator|new
 name|SqlIdentifier
 argument_list|(
-literal|"_UNSIGNED"
+literal|"_SIGNED"
 argument_list|,
 name|SqlParserPos
 operator|.
