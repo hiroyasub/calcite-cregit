@@ -57,6 +57,38 @@ name|apache
 operator|.
 name|calcite
 operator|.
+name|rel
+operator|.
+name|type
+operator|.
+name|RelDataTypeSystem
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|type
+operator|.
+name|RelDataTypeSystemImpl
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
 name|sql
 operator|.
 name|SqlCall
@@ -179,6 +211,22 @@ name|SqlParserPos
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|type
+operator|.
+name|SqlTypeName
+import|;
+end_import
+
 begin_comment
 comment|/**  * A<code>SqlDialect</code> implementation for the PostgreSQL database.  */
 end_comment
@@ -190,6 +238,61 @@ name|PostgresqlSqlDialect
 extends|extends
 name|SqlDialect
 block|{
+comment|/** PostgreSQL type system. */
+specifier|private
+specifier|static
+specifier|final
+name|RelDataTypeSystem
+name|POSTGRESQL_TYPE_SYSTEM
+init|=
+operator|new
+name|RelDataTypeSystemImpl
+argument_list|()
+block|{
+annotation|@
+name|Override
+specifier|public
+name|int
+name|getMaxPrecision
+parameter_list|(
+name|SqlTypeName
+name|typeName
+parameter_list|)
+block|{
+switch|switch
+condition|(
+name|typeName
+condition|)
+block|{
+case|case
+name|VARCHAR
+case|:
+comment|// From htup_details.h in postgresql:
+comment|// MaxAttrSize is a somewhat arbitrary upper limit on the declared size of
+comment|// data fields of char(n) and similar types.  It need not have anything
+comment|// directly to do with the *actual* upper limit of varlena values, which
+comment|// is currently 1Gb (see TOAST structures in postgres.h).  I've set it
+comment|// at 10Mb which seems like a reasonable number --- tgl 8/6/00. */
+return|return
+literal|10
+operator|*
+literal|1024
+operator|*
+literal|1024
+return|;
+default|default:
+return|return
+name|super
+operator|.
+name|getMaxPrecision
+argument_list|(
+name|typeName
+argument_list|)
+return|;
+block|}
+block|}
+block|}
+decl_stmt|;
 specifier|public
 specifier|static
 specifier|final
@@ -211,6 +314,11 @@ operator|.
 name|withIdentifierQuoteString
 argument_list|(
 literal|"\""
+argument_list|)
+operator|.
+name|withDataTypeSystem
+argument_list|(
+name|POSTGRESQL_TYPE_SYSTEM
 argument_list|)
 argument_list|)
 decl_stmt|;
