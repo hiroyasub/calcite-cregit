@@ -11397,7 +11397,10 @@ return|;
 block|}
 block|}
 block|}
-comment|/** Deep expressions simplifier. */
+comment|/** Deep expressions simplifier.    *    *<p>This class is broken because it does not change the value of    * {@link RexUnknownAs} as it recurses into an expression. Do not use. */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 specifier|static
 class|class
@@ -11435,9 +11438,6 @@ specifier|final
 name|boolean
 name|matchNullability
 decl_stmt|;
-annotation|@
-name|Deprecated
-comment|// to be removed before 2.0
 specifier|public
 name|ExprSimplifier
 parameter_list|(
@@ -11457,9 +11457,6 @@ literal|true
 argument_list|)
 expr_stmt|;
 block|}
-annotation|@
-name|Deprecated
-comment|// to be removed before 2.0
 specifier|public
 name|ExprSimplifier
 parameter_list|(

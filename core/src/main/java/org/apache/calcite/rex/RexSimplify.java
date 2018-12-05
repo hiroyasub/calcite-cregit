@@ -893,10 +893,12 @@ argument_list|(
 name|e
 argument_list|,
 name|defaultUnknownAs
+argument_list|,
+literal|true
 argument_list|)
 return|;
 block|}
-specifier|private
+specifier|public
 name|RexNode
 name|simplifyPreservingType
 parameter_list|(
@@ -905,6 +907,9 @@ name|e
 parameter_list|,
 name|RexUnknownAs
 name|unknownAs
+parameter_list|,
+name|boolean
+name|matchNullability
 parameter_list|)
 block|{
 specifier|final
@@ -950,7 +955,7 @@ argument_list|()
 argument_list|,
 name|e2
 argument_list|,
-literal|true
+name|matchNullability
 argument_list|)
 decl_stmt|;
 if|if

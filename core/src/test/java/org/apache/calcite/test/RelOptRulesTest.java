@@ -19312,6 +19312,50 @@ block|}
 end_function
 
 begin_comment
+comment|/** Test case for   *<a href="https://issues.apache.org/jira/browse/CALCITE-2726">[CALCITE-2726]   * ReduceExpressionRule may oversimplify filter conditions containing nulls</a>.   */
+end_comment
+
+begin_function
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testNoOversimplificationBelowIsNull
+parameter_list|()
+block|{
+name|HepProgram
+name|program
+init|=
+operator|new
+name|HepProgramBuilder
+argument_list|()
+operator|.
+name|addRuleInstance
+argument_list|(
+name|ReduceExpressionsRule
+operator|.
+name|FILTER_INSTANCE
+argument_list|)
+operator|.
+name|build
+argument_list|()
+decl_stmt|;
+name|String
+name|sql
+init|=
+literal|"select * from emp where ( (empno=1 and mgr=1) or (empno=null and mgr=1) ) is null"
+decl_stmt|;
+name|checkPlanning
+argument_list|(
+name|program
+argument_list|,
+name|sql
+argument_list|)
+expr_stmt|;
+block|}
+end_function
+
+begin_comment
 unit|}
 comment|// End RelOptRulesTest.java
 end_comment
