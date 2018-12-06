@@ -2975,6 +2975,14 @@ name|size
 argument_list|()
 operator|==
 literal|1
+operator|&&
+operator|!
+name|id
+operator|.
+name|isComponentQuoted
+argument_list|(
+literal|0
+argument_list|)
 condition|)
 block|{
 specifier|final
