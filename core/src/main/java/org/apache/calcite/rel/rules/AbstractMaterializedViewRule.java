@@ -1831,8 +1831,8 @@ operator|==
 literal|null
 condition|)
 block|{
-comment|// Bail out
-return|return;
+comment|// Skip it
+continue|continue;
 block|}
 comment|// Extract view tables
 name|MatchModality
