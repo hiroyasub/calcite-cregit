@@ -341,6 +341,20 @@ end_import
 
 begin_import
 import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|collect
+operator|.
+name|Sets
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -366,6 +380,16 @@ operator|.
 name|util
 operator|.
 name|Collections
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|EnumSet
 import|;
 end_import
 
@@ -4509,8 +4533,7 @@ return|;
 block|}
 block|}
 comment|/**    * Decides whether it is safe to flatten the given case part into AND/ORs    */
-specifier|static
-class|class
+enum|enum
 name|SafeRexVisitor
 implements|implements
 name|RexVisitor
@@ -4518,7 +4541,10 @@ argument_list|<
 name|Boolean
 argument_list|>
 block|{
+name|INSTANCE
+block|;
 specifier|private
+specifier|final
 name|Set
 argument_list|<
 name|SqlKind
@@ -4528,13 +4554,21 @@ decl_stmt|;
 name|SafeRexVisitor
 parameter_list|()
 block|{
+name|Set
+argument_list|<
+name|SqlKind
+argument_list|>
 name|safeOps
-operator|=
-operator|new
-name|HashSet
-argument_list|<>
-argument_list|()
-expr_stmt|;
+init|=
+name|EnumSet
+operator|.
+name|noneOf
+argument_list|(
+name|SqlKind
+operator|.
+name|class
+argument_list|)
+decl_stmt|;
 name|safeOps
 operator|.
 name|addAll
@@ -4688,6 +4722,17 @@ operator|.
 name|LIKE
 argument_list|)
 expr_stmt|;
+name|this
+operator|.
+name|safeOps
+operator|=
+name|Sets
+operator|.
+name|immutableEnumSet
+argument_list|(
+name|safeOps
+argument_list|)
+expr_stmt|;
 block|}
 annotation|@
 name|Override
@@ -4714,7 +4759,7 @@ name|localRef
 parameter_list|)
 block|{
 return|return
-literal|true
+literal|false
 return|;
 block|}
 annotation|@
@@ -4917,9 +4962,9 @@ name|r
 operator|.
 name|accept
 argument_list|(
-operator|new
 name|SafeRexVisitor
-argument_list|()
+operator|.
+name|INSTANCE
 argument_list|)
 return|;
 block|}
@@ -4946,8 +4991,6 @@ parameter_list|)
 block|{
 name|RexNode
 name|result
-init|=
-literal|null
 decl_stmt|;
 comment|// prepare all condition/branches for boolean interpretation
 comment|// It's done here make these interpretation changes available to case2or simplifications
