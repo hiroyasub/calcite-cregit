@@ -1650,6 +1650,109 @@ literal|"FROM \"foodmart\".\"expense_fact\""
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testTablesNoCatalogSchema
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|model
+init|=
+name|JdbcTest
+operator|.
+name|FOODMART_MODEL
+operator|.
+name|replace
+argument_list|(
+literal|"jdbcCatalog: 'foodmart'"
+argument_list|,
+literal|"jdbcCatalog: null"
+argument_list|)
+operator|.
+name|replace
+argument_list|(
+literal|"jdbcSchema: 'foodmart'"
+argument_list|,
+literal|"jdbcSchema: null"
+argument_list|)
+decl_stmt|;
+comment|// Since Calcite uses PostgreSQL JDBC driver version>= 4.1,
+comment|// catalog/schema can be retrieved from JDBC connection and
+comment|// this test succeeds
+name|CalciteAssert
+operator|.
+name|model
+argument_list|(
+name|model
+argument_list|)
+comment|// Calcite uses PostgreSQL JDBC driver version>= 4.1
+operator|.
+name|enable
+argument_list|(
+name|CalciteAssert
+operator|.
+name|DB
+operator|==
+name|DatabaseInstance
+operator|.
+name|POSTGRESQL
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select \"store_id\", \"account_id\", \"exp_date\","
+operator|+
+literal|" \"time_id\", \"category_id\", \"currency_id\", \"amount\","
+operator|+
+literal|" last_value(\"time_id\") over ()"
+operator|+
+literal|" as \"last_version\" from \"expense_fact\""
+argument_list|)
+operator|.
+name|runs
+argument_list|()
+expr_stmt|;
+comment|// Since Calcite uses HSQLDB JDBC driver version< 4.1,
+comment|// catalog/schema cannot be retrieved from JDBC connection and
+comment|// this test fails
+name|CalciteAssert
+operator|.
+name|model
+argument_list|(
+name|model
+argument_list|)
+operator|.
+name|enable
+argument_list|(
+name|CalciteAssert
+operator|.
+name|DB
+operator|==
+name|DatabaseInstance
+operator|.
+name|HSQLDB
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select \"store_id\", \"account_id\", \"exp_date\","
+operator|+
+literal|" \"time_id\", \"category_id\", \"currency_id\", \"amount\","
+operator|+
+literal|" last_value(\"time_id\") over ()"
+operator|+
+literal|" as \"last_version\" from \"expense_fact\""
+argument_list|)
+operator|.
+name|throws_
+argument_list|(
+literal|"'expense_fact' not found"
+argument_list|)
+expr_stmt|;
+block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1506">[CALCITE-1506]    * Push OVER Clause to underlying SQL via JDBC adapter</a>.    *    *<p>Test runs only on Postgres; the default database, Hsqldb, does not    * support OVER. */
 annotation|@
 name|Test
