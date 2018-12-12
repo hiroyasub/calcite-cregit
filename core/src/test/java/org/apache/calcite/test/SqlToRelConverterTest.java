@@ -10671,6 +10671,44 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testMatchRecognizeIn
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"  from emp match_recognize\n"
+operator|+
+literal|"  (\n"
+operator|+
+literal|"    partition by job, sal\n"
+operator|+
+literal|"    order by job asc, sal desc, empno\n"
+operator|+
+literal|"    pattern (strt down+ up+)\n"
+operator|+
+literal|"    define\n"
+operator|+
+literal|"      down as down.mgr in (0, 1),\n"
+operator|+
+literal|"      up as up.mgr> prev(up.mgr)) as mr"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2323">[CALCITE-2323]    * Validator should allow alternative nullCollations for ORDER BY in    * OVER</a>. */
 annotation|@
 name|Test

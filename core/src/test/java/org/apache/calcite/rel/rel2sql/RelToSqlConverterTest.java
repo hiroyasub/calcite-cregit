@@ -10695,6 +10695,78 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testMatchRecognizeIn
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"  from \"product\" match_recognize\n"
+operator|+
+literal|"  (\n"
+operator|+
+literal|"    partition by \"product_class_id\", \"brand_name\" \n"
+operator|+
+literal|"    order by \"product_class_id\" asc, \"brand_name\" desc \n"
+operator|+
+literal|"    pattern (strt down+ up+)\n"
+operator|+
+literal|"    define\n"
+operator|+
+literal|"      down as down.\"net_weight\" in (0, 1),\n"
+operator|+
+literal|"      up as up.\"net_weight\"> prev(up.\"net_weight\")\n"
+operator|+
+literal|"  ) mr"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM (SELECT *\n"
+operator|+
+literal|"FROM \"foodmart\".\"product\") MATCH_RECOGNIZE(\n"
+operator|+
+literal|"PARTITION BY \"product_class_id\", \"brand_name\"\n"
+operator|+
+literal|"ORDER BY \"product_class_id\", \"brand_name\" DESC\n"
+operator|+
+literal|"ONE ROW PER MATCH\n"
+operator|+
+literal|"AFTER MATCH SKIP TO NEXT ROW\n"
+operator|+
+literal|"PATTERN (\"STRT\" \"DOWN\" + \"UP\" +)\n"
+operator|+
+literal|"DEFINE "
+operator|+
+literal|"\"DOWN\" AS PREV(\"DOWN\".\"net_weight\", 0) = "
+operator|+
+literal|"0 OR PREV(\"DOWN\".\"net_weight\", 0) = 1, "
+operator|+
+literal|"\"UP\" AS PREV(\"UP\".\"net_weight\", 0)> "
+operator|+
+literal|"PREV(\"UP\".\"net_weight\", 1))"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testValues
 parameter_list|()
 block|{
