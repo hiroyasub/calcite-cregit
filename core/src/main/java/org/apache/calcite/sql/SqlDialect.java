@@ -799,6 +799,13 @@ name|add
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
+name|ROW
+argument_list|)
+operator|.
+name|add
+argument_list|(
+name|SqlStdOperatorTable
+operator|.
 name|SIN
 argument_list|)
 operator|.
@@ -2967,6 +2974,9 @@ name|OR
 case|:
 case|case
 name|PLUS
+case|:
+case|case
+name|ROW
 case|:
 case|case
 name|TIMES
