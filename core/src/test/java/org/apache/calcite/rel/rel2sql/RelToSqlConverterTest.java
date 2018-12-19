@@ -5993,6 +5993,135 @@ literal|")) AS t (EXPR$0)"
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2625">[CALCITE-2625]    * Removing Window Boundaries from SqlWindow of Aggregate Function which do not allow Framing</a>    * */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testRowNumberFunctionForPrintingOfFrameBoundary
+parameter_list|()
+block|{
+name|String
+name|query
+init|=
+literal|"SELECT row_number() over (order by \"hire_date\") FROM \"employee\""
+decl_stmt|;
+name|String
+name|expected
+init|=
+literal|"SELECT ROW_NUMBER() OVER (ORDER BY \"hire_date\")\n"
+operator|+
+literal|"FROM \"foodmart\".\"employee\""
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testRankFunctionForPrintingOfFrameBoundary
+parameter_list|()
+block|{
+name|String
+name|query
+init|=
+literal|"SELECT rank() over (order by \"hire_date\") FROM \"employee\""
+decl_stmt|;
+name|String
+name|expected
+init|=
+literal|"SELECT RANK() OVER (ORDER BY \"hire_date\")\n"
+operator|+
+literal|"FROM \"foodmart\".\"employee\""
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testLeadFunctionForPrintingOfFrameBoundary
+parameter_list|()
+block|{
+name|String
+name|query
+init|=
+literal|"SELECT lead(\"employee_id\",1,'NA') over "
+operator|+
+literal|"(partition by \"hire_date\" order by \"employee_id\") FROM \"employee\""
+decl_stmt|;
+name|String
+name|expected
+init|=
+literal|"SELECT LEAD(\"employee_id\", 1, 'NA') OVER "
+operator|+
+literal|"(PARTITION BY \"hire_date\" ORDER BY \"employee_id\")\n"
+operator|+
+literal|"FROM \"foodmart\".\"employee\""
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testLagFunctionForPrintingOfFrameBoundary
+parameter_list|()
+block|{
+name|String
+name|query
+init|=
+literal|"SELECT lag(\"employee_id\",1,'NA') over "
+operator|+
+literal|"(partition by \"hire_date\" order by \"employee_id\") FROM \"employee\""
+decl_stmt|;
+name|String
+name|expected
+init|=
+literal|"SELECT LAG(\"employee_id\", 1, 'NA') OVER "
+operator|+
+literal|"(PARTITION BY \"hire_date\" ORDER BY \"employee_id\")\n"
+operator|+
+literal|"FROM \"foodmart\".\"employee\""
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1798">[CALCITE-1798]    * Generate dialect-specific SQL for FLOOR operator</a>. */
 annotation|@
 name|Test
