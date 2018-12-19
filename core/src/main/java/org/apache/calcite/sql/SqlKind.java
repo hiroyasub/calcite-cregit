@@ -84,6 +84,9 @@ block|,
 comment|/**    * Function that is not a special function.    *    * @see #FUNCTION    */
 name|OTHER_FUNCTION
 block|,
+comment|/**    * POSITION Function    */
+name|POSITION
+block|,
 comment|/**    * EXPLAIN statement    */
 name|EXPLAIN
 block|,
@@ -1033,6 +1036,8 @@ name|JOIN
 argument_list|,
 name|OTHER_FUNCTION
 argument_list|,
+name|POSITION
+argument_list|,
 name|CAST
 argument_list|,
 name|TRIM
@@ -1134,6 +1139,8 @@ argument_list|,
 name|CAST
 argument_list|,
 name|JDBC_FN
+argument_list|,
+name|POSITION
 argument_list|)
 decl_stmt|;
 comment|/**    * Category of SqlAvgAggFunction.    *    *<p>Consists of {@link #AVG}, {@link #STDDEV_POP}, {@link #STDDEV_SAMP},    * {@link #VAR_POP}, {@link #VAR_SAMP}.    */

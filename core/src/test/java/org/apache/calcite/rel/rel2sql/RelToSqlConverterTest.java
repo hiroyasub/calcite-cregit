@@ -3018,6 +3018,228 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testPositionFunctionForHive
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|query
+init|=
+literal|"select position('A' IN 'ABC') from \"product\""
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT INSTR('ABC', 'A')\n"
+operator|+
+literal|"FROM foodmart.product"
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|withHive
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testPositionFunctionForBigQuery
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|query
+init|=
+literal|"select position('A' IN 'ABC') from \"product\""
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT STRPOS('ABC', 'A')\n"
+operator|+
+literal|"FROM foodmart.product"
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|withBigquery
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testModFunctionForHive
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|query
+init|=
+literal|"select mod(11,3) from \"product\""
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT 11 % 3\n"
+operator|+
+literal|"FROM foodmart.product"
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|withHive
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testUnionOperatorForBigQuery
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|query
+init|=
+literal|"select mod(11,3) from \"product\"\n"
+operator|+
+literal|"UNION select 1 from \"product\""
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT MOD(11, 3)\n"
+operator|+
+literal|"FROM foodmart.product\n"
+operator|+
+literal|"UNION DISTINCT\nSELECT 1\nFROM foodmart.product"
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|withBigquery
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testIntersectOperatorForBigQuery
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|query
+init|=
+literal|"select mod(11,3) from \"product\"\n"
+operator|+
+literal|"INTERSECT select 1 from \"product\""
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT MOD(11, 3)\n"
+operator|+
+literal|"FROM foodmart.product\n"
+operator|+
+literal|"INTERSECT DISTINCT\nSELECT 1\nFROM foodmart.product"
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|withBigquery
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testExceptOperatorForBigQuery
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|query
+init|=
+literal|"select mod(11,3) from \"product\"\n"
+operator|+
+literal|"EXCEPT select 1 from \"product\""
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT MOD(11, 3)\n"
+operator|+
+literal|"FROM foodmart.product\n"
+operator|+
+literal|"EXCEPT DISTINCT\nSELECT 1\nFROM foodmart.product"
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|withBigquery
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testHiveSelectQueryWithOrderByDescAndNullsFirstShouldBeEmulated
 parameter_list|()
 block|{
@@ -11115,6 +11337,24 @@ operator|.
 name|DatabaseProduct
 operator|.
 name|VERTICA
+operator|.
+name|getDialect
+argument_list|()
+argument_list|)
+return|;
+block|}
+name|Sql
+name|withBigquery
+parameter_list|()
+block|{
+return|return
+name|dialect
+argument_list|(
+name|SqlDialect
+operator|.
+name|DatabaseProduct
+operator|.
+name|BIG_QUERY
 operator|.
 name|getDialect
 argument_list|()

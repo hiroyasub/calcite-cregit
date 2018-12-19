@@ -193,7 +193,7 @@ literal|"POSITION"
 argument_list|,
 name|SqlKind
 operator|.
-name|OTHER_FUNCTION
+name|POSITION
 argument_list|,
 name|ReturnTypes
 operator|.
