@@ -136,7 +136,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Base class for functions such as "PI", "USER", "CURRENT_ROLE", and  * "CURRENT_PATH".  */
+comment|/**  * Base class for functions such as "USER", "CURRENT_ROLE", and "CURRENT_PATH".  */
 end_comment
 
 begin_class

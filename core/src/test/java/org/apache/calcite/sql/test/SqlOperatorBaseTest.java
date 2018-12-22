@@ -21450,6 +21450,21 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
+comment|// assert that PI function is not dynamic [CALCITE-2750]
+name|assertEquals
+argument_list|(
+literal|"PI operator should not be identified as dynamic function"
+argument_list|,
+name|SqlStdOperatorTable
+operator|.
+name|PI
+operator|.
+name|isDynamicFunction
+argument_list|()
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
 block|}
 annotation|@
 name|Test
