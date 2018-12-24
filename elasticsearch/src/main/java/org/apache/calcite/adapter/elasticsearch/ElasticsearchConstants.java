@@ -74,6 +74,7 @@ name|SOURCE_GROOVY
 init|=
 literal|"_source"
 decl_stmt|;
+comment|/**    * Attribute which uniquely identifies a document (ID)    * @see<a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping-id-field.html">ID Field</a>    */
 name|String
 name|ID
 init|=

@@ -1598,6 +1598,7 @@ specifier|static
 class|class
 name|SearchHit
 block|{
+comment|/**      * ID of the document (not available in aggregations)      */
 specifier|private
 specifier|final
 name|String
@@ -1630,7 +1631,9 @@ parameter_list|(
 annotation|@
 name|JsonProperty
 argument_list|(
-literal|"_id"
+name|ElasticsearchConstants
+operator|.
+name|ID
 argument_list|)
 specifier|final
 name|String

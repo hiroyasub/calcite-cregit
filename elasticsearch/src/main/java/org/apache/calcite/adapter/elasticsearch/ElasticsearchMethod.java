@@ -112,6 +112,11 @@ operator|.
 name|class
 argument_list|,
 comment|// aggregations
+name|List
+operator|.
+name|class
+argument_list|,
+comment|// expression mapping
 name|Long
 operator|.
 name|class
