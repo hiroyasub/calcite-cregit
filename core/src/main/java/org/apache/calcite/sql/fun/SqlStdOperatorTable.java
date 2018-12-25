@@ -6397,6 +6397,57 @@ name|OPTIONAL
 argument_list|)
 block|{       }
 decl_stmt|;
+comment|/**    * The LISTAGG operator. Multiset aggregator function.    */
+specifier|public
+specifier|static
+specifier|final
+name|SqlAggFunction
+name|LISTAGG
+init|=
+operator|new
+name|SqlAggFunction
+argument_list|(
+literal|"LISTAGG"
+argument_list|,
+literal|null
+argument_list|,
+name|SqlKind
+operator|.
+name|LISTAGG
+argument_list|,
+name|ReturnTypes
+operator|.
+name|ARG0_NULLABLE
+argument_list|,
+literal|null
+argument_list|,
+name|OperandTypes
+operator|.
+name|or
+argument_list|(
+name|OperandTypes
+operator|.
+name|STRING
+argument_list|,
+name|OperandTypes
+operator|.
+name|STRING_STRING
+argument_list|)
+argument_list|,
+name|SqlFunctionCategory
+operator|.
+name|SYSTEM
+argument_list|,
+literal|false
+argument_list|,
+literal|false
+argument_list|,
+name|Optionality
+operator|.
+name|OPTIONAL
+argument_list|)
+block|{       }
+decl_stmt|;
 comment|/**    * The FUSION operator. Multiset aggregator function.    */
 specifier|public
 specifier|static
