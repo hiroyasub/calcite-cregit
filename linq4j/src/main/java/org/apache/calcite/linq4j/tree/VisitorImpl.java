@@ -484,6 +484,14 @@ return|return
 name|gotoStatement
 operator|.
 name|expression
+operator|==
+literal|null
+condition|?
+literal|null
+else|:
+name|gotoStatement
+operator|.
+name|expression
 operator|.
 name|accept
 argument_list|(

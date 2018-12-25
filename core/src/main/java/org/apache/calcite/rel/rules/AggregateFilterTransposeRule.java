@@ -496,6 +496,7 @@ comment|// advantage of aggregating again. More important, without this check,
 comment|// the rule fires forever: A-F => A-F-A => A-A-F-A => A-A-A-F-A => ...
 return|return;
 block|}
+specifier|final
 name|boolean
 name|allColumnsInAggregate
 init|=

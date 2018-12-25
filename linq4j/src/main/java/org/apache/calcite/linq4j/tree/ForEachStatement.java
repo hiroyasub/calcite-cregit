@@ -53,7 +53,7 @@ specifier|final
 name|Statement
 name|body
 decl_stmt|;
-comment|/**    * Cache the hash code for the expression    */
+comment|/** Cache the hash code for the expression */
 specifier|private
 name|int
 name|hash
@@ -210,6 +210,18 @@ operator|.
 name|append
 argument_list|(
 literal|"for ("
+argument_list|)
+operator|.
+name|append
+argument_list|(
+name|parameter
+operator|.
+name|type
+argument_list|)
+operator|.
+name|append
+argument_list|(
+literal|" "
 argument_list|)
 operator|.
 name|append

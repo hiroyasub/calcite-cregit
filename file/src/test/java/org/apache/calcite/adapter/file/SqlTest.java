@@ -1904,8 +1904,6 @@ specifier|public
 name|void
 name|testJsonJoinOnString
 parameter_list|()
-throws|throws
-name|SQLException
 block|{
 specifier|final
 name|String
@@ -1951,8 +1949,6 @@ specifier|public
 name|void
 name|testJsonWithCsvJoin
 parameter_list|()
-throws|throws
-name|SQLException
 block|{
 specifier|final
 name|String

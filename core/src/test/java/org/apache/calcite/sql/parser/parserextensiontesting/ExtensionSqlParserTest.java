@@ -45,22 +45,6 @@ name|sql
 operator|.
 name|parser
 operator|.
-name|SqlParseException
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|sql
-operator|.
-name|parser
-operator|.
 name|SqlParserImplFactory
 import|;
 end_import
@@ -133,8 +117,6 @@ specifier|public
 name|void
 name|testAlterSystemExtension
 parameter_list|()
-throws|throws
-name|SqlParseException
 block|{
 name|check
 argument_list|(
@@ -150,8 +132,6 @@ specifier|public
 name|void
 name|testAlterSystemExtensionWithoutAlter
 parameter_list|()
-throws|throws
-name|SqlParseException
 block|{
 comment|// We need to include the scope for custom alter operations
 name|checkFails

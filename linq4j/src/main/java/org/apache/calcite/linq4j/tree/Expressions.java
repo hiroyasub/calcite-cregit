@@ -2057,12 +2057,19 @@ name|LabelTarget
 name|labelTarget
 parameter_list|)
 block|{
-throw|throw
-name|Extensions
+return|return
+operator|new
+name|GotoStatement
+argument_list|(
+name|GotoExpressionKind
 operator|.
-name|todo
-argument_list|()
-throw|;
+name|Continue
+argument_list|,
+literal|null
+argument_list|,
+literal|null
+argument_list|)
+return|;
 block|}
 comment|/**    * Creates a GotoExpression representing a continue statement    * with the specified type.    */
 specifier|public

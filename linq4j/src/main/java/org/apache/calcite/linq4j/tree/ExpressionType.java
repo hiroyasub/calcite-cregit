@@ -847,10 +847,13 @@ block|,
 comment|/**    * Declaration of a variable.    */
 name|Declaration
 block|,
+comment|/**    * For loop.    */
 name|For
 block|,
+comment|/** For-each loop, "for (Type i : expression) body". */
 name|ForEach
 block|,
+comment|/**    * While loop.    */
 name|While
 block|;
 specifier|final

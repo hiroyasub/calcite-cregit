@@ -246,7 +246,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Planner rule that copies a {@link org.apache.calcite.rel.core.Sort} past a  * {@link org.apache.calcite.rel.core.Join} without its limit and offset.  * The original {@link org.apache.calcite.rel.core.Sort} is preserved but  * can be potentially removed by {@link org.apache.calcite.rel.rules.SortRemoveRule} if redundant.  *  * Some examples where {@link org.apache.calcite.rel.rules.SortJoinCopyRule} can be useful are:  * allowing a {@link org.apache.calcite.rel.core.Sort} to be incorporated in an index scan,  * facilitating the use of operators requiring sorted inputs,  * and allowing the sort to be performed on a possibly smaller result.  */
+comment|/**  * Planner rule that copies a {@link org.apache.calcite.rel.core.Sort} past a  * {@link org.apache.calcite.rel.core.Join} without its limit and offset. The  * original {@link org.apache.calcite.rel.core.Sort} is preserved but can be  * potentially removed by {@link org.apache.calcite.rel.rules.SortRemoveRule} if  * redundant.  *  *<p>Some examples where {@link org.apache.calcite.rel.rules.SortJoinCopyRule}  * can be useful: allowing a {@link org.apache.calcite.rel.core.Sort} to be  * incorporated in an index scan; facilitating the use of operators requiring  * sorted inputs; and allowing the sort to be performed on a possibly smaller  * result.  */
 end_comment
 
 begin_class

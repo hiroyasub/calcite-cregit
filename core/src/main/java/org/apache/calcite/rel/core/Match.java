@@ -1077,6 +1077,9 @@ literal|"partition"
 argument_list|,
 name|getPartitionKeys
 argument_list|()
+operator|.
+name|asList
+argument_list|()
 argument_list|)
 operator|.
 name|item

@@ -28028,7 +28028,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testMatch
+name|testMatchSimple
 parameter_list|()
 block|{
 specifier|final
@@ -28041,13 +28041,15 @@ literal|"from \"hr\".\"emps\" match_recognize (\n"
 operator|+
 literal|"  order by \"empid\" desc\n"
 operator|+
-literal|"  measures \"commission\" as c,\n"
+literal|"  measures up.\"commission\" as c,\n"
 operator|+
-literal|"    \"empid\" as empid\n"
+literal|"    up.\"empid\" as empid,\n"
 operator|+
-literal|"  pattern (s up)\n"
+literal|"    2 as two\n"
 operator|+
-literal|"  define up as up.\"commission\"> prev(up.\"commission\"))"
+literal|"  pattern (up s)\n"
+operator|+
+literal|"  define up as up.\"empid\" = 100)"
 decl_stmt|;
 specifier|final
 name|String
@@ -28055,17 +28057,17 @@ name|convert
 init|=
 literal|""
 operator|+
-literal|"LogicalProject(C=[$0], EMPID=[$1])\n"
+literal|"LogicalProject(C=[$0], EMPID=[$1], TWO=[$2])\n"
 operator|+
-literal|"  LogicalMatch(partition=[{}], order=[[0 DESC]], "
+literal|"  LogicalMatch(partition=[[]], order=[[0 DESC]], "
 operator|+
-literal|"outputFields=[[C, EMPID]], allRows=[false], "
+literal|"outputFields=[[C, EMPID, TWO]], allRows=[false], "
 operator|+
-literal|"after=[FLAG(SKIP TO NEXT ROW)], pattern=[('S', 'UP')], "
+literal|"after=[FLAG(SKIP TO NEXT ROW)], pattern=[('UP', 'S')], "
 operator|+
 literal|"isStrictStarts=[false], isStrictEnds=[false], subsets=[[]], "
 operator|+
-literal|"patternDefinitions=[[>(PREV(UP.$4, 0), PREV(UP.$4, 1))]], "
+literal|"patternDefinitions=[[=(CAST(PREV(UP.$0, 0)):INTEGER NOT NULL, 100)]], "
 operator|+
 literal|"inputFields=[[empid, deptno, name, salary, commission]])\n"
 operator|+
@@ -28077,15 +28079,15 @@ name|plan
 init|=
 literal|"PLAN="
 operator|+
-literal|"EnumerableMatch(partition=[{}], order=[[0 DESC]], "
+literal|"EnumerableMatch(partition=[[]], order=[[0 DESC]], "
 operator|+
-literal|"outputFields=[[C, EMPID]], allRows=[false], "
+literal|"outputFields=[[C, EMPID, TWO]], allRows=[false], "
 operator|+
-literal|"after=[FLAG(SKIP TO NEXT ROW)], pattern=[('S', 'UP')], "
+literal|"after=[FLAG(SKIP TO NEXT ROW)], pattern=[('UP', 'S')], "
 operator|+
 literal|"isStrictStarts=[false], isStrictEnds=[false], subsets=[[]], "
 operator|+
-literal|"patternDefinitions=[[>(PREV(UP.$4, 0), PREV(UP.$4, 1))]], "
+literal|"patternDefinitions=[[=(CAST(PREV(UP.$0, 0)):INTEGER NOT NULL, 100)]], "
 operator|+
 literal|"inputFields=[[empid, deptno, name, salary, commission]])\n"
 operator|+
@@ -28122,7 +28124,112 @@ argument_list|)
 operator|.
 name|returns
 argument_list|(
-literal|"C=1000; EMPID=100"
+literal|"C=1000; EMPID=100; TWO=2\nC=500; EMPID=200; TWO=2\n"
+argument_list|)
+expr_stmt|;
+block|}
+end_function
+
+begin_function
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testMatch
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"from \"hr\".\"emps\" match_recognize (\n"
+operator|+
+literal|"  order by \"empid\" desc\n"
+operator|+
+literal|"  measures \"commission\" as c,\n"
+operator|+
+literal|"    \"empid\" as empid\n"
+operator|+
+literal|"  pattern (s up)\n"
+operator|+
+literal|"  define up as up.\"commission\"< prev(up.\"commission\"))"
+decl_stmt|;
+specifier|final
+name|String
+name|convert
+init|=
+literal|""
+operator|+
+literal|"LogicalProject(C=[$0], EMPID=[$1])\n"
+operator|+
+literal|"  LogicalMatch(partition=[[]], order=[[0 DESC]], "
+operator|+
+literal|"outputFields=[[C, EMPID]], allRows=[false], "
+operator|+
+literal|"after=[FLAG(SKIP TO NEXT ROW)], pattern=[('S', 'UP')], "
+operator|+
+literal|"isStrictStarts=[false], isStrictEnds=[false], subsets=[[]], "
+operator|+
+literal|"patternDefinitions=[[<(PREV(UP.$4, 0), PREV(UP.$4, 1))]], "
+operator|+
+literal|"inputFields=[[empid, deptno, name, salary, commission]])\n"
+operator|+
+literal|"    EnumerableTableScan(table=[[hr, emps]])\n"
+decl_stmt|;
+specifier|final
+name|String
+name|plan
+init|=
+literal|"PLAN="
+operator|+
+literal|"EnumerableMatch(partition=[[]], order=[[0 DESC]], "
+operator|+
+literal|"outputFields=[[C, EMPID]], allRows=[false], "
+operator|+
+literal|"after=[FLAG(SKIP TO NEXT ROW)], pattern=[('S', 'UP')], "
+operator|+
+literal|"isStrictStarts=[false], isStrictEnds=[false], subsets=[[]], "
+operator|+
+literal|"patternDefinitions=[[<(PREV(UP.$4, 0), PREV(UP.$4, 1))]], "
+operator|+
+literal|"inputFields=[[empid, deptno, name, salary, commission]])\n"
+operator|+
+literal|"  EnumerableTableScan(table=[[hr, emps]])"
+decl_stmt|;
+name|CalciteAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|CalciteAssert
+operator|.
+name|Config
+operator|.
+name|REGULAR
+argument_list|)
+operator|.
+name|query
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|convertContains
+argument_list|(
+name|convert
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+name|plan
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"C=1000; EMPID=100\nC=500; EMPID=200\n"
 argument_list|)
 expr_stmt|;
 block|}
