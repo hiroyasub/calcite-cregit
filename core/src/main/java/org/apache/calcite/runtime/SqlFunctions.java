@@ -4842,6 +4842,46 @@ name|ex
 argument_list|()
 return|;
 block|}
+comment|//&
+comment|/** Helper function for implementing<code>BIT_AND</code> */
+specifier|public
+specifier|static
+name|long
+name|bitAnd
+parameter_list|(
+name|long
+name|b0
+parameter_list|,
+name|long
+name|b1
+parameter_list|)
+block|{
+return|return
+name|b0
+operator|&
+name|b1
+return|;
+block|}
+comment|// |
+comment|/** Helper function for implementing<code>BIT_OR</code> */
+specifier|public
+specifier|static
+name|long
+name|bitOr
+parameter_list|(
+name|long
+name|b0
+parameter_list|,
+name|long
+name|b1
+parameter_list|)
+block|{
+return|return
+name|b0
+operator||
+name|b1
+return|;
+block|}
 comment|// EXP
 comment|/** SQL<code>EXP</code> operator applied to double values. */
 specifier|public

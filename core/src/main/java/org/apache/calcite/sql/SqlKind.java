@@ -619,6 +619,12 @@ block|,
 comment|/** The {@code SINGLE_VALUE} aggregate function. */
 name|SINGLE_VALUE
 block|,
+comment|/** The {@code BIT_AND} aggregate function. */
+name|BIT_AND
+block|,
+comment|/** The {@code BIT_OR} aggregate function. */
+name|BIT_OR
+block|,
 comment|/** The {@code ROW_NUMBER} window function. */
 name|ROW_NUMBER
 block|,
@@ -857,6 +863,10 @@ argument_list|,
 name|JSON_ARRAYAGG
 argument_list|,
 name|JSON_OBJECTAGG
+argument_list|,
+name|BIT_AND
+argument_list|,
+name|BIT_OR
 argument_list|)
 decl_stmt|;
 comment|/**    * Category consisting of all DML operators.    *    *<p>Consists of:    * {@link #INSERT},    * {@link #UPDATE},    * {@link #DELETE},    * {@link #MERGE},    * {@link #PROCEDURE_CALL}.    *    *<p>NOTE jvs 1-June-2006: For now we treat procedure calls as DML;    * this makes it easy for JDBC clients to call execute or    * executeUpdate and not have to process dummy cursor results.  If    * in the future we support procedures which return results sets,    * we'll need to refine this.    */

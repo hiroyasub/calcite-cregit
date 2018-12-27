@@ -3350,6 +3350,36 @@ operator|.
 name|VAR_SAMP
 argument_list|)
 decl_stmt|;
+comment|/**    *<code>BIT_AND</code> aggregate function.    */
+specifier|public
+specifier|static
+specifier|final
+name|SqlAggFunction
+name|BIT_AND
+init|=
+operator|new
+name|SqlBitOpAggFunction
+argument_list|(
+name|SqlKind
+operator|.
+name|BIT_AND
+argument_list|)
+decl_stmt|;
+comment|/**    *<code>BIT_OR</code> aggregate function.    */
+specifier|public
+specifier|static
+specifier|final
+name|SqlAggFunction
+name|BIT_OR
+init|=
+operator|new
+name|SqlBitOpAggFunction
+argument_list|(
+name|SqlKind
+operator|.
+name|BIT_OR
+argument_list|)
+decl_stmt|;
 comment|//-------------------------------------------------------------
 comment|// WINDOW Aggregate Functions
 comment|//-------------------------------------------------------------
