@@ -499,11 +499,7 @@ name|expr
 operator|.
 name|equals
 argument_list|(
-literal|"\""
-operator|+
 name|name
-operator|+
-literal|"\""
 argument_list|)
 condition|)
 block|{

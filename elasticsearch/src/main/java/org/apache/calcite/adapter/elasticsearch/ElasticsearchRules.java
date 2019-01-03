@@ -937,11 +937,7 @@ literal|null
 condition|)
 block|{
 return|return
-literal|"\""
-operator|+
 name|name
-operator|+
-literal|"\""
 return|;
 block|}
 specifier|final
