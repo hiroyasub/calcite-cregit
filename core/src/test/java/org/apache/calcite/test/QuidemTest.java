@@ -462,6 +462,18 @@ import|;
 end_import
 
 begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|function
+operator|.
+name|Function
+import|;
+end_import
+
+begin_import
 import|import static
 name|org
 operator|.
@@ -557,17 +569,9 @@ return|;
 case|case
 literal|"fixed"
 case|:
-comment|// Quidem requires a Guava function
+comment|// Quidem requires a Java 8 function
 return|return
 operator|(
-name|com
-operator|.
-name|google
-operator|.
-name|common
-operator|.
-name|base
-operator|.
 name|Function
 argument_list|<
 name|String
