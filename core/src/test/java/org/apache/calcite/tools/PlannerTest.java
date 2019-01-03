@@ -2249,9 +2249,9 @@ decl_stmt|;
 name|RelTraitSet
 name|traitSet
 init|=
-name|planner
+name|convert
 operator|.
-name|getEmptyTraitSet
+name|getTraitSet
 argument_list|()
 operator|.
 name|replace
@@ -2482,17 +2482,48 @@ literal|"      EnumerableTableScan(table=[[hr, emps]])\n"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testTwoSortDontRemove
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+name|runDuplicateSortCheck
+argument_list|(
+literal|"select empid+deptno from ( "
+operator|+
+literal|"select empid, deptno "
+operator|+
+literal|"from emps "
+operator|+
+literal|"order by empid) "
+operator|+
+literal|"order by deptno"
+argument_list|,
+literal|"EnumerableSort(sort0=[$1], dir0=[ASC])\n"
+operator|+
+literal|"  EnumerableProject(EXPR$0=[+($0, $1)], deptno=[$1])\n"
+operator|+
+literal|"    EnumerableSort(sort0=[$0], dir0=[ASC])\n"
+operator|+
+literal|"      EnumerableProject(empid=[$0], deptno=[$1])\n"
+operator|+
+literal|"        EnumerableTableScan(table=[[hr, emps]])\n"
+argument_list|)
+expr_stmt|;
+block|}
 comment|/** Tests that outer order by is not removed since window function    * might reorder the rows in-between */
 annotation|@
 name|Ignore
 argument_list|(
-literal|"RelOptPlanner$CannotPlanException: Node [rel#27:Subset#6"
-operator|+
-literal|".ENUMERABLE.[]] could not be implemented; planner state:\n"
+literal|"Node [rel#22:Subset#3.ENUMERABLE.[2]] could not be implemented; planner state:\n"
 operator|+
 literal|"\n"
 operator|+
-literal|"Root: rel#27:Subset#6.ENUMERABLE.[]"
+literal|"Root: rel#22:Subset#3.ENUMERABLE.[2]"
 argument_list|)
 annotation|@
 name|Test
@@ -2505,7 +2536,7 @@ name|Exception
 block|{
 name|runDuplicateSortCheck
 argument_list|(
-literal|"select empid+deptno from ( "
+literal|"select emp_cnt, empid+deptno from ( "
 operator|+
 literal|"select empid, deptno, count(*) over (partition by deptno) emp_cnt from ( "
 operator|+
@@ -2534,6 +2565,41 @@ operator|+
 literal|"            EnumerableProject(empid=[$0], deptno=[$1])\n"
 operator|+
 literal|"              EnumerableTableScan(table=[[hr, emps]])\n"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testDuplicateSortPlanWithRemovedOver
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+name|runDuplicateSortCheck
+argument_list|(
+literal|"select empid+deptno from ( "
+operator|+
+literal|"select empid, deptno, count(*) over (partition by deptno) emp_cnt from ( "
+operator|+
+literal|"  select empid, deptno "
+operator|+
+literal|"    from emps "
+operator|+
+literal|"   order by emps.deptno) "
+operator|+
+literal|")"
+operator|+
+literal|"order by deptno"
+argument_list|,
+literal|"EnumerableProject(EXPR$0=[+($0, $1)], deptno=[$1])\n"
+operator|+
+literal|"  EnumerableSort(sort0=[$1], dir0=[ASC])\n"
+operator|+
+literal|"    EnumerableProject(empid=[$0], deptno=[$1])\n"
+operator|+
+literal|"      EnumerableTableScan(table=[[hr, emps]])\n"
 argument_list|)
 expr_stmt|;
 block|}
@@ -2647,9 +2713,9 @@ decl_stmt|;
 name|RelTraitSet
 name|traitSet
 init|=
-name|planner
+name|convert
 operator|.
-name|getEmptyTraitSet
+name|getTraitSet
 argument_list|()
 operator|.
 name|replace
@@ -2788,9 +2854,9 @@ decl_stmt|;
 name|RelTraitSet
 name|traitSet
 init|=
-name|planner
+name|convert
 operator|.
-name|getEmptyTraitSet
+name|getTraitSet
 argument_list|()
 operator|.
 name|replace
@@ -2947,9 +3013,9 @@ decl_stmt|;
 name|RelTraitSet
 name|traitSet
 init|=
-name|planner
+name|convert
 operator|.
-name|getEmptyTraitSet
+name|getTraitSet
 argument_list|()
 operator|.
 name|replace
@@ -3070,9 +3136,9 @@ decl_stmt|;
 name|RelTraitSet
 name|traitSet
 init|=
-name|planner
+name|convert
 operator|.
-name|getEmptyTraitSet
+name|getTraitSet
 argument_list|()
 operator|.
 name|replace
@@ -3328,9 +3394,9 @@ decl_stmt|;
 name|RelTraitSet
 name|traitSet
 init|=
-name|planner
+name|convert
 operator|.
-name|getEmptyTraitSet
+name|getTraitSet
 argument_list|()
 operator|.
 name|replace
@@ -3568,9 +3634,9 @@ decl_stmt|;
 name|RelTraitSet
 name|traitSet0
 init|=
-name|planner
+name|convert
 operator|.
-name|getEmptyTraitSet
+name|getTraitSet
 argument_list|()
 operator|.
 name|replace
@@ -3583,9 +3649,9 @@ decl_stmt|;
 name|RelTraitSet
 name|traitSet1
 init|=
-name|planner
+name|convert
 operator|.
-name|getEmptyTraitSet
+name|getTraitSet
 argument_list|()
 operator|.
 name|replace
@@ -3878,9 +3944,9 @@ decl_stmt|;
 name|RelTraitSet
 name|traitSet
 init|=
-name|planner
+name|convert
 operator|.
-name|getEmptyTraitSet
+name|getTraitSet
 argument_list|()
 operator|.
 name|replace
@@ -4139,9 +4205,9 @@ decl_stmt|;
 name|RelTraitSet
 name|traitSet
 init|=
-name|planner
+name|convert
 operator|.
-name|getEmptyTraitSet
+name|getTraitSet
 argument_list|()
 operator|.
 name|replace
@@ -4628,9 +4694,9 @@ decl_stmt|;
 name|RelTraitSet
 name|traitSet
 init|=
-name|planner
+name|convert
 operator|.
-name|getEmptyTraitSet
+name|getTraitSet
 argument_list|()
 operator|.
 name|replace
