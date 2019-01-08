@@ -278,6 +278,16 @@ operator|.
 name|class
 argument_list|)
 block|,
+comment|/** Query timeout in milliseconds.      * When no timeout is set, the value is 0 or not present. */
+name|TIMEOUT
+argument_list|(
+literal|"timeout"
+argument_list|,
+name|Long
+operator|.
+name|class
+argument_list|)
+block|,
 comment|/** Advisor that suggests completion hints for SQL statements. */
 name|SQL_ADVISOR
 argument_list|(

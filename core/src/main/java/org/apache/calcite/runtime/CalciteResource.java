@@ -4013,6 +4013,24 @@ function_decl|;
 annotation|@
 name|BaseMessage
 argument_list|(
+literal|"Timeout of ''{0}'' ms for query execution is reached. Query execution started at ''{1}''"
+argument_list|)
+name|ExInst
+argument_list|<
+name|CalciteException
+argument_list|>
+name|queryExecutionTimeoutReached
+parameter_list|(
+name|String
+name|timeout
+parameter_list|,
+name|String
+name|queryStart
+parameter_list|)
+function_decl|;
+annotation|@
+name|BaseMessage
+argument_list|(
 literal|"While executing SQL [{0}] on JDBC sub-schema"
 argument_list|)
 name|ExInst
