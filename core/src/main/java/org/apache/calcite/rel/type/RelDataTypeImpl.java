@@ -915,7 +915,7 @@ return|return
 name|this
 return|;
 block|}
-comment|/**    * Generates a string representation of this type.    *    * @param sb         StringBuffer into which to generate the string    * @param withDetail when true, all detail information needed to compute a    *                   unique digest (and return from getFullTypeString) should    *                   be included;    */
+comment|/**    * Generates a string representation of this type.    *    * @param sb         StringBuilder into which to generate the string    * @param withDetail when true, all detail information needed to compute a    *                   unique digest (and return from getFullTypeString) should    *                   be included;    */
 specifier|protected
 specifier|abstract
 name|void

@@ -7184,7 +7184,6 @@ parameter_list|)
 throws|throws
 name|IOException
 block|{
-comment|// REVIEW mb StringBuffer not always needed
 name|StringBuilder
 name|sql
 init|=
