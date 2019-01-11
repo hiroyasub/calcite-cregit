@@ -592,7 +592,7 @@ name|fold
 argument_list|(
 literal|"f0 DECIMAL(5, 2) NOT NULL,"
 argument_list|,
-literal|"f1 VARCHAR(10) CHARACTER SET \"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$primary\" NOT NULL"
+literal|"f1 VARCHAR(10) NOT NULL"
 argument_list|)
 argument_list|,
 name|Util
@@ -655,13 +655,13 @@ literal|"f0 RECORD ("
 argument_list|,
 literal|"  f0 DECIMAL(5, 2) NOT NULL,"
 argument_list|,
-literal|"  f1 VARCHAR(10) CHARACTER SET \"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$primary\" NOT NULL) NOT NULL,"
+literal|"  f1 VARCHAR(10) NOT NULL) NOT NULL,"
 argument_list|,
 literal|"f1 RECORD ("
 argument_list|,
 literal|"  f0 DECIMAL(5, 2) NOT NULL,"
 argument_list|,
-literal|"  f1 VARCHAR(10) CHARACTER SET \"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$primary\" NOT NULL) NOT NULL MULTISET NOT NULL"
+literal|"  f1 VARCHAR(10) NOT NULL) NOT NULL MULTISET NOT NULL"
 argument_list|)
 argument_list|,
 name|Util

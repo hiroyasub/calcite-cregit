@@ -1984,7 +1984,7 @@ argument_list|()
 argument_list|,
 name|is
 argument_list|(
-literal|"1969-07-21 02:56:15"
+literal|"1969-07-21 02:56:15:TIMESTAMP_WITH_LOCAL_TIME_ZONE(0)"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -3909,6 +3909,25 @@ name|literal
 operator|.
 name|toString
 argument_list|()
+argument_list|)
+expr_stmt|;
+name|assertEquals
+argument_list|(
+literal|"_UTF8'foobar':CHAR(6) CHARACTER SET \"UTF-8\""
+argument_list|,
+operator|(
+operator|(
+name|RexLiteral
+operator|)
+name|literal
+operator|)
+operator|.
+name|computeDigest
+argument_list|(
+name|RexDigestIncludeType
+operator|.
+name|ALWAYS
+argument_list|)
 argument_list|)
 expr_stmt|;
 name|literal

@@ -299,6 +299,20 @@ name|calcite
 operator|.
 name|rex
 operator|.
+name|RexBuilder
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rex
+operator|.
 name|RexCorrelVariable
 import|;
 end_import
@@ -2832,7 +2846,7 @@ literal|""
 operator|+
 literal|"LogicalProject(DEPTNO=[$7], COMM=[CAST($6):SMALLINT NOT NULL],"
 operator|+
-literal|" $f2=[OR(=($7, 20), AND(null, =($7, 10), IS NULL($6),"
+literal|" $f2=[OR(=($7, 20), AND(null:NULL, =($7, 10), IS NULL($6),"
 operator|+
 literal|" IS NULL($7)), =($7, 30))], n2=[IS NULL($2)],"
 operator|+
@@ -3305,6 +3319,154 @@ name|hasTree
 argument_list|(
 name|expected
 argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+specifier|private
+name|void
+name|project1
+parameter_list|(
+name|int
+name|value
+parameter_list|,
+name|SqlTypeName
+name|sqlTypeName
+parameter_list|,
+name|String
+name|message
+parameter_list|,
+name|String
+name|expected
+parameter_list|)
+block|{
+specifier|final
+name|RelBuilder
+name|builder
+init|=
+name|RelBuilder
+operator|.
+name|create
+argument_list|(
+name|config
+argument_list|()
+operator|.
+name|build
+argument_list|()
+argument_list|)
+decl_stmt|;
+name|RexBuilder
+name|rex
+init|=
+name|builder
+operator|.
+name|getRexBuilder
+argument_list|()
+decl_stmt|;
+name|RelNode
+name|actual
+init|=
+name|builder
+operator|.
+name|values
+argument_list|(
+operator|new
+name|String
+index|[]
+block|{
+literal|"x"
+block|}
+argument_list|,
+literal|42
+argument_list|)
+operator|.
+name|empty
+argument_list|()
+operator|.
+name|project
+argument_list|(
+name|rex
+operator|.
+name|makeLiteral
+argument_list|(
+name|value
+argument_list|,
+name|rex
+operator|.
+name|getTypeFactory
+argument_list|()
+operator|.
+name|createSqlType
+argument_list|(
+name|sqlTypeName
+argument_list|)
+argument_list|,
+literal|false
+argument_list|)
+argument_list|)
+operator|.
+name|build
+argument_list|()
+decl_stmt|;
+name|assertThat
+argument_list|(
+name|message
+argument_list|,
+name|actual
+argument_list|,
+name|hasTree
+argument_list|(
+name|expected
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testProject1asInt
+parameter_list|()
+block|{
+name|project1
+argument_list|(
+literal|1
+argument_list|,
+name|SqlTypeName
+operator|.
+name|INTEGER
+argument_list|,
+literal|"project(1 as INT) might omit type of 1 in the output plan as"
+operator|+
+literal|" it is convention to omit INTEGER for integer literals"
+argument_list|,
+literal|"LogicalProject($f0=[1])\n"
+operator|+
+literal|"  LogicalValues(tuples=[[]])\n"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testProject1asBigInt
+parameter_list|()
+block|{
+name|project1
+argument_list|(
+literal|1
+argument_list|,
+name|SqlTypeName
+operator|.
+name|BIGINT
+argument_list|,
+literal|"project(1 as BIGINT) should contain"
+operator|+
+literal|" type of 1 in the output plan since the convention is to omit type of INTEGER"
+argument_list|,
+literal|"LogicalProject($f0=[1:BIGINT])\n"
+operator|+
+literal|"  LogicalValues(tuples=[[]])\n"
 argument_list|)
 expr_stmt|;
 block|}
@@ -3899,7 +4061,7 @@ name|expected
 init|=
 literal|""
 operator|+
-literal|"LogicalProject(DEPTNO=[CAST($0):BIGINT NOT NULL], DNAME=[CAST($1):VARCHAR(10) CHARACTER SET \"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$primary\" NOT NULL], LOC=[CAST($2):VARCHAR(10) CHARACTER SET \"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$primary\" NOT NULL])\n"
+literal|"LogicalProject(DEPTNO=[CAST($0):BIGINT NOT NULL], DNAME=[CAST($1):VARCHAR(10) NOT NULL], LOC=[CAST($2):VARCHAR(10) NOT NULL])\n"
 operator|+
 literal|"  LogicalTableScan(table=[[scott, DEPT]])\n"
 decl_stmt|;
@@ -4007,7 +4169,7 @@ name|expected
 init|=
 literal|""
 operator|+
-literal|"LogicalProject(a=[CAST($0):BIGINT NOT NULL], b=[CAST($1):VARCHAR(10) CHARACTER SET \"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$primary\" NOT NULL], c=[CAST($2):VARCHAR(10) CHARACTER SET \"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$primary\" NOT NULL])\n"
+literal|"LogicalProject(a=[CAST($0):BIGINT NOT NULL], b=[CAST($1):VARCHAR(10) NOT NULL], c=[CAST($2):VARCHAR(10) NOT NULL])\n"
 operator|+
 literal|"  LogicalTableScan(table=[[scott, DEPT]])\n"
 decl_stmt|;
@@ -9633,7 +9795,7 @@ specifier|final
 name|String
 name|expectedType
 init|=
-literal|"RecordType(BOOLEAN a, INTEGER expr$1, CHAR(13) CHARACTER SET \"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$primary\" NOT NULL c) NOT NULL"
+literal|"RecordType(BOOLEAN a, INTEGER expr$1, CHAR(13) NOT NULL c) NOT NULL"
 decl_stmt|;
 name|assertThat
 argument_list|(
@@ -10121,7 +10283,7 @@ specifier|final
 name|String
 name|expectedType
 init|=
-literal|"RecordType(BIGINT NOT NULL a, VARCHAR(10) CHARACTER SET \"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$primary\" NOT NULL a) NOT NULL"
+literal|"RecordType(BIGINT NOT NULL a, VARCHAR(10) NOT NULL a) NOT NULL"
 decl_stmt|;
 name|assertThat
 argument_list|(

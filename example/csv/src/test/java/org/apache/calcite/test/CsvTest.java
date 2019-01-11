@@ -1256,7 +1256,7 @@ literal|"PLAN="
 operator|+
 literal|"EnumerableAggregate(group=[{}], EXPR$0=[MAX($0)])\n"
 operator|+
-literal|"  EnumerableCalc(expr#0..1=[{inputs}], expr#2=['F'], "
+literal|"  EnumerableCalc(expr#0..1=[{inputs}], expr#2=['F':VARCHAR], "
 operator|+
 literal|"expr#3=[=($t1, $t2)], proj#0..1=[{exprs}], $condition=[$t3])\n"
 operator|+

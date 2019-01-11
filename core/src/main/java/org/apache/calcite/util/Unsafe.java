@@ -113,6 +113,41 @@ literal|0
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Appends to {@link StringWriter}. */
+specifier|public
+specifier|static
+name|void
+name|append
+parameter_list|(
+name|StringWriter
+name|sw
+parameter_list|,
+name|CharSequence
+name|charSequence
+parameter_list|,
+name|int
+name|start
+parameter_list|,
+name|int
+name|end
+parameter_list|)
+block|{
+comment|// Included in this class because StringBuffer is banned.
+name|sw
+operator|.
+name|getBuffer
+argument_list|()
+operator|.
+name|append
+argument_list|(
+name|charSequence
+argument_list|,
+name|start
+argument_list|,
+name|end
+argument_list|)
+expr_stmt|;
+block|}
 block|}
 end_class
 

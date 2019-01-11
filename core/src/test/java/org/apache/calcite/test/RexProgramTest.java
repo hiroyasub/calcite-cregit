@@ -797,6 +797,12 @@ parameter_list|)
 block|{
 name|assertThat
 argument_list|(
+literal|"RexUtil.toCnf(rexBuilder, "
+operator|+
+name|node
+operator|+
+literal|")"
+argument_list|,
 name|RexUtil
 operator|.
 name|toCnf
@@ -832,6 +838,16 @@ parameter_list|)
 block|{
 name|assertThat
 argument_list|(
+literal|"RexUtil.toCnf(rexBuilder, threshold="
+operator|+
+name|threshold
+operator|+
+literal|" , "
+operator|+
+name|node
+operator|+
+literal|")"
+argument_list|,
 name|RexUtil
 operator|.
 name|toCnf
@@ -885,6 +901,12 @@ parameter_list|)
 block|{
 name|assertThat
 argument_list|(
+literal|"RexUtil.pullFactors(rexBuilder, "
+operator|+
+name|node
+operator|+
+literal|")"
+argument_list|,
 name|RexUtil
 operator|.
 name|pullFactors
@@ -1226,6 +1248,10 @@ argument_list|)
 decl_stmt|;
 name|assertThat
 argument_list|(
+literal|"simplify(unknown as unknown): "
+operator|+
+name|node
+argument_list|,
 name|simplified
 operator|.
 name|toString
@@ -1269,6 +1295,10 @@ argument_list|)
 decl_stmt|;
 name|assertThat
 argument_list|(
+literal|"simplify(unknown as false): "
+operator|+
+name|node
+argument_list|,
 name|simplified2
 operator|.
 name|toString
@@ -1297,6 +1327,10 @@ argument_list|)
 decl_stmt|;
 name|assertThat
 argument_list|(
+literal|"simplify(unknown as true): "
+operator|+
+name|node
+argument_list|,
 name|simplified3
 operator|.
 name|toString
@@ -1313,6 +1347,8 @@ else|else
 block|{
 name|assertThat
 argument_list|(
+literal|"node type is not BOOLEAN, so<<expectedFalse>> should match<<expected>>"
+argument_list|,
 name|expectedFalse
 argument_list|,
 name|is
@@ -1323,6 +1359,8 @@ argument_list|)
 expr_stmt|;
 name|assertThat
 argument_list|(
+literal|"node type is not BOOLEAN, so<<expectedTrue>> should match<<expected>>"
+argument_list|,
 name|expectedTrue
 argument_list|,
 name|is
@@ -1729,7 +1767,7 @@ literal|"expr#7=[+($t4, $t2)], expr#8=[5], expr#9=[>($t2, $t8)], "
 operator|+
 literal|"expr#10=[true], expr#11=[IS NOT NULL($t5)], expr#12=[false], "
 operator|+
-literal|"expr#13=[null], expr#14=[CASE($t9, $t10, $t11, $t12, $t13)], "
+literal|"expr#13=[null:BOOLEAN], expr#14=[CASE($t9, $t10, $t11, $t12, $t13)], "
 operator|+
 literal|"expr#15=[NOT($t14)], a=[$t7], b=[$t6], $condition=[$t15])"
 argument_list|)
@@ -1803,7 +1841,7 @@ literal|"expr#7=[+($t4, $t2)], expr#8=[5], expr#9=[>($t2, $t8)], "
 operator|+
 literal|"expr#10=[true], expr#11=[IS NOT NULL($t5)], expr#12=[false], "
 operator|+
-literal|"expr#13=[null], expr#14=[CASE($t9, $t10, $t11, $t12, $t13)], "
+literal|"expr#13=[null:BOOLEAN], expr#14=[CASE($t9, $t10, $t11, $t12, $t13)], "
 operator|+
 literal|"expr#15=[NOT($t14)], expr#16=[IS TRUE($t15)], a=[$t7], b=[$t6], "
 operator|+
@@ -4980,7 +5018,7 @@ name|checkCnf
 argument_list|(
 name|nullBool
 argument_list|,
-literal|"null"
+literal|"null:BOOLEAN"
 argument_list|)
 expr_stmt|;
 name|checkCnf
@@ -6390,7 +6428,7 @@ name|checkPullFactors
 argument_list|(
 name|nullBool
 argument_list|,
-literal|"null"
+literal|"null:BOOLEAN"
 argument_list|)
 expr_stmt|;
 name|checkPullFactors
@@ -8200,7 +8238,7 @@ argument_list|,
 name|nullBool
 argument_list|)
 argument_list|,
-literal|"null"
+literal|"null:BOOLEAN"
 argument_list|,
 literal|"false"
 argument_list|,
@@ -8216,7 +8254,7 @@ argument_list|,
 name|nullBool
 argument_list|)
 argument_list|,
-literal|"null"
+literal|"null:BOOLEAN"
 argument_list|,
 literal|"false"
 argument_list|,
@@ -8232,7 +8270,7 @@ argument_list|,
 name|nullBool
 argument_list|)
 argument_list|,
-literal|"null"
+literal|"null:BOOLEAN"
 argument_list|,
 literal|"false"
 argument_list|,
@@ -8248,7 +8286,7 @@ argument_list|,
 name|nullBool
 argument_list|)
 argument_list|,
-literal|"null"
+literal|"null:BOOLEAN"
 argument_list|,
 literal|"false"
 argument_list|,
@@ -8264,7 +8302,7 @@ argument_list|,
 name|nullBool
 argument_list|)
 argument_list|,
-literal|"null"
+literal|"null:BOOLEAN"
 argument_list|,
 literal|"false"
 argument_list|,
@@ -8278,7 +8316,7 @@ argument_list|(
 name|nullBool
 argument_list|)
 argument_list|,
-literal|"null"
+literal|"null:BOOLEAN"
 argument_list|,
 literal|"false"
 argument_list|,
@@ -8295,7 +8333,7 @@ argument_list|,
 name|nullBool
 argument_list|)
 argument_list|,
-literal|"null"
+literal|"null:BOOLEAN"
 argument_list|,
 literal|"false"
 argument_list|,
@@ -8312,7 +8350,7 @@ argument_list|,
 name|nullBool
 argument_list|)
 argument_list|,
-literal|"null"
+literal|"null:BOOLEAN"
 argument_list|,
 literal|"false"
 argument_list|,
@@ -8329,7 +8367,7 @@ argument_list|,
 name|nullInt
 argument_list|)
 argument_list|,
-literal|"null"
+literal|"null:INTEGER"
 argument_list|)
 expr_stmt|;
 name|checkSimplify
@@ -8342,7 +8380,7 @@ argument_list|,
 name|nullInt
 argument_list|)
 argument_list|,
-literal|"null"
+literal|"null:INTEGER"
 argument_list|)
 expr_stmt|;
 name|checkSimplify
@@ -8355,7 +8393,7 @@ argument_list|,
 name|nullInt
 argument_list|)
 argument_list|,
-literal|"null"
+literal|"null:INTEGER"
 argument_list|)
 expr_stmt|;
 name|checkSimplify
@@ -8368,7 +8406,7 @@ argument_list|,
 name|nullInt
 argument_list|)
 argument_list|,
-literal|"null"
+literal|"null:INTEGER"
 argument_list|)
 expr_stmt|;
 block|}
@@ -10524,7 +10562,7 @@ argument_list|,
 name|nullInt
 argument_list|)
 argument_list|,
-literal|"AND(=(?0.a, 1), null)"
+literal|"AND(=(?0.a, 1), null:INTEGER)"
 argument_list|,
 literal|"false"
 argument_list|)
@@ -10538,7 +10576,7 @@ argument_list|,
 name|nullBool
 argument_list|)
 argument_list|,
-literal|"null"
+literal|"null:BOOLEAN"
 argument_list|,
 literal|"false"
 argument_list|)
@@ -10616,7 +10654,7 @@ argument_list|,
 name|nullBool
 argument_list|)
 argument_list|,
-literal|"null"
+literal|"null:BOOLEAN"
 argument_list|,
 literal|"false"
 argument_list|,
@@ -13310,7 +13348,7 @@ argument_list|,
 name|varcharType
 argument_list|)
 argument_list|,
-literal|"'1'"
+literal|"'1':VARCHAR(10)"
 argument_list|)
 expr_stmt|;
 name|checkSimplifyUnchanged
@@ -13643,7 +13681,7 @@ argument_list|,
 name|timeLTZType
 argument_list|)
 argument_list|,
-literal|"20:34:45"
+literal|"20:34:45:TIME_WITH_LOCAL_TIME_ZONE(0)"
 argument_list|)
 expr_stmt|;
 name|checkSimplify
@@ -13655,7 +13693,7 @@ argument_list|,
 name|timeLTZType
 argument_list|)
 argument_list|,
-literal|"12:34:45"
+literal|"12:34:45:TIME_WITH_LOCAL_TIME_ZONE(0)"
 argument_list|)
 expr_stmt|;
 name|checkSimplify
@@ -13667,7 +13705,7 @@ argument_list|,
 name|timeLTZType
 argument_list|)
 argument_list|,
-literal|"11:34:45"
+literal|"11:34:45:TIME_WITH_LOCAL_TIME_ZONE(0)"
 argument_list|)
 expr_stmt|;
 name|checkSimplifyUnchanged
@@ -13689,7 +13727,7 @@ argument_list|,
 name|timestampLTZType
 argument_list|)
 argument_list|,
-literal|"2011-07-20 03:34:56"
+literal|"2011-07-20 03:34:56:TIMESTAMP_WITH_LOCAL_TIME_ZONE(0)"
 argument_list|)
 expr_stmt|;
 name|checkSimplify
@@ -13701,7 +13739,7 @@ argument_list|,
 name|timestampLTZType
 argument_list|)
 argument_list|,
-literal|"2011-07-20 11:34:56"
+literal|"2011-07-20 11:34:56:TIMESTAMP_WITH_LOCAL_TIME_ZONE(0)"
 argument_list|)
 expr_stmt|;
 name|checkSimplify
@@ -13713,7 +13751,7 @@ argument_list|,
 name|timestampLTZType
 argument_list|)
 argument_list|,
-literal|"2011-07-20 12:34:56"
+literal|"2011-07-20 12:34:56:TIMESTAMP_WITH_LOCAL_TIME_ZONE(0)"
 argument_list|)
 expr_stmt|;
 name|checkSimplifyUnchanged
@@ -13735,7 +13773,7 @@ argument_list|,
 name|timestampLTZType
 argument_list|)
 argument_list|,
-literal|"2011-07-20 07:00:00"
+literal|"2011-07-20 07:00:00:TIMESTAMP_WITH_LOCAL_TIME_ZONE(0)"
 argument_list|)
 expr_stmt|;
 name|checkSimplify
@@ -13747,7 +13785,7 @@ argument_list|,
 name|timestampLTZType
 argument_list|)
 argument_list|,
-literal|"2011-07-20 19:34:56"
+literal|"2011-07-20 19:34:56:TIMESTAMP_WITH_LOCAL_TIME_ZONE(0)"
 argument_list|)
 expr_stmt|;
 name|checkSimplify
@@ -13759,7 +13797,7 @@ argument_list|,
 name|timestampLTZType
 argument_list|)
 argument_list|,
-literal|"2011-07-20 19:34:56"
+literal|"2011-07-20 19:34:56:TIMESTAMP_WITH_LOCAL_TIME_ZONE(0)"
 argument_list|)
 expr_stmt|;
 name|checkSimplify
@@ -13831,7 +13869,7 @@ argument_list|,
 name|timeLTZType
 argument_list|)
 argument_list|,
-literal|"20:34:56"
+literal|"20:34:56:TIME_WITH_LOCAL_TIME_ZONE(0)"
 argument_list|)
 expr_stmt|;
 name|checkSimplify
@@ -13843,7 +13881,7 @@ argument_list|,
 name|timeLTZType
 argument_list|)
 argument_list|,
-literal|"08:23:45"
+literal|"08:23:45:TIME_WITH_LOCAL_TIME_ZONE(0)"
 argument_list|)
 expr_stmt|;
 name|checkSimplify
@@ -13855,7 +13893,7 @@ argument_list|,
 name|varCharType
 argument_list|)
 argument_list|,
-literal|"'17:23:45 America/Los_Angeles'"
+literal|"'17:23:45 America/Los_Angeles':VARCHAR(40)"
 argument_list|)
 expr_stmt|;
 name|checkSimplify
@@ -13867,7 +13905,7 @@ argument_list|,
 name|varCharType
 argument_list|)
 argument_list|,
-literal|"'2011-07-20 01:23:45 America/Los_Angeles'"
+literal|"'2011-07-20 01:23:45 America/Los_Angeles':VARCHAR(40)"
 argument_list|)
 expr_stmt|;
 name|checkSimplify
@@ -13891,7 +13929,7 @@ argument_list|,
 name|timestampLTZType
 argument_list|)
 argument_list|,
-literal|"2011-07-20 01:23:45"
+literal|"2011-07-20 01:23:45:TIMESTAMP_WITH_LOCAL_TIME_ZONE(0)"
 argument_list|)
 expr_stmt|;
 block|}
@@ -15518,7 +15556,7 @@ name|checkSimplify3
 argument_list|(
 name|nullBool
 argument_list|,
-literal|"null"
+literal|"null:BOOLEAN"
 argument_list|,
 literal|"false"
 argument_list|,

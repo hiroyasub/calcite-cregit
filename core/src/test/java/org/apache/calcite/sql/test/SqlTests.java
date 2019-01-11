@@ -544,26 +544,11 @@ return|return
 name|actual
 return|;
 default|default:
-comment|// Get rid of the verbose charset/collation stuff.
-comment|// TODO: There's probably a better way to do this.
-specifier|final
-name|String
-name|s
-init|=
+return|return
 name|sqlType
 operator|.
 name|getFullTypeString
 argument_list|()
-decl_stmt|;
-return|return
-name|s
-operator|.
-name|replace
-argument_list|(
-literal|" CHARACTER SET \"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$primary\""
-argument_list|,
-literal|""
-argument_list|)
 return|;
 block|}
 block|}

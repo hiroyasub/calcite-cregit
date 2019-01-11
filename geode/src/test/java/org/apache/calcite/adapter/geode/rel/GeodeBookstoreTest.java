@@ -576,9 +576,7 @@ literal|"  GeodeProject(author=[$4])\n"
 operator|+
 literal|"    GeodeFilter(condition=[OR(AND(>($0, 123), =(CAST($0):INTEGER, 789)), "
 operator|+
-literal|"=(CAST($4):VARCHAR CHARACTER SET \"ISO-8859-1\" "
-operator|+
-literal|"COLLATE \"ISO-8859-1$en_US$primary\", 'Daisy Mae West'))])\n"
+literal|"=(CAST($4):VARCHAR, 'Daisy Mae West'))])\n"
 operator|+
 literal|"      GeodeTableScan(table=[[geode, BookMaster]])\n"
 operator|+

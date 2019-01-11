@@ -1203,7 +1203,7 @@ literal|"  LogicalProject(ROWTIME=[$0], ORDERID=[$1], SUPPLIERID=[$6])\n"
 operator|+
 literal|"    LogicalJoin(condition=[=($4, $5)], joinType=[inner])\n"
 operator|+
-literal|"      LogicalProject(ROWTIME=[$0], ID=[$1], PRODUCT=[$2], UNITS=[$3], PRODUCT0=[CAST($2):VARCHAR(32) CHARACTER SET \"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$primary\" NOT NULL])\n"
+literal|"      LogicalProject(ROWTIME=[$0], ID=[$1], PRODUCT=[$2], UNITS=[$3], PRODUCT0=[CAST($2):VARCHAR(32) NOT NULL])\n"
 operator|+
 literal|"        LogicalTableScan(table=[[STREAM_JOINS, ORDERS]])\n"
 operator|+
@@ -1218,7 +1218,7 @@ literal|"EnumerableCalc(expr#0..6=[{inputs}], proj#0..1=[{exprs}], SUPPLIERID=[$
 operator|+
 literal|"  EnumerableJoin(condition=[=($4, $5)], joinType=[inner])\n"
 operator|+
-literal|"    EnumerableCalc(expr#0..3=[{inputs}], expr#4=[CAST($t2):VARCHAR(32) CHARACTER SET \"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$primary\" NOT NULL], proj#0..4=[{exprs}])\n"
+literal|"    EnumerableCalc(expr#0..3=[{inputs}], expr#4=[CAST($t2):VARCHAR(32) NOT NULL], proj#0..4=[{exprs}])\n"
 operator|+
 literal|"      EnumerableInterpreter\n"
 operator|+

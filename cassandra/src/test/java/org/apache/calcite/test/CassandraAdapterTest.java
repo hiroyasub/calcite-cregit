@@ -579,7 +579,7 @@ name|explainContains
 argument_list|(
 literal|"PLAN=CassandraToEnumerableConverter\n"
 operator|+
-literal|"  CassandraFilter(condition=[=(CAST($0):CHAR(36) CHARACTER SET \"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$primary\", 'f3cd759c-d05b-11e5-b58b-90e2ba530b12')])\n"
+literal|"  CassandraFilter(condition=[=(CAST($0):CHAR(36), 'f3cd759c-d05b-11e5-b58b-90e2ba530b12')])\n"
 operator|+
 literal|"    CassandraTableScan(table=[[twissandra, tweets]]"
 argument_list|)

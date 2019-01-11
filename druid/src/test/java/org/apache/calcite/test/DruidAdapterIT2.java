@@ -400,7 +400,7 @@ specifier|final
 name|String
 name|VARCHAR_TYPE
 init|=
-literal|"VARCHAR CHARACTER SET \"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$primary\""
+literal|"VARCHAR"
 decl_stmt|;
 specifier|private
 specifier|static
@@ -12441,7 +12441,7 @@ literal|"    DruidQuery(table=[[foodmart, foodmart]], intervals=[[1900-01-09T00:
 operator|+
 literal|"2992-01-10T00:00:00.000Z]], projects=[[CAST(SUBSTRING(CAST($0):VARCHAR"
 operator|+
-literal|" CHARACTER SET \"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$primary\" "
+literal|" "
 operator|+
 literal|"NOT NULL, 12, 2)):INTEGER NOT NULL, EXTRACT(FLAG(MINUTE), $0), "
 operator|+
@@ -12549,7 +12549,7 @@ literal|"SUM($0), SUM($1)]], post_projects=[[||(||(CAST(+($0, $1)):VARCHAR CHARA
 operator|+
 literal|"\"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$primary\", '_'), CAST($2):"
 operator|+
-literal|"VARCHAR CHARACTER SET \"ISO-8859-1\" COLLATE \"ISO-8859-1$en_US$primary\")]])"
+literal|"VARCHAR)]])"
 argument_list|)
 expr_stmt|;
 block|}
