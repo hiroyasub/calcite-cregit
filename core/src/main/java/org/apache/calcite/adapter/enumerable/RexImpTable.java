@@ -6495,7 +6495,14 @@ block|{
 case|case
 name|NOT_POSSIBLE
 case|:
-comment|// Just foldAnd
+comment|// This doesn't mean that none of the arguments might be null, ex: (s and s is not null)
+name|nullAs
+operator|=
+name|NullAs
+operator|.
+name|TRUE
+expr_stmt|;
+comment|// fallthru
 case|case
 name|TRUE
 case|:
@@ -6709,7 +6716,14 @@ block|{
 case|case
 name|NOT_POSSIBLE
 case|:
-comment|// Just foldOr
+comment|// This doesn't mean that none of the arguments might be null, ex: (s or s is null)
+name|nullAs
+operator|=
+name|NullAs
+operator|.
+name|FALSE
+expr_stmt|;
+comment|// fallthru
 case|case
 name|TRUE
 case|:
@@ -16245,6 +16259,24 @@ argument_list|()
 operator|==
 literal|1
 assert|;
+switch|switch
+condition|(
+name|nullAs
+condition|)
+block|{
+case|case
+name|IS_NOT_NULL
+case|:
+return|return
+name|BOXED_TRUE_EXPR
+return|;
+case|case
+name|IS_NULL
+case|:
+return|return
+name|BOXED_FALSE_EXPR
+return|;
+block|}
 if|if
 condition|(
 name|seek
