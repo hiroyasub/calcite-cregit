@@ -1005,6 +1005,27 @@ name|class
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
+specifier|public
+name|String
+name|timeZone
+parameter_list|()
+block|{
+return|return
+name|CalciteConnectionProperty
+operator|.
+name|TIME_ZONE
+operator|.
+name|wrap
+argument_list|(
+name|properties
+argument_list|)
+operator|.
+name|getString
+argument_list|()
+return|;
+block|}
 block|}
 end_class
 

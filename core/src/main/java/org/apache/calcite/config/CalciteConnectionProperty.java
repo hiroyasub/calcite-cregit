@@ -156,6 +156,16 @@ import|;
 end_import
 
 begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|TimeZone
+import|;
+end_import
+
+begin_import
 import|import static
 name|org
 operator|.
@@ -502,7 +512,7 @@ argument_list|,
 literal|false
 argument_list|)
 block|,
-comment|/** Time zone, for example 'gmt-3'. Default is the JVM's time zone. */
+comment|/** Returns the time zone from the connect string, for example 'gmt-3'.    * If the time zone is not set then the JVM time zone is returned.    * Never null. */
 name|TIME_ZONE
 argument_list|(
 literal|"timeZone"
@@ -511,7 +521,13 @@ name|Type
 operator|.
 name|STRING
 argument_list|,
-literal|null
+name|TimeZone
+operator|.
+name|getDefault
+argument_list|()
+operator|.
+name|getID
+argument_list|()
 argument_list|,
 literal|false
 argument_list|)

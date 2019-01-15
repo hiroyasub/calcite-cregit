@@ -262,6 +262,13 @@ name|SqlConformance
 name|conformance
 parameter_list|()
 function_decl|;
+comment|/** @see CalciteConnectionProperty#TIME_ZONE */
+annotation|@
+name|Override
+name|String
+name|timeZone
+parameter_list|()
+function_decl|;
 block|}
 end_interface
 
