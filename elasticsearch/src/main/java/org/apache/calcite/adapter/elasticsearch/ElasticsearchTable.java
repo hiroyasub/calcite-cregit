@@ -563,7 +563,6 @@ specifier|final
 name|ObjectMapper
 name|mapper
 decl_stmt|;
-specifier|private
 specifier|final
 name|ElasticsearchTransport
 name|transport

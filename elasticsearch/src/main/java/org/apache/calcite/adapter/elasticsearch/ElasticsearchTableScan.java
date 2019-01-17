@@ -157,6 +157,22 @@ name|calcite
 operator|.
 name|rel
 operator|.
+name|rules
+operator|.
+name|AggregateExpandDistinctAggregatesRule
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
 name|type
 operator|.
 name|RelDataType
@@ -396,6 +412,17 @@ name|rule
 argument_list|)
 expr_stmt|;
 block|}
+comment|// remove this rule otherwise elastic can't correctly interpret approx_count_distinct()
+comment|// it is converted to cardinality aggregation in Elastic
+name|planner
+operator|.
+name|removeRule
+argument_list|(
+name|AggregateExpandDistinctAggregatesRule
+operator|.
+name|INSTANCE
+argument_list|)
+expr_stmt|;
 block|}
 annotation|@
 name|Override

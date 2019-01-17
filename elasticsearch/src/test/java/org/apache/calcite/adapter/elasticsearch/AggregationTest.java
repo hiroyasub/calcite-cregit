@@ -1277,6 +1277,108 @@ literal|"cat5=2; EXPR$1=7.0"
 argument_list|)
 expr_stmt|;
 block|}
+comment|/**    * Validate {@link org.apache.calcite.sql.fun.SqlStdOperatorTable#APPROX_COUNT_DISTINCT}.    */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|approximateCountDistinct
+parameter_list|()
+block|{
+comment|// approx_count_distinct counts distinct *non-null* values
+name|CalciteAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|newConnectionFactory
+argument_list|()
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select approx_count_distinct(cat1) from view"
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"EXPR$0=2"
+argument_list|)
+expr_stmt|;
+name|CalciteAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|newConnectionFactory
+argument_list|()
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select approx_count_distinct(cat2) from view"
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"EXPR$0=2"
+argument_list|)
+expr_stmt|;
+name|CalciteAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|newConnectionFactory
+argument_list|()
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select cat1, approx_count_distinct(val1) from view group by cat1"
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"cat1=a; EXPR$1=1"
+argument_list|,
+literal|"cat1=b; EXPR$1=1"
+argument_list|,
+literal|"cat1=null; EXPR$1=0"
+argument_list|)
+expr_stmt|;
+name|CalciteAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|newConnectionFactory
+argument_list|()
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select cat1, approx_count_distinct(val2) from view group by cat1"
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"cat1=a; EXPR$1=0"
+argument_list|,
+literal|"cat1=b; EXPR$1=1"
+argument_list|,
+literal|"cat1=null; EXPR$1=1"
+argument_list|)
+expr_stmt|;
+block|}
 block|}
 end_class
 

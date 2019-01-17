@@ -203,16 +203,6 @@ name|org
 operator|.
 name|junit
 operator|.
-name|Ignore
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|junit
-operator|.
 name|Test
 import|;
 end_import
@@ -2489,11 +2479,9 @@ literal|"EXPR$0=140; EXPR$1=84712\n"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Checks    *<a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-cardinality-aggregation.html">Cardinality</a>    * aggregation {@code approx_count_distinct}    */
+comment|/**    * Test of {@link org.apache.calcite.sql.fun.SqlStdOperatorTable#APPROX_COUNT_DISTINCT} which    * will be translated to    *<a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-cardinality-aggregation.html">Cardinality Aggregation</a>    * (approximate counts using HyperLogLog++ algorithm).    */
 annotation|@
 name|Test
-annotation|@
-name|Ignore
 specifier|public
 name|void
 name|approximateCount
@@ -2501,17 +2489,14 @@ parameter_list|()
 throws|throws
 name|Exception
 block|{
-comment|// approx_count_distinct is converted into two aggregations. needs investigation
-comment|// ElasticsearchAggregate(group=[{1}], EXPR$0=[COUNT($0)])\r
-comment|//  ElasticsearchAggregate(group=[{0, 1}])\r
 name|calciteAssert
 argument_list|()
 operator|.
 name|query
 argument_list|(
-literal|"select approx_count_distinct(city), state from zips group by state "
+literal|"select state, approx_count_distinct(city), approx_count_distinct(pop) from zips"
 operator|+
-literal|"order by state limit 3"
+literal|" group by state order by state limit 3"
 argument_list|)
 operator|.
 name|queryContains
@@ -2524,21 +2509,25 @@ literal|"'_source':false"
 argument_list|,
 literal|"size:0"
 argument_list|,
-literal|"aggregations:{'g_state':{terms:{field:state, size:3, "
+literal|"aggregations:{'g_state':{terms:{field:'state', missing:'__MISSING__', size:3, "
 operator|+
 literal|"order:{'_key':'asc'}}"
 argument_list|,
-literal|"aggregations:{'EXPR$0':{cardinality:{field:city}} }}}"
+literal|"aggregations:{'EXPR$1':{cardinality:{field:'city'}}"
+argument_list|,
+literal|"'EXPR$2':{cardinality:{field:'pop'}} "
+operator|+
+literal|" }}}"
 argument_list|)
 argument_list|)
 operator|.
 name|returnsOrdered
 argument_list|(
-literal|"EXPR$0=3; state=AK"
+literal|"state=AK; EXPR$1=3; EXPR$2=3"
 argument_list|,
-literal|"EXPR$0=3; state=AL"
+literal|"state=AL; EXPR$1=3; EXPR$2=3"
 argument_list|,
-literal|"EXPR$0=3; state=AR"
+literal|"state=AR; EXPR$1=3; EXPR$2=3"
 argument_list|)
 expr_stmt|;
 block|}
