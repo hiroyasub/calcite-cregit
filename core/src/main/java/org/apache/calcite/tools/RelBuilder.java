@@ -3583,6 +3583,8 @@ return|;
 block|}
 comment|/** Creates a call to a scalar operator. */
 specifier|public
+annotation|@
+name|Nonnull
 name|RexNode
 name|call
 parameter_list|(
@@ -3610,6 +3612,8 @@ return|;
 block|}
 comment|/** Creates a call to a scalar operator. */
 specifier|private
+annotation|@
+name|Nonnull
 name|RexNode
 name|call
 parameter_list|(
@@ -3660,6 +3664,8 @@ return|;
 block|}
 comment|/** Creates a call to a scalar operator. */
 specifier|public
+annotation|@
+name|Nonnull
 name|RexNode
 name|call
 parameter_list|(

@@ -1384,6 +1384,408 @@ name|expectedMySql
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Tests GROUP BY ROLLUP of two columns. The SQL for MySQL has    * "GROUP BY ... ROLLUP" but no "ORDER BY". */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSelectQueryWithGroupByRollup
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|query
+init|=
+literal|"select \"product_class_id\", \"brand_name\"\n"
+operator|+
+literal|"from \"product\"\n"
+operator|+
+literal|"group by rollup(\"product_class_id\", \"brand_name\")\n"
+operator|+
+literal|"order by 1, 2"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT \"product_class_id\", \"brand_name\"\n"
+operator|+
+literal|"FROM \"foodmart\".\"product\"\n"
+operator|+
+literal|"GROUP BY ROLLUP(\"product_class_id\", \"brand_name\")\n"
+operator|+
+literal|"ORDER BY \"product_class_id\", \"brand_name\""
+decl_stmt|;
+specifier|final
+name|String
+name|expectedMySql
+init|=
+literal|"SELECT `product_class_id`, `brand_name`\n"
+operator|+
+literal|"FROM `foodmart`.`product`\n"
+operator|+
+literal|"GROUP BY `product_class_id`, `brand_name` WITH ROLLUP"
+decl_stmt|;
+specifier|final
+name|String
+name|expectedMySql8
+init|=
+literal|"SELECT `product_class_id`, `brand_name`\n"
+operator|+
+literal|"FROM `foodmart`.`product`\n"
+operator|+
+literal|"GROUP BY ROLLUP(`product_class_id`, `brand_name`)\n"
+operator|+
+literal|"ORDER BY `product_class_id` NULLS LAST, `brand_name` NULLS LAST"
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+operator|.
+name|withMysql
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expectedMySql
+argument_list|)
+operator|.
+name|withMysql8
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expectedMySql8
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** As {@link #testSelectQueryWithGroupByRollup()},    * but ORDER BY columns reversed. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSelectQueryWithGroupByRollup2
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|query
+init|=
+literal|"select \"product_class_id\", \"brand_name\"\n"
+operator|+
+literal|"from \"product\"\n"
+operator|+
+literal|"group by rollup(\"product_class_id\", \"brand_name\")\n"
+operator|+
+literal|"order by 2, 1"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT \"product_class_id\", \"brand_name\"\n"
+operator|+
+literal|"FROM \"foodmart\".\"product\"\n"
+operator|+
+literal|"GROUP BY ROLLUP(\"product_class_id\", \"brand_name\")\n"
+operator|+
+literal|"ORDER BY \"brand_name\", \"product_class_id\""
+decl_stmt|;
+specifier|final
+name|String
+name|expectedMySql
+init|=
+literal|"SELECT `product_class_id`, `brand_name`\n"
+operator|+
+literal|"FROM `foodmart`.`product`\n"
+operator|+
+literal|"GROUP BY `brand_name`, `product_class_id` WITH ROLLUP"
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+operator|.
+name|withMysql
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expectedMySql
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** CUBE of one column is equivalent to ROLLUP, and Calcite recognizes    * this. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSelectQueryWithSingletonCube
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|query
+init|=
+literal|"select \"product_class_id\", count(*) as c\n"
+operator|+
+literal|"from \"product\"\n"
+operator|+
+literal|"group by cube(\"product_class_id\")\n"
+operator|+
+literal|"order by 1, 2"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT \"product_class_id\", COUNT(*) AS \"C\"\n"
+operator|+
+literal|"FROM \"foodmart\".\"product\"\n"
+operator|+
+literal|"GROUP BY ROLLUP(\"product_class_id\")\n"
+operator|+
+literal|"ORDER BY \"product_class_id\", COUNT(*)"
+decl_stmt|;
+specifier|final
+name|String
+name|expectedMySql
+init|=
+literal|"SELECT `product_class_id`, COUNT(*) AS `C`\n"
+operator|+
+literal|"FROM `foodmart`.`product`\n"
+operator|+
+literal|"GROUP BY `product_class_id` WITH ROLLUP\n"
+operator|+
+literal|"ORDER BY `product_class_id` IS NULL, `product_class_id`,"
+operator|+
+literal|" COUNT(*) IS NULL, COUNT(*)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+operator|.
+name|withMysql
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expectedMySql
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** As {@link #testSelectQueryWithSingletonCube()}, but no ORDER BY    * clause. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSelectQueryWithSingletonCubeNoOrderBy
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|query
+init|=
+literal|"select \"product_class_id\", count(*) as c\n"
+operator|+
+literal|"from \"product\"\n"
+operator|+
+literal|"group by cube(\"product_class_id\")"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT \"product_class_id\", COUNT(*) AS \"C\"\n"
+operator|+
+literal|"FROM \"foodmart\".\"product\"\n"
+operator|+
+literal|"GROUP BY ROLLUP(\"product_class_id\")"
+decl_stmt|;
+specifier|final
+name|String
+name|expectedMySql
+init|=
+literal|"SELECT `product_class_id`, COUNT(*) AS `C`\n"
+operator|+
+literal|"FROM `foodmart`.`product`\n"
+operator|+
+literal|"GROUP BY `product_class_id` WITH ROLLUP"
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+operator|.
+name|withMysql
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expectedMySql
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Cannot rewrite if ORDER BY contains a column not in GROUP BY (in this    * case COUNT(*)). */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSelectQueryWithRollupOrderByCount
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|query
+init|=
+literal|"select \"product_class_id\", \"brand_name\",\n"
+operator|+
+literal|" count(*) as c\n"
+operator|+
+literal|"from \"product\"\n"
+operator|+
+literal|"group by rollup(\"product_class_id\", \"brand_name\")\n"
+operator|+
+literal|"order by 1, 2, 3"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT \"product_class_id\", \"brand_name\","
+operator|+
+literal|" COUNT(*) AS \"C\"\n"
+operator|+
+literal|"FROM \"foodmart\".\"product\"\n"
+operator|+
+literal|"GROUP BY ROLLUP(\"product_class_id\", \"brand_name\")\n"
+operator|+
+literal|"ORDER BY \"product_class_id\", \"brand_name\", COUNT(*)"
+decl_stmt|;
+specifier|final
+name|String
+name|expectedMySql
+init|=
+literal|"SELECT `product_class_id`, `brand_name`,"
+operator|+
+literal|" COUNT(*) AS `C`\n"
+operator|+
+literal|"FROM `foodmart`.`product`\n"
+operator|+
+literal|"GROUP BY `product_class_id`, `brand_name` WITH ROLLUP\n"
+operator|+
+literal|"ORDER BY `product_class_id` IS NULL, `product_class_id`,"
+operator|+
+literal|" `brand_name` IS NULL, `brand_name`,"
+operator|+
+literal|" COUNT(*) IS NULL, COUNT(*)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+operator|.
+name|withMysql
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expectedMySql
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** As {@link #testSelectQueryWithSingletonCube()}, but with LIMIT. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSelectQueryWithCubeLimit
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|query
+init|=
+literal|"select \"product_class_id\", count(*) as c\n"
+operator|+
+literal|"from \"product\"\n"
+operator|+
+literal|"group by cube(\"product_class_id\")\n"
+operator|+
+literal|"limit 5"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT \"product_class_id\", COUNT(*) AS \"C\"\n"
+operator|+
+literal|"FROM \"foodmart\".\"product\"\n"
+operator|+
+literal|"GROUP BY ROLLUP(\"product_class_id\")\n"
+operator|+
+literal|"FETCH NEXT 5 ROWS ONLY"
+decl_stmt|;
+comment|// If a MySQL 5 query has GROUP BY ... ROLLUP, you cannot add ORDER BY,
+comment|// but you can add LIMIT.
+specifier|final
+name|String
+name|expectedMySql
+init|=
+literal|"SELECT `product_class_id`, COUNT(*) AS `C`\n"
+operator|+
+literal|"FROM `foodmart`.`product`\n"
+operator|+
+literal|"GROUP BY `product_class_id` WITH ROLLUP\n"
+operator|+
+literal|"LIMIT 5"
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+operator|.
+name|withMysql
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expectedMySql
+argument_list|)
+expr_stmt|;
+block|}
 annotation|@
 name|Test
 specifier|public
@@ -11545,6 +11947,71 @@ name|MYSQL
 operator|.
 name|getDialect
 argument_list|()
+argument_list|)
+return|;
+block|}
+name|Sql
+name|withMysql8
+parameter_list|()
+block|{
+specifier|final
+name|SqlDialect
+name|mysqlDialect
+init|=
+name|DatabaseProduct
+operator|.
+name|MYSQL
+operator|.
+name|getDialect
+argument_list|()
+decl_stmt|;
+return|return
+name|dialect
+argument_list|(
+operator|new
+name|SqlDialect
+argument_list|(
+name|SqlDialect
+operator|.
+name|EMPTY_CONTEXT
+operator|.
+name|withDatabaseProduct
+argument_list|(
+name|DatabaseProduct
+operator|.
+name|MYSQL
+argument_list|)
+operator|.
+name|withDatabaseMajorVersion
+argument_list|(
+literal|8
+argument_list|)
+operator|.
+name|withIdentifierQuoteString
+argument_list|(
+name|mysqlDialect
+operator|.
+name|quoteIdentifier
+argument_list|(
+literal|""
+argument_list|)
+operator|.
+name|substring
+argument_list|(
+literal|0
+argument_list|,
+literal|1
+argument_list|)
+argument_list|)
+operator|.
+name|withNullCollation
+argument_list|(
+name|mysqlDialect
+operator|.
+name|getNullCollation
+argument_list|()
+argument_list|)
+argument_list|)
 argument_list|)
 return|;
 block|}

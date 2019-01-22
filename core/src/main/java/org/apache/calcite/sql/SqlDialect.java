@@ -3622,6 +3622,16 @@ return|return
 literal|true
 return|;
 block|}
+comment|/**    * Returns whether this dialect supports "WITH ROLLUP" in the "GROUP BY"    * clause.    *    *<p>For instance, in MySQL version 5,    *    *<blockquote>    *<code>    *     SELECT deptno, job, COUNT(*) AS c    *     FROM emp    *     GROUP BY deptno, job WITH ROLLUP    *</code>    *</blockquote>    *    *<p>is equivalent to standard SQL    *    *<blockquote>    *<code>    *     SELECT deptno, job, COUNT(*) AS c    *     FROM emp    *     GROUP BY ROLLUP(deptno, job)    *     ORDER BY deptno, job    *</code>    *</blockquote>    *    *<p>The "WITH ROLLUP" clause was introduced in MySQL and is not standard    * SQL.    *    *<p>See also {@link #supportsAggregateFunction(SqlKind)} applied to    * {@link SqlKind#ROLLUP}, which returns true in MySQL 8 and higher.    */
+specifier|public
+name|boolean
+name|supportsGroupByWithRollup
+parameter_list|()
+block|{
+return|return
+literal|false
+return|;
+block|}
 comment|/** Returns how NULL values are sorted if an ORDER BY item does not contain    * NULLS ASCENDING or NULLS DESCENDING. */
 specifier|public
 name|NullCollation
@@ -3634,6 +3644,8 @@ return|;
 block|}
 comment|/** Returns whether NULL values are sorted first or last, in this dialect,    * in an ORDER BY item of a given direction. */
 specifier|public
+annotation|@
+name|Nonnull
 name|RelFieldCollation
 operator|.
 name|NullDirection
@@ -4470,6 +4482,8 @@ name|NullCollation
 name|nullCollation
 parameter_list|()
 function_decl|;
+annotation|@
+name|Nonnull
 name|Context
 name|withNullCollation
 parameter_list|(

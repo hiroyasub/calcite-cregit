@@ -41,6 +41,16 @@ name|Objects
 import|;
 end_import
 
+begin_import
+import|import
+name|javax
+operator|.
+name|annotation
+operator|.
+name|Nonnull
+import|;
+end_import
+
 begin_comment
 comment|/**  * Definition of the ordering of one field of a {@link RelNode} whose  * output is to be sorted.  *  * @see RelCollation  */
 end_comment
@@ -289,6 +299,8 @@ block|}
 block|}
 comment|/** Returns the null direction if not specified. Consistent with Oracle,      * NULLS are sorted as if they were positive infinity. */
 specifier|public
+annotation|@
+name|Nonnull
 name|NullDirection
 name|defaultNullDirection
 parameter_list|()

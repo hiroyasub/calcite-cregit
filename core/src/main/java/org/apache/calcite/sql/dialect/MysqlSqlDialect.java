@@ -462,6 +462,11 @@ operator|.
 name|SYSTEM
 argument_list|)
 decl_stmt|;
+specifier|private
+specifier|final
+name|int
+name|majorVersion
+decl_stmt|;
 comment|/** Creates a MysqlSqlDialect. */
 specifier|public
 name|MysqlSqlDialect
@@ -474,6 +479,13 @@ name|super
 argument_list|(
 name|context
 argument_list|)
+expr_stmt|;
+name|majorVersion
+operator|=
+name|context
+operator|.
+name|databaseMajorVersion
+argument_list|()
 expr_stmt|;
 block|}
 annotation|@
@@ -576,6 +588,16 @@ case|:
 return|return
 literal|true
 return|;
+case|case
+name|ROLLUP
+case|:
+comment|// MySQL 5 does not support standard "GROUP BY ROLLUP(x, y)",
+comment|// only the non-standard "GROUP BY x, y WITH ROLLUP".
+return|return
+name|majorVersion
+operator|>=
+literal|8
+return|;
 block|}
 return|return
 literal|false
@@ -590,6 +612,17 @@ parameter_list|()
 block|{
 return|return
 literal|false
+return|;
+block|}
+annotation|@
+name|Override
+specifier|public
+name|boolean
+name|supportsGroupByWithRollup
+parameter_list|()
+block|{
+return|return
+literal|true
 return|;
 block|}
 annotation|@
