@@ -227,6 +227,16 @@ name|Set
 import|;
 end_import
 
+begin_import
+import|import
+name|javax
+operator|.
+name|annotation
+operator|.
+name|Nonnull
+import|;
+end_import
+
 begin_comment
 comment|/**  * A<code>SqlNode</code> is a SQL parse tree.  *  *<p>It may be an  * {@link SqlOperator operator}, {@link SqlLiteral literal},  * {@link SqlIdentifier identifier}, and so forth.  */
 end_comment
@@ -343,6 +353,8 @@ parameter_list|)
 function_decl|;
 comment|/**    * Returns the type of node this is, or    * {@link org.apache.calcite.sql.SqlKind#OTHER} if it's nothing special.    *    * @return a {@link SqlKind} value, never null    * @see #isA    */
 specifier|public
+annotation|@
+name|Nonnull
 name|SqlKind
 name|getKind
 parameter_list|()

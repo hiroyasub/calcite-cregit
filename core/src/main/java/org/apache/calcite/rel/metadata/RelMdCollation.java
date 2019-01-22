@@ -1781,7 +1781,7 @@ name|add
 argument_list|(
 name|ifc
 operator|.
-name|copy
+name|withFieldIndex
 argument_list|(
 name|integers
 operator|.

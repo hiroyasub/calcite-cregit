@@ -869,7 +869,7 @@ name|fc
 lambda|->
 name|fc
 operator|.
-name|copy
+name|withFieldIndex
 argument_list|(
 name|mapping
 operator|.
@@ -916,7 +916,7 @@ name|fc
 lambda|->
 name|fc
 operator|.
-name|copy
+name|withFieldIndex
 argument_list|(
 name|mapping
 operator|.

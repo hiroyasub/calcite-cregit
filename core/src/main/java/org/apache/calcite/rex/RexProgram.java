@@ -2305,7 +2305,7 @@ name|add
 argument_list|(
 name|fieldCollation
 operator|.
-name|copy
+name|withFieldIndex
 argument_list|(
 name|target
 argument_list|)

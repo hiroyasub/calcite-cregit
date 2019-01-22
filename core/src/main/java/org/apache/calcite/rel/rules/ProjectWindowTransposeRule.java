@@ -891,7 +891,7 @@ name|add
 argument_list|(
 name|relFieldCollation
 operator|.
-name|copy
+name|withFieldIndex
 argument_list|(
 name|getAdjustedIndex
 argument_list|(

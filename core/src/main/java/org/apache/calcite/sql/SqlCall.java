@@ -187,6 +187,16 @@ name|List
 import|;
 end_import
 
+begin_import
+import|import
+name|javax
+operator|.
+name|annotation
+operator|.
+name|Nonnull
+import|;
+end_import
+
 begin_comment
 comment|/**  * A<code>SqlCall</code> is a call to an {@link SqlOperator operator}.  * (Operators can be used to describe any syntactic construct, so in practice,  * every non-leaf node in a SQL parse tree is a<code>SqlCall</code> of some  * kind.)  */
 end_comment
@@ -259,12 +269,16 @@ return|;
 block|}
 specifier|public
 specifier|abstract
+annotation|@
+name|Nonnull
 name|SqlOperator
 name|getOperator
 parameter_list|()
 function_decl|;
 specifier|public
 specifier|abstract
+annotation|@
+name|Nonnull
 name|List
 argument_list|<
 name|SqlNode
