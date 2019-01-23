@@ -23834,6 +23834,32 @@ block|}
 end_function
 
 begin_comment
+comment|/** Test case for   *<a href="https://issues.apache.org/jira/browse/CALCITE-2803">[CALCITE-2803]   * Identify expanded IS NOT DISTINCT FROM expression when pushing project past join</a>.   */
+end_comment
+
+begin_function
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testPushProjectWithIsNotDistinctFromPastJoin
+parameter_list|()
+block|{
+name|checkPlanning
+argument_list|(
+name|ProjectJoinTransposeRule
+operator|.
+name|INSTANCE
+argument_list|,
+literal|"select e.sal + b.comm from emp e inner join bonus b "
+operator|+
+literal|"on e.ename IS NOT DISTINCT FROM b.ename and e.deptno = 10"
+argument_list|)
+expr_stmt|;
+block|}
+end_function
+
+begin_comment
 unit|}
 comment|// End RelOptRulesTest.java
 end_comment
