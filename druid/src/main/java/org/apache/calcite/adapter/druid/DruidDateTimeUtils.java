@@ -444,24 +444,15 @@ name|r
 argument_list|)
 expr_stmt|;
 block|}
-if|if
-condition|(
-name|LOGGER
-operator|.
-name|isDebugEnabled
-argument_list|()
-condition|)
-block|{
 name|LOGGER
 operator|.
 name|debug
 argument_list|(
-literal|"Inferred ranges on interval : "
-operator|+
+literal|"Inferred ranges on interval : {}"
+argument_list|,
 name|condensedRanges
 argument_list|)
 expr_stmt|;
-block|}
 return|return
 name|toInterval
 argument_list|(
@@ -469,6 +460,9 @@ name|ImmutableList
 operator|.
 expr|<
 name|Range
+argument_list|<
+name|Long
+argument_list|>
 operator|>
 name|copyOf
 argument_list|(
@@ -1028,6 +1022,14 @@ specifier|final
 name|Long
 name|value
 decl_stmt|;
+name|SqlKind
+name|kind
+init|=
+name|call
+operator|.
+name|getKind
+argument_list|()
+decl_stmt|;
 if|if
 condition|(
 name|call
@@ -1119,6 +1121,13 @@ literal|0
 argument_list|)
 argument_list|)
 expr_stmt|;
+name|kind
+operator|=
+name|kind
+operator|.
+name|reverse
+argument_list|()
+expr_stmt|;
 block|}
 else|else
 block|{
@@ -1128,10 +1137,7 @@ return|;
 block|}
 switch|switch
 condition|(
-name|call
-operator|.
-name|getKind
-argument_list|()
+name|kind
 condition|)
 block|{
 case|case
