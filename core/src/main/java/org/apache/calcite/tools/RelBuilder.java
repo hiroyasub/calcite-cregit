@@ -9737,6 +9737,31 @@ condition|(
 name|simplify
 condition|)
 block|{
+comment|// Normalize expanded versions IS NOT DISTINCT FROM so that simplifier does not
+comment|// transform the expression to something unrecognizable
+if|if
+condition|(
+name|condition
+operator|instanceof
+name|RexCall
+condition|)
+block|{
+name|condition
+operator|=
+name|RelOptUtil
+operator|.
+name|collapseExpandedIsNotDistinctFromExpr
+argument_list|(
+operator|(
+name|RexCall
+operator|)
+name|condition
+argument_list|,
+name|getRexBuilder
+argument_list|()
+argument_list|)
+expr_stmt|;
+block|}
 name|condition
 operator|=
 name|simplifier

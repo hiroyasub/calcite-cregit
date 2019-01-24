@@ -25097,7 +25097,7 @@ name|INSTANCE
 argument_list|,
 literal|"select e.sal + b.comm from emp e inner join bonus b "
 operator|+
-literal|"on e.ename IS NOT DISTINCT FROM b.ename and e.deptno = 10"
+literal|"on (e.ename || e.job) IS NOT DISTINCT FROM (b.ename || b.job) and e.deptno = 10"
 argument_list|)
 expr_stmt|;
 block|}
