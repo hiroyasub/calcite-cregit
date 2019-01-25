@@ -7085,7 +7085,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testRowWitDot
+name|testRowWithDot
 parameter_list|()
 block|{
 name|check
@@ -7100,6 +7100,13 @@ argument_list|(
 literal|"select row(1,2).a from c.t"
 argument_list|,
 literal|"SELECT ((ROW(1, 2)).`A`)\nFROM `C`.`T`"
+argument_list|)
+expr_stmt|;
+name|check
+argument_list|(
+literal|"select tbl.foo(0).col.bar from tbl"
+argument_list|,
+literal|"SELECT ((`TBL`.`FOO`(0).`COL`).`BAR`)\nFROM `TBL`"
 argument_list|)
 expr_stmt|;
 block|}
@@ -24959,6 +24966,51 @@ argument_list|(
 literal|"\"SUBSTRING\"('a' ^from^ 1)"
 argument_list|,
 literal|"(?s).*Encountered \"from\" at .*"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/**    * Tests that applying member function of a specific type as a suffix function    */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testMemberFunction
+parameter_list|()
+block|{
+name|check
+argument_list|(
+literal|"SELECT myColumn.func(a, b) FROM tbl"
+argument_list|,
+literal|"SELECT `MYCOLUMN`.`FUNC`(`A`, `B`)\n"
+operator|+
+literal|"FROM `TBL`"
+argument_list|)
+expr_stmt|;
+name|check
+argument_list|(
+literal|"SELECT myColumn.mySubField.func() FROM tbl"
+argument_list|,
+literal|"SELECT `MYCOLUMN`.`MYSUBFIELD`.`FUNC`()\n"
+operator|+
+literal|"FROM `TBL`"
+argument_list|)
+expr_stmt|;
+name|check
+argument_list|(
+literal|"SELECT tbl.myColumn.mySubField.func() FROM tbl"
+argument_list|,
+literal|"SELECT `TBL`.`MYCOLUMN`.`MYSUBFIELD`.`FUNC`()\n"
+operator|+
+literal|"FROM `TBL`"
+argument_list|)
+expr_stmt|;
+name|check
+argument_list|(
+literal|"SELECT tbl.foo(0).col.bar(2, 3) FROM tbl"
+argument_list|,
+literal|"SELECT ((`TBL`.`FOO`(0).`COL`).`BAR`(2, 3))\n"
+operator|+
+literal|"FROM `TBL`"
 argument_list|)
 expr_stmt|;
 block|}

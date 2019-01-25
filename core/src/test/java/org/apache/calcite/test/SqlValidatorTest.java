@@ -4586,6 +4586,29 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+comment|/**    * Not able to parse member function yet.    */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testInvalidMemberFunction
+parameter_list|()
+block|{
+name|checkExpFails
+argument_list|(
+literal|"myCol.^func()^"
+argument_list|,
+literal|"(?s).*No match found for function signature FUNC().*"
+argument_list|)
+expr_stmt|;
+name|checkExpFails
+argument_list|(
+literal|"myCol.mySubschema.^memberFunc()^"
+argument_list|,
+literal|"(?s).*No match found for function signature MEMBERFUNC().*"
+argument_list|)
+expr_stmt|;
+block|}
 annotation|@
 name|Test
 specifier|public
@@ -4667,7 +4690,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testRowWitValidDot
+name|testRowWithValidDot
 parameter_list|()
 block|{
 name|checkColumnType
