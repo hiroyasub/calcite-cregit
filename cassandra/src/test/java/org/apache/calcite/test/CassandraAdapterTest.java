@@ -847,7 +847,7 @@ argument_list|)
 operator|.
 name|explainContains
 argument_list|(
-literal|"CassandraTableScan(table=[[twissandra, tweets_by_user]])"
+literal|"CassandraTableScan(table=[[twissandra, Tweets_By_User]])"
 argument_list|)
 expr_stmt|;
 block|}
