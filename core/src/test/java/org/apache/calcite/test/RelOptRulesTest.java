@@ -14842,6 +14842,146 @@ expr_stmt|;
 block|}
 end_function
 
+begin_comment
+comment|/**    * Once the bottom aggregate pulled through union, we need to add a Project    * if the new input contains a different type from the union.    */
+end_comment
+
+begin_function
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testPullAggregateThroughUnionAndAddProjects
+parameter_list|()
+block|{
+name|HepProgram
+name|program
+init|=
+operator|new
+name|HepProgramBuilder
+argument_list|()
+operator|.
+name|addRuleInstance
+argument_list|(
+name|AggregateProjectMergeRule
+operator|.
+name|INSTANCE
+argument_list|)
+operator|.
+name|addRuleInstance
+argument_list|(
+name|AggregateUnionAggregateRule
+operator|.
+name|INSTANCE
+argument_list|)
+operator|.
+name|build
+argument_list|()
+decl_stmt|;
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select job, deptno from"
+operator|+
+literal|" (select job, deptno from emp as e1"
+operator|+
+literal|" group by job, deptno"
+operator|+
+literal|"  union all"
+operator|+
+literal|" select job, deptno from emp as e2"
+operator|+
+literal|" group by job, deptno)"
+operator|+
+literal|" group by job, deptno"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|with
+argument_list|(
+name|program
+argument_list|)
+operator|.
+name|check
+argument_list|()
+expr_stmt|;
+block|}
+end_function
+
+begin_comment
+comment|/**    * Make sure the union alias is preserved when the bottom aggregate is    * pulled up through union.    */
+end_comment
+
+begin_function
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testPullAggregateThroughUnionWithAlias
+parameter_list|()
+block|{
+name|HepProgram
+name|program
+init|=
+operator|new
+name|HepProgramBuilder
+argument_list|()
+operator|.
+name|addRuleInstance
+argument_list|(
+name|AggregateProjectMergeRule
+operator|.
+name|INSTANCE
+argument_list|)
+operator|.
+name|addRuleInstance
+argument_list|(
+name|AggregateUnionAggregateRule
+operator|.
+name|INSTANCE
+argument_list|)
+operator|.
+name|build
+argument_list|()
+decl_stmt|;
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select job, c from"
+operator|+
+literal|" (select job, deptno c from emp as e1"
+operator|+
+literal|" group by job, deptno"
+operator|+
+literal|"  union all"
+operator|+
+literal|" select job, deptno from emp as e2"
+operator|+
+literal|" group by job, deptno)"
+operator|+
+literal|" group by job, c"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|with
+argument_list|(
+name|program
+argument_list|)
+operator|.
+name|check
+argument_list|()
+expr_stmt|;
+block|}
+end_function
+
 begin_function
 specifier|private
 name|void
