@@ -69,6 +69,16 @@ name|List
 import|;
 end_import
 
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Map
+import|;
+end_import
+
 begin_comment
 comment|/**  * Builtin methods in the Elasticsearch adapter.  */
 end_comment
@@ -112,11 +122,11 @@ operator|.
 name|class
 argument_list|,
 comment|// aggregations
-name|List
+name|Map
 operator|.
 name|class
 argument_list|,
-comment|// expression mapping
+comment|// item to expression mapping. Eg. _MAP['a.b.c'] and EXPR$1
 name|Long
 operator|.
 name|class

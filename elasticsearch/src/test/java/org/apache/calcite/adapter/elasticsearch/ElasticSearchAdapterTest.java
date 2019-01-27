@@ -1421,6 +1421,33 @@ argument_list|(
 name|ZIPS_SIZE
 argument_list|)
 expr_stmt|;
+name|CalciteAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|newConnectionFactory
+argument_list|()
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select max(_MAP['pop']), min(_MAP['pop']), _MAP['state'] from elastic.zips "
+operator|+
+literal|"group by _MAP['state'] order by _MAP['state'] limit 3"
+argument_list|)
+operator|.
+name|returnsOrdered
+argument_list|(
+literal|"EXPR$0=32383.0; EXPR$1=23238.0; EXPR$2=AK"
+argument_list|,
+literal|"EXPR$0=44165.0; EXPR$1=42124.0; EXPR$2=AL"
+argument_list|,
+literal|"EXPR$0=53532.0; EXPR$1=37428.0; EXPR$2=AR"
+argument_list|)
+expr_stmt|;
 block|}
 comment|/**    * Sort by multiple fields (in different direction: asc/desc)    */
 annotation|@
