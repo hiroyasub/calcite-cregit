@@ -965,16 +965,6 @@ name|org
 operator|.
 name|junit
 operator|.
-name|Ignore
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|junit
-operator|.
 name|Test
 import|;
 end_import
@@ -2450,7 +2440,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2554">[CALCITE-2554]    * Enrich EnumerableJoin operator with order preserving information</a>.    *    * Since left input to the join is sorted, and this join preserves order, there shouldn't be    * any sort operator above the join.    */
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2554">[CALCITE-2554]    * Enrich EnumerableJoin operator with order preserving information</a>.    *    *<p>Since the left input to the join is sorted, and this join preserves    * order, there shouldn't be any sort operator above the join.    */
 annotation|@
 name|Test
 specifier|public
@@ -2611,7 +2601,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Unit test that parses, validates, converts and    * plans for query using two duplicate order by.    * The duplicate order by should be removed by SortRemoveRule. */
+comment|/** Unit test that parses, validates, converts and    * plans for query using two duplicate order by.    * The duplicate order by should be removed by SqlToRelConverter. */
 annotation|@
 name|Test
 specifier|public
@@ -2633,17 +2623,15 @@ literal|"order by emps.deptno) "
 operator|+
 literal|"order by deptno"
 argument_list|,
-literal|"EnumerableProject(empid=[$0], deptno=[$1])\n"
+literal|"EnumerableSort(sort0=[$1], dir0=[ASC])\n"
 operator|+
-literal|"  EnumerableSort(sort0=[$1], dir0=[ASC])\n"
+literal|"  EnumerableProject(empid=[$0], deptno=[$1])\n"
 operator|+
-literal|"    EnumerableProject(empid=[$0], deptno=[$1], name=[$2], salary=[$3], commission=[$4])\n"
-operator|+
-literal|"      EnumerableTableScan(table=[[hr, emps]])\n"
+literal|"    EnumerableTableScan(table=[[hr, emps]])\n"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Unit test that parses, validates, converts and    * plans for query using two duplicate order by.    * The duplicate order by should be removed by SortRemoveRule*/
+comment|/** Unit test that parses, validates, converts and    * plans for query using two duplicate order by.    * The duplicate order by should be removed by SqlToRelConverter. */
 annotation|@
 name|Test
 specifier|public
@@ -2665,13 +2653,11 @@ literal|"order by emps.deptno) "
 operator|+
 literal|"order by deptno"
 argument_list|,
-literal|"EnumerableProject(EXPR$0=[+($0, $1)], deptno=[$1])\n"
+literal|"EnumerableSort(sort0=[$1], dir0=[ASC])\n"
 operator|+
-literal|"  EnumerableSort(sort0=[$1], dir0=[ASC])\n"
+literal|"  EnumerableProject(EXPR$0=[+($0, $1)], deptno=[$1])\n"
 operator|+
-literal|"    EnumerableProject(empid=[$0], deptno=[$1])\n"
-operator|+
-literal|"      EnumerableTableScan(table=[[hr, emps]])\n"
+literal|"    EnumerableTableScan(table=[[hr, emps]])\n"
 argument_list|)
 expr_stmt|;
 block|}
@@ -2679,7 +2665,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testTwoSortDontRemove
+name|testTwoSortRemoveInnerSort
 parameter_list|()
 throws|throws
 name|Exception
@@ -2700,24 +2686,11 @@ literal|"EnumerableSort(sort0=[$1], dir0=[ASC])\n"
 operator|+
 literal|"  EnumerableProject(EXPR$0=[+($0, $1)], deptno=[$1])\n"
 operator|+
-literal|"    EnumerableSort(sort0=[$0], dir0=[ASC])\n"
-operator|+
-literal|"      EnumerableProject(empid=[$0], deptno=[$1])\n"
-operator|+
-literal|"        EnumerableTableScan(table=[[hr, emps]])\n"
+literal|"    EnumerableTableScan(table=[[hr, emps]])\n"
 argument_list|)
 expr_stmt|;
 block|}
 comment|/** Tests that outer order by is not removed since window function    * might reorder the rows in-between */
-annotation|@
-name|Ignore
-argument_list|(
-literal|"Node [rel#22:Subset#3.ENUMERABLE.[2]] could not be implemented; planner state:\n"
-operator|+
-literal|"\n"
-operator|+
-literal|"Root: rel#22:Subset#3.ENUMERABLE.[2]"
-argument_list|)
 annotation|@
 name|Test
 specifier|public
@@ -2743,21 +2716,13 @@ literal|")"
 operator|+
 literal|"order by deptno"
 argument_list|,
-literal|"EnumerableProject(EXPR$0=[$0])\n"
+literal|"EnumerableSort(sort0=[$2], dir0=[ASC])\n"
 operator|+
-literal|"  EnumerableSort(sort0=[$1], dir0=[ASC])\n"
+literal|"  EnumerableProject(emp_cnt=[$5], EXPR$1=[+($0, $1)], deptno=[$1])\n"
 operator|+
-literal|"    EnumerableProject(EXPR$0=[+($0, $1)], deptno=[$1])\n"
+literal|"    EnumerableWindow(window#0=[window(partition {1} order by [] range between UNBOUNDED PRECEDING and UNBOUNDED FOLLOWING aggs [COUNT()])])\n"
 operator|+
-literal|"      EnumerableProject(empid=[$0], deptno=[$1], $2=[$2])\n"
-operator|+
-literal|"        EnumerableWindow(window#0=[window(partition {1} order by [] range between UNBOUNDED PRECEDING and UNBOUNDED FOLLOWING aggs [COUNT()])])\n"
-operator|+
-literal|"          EnumerableSort(sort0=[$1], dir0=[ASC])\n"
-operator|+
-literal|"            EnumerableProject(empid=[$0], deptno=[$1])\n"
-operator|+
-literal|"              EnumerableTableScan(table=[[hr, emps]])\n"
+literal|"      EnumerableTableScan(table=[[hr, emps]])\n"
 argument_list|)
 expr_stmt|;
 block|}
@@ -2786,13 +2751,11 @@ literal|")"
 operator|+
 literal|"order by deptno"
 argument_list|,
-literal|"EnumerableProject(EXPR$0=[+($0, $1)], deptno=[$1])\n"
+literal|"EnumerableSort(sort0=[$1], dir0=[ASC])\n"
 operator|+
-literal|"  EnumerableSort(sort0=[$1], dir0=[ASC])\n"
+literal|"  EnumerableProject(EXPR$0=[+($0, $1)], deptno=[$1])\n"
 operator|+
-literal|"    EnumerableProject(empid=[$0], deptno=[$1])\n"
-operator|+
-literal|"      EnumerableTableScan(table=[[hr, emps]])\n"
+literal|"    EnumerableTableScan(table=[[hr, emps]])\n"
 argument_list|)
 expr_stmt|;
 block|}
@@ -3086,11 +3049,7 @@ literal|"EnumerableSort(sort0=[$1], dir0=[ASC])\n"
 operator|+
 literal|"  EnumerableProject(empid=[$0], deptno=[$1])\n"
 operator|+
-literal|"    EnumerableSort(sort0=[$1], dir0=[ASC])\n"
-operator|+
-literal|"      EnumerableProject(empid=[$0], deptno=[$1], name=[$2], salary=[$3], commission=[$4])\n"
-operator|+
-literal|"        EnumerableTableScan(table=[[hr, emps]])\n"
+literal|"    EnumerableTableScan(table=[[hr, emps]])\n"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -5784,11 +5743,7 @@ literal|"LogicalSort(sort0=[$0], dir0=[ASC])\n"
 operator|+
 literal|"  LogicalProject(psPartkey=[$0])\n"
 operator|+
-literal|"    LogicalSort(sort0=[$0], sort1=[$1], dir0=[ASC], dir1=[ASC])\n"
-operator|+
-literal|"      LogicalProject(psPartkey=[$0], psSupplyCost=[$1])\n"
-operator|+
-literal|"        EnumerableTableScan(table=[[tpch, partsupp]])\n"
+literal|"    EnumerableTableScan(table=[[tpch, partsupp]])\n"
 argument_list|)
 argument_list|)
 expr_stmt|;
