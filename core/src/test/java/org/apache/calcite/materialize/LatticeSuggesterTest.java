@@ -123,6 +123,20 @@ name|apache
 operator|.
 name|calcite
 operator|.
+name|test
+operator|.
+name|SlowTests
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
 name|tools
 operator|.
 name|FrameworkConfig
@@ -279,6 +293,20 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|junit
+operator|.
+name|experimental
+operator|.
+name|categories
+operator|.
+name|Category
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -360,6 +388,13 @@ comment|/**  * Unit tests for {@link LatticeSuggester}.  */
 end_comment
 
 begin_class
+annotation|@
+name|Category
+argument_list|(
+name|SlowTests
+operator|.
+name|class
+argument_list|)
 specifier|public
 class|class
 name|LatticeSuggesterTest

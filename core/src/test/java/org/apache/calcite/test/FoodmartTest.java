@@ -85,6 +85,20 @@ name|org
 operator|.
 name|junit
 operator|.
+name|experimental
+operator|.
+name|categories
+operator|.
+name|Category
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|junit
+operator|.
 name|runner
 operator|.
 name|RunWith
@@ -138,6 +152,13 @@ comment|/**  * Test case that runs the FoodMart reference queries.  */
 end_comment
 
 begin_class
+annotation|@
+name|Category
+argument_list|(
+name|SlowTests
+operator|.
+name|class
+argument_list|)
 annotation|@
 name|RunWith
 argument_list|(

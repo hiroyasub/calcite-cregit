@@ -33,6 +33,20 @@ begin_import
 import|import
 name|org
 operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|test
+operator|.
+name|SlowTests
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
 name|junit
 operator|.
 name|Assume
@@ -46,6 +60,20 @@ operator|.
 name|junit
 operator|.
 name|Test
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|junit
+operator|.
+name|experimental
+operator|.
+name|categories
+operator|.
+name|Category
 import|;
 end_import
 
@@ -218,6 +246,13 @@ comment|/**  * Unit test for {@link PartiallyOrderedSet}.  */
 end_comment
 
 begin_class
+annotation|@
+name|Category
+argument_list|(
+name|SlowTests
+operator|.
+name|class
+argument_list|)
 specifier|public
 class|class
 name|PartiallyOrderedSetTest
