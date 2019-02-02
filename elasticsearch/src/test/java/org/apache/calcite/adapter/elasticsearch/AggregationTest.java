@@ -1178,6 +1178,89 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|anyValueWithOtherAgg
+parameter_list|()
+block|{
+name|CalciteAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|newConnectionFactory
+argument_list|()
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select cat1, any_value(cat2), max(val1) from view group by cat1"
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"cat1=a; EXPR$1=g; EXPR$2=1.0"
+argument_list|,
+literal|"cat1=null; EXPR$1=g; EXPR$2=null"
+argument_list|,
+literal|"cat1=b; EXPR$1=h; EXPR$2=7.0"
+argument_list|)
+expr_stmt|;
+name|CalciteAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|newConnectionFactory
+argument_list|()
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select max(val1), cat1, any_value(cat2) from view group by cat1"
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"EXPR$0=1.0; cat1=a; EXPR$2=g"
+argument_list|,
+literal|"EXPR$0=null; cat1=null; EXPR$2=g"
+argument_list|,
+literal|"EXPR$0=7.0; cat1=b; EXPR$2=h"
+argument_list|)
+expr_stmt|;
+name|CalciteAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|newConnectionFactory
+argument_list|()
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select any_value(cat2), cat1, max(val1) from view group by cat1"
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"EXPR$0=g; cat1=a; EXPR$2=1.0"
+argument_list|,
+literal|"EXPR$0=g; cat1=null; EXPR$2=null"
+argument_list|,
+literal|"EXPR$0=h; cat1=b; EXPR$2=7.0"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|cat1Cat2Cat3
 parameter_list|()
 block|{

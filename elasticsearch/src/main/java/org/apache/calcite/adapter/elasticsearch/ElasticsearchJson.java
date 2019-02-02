@@ -521,7 +521,7 @@ operator|.
 name|stream
 argument_list|()
 operator|.
-name|anyMatch
+name|allMatch
 argument_list|(
 name|val
 lambda|->
