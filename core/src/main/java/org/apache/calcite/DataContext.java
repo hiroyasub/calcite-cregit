@@ -337,6 +337,26 @@ name|TimeZone
 operator|.
 name|class
 argument_list|)
+block|,
+comment|/** The query user.      *      *<p>Default value is "sa". */
+name|USER
+argument_list|(
+literal|"user"
+argument_list|,
+name|String
+operator|.
+name|class
+argument_list|)
+block|,
+comment|/** The system user.      *      *<p>Default value is "user.name" from      * {@link System#getProperty(String)}. */
+name|SYSTEM_USER
+argument_list|(
+literal|"systemUser"
+argument_list|,
+name|String
+operator|.
+name|class
+argument_list|)
 block|;
 specifier|public
 specifier|final

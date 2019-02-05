@@ -10857,7 +10857,7 @@ argument_list|()
 operator|.
 name|query
 argument_list|(
-literal|"select substring(\"name\", \"deptno\"+case when user<> 'sa' then 1 end) from \"hr\".\"emps\""
+literal|"select substring(\"name\", \"deptno\"+case when CURRENT_PATH<> '' then 1 end) from \"hr\".\"emps\""
 argument_list|)
 operator|.
 name|planContains
@@ -10869,25 +10869,25 @@ name|planContains
 argument_list|(
 literal|"static final boolean "
 operator|+
-literal|"$L4J$C$org_apache_calcite_runtime_SqlFunctions_ne_sa_sa_ = "
+literal|"$L4J$C$org_apache_calcite_runtime_SqlFunctions_ne_ = "
 operator|+
-literal|"org.apache.calcite.runtime.SqlFunctions.ne(\"sa\", \"sa\");"
+literal|"org.apache.calcite.runtime.SqlFunctions.ne(\"\", \"\");"
 argument_list|)
 operator|.
 name|planContains
 argument_list|(
 literal|"static final boolean "
 operator|+
-literal|"$L4J$C$_org_apache_calcite_runtime_SqlFunctions_ne_sa_sa_ = "
+literal|"$L4J$C$_org_apache_calcite_runtime_SqlFunctions_ne_ = "
 operator|+
-literal|"!$L4J$C$org_apache_calcite_runtime_SqlFunctions_ne_sa_sa_;"
+literal|"!$L4J$C$org_apache_calcite_runtime_SqlFunctions_ne_;"
 argument_list|)
 operator|.
 name|planContains
 argument_list|(
 literal|"return inp2_ == null "
 operator|+
-literal|"|| $L4J$C$_org_apache_calcite_runtime_SqlFunctions_ne_sa_sa_ ? (String) null"
+literal|"|| $L4J$C$_org_apache_calcite_runtime_SqlFunctions_ne_ ? (String) null"
 operator|+
 literal|" : org.apache.calcite.runtime.SqlFunctions.substring(inp2_, "
 operator|+
@@ -10913,7 +10913,7 @@ literal|"select substring(trim(\n"
 operator|+
 literal|"substring(\"name\",\n"
 operator|+
-literal|"  \"deptno\"*0+case when user = 'sa' then 1 end)\n"
+literal|"  \"deptno\"*0+case when CURRENT_PATH = '' then 1 end)\n"
 operator|+
 literal|"), case when \"empid\">\"deptno\" then 4\n"
 comment|/* diff from 5 */
@@ -10943,25 +10943,25 @@ name|planContains
 argument_list|(
 literal|"static final boolean "
 operator|+
-literal|"$L4J$C$org_apache_calcite_runtime_SqlFunctions_eq_sa_sa_ = "
+literal|"$L4J$C$org_apache_calcite_runtime_SqlFunctions_eq_ = "
 operator|+
-literal|"org.apache.calcite.runtime.SqlFunctions.eq(\"sa\", \"sa\");"
+literal|"org.apache.calcite.runtime.SqlFunctions.eq(\"\", \"\");"
 argument_list|)
 operator|.
 name|planContains
 argument_list|(
 literal|"static final boolean "
 operator|+
-literal|"$L4J$C$_org_apache_calcite_runtime_SqlFunctions_eq_sa_sa_ = "
+literal|"$L4J$C$_org_apache_calcite_runtime_SqlFunctions_eq_ = "
 operator|+
-literal|"!$L4J$C$org_apache_calcite_runtime_SqlFunctions_eq_sa_sa_;"
+literal|"!$L4J$C$org_apache_calcite_runtime_SqlFunctions_eq_;"
 argument_list|)
 operator|.
 name|planContains
 argument_list|(
 literal|"return inp2_ == null "
 operator|+
-literal|"|| $L4J$C$_org_apache_calcite_runtime_SqlFunctions_eq_sa_sa_ "
+literal|"|| $L4J$C$_org_apache_calcite_runtime_SqlFunctions_eq_ "
 operator|+
 literal|"|| !v5&& inp1_ * 8<= 8 "
 operator|+
@@ -11006,7 +11006,7 @@ literal|"select substring(trim(\n"
 operator|+
 literal|"substring(\"name\",\n"
 operator|+
-literal|"  \"deptno\"*0+case when user = 'sa' then 1 end)\n"
+literal|"  \"deptno\"*0+case when CURRENT_PATH = '' then 1 end)\n"
 operator|+
 literal|"), case when \"empid\">\"deptno\" then 5\n"
 comment|/* diff from 4 */
@@ -11041,25 +11041,25 @@ name|planContains
 argument_list|(
 literal|"static final boolean "
 operator|+
-literal|"$L4J$C$org_apache_calcite_runtime_SqlFunctions_eq_sa_sa_ = "
+literal|"$L4J$C$org_apache_calcite_runtime_SqlFunctions_eq_ = "
 operator|+
-literal|"org.apache.calcite.runtime.SqlFunctions.eq(\"sa\", \"sa\");"
+literal|"org.apache.calcite.runtime.SqlFunctions.eq(\"\", \"\");"
 argument_list|)
 operator|.
 name|planContains
 argument_list|(
 literal|"static final boolean "
 operator|+
-literal|"$L4J$C$_org_apache_calcite_runtime_SqlFunctions_eq_sa_sa_ = "
+literal|"$L4J$C$_org_apache_calcite_runtime_SqlFunctions_eq_ = "
 operator|+
-literal|"!$L4J$C$org_apache_calcite_runtime_SqlFunctions_eq_sa_sa_;"
+literal|"!$L4J$C$org_apache_calcite_runtime_SqlFunctions_eq_;"
 argument_list|)
 operator|.
 name|planContains
 argument_list|(
 literal|"return inp2_ == null "
 operator|+
-literal|"|| $L4J$C$_org_apache_calcite_runtime_SqlFunctions_eq_sa_sa_ "
+literal|"|| $L4J$C$_org_apache_calcite_runtime_SqlFunctions_eq_ "
 operator|+
 literal|"|| current.empid<= inp1_&& inp1_ * 8<= 8 "
 operator|+
