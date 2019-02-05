@@ -71,6 +71,22 @@ name|rel
 operator|.
 name|core
 operator|.
+name|Project
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|core
+operator|.
 name|RelFactories
 import|;
 end_import
@@ -145,7 +161,7 @@ name|LOGICAL_BUILDER
 argument_list|)
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/** Creates a ProjectMultiJoinMergeRule. */
+comment|/**    * Creates a ProjectMultiJoinMergeRule that uses {@link Project}    * of type {@link LogicalProject}    * @param relBuilderFactory builder factory for relational expressions    */
 specifier|public
 name|ProjectMultiJoinMergeRule
 parameter_list|(
@@ -178,6 +194,45 @@ literal|null
 argument_list|)
 expr_stmt|;
 block|}
+comment|/**    * Creates a ProjectMultiJoinMergeRule that uses a generic    * {@link Project}    * @param projectClass project class    * @param relBuilderFactory builder factory for relational expressions    */
+specifier|public
+name|ProjectMultiJoinMergeRule
+parameter_list|(
+name|Class
+argument_list|<
+name|?
+extends|extends
+name|Project
+argument_list|>
+name|projectClass
+parameter_list|,
+name|RelBuilderFactory
+name|relBuilderFactory
+parameter_list|)
+block|{
+name|super
+argument_list|(
+name|operand
+argument_list|(
+name|projectClass
+argument_list|,
+name|operand
+argument_list|(
+name|MultiJoin
+operator|.
+name|class
+argument_list|,
+name|any
+argument_list|()
+argument_list|)
+argument_list|)
+argument_list|,
+name|relBuilderFactory
+argument_list|,
+literal|null
+argument_list|)
+expr_stmt|;
+block|}
 comment|//~ Methods ----------------------------------------------------------------
 specifier|public
 name|void
@@ -187,7 +242,7 @@ name|RelOptRuleCall
 name|call
 parameter_list|)
 block|{
-name|LogicalProject
+name|Project
 name|project
 init|=
 name|call

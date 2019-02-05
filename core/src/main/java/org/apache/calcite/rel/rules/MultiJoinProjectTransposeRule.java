@@ -85,6 +85,22 @@ name|rel
 operator|.
 name|core
 operator|.
+name|Project
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|core
+operator|.
 name|RelFactories
 import|;
 end_import
@@ -390,7 +406,7 @@ return|;
 block|}
 comment|// override JoinProjectTransposeRule
 specifier|protected
-name|LogicalProject
+name|Project
 name|getRightChild
 parameter_list|(
 name|RelOptRuleCall
@@ -437,7 +453,7 @@ parameter_list|(
 name|RelOptRuleCall
 name|call
 parameter_list|,
-name|LogicalProject
+name|Project
 name|project
 parameter_list|,
 name|boolean

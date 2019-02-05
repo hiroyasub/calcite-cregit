@@ -57,6 +57,22 @@ name|rel
 operator|.
 name|core
 operator|.
+name|Filter
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|core
+operator|.
 name|RelFactories
 import|;
 end_import
@@ -154,7 +170,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Planner rule that merges a  * {@link org.apache.calcite.rel.logical.LogicalFilter}  * into a {@link MultiJoin},  * creating a richer {@code MultiJoin}.  *  * @see org.apache.calcite.rel.rules.ProjectMultiJoinMergeRule  */
+comment|/**  * Planner rule that merges a  * {@link Filter} into a {@link MultiJoin},  * creating a richer {@code MultiJoin}.  *  * @see org.apache.calcite.rel.rules.ProjectMultiJoinMergeRule  */
 end_comment
 
 begin_class
@@ -179,10 +195,36 @@ name|LOGICAL_BUILDER
 argument_list|)
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**    * Creates a FilterMultiJoinMergeRule.    */
+comment|/**    * Creates a FilterMultiJoinMergeRule that uses {@link Filter}    * of type {@link LogicalFilter}    * @param relBuilderFactory builder factory for relational expressions    */
 specifier|public
 name|FilterMultiJoinMergeRule
 parameter_list|(
+name|RelBuilderFactory
+name|relBuilderFactory
+parameter_list|)
+block|{
+name|this
+argument_list|(
+name|LogicalFilter
+operator|.
+name|class
+argument_list|,
+name|relBuilderFactory
+argument_list|)
+expr_stmt|;
+block|}
+comment|/**    * Creates a FilterMultiJoinMergeRule that uses a generic    * {@link Filter}    * @param filterClass filter class    * @param relBuilderFactory builder factory for relational expressions    */
+specifier|public
+name|FilterMultiJoinMergeRule
+parameter_list|(
+name|Class
+argument_list|<
+name|?
+extends|extends
+name|Filter
+argument_list|>
+name|filterClass
+parameter_list|,
 name|RelBuilderFactory
 name|relBuilderFactory
 parameter_list|)
@@ -191,9 +233,7 @@ name|super
 argument_list|(
 name|operand
 argument_list|(
-name|LogicalFilter
-operator|.
-name|class
+name|filterClass
 argument_list|,
 name|operand
 argument_list|(
@@ -221,7 +261,7 @@ name|RelOptRuleCall
 name|call
 parameter_list|)
 block|{
-name|LogicalFilter
+name|Filter
 name|filter
 init|=
 name|call

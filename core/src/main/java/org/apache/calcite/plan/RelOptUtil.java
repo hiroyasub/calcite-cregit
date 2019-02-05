@@ -13166,7 +13166,7 @@ block|}
 block|}
 return|;
 block|}
-comment|/**    * Creates a new {@link org.apache.calcite.rel.rules.MultiJoin} to reflect    * projection references from a    * {@link org.apache.calcite.rel.logical.LogicalProject} that is on top of the    * {@link org.apache.calcite.rel.rules.MultiJoin}.    *    * @param multiJoin the original MultiJoin    * @param project   the LogicalProject on top of the MultiJoin    * @return the new MultiJoin    */
+comment|/**    * Creates a new {@link org.apache.calcite.rel.rules.MultiJoin} to reflect    * projection references from a    * {@link Project} that is on top of the    * {@link org.apache.calcite.rel.rules.MultiJoin}.    *    * @param multiJoin the original MultiJoin    * @param project   the Project on top of the MultiJoin    * @return the new MultiJoin    */
 specifier|public
 specifier|static
 name|MultiJoin
@@ -13175,7 +13175,7 @@ parameter_list|(
 name|MultiJoin
 name|multiJoin
 parameter_list|,
-name|LogicalProject
+name|Project
 name|project
 parameter_list|)
 block|{

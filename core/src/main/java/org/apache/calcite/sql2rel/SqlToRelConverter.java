@@ -5863,7 +5863,7 @@ specifier|final
 name|RelFactories
 operator|.
 name|FilterFactory
-name|factory
+name|filterFactory
 init|=
 name|RelFactories
 operator|.
@@ -5873,7 +5873,7 @@ specifier|final
 name|RelNode
 name|filter
 init|=
-name|factory
+name|filterFactory
 operator|.
 name|createFilter
 argument_list|(
