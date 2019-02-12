@@ -241,6 +241,7 @@ specifier|final
 name|RelDataType
 name|type
 decl_stmt|;
+comment|/**    * Simple binary operators are those operators which expects operands from the same Domain.    *    * Example: simple comparisions (=,&lt;)    * Note: it doesn't contain IN because that is defined on D x D^n    */
 specifier|private
 specifier|static
 specifier|final
@@ -286,6 +287,15 @@ argument_list|(
 name|SqlKind
 operator|.
 name|COMPARISON
+argument_list|)
+expr_stmt|;
+name|kinds
+operator|.
+name|remove
+argument_list|(
+name|SqlKind
+operator|.
+name|IN
 argument_list|)
 expr_stmt|;
 name|SIMPLE_BINARY_OPS
@@ -510,6 +520,13 @@ argument_list|(
 name|getKind
 argument_list|()
 argument_list|)
+operator|&&
+name|operands
+operator|.
+name|size
+argument_list|()
+operator|==
+literal|2
 condition|)
 block|{
 name|RexNode

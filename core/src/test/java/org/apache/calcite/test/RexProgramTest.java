@@ -16896,6 +16896,47 @@ argument_list|()
 argument_list|)
 return|;
 block|}
+comment|/** Unit test for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2842">[CALCITE-2842]    * Computing digest of IN expressions leads to Exceptions</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testInDigest
+parameter_list|()
+block|{
+name|RexNode
+name|e
+init|=
+name|in
+argument_list|(
+name|vInt
+argument_list|()
+argument_list|,
+name|literal
+argument_list|(
+literal|1
+argument_list|)
+argument_list|,
+name|literal
+argument_list|(
+literal|2
+argument_list|)
+argument_list|)
+decl_stmt|;
+name|assertThat
+argument_list|(
+name|e
+operator|.
+name|toString
+argument_list|()
+argument_list|,
+name|is
+argument_list|(
+literal|"IN(?0.int0, 1, 2)"
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
 block|}
 end_class
 
