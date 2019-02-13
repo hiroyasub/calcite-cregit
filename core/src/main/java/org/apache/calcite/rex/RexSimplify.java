@@ -2039,6 +2039,9 @@ argument_list|<
 name|RexNode
 argument_list|>
 name|terms
+parameter_list|,
+name|RexUnknownAs
+name|unknownAs
 parameter_list|)
 block|{
 name|RexSimplify
@@ -2100,7 +2103,7 @@ name|simplify
 argument_list|(
 name|t
 argument_list|,
-name|UNKNOWN
+name|unknownAs
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -2198,7 +2201,7 @@ name|simplify
 argument_list|(
 name|t
 argument_list|,
-name|UNKNOWN
+name|unknownAs
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -2213,6 +2216,9 @@ argument_list|<
 name|RexNode
 argument_list|>
 name|terms
+parameter_list|,
+name|RexUnknownAs
+name|unknownAs
 parameter_list|)
 block|{
 comment|// Suppose we are processing "e1(x) OR e2(x) OR e3(x)". When we are
@@ -2277,9 +2283,7 @@ name|simplify
 argument_list|(
 name|t
 argument_list|,
-name|RexUnknownAs
-operator|.
-name|UNKNOWN
+name|unknownAs
 argument_list|)
 decl_stmt|;
 name|terms
@@ -2407,9 +2411,7 @@ name|simplify
 argument_list|(
 name|t
 argument_list|,
-name|RexUnknownAs
-operator|.
-name|UNKNOWN
+name|unknownAs
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -5515,6 +5517,8 @@ block|{
 name|simplifyAndTerms
 argument_list|(
 name|terms
+argument_list|,
+name|FALSE
 argument_list|)
 expr_stmt|;
 block|}
@@ -5532,10 +5536,12 @@ name|simplifyList
 argument_list|(
 name|notTerms
 argument_list|,
-name|UNKNOWN
+name|unknownAs
+operator|.
+name|negate
+argument_list|()
 argument_list|)
 expr_stmt|;
-comment|// TODO could be unknownAs.negate()?
 switch|switch
 condition|(
 name|unknownAs
@@ -7785,6 +7791,8 @@ block|{
 name|simplifyOrTerms
 argument_list|(
 name|terms
+argument_list|,
+name|unknownAs
 argument_list|)
 expr_stmt|;
 block|}
