@@ -28303,8 +28303,9 @@ name|e
 parameter_list|)
 block|{
 throw|throw
-operator|new
-name|RuntimeException
+name|TestUtil
+operator|.
+name|rethrow
 argument_list|(
 name|e
 argument_list|)

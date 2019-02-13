@@ -73,6 +73,20 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|util
+operator|.
+name|TestUtil
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|io
@@ -228,8 +242,9 @@ name|e
 parameter_list|)
 block|{
 throw|throw
-operator|new
-name|RuntimeException
+name|TestUtil
+operator|.
+name|rethrow
 argument_list|(
 name|e
 argument_list|)
