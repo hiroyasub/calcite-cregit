@@ -5016,6 +5016,14 @@ control|)
 block|{
 if|if
 condition|(
+operator|(
+name|branches
+operator|.
+name|size
+argument_list|()
+operator|>
+literal|0
+operator|&&
 operator|!
 name|isSafeExpression
 argument_list|(
@@ -5023,6 +5031,7 @@ name|branch
 operator|.
 name|cond
 argument_list|)
+operator|)
 operator|||
 operator|!
 name|isSafeExpression
