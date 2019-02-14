@@ -1793,11 +1793,9 @@ literal|"(expr#0..1=[{inputs}], expr#2=[+($t0, $t1)], expr#3=[1], "
 operator|+
 literal|"expr#4=[+($t0, $t3)], expr#5=[+($t2, $t4)], "
 operator|+
-literal|"expr#6=[+($t0, $t4)], expr#7=[5], expr#8=[>($t4, $t7)], "
+literal|"expr#6=[+($t0, $t4)], expr#7=[5], expr#8=[<=($t4, $t7)], "
 operator|+
-literal|"expr#9=[NOT($t8)], "
-operator|+
-literal|"a=[$t5], b=[$t6], $condition=[$t9])"
+literal|"a=[$t5], b=[$t6], $condition=[$t8])"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -1869,11 +1867,9 @@ literal|"(expr#0..1=[{inputs}], expr#2=[+($t0, $t1)], expr#3=[1], "
 operator|+
 literal|"expr#4=[+($t0, $t3)], expr#5=[+($t2, $t4)], "
 operator|+
-literal|"expr#6=[+($t0, $t4)], expr#7=[5], expr#8=[>($t4, $t7)], "
+literal|"expr#6=[+($t0, $t4)], expr#7=[5], expr#8=[<=($t4, $t7)], "
 operator|+
-literal|"expr#9=[NOT($t8)], "
-operator|+
-literal|"a=[$t5], b=[$t6], $condition=[$t9])"
+literal|"a=[$t5], b=[$t6], $condition=[$t8])"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -11179,7 +11175,7 @@ literal|2
 argument_list|)
 argument_list|)
 argument_list|,
-literal|"CASE(OR(IS TRUE(?0.bool0), IS NOT TRUE(?0.bool0)), 1, 2)"
+literal|"CASE(OR(?0.bool0, IS NOT TRUE(?0.bool0)), 1, 2)"
 argument_list|)
 expr_stmt|;
 block|}
@@ -11902,7 +11898,7 @@ argument_list|)
 argument_list|)
 argument_list|)
 argument_list|,
-literal|"CASE(IS TRUE(?0.bool0), NOT(?0.bool1),>(/(?0.notNullInt0, 2), 1), NOT(?0.bool2), NOT(?0.bool3))"
+literal|"CASE(?0.bool0, NOT(?0.bool1),>(/(?0.notNullInt0, 2), 1), NOT(?0.bool2), NOT(?0.bool3))"
 argument_list|)
 expr_stmt|;
 block|}
@@ -16085,7 +16081,7 @@ literal|"true"
 argument_list|)
 expr_stmt|;
 comment|// "NOT(IS FALSE(x))" => "IS NOT FALSE(x)"
-name|checkSimplify
+name|checkSimplify3
 argument_list|(
 name|not
 argument_list|(
@@ -16097,10 +16093,14 @@ argument_list|)
 argument_list|)
 argument_list|,
 literal|"IS NOT FALSE(?0.bool0)"
+argument_list|,
+literal|"IS NOT FALSE(?0.bool0)"
+argument_list|,
+literal|"?0.bool0"
 argument_list|)
 expr_stmt|;
 comment|// "NOT(IS TRUE(x))" => "IS NOT TRUE(x)"
-name|checkSimplify
+name|checkSimplify3
 argument_list|(
 name|not
 argument_list|(
@@ -16112,6 +16112,10 @@ argument_list|)
 argument_list|)
 argument_list|,
 literal|"IS NOT TRUE(?0.bool0)"
+argument_list|,
+literal|"IS NOT TRUE(?0.bool0)"
+argument_list|,
+literal|"NOT(?0.bool0)"
 argument_list|)
 expr_stmt|;
 comment|// "NOT(IS NULL(x))" => "IS NOT NULL(x)"
@@ -16650,6 +16654,135 @@ name|is
 argument_list|(
 literal|false
 argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testIsNullRecursion
+parameter_list|()
+block|{
+comment|// make sure that simplifcation is visiting below isX expressions
+name|checkSimplify
+argument_list|(
+name|isNull
+argument_list|(
+name|or
+argument_list|(
+name|coalesce
+argument_list|(
+name|nullBool
+argument_list|,
+name|trueLiteral
+argument_list|)
+argument_list|,
+name|falseLiteral
+argument_list|)
+argument_list|)
+argument_list|,
+literal|"false"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testRedundantIsTrue
+parameter_list|()
+block|{
+name|checkSimplify2
+argument_list|(
+name|isTrue
+argument_list|(
+name|isTrue
+argument_list|(
+name|vBool
+argument_list|()
+argument_list|)
+argument_list|)
+argument_list|,
+literal|"IS TRUE(?0.bool0)"
+argument_list|,
+literal|"?0.bool0"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testRedundantIsFalse
+parameter_list|()
+block|{
+name|checkSimplify2
+argument_list|(
+name|isTrue
+argument_list|(
+name|isFalse
+argument_list|(
+name|vBool
+argument_list|()
+argument_list|)
+argument_list|)
+argument_list|,
+literal|"IS FALSE(?0.bool0)"
+argument_list|,
+literal|"NOT(?0.bool0)"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testRedundantIsNotTrue
+parameter_list|()
+block|{
+name|checkSimplify3
+argument_list|(
+name|isNotFalse
+argument_list|(
+name|isNotTrue
+argument_list|(
+name|vBool
+argument_list|()
+argument_list|)
+argument_list|)
+argument_list|,
+literal|"IS NOT TRUE(?0.bool0)"
+argument_list|,
+literal|"IS NOT TRUE(?0.bool0)"
+argument_list|,
+literal|"NOT(?0.bool0)"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testRedundantIsNotFalse
+parameter_list|()
+block|{
+name|checkSimplify3
+argument_list|(
+name|isNotFalse
+argument_list|(
+name|isNotFalse
+argument_list|(
+name|vBool
+argument_list|()
+argument_list|)
+argument_list|)
+argument_list|,
+literal|"IS NOT FALSE(?0.bool0)"
+argument_list|,
+literal|"IS NOT FALSE(?0.bool0)"
+argument_list|,
+literal|"?0.bool0"
 argument_list|)
 expr_stmt|;
 block|}

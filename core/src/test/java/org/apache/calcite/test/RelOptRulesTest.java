@@ -8673,7 +8673,7 @@ operator|.
 name|build
 argument_list|()
 decl_stmt|;
-name|checkPlanning
+name|checkPlanUnchanged
 argument_list|(
 operator|new
 name|HepPlanner

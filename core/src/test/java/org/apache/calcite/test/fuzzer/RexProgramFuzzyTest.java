@@ -1468,6 +1468,12 @@ block|}
 block|}
 if|if
 condition|(
+name|unknownAs
+operator|==
+name|RexUnknownAs
+operator|.
+name|UNKNOWN
+operator|&&
 name|opt
 operator|.
 name|getType
@@ -1513,10 +1519,6 @@ name|opt
 operator|.
 name|getType
 argument_list|()
-operator|+
-literal|", "
-operator|+
-name|uaf
 argument_list|)
 expr_stmt|;
 block|}
