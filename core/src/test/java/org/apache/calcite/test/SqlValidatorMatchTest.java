@@ -429,7 +429,7 @@ argument_list|)
 operator|.
 name|fails
 argument_list|(
-literal|"(?s).*Encountered \"to null\" at .*"
+literal|"(?s).*Encountered \"null\" at .*"
 argument_list|)
 expr_stmt|;
 block|}

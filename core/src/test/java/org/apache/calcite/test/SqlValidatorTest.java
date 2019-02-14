@@ -23028,7 +23028,7 @@ name|checkFails
 argument_list|(
 literal|"select count(deptno, *) from emp"
 argument_list|,
-literal|"(?s).*Encountered \", \\*\" at .*"
+literal|"(?s).*Encountered \"\\*\" at .*"
 argument_list|)
 expr_stmt|;
 name|checkFails

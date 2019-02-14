@@ -5880,9 +5880,9 @@ literal|"Was expecting one of:\n"
 operator|+
 literal|"<EOF> \n"
 operator|+
-literal|"    \"ORDER\" ...\n"
+literal|"    \"AND\" \\.\\.\\.\n"
 operator|+
-literal|"    \"LIMIT\" ...\n"
+literal|"    \"AS\" \\.\\.\\.\n"
 operator|+
 literal|".*"
 argument_list|)
@@ -8058,12 +8058,11 @@ literal|"ESCAPE"
 argument_list|)
 condition|)
 block|{
-comment|// FIXME should fail at "escape"
 name|checkFails
 argument_list|(
-literal|"select * from t ^where^ escape 'e'"
+literal|"select * from t where ^escape^ 'e'"
 argument_list|,
-literal|"(?s).*Encountered \"where escape\" at .*"
+literal|"(?s).*Encountered \"escape\" at .*"
 argument_list|)
 expr_stmt|;
 block|}
@@ -8092,7 +8091,6 @@ literal|"ESCAPE"
 argument_list|)
 condition|)
 block|{
-comment|// FIXME should fail at "escape"
 name|checkFails
 argument_list|(
 literal|"values a ^like^ escape d"
@@ -8662,12 +8660,12 @@ argument_list|)
 expr_stmt|;
 name|sql
 argument_list|(
-literal|"select * from emp join dept ^on^ DEFAULT"
+literal|"select * from emp join dept on ^DEFAULT^"
 argument_list|)
 operator|.
 name|fails
 argument_list|(
-literal|"(?s)Encountered \"on DEFAULT\" at .*"
+literal|"(?s)Encountered \"DEFAULT\" at .*"
 argument_list|)
 expr_stmt|;
 name|sql
@@ -8720,12 +8718,12 @@ argument_list|)
 expr_stmt|;
 name|sql
 argument_list|(
-literal|"insert into dept (name, deptno) select 'a'^,^ DEFAULT from (values 0)"
+literal|"insert into dept (name, deptno) select 'a', ^DEFAULT^ from (values 0)"
 argument_list|)
 operator|.
 name|fails
 argument_list|(
-literal|"(?s)Encountered \", DEFAULT\" at .*"
+literal|"(?s)Encountered \"DEFAULT\" at .*"
 argument_list|)
 expr_stmt|;
 block|}
@@ -10279,7 +10277,7 @@ argument_list|)
 operator|.
 name|fails
 argument_list|(
-literal|"(?s).*Encountered \"minus from\" at .*"
+literal|"(?s).*Encountered \"minus\" at .*"
 argument_list|)
 expr_stmt|;
 name|sql
@@ -10289,17 +10287,17 @@ argument_list|)
 operator|.
 name|fails
 argument_list|(
-literal|"(?s).*Encountered \"minus select\" at .*"
+literal|"(?s).*Encountered \"minus\" at .*"
 argument_list|)
 expr_stmt|;
 name|sql
 argument_list|(
-literal|"select * from t ^as^ minus where x< y"
+literal|"select * from t as ^minus^ where x< y"
 argument_list|)
 operator|.
 name|fails
 argument_list|(
-literal|"(?s).*Encountered \"as minus\" at .*"
+literal|"(?s).*Encountered \"minus\" at .*"
 argument_list|)
 expr_stmt|;
 block|}
@@ -13028,25 +13026,29 @@ parameter_list|()
 block|{
 name|checkFails
 argument_list|(
-literal|"select 1 ^from^ values('x')"
+literal|"select 1 from ^values^('x')"
 argument_list|,
-literal|"(?s)Encountered \"from values\" at line 1, column 10\\.\n"
+literal|"(?s)Encountered \"values\" at line 1, column 15\\.\n"
 operator|+
 literal|"Was expecting one of:\n"
 operator|+
-literal|"<EOF> \n"
+literal|"    \"LATERAL\" \\.\\.\\.\n"
 operator|+
-literal|"    \"ORDER\" \\.\\.\\.\n"
+literal|"    \"TABLE\" \\.\\.\\.\n"
 operator|+
-literal|"    \"LIMIT\" \\.\\.\\.\n"
+literal|"    \"UNNEST\" \\.\\.\\.\n"
 operator|+
-literal|".*"
+literal|"<IDENTIFIER> \\.\\.\\.\n"
 operator|+
-literal|"    \"FROM\"<IDENTIFIER> \\.\\.\\.\n"
+literal|"<QUOTED_IDENTIFIER> \\.\\.\\.\n"
 operator|+
-literal|"    \"FROM\"<QUOTED_IDENTIFIER> \\.\\.\\.\n"
+literal|"<BACK_QUOTED_IDENTIFIER> \\.\\.\\.\n"
 operator|+
-literal|".*"
+literal|"<BRACKET_QUOTED_IDENTIFIER> \\.\\.\\.\n"
+operator|+
+literal|"<UNICODE_QUOTED_IDENTIFIER> \\.\\.\\.\n"
+operator|+
+literal|"    \"\\(\" \\.\\.\\.\n.*"
 argument_list|)
 expr_stmt|;
 block|}
@@ -13059,9 +13061,9 @@ parameter_list|()
 block|{
 name|checkFails
 argument_list|(
-literal|"select * from (values^(^))"
+literal|"select * from (values(^)^)"
 argument_list|,
-literal|"(?s).*Encountered \"\\( \\)\" at .*"
+literal|"(?s).*Encountered \"\\)\" at .*"
 argument_list|)
 expr_stmt|;
 block|}
@@ -13193,12 +13195,11 @@ argument_list|,
 literal|"(TABLE `EMP`)"
 argument_list|)
 expr_stmt|;
-comment|// FIXME should fail at "123"
 name|checkFails
 argument_list|(
-literal|"^table^ 123"
+literal|"table ^123^"
 argument_list|,
-literal|"(?s)Encountered \"table 123\" at line 1, column 1\\.\n.*"
+literal|"(?s)Encountered \"123\" at line 1, column 7\\.\n.*"
 argument_list|)
 expr_stmt|;
 block|}
@@ -13243,19 +13244,18 @@ name|void
 name|testSelectFromBareExplicitTableFails
 parameter_list|()
 block|{
-comment|// FIXME should fail at "emp"
 name|checkFails
 argument_list|(
-literal|"select * from ^table^ emp"
+literal|"select * from table ^emp^"
 argument_list|,
-literal|"(?s).*Encountered \"table emp\" at .*"
+literal|"(?s).*Encountered \"emp\" at .*"
 argument_list|)
 expr_stmt|;
 name|checkFails
 argument_list|(
-literal|"select * from (^table^ (select empno from emp))"
+literal|"select * from (table ^(^select empno from emp))"
 argument_list|,
-literal|"(?s)Encountered \"table \\(\".*"
+literal|"(?s)Encountered \"\\(\".*"
 argument_list|)
 expr_stmt|;
 block|}
@@ -13326,12 +13326,12 @@ block|{
 comment|// Bad: LATERAL table
 name|sql
 argument_list|(
-literal|"select * from ^lateral^ emp"
+literal|"select * from lateral ^emp^"
 argument_list|)
 operator|.
 name|fails
 argument_list|(
-literal|"(?s)Encountered \"lateral emp\" at .*"
+literal|"(?s)Encountered \"emp\" at .*"
 argument_list|)
 expr_stmt|;
 name|sql
@@ -13401,12 +13401,12 @@ expr_stmt|;
 comment|// Bad: Parentheses make it look like a sub-query
 name|sql
 argument_list|(
-literal|"select * from lateral (^table^(ramp(1)))"
+literal|"select * from lateral (table^(^ramp(1)))"
 argument_list|)
 operator|.
 name|fails
 argument_list|(
-literal|"(?s)Encountered \"table \\(\" at .*"
+literal|"(?s)Encountered \"\\(\" at .*"
 argument_list|)
 expr_stmt|;
 comment|// Good: LATERAL (subQuery)
@@ -13968,16 +13968,16 @@ expr_stmt|;
 comment|// only allow query or DML, not explain, inside describe
 name|checkFails
 argument_list|(
-literal|"^describe^ explain plan for select * from emps"
+literal|"describe ^explain^ plan for select * from emps"
 argument_list|,
-literal|"(?s).*Encountered \"describe explain\" at .*"
+literal|"(?s).*Encountered \"explain\" at .*"
 argument_list|)
 expr_stmt|;
 name|checkFails
 argument_list|(
-literal|"describe ^statement^ explain plan for select * from emps"
+literal|"describe statement ^explain^ plan for select * from emps"
 argument_list|,
-literal|"(?s).*Encountered \"statement explain\" at .*"
+literal|"(?s).*Encountered \"explain\" at .*"
 argument_list|)
 expr_stmt|;
 block|}
@@ -14161,12 +14161,12 @@ literal|"VALUES (ROW(DEFAULT))"
 decl_stmt|;
 name|sql
 argument_list|(
-literal|"insert into emps ^values^ default"
+literal|"insert into emps values ^default^"
 argument_list|)
 operator|.
 name|fails
 argument_list|(
-literal|"(?s).*Encountered \"values default\" at .*"
+literal|"(?s).*Encountered \"default\" at .*"
 argument_list|)
 expr_stmt|;
 name|sql
@@ -15215,9 +15215,9 @@ expr_stmt|;
 comment|// comma-list must not be empty
 name|checkFails
 argument_list|(
-literal|"case x when 2, 4 then 3 ^when^ then 5 else 4 end"
+literal|"case x when 2, 4 then 3 when ^then^ 5 else 4 end"
 argument_list|,
-literal|"(?s)Encountered \"when then\" at .*"
+literal|"(?s)Encountered \"then\" at .*"
 argument_list|)
 expr_stmt|;
 comment|// commas not allowed in boolean case
@@ -16205,12 +16205,11 @@ literal|"(?s).*Encountered \"unbounded\".*"
 argument_list|)
 expr_stmt|;
 comment|// WINDOW keyword is not permissible.
-comment|// FIXME should fail at "window"
 name|checkFails
 argument_list|(
-literal|"select sum(x) ^over^ window (order by x) from bids"
+literal|"select sum(x) over ^window^ (order by x) from bids"
 argument_list|,
-literal|"(?s).*Encountered \"over window\".*"
+literal|"(?s).*Encountered \"window\".*"
 argument_list|)
 expr_stmt|;
 comment|// ORDER BY must be before Frame spec
@@ -16485,9 +16484,9 @@ expr_stmt|;
 comment|// must have at least one column
 name|checkFails
 argument_list|(
-literal|"select x from (values (1, 2), (3, 4)) as t1 ^(^)"
+literal|"select x from (values (1, 2), (3, 4)) as t1 (^)^"
 argument_list|,
-literal|"(?s).*Encountered \"\\( \\)\" at .*"
+literal|"(?s).*Encountered \"\\)\" at .*"
 argument_list|)
 expr_stmt|;
 comment|// cannot have expressions
@@ -21148,17 +21147,17 @@ literal|"Encountered \"<EOF>\" at line 1, column 12\\.\n"
 operator|+
 literal|"Was expecting one of:\n"
 operator|+
-literal|"    \"YEAR\" \\.\\.\\.\n"
-operator|+
-literal|"    \"MONTH\" \\.\\.\\.\n"
-operator|+
 literal|"    \"DAY\" \\.\\.\\.\n"
 operator|+
 literal|"    \"HOUR\" \\.\\.\\.\n"
 operator|+
 literal|"    \"MINUTE\" \\.\\.\\.\n"
 operator|+
+literal|"    \"MONTH\" \\.\\.\\.\n"
+operator|+
 literal|"    \"SECOND\" \\.\\.\\.\n"
+operator|+
+literal|"    \"YEAR\" \\.\\.\\.\n"
 operator|+
 literal|"    "
 argument_list|)
@@ -21174,9 +21173,9 @@ literal|"Was expecting one of:\n"
 operator|+
 literal|"<EOF> \n"
 operator|+
-literal|"    \"\\.\" \\.\\.\\.\n"
+literal|"    \"AND\" \\.\\.\\.\n"
 operator|+
-literal|"    \"NOT\" \\.\\.\\..*"
+literal|"    \"BETWEEN\" \\.\\.\\..*"
 argument_list|)
 expr_stmt|;
 name|checkExpFails
@@ -22100,122 +22099,121 @@ name|ANY
 argument_list|)
 expr_stmt|;
 comment|// precision of -1 (< minimum allowed)
-comment|// FIXME should fail at "-" or "-1"
 name|checkExpFails
 argument_list|(
-literal|"INTERVAL '0' YEAR^(^-1)"
+literal|"INTERVAL '0' YEAR(^-^1)"
 argument_list|,
 name|ANY
 argument_list|)
 expr_stmt|;
 name|checkExpFails
 argument_list|(
-literal|"INTERVAL '0-0' YEAR^(^-1) TO MONTH"
+literal|"INTERVAL '0-0' YEAR(^-^1) TO MONTH"
 argument_list|,
 name|ANY
 argument_list|)
 expr_stmt|;
 name|checkExpFails
 argument_list|(
-literal|"INTERVAL '0' MONTH^(^-1)"
+literal|"INTERVAL '0' MONTH(^-^1)"
 argument_list|,
 name|ANY
 argument_list|)
 expr_stmt|;
 name|checkExpFails
 argument_list|(
-literal|"INTERVAL '0' DAY^(^-1)"
+literal|"INTERVAL '0' DAY(^-^1)"
 argument_list|,
 name|ANY
 argument_list|)
 expr_stmt|;
 name|checkExpFails
 argument_list|(
-literal|"INTERVAL '0 0' DAY^(^-1) TO HOUR"
+literal|"INTERVAL '0 0' DAY(^-^1) TO HOUR"
 argument_list|,
 name|ANY
 argument_list|)
 expr_stmt|;
 name|checkExpFails
 argument_list|(
-literal|"INTERVAL '0 0' DAY^(^-1) TO MINUTE"
+literal|"INTERVAL '0 0' DAY(^-^1) TO MINUTE"
 argument_list|,
 name|ANY
 argument_list|)
 expr_stmt|;
 name|checkExpFails
 argument_list|(
-literal|"INTERVAL '0 0:0:0' DAY^(^-1) TO SECOND"
+literal|"INTERVAL '0 0:0:0' DAY(^-^1) TO SECOND"
 argument_list|,
 name|ANY
 argument_list|)
 expr_stmt|;
 name|checkExpFails
 argument_list|(
-literal|"INTERVAL '0 0:0:0' DAY TO SECOND^(^-1)"
+literal|"INTERVAL '0 0:0:0' DAY TO SECOND(^-^1)"
 argument_list|,
 name|ANY
 argument_list|)
 expr_stmt|;
 name|checkExpFails
 argument_list|(
-literal|"INTERVAL '0' HOUR^(^-1)"
+literal|"INTERVAL '0' HOUR(^-^1)"
 argument_list|,
 name|ANY
 argument_list|)
 expr_stmt|;
 name|checkExpFails
 argument_list|(
-literal|"INTERVAL '0:0' HOUR^(^-1) TO MINUTE"
+literal|"INTERVAL '0:0' HOUR(^-^1) TO MINUTE"
 argument_list|,
 name|ANY
 argument_list|)
 expr_stmt|;
 name|checkExpFails
 argument_list|(
-literal|"INTERVAL '0:0:0' HOUR^(^-1) TO SECOND"
+literal|"INTERVAL '0:0:0' HOUR(^-^1) TO SECOND"
 argument_list|,
 name|ANY
 argument_list|)
 expr_stmt|;
 name|checkExpFails
 argument_list|(
-literal|"INTERVAL '0:0:0' HOUR TO SECOND^(^-1)"
+literal|"INTERVAL '0:0:0' HOUR TO SECOND(^-^1)"
 argument_list|,
 name|ANY
 argument_list|)
 expr_stmt|;
 name|checkExpFails
 argument_list|(
-literal|"INTERVAL '0' MINUTE^(^-1)"
+literal|"INTERVAL '0' MINUTE(^-^1)"
 argument_list|,
 name|ANY
 argument_list|)
 expr_stmt|;
 name|checkExpFails
 argument_list|(
-literal|"INTERVAL '0:0' MINUTE^(^-1) TO SECOND"
+literal|"INTERVAL '0:0' MINUTE(^-^1) TO SECOND"
 argument_list|,
 name|ANY
 argument_list|)
 expr_stmt|;
 name|checkExpFails
 argument_list|(
-literal|"INTERVAL '0:0' MINUTE TO SECOND^(^-1)"
+literal|"INTERVAL '0:0' MINUTE TO SECOND(^-^1)"
 argument_list|,
 name|ANY
 argument_list|)
 expr_stmt|;
 name|checkExpFails
 argument_list|(
-literal|"INTERVAL '0' SECOND^(^-1)"
+literal|"INTERVAL '0' SECOND(^-^1)"
 argument_list|,
 name|ANY
 argument_list|)
 expr_stmt|;
 name|checkExpFails
 argument_list|(
-literal|"INTERVAL '0' SECOND(1^,^ -1)"
+literal|"INTERVAL '0' SECOND(1, ^-^1)"
 argument_list|,
 name|ANY
 argument_list|)
@@ -23304,12 +23302,12 @@ expr_stmt|;
 comment|// LATERAL UNNEST is not valid
 name|sql
 argument_list|(
-literal|"select * from dept, ^lateral^ unnest(dept.employees)"
+literal|"select * from dept, lateral ^unnest^(dept.employees)"
 argument_list|)
 operator|.
 name|fails
 argument_list|(
-literal|"(?s)Encountered \"lateral unnest\" at .*"
+literal|"(?s)Encountered \"unnest\" at .*"
 argument_list|)
 expr_stmt|;
 block|}
@@ -28725,15 +28723,13 @@ operator|=
 name|ex
 expr_stmt|;
 block|}
-name|SqlValidatorTestCase
-operator|.
 name|checkEx
 argument_list|(
-name|thrown
-argument_list|,
 name|expectedMsgPattern
 argument_list|,
 name|sap
+argument_list|,
+name|thrown
 argument_list|)
 expr_stmt|;
 block|}
@@ -28867,6 +28863,32 @@ operator|=
 name|ex
 expr_stmt|;
 block|}
+name|checkEx
+argument_list|(
+name|expectedMsgPattern
+argument_list|,
+name|sap
+argument_list|,
+name|thrown
+argument_list|)
+expr_stmt|;
+block|}
+specifier|protected
+name|void
+name|checkEx
+parameter_list|(
+name|String
+name|expectedMsgPattern
+parameter_list|,
+name|SqlParserUtil
+operator|.
+name|StringAndPos
+name|sap
+parameter_list|,
+name|Throwable
+name|thrown
+parameter_list|)
+block|{
 name|SqlValidatorTestCase
 operator|.
 name|checkEx

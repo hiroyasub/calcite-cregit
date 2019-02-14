@@ -3041,10 +3041,6 @@ argument_list|,
 name|EXPR_KEYWORDS
 argument_list|,
 name|AB_TABLES
-argument_list|,
-name|SETOPS
-argument_list|,
-name|FETCH_OFFSET
 argument_list|)
 expr_stmt|;
 name|sql
@@ -3059,10 +3055,6 @@ name|getSelectKeywords
 argument_list|()
 argument_list|,
 name|EXPR_KEYWORDS
-argument_list|,
-name|SETOPS
-argument_list|,
-name|FETCH_OFFSET
 argument_list|,
 name|Arrays
 operator|.
@@ -3087,10 +3079,6 @@ argument_list|()
 argument_list|,
 name|EXPR_KEYWORDS
 argument_list|,
-name|SETOPS
-argument_list|,
-name|FETCH_OFFSET
-argument_list|,
 name|Arrays
 operator|.
 name|asList
@@ -3114,11 +3102,7 @@ argument_list|()
 argument_list|,
 name|EXPR_KEYWORDS
 argument_list|,
-name|SETOPS
-argument_list|,
 name|AB_TABLES
-argument_list|,
-name|FETCH_OFFSET
 argument_list|)
 expr_stmt|;
 name|sql
@@ -3179,10 +3163,6 @@ argument_list|,
 name|EXPR_KEYWORDS
 argument_list|,
 name|EMP_COLUMNS
-argument_list|,
-name|SETOPS
-argument_list|,
-name|FETCH_OFFSET
 argument_list|,
 name|Arrays
 operator|.
@@ -3369,10 +3349,6 @@ argument_list|,
 name|xyColumns
 argument_list|,
 name|tTable
-argument_list|,
-name|SETOPS
-argument_list|,
-name|FETCH_OFFSET
 argument_list|)
 expr_stmt|;
 name|sql
