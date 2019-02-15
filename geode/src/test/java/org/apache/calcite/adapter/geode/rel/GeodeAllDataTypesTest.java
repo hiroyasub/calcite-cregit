@@ -676,6 +676,76 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testSqlBooleanColumnFilter
+parameter_list|()
+block|{
+name|calciteAssert
+argument_list|()
+operator|.
+name|query
+argument_list|(
+literal|"SELECT booleanValue as booleanValue "
+operator|+
+literal|"FROM geode.allDataTypesRegion WHERE booleanValue"
+argument_list|)
+operator|.
+name|returnsCount
+argument_list|(
+literal|2
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|GeodeAssertions
+operator|.
+name|query
+argument_list|(
+literal|"SELECT booleanValue AS booleanValue FROM /allDataTypesRegion "
+operator|+
+literal|"WHERE booleanValue = true"
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSqlBooleanColumnNotFilter
+parameter_list|()
+block|{
+name|calciteAssert
+argument_list|()
+operator|.
+name|query
+argument_list|(
+literal|"SELECT booleanValue as booleanValue "
+operator|+
+literal|"FROM geode.allDataTypesRegion WHERE not booleanValue"
+argument_list|)
+operator|.
+name|returnsCount
+argument_list|(
+literal|1
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|GeodeAssertions
+operator|.
+name|query
+argument_list|(
+literal|"SELECT booleanValue AS booleanValue FROM /allDataTypesRegion "
+operator|+
+literal|"WHERE booleanValue = false"
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testSqlMultipleBooleanWhereFilter
 parameter_list|()
 block|{
