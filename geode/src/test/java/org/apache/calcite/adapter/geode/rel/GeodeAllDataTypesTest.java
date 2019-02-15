@@ -772,7 +772,7 @@ name|query
 argument_list|(
 literal|"SELECT booleanValue AS booleanValue FROM /allDataTypesRegion "
 operator|+
-literal|"WHERE booleanValue IN SET(true, false)"
+literal|"WHERE booleanValue = true OR booleanValue = false"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -815,7 +815,7 @@ literal|"FROM /allDataTypesRegion WHERE "
 operator|+
 literal|"stringValue IN SET('abc', 'def') OR floatValue = 1.5678 "
 operator|+
-literal|"OR booleanValue IN SET(true, false)"
+literal|"OR booleanValue = true OR booleanValue = false"
 argument_list|)
 argument_list|)
 expr_stmt|;
