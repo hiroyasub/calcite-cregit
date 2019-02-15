@@ -1781,13 +1781,11 @@ literal|"SELECT CASE WHEN (COUNT(\"net_weight\")"
 operator|+
 literal|" OVER (ORDER BY \"product_id\" ROWS BETWEEN 3 PRECEDING AND CURRENT ROW))> 0 "
 operator|+
-literal|"THEN CAST(COALESCE(SUM(\"net_weight\")"
+literal|"THEN COALESCE(SUM(\"net_weight\")"
 operator|+
 literal|" OVER (ORDER BY \"product_id\" ROWS BETWEEN 3 PRECEDING AND CURRENT ROW), 0)"
 operator|+
-literal|" AS DOUBLE PRECISION) "
-operator|+
-literal|"ELSE NULL END / (COUNT(\"net_weight\")"
+literal|" ELSE NULL END / (COUNT(\"net_weight\")"
 operator|+
 literal|" OVER (ORDER BY \"product_id\" ROWS BETWEEN 3 PRECEDING AND CURRENT ROW))\n"
 operator|+
