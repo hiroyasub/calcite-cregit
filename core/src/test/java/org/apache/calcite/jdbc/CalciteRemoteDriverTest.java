@@ -239,6 +239,18 @@ end_import
 
 begin_import
 import|import
+name|net
+operator|.
+name|jcip
+operator|.
+name|annotations
+operator|.
+name|NotThreadSafe
+import|;
+end_import
+
+begin_import
+import|import
 name|org
 operator|.
 name|hamcrest
@@ -684,10 +696,12 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Test for Calcite's remote JDBC driver.  */
+comment|/**  * Test for Calcite's remote JDBC driver.  * Technically speaking, the test is thread safe, however Caclite/Avatica have thread-safety issues  * see https://issues.apache.org/jira/browse/CALCITE-2853.  */
 end_comment
 
 begin_class
+annotation|@
+name|NotThreadSafe
 specifier|public
 class|class
 name|CalciteRemoteDriverTest
