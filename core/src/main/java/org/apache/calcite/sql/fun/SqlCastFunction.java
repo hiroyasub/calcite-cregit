@@ -386,7 +386,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * SqlCastFunction. Note that the std functions are really singleton objects,  * because they always get fetched via the StdOperatorTable. So you can't store  * any local info in the class and hence the return type data is maintained in  * operand[1] through the validation phase.  */
+comment|/**  * SqlCastFunction. Note that the std functions are really singleton objects,  * because they always get fetched via the StdOperatorTable. So you can't store  * any local info in the class and hence the return type data is maintained in  * operand[1] through the validation phase.  *  *<p>Can be used for both {@link SqlCall} and  * {@link org.apache.calcite.rex.RexCall}.  * Note that the {@code SqlCall} has two operands (expression and type),  * while the {@code RexCall} has one operand (expression) and the type is  * obtained from {@link org.apache.calcite.rex.RexNode#getType()}.  *  * @see SqlCastOperator  */
 end_comment
 
 begin_class

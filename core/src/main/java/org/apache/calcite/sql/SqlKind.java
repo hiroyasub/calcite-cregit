@@ -452,7 +452,7 @@ block|,
 comment|/**    * The non-standard constructor used to pass a    * COLUMN_LIST parameter to a user-defined transform.    */
 name|COLUMN_LIST
 block|,
-comment|/**    * The "CAST" operator.    */
+comment|/**    * The "CAST" operator, and also the PostgreSQL-style infix cast operator    * "::".    */
 name|CAST
 block|,
 comment|/**    * The "NEXT VALUE OF sequence" operator.    */

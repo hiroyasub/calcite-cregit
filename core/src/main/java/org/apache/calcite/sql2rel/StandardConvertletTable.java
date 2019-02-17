@@ -993,6 +993,17 @@ argument_list|)
 expr_stmt|;
 name|registerOp
 argument_list|(
+name|SqlLibraryOperators
+operator|.
+name|INFIX_CAST
+argument_list|,
+name|this
+operator|::
+name|convertCast
+argument_list|)
+expr_stmt|;
+name|registerOp
+argument_list|(
 name|SqlStdOperatorTable
 operator|.
 name|IS_DISTINCT_FROM

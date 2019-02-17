@@ -1272,6 +1272,114 @@ block|}
 block|}
 return|;
 block|}
+comment|/** Tests parsing PostgreSQL-style "::" cast operator. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testParseInfixCast
+parameter_list|()
+block|{
+name|checkParseInfixCast
+argument_list|(
+literal|"integer"
+argument_list|)
+expr_stmt|;
+name|checkParseInfixCast
+argument_list|(
+literal|"varchar"
+argument_list|)
+expr_stmt|;
+name|checkParseInfixCast
+argument_list|(
+literal|"boolean"
+argument_list|)
+expr_stmt|;
+name|checkParseInfixCast
+argument_list|(
+literal|"double"
+argument_list|)
+expr_stmt|;
+name|checkParseInfixCast
+argument_list|(
+literal|"bigint"
+argument_list|)
+expr_stmt|;
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select -('12' || '.34')::VARCHAR(30)::INTEGER as x\n"
+operator|+
+literal|"from t"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|""
+operator|+
+literal|"SELECT (- ('12' || '.34') :: VARCHAR(30) :: INTEGER) AS `X`\n"
+operator|+
+literal|"FROM `T`"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+specifier|private
+name|void
+name|checkParseInfixCast
+parameter_list|(
+name|String
+name|sqlType
+parameter_list|)
+block|{
+name|String
+name|sql
+init|=
+literal|"SELECT x::"
+operator|+
+name|sqlType
+operator|+
+literal|" FROM (VALUES (1, 2)) as tbl(x,y)"
+decl_stmt|;
+name|String
+name|expected
+init|=
+literal|"SELECT `X` :: "
+operator|+
+name|sqlType
+operator|.
+name|toUpperCase
+argument_list|(
+name|Locale
+operator|.
+name|ROOT
+argument_list|)
+operator|+
+literal|"\n"
+operator|+
+literal|"FROM (VALUES (ROW(1, 2))) AS `TBL` (`X`, `Y`)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
 block|}
 end_class
 
