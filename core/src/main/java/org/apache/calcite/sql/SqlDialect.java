@@ -3176,6 +3176,17 @@ return|return
 literal|null
 return|;
 block|}
+specifier|public
+name|JoinType
+name|emulateJoinTypeForCrossJoin
+parameter_list|()
+block|{
+return|return
+name|JoinType
+operator|.
+name|COMMA
+return|;
+block|}
 specifier|protected
 name|SqlNode
 name|emulateNullDirectionWithIsNull
@@ -4212,6 +4223,17 @@ argument_list|,
 name|NullCollation
 operator|.
 name|HIGH
+argument_list|)
+block|,
+name|SPARK
+argument_list|(
+literal|"Spark"
+argument_list|,
+literal|null
+argument_list|,
+name|NullCollation
+operator|.
+name|LOW
 argument_list|)
 block|,
 comment|/** Paraccel, now called Actian Matrix. Redshift is based on this, so      * presumably the dialect capabilities are similar. */

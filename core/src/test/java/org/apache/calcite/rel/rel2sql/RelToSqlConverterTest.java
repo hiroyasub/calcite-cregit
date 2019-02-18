@@ -10986,6 +10986,42 @@ name|expected
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testCrossJoinEmulationForSpark
+parameter_list|()
+block|{
+name|String
+name|query
+init|=
+literal|"select * from \"employee\", \"department\""
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM foodmart.employee\n"
+operator|+
+literal|"CROSS JOIN foodmart.department"
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|withSpark
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
 comment|/** Fluid interface to run tests. */
 specifier|static
 class|class
@@ -11353,6 +11389,22 @@ operator|.
 name|DatabaseProduct
 operator|.
 name|BIG_QUERY
+operator|.
+name|getDialect
+argument_list|()
+argument_list|)
+return|;
+block|}
+name|Sql
+name|withSpark
+parameter_list|()
+block|{
+return|return
+name|dialect
+argument_list|(
+name|DatabaseProduct
+operator|.
+name|SPARK
 operator|.
 name|getDialect
 argument_list|()
