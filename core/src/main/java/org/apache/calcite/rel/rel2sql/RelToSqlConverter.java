@@ -4222,12 +4222,18 @@ operator|&&
 name|rename
 condition|)
 block|{
-comment|// Oracle does not support "AS t (c1, c2)". So instead of
+comment|// Some dialects (such as Oracle and BigQuery) don't support
+comment|// "AS t (c1, c2)". So instead of
 comment|//   (VALUES (v0, v1), (v2, v3)) AS t (c0, c1)
 comment|// we generate
 comment|//   SELECT v0 AS c0, v1 AS c1 FROM DUAL
 comment|//   UNION ALL
 comment|//   SELECT v2 AS c0, v3 AS c1 FROM DUAL
+comment|// for Oracle and
+comment|//   SELECT v0 AS c0, v1 AS c1
+comment|//   UNION ALL
+comment|//   SELECT v2 AS c0, v3 AS c1
+comment|// for dialects that support SELECT-without-FROM.
 name|List
 argument_list|<
 name|SqlSelect

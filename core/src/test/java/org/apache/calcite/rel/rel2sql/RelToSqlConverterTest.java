@@ -6066,7 +6066,7 @@ name|expected
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3663">[CALCITE-3663]    * Support for TRIM function in Bigquery dialect</a>. */
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3663">[CALCITE-3663]    * Support for TRIM function in BigQuery dialect</a>. */
 annotation|@
 name|Test
 name|void
@@ -17120,6 +17120,30 @@ literal|"FROM \"DUAL\")"
 decl_stmt|;
 specifier|final
 name|String
+name|expectedHive
+init|=
+literal|"SELECT a\n"
+operator|+
+literal|"FROM (SELECT 1 a, 'x ' b\n"
+operator|+
+literal|"UNION ALL\n"
+operator|+
+literal|"SELECT 2 a, 'yy' b)"
+decl_stmt|;
+specifier|final
+name|String
+name|expectedBigQuery
+init|=
+literal|"SELECT a\n"
+operator|+
+literal|"FROM (SELECT 1 AS a, 'x ' AS b\n"
+operator|+
+literal|"UNION ALL\n"
+operator|+
+literal|"SELECT 2 AS a, 'yy' AS b)"
+decl_stmt|;
+specifier|final
+name|String
 name|expectedSnowflake
 init|=
 name|expectedPostgresql
@@ -17165,6 +17189,22 @@ operator|.
 name|ok
 argument_list|(
 name|expectedOracle
+argument_list|)
+operator|.
+name|withHive
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expectedHive
+argument_list|)
+operator|.
+name|withBigQuery
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expectedBigQuery
 argument_list|)
 operator|.
 name|withSnowflake
@@ -17385,6 +17425,45 @@ name|isLinux
 argument_list|(
 name|expectedSql
 argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testSelectWithoutFromEmulationForHiveAndBigQuery
+parameter_list|()
+block|{
+name|String
+name|query
+init|=
+literal|"select 2 + 2"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT 2 + 2"
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|withHive
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+operator|.
+name|withBigQuery
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expected
 argument_list|)
 expr_stmt|;
 block|}
@@ -19911,22 +19990,6 @@ name|void
 name|testRowValueExpression
 parameter_list|()
 block|{
-specifier|final
-name|String
-name|expected0
-init|=
-literal|"INSERT INTO SCOTT.DEPT (DEPTNO, DNAME, LOC)\n"
-operator|+
-literal|"SELECT 1, 'Fred', 'San Francisco'\n"
-operator|+
-literal|"FROM (VALUES  (0)) t (ZERO)\n"
-operator|+
-literal|"UNION ALL\n"
-operator|+
-literal|"SELECT 2, 'Eric', 'Washington'\n"
-operator|+
-literal|"FROM (VALUES  (0)) t (ZERO)"
-decl_stmt|;
 name|String
 name|sql
 init|=
@@ -19934,33 +19997,29 @@ literal|"insert into \"DEPT\"\n"
 operator|+
 literal|"values ROW(1,'Fred', 'San Francisco'), ROW(2, 'Eric', 'Washington')"
 decl_stmt|;
-name|sql
-argument_list|(
-name|sql
-argument_list|)
-operator|.
-name|schema
-argument_list|(
-name|CalciteAssert
-operator|.
-name|SchemaSpec
-operator|.
-name|JDBC_SCOTT
-argument_list|)
-operator|.
-name|withHive
-argument_list|()
-operator|.
-name|ok
-argument_list|(
-name|expected0
-argument_list|)
-expr_stmt|;
 specifier|final
 name|String
-name|expected1
+name|expectedDefault
 init|=
-literal|"INSERT INTO `SCOTT`.`DEPT` (`DEPTNO`, `DNAME`, `LOC`)\n"
+literal|"INSERT INTO \"SCOTT\".\"DEPT\""
+operator|+
+literal|" (\"DEPTNO\", \"DNAME\", \"LOC\")\n"
+operator|+
+literal|"SELECT 1, 'Fred', 'San Francisco'\n"
+operator|+
+literal|"FROM (VALUES  (0)) AS \"t\" (\"ZERO\")\n"
+operator|+
+literal|"UNION ALL\n"
+operator|+
+literal|"SELECT 2, 'Eric', 'Washington'\n"
+operator|+
+literal|"FROM (VALUES  (0)) AS \"t\" (\"ZERO\")"
+decl_stmt|;
+specifier|final
+name|String
+name|expectedHive
+init|=
+literal|"INSERT INTO SCOTT.DEPT (DEPTNO, DNAME, LOC)\n"
 operator|+
 literal|"SELECT 1, 'Fred', 'San Francisco'\n"
 operator|+
@@ -19968,35 +20027,25 @@ literal|"UNION ALL\n"
 operator|+
 literal|"SELECT 2, 'Eric', 'Washington'"
 decl_stmt|;
-name|sql
-argument_list|(
-name|sql
-argument_list|)
-operator|.
-name|schema
-argument_list|(
-name|CalciteAssert
-operator|.
-name|SchemaSpec
-operator|.
-name|JDBC_SCOTT
-argument_list|)
-operator|.
-name|withMysql
-argument_list|()
-operator|.
-name|ok
-argument_list|(
-name|expected1
-argument_list|)
-expr_stmt|;
 specifier|final
 name|String
-name|expected2
+name|expectedMysql
 init|=
-literal|"INSERT INTO \"SCOTT\".\"DEPT\" (\"DEPTNO\", "
+literal|"INSERT INTO `SCOTT`.`DEPT`"
 operator|+
-literal|"\"DNAME\", \"LOC\")\n"
+literal|" (`DEPTNO`, `DNAME`, `LOC`)\nSELECT 1, 'Fred', 'San Francisco'\n"
+operator|+
+literal|"UNION ALL\n"
+operator|+
+literal|"SELECT 2, 'Eric', 'Washington'"
+decl_stmt|;
+specifier|final
+name|String
+name|expectedOracle
+init|=
+literal|"INSERT INTO \"SCOTT\".\"DEPT\""
+operator|+
+literal|" (\"DEPTNO\", \"DNAME\", \"LOC\")\n"
 operator|+
 literal|"SELECT 1, 'Fred', 'San Francisco'\n"
 operator|+
@@ -20008,33 +20057,13 @@ literal|"SELECT 2, 'Eric', 'Washington'\n"
 operator|+
 literal|"FROM \"DUAL\""
 decl_stmt|;
-name|sql
-argument_list|(
-name|sql
-argument_list|)
-operator|.
-name|schema
-argument_list|(
-name|CalciteAssert
-operator|.
-name|SchemaSpec
-operator|.
-name|JDBC_SCOTT
-argument_list|)
-operator|.
-name|withOracle
-argument_list|()
-operator|.
-name|ok
-argument_list|(
-name|expected2
-argument_list|)
-expr_stmt|;
 specifier|final
 name|String
-name|expected3
+name|expectedMssql
 init|=
-literal|"INSERT INTO [SCOTT].[DEPT] ([DEPTNO], [DNAME], [LOC])\n"
+literal|"INSERT INTO [SCOTT].[DEPT]"
+operator|+
+literal|" ([DEPTNO], [DNAME], [LOC])\n"
 operator|+
 literal|"SELECT 1, 'Fred', 'San Francisco'\n"
 operator|+
@@ -20046,6 +20075,24 @@ literal|"SELECT 2, 'Eric', 'Washington'\n"
 operator|+
 literal|"FROM (VALUES  (0)) AS [t] ([ZERO])"
 decl_stmt|;
+specifier|final
+name|String
+name|expectedCalcite
+init|=
+literal|"INSERT INTO \"SCOTT\".\"DEPT\""
+operator|+
+literal|" (\"DEPTNO\", \"DNAME\", \"LOC\")\n"
+operator|+
+literal|"SELECT 1, 'Fred', 'San Francisco'\n"
+operator|+
+literal|"FROM (VALUES  (0)) AS \"t\" (\"ZERO\")\n"
+operator|+
+literal|"UNION ALL\n"
+operator|+
+literal|"SELECT 2, 'Eric', 'Washington'\n"
+operator|+
+literal|"FROM (VALUES  (0)) AS \"t\" (\"ZERO\")"
+decl_stmt|;
 name|sql
 argument_list|(
 name|sql
@@ -20058,6 +20105,35 @@ operator|.
 name|SchemaSpec
 operator|.
 name|JDBC_SCOTT
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expectedDefault
+argument_list|)
+operator|.
+name|withHive
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expectedHive
+argument_list|)
+operator|.
+name|withMysql
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expectedMysql
+argument_list|)
+operator|.
+name|withOracle
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expectedOracle
 argument_list|)
 operator|.
 name|withMssql
@@ -20065,84 +20141,15 @@ argument_list|()
 operator|.
 name|ok
 argument_list|(
-name|expected3
-argument_list|)
-expr_stmt|;
-specifier|final
-name|String
-name|expected4
-init|=
-literal|"INSERT INTO \"SCOTT\".\"DEPT\" (\"DEPTNO\", "
-operator|+
-literal|"\"DNAME\", \"LOC\")\n"
-operator|+
-literal|"SELECT 1, 'Fred', 'San Francisco'\n"
-operator|+
-literal|"FROM (VALUES  (0)) AS \"t\" (\"ZERO\")\n"
-operator|+
-literal|"UNION ALL\n"
-operator|+
-literal|"SELECT 2, 'Eric', 'Washington'\n"
-operator|+
-literal|"FROM (VALUES  (0)) AS \"t\" (\"ZERO\")"
-decl_stmt|;
-name|sql
-argument_list|(
-name|sql
-argument_list|)
-operator|.
-name|schema
-argument_list|(
-name|CalciteAssert
-operator|.
-name|SchemaSpec
-operator|.
-name|JDBC_SCOTT
-argument_list|)
-operator|.
-name|ok
-argument_list|(
-name|expected4
-argument_list|)
-expr_stmt|;
-specifier|final
-name|String
-name|expected5
-init|=
-literal|"INSERT INTO \"SCOTT\".\"DEPT\" (\"DEPTNO\", "
-operator|+
-literal|"\"DNAME\", \"LOC\")\n"
-operator|+
-literal|"SELECT 1, 'Fred', 'San Francisco'\n"
-operator|+
-literal|"FROM (VALUES  (0)) AS \"t\" (\"ZERO\")\n"
-operator|+
-literal|"UNION ALL\n"
-operator|+
-literal|"SELECT 2, 'Eric', 'Washington'\n"
-operator|+
-literal|"FROM (VALUES  (0)) AS \"t\" (\"ZERO\")"
-decl_stmt|;
-name|sql
-argument_list|(
-name|sql
+name|expectedMssql
 argument_list|)
 operator|.
 name|withCalcite
 argument_list|()
 operator|.
-name|schema
-argument_list|(
-name|CalciteAssert
-operator|.
-name|SchemaSpec
-operator|.
-name|JDBC_SCOTT
-argument_list|)
-operator|.
 name|ok
 argument_list|(
-name|expected5
+name|expectedCalcite
 argument_list|)
 expr_stmt|;
 block|}
