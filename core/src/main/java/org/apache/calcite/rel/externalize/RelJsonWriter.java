@@ -153,12 +153,12 @@ implements|implements
 name|RelWriter
 block|{
 comment|//~ Instance fields ----------------------------------------------------------
-specifier|private
+specifier|protected
 specifier|final
 name|JsonBuilder
 name|jsonBuilder
 decl_stmt|;
-specifier|private
+specifier|protected
 specifier|final
 name|RelJson
 name|relJson
@@ -178,7 +178,7 @@ name|IdentityHashMap
 argument_list|<>
 argument_list|()
 decl_stmt|;
-specifier|private
+specifier|protected
 specifier|final
 name|List
 argument_list|<

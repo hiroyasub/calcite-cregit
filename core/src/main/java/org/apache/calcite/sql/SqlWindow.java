@@ -295,6 +295,7 @@ extends|extends
 name|SqlCall
 block|{
 comment|/**    * The FOLLOWING operator used exclusively in a window specification.    */
+specifier|public
 specifier|static
 specifier|final
 name|SqlPostfixOperator
@@ -321,6 +322,7 @@ literal|null
 argument_list|)
 decl_stmt|;
 comment|/**    * The PRECEDING operator used exclusively in a window specification.    */
+specifier|public
 specifier|static
 specifier|final
 name|SqlPostfixOperator

@@ -20642,6 +20642,32 @@ literal|"          \"precision\": 2,\n"
 operator|+
 literal|"          \"name\": \"EXPR$1\"\n"
 operator|+
+literal|"        },\n"
+operator|+
+literal|"        {\n"
+operator|+
+literal|"          \"type\": \"TIMESTAMP\",\n"
+operator|+
+literal|"          \"nullable\": false,\n"
+operator|+
+literal|"          \"precision\": 0,\n"
+operator|+
+literal|"          \"name\": \"EXPR$2\"\n"
+operator|+
+literal|"        },\n"
+operator|+
+literal|"        {\n"
+operator|+
+literal|"          \"type\": \"DECIMAL\",\n"
+operator|+
+literal|"          \"nullable\": false,\n"
+operator|+
+literal|"          \"precision\": 3,\n"
+operator|+
+literal|"          \"scale\": 2,\n"
+operator|+
+literal|"          \"name\": \"EXPR$3\"\n"
+operator|+
 literal|"        }\n"
 operator|+
 literal|"      ],\n"
@@ -20650,9 +20676,69 @@ literal|"      \"tuples\": [\n"
 operator|+
 literal|"        [\n"
 operator|+
-literal|"          1,\n"
+literal|"          {\n"
 operator|+
-literal|"          \"ab\"\n"
+literal|"            \"literal\": 1,\n"
+operator|+
+literal|"            \"type\": {\n"
+operator|+
+literal|"              \"type\": \"INTEGER\",\n"
+operator|+
+literal|"              \"nullable\": false\n"
+operator|+
+literal|"            }\n"
+operator|+
+literal|"          },\n"
+operator|+
+literal|"          {\n"
+operator|+
+literal|"            \"literal\": \"ab\",\n"
+operator|+
+literal|"            \"type\": {\n"
+operator|+
+literal|"              \"type\": \"CHAR\",\n"
+operator|+
+literal|"              \"nullable\": false,\n"
+operator|+
+literal|"              \"precision\": 2\n"
+operator|+
+literal|"            }\n"
+operator|+
+literal|"          },\n"
+operator|+
+literal|"          {\n"
+operator|+
+literal|"            \"literal\": 1364860800000,\n"
+operator|+
+literal|"            \"type\": {\n"
+operator|+
+literal|"              \"type\": \"TIMESTAMP\",\n"
+operator|+
+literal|"              \"nullable\": false,\n"
+operator|+
+literal|"              \"precision\": 0\n"
+operator|+
+literal|"            }\n"
+operator|+
+literal|"          },\n"
+operator|+
+literal|"          {\n"
+operator|+
+literal|"            \"literal\": 0.01,\n"
+operator|+
+literal|"            \"type\": {\n"
+operator|+
+literal|"              \"type\": \"DECIMAL\",\n"
+operator|+
+literal|"              \"nullable\": false,\n"
+operator|+
+literal|"              \"precision\": 3,\n"
+operator|+
+literal|"              \"scale\": 2\n"
+operator|+
+literal|"            }\n"
+operator|+
+literal|"          }\n"
 operator|+
 literal|"        ]\n"
 operator|+
@@ -20670,7 +20756,7 @@ name|with
 operator|.
 name|query
 argument_list|(
-literal|"explain plan as json for values (1, 'ab')"
+literal|"explain plan as json for values (1, 'ab', TIMESTAMP '2013-04-02 00:00:00', 0.01)"
 argument_list|)
 operator|.
 name|returns

@@ -151,6 +151,22 @@ name|rel
 operator|.
 name|logical
 operator|.
+name|LogicalProject
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|logical
+operator|.
 name|LogicalTableScan
 import|;
 end_import
@@ -182,6 +198,34 @@ operator|.
 name|rex
 operator|.
 name|RexBuilder
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rex
+operator|.
+name|RexFieldCollation
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rex
+operator|.
+name|RexWindowBound
 import|;
 end_import
 
@@ -237,9 +281,39 @@ name|calcite
 operator|.
 name|sql
 operator|.
+name|SqlWindow
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
 name|fun
 operator|.
 name|SqlStdOperatorTable
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|parser
+operator|.
+name|SqlParserPos
 import|;
 end_import
 
@@ -312,6 +386,20 @@ operator|.
 name|collect
 operator|.
 name|ImmutableList
+import|;
+end_import
+
+begin_import
+import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|collect
+operator|.
+name|ImmutableSet
 import|;
 end_import
 
@@ -452,7 +540,19 @@ literal|"            \"name\": \"$1\"\n"
 operator|+
 literal|"          },\n"
 operator|+
-literal|"          10\n"
+literal|"          {\n"
+operator|+
+literal|"            \"literal\": 10,\n"
+operator|+
+literal|"            \"type\": {\n"
+operator|+
+literal|"              \"type\": \"INTEGER\",\n"
+operator|+
+literal|"              \"nullable\": false\n"
+operator|+
+literal|"            }\n"
+operator|+
+literal|"          }\n"
 operator|+
 literal|"        ]\n"
 operator|+
@@ -522,7 +622,359 @@ literal|"  ]\n"
 operator|+
 literal|"}"
 decl_stmt|;
-comment|/**    * Unit test for {@link org.apache.calcite.rel.externalize.RelJsonWriter} on    * a simple tree of relational expressions, consisting of a table, a filter    * and an aggregate node.    */
+specifier|public
+specifier|static
+specifier|final
+name|String
+name|XXNULL
+init|=
+literal|"{\n"
+operator|+
+literal|"  \"rels\": [\n"
+operator|+
+literal|"    {\n"
+operator|+
+literal|"      \"id\": \"0\",\n"
+operator|+
+literal|"      \"relOp\": \"LogicalTableScan\",\n"
+operator|+
+literal|"      \"table\": [\n"
+operator|+
+literal|"        \"hr\",\n"
+operator|+
+literal|"        \"emps\"\n"
+operator|+
+literal|"      ],\n"
+operator|+
+literal|"      \"inputs\": []\n"
+operator|+
+literal|"    },\n"
+operator|+
+literal|"    {\n"
+operator|+
+literal|"      \"id\": \"1\",\n"
+operator|+
+literal|"      \"relOp\": \"LogicalFilter\",\n"
+operator|+
+literal|"      \"condition\": {\n"
+operator|+
+literal|"        \"op\": \"=\",\n"
+operator|+
+literal|"        \"operands\": [\n"
+operator|+
+literal|"          {\n"
+operator|+
+literal|"            \"input\": 1,\n"
+operator|+
+literal|"            \"name\": \"$1\"\n"
+operator|+
+literal|"          },\n"
+operator|+
+literal|"          {\n"
+operator|+
+literal|"            \"literal\": null,\n"
+operator|+
+literal|"            \"type\": \"INTEGER\"\n"
+operator|+
+literal|"          }\n"
+operator|+
+literal|"        ]\n"
+operator|+
+literal|"      }\n"
+operator|+
+literal|"    },\n"
+operator|+
+literal|"    {\n"
+operator|+
+literal|"      \"id\": \"2\",\n"
+operator|+
+literal|"      \"relOp\": \"LogicalAggregate\",\n"
+operator|+
+literal|"      \"group\": [\n"
+operator|+
+literal|"        0\n"
+operator|+
+literal|"      ],\n"
+operator|+
+literal|"      \"aggs\": [\n"
+operator|+
+literal|"        {\n"
+operator|+
+literal|"          \"agg\": \"COUNT\",\n"
+operator|+
+literal|"          \"type\": {\n"
+operator|+
+literal|"            \"type\": \"BIGINT\",\n"
+operator|+
+literal|"            \"nullable\": false\n"
+operator|+
+literal|"          },\n"
+operator|+
+literal|"          \"distinct\": true,\n"
+operator|+
+literal|"          \"operands\": [\n"
+operator|+
+literal|"            1\n"
+operator|+
+literal|"          ]\n"
+operator|+
+literal|"        },\n"
+operator|+
+literal|"        {\n"
+operator|+
+literal|"          \"agg\": \"COUNT\",\n"
+operator|+
+literal|"          \"type\": {\n"
+operator|+
+literal|"            \"type\": \"BIGINT\",\n"
+operator|+
+literal|"            \"nullable\": false\n"
+operator|+
+literal|"          },\n"
+operator|+
+literal|"          \"distinct\": false,\n"
+operator|+
+literal|"          \"operands\": []\n"
+operator|+
+literal|"        }\n"
+operator|+
+literal|"      ]\n"
+operator|+
+literal|"    }\n"
+operator|+
+literal|"  ]\n"
+operator|+
+literal|"}"
+decl_stmt|;
+specifier|public
+specifier|static
+specifier|final
+name|String
+name|XX2
+init|=
+literal|"{\n"
+operator|+
+literal|"  \"rels\": [\n"
+operator|+
+literal|"    {\n"
+operator|+
+literal|"      \"id\": \"0\",\n"
+operator|+
+literal|"      \"relOp\": \"LogicalTableScan\",\n"
+operator|+
+literal|"      \"table\": [\n"
+operator|+
+literal|"        \"hr\",\n"
+operator|+
+literal|"        \"emps\"\n"
+operator|+
+literal|"      ],\n"
+operator|+
+literal|"      \"inputs\": []\n"
+operator|+
+literal|"    },\n"
+operator|+
+literal|"    {\n"
+operator|+
+literal|"      \"id\": \"1\",\n"
+operator|+
+literal|"      \"relOp\": \"LogicalProject\",\n"
+operator|+
+literal|"      \"fields\": [\n"
+operator|+
+literal|"        \"field0\",\n"
+operator|+
+literal|"        \"field1\",\n"
+operator|+
+literal|"        \"field2\"\n"
+operator|+
+literal|"      ],\n"
+operator|+
+literal|"      \"exprs\": [\n"
+operator|+
+literal|"        {\n"
+operator|+
+literal|"          \"input\": 0,\n"
+operator|+
+literal|"          \"name\": \"$0\"\n"
+operator|+
+literal|"        },\n"
+operator|+
+literal|"        {\n"
+operator|+
+literal|"          \"op\": \"COUNT\",\n"
+operator|+
+literal|"          \"operands\": [\n"
+operator|+
+literal|"            {\n"
+operator|+
+literal|"              \"input\": 0,\n"
+operator|+
+literal|"              \"name\": \"$0\"\n"
+operator|+
+literal|"            }\n"
+operator|+
+literal|"          ],\n"
+operator|+
+literal|"          \"distinct\": false,\n"
+operator|+
+literal|"          \"type\": {\n"
+operator|+
+literal|"            \"type\": \"BIGINT\",\n"
+operator|+
+literal|"            \"nullable\": false\n"
+operator|+
+literal|"          },\n"
+operator|+
+literal|"          \"window\": {\n"
+operator|+
+literal|"            \"partition\": [\n"
+operator|+
+literal|"              {\n"
+operator|+
+literal|"                \"input\": 2,\n"
+operator|+
+literal|"                \"name\": \"$2\"\n"
+operator|+
+literal|"              }\n"
+operator|+
+literal|"            ],\n"
+operator|+
+literal|"            \"order\": [\n"
+operator|+
+literal|"              {\n"
+operator|+
+literal|"                \"expr\": {\n"
+operator|+
+literal|"                  \"input\": 1,\n"
+operator|+
+literal|"                  \"name\": \"$1\"\n"
+operator|+
+literal|"                },\n"
+operator|+
+literal|"                \"direction\": \"ASCENDING\",\n"
+operator|+
+literal|"                \"null-direction\": \"LAST\"\n"
+operator|+
+literal|"              }\n"
+operator|+
+literal|"            ],\n"
+operator|+
+literal|"            \"rows-lower\": {\n"
+operator|+
+literal|"              \"type\": \"UNBOUNDED_PRECEDING\"\n"
+operator|+
+literal|"            },\n"
+operator|+
+literal|"            \"rows-upper\": {\n"
+operator|+
+literal|"              \"type\": \"CURRENT_ROW\"\n"
+operator|+
+literal|"            }\n"
+operator|+
+literal|"          }\n"
+operator|+
+literal|"        },\n"
+operator|+
+literal|"        {\n"
+operator|+
+literal|"          \"op\": \"SUM\",\n"
+operator|+
+literal|"          \"operands\": [\n"
+operator|+
+literal|"            {\n"
+operator|+
+literal|"              \"input\": 0,\n"
+operator|+
+literal|"              \"name\": \"$0\"\n"
+operator|+
+literal|"            }\n"
+operator|+
+literal|"          ],\n"
+operator|+
+literal|"          \"distinct\": false,\n"
+operator|+
+literal|"          \"type\": {\n"
+operator|+
+literal|"            \"type\": \"BIGINT\",\n"
+operator|+
+literal|"            \"nullable\": false\n"
+operator|+
+literal|"          },\n"
+operator|+
+literal|"          \"window\": {\n"
+operator|+
+literal|"            \"partition\": [\n"
+operator|+
+literal|"              {\n"
+operator|+
+literal|"                \"input\": 2,\n"
+operator|+
+literal|"                \"name\": \"$2\"\n"
+operator|+
+literal|"              }\n"
+operator|+
+literal|"            ],\n"
+operator|+
+literal|"            \"order\": [\n"
+operator|+
+literal|"              {\n"
+operator|+
+literal|"                \"expr\": {\n"
+operator|+
+literal|"                  \"input\": 1,\n"
+operator|+
+literal|"                  \"name\": \"$1\"\n"
+operator|+
+literal|"                },\n"
+operator|+
+literal|"                \"direction\": \"ASCENDING\",\n"
+operator|+
+literal|"                \"null-direction\": \"LAST\"\n"
+operator|+
+literal|"              }\n"
+operator|+
+literal|"            ],\n"
+operator|+
+literal|"            \"range-lower\": {\n"
+operator|+
+literal|"              \"type\": \"CURRENT_ROW\"\n"
+operator|+
+literal|"            },\n"
+operator|+
+literal|"            \"range-upper\": {\n"
+operator|+
+literal|"              \"type\": \"FOLLOWING\",\n"
+operator|+
+literal|"              \"offset\": {\n"
+operator|+
+literal|"                \"literal\": 1,\n"
+operator|+
+literal|"                \"type\": {\n"
+operator|+
+literal|"                  \"type\": \"INTEGER\",\n"
+operator|+
+literal|"                  \"nullable\": false\n"
+operator|+
+literal|"                }\n"
+operator|+
+literal|"              }\n"
+operator|+
+literal|"            }\n"
+operator|+
+literal|"          }\n"
+operator|+
+literal|"        }\n"
+operator|+
+literal|"      ]\n"
+operator|+
+literal|"    }\n"
+operator|+
+literal|"  ]\n"
+operator|+
+literal|"}"
+decl_stmt|;
+comment|/**    * Unit test for {@link org.apache.calcite.rel.externalize.RelJsonWriter} on    * a simple tree of relational expressions, consisting of a table and a    * project including window expressions.    */
 annotation|@
 name|Test
 specifier|public
@@ -775,6 +1227,379 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+comment|/**    * Unit test for {@link org.apache.calcite.rel.externalize.RelJsonWriter} on    * a simple tree of relational expressions, consisting of a table, a filter    * and an aggregate node.    */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testWriter2
+parameter_list|()
+block|{
+name|String
+name|s
+init|=
+name|Frameworks
+operator|.
+name|withPlanner
+argument_list|(
+parameter_list|(
+name|cluster
+parameter_list|,
+name|relOptSchema
+parameter_list|,
+name|rootSchema
+parameter_list|)
+lambda|->
+block|{
+name|rootSchema
+operator|.
+name|add
+argument_list|(
+literal|"hr"
+argument_list|,
+operator|new
+name|ReflectiveSchema
+argument_list|(
+operator|new
+name|JdbcTest
+operator|.
+name|HrSchema
+argument_list|()
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|LogicalTableScan
+name|scan
+init|=
+name|LogicalTableScan
+operator|.
+name|create
+argument_list|(
+name|cluster
+argument_list|,
+name|relOptSchema
+operator|.
+name|getTableForMember
+argument_list|(
+name|Arrays
+operator|.
+name|asList
+argument_list|(
+literal|"hr"
+argument_list|,
+literal|"emps"
+argument_list|)
+argument_list|)
+argument_list|)
+decl_stmt|;
+specifier|final
+name|RexBuilder
+name|rexBuilder
+init|=
+name|cluster
+operator|.
+name|getRexBuilder
+argument_list|()
+decl_stmt|;
+specifier|final
+name|RelDataType
+name|bigIntType
+init|=
+name|cluster
+operator|.
+name|getTypeFactory
+argument_list|()
+operator|.
+name|createSqlType
+argument_list|(
+name|SqlTypeName
+operator|.
+name|BIGINT
+argument_list|)
+decl_stmt|;
+name|LogicalProject
+name|project
+init|=
+name|LogicalProject
+operator|.
+name|create
+argument_list|(
+name|scan
+argument_list|,
+name|ImmutableList
+operator|.
+name|of
+argument_list|(
+name|rexBuilder
+operator|.
+name|makeInputRef
+argument_list|(
+name|scan
+argument_list|,
+literal|0
+argument_list|)
+argument_list|,
+name|rexBuilder
+operator|.
+name|makeOver
+argument_list|(
+name|bigIntType
+argument_list|,
+name|SqlStdOperatorTable
+operator|.
+name|COUNT
+argument_list|,
+name|ImmutableList
+operator|.
+name|of
+argument_list|(
+name|rexBuilder
+operator|.
+name|makeInputRef
+argument_list|(
+name|scan
+argument_list|,
+literal|0
+argument_list|)
+argument_list|)
+argument_list|,
+name|ImmutableList
+operator|.
+name|of
+argument_list|(
+name|rexBuilder
+operator|.
+name|makeInputRef
+argument_list|(
+name|scan
+argument_list|,
+literal|2
+argument_list|)
+argument_list|)
+argument_list|,
+name|ImmutableList
+operator|.
+name|of
+argument_list|(
+operator|new
+name|RexFieldCollation
+argument_list|(
+name|rexBuilder
+operator|.
+name|makeInputRef
+argument_list|(
+name|scan
+argument_list|,
+literal|1
+argument_list|)
+argument_list|,
+name|ImmutableSet
+operator|.
+name|of
+argument_list|()
+argument_list|)
+argument_list|)
+argument_list|,
+name|RexWindowBound
+operator|.
+name|create
+argument_list|(
+name|SqlWindow
+operator|.
+name|createUnboundedPreceding
+argument_list|(
+name|SqlParserPos
+operator|.
+name|ZERO
+argument_list|)
+argument_list|,
+literal|null
+argument_list|)
+argument_list|,
+name|RexWindowBound
+operator|.
+name|create
+argument_list|(
+name|SqlWindow
+operator|.
+name|createCurrentRow
+argument_list|(
+name|SqlParserPos
+operator|.
+name|ZERO
+argument_list|)
+argument_list|,
+literal|null
+argument_list|)
+argument_list|,
+literal|true
+argument_list|,
+literal|true
+argument_list|,
+literal|false
+argument_list|,
+literal|false
+argument_list|)
+argument_list|,
+name|rexBuilder
+operator|.
+name|makeOver
+argument_list|(
+name|bigIntType
+argument_list|,
+name|SqlStdOperatorTable
+operator|.
+name|SUM
+argument_list|,
+name|ImmutableList
+operator|.
+name|of
+argument_list|(
+name|rexBuilder
+operator|.
+name|makeInputRef
+argument_list|(
+name|scan
+argument_list|,
+literal|0
+argument_list|)
+argument_list|)
+argument_list|,
+name|ImmutableList
+operator|.
+name|of
+argument_list|(
+name|rexBuilder
+operator|.
+name|makeInputRef
+argument_list|(
+name|scan
+argument_list|,
+literal|2
+argument_list|)
+argument_list|)
+argument_list|,
+name|ImmutableList
+operator|.
+name|of
+argument_list|(
+operator|new
+name|RexFieldCollation
+argument_list|(
+name|rexBuilder
+operator|.
+name|makeInputRef
+argument_list|(
+name|scan
+argument_list|,
+literal|1
+argument_list|)
+argument_list|,
+name|ImmutableSet
+operator|.
+name|of
+argument_list|()
+argument_list|)
+argument_list|)
+argument_list|,
+name|RexWindowBound
+operator|.
+name|create
+argument_list|(
+name|SqlWindow
+operator|.
+name|createCurrentRow
+argument_list|(
+name|SqlParserPos
+operator|.
+name|ZERO
+argument_list|)
+argument_list|,
+literal|null
+argument_list|)
+argument_list|,
+name|RexWindowBound
+operator|.
+name|create
+argument_list|(
+literal|null
+argument_list|,
+name|rexBuilder
+operator|.
+name|makeCall
+argument_list|(
+name|SqlWindow
+operator|.
+name|FOLLOWING_OPERATOR
+argument_list|,
+name|rexBuilder
+operator|.
+name|makeExactLiteral
+argument_list|(
+name|BigDecimal
+operator|.
+name|ONE
+argument_list|)
+argument_list|)
+argument_list|)
+argument_list|,
+literal|false
+argument_list|,
+literal|true
+argument_list|,
+literal|false
+argument_list|,
+literal|false
+argument_list|)
+argument_list|)
+argument_list|,
+name|ImmutableList
+operator|.
+name|of
+argument_list|(
+literal|"field0"
+argument_list|,
+literal|"field1"
+argument_list|,
+literal|"field2"
+argument_list|)
+argument_list|)
+decl_stmt|;
+specifier|final
+name|RelJsonWriter
+name|writer
+init|=
+operator|new
+name|RelJsonWriter
+argument_list|()
+decl_stmt|;
+name|project
+operator|.
+name|explain
+argument_list|(
+name|writer
+argument_list|)
+expr_stmt|;
+return|return
+name|writer
+operator|.
+name|asString
+argument_list|()
+return|;
+block|}
+argument_list|)
+decl_stmt|;
+name|assertThat
+argument_list|(
+name|s
+argument_list|,
+name|is
+argument_list|(
+name|XX2
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
 comment|/**    * Unit test for {@link org.apache.calcite.rel.externalize.RelJsonReader}.    */
 annotation|@
 name|Test
@@ -892,6 +1717,254 @@ argument_list|(
 literal|"LogicalAggregate(group=[{0}], agg#0=[COUNT(DISTINCT $1)], agg#1=[COUNT()])\n"
 operator|+
 literal|"  LogicalFilter(condition=[=($1, 10)])\n"
+operator|+
+literal|"    LogicalTableScan(table=[[hr, emps]])\n"
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+comment|/**    * Unit test for {@link org.apache.calcite.rel.externalize.RelJsonReader}.    */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testReader2
+parameter_list|()
+block|{
+name|String
+name|s
+init|=
+name|Frameworks
+operator|.
+name|withPlanner
+argument_list|(
+parameter_list|(
+name|cluster
+parameter_list|,
+name|relOptSchema
+parameter_list|,
+name|rootSchema
+parameter_list|)
+lambda|->
+block|{
+name|SchemaPlus
+name|schema
+init|=
+name|rootSchema
+operator|.
+name|add
+argument_list|(
+literal|"hr"
+argument_list|,
+operator|new
+name|ReflectiveSchema
+argument_list|(
+operator|new
+name|JdbcTest
+operator|.
+name|HrSchema
+argument_list|()
+argument_list|)
+argument_list|)
+decl_stmt|;
+specifier|final
+name|RelJsonReader
+name|reader
+init|=
+operator|new
+name|RelJsonReader
+argument_list|(
+name|cluster
+argument_list|,
+name|relOptSchema
+argument_list|,
+name|schema
+argument_list|)
+decl_stmt|;
+name|RelNode
+name|node
+decl_stmt|;
+try|try
+block|{
+name|node
+operator|=
+name|reader
+operator|.
+name|read
+argument_list|(
+name|XX2
+argument_list|)
+expr_stmt|;
+block|}
+catch|catch
+parameter_list|(
+name|IOException
+name|e
+parameter_list|)
+block|{
+throw|throw
+operator|new
+name|RuntimeException
+argument_list|(
+name|e
+argument_list|)
+throw|;
+block|}
+return|return
+name|RelOptUtil
+operator|.
+name|dumpPlan
+argument_list|(
+literal|""
+argument_list|,
+name|node
+argument_list|,
+name|SqlExplainFormat
+operator|.
+name|TEXT
+argument_list|,
+name|SqlExplainLevel
+operator|.
+name|EXPPLAN_ATTRIBUTES
+argument_list|)
+return|;
+block|}
+argument_list|)
+decl_stmt|;
+name|assertThat
+argument_list|(
+name|s
+argument_list|,
+name|isLinux
+argument_list|(
+literal|"LogicalProject(field0=[$0],"
+operator|+
+literal|" field1=[COUNT($0) OVER (PARTITION BY $2 ORDER BY $1 NULLS LAST ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW)],"
+operator|+
+literal|" field2=[SUM($0) OVER (PARTITION BY $2 ORDER BY $1 NULLS LAST RANGE BETWEEN CURRENT ROW AND 1 FOLLOWING)])\n"
+operator|+
+literal|"  LogicalTableScan(table=[[hr, emps]])\n"
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+comment|/**    * Unit test for {@link org.apache.calcite.rel.externalize.RelJsonReader}.    */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testReaderNull
+parameter_list|()
+block|{
+name|String
+name|s
+init|=
+name|Frameworks
+operator|.
+name|withPlanner
+argument_list|(
+parameter_list|(
+name|cluster
+parameter_list|,
+name|relOptSchema
+parameter_list|,
+name|rootSchema
+parameter_list|)
+lambda|->
+block|{
+name|SchemaPlus
+name|schema
+init|=
+name|rootSchema
+operator|.
+name|add
+argument_list|(
+literal|"hr"
+argument_list|,
+operator|new
+name|ReflectiveSchema
+argument_list|(
+operator|new
+name|JdbcTest
+operator|.
+name|HrSchema
+argument_list|()
+argument_list|)
+argument_list|)
+decl_stmt|;
+specifier|final
+name|RelJsonReader
+name|reader
+init|=
+operator|new
+name|RelJsonReader
+argument_list|(
+name|cluster
+argument_list|,
+name|relOptSchema
+argument_list|,
+name|schema
+argument_list|)
+decl_stmt|;
+name|RelNode
+name|node
+decl_stmt|;
+try|try
+block|{
+name|node
+operator|=
+name|reader
+operator|.
+name|read
+argument_list|(
+name|XXNULL
+argument_list|)
+expr_stmt|;
+block|}
+catch|catch
+parameter_list|(
+name|IOException
+name|e
+parameter_list|)
+block|{
+throw|throw
+operator|new
+name|RuntimeException
+argument_list|(
+name|e
+argument_list|)
+throw|;
+block|}
+return|return
+name|RelOptUtil
+operator|.
+name|dumpPlan
+argument_list|(
+literal|""
+argument_list|,
+name|node
+argument_list|,
+name|SqlExplainFormat
+operator|.
+name|TEXT
+argument_list|,
+name|SqlExplainLevel
+operator|.
+name|EXPPLAN_ATTRIBUTES
+argument_list|)
+return|;
+block|}
+argument_list|)
+decl_stmt|;
+name|assertThat
+argument_list|(
+name|s
+argument_list|,
+name|isLinux
+argument_list|(
+literal|"LogicalAggregate(group=[{0}], agg#0=[COUNT(DISTINCT $1)], agg#1=[COUNT()])\n"
+operator|+
+literal|"  LogicalFilter(condition=[=($1, null:INTEGER)])\n"
 operator|+
 literal|"    LogicalTableScan(table=[[hr, emps]])\n"
 argument_list|)
