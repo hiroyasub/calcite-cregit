@@ -1260,6 +1260,13 @@ specifier|private
 name|boolean
 name|locked
 decl_stmt|;
+comment|/**    * Whether rels with Convention.NONE has infinite cost.    */
+specifier|private
+name|boolean
+name|noneConventionHasInfiniteCost
+init|=
+literal|true
+decl_stmt|;
 specifier|private
 specifier|final
 name|List
@@ -4366,6 +4373,22 @@ throw|;
 block|}
 block|}
 block|}
+comment|/**    * Sets whether this planner should consider rel nodes with Convention.NONE    * to have inifinte cost or not.    * @param infinite Whether to make none convention rel nodes inifite cost    */
+specifier|public
+name|void
+name|setNoneConventionHasInfiniteCost
+parameter_list|(
+name|boolean
+name|infinite
+parameter_list|)
+block|{
+name|this
+operator|.
+name|noneConventionHasInfiniteCost
+operator|=
+name|infinite
+expr_stmt|;
+block|}
 specifier|public
 name|RelOptCost
 name|getCost
@@ -4404,6 +4427,8 @@ return|;
 block|}
 if|if
 condition|(
+name|noneConventionHasInfiniteCost
+operator|&&
 name|rel
 operator|.
 name|getTraitSet
