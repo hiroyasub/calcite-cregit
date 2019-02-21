@@ -813,9 +813,9 @@ literal|"SELECT stringValue AS stringValue "
 operator|+
 literal|"FROM /allDataTypesRegion WHERE "
 operator|+
-literal|"stringValue IN SET('abc', 'def') OR floatValue IN SET(1.5678, null) "
+literal|"stringValue IN SET('abc', 'def') OR floatValue = 1.5678 "
 operator|+
-literal|"OR booleanValue IN SET(true, false, null)"
+literal|"OR booleanValue IN SET(true, false)"
 argument_list|)
 argument_list|)
 expr_stmt|;

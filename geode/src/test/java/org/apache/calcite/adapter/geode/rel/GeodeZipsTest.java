@@ -1240,7 +1240,7 @@ name|expectedQuery
 init|=
 literal|"SELECT state AS state FROM /zips "
 operator|+
-literal|"WHERE state IN SET('', null, true, false, 123, 13.892)"
+literal|"WHERE state IN SET('', true, false, 123, 13.892)"
 decl_stmt|;
 name|calciteAssert
 argument_list|()
