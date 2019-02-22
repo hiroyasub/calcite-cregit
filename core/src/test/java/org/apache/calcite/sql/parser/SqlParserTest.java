@@ -27678,7 +27678,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testJsonArrayAgg
+name|testJsonArrayAgg1
 parameter_list|()
 block|{
 name|checkExp
@@ -27700,6 +27700,37 @@ argument_list|(
 literal|"json_arrayagg(json_array(\"column\") format json)"
 argument_list|,
 literal|"JSON_ARRAYAGG(JSON_ARRAY(`column` ABSENT ON NULL) FORMAT JSON ABSENT ON NULL)"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testJsonArrayAgg2
+parameter_list|()
+block|{
+name|checkExp
+argument_list|(
+literal|"json_arrayagg(\"column\" order by \"column\")"
+argument_list|,
+literal|"(JSON_ARRAYAGG(`column` ABSENT ON NULL) WITHIN GROUP (ORDER BY `column`))"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"json_arrayagg(\"column\") within group (order by \"column\")"
+argument_list|,
+literal|"(JSON_ARRAYAGG(`column` ABSENT ON NULL) WITHIN GROUP (ORDER BY `column`))"
+argument_list|)
+expr_stmt|;
+name|checkFails
+argument_list|(
+literal|"^json_arrayagg(\"column\" order by \"column\") within group (order by \"column\")^"
+argument_list|,
+literal|"(?s).*Including both WITHIN GROUP\\(\\.\\.\\.\\) and inside ORDER BY "
+operator|+
+literal|"in a single JSON_ARRAYAGG call is not allowed.*"
 argument_list|)
 expr_stmt|;
 block|}

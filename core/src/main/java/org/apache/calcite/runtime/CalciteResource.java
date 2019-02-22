@@ -4031,6 +4031,18 @@ function_decl|;
 annotation|@
 name|BaseMessage
 argument_list|(
+literal|"Including both WITHIN GROUP(...) and inside ORDER BY in a single JSON_ARRAYAGG call is not allowed"
+argument_list|)
+name|ExInst
+argument_list|<
+name|CalciteException
+argument_list|>
+name|ambiguousSortOrderInJsonArrayAggFunc
+parameter_list|()
+function_decl|;
+annotation|@
+name|BaseMessage
+argument_list|(
 literal|"While executing SQL [{0}] on JDBC sub-schema"
 argument_list|)
 name|ExInst
