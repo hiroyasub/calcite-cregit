@@ -4056,7 +4056,9 @@ init|=
 operator|new
 name|SqlJsonObjectAggAggFunction
 argument_list|(
-literal|"JSON_OBJECTAGG"
+name|SqlKind
+operator|.
+name|JSON_OBJECTAGG
 argument_list|,
 name|SqlJsonConstructorNullClause
 operator|.
@@ -4082,11 +4084,13 @@ init|=
 operator|new
 name|SqlJsonArrayAggAggFunction
 argument_list|(
-literal|"JSON_ARRAYAGG"
+name|SqlKind
+operator|.
+name|JSON_ARRAYAGG
 argument_list|,
 name|SqlJsonConstructorNullClause
 operator|.
-name|NULL_ON_NULL
+name|ABSENT_ON_NULL
 argument_list|)
 decl_stmt|;
 specifier|public
