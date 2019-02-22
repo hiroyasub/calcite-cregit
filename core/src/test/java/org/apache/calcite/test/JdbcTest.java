@@ -27409,6 +27409,44 @@ expr_stmt|;
 block|}
 end_function
 
+begin_function
+annotation|@
+name|Ignore
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testJsonType
+parameter_list|()
+block|{
+name|CalciteAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|query
+argument_list|(
+literal|"SELECT JSON_TYPE(v) AS c1\n"
+operator|+
+literal|",JSON_TYPE(JSON_VALUE(v, 'lax $.b' ERROR ON ERROR)) AS c2\n"
+operator|+
+literal|",JSON_TYPE(JSON_VALUE(v, 'strict $.a[0]' ERROR ON ERROR)) AS c3\n"
+operator|+
+literal|",JSON_TYPE(JSON_VALUE(v, 'strict $.a[1]' ERROR ON ERROR)) AS c4\n"
+operator|+
+literal|"FROM (VALUES ('{\"a\": [10, true],\"b\": \"[10, true]\"}')) AS t(v)\n"
+operator|+
+literal|"limit 10"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"C1=OBJECT; C2=ARRAY; C3=INTEGER; C4=BOOLEAN\n"
+argument_list|)
+expr_stmt|;
+block|}
+end_function
+
 begin_comment
 comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2609">[CALCITE-2609]    * Dynamic parameters ("?") pushed to underlying JDBC schema, causing    * error</a>.    */
 end_comment

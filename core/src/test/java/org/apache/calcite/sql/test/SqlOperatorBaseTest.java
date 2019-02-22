@@ -19136,6 +19136,133 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testJsonType
+parameter_list|()
+block|{
+name|tester
+operator|.
+name|setFor
+argument_list|(
+name|SqlStdOperatorTable
+operator|.
+name|JSON_TYPE
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"json_type('\"1\"')"
+argument_list|,
+literal|"STRING"
+argument_list|,
+literal|"VARCHAR(20) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"json_type('1')"
+argument_list|,
+literal|"INTEGER"
+argument_list|,
+literal|"VARCHAR(20) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"json_type('11.45')"
+argument_list|,
+literal|"DOUBLE"
+argument_list|,
+literal|"VARCHAR(20) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"json_type('true')"
+argument_list|,
+literal|"BOOLEAN"
+argument_list|,
+literal|"VARCHAR(20) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"json_type('null')"
+argument_list|,
+literal|"NULL"
+argument_list|,
+literal|"VARCHAR(20) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"json_type(cast(null as varchar(1)))"
+argument_list|,
+literal|"NULL"
+argument_list|,
+literal|"VARCHAR(20) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"json_type('{\"a\": [10, true]}')"
+argument_list|,
+literal|"OBJECT"
+argument_list|,
+literal|"VARCHAR(20) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"json_type('{}')"
+argument_list|,
+literal|"OBJECT"
+argument_list|,
+literal|"VARCHAR(20) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"json_type('[10, true]')"
+argument_list|,
+literal|"ARRAY"
+argument_list|,
+literal|"VARCHAR(20) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"json_type('\"2019-01-27 21:24:00\"')"
+argument_list|,
+literal|"STRING"
+argument_list|,
+literal|"VARCHAR(20) NOT NULL"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testJsonObjectAgg
 parameter_list|()
 block|{

@@ -34145,6 +34145,38 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testJsonType
+parameter_list|()
+block|{
+name|check
+argument_list|(
+literal|"select json_type(ename) from emp"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"json_type('{\"foo\":\"bar\"}')"
+argument_list|)
+expr_stmt|;
+name|checkExpType
+argument_list|(
+literal|"json_type('{\"foo\":\"bar\"}')"
+argument_list|,
+literal|"VARCHAR(20) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|checkFails
+argument_list|(
+literal|"select json_type(^1^) from emp"
+argument_list|,
+literal|"(.*)JSON_VALUE_EXPRESSION(.*)"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testJsonObjectAgg
 parameter_list|()
 block|{

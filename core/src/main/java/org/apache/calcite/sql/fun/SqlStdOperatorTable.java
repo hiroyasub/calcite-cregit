@@ -4016,6 +4016,16 @@ decl_stmt|;
 specifier|public
 specifier|static
 specifier|final
+name|SqlFunction
+name|JSON_TYPE
+init|=
+operator|new
+name|SqlJsonTypeFunction
+argument_list|()
+decl_stmt|;
+specifier|public
+specifier|static
+specifier|final
 name|SqlJsonObjectAggAggFunction
 name|JSON_OBJECTAGG
 init|=

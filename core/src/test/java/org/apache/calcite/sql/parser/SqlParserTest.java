@@ -27545,6 +27545,49 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testJsonType
+parameter_list|()
+block|{
+name|checkExp
+argument_list|(
+literal|"json_type('11.56')"
+argument_list|,
+literal|"JSON_TYPE('11.56' FORMAT JSON)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"json_type('{}')"
+argument_list|,
+literal|"JSON_TYPE('{}' FORMAT JSON)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"json_type(null)"
+argument_list|,
+literal|"JSON_TYPE(NULL FORMAT JSON)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"json_type('[\"foo\",null]')"
+argument_list|,
+literal|"JSON_TYPE('[\"foo\",null]' FORMAT JSON)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"json_type('{\"foo\": \"100\"}')"
+argument_list|,
+literal|"JSON_TYPE('{\"foo\": \"100\"}' FORMAT JSON)"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testJsonObjectAgg
 parameter_list|()
 block|{
