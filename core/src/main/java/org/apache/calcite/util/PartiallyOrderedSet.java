@@ -17,6 +17,20 @@ end_package
 
 begin_import
 import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|config
+operator|.
+name|CalciteSystemProperty
+import|;
+end_import
+
+begin_import
+import|import
 name|com
 operator|.
 name|google
@@ -265,20 +279,6 @@ argument_list|<
 name|E
 argument_list|>
 name|bottomNode
-decl_stmt|;
-comment|/** Whether to check internal consistency all the time.    * False unless you specify "-Dcalcite.debug" on the command line. */
-specifier|private
-specifier|static
-specifier|final
-name|boolean
-name|DEBUG
-init|=
-name|Util
-operator|.
-name|getBooleanProperty
-argument_list|(
-literal|"calcite.debug"
-argument_list|)
 decl_stmt|;
 comment|/**    * Creates a partially-ordered set.    *    * @param ordering Ordering relation    */
 specifier|public
@@ -963,7 +963,12 @@ literal|null
 assert|;
 assert|assert
 operator|!
+name|CalciteSystemProperty
+operator|.
 name|DEBUG
+operator|.
+name|value
+argument_list|()
 operator|||
 name|isValid
 argument_list|(
@@ -1297,7 +1302,12 @@ argument_list|)
 expr_stmt|;
 assert|assert
 operator|!
+name|CalciteSystemProperty
+operator|.
 name|DEBUG
+operator|.
+name|value
+argument_list|()
 operator|||
 name|isValid
 argument_list|(

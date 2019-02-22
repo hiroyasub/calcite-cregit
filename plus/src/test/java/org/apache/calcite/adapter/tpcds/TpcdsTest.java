@@ -25,6 +25,20 @@ name|apache
 operator|.
 name|calcite
 operator|.
+name|config
+operator|.
+name|CalciteSystemProperty
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
 name|plan
 operator|.
 name|RelOptUtil
@@ -300,7 +314,7 @@ import|;
 end_import
 
 begin_comment
-comment|/** Unit test for {@link org.apache.calcite.adapter.tpcds.TpcdsSchema}.  *  *<p>Only runs if {@code -Dcalcite.test.slow} is specified on the  * command-line.  * (See {@link org.apache.calcite.test.CalciteAssert#ENABLE_SLOW}.)</p> */
+comment|/** Unit test for {@link org.apache.calcite.adapter.tpcds.TpcdsSchema}.  *  *<p>Only runs if {@link org.apache.calcite.config.CalciteSystemProperty#TEST_SLOW} is set.</p>  */
 end_comment
 
 begin_class
@@ -461,9 +475,12 @@ argument_list|)
 operator|.
 name|enable
 argument_list|(
-name|CalciteAssert
+name|CalciteSystemProperty
 operator|.
-name|ENABLE_SLOW
+name|TEST_SLOW
+operator|.
+name|value
+argument_list|()
 argument_list|)
 return|;
 block|}

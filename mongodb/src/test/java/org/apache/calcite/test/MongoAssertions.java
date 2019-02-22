@@ -23,9 +23,9 @@ name|apache
 operator|.
 name|calcite
 operator|.
-name|util
+name|config
 operator|.
-name|TestUtil
+name|CalciteSystemProperty
 import|;
 end_import
 
@@ -39,7 +39,7 @@ name|calcite
 operator|.
 name|util
 operator|.
-name|Util
+name|TestUtil
 import|;
 end_import
 
@@ -347,21 +347,19 @@ name|useMongo
 parameter_list|()
 block|{
 return|return
-name|Util
+name|CalciteSystemProperty
 operator|.
-name|getBooleanProperty
-argument_list|(
-literal|"calcite.integrationTest"
-argument_list|)
+name|INTEGRATION_TEST
+operator|.
+name|value
+argument_list|()
 operator|&&
-name|Util
+name|CalciteSystemProperty
 operator|.
-name|getBooleanProperty
-argument_list|(
-literal|"calcite.test.mongodb"
-argument_list|,
-literal|true
-argument_list|)
+name|TEST_MONGODB
+operator|.
+name|value
+argument_list|()
 return|;
 block|}
 comment|/**    * Checks wherever tests should use Fongo instead of Mongo. Opposite of {@link #useMongo()}.    *    * @return Whether current tests should use embedded    *<a href="https://github.com/fakemongo/fongo">Fongo</a> instance    */

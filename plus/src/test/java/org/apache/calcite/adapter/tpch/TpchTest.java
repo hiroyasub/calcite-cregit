@@ -25,6 +25,20 @@ name|apache
 operator|.
 name|calcite
 operator|.
+name|config
+operator|.
+name|CalciteSystemProperty
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
 name|plan
 operator|.
 name|RelOptUtil
@@ -154,7 +168,7 @@ import|;
 end_import
 
 begin_comment
-comment|/** Unit test for {@link org.apache.calcite.adapter.tpch.TpchSchema}.  *  *<p>Because the TPC-H data generator takes time and memory to instantiate,  * tests that read data (that is, most tests) only run  * if {@code -Dcalcite.test.slow} is specified on the command-line.  * (See {@link org.apache.calcite.test.CalciteAssert#ENABLE_SLOW}.)</p> */
+comment|/** Unit test for {@link org.apache.calcite.adapter.tpch.TpchSchema}.  *  *<p>Because the TPC-H data generator takes time and memory to instantiate,  * tests that read data (that is, most tests) only run  * if {@link org.apache.calcite.config.CalciteSystemProperty#TEST_SLOW} is set.</p>  */
 end_comment
 
 begin_class
@@ -168,9 +182,12 @@ specifier|final
 name|boolean
 name|ENABLE
 init|=
-name|CalciteAssert
+name|CalciteSystemProperty
 operator|.
-name|ENABLE_SLOW
+name|TEST_SLOW
+operator|.
+name|value
+argument_list|()
 operator|&&
 name|TestUtil
 operator|.

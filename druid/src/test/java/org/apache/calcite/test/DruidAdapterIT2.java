@@ -83,9 +83,9 @@ name|apache
 operator|.
 name|calcite
 operator|.
-name|prepare
+name|config
 operator|.
-name|CalcitePrepareImpl
+name|CalciteSystemProperty
 import|;
 end_import
 
@@ -164,20 +164,6 @@ operator|.
 name|util
 operator|.
 name|TestUtil
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|util
-operator|.
-name|Util
 import|;
 end_import
 
@@ -392,22 +378,6 @@ argument_list|(
 literal|"/druid-foodmart-model-timestamp.json"
 argument_list|)
 decl_stmt|;
-comment|/** Whether to run Druid tests. Enabled by default, however test is only    * included if "it" profile is activated ({@code -Pit}). To disable,    * specify {@code -Dcalcite.test.druid=false} on the Java command line. */
-specifier|public
-specifier|static
-specifier|final
-name|boolean
-name|ENABLED
-init|=
-name|Util
-operator|.
-name|getBooleanProperty
-argument_list|(
-literal|"calcite.test.druid"
-argument_list|,
-literal|true
-argument_list|)
-decl_stmt|;
 specifier|private
 specifier|static
 specifier|final
@@ -431,7 +401,12 @@ name|enabled
 parameter_list|()
 block|{
 return|return
-name|ENABLED
+name|CalciteSystemProperty
+operator|.
+name|TEST_DRUID
+operator|.
+name|value
+argument_list|()
 return|;
 block|}
 comment|/** Returns a function that checks that a particular Druid query is    * generated to implement a query. */
@@ -760,9 +735,12 @@ expr_stmt|;
 block|}
 if|if
 condition|(
-name|CalcitePrepareImpl
+name|CalciteSystemProperty
 operator|.
 name|DEBUG
+operator|.
+name|value
+argument_list|()
 condition|)
 block|{
 name|System

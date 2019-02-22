@@ -55,9 +55,9 @@ name|apache
 operator|.
 name|calcite
 operator|.
-name|jdbc
+name|config
 operator|.
-name|CalciteConnection
+name|CalciteSystemProperty
 import|;
 end_import
 
@@ -69,9 +69,9 @@ name|apache
 operator|.
 name|calcite
 operator|.
-name|prepare
+name|jdbc
 operator|.
-name|CalcitePrepareImpl
+name|CalciteConnection
 import|;
 end_import
 
@@ -888,9 +888,12 @@ name|rs
 decl_stmt|;
 if|if
 condition|(
-name|CalcitePrepareImpl
+name|CalciteSystemProperty
 operator|.
 name|DEBUG
+operator|.
+name|value
+argument_list|()
 condition|)
 block|{
 name|rs

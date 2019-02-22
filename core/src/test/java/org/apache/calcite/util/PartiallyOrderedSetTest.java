@@ -23,9 +23,9 @@ name|apache
 operator|.
 name|calcite
 operator|.
-name|test
+name|config
 operator|.
-name|CalciteAssert
+name|CalciteSystemProperty
 import|;
 end_import
 
@@ -272,9 +272,12 @@ specifier|final
 name|int
 name|SCALE
 init|=
-name|CalciteAssert
+name|CalciteSystemProperty
 operator|.
-name|ENABLE_SLOW
+name|TEST_SLOW
+operator|.
+name|value
+argument_list|()
 condition|?
 literal|250
 else|:
@@ -1330,9 +1333,12 @@ name|assumeTrue
 argument_list|(
 literal|"it takes 80 seconds, and the computations are exactly the same every time"
 argument_list|,
-name|CalciteAssert
+name|CalciteSystemProperty
 operator|.
-name|ENABLE_SLOW
+name|TEST_SLOW
+operator|.
+name|value
+argument_list|()
 argument_list|)
 expr_stmt|;
 specifier|final
@@ -1376,9 +1382,12 @@ name|assumeTrue
 argument_list|(
 literal|"too slow to run every day"
 argument_list|,
-name|CalciteAssert
+name|CalciteSystemProperty
 operator|.
-name|ENABLE_SLOW
+name|TEST_SLOW
+operator|.
+name|value
+argument_list|()
 argument_list|)
 expr_stmt|;
 specifier|final

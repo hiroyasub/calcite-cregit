@@ -23,9 +23,9 @@ name|apache
 operator|.
 name|calcite
 operator|.
-name|util
+name|config
 operator|.
-name|TestUtil
+name|CalciteSystemProperty
 import|;
 end_import
 
@@ -39,7 +39,7 @@ name|calcite
 operator|.
 name|util
 operator|.
-name|Util
+name|TestUtil
 import|;
 end_import
 
@@ -248,20 +248,6 @@ name|SPLUNK_PASSWORD
 init|=
 literal|"changeme"
 decl_stmt|;
-comment|/** Whether to run Splunk tests. Disabled by default, because we do not expect    * Splunk to be installed and populated data set. To enable,    * specify {@code -Dcalcite.test.splunk} on the Java command line. */
-specifier|public
-specifier|static
-specifier|final
-name|boolean
-name|ENABLED
-init|=
-name|Util
-operator|.
-name|getBooleanProperty
-argument_list|(
-literal|"calcite.test.splunk"
-argument_list|)
-decl_stmt|;
 comment|/** Whether this test is enabled. Tests are disabled unless we know that    * Splunk is present and loaded with the requisite data. */
 specifier|private
 name|boolean
@@ -269,7 +255,12 @@ name|enabled
 parameter_list|()
 block|{
 return|return
-name|ENABLED
+name|CalciteSystemProperty
+operator|.
+name|TEST_SPLUNK
+operator|.
+name|value
+argument_list|()
 return|;
 block|}
 specifier|private

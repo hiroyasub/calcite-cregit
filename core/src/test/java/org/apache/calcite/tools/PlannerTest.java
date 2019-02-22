@@ -169,6 +169,20 @@ name|calcite
 operator|.
 name|config
 operator|.
+name|CalciteSystemProperty
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|config
+operator|.
 name|Lex
 import|;
 end_import
@@ -3903,9 +3917,12 @@ expr_stmt|;
 comment|// takes about 2s
 if|if
 condition|(
-name|CalciteAssert
+name|CalciteSystemProperty
 operator|.
-name|ENABLE_SLOW
+name|TEST_SLOW
+operator|.
+name|value
+argument_list|()
 condition|)
 block|{
 name|checkJoinNWay

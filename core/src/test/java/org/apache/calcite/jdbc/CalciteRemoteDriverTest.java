@@ -161,9 +161,9 @@ name|apache
 operator|.
 name|calcite
 operator|.
-name|prepare
+name|config
 operator|.
-name|CalcitePrepareImpl
+name|CalciteSystemProperty
 import|;
 end_import
 
@@ -738,9 +738,12 @@ specifier|final
 name|PrintWriter
 name|out
 init|=
-name|CalcitePrepareImpl
+name|CalciteSystemProperty
 operator|.
 name|DEBUG
+operator|.
+name|value
+argument_list|()
 condition|?
 name|Util
 operator|.
@@ -2958,9 +2961,12 @@ specifier|final
 name|PrintWriter
 name|out
 init|=
-name|CalcitePrepareImpl
+name|CalciteSystemProperty
 operator|.
 name|DEBUG
+operator|.
+name|value
+argument_list|()
 condition|?
 name|Util
 operator|.

@@ -389,20 +389,6 @@ end_import
 
 begin_import
 import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|util
-operator|.
-name|Util
-import|;
-end_import
-
-begin_import
-import|import
 name|java
 operator|.
 name|util
@@ -430,17 +416,6 @@ specifier|public
 interface|interface
 name|SqlValidator
 block|{
-comment|/** Whether to follow the SQL standard strictly. */
-name|boolean
-name|STRICT
-init|=
-name|Util
-operator|.
-name|getBooleanProperty
-argument_list|(
-literal|"calcite.strict.sql"
-argument_list|)
-decl_stmt|;
 comment|//~ Methods ----------------------------------------------------------------
 comment|/**    * Returns the dialect of SQL (SQL:2003, etc.) this validator recognizes.    * Default is {@link SqlConformanceEnum#DEFAULT}.    *    * @return dialect of SQL this validator recognizes    */
 name|SqlConformance

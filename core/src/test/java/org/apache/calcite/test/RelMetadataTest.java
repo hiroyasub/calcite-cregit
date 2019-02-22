@@ -39,6 +39,20 @@ name|apache
 operator|.
 name|calcite
 operator|.
+name|config
+operator|.
+name|CalciteSystemProperty
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
 name|linq4j
 operator|.
 name|tree
@@ -1136,20 +1150,6 @@ operator|.
 name|util
 operator|.
 name|ImmutableIntList
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|util
-operator|.
-name|SaffronProperties
 import|;
 end_import
 
@@ -4161,9 +4161,12 @@ name|assumeTrue
 argument_list|(
 literal|"too slow to run every day, and it does not reproduce the issue"
 argument_list|,
-name|CalciteAssert
+name|CalciteSystemProperty
 operator|.
-name|ENABLE_SLOW
+name|TEST_SLOW
+operator|.
+name|value
+argument_list|()
 argument_list|)
 expr_stmt|;
 name|Assume
@@ -4174,14 +4177,11 @@ literal|"If cache size is too large, this test may fail and the "
 operator|+
 literal|"test won't be to blame"
 argument_list|,
-name|SaffronProperties
+name|CalciteSystemProperty
 operator|.
-name|INSTANCE
+name|METADATA_HANDLER_CACHE_MAXIMUM_SIZE
 operator|.
-name|metadataHandlerCacheMaximumSize
-argument_list|()
-operator|.
-name|get
+name|value
 argument_list|()
 operator|<
 literal|10_000

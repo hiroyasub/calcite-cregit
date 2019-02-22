@@ -23,9 +23,9 @@ name|apache
 operator|.
 name|calcite
 operator|.
-name|prepare
+name|config
 operator|.
-name|CalcitePrepareImpl
+name|CalciteSystemProperty
 import|;
 end_import
 
@@ -130,9 +130,12 @@ argument_list|)
 expr_stmt|;
 if|if
 condition|(
-name|CalcitePrepareImpl
+name|CalciteSystemProperty
 operator|.
 name|DEBUG
+operator|.
+name|value
+argument_list|()
 condition|)
 block|{
 name|LOGGER

@@ -23,9 +23,9 @@ name|apache
 operator|.
 name|calcite
 operator|.
-name|linq4j
+name|config
 operator|.
-name|Ord
+name|CalciteSystemProperty
 import|;
 end_import
 
@@ -37,9 +37,9 @@ name|apache
 operator|.
 name|calcite
 operator|.
-name|prepare
+name|linq4j
 operator|.
-name|CalcitePrepareImpl
+name|Ord
 import|;
 end_import
 
@@ -854,9 +854,12 @@ specifier|final
 name|boolean
 name|DEBUG
 init|=
-name|CalcitePrepareImpl
+name|CalciteSystemProperty
 operator|.
 name|DEBUG
+operator|.
+name|value
+argument_list|()
 decl_stmt|;
 specifier|private
 specifier|static

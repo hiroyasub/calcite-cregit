@@ -25,6 +25,20 @@ name|apache
 operator|.
 name|calcite
 operator|.
+name|config
+operator|.
+name|CalciteSystemProperty
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
 name|plan
 operator|.
 name|RelOptCluster
@@ -70,20 +84,6 @@ operator|.
 name|plan
 operator|.
 name|RelTraitSet
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|prepare
-operator|.
-name|CalcitePrepareImpl
 import|;
 end_import
 
@@ -352,9 +352,12 @@ expr_stmt|;
 comment|// Too expensive for everyday use:
 assert|assert
 operator|!
-name|CalcitePrepareImpl
+name|CalciteSystemProperty
 operator|.
 name|DEBUG
+operator|.
+name|value
+argument_list|()
 operator|||
 name|isValid
 argument_list|(

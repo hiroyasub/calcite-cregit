@@ -67,6 +67,20 @@ name|apache
 operator|.
 name|calcite
 operator|.
+name|config
+operator|.
+name|CalciteSystemProperty
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
 name|linq4j
 operator|.
 name|Enumerable
@@ -256,20 +270,6 @@ operator|.
 name|volcano
 operator|.
 name|AbstractConverter
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|prepare
-operator|.
-name|CalcitePrepareImpl
 import|;
 end_import
 
@@ -2211,9 +2211,12 @@ name|config
 argument_list|,
 literal|" UPDATE MYTABLE set id=7 where id=1"
 argument_list|,
-name|CalcitePrepareImpl
+name|CalciteSystemProperty
 operator|.
 name|DEBUG
+operator|.
+name|value
+argument_list|()
 argument_list|)
 expr_stmt|;
 block|}

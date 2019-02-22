@@ -160,10 +160,12 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Provides an environment for debugging information, et cetera, used by  * saffron.  *  *<p>It is a singleton, accessed via the {@link #INSTANCE} object. It is  * populated from System properties if saffron is invoked via a<code>  * main()</code> method, from a<code>javax.servlet.ServletContext</code> if  * saffron is invoked from a servlet, and so forth. If there is a file called  *<code>"saffron.properties"</code> in the current directory, it is read too.  *  *<p>Every property used in saffron code must have a method in this interface.  * The method must return a sub-class of  * {@link org.apache.calcite.runtime.Resources.Prop}. The javadoc  * comment must describe the name of the property (for example,  * "net.sf.saffron.connection.PoolSize") and the default value, if any.<em>  * Developers, please make sure that this remains so!</em>  */
+comment|/**  * Provides an environment for debugging information, et cetera, used by  * saffron.  *  *<p>It is a singleton, accessed via the {@link #INSTANCE} object. It is  * populated from System properties if saffron is invoked via a<code>  * main()</code> method, from a<code>javax.servlet.ServletContext</code> if  * saffron is invoked from a servlet, and so forth. If there is a file called  *<code>"saffron.properties"</code> in the current directory, it is read too.  *  *<p>Every property used in saffron code must have a method in this interface.  * The method must return a sub-class of  * {@link org.apache.calcite.runtime.Resources.Prop}. The javadoc  * comment must describe the name of the property (for example,  * "net.sf.saffron.connection.PoolSize") and the default value, if any.<em>  * Developers, please make sure that this remains so!</em>  *  * @deprecated As of release 1.19,  * replaced by {@link org.apache.calcite.config.CalciteSystemProperty}  */
 end_comment
 
 begin_interface
+annotation|@
+name|Deprecated
 specifier|public
 interface|interface
 name|SaffronProperties

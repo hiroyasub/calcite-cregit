@@ -67,9 +67,9 @@ name|apache
 operator|.
 name|calcite
 operator|.
-name|plan
+name|config
 operator|.
-name|Contexts
+name|CalciteSystemProperty
 import|;
 end_import
 
@@ -81,9 +81,9 @@ name|apache
 operator|.
 name|calcite
 operator|.
-name|prepare
+name|plan
 operator|.
-name|CalcitePrepareImpl
+name|Contexts
 import|;
 end_import
 
@@ -516,9 +516,12 @@ argument_list|)
 decl_stmt|;
 if|if
 condition|(
-name|CalcitePrepareImpl
+name|CalciteSystemProperty
 operator|.
 name|DEBUG
+operator|.
+name|value
+argument_list|()
 condition|)
 block|{
 name|System
