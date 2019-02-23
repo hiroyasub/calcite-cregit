@@ -1339,12 +1339,87 @@ argument_list|)
 operator|.
 name|query
 argument_list|(
+literal|"select * from elastic.zips where _MAP['state'] = 'NY' order by _MAP['city']"
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|ElasticsearchChecker
+operator|.
+name|elasticsearchChecker
+argument_list|(
+literal|"query:{'constant_score':{filter:{term:{state:'NY'}}}}"
+argument_list|,
+literal|"sort:[{city:'asc'}]"
+argument_list|,
+name|String
+operator|.
+name|format
+argument_list|(
+name|Locale
+operator|.
+name|ROOT
+argument_list|,
+literal|"size:%s"
+argument_list|,
+name|ElasticsearchTransport
+operator|.
+name|DEFAULT_FETCH_SIZE
+argument_list|)
+argument_list|)
+argument_list|)
+operator|.
+name|returnsCount
+argument_list|(
+literal|3
+argument_list|)
+expr_stmt|;
+name|CalciteAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|newConnectionFactory
+argument_list|()
+argument_list|)
+operator|.
+name|query
+argument_list|(
 literal|"select _MAP['state'] from elastic.zips order by _MAP['city']"
 argument_list|)
 operator|.
 name|returnsCount
 argument_list|(
 name|ZIPS_SIZE
+argument_list|)
+expr_stmt|;
+name|CalciteAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|newConnectionFactory
+argument_list|()
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select _MAP['city'] from elastic.zips where _MAP['state'] = 'NY' "
+operator|+
+literal|"order by _MAP['city']"
+argument_list|)
+operator|.
+name|returnsOrdered
+argument_list|(
+literal|"EXPR$0=BROOKLYN"
+argument_list|,
+literal|"EXPR$0=JACKSON HEIGHTS"
+argument_list|,
+literal|"EXPR$0=NEW YORK"
 argument_list|)
 expr_stmt|;
 name|CalciteAssert
@@ -1446,6 +1521,29 @@ argument_list|,
 literal|"EXPR$0=44165.0; EXPR$1=42124.0; EXPR$2=AL"
 argument_list|,
 literal|"EXPR$0=53532.0; EXPR$1=37428.0; EXPR$2=AR"
+argument_list|)
+expr_stmt|;
+name|CalciteAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|newConnectionFactory
+argument_list|()
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select max(_MAP['pop']), min(_MAP['pop']), _MAP['state'] from elastic.zips "
+operator|+
+literal|"where _MAP['state'] = 'NY' group by _MAP['state'] order by _MAP['state'] limit 3"
+argument_list|)
+operator|.
+name|returnsCount
+argument_list|(
+literal|1
 argument_list|)
 expr_stmt|;
 block|}

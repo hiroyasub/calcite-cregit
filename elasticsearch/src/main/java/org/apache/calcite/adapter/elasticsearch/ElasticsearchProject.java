@@ -431,6 +431,11 @@ name|ArrayList
 argument_list|<>
 argument_list|()
 decl_stmt|;
+name|boolean
+name|hasSelectStar
+init|=
+literal|false
+decl_stmt|;
 for|for
 control|(
 name|Pair
@@ -493,6 +498,15 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+name|hasSelectStar
+operator||=
+literal|"_MAP"
+operator|.
+name|equals
+argument_list|(
+name|name
+argument_list|)
+expr_stmt|;
 if|if
 condition|(
 name|expr
@@ -588,6 +602,15 @@ literal|"\"}"
 argument_list|)
 expr_stmt|;
 block|}
+block|}
+if|if
+condition|(
+name|hasSelectStar
+condition|)
+block|{
+comment|// means select * from elastic
+comment|// this does not yet cover select *, _MAP['foo'], _MAP['bar'][0] from elastic
+return|return;
 block|}
 name|StringBuilder
 name|query
