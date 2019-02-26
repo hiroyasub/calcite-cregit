@@ -464,18 +464,6 @@ import|;
 end_import
 
 begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|function
-operator|.
-name|Function
-import|;
-end_import
-
-begin_import
 import|import static
 name|org
 operator|.
@@ -1049,16 +1037,14 @@ name|RexUnknownAs
 name|unknownAs
 parameter_list|)
 block|{
-return|return
-name|verify
+specifier|final
+name|RexNode
+name|simplified
+init|=
+name|withParanoid
 argument_list|(
-name|e
-argument_list|,
-name|unknownAs
-argument_list|,
-name|simplifier
-lambda|->
-name|simplifier
+literal|false
+argument_list|)
 operator|.
 name|simplify
 argument_list|(
@@ -1066,10 +1052,27 @@ name|e
 argument_list|,
 name|unknownAs
 argument_list|)
+decl_stmt|;
+if|if
+condition|(
+name|paranoid
+condition|)
+block|{
+name|verify
+argument_list|(
+name|e
+argument_list|,
+name|simplified
+argument_list|,
+name|unknownAs
 argument_list|)
+expr_stmt|;
+block|}
+return|return
+name|simplified
 return|;
 block|}
-comment|/** Internal method to simplify an expression.    *    *<p>Unlike the public {@link #simplify(RexNode)}    * and {@link #simplifyUnknownAsFalse(RexNode)} methods,    * never calls {@link #verify(RexNode, RexUnknownAs, Function)}.    * Verify adds an overhead that is only acceptable for a top-level call.    */
+comment|/** Internal method to simplify an expression.    *    *<p>Unlike the public {@link #simplify(RexNode)}    * and {@link #simplifyUnknownAsFalse(RexNode)} methods,    * never calls {@link #verify(RexNode, RexNode, RexUnknownAs)}.    * Verify adds an overhead that is only acceptable for a top-level call.    */
 name|RexNode
 name|simplify
 parameter_list|(
@@ -1475,6 +1478,7 @@ operator|.
 name|operands
 argument_list|)
 decl_stmt|;
+comment|// UNKNOWN mode is warranted: false = null
 name|simplifyList
 argument_list|(
 name|operands
@@ -2105,6 +2109,9 @@ argument_list|)
 return|;
 block|}
 comment|/**    * Simplifies a conjunction of boolean expressions.    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 name|RexNode
 name|simplifyAnds
@@ -2118,6 +2125,9 @@ argument_list|>
 name|nodes
 parameter_list|)
 block|{
+name|ensureParanoidOff
+argument_list|()
+expr_stmt|;
 return|return
 name|simplifyAnds
 argument_list|(
@@ -6120,6 +6130,9 @@ name|RexCall
 name|e
 parameter_list|)
 block|{
+name|ensureParanoidOff
+argument_list|()
+expr_stmt|;
 return|return
 name|simplifyAnd
 argument_list|(
@@ -8402,6 +8415,9 @@ name|r0
 return|;
 block|}
 comment|/** Simplifies OR(x, x) into x, and similar.    * The simplified expression returns UNKNOWN values as is (not as FALSE). */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 name|RexNode
 name|simplifyOr
@@ -8410,6 +8426,9 @@ name|RexCall
 name|call
 parameter_list|)
 block|{
+name|ensureParanoidOff
+argument_list|()
+expr_stmt|;
 return|return
 name|simplifyOr
 argument_list|(
@@ -8477,6 +8496,9 @@ argument_list|)
 return|;
 block|}
 comment|/** Simplifies a list of terms and combines them into an OR.    * Modifies the list in place.    * The simplified expression returns UNKNOWN values as is (not as FALSE). */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 name|RexNode
 name|simplifyOrs
@@ -8488,6 +8510,9 @@ argument_list|>
 name|terms
 parameter_list|)
 block|{
+name|ensureParanoidOff
+argument_list|()
+expr_stmt|;
 return|return
 name|simplifyOrs
 argument_list|(
@@ -8496,6 +8521,25 @@ argument_list|,
 name|UNKNOWN
 argument_list|)
 return|;
+block|}
+specifier|private
+name|void
+name|ensureParanoidOff
+parameter_list|()
+block|{
+if|if
+condition|(
+name|paranoid
+condition|)
+block|{
+throw|throw
+operator|new
+name|UnsupportedOperationException
+argument_list|(
+literal|"Paranoid is not supported for this method"
+argument_list|)
+throw|;
+block|}
 block|}
 comment|/** Simplifies a list of terms and combines them into an OR.    * Modifies the list in place. */
 specifier|private
@@ -8512,44 +8556,6 @@ name|RexUnknownAs
 name|unknownAs
 parameter_list|)
 block|{
-if|if
-condition|(
-name|paranoid
-condition|)
-block|{
-specifier|final
-name|RexNode
-name|before
-init|=
-name|RexUtil
-operator|.
-name|composeDisjunction
-argument_list|(
-name|rexBuilder
-argument_list|,
-name|terms
-argument_list|)
-decl_stmt|;
-return|return
-name|verify
-argument_list|(
-name|before
-argument_list|,
-name|unknownAs
-argument_list|,
-name|simplifier
-lambda|->
-name|simplifier
-operator|.
-name|simplifyOrs
-argument_list|(
-name|terms
-argument_list|,
-name|unknownAs
-argument_list|)
-argument_list|)
-return|;
-block|}
 for|for
 control|(
 name|int
@@ -8680,48 +8686,19 @@ argument_list|)
 return|;
 block|}
 specifier|private
-name|RexNode
+name|void
 name|verify
 parameter_list|(
 name|RexNode
 name|before
 parameter_list|,
+name|RexNode
+name|simplified
+parameter_list|,
 name|RexUnknownAs
 name|unknownAs
-parameter_list|,
-name|Function
-argument_list|<
-name|RexSimplify
-argument_list|,
-name|RexNode
-argument_list|>
-name|simplifier
 parameter_list|)
 block|{
-specifier|final
-name|RexNode
-name|simplified
-init|=
-name|simplifier
-operator|.
-name|apply
-argument_list|(
-name|withParanoid
-argument_list|(
-literal|false
-argument_list|)
-argument_list|)
-decl_stmt|;
-if|if
-condition|(
-operator|!
-name|paranoid
-condition|)
-block|{
-return|return
-name|simplified
-return|;
-block|}
 if|if
 condition|(
 name|simplified
@@ -8820,9 +8797,7 @@ literal|0
 condition|)
 block|{
 comment|// Analyzer cannot handle this expression currently
-return|return
-name|simplified
-return|;
+return|return;
 block|}
 if|if
 condition|(
@@ -9088,9 +9063,6 @@ argument_list|)
 throw|;
 block|}
 block|}
-return|return
-name|simplified
-return|;
 block|}
 specifier|private
 name|RexNode
