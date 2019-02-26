@@ -104,6 +104,24 @@ argument_list|,
 name|INDEX
 argument_list|)
 decl_stmt|;
+comment|/**    * Detects {@code select * from elastic} types of field name (select star).    * @param name name of the field    * @return {@code true} if this field represents whole raw, {@code false} otherwise    */
+specifier|static
+name|boolean
+name|isSelectAll
+parameter_list|(
+name|String
+name|name
+parameter_list|)
+block|{
+return|return
+literal|"_MAP"
+operator|.
+name|equals
+argument_list|(
+name|name
+argument_list|)
+return|;
+block|}
 block|}
 end_interface
 

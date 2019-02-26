@@ -500,9 +500,9 @@ expr_stmt|;
 block|}
 name|hasSelectStar
 operator||=
-literal|"_MAP"
+name|ElasticsearchConstants
 operator|.
-name|equals
+name|isSelectAll
 argument_list|(
 name|name
 argument_list|)

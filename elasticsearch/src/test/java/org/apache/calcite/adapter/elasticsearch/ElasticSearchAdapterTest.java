@@ -1297,7 +1297,7 @@ block|}
 block|}
 return|;
 block|}
-comment|/**    * Sorting directly on items without a view.    *    * Queries of type: {@code select _MAP['a'] from elastic order by _MAP['b']}    */
+comment|/**    * Sorting (and aggregating) directly on items without a view.    *    * Queries of type: {@code select _MAP['a'] from elastic order by _MAP['b']}    */
 annotation|@
 name|Test
 specifier|public
@@ -1369,9 +1369,13 @@ argument_list|)
 argument_list|)
 argument_list|)
 operator|.
-name|returnsCount
+name|returnsOrdered
 argument_list|(
-literal|3
+literal|"_MAP={id=11226, city=BROOKLYN, loc=[-73.956985, 40.646694], pop=111396, state=NY}"
+argument_list|,
+literal|"_MAP={id=11373, city=JACKSON HEIGHTS, loc=[-73.878551, 40.740388], pop=88241, state=NY}"
+argument_list|,
+literal|"_MAP={id=10021, city=NEW YORK, loc=[-73.958805, 40.768476], pop=106564, state=NY}"
 argument_list|)
 expr_stmt|;
 name|CalciteAssert
@@ -1541,9 +1545,9 @@ operator|+
 literal|"where _MAP['state'] = 'NY' group by _MAP['state'] order by _MAP['state'] limit 3"
 argument_list|)
 operator|.
-name|returnsCount
+name|returns
 argument_list|(
-literal|1
+literal|"EXPR$0=111396.0; EXPR$1=88241.0; EXPR$2=NY\n"
 argument_list|)
 expr_stmt|;
 block|}

@@ -1794,6 +1794,22 @@ argument_list|,
 literal|"name"
 argument_list|)
 expr_stmt|;
+comment|// for "select *" return whole document
+if|if
+condition|(
+name|ElasticsearchConstants
+operator|.
+name|isSelectAll
+argument_list|(
+name|name
+argument_list|)
+condition|)
+block|{
+return|return
+name|sourceOrFields
+argument_list|()
+return|;
+block|}
 if|if
 condition|(
 name|fields

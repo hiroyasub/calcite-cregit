@@ -95,6 +95,16 @@ name|Map
 import|;
 end_import
 
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+import|;
+end_import
+
 begin_comment
 comment|/**  * Util functions which convert  * {@link ElasticsearchJson.SearchHit}  * into calcite specific return type (map, object[], list etc.)  */
 end_comment
@@ -528,48 +538,21 @@ argument_list|>
 name|mapping
 parameter_list|)
 block|{
+name|Objects
+operator|.
+name|requireNonNull
+argument_list|(
+name|fields
+argument_list|,
+literal|"fields"
+argument_list|)
+expr_stmt|;
 comment|//noinspection unchecked
 specifier|final
 name|Function1
 name|getter
 decl_stmt|;
 if|if
-condition|(
-name|fields
-operator|==
-literal|null
-operator|||
-name|fields
-operator|.
-name|size
-argument_list|()
-operator|==
-literal|1
-operator|&&
-literal|"_MAP"
-operator|.
-name|equals
-argument_list|(
-name|fields
-operator|.
-name|get
-argument_list|(
-literal|0
-argument_list|)
-operator|.
-name|getKey
-argument_list|()
-argument_list|)
-condition|)
-block|{
-comment|// select * from table
-name|getter
-operator|=
-name|mapGetter
-argument_list|()
-expr_stmt|;
-block|}
-if|else if
 condition|(
 name|fields
 operator|.
@@ -580,6 +563,7 @@ literal|1
 condition|)
 block|{
 comment|// select foo from table
+comment|// select * from table
 name|getter
 operator|=
 name|singletonGetter
