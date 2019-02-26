@@ -27588,6 +27588,49 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testJsonDepth
+parameter_list|()
+block|{
+name|checkExp
+argument_list|(
+literal|"json_depth('11.56')"
+argument_list|,
+literal|"JSON_DEPTH('11.56' FORMAT JSON)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"json_depth('{}')"
+argument_list|,
+literal|"JSON_DEPTH('{}' FORMAT JSON)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"json_depth(null)"
+argument_list|,
+literal|"JSON_DEPTH(NULL FORMAT JSON)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"json_depth('[\"foo\",null]')"
+argument_list|,
+literal|"JSON_DEPTH('[\"foo\",null]' FORMAT JSON)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"json_depth('{\"foo\": \"100\"}')"
+argument_list|,
+literal|"JSON_DEPTH('{\"foo\": \"100\"}' FORMAT JSON)"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testJsonObjectAgg
 parameter_list|()
 block|{

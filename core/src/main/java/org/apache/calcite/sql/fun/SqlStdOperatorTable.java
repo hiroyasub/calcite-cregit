@@ -4040,6 +4040,16 @@ decl_stmt|;
 specifier|public
 specifier|static
 specifier|final
+name|SqlFunction
+name|JSON_DEPTH
+init|=
+operator|new
+name|SqlJsonDepthFunction
+argument_list|()
+decl_stmt|;
+specifier|public
+specifier|static
+specifier|final
 name|SqlJsonObjectAggAggFunction
 name|JSON_OBJECTAGG
 init|=

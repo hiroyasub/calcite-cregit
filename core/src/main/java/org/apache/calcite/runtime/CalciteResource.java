@@ -4070,6 +4070,21 @@ name|String
 name|value
 parameter_list|)
 function_decl|;
+annotation|@
+name|BaseMessage
+argument_list|(
+literal|"Unknown JSON depth in JSON_DEPTH function, and the object is: ''{0}''"
+argument_list|)
+name|ExInst
+argument_list|<
+name|CalciteException
+argument_list|>
+name|unknownObjectOfJsonDepth
+parameter_list|(
+name|String
+name|value
+parameter_list|)
+function_decl|;
 block|}
 end_interface
 
