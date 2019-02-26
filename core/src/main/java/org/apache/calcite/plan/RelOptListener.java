@@ -93,7 +93,7 @@ name|RelDiscardedEvent
 name|event
 parameter_list|)
 function_decl|;
-comment|/**    * Notifies this listener that a relational expression has been chosen as    * part of the final implementation of the query plan. After the plan is    * copmlete, this is called one more time with null for the rel.    *    * @param event details about the event    */
+comment|/**    * Notifies this listener that a relational expression has been chosen as    * part of the final implementation of the query plan. After the plan is    * complete, this is called one more time with null for the rel.    *    * @param event details about the event    */
 name|void
 name|relChosen
 parameter_list|(
@@ -316,7 +316,7 @@ name|ruleCall
 return|;
 block|}
 block|}
-comment|/** Event indicating that a planner rule has been attemptedd. */
+comment|/** Event indicating that a planner rule has been attempted. */
 class|class
 name|RuleAttemptedEvent
 extends|extends
