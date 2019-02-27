@@ -163,6 +163,20 @@ name|geode
 operator|.
 name|cache
 operator|.
+name|RegionExistsException
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|geode
+operator|.
+name|cache
+operator|.
 name|client
 operator|.
 name|ClientCache
@@ -669,10 +683,13 @@ block|}
 catch|catch
 parameter_list|(
 name|IllegalStateException
+decl||
+name|RegionExistsException
 name|e
 parameter_list|)
 block|{
-comment|// means this is a server cache (probably part of embedded testing)
+comment|// means this is a server cache (probably part of embedded testing
+comment|// or clientCache is passed directly)
 name|region
 operator|=
 name|cache

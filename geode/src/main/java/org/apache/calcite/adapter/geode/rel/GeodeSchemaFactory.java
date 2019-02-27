@@ -123,6 +123,26 @@ name|Map
 import|;
 end_import
 
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|adapter
+operator|.
+name|geode
+operator|.
+name|util
+operator|.
+name|GeodeUtils
+operator|.
+name|createClientCache
+import|;
+end_import
+
 begin_comment
 comment|/**  * Factory that creates a {@link GeodeSchema}.  */
 end_comment
@@ -354,9 +374,16 @@ return|return
 operator|new
 name|GeodeSchema
 argument_list|(
+name|createClientCache
+argument_list|(
 name|locatorHost
 argument_list|,
 name|locatorPort
+argument_list|,
+name|pbxSerializablePackagePath
+argument_list|,
+literal|true
+argument_list|)
 argument_list|,
 name|Arrays
 operator|.
@@ -364,8 +391,6 @@ name|asList
 argument_list|(
 name|regionNames
 argument_list|)
-argument_list|,
-name|pbxSerializablePackagePath
 argument_list|)
 return|;
 block|}
