@@ -27780,6 +27780,190 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testExtractWithDatesBeforeUnixEpoch
+parameter_list|()
+block|{
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"extract(year from TIMESTAMP '1970-01-01 00:00:00')"
+argument_list|,
+literal|"1970"
+argument_list|,
+literal|"BIGINT NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"extract(year from TIMESTAMP '1969-12-31 10:13:17')"
+argument_list|,
+literal|"1969"
+argument_list|,
+literal|"BIGINT NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"extract(quarter from TIMESTAMP '1969-12-31 08:13:17')"
+argument_list|,
+literal|"4"
+argument_list|,
+literal|"BIGINT NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"extract(quarter from TIMESTAMP '1969-5-31 21:13:17')"
+argument_list|,
+literal|"2"
+argument_list|,
+literal|"BIGINT NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"extract(month from TIMESTAMP '1969-12-31 00:13:17')"
+argument_list|,
+literal|"12"
+argument_list|,
+literal|"BIGINT NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"extract(day from TIMESTAMP '1969-12-31 12:13:17')"
+argument_list|,
+literal|"31"
+argument_list|,
+literal|"BIGINT NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"extract(week from TIMESTAMP '1969-2-23 01:23:45')"
+argument_list|,
+literal|"8"
+argument_list|,
+literal|"BIGINT NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"extract(doy from TIMESTAMP '1969-12-31 21:13:17.357')"
+argument_list|,
+literal|"365"
+argument_list|,
+literal|"BIGINT NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"extract(dow from TIMESTAMP '1969-12-31 01:13:17.357')"
+argument_list|,
+literal|"4"
+argument_list|,
+literal|"BIGINT NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"extract(decade from TIMESTAMP '1969-12-31 21:13:17.357')"
+argument_list|,
+literal|"196"
+argument_list|,
+literal|"BIGINT NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"extract(century from TIMESTAMP '1969-12-31 21:13:17.357')"
+argument_list|,
+literal|"20"
+argument_list|,
+literal|"BIGINT NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"extract(hour from TIMESTAMP '1969-12-31 21:13:17.357')"
+argument_list|,
+literal|"21"
+argument_list|,
+literal|"BIGINT NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"extract(minute from TIMESTAMP '1969-12-31 21:13:17.357')"
+argument_list|,
+literal|"13"
+argument_list|,
+literal|"BIGINT NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"extract(second from TIMESTAMP '1969-12-31 21:13:17.357')"
+argument_list|,
+literal|"17"
+argument_list|,
+literal|"BIGINT NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"extract(millisecond from TIMESTAMP '1969-12-31 21:13:17.357')"
+argument_list|,
+literal|"17357"
+argument_list|,
+literal|"BIGINT NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"extract(microsecond from TIMESTAMP '1969-12-31 21:13:17.357')"
+argument_list|,
+literal|"17357000"
+argument_list|,
+literal|"BIGINT NOT NULL"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testArrayValueConstructor
 parameter_list|()
 block|{
