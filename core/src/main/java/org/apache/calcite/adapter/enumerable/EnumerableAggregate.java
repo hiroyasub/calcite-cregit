@@ -2751,7 +2751,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**    * Implements the {@link AggregateLambdaFactory}.    *    *<p>Behavior depends upon ordering:    *<ul>    *    *<li>{@code hasOrderedCall == true} means there is at least one aggregate    * call including sort spec. We use {@link OrderedAggregateLambdaFactory}    * implementation to implement sorted aggregates for that.    *    *<li>{@code hasOrderedCall == false} indicates to use    * {@link SequencedAdderAggregateLambdaFactory} to implement a non-sort    * aggregate.    *    *</ul>    */
+comment|/**    * Implements the {@link AggregateLambdaFactory}.    *    *<p>Behavior depends upon ordering:    *<ul>    *    *<li>{@code hasOrderedCall == true} means there is at least one aggregate    * call including sort spec. We use {@link LazyAggregateLambdaFactory}    * implementation to implement sorted aggregates for that.    *    *<li>{@code hasOrderedCall == false} indicates to use    * {@link BasicAggregateLambdaFactory} to implement a non-sort    * aggregate.    *    *</ul>    */
 specifier|private
 name|void
 name|implementLambdaFactory
@@ -2798,7 +2798,7 @@ name|builder
 operator|.
 name|newName
 argument_list|(
-literal|"sourceSorters"
+literal|"lazyAccumulators"
 argument_list|)
 argument_list|)
 decl_stmt|;
@@ -2849,6 +2849,46 @@ name|EMPTY
 argument_list|)
 condition|)
 block|{
+comment|// if the call does not require ordering, fallback to
+comment|// use a non-sorted lazy accumulator.
+name|builder
+operator|.
+name|add
+argument_list|(
+name|Expressions
+operator|.
+name|statement
+argument_list|(
+name|Expressions
+operator|.
+name|call
+argument_list|(
+name|pe
+argument_list|,
+name|BuiltInMethod
+operator|.
+name|COLLECTION_ADD
+operator|.
+name|method
+argument_list|,
+name|Expressions
+operator|.
+name|new_
+argument_list|(
+name|BuiltInMethod
+operator|.
+name|BASIC_LAZY_ACCUMULATOR
+operator|.
+name|constructor
+argument_list|,
+name|agg
+operator|.
+name|accumulatorAdder
+argument_list|)
+argument_list|)
+argument_list|)
+argument_list|)
+expr_stmt|;
 continue|continue;
 block|}
 specifier|final
@@ -2939,7 +2979,7 @@ name|new_
 argument_list|(
 name|BuiltInMethod
 operator|.
-name|ORDERED_AGGREGATE_LAMBDA_FACTORY
+name|LAZY_AGGREGATE_LAMBDA_FACTORY
 operator|.
 name|constructor
 argument_list|,
@@ -3050,7 +3090,7 @@ name|new_
 argument_list|(
 name|BuiltInMethod
 operator|.
-name|SEQUENCED_ADDER_AGGREGATE_LAMBDA_FACTORY
+name|BASIC_AGGREGATE_LAMBDA_FACTORY
 operator|.
 name|constructor
 argument_list|,

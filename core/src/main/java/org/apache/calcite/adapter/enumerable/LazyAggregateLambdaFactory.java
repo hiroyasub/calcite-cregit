@@ -96,19 +96,17 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Generate aggregate lambdas that sorts the input source before calling each  * aggregate adder.  *  * @param<TSource> Type of the enumerable input source  * @param<TKey> Type of the group-by key  * @param<TSortKey> Type of the sort key  * @param<TOrigAccumulate> Type of the original accumulator  * @param<TResult> Type of the enumerable output result  */
+comment|/**  * Generate aggregate lambdas that preserve the input source before calling each  * aggregate adder, this implementation is generally used when we need to sort the input  * before performing aggregation.  *  * @param<TSource> Type of the enumerable input source  * @param<TKey> Type of the group-by key  * @param<TOrigAccumulate> Type of the original accumulator  * @param<TResult> Type of the enumerable output result  */
 end_comment
 
 begin_class
 specifier|public
 class|class
-name|OrderedAggregateLambdaFactory
+name|LazyAggregateLambdaFactory
 parameter_list|<
 name|TSource
 parameter_list|,
 name|TKey
-parameter_list|,
-name|TSortKey
 parameter_list|,
 name|TOrigAccumulate
 parameter_list|,
@@ -121,7 +119,7 @@ name|TSource
 argument_list|,
 name|TOrigAccumulate
 argument_list|,
-name|OrderedAggregateLambdaFactory
+name|LazyAggregateLambdaFactory
 operator|.
 name|LazySource
 argument_list|<
@@ -145,19 +143,17 @@ specifier|private
 specifier|final
 name|List
 argument_list|<
-name|SourceSorter
+name|LazyAccumulator
 argument_list|<
 name|TOrigAccumulate
 argument_list|,
 name|TSource
-argument_list|,
-name|TSortKey
 argument_list|>
 argument_list|>
-name|sourceSorters
+name|accumulators
 decl_stmt|;
 specifier|public
-name|OrderedAggregateLambdaFactory
+name|LazyAggregateLambdaFactory
 parameter_list|(
 name|Function0
 argument_list|<
@@ -167,16 +163,14 @@ name|accumulatorInitializer
 parameter_list|,
 name|List
 argument_list|<
-name|SourceSorter
+name|LazyAccumulator
 argument_list|<
 name|TOrigAccumulate
 argument_list|,
 name|TSource
-argument_list|,
-name|TSortKey
 argument_list|>
 argument_list|>
-name|sourceSorters
+name|accumulators
 parameter_list|)
 block|{
 name|this
@@ -187,9 +181,9 @@ name|accumulatorInitializer
 expr_stmt|;
 name|this
 operator|.
-name|sourceSorters
+name|accumulators
 operator|=
-name|sourceSorters
+name|accumulators
 expr_stmt|;
 block|}
 specifier|public
@@ -284,22 +278,20 @@ argument_list|()
 decl_stmt|;
 for|for
 control|(
-name|SourceSorter
+name|LazyAccumulator
 argument_list|<
 name|TOrigAccumulate
 argument_list|,
 name|TSource
-argument_list|,
-name|TSortKey
 argument_list|>
 name|acc
 range|:
-name|sourceSorters
+name|accumulators
 control|)
 block|{
 name|acc
 operator|.
-name|sortAndAccumulate
+name|accumulate
 argument_list|(
 name|lazySource
 argument_list|,
@@ -362,22 +354,20 @@ argument_list|()
 decl_stmt|;
 for|for
 control|(
-name|SourceSorter
+name|LazyAccumulator
 argument_list|<
 name|TOrigAccumulate
 argument_list|,
 name|TSource
-argument_list|,
-name|TSortKey
 argument_list|>
 name|acc
 range|:
-name|sourceSorters
+name|accumulators
 control|)
 block|{
 name|acc
 operator|.
-name|sortAndAccumulate
+name|accumulate
 argument_list|(
 name|lazySource
 argument_list|,
@@ -398,7 +388,7 @@ return|;
 block|}
 return|;
 block|}
-comment|/**    * Cache the input sources. (Will be sorted, aggregated in result selector.)    *    * @param<TSource> Type of the enumerable input source.    */
+comment|/**    * Cache the input sources. (Will be aggregated in result selector.)    *    * @param<TSource> Type of the enumerable input source.    */
 specifier|public
 specifier|static
 class|class
@@ -459,11 +449,35 @@ argument_list|()
 return|;
 block|}
 block|}
+comment|/**    * Accumulate on the cached input sources.    *    * @param<TOrigAccumulate> Type of the original accumulator    * @param<TSource> Type of the enumerable input source.    */
+specifier|public
+interface|interface
+name|LazyAccumulator
+parameter_list|<
+name|TOrigAccumulate
+parameter_list|,
+name|TSource
+parameter_list|>
+block|{
+name|void
+name|accumulate
+parameter_list|(
+name|Iterable
+argument_list|<
+name|TSource
+argument_list|>
+name|sourceIterable
+parameter_list|,
+name|TOrigAccumulate
+name|accumulator
+parameter_list|)
+function_decl|;
+block|}
 block|}
 end_class
 
 begin_comment
-comment|// End OrderedAggregateLambdaFactory.java
+comment|// End LazyAggregateLambdaFactory.java
 end_comment
 
 end_unit

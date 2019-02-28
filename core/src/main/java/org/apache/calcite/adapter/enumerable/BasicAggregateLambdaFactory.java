@@ -82,7 +82,7 @@ end_comment
 begin_class
 specifier|public
 class|class
-name|SequencedAdderAggregateLambdaFactory
+name|BasicAggregateLambdaFactory
 parameter_list|<
 name|TSource
 parameter_list|,
@@ -127,7 +127,7 @@ argument_list|>
 name|accumulatorAdderDecorator
 decl_stmt|;
 specifier|public
-name|SequencedAdderAggregateLambdaFactory
+name|BasicAggregateLambdaFactory
 parameter_list|(
 name|Function0
 argument_list|<
@@ -356,7 +356,7 @@ block|}
 end_class
 
 begin_comment
-comment|// End SequencedAdderAggregateLambdaFactory.java
+comment|// End BasicAggregateLambdaFactory.java
 end_comment
 
 end_unit
