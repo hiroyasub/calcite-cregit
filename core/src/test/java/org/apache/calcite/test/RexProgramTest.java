@@ -7714,7 +7714,7 @@ argument_list|,
 literal|"true"
 argument_list|)
 expr_stmt|;
-name|checkSimplify2
+name|checkSimplify3
 argument_list|(
 name|eq
 argument_list|(
@@ -7723,9 +7723,11 @@ argument_list|,
 name|iRef
 argument_list|)
 argument_list|,
-literal|"=(?0.i, ?0.i)"
+literal|"OR(null, IS NOT NULL(?0.i))"
 argument_list|,
 literal|"IS NOT NULL(?0.i)"
+argument_list|,
+literal|"true"
 argument_list|)
 expr_stmt|;
 name|checkSimplifyUnchanged
@@ -7763,7 +7765,7 @@ argument_list|,
 literal|"true"
 argument_list|)
 expr_stmt|;
-name|checkSimplify2
+name|checkSimplify3
 argument_list|(
 name|le
 argument_list|(
@@ -7772,9 +7774,11 @@ argument_list|,
 name|iRef
 argument_list|)
 argument_list|,
-literal|"<=(?0.i, ?0.i)"
+literal|"OR(null, IS NOT NULL(?0.i))"
 argument_list|,
 literal|"IS NOT NULL(?0.i)"
+argument_list|,
+literal|"true"
 argument_list|)
 expr_stmt|;
 name|checkSimplifyUnchanged
@@ -7812,7 +7816,7 @@ argument_list|,
 literal|"true"
 argument_list|)
 expr_stmt|;
-name|checkSimplify2
+name|checkSimplify3
 argument_list|(
 name|ge
 argument_list|(
@@ -7821,9 +7825,11 @@ argument_list|,
 name|iRef
 argument_list|)
 argument_list|,
-literal|">=(?0.i, ?0.i)"
+literal|"OR(null, IS NOT NULL(?0.i))"
 argument_list|,
 literal|"IS NOT NULL(?0.i)"
+argument_list|,
+literal|"true"
 argument_list|)
 expr_stmt|;
 name|checkSimplifyUnchanged
@@ -7870,7 +7876,7 @@ argument_list|,
 name|iRef
 argument_list|)
 argument_list|,
-literal|"<>(?0.i, ?0.i)"
+literal|"AND(null, IS NULL(?0.i))"
 argument_list|,
 literal|"false"
 argument_list|)
@@ -7919,7 +7925,7 @@ argument_list|,
 name|iRef
 argument_list|)
 argument_list|,
-literal|"<(?0.i, ?0.i)"
+literal|"AND(null, IS NULL(?0.i))"
 argument_list|,
 literal|"false"
 argument_list|)
@@ -7968,7 +7974,7 @@ argument_list|,
 name|iRef
 argument_list|)
 argument_list|,
-literal|">(?0.i, ?0.i)"
+literal|"AND(null, IS NULL(?0.i))"
 argument_list|,
 literal|"false"
 argument_list|)
@@ -14922,6 +14928,79 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Unit test for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2421">[CALCITE-2421]    * to-be-filled</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSelfComparisions
+parameter_list|()
+block|{
+name|checkSimplify2
+argument_list|(
+name|and
+argument_list|(
+name|eq
+argument_list|(
+name|vInt
+argument_list|()
+argument_list|,
+name|vInt
+argument_list|()
+argument_list|)
+argument_list|,
+name|eq
+argument_list|(
+name|vInt
+argument_list|(
+literal|1
+argument_list|)
+argument_list|,
+name|vInt
+argument_list|(
+literal|1
+argument_list|)
+argument_list|)
+argument_list|)
+argument_list|,
+literal|"AND(OR(null, IS NOT NULL(?0.int0)), OR(null, IS NOT NULL(?0.int1)))"
+argument_list|,
+literal|"AND(IS NOT NULL(?0.int0), IS NOT NULL(?0.int1))"
+argument_list|)
+expr_stmt|;
+name|checkSimplify2
+argument_list|(
+name|and
+argument_list|(
+name|ne
+argument_list|(
+name|vInt
+argument_list|()
+argument_list|,
+name|vInt
+argument_list|()
+argument_list|)
+argument_list|,
+name|ne
+argument_list|(
+name|vInt
+argument_list|(
+literal|1
+argument_list|)
+argument_list|,
+name|vInt
+argument_list|(
+literal|1
+argument_list|)
+argument_list|)
+argument_list|)
+argument_list|,
+literal|"AND(null, IS NULL(?0.int0), IS NULL(?0.int1))"
+argument_list|,
+literal|"false"
+argument_list|)
+expr_stmt|;
+block|}
 annotation|@
 name|Test
 specifier|public
@@ -16502,7 +16581,7 @@ argument_list|)
 argument_list|)
 argument_list|)
 argument_list|,
-literal|"AND(=(?0.int1, ?0.int1),<(?0.int2, ?0.int2))"
+literal|"AND(OR(null, IS NOT NULL(?0.int1)), null, IS NULL(?0.int2))"
 argument_list|,
 literal|"false"
 argument_list|)
@@ -16510,7 +16589,7 @@ expr_stmt|;
 comment|// "NOT(x = x AND NOT (y = y))"
 comment|//   -> "OR(x<> x, y>= y)" (treating unknown as unknown)
 comment|//   -> "y IS NOT NULL" (treating unknown as false)
-name|checkSimplify2
+name|checkSimplify3
 argument_list|(
 name|not
 argument_list|(
@@ -16547,9 +16626,11 @@ argument_list|)
 argument_list|)
 argument_list|)
 argument_list|,
-literal|"OR(<>(?0.int1, ?0.int1),>=(?0.int2, ?0.int2))"
+literal|"OR(AND(null, IS NULL(?0.int1)), null, IS NOT NULL(?0.int2))"
 argument_list|,
 literal|"IS NOT NULL(?0.int2)"
+argument_list|,
+literal|"true"
 argument_list|)
 expr_stmt|;
 block|}
@@ -16601,7 +16682,7 @@ expr_stmt|;
 comment|// "x = x OR NOT (y>= y)"
 comment|//    -> "x = x OR y< y" (treating unknown as unknown)
 comment|//    -> "x IS NOT NULL" (treating unknown as false)
-name|checkSimplify2
+name|checkSimplify3
 argument_list|(
 name|or
 argument_list|(
@@ -16635,15 +16716,17 @@ argument_list|)
 argument_list|)
 argument_list|)
 argument_list|,
-literal|"OR(=(?0.int1, ?0.int1),<(?0.int2, ?0.int2))"
+literal|"OR(null, IS NOT NULL(?0.int1), AND(null, IS NULL(?0.int2)))"
 argument_list|,
 literal|"IS NOT NULL(?0.int1)"
+argument_list|,
+literal|"true"
 argument_list|)
 expr_stmt|;
 comment|// "NOT(x = x OR NOT (y = y))"
 comment|//   -> "AND(x<> x, y>= y)" (treating unknown as unknown)
 comment|//   -> "FALSE" (treating unknown as false)
-name|checkSimplify2
+name|checkSimplify3
 argument_list|(
 name|not
 argument_list|(
@@ -16680,9 +16763,11 @@ argument_list|)
 argument_list|)
 argument_list|)
 argument_list|,
-literal|"AND(<>(?0.int1, ?0.int1),>=(?0.int2, ?0.int2))"
+literal|"AND(null, IS NULL(?0.int1), OR(null, IS NOT NULL(?0.int2)))"
 argument_list|,
 literal|"false"
+argument_list|,
+literal|"AND(null, IS NULL(?0.int1))"
 argument_list|)
 expr_stmt|;
 block|}
