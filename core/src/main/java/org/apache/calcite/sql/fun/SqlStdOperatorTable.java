@@ -3997,6 +3997,16 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlFunction
+name|JSON_PRETTY
+init|=
+operator|new
+name|SqlJsonPrettyFunction
+argument_list|()
+decl_stmt|;
+specifier|public
+specifier|static
+specifier|final
+name|SqlFunction
 name|JSON_VALUE_ANY
 init|=
 operator|new

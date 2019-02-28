@@ -19165,6 +19165,47 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testJsonPretty
+parameter_list|()
+block|{
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"json_pretty('{\"foo\":100}')"
+argument_list|,
+literal|"{\n  \"foo\" : 100\n}"
+argument_list|,
+literal|"VARCHAR(2000) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"json_pretty('[1,2,3]')"
+argument_list|,
+literal|"[ 1, 2, 3 ]"
+argument_list|,
+literal|"VARCHAR(2000) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"json_pretty('null')"
+argument_list|,
+literal|"null"
+argument_list|,
+literal|"VARCHAR(2000) NOT NULL"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testJsonType
 parameter_list|()
 block|{

@@ -27721,6 +27721,28 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testJsonPretty
+parameter_list|()
+block|{
+name|checkExp
+argument_list|(
+literal|"json_pretty('foo')"
+argument_list|,
+literal|"JSON_PRETTY('foo' FORMAT JSON)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"json_pretty(null)"
+argument_list|,
+literal|"JSON_PRETTY(NULL FORMAT JSON)"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testJsonArrayAgg1
 parameter_list|()
 block|{

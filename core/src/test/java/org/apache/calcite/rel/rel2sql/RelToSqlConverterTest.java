@@ -10850,6 +10850,37 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testJsonPretty
+parameter_list|()
+block|{
+name|String
+name|query
+init|=
+literal|"select json_pretty(\"product_name\") from \"product\""
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT JSON_PRETTY(\"product_name\" FORMAT JSON)\n"
+operator|+
+literal|"FROM \"foodmart\".\"product\""
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testJsonValue
 parameter_list|()
 block|{
