@@ -7867,7 +7867,7 @@ argument_list|,
 literal|"false"
 argument_list|)
 expr_stmt|;
-name|checkSimplify2
+name|checkSimplify3
 argument_list|(
 name|ne
 argument_list|(
@@ -7879,6 +7879,8 @@ argument_list|,
 literal|"AND(null, IS NULL(?0.i))"
 argument_list|,
 literal|"false"
+argument_list|,
+literal|"IS NULL(?0.i)"
 argument_list|)
 expr_stmt|;
 name|checkSimplifyUnchanged
@@ -7916,7 +7918,7 @@ argument_list|,
 literal|"false"
 argument_list|)
 expr_stmt|;
-name|checkSimplify2
+name|checkSimplify3
 argument_list|(
 name|lt
 argument_list|(
@@ -7928,6 +7930,8 @@ argument_list|,
 literal|"AND(null, IS NULL(?0.i))"
 argument_list|,
 literal|"false"
+argument_list|,
+literal|"IS NULL(?0.i)"
 argument_list|)
 expr_stmt|;
 name|checkSimplifyUnchanged
@@ -7965,7 +7969,7 @@ argument_list|,
 literal|"false"
 argument_list|)
 expr_stmt|;
-name|checkSimplify2
+name|checkSimplify3
 argument_list|(
 name|gt
 argument_list|(
@@ -7977,6 +7981,8 @@ argument_list|,
 literal|"AND(null, IS NULL(?0.i))"
 argument_list|,
 literal|"false"
+argument_list|,
+literal|"IS NULL(?0.i)"
 argument_list|)
 expr_stmt|;
 name|checkSimplifyUnchanged
@@ -9881,7 +9887,7 @@ literal|">(?0.a, 10)"
 argument_list|)
 expr_stmt|;
 comment|// "null AND NOT(null OR x)" => "null AND NOT(x)"
-name|checkSimplify2
+name|checkSimplify3
 argument_list|(
 name|and
 argument_list|(
@@ -9902,6 +9908,8 @@ argument_list|,
 literal|"AND(null, NOT(?0.bool0))"
 argument_list|,
 literal|"false"
+argument_list|,
+literal|"NOT(?0.bool0)"
 argument_list|)
 expr_stmt|;
 comment|// "x1 AND x2 AND x3 AND NOT(x1) AND NOT(x2) AND NOT(x0)" =>
@@ -10588,7 +10596,7 @@ argument_list|,
 literal|"false"
 argument_list|)
 expr_stmt|;
-name|checkSimplify2
+name|checkSimplify3
 argument_list|(
 name|and
 argument_list|(
@@ -10600,6 +10608,8 @@ argument_list|,
 literal|"null:BOOLEAN"
 argument_list|,
 literal|"false"
+argument_list|,
+literal|"true"
 argument_list|)
 expr_stmt|;
 name|checkSimplify
@@ -10614,7 +10624,7 @@ argument_list|,
 literal|"false"
 argument_list|)
 expr_stmt|;
-name|checkSimplify2
+name|checkSimplify3
 argument_list|(
 name|and
 argument_list|(
@@ -10631,6 +10641,8 @@ argument_list|,
 literal|"AND(null, =(?0.a, 1))"
 argument_list|,
 literal|"false"
+argument_list|,
+literal|"=(?0.a, 1)"
 argument_list|)
 expr_stmt|;
 name|checkSimplify3
@@ -14936,7 +14948,7 @@ name|void
 name|testSelfComparisions
 parameter_list|()
 block|{
-name|checkSimplify2
+name|checkSimplify3
 argument_list|(
 name|and
 argument_list|(
@@ -14966,9 +14978,11 @@ argument_list|,
 literal|"AND(OR(null, IS NOT NULL(?0.int0)), OR(null, IS NOT NULL(?0.int1)))"
 argument_list|,
 literal|"AND(IS NOT NULL(?0.int0), IS NOT NULL(?0.int1))"
+argument_list|,
+literal|"true"
 argument_list|)
 expr_stmt|;
-name|checkSimplify2
+name|checkSimplify3
 argument_list|(
 name|and
 argument_list|(
@@ -14998,6 +15012,8 @@ argument_list|,
 literal|"AND(null, IS NULL(?0.int0), IS NULL(?0.int1))"
 argument_list|,
 literal|"false"
+argument_list|,
+literal|"AND(IS NULL(?0.int0), IS NULL(?0.int1))"
 argument_list|)
 expr_stmt|;
 block|}
@@ -16547,7 +16563,7 @@ expr_stmt|;
 comment|// "x = x AND NOT (y>= y)"
 comment|//    -> "x = x AND y< y" (treating unknown as unknown)
 comment|//    -> false (treating unknown as false)
-name|checkSimplify2
+name|checkSimplify3
 argument_list|(
 name|and
 argument_list|(
@@ -16584,6 +16600,8 @@ argument_list|,
 literal|"AND(OR(null, IS NOT NULL(?0.int1)), null, IS NULL(?0.int2))"
 argument_list|,
 literal|"false"
+argument_list|,
+literal|"IS NULL(?0.int2)"
 argument_list|)
 expr_stmt|;
 comment|// "NOT(x = x AND NOT (y = y))"
@@ -16767,7 +16785,7 @@ literal|"AND(null, IS NULL(?0.int1), OR(null, IS NOT NULL(?0.int2)))"
 argument_list|,
 literal|"false"
 argument_list|,
-literal|"AND(null, IS NULL(?0.int1))"
+literal|"IS NULL(?0.int1)"
 argument_list|)
 expr_stmt|;
 block|}

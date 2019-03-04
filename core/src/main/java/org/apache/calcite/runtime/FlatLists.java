@@ -527,8 +527,6 @@ specifier|static
 parameter_list|<
 name|T
 extends|extends
-name|Object
-operator|&
 name|Comparable
 parameter_list|>
 name|ComparableList
