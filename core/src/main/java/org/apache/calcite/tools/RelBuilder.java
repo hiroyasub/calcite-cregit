@@ -6790,6 +6790,11 @@ argument_list|(
 name|i
 argument_list|)
 decl_stmt|;
+name|String
+name|originalName
+init|=
+name|name
+decl_stmt|;
 name|Field
 name|field
 decl_stmt|;
@@ -6834,7 +6839,7 @@ name|F_SUGGESTER
 operator|.
 name|apply
 argument_list|(
-name|name
+name|originalName
 argument_list|,
 name|j
 argument_list|,
