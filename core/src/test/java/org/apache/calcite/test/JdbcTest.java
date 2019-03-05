@@ -27578,8 +27578,6 @@ end_function
 
 begin_function
 annotation|@
-name|Ignore
-annotation|@
 name|Test
 specifier|public
 name|void
@@ -27616,8 +27614,6 @@ end_function
 
 begin_function
 annotation|@
-name|Ignore
-annotation|@
 name|Test
 specifier|public
 name|void
@@ -27647,6 +27643,42 @@ operator|.
 name|returns
 argument_list|(
 literal|"C1=3; C2=2; C3=1; C4=1\n"
+argument_list|)
+expr_stmt|;
+block|}
+end_function
+
+begin_function
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testJsonLength
+parameter_list|()
+block|{
+name|CalciteAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|query
+argument_list|(
+literal|"SELECT JSON_LENGTH(v) AS c1\n"
+operator|+
+literal|",JSON_LENGTH(v, 'lax $.a') AS c2\n"
+operator|+
+literal|",JSON_LENGTH(v, 'strict $.a[0]') AS c3\n"
+operator|+
+literal|",JSON_LENGTH(v, 'strict $.a[1]') AS c4\n"
+operator|+
+literal|"FROM (VALUES ('{\"a\": [10, true]}')) AS t(v)\n"
+operator|+
+literal|"limit 10"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"C1=1; C2=2; C3=1; C4=1\n"
 argument_list|)
 expr_stmt|;
 block|}

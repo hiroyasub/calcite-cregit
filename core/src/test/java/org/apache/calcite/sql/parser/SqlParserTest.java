@@ -27882,6 +27882,42 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testJsonLength
+parameter_list|()
+block|{
+name|checkExp
+argument_list|(
+literal|"json_length('{\"foo\": \"bar\"}')"
+argument_list|,
+literal|"JSON_LENGTH('{\"foo\": \"bar\"}' FORMAT JSON)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"json_length('{\"foo\": \"bar\"}', 'lax $')"
+argument_list|,
+literal|"JSON_LENGTH('{\"foo\": \"bar\"}' FORMAT JSON, 'lax $')"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"json_length('{\"foo\": \"bar\"}', 'strict $')"
+argument_list|,
+literal|"JSON_LENGTH('{\"foo\": \"bar\"}' FORMAT JSON, 'strict $')"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"json_length('{\"foo\": \"bar\"}', 'invalid $')"
+argument_list|,
+literal|"JSON_LENGTH('{\"foo\": \"bar\"}' FORMAT JSON, 'invalid $')"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testJsonObjectAgg
 parameter_list|()
 block|{

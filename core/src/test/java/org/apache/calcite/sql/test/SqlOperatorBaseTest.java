@@ -19579,6 +19579,238 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testJsonLength
+parameter_list|()
+block|{
+comment|// no path context
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"json_length('{}')"
+argument_list|,
+literal|"0"
+argument_list|,
+literal|"INTEGER"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"json_length('[]')"
+argument_list|,
+literal|"0"
+argument_list|,
+literal|"INTEGER"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"json_length('{\"foo\":100}')"
+argument_list|,
+literal|"1"
+argument_list|,
+literal|"INTEGER"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"json_length('{\"a\": 1, \"b\": {\"c\": 30}}')"
+argument_list|,
+literal|"2"
+argument_list|,
+literal|"INTEGER"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"json_length('[1, 2, {\"a\": 3}]')"
+argument_list|,
+literal|"3"
+argument_list|,
+literal|"INTEGER"
+argument_list|)
+expr_stmt|;
+comment|// lax test
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"json_length('{}', 'lax $')"
+argument_list|,
+literal|"0"
+argument_list|,
+literal|"INTEGER"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"json_length('[]', 'lax $')"
+argument_list|,
+literal|"0"
+argument_list|,
+literal|"INTEGER"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"json_length('{\"foo\":100}', 'lax $')"
+argument_list|,
+literal|"1"
+argument_list|,
+literal|"INTEGER"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"json_length('{\"a\": 1, \"b\": {\"c\": 30}}', 'lax $')"
+argument_list|,
+literal|"2"
+argument_list|,
+literal|"INTEGER"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"json_length('[1, 2, {\"a\": 3}]', 'lax $')"
+argument_list|,
+literal|"3"
+argument_list|,
+literal|"INTEGER"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"json_length('{\"a\": 1, \"b\": {\"c\": 30}}', 'lax $.b')"
+argument_list|,
+literal|"1"
+argument_list|,
+literal|"INTEGER"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"json_length('{\"foo\":100}', 'lax $.foo1')"
+argument_list|,
+literal|null
+argument_list|,
+literal|"INTEGER"
+argument_list|)
+expr_stmt|;
+comment|// strict test
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"json_length('{}', 'strict $')"
+argument_list|,
+literal|"0"
+argument_list|,
+literal|"INTEGER"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"json_length('[]', 'strict $')"
+argument_list|,
+literal|"0"
+argument_list|,
+literal|"INTEGER"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"json_length('{\"foo\":100}', 'strict $')"
+argument_list|,
+literal|"1"
+argument_list|,
+literal|"INTEGER"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"json_length('{\"a\": 1, \"b\": {\"c\": 30}}', 'strict $')"
+argument_list|,
+literal|"2"
+argument_list|,
+literal|"INTEGER"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"json_length('[1, 2, {\"a\": 3}]', 'strict $')"
+argument_list|,
+literal|"3"
+argument_list|,
+literal|"INTEGER"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"json_length('{\"a\": 1, \"b\": {\"c\": 30}}', 'strict $.b')"
+argument_list|,
+literal|"1"
+argument_list|,
+literal|"INTEGER"
+argument_list|)
+expr_stmt|;
+comment|// catch error test
+name|tester
+operator|.
+name|checkFails
+argument_list|(
+literal|"json_length('{\"foo\":100}', 'invalid $.foo')"
+argument_list|,
+literal|"(?s).*Illegal jsonpath spec.*"
+argument_list|,
+literal|true
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkFails
+argument_list|(
+literal|"json_length('{\"foo\":100}', 'strict $.foo1')"
+argument_list|,
+literal|"(?s).*No results for path.*"
+argument_list|,
+literal|true
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testJsonObjectAgg
 parameter_list|()
 block|{

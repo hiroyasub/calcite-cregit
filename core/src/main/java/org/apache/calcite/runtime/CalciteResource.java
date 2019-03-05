@@ -186,6 +186,18 @@ function_decl|;
 annotation|@
 name|BaseMessage
 argument_list|(
+literal|"JSON path expression must be specified after the JSON value expression"
+argument_list|)
+name|ExInst
+argument_list|<
+name|CalciteException
+argument_list|>
+name|jsonPathMustBeSpecified
+parameter_list|()
+function_decl|;
+annotation|@
+name|BaseMessage
+argument_list|(
 literal|"Illegal {0} literal {1}: {2}"
 argument_list|)
 name|ExInst
@@ -4088,13 +4100,13 @@ function_decl|;
 annotation|@
 name|BaseMessage
 argument_list|(
-literal|"Unknown JSON type in JSON_TYPE function, and the object is: ''{0}''"
+literal|"Not a valid input for JSON_TYPE: ''{0}''"
 argument_list|)
 name|ExInst
 argument_list|<
 name|CalciteException
 argument_list|>
-name|unknownObjectOfJsonType
+name|invalidInputForJsonType
 parameter_list|(
 name|String
 name|value
@@ -4103,13 +4115,13 @@ function_decl|;
 annotation|@
 name|BaseMessage
 argument_list|(
-literal|"Unknown JSON depth in JSON_DEPTH function, and the object is: ''{0}''"
+literal|"Not a valid input for JSON_DEPTH: ''{0}''"
 argument_list|)
 name|ExInst
 argument_list|<
 name|CalciteException
 argument_list|>
-name|unknownObjectOfJsonDepth
+name|invalidInputForJsonDepth
 parameter_list|(
 name|String
 name|value
@@ -4125,6 +4137,21 @@ argument_list|<
 name|CalciteException
 argument_list|>
 name|exceptionWhileSerializingToJson
+parameter_list|(
+name|String
+name|value
+parameter_list|)
+function_decl|;
+annotation|@
+name|BaseMessage
+argument_list|(
+literal|"Not a valid input for JSON_LENGTH: ''{0}''"
+argument_list|)
+name|ExInst
+argument_list|<
+name|CalciteException
+argument_list|>
+name|invalidInputForJsonLength
 parameter_list|(
 name|String
 name|value

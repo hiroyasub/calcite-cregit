@@ -25949,6 +25949,8 @@ literal|"ITEM -\n"
 operator|+
 literal|"JSON_API_COMMON_SYNTAX -\n"
 operator|+
+literal|"JSON_API_COMMON_SYNTAX_WITHOUT_PATH -\n"
+operator|+
 literal|"JSON_STRUCTURED_VALUE_EXPRESSION -\n"
 operator|+
 literal|"JSON_VALUE_EXPRESSION -\n"
@@ -34289,6 +34291,45 @@ argument_list|(
 literal|"select json_depth(^1^) from emp"
 argument_list|,
 literal|"(.*)JSON_VALUE_EXPRESSION(.*)"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testJsonLength
+parameter_list|()
+block|{
+name|checkExp
+argument_list|(
+literal|"json_length('{\"foo\":\"bar\"}')"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"json_length('{\"foo\":\"bar\"}', 'lax $')"
+argument_list|)
+expr_stmt|;
+name|checkExpType
+argument_list|(
+literal|"json_length('{\"foo\":\"bar\"}')"
+argument_list|,
+literal|"INTEGER"
+argument_list|)
+expr_stmt|;
+name|checkExpType
+argument_list|(
+literal|"json_length('{\"foo\":\"bar\"}', 'lax $')"
+argument_list|,
+literal|"INTEGER"
+argument_list|)
+expr_stmt|;
+name|checkExpType
+argument_list|(
+literal|"json_length('{\"foo\":\"bar\"}', 'strict $')"
+argument_list|,
+literal|"INTEGER"
 argument_list|)
 expr_stmt|;
 block|}
