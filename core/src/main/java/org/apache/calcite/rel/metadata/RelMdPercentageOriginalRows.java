@@ -318,7 +318,7 @@ name|getInputs
 argument_list|()
 control|)
 block|{
-name|double
+name|Double
 name|rowCount
 init|=
 name|mq
@@ -328,7 +328,16 @@ argument_list|(
 name|input
 argument_list|)
 decl_stmt|;
-name|double
+if|if
+condition|(
+name|rowCount
+operator|==
+literal|null
+condition|)
+block|{
+continue|continue;
+block|}
+name|Double
 name|percentage
 init|=
 name|mq
@@ -338,6 +347,15 @@ argument_list|(
 name|input
 argument_list|)
 decl_stmt|;
+if|if
+condition|(
+name|percentage
+operator|==
+literal|null
+condition|)
+block|{
+continue|continue;
+block|}
 if|if
 condition|(
 name|percentage
@@ -382,7 +400,7 @@ comment|// been pushed down.
 comment|// REVIEW jvs 28-Mar-2006: As with aggregation, this is
 comment|// oversimplified.
 comment|// REVIEW jvs 28-Mar-2006:  need any special casing for SemiJoin?
-name|double
+name|Double
 name|left
 init|=
 name|mq
@@ -395,7 +413,18 @@ name|getLeft
 argument_list|()
 argument_list|)
 decl_stmt|;
-name|double
+if|if
+condition|(
+name|left
+operator|==
+literal|null
+condition|)
+block|{
+return|return
+literal|null
+return|;
+block|}
+name|Double
 name|right
 init|=
 name|mq
@@ -408,6 +437,17 @@ name|getRight
 argument_list|()
 argument_list|)
 decl_stmt|;
+if|if
+condition|(
+name|right
+operator|==
+literal|null
+condition|)
+block|{
+return|return
+literal|null
+return|;
+block|}
 return|return
 name|left
 operator|*
