@@ -67,34 +67,6 @@ name|apache
 operator|.
 name|calcite
 operator|.
-name|plan
-operator|.
-name|RelTraitPropagationVisitor
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|plan
-operator|.
-name|RelTraitSet
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
 name|rel
 operator|.
 name|RelNode
@@ -373,33 +345,6 @@ block|{
 comment|// It's possible that rel is a subset or is already registered.
 comment|// Is there still a point in continuing? Yes, because we might
 comment|// discover that two sets of expressions are actually equivalent.
-comment|// Make sure traits that the new rel doesn't know about are
-comment|// propagated.
-name|RelTraitSet
-name|rels0Traits
-init|=
-name|rels
-index|[
-literal|0
-index|]
-operator|.
-name|getTraitSet
-argument_list|()
-decl_stmt|;
-operator|new
-name|RelTraitPropagationVisitor
-argument_list|(
-name|getPlanner
-argument_list|()
-argument_list|,
-name|rels0Traits
-argument_list|)
-operator|.
-name|go
-argument_list|(
-name|rel
-argument_list|)
-expr_stmt|;
 if|if
 condition|(
 name|LOGGER
