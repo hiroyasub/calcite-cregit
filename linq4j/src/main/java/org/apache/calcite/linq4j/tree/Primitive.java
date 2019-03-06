@@ -470,6 +470,11 @@ name|String
 name|primitiveName
 decl_stmt|;
 comment|// e.g. "int"
+specifier|public
+specifier|final
+name|String
+name|boxName
+decl_stmt|;
 specifier|private
 specifier|final
 name|int
@@ -668,6 +673,21 @@ operator|.
 name|boxClass
 operator|=
 name|boxClass
+expr_stmt|;
+name|this
+operator|.
+name|boxName
+operator|=
+name|boxClass
+operator|!=
+literal|null
+condition|?
+name|boxClass
+operator|.
+name|getSimpleName
+argument_list|()
+else|:
+literal|null
 expr_stmt|;
 name|this
 operator|.

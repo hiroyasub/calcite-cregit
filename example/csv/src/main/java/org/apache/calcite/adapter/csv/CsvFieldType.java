@@ -261,10 +261,7 @@ name|boxClass
 argument_list|,
 name|primitive
 operator|.
-name|primitiveClass
-operator|.
-name|getSimpleName
-argument_list|()
+name|primitiveName
 argument_list|)
 expr_stmt|;
 block|}

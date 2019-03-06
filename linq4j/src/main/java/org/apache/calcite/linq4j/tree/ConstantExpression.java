@@ -789,10 +789,7 @@ name|append
 argument_list|(
 name|primitive2
 operator|.
-name|boxClass
-operator|.
-name|getSimpleName
-argument_list|()
+name|boxName
 operator|+
 literal|".valueOf("
 argument_list|)

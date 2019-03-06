@@ -279,10 +279,7 @@ name|value
 operator|.
 name|primitive
 operator|.
-name|primitiveClass
-operator|.
-name|getSimpleName
-argument_list|()
+name|primitiveName
 argument_list|,
 name|value
 argument_list|)

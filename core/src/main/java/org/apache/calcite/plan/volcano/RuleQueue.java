@@ -470,7 +470,7 @@ name|RelImportanceComparator
 argument_list|()
 argument_list|)
 decl_stmt|;
-comment|/**    * Maps a {@link VolcanoPlannerPhase} to a set of rule names.  Named rules    * may be invoked in their corresponding phase.    */
+comment|/**    * Maps a {@link VolcanoPlannerPhase} to a set of rule descriptions. Named rules    * may be invoked in their corresponding phase.    *    * See {@link VolcanoPlannerPhaseRuleMappingInitializer} for more information regarding the    * contents of this Map and how it is initialized.    */
 specifier|private
 specifier|final
 name|Map
@@ -1283,20 +1283,6 @@ block|{
 comment|// Identical match has already been added.
 continue|continue;
 block|}
-name|String
-name|ruleClassName
-init|=
-name|match
-operator|.
-name|getRule
-argument_list|()
-operator|.
-name|getClass
-argument_list|()
-operator|.
-name|getSimpleName
-argument_list|()
-decl_stmt|;
 name|Set
 argument_list|<
 name|String
@@ -1319,6 +1305,17 @@ operator|!=
 name|ALL_RULES
 condition|)
 block|{
+name|String
+name|ruleDescription
+init|=
+name|match
+operator|.
+name|getRule
+argument_list|()
+operator|.
+name|toString
+argument_list|()
+decl_stmt|;
 if|if
 condition|(
 operator|!
@@ -1326,7 +1323,7 @@ name|phaseRuleSet
 operator|.
 name|contains
 argument_list|(
-name|ruleClassName
+name|ruleDescription
 argument_list|)
 condition|)
 block|{
