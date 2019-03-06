@@ -4172,6 +4172,21 @@ name|String
 name|value
 parameter_list|)
 function_decl|;
+annotation|@
+name|BaseMessage
+argument_list|(
+literal|"Not a valid input for JSON_KEYS: ''{0}''"
+argument_list|)
+name|ExInst
+argument_list|<
+name|CalciteException
+argument_list|>
+name|invalidInputForJsonKeys
+parameter_list|(
+name|String
+name|value
+parameter_list|)
+function_decl|;
 block|}
 end_interface
 

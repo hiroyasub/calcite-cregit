@@ -4059,6 +4059,16 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlFunction
+name|JSON_KEYS
+init|=
+operator|new
+name|SqlJsonKeysFunction
+argument_list|()
+decl_stmt|;
+specifier|public
+specifier|static
+specifier|final
+name|SqlFunction
 name|JSON_PRETTY
 init|=
 operator|new

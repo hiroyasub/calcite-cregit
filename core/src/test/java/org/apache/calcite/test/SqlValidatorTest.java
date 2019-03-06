@@ -34884,6 +34884,33 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testJsonKeys
+parameter_list|()
+block|{
+name|checkExp
+argument_list|(
+literal|"json_keys('{\"foo\":\"bar\"}', 'lax $')"
+argument_list|)
+expr_stmt|;
+name|checkExpType
+argument_list|(
+literal|"json_keys('{\"foo\":\"bar\"}', 'lax $')"
+argument_list|,
+literal|"VARCHAR(2000) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|checkExpType
+argument_list|(
+literal|"json_keys('{\"foo\":\"bar\"}', 'strict $')"
+argument_list|,
+literal|"VARCHAR(2000) NOT NULL"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testJsonObjectAgg
 parameter_list|()
 block|{

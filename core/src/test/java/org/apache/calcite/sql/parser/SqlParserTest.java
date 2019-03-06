@@ -28028,6 +28028,35 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testJsonKeys
+parameter_list|()
+block|{
+name|checkExp
+argument_list|(
+literal|"json_keys('{\"foo\": \"bar\"}', 'lax $')"
+argument_list|,
+literal|"JSON_KEYS('{\"foo\": \"bar\"}' FORMAT JSON, 'lax $')"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"json_keys('{\"foo\": \"bar\"}', 'strict $')"
+argument_list|,
+literal|"JSON_KEYS('{\"foo\": \"bar\"}' FORMAT JSON, 'strict $')"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"json_keys('{\"foo\": \"bar\"}', 'invalid $')"
+argument_list|,
+literal|"JSON_KEYS('{\"foo\": \"bar\"}' FORMAT JSON, 'invalid $')"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testJsonObjectAgg
 parameter_list|()
 block|{
