@@ -87,6 +87,7 @@ name|getDetailLevel
 parameter_list|()
 function_decl|;
 comment|/**    * Adds an input to the explanation of the current node.    *    * @param term  Term for input, e.g. "left" or "input #1".    * @param input Input relational expression    */
+specifier|default
 name|RelWriter
 name|input
 parameter_list|(
@@ -96,7 +97,16 @@ parameter_list|,
 name|RelNode
 name|input
 parameter_list|)
-function_decl|;
+block|{
+return|return
+name|item
+argument_list|(
+name|term
+argument_list|,
+name|input
+argument_list|)
+return|;
+block|}
 comment|/**    * Adds an attribute to the explanation of the current node.    *    * @param term  Term for attribute, e.g. "joinType"    * @param value Attribute value    */
 name|RelWriter
 name|item
@@ -109,6 +119,7 @@ name|value
 parameter_list|)
 function_decl|;
 comment|/**    * Adds an input to the explanation of the current node, if a condition    * holds.    */
+specifier|default
 name|RelWriter
 name|itemIf
 parameter_list|(
@@ -121,7 +132,20 @@ parameter_list|,
 name|boolean
 name|condition
 parameter_list|)
-function_decl|;
+block|{
+return|return
+name|condition
+condition|?
+name|item
+argument_list|(
+name|term
+argument_list|,
+name|value
+argument_list|)
+else|:
+name|this
+return|;
+block|}
 comment|/**    * Writes the completed explanation.    */
 name|RelWriter
 name|done
@@ -131,10 +155,15 @@ name|node
 parameter_list|)
 function_decl|;
 comment|/**    * Returns whether the writer prefers nested values. Traditional explain    * writers prefer flattened values.    */
+specifier|default
 name|boolean
 name|nest
 parameter_list|()
-function_decl|;
+block|{
+return|return
+literal|false
+return|;
+block|}
 block|}
 end_interface
 
