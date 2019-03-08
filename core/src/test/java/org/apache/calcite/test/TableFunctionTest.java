@@ -2206,6 +2206,49 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2004">[CALCITE-2004]    * Wrong plan generated for left outer apply with table function</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testLeftOuterApply
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"from (values 4) as t (c)\n"
+operator|+
+literal|"left join lateral table(\"s\".\"fibonacci2\"(c)) as R(n) on c=n"
+decl_stmt|;
+name|with
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|CalciteConnectionProperty
+operator|.
+name|CONFORMANCE
+argument_list|,
+name|SqlConformanceEnum
+operator|.
+name|LENIENT
+argument_list|)
+operator|.
+name|query
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"C=4; N=null"
+argument_list|)
+expr_stmt|;
+block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2382">[CALCITE-2382]    * Sub-query lateral joined to table function</a>. */
 annotation|@
 name|Test

@@ -11237,6 +11237,221 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+comment|/**    * Tests left join lateral with using    */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testLeftJoinLateral1
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select * from (values 4) as t(c)\n"
+operator|+
+literal|" left join lateral\n"
+operator|+
+literal|" (select c,a*c from (values 2) as s(a)) as r(d,c)\n"
+operator|+
+literal|" using(c)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+comment|/**    * Tests left join lateral with natural join    */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testLeftJoinLateral2
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select * from (values 4) as t(c)\n"
+operator|+
+literal|" natural left join lateral\n"
+operator|+
+literal|" (select c,a*c from (values 2) as s(a)) as r(d,c)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+comment|/**    * Tests left join lateral with on condition    */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testLeftJoinLateral3
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select * from (values 4) as t(c)\n"
+operator|+
+literal|" left join lateral\n"
+operator|+
+literal|" (select c,a*c from (values 2) as s(a)) as r(d,c)\n"
+operator|+
+literal|" on t.c=r.c"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+comment|/**    * Tests left join lateral with multiple columns from outer    */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testLeftJoinLateral4
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select * from (values (4,5)) as t(c,d)\n"
+operator|+
+literal|" left join lateral\n"
+operator|+
+literal|" (select c,a*c from (values 2) as s(a)) as r(d,c)\n"
+operator|+
+literal|" on t.c+t.d=r.c"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+comment|/**    * Tests left join lateral with correlate variable coming    * from one level up join scope    */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testLeftJoinLateral5
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select * from (values 4) as t (c)\n"
+operator|+
+literal|"left join lateral\n"
+operator|+
+literal|"  (select f1+b1 from (values 2) as foo(f1)\n"
+operator|+
+literal|"    join\n"
+operator|+
+literal|"  (select c+1 from (values 3)) as bar(b1)\n"
+operator|+
+literal|"  on f1=b1)\n"
+operator|+
+literal|"as r(n) on c=n"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+comment|/**    * Tests cross join lateral with multiple columns from outer    */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testCrossJoinLateral1
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select * from (values (4,5)) as t(c,d)\n"
+operator|+
+literal|" cross join lateral\n"
+operator|+
+literal|" (select c,a*c as f from (values 2) as s(a)\n"
+operator|+
+literal|" where c+d=a*c)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+comment|/**    * Tests cross join lateral with correlate variable coming    * from one level up join scope    */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testCrossJoinLateral2
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select * from (values 4) as t (c)\n"
+operator|+
+literal|"cross join lateral\n"
+operator|+
+literal|"(select * from (\n"
+operator|+
+literal|"  select f1+b1 from (values 2) as foo(f1)\n"
+operator|+
+literal|"    join\n"
+operator|+
+literal|"  (select c+1 from (values 3)) as bar(b1)\n"
+operator|+
+literal|"  on f1=b1\n"
+operator|+
+literal|") as r(n) where c=n)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
 comment|/**    * Visitor that checks that every {@link RelNode} in a tree is valid.    *    * @see RelNode#isValid(Litmus, RelNode.Context)    */
 specifier|public
 specifier|static
