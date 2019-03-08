@@ -267,7 +267,7 @@ argument_list|,
 literal|false
 argument_list|)
 decl_stmt|;
-comment|/**    * Which database to use for tests that require a JDBC data source.    *    * The property can take one of the following values:    *<ul>    *<li>HSQLDB(default)</li>    *<li>H2</li>    *<li>MYSQL</li>    *<li>ORACLE</li>    *<li>POSTGRESQL</li>    *</ul>    * If the specified value is not included in the previous list the default is used.    *    *<p>We recommend that casual users use hsqldb, and frequent Calcite developers use MySQL.    * The test suite runs faster against the MySQL database (mainly because of the 0.1s versus 6s    * startup time). You have to populate MySQL manually with the foodmart data set, otherwise there    * will be test failures.</p>    * */
+comment|/**    * Which database to use for tests that require a JDBC data source.    *    *<p>The property can take one of the following values:    *    *<ul>    *<li>HSQLDB (default)</li>    *<li>H2</li>    *<li>MYSQL</li>    *<li>ORACLE</li>    *<li>POSTGRESQL</li>    *</ul>    *    *<p>If the specified value is not included in the previous list, the default    * is used.    *    *<p>We recommend that casual users use hsqldb, and frequent Calcite    * developers use MySQL. The test suite runs faster against the MySQL database    * (mainly because of the 0.1 second versus 6 seconds startup time). You have    * to populate MySQL manually with the foodmart data set, otherwise there will    * be test failures.    */
 specifier|public
 specifier|static
 specifier|final
@@ -299,7 +299,7 @@ literal|"POSTGRESQL"
 argument_list|)
 argument_list|)
 decl_stmt|;
-comment|/**    * Path to the dataset file that should used for integration tests.    *    * If a path is not set, then one of the following values will be used:    *<ul>    *<li>../calcite-test-dataset</li>    *<li>../../calcite-test-dataset</li>    *<li>.</li>    *</ul>    * The first valid path that exists in the filesystem will be chosen.    */
+comment|/**    * Path to the dataset file that should used for integration tests.    *    *<p>If a path is not set, then one of the following values will be used:    *    *<ul>    *<li>../calcite-test-dataset</li>    *<li>../../calcite-test-dataset</li>    *<li>.</li>    *</ul>    * The first valid path that exists in the filesystem will be chosen.    */
 specifier|public
 specifier|static
 specifier|final
@@ -416,7 +416,7 @@ argument_list|,
 literal|true
 argument_list|)
 decl_stmt|;
-comment|/**    * Whether to run Splunk tests.    *    * Disabled by default, because we do not expect Splunk to be installed and populated data set.    */
+comment|/**    * Whether to run Splunk tests.    *    *<p>Disabled by default, because we do not expect Splunk to be installed    * and populated with the data set necessary for testing.    */
 specifier|public
 specifier|static
 specifier|final
@@ -467,7 +467,7 @@ argument_list|,
 literal|true
 argument_list|)
 decl_stmt|;
-comment|/**    * A list of ids designating the queries    * (from query.json in new.hydromatic:foodmart-queries:0.4.1) that should be run as part of    * FoodmartTest.    *    */
+comment|/**    * A list of ids designating the queries    * (from query.json in new.hydromatic:foodmart-queries:0.4.1)    * that should be run as part of FoodmartTest.    */
 comment|// TODO review zabetak:
 comment|// The name of the property is not appropriate. A better alternative would be
 comment|// calcite.test.foodmart.queries.ids. Moreover, I am not in favor of using system properties for
@@ -510,7 +510,7 @@ argument_list|,
 literal|true
 argument_list|)
 decl_stmt|;
-comment|/**    * Which is the name of the default character set.    *    *<p>It is used by {@link org.apache.calcite.sql.validate.SqlValidator}.</p>    */
+comment|/**    * The name of the default character set.    *    *<p>It is used by {@link org.apache.calcite.sql.validate.SqlValidator}.    */
 comment|// TODO review zabetak:
 comment|// What happens if a wrong value is specified?
 specifier|public
@@ -529,7 +529,7 @@ argument_list|,
 literal|"ISO-8859-1"
 argument_list|)
 decl_stmt|;
-comment|/**    * Which is the name of the default national character set.    *    *<p>It is used with the N'string' construct in    * {@link org.apache.calcite.sql.SqlLiteral#SqlLiteral}    * and may be different from the {@link #DEFAULT_CHARSET}.    */
+comment|/**    * The name of the default national character set.    *    *<p>It is used with the N'string' construct in    * {@link org.apache.calcite.sql.SqlLiteral#SqlLiteral}    * and may be different from the {@link #DEFAULT_CHARSET}.    */
 comment|// TODO review zabetak:
 comment|// What happens if a wrong value is specified?
 specifier|public
@@ -548,7 +548,7 @@ argument_list|,
 literal|"ISO-8859-1"
 argument_list|)
 decl_stmt|;
-comment|/**    * Which is the name of the default collation.    *    *<p>It is used in {@link org.apache.calcite.sql.SqlCollation} and    * {@link org.apache.calcite.sql.SqlLiteral#SqlLiteral}</p>    */
+comment|/**    * The name of the default collation.    *    *<p>It is used in {@link org.apache.calcite.sql.SqlCollation} and    * {@link org.apache.calcite.sql.SqlLiteral#SqlLiteral}.    */
 comment|// TODO review zabetak:
 comment|// What happens if a wrong value is specified?
 specifier|public
@@ -567,7 +567,7 @@ argument_list|,
 literal|"ISO-8859-1$en_US"
 argument_list|)
 decl_stmt|;
-comment|/**    * Which is the strength of the default collation.    *    *<p>It is used in {@link org.apache.calcite.sql.SqlCollation} and    * {@link org.apache.calcite.sql.SqlLiteral#SqlLiteral}.</p>    */
+comment|/**    * The strength of the default collation.    *    *<p>It is used in {@link org.apache.calcite.sql.SqlCollation} and    * {@link org.apache.calcite.sql.SqlLiteral#SqlLiteral}.</p>    */
 comment|// TODO review zabetak:
 comment|// What are the allowed values? What happens if a wrong value is specified?
 specifier|public
@@ -586,7 +586,7 @@ argument_list|,
 literal|"primary"
 argument_list|)
 decl_stmt|;
-comment|/**    * Which is the maximum size of the cache of metadata handlers.    *    *<p>A typical value is the number of queries being concurrently prepared multiplied by the    * number of types of metadata.</p>    *    *<p>If the value is less than 0, there is no limit.</p>    */
+comment|/**    * The maximum size of the cache of metadata handlers.    *    *<p>A typical value is the number of queries being concurrently prepared multiplied by the    * number of types of metadata.</p>    *    *<p>If the value is less than 0, there is no limit.</p>    */
 specifier|public
 specifier|static
 specifier|final
@@ -728,7 +728,7 @@ literal|true
 argument_list|)
 return|;
 block|}
-comment|/**    * Returns the value of the system property with the specified name as int, or    * the<code>defaultValue</code> if any of the conditions below hold:    * (i) the property is not defined;    * (ii) the property value cannot be transformed to an int;    * (iii) the property value does not satisfy the checker.    */
+comment|/**    * Returns the value of the system property with the specified name as int, or    * the<code>defaultValue</code> if any of the conditions below hold:    *    *<ol>    *<li>the property is not defined;    *<li>the property value cannot be transformed to an int;    *<li>the property value does not satisfy the checker.    *</ol>    */
 specifier|private
 specifier|static
 name|CalciteSystemProperty

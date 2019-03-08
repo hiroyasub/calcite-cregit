@@ -707,7 +707,7 @@ specifier|final
 name|String
 name|sql
 init|=
-literal|"select t.r AS myRow \n"
+literal|"select t.r AS myRow\n"
 operator|+
 literal|"from (select row(row(1)) r from dept) t"
 decl_stmt|;

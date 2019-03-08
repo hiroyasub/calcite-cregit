@@ -692,7 +692,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * A benchmark of the main methods that are dynamically  * generating and compiling Java code at runtime.  *  * The benchmark examines the behavior of existing methods  * and evaluates the potential of adding a caching layer on top.  */
+comment|/**  * A benchmark of the main methods that are dynamically generating and compiling  * Java code at runtime.  *  *<p>The benchmark examines the behavior of existing methods and evaluates the  * potential of adding a caching layer on top.  */
 end_comment
 
 begin_class

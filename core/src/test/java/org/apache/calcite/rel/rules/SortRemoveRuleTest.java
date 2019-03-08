@@ -590,7 +590,7 @@ name|planAfter
 argument_list|)
 return|;
 block|}
-comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2554">[CALCITE-2554]    * Enrich enumerable join operators with order preserving information</a>.    *    * Since join inputs are sorted, and this join preserves the order of the left input, there    * shouldn't be any sort operator above the join.    */
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2554">[CALCITE-2554]    * Enrich enumerable join operators with order preserving information</a>.    *    *<p>Since join inputs are sorted, and this join preserves the order of the    * left input, there shouldn't be any sort operator above the join.    */
 annotation|@
 name|Test
 specifier|public
@@ -696,7 +696,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2554">[CALCITE-2554]    * Enrich enumerable join operators with order preserving information</a>.    *    * Since join inputs are sorted, and this join preserves the order of the left input, there    * shouldn't be any sort operator above the join.    */
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2554">[CALCITE-2554]    * Enrich enumerable join operators with order preserving information</a>.    *    *<p>Since join inputs are sorted, and this join preserves the order of the    * left input, there shouldn't be any sort operator above the join.    */
 annotation|@
 name|Test
 specifier|public
@@ -802,7 +802,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2554">[CALCITE-2554]    * Enrich enumerable join operators with order preserving information</a>.    *    * Since join inputs are sorted, and this join preserves the order of the left input, there    * shouldn't be any sort operator above the join.    */
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2554">[CALCITE-2554]    * Enrich enumerable join operators with order preserving information</a>.    *    *<p>Since join inputs are sorted, and this join preserves the order of the    * left input, there shouldn't be any sort operator above the join.    */
 annotation|@
 name|Test
 specifier|public
@@ -912,7 +912,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2554">[CALCITE-2554]    * Enrich enumerable join operators with order preserving information</a>.    *    * Since join inputs are sorted, and this join preserves the order of the left input, there    * shouldn't be any sort operator above the join.    */
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2554">[CALCITE-2554]    * Enrich enumerable join operators with order preserving information</a>.    *    *<p>Since join inputs are sorted, and this join preserves the order of the    * left input, there shouldn't be any sort operator above the join.    */
 annotation|@
 name|Test
 specifier|public

@@ -470,7 +470,7 @@ name|RelImportanceComparator
 argument_list|()
 argument_list|)
 decl_stmt|;
-comment|/**    * Maps a {@link VolcanoPlannerPhase} to a set of rule descriptions. Named rules    * may be invoked in their corresponding phase.    *    * See {@link VolcanoPlannerPhaseRuleMappingInitializer} for more information regarding the    * contents of this Map and how it is initialized.    */
+comment|/**    * Maps a {@link VolcanoPlannerPhase} to a set of rule descriptions. Named rules    * may be invoked in their corresponding phase.    *    *<p>See {@link VolcanoPlannerPhaseRuleMappingInitializer} for more    * information regarding the contents of this Map and how it is initialized.    */
 specifier|private
 specifier|final
 name|Map

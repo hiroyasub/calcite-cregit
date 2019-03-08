@@ -1312,7 +1312,7 @@ block|}
 block|}
 return|;
 block|}
-comment|/**    * Sorting (and aggregating) directly on items without a view.    *    * Queries of type: {@code select _MAP['a'] from elastic order by _MAP['b']}    */
+comment|/**    * Sorting (and aggregating) directly on items without a view.    *    *<p>Queries of type:    * {@code select _MAP['a'] from elastic order by _MAP['b']}    */
 annotation|@
 name|Test
 specifier|public

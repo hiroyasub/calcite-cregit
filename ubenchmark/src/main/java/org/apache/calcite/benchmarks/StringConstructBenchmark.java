@@ -324,7 +324,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * A benchmark of the most common patterns that are used to construct gradually String objects.  *  * The benchmark emphasizes on the build patterns that appear in the Calcite project.  */
+comment|/**  * A benchmark of the most common patterns that are used to construct gradually  * String objects.  *  *<p>The benchmark emphasizes on the build patterns that appear in the Calcite  * project.  */
 end_comment
 
 begin_class
@@ -464,7 +464,7 @@ specifier|public
 name|String
 name|appenderType
 decl_stmt|;
-comment|/**      * The maximum number of appends before resetting the appender.      *      * If the value is small then the appender is reinitialized very often, making the instantiation      * of the appender the dominant operation of the benchmark.      */
+comment|/**      * The maximum number of appends before resetting the appender.      *      *<p>If the value is small then the appender is reinitialized very often,      * making the instantiation of the appender the dominant operation of the      * benchmark.      */
 annotation|@
 name|Param
 argument_list|(

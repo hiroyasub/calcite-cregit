@@ -10951,7 +10951,7 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/** Represents a simple Comparision.    *    * Left hand side is a {@link RexNode}, right hand side is a literal.    */
+comment|/** Represents a simple Comparison.    *    *<p>Left hand side is a {@link RexNode}, right hand side is a literal.    */
 specifier|private
 specifier|static
 class|class

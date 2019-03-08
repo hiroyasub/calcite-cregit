@@ -241,7 +241,7 @@ specifier|final
 name|RelDataType
 name|type
 decl_stmt|;
-comment|/**    * Simple binary operators are those operators which expects operands from the same Domain.    *    * Example: simple comparisions (=,&lt;)    * Note: it doesn't contain IN because that is defined on D x D^n    */
+comment|/**    * Simple binary operators are those operators which expects operands from the same Domain.    *    *<p>Example: simple comparisions ({@code =}, {@code<}).    *    *<p>Note: it does not contain {@code IN} because that is defined on D x D^n.    */
 specifier|private
 specifier|static
 specifier|final

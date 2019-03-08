@@ -788,7 +788,7 @@ name|newProjRel
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Simplifies the filter condition using a simplifier created by the information in the    * current call.    *    * The method is an attempt to replicate the simplification behavior of    * {@link RelBuilder#filter(RexNode...)} which cannot be used in the case of copying nodes. The    * main difference with the behavior of that method is that it does not drop entirely the filter    * if the condition is always false.    */
+comment|/**    * Simplifies the filter condition using a simplifier created by the    * information in the current call.    *    *<p>This method is an attempt to replicate the simplification behavior of    * {@link RelBuilder#filter(RexNode...)} which cannot be used in the case of    * copying nodes. The main difference with the behavior of that method is that    * it does not drop entirely the filter if the condition is always false.    */
 specifier|private
 name|RexNode
 name|simplifyFilterCondition
