@@ -4121,6 +4121,105 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+comment|/**    * Lateral join with temporal table, both snapshot's input scan    * and snapshot's period reference outer columns. Should not    * decorrelate join.    */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testCrossJoinTemporalTable1
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select stream *\n"
+operator|+
+literal|"from orders\n"
+operator|+
+literal|"cross join lateral (\n"
+operator|+
+literal|"  select * from products_temporal for system_time\n"
+operator|+
+literal|"  as of orders.rowtime\n"
+operator|+
+literal|"  where orders.productid = products_temporal.productid)\n"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+comment|/**    * Lateral join with temporal table, snapshot's input scan    * reference outer columns, but snapshot's period is static.    * Should be able to decorrelate join.    */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testCrossJoinTemporalTable2
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select stream *\n"
+operator|+
+literal|"from orders\n"
+operator|+
+literal|"cross join lateral (\n"
+operator|+
+literal|"  select * from products_temporal for system_time\n"
+operator|+
+literal|"  as of TIMESTAMP '2011-01-02 00:00:00'\n"
+operator|+
+literal|"  where orders.productid = products_temporal.productid)\n"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+comment|/**    * Lateral join with temporal table, snapshot's period reference    * outer columns. Should not decorrelate join.    */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testCrossJoinTemporalTable3
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select stream *\n"
+operator|+
+literal|"from orders\n"
+operator|+
+literal|"cross join lateral (\n"
+operator|+
+literal|"  select * from products_temporal for system_time\n"
+operator|+
+literal|"  as of orders.rowtime\n"
+operator|+
+literal|"  where products_temporal.productid> 1)\n"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1732">[CALCITE-1732]    * IndexOutOfBoundsException when using LATERAL TABLE with more than one    * field</a>. */
 annotation|@
 name|Test
