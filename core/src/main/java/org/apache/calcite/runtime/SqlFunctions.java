@@ -1662,6 +1662,32 @@ name|toString
 argument_list|()
 return|;
 block|}
+comment|/** SQL ASCII(string) function. */
+specifier|public
+specifier|static
+name|int
+name|ascii
+parameter_list|(
+name|String
+name|s
+parameter_list|)
+block|{
+return|return
+name|s
+operator|.
+name|isEmpty
+argument_list|()
+condition|?
+literal|0
+else|:
+name|s
+operator|.
+name|codePointAt
+argument_list|(
+literal|0
+argument_list|)
+return|;
+block|}
 comment|/** SQL CHARACTER_LENGTH(string) function. */
 specifier|public
 specifier|static
