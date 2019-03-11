@@ -24109,6 +24109,391 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testLastDayFunc
+parameter_list|()
+block|{
+name|tester
+operator|.
+name|setFor
+argument_list|(
+name|SqlStdOperatorTable
+operator|.
+name|LAST_DAY
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"last_day(DATE '2019-02-10')"
+argument_list|,
+literal|"2019-02-28"
+argument_list|,
+literal|"DATE NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"last_day(DATE '2019-06-10')"
+argument_list|,
+literal|"2019-06-30"
+argument_list|,
+literal|"DATE NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"last_day(DATE '2019-07-10')"
+argument_list|,
+literal|"2019-07-31"
+argument_list|,
+literal|"DATE NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"last_day(DATE '2019-09-10')"
+argument_list|,
+literal|"2019-09-30"
+argument_list|,
+literal|"DATE NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"last_day(DATE '2019-12-10')"
+argument_list|,
+literal|"2019-12-31"
+argument_list|,
+literal|"DATE NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"last_day(DATE '9999-12-10')"
+argument_list|,
+literal|"9999-12-31"
+argument_list|,
+literal|"DATE NOT NULL"
+argument_list|)
+expr_stmt|;
+comment|// Edge tests
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"last_day(DATE '1900-01-01')"
+argument_list|,
+literal|"1900-01-31"
+argument_list|,
+literal|"DATE NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"last_day(DATE '1935-02-01')"
+argument_list|,
+literal|"1935-02-28"
+argument_list|,
+literal|"DATE NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"last_day(DATE '1965-09-01')"
+argument_list|,
+literal|"1965-09-30"
+argument_list|,
+literal|"DATE NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"last_day(DATE '1970-01-01')"
+argument_list|,
+literal|"1970-01-31"
+argument_list|,
+literal|"DATE NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"last_day(DATE '2019-02-28')"
+argument_list|,
+literal|"2019-02-28"
+argument_list|,
+literal|"DATE NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"last_day(DATE '2019-12-31')"
+argument_list|,
+literal|"2019-12-31"
+argument_list|,
+literal|"DATE NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"last_day(DATE '2019-01-01')"
+argument_list|,
+literal|"2019-01-31"
+argument_list|,
+literal|"DATE NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"last_day(DATE '2019-06-30')"
+argument_list|,
+literal|"2019-06-30"
+argument_list|,
+literal|"DATE NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"last_day(DATE '2020-02-20')"
+argument_list|,
+literal|"2020-02-29"
+argument_list|,
+literal|"DATE NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"last_day(DATE '2020-02-29')"
+argument_list|,
+literal|"2020-02-29"
+argument_list|,
+literal|"DATE NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"last_day(DATE '9999-12-31')"
+argument_list|,
+literal|"9999-12-31"
+argument_list|,
+literal|"DATE NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkNull
+argument_list|(
+literal|"last_day(cast(null as date))"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"last_day(TIMESTAMP '2019-02-10 02:10:12')"
+argument_list|,
+literal|"2019-02-28"
+argument_list|,
+literal|"DATE NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"last_day(TIMESTAMP '2019-06-10 06:10:16')"
+argument_list|,
+literal|"2019-06-30"
+argument_list|,
+literal|"DATE NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"last_day(TIMESTAMP '2019-07-10 07:10:17')"
+argument_list|,
+literal|"2019-07-31"
+argument_list|,
+literal|"DATE NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"last_day(TIMESTAMP '2019-09-10 09:10:19')"
+argument_list|,
+literal|"2019-09-30"
+argument_list|,
+literal|"DATE NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"last_day(TIMESTAMP '2019-12-10 12:10:22')"
+argument_list|,
+literal|"2019-12-31"
+argument_list|,
+literal|"DATE NOT NULL"
+argument_list|)
+expr_stmt|;
+comment|// Edge tests
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"last_day(TIMESTAMP '1900-01-01 01:01:02')"
+argument_list|,
+literal|"1900-01-31"
+argument_list|,
+literal|"DATE NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"last_day(TIMESTAMP '1935-02-01 02:01:03')"
+argument_list|,
+literal|"1935-02-28"
+argument_list|,
+literal|"DATE NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"last_day(TIMESTAMP '1970-01-01 01:01:02')"
+argument_list|,
+literal|"1970-01-31"
+argument_list|,
+literal|"DATE NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"last_day(TIMESTAMP '2019-02-28 02:28:30')"
+argument_list|,
+literal|"2019-02-28"
+argument_list|,
+literal|"DATE NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"last_day(TIMESTAMP '2019-12-31 12:31:43')"
+argument_list|,
+literal|"2019-12-31"
+argument_list|,
+literal|"DATE NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"last_day(TIMESTAMP '2019-01-01 01:01:02')"
+argument_list|,
+literal|"2019-01-31"
+argument_list|,
+literal|"DATE NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"last_day(TIMESTAMP '2019-06-30 06:30:36')"
+argument_list|,
+literal|"2019-06-30"
+argument_list|,
+literal|"DATE NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"last_day(TIMESTAMP '2020-02-20 02:20:33')"
+argument_list|,
+literal|"2020-02-29"
+argument_list|,
+literal|"DATE NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"last_day(TIMESTAMP '2020-02-29 02:29:31')"
+argument_list|,
+literal|"2020-02-29"
+argument_list|,
+literal|"DATE NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"last_day(TIMESTAMP '9999-12-31 12:31:43')"
+argument_list|,
+literal|"9999-12-31"
+argument_list|,
+literal|"DATE NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkNull
+argument_list|(
+literal|"last_day(cast(null as timestamp))"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testSubstringFunction
 parameter_list|()
 block|{

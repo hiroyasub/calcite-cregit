@@ -769,6 +769,22 @@ operator|.
 name|DATE
 argument_list|)
 decl_stmt|;
+comment|/**    * Type-inference strategy whereby the result type of a call is nullable    * Date.    */
+specifier|public
+specifier|static
+specifier|final
+name|SqlReturnTypeInference
+name|DATE_NULLABLE
+init|=
+name|cascade
+argument_list|(
+name|DATE
+argument_list|,
+name|SqlTypeTransforms
+operator|.
+name|TO_NULLABLE
+argument_list|)
+decl_stmt|;
 comment|/**    * Type-inference strategy whereby the result type of a call is Time(0).    */
 specifier|public
 specifier|static
