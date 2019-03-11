@@ -653,7 +653,7 @@ name|r
 init|=
 literal|null
 decl_stmt|;
-comment|/**      * Setups the random number generator at the beginning of each iteration.      *      * To have relatively comparable results the generator should always use the same seed for the      * whole duration of the benchmark.      */
+comment|/**      * Sets up the random number generator at the beginning of each iteration.      *      *<p>To have relatively comparable results the generator should always use      * the same seed for the whole duration of the benchmark.      */
 annotation|@
 name|Setup
 argument_list|(
@@ -675,7 +675,7 @@ name|seed
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**      * Returns a pseudo random class name which corresponds to an implementor of the RelNode      * interface.      */
+comment|/**      * Returns a pseudo-random class name that corresponds to an implementor of the RelNode      * interface.      */
 specifier|public
 name|String
 name|nextName

@@ -18111,11 +18111,12 @@ name|tester
 operator|.
 name|checkScalarExact
 argument_list|(
-literal|"ASCII(_UTF8'Î©')"
+literal|"ASCII(_UTF8'\u03a9')"
 argument_list|,
 literal|"937"
 argument_list|)
 expr_stmt|;
+comment|// omega
 name|tester
 operator|.
 name|checkNull

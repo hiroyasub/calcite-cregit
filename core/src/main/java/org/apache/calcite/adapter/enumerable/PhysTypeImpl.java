@@ -1470,6 +1470,11 @@ name|format
 argument_list|)
 return|;
 block|}
+annotation|@
+name|SuppressWarnings
+argument_list|(
+literal|"deprecation"
+argument_list|)
 specifier|public
 name|Expression
 name|convertTo

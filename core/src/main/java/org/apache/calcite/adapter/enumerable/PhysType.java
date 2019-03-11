@@ -403,9 +403,10 @@ name|boolean
 name|nullable
 parameter_list|)
 function_decl|;
-comment|/** Converts an enumerable of this physical type to an enumerable that uses a    * given physical type for its rows.    *    * @deprecated As of 1.19, use {@link #convertTo(Expression, JavaRowFormat)}.    * The use of PhysType as a second parameter is misleading since only the row    * format of the expression is affected by the conversion. Moreover it requires    * to have at hand a PhysType object which is not really necessary for achieving    * the desired result.*/
+comment|/** Converts an enumerable of this physical type to an enumerable that uses a    * given physical type for its rows.    *    * @deprecated Use {@link #convertTo(Expression, JavaRowFormat)}.    * The use of PhysType as a second parameter is misleading since only the row    * format of the expression is affected by the conversion. Moreover it requires    * to have at hand a PhysType object which is not really necessary for achieving    * the desired result. */
 annotation|@
 name|Deprecated
+comment|// to be removed before 2.0
 name|Expression
 name|convertTo
 parameter_list|(
