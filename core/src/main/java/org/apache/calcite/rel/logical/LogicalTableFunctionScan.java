@@ -237,7 +237,7 @@ extends|extends
 name|TableFunctionScan
 block|{
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**    * Creates a<code>LogicalTableFunctionScan</code>.    *    * @param cluster        Cluster that this relational expression belongs to    * @param inputs         0 or more relational inputs    * @param rexCall        function invocation expression    * @param elementType    element type of the collection that will implement    *                       this table    * @param rowType        row type produced by function    * @param columnMappings column mappings associated with this function    */
+comment|/**    * Creates a<code>LogicalTableFunctionScan</code>.    *    * @param cluster        Cluster that this relational expression belongs to    * @param inputs         0 or more relational inputs    * @param traitSet       Trait set    * @param rexCall        Function invocation expression    * @param elementType    Element type of the collection that will implement    *                       this table    * @param rowType        Row type produced by function    * @param columnMappings Column mappings associated with this function    */
 specifier|public
 name|LogicalTableFunctionScan
 parameter_list|(

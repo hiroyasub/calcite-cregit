@@ -300,7 +300,7 @@ argument_list|>
 name|columnMappings
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**    * Creates a<code>TableFunctionScan</code>.    *    * @param cluster        Cluster that this relational expression belongs to    * @param inputs         0 or more relational inputs    * @param rexCall        Function invocation expression    * @param elementType    Element type of the collection that will implement    *                       this table    * @param rowType        Row type produced by function    * @param columnMappings Column mappings associated with this function    */
+comment|/**    * Creates a<code>TableFunctionScan</code>.    *    * @param cluster        Cluster that this relational expression belongs to    * @param inputs         0 or more relational inputs    * @param traitSet       Trait set    * @param rexCall        Function invocation expression    * @param elementType    Element type of the collection that will implement    *                       this table    * @param rowType        Row type produced by function    * @param columnMappings Column mappings associated with this function    */
 specifier|protected
 name|TableFunctionScan
 parameter_list|(
@@ -308,7 +308,7 @@ name|RelOptCluster
 name|cluster
 parameter_list|,
 name|RelTraitSet
-name|traits
+name|traitSet
 parameter_list|,
 name|List
 argument_list|<
@@ -336,7 +336,7 @@ name|super
 argument_list|(
 name|cluster
 argument_list|,
-name|traits
+name|traitSet
 argument_list|)
 expr_stmt|;
 name|this
