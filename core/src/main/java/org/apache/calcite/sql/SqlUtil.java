@@ -3132,6 +3132,10 @@ decl_stmt|;
 if|if
 condition|(
 name|from
+operator|!=
+literal|null
+operator|&&
+name|from
 operator|.
 name|getKind
 argument_list|()

@@ -16232,6 +16232,15 @@ argument_list|,
 literal|"Type mismatch in column 1 of UNION"
 argument_list|)
 expr_stmt|;
+name|checkFails
+argument_list|(
+literal|"select 1, ^2^, 3 union\n "
+operator|+
+literal|"select deptno, name, deptno from dept"
+argument_list|,
+literal|"Type mismatch in column 2 of UNION"
+argument_list|)
+expr_stmt|;
 block|}
 annotation|@
 name|Test
