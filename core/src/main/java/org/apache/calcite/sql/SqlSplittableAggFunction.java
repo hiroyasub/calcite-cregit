@@ -848,6 +848,8 @@ operator|.
 name|isApproximate
 argument_list|()
 argument_list|,
+literal|false
+argument_list|,
 name|bottom
 operator|.
 name|getArgList
@@ -1127,6 +1129,8 @@ name|bottom
 operator|.
 name|isApproximate
 argument_list|()
+argument_list|,
+literal|false
 argument_list|,
 name|bottom
 operator|.
@@ -1604,6 +1608,8 @@ name|bottom
 operator|.
 name|isApproximate
 argument_list|()
+argument_list|,
+literal|false
 argument_list|,
 name|bottom
 operator|.

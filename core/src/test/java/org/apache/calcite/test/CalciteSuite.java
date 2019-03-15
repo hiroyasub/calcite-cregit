@@ -1230,6 +1230,10 @@ name|ProfilerTest
 operator|.
 name|class
 block|,
+name|SqlStatisticProviderTest
+operator|.
+name|class
+block|,
 name|SqlAdvisorJdbcTest
 operator|.
 name|class

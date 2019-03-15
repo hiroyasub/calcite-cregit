@@ -95,6 +95,20 @@ name|apache
 operator|.
 name|calcite
 operator|.
+name|statistic
+operator|.
+name|MapSqlStatisticProvider
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
 name|test
 operator|.
 name|CalciteAssert
@@ -1594,13 +1608,7 @@ literal|"edges: ["
 operator|+
 literal|"Step([foodmart, agg_c_14_sales_fact_1997], [foodmart, store], store_id:store_id), "
 operator|+
-literal|"Step([foodmart, agg_c_14_sales_fact_1997], [foodmart, time_by_day],"
-operator|+
-literal|" month_of_year:month_of_year), "
-operator|+
 literal|"Step([foodmart, customer], [foodmart, region], customer_region_id:region_id), "
-operator|+
-literal|"Step([foodmart, customer], [foodmart, store], state_province:store_state), "
 operator|+
 literal|"Step([foodmart, employee], [foodmart, employee], supervisor_id:employee_id), "
 operator|+
@@ -1630,8 +1638,6 @@ literal|" product_class_id:product_class_id), "
 operator|+
 literal|"Step([foodmart, product], [foodmart, store], product_class_id:store_id), "
 operator|+
-literal|"Step([foodmart, product_class], [foodmart, store], product_class_id:region_id), "
-operator|+
 literal|"Step([foodmart, salary], [foodmart, department], department_id:department_id), "
 operator|+
 literal|"Step([foodmart, salary], [foodmart, employee], employee_id:employee_id), "
@@ -1660,9 +1666,15 @@ literal|"Step([foodmart, sales_fact_1997], [foodmart, time_by_day], product_id:t
 operator|+
 literal|"Step([foodmart, sales_fact_1997], [foodmart, time_by_day], time_id:time_id), "
 operator|+
+literal|"Step([foodmart, store], [foodmart, customer], store_state:state_province), "
+operator|+
+literal|"Step([foodmart, store], [foodmart, product_class], region_id:product_class_id), "
+operator|+
 literal|"Step([foodmart, store], [foodmart, region], region_id:region_id), "
 operator|+
-literal|"Step([foodmart, store], [foodmart, warehouse], store_id:stores_id), "
+literal|"Step([foodmart, time_by_day], [foodmart, agg_c_14_sales_fact_1997], month_of_year:month_of_year), "
+operator|+
+literal|"Step([foodmart, warehouse], [foodmart, store], stores_id:store_id), "
 operator|+
 literal|"Step([foodmart, warehouse], [foodmart, warehouse_class],"
 operator|+
@@ -1692,8 +1704,8 @@ condition|(
 name|evolve
 condition|)
 block|{
-comment|// compared to evolve=false, there are a few more nodes (133 vs 117),
-comment|// the same number of paths, and a lot fewer lattices (27 vs 376)
+comment|// compared to evolve=false, there are a few more nodes (137 vs 119),
+comment|// the same number of paths, and a lot fewer lattices (27 vs 388)
 name|assertThat
 argument_list|(
 name|t
@@ -1709,7 +1721,7 @@ argument_list|()
 argument_list|,
 name|is
 argument_list|(
-literal|133
+literal|137
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -1745,7 +1757,7 @@ argument_list|()
 argument_list|,
 name|is
 argument_list|(
-literal|42
+literal|46
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -1767,7 +1779,7 @@ argument_list|()
 argument_list|,
 name|is
 argument_list|(
-literal|117
+literal|119
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -1784,7 +1796,7 @@ argument_list|()
 argument_list|,
 name|is
 argument_list|(
-literal|386
+literal|388
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -1803,7 +1815,7 @@ argument_list|()
 argument_list|,
 name|is
 argument_list|(
-literal|42
+literal|46
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -3120,6 +3132,13 @@ name|SchemaSpec
 operator|.
 name|SCOTT
 argument_list|)
+argument_list|)
+operator|.
+name|statisticProvider
+argument_list|(
+name|MapSqlStatisticProvider
+operator|.
+name|INSTANCE
 argument_list|)
 operator|.
 name|build

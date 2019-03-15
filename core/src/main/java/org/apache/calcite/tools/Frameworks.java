@@ -53,20 +53,6 @@ name|calcite
 operator|.
 name|materialize
 operator|.
-name|MapSqlStatisticProvider
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|materialize
-operator|.
 name|SqlStatisticProvider
 import|;
 end_import
@@ -326,6 +312,20 @@ operator|.
 name|sql2rel
 operator|.
 name|StandardConvertletTable
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|statistic
+operator|.
+name|QuerySqlStatisticProvider
 import|;
 end_import
 
@@ -989,9 +989,9 @@ literal|false
 expr_stmt|;
 name|statisticProvider
 operator|=
-name|MapSqlStatisticProvider
+name|QuerySqlStatisticProvider
 operator|.
-name|INSTANCE
+name|SILENT_CACHING_INSTANCE
 expr_stmt|;
 block|}
 comment|/** Creates a ConfigBuilder, initializing from an existing config. */

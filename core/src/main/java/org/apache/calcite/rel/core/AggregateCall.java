@@ -963,8 +963,7 @@ name|name
 parameter_list|)
 block|{
 return|return
-operator|new
-name|AggregateCall
+name|create
 argument_list|(
 name|aggFunction
 argument_list|,

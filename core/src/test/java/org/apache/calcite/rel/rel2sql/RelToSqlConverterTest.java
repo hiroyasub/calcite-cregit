@@ -6190,23 +6190,25 @@ literal|"SELECT \"DEPT\".\"DEPTNO\","
 operator|+
 literal|" \"EMP\".\"DEPTNO\" AS \"DEPTNO0\"\n"
 operator|+
-literal|"FROM \"JDBC_SCOTT\".\"DEPT\"\n"
+literal|"FROM \"SCOTT\".\"DEPT\"\n"
 operator|+
-literal|"LEFT JOIN \"JDBC_SCOTT\".\"EMP\""
+literal|"LEFT JOIN \"SCOTT\".\"EMP\""
 operator|+
 literal|" ON \"DEPT\".\"DEPTNO\" = \"EMP\".\"DEPTNO\"\n"
 operator|+
 literal|"WHERE \"EMP\".\"JOB\" LIKE 'PRESIDENT'"
 decl_stmt|;
+comment|// DB2 does not have implicit aliases, so generates explicit "AS DEPT"
+comment|// and "AS EMP"
 specifier|final
 name|String
-name|expected2
+name|expectedDb2
 init|=
 literal|"SELECT DEPT.DEPTNO, EMP.DEPTNO AS DEPTNO0\n"
 operator|+
-literal|"FROM JDBC_SCOTT.DEPT AS DEPT\n"
+literal|"FROM SCOTT.DEPT AS DEPT\n"
 operator|+
-literal|"LEFT JOIN JDBC_SCOTT.EMP AS EMP ON DEPT.DEPTNO = EMP.DEPTNO\n"
+literal|"LEFT JOIN SCOTT.EMP AS EMP ON DEPT.DEPTNO = EMP.DEPTNO\n"
 operator|+
 literal|"WHERE EMP.JOB LIKE 'PRESIDENT'"
 decl_stmt|;
@@ -6234,7 +6236,7 @@ argument_list|()
 operator|.
 name|ok
 argument_list|(
-name|expected2
+name|expectedDb2
 argument_list|)
 expr_stmt|;
 block|}
