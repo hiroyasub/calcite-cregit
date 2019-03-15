@@ -1514,6 +1514,26 @@ argument_list|)
 decl_stmt|;
 end_decl_stmt
 
+begin_decl_stmt
+specifier|public
+specifier|static
+specifier|final
+name|SqlSingleOperandTypeChecker
+name|STRING_INTEGER
+init|=
+name|family
+argument_list|(
+name|SqlTypeFamily
+operator|.
+name|STRING
+argument_list|,
+name|SqlTypeFamily
+operator|.
+name|INTEGER
+argument_list|)
+decl_stmt|;
+end_decl_stmt
+
 begin_comment
 comment|/**    * Operand type-checking strategy where two operands must both be in the    * same string type family and last type is INTEGER.    */
 end_comment

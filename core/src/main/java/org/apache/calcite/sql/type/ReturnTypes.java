@@ -923,6 +923,38 @@ operator|.
 name|TO_NULLABLE
 argument_list|)
 decl_stmt|;
+comment|/**    * Type-inference strategy that always returns "VARCHAR(4)".    */
+specifier|public
+specifier|static
+specifier|final
+name|SqlReturnTypeInference
+name|VARCHAR_4
+init|=
+name|explicit
+argument_list|(
+name|SqlTypeName
+operator|.
+name|VARCHAR
+argument_list|,
+literal|4
+argument_list|)
+decl_stmt|;
+comment|/**    * Type-inference strategy that always returns "VARCHAR(4)" with nulls    * allowed if any of the operands allow nulls.    */
+specifier|public
+specifier|static
+specifier|final
+name|SqlReturnTypeInference
+name|VARCHAR_4_NULLABLE
+init|=
+name|cascade
+argument_list|(
+name|VARCHAR_4
+argument_list|,
+name|SqlTypeTransforms
+operator|.
+name|TO_NULLABLE
+argument_list|)
+decl_stmt|;
 comment|/**    * Type-inference strategy that always returns "VARCHAR(2000)".    */
 specifier|public
 specifier|static
@@ -937,6 +969,22 @@ operator|.
 name|VARCHAR
 argument_list|,
 literal|2000
+argument_list|)
+decl_stmt|;
+comment|/**    * Type-inference strategy that always returns "VARCHAR(2000)" with nulls    * allowed if any of the operands allow nulls.    */
+specifier|public
+specifier|static
+specifier|final
+name|SqlReturnTypeInference
+name|VARCHAR_2000_NULLABLE
+init|=
+name|cascade
+argument_list|(
+name|VARCHAR_2000
+argument_list|,
+name|SqlTypeTransforms
+operator|.
+name|TO_NULLABLE
 argument_list|)
 decl_stmt|;
 comment|/**    * Type-inference strategy for Histogram agg support    */
