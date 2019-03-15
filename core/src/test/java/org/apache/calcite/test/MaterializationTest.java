@@ -2222,7 +2222,41 @@ literal|"select count(*) + 1 as c, \"deptno\" from \"emps\" group by \"deptno\""
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Aggregation query at coarser level of aggregation than aggregation    * materialization. Requires an additional aggregate to roll up. Note that    * COUNT is rolled up using SUM. */
+comment|/** Aggregation query at same level of aggregation as aggregation    * materialization with grouping sets. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testAggregateGroupSets1
+parameter_list|()
+block|{
+name|checkMaterialize
+argument_list|(
+literal|"select \"empid\", \"deptno\", count(*) as c, sum(\"salary\") as s from \"emps\" group by cube(\"empid\",\"deptno\")"
+argument_list|,
+literal|"select count(*) + 1 as c, \"deptno\" from \"emps\" group by cube(\"empid\",\"deptno\")"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Aggregation query with different grouping sets, should not    * do materialization. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testAggregateGroupSets2
+parameter_list|()
+block|{
+name|checkNoMaterialize
+argument_list|(
+literal|"select \"empid\", \"deptno\", count(*) as c, sum(\"salary\") as s from \"emps\" group by cube(\"empid\",\"deptno\")"
+argument_list|,
+literal|"select count(*) + 1 as c, \"deptno\" from \"emps\" group by rollup(\"empid\",\"deptno\")"
+argument_list|,
+name|HR_FKUK_MODEL
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Aggregation query at coarser level of aggregation than aggregation    * materialization. Requires an additional aggregate to roll up. Note that    * COUNT is rolled up using SUM0. */
 annotation|@
 name|Test
 specifier|public
@@ -2249,6 +2283,39 @@ operator|+
 literal|"expr#3=[+($t1, $t2)], C=[$t3], deptno=[$t0])\n"
 operator|+
 literal|"  EnumerableAggregate(group=[{1}], agg#0=[$SUM0($2)])\n"
+operator|+
+literal|"    EnumerableTableScan(table=[[hr, m0]])"
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Aggregation query with groupSets at coarser level of aggregation than    * aggregation materialization. Requires an additional aggregate to roll up.    * Note that COUNT is rolled up using SUM0. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testAggregateGroupSetsRollUp
+parameter_list|()
+block|{
+name|checkMaterialize
+argument_list|(
+literal|"select \"empid\", \"deptno\", count(*) as c, sum(\"salary\") as s from \"emps\" "
+operator|+
+literal|"group by \"empid\", \"deptno\""
+argument_list|,
+literal|"select count(*) + 1 as c,  \"deptno\" from \"emps\" group by cube(\"empid\",\"deptno\")"
+argument_list|,
+name|HR_FKUK_MODEL
+argument_list|,
+name|CalciteAssert
+operator|.
+name|checkResultContains
+argument_list|(
+literal|"EnumerableCalc(expr#0..2=[{inputs}], expr#3=[1], "
+operator|+
+literal|"expr#4=[+($t2, $t3)], C=[$t4], deptno=[$t1])\n"
+operator|+
+literal|"  EnumerableAggregate(group=[{0, 1}], groups=[[{0, 1}, {0}, {1}, {}]], agg#0=[$SUM0($2)])\n"
 operator|+
 literal|"    EnumerableTableScan(table=[[hr, m0]])"
 argument_list|)
