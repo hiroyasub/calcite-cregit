@@ -95,6 +95,20 @@ name|calcite
 operator|.
 name|plan
 operator|.
+name|RelOptRule
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
 name|RelOptUtil
 import|;
 end_import
@@ -140,22 +154,6 @@ operator|.
 name|schema
 operator|.
 name|SchemaPlus
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|test
-operator|.
-name|CalciteAssert
-operator|.
-name|AssertQuery
 import|;
 end_import
 
@@ -2076,6 +2074,37 @@ name|String
 name|expectedExplain
 parameter_list|)
 block|{
+specifier|final
+name|RelOptRule
+index|[]
+name|rules
+init|=
+block|{
+name|AbstractMaterializedViewRule
+operator|.
+name|INSTANCE_PROJECT_FILTER
+block|,
+name|AbstractMaterializedViewRule
+operator|.
+name|INSTANCE_FILTER
+block|,
+name|AbstractMaterializedViewRule
+operator|.
+name|INSTANCE_PROJECT_JOIN
+block|,
+name|AbstractMaterializedViewRule
+operator|.
+name|INSTANCE_JOIN
+block|,
+name|AbstractMaterializedViewRule
+operator|.
+name|INSTANCE_PROJECT_AGGREGATE
+block|,
+name|AbstractMaterializedViewRule
+operator|.
+name|INSTANCE_AGGREGATE
+block|}
+decl_stmt|;
 name|MaterializationService
 operator|.
 name|setThreadLocal
@@ -2089,9 +2118,6 @@ operator|.
 name|clear
 argument_list|()
 expr_stmt|;
-name|AssertQuery
-name|that
-init|=
 name|foodmartLatticeModel
 argument_list|(
 name|statisticProvider
@@ -2110,13 +2136,11 @@ name|enableMaterializations
 argument_list|(
 literal|true
 argument_list|)
-decl_stmt|;
 comment|// Disable materialization rules from this test. For some reason, there is
 comment|// a weird interaction between these rules and the lattice rewriting that
 comment|// produces non-deterministic rewriting (even when only lattices are present).
 comment|// For more context, see
 comment|//<a href="https://issues.apache.org/jira/browse/CALCITE-2953">[CALCITE-2953]</a>.
-name|that
 operator|.
 name|withHook
 argument_list|(
@@ -2132,34 +2156,11 @@ argument_list|>
 operator|)
 name|planner
 lambda|->
-block|{
-name|ImmutableList
+name|Arrays
 operator|.
-name|of
+name|asList
 argument_list|(
-name|AbstractMaterializedViewRule
-operator|.
-name|INSTANCE_PROJECT_FILTER
-argument_list|,
-name|AbstractMaterializedViewRule
-operator|.
-name|INSTANCE_FILTER
-argument_list|,
-name|AbstractMaterializedViewRule
-operator|.
-name|INSTANCE_PROJECT_JOIN
-argument_list|,
-name|AbstractMaterializedViewRule
-operator|.
-name|INSTANCE_JOIN
-argument_list|,
-name|AbstractMaterializedViewRule
-operator|.
-name|INSTANCE_PROJECT_AGGREGATE
-argument_list|,
-name|AbstractMaterializedViewRule
-operator|.
-name|INSTANCE_AGGREGATE
+name|rules
 argument_list|)
 operator|.
 name|forEach
@@ -2168,13 +2169,9 @@ name|planner
 operator|::
 name|removeRule
 argument_list|)
-expr_stmt|;
-block|}
 argument_list|)
-expr_stmt|;
 comment|// disable for MySQL; times out running star-join query
 comment|// disable for H2; it thinks our generated SQL has invalid syntax
-name|that
 operator|.
 name|enable
 argument_list|(

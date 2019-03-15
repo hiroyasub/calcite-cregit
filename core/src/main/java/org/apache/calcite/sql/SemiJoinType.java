@@ -80,16 +80,16 @@ specifier|public
 enum|enum
 name|SemiJoinType
 block|{
-comment|/**    * Inner join    */
+comment|/**    * Inner join.    */
 name|INNER
 block|,
-comment|/**    * Left-outer join    */
+comment|/**    * Left-outer join.    */
 name|LEFT
 block|,
-comment|/**    * Semi-join    *<p>Similar to from A ... where a in (select b from B ...)</p>    */
+comment|/**    * Semi-join.    *    *<p>For example, {@code EMP semi-join DEPT} finds all {@code EMP} records    * that have a corresponding {@code DEPT} record:    *    *<blockquote><pre>    * SELECT * FROM EMP    * WHERE EXISTS (SELECT 1 FROM DEPT    *     WHERE DEPT.DEPTNO = EMP.DEPTNO)</pre>    *</blockquote>    */
 name|SEMI
 block|,
-comment|/**    * Anti-join    *<p>Similar to from A ... where a NOT in (select b from B ...)</p>    *<p>Note: if B.b is nullable and B has nulls, no rows must be returned</p>    */
+comment|/**    * Anti-join.    *    *<p>For example, {@code EMP anti-join DEPT} finds all {@code EMP} records    * that do not have a corresponding {@code DEPT} record:    *    *<blockquote><pre>    * SELECT * FROM EMP    * WHERE NOT EXISTS (SELECT 1 FROM DEPT    *     WHERE DEPT.DEPTNO = EMP.DEPTNO)</pre>    *</blockquote>    */
 name|ANTI
 block|;
 comment|/** Lower-case name. */
