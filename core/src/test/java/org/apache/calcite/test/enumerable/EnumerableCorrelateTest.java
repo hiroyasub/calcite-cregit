@@ -103,6 +103,22 @@ name|rel
 operator|.
 name|rules
 operator|.
+name|FilterCorrelateRule
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|rules
+operator|.
 name|JoinToCorrelateRule
 import|;
 end_import
@@ -409,6 +425,111 @@ name|returnsUnordered
 argument_list|(
 literal|"empid=100; name=Bill"
 argument_list|,
+literal|"empid=110; name=Theodore"
+argument_list|,
+literal|"empid=150; name=Sebastian"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2930">[CALCITE-2930]    * FilterCorrelateRule on a Correlate with SemiJoinType SEMI (or ANTI)    * throws IllegalStateException</a> */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|semiJoinCorrelateWithFilterCorrelateRule
+parameter_list|()
+block|{
+name|tester
+argument_list|(
+literal|false
+argument_list|,
+operator|new
+name|JdbcTest
+operator|.
+name|HrSchema
+argument_list|()
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select empid, name from emps e where e.deptno in (select d.deptno from depts d) and e.empid> 100"
+argument_list|)
+operator|.
+name|withHook
+argument_list|(
+name|Hook
+operator|.
+name|PLANNER
+argument_list|,
+operator|(
+name|Consumer
+argument_list|<
+name|RelOptPlanner
+argument_list|>
+operator|)
+name|planner
+lambda|->
+block|{
+comment|// force the semi-join to run via EnumerableCorrelate instead of EnumerableJoin/SemiJoin,
+comment|// and push the 'empid> 100' filter into the Correlate
+name|planner
+operator|.
+name|addRule
+argument_list|(
+name|JoinToCorrelateRule
+operator|.
+name|SEMI
+argument_list|)
+expr_stmt|;
+name|planner
+operator|.
+name|addRule
+argument_list|(
+name|FilterCorrelateRule
+operator|.
+name|INSTANCE
+argument_list|)
+expr_stmt|;
+name|planner
+operator|.
+name|removeRule
+argument_list|(
+name|EnumerableRules
+operator|.
+name|ENUMERABLE_JOIN_RULE
+argument_list|)
+expr_stmt|;
+name|planner
+operator|.
+name|removeRule
+argument_list|(
+name|EnumerableRules
+operator|.
+name|ENUMERABLE_SEMI_JOIN_RULE
+argument_list|)
+expr_stmt|;
+block|}
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+literal|""
+operator|+
+literal|"EnumerableCalc(expr#0..2=[{inputs}], empid=[$t0], name=[$t2])\n"
+operator|+
+literal|"  EnumerableCorrelate(correlation=[$cor3], joinType=[semi], requiredColumns=[{1}])\n"
+operator|+
+literal|"    EnumerableCalc(expr#0..4=[{inputs}], expr#5=[100], expr#6=[>($t0, $t5)], proj#0..2=[{exprs}], $condition=[$t6])\n"
+operator|+
+literal|"      EnumerableTableScan(table=[[s, emps]])\n"
+operator|+
+literal|"    EnumerableCalc(expr#0..3=[{inputs}], expr#4=[$cor3], expr#5=[$t4.deptno], expr#6=[=($t5, $t0)], proj#0..3=[{exprs}], $condition=[$t6])\n"
+operator|+
+literal|"      EnumerableTableScan(table=[[s, depts]])"
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
 literal|"empid=110; name=Theodore"
 argument_list|,
 literal|"empid=150; name=Sebastian"
