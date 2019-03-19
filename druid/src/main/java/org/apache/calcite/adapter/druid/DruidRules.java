@@ -3726,6 +3726,11 @@ name|allHaveFilters
 operator|)
 comment|// filters get extracted
 operator|||
+name|aggCall
+operator|.
+name|hasFilter
+argument_list|()
+operator|&&
 name|project
 operator|.
 name|getProjects

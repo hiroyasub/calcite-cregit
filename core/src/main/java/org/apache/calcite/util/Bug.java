@@ -236,6 +236,15 @@ name|CALCITE_2776_FIXED
 init|=
 literal|false
 decl_stmt|;
+comment|/** Whether    *<a href="https://issues.apache.org/jira/browse/CALCITE-2933">[CALCITE-2933]    * In Druid adapter, expression like "cast(cast(\"timestamp\" as timestamp) as varchar)"    * returns as epoch millisecond</a> is fixed. */
+specifier|public
+specifier|static
+specifier|final
+name|boolean
+name|CALCITE_2933_FIXED
+init|=
+literal|false
+decl_stmt|;
 comment|/**    * Use this to flag temporary code.    */
 specifier|public
 specifier|static
