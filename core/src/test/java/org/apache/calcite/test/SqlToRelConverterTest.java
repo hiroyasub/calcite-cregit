@@ -8516,6 +8516,132 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2936">[CALCITE-2936]    * Existential sub-query that has aggregate without grouping key    * should be simplified to constant boolean expression</a>.    */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSimplifyExistsAggregateSubQuery
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"SELECT e1.empno\n"
+operator|+
+literal|"FROM emp e1 where exists\n"
+operator|+
+literal|"(select avg(sal) from emp e2 where e1.empno = e2.empno)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|decorrelate
+argument_list|(
+literal|true
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSimplifyNotExistsAggregateSubQuery
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"SELECT e1.empno\n"
+operator|+
+literal|"FROM emp e1 where not exists\n"
+operator|+
+literal|"(select avg(sal) from emp e2 where e1.empno = e2.empno)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|decorrelate
+argument_list|(
+literal|true
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2936">[CALCITE-2936]    * Existential sub-query that has Values with at least 1 tuple    * should be simplified to constant boolean expression</a>.    */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSimplifyExistsValuesSubQuery
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select deptno\n"
+operator|+
+literal|"from EMP\n"
+operator|+
+literal|"where exists (values 10)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|decorrelate
+argument_list|(
+literal|true
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSimplifyNotExistsValuesSubQuery
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select deptno\n"
+operator|+
+literal|"from EMP\n"
+operator|+
+literal|"where not exists (values 10)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|decorrelate
+argument_list|(
+literal|true
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
 comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-695">[CALCITE-695]    * SqlSingleValueAggFunction is created when it may not be needed</a>.    */
 annotation|@
 name|Test
