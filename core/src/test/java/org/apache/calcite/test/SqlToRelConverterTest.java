@@ -9039,6 +9039,42 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+comment|/**    * Test case for decorrelating sub-query that has aggregate with    * grouping sets.    */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testCorrelationAggregateGroupSets
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select sum(e1.empno)\n"
+operator|+
+literal|"from emp e1, dept d1\n"
+operator|+
+literal|"where e1.deptno = d1.deptno\n"
+operator|+
+literal|"and e1.sal> (select avg(e2.sal) from emp e2\n"
+operator|+
+literal|"  where e2.deptno = d1.deptno group by cube(comm, mgr))"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|decorrelate
+argument_list|(
+literal|true
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
 annotation|@
 name|Test
 specifier|public
