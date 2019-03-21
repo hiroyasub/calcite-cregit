@@ -1598,7 +1598,7 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-specifier|private
+specifier|protected
 name|void
 name|registerMaterializations
 parameter_list|()

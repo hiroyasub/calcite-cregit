@@ -57,20 +57,6 @@ name|calcite
 operator|.
 name|plan
 operator|.
-name|RelOptMaterializations
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|plan
-operator|.
 name|RelOptPlanner
 import|;
 end_import
@@ -1476,35 +1462,6 @@ condition|)
 block|{
 return|return;
 block|}
-comment|// Obtain applicable (filtered) materializations
-comment|// TODO: Filtering of relevant materializations needs to be
-comment|// improved so we gather only materializations that might
-comment|// actually generate a valid rewriting.
-specifier|final
-name|List
-argument_list|<
-name|RelOptMaterialization
-argument_list|>
-name|applicableMaterializations
-init|=
-name|RelOptMaterializations
-operator|.
-name|getApplicableMaterializations
-argument_list|(
-name|node
-argument_list|,
-name|materializations
-argument_list|)
-decl_stmt|;
-if|if
-condition|(
-operator|!
-name|applicableMaterializations
-operator|.
-name|isEmpty
-argument_list|()
-condition|)
-block|{
 comment|// 2. Initialize all query related auxiliary data structures
 comment|// that will be used throughout query rewriting process
 comment|// Generate query table references
@@ -1675,7 +1632,7 @@ control|(
 name|RelOptMaterialization
 name|materialization
 range|:
-name|applicableMaterializations
+name|materializations
 control|)
 block|{
 name|RelNode
@@ -1729,6 +1686,73 @@ name|materialization
 operator|.
 name|queryRel
 expr_stmt|;
+block|}
+comment|// Extract view table references
+specifier|final
+name|Set
+argument_list|<
+name|RelTableRef
+argument_list|>
+name|viewTableRefs
+init|=
+name|mq
+operator|.
+name|getTableReferences
+argument_list|(
+name|viewNode
+argument_list|)
+decl_stmt|;
+if|if
+condition|(
+name|viewTableRefs
+operator|==
+literal|null
+condition|)
+block|{
+comment|// Skip it
+continue|continue;
+block|}
+comment|// Filter relevant materializations. Currently, we only check whether
+comment|// the materialization contains any table that is used by the query
+comment|// TODO: Filtering of relevant materializations can be improved to be more fine-grained.
+name|boolean
+name|applicable
+init|=
+literal|false
+decl_stmt|;
+for|for
+control|(
+name|RelTableRef
+name|tableRef
+range|:
+name|viewTableRefs
+control|)
+block|{
+if|if
+condition|(
+name|queryTableRefs
+operator|.
+name|contains
+argument_list|(
+name|tableRef
+argument_list|)
+condition|)
+block|{
+name|applicable
+operator|=
+literal|true
+expr_stmt|;
+break|break;
+block|}
+block|}
+if|if
+condition|(
+operator|!
+name|applicable
+condition|)
+block|{
+comment|// Skip it
+continue|continue;
 block|}
 comment|// 3.1. View checks before proceeding
 if|if
@@ -1809,31 +1833,6 @@ argument_list|,
 name|viewPred
 argument_list|)
 decl_stmt|;
-comment|// Extract view table references
-specifier|final
-name|Set
-argument_list|<
-name|RelTableRef
-argument_list|>
-name|viewTableRefs
-init|=
-name|mq
-operator|.
-name|getTableReferences
-argument_list|(
-name|viewNode
-argument_list|)
-decl_stmt|;
-if|if
-condition|(
-name|viewTableRefs
-operator|==
-literal|null
-condition|)
-block|{
-comment|// Skip it
-continue|continue;
-block|}
 comment|// Extract view tables
 name|MatchModality
 name|matchModality
@@ -2987,7 +2986,6 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|// end else
-block|}
 block|}
 block|}
 block|}
