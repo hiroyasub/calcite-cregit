@@ -1809,9 +1809,12 @@ name|RelNode
 argument_list|>
 name|nodes
 init|=
-name|RelMetadataQuery
+name|rel
 operator|.
-name|instance
+name|getCluster
+argument_list|()
+operator|.
+name|getMetadataQuery
 argument_list|()
 operator|.
 name|getNodeTypes
