@@ -9533,6 +9533,29 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+comment|/**    * Test case for<a href="https://issues.apache.org/jira/browse/CALCITE-2900">[CALCITE-2900]    * RelStructuredTypeFlattener generates wrong types on nested columns</a>.    */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testNestedColumnType
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select empa.home_address.zip from sales.emp_address empa where empa.home_address.city = 'abc'"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
 annotation|@
 name|Test
 specifier|public
