@@ -489,7 +489,6 @@ name|Aggregate
 extends|extends
 name|SingleRel
 block|{
-comment|/**    * @see org.apache.calcite.util.Bug#CALCITE_461_FIXED    */
 specifier|public
 specifier|static
 name|boolean

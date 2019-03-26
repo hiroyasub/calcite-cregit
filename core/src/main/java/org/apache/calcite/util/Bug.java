@@ -164,15 +164,6 @@ name|CALCITE_194_FIXED
 init|=
 literal|false
 decl_stmt|;
-comment|/** Whether the remaining issues raised in    *<a href="https://issues.apache.org/jira/browse/CALCITE-461">[CALCITE-461]    * Convert more planner rules to handle grouping sets</a> are fixed.    *    *<p>Now that [CALCITE-461] is fixed, the tracking bug is    *<a href="https://issues.apache.org/jira/browse/CALCITE-574">[CALCITE-574]    * Remove org.apache.calcite.util.Bug.CALCITE_461_FIXED</a>. */
-specifier|public
-specifier|static
-specifier|final
-name|boolean
-name|CALCITE_461_FIXED
-init|=
-literal|false
-decl_stmt|;
 comment|/** Whether    *<a href="https://issues.apache.org/jira/browse/CALCITE-673">[CALCITE-673]    * Timeout executing joins against MySQL</a> is fixed. */
 specifier|public
 specifier|static
