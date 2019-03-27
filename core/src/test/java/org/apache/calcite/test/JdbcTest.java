@@ -15258,6 +15258,66 @@ literal|"Cannot apply 'LAG' to arguments of type 'LAG(<INTEGER>,<DATE>,<INTEGER>
 argument_list|)
 expr_stmt|;
 block|}
+comment|/**    * Tests LAG function with IGNORE NULLS.    */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testLagIgnoreNulls
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select\n"
+operator|+
+literal|"  lag(rn, expected, 42) ignore nulls over (w) l,\n"
+operator|+
+literal|"  lead(rn, expected) over (w),\n"
+operator|+
+literal|"  lead(rn, expected) over (order by expected)\n"
+operator|+
+literal|"from (values"
+operator|+
+literal|"  (1,0,1),\n"
+operator|+
+literal|"  (2,0,1),\n"
+operator|+
+literal|"  (2,0,1),\n"
+operator|+
+literal|"  (3,1,2),\n"
+operator|+
+literal|"  (4,0,3),\n"
+operator|+
+literal|"  (cast(null as int),0,3),\n"
+operator|+
+literal|"  (5,0,3),\n"
+operator|+
+literal|"  (6,0,3),\n"
+operator|+
+literal|"  (7,1,4),\n"
+operator|+
+literal|"  (8,1,4)) as t(rn,val,expected)\n"
+operator|+
+literal|"window w as (order by rn)"
+decl_stmt|;
+name|CalciteAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|query
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|throws_
+argument_list|(
+literal|"IGNORE NULLS not supported"
+argument_list|)
+expr_stmt|;
+block|}
 comment|/**    * Tests NTILE(2).    */
 annotation|@
 name|Test

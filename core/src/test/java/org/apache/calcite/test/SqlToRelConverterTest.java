@@ -6719,6 +6719,57 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+comment|/**    * Tests that a window with specifying null treatment.    */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testOverNullTreatmentWindow
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select\n"
+operator|+
+literal|"lead(deptno, 1) over w,\n "
+operator|+
+literal|"lead(deptno, 2) ignore nulls over w,\n"
+operator|+
+literal|"lead(deptno, 3) respect nulls over w,\n"
+operator|+
+literal|"lead(deptno, 1) over w,\n"
+operator|+
+literal|"lag(deptno, 2) ignore nulls over w,\n"
+operator|+
+literal|"lag(deptno, 2) respect nulls over w,\n"
+operator|+
+literal|"first_value(deptno) over w,\n"
+operator|+
+literal|"first_value(deptno) ignore nulls over w,\n"
+operator|+
+literal|"first_value(deptno) respect nulls over w,\n"
+operator|+
+literal|"last_value(deptno) over w,\n"
+operator|+
+literal|"last_value(deptno) ignore nulls over w,\n"
+operator|+
+literal|"last_value(deptno) respect nulls over w\n"
+operator|+
+literal|" from emp\n"
+operator|+
+literal|"window w as (order by empno)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
 comment|/**    * Tests that a window with a FOLLOWING bound becomes BETWEEN CURRENT ROW    * AND FOLLOWING.    */
 annotation|@
 name|Test

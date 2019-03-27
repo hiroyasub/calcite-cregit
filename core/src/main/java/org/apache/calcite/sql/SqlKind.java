@@ -141,6 +141,18 @@ block|,
 comment|/**    * OVER operator    */
 name|OVER
 block|,
+comment|/**    * RESPECT NULLS operator    */
+name|RESPECT_NULLS
+argument_list|(
+literal|"RESPECT NULLS"
+argument_list|)
+block|,
+comment|/**    * IGNORE NULLS operator    */
+name|IGNORE_NULLS
+argument_list|(
+literal|"IGNORE NULLS"
+argument_list|)
+block|,
 comment|/**    * FILTER operator    */
 name|FILTER
 block|,
@@ -1030,6 +1042,14 @@ argument_list|,
 name|PREV
 argument_list|,
 name|NEXT
+argument_list|,
+name|FILTER
+argument_list|,
+name|WITHIN_GROUP
+argument_list|,
+name|IGNORE_NULLS
+argument_list|,
+name|RESPECT_NULLS
 argument_list|,
 name|DESCENDING
 argument_list|,

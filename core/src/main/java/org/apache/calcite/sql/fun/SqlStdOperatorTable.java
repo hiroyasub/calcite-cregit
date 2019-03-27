@@ -253,6 +253,20 @@ name|calcite
 operator|.
 name|sql
 operator|.
+name|SqlNullTreatmentOperator
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
 name|SqlNumericLiteral
 import|;
 end_import
@@ -3666,6 +3680,36 @@ operator|new
 name|SqlRowOperator
 argument_list|(
 literal|"ROW"
+argument_list|)
+decl_stmt|;
+comment|/**<code>IGNORE NULLS</code> operator. */
+specifier|public
+specifier|static
+specifier|final
+name|SqlNullTreatmentOperator
+name|IGNORE_NULLS
+init|=
+operator|new
+name|SqlNullTreatmentOperator
+argument_list|(
+name|SqlKind
+operator|.
+name|IGNORE_NULLS
+argument_list|)
+decl_stmt|;
+comment|/**<code>RESPECT NULLS</code> operator. */
+specifier|public
+specifier|static
+specifier|final
+name|SqlNullTreatmentOperator
+name|RESPECT_NULLS
+init|=
+operator|new
+name|SqlNullTreatmentOperator
+argument_list|(
+name|SqlKind
+operator|.
+name|RESPECT_NULLS
 argument_list|)
 decl_stmt|;
 comment|/**    * A special operator for the subtraction of two DATETIMEs. The format of    * DATETIME subtraction is:    *    *<blockquote><code>"("&lt;datetime&gt; "-"&lt;datetime&gt; ")"    *&lt;interval qualifier&gt;</code></blockquote>    *    *<p>This operator is special since it needs to hold the    * additional interval qualifier specification.</p>    */

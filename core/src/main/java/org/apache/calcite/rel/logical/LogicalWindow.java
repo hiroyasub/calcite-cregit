@@ -955,6 +955,11 @@ name|over
 operator|.
 name|isDistinct
 argument_list|()
+argument_list|,
+name|over
+operator|.
+name|ignoreNulls
+argument_list|()
 argument_list|)
 decl_stmt|;
 name|aggCalls

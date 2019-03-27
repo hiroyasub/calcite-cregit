@@ -163,6 +163,11 @@ specifier|final
 name|boolean
 name|distinct
 decl_stmt|;
+specifier|private
+specifier|final
+name|boolean
+name|ignoreNulls
+decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
 comment|/**    * Creates a RexOver.    *    *<p>For example, "SUM(DISTINCT x) OVER (ROWS 3 PRECEDING)" is represented    * as:    *    *<ul>    *<li>type = Integer,    *<li>op = {@link org.apache.calcite.sql.fun.SqlStdOperatorTable#SUM},    *<li>operands = { {@link RexFieldAccess}("x") }    *<li>window = {@link SqlWindow}(ROWS 3 PRECEDING)    *</ul>    *    * @param type     Result type    * @param op       Aggregate operator    * @param operands Operands list    * @param window   Window specification    * @param distinct Aggregate operator is applied on distinct elements    */
 name|RexOver
@@ -184,6 +189,9 @@ name|window
 parameter_list|,
 name|boolean
 name|distinct
+parameter_list|,
+name|boolean
+name|ignoreNulls
 parameter_list|)
 block|{
 name|super
@@ -222,6 +230,12 @@ name|distinct
 operator|=
 name|distinct
 expr_stmt|;
+name|this
+operator|.
+name|ignoreNulls
+operator|=
+name|ignoreNulls
+expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
 comment|/**    * Returns the aggregate operator for this expression.    */
@@ -254,6 +268,15 @@ parameter_list|()
 block|{
 return|return
 name|distinct
+return|;
+block|}
+specifier|public
+name|boolean
+name|ignoreNulls
+parameter_list|()
+block|{
+return|return
+name|ignoreNulls
 return|;
 block|}
 annotation|@
@@ -313,6 +336,19 @@ argument_list|(
 literal|")"
 argument_list|)
 expr_stmt|;
+if|if
+condition|(
+name|ignoreNulls
+condition|)
+block|{
+name|sb
+operator|.
+name|append
+argument_list|(
+literal|" IGNORE NULLS"
+argument_list|)
+expr_stmt|;
+block|}
 if|if
 condition|(
 name|withType

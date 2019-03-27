@@ -1375,6 +1375,8 @@ literal|false
 argument_list|,
 literal|false
 argument_list|,
+literal|false
+argument_list|,
 name|Collections
 operator|.
 name|singletonList

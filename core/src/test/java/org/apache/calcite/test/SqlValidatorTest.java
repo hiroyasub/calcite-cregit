@@ -4034,7 +4034,7 @@ argument_list|,
 literal|"TIME(0) NOT NULL"
 argument_list|)
 expr_stmt|;
-comment|//  with TZ ?
+comment|//  with TZ?
 name|checkWholeExpFails
 argument_list|(
 literal|"LOCALTIME(-1)"
@@ -4096,7 +4096,7 @@ argument_list|,
 literal|"TIMESTAMP(0) NOT NULL"
 argument_list|)
 expr_stmt|;
-comment|//  with TZ ?
+comment|// with TZ?
 name|checkWholeExpFails
 argument_list|(
 literal|"LOCALTIMESTAMP(-1)"
@@ -4209,7 +4209,7 @@ argument_list|,
 literal|"TIME(0) NOT NULL"
 argument_list|)
 expr_stmt|;
-comment|//  with TZ ?
+comment|// with TZ?
 name|checkWholeExpFails
 argument_list|(
 literal|"current_time(-1)"
@@ -11648,6 +11648,280 @@ operator|.
 name|fails
 argument_list|(
 literal|"RANK or DENSE_RANK functions require ORDER BY clause in window specification"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-883">[CALCITE-883]    * Give error if the aggregate function don't support null treatment</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testWindowFunctionsIgnoreNulls
+parameter_list|()
+block|{
+name|winSql
+argument_list|(
+literal|"select lead(sal, 4) over (w)\n"
+operator|+
+literal|" from emp window w as (order by empno)"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|winSql
+argument_list|(
+literal|"select lead(sal, 4) IGNORE NULLS over (w)\n"
+operator|+
+literal|" from emp window w as (order by empno)"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|winSql
+argument_list|(
+literal|"select lag(sal, 4) over (w)\n"
+operator|+
+literal|" from emp window w as (order by empno)"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|winSql
+argument_list|(
+literal|"select lag(sal, 4) IGNORE NULLS over (w)\n"
+operator|+
+literal|" from emp window w as (order by empno)"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|winSql
+argument_list|(
+literal|"select first_value(sal) over (w)\n"
+operator|+
+literal|" from emp window w as (order by empno)"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|winSql
+argument_list|(
+literal|"select first_value(sal) IGNORE NULLS over (w)\n"
+operator|+
+literal|" from emp window w as (order by empno)"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|winSql
+argument_list|(
+literal|"select last_value(sal) over (w)\n"
+operator|+
+literal|" from emp window w as (order by empno)"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|winSql
+argument_list|(
+literal|"select last_value(sal) IGNORE NULLS over (w)\n"
+operator|+
+literal|" from emp window w as (order by empno)"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|winSql
+argument_list|(
+literal|"select ^sum(sal)^ IGNORE NULLS over (w)\n"
+operator|+
+literal|" from emp window w as (order by empno)"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Cannot specify IGNORE NULLS or RESPECT NULLS following 'SUM'"
+argument_list|)
+expr_stmt|;
+name|winSql
+argument_list|(
+literal|"select ^count(sal)^ IGNORE NULLS over (w)\n"
+operator|+
+literal|" from emp window w as (order by empno)"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Cannot specify IGNORE NULLS or RESPECT NULLS following 'COUNT'"
+argument_list|)
+expr_stmt|;
+name|winSql
+argument_list|(
+literal|"select ^avg(sal)^ IGNORE NULLS \n"
+operator|+
+literal|" from emp"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Cannot specify IGNORE NULLS or RESPECT NULLS following 'AVG'"
+argument_list|)
+expr_stmt|;
+name|winSql
+argument_list|(
+literal|"select ^abs(sal)^ IGNORE NULLS \n"
+operator|+
+literal|" from emp"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Cannot specify IGNORE NULLS or RESPECT NULLS following 'ABS'"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-883">[CALCITE-883]    * Give error if the aggregate function don't support null treatment</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testWindowFunctionsRespectNulls
+parameter_list|()
+block|{
+name|winSql
+argument_list|(
+literal|"select lead(sal, 4) over (w)\n"
+operator|+
+literal|" from emp window w as (order by empno)"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|winSql
+argument_list|(
+literal|"select lead(sal, 4) RESPECT NULLS over (w)\n"
+operator|+
+literal|" from emp window w as (order by empno)"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|winSql
+argument_list|(
+literal|"select lag(sal, 4) over (w)\n"
+operator|+
+literal|" from emp window w as (order by empno)"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|winSql
+argument_list|(
+literal|"select lag(sal, 4) RESPECT NULLS over (w)\n"
+operator|+
+literal|" from emp window w as (order by empno)"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|winSql
+argument_list|(
+literal|"select first_value(sal) over (w)\n"
+operator|+
+literal|" from emp window w as (order by empno)"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|winSql
+argument_list|(
+literal|"select first_value(sal) RESPECT NULLS over (w)\n"
+operator|+
+literal|" from emp window w as (order by empno)"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|winSql
+argument_list|(
+literal|"select last_value(sal) over (w)\n"
+operator|+
+literal|" from emp window w as (order by empno)"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|winSql
+argument_list|(
+literal|"select last_value(sal) RESPECT NULLS over (w)\n"
+operator|+
+literal|" from emp window w as (order by empno)"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|winSql
+argument_list|(
+literal|"select ^sum(sal)^ RESPECT NULLS over (w)\n"
+operator|+
+literal|" from emp window w as (order by empno)"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Cannot specify IGNORE NULLS or RESPECT NULLS following 'SUM'"
+argument_list|)
+expr_stmt|;
+name|winSql
+argument_list|(
+literal|"select ^count(sal)^ RESPECT NULLS over (w)\n"
+operator|+
+literal|" from emp window w as (order by empno)"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Cannot specify IGNORE NULLS or RESPECT NULLS following 'COUNT'"
+argument_list|)
+expr_stmt|;
+name|winSql
+argument_list|(
+literal|"select ^avg(sal)^ RESPECT NULLS \n"
+operator|+
+literal|" from emp"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Cannot specify IGNORE NULLS or RESPECT NULLS following 'AVG'"
+argument_list|)
+expr_stmt|;
+name|winSql
+argument_list|(
+literal|"select ^abs(sal)^ RESPECT NULLS \n"
+operator|+
+literal|" from emp"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Cannot specify IGNORE NULLS or RESPECT NULLS following 'ABS'"
 argument_list|)
 expr_stmt|;
 block|}
@@ -26426,7 +26700,13 @@ literal|"AS -\n"
 operator|+
 literal|"DESC post\n"
 operator|+
+literal|"FILTER left\n"
+operator|+
+literal|"IGNORE NULLS -\n"
+operator|+
 literal|"OVER left\n"
+operator|+
+literal|"RESPECT NULLS -\n"
 operator|+
 literal|"TABLESAMPLE -\n"
 operator|+
@@ -26465,8 +26745,6 @@ operator|+
 literal|"\n"
 operator|+
 literal|"$throw -\n"
-operator|+
-literal|"FILTER left\n"
 operator|+
 literal|"Reinterpret -\n"
 operator|+

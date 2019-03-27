@@ -1487,6 +1487,21 @@ function_decl|;
 annotation|@
 name|BaseMessage
 argument_list|(
+literal|"Cannot specify IGNORE NULLS or RESPECT NULLS following ''{0}''"
+argument_list|)
+name|ExInst
+argument_list|<
+name|SqlValidatorException
+argument_list|>
+name|disallowsNullTreatment
+parameter_list|(
+name|String
+name|a0
+parameter_list|)
+function_decl|;
+annotation|@
+name|BaseMessage
+argument_list|(
 literal|"Expression ''{0}'' is not being grouped"
 argument_list|)
 name|ExInst

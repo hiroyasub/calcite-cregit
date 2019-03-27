@@ -167,7 +167,7 @@ name|SqlKind
 operator|.
 name|FILTER
 argument_list|,
-literal|2
+literal|20
 argument_list|,
 literal|true
 argument_list|,

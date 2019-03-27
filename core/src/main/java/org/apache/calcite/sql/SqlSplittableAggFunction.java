@@ -407,6 +407,8 @@ literal|false
 argument_list|,
 literal|false
 argument_list|,
+literal|false
+argument_list|,
 name|ImmutableIntList
 operator|.
 name|of
@@ -591,6 +593,8 @@ argument_list|(
 name|SqlStdOperatorTable
 operator|.
 name|SUM0
+argument_list|,
+literal|false
 argument_list|,
 literal|false
 argument_list|,
@@ -1082,6 +1086,8 @@ literal|false
 argument_list|,
 literal|false
 argument_list|,
+literal|false
+argument_list|,
 name|ImmutableIntList
 operator|.
 name|of
@@ -1314,6 +1320,8 @@ name|create
 argument_list|(
 name|getMergeAggFunctionOfTopSplit
 argument_list|()
+argument_list|,
+literal|false
 argument_list|,
 literal|false
 argument_list|,

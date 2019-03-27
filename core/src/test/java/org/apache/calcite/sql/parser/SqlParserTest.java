@@ -8736,26 +8736,42 @@ name|void
 name|testAggregateFilter
 parameter_list|()
 block|{
+specifier|final
+name|String
 name|sql
-argument_list|(
-literal|"select sum(sal) filter (where gender = 'F') as femaleSal,\n"
+init|=
+literal|"select\n"
+operator|+
+literal|" sum(sal) filter (where gender = 'F') as femaleSal,\n"
 operator|+
 literal|" sum(sal) filter (where true) allSal,\n"
 operator|+
 literal|" count(distinct deptno) filter (where (deptno< 40))\n"
 operator|+
 literal|"from emp"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT"
+operator|+
+literal|" SUM(`SAL`) FILTER (WHERE (`GENDER` = 'F')) AS `FEMALESAL`,"
+operator|+
+literal|" SUM(`SAL`) FILTER (WHERE TRUE) AS `ALLSAL`,"
+operator|+
+literal|" COUNT(DISTINCT `DEPTNO`) FILTER (WHERE (`DEPTNO`< 40))\n"
+operator|+
+literal|"FROM `EMP`"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
 argument_list|)
 operator|.
 name|ok
 argument_list|(
-literal|"SELECT (SUM(`SAL`) FILTER (WHERE (`GENDER` = 'F'))) AS `FEMALESAL`,"
-operator|+
-literal|" (SUM(`SAL`) FILTER (WHERE TRUE)) AS `ALLSAL`,"
-operator|+
-literal|" (COUNT(DISTINCT `DEPTNO`) FILTER (WHERE (`DEPTNO`< 40)))\n"
-operator|+
-literal|"FROM `EMP`"
+name|expected
 argument_list|)
 expr_stmt|;
 block|}
@@ -16249,6 +16265,100 @@ argument_list|,
 literal|"SELECT (SUM(`X`) OVER (ORDER BY `X`))\n"
 operator|+
 literal|"FROM `BIDS`"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testNullTreatment
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"select lead(x) respect nulls over (w) from t"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+literal|"SELECT (LEAD(`X`) RESPECT NULLS OVER (`W`))\n"
+operator|+
+literal|"FROM `T`"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select deptno, sum(sal) respect nulls from emp group by deptno"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+literal|"SELECT `DEPTNO`, SUM(`SAL`) RESPECT NULLS\n"
+operator|+
+literal|"FROM `EMP`\n"
+operator|+
+literal|"GROUP BY `DEPTNO`"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select deptno, sum(sal) ignore nulls from emp group by deptno"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+literal|"SELECT `DEPTNO`, SUM(`SAL`) IGNORE NULLS\n"
+operator|+
+literal|"FROM `EMP`\n"
+operator|+
+literal|"GROUP BY `DEPTNO`"
+argument_list|)
+expr_stmt|;
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select col1,\n"
+operator|+
+literal|" collect(col2) ignore nulls\n"
+operator|+
+literal|"   within group (order by col3)\n"
+operator|+
+literal|"   filter (where 1 = 0)\n"
+operator|+
+literal|"   over (rows 10 preceding)\n"
+operator|+
+literal|" as c\n"
+operator|+
+literal|"from t\n"
+operator|+
+literal|"order by col1 limit 10"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT `COL1`, (COLLECT(`COL2`) IGNORE NULLS"
+operator|+
+literal|" WITHIN GROUP (ORDER BY `COL3`)"
+operator|+
+literal|" FILTER (WHERE (1 = 0)) OVER (ROWS 10 PRECEDING)) AS `C`\n"
+operator|+
+literal|"FROM `T`\n"
+operator|+
+literal|"ORDER BY `COL1`\n"
+operator|+
+literal|"FETCH NEXT 10 ROWS ONLY"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
 argument_list|)
 expr_stmt|;
 block|}
@@ -27375,7 +27485,7 @@ name|expected
 init|=
 literal|"SELECT `COL1`,"
 operator|+
-literal|" (COLLECT(`COL2`) WITHIN GROUP (ORDER BY `COL3`))\n"
+literal|" COLLECT(`COL2`) WITHIN GROUP (ORDER BY `COL3`)\n"
 operator|+
 literal|"FROM `T`\n"
 operator|+
@@ -27417,7 +27527,7 @@ name|expected
 init|=
 literal|"SELECT"
 operator|+
-literal|" (COLLECT(`COL2`) WITHIN GROUP (ORDER BY `COL3`))\n"
+literal|" COLLECT(`COL2`) WITHIN GROUP (ORDER BY `COL3`)\n"
 operator|+
 literal|"FROM `T`\n"
 operator|+
@@ -27487,7 +27597,7 @@ name|expected
 init|=
 literal|"SELECT `COL1`,"
 operator|+
-literal|" (COLLECT(`COL2`) WITHIN GROUP (ORDER BY `COL3`, `COL4`))\n"
+literal|" COLLECT(`COL2`) WITHIN GROUP (ORDER BY `COL3`, `COL4`)\n"
 operator|+
 literal|"FROM `T`\n"
 operator|+
@@ -27531,9 +27641,9 @@ specifier|final
 name|String
 name|expected
 init|=
-literal|"SELECT `COL1`, (COLLECT(`COL2`) "
+literal|"SELECT `COL1`, COLLECT(`COL2`) "
 operator|+
-literal|"WITHIN GROUP (ORDER BY `COL3` DESC NULLS FIRST, `COL4` NULLS LAST))\n"
+literal|"WITHIN GROUP (ORDER BY `COL3` DESC NULLS FIRST, `COL4` NULLS LAST)\n"
 operator|+
 literal|"FROM `T`\n"
 operator|+
@@ -28066,14 +28176,14 @@ name|checkExp
 argument_list|(
 literal|"json_arrayagg(\"column\" order by \"column\")"
 argument_list|,
-literal|"(JSON_ARRAYAGG(`column` ABSENT ON NULL) WITHIN GROUP (ORDER BY `column`))"
+literal|"JSON_ARRAYAGG(`column` ABSENT ON NULL) WITHIN GROUP (ORDER BY `column`)"
 argument_list|)
 expr_stmt|;
 name|checkExp
 argument_list|(
 literal|"json_arrayagg(\"column\") within group (order by \"column\")"
 argument_list|,
-literal|"(JSON_ARRAYAGG(`column` ABSENT ON NULL) WITHIN GROUP (ORDER BY `column`))"
+literal|"JSON_ARRAYAGG(`column` ABSENT ON NULL) WITHIN GROUP (ORDER BY `column`)"
 argument_list|)
 expr_stmt|;
 name|checkFails

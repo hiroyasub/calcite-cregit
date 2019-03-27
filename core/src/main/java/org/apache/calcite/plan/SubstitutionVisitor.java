@@ -6595,6 +6595,11 @@ operator|.
 name|isApproximate
 argument_list|()
 argument_list|,
+name|aggregateCall
+operator|.
+name|ignoreNulls
+argument_list|()
+argument_list|,
 name|ImmutableList
 operator|.
 name|of

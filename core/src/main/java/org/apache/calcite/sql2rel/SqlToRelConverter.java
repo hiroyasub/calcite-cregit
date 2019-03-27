@@ -6491,6 +6491,8 @@ literal|false
 argument_list|,
 literal|false
 argument_list|,
+literal|false
+argument_list|,
 name|ImmutableList
 operator|.
 name|of
@@ -6515,6 +6517,8 @@ argument_list|(
 name|SqlStdOperatorTable
 operator|.
 name|COUNT
+argument_list|,
+literal|false
 argument_list|,
 literal|false
 argument_list|,
@@ -9643,6 +9647,40 @@ argument_list|(
 literal|0
 argument_list|)
 decl_stmt|;
+name|boolean
+name|ignoreNulls
+init|=
+literal|false
+decl_stmt|;
+switch|switch
+condition|(
+name|aggCall
+operator|.
+name|getKind
+argument_list|()
+condition|)
+block|{
+case|case
+name|IGNORE_NULLS
+case|:
+name|ignoreNulls
+operator|=
+literal|true
+expr_stmt|;
+comment|// fall through
+case|case
+name|RESPECT_NULLS
+case|:
+name|aggCall
+operator|=
+name|aggCall
+operator|.
+name|operand
+argument_list|(
+literal|0
+argument_list|)
+expr_stmt|;
+block|}
 name|SqlNode
 name|windowOrRef
 init|=
@@ -10023,6 +10061,8 @@ argument_list|,
 name|window
 argument_list|,
 name|isDistinct
+argument_list|,
+name|ignoreNulls
 argument_list|)
 decl_stmt|;
 name|RexNode
@@ -20855,9 +20895,6 @@ literal|true
 argument_list|)
 expr_stmt|;
 block|}
-comment|// REVIEW jvs 22-Jan-2004:  should I add
-comment|// mapScopeToLux.put(validator.getScope(values),bb.root);
-comment|// ?
 block|}
 comment|//~ Inner Classes ----------------------------------------------------------
 comment|/**    * Workspace for translating an individual SELECT statement (or sub-SELECT).    */
@@ -25192,6 +25229,8 @@ literal|null
 argument_list|,
 literal|null
 argument_list|,
+literal|false
+argument_list|,
 name|call
 argument_list|)
 expr_stmt|;
@@ -25208,6 +25247,9 @@ name|filter
 parameter_list|,
 name|SqlNodeList
 name|orderList
+parameter_list|,
+name|boolean
+name|ignoreNulls
 parameter_list|,
 name|SqlCall
 name|outerCall
@@ -25259,6 +25301,8 @@ argument_list|)
 argument_list|,
 name|orderList
 argument_list|,
+name|ignoreNulls
+argument_list|,
 name|outerCall
 argument_list|)
 expr_stmt|;
@@ -25288,6 +25332,38 @@ name|operand
 argument_list|(
 literal|1
 argument_list|)
+argument_list|,
+name|ignoreNulls
+argument_list|,
+name|outerCall
+argument_list|)
+expr_stmt|;
+return|return;
+case|case
+name|IGNORE_NULLS
+case|:
+name|ignoreNulls
+operator|=
+literal|true
+expr_stmt|;
+comment|// fall through
+case|case
+name|RESPECT_NULLS
+case|:
+name|translateAgg
+argument_list|(
+name|call
+operator|.
+name|operand
+argument_list|(
+literal|0
+argument_list|)
+argument_list|,
+name|filter
+argument_list|,
+name|orderList
+argument_list|,
+name|ignoreNulls
 argument_list|,
 name|outerCall
 argument_list|)
@@ -25719,6 +25795,8 @@ argument_list|,
 name|distinct
 argument_list|,
 name|approximate
+argument_list|,
+name|ignoreNulls
 argument_list|,
 name|args
 argument_list|,
@@ -26188,6 +26266,11 @@ specifier|final
 name|boolean
 name|distinct
 decl_stmt|;
+specifier|private
+specifier|final
+name|boolean
+name|ignoreNulls
+decl_stmt|;
 name|HistogramShuttle
 parameter_list|(
 name|List
@@ -26213,6 +26296,9 @@ name|window
 parameter_list|,
 name|boolean
 name|distinct
+parameter_list|,
+name|boolean
+name|ignoreNulls
 parameter_list|)
 block|{
 name|this
@@ -26250,6 +26336,12 @@ operator|.
 name|distinct
 operator|=
 name|distinct
+expr_stmt|;
+name|this
+operator|.
+name|ignoreNulls
+operator|=
+name|ignoreNulls
 expr_stmt|;
 block|}
 specifier|public
@@ -26490,6 +26582,8 @@ argument_list|,
 literal|false
 argument_list|,
 name|distinct
+argument_list|,
+name|ignoreNulls
 argument_list|)
 decl_stmt|;
 name|RexNode
@@ -26622,6 +26716,8 @@ argument_list|,
 name|needSum0
 argument_list|,
 name|distinct
+argument_list|,
+name|ignoreNulls
 argument_list|)
 return|;
 block|}

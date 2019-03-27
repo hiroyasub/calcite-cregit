@@ -1512,6 +1512,10 @@ name|distinct
 argument_list|,
 literal|false
 argument_list|,
+name|aggCall
+operator|.
+name|ignoreNulls
+argument_list|,
 name|getProjectOrdinals
 argument_list|(
 name|aggCall
@@ -1567,7 +1571,15 @@ specifier|final
 name|boolean
 name|distinct
 decl_stmt|;
-comment|/**      * Creates a RexWinAggCall.      *      * @param aggFun   Aggregate function      * @param type     Result type      * @param operands Operands to call      * @param ordinal  Ordinal within its partition      * @param distinct Eliminate duplicates before applying aggregate function      */
+comment|/** Whether to ignore nulls. */
+specifier|public
+specifier|final
+name|boolean
+name|ignoreNulls
+decl_stmt|;
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 name|RexWinAggCall
 parameter_list|(
@@ -1590,6 +1602,48 @@ name|boolean
 name|distinct
 parameter_list|)
 block|{
+name|this
+argument_list|(
+name|aggFun
+argument_list|,
+name|type
+argument_list|,
+name|operands
+argument_list|,
+name|ordinal
+argument_list|,
+name|distinct
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+block|}
+comment|/**      * Creates a RexWinAggCall.      *      * @param aggFun   Aggregate function      * @param type     Result type      * @param operands Operands to call      * @param ordinal  Ordinal within its partition      * @param distinct Eliminate duplicates before applying aggregate function      */
+specifier|public
+name|RexWinAggCall
+parameter_list|(
+name|SqlAggFunction
+name|aggFun
+parameter_list|,
+name|RelDataType
+name|type
+parameter_list|,
+name|List
+argument_list|<
+name|RexNode
+argument_list|>
+name|operands
+parameter_list|,
+name|int
+name|ordinal
+parameter_list|,
+name|boolean
+name|distinct
+parameter_list|,
+name|boolean
+name|ignoreNulls
+parameter_list|)
+block|{
 name|super
 argument_list|(
 name|type
@@ -1610,6 +1664,12 @@ operator|.
 name|distinct
 operator|=
 name|distinct
+expr_stmt|;
+name|this
+operator|.
+name|ignoreNulls
+operator|=
+name|ignoreNulls
 expr_stmt|;
 block|}
 comment|/** {@inheritDoc}      *      *<p>Override {@link RexCall}, defining equality based on identity.      */

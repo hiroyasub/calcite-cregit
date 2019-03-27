@@ -649,6 +649,16 @@ return|return
 literal|true
 return|;
 block|}
+comment|/** Returns whether this aggregate function allows specifying null treatment    * ({@code RESPECT NULLS} or {@code IGNORE NULLS}). */
+specifier|public
+name|boolean
+name|allowsNullTreatment
+parameter_list|()
+block|{
+return|return
+literal|false
+return|;
+block|}
 block|}
 end_class
 

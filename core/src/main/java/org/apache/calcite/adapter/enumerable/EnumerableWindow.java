@@ -1437,6 +1437,22 @@ argument_list|(
 name|aggIdx
 argument_list|)
 decl_stmt|;
+if|if
+condition|(
+name|call
+operator|.
+name|ignoreNulls
+argument_list|()
+condition|)
+block|{
+throw|throw
+operator|new
+name|UnsupportedOperationException
+argument_list|(
+literal|"IGNORE NULLS not supported"
+argument_list|)
+throw|;
+block|}
 name|aggs
 operator|.
 name|add
