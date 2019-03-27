@@ -18811,6 +18811,44 @@ expr_stmt|;
 block|}
 end_function
 
+begin_function
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSelectNotInCorrelated
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select sal, \n"
+operator|+
+literal|" empno NOT IN (\n"
+operator|+
+literal|" select deptno from dept \n"
+operator|+
+literal|"   where emp.job=dept.name) \n"
+operator|+
+literal|" from emp"
+decl_stmt|;
+name|checkSubQuery
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|withLateDecorrelation
+argument_list|(
+literal|true
+argument_list|)
+operator|.
+name|check
+argument_list|()
+expr_stmt|;
+block|}
+end_function
+
 begin_comment
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1493">[CALCITE-1493]    * Wrong plan for NOT IN correlated queries</a>. */
 end_comment
