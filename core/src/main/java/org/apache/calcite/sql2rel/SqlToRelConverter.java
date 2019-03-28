@@ -18909,12 +18909,13 @@ specifier|final
 name|SqlCall
 name|call
 init|=
-name|SqlUtil
+name|bb
 operator|.
-name|makeCall
+name|getValidator
+argument_list|()
+operator|.
+name|makeNullaryCall
 argument_list|(
-name|opTab
-argument_list|,
 name|identifier
 argument_list|)
 decl_stmt|;

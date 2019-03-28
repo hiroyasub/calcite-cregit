@@ -4541,7 +4541,7 @@ literal|"\"POSITION\"('b' in 'alphabet')"
 argument_list|)
 expr_stmt|;
 comment|// convert and translate not yet implemented
-comment|//        checkExp("\"CONVERT\"('b' using converstion)");
+comment|//        checkExp("\"CONVERT\"('b' using conversion)");
 comment|//        checkExp("\"TRANSLATE\"('b' using translation)");
 name|checkExp
 argument_list|(
@@ -24947,6 +24947,275 @@ argument_list|(
 literal|"select count(1), ^empno^ from emp"
 argument_list|,
 literal|"Expression 'EMPNO' is not being grouped"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Tests using case-insensitive matching of user-defined functions. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testCaseInsensitiveUdfs
+parameter_list|()
+block|{
+specifier|final
+name|SqlTester
+name|tester1
+init|=
+name|tester
+operator|.
+name|withCaseSensitive
+argument_list|(
+literal|false
+argument_list|)
+operator|.
+name|withQuoting
+argument_list|(
+name|Quoting
+operator|.
+name|BRACKET
+argument_list|)
+decl_stmt|;
+specifier|final
+name|MockSqlOperatorTable
+name|operatorTable
+init|=
+operator|new
+name|MockSqlOperatorTable
+argument_list|(
+name|SqlStdOperatorTable
+operator|.
+name|instance
+argument_list|()
+argument_list|)
+decl_stmt|;
+name|MockSqlOperatorTable
+operator|.
+name|addRamp
+argument_list|(
+name|operatorTable
+argument_list|)
+expr_stmt|;
+name|tester1
+operator|.
+name|withOperatorTable
+argument_list|(
+name|operatorTable
+argument_list|)
+expr_stmt|;
+specifier|final
+name|SqlTester
+name|tester2
+init|=
+name|tester
+operator|.
+name|withQuoting
+argument_list|(
+name|Quoting
+operator|.
+name|BRACKET
+argument_list|)
+decl_stmt|;
+name|tester2
+operator|.
+name|withOperatorTable
+argument_list|(
+name|operatorTable
+argument_list|)
+expr_stmt|;
+comment|// test table function lookup case-insensitively.
+name|tester1
+operator|.
+name|checkQuery
+argument_list|(
+literal|"select * from dept, lateral table(ramp(dept.deptno))"
+argument_list|)
+expr_stmt|;
+name|tester1
+operator|.
+name|checkQuery
+argument_list|(
+literal|"select * from dept, lateral table(RAMP(dept.deptno))"
+argument_list|)
+expr_stmt|;
+name|tester1
+operator|.
+name|checkQuery
+argument_list|(
+literal|"select * from dept, lateral table([RAMP](dept.deptno))"
+argument_list|)
+expr_stmt|;
+name|tester1
+operator|.
+name|checkQuery
+argument_list|(
+literal|"select * from dept, lateral table([Ramp](dept.deptno))"
+argument_list|)
+expr_stmt|;
+comment|// test scalar function lookup case-insensitively.
+name|tester1
+operator|.
+name|checkQuery
+argument_list|(
+literal|"select myfun(EMPNO) from EMP"
+argument_list|)
+expr_stmt|;
+name|tester1
+operator|.
+name|checkQuery
+argument_list|(
+literal|"select MYFUN(empno) from emp"
+argument_list|)
+expr_stmt|;
+name|tester1
+operator|.
+name|checkQuery
+argument_list|(
+literal|"select [MYFUN]([empno]) from [emp]"
+argument_list|)
+expr_stmt|;
+name|tester1
+operator|.
+name|checkQuery
+argument_list|(
+literal|"select [Myfun]([E].[empno]) from [emp] as e"
+argument_list|)
+expr_stmt|;
+name|tester1
+operator|.
+name|checkQuery
+argument_list|(
+literal|"select t.[x] from (\n"
+operator|+
+literal|"  select [Myfun]([E].[empno]) as x from [emp] as e) as [t]"
+argument_list|)
+expr_stmt|;
+comment|// correlating variable
+name|tester1
+operator|.
+name|checkQuery
+argument_list|(
+literal|"select * from emp as [e] where exists (\n"
+operator|+
+literal|"select 1 from dept where dept.deptno = myfun([E].deptno))"
+argument_list|)
+expr_stmt|;
+name|tester2
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"select * from emp as [e] where exists (\n"
+operator|+
+literal|"select 1 from dept where dept.deptno = ^[myfun]([e].deptno)^)"
+argument_list|,
+literal|"No match found for function signature myfun\\(<NUMERIC>\\).*"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Tests using case-sensitive matching of builtin functions. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testCaseSensitiveBuiltinFunction
+parameter_list|()
+block|{
+specifier|final
+name|SqlTester
+name|tester1
+init|=
+name|tester
+operator|.
+name|withCaseSensitive
+argument_list|(
+literal|true
+argument_list|)
+operator|.
+name|withQuoting
+argument_list|(
+name|Quoting
+operator|.
+name|BRACKET
+argument_list|)
+decl_stmt|;
+name|tester1
+operator|.
+name|withOperatorTable
+argument_list|(
+name|SqlStdOperatorTable
+operator|.
+name|instance
+argument_list|()
+argument_list|)
+expr_stmt|;
+name|tester1
+operator|.
+name|checkQuery
+argument_list|(
+literal|"select sum(empno) from EMP group by ename, empno"
+argument_list|)
+expr_stmt|;
+name|tester1
+operator|.
+name|checkQuery
+argument_list|(
+literal|"select [sum](empno) from EMP group by ename, empno"
+argument_list|)
+expr_stmt|;
+name|tester1
+operator|.
+name|checkQuery
+argument_list|(
+literal|"select [SUM](empno) from EMP group by ename, empno"
+argument_list|)
+expr_stmt|;
+name|tester1
+operator|.
+name|checkQuery
+argument_list|(
+literal|"select SUM(empno) from EMP group by ename, empno"
+argument_list|)
+expr_stmt|;
+name|tester1
+operator|.
+name|checkQuery
+argument_list|(
+literal|"select Sum(empno) from EMP group by ename, empno"
+argument_list|)
+expr_stmt|;
+name|tester1
+operator|.
+name|checkQuery
+argument_list|(
+literal|"select count(empno) from EMP group by ename, empno"
+argument_list|)
+expr_stmt|;
+name|tester1
+operator|.
+name|checkQuery
+argument_list|(
+literal|"select [count](empno) from EMP group by ename, empno"
+argument_list|)
+expr_stmt|;
+name|tester1
+operator|.
+name|checkQuery
+argument_list|(
+literal|"select [COUNT](empno) from EMP group by ename, empno"
+argument_list|)
+expr_stmt|;
+name|tester1
+operator|.
+name|checkQuery
+argument_list|(
+literal|"select COUNT(empno) from EMP group by ename, empno"
+argument_list|)
+expr_stmt|;
+name|tester1
+operator|.
+name|checkQuery
+argument_list|(
+literal|"select Count(empno) from EMP group by ename, empno"
 argument_list|)
 expr_stmt|;
 block|}

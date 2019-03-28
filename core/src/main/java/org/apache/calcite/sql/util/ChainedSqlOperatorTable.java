@@ -89,6 +89,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|validate
+operator|.
+name|SqlNameMatcher
+import|;
+end_import
+
+begin_import
+import|import
 name|com
 operator|.
 name|google
@@ -237,6 +253,9 @@ argument_list|<
 name|SqlOperator
 argument_list|>
 name|operatorList
+parameter_list|,
+name|SqlNameMatcher
+name|nameMatcher
 parameter_list|)
 block|{
 for|for
@@ -258,6 +277,8 @@ argument_list|,
 name|syntax
 argument_list|,
 name|operatorList
+argument_list|,
+name|nameMatcher
 argument_list|)
 expr_stmt|;
 block|}

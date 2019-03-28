@@ -153,6 +153,26 @@ name|List
 import|;
 end_import
 
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+import|;
+end_import
+
+begin_import
+import|import
+name|javax
+operator|.
+name|annotation
+operator|.
+name|Nullable
+import|;
+end_import
+
 begin_comment
 comment|/** Visitor that can find aggregate and windowed aggregate functions.  *  * @see AggFinder */
 end_comment
@@ -185,15 +205,22 @@ name|delegate
 decl_stmt|;
 comment|/** Whether to find regular (non-windowed) aggregates. */
 specifier|protected
+specifier|final
 name|boolean
 name|aggregate
 decl_stmt|;
 comment|/** Whether to find group functions (e.g. {@code TUMBLE})    * or group auxiliary functions (e.g. {@code TUMBLE_START}). */
 specifier|protected
+specifier|final
 name|boolean
 name|group
 decl_stmt|;
-comment|/**    * Creates an AggVisitor.    *    * @param opTab Operator table    * @param over Whether to find windowed function calls {@code agg(x) OVER    *             windowSpec}    * @param aggregate Whether to find non-windowed aggregate calls    * @param group Whether to find group functions (e.g. {@code TUMBLE})    * @param delegate Finder to which to delegate when processing the arguments    */
+specifier|protected
+specifier|final
+name|SqlNameMatcher
+name|nameMatcher
+decl_stmt|;
+comment|/**    * Creates an AggVisitor.    *    * @param opTab Operator table    * @param over Whether to find windowed function calls {@code agg(x) OVER    *             windowSpec}    * @param aggregate Whether to find non-windowed aggregate calls    * @param group Whether to find group functions (e.g. {@code TUMBLE})    * @param delegate Finder to which to delegate when processing the arguments    * @param nameMatcher Whether to match the agg function names case-sensitively    */
 name|AggVisitor
 parameter_list|(
 name|SqlOperatorTable
@@ -208,8 +235,13 @@ parameter_list|,
 name|boolean
 name|group
 parameter_list|,
+annotation|@
+name|Nullable
 name|AggFinder
 name|delegate
+parameter_list|,
+name|SqlNameMatcher
+name|nameMatcher
 parameter_list|)
 block|{
 name|this
@@ -240,7 +272,23 @@ name|this
 operator|.
 name|opTab
 operator|=
+name|Objects
+operator|.
+name|requireNonNull
+argument_list|(
 name|opTab
+argument_list|)
+expr_stmt|;
+name|this
+operator|.
+name|nameMatcher
+operator|=
+name|Objects
+operator|.
+name|requireNonNull
+argument_list|(
+name|nameMatcher
+argument_list|)
 expr_stmt|;
 block|}
 specifier|public
@@ -389,6 +437,8 @@ operator|.
 name|FUNCTION
 argument_list|,
 name|list
+argument_list|,
+name|nameMatcher
 argument_list|)
 expr_stmt|;
 for|for

@@ -5068,23 +5068,23 @@ parameter_list|)
 block|{
 comment|// First check for builtin functions which don't have parentheses,
 comment|// like "LOCALTIME".
-specifier|final
-name|SqlCall
-name|call
+name|SqlValidator
+name|validator
 init|=
-name|SqlUtil
-operator|.
-name|makeCall
-argument_list|(
 name|getScope
 argument_list|()
 operator|.
 name|getValidator
 argument_list|()
+decl_stmt|;
+specifier|final
+name|SqlCall
+name|call
+init|=
+name|validator
 operator|.
-name|getOperatorTable
-argument_list|()
-argument_list|,
+name|makeNullaryCall
+argument_list|(
 name|id
 argument_list|)
 decl_stmt|;

@@ -123,7 +123,7 @@ name|AggFinder
 extends|extends
 name|AggVisitor
 block|{
-comment|/**    * Creates an AggFinder.    *    * @param opTab Operator table    * @param over Whether to find windowed function calls {@code agg(x) OVER    *             windowSpec}    * @param aggregate Whether to find non-windowed aggregate calls    * @param group Whether to find group functions (e.g. {@code TUMBLE})    * @param delegate Finder to which to delegate when processing the arguments    */
+comment|/**    * Creates an AggFinder.    *    * @param opTab Operator table    * @param over Whether to find windowed function calls {@code agg(x) OVER    *             windowSpec}    * @param aggregate Whether to find non-windowed aggregate calls    * @param group Whether to find group functions (e.g. {@code TUMBLE})    * @param delegate Finder to which to delegate when processing the arguments    * @param nameMatcher Whether to match the agg function case-sensitively    */
 name|AggFinder
 parameter_list|(
 name|SqlOperatorTable
@@ -140,6 +140,9 @@ name|group
 parameter_list|,
 name|AggFinder
 name|delegate
+parameter_list|,
+name|SqlNameMatcher
+name|nameMatcher
 parameter_list|)
 block|{
 name|super
@@ -153,6 +156,8 @@ argument_list|,
 name|group
 argument_list|,
 name|delegate
+argument_list|,
+name|nameMatcher
 argument_list|)
 expr_stmt|;
 block|}
@@ -316,6 +321,8 @@ argument_list|,
 name|group
 argument_list|,
 name|delegate
+argument_list|,
+name|nameMatcher
 argument_list|)
 decl_stmt|;
 for|for
@@ -381,6 +388,9 @@ name|group
 parameter_list|,
 name|AggFinder
 name|delegate
+parameter_list|,
+name|SqlNameMatcher
+name|nameMatcher
 parameter_list|)
 block|{
 name|super
@@ -394,6 +404,8 @@ argument_list|,
 name|group
 argument_list|,
 name|delegate
+argument_list|,
+name|nameMatcher
 argument_list|)
 expr_stmt|;
 block|}

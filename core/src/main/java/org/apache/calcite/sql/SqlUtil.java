@@ -255,6 +255,22 @@ name|apache
 operator|.
 name|calcite
 operator|.
+name|sql
+operator|.
+name|validate
+operator|.
+name|SqlNameMatcher
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
 name|util
 operator|.
 name|BarfingInvocationHandler
@@ -1666,7 +1682,7 @@ name|lits
 argument_list|)
 return|;
 block|}
-comment|/**    * Looks up a (possibly overloaded) routine based on name and argument    * types.    *    * @param opTab    operator table to search    * @param funcName name of function being invoked    * @param argTypes argument types    * @param argNames argument names, or null if call by position    * @param category whether a function or a procedure. (If a procedure is    *                 being invoked, the overload rules are simpler.)    * @return matching routine, or null if none found    *    * @see Glossary#SQL99 SQL:1999 Part 2 Section 10.4    */
+comment|/**    * Looks up a (possibly overloaded) routine based on name and argument    * types.    *    * @param opTab         operator table to search    * @param funcName      name of function being invoked    * @param argTypes      argument types    * @param argNames      argument names, or null if call by position    * @param category      whether a function or a procedure. (If a procedure is    *                      being invoked, the overload rules are simpler.)    * @param nameMatcher   Whether to look up the function case-sensitively    * @return matching routine, or null if none found    *    * @see Glossary#SQL99 SQL:1999 Part 2 Section 10.4    */
 specifier|public
 specifier|static
 name|SqlOperator
@@ -1698,6 +1714,9 @@ name|syntax
 parameter_list|,
 name|SqlKind
 name|sqlKind
+parameter_list|,
+name|SqlNameMatcher
+name|nameMatcher
 parameter_list|)
 block|{
 name|Iterator
@@ -1721,6 +1740,8 @@ argument_list|,
 name|sqlKind
 argument_list|,
 name|category
+argument_list|,
+name|nameMatcher
 argument_list|)
 decl_stmt|;
 if|if
@@ -1785,7 +1806,7 @@ name|sqlKind
 argument_list|)
 return|;
 block|}
-comment|/**    * Looks up all subject routines matching the given name and argument types.    *    * @param opTab     operator table to search    * @param funcName  name of function being invoked    * @param argTypes  argument types    * @param argNames  argument names, or null if call by position    * @param sqlSyntax the SqlSyntax of the SqlOperator being looked up    * @param sqlKind   the SqlKind of the SqlOperator being looked up    * @param category category of routine to look up    * @return list of matching routines    * @see Glossary#SQL99 SQL:1999 Part 2 Section 10.4    */
+comment|/**    * Looks up all subject routines matching the given name and argument types.    *    * @param opTab     operator table to search    * @param funcName  name of function being invoked    * @param argTypes  argument types    * @param argNames  argument names, or null if call by position    * @param sqlSyntax the SqlSyntax of the SqlOperator being looked up    * @param sqlKind   the SqlKind of the SqlOperator being looked up    * @param category  Category of routine to look up    * @param nameMatcher Whether to look up the function case-sensitively    * @return list of matching routines    * @see Glossary#SQL99 SQL:1999 Part 2 Section 10.4    */
 specifier|public
 specifier|static
 name|Iterator
@@ -1820,6 +1841,9 @@ name|sqlKind
 parameter_list|,
 name|SqlFunctionCategory
 name|category
+parameter_list|,
+name|SqlNameMatcher
+name|nameMatcher
 parameter_list|)
 block|{
 comment|// start with all routines matching by name
@@ -1838,6 +1862,8 @@ argument_list|,
 name|sqlSyntax
 argument_list|,
 name|category
+argument_list|,
+name|nameMatcher
 argument_list|)
 decl_stmt|;
 comment|// first pass:  eliminate routines which don't accept the given
@@ -1943,7 +1969,7 @@ name|sqlKind
 argument_list|)
 return|;
 block|}
-comment|/**    * Determines whether there is a routine matching the given name and number    * of arguments.    *    * @param opTab    operator table to search    * @param funcName name of function being invoked    * @param argTypes argument types    * @param category category of routine to look up    * @return true if match found    */
+comment|/**    * Determines whether there is a routine matching the given name and number    * of arguments.    *    * @param opTab         operator table to search    * @param funcName      name of function being invoked    * @param argTypes      argument types    * @param category      category of routine to look up    * @param nameMatcher   Whether to look up the function case-sensitively    * @return true if match found    */
 specifier|public
 specifier|static
 name|boolean
@@ -1963,6 +1989,9 @@ name|argTypes
 parameter_list|,
 name|SqlFunctionCategory
 name|category
+parameter_list|,
+name|SqlNameMatcher
+name|nameMatcher
 parameter_list|)
 block|{
 comment|// start with all routines matching by name
@@ -1983,6 +2012,8 @@ operator|.
 name|FUNCTION
 argument_list|,
 name|category
+argument_list|,
+name|nameMatcher
 argument_list|)
 decl_stmt|;
 comment|// first pass:  eliminate routines which don't accept the given
@@ -2023,6 +2054,9 @@ name|syntax
 parameter_list|,
 name|SqlFunctionCategory
 name|category
+parameter_list|,
+name|SqlNameMatcher
+name|nameMatcher
 parameter_list|)
 block|{
 specifier|final
@@ -2048,6 +2082,8 @@ argument_list|,
 name|syntax
 argument_list|,
 name|sqlOperators
+argument_list|,
+name|nameMatcher
 argument_list|)
 expr_stmt|;
 switch|switch
@@ -2951,117 +2987,6 @@ name|query
 argument_list|)
 throw|;
 block|}
-block|}
-comment|/**    * If an identifier is a legitimate call to a function which has no    * arguments and requires no parentheses (for example "CURRENT_USER"),    * returns a call to that function, otherwise returns null.    */
-specifier|public
-specifier|static
-name|SqlCall
-name|makeCall
-parameter_list|(
-name|SqlOperatorTable
-name|opTab
-parameter_list|,
-name|SqlIdentifier
-name|id
-parameter_list|)
-block|{
-if|if
-condition|(
-name|id
-operator|.
-name|names
-operator|.
-name|size
-argument_list|()
-operator|==
-literal|1
-operator|&&
-operator|!
-name|id
-operator|.
-name|isComponentQuoted
-argument_list|(
-literal|0
-argument_list|)
-condition|)
-block|{
-specifier|final
-name|List
-argument_list|<
-name|SqlOperator
-argument_list|>
-name|list
-init|=
-operator|new
-name|ArrayList
-argument_list|<>
-argument_list|()
-decl_stmt|;
-name|opTab
-operator|.
-name|lookupOperatorOverloads
-argument_list|(
-name|id
-argument_list|,
-literal|null
-argument_list|,
-name|SqlSyntax
-operator|.
-name|FUNCTION
-argument_list|,
-name|list
-argument_list|)
-expr_stmt|;
-for|for
-control|(
-name|SqlOperator
-name|operator
-range|:
-name|list
-control|)
-block|{
-if|if
-condition|(
-name|operator
-operator|.
-name|getSyntax
-argument_list|()
-operator|==
-name|SqlSyntax
-operator|.
-name|FUNCTION_ID
-condition|)
-block|{
-comment|// Even though this looks like an identifier, it is a
-comment|// actually a call to a function. Construct a fake
-comment|// call to this function, so we can use the regular
-comment|// operator validation.
-return|return
-operator|new
-name|SqlBasicCall
-argument_list|(
-name|operator
-argument_list|,
-name|SqlNode
-operator|.
-name|EMPTY_ARRAY
-argument_list|,
-name|id
-operator|.
-name|getParserPosition
-argument_list|()
-argument_list|,
-literal|true
-argument_list|,
-literal|null
-argument_list|)
-return|;
-block|}
-block|}
-block|}
-return|return
-literal|null
-return|;
 block|}
 specifier|public
 specifier|static

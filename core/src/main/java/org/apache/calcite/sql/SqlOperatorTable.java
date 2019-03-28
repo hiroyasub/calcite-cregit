@@ -17,6 +17,22 @@ end_package
 
 begin_import
 import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|validate
+operator|.
+name|SqlNameMatcher
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -35,7 +51,7 @@ interface|interface
 name|SqlOperatorTable
 block|{
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**    * Retrieves a list of operators with a given name and syntax. For example,    * by passing SqlSyntax.Function, the returned list is narrowed to only    * matching SqlFunction objects.    *    * @param opName   name of operator    * @param category function category to look up, or null for any matching    *                 operator    * @param syntax   syntax type of operator    * @param operatorList mutable list to which to append matches    */
+comment|/**    * Retrieves a list of operators with a given name and syntax. For example,    * by passing SqlSyntax.Function, the returned list is narrowed to only    * matching SqlFunction objects.    *    * @param opName   name of operator    * @param category function category to look up, or null for any matching    *                 operator    * @param syntax   syntax type of operator    * @param operatorList mutable list to which to append matches    * @param nameMatcher Name matcher    */
 name|void
 name|lookupOperatorOverloads
 parameter_list|(
@@ -53,6 +69,9 @@ argument_list|<
 name|SqlOperator
 argument_list|>
 name|operatorList
+parameter_list|,
+name|SqlNameMatcher
+name|nameMatcher
 parameter_list|)
 function_decl|;
 comment|/**    * Retrieves a list of all functions and operators in this table. Used for    * automated testing.    *    * @return list of SqlOperator objects    */

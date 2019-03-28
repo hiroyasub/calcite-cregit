@@ -124,7 +124,7 @@ literal|null
 argument_list|)
 expr_stmt|;
 block|}
-specifier|protected
+specifier|public
 name|SqlBasicCall
 parameter_list|(
 name|SqlOperator

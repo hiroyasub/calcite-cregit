@@ -1367,6 +1367,14 @@ argument_list|(
 name|names
 argument_list|)
 decl_stmt|;
+name|boolean
+name|caseSensitive
+init|=
+name|nameMatcher
+operator|.
+name|isCaseSensitive
+argument_list|()
+decl_stmt|;
 name|functions2
 operator|.
 name|addAll
@@ -1377,7 +1385,7 @@ name|getFunctions
 argument_list|(
 name|name
 argument_list|,
-literal|true
+name|caseSensitive
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -1850,6 +1858,9 @@ argument_list|<
 name|SqlOperator
 argument_list|>
 name|operatorList
+parameter_list|,
+name|SqlNameMatcher
+name|nameMatcher
 parameter_list|)
 block|{
 if|if
