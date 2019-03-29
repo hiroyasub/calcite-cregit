@@ -228,7 +228,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Tests for the {@code org.apache.calcite.adapter.cassandra} package.  *  *<p>Will start embedded cassandra cluster and populate it from local {@code twissandra.cql} file.  * All configuration files are located in test classpath.  *  *<p>Note that tests will be skipped if running on JDK11 and JDK12  * (which is not yet supported by cassandra) see  *<a href="https://issues.apache.org/jira/browse/CASSANDRA-9608">CASSANDRA-9608</a>.  *  */
+comment|/**  * Tests for the {@code org.apache.calcite.adapter.cassandra} package.  *  *<p>Will start embedded cassandra cluster and populate it from local {@code twissandra.cql} file.  * All configuration files are located in test classpath.  *  *<p>Note that tests will be skipped if running on JDK11+  * (which is not yet supported by cassandra) see  *<a href="https://issues.apache.org/jira/browse/CASSANDRA-9608">CASSANDRA-9608</a>.  *  */
 end_comment
 
 begin_comment
@@ -300,7 +300,7 @@ name|getAbsolutePath
 argument_list|()
 argument_list|)
 decl_stmt|;
-comment|/**    * Whether to run this test.    *<p>Enabled by default, unless explicitly disabled    * from command line ({@code -Dcalcite.test.cassandra=false}) or running on incompatible JDK    * version (see below).    *    *<p>As of this wiring Cassandra 4.x is not yet released and we're using 3.x    * (which fails on JDK11 and JDK12). All cassandra tests will be skipped if    * running on JDK11 and JDK12.    *    * @see<a href="https://issues.apache.org/jira/browse/CASSANDRA-9608">CASSANDRA-9608</a>    * @return {@code true} if test is compatible with current environment,    *         {@code false} otherwise    */
+comment|/**    * Whether to run this test.    *<p>Enabled by default, unless explicitly disabled    * from command line ({@code -Dcalcite.test.cassandra=false}) or running on incompatible JDK    * version (see below).    *    *<p>As of this wiring Cassandra 4.x is not yet released and we're using 3.x    * (which fails on JDK11+). All cassandra tests will be skipped if    * running on JDK11+.    *    * @see<a href="https://issues.apache.org/jira/browse/CASSANDRA-9608">CASSANDRA-9608</a>    * @return {@code true} if test is compatible with current environment,    *         {@code false} otherwise    */
 specifier|private
 specifier|static
 name|boolean
@@ -333,15 +333,8 @@ name|TestUtil
 operator|.
 name|getJavaMajorVersion
 argument_list|()
-operator|!=
+operator|<
 literal|11
-operator|&&
-name|TestUtil
-operator|.
-name|getJavaMajorVersion
-argument_list|()
-operator|!=
-literal|12
 decl_stmt|;
 return|return
 name|enabled
