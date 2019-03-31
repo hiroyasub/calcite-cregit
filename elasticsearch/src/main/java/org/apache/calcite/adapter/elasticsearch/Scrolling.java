@@ -469,7 +469,7 @@ name|String
 argument_list|>
 name|closer
 decl_stmt|;
-comment|/**      * Was {@link #closer} consumer already called ?      */
+comment|/** Returns whether {@link #closer} consumer was already called. */
 specifier|private
 name|boolean
 name|closed

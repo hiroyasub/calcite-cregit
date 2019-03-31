@@ -1020,6 +1020,7 @@ name|distribution
 init|=
 name|distributionSimplified
 condition|?
+operator|(
 name|distributionKeys
 operator|.
 name|isEmpty
@@ -1035,6 +1036,7 @@ name|hash
 argument_list|(
 name|distributionKeys
 argument_list|)
+operator|)
 else|:
 name|sortExchange
 operator|.

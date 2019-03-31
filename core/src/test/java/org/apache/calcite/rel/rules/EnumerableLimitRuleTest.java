@@ -313,11 +313,23 @@ begin_import
 import|import static
 name|org
 operator|.
-name|junit
+name|hamcrest
 operator|.
-name|Assert
+name|CoreMatchers
 operator|.
-name|assertEquals
+name|is
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|hamcrest
+operator|.
+name|CoreMatchers
+operator|.
+name|notNullValue
 import|;
 end_import
 
@@ -329,17 +341,16 @@ name|junit
 operator|.
 name|Assert
 operator|.
-name|assertNotNull
+name|assertThat
 import|;
 end_import
 
 begin_comment
-comment|/**  * Tests the application of the {@link org.apache.calcite.adapter.enumerable.EnumerableLimitRule}.  */
+comment|/**  * Tests the application of the {@code EnumerableLimitRule}.  */
 end_comment
 
 begin_class
 specifier|public
-specifier|final
 class|class
 name|EnumerableLimitRuleTest
 block|{
@@ -569,6 +580,7 @@ argument_list|()
 argument_list|)
 decl_stmt|;
 comment|// verify that the collation [0] is not lost in the final plan
+specifier|final
 name|RelCollation
 name|collation
 init|=
@@ -584,11 +596,15 @@ operator|.
 name|INSTANCE
 argument_list|)
 decl_stmt|;
-name|assertNotNull
+name|assertThat
 argument_list|(
 name|collation
+argument_list|,
+name|notNullValue
+argument_list|()
 argument_list|)
 expr_stmt|;
+specifier|final
 name|List
 argument_list|<
 name|RelFieldCollation
@@ -600,25 +616,29 @@ operator|.
 name|getFieldCollations
 argument_list|()
 decl_stmt|;
-name|assertNotNull
+name|assertThat
 argument_list|(
 name|fieldCollationList
+argument_list|,
+name|notNullValue
+argument_list|()
 argument_list|)
 expr_stmt|;
-name|assertEquals
+name|assertThat
 argument_list|(
-literal|1
-argument_list|,
 name|fieldCollationList
 operator|.
 name|size
 argument_list|()
+argument_list|,
+name|is
+argument_list|(
+literal|1
+argument_list|)
 argument_list|)
 expr_stmt|;
-name|assertEquals
+name|assertThat
 argument_list|(
-literal|0
-argument_list|,
 name|fieldCollationList
 operator|.
 name|get
@@ -628,6 +648,11 @@ argument_list|)
 operator|.
 name|getFieldIndex
 argument_list|()
+argument_list|,
+name|is
+argument_list|(
+literal|0
+argument_list|)
 argument_list|)
 expr_stmt|;
 block|}

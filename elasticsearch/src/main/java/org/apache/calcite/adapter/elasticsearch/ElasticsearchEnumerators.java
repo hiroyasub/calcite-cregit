@@ -241,7 +241,7 @@ argument_list|)
 argument_list|)
 condition|)
 block|{
-comment|// is the original projection on _id field ?
+comment|// is the original projection on _id field?
 name|value
 operator|=
 name|hit
@@ -456,7 +456,7 @@ argument_list|()
 argument_list|)
 condition|)
 block|{
-comment|// is the original projection on _id field ?
+comment|// is the original projection on _id field?
 name|value
 operator|=
 name|hit
