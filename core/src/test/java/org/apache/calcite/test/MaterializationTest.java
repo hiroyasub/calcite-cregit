@@ -1896,8 +1896,6 @@ expr_stmt|;
 block|}
 comment|/** As {@link #testFilterQueryOnFilterView()} but condition is stronger in    * query. */
 annotation|@
-name|Ignore
-annotation|@
 name|Test
 specifier|public
 name|void
@@ -1915,11 +1913,6 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/** As {@link #testFilterQueryOnFilterView()} but condition is weaker in    * view. */
-annotation|@
-name|Ignore
-argument_list|(
-literal|"not implemented"
-argument_list|)
 annotation|@
 name|Test
 specifier|public
@@ -1941,9 +1934,11 @@ name|CalciteAssert
 operator|.
 name|checkResultContains
 argument_list|(
-literal|"EnumerableCalcRel(expr#0..2=[{inputs}], expr#3=[1], "
+literal|"EnumerableCalc(expr#0..2=[{inputs}], expr#3=[1], expr#4=[+($t1, $t3)], expr#5=[10], "
 operator|+
-literal|"expr#4=[+($t1, $t3)], X=[$t4], name=[$t2], condition=?)\n"
+literal|"expr#6=[CAST($t0):INTEGER NOT NULL], expr#7=[=($t5, $t6)], $f0=[$t4], "
+operator|+
+literal|"name=[$t2], $condition=[$t7])\n"
 operator|+
 literal|"  EnumerableTableScan(table=[[hr, m0]])"
 argument_list|)
@@ -2324,11 +2319,6 @@ expr_stmt|;
 block|}
 comment|/** Aggregation materialization with a project. */
 annotation|@
-name|Ignore
-argument_list|(
-literal|"work in progress"
-argument_list|)
-annotation|@
 name|Test
 specifier|public
 name|void
@@ -2349,13 +2339,15 @@ name|CalciteAssert
 operator|.
 name|checkResultContains
 argument_list|(
-literal|"xxx"
+literal|"EnumerableCalc(expr#0..1=[{inputs}], expr#2=[1], expr#3=[+($t1, $t2)], $f0=[$t3], deptno=[$t0])\n"
+operator|+
+literal|"  EnumerableAggregate(group=[{0}], agg#0=[$SUM0($1)])\n"
+operator|+
+literal|"    EnumerableTableScan(table=[[hr, m0]])"
 argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-annotation|@
-name|Ignore
 annotation|@
 name|Test
 specifier|public
@@ -2363,16 +2355,24 @@ name|void
 name|testSwapJoin
 parameter_list|()
 block|{
-name|String
-name|q1
-init|=
+name|checkMaterialize
+argument_list|(
 literal|"select count(*) as c from \"foodmart\".\"sales_fact_1997\" as s join \"foodmart\".\"time_by_day\" as t on s.\"time_id\" = t.\"time_id\""
-decl_stmt|;
-name|String
-name|q2
-init|=
+argument_list|,
 literal|"select count(*) as c from \"foodmart\".\"time_by_day\" as t join \"foodmart\".\"sales_fact_1997\" as s on t.\"time_id\" = s.\"time_id\""
-decl_stmt|;
+argument_list|,
+name|JdbcTest
+operator|.
+name|FOODMART_MODEL
+argument_list|,
+name|CalciteAssert
+operator|.
+name|checkResultContains
+argument_list|(
+literal|"EnumerableTableScan(table=[[mat, m0]])"
+argument_list|)
+argument_list|)
+expr_stmt|;
 block|}
 annotation|@
 name|Ignore
@@ -5646,6 +5646,41 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testJoinAggregateMaterializationAggregateFuncs14
+parameter_list|()
+block|{
+name|checkMaterialize
+argument_list|(
+literal|"select \"empid\", \"emps\".\"name\", \"emps\".\"deptno\", \"depts\".\"name\", "
+operator|+
+literal|"count(*) as c, sum(\"empid\") as s\n"
+operator|+
+literal|"from \"emps\" join \"depts\" using (\"deptno\")\n"
+operator|+
+literal|"where (\"depts\".\"name\" is not null and \"emps\".\"name\" = 'a') or "
+operator|+
+literal|"(\"depts\".\"name\" is not null and \"emps\".\"name\" = 'b')\n"
+operator|+
+literal|"group by \"empid\", \"emps\".\"name\", \"depts\".\"name\", \"emps\".\"deptno\""
+argument_list|,
+literal|"select \"depts\".\"deptno\", sum(\"empid\") as s\n"
+operator|+
+literal|"from \"emps\" join \"depts\" using (\"deptno\")\n"
+operator|+
+literal|"where \"depts\".\"name\" is not null and \"emps\".\"name\" = 'a'\n"
+operator|+
+literal|"group by \"depts\".\"deptno\""
+argument_list|,
+name|HR_FKUK_MODEL
+argument_list|,
+name|CONTAINS_M0
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testJoinMaterialization4
 parameter_list|()
 block|{
@@ -5921,6 +5956,39 @@ operator|+
 literal|"where \"deptno\" in (select \"deptno\" from \"depts\")"
 argument_list|,
 name|HR_FKUK_MODEL
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testJoinMaterialization12
+parameter_list|()
+block|{
+name|checkMaterialize
+argument_list|(
+literal|"select \"empid\", \"emps\".\"name\", \"emps\".\"deptno\", \"depts\".\"name\"\n"
+operator|+
+literal|"from \"emps\" join \"depts\" using (\"deptno\")\n"
+operator|+
+literal|"where (\"depts\".\"name\" is not null and \"emps\".\"name\" = 'a') or "
+operator|+
+literal|"(\"depts\".\"name\" is not null and \"emps\".\"name\" = 'b') or "
+operator|+
+literal|"(\"depts\".\"name\" is not null and \"emps\".\"name\" = 'c')"
+argument_list|,
+literal|"select \"depts\".\"deptno\", \"depts\".\"name\"\n"
+operator|+
+literal|"from \"emps\" join \"depts\" using (\"deptno\")\n"
+operator|+
+literal|"where (\"depts\".\"name\" is not null and \"emps\".\"name\" = 'a') or "
+operator|+
+literal|"(\"depts\".\"name\" is not null and \"emps\".\"name\" = 'b')"
+argument_list|,
+name|HR_FKUK_MODEL
+argument_list|,
+name|CONTAINS_M0
 argument_list|)
 expr_stmt|;
 block|}
