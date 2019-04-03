@@ -35182,6 +35182,33 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testJsonRemove
+parameter_list|()
+block|{
+name|checkExp
+argument_list|(
+literal|"json_remove('{\"foo\":\"bar\"}', '$')"
+argument_list|)
+expr_stmt|;
+name|checkExpType
+argument_list|(
+literal|"json_remove('{\"foo\":\"bar\"}', '$')"
+argument_list|,
+literal|"VARCHAR(2000)"
+argument_list|)
+expr_stmt|;
+name|checkFails
+argument_list|(
+literal|"select ^json_remove('{\"foo\":\"bar\"}')^"
+argument_list|,
+literal|"(?s).*Invalid number of arguments.*"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testJsonObjectAgg
 parameter_list|()
 block|{

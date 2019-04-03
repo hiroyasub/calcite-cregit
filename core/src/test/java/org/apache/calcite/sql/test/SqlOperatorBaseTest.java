@@ -20093,6 +20093,99 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testJsonRemove
+parameter_list|()
+block|{
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"json_remove('{\"foo\":100}', '$.foo')"
+argument_list|,
+literal|"{}"
+argument_list|,
+literal|"VARCHAR(2000)"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"json_remove('{\"foo\":100, \"foo1\":100}', '$.foo')"
+argument_list|,
+literal|"{\"foo1\":100}"
+argument_list|,
+literal|"VARCHAR(2000)"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"json_remove('[\"a\", [\"b\", \"c\"], \"d\"]', '$[1][0]')"
+argument_list|,
+literal|"[\"a\",[\"c\"],\"d\"]"
+argument_list|,
+literal|"VARCHAR(2000)"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"json_remove('[\"a\", [\"b\", \"c\"], \"d\"]', '$[1]')"
+argument_list|,
+literal|"[\"a\",\"d\"]"
+argument_list|,
+literal|"VARCHAR(2000)"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"json_remove('[\"a\", [\"b\", \"c\"], \"d\"]', '$[0]', '$[0]')"
+argument_list|,
+literal|"[\"d\"]"
+argument_list|,
+literal|"VARCHAR(2000)"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkFails
+argument_list|(
+literal|"json_remove('[\"a\", [\"b\", \"c\"], \"d\"]', '$')"
+argument_list|,
+literal|"(?s).*Invalid input for.*"
+argument_list|,
+literal|true
+argument_list|)
+expr_stmt|;
+comment|// nulls
+name|tester
+operator|.
+name|checkFails
+argument_list|(
+literal|"json_remove(^null^, '$')"
+argument_list|,
+literal|"(?s).*Illegal use of 'NULL'.*"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkNull
+argument_list|(
+literal|"json_remove(cast(null as varchar), '$')"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testJsonObject
 parameter_list|()
 block|{

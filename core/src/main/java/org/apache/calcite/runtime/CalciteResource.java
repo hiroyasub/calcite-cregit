@@ -4145,7 +4145,7 @@ function_decl|;
 annotation|@
 name|BaseMessage
 argument_list|(
-literal|"Cannot serialize object to JSON, and the object is: ''{0}''"
+literal|"Cannot serialize object to JSON: ''{0}''"
 argument_list|)
 name|ExInst
 argument_list|<
@@ -4185,6 +4185,24 @@ name|invalidInputForJsonKeys
 parameter_list|(
 name|String
 name|value
+parameter_list|)
+function_decl|;
+annotation|@
+name|BaseMessage
+argument_list|(
+literal|"Invalid input for JSON_REMOVE: document: ''{0}'', jsonpath expressions: ''{1}''"
+argument_list|)
+name|ExInst
+argument_list|<
+name|CalciteException
+argument_list|>
+name|invalidInputForJsonRemove
+parameter_list|(
+name|String
+name|value
+parameter_list|,
+name|String
+name|pathSpecs
 parameter_list|)
 function_decl|;
 block|}

@@ -4096,6 +4096,16 @@ decl_stmt|;
 specifier|public
 specifier|static
 specifier|final
+name|SqlFunction
+name|JSON_REMOVE
+init|=
+operator|new
+name|SqlJsonRemoveFunction
+argument_list|()
+decl_stmt|;
+specifier|public
+specifier|static
+specifier|final
 name|SqlJsonObjectAggAggFunction
 name|JSON_OBJECTAGG
 init|=

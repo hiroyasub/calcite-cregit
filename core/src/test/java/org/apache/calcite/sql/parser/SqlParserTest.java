@@ -28335,6 +28335,28 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testJsonRemove
+parameter_list|()
+block|{
+name|checkExp
+argument_list|(
+literal|"json_remove('[\"a\", [\"b\", \"c\"], \"d\"]', '$')"
+argument_list|,
+literal|"JSON_REMOVE('[\"a\", [\"b\", \"c\"], \"d\"]', '$')"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"json_remove('[\"a\", [\"b\", \"c\"], \"d\"]', '$[1]', '$[0]')"
+argument_list|,
+literal|"JSON_REMOVE('[\"a\", [\"b\", \"c\"], \"d\"]', '$[1]', '$[0]')"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testJsonObjectAgg
 parameter_list|()
 block|{
