@@ -16550,7 +16550,7 @@ name|sql
 argument_list|(
 literal|"select * from emp natural join\n"
 operator|+
-literal|" (select deptno, name as sal, 'foo' as sal from dept)"
+literal|" (select deptno, name as sal, 'foo' as sal2 from dept)"
 argument_list|)
 operator|.
 name|ok
@@ -18398,7 +18398,7 @@ expr_stmt|;
 comment|// empno is not an alias in the first select in the union
 name|checkFails
 argument_list|(
-literal|"select deptno, deptno from dept "
+literal|"select deptno, deptno as no2 from dept "
 operator|+
 literal|"union all "
 operator|+
@@ -23451,6 +23451,83 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testSelectAmbiguousField
+parameter_list|()
+block|{
+name|tester
+operator|=
+name|tester
+operator|.
+name|withCaseSensitive
+argument_list|(
+literal|false
+argument_list|)
+operator|.
+name|withUnquotedCasing
+argument_list|(
+name|Casing
+operator|.
+name|UNCHANGED
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select ^t0^ from (select 1 as t0, 2 as T0 from dept)"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Column 't0' is ambiguous"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select ^t0^ from (select 1 as t0, 2 as t0,3 as t1,4 as t1, 5 as t2 from dept)"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Column 't0' is ambiguous"
+argument_list|)
+expr_stmt|;
+comment|// t0 is not referenced,so this case is allowed
+name|sql
+argument_list|(
+literal|"select 1 as t0, 2 as t0 from dept"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|tester
+operator|=
+name|tester
+operator|.
+name|withCaseSensitive
+argument_list|(
+literal|true
+argument_list|)
+operator|.
+name|withUnquotedCasing
+argument_list|(
+name|Casing
+operator|.
+name|UNCHANGED
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select t0 from (select 1 as t0, 2 as T0 from DEPT)"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testTableExtend
 parameter_list|()
 block|{
@@ -25405,6 +25482,13 @@ argument_list|(
 literal|true
 argument_list|)
 operator|.
+name|withUnquotedCasing
+argument_list|(
+name|Casing
+operator|.
+name|UNCHANGED
+argument_list|)
+operator|.
 name|withQuoting
 argument_list|(
 name|Quoting
@@ -25426,70 +25510,70 @@ name|tester1
 operator|.
 name|checkQuery
 argument_list|(
-literal|"select sum(empno) from EMP group by ename, empno"
+literal|"select sum(EMPNO) from EMP group by ENAME, EMPNO"
 argument_list|)
 expr_stmt|;
 name|tester1
 operator|.
 name|checkQuery
 argument_list|(
-literal|"select [sum](empno) from EMP group by ename, empno"
+literal|"select [sum](EMPNO) from EMP group by ENAME, EMPNO"
 argument_list|)
 expr_stmt|;
 name|tester1
 operator|.
 name|checkQuery
 argument_list|(
-literal|"select [SUM](empno) from EMP group by ename, empno"
+literal|"select [SUM](EMPNO) from EMP group by ENAME, EMPNO"
 argument_list|)
 expr_stmt|;
 name|tester1
 operator|.
 name|checkQuery
 argument_list|(
-literal|"select SUM(empno) from EMP group by ename, empno"
+literal|"select SUM(EMPNO) from EMP group by ENAME, EMPNO"
 argument_list|)
 expr_stmt|;
 name|tester1
 operator|.
 name|checkQuery
 argument_list|(
-literal|"select Sum(empno) from EMP group by ename, empno"
+literal|"select Sum(EMPNO) from EMP group by ENAME, EMPNO"
 argument_list|)
 expr_stmt|;
 name|tester1
 operator|.
 name|checkQuery
 argument_list|(
-literal|"select count(empno) from EMP group by ename, empno"
+literal|"select count(EMPNO) from EMP group by ENAME, EMPNO"
 argument_list|)
 expr_stmt|;
 name|tester1
 operator|.
 name|checkQuery
 argument_list|(
-literal|"select [count](empno) from EMP group by ename, empno"
+literal|"select [count](EMPNO) from EMP group by ENAME, EMPNO"
 argument_list|)
 expr_stmt|;
 name|tester1
 operator|.
 name|checkQuery
 argument_list|(
-literal|"select [COUNT](empno) from EMP group by ename, empno"
+literal|"select [COUNT](EMPNO) from EMP group by ENAME, EMPNO"
 argument_list|)
 expr_stmt|;
 name|tester1
 operator|.
 name|checkQuery
 argument_list|(
-literal|"select COUNT(empno) from EMP group by ename, empno"
+literal|"select COUNT(EMPNO) from EMP group by ENAME, EMPNO"
 argument_list|)
 expr_stmt|;
 name|tester1
 operator|.
 name|checkQuery
 argument_list|(
-literal|"select Count(empno) from EMP group by ename, empno"
+literal|"select Count(EMPNO) from EMP group by ENAME, EMPNO"
 argument_list|)
 expr_stmt|;
 block|}
@@ -26849,6 +26933,13 @@ argument_list|(
 literal|true
 argument_list|)
 operator|.
+name|withUnquotedCasing
+argument_list|(
+name|Casing
+operator|.
+name|UNCHANGED
+argument_list|)
+operator|.
 name|withQuoting
 argument_list|(
 name|Quoting
@@ -26861,7 +26952,7 @@ name|sql
 init|=
 literal|"select [e] from (\n"
 operator|+
-literal|"select empno as [e], deptno as d, 1 as [e] from EMP)"
+literal|"select EMPNO as [e], DEPTNO as d, 1 as [e2] from EMP)"
 decl_stmt|;
 name|sensitive
 operator|.
@@ -26880,9 +26971,9 @@ expr_stmt|;
 name|String
 name|sql1
 init|=
-literal|"select e from (\n"
+literal|"select e2 from (\n"
 operator|+
-literal|"select empno as [e], deptno as d, 1 as [E] from EMP)"
+literal|"select EMPNO as [e2], DEPTNO as d, 1 as [E] from EMP)"
 decl_stmt|;
 name|insensitive
 operator|.

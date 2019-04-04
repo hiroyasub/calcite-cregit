@@ -2225,7 +2225,7 @@ name|sql
 init|=
 literal|"select \"e\" from (\n"
 operator|+
-literal|"select empno as \"e\", deptno as d, 1 as \"e\" from EMP)"
+literal|"select empno as \"e\", deptno as d, 1 as \"e0\" from EMP)"
 decl_stmt|;
 name|sql
 argument_list|(
