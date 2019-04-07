@@ -998,7 +998,7 @@ literal|"(?s)Encountered \"when then\" at .*"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Babel parser's global LOOKAHEAD is larger than the core parser's, this causes different    * parse error message between these two parser types. Here we define a looser error checker    * for Babel to reuse failure testing codes from {@link SqlParserTest}.    *    * Test cases just written in this file is still checked by {@link SqlParserTest}'s checker.    */
+comment|/**    * Babel parser's global {@code OOKAHEAD} is larger than the core    * parser's. This causes different parse error message between these two    * parsers. Here we define a looser error checker for Babel, so that we can    * reuse failure testing codes from {@link SqlParserTest}.    *    *<p>If a test case is written in this file -- that is, not inherited -- it    * is still checked by {@link SqlParserTest}'s checker.    */
 annotation|@
 name|Override
 specifier|protected
