@@ -861,6 +861,14 @@ name|e
 operator|.
 name|op
 decl_stmt|;
+comment|// SOME_EQ (=SOME) should have been rewritten into IN
+assert|assert
+name|op
+operator|!=
+name|SqlStdOperatorTable
+operator|.
+name|SOME_EQ
+assert|;
 name|builder
 operator|.
 name|push

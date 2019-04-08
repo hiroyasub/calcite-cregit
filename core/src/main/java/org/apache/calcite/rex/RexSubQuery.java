@@ -304,7 +304,7 @@ name|rel
 argument_list|)
 return|;
 block|}
-comment|/** Creates a SOME sub-query.    *    *<p>There is no ALL. For {@code x comparison ALL (sub-query)} use instead    * {@code NOT (x inverse-comparison SOME (sub-query))}.    * If {@code comparison} is {@code>}    * then {@code negated-comparison} is {@code<=}, and so forth. */
+comment|/** Creates a SOME sub-query.    *    *<p>There is no ALL. For {@code x comparison ALL (sub-query)} use instead    * {@code NOT (x inverse-comparison SOME (sub-query))}.    * If {@code comparison} is {@code>}    * then {@code negated-comparison} is {@code<=}, and so forth.    *    *<p>Also =SOME is rewritten into IN</p> */
 specifier|public
 specifier|static
 name|RexSubQuery
@@ -332,6 +332,26 @@ name|SqlKind
 operator|.
 name|SOME
 assert|;
+if|if
+condition|(
+name|op
+operator|==
+name|SqlStdOperatorTable
+operator|.
+name|SOME_EQ
+condition|)
+block|{
+return|return
+name|RexSubQuery
+operator|.
+name|in
+argument_list|(
+name|rel
+argument_list|,
+name|nodes
+argument_list|)
+return|;
+block|}
 specifier|final
 name|RelDataType
 name|type
