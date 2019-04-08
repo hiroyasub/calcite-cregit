@@ -24019,6 +24019,28 @@ literal|"RecordType(VARCHAR(10) OA) NOT NULL"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testItemOperatorException
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"select ^name[0]^ from dept"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Cannot apply 'ITEM' to arguments of type 'ITEM\\(<VARCHAR\\(10\\)>, "
+operator|+
+literal|"<INTEGER>\\)'\\. Supported form\\(s\\):<ARRAY>\\[<INTEGER>\\]\n"
+operator|+
+literal|"<MAP>\\[<VALUE>\\].*"
+argument_list|)
+expr_stmt|;
+block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-497">[CALCITE-497]    * Support optional qualifier for column name references</a>. */
 annotation|@
 name|Test
