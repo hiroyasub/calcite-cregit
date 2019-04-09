@@ -7930,11 +7930,6 @@ argument_list|()
 expr_stmt|;
 block|}
 annotation|@
-name|Ignore
-argument_list|(
-literal|"CALCITE-1527"
-argument_list|)
-annotation|@
 name|Test
 specifier|public
 name|void
