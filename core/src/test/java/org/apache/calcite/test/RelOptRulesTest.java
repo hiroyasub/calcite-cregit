@@ -3228,7 +3228,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testJoinProjectTranspose
+name|testJoinProjectTranspose1
 parameter_list|()
 block|{
 specifier|final
@@ -3330,6 +3330,264 @@ argument_list|)
 argument_list|,
 name|sql
 argument_list|)
+expr_stmt|;
+block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1338">[CALCITE-1338]    * JoinProjectTransposeRule should not pull a literal above the    * null-generating side of a join</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testJoinProjectTranspose2
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"from dept a\n"
+operator|+
+literal|"left join (select name, 1 from dept) as b\n"
+operator|+
+literal|"on a.name = b.name"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|withRule
+argument_list|(
+name|JoinProjectTransposeRule
+operator|.
+name|RIGHT_PROJECT_INCLUDE_OUTER
+argument_list|)
+operator|.
+name|checkUnchanged
+argument_list|()
+expr_stmt|;
+block|}
+comment|/** As {@link #testJoinProjectTranspose2()};    * should not transpose since the left project of right join has literal. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testJoinProjectTranspose3
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"from (select name, 1 from dept) as a\n"
+operator|+
+literal|"right join dept b\n"
+operator|+
+literal|"on a.name = b.name"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|withRule
+argument_list|(
+name|JoinProjectTransposeRule
+operator|.
+name|LEFT_PROJECT_INCLUDE_OUTER
+argument_list|)
+operator|.
+name|checkUnchanged
+argument_list|()
+expr_stmt|;
+block|}
+comment|/** As {@link #testJoinProjectTranspose2()};    * should not transpose since the right project of left join has not-strong    * expression {@code y is not null}. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testJoinProjectTranspose4
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"from dept a\n"
+operator|+
+literal|"left join (select x name, y is not null from\n"
+operator|+
+literal|"(values (2, cast(null as integer)), (2, 1)) as t(x, y)) b\n"
+operator|+
+literal|"on a.name = b.name"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|withRule
+argument_list|(
+name|JoinProjectTransposeRule
+operator|.
+name|RIGHT_PROJECT_INCLUDE_OUTER
+argument_list|)
+operator|.
+name|checkUnchanged
+argument_list|()
+expr_stmt|;
+block|}
+comment|/** As {@link #testJoinProjectTranspose2()};    * should not transpose since the right project of left join has not-strong    * expression {@code 1 + 1}. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testJoinProjectTranspose5
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"from dept a\n"
+operator|+
+literal|"left join (select name, 1 + 1 from dept) as b\n"
+operator|+
+literal|"on a.name = b.name"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|withRule
+argument_list|(
+name|JoinProjectTransposeRule
+operator|.
+name|RIGHT_PROJECT_INCLUDE_OUTER
+argument_list|)
+operator|.
+name|checkUnchanged
+argument_list|()
+expr_stmt|;
+block|}
+comment|/** As {@link #testJoinProjectTranspose2()};    * should not transpose since both the left project and right project have    * literal. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testJoinProjectTranspose6
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"from (select name, 1 from dept) a\n"
+operator|+
+literal|"full join (select name, 1 from dept) as b\n"
+operator|+
+literal|"on a.name = b.name"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|withRule
+argument_list|(
+name|JoinProjectTransposeRule
+operator|.
+name|RIGHT_PROJECT_INCLUDE_OUTER
+argument_list|)
+operator|.
+name|checkUnchanged
+argument_list|()
+expr_stmt|;
+block|}
+comment|/** As {@link #testJoinProjectTranspose2()};    * Should transpose since all expressions in the right project of left join    * are strong. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testJoinProjectTranspose7
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"from dept a\n"
+operator|+
+literal|"left join (select name from dept) as b\n"
+operator|+
+literal|" on a.name = b.name"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|withRule
+argument_list|(
+name|JoinProjectTransposeRule
+operator|.
+name|RIGHT_PROJECT_INCLUDE_OUTER
+argument_list|)
+operator|.
+name|check
+argument_list|()
+expr_stmt|;
+block|}
+comment|/** As {@link #testJoinProjectTranspose2()};    * should transpose since all expressions including    * {@code deptno> 10 and cast(null as boolean)} in the right project of left    * join are strong. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testJoinProjectTranspose8
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"from dept a\n"
+operator|+
+literal|"left join (\n"
+operator|+
+literal|"  select name, deptno> 10 and cast(null as boolean)\n"
+operator|+
+literal|"  from dept) as b\n"
+operator|+
+literal|"on a.name = b.name"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|withRule
+argument_list|(
+name|JoinProjectTransposeRule
+operator|.
+name|RIGHT_PROJECT_INCLUDE_OUTER
+argument_list|)
+operator|.
+name|check
+argument_list|()
 expr_stmt|;
 block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-889">[CALCITE-889]    * Implement SortUnionTransposeRule</a>. */
@@ -19181,13 +19439,13 @@ specifier|final
 name|String
 name|sql
 init|=
-literal|"select sal, \n"
+literal|"select sal,\n"
 operator|+
 literal|" empno NOT IN (\n"
 operator|+
-literal|" select deptno from dept \n"
+literal|" select deptno from dept\n"
 operator|+
-literal|"   where emp.job=dept.name) \n"
+literal|"   where emp.job=dept.name)\n"
 operator|+
 literal|" from emp"
 decl_stmt|;
