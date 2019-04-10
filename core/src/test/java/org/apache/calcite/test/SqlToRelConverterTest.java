@@ -9602,6 +9602,57 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+comment|/**    * Test case for<a href="https://issues.apache.org/jira/browse/CALCITE-2962">[CALCITE-2962]    * RelStructuredTypeFlattener generates wrong types for nested column when flattenProjection</a>.    */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSelectNestedColumnType
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select\n"
+operator|+
+literal|"  char_length(coord.\"unit\") as unit_length\n"
+operator|+
+literal|"from\n"
+operator|+
+literal|"  (\n"
+operator|+
+literal|"    select\n"
+operator|+
+literal|"      fname,\n"
+operator|+
+literal|"      coord\n"
+operator|+
+literal|"    from\n"
+operator|+
+literal|"      customer.contact_peek\n"
+operator|+
+literal|"    where\n"
+operator|+
+literal|"      coord.x> 1\n"
+operator|+
+literal|"      and coord.y> 1\n"
+operator|+
+literal|"  ) as view\n"
+operator|+
+literal|"where\n"
+operator|+
+literal|"  fname = 'john'"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
 annotation|@
 name|Test
 specifier|public

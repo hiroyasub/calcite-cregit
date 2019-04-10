@@ -3397,6 +3397,8 @@ name|inputRef
 operator|.
 name|getIndex
 argument_list|()
+argument_list|,
+name|j
 argument_list|)
 decl_stmt|;
 name|flattenedExps
@@ -3413,8 +3415,6 @@ argument_list|(
 name|newField
 operator|.
 name|i
-operator|+
-name|j
 argument_list|,
 name|newField
 operator|.

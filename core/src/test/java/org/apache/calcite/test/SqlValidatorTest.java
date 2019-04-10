@@ -24109,7 +24109,9 @@ literal|"RecordType(INTEGER NOT NULL CONTACTNO, VARCHAR(10) NOT NULL FNAME, "
 operator|+
 literal|"VARCHAR(10) NOT NULL LNAME, VARCHAR(20) NOT NULL EMAIL, INTEGER NOT NULL X, "
 operator|+
-literal|"INTEGER NOT NULL Y, RecordType:peek_no_expand(INTEGER NOT NULL M, "
+literal|"INTEGER NOT NULL Y, VARCHAR(20) NOT NULL unit, "
+operator|+
+literal|"RecordType:peek_no_expand(INTEGER NOT NULL M, "
 operator|+
 literal|"RecordType:peek_no_expand(INTEGER NOT NULL A, INTEGER NOT NULL B) "
 operator|+

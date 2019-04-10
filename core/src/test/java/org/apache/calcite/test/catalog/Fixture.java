@@ -430,6 +430,13 @@ argument_list|,
 name|intType
 argument_list|)
 operator|.
+name|add
+argument_list|(
+literal|"unit"
+argument_list|,
+name|varchar20Type
+argument_list|)
+operator|.
 name|kind
 argument_list|(
 name|StructKind
