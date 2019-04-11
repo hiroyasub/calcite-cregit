@@ -233,7 +233,7 @@ name|String
 name|tag
 parameter_list|)
 function_decl|;
-comment|/**    * Returns a {@code float} value. Throws if wrong type.    */
+comment|/**    * Returns a {@code string} value. Throws if wrong type.    */
 name|String
 name|getString
 parameter_list|(
