@@ -43,9 +43,9 @@ name|calcite
 operator|.
 name|rel
 operator|.
-name|type
+name|core
 operator|.
-name|RelDataType
+name|JoinRelType
 import|;
 end_import
 
@@ -57,9 +57,11 @@ name|apache
 operator|.
 name|calcite
 operator|.
-name|sql
+name|rel
 operator|.
-name|SemiJoinType
+name|type
+operator|.
+name|RelDataType
 import|;
 end_import
 
@@ -110,7 +112,7 @@ name|requiredColumns
 decl_stmt|;
 specifier|public
 specifier|final
-name|SemiJoinType
+name|JoinRelType
 name|joinType
 decl_stmt|;
 specifier|private
@@ -131,7 +133,7 @@ parameter_list|,
 name|ImmutableBitSet
 name|requiredColumns
 parameter_list|,
-name|SemiJoinType
+name|JoinRelType
 name|joinType
 parameter_list|)
 block|{
@@ -192,7 +194,7 @@ parameter_list|,
 name|ImmutableBitSet
 name|requiredColumns
 parameter_list|,
-name|SemiJoinType
+name|JoinRelType
 name|joinType
 parameter_list|)
 block|{

@@ -423,11 +423,11 @@ literal|"org.apache.calcite.adapter.enumerable.EnumerableFilter"
 block|,
 literal|"org.apache.calcite.adapter.jdbc.JdbcToEnumerableConverter"
 block|,
-literal|"org.apache.calcite.adapter.enumerable.EnumerableThetaJoin"
+literal|"org.apache.calcite.adapter.enumerable.EnumerableNestedLoopJoin"
 block|,
 literal|"org.apache.calcite.adapter.enumerable.EnumerableTableScan"
 block|,
-literal|"org.apache.calcite.adapter.enumerable.EnumerableJoin"
+literal|"org.apache.calcite.adapter.enumerable.EnumerableHashJoin"
 block|,
 literal|"org.apache.calcite.adapter.enumerable.EnumerableTableModify"
 block|,

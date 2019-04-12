@@ -1453,10 +1453,9 @@ decl_stmt|;
 if|if
 condition|(
 name|joinType
-operator|!=
-name|JoinRelType
 operator|.
-name|INNER
+name|isOuterJoin
+argument_list|()
 condition|)
 block|{
 name|newExpr
@@ -1529,10 +1528,9 @@ comment|// projection to fix differences wrt nullability of fields
 if|if
 condition|(
 name|joinType
-operator|!=
-name|JoinRelType
 operator|.
-name|INNER
+name|isOuterJoin
+argument_list|()
 condition|)
 block|{
 name|relBuilder

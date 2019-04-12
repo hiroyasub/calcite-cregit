@@ -273,7 +273,7 @@ literal|"PLAN="
 operator|+
 literal|"EnumerableCalc(expr#0..2=[{inputs}], day=[$t1], week_day=[$t2], C=[$t0])\n"
 operator|+
-literal|"  EnumerableJoin(condition=[true], joinType=[inner])\n"
+literal|"  EnumerableHashJoin(condition=[true], joinType=[inner])\n"
 operator|+
 literal|"    EnumerableValues(tuples=[[{ 1 }, { 2 }]])\n"
 operator|+
@@ -1092,7 +1092,7 @@ argument_list|)
 operator|.
 name|explainContains
 argument_list|(
-literal|"PLAN=EnumerableJoin(condition=[true], "
+literal|"PLAN=EnumerableHashJoin(condition=[true], "
 operator|+
 literal|"joinType=[inner])\n"
 operator|+

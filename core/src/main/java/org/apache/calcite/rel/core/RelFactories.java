@@ -517,20 +517,6 @@ name|calcite
 operator|.
 name|sql
 operator|.
-name|SemiJoinType
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|sql
-operator|.
 name|SqlKind
 import|;
 end_import
@@ -705,16 +691,6 @@ decl_stmt|;
 specifier|public
 specifier|static
 specifier|final
-name|SemiJoinFactory
-name|DEFAULT_SEMI_JOIN_FACTORY
-init|=
-operator|new
-name|SemiJoinFactoryImpl
-argument_list|()
-decl_stmt|;
-specifier|public
-specifier|static
-specifier|final
 name|SortFactory
 name|DEFAULT_SORT_FACTORY
 init|=
@@ -852,8 +828,6 @@ argument_list|,
 name|DEFAULT_FILTER_FACTORY
 argument_list|,
 name|DEFAULT_JOIN_FACTORY
-argument_list|,
-name|DEFAULT_SEMI_JOIN_FACTORY
 argument_list|,
 name|DEFAULT_SORT_FACTORY
 argument_list|,
@@ -1569,7 +1543,7 @@ parameter_list|,
 name|ImmutableBitSet
 name|requiredColumns
 parameter_list|,
-name|SemiJoinType
+name|JoinRelType
 name|joinType
 parameter_list|)
 function_decl|;
@@ -1598,7 +1572,7 @@ parameter_list|,
 name|ImmutableBitSet
 name|requiredColumns
 parameter_list|,
-name|SemiJoinType
+name|JoinRelType
 name|joinType
 parameter_list|)
 block|{
@@ -1620,7 +1594,10 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/**    * Can create a semi-join of the appropriate type for a rule's calling    * convention.    */
+comment|/**    * Can create a semi-join of the appropriate type for a rule's calling    * convention.    *    * @deprecated Use {@link JoinFactory} instead.    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 interface|interface
 name|SemiJoinFactory
@@ -1640,7 +1617,10 @@ name|condition
 parameter_list|)
 function_decl|;
 block|}
-comment|/**    * Implementation of {@link SemiJoinFactory} that returns a vanilla    * {@link SemiJoin}.    */
+comment|/**    * Implementation of {@link SemiJoinFactory} that returns a vanilla    * {@link SemiJoin}.    *    * @deprecated Use {@link JoinFactoryImpl} instead.    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|private
 specifier|static
 class|class

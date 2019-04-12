@@ -121,6 +121,9 @@ operator|new
 name|EnumerableMergeJoinRule
 argument_list|()
 decl_stmt|;
+annotation|@
+name|Deprecated
+comment|// To be removed before 2.0, use ENUMERABLE_JOIN_RULE instead.
 specifier|public
 specifier|static
 specifier|final

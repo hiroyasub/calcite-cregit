@@ -29,6 +29,22 @@ name|adapter
 operator|.
 name|enumerable
 operator|.
+name|EnumerableCorrelate
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|adapter
+operator|.
+name|enumerable
+operator|.
 name|EnumerableRules
 import|;
 end_import
@@ -188,7 +204,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Unit test for  * {@link org.apache.calcite.adapter.enumerable.EnumerableCorrelate}.  */
+comment|/**  * Unit test for  * {@link EnumerableCorrelate}.  */
 end_comment
 
 begin_class
@@ -235,14 +251,15 @@ operator|)
 name|planner
 lambda|->
 block|{
-comment|// force the left outer join to run via EnumerableCorrelate instead of EnumerableJoin
+comment|// force the left outer join to run via EnumerableCorrelate
+comment|// instead of EnumerableHashJoin
 name|planner
 operator|.
 name|addRule
 argument_list|(
 name|JoinToCorrelateRule
 operator|.
-name|JOIN
+name|INSTANCE
 argument_list|)
 expr_stmt|;
 name|planner
@@ -315,7 +332,7 @@ literal|""
 operator|+
 literal|"EnumerableCalc(expr#0..2=[{inputs}], empid=[$t0], name=[$t2])\n"
 operator|+
-literal|"  EnumerableSemiJoin(condition=[=($1, $3)], joinType=[inner])\n"
+literal|"  EnumerableHashJoin(condition=[=($1, $3)], joinType=[semi])\n"
 operator|+
 literal|"    EnumerableCalc(expr#0..4=[{inputs}], proj#0..2=[{exprs}])\n"
 operator|+
@@ -373,14 +390,15 @@ operator|)
 name|planner
 lambda|->
 block|{
-comment|// force the semi-join to run via EnumerableCorrelate instead of EnumerableJoin/SemiJoin
+comment|// force the semijoin to run via EnumerableCorrelate
+comment|// instead of EnumerableHashJoin(SEMI)
 name|planner
 operator|.
 name|addRule
 argument_list|(
 name|JoinToCorrelateRule
 operator|.
-name|SEMI
+name|INSTANCE
 argument_list|)
 expr_stmt|;
 name|planner
@@ -392,15 +410,6 @@ operator|.
 name|ENUMERABLE_JOIN_RULE
 argument_list|)
 expr_stmt|;
-name|planner
-operator|.
-name|removeRule
-argument_list|(
-name|EnumerableRules
-operator|.
-name|ENUMERABLE_SEMI_JOIN_RULE
-argument_list|)
-expr_stmt|;
 block|}
 argument_list|)
 operator|.
@@ -408,17 +417,17 @@ name|explainContains
 argument_list|(
 literal|""
 operator|+
-literal|"EnumerableCalc(expr#0..2=[{inputs}], empid=[$t0], name=[$t2])\n"
+literal|"EnumerableCalc(expr#0..3=[{inputs}], empid=[$t1], name=[$t3])\n"
 operator|+
-literal|"  EnumerableCorrelate(correlation=[$cor1], joinType=[semi], requiredColumns=[{1}])\n"
+literal|"  EnumerableCorrelate(correlation=[$cor2], joinType=[inner], requiredColumns=[{0}])\n"
 operator|+
-literal|"    EnumerableCalc(expr#0..4=[{inputs}], proj#0..2=[{exprs}])\n"
+literal|"    EnumerableAggregate(group=[{0}])\n"
 operator|+
-literal|"      EnumerableTableScan(table=[[s, emps]])\n"
+literal|"      EnumerableTableScan(table=[[s, depts]])\n"
 operator|+
-literal|"    EnumerableCalc(expr#0..3=[{inputs}], expr#4=[$cor1], expr#5=[$t4.deptno], expr#6=[=($t5, $t0)], proj#0..3=[{exprs}], $condition=[$t6])\n"
+literal|"    EnumerableCalc(expr#0..4=[{inputs}], expr#5=[$cor2], expr#6=[$t5.deptno], expr#7=[=($t1, $t6)], proj#0..2=[{exprs}], $condition=[$t7])\n"
 operator|+
-literal|"      EnumerableTableScan(table=[[s, depts]])"
+literal|"      EnumerableTableScan(table=[[s, emps]])"
 argument_list|)
 operator|.
 name|returnsUnordered
@@ -470,7 +479,8 @@ operator|)
 name|planner
 lambda|->
 block|{
-comment|// force the semi-join to run via EnumerableCorrelate instead of EnumerableJoin/SemiJoin,
+comment|// force the semijoin to run via EnumerableCorrelate
+comment|// instead of EnumerableHashJoin(SEMI),
 comment|// and push the 'empid> 100' filter into the Correlate
 name|planner
 operator|.
@@ -478,7 +488,7 @@ name|addRule
 argument_list|(
 name|JoinToCorrelateRule
 operator|.
-name|SEMI
+name|INSTANCE
 argument_list|)
 expr_stmt|;
 name|planner
@@ -499,15 +509,6 @@ operator|.
 name|ENUMERABLE_JOIN_RULE
 argument_list|)
 expr_stmt|;
-name|planner
-operator|.
-name|removeRule
-argument_list|(
-name|EnumerableRules
-operator|.
-name|ENUMERABLE_SEMI_JOIN_RULE
-argument_list|)
-expr_stmt|;
 block|}
 argument_list|)
 operator|.
@@ -515,17 +516,17 @@ name|explainContains
 argument_list|(
 literal|""
 operator|+
-literal|"EnumerableCalc(expr#0..2=[{inputs}], empid=[$t0], name=[$t2])\n"
+literal|"EnumerableCalc(expr#0..3=[{inputs}], empid=[$t1], name=[$t3])\n"
 operator|+
-literal|"  EnumerableCorrelate(correlation=[$cor3], joinType=[semi], requiredColumns=[{1}])\n"
+literal|"  EnumerableCorrelate(correlation=[$cor5], joinType=[inner], requiredColumns=[{0}])\n"
 operator|+
-literal|"    EnumerableCalc(expr#0..4=[{inputs}], expr#5=[100], expr#6=[>($t0, $t5)], proj#0..2=[{exprs}], $condition=[$t6])\n"
+literal|"    EnumerableAggregate(group=[{0}])\n"
 operator|+
-literal|"      EnumerableTableScan(table=[[s, emps]])\n"
+literal|"      EnumerableTableScan(table=[[s, depts]])\n"
 operator|+
-literal|"    EnumerableCalc(expr#0..3=[{inputs}], expr#4=[$cor3], expr#5=[$t4.deptno], expr#6=[=($t5, $t0)], proj#0..3=[{exprs}], $condition=[$t6])\n"
+literal|"    EnumerableCalc(expr#0..4=[{inputs}], expr#5=[100], expr#6=[>($t0, $t5)], expr#7=[$cor5], expr#8=[$t7.deptno], expr#9=[=($t1, $t8)], expr#10=[AND($t6, $t9)], proj#0..2=[{exprs}], $condition=[$t10])\n"
 operator|+
-literal|"      EnumerableTableScan(table=[[s, depts]])"
+literal|"      EnumerableTableScan(table=[[s, emps]])"
 argument_list|)
 operator|.
 name|returnsUnordered

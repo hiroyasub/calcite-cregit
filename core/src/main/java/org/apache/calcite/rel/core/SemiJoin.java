@@ -236,10 +236,13 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Relational expression that joins two relational expressions according to some  * condition, but outputs only columns from the left input, and eliminates  * duplicates.  *  *<p>The effect is something like the SQL {@code IN} operator.  */
+comment|/**  * Relational expression that joins two relational expressions according to some  * condition, but outputs only columns from the left input, and eliminates  * duplicates.  *  *<p>The effect is something like the SQL {@code IN} operator.  *  * @deprecated This class is deprecated, please use  * {@link org.apache.calcite.rel.logical.LogicalJoin} with join type {@link JoinRelType#SEMI}  * instead.  */
 end_comment
 
 begin_class
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 class|class
 name|SemiJoin

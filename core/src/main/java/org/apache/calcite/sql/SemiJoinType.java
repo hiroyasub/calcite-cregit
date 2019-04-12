@@ -72,10 +72,13 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Enumeration representing different join types used in correlation  * relations.  */
+comment|/**  * Enumeration representing different join types used in correlation  * relations.  *  * @deprecated Use {@link JoinRelType} instead.  */
 end_comment
 
 begin_enum
+annotation|@
+name|Deprecated
+comment|// To be removed before 2.0
 specifier|public
 enum|enum
 name|SemiJoinType

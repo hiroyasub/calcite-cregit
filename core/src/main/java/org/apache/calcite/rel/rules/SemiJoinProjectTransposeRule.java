@@ -71,6 +71,22 @@ name|rel
 operator|.
 name|core
 operator|.
+name|Join
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|core
+operator|.
 name|JoinRelType
 import|;
 end_import
@@ -101,9 +117,9 @@ name|calcite
 operator|.
 name|rel
 operator|.
-name|core
+name|logical
 operator|.
-name|SemiJoin
+name|LogicalJoin
 import|;
 end_import
 
@@ -182,20 +198,6 @@ operator|.
 name|rex
 operator|.
 name|RexBuilder
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|rex
-operator|.
-name|RexInputRef
 import|;
 end_import
 
@@ -295,31 +297,21 @@ name|calcite
 operator|.
 name|util
 operator|.
-name|ImmutableIntList
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|util
-operator|.
 name|Pair
 import|;
 end_import
 
 begin_import
 import|import
-name|java
+name|com
 operator|.
-name|util
+name|google
 operator|.
-name|ArrayList
+name|common
+operator|.
+name|collect
+operator|.
+name|ImmutableSet
 import|;
 end_import
 
@@ -334,7 +326,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Planner rule that pushes  * a {@link org.apache.calcite.rel.core.SemiJoin} down in a tree past  * a {@link org.apache.calcite.rel.core.Project}.  *  *<p>The intention is to trigger other rules that will convert  * {@code SemiJoin}s.  *  *<p>SemiJoin(LogicalProject(X), Y)&rarr; LogicalProject(SemiJoin(X, Y))  *  * @see org.apache.calcite.rel.rules.SemiJoinFilterTransposeRule  */
+comment|/**  * Planner rule that pushes  * a {@code SemiJoin} down in a tree past  * a {@link org.apache.calcite.rel.core.Project}.  *  *<p>The intention is to trigger other rules that will convert  * {@code SemiJoin}s.  *  *<p>SemiJoin(LogicalProject(X), Y)&rarr; LogicalProject(SemiJoin(X, Y))  *  * @see org.apache.calcite.rel.rules.SemiJoinFilterTransposeRule  */
 end_comment
 
 begin_class
@@ -369,11 +361,17 @@ parameter_list|)
 block|{
 name|super
 argument_list|(
-name|operand
+name|operandJ
 argument_list|(
-name|SemiJoin
+name|LogicalJoin
 operator|.
 name|class
+argument_list|,
+literal|null
+argument_list|,
+name|Join
+operator|::
+name|isSemiJoin
 argument_list|,
 name|some
 argument_list|(
@@ -404,7 +402,7 @@ name|RelOptRuleCall
 name|call
 parameter_list|)
 block|{
-name|SemiJoin
+name|LogicalJoin
 name|semiJoin
 init|=
 name|call
@@ -427,74 +425,6 @@ decl_stmt|;
 comment|// Convert the LHS semi-join keys to reference the child projection
 comment|// expression; all projection expressions must be RexInputRefs,
 comment|// otherwise, we wouldn't have created this semi-join.
-specifier|final
-name|List
-argument_list|<
-name|Integer
-argument_list|>
-name|newLeftKeys
-init|=
-operator|new
-name|ArrayList
-argument_list|<>
-argument_list|()
-decl_stmt|;
-specifier|final
-name|List
-argument_list|<
-name|Integer
-argument_list|>
-name|leftKeys
-init|=
-name|semiJoin
-operator|.
-name|getLeftKeys
-argument_list|()
-decl_stmt|;
-specifier|final
-name|List
-argument_list|<
-name|RexNode
-argument_list|>
-name|projExprs
-init|=
-name|project
-operator|.
-name|getProjects
-argument_list|()
-decl_stmt|;
-for|for
-control|(
-name|int
-name|leftKey
-range|:
-name|leftKeys
-control|)
-block|{
-name|RexInputRef
-name|inputRef
-init|=
-operator|(
-name|RexInputRef
-operator|)
-name|projExprs
-operator|.
-name|get
-argument_list|(
-name|leftKey
-argument_list|)
-decl_stmt|;
-name|newLeftKeys
-operator|.
-name|add
-argument_list|(
-name|inputRef
-operator|.
-name|getIndex
-argument_list|()
-argument_list|)
-expr_stmt|;
-block|}
 comment|// convert the semijoin condition to reflect the LHS with the project
 comment|// pulled up
 name|RexNode
@@ -507,10 +437,10 @@ argument_list|,
 name|semiJoin
 argument_list|)
 decl_stmt|;
-name|SemiJoin
+name|LogicalJoin
 name|newSemiJoin
 init|=
-name|SemiJoin
+name|LogicalJoin
 operator|.
 name|create
 argument_list|(
@@ -526,17 +456,14 @@ argument_list|()
 argument_list|,
 name|newCondition
 argument_list|,
-name|ImmutableIntList
+name|ImmutableSet
 operator|.
-name|copyOf
-argument_list|(
-name|newLeftKeys
-argument_list|)
-argument_list|,
-name|semiJoin
-operator|.
-name|getRightKeys
+name|of
 argument_list|()
+argument_list|,
+name|JoinRelType
+operator|.
+name|SEMI
 argument_list|)
 decl_stmt|;
 comment|// Create the new projection.  Note that the projection expressions
@@ -562,7 +489,10 @@ name|relBuilder
 operator|.
 name|project
 argument_list|(
-name|projExprs
+name|project
+operator|.
+name|getProjects
+argument_list|()
 argument_list|,
 name|project
 operator|.
@@ -592,7 +522,7 @@ parameter_list|(
 name|LogicalProject
 name|project
 parameter_list|,
-name|SemiJoin
+name|LogicalJoin
 name|semiJoin
 parameter_list|)
 block|{

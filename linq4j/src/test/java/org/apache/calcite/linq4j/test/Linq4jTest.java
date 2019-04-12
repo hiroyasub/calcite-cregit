@@ -6608,7 +6608,7 @@ name|badEmps
 argument_list|)
 argument_list|)
 operator|.
-name|join
+name|hashJoin
 argument_list|(
 name|Linq4j
 operator|.
@@ -6700,7 +6700,7 @@ name|badEmps
 argument_list|)
 argument_list|)
 operator|.
-name|join
+name|hashJoin
 argument_list|(
 name|Linq4j
 operator|.
@@ -6808,7 +6808,7 @@ name|badEmps
 argument_list|)
 argument_list|)
 operator|.
-name|join
+name|hashJoin
 argument_list|(
 name|Linq4j
 operator|.
@@ -6924,7 +6924,7 @@ name|badEmps
 argument_list|)
 argument_list|)
 operator|.
-name|join
+name|hashJoin
 argument_list|(
 name|Linq4j
 operator|.
@@ -7035,7 +7035,7 @@ name|Integer
 decl_stmt|,
 name|Integer
 decl|>
-name|join
+name|hashJoin
 argument_list|(
 name|Linq4j
 operator|.

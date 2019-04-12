@@ -898,12 +898,12 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testLeftThetaJoinPreservesOrderOfLeftInput
+name|testLeftNestedLoopJoinPreservesOrderOfLeftInput
 parameter_list|()
 block|{
 name|testJoin
 argument_list|(
-name|thetaJoin
+name|nestedLoopJoin
 argument_list|(
 literal|false
 argument_list|,
@@ -924,7 +924,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testRightThetaJoinPreservesOrderOfLeftInput
+name|testRightNestedLoopJoinPreservesOrderOfLeftInput
 parameter_list|()
 block|{
 name|Assume
@@ -938,7 +938,7 @@ argument_list|)
 expr_stmt|;
 name|testJoin
 argument_list|(
-name|thetaJoin
+name|nestedLoopJoin
 argument_list|(
 literal|true
 argument_list|,
@@ -959,7 +959,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testFullThetaJoinPreservesOrderOfLeftInput
+name|testFullNestedLoopJoinPreservesOrderOfLeftInput
 parameter_list|()
 block|{
 name|Assume
@@ -973,7 +973,7 @@ argument_list|)
 expr_stmt|;
 name|testJoin
 argument_list|(
-name|thetaJoin
+name|nestedLoopJoin
 argument_list|(
 literal|true
 argument_list|,
@@ -994,12 +994,12 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testInnerThetaJoinPreservesOrderOfLeftInput
+name|testInnerNestedLoopJoinPreservesOrderOfLeftInput
 parameter_list|()
 block|{
 name|testJoin
 argument_list|(
-name|thetaJoin
+name|nestedLoopJoin
 argument_list|(
 literal|false
 argument_list|,
@@ -1458,7 +1458,7 @@ parameter_list|)
 lambda|->
 name|left
 operator|.
-name|join
+name|hashJoin
 argument_list|(
 name|right
 argument_list|,
@@ -1496,7 +1496,7 @@ argument_list|<
 name|Integer
 argument_list|>
 argument_list|>
-name|thetaJoin
+name|nestedLoopJoin
 parameter_list|(
 name|boolean
 name|generateNullsOnLeft
@@ -1514,7 +1514,7 @@ parameter_list|)
 lambda|->
 name|EnumerableDefaults
 operator|.
-name|thetaJoin
+name|nestedLoopJoin
 argument_list|(
 name|left
 argument_list|,

@@ -735,7 +735,7 @@ literal|"PLAN=EnumerableCalc(expr#0..2=[{inputs}], _id1=[$t0])\n"
 operator|+
 literal|"  EnumerableLimit(fetch=[1])\n"
 operator|+
-literal|"    EnumerableJoin(condition=[=($1, $2)], joinType=[inner])\n"
+literal|"    EnumerableHashJoin(condition=[=($1, $2)], joinType=[inner])\n"
 operator|+
 literal|"      GeodeToEnumerableConverter\n"
 operator|+

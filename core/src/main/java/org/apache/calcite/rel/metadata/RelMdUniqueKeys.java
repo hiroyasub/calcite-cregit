@@ -712,6 +712,34 @@ name|boolean
 name|ignoreNulls
 parameter_list|)
 block|{
+if|if
+condition|(
+operator|!
+name|rel
+operator|.
+name|getJoinType
+argument_list|()
+operator|.
+name|projectsRight
+argument_list|()
+condition|)
+block|{
+comment|// only return the unique keys from the LHS since a semijoin only
+comment|// returns the LHS
+return|return
+name|mq
+operator|.
+name|getUniqueKeys
+argument_list|(
+name|rel
+operator|.
+name|getLeft
+argument_list|()
+argument_list|,
+name|ignoreNulls
+argument_list|)
+return|;
+block|}
 specifier|final
 name|RelNode
 name|left

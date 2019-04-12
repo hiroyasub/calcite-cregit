@@ -2162,7 +2162,7 @@ name|Enumerable
 argument_list|<
 name|TResult
 argument_list|>
-name|join
+name|hashJoin
 parameter_list|(
 name|Enumerable
 argument_list|<
@@ -2200,7 +2200,7 @@ block|{
 return|return
 name|EnumerableDefaults
 operator|.
-name|join
+name|hashJoin
 argument_list|(
 name|getThis
 argument_list|()
@@ -2227,7 +2227,7 @@ name|Enumerable
 argument_list|<
 name|TResult
 argument_list|>
-name|join
+name|hashJoin
 parameter_list|(
 name|Enumerable
 argument_list|<
@@ -2271,7 +2271,7 @@ block|{
 return|return
 name|EnumerableDefaults
 operator|.
-name|join
+name|hashJoin
 argument_list|(
 name|getThis
 argument_list|()
@@ -2300,7 +2300,7 @@ name|Enumerable
 argument_list|<
 name|TResult
 argument_list|>
-name|join
+name|hashJoin
 parameter_list|(
 name|Enumerable
 argument_list|<
@@ -2350,7 +2350,7 @@ block|{
 return|return
 name|EnumerableDefaults
 operator|.
-name|join
+name|hashJoin
 argument_list|(
 name|getThis
 argument_list|()

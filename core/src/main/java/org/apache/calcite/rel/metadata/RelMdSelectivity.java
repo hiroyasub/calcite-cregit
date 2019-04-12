@@ -89,7 +89,7 @@ name|rel
 operator|.
 name|core
 operator|.
-name|Project
+name|Join
 import|;
 end_import
 
@@ -105,7 +105,7 @@ name|rel
 operator|.
 name|core
 operator|.
-name|SemiJoin
+name|Project
 import|;
 end_import
 
@@ -596,7 +596,7 @@ specifier|public
 name|Double
 name|getSelectivity
 parameter_list|(
-name|SemiJoin
+name|Join
 name|rel
 parameter_list|,
 name|RelMetadataQuery
@@ -606,6 +606,29 @@ name|RexNode
 name|predicate
 parameter_list|)
 block|{
+if|if
+condition|(
+operator|!
+name|rel
+operator|.
+name|isSemiJoin
+argument_list|()
+condition|)
+block|{
+return|return
+name|getSelectivity
+argument_list|(
+operator|(
+name|RelNode
+operator|)
+name|rel
+argument_list|,
+name|mq
+argument_list|,
+name|predicate
+argument_list|)
+return|;
+block|}
 comment|// create a RexNode representing the selectivity of the
 comment|// semijoin filter and pass it to getSelectivity
 name|RexBuilder

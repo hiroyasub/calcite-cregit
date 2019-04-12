@@ -5390,7 +5390,7 @@ name|checkResultContains
 argument_list|(
 literal|"EnumerableAggregate(group=[{0}], S=[$SUM0($2)])\n"
 operator|+
-literal|"  EnumerableJoin(condition=[=($1, $3)], joinType=[inner])\n"
+literal|"  EnumerableHashJoin(condition=[=($1, $3)], joinType=[inner])\n"
 operator|+
 literal|"    EnumerableTableScan(table=[[hr, m0]])\n"
 operator|+
@@ -5434,7 +5434,7 @@ name|checkResultContains
 argument_list|(
 literal|"EnumerableAggregate(group=[{4}], S=[$SUM0($2)])\n"
 operator|+
-literal|"  EnumerableJoin(condition=[=($1, $3)], joinType=[inner])\n"
+literal|"  EnumerableHashJoin(condition=[=($1, $3)], joinType=[inner])\n"
 operator|+
 literal|"    EnumerableTableScan(table=[[hr, m0]])\n"
 operator|+
@@ -5806,7 +5806,7 @@ name|checkResultContains
 argument_list|(
 literal|"EnumerableCalc(expr#0..2=[{inputs}], empid=[$t1])\n"
 operator|+
-literal|"  EnumerableJoin(condition=[=($0, $2)], joinType=[inner])\n"
+literal|"  EnumerableHashJoin(condition=[=($0, $2)], joinType=[inner])\n"
 operator|+
 literal|"    EnumerableCalc(expr#0=[{inputs}], expr#1=[CAST($t0):VARCHAR], name=[$t1])\n"
 operator|+
@@ -5850,7 +5850,7 @@ name|checkResultContains
 argument_list|(
 literal|"EnumerableCalc(expr#0..4=[{inputs}], empid=[$t2])\n"
 operator|+
-literal|"  EnumerableJoin(condition=[=($1, $4)], joinType=[inner])\n"
+literal|"  EnumerableHashJoin(condition=[=($1, $4)], joinType=[inner])\n"
 operator|+
 literal|"    EnumerableCalc(expr#0=[{inputs}], expr#1=[CAST($t0):VARCHAR], proj#0..1=[{exprs}])\n"
 operator|+
@@ -5945,7 +5945,7 @@ name|void
 name|testJoinMaterialization11
 parameter_list|()
 block|{
-name|checkNoMaterialize
+name|checkMaterialize
 argument_list|(
 literal|"select \"empid\" from \"emps\"\n"
 operator|+
@@ -5956,6 +5956,13 @@ operator|+
 literal|"where \"deptno\" in (select \"deptno\" from \"depts\")"
 argument_list|,
 name|HR_FKUK_MODEL
+argument_list|,
+name|CalciteAssert
+operator|.
+name|checkResultContains
+argument_list|(
+literal|"PLAN=EnumerableTableScan(table=[[hr, m0]])"
+argument_list|)
 argument_list|)
 expr_stmt|;
 block|}

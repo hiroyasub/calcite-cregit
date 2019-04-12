@@ -1420,6 +1420,32 @@ operator|.
 name|getRight
 argument_list|()
 decl_stmt|;
+comment|// Semi or anti join should ignore uniqueness of the right input.
+if|if
+condition|(
+operator|!
+name|rel
+operator|.
+name|getJoinType
+argument_list|()
+operator|.
+name|projectsRight
+argument_list|()
+condition|)
+block|{
+return|return
+name|mq
+operator|.
+name|areColumnsUnique
+argument_list|(
+name|left
+argument_list|,
+name|columns
+argument_list|,
+name|ignoreNulls
+argument_list|)
+return|;
+block|}
 comment|// Divide up the input column mask into column masks for the left and
 comment|// right sides of the join
 specifier|final

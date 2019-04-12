@@ -397,6 +397,11 @@ specifier|final
 name|JoinRelType
 name|joinType
 decl_stmt|;
+specifier|protected
+specifier|final
+name|JoinInfo
+name|joinInfo
+decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
 comment|// Next time we need to change the constructor of Join, let's change the
 comment|// "Set<String> variablesStopped" parameter to
@@ -473,6 +478,21 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|joinType
+argument_list|)
+expr_stmt|;
+name|this
+operator|.
+name|joinInfo
+operator|=
+name|JoinInfo
+operator|.
+name|of
+argument_list|(
+name|left
+argument_list|,
+name|right
+argument_list|,
+name|condition
 argument_list|)
 expr_stmt|;
 block|}
@@ -674,12 +694,11 @@ name|getFieldCount
 argument_list|()
 operator|+
 operator|(
-name|this
-operator|instanceof
-name|SemiJoin
+name|joinType
+operator|.
+name|projectsRight
+argument_list|()
 condition|?
-literal|0
-else|:
 name|right
 operator|.
 name|getRowType
@@ -687,6 +706,8 @@ argument_list|()
 operator|.
 name|getFieldCount
 argument_list|()
+else|:
+literal|0
 operator|)
 condition|)
 block|{
@@ -846,7 +867,24 @@ name|RelMetadataQuery
 name|mq
 parameter_list|)
 block|{
+comment|// Maybe we should remove this for semi-join ?
+if|if
+condition|(
+name|isSemiJoin
+argument_list|()
+condition|)
+block|{
 comment|// REVIEW jvs 9-Apr-2006:  Just for now...
+return|return
+name|planner
+operator|.
+name|getCostFactory
+argument_list|()
+operator|.
+name|makeTinyCost
+argument_list|()
+return|;
+block|}
 name|double
 name|rowCount
 init|=
@@ -1049,7 +1087,7 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-comment|/**    * Returns whether this LogicalJoin has already spawned a    * {@link SemiJoin} via    * {@link org.apache.calcite.rel.rules.JoinAddRedundantSemiJoinRule}.    *    *<p>The base implementation returns false.</p>    *    * @return whether this join has already spawned a semi join    */
+comment|/**    * Returns whether this LogicalJoin has already spawned a    * {@code SemiJoin} via    * {@link org.apache.calcite.rel.rules.JoinAddRedundantSemiJoinRule}.    *    *<p>The base implementation returns false.</p>    *    * @return whether this join has already spawned a semi join    */
 specifier|public
 name|boolean
 name|isSemiJoinDone
@@ -1057,6 +1095,20 @@ parameter_list|()
 block|{
 return|return
 literal|false
+return|;
+block|}
+comment|/**    * Returns whether this Join is a semijoin.    *    * @return true if this Join's join type is semi.    */
+specifier|public
+name|boolean
+name|isSemiJoin
+parameter_list|()
+block|{
+return|return
+name|joinType
+operator|==
+name|JoinRelType
+operator|.
+name|SEMI
 return|;
 block|}
 comment|/**    * Returns a list of system fields that will be prefixed to    * output row type.    *    * @return list of system fields    */
@@ -1260,16 +1312,7 @@ name|analyzeCondition
 parameter_list|()
 block|{
 return|return
-name|JoinInfo
-operator|.
-name|of
-argument_list|(
-name|left
-argument_list|,
-name|right
-argument_list|,
-name|condition
-argument_list|)
+name|joinInfo
 return|;
 block|}
 block|}

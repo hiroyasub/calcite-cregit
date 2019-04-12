@@ -228,7 +228,7 @@ import|;
 end_import
 
 begin_comment
-comment|/** Planner rule that converts a  * {@link org.apache.calcite.rel.logical.LogicalJoin} relational expression  * {@link EnumerableConvention enumerable calling convention}.  *  * @see org.apache.calcite.adapter.enumerable.EnumerableJoinRule  */
+comment|/** Planner rule that converts a  * {@link org.apache.calcite.rel.logical.LogicalJoin} relational expression  * {@link EnumerableConvention enumerable calling convention}.  *  * @see EnumerableJoinRule  */
 end_comment
 
 begin_class

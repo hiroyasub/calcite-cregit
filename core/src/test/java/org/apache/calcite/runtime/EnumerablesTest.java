@@ -1002,7 +1002,7 @@ name|assertThat
 argument_list|(
 name|EnumerableDefaults
 operator|.
-name|thetaJoin
+name|nestedLoopJoin
 argument_list|(
 name|EMPS
 argument_list|,
@@ -1041,7 +1041,7 @@ name|assertThat
 argument_list|(
 name|EnumerableDefaults
 operator|.
-name|thetaJoin
+name|nestedLoopJoin
 argument_list|(
 name|EMPS
 argument_list|,
@@ -1082,7 +1082,7 @@ name|assertThat
 argument_list|(
 name|EnumerableDefaults
 operator|.
-name|thetaJoin
+name|nestedLoopJoin
 argument_list|(
 name|EMPS
 argument_list|,
@@ -1123,7 +1123,7 @@ name|assertThat
 argument_list|(
 name|EnumerableDefaults
 operator|.
-name|thetaJoin
+name|nestedLoopJoin
 argument_list|(
 name|EMPS
 argument_list|,
@@ -1166,7 +1166,7 @@ name|assertThat
 argument_list|(
 name|EnumerableDefaults
 operator|.
-name|thetaJoin
+name|nestedLoopJoin
 argument_list|(
 name|EMPS
 operator|.
@@ -1218,7 +1218,7 @@ name|assertThat
 argument_list|(
 name|EnumerableDefaults
 operator|.
-name|thetaJoin
+name|nestedLoopJoin
 argument_list|(
 name|EMPS
 argument_list|,
@@ -1264,7 +1264,7 @@ name|assertThat
 argument_list|(
 name|EnumerableDefaults
 operator|.
-name|thetaJoin
+name|nestedLoopJoin
 argument_list|(
 name|EMPS
 operator|.

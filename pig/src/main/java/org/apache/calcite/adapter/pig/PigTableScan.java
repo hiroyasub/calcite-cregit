@@ -545,7 +545,7 @@ operator|.
 name|INSTANCE
 argument_list|)
 expr_stmt|;
-comment|// Make sure planner picks PigJoin over EnumerableJoin. Should there be
+comment|// Make sure planner picks PigJoin over EnumerableHashJoin. Should there be
 comment|// a rule for this instead for removing ENUMERABLE_JOIN_RULE here?
 name|planner
 operator|.

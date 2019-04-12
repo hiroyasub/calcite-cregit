@@ -366,7 +366,7 @@ literal|"EnumerableAggregate(group=[{}], EXPR$0=[COUNT()])\n"
 operator|+
 literal|"  EnumerableCalc(expr#0..1=[{inputs}], expr#2=[0], expr#3=[-($t0, $t1)], expr#4=[=($t3, $t2)], DUMMY=[$t2], $condition=[$t4])\n"
 operator|+
-literal|"    EnumerableJoin(condition=[true], joinType=[inner])\n"
+literal|"    EnumerableHashJoin(condition=[true], joinType=[inner])\n"
 operator|+
 literal|"      JdbcToEnumerableConverter\n"
 operator|+
@@ -786,7 +786,7 @@ argument_list|)
 operator|.
 name|planContains
 argument_list|(
-literal|" left.join(right, new org.apache.calcite.linq4j.function.Function1() {\n"
+literal|" left.hashJoin(right, new org.apache.calcite.linq4j.function.Function1() {\n"
 argument_list|)
 expr_stmt|;
 block|}

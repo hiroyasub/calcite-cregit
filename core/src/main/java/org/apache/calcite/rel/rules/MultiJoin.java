@@ -1165,10 +1165,9 @@ block|{
 if|if
 condition|(
 name|joinType
-operator|!=
-name|JoinRelType
 operator|.
-name|INNER
+name|isOuterJoin
+argument_list|()
 condition|)
 block|{
 return|return

@@ -175,9 +175,9 @@ name|calcite
 operator|.
 name|rel
 operator|.
-name|core
+name|logical
 operator|.
-name|SemiJoin
+name|LogicalJoin
 import|;
 end_import
 
@@ -5690,7 +5690,7 @@ index|[
 name|nDimFields
 index|]
 decl_stmt|;
-name|SemiJoin
+name|LogicalJoin
 name|semiJoin
 init|=
 name|multiJoin
@@ -5705,16 +5705,20 @@ name|dimKeys
 init|=
 name|semiJoin
 operator|.
-name|getRightKeys
+name|analyzeCondition
 argument_list|()
+operator|.
+name|leftKeys
 decl_stmt|;
 name|ImmutableIntList
 name|factKeys
 init|=
 name|semiJoin
 operator|.
-name|getLeftKeys
+name|analyzeCondition
 argument_list|()
+operator|.
+name|rightKeys
 decl_stmt|;
 for|for
 control|(
@@ -7195,10 +7199,9 @@ name|joinRel
 operator|.
 name|getJoinType
 argument_list|()
-operator|!=
-name|JoinRelType
 operator|.
-name|INNER
+name|isOuterJoin
+argument_list|()
 condition|)
 block|{
 return|return

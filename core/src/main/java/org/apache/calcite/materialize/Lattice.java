@@ -157,22 +157,6 @@ name|rel
 operator|.
 name|core
 operator|.
-name|JoinRelType
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|rel
-operator|.
-name|core
-operator|.
 name|TableScan
 import|;
 end_import
@@ -1458,17 +1442,16 @@ name|join
 operator|.
 name|getJoinType
 argument_list|()
-operator|!=
-name|JoinRelType
 operator|.
-name|INNER
+name|isOuterJoin
+argument_list|()
 condition|)
 block|{
 throw|throw
 operator|new
 name|RuntimeException
 argument_list|(
-literal|"only inner join allowed, but got "
+literal|"only non nulls-generating join allowed, but got "
 operator|+
 name|join
 operator|.

@@ -143,7 +143,7 @@ name|CalciteAssert
 operator|.
 name|checkResultContains
 argument_list|(
-literal|"EnumerableSemiJoin"
+literal|"EnumerableCorrelate"
 argument_list|)
 argument_list|)
 expr_stmt|;

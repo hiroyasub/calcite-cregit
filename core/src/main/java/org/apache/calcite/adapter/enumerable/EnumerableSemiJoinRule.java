@@ -98,10 +98,13 @@ import|;
 end_import
 
 begin_comment
-comment|/** Planner rule that converts a  * {@link org.apache.calcite.rel.core.SemiJoin} relational expression  * {@link org.apache.calcite.adapter.enumerable.EnumerableConvention enumerable calling convention}. */
+comment|/** Planner rule that converts a  * {@link org.apache.calcite.rel.core.SemiJoin} relational expression  * {@link org.apache.calcite.adapter.enumerable.EnumerableConvention enumerable calling convention}.  *  * @deprecated Use {@link EnumerableJoinRule} instead.  */
 end_comment
 
 begin_class
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 class|class
 name|EnumerableSemiJoinRule
 extends|extends

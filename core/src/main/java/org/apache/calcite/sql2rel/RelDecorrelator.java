@@ -6217,9 +6217,6 @@ name|rel
 operator|.
 name|getJoinType
 argument_list|()
-operator|.
-name|toJoinType
-argument_list|()
 argument_list|)
 decl_stmt|;
 return|return
@@ -6244,6 +6241,30 @@ name|LogicalJoin
 name|rel
 parameter_list|)
 block|{
+comment|// For SEMI/ANTI join decorrelate it's input directly,
+comment|// because the correlate variables can only be propagated from
+comment|// the left side, which is not supported yet.
+if|if
+condition|(
+operator|!
+name|rel
+operator|.
+name|getJoinType
+argument_list|()
+operator|.
+name|projectsRight
+argument_list|()
+condition|)
+block|{
+name|decorrelateRel
+argument_list|(
+operator|(
+name|RelNode
+operator|)
+name|rel
+argument_list|)
+expr_stmt|;
+block|}
 comment|//
 comment|// Rewrite logic:
 comment|//
@@ -6996,9 +7017,6 @@ init|=
 name|correlate
 operator|.
 name|getJoinType
-argument_list|()
-operator|.
-name|toJoinType
 argument_list|()
 decl_stmt|;
 comment|// now create the new project
@@ -9141,9 +9159,6 @@ name|correlate
 operator|.
 name|getJoinType
 argument_list|()
-operator|.
-name|toJoinType
-argument_list|()
 decl_stmt|;
 comment|// corRel.getCondition was here, however Correlate was updated so it
 comment|// never includes a join condition. The code was not modified for brevity.
@@ -9952,9 +9967,6 @@ init|=
 name|correlate
 operator|.
 name|getJoinType
-argument_list|()
-operator|.
-name|toJoinType
 argument_list|()
 decl_stmt|;
 comment|// corRel.getCondition was here, however Correlate was updated so it
@@ -11466,9 +11478,6 @@ init|=
 name|correlate
 operator|.
 name|getJoinType
-argument_list|()
-operator|.
-name|toJoinType
 argument_list|()
 decl_stmt|;
 comment|// corRel.getCondition was here, however Correlate was updated so it

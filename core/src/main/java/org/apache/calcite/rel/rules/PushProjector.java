@@ -117,7 +117,7 @@ name|rel
 operator|.
 name|core
 operator|.
-name|Project
+name|JoinRelType
 import|;
 end_import
 
@@ -133,7 +133,7 @@ name|rel
 operator|.
 name|core
 operator|.
-name|SemiJoin
+name|Project
 import|;
 end_import
 
@@ -250,20 +250,6 @@ operator|.
 name|rex
 operator|.
 name|RexVisitorImpl
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|sql
-operator|.
-name|SemiJoinType
 import|;
 end_import
 
@@ -716,9 +702,10 @@ argument_list|()
 expr_stmt|;
 name|nFieldsRight
 operator|=
-name|childRel
-operator|instanceof
-name|SemiJoin
+name|joinRel
+operator|.
+name|isSemiJoin
+argument_list|()
 condition|?
 literal|0
 else|:
@@ -891,7 +878,7 @@ operator|.
 name|size
 argument_list|()
 expr_stmt|;
-name|SemiJoinType
+name|JoinRelType
 name|joinType
 init|=
 name|corrRel

@@ -1451,7 +1451,7 @@ argument_list|)
 operator|.
 name|connectThrows
 argument_list|(
-literal|"only inner join allowed, but got LEFT"
+literal|"only non nulls-generating join allowed, but got LEFT"
 argument_list|)
 expr_stmt|;
 block|}

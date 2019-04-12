@@ -5174,7 +5174,7 @@ name|Enumerable
 argument_list|<
 name|TResult
 argument_list|>
-name|join
+name|hashJoin
 parameter_list|(
 specifier|final
 name|Enumerable
@@ -5221,7 +5221,7 @@ name|resultSelector
 parameter_list|)
 block|{
 return|return
-name|join
+name|hashJoin
 argument_list|(
 name|outer
 argument_list|,
@@ -5263,7 +5263,7 @@ name|Enumerable
 argument_list|<
 name|TResult
 argument_list|>
-name|join
+name|hashJoin
 parameter_list|(
 name|Enumerable
 argument_list|<
@@ -5311,7 +5311,7 @@ name|comparer
 parameter_list|)
 block|{
 return|return
-name|join
+name|hashJoin
 argument_list|(
 name|outer
 argument_list|,
@@ -5353,7 +5353,7 @@ name|Enumerable
 argument_list|<
 name|TResult
 argument_list|>
-name|join
+name|hashJoin
 parameter_list|(
 name|Enumerable
 argument_list|<
@@ -5407,7 +5407,7 @@ name|generateNullsOnRight
 parameter_list|)
 block|{
 return|return
-name|join_
+name|hashJoin_
 argument_list|(
 name|outer
 argument_list|,
@@ -5449,7 +5449,7 @@ name|Enumerable
 argument_list|<
 name|TResult
 argument_list|>
-name|join_
+name|hashJoin_
 parameter_list|(
 specifier|final
 name|Enumerable
@@ -6692,7 +6692,7 @@ name|Enumerable
 argument_list|<
 name|TResult
 argument_list|>
-name|thetaJoin
+name|nestedLoopJoin
 parameter_list|(
 specifier|final
 name|Enumerable

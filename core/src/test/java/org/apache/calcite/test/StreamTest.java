@@ -1244,7 +1244,7 @@ literal|""
 operator|+
 literal|"EnumerableCalc(expr#0..6=[{inputs}], proj#0..1=[{exprs}], SUPPLIERID=[$t6])\n"
 operator|+
-literal|"  EnumerableJoin(condition=[=($4, $5)], joinType=[inner])\n"
+literal|"  EnumerableHashJoin(condition=[=($4, $5)], joinType=[inner])\n"
 operator|+
 literal|"    EnumerableCalc(expr#0..3=[{inputs}], expr#4=[CAST($t2):VARCHAR(32) NOT NULL], proj#0..4=[{exprs}])\n"
 operator|+

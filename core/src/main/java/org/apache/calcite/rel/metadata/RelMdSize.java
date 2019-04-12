@@ -1160,8 +1160,6 @@ argument_list|(
 name|rel
 argument_list|,
 name|mq
-argument_list|,
-literal|true
 argument_list|)
 return|;
 block|}
@@ -1185,8 +1183,6 @@ argument_list|(
 name|rel
 argument_list|,
 name|mq
-argument_list|,
-literal|false
 argument_list|)
 return|;
 block|}
@@ -1202,11 +1198,16 @@ name|rel
 parameter_list|,
 name|RelMetadataQuery
 name|mq
-parameter_list|,
-name|boolean
-name|semijoin
 parameter_list|)
 block|{
+name|boolean
+name|semijoin
+init|=
+name|rel
+operator|.
+name|isSemiJoin
+argument_list|()
+decl_stmt|;
 specifier|final
 name|RelNode
 name|left

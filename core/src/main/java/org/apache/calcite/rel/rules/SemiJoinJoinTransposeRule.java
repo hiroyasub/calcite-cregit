@@ -101,7 +101,7 @@ name|rel
 operator|.
 name|core
 operator|.
-name|RelFactories
+name|JoinRelType
 import|;
 end_import
 
@@ -117,7 +117,23 @@ name|rel
 operator|.
 name|core
 operator|.
-name|SemiJoin
+name|RelFactories
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|logical
+operator|.
+name|LogicalJoin
 import|;
 end_import
 
@@ -181,6 +197,20 @@ end_import
 
 begin_import
 import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|collect
+operator|.
+name|ImmutableSet
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -200,7 +230,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Planner rule that pushes a {@link org.apache.calcite.rel.core.SemiJoin}  * down in a tree past a {@link org.apache.calcite.rel.core.Join}  * in order to trigger other rules that will convert {@code SemiJoin}s.  *  *<ul>  *<li>SemiJoin(LogicalJoin(X, Y), Z)&rarr; LogicalJoin(SemiJoin(X, Z), Y)  *<li>SemiJoin(LogicalJoin(X, Y), Z)&rarr; LogicalJoin(X, SemiJoin(Y, Z))  *</ul>  *  *<p>Whether this  * first or second conversion is applied depends on which operands actually  * participate in the semi-join.</p>  */
+comment|/**  * Planner rule that pushes a {@code SemiJoin}  * down in a tree past a {@link org.apache.calcite.rel.core.Join}  * in order to trigger other rules that will convert {@code SemiJoin}s.  *  *<ul>  *<li>SemiJoin(LogicalJoin(X, Y), Z)&rarr; LogicalJoin(SemiJoin(X, Z), Y)  *<li>SemiJoin(LogicalJoin(X, Y), Z)&rarr; LogicalJoin(X, SemiJoin(Y, Z))  *</ul>  *  *<p>Whether this  * first or second conversion is applied depends on which operands actually  * participate in the semi-join.</p>  */
 end_comment
 
 begin_class
@@ -235,11 +265,17 @@ parameter_list|)
 block|{
 name|super
 argument_list|(
-name|operand
+name|operandJ
 argument_list|(
-name|SemiJoin
+name|LogicalJoin
 operator|.
 name|class
+argument_list|,
+literal|null
+argument_list|,
+name|Join
+operator|::
+name|isSemiJoin
 argument_list|,
 name|some
 argument_list|(
@@ -271,7 +307,7 @@ name|RelOptRuleCall
 name|call
 parameter_list|)
 block|{
-name|SemiJoin
+name|LogicalJoin
 name|semiJoin
 init|=
 name|call
@@ -295,8 +331,9 @@ decl_stmt|;
 if|if
 condition|(
 name|join
-operator|instanceof
-name|SemiJoin
+operator|.
+name|isSemiJoin
+argument_list|()
 condition|)
 block|{
 return|return;
@@ -307,17 +344,10 @@ name|leftKeys
 init|=
 name|semiJoin
 operator|.
-name|getLeftKeys
+name|analyzeCondition
 argument_list|()
-decl_stmt|;
-specifier|final
-name|ImmutableIntList
-name|rightKeys
-init|=
-name|semiJoin
 operator|.
-name|getRightKeys
-argument_list|()
+name|leftKeys
 decl_stmt|;
 comment|// X is the left child of the join below the semi-join
 comment|// Y is the right child of the join below the semi-join
@@ -532,12 +562,6 @@ comment|// need to convert the semi-join condition and possibly the keys
 name|RexNode
 name|newSemiJoinFilter
 decl_stmt|;
-name|List
-argument_list|<
-name|Integer
-argument_list|>
-name|newLeftKeys
-decl_stmt|;
 name|int
 index|[]
 name|adjustments
@@ -603,10 +627,6 @@ name|adjustments
 argument_list|)
 argument_list|)
 expr_stmt|;
-name|newLeftKeys
-operator|=
-name|leftKeys
-expr_stmt|;
 block|}
 else|else
 block|{
@@ -657,18 +677,6 @@ name|adjustments
 argument_list|)
 argument_list|)
 expr_stmt|;
-name|newLeftKeys
-operator|=
-name|RelOptUtil
-operator|.
-name|adjustKeys
-argument_list|(
-name|leftKeys
-argument_list|,
-operator|-
-name|nFieldsX
-argument_list|)
-expr_stmt|;
 block|}
 comment|// create the new join
 name|RelNode
@@ -699,10 +707,10 @@ name|getRight
 argument_list|()
 expr_stmt|;
 block|}
-name|SemiJoin
+name|LogicalJoin
 name|newSemiJoin
 init|=
-name|SemiJoin
+name|LogicalJoin
 operator|.
 name|create
 argument_list|(
@@ -715,14 +723,14 @@ argument_list|()
 argument_list|,
 name|newSemiJoinFilter
 argument_list|,
-name|ImmutableIntList
+name|ImmutableSet
 operator|.
-name|copyOf
-argument_list|(
-name|newLeftKeys
-argument_list|)
+name|of
+argument_list|()
 argument_list|,
-name|rightKeys
+name|JoinRelType
+operator|.
+name|SEMI
 argument_list|)
 decl_stmt|;
 name|RelNode

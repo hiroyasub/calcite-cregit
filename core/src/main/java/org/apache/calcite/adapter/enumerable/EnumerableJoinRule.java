@@ -341,7 +341,7 @@ comment|// if it is an inner join.
 try|try
 block|{
 return|return
-name|EnumerableThetaJoin
+name|EnumerableNestedLoopJoin
 operator|.
 name|create
 argument_list|(
@@ -389,6 +389,8 @@ literal|null
 return|;
 block|}
 block|}
+else|else
+block|{
 name|RelNode
 name|newRel
 decl_stmt|;
@@ -396,7 +398,7 @@ try|try
 block|{
 name|newRel
 operator|=
-name|EnumerableJoin
+name|EnumerableHashJoin
 operator|.
 name|create
 argument_list|(
@@ -417,14 +419,6 @@ operator|.
 name|getRexBuilder
 argument_list|()
 argument_list|)
-argument_list|,
-name|info
-operator|.
-name|leftKeys
-argument_list|,
-name|info
-operator|.
-name|rightKeys
 argument_list|,
 name|join
 operator|.
@@ -498,6 +492,7 @@ block|}
 return|return
 name|newRel
 return|;
+block|}
 block|}
 block|}
 end_class

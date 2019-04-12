@@ -300,10 +300,13 @@ import|;
 end_import
 
 begin_comment
-comment|/** Implementation of {@link org.apache.calcite.rel.core.SemiJoin} in  * {@link org.apache.calcite.adapter.enumerable.EnumerableConvention enumerable calling convention}. */
+comment|/** Implementation of {@link org.apache.calcite.rel.core.SemiJoin} in  * {@link org.apache.calcite.adapter.enumerable.EnumerableConvention enumerable calling convention}.  *  * @deprecated This class is deprecated, the function is merged into {@link EnumerableHashJoin},  * see {@link EnumerableJoinRule} for details.  */
 end_comment
 
 begin_class
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 class|class
 name|EnumerableSemiJoin

@@ -3190,7 +3190,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2554">[CALCITE-2554]    * Enrich EnumerableJoin operator with order preserving information</a>.    *    *<p>Since the left input to the join is sorted, and this join preserves    * order, there shouldn't be any sort operator above the join.    */
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2554">[CALCITE-2554]    * Enrich EnumerableHashJoin operator with order preserving information</a>.    *    *<p>Since the left input to the join is sorted, and this join preserves    * order, there shouldn't be any sort operator above the join.    */
 annotation|@
 name|Test
 specifier|public
@@ -3336,7 +3336,7 @@ literal|"EnumerableProject(deptno=[$1])\n"
 operator|+
 literal|"  EnumerableLimit(fetch=[10])\n"
 operator|+
-literal|"    EnumerableJoin(condition=[=($1, $5)], joinType=[left])\n"
+literal|"    EnumerableHashJoin(condition=[=($1, $5)], joinType=[left])\n"
 operator|+
 literal|"      EnumerableLimit(fetch=[10])\n"
 operator|+
@@ -4972,7 +4972,7 @@ argument_list|)
 argument_list|,
 name|containsString
 argument_list|(
-literal|"EnumerableJoin(condition=[=($0, $5)], joinType=[inner])"
+literal|"EnumerableHashJoin(condition=[=($0, $5)], joinType=[inner])"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -5007,11 +5007,11 @@ literal|"EnumerableProject(empid=[$0], deptno=[$1], name=[$2], salary=[$3], comm
 operator|+
 literal|"  EnumerableProject(empid=[$2], deptno=[$3], name=[$4], salary=[$5], commission=[$6], deptno0=[$7], name0=[$8], employees=[$9], x=[$10], y=[$11], empid0=[$0], name1=[$1])\n"
 operator|+
-literal|"    EnumerableJoin(condition=[=($0, $2)], joinType=[inner])\n"
+literal|"    EnumerableHashJoin(condition=[=($0, $2)], joinType=[inner])\n"
 operator|+
 literal|"      EnumerableTableScan(table=[[hr, dependents]])\n"
 operator|+
-literal|"      EnumerableJoin(condition=[=($1, $5)], joinType=[left])\n"
+literal|"      EnumerableHashJoin(condition=[=($1, $5)], joinType=[left])\n"
 operator|+
 literal|"        EnumerableTableScan(table=[[hr, emps]])\n"
 operator|+
@@ -5057,13 +5057,13 @@ literal|"EnumerableProject(empid=[$0], deptno=[$1], name=[$2], salary=[$3], comm
 operator|+
 literal|"  EnumerableProject(empid=[$2], deptno=[$3], name=[$4], salary=[$5], commission=[$6], deptno0=[$7], name0=[$8], employees=[$9], x=[$10], y=[$11], empid0=[$0], name1=[$1])\n"
 operator|+
-literal|"    EnumerableJoin(condition=[=($0, $2)], joinType=[inner])\n"
+literal|"    EnumerableHashJoin(condition=[=($0, $2)], joinType=[inner])\n"
 operator|+
 literal|"      EnumerableTableScan(table=[[hr, dependents]])\n"
 operator|+
 literal|"      EnumerableProject(empid=[$5], deptno=[$6], name=[$7], salary=[$8], commission=[$9], deptno0=[$0], name0=[$1], employees=[$2], x=[$3], y=[$4])\n"
 operator|+
-literal|"        EnumerableJoin(condition=[=($0, $6)], joinType=[left])\n"
+literal|"        EnumerableHashJoin(condition=[=($0, $6)], joinType=[left])\n"
 operator|+
 literal|"          EnumerableProject(deptno=[$0], name=[$1], employees=[$2], x=[$3.x], y=[$3.y])\n"
 operator|+
@@ -5109,11 +5109,11 @@ literal|"EnumerableProject(empid=[$0], deptno=[$1], name=[$2], salary=[$3], comm
 operator|+
 literal|"  EnumerableProject(empid=[$2], deptno=[$3], name=[$4], salary=[$5], commission=[$6], deptno0=[$7], name0=[$8], employees=[$9], x=[$10], y=[$11], empid0=[$0], name1=[$1])\n"
 operator|+
-literal|"    EnumerableJoin(condition=[=($0, $2)], joinType=[left])\n"
+literal|"    EnumerableHashJoin(condition=[=($0, $2)], joinType=[left])\n"
 operator|+
 literal|"      EnumerableTableScan(table=[[hr, dependents]])\n"
 operator|+
-literal|"      EnumerableJoin(condition=[=($1, $5)], joinType=[inner])\n"
+literal|"      EnumerableHashJoin(condition=[=($1, $5)], joinType=[inner])\n"
 operator|+
 literal|"        EnumerableTableScan(table=[[hr, emps]])\n"
 operator|+
@@ -5278,13 +5278,13 @@ literal|"EnumerableProject(product_id=[$0], time_id=[$1], customer_id=[$2], prom
 operator|+
 literal|"  EnumerableProject(product_id0=[$44], time_id=[$45], customer_id0=[$46], promotion_id=[$47], store_id=[$48], store_sales=[$49], store_cost=[$50], unit_sales=[$51], customer_id=[$15], account_num=[$16], lname=[$17], fname=[$18], mi=[$19], address1=[$20], address2=[$21], address3=[$22], address4=[$23], city=[$24], state_province=[$25], postal_code=[$26], country=[$27], customer_region_id=[$28], phone1=[$29], phone2=[$30], birthdate=[$31], marital_status=[$32], yearly_income=[$33], gender=[$34], total_children=[$35], num_children_at_home=[$36], education=[$37], date_accnt_opened=[$38], member_card=[$39], occupation=[$40], houseowner=[$41], num_cars_owned=[$42], fullname=[$43], product_class_id=[$0], product_id=[$1], brand_name=[$2], product_name=[$3], SKU=[$4], SRP=[$5], gross_weight=[$6], net_weight=[$7], recyclable_package=[$8], low_fat=[$9], units_per_case=[$10], cases_per_pallet=[$11], shelf_width=[$12], shelf_height=[$13], shelf_depth=[$14])\n"
 operator|+
-literal|"    EnumerableJoin(condition=[=($1, $44)], joinType=[inner])\n"
+literal|"    EnumerableHashJoin(condition=[=($1, $44)], joinType=[inner])\n"
 operator|+
 literal|"      EnumerableFilter(condition=[=($2, 'Washington')])\n"
 operator|+
 literal|"        EnumerableTableScan(table=[[foodmart2, product]])\n"
 operator|+
-literal|"      EnumerableJoin(condition=[=($0, $31)], joinType=[inner])\n"
+literal|"      EnumerableHashJoin(condition=[=($0, $31)], joinType=[inner])\n"
 operator|+
 literal|"        EnumerableFilter(condition=[=($9, 'San Francisco')])\n"
 operator|+
@@ -5344,15 +5344,15 @@ literal|"EnumerableProject(product_id=[$0], time_id=[$1], customer_id=[$2], prom
 operator|+
 literal|"  EnumerableProject(product_id0=[$49], time_id=[$50], customer_id0=[$51], promotion_id=[$52], store_id=[$53], store_sales=[$54], store_cost=[$55], unit_sales=[$56], customer_id=[$0], account_num=[$1], lname=[$2], fname=[$3], mi=[$4], address1=[$5], address2=[$6], address3=[$7], address4=[$8], city=[$9], state_province=[$10], postal_code=[$11], country=[$12], customer_region_id=[$13], phone1=[$14], phone2=[$15], birthdate=[$16], marital_status=[$17], yearly_income=[$18], gender=[$19], total_children=[$20], num_children_at_home=[$21], education=[$22], date_accnt_opened=[$23], member_card=[$24], occupation=[$25], houseowner=[$26], num_cars_owned=[$27], fullname=[$28], product_class_id0=[$34], product_id=[$35], brand_name=[$36], product_name=[$37], SKU=[$38], SRP=[$39], gross_weight=[$40], net_weight=[$41], recyclable_package=[$42], low_fat=[$43], units_per_case=[$44], cases_per_pallet=[$45], shelf_width=[$46], shelf_height=[$47], shelf_depth=[$48], product_class_id=[$29], product_subcategory=[$30], product_category=[$31], product_department=[$32], product_family=[$33])\n"
 operator|+
-literal|"    EnumerableJoin(condition=[=($0, $51)], joinType=[inner])\n"
+literal|"    EnumerableHashJoin(condition=[=($0, $51)], joinType=[inner])\n"
 operator|+
 literal|"      EnumerableFilter(condition=[=($9, 'San Francisco')])\n"
 operator|+
 literal|"        EnumerableTableScan(table=[[foodmart2, customer]])\n"
 operator|+
-literal|"      EnumerableJoin(condition=[=($6, $20)], joinType=[inner])\n"
+literal|"      EnumerableHashJoin(condition=[=($6, $20)], joinType=[inner])\n"
 operator|+
-literal|"        EnumerableJoin(condition=[=($0, $5)], joinType=[inner])\n"
+literal|"        EnumerableHashJoin(condition=[=($0, $5)], joinType=[inner])\n"
 operator|+
 literal|"          EnumerableTableScan(table=[[foodmart2, product_class]])\n"
 operator|+
@@ -5416,19 +5416,19 @@ literal|"EnumerableProject(product_id=[$0], time_id=[$1], customer_id=[$2], prom
 operator|+
 literal|"  EnumerableProject(product_id0=[$73], time_id=[$74], customer_id0=[$75], promotion_id=[$76], store_id0=[$77], store_sales=[$78], store_cost=[$79], unit_sales=[$80], customer_id=[$24], account_num=[$25], lname=[$26], fname=[$27], mi=[$28], address1=[$29], address2=[$30], address3=[$31], address4=[$32], city=[$33], state_province=[$34], postal_code=[$35], country=[$36], customer_region_id=[$37], phone1=[$38], phone2=[$39], birthdate=[$40], marital_status=[$41], yearly_income=[$42], gender=[$43], total_children=[$44], num_children_at_home=[$45], education=[$46], date_accnt_opened=[$47], member_card=[$48], occupation=[$49], houseowner=[$50], num_cars_owned=[$51], fullname=[$52], product_class_id0=[$58], product_id=[$59], brand_name=[$60], product_name=[$61], SKU=[$62], SRP=[$63], gross_weight=[$64], net_weight=[$65], recyclable_package=[$66], low_fat=[$67], units_per_case=[$68], cases_per_pallet=[$69], shelf_width=[$70], shelf_height=[$71], shelf_depth=[$72], product_class_id=[$53], product_subcategory=[$54], product_category=[$55], product_department=[$56], product_family=[$57], store_id=[$0], store_type=[$1], region_id=[$2], store_name=[$3], store_number=[$4], store_street_address=[$5], store_city=[$6], store_state=[$7], store_postal_code=[$8], store_country=[$9], store_manager=[$10], store_phone=[$11], store_fax=[$12], first_opened_date=[$13], last_remodel_date=[$14], store_sqft=[$15], grocery_sqft=[$16], frozen_sqft=[$17], meat_sqft=[$18], coffee_bar=[$19], video_store=[$20], salad_bar=[$21], prepared_food=[$22], florist=[$23])\n"
 operator|+
-literal|"    EnumerableJoin(condition=[=($0, $77)], joinType=[inner])\n"
+literal|"    EnumerableHashJoin(condition=[=($0, $77)], joinType=[inner])\n"
 operator|+
 literal|"      EnumerableTableScan(table=[[foodmart2, store]])\n"
 operator|+
-literal|"      EnumerableJoin(condition=[=($0, $51)], joinType=[inner])\n"
+literal|"      EnumerableHashJoin(condition=[=($0, $51)], joinType=[inner])\n"
 operator|+
 literal|"        EnumerableFilter(condition=[=($9, 'San Francisco')])\n"
 operator|+
 literal|"          EnumerableTableScan(table=[[foodmart2, customer]])\n"
 operator|+
-literal|"        EnumerableJoin(condition=[=($6, $20)], joinType=[inner])\n"
+literal|"        EnumerableHashJoin(condition=[=($6, $20)], joinType=[inner])\n"
 operator|+
-literal|"          EnumerableJoin(condition=[=($0, $5)], joinType=[inner])\n"
+literal|"          EnumerableHashJoin(condition=[=($0, $5)], joinType=[inner])\n"
 operator|+
 literal|"            EnumerableTableScan(table=[[foodmart2, product_class]])\n"
 operator|+
@@ -5476,11 +5476,11 @@ literal|"EnumerableProject(product_id=[$0], time_id=[$1], customer_id=[$2], prom
 operator|+
 literal|"  EnumerableProject(product_id=[$31], time_id=[$32], customer_id0=[$33], promotion_id=[$34], store_id=[$35], store_sales=[$36], store_cost=[$37], unit_sales=[$38], customer_id=[$2], account_num=[$3], lname=[$4], fname=[$5], mi=[$6], address1=[$7], address2=[$8], address3=[$9], address4=[$10], city=[$11], state_province=[$12], postal_code=[$13], country=[$14], customer_region_id=[$15], phone1=[$16], phone2=[$17], birthdate=[$18], marital_status=[$19], yearly_income=[$20], gender=[$21], total_children=[$22], num_children_at_home=[$23], education=[$24], date_accnt_opened=[$25], member_card=[$26], occupation=[$27], houseowner=[$28], num_cars_owned=[$29], fullname=[$30], department_id=[$0], department_description=[$1])\n"
 operator|+
-literal|"    EnumerableJoin(condition=[true], joinType=[inner])\n"
+literal|"    EnumerableHashJoin(condition=[true], joinType=[inner])\n"
 operator|+
 literal|"      EnumerableTableScan(table=[[foodmart2, department]])\n"
 operator|+
-literal|"      EnumerableJoin(condition=[=($0, $31)], joinType=[inner])\n"
+literal|"      EnumerableHashJoin(condition=[=($0, $31)], joinType=[inner])\n"
 operator|+
 literal|"        EnumerableTableScan(table=[[foodmart2, customer]])\n"
 operator|+
@@ -5530,15 +5530,15 @@ literal|"EnumerableProject(product_id=[$0], time_id=[$1], customer_id=[$2], prom
 operator|+
 literal|"  EnumerableProject(product_id=[$48], time_id=[$49], customer_id0=[$50], promotion_id=[$51], store_id0=[$52], store_sales=[$53], store_cost=[$54], unit_sales=[$55], customer_id=[$19], account_num=[$20], lname=[$21], fname=[$22], mi=[$23], address1=[$24], address2=[$25], address3=[$26], address4=[$27], city=[$28], state_province=[$29], postal_code=[$30], country=[$31], customer_region_id=[$32], phone1=[$33], phone2=[$34], birthdate=[$35], marital_status0=[$36], yearly_income=[$37], gender0=[$38], total_children=[$39], num_children_at_home=[$40], education=[$41], date_accnt_opened=[$42], member_card=[$43], occupation=[$44], houseowner=[$45], num_cars_owned=[$46], fullname=[$47], department_id=[$0], department_description=[$1], employee_id=[$2], full_name=[$3], first_name=[$4], last_name=[$5], position_id=[$6], position_title=[$7], store_id=[$8], department_id0=[$9], birth_date=[$10], hire_date=[$11], end_date=[$12], salary=[$13], supervisor_id=[$14], education_level=[$15], marital_status=[$16], gender=[$17], management_role=[$18])\n"
 operator|+
-literal|"    EnumerableJoin(condition=[true], joinType=[inner])\n"
+literal|"    EnumerableHashJoin(condition=[true], joinType=[inner])\n"
 operator|+
-literal|"      EnumerableJoin(condition=[=($0, $9)], joinType=[inner])\n"
+literal|"      EnumerableHashJoin(condition=[=($0, $9)], joinType=[inner])\n"
 operator|+
 literal|"        EnumerableTableScan(table=[[foodmart2, department]])\n"
 operator|+
 literal|"        EnumerableTableScan(table=[[foodmart2, employee]])\n"
 operator|+
-literal|"      EnumerableJoin(condition=[=($0, $31)], joinType=[inner])\n"
+literal|"      EnumerableHashJoin(condition=[=($0, $31)], joinType=[inner])\n"
 operator|+
 literal|"        EnumerableTableScan(table=[[foodmart2, customer]])\n"
 operator|+

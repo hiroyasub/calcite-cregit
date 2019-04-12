@@ -57,7 +57,7 @@ name|rel
 operator|.
 name|core
 operator|.
-name|RelFactories
+name|Join
 import|;
 end_import
 
@@ -73,7 +73,23 @@ name|rel
 operator|.
 name|core
 operator|.
-name|SemiJoin
+name|RelFactories
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|logical
+operator|.
+name|LogicalJoin
 import|;
 end_import
 
@@ -92,7 +108,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Planner rule that removes a {@link org.apache.calcite.rel.core.SemiJoin}s  * from a join tree.  *  *<p>It is invoked after attempts have been made to convert a SemiJoin to an  * indexed scan on a join factor have failed. Namely, if the join factor does  * not reduce to a single table that can be scanned using an index.  *  *<p>It should only be enabled if all SemiJoins in the plan are advisory; that  * is, they can be safely dropped without affecting the semantics of the query.  */
+comment|/**  * Planner rule that removes a {@code SemiJoin}s from a join tree.  *  *<p>It is invoked after attempts have been made to convert a SemiJoin to an  * indexed scan on a join factor have failed. Namely, if the join factor does  * not reduce to a single table that can be scanned using an index.  *  *<p>It should only be enabled if all SemiJoins in the plan are advisory; that  * is, they can be safely dropped without affecting the semantics of the query.  */
 end_comment
 
 begin_class
@@ -127,11 +143,17 @@ parameter_list|)
 block|{
 name|super
 argument_list|(
-name|operand
+name|operandJ
 argument_list|(
-name|SemiJoin
+name|LogicalJoin
 operator|.
 name|class
+argument_list|,
+literal|null
+argument_list|,
+name|Join
+operator|::
+name|isSemiJoin
 argument_list|,
 name|any
 argument_list|()

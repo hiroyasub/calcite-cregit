@@ -2292,6 +2292,17 @@ literal|true
 argument_list|)
 expr_stmt|;
 break|break;
+case|case
+name|SEMI
+case|:
+case|case
+name|ANTI
+case|:
+name|rightType
+operator|=
+literal|null
+expr_stmt|;
+break|break;
 default|default:
 break|break;
 block|}

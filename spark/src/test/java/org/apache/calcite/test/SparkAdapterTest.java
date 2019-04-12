@@ -1172,7 +1172,7 @@ literal|"PLAN="
 operator|+
 literal|"EnumerableCalc(expr#0..3=[{inputs}], Y=[$t3], Z=[$t1])\n"
 operator|+
-literal|"  EnumerableJoin(condition=[=($0, $2)], joinType=[inner])\n"
+literal|"  EnumerableHashJoin(condition=[=($0, $2)], joinType=[inner])\n"
 operator|+
 literal|"    EnumerableValues(tuples=[[{ 1, 'a' }, { 2, 'b' }]])\n"
 operator|+
@@ -1245,7 +1245,7 @@ literal|"PLAN="
 operator|+
 literal|"EnumerableCalc(expr#0..3=[{inputs}], Z=[$t1])\n"
 operator|+
-literal|"  EnumerableJoin(condition=[=($0, $2)], joinType=[inner])\n"
+literal|"  EnumerableHashJoin(condition=[=($0, $2)], joinType=[inner])\n"
 operator|+
 literal|"    EnumerableValues(tuples=[[{ 1, 'a' }, { 2, 'b' }]])\n"
 operator|+

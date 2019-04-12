@@ -71,9 +71,9 @@ name|calcite
 operator|.
 name|rel
 operator|.
-name|core
+name|logical
 operator|.
-name|SemiJoin
+name|LogicalJoin
 import|;
 end_import
 
@@ -486,7 +486,7 @@ index|[]
 name|joinRemovalFactors
 decl_stmt|;
 comment|/**    * The semijoins that allow the join of a dimension table to be removed    */
-name|SemiJoin
+name|LogicalJoin
 index|[]
 name|joinRemovalSemiJoins
 decl_stmt|;
@@ -826,7 +826,7 @@ expr_stmt|;
 name|joinRemovalSemiJoins
 operator|=
 operator|new
-name|SemiJoin
+name|LogicalJoin
 index|[
 name|nJoinFactors
 index|]
@@ -1039,10 +1039,9 @@ name|get
 argument_list|(
 name|factIdx
 argument_list|)
-operator|!=
-name|JoinRelType
 operator|.
-name|INNER
+name|isOuterJoin
+argument_list|()
 return|;
 block|}
 comment|/**    * @param factIdx factor for which information will be returned    *    * @return bitmap containing the factors that a null generating factor is    * dependent upon, if the factor is null generating in a left or right outer    * join; otherwise null is returned    */
@@ -1137,7 +1136,7 @@ return|;
 block|}
 comment|/**    * @param dimIdx the dimension factor for which information will be returned    *    * @return the semijoin that allows the join of a dimension table to be    * removed    */
 specifier|public
-name|SemiJoin
+name|LogicalJoin
 name|getJoinRemovalSemiJoin
 parameter_list|(
 name|int
@@ -1179,7 +1178,7 @@ parameter_list|(
 name|int
 name|dimIdx
 parameter_list|,
-name|SemiJoin
+name|LogicalJoin
 name|semiJoin
 parameter_list|)
 block|{

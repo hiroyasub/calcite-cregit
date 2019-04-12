@@ -19,6 +19,20 @@ end_package
 
 begin_import
 import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|linq4j
+operator|.
+name|CorrelateJoinType
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -36,13 +50,23 @@ specifier|public
 enum|enum
 name|JoinRelType
 block|{
+comment|/**    * Inner join.    */
 name|INNER
 block|,
+comment|/**    * Left-outer join.    */
 name|LEFT
 block|,
+comment|/**    * Right-outer join.    */
 name|RIGHT
 block|,
+comment|/**    * Full-outer join.    */
 name|FULL
+block|,
+comment|/**    * Semi-join.    *    *<p>For example, {@code EMP semi-join DEPT} finds all {@code EMP} records    * that have a corresponding {@code DEPT} record:    *    *<blockquote><pre>    * SELECT * FROM EMP    * WHERE EXISTS (SELECT 1 FROM DEPT    *     WHERE DEPT.DEPTNO = EMP.DEPTNO)</pre>    *</blockquote>    */
+name|SEMI
+block|,
+comment|/**    * Anti-join.    *    *<p>For example, {@code EMP anti-join DEPT} finds all {@code EMP} records    * that do not have a corresponding {@code DEPT} record:    *    *<blockquote><pre>    * SELECT * FROM EMP    * WHERE NOT EXISTS (SELECT 1 FROM DEPT    *     WHERE DEPT.DEPTNO = EMP.DEPTNO)</pre>    *</blockquote>    */
+name|ANTI
 block|;
 comment|/** Lower-case name. */
 specifier|public
@@ -87,6 +111,32 @@ name|generatesNullsOnLeft
 parameter_list|()
 block|{
 return|return
+operator|(
+name|this
+operator|==
+name|RIGHT
+operator|)
+operator|||
+operator|(
+name|this
+operator|==
+name|FULL
+operator|)
+return|;
+block|}
+comment|/**    * Returns whether a join of this type is an outer join, returns true if the join type may    * generate NULL values, either on the left-hand side or right-hand side.    */
+specifier|public
+name|boolean
+name|isOuterJoin
+parameter_list|()
+block|{
+return|return
+operator|(
+name|this
+operator|==
+name|LEFT
+operator|)
+operator|||
 operator|(
 name|this
 operator|==
@@ -226,6 +276,109 @@ return|return
 name|this
 return|;
 block|}
+block|}
+comment|/** Transform this JoinRelType to CorrelateJoinType. **/
+specifier|public
+name|CorrelateJoinType
+name|toLinq4j
+parameter_list|()
+block|{
+switch|switch
+condition|(
+name|this
+condition|)
+block|{
+case|case
+name|INNER
+case|:
+return|return
+name|CorrelateJoinType
+operator|.
+name|INNER
+return|;
+case|case
+name|LEFT
+case|:
+return|return
+name|CorrelateJoinType
+operator|.
+name|LEFT
+return|;
+case|case
+name|SEMI
+case|:
+return|return
+name|CorrelateJoinType
+operator|.
+name|SEMI
+return|;
+case|case
+name|ANTI
+case|:
+return|return
+name|CorrelateJoinType
+operator|.
+name|ANTI
+return|;
+block|}
+throw|throw
+operator|new
+name|IllegalStateException
+argument_list|(
+literal|"Unable to convert "
+operator|+
+name|this
+operator|+
+literal|" to CorrelateJoinType"
+argument_list|)
+throw|;
+block|}
+specifier|public
+name|boolean
+name|projectsRight
+parameter_list|()
+block|{
+switch|switch
+condition|(
+name|this
+condition|)
+block|{
+case|case
+name|INNER
+case|:
+case|case
+name|LEFT
+case|:
+case|case
+name|RIGHT
+case|:
+case|case
+name|FULL
+case|:
+return|return
+literal|true
+return|;
+case|case
+name|SEMI
+case|:
+case|case
+name|ANTI
+case|:
+return|return
+literal|false
+return|;
+block|}
+throw|throw
+operator|new
+name|IllegalStateException
+argument_list|(
+literal|"Unable to convert "
+operator|+
+name|this
+operator|+
+literal|" to JoinRelType"
+argument_list|)
+throw|;
 block|}
 block|}
 end_enum

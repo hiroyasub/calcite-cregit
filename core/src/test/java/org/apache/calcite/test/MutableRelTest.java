@@ -598,8 +598,9 @@ literal|"  and emp.sal> 100)"
 decl_stmt|;
 name|checkConvertMutableRel
 argument_list|(
-literal|"SemiJoin"
+literal|"Join"
 argument_list|,
+comment|// with join type as semi
 name|sql
 argument_list|,
 literal|true

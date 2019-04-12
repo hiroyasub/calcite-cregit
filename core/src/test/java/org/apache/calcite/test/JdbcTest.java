@@ -6083,13 +6083,13 @@ literal|"PLAN=EnumerableAggregate(group=[{0, 1, 2}], m0=[SUM($3)])\n"
 operator|+
 literal|"  EnumerableCalc(expr#0..37=[{inputs}], c0=[$t9], c1=[$t13], c2=[$t4], unit_sales=[$t22])\n"
 operator|+
-literal|"    EnumerableJoin(condition=[=($23, $0)], joinType=[inner])\n"
+literal|"    EnumerableHashJoin(condition=[=($23, $0)], joinType=[inner])\n"
 operator|+
 literal|"      EnumerableTableScan(table=[[foodmart2, product_class]])\n"
 operator|+
-literal|"      EnumerableJoin(condition=[=($10, $19)], joinType=[inner])\n"
+literal|"      EnumerableHashJoin(condition=[=($10, $19)], joinType=[inner])\n"
 operator|+
-literal|"        EnumerableJoin(condition=[=($11, $0)], joinType=[inner])\n"
+literal|"        EnumerableHashJoin(condition=[=($11, $0)], joinType=[inner])\n"
 operator|+
 literal|"          EnumerableCalc(expr#0..9=[{inputs}], expr#10=[CAST($t4):INTEGER], expr#11=[1997], expr#12=[=($t10, $t11)], proj#0..9=[{exprs}], $condition=[$t12])\n"
 operator|+
@@ -6188,9 +6188,9 @@ name|checkMaskedResultContains
 argument_list|(
 literal|""
 operator|+
-literal|"EnumerableJoin(condition=[=($0, $38)], joinType=[inner]): rowcount = 7.050660528307499E8, cumulative cost = {1.0640240216183146E9 rows, 777302.0 cpu, 0.0 io}\n"
+literal|"EnumerableHashJoin(condition=[=($0, $38)], joinType=[inner]): rowcount = 7.050660528307499E8, cumulative cost = {1.0640240216183146E9 rows, 777302.0 cpu, 0.0 io}\n"
 operator|+
-literal|"  EnumerableJoin(condition=[=($2, $8)], joinType=[inner]): rowcount = 2.0087351932499997E7, cumulative cost = {2.117504719375143E7 rows, 724261.0 cpu, 0.0 io}\n"
+literal|"  EnumerableHashJoin(condition=[=($2, $8)], joinType=[inner]): rowcount = 2.0087351932499997E7, cumulative cost = {2.117504719375143E7 rows, 724261.0 cpu, 0.0 io}\n"
 operator|+
 literal|"    EnumerableTableScan(table=[[foodmart2, sales_fact_1997]]): rowcount = 86837.0, cumulative cost = {86837.0 rows, 86838.0 cpu, 0.0 io}\n"
 operator|+
@@ -11359,7 +11359,7 @@ literal|"  EnumerableAggregate(group=[{1, 2}])\n"
 operator|+
 literal|"    EnumerableCalc(expr#0..3=[{inputs}], expr#4=[CAST($t3):INTEGER NOT NULL], expr#5=[=($t4, $t0)], expr#6=['SameName'], expr#7=[=($t1, $t6)], expr#8=[AND($t5, $t7)], proj#0..3=[{exprs}], $condition=[$t8])\n"
 operator|+
-literal|"      EnumerableJoin(condition=[true], joinType=[inner])\n"
+literal|"      EnumerableHashJoin(condition=[true], joinType=[inner])\n"
 operator|+
 literal|"        EnumerableValues(tuples=[[{ 10, 'SameName' }]])\n"
 operator|+
@@ -11411,7 +11411,7 @@ literal|""
 operator|+
 literal|"EnumerableCalc(expr#0..3=[{inputs}], empid=[$t2], deptno=[$t0], name=[$t1])\n"
 operator|+
-literal|"  EnumerableJoin(condition=[=($0, $3)], joinType=[inner])\n"
+literal|"  EnumerableHashJoin(condition=[=($0, $3)], joinType=[inner])\n"
 operator|+
 literal|"    EnumerableCalc(expr#0..3=[{inputs}], proj#0..1=[{exprs}])\n"
 operator|+
@@ -11643,7 +11643,7 @@ literal|"EnumerableAggregate(group=[{0}], m0=[COUNT($1)])\n"
 operator|+
 literal|"  EnumerableAggregate(group=[{1, 3}])\n"
 operator|+
-literal|"    EnumerableJoin(condition=[=($0, $2)], joinType=[inner])\n"
+literal|"    EnumerableHashJoin(condition=[=($0, $2)], joinType=[inner])\n"
 operator|+
 literal|"      EnumerableCalc(expr#0..9=[{inputs}], expr#10=[CAST($t4):INTEGER], expr#11=[1997], expr#12=[=($t10, $t11)], time_id=[$t0], the_year=[$t4], $condition=[$t12])\n"
 operator|+
@@ -11829,7 +11829,7 @@ name|explainContains
 argument_list|(
 literal|""
 operator|+
-literal|"EnumerableSemiJoin(condition=[=($0, $5)], joinType=[inner])\n"
+literal|"EnumerableHashJoin(condition=[=($0, $5)], joinType=[semi])\n"
 operator|+
 literal|"  EnumerableTableScan(table=[[hr, depts]])\n"
 operator|+
@@ -17010,7 +17010,7 @@ literal|""
 operator|+
 literal|"EnumerableCalc(expr#0..6=[{inputs}], proj#0..4=[{exprs}], I=[$t6])\n"
 operator|+
-literal|"  EnumerableJoin(condition=[=($1, $5)], joinType=[left])\n"
+literal|"  EnumerableHashJoin(condition=[=($1, $5)], joinType=[left])\n"
 operator|+
 literal|"    EnumerableTableScan(table=[[hr, emps]])\n"
 operator|+
@@ -17261,7 +17261,7 @@ specifier|final
 name|String
 name|explain
 init|=
-literal|"EnumerableJoin(condition=[true], joinType=[left])\n"
+literal|"EnumerableHashJoin(condition=[true], joinType=[left])\n"
 operator|+
 literal|"  EnumerableAggregate(group=[{7}], EXPR$1=[$SUM0($0)])\n"
 operator|+

@@ -71,7 +71,7 @@ name|rel
 operator|.
 name|core
 operator|.
-name|RelFactories
+name|Join
 import|;
 end_import
 
@@ -87,7 +87,23 @@ name|rel
 operator|.
 name|core
 operator|.
-name|SemiJoin
+name|JoinRelType
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|core
+operator|.
+name|RelFactories
 import|;
 end_import
 
@@ -115,14 +131,44 @@ name|apache
 operator|.
 name|calcite
 operator|.
+name|rel
+operator|.
+name|logical
+operator|.
+name|LogicalJoin
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
 name|tools
 operator|.
 name|RelBuilderFactory
 import|;
 end_import
 
+begin_import
+import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|collect
+operator|.
+name|ImmutableSet
+import|;
+end_import
+
 begin_comment
-comment|/**  * Planner rule that pushes  * {@link org.apache.calcite.rel.core.SemiJoin}s down in a tree past  * a {@link org.apache.calcite.rel.core.Filter}.  *  *<p>The intention is to trigger other rules that will convert  * {@code SemiJoin}s.  *  *<p>SemiJoin(LogicalFilter(X), Y)&rarr; LogicalFilter(SemiJoin(X, Y))  *  * @see SemiJoinProjectTransposeRule  */
+comment|/**  * Planner rule that pushes {@code SemiJoin}s down in a tree past  * a {@link org.apache.calcite.rel.core.Filter}.  *  *<p>The intention is to trigger other rules that will convert  * {@code SemiJoin}s.  *  *<p>SemiJoin(LogicalFilter(X), Y)&rarr; LogicalFilter(SemiJoin(X, Y))  *  * @see SemiJoinProjectTransposeRule  */
 end_comment
 
 begin_class
@@ -157,11 +203,17 @@ parameter_list|)
 block|{
 name|super
 argument_list|(
-name|operand
+name|operandJ
 argument_list|(
-name|SemiJoin
+name|LogicalJoin
 operator|.
 name|class
+argument_list|,
+literal|null
+argument_list|,
+name|Join
+operator|::
+name|isSemiJoin
 argument_list|,
 name|some
 argument_list|(
@@ -193,7 +245,7 @@ name|RelOptRuleCall
 name|call
 parameter_list|)
 block|{
-name|SemiJoin
+name|LogicalJoin
 name|semiJoin
 init|=
 name|call
@@ -216,7 +268,7 @@ decl_stmt|;
 name|RelNode
 name|newSemiJoin
 init|=
-name|SemiJoin
+name|LogicalJoin
 operator|.
 name|create
 argument_list|(
@@ -235,15 +287,14 @@ operator|.
 name|getCondition
 argument_list|()
 argument_list|,
-name|semiJoin
+name|ImmutableSet
 operator|.
-name|getLeftKeys
+name|of
 argument_list|()
 argument_list|,
-name|semiJoin
+name|JoinRelType
 operator|.
-name|getRightKeys
-argument_list|()
+name|SEMI
 argument_list|)
 decl_stmt|;
 specifier|final

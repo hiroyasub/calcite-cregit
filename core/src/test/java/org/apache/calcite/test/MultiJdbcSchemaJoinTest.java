@@ -979,7 +979,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testJdbcWithEnumerableJoin
+name|testJdbcWithEnumerableHashJoin
 parameter_list|()
 throws|throws
 name|SQLException
@@ -1034,7 +1034,7 @@ parameter_list|()
 throws|throws
 name|SQLException
 block|{
-comment|//  * compared to testJdbcWithEnumerableJoin, the join order is reversed
+comment|//  * compared to testJdbcWithEnumerableHashJoin, the join order is reversed
 comment|//  * the query fails with a CannotPlanException
 name|String
 name|query

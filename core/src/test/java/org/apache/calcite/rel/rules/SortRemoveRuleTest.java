@@ -585,7 +585,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|removeSortOverEnumerableJoin
+name|removeSortOverEnumerableHashJoin
 parameter_list|()
 throws|throws
 name|Exception
@@ -671,7 +671,7 @@ name|allOf
 argument_list|(
 name|containsString
 argument_list|(
-literal|"EnumerableJoin"
+literal|"EnumerableHashJoin"
 argument_list|)
 argument_list|,
 name|not
@@ -691,7 +691,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|removeSortOverEnumerableThetaJoin
+name|removeSortOverEnumerableNestedLoopJoin
 parameter_list|()
 throws|throws
 name|Exception
@@ -724,8 +724,8 @@ operator|.
 name|ENUMERABLE_TABLE_SCAN_RULE
 argument_list|)
 decl_stmt|;
-comment|// Inner join is not considered since the ENUMERABLE_JOIN_RULE does not generate a theta join
-comment|// in the case of inner joins.
+comment|// Inner join is not considered since the ENUMERABLE_JOIN_RULE does not generate a nestedLoop
+comment|// join in the case of inner joins.
 for|for
 control|(
 name|String
@@ -777,7 +777,7 @@ name|allOf
 argument_list|(
 name|containsString
 argument_list|(
-literal|"EnumerableThetaJoin"
+literal|"EnumerableNestedLoopJoin"
 argument_list|)
 argument_list|,
 name|not
@@ -792,7 +792,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2554">[CALCITE-2554]    * Enrich enumerable join operators with order preserving information</a>.    *    *<p>Since join inputs are sorted, and this join preserves the order of the    * left input, there shouldn't be any sort operator above the join.    */
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2554">[CALCITE-2554]    * Enrich enumerable join operators with order preserving information</a>.    *    *<p>Since join inputs are sorted, and this join preserves the order of the    * left input, there shouldn't be any sort operator above the join.    *    *<p>Until CALCITE-2018 is fixed we can add back EnumerableRules.ENUMERABLE_SORT_RULE    */
 annotation|@
 name|Test
 specifier|public
@@ -815,11 +815,7 @@ name|INSTANCE
 argument_list|,
 name|JoinToCorrelateRule
 operator|.
-name|JOIN
-argument_list|,
-name|EnumerableRules
-operator|.
-name|ENUMERABLE_SORT_RULE
+name|INSTANCE
 argument_list|,
 name|EnumerableRules
 operator|.
@@ -941,7 +937,7 @@ name|ENUMERABLE_SORT_RULE
 argument_list|,
 name|EnumerableRules
 operator|.
-name|ENUMERABLE_SEMI_JOIN_RULE
+name|ENUMERABLE_JOIN_RULE
 argument_list|,
 name|EnumerableRules
 operator|.
@@ -982,7 +978,7 @@ name|allOf
 argument_list|(
 name|containsString
 argument_list|(
-literal|"EnumerableSemiJoin"
+literal|"EnumerableHashJoin"
 argument_list|)
 argument_list|,
 name|not

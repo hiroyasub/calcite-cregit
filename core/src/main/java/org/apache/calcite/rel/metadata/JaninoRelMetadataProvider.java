@@ -61,7 +61,7 @@ name|adapter
 operator|.
 name|enumerable
 operator|.
-name|EnumerableJoin
+name|EnumerableHashJoin
 import|;
 end_import
 
@@ -1136,7 +1136,7 @@ name|EnumerableProject
 operator|.
 name|class
 argument_list|,
-name|EnumerableJoin
+name|EnumerableHashJoin
 operator|.
 name|class
 argument_list|,

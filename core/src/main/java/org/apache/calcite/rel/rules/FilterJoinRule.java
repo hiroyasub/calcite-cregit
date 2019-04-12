@@ -99,22 +99,6 @@ name|rel
 operator|.
 name|core
 operator|.
-name|EquiJoin
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|rel
-operator|.
-name|core
-operator|.
 name|Filter
 import|;
 end_import
@@ -583,6 +567,27 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
+comment|/** Returns if it is needed to push the filter condition above join    * into the join condition.    */
+specifier|private
+name|boolean
+name|needsPushInto
+parameter_list|(
+name|Join
+name|join
+parameter_list|)
+block|{
+comment|// If the join force the join info to be based on column equality,
+comment|// Or it is a non-correlated semijoin, returns false.
+return|return
+operator|!
+name|RelOptUtil
+operator|.
+name|forceEquiJoin
+argument_list|(
+name|join
+argument_list|)
+return|;
+block|}
 specifier|protected
 name|void
 name|perform
@@ -776,12 +781,10 @@ name|aboveFilters
 argument_list|,
 name|joinType
 argument_list|,
-operator|!
-operator|(
+name|needsPushInto
+argument_list|(
 name|join
-operator|instanceof
-name|EquiJoin
-operator|)
+argument_list|)
 argument_list|,
 operator|!
 name|joinType

@@ -45,7 +45,7 @@ name|adapter
 operator|.
 name|enumerable
 operator|.
-name|EnumerableJoin
+name|EnumerableHashJoin
 import|;
 end_import
 
@@ -77,7 +77,7 @@ name|adapter
 operator|.
 name|enumerable
 operator|.
-name|EnumerableSemiJoin
+name|EnumerableNestedLoopJoin
 import|;
 end_import
 
@@ -93,7 +93,7 @@ name|adapter
 operator|.
 name|enumerable
 operator|.
-name|EnumerableThetaJoin
+name|EnumerableSemiJoin
 import|;
 end_import
 
@@ -484,20 +484,6 @@ operator|.
 name|rex
 operator|.
 name|RexProgram
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|sql
-operator|.
-name|SemiJoinType
 import|;
 end_import
 
@@ -922,13 +908,17 @@ argument_list|()
 argument_list|,
 name|join
 operator|.
-name|getLeftKeys
+name|analyzeCondition
 argument_list|()
+operator|.
+name|leftKeys
 argument_list|,
 name|join
 operator|.
-name|getRightKeys
+name|analyzeCondition
 argument_list|()
+operator|.
+name|rightKeys
 argument_list|)
 argument_list|)
 return|;
@@ -940,7 +930,7 @@ name|RelCollation
 argument_list|>
 name|collations
 parameter_list|(
-name|EnumerableJoin
+name|EnumerableHashJoin
 name|join
 parameter_list|,
 name|RelMetadataQuery
@@ -954,7 +944,7 @@ name|copyOf
 argument_list|(
 name|RelMdCollation
 operator|.
-name|enumerableJoin
+name|enumerableHashJoin
 argument_list|(
 name|mq
 argument_list|,
@@ -983,7 +973,7 @@ name|RelCollation
 argument_list|>
 name|collations
 parameter_list|(
-name|EnumerableThetaJoin
+name|EnumerableNestedLoopJoin
 name|join
 parameter_list|,
 name|RelMetadataQuery
@@ -997,7 +987,7 @@ name|copyOf
 argument_list|(
 name|RelMdCollation
 operator|.
-name|enumerableThetaJoin
+name|enumerableNestedLoopJoin
 argument_list|(
 name|mq
 argument_list|,
@@ -2563,14 +2553,14 @@ name|build
 argument_list|()
 return|;
 block|}
-comment|/**    * Returns the collation of {@link EnumerableJoin} based on its inputs and the join type.    */
+comment|/**    * Returns the collation of {@link EnumerableHashJoin} based on its inputs and the join type.    */
 specifier|public
 specifier|static
 name|List
 argument_list|<
 name|RelCollation
 argument_list|>
-name|enumerableJoin
+name|enumerableHashJoin
 parameter_list|(
 name|RelMetadataQuery
 name|mq
@@ -2585,6 +2575,28 @@ name|JoinRelType
 name|joinType
 parameter_list|)
 block|{
+if|if
+condition|(
+name|joinType
+operator|==
+name|JoinRelType
+operator|.
+name|SEMI
+condition|)
+block|{
+return|return
+name|enumerableSemiJoin
+argument_list|(
+name|mq
+argument_list|,
+name|left
+argument_list|,
+name|right
+argument_list|)
+return|;
+block|}
+else|else
+block|{
 return|return
 name|enumerableJoin0
 argument_list|(
@@ -2598,14 +2610,15 @@ name|joinType
 argument_list|)
 return|;
 block|}
-comment|/**    * Returns the collation of {@link EnumerableThetaJoin} based on its inputs and the join type.    */
+block|}
+comment|/**    * Returns the collation of {@link EnumerableNestedLoopJoin}    * based on its inputs and the join type.    */
 specifier|public
 specifier|static
 name|List
 argument_list|<
 name|RelCollation
 argument_list|>
-name|enumerableThetaJoin
+name|enumerableNestedLoopJoin
 parameter_list|(
 name|RelMetadataQuery
 name|mq
@@ -2650,7 +2663,7 @@ parameter_list|,
 name|RelNode
 name|right
 parameter_list|,
-name|SemiJoinType
+name|JoinRelType
 name|joinType
 parameter_list|)
 block|{
@@ -2736,6 +2749,12 @@ condition|(
 name|joinType
 condition|)
 block|{
+case|case
+name|SEMI
+case|:
+case|case
+name|ANTI
+case|:
 case|case
 name|INNER
 case|:
