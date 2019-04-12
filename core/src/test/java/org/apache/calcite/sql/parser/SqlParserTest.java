@@ -16360,6 +16360,32 @@ argument_list|(
 name|expected
 argument_list|)
 expr_stmt|;
+comment|// See [CALCITE-2993] ParseException may be thrown for legal
+comment|// SQL queries due to incorrect "LOOKAHEAD(1)" hints
+name|sql
+argument_list|(
+literal|"select lead(x) ignore from t"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+literal|"SELECT LEAD(`X`) AS `IGNORE`\n"
+operator|+
+literal|"FROM `T`"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select lead(x) respect from t"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+literal|"SELECT LEAD(`X`) AS `RESPECT`\n"
+operator|+
+literal|"FROM `T`"
+argument_list|)
+expr_stmt|;
 block|}
 annotation|@
 name|Test
@@ -27036,6 +27062,67 @@ name|expected
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2993">[CALCITE-2993]    * ParseException may be thrown for legal SQL queries due to incorrect    * "LOOKAHEAD(1)" hints</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testMatchRecognizePatternSkip6
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"  from t match_recognize\n"
+operator|+
+literal|"  (\n"
+operator|+
+literal|"     after match skip to last\n"
+operator|+
+literal|"    pattern (strt down+ up+)\n"
+operator|+
+literal|"    define\n"
+operator|+
+literal|"      down as down.price< PREV(down.price),\n"
+operator|+
+literal|"      up as up.price> prev(up.price)\n"
+operator|+
+literal|"  ) mr"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM `T` MATCH_RECOGNIZE(\n"
+operator|+
+literal|"AFTER MATCH SKIP TO LAST `LAST`\n"
+operator|+
+literal|"PATTERN (((`STRT` (`DOWN` +)) (`UP` +)))\n"
+operator|+
+literal|"DEFINE "
+operator|+
+literal|"`DOWN` AS (`DOWN`.`PRICE`< PREV(`DOWN`.`PRICE`, 1)), "
+operator|+
+literal|"`UP` AS (`UP`.`PRICE`> PREV(`UP`.`PRICE`, 1))"
+operator|+
+literal|") AS `MR`"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
 annotation|@
 name|Test
 specifier|public
@@ -27961,6 +28048,29 @@ operator|+
 literal|"JSON_OBJECT(KEY 'foo' VALUE 'bar' NULL ON NULL) "
 operator|+
 literal|"FORMAT JSON NULL ON NULL)"
+argument_list|)
+expr_stmt|;
+if|if
+condition|(
+operator|!
+name|Bug
+operator|.
+name|TODO_FIXED
+condition|)
+block|{
+return|return;
+block|}
+comment|// "LOOKAHEAD(2) list = JsonNameAndValue()" does not generate
+comment|// valid LOOKAHEAD codes for the case "key: value".
+comment|//
+comment|// You can see the generated codes that are located at method
+comment|// SqlParserImpl#JsonObjectFunctionCall. Looking ahead fails
+comment|// immediately after seeking the tokens<KEY> and<COLON>.
+name|checkExp
+argument_list|(
+literal|"json_object(key: value)"
+argument_list|,
+literal|"JSON_OBJECT(KEY `KEY` VALUE `VALUE` NULL ON NULL)"
 argument_list|)
 expr_stmt|;
 block|}
