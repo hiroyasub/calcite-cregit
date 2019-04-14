@@ -157,6 +157,16 @@ name|java
 operator|.
 name|util
 operator|.
+name|Locale
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
 name|TimeZone
 import|;
 end_import
@@ -324,6 +334,16 @@ argument_list|(
 literal|"stdout"
 argument_list|,
 name|OutputStream
+operator|.
+name|class
+argument_list|)
+block|,
+comment|/** Locale in which the current statement is executing.      * Affects the behavior of functions such as {@code DAYNAME} and      * {@code MONTHNAME}. Required; defaults to the root locale if the      * connection does not specify a locale. */
+name|LOCALE
+argument_list|(
+literal|"locale"
+argument_list|,
+name|Locale
 operator|.
 name|class
 argument_list|)

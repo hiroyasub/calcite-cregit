@@ -532,6 +532,25 @@ argument_list|,
 literal|false
 argument_list|)
 block|,
+comment|/** Returns the locale from the connect string.    * If the locale is not set, returns the root locale.    * Never null.    * Examples of valid locales: 'en', 'en_US',    * 'de_DE', '_GB', 'en_US_WIN', 'de__POSIX', 'fr__MAC', ''. */
+name|LOCALE
+argument_list|(
+literal|"locale"
+argument_list|,
+name|Type
+operator|.
+name|STRING
+argument_list|,
+name|Locale
+operator|.
+name|ROOT
+operator|.
+name|toString
+argument_list|()
+argument_list|,
+literal|false
+argument_list|)
+block|,
 comment|/** If the planner should try de-correlating as much as it is possible.    * If true (the default), Calcite de-correlates the plan. */
 name|FORCE_DECORRELATE
 argument_list|(

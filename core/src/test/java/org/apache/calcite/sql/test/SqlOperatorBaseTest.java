@@ -7857,23 +7857,27 @@ argument_list|,
 literal|"TIME(0) NOT NULL"
 argument_list|)
 expr_stmt|;
-if|if
-condition|(
-literal|false
-condition|)
-block|{
 name|tester
 operator|.
 name|checkScalar
 argument_list|(
-literal|"{fn DAYNAME(date)}"
+literal|"{fn DAYNAME(DATE '2014-12-10')}"
 argument_list|,
-literal|null
+comment|// Day names in root locale changed from long to short in JDK 9
+name|TestUtil
+operator|.
+name|getJavaMajorVersion
+argument_list|()
+operator|<=
+literal|8
+condition|?
+literal|"Wednesday"
+else|:
+literal|"Wed"
 argument_list|,
-literal|""
+literal|"VARCHAR(2000) NOT NULL"
 argument_list|)
 expr_stmt|;
-block|}
 name|tester
 operator|.
 name|checkScalar
@@ -7948,23 +7952,27 @@ argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-if|if
-condition|(
-literal|false
-condition|)
-block|{
 name|tester
 operator|.
 name|checkScalar
 argument_list|(
-literal|"{fn MONTHNAME(date)}"
+literal|"{fn MONTHNAME(DATE '2014-12-10')}"
 argument_list|,
-literal|null
+comment|// Month names in root locale changed from long to short in JDK 9
+name|TestUtil
+operator|.
+name|getJavaMajorVersion
+argument_list|()
+operator|<=
+literal|8
+condition|?
+literal|"December"
+else|:
+literal|"Dec"
 argument_list|,
-literal|""
+literal|"VARCHAR(2000) NOT NULL"
 argument_list|)
 expr_stmt|;
-block|}
 name|tester
 operator|.
 name|checkType

@@ -884,6 +884,25 @@ name|getString
 argument_list|()
 return|;
 block|}
+specifier|public
+name|String
+name|locale
+parameter_list|()
+block|{
+return|return
+name|CalciteConnectionProperty
+operator|.
+name|LOCALE
+operator|.
+name|wrap
+argument_list|(
+name|properties
+argument_list|)
+operator|.
+name|getString
+argument_list|()
+return|;
+block|}
 block|}
 end_class
 

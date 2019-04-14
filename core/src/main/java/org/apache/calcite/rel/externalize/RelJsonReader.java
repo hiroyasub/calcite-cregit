@@ -628,15 +628,6 @@ argument_list|(
 name|rels
 argument_list|)
 expr_stmt|;
-name|System
-operator|.
-name|out
-operator|.
-name|println
-argument_list|(
-name|lastRel
-argument_list|)
-expr_stmt|;
 return|return
 name|lastRel
 return|;

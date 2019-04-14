@@ -269,6 +269,11 @@ name|String
 name|timeZone
 parameter_list|()
 function_decl|;
+comment|/** @see CalciteConnectionProperty#LOCALE */
+name|String
+name|locale
+parameter_list|()
+function_decl|;
 block|}
 end_interface
 
