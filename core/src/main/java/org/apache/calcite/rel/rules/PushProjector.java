@@ -1756,9 +1756,6 @@ name|Pair
 operator|.
 name|of
 argument_list|(
-operator|(
-name|RexNode
-operator|)
 name|rexBuilder
 operator|.
 name|makeInputRef
@@ -2192,9 +2189,6 @@ name|Pair
 operator|.
 name|of
 argument_list|(
-operator|(
-name|RexNode
-operator|)
 name|rexBuilder
 operator|.
 name|makeInputRef

@@ -7320,6 +7320,78 @@ name|check
 argument_list|()
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2343">[CALCITE-2343]    * Should not push over whose columns are all from left child past join since    * join will affect row count.</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testPushProjectWithOverPastJoin1
+parameter_list|()
+block|{
+name|checkPlanning
+argument_list|(
+name|ProjectJoinTransposeRule
+operator|.
+name|INSTANCE
+argument_list|,
+literal|"select e.sal + b.comm,\n"
+operator|+
+literal|"count(e.empno) over (partition by e.deptno)\n"
+operator|+
+literal|"from emp e join bonus b\n"
+operator|+
+literal|"on e.ename = b.ename and e.deptno = 10"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** As {@link #testPushProjectWithOverPastJoin1()};    * should not push over whose columns are all from right child past join since    * join will affect row count. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testPushProjectWithOverPastJoin2
+parameter_list|()
+block|{
+name|checkPlanning
+argument_list|(
+name|ProjectJoinTransposeRule
+operator|.
+name|INSTANCE
+argument_list|,
+literal|"select e.sal + b.comm,\n"
+operator|+
+literal|"count(b.sal) over (partition by b.job)\n"
+operator|+
+literal|"from emp e join bonus b\n"
+operator|+
+literal|"on e.ename = b.ename and e.deptno = 10"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** As {@link #testPushProjectWithOverPastJoin2()};    * should not push over past join but should push the operands of over past    * join. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testPushProjectWithOverPastJoin3
+parameter_list|()
+block|{
+name|checkPlanning
+argument_list|(
+name|ProjectJoinTransposeRule
+operator|.
+name|INSTANCE
+argument_list|,
+literal|"select e.sal + b.comm,\n"
+operator|+
+literal|"sum(b.sal + b.sal + 100) over (partition by b.job)\n"
+operator|+
+literal|"from emp e join bonus b\n"
+operator|+
+literal|"on e.ename = b.ename and e.deptno = 10"
+argument_list|)
+expr_stmt|;
+block|}
 annotation|@
 name|Test
 specifier|public
