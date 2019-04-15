@@ -1343,6 +1343,12 @@ name|getFieldCount
 argument_list|()
 decl_stmt|;
 comment|// precheck that all types are structs with same number of fields
+comment|// and register desired nullability for the result
+name|boolean
+name|isNullable
+init|=
+literal|false
+decl_stmt|;
 for|for
 control|(
 name|RelDataType
@@ -1381,6 +1387,13 @@ return|return
 literal|null
 return|;
 block|}
+name|isNullable
+operator||=
+name|type
+operator|.
+name|isNullable
+argument_list|()
+expr_stmt|;
 block|}
 comment|// recursively compute column-wise least restrictive
 specifier|final
@@ -1485,10 +1498,15 @@ argument_list|)
 expr_stmt|;
 block|}
 return|return
+name|createTypeWithNullability
+argument_list|(
 name|builder
 operator|.
 name|build
 argument_list|()
+argument_list|,
+name|isNullable
+argument_list|)
 return|;
 block|}
 comment|// copy a non-record type, setting nullability
