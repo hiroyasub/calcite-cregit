@@ -145,6 +145,20 @@ name|apache
 operator|.
 name|calcite
 operator|.
+name|rex
+operator|.
+name|RexOver
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
 name|tools
 operator|.
 name|RelBuilderFactory
@@ -193,7 +207,12 @@ name|ProjectSetOpTransposeRule
 argument_list|(
 name|expr
 lambda|->
-literal|false
+operator|!
+operator|(
+name|expr
+operator|instanceof
+name|RexOver
+operator|)
 argument_list|,
 name|RelFactories
 operator|.
@@ -340,11 +359,26 @@ operator|.
 name|getAdjustments
 argument_list|()
 decl_stmt|;
-comment|// push the projects completely below the setop; this
-comment|// is different from pushing below a join, where we decompose
-comment|// to try to keep expensive expressions above the join,
-comment|// because UNION ALL does not have any filtering effect,
-comment|// and it is the only operator this rule currently acts on
+specifier|final
+name|RelNode
+name|node
+decl_stmt|;
+if|if
+condition|(
+name|RexOver
+operator|.
+name|containsOver
+argument_list|(
+name|origProj
+operator|.
+name|getProjects
+argument_list|()
+argument_list|,
+literal|null
+argument_list|)
+condition|)
+block|{
+comment|// should not push over past setop but can push its operand down.
 for|for
 control|(
 name|RelNode
@@ -356,8 +390,6 @@ name|getInputs
 argument_list|()
 control|)
 block|{
-comment|// be lazy:  produce two ProjectRels, and let another rule
-comment|// merge them (could probably just clone origProj instead?)
 name|Project
 name|p
 init|=
@@ -372,22 +404,33 @@ argument_list|,
 literal|false
 argument_list|)
 decl_stmt|;
+comment|// make sure that it is not a trivial project to avoid infinite loop.
+if|if
+condition|(
+name|p
+operator|.
+name|getRowType
+argument_list|()
+operator|.
+name|equals
+argument_list|(
+name|input
+operator|.
+name|getRowType
+argument_list|()
+argument_list|)
+condition|)
+block|{
+return|return;
+block|}
 name|newSetOpInputs
 operator|.
 name|add
 argument_list|(
-name|pushProject
-operator|.
-name|createNewProject
-argument_list|(
 name|p
-argument_list|,
-name|adjustments
-argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|// create a new setop whose children are the ProjectRels created above
 name|SetOp
 name|newSetOp
 init|=
@@ -403,11 +446,78 @@ argument_list|,
 name|newSetOpInputs
 argument_list|)
 decl_stmt|;
+name|node
+operator|=
+name|pushProject
+operator|.
+name|createNewProject
+argument_list|(
+name|newSetOp
+argument_list|,
+name|adjustments
+argument_list|)
+expr_stmt|;
+block|}
+else|else
+block|{
+comment|// push some expressions below the setop; this
+comment|// is different from pushing below a join, where we decompose
+comment|// to try to keep expensive expressions above the join,
+comment|// because UNION ALL does not have any filtering effect,
+comment|// and it is the only operator this rule currently acts on
+name|setOp
+operator|.
+name|getInputs
+argument_list|()
+operator|.
+name|forEach
+argument_list|(
+name|input
+lambda|->
+name|newSetOpInputs
+operator|.
+name|add
+argument_list|(
+name|pushProject
+operator|.
+name|createNewProject
+argument_list|(
+name|pushProject
+operator|.
+name|createProjectRefsAndExprs
+argument_list|(
+name|input
+argument_list|,
+literal|true
+argument_list|,
+literal|false
+argument_list|)
+argument_list|,
+name|adjustments
+argument_list|)
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|node
+operator|=
+name|setOp
+operator|.
+name|copy
+argument_list|(
+name|setOp
+operator|.
+name|getTraitSet
+argument_list|()
+argument_list|,
+name|newSetOpInputs
+argument_list|)
+expr_stmt|;
+block|}
 name|call
 operator|.
 name|transformTo
 argument_list|(
-name|newSetOp
+name|node
 argument_list|)
 expr_stmt|;
 block|}

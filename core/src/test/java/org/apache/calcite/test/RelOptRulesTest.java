@@ -6273,6 +6273,26 @@ literal|"on e.ename = b.ename and e.deptno = 10"
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3004">[CALCITE-3004]    * Should not push over past union but its operands can since setop    * will affect row count</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testProjectSetOpTranspose
+parameter_list|()
+block|{
+name|checkPlanning
+argument_list|(
+name|ProjectSetOpTransposeRule
+operator|.
+name|INSTANCE
+argument_list|,
+literal|"select job, sum(sal + 100) over (partition by deptno) from\n"
+operator|+
+literal|"(select * from emp e1 union all select * from emp e2)"
+argument_list|)
+expr_stmt|;
+block|}
 annotation|@
 name|Test
 specifier|public
@@ -6986,6 +7006,30 @@ argument_list|(
 name|customPCTrans
 argument_list|,
 literal|"select t1.name, t2.ename "
+operator|+
+literal|"from DEPT_NESTED as t1, "
+operator|+
+literal|"unnest(t1.employees) as t2"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** As {@link #testProjectSetOpTranspose()};    * should not push over past correlate but its operands can since correlate    * will affect row count. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testProjectCorrelateTransposeWithOver
+parameter_list|()
+block|{
+name|checkPlanning
+argument_list|(
+name|ProjectCorrelateTransposeRule
+operator|.
+name|INSTANCE
+argument_list|,
+literal|"select sum(t1.deptno + 1) over (partition by t1.name),\n"
+operator|+
+literal|"count(t2.empno) over ()\n"
 operator|+
 literal|"from DEPT_NESTED as t1, "
 operator|+
