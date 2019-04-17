@@ -634,22 +634,11 @@ argument_list|,
 name|allowFunctions
 argument_list|)
 argument_list|,
-name|operandJ
+name|operand
 argument_list|(
 name|joinClass
 argument_list|,
 literal|null
-argument_list|,
-name|join
-lambda|->
-name|join
-operator|.
-name|getJoinType
-argument_list|()
-operator|==
-name|JoinRelType
-operator|.
-name|INNER
 argument_list|,
 name|any
 argument_list|()
@@ -1002,6 +991,52 @@ return|return
 literal|true
 return|;
 block|}
+comment|// OUTER joins are supported for group by without aggregate functions
+comment|// FULL OUTER JOIN is not supported since it could produce wrong result
+comment|// due to bug (CALCITE-3012)
+specifier|private
+name|boolean
+name|isJoinSupported
+parameter_list|(
+specifier|final
+name|Join
+name|join
+parameter_list|,
+specifier|final
+name|Aggregate
+name|aggregate
+parameter_list|)
+block|{
+return|return
+name|join
+operator|.
+name|getJoinType
+argument_list|()
+operator|!=
+name|JoinRelType
+operator|.
+name|FULL
+operator|&&
+operator|(
+name|join
+operator|.
+name|getJoinType
+argument_list|()
+operator|==
+name|JoinRelType
+operator|.
+name|INNER
+operator|||
+name|aggregate
+operator|.
+name|getAggCallList
+argument_list|()
+operator|.
+name|isEmpty
+argument_list|()
+operator|)
+return|;
+block|}
 specifier|public
 name|void
 name|onMatch
@@ -1053,6 +1088,19 @@ operator|.
 name|builder
 argument_list|()
 decl_stmt|;
+if|if
+condition|(
+operator|!
+name|isJoinSupported
+argument_list|(
+name|join
+argument_list|,
+name|aggregate
+argument_list|)
+condition|)
+block|{
+return|return;
+block|}
 comment|// Do the columns used by the join appear in the output of the aggregate?
 specifier|final
 name|ImmutableBitSet
@@ -2309,6 +2357,7 @@ name|allColumnsInAggregate
 condition|)
 block|{
 comment|// let's see if we can convert aggregate into projects
+comment|// This shouldn't be done for FULL OUTER JOIN, aggregate on top is always required
 name|List
 argument_list|<
 name|RexNode
