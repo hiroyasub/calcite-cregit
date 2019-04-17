@@ -1535,6 +1535,44 @@ decl_stmt|;
 end_decl_stmt
 
 begin_comment
+comment|/** Operand type-checking strategy where the first operand is a character or    * binary string (CHAR, VARCHAR, BINARY or VARBINARY), and the second operand    * is INTEGER. */
+end_comment
+
+begin_decl_stmt
+specifier|public
+specifier|static
+specifier|final
+name|SqlSingleOperandTypeChecker
+name|CBSTRING_INTEGER
+init|=
+name|or
+argument_list|(
+name|family
+argument_list|(
+name|SqlTypeFamily
+operator|.
+name|STRING
+argument_list|,
+name|SqlTypeFamily
+operator|.
+name|INTEGER
+argument_list|)
+argument_list|,
+name|family
+argument_list|(
+name|SqlTypeFamily
+operator|.
+name|BINARY
+argument_list|,
+name|SqlTypeFamily
+operator|.
+name|INTEGER
+argument_list|)
+argument_list|)
+decl_stmt|;
+end_decl_stmt
+
+begin_comment
 comment|/**    * Operand type-checking strategy where two operands must both be in the    * same string type family and last type is INTEGER.    */
 end_comment
 

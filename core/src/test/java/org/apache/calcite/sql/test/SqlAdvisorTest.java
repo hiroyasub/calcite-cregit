@@ -695,6 +695,8 @@ literal|"KEYWORD(LAST_VALUE)"
 argument_list|,
 literal|"KEYWORD(LEAD)"
 argument_list|,
+literal|"KEYWORD(LEFT)"
+argument_list|,
 literal|"KEYWORD(LN)"
 argument_list|,
 literal|"KEYWORD(LOCALTIME)"
@@ -752,6 +754,8 @@ argument_list|,
 literal|"KEYWORD(REGR_SXX)"
 argument_list|,
 literal|"KEYWORD(REGR_SYY)"
+argument_list|,
+literal|"KEYWORD(RIGHT)"
 argument_list|,
 literal|"KEYWORD(ROW)"
 argument_list|,

@@ -872,6 +872,18 @@ import|;
 end_import
 
 begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|stream
+operator|.
+name|Stream
+import|;
+end_import
+
+begin_import
 import|import static
 name|org
 operator|.
@@ -7522,6 +7534,86 @@ argument_list|(
 literal|"{fn REVERSE(cast(null as varchar(1)))}"
 argument_list|)
 expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"{fn LEFT('abcd', 3)}"
+argument_list|,
+literal|"abc"
+argument_list|,
+literal|"VARCHAR(4) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"{fn LEFT('abcd', 4)}"
+argument_list|,
+literal|"abcd"
+argument_list|,
+literal|"VARCHAR(4) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"{fn LEFT('abcd', 5)}"
+argument_list|,
+literal|"abcd"
+argument_list|,
+literal|"VARCHAR(4) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkNull
+argument_list|(
+literal|"{fn LEFT(cast(null as varchar(1)), 3)}"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"{fn RIGHT('abcd', 3)}"
+argument_list|,
+literal|"bcd"
+argument_list|,
+literal|"VARCHAR(4) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"{fn RIGHT('abcd', 4)}"
+argument_list|,
+literal|"abcd"
+argument_list|,
+literal|"VARCHAR(4) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"{fn RIGHT('abcd', 5)}"
+argument_list|,
+literal|"abcd"
+argument_list|,
+literal|"VARCHAR(4) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkNull
+argument_list|(
+literal|"{fn RIGHT(cast(null as varchar(1)), 3)}"
+argument_list|)
+expr_stmt|;
 comment|// REVIEW: is this result correct? I think it should be "abcCdef"
 name|tester
 operator|.
@@ -7545,23 +7637,6 @@ argument_list|,
 literal|"CHAR(6) NOT NULL"
 argument_list|)
 expr_stmt|;
-if|if
-condition|(
-literal|false
-condition|)
-block|{
-name|tester
-operator|.
-name|checkScalar
-argument_list|(
-literal|"{fn LEFT(string, count)}"
-argument_list|,
-literal|null
-argument_list|,
-literal|""
-argument_list|)
-expr_stmt|;
-block|}
 if|if
 condition|(
 literal|false
@@ -7694,23 +7769,6 @@ argument_list|(
 literal|"{fn REPLACE('ciao', 'bella', cast(null as varchar(3)))}"
 argument_list|)
 expr_stmt|;
-if|if
-condition|(
-literal|false
-condition|)
-block|{
-name|tester
-operator|.
-name|checkScalar
-argument_list|(
-literal|"{fn RIGHT(string, count)}"
-argument_list|,
-literal|null
-argument_list|,
-literal|""
-argument_list|)
-expr_stmt|;
-block|}
 name|tester
 operator|.
 name|checkScalar
@@ -18843,6 +18901,330 @@ operator|.
 name|checkNull
 argument_list|(
 literal|"upper(cast(null as varchar(1)))"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testLeftFunc
+parameter_list|()
+block|{
+name|Stream
+operator|.
+name|of
+argument_list|(
+name|SqlLibrary
+operator|.
+name|MYSQL
+argument_list|,
+name|SqlLibrary
+operator|.
+name|POSTGRESQL
+argument_list|)
+operator|.
+name|map
+argument_list|(
+name|this
+operator|::
+name|tester
+argument_list|)
+operator|.
+name|forEach
+argument_list|(
+name|t
+lambda|->
+block|{
+name|t
+operator|.
+name|setFor
+argument_list|(
+name|SqlLibraryOperators
+operator|.
+name|LEFT
+argument_list|)
+expr_stmt|;
+name|t
+operator|.
+name|checkString
+argument_list|(
+literal|"left('abcd', 3)"
+argument_list|,
+literal|"abc"
+argument_list|,
+literal|"VARCHAR(4) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|t
+operator|.
+name|checkString
+argument_list|(
+literal|"left('abcd', 0)"
+argument_list|,
+literal|""
+argument_list|,
+literal|"VARCHAR(4) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|t
+operator|.
+name|checkString
+argument_list|(
+literal|"left('abcd', 5)"
+argument_list|,
+literal|"abcd"
+argument_list|,
+literal|"VARCHAR(4) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|t
+operator|.
+name|checkString
+argument_list|(
+literal|"left('abcd', -2)"
+argument_list|,
+literal|""
+argument_list|,
+literal|"VARCHAR(4) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|t
+operator|.
+name|checkNull
+argument_list|(
+literal|"left(cast(null as varchar(1)), -2)"
+argument_list|)
+expr_stmt|;
+name|t
+operator|.
+name|checkNull
+argument_list|(
+literal|"left('abcd', cast(null as Integer))"
+argument_list|)
+expr_stmt|;
+comment|// test for ByteString
+name|t
+operator|.
+name|checkString
+argument_list|(
+literal|"left(x'ABCdef', 1)"
+argument_list|,
+literal|"ab"
+argument_list|,
+literal|"VARBINARY(3) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|t
+operator|.
+name|checkString
+argument_list|(
+literal|"left(x'ABCdef', 0)"
+argument_list|,
+literal|""
+argument_list|,
+literal|"VARBINARY(3) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|t
+operator|.
+name|checkString
+argument_list|(
+literal|"left(x'ABCdef', 4)"
+argument_list|,
+literal|"abcdef"
+argument_list|,
+literal|"VARBINARY(3) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|t
+operator|.
+name|checkString
+argument_list|(
+literal|"left(x'ABCdef', -2)"
+argument_list|,
+literal|""
+argument_list|,
+literal|"VARBINARY(3) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|t
+operator|.
+name|checkNull
+argument_list|(
+literal|"left(cast(null as binary(1)), -2)"
+argument_list|)
+expr_stmt|;
+name|t
+operator|.
+name|checkNull
+argument_list|(
+literal|"left(x'ABCdef', cast(null as Integer))"
+argument_list|)
+expr_stmt|;
+block|}
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testRightFunc
+parameter_list|()
+block|{
+name|Stream
+operator|.
+name|of
+argument_list|(
+name|SqlLibrary
+operator|.
+name|MYSQL
+argument_list|,
+name|SqlLibrary
+operator|.
+name|POSTGRESQL
+argument_list|)
+operator|.
+name|map
+argument_list|(
+name|this
+operator|::
+name|tester
+argument_list|)
+operator|.
+name|forEach
+argument_list|(
+name|t
+lambda|->
+block|{
+name|t
+operator|.
+name|setFor
+argument_list|(
+name|SqlLibraryOperators
+operator|.
+name|RIGHT
+argument_list|)
+expr_stmt|;
+name|t
+operator|.
+name|checkString
+argument_list|(
+literal|"right('abcd', 3)"
+argument_list|,
+literal|"bcd"
+argument_list|,
+literal|"VARCHAR(4) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|t
+operator|.
+name|checkString
+argument_list|(
+literal|"right('abcd', 0)"
+argument_list|,
+literal|""
+argument_list|,
+literal|"VARCHAR(4) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|t
+operator|.
+name|checkString
+argument_list|(
+literal|"right('abcd', 5)"
+argument_list|,
+literal|"abcd"
+argument_list|,
+literal|"VARCHAR(4) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|t
+operator|.
+name|checkString
+argument_list|(
+literal|"right('abcd', -2)"
+argument_list|,
+literal|""
+argument_list|,
+literal|"VARCHAR(4) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|t
+operator|.
+name|checkNull
+argument_list|(
+literal|"right(cast(null as varchar(1)), -2)"
+argument_list|)
+expr_stmt|;
+name|t
+operator|.
+name|checkNull
+argument_list|(
+literal|"right('abcd', cast(null as Integer))"
+argument_list|)
+expr_stmt|;
+comment|// test for ByteString
+name|t
+operator|.
+name|checkString
+argument_list|(
+literal|"right(x'ABCdef', 1)"
+argument_list|,
+literal|"ef"
+argument_list|,
+literal|"VARBINARY(3) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|t
+operator|.
+name|checkString
+argument_list|(
+literal|"right(x'ABCdef', 0)"
+argument_list|,
+literal|""
+argument_list|,
+literal|"VARBINARY(3) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|t
+operator|.
+name|checkString
+argument_list|(
+literal|"right(x'ABCdef', 4)"
+argument_list|,
+literal|"abcdef"
+argument_list|,
+literal|"VARBINARY(3) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|t
+operator|.
+name|checkString
+argument_list|(
+literal|"right(x'ABCdef', -2)"
+argument_list|,
+literal|""
+argument_list|,
+literal|"VARBINARY(3) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|t
+operator|.
+name|checkNull
+argument_list|(
+literal|"right(cast(null as binary(1)), -2)"
+argument_list|)
+expr_stmt|;
+name|t
+operator|.
+name|checkNull
+argument_list|(
+literal|"right(x'ABCdef', cast(null as Integer))"
+argument_list|)
+expr_stmt|;
+block|}
 argument_list|)
 expr_stmt|;
 block|}
