@@ -378,7 +378,7 @@ argument_list|(
 literal|"/druid-foodmart-model.json"
 argument_list|)
 decl_stmt|;
-comment|/** URL of the "druid-wiki" model    * and the "wikiticker" data set. */
+comment|/** URL of the "druid-wiki" model    * and the "wikipedia" data set. */
 specifier|public
 specifier|static
 specifier|final
@@ -394,7 +394,7 @@ argument_list|(
 literal|"/druid-wiki-model.json"
 argument_list|)
 decl_stmt|;
-comment|/** URL of the "druid-wiki-no-columns" model    * and the "wikiticker" data set. */
+comment|/** URL of the "druid-wiki-no-columns" model    * and the "wikipedia" data set. */
 specifier|public
 specifier|static
 specifier|final
@@ -410,7 +410,7 @@ argument_list|(
 literal|"/druid-wiki-no-columns-model.json"
 argument_list|)
 decl_stmt|;
-comment|/** URL of the "druid-wiki-no-tables" model    * and the "wikiticker" data set. */
+comment|/** URL of the "druid-wiki-no-tables" model    * and the "wikipedia" data set. */
 specifier|public
 specifier|static
 specifier|final
@@ -709,7 +709,7 @@ name|FOODMART
 argument_list|)
 return|;
 block|}
-comment|/** Tests a query against the {@link #WIKI} data set.    *    *<p>Most of the others in this suite are against {@link #FOODMART},    * but our examples in "druid-adapter.md" use wikiticker. */
+comment|/** Tests a query against the {@link #WIKI} data set.    *    *<p>Most of the others in this suite are against {@link #FOODMART},    * but our examples in "druid-adapter.md" use wikipedia. */
 annotation|@
 name|Test
 specifier|public
@@ -763,7 +763,7 @@ literal|"  DruidQuery(table=[[wiki, wiki]], "
 operator|+
 literal|"intervals=[[1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z]], "
 operator|+
-literal|"filter=[=($17, 'Jeremy Corbyn')], groups=[{7}], aggs=[[]])\n"
+literal|"filter=[=($16, 'Jeremy Corbyn')], groups=[{6}], aggs=[[]])\n"
 decl_stmt|;
 name|checkSelectDistinctWiki
 argument_list|(
@@ -795,7 +795,7 @@ name|sql
 init|=
 literal|"select distinct \"countryName\"\n"
 operator|+
-literal|"from \"wikiticker\"\n"
+literal|"from \"wikipedia\"\n"
 operator|+
 literal|"where \"page\" = 'Jeremy Corbyn'"
 decl_stmt|;
@@ -807,11 +807,11 @@ literal|"PLAN="
 operator|+
 literal|"EnumerableInterpreter\n"
 operator|+
-literal|"  DruidQuery(table=[[wiki, wikiticker]], "
+literal|"  DruidQuery(table=[[wiki, wikipedia]], "
 operator|+
 literal|"intervals=[[1900-01-01T00:00:00.000Z/3000-01-01T00:00:00.000Z]], "
 operator|+
-literal|"filter=[=($17, 'Jeremy Corbyn')], groups=[{7}], aggs=[[]])\n"
+literal|"filter=[=($16, 'Jeremy Corbyn')], groups=[{6}], aggs=[[]])\n"
 decl_stmt|;
 specifier|final
 name|String
@@ -819,7 +819,7 @@ name|druidQuery
 init|=
 literal|"{'queryType':'groupBy',"
 operator|+
-literal|"'dataSource':'wikiticker','granularity':'all',"
+literal|"'dataSource':'wikipedia','granularity':'all',"
 operator|+
 literal|"'dimensions':[{'type':'default','dimension':'countryName','outputName':'countryName',"
 operator|+
@@ -887,7 +887,7 @@ name|sql
 init|=
 literal|"select sum(\"added\")\n"
 operator|+
-literal|"from \"wikiticker\"\n"
+literal|"from \"wikipedia\"\n"
 operator|+
 literal|"group by floor(\"__time\" to DAY)"
 decl_stmt|;
@@ -901,7 +901,7 @@ literal|"EnumerableInterpreter\n"
 operator|+
 literal|"  BindableProject(EXPR$0=[$1])\n"
 operator|+
-literal|"    DruidQuery(table=[[wiki, wikiticker]], intervals=[[1900-01-01T00:00:00.000Z/3000-01-01T00:00:00.000Z]], projects=[[FLOOR($0, FLAG(DAY)), $1]], groups=[{0}], aggs=[[SUM($1)]])\n"
+literal|"    DruidQuery(table=[[wiki, wikipedia]], intervals=[[1900-01-01T00:00:00.000Z/3000-01-01T00:00:00.000Z]], projects=[[FLOOR($0, FLAG(DAY)), $1]], groups=[{0}], aggs=[[SUM($1)]])\n"
 decl_stmt|;
 specifier|final
 name|String
@@ -909,7 +909,7 @@ name|druidQuery
 init|=
 literal|"{'queryType':'timeseries',"
 operator|+
-literal|"'dataSource':'wikiticker','descending':false,'granularity':{'type':'period','period':'P1D','timeZone':'UTC'},"
+literal|"'dataSource':'wikipedia','descending':false,'granularity':{'type':'period','period':'P1D','timeZone':'UTC'},"
 operator|+
 literal|"'aggregations':[{'type':'longSum','name':'EXPR$0','fieldName':'added'}],"
 operator|+
@@ -953,7 +953,7 @@ name|sql
 init|=
 literal|"select cast(\"__time\" as timestamp) as \"__time\"\n"
 operator|+
-literal|"from \"wikiticker\"\n"
+literal|"from \"wikipedia\"\n"
 operator|+
 literal|"limit 1\n"
 decl_stmt|;
@@ -963,7 +963,7 @@ name|explain
 init|=
 literal|"PLAN=EnumerableInterpreter\n"
 operator|+
-literal|"  DruidQuery(table=[[wiki, wikiticker]], intervals=[[1900-01-01T00:00:00.000Z/"
+literal|"  DruidQuery(table=[[wiki, wikipedia]], intervals=[[1900-01-01T00:00:00.000Z/"
 operator|+
 literal|"3000-01-01T00:00:00.000Z]], projects=[[CAST($0):TIMESTAMP(0) NOT NULL]], fetch=[1])"
 decl_stmt|;
@@ -973,7 +973,7 @@ name|druidQuery
 init|=
 literal|"{'queryType':'scan',"
 operator|+
-literal|"'dataSource':'wikiticker',"
+literal|"'dataSource':'wikipedia',"
 operator|+
 literal|"'intervals':['1900-01-01T00:00:00.000Z/3000-01-01T00:00:00.000Z'],"
 operator|+
@@ -1014,7 +1014,7 @@ name|sql
 init|=
 literal|"select cast(floor(\"__time\" to DAY) as timestamp) as \"day\", sum(\"added\")\n"
 operator|+
-literal|"from \"wikiticker\"\n"
+literal|"from \"wikipedia\"\n"
 operator|+
 literal|"group by floor(\"__time\" to DAY)"
 decl_stmt|;
@@ -1024,7 +1024,7 @@ name|explain
 init|=
 literal|"PLAN=EnumerableInterpreter\n"
 operator|+
-literal|"  DruidQuery(table=[[wiki, wikiticker]], intervals=[[1900-01-01T00:00:00.000Z/3000-01-01T00:00:00.000Z]], projects=[[FLOOR($0, FLAG(DAY)), $1]], groups=[{0}], aggs=[[SUM($1)]], post_projects=[[CAST($0):TIMESTAMP(0) NOT NULL, $1]])"
+literal|"  DruidQuery(table=[[wiki, wikipedia]], intervals=[[1900-01-01T00:00:00.000Z/3000-01-01T00:00:00.000Z]], projects=[[FLOOR($0, FLAG(DAY)), $1]], groups=[{0}], aggs=[[SUM($1)]], post_projects=[[CAST($0):TIMESTAMP(0) NOT NULL, $1]])"
 decl_stmt|;
 specifier|final
 name|String
@@ -1032,7 +1032,7 @@ name|druidQuery
 init|=
 literal|"{'queryType':'timeseries',"
 operator|+
-literal|"'dataSource':'wikiticker','descending':false,'granularity':{'type':'period','period':'P1D','timeZone':'UTC'},"
+literal|"'dataSource':'wikipedia','descending':false,'granularity':{'type':'period','period':'P1D','timeZone':'UTC'},"
 operator|+
 literal|"'aggregations':[{'type':'longSum','name':'EXPR$1','fieldName':'added'}],"
 operator|+
@@ -1083,7 +1083,7 @@ literal|"select sum(\"added\") as \"s\", \"page\", "
 operator|+
 literal|"cast(floor(\"__time\" to DAY) as timestamp) as \"day\"\n"
 operator|+
-literal|"from \"wikiticker\"\n"
+literal|"from \"wikipedia\"\n"
 operator|+
 literal|"group by \"page\", floor(\"__time\" to DAY)\n"
 operator|+
@@ -1095,7 +1095,7 @@ name|explain
 init|=
 literal|"PLAN=EnumerableInterpreter\n"
 operator|+
-literal|"  DruidQuery(table=[[wiki, wikiticker]], intervals=[[1900-01-01T00:00:00.000Z/3000-01-01T00:00:00.000Z]], projects=[[$17, FLOOR($0, FLAG(DAY)), $1]], groups=[{0, 1}], aggs=[[SUM($2)]], post_projects=[[$2, $0, CAST($1):TIMESTAMP(0) NOT NULL]], sort0=[0], dir0=[DESC])"
+literal|"  DruidQuery(table=[[wiki, wikipedia]], intervals=[[1900-01-01T00:00:00.000Z/3000-01-01T00:00:00.000Z]], projects=[[$16, FLOOR($0, FLAG(DAY)), $1]], groups=[{0, 1}], aggs=[[SUM($2)]], post_projects=[[$2, $0, CAST($1):TIMESTAMP(0) NOT NULL]], sort0=[0], dir0=[DESC])"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -1147,7 +1147,7 @@ name|sql
 init|=
 literal|"select cast(floor(\"__time\" to SECOND) as timestamp) as \"second\", sum(\"added\")\n"
 operator|+
-literal|"from \"wikiticker\"\n"
+literal|"from \"wikipedia\"\n"
 operator|+
 literal|"where \"page\" = 'Jeremy Corbyn'\n"
 operator|+
@@ -1159,7 +1159,7 @@ name|druidQuery
 init|=
 literal|"{'queryType':'timeseries',"
 operator|+
-literal|"'dataSource':'wikiticker','descending':false,'granularity':{'type':'period','period':'PT1S','timeZone':'UTC'},"
+literal|"'dataSource':'wikipedia','descending':false,'granularity':{'type':'period','period':'PT1S','timeZone':'UTC'},"
 operator|+
 literal|"'filter':{'type':'selector','dimension':'page','value':'Jeremy Corbyn'},"
 operator|+
@@ -1229,7 +1229,7 @@ name|druidQuery
 init|=
 literal|"{'queryType':'groupBy',"
 operator|+
-literal|"'dataSource':'wikiticker','granularity':'all',"
+literal|"'dataSource':'wikipedia','granularity':'all',"
 operator|+
 literal|"'dimensions':[{'type':'default','dimension':'countryName','outputName':'countryName',"
 operator|+
@@ -1279,7 +1279,7 @@ name|sql
 init|=
 literal|"select cast(\"__time\" as timestamp) as \"__time\"\n"
 operator|+
-literal|"from \"wikiticker\"\n"
+literal|"from \"wikipedia\"\n"
 operator|+
 literal|"where \"__time\"< '2015-10-12 00:00:00 UTC'"
 decl_stmt|;
@@ -1289,7 +1289,7 @@ name|explain
 init|=
 literal|"PLAN=EnumerableInterpreter\n"
 operator|+
-literal|"  DruidQuery(table=[[wiki, wikiticker]],"
+literal|"  DruidQuery(table=[[wiki, wikipedia]],"
 operator|+
 literal|" intervals=[[1900-01-01T00:00:00.000Z/2015-10-12T00:00:00.000Z]], "
 operator|+
@@ -1301,7 +1301,7 @@ name|druidQuery
 init|=
 literal|"{'queryType':'scan',"
 operator|+
-literal|"'dataSource':'wikiticker',"
+literal|"'dataSource':'wikipedia',"
 operator|+
 literal|"'intervals':['1900-01-01T00:00:00.000Z/2015-10-12T00:00:00.000Z'],"
 operator|+
@@ -1355,7 +1355,7 @@ literal|"select CAST(\"c1\" AS timestamp) as \"time\" from\n"
 operator|+
 literal|"(select distinct \"__time\" as \"c1\"\n"
 operator|+
-literal|"from \"wikiticker\"\n"
+literal|"from \"wikipedia\"\n"
 operator|+
 literal|"where \"__time\"< '2015-10-12 00:00:00 UTC')"
 decl_stmt|;
@@ -1365,7 +1365,7 @@ name|explain
 init|=
 literal|"PLAN=EnumerableInterpreter\n"
 operator|+
-literal|"  DruidQuery(table=[[wiki, wikiticker]], intervals=[[1900-01-01T00:00:00.000Z/"
+literal|"  DruidQuery(table=[[wiki, wikipedia]], intervals=[[1900-01-01T00:00:00.000Z/"
 operator|+
 literal|"3000-01-01T00:00:00.000Z]], projects=[[$0]], groups=[{0}], aggs=[[]], "
 operator|+
@@ -1375,7 +1375,7 @@ specifier|final
 name|String
 name|subDruidQuery
 init|=
-literal|"{'queryType':'groupBy','dataSource':'wikiticker',"
+literal|"{'queryType':'groupBy','dataSource':'wikipedia',"
 operator|+
 literal|"'granularity':'all','dimensions':[{'type':'extraction',"
 operator|+
@@ -4925,23 +4925,23 @@ block|{
 name|String
 name|sql
 init|=
-literal|"select \"wikiticker\".\"countryName\" as \"c0\",\n"
+literal|"select \"wikipedia\".\"countryName\" as \"c0\",\n"
 operator|+
-literal|" sum(\"wikiticker\".\"count\") as \"m1\",\n"
+literal|" sum(\"wikipedia\".\"count\") as \"m1\",\n"
 operator|+
-literal|" sum(\"wikiticker\".\"deleted\") as \"m2\",\n"
+literal|" sum(\"wikipedia\".\"deleted\") as \"m2\",\n"
 operator|+
-literal|" sum(\"wikiticker\".\"delta\") as \"m3\"\n"
+literal|" sum(\"wikipedia\".\"delta\") as \"m3\"\n"
 operator|+
-literal|"from \"wiki\" as \"wikiticker\"\n"
+literal|"from \"wiki\" as \"wikipedia\"\n"
 operator|+
-literal|"where (\"wikiticker\".\"countryName\" in ('Colombia', 'France',\n"
+literal|"where (\"wikipedia\".\"countryName\" in ('Colombia', 'France',\n"
 operator|+
 literal|" 'Germany', 'India', 'Italy', 'Russia', 'United Kingdom',\n"
 operator|+
-literal|" 'United States') or \"wikiticker\".\"countryName\" is null)\n"
+literal|" 'United States') or \"wikipedia\".\"countryName\" is null)\n"
 operator|+
-literal|"group by \"wikiticker\".\"countryName\""
+literal|"group by \"wikipedia\".\"countryName\""
 decl_stmt|;
 name|String
 name|druidQuery
@@ -7453,9 +7453,9 @@ literal|"intervals=[[1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z]], "
 operator|+
 literal|"filter=[AND(=($2, 'Bird Call'), OR(=(EXTRACT(FLAG(WEEK), $0), 10), "
 operator|+
-literal|"=(EXTRACT(FLAG(WEEK), $0), 11)))], projects=[[$63, $90, $91]], "
+literal|"=(EXTRACT(FLAG(WEEK), $0), 11)))], projects=[[$0, $2, $63, $90, $91]], "
 operator|+
-literal|"groups=[{0}], aggs=[[SUM($1), SUM($2)]], post_projects=[[$0, 'Bird Call', -($1, $2)]])"
+literal|"groups=[{2}], aggs=[[SUM($3), SUM($4)]], post_projects=[[$0, 'Bird Call', -($1, $2)]])"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -9241,7 +9241,7 @@ name|sql
 init|=
 literal|"SELECT count(\"countryName\") FROM (SELECT \"countryName\" FROM "
 operator|+
-literal|"\"wikiticker\" WHERE \"countryName\"  IS NOT NULL) as a"
+literal|"\"wikipedia\" WHERE \"countryName\"  IS NOT NULL) as a"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -9261,7 +9261,7 @@ name|sql2
 init|=
 literal|"SELECT count(\"countryName\") FROM (SELECT \"countryName\" FROM "
 operator|+
-literal|"\"wikiticker\") as a"
+literal|"\"wikipedia\") as a"
 decl_stmt|;
 specifier|final
 name|String
@@ -9269,9 +9269,9 @@ name|plan2
 init|=
 literal|"PLAN=EnumerableInterpreter\n"
 operator|+
-literal|"  DruidQuery(table=[[wiki, wikiticker]], "
+literal|"  DruidQuery(table=[[wiki, wikipedia]], "
 operator|+
-literal|"intervals=[[1900-01-01T00:00:00.000Z/3000-01-01T00:00:00.000Z]], projects=[[$7]], "
+literal|"intervals=[[1900-01-01T00:00:00.000Z/3000-01-01T00:00:00.000Z]], projects=[[$6]], "
 operator|+
 literal|"groups=[{}], aggs=[[COUNT($0)]])"
 decl_stmt|;
@@ -9296,7 +9296,7 @@ specifier|final
 name|String
 name|sql3
 init|=
-literal|"SELECT count(*), count(\"countryName\") FROM \"wikiticker\""
+literal|"SELECT count(*), count(\"countryName\") FROM \"wikipedia\""
 decl_stmt|;
 specifier|final
 name|String
@@ -9304,9 +9304,9 @@ name|plan3
 init|=
 literal|"PLAN=EnumerableInterpreter\n"
 operator|+
-literal|"  DruidQuery(table=[[wiki, wikiticker]], "
+literal|"  DruidQuery(table=[[wiki, wikipedia]], "
 operator|+
-literal|"intervals=[[1900-01-01T00:00:00.000Z/3000-01-01T00:00:00.000Z]], projects=[[$7]], "
+literal|"intervals=[[1900-01-01T00:00:00.000Z/3000-01-01T00:00:00.000Z]], projects=[[$6]], "
 operator|+
 literal|"groups=[{}], aggs=[[COUNT(), COUNT($0)]])"
 decl_stmt|;
@@ -9336,7 +9336,7 @@ name|sql
 init|=
 literal|"SELECT count(\"countryName\") FROM (SELECT \"countryName\" FROM "
 operator|+
-literal|"\"wikiticker\" WHERE \"countryName\"  IS NOT NULL) as a"
+literal|"\"wikipedia\" WHERE \"countryName\"  IS NOT NULL) as a"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -10211,7 +10211,7 @@ name|queryContains
 argument_list|(
 name|druidChecker
 argument_list|(
-literal|"{'queryType':'scan','dataSource':'wikiticker','intervals':"
+literal|"{'queryType':'scan','dataSource':'wikipedia','intervals':"
 operator|+
 literal|"['1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z'],'virtualColumns':"
 operator|+
@@ -10255,14 +10255,14 @@ name|schema
 operator|.
 name|getTable
 argument_list|(
-literal|"wikiticker"
+literal|"wikipedia"
 argument_list|)
 argument_list|,
 name|schema
 operator|.
 name|getTable
 argument_list|(
-literal|"wikiticker"
+literal|"wikipedia"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -10723,7 +10723,7 @@ name|sql
 init|=
 literal|"Select cast(\"__time\" as timestamp) as t from "
 operator|+
-literal|"\"wikiticker\" where floor(\"__time\" to HOUR)>= cast('2015-09-12 08:00:00'"
+literal|"\"wikipedia\" where floor(\"__time\" to HOUR)>= cast('2015-09-12 08:00:00'"
 operator|+
 literal|" as TIMESTAMP) order by t limit 1"
 decl_stmt|;
@@ -10811,7 +10811,7 @@ name|sql
 init|=
 literal|"Select cast(\"__time\" as timestamp) as t, \"countryName\" as s, "
 operator|+
-literal|"count(*) as c from \"wikiticker\" where floor(\"__time\" to HOUR)"
+literal|"count(*) as c from \"wikipedia\" where floor(\"__time\" to HOUR)"
 operator|+
 literal|">= '2015-09-12 08:00:00 Asia/Kolkata' group by cast(\"__time\" as timestamp), \"countryName\""
 operator|+
@@ -10910,7 +10910,7 @@ name|sql
 init|=
 literal|"Select cast(\"__time\" as timestamp) as t, \"countryName\" as s, "
 operator|+
-literal|"count(*) as c from \"wikiticker\" where floor(\"__time\" to HOUR)"
+literal|"count(*) as c from \"wikipedia\" where floor(\"__time\" to HOUR)"
 operator|+
 literal|">= '2015-09-12 08:00:00 Asia/Kolkata' group by cast(\"__time\" as timestamp), \"countryName\""
 operator|+
@@ -14039,7 +14039,7 @@ specifier|final
 name|String
 name|sql
 init|=
-literal|"SELECT SUM(EXTRACT(MONTH FROM \"__time\")) FROM \"wikiticker\""
+literal|"SELECT SUM(EXTRACT(MONTH FROM \"__time\")) FROM \"wikipedia\""
 decl_stmt|;
 name|sql
 argument_list|(
@@ -14057,7 +14057,7 @@ name|queryContains
 argument_list|(
 name|druidChecker
 argument_list|(
-literal|"{'queryType':'timeseries','dataSource':'wikiticker',"
+literal|"{'queryType':'timeseries','dataSource':'wikipedia',"
 operator|+
 literal|"'descending':false,'granularity':'all','aggregations':[{"
 operator|+
@@ -14516,7 +14516,7 @@ literal|"EXTRACT(WEEK FROM \"__time\") AS WEEK, DAYOFWEEK(\"__time\") AS DAYOFWE
 operator|+
 literal|"DAYOFMONTH(\"__time\") AS DAYOFMONTH, DAYOFYEAR(\"__time\") AS DAYOFYEAR, "
 operator|+
-literal|"SUM(\"added\") AS sum_added  FROM \"wikiticker\" GROUP BY EXTRACT(WEEK FROM \"__time\"),"
+literal|"SUM(\"added\") AS sum_added  FROM \"wikipedia\" GROUP BY EXTRACT(WEEK FROM \"__time\"),"
 operator|+
 literal|" DAYOFWEEK(\"__time\"), DAYOFMONTH(\"__time\"), DAYOFYEAR(\"__time\") ,"
 operator|+
@@ -14544,7 +14544,7 @@ literal|"  BindableProject(QUARTER=[$4], WEEK=[$0], DAYOFWEEK=[$1], "
 operator|+
 literal|"DAYOFMONTH=[$2], DAYOFYEAR=[$3], SUM_ADDED=[$5])\n"
 operator|+
-literal|"    DruidQuery(table=[[wiki, wikiticker]], "
+literal|"    DruidQuery(table=[[wiki, wikipedia]], "
 operator|+
 literal|"intervals=[[1900-01-01T00:00:00.000Z/3000-01-01T00:00:00.000Z]], "
 operator|+
