@@ -19959,6 +19959,86 @@ block|}
 end_function
 
 begin_comment
+comment|/** Test case for    * testing type created by SubQueryRemoveRule    * ANY subquery is non-nullable therefore plan should have cast    */
+end_comment
+
+begin_function
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testAnyInProjectNonNullable
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select name, \n"
+operator|+
+literal|" deptno> ANY (\n"
+operator|+
+literal|" select deptno from emp) \n"
+operator|+
+literal|" from dept"
+decl_stmt|;
+name|checkSubQuery
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|withLateDecorrelation
+argument_list|(
+literal|true
+argument_list|)
+operator|.
+name|check
+argument_list|()
+expr_stmt|;
+block|}
+end_function
+
+begin_comment
+comment|/** Test case for    * testing type created by SubQueryRemoveRule    * ANY subquery is nullable therefore plan should not have cast    */
+end_comment
+
+begin_function
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testAnyInProjectNullable
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select deptno, \n"
+operator|+
+literal|" name = ANY (\n"
+operator|+
+literal|" select mgr from emp) \n"
+operator|+
+literal|" from dept"
+decl_stmt|;
+name|checkSubQuery
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|withLateDecorrelation
+argument_list|(
+literal|true
+argument_list|)
+operator|.
+name|check
+argument_list|()
+expr_stmt|;
+block|}
+end_function
+
+begin_comment
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1546">[CALCITE-1546]    * Sub-queries connected by OR</a>. */
 end_comment
 

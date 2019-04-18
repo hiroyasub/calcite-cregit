@@ -959,7 +959,10 @@ operator|.
 name|INNER
 argument_list|)
 expr_stmt|;
-return|return
+specifier|final
+name|RexNode
+name|caseRexNode
+init|=
 name|builder
 operator|.
 name|call
@@ -1118,6 +1121,43 @@ literal|"m"
 argument_list|)
 argument_list|)
 argument_list|)
+decl_stmt|;
+comment|// CASE statement above is created with nullable boolean type, but it might
+comment|// not be correct.  If the original subquery node's type is not nullable it
+comment|// is guranteed for case statement to not produce NULLs. Therefore to avoid
+comment|// planner complaining we need to add cast.  Note that nullable type is
+comment|// created due to MIN aggcall, since there is no groupby.
+if|if
+condition|(
+operator|!
+name|e
+operator|.
+name|getType
+argument_list|()
+operator|.
+name|isNullable
+argument_list|()
+condition|)
+block|{
+return|return
+name|builder
+operator|.
+name|cast
+argument_list|(
+name|caseRexNode
+argument_list|,
+name|e
+operator|.
+name|getType
+argument_list|()
+operator|.
+name|getSqlTypeName
+argument_list|()
+argument_list|)
+return|;
+block|}
+return|return
+name|caseRexNode
 return|;
 block|}
 comment|/**    * Rewrites an EXISTS RexSubQuery into a {@link Join}.    *    * @param e            EXISTS sub-query to rewrite    * @param variablesSet A set of variables used by a relational    *                     expression of the specified RexSubQuery    * @param logic        Logic for evaluating    * @param builder      Builder    *    * @return Expression that may be used to replace the RexSubQuery    */
