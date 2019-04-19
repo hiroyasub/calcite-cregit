@@ -19144,113 +19144,6 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testJsonObject
-parameter_list|()
-block|{
-name|tester
-operator|.
-name|checkString
-argument_list|(
-literal|"json_object()"
-argument_list|,
-literal|"{}"
-argument_list|,
-literal|"VARCHAR(2000) NOT NULL"
-argument_list|)
-expr_stmt|;
-name|tester
-operator|.
-name|checkString
-argument_list|(
-literal|"json_object('foo': 'bar')"
-argument_list|,
-literal|"{\"foo\":\"bar\"}"
-argument_list|,
-literal|"VARCHAR(2000) NOT NULL"
-argument_list|)
-expr_stmt|;
-name|tester
-operator|.
-name|checkString
-argument_list|(
-literal|"json_object('foo': 'bar', 'foo2': 'bar2')"
-argument_list|,
-literal|"{\"foo\":\"bar\",\"foo2\":\"bar2\"}"
-argument_list|,
-literal|"VARCHAR(2000) NOT NULL"
-argument_list|)
-expr_stmt|;
-name|tester
-operator|.
-name|checkString
-argument_list|(
-literal|"json_object('foo': null)"
-argument_list|,
-literal|"{\"foo\":null}"
-argument_list|,
-literal|"VARCHAR(2000) NOT NULL"
-argument_list|)
-expr_stmt|;
-name|tester
-operator|.
-name|checkString
-argument_list|(
-literal|"json_object('foo': null null on null)"
-argument_list|,
-literal|"{\"foo\":null}"
-argument_list|,
-literal|"VARCHAR(2000) NOT NULL"
-argument_list|)
-expr_stmt|;
-name|tester
-operator|.
-name|checkString
-argument_list|(
-literal|"json_object('foo': null absent on null)"
-argument_list|,
-literal|"{}"
-argument_list|,
-literal|"VARCHAR(2000) NOT NULL"
-argument_list|)
-expr_stmt|;
-name|tester
-operator|.
-name|checkString
-argument_list|(
-literal|"json_object('foo': 100)"
-argument_list|,
-literal|"{\"foo\":100}"
-argument_list|,
-literal|"VARCHAR(2000) NOT NULL"
-argument_list|)
-expr_stmt|;
-name|tester
-operator|.
-name|checkString
-argument_list|(
-literal|"json_object('foo': json_object('foo': 'bar'))"
-argument_list|,
-literal|"{\"foo\":\"{\\\"foo\\\":\\\"bar\\\"}\"}"
-argument_list|,
-literal|"VARCHAR(2000) NOT NULL"
-argument_list|)
-expr_stmt|;
-name|tester
-operator|.
-name|checkString
-argument_list|(
-literal|"json_object('foo': json_object('foo': 'bar') format json)"
-argument_list|,
-literal|"{\"foo\":{\"foo\":\"bar\"}}"
-argument_list|,
-literal|"VARCHAR(2000) NOT NULL"
-argument_list|)
-expr_stmt|;
-block|}
-annotation|@
-name|Test
-specifier|public
-name|void
 name|testJsonPretty
 parameter_list|()
 block|{
@@ -20032,6 +19925,113 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testJsonObject
+parameter_list|()
+block|{
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"json_object()"
+argument_list|,
+literal|"{}"
+argument_list|,
+literal|"VARCHAR(2000) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"json_object('foo': 'bar')"
+argument_list|,
+literal|"{\"foo\":\"bar\"}"
+argument_list|,
+literal|"VARCHAR(2000) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"json_object('foo': 'bar', 'foo2': 'bar2')"
+argument_list|,
+literal|"{\"foo\":\"bar\",\"foo2\":\"bar2\"}"
+argument_list|,
+literal|"VARCHAR(2000) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"json_object('foo': null)"
+argument_list|,
+literal|"{\"foo\":null}"
+argument_list|,
+literal|"VARCHAR(2000) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"json_object('foo': null null on null)"
+argument_list|,
+literal|"{\"foo\":null}"
+argument_list|,
+literal|"VARCHAR(2000) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"json_object('foo': null absent on null)"
+argument_list|,
+literal|"{}"
+argument_list|,
+literal|"VARCHAR(2000) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"json_object('foo': 100)"
+argument_list|,
+literal|"{\"foo\":100}"
+argument_list|,
+literal|"VARCHAR(2000) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"json_object('foo': json_object('foo': 'bar'))"
+argument_list|,
+literal|"{\"foo\":\"{\\\"foo\\\":\\\"bar\\\"}\"}"
+argument_list|,
+literal|"VARCHAR(2000) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"json_object('foo': json_object('foo': 'bar') format json)"
+argument_list|,
+literal|"{\"foo\":{\"foo\":\"bar\"}}"
+argument_list|,
+literal|"VARCHAR(2000) NOT NULL"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testJsonObjectAgg
 parameter_list|()
 block|{
@@ -20040,6 +20040,15 @@ argument_list|(
 name|tester
 argument_list|,
 literal|"json_objectagg('foo': 'bar')"
+argument_list|,
+literal|"VARCHAR(2000) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|checkAggType
+argument_list|(
+name|tester
+argument_list|,
+literal|"json_objectagg('foo': null)"
 argument_list|,
 literal|"VARCHAR(2000) NOT NULL"
 argument_list|)
@@ -20240,6 +20249,15 @@ argument_list|(
 name|tester
 argument_list|,
 literal|"json_arrayagg('foo')"
+argument_list|,
+literal|"VARCHAR(2000) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|checkAggType
+argument_list|(
+name|tester
+argument_list|,
+literal|"json_arrayagg(null)"
 argument_list|,
 literal|"VARCHAR(2000) NOT NULL"
 argument_list|)

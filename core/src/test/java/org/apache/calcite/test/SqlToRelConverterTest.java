@@ -10900,6 +10900,45 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testJsonValueExpressionOperator
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select ename format json,\n"
+operator|+
+literal|"ename format json encoding utf8,\n"
+operator|+
+literal|"ename format json encoding utf16,\n"
+operator|+
+literal|"ename format json encoding utf32\n"
+operator|+
+literal|"from emp"
+decl_stmt|;
+name|System
+operator|.
+name|out
+operator|.
+name|println
+argument_list|(
+name|sql
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testJsonExists
 parameter_list|()
 block|{
@@ -10956,6 +10995,126 @@ name|String
 name|sql
 init|=
 literal|"select json_query(ename, 'lax $')\n"
+operator|+
+literal|"from emp"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testJsonType
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select json_type(ename)\n"
+operator|+
+literal|"from emp"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testJsonPretty
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select json_pretty(ename)\n"
+operator|+
+literal|"from emp"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testJsonDepth
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select json_depth(ename)\n"
+operator|+
+literal|"from emp"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testJsonLength
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select json_length(ename, 'strict $')\n"
+operator|+
+literal|"from emp"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testJsonKeys
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select json_keys(ename, 'strict $')\n"
 operator|+
 literal|"from emp"
 decl_stmt|;

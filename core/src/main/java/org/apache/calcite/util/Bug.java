@@ -227,6 +227,15 @@ name|CALCITE_2776_FIXED
 init|=
 literal|false
 decl_stmt|;
+comment|/** Whether    *<a href="https://issues.apache.org/jira/browse/CALCITE-2869">[CALCITE-2869]    * JSON data type support</a> is fixed. */
+specifier|public
+specifier|static
+specifier|final
+name|boolean
+name|CALCITE_2869_FIXED
+init|=
+literal|false
+decl_stmt|;
 comment|/** Whether    *<a href="https://issues.apache.org/jira/browse/CALCITE-2933">[CALCITE-2933]    * In Druid adapter, expression like "cast(cast(\"timestamp\" as timestamp) as varchar)"    * returns as epoch millisecond</a> is fixed. */
 specifier|public
 specifier|static

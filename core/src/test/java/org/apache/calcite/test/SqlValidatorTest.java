@@ -26578,12 +26578,6 @@ literal|"ITEM -\n"
 operator|+
 literal|"JSON_API_COMMON_SYNTAX -\n"
 operator|+
-literal|"JSON_API_COMMON_SYNTAX_WITHOUT_PATH -\n"
-operator|+
-literal|"JSON_STRUCTURED_VALUE_EXPRESSION -\n"
-operator|+
-literal|"JSON_VALUE_EXPRESSION -\n"
-operator|+
 literal|"NEXT_VALUE -\n"
 operator|+
 literal|"PATTERN_EXCLUDE -\n"
@@ -26725,6 +26719,8 @@ operator|+
 literal|"SUCCEEDS left\n"
 operator|+
 literal|"\n"
+operator|+
+literal|"FORMAT JSON post\n"
 operator|+
 literal|"IS A SET post\n"
 operator|+
@@ -34601,6 +34597,48 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testJsonValueExpressionOperator
+parameter_list|()
+block|{
+name|checkExp
+argument_list|(
+literal|"'{}' format json"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"'{}' format json encoding utf8"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"'{}' format json encoding utf16"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"'{}' format json encoding utf32"
+argument_list|)
+expr_stmt|;
+name|checkExpType
+argument_list|(
+literal|"'{}' format json"
+argument_list|,
+literal|"ANY NOT NULL"
+argument_list|)
+expr_stmt|;
+name|checkExpFails
+argument_list|(
+literal|"^null^ format json"
+argument_list|,
+literal|"(?s).*Illegal use of .NULL.*"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testJsonExists
 parameter_list|()
 block|{
@@ -34862,6 +34900,20 @@ argument_list|,
 literal|"(?s).*Illegal use of .NULL.*"
 argument_list|)
 expr_stmt|;
+if|if
+condition|(
+operator|!
+name|Bug
+operator|.
+name|CALCITE_2869_FIXED
+condition|)
+block|{
+comment|// the case should throw an error but currently validation
+comment|// is done during sql-to-rel process.
+comment|//
+comment|// see StandardConvertletTable.JsonOperatorValueExprConvertlet
+return|return;
+block|}
 name|checkFails
 argument_list|(
 literal|"select json_pretty(^1^) from emp"
@@ -34894,6 +34946,16 @@ argument_list|,
 literal|"VARCHAR(20) NOT NULL"
 argument_list|)
 expr_stmt|;
+if|if
+condition|(
+operator|!
+name|Bug
+operator|.
+name|CALCITE_2869_FIXED
+condition|)
+block|{
+return|return;
+block|}
 name|checkFails
 argument_list|(
 literal|"select json_type(^1^) from emp"
@@ -34926,6 +34988,16 @@ argument_list|,
 literal|"INTEGER"
 argument_list|)
 expr_stmt|;
+if|if
+condition|(
+operator|!
+name|Bug
+operator|.
+name|CALCITE_2869_FIXED
+condition|)
+block|{
+return|return;
+block|}
 name|checkFails
 argument_list|(
 literal|"select json_depth(^1^) from emp"

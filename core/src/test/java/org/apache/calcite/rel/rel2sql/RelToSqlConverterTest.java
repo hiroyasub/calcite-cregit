@@ -11295,6 +11295,49 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testJsonValueExpressionOperator
+parameter_list|()
+block|{
+name|String
+name|query
+init|=
+literal|"select \"product_name\" format json, "
+operator|+
+literal|"\"product_name\" format json encoding utf8, "
+operator|+
+literal|"\"product_name\" format json encoding utf16, "
+operator|+
+literal|"\"product_name\" format json encoding utf32 from \"product\""
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT \"product_name\" FORMAT JSON, "
+operator|+
+literal|"\"product_name\" FORMAT JSON, "
+operator|+
+literal|"\"product_name\" FORMAT JSON, "
+operator|+
+literal|"\"product_name\" FORMAT JSON\n"
+operator|+
+literal|"FROM \"foodmart\".\"product\""
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testJsonExists
 parameter_list|()
 block|{

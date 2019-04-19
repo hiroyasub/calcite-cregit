@@ -5880,9 +5880,9 @@ literal|"Was expecting one of:\n"
 operator|+
 literal|"<EOF> \n"
 operator|+
-literal|"    \"AND\" \\.\\.\\.\n"
-operator|+
 literal|"    \"AS\" \\.\\.\\.\n"
+operator|+
+literal|"    \"EXCEPT\" \\.\\.\\.\n"
 operator|+
 literal|".*"
 argument_list|)
@@ -21173,9 +21173,9 @@ literal|"Was expecting one of:\n"
 operator|+
 literal|"<EOF> \n"
 operator|+
-literal|"    \"AND\" \\.\\.\\.\n"
+literal|"    \"\\(\" \\.\\.\\.\n"
 operator|+
-literal|"    \"BETWEEN\" \\.\\.\\..*"
+literal|"    \"\\.\" \\.\\.\\..*"
 argument_list|)
 expr_stmt|;
 name|checkExpFails
@@ -27664,6 +27664,70 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testJsonValueExpressionOperator
+parameter_list|()
+block|{
+name|checkExp
+argument_list|(
+literal|"foo format json"
+argument_list|,
+literal|"`FOO` FORMAT JSON"
+argument_list|)
+expr_stmt|;
+comment|// Currently, encoding js not valid
+name|checkExp
+argument_list|(
+literal|"foo format json encoding utf8"
+argument_list|,
+literal|"`FOO` FORMAT JSON"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"foo format json encoding utf16"
+argument_list|,
+literal|"`FOO` FORMAT JSON"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"foo format json encoding utf32"
+argument_list|,
+literal|"`FOO` FORMAT JSON"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"null format json"
+argument_list|,
+literal|"NULL FORMAT JSON"
+argument_list|)
+expr_stmt|;
+comment|// Test case to eliminate choice conflict on token<FORMAT>
+name|check
+argument_list|(
+literal|"select foo format from tab"
+argument_list|,
+literal|"SELECT `FOO` AS `FORMAT`\n"
+operator|+
+literal|"FROM `TAB`"
+argument_list|)
+expr_stmt|;
+comment|// Test case to eliminate choice conflict on token<ENCODING>
+name|check
+argument_list|(
+literal|"select foo format json encoding from tab"
+argument_list|,
+literal|"SELECT `FOO` FORMAT JSON AS `ENCODING`\n"
+operator|+
+literal|"FROM `TAB`"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testJsonExists
 parameter_list|()
 block|{
@@ -27671,14 +27735,14 @@ name|checkExp
 argument_list|(
 literal|"json_exists('{\"foo\": \"bar\"}', 'lax $.foo')"
 argument_list|,
-literal|"JSON_EXISTS('{\"foo\": \"bar\"}' FORMAT JSON, 'lax $.foo')"
+literal|"JSON_EXISTS('{\"foo\": \"bar\"}', 'lax $.foo')"
 argument_list|)
 expr_stmt|;
 name|checkExp
 argument_list|(
 literal|"json_exists('{\"foo\": \"bar\"}', 'lax $.foo' error on error)"
 argument_list|,
-literal|"JSON_EXISTS('{\"foo\": \"bar\"}' FORMAT JSON, 'lax $.foo' ERROR ON ERROR)"
+literal|"JSON_EXISTS('{\"foo\": \"bar\"}', 'lax $.foo' ERROR ON ERROR)"
 argument_list|)
 expr_stmt|;
 block|}
@@ -27695,7 +27759,7 @@ literal|"json_value('{\"foo\": \"100\"}', 'lax $.foo' "
 operator|+
 literal|"returning integer)"
 argument_list|,
-literal|"JSON_VALUE('{\"foo\": \"100\"}' FORMAT JSON, 'lax $.foo' "
+literal|"JSON_VALUE('{\"foo\": \"100\"}', 'lax $.foo' "
 operator|+
 literal|"RETURNING INTEGER NULL ON EMPTY NULL ON ERROR)"
 argument_list|)
@@ -27706,7 +27770,7 @@ literal|"json_value('{\"foo\": \"100\"}', 'lax $.foo' "
 operator|+
 literal|"returning integer default 10 on empty error on error)"
 argument_list|,
-literal|"JSON_VALUE('{\"foo\": \"100\"}' FORMAT JSON, 'lax $.foo' "
+literal|"JSON_VALUE('{\"foo\": \"100\"}', 'lax $.foo' "
 operator|+
 literal|"RETURNING INTEGER DEFAULT 10 ON EMPTY ERROR ON ERROR)"
 argument_list|)
@@ -27723,7 +27787,7 @@ name|checkExp
 argument_list|(
 literal|"json_query('{\"foo\": \"bar\"}', 'lax $' WITHOUT ARRAY WRAPPER)"
 argument_list|,
-literal|"JSON_QUERY('{\"foo\": \"bar\"}' FORMAT JSON, "
+literal|"JSON_QUERY('{\"foo\": \"bar\"}', "
 operator|+
 literal|"'lax $' WITHOUT ARRAY WRAPPER NULL ON EMPTY NULL ON ERROR)"
 argument_list|)
@@ -27732,7 +27796,7 @@ name|checkExp
 argument_list|(
 literal|"json_query('{\"foo\": \"bar\"}', 'lax $' WITH WRAPPER)"
 argument_list|,
-literal|"JSON_QUERY('{\"foo\": \"bar\"}' FORMAT JSON, "
+literal|"JSON_QUERY('{\"foo\": \"bar\"}', "
 operator|+
 literal|"'lax $' WITH UNCONDITIONAL ARRAY WRAPPER NULL ON EMPTY NULL ON ERROR)"
 argument_list|)
@@ -27741,7 +27805,7 @@ name|checkExp
 argument_list|(
 literal|"json_query('{\"foo\": \"bar\"}', 'lax $' WITH UNCONDITIONAL WRAPPER)"
 argument_list|,
-literal|"JSON_QUERY('{\"foo\": \"bar\"}' FORMAT JSON, "
+literal|"JSON_QUERY('{\"foo\": \"bar\"}', "
 operator|+
 literal|"'lax $' WITH UNCONDITIONAL ARRAY WRAPPER NULL ON EMPTY NULL ON ERROR)"
 argument_list|)
@@ -27750,7 +27814,7 @@ name|checkExp
 argument_list|(
 literal|"json_query('{\"foo\": \"bar\"}', 'lax $' WITH CONDITIONAL WRAPPER)"
 argument_list|,
-literal|"JSON_QUERY('{\"foo\": \"bar\"}' FORMAT JSON, "
+literal|"JSON_QUERY('{\"foo\": \"bar\"}', "
 operator|+
 literal|"'lax $' WITH CONDITIONAL ARRAY WRAPPER NULL ON EMPTY NULL ON ERROR)"
 argument_list|)
@@ -27759,7 +27823,7 @@ name|checkExp
 argument_list|(
 literal|"json_query('{\"foo\": \"bar\"}', 'lax $' NULL ON EMPTY)"
 argument_list|,
-literal|"JSON_QUERY('{\"foo\": \"bar\"}' FORMAT JSON, "
+literal|"JSON_QUERY('{\"foo\": \"bar\"}', "
 operator|+
 literal|"'lax $' WITHOUT ARRAY WRAPPER NULL ON EMPTY NULL ON ERROR)"
 argument_list|)
@@ -27768,7 +27832,7 @@ name|checkExp
 argument_list|(
 literal|"json_query('{\"foo\": \"bar\"}', 'lax $' ERROR ON EMPTY)"
 argument_list|,
-literal|"JSON_QUERY('{\"foo\": \"bar\"}' FORMAT JSON, "
+literal|"JSON_QUERY('{\"foo\": \"bar\"}', "
 operator|+
 literal|"'lax $' WITHOUT ARRAY WRAPPER ERROR ON EMPTY NULL ON ERROR)"
 argument_list|)
@@ -27777,7 +27841,7 @@ name|checkExp
 argument_list|(
 literal|"json_query('{\"foo\": \"bar\"}', 'lax $' EMPTY ARRAY ON EMPTY)"
 argument_list|,
-literal|"JSON_QUERY('{\"foo\": \"bar\"}' FORMAT JSON, "
+literal|"JSON_QUERY('{\"foo\": \"bar\"}', "
 operator|+
 literal|"'lax $' WITHOUT ARRAY WRAPPER EMPTY ARRAY ON EMPTY NULL ON ERROR)"
 argument_list|)
@@ -27786,7 +27850,7 @@ name|checkExp
 argument_list|(
 literal|"json_query('{\"foo\": \"bar\"}', 'lax $' EMPTY OBJECT ON EMPTY)"
 argument_list|,
-literal|"JSON_QUERY('{\"foo\": \"bar\"}' FORMAT JSON, "
+literal|"JSON_QUERY('{\"foo\": \"bar\"}', "
 operator|+
 literal|"'lax $' WITHOUT ARRAY WRAPPER EMPTY OBJECT ON EMPTY NULL ON ERROR)"
 argument_list|)
@@ -27795,7 +27859,7 @@ name|checkExp
 argument_list|(
 literal|"json_query('{\"foo\": \"bar\"}', 'lax $' NULL ON ERROR)"
 argument_list|,
-literal|"JSON_QUERY('{\"foo\": \"bar\"}' FORMAT JSON, "
+literal|"JSON_QUERY('{\"foo\": \"bar\"}', "
 operator|+
 literal|"'lax $' WITHOUT ARRAY WRAPPER NULL ON EMPTY NULL ON ERROR)"
 argument_list|)
@@ -27804,7 +27868,7 @@ name|checkExp
 argument_list|(
 literal|"json_query('{\"foo\": \"bar\"}', 'lax $' ERROR ON ERROR)"
 argument_list|,
-literal|"JSON_QUERY('{\"foo\": \"bar\"}' FORMAT JSON, "
+literal|"JSON_QUERY('{\"foo\": \"bar\"}', "
 operator|+
 literal|"'lax $' WITHOUT ARRAY WRAPPER NULL ON EMPTY ERROR ON ERROR)"
 argument_list|)
@@ -27813,7 +27877,7 @@ name|checkExp
 argument_list|(
 literal|"json_query('{\"foo\": \"bar\"}', 'lax $' EMPTY ARRAY ON ERROR)"
 argument_list|,
-literal|"JSON_QUERY('{\"foo\": \"bar\"}' FORMAT JSON, "
+literal|"JSON_QUERY('{\"foo\": \"bar\"}', "
 operator|+
 literal|"'lax $' WITHOUT ARRAY WRAPPER NULL ON EMPTY EMPTY ARRAY ON ERROR)"
 argument_list|)
@@ -27822,7 +27886,7 @@ name|checkExp
 argument_list|(
 literal|"json_query('{\"foo\": \"bar\"}', 'lax $' EMPTY OBJECT ON ERROR)"
 argument_list|,
-literal|"JSON_QUERY('{\"foo\": \"bar\"}' FORMAT JSON, "
+literal|"JSON_QUERY('{\"foo\": \"bar\"}', "
 operator|+
 literal|"'lax $' WITHOUT ARRAY WRAPPER NULL ON EMPTY EMPTY OBJECT ON ERROR)"
 argument_list|)
@@ -27833,7 +27897,7 @@ literal|"json_query('{\"foo\": \"bar\"}', 'lax $' EMPTY ARRAY ON EMPTY "
 operator|+
 literal|"EMPTY OBJECT ON ERROR)"
 argument_list|,
-literal|"JSON_QUERY('{\"foo\": \"bar\"}' FORMAT JSON, "
+literal|"JSON_QUERY('{\"foo\": \"bar\"}', "
 operator|+
 literal|"'lax $' WITHOUT ARRAY WRAPPER EMPTY ARRAY ON EMPTY EMPTY OBJECT ON ERROR)"
 argument_list|)
@@ -27911,35 +27975,35 @@ name|checkExp
 argument_list|(
 literal|"json_type('11.56')"
 argument_list|,
-literal|"JSON_TYPE('11.56' FORMAT JSON)"
+literal|"JSON_TYPE('11.56')"
 argument_list|)
 expr_stmt|;
 name|checkExp
 argument_list|(
 literal|"json_type('{}')"
 argument_list|,
-literal|"JSON_TYPE('{}' FORMAT JSON)"
+literal|"JSON_TYPE('{}')"
 argument_list|)
 expr_stmt|;
 name|checkExp
 argument_list|(
 literal|"json_type(null)"
 argument_list|,
-literal|"JSON_TYPE(NULL FORMAT JSON)"
+literal|"JSON_TYPE(NULL)"
 argument_list|)
 expr_stmt|;
 name|checkExp
 argument_list|(
 literal|"json_type('[\"foo\",null]')"
 argument_list|,
-literal|"JSON_TYPE('[\"foo\",null]' FORMAT JSON)"
+literal|"JSON_TYPE('[\"foo\",null]')"
 argument_list|)
 expr_stmt|;
 name|checkExp
 argument_list|(
 literal|"json_type('{\"foo\": \"100\"}')"
 argument_list|,
-literal|"JSON_TYPE('{\"foo\": \"100\"}' FORMAT JSON)"
+literal|"JSON_TYPE('{\"foo\": \"100\"}')"
 argument_list|)
 expr_stmt|;
 block|}
@@ -27954,35 +28018,35 @@ name|checkExp
 argument_list|(
 literal|"json_depth('11.56')"
 argument_list|,
-literal|"JSON_DEPTH('11.56' FORMAT JSON)"
+literal|"JSON_DEPTH('11.56')"
 argument_list|)
 expr_stmt|;
 name|checkExp
 argument_list|(
 literal|"json_depth('{}')"
 argument_list|,
-literal|"JSON_DEPTH('{}' FORMAT JSON)"
+literal|"JSON_DEPTH('{}')"
 argument_list|)
 expr_stmt|;
 name|checkExp
 argument_list|(
 literal|"json_depth(null)"
 argument_list|,
-literal|"JSON_DEPTH(NULL FORMAT JSON)"
+literal|"JSON_DEPTH(NULL)"
 argument_list|)
 expr_stmt|;
 name|checkExp
 argument_list|(
 literal|"json_depth('[\"foo\",null]')"
 argument_list|,
-literal|"JSON_DEPTH('[\"foo\",null]' FORMAT JSON)"
+literal|"JSON_DEPTH('[\"foo\",null]')"
 argument_list|)
 expr_stmt|;
 name|checkExp
 argument_list|(
 literal|"json_depth('{\"foo\": \"100\"}')"
 argument_list|,
-literal|"JSON_DEPTH('{\"foo\": \"100\"}' FORMAT JSON)"
+literal|"JSON_DEPTH('{\"foo\": \"100\"}')"
 argument_list|)
 expr_stmt|;
 block|}
@@ -27997,28 +28061,28 @@ name|checkExp
 argument_list|(
 literal|"json_length('{\"foo\": \"bar\"}')"
 argument_list|,
-literal|"JSON_LENGTH('{\"foo\": \"bar\"}' FORMAT JSON)"
+literal|"JSON_LENGTH('{\"foo\": \"bar\"}')"
 argument_list|)
 expr_stmt|;
 name|checkExp
 argument_list|(
 literal|"json_length('{\"foo\": \"bar\"}', 'lax $')"
 argument_list|,
-literal|"JSON_LENGTH('{\"foo\": \"bar\"}' FORMAT JSON, 'lax $')"
+literal|"JSON_LENGTH('{\"foo\": \"bar\"}', 'lax $')"
 argument_list|)
 expr_stmt|;
 name|checkExp
 argument_list|(
 literal|"json_length('{\"foo\": \"bar\"}', 'strict $')"
 argument_list|,
-literal|"JSON_LENGTH('{\"foo\": \"bar\"}' FORMAT JSON, 'strict $')"
+literal|"JSON_LENGTH('{\"foo\": \"bar\"}', 'strict $')"
 argument_list|)
 expr_stmt|;
 name|checkExp
 argument_list|(
 literal|"json_length('{\"foo\": \"bar\"}', 'invalid $')"
 argument_list|,
-literal|"JSON_LENGTH('{\"foo\": \"bar\"}' FORMAT JSON, 'invalid $')"
+literal|"JSON_LENGTH('{\"foo\": \"bar\"}', 'invalid $')"
 argument_list|)
 expr_stmt|;
 block|}
@@ -28033,21 +28097,21 @@ name|checkExp
 argument_list|(
 literal|"json_keys('{\"foo\": \"bar\"}', 'lax $')"
 argument_list|,
-literal|"JSON_KEYS('{\"foo\": \"bar\"}' FORMAT JSON, 'lax $')"
+literal|"JSON_KEYS('{\"foo\": \"bar\"}', 'lax $')"
 argument_list|)
 expr_stmt|;
 name|checkExp
 argument_list|(
 literal|"json_keys('{\"foo\": \"bar\"}', 'strict $')"
 argument_list|,
-literal|"JSON_KEYS('{\"foo\": \"bar\"}' FORMAT JSON, 'strict $')"
+literal|"JSON_KEYS('{\"foo\": \"bar\"}', 'strict $')"
 argument_list|)
 expr_stmt|;
 name|checkExp
 argument_list|(
 literal|"json_keys('{\"foo\": \"bar\"}', 'invalid $')"
 argument_list|,
-literal|"JSON_KEYS('{\"foo\": \"bar\"}' FORMAT JSON, 'invalid $')"
+literal|"JSON_KEYS('{\"foo\": \"bar\"}', 'invalid $')"
 argument_list|)
 expr_stmt|;
 block|}
@@ -28152,14 +28216,14 @@ name|checkExp
 argument_list|(
 literal|"json_pretty('foo')"
 argument_list|,
-literal|"JSON_PRETTY('foo' FORMAT JSON)"
+literal|"JSON_PRETTY('foo')"
 argument_list|)
 expr_stmt|;
 name|checkExp
 argument_list|(
 literal|"json_pretty(null)"
 argument_list|,
-literal|"JSON_PRETTY(NULL FORMAT JSON)"
+literal|"JSON_PRETTY(NULL)"
 argument_list|)
 expr_stmt|;
 block|}
