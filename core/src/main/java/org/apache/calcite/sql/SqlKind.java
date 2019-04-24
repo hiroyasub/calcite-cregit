@@ -485,9 +485,6 @@ block|,
 comment|/**    * The JSON value expression.    */
 name|JSON_VALUE_EXPRESSION
 block|,
-comment|/**    * The JSON API common syntax.    */
-name|JSON_API_COMMON_SYNTAX
-block|,
 comment|/**    * The {@code JSON_ARRAYAGG} aggregate function.    */
 name|JSON_ARRAYAGG
 block|,
@@ -1119,8 +1116,6 @@ argument_list|,
 name|SKIP_TO_LAST
 argument_list|,
 name|JSON_VALUE_EXPRESSION
-argument_list|,
-name|JSON_API_COMMON_SYNTAX
 argument_list|)
 argument_list|,
 name|AGGREGATE

@@ -26635,8 +26635,6 @@ literal|"DOT -\n"
 operator|+
 literal|"ITEM -\n"
 operator|+
-literal|"JSON_API_COMMON_SYNTAX -\n"
-operator|+
 literal|"NEXT_VALUE -\n"
 operator|+
 literal|"PATTERN_EXCLUDE -\n"
@@ -34722,6 +34720,20 @@ argument_list|,
 literal|"ANY NOT NULL"
 argument_list|)
 expr_stmt|;
+name|checkExpType
+argument_list|(
+literal|"'null' format json"
+argument_list|,
+literal|"ANY NOT NULL"
+argument_list|)
+expr_stmt|;
+name|checkExpType
+argument_list|(
+literal|"cast(null as varchar) format json"
+argument_list|,
+literal|"ANY"
+argument_list|)
+expr_stmt|;
 name|checkExpFails
 argument_list|(
 literal|"^null^ format json"
@@ -34985,7 +34997,7 @@ name|checkExpType
 argument_list|(
 literal|"json_pretty('{\"foo\":\"bar\"}')"
 argument_list|,
-literal|"VARCHAR(2000) NOT NULL"
+literal|"VARCHAR(2000)"
 argument_list|)
 expr_stmt|;
 name|checkFails
@@ -35038,7 +35050,7 @@ name|checkExpType
 argument_list|(
 literal|"json_type('{\"foo\":\"bar\"}')"
 argument_list|,
-literal|"VARCHAR(20) NOT NULL"
+literal|"VARCHAR(20)"
 argument_list|)
 expr_stmt|;
 if|if
@@ -35156,14 +35168,14 @@ name|checkExpType
 argument_list|(
 literal|"json_keys('{\"foo\":\"bar\"}', 'lax $')"
 argument_list|,
-literal|"VARCHAR(2000) NOT NULL"
+literal|"VARCHAR(2000)"
 argument_list|)
 expr_stmt|;
 name|checkExpType
 argument_list|(
 literal|"json_keys('{\"foo\":\"bar\"}', 'strict $')"
 argument_list|,
-literal|"VARCHAR(2000) NOT NULL"
+literal|"VARCHAR(2000)"
 argument_list|)
 expr_stmt|;
 block|}

@@ -18410,6 +18410,29 @@ operator|.
 name|FALSE
 argument_list|)
 expr_stmt|;
+comment|// nulls
+name|tester
+operator|.
+name|checkFails
+argument_list|(
+literal|"json_exists(^null^, "
+operator|+
+literal|"'lax $' unknown on error)"
+argument_list|,
+literal|"(?s).*Illegal use of 'NULL'.*"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkNull
+argument_list|(
+literal|"json_exists(cast(null as varchar), "
+operator|+
+literal|"'lax $.foo1' unknown on error)"
+argument_list|)
+expr_stmt|;
 block|}
 annotation|@
 name|Test
@@ -18753,6 +18776,25 @@ argument_list|,
 literal|"empty"
 argument_list|,
 literal|"VARCHAR(2000)"
+argument_list|)
+expr_stmt|;
+comment|// nulls
+name|tester
+operator|.
+name|checkFails
+argument_list|(
+literal|"json_value(^null^, 'strict $')"
+argument_list|,
+literal|"(?s).*Illegal use of 'NULL'.*"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkNull
+argument_list|(
+literal|"json_value(cast(null as varchar), 'strict $')"
 argument_list|)
 expr_stmt|;
 block|}
@@ -19155,6 +19197,25 @@ argument_list|,
 literal|"VARCHAR(2000)"
 argument_list|)
 expr_stmt|;
+comment|// nulls
+name|tester
+operator|.
+name|checkFails
+argument_list|(
+literal|"json_query(^null^, 'lax $')"
+argument_list|,
+literal|"(?s).*Illegal use of 'NULL'.*"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkNull
+argument_list|(
+literal|"json_query(cast(null as varchar), 'lax $')"
+argument_list|)
+expr_stmt|;
 block|}
 annotation|@
 name|Test
@@ -19171,7 +19232,7 @@ literal|"json_pretty('{\"foo\":100}')"
 argument_list|,
 literal|"{\n  \"foo\" : 100\n}"
 argument_list|,
-literal|"VARCHAR(2000) NOT NULL"
+literal|"VARCHAR(2000)"
 argument_list|)
 expr_stmt|;
 name|tester
@@ -19182,7 +19243,7 @@ literal|"json_pretty('[1,2,3]')"
 argument_list|,
 literal|"[ 1, 2, 3 ]"
 argument_list|,
-literal|"VARCHAR(2000) NOT NULL"
+literal|"VARCHAR(2000)"
 argument_list|)
 expr_stmt|;
 name|tester
@@ -19193,7 +19254,26 @@ literal|"json_pretty('null')"
 argument_list|,
 literal|"null"
 argument_list|,
-literal|"VARCHAR(2000) NOT NULL"
+literal|"VARCHAR(2000)"
+argument_list|)
+expr_stmt|;
+comment|// nulls
+name|tester
+operator|.
+name|checkFails
+argument_list|(
+literal|"json_pretty(^null^)"
+argument_list|,
+literal|"(?s).*Illegal use of 'NULL'.*"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkNull
+argument_list|(
+literal|"json_pretty(cast(null as varchar))"
 argument_list|)
 expr_stmt|;
 block|}
@@ -19221,7 +19301,7 @@ literal|"json_type('\"1\"')"
 argument_list|,
 literal|"STRING"
 argument_list|,
-literal|"VARCHAR(20) NOT NULL"
+literal|"VARCHAR(20)"
 argument_list|)
 expr_stmt|;
 name|tester
@@ -19232,7 +19312,7 @@ literal|"json_type('1')"
 argument_list|,
 literal|"INTEGER"
 argument_list|,
-literal|"VARCHAR(20) NOT NULL"
+literal|"VARCHAR(20)"
 argument_list|)
 expr_stmt|;
 name|tester
@@ -19243,7 +19323,7 @@ literal|"json_type('11.45')"
 argument_list|,
 literal|"DOUBLE"
 argument_list|,
-literal|"VARCHAR(20) NOT NULL"
+literal|"VARCHAR(20)"
 argument_list|)
 expr_stmt|;
 name|tester
@@ -19254,7 +19334,7 @@ literal|"json_type('true')"
 argument_list|,
 literal|"BOOLEAN"
 argument_list|,
-literal|"VARCHAR(20) NOT NULL"
+literal|"VARCHAR(20)"
 argument_list|)
 expr_stmt|;
 name|tester
@@ -19265,18 +19345,14 @@ literal|"json_type('null')"
 argument_list|,
 literal|"NULL"
 argument_list|,
-literal|"VARCHAR(20) NOT NULL"
+literal|"VARCHAR(20)"
 argument_list|)
 expr_stmt|;
 name|tester
 operator|.
-name|checkString
+name|checkNull
 argument_list|(
 literal|"json_type(cast(null as varchar(1)))"
-argument_list|,
-literal|"NULL"
-argument_list|,
-literal|"VARCHAR(20) NOT NULL"
 argument_list|)
 expr_stmt|;
 name|tester
@@ -19287,7 +19363,7 @@ literal|"json_type('{\"a\": [10, true]}')"
 argument_list|,
 literal|"OBJECT"
 argument_list|,
-literal|"VARCHAR(20) NOT NULL"
+literal|"VARCHAR(20)"
 argument_list|)
 expr_stmt|;
 name|tester
@@ -19298,7 +19374,7 @@ literal|"json_type('{}')"
 argument_list|,
 literal|"OBJECT"
 argument_list|,
-literal|"VARCHAR(20) NOT NULL"
+literal|"VARCHAR(20)"
 argument_list|)
 expr_stmt|;
 name|tester
@@ -19309,7 +19385,7 @@ literal|"json_type('[10, true]')"
 argument_list|,
 literal|"ARRAY"
 argument_list|,
-literal|"VARCHAR(20) NOT NULL"
+literal|"VARCHAR(20)"
 argument_list|)
 expr_stmt|;
 name|tester
@@ -19320,7 +19396,26 @@ literal|"json_type('\"2019-01-27 21:24:00\"')"
 argument_list|,
 literal|"STRING"
 argument_list|,
-literal|"VARCHAR(20) NOT NULL"
+literal|"VARCHAR(20)"
+argument_list|)
+expr_stmt|;
+comment|// nulls
+name|tester
+operator|.
+name|checkFails
+argument_list|(
+literal|"json_type(^null^)"
+argument_list|,
+literal|"(?s).*Illegal use of 'NULL'.*"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkNull
+argument_list|(
+literal|"json_type(cast(null as varchar))"
 argument_list|)
 expr_stmt|;
 block|}
@@ -19470,6 +19565,25 @@ argument_list|,
 literal|"5"
 argument_list|,
 literal|"INTEGER"
+argument_list|)
+expr_stmt|;
+comment|// nulls
+name|tester
+operator|.
+name|checkFails
+argument_list|(
+literal|"json_depth(^null^)"
+argument_list|,
+literal|"(?s).*Illegal use of 'NULL'.*"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkNull
+argument_list|(
+literal|"json_depth(cast(null as varchar))"
 argument_list|)
 expr_stmt|;
 block|}
@@ -19704,6 +19818,25 @@ argument_list|,
 literal|true
 argument_list|)
 expr_stmt|;
+comment|// nulls
+name|tester
+operator|.
+name|checkFails
+argument_list|(
+literal|"json_length(^null^)"
+argument_list|,
+literal|"(?s).*Illegal use of 'NULL'.*"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkNull
+argument_list|(
+literal|"json_length(cast(null as varchar))"
+argument_list|)
+expr_stmt|;
 block|}
 annotation|@
 name|Test
@@ -19721,7 +19854,7 @@ literal|"json_keys('{}')"
 argument_list|,
 literal|"[]"
 argument_list|,
-literal|"VARCHAR(2000) NOT NULL"
+literal|"VARCHAR(2000)"
 argument_list|)
 expr_stmt|;
 name|tester
@@ -19732,7 +19865,7 @@ literal|"json_keys('[]')"
 argument_list|,
 literal|"null"
 argument_list|,
-literal|"VARCHAR(2000) NOT NULL"
+literal|"VARCHAR(2000)"
 argument_list|)
 expr_stmt|;
 name|tester
@@ -19743,7 +19876,7 @@ literal|"json_keys('{\"foo\":100}')"
 argument_list|,
 literal|"[\"foo\"]"
 argument_list|,
-literal|"VARCHAR(2000) NOT NULL"
+literal|"VARCHAR(2000)"
 argument_list|)
 expr_stmt|;
 name|tester
@@ -19754,7 +19887,7 @@ literal|"json_keys('{\"a\": 1, \"b\": {\"c\": 30}}')"
 argument_list|,
 literal|"[\"a\",\"b\"]"
 argument_list|,
-literal|"VARCHAR(2000) NOT NULL"
+literal|"VARCHAR(2000)"
 argument_list|)
 expr_stmt|;
 name|tester
@@ -19765,7 +19898,7 @@ literal|"json_keys('[1, 2, {\"a\": 3}]')"
 argument_list|,
 literal|"null"
 argument_list|,
-literal|"VARCHAR(2000) NOT NULL"
+literal|"VARCHAR(2000)"
 argument_list|)
 expr_stmt|;
 comment|// lax test
@@ -19777,7 +19910,7 @@ literal|"json_keys('{}', 'lax $')"
 argument_list|,
 literal|"[]"
 argument_list|,
-literal|"VARCHAR(2000) NOT NULL"
+literal|"VARCHAR(2000)"
 argument_list|)
 expr_stmt|;
 name|tester
@@ -19788,7 +19921,7 @@ literal|"json_keys('[]', 'lax $')"
 argument_list|,
 literal|"null"
 argument_list|,
-literal|"VARCHAR(2000) NOT NULL"
+literal|"VARCHAR(2000)"
 argument_list|)
 expr_stmt|;
 name|tester
@@ -19799,7 +19932,7 @@ literal|"json_keys('{\"foo\":100}', 'lax $')"
 argument_list|,
 literal|"[\"foo\"]"
 argument_list|,
-literal|"VARCHAR(2000) NOT NULL"
+literal|"VARCHAR(2000)"
 argument_list|)
 expr_stmt|;
 name|tester
@@ -19810,7 +19943,7 @@ literal|"json_keys('{\"a\": 1, \"b\": {\"c\": 30}}', 'lax $')"
 argument_list|,
 literal|"[\"a\",\"b\"]"
 argument_list|,
-literal|"VARCHAR(2000) NOT NULL"
+literal|"VARCHAR(2000)"
 argument_list|)
 expr_stmt|;
 name|tester
@@ -19821,7 +19954,7 @@ literal|"json_keys('[1, 2, {\"a\": 3}]', 'lax $')"
 argument_list|,
 literal|"null"
 argument_list|,
-literal|"VARCHAR(2000) NOT NULL"
+literal|"VARCHAR(2000)"
 argument_list|)
 expr_stmt|;
 name|tester
@@ -19832,7 +19965,7 @@ literal|"json_keys('{\"a\": 1, \"b\": {\"c\": 30}}', 'lax $.b')"
 argument_list|,
 literal|"[\"c\"]"
 argument_list|,
-literal|"VARCHAR(2000) NOT NULL"
+literal|"VARCHAR(2000)"
 argument_list|)
 expr_stmt|;
 name|tester
@@ -19843,7 +19976,7 @@ literal|"json_keys('{\"foo\":100}', 'lax $.foo1')"
 argument_list|,
 literal|"null"
 argument_list|,
-literal|"VARCHAR(2000) NOT NULL"
+literal|"VARCHAR(2000)"
 argument_list|)
 expr_stmt|;
 comment|// strict test
@@ -19855,7 +19988,7 @@ literal|"json_keys('{}', 'strict $')"
 argument_list|,
 literal|"[]"
 argument_list|,
-literal|"VARCHAR(2000) NOT NULL"
+literal|"VARCHAR(2000)"
 argument_list|)
 expr_stmt|;
 name|tester
@@ -19866,7 +19999,7 @@ literal|"json_keys('[]', 'strict $')"
 argument_list|,
 literal|"null"
 argument_list|,
-literal|"VARCHAR(2000) NOT NULL"
+literal|"VARCHAR(2000)"
 argument_list|)
 expr_stmt|;
 name|tester
@@ -19877,7 +20010,7 @@ literal|"json_keys('{\"foo\":100}', 'strict $')"
 argument_list|,
 literal|"[\"foo\"]"
 argument_list|,
-literal|"VARCHAR(2000) NOT NULL"
+literal|"VARCHAR(2000)"
 argument_list|)
 expr_stmt|;
 name|tester
@@ -19888,7 +20021,7 @@ literal|"json_keys('{\"a\": 1, \"b\": {\"c\": 30}}', 'strict $')"
 argument_list|,
 literal|"[\"a\",\"b\"]"
 argument_list|,
-literal|"VARCHAR(2000) NOT NULL"
+literal|"VARCHAR(2000)"
 argument_list|)
 expr_stmt|;
 name|tester
@@ -19899,7 +20032,7 @@ literal|"json_keys('[1, 2, {\"a\": 3}]', 'strict $')"
 argument_list|,
 literal|"null"
 argument_list|,
-literal|"VARCHAR(2000) NOT NULL"
+literal|"VARCHAR(2000)"
 argument_list|)
 expr_stmt|;
 name|tester
@@ -19910,7 +20043,7 @@ literal|"json_keys('{\"a\": 1, \"b\": {\"c\": 30}}', 'strict $.b')"
 argument_list|,
 literal|"[\"c\"]"
 argument_list|,
-literal|"VARCHAR(2000) NOT NULL"
+literal|"VARCHAR(2000)"
 argument_list|)
 expr_stmt|;
 comment|// catch error test
@@ -19934,6 +20067,25 @@ argument_list|,
 literal|"(?s).*No results for path.*"
 argument_list|,
 literal|true
+argument_list|)
+expr_stmt|;
+comment|// nulls
+name|tester
+operator|.
+name|checkFails
+argument_list|(
+literal|"json_keys(^null^)"
+argument_list|,
+literal|"(?s).*Illegal use of 'NULL'.*"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkNull
+argument_list|(
+literal|"json_keys(cast(null as varchar))"
 argument_list|)
 expr_stmt|;
 block|}
@@ -20143,6 +20295,65 @@ argument_list|,
 literal|"{\"foo\":\"bar\",\"foo3\":\"bar3\"}"
 argument_list|,
 literal|0.0D
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testJsonValueExpressionOperator
+parameter_list|()
+block|{
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"'{}' format json"
+argument_list|,
+literal|"{}"
+argument_list|,
+literal|"ANY NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"'[1, 2, 3]' format json"
+argument_list|,
+literal|"[1, 2, 3]"
+argument_list|,
+literal|"ANY NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkNull
+argument_list|(
+literal|"cast(null as varchar) format json"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"'null' format json"
+argument_list|,
+literal|"null"
+argument_list|,
+literal|"ANY NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkFails
+argument_list|(
+literal|"^null^ format json"
+argument_list|,
+literal|"(?s).*Illegal use of .NULL.*"
+argument_list|,
+literal|false
 argument_list|)
 expr_stmt|;
 block|}

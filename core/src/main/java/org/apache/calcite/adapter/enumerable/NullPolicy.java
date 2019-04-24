@@ -35,6 +35,9 @@ block|,
 comment|/** If any of the arguments are null, return null. */
 name|ANY
 block|,
+comment|/** If the first argument is null, return null. */
+name|ARG0
+block|,
 comment|/** If any of the arguments are false, result is false; else if any    * arguments are null, result is null; else true. */
 name|AND
 block|,

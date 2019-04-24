@@ -11350,7 +11350,7 @@ specifier|final
 name|String
 name|expected
 init|=
-literal|"SELECT JSON_EXISTS(\"product_name\" FORMAT JSON, 'lax $')\n"
+literal|"SELECT JSON_EXISTS(\"product_name\", 'lax $')\n"
 operator|+
 literal|"FROM \"foodmart\".\"product\""
 decl_stmt|;
@@ -11381,7 +11381,7 @@ specifier|final
 name|String
 name|expected
 init|=
-literal|"SELECT JSON_PRETTY(\"product_name\" FORMAT JSON)\n"
+literal|"SELECT JSON_PRETTY(\"product_name\")\n"
 operator|+
 literal|"FROM \"foodmart\".\"product\""
 decl_stmt|;
@@ -11413,7 +11413,7 @@ specifier|final
 name|String
 name|expected
 init|=
-literal|"SELECT CAST(JSON_VALUE_ANY(\"product_name\" FORMAT JSON, "
+literal|"SELECT CAST(JSON_VALUE_ANY(\"product_name\", "
 operator|+
 literal|"'lax $' NULL ON EMPTY NULL ON ERROR) AS VARCHAR(2000) CHARACTER SET \"ISO-8859-1\")\n"
 operator|+
@@ -11446,7 +11446,7 @@ specifier|final
 name|String
 name|expected
 init|=
-literal|"SELECT JSON_QUERY(\"product_name\" FORMAT JSON, 'lax $' "
+literal|"SELECT JSON_QUERY(\"product_name\", 'lax $' "
 operator|+
 literal|"WITHOUT ARRAY WRAPPER NULL ON EMPTY NULL ON ERROR)\n"
 operator|+
@@ -11718,7 +11718,7 @@ name|expected
 init|=
 literal|"SELECT "
 operator|+
-literal|"JSON_TYPE(\"product_name\" FORMAT JSON)\n"
+literal|"JSON_TYPE(\"product_name\")\n"
 operator|+
 literal|"FROM \"foodmart\".\"product\""
 decl_stmt|;
@@ -11751,7 +11751,7 @@ name|expected
 init|=
 literal|"SELECT "
 operator|+
-literal|"JSON_DEPTH(\"product_name\" FORMAT JSON)\n"
+literal|"JSON_DEPTH(\"product_name\")\n"
 operator|+
 literal|"FROM \"foodmart\".\"product\""
 decl_stmt|;
@@ -11784,9 +11784,9 @@ specifier|final
 name|String
 name|expected
 init|=
-literal|"SELECT JSON_LENGTH(\"product_name\" FORMAT JSON, 'lax $'), "
+literal|"SELECT JSON_LENGTH(\"product_name\", 'lax $'), "
 operator|+
-literal|"JSON_LENGTH(\"product_name\" FORMAT JSON)\n"
+literal|"JSON_LENGTH(\"product_name\")\n"
 operator|+
 literal|"FROM \"foodmart\".\"product\""
 decl_stmt|;
@@ -11817,7 +11817,7 @@ specifier|final
 name|String
 name|expected
 init|=
-literal|"SELECT JSON_KEYS(\"product_name\" FORMAT JSON, 'lax $')\n"
+literal|"SELECT JSON_KEYS(\"product_name\", 'lax $')\n"
 operator|+
 literal|"FROM \"foodmart\".\"product\""
 decl_stmt|;

@@ -271,6 +271,10 @@ name|ANY
 argument_list|,
 name|SqlTypeFamily
 operator|.
+name|CHARACTER
+argument_list|,
+name|SqlTypeFamily
+operator|.
 name|ANY
 argument_list|,
 name|SqlTypeFamily
@@ -299,7 +303,7 @@ name|operandsCount
 parameter_list|)
 block|{
 return|return
-literal|"{0}({1} {2} WRAPPER {3} ON EMPTY {4} ON ERROR)"
+literal|"{0}({1} {2} {3} WRAPPER {4} ON EMPTY {5} ON ERROR)"
 return|;
 block|}
 annotation|@
@@ -351,6 +355,31 @@ argument_list|,
 literal|0
 argument_list|)
 expr_stmt|;
+name|writer
+operator|.
+name|sep
+argument_list|(
+literal|","
+argument_list|,
+literal|true
+argument_list|)
+expr_stmt|;
+name|call
+operator|.
+name|operand
+argument_list|(
+literal|1
+argument_list|)
+operator|.
+name|unparse
+argument_list|(
+name|writer
+argument_list|,
+literal|0
+argument_list|,
+literal|0
+argument_list|)
+expr_stmt|;
 specifier|final
 name|SqlJsonQueryWrapperBehavior
 name|wrapperBehavior
@@ -361,7 +390,7 @@ name|call
 operator|.
 name|operand
 argument_list|(
-literal|1
+literal|2
 argument_list|)
 argument_list|)
 decl_stmt|;
@@ -429,7 +458,7 @@ name|call
 operator|.
 name|operand
 argument_list|(
-literal|2
+literal|3
 argument_list|)
 argument_list|)
 argument_list|)
@@ -451,7 +480,7 @@ name|call
 operator|.
 name|operand
 argument_list|(
-literal|3
+literal|4
 argument_list|)
 argument_list|)
 argument_list|)
@@ -492,7 +521,7 @@ if|if
 condition|(
 name|operands
 index|[
-literal|1
+literal|2
 index|]
 operator|==
 literal|null
@@ -500,7 +529,7 @@ condition|)
 block|{
 name|operands
 index|[
-literal|1
+literal|2
 index|]
 operator|=
 name|SqlLiteral
@@ -519,7 +548,7 @@ if|if
 condition|(
 name|operands
 index|[
-literal|2
+literal|3
 index|]
 operator|==
 literal|null
@@ -527,7 +556,7 @@ condition|)
 block|{
 name|operands
 index|[
-literal|2
+literal|3
 index|]
 operator|=
 name|SqlLiteral
@@ -546,7 +575,7 @@ if|if
 condition|(
 name|operands
 index|[
-literal|3
+literal|4
 index|]
 operator|==
 literal|null
@@ -554,7 +583,7 @@ condition|)
 block|{
 name|operands
 index|[
-literal|3
+literal|4
 index|]
 operator|=
 name|SqlLiteral

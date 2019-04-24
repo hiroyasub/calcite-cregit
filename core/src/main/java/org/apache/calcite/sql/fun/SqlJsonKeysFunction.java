@@ -107,6 +107,22 @@ name|SqlTypeFamily
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|type
+operator|.
+name|SqlTypeTransforms
+import|;
+end_import
+
 begin_comment
 comment|/**  * The<code>JSON_KEYS</code> function.  */
 end_comment
@@ -132,7 +148,16 @@ name|OTHER_FUNCTION
 argument_list|,
 name|ReturnTypes
 operator|.
+name|cascade
+argument_list|(
+name|ReturnTypes
+operator|.
 name|VARCHAR_2000
+argument_list|,
+name|SqlTypeTransforms
+operator|.
+name|FORCE_NULLABLE
+argument_list|)
 argument_list|,
 literal|null
 argument_list|,
