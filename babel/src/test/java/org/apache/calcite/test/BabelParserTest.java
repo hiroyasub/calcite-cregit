@@ -989,7 +989,80 @@ literal|"(?s)Encountered \"when then\" at .*"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Babel parser's global {@code OOKAHEAD} is larger than the core    * parser's. This causes different parse error message between these two    * parsers. Here we define a looser error checker for Babel, so that we can    * reuse failure testing codes from {@link SqlParserTest}.    *    *<p>If a test case is written in this file -- that is, not inherited -- it    * is still checked by {@link SqlParserTest}'s checker.    */
+comment|/** In Redshift, DATE is a function. It requires special treatment in the    * parser because it is a reserved keyword.    * (Curiously, TIMESTAMP and TIME are not functions.) */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testDateFunction
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT `DATE`(`X`)\n"
+operator|+
+literal|"FROM `T`"
+decl_stmt|;
+name|sql
+argument_list|(
+literal|"select date(x) from t"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** PostgreSQL and Redshift allow TIMESTAMP literals that contain only a    * date part. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testShortTimestampLiteral
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"select timestamp '1969-07-20'"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+literal|"SELECT TIMESTAMP '1969-07-20 00:00:00'"
+argument_list|)
+expr_stmt|;
+comment|// PostgreSQL allows the following. We should too.
+name|sql
+argument_list|(
+literal|"select ^timestamp '1969-07-20 1:2'^"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Illegal TIMESTAMP literal '1969-07-20 1:2': not in format "
+operator|+
+literal|"'yyyy-MM-dd HH:mm:ss'"
+argument_list|)
+expr_stmt|;
+comment|// PostgreSQL gives 1969-07-20 01:02:00
+name|sql
+argument_list|(
+literal|"select ^timestamp '1969-07-20:23:'^"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Illegal TIMESTAMP literal '1969-07-20:23:': not in format "
+operator|+
+literal|"'yyyy-MM-dd HH:mm:ss'"
+argument_list|)
+expr_stmt|;
+comment|// PostgreSQL gives 1969-07-20 23:00:00
+block|}
+comment|/**    * Babel parser's global {@code LOOKAHEAD} is larger than the core    * parser's. This causes different parse error message between these two    * parsers. Here we define a looser error checker for Babel, so that we can    * reuse failure testing codes from {@link SqlParserTest}.    *    *<p>If a test case is written in this file -- that is, not inherited -- it    * is still checked by {@link SqlParserTest}'s checker.    */
 annotation|@
 name|Override
 specifier|protected
