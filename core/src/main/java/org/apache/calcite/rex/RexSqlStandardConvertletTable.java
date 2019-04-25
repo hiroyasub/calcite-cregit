@@ -111,7 +111,7 @@ name|sql
 operator|.
 name|fun
 operator|.
-name|OracleSqlOperatorTable
+name|SqlCaseOperator
 import|;
 end_import
 
@@ -127,7 +127,7 @@ name|sql
 operator|.
 name|fun
 operator|.
-name|SqlCaseOperator
+name|SqlLibraryOperators
 import|;
 end_import
 
@@ -539,7 +539,7 @@ argument_list|)
 expr_stmt|;
 name|registerEquivOp
 argument_list|(
-name|OracleSqlOperatorTable
+name|SqlLibraryOperators
 operator|.
 name|TRANSLATE3
 argument_list|)

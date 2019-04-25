@@ -4447,7 +4447,7 @@ argument_list|(
 literal|"CONVERT"
 argument_list|)
 decl_stmt|;
-comment|/**    * The<code>TRANSLATE(<i>char_value</i> USING<i>translation_name</i>)</code> function    * alters the character set of a string value from one base character set to another.    *    *<p>It is defined in the SQL standard. See also non-standard    * {@link OracleSqlOperatorTable#TRANSLATE3}.    */
+comment|/**    * The<code>TRANSLATE(<i>char_value</i> USING<i>translation_name</i>)</code> function    * alters the character set of a string value from one base character set to another.    *    *<p>It is defined in the SQL standard. See also the non-standard    * {@link SqlLibraryOperators#TRANSLATE3}, which has a different purpose.    */
 specifier|public
 specifier|static
 specifier|final

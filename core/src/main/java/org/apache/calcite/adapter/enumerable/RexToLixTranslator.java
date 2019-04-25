@@ -699,7 +699,7 @@ name|sql
 operator|.
 name|fun
 operator|.
-name|OracleSqlOperatorTable
+name|SqlLibraryOperators
 operator|.
 name|TRANSLATE3
 import|;

@@ -115,7 +115,7 @@ name|sql
 operator|.
 name|fun
 operator|.
-name|OracleSqlOperatorTable
+name|SqlFloorFunction
 import|;
 end_import
 
@@ -131,7 +131,7 @@ name|sql
 operator|.
 name|fun
 operator|.
-name|SqlFloorFunction
+name|SqlLibraryOperators
 import|;
 end_import
 
@@ -268,7 +268,7 @@ name|SqlUtil
 operator|.
 name|unparseFunctionSyntax
 argument_list|(
-name|OracleSqlOperatorTable
+name|SqlLibraryOperators
 operator|.
 name|SUBSTR
 argument_list|,

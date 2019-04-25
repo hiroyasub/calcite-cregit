@@ -471,22 +471,6 @@ name|sql
 operator|.
 name|fun
 operator|.
-name|OracleSqlOperatorTable
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|sql
-operator|.
-name|fun
-operator|.
 name|SqlArrayValueConstructor
 import|;
 end_import
@@ -552,6 +536,22 @@ operator|.
 name|fun
 operator|.
 name|SqlExtractFunction
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|fun
+operator|.
+name|SqlLibraryOperators
 import|;
 end_import
 
@@ -1175,7 +1175,7 @@ argument_list|)
 expr_stmt|;
 name|registerOp
 argument_list|(
-name|OracleSqlOperatorTable
+name|SqlLibraryOperators
 operator|.
 name|LTRIM
 argument_list|,
@@ -1192,7 +1192,7 @@ argument_list|)
 expr_stmt|;
 name|registerOp
 argument_list|(
-name|OracleSqlOperatorTable
+name|SqlLibraryOperators
 operator|.
 name|RTRIM
 argument_list|,
@@ -1209,7 +1209,7 @@ argument_list|)
 expr_stmt|;
 name|registerOp
 argument_list|(
-name|OracleSqlOperatorTable
+name|SqlLibraryOperators
 operator|.
 name|GREATEST
 argument_list|,
@@ -1220,7 +1220,7 @@ argument_list|)
 expr_stmt|;
 name|registerOp
 argument_list|(
-name|OracleSqlOperatorTable
+name|SqlLibraryOperators
 operator|.
 name|LEAST
 argument_list|,
@@ -1231,7 +1231,7 @@ argument_list|)
 expr_stmt|;
 name|registerOp
 argument_list|(
-name|OracleSqlOperatorTable
+name|SqlLibraryOperators
 operator|.
 name|NVL
 argument_list|,
@@ -1354,7 +1354,7 @@ argument_list|)
 expr_stmt|;
 name|registerOp
 argument_list|(
-name|OracleSqlOperatorTable
+name|SqlLibraryOperators
 operator|.
 name|DECODE
 argument_list|,
@@ -1797,7 +1797,7 @@ argument_list|)
 expr_stmt|;
 name|registerOp
 argument_list|(
-name|SqlStdOperatorTable
+name|SqlLibraryOperators
 operator|.
 name|JSON_PRETTY
 argument_list|,
@@ -1810,7 +1810,7 @@ argument_list|)
 expr_stmt|;
 name|registerOp
 argument_list|(
-name|SqlStdOperatorTable
+name|SqlLibraryOperators
 operator|.
 name|JSON_TYPE
 argument_list|,
@@ -1823,7 +1823,7 @@ argument_list|)
 expr_stmt|;
 name|registerOp
 argument_list|(
-name|SqlStdOperatorTable
+name|SqlLibraryOperators
 operator|.
 name|JSON_DEPTH
 argument_list|,
@@ -1836,7 +1836,7 @@ argument_list|)
 expr_stmt|;
 name|registerOp
 argument_list|(
-name|SqlStdOperatorTable
+name|SqlLibraryOperators
 operator|.
 name|JSON_LENGTH
 argument_list|,
@@ -1849,7 +1849,7 @@ argument_list|)
 expr_stmt|;
 name|registerOp
 argument_list|(
-name|SqlStdOperatorTable
+name|SqlLibraryOperators
 operator|.
 name|JSON_KEYS
 argument_list|,
