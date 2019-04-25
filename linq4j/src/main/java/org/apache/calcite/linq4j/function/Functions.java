@@ -1883,7 +1883,7 @@ block|{
 return|return
 name|Arrays
 operator|.
-name|deepEquals
+name|equals
 argument_list|(
 name|v1
 argument_list|,
@@ -1903,7 +1903,7 @@ block|{
 return|return
 name|Arrays
 operator|.
-name|deepHashCode
+name|hashCode
 argument_list|(
 name|t
 argument_list|)
