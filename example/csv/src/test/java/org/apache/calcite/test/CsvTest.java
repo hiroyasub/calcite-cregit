@@ -1454,6 +1454,64 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2272">[CALCITE-2272]    * Incorrect result for {@code name like '%E%' and city not like '%W%'}</a>.    */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testFilterableWhereWithNot1
+parameter_list|()
+throws|throws
+name|SQLException
+block|{
+name|sql
+argument_list|(
+literal|"filterable-model"
+argument_list|,
+literal|"select name, empno from EMPS "
+operator|+
+literal|"where name like '%E%' and city not like '%W%' "
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"NAME=Eric; EMPNO=110"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+comment|/** Similar to {@link #testFilterableWhereWithNot1()};    * But use the same column. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testFilterableWhereWithNot2
+parameter_list|()
+throws|throws
+name|SQLException
+block|{
+name|sql
+argument_list|(
+literal|"filterable-model"
+argument_list|,
+literal|"select name, empno from EMPS "
+operator|+
+literal|"where name like '%i%' and name not like '%W%' "
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"NAME=Eric; EMPNO=110"
+argument_list|,
+literal|"NAME=Alice; EMPNO=130"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
 annotation|@
 name|Test
 specifier|public
