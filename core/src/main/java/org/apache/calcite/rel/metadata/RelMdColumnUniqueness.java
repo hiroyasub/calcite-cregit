@@ -203,6 +203,22 @@ name|rel
 operator|.
 name|core
 operator|.
+name|JoinRelType
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|core
+operator|.
 name|Minus
 import|;
 end_import
@@ -1447,6 +1463,41 @@ name|leftAndRightColumns
 operator|.
 name|right
 decl_stmt|;
+comment|// for FULL OUTER JOIN if columns contain column from both inputs it is not
+comment|// guaranteed that the result will be unique
+if|if
+condition|(
+operator|!
+name|ignoreNulls
+operator|&&
+name|rel
+operator|.
+name|getJoinType
+argument_list|()
+operator|==
+name|JoinRelType
+operator|.
+name|FULL
+operator|&&
+name|leftColumns
+operator|.
+name|cardinality
+argument_list|()
+operator|>
+literal|0
+operator|&&
+name|rightColumns
+operator|.
+name|cardinality
+argument_list|()
+operator|>
+literal|0
+condition|)
+block|{
+return|return
+literal|false
+return|;
+block|}
 comment|// If the original column mask contains columns from both the left and
 comment|// right hand side, then the columns are unique if and only if they're
 comment|// unique for their respective join inputs
