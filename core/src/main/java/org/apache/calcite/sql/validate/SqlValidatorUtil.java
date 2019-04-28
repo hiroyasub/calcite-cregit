@@ -3824,7 +3824,7 @@ name|names
 operator|.
 name|size
 argument_list|()
-operator|==
+operator|>=
 literal|2
 assert|;
 name|String

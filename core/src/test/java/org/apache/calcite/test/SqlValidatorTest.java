@@ -14506,6 +14506,43 @@ literal|"(?s)Cannot apply '\\+' to arguments of type.*"
 argument_list|)
 expr_stmt|;
 block|}
+comment|/**    * Test case for<a href="https://issues.apache.org/jira/browse/CALCITE-3003">[CALCITE-3003]    * AssertionError when GROUP BY nested field</a>.    *    *<p>Make sure table name of GROUP BY item with nested field could be    * properly validated.    */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testInvalidGroupByWithInvalidTableName
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select\n"
+operator|+
+literal|"  coord.x,\n"
+operator|+
+literal|"  avg(coord.y)\n"
+operator|+
+literal|"from\n"
+operator|+
+literal|"  customer.contact_peek\n"
+operator|+
+literal|"group by\n"
+operator|+
+literal|"  ^unknown_table_alias.coord^.x"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Table 'UNKNOWN_TABLE_ALIAS.COORD' not found"
+argument_list|)
+expr_stmt|;
+block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1781">[CALCITE-1781]    * Allow expression in CUBE and ROLLUP</a>. */
 annotation|@
 name|Test

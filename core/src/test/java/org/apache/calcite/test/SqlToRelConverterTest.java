@@ -9682,6 +9682,129 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+comment|/**    * Test case for<a href="https://issues.apache.org/jira/browse/CALCITE-3003">[CALCITE-3003]    * AssertionError when GROUP BY nested field</a>.    */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testGroupByNestedColumn
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select\n"
+operator|+
+literal|"  coord.x,\n"
+operator|+
+literal|"  coord_ne.sub.a,\n"
+operator|+
+literal|"  avg(coord.y)\n"
+operator|+
+literal|"from\n"
+operator|+
+literal|"  customer.contact_peek\n"
+operator|+
+literal|"group by\n"
+operator|+
+literal|"  coord_ne.sub.a,\n"
+operator|+
+literal|"  coord.x"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+comment|/**    * Similar to {@link #testGroupByNestedColumn()},    * but with grouping sets.    */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testGroupingSetsWithNestedColumn
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select\n"
+operator|+
+literal|"  coord.x,\n"
+operator|+
+literal|"  coord.\"unit\",\n"
+operator|+
+literal|"  coord_ne.sub.a,\n"
+operator|+
+literal|"  avg(coord.y)\n"
+operator|+
+literal|"from\n"
+operator|+
+literal|"  customer.contact_peek\n"
+operator|+
+literal|"group by\n"
+operator|+
+literal|"  grouping sets (\n"
+operator|+
+literal|"    (coord_ne.sub.a, coord.x, coord.\"unit\"),\n"
+operator|+
+literal|"    (coord.x, coord.\"unit\")\n"
+operator|+
+literal|"  )"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+comment|/**    * Similar to {@link #testGroupByNestedColumn()},    * but with cube.    */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testGroupByCubeWithNestedColumn
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select\n"
+operator|+
+literal|"  coord.x,\n"
+operator|+
+literal|"  coord.\"unit\",\n"
+operator|+
+literal|"  coord_ne.sub.a,\n"
+operator|+
+literal|"  avg(coord.y)\n"
+operator|+
+literal|"from\n"
+operator|+
+literal|"  customer.contact_peek\n"
+operator|+
+literal|"group by\n"
+operator|+
+literal|"  cube (coord_ne.sub.a, coord.x, coord.\"unit\")"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
 annotation|@
 name|Test
 specifier|public
