@@ -392,6 +392,43 @@ name|isA
 argument_list|(
 name|SqlKind
 operator|.
+name|AND
+argument_list|)
+condition|)
+block|{
+comment|// We cannot refine(remove) the operands of AND,
+comment|// it will cause o.a.c.i.TableScanNode.createFilterable filters check failed.
+operator|(
+operator|(
+name|RexCall
+operator|)
+name|filter
+operator|)
+operator|.
+name|getOperands
+argument_list|()
+operator|.
+name|forEach
+argument_list|(
+name|subFilter
+lambda|->
+name|addFilter
+argument_list|(
+name|subFilter
+argument_list|,
+name|filterValues
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+if|else if
+condition|(
+name|filter
+operator|.
+name|isA
+argument_list|(
+name|SqlKind
+operator|.
 name|EQUALS
 argument_list|)
 condition|)

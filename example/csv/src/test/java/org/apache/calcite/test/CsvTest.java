@@ -1454,6 +1454,40 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+comment|/** Filter that can be slightly handled by CsvFilterableTable. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testFilterableWhere3
+parameter_list|()
+throws|throws
+name|SQLException
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select empno, gender, name from EMPS\n"
+operator|+
+literal|" where gender<> 'M' and empno> 125"
+decl_stmt|;
+name|sql
+argument_list|(
+literal|"filterable-model"
+argument_list|,
+name|sql
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"EMPNO=130; GENDER=F; NAME=Alice"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2272">[CALCITE-2272]    * Incorrect result for {@code name like '%E%' and city not like '%W%'}</a>.    */
 annotation|@
 name|Test
