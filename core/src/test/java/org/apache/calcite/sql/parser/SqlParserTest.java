@@ -15187,6 +15187,76 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Same as testMergeSelectSource but set with compound identifier. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testMergeSelectSource2
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"merge into emps e "
+operator|+
+literal|"using (select * from tempemps where deptno is null) t "
+operator|+
+literal|"on e.empno = t.empno "
+operator|+
+literal|"when matched then update "
+operator|+
+literal|"set e.name = t.name, e.deptno = t.deptno, e.salary = t.salary * .1 "
+operator|+
+literal|"when not matched then insert (name, dept, salary) "
+operator|+
+literal|"values(t.name, 10, t.salary * .15)"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"MERGE INTO `EMPS` AS `E`\n"
+operator|+
+literal|"USING (SELECT *\n"
+operator|+
+literal|"FROM `TEMPEMPS`\n"
+operator|+
+literal|"WHERE (`DEPTNO` IS NULL)) AS `T`\n"
+operator|+
+literal|"ON (`E`.`EMPNO` = `T`.`EMPNO`)\n"
+operator|+
+literal|"WHEN MATCHED THEN UPDATE SET `E`.`NAME` = `T`.`NAME`\n"
+operator|+
+literal|", `E`.`DEPTNO` = `T`.`DEPTNO`\n"
+operator|+
+literal|", `E`.`SALARY` = (`T`.`SALARY` * 0.1)\n"
+operator|+
+literal|"WHEN NOT MATCHED THEN INSERT (`NAME`, `DEPT`, `SALARY`) "
+operator|+
+literal|"(VALUES (ROW(`T`.`NAME`, 10, (`T`.`SALARY` * 0.15))))"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+operator|.
+name|node
+argument_list|(
+name|not
+argument_list|(
+name|isDdl
+argument_list|()
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
 annotation|@
 name|Test
 specifier|public
@@ -15221,6 +15291,48 @@ operator|+
 literal|", `DEPTNO` = `T`.`DEPTNO`\n"
 operator|+
 literal|", `SALARY` = (`T`.`SALARY` * 0.1)\n"
+operator|+
+literal|"WHEN NOT MATCHED THEN INSERT (`NAME`, `DEPT`, `SALARY`) "
+operator|+
+literal|"(VALUES (ROW(`T`.`NAME`, 10, (`T`.`SALARY` * 0.15))))"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Same with testMergeTableRefSource but set with compound identifier. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testMergeTableRefSource2
+parameter_list|()
+block|{
+name|check
+argument_list|(
+literal|"merge into emps e "
+operator|+
+literal|"using tempemps as t "
+operator|+
+literal|"on e.empno = t.empno "
+operator|+
+literal|"when matched then update "
+operator|+
+literal|"set e.name = t.name, e.deptno = t.deptno, e.salary = t.salary * .1 "
+operator|+
+literal|"when not matched then insert (name, dept, salary) "
+operator|+
+literal|"values(t.name, 10, t.salary * .15)"
+argument_list|,
+literal|"MERGE INTO `EMPS` AS `E`\n"
+operator|+
+literal|"USING `TEMPEMPS` AS `T`\n"
+operator|+
+literal|"ON (`E`.`EMPNO` = `T`.`EMPNO`)\n"
+operator|+
+literal|"WHEN MATCHED THEN UPDATE SET `E`.`NAME` = `T`.`NAME`\n"
+operator|+
+literal|", `E`.`DEPTNO` = `T`.`DEPTNO`\n"
+operator|+
+literal|", `E`.`SALARY` = (`T`.`SALARY` * 0.1)\n"
 operator|+
 literal|"WHEN NOT MATCHED THEN INSERT (`NAME`, `DEPT`, `SALARY`) "
 operator|+
