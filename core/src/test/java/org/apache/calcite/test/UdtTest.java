@@ -137,6 +137,36 @@ literal|"LD=1\n"
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3045">[CALCITE-3045]    * NullPointerException when casting null literal to composite user defined type</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testCastNullLiteralToCompositeUdt
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select CAST(null AS \"adhoc\".mytype2) as c "
+operator|+
+literal|"from (VALUES (1))"
+decl_stmt|;
+name|withUdt
+argument_list|()
+operator|.
+name|query
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"C=null\n"
+argument_list|)
+expr_stmt|;
+block|}
 block|}
 end_class
 
