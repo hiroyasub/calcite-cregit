@@ -581,6 +581,16 @@ name|Collectors
 import|;
 end_import
 
+begin_import
+import|import
+name|javax
+operator|.
+name|sql
+operator|.
+name|DataSource
+import|;
+end_import
+
 begin_comment
 comment|/**  * Relational expression representing a scan of a table in a JDBC data source.  */
 end_comment
@@ -1268,10 +1278,6 @@ name|RESULT_SET_ENUMERABLE_OF_PREPARED
 operator|.
 name|method
 argument_list|,
-name|Expressions
-operator|.
-name|call
-argument_list|(
 name|Schemas
 operator|.
 name|unwrap
@@ -1280,16 +1286,9 @@ name|jdbcConvention
 operator|.
 name|expression
 argument_list|,
-name|JdbcSchema
+name|DataSource
 operator|.
 name|class
-argument_list|)
-argument_list|,
-name|BuiltInMethod
-operator|.
-name|JDBC_SCHEMA_DATA_SOURCE
-operator|.
-name|method
 argument_list|)
 argument_list|,
 name|sql_
@@ -1321,10 +1320,6 @@ name|RESULT_SET_ENUMERABLE_OF
 operator|.
 name|method
 argument_list|,
-name|Expressions
-operator|.
-name|call
-argument_list|(
 name|Schemas
 operator|.
 name|unwrap
@@ -1333,16 +1328,9 @@ name|jdbcConvention
 operator|.
 name|expression
 argument_list|,
-name|JdbcSchema
+name|DataSource
 operator|.
 name|class
-argument_list|)
-argument_list|,
-name|BuiltInMethod
-operator|.
-name|JDBC_SCHEMA_DATA_SOURCE
-operator|.
-name|method
 argument_list|)
 argument_list|,
 name|sql_

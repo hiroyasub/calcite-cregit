@@ -8586,7 +8586,7 @@ argument_list|)
 expr_stmt|;
 name|expected
 operator|=
-literal|"getDataSource(), \""
+literal|".unwrap(javax.sql.DataSource.class), \""
 operator|+
 name|expected
 operator|.
@@ -8660,7 +8660,7 @@ block|{
 return|return
 name|planContains
 argument_list|(
-literal|"getDataSource(), \""
+literal|".unwrap(javax.sql.DataSource.class), \""
 operator|+
 name|expected
 operator|.
