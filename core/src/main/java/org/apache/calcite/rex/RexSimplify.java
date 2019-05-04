@@ -3666,12 +3666,7 @@ literal|null
 condition|)
 block|{
 return|return
-name|simplify
-argument_list|(
 name|simplified
-argument_list|,
-name|unknownAs
-argument_list|)
 return|;
 block|}
 break|break;
@@ -3694,12 +3689,7 @@ literal|null
 condition|)
 block|{
 return|return
-name|simplify
-argument_list|(
 name|simplified
-argument_list|,
-name|unknownAs
-argument_list|)
 return|;
 block|}
 break|break;
@@ -3893,6 +3883,7 @@ name|UNKNOWN
 argument_list|)
 return|;
 block|}
+specifier|final
 name|RexNode
 name|a2
 init|=
@@ -3944,6 +3935,20 @@ name|RexNode
 name|a
 parameter_list|)
 block|{
+comment|// Simplify the argument first,
+comment|// call ourselves recursively to see whether we can make more progress.
+comment|// For example, given
+comment|// "(CASE WHEN FALSE THEN 1 ELSE 2) IS NOT NULL" we first simplify the
+comment|// argument to "2", and only then we can simplify "2 IS NOT NULL" to "TRUE".
+name|a
+operator|=
+name|simplify
+argument_list|(
+name|a
+argument_list|,
+name|UNKNOWN
+argument_list|)
+expr_stmt|;
 if|if
 condition|(
 operator|!
@@ -4197,6 +4202,20 @@ name|RexNode
 name|a
 parameter_list|)
 block|{
+comment|// Simplify the argument first,
+comment|// call ourselves recursively to see whether we can make more progress.
+comment|// For example, given
+comment|// "(CASE WHEN FALSE THEN 1 ELSE 2) IS NULL" we first simplify the
+comment|// argument to "2", and only then we can simplify "2 IS NULL" to "FALSE".
+name|a
+operator|=
+name|simplify
+argument_list|(
+name|a
+argument_list|,
+name|UNKNOWN
+argument_list|)
+expr_stmt|;
 if|if
 condition|(
 operator|!
