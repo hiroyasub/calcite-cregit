@@ -27375,6 +27375,70 @@ block|}
 end_function
 
 begin_comment
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3039">[CALCITE-3039]    * In Interpreter, min() incorrectly returns maximum double value</a>. */
+end_comment
+
+begin_function
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testMinAggWithDouble
+parameter_list|()
+block|{
+try|try
+init|(
+name|Hook
+operator|.
+name|Closeable
+name|ignored
+init|=
+name|Hook
+operator|.
+name|ENABLE_BINDABLE
+operator|.
+name|addThread
+argument_list|(
+name|Hook
+operator|.
+name|propertyJ
+argument_list|(
+literal|true
+argument_list|)
+argument_list|)
+init|)
+block|{
+name|CalciteAssert
+operator|.
+name|hr
+argument_list|()
+operator|.
+name|query
+argument_list|(
+literal|"select min(div) as _min from ("
+operator|+
+literal|"select \"empid\", \"deptno\", CAST(\"empid\" AS DOUBLE)/\"deptno\" as div from \"hr\".\"emps\")"
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+literal|"BindableAggregate(group=[{}], _MIN=[MIN($0)])\n"
+operator|+
+literal|"  BindableProject(DIV=[/(CAST($0):DOUBLE NOT NULL, $1)])\n"
+operator|+
+literal|"    BindableTableScan(table=[[hr, emps]])"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"_MIN=10.0\n"
+argument_list|)
+expr_stmt|;
+block|}
+block|}
+end_function
+
+begin_comment
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2224">[CALCITE-2224]    * WITHIN GROUP clause for aggregate functions</a>. */
 end_comment
 

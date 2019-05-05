@@ -2890,7 +2890,7 @@ name|MAX_VALUE
 argument_list|,
 name|Math
 operator|::
-name|max
+name|min
 argument_list|)
 expr_stmt|;
 block|}
