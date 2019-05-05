@@ -11040,15 +11040,6 @@ literal|"ename format json encoding utf32\n"
 operator|+
 literal|"from emp"
 decl_stmt|;
-name|System
-operator|.
-name|out
-operator|.
-name|println
-argument_list|(
-name|sql
-argument_list|)
-expr_stmt|;
 name|sql
 argument_list|(
 name|sql
