@@ -489,6 +489,22 @@ name|sql
 operator|.
 name|test
 operator|.
+name|DocumentationTest
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|test
+operator|.
 name|SqlAdvisorTest
 import|;
 end_import
@@ -1178,6 +1194,10 @@ operator|.
 name|class
 block|,
 comment|// slow tests (above 1s)
+name|DocumentationTest
+operator|.
+name|class
+block|,
 name|UdfTest
 operator|.
 name|class

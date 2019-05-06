@@ -5770,7 +5770,7 @@ init|=
 operator|new
 name|SqlMonotonicUnaryFunction
 argument_list|(
-literal|"IN_FENNEL"
+literal|"$IN_FENNEL"
 argument_list|,
 name|SqlKind
 operator|.

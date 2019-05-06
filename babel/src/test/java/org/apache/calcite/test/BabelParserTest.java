@@ -210,15 +210,6 @@ name|FACTORY
 return|;
 block|}
 annotation|@
-name|Override
-specifier|public
-name|void
-name|testGenerateKeyWords
-parameter_list|()
-block|{
-comment|// by design, method only works in base class; no-ops in this sub-class
-block|}
-annotation|@
 name|Test
 specifier|public
 name|void
