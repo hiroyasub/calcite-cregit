@@ -1462,6 +1462,63 @@ literal|"cat1=null; EXPR$1=1"
 argument_list|)
 expr_stmt|;
 block|}
+comment|/**    * {@code select max(cast(_MAP['foo'] as integer)) from tbl}    */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|aggregationWithCast
+parameter_list|()
+block|{
+name|CalciteAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|newConnectionFactory
+argument_list|()
+argument_list|)
+operator|.
+name|query
+argument_list|(
+name|String
+operator|.
+name|format
+argument_list|(
+name|Locale
+operator|.
+name|ROOT
+argument_list|,
+literal|"select max(cast(_MAP['val1'] as integer)) as v1, "
+operator|+
+literal|"min(cast(_MAP['val2'] as integer)) as v2 from elastic.%s"
+argument_list|,
+name|NAME
+argument_list|)
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|ElasticsearchChecker
+operator|.
+name|elasticsearchChecker
+argument_list|(
+literal|"_source:false, size:0"
+argument_list|,
+literal|"aggregations:{'v1.max.field': 'val1'"
+argument_list|,
+literal|"'v2.min.field': 'val2'}"
+argument_list|)
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"v1=7; v2=5"
+argument_list|)
+expr_stmt|;
+block|}
 block|}
 end_class
 
