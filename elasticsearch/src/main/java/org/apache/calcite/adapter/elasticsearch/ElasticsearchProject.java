@@ -431,6 +431,7 @@ name|ArrayList
 argument_list|<>
 argument_list|()
 decl_stmt|;
+comment|// registers wherever "select *" is present
 name|boolean
 name|hasSelectStar
 init|=
@@ -471,6 +472,16 @@ argument_list|(
 name|translator
 argument_list|)
 decl_stmt|;
+comment|// "select *" present ?
+name|hasSelectStar
+operator||=
+name|ElasticsearchConstants
+operator|.
+name|isSelectAll
+argument_list|(
+name|name
+argument_list|)
+expr_stmt|;
 if|if
 condition|(
 name|ElasticsearchRules
@@ -489,25 +500,18 @@ name|addExpressionItemMapping
 argument_list|(
 name|name
 argument_list|,
-name|ElasticsearchRules
+name|expr
+argument_list|)
+expr_stmt|;
+name|fields
 operator|.
-name|stripQuotes
+name|add
 argument_list|(
 name|expr
 argument_list|)
-argument_list|)
 expr_stmt|;
 block|}
-name|hasSelectStar
-operator||=
-name|ElasticsearchConstants
-operator|.
-name|isSelectAll
-argument_list|(
-name|name
-argument_list|)
-expr_stmt|;
-if|if
+if|else if
 condition|(
 name|expr
 operator|.
@@ -612,6 +616,7 @@ comment|// means select * from elastic
 comment|// this does not yet cover select *, _MAP['foo'], _MAP['bar'][0] from elastic
 return|return;
 block|}
+specifier|final
 name|StringBuilder
 name|query
 init|=
@@ -637,6 +642,22 @@ name|fields
 operator|.
 name|stream
 argument_list|()
+comment|// _id field is available implicitly
+operator|.
+name|filter
+argument_list|(
+name|f
+lambda|->
+operator|!
+name|ElasticsearchConstants
+operator|.
+name|ID
+operator|.
+name|equals
+argument_list|(
+name|f
+argument_list|)
+argument_list|)
 operator|.
 name|map
 argument_list|(

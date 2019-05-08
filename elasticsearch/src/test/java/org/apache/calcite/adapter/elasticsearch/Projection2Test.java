@@ -99,6 +99,20 @@ name|apache
 operator|.
 name|calcite
 operator|.
+name|test
+operator|.
+name|ElasticsearchChecker
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
 name|util
 operator|.
 name|TestUtil
@@ -976,6 +990,66 @@ argument_list|(
 name|regexMatch
 argument_list|(
 literal|"_MAP={a=1, b={a=2, b=3, c={a=foo}}}; EXPR$1=\\p{Graph}+"
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+comment|/**    * Avoid using scripting for simple projections    *    *<p> When projecting simple fields (without expression) no    *<a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/modules-scripting.html">scripting</a>    * should be used just    *<a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-source-filtering.html">_source</a>    */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|simpleProjectionNoScripting
+parameter_list|()
+block|{
+name|CalciteAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|newConnectionFactory
+argument_list|()
+argument_list|)
+operator|.
+name|query
+argument_list|(
+name|String
+operator|.
+name|format
+argument_list|(
+name|Locale
+operator|.
+name|ROOT
+argument_list|,
+literal|"select _MAP['_id'], _MAP['a'], _MAP['b.a'] from "
+operator|+
+literal|" \"elastic\".\"%s\" where _MAP['b.a'] = 2"
+argument_list|,
+name|NAME
+argument_list|)
+argument_list|)
+operator|.
+name|queryContains
+argument_list|(
+name|ElasticsearchChecker
+operator|.
+name|elasticsearchChecker
+argument_list|(
+literal|"'query.constant_score.filter.term.b.a':2"
+argument_list|,
+literal|"_source:['a', 'b.a']"
+argument_list|,
+literal|"size:5196"
+argument_list|)
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+name|regexMatch
+argument_list|(
+literal|"EXPR$0=\\p{Graph}+; EXPR$1=1; EXPR$2=2"
 argument_list|)
 argument_list|)
 expr_stmt|;
