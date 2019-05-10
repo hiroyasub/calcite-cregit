@@ -1049,6 +1049,10 @@ specifier|abstract
 class|class
 name|SqlImplementor
 block|{
+comment|// Always use quoted position, the "isQuoted" info is only used when
+comment|// unparsing a SqlIdentifier. For some rex nodes, saying RexInputRef, we have
+comment|// no idea about whether it is quoted or not for the original sql statement.
+comment|// So we just quote it.
 specifier|public
 specifier|static
 specifier|final
@@ -1057,7 +1061,7 @@ name|POS
 init|=
 name|SqlParserPos
 operator|.
-name|ZERO
+name|QUOTED_ZERO
 decl_stmt|;
 specifier|public
 specifier|final

@@ -2775,6 +2775,9 @@ name|identifier
 parameter_list|(
 name|String
 name|name
+parameter_list|,
+name|boolean
+name|quoted
 parameter_list|)
 block|{
 name|String
@@ -2782,17 +2785,14 @@ name|qName
 init|=
 name|name
 decl_stmt|;
+comment|// If configured globally or the original identifier is quoted,
+comment|// then quotes the identifier.
 if|if
 condition|(
 name|isQuoteAllIdentifiers
 argument_list|()
 operator|||
-name|dialect
-operator|.
-name|identifierNeedsToBeQuoted
-argument_list|(
-name|name
-argument_list|)
+name|quoted
 condition|)
 block|{
 name|qName

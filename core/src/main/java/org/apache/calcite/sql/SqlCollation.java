@@ -789,12 +789,6 @@ name|unparse
 parameter_list|(
 name|SqlWriter
 name|writer
-parameter_list|,
-name|int
-name|leftPrec
-parameter_list|,
-name|int
-name|rightPrec
 parameter_list|)
 block|{
 name|writer
@@ -809,6 +803,8 @@ operator|.
 name|identifier
 argument_list|(
 name|collationName
+argument_list|,
+literal|false
 argument_list|)
 expr_stmt|;
 block|}

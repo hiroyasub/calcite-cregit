@@ -4569,11 +4569,10 @@ literal|"(?s).*Encountered \"FROM\" at .*"
 argument_list|)
 expr_stmt|;
 comment|// Without the "FROM" noise word, TRIM is parsed as a regular
-comment|// function, not as a built-in. So we can parse with and without
-comment|// quoting.
+comment|// function without quoting and built-in function with quoting.
 name|checkExpType
 argument_list|(
-literal|"\"TRIM\"('b')"
+literal|"\"TRIM\"('b', 'FROM', 'a')"
 argument_list|,
 literal|"VARCHAR(1) NOT NULL"
 argument_list|)

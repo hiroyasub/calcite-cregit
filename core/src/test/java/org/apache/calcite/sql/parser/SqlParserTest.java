@@ -8584,7 +8584,7 @@ name|checkExp
 argument_list|(
 literal|"MOD(5             ,\t\f\r\n2)"
 argument_list|,
-literal|"(MOD(5, 2))"
+literal|"MOD(5, 2)"
 argument_list|)
 expr_stmt|;
 name|checkExp
@@ -8765,7 +8765,7 @@ name|checkExp
 argument_list|(
 literal|"log10(1)\r\n+power(2, mod(\r\n3\n\t\t\f\n,ln(4))*log10(5)-6*log10(7/abs(8)+9))*power(10,11)"
 argument_list|,
-literal|"(LOG10(1) + (POWER(2, (((MOD(3, LN(4))) * LOG10(5)) - (6 * LOG10(((7 / ABS(8)) + 9))))) * POWER(10, 11)))"
+literal|"(LOG10(1) + (POWER(2, ((MOD(3, LN(4)) * LOG10(5)) - (6 * LOG10(((7 / ABS(8)) + 9))))) * POWER(10, 11)))"
 argument_list|)
 expr_stmt|;
 block|}
@@ -9490,7 +9490,7 @@ argument_list|)
 operator|.
 name|ok
 argument_list|(
-literal|"SELECT `DEPTNO`, (GROUPING(`DEPTNO`))\n"
+literal|"SELECT `DEPTNO`, GROUPING(`DEPTNO`)\n"
 operator|+
 literal|"FROM `EMP`\n"
 operator|+
@@ -15746,7 +15746,7 @@ name|checkExp
 argument_list|(
 literal|"nullif(v1,v2)"
 argument_list|,
-literal|"(NULLIF(`V1`, `V2`))"
+literal|"NULLIF(`V1`, `V2`)"
 argument_list|)
 expr_stmt|;
 if|if
@@ -15777,21 +15777,21 @@ name|checkExp
 argument_list|(
 literal|"coalesce(v1)"
 argument_list|,
-literal|"(COALESCE(`V1`))"
+literal|"COALESCE(`V1`)"
 argument_list|)
 expr_stmt|;
 name|checkExp
 argument_list|(
 literal|"coalesce(v1,v2)"
 argument_list|,
-literal|"(COALESCE(`V1`, `V2`))"
+literal|"COALESCE(`V1`, `V2`)"
 argument_list|)
 expr_stmt|;
 name|checkExp
 argument_list|(
 literal|"coalesce(v1,v2,v3)"
 argument_list|,
-literal|"(COALESCE(`V1`, `V2`, `V3`))"
+literal|"COALESCE(`V1`, `V2`, `V3`)"
 argument_list|)
 expr_stmt|;
 block|}
@@ -16034,7 +16034,7 @@ name|checkExp
 argument_list|(
 literal|"CURRENT_TIME"
 argument_list|,
-literal|"`CURRENT_TIME`"
+literal|"CURRENT_TIME"
 argument_list|)
 expr_stmt|;
 name|checkExp
@@ -16058,7 +16058,7 @@ name|checkExp
 argument_list|(
 literal|"LOCALTIME"
 argument_list|,
-literal|"`LOCALTIME`"
+literal|"LOCALTIME"
 argument_list|)
 expr_stmt|;
 name|checkExp
@@ -16082,7 +16082,7 @@ name|checkExp
 argument_list|(
 literal|"LOCALTIMESTAMP"
 argument_list|,
-literal|"`LOCALTIMESTAMP`"
+literal|"LOCALTIMESTAMP"
 argument_list|)
 expr_stmt|;
 name|checkExp
@@ -16106,7 +16106,7 @@ name|checkExp
 argument_list|(
 literal|"CURRENT_DATE"
 argument_list|,
-literal|"`CURRENT_DATE`"
+literal|"CURRENT_DATE"
 argument_list|)
 expr_stmt|;
 comment|// checkFails("SELECT CURRENT_DATE(x+y) FROM foo",
@@ -16125,7 +16125,7 @@ name|checkExp
 argument_list|(
 literal|"CURRENT_TIMESTAMP"
 argument_list|,
-literal|"`CURRENT_TIMESTAMP`"
+literal|"CURRENT_TIMESTAMP"
 argument_list|)
 expr_stmt|;
 name|checkExp
@@ -16344,9 +16344,9 @@ literal|"trim (coalesce(cast(null as varchar(2)))||"
 operator|+
 literal|"' '||coalesce('junk ',''))"
 argument_list|,
-literal|"TRIM(BOTH ' ' FROM (((COALESCE(CAST(NULL AS VARCHAR(2)))) || "
+literal|"TRIM(BOTH ' ' FROM ((COALESCE(CAST(NULL AS VARCHAR(2))) || "
 operator|+
-literal|"' ') || (COALESCE('junk ', ''))))"
+literal|"' ') || COALESCE('junk ', '')))"
 argument_list|)
 expr_stmt|;
 name|checkFails
@@ -23561,12 +23561,12 @@ argument_list|()
 operator|.
 name|add
 argument_list|(
-literal|"timestampadd(%1$s, 12, %2$scurrent_timestamp%2$s)"
+literal|"timestampadd(%1$s, 12, current_timestamp)"
 argument_list|)
 operator|.
 name|add
 argument_list|(
-literal|"timestampdiff(%1$s, %2$scurrent_timestamp%2$s, %2$scurrent_timestamp%2$s)"
+literal|"timestampdiff(%1$s, current_timestamp, current_timestamp)"
 argument_list|)
 operator|.
 name|build

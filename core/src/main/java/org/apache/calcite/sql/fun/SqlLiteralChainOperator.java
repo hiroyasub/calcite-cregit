@@ -1048,10 +1048,6 @@ operator|.
 name|unparse
 argument_list|(
 name|writer
-argument_list|,
-literal|0
-argument_list|,
-literal|0
 argument_list|)
 expr_stmt|;
 block|}

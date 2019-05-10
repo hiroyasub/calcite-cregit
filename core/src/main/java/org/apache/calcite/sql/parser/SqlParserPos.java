@@ -162,6 +162,25 @@ argument_list|,
 literal|0
 argument_list|)
 decl_stmt|;
+comment|/** Same as {@link #ZERO} but always quoted. **/
+specifier|public
+specifier|static
+specifier|final
+name|SqlParserPos
+name|QUOTED_ZERO
+init|=
+operator|new
+name|QuotedParserPos
+argument_list|(
+literal|0
+argument_list|,
+literal|0
+argument_list|,
+literal|0
+argument_list|,
+literal|0
+argument_list|)
+decl_stmt|;
 specifier|private
 specifier|static
 specifier|final

@@ -407,18 +407,6 @@ end_import
 
 begin_import
 import|import
-name|java
-operator|.
-name|util
-operator|.
-name|regex
-operator|.
-name|Pattern
-import|;
-end_import
-
-begin_import
-import|import
 name|javax
 operator|.
 name|annotation
@@ -1691,33 +1679,6 @@ expr_stmt|;
 block|}
 return|return
 name|buf
-return|;
-block|}
-comment|/**    * Returns whether a given identifier needs to be quoted.    */
-specifier|public
-name|boolean
-name|identifierNeedsToBeQuoted
-parameter_list|(
-name|String
-name|val
-parameter_list|)
-block|{
-return|return
-operator|!
-name|Pattern
-operator|.
-name|compile
-argument_list|(
-literal|"^[A-Z_$0-9]+"
-argument_list|)
-operator|.
-name|matcher
-argument_list|(
-name|val
-argument_list|)
-operator|.
-name|matches
-argument_list|()
 return|;
 block|}
 comment|/**    * Converts a string into a string literal. For example,<code>can't    * run</code> becomes<code>'can''t run'</code>.    */
