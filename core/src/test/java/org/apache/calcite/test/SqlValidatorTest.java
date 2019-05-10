@@ -34268,6 +34268,42 @@ argument_list|(
 name|error
 argument_list|)
 expr_stmt|;
+name|sql
+argument_list|(
+literal|"with emp_r as (select 1 as slackingmin) select slackingmin from emp_r"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"with emp_r as (select ^slackingmin^ from emp_r) select slackingmin from emp_r"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+name|error
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"with emp_r1 as (select 1 as slackingmin) select emp_r1.slackingmin from emp_r, emp_r1"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"with emp_r1 as (select 1 as slackingmin) select ^emp_r.slackingmin^ from emp_r, emp_r1"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+name|error
+argument_list|)
+expr_stmt|;
 block|}
 annotation|@
 name|Test
