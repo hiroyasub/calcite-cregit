@@ -9502,6 +9502,30 @@ block|}
 block|}
 return|;
 block|}
+comment|/** Returns a map which ignores any write operation. */
+specifier|public
+specifier|static
+parameter_list|<
+name|K
+parameter_list|,
+name|V
+parameter_list|>
+name|Map
+argument_list|<
+name|K
+argument_list|,
+name|V
+argument_list|>
+name|blackholeMap
+parameter_list|()
+block|{
+return|return
+name|BlackholeMap
+operator|.
+name|of
+argument_list|()
+return|;
+block|}
 comment|//~ Inner Classes ----------------------------------------------------------
 comment|/**    * Exception used to interrupt a tree walk of any kind.    */
 specifier|public
