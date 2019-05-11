@@ -26754,6 +26754,10 @@ literal|"IN left\n"
 operator|+
 literal|"LIKE -\n"
 operator|+
+literal|"NEGATED POSIX REGEX CASE INSENSITIVE left\n"
+operator|+
+literal|"NEGATED POSIX REGEX CASE SENSITIVE left\n"
+operator|+
 literal|"NOT BETWEEN ASYMMETRIC -\n"
 operator|+
 literal|"NOT BETWEEN SYMMETRIC -\n"
@@ -26763,6 +26767,10 @@ operator|+
 literal|"NOT LIKE -\n"
 operator|+
 literal|"NOT SIMILAR TO -\n"
+operator|+
+literal|"POSIX REGEX CASE INSENSITIVE left\n"
+operator|+
+literal|"POSIX REGEX CASE SENSITIVE left\n"
 operator|+
 literal|"SIMILAR TO -\n"
 operator|+

@@ -294,6 +294,12 @@ block|,
 comment|/**    * The "SIMILAR" operator.    */
 name|SIMILAR
 block|,
+comment|/**    * The "~" operator.    */
+name|POSIX_REGEX_CASE_SENSITIVE
+block|,
+comment|/**    * The "~*" operator.    */
+name|POSIX_REGEX_CASE_INSENSITIVE
+block|,
 comment|/**    * The "BETWEEN" operator.    */
 name|BETWEEN
 block|,
