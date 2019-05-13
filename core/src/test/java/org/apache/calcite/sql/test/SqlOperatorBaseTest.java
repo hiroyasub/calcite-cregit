@@ -7491,6 +7491,17 @@ literal|""
 argument_list|)
 expr_stmt|;
 block|}
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"{fn REVERSE('abc')}"
+argument_list|,
+literal|"cba"
+argument_list|,
+literal|"VARCHAR(3) NOT NULL"
+argument_list|)
+expr_stmt|;
 comment|// REVIEW: is this result correct? I think it should be "abcCdef"
 name|tester
 operator|.
@@ -18633,6 +18644,107 @@ operator|.
 name|checkNull
 argument_list|(
 literal|"DIFFERENCE(cast(null as varchar(1)), 'muller')"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testReverseFunc
+parameter_list|()
+block|{
+specifier|final
+name|SqlTester
+name|testerMysql
+init|=
+name|tester
+argument_list|(
+name|SqlLibrary
+operator|.
+name|MYSQL
+argument_list|)
+decl_stmt|;
+name|testerMysql
+operator|.
+name|setFor
+argument_list|(
+name|SqlLibraryOperators
+operator|.
+name|REVERSE
+argument_list|)
+expr_stmt|;
+name|testerMysql
+operator|.
+name|checkString
+argument_list|(
+literal|"reverse('')"
+argument_list|,
+literal|""
+argument_list|,
+literal|"VARCHAR(0) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|testerMysql
+operator|.
+name|checkString
+argument_list|(
+literal|"reverse('123')"
+argument_list|,
+literal|"321"
+argument_list|,
+literal|"VARCHAR(3) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|testerMysql
+operator|.
+name|checkString
+argument_list|(
+literal|"reverse('abc')"
+argument_list|,
+literal|"cba"
+argument_list|,
+literal|"VARCHAR(3) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|testerMysql
+operator|.
+name|checkString
+argument_list|(
+literal|"reverse('ABC')"
+argument_list|,
+literal|"CBA"
+argument_list|,
+literal|"VARCHAR(3) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|testerMysql
+operator|.
+name|checkString
+argument_list|(
+literal|"reverse('Hello World')"
+argument_list|,
+literal|"dlroW olleH"
+argument_list|,
+literal|"VARCHAR(11) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|testerMysql
+operator|.
+name|checkString
+argument_list|(
+literal|"reverse(_UTF8'\u4F60\u597D')"
+argument_list|,
+literal|"å¥½ä½ "
+argument_list|,
+literal|"VARCHAR(2) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|testerMysql
+operator|.
+name|checkNull
+argument_list|(
+literal|"reverse(cast(null as varchar(1)))"
 argument_list|)
 expr_stmt|;
 block|}

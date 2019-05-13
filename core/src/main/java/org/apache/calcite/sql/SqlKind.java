@@ -473,6 +473,9 @@ block|,
 comment|/**    * The "EXTRACT" function.    */
 name|EXTRACT
 block|,
+comment|/**    * The "REVERSE" function (SQL Server, MySQL).    */
+name|REVERSE
+block|,
 comment|/**    * Call to a function using JDBC function syntax.    */
 name|JDBC_FN
 block|,
@@ -1145,7 +1148,7 @@ argument_list|,
 name|DDL
 argument_list|)
 decl_stmt|;
-comment|/**    * Category consisting of regular and special functions.    *    *<p>Consists of regular functions {@link #OTHER_FUNCTION} and special    * functions {@link #ROW}, {@link #TRIM}, {@link #CAST}, {@link #JDBC_FN}.    */
+comment|/**    * Category consisting of regular and special functions.    *    *<p>Consists of regular functions {@link #OTHER_FUNCTION} and special    * functions {@link #ROW}, {@link #TRIM}, {@link #CAST}, {@link #REVERSE}, {@link #JDBC_FN}.    */
 specifier|public
 specifier|static
 specifier|final
@@ -1170,6 +1173,8 @@ argument_list|,
 name|RTRIM
 argument_list|,
 name|CAST
+argument_list|,
+name|REVERSE
 argument_list|,
 name|JDBC_FN
 argument_list|,

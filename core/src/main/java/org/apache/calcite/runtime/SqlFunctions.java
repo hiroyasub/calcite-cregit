@@ -1403,6 +1403,36 @@ name|toString
 argument_list|()
 return|;
 block|}
+comment|/** SQL REVERSE(string) function. */
+specifier|public
+specifier|static
+name|String
+name|reverse
+parameter_list|(
+name|String
+name|s
+parameter_list|)
+block|{
+specifier|final
+name|StringBuilder
+name|buf
+init|=
+operator|new
+name|StringBuilder
+argument_list|(
+name|s
+argument_list|)
+decl_stmt|;
+return|return
+name|buf
+operator|.
+name|reverse
+argument_list|()
+operator|.
+name|toString
+argument_list|()
+return|;
+block|}
 comment|/** SQL ASCII(string) function. */
 specifier|public
 specifier|static
