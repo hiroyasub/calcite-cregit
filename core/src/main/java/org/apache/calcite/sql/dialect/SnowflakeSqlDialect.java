@@ -48,13 +48,13 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * A<code>SqlDialect</code> implementation for the Vertica database.  */
+comment|/**  * A<code>SqlDialect</code> implementation for the Snowflake database.  */
 end_comment
 
 begin_class
 specifier|public
 class|class
-name|VerticaSqlDialect
+name|SnowflakeSqlDialect
 extends|extends
 name|SqlDialect
 block|{
@@ -65,7 +65,7 @@ name|SqlDialect
 name|DEFAULT
 init|=
 operator|new
-name|VerticaSqlDialect
+name|SnowflakeSqlDialect
 argument_list|(
 name|EMPTY_CONTEXT
 operator|.
@@ -73,7 +73,7 @@ name|withDatabaseProduct
 argument_list|(
 name|DatabaseProduct
 operator|.
-name|VERTICA
+name|SNOWFLAKE
 argument_list|)
 operator|.
 name|withIdentifierQuoteString
@@ -85,13 +85,13 @@ name|withUnquotedCasing
 argument_list|(
 name|Casing
 operator|.
-name|UNCHANGED
+name|TO_UPPER
 argument_list|)
 argument_list|)
 decl_stmt|;
-comment|/** Creates a VerticaSqlDialect. */
+comment|/** Creates a SnowflakeSqlDialect. */
 specifier|public
-name|VerticaSqlDialect
+name|SnowflakeSqlDialect
 parameter_list|(
 name|Context
 name|context
@@ -103,22 +103,11 @@ name|context
 argument_list|)
 expr_stmt|;
 block|}
-annotation|@
-name|Override
-specifier|public
-name|boolean
-name|supportsNestedAggregations
-parameter_list|()
-block|{
-return|return
-literal|false
-return|;
-block|}
 block|}
 end_class
 
 begin_comment
-comment|// End VerticaSqlDialect.java
+comment|// End SnowflakeSqlDialect.java
 end_comment
 
 end_unit
