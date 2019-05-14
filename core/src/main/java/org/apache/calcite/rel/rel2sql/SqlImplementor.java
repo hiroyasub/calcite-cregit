@@ -3484,7 +3484,7 @@ operator|.
 name|class
 argument_list|)
 operator|.
-name|toString
+name|toPlainString
 argument_list|()
 argument_list|,
 name|POS
@@ -3507,7 +3507,7 @@ operator|.
 name|class
 argument_list|)
 operator|.
-name|toString
+name|toPlainString
 argument_list|()
 argument_list|,
 name|POS

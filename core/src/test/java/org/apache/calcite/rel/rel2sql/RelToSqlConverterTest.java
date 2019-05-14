@@ -2000,6 +2000,40 @@ name|expected
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testCastDecimal1
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|query
+init|=
+literal|"select -0.0000000123\n"
+operator|+
+literal|" from \"expense_fact\""
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT -1.23E-8\n"
+operator|+
+literal|"FROM \"foodmart\".\"expense_fact\""
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2713">[CALCITE-2713]    * JDBC adapter may generate casts on PostgreSQL for VARCHAR type exceeding    * max length</a>. */
 annotation|@
 name|Test
