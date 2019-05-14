@@ -1012,16 +1012,6 @@ name|join
 operator|.
 name|getJoinType
 argument_list|()
-operator|!=
-name|JoinRelType
-operator|.
-name|FULL
-operator|&&
-operator|(
-name|join
-operator|.
-name|getJoinType
-argument_list|()
 operator|==
 name|JoinRelType
 operator|.
@@ -1034,7 +1024,6 @@ argument_list|()
 operator|.
 name|isEmpty
 argument_list|()
-operator|)
 return|;
 block|}
 specifier|public
@@ -2354,6 +2343,15 @@ decl_stmt|;
 if|if
 condition|(
 name|allColumnsInAggregate
+operator|&&
+name|join
+operator|.
+name|getJoinType
+argument_list|()
+operator|!=
+name|JoinRelType
+operator|.
+name|FULL
 condition|)
 block|{
 comment|// let's see if we can convert aggregate into projects

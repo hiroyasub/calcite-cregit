@@ -17261,11 +17261,6 @@ end_comment
 
 begin_function
 annotation|@
-name|Ignore
-argument_list|(
-literal|"[CALCITE-3012]"
-argument_list|)
-annotation|@
 name|Test
 specifier|public
 name|void
@@ -17343,11 +17338,6 @@ comment|/** Test case for    * full outer join, group by on key same as join key
 end_comment
 
 begin_function
-annotation|@
-name|Ignore
-argument_list|(
-literal|"[CALCITE-3012]"
-argument_list|)
 annotation|@
 name|Test
 specifier|public
@@ -17427,11 +17417,6 @@ end_comment
 
 begin_function
 annotation|@
-name|Ignore
-argument_list|(
-literal|"[CALCITE-3012]"
-argument_list|)
-annotation|@
 name|Test
 specifier|public
 name|void
@@ -17509,11 +17494,6 @@ comment|/** Test case for    * full outer join, group by key is susbset of join 
 end_comment
 
 begin_function
-annotation|@
-name|Ignore
-argument_list|(
-literal|"[CALCITE-3012]"
-argument_list|)
 annotation|@
 name|Test
 specifier|public
