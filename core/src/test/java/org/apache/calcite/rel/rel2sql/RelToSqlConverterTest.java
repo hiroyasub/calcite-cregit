@@ -11738,6 +11738,154 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testSubstringInSpark
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|query
+init|=
+literal|"select substring(\"brand_name\" from 2) "
+operator|+
+literal|"from \"product\"\n"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT SUBSTRING(brand_name, 2)\n"
+operator|+
+literal|"FROM foodmart.product"
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|withSpark
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSubstringWithForInSpark
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|query
+init|=
+literal|"select substring(\"brand_name\" from 2 for 3) "
+operator|+
+literal|"from \"product\"\n"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT SUBSTRING(brand_name, 2, 3)\n"
+operator|+
+literal|"FROM foodmart.product"
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|withSpark
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testFloorInSpark
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|query
+init|=
+literal|"select floor(\"hire_date\" TO MINUTE) "
+operator|+
+literal|"from \"employee\""
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT DATE_TRUNC('MINUTE', hire_date)\n"
+operator|+
+literal|"FROM foodmart.employee"
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|withSpark
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testNumericFloorInSpark
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|query
+init|=
+literal|"select floor(\"salary\") "
+operator|+
+literal|"from \"employee\""
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT FLOOR(salary)\n"
+operator|+
+literal|"FROM foodmart.employee"
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|withSpark
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testJsonType
 parameter_list|()
 block|{
