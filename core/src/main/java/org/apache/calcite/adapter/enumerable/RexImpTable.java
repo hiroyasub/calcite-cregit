@@ -1181,6 +1181,24 @@ name|fun
 operator|.
 name|SqlLibraryOperators
 operator|.
+name|JSON_REMOVE
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|fun
+operator|.
+name|SqlLibraryOperators
+operator|.
 name|JSON_TYPE
 import|;
 end_import
@@ -2550,24 +2568,6 @@ operator|.
 name|SqlStdOperatorTable
 operator|.
 name|JSON_QUERY
-import|;
-end_import
-
-begin_import
-import|import static
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|sql
-operator|.
-name|fun
-operator|.
-name|SqlStdOperatorTable
-operator|.
-name|JSON_REMOVE
 import|;
 end_import
 
