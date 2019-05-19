@@ -119,7 +119,7 @@ name|BeginGroup
 name|group
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**    * Creates a new HepProgramBuilder with an initially empty program. The    * program under construction has an initial match order of    * {@link HepMatchOrder#ARBITRARY}, and an initial match limit of    * {@link HepProgram#MATCH_UNTIL_FIXPOINT}.    */
+comment|/**    * Creates a new HepProgramBuilder with an initially empty program. The    * program under construction has an initial match order of    * {@link HepMatchOrder#DEPTH_FIRST}, and an initial match limit of    * {@link HepProgram#MATCH_UNTIL_FIXPOINT}.    */
 specifier|public
 name|HepProgramBuilder
 parameter_list|()

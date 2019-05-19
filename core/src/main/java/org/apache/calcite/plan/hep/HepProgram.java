@@ -82,7 +82,7 @@ name|EndGroup
 name|group
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**    * Creates a new empty HepProgram. The program has an initial match order of    * {@link org.apache.calcite.plan.hep.HepMatchOrder#ARBITRARY}, and an initial    * match limit of {@link #MATCH_UNTIL_FIXPOINT}.    */
+comment|/**    * Creates a new empty HepProgram. The program has an initial match order of    * {@link org.apache.calcite.plan.hep.HepMatchOrder#DEPTH_FIRST}, and an initial    * match limit of {@link #MATCH_UNTIL_FIXPOINT}.    */
 name|HepProgram
 parameter_list|(
 name|List

@@ -1167,6 +1167,15 @@ name|subprogramBuilder
 operator|.
 name|addRuleInstance
 argument_list|(
+name|FilterToCalcRule
+operator|.
+name|INSTANCE
+argument_list|)
+expr_stmt|;
+name|subprogramBuilder
+operator|.
+name|addRuleInstance
+argument_list|(
 name|CalcMergeRule
 operator|.
 name|INSTANCE
@@ -1197,7 +1206,7 @@ operator|.
 name|build
 argument_list|()
 argument_list|,
-literal|"select upper(ename) from (select lower(ename) as ename from emp)"
+literal|"select upper(ename) from (select lower(ename) as ename from emp where empno = 100)"
 argument_list|)
 expr_stmt|;
 block|}
