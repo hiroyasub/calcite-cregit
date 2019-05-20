@@ -18819,6 +18819,96 @@ block|}
 end_function
 
 begin_comment
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3076">[CALCITE-3076]    * AggregateJoinTransposeRule throws error for unique under aggregate keys when    * generating merged calls</a>.*/
+end_comment
+
+begin_function
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testPushAggregateThroughJoinOnEmptyLogicalValues
+parameter_list|()
+block|{
+specifier|final
+name|HepProgram
+name|preProgram
+init|=
+operator|new
+name|HepProgramBuilder
+argument_list|()
+operator|.
+name|addRuleInstance
+argument_list|(
+name|AggregateProjectMergeRule
+operator|.
+name|INSTANCE
+argument_list|)
+operator|.
+name|addRuleInstance
+argument_list|(
+name|ReduceExpressionsRule
+operator|.
+name|FilterReduceExpressionsRule
+operator|.
+name|FILTER_INSTANCE
+argument_list|)
+operator|.
+name|build
+argument_list|()
+decl_stmt|;
+specifier|final
+name|HepProgram
+name|program
+init|=
+operator|new
+name|HepProgramBuilder
+argument_list|()
+operator|.
+name|addRuleInstance
+argument_list|(
+name|AggregateJoinTransposeRule
+operator|.
+name|EXTENDED
+argument_list|)
+operator|.
+name|build
+argument_list|()
+decl_stmt|;
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select count(*) volume, sum(C1.sal) C1_sum_sal "
+operator|+
+literal|"from (select sal, ename from sales.emp where 1=2) C1 "
+operator|+
+literal|"inner join (select ename from sales.emp) C2   "
+operator|+
+literal|"on C1.ename = C2.ename "
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|withPre
+argument_list|(
+name|preProgram
+argument_list|)
+operator|.
+name|with
+argument_list|(
+name|program
+argument_list|)
+operator|.
+name|check
+argument_list|()
+expr_stmt|;
+block|}
+end_function
+
+begin_comment
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2249">[CALCITE-2249]    * AggregateJoinTransposeRule generates inequivalent nodes if Aggregate relNode contains    * distinct aggregate function.</a>. */
 end_comment
 
