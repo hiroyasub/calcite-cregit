@@ -381,7 +381,7 @@ name|Pattern
 operator|.
 name|compile
 argument_list|(
-literal|"<response>\\s*<sessionKey>([0-9a-f]+)</sessionKey>\\s*</response>"
+literal|"<sessionKey>([0-9a-zA-Z^_]+)</sessionKey>"
 argument_list|)
 decl_stmt|;
 specifier|final
