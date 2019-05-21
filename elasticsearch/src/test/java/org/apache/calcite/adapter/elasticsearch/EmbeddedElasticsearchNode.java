@@ -251,6 +251,18 @@ name|Objects
 import|;
 end_import
 
+begin_import
+import|import static
+name|java
+operator|.
+name|util
+operator|.
+name|Collections
+operator|.
+name|emptyMap
+import|;
+end_import
+
 begin_comment
 comment|/**  * Represents a single elastic search node which can run embedded in a java application.  *  *<p>Intended for unit and integration tests. Settings and plugins are crafted for Calcite.  */
 end_comment
@@ -716,10 +728,19 @@ name|prepareEnvironment
 argument_list|(
 name|settings
 argument_list|,
+name|emptyMap
+argument_list|()
+argument_list|,
 literal|null
+argument_list|,
+parameter_list|()
+lambda|->
+literal|"default_node_name"
 argument_list|)
 argument_list|,
 name|classpathPlugins
+argument_list|,
+literal|false
 argument_list|)
 expr_stmt|;
 block|}

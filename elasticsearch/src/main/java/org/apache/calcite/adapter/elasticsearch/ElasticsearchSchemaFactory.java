@@ -343,17 +343,6 @@ argument_list|(
 literal|"index"
 argument_list|)
 decl_stmt|;
-name|Preconditions
-operator|.
-name|checkState
-argument_list|(
-name|index
-operator|!=
-literal|null
-argument_list|,
-literal|"'index' is missing in configuration"
-argument_list|)
-expr_stmt|;
 return|return
 operator|new
 name|ElasticsearchSchema

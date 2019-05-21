@@ -2171,6 +2171,8 @@ argument_list|(
 literal|"'_source':false"
 argument_list|,
 literal|"size:0"
+argument_list|,
+literal|"track_total_hits:true"
 argument_list|)
 argument_list|)
 operator|.
@@ -2210,6 +2212,8 @@ argument_list|(
 literal|"'_source':false"
 argument_list|,
 literal|"size:0"
+argument_list|,
+literal|"track_total_hits:true"
 argument_list|)
 argument_list|)
 operator|.
@@ -2235,6 +2239,8 @@ argument_list|(
 literal|"'_source':false"
 argument_list|,
 literal|"size:0"
+argument_list|,
+literal|"track_total_hits:true"
 argument_list|,
 literal|"aggregations:{'EXPR$0':{min:{field:'pop'}},'EXPR$1':{max:"
 operator|+

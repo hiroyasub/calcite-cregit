@@ -166,7 +166,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Stores Elasticsearch  *<a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping.html">  * mapping</a> information for particular index/type. This information is  * extracted from {@code /$index/$type/_mapping} endpoint.  *  *<p>Instances of this class are immutable.  */
+comment|/**  * Stores Elasticsearch  *<a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping.html">  * mapping</a> information for particular index. This information is  * extracted from {@code /$index/_mapping} endpoint.  *  *<p>Instances of this class are immutable.  */
 end_comment
 
 begin_class
@@ -177,11 +177,6 @@ specifier|private
 specifier|final
 name|String
 name|index
-decl_stmt|;
-specifier|private
-specifier|final
-name|String
-name|type
 decl_stmt|;
 specifier|private
 specifier|final
@@ -198,10 +193,6 @@ parameter_list|(
 specifier|final
 name|String
 name|index
-parameter_list|,
-specifier|final
-name|String
-name|type
 parameter_list|,
 specifier|final
 name|Map
@@ -224,19 +215,6 @@ argument_list|(
 name|index
 argument_list|,
 literal|"index"
-argument_list|)
-expr_stmt|;
-name|this
-operator|.
-name|type
-operator|=
-name|Objects
-operator|.
-name|requireNonNull
-argument_list|(
-name|type
-argument_list|,
-literal|"type"
 argument_list|)
 expr_stmt|;
 name|Objects
@@ -353,13 +331,11 @@ name|Locale
 operator|.
 name|ROOT
 argument_list|,
-literal|"Field %s not defined for %s/%s"
+literal|"Field %s not defined for %s"
 argument_list|,
 name|fieldName
 argument_list|,
 name|index
-argument_list|,
-name|type
 argument_list|)
 decl_stmt|;
 throw|throw
@@ -391,16 +367,6 @@ return|return
 name|this
 operator|.
 name|index
-return|;
-block|}
-name|String
-name|type
-parameter_list|()
-block|{
-return|return
-name|this
-operator|.
-name|type
 return|;
 block|}
 comment|/**    * Represents elastic data-type, like {@code long}, {@code keyword},    * {@code date} etc.    *    * @see<a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping-types.html">Mapping Types</a>    */

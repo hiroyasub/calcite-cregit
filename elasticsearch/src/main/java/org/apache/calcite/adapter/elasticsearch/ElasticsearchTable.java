@@ -508,7 +508,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Table based on an Elasticsearch type.  */
+comment|/**  * Table based on an Elasticsearch index.  */
 end_comment
 
 begin_class
@@ -553,11 +553,6 @@ specifier|private
 specifier|final
 name|String
 name|indexName
-decl_stmt|;
-specifier|private
-specifier|final
-name|String
-name|typeName
 decl_stmt|;
 specifier|final
 name|ObjectMapper
@@ -613,14 +608,6 @@ name|indexName
 expr_stmt|;
 name|this
 operator|.
-name|typeName
-operator|=
-name|transport
-operator|.
-name|typeName
-expr_stmt|;
-name|this
-operator|.
 name|mapper
 operator|=
 name|transport
@@ -651,7 +638,7 @@ operator|.
 name|SOURCE_PAINLESS
 return|;
 block|}
-comment|/**    * Executes a "find" operation on the underlying type.    *    *<p>For example,    *<code>client.prepareSearch(index).setTypes(type)    * .setSource("{\"fields\" : [\"state\"]}")</code></p>    *    * @param ops List of operations represented as Json strings.    * @param fields List of fields to project; or null to return map    * @param sort list of fields to sort and their direction (asc/desc)    * @param aggregations aggregation functions    * @return Enumerator of results    */
+comment|/**    * Executes a "find" operation on the underlying index.    *    * @param ops List of operations represented as Json strings.    * @param fields List of fields to project; or null to return map    * @param sort list of fields to sort and their direction (asc/desc)    * @param aggregations aggregation functions    * @return Enumerator of results    */
 specifier|private
 name|Enumerable
 argument_list|<
@@ -1630,6 +1617,38 @@ argument_list|(
 name|query
 argument_list|)
 expr_stmt|;
+comment|// This must be set to true or else in 7.X and 6/7 mixed clusters
+comment|// will return lower bounded count values instead of an accurate count.
+if|if
+condition|(
+name|groupBy
+operator|.
+name|isEmpty
+argument_list|()
+operator|&&
+name|version
+operator|.
+name|elasticVersionMajor
+argument_list|()
+operator|>=
+name|ElasticsearchVersion
+operator|.
+name|ES6
+operator|.
+name|elasticVersionMajor
+argument_list|()
+condition|)
+block|{
+name|query
+operator|.
+name|put
+argument_list|(
+literal|"track_total_hits"
+argument_list|,
+literal|true
+argument_list|)
+expr_stmt|;
+block|}
 name|ElasticsearchJson
 operator|.
 name|Result
@@ -1775,6 +1794,9 @@ argument_list|()
 operator|.
 name|total
 argument_list|()
+operator|.
+name|value
+argument_list|()
 decl_stmt|;
 if|if
 condition|(
@@ -1846,7 +1868,13 @@ name|ElasticsearchJson
 operator|.
 name|SearchHits
 argument_list|(
+name|res
+operator|.
+name|searchHits
+argument_list|()
+operator|.
 name|total
+argument_list|()
 argument_list|,
 name|result
 operator|.
@@ -1968,10 +1996,6 @@ return|return
 literal|"ElasticsearchTable{"
 operator|+
 name|indexName
-operator|+
-literal|"/"
-operator|+
-name|typeName
 operator|+
 literal|"}"
 return|;

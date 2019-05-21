@@ -681,7 +681,7 @@ name|ElasticsearchChecker
 operator|.
 name|elasticsearchChecker
 argument_list|(
-literal|"_source:false, size:0"
+literal|"_source:false, size:0, track_total_hits:true"
 argument_list|)
 argument_list|)
 operator|.
@@ -762,7 +762,7 @@ name|ElasticsearchChecker
 operator|.
 name|elasticsearchChecker
 argument_list|(
-literal|"_source:false, size:0"
+literal|"_source:false, size:0, track_total_hits:true"
 argument_list|,
 literal|"aggregations:{'EXPR$0.value_count.field': '_id'"
 argument_list|,
@@ -799,7 +799,7 @@ name|ElasticsearchChecker
 operator|.
 name|elasticsearchChecker
 argument_list|(
-literal|"_source:false, size:0"
+literal|"_source:false, size:0, track_total_hits:true"
 argument_list|,
 literal|"aggregations:{'EXPR$0.min.field': 'val1'"
 argument_list|,
@@ -1505,7 +1505,7 @@ name|ElasticsearchChecker
 operator|.
 name|elasticsearchChecker
 argument_list|(
-literal|"_source:false, size:0"
+literal|"_source:false, size:0, track_total_hits:true"
 argument_list|,
 literal|"aggregations:{'v1.max.field': 'val1'"
 argument_list|,
