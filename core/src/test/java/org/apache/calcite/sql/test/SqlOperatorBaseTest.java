@@ -7429,23 +7429,35 @@ literal|"DECIMAL(4, 2) NOT NULL"
 argument_list|)
 expr_stmt|;
 comment|// String Functions
-if|if
-condition|(
-literal|false
-condition|)
-block|{
 name|tester
 operator|.
 name|checkScalar
 argument_list|(
-literal|"{fn ASCII(string)}"
+literal|"{fn ASCII('a')}"
 argument_list|,
-literal|null
+literal|97
 argument_list|,
-literal|""
+literal|"INTEGER NOT NULL"
 argument_list|)
 expr_stmt|;
-block|}
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"{fn ASCII('ABC')}"
+argument_list|,
+literal|"65"
+argument_list|,
+literal|"INTEGER NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkNull
+argument_list|(
+literal|"{fn ASCII(cast(null as varchar(1)))}"
+argument_list|)
+expr_stmt|;
 if|if
 condition|(
 literal|false
@@ -7474,23 +7486,24 @@ argument_list|,
 literal|"CHAR(6) NOT NULL"
 argument_list|)
 expr_stmt|;
-if|if
-condition|(
-literal|false
-condition|)
-block|{
 name|tester
 operator|.
 name|checkScalar
 argument_list|(
-literal|"{fn DIFFERENCE(string1, string2)}"
+literal|"{fn DIFFERENCE('Miller', 'miller')}"
 argument_list|,
-literal|null
+literal|"4"
 argument_list|,
-literal|""
+literal|"INTEGER NOT NULL"
 argument_list|)
 expr_stmt|;
-block|}
+name|tester
+operator|.
+name|checkNull
+argument_list|(
+literal|"{fn DIFFERENCE('muller', cast(null as varchar(1)))}"
+argument_list|)
+expr_stmt|;
 name|tester
 operator|.
 name|checkString
@@ -7500,6 +7513,13 @@ argument_list|,
 literal|"cba"
 argument_list|,
 literal|"VARCHAR(3) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkNull
+argument_list|(
+literal|"{fn REVERSE(cast(null as varchar(1)))}"
 argument_list|)
 expr_stmt|;
 comment|// REVIEW: is this result correct? I think it should be "abcCdef"
@@ -7592,23 +7612,31 @@ argument_list|,
 literal|"VARCHAR(6) NOT NULL"
 argument_list|)
 expr_stmt|;
-if|if
-condition|(
-literal|false
-condition|)
-block|{
 name|tester
 operator|.
 name|checkScalar
 argument_list|(
-literal|"{fn REPEAT(string, count)}"
-argument_list|,
-literal|null
+literal|"{fn REPEAT('a', -100)}"
 argument_list|,
 literal|""
+argument_list|,
+literal|"VARCHAR(1) NOT NULL"
 argument_list|)
 expr_stmt|;
-block|}
+name|tester
+operator|.
+name|checkNull
+argument_list|(
+literal|"{fn REPEAT('abc', cast(null as integer))}"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkNull
+argument_list|(
+literal|"{fn REPEAT(cast(null as varchar(1)), cast(null as integer))}"
+argument_list|)
+expr_stmt|;
 name|tester
 operator|.
 name|checkString
@@ -7694,40 +7722,42 @@ argument_list|,
 literal|"VARCHAR(6) NOT NULL"
 argument_list|)
 expr_stmt|;
-if|if
-condition|(
-literal|false
-condition|)
-block|{
 name|tester
 operator|.
 name|checkScalar
 argument_list|(
-literal|"{fn SOUNDEX(string)}"
+literal|"{fn SOUNDEX('Miller')}"
 argument_list|,
-literal|null
+literal|"M460"
 argument_list|,
-literal|""
+literal|"VARCHAR(4) NOT NULL"
 argument_list|)
 expr_stmt|;
-block|}
-if|if
-condition|(
-literal|false
-condition|)
-block|{
+name|tester
+operator|.
+name|checkNull
+argument_list|(
+literal|"{fn SOUNDEX(cast(null as varchar(1)))}"
+argument_list|)
+expr_stmt|;
 name|tester
 operator|.
 name|checkScalar
 argument_list|(
-literal|"{fn SPACE(count)}"
-argument_list|,
-literal|null
+literal|"{fn SPACE(-100)}"
 argument_list|,
 literal|""
+argument_list|,
+literal|"VARCHAR(2000) NOT NULL"
 argument_list|)
 expr_stmt|;
-block|}
+name|tester
+operator|.
+name|checkNull
+argument_list|(
+literal|"{fn SPACE(cast(null as integer))}"
+argument_list|)
+expr_stmt|;
 name|tester
 operator|.
 name|checkScalar
