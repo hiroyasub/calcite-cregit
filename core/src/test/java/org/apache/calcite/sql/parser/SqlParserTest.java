@@ -28860,6 +28860,56 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testParenthesizedSubQueries
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM (SELECT *\n"
+operator|+
+literal|"FROM `TAB`) AS `X`"
+decl_stmt|;
+specifier|final
+name|String
+name|sql1
+init|=
+literal|"SELECT * FROM (((SELECT * FROM tab))) X"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql1
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+specifier|final
+name|String
+name|sql2
+init|=
+literal|"SELECT * FROM ((((((((((((SELECT * FROM tab)))))))))))) X"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql2
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
 specifier|protected
 name|void
 name|checkDialect
