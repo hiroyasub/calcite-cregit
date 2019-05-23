@@ -320,6 +320,19 @@ operator|.
 name|getDigest
 argument_list|()
 argument_list|)
+operator|&&
+name|newCalc
+operator|.
+name|getRowType
+argument_list|()
+operator|.
+name|equals
+argument_list|(
+name|bottomCalc
+operator|.
+name|getRowType
+argument_list|()
+argument_list|)
 condition|)
 block|{
 comment|// newCalc is equivalent to bottomCalc, which means that topCalc
