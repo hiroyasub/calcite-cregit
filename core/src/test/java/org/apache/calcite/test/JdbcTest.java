@@ -27912,6 +27912,42 @@ expr_stmt|;
 block|}
 end_function
 
+begin_function
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testJsonStorageSize
+parameter_list|()
+block|{
+name|CalciteAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|query
+argument_list|(
+literal|"SELECT\n"
+operator|+
+literal|"JSON_STORAGE_SIZE('[100, \"sakila\", [1, 3, 5], 425.05]') AS A,\n"
+operator|+
+literal|"JSON_STORAGE_SIZE('{\"a\": 10, \"b\": \"a\", \"c\": \"[1, 3, 5, 7]\"}') AS B,\n"
+operator|+
+literal|"JSON_STORAGE_SIZE('{\"a\": 10, \"b\": \"xyz\", \"c\": \"[1, 3, 5, 7]\"}') AS C,\n"
+operator|+
+literal|"JSON_STORAGE_SIZE('[100, \"json\", [[10, 20, 30], 3, 5], 425.05]') AS D\n"
+operator|+
+literal|"limit 10"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"A=29; B=35; C=37; D=36\n"
+argument_list|)
+expr_stmt|;
+block|}
+end_function
+
 begin_comment
 comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2609">[CALCITE-2609]    * Dynamic parameters ("?") pushed to underlying JDBC schema, causing    * error</a>.    */
 end_comment

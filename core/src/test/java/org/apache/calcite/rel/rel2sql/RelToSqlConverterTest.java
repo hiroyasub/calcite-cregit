@@ -11964,6 +11964,37 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testJsonStorageSize
+parameter_list|()
+block|{
+name|String
+name|query
+init|=
+literal|"select json_storage_size(\"product_name\") from \"product\""
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT JSON_STORAGE_SIZE(\"product_name\")\n"
+operator|+
+literal|"FROM \"foodmart\".\"product\""
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testJsonType
 parameter_list|()
 block|{

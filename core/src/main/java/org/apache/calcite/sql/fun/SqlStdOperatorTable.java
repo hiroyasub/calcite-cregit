@@ -4149,6 +4149,19 @@ name|SqlLibraryOperators
 operator|.
 name|JSON_REMOVE
 decl_stmt|;
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
+specifier|public
+specifier|static
+specifier|final
+name|SqlFunction
+name|JSON_STORAGE_SIZE
+init|=
+name|SqlLibraryOperators
+operator|.
+name|JSON_STORAGE_SIZE
+decl_stmt|;
 specifier|public
 specifier|static
 specifier|final
