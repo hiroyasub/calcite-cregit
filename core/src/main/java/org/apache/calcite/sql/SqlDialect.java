@@ -3734,6 +3734,16 @@ return|return
 literal|false
 return|;
 block|}
+comment|/**    * Returns whether this dialect supports "WITH CUBE" in "GROUP BY" clause.    */
+specifier|public
+name|boolean
+name|supportsGroupByWithCube
+parameter_list|()
+block|{
+return|return
+literal|false
+return|;
+block|}
 comment|/** Returns how NULL values are sorted if an ORDER BY item does not contain    * NULLS ASCENDING or NULLS DESCENDING. */
 specifier|public
 name|NullCollation

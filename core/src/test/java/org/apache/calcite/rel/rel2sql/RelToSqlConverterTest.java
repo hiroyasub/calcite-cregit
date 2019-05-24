@@ -11995,6 +11995,118 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testCubeInSpark
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|query
+init|=
+literal|"select count(*) "
+operator|+
+literal|"from \"foodmart\".\"product\" "
+operator|+
+literal|"group by cube(\"product_id\",\"product_class_id\")"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT COUNT(*)\n"
+operator|+
+literal|"FROM \"foodmart\".\"product\"\n"
+operator|+
+literal|"GROUP BY CUBE(\"product_id\", \"product_class_id\")"
+decl_stmt|;
+specifier|final
+name|String
+name|expectedInSpark
+init|=
+literal|"SELECT COUNT(*)\n"
+operator|+
+literal|"FROM foodmart.product\n"
+operator|+
+literal|"GROUP BY product_id, product_class_id WITH CUBE"
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+operator|.
+name|withSpark
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expectedInSpark
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testRollupInSpark
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|query
+init|=
+literal|"select count(*) "
+operator|+
+literal|"from \"foodmart\".\"product\" "
+operator|+
+literal|"group by rollup(\"product_id\",\"product_class_id\")"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT COUNT(*)\n"
+operator|+
+literal|"FROM \"foodmart\".\"product\"\n"
+operator|+
+literal|"GROUP BY ROLLUP(\"product_id\", \"product_class_id\")"
+decl_stmt|;
+specifier|final
+name|String
+name|expectedInSpark
+init|=
+literal|"SELECT COUNT(*)\n"
+operator|+
+literal|"FROM foodmart.product\n"
+operator|+
+literal|"GROUP BY product_id, product_class_id WITH ROLLUP"
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+operator|.
+name|withSpark
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expectedInSpark
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testJsonType
 parameter_list|()
 block|{
