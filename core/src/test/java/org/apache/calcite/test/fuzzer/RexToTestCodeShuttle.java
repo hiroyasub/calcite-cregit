@@ -443,6 +443,15 @@ argument_list|,
 literal|"unaryMinus"
 argument_list|)
 decl|.
+name|put
+argument_list|(
+name|SqlStdOperatorTable
+operator|.
+name|MULTIPLY
+argument_list|,
+literal|"mul"
+argument_list|)
+decl|.
 name|build
 argument_list|()
 decl_stmt|;
