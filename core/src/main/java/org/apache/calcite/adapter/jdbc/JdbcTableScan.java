@@ -113,6 +113,16 @@ name|List
 import|;
 end_import
 
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+import|;
+end_import
+
 begin_comment
 comment|/**  * Relational expression representing a scan of a table in a JDBC data source.  */
 end_comment
@@ -126,7 +136,7 @@ name|TableScan
 implements|implements
 name|JdbcRel
 block|{
-specifier|protected
+specifier|public
 specifier|final
 name|JdbcTable
 name|jdbcTable
@@ -165,13 +175,13 @@ name|this
 operator|.
 name|jdbcTable
 operator|=
+name|Objects
+operator|.
+name|requireNonNull
+argument_list|(
 name|jdbcTable
+argument_list|)
 expr_stmt|;
-assert|assert
-name|jdbcTable
-operator|!=
-literal|null
-assert|;
 block|}
 annotation|@
 name|Override
