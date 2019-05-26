@@ -66,7 +66,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Interface to handle formatting between Kafka message and Calcite row.  *  * @param<K>: type for Kafka message key,  *           refer to {@link ConsumerConfig#KEY_DESERIALIZER_CLASS_CONFIG};  * @param<V>: type for Kafka message value,  *           refer to {@link ConsumerConfig#VALUE_DESERIALIZER_CLASS_CONFIG};  *  */
+comment|/**  * Interface to handle formatting between Kafka message and Calcite row.  *  * @param<K> type for Kafka message key,  *           refer to {@link ConsumerConfig#KEY_DESERIALIZER_CLASS_CONFIG};  * @param<V> type for Kafka message value,  *           refer to {@link ConsumerConfig#VALUE_DESERIALIZER_CLASS_CONFIG};  *  */
 end_comment
 
 begin_interface
@@ -79,7 +79,7 @@ parameter_list|,
 name|V
 parameter_list|>
 block|{
-comment|/**    * Generate row type for a given Kafka topic.    *    * @param topicName, Kafka topic name;    * @return row type    */
+comment|/**    * Generates row type for a given Kafka topic.    *    * @param topicName, Kafka topic name;    * @return row type    */
 name|RelDataType
 name|rowDataType
 parameter_list|(
@@ -87,7 +87,7 @@ name|String
 name|topicName
 parameter_list|)
 function_decl|;
-comment|/**    * Parse and reformat Kafka message from consumer,    *  to align with row type defined as {@link #rowDataType(String)}.    * @param message, the raw Kafka message record;    * @return fields in the row    */
+comment|/**    * Parses and reformats Kafka message from consumer,    * to align with row type defined as {@link #rowDataType(String)}.    *    * @param message, the raw Kafka message record;    * @return fields in the row    */
 name|Object
 index|[]
 name|toRow

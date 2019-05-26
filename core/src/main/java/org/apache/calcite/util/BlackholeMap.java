@@ -76,7 +76,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * A {@code java.util.Map} implementation which ignores any {@code put} operation.  *  * The implementation does not fully conform to {@code java.util.Map} API, as any  * write operation would succeed, but any read operation would not return any value.  *  * @param<K> the type of the keys for the map  * @param<V> the type of the values for the map  */
+comment|/**  * An implementation of {@code java.util.Map} that ignores any {@code put}  * operation.  *  *<p>The implementation does not fully conform to {@code java.util.Map} API, as  * any write operation would succeed, but any read operation would not return  * any value.  *  * @param<K> the type of the keys for the map  * @param<V> the type of the values for the map  */
 end_comment
 
 begin_class

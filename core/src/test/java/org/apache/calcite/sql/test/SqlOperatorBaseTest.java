@@ -18765,7 +18765,7 @@ name|checkString
 argument_list|(
 literal|"reverse(_UTF8'\u4F60\u597D')"
 argument_list|,
-literal|"å¥½ä½ "
+literal|"\u597D\u4F60"
 argument_list|,
 literal|"VARCHAR(2) NOT NULL"
 argument_list|)

@@ -340,7 +340,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * A table which maps to an Apache Kafka topic, currently only {@link KafkaStreamTable} is  * implemented as a STREAM table.  */
+comment|/**  * A table that maps to an Apache Kafka topic.  *  *<p>Currently only {@link KafkaStreamTable} is  * implemented as a STREAM table.  */
 end_comment
 
 begin_class
@@ -580,7 +580,6 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-comment|/** Returns a provider of statistics about this table. */
 annotation|@
 name|Override
 specifier|public
@@ -662,7 +661,6 @@ return|return
 name|this
 return|;
 block|}
-comment|/** Type of table. */
 annotation|@
 name|Override
 specifier|public

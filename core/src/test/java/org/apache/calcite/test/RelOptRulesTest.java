@@ -16381,7 +16381,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testPushAggregateThroughtOuterJoin1
+name|testPushAggregateThroughOuterJoin1
 parameter_list|()
 block|{
 specifier|final
@@ -16459,7 +16459,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testPushAggregateThroughtOuterJoin2
+name|testPushAggregateThroughOuterJoin2
 parameter_list|()
 block|{
 specifier|final
@@ -16537,7 +16537,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testPushAggregateThroughtOuterJoin3
+name|testPushAggregateThroughOuterJoin3
 parameter_list|()
 block|{
 specifier|final
@@ -16615,7 +16615,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testPushAggregateThroughtOuterJoin4
+name|testPushAggregateThroughOuterJoin4
 parameter_list|()
 block|{
 specifier|final
@@ -16693,7 +16693,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testPushAggregateThroughtOuterJoin5
+name|testPushAggregateThroughOuterJoin5
 parameter_list|()
 block|{
 specifier|final
@@ -16771,7 +16771,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testPushAggregateThroughtOuterJoin6
+name|testPushAggregateThroughOuterJoin6
 parameter_list|()
 block|{
 specifier|final
@@ -16849,7 +16849,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testPushAggregateThroughtOuterJoin7
+name|testPushAggregateThroughOuterJoin7
 parameter_list|()
 block|{
 specifier|final
@@ -16929,7 +16929,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testPushAggregateThroughtOuterJoin8
+name|testPushAggregateThroughOuterJoin8
 parameter_list|()
 block|{
 specifier|final
@@ -17009,7 +17009,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testPushAggregateThroughtOuterJoin9
+name|testPushAggregateThroughOuterJoin9
 parameter_list|()
 block|{
 specifier|final
@@ -17089,7 +17089,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testPushAggregateThroughtOuterJoin10
+name|testPushAggregateThroughOuterJoin10
 parameter_list|()
 block|{
 specifier|final
@@ -17132,7 +17132,7 @@ specifier|final
 name|String
 name|sql
 init|=
-literal|"select count(e.ename) \n"
+literal|"select count(e.ename)\n"
 operator|+
 literal|"from (select * from sales.emp where empno = 10) as e\n"
 operator|+
@@ -17170,7 +17170,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testPushAggregateThroughtOuterJoin11
+name|testPushAggregateThroughOuterJoin11
 parameter_list|()
 block|{
 specifier|final
@@ -17250,7 +17250,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testPushAggregateThroughtOuterJoin12
+name|testPushAggregateThroughOuterJoin12
 parameter_list|()
 block|{
 specifier|final
@@ -17328,7 +17328,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testPushAggregateThroughtOuterJoin13
+name|testPushAggregateThroughOuterJoin13
 parameter_list|()
 block|{
 specifier|final
@@ -17406,7 +17406,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testPushAggregateThroughtOuterJoin14
+name|testPushAggregateThroughOuterJoin14
 parameter_list|()
 block|{
 specifier|final
@@ -17484,7 +17484,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testPushAggregateThroughtOuterJoin15
+name|testPushAggregateThroughOuterJoin15
 parameter_list|()
 block|{
 specifier|final
@@ -17562,7 +17562,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testPushAggregateThroughtOuterJoin16
+name|testPushAggregateThroughOuterJoin16
 parameter_list|()
 block|{
 specifier|final
@@ -22528,7 +22528,7 @@ block|}
 end_function
 
 begin_comment
-comment|/** Test case for    * testing type created by SubQueryRemoveRule    * ANY subquery is non-nullable therefore plan should have cast    */
+comment|/** Test case for testing type created by SubQueryRemoveRule: an    * ANY sub-query is non-nullable therefore plan should have cast. */
 end_comment
 
 begin_function
@@ -22543,13 +22543,11 @@ specifier|final
 name|String
 name|sql
 init|=
-literal|"select name, \n"
+literal|"select name, deptno> ANY (\n"
 operator|+
-literal|" deptno> ANY (\n"
+literal|"  select deptno from emp)\n"
 operator|+
-literal|" select deptno from emp) \n"
-operator|+
-literal|" from dept"
+literal|"from dept"
 decl_stmt|;
 name|checkSubQuery
 argument_list|(
@@ -22568,7 +22566,7 @@ block|}
 end_function
 
 begin_comment
-comment|/** Test case for    * testing type created by SubQueryRemoveRule    * ANY subquery is nullable therefore plan should not have cast    */
+comment|/** Test case for testing type created by SubQueryRemoveRule; an    * ANY sub-query is nullable therefore plan should not have cast. */
 end_comment
 
 begin_function
@@ -22583,13 +22581,11 @@ specifier|final
 name|String
 name|sql
 init|=
-literal|"select deptno, \n"
+literal|"select deptno, name = ANY (\n"
 operator|+
-literal|" name = ANY (\n"
+literal|"  select mgr from emp)\n"
 operator|+
-literal|" select mgr from emp) \n"
-operator|+
-literal|" from dept"
+literal|"from dept"
 decl_stmt|;
 name|checkSubQuery
 argument_list|(

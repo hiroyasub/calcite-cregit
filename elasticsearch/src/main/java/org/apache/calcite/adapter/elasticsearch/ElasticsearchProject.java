@@ -472,7 +472,7 @@ argument_list|(
 name|translator
 argument_list|)
 decl_stmt|;
-comment|// "select *" present ?
+comment|// "select *" present?
 name|hasSelectStar
 operator||=
 name|ElasticsearchConstants

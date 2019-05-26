@@ -1131,7 +1131,7 @@ argument_list|)
 argument_list|)
 decl_stmt|;
 comment|// CASE statement above is created with nullable boolean type, but it might
-comment|// not be correct.  If the original subquery node's type is not nullable it
+comment|// not be correct.  If the original sub-query node's type is not nullable it
 comment|// is guranteed for case statement to not produce NULLs. Therefore to avoid
 comment|// planner complaining we need to add cast.  Note that nullable type is
 comment|// created due to MIN aggcall, since there is no groupby.
