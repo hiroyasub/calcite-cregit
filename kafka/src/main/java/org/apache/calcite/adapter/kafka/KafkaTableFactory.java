@@ -144,7 +144,6 @@ name|KafkaTableFactory
 parameter_list|()
 block|{
 block|}
-comment|/** Creates a Table.    *  @param schema Schema this table belongs to    * @param name Name of this table    * @param operand The "operand" JSON property    * @param rowType Row type. Specified if the "columns" JSON property.    */
 annotation|@
 name|Override
 specifier|public
@@ -169,6 +168,7 @@ name|RelDataType
 name|rowType
 parameter_list|)
 block|{
+specifier|final
 name|KafkaTableOptions
 name|tableOptionBuilder
 init|=
@@ -214,10 +214,9 @@ literal|null
 argument_list|)
 argument_list|)
 expr_stmt|;
+specifier|final
 name|KafkaRowConverter
 name|rowConverter
-init|=
-literal|null
 decl_stmt|;
 if|if
 condition|(
@@ -248,17 +247,29 @@ argument_list|)
 decl_stmt|;
 try|try
 block|{
-name|rowConverter
-operator|=
-operator|(
-name|KafkaRowConverter
-operator|)
+specifier|final
+name|Class
+argument_list|<
+name|?
+argument_list|>
+name|klass
+init|=
 name|Class
 operator|.
 name|forName
 argument_list|(
 name|rowConverterClass
 argument_list|)
+decl_stmt|;
+name|rowConverter
+operator|=
+operator|(
+name|KafkaRowConverter
+operator|)
+name|klass
+operator|.
+name|getDeclaredConstructor
+argument_list|()
 operator|.
 name|newInstance
 argument_list|()
@@ -268,9 +279,13 @@ catch|catch
 parameter_list|(
 name|InstantiationException
 decl||
+name|InvocationTargetException
+decl||
 name|IllegalAccessException
 decl||
 name|ClassNotFoundException
+decl||
+name|NoSuchMethodException
 name|e
 parameter_list|)
 block|{
@@ -286,7 +301,7 @@ name|Locale
 operator|.
 name|ROOT
 argument_list|,
-literal|"Fail to create table '%s' with configuration: \n"
+literal|"Failed to create table '%s' with configuration:\n"
 operator|+
 literal|"'%s'\n"
 operator|+
