@@ -9369,6 +9369,22 @@ operator|+
 literal|"GROUP BY GROUPING SETS(`DEPTNO`, (`DEPTNO`, `GENDER`), ())"
 argument_list|)
 expr_stmt|;
+name|sql
+argument_list|(
+literal|"select deptno from emp\n"
+operator|+
+literal|"group by grouping sets ((deptno, gender), (deptno), (), gender)"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+literal|"SELECT `DEPTNO`\n"
+operator|+
+literal|"FROM `EMP`\n"
+operator|+
+literal|"GROUP BY GROUPING SETS((`DEPTNO`, `GENDER`), `DEPTNO`, (), `GENDER`)"
+argument_list|)
+expr_stmt|;
 comment|// Grouping sets must have parentheses
 name|sql
 argument_list|(

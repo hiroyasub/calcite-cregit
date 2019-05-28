@@ -1384,6 +1384,56 @@ name|expectedMySql
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3097">[CALCITE-3097]    * GROUPING SETS breaks on sets of size&gt; 1 due to precedence issues</a>,    * in particular, that we maintain proper precedence around nested lists. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testGroupByGroupingSets
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|query
+init|=
+literal|"select \"product_class_id\", \"brand_name\"\n"
+operator|+
+literal|"from \"product\"\n"
+operator|+
+literal|"group by GROUPING SETS ((\"product_class_id\", \"brand_name\"),"
+operator|+
+literal|" (\"product_class_id\"))\n"
+operator|+
+literal|"order by 2, 1"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT \"product_class_id\", \"brand_name\"\n"
+operator|+
+literal|"FROM \"foodmart\".\"product\"\n"
+operator|+
+literal|"GROUP BY GROUPING SETS((\"product_class_id\", \"brand_name\"),"
+operator|+
+literal|" \"product_class_id\")\n"
+operator|+
+literal|"ORDER BY \"brand_name\", \"product_class_id\""
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|withPostgresql
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
 comment|/** Tests GROUP BY ROLLUP of two columns. The SQL for MySQL has    * "GROUP BY ... ROLLUP" but no "ORDER BY". */
 annotation|@
 name|Test
