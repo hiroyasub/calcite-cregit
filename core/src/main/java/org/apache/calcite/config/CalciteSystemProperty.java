@@ -196,6 +196,57 @@ argument_list|,
 literal|false
 argument_list|)
 decl_stmt|;
+comment|/** Whether to enable the collation trait in the default planner configuration.    *    * Some extra optimizations are possible if enabled, but queries should work either way.    * At some point this will become a preference, or we will run multiple phases: first    * disabled, then enabled. */
+specifier|public
+specifier|static
+specifier|final
+name|CalciteSystemProperty
+argument_list|<
+name|Boolean
+argument_list|>
+name|ENABLE_COLLATION_TRAIT
+init|=
+name|booleanProperty
+argument_list|(
+literal|"calcite.enable.collation.trait"
+argument_list|,
+literal|true
+argument_list|)
+decl_stmt|;
+comment|/** Whether the enumerable convention is enabled in the default planner configuration. */
+specifier|public
+specifier|static
+specifier|final
+name|CalciteSystemProperty
+argument_list|<
+name|Boolean
+argument_list|>
+name|ENABLE_ENUMERABLE
+init|=
+name|booleanProperty
+argument_list|(
+literal|"calcite.enable.enumerable"
+argument_list|,
+literal|true
+argument_list|)
+decl_stmt|;
+comment|/** Whether streaming is enabled in the default planner configuration. */
+specifier|public
+specifier|static
+specifier|final
+name|CalciteSystemProperty
+argument_list|<
+name|Boolean
+argument_list|>
+name|ENABLE_STREAM
+init|=
+name|booleanProperty
+argument_list|(
+literal|"calcite.enable.stream"
+argument_list|,
+literal|true
+argument_list|)
+decl_stmt|;
 comment|/**    *  Whether to follow the SQL standard strictly.    */
 specifier|public
 specifier|static
