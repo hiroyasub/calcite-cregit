@@ -434,7 +434,7 @@ name|Predicate
 name|predicate
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**    * Creates a FilterProjectTransposeRule with an explicit root operand and    * factories.    */
+comment|/**    * Creates a FilterJoinRule with an explicit root operand and    * factories.    */
 specifier|protected
 name|FilterJoinRule
 parameter_list|(
@@ -531,7 +531,7 @@ name|TRUE_PREDICATE
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Creates a FilterProjectTransposeRule with an explicit root operand and    * factories.    */
+comment|/**    * Creates a FilterJoinRule with an explicit root operand and    * factories.    */
 annotation|@
 name|Deprecated
 comment|// to be removed before 2.0
