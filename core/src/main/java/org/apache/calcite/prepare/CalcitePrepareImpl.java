@@ -2169,6 +2169,14 @@ name|ENUMERABLE_UNION_RULE
 argument_list|,
 name|EnumerableRules
 operator|.
+name|ENUMERABLE_REPEAT_UNION_RULE
+argument_list|,
+name|EnumerableRules
+operator|.
+name|ENUMERABLE_TABLE_SPOOL_RULE
+argument_list|,
+name|EnumerableRules
+operator|.
 name|ENUMERABLE_INTERSECT_RULE
 argument_list|,
 name|EnumerableRules
