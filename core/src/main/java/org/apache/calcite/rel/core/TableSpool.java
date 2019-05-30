@@ -89,8 +89,18 @@ name|RelWriter
 import|;
 end_import
 
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+import|;
+end_import
+
 begin_comment
-comment|/**  * Spool that writes into a table.  *  *<p>NOTE: The current API is experimental and subject to change without notice.</p>  */
+comment|/**  * Spool that writes into a table.  *  *<p>NOTE: The current API is experimental and subject to change without  * notice.  */
 end_comment
 
 begin_class
@@ -147,7 +157,12 @@ name|this
 operator|.
 name|tableName
 operator|=
+name|Objects
+operator|.
+name|requireNonNull
+argument_list|(
 name|tableName
+argument_list|)
 expr_stmt|;
 block|}
 specifier|public

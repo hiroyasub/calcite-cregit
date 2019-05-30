@@ -166,7 +166,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Sub-class of {@link TableSpool} not targeted at any particular engine or calling convention.  *  *<p>NOTE: The current API is experimental and subject to change without notice.</p>  */
+comment|/**  * Sub-class of {@link TableSpool} not targeted at any particular engine or  * calling convention.  *  *<p>NOTE: The current API is experimental and subject to change without  * notice.  */
 end_comment
 
 begin_class

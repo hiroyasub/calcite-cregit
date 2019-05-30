@@ -228,7 +228,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Implementation of {@link TableSpool} in  * {@link EnumerableConvention enumerable calling convention}  * that writes into a {@link ModifiableTable} (which must exist in the current schema).  *  *<p>NOTE: The current API is experimental and subject to change without notice.</p>  */
+comment|/**  * Implementation of {@link TableSpool} in  * {@link EnumerableConvention enumerable calling convention}  * that writes into a {@link ModifiableTable} (which must exist in the current  * schema).  *  *<p>NOTE: The current API is experimental and subject to change without  * notice.  */
 end_comment
 
 begin_class

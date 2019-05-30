@@ -84,7 +84,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Unit tests for  * {@link EnumerableRepeatUnion}  *<a href="https://issues.apache.org/jira/browse/CALCITE-2812">[CALCITE-2812]  * Add algebraic operators to allow expressing recursive queries</a>.  */
+comment|/**  * Unit tests for {@link EnumerableRepeatUnion}.  *  *<p>Added in  *<a href="https://issues.apache.org/jira/browse/CALCITE-2812">[CALCITE-2812]  * Add algebraic operators to allow expressing recursive queries</a>.  */
 end_comment
 
 begin_class

@@ -867,7 +867,7 @@ name|RelMetadataQuery
 name|mq
 parameter_list|)
 block|{
-comment|// Maybe we should remove this for semi-join ?
+comment|// Maybe we should remove this for semi-join?
 if|if
 condition|(
 name|isSemiJoin

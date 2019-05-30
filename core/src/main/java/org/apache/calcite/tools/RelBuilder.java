@@ -9746,7 +9746,7 @@ return|return
 name|this
 return|;
 block|}
-comment|/**    * Creates a {@link TableSpool} for the most recent relation expression.    *    * @param readType spool's read type (as described in {@link Spool.Type})    * @param writeType spool's write type (as described in {@link Spool.Type})    * @param tableName table name    */
+comment|/**    * Creates a {@link TableSpool} for the most recent relational expression.    *    * @param readType Spool's read type (as described in {@link Spool.Type})    * @param writeType Spool's write type (as described in {@link Spool.Type})    * @param tableName Table name    */
 specifier|private
 name|RelBuilder
 name|tableSpool
@@ -9817,7 +9817,7 @@ literal|1
 argument_list|)
 return|;
 block|}
-comment|/**    * Creates a {@link RepeatUnion} associated to a {@link TransientTable} of the two most recent    * relational expressions on the stack. Warning: if these relational expressions are not    * correctly defined, this operation might lead to an infinite loop.    * The generated {@link RepeatUnion} will:    *   - Evaluate its left term once, propagating the results into the {@link TransientTable}.    *   - Evaluate its right term (which may contain a {@link TableScan} on the    *   {@link TransientTable}) over and over until it produces no more results (or until an    *   optional maximum number of iterations is reached). On each iteration, the results will be    *   propagated into the {@link TransientTable}, overwriting the results from the previous one.    *    * @param tableName name of the {@link TransientTable} associated to the {@link RepeatUnion}    * @param all whether duplicates will be considered or not    * @param maxRep maximum number of iterations, -1 means no limit    */
+comment|/**    * Creates a {@link RepeatUnion} associated to a {@link TransientTable} of the    * two most recent relational expressions on the stack.    *    *<p>Warning: if these relational expressions are not    * correctly defined, this operation might lead to an infinite loop.    *    *<p>The generated {@link RepeatUnion} operates as follows:    *    *<ul>    *<li>Evaluate its left term once, propagating the results into the    *     {@link TransientTable};    *<li>Evaluate its right term (which may contain a {@link TableScan} on the    *     {@link TransientTable}) over and over until it produces no more results    *     (or until an optional maximum number of iterations is reached). On each    *     iteration, the results are propagated into the {@link TransientTable},    *     overwriting the results from the previous one.    *</ul>    *    * @param tableName Name of the {@link TransientTable} associated to the    *     {@link RepeatUnion}    * @param all Whether duplicates are considered    * @param maxRep Maximum number of iterations; -1 means no limit    */
 annotation|@
 name|Experimental
 specifier|public

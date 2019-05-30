@@ -113,8 +113,18 @@ name|List
 import|;
 end_import
 
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+import|;
+end_import
+
 begin_comment
-comment|/**  * Relational expression that iterates over its input and, apart from returning its results,  * will forward them into other consumers.  *  *<p>NOTE: The current API is experimental and subject to change without notice.</p>  */
+comment|/**  * Relational expression that iterates over its input and, in addition to  * returning its results, will forward them into other consumers.  *  *<p>NOTE: The current API is experimental and subject to change without  * notice.  */
 end_comment
 
 begin_class
@@ -136,19 +146,20 @@ name|EAGER
 block|,
 name|LAZY
 block|}
-comment|/**    * The way the spool consumes elements from its input.    *<ul>    *<li>EAGER: the spool will consume the elements from its input at once at the initial request.    *</li>    *<li>LAZY: the spool will consume the elements from its input one by one by request.</li>    *</ul>    */
+comment|/**    * How the spool consumes elements from its input.    *    *<ul>    *<li>EAGER: the spool consumes the elements from its input at once at the    *     initial request;    *<li>LAZY: the spool consumes the elements from its input one by one by    *     request.    *</ul>    */
 specifier|public
 specifier|final
 name|Type
 name|readType
 decl_stmt|;
-comment|/**    * The way the spool forwards elements to consumers.    *<ul>    *<li>EAGER: the spool will forward each element as soon as it returns it.</li>    *<li>LAZY: the spool will forward all elements at once when it is done retuning all of them.    *</li>    *</ul>    */
+comment|/**    * How the spool forwards elements to consumers.    *    *<ul>    *<li>EAGER: the spool forwards each element as soon as it returns it;    *<li>LAZY: the spool forwards all elements at once when it is done returning    *     all of them.    *</ul>    */
 specifier|public
 specifier|final
 name|Type
 name|writeType
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
+comment|/** Creates a Spool. */
 specifier|protected
 name|Spool
 parameter_list|(
@@ -181,13 +192,23 @@ name|this
 operator|.
 name|readType
 operator|=
+name|Objects
+operator|.
+name|requireNonNull
+argument_list|(
 name|readType
+argument_list|)
 expr_stmt|;
 name|this
 operator|.
 name|writeType
 operator|=
+name|Objects
+operator|.
+name|requireNonNull
+argument_list|(
 name|writeType
+argument_list|)
 expr_stmt|;
 block|}
 annotation|@

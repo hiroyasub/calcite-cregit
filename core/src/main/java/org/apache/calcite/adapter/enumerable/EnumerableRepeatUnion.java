@@ -164,7 +164,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Implementation of {@link RepeatUnion} in  * {@link EnumerableConvention enumerable calling convention}.  *  *<p>NOTE: The current API is experimental and subject to change without notice.</p>  */
+comment|/**  * Implementation of {@link RepeatUnion} in  * {@link EnumerableConvention enumerable calling convention}.  *  *<p>NOTE: The current API is experimental and subject to change without  * notice.  */
 end_comment
 
 begin_class
@@ -178,14 +178,14 @@ name|RepeatUnion
 implements|implements
 name|EnumerableRel
 block|{
-comment|/**    * Creates an EnumerableRepeatUnion    */
+comment|/**    * Creates an EnumerableRepeatUnion.    */
 name|EnumerableRepeatUnion
 parameter_list|(
 name|RelOptCluster
 name|cluster
 parameter_list|,
 name|RelTraitSet
-name|traits
+name|traitSet
 parameter_list|,
 name|RelNode
 name|seed
@@ -204,7 +204,7 @@ name|super
 argument_list|(
 name|cluster
 argument_list|,
-name|traits
+name|traitSet
 argument_list|,
 name|seed
 argument_list|,
@@ -282,7 +282,6 @@ name|Prefer
 name|pref
 parameter_list|)
 block|{
-comment|// TODO only UNION ALL is supported for the moment
 if|if
 condition|(
 operator|!
@@ -293,7 +292,7 @@ throw|throw
 operator|new
 name|UnsupportedOperationException
 argument_list|(
-literal|"Only EnumerableRepeatUnion ALL is supported for the moment"
+literal|"Only EnumerableRepeatUnion ALL is supported"
 argument_list|)
 throw|;
 block|}

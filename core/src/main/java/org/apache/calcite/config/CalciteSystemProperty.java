@@ -196,7 +196,7 @@ argument_list|,
 literal|false
 argument_list|)
 decl_stmt|;
-comment|/** Whether to enable the collation trait in the default planner configuration.    *    * Some extra optimizations are possible if enabled, but queries should work either way.    * At some point this will become a preference, or we will run multiple phases: first    * disabled, then enabled. */
+comment|/** Whether to enable the collation trait in the default planner configuration.    *    *<p>Some extra optimizations are possible if enabled, but queries should    * work either way. At some point this will become a preference, or we will    * run multiple phases: first disabled, then enabled. */
 specifier|public
 specifier|static
 specifier|final

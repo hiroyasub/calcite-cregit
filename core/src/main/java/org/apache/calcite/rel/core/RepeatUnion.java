@@ -174,7 +174,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Relational expression that computes a Repeat Union (Recursive Union in SQL terminology).  *  * This operation is executed as follows:  *<ul>  *<li>Evaluate the left input (i.e., seed relational expression) once.  *   For UNION (but not UNION ALL), discard duplicated rows.</li>  *<li>Evaluate the right input (i.e., iterative relational expression) over and over until it  *   produces no more results (or until an optional maximum number of iterations is reached).  *   For UNION (but not UNION ALL), discard duplicated results.</li>  *</ul>  *  *<p>NOTE: The current API is experimental and subject to change without notice.</p>  */
+comment|/**  * Relational expression that computes a repeat union (recursive union in SQL  * terminology).  *  *<p>This operation is executed as follows:  *  *<ul>  *<li>Evaluate the left input (i.e., seed relational expression) once.  For  *   UNION (but not UNION ALL), discard duplicated rows.  *  *<li>Evaluate the right input (i.e., iterative relational expression) over and  *   over until it produces no more results (or until an optional maximum number  *   of iterations is reached).  For UNION (but not UNION ALL), discard  *   duplicated results.  *</ul>  *  *<p>NOTE: The current API is experimental and subject to change without  * notice.  */
 end_comment
 
 begin_class
@@ -187,13 +187,13 @@ name|RepeatUnion
 extends|extends
 name|BiRel
 block|{
-comment|/**    * Whether duplicates will be considered or not    */
+comment|/**    * Whether duplicates are considered.    */
 specifier|public
 specifier|final
 name|boolean
 name|all
 decl_stmt|;
-comment|/**    * Maximum number of times to repeat the iterative relational expression,    * -1 means no limit, 0 means only seed will be evaluated    */
+comment|/**    * Maximum number of times to repeat the iterative relational expression; -1    * means no limit, 0 means only seed will be evaluated    */
 specifier|public
 specifier|final
 name|int

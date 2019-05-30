@@ -94,7 +94,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Rule to convert a {@link LogicalTableSpool} into an {@link EnumerableTableSpool}.  *  *<p>NOTE: The current API is experimental and subject to change without notice.</p>  */
+comment|/**  * Rule to convert a {@link LogicalTableSpool} into an  * {@link EnumerableTableSpool}.  *  *<p>NOTE: The current API is experimental and subject to change without  * notice.  */
 end_comment
 
 begin_class
