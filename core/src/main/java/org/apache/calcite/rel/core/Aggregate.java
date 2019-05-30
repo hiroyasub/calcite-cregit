@@ -607,11 +607,15 @@ operator|::
 name|isNotGrandTotal
 decl_stmt|;
 comment|//~ Instance fields --------------------------------------------------------
-comment|/** Whether there are indicator fields.    *    *<p>We strongly discourage the use indicator fields, because they cause the    * output row type of GROUPING SETS queries to be different from regular GROUP    * BY queries, and recommend that you set this field to {@code false}. */
+annotation|@
+name|Deprecated
+comment|// unused field, to be removed before 2.0
 specifier|public
 specifier|final
 name|boolean
 name|indicator
+init|=
+literal|false
 decl_stmt|;
 specifier|protected
 specifier|final
@@ -635,7 +639,7 @@ argument_list|>
 name|groupSets
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**    * Creates an Aggregate.    *    *<p>All members of {@code groupSets} must be sub-sets of {@code groupSet}.    * For a simple {@code GROUP BY}, {@code groupSets} is a singleton list    * containing {@code groupSet}.    *    *<p>If {@code GROUP BY} is not specified,    * or equivalently if {@code GROUP BY ()} is specified,    * {@code groupSet} will be the empty set,    * and {@code groupSets} will have one element, that empty set.    *    *<p>If {@code CUBE}, {@code ROLLUP} or {@code GROUPING SETS} are    * specified, {@code groupSets} will have additional elements,    * but they must each be a subset of {@code groupSet},    * and they must be sorted by inclusion:    * {@code (0, 1, 2), (1), (0, 2), (0), ()}.    *    * @param cluster  Cluster    * @param traits   Traits    * @param child    Child    * @param indicator Whether row type should include indicator fields to    *                 indicate which grouping set is active; true is deprecated    * @param groupSet Bit set of grouping fields    * @param groupSets List of all grouping sets; null for just {@code groupSet}    * @param aggCalls Collection of calls to aggregate functions    */
+comment|/**    * Creates an Aggregate.    *    *<p>All members of {@code groupSets} must be sub-sets of {@code groupSet}.    * For a simple {@code GROUP BY}, {@code groupSets} is a singleton list    * containing {@code groupSet}.    *    *<p>If {@code GROUP BY} is not specified,    * or equivalently if {@code GROUP BY ()} is specified,    * {@code groupSet} will be the empty set,    * and {@code groupSets} will have one element, that empty set.    *    *<p>If {@code CUBE}, {@code ROLLUP} or {@code GROUPING SETS} are    * specified, {@code groupSets} will have additional elements,    * but they must each be a subset of {@code groupSet},    * and they must be sorted by inclusion:    * {@code (0, 1, 2), (1), (0, 2), (0), ()}.    *    * @param cluster  Cluster    * @param traits   Traits    * @param child    Child    * @param groupSet Bit set of grouping fields    * @param groupSets List of all grouping sets; null for just {@code groupSet}    * @param aggCalls Collection of calls to aggregate functions    */
 specifier|protected
 name|Aggregate
 parameter_list|(
@@ -647,9 +651,6 @@ name|traits
 parameter_list|,
 name|RelNode
 name|child
-parameter_list|,
-name|boolean
-name|indicator
 parameter_list|,
 name|ImmutableBitSet
 name|groupSet
@@ -676,13 +677,6 @@ argument_list|,
 name|child
 argument_list|)
 expr_stmt|;
-name|this
-operator|.
-name|indicator
-operator|=
-name|indicator
-expr_stmt|;
-comment|// true is allowed, but discouraged
 name|this
 operator|.
 name|aggCalls
@@ -823,6 +817,67 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+comment|/**    * Creates an Aggregate.    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
+specifier|protected
+name|Aggregate
+parameter_list|(
+name|RelOptCluster
+name|cluster
+parameter_list|,
+name|RelTraitSet
+name|traits
+parameter_list|,
+name|RelNode
+name|child
+parameter_list|,
+name|boolean
+name|indicator
+parameter_list|,
+name|ImmutableBitSet
+name|groupSet
+parameter_list|,
+name|List
+argument_list|<
+name|ImmutableBitSet
+argument_list|>
+name|groupSets
+parameter_list|,
+name|List
+argument_list|<
+name|AggregateCall
+argument_list|>
+name|aggCalls
+parameter_list|)
+block|{
+name|this
+argument_list|(
+name|cluster
+argument_list|,
+name|traits
+argument_list|,
+name|child
+argument_list|,
+name|groupSet
+argument_list|,
+name|groupSets
+argument_list|,
+name|aggCalls
+argument_list|)
+expr_stmt|;
+name|Preconditions
+operator|.
+name|checkArgument
+argument_list|(
+operator|!
+name|indicator
+argument_list|,
+literal|"indicator is not supported, use GROUPING function instead"
+argument_list|)
+expr_stmt|;
+block|}
 specifier|public
 specifier|static
 name|boolean
@@ -841,6 +896,9 @@ operator|>
 literal|0
 return|;
 block|}
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 specifier|static
 name|boolean
@@ -851,10 +909,7 @@ name|aggregate
 parameter_list|)
 block|{
 return|return
-operator|!
-name|aggregate
-operator|.
-name|indicator
+literal|true
 return|;
 block|}
 specifier|private
@@ -932,15 +987,6 @@ argument_list|()
 argument_list|,
 name|input
 operator|.
-name|getBoolean
-argument_list|(
-literal|"indicator"
-argument_list|,
-literal|false
-argument_list|)
-argument_list|,
-name|input
-operator|.
 name|getBitSet
 argument_list|(
 literal|"group"
@@ -990,7 +1036,7 @@ argument_list|(
 name|inputs
 argument_list|)
 argument_list|,
-name|indicator
+literal|false
 argument_list|,
 name|groupSet
 argument_list|,
@@ -1000,7 +1046,7 @@ name|aggCalls
 argument_list|)
 return|;
 block|}
-comment|/** Creates a copy of this aggregate.    *    * @param traitSet Traits    * @param input Input    * @param indicator Whether row type should include indicator fields to    *                 indicate which grouping set is active; must be true if    *                 aggregate is not simple    * @param groupSet Bit set of grouping fields    * @param groupSets List of all grouping sets; null for just {@code groupSet}    * @param aggCalls Collection of calls to aggregate functions    * @return New {@code Aggregate} if any parameter differs from the value of    *   this {@code Aggregate}, or just {@code this} if all the parameters are    *   the same    *    * @see #copy(org.apache.calcite.plan.RelTraitSet, java.util.List)    */
+comment|/** Creates a copy of this aggregate.    *    * @param traitSet Traits    * @param input Input    * @param indicator Deprecated, always false    * @param groupSet Bit set of grouping fields    * @param groupSets List of all grouping sets; null for just {@code groupSet}    * @param aggCalls Collection of calls to aggregate functions    * @return New {@code Aggregate} if any parameter differs from the value of    *   this {@code Aggregate}, or just {@code this} if all the parameters are    *   the same    *    * @see #copy(org.apache.calcite.plan.RelTraitSet, java.util.List)    */
 specifier|public
 specifier|abstract
 name|Aggregate
@@ -1064,9 +1110,6 @@ name|offset
 init|=
 name|getGroupCount
 argument_list|()
-operator|+
-name|getIndicatorCount
-argument_list|()
 decl_stmt|;
 return|return
 name|Pair
@@ -1103,18 +1146,16 @@ name|cardinality
 argument_list|()
 return|;
 block|}
-comment|/**    * Returns the number of indicator fields.    *    *<p>This is the same as {@link #getGroupCount()} if {@link #indicator} is    * true, zero if {@code indicator} is false.    *    *<p>The offset of the first aggregate call in the output record is always    *<i>groupCount + indicatorCount</i>.    *    * @return number of indicator fields    */
+comment|/**    * Returns the number of indicator fields.    *    *<p>Always zero.    *    * @return number of indicator fields, always zero    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 name|int
 name|getIndicatorCount
 parameter_list|()
 block|{
 return|return
-name|indicator
-condition|?
-name|getGroupCount
-argument_list|()
-else|:
 literal|0
 return|;
 block|}
@@ -1176,15 +1217,6 @@ operator|!=
 name|Group
 operator|.
 name|SIMPLE
-argument_list|)
-operator|.
-name|itemIf
-argument_list|(
-literal|"indicator"
-argument_list|,
-name|indicator
-argument_list|,
-name|indicator
 argument_list|)
 operator|.
 name|itemIf
@@ -1431,7 +1463,7 @@ operator|.
 name|getRowType
 argument_list|()
 argument_list|,
-name|indicator
+literal|false
 argument_list|,
 name|groupSet
 argument_list|,
@@ -1441,7 +1473,7 @@ name|aggCalls
 argument_list|)
 return|;
 block|}
-comment|/**    * Computes the row type of an {@code Aggregate} before it exists.    *    * @param typeFactory Type factory    * @param inputRowType Input row type    * @param indicator Whether row type should include indicator fields to    *                 indicate which grouping set is active; must be true if    *                 aggregate is not simple    * @param groupSet Bit set of grouping fields    * @param groupSets List of all grouping sets; null for just {@code groupSet}    * @param aggCalls Collection of calls to aggregate functions    * @return Row type of the aggregate    */
+comment|/**    * Computes the row type of an {@code Aggregate} before it exists.    *    * @param typeFactory Type factory    * @param inputRowType Input row type    * @param indicator Deprecated, always false    * @param groupSet Bit set of grouping fields    * @param groupSets List of all grouping sets; null for just {@code groupSet}    * @param aggCalls Collection of calls to aggregate functions    * @return Row type of the aggregate    */
 specifier|public
 specifier|static
 name|RelDataType
@@ -1592,103 +1624,16 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-if|if
-condition|(
+name|Preconditions
+operator|.
+name|checkArgument
+argument_list|(
+operator|!
 name|indicator
-condition|)
-block|{
-for|for
-control|(
-name|int
-name|groupKey
-range|:
-name|groupList
-control|)
-block|{
-specifier|final
-name|RelDataType
-name|booleanType
-init|=
-name|typeFactory
-operator|.
-name|createTypeWithNullability
-argument_list|(
-name|typeFactory
-operator|.
-name|createSqlType
-argument_list|(
-name|SqlTypeName
-operator|.
-name|BOOLEAN
-argument_list|)
 argument_list|,
-literal|false
-argument_list|)
-decl_stmt|;
-specifier|final
-name|String
-name|base
-init|=
-literal|"i$"
-operator|+
-name|fieldList
-operator|.
-name|get
-argument_list|(
-name|groupKey
-argument_list|)
-operator|.
-name|getName
-argument_list|()
-decl_stmt|;
-name|String
-name|name
-init|=
-name|base
-decl_stmt|;
-name|int
-name|i
-init|=
-literal|0
-decl_stmt|;
-while|while
-condition|(
-name|containedNames
-operator|.
-name|contains
-argument_list|(
-name|name
-argument_list|)
-condition|)
-block|{
-name|name
-operator|=
-name|base
-operator|+
-literal|"_"
-operator|+
-name|i
-operator|++
-expr_stmt|;
-block|}
-name|containedNames
-operator|.
-name|add
-argument_list|(
-name|name
+literal|"indicator is not supported, use GROUPING function instead"
 argument_list|)
 expr_stmt|;
-name|builder
-operator|.
-name|add
-argument_list|(
-name|name
-argument_list|,
-name|booleanType
-argument_list|)
-expr_stmt|;
-block|}
-block|}
 for|for
 control|(
 name|Ord

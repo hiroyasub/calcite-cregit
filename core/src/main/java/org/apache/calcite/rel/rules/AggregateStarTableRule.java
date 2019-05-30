@@ -1360,14 +1360,6 @@ name|int
 name|source
 parameter_list|)
 block|{
-assert|assert
-name|aggregate
-operator|.
-name|getIndicatorCount
-argument_list|()
-operator|==
-literal|0
-assert|;
 if|if
 condition|(
 name|source

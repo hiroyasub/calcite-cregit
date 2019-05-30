@@ -3489,8 +3489,6 @@ name|traitSet
 argument_list|,
 name|input
 argument_list|,
-name|indicator
-argument_list|,
 name|groupSet
 argument_list|,
 name|groupSets
@@ -3504,6 +3502,16 @@ argument_list|()
 operator|instanceof
 name|BindableConvention
 assert|;
+name|Preconditions
+operator|.
+name|checkArgument
+argument_list|(
+operator|!
+name|indicator
+argument_list|,
+literal|"indicator is not supported, use GROUPING function instead"
+argument_list|)
+expr_stmt|;
 for|for
 control|(
 name|AggregateCall
@@ -3800,9 +3808,7 @@ argument_list|,
 name|traitSet
 argument_list|)
 argument_list|,
-name|agg
-operator|.
-name|indicator
+literal|false
 argument_list|,
 name|agg
 operator|.

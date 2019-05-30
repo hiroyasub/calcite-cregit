@@ -785,9 +785,7 @@ operator|.
 name|getInput
 argument_list|()
 argument_list|,
-name|topAgg
-operator|.
-name|indicator
+literal|false
 argument_list|,
 name|topGroupSet
 argument_list|,

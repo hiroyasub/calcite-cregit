@@ -2153,16 +2153,11 @@ argument_list|()
 decl_stmt|;
 specifier|final
 name|int
-name|groupIndicatorCount
+name|groupCount
 init|=
 name|aggregate
 operator|.
 name|getGroupCount
-argument_list|()
-operator|+
-name|aggregate
-operator|.
-name|getIndicatorCount
 argument_list|()
 decl_stmt|;
 specifier|final
@@ -2312,7 +2307,7 @@ argument_list|(
 name|projects
 argument_list|)
 argument_list|,
-name|groupIndicatorCount
+name|groupCount
 argument_list|,
 name|relBuilder
 operator|.

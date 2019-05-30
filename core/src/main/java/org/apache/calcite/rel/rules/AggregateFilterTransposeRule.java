@@ -899,9 +899,7 @@ argument_list|()
 argument_list|,
 name|newFilter
 argument_list|,
-name|aggregate
-operator|.
-name|indicator
+literal|false
 argument_list|,
 name|topGroupSet
 operator|.

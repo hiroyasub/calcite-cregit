@@ -149,6 +149,20 @@ end_import
 
 begin_import
 import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|base
+operator|.
+name|Preconditions
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -170,7 +184,7 @@ extends|extends
 name|Aggregate
 block|{
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**    * Creates a LogicalAggregate.    *    *<p>Use {@link #create} unless you know what you're doing.    *    * @param cluster    Cluster that this relational expression belongs to    * @param traitSet   Traits    * @param child      input relational expression    * @param indicator  Whether row type should include indicator fields to    *                   indicate which grouping set is active    * @param groupSet Bit set of grouping fields    * @param groupSets Grouping sets, or null to use just {@code groupSet}    * @param aggCalls Array of aggregates to compute, not null    */
+comment|/**    * Creates a LogicalAggregate.    *    *<p>Use {@link #create} unless you know what you're doing.    *    * @param cluster    Cluster that this relational expression belongs to    * @param traitSet   Traits    * @param child      input relational expression    * @param indicator  Unused field, alway false    * @param groupSet Bit set of grouping fields    * @param groupSets Grouping sets, or null to use just {@code groupSet}    * @param aggCalls Array of aggregates to compute, not null    */
 specifier|public
 name|LogicalAggregate
 parameter_list|(
@@ -210,13 +224,21 @@ name|traitSet
 argument_list|,
 name|child
 argument_list|,
-name|indicator
-argument_list|,
 name|groupSet
 argument_list|,
 name|groupSets
 argument_list|,
 name|aggCalls
+argument_list|)
+expr_stmt|;
+name|Preconditions
+operator|.
+name|checkArgument
+argument_list|(
+operator|!
+name|indicator
+argument_list|,
+literal|"indicator is not supported, use GROUPING function instead"
 argument_list|)
 expr_stmt|;
 block|}

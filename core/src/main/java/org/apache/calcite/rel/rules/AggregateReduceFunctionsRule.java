@@ -883,15 +883,6 @@ name|getGroupCount
 argument_list|()
 decl_stmt|;
 specifier|final
-name|int
-name|indicatorCount
-init|=
-name|oldAggRel
-operator|.
-name|getIndicatorCount
-argument_list|()
-decl_stmt|;
-specifier|final
 name|List
 argument_list|<
 name|AggregateCall
@@ -929,7 +920,7 @@ name|ArrayList
 argument_list|<>
 argument_list|()
 decl_stmt|;
-comment|// pass through group key (+ indicators if present)
+comment|// pass through group key
 for|for
 control|(
 name|int
@@ -940,8 +931,6 @@ init|;
 name|i
 operator|<
 name|groupCount
-operator|+
-name|indicatorCount
 condition|;
 operator|++
 name|i
@@ -1567,10 +1556,6 @@ name|oldCall
 argument_list|,
 name|nGroups
 argument_list|,
-name|oldAggRel
-operator|.
-name|indicator
-argument_list|,
 name|newCalls
 argument_list|,
 name|aggCallMapping
@@ -1887,10 +1872,6 @@ name|sumCall
 argument_list|,
 name|nGroups
 argument_list|,
-name|oldAggRel
-operator|.
-name|indicator
-argument_list|,
 name|newCalls
 argument_list|,
 name|aggCallMapping
@@ -1914,10 +1895,6 @@ argument_list|(
 name|countCall
 argument_list|,
 name|nGroups
-argument_list|,
-name|oldAggRel
-operator|.
-name|indicator
 argument_list|,
 name|newCalls
 argument_list|,
@@ -2202,10 +2179,6 @@ name|sumZeroCall
 argument_list|,
 name|nGroups
 argument_list|,
-name|oldAggRel
-operator|.
-name|indicator
-argument_list|,
 name|newCalls
 argument_list|,
 name|aggCallMapping
@@ -2247,10 +2220,6 @@ argument_list|(
 name|countCall
 argument_list|,
 name|nGroups
-argument_list|,
-name|oldAggRel
-operator|.
-name|indicator
 argument_list|,
 name|newCalls
 argument_list|,
@@ -2546,10 +2515,6 @@ name|sumArgSquaredAggCall
 argument_list|,
 name|nGroups
 argument_list|,
-name|oldAggRel
-operator|.
-name|indicator
-argument_list|,
 name|newCalls
 argument_list|,
 name|aggCallMapping
@@ -2633,10 +2598,6 @@ argument_list|(
 name|sumArgAggCall
 argument_list|,
 name|nGroups
-argument_list|,
-name|oldAggRel
-operator|.
-name|indicator
 argument_list|,
 name|newCalls
 argument_list|,
@@ -2748,10 +2709,6 @@ argument_list|(
 name|countArgAggCall
 argument_list|,
 name|nGroups
-argument_list|,
-name|oldAggRel
-operator|.
-name|indicator
 argument_list|,
 name|newCalls
 argument_list|,
@@ -3072,10 +3029,6 @@ operator|.
 name|getGroupCount
 argument_list|()
 argument_list|,
-name|oldAggRel
-operator|.
-name|indicator
-argument_list|,
 name|newCalls
 argument_list|,
 name|aggCallMapping
@@ -3174,10 +3127,6 @@ name|oldAggRel
 operator|.
 name|getGroupCount
 argument_list|()
-argument_list|,
-name|oldAggRel
-operator|.
-name|indicator
 argument_list|,
 name|newCalls
 argument_list|,
@@ -3296,10 +3245,6 @@ name|oldAggRel
 operator|.
 name|getGroupCount
 argument_list|()
-argument_list|,
-name|oldAggRel
-operator|.
-name|indicator
 argument_list|,
 name|newCalls
 argument_list|,

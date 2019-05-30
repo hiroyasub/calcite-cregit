@@ -5343,9 +5343,7 @@ operator|.
 name|build
 argument_list|()
 argument_list|,
-name|aggregateViewNode
-operator|.
-name|indicator
+literal|false
 argument_list|,
 name|groupSet
 operator|.

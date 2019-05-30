@@ -487,14 +487,6 @@ argument_list|(
 literal|1
 argument_list|)
 decl_stmt|;
-assert|assert
-operator|!
-name|aggregate
-operator|.
-name|indicator
-operator|:
-literal|"predicate ensured no grouping sets"
-assert|;
 specifier|final
 name|int
 name|groupCount

@@ -833,7 +833,7 @@ literal|null
 argument_list|,
 name|Aggregate
 operator|::
-name|noIndicator
+name|isSimple
 argument_list|,
 name|any
 argument_list|()

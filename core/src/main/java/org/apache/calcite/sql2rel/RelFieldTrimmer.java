@@ -4213,15 +4213,6 @@ operator|.
 name|cardinality
 argument_list|()
 decl_stmt|;
-specifier|final
-name|int
-name|indicatorCount
-init|=
-name|aggregate
-operator|.
-name|getIndicatorCount
-argument_list|()
-decl_stmt|;
 name|fieldsUsed
 operator|=
 name|fieldsUsed
@@ -4233,8 +4224,6 @@ operator|.
 name|range
 argument_list|(
 name|groupCount
-operator|+
-name|indicatorCount
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -4284,8 +4273,6 @@ name|int
 name|j
 init|=
 name|groupCount
-operator|+
-name|indicatorCount
 decl_stmt|;
 name|int
 name|usedAggCallCount
@@ -4347,8 +4334,6 @@ name|getFieldCount
 argument_list|()
 argument_list|,
 name|groupCount
-operator|+
-name|indicatorCount
 operator|+
 name|usedAggCallCount
 argument_list|)
@@ -4413,8 +4398,6 @@ init|;
 name|j
 operator|<
 name|groupCount
-operator|+
-name|indicatorCount
 condition|;
 name|j
 operator|++
@@ -4455,8 +4438,6 @@ decl_stmt|;
 name|j
 operator|=
 name|groupCount
-operator|+
-name|indicatorCount
 expr_stmt|;
 for|for
 control|(
@@ -4595,8 +4576,6 @@ argument_list|(
 name|j
 argument_list|,
 name|groupCount
-operator|+
-name|indicatorCount
 operator|+
 name|newAggCallList
 operator|.

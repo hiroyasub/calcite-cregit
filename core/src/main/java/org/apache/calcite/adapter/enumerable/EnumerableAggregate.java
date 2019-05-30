@@ -605,8 +605,6 @@ name|traitSet
 argument_list|,
 name|child
 argument_list|,
-name|indicator
-argument_list|,
 name|groupSet
 argument_list|,
 name|groupSets

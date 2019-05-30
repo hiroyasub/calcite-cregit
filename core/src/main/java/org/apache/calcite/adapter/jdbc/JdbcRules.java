@@ -3827,9 +3827,7 @@ argument_list|,
 name|out
 argument_list|)
 argument_list|,
-name|agg
-operator|.
-name|indicator
+literal|false
 argument_list|,
 name|agg
 operator|.
@@ -3946,8 +3944,6 @@ name|traitSet
 argument_list|,
 name|input
 argument_list|,
-name|indicator
-argument_list|,
 name|groupSet
 argument_list|,
 name|groupSets
@@ -3975,8 +3971,6 @@ literal|"Grouping sets not supported"
 assert|;
 assert|assert
 operator|!
-name|this
-operator|.
 name|indicator
 assert|;
 specifier|final

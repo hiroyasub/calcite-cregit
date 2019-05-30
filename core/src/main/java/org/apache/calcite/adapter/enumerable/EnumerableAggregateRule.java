@@ -194,9 +194,7 @@ operator|.
 name|INSTANCE
 argument_list|)
 argument_list|,
-name|agg
-operator|.
-name|indicator
+literal|false
 argument_list|,
 name|agg
 operator|.
