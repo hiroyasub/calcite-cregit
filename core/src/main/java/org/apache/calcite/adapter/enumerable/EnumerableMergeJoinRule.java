@@ -626,14 +626,6 @@ name|getRexBuilder
 argument_list|()
 argument_list|)
 argument_list|,
-name|info
-operator|.
-name|leftKeys
-argument_list|,
-name|info
-operator|.
-name|rightKeys
-argument_list|,
 name|join
 operator|.
 name|getVariablesSet

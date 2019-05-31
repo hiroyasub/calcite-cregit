@@ -145,22 +145,6 @@ name|calcite
 operator|.
 name|rel
 operator|.
-name|core
-operator|.
-name|SemiJoin
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|rel
-operator|.
 name|logical
 operator|.
 name|LogicalCorrelate
@@ -335,19 +319,7 @@ specifier|final
 name|JoinToCorrelateRule
 name|SEMI
 init|=
-operator|new
-name|JoinToCorrelateRule
-argument_list|(
-name|SemiJoin
-operator|.
-name|class
-argument_list|,
-name|RelFactories
-operator|.
-name|LOGICAL_BUILDER
-argument_list|,
-literal|"SemiJoinToCorrelateRule"
-argument_list|)
+name|INSTANCE
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
 comment|/**    * Creates a rule that converts a {@link org.apache.calcite.rel.logical.LogicalJoin}    * into a {@link org.apache.calcite.rel.logical.LogicalCorrelate}    */
