@@ -108,10 +108,13 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Base class for any join whose condition is based on column equality.  *  *<p>For most of the cases, {@link JoinInfo#isEqui()} can already decide  * if the join condition is based on column equality.  *  *<p>{@code EquiJoin} is an abstract class for inheritance of Calcite enumerable  * joins and join implementation of other system. You should inherit the {@code EquiJoin}  * if your join implementation does not support non-equi join conditions. Calcite would  * eliminate some optimize logic for {@code EquiJoin} in some planning rules.  * e.g. {@link org.apache.calcite.rel.rules.FilterJoinRule} would not push non-equi  * join conditions of the above filter into the join underneath if it is an {@code EquiJoin}.  */
+comment|/**  * Base class for any join whose condition is based on column equality.  *  *<p>For most of the cases, {@link JoinInfo#isEqui()} can already decide  * if the join condition is based on column equality.  *  *<p>{@code EquiJoin} is an abstract class for inheritance of Calcite enumerable  * joins and join implementation of other system. You should inherit the {@code EquiJoin}  * if your join implementation does not support non-equi join conditions. Calcite would  * eliminate some optimize logic for {@code EquiJoin} in some planning rules.  * e.g. {@link org.apache.calcite.rel.rules.FilterJoinRule} would not push non-equi  * join conditions of the above filter into the join underneath if it is an {@code EquiJoin}.  *  * @deprecated This class is no longer needed; if you are writing a sub-class of  * Join that only accepts equi conditions, it is sufficient that it extends  * {@link Join}. It will be evident that it is an equi-join when its  * {@link JoinInfo#nonEquiConditions} is an empty list.  */
 end_comment
 
 begin_class
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 specifier|abstract
 class|class

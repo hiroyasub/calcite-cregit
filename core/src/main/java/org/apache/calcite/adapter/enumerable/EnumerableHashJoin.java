@@ -131,20 +131,6 @@ name|calcite
 operator|.
 name|rel
 operator|.
-name|InvalidRelException
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|rel
-operator|.
 name|RelCollationTraitDef
 import|;
 end_import
@@ -205,7 +191,7 @@ name|rel
 operator|.
 name|core
 operator|.
-name|EquiJoin
+name|Join
 import|;
 end_import
 
@@ -374,7 +360,7 @@ specifier|public
 class|class
 name|EnumerableHashJoin
 extends|extends
-name|EquiJoin
+name|Join
 implements|implements
 name|EnumerableRel
 block|{
@@ -406,8 +392,6 @@ parameter_list|,
 name|JoinRelType
 name|joinType
 parameter_list|)
-throws|throws
-name|InvalidRelException
 block|{
 name|super
 argument_list|(
@@ -463,8 +447,6 @@ name|String
 argument_list|>
 name|variablesStopped
 parameter_list|)
-throws|throws
-name|InvalidRelException
 block|{
 name|this
 argument_list|(
@@ -513,8 +495,6 @@ parameter_list|,
 name|JoinRelType
 name|joinType
 parameter_list|)
-throws|throws
-name|InvalidRelException
 block|{
 specifier|final
 name|RelOptCluster
@@ -614,8 +594,6 @@ name|boolean
 name|semiJoinDone
 parameter_list|)
 block|{
-try|try
-block|{
 return|return
 operator|new
 name|EnumerableHashJoin
@@ -636,23 +614,6 @@ argument_list|,
 name|joinType
 argument_list|)
 return|;
-block|}
-catch|catch
-parameter_list|(
-name|InvalidRelException
-name|e
-parameter_list|)
-block|{
-comment|// Semantic error not possible. Must be a bug. Convert to
-comment|// internal error.
-throw|throw
-operator|new
-name|AssertionError
-argument_list|(
-name|e
-argument_list|)
-throw|;
-block|}
 block|}
 annotation|@
 name|Override

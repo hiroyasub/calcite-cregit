@@ -6356,7 +6356,7 @@ argument_list|(
 name|program
 argument_list|)
 operator|.
-name|checkUnchanged
+name|check
 argument_list|()
 expr_stmt|;
 block|}
