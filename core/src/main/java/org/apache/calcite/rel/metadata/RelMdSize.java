@@ -1198,11 +1198,15 @@ name|mq
 parameter_list|)
 block|{
 name|boolean
-name|semijoin
+name|semiOrAntijoin
 init|=
+operator|!
 name|rel
 operator|.
-name|isSemiJoin
+name|getJoinType
+argument_list|()
+operator|.
+name|projectsRight
 argument_list|()
 decl_stmt|;
 specifier|final
@@ -1244,7 +1248,7 @@ name|Double
 argument_list|>
 name|rights
 init|=
-name|semijoin
+name|semiOrAntijoin
 condition|?
 literal|null
 else|:

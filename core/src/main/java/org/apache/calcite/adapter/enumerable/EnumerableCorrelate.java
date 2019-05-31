@@ -779,7 +779,7 @@ name|constant
 argument_list|(
 name|joinType
 operator|.
-name|toLinq4j
+name|toLinq4jCorrelateJoinType
 argument_list|()
 argument_list|)
 argument_list|,

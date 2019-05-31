@@ -2017,20 +2017,26 @@ name|Join
 operator|)
 name|rel
 decl_stmt|;
-if|if
+switch|switch
 condition|(
 name|join
 operator|.
-name|isSemiJoin
+name|getJoinType
 argument_list|()
 condition|)
 block|{
-comment|// It's not possible to convert semi-joins. They have fewer columns
+case|case
+name|SEMI
+case|:
+case|case
+name|ANTI
+case|:
+comment|// It's not possible to convert semi-joins or anti-joins. They have fewer columns
 comment|// than regular joins.
 return|return
 literal|null
 return|;
-block|}
+default|default:
 return|return
 name|convert
 argument_list|(
@@ -2039,6 +2045,7 @@ argument_list|,
 literal|true
 argument_list|)
 return|;
+block|}
 block|}
 comment|/**      * Converts a {@code Join} into a {@code JdbcJoin}.      *      * @param join Join operator to convert      * @param convertInputTraits Whether to convert input to {@code join}'s      *                            JDBC convention      * @return A new JdbcJoin      */
 specifier|public

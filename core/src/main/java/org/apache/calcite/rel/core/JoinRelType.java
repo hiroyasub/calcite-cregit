@@ -33,6 +33,20 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|linq4j
+operator|.
+name|JoinType
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -65,7 +79,7 @@ block|,
 comment|/**    * Semi-join.    *    *<p>For example, {@code EMP semi-join DEPT} finds all {@code EMP} records    * that have a corresponding {@code DEPT} record:    *    *<blockquote><pre>    * SELECT * FROM EMP    * WHERE EXISTS (SELECT 1 FROM DEPT    *     WHERE DEPT.DEPTNO = EMP.DEPTNO)</pre>    *</blockquote>    */
 name|SEMI
 block|,
-comment|/**    * Anti-join.    *    *<p>For example, {@code EMP anti-join DEPT} finds all {@code EMP} records    * that do not have a corresponding {@code DEPT} record:    *    *<blockquote><pre>    * SELECT * FROM EMP    * WHERE NOT EXISTS (SELECT 1 FROM DEPT    *     WHERE DEPT.DEPTNO = EMP.DEPTNO)</pre>    *</blockquote>    */
+comment|/**    * Anti-join (also known as Anti-semi-join).    *    *<p>For example, {@code EMP anti-join DEPT} finds all {@code EMP} records    * that do not have a corresponding {@code DEPT} record:    *    *<blockquote><pre>    * SELECT * FROM EMP    * WHERE NOT EXISTS (SELECT 1 FROM DEPT    *     WHERE DEPT.DEPTNO = EMP.DEPTNO)</pre>    *</blockquote>    */
 name|ANTI
 block|;
 comment|/** Lower-case name. */
@@ -280,7 +294,7 @@ block|}
 comment|/** Transform this JoinRelType to CorrelateJoinType. **/
 specifier|public
 name|CorrelateJoinType
-name|toLinq4j
+name|toLinq4jCorrelateJoinType
 parameter_list|()
 block|{
 switch|switch
@@ -333,9 +347,10 @@ literal|" to CorrelateJoinType"
 argument_list|)
 throw|;
 block|}
+comment|/** Transform this JoinRelType to Linq4j JoinType. **/
 specifier|public
-name|boolean
-name|projectsRight
+name|JoinType
+name|toLinq4jJoinType
 parameter_list|()
 block|{
 switch|switch
@@ -346,26 +361,50 @@ block|{
 case|case
 name|INNER
 case|:
+return|return
+name|JoinType
+operator|.
+name|INNER
+return|;
 case|case
 name|LEFT
 case|:
+return|return
+name|JoinType
+operator|.
+name|LEFT
+return|;
 case|case
 name|RIGHT
 case|:
+return|return
+name|JoinType
+operator|.
+name|RIGHT
+return|;
 case|case
 name|FULL
 case|:
 return|return
-literal|true
+name|JoinType
+operator|.
+name|FULL
 return|;
 case|case
 name|SEMI
 case|:
+return|return
+name|JoinType
+operator|.
+name|SEMI
+return|;
 case|case
 name|ANTI
 case|:
 return|return
-literal|false
+name|JoinType
+operator|.
+name|ANTI
 return|;
 block|}
 throw|throw
@@ -376,9 +415,24 @@ literal|"Unable to convert "
 operator|+
 name|this
 operator|+
-literal|" to JoinRelType"
+literal|" to Linq4j JoinType"
 argument_list|)
 throw|;
+block|}
+specifier|public
+name|boolean
+name|projectsRight
+parameter_list|()
+block|{
+return|return
+name|this
+operator|!=
+name|SEMI
+operator|&&
+name|this
+operator|!=
+name|ANTI
+return|;
 block|}
 block|}
 end_enum

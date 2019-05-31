@@ -8614,20 +8614,17 @@ operator|.
 name|build
 argument_list|()
 decl_stmt|;
-comment|// AntiJoin implemented as LogicalCorrelate with joinType=anti
 specifier|final
 name|String
 name|expected
 init|=
 literal|""
 operator|+
-literal|"LogicalCorrelate(correlation=[$cor0], joinType=[anti], requiredColumns=[{0}])\n"
+literal|"LogicalJoin(condition=[=($0, $10)], joinType=[anti])\n"
 operator|+
 literal|"  LogicalTableScan(table=[[scott, DEPT]])\n"
 operator|+
-literal|"  LogicalFilter(condition=[=($cor0.DEPTNO, $7)])\n"
-operator|+
-literal|"    LogicalTableScan(table=[[scott, EMP]])\n"
+literal|"  LogicalTableScan(table=[[scott, EMP]])\n"
 decl_stmt|;
 name|assertThat
 argument_list|(

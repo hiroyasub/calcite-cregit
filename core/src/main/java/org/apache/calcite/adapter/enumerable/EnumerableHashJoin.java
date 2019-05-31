@@ -347,6 +347,18 @@ begin_import
 import|import
 name|java
 operator|.
+name|lang
+operator|.
+name|reflect
+operator|.
+name|Method
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
 name|util
 operator|.
 name|Set
@@ -665,13 +677,6 @@ argument_list|(
 name|this
 argument_list|)
 decl_stmt|;
-if|if
-condition|(
-operator|!
-name|isSemiJoin
-argument_list|()
-condition|)
-block|{
 comment|// Joins can be flipped, and for many algorithms, both versions are viable
 comment|// and have the same cost. To make the results stable between versions of
 comment|// the planner, make one of the versions slightly more expensive.
@@ -680,6 +685,14 @@ condition|(
 name|joinType
 condition|)
 block|{
+case|case
+name|SEMI
+case|:
+case|case
+name|ANTI
+case|:
+comment|// SEMI and ANTI join cannot be flipped
+break|break;
 case|case
 name|RIGHT
 case|:
@@ -719,7 +732,6 @@ argument_list|(
 name|rowCount
 argument_list|)
 expr_stmt|;
-block|}
 block|}
 block|}
 comment|// Cheaper if the smaller number of rows is coming from the LHS.
@@ -854,12 +866,17 @@ name|Prefer
 name|pref
 parameter_list|)
 block|{
-if|if
+switch|switch
 condition|(
-name|isSemiJoin
-argument_list|()
+name|joinType
 condition|)
 block|{
+case|case
+name|SEMI
+case|:
+case|case
+name|ANTI
+case|:
 assert|assert
 name|joinInfo
 operator|.
@@ -874,7 +891,7 @@ argument_list|,
 name|pref
 argument_list|)
 return|;
-block|}
+default|default:
 return|return
 name|implementHashJoin
 argument_list|(
@@ -883,6 +900,7 @@ argument_list|,
 name|pref
 argument_list|)
 return|;
+block|}
 block|}
 specifier|private
 name|Result
@@ -895,6 +913,41 @@ name|Prefer
 name|pref
 parameter_list|)
 block|{
+assert|assert
+name|joinType
+operator|==
+name|JoinRelType
+operator|.
+name|SEMI
+operator|||
+name|joinType
+operator|==
+name|JoinRelType
+operator|.
+name|ANTI
+assert|;
+specifier|final
+name|Method
+name|method
+init|=
+name|joinType
+operator|==
+name|JoinRelType
+operator|.
+name|SEMI
+condition|?
+name|BuiltInMethod
+operator|.
+name|SEMI_JOIN
+operator|.
+name|method
+else|:
+name|BuiltInMethod
+operator|.
+name|ANTI_JOIN
+operator|.
+name|method
+decl_stmt|;
 name|BlockBuilder
 name|builder
 init|=
@@ -993,10 +1046,6 @@ name|Expressions
 operator|.
 name|call
 argument_list|(
-name|BuiltInMethod
-operator|.
-name|SEMI_JOIN
-operator|.
 name|method
 argument_list|,
 name|Expressions

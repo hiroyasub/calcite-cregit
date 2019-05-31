@@ -348,14 +348,18 @@ argument_list|)
 decl_stmt|;
 if|if
 condition|(
+operator|!
 name|join
 operator|.
-name|isSemiJoin
+name|getJoinType
+argument_list|()
+operator|.
+name|projectsRight
 argument_list|()
 condition|)
 block|{
 return|return;
-comment|// TODO: support SemiJoin
+comment|// TODO: support SemiJoin / AntiJoin
 block|}
 comment|// Normalize the join condition so we don't end up misidentified expanded
 comment|// form of IS NOT DISTINCT FROM as PushProject also visit the filter condition
