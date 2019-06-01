@@ -150,9 +150,10 @@ operator|new
 name|EnumerableMergeJoinRule
 argument_list|()
 decl_stmt|;
+comment|/** @deprecated To be removed along with {@link SemiJoin};    * use {@link #ENUMERABLE_JOIN_RULE} */
 annotation|@
 name|Deprecated
-comment|// To be removed before 2.0, use ENUMERABLE_JOIN_RULE instead.
+comment|// to be removed before 1.21
 specifier|public
 specifier|static
 specifier|final

@@ -298,9 +298,7 @@ argument_list|,
 literal|"JoinToCorrelateRule"
 argument_list|)
 decl_stmt|;
-annotation|@
-name|Deprecated
-comment|// To be removed before 2.0, should use INSTANCE instead.
+comment|/** Synonym for {@link #INSTANCE};    * {@code JOIN} is not deprecated, but {@code INSTANCE} is preferred. */
 specifier|public
 specifier|static
 specifier|final
@@ -309,17 +307,39 @@ name|JOIN
 init|=
 name|INSTANCE
 decl_stmt|;
-comment|/**    * Rule that converts a {@link org.apache.calcite.rel.core.SemiJoin}    * into a {@link org.apache.calcite.rel.logical.LogicalCorrelate}    */
+comment|/**    * Rule that converts a {@link org.apache.calcite.rel.core.SemiJoin}    * into a {@link org.apache.calcite.rel.logical.LogicalCorrelate}    *    * @deprecated Will be unnecessary when {@code SemiJoin} is removed before    * 1.21, and will be removed at that time.    */
 annotation|@
 name|Deprecated
-comment|// To be removed before 2.0, should use INSTANCE instead.
+comment|// to be removed before 1.21
 specifier|public
 specifier|static
 specifier|final
 name|JoinToCorrelateRule
 name|SEMI
 init|=
-name|INSTANCE
+operator|new
+name|JoinToCorrelateRule
+argument_list|(
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|core
+operator|.
+name|SemiJoin
+operator|.
+name|class
+argument_list|,
+name|RelFactories
+operator|.
+name|LOGICAL_BUILDER
+argument_list|,
+literal|"SemiJoinToCorrelateRule"
+argument_list|)
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
 comment|/**    * Creates a rule that converts a {@link org.apache.calcite.rel.logical.LogicalJoin}    * into a {@link org.apache.calcite.rel.logical.LogicalCorrelate}    */
@@ -370,7 +390,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Creates a JoinToCorrelateRule for a certain sub-class of    * {@link org.apache.calcite.rel.core.Join} to be transformed into a    * {@link org.apache.calcite.rel.logical.LogicalCorrelate}    * @param clazz Class of relational expression to match (must not be null)    * @param relBuilderFactory Builder for relational expressions    * @param description Description, or null to guess description    */
+comment|/**    * Creates a JoinToCorrelateRule for a certain sub-class of    * {@link org.apache.calcite.rel.core.Join} to be transformed into a    * {@link org.apache.calcite.rel.logical.LogicalCorrelate}.    *    * @param clazz Class of relational expression to match (must not be null)    * @param relBuilderFactory Builder for relational expressions    * @param description Description, or null to guess description    */
 specifier|private
 name|JoinToCorrelateRule
 parameter_list|(

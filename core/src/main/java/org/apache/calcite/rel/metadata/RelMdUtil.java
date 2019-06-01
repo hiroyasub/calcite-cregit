@@ -665,6 +665,59 @@ name|class
 argument_list|)
 return|;
 block|}
+comment|/**    * Computes the selectivity of a semijoin filter if it is applied on a fact    * table. The computation is based on the selectivity of the dimension    * table/columns and the number of distinct values in the fact table    * columns.    *    * @param rel semijoin rel    * @return calculated selectivity    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 1.21
+specifier|public
+specifier|static
+name|double
+name|computeSemiJoinSelectivity
+parameter_list|(
+name|RelMetadataQuery
+name|mq
+parameter_list|,
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|core
+operator|.
+name|SemiJoin
+name|rel
+parameter_list|)
+block|{
+return|return
+name|computeSemiJoinSelectivity
+argument_list|(
+name|mq
+argument_list|,
+name|rel
+operator|.
+name|getLeft
+argument_list|()
+argument_list|,
+name|rel
+operator|.
+name|getRight
+argument_list|()
+argument_list|,
+name|rel
+operator|.
+name|getLeftKeys
+argument_list|()
+argument_list|,
+name|rel
+operator|.
+name|getRightKeys
+argument_list|()
+argument_list|)
+return|;
+block|}
 comment|/**    * Computes the selectivity of a semijoin filter if it is applied on a fact    * table. The computation is based on the selectivity of the dimension    * table/columns and the number of distinct values in the fact table    * columns.    *    * @param factRel fact table participating in the semijoin    * @param dimRel  dimension table participating in the semijoin    * @param rel     semijoin rel    * @return calculated selectivity    */
 specifier|public
 specifier|static
@@ -3000,7 +3053,7 @@ name|condition
 argument_list|)
 return|;
 block|}
-comment|/** Returns an estimate of the number of rows returned by a    * join with type {@link JoinRelType#SEMI}. */
+comment|/** Returns an estimate of the number of rows returned by a    * {@link SemiJoin}. */
 specifier|public
 specifier|static
 name|Double

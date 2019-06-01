@@ -566,7 +566,7 @@ decl_stmt|;
 try|try
 block|{
 name|RelTraitSet
-name|traits
+name|traitSet
 init|=
 name|join
 operator|.
@@ -589,9 +589,9 @@ name|isEmpty
 argument_list|()
 condition|)
 block|{
-name|traits
+name|traitSet
 operator|=
-name|traits
+name|traitSet
 operator|.
 name|replace
 argument_list|(
@@ -606,7 +606,7 @@ name|EnumerableMergeJoin
 argument_list|(
 name|cluster
 argument_list|,
-name|traits
+name|traitSet
 argument_list|,
 name|left
 argument_list|,
