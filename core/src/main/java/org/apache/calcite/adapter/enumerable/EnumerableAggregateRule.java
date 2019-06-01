@@ -194,8 +194,6 @@ operator|.
 name|INSTANCE
 argument_list|)
 argument_list|,
-literal|false
-argument_list|,
 name|agg
 operator|.
 name|getGroupSet

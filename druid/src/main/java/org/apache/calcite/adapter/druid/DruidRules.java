@@ -2935,10 +2935,6 @@ if|if
 condition|(
 name|aggregate
 operator|.
-name|indicator
-operator|||
-name|aggregate
-operator|.
 name|getGroupSets
 argument_list|()
 operator|.
@@ -3180,10 +3176,6 @@ return|return;
 block|}
 if|if
 condition|(
-name|aggregate
-operator|.
-name|indicator
-operator|||
 name|aggregate
 operator|.
 name|getGroupSets
@@ -3790,10 +3782,6 @@ name|aggregate
 operator|.
 name|getInput
 argument_list|()
-argument_list|,
-name|aggregate
-operator|.
-name|indicator
 argument_list|,
 name|aggregate
 operator|.

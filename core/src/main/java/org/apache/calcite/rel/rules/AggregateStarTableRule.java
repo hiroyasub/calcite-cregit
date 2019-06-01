@@ -1259,8 +1259,6 @@ operator|.
 name|build
 argument_list|()
 argument_list|,
-literal|false
-argument_list|,
 name|groupSet
 operator|.
 name|build

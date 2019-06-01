@@ -398,9 +398,6 @@ parameter_list|(
 name|RelNode
 name|input
 parameter_list|,
-name|boolean
-name|indicator
-parameter_list|,
 name|ImmutableBitSet
 name|groupSet
 parameter_list|,
@@ -432,8 +429,6 @@ name|getTraitSet
 argument_list|()
 argument_list|,
 name|input
-argument_list|,
-name|indicator
 argument_list|,
 name|groupSet
 argument_list|,

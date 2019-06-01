@@ -713,8 +713,6 @@ operator|.
 name|getInput
 argument_list|()
 argument_list|,
-literal|false
-argument_list|,
 name|newGroupSet
 argument_list|,
 name|newGroupingSets

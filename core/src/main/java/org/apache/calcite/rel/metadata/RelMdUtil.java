@@ -3053,7 +3053,7 @@ name|condition
 argument_list|)
 return|;
 block|}
-comment|/** Returns an estimate of the number of rows returned by a    * {@link SemiJoin}. */
+comment|/** Returns an estimate of the number of rows returned by a semi-join. */
 specifier|public
 specifier|static
 name|Double

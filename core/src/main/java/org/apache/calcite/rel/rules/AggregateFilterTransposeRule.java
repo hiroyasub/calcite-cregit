@@ -524,8 +524,6 @@ argument_list|()
 argument_list|,
 name|input
 argument_list|,
-literal|false
-argument_list|,
 name|newGroupSet
 argument_list|,
 literal|null
@@ -898,8 +896,6 @@ name|getTraitSet
 argument_list|()
 argument_list|,
 name|newFilter
-argument_list|,
-literal|false
 argument_list|,
 name|topGroupSet
 operator|.

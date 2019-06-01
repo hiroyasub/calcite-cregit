@@ -3303,10 +3303,6 @@ name|size
 argument_list|()
 operator|!=
 literal|1
-operator|||
-name|aggregate
-operator|.
-name|indicator
 condition|)
 block|{
 return|return

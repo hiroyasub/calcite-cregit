@@ -39,6 +39,22 @@ name|apache
 operator|.
 name|calcite
 operator|.
+name|linq4j
+operator|.
+name|function
+operator|.
+name|Experimental
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
 name|plan
 operator|.
 name|RelOptCluster
@@ -606,6 +622,29 @@ name|Aggregate
 operator|::
 name|isNotGrandTotal
 decl_stmt|;
+comment|/** Used internally; will removed when {@link #indicator} is removed,    * before 2.0. */
+annotation|@
+name|Experimental
+specifier|public
+specifier|static
+name|void
+name|checkIndicator
+parameter_list|(
+name|boolean
+name|indicator
+parameter_list|)
+block|{
+name|Preconditions
+operator|.
+name|checkArgument
+argument_list|(
+operator|!
+name|indicator
+argument_list|,
+literal|"indicator is no longer supported; use GROUPING function instead"
+argument_list|)
+expr_stmt|;
+block|}
 comment|//~ Instance fields --------------------------------------------------------
 annotation|@
 name|Deprecated
@@ -639,7 +678,7 @@ argument_list|>
 name|groupSets
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**    * Creates an Aggregate.    *    *<p>All members of {@code groupSets} must be sub-sets of {@code groupSet}.    * For a simple {@code GROUP BY}, {@code groupSets} is a singleton list    * containing {@code groupSet}.    *    *<p>If {@code GROUP BY} is not specified,    * or equivalently if {@code GROUP BY ()} is specified,    * {@code groupSet} will be the empty set,    * and {@code groupSets} will have one element, that empty set.    *    *<p>If {@code CUBE}, {@code ROLLUP} or {@code GROUPING SETS} are    * specified, {@code groupSets} will have additional elements,    * but they must each be a subset of {@code groupSet},    * and they must be sorted by inclusion:    * {@code (0, 1, 2), (1), (0, 2), (0), ()}.    *    * @param cluster  Cluster    * @param traits   Traits    * @param child    Child    * @param groupSet Bit set of grouping fields    * @param groupSets List of all grouping sets; null for just {@code groupSet}    * @param aggCalls Collection of calls to aggregate functions    */
+comment|/**    * Creates an Aggregate.    *    *<p>All members of {@code groupSets} must be sub-sets of {@code groupSet}.    * For a simple {@code GROUP BY}, {@code groupSets} is a singleton list    * containing {@code groupSet}.    *    *<p>If {@code GROUP BY} is not specified,    * or equivalently if {@code GROUP BY ()} is specified,    * {@code groupSet} will be the empty set,    * and {@code groupSets} will have one element, that empty set.    *    *<p>If {@code CUBE}, {@code ROLLUP} or {@code GROUPING SETS} are    * specified, {@code groupSets} will have additional elements,    * but they must each be a subset of {@code groupSet},    * and they must be sorted by inclusion:    * {@code (0, 1, 2), (1), (0, 2), (0), ()}.    *    * @param cluster  Cluster    * @param traitSet Trait set    * @param input    Input relational expression    * @param groupSet Bit set of grouping fields    * @param groupSets List of all grouping sets; null for just {@code groupSet}    * @param aggCalls Collection of calls to aggregate functions    */
 specifier|protected
 name|Aggregate
 parameter_list|(
@@ -647,10 +686,10 @@ name|RelOptCluster
 name|cluster
 parameter_list|,
 name|RelTraitSet
-name|traits
+name|traitSet
 parameter_list|,
 name|RelNode
-name|child
+name|input
 parameter_list|,
 name|ImmutableBitSet
 name|groupSet
@@ -672,9 +711,9 @@ name|super
 argument_list|(
 name|cluster
 argument_list|,
-name|traits
+name|traitSet
 argument_list|,
-name|child
+name|input
 argument_list|)
 expr_stmt|;
 name|this
@@ -767,7 +806,7 @@ operator|.
 name|length
 argument_list|()
 operator|<=
-name|child
+name|input
 operator|.
 name|getRowType
 argument_list|()
@@ -805,7 +844,7 @@ literal|0
 operator|||
 name|isPredicate
 argument_list|(
-name|child
+name|input
 argument_list|,
 name|aggCall
 operator|.
@@ -867,14 +906,9 @@ argument_list|,
 name|aggCalls
 argument_list|)
 expr_stmt|;
-name|Preconditions
-operator|.
-name|checkArgument
+name|checkIndicator
 argument_list|(
-operator|!
 name|indicator
-argument_list|,
-literal|"indicator is not supported, use GROUPING function instead"
 argument_list|)
 expr_stmt|;
 block|}
@@ -1036,8 +1070,6 @@ argument_list|(
 name|inputs
 argument_list|)
 argument_list|,
-literal|false
-argument_list|,
 name|groupSet
 argument_list|,
 name|groupSets
@@ -1046,9 +1078,38 @@ name|aggCalls
 argument_list|)
 return|;
 block|}
-comment|/** Creates a copy of this aggregate.    *    * @param traitSet Traits    * @param input Input    * @param indicator Deprecated, always false    * @param groupSet Bit set of grouping fields    * @param groupSets List of all grouping sets; null for just {@code groupSet}    * @param aggCalls Collection of calls to aggregate functions    * @return New {@code Aggregate} if any parameter differs from the value of    *   this {@code Aggregate}, or just {@code this} if all the parameters are    *   the same    *    * @see #copy(org.apache.calcite.plan.RelTraitSet, java.util.List)    */
+comment|/** Creates a copy of this aggregate.    *    * @param traitSet Traits    * @param input Input    * @param groupSet Bit set of grouping fields    * @param groupSets List of all grouping sets; null for just {@code groupSet}    * @param aggCalls Collection of calls to aggregate functions    * @return New {@code Aggregate} if any parameter differs from the value of    *   this {@code Aggregate}, or just {@code this} if all the parameters are    *   the same    *    * @see #copy(org.apache.calcite.plan.RelTraitSet, java.util.List)    */
 specifier|public
 specifier|abstract
+name|Aggregate
+name|copy
+parameter_list|(
+name|RelTraitSet
+name|traitSet
+parameter_list|,
+name|RelNode
+name|input
+parameter_list|,
+name|ImmutableBitSet
+name|groupSet
+parameter_list|,
+name|List
+argument_list|<
+name|ImmutableBitSet
+argument_list|>
+name|groupSets
+parameter_list|,
+name|List
+argument_list|<
+name|AggregateCall
+argument_list|>
+name|aggCalls
+parameter_list|)
+function_decl|;
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
+specifier|public
 name|Aggregate
 name|copy
 parameter_list|(
@@ -1076,7 +1137,27 @@ name|AggregateCall
 argument_list|>
 name|aggCalls
 parameter_list|)
-function_decl|;
+block|{
+name|checkIndicator
+argument_list|(
+name|indicator
+argument_list|)
+expr_stmt|;
+return|return
+name|copy
+argument_list|(
+name|traitSet
+argument_list|,
+name|input
+argument_list|,
+name|groupSet
+argument_list|,
+name|groupSets
+argument_list|,
+name|aggCalls
+argument_list|)
+return|;
+block|}
 comment|/**    * Returns a list of calls to aggregate functions.    *    * @return list of calls to aggregate functions    */
 specifier|public
 name|List
@@ -1624,14 +1705,9 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-name|Preconditions
-operator|.
-name|checkArgument
+name|checkIndicator
 argument_list|(
-operator|!
 name|indicator
-argument_list|,
-literal|"indicator is not supported, use GROUPING function instead"
 argument_list|)
 expr_stmt|;
 for|for

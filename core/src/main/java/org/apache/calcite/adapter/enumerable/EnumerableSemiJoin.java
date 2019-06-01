@@ -284,7 +284,7 @@ import|;
 end_import
 
 begin_comment
-comment|/** Implementation of {@link org.apache.calcite.rel.core.SemiJoin} in  * {@link org.apache.calcite.adapter.enumerable.EnumerableConvention enumerable calling convention}.  *  * @deprecated This class is deprecated along with {@link SemiJoin};  * the function is merged into {@link EnumerableHashJoin};  * see {@link EnumerableJoinRule} for details.  */
+comment|/** Implementation of {@link org.apache.calcite.rel.core.SemiJoin} in  * {@link org.apache.calcite.adapter.enumerable.EnumerableConvention enumerable calling convention}.  *  * @deprecated This class is deprecated along with  * {@link org.apache.calcite.rel.core.SemiJoin};  * the function is merged into {@link EnumerableHashJoin};  * see {@link EnumerableJoinRule} for details.  */
 end_comment
 
 begin_class

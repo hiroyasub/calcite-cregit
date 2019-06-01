@@ -1094,10 +1094,6 @@ argument_list|)
 argument_list|,
 name|aggregate
 operator|.
-name|indicator
-argument_list|,
-name|aggregate
-operator|.
 name|getGroupSet
 argument_list|()
 argument_list|,

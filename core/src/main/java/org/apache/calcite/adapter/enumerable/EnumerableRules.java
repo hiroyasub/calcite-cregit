@@ -150,7 +150,7 @@ operator|new
 name|EnumerableMergeJoinRule
 argument_list|()
 decl_stmt|;
-comment|/** @deprecated To be removed along with {@link SemiJoin};    * use {@link #ENUMERABLE_JOIN_RULE} */
+comment|/** @deprecated To be removed along with    * {@link org.apache.calcite.rel.core.SemiJoin};    * use {@link #ENUMERABLE_JOIN_RULE} instead. */
 annotation|@
 name|Deprecated
 comment|// to be removed before 1.21
