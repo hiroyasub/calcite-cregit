@@ -2348,6 +2348,120 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3087">[CALCITE-3087]    * AggregateOnProjectToAggregateUnifyRule ignores Project incorrectly when its    * Mapping breaks ordering</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testAggregateOnProject1
+parameter_list|()
+block|{
+name|checkMaterialize
+argument_list|(
+literal|"select \"empid\", \"deptno\", count(*) as c, sum(\"empid\") as s from \"emps\" "
+operator|+
+literal|"group by \"empid\", \"deptno\""
+argument_list|,
+literal|"select count(*) + 1 as c, \"deptno\" from \"emps\" group by \"deptno\", \"empid\""
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testAggregateOnProject2
+parameter_list|()
+block|{
+name|checkMaterialize
+argument_list|(
+literal|"select \"empid\", \"deptno\", count(*) as c, sum(\"salary\") as s from \"emps\" "
+operator|+
+literal|"group by \"empid\", \"deptno\""
+argument_list|,
+literal|"select count(*) + 1 as c,  \"deptno\" from \"emps\" group by cube(\"deptno\", \"empid\")"
+argument_list|,
+name|HR_FKUK_MODEL
+argument_list|,
+name|CalciteAssert
+operator|.
+name|checkResultContains
+argument_list|(
+literal|"EnumerableCalc(expr#0..2=[{inputs}], expr#3=[1], "
+operator|+
+literal|"expr#4=[+($t2, $t3)], C=[$t4], deptno=[$t1])\n"
+operator|+
+literal|"  EnumerableAggregate(group=[{0, 1}], groups=[[{0, 1}, {0}, {1}, {}]], agg#0=[$SUM0($2)])\n"
+operator|+
+literal|"    EnumerableTableScan(table=[[hr, m0]])"
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testAggregateOnProject3
+parameter_list|()
+block|{
+name|checkMaterialize
+argument_list|(
+literal|"select \"empid\", \"deptno\", count(*) as c, sum(\"salary\") as s from \"emps\" "
+operator|+
+literal|"group by \"empid\", \"deptno\""
+argument_list|,
+literal|"select count(*) + 1 as c,  \"deptno\" from \"emps\" group by rollup(\"deptno\", \"empid\")"
+argument_list|,
+name|HR_FKUK_MODEL
+argument_list|,
+name|CalciteAssert
+operator|.
+name|checkResultContains
+argument_list|(
+literal|"EnumerableCalc(expr#0..2=[{inputs}], expr#3=[1], "
+operator|+
+literal|"expr#4=[+($t2, $t3)], C=[$t4], deptno=[$t1])\n"
+operator|+
+literal|"  EnumerableAggregate(group=[{0, 1}], groups=[[{0, 1}, {1}, {}]], agg#0=[$SUM0($2)])\n"
+operator|+
+literal|"    EnumerableTableScan(table=[[hr, m0]])"
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testAggregateOnProject4
+parameter_list|()
+block|{
+name|checkMaterialize
+argument_list|(
+literal|"select \"salary\", \"empid\", \"deptno\", count(*) as c, sum(\"commission\") as s from \"emps\" "
+operator|+
+literal|"group by \"salary\", \"empid\", \"deptno\""
+argument_list|,
+literal|"select count(*) + 1 as c,  \"deptno\" from \"emps\" group by rollup(\"empid\", \"deptno\", \"salary\")"
+argument_list|,
+name|HR_FKUK_MODEL
+argument_list|,
+name|CalciteAssert
+operator|.
+name|checkResultContains
+argument_list|(
+literal|"EnumerableCalc(expr#0..3=[{inputs}], expr#4=[1], "
+operator|+
+literal|"expr#5=[+($t3, $t4)], C=[$t5], deptno=[$t2])\n"
+operator|+
+literal|"  EnumerableAggregate(group=[{0, 1, 2}], groups=[[{0, 1, 2}, {1, 2}, {1}, {}]], agg#0=[$SUM0($3)])\n"
+operator|+
+literal|"    EnumerableTableScan(table=[[hr, m0]])"
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
 annotation|@
 name|Test
 specifier|public

@@ -1045,6 +1045,9 @@ name|bijection
 argument_list|(
 name|posList
 argument_list|)
+operator|.
+name|inverse
+argument_list|()
 argument_list|)
 argument_list|,
 name|child
