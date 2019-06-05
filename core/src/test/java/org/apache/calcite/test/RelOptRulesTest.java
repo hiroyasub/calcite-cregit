@@ -3257,6 +3257,37 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testNotPushExpression
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select 1 from emp inner join dept \n"
+operator|+
+literal|"on emp.deptno=dept.deptno and emp.ename is not null"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|withRule
+argument_list|(
+name|JoinPushExpressionsRule
+operator|.
+name|INSTANCE
+argument_list|)
+operator|.
+name|checkUnchanged
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testAddRedundantSemiJoinRule
 parameter_list|()
 block|{
