@@ -137,6 +137,16 @@ name|java
 operator|.
 name|util
 operator|.
+name|Locale
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
 name|Objects
 import|;
 end_import
@@ -177,7 +187,7 @@ name|RelTrait
 name|outTrait
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**    * Creates a<code>ConverterRule</code>.    *    * @param clazz       Type of relational expression to consider converting    * @param in          Trait of relational expression to consider converting    * @param out         Trait which is converted to    * @param description Description of rule    */
+comment|/**    * Creates a<code>ConverterRule</code>.    *    * @param clazz       Type of relational expression to consider converting    * @param in          Trait of relational expression to consider converting    * @param out         Trait which is converted to    * @param descriptionPrefix Description prefix of rule    */
 specifier|public
 name|ConverterRule
 parameter_list|(
@@ -196,7 +206,7 @@ name|RelTrait
 name|out
 parameter_list|,
 name|String
-name|description
+name|descriptionPrefix
 parameter_list|)
 block|{
 name|this
@@ -221,7 +231,7 @@ name|RelFactories
 operator|.
 name|LOGICAL_BUILDER
 argument_list|,
-name|description
+name|descriptionPrefix
 argument_list|)
 expr_stmt|;
 block|}
@@ -270,7 +280,7 @@ name|RelTrait
 name|out
 parameter_list|,
 name|String
-name|description
+name|descriptionPrefix
 parameter_list|)
 block|{
 name|this
@@ -287,11 +297,11 @@ name|RelFactories
 operator|.
 name|LOGICAL_BUILDER
 argument_list|,
-name|description
+name|descriptionPrefix
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Creates a<code>ConverterRule</code> with a predicate.    *    * @param clazz       Type of relational expression to consider converting    * @param predicate   Predicate on the relational expression    * @param in          Trait of relational expression to consider converting    * @param out         Trait which is converted to    * @param relBuilderFactory Builder for relational expressions    * @param description Description of rule    */
+comment|/**    * Creates a<code>ConverterRule</code> with a predicate.    *    * @param clazz       Type of relational expression to consider converting    * @param predicate   Predicate on the relational expression    * @param in          Trait of relational expression to consider converting    * @param out         Trait which is converted to    * @param relBuilderFactory Builder for relational expressions    * @param descriptionPrefix Description prefix of rule    */
 specifier|public
 parameter_list|<
 name|R
@@ -324,7 +334,7 @@ name|RelBuilderFactory
 name|relBuilderFactory
 parameter_list|,
 name|String
-name|description
+name|descriptionPrefix
 parameter_list|)
 block|{
 name|super
@@ -340,21 +350,14 @@ argument_list|)
 argument_list|,
 name|relBuilderFactory
 argument_list|,
-name|description
-operator|==
-literal|null
-condition|?
-literal|"ConverterRule(in:"
-operator|+
+name|createDescription
+argument_list|(
+name|descriptionPrefix
+argument_list|,
 name|in
-operator|+
-literal|",out:"
-operator|+
+argument_list|,
 name|out
-operator|+
-literal|")"
-else|:
-name|description
+argument_list|)
 argument_list|)
 expr_stmt|;
 name|this
@@ -510,6 +513,47 @@ name|inTrait
 operator|.
 name|getTraitDef
 argument_list|()
+return|;
+block|}
+specifier|private
+specifier|static
+name|String
+name|createDescription
+parameter_list|(
+name|String
+name|descriptionPrefix
+parameter_list|,
+name|RelTrait
+name|in
+parameter_list|,
+name|RelTrait
+name|out
+parameter_list|)
+block|{
+return|return
+name|String
+operator|.
+name|format
+argument_list|(
+name|Locale
+operator|.
+name|ROOT
+argument_list|,
+literal|"%s(in:%s,out:%s)"
+argument_list|,
+name|Objects
+operator|.
+name|toString
+argument_list|(
+name|descriptionPrefix
+argument_list|,
+literal|"ConverterRule"
+argument_list|)
+argument_list|,
+name|in
+argument_list|,
+name|out
+argument_list|)
 return|;
 block|}
 comment|/** Converts a relational expression to the target trait(s) of this rule.    *    *<p>Returns null if conversion is not possible. */

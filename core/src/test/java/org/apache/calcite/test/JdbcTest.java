@@ -2141,6 +2141,28 @@ specifier|public
 specifier|static
 specifier|final
 name|String
+name|FOODMART_SCOTT_MODEL
+init|=
+literal|"{\n"
+operator|+
+literal|"  version: '1.0',\n"
+operator|+
+literal|"   schemas: [\n"
+operator|+
+name|FOODMART_SCHEMA
+operator|+
+literal|",\n"
+operator|+
+name|SCOTT_SCHEMA
+operator|+
+literal|"   ]\n"
+operator|+
+literal|"}"
+decl_stmt|;
+specifier|public
+specifier|static
+specifier|final
+name|String
 name|START_OF_GROUP_DATA
 init|=
 literal|"(values"

@@ -404,6 +404,88 @@ literal|"FROM \"foodmart\".\"sales_fact_1998\""
 argument_list|)
 expr_stmt|;
 block|}
+comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3115">[CALCITE-3115]    * Cannot add JdbcRules which have different JdbcConvention    * to same VolcanoPlanner's RuleSet.</a>*/
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testUnionPlan2
+parameter_list|()
+block|{
+name|CalciteAssert
+operator|.
+name|model
+argument_list|(
+name|JdbcTest
+operator|.
+name|FOODMART_SCOTT_MODEL
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select \"store_name\" from \"foodmart\".\"store\" where \"store_id\"< 10\n"
+operator|+
+literal|"union all\n"
+operator|+
+literal|"select ename from SCOTT.emp where empno> 10"
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+literal|"PLAN=EnumerableUnion(all=[true])\n"
+operator|+
+literal|"  JdbcToEnumerableConverter\n"
+operator|+
+literal|"    JdbcProject(store_name=[$3])\n"
+operator|+
+literal|"      JdbcFilter(condition=[<($0, 10)])\n"
+operator|+
+literal|"        JdbcTableScan(table=[[foodmart, store]])\n"
+operator|+
+literal|"  JdbcToEnumerableConverter\n"
+operator|+
+literal|"    JdbcProject(ENAME=[$1])\n"
+operator|+
+literal|"      JdbcFilter(condition=[>($0, 10)])\n"
+operator|+
+literal|"        JdbcTableScan(table=[[SCOTT, EMP]])"
+argument_list|)
+operator|.
+name|runs
+argument_list|()
+operator|.
+name|enable
+argument_list|(
+name|CalciteAssert
+operator|.
+name|DB
+operator|==
+name|CalciteAssert
+operator|.
+name|DatabaseInstance
+operator|.
+name|HSQLDB
+argument_list|)
+operator|.
+name|planHasSql
+argument_list|(
+literal|"SELECT \"store_name\"\n"
+operator|+
+literal|"FROM \"foodmart\".\"store\"\n"
+operator|+
+literal|"WHERE \"store_id\"< 10"
+argument_list|)
+operator|.
+name|planHasSql
+argument_list|(
+literal|"SELECT \"ENAME\"\n"
+operator|+
+literal|"FROM \"SCOTT\".\"EMP\"\n"
+operator|+
+literal|"WHERE \"EMPNO\"> 10"
+argument_list|)
+expr_stmt|;
+block|}
 annotation|@
 name|Test
 specifier|public
