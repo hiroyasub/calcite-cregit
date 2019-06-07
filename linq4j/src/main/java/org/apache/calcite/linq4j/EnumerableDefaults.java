@@ -5908,7 +5908,7 @@ block|}
 end_function
 
 begin_comment
-comment|/**    * Returns elements of {@code outer} for which there is a member of    * {@code inner} with a matching key. A specified    * {@code EqualityComparer<TSource>} is used to compare keys.    */
+comment|/**    * For each row of the {@code outer} enumerable returns the correlated rows    * from the {@code inner} enumerable.    */
 end_comment
 
 begin_function
@@ -5928,7 +5928,7 @@ argument_list|>
 name|correlateJoin
 parameter_list|(
 specifier|final
-name|CorrelateJoinType
+name|JoinType
 name|joinType
 parameter_list|,
 specifier|final
@@ -5962,6 +5962,33 @@ argument_list|>
 name|resultSelector
 parameter_list|)
 block|{
+if|if
+condition|(
+name|joinType
+operator|==
+name|JoinType
+operator|.
+name|RIGHT
+operator|||
+name|joinType
+operator|==
+name|JoinType
+operator|.
+name|FULL
+condition|)
+block|{
+throw|throw
+operator|new
+name|IllegalArgumentException
+argument_list|(
+literal|"JoinType "
+operator|+
+name|joinType
+operator|+
+literal|" is not valid for correlation"
+argument_list|)
+throw|;
+block|}
 return|return
 operator|new
 name|AbstractEnumerable

@@ -27,20 +27,6 @@ name|calcite
 operator|.
 name|linq4j
 operator|.
-name|CorrelateJoinType
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|linq4j
-operator|.
 name|Enumerable
 import|;
 end_import
@@ -1041,7 +1027,7 @@ name|testJoin
 argument_list|(
 name|correlateJoin
 argument_list|(
-name|CorrelateJoinType
+name|JoinType
 operator|.
 name|LEFT
 argument_list|)
@@ -1067,7 +1053,7 @@ name|testJoin
 argument_list|(
 name|correlateJoin
 argument_list|(
-name|CorrelateJoinType
+name|JoinType
 operator|.
 name|INNER
 argument_list|)
@@ -1093,7 +1079,7 @@ name|testJoin
 argument_list|(
 name|correlateJoin
 argument_list|(
-name|CorrelateJoinType
+name|JoinType
 operator|.
 name|ANTI
 argument_list|)
@@ -1119,7 +1105,7 @@ name|testJoin
 argument_list|(
 name|correlateJoin
 argument_list|(
-name|CorrelateJoinType
+name|JoinType
 operator|.
 name|SEMI
 argument_list|)
@@ -1411,7 +1397,7 @@ argument_list|>
 argument_list|>
 name|correlateJoin
 parameter_list|(
-name|CorrelateJoinType
+name|JoinType
 name|joinType
 parameter_list|)
 block|{

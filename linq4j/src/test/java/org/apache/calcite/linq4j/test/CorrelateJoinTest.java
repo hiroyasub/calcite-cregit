@@ -27,20 +27,6 @@ name|calcite
 operator|.
 name|linq4j
 operator|.
-name|CorrelateJoinType
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|linq4j
-operator|.
 name|Enumerable
 import|;
 end_import
@@ -69,7 +55,51 @@ name|calcite
 operator|.
 name|linq4j
 operator|.
+name|ExtendedEnumerable
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|linq4j
+operator|.
+name|JoinType
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|linq4j
+operator|.
 name|Linq4j
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|linq4j
+operator|.
+name|function
+operator|.
+name|Function1
 import|;
 end_import
 
@@ -146,7 +176,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Tests {@link org.apache.calcite.linq4j.ExtendedEnumerable#correlateJoin}  */
+comment|/**  * Tests {@link ExtendedEnumerable#correlateJoin(JoinType, Function1, Function2)}  */
 end_comment
 
 begin_class
@@ -191,7 +221,7 @@ parameter_list|()
 block|{
 name|testJoin
 argument_list|(
-name|CorrelateJoinType
+name|JoinType
 operator|.
 name|INNER
 argument_list|,
@@ -252,7 +282,7 @@ parameter_list|()
 block|{
 name|testJoin
 argument_list|(
-name|CorrelateJoinType
+name|JoinType
 operator|.
 name|LEFT
 argument_list|,
@@ -325,7 +355,7 @@ parameter_list|()
 block|{
 name|testJoin
 argument_list|(
-name|CorrelateJoinType
+name|JoinType
 operator|.
 name|SEMI
 argument_list|,
@@ -370,7 +400,7 @@ parameter_list|()
 block|{
 name|testJoin
 argument_list|(
-name|CorrelateJoinType
+name|JoinType
 operator|.
 name|ANTI
 argument_list|,
@@ -398,7 +428,7 @@ specifier|public
 name|void
 name|testJoin
 parameter_list|(
-name|CorrelateJoinType
+name|JoinType
 name|joinType
 parameter_list|,
 name|Integer

@@ -976,10 +976,12 @@ name|Expressions
 operator|.
 name|constant
 argument_list|(
-name|joinType
+name|EnumUtils
 operator|.
 name|toLinq4jJoinType
-argument_list|()
+argument_list|(
+name|joinType
+argument_list|)
 argument_list|)
 argument_list|)
 argument_list|)

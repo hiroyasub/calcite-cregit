@@ -777,10 +777,12 @@ name|Expressions
 operator|.
 name|constant
 argument_list|(
-name|joinType
+name|EnumUtils
 operator|.
-name|toLinq4jCorrelateJoinType
-argument_list|()
+name|toLinq4jJoinType
+argument_list|(
+name|joinType
+argument_list|)
 argument_list|)
 argument_list|,
 name|Expressions

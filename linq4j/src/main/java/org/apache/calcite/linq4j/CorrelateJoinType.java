@@ -16,10 +16,13 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * Specifies the type of correlation operation: inner, left, semi, or anti.  */
+comment|/**  * Specifies the type of correlation operation: inner, left, semi, or anti.  * @deprecated Use {@link JoinType}  */
 end_comment
 
 begin_enum
+annotation|@
+name|Deprecated
+comment|// to be removed before 1.21
 specifier|public
 enum|enum
 name|CorrelateJoinType
@@ -35,7 +38,64 @@ name|SEMI
 block|,
 comment|/**    * Anti-join.    *    *<p>Similar to {@code from A ... where a NOT in (select b from B ...)}    *    *<p>Note: if B.b is nullable and B has nulls, no rows must be returned.    */
 name|ANTI
-block|; }
+block|;
+comment|/** Transforms this CorrelateJoinType to JoinType. **/
+specifier|public
+name|JoinType
+name|toJoinType
+parameter_list|()
+block|{
+switch|switch
+condition|(
+name|this
+condition|)
+block|{
+case|case
+name|INNER
+case|:
+return|return
+name|JoinType
+operator|.
+name|INNER
+return|;
+case|case
+name|LEFT
+case|:
+return|return
+name|JoinType
+operator|.
+name|LEFT
+return|;
+case|case
+name|SEMI
+case|:
+return|return
+name|JoinType
+operator|.
+name|SEMI
+return|;
+case|case
+name|ANTI
+case|:
+return|return
+name|JoinType
+operator|.
+name|ANTI
+return|;
+block|}
+throw|throw
+operator|new
+name|IllegalStateException
+argument_list|(
+literal|"Unable to convert "
+operator|+
+name|this
+operator|+
+literal|" to JoinType"
+argument_list|)
+throw|;
+block|}
+block|}
 end_enum
 
 begin_comment
