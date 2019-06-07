@@ -366,7 +366,8 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|// override JoinProjectTransposeRule
+annotation|@
+name|Override
 specifier|protected
 name|boolean
 name|hasLeftChild
@@ -385,7 +386,8 @@ operator|!=
 literal|4
 return|;
 block|}
-comment|// override JoinProjectTransposeRule
+annotation|@
+name|Override
 specifier|protected
 name|boolean
 name|hasRightChild
@@ -404,7 +406,8 @@ operator|>
 literal|3
 return|;
 block|}
-comment|// override JoinProjectTransposeRule
+annotation|@
+name|Override
 specifier|protected
 name|Project
 name|getRightChild
@@ -445,7 +448,8 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|// override JoinProjectTransposeRule
+annotation|@
+name|Override
 specifier|protected
 name|RelNode
 name|getProjectChild
