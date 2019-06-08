@@ -1534,9 +1534,7 @@ name|inputRels
 init|=
 name|input
 operator|.
-name|set
-operator|.
-name|getRelsFromAllSubsets
+name|getRelList
 argument_list|()
 decl_stmt|;
 if|if
