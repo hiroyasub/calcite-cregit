@@ -219,22 +219,6 @@ name|sql
 operator|.
 name|type
 operator|.
-name|SqlTypeFamily
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|sql
-operator|.
-name|type
-operator|.
 name|SqlTypeName
 import|;
 end_import
@@ -268,6 +252,20 @@ operator|.
 name|util
 operator|.
 name|ListSqlOperatorTable
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|util
+operator|.
+name|Optionality
 import|;
 end_import
 
@@ -622,7 +620,7 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/** "MY_AVG" user-defined aggregate function. */
+comment|/** "MY_AVG" user-defined aggregate function, with two arguments. */
 specifier|public
 specifier|static
 class|class
@@ -652,16 +650,7 @@ literal|null
 argument_list|,
 name|OperandTypes
 operator|.
-name|family
-argument_list|(
-name|SqlTypeFamily
-operator|.
-name|NUMERIC
-argument_list|,
-name|SqlTypeFamily
-operator|.
-name|NUMERIC
-argument_list|)
+name|NUMERIC_NUMERIC
 argument_list|,
 name|SqlFunctionCategory
 operator|.
@@ -670,6 +659,10 @@ argument_list|,
 literal|false
 argument_list|,
 literal|false
+argument_list|,
+name|Optionality
+operator|.
+name|FORBIDDEN
 argument_list|)
 expr_stmt|;
 block|}
