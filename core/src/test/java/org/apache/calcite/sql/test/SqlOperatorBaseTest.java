@@ -17280,17 +17280,37 @@ literal|true
 argument_list|)
 expr_stmt|;
 comment|// illegal range
+comment|// Slightly different error message from JDK 13 onwards
+specifier|final
+name|String
+name|expectedError
+init|=
+name|TestUtil
+operator|.
+name|getJavaMajorVersion
+argument_list|()
+operator|>=
+literal|13
+condition|?
+literal|"Illegal repetition near index 22\n"
+operator|+
+literal|"\\[\\:LOWER\\:\\]\\{2\\}\\[\\:DIGIT\\:\\]\\{,5\\}\n"
+operator|+
+literal|"                      \\^"
+else|:
+literal|"Illegal repetition near index 20\n"
+operator|+
+literal|"\\[\\:LOWER\\:\\]\\{2\\}\\[\\:DIGIT\\:\\]\\{,5\\}\n"
+operator|+
+literal|"                    \\^"
+decl_stmt|;
 name|tester
 operator|.
 name|checkFails
 argument_list|(
 literal|"'yd3223' similar to '[:LOWER:]{2}[:DIGIT:]{,5}'"
 argument_list|,
-literal|"Illegal repetition near index 20\n"
-operator|+
-literal|"\\[\\:LOWER\\:\\]\\{2\\}\\[\\:DIGIT\\:\\]\\{,5\\}\n"
-operator|+
-literal|"                    \\^"
+name|expectedError
 argument_list|,
 literal|true
 argument_list|)
