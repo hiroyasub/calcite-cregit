@@ -2196,6 +2196,33 @@ name|n
 argument_list|)
 return|;
 block|}
+comment|/** SQL CHR(long) function. */
+specifier|public
+specifier|static
+name|String
+name|chr
+parameter_list|(
+name|long
+name|n
+parameter_list|)
+block|{
+return|return
+name|String
+operator|.
+name|valueOf
+argument_list|(
+name|Character
+operator|.
+name|toChars
+argument_list|(
+operator|(
+name|int
+operator|)
+name|n
+argument_list|)
+argument_list|)
+return|;
+block|}
 comment|/** SQL CHARACTER_LENGTH(string) function. */
 specifier|public
 specifier|static

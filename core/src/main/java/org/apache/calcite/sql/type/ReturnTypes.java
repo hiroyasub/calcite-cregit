@@ -847,6 +847,20 @@ operator|.
 name|TO_NULLABLE
 argument_list|)
 decl_stmt|;
+comment|/**    * Type-inference strategy whereby the result type of a call is a Char.    */
+specifier|public
+specifier|static
+specifier|final
+name|SqlReturnTypeInference
+name|CHAR
+init|=
+name|explicit
+argument_list|(
+name|SqlTypeName
+operator|.
+name|CHAR
+argument_list|)
+decl_stmt|;
 comment|/**    * Type-inference strategy whereby the result type of a call is an Integer.    */
 specifier|public
 specifier|static
