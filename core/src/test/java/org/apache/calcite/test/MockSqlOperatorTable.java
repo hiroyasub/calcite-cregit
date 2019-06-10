@@ -219,6 +219,22 @@ name|sql
 operator|.
 name|type
 operator|.
+name|SqlTypeFamily
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|type
+operator|.
 name|SqlTypeName
 import|;
 end_import
@@ -620,7 +636,7 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/** "MY_AVG" user-defined aggregate function, with two arguments. */
+comment|/** "MYAGG" user-defined aggregate function. This agg function accept two numeric arguments    * in order to reproduce the throws of CALCITE-2744. */
 specifier|public
 specifier|static
 class|class
@@ -634,7 +650,7 @@ parameter_list|()
 block|{
 name|super
 argument_list|(
-literal|"MY_AVG"
+literal|"MYAGG"
 argument_list|,
 literal|null
 argument_list|,
@@ -650,7 +666,16 @@ literal|null
 argument_list|,
 name|OperandTypes
 operator|.
-name|NUMERIC_NUMERIC
+name|family
+argument_list|(
+name|SqlTypeFamily
+operator|.
+name|NUMERIC
+argument_list|,
+name|SqlTypeFamily
+operator|.
+name|NUMERIC
+argument_list|)
 argument_list|,
 name|SqlFunctionCategory
 operator|.

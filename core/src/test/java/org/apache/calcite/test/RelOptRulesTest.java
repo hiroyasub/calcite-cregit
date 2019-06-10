@@ -24142,7 +24142,7 @@ specifier|final
 name|String
 name|sql
 init|=
-literal|"SELECT * FROM (SELECT MY_AVG(sal, 1) AS c FROM emp) as m,\n"
+literal|"SELECT * FROM (SELECT MYAGG(sal, 1) AS c FROM emp) as m,\n"
 operator|+
 literal|" LATERAL TABLE(ramp(m.c)) AS T(s)"
 decl_stmt|;
@@ -24179,7 +24179,7 @@ block|}
 end_function
 
 begin_comment
-comment|/** Same as {@link #testDecorrelateAggWithMultiParamsAggCall}    * but with constant grouping key. */
+comment|/** Same as {@link #testDecorrelateAggWithMultiParamsAggCall}    * but with a constant group key. */
 end_comment
 
 begin_function
@@ -24196,7 +24196,7 @@ name|sql
 init|=
 literal|"SELECT * FROM "
 operator|+
-literal|"(SELECT MY_AVG(sal, 1) AS c FROM emp group by empno, 'abc') as m,\n"
+literal|"(SELECT MYAGG(sal, 1) AS c FROM emp group by empno, 'abc') as m,\n"
 operator|+
 literal|" LATERAL TABLE(ramp(m.c)) AS T(s)"
 decl_stmt|;
