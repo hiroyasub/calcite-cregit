@@ -147,6 +147,22 @@ name|rel
 operator|.
 name|rules
 operator|.
+name|ProjectToWindowRule
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|rules
+operator|.
 name|PruneEmptyRules
 import|;
 end_import
@@ -8622,6 +8638,336 @@ operator|.
 name|ok
 argument_list|(
 name|expected
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3112">[CALCITE-3112]    * Support Window in RelToSqlConverter</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testConvertWinodwToSql
+parameter_list|()
+block|{
+name|String
+name|query0
+init|=
+literal|"SELECT row_number() over (order by \"hire_date\") FROM \"employee\""
+decl_stmt|;
+name|String
+name|expected0
+init|=
+literal|"SELECT ROW_NUMBER() OVER (ORDER BY \"hire_date\") AS \"$0\"\n"
+operator|+
+literal|"FROM \"foodmart\".\"employee\""
+decl_stmt|;
+name|String
+name|query1
+init|=
+literal|"SELECT rank() over (order by \"hire_date\") FROM \"employee\""
+decl_stmt|;
+name|String
+name|expected1
+init|=
+literal|"SELECT RANK() OVER (ORDER BY \"hire_date\") AS \"$0\"\n"
+operator|+
+literal|"FROM \"foodmart\".\"employee\""
+decl_stmt|;
+name|String
+name|query2
+init|=
+literal|"SELECT lead(\"employee_id\",1,'NA') over "
+operator|+
+literal|"(partition by \"hire_date\" order by \"employee_id\")\n"
+operator|+
+literal|"FROM \"employee\""
+decl_stmt|;
+name|String
+name|expected2
+init|=
+literal|"SELECT LEAD(\"employee_id\", 1, 'NA') OVER "
+operator|+
+literal|"(PARTITION BY \"hire_date\" "
+operator|+
+literal|"ORDER BY \"employee_id\") AS \"$0\"\n"
+operator|+
+literal|"FROM \"foodmart\".\"employee\""
+decl_stmt|;
+name|String
+name|query3
+init|=
+literal|"SELECT lag(\"employee_id\",1,'NA') over "
+operator|+
+literal|"(partition by \"hire_date\" order by \"employee_id\")\n"
+operator|+
+literal|"FROM \"employee\""
+decl_stmt|;
+name|String
+name|expected3
+init|=
+literal|"SELECT LAG(\"employee_id\", 1, 'NA') OVER "
+operator|+
+literal|"(PARTITION BY \"hire_date\" ORDER BY \"employee_id\") AS \"$0\"\n"
+operator|+
+literal|"FROM \"foodmart\".\"employee\""
+decl_stmt|;
+name|String
+name|query4
+init|=
+literal|"SELECT lag(\"employee_id\",1,'NA') "
+operator|+
+literal|"over (partition by \"hire_date\" order by \"employee_id\") as lag1, "
+operator|+
+literal|"lag(\"employee_id\",1,'NA') "
+operator|+
+literal|"over (partition by \"birth_date\" order by \"employee_id\") as lag2, "
+operator|+
+literal|"count(*) over (partition by \"hire_date\" order by \"employee_id\") as count1, "
+operator|+
+literal|"count(*) over (partition by \"birth_date\" order by \"employee_id\") as count2\n"
+operator|+
+literal|"FROM \"employee\""
+decl_stmt|;
+name|String
+name|expected4
+init|=
+literal|"SELECT LAG(\"employee_id\", 1, 'NA') OVER "
+operator|+
+literal|"(PARTITION BY \"hire_date\" ORDER BY \"employee_id\") AS \"$0\", "
+operator|+
+literal|"LAG(\"employee_id\", 1, 'NA') OVER "
+operator|+
+literal|"(PARTITION BY \"birth_date\" ORDER BY \"employee_id\") AS \"$1\", "
+operator|+
+literal|"COUNT(*) OVER (PARTITION BY \"hire_date\" ORDER BY \"employee_id\" "
+operator|+
+literal|"RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS \"$2\", "
+operator|+
+literal|"COUNT(*) OVER (PARTITION BY \"birth_date\" ORDER BY \"employee_id\" "
+operator|+
+literal|"RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS \"$3\"\n"
+operator|+
+literal|"FROM \"foodmart\".\"employee\""
+decl_stmt|;
+name|String
+name|query5
+init|=
+literal|"SELECT lag(\"employee_id\",1,'NA') "
+operator|+
+literal|"over (partition by \"hire_date\" order by \"employee_id\") as lag1, "
+operator|+
+literal|"lag(\"employee_id\",1,'NA') "
+operator|+
+literal|"over (partition by \"birth_date\" order by \"employee_id\") as lag2, "
+operator|+
+literal|"max(sum(\"employee_id\")) over (partition by \"hire_date\" order by \"employee_id\") as count1, "
+operator|+
+literal|"max(sum(\"employee_id\")) over (partition by \"birth_date\" order by \"employee_id\") as count2\n"
+operator|+
+literal|"FROM \"employee\" group by \"employee_id\", \"hire_date\", \"birth_date\""
+decl_stmt|;
+name|String
+name|expected5
+init|=
+literal|"SELECT LAG(\"employee_id\", 1, 'NA') OVER "
+operator|+
+literal|"(PARTITION BY \"hire_date\" ORDER BY \"employee_id\") AS \"$0\", "
+operator|+
+literal|"LAG(\"employee_id\", 1, 'NA') OVER "
+operator|+
+literal|"(PARTITION BY \"birth_date\" ORDER BY \"employee_id\") AS \"$1\", "
+operator|+
+literal|"MAX(SUM(\"employee_id\")) OVER (PARTITION BY \"hire_date\" ORDER BY \"employee_id\" "
+operator|+
+literal|"RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS \"$2\", "
+operator|+
+literal|"MAX(SUM(\"employee_id\")) OVER (PARTITION BY \"birth_date\" ORDER BY \"employee_id\" "
+operator|+
+literal|"RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS \"$3\"\n"
+operator|+
+literal|"FROM \"foodmart\".\"employee\"\n"
+operator|+
+literal|"GROUP BY \"employee_id\", \"hire_date\", \"birth_date\""
+decl_stmt|;
+name|String
+name|query6
+init|=
+literal|"SELECT lag(\"employee_id\",1,'NA') over "
+operator|+
+literal|"(partition by \"hire_date\" order by \"employee_id\"), \"hire_date\"\n"
+operator|+
+literal|"FROM \"employee\"\n"
+operator|+
+literal|"group by \"hire_date\", \"employee_id\""
+decl_stmt|;
+name|String
+name|expected6
+init|=
+literal|"SELECT LAG(\"employee_id\", 1, 'NA') "
+operator|+
+literal|"OVER (PARTITION BY \"hire_date\" ORDER BY \"employee_id\"), \"hire_date\"\n"
+operator|+
+literal|"FROM \"foodmart\".\"employee\"\n"
+operator|+
+literal|"GROUP BY \"hire_date\", \"employee_id\""
+decl_stmt|;
+name|HepProgramBuilder
+name|builder
+init|=
+operator|new
+name|HepProgramBuilder
+argument_list|()
+decl_stmt|;
+name|builder
+operator|.
+name|addRuleClass
+argument_list|(
+name|ProjectToWindowRule
+operator|.
+name|class
+argument_list|)
+expr_stmt|;
+name|HepPlanner
+name|hepPlanner
+init|=
+operator|new
+name|HepPlanner
+argument_list|(
+name|builder
+operator|.
+name|build
+argument_list|()
+argument_list|)
+decl_stmt|;
+name|RuleSet
+name|rules
+init|=
+name|RuleSets
+operator|.
+name|ofList
+argument_list|(
+name|ProjectToWindowRule
+operator|.
+name|PROJECT
+argument_list|)
+decl_stmt|;
+name|sql
+argument_list|(
+name|query0
+argument_list|)
+operator|.
+name|optimize
+argument_list|(
+name|rules
+argument_list|,
+name|hepPlanner
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected0
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+name|query1
+argument_list|)
+operator|.
+name|optimize
+argument_list|(
+name|rules
+argument_list|,
+name|hepPlanner
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected1
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+name|query2
+argument_list|)
+operator|.
+name|optimize
+argument_list|(
+name|rules
+argument_list|,
+name|hepPlanner
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected2
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+name|query3
+argument_list|)
+operator|.
+name|optimize
+argument_list|(
+name|rules
+argument_list|,
+name|hepPlanner
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected3
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+name|query4
+argument_list|)
+operator|.
+name|optimize
+argument_list|(
+name|rules
+argument_list|,
+name|hepPlanner
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected4
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+name|query5
+argument_list|)
+operator|.
+name|optimize
+argument_list|(
+name|rules
+argument_list|,
+name|hepPlanner
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected5
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+name|query6
+argument_list|)
+operator|.
+name|optimize
+argument_list|(
+name|rules
+argument_list|,
+name|hepPlanner
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected6
 argument_list|)
 expr_stmt|;
 block|}
