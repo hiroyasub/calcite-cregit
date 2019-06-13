@@ -100,7 +100,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * A character string literal.  *  *<p>Its {@link #value} field is an {@link NlsString} and {@link #typeName} is  * {@link SqlTypeName#CHAR}.  */
+comment|/**  * A character string literal.  *  *<p>Its {@link #value} field is an {@link NlsString} and  * {@link #getTypeName typeName} is {@link SqlTypeName#CHAR}.  */
 end_comment
 
 begin_class
@@ -198,6 +198,22 @@ name|int
 name|rightPrec
 parameter_list|)
 block|{
+assert|assert
+name|value
+operator|instanceof
+name|NlsString
+assert|;
+specifier|final
+name|NlsString
+name|nlsString
+init|=
+operator|(
+name|NlsString
+operator|)
+name|this
+operator|.
+name|value
+decl_stmt|;
 if|if
 condition|(
 literal|false
@@ -215,12 +231,7 @@ expr_stmt|;
 name|String
 name|stringValue
 init|=
-operator|(
-operator|(
-name|NlsString
-operator|)
-name|value
-operator|)
+name|nlsString
 operator|.
 name|getValue
 argument_list|()
@@ -241,19 +252,23 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-assert|assert
-name|value
-operator|instanceof
-name|NlsString
-assert|;
 name|writer
 operator|.
 name|literal
 argument_list|(
-name|value
+name|nlsString
 operator|.
-name|toString
+name|asSql
+argument_list|(
+literal|true
+argument_list|,
+literal|true
+argument_list|,
+name|writer
+operator|.
+name|getDialect
 argument_list|()
+argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
