@@ -318,7 +318,7 @@ block|,
 literal|true
 block|,
 operator|-
-literal|1
+literal|2
 block|,
 operator|new
 name|String
@@ -356,7 +356,7 @@ block|,
 literal|true
 block|,
 operator|-
-literal|1
+literal|5
 block|,
 operator|new
 name|String
@@ -488,7 +488,7 @@ block|,
 literal|false
 block|,
 operator|-
-literal|1
+literal|10
 block|,
 operator|new
 name|String
@@ -508,7 +508,7 @@ block|,
 literal|false
 block|,
 operator|-
-literal|1
+literal|100
 block|,
 operator|new
 name|String

@@ -148,7 +148,7 @@ name|boolean
 name|all
 parameter_list|,
 name|int
-name|maxRep
+name|iterationLimit
 parameter_list|)
 block|{
 name|super
@@ -163,7 +163,7 @@ name|iterative
 argument_list|,
 name|all
 argument_list|,
-name|maxRep
+name|iterationLimit
 argument_list|)
 expr_stmt|;
 block|}
@@ -213,7 +213,7 @@ name|boolean
 name|all
 parameter_list|,
 name|int
-name|maxRep
+name|iterationLimit
 parameter_list|)
 block|{
 name|RelOptCluster
@@ -250,7 +250,7 @@ name|iterative
 argument_list|,
 name|all
 argument_list|,
-name|maxRep
+name|iterationLimit
 argument_list|)
 return|;
 block|}
@@ -314,7 +314,7 @@ argument_list|)
 argument_list|,
 name|all
 argument_list|,
-name|maxRep
+name|iterationLimit
 argument_list|)
 return|;
 block|}

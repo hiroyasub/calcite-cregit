@@ -193,11 +193,11 @@ specifier|final
 name|boolean
 name|all
 decl_stmt|;
-comment|/**    * Maximum number of times to repeat the iterative relational expression; -1    * means no limit, 0 means only seed will be evaluated    */
+comment|/**    * Maximum number of times to repeat the iterative relational expression;    * negative value means no limit, 0 means only seed will be evaluated    */
 specifier|public
 specifier|final
 name|int
-name|maxRep
+name|iterationLimit
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
 specifier|protected
@@ -219,7 +219,7 @@ name|boolean
 name|all
 parameter_list|,
 name|int
-name|maxRep
+name|iterationLimit
 parameter_list|)
 block|{
 name|super
@@ -233,27 +233,11 @@ argument_list|,
 name|iterative
 argument_list|)
 expr_stmt|;
-if|if
-condition|(
-name|maxRep
-operator|<
-operator|-
-literal|1
-condition|)
-block|{
-throw|throw
-operator|new
-name|IllegalArgumentException
-argument_list|(
-literal|"Wrong maxRep value"
-argument_list|)
-throw|;
-block|}
 name|this
 operator|.
-name|maxRep
+name|iterationLimit
 operator|=
-name|maxRep
+name|iterationLimit
 expr_stmt|;
 name|this
 operator|.
@@ -286,7 +270,7 @@ argument_list|)
 decl_stmt|;
 if|if
 condition|(
-name|maxRep
+name|iterationLimit
 operator|==
 literal|0
 condition|)
@@ -307,14 +291,13 @@ argument_list|()
 argument_list|)
 operator|*
 operator|(
-name|maxRep
-operator|!=
-operator|-
-literal|1
+name|iterationLimit
+operator|<
+literal|0
 condition|?
-name|maxRep
-else|:
 literal|10
+else|:
+name|iterationLimit
 operator|)
 return|;
 block|}
@@ -337,19 +320,18 @@ argument_list|)
 expr_stmt|;
 if|if
 condition|(
-name|maxRep
-operator|!=
-operator|-
-literal|1
+name|iterationLimit
+operator|>=
+literal|0
 condition|)
 block|{
 name|pw
 operator|.
 name|item
 argument_list|(
-literal|"maxRep"
+literal|"iterationLimit"
 argument_list|,
-name|maxRep
+name|iterationLimit
 argument_list|)
 expr_stmt|;
 block|}

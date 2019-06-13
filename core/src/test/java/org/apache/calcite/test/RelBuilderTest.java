@@ -7755,11 +7755,11 @@ name|expected
 init|=
 literal|"LogicalRepeatUnion(all=[true])\n"
 operator|+
-literal|"  LogicalTableSpool(readType=[LAZY], writeType=[LAZY], tableName=[DELTA_TABLE])\n"
+literal|"  LogicalTableSpool(readType=[LAZY], writeType=[LAZY], table=[[DELTA_TABLE]])\n"
 operator|+
 literal|"    LogicalValues(tuples=[[{ 1 }]])\n"
 operator|+
-literal|"  LogicalTableSpool(readType=[LAZY], writeType=[LAZY], tableName=[DELTA_TABLE])\n"
+literal|"  LogicalTableSpool(readType=[LAZY], writeType=[LAZY], table=[[DELTA_TABLE]])\n"
 operator|+
 literal|"    LogicalProject($f0=[+($0, 1)])\n"
 operator|+
@@ -7954,11 +7954,11 @@ name|expected
 init|=
 literal|"LogicalRepeatUnion(all=[true])\n"
 operator|+
-literal|"  LogicalTableSpool(readType=[LAZY], writeType=[LAZY], tableName=[AUX])\n"
+literal|"  LogicalTableSpool(readType=[LAZY], writeType=[LAZY], table=[[AUX]])\n"
 operator|+
 literal|"    LogicalValues(tuples=[[{ 0, 1 }]])\n"
 operator|+
-literal|"  LogicalTableSpool(readType=[LAZY], writeType=[LAZY], tableName=[AUX])\n"
+literal|"  LogicalTableSpool(readType=[LAZY], writeType=[LAZY], table=[[AUX]])\n"
 operator|+
 literal|"    LogicalProject(n=[+($0, 1)], fact=[*(+($0, 1), $1)])\n"
 operator|+

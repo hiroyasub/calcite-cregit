@@ -197,7 +197,7 @@ name|boolean
 name|all
 parameter_list|,
 name|int
-name|maxRep
+name|iterationLimit
 parameter_list|)
 block|{
 name|super
@@ -212,7 +212,7 @@ name|iterative
 argument_list|,
 name|all
 argument_list|,
-name|maxRep
+name|iterationLimit
 argument_list|)
 expr_stmt|;
 block|}
@@ -265,7 +265,7 @@ argument_list|)
 argument_list|,
 name|all
 argument_list|,
-name|maxRep
+name|iterationLimit
 argument_list|)
 return|;
 block|}
@@ -296,7 +296,7 @@ literal|"Only EnumerableRepeatUnion ALL is supported"
 argument_list|)
 throw|;
 block|}
-comment|// return repeatUnionAll(<seedExp>,<iterativeExp>, maxRep);
+comment|// return repeatUnionAll(<seedExp>,<iterativeExp>, iterationLimit);
 name|BlockBuilder
 name|builder
 init|=
@@ -403,7 +403,7 @@ name|Expressions
 operator|.
 name|constant
 argument_list|(
-name|maxRep
+name|iterationLimit
 argument_list|,
 name|int
 operator|.

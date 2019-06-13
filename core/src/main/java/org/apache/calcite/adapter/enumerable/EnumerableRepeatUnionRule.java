@@ -224,7 +224,7 @@ name|all
 argument_list|,
 name|union
 operator|.
-name|maxRep
+name|iterationLimit
 argument_list|)
 return|;
 block|}

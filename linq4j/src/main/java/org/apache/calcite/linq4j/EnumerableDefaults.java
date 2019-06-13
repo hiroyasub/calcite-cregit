@@ -17002,7 +17002,7 @@ decl_stmt|;
 end_decl_stmt
 
 begin_comment
-comment|/**    * Repeat Union All enumerable: it will evaluate the seed enumerable once, and then    * it will start to evaluate the iteration enumerable over and over until either it returns    * no results, or an optional maximum numbers of iterations is reached    * @param seed seed enumerable    * @param iteration iteration enumerable    * @param maxRep maximum numbers of repetitions for the iteration enumerable (-1 means no limit)    * @param<TSource> record type    */
+comment|/**    * Repeat Union All enumerable: it will evaluate the seed enumerable once, and then    * it will start to evaluate the iteration enumerable over and over until either it returns    * no results, or an optional maximum numbers of iterations is reached    * @param seed seed enumerable    * @param iteration iteration enumerable    * @param iterationLimit maximum numbers of repetitions for the iteration enumerable    *                       (negative value means no limit)    * @param<TSource> record type    */
 end_comment
 
 begin_function
@@ -17035,15 +17035,9 @@ argument_list|>
 name|iteration
 parameter_list|,
 name|int
-name|maxRep
+name|iterationLimit
 parameter_list|)
 block|{
-assert|assert
-name|maxRep
-operator|>=
-operator|-
-literal|1
-assert|;
 return|return
 operator|new
 name|AbstractEnumerable
@@ -17087,7 +17081,7 @@ literal|false
 decl_stmt|;
 specifier|private
 name|int
-name|currentRep
+name|currentIteration
 init|=
 literal|0
 decl_stmt|;
@@ -17200,16 +17194,15 @@ condition|)
 block|{
 if|if
 condition|(
-name|maxRep
-operator|!=
-operator|-
-literal|1
+name|iterationLimit
+operator|>=
+literal|0
 operator|&&
 name|this
 operator|.
-name|currentRep
+name|currentIteration
 operator|==
-name|maxRep
+name|iterationLimit
 condition|)
 block|{
 comment|// max number of iterations reached, we are done
@@ -17309,7 +17302,7 @@ literal|null
 expr_stmt|;
 name|this
 operator|.
-name|currentRep
+name|currentIteration
 operator|++
 expr_stmt|;
 block|}
@@ -17353,7 +17346,7 @@ expr_stmt|;
 block|}
 name|this
 operator|.
-name|currentRep
+name|currentIteration
 operator|=
 literal|0
 expr_stmt|;
@@ -17387,12 +17380,6 @@ name|iterativeEnumerator
 operator|.
 name|close
 argument_list|()
-expr_stmt|;
-name|this
-operator|.
-name|iterativeEnumerator
-operator|=
-literal|null
 expr_stmt|;
 block|}
 block|}

@@ -2364,8 +2364,8 @@ operator|.
 name|Type
 name|writeType
 parameter_list|,
-name|String
-name|tableName
+name|RelOptTable
+name|table
 parameter_list|)
 function_decl|;
 block|}
@@ -2394,8 +2394,8 @@ operator|.
 name|Type
 name|writeType
 parameter_list|,
-name|String
-name|tableName
+name|RelOptTable
+name|table
 parameter_list|)
 block|{
 return|return
@@ -2409,7 +2409,7 @@ name|readType
 argument_list|,
 name|writeType
 argument_list|,
-name|tableName
+name|table
 argument_list|)
 return|;
 block|}
@@ -2435,7 +2435,7 @@ name|boolean
 name|all
 parameter_list|,
 name|int
-name|maxRep
+name|iterationLimit
 parameter_list|)
 function_decl|;
 block|}
@@ -2461,7 +2461,7 @@ name|boolean
 name|all
 parameter_list|,
 name|int
-name|maxRep
+name|iterationLimit
 parameter_list|)
 block|{
 return|return
@@ -2475,7 +2475,7 @@ name|iterative
 argument_list|,
 name|all
 argument_list|,
-name|maxRep
+name|iterationLimit
 argument_list|)
 return|;
 block|}

@@ -183,7 +183,7 @@ name|writeType
 argument_list|,
 name|spool
 operator|.
-name|getTableName
+name|getTable
 argument_list|()
 argument_list|)
 return|;
