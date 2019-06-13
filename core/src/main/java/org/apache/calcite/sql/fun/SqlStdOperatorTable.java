@@ -1111,7 +1111,7 @@ comment|/** {@code GROUPING(c1 [, c2, ...])} function.    *    *<p>Occurs in sim
 specifier|public
 specifier|static
 specifier|final
-name|SqlGroupingFunction
+name|SqlAggFunction
 name|GROUPING
 init|=
 operator|new
@@ -1124,7 +1124,7 @@ comment|/** {@code GROUP_ID()} function. (Oracle-specific.) */
 specifier|public
 specifier|static
 specifier|final
-name|SqlGroupIdFunction
+name|SqlAggFunction
 name|GROUP_ID
 init|=
 operator|new
@@ -1135,7 +1135,7 @@ comment|/** {@code GROUPING_ID} function is a synonym for {@code GROUPING}.    *
 specifier|public
 specifier|static
 specifier|final
-name|SqlGroupingFunction
+name|SqlAggFunction
 name|GROUPING_ID
 init|=
 operator|new

@@ -615,6 +615,8 @@ name|index
 parameter_list|)
 block|{
 return|return
+name|Ord
+operator|.
 name|of
 argument_list|(
 name|index
