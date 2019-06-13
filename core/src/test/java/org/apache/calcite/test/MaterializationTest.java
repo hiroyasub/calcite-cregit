@@ -2466,6 +2466,32 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testPermutationError
+parameter_list|()
+block|{
+name|checkMaterialize
+argument_list|(
+literal|"select min(\"salary\"), count(*), max(\"salary\"), sum(\"salary\"), \"empid\" "
+operator|+
+literal|"from \"emps\" group by \"empid\""
+argument_list|,
+literal|"select count(*), \"empid\" from \"emps\" group by \"empid\""
+argument_list|,
+name|HR_FKUK_MODEL
+argument_list|,
+name|CalciteAssert
+operator|.
+name|checkResultContains
+argument_list|(
+literal|"EnumerableTableScan(table=[[hr, m0]])"
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testSwapJoin
 parameter_list|()
 block|{
