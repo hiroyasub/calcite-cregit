@@ -306,7 +306,7 @@ name|description
 operator|.
 name|matches
 argument_list|(
-literal|"[A-Za-z][-A-Za-z0-9_.():]*"
+literal|"[A-Za-z][-A-Za-z0-9_.(),\\[\\]\\s:]*"
 argument_list|)
 condition|)
 block|{
@@ -1378,7 +1378,7 @@ return|return
 literal|null
 return|;
 block|}
-comment|/**    * Returns the description of this rule.    *    *<p>It must be unique (for rules that are not equal) and must consist of    * only the characters A-Z, a-z, 0-9, '_', '.', '(', ')'. It must start with    * a letter. */
+comment|/**    * Returns the description of this rule.    *    *<p>It must be unique (for rules that are not equal) and must consist of    * only the characters A-Z, a-z, 0-9, '_', '.', '(', ')', '-', ',', '[', ']', ':', ' '.    * It must start with a letter. */
 specifier|public
 specifier|final
 name|String
