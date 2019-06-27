@@ -27254,6 +27254,31 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testInsertWithNonEqualSourceSinkFieldsNum
+parameter_list|()
+block|{
+name|tester
+operator|.
+name|checkQueryFails
+argument_list|(
+literal|"insert into ^dept^ select sid, ename, deptno "
+operator|+
+literal|"from "
+operator|+
+literal|"(select sum(empno) as sid, ename, deptno, sal "
+operator|+
+literal|"from emp group by ename, deptno, sal)"
+argument_list|,
+literal|"Number of INSERT target columns \\(2\\) "
+operator|+
+literal|"does not equal number of source items \\(3\\)"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testInsertSubset
 parameter_list|()
 block|{

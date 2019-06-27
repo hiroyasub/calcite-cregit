@@ -19640,7 +19640,7 @@ name|targetRowType
 operator|.
 name|getFieldCount
 argument_list|()
-operator|>=
+operator|>
 name|i
 condition|?
 name|targetRowType
