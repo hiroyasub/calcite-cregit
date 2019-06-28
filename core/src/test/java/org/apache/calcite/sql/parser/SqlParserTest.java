@@ -6639,7 +6639,7 @@ comment|//   it's one of those unstampoutable urban myths."
 comment|// Therefore, we only support != with certain SQL conformance levels.
 name|checkExpFails
 argument_list|(
-literal|"'abc'!=123"
+literal|"'abc'^!=^123"
 argument_list|,
 literal|"Bang equal '!=' is not allowed under the current SQL conformance level"
 argument_list|)
@@ -10631,13 +10631,19 @@ literal|"MINUS is not allowed under the current SQL conformance level"
 decl_stmt|;
 specifier|final
 name|String
-name|sql
+name|sql0
+init|=
+literal|"select col1 from table1 ^MINUS^ select col1 from table2"
+decl_stmt|;
+specifier|final
+name|String
+name|sql1
 init|=
 literal|"select col1 from table1 MINUS select col1 from table2"
 decl_stmt|;
 name|sql
 argument_list|(
-name|sql
+name|sql0
 argument_list|)
 operator|.
 name|fails
@@ -10667,7 +10673,7 @@ literal|"FROM `TABLE2`)"
 decl_stmt|;
 name|sql
 argument_list|(
-name|sql
+name|sql1
 argument_list|)
 operator|.
 name|ok
@@ -11169,7 +11175,15 @@ literal|"APPLY operator is not allowed under the current SQL conformance level"
 decl_stmt|;
 specifier|final
 name|String
-name|sql
+name|sql0
+init|=
+literal|"select * from dept\n"
+operator|+
+literal|"cross apply table(ramp(deptno)) as t(a^)^"
+decl_stmt|;
+specifier|final
+name|String
+name|sql1
 init|=
 literal|"select * from dept\n"
 operator|+
@@ -11177,7 +11191,7 @@ literal|"cross apply table(ramp(deptno)) as t(a)"
 decl_stmt|;
 name|sql
 argument_list|(
-name|sql
+name|sql0
 argument_list|)
 operator|.
 name|fails
@@ -11203,7 +11217,7 @@ literal|"CROSS JOIN LATERAL TABLE(`RAMP`(`DEPTNO`)) AS `T` (`A`)"
 decl_stmt|;
 name|sql
 argument_list|(
-name|sql
+name|sql1
 argument_list|)
 operator|.
 name|ok
@@ -11220,7 +11234,7 @@ name|ORACLE_10
 expr_stmt|;
 name|sql
 argument_list|(
-name|sql
+name|sql0
 argument_list|)
 operator|.
 name|fails
@@ -11236,7 +11250,7 @@ name|ORACLE_12
 expr_stmt|;
 name|sql
 argument_list|(
-name|sql
+name|sql1
 argument_list|)
 operator|.
 name|ok
@@ -12169,7 +12183,7 @@ literal|"current SQL conformance level"
 decl_stmt|;
 name|sql
 argument_list|(
-literal|"select a from foo limit 1,2"
+literal|"select a from foo limit 1,^2^"
 argument_list|)
 operator|.
 name|fails
@@ -23154,7 +23168,7 @@ parameter_list|()
 block|{
 name|checkExpFails
 argument_list|(
-literal|"cast(null as geometry)"
+literal|"cast(null as ^geometry^)"
 argument_list|,
 literal|"Geo-spatial extensions and the GEOMETRY data type are not enabled"
 argument_list|)

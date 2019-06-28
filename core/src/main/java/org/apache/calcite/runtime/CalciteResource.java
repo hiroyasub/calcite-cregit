@@ -448,6 +448,24 @@ function_decl|;
 annotation|@
 name|BaseMessage
 argument_list|(
+literal|"Literal ''{0}'' can not be parsed to type ''{1}''"
+argument_list|)
+name|ExInst
+argument_list|<
+name|CalciteException
+argument_list|>
+name|invalidLiteral
+parameter_list|(
+name|String
+name|a0
+parameter_list|,
+name|String
+name|a1
+parameter_list|)
+function_decl|;
+annotation|@
+name|BaseMessage
+argument_list|(
 literal|"Unknown character set ''{0}''"
 argument_list|)
 name|ExInst
