@@ -5772,6 +5772,131 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testHiveSelectQueryWithOverDescAndNullsFirstShouldBeEmulated
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|query
+init|=
+literal|"SELECT row_number() over "
+operator|+
+literal|"(order by \"hire_date\" desc nulls first) FROM \"employee\""
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT ROW_NUMBER() "
+operator|+
+literal|"OVER (ORDER BY hire_date IS NULL DESC, hire_date DESC)\n"
+operator|+
+literal|"FROM foodmart.employee"
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|dialect
+argument_list|(
+name|HiveSqlDialect
+operator|.
+name|DEFAULT
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testHiveSelectQueryWithOverAscAndNullsLastShouldBeEmulated
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|query
+init|=
+literal|"SELECT row_number() over "
+operator|+
+literal|"(order by \"hire_date\" nulls last) FROM \"employee\""
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT ROW_NUMBER() OVER (ORDER BY hire_date IS NULL, hire_date)\n"
+operator|+
+literal|"FROM foodmart.employee"
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|dialect
+argument_list|(
+name|HiveSqlDialect
+operator|.
+name|DEFAULT
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testHiveSelectQueryWithOverAscNullsFirstShouldNotAddNullEmulation
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|query
+init|=
+literal|"SELECT row_number() over "
+operator|+
+literal|"(order by \"hire_date\" nulls first) FROM \"employee\""
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT ROW_NUMBER() OVER (ORDER BY hire_date)\n"
+operator|+
+literal|"FROM foodmart.employee"
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|dialect
+argument_list|(
+name|HiveSqlDialect
+operator|.
+name|DEFAULT
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testHiveSubstring
 parameter_list|()
 block|{
@@ -5905,6 +6030,47 @@ argument_list|)
 operator|.
 name|withHive
 argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testHiveSelectQueryWithOverDescNullsLastShouldNotAddNullEmulation
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|query
+init|=
+literal|"SELECT row_number() over "
+operator|+
+literal|"(order by \"hire_date\" desc nulls last) FROM \"employee\""
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT ROW_NUMBER() OVER (ORDER BY hire_date DESC)\n"
+operator|+
+literal|"FROM foodmart.employee"
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|dialect
+argument_list|(
+name|HiveSqlDialect
+operator|.
+name|DEFAULT
+argument_list|)
 operator|.
 name|ok
 argument_list|(
@@ -6108,6 +6274,118 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testHiveSelectQueryWithOverDescAndHighNullsWithVersionGreaterThanOrEq21
+parameter_list|()
+block|{
+specifier|final
+name|HiveSqlDialect
+name|hive2_1Dialect
+init|=
+operator|new
+name|HiveSqlDialect
+argument_list|(
+name|SqlDialect
+operator|.
+name|EMPTY_CONTEXT
+operator|.
+name|withDatabaseMajorVersion
+argument_list|(
+literal|2
+argument_list|)
+operator|.
+name|withDatabaseMinorVersion
+argument_list|(
+literal|1
+argument_list|)
+operator|.
+name|withNullCollation
+argument_list|(
+name|NullCollation
+operator|.
+name|LOW
+argument_list|)
+argument_list|)
+decl_stmt|;
+specifier|final
+name|HiveSqlDialect
+name|hive2_2_Dialect
+init|=
+operator|new
+name|HiveSqlDialect
+argument_list|(
+name|SqlDialect
+operator|.
+name|EMPTY_CONTEXT
+operator|.
+name|withDatabaseMajorVersion
+argument_list|(
+literal|2
+argument_list|)
+operator|.
+name|withDatabaseMinorVersion
+argument_list|(
+literal|2
+argument_list|)
+operator|.
+name|withNullCollation
+argument_list|(
+name|NullCollation
+operator|.
+name|LOW
+argument_list|)
+argument_list|)
+decl_stmt|;
+specifier|final
+name|String
+name|query
+init|=
+literal|"SELECT row_number() over "
+operator|+
+literal|"(order by \"hire_date\" desc nulls first) FROM \"employee\""
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT ROW_NUMBER() OVER (ORDER BY hire_date DESC NULLS FIRST)\n"
+operator|+
+literal|"FROM foodmart.employee"
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|dialect
+argument_list|(
+name|hive2_1Dialect
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|dialect
+argument_list|(
+name|hive2_2_Dialect
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testHiveSelectQueryWithOrderByDescAndHighNullsWithVersion20
 parameter_list|()
 block|{
@@ -6178,6 +6456,76 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testHiveSelectQueryWithOverDescAndHighNullsWithVersion20
+parameter_list|()
+block|{
+specifier|final
+name|HiveSqlDialect
+name|hive2_1_0_Dialect
+init|=
+operator|new
+name|HiveSqlDialect
+argument_list|(
+name|SqlDialect
+operator|.
+name|EMPTY_CONTEXT
+operator|.
+name|withDatabaseMajorVersion
+argument_list|(
+literal|2
+argument_list|)
+operator|.
+name|withDatabaseMinorVersion
+argument_list|(
+literal|0
+argument_list|)
+operator|.
+name|withNullCollation
+argument_list|(
+name|NullCollation
+operator|.
+name|LOW
+argument_list|)
+argument_list|)
+decl_stmt|;
+specifier|final
+name|String
+name|query
+init|=
+literal|"SELECT row_number() over "
+operator|+
+literal|"(order by \"hire_date\" desc nulls first) FROM \"employee\""
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT ROW_NUMBER() OVER "
+operator|+
+literal|"(ORDER BY hire_date IS NULL DESC, hire_date DESC)\n"
+operator|+
+literal|"FROM foodmart.employee"
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|dialect
+argument_list|(
+name|hive2_1_0_Dialect
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testJethroDataSelectQueryWithOrderByDescAndNullsFirstShouldBeEmulated
 parameter_list|()
 block|{
@@ -6220,6 +6568,48 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testJethroDataSelectQueryWithOverDescAndNullsFirstShouldBeEmulated
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|query
+init|=
+literal|"SELECT row_number() over "
+operator|+
+literal|"(order by \"hire_date\" desc nulls first) FROM \"employee\""
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT ROW_NUMBER() OVER "
+operator|+
+literal|"(ORDER BY \"hire_date\", \"hire_date\" DESC)\n"
+operator|+
+literal|"FROM \"foodmart\".\"employee\""
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|dialect
+argument_list|(
+name|jethroDataSqlDialect
+argument_list|()
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testMySqlSelectQueryWithOrderByDescAndNullsFirstShouldBeEmulated
 parameter_list|()
 block|{
@@ -6240,6 +6630,49 @@ operator|+
 literal|"FROM `foodmart`.`product`\n"
 operator|+
 literal|"ORDER BY `product_id` IS NULL DESC, `product_id` DESC"
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|dialect
+argument_list|(
+name|MysqlSqlDialect
+operator|.
+name|DEFAULT
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testMySqlSelectQueryWithOverDescAndNullsFirstShouldBeEmulated
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|query
+init|=
+literal|"SELECT row_number() over "
+operator|+
+literal|"(order by \"hire_date\" desc nulls first) FROM \"employee\""
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT ROW_NUMBER() OVER "
+operator|+
+literal|"(ORDER BY `hire_date` IS NULL DESC, `hire_date` DESC)\n"
+operator|+
+literal|"FROM `foodmart`.`employee`"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -6306,6 +6739,49 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testMySqlSelectQueryWithOverAscAndNullsLastShouldBeEmulated
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|query
+init|=
+literal|"SELECT row_number() over "
+operator|+
+literal|"(order by \"hire_date\" nulls last) FROM \"employee\""
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT ROW_NUMBER() OVER "
+operator|+
+literal|"(ORDER BY `hire_date` IS NULL, `hire_date`)\n"
+operator|+
+literal|"FROM `foodmart`.`employee`"
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|dialect
+argument_list|(
+name|MysqlSqlDialect
+operator|.
+name|DEFAULT
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testMySqlSelectQueryWithOrderByAscNullsFirstShouldNotAddNullEmulation
 parameter_list|()
 block|{
@@ -6326,6 +6802,47 @@ operator|+
 literal|"FROM `foodmart`.`product`\n"
 operator|+
 literal|"ORDER BY `product_id`"
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|dialect
+argument_list|(
+name|MysqlSqlDialect
+operator|.
+name|DEFAULT
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testMySqlSelectQueryWithOverAscNullsFirstShouldNotAddNullEmulation
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|query
+init|=
+literal|"SELECT row_number() "
+operator|+
+literal|"over (order by \"hire_date\" nulls first) FROM \"employee\""
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT ROW_NUMBER() OVER (ORDER BY `hire_date`)\n"
+operator|+
+literal|"FROM `foodmart`.`employee`"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -6392,6 +6909,47 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testMySqlSelectQueryWithOverDescNullsLastShouldNotAddNullEmulation
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|query
+init|=
+literal|"SELECT row_number() "
+operator|+
+literal|"over (order by \"hire_date\" desc nulls last) FROM \"employee\""
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT ROW_NUMBER() OVER (ORDER BY `hire_date` DESC)\n"
+operator|+
+literal|"FROM `foodmart`.`employee`"
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|dialect
+argument_list|(
+name|MysqlSqlDialect
+operator|.
+name|DEFAULT
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testMySqlWithHighNullsSelectWithOrderByAscNullsLastAndNoEmulation
 parameter_list|()
 block|{
@@ -6412,6 +6970,50 @@ operator|+
 literal|"FROM `foodmart`.`product`\n"
 operator|+
 literal|"ORDER BY `product_id`"
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|dialect
+argument_list|(
+name|mySqlDialect
+argument_list|(
+name|NullCollation
+operator|.
+name|HIGH
+argument_list|)
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testMySqlWithHighNullsSelectWithOverAscNullsLastAndNoEmulation
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|query
+init|=
+literal|"SELECT row_number() "
+operator|+
+literal|"over (order by \"hire_date\" nulls last) FROM \"employee\""
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT ROW_NUMBER() OVER (ORDER BY `hire_date`)\n"
+operator|+
+literal|"FROM `foodmart`.`employee`"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -6484,6 +7086,52 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testMySqlWithHighNullsSelectWithOverAscNullsFirstAndNullEmulation
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|query
+init|=
+literal|"SELECT row_number() "
+operator|+
+literal|"over (order by \"hire_date\" nulls first) FROM \"employee\""
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT ROW_NUMBER() "
+operator|+
+literal|"OVER (ORDER BY `hire_date` IS NULL DESC, `hire_date`)\n"
+operator|+
+literal|"FROM `foodmart`.`employee`"
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|dialect
+argument_list|(
+name|mySqlDialect
+argument_list|(
+name|NullCollation
+operator|.
+name|HIGH
+argument_list|)
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testMySqlWithHighNullsSelectWithOrderByDescNullsFirstAndNoEmulation
 parameter_list|()
 block|{
@@ -6504,6 +7152,50 @@ operator|+
 literal|"FROM `foodmart`.`product`\n"
 operator|+
 literal|"ORDER BY `product_id` DESC"
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|dialect
+argument_list|(
+name|mySqlDialect
+argument_list|(
+name|NullCollation
+operator|.
+name|HIGH
+argument_list|)
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testMySqlWithHighNullsSelectWithOverDescNullsFirstAndNoEmulation
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|query
+init|=
+literal|"SELECT row_number() "
+operator|+
+literal|"over (order by \"hire_date\" desc nulls first) FROM \"employee\""
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT ROW_NUMBER() OVER (ORDER BY `hire_date` DESC)\n"
+operator|+
+literal|"FROM `foodmart`.`employee`"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -6576,6 +7268,52 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testMySqlWithHighNullsSelectWithOverDescNullsLastAndNullEmulation
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|query
+init|=
+literal|"SELECT row_number() "
+operator|+
+literal|"over (order by \"hire_date\" desc nulls last) FROM \"employee\""
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT ROW_NUMBER() "
+operator|+
+literal|"OVER (ORDER BY `hire_date` IS NULL, `hire_date` DESC)\n"
+operator|+
+literal|"FROM `foodmart`.`employee`"
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|dialect
+argument_list|(
+name|mySqlDialect
+argument_list|(
+name|NullCollation
+operator|.
+name|HIGH
+argument_list|)
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testMySqlWithFirstNullsSelectWithOrderByDescAndNullsFirstShouldNotBeEmulated
 parameter_list|()
 block|{
@@ -6596,6 +7334,50 @@ operator|+
 literal|"FROM `foodmart`.`product`\n"
 operator|+
 literal|"ORDER BY `product_id` DESC"
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|dialect
+argument_list|(
+name|mySqlDialect
+argument_list|(
+name|NullCollation
+operator|.
+name|FIRST
+argument_list|)
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testMySqlWithFirstNullsSelectWithOverDescAndNullsFirstShouldNotBeEmulated
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|query
+init|=
+literal|"SELECT row_number() "
+operator|+
+literal|"over (order by \"hire_date\" desc nulls first) FROM \"employee\""
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT ROW_NUMBER() OVER (ORDER BY `hire_date` DESC)\n"
+operator|+
+literal|"FROM `foodmart`.`employee`"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -6668,6 +7450,50 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testMySqlWithFirstNullsSelectWithOverAscAndNullsFirstShouldNotBeEmulated
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|query
+init|=
+literal|"SELECT row_number() "
+operator|+
+literal|"over (order by \"hire_date\" nulls first) FROM \"employee\""
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT ROW_NUMBER() OVER (ORDER BY `hire_date`)\n"
+operator|+
+literal|"FROM `foodmart`.`employee`"
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|dialect
+argument_list|(
+name|mySqlDialect
+argument_list|(
+name|NullCollation
+operator|.
+name|FIRST
+argument_list|)
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testMySqlWithFirstNullsSelectWithOrderByDescAndNullsLastShouldBeEmulated
 parameter_list|()
 block|{
@@ -6688,6 +7514,52 @@ operator|+
 literal|"FROM `foodmart`.`product`\n"
 operator|+
 literal|"ORDER BY `product_id` IS NULL, `product_id` DESC"
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|dialect
+argument_list|(
+name|mySqlDialect
+argument_list|(
+name|NullCollation
+operator|.
+name|FIRST
+argument_list|)
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testMySqlWithFirstNullsSelectWithOverDescAndNullsLastShouldBeEmulated
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|query
+init|=
+literal|"SELECT row_number() "
+operator|+
+literal|"over (order by \"hire_date\" desc nulls last) FROM \"employee\""
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT ROW_NUMBER() "
+operator|+
+literal|"OVER (ORDER BY `hire_date` IS NULL, `hire_date` DESC)\n"
+operator|+
+literal|"FROM `foodmart`.`employee`"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -6760,6 +7632,52 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testMySqlWithFirstNullsSelectWithOverAscAndNullsLastShouldBeEmulated
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|query
+init|=
+literal|"SELECT row_number() "
+operator|+
+literal|"over (order by \"hire_date\" nulls last) FROM \"employee\""
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT ROW_NUMBER() "
+operator|+
+literal|"OVER (ORDER BY `hire_date` IS NULL, `hire_date`)\n"
+operator|+
+literal|"FROM `foodmart`.`employee`"
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|dialect
+argument_list|(
+name|mySqlDialect
+argument_list|(
+name|NullCollation
+operator|.
+name|FIRST
+argument_list|)
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testMySqlWithLastNullsSelectWithOrderByDescAndNullsFirstShouldBeEmulated
 parameter_list|()
 block|{
@@ -6780,6 +7698,52 @@ operator|+
 literal|"FROM `foodmart`.`product`\n"
 operator|+
 literal|"ORDER BY `product_id` IS NULL DESC, `product_id` DESC"
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|dialect
+argument_list|(
+name|mySqlDialect
+argument_list|(
+name|NullCollation
+operator|.
+name|LAST
+argument_list|)
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testMySqlWithLastNullsSelectWithOverDescAndNullsFirstShouldBeEmulated
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|query
+init|=
+literal|"SELECT row_number() "
+operator|+
+literal|"over (order by \"hire_date\" desc nulls first) FROM \"employee\""
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT ROW_NUMBER() "
+operator|+
+literal|"OVER (ORDER BY `hire_date` IS NULL DESC, `hire_date` DESC)\n"
+operator|+
+literal|"FROM `foodmart`.`employee`"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -6852,6 +7816,52 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testMySqlWithLastNullsSelectWithOverAscAndNullsFirstShouldBeEmulated
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|query
+init|=
+literal|"SELECT row_number() "
+operator|+
+literal|"over (order by \"hire_date\" nulls first) FROM \"employee\""
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT ROW_NUMBER() "
+operator|+
+literal|"OVER (ORDER BY `hire_date` IS NULL DESC, `hire_date`)\n"
+operator|+
+literal|"FROM `foodmart`.`employee`"
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|dialect
+argument_list|(
+name|mySqlDialect
+argument_list|(
+name|NullCollation
+operator|.
+name|LAST
+argument_list|)
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testMySqlWithLastNullsSelectWithOrderByDescAndNullsLastShouldNotBeEmulated
 parameter_list|()
 block|{
@@ -6898,6 +7908,50 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testMySqlWithLastNullsSelectWithOverDescAndNullsLastShouldNotBeEmulated
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|query
+init|=
+literal|"SELECT row_number() "
+operator|+
+literal|"over (order by \"hire_date\" desc nulls last) FROM \"employee\""
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT ROW_NUMBER() OVER (ORDER BY `hire_date` DESC)\n"
+operator|+
+literal|"FROM `foodmart`.`employee`"
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|dialect
+argument_list|(
+name|mySqlDialect
+argument_list|(
+name|NullCollation
+operator|.
+name|LAST
+argument_list|)
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testMySqlWithLastNullsSelectWithOrderByAscAndNullsLastShouldNotBeEmulated
 parameter_list|()
 block|{
@@ -6918,6 +7972,50 @@ operator|+
 literal|"FROM `foodmart`.`product`\n"
 operator|+
 literal|"ORDER BY `product_id`"
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|dialect
+argument_list|(
+name|mySqlDialect
+argument_list|(
+name|NullCollation
+operator|.
+name|LAST
+argument_list|)
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testMySqlWithLastNullsSelectWithOverAscAndNullsLastShouldNotBeEmulated
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|query
+init|=
+literal|"SELECT row_number() over "
+operator|+
+literal|"(order by \"hire_date\" nulls last) FROM \"employee\""
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT ROW_NUMBER() OVER (ORDER BY `hire_date`)\n"
+operator|+
+literal|"FROM `foodmart`.`employee`"
 decl_stmt|;
 name|sql
 argument_list|(
