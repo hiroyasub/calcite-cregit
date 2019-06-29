@@ -12316,6 +12316,109 @@ name|expected
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testUnionAllWithNoOperandsUsingOracleDialect
+parameter_list|()
+block|{
+name|String
+name|query
+init|=
+literal|"select A.\"department_id\" "
+operator|+
+literal|"from \"foodmart\".\"employee\" A "
+operator|+
+literal|" where A.\"department_id\" = ( select min( A.\"department_id\") from \"foodmart\".\"department\" B where 1=2 )"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT \"employee\".\"department_id\"\n"
+operator|+
+literal|"FROM \"foodmart\".\"employee\"\n"
+operator|+
+literal|"INNER JOIN (SELECT \"t1\".\"department_id\" \"department_id0\", MIN(\"t1\".\"department_id\")\n"
+operator|+
+literal|"FROM (SELECT NULL \"department_id\", NULL \"department_description\"\nFROM \"DUAL\"\nWHERE 1 = 0) \"t\",\n"
+operator|+
+literal|"(SELECT \"department_id\"\nFROM \"foodmart\".\"employee\"\nGROUP BY \"department_id\") \"t1\"\n"
+operator|+
+literal|"GROUP BY \"t1\".\"department_id\") \"t3\" ON \"employee\".\"department_id\" = \"t3\".\"department_id0\""
+operator|+
+literal|" AND \"employee\".\"department_id\" = MIN(\"t1\".\"department_id\")"
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|withOracle
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testUnionAllWithNoOperands
+parameter_list|()
+block|{
+name|String
+name|query
+init|=
+literal|"select A.\"department_id\" "
+operator|+
+literal|"from \"foodmart\".\"employee\" A "
+operator|+
+literal|" where A.\"department_id\" = ( select min( A.\"department_id\") from \"foodmart\".\"department\" B where 1=2 )"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT \"employee\".\"department_id\"\n"
+operator|+
+literal|"FROM \"foodmart\".\"employee\"\n"
+operator|+
+literal|"INNER JOIN (SELECT \"t1\".\"department_id\" AS \"department_id0\","
+operator|+
+literal|" MIN(\"t1\".\"department_id\")\n"
+operator|+
+literal|"FROM (SELECT *\nFROM (VALUES  (NULL, NULL))"
+operator|+
+literal|" AS \"t\" (\"department_id\", \"department_description\")"
+operator|+
+literal|"\nWHERE 1 = 0) AS \"t\","
+operator|+
+literal|"\n(SELECT \"department_id\"\nFROM \"foodmart\".\"employee\""
+operator|+
+literal|"\nGROUP BY \"department_id\") AS \"t1\""
+operator|+
+literal|"\nGROUP BY \"t1\".\"department_id\") AS \"t3\" "
+operator|+
+literal|"ON \"employee\".\"department_id\" = \"t3\".\"department_id0\""
+operator|+
+literal|" AND \"employee\".\"department_id\" = MIN(\"t1\".\"department_id\")"
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
 comment|/** Fluid interface to run tests. */
 specifier|static
 class|class
