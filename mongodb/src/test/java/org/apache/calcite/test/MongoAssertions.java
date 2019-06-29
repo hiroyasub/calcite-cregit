@@ -362,11 +362,11 @@ name|value
 argument_list|()
 return|;
 block|}
-comment|/**    * Checks wherever tests should use Fongo instead of Mongo. Opposite of {@link #useMongo()}.    *    * @return Whether current tests should use embedded    *<a href="https://github.com/fakemongo/fongo">Fongo</a> instance    */
+comment|/**    * Checks wherever tests should use Embedded Fake Mongo instead of connecting to real    * mongodb instance. Opposite of {@link #useMongo()}.    *    * @return Whether current tests should use embedded    *<a href="https://github.com/bwaldvogel/mongo-java-server">Mongo Java Server</a> instance    */
 specifier|public
 specifier|static
 name|boolean
-name|useFongo
+name|useFake
 parameter_list|()
 block|{
 return|return

@@ -1655,12 +1655,6 @@ name|void
 name|testCountGroupByEmptyMultiplyBy2
 parameter_list|()
 block|{
-comment|// This operation is not supported by fongo: https://github.com/fakemongo/fongo/issues/152
-name|MongoAssertions
-operator|.
-name|assumeRealMongoInstance
-argument_list|()
-expr_stmt|;
 name|assertModel
 argument_list|(
 name|MODEL
@@ -1882,12 +1876,6 @@ name|void
 name|testGroupByAvgSumCount
 parameter_list|()
 block|{
-comment|// This operation not supported by fongo: https://github.com/fakemongo/fongo/issues/152
-name|MongoAssertions
-operator|.
-name|assumeRealMongoInstance
-argument_list|()
-expr_stmt|;
 name|assertModel
 argument_list|(
 name|MODEL
@@ -1920,9 +1908,9 @@ literal|"{$group: {_id: '$STATE', _1: {$sum: '$POP'}, _2: {$sum: {$cond: [ {$eq:
 argument_list|,
 literal|"{$project: {STATE: '$_id', _1: '$_1', _2: '$_2'}}"
 argument_list|,
-literal|"{$sort: {STATE: 1}}"
-argument_list|,
 literal|"{$project: {STATE: 1, A: {$divide: [{$cond:[{$eq: ['$_2', {$literal: 0}]},null,'$_1']}, '$_2']}, S: {$cond:[{$eq: ['$_2', {$literal: 0}]},null,'$_1']}, C: '$_2'}}"
+argument_list|,
+literal|"{$sort: {STATE: 1}}"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -2224,13 +2212,6 @@ name|void
 name|testDistinctCountOrderBy
 parameter_list|()
 block|{
-comment|// java.lang.ClassCastException: com.mongodb.BasicDBObject cannot be cast to java.lang.Number
-comment|// https://github.com/fakemongo/fongo/issues/152
-name|MongoAssertions
-operator|.
-name|assumeRealMongoInstance
-argument_list|()
-expr_stmt|;
 name|assertModel
 argument_list|(
 name|MODEL
