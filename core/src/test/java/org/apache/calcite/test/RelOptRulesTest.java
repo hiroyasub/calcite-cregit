@@ -709,6 +709,22 @@ name|rel
 operator|.
 name|rules
 operator|.
+name|AggregateCaseToFilterRule
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|rules
+operator|.
 name|AggregateExpandDistinctAggregatesRule
 import|;
 end_import
@@ -15475,6 +15491,58 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testAggregateCaseToFilter
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select\n"
+operator|+
+literal|" sum(sal) as sum_sal,\n"
+operator|+
+literal|" count(distinct case\n"
+operator|+
+literal|"       when job = 'CLERK'\n"
+operator|+
+literal|"       then deptno else null end) as count_distinct_clerk,\n"
+operator|+
+literal|" sum(case when deptno = 10 then sal end) as sum_sal_d10,\n"
+operator|+
+literal|" sum(case when deptno = 20 then sal else 0 end) as sum_sal_d20,\n"
+operator|+
+literal|" sum(case when deptno = 30 then 1 else 0 end) as count_d30,\n"
+operator|+
+literal|" count(case when deptno = 40 then 'x' end) as count_d40,\n"
+operator|+
+literal|" count(case when deptno = 20 then 1 end) as count_d20\n"
+operator|+
+literal|"from emp"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|withRule
+argument_list|(
+name|AggregateCaseToFilterRule
+operator|.
+name|INSTANCE
+argument_list|)
+operator|.
+name|check
+argument_list|()
+expr_stmt|;
+block|}
+end_function
+
+begin_function
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testPullAggregateThroughUnion
 parameter_list|()
 block|{
@@ -24238,7 +24306,7 @@ block|}
 end_function
 
 begin_comment
-comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3121">[CALCITE-3121]    * VolcanoPlanner hangs due to subquery with dynamic star</a>. */
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3121">[CALCITE-3121]    * VolcanoPlanner hangs due to sub-query with dynamic star</a>. */
 end_comment
 
 begin_function

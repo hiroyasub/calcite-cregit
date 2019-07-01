@@ -231,6 +231,17 @@ expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
 annotation|@
+name|Override
+specifier|public
+name|boolean
+name|allowsFilter
+parameter_list|()
+block|{
+return|return
+literal|false
+return|;
+block|}
+annotation|@
 name|SuppressWarnings
 argument_list|(
 literal|"deprecation"
