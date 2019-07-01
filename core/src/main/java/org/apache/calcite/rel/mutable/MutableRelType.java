@@ -47,8 +47,6 @@ name|PROJECT
 block|,
 name|SAMPLE
 block|,
-name|SEMIJOIN
-block|,
 name|SORT
 block|,
 name|TABLE_FUNCTION_SCAN

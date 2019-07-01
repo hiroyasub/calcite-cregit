@@ -25,7 +25,7 @@ name|calcite
 operator|.
 name|linq4j
 operator|.
-name|CorrelateJoinType
+name|JoinType
 import|;
 end_import
 
@@ -208,7 +208,7 @@ argument_list|)
 throw|;
 block|}
 specifier|public
-name|CorrelateJoinType
+name|JoinType
 name|toLinq4j
 parameter_list|()
 block|{
@@ -221,7 +221,7 @@ case|case
 name|INNER
 case|:
 return|return
-name|CorrelateJoinType
+name|JoinType
 operator|.
 name|INNER
 return|;
@@ -229,7 +229,7 @@ case|case
 name|LEFT
 case|:
 return|return
-name|CorrelateJoinType
+name|JoinType
 operator|.
 name|LEFT
 return|;
@@ -237,7 +237,7 @@ case|case
 name|SEMI
 case|:
 return|return
-name|CorrelateJoinType
+name|JoinType
 operator|.
 name|SEMI
 return|;
@@ -245,7 +245,7 @@ case|case
 name|ANTI
 case|:
 return|return
-name|CorrelateJoinType
+name|JoinType
 operator|.
 name|ANTI
 return|;

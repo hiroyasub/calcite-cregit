@@ -150,20 +150,6 @@ operator|new
 name|EnumerableMergeJoinRule
 argument_list|()
 decl_stmt|;
-comment|/** @deprecated To be removed along with    * {@link org.apache.calcite.rel.core.SemiJoin};    * use {@link #ENUMERABLE_JOIN_RULE} instead. */
-annotation|@
-name|Deprecated
-comment|// to be removed before 1.21
-specifier|public
-specifier|static
-specifier|final
-name|RelOptRule
-name|ENUMERABLE_SEMI_JOIN_RULE
-init|=
-operator|new
-name|EnumerableSemiJoinRule
-argument_list|()
-decl_stmt|;
 specifier|public
 specifier|static
 specifier|final
@@ -422,10 +408,6 @@ argument_list|,
 name|EnumerableRules
 operator|.
 name|ENUMERABLE_MERGE_JOIN_RULE
-argument_list|,
-name|EnumerableRules
-operator|.
-name|ENUMERABLE_SEMI_JOIN_RULE
 argument_list|,
 name|EnumerableRules
 operator|.

@@ -784,12 +784,6 @@ operator|.
 name|INSTANCE
 argument_list|)
 decl_stmt|;
-annotation|@
-name|SuppressWarnings
-argument_list|(
-literal|"deprecation"
-argument_list|)
-comment|// directive to be removed before 1.21
 specifier|public
 specifier|static
 specifier|final
@@ -810,12 +804,6 @@ argument_list|,
 name|EnumerableRules
 operator|.
 name|ENUMERABLE_MERGE_JOIN_RULE
-argument_list|,
-comment|// The following line is to be removed before 1.21;
-comment|// when it is removed, also remove SuppressWarnings directive, above
-name|EnumerableRules
-operator|.
-name|ENUMERABLE_SEMI_JOIN_RULE
 argument_list|,
 name|EnumerableRules
 operator|.

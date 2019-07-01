@@ -307,40 +307,6 @@ name|JOIN
 init|=
 name|INSTANCE
 decl_stmt|;
-comment|/**    * Rule that converts a {@link org.apache.calcite.rel.core.SemiJoin}    * into a {@link org.apache.calcite.rel.logical.LogicalCorrelate}    *    * @deprecated Will be unnecessary when {@code SemiJoin} is removed before    * 1.21, and will be removed at that time.    */
-annotation|@
-name|Deprecated
-comment|// to be removed before 1.21
-specifier|public
-specifier|static
-specifier|final
-name|JoinToCorrelateRule
-name|SEMI
-init|=
-operator|new
-name|JoinToCorrelateRule
-argument_list|(
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|rel
-operator|.
-name|core
-operator|.
-name|SemiJoin
-operator|.
-name|class
-argument_list|,
-name|RelFactories
-operator|.
-name|LOGICAL_BUILDER
-argument_list|,
-literal|"SemiJoinToCorrelateRule"
-argument_list|)
-decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
 comment|/**    * Creates a rule that converts a {@link org.apache.calcite.rel.logical.LogicalJoin}    * into a {@link org.apache.calcite.rel.logical.LogicalCorrelate}    */
 specifier|public

@@ -579,6 +579,20 @@ end_import
 
 begin_import
 import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|collect
+operator|.
+name|ImmutableSet
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|lang
@@ -1653,7 +1667,7 @@ name|condition
 parameter_list|)
 function_decl|;
 block|}
-comment|/**    * Implementation of {@link SemiJoinFactory} that returns a vanilla    * {@link SemiJoin}.    *    * @deprecated Use {@link JoinFactoryImpl} instead.    */
+comment|/**    * Implementation of {@link SemiJoinFactory} that returns a vanilla    * {@link Join} with join type as {@link JoinRelType#SEMI}.    *    * @deprecated Use {@link JoinFactoryImpl} instead.    */
 annotation|@
 name|Deprecated
 comment|// to be removed before 2.0
@@ -1678,23 +1692,8 @@ name|RexNode
 name|condition
 parameter_list|)
 block|{
-specifier|final
-name|JoinInfo
-name|joinInfo
-init|=
-name|JoinInfo
-operator|.
-name|of
-argument_list|(
-name|left
-argument_list|,
-name|right
-argument_list|,
-name|condition
-argument_list|)
-decl_stmt|;
 return|return
-name|SemiJoin
+name|LogicalJoin
 operator|.
 name|create
 argument_list|(
@@ -1704,13 +1703,21 @@ name|right
 argument_list|,
 name|condition
 argument_list|,
-name|joinInfo
+name|ImmutableSet
 operator|.
-name|leftKeys
+name|of
+argument_list|()
 argument_list|,
-name|joinInfo
+name|JoinRelType
 operator|.
-name|rightKeys
+name|SEMI
+argument_list|,
+literal|false
+argument_list|,
+name|ImmutableList
+operator|.
+name|of
+argument_list|()
 argument_list|)
 return|;
 block|}
