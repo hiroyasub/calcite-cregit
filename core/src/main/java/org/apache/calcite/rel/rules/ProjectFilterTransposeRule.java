@@ -429,6 +429,49 @@ comment|// aggregate has been implemented. It's OK if the filter contains a
 comment|// windowed aggregate.
 return|return;
 block|}
+if|if
+condition|(
+operator|(
+name|origProj
+operator|!=
+literal|null
+operator|)
+operator|&&
+name|origProj
+operator|.
+name|getRowType
+argument_list|()
+operator|.
+name|getFieldList
+argument_list|()
+operator|.
+name|get
+argument_list|(
+literal|0
+argument_list|)
+operator|.
+name|isDynamicStar
+argument_list|()
+condition|)
+block|{
+comment|// The PushProjector would change the plan:
+comment|//
+comment|//    prj(**=[$0])
+comment|//    : - filter
+comment|//        : - scan
+comment|//
+comment|// to form like:
+comment|//
+comment|//    prj(**=[$0])                    (1)
+comment|//    : - filter                      (2)
+comment|//        : - prj(**=[$0], ITEM= ...) (3)
+comment|//            :  - scan
+comment|// This new plan has more cost that the old one, because of the new
+comment|// redundant project (3), if we also have FilterProjectTransposeRule in
+comment|// the rule set, it will also trigger infinite match of the ProjectMergeRule
+comment|// for project (1) and (3).
+return|return;
+block|}
 name|PushProjector
 name|pushProjector
 init|=
