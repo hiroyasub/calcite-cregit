@@ -1132,6 +1132,10 @@ name|TypeFinderTest
 operator|.
 name|class
 block|,
+name|RexShuttleTest
+operator|.
+name|class
+block|,
 comment|// medium tests (above 0.1s)
 name|SqlParserTest
 operator|.

@@ -554,7 +554,7 @@ name|RelShuttle
 name|shuttle
 parameter_list|)
 function_decl|;
-comment|/**    * Accepts a visit from a shuttle. If the shuttle updates expression, then    * a copy of the relation should be created.    *    * @param shuttle Shuttle    * @return A copy of this node incorporating changes made by the shuttle to    * this node's children    */
+comment|/**    * Accepts a visit from a shuttle. If the shuttle updates expression, then    * a copy of the relation should be created. This new relation might have    * a different row-type.    *    * @param shuttle Shuttle    * @return A copy of this node incorporating changes made by the shuttle to    * this node's children    */
 name|RelNode
 name|accept
 parameter_list|(
