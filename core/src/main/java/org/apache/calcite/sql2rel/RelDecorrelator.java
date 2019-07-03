@@ -6398,6 +6398,7 @@ name|projectsRight
 argument_list|()
 condition|)
 block|{
+return|return
 name|decorrelateRel
 argument_list|(
 operator|(
@@ -6405,7 +6406,7 @@ name|RelNode
 operator|)
 name|rel
 argument_list|)
-expr_stmt|;
+return|;
 block|}
 comment|//
 comment|// Rewrite logic:
