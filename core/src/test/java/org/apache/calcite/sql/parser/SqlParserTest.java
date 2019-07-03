@@ -10631,19 +10631,13 @@ literal|"MINUS is not allowed under the current SQL conformance level"
 decl_stmt|;
 specifier|final
 name|String
-name|sql0
+name|sql
 init|=
 literal|"select col1 from table1 ^MINUS^ select col1 from table2"
 decl_stmt|;
-specifier|final
-name|String
-name|sql1
-init|=
-literal|"select col1 from table1 MINUS select col1 from table2"
-decl_stmt|;
 name|sql
 argument_list|(
-name|sql0
+name|sql
 argument_list|)
 operator|.
 name|fails
@@ -10673,8 +10667,11 @@ literal|"FROM `TABLE2`)"
 decl_stmt|;
 name|sql
 argument_list|(
-name|sql1
+name|sql
 argument_list|)
+operator|.
+name|sansCarets
+argument_list|()
 operator|.
 name|ok
 argument_list|(
@@ -11175,23 +11172,15 @@ literal|"APPLY operator is not allowed under the current SQL conformance level"
 decl_stmt|;
 specifier|final
 name|String
-name|sql0
+name|sql
 init|=
 literal|"select * from dept\n"
 operator|+
 literal|"cross apply table(ramp(deptno)) as t(a^)^"
 decl_stmt|;
-specifier|final
-name|String
-name|sql1
-init|=
-literal|"select * from dept\n"
-operator|+
-literal|"cross apply table(ramp(deptno)) as t(a)"
-decl_stmt|;
 name|sql
 argument_list|(
-name|sql0
+name|sql
 argument_list|)
 operator|.
 name|fails
@@ -11217,8 +11206,11 @@ literal|"CROSS JOIN LATERAL TABLE(`RAMP`(`DEPTNO`)) AS `T` (`A`)"
 decl_stmt|;
 name|sql
 argument_list|(
-name|sql1
+name|sql
 argument_list|)
+operator|.
+name|sansCarets
+argument_list|()
 operator|.
 name|ok
 argument_list|(
@@ -11234,7 +11226,7 @@ name|ORACLE_10
 expr_stmt|;
 name|sql
 argument_list|(
-name|sql0
+name|sql
 argument_list|)
 operator|.
 name|fails
@@ -11250,8 +11242,11 @@ name|ORACLE_12
 expr_stmt|;
 name|sql
 argument_list|(
-name|sql1
+name|sql
 argument_list|)
+operator|.
+name|sansCarets
+argument_list|()
 operator|.
 name|ok
 argument_list|(
@@ -11527,6 +11522,47 @@ argument_list|,
 literal|"SELECT *\n"
 operator|+
 literal|"FROM `EMP` AS `X` TABLESAMPLE BERNOULLI(50.0)"
+argument_list|)
+expr_stmt|;
+name|check
+argument_list|(
+literal|"select * "
+operator|+
+literal|"from emp as x "
+operator|+
+literal|"tablesample bernoulli(50) REPEATABLE(10) "
+argument_list|,
+literal|"SELECT *\n"
+operator|+
+literal|"FROM `EMP` AS `X` TABLESAMPLE BERNOULLI(50.0) REPEATABLE(10)"
+argument_list|)
+expr_stmt|;
+comment|// test repeatable with invalid int literal.
+name|checkFails
+argument_list|(
+literal|"select * "
+operator|+
+literal|"from emp as x "
+operator|+
+literal|"tablesample bernoulli(50) REPEATABLE(^100000000000000000000^) "
+argument_list|,
+literal|"Literal '100000000000000000000' "
+operator|+
+literal|"can not be parsed to type 'java\\.lang\\.Integer'"
+argument_list|)
+expr_stmt|;
+comment|// test repeatable with invalid negative int literal.
+name|checkFails
+argument_list|(
+literal|"select * "
+operator|+
+literal|"from emp as x "
+operator|+
+literal|"tablesample bernoulli(50) REPEATABLE(-^100000000000000000000^) "
+argument_list|,
+literal|"Literal '100000000000000000000' "
+operator|+
+literal|"can not be parsed to type 'java\\.lang\\.Integer'"
 argument_list|)
 expr_stmt|;
 block|}
