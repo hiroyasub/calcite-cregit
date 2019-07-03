@@ -4699,7 +4699,7 @@ name|result
 argument_list|(
 name|call
 operator|.
-name|query
+name|target
 argument_list|)
 return|;
 block|}
