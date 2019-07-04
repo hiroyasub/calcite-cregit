@@ -11342,7 +11342,7 @@ return|return
 literal|true
 return|;
 block|}
-comment|/** Creates a relational expression that reads from an input and throws    * all of the rows away.    *    *<p>Note that this method always pops one relational expression from the    * stack. {@code values}, in contrast, does not pop any relational    * expressions, and always produces a leaf.    *    *<p>The default implementation creates a {@link Values} with the same    * specified row type as the input, and ignores the input entirely.    * But schema-on-query systems such as Drill might override this method to    * create a relation expression that retains the input, just to read its    * schema.    */
+comment|/** Creates a relational expression that reads from an input and throws    * all of the rows away.    *    *<p>Note that this method always pops one relational expression from the    * stack. {@code values}, in contrast, does not pop any relational    * expressions, and always produces a leaf.    *    *<p>The default implementation creates a {@link Values} with the same    * specified row type and aliases as the input, and ignores the input entirely.    * But schema-on-query systems such as Drill might override this method to    * create a relation expression that retains the input, just to read its    * schema.    */
 specifier|public
 name|RelBuilder
 name|empty
@@ -11357,16 +11357,46 @@ operator|.
 name|pop
 argument_list|()
 decl_stmt|;
-return|return
+specifier|final
+name|RelNode
 name|values
+init|=
+name|valuesFactory
+operator|.
+name|createValues
 argument_list|(
+name|cluster
+argument_list|,
 name|frame
 operator|.
 name|rel
 operator|.
 name|getRowType
 argument_list|()
+argument_list|,
+name|ImmutableList
+operator|.
+name|of
+argument_list|()
 argument_list|)
+decl_stmt|;
+name|stack
+operator|.
+name|push
+argument_list|(
+operator|new
+name|Frame
+argument_list|(
+name|values
+argument_list|,
+name|frame
+operator|.
+name|fields
+argument_list|)
+argument_list|)
+expr_stmt|;
+return|return
+name|this
 return|;
 block|}
 comment|/** Creates a {@link Values} with a specified row type.    *    *<p>This method can handle cases that {@link #values(String[], Object...)}    * cannot, such as all values of a column being null, or there being zero    * rows.    *    * @param rowType Row type    * @param columnValues Values    */
