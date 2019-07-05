@@ -1141,6 +1141,9 @@ operator|.
 name|build
 argument_list|()
 decl_stmt|;
+comment|// We must use the same HEP planner for the two optimizations below.
+comment|// Thus different nodes with the same digest will share the same vertex in
+comment|// the plan graph. This is important for the matching process.
 specifier|final
 name|HepPlanner
 name|hepPlanner

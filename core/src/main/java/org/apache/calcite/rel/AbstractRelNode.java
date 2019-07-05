@@ -1701,6 +1701,43 @@ operator|.
 name|digest
 return|;
 block|}
+comment|/**    * {@inheritDoc}    *    *<p>This method (and {@link #hashCode} is intentionally final. We do not want    * sub-classes of {@link RelNode} to redefine identity. Various algorithms    * (e.g. visitors, planner) can define the identity as meets their needs.    */
+annotation|@
+name|Override
+specifier|public
+specifier|final
+name|boolean
+name|equals
+parameter_list|(
+name|Object
+name|obj
+parameter_list|)
+block|{
+return|return
+name|super
+operator|.
+name|equals
+argument_list|(
+name|obj
+argument_list|)
+return|;
+block|}
+comment|/**    * {@inheritDoc}    *    *<p>This method (and {@link #equals} is intentionally final. We do not want    * sub-classes of {@link RelNode} to redefine identity. Various algorithms    * (e.g. visitors, planner) can define the identity as meets their needs.    */
+annotation|@
+name|Override
+specifier|public
+specifier|final
+name|int
+name|hashCode
+parameter_list|()
+block|{
+return|return
+name|super
+operator|.
+name|hashCode
+argument_list|()
+return|;
+block|}
 comment|/**    * A writer object used exclusively for computing the digest of a RelNode.    *    *<p>The writer is meant to be used only for computing a single digest and then thrown away.    * After calling {@link #done(RelNode)} the writer should be used only to obtain the computed    * {@link #digest}. Any other action is prohibited.</p>    *    */
 specifier|private
 specifier|static
