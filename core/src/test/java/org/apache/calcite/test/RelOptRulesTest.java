@@ -27414,6 +27414,39 @@ expr_stmt|;
 block|}
 end_function
 
+begin_function
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testPushFiltertWithIsNotDistinctFromPastJoin
+parameter_list|()
+block|{
+name|String
+name|query
+init|=
+literal|"SELECT * FROM "
+operator|+
+literal|"emp t1 INNER JOIN "
+operator|+
+literal|"emp t2 "
+operator|+
+literal|"ON t1.deptno = t2.deptno "
+operator|+
+literal|"WHERE t1.ename is not distinct from t2.ename"
+decl_stmt|;
+name|checkPlanning
+argument_list|(
+name|FilterJoinRule
+operator|.
+name|FILTER_ON_JOIN
+argument_list|,
+name|query
+argument_list|)
+expr_stmt|;
+block|}
+end_function
+
 begin_comment
 comment|/**    * Custom implementation of {@link Filter} for use    * in test case to verify that {@link FilterMultiJoinMergeRule}    * can be created with any {@link Filter} and not limited to    * {@link org.apache.calcite.rel.logical.LogicalFilter}    */
 end_comment
