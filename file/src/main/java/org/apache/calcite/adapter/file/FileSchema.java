@@ -45,7 +45,7 @@ name|adapter
 operator|.
 name|csv
 operator|.
-name|JsonTable
+name|JsonScannableTable
 import|;
 end_import
 
@@ -231,7 +231,7 @@ specifier|final
 name|File
 name|baseDirectory
 decl_stmt|;
-comment|/**    * Creates an HTML tables schema.    *    * @param parentSchema Parent schema    * @param name Schema name    * @param baseDirectory Base directory to look for relative files, or null    * @param tables List containing HTML table identifiers    */
+comment|/**    * Creates an HTML tables schema.    *    * @param parentSchema  Parent schema    * @param name          Schema name    * @param baseDirectory Base directory to look for relative files, or null    * @param tables        List containing HTML table identifiers    */
 name|FileSchema
 parameter_list|(
 name|SchemaPlus
@@ -273,7 +273,7 @@ operator|=
 name|baseDirectory
 expr_stmt|;
 block|}
-comment|/** Looks for a suffix on a string and returns    * either the string with the suffix removed    * or the original string. */
+comment|/**    * Looks for a suffix on a string and returns    * either the string with the suffix removed    * or the original string.    */
 specifier|private
 specifier|static
 name|String
@@ -306,7 +306,7 @@ else|:
 name|s
 return|;
 block|}
-comment|/** Looks for a suffix on a string and returns    * either the string with the suffix removed    * or null. */
+comment|/**    * Looks for a suffix on a string and returns    * either the string with the suffix removed    * or null.    */
 specifier|private
 specifier|static
 name|String
@@ -563,19 +563,12 @@ operator|!=
 literal|null
 condition|)
 block|{
-name|JsonTable
-name|table
-init|=
-operator|new
-name|JsonTable
+name|addTable
 argument_list|(
-name|source
-argument_list|)
-decl_stmt|;
 name|builder
-operator|.
-name|put
-argument_list|(
+argument_list|,
+name|source
+argument_list|,
 name|sourceSansJson
 operator|.
 name|relative
@@ -586,10 +579,9 @@ operator|.
 name|path
 argument_list|()
 argument_list|,
-name|table
+literal|null
 argument_list|)
 expr_stmt|;
-continue|continue;
 block|}
 specifier|final
 name|Source
@@ -805,11 +797,12 @@ operator|!=
 literal|null
 condition|)
 block|{
-name|JsonTable
+specifier|final
+name|Table
 name|table
 init|=
 operator|new
-name|JsonTable
+name|JsonScannableTable
 argument_list|(
 name|source
 argument_list|)

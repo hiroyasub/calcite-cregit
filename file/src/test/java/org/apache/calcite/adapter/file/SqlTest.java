@@ -1424,7 +1424,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testGroupByTimestampAdd
+name|testCsvGroupByTimestampAdd
 parameter_list|()
 throws|throws
 name|SQLException
@@ -1689,6 +1689,313 @@ argument_list|)
 argument_list|)
 return|;
 block|}
+block|}
+comment|/** Reads the DEPTS table from the JSON schema. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testJsonSalesDepts
+parameter_list|()
+throws|throws
+name|SQLException
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select * from sales.depts"
+decl_stmt|;
+name|sql
+argument_list|(
+literal|"sales-json"
+argument_list|,
+name|sql
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"DEPTNO=10; NAME=Sales"
+argument_list|,
+literal|"DEPTNO=20; NAME=Marketing"
+argument_list|,
+literal|"DEPTNO=30; NAME=Accounts"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+comment|/** Reads the EMPS table from the JSON schema. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testJsonSalesEmps
+parameter_list|()
+throws|throws
+name|SQLException
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select * from sales.emps"
+decl_stmt|;
+specifier|final
+name|String
+index|[]
+name|lines
+init|=
+block|{
+literal|"EMPNO=100; NAME=Fred; DEPTNO=10; GENDER=; CITY=; EMPID=30; AGE=25; SLACKER=true; MANAGER=false; JOINEDAT=1996-08-03"
+block|,
+literal|"EMPNO=110; NAME=Eric; DEPTNO=20; GENDER=M; CITY=San Francisco; EMPID=3; AGE=80; SLACKER=null; MANAGER=false; JOINEDAT=2001-01-01"
+block|,
+literal|"EMPNO=110; NAME=John; DEPTNO=40; GENDER=M; CITY=Vancouver; EMPID=2; AGE=null; SLACKER=false; MANAGER=true; JOINEDAT=2002-05-03"
+block|,
+literal|"EMPNO=120; NAME=Wilma; DEPTNO=20; GENDER=F; CITY=; EMPID=1; AGE=5; SLACKER=null; MANAGER=true; JOINEDAT=2005-09-07"
+block|,
+literal|"EMPNO=130; NAME=Alice; DEPTNO=40; GENDER=F; CITY=Vancouver; EMPID=2; AGE=null; SLACKER=false; MANAGER=true; JOINEDAT=2007-01-01"
+block|,     }
+decl_stmt|;
+name|sql
+argument_list|(
+literal|"sales-json"
+argument_list|,
+name|sql
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+name|lines
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+comment|/** Reads the EMPTY table from the JSON schema. The JSON file has no lines,    * therefore the table has a system-generated column called    * "EmptyFileHasNoColumns". */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testJsonSalesEmpty
+parameter_list|()
+throws|throws
+name|SQLException
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select * from sales.\"EMPTY\""
+decl_stmt|;
+name|checkSql
+argument_list|(
+name|sql
+argument_list|,
+literal|"sales-json"
+argument_list|,
+name|resultSet
+lambda|->
+block|{
+try|try
+block|{
+name|assertThat
+argument_list|(
+name|resultSet
+operator|.
+name|getMetaData
+argument_list|()
+operator|.
+name|getColumnCount
+argument_list|()
+argument_list|,
+name|is
+argument_list|(
+literal|1
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|assertThat
+argument_list|(
+name|resultSet
+operator|.
+name|getMetaData
+argument_list|()
+operator|.
+name|getColumnName
+argument_list|(
+literal|1
+argument_list|)
+argument_list|,
+name|is
+argument_list|(
+literal|"EmptyFileHasNoColumns"
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|assertThat
+argument_list|(
+name|resultSet
+operator|.
+name|getMetaData
+argument_list|()
+operator|.
+name|getColumnType
+argument_list|(
+literal|1
+argument_list|)
+argument_list|,
+name|is
+argument_list|(
+name|Types
+operator|.
+name|BOOLEAN
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|String
+name|actual
+init|=
+name|toString
+argument_list|(
+name|resultSet
+argument_list|)
+decl_stmt|;
+name|assertThat
+argument_list|(
+name|actual
+argument_list|,
+name|is
+argument_list|(
+literal|""
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+catch|catch
+parameter_list|(
+name|SQLException
+name|e
+parameter_list|)
+block|{
+throw|throw
+name|TestUtil
+operator|.
+name|rethrow
+argument_list|(
+name|e
+argument_list|)
+throw|;
+block|}
+return|return
+literal|null
+return|;
+block|}
+argument_list|)
+expr_stmt|;
+block|}
+comment|/**    * Test returns the result of two json file joins.    *    * @throws SQLException    */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testJsonJoinOnString
+parameter_list|()
+throws|throws
+name|SQLException
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select emps.EMPNO, emps.NAME, depts.deptno from emps\n"
+operator|+
+literal|"join depts on emps.deptno = depts.deptno"
+decl_stmt|;
+specifier|final
+name|String
+index|[]
+name|lines
+init|=
+block|{
+literal|"EMPNO=100; NAME=Fred; DEPTNO=10"
+block|,
+literal|"EMPNO=110; NAME=Eric; DEPTNO=20"
+block|,
+literal|"EMPNO=120; NAME=Wilma; DEPTNO=20"
+block|,     }
+decl_stmt|;
+name|sql
+argument_list|(
+literal|"sales-json"
+argument_list|,
+name|sql
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+name|lines
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+comment|/**    * The folder contains both JSON files and CSV files joins.    *    * @throws SQLException    */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testJsonWithCsvJoin
+parameter_list|()
+throws|throws
+name|SQLException
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select emps.empno,\n"
+operator|+
+literal|" NAME,\n"
+operator|+
+literal|" \"DATE\".JOINEDAT\n"
+operator|+
+literal|" from \"DATE\"\n"
+operator|+
+literal|"join emps on emps.empno = \"DATE\".EMPNO limit 3"
+decl_stmt|;
+specifier|final
+name|String
+index|[]
+name|lines
+init|=
+block|{
+literal|"EMPNO=100; NAME=Fred; JOINEDAT=1996-08-03"
+block|,
+literal|"EMPNO=110; NAME=Eric; JOINEDAT=2001-01-01"
+block|,
+literal|"EMPNO=110; NAME=Eric; JOINEDAT=2002-05-03"
+block|,     }
+decl_stmt|;
+name|sql
+argument_list|(
+literal|"sales-json"
+argument_list|,
+name|sql
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+name|lines
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
 block|}
 block|}
 end_class

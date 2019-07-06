@@ -1559,13 +1559,30 @@ specifier|final
 name|String
 name|sql
 init|=
-literal|"select _MAP['id'] as id,\n"
+literal|"select * from archers\n"
+decl_stmt|;
+specifier|final
+name|String
+index|[]
+name|lines
+init|=
+block|{
+literal|"id=19990101; dow=Friday; longDate=New Years Day; title=Tractor trouble.; "
 operator|+
-literal|" _MAP['title'] as title,\n"
+literal|"characters=[Alice, Bob, Xavier]; script=Julian Hyde; summary=; "
 operator|+
-literal|" CHAR_LENGTH(CAST(_MAP['title'] AS VARCHAR(30))) as len\n"
+literal|"lines=[Bob's tractor got stuck in a field., "
 operator|+
-literal|" from \"archers\"\n"
+literal|"Alice and Xavier hatch a plan to surprise Charlie.]"
+block|,
+literal|"id=19990103; dow=Sunday; longDate=Sunday 3rd January; "
+operator|+
+literal|"title=Charlie's surprise.; characters=[Alice, Zebedee, Charlie, Xavier]; "
+operator|+
+literal|"script=William Shakespeare; summary=; "
+operator|+
+literal|"lines=[Charlie is very surprised by Alice and Xavier's surprise plan.]"
+block|,     }
 decl_stmt|;
 name|sql
 argument_list|(
@@ -1576,9 +1593,7 @@ argument_list|)
 operator|.
 name|returns
 argument_list|(
-literal|"ID=19990101; TITLE=Tractor trouble.; LEN=16"
-argument_list|,
-literal|"ID=19990103; TITLE=Charlie's surprise.; LEN=19"
+name|lines
 argument_list|)
 operator|.
 name|ok
