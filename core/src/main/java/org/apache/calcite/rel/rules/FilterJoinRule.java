@@ -577,7 +577,7 @@ name|join
 parameter_list|)
 block|{
 comment|// If the join force the join info to be based on column equality,
-comment|// Or it is a non-correlated semijoin, returns false.
+comment|// or it is a non-correlated semijoin, returns false.
 return|return
 operator|!
 name|RelOptUtil
@@ -876,8 +876,23 @@ block|}
 comment|// Try to push down filters in ON clause. A ON clause filter can only be
 comment|// pushed down if it does not affect the non-matching set, i.e. it is
 comment|// not on the side which is preserved.
+comment|// Anti-join on conditions can not be pushed into left or right, e.g. for plan:
+comment|//
+comment|//     Join(condition=[AND(cond1, $2)], joinType=[anti])
+comment|//     :  - prj(f0=[$0], f1=[$1], f2=[$2])
+comment|//     :  - prj(f0=[$0])
+comment|//
+comment|// The semantic would change if join condition $2 is pushed into left,
+comment|// that is, the result set may be smaller. The right can not be pushed
+comment|// into for the same reason.
 if|if
 condition|(
+name|joinType
+operator|!=
+name|JoinRelType
+operator|.
+name|ANTI
+operator|&&
 name|RelOptUtil
 operator|.
 name|classifyFilters
