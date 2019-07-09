@@ -389,7 +389,10 @@ name|SqlIntervalQualifier
 name|intervalQualifier
 parameter_list|)
 function_decl|;
-comment|/**    * Infers the return type of a decimal multiplication. Decimal    * multiplication involves at least one decimal operand and requires both    * operands to have exact numeric types.    *    * @param type1 type of the first operand    * @param type2 type of the second operand    * @return the result type for a decimal multiplication, or null if decimal    * multiplication should not be applied to the operands.    */
+comment|/**    * Infers the return type of a decimal multiplication. Decimal    * multiplication involves at least one decimal operand and requires both    * operands to have exact numeric types.    *    * @param type1 type of the first operand    * @param type2 type of the second operand    * @return the result type for a decimal multiplication, or null if decimal    * multiplication should not be applied to the operands.    * @deprecated Use    * {@link RelDataTypeSystem#deriveDecimalMultiplyType(RelDataTypeFactory, RelDataType, RelDataType)}    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 name|RelDataType
 name|createDecimalProduct
 parameter_list|(
@@ -400,7 +403,10 @@ name|RelDataType
 name|type2
 parameter_list|)
 function_decl|;
-comment|/**    * Returns whether a decimal multiplication should be implemented by casting    * arguments to double values.    *    *<p>Pre-condition:<code>createDecimalProduct(type1, type2) != null</code>    */
+comment|/**    * Returns whether a decimal multiplication should be implemented by casting    * arguments to double values.    *    *<p>Pre-condition:<code>createDecimalProduct(type1, type2) != null</code>    *    * @deprecated Use    * {@link RelDataTypeSystem#shouldUseDoubleMultiplication(RelDataType, RelDataType)}    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 name|boolean
 name|useDoubleMultiplication
 parameter_list|(
@@ -411,7 +417,10 @@ name|RelDataType
 name|type2
 parameter_list|)
 function_decl|;
-comment|/**    * Infers the return type of a decimal division. Decimal division involves    * at least one decimal operand and requires both operands to have exact    * numeric types.    *    * @param type1 type of the first operand    * @param type2 type of the second operand    * @return the result type for a decimal division, or null if decimal    * division should not be applied to the operands.    */
+comment|/**    * Infers the return type of a decimal division. Decimal division involves    * at least one decimal operand and requires both operands to have exact    * numeric types.    *    * @param type1 type of the first operand    * @param type2 type of the second operand    * @return the result type for a decimal division, or null if decimal    * division should not be applied to the operands.    *    * @deprecated Use    * {@link RelDataTypeSystem#deriveDecimalDivideType(RelDataTypeFactory, RelDataType, RelDataType)}    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 name|RelDataType
 name|createDecimalQuotient
 parameter_list|(

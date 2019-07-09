@@ -4861,7 +4861,7 @@ name|MOD
 argument_list|,
 name|ReturnTypes
 operator|.
-name|ARG1_NULLABLE
+name|NULLABLE_MOD
 argument_list|,
 literal|null
 argument_list|,
