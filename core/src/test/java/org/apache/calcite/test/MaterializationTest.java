@@ -2206,7 +2206,38 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testAggregate
+name|testAggregate0
+parameter_list|()
+block|{
+name|checkMaterialize
+argument_list|(
+literal|"select count(*) as c from \"emps\" group by \"empid\""
+argument_list|,
+literal|"select count(*) + 1 as c from \"emps\" group by \"empid\""
+argument_list|)
+expr_stmt|;
+block|}
+comment|/**    * Aggregation query at same level of aggregation as aggregation    * materialization but with different row types. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testAggregate1
+parameter_list|()
+block|{
+name|checkMaterialize
+argument_list|(
+literal|"select count(*) as c0 from \"emps\" group by \"empid\""
+argument_list|,
+literal|"select count(*) as c1 from \"emps\" group by \"empid\""
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testAggregate2
 parameter_list|()
 block|{
 name|checkMaterialize
