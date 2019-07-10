@@ -3108,6 +3108,19 @@ operator|.
 name|NULL
 return|;
 block|}
+comment|/** Returns whether this dialect supports a given type. */
+specifier|public
+name|boolean
+name|supportsDataType
+parameter_list|(
+name|RelDataType
+name|type
+parameter_list|)
+block|{
+return|return
+literal|true
+return|;
+block|}
 specifier|public
 name|SqlNode
 name|getCastSpec
