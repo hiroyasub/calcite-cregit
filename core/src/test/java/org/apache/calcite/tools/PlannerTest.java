@@ -5003,21 +5003,19 @@ name|expected
 init|=
 literal|""
 operator|+
-literal|"EnumerableProject(empid=[$0], deptno=[$1], name=[$2], salary=[$3], commission=[$4], deptno0=[$5], name0=[$6], employees=[$7], location=[$8], location9=[$9], empid0=[$10], name1=[$11])\n"
+literal|"EnumerableProject(empid=[$2], deptno=[$3], name=[$4], salary=[$5], commission=[$6], deptno0=[$7], name0=[$8], employees=[$9], location=[ROW($10, $11)], empid0=[$0], name1=[$1])\n"
 operator|+
-literal|"  EnumerableProject(empid=[$2], deptno=[$3], name=[$4], salary=[$5], commission=[$6], deptno0=[$7], name0=[$8], employees=[$9], x=[$10], y=[$11], empid0=[$0], name1=[$1])\n"
+literal|"  EnumerableHashJoin(condition=[=($0, $2)], joinType=[inner])\n"
 operator|+
-literal|"    EnumerableHashJoin(condition=[=($0, $2)], joinType=[inner])\n"
+literal|"    EnumerableTableScan(table=[[hr, dependents]])\n"
 operator|+
-literal|"      EnumerableTableScan(table=[[hr, dependents]])\n"
+literal|"    EnumerableHashJoin(condition=[=($1, $5)], joinType=[left])\n"
 operator|+
-literal|"      EnumerableHashJoin(condition=[=($1, $5)], joinType=[left])\n"
+literal|"      EnumerableTableScan(table=[[hr, emps]])\n"
 operator|+
-literal|"        EnumerableTableScan(table=[[hr, emps]])\n"
+literal|"      EnumerableProject(deptno=[$0], name=[$1], employees=[$2], x=[$3.x], y=[$3.y])\n"
 operator|+
-literal|"        EnumerableProject(deptno=[$0], name=[$1], employees=[$2], x=[$3.x], y=[$3.y])\n"
-operator|+
-literal|"          EnumerableTableScan(table=[[hr, depts]])"
+literal|"        EnumerableTableScan(table=[[hr, depts]])"
 decl_stmt|;
 name|checkHeuristic
 argument_list|(
@@ -5053,23 +5051,21 @@ name|expected
 init|=
 literal|""
 operator|+
-literal|"EnumerableProject(empid=[$0], deptno=[$1], name=[$2], salary=[$3], commission=[$4], deptno0=[$5], name0=[$6], employees=[$7], location=[$8], location9=[$9], empid0=[$10], name1=[$11])\n"
+literal|"EnumerableProject(empid=[$2], deptno=[$3], name=[$4], salary=[$5], commission=[$6], deptno0=[$7], name0=[$8], employees=[$9], location=[ROW($10, $11)], empid0=[$0], name1=[$1])\n"
 operator|+
-literal|"  EnumerableProject(empid=[$2], deptno=[$3], name=[$4], salary=[$5], commission=[$6], deptno0=[$7], name0=[$8], employees=[$9], x=[$10], y=[$11], empid0=[$0], name1=[$1])\n"
+literal|"  EnumerableHashJoin(condition=[=($0, $2)], joinType=[inner])\n"
 operator|+
-literal|"    EnumerableHashJoin(condition=[=($0, $2)], joinType=[inner])\n"
+literal|"    EnumerableTableScan(table=[[hr, dependents]])\n"
 operator|+
-literal|"      EnumerableTableScan(table=[[hr, dependents]])\n"
+literal|"    EnumerableProject(empid=[$5], deptno=[$6], name=[$7], salary=[$8], commission=[$9], deptno0=[$0], name0=[$1], employees=[$2], x=[$3], y=[$4])\n"
 operator|+
-literal|"      EnumerableProject(empid=[$5], deptno=[$6], name=[$7], salary=[$8], commission=[$9], deptno0=[$0], name0=[$1], employees=[$2], x=[$3], y=[$4])\n"
+literal|"      EnumerableHashJoin(condition=[=($0, $6)], joinType=[left])\n"
 operator|+
-literal|"        EnumerableHashJoin(condition=[=($0, $6)], joinType=[left])\n"
+literal|"        EnumerableProject(deptno=[$0], name=[$1], employees=[$2], x=[$3.x], y=[$3.y])\n"
 operator|+
-literal|"          EnumerableProject(deptno=[$0], name=[$1], employees=[$2], x=[$3.x], y=[$3.y])\n"
+literal|"          EnumerableTableScan(table=[[hr, depts]])\n"
 operator|+
-literal|"            EnumerableTableScan(table=[[hr, depts]])\n"
-operator|+
-literal|"          EnumerableTableScan(table=[[hr, emps]])"
+literal|"        EnumerableTableScan(table=[[hr, emps]])"
 decl_stmt|;
 name|checkHeuristic
 argument_list|(
@@ -5105,21 +5101,19 @@ name|expected
 init|=
 literal|""
 operator|+
-literal|"EnumerableProject(empid=[$0], deptno=[$1], name=[$2], salary=[$3], commission=[$4], deptno0=[$5], name0=[$6], employees=[$7], location=[$8], location9=[$9], empid0=[$10], name1=[$11])\n"
+literal|"EnumerableProject(empid=[$2], deptno=[$3], name=[$4], salary=[$5], commission=[$6], deptno0=[$7], name0=[$8], employees=[$9], location=[ROW($10, $11)], empid0=[$0], name1=[$1])\n"
 operator|+
-literal|"  EnumerableProject(empid=[$2], deptno=[$3], name=[$4], salary=[$5], commission=[$6], deptno0=[$7], name0=[$8], employees=[$9], x=[$10], y=[$11], empid0=[$0], name1=[$1])\n"
+literal|"  EnumerableHashJoin(condition=[=($0, $2)], joinType=[left])\n"
 operator|+
-literal|"    EnumerableHashJoin(condition=[=($0, $2)], joinType=[left])\n"
+literal|"    EnumerableTableScan(table=[[hr, dependents]])\n"
 operator|+
-literal|"      EnumerableTableScan(table=[[hr, dependents]])\n"
+literal|"    EnumerableHashJoin(condition=[=($1, $5)], joinType=[inner])\n"
 operator|+
-literal|"      EnumerableHashJoin(condition=[=($1, $5)], joinType=[inner])\n"
+literal|"      EnumerableTableScan(table=[[hr, emps]])\n"
 operator|+
-literal|"        EnumerableTableScan(table=[[hr, emps]])\n"
+literal|"      EnumerableProject(deptno=[$0], name=[$1], employees=[$2], x=[$3.x], y=[$3.y])\n"
 operator|+
-literal|"        EnumerableProject(deptno=[$0], name=[$1], employees=[$2], x=[$3.x], y=[$3.y])\n"
-operator|+
-literal|"          EnumerableTableScan(table=[[hr, depts]])"
+literal|"        EnumerableTableScan(table=[[hr, depts]])"
 decl_stmt|;
 name|checkHeuristic
 argument_list|(

@@ -569,8 +569,6 @@ return|;
 block|}
 block|}
 decl_stmt|;
-comment|// Table schema is as following:
-comment|// { a: INT, n1: { n11: { b INT }, n12: {c: Int } }, n2: { d: Int }, e: Int }
 specifier|private
 specifier|static
 specifier|final
@@ -581,6 +579,7 @@ operator|new
 name|Table
 argument_list|()
 block|{
+comment|/**      * Table schema is as following:      *  myTable(      *          a: BIGINT,      *          n1: STRUCT<      *                n11: STRUCT<b: BIGINT>,      *                n12: STRUCT<c: BIGINT>      *>,      *          n2: STRUCT<d: BIGINT>,      *          e: BIGINT      *  )      */
 annotation|@
 name|Override
 specifier|public
@@ -588,14 +587,13 @@ name|RelDataType
 name|getRowType
 parameter_list|(
 name|RelDataTypeFactory
-name|typeFactory
+name|tf
 parameter_list|)
 block|{
-specifier|final
 name|RelDataType
-name|aType
+name|bigint
 init|=
-name|typeFactory
+name|tf
 operator|.
 name|createSqlType
 argument_list|(
@@ -604,63 +602,10 @@ operator|.
 name|BIGINT
 argument_list|)
 decl_stmt|;
-specifier|final
 name|RelDataType
-name|bType
+name|n1Type
 init|=
-name|typeFactory
-operator|.
-name|createSqlType
-argument_list|(
-name|SqlTypeName
-operator|.
-name|BIGINT
-argument_list|)
-decl_stmt|;
-specifier|final
-name|RelDataType
-name|cType
-init|=
-name|typeFactory
-operator|.
-name|createSqlType
-argument_list|(
-name|SqlTypeName
-operator|.
-name|BIGINT
-argument_list|)
-decl_stmt|;
-specifier|final
-name|RelDataType
-name|dType
-init|=
-name|typeFactory
-operator|.
-name|createSqlType
-argument_list|(
-name|SqlTypeName
-operator|.
-name|BIGINT
-argument_list|)
-decl_stmt|;
-specifier|final
-name|RelDataType
-name|eType
-init|=
-name|typeFactory
-operator|.
-name|createSqlType
-argument_list|(
-name|SqlTypeName
-operator|.
-name|BIGINT
-argument_list|)
-decl_stmt|;
-specifier|final
-name|RelDataType
-name|n11Type
-init|=
-name|typeFactory
+name|tf
 operator|.
 name|createStructType
 argument_list|(
@@ -668,7 +613,15 @@ name|ImmutableList
 operator|.
 name|of
 argument_list|(
-name|bType
+name|tf
+operator|.
+name|createStructType
+argument_list|(
+name|ImmutableList
+operator|.
+name|of
+argument_list|(
+name|bigint
 argument_list|)
 argument_list|,
 name|ImmutableList
@@ -678,12 +631,8 @@ argument_list|(
 literal|"b"
 argument_list|)
 argument_list|)
-decl_stmt|;
-specifier|final
-name|RelDataType
-name|n12Type
-init|=
-name|typeFactory
+argument_list|,
+name|tf
 operator|.
 name|createStructType
 argument_list|(
@@ -691,7 +640,7 @@ name|ImmutableList
 operator|.
 name|of
 argument_list|(
-name|cType
+name|bigint
 argument_list|)
 argument_list|,
 name|ImmutableList
@@ -701,22 +650,6 @@ argument_list|(
 literal|"c"
 argument_list|)
 argument_list|)
-decl_stmt|;
-specifier|final
-name|RelDataType
-name|n1Type
-init|=
-name|typeFactory
-operator|.
-name|createStructType
-argument_list|(
-name|ImmutableList
-operator|.
-name|of
-argument_list|(
-name|n11Type
-argument_list|,
-name|n12Type
 argument_list|)
 argument_list|,
 name|ImmutableList
@@ -729,11 +662,10 @@ literal|"n12"
 argument_list|)
 argument_list|)
 decl_stmt|;
-specifier|final
 name|RelDataType
 name|n2Type
 init|=
-name|typeFactory
+name|tf
 operator|.
 name|createStructType
 argument_list|(
@@ -741,7 +673,7 @@ name|ImmutableList
 operator|.
 name|of
 argument_list|(
-name|dType
+name|bigint
 argument_list|)
 argument_list|,
 name|ImmutableList
@@ -753,7 +685,7 @@ argument_list|)
 argument_list|)
 decl_stmt|;
 return|return
-name|typeFactory
+name|tf
 operator|.
 name|createStructType
 argument_list|(
@@ -761,13 +693,13 @@ name|ImmutableList
 operator|.
 name|of
 argument_list|(
-name|aType
+name|bigint
 argument_list|,
 name|n1Type
 argument_list|,
 name|n2Type
 argument_list|,
-name|eType
+name|bigint
 argument_list|)
 argument_list|,
 name|ImmutableList
@@ -1005,11 +937,9 @@ name|expected
 init|=
 literal|"SELECT \"a\", "
 operator|+
-literal|"\"n1\".\"n11\".\"b\" AS \"n1\", "
+literal|"ROW(ROW(\"n1\".\"n11\".\"b\"), ROW(\"n1\".\"n12\".\"c\")) AS \"n1\", "
 operator|+
-literal|"\"n1\".\"n12\".\"c\" AS \"n12\", "
-operator|+
-literal|"\"n2\".\"d\" AS \"n2\", "
+literal|"ROW(\"n2\".\"d\") AS \"n2\", "
 operator|+
 literal|"\"e\"\n"
 operator|+
