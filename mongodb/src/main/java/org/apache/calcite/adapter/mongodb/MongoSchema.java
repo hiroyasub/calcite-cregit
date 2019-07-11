@@ -133,16 +133,6 @@ name|java
 operator|.
 name|util
 operator|.
-name|List
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
 name|Map
 import|;
 end_import
@@ -172,7 +162,7 @@ specifier|final
 name|MongoDatabase
 name|mongoDb
 decl_stmt|;
-comment|/**    * Creates a MongoDB schema.    *    * @param host Mongo host, e.g. "localhost"    * @param credentialsList Optional credentials (empty list for none)    * @param options Mongo connection options    * @param database Mongo database name, e.g. "foodmart"    */
+comment|/**    * Creates a MongoDB schema.    *    * @param host Mongo host, e.g. "localhost"    * @param credential Optional credentials (null for none)    * @param options Mongo connection options    * @param database Mongo database name, e.g. "foodmart"    */
 name|MongoSchema
 parameter_list|(
 name|String
@@ -181,11 +171,8 @@ parameter_list|,
 name|String
 name|database
 parameter_list|,
-name|List
-argument_list|<
 name|MongoCredential
-argument_list|>
-name|credentialsList
+name|credential
 parameter_list|,
 name|MongoClientOptions
 name|options
@@ -200,6 +187,10 @@ specifier|final
 name|MongoClient
 name|mongo
 init|=
+name|credential
+operator|==
+literal|null
+condition|?
 operator|new
 name|MongoClient
 argument_list|(
@@ -209,7 +200,19 @@ argument_list|(
 name|host
 argument_list|)
 argument_list|,
-name|credentialsList
+name|options
+argument_list|)
+else|:
+operator|new
+name|MongoClient
+argument_list|(
+operator|new
+name|ServerAddress
+argument_list|(
+name|host
+argument_list|)
+argument_list|,
+name|credential
 argument_list|,
 name|options
 argument_list|)

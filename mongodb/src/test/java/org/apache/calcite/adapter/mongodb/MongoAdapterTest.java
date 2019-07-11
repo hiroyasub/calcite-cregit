@@ -641,7 +641,7 @@ if|if
 condition|(
 name|datatypes
 operator|.
-name|count
+name|countDocuments
 argument_list|()
 operator|>
 literal|0
@@ -776,7 +776,7 @@ if|if
 condition|(
 name|collection
 operator|.
-name|count
+name|countDocuments
 argument_list|()
 operator|>
 literal|0
