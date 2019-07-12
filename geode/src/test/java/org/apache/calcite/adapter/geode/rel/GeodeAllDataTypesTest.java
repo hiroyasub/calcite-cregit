@@ -1296,7 +1296,7 @@ literal|"SELECT stringValue AS stringValue "
 operator|+
 literal|"FROM /allDataTypesRegion WHERE "
 operator|+
-literal|"stringValue IN SET('abc', 'def') OR floatValue IN SET(1.5678, null) OR dateValue "
+literal|"stringValue IN SET('abc', 'def') OR floatValue = 1.5678 OR dateValue "
 operator|+
 literal|"IN SET(DATE '2018-02-05', DATE '2018-02-06') OR timeValue "
 operator|+
@@ -1304,7 +1304,7 @@ literal|"IN SET(TIME '03:22:23', TIME '07:22:23') OR timestampValue "
 operator|+
 literal|"IN SET(TIMESTAMP '2018-02-05 04:22:33', TIMESTAMP '2017-02-05 04:22:33') "
 operator|+
-literal|"OR booleanValue IN SET(true, false, null)"
+literal|"OR booleanValue = true OR booleanValue = false"
 argument_list|)
 argument_list|)
 expr_stmt|;

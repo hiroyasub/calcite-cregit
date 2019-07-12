@@ -1382,12 +1382,32 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/**    * Can create a {@link LogicalFilter} of the appropriate type    * for this rule's calling convention.    */
+comment|/**    * Can create a {@link Filter} of the appropriate type    * for this rule's calling convention.    */
 specifier|public
 interface|interface
 name|FilterFactory
 block|{
-comment|/** Creates a filter. */
+comment|/** Creates a filter.      *      *<p>Some implementations of {@code Filter} do not support correlation      * variables, and for these, this method will throw if {@code variablesSet}      * is not empty.      *      * @param input Input relational expression      * @param condition Filter condition; only rows for which this condition      *   evaluates to TRUE will be emitted      * @param variablesSet Correlating variables that are set when reading      *   a row from the input, and which may be referenced from inside the      *   condition      */
+name|RelNode
+name|createFilter
+parameter_list|(
+name|RelNode
+name|input
+parameter_list|,
+name|RexNode
+name|condition
+parameter_list|,
+name|Set
+argument_list|<
+name|CorrelationId
+argument_list|>
+name|variablesSet
+parameter_list|)
+function_decl|;
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
+specifier|default
 name|RelNode
 name|createFilter
 parameter_list|(
@@ -1397,7 +1417,21 @@ parameter_list|,
 name|RexNode
 name|condition
 parameter_list|)
-function_decl|;
+block|{
+return|return
+name|createFilter
+argument_list|(
+name|input
+argument_list|,
+name|condition
+argument_list|,
+name|ImmutableSet
+operator|.
+name|of
+argument_list|()
+argument_list|)
+return|;
+block|}
 block|}
 comment|/**    * Implementation of {@link RelFactories.FilterFactory} that    * returns a vanilla {@link LogicalFilter}.    */
 specifier|private
@@ -1416,6 +1450,12 @@ name|input
 parameter_list|,
 name|RexNode
 name|condition
+parameter_list|,
+name|Set
+argument_list|<
+name|CorrelationId
+argument_list|>
+name|variablesSet
 parameter_list|)
 block|{
 return|return
@@ -1426,6 +1466,13 @@ argument_list|(
 name|input
 argument_list|,
 name|condition
+argument_list|,
+name|ImmutableSet
+operator|.
+name|copyOf
+argument_list|(
+name|variablesSet
+argument_list|)
 argument_list|)
 return|;
 block|}

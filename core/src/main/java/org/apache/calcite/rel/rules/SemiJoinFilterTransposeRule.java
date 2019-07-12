@@ -320,6 +320,11 @@ name|filter
 operator|.
 name|getCondition
 argument_list|()
+argument_list|,
+name|ImmutableSet
+operator|.
+name|of
+argument_list|()
 argument_list|)
 decl_stmt|;
 name|call

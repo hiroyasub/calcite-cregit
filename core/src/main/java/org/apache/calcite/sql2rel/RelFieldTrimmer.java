@@ -2640,24 +2640,22 @@ argument_list|(
 name|shuttle
 argument_list|)
 decl_stmt|;
-comment|// Use copy rather than relBuilder so that correlating variables get set.
+comment|// Build new filter with trimmed input and condition.
 name|relBuilder
 operator|.
 name|push
 argument_list|(
-name|filter
+name|newInput
+argument_list|)
 operator|.
-name|copy
+name|filter
 argument_list|(
 name|filter
 operator|.
-name|getTraitSet
+name|getVariablesSet
 argument_list|()
 argument_list|,
-name|newInput
-argument_list|,
 name|newConditionExpr
-argument_list|)
 argument_list|)
 expr_stmt|;
 comment|// The result has the same mapping as the input gave us. Sometimes we

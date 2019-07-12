@@ -5882,6 +5882,11 @@ operator|.
 name|root
 argument_list|,
 name|convertedWhere2
+argument_list|,
+name|ImmutableSet
+operator|.
+name|of
+argument_list|()
 argument_list|)
 decl_stmt|;
 specifier|final
@@ -13418,6 +13423,11 @@ operator|.
 name|r
 argument_list|,
 name|newCond
+argument_list|,
+name|ImmutableSet
+operator|.
+name|of
+argument_list|()
 argument_list|)
 expr_stmt|;
 name|requiredCols
