@@ -55,6 +55,20 @@ name|calcite
 operator|.
 name|plan
 operator|.
+name|RelOptRule
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
 name|RelTraitDef
 import|;
 end_import
@@ -72,22 +86,6 @@ operator|.
 name|hep
 operator|.
 name|HepPlanner
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|plan
-operator|.
-name|hep
-operator|.
-name|HepProgram
 import|;
 end_import
 
@@ -134,6 +132,22 @@ operator|.
 name|core
 operator|.
 name|JoinRelType
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|rules
+operator|.
+name|PruneEmptyRules
 import|;
 end_import
 
@@ -686,6 +700,20 @@ operator|.
 name|util
 operator|.
 name|TestUtil
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|util
+operator|.
+name|Util
 import|;
 end_import
 
@@ -3417,6 +3445,66 @@ operator|+
 literal|"HAVING COUNT(*)> 1) AS \"t2\"\n"
 operator|+
 literal|"WHERE \"t2\".\"product_id\"> 100"
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testHaving4
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|query
+init|=
+literal|"select \"product_id\"\n"
+operator|+
+literal|"from (\n"
+operator|+
+literal|"  select \"product_id\", avg(\"gross_weight\") as agw\n"
+operator|+
+literal|"  from \"product\"\n"
+operator|+
+literal|"  where \"net_weight\"< 100\n"
+operator|+
+literal|"  group by \"product_id\")\n"
+operator|+
+literal|"where agw> 50\n"
+operator|+
+literal|"group by \"product_id\"\n"
+operator|+
+literal|"having avg(agw)> 60\n"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT \"product_id\"\n"
+operator|+
+literal|"FROM (SELECT \"product_id\", AVG(\"gross_weight\") AS \"AGW\"\n"
+operator|+
+literal|"FROM \"foodmart\".\"product\"\n"
+operator|+
+literal|"WHERE \"net_weight\"< 100\n"
+operator|+
+literal|"GROUP BY \"product_id\"\n"
+operator|+
+literal|"HAVING AVG(\"gross_weight\")> 50) AS \"t2\"\n"
+operator|+
+literal|"GROUP BY \"product_id\"\n"
+operator|+
+literal|"HAVING AVG(\"AGW\")> 60"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -7141,24 +7229,6 @@ operator|+
 literal|"FROM \"foodmart\".\"product_class\""
 decl_stmt|;
 specifier|final
-name|HepProgram
-name|program
-init|=
-operator|new
-name|HepProgramBuilder
-argument_list|()
-operator|.
-name|addRuleClass
-argument_list|(
-name|UnionMergeRule
-operator|.
-name|class
-argument_list|)
-operator|.
-name|build
-argument_list|()
-decl_stmt|;
-specifier|final
 name|RuleSet
 name|rules
 init|=
@@ -7180,11 +7250,7 @@ name|optimize
 argument_list|(
 name|rules
 argument_list|,
-operator|new
-name|HepPlanner
-argument_list|(
-name|program
-argument_list|)
+literal|null
 argument_list|)
 operator|.
 name|ok
@@ -11639,6 +11705,18 @@ literal|" (2, 'yy')) AS t (a, b)"
 decl_stmt|;
 specifier|final
 name|String
+name|expectedMysql
+init|=
+literal|"SELECT `a`\n"
+operator|+
+literal|"FROM (SELECT 1 AS `a`, 'x ' AS `b`\n"
+operator|+
+literal|"UNION ALL\n"
+operator|+
+literal|"SELECT 2 AS `a`, 'yy' AS `b`) AS `t`"
+decl_stmt|;
+specifier|final
+name|String
 name|expectedPostgresql
 init|=
 literal|"SELECT \"a\"\n"
@@ -11688,6 +11766,14 @@ argument_list|(
 name|expectedHsqldb
 argument_list|)
 operator|.
+name|withMysql
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expectedMysql
+argument_list|)
+operator|.
 name|withPostgresql
 argument_list|()
 operator|.
@@ -11718,6 +11804,103 @@ operator|.
 name|ok
 argument_list|(
 name|expectedRedshift
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testValuesEmpty
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"from (values (1, 'a'), (2, 'bb')) as t(x, y)\n"
+operator|+
+literal|"limit 0"
+decl_stmt|;
+specifier|final
+name|RuleSet
+name|rules
+init|=
+name|RuleSets
+operator|.
+name|ofList
+argument_list|(
+name|PruneEmptyRules
+operator|.
+name|SORT_FETCH_ZERO_INSTANCE
+argument_list|)
+decl_stmt|;
+specifier|final
+name|String
+name|expectedMysql
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM (SELECT NULL AS `X`, NULL AS `Y`) AS `t`\n"
+operator|+
+literal|"WHERE 1 = 0"
+decl_stmt|;
+specifier|final
+name|String
+name|expectedOracle
+init|=
+literal|"SELECT NULL \"X\", NULL \"Y\"\n"
+operator|+
+literal|"FROM \"DUAL\"\n"
+operator|+
+literal|"WHERE 1 = 0"
+decl_stmt|;
+specifier|final
+name|String
+name|expectedPostgresql
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM (VALUES  (NULL, NULL)) AS \"t\" (\"X\", \"Y\")\n"
+operator|+
+literal|"WHERE 1 = 0"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|optimize
+argument_list|(
+name|rules
+argument_list|,
+literal|null
+argument_list|)
+operator|.
+name|withMysql
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expectedMysql
+argument_list|)
+operator|.
+name|withOracle
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expectedOracle
+argument_list|)
+operator|.
+name|withPostgresql
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expectedPostgresql
 argument_list|)
 expr_stmt|;
 block|}
@@ -13248,7 +13431,7 @@ decl_stmt|;
 name|String
 name|expected
 init|=
-literal|"SELECT TO_DATE ('1978-05-02', 'YYYY-MM-DD')\n"
+literal|"SELECT TO_DATE('1978-05-02', 'YYYY-MM-DD')\n"
 operator|+
 literal|"FROM \"foodmart\".\"employee\""
 decl_stmt|;
@@ -13281,7 +13464,9 @@ decl_stmt|;
 name|String
 name|expected
 init|=
-literal|"SELECT TO_TIMESTAMP ('1978-05-02 12:34:56.78', 'YYYY-MM-DD HH24:MI:SS.FF')\n"
+literal|"SELECT TO_TIMESTAMP('1978-05-02 12:34:56.78',"
+operator|+
+literal|" 'YYYY-MM-DD HH24:MI:SS.FF')\n"
 operator|+
 literal|"FROM \"foodmart\".\"employee\""
 decl_stmt|;
@@ -13314,7 +13499,7 @@ decl_stmt|;
 name|String
 name|expected
 init|=
-literal|"SELECT TO_TIME ('12:34:56.78', 'HH24:MI:SS.FF')\n"
+literal|"SELECT TO_TIME('12:34:56.78', 'HH24:MI:SS.FF')\n"
 operator|+
 literal|"FROM \"foodmart\".\"employee\""
 decl_stmt|;
@@ -14274,12 +14459,41 @@ argument_list|(
 name|ruleSet
 argument_list|)
 decl_stmt|;
+specifier|final
+name|RelOptPlanner
+name|p
+init|=
+name|Util
+operator|.
+name|first
+argument_list|(
+name|relOptPlanner
+argument_list|,
+operator|new
+name|HepPlanner
+argument_list|(
+operator|new
+name|HepProgramBuilder
+argument_list|()
+operator|.
+name|addRuleClass
+argument_list|(
+name|RelOptRule
+operator|.
+name|class
+argument_list|)
+operator|.
+name|build
+argument_list|()
+argument_list|)
+argument_list|)
+decl_stmt|;
 return|return
 name|program
 operator|.
 name|run
 argument_list|(
-name|relOptPlanner
+name|p
 argument_list|,
 name|r
 argument_list|,

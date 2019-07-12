@@ -451,7 +451,7 @@ return|;
 block|}
 annotation|@
 name|Override
-specifier|protected
+specifier|public
 name|boolean
 name|requiresAliasForFromItems
 parameter_list|()

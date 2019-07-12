@@ -525,6 +525,27 @@ block|}
 annotation|@
 name|Override
 specifier|public
+name|boolean
+name|requiresAliasForFromItems
+parameter_list|()
+block|{
+return|return
+literal|true
+return|;
+block|}
+specifier|public
+name|boolean
+name|supportsAliasedValues
+parameter_list|()
+block|{
+comment|// MySQL supports VALUES only in INSERT; not in a FROM clause
+return|return
+literal|false
+return|;
+block|}
+annotation|@
+name|Override
+specifier|public
 name|void
 name|unparseOffsetFetch
 parameter_list|(

@@ -329,6 +329,30 @@ name|SqlTypeName
 import|;
 end_import
 
+begin_import
+import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|collect
+operator|.
+name|ImmutableList
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|List
+import|;
+end_import
+
 begin_comment
 comment|/**  * A<code>SqlDialect</code> implementation for the Oracle database.  */
 end_comment
@@ -620,7 +644,7 @@ name|writer
 operator|.
 name|literal
 argument_list|(
-literal|"TO_TIMESTAMP ('"
+literal|"TO_TIMESTAMP('"
 operator|+
 name|literal
 operator|.
@@ -642,7 +666,7 @@ name|writer
 operator|.
 name|literal
 argument_list|(
-literal|"TO_DATE ('"
+literal|"TO_DATE('"
 operator|+
 name|literal
 operator|.
@@ -664,7 +688,7 @@ name|writer
 operator|.
 name|literal
 argument_list|(
-literal|"TO_TIME ('"
+literal|"TO_TIME('"
 operator|+
 name|literal
 operator|.
@@ -691,6 +715,25 @@ name|rightPrec
 argument_list|)
 expr_stmt|;
 block|}
+block|}
+annotation|@
+name|Override
+specifier|public
+name|List
+argument_list|<
+name|String
+argument_list|>
+name|getSingleRowTableName
+parameter_list|()
+block|{
+return|return
+name|ImmutableList
+operator|.
+name|of
+argument_list|(
+literal|"DUAL"
+argument_list|)
+return|;
 block|}
 annotation|@
 name|Override

@@ -495,6 +495,16 @@ name|Nonnull
 import|;
 end_import
 
+begin_import
+import|import
+name|javax
+operator|.
+name|annotation
+operator|.
+name|Nullable
+import|;
+end_import
+
 begin_comment
 comment|/**  *<code>SqlDialect</code> encapsulates the differences between dialects of SQL.  *  *<p>It is used by classes such as {@link SqlWriter} and  * {@link org.apache.calcite.sql.util.SqlBuilder}.  */
 end_comment
@@ -2972,7 +2982,8 @@ literal|true
 return|;
 block|}
 comment|// -- behaviors --
-specifier|protected
+comment|/** Whether a sub-query in the FROM clause must have an alias.    *    *<p>For example, in PostgreSQL, this query is legal:    *    *<blockquote>{@code SELECT * FROM (SELECT * FROM Emp) As e}</blockquote>    *    *<p>but remove the alias {@code e} and it is not:    *    *<blockquote>{@code SELECT * FROM (SELECT * FROM Emp)}</blockquote>    *    *<p>In Oracle, both queries are legal.    */
+specifier|public
 name|boolean
 name|requiresAliasForFromItems
 parameter_list|()
@@ -3982,6 +3993,23 @@ parameter_list|()
 block|{
 return|return
 literal|true
+return|;
+block|}
+comment|/** Returns the name of the system table that has precisely one row.    * If there is no such table, returns null, and we will generate SELECT with    * no FROM clause.    *    *<p>For {@code VALUES 1},    * Oracle returns ["DUAL"] and we generate "SELECT 1 FROM DUAL";    * MySQL returns null and we generate "SELECT 1".    */
+annotation|@
+name|Experimental
+specifier|public
+annotation|@
+name|Nullable
+name|List
+argument_list|<
+name|String
+argument_list|>
+name|getSingleRowTableName
+parameter_list|()
+block|{
+return|return
+literal|null
 return|;
 block|}
 comment|/**    * Copies settings from this dialect into a parser configuration.    *    *<p>{@code SqlDialect}, {@link SqlParser.Config} and {@link SqlConformance}    * cover different aspects of the same thing - the dialect of SQL spoken by a    * database - and this method helps to bridge between them. (The aspects are,    * respectively, generating SQL to send to a source database, parsing SQL    * sent to Calcite, and validating queries sent to Calcite. It makes sense to    * keep them as separate interfaces because they are used by different    * modules.)    *    *<p>The settings copied may differ among dialects, and may change over time,    * but currently include the following:    *    *<ul>    *<li>{@link #getQuoting()}    *<li>{@link #getQuotedCasing()}    *<li>{@link #getUnquotedCasing()}    *<li>{@link #isCaseSensitive()}    *<li>{@link #getConformance()}    *</ul>    *    * @param configBuilder Parser configuration builder    *    * @return The configuration builder    */
