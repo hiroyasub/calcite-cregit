@@ -624,6 +624,25 @@ literal|"         },\n"
 operator|+
 literal|"         {\n"
 operator|+
+literal|"           name: 'MY_EXCEPTION',\n"
+operator|+
+literal|"           className: '"
+operator|+
+name|Smalls
+operator|.
+name|MyExceptionFunction
+operator|.
+name|class
+operator|.
+name|getName
+argument_list|()
+operator|+
+literal|"'\n"
+operator|+
+literal|"         },\n"
+operator|+
+literal|"         {\n"
+operator|+
 literal|"           name: 'COUNT_ARGS',\n"
 operator|+
 literal|"           className: '"
@@ -1015,6 +1034,116 @@ operator|.
 name|returns
 argument_list|(
 name|expected
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3195">[CALCITE-3195]    * Handle a UDF that throws checked exceptions in the Enumerable code generator</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testUserDefinedFunctionWithException
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+specifier|final
+name|String
+name|sql1
+init|=
+literal|"select \"adhoc\".my_exception(\"deptno\") as p\n"
+operator|+
+literal|"from \"adhoc\".EMPLOYEES"
+decl_stmt|;
+specifier|final
+name|String
+name|expected1
+init|=
+literal|"P=20\n"
+operator|+
+literal|"P=30\n"
+operator|+
+literal|"P=20\n"
+operator|+
+literal|"P=20\n"
+decl_stmt|;
+name|withUdf
+argument_list|()
+operator|.
+name|query
+argument_list|(
+name|sql1
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+name|expected1
+argument_list|)
+expr_stmt|;
+specifier|final
+name|String
+name|sql2
+init|=
+literal|"select cast(\"adhoc\".my_exception(\"deptno\") as double) as p\n"
+operator|+
+literal|"from \"adhoc\".EMPLOYEES"
+decl_stmt|;
+specifier|final
+name|String
+name|expected2
+init|=
+literal|"P=20.0\n"
+operator|+
+literal|"P=30.0\n"
+operator|+
+literal|"P=20.0\n"
+operator|+
+literal|"P=20.0\n"
+decl_stmt|;
+name|withUdf
+argument_list|()
+operator|.
+name|query
+argument_list|(
+name|sql2
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+name|expected2
+argument_list|)
+expr_stmt|;
+specifier|final
+name|String
+name|sql3
+init|=
+literal|"select \"adhoc\".my_exception(\"deptno\" * 2 + 11) as p\n"
+operator|+
+literal|"from \"adhoc\".EMPLOYEES"
+decl_stmt|;
+specifier|final
+name|String
+name|expected3
+init|=
+literal|"P=41\n"
+operator|+
+literal|"P=61\n"
+operator|+
+literal|"P=41\n"
+operator|+
+literal|"P=41\n"
+decl_stmt|;
+name|withUdf
+argument_list|()
+operator|.
+name|query
+argument_list|(
+name|sql3
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+name|expected3
 argument_list|)
 expr_stmt|;
 block|}
