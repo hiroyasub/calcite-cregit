@@ -403,7 +403,7 @@ name|RelDataType
 name|type2
 parameter_list|)
 function_decl|;
-comment|/**    * Returns whether a decimal multiplication should be implemented by casting    * arguments to double values.    *    *<p>Pre-condition:<code>createDecimalProduct(type1, type2) != null</code>    *    * @deprecated Use    * {@link RelDataTypeSystem#shouldUseDoubleMultiplication(RelDataType, RelDataType)}    */
+comment|/**    * Returns whether a decimal multiplication should be implemented by casting    * arguments to double values.    *    *<p>Pre-condition:<code>createDecimalProduct(type1, type2) != null</code>    *    * @deprecated Use    * {@link RelDataTypeSystem#shouldUseDoubleMultiplication(RelDataTypeFactory, RelDataType, RelDataType)}    */
 annotation|@
 name|Deprecated
 comment|// to be removed before 2.0
