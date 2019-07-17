@@ -6011,7 +6011,7 @@ literal|"EnumerableCalc(expr#0..2=[{inputs}], empid=[$t1])\n"
 operator|+
 literal|"  EnumerableHashJoin(condition=[=($0, $2)], joinType=[inner])\n"
 operator|+
-literal|"    EnumerableCalc(expr#0=[{inputs}], expr#1=[CAST($t0):VARCHAR], name=[$t1])\n"
+literal|"    EnumerableCalc(expr#0=[{inputs}], expr#1=[CAST($t0):VARCHAR], name00=[$t1])\n"
 operator|+
 literal|"      EnumerableTableScan(table=[[hr, m0]])\n"
 operator|+
@@ -8109,6 +8109,40 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testMaterializationAfterTrimingOfUnusedFields
+parameter_list|()
+block|{
+name|String
+name|sql
+init|=
+literal|"select \"y\".\"deptno\", \"y\".\"name\", \"x\".\"sum_salary\"\n"
+operator|+
+literal|"from\n"
+operator|+
+literal|"  (select \"deptno\", sum(\"salary\") \"sum_salary\"\n"
+operator|+
+literal|"  from \"emps\"\n"
+operator|+
+literal|"  group by \"deptno\") \"x\"\n"
+operator|+
+literal|"  join\n"
+operator|+
+literal|"  \"depts\" \"y\"\n"
+operator|+
+literal|"  on \"x\".\"deptno\"=\"y\".\"deptno\"\n"
+decl_stmt|;
+name|checkMaterialize
+argument_list|(
+name|sql
+argument_list|,
+name|sql
+argument_list|)
+expr_stmt|;
 block|}
 specifier|private
 specifier|static
