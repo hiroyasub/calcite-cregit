@@ -11,7 +11,9 @@ name|apache
 operator|.
 name|calcite
 operator|.
-name|schema
+name|test
+operator|.
+name|catalog
 package|;
 end_package
 
@@ -29,51 +31,97 @@ name|RelOptTable
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|schema
+operator|.
+name|ColumnStrategy
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql2rel
+operator|.
+name|NullInitializerExpressionFactory
+import|;
+end_import
+
 begin_comment
-comment|/** Describes how a column gets populated.  *  * @see org.apache.calcite.sql2rel.InitializerExpressionFactory#generationStrategy  * @see RelOptTable#getColumnStrategies()  */
+comment|/** Define column strategies for the "VIRTUALCOLUMNS" table. */
 end_comment
 
-begin_enum
+begin_class
 specifier|public
-enum|enum
+class|class
+name|VirtualColumnsExpressionFactory
+extends|extends
+name|NullInitializerExpressionFactory
+block|{
+annotation|@
+name|Override
+specifier|public
 name|ColumnStrategy
+name|generationStrategy
+parameter_list|(
+name|RelOptTable
+name|table
+parameter_list|,
+name|int
+name|iColumn
+parameter_list|)
 block|{
-comment|/** Column does not have a default value, but does allow null values.    * If you don't specify it in an INSERT, it will get a NULL value. */
-name|NULLABLE
-block|,
-comment|/** Column does not have a default value, and does not allow nulls.    * You must specify it in an INSERT. */
-name|NOT_NULLABLE
-block|,
-comment|/** Column has a default value.    * If you don't specify it in an INSERT, it will get a NULL value. */
-name|DEFAULT
-block|,
-comment|/** Column is computed and stored. You cannot insert into it. */
-name|STORED
-block|,
-comment|/** Column is computed and not stored. You cannot insert into it. */
-name|VIRTUAL
-block|;
-comment|/**    * Returns whether you can insert into the column.    * @return true if this column can be inserted.    */
-specifier|public
-name|boolean
-name|canInsertInto
-parameter_list|()
+switch|switch
+condition|(
+name|iColumn
+condition|)
 block|{
+case|case
+literal|3
+case|:
 return|return
-name|this
-operator|!=
+name|ColumnStrategy
+operator|.
 name|STORED
-operator|&&
-name|this
-operator|!=
+return|;
+case|case
+literal|4
+case|:
+return|return
+name|ColumnStrategy
+operator|.
 name|VIRTUAL
+return|;
+default|default:
+return|return
+name|super
+operator|.
+name|generationStrategy
+argument_list|(
+name|table
+argument_list|,
+name|iColumn
+argument_list|)
 return|;
 block|}
 block|}
-end_enum
+block|}
+end_class
 
 begin_comment
-comment|// End ColumnStrategy.java
+comment|// End VirtualColumnsExpressionFactory.java
 end_comment
 
 end_unit

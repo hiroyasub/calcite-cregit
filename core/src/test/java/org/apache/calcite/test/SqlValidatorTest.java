@@ -28445,6 +28445,156 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testInsertTargetTableWithVirtualColumns
+parameter_list|()
+block|{
+specifier|final
+name|Sql
+name|s
+init|=
+name|sql
+argument_list|(
+literal|"?"
+argument_list|)
+operator|.
+name|withExtendedCatalog
+argument_list|()
+decl_stmt|;
+name|s
+operator|.
+name|sql
+argument_list|(
+literal|"insert into VIRTUALCOLUMNS.VC_T1 select a, b, c from VIRTUALCOLUMNS.VC_T2"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+specifier|final
+name|String
+name|sql0
+init|=
+literal|"insert into ^VIRTUALCOLUMNS.VC_T1^ values(1, 2, 'abc', 3, 4)"
+decl_stmt|;
+specifier|final
+name|String
+name|error0
+init|=
+literal|"Cannot INSERT into generated column 'D'"
+decl_stmt|;
+name|s
+operator|.
+name|sql
+argument_list|(
+name|sql0
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+name|error0
+argument_list|)
+expr_stmt|;
+specifier|final
+name|String
+name|sql1
+init|=
+literal|"insert into ^VIRTUALCOLUMNS.VC_T1^ values(1, 2, 'abc', DEFAULT, DEFAULT)"
+decl_stmt|;
+name|s
+operator|.
+name|sql
+argument_list|(
+name|sql1
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+specifier|final
+name|String
+name|sql2
+init|=
+literal|"insert into ^VIRTUALCOLUMNS.VC_T1^ values(1, 2, 'abc', DEFAULT)"
+decl_stmt|;
+specifier|final
+name|String
+name|error2
+init|=
+literal|"(?s).*Number of INSERT target columns \\(5\\) "
+operator|+
+literal|"does not equal number of source items \\(4\\).*"
+decl_stmt|;
+name|s
+operator|.
+name|sql
+argument_list|(
+name|sql2
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+name|error2
+argument_list|)
+expr_stmt|;
+specifier|final
+name|String
+name|sql3
+init|=
+literal|"insert into ^VIRTUALCOLUMNS.VC_T1^ "
+operator|+
+literal|"values(1, 2, 'abc', DEFAULT, DEFAULT, DEFAULT)"
+decl_stmt|;
+specifier|final
+name|String
+name|error3
+init|=
+literal|"(?s).*Number of INSERT target columns \\(5\\) "
+operator|+
+literal|"does not equal number of source items \\(6\\).*"
+decl_stmt|;
+name|s
+operator|.
+name|sql
+argument_list|(
+name|sql3
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+name|error3
+argument_list|)
+expr_stmt|;
+specifier|final
+name|String
+name|sql4
+init|=
+literal|"insert into VIRTUALCOLUMNS.VC_T1 ^values(1, '2', 'abc')^"
+decl_stmt|;
+specifier|final
+name|String
+name|error4
+init|=
+literal|"(?s).*Cannot assign to target field 'B' of type BIGINT "
+operator|+
+literal|"from source field 'EXPR\\$1' of type CHAR\\(1\\).*"
+decl_stmt|;
+name|s
+operator|.
+name|sql
+argument_list|(
+name|sql4
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+name|error4
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testInsertFailNullability
 parameter_list|()
 block|{

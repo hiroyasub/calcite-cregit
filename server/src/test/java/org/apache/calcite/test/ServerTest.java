@@ -1414,13 +1414,6 @@ argument_list|(
 literal|"insert into t values (2, 3)"
 argument_list|)
 expr_stmt|;
-name|fail
-argument_list|(
-literal|"expected error, got "
-operator|+
-name|x
-argument_list|)
-expr_stmt|;
 block|}
 catch|catch
 parameter_list|(
@@ -1785,7 +1778,7 @@ argument_list|)
 argument_list|,
 name|is
 argument_list|(
-literal|19
+literal|22
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -1800,7 +1793,7 @@ argument_list|)
 argument_list|,
 name|is
 argument_list|(
-literal|9
+literal|10
 argument_list|)
 argument_list|)
 expr_stmt|;
