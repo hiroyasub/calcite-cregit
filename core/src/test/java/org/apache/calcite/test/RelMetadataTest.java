@@ -1303,18 +1303,6 @@ begin_import
 import|import
 name|org
 operator|.
-name|hamcrest
-operator|.
-name|core
-operator|.
-name|Is
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
 name|junit
 operator|.
 name|Assume
@@ -1327,7 +1315,11 @@ name|org
 operator|.
 name|junit
 operator|.
-name|Ignore
+name|jupiter
+operator|.
+name|api
+operator|.
+name|Disabled
 import|;
 end_import
 
@@ -1337,17 +1329,25 @@ name|org
 operator|.
 name|junit
 operator|.
-name|Test
+name|jupiter
+operator|.
+name|api
+operator|.
+name|Tag
 import|;
 end_import
 
 begin_import
 import|import
-name|java
+name|org
 operator|.
-name|io
+name|junit
 operator|.
-name|File
+name|jupiter
+operator|.
+name|api
+operator|.
+name|Test
 import|;
 end_import
 
@@ -2014,7 +2014,7 @@ argument_list|)
 expr_stmt|;
 block|}
 annotation|@
-name|Ignore
+name|Disabled
 annotation|@
 name|Test
 specifier|public
@@ -2031,7 +2031,7 @@ argument_list|)
 expr_stmt|;
 block|}
 annotation|@
-name|Ignore
+name|Disabled
 annotation|@
 name|Test
 specifier|public
@@ -2052,7 +2052,7 @@ argument_list|)
 expr_stmt|;
 block|}
 annotation|@
-name|Ignore
+name|Disabled
 annotation|@
 name|Test
 specifier|public
@@ -2088,7 +2088,7 @@ argument_list|)
 expr_stmt|;
 block|}
 annotation|@
-name|Ignore
+name|Disabled
 annotation|@
 name|Test
 specifier|public
@@ -2126,7 +2126,7 @@ argument_list|)
 expr_stmt|;
 block|}
 annotation|@
-name|Ignore
+name|Disabled
 annotation|@
 name|Test
 specifier|public
@@ -2159,7 +2159,7 @@ argument_list|)
 expr_stmt|;
 block|}
 annotation|@
-name|Ignore
+name|Disabled
 annotation|@
 name|Test
 specifier|public
@@ -4528,7 +4528,12 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1808">[CALCITE-1808]    * JaninoRelMetadataProvider loading cache might cause    * OutOfMemoryError</a>. */
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1808">[CALCITE-1808]    * JaninoRelMetadataProvider loading cache might cause    * OutOfMemoryError</a>.    *    * Too slow to run every day, and it does not reproduce the issue. */
+annotation|@
+name|Tag
+argument_list|(
+literal|"slow"
+argument_list|)
 annotation|@
 name|Test
 specifier|public
@@ -4536,20 +4541,6 @@ name|void
 name|testMetadataHandlerCacheLimit
 parameter_list|()
 block|{
-name|Assume
-operator|.
-name|assumeTrue
-argument_list|(
-literal|"too slow to run every day, and it does not reproduce the issue"
-argument_list|,
-name|CalciteSystemProperty
-operator|.
-name|TEST_SLOW
-operator|.
-name|value
-argument_list|()
-argument_list|)
-expr_stmt|;
 name|Assume
 operator|.
 name|assumeTrue
@@ -11575,36 +11566,11 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1960">[CALCITE-1960]    * RelMdPredicates.getPredicates is slow if there are many equivalent    * columns</a>. There are much less duplicates after    *<a href="https://issues.apache.org/jira/browse/CALCITE-2205">[CALCITE-2205]</a>.    * Since this is a performance problem, the test result does not    * change, but takes over 15 minutes before the fix and 6 seconds after. */
 annotation|@
 name|Test
-argument_list|(
-name|timeout
-operator|=
-literal|20_000
-argument_list|)
 specifier|public
 name|void
 name|testPullUpPredicatesForExprsItr
 parameter_list|()
 block|{
-comment|// If we're running Windows, we are probably in a VM and the test may
-comment|// exceed timeout by a small margin.
-name|Assume
-operator|.
-name|assumeThat
-argument_list|(
-literal|"Too slow to run on Windows"
-argument_list|,
-name|File
-operator|.
-name|separatorChar
-argument_list|,
-name|Is
-operator|.
-name|is
-argument_list|(
-literal|'/'
-argument_list|)
-argument_list|)
-expr_stmt|;
 specifier|final
 name|String
 name|sql

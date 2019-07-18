@@ -25,20 +25,6 @@ name|apache
 operator|.
 name|calcite
 operator|.
-name|config
-operator|.
-name|CalciteSystemProperty
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
 name|plan
 operator|.
 name|RelTraitDef
@@ -253,7 +239,11 @@ name|org
 operator|.
 name|junit
 operator|.
-name|Ignore
+name|jupiter
+operator|.
+name|api
+operator|.
+name|Disabled
 import|;
 end_import
 
@@ -262,6 +252,24 @@ import|import
 name|org
 operator|.
 name|junit
+operator|.
+name|jupiter
+operator|.
+name|api
+operator|.
+name|Tag
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|junit
+operator|.
+name|jupiter
+operator|.
+name|api
 operator|.
 name|Test
 import|;
@@ -328,10 +336,15 @@ import|;
 end_import
 
 begin_comment
-comment|/** Unit test for {@link org.apache.calcite.adapter.tpcds.TpcdsSchema}.  *  *<p>Only runs if {@link org.apache.calcite.config.CalciteSystemProperty#TEST_SLOW} is set.</p>  */
+comment|/** Unit test for {@link org.apache.calcite.adapter.tpcds.TpcdsSchema}.  *  *<p>Only runs as part of slow test suite.</p>  */
 end_comment
 
 begin_class
+annotation|@
+name|Tag
+argument_list|(
+literal|"slow"
+argument_list|)
 specifier|public
 class|class
 name|TpcdsTest
@@ -485,16 +498,6 @@ operator|.
 name|model
 argument_list|(
 name|TPCDS_MODEL
-argument_list|)
-operator|.
-name|enable
-argument_list|(
-name|CalciteSystemProperty
-operator|.
-name|TEST_SLOW
-operator|.
-name|value
-argument_list|()
 argument_list|)
 return|;
 block|}
@@ -955,7 +958,7 @@ expr_stmt|;
 block|}
 comment|/** Tests the customer table with scale factor 5. */
 annotation|@
-name|Ignore
+name|Disabled
 argument_list|(
 literal|"add tests like this that count each table"
 argument_list|)
@@ -981,7 +984,7 @@ argument_list|)
 expr_stmt|;
 block|}
 annotation|@
-name|Ignore
+name|Disabled
 argument_list|(
 literal|"throws 'RuntimeException: Cannot convert null to long'"
 argument_list|)
@@ -1088,7 +1091,7 @@ argument_list|)
 expr_stmt|;
 block|}
 annotation|@
-name|Ignore
+name|Disabled
 argument_list|(
 literal|"throws 'RuntimeException: Cannot convert null to long'"
 argument_list|)
@@ -1109,7 +1112,7 @@ argument_list|()
 expr_stmt|;
 block|}
 annotation|@
-name|Ignore
+name|Disabled
 argument_list|(
 literal|"throws 'RuntimeException: Cannot convert null to long'"
 argument_list|)
@@ -1135,7 +1138,7 @@ argument_list|()
 expr_stmt|;
 block|}
 annotation|@
-name|Ignore
+name|Disabled
 argument_list|(
 literal|"takes too long to optimize"
 argument_list|)
@@ -1156,7 +1159,7 @@ argument_list|()
 expr_stmt|;
 block|}
 annotation|@
-name|Ignore
+name|Disabled
 argument_list|(
 literal|"work in progress"
 argument_list|)
@@ -1193,7 +1196,7 @@ argument_list|)
 expr_stmt|;
 block|}
 annotation|@
-name|Ignore
+name|Disabled
 argument_list|(
 literal|"throws 'java.lang.AssertionError: type mismatch'"
 argument_list|)

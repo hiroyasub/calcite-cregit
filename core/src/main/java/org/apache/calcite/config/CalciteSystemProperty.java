@@ -433,23 +433,6 @@ return|;
 block|}
 argument_list|)
 decl_stmt|;
-comment|/**    * Whether to run slow tests.    */
-specifier|public
-specifier|static
-specifier|final
-name|CalciteSystemProperty
-argument_list|<
-name|Boolean
-argument_list|>
-name|TEST_SLOW
-init|=
-name|booleanProperty
-argument_list|(
-literal|"calcite.test.slow"
-argument_list|,
-literal|false
-argument_list|)
-decl_stmt|;
 comment|/**    * Whether to run MongoDB tests.    */
 specifier|public
 specifier|static

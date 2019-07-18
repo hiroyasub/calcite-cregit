@@ -603,7 +603,11 @@ name|org
 operator|.
 name|junit
 operator|.
-name|Ignore
+name|jupiter
+operator|.
+name|api
+operator|.
+name|Disabled
 import|;
 end_import
 
@@ -612,22 +616,26 @@ import|import
 name|org
 operator|.
 name|junit
+operator|.
+name|jupiter
+operator|.
+name|api
+operator|.
+name|Tag
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|junit
+operator|.
+name|jupiter
+operator|.
+name|api
 operator|.
 name|Test
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|junit
-operator|.
-name|experimental
-operator|.
-name|categories
-operator|.
-name|Category
 import|;
 end_import
 
@@ -813,11 +821,9 @@ end_comment
 
 begin_class
 annotation|@
-name|Category
+name|Tag
 argument_list|(
-name|SlowTests
-operator|.
-name|class
+literal|"slow"
 argument_list|)
 specifier|public
 class|class
@@ -3758,7 +3764,7 @@ argument_list|)
 expr_stmt|;
 block|}
 annotation|@
-name|Ignore
+name|Disabled
 annotation|@
 name|Test
 specifier|public
@@ -3775,7 +3781,7 @@ argument_list|)
 expr_stmt|;
 block|}
 annotation|@
-name|Ignore
+name|Disabled
 annotation|@
 name|Test
 specifier|public
@@ -3792,7 +3798,7 @@ argument_list|)
 expr_stmt|;
 block|}
 annotation|@
-name|Ignore
+name|Disabled
 annotation|@
 name|Test
 specifier|public
@@ -3802,7 +3808,7 @@ parameter_list|()
 block|{
 block|}
 annotation|@
-name|Ignore
+name|Disabled
 annotation|@
 name|Test
 specifier|public
@@ -3812,7 +3818,7 @@ parameter_list|()
 block|{
 block|}
 annotation|@
-name|Ignore
+name|Disabled
 annotation|@
 name|Test
 specifier|public
@@ -3822,7 +3828,7 @@ parameter_list|()
 block|{
 block|}
 annotation|@
-name|Ignore
+name|Disabled
 annotation|@
 name|Test
 specifier|public
@@ -3832,7 +3838,7 @@ parameter_list|()
 block|{
 block|}
 annotation|@
-name|Ignore
+name|Disabled
 annotation|@
 name|Test
 specifier|public
@@ -5170,7 +5176,7 @@ expr_stmt|;
 block|}
 comment|/** Tests a complicated star-join query on a complicated materialized    * star-join query. Some of the features:    *    *<ol>    *<li>query joins in different order;    *<li>query's join conditions are in where clause;    *<li>query does not use all join tables (safe to omit them because they are    *    many-to-mandatory-one joins);    *<li>query is at higher granularity, therefore needs to roll up;    *<li>query has a condition on one of the materialization's grouping columns.    *</ol>    */
 annotation|@
-name|Ignore
+name|Disabled
 annotation|@
 name|Test
 specifier|public
@@ -5240,7 +5246,7 @@ expr_stmt|;
 block|}
 comment|/** Simpler than {@link #testFilterGroupQueryOnStar()}, tests a query on a    * materialization that is just a join. */
 annotation|@
-name|Ignore
+name|Disabled
 annotation|@
 name|Test
 specifier|public
@@ -5279,7 +5285,7 @@ expr_stmt|;
 block|}
 comment|/** A materialization that is a join of a union cannot at present be converted    * to a star table and therefore cannot be recognized. This test checks that    * nothing unpleasant happens. */
 annotation|@
-name|Ignore
+name|Disabled
 annotation|@
 name|Test
 specifier|public
@@ -5848,7 +5854,7 @@ argument_list|)
 expr_stmt|;
 block|}
 annotation|@
-name|Ignore
+name|Disabled
 annotation|@
 name|Test
 specifier|public
@@ -6688,7 +6694,7 @@ argument_list|)
 expr_stmt|;
 block|}
 annotation|@
-name|Ignore
+name|Disabled
 annotation|@
 name|Test
 specifier|public
@@ -8418,7 +8424,7 @@ expr_stmt|;
 block|}
 block|}
 annotation|@
-name|Ignore
+name|Disabled
 argument_list|(
 literal|"Creating mv for depts considering all its column throws exception"
 argument_list|)

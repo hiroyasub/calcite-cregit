@@ -109,20 +109,6 @@ name|apache
 operator|.
 name|calcite
 operator|.
-name|test
-operator|.
-name|SlowTests
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
 name|util
 operator|.
 name|ImmutableBitSet
@@ -243,7 +229,11 @@ name|org
 operator|.
 name|junit
 operator|.
-name|Ignore
+name|jupiter
+operator|.
+name|api
+operator|.
+name|Disabled
 import|;
 end_import
 
@@ -252,22 +242,26 @@ import|import
 name|org
 operator|.
 name|junit
+operator|.
+name|jupiter
+operator|.
+name|api
+operator|.
+name|Tag
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|junit
+operator|.
+name|jupiter
+operator|.
+name|api
 operator|.
 name|Test
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|junit
-operator|.
-name|experimental
-operator|.
-name|categories
-operator|.
-name|Category
 import|;
 end_import
 
@@ -459,11 +453,9 @@ end_comment
 
 begin_class
 annotation|@
-name|Category
+name|Tag
 argument_list|(
-name|SlowTests
-operator|.
-name|class
+literal|"slow"
 argument_list|)
 specifier|public
 class|class
@@ -983,7 +975,7 @@ expr_stmt|;
 block|}
 comment|/** As {@link #testProfileScott3()}, but uses the breadth-first profiler. */
 annotation|@
-name|Ignore
+name|Disabled
 annotation|@
 name|Test
 specifier|public
@@ -1043,7 +1035,7 @@ expr_stmt|;
 block|}
 comment|/** Profiles a star-join query on the Foodmart schema using the breadth-first    * profiler. */
 annotation|@
-name|Ignore
+name|Disabled
 annotation|@
 name|Test
 specifier|public

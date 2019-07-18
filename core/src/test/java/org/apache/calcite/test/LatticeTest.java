@@ -229,7 +229,11 @@ name|org
 operator|.
 name|junit
 operator|.
-name|Ignore
+name|jupiter
+operator|.
+name|api
+operator|.
+name|Disabled
 import|;
 end_import
 
@@ -238,22 +242,26 @@ import|import
 name|org
 operator|.
 name|junit
+operator|.
+name|jupiter
+operator|.
+name|api
+operator|.
+name|Tag
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|junit
+operator|.
+name|jupiter
+operator|.
+name|api
 operator|.
 name|Test
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|junit
-operator|.
-name|experimental
-operator|.
-name|categories
-operator|.
-name|Category
 import|;
 end_import
 
@@ -485,11 +493,9 @@ end_comment
 
 begin_class
 annotation|@
-name|Category
+name|Tag
 argument_list|(
-name|SlowTests
-operator|.
-name|class
+literal|"slow"
 argument_list|)
 specifier|public
 class|class
@@ -2740,7 +2746,7 @@ expr_stmt|;
 block|}
 comment|/** Runs all queries against the Foodmart schema, using a lattice.    *    *<p>Disabled for normal runs, because it is slow. */
 annotation|@
-name|Ignore
+name|Disabled
 annotation|@
 name|Test
 specifier|public
@@ -3442,7 +3448,7 @@ expr_stmt|;
 block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-760">[CALCITE-760]    * Aggregate recommender blows up if row count estimate is too high</a>. */
 annotation|@
-name|Ignore
+name|Disabled
 annotation|@
 name|Test
 specifier|public

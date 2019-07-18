@@ -25,20 +25,6 @@ name|apache
 operator|.
 name|calcite
 operator|.
-name|config
-operator|.
-name|CalciteSystemProperty
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
 name|plan
 operator|.
 name|RelOptUtil
@@ -117,7 +103,11 @@ name|org
 operator|.
 name|junit
 operator|.
-name|Ignore
+name|jupiter
+operator|.
+name|api
+operator|.
+name|Disabled
 import|;
 end_import
 
@@ -126,6 +116,24 @@ import|import
 name|org
 operator|.
 name|junit
+operator|.
+name|jupiter
+operator|.
+name|api
+operator|.
+name|Tag
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|junit
+operator|.
+name|jupiter
+operator|.
+name|api
 operator|.
 name|Test
 import|;
@@ -178,10 +186,15 @@ import|;
 end_import
 
 begin_comment
-comment|/** Unit test for {@link org.apache.calcite.adapter.tpch.TpchSchema}.  *  *<p>Because the TPC-H data generator takes time and memory to instantiate,  * tests that read data (that is, most tests) only run  * if {@link org.apache.calcite.config.CalciteSystemProperty#TEST_SLOW} is set.</p>  */
+comment|/** Unit test for {@link org.apache.calcite.adapter.tpch.TpchSchema}.  *  *<p>Because the TPC-H data generator takes time and memory to instantiate,  * tests only run as part of slow tests.</p>  */
 end_comment
 
 begin_class
+annotation|@
+name|Tag
+argument_list|(
+literal|"slow"
+argument_list|)
 specifier|public
 class|class
 name|TpchTest
@@ -192,13 +205,6 @@ specifier|final
 name|boolean
 name|ENABLE
 init|=
-name|CalciteSystemProperty
-operator|.
-name|TEST_SLOW
-operator|.
-name|value
-argument_list|()
-operator|&&
 name|TestUtil
 operator|.
 name|getJavaMajorVersion
@@ -1685,7 +1691,7 @@ expr_stmt|;
 block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1543">[CALCITE-1543]    * Correlated scalar sub-query with multiple aggregates gives    * AssertionError</a>. */
 annotation|@
-name|Ignore
+name|Disabled
 argument_list|(
 literal|"planning succeeds, but gives OutOfMemoryError during execution"
 argument_list|)
@@ -1759,7 +1765,6 @@ name|with
 parameter_list|()
 block|{
 comment|// Only run on JDK 1.7 or higher. The io.airlift.tpch library requires it.
-comment|// Only run if slow tests are enabled; the library uses lots of memory.
 return|return
 name|CalciteAssert
 operator|.
@@ -1810,7 +1815,7 @@ argument_list|)
 expr_stmt|;
 block|}
 annotation|@
-name|Ignore
+name|Disabled
 argument_list|(
 literal|"Infinite planning"
 argument_list|)
@@ -1828,7 +1833,7 @@ argument_list|)
 expr_stmt|;
 block|}
 annotation|@
-name|Ignore
+name|Disabled
 argument_list|(
 literal|"Infinite planning"
 argument_list|)
@@ -1893,7 +1898,7 @@ argument_list|)
 expr_stmt|;
 block|}
 annotation|@
-name|Ignore
+name|Disabled
 argument_list|(
 literal|"NoSuchMethodException: SqlFunctions.lt(Date, Date)"
 argument_list|)
@@ -1911,7 +1916,7 @@ argument_list|)
 expr_stmt|;
 block|}
 annotation|@
-name|Ignore
+name|Disabled
 argument_list|(
 literal|"OutOfMemoryError"
 argument_list|)
@@ -1942,11 +1947,6 @@ argument_list|)
 expr_stmt|;
 block|}
 annotation|@
-name|Ignore
-argument_list|(
-literal|"slow"
-argument_list|)
-annotation|@
 name|Test
 specifier|public
 name|void
@@ -1969,11 +1969,6 @@ argument_list|)
 expr_stmt|;
 block|}
 annotation|@
-name|Ignore
-argument_list|(
-literal|"slow"
-argument_list|)
-annotation|@
 name|Test
 specifier|public
 name|void
@@ -1987,7 +1982,7 @@ argument_list|)
 expr_stmt|;
 block|}
 annotation|@
-name|Ignore
+name|Disabled
 argument_list|(
 literal|"no method found"
 argument_list|)
@@ -2018,7 +2013,7 @@ argument_list|)
 expr_stmt|;
 block|}
 annotation|@
-name|Ignore
+name|Disabled
 argument_list|(
 literal|"CannotPlanException"
 argument_list|)
@@ -2036,7 +2031,7 @@ argument_list|)
 expr_stmt|;
 block|}
 annotation|@
-name|Ignore
+name|Disabled
 argument_list|(
 literal|"NoSuchMethodException: SqlFunctions.lt(Date, Date)"
 argument_list|)
@@ -2054,7 +2049,7 @@ argument_list|)
 expr_stmt|;
 block|}
 annotation|@
-name|Ignore
+name|Disabled
 argument_list|(
 literal|"CannotPlanException"
 argument_list|)
@@ -2085,7 +2080,7 @@ argument_list|)
 expr_stmt|;
 block|}
 annotation|@
-name|Ignore
+name|Disabled
 argument_list|(
 literal|"AssertionError"
 argument_list|)
@@ -2115,11 +2110,6 @@ literal|16
 argument_list|)
 expr_stmt|;
 block|}
-annotation|@
-name|Ignore
-argument_list|(
-literal|"slow"
-argument_list|)
 annotation|@
 name|Test
 specifier|public
@@ -2174,11 +2164,6 @@ argument_list|)
 expr_stmt|;
 block|}
 annotation|@
-name|Ignore
-argument_list|(
-literal|"slow"
-argument_list|)
-annotation|@
 name|Test
 specifier|public
 name|void
@@ -2192,7 +2177,7 @@ argument_list|)
 expr_stmt|;
 block|}
 annotation|@
-name|Ignore
+name|Disabled
 argument_list|(
 literal|"IllegalArgumentException during decorrelation"
 argument_list|)

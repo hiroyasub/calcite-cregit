@@ -227,20 +227,6 @@ name|apache
 operator|.
 name|calcite
 operator|.
-name|test
-operator|.
-name|SlowTests
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
 name|tools
 operator|.
 name|FrameworkConfig
@@ -391,7 +377,11 @@ name|org
 operator|.
 name|junit
 operator|.
-name|Test
+name|jupiter
+operator|.
+name|api
+operator|.
+name|Tag
 import|;
 end_import
 
@@ -401,11 +391,11 @@ name|org
 operator|.
 name|junit
 operator|.
-name|experimental
+name|jupiter
 operator|.
-name|categories
+name|api
 operator|.
-name|Category
+name|Test
 import|;
 end_import
 
@@ -525,11 +515,9 @@ end_comment
 
 begin_class
 annotation|@
-name|Category
+name|Tag
 argument_list|(
-name|SlowTests
-operator|.
-name|class
+literal|"slow"
 argument_list|)
 specifier|public
 class|class

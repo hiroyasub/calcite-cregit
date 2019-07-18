@@ -169,20 +169,6 @@ name|calcite
 operator|.
 name|config
 operator|.
-name|CalciteSystemProperty
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|config
-operator|.
 name|Lex
 import|;
 end_import
@@ -1089,7 +1075,11 @@ name|org
 operator|.
 name|junit
 operator|.
-name|Ignore
+name|jupiter
+operator|.
+name|api
+operator|.
+name|Assertions
 import|;
 end_import
 
@@ -1098,6 +1088,38 @@ import|import
 name|org
 operator|.
 name|junit
+operator|.
+name|jupiter
+operator|.
+name|api
+operator|.
+name|Disabled
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|junit
+operator|.
+name|jupiter
+operator|.
+name|api
+operator|.
+name|Tag
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|junit
+operator|.
+name|jupiter
+operator|.
+name|api
 operator|.
 name|Test
 import|;
@@ -1364,19 +1386,21 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-argument_list|(
-name|expected
-operator|=
-name|SqlParseException
-operator|.
-name|class
-argument_list|)
 specifier|public
 name|void
 name|testParseIdentiferMaxLengthWithDefault
 parameter_list|()
-throws|throws
-name|Exception
+block|{
+name|Assertions
+operator|.
+name|assertThrows
+argument_list|(
+name|SqlParseException
+operator|.
+name|class
+argument_list|,
+parameter_list|()
+lambda|->
 block|{
 name|Planner
 name|planner
@@ -1401,6 +1425,9 @@ argument_list|(
 literal|"select name as "
 operator|+
 literal|"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa from \"emps\""
+argument_list|)
+expr_stmt|;
+block|}
 argument_list|)
 expr_stmt|;
 block|}
@@ -2578,7 +2605,7 @@ argument_list|)
 expr_stmt|;
 block|}
 annotation|@
-name|Ignore
+name|Disabled
 argument_list|(
 literal|"[CALCITE-2773] java.lang.AssertionError: rel"
 operator|+
@@ -2857,7 +2884,7 @@ argument_list|)
 expr_stmt|;
 block|}
 annotation|@
-name|Ignore
+name|Disabled
 argument_list|(
 literal|"[CALCITE-2773] java.lang.AssertionError: rel"
 operator|+
@@ -4728,13 +4755,83 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Unit test that plans a query with a large number of joins. */
 annotation|@
 name|Test
 specifier|public
 name|void
-name|testPlanNWayJoin
+name|testPlan5WayJoin
 parameter_list|()
+throws|throws
+name|Exception
+block|{
+name|checkJoinNWay
+argument_list|(
+literal|5
+argument_list|)
+expr_stmt|;
+comment|// LoptOptimizeJoinRule disabled; takes about .4s
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testPlan9WayJoin
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+name|checkJoinNWay
+argument_list|(
+literal|9
+argument_list|)
+expr_stmt|;
+comment|// LoptOptimizeJoinRule enabled; takes about 0.04s
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testPlan35WayJoin
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+name|checkJoinNWay
+argument_list|(
+literal|35
+argument_list|)
+expr_stmt|;
+comment|// takes about 2s
+block|}
+annotation|@
+name|Tag
+argument_list|(
+literal|"slow"
+argument_list|)
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testPlan60WayJoin
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+name|checkJoinNWay
+argument_list|(
+literal|60
+argument_list|)
+expr_stmt|;
+comment|// takes about 15s
+block|}
+comment|/** Test that plans a query with a large number of joins. */
+specifier|private
+name|void
+name|checkJoinNWay
+parameter_list|(
+name|int
+name|n
+parameter_list|)
 throws|throws
 name|Exception
 block|{
@@ -4756,52 +4853,6 @@ comment|//      12   40,000         63
 comment|//      13 OOM              96
 comment|//      35 OOM           1,716
 comment|//      60 OOM          12,230
-name|checkJoinNWay
-argument_list|(
-literal|5
-argument_list|)
-expr_stmt|;
-comment|// LoptOptimizeJoinRule disabled; takes about .4s
-name|checkJoinNWay
-argument_list|(
-literal|9
-argument_list|)
-expr_stmt|;
-comment|// LoptOptimizeJoinRule enabled; takes about 0.04s
-name|checkJoinNWay
-argument_list|(
-literal|35
-argument_list|)
-expr_stmt|;
-comment|// takes about 2s
-if|if
-condition|(
-name|CalciteSystemProperty
-operator|.
-name|TEST_SLOW
-operator|.
-name|value
-argument_list|()
-condition|)
-block|{
-name|checkJoinNWay
-argument_list|(
-literal|60
-argument_list|)
-expr_stmt|;
-comment|// takes about 15s
-block|}
-block|}
-specifier|private
-name|void
-name|checkJoinNWay
-parameter_list|(
-name|int
-name|n
-parameter_list|)
-throws|throws
-name|Exception
-block|{
 specifier|final
 name|StringBuilder
 name|buf
