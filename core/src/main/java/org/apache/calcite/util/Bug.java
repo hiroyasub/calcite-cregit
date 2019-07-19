@@ -191,6 +191,15 @@ name|CALCITE_1045_FIXED
 init|=
 literal|false
 decl_stmt|;
+comment|/**    * Whether    *<a href="https://issues.apache.org/jira/browse/CALCITE-2223">[CALCITE-2223]    * ProjectMergeRule is infinitely matched when is applied after ProjectReduceExpressions Rule</a>    * is fixed.    */
+specifier|public
+specifier|static
+specifier|final
+name|boolean
+name|CALCITE_2223_FIXED
+init|=
+literal|false
+decl_stmt|;
 comment|/** Whether    *<a href="https://issues.apache.org/jira/browse/CALCITE-2400">[CALCITE-2400]    * Allow standards-compliant column ordering for NATURAL JOIN and JOIN USING    * when dynamic tables are used</a> is fixed. */
 specifier|public
 specifier|static
@@ -224,6 +233,15 @@ specifier|static
 specifier|final
 name|boolean
 name|CALCITE_2869_FIXED
+init|=
+literal|false
+decl_stmt|;
+comment|/** Whether    *<a href="https://issues.apache.org/jira/browse/CALCITE-3243">[CALCITE-3243]    * Incomplete validation of operands in JSON functions</a> is fixed. */
+specifier|public
+specifier|static
+specifier|final
+name|boolean
+name|CALCITE_3243_FIXED
 init|=
 literal|false
 decl_stmt|;

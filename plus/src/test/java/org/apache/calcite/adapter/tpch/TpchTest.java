@@ -69,7 +69,7 @@ name|calcite
 operator|.
 name|util
 operator|.
-name|TestUtil
+name|Bug
 import|;
 end_import
 
@@ -83,7 +83,7 @@ name|calcite
 operator|.
 name|util
 operator|.
-name|Util
+name|TestUtil
 import|;
 end_import
 
@@ -98,6 +98,16 @@ operator|.
 name|collect
 operator|.
 name|ImmutableList
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|junit
+operator|.
+name|Assume
 import|;
 end_import
 
@@ -1746,11 +1756,10 @@ name|CalciteAssert
 operator|.
 name|AssertThat
 name|with
-parameter_list|(
-name|boolean
-name|enable
-parameter_list|)
+parameter_list|()
 block|{
+comment|// Only run on JDK 1.7 or higher. The io.airlift.tpch library requires it.
+comment|// Only run if slow tests are enabled; the library uses lots of memory.
 return|return
 name|CalciteAssert
 operator|.
@@ -1760,22 +1769,6 @@ name|TPCH_MODEL
 argument_list|)
 operator|.
 name|enable
-argument_list|(
-name|enable
-argument_list|)
-return|;
-block|}
-specifier|private
-name|CalciteAssert
-operator|.
-name|AssertThat
-name|with
-parameter_list|()
-block|{
-comment|// Only run on JDK 1.7 or higher. The io.airlift.tpch library requires it.
-comment|// Only run if slow tests are enabled; the library uses lots of memory.
-return|return
-name|with
 argument_list|(
 name|ENABLE
 argument_list|)
@@ -1819,7 +1812,7 @@ block|}
 annotation|@
 name|Ignore
 argument_list|(
-literal|"slow"
+literal|"Infinite planning"
 argument_list|)
 annotation|@
 name|Test
@@ -1835,6 +1828,11 @@ argument_list|)
 expr_stmt|;
 block|}
 annotation|@
+name|Ignore
+argument_list|(
+literal|"Infinite planning"
+argument_list|)
+annotation|@
 name|Test
 specifier|public
 name|void
@@ -1844,13 +1842,6 @@ block|{
 name|query
 argument_list|(
 literal|2
-argument_list|,
-literal|true
-argument_list|)
-operator|.
-name|enable
-argument_list|(
-name|ENABLE
 argument_list|)
 operator|.
 name|convertMatches
@@ -1962,6 +1953,15 @@ name|void
 name|testQuery07
 parameter_list|()
 block|{
+name|Assume
+operator|.
+name|assumeTrue
+argument_list|(
+name|Bug
+operator|.
+name|CALCITE_2223_FIXED
+argument_list|)
+expr_stmt|;
 name|checkQuery
 argument_list|(
 literal|7
@@ -2220,15 +2220,13 @@ block|{
 name|query
 argument_list|(
 name|i
-argument_list|,
-literal|null
 argument_list|)
 operator|.
 name|runs
 argument_list|()
 expr_stmt|;
 block|}
-comment|/** Runs with query #i.    *    * @param i Ordinal of query, per the benchmark, 1-based    * @param enable Whether to enable query execution.    *     If null, use the value of {@link #ENABLE}.    *     Pass true only for 'fast' tests that do not read any data.    */
+comment|/** Runs with query #i.    *  @param i Ordinal of query, per the benchmark, 1-based    *    */
 specifier|private
 name|CalciteAssert
 operator|.
@@ -2237,23 +2235,11 @@ name|query
 parameter_list|(
 name|int
 name|i
-parameter_list|,
-name|Boolean
-name|enable
 parameter_list|)
 block|{
 return|return
 name|with
-argument_list|(
-name|Util
-operator|.
-name|first
-argument_list|(
-name|enable
-argument_list|,
-name|ENABLE
-argument_list|)
-argument_list|)
+argument_list|()
 operator|.
 name|query
 argument_list|(

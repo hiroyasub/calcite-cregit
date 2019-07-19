@@ -276,6 +276,31 @@ literal|"org.apache.calcite.sql2rel"
 argument_list|)
 return|;
 block|}
+comment|/**    * The tracers report important/useful information related with the execution    * of unit tests.    */
+specifier|public
+specifier|static
+name|Logger
+name|getTestTracer
+parameter_list|(
+name|Class
+argument_list|<
+name|?
+argument_list|>
+name|testClass
+parameter_list|)
+block|{
+return|return
+name|LoggerFactory
+operator|.
+name|getLogger
+argument_list|(
+name|testClass
+operator|.
+name|getName
+argument_list|()
+argument_list|)
+return|;
+block|}
 comment|/**    * Thread-local handler that is called with dynamically generated Java code.    * It exists for unit-testing.    * The handler is never null; the default handler does nothing.    */
 specifier|public
 specifier|static
