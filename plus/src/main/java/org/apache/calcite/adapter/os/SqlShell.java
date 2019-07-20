@@ -454,6 +454,15 @@ name|addView
 argument_list|(
 name|b
 argument_list|,
+literal|"jps"
+argument_list|,
+literal|"select * from table(\"jps\"(true))"
+argument_list|)
+expr_stmt|;
+name|addView
+argument_list|(
+name|b
+argument_list|,
 literal|"ps"
 argument_list|,
 literal|"select * from table(\"ps\"(true))"
@@ -518,6 +527,17 @@ argument_list|,
 literal|"git_commits"
 argument_list|,
 name|GitCommitsTableFunction
+operator|.
+name|class
+argument_list|)
+expr_stmt|;
+name|addFunction
+argument_list|(
+name|b
+argument_list|,
+literal|"jps"
+argument_list|,
+name|JpsTableFunction
 operator|.
 name|class
 argument_list|)
