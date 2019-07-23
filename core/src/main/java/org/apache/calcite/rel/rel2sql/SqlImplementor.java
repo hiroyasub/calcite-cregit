@@ -1741,6 +1741,9 @@ case|:
 case|case
 name|LESS_THAN_OR_EQUAL
 case|:
+case|case
+name|LIKE
+case|:
 name|node
 operator|=
 name|stripCastFromString
