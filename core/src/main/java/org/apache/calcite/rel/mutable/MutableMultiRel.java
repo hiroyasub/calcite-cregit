@@ -71,21 +71,17 @@ name|common
 operator|.
 name|collect
 operator|.
-name|ImmutableList
+name|Lists
 import|;
 end_import
 
 begin_import
 import|import
-name|com
+name|java
 operator|.
-name|google
+name|util
 operator|.
-name|common
-operator|.
-name|collect
-operator|.
-name|Lists
+name|ArrayList
 import|;
 end_import
 
@@ -150,9 +146,9 @@ name|this
 operator|.
 name|inputs
 operator|=
-name|ImmutableList
-operator|.
-name|copyOf
+operator|new
+name|ArrayList
+argument_list|<>
 argument_list|(
 name|inputs
 argument_list|)
