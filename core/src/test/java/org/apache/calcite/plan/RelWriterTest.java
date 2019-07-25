@@ -644,7 +644,15 @@ literal|"      \"relOp\": \"LogicalFilter\",\n"
 operator|+
 literal|"      \"condition\": {\n"
 operator|+
-literal|"        \"op\": \"=\",\n"
+literal|"        \"op\": {\n"
+operator|+
+literal|"          \"name\": \"=\",\n"
+operator|+
+literal|"          \"kind\": \"EQUALS\",\n"
+operator|+
+literal|"          \"syntax\": \"BINARY\"\n"
+operator|+
+literal|"        },\n"
 operator|+
 literal|"        \"operands\": [\n"
 operator|+
@@ -692,7 +700,15 @@ literal|"      \"aggs\": [\n"
 operator|+
 literal|"        {\n"
 operator|+
-literal|"          \"agg\": \"COUNT\",\n"
+literal|"          \"agg\": {\n"
+operator|+
+literal|"            \"name\": \"COUNT\",\n"
+operator|+
+literal|"            \"kind\": \"COUNT\",\n"
+operator|+
+literal|"            \"syntax\": \"FUNCTION_STAR\"\n"
+operator|+
+literal|"          },\n"
 operator|+
 literal|"          \"type\": {\n"
 operator|+
@@ -714,7 +730,15 @@ literal|"        },\n"
 operator|+
 literal|"        {\n"
 operator|+
-literal|"          \"agg\": \"COUNT\",\n"
+literal|"          \"agg\": {\n"
+operator|+
+literal|"            \"name\": \"COUNT\",\n"
+operator|+
+literal|"            \"kind\": \"COUNT\",\n"
+operator|+
+literal|"            \"syntax\": \"FUNCTION_STAR\"\n"
+operator|+
+literal|"          },\n"
 operator|+
 literal|"          \"type\": {\n"
 operator|+
@@ -774,7 +798,15 @@ literal|"      \"relOp\": \"LogicalFilter\",\n"
 operator|+
 literal|"      \"condition\": {\n"
 operator|+
-literal|"        \"op\": \"=\",\n"
+literal|"        \"op\": {"
+operator|+
+literal|"            \"name\": \"=\",\n"
+operator|+
+literal|"            \"kind\": \"EQUALS\",\n"
+operator|+
+literal|"            \"syntax\": \"BINARY\"\n"
+operator|+
+literal|"          },\n"
 operator|+
 literal|"        \"operands\": [\n"
 operator|+
@@ -816,7 +848,15 @@ literal|"      \"aggs\": [\n"
 operator|+
 literal|"        {\n"
 operator|+
-literal|"          \"agg\": \"COUNT\",\n"
+literal|"        \"agg\": {\n"
+operator|+
+literal|"            \"name\": \"COUNT\",\n"
+operator|+
+literal|"            \"kind\": \"COUNT\",\n"
+operator|+
+literal|"            \"syntax\": \"FUNCTION_STAR\"\n"
+operator|+
+literal|"          },\n"
 operator|+
 literal|"          \"type\": {\n"
 operator|+
@@ -838,7 +878,15 @@ literal|"        },\n"
 operator|+
 literal|"        {\n"
 operator|+
-literal|"          \"agg\": \"COUNT\",\n"
+literal|"        \"agg\": {\n"
+operator|+
+literal|"            \"name\": \"COUNT\",\n"
+operator|+
+literal|"            \"kind\": \"COUNT\",\n"
+operator|+
+literal|"            \"syntax\": \"FUNCTION_STAR\"\n"
+operator|+
+literal|"          },\n"
 operator|+
 literal|"          \"type\": {\n"
 operator|+
@@ -918,7 +966,15 @@ literal|"        },\n"
 operator|+
 literal|"        {\n"
 operator|+
-literal|"          \"op\": \"COUNT\",\n"
+literal|"          \"op\": {\n"
+operator|+
+literal|"            \"name\": \"COUNT\",\n"
+operator|+
+literal|"            \"kind\": \"COUNT\",\n"
+operator|+
+literal|"            \"syntax\": \"FUNCTION_STAR\"\n"
+operator|+
+literal|"          },\n"
 operator|+
 literal|"          \"operands\": [\n"
 operator|+
@@ -994,7 +1050,15 @@ literal|"        },\n"
 operator|+
 literal|"        {\n"
 operator|+
-literal|"          \"op\": \"SUM\",\n"
+literal|"          \"op\": {\n"
+operator|+
+literal|"            \"name\": \"SUM\",\n"
+operator|+
+literal|"            \"kind\": \"SUM\",\n"
+operator|+
+literal|"            \"syntax\": \"FUNCTION\"\n"
+operator|+
+literal|"          },\n"
 operator|+
 literal|"          \"operands\": [\n"
 operator|+
@@ -2306,6 +2370,203 @@ init|=
 literal|""
 operator|+
 literal|"LogicalProject(trimmed_ename=[TRIM(FLAG(BOTH), ' ', $1)])\n"
+operator|+
+literal|"  LogicalTableScan(table=[[scott, EMP]])\n"
+decl_stmt|;
+name|assertThat
+argument_list|(
+name|s
+argument_list|,
+name|isLinux
+argument_list|(
+name|expected
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testPlusOperator
+parameter_list|()
+block|{
+specifier|final
+name|FrameworkConfig
+name|config
+init|=
+name|RelBuilderTest
+operator|.
+name|config
+argument_list|()
+operator|.
+name|build
+argument_list|()
+decl_stmt|;
+specifier|final
+name|RelBuilder
+name|builder
+init|=
+name|RelBuilder
+operator|.
+name|create
+argument_list|(
+name|config
+argument_list|)
+decl_stmt|;
+specifier|final
+name|RelNode
+name|rel
+init|=
+name|builder
+operator|.
+name|scan
+argument_list|(
+literal|"EMP"
+argument_list|)
+operator|.
+name|project
+argument_list|(
+name|builder
+operator|.
+name|call
+argument_list|(
+name|SqlStdOperatorTable
+operator|.
+name|PLUS
+argument_list|,
+name|builder
+operator|.
+name|field
+argument_list|(
+literal|"SAL"
+argument_list|)
+argument_list|,
+name|builder
+operator|.
+name|literal
+argument_list|(
+literal|10
+argument_list|)
+argument_list|)
+argument_list|)
+operator|.
+name|build
+argument_list|()
+decl_stmt|;
+name|RelJsonWriter
+name|jsonWriter
+init|=
+operator|new
+name|RelJsonWriter
+argument_list|()
+decl_stmt|;
+name|rel
+operator|.
+name|explain
+argument_list|(
+name|jsonWriter
+argument_list|)
+expr_stmt|;
+name|String
+name|relJson
+init|=
+name|jsonWriter
+operator|.
+name|asString
+argument_list|()
+decl_stmt|;
+name|String
+name|s
+init|=
+name|Frameworks
+operator|.
+name|withPlanner
+argument_list|(
+parameter_list|(
+name|cluster
+parameter_list|,
+name|relOptSchema
+parameter_list|,
+name|rootSchema
+parameter_list|)
+lambda|->
+block|{
+specifier|final
+name|RelJsonReader
+name|reader
+init|=
+operator|new
+name|RelJsonReader
+argument_list|(
+name|cluster
+argument_list|,
+name|getSchema
+argument_list|(
+name|rel
+argument_list|)
+argument_list|,
+name|rootSchema
+argument_list|)
+decl_stmt|;
+name|RelNode
+name|node
+decl_stmt|;
+try|try
+block|{
+name|node
+operator|=
+name|reader
+operator|.
+name|read
+argument_list|(
+name|relJson
+argument_list|)
+expr_stmt|;
+block|}
+catch|catch
+parameter_list|(
+name|IOException
+name|e
+parameter_list|)
+block|{
+throw|throw
+name|TestUtil
+operator|.
+name|rethrow
+argument_list|(
+name|e
+argument_list|)
+throw|;
+block|}
+return|return
+name|RelOptUtil
+operator|.
+name|dumpPlan
+argument_list|(
+literal|""
+argument_list|,
+name|node
+argument_list|,
+name|SqlExplainFormat
+operator|.
+name|TEXT
+argument_list|,
+name|SqlExplainLevel
+operator|.
+name|EXPPLAN_ATTRIBUTES
+argument_list|)
+return|;
+block|}
+argument_list|)
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|""
+operator|+
+literal|"LogicalProject($f0=[+($5, 10)])\n"
 operator|+
 literal|"  LogicalTableScan(table=[[scott, EMP]])\n"
 decl_stmt|;
