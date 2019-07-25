@@ -29500,6 +29500,17 @@ name|tester
 operator|.
 name|checkScalar
 argument_list|(
+literal|"extract(nanosecond from interval '4-2' year to month)"
+argument_list|,
+literal|"0"
+argument_list|,
+literal|"BIGINT NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
 literal|"extract(minute from interval '4-2' year to month)"
 argument_list|,
 literal|"0"
@@ -29701,6 +29712,17 @@ argument_list|(
 literal|"extract(microsecond from interval '2 3:4:5.678' day to second)"
 argument_list|,
 literal|"5678000"
+argument_list|,
+literal|"BIGINT NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"extract(nanosecond from interval '2 3:4:5.678' day to second)"
+argument_list|,
+literal|"5678000000"
 argument_list|,
 literal|"BIGINT NOT NULL"
 argument_list|)
@@ -29917,6 +29939,39 @@ operator|.
 name|checkScalar
 argument_list|(
 literal|"extract(second from date '2008-2-23')"
+argument_list|,
+literal|"0"
+argument_list|,
+literal|"BIGINT NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"extract(millisecond from date '2008-2-23')"
+argument_list|,
+literal|"0"
+argument_list|,
+literal|"BIGINT NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"extract(microsecond from date '2008-2-23')"
+argument_list|,
+literal|"0"
+argument_list|,
+literal|"BIGINT NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"extract(nanosecond from date '2008-2-23')"
 argument_list|,
 literal|"0"
 argument_list|,
@@ -30291,6 +30346,17 @@ name|tester
 operator|.
 name|checkScalar
 argument_list|(
+literal|"extract(nanosecond from timestamp '2008-2-23 12:34:56')"
+argument_list|,
+literal|"56000000000"
+argument_list|,
+literal|"BIGINT NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
 literal|"extract(minute from timestamp '2008-2-23 12:34:56')"
 argument_list|,
 literal|"34"
@@ -30575,6 +30641,17 @@ argument_list|)
 expr_stmt|;
 name|tester
 operator|.
+name|checkScalar
+argument_list|(
+literal|"extract(nanosecond from interval '2 3:4:5.678' day to second)"
+argument_list|,
+literal|"5678000000"
+argument_list|,
+literal|"BIGINT NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
 name|checkNull
 argument_list|(
 literal|"extract(month from cast(null as interval year))"
@@ -30702,6 +30779,13 @@ argument_list|(
 literal|"extract(microsecond from cast(null as time))"
 argument_list|)
 expr_stmt|;
+name|tester
+operator|.
+name|checkNull
+argument_list|(
+literal|"extract(nanosecond from cast(null as time))"
+argument_list|)
+expr_stmt|;
 block|}
 annotation|@
 name|Test
@@ -30710,6 +30794,17 @@ name|void
 name|testExtractWithDatesBeforeUnixEpoch
 parameter_list|()
 block|{
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"extract(millisecond from TIMESTAMP '1969-12-31 21:13:17.357')"
+argument_list|,
+literal|"17357"
+argument_list|,
+literal|"BIGINT NOT NULL"
+argument_list|)
+expr_stmt|;
 name|tester
 operator|.
 name|checkScalar
@@ -31477,6 +31572,28 @@ argument_list|)
 expr_stmt|;
 name|tester
 operator|.
+name|checkFails
+argument_list|(
+literal|"^floor(timestamp '2015-02-19 12:34:56.78' to microsecond)^"
+argument_list|,
+literal|"(?s)Encountered \"microsecond\" at .*"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkFails
+argument_list|(
+literal|"^floor(timestamp '2015-02-19 12:34:56.78' to nanosecond)^"
+argument_list|,
+literal|"(?s)Encountered \"nanosecond\" at .*"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
 name|checkScalar
 argument_list|(
 literal|"floor(time '12:34:56' to minute)"
@@ -31593,6 +31710,28 @@ argument_list|(
 literal|"^ceil('abcde' to minute)^"
 argument_list|,
 literal|"(?s)Cannot apply 'CEIL' to arguments .*"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkFails
+argument_list|(
+literal|"^ceil(timestamp '2015-02-19 12:34:56.78' to microsecond)^"
+argument_list|,
+literal|"(?s)Encountered \"microsecond\" at .*"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkFails
+argument_list|(
+literal|"^ceil(timestamp '2015-02-19 12:34:56.78' to nanosecond)^"
+argument_list|,
+literal|"(?s)Encountered \"nanosecond\" at .*"
 argument_list|,
 literal|false
 argument_list|)
