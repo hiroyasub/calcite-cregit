@@ -354,7 +354,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Tests for the {@code org.apache.calcite.adapter.druid} package.  *  *<p>Before calling this test, you need to populate Druid, as follows:  *  *<blockquote><code>  * git clone https://github.com/vlsi/calcite-test-dataset<br>  * cd calcite-test-dataset<br>  * mvn install  *</code></blockquote>  *  *<p>This will create a virtual machine with Druid and test data set.  *  *<p>Features not yet implemented:  *<ul>  *<li>push LIMIT into "select" query</li>  *<li>push SORT and/or LIMIT into "groupBy" query</li>  *<li>push HAVING into "groupBy" query</li>  *</ul>  *  *<p>These tests use TIMESTAMP WITH LOCAL TIME ZONE type for the  * Druid timestamp column, instead of TIMESTAMP type as  * {@link DruidAdapterIT2}.  */
+comment|/**  * Tests for the {@code org.apache.calcite.adapter.druid} package.  *  *<p>Before calling this test, you need to populate Druid, as follows:  *  *<blockquote><code>  * git clone https://github.com/vlsi/calcite-test-dataset<br>  * cd calcite-test-dataset<br>  * mvn install  *</code></blockquote>  *  *<p>This will create a virtual machine with Druid and test data set.  *  *<p>Features not yet implemented:  *<ul>  *<li>push LIMIT into "select" query</li>  *<li>push SORT and/or LIMIT into "groupBy" query</li>  *<li>push HAVING into "groupBy" query</li>  *</ul>  *  *<p>These tests use TIMESTAMP WITH LOCAL TIME ZONE type for the  * Druid timestamp column, instead of TIMESTAMP type as  * {@link DruidAdapter2IT}.  */
 end_comment
 
 begin_class
@@ -6702,19 +6702,7 @@ specifier|final
 name|String
 name|plan
 init|=
-literal|"PLAN=EnumerableInterpreter\n"
-operator|+
-literal|"  DruidQuery(table=[[foodmart, foodmart]], "
-operator|+
-literal|"intervals=[[1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z]], "
-operator|+
-literal|"filter=[false], groups=[{1}], aggs=[[]], sort0=[0], dir0=[ASC], fetch=[5])"
-decl_stmt|;
-specifier|final
-name|String
-name|query
-init|=
-literal|"{\"queryType\":\"groupBy\""
+literal|"EnumerableValues(tuples=[[]])"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -6724,14 +6712,6 @@ operator|.
 name|explainContains
 argument_list|(
 name|plan
-argument_list|)
-operator|.
-name|queryContains
-argument_list|(
-name|druidChecker
-argument_list|(
-name|query
-argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
@@ -6747,17 +6727,22 @@ name|sql
 init|=
 literal|"Select count(*) as c from \"foodmart\" where false"
 decl_stmt|;
+specifier|final
+name|String
+name|plan
+init|=
+literal|"EnumerableAggregate(group=[{}], C=[COUNT()])\n"
+operator|+
+literal|"  EnumerableValues(tuples=[[]])"
+decl_stmt|;
 name|sql
 argument_list|(
 name|sql
 argument_list|)
 operator|.
-name|queryContains
+name|explainContains
 argument_list|(
-name|druidChecker
-argument_list|(
-literal|"\"filter\":{\"type\":\"expression\",\"expression\":\"1 == 2\"}"
-argument_list|)
+name|plan
 argument_list|)
 operator|.
 name|returnsUnordered
@@ -7600,9 +7585,9 @@ literal|"intervals=[[1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z]], "
 operator|+
 literal|"filter=[AND(=($2, 'Bird Call'), OR(=(EXTRACT(FLAG(WEEK), $0), 10), "
 operator|+
-literal|"=(EXTRACT(FLAG(WEEK), $0), 11)))], projects=[[$0, $2, $63, $90, $91]], "
+literal|"=(EXTRACT(FLAG(WEEK), $0), 11)))], projects=[[$63, $90, $91]], "
 operator|+
-literal|"groups=[{2}], aggs=[[SUM($3), SUM($4)]], post_projects=[[$0, 'Bird Call', -($1, $2)]])"
+literal|"groups=[{0}], aggs=[[SUM($1), SUM($2)]], post_projects=[[$0, 'Bird Call', -($1, $2)]])"
 decl_stmt|;
 name|sql
 argument_list|(

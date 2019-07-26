@@ -360,7 +360,7 @@ end_comment
 begin_class
 specifier|public
 class|class
-name|DruidAdapterIT2
+name|DruidAdapter2IT
 block|{
 comment|/** URL of the "druid-foodmart" model. */
 specifier|public
@@ -369,7 +369,7 @@ specifier|final
 name|URL
 name|FOODMART
 init|=
-name|DruidAdapterIT2
+name|DruidAdapter2IT
 operator|.
 name|class
 operator|.
@@ -5727,19 +5727,7 @@ specifier|final
 name|String
 name|plan
 init|=
-literal|"PLAN=EnumerableInterpreter\n"
-operator|+
-literal|"  DruidQuery(table=[[foodmart, foodmart]], "
-operator|+
-literal|"intervals=[[1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z]], "
-operator|+
-literal|"filter=[false], groups=[{1}], aggs=[[]], sort0=[0], dir0=[ASC], fetch=[5])"
-decl_stmt|;
-specifier|final
-name|String
-name|query
-init|=
-literal|"{\"queryType\":\"groupBy\""
+literal|"EnumerableValues(tuples=[[]])"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -5749,14 +5737,6 @@ operator|.
 name|explainContains
 argument_list|(
 name|plan
-argument_list|)
-operator|.
-name|queryContains
-argument_list|(
-name|druidChecker
-argument_list|(
-name|query
-argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
@@ -5772,17 +5752,22 @@ name|sql
 init|=
 literal|"Select count(*) as c from \"foodmart\" where false"
 decl_stmt|;
+specifier|final
+name|String
+name|plan
+init|=
+literal|"EnumerableAggregate(group=[{}], C=[COUNT()])\n"
+operator|+
+literal|"  EnumerableValues(tuples=[[]])"
+decl_stmt|;
 name|sql
 argument_list|(
 name|sql
 argument_list|)
 operator|.
-name|queryContains
+name|explainContains
 argument_list|(
-name|druidChecker
-argument_list|(
-literal|"\"filter\":{\"type\":\"expression\",\"expression\":\"1 == 2\"}"
-argument_list|)
+name|plan
 argument_list|)
 operator|.
 name|returnsUnordered
@@ -6625,7 +6610,9 @@ literal|"2992-01-10T00:00:00.000Z]], filter=[AND(=($2, 'Bird Call'), "
 operator|+
 literal|"OR(=(EXTRACT(FLAG(WEEK), $0), 10), =(EXTRACT(FLAG(WEEK), $0), 11)))], "
 operator|+
-literal|"projects=[[$0, $2, $63, $90, $91]], groups=[{2}], aggs=[[SUM($3), SUM($4)]], "
+literal|"projects=[[$63, $90, $91]], "
+operator|+
+literal|"groups=[{0}], aggs=[[SUM($1), SUM($2)]], "
 operator|+
 literal|"post_projects=[[$0, 'Bird Call', -($1, $2)]])"
 decl_stmt|;
@@ -13115,7 +13102,7 @@ block|}
 end_class
 
 begin_comment
-comment|// End DruidAdapterIT2.java
+comment|// End DruidAdapter2IT.java
 end_comment
 
 end_unit
