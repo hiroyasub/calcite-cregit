@@ -8202,6 +8202,39 @@ name|sql
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testUnionToUnion
+parameter_list|()
+block|{
+name|String
+name|sql0
+init|=
+literal|"select * from \"emps\" where \"empid\"< 300"
+decl_stmt|;
+name|String
+name|sql1
+init|=
+literal|"select * from \"emps\" where \"empid\"> 200"
+decl_stmt|;
+name|checkMaterialize
+argument_list|(
+name|sql0
+operator|+
+literal|" union all "
+operator|+
+name|sql1
+argument_list|,
+name|sql1
+operator|+
+literal|" union all "
+operator|+
+name|sql0
+argument_list|)
+expr_stmt|;
+block|}
 specifier|private
 specifier|static
 parameter_list|<
