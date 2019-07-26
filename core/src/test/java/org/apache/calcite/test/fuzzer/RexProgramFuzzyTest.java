@@ -435,7 +435,7 @@ name|getLong
 argument_list|(
 literal|"rex.fuzzing.iterations"
 argument_list|,
-literal|18
+literal|2000
 argument_list|)
 decl_stmt|;
 comment|// Stop fuzzing after detecting MAX_FAILURES errors
