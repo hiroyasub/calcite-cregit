@@ -131,6 +131,20 @@ name|calcite
 operator|.
 name|util
 operator|.
+name|Optionality
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|util
+operator|.
 name|mapping
 operator|.
 name|Mapping
@@ -421,6 +435,25 @@ operator|.
 name|ignoreNulls
 operator|=
 name|ignoreNulls
+expr_stmt|;
+name|Preconditions
+operator|.
+name|checkArgument
+argument_list|(
+name|aggFunction
+operator|.
+name|getDistinctOptionality
+argument_list|()
+operator|!=
+name|Optionality
+operator|.
+name|IGNORED
+operator|||
+operator|!
+name|distinct
+argument_list|,
+literal|"DISTINCT has no effect for this aggregate function, so must be false"
+argument_list|)
 expr_stmt|;
 name|Preconditions
 operator|.
@@ -1050,13 +1083,30 @@ name|String
 name|name
 parameter_list|)
 block|{
+specifier|final
+name|boolean
+name|distinct2
+init|=
+name|distinct
+operator|&&
+operator|(
+name|aggFunction
+operator|.
+name|getDistinctOptionality
+argument_list|()
+operator|!=
+name|Optionality
+operator|.
+name|IGNORED
+operator|)
+decl_stmt|;
 return|return
 operator|new
 name|AggregateCall
 argument_list|(
 name|aggFunction
 argument_list|,
-name|distinct
+name|distinct2
 argument_list|,
 name|approximate
 argument_list|,
@@ -1379,7 +1429,7 @@ name|toString
 argument_list|()
 return|;
 block|}
-comment|/**    * Returns true if and only if this AggregateCall has a filter argument    * */
+comment|/** Returns whether this AggregateCall has a filter argument. */
 specifier|public
 name|boolean
 name|hasFilter
@@ -1647,7 +1697,7 @@ name|collation
 argument_list|)
 return|;
 block|}
-comment|/**    * Creates equivalent AggregateCall that is adapted to a new input types    * and/or number of columns in GROUP BY.    *    * @param input relation that will be used as a child of aggregate    * @param argList argument indices of the new call in the input    * @param filterArg Index of the filter, or -1    * @param oldGroupKeyCount number of columns in GROUP BY of old aggregate    * @param newGroupKeyCount number of columns in GROUP BY of new aggregate    * @return AggregateCall that suits new inputs and GROUP BY columns    */
+comment|/**    * Creates an equivalent AggregateCall that is adapted to a new input types    * and/or number of columns in GROUP BY.    *    * @param input            Relation that will be input of Aggregate    * @param argList          Argument indices of the new call in the input    * @param filterArg        Index of the filter, or -1    * @param oldGroupKeyCount number of columns in GROUP BY of old aggregate    * @param newGroupKeyCount number of columns in GROUP BY of new aggregate    * @return AggregateCall that suits new inputs and GROUP BY columns    */
 specifier|public
 name|AggregateCall
 name|adaptTo

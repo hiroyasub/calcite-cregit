@@ -252,6 +252,19 @@ name|clazz
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
+specifier|public
+name|Optionality
+name|getDistinctOptionality
+parameter_list|()
+block|{
+return|return
+name|Optionality
+operator|.
+name|IGNORED
+return|;
+block|}
 block|}
 end_class
 

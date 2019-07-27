@@ -7599,6 +7599,64 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testRemoveDistinctOnAgg
+parameter_list|()
+block|{
+specifier|final
+name|HepProgram
+name|program
+init|=
+operator|new
+name|HepProgramBuilder
+argument_list|()
+operator|.
+name|addRuleInstance
+argument_list|(
+name|AggregateRemoveRule
+operator|.
+name|INSTANCE
+argument_list|)
+operator|.
+name|addRuleInstance
+argument_list|(
+name|ProjectMergeRule
+operator|.
+name|INSTANCE
+argument_list|)
+operator|.
+name|build
+argument_list|()
+decl_stmt|;
+specifier|final
+name|String
+name|sql
+init|=
+literal|"SELECT empno, SUM(distinct sal), MIN(sal), "
+operator|+
+literal|"MIN(distinct sal), MAX(distinct sal), "
+operator|+
+literal|"bit_and(distinct sal), bit_or(sal), count(distinct sal) "
+operator|+
+literal|"from sales.emp group by empno, deptno\n"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|with
+argument_list|(
+name|program
+argument_list|)
+operator|.
+name|check
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testMultipleDistinctWithGrouping
 parameter_list|()
 block|{
@@ -7606,7 +7664,7 @@ specifier|final
 name|String
 name|sql
 init|=
-literal|"SELECT sal, SUM(comm), MIN(DISTINCT comm), SUM(DISTINCT sal)\n"
+literal|"SELECT sal, SUM(comm), AVG(DISTINCT comm), SUM(DISTINCT sal)\n"
 operator|+
 literal|"FROM emp\n"
 operator|+

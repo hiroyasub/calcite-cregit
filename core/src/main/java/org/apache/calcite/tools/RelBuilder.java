@@ -1089,6 +1089,20 @@ name|calcite
 operator|.
 name|util
 operator|.
+name|Optionality
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|util
+operator|.
 name|Pair
 import|;
 end_import
@@ -13711,11 +13725,22 @@ argument_list|(
 name|aggFunction
 argument_list|)
 expr_stmt|;
+comment|// If the aggregate function ignores DISTINCT,
+comment|// make the DISTINCT flag FALSE.
 name|this
 operator|.
 name|distinct
 operator|=
 name|distinct
+operator|&&
+name|aggFunction
+operator|.
+name|getDistinctOptionality
+argument_list|()
+operator|!=
+name|Optionality
+operator|.
+name|IGNORED
 expr_stmt|;
 name|this
 operator|.
