@@ -41,20 +41,6 @@ name|calcite
 operator|.
 name|plan
 operator|.
-name|RelOptUtil
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|plan
-operator|.
 name|RelTraitDef
 import|;
 end_import
@@ -310,6 +296,34 @@ operator|.
 name|function
 operator|.
 name|Consumer
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|test
+operator|.
+name|Matchers
+operator|.
+name|hasTree
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|Assert
+operator|.
+name|assertThat
 import|;
 end_import
 
@@ -676,30 +690,222 @@ init|=
 name|with
 argument_list|()
 decl_stmt|;
-comment|//    foo(with, "CALL_CENTER", 6);
-comment|//    foo(with, "CATALOG_PAGE", 11_718);
-comment|//    foo(with, "CATALOG_RETURNS", 144_067);
-comment|//    foo(with, "CATALOG_SALES", 1_441_548);
-comment|//    foo(with, "CUSTOMER", 100_000);
-comment|//    foo(with, "CUSTOMER_ADDRESS", 50_000);
-comment|//    foo(with, "CUSTOMER_DEMOGRAPHICS", 1_920_800);
-comment|//    foo(with, "DATE_DIM", 73_049);
-comment|//    foo(with, "HOUSEHOLD_DEMOGRAPHICS", 7_200);
-comment|//    foo(with, "INCOME_BAND", 20);
-comment|//    foo(with, "INVENTORY", 11_745_000);
-comment|//    foo(with, "ITEM", 18_000);
-comment|//    foo(with, "PROMOTION", 300);
-comment|//    foo(with, "REASON", 35);
-comment|//    foo(with, "SHIP_MODE", 20);
-comment|//    foo(with, "STORE", 12);
-comment|//    foo(with, "STORE_RETURNS", 287_514);
-comment|//    foo(with, "STORE_SALES", 2_880_404);
-comment|//    foo(with, "TIME_DIM", 86_400);
-comment|//    foo(with, "WAREHOUSE", 5);
-comment|//    foo(with, "WEB_PAGE", 60);
-comment|//    foo(with, "WEB_RETURNS", 71_763);
-comment|//    foo(with, "WEB_SALES", 719_384);
-comment|//    foo(with, "WEB_SITE", 30);
+name|foo
+argument_list|(
+name|with
+argument_list|,
+literal|"CALL_CENTER"
+argument_list|,
+literal|6
+argument_list|)
+expr_stmt|;
+name|foo
+argument_list|(
+name|with
+argument_list|,
+literal|"CATALOG_PAGE"
+argument_list|,
+literal|11_718
+argument_list|)
+expr_stmt|;
+name|foo
+argument_list|(
+name|with
+argument_list|,
+literal|"CATALOG_RETURNS"
+argument_list|,
+literal|144_067
+argument_list|)
+expr_stmt|;
+name|foo
+argument_list|(
+name|with
+argument_list|,
+literal|"CATALOG_SALES"
+argument_list|,
+literal|1_441_548
+argument_list|)
+expr_stmt|;
+name|foo
+argument_list|(
+name|with
+argument_list|,
+literal|"CUSTOMER"
+argument_list|,
+literal|100_000
+argument_list|)
+expr_stmt|;
+name|foo
+argument_list|(
+name|with
+argument_list|,
+literal|"CUSTOMER_ADDRESS"
+argument_list|,
+literal|50_000
+argument_list|)
+expr_stmt|;
+name|foo
+argument_list|(
+name|with
+argument_list|,
+literal|"CUSTOMER_DEMOGRAPHICS"
+argument_list|,
+literal|1_920_800
+argument_list|)
+expr_stmt|;
+name|foo
+argument_list|(
+name|with
+argument_list|,
+literal|"DATE_DIM"
+argument_list|,
+literal|73_049
+argument_list|)
+expr_stmt|;
+name|foo
+argument_list|(
+name|with
+argument_list|,
+literal|"HOUSEHOLD_DEMOGRAPHICS"
+argument_list|,
+literal|7_200
+argument_list|)
+expr_stmt|;
+name|foo
+argument_list|(
+name|with
+argument_list|,
+literal|"INCOME_BAND"
+argument_list|,
+literal|20
+argument_list|)
+expr_stmt|;
+name|foo
+argument_list|(
+name|with
+argument_list|,
+literal|"INVENTORY"
+argument_list|,
+literal|11_745_000
+argument_list|)
+expr_stmt|;
+name|foo
+argument_list|(
+name|with
+argument_list|,
+literal|"ITEM"
+argument_list|,
+literal|18_000
+argument_list|)
+expr_stmt|;
+name|foo
+argument_list|(
+name|with
+argument_list|,
+literal|"PROMOTION"
+argument_list|,
+literal|300
+argument_list|)
+expr_stmt|;
+name|foo
+argument_list|(
+name|with
+argument_list|,
+literal|"REASON"
+argument_list|,
+literal|35
+argument_list|)
+expr_stmt|;
+name|foo
+argument_list|(
+name|with
+argument_list|,
+literal|"SHIP_MODE"
+argument_list|,
+literal|20
+argument_list|)
+expr_stmt|;
+name|foo
+argument_list|(
+name|with
+argument_list|,
+literal|"STORE"
+argument_list|,
+literal|12
+argument_list|)
+expr_stmt|;
+name|foo
+argument_list|(
+name|with
+argument_list|,
+literal|"STORE_RETURNS"
+argument_list|,
+literal|287_514
+argument_list|)
+expr_stmt|;
+name|foo
+argument_list|(
+name|with
+argument_list|,
+literal|"STORE_SALES"
+argument_list|,
+literal|2_880_404
+argument_list|)
+expr_stmt|;
+name|foo
+argument_list|(
+name|with
+argument_list|,
+literal|"TIME_DIM"
+argument_list|,
+literal|86_400
+argument_list|)
+expr_stmt|;
+name|foo
+argument_list|(
+name|with
+argument_list|,
+literal|"WAREHOUSE"
+argument_list|,
+literal|5
+argument_list|)
+expr_stmt|;
+name|foo
+argument_list|(
+name|with
+argument_list|,
+literal|"WEB_PAGE"
+argument_list|,
+literal|60
+argument_list|)
+expr_stmt|;
+name|foo
+argument_list|(
+name|with
+argument_list|,
+literal|"WEB_RETURNS"
+argument_list|,
+literal|71_763
+argument_list|)
+expr_stmt|;
+name|foo
+argument_list|(
+name|with
+argument_list|,
+literal|"WEB_SALES"
+argument_list|,
+literal|719_384
+argument_list|)
+expr_stmt|;
+name|foo
+argument_list|(
+name|with
+argument_list|,
+literal|"WEB_SITE"
+argument_list|,
+literal|30
+argument_list|)
+expr_stmt|;
 name|foo
 argument_list|(
 name|with
@@ -1673,17 +1879,42 @@ operator|.
 name|build
 argument_list|()
 decl_stmt|;
-name|System
-operator|.
-name|out
-operator|.
-name|println
-argument_list|(
-name|RelOptUtil
-operator|.
-name|toString
+name|String
+name|expectResult
+init|=
+literal|""
+operator|+
+literal|"LogicalSort(sort0=[$1], sort1=[$0], dir0=[ASC], dir1=[ASC], fetch=[100])\n"
+operator|+
+literal|"  LogicalAggregate(group=[{84, 90}], AGG1=[AVG($10)], AGG2=[AVG($12)], AGG3=[AVG($19)], AGG4=[AVG($13)])\n"
+operator|+
+literal|"    LogicalFilter(condition=[AND(=($0, $32), =($2, $89), =($7, $60), =($4, $23), =($24, 'M'), =($25, 'S'), =($26, 'HIGH SCHOOL'), =($38, 1998), IN($84, ARRAY('CA', 'OR', 'WA', 'TX', 'OK', 'MD')))])\n"
+operator|+
+literal|"      LogicalJoin(condition=[true], joinType=[inner])\n"
+operator|+
+literal|"        LogicalTableScan(table=[[TPCDS, STORE_SALES]])\n"
+operator|+
+literal|"        LogicalJoin(condition=[true], joinType=[inner])\n"
+operator|+
+literal|"          LogicalTableScan(table=[[TPCDS, CUSTOMER_DEMOGRAPHICS]])\n"
+operator|+
+literal|"          LogicalJoin(condition=[true], joinType=[inner])\n"
+operator|+
+literal|"            LogicalTableScan(table=[[TPCDS, DATE_DIM]])\n"
+operator|+
+literal|"            LogicalJoin(condition=[true], joinType=[inner])\n"
+operator|+
+literal|"              LogicalTableScan(table=[[TPCDS, STORE]])\n"
+operator|+
+literal|"              LogicalTableScan(table=[[TPCDS, ITEM]])\n"
+decl_stmt|;
+name|assertThat
 argument_list|(
 name|root
+argument_list|,
+name|hasTree
+argument_list|(
+name|expectResult
 argument_list|)
 argument_list|)
 expr_stmt|;
