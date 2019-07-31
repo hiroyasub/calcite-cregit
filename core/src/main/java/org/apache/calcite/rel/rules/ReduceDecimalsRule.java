@@ -3641,8 +3641,16 @@ operator|.
 name|getTypeFactory
 argument_list|()
 operator|.
-name|useDoubleMultiplication
+name|getTypeSystem
+argument_list|()
+operator|.
+name|shouldUseDoubleMultiplication
 argument_list|(
+name|builder
+operator|.
+name|getTypeFactory
+argument_list|()
+argument_list|,
 name|typeA
 argument_list|,
 name|typeB

@@ -2328,6 +2328,8 @@ name|list
 return|;
 block|}
 comment|/**    * Delegates to    * {@link RelDataTypeSystem#deriveDecimalMultiplyType(RelDataTypeFactory, RelDataType, RelDataType)}    * to get the return type for the operation.    */
+annotation|@
+name|Deprecated
 specifier|public
 name|RelDataType
 name|createDecimalProduct
@@ -2353,6 +2355,8 @@ argument_list|)
 return|;
 block|}
 comment|/**    * Delegates to    * {@link RelDataTypeSystem#shouldUseDoubleMultiplication(RelDataTypeFactory, RelDataType, RelDataType)}    * to get if double should be used for multiplication.    */
+annotation|@
+name|Deprecated
 specifier|public
 name|boolean
 name|useDoubleMultiplication
@@ -2378,6 +2382,8 @@ argument_list|)
 return|;
 block|}
 comment|/**    * Delegates to    * {@link RelDataTypeSystem#deriveDecimalDivideType(RelDataTypeFactory, RelDataType, RelDataType)}    * to get the return type for the operation.    */
+annotation|@
+name|Deprecated
 specifier|public
 name|RelDataType
 name|createDecimalQuotient
