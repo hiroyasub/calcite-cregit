@@ -23750,7 +23750,7 @@ name|sql
 init|=
 literal|"select empno> ANY (\n"
 operator|+
-literal|" select deptno from dept where emp.job = dept.name) \n"
+literal|"  select deptno from dept where emp.job = dept.name)\n"
 operator|+
 literal|"from emp\n"
 decl_stmt|;
@@ -23784,7 +23784,7 @@ name|sql
 init|=
 literal|"select * from emp where empno> ANY (\n"
 operator|+
-literal|" select deptno from dept where emp.job = dept.name) \n"
+literal|"  select deptno from dept where emp.job = dept.name)\n"
 decl_stmt|;
 name|checkSubQuery
 argument_list|(

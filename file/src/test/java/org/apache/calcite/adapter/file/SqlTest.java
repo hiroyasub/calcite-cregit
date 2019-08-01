@@ -1897,7 +1897,7 @@ block|}
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Test returns the result of two json file joins.    *    * @throws SQLException    */
+comment|/** Test returns the result of two json file joins. */
 annotation|@
 name|Test
 specifier|public
@@ -1944,7 +1944,7 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
-comment|/**    * The folder contains both JSON files and CSV files joins.    *    * @throws SQLException    */
+comment|/** The folder contains both JSON files and CSV files joins. */
 annotation|@
 name|Test
 specifier|public
