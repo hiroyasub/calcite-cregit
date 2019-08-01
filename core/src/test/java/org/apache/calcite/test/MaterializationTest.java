@@ -1138,6 +1138,88 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testFilterToProject0
+parameter_list|()
+block|{
+name|String
+name|union
+init|=
+literal|"select * from \"emps\" where \"empid\"> 300\n"
+operator|+
+literal|"union all select * from \"emps\" where \"empid\"< 200"
+decl_stmt|;
+name|String
+name|mv
+init|=
+literal|"select *, \"empid\" * 2 from ("
+operator|+
+name|union
+operator|+
+literal|")"
+decl_stmt|;
+name|String
+name|query
+init|=
+literal|"select * from ("
+operator|+
+name|union
+operator|+
+literal|") where (\"empid\" * 2)> 3"
+decl_stmt|;
+name|checkMaterialize
+argument_list|(
+name|mv
+argument_list|,
+name|query
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testFilterToProject1
+parameter_list|()
+block|{
+name|String
+name|agg
+init|=
+literal|"select \"deptno\", count(*) as \"c\", sum(\"salary\") as \"s\"\n"
+operator|+
+literal|"from \"emps\" group by \"deptno\""
+decl_stmt|;
+name|String
+name|mv
+init|=
+literal|"select \"c\", \"s\", \"s\" from ("
+operator|+
+name|agg
+operator|+
+literal|")"
+decl_stmt|;
+name|String
+name|query
+init|=
+literal|"select * from ("
+operator|+
+name|agg
+operator|+
+literal|") where (\"s\" * 0.8)> 10000"
+decl_stmt|;
+name|checkNoMaterialize
+argument_list|(
+name|mv
+argument_list|,
+name|query
+argument_list|,
+name|HR_FKUK_MODEL
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testFilterQueryOnProjectView
 parameter_list|()
 block|{
