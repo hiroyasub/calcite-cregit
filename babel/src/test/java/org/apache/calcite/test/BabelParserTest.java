@@ -1016,6 +1016,45 @@ name|expected
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** In Redshift, PostgreSQL the DATEADD, DATEDIFF and DATE_PART functions have    * ordinary function syntax except that its first argument is a time unit    * (e.g. DAY). We must not parse that first argument as an identifier. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testRedshiftFunctionsWithDateParts
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"SELECT DATEADD(day, 1, t),\n"
+operator|+
+literal|" DATEDIFF(week, 2, t),\n"
+operator|+
+literal|" DATE_PART(year, t) FROM mytable"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT `DATEADD`(DAY, 1, `T`),"
+operator|+
+literal|" `DATEDIFF`(WEEK, 2, `T`), `DATE_PART`(YEAR, `T`)\n"
+operator|+
+literal|"FROM `MYTABLE`"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
 comment|/** PostgreSQL and Redshift allow TIMESTAMP literals that contain only a    * date part. */
 annotation|@
 name|Test
