@@ -6253,6 +6253,34 @@ name|getFieldNames
 argument_list|()
 argument_list|)
 expr_stmt|;
+comment|// When the node is not a TableScan but from expansion,
+comment|// we need to explicitly add the alias.
+if|if
+condition|(
+operator|!
+operator|(
+name|scan
+operator|instanceof
+name|TableScan
+operator|)
+condition|)
+block|{
+name|as
+argument_list|(
+name|Util
+operator|.
+name|last
+argument_list|(
+name|ImmutableList
+operator|.
+name|copyOf
+argument_list|(
+name|tableNames
+argument_list|)
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
 return|return
 name|this
 return|;
