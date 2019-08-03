@@ -1510,6 +1510,23 @@ condition|)
 block|{
 comment|// We know that the previous operand was *a* child of its parent,
 comment|// but now check that it is the *correct* child.
+if|if
+condition|(
+name|previousOperand
+operator|.
+name|ordinalInParent
+operator|>=
+name|rel
+operator|.
+name|getInputs
+argument_list|()
+operator|.
+name|size
+argument_list|()
+condition|)
+block|{
+continue|continue;
+block|}
 specifier|final
 name|RelSubset
 name|input
