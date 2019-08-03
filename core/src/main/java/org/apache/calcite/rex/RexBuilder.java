@@ -1888,12 +1888,9 @@ argument_list|,
 literal|false
 argument_list|)
 argument_list|,
-name|makeCast
+name|makeNullLiteral
 argument_list|(
 name|type
-argument_list|,
-name|constantNull
-argument_list|()
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -2032,7 +2029,10 @@ name|isRows
 argument_list|)
 return|;
 block|}
-comment|/**    * Creates a constant for the SQL<code>NULL</code> value.    */
+comment|/**    * Creates a constant for the SQL<code>NULL</code> value.    *    * @deprecated Use {@link #makeNullLiteral(RelDataType)}, which produces a    * NULL of the correct type    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 name|RexLiteral
 name|constantNull
@@ -4951,7 +4951,6 @@ argument_list|(
 name|type
 argument_list|,
 name|constantNull
-argument_list|()
 argument_list|)
 return|;
 block|}

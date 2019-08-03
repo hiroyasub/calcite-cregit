@@ -1027,9 +1027,6 @@ name|i
 init|=
 literal|0
 decl_stmt|;
-name|RexNode
-name|reducedValue
-decl_stmt|;
 if|if
 condition|(
 name|conditionExpr
@@ -1037,8 +1034,10 @@ operator|!=
 literal|null
 condition|)
 block|{
+specifier|final
+name|RexNode
 name|reducedValue
-operator|=
+init|=
 name|reducibleExps
 operator|.
 name|get
@@ -1051,7 +1050,7 @@ operator|)
 operator|+
 name|i
 argument_list|)
-expr_stmt|;
+decl_stmt|;
 operator|++
 name|i
 expr_stmt|;
@@ -1070,6 +1069,7 @@ expr_stmt|;
 continue|continue;
 block|}
 block|}
+specifier|final
 name|ImmutableList
 argument_list|<
 name|RexLiteral
@@ -1111,8 +1111,10 @@ operator|++
 name|i
 control|)
 block|{
+specifier|final
+name|RexNode
 name|reducedValue
-operator|=
+init|=
 name|reducibleExps
 operator|.
 name|get
@@ -1125,7 +1127,7 @@ operator|)
 operator|+
 name|i
 argument_list|)
-expr_stmt|;
+decl_stmt|;
 if|if
 condition|(
 name|reducedValue
@@ -1162,8 +1164,13 @@ name|add
 argument_list|(
 name|rexBuilder
 operator|.
-name|constantNull
+name|makeNullLiteral
+argument_list|(
+name|reducedValue
+operator|.
+name|getType
 argument_list|()
+argument_list|)
 argument_list|)
 expr_stmt|;
 block|}

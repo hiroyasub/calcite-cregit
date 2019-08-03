@@ -6044,14 +6044,9 @@ name|projExpr
 operator|=
 name|rexBuilder
 operator|.
-name|makeCast
+name|makeNullLiteral
 argument_list|(
 name|newType
-argument_list|,
-name|rexBuilder
-operator|.
-name|constantNull
-argument_list|()
 argument_list|)
 expr_stmt|;
 block|}

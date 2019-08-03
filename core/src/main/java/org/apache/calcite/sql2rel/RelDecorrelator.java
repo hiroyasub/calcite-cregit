@@ -8315,7 +8315,7 @@ comment|// projects fields from outer relation. Since LOJ cannot produce
 comment|// nulls on the LHS, the projection now need to make a nullable LHS
 comment|// reference using a nullability indicator. If this this indicator
 comment|// is null, it means the sub-query does not produce any value. As a
-comment|// result, any RHS ref by this usbquery needs to produce null value.
+comment|// result, any RHS ref by this sub-query needs to produce null value.
 comment|// WHEN indicator IS NULL
 name|caseOperands
 index|[
@@ -8358,21 +8358,28 @@ index|[
 literal|1
 index|]
 operator|=
+name|lit
+operator|==
+literal|null
+condition|?
 name|rexBuilder
 operator|.
-name|makeCast
-argument_list|(
-name|typeFactory
-operator|.
-name|createTypeWithNullability
+name|makeNullLiteral
 argument_list|(
 name|rexNode
 operator|.
 name|getType
 argument_list|()
-argument_list|,
-literal|true
 argument_list|)
+else|:
+name|rexBuilder
+operator|.
+name|makeCast
+argument_list|(
+name|rexNode
+operator|.
+name|getType
+argument_list|()
 argument_list|,
 name|lit
 argument_list|)
@@ -8487,10 +8494,7 @@ name|createCaseExpression
 argument_list|(
 name|nullIndicator
 argument_list|,
-name|rexBuilder
-operator|.
-name|constantNull
-argument_list|()
+literal|null
 argument_list|,
 name|newRexNode
 argument_list|)
@@ -8673,10 +8677,7 @@ name|createCaseExpression
 argument_list|(
 name|nullIndicator
 argument_list|,
-name|rexBuilder
-operator|.
-name|constantNull
-argument_list|()
+literal|null
 argument_list|,
 name|literal
 argument_list|)
@@ -8872,10 +8873,7 @@ name|createCaseExpression
 argument_list|(
 name|nullIndicator
 argument_list|,
-name|rexBuilder
-operator|.
-name|constantNull
-argument_list|()
+literal|null
 argument_list|,
 name|newCall
 argument_list|)

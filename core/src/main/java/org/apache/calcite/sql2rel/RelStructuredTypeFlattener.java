@@ -1654,14 +1654,9 @@ index|]
 operator|=
 name|rexBuilder
 operator|.
-name|makeCast
+name|makeNullLiteral
 argument_list|(
 name|structuredType
-argument_list|,
-name|rexBuilder
-operator|.
-name|constantNull
-argument_list|()
 argument_list|)
 expr_stmt|;
 comment|// ELSE NEW StructuredType(inputs...) END
@@ -3832,16 +3827,11 @@ name|of
 argument_list|(
 name|rexBuilder
 operator|.
-name|makeCast
+name|makeNullLiteral
 argument_list|(
 name|field
 operator|.
 name|getType
-argument_list|()
-argument_list|,
-name|rexBuilder
-operator|.
-name|constantNull
 argument_list|()
 argument_list|)
 argument_list|,

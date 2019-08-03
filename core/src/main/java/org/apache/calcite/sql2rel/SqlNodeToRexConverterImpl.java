@@ -540,14 +540,9 @@ block|}
 return|return
 name|rexBuilder
 operator|.
-name|makeCast
+name|makeNullLiteral
 argument_list|(
 name|type
-argument_list|,
-name|rexBuilder
-operator|.
-name|constantNull
-argument_list|()
 argument_list|)
 return|;
 block|}
