@@ -72,6 +72,12 @@ block|,
 comment|/**    * SELECT statement or sub-query.    */
 name|SELECT
 block|,
+comment|/**    * Sql Hint statement.    */
+name|HINT
+block|,
+comment|/**    * Table reference.    */
+name|TABLE_REF
+block|,
 comment|/**    * JOIN operator or compound FROM clause.    *    *<p>A FROM clause with more than one table is represented as if it were a    * join. For example, "FROM x, y, z" is represented as    * "JOIN(x, JOIN(x, y))".</p>    */
 name|JOIN
 block|,

@@ -35053,6 +35053,460 @@ name|expected
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testQueryHint
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select "
+operator|+
+literal|"/*+ properties(k1='v1', k2='v2'), no_hash_join, Index(idx1, idx2) */ "
+operator|+
+literal|"empno, ename, deptno from emps"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT\n"
+operator|+
+literal|"/*+ `PROPERTIES`(`K1` ='v1', `K2` ='v2'), `NO_HASH_JOIN`, `INDEX`(`IDX1`, `IDX2`) */\n"
+operator|+
+literal|"`EMPNO`, `ENAME`, `DEPTNO`\n"
+operator|+
+literal|"FROM `EMPS`"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testTableHintsInQuery
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|hint
+init|=
+literal|"/*+ PROPERTIES(K1 ='v1', K2 ='v2'), INDEX(IDX0, IDX1) */"
+decl_stmt|;
+specifier|final
+name|String
+name|sql1
+init|=
+name|String
+operator|.
+name|format
+argument_list|(
+name|Locale
+operator|.
+name|ROOT
+argument_list|,
+literal|"select * from t %s"
+argument_list|,
+name|hint
+argument_list|)
+decl_stmt|;
+specifier|final
+name|String
+name|expected1
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM `T`\n"
+operator|+
+literal|"/*+ `PROPERTIES`(`K1` ='v1', `K2` ='v2'), `INDEX`(`IDX0`, `IDX1`) */"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql1
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected1
+argument_list|)
+expr_stmt|;
+specifier|final
+name|String
+name|sql2
+init|=
+name|String
+operator|.
+name|format
+argument_list|(
+name|Locale
+operator|.
+name|ROOT
+argument_list|,
+literal|"select * from\n"
+operator|+
+literal|"(select * from t %s union all select * from t %s )"
+argument_list|,
+name|hint
+argument_list|,
+name|hint
+argument_list|)
+decl_stmt|;
+specifier|final
+name|String
+name|expected2
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM (SELECT *\n"
+operator|+
+literal|"FROM `T`\n"
+operator|+
+literal|"/*+ `PROPERTIES`(`K1` ='v1', `K2` ='v2'), `INDEX`(`IDX0`, `IDX1`) */\n"
+operator|+
+literal|"UNION ALL\n"
+operator|+
+literal|"SELECT *\n"
+operator|+
+literal|"FROM `T`\n"
+operator|+
+literal|"/*+ `PROPERTIES`(`K1` ='v1', `K2` ='v2'), `INDEX`(`IDX0`, `IDX1`) */)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql2
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected2
+argument_list|)
+expr_stmt|;
+specifier|final
+name|String
+name|sql3
+init|=
+name|String
+operator|.
+name|format
+argument_list|(
+name|Locale
+operator|.
+name|ROOT
+argument_list|,
+literal|"select * from t %s join t %s"
+argument_list|,
+name|hint
+argument_list|,
+name|hint
+argument_list|)
+decl_stmt|;
+specifier|final
+name|String
+name|expected3
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM `T`\n"
+operator|+
+literal|"/*+ `PROPERTIES`(`K1` ='v1', `K2` ='v2'), `INDEX`(`IDX0`, `IDX1`) */\n"
+operator|+
+literal|"INNER JOIN `T`\n"
+operator|+
+literal|"/*+ `PROPERTIES`(`K1` ='v1', `K2` ='v2'), `INDEX`(`IDX0`, `IDX1`) */"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql3
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected3
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testTableHintsInInsert
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"insert into emps\n"
+operator|+
+literal|"/*+ PROPERTIES(k1='v1', k2='v2'), INDEX(idx0, idx1) */\n"
+operator|+
+literal|"select * from emps"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"INSERT INTO `EMPS`\n"
+operator|+
+literal|"/*+ `PROPERTIES`(`K1` ='v1', `K2` ='v2'), `INDEX`(`IDX0`, `IDX1`) */\n"
+operator|+
+literal|"(SELECT *\n"
+operator|+
+literal|"FROM `EMPS`)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testTableHintsInDelete
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"delete from emps\n"
+operator|+
+literal|"/*+ properties(k1='v1', k2='v2'), index(idx1, idx2), no_hash_join */\n"
+operator|+
+literal|"where empno=12"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"DELETE FROM `EMPS`\n"
+operator|+
+literal|"/*+ `PROPERTIES`(`K1` ='v1', `K2` ='v2'), `INDEX`(`IDX1`, `IDX2`), `NO_HASH_JOIN` */\n"
+operator|+
+literal|"WHERE (`EMPNO` = 12)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testTableHintsInUpdate
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"update emps\n"
+operator|+
+literal|"/*+ properties(k1='v1', k2='v2'), index(idx1, idx2), no_hash_join */\n"
+operator|+
+literal|"set empno = empno + 1, sal = sal - 1 \n"
+operator|+
+literal|"where empno=12"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"UPDATE `EMPS`\n"
+operator|+
+literal|"/*+ `PROPERTIES`(`K1` ='v1', `K2` ='v2'), "
+operator|+
+literal|"`INDEX`(`IDX1`, `IDX2`), `NO_HASH_JOIN` */ "
+operator|+
+literal|"SET `EMPNO` = (`EMPNO` + 1)\n"
+operator|+
+literal|", `SAL` = (`SAL` - 1)\n"
+operator|+
+literal|"WHERE (`EMPNO` = 12)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testTableHintsInMerge
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"merge into emps\n"
+operator|+
+literal|"/*+ properties(k1='v1', k2='v2'), index(idx1, idx2), no_hash_join */ e\n"
+operator|+
+literal|"using tempemps as t\n"
+operator|+
+literal|"on e.empno = t.empno\n"
+operator|+
+literal|"when matched then update\n"
+operator|+
+literal|"set name = t.name, deptno = t.deptno, salary = t.salary * .1\n"
+operator|+
+literal|"when not matched then insert (name, dept, salary)\n"
+operator|+
+literal|"values(t.name, 10, t.salary * .15)"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"MERGE INTO `EMPS`\n"
+operator|+
+literal|"/*+ `PROPERTIES`(`K1` ='v1', `K2` ='v2'), "
+operator|+
+literal|"`INDEX`(`IDX1`, `IDX2`), `NO_HASH_JOIN` */ "
+operator|+
+literal|"AS `E`\n"
+operator|+
+literal|"USING `TEMPEMPS` AS `T`\n"
+operator|+
+literal|"ON (`E`.`EMPNO` = `T`.`EMPNO`)\n"
+operator|+
+literal|"WHEN MATCHED THEN UPDATE SET `NAME` = `T`.`NAME`\n"
+operator|+
+literal|", `DEPTNO` = `T`.`DEPTNO`\n"
+operator|+
+literal|", `SALARY` = (`T`.`SALARY` * 0.1)\n"
+operator|+
+literal|"WHEN NOT MATCHED THEN INSERT (`NAME`, `DEPT`, `SALARY`) "
+operator|+
+literal|"(VALUES (ROW(`T`.`NAME`, 10, (`T`.`SALARY` * 0.15))))"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testInvalidHintFormat
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql1
+init|=
+literal|"select "
+operator|+
+literal|"/*+ properties(k1^=^123, k2='v2'), no_hash_join() */ "
+operator|+
+literal|"empno, ename, deptno from emps"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql1
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"(?s).*Encountered \"= 123\" at line 1, column 25.\n.*"
+argument_list|)
+expr_stmt|;
+specifier|final
+name|String
+name|sql2
+init|=
+literal|"select "
+operator|+
+literal|"/*+ properties(k1, k2^=^'v2'), no_hash_join */ "
+operator|+
+literal|"empno, ename, deptno from emps"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql2
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"(?s).*Encountered \"=\" at line 1, column 29.\n.*"
+argument_list|)
+expr_stmt|;
+specifier|final
+name|String
+name|sql3
+init|=
+literal|"select "
+operator|+
+literal|"/*+ no_hash_join() */ "
+operator|+
+literal|"empno, ename, deptno from emps"
+decl_stmt|;
+comment|// allow empty options.
+specifier|final
+name|String
+name|expected3
+init|=
+literal|"SELECT\n"
+operator|+
+literal|"/*+ `NO_HASH_JOIN` */\n"
+operator|+
+literal|"`EMPNO`, `ENAME`, `DEPTNO`\n"
+operator|+
+literal|"FROM `EMPS`"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql3
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected3
+argument_list|)
+expr_stmt|;
+block|}
 comment|//~ Inner Interfaces -------------------------------------------------------
 comment|/**    * Callback to control how test actions are performed.    */
 specifier|protected

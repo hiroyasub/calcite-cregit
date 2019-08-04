@@ -55,6 +55,22 @@ name|calcite
 operator|.
 name|rel
 operator|.
+name|hint
+operator|.
+name|Hintable
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
 name|metadata
 operator|.
 name|RelMetadataQuery
@@ -156,6 +172,18 @@ operator|.
 name|util
 operator|.
 name|Map
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|function
+operator|.
+name|BiFunction
 import|;
 end_import
 
@@ -554,7 +582,7 @@ return|return
 name|parents
 return|;
 block|}
-comment|/**    * Registers that a rule has produced an equivalent relational expression.    *    *<p>Called by the rule whenever it finds a match. The implementation of    * this method guarantees that the original relational expression (that is,    *<code>this.rels[0]</code>) has its traits propagated to the new    * relational expression (<code>rel</code>) and its unregistered children.    * Any trait not specifically set in the RelTraitSet returned by<code>    * rel.getTraits()</code> will be copied from<code>    * this.rels[0].getTraitSet()</code>.    *    * @param rel   Relational expression equivalent to the root relational    *              expression of the rule call, {@code call.rels(0)}    * @param equiv Map of other equivalences    */
+comment|/**    * Registers that a rule has produced an equivalent relational expression.    *    *<p>Called by the rule whenever it finds a match. The implementation of    * this method guarantees that the original relational expression (that is,    *<code>this.rels[0]</code>) has its traits propagated to the new    * relational expression (<code>rel</code>) and its unregistered children.    * Any trait not specifically set in the RelTraitSet returned by<code>    * rel.getTraits()</code> will be copied from<code>    * this.rels[0].getTraitSet()</code>.    *    *<p>The implementation of this method also guarantees that the original    * relational expression (that is,<code>this.rels[0]</code>) has its hints propagated to    * the new relational expression (<code>rel</code>). The hints propagation strategy can be    * customized through specified {@code handler}.    *    * @param rel     Relational expression equivalent to the root relational    *                expression of the rule call, {@code call.rels(0)}    * @param equiv   Map of other equivalences    * @param handler Handler to customize the relational expression that would    *                be registered into the planner, the 1th argument is the    *                original expression and the 2th argument is the new relational    *                expression    */
 specifier|public
 specifier|abstract
 name|void
@@ -570,9 +598,48 @@ argument_list|,
 name|RelNode
 argument_list|>
 name|equiv
+parameter_list|,
+name|BiFunction
+argument_list|<
+name|RelNode
+argument_list|,
+name|RelNode
+argument_list|,
+name|RelNode
+argument_list|>
+name|handler
 parameter_list|)
 function_decl|;
-comment|/**    * Registers that a rule has produced an equivalent relational expression,    * but no other equivalences.    *    * @param rel Relational expression equivalent to the root relational    *            expression of the rule call, {@code call.rels(0)}    */
+comment|/**    * Registers that a rule has produced an equivalent relational expression,    * with specified equivalences.    *    *<p>The hints are copied fully from the original expression    * (that is,<code>this.rels[0]</code>) to the new relational expression    * (<code>rel</code>) if both of them are all instances of    * {@link Hintable}.    *    * @param rel   Relational expression equivalent to the root relational    *              expression of the rule call, {@code call.rels(0)}    * @param equiv Map of other equivalences    */
+specifier|public
+name|void
+name|transformTo
+parameter_list|(
+name|RelNode
+name|rel
+parameter_list|,
+name|Map
+argument_list|<
+name|RelNode
+argument_list|,
+name|RelNode
+argument_list|>
+name|equiv
+parameter_list|)
+block|{
+name|transformTo
+argument_list|(
+name|rel
+argument_list|,
+name|equiv
+argument_list|,
+name|RelOptUtil
+operator|::
+name|copyRelHints
+argument_list|)
+expr_stmt|;
+block|}
+comment|/**    * Registers that a rule has produced an equivalent relational expression,    * but no other equivalences.    *    *<p>The hints are copied fully from the original expression    * (that is,<code>this.rels[0]</code>) to the new relational expression    * (<code>rel</code>) if both of them are all instances of    * {@link Hintable}.    *    * @param rel Relational expression equivalent to the root relational    *            expression of the rule call, {@code call.rels(0)}    */
 specifier|public
 specifier|final
 name|void

@@ -887,6 +887,10 @@ argument_list|,
 literal|null
 argument_list|,
 literal|null
+argument_list|,
+name|SqlNodeList
+operator|.
+name|EMPTY
 argument_list|)
 decl_stmt|;
 comment|// For MySQL, generate

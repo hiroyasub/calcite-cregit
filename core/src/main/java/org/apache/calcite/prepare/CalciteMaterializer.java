@@ -773,6 +773,8 @@ operator|.
 name|toRel
 argument_list|(
 name|table
+argument_list|,
+literal|null
 argument_list|)
 expr_stmt|;
 block|}

@@ -237,6 +237,18 @@ name|Map
 import|;
 end_import
 
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|function
+operator|.
+name|BiFunction
+import|;
+end_import
+
 begin_comment
 comment|/**  * MockRelOptPlanner is a mock implementation of the {@link RelOptPlanner}  * interface.  */
 end_comment
@@ -905,6 +917,16 @@ argument_list|,
 name|RelNode
 argument_list|>
 name|equiv
+parameter_list|,
+name|BiFunction
+argument_list|<
+name|RelNode
+argument_list|,
+name|RelNode
+argument_list|,
+name|RelNode
+argument_list|>
+name|handler
 parameter_list|)
 block|{
 name|transformationResult

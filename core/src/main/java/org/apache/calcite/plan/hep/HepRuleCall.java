@@ -117,6 +117,18 @@ name|Map
 import|;
 end_import
 
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|function
+operator|.
+name|BiFunction
+import|;
+end_import
+
 begin_comment
 comment|/**  * HepRuleCall implements {@link RelOptRuleCall} for a {@link HepPlanner}. It  * remembers transformation results so that the planner can choose which one (if  * any) should replace the original expression.  */
 end_comment
@@ -204,6 +216,16 @@ argument_list|,
 name|RelNode
 argument_list|>
 name|equiv
+parameter_list|,
+name|BiFunction
+argument_list|<
+name|RelNode
+argument_list|,
+name|RelNode
+argument_list|,
+name|RelNode
+argument_list|>
+name|handler
 parameter_list|)
 block|{
 specifier|final
@@ -226,6 +248,17 @@ argument_list|,
 name|rel0
 argument_list|)
 expr_stmt|;
+name|rel
+operator|=
+name|handler
+operator|.
+name|apply
+argument_list|(
+name|rel0
+argument_list|,
+name|rel
+argument_list|)
+expr_stmt|;
 name|results
 operator|.
 name|add
@@ -233,10 +266,7 @@ argument_list|(
 name|rel
 argument_list|)
 expr_stmt|;
-name|rel
-argument_list|(
-literal|0
-argument_list|)
+name|rel0
 operator|.
 name|getCluster
 argument_list|()

@@ -6219,6 +6219,11 @@ argument_list|,
 name|fields
 argument_list|,
 name|collation
+argument_list|,
+operator|new
+name|ArrayList
+argument_list|<>
+argument_list|()
 argument_list|)
 decl_stmt|;
 if|if
