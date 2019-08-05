@@ -1280,7 +1280,7 @@ name|exps
 argument_list|)
 return|;
 block|}
-comment|/**    * Returns a mapping of a set of project expressions.    *    *<p>The mapping is an inverse surjection.    * Every target has a source field, but    * a source field may appear as zero, one, or more target fields.    * Thus you can safely call    * {@link org.apache.calcite.util.mapping.Mappings.TargetMapping#getTarget(int)}.    *    * @param inputFieldCount Number of input fields    * @param projects Project expressions    * @return Mapping of a set of project expressions, or null if projection is    * not a mapping    */
+comment|/**    * Returns a mapping of a set of project expressions.    *    *<p>The mapping is an inverse surjection.    * Every target has a source field, but no    * source has more than one target.    * Thus you can safely call    * {@link org.apache.calcite.util.mapping.Mappings.TargetMapping#getSourceOpt(int)}.    *    * @param inputFieldCount Number of input fields    * @param projects Project expressions    * @return Mapping of a set of project expressions, or null if projection is    * not a mapping    */
 specifier|public
 specifier|static
 name|Mappings
@@ -1371,10 +1371,9 @@ return|return
 literal|null
 return|;
 block|}
-name|mapping
-operator|.
-name|set
-argument_list|(
+name|int
+name|source
+init|=
 operator|(
 operator|(
 name|RexInputRef
@@ -1386,6 +1385,29 @@ operator|)
 operator|.
 name|getIndex
 argument_list|()
+decl_stmt|;
+if|if
+condition|(
+name|mapping
+operator|.
+name|getTargetOpt
+argument_list|(
+name|source
+argument_list|)
+operator|!=
+operator|-
+literal|1
+condition|)
+block|{
+return|return
+literal|null
+return|;
+block|}
+name|mapping
+operator|.
+name|set
+argument_list|(
+name|source
 argument_list|,
 name|exp
 operator|.
