@@ -11177,6 +11177,42 @@ name|void
 name|testReuseExpressionWhenNullChecking
 parameter_list|()
 block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select upper((case when \"empid\">\"deptno\"*10"
+operator|+
+literal|" then 'y' else null end)) T\n"
+operator|+
+literal|"from \"hr\".\"emps\""
+decl_stmt|;
+specifier|final
+name|String
+name|plan
+init|=
+literal|""
+operator|+
+literal|"      String case_when_value;\n"
+operator|+
+literal|"              final org.apache.calcite.test.JdbcTest.Employee current = (org.apache"
+operator|+
+literal|".calcite.test.JdbcTest.Employee) inputEnumerator.current();\n"
+operator|+
+literal|"              if (current.empid> current.deptno * 10) {\n"
+operator|+
+literal|"                case_when_value = \"y\";\n"
+operator|+
+literal|"              } else {\n"
+operator|+
+literal|"                case_when_value = (String) null;\n"
+operator|+
+literal|"              }\n"
+operator|+
+literal|"              return case_when_value == null ? (String) null : org.apache.calcite"
+operator|+
+literal|".runtime.SqlFunctions.upper(case_when_value);"
+decl_stmt|;
 name|CalciteAssert
 operator|.
 name|hr
@@ -11184,25 +11220,12 @@ argument_list|()
 operator|.
 name|query
 argument_list|(
-literal|"select upper((case when \"empid\">\"deptno\"*10 then 'y' else null end)) T from \"hr\".\"emps\""
+name|sql
 argument_list|)
 operator|.
 name|planContains
 argument_list|(
-literal|"static final String "
-operator|+
-literal|"$L4J$C$org_apache_calcite_runtime_SqlFunctions_upper_y_ = "
-operator|+
-literal|"org.apache.calcite.runtime.SqlFunctions.upper(\"y\");"
-argument_list|)
-operator|.
-name|planContains
-argument_list|(
-literal|"return current.empid<= current.deptno * 10 "
-operator|+
-literal|"? (String) null "
-operator|+
-literal|": $L4J$C$org_apache_calcite_runtime_SqlFunctions_upper_y_;"
+name|plan
 argument_list|)
 operator|.
 name|returns
@@ -11223,6 +11246,42 @@ name|void
 name|testReuseExpressionWhenNullChecking2
 parameter_list|()
 block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select upper((case when \"empid\">\"deptno\"*10"
+operator|+
+literal|" then \"name\" end)) T\n"
+operator|+
+literal|"from \"hr\".\"emps\""
+decl_stmt|;
+specifier|final
+name|String
+name|plan
+init|=
+literal|""
+operator|+
+literal|"      String case_when_value;\n"
+operator|+
+literal|"              final org.apache.calcite.test.JdbcTest.Employee current = (org.apache"
+operator|+
+literal|".calcite.test.JdbcTest.Employee) inputEnumerator.current();\n"
+operator|+
+literal|"              if (current.empid> current.deptno * 10) {\n"
+operator|+
+literal|"                case_when_value = current.name;\n"
+operator|+
+literal|"              } else {\n"
+operator|+
+literal|"                case_when_value = (String) null;\n"
+operator|+
+literal|"              }\n"
+operator|+
+literal|"              return case_when_value == null ? (String) null : org.apache.calcite"
+operator|+
+literal|".runtime.SqlFunctions.upper(case_when_value);"
+decl_stmt|;
 name|CalciteAssert
 operator|.
 name|hr
@@ -11230,23 +11289,12 @@ argument_list|()
 operator|.
 name|query
 argument_list|(
-literal|"select upper((case when \"empid\">\"deptno\"*10 then \"name\" end)) T from \"hr\".\"emps\""
+name|sql
 argument_list|)
 operator|.
 name|planContains
 argument_list|(
-literal|"final String inp2_ = current.name;"
-argument_list|)
-operator|.
-name|planContains
-argument_list|(
-literal|"return current.empid<= current.deptno * 10 "
-operator|+
-literal|"|| inp2_ == null "
-operator|+
-literal|"? (String) null "
-operator|+
-literal|": org.apache.calcite.runtime.SqlFunctions.upper(inp2_);"
+name|plan
 argument_list|)
 operator|.
 name|returns
@@ -11267,6 +11315,54 @@ name|void
 name|testReuseExpressionWhenNullChecking3
 parameter_list|()
 block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select substring(\"name\",\n"
+operator|+
+literal|" \"deptno\"+case when CURRENT_PATH<> '' then 1 end)\n"
+operator|+
+literal|"from \"hr\".\"emps\""
+decl_stmt|;
+specifier|final
+name|String
+name|plan
+init|=
+literal|""
+operator|+
+literal|"              final org.apache.calcite.test.JdbcTest.Employee current"
+operator|+
+literal|" = (org.apache.calcite.test.JdbcTest.Employee) inputEnumerator.current();\n"
+operator|+
+literal|"              final String input_value = current.name;\n"
+operator|+
+literal|"              Integer case_when_value;\n"
+operator|+
+literal|"              if ($L4J$C$org_apache_calcite_runtime_SqlFunctions_ne_) {\n"
+operator|+
+literal|"                case_when_value = $L4J$C$Integer_valueOf_1_;\n"
+operator|+
+literal|"              } else {\n"
+operator|+
+literal|"                case_when_value = (Integer) null;\n"
+operator|+
+literal|"              }\n"
+operator|+
+literal|"              final Integer binary_call_value0 = "
+operator|+
+literal|"case_when_value == null ? (Integer) null : "
+operator|+
+literal|"Integer.valueOf(current.deptno + case_when_value.intValue());\n"
+operator|+
+literal|"              return input_value == null || binary_call_value0 == null"
+operator|+
+literal|" ? (String) null"
+operator|+
+literal|" : org.apache.calcite.runtime.SqlFunctions.substring(input_value, "
+operator|+
+literal|"binary_call_value0.intValue());\n"
+decl_stmt|;
 name|CalciteAssert
 operator|.
 name|hr
@@ -11274,41 +11370,12 @@ argument_list|()
 operator|.
 name|query
 argument_list|(
-literal|"select substring(\"name\", \"deptno\"+case when CURRENT_PATH<> '' then 1 end) from \"hr\".\"emps\""
+name|sql
 argument_list|)
 operator|.
 name|planContains
 argument_list|(
-literal|"final String inp2_ = current.name;"
-argument_list|)
-operator|.
-name|planContains
-argument_list|(
-literal|"static final boolean "
-operator|+
-literal|"$L4J$C$org_apache_calcite_runtime_SqlFunctions_ne_ = "
-operator|+
-literal|"org.apache.calcite.runtime.SqlFunctions.ne(\"\", \"\");"
-argument_list|)
-operator|.
-name|planContains
-argument_list|(
-literal|"static final boolean "
-operator|+
-literal|"$L4J$C$_org_apache_calcite_runtime_SqlFunctions_ne_ = "
-operator|+
-literal|"!$L4J$C$org_apache_calcite_runtime_SqlFunctions_ne_;"
-argument_list|)
-operator|.
-name|planContains
-argument_list|(
-literal|"return inp2_ == null "
-operator|+
-literal|"|| $L4J$C$_org_apache_calcite_runtime_SqlFunctions_ne_ ? (String) null"
-operator|+
-literal|" : org.apache.calcite.runtime.SqlFunctions.substring(inp2_, "
-operator|+
-literal|"Integer.valueOf(current.deptno + 1).intValue());"
+name|plan
 argument_list|)
 expr_stmt|;
 block|}
@@ -11318,13 +11385,10 @@ name|void
 name|testReuseExpressionWhenNullChecking4
 parameter_list|()
 block|{
-name|CalciteAssert
-operator|.
-name|hr
-argument_list|()
-operator|.
-name|query
-argument_list|(
+specifier|final
+name|String
+name|sql
+init|=
 literal|"select substring(trim(\n"
 operator|+
 literal|"substring(\"name\",\n"
@@ -11343,53 +11407,114 @@ operator|+
 literal|"from\n"
 operator|+
 literal|"\"hr\".\"emps\""
+decl_stmt|;
+specifier|final
+name|String
+name|plan
+init|=
+literal|""
+operator|+
+literal|"              final org.apache.calcite.test.JdbcTest.Employee current ="
+operator|+
+literal|" (org.apache.calcite.test.JdbcTest.Employee) inputEnumerator.current();\n"
+operator|+
+literal|"              final String input_value = current.name;\n"
+operator|+
+literal|"              final int input_value0 = current.deptno;\n"
+operator|+
+literal|"              Integer case_when_value;\n"
+operator|+
+literal|"              if ($L4J$C$org_apache_calcite_runtime_SqlFunctions_eq_) {\n"
+operator|+
+literal|"                case_when_value = $L4J$C$Integer_valueOf_1_;\n"
+operator|+
+literal|"              } else {\n"
+operator|+
+literal|"                case_when_value = (Integer) null;\n"
+operator|+
+literal|"              }\n"
+operator|+
+literal|"              final Integer binary_call_value1 = "
+operator|+
+literal|"case_when_value == null"
+operator|+
+literal|" ? (Integer) null"
+operator|+
+literal|" : Integer.valueOf(input_value0 * 0 + case_when_value.intValue());\n"
+operator|+
+literal|"              final String method_call_value = "
+operator|+
+literal|"input_value == null || binary_call_value1 == null"
+operator|+
+literal|" ? (String) null"
+operator|+
+literal|" : org.apache.calcite.runtime.SqlFunctions.substring(input_value, "
+operator|+
+literal|"binary_call_value1.intValue());\n"
+operator|+
+literal|"              final String trim_value = "
+operator|+
+literal|"method_call_value == null"
+operator|+
+literal|" ? (String) null"
+operator|+
+literal|" : org.apache.calcite.runtime.SqlFunctions.trim(true, true, \" \", "
+operator|+
+literal|"method_call_value, true);\n"
+operator|+
+literal|"              Integer case_when_value0;\n"
+operator|+
+literal|"              if (current.empid> input_value0) {\n"
+operator|+
+literal|"                case_when_value0 = $L4J$C$Integer_valueOf_4_;\n"
+operator|+
+literal|"              } else {\n"
+operator|+
+literal|"                Integer case_when_value1;\n"
+operator|+
+literal|"                if (current.deptno * 8> 8) {\n"
+operator|+
+literal|"                  case_when_value1 = $L4J$C$Integer_valueOf_5_;\n"
+operator|+
+literal|"                } else {\n"
+operator|+
+literal|"                  case_when_value1 = (Integer) null;\n"
+operator|+
+literal|"                }\n"
+operator|+
+literal|"                case_when_value0 = case_when_value1;\n"
+operator|+
+literal|"              }\n"
+operator|+
+literal|"              final Integer binary_call_value3 = "
+operator|+
+literal|"case_when_value0 == null"
+operator|+
+literal|" ? (Integer) null"
+operator|+
+literal|" : Integer.valueOf(case_when_value0.intValue() - 2);\n"
+operator|+
+literal|"              return trim_value == null || binary_call_value3 == null"
+operator|+
+literal|" ? (String) null"
+operator|+
+literal|" : org.apache.calcite.runtime.SqlFunctions.substring(trim_value, "
+operator|+
+literal|"binary_call_value3.intValue());\n"
+decl_stmt|;
+name|CalciteAssert
+operator|.
+name|hr
+argument_list|()
+operator|.
+name|query
+argument_list|(
+name|sql
 argument_list|)
 operator|.
 name|planContains
 argument_list|(
-literal|"final String inp2_ = current.name;"
-argument_list|)
-operator|.
-name|planContains
-argument_list|(
-literal|"final int inp1_ = current.deptno;"
-argument_list|)
-operator|.
-name|planContains
-argument_list|(
-literal|"static final boolean "
-operator|+
-literal|"$L4J$C$org_apache_calcite_runtime_SqlFunctions_eq_ = "
-operator|+
-literal|"org.apache.calcite.runtime.SqlFunctions.eq(\"\", \"\");"
-argument_list|)
-operator|.
-name|planContains
-argument_list|(
-literal|"static final boolean "
-operator|+
-literal|"$L4J$C$_org_apache_calcite_runtime_SqlFunctions_eq_ = "
-operator|+
-literal|"!$L4J$C$org_apache_calcite_runtime_SqlFunctions_eq_;"
-argument_list|)
-operator|.
-name|planContains
-argument_list|(
-literal|"return inp2_ == null "
-operator|+
-literal|"|| $L4J$C$_org_apache_calcite_runtime_SqlFunctions_eq_ "
-operator|+
-literal|"|| !v5&& inp1_ * 8<= 8 "
-operator|+
-literal|"? (String) null "
-operator|+
-literal|": org.apache.calcite.runtime.SqlFunctions.substring("
-operator|+
-literal|"org.apache.calcite.runtime.SqlFunctions.trim(true, true, \" \", "
-operator|+
-literal|"org.apache.calcite.runtime.SqlFunctions.substring(inp2_, "
-operator|+
-literal|"Integer.valueOf(inp1_ * 0 + 1).intValue()), true), Integer.valueOf((v5 ? 4 : 5) - 2).intValue());"
+name|plan
 argument_list|)
 operator|.
 name|returns
@@ -11410,13 +11535,10 @@ name|void
 name|testReuseExpressionWhenNullChecking5
 parameter_list|()
 block|{
-name|CalciteAssert
-operator|.
-name|hr
-argument_list|()
-operator|.
-name|query
-argument_list|(
+specifier|final
+name|String
+name|sql
+init|=
 literal|"select substring(trim(\n"
 operator|+
 literal|"substring(\"name\",\n"
@@ -11435,68 +11557,114 @@ operator|+
 literal|"from\n"
 operator|+
 literal|"\"hr\".\"emps\""
+decl_stmt|;
+specifier|final
+name|String
+name|plan
+init|=
+literal|""
+operator|+
+literal|"              final org.apache.calcite.test.JdbcTest.Employee current ="
+operator|+
+literal|" (org.apache.calcite.test.JdbcTest.Employee) inputEnumerator.current();\n"
+operator|+
+literal|"              final String input_value = current.name;\n"
+operator|+
+literal|"              final int input_value0 = current.deptno;\n"
+operator|+
+literal|"              Integer case_when_value;\n"
+operator|+
+literal|"              if ($L4J$C$org_apache_calcite_runtime_SqlFunctions_eq_) {\n"
+operator|+
+literal|"                case_when_value = $L4J$C$Integer_valueOf_1_;\n"
+operator|+
+literal|"              } else {\n"
+operator|+
+literal|"                case_when_value = (Integer) null;\n"
+operator|+
+literal|"              }\n"
+operator|+
+literal|"              final Integer binary_call_value1 = "
+operator|+
+literal|"case_when_value == null"
+operator|+
+literal|" ? (Integer) null"
+operator|+
+literal|" : Integer.valueOf(input_value0 * 0 + case_when_value.intValue());\n"
+operator|+
+literal|"              final String method_call_value = "
+operator|+
+literal|"input_value == null || binary_call_value1 == null"
+operator|+
+literal|" ? (String) null"
+operator|+
+literal|" : org.apache.calcite.runtime.SqlFunctions.substring(input_value, "
+operator|+
+literal|"binary_call_value1.intValue());\n"
+operator|+
+literal|"              final String trim_value = "
+operator|+
+literal|"method_call_value == null"
+operator|+
+literal|" ? (String) null"
+operator|+
+literal|" : org.apache.calcite.runtime.SqlFunctions.trim(true, true, \" \", "
+operator|+
+literal|"method_call_value, true);\n"
+operator|+
+literal|"              Integer case_when_value0;\n"
+operator|+
+literal|"              if (current.empid> input_value0) {\n"
+operator|+
+literal|"                case_when_value0 = $L4J$C$Integer_valueOf_5_;\n"
+operator|+
+literal|"              } else {\n"
+operator|+
+literal|"                Integer case_when_value1;\n"
+operator|+
+literal|"                if (current.deptno * 8> 8) {\n"
+operator|+
+literal|"                  case_when_value1 = $L4J$C$Integer_valueOf_5_;\n"
+operator|+
+literal|"                } else {\n"
+operator|+
+literal|"                  case_when_value1 = (Integer) null;\n"
+operator|+
+literal|"                }\n"
+operator|+
+literal|"                case_when_value0 = case_when_value1;\n"
+operator|+
+literal|"              }\n"
+operator|+
+literal|"              final Integer binary_call_value3 = "
+operator|+
+literal|"case_when_value0 == null"
+operator|+
+literal|" ? (Integer) null"
+operator|+
+literal|" : Integer.valueOf(case_when_value0.intValue() - 2);\n"
+operator|+
+literal|"              return trim_value == null || binary_call_value3 == null"
+operator|+
+literal|" ? (String) null"
+operator|+
+literal|" : org.apache.calcite.runtime.SqlFunctions.substring(trim_value, "
+operator|+
+literal|"binary_call_value3.intValue());"
+decl_stmt|;
+name|CalciteAssert
+operator|.
+name|hr
+argument_list|()
+operator|.
+name|query
+argument_list|(
+name|sql
 argument_list|)
 operator|.
 name|planContains
 argument_list|(
-literal|"final String inp2_ = current.name;"
-argument_list|)
-operator|.
-name|planContains
-argument_list|(
-literal|"final int inp1_ = current.deptno;"
-argument_list|)
-operator|.
-name|planContains
-argument_list|(
-literal|"static final int $L4J$C$5_2 = 5 - 2;"
-argument_list|)
-operator|.
-name|planContains
-argument_list|(
-literal|"static final Integer $L4J$C$Integer_valueOf_5_2_ = Integer.valueOf($L4J$C$5_2);"
-argument_list|)
-operator|.
-name|planContains
-argument_list|(
-literal|"static final int $L4J$C$Integer_valueOf_5_2_intValue_ = $L4J$C$Integer_valueOf_5_2_.intValue();"
-argument_list|)
-operator|.
-name|planContains
-argument_list|(
-literal|"static final boolean "
-operator|+
-literal|"$L4J$C$org_apache_calcite_runtime_SqlFunctions_eq_ = "
-operator|+
-literal|"org.apache.calcite.runtime.SqlFunctions.eq(\"\", \"\");"
-argument_list|)
-operator|.
-name|planContains
-argument_list|(
-literal|"static final boolean "
-operator|+
-literal|"$L4J$C$_org_apache_calcite_runtime_SqlFunctions_eq_ = "
-operator|+
-literal|"!$L4J$C$org_apache_calcite_runtime_SqlFunctions_eq_;"
-argument_list|)
-operator|.
-name|planContains
-argument_list|(
-literal|"return inp2_ == null "
-operator|+
-literal|"|| $L4J$C$_org_apache_calcite_runtime_SqlFunctions_eq_ "
-operator|+
-literal|"|| current.empid<= inp1_&& inp1_ * 8<= 8 "
-operator|+
-literal|"? (String) null "
-operator|+
-literal|": org.apache.calcite.runtime.SqlFunctions.substring("
-operator|+
-literal|"org.apache.calcite.runtime.SqlFunctions.trim(true, true, \" \", "
-operator|+
-literal|"org.apache.calcite.runtime.SqlFunctions.substring(inp2_, "
-operator|+
-literal|"Integer.valueOf(inp1_ * 0 + 1).intValue()), true), $L4J$C$Integer_valueOf_5_2_intValue_);"
+name|plan
 argument_list|)
 operator|.
 name|returns
@@ -14699,14 +14867,28 @@ argument_list|)
 operator|.
 name|planContains
 argument_list|(
+literal|"      Float case_when_value;\n"
+operator|+
+literal|"              if (org.apache.calcite.runtime.SqlFunctions.toLong(current[4])> 0L) {\n"
+operator|+
+literal|"                case_when_value = Float.valueOf(org.apache.calcite.runtime.SqlFunctions.toFloat(current[5]));\n"
+operator|+
+literal|"              } else {\n"
+operator|+
+literal|"                case_when_value = (Float) null;\n"
+operator|+
+literal|"              }"
+argument_list|)
+operator|.
+name|planContains
+argument_list|(
 literal|"return new Object[] {\n"
 operator|+
 literal|"                  current[1],\n"
 operator|+
 literal|"                  current[0],\n"
-comment|// Float.valueOf(SqlFunctions.toFloat(current[5])) comes from SUM0
 operator|+
-literal|"                  org.apache.calcite.runtime.SqlFunctions.toLong(current[4])> 0L ? Float.valueOf(org.apache.calcite.runtime.SqlFunctions.toFloat(current[5])) : (Float) null,\n"
+literal|"                  case_when_value,\n"
 operator|+
 literal|"                  5,\n"
 operator|+
@@ -16190,14 +16372,14 @@ argument_list|)
 operator|.
 name|planContains
 argument_list|(
-literal|"final java.math.BigDecimal v = "
+literal|"final java.math.BigDecimal literal_value = "
 operator|+
 literal|"$L4J$C$new_java_math_BigDecimal_12_5_"
 argument_list|)
 operator|.
 name|planContains
 argument_list|(
-literal|"org.apache.calcite.runtime.SqlFunctions.mod(v, "
+literal|"org.apache.calcite.runtime.SqlFunctions.mod(literal_value, "
 operator|+
 literal|"$L4J$C$new_java_math_BigDecimal_3L_)"
 argument_list|)
@@ -23475,16 +23657,6 @@ operator|+
 literal|") calcs"
 argument_list|)
 operator|.
-name|planContains
-argument_list|(
-literal|"org.apache.calcite.runtime.SqlFunctions.eq(inp0_, inp1_)"
-argument_list|)
-operator|.
-name|planContains
-argument_list|(
-literal|"org.apache.calcite.runtime.SqlFunctions.ne(inp0_, inp1_)"
-argument_list|)
-operator|.
 name|returns
 argument_list|(
 literal|"EXPR$0=true; EXPR$1=false\n"
@@ -28927,7 +29099,7 @@ name|planContains
 argument_list|(
 literal|"org.apache.calcite.runtime.GeoFunctions.ST_MakePoint("
 operator|+
-literal|"$L4J$C$new_java_math_BigDecimal_1_, v)"
+literal|"$L4J$C$new_java_math_BigDecimal_1_, literal_value0)"
 argument_list|)
 operator|.
 name|returns

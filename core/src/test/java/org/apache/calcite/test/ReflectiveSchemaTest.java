@@ -3288,14 +3288,12 @@ argument_list|)
 operator|.
 name|planContains
 argument_list|(
-literal|"final Long inp13_ = current.wrapperLong;"
+literal|"final Long input_value = current.wrapperLong;"
 argument_list|)
 operator|.
 name|planContains
 argument_list|(
-literal|"return inp13_ == null ? (Long) null "
-operator|+
-literal|": Long.valueOf(inp13_.longValue() / current.primitiveLong);"
+literal|"return input_value == null ? (Long) null : Long.valueOf(input_value.longValue() / current.primitiveLong);"
 argument_list|)
 operator|.
 name|returns
@@ -3378,14 +3376,12 @@ argument_list|)
 operator|.
 name|planContains
 argument_list|(
-literal|"final Long inp13_ = ((org.apache.calcite.test.ReflectiveSchemaTest.EveryType) inputEnumerator.current()).wrapperLong;"
+literal|"final Long input_value = ((org.apache.calcite.test.ReflectiveSchemaTest.EveryType) inputEnumerator.current()).wrapperLong;"
 argument_list|)
 operator|.
 name|planContains
 argument_list|(
-literal|"return inp13_ == null ? (Long) null "
-operator|+
-literal|": Long.valueOf(inp13_.longValue() / inp13_.longValue());"
+literal|"return input_value == null ? (Long) null : Long.valueOf(input_value.longValue() / input_value.longValue());"
 argument_list|)
 operator|.
 name|returns
@@ -3433,16 +3429,17 @@ argument_list|)
 operator|.
 name|planContains
 argument_list|(
-literal|"final Long inp13_ = ((org.apache.calcite.test.ReflectiveSchemaTest.EveryType) inputEnumerator.current()).wrapperLong;"
+literal|"final Long input_value = ((org.apache.calcite.test.ReflectiveSchemaTest.EveryType) inputEnumerator.current()).wrapperLong;"
 argument_list|)
 operator|.
 name|planContains
 argument_list|(
-literal|"return inp13_ == null ? (Long) null "
-operator|+
-literal|": Long.valueOf(Long.valueOf(inp13_.longValue() / inp13_.longValue()).longValue() "
-operator|+
-literal|"+ Long.valueOf(inp13_.longValue() / inp13_.longValue()).longValue());"
+literal|"final Long binary_call_value = input_value == null ? (Long) null : Long.valueOf(input_value.longValue() / input_value.longValue());"
+argument_list|)
+operator|.
+name|planContains
+argument_list|(
+literal|"return binary_call_value == null ? (Long) null : Long.valueOf(binary_call_value.longValue() + binary_call_value.longValue());"
 argument_list|)
 operator|.
 name|returns

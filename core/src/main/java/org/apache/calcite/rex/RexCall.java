@@ -1643,6 +1643,15 @@ name|rexCall
 operator|.
 name|operands
 argument_list|)
+operator|&&
+name|type
+operator|.
+name|equals
+argument_list|(
+name|rexCall
+operator|.
+name|type
+argument_list|)
 return|;
 block|}
 annotation|@

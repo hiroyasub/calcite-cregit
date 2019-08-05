@@ -38,15 +38,6 @@ block|,
 comment|/** If the first argument is null, return null. */
 name|ARG0
 block|,
-comment|/** If any of the arguments are false, result is false; else if any    * arguments are null, result is null; else true. */
-name|AND
-block|,
-comment|/** If any of the arguments are true, result is true; else if any    * arguments are null, result is null; else false. */
-name|OR
-block|,
-comment|/** If any argument is true, result is false; else if any argument is null,    * result is null; else true. */
-name|NOT
-block|,
 name|NONE
 block|}
 end_enum

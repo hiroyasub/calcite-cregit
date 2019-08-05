@@ -176,7 +176,7 @@ argument_list|)
 operator|.
 name|planContains
 argument_list|(
-literal|"inp4_ != null ? inp4_.intValue() : 0;"
+literal|"input_value != null ? input_value : 0"
 argument_list|)
 operator|.
 name|returnsUnordered

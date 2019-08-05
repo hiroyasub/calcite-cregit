@@ -20746,6 +20746,23 @@ name|void
 name|testJsonValue
 parameter_list|()
 block|{
+if|if
+condition|(
+literal|false
+condition|)
+block|{
+name|tester
+operator|.
+name|checkFails
+argument_list|(
+literal|"json_value('{\"foo\":100}', 'lax $.foo1' error on empty)"
+argument_list|,
+literal|"(?s).*Empty result of JSON_VALUE function is not allowed.*"
+argument_list|,
+literal|true
+argument_list|)
+expr_stmt|;
+block|}
 comment|// type casting test
 name|tester
 operator|.
