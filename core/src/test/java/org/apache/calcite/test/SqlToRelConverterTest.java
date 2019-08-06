@@ -8431,6 +8431,60 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3229">[CALCITE-3229]    * UnsupportedOperationException for UPDATE with IN query</a>.    */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testUpdateSubQueryWithIn
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"update emp\n"
+operator|+
+literal|"set empno = 1 where empno in (\n"
+operator|+
+literal|"  select empno from emp where empno=2)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+comment|/** Similar to {@link #testUpdateSubQueryWithIn()} but with not in instead of in. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testUpdateSubQueryWithNotIn
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"update emp\n"
+operator|+
+literal|"set empno = 1 where empno not in (\n"
+operator|+
+literal|"  select empno from emp where empno=2)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
 annotation|@
 name|Test
 specifier|public

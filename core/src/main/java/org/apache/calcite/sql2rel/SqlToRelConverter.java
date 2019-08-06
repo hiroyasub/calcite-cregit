@@ -9492,25 +9492,28 @@ block|{
 case|case
 name|TRUE_FALSE_UNKNOWN
 case|:
-if|if
-condition|(
+name|RelDataType
+name|type
+init|=
 name|validator
 operator|.
-name|getValidatedNodeType
+name|getValidatedNodeTypeIfKnown
 argument_list|(
 name|node
 argument_list|)
-operator|.
-name|isNullable
-argument_list|()
+decl_stmt|;
+if|if
+condition|(
+name|type
+operator|==
+literal|null
 condition|)
 block|{
-break|break;
+comment|// The node might not be validated if we still don't know type of the node.
+comment|// Therefore return directly.
+return|return;
 block|}
-if|else if
-condition|(
-literal|true
-condition|)
+else|else
 block|{
 break|break;
 block|}
