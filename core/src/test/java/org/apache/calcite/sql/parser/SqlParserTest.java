@@ -17667,6 +17667,42 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testCastAsArrayType
+parameter_list|()
+block|{
+name|checkExp
+argument_list|(
+literal|"cast(a as int array)"
+argument_list|,
+literal|"CAST(`A` AS INTEGER ARRAY)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"cast(a as varchar(5) array)"
+argument_list|,
+literal|"CAST(`A` AS VARCHAR(5) ARRAY)"
+argument_list|)
+expr_stmt|;
+name|checkExpFails
+argument_list|(
+literal|"cast(a as int array ^array^)"
+argument_list|,
+literal|"(?s).*Encountered \"array\" at line 1, column 21.\n.*"
+argument_list|)
+expr_stmt|;
+name|checkExpFails
+argument_list|(
+literal|"cast(a as int array^<^10>)"
+argument_list|,
+literal|"(?s).*Encountered \"<\" at line 1, column 20.\n.*"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testMapValueConstructor
 parameter_list|()
 block|{

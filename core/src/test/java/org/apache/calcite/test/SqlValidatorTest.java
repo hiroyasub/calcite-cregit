@@ -22623,6 +22623,34 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testCastAsArrayType
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"select cast(array[1,null,2] as int array) from (values (1))"
+argument_list|)
+operator|.
+name|columnType
+argument_list|(
+literal|"INTEGER NOT NULL ARRAY NOT NULL"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select cast(array['1',null,'2'] as varchar(5) array) from (values (1))"
+argument_list|)
+operator|.
+name|columnType
+argument_list|(
+literal|"VARCHAR(5) NOT NULL ARRAY NOT NULL"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testMultisetConstructor
 parameter_list|()
 block|{
