@@ -727,6 +727,7 @@ name|boolean
 name|defaultValue
 parameter_list|)
 block|{
+comment|// Note that "" -> true (convenient for command-lines flags like '-Dflag')
 return|return
 operator|new
 name|CalciteSystemProperty
@@ -742,6 +743,13 @@ literal|null
 condition|?
 name|defaultValue
 else|:
+literal|""
+operator|.
+name|equals
+argument_list|(
+name|v
+argument_list|)
+operator|||
 name|Boolean
 operator|.
 name|parseBoolean
@@ -1034,6 +1042,9 @@ parameter_list|)
 block|{
 comment|// we're in a sandbox
 block|}
+comment|// Merge system and saffron properties, mapping deprecated saffron
+comment|// namespaces to calcite
+specifier|final
 name|Properties
 name|allProperties
 init|=
@@ -1041,7 +1052,6 @@ operator|new
 name|Properties
 argument_list|()
 decl_stmt|;
-comment|// Merge system and saffron properties mapping deprecated saffron namespaces to calcite
 name|Stream
 operator|.
 name|concat
