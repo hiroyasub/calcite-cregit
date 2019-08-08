@@ -3860,7 +3860,10 @@ name|query
 argument_list|,
 name|target
 argument_list|,
-literal|null
+name|ImmutableList
+operator|.
+name|of
+argument_list|()
 argument_list|)
 decl_stmt|;
 return|return

@@ -330,7 +330,7 @@ name|equals
 argument_list|(
 operator|(
 operator|(
-name|MutableSetOp
+name|MutableTableFunctionScan
 operator|)
 name|obj
 operator|)
