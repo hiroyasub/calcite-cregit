@@ -22651,6 +22651,103 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testCastAsRowType
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"select cast(a as row(f0 int, f1 varchar)) from COMPLEXTYPES.CTC_T1"
+argument_list|)
+operator|.
+name|withExtendedCatalog
+argument_list|()
+operator|.
+name|columnType
+argument_list|(
+literal|"RecordType(INTEGER NOT NULL F0, VARCHAR NOT NULL F1) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select cast(b as row(f0 int not null, f1 varchar null))\n"
+operator|+
+literal|"from COMPLEXTYPES.CTC_T1"
+argument_list|)
+operator|.
+name|withExtendedCatalog
+argument_list|()
+operator|.
+name|columnType
+argument_list|(
+literal|"RecordType(INTEGER NOT NULL F0, VARCHAR F1) NOT NULL"
+argument_list|)
+expr_stmt|;
+comment|// test nested row type.
+name|sql
+argument_list|(
+literal|"select "
+operator|+
+literal|"cast(c as row("
+operator|+
+literal|"f0 row(ff0 int not null, ff1 varchar null) null, "
+operator|+
+literal|"f1 timestamp not null))"
+operator|+
+literal|" from COMPLEXTYPES.CTC_T1"
+argument_list|)
+operator|.
+name|withExtendedCatalog
+argument_list|()
+operator|.
+name|columnType
+argument_list|(
+literal|"RecordType("
+operator|+
+literal|"RecordType(INTEGER FF0, VARCHAR FF1) F0, "
+operator|+
+literal|"TIMESTAMP(0) NOT NULL F1) NOT NULL"
+argument_list|)
+expr_stmt|;
+comment|// test row type in collection data types.
+name|sql
+argument_list|(
+literal|"select cast(d as row(f0 bigint not null, f1 decimal null) array)\n"
+operator|+
+literal|"from COMPLEXTYPES.CTC_T1"
+argument_list|)
+operator|.
+name|withExtendedCatalog
+argument_list|()
+operator|.
+name|columnType
+argument_list|(
+literal|"RecordType(BIGINT NOT NULL F0, DECIMAL(19, 0) F1) NOT NULL "
+operator|+
+literal|"ARRAY NOT NULL"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select cast(e as row(f0 varchar not null, f1 timestamp null) multiset)\n"
+operator|+
+literal|"from COMPLEXTYPES.CTC_T1"
+argument_list|)
+operator|.
+name|withExtendedCatalog
+argument_list|()
+operator|.
+name|columnType
+argument_list|(
+literal|"RecordType(VARCHAR NOT NULL F0, TIMESTAMP(0) F1) NOT NULL "
+operator|+
+literal|"MULTISET NOT NULL"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testMultisetConstructor
 parameter_list|()
 block|{

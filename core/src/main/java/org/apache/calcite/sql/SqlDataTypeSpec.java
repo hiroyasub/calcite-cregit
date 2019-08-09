@@ -236,7 +236,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Represents a SQL data type specification in a parse tree.  *  *<p>A<code>SqlDataTypeSpec</code> is immutable; once created, you cannot  * change any of the fields.</p>  *  *<p>todo: This should really be a subtype of {@link SqlCall}.</p>  *  *<p>In its full glory, we will have to support complex type expressions  * like:</p>  *  *<blockquote><code>ROW(<br>  *   NUMBER(5, 2) NOT NULL AS foo,<br>  *   ROW(BOOLEAN AS b, MyUDT NOT NULL AS i) AS rec)</code></blockquote>  *  *<p>Currently it only supports simple datatypes like CHAR, VARCHAR and DOUBLE,  * with optional precision and scale.</p>  */
+comment|/**  * Represents a SQL data type specification in a parse tree.  *  *<p>A<code>SqlDataTypeSpec</code> is immutable; once created, you cannot  * change any of the fields.</p>  *  *<p>todo: This should really be a subtype of {@link SqlCall}.</p>  *  *<p>we support complex type expressions  * like:</p>  *  *<blockquote><code>ROW(<br>  *   foo NUMBER(5, 2) NOT NULL,<br>  *   rec ROW(b BOOLEAN, i MyUDT NOT NULL))</code></blockquote>  *  *<p>Internally we use {@link SqlTypeNameSpec} to specify such complex data types.  *  *<p>We support simple data types like CHAR, VARCHAR and DOUBLE,  * with optional precision and scale.</p>  *  *<p>Internally we use {@link SqlIdentifier} to specify simple data types.  */
 end_comment
 
 begin_class
@@ -742,6 +742,43 @@ name|getSimple
 argument_list|()
 decl_stmt|;
 if|if
+condition|(
+name|typeName
+operator|instanceof
+name|SqlTypeNameSpec
+condition|)
+block|{
+name|typeName
+operator|.
+name|unparse
+argument_list|(
+name|writer
+argument_list|,
+name|leftPrec
+argument_list|,
+name|rightPrec
+argument_list|)
+expr_stmt|;
+if|if
+condition|(
+name|collectionsTypeName
+operator|!=
+literal|null
+condition|)
+block|{
+name|writer
+operator|.
+name|keyword
+argument_list|(
+name|collectionsTypeName
+operator|.
+name|getSimple
+argument_list|()
+argument_list|)
+expr_stmt|;
+block|}
+block|}
+if|else if
 condition|(
 name|SqlTypeName
 operator|.
@@ -1337,6 +1374,43 @@ return|return
 literal|null
 return|;
 block|}
+name|RelDataType
+name|type
+decl_stmt|;
+if|if
+condition|(
+name|typeName
+operator|instanceof
+name|SqlTypeNameSpec
+condition|)
+block|{
+comment|// Create type directly if this typeName is a SqlTypeNameSpec.
+name|type
+operator|=
+name|createTypeFromTypeNameSpec
+argument_list|(
+name|typeFactory
+argument_list|,
+operator|(
+name|SqlTypeNameSpec
+operator|)
+name|typeName
+argument_list|)
+expr_stmt|;
+if|if
+condition|(
+name|type
+operator|==
+literal|null
+condition|)
+block|{
+return|return
+literal|null
+return|;
+block|}
+block|}
+else|else
+block|{
 specifier|final
 name|String
 name|name
@@ -1371,9 +1445,6 @@ block|}
 comment|// NOTE jvs 15-Jan-2009:  earlier validation is supposed to
 comment|// have caught these, which is why it's OK for them
 comment|// to be assertions rather than user-level exceptions.
-name|RelDataType
-name|type
-decl_stmt|;
 if|if
 condition|(
 operator|(
@@ -1455,6 +1526,7 @@ argument_list|(
 name|sqlTypeName
 argument_list|)
 expr_stmt|;
+block|}
 block|}
 if|if
 condition|(
@@ -1651,6 +1723,27 @@ argument_list|)
 expr_stmt|;
 return|return
 name|type
+return|;
+block|}
+comment|/**    * Create type from the type name specification directly.    * @param typeFactory type factory.    * @return the type.    */
+specifier|private
+name|RelDataType
+name|createTypeFromTypeNameSpec
+parameter_list|(
+name|RelDataTypeFactory
+name|typeFactory
+parameter_list|,
+name|SqlTypeNameSpec
+name|typeNameSpec
+parameter_list|)
+block|{
+return|return
+name|typeNameSpec
+operator|.
+name|deriveType
+argument_list|(
+name|typeFactory
+argument_list|)
 return|;
 block|}
 block|}

@@ -17703,6 +17703,59 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testCastAsRowType
+parameter_list|()
+block|{
+name|checkExp
+argument_list|(
+literal|"cast(a as row(f0 int, f1 varchar))"
+argument_list|,
+literal|"CAST(`A` AS ROW(`F0` INTEGER, `F1` VARCHAR))"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"cast(a as row(f0 int not null, f1 varchar null))"
+argument_list|,
+literal|"CAST(`A` AS ROW(`F0` INTEGER, `F1` VARCHAR NULL))"
+argument_list|)
+expr_stmt|;
+comment|//    // test nested row type.
+name|checkExp
+argument_list|(
+literal|"cast(a as row("
+operator|+
+literal|"f0 row(ff0 int not null, ff1 varchar null) null, "
+operator|+
+literal|"f1 timestamp not null))"
+argument_list|,
+literal|"CAST(`A` AS ROW("
+operator|+
+literal|"`F0` ROW(`FF0` INTEGER, `FF1` VARCHAR NULL) NULL, "
+operator|+
+literal|"`F1` TIMESTAMP))"
+argument_list|)
+expr_stmt|;
+comment|// test row type in collection data types.
+name|checkExp
+argument_list|(
+literal|"cast(a as row(f0 bigint not null, f1 decimal null) array)"
+argument_list|,
+literal|"CAST(`A` AS ROW(`F0` BIGINT, `F1` DECIMAL NULL) ARRAY)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"cast(a as row(f0 varchar not null, f1 timestamp null) multiset)"
+argument_list|,
+literal|"CAST(`A` AS ROW(`F0` VARCHAR, `F1` TIMESTAMP NULL) MULTISET)"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testMapValueConstructor
 parameter_list|()
 block|{
