@@ -10753,7 +10753,7 @@ name|sql
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3198">[CALCITE-3198]    * Enhance RexSimplify to handle (x!=a or x!=b)</a>. */
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3198">[CALCITE-3198]    * Enhance RexSimplify to handle (x&lt;&gt;a or x&lt;&gt;b)</a>. */
 annotation|@
 name|Test
 specifier|public
@@ -10802,7 +10802,7 @@ name|sql
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3198">[CALCITE-3198]    * Enhance RexSimplify to handle (x!=a or x!=b)</a>. */
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3198">[CALCITE-3198]    * Enhance RexSimplify to handle (x&lt;&gt;a or x&lt;&gt;b)</a>. */
 annotation|@
 name|Test
 specifier|public
@@ -10851,7 +10851,7 @@ name|sql
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3198">[CALCITE-3198]    * Enhance RexSimplify to handle (x!=a or x!=b)</a>. */
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3198">[CALCITE-3198]    * Enhance RexSimplify to handle (x&lt;&gt;a or x&lt;&gt;b)</a>. */
 annotation|@
 name|Test
 specifier|public
@@ -10900,7 +10900,7 @@ name|sql
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3198">[CALCITE-3198]    * Enhance RexSimplify to handle (x!=a or x!=b)</a>. */
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3198">[CALCITE-3198]    * Enhance RexSimplify to handle (x&lt;&gt;a or x&lt;&gt;b)</a>. */
 annotation|@
 name|Test
 specifier|public
@@ -10949,7 +10949,7 @@ name|sql
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3198">[CALCITE-3198]    * Enhance RexSimplify to handle (x!=a or x!=b)</a>. */
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3198">[CALCITE-3198]    * Enhance RexSimplify to handle (x&lt;&gt;a or x&lt;&gt;b)</a>. */
 annotation|@
 name|Test
 specifier|public
@@ -10998,7 +10998,7 @@ name|sql
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3198">[CALCITE-3198]    * Enhance RexSimplify to handle (x!=a or x!=b)</a>. */
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3198">[CALCITE-3198]    * Enhance RexSimplify to handle (x&lt;&gt;a or x&lt;&gt;b)</a>. */
 annotation|@
 name|Test
 specifier|public
