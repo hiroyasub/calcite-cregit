@@ -2217,10 +2217,7 @@ parameter_list|,
 name|boolean
 name|allRows
 parameter_list|,
-name|List
-argument_list|<
-name|RexNode
-argument_list|>
+name|ImmutableBitSet
 name|partitionKeys
 parameter_list|,
 name|RelCollation
@@ -2293,10 +2290,7 @@ parameter_list|,
 name|boolean
 name|allRows
 parameter_list|,
-name|List
-argument_list|<
-name|RexNode
-argument_list|>
+name|ImmutableBitSet
 name|partitionKeys
 parameter_list|,
 name|RelCollation

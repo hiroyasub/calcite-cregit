@@ -20,6 +20,9 @@ comment|/**  * A<code>RexAction</code> is called when a {@link RexPattern} finds
 end_comment
 
 begin_interface
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 interface|interface
 name|RexAction

@@ -4424,6 +4424,34 @@ name|body
 argument_list|)
 return|;
 block|}
+comment|/**    * Creates a ForEachExpression with the given body.    */
+specifier|public
+specifier|static
+name|ForEachStatement
+name|forEach
+parameter_list|(
+name|ParameterExpression
+name|parameter
+parameter_list|,
+name|Expression
+name|iterable
+parameter_list|,
+name|Statement
+name|body
+parameter_list|)
+block|{
+return|return
+operator|new
+name|ForEachStatement
+argument_list|(
+name|parameter
+argument_list|,
+name|iterable
+argument_list|,
+name|body
+argument_list|)
+return|;
+block|}
 comment|/**    * Creates a BinaryExpression, given the left and right operands,    * by calling an appropriate factory method.    */
 specifier|public
 specifier|static

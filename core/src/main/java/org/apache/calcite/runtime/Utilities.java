@@ -907,6 +907,22 @@ name|v1
 argument_list|)
 return|;
 block|}
+comment|/** Creates a pattern builder. */
+specifier|public
+specifier|static
+name|Pattern
+operator|.
+name|PatternBuilder
+name|patternBuilder
+parameter_list|()
+block|{
+return|return
+name|Pattern
+operator|.
+name|builder
+argument_list|()
+return|;
+block|}
 block|}
 end_class
 

@@ -28028,6 +28028,111 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testMatch
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"from \"hr\".\"emps\" match_recognize (\n"
+operator|+
+literal|"  order by \"empid\" desc\n"
+operator|+
+literal|"  measures \"commission\" as c,\n"
+operator|+
+literal|"    \"empid\" as empid\n"
+operator|+
+literal|"  pattern (s up)\n"
+operator|+
+literal|"  define up as up.\"commission\"> prev(up.\"commission\"))"
+decl_stmt|;
+specifier|final
+name|String
+name|convert
+init|=
+literal|""
+operator|+
+literal|"LogicalProject(C=[$0], EMPID=[$1])\n"
+operator|+
+literal|"  LogicalMatch(partition=[{}], order=[[0 DESC]], "
+operator|+
+literal|"outputFields=[[C, EMPID]], allRows=[false], "
+operator|+
+literal|"after=[FLAG(SKIP TO NEXT ROW)], pattern=[('S', 'UP')], "
+operator|+
+literal|"isStrictStarts=[false], isStrictEnds=[false], subsets=[[]], "
+operator|+
+literal|"patternDefinitions=[[>(PREV(UP.$4, 0), PREV(UP.$4, 1))]], "
+operator|+
+literal|"inputFields=[[empid, deptno, name, salary, commission]])\n"
+operator|+
+literal|"    EnumerableTableScan(table=[[hr, emps]])\n"
+decl_stmt|;
+specifier|final
+name|String
+name|plan
+init|=
+literal|"PLAN="
+operator|+
+literal|"EnumerableMatch(partition=[{}], order=[[0 DESC]], "
+operator|+
+literal|"outputFields=[[C, EMPID]], allRows=[false], "
+operator|+
+literal|"after=[FLAG(SKIP TO NEXT ROW)], pattern=[('S', 'UP')], "
+operator|+
+literal|"isStrictStarts=[false], isStrictEnds=[false], subsets=[[]], "
+operator|+
+literal|"patternDefinitions=[[>(PREV(UP.$4, 0), PREV(UP.$4, 1))]], "
+operator|+
+literal|"inputFields=[[empid, deptno, name, salary, commission]])\n"
+operator|+
+literal|"  EnumerableTableScan(table=[[hr, emps]])"
+decl_stmt|;
+name|CalciteAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|CalciteAssert
+operator|.
+name|Config
+operator|.
+name|REGULAR
+argument_list|)
+operator|.
+name|query
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|convertContains
+argument_list|(
+name|convert
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+name|plan
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"C=1000; EMPID=100"
+argument_list|)
+expr_stmt|;
+block|}
+end_function
+
+begin_function
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testJsonType
 parameter_list|()
 block|{
@@ -28621,6 +28726,10 @@ end_comment
 
 begin_comment
 comment|//CHECKSTYLE: OFF
+end_comment
+
+begin_comment
+comment|/** A schema that contains two tables by reflection.    *    *<p>Here is the SQL to create equivalent tables in Oracle:    *    *<blockquote>    *<pre>    * CREATE TABLE "emps" (    *   "empid" INTEGER NOT NULL,    *   "deptno" INTEGER NOT NULL,    *   "name" VARCHAR2(10) NOT NULL,    *   "salary" NUMBER(6, 2) NOT NULL,    *   "commission" INTEGER);    * INSERT INTO "emps" VALUES (100, 10, 'Bill', 10000, 1000);    * INSERT INTO "emps" VALUES (200, 20, 'Eric', 8000, 500);    * INSERT INTO "emps" VALUES (150, 10, 'Sebastian', 7000, null);    * INSERT INTO "emps" VALUES (110, 10, 'Theodore', 11500, 250);    *    * CREATE TABLE "depts" (    *   "deptno" INTEGER NOT NULL,    *   "name" VARCHAR2(10) NOT NULL,    *   "employees" ARRAY OF "Employee",    *   "location" "Location");    * INSERT INTO "depts" VALUES (10, 'Sales', null, (-122, 38));    * INSERT INTO "depts" VALUES (30, 'Marketing', null, (0, 52));    * INSERT INTO "depts" VALUES (40, 'HR', null, null);    *</pre>    *</blockquote>    */
 end_comment
 
 begin_class

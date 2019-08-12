@@ -20,6 +20,9 @@ comment|/**  * A<code>RexPattern</code> represents an expression with holes in i
 end_comment
 
 begin_interface
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 interface|interface
 name|RexPattern

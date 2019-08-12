@@ -269,15 +269,15 @@ end_import
 
 begin_import
 import|import
-name|com
+name|org
 operator|.
-name|google
+name|apache
 operator|.
-name|common
+name|calcite
 operator|.
-name|base
+name|util
 operator|.
-name|Preconditions
+name|ImmutableBitSet
 import|;
 end_import
 
@@ -289,9 +289,9 @@ name|google
 operator|.
 name|common
 operator|.
-name|collect
+name|base
 operator|.
-name|ImmutableList
+name|Preconditions
 import|;
 end_import
 
@@ -519,10 +519,7 @@ name|subsets
 decl_stmt|;
 specifier|protected
 specifier|final
-name|List
-argument_list|<
-name|RexNode
-argument_list|>
+name|ImmutableBitSet
 name|partitionKeys
 decl_stmt|;
 specifier|protected
@@ -596,10 +593,7 @@ parameter_list|,
 name|boolean
 name|allRows
 parameter_list|,
-name|List
-argument_list|<
-name|RexNode
-argument_list|>
+name|ImmutableBitSet
 name|partitionKeys
 parameter_list|,
 name|RelCollation
@@ -716,9 +710,9 @@ name|this
 operator|.
 name|partitionKeys
 operator|=
-name|ImmutableList
+name|Objects
 operator|.
-name|copyOf
+name|requireNonNull
 argument_list|(
 name|partitionKeys
 argument_list|)
@@ -1033,10 +1027,7 @@ name|subsets
 return|;
 block|}
 specifier|public
-name|List
-argument_list|<
-name|RexNode
-argument_list|>
+name|ImmutableBitSet
 name|getPartitionKeys
 parameter_list|()
 block|{

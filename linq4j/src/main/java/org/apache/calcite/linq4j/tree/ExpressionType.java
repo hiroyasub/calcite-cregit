@@ -849,6 +849,8 @@ name|Declaration
 block|,
 name|For
 block|,
+name|ForEach
+block|,
 name|While
 block|;
 specifier|final

@@ -14513,7 +14513,7 @@ specifier|final
 name|String
 name|expected
 init|=
-literal|"LogicalMatch(partition=[[$7]], order=[[0]], "
+literal|"LogicalMatch(partition=[{7}], order=[[0]], "
 operator|+
 literal|"outputFields=[[$7, 'start_nw', 'bottom_nw']], allRows=[false], "
 operator|+

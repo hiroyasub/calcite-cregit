@@ -116,6 +116,13 @@ function_decl|;
 name|R
 name|visit
 parameter_list|(
+name|ForEachStatement
+name|forEachStatement
+parameter_list|)
+function_decl|;
+name|R
+name|visit
+parameter_list|(
 name|FunctionExpression
 name|functionExpression
 parameter_list|)
