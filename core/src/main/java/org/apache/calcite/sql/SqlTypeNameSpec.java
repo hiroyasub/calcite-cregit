@@ -63,8 +63,22 @@ name|SqlParserPos
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|util
+operator|.
+name|Litmus
+import|;
+end_import
+
 begin_comment
-comment|/**  * A<code>SqlTypeNameSpec</code> is a type name that allows user to  * customize sql node unparsing and data type deriving.  *  *<p>To customize sql node unparsing, override the method {@link #unparse(SqlWriter, int, int)}.  */
+comment|/**  * A<code>SqlTypeNameSpec</code> is a type name specification that allows user to  * customize sql node unparsing and data type deriving.  *  *<p>To customize sql node unparsing, override the method  * {@link #unparse(SqlWriter, int, int)}.  *<p>To customize data type deriving, override the method  * {@link #deriveType(RelDataTypeFactory)}.  */
 end_comment
 
 begin_class
@@ -72,27 +86,41 @@ specifier|public
 specifier|abstract
 class|class
 name|SqlTypeNameSpec
-extends|extends
-name|SqlIdentifier
 block|{
+specifier|private
+specifier|final
+name|SqlIdentifier
+name|typeName
+decl_stmt|;
+specifier|private
+specifier|final
+name|SqlParserPos
+name|pos
+decl_stmt|;
 comment|/**    * Creates a {@code SqlTypeNameSpec}.    *    * @param name Name of the type.    * @param pos  Parser position, must not be null.    */
 name|SqlTypeNameSpec
 parameter_list|(
-name|String
+name|SqlIdentifier
 name|name
 parameter_list|,
 name|SqlParserPos
 name|pos
 parameter_list|)
 block|{
-name|super
-argument_list|(
+name|this
+operator|.
+name|typeName
+operator|=
 name|name
-argument_list|,
+expr_stmt|;
+name|this
+operator|.
 name|pos
-argument_list|)
+operator|=
+name|pos
 expr_stmt|;
 block|}
+comment|/**    * Derive type from this SqlTypeNameSpec.    *    * @param typeFactory Type factory.    * @return the {@code RelDataType} instance, or null if the SqlTypeNameSpec is not a    *         builtin sql type name.    */
 specifier|public
 specifier|abstract
 name|RelDataType
@@ -102,6 +130,53 @@ name|RelDataTypeFactory
 name|typeFactory
 parameter_list|)
 function_decl|;
+comment|/** Writes a SQL representation of this spec to a writer. */
+specifier|public
+specifier|abstract
+name|void
+name|unparse
+parameter_list|(
+name|SqlWriter
+name|writer
+parameter_list|,
+name|int
+name|leftPrec
+parameter_list|,
+name|int
+name|rightPrec
+parameter_list|)
+function_decl|;
+comment|/** Returns whether this spec is structurally equivalent to another spec. */
+specifier|public
+specifier|abstract
+name|boolean
+name|equalsDeep
+parameter_list|(
+name|SqlTypeNameSpec
+name|spec
+parameter_list|,
+name|Litmus
+name|litmus
+parameter_list|)
+function_decl|;
+specifier|public
+name|SqlParserPos
+name|getParserPos
+parameter_list|()
+block|{
+return|return
+name|pos
+return|;
+block|}
+specifier|public
+name|SqlIdentifier
+name|getTypeName
+parameter_list|()
+block|{
+return|return
+name|typeName
+return|;
+block|}
 block|}
 end_class
 

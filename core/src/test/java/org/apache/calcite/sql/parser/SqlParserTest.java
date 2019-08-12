@@ -8263,9 +8263,30 @@ argument_list|)
 expr_stmt|;
 name|checkExp
 argument_list|(
-literal|"cast(x as timestamp)"
+literal|"cast(x as time without time zone)"
+argument_list|,
+literal|"CAST(`X` AS TIME)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"cast(x as time with local time zone)"
+argument_list|,
+literal|"CAST(`X` AS TIME WITH LOCAL TIME ZONE)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"cast(x as timestamp without time zone)"
 argument_list|,
 literal|"CAST(`X` AS TIMESTAMP)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"cast(x as timestamp with local time zone)"
+argument_list|,
+literal|"CAST(`X` AS TIMESTAMP WITH LOCAL TIME ZONE)"
 argument_list|)
 expr_stmt|;
 name|checkExp
@@ -8277,9 +8298,44 @@ argument_list|)
 expr_stmt|;
 name|checkExp
 argument_list|(
+literal|"cast(x as time(0) without time zone)"
+argument_list|,
+literal|"CAST(`X` AS TIME(0))"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"cast(x as time(0) with local time zone)"
+argument_list|,
+literal|"CAST(`X` AS TIME(0) WITH LOCAL TIME ZONE)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
 literal|"cast(x as timestamp(0))"
 argument_list|,
 literal|"CAST(`X` AS TIMESTAMP(0))"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"cast(x as timestamp(0) without time zone)"
+argument_list|,
+literal|"CAST(`X` AS TIMESTAMP(0))"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"cast(x as timestamp(0) with local time zone)"
+argument_list|,
+literal|"CAST(`X` AS TIMESTAMP(0) WITH LOCAL TIME ZONE)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"cast(x as timestamp)"
+argument_list|,
+literal|"CAST(`X` AS TIMESTAMP)"
 argument_list|)
 expr_stmt|;
 name|checkExp
@@ -8381,6 +8437,48 @@ name|void
 name|testCastFails
 parameter_list|()
 block|{
+name|checkExpFails
+argument_list|(
+literal|"cast(x as time with ^time^ zone)"
+argument_list|,
+literal|"(?s).*Encountered \"time\" at .*"
+argument_list|)
+expr_stmt|;
+name|checkExpFails
+argument_list|(
+literal|"cast(x as time(0) with ^time^ zone)"
+argument_list|,
+literal|"(?s).*Encountered \"time\" at .*"
+argument_list|)
+expr_stmt|;
+name|checkExpFails
+argument_list|(
+literal|"cast(x as timestamp with ^time^ zone)"
+argument_list|,
+literal|"(?s).*Encountered \"time\" at .*"
+argument_list|)
+expr_stmt|;
+name|checkExpFails
+argument_list|(
+literal|"cast(x as timestamp(0) with ^time^ zone)"
+argument_list|,
+literal|"(?s).*Encountered \"time\" at .*"
+argument_list|)
+expr_stmt|;
+name|checkExpFails
+argument_list|(
+literal|"cast(x as varchar(10) ^with^ local time zone)"
+argument_list|,
+literal|"(?s).*Encountered \"with\" at line 1, column 23.\n.*"
+argument_list|)
+expr_stmt|;
+name|checkExpFails
+argument_list|(
+literal|"cast(x as varchar(10) ^without^ time zone)"
+argument_list|,
+literal|"(?s).*Encountered \"without\" at line 1, column 23.\n.*"
+argument_list|)
+expr_stmt|;
 block|}
 annotation|@
 name|Test
@@ -17720,7 +17818,7 @@ argument_list|,
 literal|"CAST(`A` AS ROW(`F0` INTEGER, `F1` VARCHAR NULL))"
 argument_list|)
 expr_stmt|;
-comment|//    // test nested row type.
+comment|// test nested row type.
 name|checkExp
 argument_list|(
 literal|"cast(a as row("

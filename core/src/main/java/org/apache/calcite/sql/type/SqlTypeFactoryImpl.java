@@ -1111,6 +1111,24 @@ operator|:
 literal|"use createMultisetType() instead"
 assert|;
 assert|assert
+name|typeName
+operator|!=
+name|SqlTypeName
+operator|.
+name|ARRAY
+operator|:
+literal|"use createArrayType() instead"
+assert|;
+assert|assert
+name|typeName
+operator|!=
+name|SqlTypeName
+operator|.
+name|ROW
+operator|:
+literal|"use createStructType() instead"
+assert|;
+assert|assert
 operator|!
 name|SqlTypeName
 operator|.

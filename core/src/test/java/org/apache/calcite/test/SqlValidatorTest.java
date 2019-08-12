@@ -3797,6 +3797,92 @@ argument_list|,
 literal|"INTEGER NOT NULL MULTISET NOT NULL"
 argument_list|)
 expr_stmt|;
+comment|// test cast to time type.
+name|checkExpType
+argument_list|(
+literal|"cast('abc' as time)"
+argument_list|,
+literal|"TIME(0) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|checkExpType
+argument_list|(
+literal|"cast('abc' as time without time zone)"
+argument_list|,
+literal|"TIME(0) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|checkExpType
+argument_list|(
+literal|"cast('abc' as time with local time zone)"
+argument_list|,
+literal|"TIME_WITH_LOCAL_TIME_ZONE(0) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|checkExpType
+argument_list|(
+literal|"cast('abc' as time(3))"
+argument_list|,
+literal|"TIME(3) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|checkExpType
+argument_list|(
+literal|"cast('abc' as time(3) without time zone)"
+argument_list|,
+literal|"TIME(3) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|checkExpType
+argument_list|(
+literal|"cast('abc' as time(3) with local time zone)"
+argument_list|,
+literal|"TIME_WITH_LOCAL_TIME_ZONE(3) NOT NULL"
+argument_list|)
+expr_stmt|;
+comment|// test cast to timestamp type.
+name|checkExpType
+argument_list|(
+literal|"cast('abc' as timestamp)"
+argument_list|,
+literal|"TIMESTAMP(0) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|checkExpType
+argument_list|(
+literal|"cast('abc' as timestamp without time zone)"
+argument_list|,
+literal|"TIMESTAMP(0) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|checkExpType
+argument_list|(
+literal|"cast('abc' as timestamp with local time zone)"
+argument_list|,
+literal|"TIMESTAMP_WITH_LOCAL_TIME_ZONE(0) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|checkExpType
+argument_list|(
+literal|"cast('abc' as timestamp(3))"
+argument_list|,
+literal|"TIMESTAMP(3) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|checkExpType
+argument_list|(
+literal|"cast('abc' as timestamp(3) without time zone)"
+argument_list|,
+literal|"TIMESTAMP(3) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|checkExpType
+argument_list|(
+literal|"cast('abc' as timestamp(3) with local time zone)"
+argument_list|,
+literal|"TIMESTAMP_WITH_LOCAL_TIME_ZONE(3) NOT NULL"
+argument_list|)
+expr_stmt|;
 block|}
 annotation|@
 name|Test
