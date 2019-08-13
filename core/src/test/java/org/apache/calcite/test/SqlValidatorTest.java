@@ -2603,6 +2603,88 @@ literal|".*Supported form.s.: '<STRING> \\|\\|<STRING>.*'"
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Tests the CONCAT function, which unlike the concat operator ('||') is not    * standard but only in the ORACLE and POSTGRESQL libraries. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testConcatFunction
+parameter_list|()
+block|{
+comment|// CONCAT is not in the library operator table
+name|tester
+operator|=
+name|tester
+operator|.
+name|withOperatorTable
+argument_list|(
+name|SqlLibraryOperatorTableFactory
+operator|.
+name|INSTANCE
+operator|.
+name|getOperatorTable
+argument_list|(
+name|SqlLibrary
+operator|.
+name|STANDARD
+argument_list|,
+name|SqlLibrary
+operator|.
+name|POSTGRESQL
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"concat('a', 'b')"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"concat(x'12', x'34')"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"concat(_UTF16'a', _UTF16'b', _UTF16'c')"
+argument_list|)
+expr_stmt|;
+name|checkExpType
+argument_list|(
+literal|"concat('aabbcc', 'ab', '+-')"
+argument_list|,
+literal|"VARCHAR(10) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|checkExpType
+argument_list|(
+literal|"concat('aabbcc', CAST(NULL AS VARCHAR(20)), '+-')"
+argument_list|,
+literal|"VARCHAR(28)"
+argument_list|)
+expr_stmt|;
+name|checkWholeExpFails
+argument_list|(
+literal|"concat('aabbcc', 2)"
+argument_list|,
+literal|"(?s)Cannot apply 'CONCAT' to arguments of type 'CONCAT\\(<CHAR\\(6\\)>,<INTEGER>\\)'\\. .*"
+argument_list|)
+expr_stmt|;
+name|checkWholeExpFails
+argument_list|(
+literal|"concat('abc', 'ab', 123)"
+argument_list|,
+literal|"(?s)Cannot apply 'CONCAT' to arguments of type 'CONCAT\\(<CHAR\\(3\\)>,<CHAR\\(2\\)>,<INTEGER>\\)'\\. .*"
+argument_list|)
+expr_stmt|;
+name|checkWholeExpFails
+argument_list|(
+literal|"concat(true, false)"
+argument_list|,
+literal|"(?s)Cannot apply 'CONCAT' to arguments of type 'CONCAT\\(<BOOLEAN>,<BOOLEAN>\\)'\\. .*"
+argument_list|)
+expr_stmt|;
+block|}
 annotation|@
 name|Test
 specifier|public

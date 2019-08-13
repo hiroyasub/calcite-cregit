@@ -224,7 +224,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Factory that creates operator tables that consist of functions and operators  * for particular named libraries. For example, the following code will return  * an operator table that contains operators for both Oracle and MySQL:  *  *<blockquote>  *<pre>SqlOperatorTable opTab =  *     SqlDialectOperatorTableFactory.INSTANCE.getOperatorTable(  *         EnumSet.of(SqlLibrary.ORACLE, SqlLibrary.MYSQL))</pre>  *</blockquote>  *  *<p>To define a new library, add a value to enum {@link SqlLibrary}.  *  *<p>To add functions to a library, add the {@link LibraryOperator} annotation  * to fields that of type {@link SqlOperator}, and the library name to its  * {@link LibraryOperator#libraries()} field.  */
+comment|/**  * Factory that creates operator tables that consist of functions and operators  * for particular named libraries. For example, the following code will return  * an operator table that contains operators for both Oracle and MySQL:  *  *<blockquote>  *<pre>SqlOperatorTable opTab =  *     SqlLibraryOperatorTableFactory.INSTANCE.getOperatorTable(  *         EnumSet.of(SqlLibrary.ORACLE, SqlLibrary.MYSQL))</pre>  *</blockquote>  *  *<p>To define a new library, add a value to enum {@link SqlLibrary}.  *  *<p>To add functions to a library, add the {@link LibraryOperator} annotation  * to fields that of type {@link SqlOperator}, and the library name to its  * {@link LibraryOperator#libraries()} field.  */
 end_comment
 
 begin_class
