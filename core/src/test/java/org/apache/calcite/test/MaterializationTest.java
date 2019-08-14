@@ -2248,6 +2248,64 @@ literal|"select count(*) + 1 as c, \"deptno\" from \"emps\" group by \"deptno\""
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testAggregate3
+parameter_list|()
+block|{
+name|String
+name|deduplicated
+init|=
+literal|"(select \"empid\", \"deptno\", \"name\", \"salary\", \"commission\"\n"
+operator|+
+literal|"from \"emps\"\n"
+operator|+
+literal|"group by \"empid\", \"deptno\", \"name\", \"salary\", \"commission\")"
+decl_stmt|;
+name|String
+name|mv
+init|=
+literal|"select \"deptno\", sum(\"salary\"), sum(\"commission\"), sum(\"k\")\n"
+operator|+
+literal|"from\n"
+operator|+
+literal|"  (select \"deptno\", \"salary\", \"commission\", 100 as \"k\"\n"
+operator|+
+literal|"  from "
+operator|+
+name|deduplicated
+operator|+
+literal|")\n"
+operator|+
+literal|"group by \"deptno\""
+decl_stmt|;
+name|String
+name|query
+init|=
+literal|"select \"deptno\", sum(\"salary\"), sum(\"k\")\n"
+operator|+
+literal|"from\n"
+operator|+
+literal|"  (select \"deptno\", \"salary\", 100 as \"k\"\n"
+operator|+
+literal|"  from "
+operator|+
+name|deduplicated
+operator|+
+literal|")\n"
+operator|+
+literal|"group by \"deptno\""
+decl_stmt|;
+name|checkMaterialize
+argument_list|(
+name|mv
+argument_list|,
+name|query
+argument_list|)
+expr_stmt|;
+block|}
 comment|/** Aggregation query at same level of aggregation as aggregation    * materialization with grouping sets. */
 annotation|@
 name|Test
