@@ -3357,7 +3357,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testDialect
+name|testRedshiftDialect
 parameter_list|()
 throws|throws
 name|Exception
@@ -3403,9 +3403,17 @@ name|q0
 init|=
 literal|"select\n"
 operator|+
+literal|"  CONCAT(\"fname\", ' ', \"lname\") as \"full_name\",\n"
+operator|+
+literal|"  convert_timezone('UTC', 'America/Los_Angeles',\n"
+operator|+
+literal|"    cast('2019-01-01 01:00:00' as timestamp)),\n"
+operator|+
 literal|"  left(\"fname\", 1) as \"initial\",\n"
 operator|+
-literal|"  CONCAT(\"fname\", ' ', \"lname\") as \"full_name\",\n"
+literal|"  to_date('2019-01-01', 'YYYY-MM-DD'),\n"
+operator|+
+literal|"  to_timestamp('2019-01-01 01:00:00', 'YYYY-MM-DD HH:MM:SS'),\n"
 operator|+
 literal|"  count(*) as c,\n"
 operator|+

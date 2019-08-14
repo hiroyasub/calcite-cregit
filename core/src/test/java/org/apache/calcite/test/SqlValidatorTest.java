@@ -4565,6 +4565,209 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testConvertTimezoneFunction
+parameter_list|()
+block|{
+name|checkWholeExpFails
+argument_list|(
+literal|"CONVERT_TIMEZONE('UTC', 'America/Los_Angeles', CAST('2000-01-01' AS TIMESTAMP))"
+argument_list|,
+literal|"No match found for function signature CONVERT_TIMEZONE\\(<CHARACTER>,<CHARACTER>,<TIMESTAMP>\\)"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|=
+name|tester
+operator|.
+name|withOperatorTable
+argument_list|(
+name|SqlLibraryOperatorTableFactory
+operator|.
+name|INSTANCE
+operator|.
+name|getOperatorTable
+argument_list|(
+name|SqlLibrary
+operator|.
+name|STANDARD
+argument_list|,
+name|SqlLibrary
+operator|.
+name|POSTGRESQL
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|checkExpType
+argument_list|(
+literal|"CONVERT_TIMEZONE('UTC', 'America/Los_Angeles', CAST('2000-01-01' AS TIMESTAMP))"
+argument_list|,
+literal|"DATE NOT NULL"
+argument_list|)
+expr_stmt|;
+name|checkWholeExpFails
+argument_list|(
+literal|"CONVERT_TIMEZONE('UTC', 'America/Los_Angeles')"
+argument_list|,
+literal|"Invalid number of arguments to function 'CONVERT_TIMEZONE'. Was expecting 3 arguments"
+argument_list|)
+expr_stmt|;
+name|checkWholeExpFails
+argument_list|(
+literal|"CONVERT_TIMEZONE('UTC', 'America/Los_Angeles', '2000-01-01')"
+argument_list|,
+literal|"Cannot apply 'CONVERT_TIMEZONE' to arguments of type 'CONVERT_TIMEZONE\\(<CHAR\\(3\\)>,<CHAR\\(19\\)>, "
+operator|+
+literal|"<CHAR\\(10\\)>\\)'\\. Supported form\\(s\\): 'CONVERT_TIMEZONE\\(<CHARACTER>,<CHARACTER>,<DATETIME>\\)'"
+argument_list|)
+expr_stmt|;
+name|checkWholeExpFails
+argument_list|(
+literal|"CONVERT_TIMEZONE('UTC', 'America/Los_Angeles', "
+operator|+
+literal|"'UTC', CAST('2000-01-01' AS TIMESTAMP))"
+argument_list|,
+literal|"Invalid number of arguments to function 'CONVERT_TIMEZONE'. Was expecting 3 arguments"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testToDateFunction
+parameter_list|()
+block|{
+name|checkWholeExpFails
+argument_list|(
+literal|"TO_DATE('2000-01-01', 'YYYY-MM-DD')"
+argument_list|,
+literal|"No match found for function signature TO_DATE\\(<CHARACTER>,<CHARACTER>\\)"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|=
+name|tester
+operator|.
+name|withOperatorTable
+argument_list|(
+name|SqlLibraryOperatorTableFactory
+operator|.
+name|INSTANCE
+operator|.
+name|getOperatorTable
+argument_list|(
+name|SqlLibrary
+operator|.
+name|STANDARD
+argument_list|,
+name|SqlLibrary
+operator|.
+name|POSTGRESQL
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|checkExpType
+argument_list|(
+literal|"TO_DATE('2000-01-01', 'YYYY-MM-DD')"
+argument_list|,
+literal|"DATE NOT NULL"
+argument_list|)
+expr_stmt|;
+name|checkWholeExpFails
+argument_list|(
+literal|"TO_DATE('2000-01-01')"
+argument_list|,
+literal|"Invalid number of arguments to function 'TO_DATE'. Was expecting 2 arguments"
+argument_list|)
+expr_stmt|;
+name|checkWholeExpFails
+argument_list|(
+literal|"TO_DATE(2000, 'YYYY')"
+argument_list|,
+literal|"Cannot apply 'TO_DATE' to arguments of type 'TO_DATE\\(<INTEGER>,<CHAR\\(4\\)>\\)'\\. "
+operator|+
+literal|"Supported form\\(s\\): 'TO_DATE\\(<STRING>,<STRING>\\)'"
+argument_list|)
+expr_stmt|;
+name|checkWholeExpFails
+argument_list|(
+literal|"TO_DATE('2000-01-01', 'YYYY-MM-DD', 'YYYY-MM-DD')"
+argument_list|,
+literal|"Invalid number of arguments to function 'TO_DATE'. Was expecting 2 arguments"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testToTimestampFunction
+parameter_list|()
+block|{
+name|checkWholeExpFails
+argument_list|(
+literal|"TO_TIMESTAMP('2000-01-01 01:00:00', 'YYYY-MM-DD HH:MM:SS')"
+argument_list|,
+literal|"No match found for function signature TO_TIMESTAMP\\(<CHARACTER>,<CHARACTER>\\)"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|=
+name|tester
+operator|.
+name|withOperatorTable
+argument_list|(
+name|SqlLibraryOperatorTableFactory
+operator|.
+name|INSTANCE
+operator|.
+name|getOperatorTable
+argument_list|(
+name|SqlLibrary
+operator|.
+name|STANDARD
+argument_list|,
+name|SqlLibrary
+operator|.
+name|POSTGRESQL
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|checkExpType
+argument_list|(
+literal|"TO_TIMESTAMP('2000-01-01 01:00:00', 'YYYY-MM-DD HH:MM:SS')"
+argument_list|,
+literal|"DATE NOT NULL"
+argument_list|)
+expr_stmt|;
+name|checkWholeExpFails
+argument_list|(
+literal|"TO_TIMESTAMP('2000-01-01 01:00:00')"
+argument_list|,
+literal|"Invalid number of arguments to function 'TO_TIMESTAMP'. Was expecting 2 arguments"
+argument_list|)
+expr_stmt|;
+name|checkWholeExpFails
+argument_list|(
+literal|"TO_TIMESTAMP(2000, 'YYYY')"
+argument_list|,
+literal|"Cannot apply 'TO_TIMESTAMP' to arguments of type 'TO_TIMESTAMP\\(<INTEGER>,<CHAR\\(4\\)>\\)'\\. "
+operator|+
+literal|"Supported form\\(s\\): 'TO_TIMESTAMP\\(<STRING>,<STRING>\\)'"
+argument_list|)
+expr_stmt|;
+name|checkWholeExpFails
+argument_list|(
+literal|"TO_TIMESTAMP('2000-01-01 01:00:00', 'YYYY-MM-DD HH:MM:SS', 'YYYY-MM-DD')"
+argument_list|,
+literal|"Invalid number of arguments to function 'TO_TIMESTAMP'. Was expecting 2 arguments"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testInvalidFunction
 parameter_list|()
 block|{
