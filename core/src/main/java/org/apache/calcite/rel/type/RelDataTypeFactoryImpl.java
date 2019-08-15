@@ -2477,7 +2477,22 @@ block|{
 case|case
 name|DECIMAL
 case|:
+comment|// Fix the precision when the type is JavaType.
 return|return
+name|RelDataTypeFactoryImpl
+operator|.
+name|isJavaType
+argument_list|(
+name|type
+argument_list|)
+condition|?
+name|SqlTypeUtil
+operator|.
+name|getMaxPrecisionScaleDecimal
+argument_list|(
+name|this
+argument_list|)
+else|:
 name|type
 return|;
 case|case

@@ -387,6 +387,16 @@ begin_import
 import|import
 name|java
 operator|.
+name|math
+operator|.
+name|BigDecimal
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
 name|sql
 operator|.
 name|Connection
@@ -1818,9 +1828,9 @@ name|returns
 argument_list|(
 literal|""
 operator|+
-literal|"primitiveBoolean=false; primitiveByte=0; primitiveChar=\u0000; primitiveShort=0; primitiveInt=0; primitiveLong=0; primitiveFloat=0.0; primitiveDouble=0.0; wrapperBoolean=false; wrapperByte=0; wrapperCharacter=\u0000; wrapperShort=0; wrapperInteger=0; wrapperLong=0; wrapperFloat=0.0; wrapperDouble=0.0; sqlDate=1970-01-01; sqlTime=00:00:00; sqlTimestamp=1970-01-01 00:00:00; utilDate=1970-01-01 00:00:00; string=1\n"
+literal|"primitiveBoolean=false; primitiveByte=0; primitiveChar=\u0000; primitiveShort=0; primitiveInt=0; primitiveLong=0; primitiveFloat=0.0; primitiveDouble=0.0; wrapperBoolean=false; wrapperByte=0; wrapperCharacter=\u0000; wrapperShort=0; wrapperInteger=0; wrapperLong=0; wrapperFloat=0.0; wrapperDouble=0.0; sqlDate=1970-01-01; sqlTime=00:00:00; sqlTimestamp=1970-01-01 00:00:00; utilDate=1970-01-01 00:00:00; string=1; bigDecimal=0\n"
 operator|+
-literal|"primitiveBoolean=true; primitiveByte=127; primitiveChar=\uffff; primitiveShort=32767; primitiveInt=2147483647; primitiveLong=9223372036854775807; primitiveFloat=3.4028235E38; primitiveDouble=1.7976931348623157E308; wrapperBoolean=null; wrapperByte=null; wrapperCharacter=null; wrapperShort=null; wrapperInteger=null; wrapperLong=null; wrapperFloat=null; wrapperDouble=null; sqlDate=null; sqlTime=null; sqlTimestamp=null; utilDate=null; string=null\n"
+literal|"primitiveBoolean=true; primitiveByte=127; primitiveChar=\uffff; primitiveShort=32767; primitiveInt=2147483647; primitiveLong=9223372036854775807; primitiveFloat=3.4028235E38; primitiveDouble=1.7976931348623157E308; wrapperBoolean=null; wrapperByte=null; wrapperCharacter=null; wrapperShort=null; wrapperInteger=null; wrapperLong=null; wrapperFloat=null; wrapperDouble=null; sqlDate=null; sqlTime=null; sqlTimestamp=null; utilDate=null; string=null; bigDecimal=null\n"
 argument_list|)
 expr_stmt|;
 block|}
@@ -2610,6 +2620,23 @@ argument_list|(
 literal|1
 argument_list|)
 return|;
+case|case
+name|java
+operator|.
+name|sql
+operator|.
+name|Types
+operator|.
+name|DECIMAL
+case|:
+return|return
+name|input
+operator|.
+name|getBigDecimal
+argument_list|(
+literal|1
+argument_list|)
+return|;
 default|default:
 throw|throw
 operator|new
@@ -3278,6 +3305,44 @@ name|returns
 argument_list|(
 literal|"C=null\n"
 argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testDivideDoubleBigDecimal
+parameter_list|()
+block|{
+specifier|final
+name|CalciteAssert
+operator|.
+name|AssertThat
+name|with
+init|=
+name|CalciteAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|withSchema
+argument_list|(
+literal|"s"
+argument_list|,
+name|CATCHALL
+argument_list|)
+decl_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"select \"wrapperDouble\" / \"bigDecimal\" as c\n"
+operator|+
+literal|" from \"s\".\"everyTypes\""
+argument_list|)
+operator|.
+name|runs
+argument_list|()
 expr_stmt|;
 block|}
 annotation|@
@@ -4518,6 +4583,11 @@ name|String
 name|string
 decl_stmt|;
 specifier|public
+specifier|final
+name|BigDecimal
+name|bigDecimal
+decl_stmt|;
+specifier|public
 name|EveryType
 parameter_list|(
 name|boolean
@@ -4586,6 +4656,9 @@ name|utilDate
 parameter_list|,
 name|String
 name|string
+parameter_list|,
+name|BigDecimal
+name|bigDecimal
 parameter_list|)
 block|{
 name|this
@@ -4713,6 +4786,12 @@ operator|.
 name|string
 operator|=
 name|string
+expr_stmt|;
+name|this
+operator|.
+name|bigDecimal
+operator|=
+name|bigDecimal
 expr_stmt|;
 block|}
 specifier|static
@@ -4996,6 +5075,10 @@ literal|0
 argument_list|)
 argument_list|,
 literal|"1"
+argument_list|,
+name|BigDecimal
+operator|.
+name|ZERO
 argument_list|)
 block|,
 operator|new
@@ -5030,6 +5113,8 @@ argument_list|,
 name|Double
 operator|.
 name|MAX_VALUE
+argument_list|,
+literal|null
 argument_list|,
 literal|null
 argument_list|,
