@@ -71,6 +71,22 @@ name|apache
 operator|.
 name|calcite
 operator|.
+name|sql
+operator|.
+name|validate
+operator|.
+name|SqlValidator
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
 name|util
 operator|.
 name|Litmus
@@ -128,6 +144,16 @@ name|deriveType
 parameter_list|(
 name|RelDataTypeFactory
 name|typeFactory
+parameter_list|)
+function_decl|;
+comment|/**    * Derive type from this SqlTypeNameSpec.    *    * @param validator The sql validator.    * @return the {@code RelDataType} instance, throws exception if we could not    *         deduce the type.    */
+specifier|public
+specifier|abstract
+name|RelDataType
+name|deriveType
+parameter_list|(
+name|SqlValidator
+name|validator
 parameter_list|)
 function_decl|;
 comment|/** Writes a SQL representation of this spec to a writer. */

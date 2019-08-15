@@ -71,6 +71,22 @@ name|apache
 operator|.
 name|calcite
 operator|.
+name|sql
+operator|.
+name|validate
+operator|.
+name|SqlValidator
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
 name|util
 operator|.
 name|Litmus
@@ -107,6 +123,21 @@ name|pos
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Override
+specifier|public
+name|RelDataType
+name|deriveType
+parameter_list|(
+name|RelDataTypeFactory
+name|typeFactory
+parameter_list|)
+block|{
+comment|// Returns null to let the SqlValidator deduce the type.
+return|return
+literal|null
+return|;
+block|}
 specifier|public
 name|SqlUserDefinedTypeNameSpec
 parameter_list|(
@@ -137,15 +168,20 @@ specifier|public
 name|RelDataType
 name|deriveType
 parameter_list|(
-name|RelDataTypeFactory
-name|typeFactory
+name|SqlValidator
+name|validator
 parameter_list|)
 block|{
 comment|// The type name is a compound identifier, that means it is a UDT,
-comment|// returns null to let the SqlValidator deduce its type from
-comment|// the Schema.
+comment|// use SqlValidator to deduce its type from the Schema.
 return|return
-literal|null
+name|validator
+operator|.
+name|getValidatedNodeType
+argument_list|(
+name|getTypeName
+argument_list|()
+argument_list|)
 return|;
 block|}
 annotation|@

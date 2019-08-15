@@ -17765,9 +17765,10 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testCastAsArrayType
+name|testCastAsCollectionType
 parameter_list|()
 block|{
+comment|// test array type.
 name|checkExp
 argument_list|(
 literal|"cast(a as int array)"
@@ -17782,11 +17783,18 @@ argument_list|,
 literal|"CAST(`A` AS VARCHAR(5) ARRAY)"
 argument_list|)
 expr_stmt|;
-name|checkExpFails
+name|checkExp
 argument_list|(
-literal|"cast(a as int array ^array^)"
+literal|"cast(a as int array array)"
 argument_list|,
-literal|"(?s).*Encountered \"array\" at line 1, column 21.\n.*"
+literal|"CAST(`A` AS INTEGER ARRAY ARRAY)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"cast(a as varchar(5) array array)"
+argument_list|,
+literal|"CAST(`A` AS VARCHAR(5) ARRAY ARRAY)"
 argument_list|)
 expr_stmt|;
 name|checkExpFails
@@ -17794,6 +17802,57 @@ argument_list|(
 literal|"cast(a as int array^<^10>)"
 argument_list|,
 literal|"(?s).*Encountered \"<\" at line 1, column 20.\n.*"
+argument_list|)
+expr_stmt|;
+comment|// test multiset type.
+name|checkExp
+argument_list|(
+literal|"cast(a as int multiset)"
+argument_list|,
+literal|"CAST(`A` AS INTEGER MULTISET)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"cast(a as varchar(5) multiset)"
+argument_list|,
+literal|"CAST(`A` AS VARCHAR(5) MULTISET)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"cast(a as int multiset array)"
+argument_list|,
+literal|"CAST(`A` AS INTEGER MULTISET ARRAY)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"cast(a as varchar(5) multiset array)"
+argument_list|,
+literal|"CAST(`A` AS VARCHAR(5) MULTISET ARRAY)"
+argument_list|)
+expr_stmt|;
+comment|// test row type nested in collection type.
+name|checkExp
+argument_list|(
+literal|"cast(a as row(f0 int array multiset, f1 varchar(5) array) array multiset)"
+argument_list|,
+literal|"CAST(`A` AS "
+operator|+
+literal|"ROW(`F0` INTEGER ARRAY MULTISET, "
+operator|+
+literal|"`F1` VARCHAR(5) ARRAY) "
+operator|+
+literal|"ARRAY MULTISET)"
+argument_list|)
+expr_stmt|;
+comment|// test UDT collection type.
+name|checkExp
+argument_list|(
+literal|"cast(a as MyUDT array multiset)"
+argument_list|,
+literal|"CAST(`A` AS `MYUDT` ARRAY MULTISET)"
 argument_list|)
 expr_stmt|;
 block|}

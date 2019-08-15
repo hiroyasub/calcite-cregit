@@ -22709,7 +22709,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testCastAsArrayType
+name|testCastAsCollectionType
 parameter_list|()
 block|{
 name|sql
@@ -22730,6 +22730,152 @@ operator|.
 name|columnType
 argument_list|(
 literal|"VARCHAR(5) NOT NULL ARRAY NOT NULL"
+argument_list|)
+expr_stmt|;
+comment|// test array type.
+name|sql
+argument_list|(
+literal|"select cast(\"intArrayType\" as int array) from COMPLEXTYPES.CTC_T1"
+argument_list|)
+operator|.
+name|withExtendedCatalog
+argument_list|()
+operator|.
+name|columnType
+argument_list|(
+literal|"INTEGER NOT NULL ARRAY NOT NULL"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select cast(\"varchar5ArrayType\" as varchar(5) array) from COMPLEXTYPES.CTC_T1"
+argument_list|)
+operator|.
+name|withExtendedCatalog
+argument_list|()
+operator|.
+name|columnType
+argument_list|(
+literal|"VARCHAR(5) NOT NULL ARRAY NOT NULL"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select cast(\"intArrayArrayType\" as int array array) from COMPLEXTYPES.CTC_T1"
+argument_list|)
+operator|.
+name|withExtendedCatalog
+argument_list|()
+operator|.
+name|columnType
+argument_list|(
+literal|"INTEGER NOT NULL ARRAY NOT NULL ARRAY NOT NULL"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select cast(\"varchar5ArrayArrayType\" as varchar(5) array array) "
+operator|+
+literal|"from COMPLEXTYPES.CTC_T1"
+argument_list|)
+operator|.
+name|withExtendedCatalog
+argument_list|()
+operator|.
+name|columnType
+argument_list|(
+literal|"VARCHAR(5) NOT NULL ARRAY NOT NULL ARRAY NOT NULL"
+argument_list|)
+expr_stmt|;
+comment|// test multiset type.
+name|sql
+argument_list|(
+literal|"select cast(\"intMultisetType\" as int multiset) from COMPLEXTYPES.CTC_T1"
+argument_list|)
+operator|.
+name|withExtendedCatalog
+argument_list|()
+operator|.
+name|columnType
+argument_list|(
+literal|"INTEGER NOT NULL MULTISET NOT NULL"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select cast(\"varchar5MultisetType\" as varchar(5) multiset) from COMPLEXTYPES.CTC_T1"
+argument_list|)
+operator|.
+name|withExtendedCatalog
+argument_list|()
+operator|.
+name|columnType
+argument_list|(
+literal|"VARCHAR(5) NOT NULL MULTISET NOT NULL"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select cast(\"intMultisetArrayType\" as int multiset array) from COMPLEXTYPES.CTC_T1"
+argument_list|)
+operator|.
+name|withExtendedCatalog
+argument_list|()
+operator|.
+name|columnType
+argument_list|(
+literal|"INTEGER NOT NULL MULTISET NOT NULL ARRAY NOT NULL"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select cast(\"varchar5MultisetArrayType\" as varchar(5) multiset array) "
+operator|+
+literal|"from COMPLEXTYPES.CTC_T1"
+argument_list|)
+operator|.
+name|withExtendedCatalog
+argument_list|()
+operator|.
+name|columnType
+argument_list|(
+literal|"VARCHAR(5) NOT NULL MULTISET NOT NULL ARRAY NOT NULL"
+argument_list|)
+expr_stmt|;
+comment|// test row type nested in collection type.
+name|sql
+argument_list|(
+literal|"select cast(\"rowArrayMultisetType\" as row(f0 int array multiset, "
+operator|+
+literal|"f1 varchar(5) array) array multiset) "
+operator|+
+literal|"from COMPLEXTYPES.CTC_T1"
+argument_list|)
+operator|.
+name|withExtendedCatalog
+argument_list|()
+operator|.
+name|columnType
+argument_list|(
+literal|"RecordType(INTEGER NOT NULL ARRAY NOT NULL MULTISET NOT NULL F0, "
+operator|+
+literal|"VARCHAR(5) NOT NULL ARRAY NOT NULL F1) NOT NULL "
+operator|+
+literal|"ARRAY NOT NULL MULTISET NOT NULL"
+argument_list|)
+expr_stmt|;
+comment|// test UDT collection type.
+name|sql
+argument_list|(
+literal|"select cast(a as MyUDT array multiset) from COMPLEXTYPES.CTC_T1"
+argument_list|)
+operator|.
+name|withExtendedCatalog
+argument_list|()
+operator|.
+name|fails
+argument_list|(
+literal|"(?s).*class org\\.apache\\.calcite\\.sql\\.SqlIdentifier: MYUDT.*"
 argument_list|)
 expr_stmt|;
 block|}
