@@ -1527,6 +1527,17 @@ name|toString
 argument_list|()
 argument_list|)
 expr_stmt|;
+name|planner
+operator|.
+name|getRoot
+argument_list|()
+operator|.
+name|getCluster
+argument_list|()
+operator|.
+name|invalidateMetadataQuery
+argument_list|()
+expr_stmt|;
 block|}
 block|}
 specifier|private
