@@ -1388,8 +1388,8 @@ operator|.
 name|builder
 argument_list|()
 decl_stmt|;
-comment|// REVIEW 2019-08-19 Danny Chan: Should we implement the #validate(SqlValidator)
-comment|// to get the SqlValidator instance ?
+comment|// REVIEW 2019-08-19 Danny Chan: Should we implement the
+comment|// #validate(SqlValidator) to get the SqlValidator instance?
 specifier|final
 name|SqlValidator
 name|validator
