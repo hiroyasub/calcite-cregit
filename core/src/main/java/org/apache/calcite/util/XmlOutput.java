@@ -1010,6 +1010,11 @@ expr_stmt|;
 block|}
 name|out
 operator|.
+name|println
+argument_list|()
+expr_stmt|;
+name|out
+operator|.
 name|flush
 argument_list|()
 expr_stmt|;

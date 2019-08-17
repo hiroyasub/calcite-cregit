@@ -7328,11 +7328,15 @@ literal|"<RelNode type=\"LogicalProject\">\n"
 operator|+
 literal|"\t<Property name=\"EXPR$0\">\n"
 operator|+
-literal|"\t\t+(1, 2)\t</Property>\n"
+literal|"\t\t+(1, 2)\n"
+operator|+
+literal|"\t</Property>\n"
 operator|+
 literal|"\t<Property name=\"EXPR$1\">\n"
 operator|+
-literal|"\t\t3\t</Property>\n"
+literal|"\t\t3\n"
+operator|+
+literal|"\t</Property>\n"
 operator|+
 literal|"\t<Inputs>\n"
 operator|+
@@ -7340,7 +7344,9 @@ literal|"\t\t<RelNode type=\"LogicalValues\">\n"
 operator|+
 literal|"\t\t\t<Property name=\"tuples\">\n"
 operator|+
-literal|"\t\t\t\t[{ true }]\t\t\t</Property>\n"
+literal|"\t\t\t\t[{ true }]\n"
+operator|+
+literal|"\t\t\t</Property>\n"
 operator|+
 literal|"\t\t\t<Inputs/>\n"
 operator|+

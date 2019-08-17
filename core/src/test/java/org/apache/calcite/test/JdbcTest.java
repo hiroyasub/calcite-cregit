@@ -20706,7 +20706,9 @@ literal|"PLAN=<RelNode type=\"EnumerableValues\">\n"
 operator|+
 literal|"\t<Property name=\"tuples\">\n"
 operator|+
-literal|"\t\t[{ 1,&#39;ab&#39; }]\t</Property>\n"
+literal|"\t\t[{ 1,&#39;ab&#39; }]\n"
+operator|+
+literal|"\t</Property>\n"
 operator|+
 literal|"\t<Inputs/>\n"
 operator|+
