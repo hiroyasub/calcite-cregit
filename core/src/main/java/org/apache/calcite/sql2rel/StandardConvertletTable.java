@@ -3480,7 +3480,10 @@ name|dataType
 operator|.
 name|deriveType
 argument_list|(
-name|typeFactory
+name|cx
+operator|.
+name|getValidator
+argument_list|()
 argument_list|)
 decl_stmt|;
 if|if

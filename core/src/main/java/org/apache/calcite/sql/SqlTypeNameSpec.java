@@ -39,22 +39,6 @@ name|apache
 operator|.
 name|calcite
 operator|.
-name|rel
-operator|.
-name|type
-operator|.
-name|RelDataTypeFactory
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
 name|sql
 operator|.
 name|parser
@@ -94,7 +78,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * A<code>SqlTypeNameSpec</code> is a type name specification that allows user to  * customize sql node unparsing and data type deriving.  *  *<p>To customize sql node unparsing, override the method  * {@link #unparse(SqlWriter, int, int)}.  *<p>To customize data type deriving, override the method  * {@link #deriveType(RelDataTypeFactory)}.  */
+comment|/**  * A<code>SqlTypeNameSpec</code> is a type name specification that allows user to  * customize sql node unparsing and data type deriving.  *  *<p>To customize sql node unparsing, override the method  * {@link #unparse(SqlWriter, int, int)}.  *<p>To customize data type deriving, override the method  * {@link #deriveType(SqlValidator)}.  */
 end_comment
 
 begin_class
@@ -136,16 +120,6 @@ operator|=
 name|pos
 expr_stmt|;
 block|}
-comment|/**    * Derive type from this SqlTypeNameSpec.    *    * @param typeFactory Type factory.    * @return the {@code RelDataType} instance, or null if the SqlTypeNameSpec is not a    *         builtin sql type name.    */
-specifier|public
-specifier|abstract
-name|RelDataType
-name|deriveType
-parameter_list|(
-name|RelDataTypeFactory
-name|typeFactory
-parameter_list|)
-function_decl|;
 comment|/**    * Derive type from this SqlTypeNameSpec.    *    * @param validator The sql validator.    * @return the {@code RelDataType} instance, throws exception if we could not    *         deduce the type.    */
 specifier|public
 specifier|abstract

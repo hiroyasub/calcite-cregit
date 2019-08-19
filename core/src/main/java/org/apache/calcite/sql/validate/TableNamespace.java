@@ -530,9 +530,6 @@ operator|.
 name|getExtendedColumns
 argument_list|(
 name|validator
-operator|.
-name|getTypeFactory
-argument_list|()
 argument_list|,
 name|getTable
 argument_list|()
@@ -568,10 +565,6 @@ argument_list|)
 decl_stmt|;
 if|if
 condition|(
-name|schemaTable
-operator|!=
-literal|null
-operator|&&
 name|table
 operator|instanceof
 name|RelOptTable
@@ -740,9 +733,6 @@ operator|.
 name|getExtendedColumns
 argument_list|(
 name|validator
-operator|.
-name|getTypeFactory
-argument_list|()
 argument_list|,
 name|table
 argument_list|,

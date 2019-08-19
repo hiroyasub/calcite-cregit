@@ -73,7 +73,7 @@ name|calcite
 operator|.
 name|jdbc
 operator|.
-name|JavaTypeFactoryImpl
+name|ContextSqlValidator
 import|;
 end_import
 
@@ -410,6 +410,22 @@ operator|.
 name|parser
 operator|.
 name|SqlParserPos
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|validate
+operator|.
+name|SqlValidator
 import|;
 end_import
 
@@ -866,8 +882,9 @@ specifier|final
 name|JavaTypeFactory
 name|typeFactory
 init|=
-operator|new
-name|JavaTypeFactoryImpl
+name|context
+operator|.
+name|getTypeFactory
 argument_list|()
 decl_stmt|;
 specifier|final
@@ -880,6 +897,18 @@ name|typeFactory
 operator|.
 name|builder
 argument_list|()
+decl_stmt|;
+specifier|final
+name|SqlValidator
+name|validator
+init|=
+operator|new
+name|ContextSqlValidator
+argument_list|(
+name|context
+argument_list|,
+literal|false
+argument_list|)
 decl_stmt|;
 for|for
 control|(
@@ -912,7 +941,7 @@ name|right
 operator|.
 name|deriveType
 argument_list|(
-name|typeFactory
+name|validator
 argument_list|,
 literal|true
 argument_list|)

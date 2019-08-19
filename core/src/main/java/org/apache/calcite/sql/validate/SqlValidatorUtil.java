@@ -851,15 +851,6 @@ name|getTable
 argument_list|()
 decl_stmt|;
 specifier|final
-name|RelDataTypeFactory
-name|typeFactory
-init|=
-name|catalogReader
-operator|.
-name|getTypeFactory
-argument_list|()
-decl_stmt|;
-specifier|final
 name|List
 argument_list|<
 name|RelDataTypeField
@@ -879,7 +870,10 @@ argument_list|()
 else|:
 name|getExtendedColumns
 argument_list|(
-name|typeFactory
+name|namespace
+operator|.
+name|getValidator
+argument_list|()
 argument_list|,
 name|validatorTable
 argument_list|,
@@ -1032,8 +1026,8 @@ name|RelDataTypeField
 argument_list|>
 name|getExtendedColumns
 parameter_list|(
-name|RelDataTypeFactory
-name|typeFactory
+name|SqlValidator
+name|validator
 parameter_list|,
 name|SqlValidatorTable
 name|table
@@ -1141,7 +1135,7 @@ name|type
 operator|.
 name|deriveType
 argument_list|(
-name|typeFactory
+name|validator
 argument_list|)
 argument_list|)
 argument_list|)

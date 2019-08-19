@@ -12592,9 +12592,6 @@ operator|.
 name|getExtendedColumns
 argument_list|(
 name|validator
-operator|.
-name|getTypeFactory
-argument_list|()
 argument_list|,
 name|validatorTable
 argument_list|,

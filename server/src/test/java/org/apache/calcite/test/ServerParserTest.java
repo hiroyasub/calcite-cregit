@@ -487,6 +487,48 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testCreateTableWithUDT
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"create table if not exists t (\n"
+operator|+
+literal|"  f0 MyType0 not null,\n"
+operator|+
+literal|"  f1 db_name.MyType1,\n"
+operator|+
+literal|"  f2 catalog_name.db_name.MyType2)"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"CREATE TABLE IF NOT EXISTS `T` ("
+operator|+
+literal|"`F0` `MYTYPE0` NOT NULL,"
+operator|+
+literal|" `F1` `DB_NAME`.`MYTYPE1`,"
+operator|+
+literal|" `F2` `CATALOG_NAME`.`DB_NAME`.`MYTYPE2`)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testCreateView
 parameter_list|()
 block|{
