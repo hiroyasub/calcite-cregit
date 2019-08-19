@@ -826,7 +826,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Substitutes part of a tree of relational expressions with another tree.  *  *<p>The call {@code new SubstitutionVisitor(target, query).go(replacement))}  * will return {@code query} with every occurrence of {@code target} replaced  * by {@code replacement}.</p>  *  *<p>The following example shows how {@code SubstitutionVisitor} can be used  * for materialized view recognition.</p>  *  *<ul>  *<li>query = SELECT a, c FROM t WHERE x = 5 AND b = 4</li>  *<li>target = SELECT a, b, c FROM t WHERE x = 5</li>  *<li>replacement = SELECT * FROM mv</li>  *<li>result = SELECT a, c FROM mv WHERE b = 4</li>  *</ul>  *  *<p>Note that {@code result} uses the materialized view table {@code mv} and a  * simplified condition {@code b = 4}.</p>  *  *<p>Uses a bottom-up matching algorithm. Nodes do not need to be identical.  * At each level, returns the residue.</p>  *  *<p>The inputs must only include the core relational operators:  * {@link org.apache.calcite.rel.logical.LogicalTableScan},  * {@link org.apache.calcite.rel.logical.LogicalFilter},  * {@link org.apache.calcite.rel.logical.LogicalProject},  * {@link org.apache.calcite.rel.logical.LogicalJoin},  * {@link org.apache.calcite.rel.logical.LogicalUnion},  * {@link org.apache.calcite.rel.logical.LogicalAggregate}.</p>  */
+comment|/**  * Substitutes part of a tree of relational expressions with another tree.  *  *<p>The call {@code new SubstitutionVisitor(target, query).go(replacement))}  * will return {@code query} with every occurrence of {@code target} replaced  * by {@code replacement}.</p>  *  *<p>The following example shows how {@code SubstitutionVisitor} can be used  * for materialized view recognition.</p>  *  *<ul>  *<li>query = SELECT a, c FROM t WHERE x = 5 AND b = 4</li>  *<li>target = SELECT a, b, c FROM t WHERE x = 5</li>  *<li>replacement = SELECT * FROM mv</li>  *<li>result = SELECT a, c FROM mv WHERE b = 4</li>  *</ul>  *  *<p>Note that {@code result} uses the materialized view table {@code mv} and a  * simplified condition {@code b = 4}.</p>  *  *<p>Uses a bottom-up matching algorithm. Nodes do not need to be identical.  * At each level, returns the residue.</p>  *  *<p>The inputs must only include the core relational operators:  * {@link org.apache.calcite.rel.core.TableScan},  * {@link org.apache.calcite.rel.core.Filter},  * {@link org.apache.calcite.rel.core.Project},  * {@link org.apache.calcite.rel.core.Join},  * {@link org.apache.calcite.rel.core.Union},  * {@link org.apache.calcite.rel.core.Aggregate}.</p>  */
 end_comment
 
 begin_class
@@ -4740,7 +4740,7 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/** Implementation of {@link UnifyRule} that matches if the query is already    * equal to the target.    *    *<p>Matches scans to the same table, because these will be    * {@link MutableScan}s with the same    * {@link org.apache.calcite.rel.logical.LogicalTableScan} instance.</p>    */
+comment|/** Implementation of {@link UnifyRule} that matches if the query is already    * equal to the target.    *    *<p>Matches scans to the same table, because these will be    * {@link MutableScan}s with the same    * {@link org.apache.calcite.rel.core.TableScan} instance.</p>    */
 specifier|private
 specifier|static
 class|class
@@ -4820,7 +4820,7 @@ literal|null
 return|;
 block|}
 block|}
-comment|/** Implementation of {@link UnifyRule} that matches    * {@link org.apache.calcite.rel.logical.LogicalTableScan}. */
+comment|/** Implementation of {@link UnifyRule} that matches    * {@link org.apache.calcite.rel.core.TableScan}. */
 specifier|private
 specifier|static
 class|class
@@ -5013,7 +5013,7 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/** Implementation of {@link UnifyRule} that matches    * {@link org.apache.calcite.rel.logical.LogicalProject}. */
+comment|/** Implementation of {@link UnifyRule} that matches    * {@link org.apache.calcite.rel.core.Project}. */
 specifier|private
 specifier|static
 class|class
@@ -6116,7 +6116,7 @@ literal|null
 return|;
 block|}
 block|}
-comment|/** Implementation of {@link UnifyRule} that matches a    * {@link org.apache.calcite.rel.logical.LogicalAggregate} to a    * {@link org.apache.calcite.rel.logical.LogicalAggregate}, provided    * that they have the same child. */
+comment|/** Implementation of {@link UnifyRule} that matches a    * {@link org.apache.calcite.rel.core.Aggregate} to a    * {@link org.apache.calcite.rel.core.Aggregate}, provided    * that they have the same child. */
 specifier|private
 specifier|static
 class|class
