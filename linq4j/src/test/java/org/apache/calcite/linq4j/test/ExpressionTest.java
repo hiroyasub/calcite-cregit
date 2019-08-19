@@ -496,7 +496,408 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testLambdaCallsBinaryOp
+name|testLambdaCallsBinaryOpInt
+parameter_list|()
+block|{
+comment|// A parameter for the lambda expression.
+name|ParameterExpression
+name|paramExpr
+init|=
+name|Expressions
+operator|.
+name|parameter
+argument_list|(
+name|Integer
+operator|.
+name|TYPE
+argument_list|,
+literal|"arg"
+argument_list|)
+decl_stmt|;
+comment|// This expression represents a lambda expression
+comment|// that adds 1 to the parameter value.
+name|FunctionExpression
+name|lambdaExpr
+init|=
+name|Expressions
+operator|.
+name|lambda
+argument_list|(
+name|Expressions
+operator|.
+name|add
+argument_list|(
+name|paramExpr
+argument_list|,
+name|Expressions
+operator|.
+name|constant
+argument_list|(
+literal|2
+argument_list|)
+argument_list|)
+argument_list|,
+name|Arrays
+operator|.
+name|asList
+argument_list|(
+name|paramExpr
+argument_list|)
+argument_list|)
+decl_stmt|;
+comment|// Print out the expression.
+name|String
+name|s
+init|=
+name|Expressions
+operator|.
+name|toString
+argument_list|(
+name|lambdaExpr
+argument_list|)
+decl_stmt|;
+name|assertEquals
+argument_list|(
+literal|"new org.apache.calcite.linq4j.function.Function1() {\n"
+operator|+
+literal|"  public int apply(int arg) {\n"
+operator|+
+literal|"    return arg + 2;\n"
+operator|+
+literal|"  }\n"
+operator|+
+literal|"  public Object apply(Integer arg) {\n"
+operator|+
+literal|"    return apply(\n"
+operator|+
+literal|"      arg.intValue());\n"
+operator|+
+literal|"  }\n"
+operator|+
+literal|"  public Object apply(Object arg) {\n"
+operator|+
+literal|"    return apply(\n"
+operator|+
+literal|"      (Integer) arg);\n"
+operator|+
+literal|"  }\n"
+operator|+
+literal|"}\n"
+argument_list|,
+name|s
+argument_list|)
+expr_stmt|;
+comment|// Compile and run the lambda expression.
+comment|// The value of the parameter is 1
+name|Integer
+name|n
+init|=
+operator|(
+name|Integer
+operator|)
+name|lambdaExpr
+operator|.
+name|compile
+argument_list|()
+operator|.
+name|dynamicInvoke
+argument_list|(
+literal|1
+argument_list|)
+decl_stmt|;
+comment|// This code example produces the following output:
+comment|//
+comment|// arg => (arg +2)
+comment|// 3
+name|assertEquals
+argument_list|(
+literal|3
+argument_list|,
+name|n
+argument_list|,
+literal|0
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testLambdaCallsBinaryOpShort
+parameter_list|()
+block|{
+comment|// A parameter for the lambda expression.
+name|ParameterExpression
+name|paramExpr
+init|=
+name|Expressions
+operator|.
+name|parameter
+argument_list|(
+name|Short
+operator|.
+name|TYPE
+argument_list|,
+literal|"arg"
+argument_list|)
+decl_stmt|;
+comment|// This expression represents a lambda expression
+comment|// that adds 1 to the parameter value.
+name|Short
+name|a
+init|=
+literal|2
+decl_stmt|;
+name|FunctionExpression
+name|lambdaExpr
+init|=
+name|Expressions
+operator|.
+name|lambda
+argument_list|(
+name|Expressions
+operator|.
+name|add
+argument_list|(
+name|paramExpr
+argument_list|,
+name|Expressions
+operator|.
+name|constant
+argument_list|(
+name|a
+argument_list|)
+argument_list|)
+argument_list|,
+name|Arrays
+operator|.
+name|asList
+argument_list|(
+name|paramExpr
+argument_list|)
+argument_list|)
+decl_stmt|;
+comment|// Print out the expression.
+name|String
+name|s
+init|=
+name|Expressions
+operator|.
+name|toString
+argument_list|(
+name|lambdaExpr
+argument_list|)
+decl_stmt|;
+name|assertEquals
+argument_list|(
+literal|"new org.apache.calcite.linq4j.function.Function1() {\n"
+operator|+
+literal|"  public int apply(short arg) {\n"
+operator|+
+literal|"    return arg + (short)2;\n"
+operator|+
+literal|"  }\n"
+operator|+
+literal|"  public Object apply(Short arg) {\n"
+operator|+
+literal|"    return apply(\n"
+operator|+
+literal|"      arg.shortValue());\n"
+operator|+
+literal|"  }\n"
+operator|+
+literal|"  public Object apply(Object arg) {\n"
+operator|+
+literal|"    return apply(\n"
+operator|+
+literal|"      (Short) arg);\n"
+operator|+
+literal|"  }\n"
+operator|+
+literal|"}\n"
+argument_list|,
+name|s
+argument_list|)
+expr_stmt|;
+comment|// Compile and run the lambda expression.
+comment|// The value of the parameter is 1.
+name|Short
+name|b
+init|=
+literal|1
+decl_stmt|;
+name|Integer
+name|n
+init|=
+operator|(
+name|Integer
+operator|)
+name|lambdaExpr
+operator|.
+name|compile
+argument_list|()
+operator|.
+name|dynamicInvoke
+argument_list|(
+name|b
+argument_list|)
+decl_stmt|;
+comment|// This code example produces the following output:
+comment|//
+comment|// arg => (arg +2)
+comment|// 3
+name|assertEquals
+argument_list|(
+literal|3
+argument_list|,
+name|n
+argument_list|,
+literal|0
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testLambdaCallsBinaryOpByte
+parameter_list|()
+block|{
+comment|// A parameter for the lambda expression.
+name|ParameterExpression
+name|paramExpr
+init|=
+name|Expressions
+operator|.
+name|parameter
+argument_list|(
+name|Byte
+operator|.
+name|TYPE
+argument_list|,
+literal|"arg"
+argument_list|)
+decl_stmt|;
+comment|// This expression represents a lambda expression
+comment|// that adds 1 to the parameter value.
+name|FunctionExpression
+name|lambdaExpr
+init|=
+name|Expressions
+operator|.
+name|lambda
+argument_list|(
+name|Expressions
+operator|.
+name|add
+argument_list|(
+name|paramExpr
+argument_list|,
+name|Expressions
+operator|.
+name|constant
+argument_list|(
+name|Byte
+operator|.
+name|valueOf
+argument_list|(
+literal|"2"
+argument_list|)
+argument_list|)
+argument_list|)
+argument_list|,
+name|Arrays
+operator|.
+name|asList
+argument_list|(
+name|paramExpr
+argument_list|)
+argument_list|)
+decl_stmt|;
+comment|// Print out the expression.
+name|String
+name|s
+init|=
+name|Expressions
+operator|.
+name|toString
+argument_list|(
+name|lambdaExpr
+argument_list|)
+decl_stmt|;
+name|assertEquals
+argument_list|(
+literal|"new org.apache.calcite.linq4j.function.Function1() {\n"
+operator|+
+literal|"  public int apply(byte arg) {\n"
+operator|+
+literal|"    return arg + (byte)2;\n"
+operator|+
+literal|"  }\n"
+operator|+
+literal|"  public Object apply(Byte arg) {\n"
+operator|+
+literal|"    return apply(\n"
+operator|+
+literal|"      arg.byteValue());\n"
+operator|+
+literal|"  }\n"
+operator|+
+literal|"  public Object apply(Object arg) {\n"
+operator|+
+literal|"    return apply(\n"
+operator|+
+literal|"      (Byte) arg);\n"
+operator|+
+literal|"  }\n"
+operator|+
+literal|"}\n"
+argument_list|,
+name|s
+argument_list|)
+expr_stmt|;
+comment|// Compile and run the lambda expression.
+comment|// The value of the parameter is 1.
+name|Integer
+name|n
+init|=
+operator|(
+name|Integer
+operator|)
+name|lambdaExpr
+operator|.
+name|compile
+argument_list|()
+operator|.
+name|dynamicInvoke
+argument_list|(
+name|Byte
+operator|.
+name|valueOf
+argument_list|(
+literal|"1"
+argument_list|)
+argument_list|)
+decl_stmt|;
+comment|// This code example produces the following output:
+comment|//
+comment|// arg => (arg +2)
+comment|// 3
+name|assertEquals
+argument_list|(
+literal|3
+argument_list|,
+name|n
+argument_list|,
+literal|0
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testLambdaCallsBinaryOpDouble
 parameter_list|()
 block|{
 comment|// A parameter for the lambda expression.
@@ -608,7 +1009,7 @@ decl_stmt|;
 comment|// This code example produces the following output:
 comment|//
 comment|// arg => (arg +2)
-comment|// 3
+comment|// 3.5
 name|assertEquals
 argument_list|(
 literal|3.5D
@@ -616,6 +1017,260 @@ argument_list|,
 name|n
 argument_list|,
 literal|0d
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testLambdaCallsBinaryOpLong
+parameter_list|()
+block|{
+comment|// A parameter for the lambda expression.
+name|ParameterExpression
+name|paramExpr
+init|=
+name|Expressions
+operator|.
+name|parameter
+argument_list|(
+name|Long
+operator|.
+name|TYPE
+argument_list|,
+literal|"arg"
+argument_list|)
+decl_stmt|;
+comment|// This expression represents a lambda expression
+comment|// that adds 1L to the parameter value.
+name|FunctionExpression
+name|lambdaExpr
+init|=
+name|Expressions
+operator|.
+name|lambda
+argument_list|(
+name|Expressions
+operator|.
+name|add
+argument_list|(
+name|paramExpr
+argument_list|,
+name|Expressions
+operator|.
+name|constant
+argument_list|(
+literal|2L
+argument_list|)
+argument_list|)
+argument_list|,
+name|Arrays
+operator|.
+name|asList
+argument_list|(
+name|paramExpr
+argument_list|)
+argument_list|)
+decl_stmt|;
+comment|// Print out the expression.
+name|String
+name|s
+init|=
+name|Expressions
+operator|.
+name|toString
+argument_list|(
+name|lambdaExpr
+argument_list|)
+decl_stmt|;
+name|assertEquals
+argument_list|(
+literal|"new org.apache.calcite.linq4j.function.Function1() {\n"
+operator|+
+literal|"  public long apply(long arg) {\n"
+operator|+
+literal|"    return arg + 2L;\n"
+operator|+
+literal|"  }\n"
+operator|+
+literal|"  public Object apply(Long arg) {\n"
+operator|+
+literal|"    return apply(\n"
+operator|+
+literal|"      arg.longValue());\n"
+operator|+
+literal|"  }\n"
+operator|+
+literal|"  public Object apply(Object arg) {\n"
+operator|+
+literal|"    return apply(\n"
+operator|+
+literal|"      (Long) arg);\n"
+operator|+
+literal|"  }\n"
+operator|+
+literal|"}\n"
+argument_list|,
+name|s
+argument_list|)
+expr_stmt|;
+comment|// Compile and run the lambda expression.
+comment|// The value of the parameter is 1L.
+name|long
+name|n
+init|=
+operator|(
+name|Long
+operator|)
+name|lambdaExpr
+operator|.
+name|compile
+argument_list|()
+operator|.
+name|dynamicInvoke
+argument_list|(
+literal|1L
+argument_list|)
+decl_stmt|;
+comment|// This code example produces the following output:
+comment|//
+comment|// arg => (arg +2)
+comment|// 3
+name|assertEquals
+argument_list|(
+literal|3L
+argument_list|,
+name|n
+argument_list|,
+literal|0d
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testLambdaCallsBinaryOpFloat
+parameter_list|()
+block|{
+comment|// A parameter for the lambda expression.
+name|ParameterExpression
+name|paramExpr
+init|=
+name|Expressions
+operator|.
+name|parameter
+argument_list|(
+name|Float
+operator|.
+name|TYPE
+argument_list|,
+literal|"arg"
+argument_list|)
+decl_stmt|;
+comment|// This expression represents a lambda expression
+comment|// that adds 1f to the parameter value.
+name|FunctionExpression
+name|lambdaExpr
+init|=
+name|Expressions
+operator|.
+name|lambda
+argument_list|(
+name|Expressions
+operator|.
+name|add
+argument_list|(
+name|paramExpr
+argument_list|,
+name|Expressions
+operator|.
+name|constant
+argument_list|(
+literal|2.0f
+argument_list|)
+argument_list|)
+argument_list|,
+name|Arrays
+operator|.
+name|asList
+argument_list|(
+name|paramExpr
+argument_list|)
+argument_list|)
+decl_stmt|;
+comment|// Print out the expression.
+name|String
+name|s
+init|=
+name|Expressions
+operator|.
+name|toString
+argument_list|(
+name|lambdaExpr
+argument_list|)
+decl_stmt|;
+name|assertEquals
+argument_list|(
+literal|"new org.apache.calcite.linq4j.function.Function1() {\n"
+operator|+
+literal|"  public float apply(float arg) {\n"
+operator|+
+literal|"    return arg + 2.0F;\n"
+operator|+
+literal|"  }\n"
+operator|+
+literal|"  public Object apply(Float arg) {\n"
+operator|+
+literal|"    return apply(\n"
+operator|+
+literal|"      arg.floatValue());\n"
+operator|+
+literal|"  }\n"
+operator|+
+literal|"  public Object apply(Object arg) {\n"
+operator|+
+literal|"    return apply(\n"
+operator|+
+literal|"      (Float) arg);\n"
+operator|+
+literal|"  }\n"
+operator|+
+literal|"}\n"
+argument_list|,
+name|s
+argument_list|)
+expr_stmt|;
+comment|// Compile and run the lambda expression.
+comment|// The value of the parameter is 1f
+name|float
+name|n
+init|=
+operator|(
+name|Float
+operator|)
+name|lambdaExpr
+operator|.
+name|compile
+argument_list|()
+operator|.
+name|dynamicInvoke
+argument_list|(
+literal|1f
+argument_list|)
+decl_stmt|;
+comment|// This code example produces the following output:
+comment|//
+comment|// arg => (arg +2)
+comment|// 3.0
+name|assertEquals
+argument_list|(
+literal|3.0f
+argument_list|,
+name|n
+argument_list|,
+literal|0f
 argument_list|)
 expr_stmt|;
 block|}
@@ -3326,42 +3981,6 @@ name|void
 name|testWriteTryFinally
 parameter_list|()
 block|{
-specifier|final
-name|ParameterExpression
-name|cce_
-init|=
-name|Expressions
-operator|.
-name|parameter
-argument_list|(
-name|Modifier
-operator|.
-name|FINAL
-argument_list|,
-name|ClassCastException
-operator|.
-name|class
-argument_list|,
-literal|"cce"
-argument_list|)
-decl_stmt|;
-specifier|final
-name|ParameterExpression
-name|re_
-init|=
-name|Expressions
-operator|.
-name|parameter
-argument_list|(
-literal|0
-argument_list|,
-name|RuntimeException
-operator|.
-name|class
-argument_list|,
-literal|"re"
-argument_list|)
-decl_stmt|;
 name|Node
 name|node
 init|=
