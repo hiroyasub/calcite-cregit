@@ -13782,6 +13782,314 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testSelectNull
+parameter_list|()
+block|{
+name|String
+name|query
+init|=
+literal|"SELECT CAST(NULL AS INT)"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT CAST(NULL AS INTEGER)\n"
+operator|+
+literal|"FROM (VALUES  (0)) AS \"t\" (\"ZERO\")"
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+comment|// validate
+name|sql
+argument_list|(
+name|expected
+argument_list|)
+operator|.
+name|exec
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSelectNullWithCount
+parameter_list|()
+block|{
+name|String
+name|query
+init|=
+literal|"SELECT COUNT(CAST(NULL AS INT))"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT COUNT(CAST(NULL AS INTEGER))\n"
+operator|+
+literal|"FROM (VALUES  (0)) AS \"t\" (\"ZERO\")"
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+comment|// validate
+name|sql
+argument_list|(
+name|expected
+argument_list|)
+operator|.
+name|exec
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSelectNullWithGroupByNull
+parameter_list|()
+block|{
+name|String
+name|query
+init|=
+literal|"SELECT COUNT(CAST(NULL AS INT)) FROM (VALUES  (0))\n"
+operator|+
+literal|"AS \"t\" GROUP BY CAST(NULL AS VARCHAR CHARACTER SET \"ISO-8859-1\")"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT COUNT(CAST(NULL AS INTEGER))\n"
+operator|+
+literal|"FROM (VALUES  (0)) AS \"t\" (\"EXPR$0\")\nGROUP BY CAST(NULL "
+operator|+
+literal|"AS VARCHAR CHARACTER SET \"ISO-8859-1\")"
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+comment|// validate
+name|sql
+argument_list|(
+name|expected
+argument_list|)
+operator|.
+name|exec
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSelectNullWithGroupByVar
+parameter_list|()
+block|{
+name|String
+name|query
+init|=
+literal|"SELECT COUNT(CAST(NULL AS INT)) FROM \"account\"\n"
+operator|+
+literal|"AS \"t\" GROUP BY \"account_type\""
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT COUNT(CAST(NULL AS INTEGER))\n"
+operator|+
+literal|"FROM \"foodmart\".\"account\"\n"
+operator|+
+literal|"GROUP BY \"account_type\""
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+comment|// validate
+name|sql
+argument_list|(
+name|expected
+argument_list|)
+operator|.
+name|exec
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSelectNullWithInsert
+parameter_list|()
+block|{
+name|String
+name|query
+init|=
+literal|"insert into\n"
+operator|+
+literal|"\"account\"(\"account_id\",\"account_parent\",\"account_type\",\"account_rollup\")\n"
+operator|+
+literal|"select 1, cast(NULL AS INT), cast(123 as varchar), cast(123 as varchar)"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"INSERT INTO \"foodmart\".\"account\" ("
+operator|+
+literal|"\"account_id\", \"account_parent\", \"account_description\", "
+operator|+
+literal|"\"account_type\", \"account_rollup\", \"Custom_Members\")\n"
+operator|+
+literal|"(SELECT 1 AS \"account_id\", CAST(NULL AS INTEGER) AS \"account_parent\","
+operator|+
+literal|" CAST(NULL AS VARCHAR(30) CHARACTER SET "
+operator|+
+literal|"\"ISO-8859-1\") AS \"account_description\", '123' AS \"account_type\", "
+operator|+
+literal|"'123' AS \"account_rollup\", CAST(NULL AS VARCHAR"
+operator|+
+literal|"(255) CHARACTER SET \"ISO-8859-1\") AS \"Custom_Members\"\n"
+operator|+
+literal|"FROM (VALUES  (0)) AS \"t\" (\"ZERO\"))"
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+comment|// validate
+name|sql
+argument_list|(
+name|expected
+argument_list|)
+operator|.
+name|exec
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSelectNullWithInsertFromJoin
+parameter_list|()
+block|{
+name|String
+name|query
+init|=
+literal|"insert into \n"
+operator|+
+literal|"\"account\"(\"account_id\",\"account_parent\",\n"
+operator|+
+literal|"\"account_type\",\"account_rollup\")\n"
+operator|+
+literal|"select \"product\".\"product_id\", \n"
+operator|+
+literal|"cast(NULL AS INT),\n"
+operator|+
+literal|"cast(\"product\".\"product_id\" as varchar),\n"
+operator|+
+literal|"cast(\"sales_fact_1997\".\"store_id\" as varchar)\n"
+operator|+
+literal|"from \"product\"\n"
+operator|+
+literal|"inner join \"sales_fact_1997\"\n"
+operator|+
+literal|"on \"product\".\"product_id\" = \"sales_fact_1997\".\"product_id\""
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"INSERT INTO \"foodmart\".\"account\" "
+operator|+
+literal|"(\"account_id\", \"account_parent\", \"account_description\", "
+operator|+
+literal|"\"account_type\", \"account_rollup\", \"Custom_Members\")\n"
+operator|+
+literal|"(SELECT \"product\".\"product_id\" AS \"account_id\", "
+operator|+
+literal|"CAST(NULL AS INTEGER) AS \"account_parent\", CAST(NULL AS VARCHAR"
+operator|+
+literal|"(30) CHARACTER SET \"ISO-8859-1\") AS \"account_description\", "
+operator|+
+literal|"CAST(\"product\".\"product_id\" AS VARCHAR CHARACTER SET "
+operator|+
+literal|"\"ISO-8859-1\") AS \"account_type\", "
+operator|+
+literal|"CAST(\"sales_fact_1997\".\"store_id\" AS VARCHAR CHARACTER SET \"ISO-8859-1\") AS "
+operator|+
+literal|"\"account_rollup\", "
+operator|+
+literal|"CAST(NULL AS VARCHAR(255) CHARACTER SET \"ISO-8859-1\") AS \"Custom_Members\"\n"
+operator|+
+literal|"FROM \"foodmart\".\"product\"\n"
+operator|+
+literal|"INNER JOIN \"foodmart\".\"sales_fact_1997\" "
+operator|+
+literal|"ON \"product\".\"product_id\" = \"sales_fact_1997\".\"product_id\")"
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+comment|// validate
+name|sql
+argument_list|(
+name|expected
+argument_list|)
+operator|.
+name|exec
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testDialectQuoteStringLiteral
 parameter_list|()
 block|{
