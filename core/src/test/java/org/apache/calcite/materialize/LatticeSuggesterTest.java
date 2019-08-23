@@ -185,6 +185,20 @@ name|apache
 operator|.
 name|calcite
 operator|.
+name|statistic
+operator|.
+name|QuerySqlStatisticProvider
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
 name|test
 operator|.
 name|CalciteAssert
@@ -3444,6 +3458,297 @@ argument_list|,
 name|is
 argument_list|(
 literal|1
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** A tricky case involving a CTE (WITH), a join condition that references an    * expression, a complex WHERE clause, and some other queries. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testJoinUsingExpression
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+specifier|final
+name|Tester
+name|t
+init|=
+operator|new
+name|Tester
+argument_list|()
+operator|.
+name|foodmart
+argument_list|()
+operator|.
+name|withEvolve
+argument_list|(
+literal|true
+argument_list|)
+decl_stmt|;
+specifier|final
+name|String
+name|q0
+init|=
+literal|"with c as (select\n"
+operator|+
+literal|"    \"customer_id\" + 1 as \"customer_id\",\n"
+operator|+
+literal|"    \"fname\"\n"
+operator|+
+literal|"  from \"customer\")\n"
+operator|+
+literal|"select\n"
+operator|+
+literal|"  COUNT(distinct c.\"customer_id\") as \"customer.count\"\n"
+operator|+
+literal|"from c\n"
+operator|+
+literal|"left join \"sales_fact_1997\" using (\"customer_id\")\n"
+operator|+
+literal|"where case\n"
+operator|+
+literal|"  when lower(substring(\"fname\", 11, 1)) in (0, 1)\n"
+operator|+
+literal|"    then 'Amy Adams'\n"
+operator|+
+literal|"  when lower(substring(\"fname\", 11, 1)) in (2, 3)\n"
+operator|+
+literal|"    then 'Barry Manilow'\n"
+operator|+
+literal|"  when lower(substring(\"fname\", 11, 1)) in ('y', 'z')\n"
+operator|+
+literal|"   then 'Yvonne Zane'\n"
+operator|+
+literal|"  end = 'Barry Manilow'\n"
+operator|+
+literal|"LIMIT 500"
+decl_stmt|;
+specifier|final
+name|String
+name|q1
+init|=
+literal|"select * from \"customer\""
+decl_stmt|;
+specifier|final
+name|String
+name|q2
+init|=
+literal|"select sum(\"product_id\") from \"product\""
+decl_stmt|;
+comment|// similar to q0, but "c" is a sub-select rather than CTE
+specifier|final
+name|String
+name|q4
+init|=
+literal|"select\n"
+operator|+
+literal|"  COUNT(distinct c.\"customer_id\") as \"customer.count\"\n"
+operator|+
+literal|"from (select \"customer_id\" + 1 as \"customer_id\", \"fname\"\n"
+operator|+
+literal|"  from \"customer\") as c\n"
+operator|+
+literal|"left join \"sales_fact_1997\" using (\"customer_id\")\n"
+decl_stmt|;
+name|t
+operator|.
+name|addQuery
+argument_list|(
+name|q1
+argument_list|)
+expr_stmt|;
+name|t
+operator|.
+name|addQuery
+argument_list|(
+name|q0
+argument_list|)
+expr_stmt|;
+name|t
+operator|.
+name|addQuery
+argument_list|(
+name|q1
+argument_list|)
+expr_stmt|;
+name|t
+operator|.
+name|addQuery
+argument_list|(
+name|q4
+argument_list|)
+expr_stmt|;
+name|t
+operator|.
+name|addQuery
+argument_list|(
+name|q2
+argument_list|)
+expr_stmt|;
+name|assertThat
+argument_list|(
+name|t
+operator|.
+name|s
+operator|.
+name|latticeMap
+operator|.
+name|size
+argument_list|()
+argument_list|,
+name|is
+argument_list|(
+literal|3
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testDerivedColRef
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+specifier|final
+name|FrameworkConfig
+name|config
+init|=
+name|Frameworks
+operator|.
+name|newConfigBuilder
+argument_list|()
+operator|.
+name|defaultSchema
+argument_list|(
+name|Tester
+operator|.
+name|schemaFrom
+argument_list|(
+name|CalciteAssert
+operator|.
+name|SchemaSpec
+operator|.
+name|SCOTT
+argument_list|)
+argument_list|)
+operator|.
+name|statisticProvider
+argument_list|(
+name|QuerySqlStatisticProvider
+operator|.
+name|SILENT_CACHING_INSTANCE
+argument_list|)
+operator|.
+name|build
+argument_list|()
+decl_stmt|;
+specifier|final
+name|Tester
+name|t
+init|=
+operator|new
+name|Tester
+argument_list|(
+name|config
+argument_list|)
+operator|.
+name|foodmart
+argument_list|()
+operator|.
+name|withEvolve
+argument_list|(
+literal|true
+argument_list|)
+decl_stmt|;
+specifier|final
+name|String
+name|q0
+init|=
+literal|"select\n"
+operator|+
+literal|"  min(c.\"fname\") as \"customer.count\"\n"
+operator|+
+literal|"from \"customer\" as c\n"
+operator|+
+literal|"left join \"sales_fact_1997\" as s\n"
+operator|+
+literal|"on c.\"customer_id\" + 1 = s.\"customer_id\" + 2"
+decl_stmt|;
+name|t
+operator|.
+name|addQuery
+argument_list|(
+name|q0
+argument_list|)
+expr_stmt|;
+name|assertThat
+argument_list|(
+name|t
+operator|.
+name|s
+operator|.
+name|latticeMap
+operator|.
+name|size
+argument_list|()
+argument_list|,
+name|is
+argument_list|(
+literal|1
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|assertThat
+argument_list|(
+name|t
+operator|.
+name|s
+operator|.
+name|latticeMap
+operator|.
+name|keySet
+argument_list|()
+operator|.
+name|iterator
+argument_list|()
+operator|.
+name|next
+argument_list|()
+argument_list|,
+name|is
+argument_list|(
+literal|"sales_fact_1997 (customer:+($2, 2)):[MIN(customer.fname)]"
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|assertThat
+argument_list|(
+name|t
+operator|.
+name|s
+operator|.
+name|space
+operator|.
+name|g
+operator|.
+name|toString
+argument_list|()
+argument_list|,
+name|is
+argument_list|(
+literal|"graph(vertices: [[foodmart, customer],"
+operator|+
+literal|" [foodmart, sales_fact_1997]], "
+operator|+
+literal|"edges: [Step([foodmart, sales_fact_1997],"
+operator|+
+literal|" [foodmart, customer], +($2, 2):+($0, 1))])"
 argument_list|)
 argument_list|)
 expr_stmt|;

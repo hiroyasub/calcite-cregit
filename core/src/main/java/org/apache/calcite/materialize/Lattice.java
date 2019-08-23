@@ -5158,8 +5158,9 @@ specifier|final
 name|Step
 name|step
 init|=
-operator|new
 name|Step
+operator|.
+name|create
 argument_list|(
 name|edge
 operator|.
@@ -5178,6 +5179,8 @@ argument_list|,
 name|edge
 operator|.
 name|pairs
+argument_list|,
+name|space
 argument_list|)
 decl_stmt|;
 name|node

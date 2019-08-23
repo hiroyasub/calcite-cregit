@@ -58,7 +58,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Converts expressions from {@link RexNode} to {@link SqlNode}.  */
+comment|/**  * Converts expressions from {@link RexNode} to {@link SqlNode}.  *  *<p>For most purposes, {@link org.apache.calcite.rel.rel2sql.SqlImplementor}  * is superior. See in particular  * {@link org.apache.calcite.rel.rel2sql.SqlImplementor.Context#toSql(RexProgram, RexNode)}.  */
 end_comment
 
 begin_interface
