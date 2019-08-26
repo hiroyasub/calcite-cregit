@@ -6342,6 +6342,24 @@ comment|//   on emp.deptno = q.col1
 comment|//   where emp.deptno<> null
 comment|//         and q.indicator<> TRUE"
 comment|//
+comment|// Note:
+comment|// Subquery can be used as SqlUpdate#condition like below:
+comment|// "update emp
+comment|//  set empno = 1 where emp.empno in (
+comment|//   select emp.empno from emp where emp.empno=2)"
+comment|// In such case, when converting SqlUpdate#condition, bb.root is null
+comment|// and it makes no sense to do the subquery substituion.
+if|if
+condition|(
+name|bb
+operator|.
+name|root
+operator|==
+literal|null
+condition|)
+block|{
+return|return;
+block|}
 specifier|final
 name|RelDataType
 name|targetRowType

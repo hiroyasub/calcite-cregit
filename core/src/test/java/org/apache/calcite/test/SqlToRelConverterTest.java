@@ -8466,6 +8466,33 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3292">[CALCITE-3292]    * NPE for UPDATE with IN query</a>.    */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testUpdateSubQueryWithIn1
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"update emp\n"
+operator|+
+literal|"set empno = 1 where emp.empno in (\n"
+operator|+
+literal|"  select emp.empno from emp where emp.empno=2)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
 comment|/** Similar to {@link #testUpdateSubQueryWithIn()} but with not in instead of in. */
 annotation|@
 name|Test
