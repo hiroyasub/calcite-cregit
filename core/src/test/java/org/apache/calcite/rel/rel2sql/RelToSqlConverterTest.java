@@ -5000,6 +5000,150 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testHiveSubstring
+parameter_list|()
+block|{
+name|String
+name|query
+init|=
+literal|"SELECT SUBSTRING('ABC', 2)"
+operator|+
+literal|"from \"foodmart\".\"reserve_employee\""
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT SUBSTRING('ABC', 2)\n"
+operator|+
+literal|"FROM foodmart.reserve_employee"
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|withHive
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testHiveSubstringWithLength
+parameter_list|()
+block|{
+name|String
+name|query
+init|=
+literal|"SELECT SUBSTRING('ABC', 2, 3)"
+operator|+
+literal|"from \"foodmart\".\"reserve_employee\""
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT SUBSTRING('ABC', 2, 3)\n"
+operator|+
+literal|"FROM foodmart.reserve_employee"
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|withHive
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testHiveSubstringWithANSI
+parameter_list|()
+block|{
+name|String
+name|query
+init|=
+literal|"SELECT SUBSTRING('ABC' FROM 2)"
+operator|+
+literal|"from \"foodmart\".\"reserve_employee\""
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT SUBSTRING('ABC', 2)\n"
+operator|+
+literal|"FROM foodmart.reserve_employee"
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|withHive
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testHiveSubstringWithANSIAndLength
+parameter_list|()
+block|{
+name|String
+name|query
+init|=
+literal|"SELECT SUBSTRING('ABC' FROM 2 FOR 3)"
+operator|+
+literal|"from \"foodmart\".\"reserve_employee\""
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT SUBSTRING('ABC', 2, 3)\n"
+operator|+
+literal|"FROM foodmart.reserve_employee"
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|withHive
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testMysqlCastToBigint
 parameter_list|()
 block|{
