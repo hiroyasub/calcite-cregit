@@ -2685,7 +2685,8 @@ name|offset
 operator|==
 literal|null
 condition|?
-literal|0
+operator|-
+literal|1
 else|:
 name|RexLiteral
 operator|.
@@ -2706,7 +2707,8 @@ name|fetch
 operator|==
 literal|null
 condition|?
-literal|0
+operator|-
+literal|1
 else|:
 name|RexLiteral
 operator|.

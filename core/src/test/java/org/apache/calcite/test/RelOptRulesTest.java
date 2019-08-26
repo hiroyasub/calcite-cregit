@@ -29485,6 +29485,59 @@ block|}
 end_function
 
 begin_comment
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3296">[CALCITE-3296]    * Decorrelator gives empty result    * after decorrelating sort rel with null offset and fetch</a>    */
+end_comment
+
+begin_function
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testDecorrelationWithSort
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"SELECT e1.empno\n"
+operator|+
+literal|"FROM emp e1, dept d1 where e1.deptno = d1.deptno\n"
+operator|+
+literal|"and e1.deptno< 10 and d1.deptno< 15\n"
+operator|+
+literal|"and e1.sal> (select avg(sal) from emp e2 where e1.empno = e2.empno)\n"
+operator|+
+literal|"order by e1.empno"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|with
+argument_list|(
+name|HepProgram
+operator|.
+name|builder
+argument_list|()
+operator|.
+name|build
+argument_list|()
+argument_list|)
+operator|.
+name|withDecorrelation
+argument_list|(
+literal|true
+argument_list|)
+operator|.
+name|checkUnchanged
+argument_list|()
+expr_stmt|;
+block|}
+end_function
+
+begin_comment
 unit|}
 comment|// End RelOptRulesTest.java
 end_comment
