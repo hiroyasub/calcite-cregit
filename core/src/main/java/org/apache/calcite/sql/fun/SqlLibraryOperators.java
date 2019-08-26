@@ -946,6 +946,27 @@ operator|new
 name|SqlJsonStorageSizeFunction
 argument_list|()
 decl_stmt|;
+annotation|@
+name|LibraryOperator
+argument_list|(
+name|libraries
+operator|=
+block|{
+name|MYSQL
+block|,
+name|ORACLE
+block|}
+argument_list|)
+specifier|public
+specifier|static
+specifier|final
+name|SqlFunction
+name|REGEXP_REPLACE
+init|=
+operator|new
+name|SqlRegexpReplaceFunction
+argument_list|()
+decl_stmt|;
 comment|/** The "MONTHNAME(datetime)" function; returns the name of the month,    * in the current locale, of a TIMESTAMP or DATE argument. */
 annotation|@
 name|LibraryOperator
@@ -1270,7 +1291,7 @@ operator|.
 name|STRING
 argument_list|)
 decl_stmt|;
-comment|/** The "CONCAT(arg, ...)" function that concatenates strings.    * For example, "CONCACT('a', 'bc', 'd')" returns "abcd". */
+comment|/** The "CONCAT(arg, ...)" function that concatenates strings.    * For example, "CONCAT('a', 'bc', 'd')" returns "abcd". */
 annotation|@
 name|LibraryOperator
 argument_list|(

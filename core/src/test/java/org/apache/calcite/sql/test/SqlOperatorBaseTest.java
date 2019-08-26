@@ -19742,6 +19742,232 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testRegexpReplaceFunc
+parameter_list|()
+block|{
+name|Stream
+operator|.
+name|of
+argument_list|(
+name|SqlLibrary
+operator|.
+name|MYSQL
+argument_list|,
+name|SqlLibrary
+operator|.
+name|ORACLE
+argument_list|)
+operator|.
+name|map
+argument_list|(
+name|this
+operator|::
+name|tester
+argument_list|)
+operator|.
+name|forEach
+argument_list|(
+name|t
+lambda|->
+block|{
+name|t
+operator|.
+name|setFor
+argument_list|(
+name|SqlLibraryOperators
+operator|.
+name|REGEXP_REPLACE
+argument_list|)
+expr_stmt|;
+name|t
+operator|.
+name|checkString
+argument_list|(
+literal|"regexp_replace('a b c', 'b', 'X')"
+argument_list|,
+literal|"a X c"
+argument_list|,
+literal|"VARCHAR NOT NULL"
+argument_list|)
+expr_stmt|;
+name|t
+operator|.
+name|checkString
+argument_list|(
+literal|"regexp_replace('abc def ghi', '[a-z]+', 'X')"
+argument_list|,
+literal|"X X X"
+argument_list|,
+literal|"VARCHAR NOT NULL"
+argument_list|)
+expr_stmt|;
+name|t
+operator|.
+name|checkString
+argument_list|(
+literal|"regexp_replace('100-200', '(\\d+)', 'num')"
+argument_list|,
+literal|"num-num"
+argument_list|,
+literal|"VARCHAR NOT NULL"
+argument_list|)
+expr_stmt|;
+name|t
+operator|.
+name|checkString
+argument_list|(
+literal|"regexp_replace('100-200', '(-)', '###')"
+argument_list|,
+literal|"100###200"
+argument_list|,
+literal|"VARCHAR NOT NULL"
+argument_list|)
+expr_stmt|;
+name|t
+operator|.
+name|checkNull
+argument_list|(
+literal|"regexp_replace(cast(null as varchar), '(-)', '###')"
+argument_list|)
+expr_stmt|;
+name|t
+operator|.
+name|checkNull
+argument_list|(
+literal|"regexp_replace('100-200', cast(null as varchar), '###')"
+argument_list|)
+expr_stmt|;
+name|t
+operator|.
+name|checkNull
+argument_list|(
+literal|"regexp_replace('100-200', '(-)', cast(null as varchar))"
+argument_list|)
+expr_stmt|;
+name|t
+operator|.
+name|checkString
+argument_list|(
+literal|"regexp_replace('abc def ghi', '[a-z]+', 'X', 2)"
+argument_list|,
+literal|"aX X X"
+argument_list|,
+literal|"VARCHAR NOT NULL"
+argument_list|)
+expr_stmt|;
+name|t
+operator|.
+name|checkString
+argument_list|(
+literal|"regexp_replace('abc def ghi', '[a-z]+', 'X', 1, 3)"
+argument_list|,
+literal|"abc def X"
+argument_list|,
+literal|"VARCHAR NOT NULL"
+argument_list|)
+expr_stmt|;
+name|t
+operator|.
+name|checkString
+argument_list|(
+literal|"regexp_replace('abc def GHI', '[a-z]+', 'X', 1, 3, 'c')"
+argument_list|,
+literal|"abc def GHI"
+argument_list|,
+literal|"VARCHAR NOT NULL"
+argument_list|)
+expr_stmt|;
+name|t
+operator|.
+name|checkString
+argument_list|(
+literal|"regexp_replace('abc def GHI', '[a-z]+', 'X', 1, 3, 'i')"
+argument_list|,
+literal|"abc def X"
+argument_list|,
+literal|"VARCHAR NOT NULL"
+argument_list|)
+expr_stmt|;
+name|t
+operator|.
+name|checkString
+argument_list|(
+literal|"regexp_replace('abc def GHI', '[a-z]+', 'X', 1, 3, 'i')"
+argument_list|,
+literal|"abc def X"
+argument_list|,
+literal|"VARCHAR NOT NULL"
+argument_list|)
+expr_stmt|;
+name|t
+operator|.
+name|checkString
+argument_list|(
+literal|"regexp_replace('abc\t\ndef\t\nghi', '\t', '+')"
+argument_list|,
+literal|"abc+\ndef+\nghi"
+argument_list|,
+literal|"VARCHAR NOT NULL"
+argument_list|)
+expr_stmt|;
+name|t
+operator|.
+name|checkString
+argument_list|(
+literal|"regexp_replace('abc\t\ndef\t\nghi', '\t\n', '+')"
+argument_list|,
+literal|"abc+def+ghi"
+argument_list|,
+literal|"VARCHAR NOT NULL"
+argument_list|)
+expr_stmt|;
+name|t
+operator|.
+name|checkString
+argument_list|(
+literal|"regexp_replace('abc\t\ndef\t\nghi', '\\w+', '+')"
+argument_list|,
+literal|"+\t\n+\t\n+"
+argument_list|,
+literal|"VARCHAR NOT NULL"
+argument_list|)
+expr_stmt|;
+name|t
+operator|.
+name|checkQuery
+argument_list|(
+literal|"select regexp_replace('a b c', 'b', 'X')"
+argument_list|)
+expr_stmt|;
+name|t
+operator|.
+name|checkQuery
+argument_list|(
+literal|"select regexp_replace('a b c', 'b', 'X', 1)"
+argument_list|)
+expr_stmt|;
+name|t
+operator|.
+name|checkQuery
+argument_list|(
+literal|"select regexp_replace('a b c', 'b', 'X', 1, 3)"
+argument_list|)
+expr_stmt|;
+name|t
+operator|.
+name|checkQuery
+argument_list|(
+literal|"select regexp_replace('a b c', 'b', 'X', 1, 3, 'i')"
+argument_list|)
+expr_stmt|;
+block|}
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testJsonExists
 parameter_list|()
 block|{
