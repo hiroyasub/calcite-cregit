@@ -584,7 +584,7 @@ name|OperandTypes
 operator|.
 name|family
 argument_list|(
-name|getFamilitTypes
+name|getTypeFamilies
 argument_list|(
 name|operands
 argument_list|)
@@ -630,7 +630,7 @@ name|OperandTypes
 operator|.
 name|family
 argument_list|(
-name|getFamilitTypes
+name|getTypeFamilies
 argument_list|(
 name|operands
 argument_list|)
@@ -1147,7 +1147,7 @@ name|List
 argument_list|<
 name|SqlTypeFamily
 argument_list|>
-name|getFamilitTypes
+name|getTypeFamilies
 parameter_list|(
 name|ImmutableList
 argument_list|<
