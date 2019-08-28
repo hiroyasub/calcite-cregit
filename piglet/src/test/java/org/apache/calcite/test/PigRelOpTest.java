@@ -69,20 +69,6 @@ name|calcite
 operator|.
 name|util
 operator|.
-name|Bug
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|util
-operator|.
 name|TestUtil
 import|;
 end_import
@@ -3597,6 +3583,7 @@ literal|"      LogicalProject(DEPTNO=[$0], $f1=[ROW($0, $1, $2)])\n"
 operator|+
 literal|"        LogicalTableScan(table=[[scott, DEPT]])\n"
 decl_stmt|;
+specifier|final
 name|String
 name|optimizedPlan
 init|=
@@ -3606,9 +3593,7 @@ literal|"LogicalProject($f0=[$1])\n"
 operator|+
 literal|"  LogicalAggregate(group=[{0}], agg#0=[COLLECT($2)])\n"
 operator|+
-literal|"    LogicalProject(DEPTNO=[$0], DNAME=[$1], $f2=[ROW"
-operator|+
-literal|"($0, $1)])\n"
+literal|"    LogicalProject(DEPTNO=[$0], DNAME=[$1], $f2=[ROW($0, $1)])\n"
 operator|+
 literal|"      LogicalTableScan(table=[[scott, DEPT]])\n"
 decl_stmt|;
@@ -3626,6 +3611,7 @@ literal|"({(10,ACCOUNTING)})\n"
 operator|+
 literal|"({(30,SALES)})\n"
 decl_stmt|;
+specifier|final
 name|String
 name|sql
 init|=
@@ -3637,45 +3623,6 @@ literal|"FROM scott.DEPT\n"
 operator|+
 literal|"GROUP BY DEPTNO"
 decl_stmt|;
-comment|// When
-comment|//   [CALCITE-3297] PigToSqlAggregateRule should be applied on multi-set
-comment|//   projection to produce an optimal plan
-comment|// is fixed we can remove the following block.
-if|if
-condition|(
-name|Bug
-operator|.
-name|remark
-argument_list|(
-literal|"[CALCITE-3297]"
-argument_list|)
-operator|!=
-literal|null
-condition|)
-block|{
-name|optimizedPlan
-operator|=
-literal|""
-operator|+
-literal|"LogicalProject($f0=[MULTISET_PROJECTION($1, 0, 1)])\n"
-operator|+
-literal|"  LogicalAggregate(group=[{0}], A=[COLLECT($1)])\n"
-operator|+
-literal|"    LogicalProject(DEPTNO=[$0], $f1=[ROW($0, $1, $2)])\n"
-operator|+
-literal|"      LogicalTableScan(table=[[scott, DEPT]])\n"
-expr_stmt|;
-name|sql
-operator|=
-literal|"SELECT MULTISET_PROJECTION(COLLECT(ROW(DEPTNO, DNAME, LOC)), "
-operator|+
-literal|"0, 1) AS $f0\n"
-operator|+
-literal|"FROM scott.DEPT\n"
-operator|+
-literal|"GROUP BY DEPTNO"
-expr_stmt|;
-block|}
 name|pig
 argument_list|(
 name|script
