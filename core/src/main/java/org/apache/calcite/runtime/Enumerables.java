@@ -640,17 +640,21 @@ argument_list|,
 name|partitionState
 argument_list|,
 comment|// TODO 26.12.18 jf: add row states (whatever this is?)
-name|list
+name|matches
 lambda|->
 name|emitter
 operator|.
 name|emit
 argument_list|(
-name|list
+name|matches
+operator|.
+name|rows
 argument_list|,
 literal|null
 argument_list|,
-literal|null
+name|matches
+operator|.
+name|symbols
 argument_list|,
 name|matchCounter
 operator|.

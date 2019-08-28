@@ -411,7 +411,7 @@ block|}
 specifier|public
 name|List
 argument_list|<
-name|List
+name|PartialMatch
 argument_list|<
 name|E
 argument_list|>
@@ -438,7 +438,7 @@ block|}
 specifier|public
 name|List
 argument_list|<
-name|List
+name|PartialMatch
 argument_list|<
 name|E
 argument_list|>
@@ -457,7 +457,7 @@ name|ImmutableList
 operator|.
 name|Builder
 argument_list|<
-name|List
+name|PartialMatch
 argument_list|<
 name|E
 argument_list|>
@@ -472,7 +472,7 @@ decl_stmt|;
 specifier|final
 name|Consumer
 argument_list|<
-name|List
+name|PartialMatch
 argument_list|<
 name|E
 argument_list|>
@@ -581,7 +581,7 @@ name|partitionState
 parameter_list|,
 name|Consumer
 argument_list|<
-name|List
+name|PartialMatch
 argument_list|<
 name|E
 argument_list|>
@@ -621,8 +621,6 @@ operator|.
 name|accept
 argument_list|(
 name|pm
-operator|.
-name|rows
 argument_list|)
 expr_stmt|;
 block|}
