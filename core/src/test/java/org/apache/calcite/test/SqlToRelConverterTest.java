@@ -12656,6 +12656,59 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+comment|/** Test case for:    *<a href="https://issues.apache.org/jira/browse/CALCITE-3310">[CALCITE-3310]    * Approximate and exact aggregate calls are recognized as the same    * during sql-to-rel conversion.</a>.    */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testProjectApproximateAndExactAggregates
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"SELECT empno, count(distinct ename),\n"
+operator|+
+literal|"approx_count_distinct(ename)\n"
+operator|+
+literal|"FROM emp\n"
+operator|+
+literal|"GROUP BY empno"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testProjectAggregatesIgnoreNullsAndNot
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select lead(sal, 4) IGNORE NULLS, lead(sal, 4) over (w)\n"
+operator|+
+literal|" from emp window w as (order by empno)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
 comment|/**    * Visitor that checks that every {@link RelNode} in a tree is valid.    *    * @see RelNode#isValid(Litmus, RelNode.Context)    */
 specifier|public
 specifier|static
