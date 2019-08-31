@@ -27,22 +27,6 @@ name|adapter
 operator|.
 name|druid
 operator|.
-name|DruidQuery
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|adapter
-operator|.
-name|druid
-operator|.
 name|DruidSchema
 import|;
 end_import
@@ -260,40 +244,6 @@ import|;
 end_import
 
 begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|List
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|function
-operator|.
-name|Consumer
-import|;
-end_import
-
-begin_import
-import|import static
-name|org
-operator|.
-name|hamcrest
-operator|.
-name|CoreMatchers
-operator|.
-name|containsString
-import|;
-end_import
-
-begin_import
 import|import static
 name|org
 operator|.
@@ -455,176 +405,6 @@ name|TEST_DRUID
 operator|.
 name|value
 argument_list|()
-return|;
-block|}
-comment|/** Returns a consumer that checks that a particular Druid query is    * generated to implement a query. */
-specifier|private
-specifier|static
-name|Consumer
-argument_list|<
-name|List
-argument_list|>
-name|druidChecker
-parameter_list|(
-specifier|final
-name|String
-modifier|...
-name|lines
-parameter_list|)
-block|{
-return|return
-name|list
-lambda|->
-block|{
-name|assertThat
-argument_list|(
-name|list
-operator|.
-name|size
-argument_list|()
-argument_list|,
-name|is
-argument_list|(
-literal|1
-argument_list|)
-argument_list|)
-expr_stmt|;
-name|DruidQuery
-operator|.
-name|QuerySpec
-name|querySpec
-init|=
-operator|(
-name|DruidQuery
-operator|.
-name|QuerySpec
-operator|)
-name|list
-operator|.
-name|get
-argument_list|(
-literal|0
-argument_list|)
-decl_stmt|;
-for|for
-control|(
-name|String
-name|line
-range|:
-name|lines
-control|)
-block|{
-specifier|final
-name|String
-name|s
-init|=
-name|line
-operator|.
-name|replace
-argument_list|(
-literal|'\''
-argument_list|,
-literal|'"'
-argument_list|)
-decl_stmt|;
-name|assertThat
-argument_list|(
-name|querySpec
-operator|.
-name|getQueryString
-argument_list|(
-literal|null
-argument_list|,
-operator|-
-literal|1
-argument_list|)
-argument_list|,
-name|containsString
-argument_list|(
-name|s
-argument_list|)
-argument_list|)
-expr_stmt|;
-block|}
-block|}
-return|;
-block|}
-comment|/** Returns a consumer that checks that a particular Druid query is    * generated to implement a query. Expected lines should be exactly    * included in the actual query text, without changing quote types. */
-specifier|private
-name|Consumer
-argument_list|<
-name|List
-argument_list|>
-name|druidOriginalChecker
-parameter_list|(
-specifier|final
-name|String
-modifier|...
-name|lines
-parameter_list|)
-block|{
-return|return
-name|list
-lambda|->
-block|{
-name|assertThat
-argument_list|(
-name|list
-operator|.
-name|size
-argument_list|()
-argument_list|,
-name|is
-argument_list|(
-literal|1
-argument_list|)
-argument_list|)
-expr_stmt|;
-name|DruidQuery
-operator|.
-name|QuerySpec
-name|querySpec
-init|=
-operator|(
-name|DruidQuery
-operator|.
-name|QuerySpec
-operator|)
-name|list
-operator|.
-name|get
-argument_list|(
-literal|0
-argument_list|)
-decl_stmt|;
-for|for
-control|(
-name|String
-name|line
-range|:
-name|lines
-control|)
-block|{
-name|assertThat
-argument_list|(
-name|querySpec
-operator|.
-name|getQueryString
-argument_list|(
-literal|null
-argument_list|,
-operator|-
-literal|1
-argument_list|)
-argument_list|,
-name|containsString
-argument_list|(
-name|line
-argument_list|)
-argument_list|)
-expr_stmt|;
-block|}
-block|}
 return|;
 block|}
 comment|/**    * Creates a query against FOODMART with approximate parameters    * */
@@ -930,7 +710,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 name|druidQuery
 argument_list|)
@@ -1009,7 +790,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 name|druidQuery
 argument_list|)
@@ -1137,7 +919,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 name|druidQuery
 argument_list|)
@@ -1201,7 +984,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 literal|"'queryType':'groupBy'"
 argument_list|,
@@ -1267,7 +1051,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 name|druidQuery
 argument_list|)
@@ -1336,7 +1121,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 name|druidQuery
 argument_list|)
@@ -1411,7 +1197,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 name|druidQuery
 argument_list|)
@@ -1487,7 +1274,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 name|subDruidQuery
 argument_list|)
@@ -1780,7 +1568,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 name|druidQuery
 argument_list|)
@@ -1861,7 +1650,9 @@ literal|"PLAN=EnumerableInterpreter\n"
 operator|+
 literal|"  DruidQuery(table=[[foodmart, foodmart]], "
 operator|+
-literal|"intervals=[[1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z]], filter=[=($1, 1020)],"
+literal|"intervals=[[1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z]], "
+operator|+
+literal|"filter=[=(CAST($1):INTEGER, 1020)],"
 operator|+
 literal|" projects=[[$90, $1]], groups=[{0, 1}], aggs=[[]])"
 decl_stmt|;
@@ -1895,7 +1686,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 name|druidQuery
 argument_list|)
@@ -1960,7 +1752,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 name|druidQuery
 argument_list|)
@@ -2022,7 +1815,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 name|druidQuery
 argument_list|)
@@ -2208,7 +2002,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 literal|"{'queryType':'groupBy','dataSource':'foodmart','granularity':'all',"
 operator|+
@@ -2326,7 +2121,8 @@ argument_list|()
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 name|druidQuery
 argument_list|)
@@ -2370,7 +2166,8 @@ argument_list|()
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 name|druidQuery
 argument_list|)
@@ -2439,8 +2236,11 @@ argument_list|()
 operator|.
 name|queryContains
 argument_list|(
-name|druidOriginalChecker
+operator|new
+name|DruidChecker
 argument_list|(
+literal|false
+argument_list|,
 name|druidQuery
 argument_list|)
 argument_list|)
@@ -2508,7 +2308,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 name|druidQuery
 argument_list|)
@@ -2600,7 +2401,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 name|druidQuery
 argument_list|)
@@ -2756,7 +2558,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 name|druidQuery
 argument_list|)
@@ -2825,7 +2628,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 literal|"'queryType':'groupBy'"
 argument_list|,
@@ -2922,7 +2726,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 name|druidQueryPart1
 argument_list|,
@@ -3005,7 +2810,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 name|subDruidQuery
 argument_list|)
@@ -3133,7 +2939,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 name|druidQuery
 argument_list|)
@@ -3261,7 +3068,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 name|druidQuery
 argument_list|)
@@ -3315,7 +3123,8 @@ argument_list|()
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 name|druidQuery
 argument_list|)
@@ -3449,7 +3258,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 name|druidQuery
 argument_list|,
@@ -3617,7 +3427,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 name|druidQuery
 argument_list|)
@@ -3697,7 +3508,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 literal|"'queryType':'groupBy'"
 argument_list|)
@@ -3743,7 +3555,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 literal|"'queryType':'groupBy'"
 argument_list|)
@@ -3787,7 +3600,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 literal|"'queryType':'groupBy'"
 argument_list|)
@@ -3976,7 +3790,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 literal|"{'queryType':'groupBy','dataSource':'foodmart','granularity':'all'"
 operator|+
@@ -4063,7 +3878,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 name|druidQuery
 argument_list|)
@@ -4239,7 +4055,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 name|druidQuery
 argument_list|)
@@ -4304,7 +4121,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 name|druidQuery
 argument_list|)
@@ -4405,7 +4223,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 name|druidQueryPart1
 argument_list|,
@@ -4500,7 +4319,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 name|druidQueryType
 argument_list|,
@@ -4670,7 +4490,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 name|druidQuery
 argument_list|)
@@ -4809,7 +4630,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 name|druidQuery1
 argument_list|,
@@ -4918,7 +4740,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 name|druidQuery
 argument_list|)
@@ -5054,7 +4877,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 name|druidQuery
 argument_list|)
@@ -5104,7 +4928,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 name|druidQuery
 argument_list|)
@@ -5142,7 +4967,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 literal|"{\"queryType\":\"groupBy\""
 argument_list|)
@@ -5170,7 +4996,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 literal|"'type':'bound','dimension':'product_id','upper':'0.41024'"
 argument_list|,
@@ -5224,7 +5051,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 name|druidQuery
 argument_list|)
@@ -5260,7 +5088,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 literal|",'granularity':'all'"
 argument_list|,
@@ -5309,7 +5138,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 literal|",'granularity':'all'"
 argument_list|,
@@ -5368,7 +5198,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 literal|",'granularity':'all'"
 argument_list|,
@@ -5423,7 +5254,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 literal|"'queryType':'groupBy'"
 argument_list|)
@@ -5468,7 +5300,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 literal|",'granularity':'all'"
 argument_list|,
@@ -5506,7 +5339,7 @@ literal|"  DruidQuery(table=[[foodmart, foodmart]], "
 operator|+
 literal|"intervals=[[1997-01-01T00:00:00.001Z/1997-01-20T00:00:00.000Z]], "
 operator|+
-literal|"filter=[=($1, 1016)], projects=[[EXTRACT(FLAG(DAY), $0), EXTRACT(FLAG(MONTH), $0), "
+literal|"filter=[=(CAST($1):INTEGER, 1016)], projects=[[EXTRACT(FLAG(DAY), $0), EXTRACT(FLAG(MONTH), $0), "
 operator|+
 literal|"EXTRACT(FLAG(YEAR), $0), $1]], groups=[{0, 1, 2, 3}], aggs=[[]])\n"
 argument_list|)
@@ -5556,7 +5389,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 literal|",'granularity':'all'"
 argument_list|,
@@ -5594,7 +5428,7 @@ literal|"  DruidQuery(table=[[foodmart, foodmart]], "
 operator|+
 literal|"intervals=[[1997-01-01T00:00:00.001Z/1997-01-20T00:00:00.000Z]], "
 operator|+
-literal|"filter=[=($1, 1016)], projects=[[EXTRACT(FLAG(DAY), $0), EXTRACT(FLAG(MONTH), $0), "
+literal|"filter=[=(CAST($1):INTEGER, 1016)], projects=[[EXTRACT(FLAG(DAY), $0), EXTRACT(FLAG(MONTH), $0), "
 operator|+
 literal|"EXTRACT(FLAG(YEAR), $0), $1]], groups=[{0, 1, 2, 3}], aggs=[[]])\n"
 argument_list|)
@@ -5642,7 +5476,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 literal|",'granularity':'all'"
 argument_list|,
@@ -5664,7 +5499,7 @@ literal|"  DruidQuery(table=[[foodmart, foodmart]], "
 operator|+
 literal|"intervals=[[1997-01-01T00:00:00.001Z/1997-01-20T00:00:00.000Z]], "
 operator|+
-literal|"filter=[=($1, 1016)], projects=[[EXTRACT(FLAG(DAY), $0), $1]], "
+literal|"filter=[=(CAST($1):INTEGER, 1016)], projects=[[EXTRACT(FLAG(DAY), $0), $1]], "
 operator|+
 literal|"groups=[{0, 1}], aggs=[[]])\n"
 argument_list|)
@@ -5731,9 +5566,9 @@ literal|"  DruidQuery(table=[[foodmart, foodmart]], "
 operator|+
 literal|"intervals=[[1997-01-01T00:00:00.000Z/1998-01-01T00:00:00.000Z]], "
 operator|+
-literal|"filter=[AND(>=(CAST($11):BIGINT, 8),<=(CAST($11):BIGINT, 10), "
+literal|"filter=[AND(>=(CAST($11):INTEGER, 8),<=(CAST($11):INTEGER, 10), "
 operator|+
-literal|"<(CAST($10):BIGINT, 15))], groups=[{}], "
+literal|"<(CAST($10):INTEGER, 15))], groups=[{}], "
 operator|+
 literal|"aggs=[[SUM($90)]])\n"
 argument_list|)
@@ -5745,7 +5580,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 name|druidQuery
 argument_list|)
@@ -5821,7 +5657,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 literal|"{'queryType':'groupBy','dataSource':'foodmart','granularity':'all'"
 argument_list|)
@@ -5865,7 +5702,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 name|druidQuery
 argument_list|)
@@ -5904,7 +5742,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 literal|"{'queryType':'groupBy',"
 operator|+
@@ -5970,7 +5809,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 literal|"{'queryType':'groupBy','dataSource':'foodmart',"
 operator|+
@@ -6012,7 +5852,7 @@ literal|"  DruidQuery(table=[[foodmart, foodmart]], "
 operator|+
 literal|"intervals=[[1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z]], "
 operator|+
-literal|"filter=[>=(CAST($1):BIGINT, 1558)], projects=[[EXTRACT(FLAG(MONTH), $0), $1, $89]], "
+literal|"filter=[>=(CAST($1):INTEGER, 1558)], projects=[[EXTRACT(FLAG(MONTH), $0), $1, $89]], "
 operator|+
 literal|"groups=[{0, 1}], aggs=[[SUM($2)]], sort0=[0], sort1=[2], sort2=[1], "
 operator|+
@@ -6046,7 +5886,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 literal|"'queryType':'timeseries'"
 argument_list|,
@@ -6118,7 +5959,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 literal|"'queryType':'groupBy'"
 argument_list|,
@@ -6159,7 +6001,7 @@ literal|"  DruidQuery(table=[[foodmart, foodmart]], "
 operator|+
 literal|"intervals=[[1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z]], "
 operator|+
-literal|"filter=[>=(CAST($1):BIGINT, 1558)], projects=[[EXTRACT(FLAG(YEAR), $0), "
+literal|"filter=[>=(CAST($1):INTEGER, 1558)], projects=[[EXTRACT(FLAG(YEAR), $0), "
 operator|+
 literal|"EXTRACT(FLAG(MONTH), $0), $1, $89]], groups=[{0, 1, 2}], aggs=[[SUM($3)]], sort0=[0], "
 operator|+
@@ -6221,7 +6063,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 name|expectedDruidQuery
 argument_list|)
@@ -6267,7 +6110,7 @@ literal|"  DruidQuery(table=[[foodmart, foodmart]], "
 operator|+
 literal|"intervals=[[1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z]], "
 operator|+
-literal|"filter=[>=(CAST($1):BIGINT, 1558)], projects=[[EXTRACT(FLAG(YEAR), $0), "
+literal|"filter=[>=(CAST($1):INTEGER, 1558)], projects=[[EXTRACT(FLAG(YEAR), $0), "
 operator|+
 literal|"EXTRACT(FLAG(MONTH), $0), $1, $89]], groups=[{0, 1, 2}], aggs=[[SUM($3)]], "
 operator|+
@@ -6300,7 +6143,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 name|expectedDruidQueryType
 argument_list|)
@@ -6358,7 +6202,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 literal|"'queryType':'groupBy'"
 argument_list|)
@@ -6431,7 +6276,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 name|druidSubQuery
 argument_list|)
@@ -6491,7 +6337,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 name|druidSubQuery
 argument_list|)
@@ -6541,7 +6388,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 name|druidSubQuery
 argument_list|)
@@ -6615,7 +6463,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 name|druidQuery
 argument_list|)
@@ -6652,7 +6501,7 @@ literal|"      DruidQuery(table=[[foodmart, foodmart]], "
 operator|+
 literal|"intervals=[[1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z]], "
 operator|+
-literal|"filter=[=($1, 1558)], projects=[[$0]])\n"
+literal|"filter=[=(CAST($1):INTEGER, 1558)], projects=[[$0]])\n"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -6666,7 +6515,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 literal|"'queryType':'scan'"
 argument_list|)
@@ -6800,7 +6650,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 literal|"'queryType':'timeseries'"
 argument_list|)
@@ -6943,7 +6794,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 name|druidQuery
 argument_list|)
@@ -7036,7 +6888,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 literal|"'queryType':'timeseries'"
 argument_list|)
@@ -7098,7 +6951,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 name|postAggString
 argument_list|)
@@ -7160,7 +7014,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 name|postAggString
 argument_list|)
@@ -7222,7 +7077,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 name|postAggString
 argument_list|)
@@ -7286,7 +7142,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 name|postAggString
 argument_list|)
@@ -7348,7 +7205,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 name|postAggString
 argument_list|)
@@ -7418,7 +7276,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 name|postAggString
 argument_list|)
@@ -7476,7 +7335,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 name|postAggString
 argument_list|)
@@ -7541,7 +7401,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 name|druidQuery
 argument_list|)
@@ -7612,7 +7473,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 name|druidQuery
 argument_list|)
@@ -7676,7 +7538,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 name|postAggString
 argument_list|)
@@ -7745,7 +7608,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 name|postAggString
 argument_list|)
@@ -7813,7 +7677,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 name|postAggString
 argument_list|)
@@ -7875,7 +7740,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 name|postAggString
 argument_list|)
@@ -7939,7 +7805,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 name|postAggString
 argument_list|)
@@ -8004,7 +7871,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 name|postAggString
 argument_list|)
@@ -8130,7 +7998,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 name|postAggString
 argument_list|)
@@ -8203,7 +8072,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 name|postAggString
 argument_list|)
@@ -8275,7 +8145,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 name|queryType
 argument_list|)
@@ -8319,7 +8190,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 name|expectedQuery
 argument_list|)
@@ -8359,7 +8231,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 name|expectedQuery
 argument_list|)
@@ -8403,7 +8276,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 name|expectedQuery
 argument_list|)
@@ -8454,7 +8328,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 name|expectedQuery
 argument_list|)
@@ -8502,7 +8377,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 name|expectedQuery
 argument_list|)
@@ -8541,7 +8417,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 literal|"{\"queryType\":\"timeseries\","
 operator|+
@@ -8605,7 +8482,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 literal|"\"filter\":{\"type"
 operator|+
@@ -8653,7 +8531,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 name|expectedQuery
 argument_list|)
@@ -8702,7 +8581,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 name|expectedQuery
 argument_list|)
@@ -8750,7 +8630,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 name|expectedQuery
 argument_list|)
@@ -8806,7 +8687,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 name|expectedQuery
 argument_list|)
@@ -8869,7 +8751,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 name|expectedQuery
 argument_list|)
@@ -8935,7 +8818,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 name|expectedQuery
 argument_list|)
@@ -8994,7 +8878,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 name|expectedFilter
 argument_list|,
@@ -9044,7 +8929,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 literal|"\"filter\":{\"type"
 operator|+
@@ -9090,7 +8976,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 literal|"\"queryType\":\"timeseries\""
 argument_list|,
@@ -9133,7 +9020,7 @@ literal|"    DruidQuery(table=[[foodmart, foodmart]], "
 operator|+
 literal|"intervals=[[1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z]], filter=[AND(>"
 operator|+
-literal|"(CAST($1):BIGINT, 1553),>($91, 5))], groups=[{1}], aggs=[[SUM($90)]])"
+literal|"(CAST($1):INTEGER, 1553),>($91, 5))], groups=[{1}], aggs=[[SUM($90)]])"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -9147,7 +9034,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 literal|"\"queryType\":\"groupBy\""
 argument_list|,
@@ -9194,7 +9082,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 literal|"\"queryType\":\"groupBy\""
 argument_list|,
@@ -9258,7 +9147,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 name|expectedFilterJson
 argument_list|)
@@ -9266,7 +9156,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 name|expectedAggregateJson
 argument_list|)
@@ -9339,7 +9230,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 name|expectedFilterJson
 argument_list|)
@@ -9347,7 +9239,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 name|expectedAggregatesJson
 argument_list|)
@@ -9479,7 +9372,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 literal|"timeseries"
 argument_list|)
@@ -9522,7 +9416,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 name|druidQuery
 argument_list|)
@@ -9561,7 +9456,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 name|druidFilter
 argument_list|)
@@ -9977,7 +9873,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 name|expectedDruidQuery
 argument_list|)
@@ -10014,7 +9911,8 @@ comment|// customer_id_ts. The thetaSketch aggregation is used to compute the co
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 literal|"{'queryType':'timeseries','dataSource':"
 operator|+
@@ -10045,7 +9943,8 @@ comment|// Check that filtered aggregations work correctly
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 literal|"{'type':'filtered','filter':"
 operator|+
@@ -10147,7 +10046,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 literal|"\"postAggregations\":[{\"type\":\"expression\","
 operator|+
@@ -10175,7 +10075,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 literal|"'postAggregations':[{'type':'expression',"
 operator|+
@@ -10233,7 +10134,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 name|druid
 argument_list|)
@@ -10263,7 +10165,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 name|druid
 argument_list|)
@@ -10300,7 +10203,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 literal|"{'queryType':'groupBy','dataSource':'foodmart',"
 operator|+
@@ -10341,7 +10245,8 @@ comment|// make sure user_id column is not present
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 literal|"{'queryType':'scan','dataSource':'wikipedia','intervals':"
 operator|+
@@ -10456,7 +10361,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 name|druidQuery
 argument_list|)
@@ -10552,7 +10458,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 name|druidQuery
 argument_list|)
@@ -10623,7 +10530,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 name|druidQuery
 argument_list|)
@@ -10680,7 +10588,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 name|druidQuery
 argument_list|)
@@ -10736,7 +10645,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 name|druidQuery
 argument_list|)
@@ -10835,7 +10745,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 name|druidQuery
 argument_list|)
@@ -10916,7 +10827,8 @@ argument_list|()
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 name|druidQueryPart1
 argument_list|,
@@ -11009,7 +10921,8 @@ argument_list|()
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 name|druidQueryPart1
 argument_list|,
@@ -11105,7 +11018,8 @@ argument_list|()
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 name|druidQueryPart1
 argument_list|,
@@ -11155,7 +11069,8 @@ argument_list|()
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 literal|"{\"queryType\":\"timeseries\""
 argument_list|)
@@ -11229,7 +11144,8 @@ argument_list|()
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 name|druidQuery
 argument_list|)
@@ -11265,7 +11181,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 literal|"pow(\\\"store_sales\\\""
 argument_list|)
@@ -11301,7 +11218,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 literal|"(CAST((pow(abs((- \\\"store_sales\\\")),0.5) / 2),"
 argument_list|)
@@ -11335,7 +11253,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 literal|"\"filter\":{\"type\":\"expression\",\"expression\":\"like"
 argument_list|)
@@ -11369,7 +11288,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 literal|"\"expression\":\"(strlen(\\\"product_id\\\") == 2"
 argument_list|)
@@ -11405,7 +11325,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 literal|"\"filter\":{\"type\":\"expression\",\"expression\":\"(upper"
 operator|+
@@ -11445,7 +11366,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 literal|"\"filter\":{\"type\":\"expression\",\"expression\":\"(lower"
 operator|+
@@ -11483,7 +11405,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 literal|"\"filter\":{\"type\":\"expression\",\"expression\":\"(lower"
 operator|+
@@ -11521,7 +11444,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 literal|"\"filter\":{\"type\":\"expression\",\"expression\":\"(lower"
 operator|+
@@ -11559,7 +11483,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 literal|"\"filter\":{\"type\":\"expression\",\"expression\":\"(upper"
 operator|+
@@ -11597,7 +11522,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 literal|"\"filter\":{\"type\":\"expression\",\"expression\":\"(upper"
 operator|+
@@ -11637,7 +11563,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 literal|"{\"type\":\"expression\",\"expression\":\"(concat"
 operator|+
@@ -11675,7 +11602,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 literal|"{\"type\":\"expression\",\"expression\":\"(concat"
 operator|+
@@ -11726,7 +11654,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 literal|"{\"queryType\":\"timeseries\",\"dataSource\":\"foodmart\","
 operator|+
@@ -11770,7 +11699,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 literal|"(concat(\\\"city\\\",\\\"state_province\\\") =="
 argument_list|,
@@ -11810,7 +11740,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 literal|"(concat(\\\"city\\\",\\\"state_province\\\") =="
 argument_list|,
@@ -11852,7 +11783,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 literal|"(concat(\\\"city\\\",\\\"state_province\\\") =="
 argument_list|,
@@ -11894,7 +11826,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 literal|"\"filter\":{\"type\":\"expression\",\"expression\":\""
 operator|+
@@ -11930,7 +11863,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 literal|"\"filter\":{\"type\":\"expression\",\"expression\":\""
 operator|+
@@ -11983,7 +11917,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 literal|"(concat(\\\"city\\\",\\\"state_province\\\") =="
 argument_list|,
@@ -12025,7 +11960,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 literal|"(CAST((((pow(\\\"store_sales\\\",0.5) - 1) / 3) + 1)"
 argument_list|,
@@ -12076,7 +12012,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 literal|"{\"type\":\"expression\","
 operator|+
@@ -12114,7 +12051,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 literal|",\"filter\":{\"type\":\"expression\",\"expression\":\"((("
 operator|+
@@ -12204,7 +12142,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 name|filterPart1
 argument_list|,
@@ -12285,7 +12224,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 name|filterPart1
 argument_list|,
@@ -12710,7 +12650,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 literal|"\"filter\":{\"type\":\"expression\",\"expression\":\""
 operator|+
@@ -12749,7 +12690,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 literal|"\"filter\":{\"type\":\"expression\",\"expression\":\""
 operator|+
@@ -12807,7 +12749,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 literal|"\"queryType\":\"timeseries\""
 argument_list|)
@@ -12847,7 +12790,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 literal|"\"filter\":{\"type\":\"expression\","
 operator|+
@@ -12889,7 +12833,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 literal|"\"filter\":{\"type\":\"expression\",\"expression\":\"(((CAST(\\\"product_id\\\", "
 argument_list|,
@@ -12957,7 +12902,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 literal|"\"queryType\":\"timeseries\""
 argument_list|)
@@ -13138,7 +13084,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 name|queryType
 argument_list|,
@@ -13294,7 +13241,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 literal|"\"queryType\":\"groupBy\""
 argument_list|,
@@ -13344,7 +13292,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 literal|"\"queryType\":\"timeseries\""
 argument_list|,
@@ -13395,7 +13344,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 literal|"like(substring(\\\"product_id\\\""
 argument_list|)
@@ -13439,7 +13389,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 literal|"\"queryType\":\"groupBy\""
 argument_list|,
@@ -13473,6 +13424,9 @@ name|FOODMART_TABLE
 operator|+
 literal|" WHERE \"product_id\" = 16.0"
 decl_stmt|;
+comment|// After CALCITE-2302 the Druid query changed a bit and the type of the
+comment|// filter became an expression (instead of a bound filter) but it still
+comment|// seems correct.
 name|sql
 argument_list|(
 name|sql
@@ -13485,13 +13439,18 @@ argument_list|()
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
-literal|"\"filter\":{\"type\":\"bound\",\"dimension\":\"product_id\",\"lower\":\"16.0\","
+literal|false
+argument_list|,
+literal|"\"filter\":{"
 operator|+
-literal|"\"lowerStrict\":false,\"upper\":\"16.0\","
+literal|"\"type\":\"expression\","
 operator|+
-literal|"\"upperStrict\":false,\"ordering\":\"numeric\"}"
+literal|"\"expression\":\"(CAST(\\\"product_id\\\", \'DOUBLE\') == 16.0)\""
+operator|+
+literal|"}"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -13580,7 +13539,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 literal|"{'queryType':'timeseries','dataSource':'foodmart',"
 operator|+
@@ -13648,7 +13608,7 @@ literal|"  DruidQuery(table=[[foodmart, foodmart]], "
 operator|+
 literal|"intervals=[[1900-01-09T00:00:00.000Z/2992-01-10T00:00:00.000Z]], "
 operator|+
-literal|"filter=[AND(IS NOT TRUE(=($1, 1020)),<>($1, 1020))],"
+literal|"filter=[AND(IS NOT TRUE(=(CAST($1):INTEGER, 1020)),<>(CAST($1):INTEGER, 1020))],"
 operator|+
 literal|" groups=[{}], aggs=[[COUNT()]])"
 argument_list|)
@@ -13822,7 +13782,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 literal|"\"virtualColumns\":[{\"type\":\"expression\",\"name\":\"vc\","
 operator|+
@@ -13871,7 +13832,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 literal|"\"queryType\":\"timeseries\""
 argument_list|,
@@ -13922,7 +13884,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 literal|"'queryType':'groupBy'"
 argument_list|,
@@ -13983,7 +13946,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 literal|",\"aggregations\":[{\"type\":\"doubleSum\",\"name\":\"$f1\","
 operator|+
@@ -14046,7 +14010,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 literal|"'queryType':'groupBy'"
 argument_list|,
@@ -14103,7 +14068,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 literal|"\"queryType\":\"timeseries\""
 argument_list|,
@@ -14142,7 +14108,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 literal|"{'queryType':'timeseries','dataSource':'foodmart',"
 operator|+
@@ -14187,7 +14154,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 literal|"{'queryType':'timeseries','dataSource':'wikipedia',"
 operator|+
@@ -14225,7 +14193,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 literal|"{'queryType':'timeseries','dataSource':'foodmart',"
 operator|+
@@ -14291,7 +14260,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 name|query
 argument_list|)
@@ -14432,7 +14402,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 literal|"\"queryType\":\"groupBy\""
 argument_list|,
@@ -14508,7 +14479,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 literal|"\"queryType\":\"groupBy\""
 argument_list|)
@@ -14573,7 +14545,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 literal|"\"queryType\":\"groupBy\""
 argument_list|)
@@ -14624,7 +14597,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 literal|"\"queryType\":\"groupBy\""
 argument_list|)
@@ -14689,7 +14663,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 literal|"\"queryType\":\"groupBy\""
 argument_list|)
@@ -14781,7 +14756,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 literal|"'having':{'type':'filter','filter':{'type':'bound',"
 operator|+
@@ -14834,7 +14810,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 literal|"{'queryType':'groupBy','dataSource':'foodmart','granularity':'all'"
 argument_list|)
@@ -14880,7 +14857,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 literal|"{'queryType':'scan','dataSource':'foodmart','intervals':"
 operator|+
@@ -14941,7 +14919,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 literal|"{\"queryType\":\"scan\",\"dataSource\":\"foodmart\",\"intervals\":"
 operator|+
@@ -15002,7 +14981,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 literal|"\"queryType\":\"groupBy\""
 argument_list|)
@@ -15043,7 +15023,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 literal|"{'queryType':'groupBy','dataSource':'foodmart','granularity':'all',"
 operator|+
@@ -15089,7 +15070,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 literal|"{\"queryType\":\"timeseries\",\"dataSource\":\"foodmart\",\"descending\":false,"
 operator|+
@@ -15127,7 +15109,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 literal|"{\"queryType\":\"groupBy\",\"dataSource\":\"foodmart\",\"granularity\":\"all\",\"dimensions\":"
 operator|+
@@ -15182,7 +15165,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 literal|"{\"queryType\":\"groupBy\",\"dataSource\":\"foodmart\",\"granularity\":\"all\",\"dimensions\":"
 operator|+
@@ -15233,7 +15217,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 literal|"{\"queryType\":\"groupBy\",\"dataSource\":\"foodmart\",\"granularity\":\"all\","
 operator|+
@@ -15276,7 +15261,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 literal|"{'queryType':'timeseries'"
 argument_list|,
@@ -15318,7 +15304,8 @@ argument_list|)
 operator|.
 name|queryContains
 argument_list|(
-name|druidChecker
+operator|new
+name|DruidChecker
 argument_list|(
 literal|"{\"queryType\":\"groupBy\""
 argument_list|,
