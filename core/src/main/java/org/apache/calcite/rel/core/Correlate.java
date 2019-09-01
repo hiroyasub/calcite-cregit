@@ -438,7 +438,7 @@ name|input
 operator|.
 name|get
 argument_list|(
-literal|"correlationId"
+literal|"correlation"
 argument_list|)
 argument_list|)
 argument_list|,
@@ -694,9 +694,6 @@ argument_list|(
 literal|"requiredColumns"
 argument_list|,
 name|requiredColumns
-operator|.
-name|toString
-argument_list|()
 argument_list|)
 return|;
 block|}

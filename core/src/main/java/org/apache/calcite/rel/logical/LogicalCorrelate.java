@@ -317,7 +317,7 @@ name|input
 operator|.
 name|get
 argument_list|(
-literal|"correlationId"
+literal|"correlation"
 argument_list|)
 argument_list|)
 argument_list|,
