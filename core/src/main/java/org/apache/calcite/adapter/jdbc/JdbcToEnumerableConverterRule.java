@@ -149,9 +149,7 @@ name|INSTANCE
 argument_list|,
 name|relBuilderFactory
 argument_list|,
-literal|"JdbcToEnumerableConverterRule:"
-operator|+
-name|out
+literal|"JdbcToEnumerableConverterRule"
 argument_list|)
 expr_stmt|;
 block|}
