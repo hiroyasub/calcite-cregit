@@ -29223,6 +29223,28 @@ literal|"FROM \"doublequotedtable\""
 argument_list|)
 argument_list|)
 expr_stmt|;
+comment|// BigQuery leaves quoted and unquoted identifers unchanged
+name|checkDialect
+argument_list|(
+name|SqlDialect
+operator|.
+name|DatabaseProduct
+operator|.
+name|BIG_QUERY
+operator|.
+name|getDialect
+argument_list|()
+argument_list|,
+literal|"select unquotedColumn from `doubleQuotedTable`"
+argument_list|,
+name|is
+argument_list|(
+literal|"SELECT unquotedColumn\n"
+operator|+
+literal|"FROM doubleQuotedTable"
+argument_list|)
+argument_list|)
+expr_stmt|;
 block|}
 annotation|@
 name|Test
