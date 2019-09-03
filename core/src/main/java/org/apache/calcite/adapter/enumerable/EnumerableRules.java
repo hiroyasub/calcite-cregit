@@ -447,6 +447,10 @@ name|ENUMERABLE_FILTER_RULE
 argument_list|,
 name|EnumerableRules
 operator|.
+name|ENUMERABLE_CALC_RULE
+argument_list|,
+name|EnumerableRules
+operator|.
 name|ENUMERABLE_AGGREGATE_RULE
 argument_list|,
 name|EnumerableRules

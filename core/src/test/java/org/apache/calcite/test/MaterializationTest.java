@@ -111,6 +111,20 @@ name|calcite
 operator|.
 name|plan
 operator|.
+name|RelOptRules
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
 name|RelOptTable
 import|;
 end_import
@@ -1316,7 +1330,7 @@ block|}
 comment|/** Checks that a given query can use a materialized view with a given    * definition. */
 specifier|private
 name|void
-name|checkMaterializeWithRules
+name|checkMaterialize
 parameter_list|(
 name|String
 name|materialize
@@ -1324,8 +1338,8 @@ parameter_list|,
 name|String
 name|query
 parameter_list|,
-name|RuleSet
-name|rules
+name|boolean
+name|onlyBySubstitution
 parameter_list|)
 block|{
 name|checkMaterialize
@@ -1338,7 +1352,17 @@ name|HR_FKUK_MODEL
 argument_list|,
 name|CONTAINS_M0
 argument_list|,
-name|rules
+name|RuleSets
+operator|.
+name|ofList
+argument_list|(
+name|ImmutableList
+operator|.
+name|of
+argument_list|()
+argument_list|)
+argument_list|,
+name|onlyBySubstitution
 argument_list|)
 expr_stmt|;
 block|}
@@ -1385,6 +1409,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Checks that a given query can use a materialized view with a given    * definition. */
 specifier|private
 name|void
 name|checkMaterialize
@@ -1409,6 +1434,50 @@ name|RuleSet
 name|rules
 parameter_list|)
 block|{
+name|checkMaterialize
+argument_list|(
+name|materialize
+argument_list|,
+name|query
+argument_list|,
+name|model
+argument_list|,
+name|explainChecker
+argument_list|,
+name|rules
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Checks that a given query can use a materialized view with a given    * definition. */
+specifier|private
+name|void
+name|checkMaterialize
+parameter_list|(
+name|String
+name|materialize
+parameter_list|,
+name|String
+name|query
+parameter_list|,
+name|String
+name|model
+parameter_list|,
+name|Consumer
+argument_list|<
+name|ResultSet
+argument_list|>
+name|explainChecker
+parameter_list|,
+specifier|final
+name|RuleSet
+name|rules
+parameter_list|,
+name|boolean
+name|onlyBySubstitution
+parameter_list|)
+block|{
 name|checkThatMaterialize
 argument_list|(
 name|materialize
@@ -1424,6 +1493,8 @@ argument_list|,
 name|explainChecker
 argument_list|,
 name|rules
+argument_list|,
+name|onlyBySubstitution
 argument_list|)
 operator|.
 name|sameResultWithMaterializationsDisabled
@@ -1461,6 +1532,63 @@ parameter_list|,
 specifier|final
 name|RuleSet
 name|rules
+parameter_list|)
+block|{
+return|return
+name|checkThatMaterialize
+argument_list|(
+name|materialize
+argument_list|,
+name|query
+argument_list|,
+name|name
+argument_list|,
+name|existing
+argument_list|,
+name|model
+argument_list|,
+name|explainChecker
+argument_list|,
+name|rules
+argument_list|,
+literal|false
+argument_list|)
+return|;
+block|}
+comment|/** Checks that a given query can use a materialized view with a given    * definition. */
+specifier|private
+name|CalciteAssert
+operator|.
+name|AssertQuery
+name|checkThatMaterialize
+parameter_list|(
+name|String
+name|materialize
+parameter_list|,
+name|String
+name|query
+parameter_list|,
+name|String
+name|name
+parameter_list|,
+name|boolean
+name|existing
+parameter_list|,
+name|String
+name|model
+parameter_list|,
+name|Consumer
+argument_list|<
+name|ResultSet
+argument_list|>
+name|explainChecker
+parameter_list|,
+specifier|final
+name|RuleSet
+name|rules
+parameter_list|,
+name|boolean
+name|onlyBySubstitution
 parameter_list|)
 block|{
 try|try
@@ -1526,6 +1654,8 @@ argument_list|()
 operator|.
 name|hasNext
 argument_list|()
+operator|||
+name|onlyBySubstitution
 condition|)
 block|{
 name|that
@@ -1561,6 +1691,31 @@ name|rule
 argument_list|)
 expr_stmt|;
 block|}
+if|if
+condition|(
+name|onlyBySubstitution
+condition|)
+block|{
+name|RelOptRules
+operator|.
+name|MATERIALIZATION_RULES
+operator|.
+name|forEach
+argument_list|(
+name|rule
+lambda|->
+block|{
+name|planner
+operator|.
+name|removeRule
+argument_list|(
+name|rule
+argument_list|)
+expr_stmt|;
+block|}
+argument_list|)
+expr_stmt|;
+block|}
 block|}
 argument_list|)
 expr_stmt|;
@@ -1592,6 +1747,36 @@ name|String
 name|model
 parameter_list|)
 block|{
+name|checkNoMaterialize
+argument_list|(
+name|materialize
+argument_list|,
+name|query
+argument_list|,
+name|model
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Checks that a given query CAN NOT use a materialized view with a given    * definition. */
+specifier|private
+name|void
+name|checkNoMaterialize
+parameter_list|(
+name|String
+name|materialize
+parameter_list|,
+name|String
+name|query
+parameter_list|,
+name|String
+name|model
+parameter_list|,
+name|boolean
+name|onlyBySubstitution
+parameter_list|)
+block|{
 try|try
 init|(
 name|TryThreadLocal
@@ -1616,6 +1801,11 @@ argument_list|()
 expr_stmt|;
 name|CalciteAssert
 operator|.
+name|AssertQuery
+name|that
+init|=
+name|CalciteAssert
+operator|.
 name|that
 argument_list|()
 operator|.
@@ -1637,6 +1827,53 @@ name|enableMaterializations
 argument_list|(
 literal|true
 argument_list|)
+decl_stmt|;
+if|if
+condition|(
+name|onlyBySubstitution
+condition|)
+block|{
+name|that
+operator|.
+name|withHook
+argument_list|(
+name|Hook
+operator|.
+name|PLANNER
+argument_list|,
+operator|(
+name|Consumer
+argument_list|<
+name|RelOptPlanner
+argument_list|>
+operator|)
+name|planner
+lambda|->
+block|{
+name|RelOptRules
+operator|.
+name|MATERIALIZATION_RULES
+operator|.
+name|forEach
+argument_list|(
+name|rule
+lambda|->
+block|{
+name|planner
+operator|.
+name|removeRule
+argument_list|(
+name|rule
+argument_list|)
+expr_stmt|;
+block|}
+argument_list|)
+expr_stmt|;
+block|}
+argument_list|)
+expr_stmt|;
+block|}
+name|that
 operator|.
 name|explainContains
 argument_list|(
@@ -1752,7 +1989,7 @@ name|checkResultContains
 argument_list|(
 literal|"EnumerableCalc(expr#0..2=[{inputs}], expr#3=[2], "
 operator|+
-literal|"expr#4=[=($t0, $t3)], name=[$t2], EE=[$t1], $condition=[$t4])\n"
+literal|"expr#4=[=($t0, $t3)], name=[$t2], E=[$t1], $condition=[$t4])\n"
 operator|+
 literal|"  EnumerableTableScan(table=[[hr, m0]]"
 argument_list|)
@@ -2018,7 +2255,7 @@ name|checkResultContains
 argument_list|(
 literal|"EnumerableCalc(expr#0..2=[{inputs}], expr#3=[1], expr#4=[+($t1, $t3)], expr#5=[10], "
 operator|+
-literal|"expr#6=[CAST($t0):INTEGER NOT NULL], expr#7=[=($t5, $t6)], $f0=[$t4], "
+literal|"expr#6=[CAST($t0):INTEGER NOT NULL], expr#7=[=($t5, $t6)], X=[$t4], "
 operator|+
 literal|"name=[$t2], $condition=[$t7])\n"
 operator|+
@@ -2388,6 +2625,290 @@ name|query
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testAggregate4
+parameter_list|()
+block|{
+name|String
+name|mv
+init|=
+literal|""
+operator|+
+literal|"select \"deptno\", \"commission\", sum(\"salary\")\n"
+operator|+
+literal|"from \"emps\"\n"
+operator|+
+literal|"group by \"deptno\", \"commission\""
+decl_stmt|;
+name|String
+name|query
+init|=
+literal|""
+operator|+
+literal|"select \"deptno\", sum(\"salary\")\n"
+operator|+
+literal|"from \"emps\"\n"
+operator|+
+literal|"where \"commission\" = 100\n"
+operator|+
+literal|"group by \"deptno\""
+decl_stmt|;
+name|checkMaterialize
+argument_list|(
+name|mv
+argument_list|,
+name|query
+argument_list|,
+literal|true
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testAggregate5
+parameter_list|()
+block|{
+name|String
+name|mv
+init|=
+literal|""
+operator|+
+literal|"select \"deptno\" + \"commission\", \"commission\", sum(\"salary\")\n"
+operator|+
+literal|"from \"emps\"\n"
+operator|+
+literal|"group by \"deptno\" + \"commission\", \"commission\""
+decl_stmt|;
+name|String
+name|query
+init|=
+literal|""
+operator|+
+literal|"select \"commission\", sum(\"salary\")\n"
+operator|+
+literal|"from \"emps\"\n"
+operator|+
+literal|"where \"commission\" * (\"deptno\" + \"commission\") = 100\n"
+operator|+
+literal|"group by \"commission\""
+decl_stmt|;
+name|checkMaterialize
+argument_list|(
+name|mv
+argument_list|,
+name|query
+argument_list|,
+literal|true
+argument_list|)
+expr_stmt|;
+block|}
+comment|/**    * Matching failed because the filtering condition under Aggregate    * references columns for aggregation.    */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testAggregate6
+parameter_list|()
+block|{
+name|String
+name|mv
+init|=
+literal|""
+operator|+
+literal|"select * from\n"
+operator|+
+literal|"(select \"deptno\", sum(\"salary\") as \"sum_salary\", sum(\"commission\")\n"
+operator|+
+literal|"from \"emps\"\n"
+operator|+
+literal|"group by \"deptno\")\n"
+operator|+
+literal|"where \"sum_salary\"> 10"
+decl_stmt|;
+name|String
+name|query
+init|=
+literal|""
+operator|+
+literal|"select * from\n"
+operator|+
+literal|"(select \"deptno\", sum(\"salary\") as \"sum_salary\"\n"
+operator|+
+literal|"from \"emps\"\n"
+operator|+
+literal|"where \"salary\"> 1000\n"
+operator|+
+literal|"group by \"deptno\")\n"
+operator|+
+literal|"where \"sum_salary\"> 10"
+decl_stmt|;
+name|checkNoMaterialize
+argument_list|(
+name|mv
+argument_list|,
+name|query
+argument_list|,
+name|HR_FKUK_MODEL
+argument_list|,
+literal|true
+argument_list|)
+expr_stmt|;
+block|}
+comment|/**    * There will be a compensating Project added after matching of the Aggregate.    * This rule targets to test if the Calc can be handled.    */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testCompensatingCalcWithAggregate0
+parameter_list|()
+block|{
+name|String
+name|mv
+init|=
+literal|""
+operator|+
+literal|"select * from\n"
+operator|+
+literal|"(select \"deptno\", sum(\"salary\") as \"sum_salary\", sum(\"commission\")\n"
+operator|+
+literal|"from \"emps\"\n"
+operator|+
+literal|"group by \"deptno\")\n"
+operator|+
+literal|"where \"sum_salary\"> 10"
+decl_stmt|;
+name|String
+name|query
+init|=
+literal|""
+operator|+
+literal|"select * from\n"
+operator|+
+literal|"(select \"deptno\", sum(\"salary\") as \"sum_salary\"\n"
+operator|+
+literal|"from \"emps\"\n"
+operator|+
+literal|"group by \"deptno\")\n"
+operator|+
+literal|"where \"sum_salary\"> 10"
+decl_stmt|;
+name|checkMaterialize
+argument_list|(
+name|mv
+argument_list|,
+name|query
+argument_list|,
+literal|true
+argument_list|)
+expr_stmt|;
+block|}
+comment|/**    * There will be a compensating Project + Filter added after matching of the Aggregate.    * This rule targets to test if the Calc can be handled.    */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testCompensatingCalcWithAggregate1
+parameter_list|()
+block|{
+name|String
+name|mv
+init|=
+literal|""
+operator|+
+literal|"select * from\n"
+operator|+
+literal|"(select \"deptno\", sum(\"salary\") as \"sum_salary\", sum(\"commission\")\n"
+operator|+
+literal|"from \"emps\"\n"
+operator|+
+literal|"group by \"deptno\")\n"
+operator|+
+literal|"where \"sum_salary\"> 10"
+decl_stmt|;
+name|String
+name|query
+init|=
+literal|""
+operator|+
+literal|"select * from\n"
+operator|+
+literal|"(select \"deptno\", sum(\"salary\") as \"sum_salary\"\n"
+operator|+
+literal|"from \"emps\"\n"
+operator|+
+literal|"where \"deptno\">=20\n"
+operator|+
+literal|"group by \"deptno\")\n"
+operator|+
+literal|"where \"sum_salary\"> 10"
+decl_stmt|;
+name|checkMaterialize
+argument_list|(
+name|mv
+argument_list|,
+name|query
+argument_list|,
+literal|true
+argument_list|)
+expr_stmt|;
+block|}
+comment|/**    * There will be a compensating Project + Filter added after matching of the Aggregate.    * This rule targets to test if the Calc can be handled.    */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testCompensatingCalcWithAggregate2
+parameter_list|()
+block|{
+name|String
+name|mv
+init|=
+literal|""
+operator|+
+literal|"select * from\n"
+operator|+
+literal|"(select \"deptno\", sum(\"salary\") as \"sum_salary\", sum(\"commission\")\n"
+operator|+
+literal|"from \"emps\"\n"
+operator|+
+literal|"where \"deptno\">= 10\n"
+operator|+
+literal|"group by \"deptno\")\n"
+operator|+
+literal|"where \"sum_salary\"> 10"
+decl_stmt|;
+name|String
+name|query
+init|=
+literal|""
+operator|+
+literal|"select * from\n"
+operator|+
+literal|"(select \"deptno\", sum(\"salary\") as \"sum_salary\"\n"
+operator|+
+literal|"from \"emps\"\n"
+operator|+
+literal|"where \"deptno\">= 20\n"
+operator|+
+literal|"group by \"deptno\")\n"
+operator|+
+literal|"where \"sum_salary\"> 20"
+decl_stmt|;
+name|checkMaterialize
+argument_list|(
+name|mv
+argument_list|,
+name|query
+argument_list|,
+literal|true
+argument_list|)
+expr_stmt|;
+block|}
 comment|/** Aggregation query at same level of aggregation as aggregation    * materialization with grouping sets. */
 annotation|@
 name|Test
@@ -2669,6 +3190,86 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testAggregateOnProjectAndFilter
+parameter_list|()
+block|{
+name|String
+name|mv
+init|=
+literal|""
+operator|+
+literal|"select \"deptno\", sum(\"salary\"), count(1)\n"
+operator|+
+literal|"from \"emps\"\n"
+operator|+
+literal|"group by \"deptno\""
+decl_stmt|;
+name|String
+name|query
+init|=
+literal|""
+operator|+
+literal|"select \"deptno\", count(1)\n"
+operator|+
+literal|"from \"emps\"\n"
+operator|+
+literal|"where \"deptno\" = 10\n"
+operator|+
+literal|"group by \"deptno\""
+decl_stmt|;
+name|checkMaterialize
+argument_list|(
+name|mv
+argument_list|,
+name|query
+argument_list|,
+literal|true
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testProjectOnProject
+parameter_list|()
+block|{
+name|String
+name|mv
+init|=
+literal|""
+operator|+
+literal|"select \"deptno\", sum(\"salary\") + 2, sum(\"commission\")\n"
+operator|+
+literal|"from \"emps\"\n"
+operator|+
+literal|"group by \"deptno\""
+decl_stmt|;
+name|String
+name|query
+init|=
+literal|""
+operator|+
+literal|"select \"deptno\", sum(\"salary\") + 2\n"
+operator|+
+literal|"from \"emps\"\n"
+operator|+
+literal|"group by \"deptno\""
+decl_stmt|;
+name|checkMaterialize
+argument_list|(
+name|mv
+argument_list|,
+name|query
+argument_list|,
+literal|true
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testPermutationError
 parameter_list|()
 block|{
@@ -2688,6 +3289,412 @@ name|checkResultContains
 argument_list|(
 literal|"EnumerableTableScan(table=[[hr, m0]])"
 argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testJoinOnLeftProjectToJoin
+parameter_list|()
+block|{
+name|String
+name|mv
+init|=
+literal|""
+operator|+
+literal|"select * from\n"
+operator|+
+literal|"  (select \"deptno\", sum(\"salary\"), sum(\"commission\")\n"
+operator|+
+literal|"  from \"emps\"\n"
+operator|+
+literal|"  group by \"deptno\") \"A\"\n"
+operator|+
+literal|"  join\n"
+operator|+
+literal|"  (select \"deptno\", count(\"name\")\n"
+operator|+
+literal|"  from \"depts\"\n"
+operator|+
+literal|"  group by \"deptno\") \"B\"\n"
+operator|+
+literal|"  on \"A\".\"deptno\" = \"B\".\"deptno\""
+decl_stmt|;
+name|String
+name|query
+init|=
+literal|""
+operator|+
+literal|"select * from\n"
+operator|+
+literal|"  (select \"deptno\", sum(\"salary\")\n"
+operator|+
+literal|"  from \"emps\"\n"
+operator|+
+literal|"  group by \"deptno\") \"A\"\n"
+operator|+
+literal|"  join\n"
+operator|+
+literal|"  (select \"deptno\", count(\"name\")\n"
+operator|+
+literal|"  from \"depts\"\n"
+operator|+
+literal|"  group by \"deptno\") \"B\"\n"
+operator|+
+literal|"  on \"A\".\"deptno\" = \"B\".\"deptno\""
+decl_stmt|;
+name|checkMaterialize
+argument_list|(
+name|mv
+argument_list|,
+name|query
+argument_list|,
+literal|true
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testJoinOnRightProjectToJoin
+parameter_list|()
+block|{
+name|String
+name|mv
+init|=
+literal|""
+operator|+
+literal|"select * from\n"
+operator|+
+literal|"  (select \"deptno\", sum(\"salary\"), sum(\"commission\")\n"
+operator|+
+literal|"  from \"emps\"\n"
+operator|+
+literal|"  group by \"deptno\") \"A\"\n"
+operator|+
+literal|"  join\n"
+operator|+
+literal|"  (select \"deptno\", count(\"name\")\n"
+operator|+
+literal|"  from \"depts\"\n"
+operator|+
+literal|"  group by \"deptno\") \"B\"\n"
+operator|+
+literal|"  on \"A\".\"deptno\" = \"B\".\"deptno\""
+decl_stmt|;
+name|String
+name|query
+init|=
+literal|""
+operator|+
+literal|"select * from\n"
+operator|+
+literal|"  (select \"deptno\", sum(\"salary\"), sum(\"commission\")\n"
+operator|+
+literal|"  from \"emps\"\n"
+operator|+
+literal|"  group by \"deptno\") \"A\"\n"
+operator|+
+literal|"  join\n"
+operator|+
+literal|"  (select \"deptno\"\n"
+operator|+
+literal|"  from \"depts\"\n"
+operator|+
+literal|"  group by \"deptno\") \"B\"\n"
+operator|+
+literal|"  on \"A\".\"deptno\" = \"B\".\"deptno\""
+decl_stmt|;
+name|checkMaterialize
+argument_list|(
+name|mv
+argument_list|,
+name|query
+argument_list|,
+literal|true
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testJoinOnProjectsToJoin
+parameter_list|()
+block|{
+name|String
+name|mv
+init|=
+literal|""
+operator|+
+literal|"select * from\n"
+operator|+
+literal|"  (select \"deptno\", sum(\"salary\"), sum(\"commission\")\n"
+operator|+
+literal|"  from \"emps\"\n"
+operator|+
+literal|"  group by \"deptno\") \"A\"\n"
+operator|+
+literal|"  join\n"
+operator|+
+literal|"  (select \"deptno\", count(\"name\")\n"
+operator|+
+literal|"  from \"depts\"\n"
+operator|+
+literal|"  group by \"deptno\") \"B\"\n"
+operator|+
+literal|"  on \"A\".\"deptno\" = \"B\".\"deptno\""
+decl_stmt|;
+name|String
+name|query
+init|=
+literal|""
+operator|+
+literal|"select * from\n"
+operator|+
+literal|"  (select \"deptno\", sum(\"salary\")\n"
+operator|+
+literal|"  from \"emps\"\n"
+operator|+
+literal|"  group by \"deptno\") \"A\"\n"
+operator|+
+literal|"  join\n"
+operator|+
+literal|"  (select \"deptno\"\n"
+operator|+
+literal|"  from \"depts\"\n"
+operator|+
+literal|"  group by \"deptno\") \"B\"\n"
+operator|+
+literal|"  on \"A\".\"deptno\" = \"B\".\"deptno\""
+decl_stmt|;
+name|checkMaterialize
+argument_list|(
+name|mv
+argument_list|,
+name|query
+argument_list|,
+literal|true
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testJoinOnCalcToJoin0
+parameter_list|()
+block|{
+name|String
+name|mv
+init|=
+literal|""
+operator|+
+literal|"select \"emps\".\"empid\", \"emps\".\"deptno\", \"depts\".\"deptno\" from\n"
+operator|+
+literal|"\"emps\" join \"depts\"\n"
+operator|+
+literal|"on \"emps\".\"deptno\" = \"depts\".\"deptno\""
+decl_stmt|;
+name|String
+name|query
+init|=
+literal|""
+operator|+
+literal|"select \"A\".\"empid\", \"A\".\"deptno\", \"depts\".\"deptno\" from\n"
+operator|+
+literal|" (select \"empid\", \"deptno\" from \"emps\" where \"deptno\"> 10) A"
+operator|+
+literal|" join \"depts\"\n"
+operator|+
+literal|"on \"A\".\"deptno\" = \"depts\".\"deptno\""
+decl_stmt|;
+name|checkMaterialize
+argument_list|(
+name|mv
+argument_list|,
+name|query
+argument_list|,
+literal|true
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testJoinOnCalcToJoin1
+parameter_list|()
+block|{
+name|String
+name|mv
+init|=
+literal|""
+operator|+
+literal|"select \"emps\".\"empid\", \"emps\".\"deptno\", \"depts\".\"deptno\" from\n"
+operator|+
+literal|"\"emps\" join \"depts\"\n"
+operator|+
+literal|"on \"emps\".\"deptno\" = \"depts\".\"deptno\""
+decl_stmt|;
+name|String
+name|query
+init|=
+literal|""
+operator|+
+literal|"select \"emps\".\"empid\", \"emps\".\"deptno\", \"B\".\"deptno\" from\n"
+operator|+
+literal|"\"emps\" join\n"
+operator|+
+literal|"(select \"deptno\" from \"depts\" where \"deptno\"> 10) B\n"
+operator|+
+literal|"on \"emps\".\"deptno\" = \"B\".\"deptno\""
+decl_stmt|;
+name|checkMaterialize
+argument_list|(
+name|mv
+argument_list|,
+name|query
+argument_list|,
+literal|true
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testJoinOnCalcToJoin2
+parameter_list|()
+block|{
+name|String
+name|mv
+init|=
+literal|""
+operator|+
+literal|"select \"emps\".\"empid\", \"emps\".\"deptno\", \"depts\".\"deptno\" from\n"
+operator|+
+literal|"\"emps\" join \"depts\"\n"
+operator|+
+literal|"on \"emps\".\"deptno\" = \"depts\".\"deptno\""
+decl_stmt|;
+name|String
+name|query
+init|=
+literal|""
+operator|+
+literal|"select * from\n"
+operator|+
+literal|"(select \"empid\", \"deptno\" from \"emps\" where \"empid\"> 10) A\n"
+operator|+
+literal|"join\n"
+operator|+
+literal|"(select \"deptno\" from \"depts\" where \"deptno\"> 10) B\n"
+operator|+
+literal|"on \"A\".\"deptno\" = \"B\".\"deptno\""
+decl_stmt|;
+name|checkMaterialize
+argument_list|(
+name|mv
+argument_list|,
+name|query
+argument_list|,
+literal|true
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testJoinOnCalcToJoin3
+parameter_list|()
+block|{
+name|String
+name|mv
+init|=
+literal|""
+operator|+
+literal|"select \"emps\".\"empid\", \"emps\".\"deptno\", \"depts\".\"deptno\" from\n"
+operator|+
+literal|"\"emps\" join \"depts\"\n"
+operator|+
+literal|"on \"emps\".\"deptno\" = \"depts\".\"deptno\""
+decl_stmt|;
+name|String
+name|query
+init|=
+literal|""
+operator|+
+literal|"select * from\n"
+operator|+
+literal|"(select \"empid\", \"deptno\" + 1 as \"deptno\" from \"emps\" where \"empid\"> 10) A\n"
+operator|+
+literal|"join\n"
+operator|+
+literal|"(select \"deptno\" from \"depts\" where \"deptno\"> 10) B\n"
+operator|+
+literal|"on \"A\".\"deptno\" = \"B\".\"deptno\""
+decl_stmt|;
+comment|// Match failure because join condition references non-mapping projects.
+name|checkNoMaterialize
+argument_list|(
+name|mv
+argument_list|,
+name|query
+argument_list|,
+name|HR_FKUK_MODEL
+argument_list|,
+literal|true
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testJoinOnCalcToJoin4
+parameter_list|()
+block|{
+name|String
+name|mv
+init|=
+literal|""
+operator|+
+literal|"select \"emps\".\"empid\", \"emps\".\"deptno\", \"depts\".\"deptno\" from\n"
+operator|+
+literal|"\"emps\" join \"depts\"\n"
+operator|+
+literal|"on \"emps\".\"deptno\" = \"depts\".\"deptno\""
+decl_stmt|;
+name|String
+name|query
+init|=
+literal|""
+operator|+
+literal|"select * from\n"
+operator|+
+literal|"(select \"empid\", \"deptno\" from \"emps\" where \"empid\" is not null) A\n"
+operator|+
+literal|"full join\n"
+operator|+
+literal|"(select \"deptno\" from \"depts\" where \"deptno\" is not null) B\n"
+operator|+
+literal|"on \"A\".\"deptno\" = \"B\".\"deptno\""
+decl_stmt|;
+comment|// Match failure because of outer join type but filtering condition in Calc is not empty.
+name|checkNoMaterialize
+argument_list|(
+name|mv
+argument_list|,
+name|query
+argument_list|,
+name|HR_FKUK_MODEL
+argument_list|,
+literal|true
 argument_list|)
 expr_stmt|;
 block|}
@@ -5075,7 +6082,7 @@ name|CalciteAssert
 operator|.
 name|checkResultContains
 argument_list|(
-literal|"EnumerableCalc(expr#0..1=[{inputs}], expr#2=[20], expr#3=[<($t2, $t1)], "
+literal|"EnumerableCalc(expr#0..1=[{inputs}], expr#2=[20], expr#3=[>($t1, $t2)], "
 operator|+
 literal|"empid=[$t0], $condition=[$t3])\n"
 operator|+
@@ -5209,7 +6216,7 @@ name|CalciteAssert
 operator|.
 name|checkResultContains
 argument_list|(
-literal|"EnumerableCalc(expr#0..1=[{inputs}], expr#2=[15], expr#3=[<($t2, $t1)], "
+literal|"EnumerableCalc(expr#0..1=[{inputs}], expr#2=[15], expr#3=[>($t1, $t2)], "
 operator|+
 literal|"deptno=[$t0], $condition=[$t3])\n"
 operator|+
@@ -6897,7 +7904,7 @@ block|{
 name|String
 name|q
 init|=
-literal|"select \"deptno\" from \"emps\""
+literal|"select distinct \"deptno\" from \"emps\""
 decl_stmt|;
 try|try
 init|(
@@ -6959,7 +7966,7 @@ expr_stmt|;
 name|String
 name|sql
 init|=
-literal|"select `deptno` as `empid`, '' as `name`\n"
+literal|"select distinct `deptno` as `empid`, '' as `name`\n"
 operator|+
 literal|"from `emps`"
 decl_stmt|;
@@ -8382,6 +9389,59 @@ operator|+
 name|sql1
 argument_list|,
 name|HR_FKUK_MODEL
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testUnionOnCalcsToUnion
+parameter_list|()
+block|{
+name|String
+name|mv
+init|=
+literal|""
+operator|+
+literal|"select \"deptno\", \"salary\"\n"
+operator|+
+literal|"from \"emps\"\n"
+operator|+
+literal|"where \"empid\"> 300\n"
+operator|+
+literal|"union all\n"
+operator|+
+literal|"select \"deptno\", \"salary\"\n"
+operator|+
+literal|"from \"emps\"\n"
+operator|+
+literal|"where \"empid\"< 100"
+decl_stmt|;
+name|String
+name|query
+init|=
+literal|""
+operator|+
+literal|"select \"deptno\", \"salary\" * 2\n"
+operator|+
+literal|"from \"emps\"\n"
+operator|+
+literal|"where \"empid\"> 300 and \"salary\"> 100\n"
+operator|+
+literal|"union all\n"
+operator|+
+literal|"select \"deptno\", \"salary\" * 2\n"
+operator|+
+literal|"from \"emps\"\n"
+operator|+
+literal|"where \"empid\"< 100 and \"salary\"> 100"
+decl_stmt|;
+name|checkMaterialize
+argument_list|(
+name|mv
+argument_list|,
+name|query
 argument_list|)
 expr_stmt|;
 block|}
