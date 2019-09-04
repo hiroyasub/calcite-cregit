@@ -1541,7 +1541,6 @@ return|return;
 block|}
 try|try
 block|{
-specifier|final
 name|RelOptCost
 name|cost
 init|=
@@ -1554,21 +1553,89 @@ argument_list|,
 name|mq
 argument_list|)
 decl_stmt|;
-if|if
-condition|(
+name|boolean
+name|updateBest
+init|=
 name|cost
 operator|.
 name|isLt
 argument_list|(
 name|bestCost
 argument_list|)
+decl_stmt|;
+comment|// Best rel's cost is increased, we need to search for new best rel
+if|if
+condition|(
+name|rel
+operator|==
+name|best
+operator|&&
+name|bestCost
+operator|.
+name|isLt
+argument_list|(
+name|cost
+argument_list|)
+condition|)
+block|{
+name|updateBest
+operator|=
+literal|true
+expr_stmt|;
+for|for
+control|(
+name|RelNode
+name|node
+range|:
+name|getRels
+argument_list|()
+control|)
+block|{
+name|RelOptCost
+name|relCost
+init|=
+name|planner
+operator|.
+name|getCost
+argument_list|(
+name|node
+argument_list|,
+name|mq
+argument_list|)
+decl_stmt|;
+if|if
+condition|(
+name|relCost
+operator|.
+name|isLt
+argument_list|(
+name|cost
+argument_list|)
+condition|)
+block|{
+name|cost
+operator|=
+name|relCost
+expr_stmt|;
+name|rel
+operator|=
+name|node
+expr_stmt|;
+block|}
+block|}
+block|}
+comment|// Update subset best cost when we find a cheaper rel or the current
+comment|// best's cost is changed
+if|if
+condition|(
+name|updateBest
 condition|)
 block|{
 name|LOGGER
 operator|.
 name|trace
 argument_list|(
-literal|"Subset cost improved: subset [{}] cost was {} now {}"
+literal|"Subset cost changed: subset [{}] cost was {} now {}"
 argument_list|,
 name|this
 argument_list|,
@@ -1585,8 +1652,7 @@ name|best
 operator|=
 name|rel
 expr_stmt|;
-comment|// Lower cost means lower importance. Other nodes will change
-comment|// too, but we'll get to them later.
+comment|// Recompute subset's importance and propagate cost change to parents
 name|planner
 operator|.
 name|ruleQueue

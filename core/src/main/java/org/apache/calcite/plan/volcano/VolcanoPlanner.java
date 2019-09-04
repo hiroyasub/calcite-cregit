@@ -3968,7 +3968,6 @@ name|set
 argument_list|)
 return|;
 block|}
-comment|// Make sure best RelNode is valid
 if|if
 condition|(
 name|subset
@@ -3976,7 +3975,11 @@ operator|.
 name|best
 operator|!=
 literal|null
-operator|&&
+condition|)
+block|{
+comment|// Make sure best RelNode is valid
+if|if
+condition|(
 operator|!
 name|subset
 operator|.
@@ -4012,6 +4015,65 @@ name|getDescription
 argument_list|()
 argument_list|)
 return|;
+block|}
+comment|// Make sure bestCost is up-to-date
+name|RelOptCost
+name|bestCost
+init|=
+name|getCost
+argument_list|(
+name|subset
+operator|.
+name|best
+argument_list|,
+name|subset
+operator|.
+name|best
+operator|.
+name|getCluster
+argument_list|()
+operator|.
+name|getMetadataQuery
+argument_list|()
+argument_list|)
+decl_stmt|;
+if|if
+condition|(
+operator|!
+name|subset
+operator|.
+name|bestCost
+operator|.
+name|equals
+argument_list|(
+name|bestCost
+argument_list|)
+condition|)
+block|{
+return|return
+name|litmus
+operator|.
+name|fail
+argument_list|(
+literal|"RelSubset ["
+operator|+
+name|subset
+operator|.
+name|getDescription
+argument_list|()
+operator|+
+literal|"] has wrong best cost "
+operator|+
+name|subset
+operator|.
+name|bestCost
+operator|+
+literal|". Correct cost is "
+operator|+
+name|bestCost
+argument_list|)
+return|;
+block|}
 block|}
 for|for
 control|(
