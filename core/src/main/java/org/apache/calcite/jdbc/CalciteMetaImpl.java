@@ -3399,6 +3399,10 @@ name|signature
 decl_stmt|;
 try|try
 block|{
+specifier|final
+name|int
+name|updateCount
+decl_stmt|;
 synchronized|synchronized
 init|(
 name|callback
@@ -3477,10 +3481,6 @@ argument_list|(
 name|signature
 argument_list|)
 expr_stmt|;
-specifier|final
-name|int
-name|updateCount
-decl_stmt|;
 switch|switch
 condition|(
 name|signature
@@ -3553,6 +3553,8 @@ argument_list|,
 name|signature
 argument_list|,
 literal|null
+argument_list|,
+name|updateCount
 argument_list|)
 decl_stmt|;
 return|return
