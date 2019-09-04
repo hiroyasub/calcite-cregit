@@ -3551,17 +3551,17 @@ specifier|final
 name|String
 name|sql
 init|=
-literal|"select * from emp order by ename limit 10"
+literal|"select * from emp order by ename limit 0"
 decl_stmt|;
 name|checkRowCount
 argument_list|(
 name|sql
 argument_list|,
-literal|10d
+literal|1d
 argument_list|,
 literal|0D
 argument_list|,
-literal|10d
+literal|0d
 argument_list|)
 expr_stmt|;
 block|}
