@@ -3691,6 +3691,43 @@ name|expected
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3282">[CALCITE-3282]    * HiveSqlDialect unparse Interger type as Int in order    * to be compatible with Hive1.x</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testHiveCastAsInt
+parameter_list|()
+block|{
+name|String
+name|query
+init|=
+literal|"select cast( cast(\"employee_id\" as varchar) as int) "
+operator|+
+literal|"from \"foodmart\".\"reserve_employee\" "
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT CAST(CAST(employee_id AS VARCHAR) AS INT)\n"
+operator|+
+literal|"FROM foodmart.reserve_employee"
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|withHive
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3220">[CALCITE-3220]    * HiveSqlDialect should transform the SQL-standard TRIM function to TRIM,    * LTRIM or RTRIM</a>. */
 annotation|@
 name|Test

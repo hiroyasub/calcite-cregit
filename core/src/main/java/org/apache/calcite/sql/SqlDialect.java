@@ -3253,6 +3253,7 @@ return|return
 literal|true
 return|;
 block|}
+comment|/** Returns SqlNode for type in "cast(column as type)", which might be   * different between databases by type name, precision etc. */
 specifier|public
 name|SqlNode
 name|getCastSpec
