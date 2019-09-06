@@ -698,9 +698,6 @@ specifier|public
 name|void
 name|checkRewrite
 parameter_list|(
-name|SqlValidator
-name|validator
-parameter_list|,
 name|String
 name|query
 parameter_list|,

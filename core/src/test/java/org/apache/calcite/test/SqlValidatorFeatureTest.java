@@ -426,10 +426,13 @@ name|feature
 parameter_list|)
 block|{
 comment|// Test once with feature enabled:  should pass
-name|check
+name|sql
 argument_list|(
 name|sql
 argument_list|)
+operator|.
+name|ok
+argument_list|()
 expr_stmt|;
 comment|// Test once with feature disabled:  should fail
 try|try
@@ -438,10 +441,13 @@ name|disabledFeature
 operator|=
 name|feature
 expr_stmt|;
-name|checkFails
+name|sql
 argument_list|(
 name|sql
-argument_list|,
+argument_list|)
+operator|.
+name|fails
+argument_list|(
 name|FEATURE_DISABLED
 argument_list|)
 expr_stmt|;

@@ -118,10 +118,13 @@ name|void
 name|testAlterSystemExtension
 parameter_list|()
 block|{
-name|check
+name|sql
 argument_list|(
 literal|"alter system upload jar '/path/to/jar'"
-argument_list|,
+argument_list|)
+operator|.
+name|ok
+argument_list|(
 literal|"ALTER SYSTEM UPLOAD JAR '/path/to/jar'"
 argument_list|)
 expr_stmt|;
@@ -134,10 +137,13 @@ name|testAlterSystemExtensionWithoutAlter
 parameter_list|()
 block|{
 comment|// We need to include the scope for custom alter operations
-name|checkFails
+name|sql
 argument_list|(
 literal|"^upload^ jar '/path/to/jar'"
-argument_list|,
+argument_list|)
+operator|.
+name|fails
+argument_list|(
 literal|"(?s).*Encountered \"upload\" at .*"
 argument_list|)
 expr_stmt|;

@@ -285,7 +285,7 @@ name|SqlTester
 name|getTester
 parameter_list|()
 block|{
-comment|// Dymamic schema should not be reused since it is mutable, so
+comment|// Dynamic schema should not be reused since it is mutable, so
 comment|// we create new SqlTestFactory for each test
 return|return
 operator|new

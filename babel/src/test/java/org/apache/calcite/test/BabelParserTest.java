@@ -981,10 +981,13 @@ name|void
 name|testCaseExpressionBabel
 parameter_list|()
 block|{
-name|checkFails
+name|sql
 argument_list|(
 literal|"case x when 2, 4 then 3 ^when^ then 5 else 4 end"
-argument_list|,
+argument_list|)
+operator|.
+name|fails
+argument_list|(
 literal|"(?s)Encountered \"when then\" at .*"
 argument_list|)
 expr_stmt|;

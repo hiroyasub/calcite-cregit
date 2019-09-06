@@ -575,14 +575,9 @@ argument_list|(
 name|sql
 argument_list|)
 operator|.
-name|tester
-argument_list|(
-name|tester
-operator|.
 name|withCaseSensitive
 argument_list|(
 literal|false
-argument_list|)
 argument_list|)
 operator|.
 name|sansCarets

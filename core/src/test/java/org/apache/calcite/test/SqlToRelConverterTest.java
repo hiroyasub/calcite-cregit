@@ -674,6 +674,9 @@ argument_list|()
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Deprecated
+comment|// to be removed before 1.23
 specifier|protected
 specifier|final
 name|void

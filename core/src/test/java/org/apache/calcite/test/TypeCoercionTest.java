@@ -3089,30 +3089,45 @@ name|testArithmeticExpressionsWithStrings
 parameter_list|()
 block|{
 comment|// for null type in binary arithmetic.
-name|checkExp
+name|expr
 argument_list|(
 literal|"1 + null"
 argument_list|)
+operator|.
+name|ok
+argument_list|()
 expr_stmt|;
-name|checkExp
+name|expr
 argument_list|(
 literal|"1 - null"
 argument_list|)
+operator|.
+name|ok
+argument_list|()
 expr_stmt|;
-name|checkExp
+name|expr
 argument_list|(
 literal|"1 / null"
 argument_list|)
+operator|.
+name|ok
+argument_list|()
 expr_stmt|;
-name|checkExp
+name|expr
 argument_list|(
 literal|"1 * null"
 argument_list|)
+operator|.
+name|ok
+argument_list|()
 expr_stmt|;
-name|checkExp
+name|expr
 argument_list|(
 literal|"MOD(1, null)"
 argument_list|)
+operator|.
+name|ok
+argument_list|()
 expr_stmt|;
 name|sql
 argument_list|(
@@ -3136,20 +3151,29 @@ operator|+
 literal|"NOT NULL EXPR$4) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|checkExp
+name|expr
 argument_list|(
 literal|"select abs(t1_varchar20) from t1"
 argument_list|)
+operator|.
+name|ok
+argument_list|()
 expr_stmt|;
-name|checkExp
+name|expr
 argument_list|(
 literal|"select sum(t1_varchar20) from t1"
 argument_list|)
+operator|.
+name|ok
+argument_list|()
 expr_stmt|;
-name|checkExp
+name|expr
 argument_list|(
 literal|"select avg(t1_varchar20) from t1"
 argument_list|)
+operator|.
+name|ok
+argument_list|()
 expr_stmt|;
 name|tester
 operator|.
@@ -3169,25 +3193,37 @@ operator|.
 name|STDDEV_SAMP
 argument_list|)
 expr_stmt|;
-name|checkExp
+name|expr
 argument_list|(
 literal|"select STDDEV_POP(t1_varchar20) from t1"
 argument_list|)
+operator|.
+name|ok
+argument_list|()
 expr_stmt|;
-name|checkExp
+name|expr
 argument_list|(
 literal|"select STDDEV_SAMP(t1_varchar20) from t1"
 argument_list|)
+operator|.
+name|ok
+argument_list|()
 expr_stmt|;
-name|checkExp
+name|expr
 argument_list|(
 literal|"select -(t1_varchar20) from t1"
 argument_list|)
+operator|.
+name|ok
+argument_list|()
 expr_stmt|;
-name|checkExp
+name|expr
 argument_list|(
 literal|"select +(t1_varchar20) from t1"
 argument_list|)
+operator|.
+name|ok
+argument_list|()
 expr_stmt|;
 name|tester
 operator|.
@@ -3207,85 +3243,121 @@ operator|.
 name|VAR_SAMP
 argument_list|)
 expr_stmt|;
-name|checkExp
+name|expr
 argument_list|(
 literal|"select VAR_POP(t1_varchar20) from t1"
 argument_list|)
+operator|.
+name|ok
+argument_list|()
 expr_stmt|;
-name|checkExp
+name|expr
 argument_list|(
 literal|"select VAR_SAMP(t1_varchar20) from t1"
 argument_list|)
+operator|.
+name|ok
+argument_list|()
 expr_stmt|;
 comment|// test divide with strings
-name|checkExpType
+name|expr
 argument_list|(
 literal|"'12.3'/5"
-argument_list|,
+argument_list|)
+operator|.
+name|columnType
+argument_list|(
 literal|"INTEGER NOT NULL"
 argument_list|)
 expr_stmt|;
-name|checkExpType
+name|expr
 argument_list|(
 literal|"'12.3'/cast(5 as bigint)"
-argument_list|,
+argument_list|)
+operator|.
+name|columnType
+argument_list|(
 literal|"BIGINT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|checkExpType
+name|expr
 argument_list|(
 literal|"'12.3'/cast(5 as float)"
-argument_list|,
+argument_list|)
+operator|.
+name|columnType
+argument_list|(
 literal|"FLOAT NOT NULL"
 argument_list|)
 expr_stmt|;
-name|checkExpType
+name|expr
 argument_list|(
 literal|"'12.3'/cast(5 as double)"
-argument_list|,
+argument_list|)
+operator|.
+name|columnType
+argument_list|(
 literal|"DOUBLE NOT NULL"
 argument_list|)
 expr_stmt|;
-name|checkExpType
+name|expr
 argument_list|(
 literal|"'12.3'/5.1"
-argument_list|,
+argument_list|)
+operator|.
+name|columnType
+argument_list|(
 literal|"DECIMAL(19, 18) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|checkExpType
+name|expr
 argument_list|(
 literal|"12.3/'5.1'"
-argument_list|,
+argument_list|)
+operator|.
+name|columnType
+argument_list|(
 literal|"DECIMAL(19, 0) NOT NULL"
 argument_list|)
 expr_stmt|;
 comment|// test binary arithmetic with two strings.
-name|checkExpType
+name|expr
 argument_list|(
 literal|"'12.3' + '5'"
-argument_list|,
+argument_list|)
+operator|.
+name|columnType
+argument_list|(
 literal|"DECIMAL(19, 19) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|checkExpType
+name|expr
 argument_list|(
 literal|"'12.3' - '5'"
-argument_list|,
+argument_list|)
+operator|.
+name|columnType
+argument_list|(
 literal|"DECIMAL(19, 19) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|checkExpType
+name|expr
 argument_list|(
 literal|"'12.3' * '5'"
-argument_list|,
+argument_list|)
+operator|.
+name|columnType
+argument_list|(
 literal|"DECIMAL(19, 19) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|checkExpType
+name|expr
 argument_list|(
 literal|"'12.3' / '5'"
-argument_list|,
+argument_list|)
+operator|.
+name|columnType
+argument_list|(
 literal|"DECIMAL(19, 0) NOT NULL"
 argument_list|)
 expr_stmt|;
@@ -3298,117 +3370,165 @@ name|void
 name|testBinaryComparisonCoercion
 parameter_list|()
 block|{
-name|checkExpType
+name|expr
 argument_list|(
 literal|"'2' = 3"
-argument_list|,
+argument_list|)
+operator|.
+name|columnType
+argument_list|(
 literal|"BOOLEAN NOT NULL"
 argument_list|)
 expr_stmt|;
-name|checkExpType
+name|expr
 argument_list|(
 literal|"'2'> 3"
-argument_list|,
+argument_list|)
+operator|.
+name|columnType
+argument_list|(
 literal|"BOOLEAN NOT NULL"
 argument_list|)
 expr_stmt|;
-name|checkExpType
+name|expr
 argument_list|(
 literal|"'2'>= 3"
-argument_list|,
+argument_list|)
+operator|.
+name|columnType
+argument_list|(
 literal|"BOOLEAN NOT NULL"
 argument_list|)
 expr_stmt|;
-name|checkExpType
+name|expr
 argument_list|(
 literal|"'2'< 3"
-argument_list|,
+argument_list|)
+operator|.
+name|columnType
+argument_list|(
 literal|"BOOLEAN NOT NULL"
 argument_list|)
 expr_stmt|;
-name|checkExpType
+name|expr
 argument_list|(
 literal|"'2'<= 3"
-argument_list|,
+argument_list|)
+operator|.
+name|columnType
+argument_list|(
 literal|"BOOLEAN NOT NULL"
 argument_list|)
 expr_stmt|;
-name|checkExpType
+name|expr
 argument_list|(
 literal|"'2' is distinct from 3"
-argument_list|,
+argument_list|)
+operator|.
+name|columnType
+argument_list|(
 literal|"BOOLEAN NOT NULL"
 argument_list|)
 expr_stmt|;
-name|checkExpType
+name|expr
 argument_list|(
 literal|"'2' is not distinct from 3"
-argument_list|,
+argument_list|)
+operator|.
+name|columnType
+argument_list|(
 literal|"BOOLEAN NOT NULL"
 argument_list|)
 expr_stmt|;
 comment|// NULL operand
-name|checkExpType
+name|expr
 argument_list|(
 literal|"'2' = null"
-argument_list|,
+argument_list|)
+operator|.
+name|columnType
+argument_list|(
 literal|"BOOLEAN"
 argument_list|)
 expr_stmt|;
-name|checkExpType
+name|expr
 argument_list|(
 literal|"'2'> null"
-argument_list|,
+argument_list|)
+operator|.
+name|columnType
+argument_list|(
 literal|"BOOLEAN"
 argument_list|)
 expr_stmt|;
-name|checkExpType
+name|expr
 argument_list|(
 literal|"'2'>= null"
-argument_list|,
+argument_list|)
+operator|.
+name|columnType
+argument_list|(
 literal|"BOOLEAN"
 argument_list|)
 expr_stmt|;
-name|checkExpType
+name|expr
 argument_list|(
 literal|"'2'< null"
-argument_list|,
+argument_list|)
+operator|.
+name|columnType
+argument_list|(
 literal|"BOOLEAN"
 argument_list|)
 expr_stmt|;
-name|checkExpType
+name|expr
 argument_list|(
 literal|"'2'<= null"
-argument_list|,
+argument_list|)
+operator|.
+name|columnType
+argument_list|(
 literal|"BOOLEAN"
 argument_list|)
 expr_stmt|;
-name|checkExpType
+name|expr
 argument_list|(
 literal|"'2' is distinct from null"
-argument_list|,
+argument_list|)
+operator|.
+name|columnType
+argument_list|(
 literal|"BOOLEAN NOT NULL"
 argument_list|)
 expr_stmt|;
-name|checkExpType
+name|expr
 argument_list|(
 literal|"'2' is not distinct from null"
-argument_list|,
+argument_list|)
+operator|.
+name|columnType
+argument_list|(
 literal|"BOOLEAN NOT NULL"
 argument_list|)
 expr_stmt|;
 comment|// BETWEEN operator
-name|checkExpType
+name|expr
 argument_list|(
 literal|"'2' between 1 and 3"
-argument_list|,
+argument_list|)
+operator|.
+name|columnType
+argument_list|(
 literal|"BOOLEAN NOT NULL"
 argument_list|)
 expr_stmt|;
-name|checkExpType
+name|expr
 argument_list|(
 literal|"NULL between 1 and 3"
-argument_list|,
+argument_list|)
+operator|.
+name|columnType
+argument_list|(
 literal|"BOOLEAN"
 argument_list|)
 expr_stmt|;
@@ -4619,63 +4739,87 @@ name|testBuiltinFunctionCoercion
 parameter_list|()
 block|{
 comment|// concat
-name|checkExpType
+name|expr
 argument_list|(
 literal|"'ab'||'cde'"
-argument_list|,
+argument_list|)
+operator|.
+name|columnType
+argument_list|(
 literal|"CHAR(5) NOT NULL"
 argument_list|)
 expr_stmt|;
-name|checkExpType
+name|expr
 argument_list|(
 literal|"null||'cde'"
-argument_list|,
+argument_list|)
+operator|.
+name|columnType
+argument_list|(
 literal|"VARCHAR"
 argument_list|)
 expr_stmt|;
-name|checkExpType
+name|expr
 argument_list|(
 literal|"1||'234'"
-argument_list|,
+argument_list|)
+operator|.
+name|columnType
+argument_list|(
 literal|"VARCHAR NOT NULL"
 argument_list|)
 expr_stmt|;
-name|checkExpFails
+name|expr
 argument_list|(
 literal|"select ^'a'||t1_binary^ from t1"
-argument_list|,
+argument_list|)
+operator|.
+name|fails
+argument_list|(
 literal|"(?s).*Cannot apply.*"
 argument_list|)
 expr_stmt|;
 comment|// smallint int double
-name|checkExpType
+name|expr
 argument_list|(
 literal|"select t1_smallint||t1_int||t1_double from t1"
-argument_list|,
+argument_list|)
+operator|.
+name|columnType
+argument_list|(
 literal|"VARCHAR"
 argument_list|)
 expr_stmt|;
 comment|// boolean float smallint
-name|checkExpType
+name|expr
 argument_list|(
 literal|"select t1_boolean||t1_float||t1_smallint from t1"
-argument_list|,
+argument_list|)
+operator|.
+name|columnType
+argument_list|(
 literal|"VARCHAR"
 argument_list|)
 expr_stmt|;
 comment|// decimal
-name|checkExpType
+name|expr
 argument_list|(
 literal|"select t1_decimal||t1_varchar20 from t1"
-argument_list|,
+argument_list|)
+operator|.
+name|columnType
+argument_list|(
 literal|"VARCHAR"
 argument_list|)
 expr_stmt|;
 comment|// date timestamp
-name|checkExpType
+name|expr
 argument_list|(
 literal|"select t1_timestamp||t1_date from t1"
-argument_list|,
+argument_list|)
+operator|.
+name|columnType
+argument_list|(
 literal|"VARCHAR"
 argument_list|)
 expr_stmt|;

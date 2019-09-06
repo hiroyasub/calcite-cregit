@@ -147,6 +147,22 @@ name|apache
 operator|.
 name|calcite
 operator|.
+name|sql
+operator|.
+name|validate
+operator|.
+name|SqlValidator
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
 name|test
 operator|.
 name|CalciteAssert
@@ -174,6 +190,18 @@ operator|.
 name|sql
 operator|.
 name|ResultSet
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|function
+operator|.
+name|UnaryOperator
 import|;
 end_import
 
@@ -280,6 +308,20 @@ name|withOperatorTable
 parameter_list|(
 name|SqlOperatorTable
 name|operatorTable
+parameter_list|)
+function_decl|;
+comment|/** Returns a tester that applies the given transform to a validator before    * using it. */
+name|SqlTester
+name|withValidatorTransform
+parameter_list|(
+name|UnaryOperator
+argument_list|<
+name|UnaryOperator
+argument_list|<
+name|SqlValidator
+argument_list|>
+argument_list|>
+name|transform
 parameter_list|)
 function_decl|;
 comment|/**    * Tests that a scalar SQL expression returns the expected result and the    * expected type. For example,    *    *<blockquote>    *<pre>checkScalar("1.1 + 2.9", "4.0", "DECIMAL(2, 1) NOT NULL");</pre>    *</blockquote>    *    * @param expression Scalar expression    * @param result     Expected result    * @param resultType Expected result type    */
