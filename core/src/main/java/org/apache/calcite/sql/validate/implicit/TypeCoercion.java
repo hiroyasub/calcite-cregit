@@ -181,7 +181,7 @@ name|boolean
 name|stringPromotion
 parameter_list|)
 function_decl|;
-comment|/**    * Finds a wider type when one or both types are decimal type.    * If the wider decimal type's precision/scale exceeds system limitation,    * this rule will truncate the decimal type to the max precision/scale.    * For decimal and fractional types, returns a decimal type    * which has the higher precision of the two.    *    *<p>The default implementation depends on the max precision/scale of the type system,    * you can override it based on the specific system requirement in    * {@link org.apache.calcite.rel.type.RelDataTypeSystem}.    */
+comment|/**    * Finds a wider type when one or both types are decimal type.    *    *<p>If the wider decimal type's precision/scale exceeds system limitation,    * this rule will truncate the decimal type to the max precision/scale.    * For decimal and fractional types, returns a decimal type    * which has the higher precision of the two.    *    *<p>The default implementation depends on the max precision/scale of the type system,    * you can override it based on the specific system requirement in    * {@link org.apache.calcite.rel.type.RelDataTypeSystem}.    */
 name|RelDataType
 name|getWiderTypeForDecimal
 parameter_list|(
@@ -192,7 +192,7 @@ name|RelDataType
 name|type2
 parameter_list|)
 function_decl|;
-comment|/**    * Determines common type for a comparison operator whose operands are String type and the    * other(non String type) type.    */
+comment|/**    * Determines common type for a comparison operator whose operands are String    * type and the other (non String) type.    */
 name|RelDataType
 name|commonTypeForBinaryComparison
 parameter_list|(
@@ -203,7 +203,7 @@ name|RelDataType
 name|type2
 parameter_list|)
 function_decl|;
-comment|/**    * Widen a SqlNode ith column type to target type, mainly used for set operations like UNION,    * INTERSECT and EXCEPT.    *    * @param scope       scope to query    * @param query       SqlNode which have children nodes as columns    * @param columnIndex target column index    * @param targetType  target type to cast to    * @return true if we add any cast in successfully.    */
+comment|/**    * Widen a SqlNode ith column type to target type, mainly used for set    * operations like UNION, INTERSECT and EXCEPT.    *    * @param scope       scope to query    * @param query       SqlNode which have children nodes as columns    * @param columnIndex target column index    * @param targetType  target type to cast to    * @return true if we add any cast in successfully.    */
 name|boolean
 name|rowTypeCoercion
 parameter_list|(
@@ -220,7 +220,7 @@ name|RelDataType
 name|targetType
 parameter_list|)
 function_decl|;
-comment|/**    * Handles type coercion for IN operation with or without subquery.    * see {@link TypeCoercionImpl} for default strategies.    */
+comment|/**    * Handles type coercion for IN operation with or without sub-query.    *    *<p>See {@link TypeCoercionImpl} for default strategies.    */
 name|boolean
 name|inOperationCoercion
 parameter_list|(
@@ -236,7 +236,7 @@ name|SqlCallBinding
 name|binding
 parameter_list|)
 function_decl|;
-comment|/**    * Coerce CASE WHEN statement branches to one common type.    *    *<p>Rules: Find common type for all the then operands and else operands, then    * try to coerce the then/else operands to the type if needed.    * */
+comment|/**    * Coerce CASE WHEN statement branches to one common type.    *    *<p>Rules: Find common type for all the then operands and else operands,    * then try to coerce the then/else operands to the type if needed.    */
 name|boolean
 name|caseWhenCoercion
 parameter_list|(
@@ -244,7 +244,7 @@ name|SqlCallBinding
 name|binding
 parameter_list|)
 function_decl|;
-comment|/**    * Type coercion with inferred type from passed in arguments and the {@link SqlTypeFamily}    * defined in the checkers, e.g. the {@link org.apache.calcite.sql.type.FamilyOperandTypeChecker}.    *    *<p>Caution that We do not cast from numeric if desired type family is also    * {@link SqlTypeFamily#NUMERIC}.    *    *<p>If the {@link org.apache.calcite.sql.type.FamilyOperandTypeChecker}s are subsumed in a    * {@link org.apache.calcite.sql.type.CompositeOperandTypeChecker}, check them based on    * their combination order. i.e. If we allows a (numeric, numeric) OR (string, numeric) family    * but with arguments (op1, op2) of types (varchar(20), boolean), try to coerce op1    * to numeric and op2 to numeric if the type coercion rules allow it, or else try to coerce    * op2 to numeric and keep op1 the type as it is.    *    *<p>This is also very interrelated to the    * composition predicate for the checkers, if the predicate is AND, we would fail fast    * if the first family type coercion fails.    * @param binding          call binding.    * @param operandTypes     Types of the operands passed in.    * @param expectedFamilies Expected SqlTypeFamily list by user specified.    * @return true if we successfully do any implicit cast.    */
+comment|/**    * Type coercion with inferred type from passed in arguments and the    * {@link SqlTypeFamily} defined in the checkers, e.g. the    * {@link org.apache.calcite.sql.type.FamilyOperandTypeChecker}.    *    *<p>Caution that we do not cast from numeric if desired type family is also    * {@link SqlTypeFamily#NUMERIC}.    *    *<p>If the {@link org.apache.calcite.sql.type.FamilyOperandTypeChecker}s are    * subsumed in a    * {@link org.apache.calcite.sql.type.CompositeOperandTypeChecker}, check them    * based on their combination order. i.e. If we allows a (numeric, numeric) OR    * (string, numeric) family but with arguments (op1, op2) of types    * (varchar(20), boolean), try to coerce op1 to numeric and op2 to numeric if    * the type coercion rules allow it, or else try to coerce op2 to numeric and    * keep op1 the type as it is.    *    *<p>This is also very interrelated to the composition predicate for the    * checkers: if the predicate is AND, we would fail fast if the first family    * type coercion fails.    *    * @param binding          Call binding    * @param operandTypes     Types of the operands passed in    * @param expectedFamilies Expected SqlTypeFamily list by user specified    * @return true if we successfully do any implicit cast    */
 name|boolean
 name|builtinFunctionCoercion
 parameter_list|(
@@ -264,7 +264,7 @@ argument_list|>
 name|expectedFamilies
 parameter_list|)
 function_decl|;
-comment|/**    * Non builtin functions(UDFs) type coercion, compare the types of arguments with    * rules:    *<ol>    *<li>named param: find the desired type by the passed in operand's name.</li>    *<li>non-named param: find the desired type by formal parameter ordinal.</li>    *</ol>    *    *<p>Try to make type coercion only of the desired type is found.    *    * @return true if any operands is coerced.    */
+comment|/**    * Non built-in functions (UDFs) type coercion, compare the types of arguments    * with rules:    *    *<ol>    *<li>named param: find the desired type by the passed in operand's name    *<li>non-named param: find the desired type by formal parameter ordinal    *</ol>    *    *<p>Try to make type coercion only of the desired type is found.    *    * @return true if any operands is coerced    */
 name|boolean
 name|userDefinedFunctionCoercion
 parameter_list|(

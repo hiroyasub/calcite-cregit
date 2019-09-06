@@ -6342,13 +6342,14 @@ comment|//   on emp.deptno = q.col1
 comment|//   where emp.deptno<> null
 comment|//         and q.indicator<> TRUE"
 comment|//
-comment|// Note:
-comment|// Subquery can be used as SqlUpdate#condition like below:
-comment|// "update emp
-comment|//  set empno = 1 where emp.empno in (
-comment|//   select emp.empno from emp where emp.empno=2)"
+comment|// Note: Sub-query can be used as SqlUpdate#condition like below:
+comment|//
+comment|//   UPDATE emp
+comment|//   SET empno = 1 WHERE emp.empno IN (
+comment|//     SELECT emp.empno FROM emp WHERE emp.empno = 2)
+comment|//
 comment|// In such case, when converting SqlUpdate#condition, bb.root is null
-comment|// and it makes no sense to do the subquery substituion.
+comment|// and it makes no sense to do the sub-query substitution.
 if|if
 condition|(
 name|bb
