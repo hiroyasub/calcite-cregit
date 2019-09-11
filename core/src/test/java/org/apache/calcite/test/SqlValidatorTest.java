@@ -3521,6 +3521,38 @@ literal|"UTF-16LE"
 argument_list|)
 argument_list|)
 expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"substring('a', 1)"
+argument_list|)
+expr_stmt|;
+name|checkExp
+argument_list|(
+literal|"substring('a', 1, 3)"
+argument_list|)
+expr_stmt|;
+comment|// Implicit type coercion.
+name|checkExpType
+argument_list|(
+literal|"substring(12345, '1')"
+argument_list|,
+literal|"VARCHAR NOT NULL"
+argument_list|)
+expr_stmt|;
+name|checkExpType
+argument_list|(
+literal|"substring('a', '1')"
+argument_list|,
+literal|"VARCHAR(1) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|checkExpType
+argument_list|(
+literal|"substring('a', 1, '3')"
+argument_list|,
+literal|"VARCHAR(1) NOT NULL"
+argument_list|)
+expr_stmt|;
 block|}
 annotation|@
 name|Test
@@ -3534,6 +3566,15 @@ argument_list|(
 literal|"substring('a' from 1 for 'b')"
 argument_list|,
 literal|"(?s).*Cannot apply 'SUBSTRING' to arguments of type.*"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+name|checkExpType
+argument_list|(
+literal|"substring('a' from 1 for 'b')"
+argument_list|,
+literal|"VARCHAR(1) NOT NULL"
 argument_list|)
 expr_stmt|;
 name|checkWholeExpFails
@@ -36675,6 +36716,20 @@ argument_list|,
 literal|"VARCHAR(2000)"
 argument_list|)
 expr_stmt|;
+name|checkExpType
+argument_list|(
+literal|"json_remove('{\"foo\":\"bar\"}', 1, '2', 3)"
+argument_list|,
+literal|"VARCHAR(2000)"
+argument_list|)
+expr_stmt|;
+name|checkExpType
+argument_list|(
+literal|"json_remove('{\"foo\":\"bar\"}', 1, 2, 3)"
+argument_list|,
+literal|"VARCHAR(2000)"
+argument_list|)
+expr_stmt|;
 name|checkFails
 argument_list|(
 literal|"select ^json_remove('{\"foo\":\"bar\"}')^"
@@ -36808,6 +36863,109 @@ argument_list|,
 literal|"(?s).*Cannot apply.*"
 argument_list|,
 literal|false
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testRegexpReplace
+parameter_list|()
+block|{
+name|tester
+operator|=
+name|tester
+operator|.
+name|withOperatorTable
+argument_list|(
+name|SqlLibraryOperatorTableFactory
+operator|.
+name|INSTANCE
+operator|.
+name|getOperatorTable
+argument_list|(
+name|SqlLibrary
+operator|.
+name|STANDARD
+argument_list|,
+name|SqlLibrary
+operator|.
+name|ORACLE
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|checkExpType
+argument_list|(
+literal|"REGEXP_REPLACE('a b c', 'a', 'X')"
+argument_list|,
+literal|"VARCHAR NOT NULL"
+argument_list|)
+expr_stmt|;
+name|checkExpType
+argument_list|(
+literal|"REGEXP_REPLACE('abc def ghi', '[a-z]+', 'X', 2)"
+argument_list|,
+literal|"VARCHAR NOT NULL"
+argument_list|)
+expr_stmt|;
+name|checkExpType
+argument_list|(
+literal|"REGEXP_REPLACE('abc def ghi', '[a-z]+', 'X', 1, 3)"
+argument_list|,
+literal|"VARCHAR NOT NULL"
+argument_list|)
+expr_stmt|;
+name|checkExpType
+argument_list|(
+literal|"REGEXP_REPLACE('abc def GHI', '[a-z]+', 'X', 1, 3, 'c')"
+argument_list|,
+literal|"VARCHAR NOT NULL"
+argument_list|)
+expr_stmt|;
+comment|// Implicit type coercion.
+name|checkExpType
+argument_list|(
+literal|"REGEXP_REPLACE(null, '(-)', '###')"
+argument_list|,
+literal|"VARCHAR"
+argument_list|)
+expr_stmt|;
+name|checkExpType
+argument_list|(
+literal|"REGEXP_REPLACE('100-200', null, '###')"
+argument_list|,
+literal|"VARCHAR"
+argument_list|)
+expr_stmt|;
+name|checkExpType
+argument_list|(
+literal|"REGEXP_REPLACE('100-200', '(-)', null)"
+argument_list|,
+literal|"VARCHAR"
+argument_list|)
+expr_stmt|;
+name|checkExpType
+argument_list|(
+literal|"REGEXP_REPLACE('abc def ghi', '[a-z]+', 'X', '2')"
+argument_list|,
+literal|"VARCHAR NOT NULL"
+argument_list|)
+expr_stmt|;
+name|checkExpType
+argument_list|(
+literal|"REGEXP_REPLACE('abc def ghi', '[a-z]+', 'X', '1', '3')"
+argument_list|,
+literal|"VARCHAR NOT NULL"
+argument_list|)
+expr_stmt|;
+comment|// The last argument to REGEXP_REPLACE should be specific character, but with
+comment|// implicit type coercion, the validation still passes.
+name|checkExpType
+argument_list|(
+literal|"REGEXP_REPLACE('abc def ghi', '[a-z]+', 'X', '1', '3', '1')"
+argument_list|,
+literal|"VARCHAR NOT NULL"
 argument_list|)
 expr_stmt|;
 block|}

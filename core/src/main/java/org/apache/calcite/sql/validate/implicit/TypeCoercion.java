@@ -134,7 +134,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Default Strategies to coerce differing types that participate in  * operations into compatible ones.  *  *<p>Notes about type widening / tightest common types: Broadly, there are two cases that need  * to widen data types (i.e. set operations, binary comparison):  *  *<ul>  *<li>Case1: Look for a common data type for two or more data types,  * and no loss of precision is allowed. Including type inference for returned/operands  * type (i.e. what's the column's common data type if one row is an integer while the  * other row is a long?).</li>  *<li>Case2: Look for a widen data type with some acceptable loss of precision  * (i.e. there is no common type for double and decimal because double's range is larger than  * decimal(with default max precision), and yet decimal is more precise than double,  * but in union we would cast the decimal to double).</li>  *</ul>  *<p>REFERENCE:<a href="https://docs.microsoft.com/en-us/sql/t-sql/data-types/data-type-conversion-database-engine?">SQL-SERVER</a>  *<a href="https://cwiki.apache.org/confluence/display/Hive/LanguageManual+Types">HIVE</a></p>  */
+comment|/**  * Default strategies to coerce differing types that participate in  * operations into compatible ones.  *  *<p>Notes about type widening / tightest common types: Broadly, there are two cases that need  * to widen data types (i.e. set operations, binary comparison):  *  *<ul>  *<li>Case1: Look for a common data type for two or more data types,  * and no loss of precision is allowed. Including type inference for returned/operands  * type (i.e. what's the column's common data type if one row is an integer while the  * other row is a long?).</li>  *<li>Case2: Look for a widen data type with some acceptable loss of precision  * (i.e. there is no common type for double and decimal because double's range is larger than  * decimal(with default max precision), and yet decimal is more precise than double,  * but in union we would cast the decimal to double).</li>  *</ul>  *<p>REFERENCE:<a href="https://docs.microsoft.com/en-us/sql/t-sql/data-types/data-type-conversion-database-engine?">SQL-SERVER</a>  *<a href="https://cwiki.apache.org/confluence/display/Hive/LanguageManual+Types">HIVE</a></p>  */
 end_comment
 
 begin_interface
@@ -167,7 +167,7 @@ name|boolean
 name|stringPromotion
 parameter_list|)
 function_decl|;
-comment|/**    * Similar to {@link #getWiderTypeForTwo}, but can handle    * sequence types. {@link #getWiderTypeForTwo} doesn't satisfy the associative law,    * i.e. (a op b) op c may not equal to a op (b op c). This is only a problem for StringType or    * nested StringType in collection type like Array. Excluding these types,    * {@link #getWiderTypeForTwo} satisfies the associative law. For instance,    * (DATE, INTEGER, VARCHAR) should have VARCHAR as the wider common type.    */
+comment|/**    * Similar to {@link #getWiderTypeForTwo}, but can handle    * sequence types. {@link #getWiderTypeForTwo} doesn't satisfy the associative law,    * i.e. (a op b) op c may not equal to a op (b op c). This is only a problem for STRING or    * nested STRING in collection type like ARRAY. Excluding these types,    * {@link #getWiderTypeForTwo} satisfies the associative law. For instance,    * (DATE, INTEGER, VARCHAR) should have VARCHAR as the wider common type.    */
 name|RelDataType
 name|getWiderTypeFor
 parameter_list|(
@@ -181,7 +181,7 @@ name|boolean
 name|stringPromotion
 parameter_list|)
 function_decl|;
-comment|/**    * Finds a wider type when one or both types are decimal type.    *    *<p>If the wider decimal type's precision/scale exceeds system limitation,    * this rule will truncate the decimal type to the max precision/scale.    * For decimal and fractional types, returns a decimal type    * which has the higher precision of the two.    *    *<p>The default implementation depends on the max precision/scale of the type system,    * you can override it based on the specific system requirement in    * {@link org.apache.calcite.rel.type.RelDataTypeSystem}.    */
+comment|/**    * Finds a wider type when one or both types are DECIMAL type.    *    *<p>If the wider decimal type's precision/scale exceeds system limitation,    * this rule will truncate the decimal type to the max precision/scale.    * For DECIMAL and fractional types, returns DECIMAL type    * that has the higher precision of the two.    *    *<p>The default implementation depends on the max precision/scale of the type system,    * you can override it based on the specific system requirement in    * {@link org.apache.calcite.rel.type.RelDataTypeSystem}.    */
 name|RelDataType
 name|getWiderTypeForDecimal
 parameter_list|(
@@ -192,7 +192,7 @@ name|RelDataType
 name|type2
 parameter_list|)
 function_decl|;
-comment|/**    * Determines common type for a comparison operator whose operands are String    * type and the other (non String) type.    */
+comment|/**    * Determines common type for a comparison operator whose operands are STRING    * type and the other (non STRING) type.    */
 name|RelDataType
 name|commonTypeForBinaryComparison
 parameter_list|(
@@ -203,7 +203,7 @@ name|RelDataType
 name|type2
 parameter_list|)
 function_decl|;
-comment|/**    * Widen a SqlNode ith column type to target type, mainly used for set    * operations like UNION, INTERSECT and EXCEPT.    *    * @param scope       scope to query    * @param query       SqlNode which have children nodes as columns    * @param columnIndex target column index    * @param targetType  target type to cast to    * @return true if we add any cast in successfully.    */
+comment|/**    * Widen a SqlNode ith column type to target type, mainly used for set    * operations like UNION, INTERSECT and EXCEPT.    *    * @param scope       scope to query    * @param query       SqlNode which have children nodes as columns    * @param columnIndex target column index    * @param targetType  target type to cast to    * @return true if we add any cast in successfully    */
 name|boolean
 name|rowTypeCoercion
 parameter_list|(
@@ -244,7 +244,7 @@ name|SqlCallBinding
 name|binding
 parameter_list|)
 function_decl|;
-comment|/**    * Type coercion with inferred type from passed in arguments and the    * {@link SqlTypeFamily} defined in the checkers, e.g. the    * {@link org.apache.calcite.sql.type.FamilyOperandTypeChecker}.    *    *<p>Caution that we do not cast from numeric if desired type family is also    * {@link SqlTypeFamily#NUMERIC}.    *    *<p>If the {@link org.apache.calcite.sql.type.FamilyOperandTypeChecker}s are    * subsumed in a    * {@link org.apache.calcite.sql.type.CompositeOperandTypeChecker}, check them    * based on their combination order. i.e. If we allows a (numeric, numeric) OR    * (string, numeric) family but with arguments (op1, op2) of types    * (varchar(20), boolean), try to coerce op1 to numeric and op2 to numeric if    * the type coercion rules allow it, or else try to coerce op2 to numeric and    * keep op1 the type as it is.    *    *<p>This is also very interrelated to the composition predicate for the    * checkers: if the predicate is AND, we would fail fast if the first family    * type coercion fails.    *    * @param binding          Call binding    * @param operandTypes     Types of the operands passed in    * @param expectedFamilies Expected SqlTypeFamily list by user specified    * @return true if we successfully do any implicit cast    */
+comment|/**    * Type coercion with inferred type from passed in arguments and the    * {@link SqlTypeFamily} defined in the checkers, e.g. the    * {@link org.apache.calcite.sql.type.FamilyOperandTypeChecker}.    *    *<p>Caution that we do not cast from NUMERIC if desired type family is also    * {@link SqlTypeFamily#NUMERIC}.    *    *<p>If the {@link org.apache.calcite.sql.type.FamilyOperandTypeChecker}s are    * subsumed in a    * {@link org.apache.calcite.sql.type.CompositeOperandTypeChecker}, check them    * based on their combination order. i.e. If we allow a NUMERIC_NUMERIC OR    * STRING_NUMERIC family combination and are with arguments (op1: VARCHAR(20), op2: BOOLEAN),    * try to coerce both op1 and op2 to NUMERIC if the type coercion rules allow it,    * or else try to coerce op2 to NUMERIC and keep op1 the type as it is.    *    *<p>This is also very interrelated to the composition predicate for the    * checkers: if the predicate is AND, we would fail fast if the first family    * type coercion fails.    *    * @param binding          Call binding    * @param operandTypes     Types of the operands passed in    * @param expectedFamilies Expected SqlTypeFamily list by user specified    * @return true if we successfully do any implicit cast    */
 name|boolean
 name|builtinFunctionCoercion
 parameter_list|(

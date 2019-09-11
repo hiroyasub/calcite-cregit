@@ -1016,6 +1016,8 @@ argument_list|(
 name|operandType
 argument_list|)
 decl_stmt|;
+comment|// Actually operand0 always comes from parsing the SqlIdentifier, so there
+comment|// is no need to make implicit type coercion.
 return|return
 name|checker
 operator|.

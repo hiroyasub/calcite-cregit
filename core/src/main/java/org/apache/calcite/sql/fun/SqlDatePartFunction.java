@@ -417,23 +417,21 @@ name|boolean
 name|throwOnFailure
 parameter_list|)
 block|{
+comment|// Use #checkOperandTypes instead of #checkSingleOperandType to enable implicit
+comment|// type coercion. REVIEW Danny 2019-09-10, because we declare that the operand
+comment|// type family is DATETIME, that means it allows arguments of type DATE, TIME
+comment|// or TIMESTAMP, so actually we can not figure out which type we want precisely.
+comment|// For example, the YEAR(date) function, it actually allows a DATE/TIMESTAMP operand,
+comment|// but we declare the required operand type family to be DATETIME.
+comment|// We just need some refactoring for the SqlDatePartFunction.
 return|return
 name|OperandTypes
 operator|.
 name|DATETIME
 operator|.
-name|checkSingleOperandType
+name|checkOperandTypes
 argument_list|(
 name|callBinding
-argument_list|,
-name|callBinding
-operator|.
-name|operand
-argument_list|(
-literal|0
-argument_list|)
-argument_list|,
-literal|0
 argument_list|,
 name|throwOnFailure
 argument_list|)

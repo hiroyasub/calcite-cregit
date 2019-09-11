@@ -365,7 +365,7 @@ name|validator
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Widen a SqlNode's field type to target type,    * mainly used for set operations like UNION, INTERSECT and EXCEPT.    *    *<p>Rules:    *<pre>    *    *       type1, type2  type3       select a, b, c from t1    *         |      |      |    *       type4  type5  type6              union    *         |      |      |    *       type7  type8  type9       select d, e, f from t2    *</pre>    * For struct type (type1, type2, type3) union type (type4, type5, type6),    * infer the first result column type type7 as the wider type of type1 and type4,    * the second column type as the wider type of type2 and type5 and so forth.    *    * @param scope       validator scope    * @param query       query node to update the field type for    * @param columnIndex target column index    * @param targetType  target type to cast to    * @return true if any type coercion actually happens.    */
+comment|/**    * Widen a SqlNode's field type to target type,    * mainly used for set operations like UNION, INTERSECT and EXCEPT.    *    *<p>Rules:    *<pre>    *    *       type1, type2  type3       select a, b, c from t1    *          \      \      \    *         type4  type5  type6              UNION    *          /      /      /    *       type7  type8  type9       select d, e, f from t2    *</pre>    * For struct type (type1, type2, type3) union type (type4, type5, type6),    * infer the first result column type type7 as the wider type of type1 and type4,    * the second column type as the wider type of type2 and type5 and so on.    *    * @param scope       validator scope    * @param query       query node to update the field type for    * @param columnIndex target column index    * @param targetType  target type to cast to    * @return true if any type coercion actually happens.    */
 specifier|public
 name|boolean
 name|rowTypeCoercion
@@ -601,7 +601,7 @@ literal|false
 return|;
 block|}
 block|}
-comment|/**    * Coerce operands in binary arithmetic expressions to Numeric types.    *    *<p>Rules:</p>    *<ul>    *<li>For binary arithmetic operators like [+, -, *, /, %]: 1. If the operand is VARCHAR type,    *   coerce it to data type of the other operand if its data type is NUMERIC.</li>    *<li>For EQUALS(=) operator: 1. If operands are BOOLEAN and NUMERIC, evaluate    *   `1=true` and `0=false` all to be true; 2. If operands are datetime and string,    *   do nothing because the SqlToRelConverter already makes the type coercion.</li>    *<li>For binary comparision [=,&gt;,&gt;=,&lt;,&lt;=]: try to find the common type,    *   i.e. "1&gt; '1'" will be converted to "1&gt; 1".</li>    *<li>Some single agg functions: coerce string operand to DECIMAL type.</li>    *</ul>    */
+comment|/**    * Coerce operands in binary arithmetic expressions to NUMERIC types.    *    *<p>Rules:</p>    *<ul>    *<li>For binary arithmetic operators like [+, -, *, /, %]: 1. If the operand is VARCHAR type,    *   coerce it to data type of the other operand if its data type is NUMERIC.</li>    *<li>For EQUALS(=) operator: 1. If operands are BOOLEAN and NUMERIC, evaluate    *   `1=true` and `0=false` all to be true; 2. If operands are datetime and string,    *   do nothing because the SqlToRelConverter already makes the type coercion.</li>    *<li>For binary comparision [=,&gt;,&gt;=,&lt;,&lt;=]: try to find the common type,    *   i.e. "1&gt; '1'" will be converted to "1&gt; 1".</li>    *<li>Some single agg functions: coerce string operand to DECIMAL type.</li>    *</ul>    */
 specifier|public
 name|boolean
 name|binaryArithmeticCoercion
@@ -991,7 +991,7 @@ return|return
 name|coerced
 return|;
 block|}
-comment|/**    * For numeric and string operands, cast string to data type of the other operand.    **/
+comment|/**    * For NUMERIC and STRING operands, cast STRING to data type of the other operand.    **/
 specifier|protected
 name|boolean
 name|binaryArithmeticWithStrings
@@ -1131,7 +1131,7 @@ return|return
 literal|false
 return|;
 block|}
-comment|/**    * Datetime and string equality: cast string type to datetime type, SqlToRelConverter already    * make the conversion but we still keep this interface overridable    * so user can have their custom implementation.    */
+comment|/**    * Datetime and STRING equality: cast STRING type to datetime type, SqlToRelConverter already    * make the conversion but we still keep this interface overridable    * so user can have their custom implementation.    */
 specifier|protected
 name|boolean
 name|dateTimeStringEquality
@@ -1765,7 +1765,7 @@ return|return
 literal|false
 return|;
 block|}
-comment|/**    * STRATEGIES    *    *<p>with/Without sub-query:    *    *<ul>    *    *<li>With sub-query: find the common type through comparing the left hand    * side (LHS) expression types with corresponding right hand side (RHS)    * expression derived from the sub-query expression's row type. Wrap the    * fields of the LHS and RHS in CAST operators if it is needed.    *    *<li>Without sub-query: convert the nodes of the RHS to the common type by    * checking all the argument types and find out the minimum common type that    * all the arguments can be cast to.    *    *</ul>    *    *<p>How to find the common type:    *    *<ul>    *    *<li>For both struct sql types (LHS and RHS), find the common type of every    * LHS and RHS fields pair:    *    *<pre>    * (field1, field2, field3)    (field4, field5, field6)    *    |        |       |          |       |       |    *    +--------+---type1----------+       |       |    *             |       |                  |       |    *             +-------+----type2---------+       |    *                     |                          |    *                     +-------------type3--------+    *</pre>    *</li>    *<li>For both basic sql types(LHS and RHS),    *   find the common type of LHS and RHS nodes.</li>    *</ul>    */
+comment|/**    * STRATEGIES    *    *<p>With(Without) sub-query:    *    *<ul>    *    *<li>With sub-query: find the common type through comparing the left hand    * side (LHS) expression types with corresponding right hand side (RHS)    * expression derived from the sub-query expression's row type. Wrap the    * fields of the LHS and RHS in CAST operators if it is needed.    *    *<li>Without sub-query: convert the nodes of the RHS to the common type by    * checking all the argument types and find out the minimum common type that    * all the arguments can be cast to.    *    *</ul>    *    *<p>How to find the common type:    *    *<ul>    *    *<li>For both struct sql types (LHS and RHS), find the common type of every    * LHS and RHS fields pair:    *    *<pre>    * (field1, field2, field3)    (field4, field5, field6)    *    |        |       |          |       |       |    *    +--------+---type1----------+       |       |    *             |       |                  |       |    *             +-------+----type2---------+       |    *                     |                          |    *                     +-------------type3--------+    *</pre>    *</li>    *<li>For both basic sql types(LHS and RHS),    *   find the common type of LHS and RHS nodes.</li>    *</ul>    */
 specifier|public
 name|boolean
 name|inOperationCoercion
