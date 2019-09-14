@@ -295,6 +295,17 @@ name|SqlNode
 name|offset
 parameter_list|)
 function_decl|;
+comment|/**    * Prints the TOP(n) clause.    *    * @see #fetchOffset    */
+name|void
+name|topN
+parameter_list|(
+name|SqlNode
+name|fetch
+parameter_list|,
+name|SqlNode
+name|offset
+parameter_list|)
+function_decl|;
 comment|/**    * Prints a new line, and indents.    */
 name|void
 name|newlineAndIndent
