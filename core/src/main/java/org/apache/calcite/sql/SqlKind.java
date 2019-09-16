@@ -952,6 +952,10 @@ name|ALTER_TABLE
 argument_list|,
 name|DROP_TABLE
 argument_list|,
+name|CREATE_FUNCTION
+argument_list|,
+name|DROP_FUNCTION
+argument_list|,
 name|CREATE_VIEW
 argument_list|,
 name|ALTER_VIEW

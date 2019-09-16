@@ -3725,6 +3725,21 @@ function_decl|;
 annotation|@
 name|BaseMessage
 argument_list|(
+literal|"Function ''{0}'' not found"
+argument_list|)
+name|ExInst
+argument_list|<
+name|SqlValidatorException
+argument_list|>
+name|functionNotFound
+parameter_list|(
+name|String
+name|name
+parameter_list|)
+function_decl|;
+annotation|@
+name|BaseMessage
+argument_list|(
 literal|"Dialect does not support feature: ''{0}''"
 argument_list|)
 name|ExInst
