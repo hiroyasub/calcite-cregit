@@ -1449,6 +1449,7 @@ operator|.
 name|next
 argument_list|()
 decl_stmt|;
+comment|// Do not pull up filter conditions for semi/anti join.
 if|if
 condition|(
 operator|!
@@ -1462,6 +1463,11 @@ name|joinType
 argument_list|,
 name|exp
 argument_list|)
+operator|&&
+name|joinType
+operator|.
+name|projectsRight
+argument_list|()
 condition|)
 block|{
 name|aboveFilters

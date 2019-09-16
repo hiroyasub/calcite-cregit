@@ -28745,6 +28745,49 @@ block|}
 block|}
 end_function
 
+begin_comment
+comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3347">[CALCITE-3347]    * IndexOutOfBoundsException in FixNullabilityShuttle when using FilterIntoJoinRule</a>.    */
+end_comment
+
+begin_function
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSemiJoin
+parameter_list|()
+block|{
+name|CalciteAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|CalciteAssert
+operator|.
+name|Config
+operator|.
+name|JDBC_FOODMART
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select *\n"
+operator|+
+literal|" from \"foodmart\".\"employee\""
+operator|+
+literal|" where \"employee_id\" = 1 and \"last_name\" in"
+operator|+
+literal|" (select \"last_name\" from \"foodmart\".\"employee\" where \"employee_id\" = 2)"
+argument_list|)
+operator|.
+name|runs
+argument_list|()
+expr_stmt|;
+block|}
+end_function
+
 begin_function
 specifier|private
 specifier|static
