@@ -2948,7 +2948,51 @@ name|void
 name|testTileWithNoMeasures
 parameter_list|()
 block|{
-comment|// TODO
+name|foodmartModel
+argument_list|(
+literal|" auto: false,\n"
+operator|+
+literal|"  defaultMeasures: [ {\n"
+operator|+
+literal|"    agg: 'count'\n"
+operator|+
+literal|"  } ],\n"
+operator|+
+literal|"  tiles: [ {\n"
+operator|+
+literal|"    dimensions: [ 'the_year', ['t', 'quarter'] ],\n"
+operator|+
+literal|"    measures: [ ]\n"
+operator|+
+literal|"  } ]\n"
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select count(t.\"the_year\", t.\"quarter\")\n"
+operator|+
+literal|"from \"foodmart\".\"sales_fact_1997\" as s\n"
+operator|+
+literal|"join \"foodmart\".\"time_by_day\" as t using (\"time_id\")\n"
+argument_list|)
+operator|.
+name|enableMaterializations
+argument_list|(
+literal|true
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+literal|"EnumerableAggregate(group=[{}], EXPR$0=[COUNT($0, $1)])\n"
+operator|+
+literal|"  EnumerableTableScan(table=[[adhoc, m{32, 36}"
+argument_list|)
+operator|.
+name|returnsCount
+argument_list|(
+literal|1
+argument_list|)
+expr_stmt|;
 block|}
 comment|/** A lattice with no default measure list should get "count(*)" is its    * default measure. */
 annotation|@
@@ -2958,7 +3002,45 @@ name|void
 name|testLatticeWithNoMeasures
 parameter_list|()
 block|{
-comment|// TODO
+name|foodmartModel
+argument_list|(
+literal|" auto: false,\n"
+operator|+
+literal|"  tiles: [ {\n"
+operator|+
+literal|"    dimensions: [ 'the_year', ['t', 'quarter'] ],\n"
+operator|+
+literal|"    measures: [ ]\n"
+operator|+
+literal|"  } ]\n"
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select count(*)\n"
+operator|+
+literal|"from \"foodmart\".\"sales_fact_1997\" as s\n"
+operator|+
+literal|"join \"foodmart\".\"time_by_day\" as t using (\"time_id\")\n"
+argument_list|)
+operator|.
+name|enableMaterializations
+argument_list|(
+literal|true
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+literal|"EnumerableAggregate(group=[{}], EXPR$0=[COUNT()])\n"
+operator|+
+literal|"  EnumerableTableScan(table=[[adhoc, m{32, 36}"
+argument_list|)
+operator|.
+name|returnsCount
+argument_list|(
+literal|1
+argument_list|)
+expr_stmt|;
 block|}
 annotation|@
 name|Test
@@ -2967,7 +3049,24 @@ name|void
 name|testDimensionIsInvalidColumn
 parameter_list|()
 block|{
-comment|// TODO
+name|foodmartModel
+argument_list|(
+literal|" auto: false,\n"
+operator|+
+literal|"  tiles: [ {\n"
+operator|+
+literal|"    dimensions: [ 'invalid_column'],\n"
+operator|+
+literal|"    measures: [ ]\n"
+operator|+
+literal|"  } ]\n"
+argument_list|)
+operator|.
+name|connectThrows
+argument_list|(
+literal|"Unknown lattice column 'invalid_column'"
+argument_list|)
+expr_stmt|;
 block|}
 annotation|@
 name|Test
@@ -2976,9 +3075,34 @@ name|void
 name|testMeasureArgIsInvalidColumn
 parameter_list|()
 block|{
-comment|// TODO
+name|foodmartModel
+argument_list|(
+literal|" auto: false,\n"
+operator|+
+literal|"  defaultMeasures: [ {\n"
+operator|+
+literal|"   agg: 'sum',\n"
+operator|+
+literal|"   args: 'invalid_column'\n"
+operator|+
+literal|"  } ],\n"
+operator|+
+literal|"  tiles: [ {\n"
+operator|+
+literal|"    dimensions: [ 'the_year', ['t', 'quarter'] ],\n"
+operator|+
+literal|"    measures: [ ]\n"
+operator|+
+literal|"  } ]\n"
+argument_list|)
+operator|.
+name|connectThrows
+argument_list|(
+literal|"Unknown lattice column 'invalid_column'"
+argument_list|)
+expr_stmt|;
 block|}
-comment|/** It is an error for "customer_id" to be a measure arg, because is not a    * unique alias. Both "c" and "t" have "customer_id". */
+comment|/** It is an error for "time_id" to be a measure arg, because is not a    * unique alias. Both "s" and "t" have "time_id". */
 annotation|@
 name|Test
 specifier|public
@@ -2986,7 +3110,32 @@ name|void
 name|testMeasureArgIsNotUniqueAlias
 parameter_list|()
 block|{
-comment|// TODO
+name|foodmartModel
+argument_list|(
+literal|" auto: false,\n"
+operator|+
+literal|"  defaultMeasures: [ {\n"
+operator|+
+literal|"    agg: 'count',\n"
+operator|+
+literal|"    args: 'time_id'\n"
+operator|+
+literal|"  } ],\n"
+operator|+
+literal|"  tiles: [ {\n"
+operator|+
+literal|"    dimensions: [ 'the_year', ['t', 'quarter'] ],\n"
+operator|+
+literal|"    measures: [ ]\n"
+operator|+
+literal|"  } ]\n"
+argument_list|)
+operator|.
+name|connectThrows
+argument_list|(
+literal|"Lattice column alias 'time_id' is not unique"
+argument_list|)
+expr_stmt|;
 block|}
 annotation|@
 name|Test
@@ -2995,7 +3144,32 @@ name|void
 name|testMeasureAggIsInvalid
 parameter_list|()
 block|{
-comment|// TODO
+name|foodmartModel
+argument_list|(
+literal|" auto: false,\n"
+operator|+
+literal|"  defaultMeasures: [ {\n"
+operator|+
+literal|"    agg: 'invalid_count',\n"
+operator|+
+literal|"    args: 'customer_id'\n"
+operator|+
+literal|"  } ],\n"
+operator|+
+literal|"  tiles: [ {\n"
+operator|+
+literal|"    dimensions: [ 'the_year', ['t', 'quarter'] ],\n"
+operator|+
+literal|"    measures: [ ]\n"
+operator|+
+literal|"  } ]\n"
+argument_list|)
+operator|.
+name|connectThrows
+argument_list|(
+literal|"Unknown lattice aggregate function invalid_count"
+argument_list|)
+expr_stmt|;
 block|}
 annotation|@
 name|Test
