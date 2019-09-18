@@ -8642,7 +8642,7 @@ comment|// While a tree of RelNodes is being registered, sometimes nodes' costs
 comment|// improve and the subset doesn't hear about it. You can end up with
 comment|// a subset with a single rel of cost 99 which thinks its best cost is
 comment|// 100. We think this happens because the back-links to parents are
-comment|// not established. So, give the subset another change to figure out
+comment|// not established. So, give the subset another chance to figure out
 comment|// its cost.
 specifier|final
 name|RelMetadataQuery
