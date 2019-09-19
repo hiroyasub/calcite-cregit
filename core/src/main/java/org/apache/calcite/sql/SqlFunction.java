@@ -1120,6 +1120,7 @@ name|validCoercionType
 break|;
 block|}
 block|}
+block|}
 comment|// if function doesn't exist within operator table and known function
 comment|// handling is turned off then create a more permissive function
 if|if
@@ -1199,7 +1200,6 @@ expr_stmt|;
 break|break
 name|validCoercionType
 break|;
-block|}
 block|}
 throw|throw
 name|validator

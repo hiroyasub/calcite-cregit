@@ -608,6 +608,20 @@ literal|true
 argument_list|,
 literal|false
 argument_list|)
+block|,
+comment|/** Whether to make create implicit functions if functions do not exist    * in the operator table, default false. */
+name|LENIENT_OPERATOR_LOOKUP
+argument_list|(
+literal|"lenientOperatorLookup"
+argument_list|,
+name|Type
+operator|.
+name|BOOLEAN
+argument_list|,
+literal|false
+argument_list|,
+literal|false
+argument_list|)
 block|;
 specifier|private
 specifier|final

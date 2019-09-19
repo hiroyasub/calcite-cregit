@@ -922,6 +922,25 @@ name|getBoolean
 argument_list|()
 return|;
 block|}
+specifier|public
+name|boolean
+name|lenientOperatorLookup
+parameter_list|()
+block|{
+return|return
+name|CalciteConnectionProperty
+operator|.
+name|LENIENT_OPERATOR_LOOKUP
+operator|.
+name|wrap
+argument_list|(
+name|properties
+argument_list|)
+operator|.
+name|getBoolean
+argument_list|()
+return|;
+block|}
 block|}
 end_class
 

@@ -279,6 +279,11 @@ name|boolean
 name|typeCoercion
 parameter_list|()
 function_decl|;
+comment|/** @see CalciteConnectionProperty#LENIENT_OPERATOR_LOOKUP */
+name|boolean
+name|lenientOperatorLookup
+parameter_list|()
+function_decl|;
 block|}
 end_interface
 
