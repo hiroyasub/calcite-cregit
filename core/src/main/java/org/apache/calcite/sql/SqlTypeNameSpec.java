@@ -98,6 +98,7 @@ name|SqlParserPos
 name|pos
 decl_stmt|;
 comment|/**    * Creates a {@code SqlTypeNameSpec}.    *    * @param name Name of the type.    * @param pos  Parser position, must not be null.    */
+specifier|public
 name|SqlTypeNameSpec
 parameter_list|(
 name|SqlIdentifier

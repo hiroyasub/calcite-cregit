@@ -997,7 +997,15 @@ condition|(
 name|function
 operator|==
 literal|null
-operator|&&
+condition|)
+block|{
+name|boolean
+name|changed
+init|=
+literal|false
+decl_stmt|;
+if|if
+condition|(
 name|validator
 operator|.
 name|isTypeCoercionEnabled
@@ -1005,11 +1013,6 @@ argument_list|()
 condition|)
 block|{
 comment|// try again if implicit type coercion is allowed.
-name|boolean
-name|changed
-init|=
-literal|false
-decl_stmt|;
 name|function
 operator|=
 operator|(
@@ -1082,6 +1085,7 @@ argument_list|,
 name|function
 argument_list|)
 expr_stmt|;
+block|}
 block|}
 if|if
 condition|(

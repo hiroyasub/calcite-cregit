@@ -36973,6 +36973,156 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testInvalidFunctionCall
+parameter_list|()
+block|{
+specifier|final
+name|SqlTester
+name|tester1
+init|=
+name|tester
+operator|.
+name|withCaseSensitive
+argument_list|(
+literal|true
+argument_list|)
+decl_stmt|;
+specifier|final
+name|MockSqlOperatorTable
+name|operatorTable
+init|=
+operator|new
+name|MockSqlOperatorTable
+argument_list|(
+name|SqlStdOperatorTable
+operator|.
+name|instance
+argument_list|()
+argument_list|)
+decl_stmt|;
+name|MockSqlOperatorTable
+operator|.
+name|addRamp
+argument_list|(
+name|operatorTable
+argument_list|)
+expr_stmt|;
+name|tester1
+operator|.
+name|withOperatorTable
+argument_list|(
+name|operatorTable
+argument_list|)
+expr_stmt|;
+comment|// With implicit type coercion.
+name|checkExpFails
+argument_list|(
+literal|"^unknown_udf(1, 2)^"
+argument_list|,
+literal|"(?s).*No match found for function signature "
+operator|+
+literal|"UNKNOWN_UDF\\(<NUMERIC>,<NUMERIC>\\).*"
+argument_list|)
+expr_stmt|;
+name|checkExpFails
+argument_list|(
+literal|"^power(cast(1 as timestamp), cast(2 as timestamp))^"
+argument_list|,
+literal|"(?s).*Cannot apply 'POWER' to arguments of type "
+operator|+
+literal|"'POWER\\(<TIMESTAMP\\(0\\)>,<TIMESTAMP\\(0\\)>\\)'.*"
+argument_list|)
+expr_stmt|;
+name|tester1
+operator|.
+name|checkFails
+argument_list|(
+literal|"^myFUN(cast('124' as timestamp))^"
+argument_list|,
+literal|"(?s).*Cannot apply 'MYFUN' to arguments of type "
+operator|+
+literal|"'MYFUN\\(<TIMESTAMP\\(0\\)>\\)'.*"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+name|tester1
+operator|.
+name|checkFails
+argument_list|(
+literal|"^myFUN(1, 2)^"
+argument_list|,
+literal|"(?s).*No match found for function signature "
+operator|+
+literal|"MYFUN\\(<NUMERIC>,<NUMERIC>\\).*"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+comment|// Without implicit type coercion.
+name|checkExpFails
+argument_list|(
+literal|"^unknown_udf(1, 2)^"
+argument_list|,
+literal|"(?s).*No match found for function signature "
+operator|+
+literal|"UNKNOWN_UDF\\(<NUMERIC>,<NUMERIC>\\).*"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+name|checkExpFails
+argument_list|(
+literal|"^power(cast(1 as timestamp), cast(2 as timestamp))^"
+argument_list|,
+literal|"(?s).*Cannot apply 'POWER' to arguments of type "
+operator|+
+literal|"'POWER\\(<TIMESTAMP\\(0\\)>,<TIMESTAMP\\(0\\)>\\)'.*"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+name|tester1
+operator|.
+name|enableTypeCoercion
+argument_list|(
+literal|false
+argument_list|)
+operator|.
+name|checkFails
+argument_list|(
+literal|"^myFUN(cast('124' as timestamp))^"
+argument_list|,
+literal|"(?s).*Cannot apply 'MYFUN' to arguments of type "
+operator|+
+literal|"'MYFUN\\(<TIMESTAMP\\(0\\)>\\)'.*"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+name|tester1
+operator|.
+name|enableTypeCoercion
+argument_list|(
+literal|false
+argument_list|)
+operator|.
+name|checkFails
+argument_list|(
+literal|"^myFUN(1, 2)^"
+argument_list|,
+literal|"(?s).*No match found for function signature "
+operator|+
+literal|"MYFUN\\(<NUMERIC>,<NUMERIC>\\).*"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testValidatorReportsOriginalQueryUsingReader
 parameter_list|()
 throws|throws
