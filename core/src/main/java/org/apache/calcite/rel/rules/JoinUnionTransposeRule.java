@@ -439,6 +439,15 @@ argument_list|()
 operator|.
 name|generatesNullsOnRight
 argument_list|()
+operator|||
+operator|!
+name|join
+operator|.
+name|getJoinType
+argument_list|()
+operator|.
+name|projectsRight
+argument_list|()
 condition|)
 block|{
 return|return;
