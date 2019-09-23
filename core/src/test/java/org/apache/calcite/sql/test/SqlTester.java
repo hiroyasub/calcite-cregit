@@ -292,6 +292,14 @@ name|boolean
 name|enabled
 parameter_list|)
 function_decl|;
+comment|/** Returns a tester that does not fail validation if it encounters an    * unknown function. */
+name|SqlTester
+name|withLenientOperatorLookup
+parameter_list|(
+name|boolean
+name|lenient
+parameter_list|)
+function_decl|;
 comment|/** Returns a tester that gets connections from a given factory. */
 name|SqlTester
 name|withConnectionFactory

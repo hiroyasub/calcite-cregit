@@ -1093,6 +1093,19 @@ name|SqlNode
 name|withItem
 parameter_list|)
 function_decl|;
+comment|/**    * Sets whether this validator should be lenient upon encountering an unknown    * function.    *    * @param lenient Whether to be lenient when encountering an unknown function    */
+name|SqlValidator
+name|setLenientOperatorLookup
+parameter_list|(
+name|boolean
+name|lenient
+parameter_list|)
+function_decl|;
+comment|/** Returns whether this validator should be lenient upon encountering an    * unknown function.    *    *<p>If true, if a statement contains a call to a function that is not    * present in the operator table, or if the call does not have the required    * number or types of operands, the validator nevertheless regards the    * statement as valid. The type of the function call will be    * {@link #getUnknownType() UNKNOWN}.    *    *<p>If false (the default behavior), an unknown function call causes a    * validation error to be thrown. */
+name|boolean
+name|isLenientOperatorLookup
+parameter_list|()
+function_decl|;
 comment|/**    * Set if implicit type coercion is allowed when the validator does validation.    * See {@link org.apache.calcite.sql.validate.implicit.TypeCoercionImpl} for the details.    * @param enabled default as true.    */
 name|SqlValidator
 name|setEnableTypeCoercion
