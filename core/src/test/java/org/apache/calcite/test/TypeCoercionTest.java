@@ -3298,9 +3298,123 @@ name|void
 name|testBinaryComparisonCoercion
 parameter_list|()
 block|{
+name|checkExpType
+argument_list|(
+literal|"'2' = 3"
+argument_list|,
+literal|"BOOLEAN NOT NULL"
+argument_list|)
+expr_stmt|;
+name|checkExpType
+argument_list|(
+literal|"'2'> 3"
+argument_list|,
+literal|"BOOLEAN NOT NULL"
+argument_list|)
+expr_stmt|;
+name|checkExpType
+argument_list|(
+literal|"'2'>= 3"
+argument_list|,
+literal|"BOOLEAN NOT NULL"
+argument_list|)
+expr_stmt|;
+name|checkExpType
+argument_list|(
+literal|"'2'< 3"
+argument_list|,
+literal|"BOOLEAN NOT NULL"
+argument_list|)
+expr_stmt|;
+name|checkExpType
+argument_list|(
+literal|"'2'<= 3"
+argument_list|,
+literal|"BOOLEAN NOT NULL"
+argument_list|)
+expr_stmt|;
+name|checkExpType
+argument_list|(
+literal|"'2' is distinct from 3"
+argument_list|,
+literal|"BOOLEAN NOT NULL"
+argument_list|)
+expr_stmt|;
+name|checkExpType
+argument_list|(
+literal|"'2' is not distinct from 3"
+argument_list|,
+literal|"BOOLEAN NOT NULL"
+argument_list|)
+expr_stmt|;
+comment|// NULL operand
+name|checkExpType
+argument_list|(
+literal|"'2' = null"
+argument_list|,
+literal|"BOOLEAN"
+argument_list|)
+expr_stmt|;
+name|checkExpType
+argument_list|(
+literal|"'2'> null"
+argument_list|,
+literal|"BOOLEAN"
+argument_list|)
+expr_stmt|;
+name|checkExpType
+argument_list|(
+literal|"'2'>= null"
+argument_list|,
+literal|"BOOLEAN"
+argument_list|)
+expr_stmt|;
+name|checkExpType
+argument_list|(
+literal|"'2'< null"
+argument_list|,
+literal|"BOOLEAN"
+argument_list|)
+expr_stmt|;
+name|checkExpType
+argument_list|(
+literal|"'2'<= null"
+argument_list|,
+literal|"BOOLEAN"
+argument_list|)
+expr_stmt|;
+name|checkExpType
+argument_list|(
+literal|"'2' is distinct from null"
+argument_list|,
+literal|"BOOLEAN NOT NULL"
+argument_list|)
+expr_stmt|;
+name|checkExpType
+argument_list|(
+literal|"'2' is not distinct from null"
+argument_list|,
+literal|"BOOLEAN NOT NULL"
+argument_list|)
+expr_stmt|;
+comment|// BETWEEN operator
+name|checkExpType
+argument_list|(
+literal|"'2' between 1 and 3"
+argument_list|,
+literal|"BOOLEAN NOT NULL"
+argument_list|)
+expr_stmt|;
+name|checkExpType
+argument_list|(
+literal|"NULL between 1 and 3"
+argument_list|,
+literal|"BOOLEAN"
+argument_list|)
+expr_stmt|;
 name|sql
 argument_list|(
-literal|"select '2' = 3 from (values true)"
+literal|"select '2019-09-23' between t1_date and t1_timestamp from t1"
 argument_list|)
 operator|.
 name|columnType
@@ -3310,7 +3424,7 @@ argument_list|)
 expr_stmt|;
 name|sql
 argument_list|(
-literal|"select '2'> 3 from (values true)"
+literal|"select t1_date between '2019-09-23' and t1_timestamp from t1"
 argument_list|)
 operator|.
 name|columnType
@@ -3320,7 +3434,7 @@ argument_list|)
 expr_stmt|;
 name|sql
 argument_list|(
-literal|"select '2'>= 3 from (values true)"
+literal|"select cast('2019-09-23' as date) between t1_date and t1_timestamp from t1"
 argument_list|)
 operator|.
 name|columnType
@@ -3330,47 +3444,7 @@ argument_list|)
 expr_stmt|;
 name|sql
 argument_list|(
-literal|"select '2'< 3 from (values true)"
-argument_list|)
-operator|.
-name|columnType
-argument_list|(
-literal|"BOOLEAN NOT NULL"
-argument_list|)
-expr_stmt|;
-name|sql
-argument_list|(
-literal|"select '2'<= 3 from (values true)"
-argument_list|)
-operator|.
-name|columnType
-argument_list|(
-literal|"BOOLEAN NOT NULL"
-argument_list|)
-expr_stmt|;
-name|sql
-argument_list|(
-literal|"select '2' is distinct from 3 from (values true)"
-argument_list|)
-operator|.
-name|columnType
-argument_list|(
-literal|"BOOLEAN NOT NULL"
-argument_list|)
-expr_stmt|;
-name|sql
-argument_list|(
-literal|"select '2' is not distinct from 3 from (values true)"
-argument_list|)
-operator|.
-name|columnType
-argument_list|(
-literal|"BOOLEAN NOT NULL"
-argument_list|)
-expr_stmt|;
-name|sql
-argument_list|(
-literal|"select '2' is not distinct from 3 from (values true)"
+literal|"select t1_date between cast('2019-09-23' as date) and t1_timestamp from t1"
 argument_list|)
 operator|.
 name|columnType

@@ -101,91 +101,33 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testBinaryComparable
+name|testBinaryComparison
 parameter_list|()
 block|{
 comment|// for constant cast, there is reduce rule
 name|checkPlanEquals
 argument_list|(
-literal|"select 1<'1' from (values true)"
-argument_list|)
-expr_stmt|;
-block|}
-annotation|@
-name|Test
-specifier|public
-name|void
-name|testBinaryComparable1
-parameter_list|()
-block|{
-name|checkPlanEquals
-argument_list|(
-literal|"select 1<='1' from (values true)"
-argument_list|)
-expr_stmt|;
-block|}
-annotation|@
-name|Test
-specifier|public
-name|void
-name|testBinaryComparable2
-parameter_list|()
-block|{
-name|checkPlanEquals
-argument_list|(
-literal|"select 1>'1' from (values true)"
-argument_list|)
-expr_stmt|;
-block|}
-annotation|@
-name|Test
-specifier|public
-name|void
-name|testBinaryComparable3
-parameter_list|()
-block|{
-name|checkPlanEquals
-argument_list|(
-literal|"select 1>='1' from (values true)"
-argument_list|)
-expr_stmt|;
-block|}
-annotation|@
-name|Test
-specifier|public
-name|void
-name|testBinaryComparable4
-parameter_list|()
-block|{
-name|checkPlanEquals
-argument_list|(
-literal|"select 1='1' from (values true)"
-argument_list|)
-expr_stmt|;
-block|}
-annotation|@
-name|Test
-specifier|public
-name|void
-name|testBinaryComparable5
-parameter_list|()
-block|{
-name|checkPlanEquals
-argument_list|(
-literal|"select t1_date> t1_timestamp from t1"
-argument_list|)
-expr_stmt|;
-block|}
-annotation|@
-name|Test
-specifier|public
-name|void
-name|testBinaryComparable6
-parameter_list|()
-block|{
-name|checkPlanEquals
-argument_list|(
-literal|"select '2' is not distinct from 2 from (values true)"
+literal|"select\n"
+operator|+
+literal|"1<'1' as f0,\n"
+operator|+
+literal|"1<='1' as f1,\n"
+operator|+
+literal|"1>'1' as f2,\n"
+operator|+
+literal|"1>='1' as f3,\n"
+operator|+
+literal|"1='1' as f4,\n"
+operator|+
+literal|"t1_date> t1_timestamp as f5,\n"
+operator|+
+literal|"'2' is not distinct from 2 as f6,\n"
+operator|+
+literal|"'2019-09-23' between t1_date and t1_timestamp as f7,\n"
+operator|+
+literal|"cast('2019-09-23' as date) between t1_date and t1_timestamp as f8\n"
+operator|+
+literal|"from t1"
 argument_list|)
 expr_stmt|;
 block|}
@@ -199,35 +141,15 @@ parameter_list|()
 block|{
 name|checkPlanEquals
 argument_list|(
-literal|"select 1 in ('1', '2', '3') from (values true)"
-argument_list|)
-expr_stmt|;
-block|}
-annotation|@
-name|Test
-specifier|public
-name|void
-name|testInOperation1
-parameter_list|()
-block|{
-name|checkPlanEquals
-argument_list|(
-literal|"select (1, 2) in (select '1', '2' "
+literal|"select\n"
 operator|+
-literal|"from (values (true, true))) from (values true)"
-argument_list|)
-expr_stmt|;
-block|}
-annotation|@
-name|Test
-specifier|public
-name|void
-name|testInOperation2
-parameter_list|()
-block|{
-name|checkPlanEquals
-argument_list|(
-literal|"select (1, 2) in (('1', '2'), ('3', '4')) from (values true)"
+literal|"1 in ('1', '2', '3') as f0,\n"
+operator|+
+literal|"(1, 2) in (('1', '2')) as f1,\n"
+operator|+
+literal|"(1, 2) in (('1', '2'), ('3', '4')) as f2\n"
+operator|+
+literal|"from (values (true, true, true))"
 argument_list|)
 expr_stmt|;
 block|}
@@ -245,73 +167,21 @@ comment|// using Calcite can rewrite Cast operator implementation.
 comment|// for this case, we replace the boolean literal with numeric 1.
 name|checkPlanEquals
 argument_list|(
-literal|"select 1=true from (values true)"
-argument_list|)
-expr_stmt|;
-block|}
-annotation|@
-name|Test
-specifier|public
-name|void
-name|testBooleanEquality1
-parameter_list|()
-block|{
-name|checkPlanEquals
-argument_list|(
-literal|"select 1.0=true from (values true)"
-argument_list|)
-expr_stmt|;
-block|}
-annotation|@
-name|Test
-specifier|public
-name|void
-name|testBooleanEquality2
-parameter_list|()
-block|{
-name|checkPlanEquals
-argument_list|(
-literal|"select 0.0=true from (values true)"
-argument_list|)
-expr_stmt|;
-block|}
-annotation|@
-name|Test
-specifier|public
-name|void
-name|testBooleanEquality3
-parameter_list|()
-block|{
-name|checkPlanEquals
-argument_list|(
-literal|"select 1.23=t1_boolean from t1"
-argument_list|)
-expr_stmt|;
-block|}
-annotation|@
-name|Test
-specifier|public
-name|void
-name|testBooleanEquality4
-parameter_list|()
-block|{
-comment|// int boolean
-name|checkPlanEquals
-argument_list|(
-literal|"select t1_smallint=t1_boolean from t1"
-argument_list|)
-expr_stmt|;
-block|}
-annotation|@
-name|Test
-specifier|public
-name|void
-name|testBooleanEquality5
-parameter_list|()
-block|{
-name|checkPlanEquals
-argument_list|(
-literal|"select 10000000000=true from (values true)"
+literal|"select\n"
+operator|+
+literal|"1=true as f0,\n"
+operator|+
+literal|"1.0=true as f1,\n"
+operator|+
+literal|"0.0=true=true as f2,\n"
+operator|+
+literal|"1.23=t1_boolean as f3,\n"
+operator|+
+literal|"t1_smallint=t1_boolean as f4,\n"
+operator|+
+literal|"10000000000=true as f5\n"
+operator|+
+literal|"from t1"
 argument_list|)
 expr_stmt|;
 block|}
@@ -358,7 +228,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testSetOperations
+name|testSetOperation
 parameter_list|()
 block|{
 comment|// int decimal smallint double

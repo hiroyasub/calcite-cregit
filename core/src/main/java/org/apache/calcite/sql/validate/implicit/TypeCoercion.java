@@ -236,6 +236,14 @@ name|SqlCallBinding
 name|binding
 parameter_list|)
 function_decl|;
+comment|/** Coerce operands in binary comparison expressions. */
+name|boolean
+name|binaryComparisonCoercion
+parameter_list|(
+name|SqlCallBinding
+name|binding
+parameter_list|)
+function_decl|;
 comment|/**    * Coerce CASE WHEN statement branches to one common type.    *    *<p>Rules: Find common type for all the then operands and else operands,    * then try to coerce the then/else operands to the type if needed.    */
 name|boolean
 name|caseWhenCoercion

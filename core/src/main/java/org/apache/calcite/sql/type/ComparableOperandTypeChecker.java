@@ -248,6 +248,7 @@ name|b
 operator|=
 literal|false
 expr_stmt|;
+break|break;
 block|}
 block|}
 if|if
@@ -278,10 +279,10 @@ operator|.
 name|getTypeCoercion
 argument_list|()
 decl_stmt|;
-comment|// For comparable operators, e.g.>,<, =,>=,<=.
+comment|// For comparison operators, i.e.>,<, =,>=,<=.
 name|typeCoercion
 operator|.
-name|binaryArithmeticCoercion
+name|binaryComparisonCoercion
 argument_list|(
 name|callBinding
 argument_list|)
@@ -298,6 +299,7 @@ argument_list|,
 literal|false
 argument_list|)
 expr_stmt|;
+block|}
 if|if
 condition|(
 operator|!
@@ -312,7 +314,6 @@ operator|.
 name|newValidationSignatureError
 argument_list|()
 throw|;
-block|}
 block|}
 return|return
 name|b
@@ -436,6 +437,7 @@ name|b
 operator|=
 literal|false
 expr_stmt|;
+break|break;
 block|}
 block|}
 if|if
