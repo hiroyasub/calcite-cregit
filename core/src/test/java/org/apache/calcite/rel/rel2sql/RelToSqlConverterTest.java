@@ -4828,7 +4828,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testHiveSelectQueryWithOrderByDescAndNullsFirstShouldBeEmulated
+name|testSelectOrderByDescNullsFirst
 parameter_list|()
 block|{
 specifier|final
@@ -4839,6 +4839,7 @@ literal|"select \"product_id\" from \"product\"\n"
 operator|+
 literal|"order by \"product_id\" desc nulls first"
 decl_stmt|;
+comment|// Hive and MSSQL do not support NULLS FIRST, so need to emulate
 specifier|final
 name|String
 name|expected
@@ -4849,6 +4850,16 @@ literal|"FROM foodmart.product\n"
 operator|+
 literal|"ORDER BY product_id IS NULL DESC, product_id DESC"
 decl_stmt|;
+specifier|final
+name|String
+name|mssqlExpected
+init|=
+literal|"SELECT [product_id]\n"
+operator|+
+literal|"FROM [foodmart].[product]\n"
+operator|+
+literal|"ORDER BY CASE WHEN [product_id] IS NULL THEN 0 ELSE 1 END, [product_id] DESC"
+decl_stmt|;
 name|sql
 argument_list|(
 name|query
@@ -4865,13 +4876,25 @@ name|ok
 argument_list|(
 name|expected
 argument_list|)
+operator|.
+name|dialect
+argument_list|(
+name|MssqlSqlDialect
+operator|.
+name|DEFAULT
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|mssqlExpected
+argument_list|)
 expr_stmt|;
 block|}
 annotation|@
 name|Test
 specifier|public
 name|void
-name|testHiveSelectQueryWithOrderByAscAndNullsLastShouldBeEmulated
+name|testSelectOrderByAscNullsLast
 parameter_list|()
 block|{
 specifier|final
@@ -4882,6 +4905,7 @@ literal|"select \"product_id\" from \"product\"\n"
 operator|+
 literal|"order by \"product_id\" nulls last"
 decl_stmt|;
+comment|// Hive and MSSQL do not support NULLS LAST, so need to emulate
 specifier|final
 name|String
 name|expected
@@ -4892,6 +4916,16 @@ literal|"FROM foodmart.product\n"
 operator|+
 literal|"ORDER BY product_id IS NULL, product_id"
 decl_stmt|;
+specifier|final
+name|String
+name|mssqlExpected
+init|=
+literal|"SELECT [product_id]\n"
+operator|+
+literal|"FROM [foodmart].[product]\n"
+operator|+
+literal|"ORDER BY CASE WHEN [product_id] IS NULL THEN 1 ELSE 0 END, [product_id]"
+decl_stmt|;
 name|sql
 argument_list|(
 name|query
@@ -4908,13 +4942,25 @@ name|ok
 argument_list|(
 name|expected
 argument_list|)
+operator|.
+name|dialect
+argument_list|(
+name|MssqlSqlDialect
+operator|.
+name|DEFAULT
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|mssqlExpected
+argument_list|)
 expr_stmt|;
 block|}
 annotation|@
 name|Test
 specifier|public
 name|void
-name|testHiveSelectQueryWithOrderByAscNullsFirstShouldNotAddNullEmulation
+name|testSelectOrderByAscNullsFirst
 parameter_list|()
 block|{
 specifier|final
@@ -4925,6 +4971,8 @@ literal|"select \"product_id\" from \"product\"\n"
 operator|+
 literal|"order by \"product_id\" nulls first"
 decl_stmt|;
+comment|// Hive and MSSQL do not support NULLS FIRST, but nulls sort low, so no
+comment|// need to emulate
 specifier|final
 name|String
 name|expected
@@ -4935,6 +4983,16 @@ literal|"FROM foodmart.product\n"
 operator|+
 literal|"ORDER BY product_id"
 decl_stmt|;
+specifier|final
+name|String
+name|mssqlExpected
+init|=
+literal|"SELECT [product_id]\n"
+operator|+
+literal|"FROM [foodmart].[product]\n"
+operator|+
+literal|"ORDER BY [product_id]"
+decl_stmt|;
 name|sql
 argument_list|(
 name|query
@@ -4951,13 +5009,25 @@ name|ok
 argument_list|(
 name|expected
 argument_list|)
+operator|.
+name|dialect
+argument_list|(
+name|MssqlSqlDialect
+operator|.
+name|DEFAULT
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|mssqlExpected
+argument_list|)
 expr_stmt|;
 block|}
 annotation|@
 name|Test
 specifier|public
 name|void
-name|testHiveSelectQueryWithOrderByDescNullsLastShouldNotAddNullEmulation
+name|testSelectOrderByDescNullsLast
 parameter_list|()
 block|{
 specifier|final
@@ -4968,6 +5038,8 @@ literal|"select \"product_id\" from \"product\"\n"
 operator|+
 literal|"order by \"product_id\" desc nulls last"
 decl_stmt|;
+comment|// Hive and MSSQL do not support NULLS LAST, but nulls sort low, so no
+comment|// need to emulate
 specifier|final
 name|String
 name|expected
@@ -4977,6 +5049,16 @@ operator|+
 literal|"FROM foodmart.product\n"
 operator|+
 literal|"ORDER BY product_id DESC"
+decl_stmt|;
+specifier|final
+name|String
+name|mssqlExpected
+init|=
+literal|"SELECT [product_id]\n"
+operator|+
+literal|"FROM [foodmart].[product]\n"
+operator|+
+literal|"ORDER BY [product_id] DESC"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -4993,6 +5075,18 @@ operator|.
 name|ok
 argument_list|(
 name|expected
+argument_list|)
+operator|.
+name|dialect
+argument_list|(
+name|MssqlSqlDialect
+operator|.
+name|DEFAULT
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|mssqlExpected
 argument_list|)
 expr_stmt|;
 block|}
@@ -6379,7 +6473,7 @@ literal|"SELECT TOP (100) [product_id]\n"
 operator|+
 literal|"FROM [foodmart].[product]\n"
 operator|+
-literal|"ORDER BY [product_id]"
+literal|"ORDER BY CASE WHEN [product_id] IS NULL THEN 1 ELSE 0 END, [product_id]"
 decl_stmt|;
 specifier|final
 name|String
@@ -6389,7 +6483,7 @@ literal|"SELECT [product_id]\n"
 operator|+
 literal|"FROM [foodmart].[product]\n"
 operator|+
-literal|"ORDER BY [product_id]\n"
+literal|"ORDER BY CASE WHEN [product_id] IS NULL THEN 1 ELSE 0 END, [product_id]\n"
 operator|+
 literal|"FETCH NEXT 100 ROWS ONLY"
 decl_stmt|;
