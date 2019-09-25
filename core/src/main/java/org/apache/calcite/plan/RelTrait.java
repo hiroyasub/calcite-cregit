@@ -16,7 +16,7 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * RelTrait represents the manifestation of a relational expression trait within  * a trait definition. For example, a {@code CallingConvention.JAVA} is a trait  * of the {@link ConventionTraitDef} trait definition.  *  *<h3><a id="EqualsHashCodeNote">Note about equals() and hashCode()</a></h3>  *  *<p>If all instances of RelTrait for a particular RelTraitDef are defined in  * an {@code enum} and no new RelTraits can be introduced at runtime, you need  * not override {@link #hashCode()} and {@link #equals(Object)}. If, however,  * new RelTrait instances are generated at runtime (e.g. based on state external  * to the planner), you must implement {@link #hashCode()} and  * {@link #equals(Object)} for proper {@link RelTraitDef#canonize canonization}  * of your RelTrait objects.</p>  */
+comment|/**  * RelTrait represents the manifestation of a relational expression trait within  * a trait definition. For example, a {@code CallingConvention.JAVA} is a trait  * of the {@link ConventionTraitDef} trait definition.  *  *<h2><a id="EqualsHashCodeNote">Note about equals() and hashCode()</a></h2>  *  *<p>If all instances of RelTrait for a particular RelTraitDef are defined in  * an {@code enum} and no new RelTraits can be introduced at runtime, you need  * not override {@link #hashCode()} and {@link #equals(Object)}. If, however,  * new RelTrait instances are generated at runtime (e.g. based on state external  * to the planner), you must implement {@link #hashCode()} and  * {@link #equals(Object)} for proper {@link RelTraitDef#canonize canonization}  * of your RelTrait objects.</p>  */
 end_comment
 
 begin_interface

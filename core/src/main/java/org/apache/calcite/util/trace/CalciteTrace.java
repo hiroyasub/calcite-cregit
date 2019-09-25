@@ -122,7 +122,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Contains all of the {@link org.slf4j.Logger tracers} used within  * org.apache.calcite class libraries.  *  *<h3>Note to developers</h3>  *  *<p>Please ensure that every tracer used in org.apache.calcite is added to  * this class as a<em>public static final</em> member called<code>  *<i>component</i>Tracer</code>. For example, {@link #getPlannerTracer} is the  * tracer used by all classes which take part in the query planning process.  *  *<p>The javadoc in this file is the primary source of information on what  * tracers are available, so the javadoc against each tracer member must be an  * up-to-date description of what that tracer does.  *  *<p>In the class where the tracer is used, create a<em>private</em> (or  * perhaps<em>protected</em>)<em>static final</em> member called<code>  * tracer</code>.  */
+comment|/**  * Contains all of the {@link org.slf4j.Logger tracers} used within  * org.apache.calcite class libraries.  *  *<h2>Note to developers</h2>  *  *<p>Please ensure that every tracer used in org.apache.calcite is added to  * this class as a<em>public static final</em> member called<code>  *<i>component</i>Tracer</code>. For example, {@link #getPlannerTracer} is the  * tracer used by all classes which take part in the query planning process.  *  *<p>The javadoc in this file is the primary source of information on what  * tracers are available, so the javadoc against each tracer member must be an  * up-to-date description of what that tracer does.  *  *<p>In the class where the tracer is used, create a<em>private</em> (or  * perhaps<em>protected</em>)<em>static final</em> member called<code>  * tracer</code>.  */
 end_comment
 
 begin_class
