@@ -496,7 +496,7 @@ argument_list|()
 operator|==
 name|SqlExplainFormat
 operator|.
-name|XML
+name|JSON
 return|;
 block|}
 annotation|@
