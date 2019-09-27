@@ -1766,7 +1766,7 @@ operator|!=
 literal|null
 condition|)
 block|{
-comment|// REVIEW Danny 2019-10-09: Should we support validation for DDL nodes ?
+comment|// REVIEW Danny 2019-10-09: Should we support validation for DDL nodes?
 specifier|final
 name|SqlNode
 name|validated
