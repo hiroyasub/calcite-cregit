@@ -30252,6 +30252,60 @@ expr_stmt|;
 block|}
 end_function
 
+begin_function
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testProjectJoinTransposeItem
+parameter_list|()
+block|{
+name|ProjectJoinTransposeRule
+name|projectJoinTransposeRule
+init|=
+operator|new
+name|ProjectJoinTransposeRule
+argument_list|(
+name|skipItem
+argument_list|,
+name|RelFactories
+operator|.
+name|LOGICAL_BUILDER
+argument_list|)
+decl_stmt|;
+name|String
+name|query
+init|=
+literal|"select t1.c_nationkey[0], t2.c_nationkey[0] "
+operator|+
+literal|"from sales.customer as t1 left outer join sales.customer as t2 "
+operator|+
+literal|"on t1.c_nationkey[0] = t2.c_nationkey[0]"
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|withTester
+argument_list|(
+name|t
+lambda|->
+name|createDynamicTester
+argument_list|()
+argument_list|)
+operator|.
+name|withRule
+argument_list|(
+name|projectJoinTransposeRule
+argument_list|)
+operator|.
+name|check
+argument_list|()
+expr_stmt|;
+block|}
+end_function
+
 begin_comment
 unit|}
 comment|// End RelOptRulesTest.java

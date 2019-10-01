@@ -120,6 +120,9 @@ block|,
 comment|/** Item in WITH clause. */
 name|WITH_ITEM
 block|,
+comment|/** Item expression */
+name|ITEM
+block|,
 comment|/**    * Union    */
 name|UNION
 block|,
@@ -1123,6 +1126,8 @@ argument_list|,
 name|WITH
 argument_list|,
 name|WITH_ITEM
+argument_list|,
+name|ITEM
 argument_list|,
 name|SKIP_TO_FIRST
 argument_list|,

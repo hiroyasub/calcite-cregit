@@ -1461,6 +1461,19 @@ operator|.
 name|ANY
 argument_list|)
 expr_stmt|;
+name|map
+operator|.
+name|put
+argument_list|(
+name|SqlKind
+operator|.
+name|ITEM
+argument_list|,
+name|Policy
+operator|.
+name|ANY
+argument_list|)
+expr_stmt|;
 comment|// Assume that any other expressions cannot be simplified.
 for|for
 control|(

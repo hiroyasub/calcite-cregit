@@ -913,6 +913,9 @@ argument_list|)
 argument_list|)
 return|;
 case|case
+name|ITEM
+case|:
+case|case
 name|OTHER_FUNCTION
 case|:
 return|return
@@ -2012,7 +2015,7 @@ name|right
 argument_list|)
 return|;
 case|case
-name|OTHER_FUNCTION
+name|ITEM
 case|:
 name|String
 name|item

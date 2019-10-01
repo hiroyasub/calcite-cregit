@@ -1878,7 +1878,7 @@ literal|null
 operator|)
 return|;
 block|}
-if|if
+if|else if
 condition|(
 name|left
 operator|.
@@ -1886,7 +1886,7 @@ name|isA
 argument_list|(
 name|SqlKind
 operator|.
-name|OTHER_FUNCTION
+name|ITEM
 argument_list|)
 operator|&&
 name|right
@@ -1899,28 +1899,6 @@ name|LITERAL
 argument_list|)
 condition|)
 block|{
-if|if
-condition|(
-operator|(
-operator|(
-name|RexCall
-operator|)
-name|left
-operator|)
-operator|.
-name|getOperator
-argument_list|()
-operator|!=
-name|SqlStdOperatorTable
-operator|.
-name|ITEM
-condition|)
-block|{
-return|return
-literal|false
-return|;
-block|}
-comment|// Should be ITEM
 return|return
 literal|true
 return|;

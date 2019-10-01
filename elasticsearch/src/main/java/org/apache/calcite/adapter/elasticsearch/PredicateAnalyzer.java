@@ -939,6 +939,9 @@ case|case
 name|LIKE
 case|:
 case|case
+name|ITEM
+case|:
+case|case
 name|OTHER_FUNCTION
 case|:
 return|return

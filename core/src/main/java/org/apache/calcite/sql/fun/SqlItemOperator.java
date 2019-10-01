@@ -340,7 +340,7 @@ literal|"ITEM"
 argument_list|,
 name|SqlKind
 operator|.
-name|OTHER_FUNCTION
+name|ITEM
 argument_list|,
 literal|100
 argument_list|,
