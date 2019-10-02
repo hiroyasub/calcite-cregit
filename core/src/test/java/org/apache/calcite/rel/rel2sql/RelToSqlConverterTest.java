@@ -3744,6 +3744,70 @@ name|expected
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testBigQueryCast
+parameter_list|()
+block|{
+name|String
+name|query
+init|=
+literal|"select cast(cast(\"employee_id\" as varchar) as bigint), "
+operator|+
+literal|"cast(cast(\"employee_id\" as varchar) as varbinary), "
+operator|+
+literal|"cast(cast(\"employee_id\" as varchar) as timestamp), "
+operator|+
+literal|"cast(cast(\"employee_id\" as varchar) as double), "
+operator|+
+literal|"cast(cast(\"employee_id\" as varchar) as decimal), "
+operator|+
+literal|"cast(cast(\"employee_id\" as varchar) as date), "
+operator|+
+literal|"cast(cast(\"employee_id\" as varchar) as time), "
+operator|+
+literal|"cast(cast(\"employee_id\" as varchar) as boolean) "
+operator|+
+literal|"from \"foodmart\".\"reserve_employee\" "
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT CAST(CAST(employee_id AS STRING) AS INT64), "
+operator|+
+literal|"CAST(CAST(employee_id AS STRING) AS BYTES), "
+operator|+
+literal|"CAST(CAST(employee_id AS STRING) AS TIMESTAMP), "
+operator|+
+literal|"CAST(CAST(employee_id AS STRING) AS FLOAT64), "
+operator|+
+literal|"CAST(CAST(employee_id AS STRING) AS NUMERIC), "
+operator|+
+literal|"CAST(CAST(employee_id AS STRING) AS DATE), "
+operator|+
+literal|"CAST(CAST(employee_id AS STRING) AS TIME), "
+operator|+
+literal|"CAST(CAST(employee_id AS STRING) AS BOOL)\n"
+operator|+
+literal|"FROM foodmart.reserve_employee"
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|withBigQuery
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3220">[CALCITE-3220]    * HiveSqlDialect should transform the SQL-standard TRIM function to TRIM,    * LTRIM or RTRIM</a>. */
 annotation|@
 name|Test
