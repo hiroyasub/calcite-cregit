@@ -78,7 +78,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Entry point for optimizers that factor ou deterministic expressions to  * final static fields.  * Instances of this class should not be reused, so new visitor should be  * created for optimizing a new expression tree.  */
+comment|/**  * Entry point for optimizers that factor out deterministic expressions to  * final static fields.  * Instances of this class should not be reused, so new visitor should be  * created for optimizing a new expression tree.  */
 end_comment
 
 begin_class

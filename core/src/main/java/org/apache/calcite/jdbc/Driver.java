@@ -470,6 +470,8 @@ literal|"org.apache.calcite.jdbc.CalciteJdbc41Factory"
 return|;
 block|}
 block|}
+annotation|@
+name|Override
 specifier|protected
 name|DriverVersion
 name|createDriverVersion
