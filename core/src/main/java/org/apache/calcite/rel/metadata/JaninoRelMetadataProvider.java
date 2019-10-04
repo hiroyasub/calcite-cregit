@@ -2013,7 +2013,7 @@ argument_list|)
 operator|.
 name|append
 argument_list|(
-literal|"        throw "
+literal|"        throw new "
 argument_list|)
 operator|.
 name|append
@@ -2028,7 +2028,7 @@ argument_list|)
 operator|.
 name|append
 argument_list|(
-literal|".INSTANCE;\n"
+literal|"();\n"
 argument_list|)
 operator|.
 name|append

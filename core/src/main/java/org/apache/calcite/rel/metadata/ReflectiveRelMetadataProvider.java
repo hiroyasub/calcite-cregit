@@ -958,9 +958,9 @@ literal|null
 condition|)
 block|{
 throw|throw
+operator|new
 name|CyclicMetadataException
-operator|.
-name|INSTANCE
+argument_list|()
 throw|;
 block|}
 try|try

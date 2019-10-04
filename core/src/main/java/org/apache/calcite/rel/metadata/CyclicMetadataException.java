@@ -28,24 +28,8 @@ name|CyclicMetadataException
 extends|extends
 name|RuntimeException
 block|{
-comment|/** Singleton instance. Since this exception is thrown for signaling purposes,    * rather than on an actual error, re-using a singleton instance saves the    * effort of constructing an exception instance. */
-annotation|@
-name|SuppressWarnings
-argument_list|(
-literal|"ThrowableInstanceNeverThrown"
-argument_list|)
-specifier|public
-specifier|static
-specifier|final
-name|CyclicMetadataException
-name|INSTANCE
-init|=
-operator|new
-name|CyclicMetadataException
-argument_list|()
-decl_stmt|;
 comment|/** Creates a CyclicMetadataException. */
-specifier|private
+specifier|public
 name|CyclicMetadataException
 parameter_list|()
 block|{
