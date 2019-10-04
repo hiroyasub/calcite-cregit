@@ -594,7 +594,13 @@ literal|"SELECT \"store_id\", \"store_name\"\n"
 operator|+
 literal|"FROM \"foodmart\".\"store\"\n"
 operator|+
-literal|"WHERE \"store_name\" = 'Store 1' OR \"store_name\" = 'Store 10' OR \"store_name\" = 'Store 11' OR \"store_name\" = 'Store 15' OR \"store_name\" = 'Store 16' OR \"store_name\" = 'Store 24' OR \"store_name\" = 'Store 3' OR \"store_name\" = 'Store 7'"
+literal|"WHERE \"store_name\" = 'Store 1' OR \"store_name\" = 'Store 10'"
+operator|+
+literal|" OR (\"store_name\" = 'Store 11' OR \"store_name\" = 'Store 15')"
+operator|+
+literal|" OR (\"store_name\" = 'Store 16' OR \"store_name\" = 'Store 24'"
+operator|+
+literal|" OR (\"store_name\" = 'Store 3' OR \"store_name\" = 'Store 7'))"
 argument_list|)
 operator|.
 name|returns
