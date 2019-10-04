@@ -79,6 +79,54 @@ name|apache
 operator|.
 name|calcite
 operator|.
+name|plan
+operator|.
+name|hep
+operator|.
+name|HepPlanner
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
+name|hep
+operator|.
+name|HepProgram
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
+name|hep
+operator|.
+name|HepProgramBuilder
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
 name|rel
 operator|.
 name|RelNode
@@ -96,6 +144,22 @@ operator|.
 name|rel
 operator|.
 name|RelRoot
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|rules
+operator|.
+name|SemiJoinRule
 import|;
 end_import
 
@@ -1710,6 +1774,336 @@ argument_list|)
 operator|.
 name|returnsRows
 argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testInterpretInnerJoin
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select * from\n"
+operator|+
+literal|"(select x, y from (values (1, 'a'), (2, 'b'), (3, 'c')) as t(x, y)) t\n"
+operator|+
+literal|"join\n"
+operator|+
+literal|"(select x, y from (values (1, 'd'), (2, 'c')) as t2(x, y)) t2\n"
+operator|+
+literal|"on t.x = t2.x"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|returnsRows
+argument_list|(
+literal|"[1, a, 1, d]"
+argument_list|,
+literal|"[2, b, 2, c]"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testInterpretLeftOutJoin
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select * from\n"
+operator|+
+literal|"(select x, y from (values (1, 'a'), (2, 'b'), (3, 'c')) as t(x, y)) t\n"
+operator|+
+literal|"left join\n"
+operator|+
+literal|"(select x, y from (values (1, 'd')) as t2(x, y)) t2\n"
+operator|+
+literal|"on t.x = t2.x"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|returnsRows
+argument_list|(
+literal|"[1, a, 1, d]"
+argument_list|,
+literal|"[2, b, null, null]"
+argument_list|,
+literal|"[3, c, null, null]"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testInterpretRightOutJoin
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select * from\n"
+operator|+
+literal|"(select x, y from (values (1, 'd')) as t2(x, y)) t2\n"
+operator|+
+literal|"right join\n"
+operator|+
+literal|"(select x, y from (values (1, 'a'), (2, 'b'), (3, 'c')) as t(x, y)) t\n"
+operator|+
+literal|"on t2.x = t.x"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|returnsRows
+argument_list|(
+literal|"[1, d, 1, a]"
+argument_list|,
+literal|"[null, null, 2, b]"
+argument_list|,
+literal|"[null, null, 3, c]"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testInterpretSemanticSemiJoin
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select x, y from (values (1, 'a'), (2, 'b'), (3, 'c')) as t(x, y)\n"
+operator|+
+literal|"where x in\n"
+operator|+
+literal|"(select x from (values (1, 'd'), (3, 'g')) as t2(x, y))"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|returnsRows
+argument_list|(
+literal|"[1, a]"
+argument_list|,
+literal|"[3, c]"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testInterpretSemiJoin
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select x, y from (values (1, 'a'), (2, 'b'), (3, 'c')) as t(x, y)\n"
+operator|+
+literal|"where x in\n"
+operator|+
+literal|"(select x from (values (1, 'd'), (3, 'g')) as t2(x, y))"
+decl_stmt|;
+name|SqlNode
+name|validate
+init|=
+name|planner
+operator|.
+name|validate
+argument_list|(
+name|planner
+operator|.
+name|parse
+argument_list|(
+name|sql
+argument_list|)
+argument_list|)
+decl_stmt|;
+name|RelNode
+name|convert
+init|=
+name|planner
+operator|.
+name|rel
+argument_list|(
+name|validate
+argument_list|)
+operator|.
+name|rel
+decl_stmt|;
+specifier|final
+name|HepProgram
+name|program
+init|=
+operator|new
+name|HepProgramBuilder
+argument_list|()
+operator|.
+name|addRuleInstance
+argument_list|(
+name|SemiJoinRule
+operator|.
+name|PROJECT
+argument_list|)
+operator|.
+name|build
+argument_list|()
+decl_stmt|;
+specifier|final
+name|HepPlanner
+name|hepPlanner
+init|=
+operator|new
+name|HepPlanner
+argument_list|(
+name|program
+argument_list|)
+decl_stmt|;
+name|hepPlanner
+operator|.
+name|setRoot
+argument_list|(
+name|convert
+argument_list|)
+expr_stmt|;
+specifier|final
+name|RelNode
+name|relNode
+init|=
+name|hepPlanner
+operator|.
+name|findBestExp
+argument_list|()
+decl_stmt|;
+specifier|final
+name|Interpreter
+name|interpreter
+init|=
+operator|new
+name|Interpreter
+argument_list|(
+name|dataContext
+argument_list|,
+name|relNode
+argument_list|)
+decl_stmt|;
+name|assertRows
+argument_list|(
+name|interpreter
+argument_list|,
+literal|true
+argument_list|,
+literal|"[1, a]"
+argument_list|,
+literal|"[3, c]"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testInterpretAntiJoin
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select x, y from (values (1, 'a'), (2, 'b'), (3, 'c')) as t(x, y)\n"
+operator|+
+literal|"where x not in \n"
+operator|+
+literal|"(select x from (values (1, 'd')) as t2(x, y))"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|returnsRows
+argument_list|(
+literal|"[2, b]"
+argument_list|,
+literal|"[3, c]"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testInterpretFullJoin
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select * from\n"
+operator|+
+literal|"(select x, y from (values (1, 'a'), (2, 'b'), (3, 'c')) as t(x, y)) t\n"
+operator|+
+literal|"full join\n"
+operator|+
+literal|"(select x, y from (values (1, 'd'), (2, 'c'), (4, 'x')) as t2(x, y)) t2\n"
+operator|+
+literal|"on t.x = t2.x"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|returnsRows
+argument_list|(
+literal|"[1, a, 1, d]"
+argument_list|,
+literal|"[2, b, 2, c]"
+argument_list|,
+literal|"[3, c, null, null]"
+argument_list|,
+literal|"[null, null, 4, x]"
+argument_list|)
 expr_stmt|;
 block|}
 block|}
