@@ -7057,7 +7057,7 @@ name|Set
 name|set
 init|=
 operator|new
-name|HashSet
+name|LinkedHashSet
 argument_list|()
 decl_stmt|;
 comment|// for consistent output
