@@ -1766,14 +1766,31 @@ operator|!=
 literal|null
 condition|)
 block|{
+comment|// REVIEW Danny 2019-10-09: Should we support validation for DDL nodes ?
+specifier|final
+name|SqlNode
+name|validated
+init|=
+name|context
+operator|.
+name|validateExpression
+argument_list|(
+name|storedRowType
+argument_list|,
+name|c
+operator|.
+name|expr
+argument_list|)
+decl_stmt|;
+comment|// The explicit specified type should have the same nullability
+comment|// with the column expression inferred type,
+comment|// actually they should be exactly the same.
 return|return
 name|context
 operator|.
 name|convertExpression
 argument_list|(
-name|c
-operator|.
-name|expr
+name|validated
 argument_list|)
 return|;
 block|}
