@@ -309,6 +309,20 @@ name|allowExtendedTrim
 argument_list|()
 return|;
 block|}
+specifier|public
+name|boolean
+name|allowPluralTimeUnits
+parameter_list|()
+block|{
+return|return
+name|SqlConformanceEnum
+operator|.
+name|DEFAULT
+operator|.
+name|allowPluralTimeUnits
+argument_list|()
+return|;
+block|}
 block|}
 end_class
 

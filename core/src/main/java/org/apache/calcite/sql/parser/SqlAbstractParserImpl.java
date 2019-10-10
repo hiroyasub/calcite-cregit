@@ -41,6 +41,20 @@ name|apache
 operator|.
 name|calcite
 operator|.
+name|runtime
+operator|.
+name|CalciteContextException
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
 name|sql
 operator|.
 name|SqlCall
@@ -258,6 +272,16 @@ operator|.
 name|reflect
 operator|.
 name|Method
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|ArrayList
 import|;
 end_import
 
@@ -845,6 +869,19 @@ decl_stmt|;
 specifier|protected
 name|String
 name|originalSql
+decl_stmt|;
+specifier|protected
+specifier|final
+name|List
+argument_list|<
+name|CalciteContextException
+argument_list|>
+name|warnings
+init|=
+operator|new
+name|ArrayList
+argument_list|<>
+argument_list|()
 decl_stmt|;
 comment|//~ Methods ----------------------------------------------------------------
 comment|/**    * Returns immutable set of all reserved words defined by SQL-92.    *    * @see Glossary#SQL92 SQL-92 Section 5.2    */

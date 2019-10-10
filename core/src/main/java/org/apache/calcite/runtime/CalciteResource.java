@@ -2624,6 +2624,21 @@ function_decl|;
 annotation|@
 name|BaseMessage
 argument_list|(
+literal|"Warning: use of non-standard feature ''{0}''"
+argument_list|)
+name|ExInst
+argument_list|<
+name|CalciteException
+argument_list|>
+name|nonStandardFeatureUsed
+parameter_list|(
+name|String
+name|feature
+parameter_list|)
+function_decl|;
+annotation|@
+name|BaseMessage
+argument_list|(
 literal|"SELECT DISTINCT not supported"
 argument_list|)
 annotation|@

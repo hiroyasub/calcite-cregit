@@ -238,6 +238,11 @@ name|boolean
 name|allowExtendedTrim
 parameter_list|()
 function_decl|;
+comment|/**    * Whether interval literals should allow plural time units    * such as "YEARS" and "DAYS" in interval literals.    *    *<p>Under strict behavior, {@code INTERVAL '2' DAY} is valid    * and {@code INTERVAL '2' DAYS} is invalid;    * PostgreSQL allows both; Oracle only allows singular time units.    *    *<p>Among the built-in conformance levels, true in    * {@link SqlConformanceEnum#BABEL},    * {@link SqlConformanceEnum#LENIENT};    * false otherwise.    */
+name|boolean
+name|allowPluralTimeUnits
+parameter_list|()
+function_decl|;
 block|}
 end_interface
 
