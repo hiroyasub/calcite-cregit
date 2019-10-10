@@ -8288,7 +8288,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testUnionToUnion
+name|testUnionAllToUnionAll
 parameter_list|()
 block|{
 name|String
@@ -8314,6 +8314,74 @@ operator|+
 literal|" union all "
 operator|+
 name|sql0
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testUnionDistinctToUnionDistinct
+parameter_list|()
+block|{
+name|String
+name|sql0
+init|=
+literal|"select * from \"emps\" where \"empid\"< 300"
+decl_stmt|;
+name|String
+name|sql1
+init|=
+literal|"select * from \"emps\" where \"empid\"> 200"
+decl_stmt|;
+name|checkMaterialize
+argument_list|(
+name|sql0
+operator|+
+literal|" union "
+operator|+
+name|sql1
+argument_list|,
+name|sql1
+operator|+
+literal|" union "
+operator|+
+name|sql0
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testUnionDistinctToUnionAll
+parameter_list|()
+block|{
+name|String
+name|sql0
+init|=
+literal|"select * from \"emps\" where \"empid\"< 300"
+decl_stmt|;
+name|String
+name|sql1
+init|=
+literal|"select * from \"emps\" where \"empid\"> 200"
+decl_stmt|;
+name|checkNoMaterialize
+argument_list|(
+name|sql0
+operator|+
+literal|" union "
+operator|+
+name|sql1
+argument_list|,
+name|sql0
+operator|+
+literal|" union all "
+operator|+
+name|sql1
+argument_list|,
+name|HR_FKUK_MODEL
 argument_list|)
 expr_stmt|;
 block|}

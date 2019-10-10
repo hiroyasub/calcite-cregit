@@ -976,6 +976,16 @@ argument_list|()
 decl_stmt|;
 if|if
 condition|(
+name|query
+operator|.
+name|isAll
+argument_list|()
+operator|==
+name|target
+operator|.
+name|isAll
+argument_list|()
+operator|&&
 name|queryInputs
 operator|.
 name|size
