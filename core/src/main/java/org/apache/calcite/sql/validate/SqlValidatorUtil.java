@@ -5455,7 +5455,7 @@ argument_list|,
 literal|""
 argument_list|,
 operator|new
-name|ExplicitTablesSchema
+name|ExplicitTableSchema
 argument_list|(
 name|tableMap
 argument_list|)
@@ -5984,7 +5984,7 @@ comment|/**    * A {@link AbstractSchema} that can specify the table map explici
 specifier|private
 specifier|static
 class|class
-name|ExplicitTablesSchema
+name|ExplicitTableSchema
 extends|extends
 name|AbstractSchema
 block|{
@@ -5998,7 +5998,7 @@ name|Table
 argument_list|>
 name|tableMap
 decl_stmt|;
-name|ExplicitTablesSchema
+name|ExplicitTableSchema
 parameter_list|(
 name|Map
 argument_list|<

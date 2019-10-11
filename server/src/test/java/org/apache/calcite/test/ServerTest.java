@@ -2718,7 +2718,7 @@ literal|" i varchar(3),\n"
 operator|+
 literal|" j int not null as (char_length(h)) virtual,\n"
 operator|+
-literal|" k varchar(3) null as (trim(i)) virtual)"
+literal|" k varchar(3) null as (rtrim(i)) virtual)"
 decl_stmt|;
 name|boolean
 name|b
@@ -2875,7 +2875,9 @@ literal|""
 operator|+
 literal|"EnumerableCalc(expr#0..1=[{inputs}], expr#2=[CHAR_LENGTH($t0)], "
 operator|+
-literal|"expr#3=[FLAG(BOTH)], expr#4=[' '], expr#5=[TRIM($t3, $t4, $t1)], proj#0..2=[{exprs}], K=[$t5])\n"
+literal|"expr#3=[FLAG(TRAILING)], expr#4=[' '], "
+operator|+
+literal|"expr#5=[TRIM($t3, $t4, $t1)], proj#0..2=[{exprs}], K=[$t5])\n"
 operator|+
 literal|"  EnumerableTableScan(table=[[T1]])\n"
 decl_stmt|;

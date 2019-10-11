@@ -39,6 +39,20 @@ name|calcite
 operator|.
 name|rel
 operator|.
+name|RelNode
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
 name|type
 operator|.
 name|RelDataType
@@ -97,6 +111,18 @@ name|List
 import|;
 end_import
 
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|function
+operator|.
+name|BiFunction
+import|;
+end_import
+
 begin_comment
 comment|/**  * InitializerExpressionFactory supplies default values for INSERT, UPDATE, and NEW.  */
 end_comment
@@ -145,6 +171,18 @@ parameter_list|,
 name|InitializerContext
 name|context
 parameter_list|)
+function_decl|;
+comment|/**    * Creates a hook function to customize the relational expression right after the column    * expressions are converted. Usually the relational expression is a projection    * above a table scan.    *    * @return a hook function to transform the relational expression    * right after the column expression conversion to a customized one    *    * @see #newColumnDefaultValue(RelOptTable, int, InitializerContext)    */
+name|BiFunction
+argument_list|<
+name|InitializerContext
+argument_list|,
+name|RelNode
+argument_list|,
+name|RelNode
+argument_list|>
+name|postExpressionConversionHook
+parameter_list|()
 function_decl|;
 comment|/**    * Creates an expression which evaluates to the initializer expression for a    * particular attribute of a structured type.    *    * @param type            the structured type    * @param constructor     the constructor invoked to initialize the type    * @param iAttribute      the 0-based offset of the attribute in the type    * @param constructorArgs arguments passed to the constructor invocation    * @param context Context for creating the expression    *    * @return default value expression    */
 name|RexNode
