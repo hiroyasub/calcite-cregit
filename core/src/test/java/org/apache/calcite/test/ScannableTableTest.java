@@ -1948,12 +1948,12 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2039">[CALCITE-2039]    * AssertionError when pushing project to ProjectableFilterableTable</a>.    * Cannot push down a project if it is not a permutation of columns; in this    * case, it contains a literal. */
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1031">[CALCITE-3405]    * Prune columns for ProjectableFilterable when project is not simple mapping</a>. */
 annotation|@
 name|Test
 specifier|public
 name|void
-name|testCannotPushProject
+name|testPushNonSimpleMappingProject
 parameter_list|()
 throws|throws
 name|Exception
@@ -1984,13 +1984,13 @@ name|explain
 init|=
 literal|"PLAN="
 operator|+
-literal|"EnumerableCalc(expr#0..2=[{inputs}], expr#3=[3], k=[$t2], j=[$t1], "
+literal|"EnumerableCalc(expr#0..1=[{inputs}], expr#2=[+($t1, $t1)], expr#3=[3],"
 operator|+
-literal|"i=[$t0], EXPR$3=[$t3])\n"
+literal|" proj#0..1=[{exprs}], k0=[$t0], $f3=[$t2], $f4=[$t3])\n"
 operator|+
 literal|"  EnumerableInterpreter\n"
 operator|+
-literal|"    BindableTableScan(table=[[s, beatles]])"
+literal|"    BindableTableScan(table=[[s, beatles]], projects=[[2, 0]])"
 decl_stmt|;
 name|CalciteAssert
 operator|.
@@ -2011,7 +2011,7 @@ argument_list|)
 operator|.
 name|query
 argument_list|(
-literal|"select \"k\",\"j\",\"i\",3 from \"s\".\"beatles\""
+literal|"select \"k\", \"i\", \"k\", \"i\"+\"i\" \"ii\", 3 from \"s\".\"beatles\""
 argument_list|)
 operator|.
 name|explainContains
@@ -2021,13 +2021,13 @@ argument_list|)
 operator|.
 name|returnsUnordered
 argument_list|(
-literal|"k=1940; j=John; i=4; EXPR$3=3"
+literal|"k=1940; i=4; k=1940; ii=8; EXPR$3=3"
 argument_list|,
-literal|"k=1940; j=Ringo; i=5; EXPR$3=3"
+literal|"k=1940; i=5; k=1940; ii=10; EXPR$3=3"
 argument_list|,
-literal|"k=1942; j=Paul; i=4; EXPR$3=3"
+literal|"k=1942; i=4; k=1942; ii=8; EXPR$3=3"
 argument_list|,
-literal|"k=1943; j=George; i=6; EXPR$3=3"
+literal|"k=1943; i=6; k=1943; ii=12; EXPR$3=3"
 argument_list|)
 expr_stmt|;
 name|assertThat
@@ -2039,7 +2039,100 @@ argument_list|()
 argument_list|,
 name|is
 argument_list|(
-literal|"returnCount=4"
+literal|"returnCount=4, projects=[2, 0]"
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1031">[CALCITE-3405]    * Prune columns for ProjectableFilterable when project is not simple mapping</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testPushSimpleMappingProject
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+specifier|final
+name|StringBuilder
+name|buf
+init|=
+operator|new
+name|StringBuilder
+argument_list|()
+decl_stmt|;
+specifier|final
+name|Table
+name|table
+init|=
+operator|new
+name|BeatlesProjectableFilterableTable
+argument_list|(
+name|buf
+argument_list|,
+literal|true
+argument_list|)
+decl_stmt|;
+comment|// Note that no redundant Project on EnumerableInterpreter
+specifier|final
+name|String
+name|explain
+init|=
+literal|"PLAN="
+operator|+
+literal|"EnumerableInterpreter\n"
+operator|+
+literal|"  BindableTableScan(table=[[s, beatles]], projects=[[2, 0]])"
+decl_stmt|;
+name|CalciteAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|newSchema
+argument_list|(
+literal|"s"
+argument_list|,
+literal|"beatles"
+argument_list|,
+name|table
+argument_list|)
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select \"k\", \"i\" from \"s\".\"beatles\""
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+name|explain
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"k=1940; i=4"
+argument_list|,
+literal|"k=1940; i=5"
+argument_list|,
+literal|"k=1942; i=4"
+argument_list|,
+literal|"k=1943; i=6"
+argument_list|)
+expr_stmt|;
+name|assertThat
+argument_list|(
+name|buf
+operator|.
+name|toString
+argument_list|()
+argument_list|,
+name|is
+argument_list|(
+literal|"returnCount=4, projects=[2, 0]"
 argument_list|)
 argument_list|)
 expr_stmt|;
