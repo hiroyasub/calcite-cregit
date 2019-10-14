@@ -378,6 +378,18 @@ import|;
 end_import
 
 begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|function
+operator|.
+name|UnaryOperator
+import|;
+end_import
+
+begin_import
 import|import static
 name|org
 operator|.
@@ -409,7 +421,7 @@ name|junit
 operator|.
 name|Assert
 operator|.
-name|assertThat
+name|assertNotNull
 import|;
 end_import
 
@@ -421,7 +433,7 @@ name|junit
 operator|.
 name|Assert
 operator|.
-name|assertTrue
+name|assertThat
 import|;
 end_import
 
@@ -466,7 +478,9 @@ name|getTesterWithDynamicTable
 argument_list|()
 return|;
 block|}
-comment|/**    * Checks the plan for a SQL statement before/after executing a given rule.    *    * @param rule Planner rule    * @param sql  SQL query    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 1.23
 specifier|protected
 name|void
 name|checkPlanning
@@ -504,86 +518,9 @@ name|sql
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Checks the plan for a SQL statement before/after executing a given rule.    *    * @param rule Planner rule    * @param sql  SQL query    */
-specifier|protected
-name|void
-name|checkPlanningDynamic
-parameter_list|(
-name|RelOptRule
-name|rule
-parameter_list|,
-name|String
-name|sql
-parameter_list|)
-block|{
-name|HepProgramBuilder
-name|programBuilder
-init|=
-name|HepProgram
-operator|.
-name|builder
-argument_list|()
-decl_stmt|;
-name|programBuilder
-operator|.
-name|addRuleInstance
-argument_list|(
-name|rule
-argument_list|)
-expr_stmt|;
-name|checkPlanning
-argument_list|(
-name|createDynamicTester
-argument_list|()
-argument_list|,
-literal|null
-argument_list|,
-operator|new
-name|HepPlanner
-argument_list|(
-name|programBuilder
-operator|.
-name|build
-argument_list|()
-argument_list|)
-argument_list|,
-name|sql
-argument_list|)
-expr_stmt|;
-block|}
-comment|/**    * Checks the plan for a SQL statement before/after executing a given rule.    *    * @param sql  SQL query    */
-specifier|protected
-name|void
-name|checkPlanningDynamic
-parameter_list|(
-name|String
-name|sql
-parameter_list|)
-block|{
-name|checkPlanning
-argument_list|(
-name|createDynamicTester
-argument_list|()
-argument_list|,
-literal|null
-argument_list|,
-operator|new
-name|HepPlanner
-argument_list|(
-name|HepProgram
-operator|.
-name|builder
-argument_list|()
-operator|.
-name|build
-argument_list|()
-argument_list|)
-argument_list|,
-name|sql
-argument_list|)
-expr_stmt|;
-block|}
-comment|/**    * Checks the plan for a SQL statement before/after executing a given    * program.    *    * @param program Planner program    * @param sql     SQL query    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 1.23
 specifier|protected
 name|void
 name|checkPlanning
@@ -607,52 +544,9 @@ name|sql
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Checks the plan for a SQL statement before/after executing a given    * program, but with specified implicit type coercion flag.    *    * @param program      Planner program    * @param sql          SQL query    * @param typeCoercion Whether to open up the implicit type coercion    */
-specifier|protected
-name|void
-name|checkPlanning
-parameter_list|(
-name|HepProgram
-name|program
-parameter_list|,
-name|String
-name|sql
-parameter_list|,
-name|boolean
-name|typeCoercion
-parameter_list|)
-block|{
-specifier|final
-name|Tester
-name|tester
-init|=
-name|typeCoercion
-condition|?
-name|this
-operator|.
-name|tester
-else|:
-name|this
-operator|.
-name|strictTester
-decl_stmt|;
-name|checkPlanning
-argument_list|(
-name|tester
-argument_list|,
-literal|null
-argument_list|,
-operator|new
-name|HepPlanner
-argument_list|(
-name|program
-argument_list|)
-argument_list|,
-name|sql
-argument_list|)
-expr_stmt|;
-block|}
-comment|/**    * Checks the plan for a SQL statement before/after executing a given    * planner.    *    * @param planner Planner    * @param sql     SQL query    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 1.23
 specifier|protected
 name|void
 name|checkPlanning
@@ -676,7 +570,9 @@ name|sql
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Checks that the plan is the same before and after executing a given    * planner. Useful for checking circumstances where rules should not fire.    *    * @param planner Planner    * @param sql     SQL query    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 1.23
 specifier|protected
 name|void
 name|checkPlanUnchanged
@@ -702,7 +598,9 @@ literal|true
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Checks the plan for a SQL statement before/after executing a given rule,    * with a pre-program to prepare the tree.    *    * @param tester     Tester    * @param preProgram Program to execute before comparing before state    * @param planner    Planner    * @param sql        SQL query    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 1.23
 specifier|protected
 name|void
 name|checkPlanning
@@ -735,7 +633,7 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/**    * Checks the plan for a SQL statement before/after executing a given rule,    * with a pre-program to prepare the tree.    *    * @param tester     Tester    * @param preProgram Program to execute before comparing before state    * @param planner    Planner    * @param sql        SQL query    * @param unchanged  Whether the rule is to have no effect    */
-specifier|protected
+specifier|private
 name|void
 name|checkPlanning
 parameter_list|(
@@ -793,11 +691,9 @@ name|root
 operator|.
 name|rel
 decl_stmt|;
-name|assertTrue
+name|assertNotNull
 argument_list|(
 name|relInitial
-operator|!=
-literal|null
 argument_list|)
 expr_stmt|;
 name|List
@@ -1097,6 +993,8 @@ return|return
 operator|new
 name|Sql
 argument_list|(
+name|tester
+argument_list|,
 name|sql
 argument_list|,
 literal|null
@@ -1121,6 +1019,11 @@ name|Sql
 block|{
 specifier|private
 specifier|final
+name|Tester
+name|tester
+decl_stmt|;
+specifier|private
+specifier|final
 name|String
 name|sql
 decl_stmt|;
@@ -1157,6 +1060,9 @@ name|transforms
 decl_stmt|;
 name|Sql
 parameter_list|(
+name|Tester
+name|tester
+parameter_list|,
 name|String
 name|sql
 parameter_list|,
@@ -1186,6 +1092,12 @@ argument_list|>
 name|transforms
 parameter_list|)
 block|{
+name|this
+operator|.
+name|tester
+operator|=
+name|tester
+expr_stmt|;
 name|this
 operator|.
 name|sql
@@ -1219,6 +1131,40 @@ expr_stmt|;
 block|}
 specifier|public
 name|Sql
+name|withTester
+parameter_list|(
+name|UnaryOperator
+argument_list|<
+name|Tester
+argument_list|>
+name|transform
+parameter_list|)
+block|{
+return|return
+operator|new
+name|Sql
+argument_list|(
+name|transform
+operator|.
+name|apply
+argument_list|(
+name|tester
+argument_list|)
+argument_list|,
+name|sql
+argument_list|,
+name|preProgram
+argument_list|,
+name|hepPlanner
+argument_list|,
+name|hooks
+argument_list|,
+name|transforms
+argument_list|)
+return|;
+block|}
+specifier|public
+name|Sql
 name|withPre
 parameter_list|(
 name|HepProgram
@@ -1229,6 +1175,8 @@ return|return
 operator|new
 name|Sql
 argument_list|(
+name|tester
+argument_list|,
 name|sql
 argument_list|,
 name|preProgram
@@ -1253,6 +1201,8 @@ return|return
 operator|new
 name|Sql
 argument_list|(
+name|tester
+argument_list|,
 name|sql
 argument_list|,
 name|preProgram
@@ -1277,6 +1227,8 @@ return|return
 operator|new
 name|Sql
 argument_list|(
+name|tester
+argument_list|,
 name|sql
 argument_list|,
 name|preProgram
@@ -1355,6 +1307,8 @@ return|return
 operator|new
 name|Sql
 argument_list|(
+name|tester
+argument_list|,
 name|sql
 argument_list|,
 name|preProgram
@@ -1396,6 +1350,8 @@ return|return
 operator|new
 name|Sql
 argument_list|(
+name|tester
+argument_list|,
 name|sql
 argument_list|,
 name|preProgram
@@ -1613,6 +1569,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
+comment|/**      * Checks the plan for a SQL statement before/after executing a given rule,      * with a optional pre-program specified by {@link #withPre(HepProgram)}      * to prepare the tree.      */
 specifier|public
 name|void
 name|check
@@ -1624,6 +1581,7 @@ literal|false
 argument_list|)
 expr_stmt|;
 block|}
+comment|/**      * Checks that the plan is the same before and after executing a given      * planner. Useful for checking circumstances where rules should not fire.      */
 specifier|public
 name|void
 name|checkUnchanged

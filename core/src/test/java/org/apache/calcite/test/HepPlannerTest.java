@@ -523,14 +523,26 @@ name|LOGICAL_BUILDER
 argument_list|)
 argument_list|)
 expr_stmt|;
-name|checkPlanning
+specifier|final
+name|String
+name|sql
+init|=
+literal|"(select name from dept union select ename from emp)\n"
+operator|+
+literal|"intersect (select fname from customer.contact)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|with
 argument_list|(
 name|planner
-argument_list|,
-literal|"(select name from dept union select ename from emp)"
-operator|+
-literal|" intersect (select fname from customer.contact)"
 argument_list|)
+operator|.
+name|check
+argument_list|()
 expr_stmt|;
 block|}
 annotation|@
@@ -579,12 +591,24 @@ operator|.
 name|INSTANCE
 argument_list|)
 expr_stmt|;
-name|checkPlanning
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select name from sales.dept where deptno=12"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|with
 argument_list|(
 name|planner
-argument_list|,
-literal|"select name from sales.dept where deptno=12"
 argument_list|)
+operator|.
+name|check
+argument_list|()
 expr_stmt|;
 block|}
 comment|/**    * Ensures {@link org.apache.calcite.rel.AbstractRelNode} digest does not include    * full digest tree.    */
@@ -847,15 +871,21 @@ operator|.
 name|INSTANCE
 argument_list|)
 expr_stmt|;
-name|checkPlanning
+name|sql
+argument_list|(
+name|UNION_TREE
+argument_list|)
+operator|.
+name|with
 argument_list|(
 name|programBuilder
 operator|.
 name|build
 argument_list|()
-argument_list|,
-name|UNION_TREE
 argument_list|)
+operator|.
+name|check
+argument_list|()
 expr_stmt|;
 block|}
 annotation|@
@@ -901,15 +931,21 @@ operator|.
 name|INSTANCE
 argument_list|)
 expr_stmt|;
-name|checkPlanning
+name|sql
+argument_list|(
+name|UNION_TREE
+argument_list|)
+operator|.
+name|with
 argument_list|(
 name|programBuilder
 operator|.
 name|build
 argument_list|()
-argument_list|,
-name|UNION_TREE
 argument_list|)
+operator|.
+name|check
+argument_list|()
 expr_stmt|;
 block|}
 annotation|@
@@ -948,15 +984,21 @@ operator|.
 name|INSTANCE
 argument_list|)
 expr_stmt|;
-name|checkPlanning
+name|sql
+argument_list|(
+name|UNION_TREE
+argument_list|)
+operator|.
+name|with
 argument_list|(
 name|programBuilder
 operator|.
 name|build
 argument_list|()
-argument_list|,
-name|UNION_TREE
 argument_list|)
+operator|.
+name|check
+argument_list|()
 expr_stmt|;
 block|}
 annotation|@
@@ -974,16 +1016,28 @@ comment|// common sub-expression.  The purpose of this test
 comment|// is to make sure the planner can deal with
 comment|// rewriting something used as a common sub-expression
 comment|// twice by the same parent (the join in this case).
-name|checkPlanning
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select d1.deptno from (select * from dept) d1,\n"
+operator|+
+literal|"(select * from dept) d2"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|withRule
 argument_list|(
 name|ProjectRemoveRule
 operator|.
 name|INSTANCE
-argument_list|,
-literal|"select d1.deptno from (select * from dept) d1,"
-operator|+
-literal|" (select * from dept) d2"
 argument_list|)
+operator|.
+name|check
+argument_list|()
 expr_stmt|;
 block|}
 comment|/** Tests that if two relational expressions are equivalent, the planner    * notices, and only applies the rule once. */
@@ -1199,15 +1253,29 @@ name|build
 argument_list|()
 argument_list|)
 expr_stmt|;
-name|checkPlanning
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select upper(ename) from\n"
+operator|+
+literal|"(select lower(ename) as ename from emp where empno = 100)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|with
 argument_list|(
 name|programBuilder
 operator|.
 name|build
 argument_list|()
-argument_list|,
-literal|"select upper(ename) from (select lower(ename) as ename from emp where empno = 100)"
 argument_list|)
+operator|.
+name|check
+argument_list|()
 expr_stmt|;
 block|}
 annotation|@
@@ -1267,15 +1335,27 @@ operator|.
 name|addGroupEnd
 argument_list|()
 expr_stmt|;
-name|checkPlanning
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select upper(name) from dept where deptno=20"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|with
 argument_list|(
 name|programBuilder
 operator|.
 name|build
 argument_list|()
-argument_list|,
-literal|"select upper(name) from dept where deptno=20"
 argument_list|)
+operator|.
+name|check
+argument_list|()
 expr_stmt|;
 block|}
 annotation|@
@@ -1417,32 +1497,39 @@ literal|"(select n_nationkey from SALES.CUSTOMER) union all\n"
 operator|+
 literal|"(select n_name from CUSTOMER_MODIFIABLEVIEW)"
 decl_stmt|;
-name|Tester
-name|tester
-init|=
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|withTester
+argument_list|(
+name|t
+lambda|->
 name|createDynamicTester
 argument_list|()
+argument_list|)
 operator|.
 name|withDecorrelation
 argument_list|(
 literal|true
 argument_list|)
-decl_stmt|;
-name|checkPlanning
+operator|.
+name|with
 argument_list|(
-name|tester
-argument_list|,
 name|programBuilder
 operator|.
 name|build
 argument_list|()
-argument_list|,
-name|planner
-argument_list|,
-name|query
-argument_list|,
-literal|true
 argument_list|)
+operator|.
+name|with
+argument_list|(
+name|planner
+argument_list|)
+operator|.
+name|checkUnchanged
+argument_list|()
 expr_stmt|;
 block|}
 annotation|@
