@@ -2656,6 +2656,10 @@ argument_list|,
 name|Enumerable
 operator|.
 name|class
+argument_list|,
+name|boolean
+operator|.
+name|class
 argument_list|)
 block|,
 name|EXCEPT
@@ -2667,6 +2671,10 @@ argument_list|,
 literal|"except"
 argument_list|,
 name|Enumerable
+operator|.
+name|class
+argument_list|,
+name|boolean
 operator|.
 name|class
 argument_list|)

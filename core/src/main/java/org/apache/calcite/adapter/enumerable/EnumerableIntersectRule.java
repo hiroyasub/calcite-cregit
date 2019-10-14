@@ -139,18 +139,6 @@ name|LogicalIntersect
 operator|)
 name|rel
 decl_stmt|;
-if|if
-condition|(
-name|intersect
-operator|.
-name|all
-condition|)
-block|{
-return|return
-literal|null
-return|;
-comment|// INTERSECT ALL not implemented
-block|}
 specifier|final
 name|EnumerableConvention
 name|out
@@ -194,7 +182,9 @@ argument_list|,
 name|out
 argument_list|)
 argument_list|,
-literal|false
+name|intersect
+operator|.
+name|all
 argument_list|)
 return|;
 block|}

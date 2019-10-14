@@ -695,7 +695,7 @@ name|int
 name|index
 parameter_list|)
 function_decl|;
-comment|/**    * Produces the set difference of two sequences by    * using the default equality comparer to compare values. (Defined    * by Enumerable.)    */
+comment|/**    * Produces the set difference of two sequences by    * using the default equality comparer to compare values,    * eliminate duplicates. (Defined by Enumerable.)    */
 name|Enumerable
 argument_list|<
 name|TSource
@@ -709,7 +709,24 @@ argument_list|>
 name|enumerable1
 parameter_list|)
 function_decl|;
-comment|/**    * Produces the set difference of two sequences by    * using the specified {@code EqualityComparer<TSource>} to compare    * values.    */
+comment|/**    * Produces the set difference of two sequences by    * using the default equality comparer to compare values,    * using {@code all} to indicate whether to eliminate duplicates.    * (Defined by Enumerable.)    */
+name|Enumerable
+argument_list|<
+name|TSource
+argument_list|>
+name|except
+parameter_list|(
+name|Enumerable
+argument_list|<
+name|TSource
+argument_list|>
+name|enumerable1
+parameter_list|,
+name|boolean
+name|all
+parameter_list|)
+function_decl|;
+comment|/**    * Produces the set difference of two sequences by    * using the specified {@code EqualityComparer<TSource>} to compare    * values, eliminate duplicates.    */
 name|Enumerable
 argument_list|<
 name|TSource
@@ -727,6 +744,29 @@ argument_list|<
 name|TSource
 argument_list|>
 name|comparer
+parameter_list|)
+function_decl|;
+comment|/**    * Produces the set difference of two sequences by    * using the specified {@code EqualityComparer<TSource>} to compare    * values, using {@code all} to indicate whether to eliminate duplicates.    */
+name|Enumerable
+argument_list|<
+name|TSource
+argument_list|>
+name|except
+parameter_list|(
+name|Enumerable
+argument_list|<
+name|TSource
+argument_list|>
+name|enumerable1
+parameter_list|,
+name|EqualityComparer
+argument_list|<
+name|TSource
+argument_list|>
+name|comparer
+parameter_list|,
+name|boolean
+name|all
 parameter_list|)
 function_decl|;
 comment|/**    * Returns the first element of a sequence. (Defined    * by Enumerable.)    */
@@ -1267,7 +1307,7 @@ argument_list|>
 name|comparer
 parameter_list|)
 function_decl|;
-comment|/**    * Produces the set intersection of two sequences by    * using the default equality comparer to compare values. (Defined    * by Enumerable.)    */
+comment|/**    * Produces the set intersection of two sequences by    * using the default equality comparer to compare values,    * eliminate duplicates. (Defined by Enumerable.)    */
 name|Enumerable
 argument_list|<
 name|TSource
@@ -1281,7 +1321,24 @@ argument_list|>
 name|enumerable1
 parameter_list|)
 function_decl|;
-comment|/**    * Produces the set intersection of two sequences by    * using the specified {@code EqualityComparer<TSource>} to compare    * values.    */
+comment|/**    * Produces the set intersection of two sequences by    * using the default equality comparer to compare values,    * using {@code all} to indicate whether to eliminate duplicates.    * (Defined by Enumerable.)    */
+name|Enumerable
+argument_list|<
+name|TSource
+argument_list|>
+name|intersect
+parameter_list|(
+name|Enumerable
+argument_list|<
+name|TSource
+argument_list|>
+name|enumerable1
+parameter_list|,
+name|boolean
+name|all
+parameter_list|)
+function_decl|;
+comment|/**    * Produces the set intersection of two sequences by    * using the specified {@code EqualityComparer<TSource>} to compare    * values, eliminate duplicates.    */
 name|Enumerable
 argument_list|<
 name|TSource
@@ -1299,6 +1356,29 @@ argument_list|<
 name|TSource
 argument_list|>
 name|comparer
+parameter_list|)
+function_decl|;
+comment|/**    * Produces the set intersection of two sequences by    * using the specified {@code EqualityComparer<TSource>} to compare    * values, using {@code all} to indicate whether to eliminate duplicates.    */
+name|Enumerable
+argument_list|<
+name|TSource
+argument_list|>
+name|intersect
+parameter_list|(
+name|Enumerable
+argument_list|<
+name|TSource
+argument_list|>
+name|enumerable1
+parameter_list|,
+name|EqualityComparer
+argument_list|<
+name|TSource
+argument_list|>
+name|comparer
+parameter_list|,
+name|boolean
+name|all
 parameter_list|)
 function_decl|;
 comment|/**    * Copies the contents of this sequence into a collection.    */

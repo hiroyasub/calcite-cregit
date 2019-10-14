@@ -204,10 +204,6 @@ argument_list|,
 name|all
 argument_list|)
 expr_stmt|;
-assert|assert
-operator|!
-name|all
-assert|;
 block|}
 specifier|public
 name|EnumerableIntersect
@@ -371,6 +367,16 @@ name|physType
 operator|.
 name|comparer
 argument_list|()
+argument_list|)
+operator|.
+name|append
+argument_list|(
+name|Expressions
+operator|.
+name|constant
+argument_list|(
+name|all
+argument_list|)
 argument_list|)
 argument_list|)
 expr_stmt|;

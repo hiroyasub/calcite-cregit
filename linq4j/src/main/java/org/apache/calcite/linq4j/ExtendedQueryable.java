@@ -612,7 +612,7 @@ argument_list|>
 name|comparer
 parameter_list|)
 function_decl|;
-comment|/**    * Produces the set difference of two sequences by    * using the default equality comparer to compare values. (Defined    * by Queryable.)    */
+comment|/**    * Produces the set difference of two sequences by    * using the default equality comparer to compare values,    * eliminate duplicates. (Defined by Enumerable.)    */
 name|Queryable
 argument_list|<
 name|TSource
@@ -626,7 +626,24 @@ argument_list|>
 name|enumerable
 parameter_list|)
 function_decl|;
-comment|/**    * Produces the set difference of two sequences by    * using the specified {@code EqualityComparer<TSource>} to compare    * values.    */
+comment|/**    * Produces the set difference of two sequences by    * using the default equality comparer to compare values,    * using {@code all} to indicate whether to eliminate duplicates.    * (Defined by Enumerable.)    */
+name|Queryable
+argument_list|<
+name|TSource
+argument_list|>
+name|except
+parameter_list|(
+name|Enumerable
+argument_list|<
+name|TSource
+argument_list|>
+name|enumerable
+parameter_list|,
+name|boolean
+name|all
+parameter_list|)
+function_decl|;
+comment|/**    * Produces the set difference of two sequences by    * using the specified {@code EqualityComparer<TSource>} to compare    * values, eliminate duplicates.    */
 name|Queryable
 argument_list|<
 name|TSource
@@ -644,6 +661,29 @@ argument_list|<
 name|TSource
 argument_list|>
 name|comparer
+parameter_list|)
+function_decl|;
+comment|/**    * Produces the set difference of two sequences by    * using the specified {@code EqualityComparer<TSource>} to compare    * values, using {@code all} to indicate whether to eliminate duplicates.    */
+name|Queryable
+argument_list|<
+name|TSource
+argument_list|>
+name|except
+parameter_list|(
+name|Enumerable
+argument_list|<
+name|TSource
+argument_list|>
+name|enumerable
+parameter_list|,
+name|EqualityComparer
+argument_list|<
+name|TSource
+argument_list|>
+name|comparer
+parameter_list|,
+name|boolean
+name|all
 parameter_list|)
 function_decl|;
 comment|/**    * Returns the first element of a sequence that    * satisfies a specified condition.    */
@@ -1142,7 +1182,7 @@ argument_list|>
 name|comparer
 parameter_list|)
 function_decl|;
-comment|/**    * Produces the set intersection of two sequences by    * using the default equality comparer to compare values. (Defined    * by Queryable.)    */
+comment|/**    * Produces the set intersection of two sequences by    * using the default equality comparer to compare values,    * eliminate duplicates.(Defined by Queryable.)    */
 name|Queryable
 argument_list|<
 name|TSource
@@ -1156,7 +1196,24 @@ argument_list|>
 name|enumerable
 parameter_list|)
 function_decl|;
-comment|/**    * Produces the set intersection of two sequences by    * using the specified {@code EqualityComparer<TSource>} to compare    * values.    */
+comment|/**    * Produces the set intersection of two sequences by    * using the default equality comparer to compare values,    * using {@code all} to indicate whether to eliminate duplicates.    * (Defined by Queryable.)    */
+name|Queryable
+argument_list|<
+name|TSource
+argument_list|>
+name|intersect
+parameter_list|(
+name|Enumerable
+argument_list|<
+name|TSource
+argument_list|>
+name|enumerable
+parameter_list|,
+name|boolean
+name|all
+parameter_list|)
+function_decl|;
+comment|/**    * Produces the set intersection of two sequences by    * using the specified {@code EqualityComparer<TSource>} to compare    * values, eliminate duplicates.    */
 name|Queryable
 argument_list|<
 name|TSource
@@ -1174,6 +1231,29 @@ argument_list|<
 name|TSource
 argument_list|>
 name|comparer
+parameter_list|)
+function_decl|;
+comment|/**    * Produces the set intersection of two sequences by    * using the specified {@code EqualityComparer<TSource>} to compare    * values, using {@code all} to indicate whether to eliminate duplicates.    */
+name|Queryable
+argument_list|<
+name|TSource
+argument_list|>
+name|intersect
+parameter_list|(
+name|Enumerable
+argument_list|<
+name|TSource
+argument_list|>
+name|enumerable
+parameter_list|,
+name|EqualityComparer
+argument_list|<
+name|TSource
+argument_list|>
+name|comparer
+parameter_list|,
+name|boolean
+name|all
 parameter_list|)
 function_decl|;
 comment|/**    * Correlates the elements of two sequences based on    * matching keys. The default equality comparer is used to compare    * keys.    */

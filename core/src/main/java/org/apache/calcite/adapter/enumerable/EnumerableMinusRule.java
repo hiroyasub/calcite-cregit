@@ -139,18 +139,6 @@ name|LogicalMinus
 operator|)
 name|rel
 decl_stmt|;
-if|if
-condition|(
-name|minus
-operator|.
-name|all
-condition|)
-block|{
-return|return
-literal|null
-return|;
-comment|// EXCEPT ALL not implemented
-block|}
 specifier|final
 name|EnumerableConvention
 name|out
@@ -196,7 +184,9 @@ argument_list|,
 name|out
 argument_list|)
 argument_list|,
-literal|false
+name|minus
+operator|.
+name|all
 argument_list|)
 return|;
 block|}
