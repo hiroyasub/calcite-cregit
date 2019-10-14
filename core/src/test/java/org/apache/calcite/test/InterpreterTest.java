@@ -1310,6 +1310,408 @@ literal|"[30]"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testInterpretUnionWithNullValue
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select * from\n"
+operator|+
+literal|"(select x, y from (values (cast(NULL as int), cast(NULL as varchar(1))),\n"
+operator|+
+literal|"(cast(NULL as int), cast(NULL as varchar(1)))) as t(x, y))\n"
+operator|+
+literal|"union\n"
+operator|+
+literal|"(select x, y from (values (cast(NULL as int), cast(NULL as varchar(1)))) as t2(x, y))"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|returnsRows
+argument_list|(
+literal|"[null, null]"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testInterpretUnionAllWithNullValue
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select * from\n"
+operator|+
+literal|"(select x, y from (values (cast(NULL as int), cast(NULL as varchar(1))),\n"
+operator|+
+literal|"(cast(NULL as int), cast(NULL as varchar(1)))) as t(x, y))\n"
+operator|+
+literal|"union all\n"
+operator|+
+literal|"(select x, y from (values (cast(NULL as int), cast(NULL as varchar(1)))) as t2(x, y))"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|returnsRows
+argument_list|(
+literal|"[null, null]"
+argument_list|,
+literal|"[null, null]"
+argument_list|,
+literal|"[null, null]"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testInterpretIntersect
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select * from\n"
+operator|+
+literal|"(select x, y from (values (1, 'a'), (1, 'a'), (2, 'b'), (3, 'c')) as t(x, y))\n"
+operator|+
+literal|"intersect\n"
+operator|+
+literal|"(select x, y from (values (1, 'a'), (2, 'c'), (4, 'x')) as t2(x, y))"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|returnsRows
+argument_list|(
+literal|"[1, a]"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testInterpretIntersectAll
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select * from\n"
+operator|+
+literal|"(select x, y from (values (1, 'a'), (1, 'a'), (2, 'b'), (3, 'c')) as t(x, y))\n"
+operator|+
+literal|"intersect all\n"
+operator|+
+literal|"(select x, y from (values (1, 'a'), (2, 'c'), (4, 'x')) as t2(x, y))"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|returnsRows
+argument_list|(
+literal|"[1, a]"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testInterpretIntersectWithNullValue
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select * from\n"
+operator|+
+literal|"(select x, y from (values (cast(NULL as int), cast(NULL as varchar(1))),\n"
+operator|+
+literal|" (cast(NULL as int), cast(NULL as varchar(1)))) as t(x, y))\n"
+operator|+
+literal|"intersect\n"
+operator|+
+literal|"(select x, y from (values (cast(NULL as int), cast(NULL as varchar(1)))) as t2(x, y))"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|returnsRows
+argument_list|(
+literal|"[null, null]"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testInterpretIntersectAllWithNullValue
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select * from\n"
+operator|+
+literal|"(select x, y from (values (cast(NULL as int), cast(NULL as varchar(1))),\n"
+operator|+
+literal|" (cast(NULL as int), cast(NULL as varchar(1)))) as t(x, y))\n"
+operator|+
+literal|"intersect all\n"
+operator|+
+literal|"(select x, y from (values (cast(NULL as int), cast(NULL as varchar(1)))) as t2(x, y))"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|returnsRows
+argument_list|(
+literal|"[null, null]"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testInterpretMinus
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select * from\n"
+operator|+
+literal|"(select x, y from (values (1, 'a'), (2, 'b'), (2, 'b'), (3, 'c')) as t(x, y))\n"
+operator|+
+literal|"except\n"
+operator|+
+literal|"(select x, y from (values (1, 'a'), (2, 'c'), (4, 'x')) as t2(x, y))"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|returnsRows
+argument_list|(
+literal|"[2, b]"
+argument_list|,
+literal|"[3, c]"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testDuplicateRowInterpretMinus
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select * from\n"
+operator|+
+literal|"(select x, y from (values (2, 'b'), (2, 'b')) as t(x, y))\n"
+operator|+
+literal|"except\n"
+operator|+
+literal|"(select x, y from (values (2, 'b')) as t2(x, y))"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|returnsRows
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testInterpretMinusAll
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select * from\n"
+operator|+
+literal|"(select x, y from (values (1, 'a'), (2, 'b'), (2, 'b'), (3, 'c')) as t(x, y))\n"
+operator|+
+literal|"except all\n"
+operator|+
+literal|"(select x, y from (values (1, 'a'), (2, 'c'), (4, 'x')) as t2(x, y))"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|returnsRows
+argument_list|(
+literal|"[2, b]"
+argument_list|,
+literal|"[2, b]"
+argument_list|,
+literal|"[3, c]"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testDuplicateRowInterpretMinusAll
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select * from\n"
+operator|+
+literal|"(select x, y from (values (2, 'b'), (2, 'b')) as t(x, y))\n"
+operator|+
+literal|"except all\n"
+operator|+
+literal|"(select x, y from (values (2, 'b')) as t2(x, y))\n"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|returnsRows
+argument_list|(
+literal|"[2, b]"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testInterpretMinusAllWithNullValue
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select * from\n"
+operator|+
+literal|"(select x, y from (values (cast(NULL as int), cast(NULL as varchar(1))),\n"
+operator|+
+literal|" (cast(NULL as int), cast(NULL as varchar(1)))) as t(x, y))\n"
+operator|+
+literal|"except all\n"
+operator|+
+literal|"(select x, y from (values (cast(NULL as int), cast(NULL as varchar(1)))) as t2(x, y))\n"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|returnsRows
+argument_list|(
+literal|"[null, null]"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testInterpretMinusWithNullValue
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select * from\n"
+operator|+
+literal|"(select x, y from (values (cast(NULL as int), cast(NULL as varchar(1))),\n"
+operator|+
+literal|"(cast(NULL as int), cast(NULL as varchar(1)))) as t(x, y))\n"
+operator|+
+literal|"except\n"
+operator|+
+literal|"(select x, y from (values (cast(NULL as int), cast(NULL as varchar(1)))) as t2(x, y))\n"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|returnsRows
+argument_list|()
+expr_stmt|;
+block|}
 block|}
 end_class
 

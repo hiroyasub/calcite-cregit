@@ -3330,7 +3330,7 @@ parameter_list|)
 block|{
 return|return
 operator|new
-name|UnionNode
+name|SetOpNode
 argument_list|(
 name|implementor
 operator|.
