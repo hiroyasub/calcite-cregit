@@ -249,6 +249,22 @@ name|linq4j
 operator|.
 name|tree
 operator|.
+name|Types
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|linq4j
+operator|.
+name|tree
+operator|.
 name|UnaryExpression
 import|;
 end_import
@@ -5164,10 +5180,13 @@ parameter_list|)
 block|{
 if|if
 condition|(
-name|fromType
+operator|!
+name|Types
 operator|.
-name|equals
+name|needTypeCast
 argument_list|(
+name|fromType
+argument_list|,
 name|toType
 argument_list|)
 condition|)
@@ -5587,12 +5606,44 @@ argument_list|)
 return|;
 block|}
 block|}
+if|if
+condition|(
+name|fromType
+operator|==
+name|toBox
+operator|.
+name|primitiveClass
+condition|)
+block|{
 return|return
 name|Expressions
 operator|.
 name|box
 argument_list|(
 name|operand
+argument_list|,
+name|toBox
+argument_list|)
+return|;
+block|}
+comment|// E.g., from "int" to "Byte".
+comment|// Convert it first and generate "Byte.valueOf((byte)x)"
+comment|// Because there is no method "Byte.valueOf(int)" in Byte
+return|return
+name|Expressions
+operator|.
+name|box
+argument_list|(
+name|Expressions
+operator|.
+name|convert_
+argument_list|(
+name|operand
+argument_list|,
+name|toBox
+operator|.
+name|primitiveClass
+argument_list|)
 argument_list|,
 name|toBox
 argument_list|)
@@ -6045,7 +6096,7 @@ name|class
 condition|)
 block|{
 comment|// E.g. from "BigDecimal" to "String"
-comment|// Generate "x.toString()"
+comment|// Generate "SqlFunctions.toString(x)"
 return|return
 name|Expressions
 operator|.
@@ -6083,9 +6134,16 @@ return|;
 block|}
 else|else
 block|{
-comment|// E.g. from "BigDecimal" to "String"
+name|Expression
+name|result
+decl_stmt|;
+try|try
+block|{
+comment|// Try to call "toString()" method
+comment|// E.g. from "Integer" to "String"
 comment|// Generate "x == null ? null : x.toString()"
-return|return
+name|result
+operator|=
 name|Expressions
 operator|.
 name|condition
@@ -6114,6 +6172,30 @@ argument_list|,
 literal|"toString"
 argument_list|)
 argument_list|)
+expr_stmt|;
+block|}
+catch|catch
+parameter_list|(
+name|RuntimeException
+name|e
+parameter_list|)
+block|{
+comment|// For some special cases, e.g., "BuiltInMethod.LESSER",
+comment|// its return type is generic ("Comparable"), which contains
+comment|// no "toString()" method. We fall through to "(String)x".
+return|return
+name|Expressions
+operator|.
+name|convert_
+argument_list|(
+name|operand
+argument_list|,
+name|toType
+argument_list|)
+return|;
+block|}
+return|return
+name|result
 return|;
 block|}
 block|}

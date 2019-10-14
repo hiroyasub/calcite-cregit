@@ -10904,7 +10904,7 @@ literal|"|| $L4J$C$_org_apache_calcite_runtime_SqlFunctions_ne_ ? (String) null"
 operator|+
 literal|" : org.apache.calcite.runtime.SqlFunctions.substring(inp2_, "
 operator|+
-literal|"current.deptno + 1);"
+literal|"Integer.valueOf(current.deptno + 1).intValue());"
 argument_list|)
 expr_stmt|;
 block|}
@@ -10986,7 +10986,7 @@ literal|"org.apache.calcite.runtime.SqlFunctions.trim(true, true, \" \", "
 operator|+
 literal|"org.apache.calcite.runtime.SqlFunctions.substring(inp2_, "
 operator|+
-literal|"inp1_ * 0 + 1), true), (v5 ? 4 : 5) - 2);"
+literal|"Integer.valueOf(inp1_ * 0 + 1).intValue()), true), Integer.valueOf((v5 ? 4 : 5) - 2).intValue());"
 argument_list|)
 operator|.
 name|returns
@@ -11052,6 +11052,16 @@ argument_list|)
 operator|.
 name|planContains
 argument_list|(
+literal|"static final Integer $L4J$C$Integer_valueOf_5_2_ = Integer.valueOf($L4J$C$5_2);"
+argument_list|)
+operator|.
+name|planContains
+argument_list|(
+literal|"static final int $L4J$C$Integer_valueOf_5_2_intValue_ = $L4J$C$Integer_valueOf_5_2_.intValue();"
+argument_list|)
+operator|.
+name|planContains
+argument_list|(
 literal|"static final boolean "
 operator|+
 literal|"$L4J$C$org_apache_calcite_runtime_SqlFunctions_eq_ = "
@@ -11084,7 +11094,7 @@ literal|"org.apache.calcite.runtime.SqlFunctions.trim(true, true, \" \", "
 operator|+
 literal|"org.apache.calcite.runtime.SqlFunctions.substring(inp2_, "
 operator|+
-literal|"inp1_ * 0 + 1), true), $L4J$C$5_2);"
+literal|"Integer.valueOf(inp1_ * 0 + 1).intValue()), true), $L4J$C$Integer_valueOf_5_2_intValue_);"
 argument_list|)
 operator|.
 name|returns

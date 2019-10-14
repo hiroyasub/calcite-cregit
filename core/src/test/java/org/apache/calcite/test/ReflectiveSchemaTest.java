@@ -3381,9 +3381,9 @@ name|planContains
 argument_list|(
 literal|"return inp13_ == null ? (Long) null "
 operator|+
-literal|": Long.valueOf(inp13_.longValue() / inp13_.longValue() "
+literal|": Long.valueOf(Long.valueOf(inp13_.longValue() / inp13_.longValue()).longValue() "
 operator|+
-literal|"+ inp13_.longValue() / inp13_.longValue());"
+literal|"+ Long.valueOf(inp13_.longValue() / inp13_.longValue()).longValue());"
 argument_list|)
 operator|.
 name|returns
