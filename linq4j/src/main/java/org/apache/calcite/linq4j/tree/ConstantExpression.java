@@ -914,7 +914,7 @@ name|writer
 operator|.
 name|append
 argument_list|(
-literal|"new java.math.BigDecimal("
+literal|"java.math.BigDecimal.valueOf("
 argument_list|)
 operator|.
 name|append
