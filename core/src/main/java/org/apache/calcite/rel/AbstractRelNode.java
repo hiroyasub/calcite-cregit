@@ -751,9 +751,9 @@ specifier|final
 name|RelMetadataQuery
 name|mq
 init|=
-name|RelMetadataQuery
+name|cluster
 operator|.
-name|instance
+name|getMetadataQuery
 argument_list|()
 decl_stmt|;
 return|return
@@ -789,9 +789,9 @@ specifier|final
 name|RelMetadataQuery
 name|mq
 init|=
-name|RelMetadataQuery
+name|cluster
 operator|.
-name|instance
+name|getMetadataQuery
 argument_list|()
 decl_stmt|;
 return|return
@@ -1096,9 +1096,9 @@ block|{
 return|return
 name|estimateRowCount
 argument_list|(
-name|RelMetadataQuery
+name|cluster
 operator|.
-name|instance
+name|getMetadataQuery
 argument_list|()
 argument_list|)
 return|;
@@ -1282,9 +1282,9 @@ name|computeSelfCost
 argument_list|(
 name|planner
 argument_list|,
-name|RelMetadataQuery
+name|cluster
 operator|.
-name|instance
+name|getMetadataQuery
 argument_list|()
 argument_list|)
 return|;
