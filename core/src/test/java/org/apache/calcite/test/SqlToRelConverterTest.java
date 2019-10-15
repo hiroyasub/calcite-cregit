@@ -10395,6 +10395,92 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testFunctionWithStructInput
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select json_type(skill) from sales.dept_nested"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testAggregateFunctionForStructInput
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select "
+operator|+
+literal|"collect(skill) as collect_skill, count(skill) as count_skill, count(*) as count_star, "
+operator|+
+literal|"approx_count_distinct(skill) as approx_count_distinct_skill, "
+operator|+
+literal|"max(skill) as max_skill, min(skill) as min_skill, "
+operator|+
+literal|"any_value(skill) as any_value_skill "
+operator|+
+literal|"from sales.dept_nested"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testAggregateFunctionForStructInputByName
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select "
+operator|+
+literal|"collect(skill) as collect_skill, count(skill) as count_skill, count(*) as count_star, "
+operator|+
+literal|"approx_count_distinct(skill) as approx_count_distinct_skill, "
+operator|+
+literal|"max(skill) as max_skill, min(skill) as min_skill, "
+operator|+
+literal|"any_value(skill) as any_value_skill "
+operator|+
+literal|"from sales.dept_nested group by name"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testNestedPrimitiveFieldAccess
 parameter_list|()
 block|{
