@@ -1391,7 +1391,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**    * Update inferred row type for a query, i.e. SqlCall that returns struct type    * or SqlSelect.    *    * @param scope       validator scope    * @param query       node to inferred type    * @param columnIndex column index to update    * @param targetType1 desired column type    */
+comment|/**    * Update inferred row type for a query, i.e. SqlCall that returns struct type    * or SqlSelect.    *    * @param scope       validator scope    * @param query       node to inferred type    * @param columnIndex column index to update    * @param desiredType desired column type    */
 specifier|protected
 name|void
 name|updateInferredColumnType
@@ -1406,7 +1406,7 @@ name|int
 name|columnIndex
 parameter_list|,
 name|RelDataType
-name|targetType1
+name|desiredType
 parameter_list|)
 block|{
 specifier|final
@@ -1426,6 +1426,17 @@ assert|assert
 name|rowType
 operator|.
 name|isStruct
+argument_list|()
+assert|;
+assert|assert
+name|columnIndex
+operator|<
+name|rowType
+operator|.
+name|getFieldList
+argument_list|()
+operator|.
+name|size
 argument_list|()
 assert|;
 specifier|final
@@ -1505,7 +1516,7 @@ name|i
 operator|==
 name|columnIndex
 condition|?
-name|targetType1
+name|desiredType
 else|:
 name|type
 decl_stmt|;

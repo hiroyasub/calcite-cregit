@@ -3041,6 +3041,36 @@ operator|+
 literal|" DOUBLE NOT NULL T1_DOUBLE) NOT NULL"
 argument_list|)
 expr_stmt|;
+comment|// (int) union (int) union (varchar(20))
+name|sql
+argument_list|(
+literal|"select t1_int from t1 "
+operator|+
+literal|"union select t2_int from t2 "
+operator|+
+literal|"union select t1_varchar20 from t1"
+argument_list|)
+operator|.
+name|columnType
+argument_list|(
+literal|"VARCHAR NOT NULL"
+argument_list|)
+expr_stmt|;
+comment|// (varchar(20)) union (int) union (int)
+name|sql
+argument_list|(
+literal|"select t1_varchar20 from t1 "
+operator|+
+literal|"union select t2_int from t2 "
+operator|+
+literal|"union select t1_int from t1"
+argument_list|)
+operator|.
+name|columnType
+argument_list|(
+literal|"VARCHAR NOT NULL"
+argument_list|)
+expr_stmt|;
 comment|// intersect
 name|sql
 argument_list|(
