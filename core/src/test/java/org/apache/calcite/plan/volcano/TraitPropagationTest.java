@@ -1045,9 +1045,12 @@ specifier|final
 name|RelMetadataQuery
 name|mq
 init|=
-name|RelMetadataQuery
+name|planned
 operator|.
-name|instance
+name|getCluster
+argument_list|()
+operator|.
+name|getMetadataQuery
 argument_list|()
 decl_stmt|;
 name|assertEquals
@@ -2307,9 +2310,9 @@ specifier|final
 name|RelMetadataQuery
 name|mq
 init|=
-name|RelMetadataQuery
+name|cluster
 operator|.
-name|instance
+name|getMetadataQuery
 argument_list|()
 decl_stmt|;
 specifier|final
