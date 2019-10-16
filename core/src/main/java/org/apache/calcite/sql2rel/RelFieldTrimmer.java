@@ -657,6 +657,20 @@ name|calcite
 operator|.
 name|sql
 operator|.
+name|SqlKind
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
 name|validate
 operator|.
 name|SqlValidator
@@ -4881,7 +4895,7 @@ name|mapping
 argument_list|)
 return|;
 block|}
-comment|/**    * Variant of {@link #trimFields(RelNode, ImmutableBitSet, Set)} for    * {@link org.apache.calcite.rel.core.SetOp} (including UNION and UNION ALL).    */
+comment|/**    * Variant of {@link #trimFields(RelNode, ImmutableBitSet, Set)} for    * {@link org.apache.calcite.rel.core.SetOp} (Only UNION ALL is supported).    */
 specifier|public
 name|TrimResult
 name|trimFields
@@ -4917,6 +4931,44 @@ operator|.
 name|getFieldCount
 argument_list|()
 decl_stmt|;
+comment|// Trim fields only for UNION ALL.
+comment|//
+comment|// UNION | INTERSECT | INTERSECT ALL | EXCEPT | EXCEPT ALL
+comment|// all have comparison between branches.
+comment|// They can not be trimmed because the comparison needs
+comment|// complete fields.
+if|if
+condition|(
+operator|!
+operator|(
+name|setOp
+operator|.
+name|kind
+operator|==
+name|SqlKind
+operator|.
+name|UNION
+operator|&&
+name|setOp
+operator|.
+name|all
+operator|)
+condition|)
+block|{
+return|return
+name|result
+argument_list|(
+name|setOp
+argument_list|,
+name|Mappings
+operator|.
+name|createIdentity
+argument_list|(
+name|fieldCount
+argument_list|)
+argument_list|)
+return|;
+block|}
 name|int
 name|changeCount
 init|=

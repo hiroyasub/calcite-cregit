@@ -14089,6 +14089,216 @@ literal|"${planKeepSort}"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testTrimUnionAll
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|""
+operator|+
+literal|"select deptno from\n"
+operator|+
+literal|"(select ename, deptno from emp\n"
+operator|+
+literal|"union all\n"
+operator|+
+literal|"select name, deptno from dept)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|trim
+argument_list|(
+literal|true
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testTrimUnionDistinct
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|""
+operator|+
+literal|"select deptno from\n"
+operator|+
+literal|"(select ename, deptno from emp\n"
+operator|+
+literal|"union\n"
+operator|+
+literal|"select name, deptno from dept)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|trim
+argument_list|(
+literal|true
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testTrimIntersectAll
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|""
+operator|+
+literal|"select deptno from\n"
+operator|+
+literal|"(select ename, deptno from emp\n"
+operator|+
+literal|"intersect all\n"
+operator|+
+literal|"select name, deptno from dept)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|trim
+argument_list|(
+literal|true
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testTrimIntersectDistinct
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|""
+operator|+
+literal|"select deptno from\n"
+operator|+
+literal|"(select ename, deptno from emp\n"
+operator|+
+literal|"intersect\n"
+operator|+
+literal|"select name, deptno from dept)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|trim
+argument_list|(
+literal|true
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testTrimExceptAll
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|""
+operator|+
+literal|"select deptno from\n"
+operator|+
+literal|"(select ename, deptno from emp\n"
+operator|+
+literal|"except all\n"
+operator|+
+literal|"select name, deptno from dept)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|trim
+argument_list|(
+literal|true
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testTrimExceptDistinct
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|""
+operator|+
+literal|"select deptno from\n"
+operator|+
+literal|"(select ename, deptno from emp\n"
+operator|+
+literal|"except\n"
+operator|+
+literal|"select name, deptno from dept)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|trim
+argument_list|(
+literal|true
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
 comment|/**    * Visitor that checks that every {@link RelNode} in a tree is valid.    *    * @see RelNode#isValid(Litmus, RelNode.Context)    */
 specifier|public
 specifier|static
