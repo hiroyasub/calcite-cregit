@@ -22886,7 +22886,7 @@ block|}
 end_function
 
 begin_comment
-comment|/** Test for MONTHNAME and DAYNAME functions in two locales. */
+comment|/** Test for MONTHNAME, DAYNAME and DAYOFWEEK functions in two locales. */
 end_comment
 
 begin_function
@@ -22917,9 +22917,27 @@ literal|" dayname(DATE '1969-01-01'),\n"
 operator|+
 literal|" dayname(DATE '2019-02-10'),\n"
 operator|+
-literal|" dayname(TIMESTAMP '2019-02-10 02:10:12')\n"
+literal|" dayname(TIMESTAMP '2019-02-10 02:10:12'),\n"
 operator|+
-literal|")) AS t(t0, t1, t2, t3, t4, t5, t6, t7)"
+literal|" dayofweek(DATE '2019-02-09'),\n"
+comment|// sat=7
+operator|+
+literal|" dayofweek(DATE '2019-02-10'),\n"
+comment|// sun=1
+operator|+
+literal|" extract(DOW FROM DATE '2019-02-09'),\n"
+comment|// sat=7
+operator|+
+literal|" extract(DOW FROM DATE '2019-02-10'),\n"
+comment|// sun=1
+operator|+
+literal|" extract(ISODOW FROM DATE '2019-02-09'),\n"
+comment|// sat=6
+operator|+
+literal|" extract(ISODOW FROM DATE '2019-02-10')\n"
+comment|// sun=7
+operator|+
+literal|")) AS t(t0, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13)"
 decl_stmt|;
 name|Stream
 operator|.
@@ -23138,6 +23156,96 @@ argument_list|(
 name|t
 operator|.
 name|sunday
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|assertThat
+argument_list|(
+name|rs
+operator|.
+name|getInt
+argument_list|(
+literal|9
+argument_list|)
+argument_list|,
+name|is
+argument_list|(
+literal|7
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|assertThat
+argument_list|(
+name|rs
+operator|.
+name|getInt
+argument_list|(
+literal|10
+argument_list|)
+argument_list|,
+name|is
+argument_list|(
+literal|1
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|assertThat
+argument_list|(
+name|rs
+operator|.
+name|getInt
+argument_list|(
+literal|11
+argument_list|)
+argument_list|,
+name|is
+argument_list|(
+literal|7
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|assertThat
+argument_list|(
+name|rs
+operator|.
+name|getInt
+argument_list|(
+literal|12
+argument_list|)
+argument_list|,
+name|is
+argument_list|(
+literal|1
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|assertThat
+argument_list|(
+name|rs
+operator|.
+name|getInt
+argument_list|(
+literal|13
+argument_list|)
+argument_list|,
+name|is
+argument_list|(
+literal|6
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|assertThat
+argument_list|(
+name|rs
+operator|.
+name|getInt
+argument_list|(
+literal|14
+argument_list|)
+argument_list|,
+name|is
+argument_list|(
+literal|7
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -32787,6 +32895,8 @@ name|shorten
 argument_list|(
 literal|"February"
 argument_list|)
+argument_list|,
+literal|0
 argument_list|)
 block|,
 name|EN
@@ -32800,6 +32910,8 @@ argument_list|,
 literal|"January"
 argument_list|,
 literal|"February"
+argument_list|,
+literal|0
 argument_list|)
 block|,
 name|FR
@@ -32813,6 +32925,8 @@ argument_list|,
 literal|"janvier"
 argument_list|,
 literal|"f\u00e9vrier"
+argument_list|,
+literal|6
 argument_list|)
 block|,
 name|FR_FR
@@ -32826,6 +32940,8 @@ argument_list|,
 literal|"janvier"
 argument_list|,
 literal|"f\u00e9vrier"
+argument_list|,
+literal|6
 argument_list|)
 block|,
 name|FR_CA
@@ -32839,6 +32955,8 @@ argument_list|,
 literal|"janvier"
 argument_list|,
 literal|"f\u00e9vrier"
+argument_list|,
+literal|6
 argument_list|)
 block|,
 name|ZH_CN
@@ -32852,6 +32970,8 @@ argument_list|,
 literal|"\u4e00\u6708"
 argument_list|,
 literal|"\u4e8c\u6708"
+argument_list|,
+literal|6
 argument_list|)
 block|,
 name|ZH
@@ -32865,6 +32985,8 @@ argument_list|,
 literal|"\u4e00\u6708"
 argument_list|,
 literal|"\u4e8c\u6708"
+argument_list|,
+literal|6
 argument_list|)
 block|;
 specifier|private
@@ -32924,6 +33046,11 @@ specifier|final
 name|String
 name|february
 decl_stmt|;
+specifier|public
+specifier|final
+name|int
+name|sundayDayOfWeek
+decl_stmt|;
 name|TestLocale
 parameter_list|(
 name|String
@@ -32940,6 +33067,9 @@ name|january
 parameter_list|,
 name|String
 name|february
+parameter_list|,
+name|int
+name|sundayDayOfWeek
 parameter_list|)
 block|{
 name|this
@@ -32971,6 +33101,12 @@ operator|.
 name|february
 operator|=
 name|february
+expr_stmt|;
+name|this
+operator|.
+name|sundayDayOfWeek
+operator|=
+name|sundayDayOfWeek
 expr_stmt|;
 block|}
 block|}

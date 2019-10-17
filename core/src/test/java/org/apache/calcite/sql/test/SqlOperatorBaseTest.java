@@ -33502,6 +33502,17 @@ name|tester
 operator|.
 name|checkScalar
 argument_list|(
+literal|"floor(date '2015-02-19' to year)"
+argument_list|,
+literal|"2015-01-01"
+argument_list|,
+literal|"DATE NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
 literal|"floor(timestamp '2015-02-19 12:34:56' to month)"
 argument_list|,
 literal|"2015-02-01 00:00:00"
@@ -33511,9 +33522,27 @@ argument_list|)
 expr_stmt|;
 name|tester
 operator|.
+name|checkScalar
+argument_list|(
+literal|"floor(date '2015-02-19' to month)"
+argument_list|,
+literal|"2015-02-01"
+argument_list|,
+literal|"DATE NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
 name|checkNull
 argument_list|(
 literal|"floor(cast(null as timestamp) to month)"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkNull
+argument_list|(
+literal|"floor(cast(null as date) to month)"
 argument_list|)
 expr_stmt|;
 block|}
@@ -33677,6 +33706,17 @@ name|tester
 operator|.
 name|checkScalar
 argument_list|(
+literal|"ceil(date '2015-02-19' to year)"
+argument_list|,
+literal|"2016-01-01"
+argument_list|,
+literal|"DATE NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
 literal|"ceil(timestamp '2015-02-19 12:34:56' to month)"
 argument_list|,
 literal|"2015-03-01 00:00:00"
@@ -33686,9 +33726,27 @@ argument_list|)
 expr_stmt|;
 name|tester
 operator|.
+name|checkScalar
+argument_list|(
+literal|"ceil(date '2015-02-19' to month)"
+argument_list|,
+literal|"2015-03-01"
+argument_list|,
+literal|"DATE NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
 name|checkNull
 argument_list|(
 literal|"ceil(cast(null as timestamp) to month)"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkNull
+argument_list|(
+literal|"ceil(cast(null as date) to month)"
 argument_list|)
 expr_stmt|;
 comment|// ceiling alias
@@ -33701,6 +33759,17 @@ argument_list|,
 literal|"2015-03-01 00:00:00"
 argument_list|,
 literal|"TIMESTAMP(0) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"ceiling(date '2015-02-19' to month)"
+argument_list|,
+literal|"2015-03-01"
+argument_list|,
+literal|"DATE NOT NULL"
 argument_list|)
 expr_stmt|;
 name|tester
