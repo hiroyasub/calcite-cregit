@@ -1434,6 +1434,10 @@ operator|||
 name|o
 operator|instanceof
 name|ByteString
+operator|||
+name|o
+operator|instanceof
+name|Boolean
 condition|)
 block|{
 return|return

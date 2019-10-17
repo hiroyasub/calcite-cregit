@@ -265,22 +265,6 @@ name|sql
 operator|.
 name|validate
 operator|.
-name|SqlUserDefinedTableMacro
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|sql
-operator|.
-name|validate
-operator|.
 name|SqlValidator
 import|;
 end_import
@@ -2833,19 +2817,6 @@ name|coerced
 init|=
 literal|false
 decl_stmt|;
-comment|// User defined table macro only allows literals.
-comment|// we should support this in the future.
-if|if
-condition|(
-name|function
-operator|instanceof
-name|SqlUserDefinedTableMacro
-condition|)
-block|{
-return|return
-literal|false
-return|;
-block|}
 for|for
 control|(
 name|int

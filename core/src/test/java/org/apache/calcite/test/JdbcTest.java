@@ -1271,6 +1271,18 @@ begin_import
 import|import
 name|java
 operator|.
+name|lang
+operator|.
+name|reflect
+operator|.
+name|Method
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
 name|math
 operator|.
 name|BigDecimal
@@ -2814,28 +2826,20 @@ argument_list|()
 expr_stmt|;
 block|}
 block|}
-comment|/**    * Tests a relation that is accessed via method syntax.    *    *<p>The function ({@link Smalls#view(String)} has a return type    * {@link Table} and the actual returned value implements    * {@link org.apache.calcite.schema.TranslatableTable}.    */
-annotation|@
-name|Test
-specifier|public
+comment|/**    * Adds table macro for connection, with catalog named "s"    * and the method reflection name as the name of the macro.    */
+specifier|private
 name|void
-name|testTableMacro
-parameter_list|()
-throws|throws
-name|SQLException
-throws|,
-name|ClassNotFoundException
-block|{
+name|addTableMacro
+parameter_list|(
 name|Connection
 name|connection
-init|=
-name|DriverManager
-operator|.
-name|getConnection
-argument_list|(
-literal|"jdbc:calcite:"
-argument_list|)
-decl_stmt|;
+parameter_list|,
+name|Method
+name|method
+parameter_list|)
+throws|throws
+name|SQLException
+block|{
 name|CalciteConnection
 name|calciteConnection
 init|=
@@ -2878,18 +2882,51 @@ name|TableMacroImpl
 operator|.
 name|create
 argument_list|(
-name|Smalls
-operator|.
-name|VIEW_METHOD
+name|method
 argument_list|)
 decl_stmt|;
 name|schema
 operator|.
 name|add
 argument_list|(
-literal|"View"
+name|method
+operator|.
+name|getName
+argument_list|()
 argument_list|,
 name|tableMacro
+argument_list|)
+expr_stmt|;
+block|}
+comment|/**    * Tests a relation that is accessed via method syntax.    *    *<p>The function ({@link Smalls#view(String)} has a return type    * {@link Table} and the actual returned value implements    * {@link org.apache.calcite.schema.TranslatableTable}.    */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testTableMacro
+parameter_list|()
+throws|throws
+name|SQLException
+throws|,
+name|ClassNotFoundException
+block|{
+name|Connection
+name|connection
+init|=
+name|DriverManager
+operator|.
+name|getConnection
+argument_list|(
+literal|"jdbc:calcite:"
+argument_list|)
+decl_stmt|;
+name|addTableMacro
+argument_list|(
+name|connection
+argument_list|,
+name|Smalls
+operator|.
+name|VIEW_METHOD
 argument_list|)
 expr_stmt|;
 name|ResultSet
@@ -2904,7 +2941,7 @@ name|executeQuery
 argument_list|(
 literal|"select *\n"
 operator|+
-literal|"from table(\"s\".\"View\"('(10), (20)')) as t(n)\n"
+literal|"from table(\"s\".\"view\"('(10), (20)')) as t(n)\n"
 operator|+
 literal|"where n< 15"
 argument_list|)
@@ -2957,60 +2994,13 @@ argument_list|(
 literal|"jdbc:calcite:"
 argument_list|)
 decl_stmt|;
-name|CalciteConnection
-name|calciteConnection
-init|=
+name|addTableMacro
+argument_list|(
 name|connection
-operator|.
-name|unwrap
-argument_list|(
-name|CalciteConnection
-operator|.
-name|class
-argument_list|)
-decl_stmt|;
-name|SchemaPlus
-name|rootSchema
-init|=
-name|calciteConnection
-operator|.
-name|getRootSchema
-argument_list|()
-decl_stmt|;
-name|SchemaPlus
-name|schema
-init|=
-name|rootSchema
-operator|.
-name|add
-argument_list|(
-literal|"s"
 argument_list|,
-operator|new
-name|AbstractSchema
-argument_list|()
-argument_list|)
-decl_stmt|;
-specifier|final
-name|TableMacro
-name|tableMacro
-init|=
-name|TableMacroImpl
-operator|.
-name|create
-argument_list|(
 name|Smalls
 operator|.
 name|STR_METHOD
-argument_list|)
-decl_stmt|;
-name|schema
-operator|.
-name|add
-argument_list|(
-literal|"Str"
-argument_list|,
-name|tableMacro
 argument_list|)
 expr_stmt|;
 name|ResultSet
@@ -3025,7 +3015,7 @@ name|executeQuery
 argument_list|(
 literal|"select *\n"
 operator|+
-literal|"from table(\"s\".\"Str\"(MAP['a', 1, 'baz', 2],\n"
+literal|"from table(\"s\".\"str\"(MAP['a', 1, 'baz', 2],\n"
 operator|+
 literal|"                         ARRAY[3, 4, CAST(null AS INTEGER)])) as t(n)"
 argument_list|)
@@ -3045,6 +3035,206 @@ argument_list|(
 literal|"N={'a'=1, 'baz'=2}\n"
 operator|+
 literal|"N=[3, 4, null]    \n"
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|connection
+operator|.
+name|close
+argument_list|()
+expr_stmt|;
+block|}
+comment|/**    *<p>Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3423">[CALCITE-3423]    * Support using CAST operation and BOOLEAN type value in table macro</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testTableMacroWithCastOrBoolean
+parameter_list|()
+throws|throws
+name|SQLException
+block|{
+name|Connection
+name|connection
+init|=
+name|DriverManager
+operator|.
+name|getConnection
+argument_list|(
+literal|"jdbc:calcite:"
+argument_list|)
+decl_stmt|;
+name|addTableMacro
+argument_list|(
+name|connection
+argument_list|,
+name|Smalls
+operator|.
+name|STR_METHOD
+argument_list|)
+expr_stmt|;
+comment|// check for cast
+name|ResultSet
+name|resultSet
+init|=
+name|connection
+operator|.
+name|createStatement
+argument_list|()
+operator|.
+name|executeQuery
+argument_list|(
+literal|"select * from table(\"s\".\"str\"(MAP['a', 1, 'baz', 2], cast(1 as bigint))) as t(n)"
+argument_list|)
+decl_stmt|;
+name|assertThat
+argument_list|(
+name|CalciteAssert
+operator|.
+name|toString
+argument_list|(
+name|resultSet
+argument_list|)
+argument_list|,
+name|equalTo
+argument_list|(
+literal|"N={'a'=1, 'baz'=2}\n"
+operator|+
+literal|"N=1               \n"
+argument_list|)
+argument_list|)
+expr_stmt|;
+comment|// check for Boolean type
+name|resultSet
+operator|=
+name|connection
+operator|.
+name|createStatement
+argument_list|()
+operator|.
+name|executeQuery
+argument_list|(
+literal|"select * from table(\"s\".\"str\"(MAP['a', 1, 'baz', 2], true)) as t(n)"
+argument_list|)
+expr_stmt|;
+name|assertThat
+argument_list|(
+name|CalciteAssert
+operator|.
+name|toString
+argument_list|(
+name|resultSet
+argument_list|)
+argument_list|,
+name|equalTo
+argument_list|(
+literal|"N={'a'=1, 'baz'=2}\n"
+operator|+
+literal|"N=true            \n"
+argument_list|)
+argument_list|)
+expr_stmt|;
+comment|// check for nested cast
+name|resultSet
+operator|=
+name|connection
+operator|.
+name|createStatement
+argument_list|()
+operator|.
+name|executeQuery
+argument_list|(
+literal|"select * from table(\"s\".\"str\"(MAP['a', 1, 'baz', 2],"
+operator|+
+literal|"cast(cast(1 as int) as varchar(1)))) as t(n)"
+argument_list|)
+expr_stmt|;
+name|assertThat
+argument_list|(
+name|CalciteAssert
+operator|.
+name|toString
+argument_list|(
+name|resultSet
+argument_list|)
+argument_list|,
+name|equalTo
+argument_list|(
+literal|"N={'a'=1, 'baz'=2}\n"
+operator|+
+literal|"N=1               \n"
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|resultSet
+operator|=
+name|connection
+operator|.
+name|createStatement
+argument_list|()
+operator|.
+name|executeQuery
+argument_list|(
+literal|"select * from table(\"s\".\"str\"(MAP['a', 1, 'baz', 2],"
+operator|+
+literal|"cast(cast(cast('2019-10-18 10:35:23' as TIMESTAMP) as BIGINT) as VARCHAR))) as t(n)"
+argument_list|)
+expr_stmt|;
+name|assertThat
+argument_list|(
+name|CalciteAssert
+operator|.
+name|toString
+argument_list|(
+name|resultSet
+argument_list|)
+argument_list|,
+name|equalTo
+argument_list|(
+literal|"N={'a'=1, 'baz'=2}     \n"
+operator|+
+literal|"N='2019-10-18 10:35:23'\n"
+argument_list|)
+argument_list|)
+expr_stmt|;
+comment|// check for implicit type coercion
+name|addTableMacro
+argument_list|(
+name|connection
+argument_list|,
+name|Smalls
+operator|.
+name|VIEW_METHOD
+argument_list|)
+expr_stmt|;
+name|resultSet
+operator|=
+name|connection
+operator|.
+name|createStatement
+argument_list|()
+operator|.
+name|executeQuery
+argument_list|(
+literal|"select * from table(\"s\".\"view\"(5)) as t(n)"
+argument_list|)
+expr_stmt|;
+name|assertThat
+argument_list|(
+name|CalciteAssert
+operator|.
+name|toString
+argument_list|(
+name|resultSet
+argument_list|)
+argument_list|,
+name|equalTo
+argument_list|(
+literal|"N=1\n"
+operator|+
+literal|"N=3\n"
+operator|+
+literal|"N=5\n"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -3152,18 +3342,6 @@ argument_list|(
 literal|"Duplicate argument name 'T'"
 argument_list|)
 expr_stmt|;
-name|with
-operator|.
-name|query
-argument_list|(
-literal|"select * from table(\"adhoc\".\"View\"(t=>'5', s=>'6'))"
-argument_list|)
-operator|.
-name|throws_
-argument_list|(
-literal|"No match found for function signature View(T =><CHARACTER>, S =><CHARACTER>)"
-argument_list|)
-expr_stmt|;
 specifier|final
 name|String
 name|expected3
@@ -3176,6 +3354,19 @@ literal|"c=6\n"
 operator|+
 literal|"c=5\n"
 decl_stmt|;
+comment|// implicit type coercion
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"select * from table(\"adhoc\".\"View\"(t=>'5', s=>'6'))"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+name|expected3
+argument_list|)
+expr_stmt|;
 name|with
 operator|.
 name|query

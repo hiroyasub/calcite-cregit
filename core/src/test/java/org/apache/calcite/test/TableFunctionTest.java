@@ -2008,22 +2008,11 @@ specifier|final
 name|String
 name|q
 init|=
-literal|"select *\n"
+literal|"select \"c1\"\n"
 operator|+
 literal|"from table(\"s\".\"multiplication\"('2', 3, 100))\n"
 operator|+
-literal|"where c1 + 2< c2"
-decl_stmt|;
-comment|// With type coercion, a cast node with null as argument would be
-comment|// passed to the function to infer the table row type, we use
-comment|// SqlUserDefinedTableMacro#convertArguments to decide the type.
-comment|// For this table function: multiplication,
-comment|// it will just throw IllegalArgumentException.
-specifier|final
-name|String
-name|e
-init|=
-literal|"java.lang.IllegalArgumentException"
+literal|"where \"c1\" + 2< \"c2\""
 decl_stmt|;
 name|with
 argument_list|()
@@ -2033,9 +2022,9 @@ argument_list|(
 name|q
 argument_list|)
 operator|.
-name|throws_
+name|returnsUnordered
 argument_list|(
-name|e
+literal|"c1=103"
 argument_list|)
 expr_stmt|;
 block|}
