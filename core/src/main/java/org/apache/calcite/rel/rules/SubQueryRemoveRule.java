@@ -1259,9 +1259,9 @@ comment|//   else e.deptno< q.m
 comment|//   end as v
 comment|// from emp as e
 comment|// left outer join (
-comment|//   select max(deptno) as m, count(*) as c, count(deptno) as d,
+comment|//   select name, max(deptno) as m, count(*) as c, count(deptno) as d,
 comment|//       "alwaysTrue" as indicator
-comment|//   group by name from emp) as q on e.name = q.name
+comment|//   from emp group by name) as q on e.name = q.name
 name|builder
 operator|.
 name|push
