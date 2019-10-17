@@ -1435,6 +1435,8 @@ argument_list|()
 operator|.
 name|getFieldCount
 argument_list|()
+argument_list|,
+name|dialect
 argument_list|)
 expr_stmt|;
 block|}

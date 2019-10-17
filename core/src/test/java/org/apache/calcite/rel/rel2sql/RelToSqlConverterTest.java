@@ -14890,6 +14890,68 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testCastInStringIntegerComparison
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|query
+init|=
+literal|"select \"employee_id\" "
+operator|+
+literal|"from \"foodmart\".\"employee\" "
+operator|+
+literal|"where 10 = cast('10' as int) and \"birth_date\" = cast('1914-02-02' as date) or "
+operator|+
+literal|"\"hire_date\" = cast('1996-01-01 '||'00:00:00' as timestamp)"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT \"employee_id\"\n"
+operator|+
+literal|"FROM \"foodmart\".\"employee\"\n"
+operator|+
+literal|"WHERE 10 = '10' AND \"birth_date\" = '1914-02-02' OR \"hire_date\" = '1996-01-01 ' || "
+operator|+
+literal|"'00:00:00'"
+decl_stmt|;
+specifier|final
+name|String
+name|expectedBiqquery
+init|=
+literal|"SELECT employee_id\n"
+operator|+
+literal|"FROM foodmart.employee\n"
+operator|+
+literal|"WHERE 10 = CAST('10' AS INTEGER) AND birth_date = '1914-02-02' OR hire_date = "
+operator|+
+literal|"CAST('1996-01-01 ' || '00:00:00' AS TIMESTAMP)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+operator|.
+name|withBigQuery
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expectedBiqquery
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testDialectQuoteStringLiteral
 parameter_list|()
 block|{
