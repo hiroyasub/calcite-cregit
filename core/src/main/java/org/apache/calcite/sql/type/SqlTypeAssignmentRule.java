@@ -1045,6 +1045,25 @@ name|ARRAY
 argument_list|)
 argument_list|)
 expr_stmt|;
+comment|// MAP is assignable from ...
+name|rules
+operator|.
+name|add
+argument_list|(
+name|SqlTypeName
+operator|.
+name|MAP
+argument_list|,
+name|EnumSet
+operator|.
+name|of
+argument_list|(
+name|SqlTypeName
+operator|.
+name|MAP
+argument_list|)
+argument_list|)
+expr_stmt|;
 comment|// ANY is assignable from ...
 name|rule
 operator|.

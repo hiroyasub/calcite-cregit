@@ -1139,6 +1139,15 @@ name|typeName
 operator|!=
 name|SqlTypeName
 operator|.
+name|MAP
+operator|:
+literal|"use createMapType() instead"
+assert|;
+assert|assert
+name|typeName
+operator|!=
+name|SqlTypeName
+operator|.
 name|ROW
 operator|:
 literal|"use createStructType() instead"

@@ -1270,14 +1270,30 @@ operator|==
 literal|null
 condition|)
 block|{
-comment|// This is in case of nested Objects!
+return|return
+name|o
+operator|.
+name|toString
+argument_list|()
+return|;
+block|}
 if|if
 condition|(
+name|Map
+operator|.
+name|class
+operator|.
+name|isAssignableFrom
+argument_list|(
+name|clazz
+argument_list|)
+operator|&&
 name|o
 operator|instanceof
 name|PdxInstance
 condition|)
 block|{
+comment|// This is in case of nested Objects!
 return|return
 name|Util
 operator|.
@@ -1299,13 +1315,6 @@ literal|","
 argument_list|,
 literal|"]"
 argument_list|)
-return|;
-block|}
-return|return
-name|o
-operator|.
-name|toString
-argument_list|()
 return|;
 block|}
 if|if

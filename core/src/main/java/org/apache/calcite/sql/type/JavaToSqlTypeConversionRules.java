@@ -507,6 +507,17 @@ argument_list|)
 decl|.
 name|put
 argument_list|(
+name|Map
+operator|.
+name|class
+argument_list|,
+name|SqlTypeName
+operator|.
+name|MAP
+argument_list|)
+decl|.
+name|put
+argument_list|(
 name|Void
 operator|.
 name|class
