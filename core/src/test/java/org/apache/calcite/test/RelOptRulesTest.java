@@ -19587,7 +19587,7 @@ name|sql
 init|=
 literal|"select e.job,d.name\n"
 operator|+
-literal|"from (select * from sales.emp where empno = 10) as e\n"
+literal|"from (select * from sales.emp where ename = 'A') as e\n"
 operator|+
 literal|"join sales.dept as d on e.job = d.name\n"
 operator|+
@@ -19652,7 +19652,7 @@ name|sql
 init|=
 literal|"select e.ename\n"
 operator|+
-literal|"from (select * from sales.emp where empno = 10) as e\n"
+literal|"from (select * from sales.emp where ename = 'A') as e\n"
 operator|+
 literal|"left outer join sales.dept as d on e.job = d.name\n"
 operator|+
@@ -19717,7 +19717,7 @@ name|sql
 init|=
 literal|"select d.ename\n"
 operator|+
-literal|"from (select * from sales.emp where empno = 10) as e\n"
+literal|"from (select * from sales.emp where ename = 'A') as e\n"
 operator|+
 literal|"left outer join sales.emp as d on e.job = d.job\n"
 operator|+
@@ -19782,7 +19782,7 @@ name|sql
 init|=
 literal|"select e.ename, d.mgr\n"
 operator|+
-literal|"from (select * from sales.emp where empno = 10) as e\n"
+literal|"from (select * from sales.emp where ename = 'A') as e\n"
 operator|+
 literal|"left outer join sales.emp as d on e.job = d.job\n"
 operator|+
@@ -19847,7 +19847,7 @@ name|sql
 init|=
 literal|"select e.job\n"
 operator|+
-literal|"from (select * from sales.emp where empno = 10) as e\n"
+literal|"from (select * from sales.emp where ename = 'A') as e\n"
 operator|+
 literal|"left outer join sales.dept as d on e.job = d.name\n"
 operator|+
@@ -19912,7 +19912,7 @@ name|sql
 init|=
 literal|"select d.name\n"
 operator|+
-literal|"from (select * from sales.emp where empno = 10) as e\n"
+literal|"from (select * from sales.emp where ename = 'A') as e\n"
 operator|+
 literal|"left outer join sales.dept as d on e.job = d.name\n"
 operator|+
@@ -19977,7 +19977,7 @@ name|sql
 init|=
 literal|"select e.job,d.name\n"
 operator|+
-literal|"from (select * from sales.emp where empno = 10) as e\n"
+literal|"from (select * from sales.emp where ename = 'A') as e\n"
 operator|+
 literal|"left outer join sales.dept as d on e.job = d.name\n"
 operator|+
@@ -20042,7 +20042,7 @@ name|sql
 init|=
 literal|"select e.job\n"
 operator|+
-literal|"from (select * from sales.emp where empno = 10) as e\n"
+literal|"from (select * from sales.emp where ename = 'A') as e\n"
 operator|+
 literal|"left outer join sales.dept as d on e.job = d.name\n"
 operator|+
@@ -20109,7 +20109,7 @@ name|sql
 init|=
 literal|"select d.name\n"
 operator|+
-literal|"from (select * from sales.emp where empno = 10) as e\n"
+literal|"from (select * from sales.emp where ename = 'A') as e\n"
 operator|+
 literal|"left outer join sales.dept as d on e.job = d.name\n"
 operator|+
@@ -20176,7 +20176,7 @@ name|sql
 init|=
 literal|"select e.job, d.name\n"
 operator|+
-literal|"from (select * from sales.emp where empno = 10) as e\n"
+literal|"from (select * from sales.emp where ename = 'A') as e\n"
 operator|+
 literal|"left outer join sales.dept as d on e.job = d.name\n"
 operator|+
@@ -20373,7 +20373,7 @@ name|sql
 init|=
 literal|"select e.job\n"
 operator|+
-literal|"from (select * from sales.emp where empno = 10) as e\n"
+literal|"from (select * from sales.emp where ename = 'A') as e\n"
 operator|+
 literal|"right outer join sales.dept as d on e.job = d.name\n"
 operator|+
@@ -20438,7 +20438,7 @@ name|sql
 init|=
 literal|"select e.job\n"
 operator|+
-literal|"from (select * from sales.emp where empno = 10) as e\n"
+literal|"from (select * from sales.emp where ename = 'A') as e\n"
 operator|+
 literal|"full outer join sales.dept as d on e.job = d.name\n"
 operator|+
@@ -20568,7 +20568,7 @@ name|sql
 init|=
 literal|"select e.ename, d.mgr\n"
 operator|+
-literal|"from (select * from sales.emp where empno = 10) as e\n"
+literal|"from (select * from sales.emp where ename = 'A') as e\n"
 operator|+
 literal|"full outer join sales.emp as d on e.job = d.job\n"
 operator|+
@@ -20633,7 +20633,7 @@ name|sql
 init|=
 literal|"select e.job\n"
 operator|+
-literal|"from (select * from sales.emp where empno = 10) as e\n"
+literal|"from (select * from sales.emp where ename = 'A') as e\n"
 operator|+
 literal|"full outer join sales.dept as d on e.job = d.name\n"
 operator|+
@@ -20696,7 +20696,7 @@ name|sql
 init|=
 literal|"select e.job,d.name\n"
 operator|+
-literal|"from (select * from sales.emp where empno = 10) as e\n"
+literal|"from (select * from sales.emp where ename = 'A') as e\n"
 operator|+
 literal|"join sales.dept as d on e.job = d.name\n"
 operator|+
@@ -21335,7 +21335,7 @@ name|sql
 init|=
 literal|"select e.job,sum(sal)\n"
 operator|+
-literal|"from (select * from sales.emp where empno = 10) as e\n"
+literal|"from (select * from sales.emp where ename = 'A') as e\n"
 operator|+
 literal|"join sales.dept as d on e.job = d.name\n"
 operator|+
@@ -21400,7 +21400,7 @@ name|sql
 init|=
 literal|"select sum(sal)\n"
 operator|+
-literal|"from (select * from sales.emp where empno = 10) as e\n"
+literal|"from (select * from sales.emp where ename = 'A') as e\n"
 operator|+
 literal|"join sales.dept as d on e.job = d.name"
 decl_stmt|;
@@ -21488,7 +21488,7 @@ name|sql
 init|=
 literal|"select sum(sal)\n"
 operator|+
-literal|"from (select * from sales.emp where empno = 10) as e\n"
+literal|"from (select * from sales.emp where ename = 'A') as e\n"
 operator|+
 literal|"join sales.dept as d on e.job = d.name"
 decl_stmt|;
@@ -22949,6 +22949,79 @@ name|program
 argument_list|)
 operator|.
 name|checkUnchanged
+argument_list|()
+expr_stmt|;
+block|}
+end_function
+
+begin_comment
+comment|/**    * The top Aggregate should be removed -- given "deptno=100",    * the input of top Aggregate must be already distinct by "mgr"    */
+end_comment
+
+begin_function
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testAggregateRemove7
+parameter_list|()
+block|{
+specifier|final
+name|HepProgram
+name|program
+init|=
+operator|new
+name|HepProgramBuilder
+argument_list|()
+operator|.
+name|addRuleInstance
+argument_list|(
+name|AggregateRemoveRule
+operator|.
+name|INSTANCE
+argument_list|)
+operator|.
+name|addRuleInstance
+argument_list|(
+name|ProjectMergeRule
+operator|.
+name|INSTANCE
+argument_list|)
+operator|.
+name|build
+argument_list|()
+decl_stmt|;
+specifier|final
+name|String
+name|sql
+init|=
+literal|""
+operator|+
+literal|"select mgr, sum(sum_sal)\n"
+operator|+
+literal|"from\n"
+operator|+
+literal|"(select mgr, deptno, sum(sal) sum_sal\n"
+operator|+
+literal|" from sales.emp\n"
+operator|+
+literal|" group by mgr, deptno)\n"
+operator|+
+literal|"where deptno=100\n"
+operator|+
+literal|"group by mgr"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|with
+argument_list|(
+name|program
+argument_list|)
+operator|.
+name|check
 argument_list|()
 expr_stmt|;
 block|}
