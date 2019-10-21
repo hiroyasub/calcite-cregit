@@ -534,7 +534,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  *<code>SqlDialect</code> encapsulates the differences between dialects of SQL.  *  *<p>It is used by classes such as {@link SqlWriter} and  * {@link org.apache.calcite.sql.util.SqlBuilder}.  */
+comment|/**  *<code>SqlDialect</code> encapsulates the differences between dialects of SQL.  *  *<p>It is used by classes such as {@link SqlWriter} and  * {@link org.apache.calcite.sql.util.SqlBuilder}.  *  *<p>To add a new {@link SqlDialect} sub-class, extends this class to hold 2 public final  * static member:  *<ul>  *<li>DEFAULT_CONTEXT: a default {@link Context} instance, which can be used to customize  *   or extending the dialect if the DEFAULT instance does not meet the requests</li>  *<li>DEFAULT: the default {@link SqlDialect} instance with context properties defined with  *<code>DEFAULT_CONTEXT</code></li>  *</ul>  */
 end_comment
 
 begin_class
@@ -1322,8 +1322,8 @@ argument_list|()
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|/** Creates an empty context. Use {@link #EMPTY_CONTEXT} if possible. */
-specifier|protected
+comment|/** Creates an empty context. Use {@link #EMPTY_CONTEXT} to reference the instance. */
+specifier|private
 specifier|static
 name|Context
 name|emptyContext

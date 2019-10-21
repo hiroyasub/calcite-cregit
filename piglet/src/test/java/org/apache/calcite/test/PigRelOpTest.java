@@ -266,8 +266,9 @@ init|=
 operator|new
 name|CalciteSqlDialect
 argument_list|(
-name|emptyContext
-argument_list|()
+name|SqlDialect
+operator|.
+name|EMPTY_CONTEXT
 operator|.
 name|withDatabaseProduct
 argument_list|(
