@@ -103,6 +103,14 @@ name|ImmutableBitSet
 name|columns
 parameter_list|)
 function_decl|;
+comment|/** Returns a list of unique keys, or null if no key exist. */
+name|List
+argument_list|<
+name|ImmutableBitSet
+argument_list|>
+name|getKeys
+parameter_list|()
+function_decl|;
 comment|/** Returns the collection of referential constraints (foreign-keys)    * for this table. */
 name|List
 argument_list|<

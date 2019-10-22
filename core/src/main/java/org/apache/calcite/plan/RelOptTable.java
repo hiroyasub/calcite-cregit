@@ -265,6 +265,14 @@ name|ImmutableBitSet
 name|columns
 parameter_list|)
 function_decl|;
+comment|/**    * Returns a list of unique keys, empty list if no key exist,    * the result should be consistent with {@code isKey}    */
+name|List
+argument_list|<
+name|ImmutableBitSet
+argument_list|>
+name|getKeys
+parameter_list|()
+function_decl|;
 comment|/**    * Returns the referential constraints existing for this table. These constraints    * are represented over other tables using {@link RelReferentialConstraint} nodes.    */
 name|List
 argument_list|<

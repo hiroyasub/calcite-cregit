@@ -412,6 +412,22 @@ return|return
 literal|false
 return|;
 block|}
+comment|// Override to get unique keys
+specifier|public
+name|List
+argument_list|<
+name|ImmutableBitSet
+argument_list|>
+name|getKeys
+parameter_list|()
+block|{
+return|return
+name|Collections
+operator|.
+name|emptyList
+argument_list|()
+return|;
+block|}
 comment|// Override to define foreign keys
 specifier|public
 name|List
