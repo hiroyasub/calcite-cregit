@@ -674,9 +674,6 @@ name|aggregate
 operator|.
 name|getGroupSet
 argument_list|()
-operator|.
-name|asList
-argument_list|()
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -720,9 +717,6 @@ argument_list|(
 name|aggregate
 operator|.
 name|getGroupSet
-argument_list|()
-operator|.
-name|asList
 argument_list|()
 argument_list|)
 argument_list|)

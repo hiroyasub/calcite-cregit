@@ -6470,9 +6470,6 @@ operator|.
 name|fields
 argument_list|(
 name|groupSet
-operator|.
-name|asList
-argument_list|()
 argument_list|)
 argument_list|)
 operator|.
@@ -8323,9 +8320,6 @@ operator|.
 name|fields
 argument_list|(
 name|groupSet
-operator|.
-name|asList
-argument_list|()
 argument_list|)
 argument_list|)
 operator|.
