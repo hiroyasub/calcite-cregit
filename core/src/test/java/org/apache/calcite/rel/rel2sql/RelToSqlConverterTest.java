@@ -3875,6 +3875,111 @@ name|expected
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3440">[CALCITE-3440]    * RelToSqlConverter does not properly alias ambiguous ORDER BY</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testOrderByColumnWithSameNameAsAlias
+parameter_list|()
+block|{
+name|String
+name|query
+init|=
+literal|"select \"product_id\" as \"p\",\n"
+operator|+
+literal|" \"net_weight\" as \"product_id\"\n"
+operator|+
+literal|"from \"product\"\n"
+operator|+
+literal|"order by 1"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT \"product_id\" AS \"p\","
+operator|+
+literal|" \"net_weight\" AS \"product_id\"\n"
+operator|+
+literal|"FROM \"foodmart\".\"product\"\n"
+operator|+
+literal|"ORDER BY 1"
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testOrderByColumnWithSameNameAsAlias2
+parameter_list|()
+block|{
+comment|// We use ordinal "2" because the column name "product_id" is obscured
+comment|// by alias "product_id".
+name|String
+name|query
+init|=
+literal|"select \"net_weight\" as \"product_id\",\n"
+operator|+
+literal|"  \"product_id\" as \"product_id\"\n"
+operator|+
+literal|"from \"product\"\n"
+operator|+
+literal|"order by \"product\".\"product_id\""
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT \"net_weight\" AS \"product_id\","
+operator|+
+literal|" \"product_id\" AS \"product_id0\"\n"
+operator|+
+literal|"FROM \"foodmart\".\"product\"\n"
+operator|+
+literal|"ORDER BY 2"
+decl_stmt|;
+specifier|final
+name|String
+name|expectedMysql
+init|=
+literal|"SELECT `net_weight` AS `product_id`,"
+operator|+
+literal|" `product_id` AS `product_id0`\n"
+operator|+
+literal|"FROM `foodmart`.`product`\n"
+operator|+
+literal|"ORDER BY `product_id` IS NULL, 2"
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+operator|.
+name|withMysql
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expectedMysql
+argument_list|)
+expr_stmt|;
+block|}
 annotation|@
 name|Test
 specifier|public
