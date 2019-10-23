@@ -992,7 +992,7 @@ condition|)
 block|{
 name|out
 operator|.
-name|print
+name|println
 argument_list|(
 name|data
 argument_list|)
@@ -1007,12 +1007,12 @@ argument_list|,
 name|out
 argument_list|)
 expr_stmt|;
-block|}
 name|out
 operator|.
 name|println
 argument_list|()
 expr_stmt|;
+block|}
 name|out
 operator|.
 name|flush

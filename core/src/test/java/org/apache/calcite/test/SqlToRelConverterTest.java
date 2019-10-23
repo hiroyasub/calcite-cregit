@@ -10296,7 +10296,7 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
-comment|/**    * Test case for<a href="https://issues.apache.org/jira/browse/CALCITE-2962">[CALCITE-2962]    * RelStructuredTypeFlattener generates wrong types for nested column when flattenProjection</a>.    */
+comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2962">[CALCITE-2962]    * RelStructuredTypeFlattener generates wrong types for nested column when    * flattenProjection</a>.    */
 annotation|@
 name|Test
 specifier|public
@@ -10358,7 +10358,9 @@ specifier|final
 name|String
 name|sql
 init|=
-literal|"select dn.skill['others'] from sales.dept_nested dn"
+literal|"select dn.skill['others']\n"
+operator|+
+literal|"from sales.dept_nested dn"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -10380,7 +10382,9 @@ specifier|final
 name|String
 name|sql
 init|=
-literal|"select dn.skill['others']['a'] from sales.dept_nested dn"
+literal|"select dn.skill['others']['a']\n"
+operator|+
+literal|"from sales.dept_nested dn"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -10402,7 +10406,9 @@ specifier|final
 name|String
 name|sql
 init|=
-literal|"select json_type(skill) from sales.dept_nested"
+literal|"select json_type(skill)\n"
+operator|+
+literal|"from sales.dept_nested"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -10424,15 +10430,15 @@ specifier|final
 name|String
 name|sql
 init|=
-literal|"select "
+literal|"select collect(skill) as collect_skill,\n"
 operator|+
-literal|"collect(skill) as collect_skill, count(skill) as count_skill, count(*) as count_star, "
+literal|"  count(skill) as count_skill, count(*) as count_star,\n"
 operator|+
-literal|"approx_count_distinct(skill) as approx_count_distinct_skill, "
+literal|"  approx_count_distinct(skill) as approx_count_distinct_skill,\n"
 operator|+
-literal|"max(skill) as max_skill, min(skill) as min_skill, "
+literal|"  max(skill) as max_skill, min(skill) as min_skill,\n"
 operator|+
-literal|"any_value(skill) as any_value_skill "
+literal|"  any_value(skill) as any_value_skill\n"
 operator|+
 literal|"from sales.dept_nested"
 decl_stmt|;
@@ -10456,15 +10462,15 @@ specifier|final
 name|String
 name|sql
 init|=
-literal|"select "
+literal|"select collect(skill) as collect_skill,\n"
 operator|+
-literal|"collect(skill) as collect_skill, count(skill) as count_skill, count(*) as count_star, "
+literal|"  count(skill) as count_skill, count(*) as count_star,\n"
 operator|+
-literal|"approx_count_distinct(skill) as approx_count_distinct_skill, "
+literal|"  approx_count_distinct(skill) as approx_count_distinct_skill,\n"
 operator|+
-literal|"max(skill) as max_skill, min(skill) as min_skill, "
+literal|"  max(skill) as max_skill, min(skill) as min_skill,\n"
 operator|+
-literal|"any_value(skill) as any_value_skill "
+literal|"  any_value(skill) as any_value_skill\n"
 operator|+
 literal|"from sales.dept_nested group by name"
 decl_stmt|;
@@ -10488,7 +10494,9 @@ specifier|final
 name|String
 name|sql
 init|=
-literal|"select dn.skill['desc'] from sales.dept_nested dn"
+literal|"select dn.skill['desc']\n"
+operator|+
+literal|"from sales.dept_nested dn"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -10510,7 +10518,9 @@ specifier|final
 name|String
 name|sql
 init|=
-literal|"select dn.employees[0]['empno'] from sales.dept_nested dn"
+literal|"select dn.employees[0]['empno']\n"
+operator|+
+literal|"from sales.dept_nested dn"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -10532,7 +10542,9 @@ specifier|final
 name|String
 name|sql
 init|=
-literal|"select dn.employees[0]['detail']['skills'][0]['type'] from sales.dept_nested dn"
+literal|"select dn.employees[0]['detail']['skills'][0]['type']\n"
+operator|+
+literal|"from sales.dept_nested dn"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -10554,7 +10566,9 @@ specifier|final
 name|String
 name|sql
 init|=
-literal|"select dn.employees[0]['detail']['skills'][0] from sales.dept_nested dn"
+literal|"select dn.employees[0]['detail']['skills'][0]\n"
+operator|+
+literal|"from sales.dept_nested dn"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -10576,7 +10590,11 @@ specifier|final
 name|String
 name|sql
 init|=
-literal|"select dn.employees[0]['detail']['skills'][0]['others'] from sales.dept_nested dn"
+literal|""
+operator|+
+literal|"select dn.employees[0]['detail']['skills'][0]['others']\n"
+operator|+
+literal|"from sales.dept_nested dn"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -10587,7 +10605,7 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
-comment|/**    * Test case for<a href="https://issues.apache.org/jira/browse/CALCITE-3003">[CALCITE-3003]    * AssertionError when GROUP BY nested field</a>.    */
+comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3003">[CALCITE-3003]    * AssertionError when GROUP BY nested field</a>.    */
 annotation|@
 name|Test
 specifier|public
@@ -12787,7 +12805,7 @@ name|sql
 init|=
 literal|"select lead(sal, 4) IGNORE NULLS, lead(sal, 4) over (w)\n"
 operator|+
-literal|" from emp window w as (order by empno)"
+literal|"from emp window w as (order by empno)"
 decl_stmt|;
 name|sql
 argument_list|(
