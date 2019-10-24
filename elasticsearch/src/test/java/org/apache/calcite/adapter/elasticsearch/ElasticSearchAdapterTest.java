@@ -2172,6 +2172,8 @@ literal|"'_source':false"
 argument_list|,
 literal|"size:0"
 argument_list|,
+literal|"'stored_fields': '_none_'"
+argument_list|,
 literal|"track_total_hits:true"
 argument_list|)
 argument_list|)
@@ -2211,6 +2213,8 @@ name|elasticsearchChecker
 argument_list|(
 literal|"'_source':false"
 argument_list|,
+literal|"'stored_fields': '_none_'"
+argument_list|,
 literal|"size:0"
 argument_list|,
 literal|"track_total_hits:true"
@@ -2241,6 +2245,8 @@ argument_list|,
 literal|"size:0"
 argument_list|,
 literal|"track_total_hits:true"
+argument_list|,
+literal|"'stored_fields': '_none_'"
 argument_list|,
 literal|"aggregations:{'EXPR$0':{min:{field:'pop'}},'EXPR$1':{max:"
 operator|+
@@ -2310,6 +2316,8 @@ literal|"_source:false"
 argument_list|,
 literal|"size:0"
 argument_list|,
+literal|"'stored_fields': '_none_'"
+argument_list|,
 literal|"aggregations:{'g_state':{'terms':{'field':'state','missing':'__MISSING__', 'size' : 6}}}"
 argument_list|)
 argument_list|)
@@ -2353,6 +2361,8 @@ argument_list|(
 literal|"'_source':false"
 argument_list|,
 literal|"size:0"
+argument_list|,
+literal|"'stored_fields': '_none_'"
 argument_list|,
 literal|"aggregations:{'g_city':{'terms':{'field':'city','missing':'__MISSING__','size':10,'order':{'_key':'asc'}}"
 argument_list|,
@@ -2408,6 +2418,8 @@ literal|"'_source':false"
 argument_list|,
 literal|"size:0"
 argument_list|,
+literal|"'stored_fields': '_none_'"
+argument_list|,
 literal|"aggregations:{'g_state':{terms:{field:'state',missing:'__MISSING__',size:3,"
 operator|+
 literal|" order:{'_key':'asc'}}"
@@ -2449,6 +2461,8 @@ argument_list|(
 literal|"'_source':false"
 argument_list|,
 literal|"size:0"
+argument_list|,
+literal|"'stored_fields': '_none_'"
 argument_list|,
 literal|"aggregations:{'g_state':{terms:{field:'state',missing:'__MISSING__',"
 operator|+
@@ -2492,6 +2506,8 @@ literal|"'_source':false"
 argument_list|,
 literal|"size:0"
 argument_list|,
+literal|"'stored_fields': '_none_'"
+argument_list|,
 literal|"aggregations:{'g_state':{terms:{field:'state',missing:'__MISSING__',"
 operator|+
 literal|" size:3, order:{'_key':'asc'}}"
@@ -2533,6 +2549,8 @@ argument_list|(
 literal|"'_source':false"
 argument_list|,
 literal|"size:0"
+argument_list|,
+literal|"'stored_fields': '_none_'"
 argument_list|,
 literal|"aggregations:{'g_state':{terms:{field:'state',missing:'__MISSING__',"
 operator|+
@@ -2658,6 +2676,8 @@ argument_list|(
 literal|"'_source':false"
 argument_list|,
 literal|"size:0"
+argument_list|,
+literal|"'stored_fields': '_none_'"
 argument_list|,
 literal|"aggregations:{'g_state':{terms:{field:'state', missing:'__MISSING__', size:3, "
 operator|+

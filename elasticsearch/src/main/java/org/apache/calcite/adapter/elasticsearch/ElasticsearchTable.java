@@ -1150,6 +1150,19 @@ argument_list|(
 literal|"script_fields"
 argument_list|)
 expr_stmt|;
+comment|// set _source = false and size = 0, `FetchPhase` would still be executed
+comment|// to fetch the metadata fields and visit the Lucene stored_fields,
+comment|// which would lead to performance declined dramatically.
+comment|// `stored_fields = _none` can prohibit such behavior entirely
+name|query
+operator|.
+name|put
+argument_list|(
+literal|"stored_fields"
+argument_list|,
+literal|"_none_"
+argument_list|)
+expr_stmt|;
 comment|// allows to detect aggregation for count(*)
 specifier|final
 name|Predicate
