@@ -243,22 +243,6 @@ name|sql
 operator|.
 name|type
 operator|.
-name|SqlTypeAssignmentRules
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|sql
-operator|.
-name|type
-operator|.
 name|SqlTypeFamily
 import|;
 end_import
@@ -1261,9 +1245,9 @@ return|return
 literal|false
 return|;
 block|}
-comment|// Should keep sync with rules in SqlTypeAssignmentRules.
-return|return
-operator|!
+comment|// Implicit type coercion does not handle nullability.
+if|if
+condition|(
 name|SqlTypeUtil
 operator|.
 name|equalSansNullability
@@ -1274,26 +1258,27 @@ name|fromType
 argument_list|,
 name|toType
 argument_list|)
-operator|&&
-name|SqlTypeAssignmentRules
-operator|.
-name|instance
-argument_list|(
-literal|true
-argument_list|)
+condition|)
+block|{
+return|return
+literal|false
+return|;
+block|}
+comment|// Should keep sync with rules in SqlTypeAssignmentRules.
+assert|assert
+name|SqlTypeUtil
 operator|.
 name|canCastFrom
 argument_list|(
 name|toType
-operator|.
-name|getSqlTypeName
-argument_list|()
 argument_list|,
 name|fromType
-operator|.
-name|getSqlTypeName
-argument_list|()
+argument_list|,
+literal|true
 argument_list|)
+assert|;
+return|return
+literal|true
 return|;
 block|}
 comment|/** It should not be used directly, because some other work should be done    * before cast operation, see {@link #coerceColumnType}, {@link #coerceOperandType}.    *    *<p>Ignore constant reduction which should happen in RexSimplify.    * */
