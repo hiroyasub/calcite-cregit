@@ -73,6 +73,22 @@ name|rel
 operator|.
 name|metadata
 operator|.
+name|JaninoRelMetadataProvider
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|metadata
+operator|.
 name|MetadataFactory
 import|;
 end_import
@@ -122,6 +138,22 @@ operator|.
 name|metadata
 operator|.
 name|RelMetadataQuery
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|metadata
+operator|.
+name|RelMetadataQueryBase
 import|;
 end_import
 
@@ -213,6 +245,18 @@ name|AtomicInteger
 import|;
 end_import
 
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|function
+operator|.
+name|Supplier
+import|;
+end_import
+
 begin_comment
 comment|/**  * An environment for related relational expressions during the  * optimization of a query.  */
 end_comment
@@ -272,6 +316,13 @@ decl_stmt|;
 specifier|private
 name|RelMetadataQuery
 name|mq
+decl_stmt|;
+specifier|private
+name|Supplier
+argument_list|<
+name|RelMetadataQuery
+argument_list|>
+name|mqSupplier
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
 comment|/**    * Creates a cluster.    */
@@ -393,6 +444,13 @@ argument_list|(
 name|DefaultRelMetadataProvider
 operator|.
 name|INSTANCE
+argument_list|)
+expr_stmt|;
+name|setMetadataQuery
+argument_list|(
+name|RelMetadataQuery
+operator|::
+name|instance
 argument_list|)
 expr_stmt|;
 name|this
@@ -570,6 +628,23 @@ argument_list|(
 name|metadataProvider
 argument_list|)
 expr_stmt|;
+comment|// Wrap the metadata provider as a JaninoRelMetadataProvider
+comment|// and set it to the ThreadLocal,
+comment|// JaninoRelMetadataProvider is required by the RelMetadataQuery.
+name|RelMetadataQueryBase
+operator|.
+name|THREAD_PROVIDERS
+operator|.
+name|set
+argument_list|(
+name|JaninoRelMetadataProvider
+operator|.
+name|of
+argument_list|(
+name|metadataProvider
+argument_list|)
+argument_list|)
+expr_stmt|;
 block|}
 specifier|public
 name|MetadataFactory
@@ -580,9 +655,33 @@ return|return
 name|metadataFactory
 return|;
 block|}
+comment|/**    * Set up the customized {@link RelMetadataQuery} instance that to use during rule planning.    *    *<p>Note that the {@code mqSupplier} should return    * a fresh new {@link RelMetadataQuery} instance because the instance would be    * cached in this cluster, and we may invalidate and re-generate it    * for each {@link RelOptRuleCall} cycle.    */
+specifier|public
+name|void
+name|setMetadataQuery
+parameter_list|(
+name|Supplier
+argument_list|<
+name|RelMetadataQuery
+argument_list|>
+name|mqSupplier
+parameter_list|)
+block|{
+name|this
+operator|.
+name|mqSupplier
+operator|=
+name|mqSupplier
+expr_stmt|;
+block|}
 comment|/** Returns the current RelMetadataQuery.    *    *<p>This method might be changed or moved in future.    * If you have a {@link RelOptRuleCall} available,    * for example if you are in a {@link RelOptRule#onMatch(RelOptRuleCall)}    * method, then use {@link RelOptRuleCall#getMetadataQuery()} instead. */
 specifier|public
+parameter_list|<
+name|M
+extends|extends
 name|RelMetadataQuery
+parameter_list|>
+name|M
 name|getMetadataQuery
 parameter_list|()
 block|{
@@ -595,13 +694,19 @@ condition|)
 block|{
 name|mq
 operator|=
-name|RelMetadataQuery
+name|this
 operator|.
-name|instance
+name|mqSupplier
+operator|.
+name|get
 argument_list|()
 expr_stmt|;
 block|}
+comment|//noinspection unchecked
 return|return
+operator|(
+name|M
+operator|)
 name|mq
 return|;
 block|}
