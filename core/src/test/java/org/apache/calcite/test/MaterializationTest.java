@@ -3186,6 +3186,39 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3448">[CALCITE-3448]    * AggregateOnCalcToAggregateUnifyRule ignores Project incorrectly when    * there's missing grouping or mapping breaks ordering</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testAggregateOnProject5
+parameter_list|()
+block|{
+name|checkMaterialize
+argument_list|(
+literal|"select \"empid\", \"deptno\", \"name\", count(*) from \"emps\"\n"
+operator|+
+literal|"group by \"empid\", \"deptno\", \"name\""
+argument_list|,
+literal|"select \"name\", \"empid\", count(*) from \"emps\" group by \"name\", \"empid\""
+argument_list|,
+name|HR_FKUK_MODEL
+argument_list|,
+name|CalciteAssert
+operator|.
+name|checkResultContains
+argument_list|(
+literal|""
+operator|+
+literal|"EnumerableCalc(expr#0..2=[{inputs}], name=[$t1], empid=[$t0], EXPR$2=[$t2])\n"
+operator|+
+literal|"  EnumerableAggregate(group=[{0, 2}], EXPR$2=[$SUM0($3)])\n"
+operator|+
+literal|"    EnumerableTableScan(table=[[hr, m0]])"
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
 annotation|@
 name|Test
 specifier|public

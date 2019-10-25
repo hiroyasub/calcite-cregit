@@ -1789,7 +1789,10 @@ name|target
 operator|!=
 operator|-
 literal|1
-operator|&&
+condition|)
+block|{
+if|if
+condition|(
 name|target
 operator|<
 name|prevTarget
@@ -1803,6 +1806,7 @@ name|prevTarget
 operator|=
 name|target
 expr_stmt|;
+block|}
 block|}
 return|return
 literal|true
