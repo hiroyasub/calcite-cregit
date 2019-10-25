@@ -4134,6 +4134,7 @@ throw|;
 block|}
 block|}
 comment|/** Converts a {@link ResultSet} to a string. */
+specifier|public
 specifier|static
 name|String
 name|toString
