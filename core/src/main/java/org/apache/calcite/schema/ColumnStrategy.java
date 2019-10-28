@@ -53,7 +53,7 @@ block|,
 comment|/** Column is computed and not stored. You cannot insert into it. */
 name|VIRTUAL
 block|;
-comment|/**    * Returns whether you can insert into the column.    * @return true if this column can be inserted.    */
+comment|/**    * Returns whether you can insert into the column.    *    * @return true if this column can be inserted    */
 specifier|public
 name|boolean
 name|canInsertInto

@@ -5074,7 +5074,7 @@ return|return
 literal|false
 return|;
 block|}
-comment|/**    * Lookup sql function by sql identifier and function category.    *    * @param opTab    operator table to look up    * @param funName  function name    * @param funcType function category    * @return A sql function if and only if there is one operator matches, else null.    */
+comment|/**    * Lookup sql function by sql identifier and function category.    *    * @param opTab    operator table to look up    * @param funName  function name    * @param funcType function category    * @return A sql function if and only if there is one operator matches, else null    */
 specifier|public
 specifier|static
 name|SqlOperator

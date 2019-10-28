@@ -88,7 +88,7 @@ name|SqlUserDefinedTypeNameSpec
 extends|extends
 name|SqlTypeNameSpec
 block|{
-comment|/**    * Create a SqlUserDefinedTypeNameSpec instance.    * @param typeName Type name as SQL identifier.    * @param pos The parser position.    */
+comment|/**    * Create a SqlUserDefinedTypeNameSpec instance.    *    * @param typeName Type name as SQL identifier    * @param pos The parser position    */
 specifier|public
 name|SqlUserDefinedTypeNameSpec
 parameter_list|(

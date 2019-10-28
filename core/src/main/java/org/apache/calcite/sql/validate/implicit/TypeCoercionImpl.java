@@ -1517,7 +1517,7 @@ return|return
 literal|false
 return|;
 block|}
-comment|/**    * Cast "BOOLEAN = NUMERIC" to "NUMERIC = NUMERIC". Expressions like 1=`expr` and    * 0=`expr` can be simplified to `expr` and `not expr`, but this better happens    * in {@link org.apache.calcite.rex.RexSimplify}.    * There are 2 cases that need type coercion here:    *<ol>    *<li>Case1: `boolean expr1` = 1 or `boolean expr1` = 0, replace the numeric literal with    *   `true` or `false` boolean literal.</li>    *<li>Case2: `boolean expr1` = `numeric expr2`, replace expr1 to `1` or `0` numeric    *   literal.</li>    *</ol>    * For case2, wrap the operand in a cast operator, during sql-to-rel conversion    * we would convert expression `cast(expr1 as right)` to `case when expr1 then 1 else 0.`    */
+comment|/**    * Cast "BOOLEAN = NUMERIC" to "NUMERIC = NUMERIC". Expressions like 1=`expr` and    * 0=`expr` can be simplified to `expr` and `not expr`, but this better happens    * in {@link org.apache.calcite.rex.RexSimplify}.    *    *<p>There are 2 cases that need type coercion here:    *<ol>    *<li>Case1: `boolean expr1` = 1 or `boolean expr1` = 0, replace the numeric literal with    *   `true` or `false` boolean literal.</li>    *<li>Case2: `boolean expr1` = `numeric expr2`, replace expr1 to `1` or `0` numeric    *   literal.</li>    *</ol>    * For case2, wrap the operand in a cast operator, during sql-to-rel conversion    * we would convert expression `cast(expr1 as right)` to `case when expr1 then 1 else 0.`    */
 specifier|protected
 name|boolean
 name|booleanEquality

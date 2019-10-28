@@ -422,7 +422,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Base class for all the type coercion rules. If you want to have a custom type coercion rules,  * inheriting this class is not necessary, but would have some convenient tool methods.  *  *<p>We make tool methods: {@link #coerceOperandType}, {@link #coerceColumnType},  * {@link #needToCast}, {@link #updateInferredType}, {@link #updateInferredColumnType}  * all overridable by derived classes, you can define system specific type coercion logic.  *  *<p>Caution that these methods may modify the {@link SqlNode} tree, you should know what the  * effect is when using these methods to customize your type coercion rules.</p>  *  *<p>This class also defines the default implementation of the type widening strategies, see  * {@link TypeCoercion} doc and methods: {@link #getTightestCommonType}, {@link #getWiderTypeFor},  * {@link #getWiderTypeForTwo}, {@link #getWiderTypeForDecimal},  * {@link #commonTypeForBinaryComparison} for the detail strategies.</p>  */
+comment|/**  * Base class for all the type coercion rules. If you want to have a custom type coercion rules,  * inheriting this class is not necessary, but would have some convenient tool methods.  *  *<p>We make tool methods: {@link #coerceOperandType}, {@link #coerceColumnType},  * {@link #needToCast}, {@link #updateInferredType}, {@link #updateInferredColumnType}  * all overridable by derived classes, you can define system specific type coercion logic.  *  *<p>Caution that these methods may modify the {@link SqlNode} tree, you should know what the  * effect is when using these methods to customize your type coercion rules.  *  *<p>This class also defines the default implementation of the type widening strategies, see  * {@link TypeCoercion} doc and methods: {@link #getTightestCommonType}, {@link #getWiderTypeFor},  * {@link #getWiderTypeForTwo}, {@link #getWiderTypeForDecimal},  * {@link #commonTypeForBinaryComparison} for the detail strategies.  */
 end_comment
 
 begin_class
@@ -2908,7 +2908,7 @@ return|return
 name|partitioned
 return|;
 block|}
-comment|/**    * Check if the types and families can have implicit type coercion.    * We will check the type one by one, that means the 1th type and 1th family,    * 2th type and 2th family, and the like.    *    * @param types    data type need to check.    * @param families desired type families list.    * @return true if we can do type coercion.    */
+comment|/**    * Check if the types and families can have implicit type coercion.    * We will check the type one by one, that means the 1th type and 1th family,    * 2th type and 2th family, and the like.    *    * @param types    data type need to check    * @param families desired type families list    * @return true if we can do type coercion    */
 name|boolean
 name|canImplicitTypeCast
 parameter_list|(
@@ -3007,7 +3007,7 @@ return|return
 name|needed
 return|;
 block|}
-comment|/**    * Type coercion based on the inferred type from passed in operand    * and the {@link SqlTypeFamily} defined in the checkers,    * e.g. the {@link org.apache.calcite.sql.type.FamilyOperandTypeChecker}.    *    *<p>Caution that we do not cast from NUMERIC to NUMERIC.    * See<a href="https://docs.google.com/spreadsheets/d/1GhleX5h5W8-kJKh7NMJ4vtoE78pwfaZRJl88ULX_MgU/edit?usp=sharing">CalciteImplicitCasts</a>    * for the details.    *    * @param in       inferred operand type.    * @param expected expected {@link SqlTypeFamily} of registered SqlFunction.    * @return common type of implicit cast, null if we do not find any.    */
+comment|/**    * Type coercion based on the inferred type from passed in operand    * and the {@link SqlTypeFamily} defined in the checkers,    * e.g. the {@link org.apache.calcite.sql.type.FamilyOperandTypeChecker}.    *    *<p>Caution that we do not cast from NUMERIC to NUMERIC.    * See<a href="https://docs.google.com/spreadsheets/d/1GhleX5h5W8-kJKh7NMJ4vtoE78pwfaZRJl88ULX_MgU/edit?usp=sharing">CalciteImplicitCasts</a>    * for the details.    *    * @param in       inferred operand type    * @param expected expected {@link SqlTypeFamily} of registered SqlFunction    * @return common type of implicit cast, null if we do not find any    */
 specifier|public
 name|RelDataType
 name|implicitCast

@@ -156,7 +156,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * A sql type name specification of row type.  *  *<p>The grammar definition in SQL-2011 IWD 9075-2:201?(E)  * 6.1&lt;data type&gt; is as following:  *<blockquote><pre>  *&lt;row type&gt; ::=  *   ROW&lt;row type body&gt;  *&lt;row type body&gt; ::=  *&lt;left paren&gt;&lt;field definition&gt;  *   [ {&lt;comma&gt;&lt;field definition&gt; }... ]  *&lt;right paren&gt;  *  *&lt;field definition&gt; ::=  *&lt;field name&gt;&lt;data type&gt;  *</pre></blockquote>  *  *<p>We also support to add a [ NULL | NOT NULL ] suffix for every field type, i.e.  * Row(f0 int null, f1 varchar not null), the default is not nullable.  */
+comment|/**  * A sql type name specification of row type.  *  *<p>The grammar definition in SQL-2011 IWD 9075-2:201?(E)  * 6.1&lt;data type&gt; is as following:  *<blockquote><pre>  *&lt;row type&gt; ::=  *   ROW&lt;row type body&gt;  *&lt;row type body&gt; ::=  *&lt;left paren&gt;&lt;field definition&gt;  *   [ {&lt;comma&gt;&lt;field definition&gt; }... ]  *&lt;right paren&gt;  *  *&lt;field definition&gt; ::=  *&lt;field name&gt;&lt;data type&gt;  *</pre></blockquote>  *  *<p>As a extended syntax to the standard SQL, each field type can have a  * [ NULL | NOT NULL ] suffix specification, i.e.  * Row(f0 int null, f1 varchar not null). The default is NOT NULL(not nullable).  */
 end_comment
 
 begin_class
@@ -182,7 +182,7 @@ name|SqlDataTypeSpec
 argument_list|>
 name|fieldTypes
 decl_stmt|;
-comment|/**    * Creates a row type specification.    *    * @param pos        The parser position.    * @param fieldNames The field names.    * @param fieldTypes The field data types.    */
+comment|/**    * Creates a row type specification.    *    * @param pos        The parser position    * @param fieldNames The field names    * @param fieldTypes The field data types    */
 specifier|public
 name|SqlRowTypeNameSpec
 parameter_list|(

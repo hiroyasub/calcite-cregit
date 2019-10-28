@@ -134,7 +134,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * A sql type name specification of collection type.  *  *<p>The grammar definition in SQL-2011 IWD 9075-2:201?(E)  * 6.1&lt;collection type&gt; is as following:  *<blockquote><pre>  *&lt;collection type&gt; ::=  *&lt;array type&gt;  *   |&lt;multiset type&gt;  *  *&lt;array type&gt; ::=  *&lt;data type&gt; ARRAY  *   [&lt;left bracket or trigraph&gt;  *&lt;maximum cardinality&gt;  *&lt;right bracket or trigraph&gt; ]  *  *&lt;maximum cardinality&gt; ::=  *&lt;unsigned integer&gt;  *  *&lt;multiset type&gt; ::=  *&lt;data type&gt; MULTISET  *</pre></blockquote>  *  *<p>This class is intended to be used in nested collection type, it can be used as the  * element type name of {@link SqlDataTypeSpec}. i.e. "int array array" or "int array multiset".  * For simple collection type like "int array", {@link SqlBasicTypeNameSpec} is descriptive enough.  */
+comment|/**  * A sql type name specification of collection type.  *  *<p>The grammar definition in SQL-2011 IWD 9075-2:201?(E)  * 6.1&lt;collection type&gt; is as following:  *<blockquote><pre>  *&lt;collection type&gt; ::=  *&lt;array type&gt;  *   |&lt;multiset type&gt;  *  *&lt;array type&gt; ::=  *&lt;data type&gt; ARRAY  *   [&lt;left bracket or trigraph&gt;  *&lt;maximum cardinality&gt;  *&lt;right bracket or trigraph&gt; ]  *  *&lt;maximum cardinality&gt; ::=  *&lt;unsigned integer&gt;  *  *&lt;multiset type&gt; ::=  *&lt;data type&gt; MULTISET  *</pre></blockquote>  *  *<p>This class is intended to describe SQL collection type. It can describe  * either simple collection type like "int array" or nested collection type like  * "int array array" or "int array multiset". For nested collection type, the element type  * name of this {@code SqlCollectionTypeNameSpec} is also a {@code SqlCollectionTypeNameSpec}.  */
 end_comment
 
 begin_class
@@ -154,7 +154,7 @@ specifier|final
 name|SqlTypeName
 name|collectionTypeName
 decl_stmt|;
-comment|/**    * Creates a {@code SqlCollectionTypeNameSpec}.    *    * @param elementTypeName    Type of the collection element.    * @param collectionTypeName Collection type name.    * @param pos                Parser position, must not be null.    */
+comment|/**    * Creates a {@code SqlCollectionTypeNameSpec}.    *    * @param elementTypeName    Type of the collection element    * @param collectionTypeName Collection type name    * @param pos                Parser position, must not be null    */
 specifier|public
 name|SqlCollectionTypeNameSpec
 parameter_list|(
@@ -399,7 +399,7 @@ argument_list|()
 return|;
 block|}
 comment|//~ Tools ------------------------------------------------------------------
-comment|/**    * Create collection data type.    * @param elementType Type of the collection element.    * @param typeFactory Type factory.    * @return The collection data type, or throw exception if the collection    *         type name does not belong to {@code SqlTypeName} enumerations.    */
+comment|/**    * Create collection data type.    *    * @param elementType Type of the collection element    * @param typeFactory Type factory    * @return The collection data type, or throw exception if the collection    *         type name does not belong to {@code SqlTypeName} enumerations    */
 specifier|private
 name|RelDataType
 name|createCollectionType

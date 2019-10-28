@@ -78,7 +78,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * A<code>SqlTypeNameSpec</code> is a type name specification that allows user to  * customize sql node unparsing and data type deriving.  *  *<p>To customize sql node unparsing, override the method  * {@link #unparse(SqlWriter, int, int)}.  *<p>To customize data type deriving, override the method  * {@link #deriveType(SqlValidator)}.  */
+comment|/**  * A<code>SqlTypeNameSpec</code> is a type name specification that allows user to  * customize sql node unparsing and data type deriving.  *  *<p>To customize sql node unparsing, override the method  * {@link #unparse(SqlWriter, int, int)}.  *  *<p>To customize data type deriving, override the method  * {@link #deriveType(SqlValidator)}.  */
 end_comment
 
 begin_class
@@ -97,7 +97,7 @@ specifier|final
 name|SqlParserPos
 name|pos
 decl_stmt|;
-comment|/**    * Creates a {@code SqlTypeNameSpec}.    *    * @param name Name of the type.    * @param pos  Parser position, must not be null.    */
+comment|/**    * Creates a {@code SqlTypeNameSpec}.    *    * @param name Name of the type    * @param pos  Parser position, must not be null    */
 specifier|public
 name|SqlTypeNameSpec
 parameter_list|(
@@ -121,7 +121,7 @@ operator|=
 name|pos
 expr_stmt|;
 block|}
-comment|/**    * Derive type from this SqlTypeNameSpec.    *    * @param validator The sql validator.    * @return the {@code RelDataType} instance, throws exception if we could not    *         deduce the type.    */
+comment|/**    * Derive type from this SqlTypeNameSpec.    *    * @param validator The sql validator    * @return the {@code RelDataType} instance, throws exception if we could not    *         deduce the type    */
 specifier|public
 specifier|abstract
 name|RelDataType

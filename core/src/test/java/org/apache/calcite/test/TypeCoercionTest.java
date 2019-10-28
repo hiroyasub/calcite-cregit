@@ -2621,7 +2621,7 @@ literal|true
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Test case for {@link TypeCoercion#getWiderTypeForTwo}    * and {@link TypeCoercion#getWiderTypeFor} */
+comment|/** Test case for {@link TypeCoercion#getWiderTypeForTwo}    * and {@link TypeCoercion#getWiderTypeFor}. */
 annotation|@
 name|Test
 specifier|public

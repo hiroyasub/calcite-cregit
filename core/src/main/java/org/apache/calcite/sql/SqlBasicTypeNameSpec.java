@@ -185,7 +185,7 @@ specifier|private
 name|String
 name|charSetName
 decl_stmt|;
-comment|/**    * Create a basic sql type name specification.    * @param typeName    Type name.    * @param precision   Precision of the type name if it is allowed, default is -1.    * @param scale       Scale of the type name if it is allowed, default is -1.    * @param charSetName Char set of the type, only works when the type    *                    belong to CHARACTER type family.    * @param pos         The parser position.    */
+comment|/**    * Create a basic sql type name specification.    *    * @param typeName    Type name    * @param precision   Precision of the type name if it is allowed, default is -1    * @param scale       Scale of the type name if it is allowed, default is -1    * @param charSetName Char set of the type, only works when the type    *                    belong to CHARACTER type family    * @param pos         The parser position    */
 specifier|public
 name|SqlBasicTypeNameSpec
 parameter_list|(
@@ -964,7 +964,7 @@ literal|false
 return|;
 block|}
 block|}
-comment|/**    * Remove the local time zone definition of the {@code typeName}.    *    * @param typeName Type name.    * @return new type name without local time zone definition.    */
+comment|/**    * Remove the local time zone definition of the {@code typeName}.    *    * @param typeName Type name    * @return new type name without local time zone definition    */
 specifier|private
 name|SqlTypeName
 name|stripLocalTimeZoneDef

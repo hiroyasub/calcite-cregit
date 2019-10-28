@@ -1507,7 +1507,7 @@ name|frame
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Unparse a SqlIdentifier syntax.    * @param writer       Writer    * @param identifier   SqlIdentifier    * @param asFunctionID Whether this identifier comes from a SqlFunction    */
+comment|/**    * Unparse a SqlIdentifier syntax.    *    * @param writer       Writer    * @param identifier   SqlIdentifier    * @param asFunctionID Whether this identifier comes from a SqlFunction    */
 specifier|public
 specifier|static
 name|void
