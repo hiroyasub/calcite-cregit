@@ -22895,6 +22895,58 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testTimestampEqualsComparison
+parameter_list|()
+block|{
+name|CalciteAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|query
+argument_list|(
+literal|"select time0 = time1, time0<> time1"
+operator|+
+literal|" from ("
+operator|+
+literal|"  select timestamp'2000-12-30 21:07:32'as time0,"
+operator|+
+literal|"         timestamp'2000-12-30 21:07:32'as time1 "
+operator|+
+literal|"  union all"
+operator|+
+literal|"  select cast(null as timestamp) as time0,"
+operator|+
+literal|"         cast(null as timestamp) as time1"
+operator|+
+literal|") calcs"
+argument_list|)
+operator|.
+name|planContains
+argument_list|(
+literal|"org.apache.calcite.runtime.SqlFunctions.eq(inp0_, inp1_)"
+argument_list|)
+operator|.
+name|planContains
+argument_list|(
+literal|"org.apache.calcite.runtime.SqlFunctions.ne(inp0_, inp1_)"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"EXPR$0=true; EXPR$1=false\n"
+operator|+
+literal|"EXPR$0=null; EXPR$1=null\n"
+argument_list|)
+expr_stmt|;
+block|}
+end_function
+
+begin_function
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testUnicode
 parameter_list|()
 throws|throws
