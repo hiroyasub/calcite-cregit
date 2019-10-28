@@ -705,23 +705,6 @@ name|SqlJoin
 operator|)
 name|call
 decl_stmt|;
-specifier|final
-name|SqlWriter
-operator|.
-name|Frame
-name|joinFrame
-init|=
-name|writer
-operator|.
-name|startList
-argument_list|(
-name|SqlWriter
-operator|.
-name|FrameTypeEnum
-operator|.
-name|JOIN
-argument_list|)
-decl_stmt|;
 name|join
 operator|.
 name|left
@@ -736,24 +719,6 @@ name|getLeftPrec
 argument_list|()
 argument_list|)
 expr_stmt|;
-name|String
-name|natural
-init|=
-literal|""
-decl_stmt|;
-if|if
-condition|(
-name|join
-operator|.
-name|isNatural
-argument_list|()
-condition|)
-block|{
-name|natural
-operator|=
-literal|"NATURAL "
-expr_stmt|;
-block|}
 switch|switch
 condition|(
 name|join
@@ -782,8 +747,13 @@ name|writer
 operator|.
 name|sep
 argument_list|(
-name|natural
-operator|+
+name|join
+operator|.
+name|isNatural
+argument_list|()
+condition|?
+literal|"NATURAL CROSS JOIN"
+else|:
 literal|"CROSS JOIN"
 argument_list|)
 expr_stmt|;
@@ -795,8 +765,13 @@ name|writer
 operator|.
 name|sep
 argument_list|(
-name|natural
-operator|+
+name|join
+operator|.
+name|isNatural
+argument_list|()
+condition|?
+literal|"NATURAL FULL JOIN"
+else|:
 literal|"FULL JOIN"
 argument_list|)
 expr_stmt|;
@@ -808,8 +783,13 @@ name|writer
 operator|.
 name|sep
 argument_list|(
-name|natural
-operator|+
+name|join
+operator|.
+name|isNatural
+argument_list|()
+condition|?
+literal|"NATURAL INNER JOIN"
+else|:
 literal|"INNER JOIN"
 argument_list|)
 expr_stmt|;
@@ -821,8 +801,13 @@ name|writer
 operator|.
 name|sep
 argument_list|(
-name|natural
-operator|+
+name|join
+operator|.
+name|isNatural
+argument_list|()
+condition|?
+literal|"NATURAL LEFT JOIN"
+else|:
 literal|"LEFT JOIN"
 argument_list|)
 expr_stmt|;
@@ -834,8 +819,13 @@ name|writer
 operator|.
 name|sep
 argument_list|(
-name|natural
-operator|+
+name|join
+operator|.
+name|isNatural
+argument_list|()
+condition|?
+literal|"NATURAL LEFT SEMI JOIN"
+else|:
 literal|"LEFT SEMI JOIN"
 argument_list|)
 expr_stmt|;
@@ -847,8 +837,13 @@ name|writer
 operator|.
 name|sep
 argument_list|(
-name|natural
-operator|+
+name|join
+operator|.
+name|isNatural
+argument_list|()
+condition|?
+literal|"NATURAL RIGHT JOIN"
+else|:
 literal|"RIGHT JOIN"
 argument_list|)
 expr_stmt|;
@@ -992,13 +987,6 @@ argument_list|)
 throw|;
 block|}
 block|}
-name|writer
-operator|.
-name|endList
-argument_list|(
-name|joinFrame
-argument_list|)
-expr_stmt|;
 block|}
 block|}
 block|}

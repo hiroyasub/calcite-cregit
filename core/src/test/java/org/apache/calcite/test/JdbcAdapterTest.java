@@ -1140,7 +1140,7 @@ literal|"FROM \"SCOTT\".\"SALGRADE\"\n"
 operator|+
 literal|"INNER JOIN ((SELECT \"EMPNO\", \"ENAME\", \"SAL\", \"DEPTNO\"\n"
 operator|+
-literal|"FROM \"SCOTT\".\"EMP\") AS \"t\"\n"
+literal|"FROM \"SCOTT\".\"EMP\") AS \"t\" "
 operator|+
 literal|"INNER JOIN (SELECT \"DEPTNO\", \"DNAME\"\n"
 operator|+

@@ -171,9 +171,23 @@ name|calcite
 operator|.
 name|sql
 operator|.
+name|SqlWriterConfig
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
 name|dialect
 operator|.
-name|CalciteSqlDialect
+name|AnsiSqlDialect
 import|;
 end_import
 
@@ -553,6 +567,16 @@ name|java
 operator|.
 name|util
 operator|.
+name|Random
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
 name|SortedSet
 import|;
 end_import
@@ -658,6 +682,18 @@ operator|.
 name|CoreMatchers
 operator|.
 name|not
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|hamcrest
+operator|.
+name|CoreMatchers
+operator|.
+name|notNullValue
 import|;
 end_import
 
@@ -5353,6 +5389,41 @@ index|[]
 block|{
 literal|true
 block|}
+argument_list|)
+decl_stmt|;
+specifier|private
+specifier|static
+specifier|final
+name|SqlWriterConfig
+name|SQL_WRITER_CONFIG
+init|=
+name|SqlPrettyWriter
+operator|.
+name|config
+argument_list|()
+operator|.
+name|withAlwaysUseParentheses
+argument_list|(
+literal|true
+argument_list|)
+operator|.
+name|withUpdateSetListNewline
+argument_list|(
+literal|false
+argument_list|)
+operator|.
+name|withFromFolding
+argument_list|(
+name|SqlWriterConfig
+operator|.
+name|LineFolding
+operator|.
+name|TALL
+argument_list|)
+operator|.
+name|withIndentation
+argument_list|(
+literal|0
 argument_list|)
 decl_stmt|;
 name|Quoting
@@ -17136,13 +17207,13 @@ name|expected
 init|=
 literal|"UPDATE `EMPDEFAULTS` EXTEND (`EXTRA` BOOLEAN, `NOTE` VARCHAR)"
 operator|+
-literal|" SET `DEPTNO` = 1\n"
+literal|" SET `DEPTNO` = 1"
 operator|+
-literal|", `EXTRA` = TRUE\n"
+literal|", `EXTRA` = TRUE"
 operator|+
-literal|", `EMPNO` = 20\n"
+literal|", `EMPNO` = 20"
 operator|+
-literal|", `ENAME` = 'Bob'\n"
+literal|", `ENAME` = 'Bob'"
 operator|+
 literal|", `NOTE` = 'legion'\n"
 operator|+
@@ -17176,13 +17247,13 @@ name|expected
 init|=
 literal|"UPDATE `EMPDEFAULTS` EXTEND (`extra` BOOLEAN, `NOTE` VARCHAR)"
 operator|+
-literal|" SET `DEPTNO` = 1\n"
+literal|" SET `DEPTNO` = 1"
 operator|+
-literal|", `extra` = TRUE\n"
+literal|", `extra` = TRUE"
 operator|+
-literal|", `EMPNO` = 20\n"
+literal|", `EMPNO` = 20"
 operator|+
-literal|", `ENAME` = 'Bob'\n"
+literal|", `ENAME` = 'Bob'"
 operator|+
 literal|", `NOTE` = 'legion'\n"
 operator|+
@@ -17494,7 +17565,7 @@ argument_list|)
 operator|.
 name|ok
 argument_list|(
-literal|"UPDATE `EMPS` SET `EMPNO` = (`EMPNO` + 1)\n"
+literal|"UPDATE `EMPS` SET `EMPNO` = (`EMPNO` + 1)"
 operator|+
 literal|", `SAL` = (`SAL` - 1)\n"
 operator|+
@@ -17541,9 +17612,9 @@ literal|"WHERE (`DEPTNO` IS NULL)) AS `T`\n"
 operator|+
 literal|"ON (`E`.`EMPNO` = `T`.`EMPNO`)\n"
 operator|+
-literal|"WHEN MATCHED THEN UPDATE SET `NAME` = `T`.`NAME`\n"
+literal|"WHEN MATCHED THEN UPDATE SET `NAME` = `T`.`NAME`"
 operator|+
-literal|", `DEPTNO` = `T`.`DEPTNO`\n"
+literal|", `DEPTNO` = `T`.`DEPTNO`"
 operator|+
 literal|", `SALARY` = (`T`.`SALARY` * 0.1)\n"
 operator|+
@@ -17611,9 +17682,9 @@ literal|"WHERE (`DEPTNO` IS NULL)) AS `T`\n"
 operator|+
 literal|"ON (`E`.`EMPNO` = `T`.`EMPNO`)\n"
 operator|+
-literal|"WHEN MATCHED THEN UPDATE SET `E`.`NAME` = `T`.`NAME`\n"
+literal|"WHEN MATCHED THEN UPDATE SET `E`.`NAME` = `T`.`NAME`"
 operator|+
-literal|", `E`.`DEPTNO` = `T`.`DEPTNO`\n"
+literal|", `E`.`DEPTNO` = `T`.`DEPTNO`"
 operator|+
 literal|", `E`.`SALARY` = (`T`.`SALARY` * 0.1)\n"
 operator|+
@@ -17676,9 +17747,9 @@ literal|"USING `TEMPEMPS` AS `T`\n"
 operator|+
 literal|"ON (`E`.`EMPNO` = `T`.`EMPNO`)\n"
 operator|+
-literal|"WHEN MATCHED THEN UPDATE SET `NAME` = `T`.`NAME`\n"
+literal|"WHEN MATCHED THEN UPDATE SET `NAME` = `T`.`NAME`"
 operator|+
-literal|", `DEPTNO` = `T`.`DEPTNO`\n"
+literal|", `DEPTNO` = `T`.`DEPTNO`"
 operator|+
 literal|", `SALARY` = (`T`.`SALARY` * 0.1)\n"
 operator|+
@@ -17733,9 +17804,9 @@ literal|"USING `TEMPEMPS` AS `T`\n"
 operator|+
 literal|"ON (`E`.`EMPNO` = `T`.`EMPNO`)\n"
 operator|+
-literal|"WHEN MATCHED THEN UPDATE SET `E`.`NAME` = `T`.`NAME`\n"
+literal|"WHEN MATCHED THEN UPDATE SET `E`.`NAME` = `T`.`NAME`"
 operator|+
-literal|", `E`.`DEPTNO` = `T`.`DEPTNO`\n"
+literal|", `E`.`DEPTNO` = `T`.`DEPTNO`"
 operator|+
 literal|", `E`.`SALARY` = (`T`.`SALARY` * 0.1)\n"
 operator|+
@@ -31365,11 +31436,7 @@ name|writer
 init|=
 operator|new
 name|SqlPrettyWriter
-argument_list|(
-name|CalciteSqlDialect
-operator|.
-name|DEFAULT
-argument_list|)
+argument_list|()
 decl_stmt|;
 name|assertThat
 argument_list|(
@@ -31393,11 +31460,7 @@ name|writer
 operator|=
 operator|new
 name|SqlPrettyWriter
-argument_list|(
-name|CalciteSqlDialect
-operator|.
-name|DEFAULT
-argument_list|)
+argument_list|()
 expr_stmt|;
 name|assertThat
 argument_list|(
@@ -31421,11 +31484,7 @@ name|writer
 operator|=
 operator|new
 name|SqlPrettyWriter
-argument_list|(
-name|CalciteSqlDialect
-operator|.
-name|DEFAULT
-argument_list|)
+argument_list|()
 expr_stmt|;
 name|assertThat
 argument_list|(
@@ -31568,11 +31627,7 @@ name|writer
 operator|=
 operator|new
 name|SqlPrettyWriter
-argument_list|(
-name|CalciteSqlDialect
-operator|.
-name|DEFAULT
-argument_list|)
+argument_list|()
 expr_stmt|;
 name|assertThat
 argument_list|(
@@ -31609,11 +31664,7 @@ name|writer
 operator|=
 operator|new
 name|SqlPrettyWriter
-argument_list|(
-name|CalciteSqlDialect
-operator|.
-name|DEFAULT
-argument_list|)
+argument_list|()
 expr_stmt|;
 name|assertThat
 argument_list|(
@@ -35663,7 +35714,7 @@ literal|"/*+ `PROPERTIES`(`K1` ='v1', `K2` ='v2'), "
 operator|+
 literal|"`INDEX`(`IDX1`, `IDX2`), `NO_HASH_JOIN` */ "
 operator|+
-literal|"SET `EMPNO` = (`EMPNO` + 1)\n"
+literal|"SET `EMPNO` = (`EMPNO` + 1)"
 operator|+
 literal|", `SAL` = (`SAL` - 1)\n"
 operator|+
@@ -35723,9 +35774,9 @@ literal|"USING `TEMPEMPS` AS `T`\n"
 operator|+
 literal|"ON (`E`.`EMPNO` = `T`.`EMPNO`)\n"
 operator|+
-literal|"WHEN MATCHED THEN UPDATE SET `NAME` = `T`.`NAME`\n"
+literal|"WHEN MATCHED THEN UPDATE SET `NAME` = `T`.`NAME`"
 operator|+
-literal|", `DEPTNO` = `T`.`DEPTNO`\n"
+literal|", `DEPTNO` = `T`.`DEPTNO`"
 operator|+
 literal|", `SALARY` = (`T`.`SALARY` * 0.1)\n"
 operator|+
@@ -35938,7 +35989,32 @@ name|String
 name|expected
 parameter_list|)
 block|{
-comment|// no dialect, always parenthesize
+specifier|final
+name|SqlDialect
+name|dialect2
+init|=
+name|Util
+operator|.
+name|first
+argument_list|(
+name|dialect
+argument_list|,
+name|AnsiSqlDialect
+operator|.
+name|DEFAULT
+argument_list|)
+decl_stmt|;
+specifier|final
+name|SqlWriterConfig
+name|c2
+init|=
+name|SQL_WRITER_CONFIG
+operator|.
+name|withDialect
+argument_list|(
+name|dialect2
+argument_list|)
+decl_stmt|;
 specifier|final
 name|String
 name|actual
@@ -35947,9 +36023,9 @@ name|sqlNode
 operator|.
 name|toSqlString
 argument_list|(
-name|dialect
-argument_list|,
-literal|true
+name|c
+lambda|->
+name|c2
 argument_list|)
 operator|.
 name|getSql
@@ -36659,19 +36735,227 @@ extends|extends
 name|TesterImpl
 block|{
 specifier|private
+name|UnaryOperator
+argument_list|<
+name|SqlWriterConfig
+argument_list|>
+name|simple
+parameter_list|()
+block|{
+return|return
+name|c
+lambda|->
+name|c
+operator|.
+name|withSelectListItemsOnSeparateLines
+argument_list|(
+literal|false
+argument_list|)
+operator|.
+name|withUpdateSetListNewline
+argument_list|(
+literal|false
+argument_list|)
+operator|.
+name|withIndentation
+argument_list|(
+literal|0
+argument_list|)
+operator|.
+name|withFromFolding
+argument_list|(
+name|SqlWriterConfig
+operator|.
+name|LineFolding
+operator|.
+name|TALL
+argument_list|)
+return|;
+block|}
+specifier|private
+name|UnaryOperator
+argument_list|<
+name|SqlWriterConfig
+argument_list|>
+name|simpleWithParens
+parameter_list|()
+block|{
+return|return
+name|simple
+argument_list|()
+operator|.
+name|andThen
+argument_list|(
+name|withParens
+argument_list|()
+argument_list|)
+operator|::
+name|apply
+return|;
+block|}
+specifier|private
+name|UnaryOperator
+argument_list|<
+name|SqlWriterConfig
+argument_list|>
+name|simpleWithParensAnsi
+parameter_list|()
+block|{
+return|return
+name|simpleWithParens
+argument_list|()
+operator|.
+name|andThen
+argument_list|(
+name|withAnsi
+argument_list|()
+argument_list|)
+operator|::
+name|apply
+return|;
+block|}
+specifier|private
+name|UnaryOperator
+argument_list|<
+name|SqlWriterConfig
+argument_list|>
+name|withParens
+parameter_list|()
+block|{
+return|return
+name|c
+lambda|->
+name|c
+operator|.
+name|withAlwaysUseParentheses
+argument_list|(
+literal|true
+argument_list|)
+return|;
+block|}
+specifier|private
+name|UnaryOperator
+argument_list|<
+name|SqlWriterConfig
+argument_list|>
+name|withAnsi
+parameter_list|()
+block|{
+return|return
+name|c
+lambda|->
+name|c
+operator|.
+name|withDialect
+argument_list|(
+name|AnsiSqlDialect
+operator|.
+name|DEFAULT
+argument_list|)
+return|;
+block|}
+specifier|private
+name|UnaryOperator
+argument_list|<
+name|SqlWriterConfig
+argument_list|>
+name|randomize
+parameter_list|(
+name|Random
+name|random
+parameter_list|)
+block|{
+return|return
+name|c
+lambda|->
+name|c
+operator|.
+name|withFoldLength
+argument_list|(
+name|random
+operator|.
+name|nextInt
+argument_list|(
+literal|5
+argument_list|)
+operator|*
+literal|20
+operator|+
+literal|3
+argument_list|)
+operator|.
+name|withHavingFolding
+argument_list|(
+name|nextLineFolding
+argument_list|(
+name|random
+argument_list|)
+argument_list|)
+operator|.
+name|withWhereFolding
+argument_list|(
+name|nextLineFolding
+argument_list|(
+name|random
+argument_list|)
+argument_list|)
+operator|.
+name|withSelectFolding
+argument_list|(
+name|nextLineFolding
+argument_list|(
+name|random
+argument_list|)
+argument_list|)
+operator|.
+name|withFromFolding
+argument_list|(
+name|nextLineFolding
+argument_list|(
+name|random
+argument_list|)
+argument_list|)
+operator|.
+name|withGroupByFolding
+argument_list|(
+name|nextLineFolding
+argument_list|(
+name|random
+argument_list|)
+argument_list|)
+operator|.
+name|withClauseStartsLine
+argument_list|(
+name|random
+operator|.
+name|nextBoolean
+argument_list|()
+argument_list|)
+operator|.
+name|withClauseEndsLine
+argument_list|(
+name|random
+operator|.
+name|nextBoolean
+argument_list|()
+argument_list|)
+return|;
+block|}
+specifier|private
 name|String
 name|toSqlString
 parameter_list|(
 name|SqlNodeList
 name|sqlNodeList
+parameter_list|,
+name|UnaryOperator
+argument_list|<
+name|SqlWriterConfig
+argument_list|>
+name|transform
 parameter_list|)
 block|{
-name|List
-argument_list|<
-name|String
-argument_list|>
-name|sqls
-init|=
+return|return
 name|sqlNodeList
 operator|.
 name|getList
@@ -36682,17 +36966,13 @@ argument_list|()
 operator|.
 name|map
 argument_list|(
-name|it
+name|node
 lambda|->
-name|it
+name|node
 operator|.
 name|toSqlString
 argument_list|(
-name|CalciteSqlDialect
-operator|.
-name|DEFAULT
-argument_list|,
-literal|false
+name|transform
 argument_list|)
 operator|.
 name|getSql
@@ -36703,19 +36983,80 @@ name|collect
 argument_list|(
 name|Collectors
 operator|.
-name|toList
-argument_list|()
-argument_list|)
-decl_stmt|;
-return|return
-name|String
-operator|.
-name|join
+name|joining
 argument_list|(
 literal|";"
-argument_list|,
-name|sqls
 argument_list|)
+argument_list|)
+return|;
+block|}
+specifier|private
+name|SqlWriterConfig
+operator|.
+name|LineFolding
+name|nextLineFolding
+parameter_list|(
+name|Random
+name|random
+parameter_list|)
+block|{
+return|return
+name|nextEnum
+argument_list|(
+name|random
+argument_list|,
+name|SqlWriterConfig
+operator|.
+name|LineFolding
+operator|.
+name|class
+argument_list|)
+return|;
+block|}
+specifier|private
+parameter_list|<
+name|E
+extends|extends
+name|Enum
+argument_list|<
+name|E
+argument_list|>
+parameter_list|>
+name|E
+name|nextEnum
+parameter_list|(
+name|Random
+name|random
+parameter_list|,
+name|Class
+argument_list|<
+name|E
+argument_list|>
+name|enumClass
+parameter_list|)
+block|{
+specifier|final
+name|E
+index|[]
+name|constants
+init|=
+name|enumClass
+operator|.
+name|getEnumConstants
+argument_list|()
+decl_stmt|;
+return|return
+name|constants
+index|[
+name|random
+operator|.
+name|nextInt
+argument_list|(
+name|constants
+operator|.
+name|length
+argument_list|)
+index|]
 return|;
 block|}
 specifier|private
@@ -36732,17 +37073,20 @@ argument_list|>
 name|expected
 parameter_list|)
 block|{
-name|assertEquals
+name|assertThat
+argument_list|(
+name|sqlNodeList
+operator|.
+name|size
+argument_list|()
+argument_list|,
+name|is
 argument_list|(
 name|expected
 operator|.
 name|size
 argument_list|()
-argument_list|,
-name|sqlNodeList
-operator|.
-name|size
-argument_list|()
+argument_list|)
 argument_list|)
 expr_stmt|;
 for|for
@@ -36782,9 +37126,8 @@ name|sqlNode
 operator|.
 name|toSqlString
 argument_list|(
-literal|null
-argument_list|,
-literal|true
+name|simpleWithParensAnsi
+argument_list|()
 argument_list|)
 operator|.
 name|getSql
@@ -36847,6 +37190,9 @@ init|=
 name|toSqlString
 argument_list|(
 name|sqlNodeList
+argument_list|,
+name|simple
+argument_list|()
 argument_list|)
 decl_stmt|;
 comment|// Parse and unparse again.
@@ -36889,6 +37235,9 @@ init|=
 name|toSqlString
 argument_list|(
 name|sqlNodeList2
+argument_list|,
+name|simple
+argument_list|()
 argument_list|)
 decl_stmt|;
 comment|// Should be the same as we started with.
@@ -36907,6 +37256,36 @@ argument_list|(
 name|sqlNodeList2
 argument_list|,
 name|expected
+argument_list|)
+expr_stmt|;
+specifier|final
+name|Random
+name|random
+init|=
+operator|new
+name|Random
+argument_list|()
+decl_stmt|;
+specifier|final
+name|String
+name|sql3
+init|=
+name|toSqlString
+argument_list|(
+name|sqlNodeList
+argument_list|,
+name|randomize
+argument_list|(
+name|random
+argument_list|)
+argument_list|)
+decl_stmt|;
+name|assertThat
+argument_list|(
+name|sql3
+argument_list|,
+name|notNullValue
+argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
@@ -36957,6 +37336,45 @@ argument_list|)
 decl_stmt|;
 comment|// Unparse with the given dialect, always parenthesize.
 specifier|final
+name|SqlDialect
+name|dialect2
+init|=
+name|Util
+operator|.
+name|first
+argument_list|(
+name|dialect
+argument_list|,
+name|AnsiSqlDialect
+operator|.
+name|DEFAULT
+argument_list|)
+decl_stmt|;
+specifier|final
+name|UnaryOperator
+argument_list|<
+name|SqlWriterConfig
+argument_list|>
+name|transform
+init|=
+name|simpleWithParens
+argument_list|()
+operator|.
+name|andThen
+argument_list|(
+name|c
+lambda|->
+name|c
+operator|.
+name|withDialect
+argument_list|(
+name|dialect2
+argument_list|)
+argument_list|)
+operator|::
+name|apply
+decl_stmt|;
+specifier|final
 name|String
 name|actual
 init|=
@@ -36964,9 +37382,7 @@ name|sqlNode
 operator|.
 name|toSqlString
 argument_list|(
-name|dialect
-argument_list|,
-literal|true
+name|transform
 argument_list|)
 operator|.
 name|getSql
@@ -36992,11 +37408,8 @@ name|sqlNode
 operator|.
 name|toSqlString
 argument_list|(
-name|CalciteSqlDialect
-operator|.
-name|DEFAULT
-argument_list|,
-literal|false
+name|simple
+argument_list|()
 argument_list|)
 operator|.
 name|getSql
@@ -37051,11 +37464,8 @@ name|sqlNode2
 operator|.
 name|toSqlString
 argument_list|(
-name|CalciteSqlDialect
-operator|.
-name|DEFAULT
-argument_list|,
-literal|false
+name|simple
+argument_list|()
 argument_list|)
 operator|.
 name|getSql
@@ -37076,13 +37486,11 @@ specifier|final
 name|String
 name|actual2
 init|=
-name|sqlNode2
+name|sqlNode
 operator|.
 name|toSqlString
 argument_list|(
-name|dialect
-argument_list|,
-literal|true
+name|transform
 argument_list|)
 operator|.
 name|getSql
@@ -37096,6 +37504,97 @@ name|linux
 argument_list|(
 name|actual2
 argument_list|)
+argument_list|)
+expr_stmt|;
+comment|// Now unparse with a randomly configured SqlPrettyWriter.
+comment|// (This is a much a test for SqlPrettyWriter as for the parser.)
+specifier|final
+name|Random
+name|random
+init|=
+operator|new
+name|Random
+argument_list|()
+decl_stmt|;
+specifier|final
+name|String
+name|sql3
+init|=
+name|sqlNode
+operator|.
+name|toSqlString
+argument_list|(
+name|randomize
+argument_list|(
+name|random
+argument_list|)
+argument_list|)
+operator|.
+name|getSql
+argument_list|()
+decl_stmt|;
+name|assertThat
+argument_list|(
+name|sql3
+argument_list|,
+name|notNullValue
+argument_list|()
+argument_list|)
+expr_stmt|;
+name|SqlNode
+name|sqlNode4
+decl_stmt|;
+try|try
+block|{
+name|quoting
+operator|=
+name|Quoting
+operator|.
+name|DOUBLE_QUOTE
+expr_stmt|;
+name|sqlNode4
+operator|=
+name|parseStmtAndHandleEx
+argument_list|(
+name|sql1
+argument_list|,
+name|b
+lambda|->
+name|b
+argument_list|,
+name|parser
+lambda|->
+block|{ }
+argument_list|)
+expr_stmt|;
+block|}
+finally|finally
+block|{
+name|quoting
+operator|=
+name|q
+expr_stmt|;
+block|}
+specifier|final
+name|String
+name|sql4
+init|=
+name|sqlNode4
+operator|.
+name|toSqlString
+argument_list|(
+name|simple
+argument_list|()
+argument_list|)
+operator|.
+name|getSql
+argument_list|()
+decl_stmt|;
+name|assertEquals
+argument_list|(
+name|sql1
+argument_list|,
+name|sql4
 argument_list|)
 expr_stmt|;
 block|}
@@ -37130,6 +37629,30 @@ argument_list|)
 decl_stmt|;
 comment|// Unparse with no dialect, always parenthesize.
 specifier|final
+name|UnaryOperator
+argument_list|<
+name|SqlWriterConfig
+argument_list|>
+name|transform
+init|=
+name|c
+lambda|->
+name|simpleWithParens
+argument_list|()
+operator|.
+name|apply
+argument_list|(
+name|c
+argument_list|)
+operator|.
+name|withDialect
+argument_list|(
+name|AnsiSqlDialect
+operator|.
+name|DEFAULT
+argument_list|)
+decl_stmt|;
+specifier|final
 name|String
 name|actual
 init|=
@@ -37137,9 +37660,7 @@ name|sqlNode
 operator|.
 name|toSqlString
 argument_list|(
-literal|null
-argument_list|,
-literal|true
+name|transform
 argument_list|)
 operator|.
 name|getSql
@@ -37165,11 +37686,10 @@ name|sqlNode
 operator|.
 name|toSqlString
 argument_list|(
-name|CalciteSqlDialect
+name|UnaryOperator
 operator|.
-name|DEFAULT
-argument_list|,
-literal|false
+name|identity
+argument_list|()
 argument_list|)
 operator|.
 name|getSql
@@ -37222,11 +37742,10 @@ name|sqlNode2
 operator|.
 name|toSqlString
 argument_list|(
-name|CalciteSqlDialect
+name|UnaryOperator
 operator|.
-name|DEFAULT
-argument_list|,
-literal|false
+name|identity
+argument_list|()
 argument_list|)
 operator|.
 name|getSql

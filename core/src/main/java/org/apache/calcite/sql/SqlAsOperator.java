@@ -373,7 +373,7 @@ name|SqlWriter
 operator|.
 name|FrameTypeEnum
 operator|.
-name|SIMPLE
+name|AS
 argument_list|)
 decl_stmt|;
 name|call

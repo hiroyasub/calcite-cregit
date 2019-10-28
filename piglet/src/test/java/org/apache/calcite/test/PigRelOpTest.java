@@ -1160,17 +1160,17 @@ literal|""
 operator|+
 literal|"SELECT *\n"
 operator|+
-literal|"  FROM scott.EMP\n"
+literal|"FROM scott.EMP\n"
 operator|+
-literal|"  WHERE DEPTNO = 10\n"
+literal|"WHERE DEPTNO = 10\n"
 operator|+
 literal|"UNION ALL\n"
 operator|+
-literal|"  SELECT *\n"
+literal|"SELECT *\n"
 operator|+
-literal|"  FROM scott.EMP\n"
+literal|"FROM scott.EMP\n"
 operator|+
-literal|"  WHERE DEPTNO = 20"
+literal|"WHERE DEPTNO = 20"
 decl_stmt|;
 name|pig
 argument_list|(
@@ -1566,15 +1566,15 @@ literal|"FROM (SELECT DEPTNO, JOB, COLLECT(ROW(EMPNO, ENAME, JOB, MGR, "
 operator|+
 literal|"HIREDATE, SAL, COMM, DEPTNO)) AS $f2\n"
 operator|+
-literal|"      FROM scott.EMP\n"
+literal|"    FROM scott.EMP\n"
 operator|+
-literal|"      WHERE JOB<> 'CLERK'\n"
+literal|"    WHERE JOB<> 'CLERK'\n"
 operator|+
-literal|"      GROUP BY DEPTNO, JOB) AS $cor1,\n"
+literal|"    GROUP BY DEPTNO, JOB) AS $cor1,\n"
 operator|+
-literal|"    LATERAL UNNEST (SELECT $cor1.$f2 AS $f0\n"
+literal|"  LATERAL UNNEST (SELECT $cor1.$f2 AS $f0\n"
 operator|+
-literal|"        FROM (VALUES  (0)) AS t (ZERO)) AS t3 (EMPNO, ENAME, JOB,"
+literal|"    FROM (VALUES  (0)) AS t (ZERO)) AS t3 (EMPNO, ENAME, JOB,"
 operator|+
 literal|" MGR, HIREDATE, SAL, COMM, DEPTNO) AS t30\n"
 operator|+
@@ -1785,33 +1785,33 @@ literal|"COUNT(PIG_BAG($cor4.X)) AS cnt, $cor4.X, "
 operator|+
 literal|"BigDecimalMax(PIG_BAG(MULTISET_PROJECTION($cor4.X, 3))) AS $f3\n"
 operator|+
-literal|"      FROM (SELECT DEPTNO, COLLECT(ROW(EMPNO, ENAME, JOB, MGR, "
+literal|"    FROM (SELECT DEPTNO, COLLECT(ROW(EMPNO, ENAME, JOB, MGR, "
 operator|+
 literal|"HIREDATE, SAL, COMM, DEPTNO)) AS A\n"
 operator|+
-literal|"            FROM scott.EMP\n"
+literal|"        FROM scott.EMP\n"
 operator|+
-literal|"            GROUP BY DEPTNO) AS $cor4,\n"
+literal|"        GROUP BY DEPTNO) AS $cor4,\n"
 operator|+
-literal|"          LATERAL (SELECT COLLECT(ROW(ENAME, JOB, DEPTNO, SAL)) AS X\n"
+literal|"      LATERAL (SELECT COLLECT(ROW(ENAME, JOB, DEPTNO, SAL)) AS X\n"
 operator|+
-literal|"            FROM (SELECT ENAME, JOB, DEPTNO, SAL\n"
+literal|"        FROM (SELECT ENAME, JOB, DEPTNO, SAL\n"
 operator|+
-literal|"                  FROM UNNEST (SELECT $cor4.A AS $f0\n"
+literal|"            FROM UNNEST (SELECT $cor4.A AS $f0\n"
 operator|+
-literal|"                        FROM (VALUES  (0)) AS t (ZERO)) "
+literal|"                FROM (VALUES  (0)) AS t (ZERO)) "
 operator|+
 literal|"AS t2 (EMPNO, ENAME, JOB, MGR, HIREDATE, SAL, COMM, DEPTNO)\n"
 operator|+
-literal|"                  WHERE JOB<> 'CLERK'\n"
+literal|"            WHERE JOB<> 'CLERK'\n"
 operator|+
-literal|"                  ORDER BY SAL) AS t5\n"
+literal|"            ORDER BY SAL) AS t5\n"
 operator|+
-literal|"            GROUP BY 'all') AS t8) AS $cor5,\n"
+literal|"        GROUP BY 'all') AS t8) AS $cor5,\n"
 operator|+
-literal|"    LATERAL UNNEST (SELECT $cor5.X AS $f0\n"
+literal|"  LATERAL UNNEST (SELECT $cor5.X AS $f0\n"
 operator|+
-literal|"        FROM (VALUES  (0)) AS t (ZERO)) "
+literal|"    FROM (VALUES  (0)) AS t (ZERO)) "
 operator|+
 literal|"AS t11 (ENAME, JOB, DEPTNO, SAL) AS t110\n"
 operator|+
@@ -1918,17 +1918,17 @@ literal|""
 operator|+
 literal|"SELECT *\n"
 operator|+
-literal|"  FROM scott.EMP\n"
+literal|"FROM scott.EMP\n"
 operator|+
-literal|"  WHERE DEPTNO = 10\n"
+literal|"WHERE DEPTNO = 10\n"
 operator|+
 literal|"UNION ALL\n"
 operator|+
-literal|"  SELECT *\n"
+literal|"SELECT *\n"
 operator|+
-literal|"  FROM scott.EMP\n"
+literal|"FROM scott.EMP\n"
 operator|+
-literal|"  WHERE DEPTNO = 20"
+literal|"WHERE DEPTNO = 20"
 decl_stmt|;
 name|pig
 argument_list|(
@@ -2039,15 +2039,15 @@ literal|""
 operator|+
 literal|"SELECT *\n"
 operator|+
-literal|"  FROM scott.DEPT\n"
+literal|"FROM scott.DEPT\n"
 operator|+
 literal|"UNION ALL\n"
 operator|+
-literal|"  SELECT DEPTNO, DNAME, "
+literal|"SELECT DEPTNO, DNAME, "
 operator|+
 literal|"CAST(NULL AS VARCHAR CHARACTER SET ISO-8859-1) AS LOC\n"
 operator|+
-literal|"  FROM scott.DEPT"
+literal|"FROM scott.DEPT"
 decl_stmt|;
 name|pig
 argument_list|(
@@ -2174,13 +2174,13 @@ literal|"CAST(NULL AS VARCHAR CHARACTER SET ISO-8859-1) AS DNAME, "
 operator|+
 literal|"CAST(NULL AS VARCHAR CHARACTER SET ISO-8859-1) AS LOC\n"
 operator|+
-literal|"  FROM scott.EMP\n"
+literal|"FROM scott.EMP\n"
 operator|+
-literal|"  WHERE DEPTNO = 10\n"
+literal|"WHERE DEPTNO = 10\n"
 operator|+
 literal|"UNION ALL\n"
 operator|+
-literal|"  SELECT CAST(NULL AS INTEGER) AS EMPNO, "
+literal|"SELECT CAST(NULL AS INTEGER) AS EMPNO, "
 operator|+
 literal|"CAST(NULL AS VARCHAR CHARACTER SET ISO-8859-1) AS ENAME, "
 operator|+
@@ -2192,7 +2192,7 @@ literal|"CAST(NULL AS DATE) AS HIREDATE, CAST(NULL AS DECIMAL(19, 0)) AS SAL, "
 operator|+
 literal|"CAST(NULL AS DECIMAL(19, 0)) AS COMM, DEPTNO, DNAME, LOC\n"
 operator|+
-literal|"  FROM scott.DEPT"
+literal|"FROM scott.DEPT"
 decl_stmt|;
 name|pig
 argument_list|(
@@ -2589,9 +2589,9 @@ literal|"  INNER JOIN scott.DEPT ON EMP.DEPTNO = DEPT.DEPTNO\n"
 operator|+
 literal|"  INNER JOIN (SELECT *\n"
 operator|+
-literal|"      FROM scott.DEPT\n"
+literal|"    FROM scott.DEPT\n"
 operator|+
-literal|"      WHERE LOC = 'CHICAGO') AS t ON EMP.DEPTNO = t.DEPTNO"
+literal|"    WHERE LOC = 'CHICAGO') AS t ON EMP.DEPTNO = t.DEPTNO"
 decl_stmt|;
 specifier|final
 name|String
@@ -2724,9 +2724,9 @@ literal|"AND EMP.ENAME = DEPT.DNAME\n"
 operator|+
 literal|"  INNER JOIN (SELECT *\n"
 operator|+
-literal|"      FROM scott.DEPT\n"
+literal|"    FROM scott.DEPT\n"
 operator|+
-literal|"      WHERE LOC = 'CHICAGO') AS t ON EMP.DEPTNO = t.DEPTNO "
+literal|"    WHERE LOC = 'CHICAGO') AS t ON EMP.DEPTNO = t.DEPTNO "
 operator|+
 literal|"AND DEPT.DNAME = t.DNAME"
 decl_stmt|;
@@ -2803,13 +2803,13 @@ literal|"SELECT *\n"
 operator|+
 literal|"FROM (SELECT DEPTNO\n"
 operator|+
-literal|"      FROM scott.DEPT) AS t,\n"
+literal|"    FROM scott.DEPT) AS t,\n"
 operator|+
-literal|"      (SELECT DEPTNO\n"
+literal|"    (SELECT DEPTNO\n"
 operator|+
-literal|"      FROM scott.DEPT\n"
+literal|"    FROM scott.DEPT\n"
 operator|+
-literal|"      WHERE DEPTNO<= 20) AS t1"
+literal|"    WHERE DEPTNO<= 20) AS t1"
 decl_stmt|;
 specifier|final
 name|String
@@ -2954,19 +2954,19 @@ literal|"SELECT *\n"
 operator|+
 literal|"FROM (SELECT DEPTNO\n"
 operator|+
-literal|"      FROM scott.DEPT) AS t,\n"
+literal|"    FROM scott.DEPT) AS t,\n"
 operator|+
-literal|"      (SELECT DEPTNO\n"
+literal|"    (SELECT DEPTNO\n"
 operator|+
-literal|"      FROM scott.DEPT\n"
+literal|"    FROM scott.DEPT\n"
 operator|+
-literal|"      WHERE DEPTNO<= 20) AS t1,\n"
+literal|"    WHERE DEPTNO<= 20) AS t1,\n"
 operator|+
-literal|"      (SELECT DEPTNO\n"
+literal|"    (SELECT DEPTNO\n"
 operator|+
-literal|"      FROM scott.DEPT\n"
+literal|"    FROM scott.DEPT\n"
 operator|+
-literal|"      WHERE DEPTNO> 20) AS t3"
+literal|"    WHERE DEPTNO> 20) AS t3"
 decl_stmt|;
 name|pig
 argument_list|(
@@ -5404,31 +5404,35 @@ literal|"FROM (SELECT CASE WHEN t0.$f0 IS NOT NULL THEN t0.$f0 ELSE t3.DEPTNO EN
 operator|+
 literal|"AS DEPTNO, t0.A, t3.B\n"
 operator|+
-literal|"      FROM (SELECT DEPTNO + 10 AS $f0, COLLECT(ROW(DEPTNO, DNAME, LOC)) AS A\n"
+literal|"    FROM (SELECT DEPTNO + 10 AS $f0, "
 operator|+
-literal|"            FROM scott.DEPT\n"
+literal|"COLLECT(ROW(DEPTNO, DNAME, LOC)) AS A\n"
 operator|+
-literal|"            GROUP BY DEPTNO + 10) AS t0\n"
+literal|"        FROM scott.DEPT\n"
 operator|+
-literal|"        FULL JOIN (SELECT CAST(DEPTNO AS INTEGER) AS DEPTNO, COLLECT(ROW"
+literal|"        GROUP BY DEPTNO + 10) AS t0\n"
 operator|+
-literal|"(DEPTNO, DNAME, LOC)) AS B\n"
+literal|"      FULL JOIN (SELECT CAST(DEPTNO AS INTEGER) AS DEPTNO, "
 operator|+
-literal|"            FROM scott.DEPT\n"
+literal|"COLLECT(ROW(DEPTNO, DNAME, LOC)) AS B\n"
 operator|+
-literal|"            WHERE DEPTNO<= 30\n"
+literal|"        FROM scott.DEPT\n"
 operator|+
-literal|"            GROUP BY CAST(DEPTNO AS INTEGER)) AS t3 ON t0.$f0 = t3.DEPTNO) AS t4\n"
+literal|"        WHERE DEPTNO<= 30\n"
+operator|+
+literal|"        GROUP BY CAST(DEPTNO AS INTEGER)) AS t3 "
+operator|+
+literal|"ON t0.$f0 = t3.DEPTNO) AS t4\n"
 operator|+
 literal|"  FULL JOIN (SELECT CAST(DEPTNO AS INTEGER) AS DEPTNO, COLLECT(ROW(DEPTNO, DNAME, "
 operator|+
 literal|"LOC)) AS C\n"
 operator|+
-literal|"      FROM scott.DEPT\n"
+literal|"    FROM scott.DEPT\n"
 operator|+
-literal|"      WHERE DEPTNO>= 20\n"
+literal|"    WHERE DEPTNO>= 20\n"
 operator|+
-literal|"      GROUP BY CAST(DEPTNO AS INTEGER)) AS t7 ON t4.DEPTNO = t7.DEPTNO\n"
+literal|"    GROUP BY CAST(DEPTNO AS INTEGER)) AS t7 ON t4.DEPTNO = t7.DEPTNO\n"
 operator|+
 literal|"ORDER BY CASE WHEN t4.DEPTNO IS NOT NULL THEN t4.DEPTNO ELSE t7.DEPTNO END"
 decl_stmt|;

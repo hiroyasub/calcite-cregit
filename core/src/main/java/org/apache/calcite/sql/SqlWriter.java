@@ -25,9 +25,37 @@ name|calcite
 operator|.
 name|sql
 operator|.
+name|fun
+operator|.
+name|SqlStdOperatorTable
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
 name|util
 operator|.
 name|SqlString
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|function
+operator|.
+name|Consumer
 import|;
 end_import
 
@@ -62,6 +90,9 @@ name|SELECT
 block|,
 comment|/**      * Simple list.      */
 name|SIMPLE
+block|,
+comment|/**      * Comma-separated list surrounded by parentheses.      * The parentheses are present even if the list is empty.      */
+name|PARENTHESES
 block|,
 comment|/**      * The SELECT clause of a SELECT statement.      */
 name|SELECT_LIST
@@ -101,6 +132,9 @@ name|GROUP_BY_LIST
 block|,
 comment|/**      * Sub-query list. Encloses a SELECT, UNION, EXCEPT, INTERSECT query      * with optional ORDER BY.      *      *<p>Example:</p>      *<ul>      *<li><code>GROUP BY x, FLOOR(y)</code></li>      *</ul>      */
 name|SUB_QUERY
+argument_list|(
+literal|true
+argument_list|)
 block|,
 comment|/**      * Set operation.      *      *<p>Example:</p>      *<ul>      *<li><code>SELECT * FROM a UNION SELECT * FROM b</code></li>      *</ul>      */
 name|SETOP
@@ -125,6 +159,18 @@ name|IDENTIFIER
 argument_list|(
 literal|false
 argument_list|)
+block|,
+comment|/**      * Alias ("AS"). No indent.      */
+name|AS
+argument_list|(
+literal|false
+argument_list|)
+block|,
+comment|/**      * CASE expression.      */
+name|CASE
+block|,
+comment|/**      * Same behavior as user-defined frame type.      */
+name|OTHER
 block|;
 specifier|private
 specifier|final
@@ -212,6 +258,30 @@ argument_list|()
 return|;
 block|}
 block|}
+comment|/** Comma operator.    *    *<p>Defined in {@code SqlWriter} because it is only used while converting    * {@link SqlNode} to SQL;    * see {@link SqlWriter#list(FrameTypeEnum, SqlBinaryOperator, SqlNodeList)}.    *    *<p>The precedence of the comma operator is low but not zero. For    * instance, this ensures parentheses in    * {@code select x, (select * from foo order by z), y from t}. */
+name|SqlBinaryOperator
+name|COMMA
+init|=
+operator|new
+name|SqlBinaryOperator
+argument_list|(
+literal|","
+argument_list|,
+name|SqlKind
+operator|.
+name|OTHER
+argument_list|,
+literal|2
+argument_list|,
+literal|false
+argument_list|,
+literal|null
+argument_list|,
+literal|null
+argument_list|,
+literal|null
+argument_list|)
+decl_stmt|;
 comment|//~ Methods ----------------------------------------------------------------
 comment|/**    * Resets this writer so that it can format another expression. Does not    * affect formatting preferences (see {@link #resetSettings()}    */
 name|void
@@ -358,7 +428,7 @@ name|String
 name|close
 parameter_list|)
 function_decl|;
-comment|/**    * Starts a list with no opening string.    *    * @param frameType Type of list. For example, a SELECT list will be    */
+comment|/**    * Starts a list with no opening string.    *    * @param frameType Type of list. For example, a SELECT list will be    * governed according to SELECT-list formatting preferences.    */
 name|Frame
 name|startList
 parameter_list|(
@@ -386,6 +456,34 @@ name|endList
 parameter_list|(
 name|Frame
 name|frame
+parameter_list|)
+function_decl|;
+comment|/**    * Writes a list.    */
+name|SqlWriter
+name|list
+parameter_list|(
+name|FrameTypeEnum
+name|frameType
+parameter_list|,
+name|Consumer
+argument_list|<
+name|SqlWriter
+argument_list|>
+name|action
+parameter_list|)
+function_decl|;
+comment|/**    * Writes a list separated by a binary operator    * ({@link SqlStdOperatorTable#AND AND},    * {@link SqlStdOperatorTable#OR OR}, or    * {@link #COMMA COMMA}).    */
+name|SqlWriter
+name|list
+parameter_list|(
+name|FrameTypeEnum
+name|frameType
+parameter_list|,
+name|SqlBinaryOperator
+name|sepOp
+parameter_list|,
+name|SqlNodeList
+name|list
 parameter_list|)
 function_decl|;
 comment|/**    * Writes a list separator, unless the separator is "," and this is the    * first occurrence in the list.    *    * @param sep List separator, typically ",".    */

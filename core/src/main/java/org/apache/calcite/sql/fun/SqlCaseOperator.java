@@ -460,23 +460,6 @@ operator|new
 name|SqlCaseOperator
 argument_list|()
 decl_stmt|;
-specifier|private
-specifier|static
-specifier|final
-name|SqlWriter
-operator|.
-name|FrameType
-name|FRAME_TYPE
-init|=
-name|SqlWriter
-operator|.
-name|FrameTypeEnum
-operator|.
-name|create
-argument_list|(
-literal|"CASE"
-argument_list|)
-decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
 specifier|private
 name|SqlCaseOperator
@@ -1558,7 +1541,11 @@ name|writer
 operator|.
 name|startList
 argument_list|(
-name|FRAME_TYPE
+name|SqlWriter
+operator|.
+name|FrameTypeEnum
+operator|.
+name|CASE
 argument_list|,
 literal|"CASE"
 argument_list|,
