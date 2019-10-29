@@ -589,11 +589,11 @@ parameter_list|,
 name|CalciteSchema
 name|schema
 parameter_list|,
-name|SqlRexConvertletTable
-name|convertletTable
-parameter_list|,
 name|RelOptCluster
 name|cluster
+parameter_list|,
+name|SqlRexConvertletTable
+name|convertletTable
 parameter_list|)
 block|{
 name|super

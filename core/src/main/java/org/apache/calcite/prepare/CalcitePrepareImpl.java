@@ -5575,10 +5575,10 @@ name|catalogReader
 argument_list|,
 name|schema
 argument_list|,
+name|cluster
+argument_list|,
 name|createConvertletTable
 argument_list|()
-argument_list|,
-name|cluster
 argument_list|)
 decl_stmt|;
 name|materializer

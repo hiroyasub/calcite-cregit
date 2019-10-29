@@ -1104,6 +1104,16 @@ name|DEF
 argument_list|)
 expr_stmt|;
 block|}
+catch|catch
+parameter_list|(
+name|CyclicMetadataException
+name|e
+parameter_list|)
+block|{
+return|return
+literal|null
+return|;
+block|}
 block|}
 block|}
 comment|/**    * Returns the    * {@link BuiltInMetadata.RowCount#getRowCount()}    * statistic.    *    * @param rel the relational expression    * @return estimated row count, or null if no reliable estimate can be    * determined    */

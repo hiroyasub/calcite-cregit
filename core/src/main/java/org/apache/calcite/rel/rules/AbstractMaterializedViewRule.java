@@ -10236,6 +10236,17 @@ argument_list|(
 name|node
 argument_list|)
 decl_stmt|;
+if|if
+condition|(
+name|m
+operator|==
+literal|null
+condition|)
+block|{
+return|return
+literal|false
+return|;
+block|}
 for|for
 control|(
 name|Entry
