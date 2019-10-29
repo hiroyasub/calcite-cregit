@@ -617,13 +617,13 @@ name|Prefer
 operator|.
 name|ANY
 argument_list|,
+name|cluster
+argument_list|,
 name|BindableConvention
 operator|.
 name|INSTANCE
 argument_list|,
 name|convertletTable
-argument_list|,
-name|cluster
 argument_list|)
 expr_stmt|;
 block|}
