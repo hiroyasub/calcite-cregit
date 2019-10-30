@@ -785,19 +785,14 @@ parameter_list|)
 block|{
 comment|// Not a typical implementation of "explain". We don't gather terms&
 comment|// values to be printed later. We actually do the work.
-name|String
-name|s
-init|=
-name|getDescription
-argument_list|()
-decl_stmt|;
 name|pw
 operator|.
 name|item
 argument_list|(
 literal|"subset"
 argument_list|,
-name|s
+name|toString
+argument_list|()
 argument_list|)
 expr_stmt|;
 specifier|final

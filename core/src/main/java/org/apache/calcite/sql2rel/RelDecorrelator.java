@@ -9792,14 +9792,8 @@ argument_list|(
 literal|"{} are not unique keys for {}"
 argument_list|,
 name|rightJoinKeys
-operator|.
-name|toString
-argument_list|()
 argument_list|,
 name|right
-operator|.
-name|toString
-argument_list|()
 argument_list|)
 expr_stmt|;
 return|return;
@@ -10677,14 +10671,8 @@ argument_list|(
 literal|"{} are not unique keys for {}"
 argument_list|,
 name|correlatedJoinKeys
-operator|.
-name|toString
-argument_list|()
 argument_list|,
 name|left
-operator|.
-name|toString
-argument_list|()
 argument_list|)
 expr_stmt|;
 return|return;

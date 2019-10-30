@@ -4008,9 +4008,6 @@ argument_list|(
 literal|"subset [{}] is in wrong set [{}]"
 argument_list|,
 name|subset
-operator|.
-name|getDescription
-argument_list|()
 argument_list|,
 name|set
 argument_list|)
@@ -4051,16 +4048,10 @@ argument_list|(
 literal|"RelSubset [{}] does not contain its best RelNode [{}]"
 argument_list|,
 name|subset
-operator|.
-name|getDescription
-argument_list|()
 argument_list|,
 name|subset
 operator|.
 name|best
-operator|.
-name|getDescription
-argument_list|()
 argument_list|)
 return|;
 block|}
@@ -4100,9 +4091,6 @@ argument_list|(
 literal|"RelSubset ["
 operator|+
 name|subset
-operator|.
-name|getDescription
-argument_list|()
 operator|+
 literal|"] has wrong best cost "
 operator|+
@@ -4171,9 +4159,6 @@ operator|+
 literal|"best cost {} of subset [{}]"
 argument_list|,
 name|rel
-operator|.
-name|getDescription
-argument_list|()
 argument_list|,
 name|relCost
 argument_list|,
@@ -4182,9 +4167,6 @@ operator|.
 name|bestCost
 argument_list|,
 name|subset
-operator|.
-name|getDescription
-argument_list|()
 argument_list|)
 return|;
 block|}
@@ -5168,9 +5150,6 @@ argument_list|(
 literal|"Root: "
 operator|+
 name|root
-operator|.
-name|getDescription
-argument_list|()
 argument_list|)
 expr_stmt|;
 name|pw
@@ -5426,9 +5405,6 @@ argument_list|(
 literal|"\t"
 operator|+
 name|subset
-operator|.
-name|getDescription
-argument_list|()
 operator|+
 literal|", best="
 operator|+
@@ -5529,9 +5505,6 @@ argument_list|(
 literal|"\t\t"
 operator|+
 name|rel
-operator|.
-name|getDescription
-argument_list|()
 argument_list|)
 expr_stmt|;
 for|for
@@ -5976,7 +5949,7 @@ name|title
 init|=
 name|rel
 operator|.
-name|getDescription
+name|toString
 argument_list|()
 operator|.
 name|replace
@@ -6208,7 +6181,7 @@ name|pw
 argument_list|,
 name|subset
 operator|.
-name|getDescription
+name|toString
 argument_list|()
 argument_list|,
 literal|false
@@ -8221,9 +8194,6 @@ name|getId
 argument_list|()
 argument_list|,
 name|equivExp
-operator|.
-name|getDescription
-argument_list|()
 argument_list|)
 expr_stmt|;
 return|return
@@ -8531,14 +8501,8 @@ argument_list|(
 literal|"Register {} in {}"
 argument_list|,
 name|rel
-operator|.
-name|getDescription
-argument_list|()
 argument_list|,
 name|subset
-operator|.
-name|getDescription
-argument_list|()
 argument_list|)
 expr_stmt|;
 comment|// This relational expression may have been registered while we

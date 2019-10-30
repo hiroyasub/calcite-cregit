@@ -72,6 +72,9 @@ name|getRowType
 parameter_list|()
 function_decl|;
 comment|/**    * Returns a string which describes the relational expression and, unlike    * {@link #getDigest()}, also includes the identity. Typically returns    * "rel#{id}:{digest}".    *    * @return String which describes the relational expression and, unlike    *   {@link #getDigest()}, also includes the identity    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 name|String
 name|getDescription
 parameter_list|()

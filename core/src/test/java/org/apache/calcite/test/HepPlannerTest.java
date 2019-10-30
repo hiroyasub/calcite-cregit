@@ -735,7 +735,7 @@ literal|"best.getDescription()"
 argument_list|,
 name|best
 operator|.
-name|getDescription
+name|toString
 argument_list|()
 argument_list|,
 literal|"LogicalUnion"

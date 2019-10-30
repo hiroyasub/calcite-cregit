@@ -479,17 +479,12 @@ name|getPlannerTracer
 argument_list|()
 decl_stmt|;
 comment|//~ Instance fields --------------------------------------------------------
-comment|/**    * Description, consists of id plus digest.    */
-specifier|private
-name|String
-name|desc
-decl_stmt|;
 comment|/**    * Cached type of this relational expression.    */
 specifier|protected
 name|RelDataType
 name|rowType
 decl_stmt|;
-comment|/**    * A short description of this relational expression's type, inputs, and    * other properties. The string uniquely identifies the node; another node    * is equivalent if and only if it has the same value. Computed by    * {@link #computeDigest}, assigned by {@link #onRegister}, returned by    * {@link #getDigest()}.    *    * @see #desc    */
+comment|/**    * A short description of this relational expression's type, inputs, and    * other properties. The string uniquely identifies the node; another node    * is equivalent if and only if it has the same value. Computed by    * {@link #computeDigest}, assigned by {@link #onRegister}, returned by    * {@link #getDigest()}.    */
 specifier|protected
 name|String
 name|digest
@@ -561,12 +556,6 @@ operator|+
 literal|"#"
 operator|+
 name|id
-expr_stmt|;
-name|this
-operator|.
-name|desc
-operator|=
-name|digest
 expr_stmt|;
 name|LOGGER
 operator|.
@@ -1581,40 +1570,19 @@ name|String
 name|recomputeDigest
 parameter_list|()
 block|{
-name|String
-name|tempDigest
-init|=
+name|digest
+operator|=
 name|computeDigest
 argument_list|()
-decl_stmt|;
+expr_stmt|;
 assert|assert
-name|tempDigest
+name|digest
 operator|!=
 literal|null
 operator|:
 literal|"computeDigest() should be non-null"
 assert|;
-name|this
-operator|.
-name|desc
-operator|=
-literal|"rel#"
-operator|+
-name|id
-operator|+
-literal|":"
-operator|+
-name|tempDigest
-expr_stmt|;
-name|this
-operator|.
-name|digest
-operator|=
-name|tempDigest
-expr_stmt|;
 return|return
-name|this
-operator|.
 name|digest
 return|;
 block|}
@@ -1639,15 +1607,41 @@ name|this
 argument_list|)
 throw|;
 block|}
+comment|/* Description, consists of id plus digest */
 specifier|public
 name|String
 name|toString
 parameter_list|()
 block|{
+name|StringBuilder
+name|sb
+init|=
+operator|new
+name|StringBuilder
+argument_list|()
+decl_stmt|;
+name|sb
+operator|=
+name|RelOptUtil
+operator|.
+name|appendRelDescription
+argument_list|(
+name|sb
+argument_list|,
+name|this
+argument_list|)
+expr_stmt|;
 return|return
-name|desc
+name|sb
+operator|.
+name|toString
+argument_list|()
 return|;
 block|}
+comment|/* Description, consists of id plus digest */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 specifier|final
 name|String
@@ -1655,7 +1649,10 @@ name|getDescription
 parameter_list|()
 block|{
 return|return
-name|desc
+name|this
+operator|.
+name|toString
+argument_list|()
 return|;
 block|}
 specifier|public
