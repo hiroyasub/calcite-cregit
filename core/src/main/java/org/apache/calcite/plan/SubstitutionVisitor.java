@@ -3170,7 +3170,7 @@ operator|.
 name|getFieldList
 argument_list|()
 argument_list|,
-name|rel0
+name|rel1
 operator|.
 name|rowType
 operator|.
