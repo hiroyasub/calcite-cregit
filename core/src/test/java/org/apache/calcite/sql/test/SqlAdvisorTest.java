@@ -3467,6 +3467,25 @@ name|getSalesTables
 argument_list|()
 argument_list|)
 expr_stmt|;
+comment|// CALCITE-3474:SqlSimpleParser toke.s equals NullPointerException
+name|sql
+operator|=
+literal|"select ^ from (select * from sales.emp) as t"
+expr_stmt|;
+name|assertComplete
+argument_list|(
+name|sql
+argument_list|,
+name|getSelectKeywords
+argument_list|()
+argument_list|,
+name|tTable
+argument_list|,
+name|EMP_COLUMNS
+argument_list|,
+name|EXPR_KEYWORDS
+argument_list|)
+expr_stmt|;
 block|}
 annotation|@
 name|Test
