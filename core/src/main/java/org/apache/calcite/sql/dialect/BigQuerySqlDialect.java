@@ -957,7 +957,6 @@ name|UNION
 case|:
 if|if
 condition|(
-operator|!
 operator|(
 operator|(
 name|SqlSetOperator
@@ -971,6 +970,22 @@ operator|.
 name|isAll
 argument_list|()
 condition|)
+block|{
+name|super
+operator|.
+name|unparseCall
+argument_list|(
+name|writer
+argument_list|,
+name|call
+argument_list|,
+name|leftPrec
+argument_list|,
+name|rightPrec
+argument_list|)
+expr_stmt|;
+block|}
+else|else
 block|{
 name|SqlSyntax
 operator|.
@@ -996,7 +1011,6 @@ name|EXCEPT
 case|:
 if|if
 condition|(
-operator|!
 operator|(
 operator|(
 name|SqlSetOperator
@@ -1011,6 +1025,14 @@ name|isAll
 argument_list|()
 condition|)
 block|{
+throw|throw
+operator|new
+name|RuntimeException
+argument_list|(
+literal|"BigQuery does not support EXCEPT ALL"
+argument_list|)
+throw|;
+block|}
 name|SqlSyntax
 operator|.
 name|BINARY
@@ -1028,14 +1050,12 @@ argument_list|,
 name|rightPrec
 argument_list|)
 expr_stmt|;
-block|}
 break|break;
 case|case
 name|INTERSECT
 case|:
 if|if
 condition|(
-operator|!
 operator|(
 operator|(
 name|SqlSetOperator
@@ -1050,6 +1070,14 @@ name|isAll
 argument_list|()
 condition|)
 block|{
+throw|throw
+operator|new
+name|RuntimeException
+argument_list|(
+literal|"BigQuery does not support INTERSECT ALL"
+argument_list|)
+throw|;
+block|}
 name|SqlSyntax
 operator|.
 name|BINARY
@@ -1067,7 +1095,6 @@ argument_list|,
 name|rightPrec
 argument_list|)
 expr_stmt|;
-block|}
 break|break;
 default|default:
 name|super
@@ -1085,7 +1112,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/** BigQuery data type reference:    *<a href="https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types">    * Bigquery Standard SQL Data Types</a>    */
+comment|/** BigQuery data type reference:    *<a href="https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types">    * BigQuery Standard SQL Data Types</a>    */
 annotation|@
 name|Override
 specifier|public

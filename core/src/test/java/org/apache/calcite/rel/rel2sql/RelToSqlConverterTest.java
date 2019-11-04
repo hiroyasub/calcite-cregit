@@ -5103,7 +5103,54 @@ literal|"SELECT MOD(11, 3)\n"
 operator|+
 literal|"FROM foodmart.product\n"
 operator|+
-literal|"UNION DISTINCT\nSELECT 1\nFROM foodmart.product"
+literal|"UNION DISTINCT\n"
+operator|+
+literal|"SELECT 1\n"
+operator|+
+literal|"FROM foodmart.product"
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|withBigQuery
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testUnionAllOperatorForBigQuery
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|query
+init|=
+literal|"select mod(11,3) from \"product\"\n"
+operator|+
+literal|"UNION ALL select 1 from \"product\""
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT MOD(11, 3)\n"
+operator|+
+literal|"FROM foodmart.product\n"
+operator|+
+literal|"UNION ALL\n"
+operator|+
+literal|"SELECT 1\n"
+operator|+
+literal|"FROM foodmart.product"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -5142,7 +5189,11 @@ literal|"SELECT MOD(11, 3)\n"
 operator|+
 literal|"FROM foodmart.product\n"
 operator|+
-literal|"INTERSECT DISTINCT\nSELECT 1\nFROM foodmart.product"
+literal|"INTERSECT DISTINCT\n"
+operator|+
+literal|"SELECT 1\n"
+operator|+
+literal|"FROM foodmart.product"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -5181,7 +5232,11 @@ literal|"SELECT MOD(11, 3)\n"
 operator|+
 literal|"FROM foodmart.product\n"
 operator|+
-literal|"EXCEPT DISTINCT\nSELECT 1\nFROM foodmart.product"
+literal|"EXCEPT DISTINCT\n"
+operator|+
+literal|"SELECT 1\n"
+operator|+
+literal|"FROM foodmart.product"
 decl_stmt|;
 name|sql
 argument_list|(
