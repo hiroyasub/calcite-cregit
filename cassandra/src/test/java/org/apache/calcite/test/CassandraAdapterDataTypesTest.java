@@ -45,6 +45,16 @@ name|org
 operator|.
 name|junit
 operator|.
+name|Ignore
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|junit
+operator|.
 name|Test
 import|;
 end_import
@@ -94,7 +104,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Tests for the {@code org.apache.calcite.adapter.cassandra} package.  *  *<p>Will start embedded cassandra cluster and populate it from local {@code twissandra.cql} file.  * All configuration files are located in test classpath.  *  *<p>Note that tests will be skipped if running on JDK11+  * (which is not yet supported by cassandra) see  *<a href="https://issues.apache.org/jira/browse/CASSANDRA-9608">CASSANDRA-9608</a>.  *  */
+comment|/**  * Tests for the {@code org.apache.calcite.adapter.cassandra} package related to data types.  *  *<p>Will start embedded cassandra cluster and populate it from local {@code datatypes.cql} file.  * All configuration files are located in test classpath.  *  *<p>Note that tests will be skipped if running on JDK11+  * (which is not yet supported by cassandra) see  *<a href="https://issues.apache.org/jira/browse/CASSANDRA-9608">CASSANDRA-9608</a>.  *  */
 end_comment
 
 begin_class
@@ -107,7 +117,7 @@ name|SAME_THREAD
 argument_list|)
 specifier|public
 class|class
-name|CassandraAdapterTest
+name|CassandraAdapterDataTypesTest
 extends|extends
 name|AbstractCassandraAdapterTest
 block|{
@@ -121,7 +131,7 @@ name|RULE
 init|=
 name|initCassandraIfEnabled
 argument_list|(
-literal|"twissandra.cql"
+literal|"datatypes.cql"
 argument_list|)
 decl_stmt|;
 comment|/** Connection factory based on the "mongo-zips" model. */
@@ -134,18 +144,18 @@ name|String
 argument_list|,
 name|String
 argument_list|>
-name|TWISSANDRA
+name|DTCASSANDRA
 init|=
 name|getDataset
 argument_list|(
-literal|"/model.json"
+literal|"/model-datatypes.json"
 argument_list|)
 decl_stmt|;
 annotation|@
 name|Test
 specifier|public
 name|void
-name|testSelect
+name|testSimpleTypesRowType
 parameter_list|()
 block|{
 name|CalciteAssert
@@ -155,17 +165,55 @@ argument_list|()
 operator|.
 name|with
 argument_list|(
-name|TWISSANDRA
+name|DTCASSANDRA
 argument_list|)
 operator|.
 name|query
 argument_list|(
-literal|"select * from \"users\""
+literal|"select * from \"test_simple\""
 argument_list|)
 operator|.
-name|returnsCount
+name|typeIs
 argument_list|(
-literal|10
+literal|"[f_int INTEGER"
+operator|+
+literal|", f_ascii VARCHAR"
+operator|+
+literal|", f_bigint BIGINT"
+operator|+
+literal|", f_blob VARBINARY"
+operator|+
+literal|", f_boolean BOOLEAN"
+operator|+
+literal|", f_date DATE"
+operator|+
+literal|", f_decimal DOUBLE"
+operator|+
+literal|", f_double DOUBLE"
+operator|+
+literal|", f_duration ANY"
+operator|+
+literal|", f_float REAL"
+operator|+
+literal|", f_inet ANY"
+operator|+
+literal|", f_smallint SMALLINT"
+operator|+
+literal|", f_text VARCHAR"
+operator|+
+literal|", f_time BIGINT"
+operator|+
+literal|", f_timestamp TIMESTAMP"
+operator|+
+literal|", f_timeuuid CHAR"
+operator|+
+literal|", f_tinyint TINYINT"
+operator|+
+literal|", f_uuid CHAR"
+operator|+
+literal|", f_varchar VARCHAR"
+operator|+
+literal|", f_varint INTEGER]"
 argument_list|)
 expr_stmt|;
 block|}
@@ -173,7 +221,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testFilter
+name|testSimpleTypesValues
 parameter_list|()
 block|{
 name|CalciteAssert
@@ -183,33 +231,55 @@ argument_list|()
 operator|.
 name|with
 argument_list|(
-name|TWISSANDRA
+name|DTCASSANDRA
 argument_list|)
 operator|.
 name|query
 argument_list|(
-literal|"select * from \"userline\" where \"username\"='!PUBLIC!'"
-argument_list|)
-operator|.
-name|limit
-argument_list|(
-literal|1
+literal|"select * from \"test_simple\""
 argument_list|)
 operator|.
 name|returns
 argument_list|(
-literal|"username=!PUBLIC!; time=e8754000-80b8-1fe9-8e73-e3698c967ddd; "
+literal|"f_int=0"
 operator|+
-literal|"tweet_id=f3c329de-d05b-11e5-b58b-90e2ba530b12\n"
-argument_list|)
-operator|.
-name|explainContains
-argument_list|(
-literal|"PLAN=CassandraToEnumerableConverter\n"
+literal|"; f_ascii=abcdefg"
 operator|+
-literal|"  CassandraFilter(condition=[=($0, '!PUBLIC!')])\n"
+literal|"; f_bigint=3000000000"
 operator|+
-literal|"    CassandraTableScan(table=[[twissandra, userline]]"
+literal|"; f_blob=20"
+operator|+
+literal|"; f_boolean=true"
+operator|+
+literal|"; f_date=2015-05-03"
+operator|+
+literal|"; f_decimal=2.1"
+operator|+
+literal|"; f_double=2.0"
+operator|+
+literal|"; f_duration=89h9m9s"
+operator|+
+literal|"; f_float=5.1"
+operator|+
+literal|"; f_inet=/192.168.0.1"
+operator|+
+literal|"; f_smallint=5"
+operator|+
+literal|"; f_text=abcdefg"
+operator|+
+literal|"; f_time=48654234000000"
+operator|+
+literal|"; f_timestamp=2011-02-03 04:05:00"
+operator|+
+literal|"; f_timeuuid=8ac6d1dc-fbeb-11e9-8f0b-362b9e155667"
+operator|+
+literal|"; f_tinyint=0"
+operator|+
+literal|"; f_uuid=123e4567-e89b-12d3-a456-426655440000"
+operator|+
+literal|"; f_varchar=abcdefg"
+operator|+
+literal|"; f_varint=10\n"
 argument_list|)
 expr_stmt|;
 block|}
@@ -217,7 +287,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testFilterUUID
+name|testCounterRowType
 parameter_list|()
 block|{
 name|CalciteAssert
@@ -227,33 +297,45 @@ argument_list|()
 operator|.
 name|with
 argument_list|(
-name|TWISSANDRA
+name|DTCASSANDRA
 argument_list|)
 operator|.
 name|query
 argument_list|(
-literal|"select * from \"tweets\" where \"tweet_id\"='f3cd759c-d05b-11e5-b58b-90e2ba530b12'"
+literal|"select * from \"test_counter\""
 argument_list|)
 operator|.
-name|limit
+name|typeIs
 argument_list|(
-literal|1
+literal|"[f_int INTEGER, f_counter BIGINT]"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testCounterValues
+parameter_list|()
+block|{
+name|CalciteAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|DTCASSANDRA
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select * from \"test_counter\""
 argument_list|)
 operator|.
 name|returns
 argument_list|(
-literal|"tweet_id=f3cd759c-d05b-11e5-b58b-90e2ba530b12; "
-operator|+
-literal|"body=Lacus augue pede posuere.; username=JmuhsAaMdw\n"
-argument_list|)
-operator|.
-name|explainContains
-argument_list|(
-literal|"PLAN=CassandraToEnumerableConverter\n"
-operator|+
-literal|"  CassandraFilter(condition=[=(CAST($0):CHAR(36), 'f3cd759c-d05b-11e5-b58b-90e2ba530b12')])\n"
-operator|+
-literal|"    CassandraTableScan(table=[[twissandra, tweets]]"
+literal|"f_int=1; f_counter=1\n"
 argument_list|)
 expr_stmt|;
 block|}
@@ -261,7 +343,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testSort
+name|testCollectionsRowType
 parameter_list|()
 block|{
 name|CalciteAssert
@@ -271,26 +353,25 @@ argument_list|()
 operator|.
 name|with
 argument_list|(
-name|TWISSANDRA
+name|DTCASSANDRA
 argument_list|)
 operator|.
 name|query
 argument_list|(
-literal|"select * from \"userline\" where \"username\" = '!PUBLIC!' order by \"time\" desc"
+literal|"select * from \"test_collections\""
 argument_list|)
 operator|.
-name|returnsCount
+name|typeIs
 argument_list|(
-literal|146
-argument_list|)
-operator|.
-name|explainContains
-argument_list|(
-literal|"PLAN=CassandraToEnumerableConverter\n"
+literal|"[f_int INTEGER"
 operator|+
-literal|"  CassandraSort(sort0=[$1], dir0=[DESC])\n"
+literal|", f_list INTEGER ARRAY"
 operator|+
-literal|"    CassandraFilter(condition=[=($0, '!PUBLIC!')])\n"
+literal|", f_map (VARCHAR, VARCHAR) MAP"
+operator|+
+literal|", f_set DOUBLE MULTISET"
+operator|+
+literal|", f_tuple STRUCT]"
 argument_list|)
 expr_stmt|;
 block|}
@@ -298,7 +379,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testProject
+name|testCollectionsValues
 parameter_list|()
 block|{
 name|CalciteAssert
@@ -308,30 +389,27 @@ argument_list|()
 operator|.
 name|with
 argument_list|(
-name|TWISSANDRA
+name|DTCASSANDRA
 argument_list|)
 operator|.
 name|query
 argument_list|(
-literal|"select \"tweet_id\" from \"userline\" where \"username\" = '!PUBLIC!' limit 2"
+literal|"select * from \"test_collections\""
 argument_list|)
 operator|.
 name|returns
 argument_list|(
-literal|"tweet_id=f3c329de-d05b-11e5-b58b-90e2ba530b12\n"
+literal|"f_int=0"
 operator|+
-literal|"tweet_id=f3dbb03a-d05b-11e5-b58b-90e2ba530b12\n"
-argument_list|)
-operator|.
-name|explainContains
-argument_list|(
-literal|"PLAN=CassandraToEnumerableConverter\n"
+literal|"; f_list=[1, 2, 3]"
 operator|+
-literal|"  CassandraLimit(fetch=[2])\n"
+literal|"; f_map={k1=v1, k2=v2}"
 operator|+
-literal|"    CassandraProject(tweet_id=[$2])\n"
+literal|"; f_set=[2.0, 3.1]"
 operator|+
-literal|"      CassandraFilter(condition=[=($0, '!PUBLIC!')])\n"
+literal|"; f_tuple={3000000000, 30ff87, 2015-05-03 13:30:54.234}"
+operator|+
+literal|"\n"
 argument_list|)
 expr_stmt|;
 block|}
@@ -339,7 +417,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testProjectAlias
+name|testCollectionsInnerRowType
 parameter_list|()
 block|{
 name|CalciteAssert
@@ -349,27 +427,93 @@ argument_list|()
 operator|.
 name|with
 argument_list|(
-name|TWISSANDRA
+name|DTCASSANDRA
 argument_list|)
 operator|.
 name|query
 argument_list|(
-literal|"select \"tweet_id\" as \"foo\" from \"userline\" "
+literal|"select \"f_list\"[1], "
 operator|+
-literal|"where \"username\" = '!PUBLIC!' limit 1"
+literal|"\"f_map\"['k1'], "
+operator|+
+literal|"\"f_tuple\"['1'], "
+operator|+
+literal|"\"f_tuple\"['2'], "
+operator|+
+literal|"\"f_tuple\"['3']"
+operator|+
+literal|" from \"test_collections\""
+argument_list|)
+operator|.
+name|typeIs
+argument_list|(
+literal|"[EXPR$0 INTEGER"
+operator|+
+literal|", EXPR$1 VARCHAR"
+operator|+
+literal|", EXPR$2 BIGINT"
+operator|+
+literal|", EXPR$3 VARBINARY"
+operator|+
+literal|", EXPR$4 TIMESTAMP]"
+argument_list|)
+expr_stmt|;
+block|}
+comment|// ignored as tuple elements returns 'null' when accessed in the select statement
+annotation|@
+name|Ignore
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testCollectionsInnerValues
+parameter_list|()
+block|{
+name|CalciteAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|DTCASSANDRA
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select \"f_list\"[1], "
+operator|+
+literal|"\"f_map\"['k1'], "
+operator|+
+literal|"\"f_tuple\"['1'], "
+operator|+
+literal|"\"f_tuple\"['2'], "
+operator|+
+literal|"\"f_tuple\"['3']"
+operator|+
+literal|" from \"test_collections\""
 argument_list|)
 operator|.
 name|returns
 argument_list|(
-literal|"foo=f3c329de-d05b-11e5-b58b-90e2ba530b12\n"
+literal|"EXPR$0=1"
+operator|+
+literal|"; EXPR$1=v1"
+operator|+
+literal|"; EXPR$2=3000000000"
+operator|+
+literal|"; EXPR$3=30ff87"
+operator|+
+literal|"; EXPR$4=2015-05-03 13:30:54.234"
 argument_list|)
 expr_stmt|;
 block|}
+comment|// frozen collections should not affect the row type
 annotation|@
 name|Test
 specifier|public
 name|void
-name|testProjectConstant
+name|testFrozenCollectionsRowType
 parameter_list|()
 block|{
 name|CalciteAssert
@@ -379,147 +523,65 @@ argument_list|()
 operator|.
 name|with
 argument_list|(
-name|TWISSANDRA
+name|DTCASSANDRA
 argument_list|)
 operator|.
 name|query
 argument_list|(
-literal|"select 'foo' as \"bar\" from \"userline\" limit 1"
+literal|"select * from \"test_frozen_collections\""
+argument_list|)
+operator|.
+name|typeIs
+argument_list|(
+literal|"[f_int INTEGER"
+operator|+
+literal|", f_list INTEGER ARRAY"
+operator|+
+literal|", f_map (VARCHAR, VARCHAR) MAP"
+operator|+
+literal|", f_set DOUBLE MULTISET"
+operator|+
+literal|", f_tuple STRUCT]"
+argument_list|)
+expr_stmt|;
+comment|// we should test (BIGINT, VARBINARY, TIMESTAMP) STRUCT but inner types are not exposed
+block|}
+comment|// frozen collections should not affect the result set
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testFrozenCollectionsValues
+parameter_list|()
+block|{
+name|CalciteAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|DTCASSANDRA
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select * from \"test_frozen_collections\""
 argument_list|)
 operator|.
 name|returns
 argument_list|(
-literal|"bar=foo\n"
-argument_list|)
-expr_stmt|;
-block|}
-annotation|@
-name|Test
-specifier|public
-name|void
-name|testLimit
-parameter_list|()
-block|{
-name|CalciteAssert
-operator|.
-name|that
-argument_list|()
-operator|.
-name|with
-argument_list|(
-name|TWISSANDRA
-argument_list|)
-operator|.
-name|query
-argument_list|(
-literal|"select \"tweet_id\" from \"userline\" where \"username\" = '!PUBLIC!' limit 8"
-argument_list|)
-operator|.
-name|explainContains
-argument_list|(
-literal|"CassandraLimit(fetch=[8])\n"
-argument_list|)
-expr_stmt|;
-block|}
-annotation|@
-name|Test
-specifier|public
-name|void
-name|testSortLimit
-parameter_list|()
-block|{
-name|CalciteAssert
-operator|.
-name|that
-argument_list|()
-operator|.
-name|with
-argument_list|(
-name|TWISSANDRA
-argument_list|)
-operator|.
-name|query
-argument_list|(
-literal|"select * from \"userline\" where \"username\"='!PUBLIC!' "
+literal|"f_int=0"
 operator|+
-literal|"order by \"time\" desc limit 10"
-argument_list|)
-operator|.
-name|explainContains
-argument_list|(
-literal|"  CassandraLimit(fetch=[10])\n"
+literal|"; f_list=[1, 2, 3]"
 operator|+
-literal|"    CassandraSort(sort0=[$1], dir0=[DESC])"
-argument_list|)
-expr_stmt|;
-block|}
-annotation|@
-name|Test
-specifier|public
-name|void
-name|testSortOffset
-parameter_list|()
-block|{
-name|CalciteAssert
-operator|.
-name|that
-argument_list|()
-operator|.
-name|with
-argument_list|(
-name|TWISSANDRA
-argument_list|)
-operator|.
-name|query
-argument_list|(
-literal|"select \"tweet_id\" from \"userline\" where "
+literal|"; f_map={k1=v1, k2=v2}"
 operator|+
-literal|"\"username\"='!PUBLIC!' limit 2 offset 1"
-argument_list|)
-operator|.
-name|explainContains
-argument_list|(
-literal|"CassandraLimit(offset=[1], fetch=[2])"
-argument_list|)
-operator|.
-name|returns
-argument_list|(
-literal|"tweet_id=f3dbb03a-d05b-11e5-b58b-90e2ba530b12\n"
+literal|"; f_set=[2.0, 3.1]"
 operator|+
-literal|"tweet_id=f3e4182e-d05b-11e5-b58b-90e2ba530b12\n"
-argument_list|)
-expr_stmt|;
-block|}
-annotation|@
-name|Test
-specifier|public
-name|void
-name|testMaterializedView
-parameter_list|()
-block|{
-name|CalciteAssert
-operator|.
-name|that
-argument_list|()
-operator|.
-name|with
-argument_list|(
-name|TWISSANDRA
-argument_list|)
-operator|.
-name|query
-argument_list|(
-literal|"select \"tweet_id\" from \"tweets\" where \"username\"='JmuhsAaMdw'"
-argument_list|)
-operator|.
-name|enableMaterializations
-argument_list|(
-literal|true
-argument_list|)
-operator|.
-name|explainContains
-argument_list|(
-literal|"CassandraTableScan(table=[[twissandra, Tweets_By_User]])"
+literal|"; f_tuple={3000000000, 30ff87, 2015-05-03 13:30:54.234}"
+operator|+
+literal|"\n"
 argument_list|)
 expr_stmt|;
 block|}
