@@ -4065,6 +4065,18 @@ name|query
 init|=
 literal|"select cast(cast(\"employee_id\" as varchar) as bigint), "
 operator|+
+literal|"cast(cast(\"employee_id\" as varchar) as smallint), "
+operator|+
+literal|"cast(cast(\"employee_id\" as varchar) as tinyint), "
+operator|+
+literal|"cast(cast(\"employee_id\" as varchar) as integer), "
+operator|+
+literal|"cast(cast(\"employee_id\" as varchar) as float), "
+operator|+
+literal|"cast(cast(\"employee_id\" as varchar) as char), "
+operator|+
+literal|"cast(cast(\"employee_id\" as varchar) as binary), "
+operator|+
 literal|"cast(cast(\"employee_id\" as varchar) as varbinary), "
 operator|+
 literal|"cast(cast(\"employee_id\" as varchar) as timestamp), "
@@ -4086,6 +4098,18 @@ name|String
 name|expected
 init|=
 literal|"SELECT CAST(CAST(employee_id AS STRING) AS INT64), "
+operator|+
+literal|"CAST(CAST(employee_id AS STRING) AS INT64), "
+operator|+
+literal|"CAST(CAST(employee_id AS STRING) AS INT64), "
+operator|+
+literal|"CAST(CAST(employee_id AS STRING) AS INT64), "
+operator|+
+literal|"CAST(CAST(employee_id AS STRING) AS FLOAT64), "
+operator|+
+literal|"CAST(CAST(employee_id AS STRING) AS STRING), "
+operator|+
+literal|"CAST(CAST(employee_id AS STRING) AS BYTES), "
 operator|+
 literal|"CAST(CAST(employee_id AS STRING) AS BYTES), "
 operator|+
@@ -15071,7 +15095,7 @@ literal|"SELECT employee_id\n"
 operator|+
 literal|"FROM foodmart.employee\n"
 operator|+
-literal|"WHERE 10 = CAST('10' AS INTEGER) AND birth_date = '1914-02-02' OR hire_date = "
+literal|"WHERE 10 = CAST('10' AS INT64) AND birth_date = '1914-02-02' OR hire_date = "
 operator|+
 literal|"CAST('1996-01-01 ' || '00:00:00' AS TIMESTAMP)"
 decl_stmt|;

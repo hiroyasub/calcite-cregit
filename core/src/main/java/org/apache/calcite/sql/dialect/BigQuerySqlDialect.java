@@ -1139,8 +1139,18 @@ name|getSqlTypeName
 argument_list|()
 condition|)
 block|{
+comment|// BigQuery only supports INT64 for integer types.
 case|case
 name|BIGINT
+case|:
+case|case
+name|INTEGER
+case|:
+case|case
+name|TINYINT
+case|:
+case|case
+name|SMALLINT
 case|:
 return|return
 name|createSqlDataTypeSpecByName
@@ -1148,6 +1158,10 @@ argument_list|(
 literal|"INT64"
 argument_list|)
 return|;
+comment|// BigQuery only supports FLOAT64(aka. Double) for floating point types.
+case|case
+name|FLOAT
+case|:
 case|case
 name|DOUBLE
 case|:
@@ -1176,6 +1190,9 @@ literal|"BOOL"
 argument_list|)
 return|;
 case|case
+name|CHAR
+case|:
+case|case
 name|VARCHAR
 case|:
 return|return
@@ -1186,6 +1203,9 @@ argument_list|)
 return|;
 case|case
 name|VARBINARY
+case|:
+case|case
+name|BINARY
 case|:
 return|return
 name|createSqlDataTypeSpecByName
