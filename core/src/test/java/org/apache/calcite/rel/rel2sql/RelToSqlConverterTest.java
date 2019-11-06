@@ -621,6 +621,20 @@ name|calcite
 operator|.
 name|test
 operator|.
+name|MockSqlOperatorTable
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|test
+operator|.
 name|RelBuilderTest
 import|;
 end_import
@@ -1075,6 +1089,26 @@ name|programs
 parameter_list|)
 block|{
 specifier|final
+name|MockSqlOperatorTable
+name|operatorTable
+init|=
+operator|new
+name|MockSqlOperatorTable
+argument_list|(
+name|SqlStdOperatorTable
+operator|.
+name|instance
+argument_list|()
+argument_list|)
+decl_stmt|;
+name|MockSqlOperatorTable
+operator|.
+name|addRamp
+argument_list|(
+name|operatorTable
+argument_list|)
+expr_stmt|;
+specifier|final
 name|FrameworkConfig
 name|config
 init|=
@@ -1106,6 +1140,11 @@ operator|.
 name|programs
 argument_list|(
 name|programs
+argument_list|)
+operator|.
+name|operatorTable
+argument_list|(
+name|operatorTable
 argument_list|)
 operator|.
 name|build
@@ -15941,6 +15980,120 @@ operator|.
 name|ok
 argument_list|(
 name|expected5
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testTableFunctionScan
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|query
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM TABLE(DEDUP(CURSOR(select \"product_id\", \"product_name\"\n"
+operator|+
+literal|"from \"product\"), CURSOR(select  \"employee_id\", \"full_name\"\n"
+operator|+
+literal|"from \"employee\"), 'NAME'))"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM TABLE(DEDUP(CURSOR ((SELECT \"product_id\", \"product_name\"\n"
+operator|+
+literal|"FROM \"foodmart\".\"product\")), CURSOR ((SELECT \"employee_id\", \"full_name\"\n"
+operator|+
+literal|"FROM \"foodmart\".\"employee\")), 'NAME'))"
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+specifier|final
+name|String
+name|query2
+init|=
+literal|"select * from table(ramp(3))"
+decl_stmt|;
+name|sql
+argument_list|(
+name|query2
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+literal|"SELECT *\n"
+operator|+
+literal|"FROM TABLE(RAMP(3))"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testTableFunctionScanWithComplexQuery
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|query
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM TABLE(DEDUP(CURSOR(select \"product_id\", \"product_name\"\n"
+operator|+
+literal|"from \"product\"\n"
+operator|+
+literal|"where \"net_weight\"> 100 and \"product_name\" = 'Hello World')\n"
+operator|+
+literal|",CURSOR(select  \"employee_id\", \"full_name\"\n"
+operator|+
+literal|"from \"employee\"\n"
+operator|+
+literal|"group by \"employee_id\", \"full_name\"), 'NAME'))"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM TABLE(DEDUP(CURSOR ((SELECT \"product_id\", \"product_name\"\n"
+operator|+
+literal|"FROM \"foodmart\".\"product\"\n"
+operator|+
+literal|"WHERE \"net_weight\"> 100 AND \"product_name\" = 'Hello World')), "
+operator|+
+literal|"CURSOR ((SELECT \"employee_id\", \"full_name\"\n"
+operator|+
+literal|"FROM \"foodmart\".\"employee\"\n"
+operator|+
+literal|"GROUP BY \"employee_id\", \"full_name\")), 'NAME'))"
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
 argument_list|)
 expr_stmt|;
 block|}
