@@ -761,7 +761,7 @@ name|Assert
 operator|.
 name|assertEquals
 argument_list|(
-literal|19
+literal|11
 argument_list|,
 name|dataType
 operator|.

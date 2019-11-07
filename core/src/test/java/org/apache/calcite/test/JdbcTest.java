@@ -7668,6 +7668,41 @@ literal|"C=2011-09-01 00:00:00\n"
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3435">[CALCITE-3435]    * Enable decimal modulus operation to allow numeric with non-zero scale</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testModOperation
+parameter_list|()
+block|{
+name|CalciteAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|query
+argument_list|(
+literal|"select mod(33.5, 7) as c0, floor(mod(33.5, 7)) as c1, "
+operator|+
+literal|"mod(11, 3.2) as c2, floor(mod(11, 3.2)) as c3,"
+operator|+
+literal|"mod(12, 3) as c4, floor(mod(12, 3)) as c5"
+argument_list|)
+operator|.
+name|typeIs
+argument_list|(
+literal|"[C0 DECIMAL NOT NULL, C1 DECIMAL NOT NULL, C2 DECIMAL NOT NULL, "
+operator|+
+literal|"C3 DECIMAL NOT NULL, C4 INTEGER NOT NULL, C5 INTEGER NOT NULL]"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"C0=5.5; C1=5; C2=1.4; C3=1; C4=0; C5=0\n"
+argument_list|)
+expr_stmt|;
+block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-387">[CALCITE-387]    * CompileException when cast TRUE to nullable boolean</a>. */
 annotation|@
 name|Test

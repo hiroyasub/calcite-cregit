@@ -6363,7 +6363,7 @@ block|}
 comment|// temporary
 specifier|public
 specifier|static
-name|int
+name|BigDecimal
 name|mod
 parameter_list|(
 name|int
@@ -6376,12 +6376,14 @@ block|{
 return|return
 name|mod
 argument_list|(
+name|BigDecimal
+operator|.
+name|valueOf
+argument_list|(
 name|b0
+argument_list|)
 argument_list|,
 name|b1
-operator|.
-name|intValue
-argument_list|()
 argument_list|)
 return|;
 block|}
