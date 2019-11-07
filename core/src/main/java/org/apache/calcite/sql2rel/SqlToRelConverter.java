@@ -2561,16 +2561,6 @@ name|java
 operator|.
 name|util
 operator|.
-name|LinkedHashSet
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
 name|List
 import|;
 end_import
@@ -21374,14 +21364,14 @@ decl_stmt|;
 comment|/**      * List of<code>IN</code> and<code>EXISTS</code> nodes inside this      *<code>SELECT</code> statement (but not inside sub-queries).      */
 specifier|private
 specifier|final
-name|Set
+name|List
 argument_list|<
 name|SubQuery
 argument_list|>
 name|subQueryList
 init|=
 operator|new
-name|LinkedHashSet
+name|ArrayList
 argument_list|<>
 argument_list|()
 decl_stmt|;
@@ -22832,19 +22822,6 @@ argument_list|()
 decl_stmt|;
 if|if
 condition|(
-name|rowType
-operator|==
-literal|null
-condition|)
-block|{
-comment|// TODO:  remove this once leastRestrictive
-comment|// is correctly implemented
-return|return
-literal|null
-return|;
-block|}
-if|if
-condition|(
 name|fieldOffset
 operator|<
 name|rowType
@@ -22873,11 +22850,9 @@ name|getFieldCount
 argument_list|()
 expr_stmt|;
 block|}
-throw|throw
-operator|new
-name|AssertionError
-argument_list|()
-throw|;
+return|return
+literal|null
+return|;
 block|}
 specifier|public
 name|void
@@ -23019,20 +22994,15 @@ range|:
 name|subQueryList
 control|)
 block|{
+comment|// Compare the reference to make sure the matched node has
+comment|// exact scope where it belongs.
 if|if
 condition|(
 name|node
-operator|.
-name|equalsDeep
-argument_list|(
+operator|==
 name|subQuery
 operator|.
 name|node
-argument_list|,
-name|Litmus
-operator|.
-name|IGNORE
-argument_list|)
 condition|)
 block|{
 return|return;
@@ -23067,20 +23037,15 @@ range|:
 name|subQueryList
 control|)
 block|{
+comment|// Compare the reference to make sure the matched node has
+comment|// exact scope where it belongs.
 if|if
 condition|(
 name|expr
-operator|.
-name|equalsDeep
-argument_list|(
+operator|==
 name|subQuery
 operator|.
 name|node
-argument_list|,
-name|Litmus
-operator|.
-name|IGNORE
-argument_list|)
 condition|)
 block|{
 return|return

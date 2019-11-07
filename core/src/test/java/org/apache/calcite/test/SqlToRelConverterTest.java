@@ -12816,6 +12816,43 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+comment|/** Test case for:    *<a href="https://issues.apache.org/jira/browse/CALCITE-3456">[CALCITE-3456]    * AssertionError throws when aggregation same digest in subquery in same scope</a>.    */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testAggregateWithSameDigestInSubQueries
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select\n"
+operator|+
+literal|"  CASE WHEN job IN ('810000', '820000') THEN job\n"
+operator|+
+literal|"  ELSE 'error'\n"
+operator|+
+literal|"  END AS job_name,\n"
+operator|+
+literal|"  count(empno)\n"
+operator|+
+literal|"FROM emp\n"
+operator|+
+literal|"where job<> '' or job IN ('810000', '820000')\n"
+operator|+
+literal|"GROUP by deptno, job"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
 comment|/**    * Visitor that checks that every {@link RelNode} in a tree is valid.    *    * @see RelNode#isValid(Litmus, RelNode.Context)    */
 specifier|public
 specifier|static
