@@ -3637,6 +3637,32 @@ argument_list|()
 argument_list|)
 return|;
 block|}
+comment|/** SQL<code>=</code> operator applied to Object[] values (neither may be    * null). */
+specifier|public
+specifier|static
+name|boolean
+name|eq
+parameter_list|(
+name|Object
+index|[]
+name|b0
+parameter_list|,
+name|Object
+index|[]
+name|b1
+parameter_list|)
+block|{
+return|return
+name|Arrays
+operator|.
+name|deepEquals
+argument_list|(
+name|b0
+argument_list|,
+name|b1
+argument_list|)
+return|;
+block|}
 comment|/** SQL<code>=</code> operator applied to Object values (including String;    * neither side may be null). */
 specifier|public
 specifier|static
