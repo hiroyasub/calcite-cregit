@@ -446,7 +446,7 @@ operator|.
 name|INSTANCE
 argument_list|)
 expr_stmt|;
-name|setMetadataQuery
+name|setMetadataQuerySupplier
 argument_list|(
 name|RelMetadataQuery
 operator|::
@@ -655,10 +655,10 @@ return|return
 name|metadataFactory
 return|;
 block|}
-comment|/**    * Set up the customized {@link RelMetadataQuery} instance that to use during rule planning.    *    *<p>Note that the {@code mqSupplier} should return    * a fresh new {@link RelMetadataQuery} instance because the instance would be    * cached in this cluster, and we may invalidate and re-generate it    * for each {@link RelOptRuleCall} cycle.    */
+comment|/**    * Set up the customized {@link RelMetadataQuery} instance supplier that to    * use during rule planning.    *    *<p>Note that the {@code mqSupplier} should return    * a fresh new {@link RelMetadataQuery} instance because the instance would be    * cached in this cluster, and we may invalidate and re-generate it    * for each {@link RelOptRuleCall} cycle.    */
 specifier|public
 name|void
-name|setMetadataQuery
+name|setMetadataQuerySupplier
 parameter_list|(
 name|Supplier
 argument_list|<
@@ -708,6 +708,21 @@ operator|(
 name|M
 operator|)
 name|mq
+return|;
+block|}
+comment|/**    * Returns the RelMetadataQuery supplier    * @return The supplier of RelMetadataQuery    */
+specifier|public
+name|Supplier
+argument_list|<
+name|RelMetadataQuery
+argument_list|>
+name|getMetadataQuerySupplier
+parameter_list|()
+block|{
+return|return
+name|this
+operator|.
+name|mqSupplier
 return|;
 block|}
 comment|/**    * Should be called whenever the current {@link RelMetadataQuery} becomes    * invalid. Typically invoked from {@link RelOptRuleCall#transformTo}.    */

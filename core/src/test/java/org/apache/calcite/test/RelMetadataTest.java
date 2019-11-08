@@ -6816,7 +6816,7 @@ argument_list|)
 expr_stmt|;
 name|cluster
 operator|.
-name|setMetadataQuery
+name|setMetadataQuerySupplier
 argument_list|(
 name|MyRelMetadataQuery
 operator|::
@@ -7632,7 +7632,7 @@ argument_list|)
 expr_stmt|;
 name|cluster
 operator|.
-name|setMetadataQuery
+name|setMetadataQuerySupplier
 argument_list|(
 name|MyRelMetadataQuery
 operator|::
