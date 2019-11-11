@@ -145,16 +145,6 @@ name|org
 operator|.
 name|hamcrest
 operator|.
-name|Factory
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|hamcrest
-operator|.
 name|Matcher
 import|;
 end_import
@@ -723,8 +713,6 @@ argument_list|)
 return|;
 block|}
 comment|/**    * Creates a matcher that matches when the examined object is within    * {@code epsilon} of the specified<code>operand</code>.    */
-annotation|@
-name|Factory
 specifier|public
 specifier|static
 parameter_list|<
@@ -870,8 +858,6 @@ argument_list|)
 return|;
 block|}
 comment|/**    * Creates a Matcher that matches when the examined string is equal to the    * specified {@code value} when all Windows-style line endings ("\r\n")    * have been converted to Unix-style line endings ("\n").    *    *<p>Thus, if {@code foo()} is a function that returns "hello{newline}world"    * in the current operating system's line endings, then    *    *<blockquote>    *   assertThat(foo(), isLinux("hello\nworld"));    *</blockquote>    *    *<p>will succeed on all platforms.    *    * @see Util#toLinux(String)    */
-annotation|@
-name|Factory
 specifier|public
 specifier|static
 name|Matcher
@@ -913,8 +899,6 @@ argument_list|)
 return|;
 block|}
 comment|/**    * Creates a Matcher that matches a {@link RelNode} if its string    * representation, after converting Windows-style line endings ("\r\n")    * to Unix-style line endings ("\n"), is equal to the given {@code value}.    */
-annotation|@
-name|Factory
 specifier|public
 specifier|static
 name|Matcher
@@ -960,8 +944,6 @@ argument_list|)
 return|;
 block|}
 comment|/**    * Creates a Matcher that matches a {@link RelNode} if its string    * representation, after converting Windows-style line endings ("\r\n")    * to Unix-style line endings ("\n"), contains the given {@code value}    * as a substring.    */
-annotation|@
-name|Factory
 specifier|public
 specifier|static
 name|Matcher
@@ -1007,8 +989,6 @@ argument_list|)
 return|;
 block|}
 comment|/**    * Creates a matcher that matches when the examined string is equal to the    * specified<code>operand</code> when all Windows-style line endings ("\r\n")    * have been converted to Unix-style line endings ("\n").    *    *<p>Thus, if {@code foo()} is a function that returns "hello{newline}world"    * in the current operating system's line endings, then    *    *<blockquote>    *   assertThat(foo(), isLinux("hello\nworld"));    *</blockquote>    *    *<p>will succeed on all platforms.    *    * @see Util#toLinux(String)    */
-annotation|@
-name|Factory
 specifier|public
 specifier|static
 name|Matcher

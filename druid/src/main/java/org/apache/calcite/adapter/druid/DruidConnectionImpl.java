@@ -190,22 +190,6 @@ import|;
 end_import
 
 begin_import
-import|import static
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|runtime
-operator|.
-name|HttpUtils
-operator|.
-name|post
-import|;
-end_import
-
-begin_import
 import|import
 name|com
 operator|.
@@ -540,6 +524,22 @@ operator|.
 name|atomic
 operator|.
 name|AtomicBoolean
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|runtime
+operator|.
+name|HttpUtils
+operator|.
+name|post
 import|;
 end_import
 

@@ -1394,7 +1394,7 @@ name|File
 argument_list|(
 name|base
 argument_list|,
-literal|"core/target/surefire/reference.md"
+literal|"core/build/reports/documentationTest/reference.md"
 argument_list|)
 expr_stmt|;
 block|}

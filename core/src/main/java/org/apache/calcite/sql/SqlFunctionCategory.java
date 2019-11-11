@@ -30,6 +30,26 @@ import|;
 end_import
 
 begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Arrays
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|EnumSet
+import|;
+end_import
+
+begin_import
 import|import static
 name|org
 operator|.
@@ -98,26 +118,6 @@ operator|.
 name|Property
 operator|.
 name|USER_DEFINED
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|Arrays
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|EnumSet
 import|;
 end_import
 

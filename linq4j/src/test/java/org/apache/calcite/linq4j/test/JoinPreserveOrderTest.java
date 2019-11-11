@@ -106,24 +106,6 @@ import|;
 end_import
 
 begin_import
-import|import static
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|linq4j
-operator|.
-name|function
-operator|.
-name|Functions
-operator|.
-name|nullsComparator
-import|;
-end_import
-
-begin_import
 import|import
 name|org
 operator|.
@@ -204,6 +186,24 @@ operator|.
 name|util
 operator|.
 name|List
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|linq4j
+operator|.
+name|function
+operator|.
+name|Functions
+operator|.
+name|nullsComparator
 import|;
 end_import
 

@@ -50,24 +50,6 @@ import|;
 end_import
 
 begin_import
-import|import static
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|sql
-operator|.
-name|type
-operator|.
-name|SqlTypeUtil
-operator|.
-name|areSameFamily
-import|;
-end_import
-
-begin_import
 import|import
 name|com
 operator|.
@@ -88,6 +70,24 @@ operator|.
 name|junit
 operator|.
 name|Test
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|type
+operator|.
+name|SqlTypeUtil
+operator|.
+name|areSameFamily
 import|;
 end_import
 

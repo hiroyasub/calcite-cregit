@@ -63,16 +63,6 @@ name|org
 operator|.
 name|hamcrest
 operator|.
-name|Factory
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|hamcrest
-operator|.
 name|core
 operator|.
 name|Is
@@ -157,8 +147,6 @@ class|class
 name|AutomatonTest
 block|{
 comment|/** Creates a Matcher that matches a list of    * {@link org.apache.calcite.runtime.Matcher.PartialMatch} if they    * a formatted to a given string. */
-annotation|@
-name|Factory
 specifier|private
 specifier|static
 parameter_list|<
