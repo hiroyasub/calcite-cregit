@@ -1967,6 +1967,11 @@ argument_list|)
 expr_stmt|;
 block|}
 annotation|@
+name|Ignore
+argument_list|(
+literal|"Ignore for now: CALCITE-3457"
+argument_list|)
+annotation|@
 name|Test
 specifier|public
 name|void
@@ -2046,6 +2051,11 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+annotation|@
+name|Ignore
+argument_list|(
+literal|"Ignore for now: CALCITE-3457"
+argument_list|)
 annotation|@
 name|Test
 specifier|public
