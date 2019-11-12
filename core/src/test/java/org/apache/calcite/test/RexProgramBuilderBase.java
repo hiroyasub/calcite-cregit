@@ -1839,7 +1839,7 @@ return|;
 block|}
 specifier|protected
 name|RelDataType
-name|tBoolean
+name|tBool
 parameter_list|()
 block|{
 return|return
@@ -1848,7 +1848,7 @@ return|;
 block|}
 specifier|protected
 name|RelDataType
-name|tBoolean
+name|tBool
 parameter_list|(
 name|boolean
 name|nullable

@@ -2727,8 +2727,7 @@ name|r
 operator|.
 name|setSeed
 argument_list|(
-operator|-
-literal|179916965778405462L
+literal|4887662474363391810L
 argument_list|)
 expr_stmt|;
 name|RexFuzzer
