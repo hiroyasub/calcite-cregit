@@ -38054,7 +38054,7 @@ literal|false
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Test that calls all operators with all possible argument types, and for    * each type, with a set of tricky values.    *    * This is not really a unit test since there are no assertions;    * it either succeeds or fails in the preparation of the operator case    * and not when actually testing (validating/executing) the call.    *    * Nevertheless the log messages conceal many problems which potentially need    * to be fixed especially cases where the query passes from the validation stage    * and fails at runtime.    * */
+comment|/** Test that calls all operators with all possible argument types, and for    * each type, with a set of tricky values.    *    *<p>This is not really a unit test since there are no assertions;    * it either succeeds or fails in the preparation of the operator case    * and not when actually testing (validating/executing) the call.    *    *<p>Nevertheless the log messages conceal many problems which potentially    * need to be fixed especially cases where the query passes from the    * validation stage and fails at runtime. */
 annotation|@
 name|Disabled
 argument_list|(

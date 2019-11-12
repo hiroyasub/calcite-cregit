@@ -4852,7 +4852,7 @@ block|}
 annotation|@
 name|Disabled
 argument_list|(
-literal|"CALCITE-3457: AssertionError in RexSimplify.validateStrongPolicy:843"
+literal|"CALCITE-3457: AssertionError in RexSimplify.validateStrongPolicy"
 argument_list|)
 annotation|@
 name|Test
@@ -4899,7 +4899,7 @@ argument_list|)
 argument_list|)
 argument_list|)
 argument_list|,
-literal|"I've no idea what I'm doing ð"
+literal|"true"
 argument_list|)
 expr_stmt|;
 block|}

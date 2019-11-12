@@ -2254,7 +2254,7 @@ name|runs
 argument_list|()
 expr_stmt|;
 block|}
-comment|/** Runs with query #i.    *  @param i Ordinal of query, per the benchmark, 1-based    *    */
+comment|/** Runs with query #i.    *    * @param i Ordinal of query, per the benchmark, 1-based */
 specifier|private
 name|CalciteAssert
 operator|.

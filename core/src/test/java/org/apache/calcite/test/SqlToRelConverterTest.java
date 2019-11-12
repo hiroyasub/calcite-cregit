@@ -907,7 +907,7 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
-comment|/** Test case for:    *<a href="https://issues.apache.org/jira/browse/CALCITE-2468">[CALCITE-2468]    * struct type alias should not cause IOOBE.</a>.    */
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2468">[CALCITE-2468]    * struct type alias should not cause IndexOutOfBoundsException</a>.    */
 annotation|@
 name|Test
 specifier|public
@@ -1017,7 +1017,7 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
-comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-245">[CALCITE-245]    * Off-by-one translation of ON clause of JOIN</a>.    */
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-245">[CALCITE-245]    * Off-by-one translation of ON clause of JOIN</a>. */
 annotation|@
 name|Test
 specifier|public
@@ -1249,7 +1249,7 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
-comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-801">[CALCITE-801]    * NullPointerException using USING on table alias with column    * aliases</a>. */
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-801">[CALCITE-801]    * NullPointerException using USING on table alias with column aliases</a>. */
 annotation|@
 name|Test
 specifier|public
@@ -3268,7 +3268,7 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
-comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-439">[CALCITE-439]    * SqlValidatorUtil.uniquify() may not terminate under some    * conditions</a>. */
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-439">[CALCITE-439]    * SqlValidatorUtil.uniquify() may not terminate under some conditions</a>. */
 annotation|@
 name|Test
 specifier|public
@@ -7575,7 +7575,7 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
-comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3183">[CALCITE-3183]    * Trimming method for Filter rel uses wrong traitSet</a> */
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3183">[CALCITE-3183]    * Trimming method for Filter rel uses wrong traitSet</a>. */
 annotation|@
 name|Test
 specifier|public
@@ -8091,7 +8091,7 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
-comment|/** Test aggregate function on a CASE expression involving IN with a    * sub-query.    *    *<p>Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-551">[CALCITE-551]    * Sub-query inside aggregate function</a>.    */
+comment|/** Test aggregate function on a CASE expression involving IN with a    * sub-query.    *    *<p>Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-551">[CALCITE-551]    * Sub-query inside aggregate function</a>. */
 annotation|@
 name|Test
 specifier|public
@@ -13112,7 +13112,7 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
-comment|/** Test case for:    *<a href="https://issues.apache.org/jira/browse/CALCITE-3456">[CALCITE-3456]    * AssertionError throws when aggregation same digest in subquery in same scope</a>.    */
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3456">[CALCITE-3456]    * AssertionError throws when aggregation same digest in sub-query in same    * scope</a>.    */
 annotation|@
 name|Test
 specifier|public

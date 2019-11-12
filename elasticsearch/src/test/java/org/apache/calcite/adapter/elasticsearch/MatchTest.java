@@ -355,6 +355,20 @@ name|common
 operator|.
 name|collect
 operator|.
+name|ImmutableList
+import|;
+end_import
+
+begin_import
+import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|collect
+operator|.
 name|ImmutableMap
 import|;
 end_import
@@ -977,7 +991,7 @@ block|}
 block|}
 return|;
 block|}
-comment|/**    * Test the ElasticSearch match query. The match query is translated from CONTAINS query which    * is build using RelBuilder, RexBuilder because the normal sql query assumes CONTAINS query    * is for date/period range    *    * Equivalent SQL query: select * from zips where city contains 'waltham'    *    * ElasticSearch query for it:    * {"query":{"constant_score":{"filter":{"match":{"city":"waltham"}}}}}    *    * @throws Exception    */
+comment|/**    * Tests the ElasticSearch match query. The match query is translated from    * CONTAINS query which is build using RelBuilder, RexBuilder because the    * normal SQL query assumes CONTAINS query is for date/period range.    *    *<p>Equivalent SQL query:    *    *<blockquote>    *<code>select * from zips where city contains 'waltham'</code>    *</blockquote>    *    *<p>ElasticSearch query for it:    *    *<blockquote><code>    * {"query":{"constant_score":{"filter":{"match":{"city":"waltham"}}}}}    *</code></blockquote>    */
 annotation|@
 name|Test
 specifier|public
@@ -1000,7 +1014,7 @@ name|createConnection
 argument_list|()
 decl_stmt|;
 name|SchemaPlus
-name|postschema
+name|postSchema
 init|=
 name|con
 operator|.
@@ -1031,7 +1045,7 @@ argument_list|)
 operator|.
 name|defaultSchema
 argument_list|(
-name|postschema
+name|postSchema
 argument_list|)
 operator|.
 name|build
@@ -1057,7 +1071,7 @@ argument_list|)
 expr_stmt|;
 specifier|final
 name|RelDataTypeFactory
-name|relDataTypeFactory
+name|typeFactory
 init|=
 operator|new
 name|SqlTypeFactoryImpl
@@ -1069,18 +1083,18 @@ argument_list|)
 decl_stmt|;
 specifier|final
 name|RexBuilder
-name|rexbuilder
+name|rexBuilder
 init|=
 operator|new
 name|RexBuilder
 argument_list|(
-name|relDataTypeFactory
+name|typeFactory
 argument_list|)
 decl_stmt|;
 name|RexNode
 name|nameRexNode
 init|=
-name|rexbuilder
+name|rexBuilder
 operator|.
 name|makeCall
 argument_list|(
@@ -1088,11 +1102,11 @@ name|SqlStdOperatorTable
 operator|.
 name|ITEM
 argument_list|,
-name|rexbuilder
+name|rexBuilder
 operator|.
 name|makeInputRef
 argument_list|(
-name|relDataTypeFactory
+name|typeFactory
 operator|.
 name|createSqlType
 argument_list|(
@@ -1104,7 +1118,7 @@ argument_list|,
 literal|0
 argument_list|)
 argument_list|,
-name|rexbuilder
+name|rexBuilder
 operator|.
 name|makeCharLiteral
 argument_list|(
@@ -1113,10 +1127,7 @@ name|NlsString
 argument_list|(
 literal|"city"
 argument_list|,
-name|rexbuilder
-operator|.
-name|getTypeFactory
-argument_list|()
+name|typeFactory
 operator|.
 name|getDefaultCharset
 argument_list|()
@@ -1134,11 +1145,11 @@ decl_stmt|;
 name|RelDataType
 name|mapType
 init|=
-name|relDataTypeFactory
+name|typeFactory
 operator|.
 name|createMapType
 argument_list|(
-name|relDataTypeFactory
+name|typeFactory
 operator|.
 name|createSqlType
 argument_list|(
@@ -1147,11 +1158,11 @@ operator|.
 name|VARCHAR
 argument_list|)
 argument_list|,
-name|relDataTypeFactory
+name|typeFactory
 operator|.
 name|createTypeWithNullability
 argument_list|(
-name|relDataTypeFactory
+name|typeFactory
 operator|.
 name|createSqlType
 argument_list|(
@@ -1164,26 +1175,17 @@ literal|true
 argument_list|)
 argument_list|)
 decl_stmt|;
-name|ArrayList
+name|List
 argument_list|<
 name|RexNode
 argument_list|>
 name|namedList
 init|=
-operator|new
-name|ArrayList
-argument_list|<
-name|RexNode
-argument_list|>
-argument_list|(
-literal|2
-argument_list|)
-decl_stmt|;
-name|namedList
+name|ImmutableList
 operator|.
-name|add
+name|of
 argument_list|(
-name|rexbuilder
+name|rexBuilder
 operator|.
 name|makeInputRef
 argument_list|(
@@ -1191,16 +1193,11 @@ name|mapType
 argument_list|,
 literal|0
 argument_list|)
-argument_list|)
-expr_stmt|;
-name|namedList
-operator|.
-name|add
-argument_list|(
+argument_list|,
 name|nameRexNode
 argument_list|)
-expr_stmt|;
-comment|//Add fields in builder stack so it is accessible while filter preparation
+decl_stmt|;
+comment|// Add fields in builder stack so it is accessible while filter preparation
 name|builder
 operator|.
 name|projectNamed
@@ -1325,9 +1322,11 @@ name|result
 init|=
 literal|""
 operator|+
-literal|"_MAP={id=02154, city=NORTH WALTHAM, loc=[-71.236497, 42.382492], pop=57871, state=MA}; city=NORTH WALTHAM\n"
+literal|"_MAP={id=02154, city=NORTH WALTHAM, loc=[-71.236497, 42.382492], "
+operator|+
+literal|"pop=57871, state=MA}; city=NORTH WALTHAM\n"
 decl_stmt|;
-comment|//Validate query prepared
+comment|// Validate query prepared
 name|assertThat
 argument_list|(
 name|root
@@ -1338,7 +1337,7 @@ name|builderExpected
 argument_list|)
 argument_list|)
 expr_stmt|;
-comment|//Validate result returned from ES
+comment|// Validate result returned from ES
 name|assertThat
 argument_list|(
 name|s

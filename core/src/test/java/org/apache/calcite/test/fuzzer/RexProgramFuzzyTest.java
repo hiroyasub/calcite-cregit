@@ -394,7 +394,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Validates that {@link org.apache.calcite.rex.RexSimplify} is able to deal with  * randomized {@link RexNode}.  * Note: the default fuzzing time is 5 seconds to keep overall test duration reasonable.  * The test starts from a random point every time, so the longer it runs the more errors it detects.  *  *<p>Note: The test is not included to {@link org.apache.calcite.test.CalciteSuite} since it would  * fail every build (there are lots of issues with {@link org.apache.calcite.rex.RexSimplify})  */
+comment|/**  * Validates that {@link org.apache.calcite.rex.RexSimplify} is able to deal  * with a randomized {@link RexNode}.  *  *<p>The default fuzzing time is 5 seconds to keep overall test duration  * reasonable. The test starts from a random point every time, so the longer it  * runs the more errors it detects.  */
 end_comment
 
 begin_class
