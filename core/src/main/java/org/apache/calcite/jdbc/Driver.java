@@ -478,24 +478,9 @@ name|createDriverVersion
 parameter_list|()
 block|{
 return|return
-name|DriverVersion
+name|CalciteDriverVersion
 operator|.
-name|load
-argument_list|(
-name|Driver
-operator|.
-name|class
-argument_list|,
-literal|"org-apache-calcite-jdbc.properties"
-argument_list|,
-literal|"Calcite JDBC Driver"
-argument_list|,
-literal|"unknown version"
-argument_list|,
-literal|"Calcite"
-argument_list|,
-literal|"unknown version"
-argument_list|)
+name|INSTANCE
 return|;
 block|}
 annotation|@
