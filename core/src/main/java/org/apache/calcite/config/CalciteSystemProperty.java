@@ -498,7 +498,7 @@ name|booleanProperty
 argument_list|(
 literal|"calcite.test.druid"
 argument_list|,
-literal|true
+literal|false
 argument_list|)
 decl_stmt|;
 comment|/**    * Whether to run Cassandra tests.    */

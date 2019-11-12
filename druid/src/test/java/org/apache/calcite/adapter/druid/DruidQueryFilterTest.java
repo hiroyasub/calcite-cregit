@@ -199,7 +199,11 @@ name|org
 operator|.
 name|junit
 operator|.
-name|Assert
+name|jupiter
+operator|.
+name|api
+operator|.
+name|BeforeEach
 import|;
 end_import
 
@@ -209,15 +213,9 @@ name|org
 operator|.
 name|junit
 operator|.
-name|Before
-import|;
-end_import
-
-begin_import
-import|import
-name|org
+name|jupiter
 operator|.
-name|junit
+name|api
 operator|.
 name|Test
 import|;
@@ -279,6 +277,30 @@ name|org
 operator|.
 name|hamcrest
 operator|.
+name|CoreMatchers
+operator|.
+name|notNullValue
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|hamcrest
+operator|.
+name|MatcherAssert
+operator|.
+name|assertThat
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|hamcrest
+operator|.
 name|core
 operator|.
 name|Is
@@ -301,7 +323,7 @@ name|DruidQuery
 name|druidQuery
 decl_stmt|;
 annotation|@
-name|Before
+name|BeforeEach
 specifier|public
 name|void
 name|testSetup
@@ -518,13 +540,14 @@ argument_list|,
 name|druidQuery
 argument_list|)
 decl_stmt|;
-name|Assert
-operator|.
-name|assertNotNull
+name|assertThat
 argument_list|(
 literal|"Filter is null"
 argument_list|,
 name|returnValue
+argument_list|,
+name|notNullValue
+argument_list|()
 argument_list|)
 expr_stmt|;
 name|JsonFactory
@@ -564,8 +587,6 @@ operator|.
 name|close
 argument_list|()
 expr_stmt|;
-name|Assert
-operator|.
 name|assertThat
 argument_list|(
 name|sw
@@ -699,13 +720,14 @@ argument_list|,
 name|druidQuery
 argument_list|)
 decl_stmt|;
-name|Assert
-operator|.
-name|assertNotNull
+name|assertThat
 argument_list|(
 literal|"Filter is null"
 argument_list|,
 name|returnValue
+argument_list|,
+name|notNullValue
+argument_list|()
 argument_list|)
 expr_stmt|;
 name|JsonFactory
@@ -745,8 +767,6 @@ operator|.
 name|close
 argument_list|()
 expr_stmt|;
-name|Assert
-operator|.
 name|assertThat
 argument_list|(
 name|sw

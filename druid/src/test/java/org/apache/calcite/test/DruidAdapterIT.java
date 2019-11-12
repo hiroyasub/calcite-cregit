@@ -199,6 +199,24 @@ name|org
 operator|.
 name|junit
 operator|.
+name|jupiter
+operator|.
+name|api
+operator|.
+name|BeforeAll
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|junit
+operator|.
+name|jupiter
+operator|.
+name|api
+operator|.
 name|Test
 import|;
 end_import
@@ -259,33 +277,9 @@ begin_import
 import|import static
 name|org
 operator|.
-name|junit
+name|hamcrest
 operator|.
-name|Assert
-operator|.
-name|assertFalse
-import|;
-end_import
-
-begin_import
-import|import static
-name|org
-operator|.
-name|junit
-operator|.
-name|Assert
-operator|.
-name|assertSame
-import|;
-end_import
-
-begin_import
-import|import static
-name|org
-operator|.
-name|junit
-operator|.
-name|Assert
+name|MatcherAssert
 operator|.
 name|assertThat
 import|;
@@ -297,9 +291,61 @@ name|org
 operator|.
 name|junit
 operator|.
-name|Assert
+name|jupiter
+operator|.
+name|api
+operator|.
+name|Assertions
+operator|.
+name|assertFalse
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|jupiter
+operator|.
+name|api
+operator|.
+name|Assertions
+operator|.
+name|assertSame
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|jupiter
+operator|.
+name|api
+operator|.
+name|Assertions
 operator|.
 name|assertTrue
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|jupiter
+operator|.
+name|api
+operator|.
+name|Assumptions
+operator|.
+name|assumeTrue
 import|;
 end_import
 
@@ -393,7 +439,8 @@ init|=
 literal|"\"foodmart\""
 decl_stmt|;
 comment|/** Whether to run this test. */
-specifier|protected
+specifier|private
+specifier|static
 name|boolean
 name|enabled
 parameter_list|()
@@ -406,6 +453,23 @@ operator|.
 name|value
 argument_list|()
 return|;
+block|}
+annotation|@
+name|BeforeAll
+specifier|public
+specifier|static
+name|void
+name|assumeDruidTestsEnabled
+parameter_list|()
+block|{
+name|assumeTrue
+argument_list|(
+name|enabled
+argument_list|()
+argument_list|,
+literal|"Druid tests disabled. Add -Dcalcite.test.druid to enable it"
+argument_list|)
+expr_stmt|;
 block|}
 comment|/**    * Creates a query against FOODMART with approximate parameters    * */
 specifier|private
