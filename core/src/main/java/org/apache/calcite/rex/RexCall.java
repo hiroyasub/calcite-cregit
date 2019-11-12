@@ -336,6 +336,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|type
+argument_list|,
+literal|"type"
 argument_list|)
 expr_stmt|;
 name|this
@@ -347,6 +349,8 @@ operator|.
 name|requireNonNull
 argument_list|(
 name|op
+argument_list|,
+literal|"operator"
 argument_list|)
 expr_stmt|;
 name|this

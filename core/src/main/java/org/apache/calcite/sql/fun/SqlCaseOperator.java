@@ -1210,10 +1210,16 @@ argument_list|()
 operator|>
 literal|1
 operator|:
+literal|"CASE must have more than 1 argument. Given "
+operator|+
 name|argTypes
 operator|.
 name|size
 argument_list|()
+operator|+
+literal|", "
+operator|+
+name|argTypes
 assert|;
 name|List
 argument_list|<
