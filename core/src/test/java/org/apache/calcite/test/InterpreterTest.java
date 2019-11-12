@@ -2106,6 +2106,36 @@ literal|"[null, null, 4, x]"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testInterpretDecimalAggregate
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select x, min(y), max(y), sum(y), avg(y)\n"
+operator|+
+literal|"from (values ('a', -1.2), ('a', 2.3), ('a', 15)) as t(x, y)\n"
+operator|+
+literal|"group by x"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|returnsRows
+argument_list|(
+literal|"[a, -1.2, 15.0, 16.1, 5.366666666666667]"
+argument_list|)
+expr_stmt|;
+block|}
 block|}
 end_class
 
