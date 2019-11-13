@@ -10110,11 +10110,66 @@ argument_list|)
 operator|.
 name|returnsUnordered
 argument_list|(
-literal|"name=HR; EI=200; D=20; N=Eric; S=8000.0; C=500; I=1; O=2"
+literal|"name=HR; EI=200; D=20; N=Eric; S=8000.0; C=500; I=1; O=1"
 argument_list|,
-literal|"name=HR; EI=200; D=20; N=Eric; S=8000.0; C=500; I=2; O=4"
+literal|"name=HR; EI=200; D=20; N=Eric; S=8000.0; C=500; I=2; O=2"
 argument_list|,
-literal|"name=Sales; EI=150; D=10; N=Sebastian; S=7000.0; C=null; I=2; O=5"
+literal|"name=Sales; EI=150; D=10; N=Sebastian; S=7000.0; C=null; I=2; O=4"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3498">[CALCITE-3498]    * Unnest operation's ordinality should be deterministic</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testUnnestArrayWithDeterministicOrdinality
+parameter_list|()
+block|{
+name|CalciteAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|query
+argument_list|(
+literal|"select v, o\n"
+operator|+
+literal|"from unnest(array[100, 200]) with ordinality as t1(v, o)\n"
+operator|+
+literal|"where v> 1"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"V=100; O=1\n"
+operator|+
+literal|"V=200; O=2\n"
+argument_list|)
+expr_stmt|;
+name|CalciteAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|query
+argument_list|(
+literal|"with\n"
+operator|+
+literal|"  x as (select * from unnest(array[100, 200]) with ordinality as t1(v, o)), "
+operator|+
+literal|"  y as (select * from unnest(array[1000, 2000]) with ordinality as t2(v, o))\n"
+operator|+
+literal|"select x.o as o1, x.v as v1, y.o as o2, y.v as v2 "
+operator|+
+literal|"from x join y on x.o=y.o"
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"O1=1; V1=100; O2=1; V2=1000"
+argument_list|,
+literal|"O1=2; V1=200; O2=2; V2=2000"
 argument_list|)
 expr_stmt|;
 block|}
