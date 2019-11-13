@@ -309,7 +309,7 @@ init|=
 operator|new
 name|File
 argument_list|(
-literal|"target/classes"
+literal|"build/sparkServer/classes"
 argument_list|)
 decl_stmt|;
 comment|/** Creates a SparkHandlerImpl. */
@@ -317,6 +317,33 @@ specifier|private
 name|SparkHandlerImpl
 parameter_list|()
 block|{
+if|if
+condition|(
+operator|!
+name|CLASS_DIR
+operator|.
+name|isDirectory
+argument_list|()
+operator|&&
+operator|!
+name|CLASS_DIR
+operator|.
+name|mkdirs
+argument_list|()
+condition|)
+block|{
+name|System
+operator|.
+name|err
+operator|.
+name|println
+argument_list|(
+literal|"Unable to create temporary folder "
+operator|+
+name|CLASS_DIR
+argument_list|)
+expr_stmt|;
+block|}
 name|classServer
 operator|=
 operator|new
@@ -679,9 +706,12 @@ argument_list|<
 name|ArrayBindable
 argument_list|>
 operator|)
-name|Class
+name|compiler
 operator|.
-name|forName
+name|getClassLoader
+argument_list|()
+operator|.
+name|loadClass
 argument_list|(
 name|className
 argument_list|)
