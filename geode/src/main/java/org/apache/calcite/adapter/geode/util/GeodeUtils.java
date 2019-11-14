@@ -566,11 +566,6 @@ argument_list|(
 name|readSerialized
 argument_list|)
 operator|.
-name|setPdxPersistent
-argument_list|(
-literal|false
-argument_list|)
-operator|.
 name|create
 argument_list|()
 return|;
