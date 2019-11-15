@@ -9744,6 +9744,101 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testUnparseSqlIntervalQualifierBigQuery
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql0
+init|=
+literal|"select  * from \"employee\" where  \"hire_date\" - "
+operator|+
+literal|"INTERVAL '19800' SECOND(5)> TIMESTAMP '2005-10-17 00:00:00' "
+decl_stmt|;
+specifier|final
+name|String
+name|expect0
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM foodmart.employee\n"
+operator|+
+literal|"WHERE (hire_date - INTERVAL 19800 SECOND)"
+operator|+
+literal|"> TIMESTAMP '2005-10-17 00:00:00'"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql0
+argument_list|)
+operator|.
+name|withBigQuery
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expect0
+argument_list|)
+expr_stmt|;
+specifier|final
+name|String
+name|sql1
+init|=
+literal|"select  * from \"employee\" where  \"hire_date\" + "
+operator|+
+literal|"INTERVAL '10' HOUR> TIMESTAMP '2005-10-17 00:00:00' "
+decl_stmt|;
+specifier|final
+name|String
+name|expect1
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM foodmart.employee\n"
+operator|+
+literal|"WHERE (hire_date + INTERVAL 10 HOUR)"
+operator|+
+literal|"> TIMESTAMP '2005-10-17 00:00:00'"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql1
+argument_list|)
+operator|.
+name|withBigQuery
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expect1
+argument_list|)
+expr_stmt|;
+specifier|final
+name|String
+name|sql2
+init|=
+literal|"select  * from \"employee\" where  \"hire_date\" + "
+operator|+
+literal|"INTERVAL '1 2:34:56.78' DAY TO SECOND> TIMESTAMP '2005-10-17 00:00:00' "
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql2
+argument_list|)
+operator|.
+name|withBigQuery
+argument_list|()
+operator|.
+name|throws_
+argument_list|(
+literal|"Only INT64 is supported as the interval value for BigQuery."
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testFloorMysqlWeek
 parameter_list|()
 block|{
