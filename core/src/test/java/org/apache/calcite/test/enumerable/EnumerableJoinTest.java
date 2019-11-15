@@ -27,6 +27,38 @@ name|calcite
 operator|.
 name|adapter
 operator|.
+name|enumerable
+operator|.
+name|EnumerableConvention
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|adapter
+operator|.
+name|enumerable
+operator|.
+name|EnumerableRules
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|adapter
+operator|.
 name|java
 operator|.
 name|ReflectiveSchema
@@ -58,6 +90,34 @@ operator|.
 name|config
 operator|.
 name|Lex
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
+name|RelOptPlanner
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|runtime
+operator|.
+name|Hook
 import|;
 end_import
 
@@ -116,6 +176,18 @@ operator|.
 name|api
 operator|.
 name|Test
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|function
+operator|.
+name|Consumer
 import|;
 end_import
 
@@ -698,6 +770,232 @@ literal|"empid=150"
 argument_list|,
 literal|"empid=200"
 argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSortMergeJoinWithEquiCondition
+parameter_list|()
+block|{
+name|EnumerableConvention
+operator|.
+name|INSTANCE
+operator|.
+name|useAbstractConvertersForConversion
+operator|=
+literal|true
+expr_stmt|;
+name|tester
+argument_list|(
+literal|false
+argument_list|,
+operator|new
+name|JdbcTest
+operator|.
+name|HrSchema
+argument_list|()
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|""
+operator|+
+literal|"select e.empid, e.name, d.name as dept, e.deptno, d.deptno\n"
+operator|+
+literal|"from emps e join depts d\n"
+operator|+
+literal|"on e.deptno=d.deptno"
+argument_list|)
+operator|.
+name|withHook
+argument_list|(
+name|Hook
+operator|.
+name|PLANNER
+argument_list|,
+operator|(
+name|Consumer
+argument_list|<
+name|RelOptPlanner
+argument_list|>
+operator|)
+name|planner
+lambda|->
+block|{
+name|planner
+operator|.
+name|addRule
+argument_list|(
+name|EnumerableRules
+operator|.
+name|ENUMERABLE_MERGE_JOIN_RULE
+argument_list|)
+expr_stmt|;
+name|planner
+operator|.
+name|removeRule
+argument_list|(
+name|EnumerableRules
+operator|.
+name|ENUMERABLE_JOIN_RULE
+argument_list|)
+expr_stmt|;
+block|}
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+literal|""
+operator|+
+literal|"EnumerableCalc(expr#0..4=[{inputs}], empid=[$t2], name=[$t4], dept=[$t1], deptno=[$t3], deptno0=[$t0])\n"
+operator|+
+literal|"  EnumerableMergeJoin(condition=[=($3, $0)], joinType=[inner])\n"
+operator|+
+literal|"    EnumerableSort(sort0=[$0], dir0=[ASC])\n"
+operator|+
+literal|"      EnumerableCalc(expr#0..3=[{inputs}], proj#0..1=[{exprs}])\n"
+operator|+
+literal|"        EnumerableTableScan(table=[[s, depts]])\n"
+operator|+
+literal|"    EnumerableSort(sort0=[$1], dir0=[ASC])\n"
+operator|+
+literal|"      EnumerableCalc(expr#0..4=[{inputs}], proj#0..2=[{exprs}])\n"
+operator|+
+literal|"        EnumerableTableScan(table=[[s, emps]])"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|""
+operator|+
+literal|"empid=100; name=Bill; dept=Sales; deptno=10; deptno=10\n"
+operator|+
+literal|"empid=150; name=Sebastian; dept=Sales; deptno=10; deptno=10\n"
+operator|+
+literal|"empid=110; name=Theodore; dept=Sales; deptno=10; deptno=10\n"
+argument_list|)
+expr_stmt|;
+name|EnumerableConvention
+operator|.
+name|INSTANCE
+operator|.
+name|useAbstractConvertersForConversion
+operator|=
+literal|false
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSortMergeJoinWithNonEquiCondition
+parameter_list|()
+block|{
+name|EnumerableConvention
+operator|.
+name|INSTANCE
+operator|.
+name|useAbstractConvertersForConversion
+operator|=
+literal|true
+expr_stmt|;
+name|tester
+argument_list|(
+literal|false
+argument_list|,
+operator|new
+name|JdbcTest
+operator|.
+name|HrSchema
+argument_list|()
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|""
+operator|+
+literal|"select e.empid, e.name, d.name as dept, e.deptno, d.deptno\n"
+operator|+
+literal|"from emps e join depts d\n"
+operator|+
+literal|"on e.deptno=d.deptno and e.empid> d.deptno * 10"
+argument_list|)
+operator|.
+name|withHook
+argument_list|(
+name|Hook
+operator|.
+name|PLANNER
+argument_list|,
+operator|(
+name|Consumer
+argument_list|<
+name|RelOptPlanner
+argument_list|>
+operator|)
+name|planner
+lambda|->
+block|{
+name|planner
+operator|.
+name|addRule
+argument_list|(
+name|EnumerableRules
+operator|.
+name|ENUMERABLE_MERGE_JOIN_RULE
+argument_list|)
+expr_stmt|;
+name|planner
+operator|.
+name|removeRule
+argument_list|(
+name|EnumerableRules
+operator|.
+name|ENUMERABLE_JOIN_RULE
+argument_list|)
+expr_stmt|;
+block|}
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+literal|""
+operator|+
+literal|"EnumerableCalc(expr#0..4=[{inputs}], empid=[$t2], name=[$t4], dept=[$t1], deptno=[$t3], deptno0=[$t0])\n"
+operator|+
+literal|"  EnumerableMergeJoin(condition=[AND(=($3, $0),>($2, *($0, 10)))], joinType=[inner])\n"
+operator|+
+literal|"    EnumerableSort(sort0=[$0], dir0=[ASC])\n"
+operator|+
+literal|"      EnumerableCalc(expr#0..3=[{inputs}], proj#0..1=[{exprs}])\n"
+operator|+
+literal|"        EnumerableTableScan(table=[[s, depts]])\n"
+operator|+
+literal|"    EnumerableSort(sort0=[$1], dir0=[ASC])\n"
+operator|+
+literal|"      EnumerableCalc(expr#0..4=[{inputs}], proj#0..2=[{exprs}])\n"
+operator|+
+literal|"        EnumerableTableScan(table=[[s, emps]])"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|""
+operator|+
+literal|"empid=150; name=Sebastian; dept=Sales; deptno=10; deptno=10\n"
+operator|+
+literal|"empid=110; name=Theodore; dept=Sales; deptno=10; deptno=10\n"
+argument_list|)
+expr_stmt|;
+name|EnumerableConvention
+operator|.
+name|INSTANCE
+operator|.
+name|useAbstractConvertersForConversion
+operator|=
+literal|false
 expr_stmt|;
 block|}
 specifier|private

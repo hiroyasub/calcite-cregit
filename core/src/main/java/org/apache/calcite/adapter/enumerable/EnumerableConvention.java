@@ -123,6 +123,14 @@ name|COST_MULTIPLIER
 init|=
 literal|1.0d
 decl_stmt|;
+comment|/**    * This config is used to allow conversion by    * {@link org.apache.calcite.plan.volcano.AbstractConverter}, which is relied    * upon when converting collations/distributions of input to fit the parent node.    * Some tests enable this config to test sepcific phsyical operators,    * e.g. {@link org.apache.calcite.adapter.enumerable.EnumerableMergeJoin}.    */
+specifier|public
+specifier|static
+name|boolean
+name|useAbstractConvertersForConversion
+init|=
+literal|false
+decl_stmt|;
 annotation|@
 name|Override
 specifier|public
@@ -213,7 +221,7 @@ name|toTraits
 parameter_list|)
 block|{
 return|return
-literal|false
+name|useAbstractConvertersForConversion
 return|;
 block|}
 block|}
