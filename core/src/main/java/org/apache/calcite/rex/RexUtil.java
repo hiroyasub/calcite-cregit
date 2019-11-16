@@ -7751,13 +7751,11 @@ argument_list|)
 operator|.
 name|simplifyUnknownAs
 argument_list|(
-name|rexBuilder
+name|RexUtil
 operator|.
-name|makeCall
+name|composeDisjunction
 argument_list|(
-name|SqlStdOperatorTable
-operator|.
-name|OR
+name|rexBuilder
 argument_list|,
 name|terms
 argument_list|)
