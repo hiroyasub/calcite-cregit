@@ -7500,6 +7500,147 @@ name|whereExpected
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testRowValueExpression
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|expected0
+init|=
+literal|"INSERT INTO \"EMPS\"\n"
+operator|+
+literal|"VALUES (ROW(1, 'Fred')),\n"
+operator|+
+literal|"(ROW(2, 'Eric'))"
+decl_stmt|;
+name|String
+name|sql
+init|=
+literal|"insert into emps values (1,'Fred'),(2, 'Eric')"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|withDialect
+argument_list|(
+name|SqlDialect
+operator|.
+name|DatabaseProduct
+operator|.
+name|CALCITE
+operator|.
+name|getDialect
+argument_list|()
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected0
+argument_list|)
+expr_stmt|;
+specifier|final
+name|String
+name|expected1
+init|=
+literal|"INSERT INTO `emps`\n"
+operator|+
+literal|"VALUES (1, 'Fred'),\n"
+operator|+
+literal|"(2, 'Eric')"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|withDialect
+argument_list|(
+name|SqlDialect
+operator|.
+name|DatabaseProduct
+operator|.
+name|MYSQL
+operator|.
+name|getDialect
+argument_list|()
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected1
+argument_list|)
+expr_stmt|;
+specifier|final
+name|String
+name|expected2
+init|=
+literal|"INSERT INTO \"EMPS\"\n"
+operator|+
+literal|"VALUES (1, 'Fred'),\n"
+operator|+
+literal|"(2, 'Eric')"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|withDialect
+argument_list|(
+name|SqlDialect
+operator|.
+name|DatabaseProduct
+operator|.
+name|ORACLE
+operator|.
+name|getDialect
+argument_list|()
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected2
+argument_list|)
+expr_stmt|;
+specifier|final
+name|String
+name|expected3
+init|=
+literal|"INSERT INTO [EMPS]\n"
+operator|+
+literal|"VALUES (1, 'Fred'),\n"
+operator|+
+literal|"(2, 'Eric')"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|withDialect
+argument_list|(
+name|SqlDialect
+operator|.
+name|DatabaseProduct
+operator|.
+name|MSSQL
+operator|.
+name|getDialect
+argument_list|()
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected3
+argument_list|)
+expr_stmt|;
+block|}
 comment|/** Whether this is a sub-class that tests un-parsing as well as parsing. */
 specifier|protected
 name|boolean
