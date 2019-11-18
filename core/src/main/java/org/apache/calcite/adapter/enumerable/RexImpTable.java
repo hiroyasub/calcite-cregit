@@ -9569,7 +9569,7 @@ name|NULL
 case|:
 name|ifTrue
 operator|=
-name|RexToLixTranslator
+name|EnumUtils
 operator|.
 name|convert
 argument_list|(
@@ -10220,7 +10220,7 @@ case|case
 name|NOT_POSSIBLE
 case|:
 return|return
-name|RexToLixTranslator
+name|EnumUtils
 operator|.
 name|convert
 argument_list|(
@@ -10886,7 +10886,7 @@ name|add
 argument_list|(
 name|acc
 argument_list|,
-name|RexToLixTranslator
+name|EnumUtils
 operator|.
 name|convert
 argument_list|(
@@ -11432,7 +11432,7 @@ name|result
 parameter_list|)
 block|{
 return|return
-name|RexToLixTranslator
+name|EnumUtils
 operator|.
 name|convert
 argument_list|(
@@ -15407,7 +15407,7 @@ name|class
 argument_list|,
 name|methodName
 argument_list|,
-name|RexToLixTranslator
+name|EnumUtils
 operator|.
 name|convert
 argument_list|(
@@ -15416,7 +15416,7 @@ argument_list|,
 name|type
 argument_list|)
 argument_list|,
-name|RexToLixTranslator
+name|EnumUtils
 operator|.
 name|convert
 argument_list|(
@@ -15552,7 +15552,7 @@ argument_list|()
 argument_list|)
 decl_stmt|;
 return|return
-name|RexToLixTranslator
+name|EnumUtils
 operator|.
 name|convert
 argument_list|(
@@ -15992,7 +15992,7 @@ argument_list|()
 argument_list|)
 decl_stmt|;
 return|return
-name|RexToLixTranslator
+name|EnumUtils
 operator|.
 name|convert
 argument_list|(
@@ -19092,7 +19092,7 @@ name|i
 parameter_list|)
 block|{
 return|return
-name|RexToLixTranslator
+name|EnumUtils
 operator|.
 name|convert
 argument_list|(

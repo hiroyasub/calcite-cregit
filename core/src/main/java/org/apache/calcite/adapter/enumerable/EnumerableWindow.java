@@ -1751,7 +1751,7 @@ name|append
 argument_list|(
 literal|"row"
 argument_list|,
-name|RexToLixTranslator
+name|EnumUtils
 operator|.
 name|convert
 argument_list|(
@@ -3756,7 +3756,7 @@ name|append
 argument_list|(
 literal|"jRow"
 argument_list|,
-name|RexToLixTranslator
+name|EnumUtils
 operator|.
 name|convert
 argument_list|(
@@ -5322,7 +5322,7 @@ name|aggIdx
 operator|+
 literal|"res"
 argument_list|,
-name|RexToLixTranslator
+name|EnumUtils
 operator|.
 name|convert
 argument_list|(
@@ -5480,7 +5480,7 @@ comment|// Floating offset does not make sense since we refer to array index.
 comment|// Nulls do not make sense as well.
 name|offs
 operator|=
-name|RexToLixTranslator
+name|EnumUtils
 operator|.
 name|convert
 argument_list|(

@@ -1389,7 +1389,7 @@ literal|0
 argument_list|,
 name|row_
 argument_list|,
-name|RexToLixTranslator
+name|EnumUtils
 operator|.
 name|convert
 argument_list|(
@@ -3067,7 +3067,7 @@ name|generator
 operator|.
 name|apply
 argument_list|(
-name|RexToLixTranslator
+name|EnumUtils
 operator|.
 name|convert
 argument_list|(

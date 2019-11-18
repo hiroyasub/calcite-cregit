@@ -39,7 +39,7 @@ name|adapter
 operator|.
 name|enumerable
 operator|.
-name|RexToLixTranslator
+name|EnumUtils
 import|;
 end_import
 
@@ -1171,7 +1171,7 @@ argument_list|)
 expr_stmt|;
 block|}
 return|return
-name|RexToLixTranslator
+name|EnumUtils
 operator|.
 name|convert
 argument_list|(

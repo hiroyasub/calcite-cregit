@@ -4258,6 +4258,111 @@ literal|"V=1970-01-01"
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3512">[CALCITE-3512]    * Query fails when comparing Time/TimeStamp types</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testTimeCanCompare
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select a.v\n"
+operator|+
+literal|"from (select \"sqlTime\" v\n"
+operator|+
+literal|"  from \"s\".\"everyTypes\" "
+operator|+
+literal|"  group by \"sqlTime\") a,"
+operator|+
+literal|"    (select \"sqlTime\" v\n"
+operator|+
+literal|"  from \"s\".\"everyTypes\"\n"
+operator|+
+literal|"  group by \"sqlTime\") b\n"
+operator|+
+literal|"where a.v>= b.v\n"
+operator|+
+literal|"group by a.v"
+decl_stmt|;
+name|CalciteAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|withSchema
+argument_list|(
+literal|"s"
+argument_list|,
+name|CATCHALL
+argument_list|)
+operator|.
+name|query
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"V=00:00:00"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testTimestampCanCompare
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select a.v\n"
+operator|+
+literal|"from (select \"sqlTimestamp\" v\n"
+operator|+
+literal|"  from \"s\".\"everyTypes\" "
+operator|+
+literal|"  group by \"sqlTimestamp\") a,"
+operator|+
+literal|"    (select \"sqlTimestamp\" v\n"
+operator|+
+literal|"  from \"s\".\"everyTypes\"\n"
+operator|+
+literal|"  group by \"sqlTimestamp\") b\n"
+operator|+
+literal|"where a.v>= b.v\n"
+operator|+
+literal|"group by a.v"
+decl_stmt|;
+name|CalciteAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|withSchema
+argument_list|(
+literal|"s"
+argument_list|,
+name|CATCHALL
+argument_list|)
+operator|.
+name|query
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"V=1970-01-01 00:00:00"
+argument_list|)
+expr_stmt|;
+block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-281">[CALCITE-1919]    * NPE when target in ReflectiveSchema belongs to the unnamed package</a>. */
 annotation|@
 name|Test

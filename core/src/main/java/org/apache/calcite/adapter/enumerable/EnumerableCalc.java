@@ -966,7 +966,7 @@ decl_stmt|;
 name|Expression
 name|input
 init|=
-name|RexToLixTranslator
+name|EnumUtils
 operator|.
 name|convert
 argument_list|(

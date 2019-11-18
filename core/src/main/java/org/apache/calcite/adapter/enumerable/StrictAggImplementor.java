@@ -289,7 +289,7 @@ name|assign
 argument_list|(
 name|acc
 argument_list|,
-name|RexToLixTranslator
+name|EnumUtils
 operator|.
 name|convert
 argument_list|(
@@ -1011,7 +1011,7 @@ name|needTrackEmptySet
 condition|)
 block|{
 return|return
-name|RexToLixTranslator
+name|EnumUtils
 operator|.
 name|convert
 argument_list|(
@@ -1104,7 +1104,7 @@ decl_stmt|;
 name|Expression
 name|nonNull
 init|=
-name|RexToLixTranslator
+name|EnumUtils
 operator|.
 name|convert
 argument_list|(

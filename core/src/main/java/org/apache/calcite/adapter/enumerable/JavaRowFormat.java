@@ -919,7 +919,7 @@ argument_list|()
 expr_stmt|;
 block|}
 return|return
-name|RexToLixTranslator
+name|EnumUtils
 operator|.
 name|convert
 argument_list|(
@@ -1063,7 +1063,7 @@ argument_list|()
 expr_stmt|;
 block|}
 return|return
-name|RexToLixTranslator
+name|EnumUtils
 operator|.
 name|convert
 argument_list|(
@@ -1215,7 +1215,7 @@ argument_list|()
 expr_stmt|;
 block|}
 return|return
-name|RexToLixTranslator
+name|EnumUtils
 operator|.
 name|convert
 argument_list|(

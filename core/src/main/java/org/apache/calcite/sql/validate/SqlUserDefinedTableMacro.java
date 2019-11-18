@@ -29,7 +29,7 @@ name|adapter
 operator|.
 name|enumerable
 operator|.
-name|RexToLixTranslator
+name|EnumUtils
 import|;
 end_import
 
@@ -1210,7 +1210,7 @@ specifier|final
 name|Expression
 name|expr
 init|=
-name|RexToLixTranslator
+name|EnumUtils
 operator|.
 name|convert
 argument_list|(

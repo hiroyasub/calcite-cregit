@@ -1159,7 +1159,7 @@ name|leftExpressions
 operator|.
 name|add
 argument_list|(
-name|RexToLixTranslator
+name|EnumUtils
 operator|.
 name|convert
 argument_list|(
@@ -1184,7 +1184,7 @@ name|rightExpressions
 operator|.
 name|add
 argument_list|(
-name|RexToLixTranslator
+name|EnumUtils
 operator|.
 name|convert
 argument_list|(
