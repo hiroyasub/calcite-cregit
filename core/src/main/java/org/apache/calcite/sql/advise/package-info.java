@@ -7,11 +7,6 @@ begin_comment
 comment|/**  * Provides hints and corrections for editing SQL statements.  *  *<p>The SQL statement might be partially-formed SQL statement or  * invalid. It is edited in a SQL editor user-interface.</p>  *  *<p>The advisor uses the validation and parser framework set up in  *<code>org.apache.calcite.sql.validate</code> package. */
 end_comment
 
-begin_annotation
-annotation|@
-name|PackageMarker
-end_annotation
-
 begin_package
 package|package
 name|org
@@ -25,22 +20,6 @@ operator|.
 name|advise
 package|;
 end_package
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|avatica
-operator|.
-name|util
-operator|.
-name|PackageMarker
-import|;
-end_import
 
 begin_comment
 comment|// End package-info.java

@@ -7,11 +7,6 @@ begin_comment
 comment|/**  * Defines mutable relational expressions.  *  *<h2>Related packages and classes</h2>  *<ul>  *  *<li>Package<code>  *<a href="../core/package-summary.html">org.apache.calcite.rel.core</a></code>  * contains core relational expressions  *  *<li>Package<code>  *<a href="../package-summary.html">org.apache.calcite.rex</a></code>  * defines the relational expression API  *  *</ul>  */
 end_comment
 
-begin_annotation
-annotation|@
-name|PackageMarker
-end_annotation
-
 begin_package
 package|package
 name|org
@@ -25,22 +20,6 @@ operator|.
 name|mutable
 package|;
 end_package
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|avatica
-operator|.
-name|util
-operator|.
-name|PackageMarker
-import|;
-end_import
 
 begin_comment
 comment|// End package-info.java

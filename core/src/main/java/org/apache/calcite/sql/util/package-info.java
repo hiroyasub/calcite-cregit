@@ -7,11 +7,6 @@ begin_comment
 comment|/**  * Utility classes for the SQL object model, parsing, and validation.  */
 end_comment
 
-begin_annotation
-annotation|@
-name|PackageMarker
-end_annotation
-
 begin_package
 package|package
 name|org
@@ -25,22 +20,6 @@ operator|.
 name|util
 package|;
 end_package
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|avatica
-operator|.
-name|util
-operator|.
-name|PackageMarker
-import|;
-end_import
 
 begin_comment
 comment|// End package-info.java

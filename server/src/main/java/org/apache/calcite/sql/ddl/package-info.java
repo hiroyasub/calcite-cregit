@@ -7,11 +7,6 @@ begin_comment
 comment|/**  * Parse tree for SQL DDL statements.  *  *<p>These are available in the extended SQL parser that is part of Calcite's  * "server" module; the core parser in the "core" module only supports SELECT  * and DML.  *  *<p>If you are writing a project that requires DDL it is likely that your  * DDL syntax is different than ours. We recommend that you copy-paste this  * the parser and its supporting classes into your own module, rather than try  * to extend this one.  */
 end_comment
 
-begin_annotation
-annotation|@
-name|PackageMarker
-end_annotation
-
 begin_package
 package|package
 name|org
@@ -25,22 +20,6 @@ operator|.
 name|ddl
 package|;
 end_package
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|avatica
-operator|.
-name|util
-operator|.
-name|PackageMarker
-import|;
-end_import
 
 begin_comment
 comment|// End package-info.java

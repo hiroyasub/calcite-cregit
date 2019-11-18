@@ -7,11 +7,6 @@ begin_comment
 comment|/**  *<h2>SQL Implicit Type Cast</h2>  *  *<h3>Work Flow</h3>  *  *<p>This package contains rules for implicit type coercion, it works during  * the process of SQL validation. The transformation entrance are all kinds of  * checkers. i.e.  * {@link org.apache.calcite.sql.type.AssignableOperandTypeChecker AssignableOperandTypeChecker},  * {@link org.apache.calcite.sql.type.ComparableOperandTypeChecker ComparableOperandTypeChecker}  * {@link org.apache.calcite.sql.type.CompositeOperandTypeChecker CompositeOperandTypeChecker},  * {@link org.apache.calcite.sql.type.FamilyOperandTypeChecker FamilyOperandTypeChecker},  * {@link org.apache.calcite.sql.type.SameOperandTypeChecker SameOperandTypeChecker},  * {@link org.apache.calcite.sql.type.SetopOperandTypeChecker SetopOperandTypeChecker}.  *  *<ul>  *<li>  *     When user do validation for a {@link org.apache.calcite.sql.SqlNode SqlNode},  *     and the type coercion is turned on(default), the validator will check the  *     operands/return types of all kinds of operators, if the validation passes through,  *     the validator will just cache the data type (say RelDataType) for the  *     {@link org.apache.calcite.sql.SqlNode SqlNode} it has validated;</li>  *<li>If the validation fails, the validator will ask the  *   {@link org.apache.calcite.sql.validate.implicit.TypeCoercion TypeCoercion} about  *   if there can make implicit type coercion, if the coercion rules passed, the  *   {@link org.apache.calcite.sql.validate.implicit.TypeCoercion TypeCoercion} component  *   will replace the {@link org.apache.calcite.sql.SqlNode SqlNode} with a casted one,  *   (the node may be an operand of an operator or a column field of a selected row).</li>  *<li>{@link org.apache.calcite.sql.validate.implicit.TypeCoercion TypeCoercion}  *   will then update the inferred type for the casted node and  *   the containing operator/row column type.</li>  *<li>If the coercion rule fails again, the validator will just throw  *   the exception as is before.</li>  *</ul>  *  *<p>For some cases, although the validation passes, we still need the type coercion, e.g. for  * expression 1&gt; '1', Calcite will just return false without type coercion, we do type coercion  * eagerly here: the result expression would be transformed to "1&gt; cast('1' as int)" and  * the result would be true.  *  *<h3>Conversion SQL Contexts</h3>  *  *<p>The supported conversion contexts are:  *<a href="https://docs.google.com/document/d/1g2RUnLXyp_LjUlO-wbblKuP5hqEu3a_2Mt2k4dh6RwU/edit?usp=sharing">Conversion Expressions</a>  *  *<p>Strategies for Finding Common Type:</p>  *<ul>  *<li>If the operator has expected data types, just take them as the desired one. i.e. the UDF.  *</li>  *<li>If there is no expected data type but data type families are registered, try to coerce  *   operand to the family's default data type, i.e. the STRING family will have a VARCHAR type.  *</li>  *<li>If neither expected data type nor families are specified, try to find the tightest common  *   type of the node types, i.e. INTEGER and DOUBLE will return DOUBLE, the numeric precision  *   does not lose for this case.</li>  *<li>If no tightest common type is found, try to find a wider type, i.e. STRING and INT  *   will return int, we allow some precision loss when widening DECIMAL to fractional,  *   or promote to STRING.</li>  *</ul>  *  *<h3>Type Conversion Matrix</h3>  *  *<p>See<a href="https://docs.google.com/spreadsheets/d/1GhleX5h5W8-kJKh7NMJ4vtoE78pwfaZRJl88ULX_MgU/edit?usp=sharing">CalciteImplicitCasts</a>.  */
 end_comment
 
-begin_annotation
-annotation|@
-name|PackageMarker
-end_annotation
-
 begin_package
 package|package
 name|org
@@ -27,22 +22,6 @@ operator|.
 name|implicit
 package|;
 end_package
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|avatica
-operator|.
-name|util
-operator|.
-name|PackageMarker
-import|;
-end_import
 
 begin_comment
 comment|// End package-info.java

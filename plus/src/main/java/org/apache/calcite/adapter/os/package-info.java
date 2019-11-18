@@ -7,11 +7,6 @@ begin_comment
 comment|/**  * The OS adapter contains various table functions that let you query data  * sources in your operating system and environment.  */
 end_comment
 
-begin_annotation
-annotation|@
-name|PackageMarker
-end_annotation
-
 begin_package
 package|package
 name|org
@@ -25,22 +20,6 @@ operator|.
 name|os
 package|;
 end_package
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|avatica
-operator|.
-name|util
-operator|.
-name|PackageMarker
-import|;
-end_import
 
 begin_comment
 comment|// End package-info.java

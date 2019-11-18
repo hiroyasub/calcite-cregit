@@ -7,11 +7,6 @@ begin_comment
 comment|/**  * Implementations of statistics providers.  *  * @see org.apache.calcite.materialize.SqlStatisticProvider  */
 end_comment
 
-begin_annotation
-annotation|@
-name|PackageMarker
-end_annotation
-
 begin_package
 package|package
 name|org
@@ -23,22 +18,6 @@ operator|.
 name|statistic
 package|;
 end_package
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|avatica
-operator|.
-name|util
-operator|.
-name|PackageMarker
-import|;
-end_import
 
 begin_comment
 comment|// End package-info.java
