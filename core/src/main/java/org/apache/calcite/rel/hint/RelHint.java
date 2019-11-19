@@ -19,20 +19,6 @@ end_package
 
 begin_import
 import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|util
-operator|.
-name|ImmutableBitSet
-import|;
-end_import
-
-begin_import
-import|import
 name|com
 operator|.
 name|google
@@ -111,7 +97,10 @@ block|{
 comment|//~ Instance fields --------------------------------------------------------
 specifier|public
 specifier|final
-name|ImmutableBitSet
+name|ImmutableList
+argument_list|<
+name|Integer
+argument_list|>
 name|inheritPath
 decl_stmt|;
 specifier|public
@@ -188,9 +177,9 @@ name|this
 operator|.
 name|inheritPath
 operator|=
-name|ImmutableBitSet
+name|ImmutableList
 operator|.
-name|of
+name|copyOf
 argument_list|(
 name|inheritPath
 argument_list|)
