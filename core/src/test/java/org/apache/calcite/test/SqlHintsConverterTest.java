@@ -1474,8 +1474,9 @@ specifier|final
 name|RelHint
 name|hint
 init|=
-operator|new
 name|RelHint
+operator|.
+name|of
 argument_list|(
 name|Collections
 operator|.
@@ -1494,8 +1495,6 @@ literal|"EMP"
 argument_list|,
 literal|"DEPT"
 argument_list|)
-argument_list|,
-literal|null
 argument_list|)
 decl_stmt|;
 comment|// Validate Hep planner.
@@ -1633,8 +1632,9 @@ specifier|final
 name|RelHint
 name|hint
 init|=
-operator|new
 name|RelHint
+operator|.
+name|of
 argument_list|(
 name|Collections
 operator|.
@@ -1653,8 +1653,6 @@ literal|"EMP"
 argument_list|,
 literal|"DEPT"
 argument_list|)
-argument_list|,
-literal|null
 argument_list|)
 decl_stmt|;
 comment|// Validate Volcano planner.
@@ -2275,6 +2273,9 @@ name|expectedHint
 decl_stmt|;
 specifier|private
 name|Class
+argument_list|<
+name|?
+argument_list|>
 name|clazz
 decl_stmt|;
 comment|/**      * Creates the validate visitor.      *      * @param hint  the hint to validate      * @param clazz the node type to validate the hint with      */
@@ -2284,6 +2285,9 @@ name|RelHint
 name|hint
 parameter_list|,
 name|Class
+argument_list|<
+name|?
+argument_list|>
 name|clazz
 parameter_list|)
 block|{
@@ -2461,7 +2465,7 @@ return|return
 name|this
 return|;
 block|}
-name|Sql
+name|void
 name|ok
 parameter_list|()
 block|{
@@ -2472,9 +2476,6 @@ argument_list|,
 literal|"${hints}"
 argument_list|)
 expr_stmt|;
-return|return
-name|this
-return|;
 block|}
 specifier|private
 name|void
@@ -2591,7 +2592,7 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
-name|Sql
+name|void
 name|fails
 parameter_list|(
 name|String
@@ -2621,9 +2622,6 @@ argument_list|(
 name|sql
 argument_list|)
 expr_stmt|;
-return|return
-name|this
-return|;
 block|}
 comment|/** A shuttle to collect all the hints within the relational expression into a collection. */
 specifier|private
@@ -2828,8 +2826,9 @@ specifier|final
 name|RelHint
 name|PROPS_HINT
 init|=
-operator|new
 name|RelHint
+operator|.
+name|of
 argument_list|(
 operator|new
 name|ArrayList
@@ -2837,8 +2836,6 @@ argument_list|<>
 argument_list|()
 argument_list|,
 literal|"PROPERTIES"
-argument_list|,
-literal|null
 argument_list|,
 name|ImmutableMap
 operator|.
@@ -2859,8 +2856,9 @@ specifier|final
 name|RelHint
 name|IDX_HINT
 init|=
-operator|new
 name|RelHint
+operator|.
+name|of
 argument_list|(
 operator|new
 name|ArrayList
@@ -2875,8 +2873,6 @@ name|of
 argument_list|(
 literal|"ENAME"
 argument_list|)
-argument_list|,
-literal|null
 argument_list|)
 decl_stmt|;
 specifier|static
@@ -2884,8 +2880,9 @@ specifier|final
 name|RelHint
 name|JOIN_HINT
 init|=
-operator|new
 name|RelHint
+operator|.
+name|of
 argument_list|(
 operator|new
 name|ArrayList
@@ -2893,10 +2890,6 @@ argument_list|<>
 argument_list|()
 argument_list|,
 literal|"NO_HASH_JOIN"
-argument_list|,
-literal|null
-argument_list|,
-literal|null
 argument_list|)
 decl_stmt|;
 specifier|static

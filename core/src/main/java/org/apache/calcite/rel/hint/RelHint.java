@@ -86,7 +86,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Represents a hint within a relation expression.  */
+comment|/**  * Represents hint within a relation expression.  *  *<p>Every hint has a {@code inheritPath} (integers list) which records its propagate path  * from the root node,  * number `0` represents the hint is propagated from the first(left) child,  * number `1` represents the hint is propagated from the second(right) child.  *  *<p>Given a relational expression tree with initial attached hints:  *  *<blockquote><pre>  *            Filter (Hint1)  *                |  *               Join  *              /    \  *            Scan  Project (Hint2)  *                     |  *                    Scan2  *</pre></blockquote>  *  *<p>The plan would have hints path as follows  * (assumes each hint can be propagated to all child nodes):  *<ul>  *<li>Filter would have hints {Hint1[]}</li>  *<li>Join would have hints {Hint1[0]}</li>  *<li>Scan would have hints {Hint1[0, 0]}</li>  *<li>Project would have hints {Hint1[0,1], Hint2[]}</li>  *<li>Scan2 would have hints {[Hint1[0, 1, 0], Hint2[0]}</li>  *</ul>  *  *<p>The {@code listOptions} and {@code kvOptions} are supposed to contain the same information,  * they are mutually exclusive, that means, they can not both be non-empty.  *  *<p>The<code>RelHint</code> is immutable.  */
 end_comment
 
 begin_class
@@ -128,7 +128,7 @@ name|kvOptions
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
 comment|/**    * Creates a {@code RelHint}.    *    * @param inheritPath Hint inherit path    * @param hintName    Hint name    * @param listOption  Hint options as string list    * @param kvOptions   Hint options as string key value pair    */
-specifier|public
+specifier|private
 name|RelHint
 parameter_list|(
 name|Iterable
@@ -232,6 +232,120 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
+comment|/**    * Creates a {@link RelHint} with {@code inheritPath} and hint name.    *    * @param inheritPath Hint inherit path    * @param hintName    Hint name    * @return The {@link RelHint} instance with empty options    */
+specifier|public
+specifier|static
+name|RelHint
+name|of
+parameter_list|(
+name|Iterable
+argument_list|<
+name|Integer
+argument_list|>
+name|inheritPath
+parameter_list|,
+name|String
+name|hintName
+parameter_list|)
+block|{
+return|return
+operator|new
+name|RelHint
+argument_list|(
+name|inheritPath
+argument_list|,
+name|hintName
+argument_list|,
+literal|null
+argument_list|,
+literal|null
+argument_list|)
+return|;
+block|}
+comment|/**    * Creates a {@link RelHint} with {@code inheritPath}, hint name and list of string options.    *    * @param inheritPath Hint inherit path    * @param hintName    Hint name    * @param listOption  Hint options as a string list    * @return The {@link RelHint} instance with options as string list    */
+specifier|public
+specifier|static
+name|RelHint
+name|of
+parameter_list|(
+name|Iterable
+argument_list|<
+name|Integer
+argument_list|>
+name|inheritPath
+parameter_list|,
+name|String
+name|hintName
+parameter_list|,
+name|List
+argument_list|<
+name|String
+argument_list|>
+name|listOption
+parameter_list|)
+block|{
+return|return
+operator|new
+name|RelHint
+argument_list|(
+name|inheritPath
+argument_list|,
+name|hintName
+argument_list|,
+name|Objects
+operator|.
+name|requireNonNull
+argument_list|(
+name|listOption
+argument_list|)
+argument_list|,
+literal|null
+argument_list|)
+return|;
+block|}
+comment|/**    * Creates a {@link RelHint} with {@code inheritPath}, hint name    * and options as string key-values.    *    * @param inheritPath Hint inherit path    * @param hintName    Hint name    * @param kvOptions   Hint options as string key value pairs    * @return The {@link RelHint} instance with options as string key value pairs    */
+specifier|public
+specifier|static
+name|RelHint
+name|of
+parameter_list|(
+name|Iterable
+argument_list|<
+name|Integer
+argument_list|>
+name|inheritPath
+parameter_list|,
+name|String
+name|hintName
+parameter_list|,
+name|Map
+argument_list|<
+name|String
+argument_list|,
+name|String
+argument_list|>
+name|kvOptions
+parameter_list|)
+block|{
+return|return
+operator|new
+name|RelHint
+argument_list|(
+name|inheritPath
+argument_list|,
+name|hintName
+argument_list|,
+literal|null
+argument_list|,
+name|Objects
+operator|.
+name|requireNonNull
+argument_list|(
+name|kvOptions
+argument_list|)
+argument_list|)
+return|;
+block|}
 comment|/**    * Represents a copy of this hint that has a specified inherit path.    *    * @param inheritPath Hint path    * @return the new {@code RelHint}    */
 specifier|public
 name|RelHint
