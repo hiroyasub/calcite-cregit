@@ -515,6 +515,23 @@ argument_list|,
 literal|true
 argument_list|)
 decl_stmt|;
+comment|/**    * Whether to run Redis tests.    */
+specifier|public
+specifier|static
+specifier|final
+name|CalciteSystemProperty
+argument_list|<
+name|Boolean
+argument_list|>
+name|TEST_REDIS
+init|=
+name|booleanProperty
+argument_list|(
+literal|"calcite.test.redis"
+argument_list|,
+literal|true
+argument_list|)
+decl_stmt|;
 comment|/**    * A list of ids designating the queries    * (from query.json in new.hydromatic:foodmart-queries:0.4.1)    * that should be run as part of FoodmartTest.    */
 comment|// TODO review zabetak:
 comment|// The name of the property is not appropriate. A better alternative would be
