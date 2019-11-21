@@ -230,7 +230,7 @@ name|options
 argument_list|)
 return|;
 block|}
-comment|/**    * Returns the sql hint name    */
+comment|/**    * Returns the sql hint name.    */
 specifier|public
 name|String
 name|getName
@@ -253,7 +253,7 @@ return|return
 name|optionFormat
 return|;
 block|}
-comment|/**    * Returns a string list if the hint option is a list of    * simple SQL identifier, else an empty list    */
+comment|/**    * Returns a string list if the hint option is a list of    * simple SQL identifier, else an empty list.    */
 specifier|public
 name|List
 argument_list|<
@@ -328,7 +328,7 @@ argument_list|()
 return|;
 block|}
 block|}
-comment|/**    * Returns a key value string map if the hint option is a list of    * pair, each pair contains a simple SQL identifier and a string literal;    * else returns an empty map    */
+comment|/**    * Returns a key value string map if the hint option is a list of    * pair, each pair contains a simple SQL identifier and a string literal;    * else returns an empty map.    */
 specifier|public
 name|Map
 argument_list|<

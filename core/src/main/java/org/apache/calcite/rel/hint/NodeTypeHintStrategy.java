@@ -137,6 +137,9 @@ decl_stmt|;
 name|NodeType
 parameter_list|(
 name|Class
+argument_list|<
+name|?
+argument_list|>
 name|relClazz
 parameter_list|)
 block|{
