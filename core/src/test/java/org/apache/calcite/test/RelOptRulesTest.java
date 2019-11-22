@@ -24916,6 +24916,50 @@ expr_stmt|;
 block|}
 end_function
 
+begin_comment
+comment|/** Tests {@link AggregateProjectPullUpConstantsRule} where    * there are group keys of type    * {@link org.apache.calcite.sql.fun.SqlAbstractTimeFunction}    * that can not be removed. */
+end_comment
+
+begin_function
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testAggregateDynamicFunction
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select hiredate\n"
+operator|+
+literal|"from sales.emp\n"
+operator|+
+literal|"where sal is null and hiredate = current_timestamp\n"
+operator|+
+literal|"group by sal, hiredate\n"
+operator|+
+literal|"having count(*)> 3"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|withRule
+argument_list|(
+name|AggregateProjectPullUpConstantsRule
+operator|.
+name|INSTANCE2
+argument_list|)
+operator|.
+name|checkUnchanged
+argument_list|()
+expr_stmt|;
+block|}
+end_function
+
 begin_function
 annotation|@
 name|Test

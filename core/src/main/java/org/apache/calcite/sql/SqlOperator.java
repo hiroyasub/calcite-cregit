@@ -2566,7 +2566,7 @@ operator|.
 name|NOT_MONOTONIC
 return|;
 block|}
-comment|/**    * @return true iff a call to this operator is guaranteed to always return    * the same result given the same operands; true is assumed by default    */
+comment|/**    * Returns whether a call to this operator is guaranteed to always return    * the same result given the same operands; true is assumed by default    */
 specifier|public
 name|boolean
 name|isDeterministic
@@ -2576,7 +2576,7 @@ return|return
 literal|true
 return|;
 block|}
-comment|/**    * @return true iff it is unsafe to cache query plans referencing this    * operator; false is assumed by default    */
+comment|/**    * Returns whether it is unsafe to cache query plans referencing this    * operator; false is assumed by default    */
 specifier|public
 name|boolean
 name|isDynamicFunction

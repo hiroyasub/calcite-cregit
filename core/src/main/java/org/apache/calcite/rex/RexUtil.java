@@ -2445,9 +2445,21 @@ name|RexCall
 name|call
 parameter_list|)
 block|{
-comment|// Constant if operator is deterministic and all operands are
-comment|// constant.
+comment|// Constant if operator meets the following conditions:
+comment|// 1. It is non-dynamic, e.g. it is safe to
+comment|//    cache query plans referencing this operator;
+comment|// 2. It is deterministic;
+comment|// 3. All its operands are constant.
 return|return
+operator|!
+name|call
+operator|.
+name|getOperator
+argument_list|()
+operator|.
+name|isDynamicFunction
+argument_list|()
+operator|&&
 name|call
 operator|.
 name|getOperator

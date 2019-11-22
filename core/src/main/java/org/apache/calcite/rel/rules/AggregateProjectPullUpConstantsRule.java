@@ -340,7 +340,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Planner rule that removes constant keys from an  * {@link org.apache.calcite.rel.core.Aggregate}.  *  *<p>Constant fields are deduced using  * {@link RelMetadataQuery#getPulledUpPredicates(RelNode)}; the input does not  * need to be a {@link org.apache.calcite.rel.core.Project}.  *  *<p>This rules never removes the last column, because {@code Aggregate([])}  * returns 1 row even if its input is empty.  *  *<p>Since the transformed relational expression has to match the original  * relational expression, the constants are placed in a projection above the  * reduced aggregate. If those constants are not used, another rule will remove  * them from the project.  */
+comment|/**  * Planner rule that removes constant keys from an  * {@link org.apache.calcite.rel.core.Aggregate}.  *  *<p>Constant fields are deduced using  * {@link RelMetadataQuery#getPulledUpPredicates(RelNode)}; the input does not  * need to be a {@link org.apache.calcite.rel.core.Project}.  *  *<p>This rule never removes the last column, because {@code Aggregate([])}  * returns 1 row even if its input is empty.  *  *<p>Since the transformed relational expression has to match the original  * relational expression, the constants are placed in a projection above the  * reduced aggregate. If those constants are not used, another rule will remove  * them from the project.  */
 end_comment
 
 begin_class
