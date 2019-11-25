@@ -523,6 +523,14 @@ name|ENUMERABLE_UNION_RULE
 argument_list|,
 name|EnumerableRules
 operator|.
+name|ENUMERABLE_INTERSECT_RULE
+argument_list|,
+name|EnumerableRules
+operator|.
+name|ENUMERABLE_MINUS_RULE
+argument_list|,
+name|EnumerableRules
+operator|.
 name|ENUMERABLE_WINDOW_RULE
 argument_list|,
 name|EnumerableRules
@@ -1753,6 +1761,208 @@ init|=
 literal|""
 operator|+
 literal|"LogicalUnion(all=[true])\n"
+operator|+
+literal|"  LogicalProject(DEPTNO=[$0])\n"
+operator|+
+literal|"    LogicalTableScan(table=[[scott, DEPT]])\n"
+operator|+
+literal|"  LogicalProject(DEPTNO=[$7])\n"
+operator|+
+literal|"    LogicalTableScan(table=[[scott, EMP]])\n"
+decl_stmt|;
+name|verify
+argument_list|(
+name|rel
+argument_list|,
+name|expectedPhysial
+argument_list|,
+name|expectedLogical
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testIntersect
+parameter_list|()
+block|{
+comment|// Equivalent SQL:
+comment|//   SELECT deptno FROM emp
+comment|//   INTERSECT ALL
+comment|//   SELECT deptno FROM dept
+specifier|final
+name|RelBuilder
+name|builder
+init|=
+name|builder
+argument_list|()
+decl_stmt|;
+name|RelNode
+name|rel
+init|=
+name|builder
+operator|.
+name|scan
+argument_list|(
+literal|"DEPT"
+argument_list|)
+operator|.
+name|project
+argument_list|(
+name|builder
+operator|.
+name|field
+argument_list|(
+literal|"DEPTNO"
+argument_list|)
+argument_list|)
+operator|.
+name|scan
+argument_list|(
+literal|"EMP"
+argument_list|)
+operator|.
+name|project
+argument_list|(
+name|builder
+operator|.
+name|field
+argument_list|(
+literal|"DEPTNO"
+argument_list|)
+argument_list|)
+operator|.
+name|intersect
+argument_list|(
+literal|true
+argument_list|)
+operator|.
+name|build
+argument_list|()
+decl_stmt|;
+name|String
+name|expectedPhysial
+init|=
+literal|""
+operator|+
+literal|"EnumerableIntersect(all=[true])\n"
+operator|+
+literal|"  EnumerableProject(DEPTNO=[$0])\n"
+operator|+
+literal|"    EnumerableTableScan(table=[[scott, DEPT]])\n"
+operator|+
+literal|"  EnumerableProject(DEPTNO=[$7])\n"
+operator|+
+literal|"    EnumerableTableScan(table=[[scott, EMP]])\n"
+decl_stmt|;
+name|String
+name|expectedLogical
+init|=
+literal|""
+operator|+
+literal|"LogicalIntersect(all=[true])\n"
+operator|+
+literal|"  LogicalProject(DEPTNO=[$0])\n"
+operator|+
+literal|"    LogicalTableScan(table=[[scott, DEPT]])\n"
+operator|+
+literal|"  LogicalProject(DEPTNO=[$7])\n"
+operator|+
+literal|"    LogicalTableScan(table=[[scott, EMP]])\n"
+decl_stmt|;
+name|verify
+argument_list|(
+name|rel
+argument_list|,
+name|expectedPhysial
+argument_list|,
+name|expectedLogical
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testMinus
+parameter_list|()
+block|{
+comment|// Equivalent SQL:
+comment|//   SELECT deptno FROM emp
+comment|//   EXCEPT ALL
+comment|//   SELECT deptno FROM dept
+specifier|final
+name|RelBuilder
+name|builder
+init|=
+name|builder
+argument_list|()
+decl_stmt|;
+name|RelNode
+name|rel
+init|=
+name|builder
+operator|.
+name|scan
+argument_list|(
+literal|"DEPT"
+argument_list|)
+operator|.
+name|project
+argument_list|(
+name|builder
+operator|.
+name|field
+argument_list|(
+literal|"DEPTNO"
+argument_list|)
+argument_list|)
+operator|.
+name|scan
+argument_list|(
+literal|"EMP"
+argument_list|)
+operator|.
+name|project
+argument_list|(
+name|builder
+operator|.
+name|field
+argument_list|(
+literal|"DEPTNO"
+argument_list|)
+argument_list|)
+operator|.
+name|minus
+argument_list|(
+literal|true
+argument_list|)
+operator|.
+name|build
+argument_list|()
+decl_stmt|;
+name|String
+name|expectedPhysial
+init|=
+literal|""
+operator|+
+literal|"EnumerableMinus(all=[true])\n"
+operator|+
+literal|"  EnumerableProject(DEPTNO=[$0])\n"
+operator|+
+literal|"    EnumerableTableScan(table=[[scott, DEPT]])\n"
+operator|+
+literal|"  EnumerableProject(DEPTNO=[$7])\n"
+operator|+
+literal|"    EnumerableTableScan(table=[[scott, EMP]])\n"
+decl_stmt|;
+name|String
+name|expectedLogical
+init|=
+literal|""
+operator|+
+literal|"LogicalMinus(all=[true])\n"
 operator|+
 literal|"  LogicalProject(DEPTNO=[$0])\n"
 operator|+
