@@ -105,6 +105,20 @@ name|calcite
 operator|.
 name|sql
 operator|.
+name|SqlAlienSystemTypeNameSpec
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
 name|SqlCall
 import|;
 end_import
@@ -204,20 +218,6 @@ operator|.
 name|sql
 operator|.
 name|SqlTimestampLiteral
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|sql
-operator|.
-name|SqlUserDefinedTypeNameSpec
 import|;
 end_import
 
@@ -539,7 +539,7 @@ name|SMALLINT
 case|:
 name|castSpec
 operator|=
-literal|"_NUMBER(5)"
+literal|"NUMBER(5)"
 expr_stmt|;
 break|break;
 case|case
@@ -547,7 +547,7 @@ name|INTEGER
 case|:
 name|castSpec
 operator|=
-literal|"_NUMBER(10)"
+literal|"NUMBER(10)"
 expr_stmt|;
 break|break;
 case|case
@@ -555,7 +555,7 @@ name|BIGINT
 case|:
 name|castSpec
 operator|=
-literal|"_NUMBER(19)"
+literal|"NUMBER(19)"
 expr_stmt|;
 break|break;
 case|case
@@ -563,7 +563,7 @@ name|DOUBLE
 case|:
 name|castSpec
 operator|=
-literal|"_DOUBLE PRECISION"
+literal|"DOUBLE PRECISION"
 expr_stmt|;
 break|break;
 default|default:
@@ -581,9 +581,14 @@ operator|new
 name|SqlDataTypeSpec
 argument_list|(
 operator|new
-name|SqlUserDefinedTypeNameSpec
+name|SqlAlienSystemTypeNameSpec
 argument_list|(
 name|castSpec
+argument_list|,
+name|type
+operator|.
+name|getSqlTypeName
+argument_list|()
 argument_list|,
 name|SqlParserPos
 operator|.

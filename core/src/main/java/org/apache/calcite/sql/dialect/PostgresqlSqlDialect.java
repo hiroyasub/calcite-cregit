@@ -107,6 +107,20 @@ name|calcite
 operator|.
 name|sql
 operator|.
+name|SqlAlienSystemTypeNameSpec
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
 name|SqlCall
 import|;
 end_import
@@ -164,20 +178,6 @@ operator|.
 name|sql
 operator|.
 name|SqlNode
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|sql
-operator|.
-name|SqlUserDefinedTypeNameSpec
 import|;
 end_import
 
@@ -411,7 +411,7 @@ case|:
 comment|// Postgres has no tinyint (1 byte), so instead cast to smallint (2 bytes)
 name|castSpec
 operator|=
-literal|"_smallint"
+literal|"smallint"
 expr_stmt|;
 break|break;
 case|case
@@ -420,7 +420,7 @@ case|:
 comment|// Postgres has a double type but it is named differently
 name|castSpec
 operator|=
-literal|"_double precision"
+literal|"double precision"
 expr_stmt|;
 break|break;
 default|default:
@@ -438,9 +438,14 @@ operator|new
 name|SqlDataTypeSpec
 argument_list|(
 operator|new
-name|SqlUserDefinedTypeNameSpec
+name|SqlAlienSystemTypeNameSpec
 argument_list|(
 name|castSpec
+argument_list|,
+name|type
+operator|.
+name|getSqlTypeName
+argument_list|()
 argument_list|,
 name|SqlParserPos
 operator|.

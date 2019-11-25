@@ -162,7 +162,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Represents a SQL data type specification in a parse tree.  *  *<p>A<code>SqlDataTypeSpec</code> is immutable; once created, you cannot  * change any of the fields.</p>  *  *<p>todo: This should really be a subtype of {@link SqlCall}.</p>  *  *<p>we support complex type expressions  * like:</p>  *  *<blockquote><code>ROW(<br>  *   foo NUMBER(5, 2) NOT NULL,<br>  *   rec ROW(b BOOLEAN, i MyUDT NOT NULL))</code></blockquote>  *  *<p>Internally we use {@link SqlRowTypeNameSpec} to specify row data type name.  *  *<p>We support simple data types like CHAR, VARCHAR and DOUBLE,  * with optional precision and scale.</p>  *  *<p>Internally we use {@link SqlBasicTypeNameSpec} to specify basic sql data type name.  */
+comment|/**  * Represents a SQL data type specification in a parse tree.  *  *<p>A<code>SqlDataTypeSpec</code> is immutable; once created, you cannot  * change any of the fields.</p>  *  *<p>We support the following data type expressions:  *  *<ul>  *<li>Complex data type expression like:  *<blockquote><code>ROW(<br>  *     foo NUMBER(5, 2) NOT NULL,<br>  *       rec ROW(b BOOLEAN, i MyUDT NOT NULL))</code></blockquote>  *   Internally we use {@link SqlRowTypeNameSpec} to specify row data type name.  *</li>  *<li>Simple data type expression like CHAR, VARCHAR and DOUBLE  *   with optional precision and scale;  *   Internally we use {@link SqlBasicTypeNameSpec} to specify basic sql data type name.  *</li>  *<li>Collection data type expression like:  *<blockquote><code>  *     INT ARRAY;  *     VARCHAR(20) MULTISET;  *     INT ARRAY MULTISET;</code></blockquote>  *   Internally we use {@link SqlCollectionTypeNameSpec} to specify collection data type name.  *</li>  *<li>User defined data type expression like `My_UDT`;  *   Internally we use {@link SqlUserDefinedTypeNameSpec} to specify user defined data type name.  *</li>  *</ul>  */
 end_comment
 
 begin_class
@@ -180,21 +180,16 @@ name|typeNameSpec
 decl_stmt|;
 specifier|private
 specifier|final
-name|SqlTypeNameSpec
-name|baseTypeName
-decl_stmt|;
-specifier|private
-specifier|final
 name|TimeZone
 name|timeZone
 decl_stmt|;
-comment|/** Whether data type is allows nulls.    *    *<p>Nullable is nullable! Null means "not specified". E.g.    * {@code CAST(x AS INTEGER)} preserves has the same nullability as {@code x}.    */
+comment|/** Whether data type allows nulls.    *    *<p>Nullable is nullable! Null means "not specified". E.g.    * {@code CAST(x AS INTEGER)} preserves the same nullability as {@code x}.    */
 specifier|private
 name|Boolean
 name|nullable
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**    * Creates a type specification representing a type.    *    * @param typeNameSpec The type name can be basic sql type, row type,    *                     collections type and user defined type.    */
+comment|/**    * Creates a type specification representing a type.    *    * @param typeNameSpec The type name can be basic sql type, row type,    *                     collections type and user defined type    */
 specifier|public
 name|SqlDataTypeSpec
 parameter_list|(
@@ -218,7 +213,7 @@ name|pos
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Creates a type specification representing a type, with time zone specified.    *    * @param typeNameSpec The type name can be basic sql type, row type,    *                     collections type and user defined type.    * @param timeZone     Specified time zone.    */
+comment|/**    * Creates a type specification representing a type, with time zone specified.    *    * @param typeNameSpec The type name can be basic sql type, row type,    *                     collections type and user defined type    * @param timeZone     Specified time zone    */
 specifier|public
 name|SqlDataTypeSpec
 parameter_list|(
@@ -245,46 +240,12 @@ name|pos
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Creates a type specification representing a type, with time zone    * and nullability specified.    *    * @param typeNameSpec The type name can be basic sql type, row type,    *                     collections type and user defined type.    * @param timeZone     Specified time zone.    * @param nullable     The nullability.    */
+comment|/**    * Creates a type specification representing a type, with time zone,    * nullability and base type name specified.    *    * @param typeNameSpec The type name can be basic sql type, row type,    *                     collections type and user defined type    * @param timeZone     Specified time zone    * @param nullable     The nullability    */
 specifier|public
 name|SqlDataTypeSpec
 parameter_list|(
 name|SqlTypeNameSpec
 name|typeNameSpec
-parameter_list|,
-name|TimeZone
-name|timeZone
-parameter_list|,
-name|Boolean
-name|nullable
-parameter_list|,
-name|SqlParserPos
-name|pos
-parameter_list|)
-block|{
-name|this
-argument_list|(
-name|typeNameSpec
-argument_list|,
-name|typeNameSpec
-argument_list|,
-name|timeZone
-argument_list|,
-name|nullable
-argument_list|,
-name|pos
-argument_list|)
-expr_stmt|;
-block|}
-comment|/**    * Creates a type specification representing a type, with time zone,    * nullability and base type name specified.    *    * @param typeNameSpec The type name can be basic sql type, row type,    *                     collections type and user defined type.    * @param baseTypeName The base type name.    * @param timeZone     Specified time zone.    * @param nullable     The nullability.    */
-specifier|public
-name|SqlDataTypeSpec
-parameter_list|(
-name|SqlTypeNameSpec
-name|typeNameSpec
-parameter_list|,
-name|SqlTypeNameSpec
-name|baseTypeName
 parameter_list|,
 name|TimeZone
 name|timeZone
@@ -306,12 +267,6 @@ operator|.
 name|typeNameSpec
 operator|=
 name|typeNameSpec
-expr_stmt|;
-name|this
-operator|.
-name|baseTypeName
-operator|=
-name|baseTypeName
 expr_stmt|;
 name|this
 operator|.
@@ -693,7 +648,7 @@ literal|false
 argument_list|)
 return|;
 block|}
-comment|/**    * Converts this type specification to a {@link RelDataType}.    *    *<p>Throws an error if the type is not found.    *    * @param nullable Whether the type is nullable if the type specification    *                 does not explicitly state.    */
+comment|/**    * Converts this type specification to a {@link RelDataType}.    *    *<p>Throws an error if the type is not found.    *    * @param nullable Whether the type is nullable if the type specification    *                 does not explicitly state    */
 specifier|public
 name|RelDataType
 name|deriveType
@@ -743,7 +698,7 @@ name|type
 return|;
 block|}
 comment|//~ Tools ------------------------------------------------------------------
-comment|/**    * Fix up the nullability of the {@code type}.    * @param typeFactory Type factory.    * @param type        The type to coerce nullability.    * @param nullable    Default nullability to use if this type specification does not    *                    specify nullability.    * @return type with specified nullability or the default.    */
+comment|/**    * Fix up the nullability of the {@code type}.    *    * @param typeFactory Type factory    * @param type        The type to coerce nullability    * @param nullable    Default nullability to use if this type specification does not    *                    specify nullability    * @return Type with specified nullability or the default(false)    */
 specifier|private
 name|RelDataType
 name|fixUpNullability
