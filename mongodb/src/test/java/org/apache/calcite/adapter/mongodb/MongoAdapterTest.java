@@ -1404,7 +1404,7 @@ name|runs
 argument_list|()
 expr_stmt|;
 block|}
-comment|/** Tests that we don't generate multiple constraints on the same column.    * MongoDB doesn't like it. If there is an '=', it supersedes all other    * operators. */
+comment|/**    * Tests that mongo query is empty when filter simplified to false.    */
 annotation|@
 name|Test
 specifier|public
@@ -1428,19 +1428,7 @@ operator|.
 name|queryContains
 argument_list|(
 name|mongoChecker
-argument_list|(
-literal|"{\n"
-operator|+
-literal|"  \"$match\": {\n"
-operator|+
-literal|"    \"state\": \"OK\"\n"
-operator|+
-literal|"  }\n"
-operator|+
-literal|"}"
-argument_list|,
-literal|"{$project: {CITY: '$city', LONGITUDE: '$loc[0]', LATITUDE: '$loc[1]', POP: '$pop', STATE: '$state', ID: '$_id'}}"
-argument_list|)
+argument_list|()
 argument_list|)
 expr_stmt|;
 block|}

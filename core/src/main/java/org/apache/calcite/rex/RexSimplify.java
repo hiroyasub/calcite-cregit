@@ -11724,7 +11724,7 @@ name|literal
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Creates a comparison, between a {@link RexInputRef} or {@link RexFieldAccess}      * and a literal. */
+comment|/** Creates a comparison, between a {@link RexInputRef} or {@link RexFieldAccess} or      * deterministic {@link RexCall} and a literal. */
 specifier|static
 name|Comparison
 name|of
@@ -11747,6 +11747,13 @@ argument_list|(
 name|node
 argument_list|,
 literal|true
+argument_list|)
+operator|||
+name|RexUtil
+operator|.
+name|isDeterministic
+argument_list|(
+name|node
 argument_list|)
 argument_list|)
 return|;

@@ -2242,7 +2242,7 @@ name|explain
 init|=
 literal|"PLAN="
 operator|+
-literal|"EnumerableHashJoin(condition=[=($0, $3)], joinType=[inner])\n"
+literal|"EnumerableNestedLoopJoin(condition=[true], joinType=[inner])\n"
 operator|+
 literal|"  EnumerableInterpreter\n"
 operator|+

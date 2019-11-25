@@ -1658,9 +1658,7 @@ name|plan
 init|=
 literal|"PLAN="
 operator|+
-literal|"EnumerableCalc(expr#0..1=[{inputs}], expr#2=[false], proj#0..1=[{exprs}], $condition=[$t2])\n"
-operator|+
-literal|"  EnumerableValues(tuples=[[{ 1, 'a' }, { 2, 'b' }, { 1, 'b' }, { 2, 'c' }, { 2, 'c' }]])\n\n"
+literal|"EnumerableValues(tuples=[[]])\n\n"
 decl_stmt|;
 specifier|final
 name|String
@@ -1831,9 +1829,7 @@ name|plan
 init|=
 literal|"PLAN="
 operator|+
-literal|"EnumerableCalc(expr#0..1=[{inputs}], expr#2=[IS NULL($t0)], proj#0..1=[{exprs}], $condition=[$t2])\n"
-operator|+
-literal|"  EnumerableValues(tuples=[[{ 1, 'a' }, { 2, 'b' }, { 1, 'b' }, { 2, 'c' }, { 2, 'c' }]])\n\n"
+literal|"EnumerableValues(tuples=[[]])\n\n"
 decl_stmt|;
 specifier|final
 name|String

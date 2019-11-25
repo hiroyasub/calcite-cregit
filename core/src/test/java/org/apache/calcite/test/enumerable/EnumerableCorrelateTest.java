@@ -538,13 +538,13 @@ literal|""
 operator|+
 literal|"EnumerableCalc(expr#0..3=[{inputs}], empid=[$t1], name=[$t3])\n"
 operator|+
-literal|"  EnumerableCorrelate(correlation=[$cor5], joinType=[inner], requiredColumns=[{0}])\n"
+literal|"  EnumerableCorrelate(correlation=[$cor4], joinType=[inner], requiredColumns=[{0}])\n"
 operator|+
 literal|"    EnumerableAggregate(group=[{0}])\n"
 operator|+
 literal|"      EnumerableTableScan(table=[[s, depts]])\n"
 operator|+
-literal|"    EnumerableCalc(expr#0..4=[{inputs}], expr#5=[100], expr#6=[>($t0, $t5)], expr#7=[$cor5], expr#8=[$t7.deptno], expr#9=[=($t1, $t8)], expr#10=[AND($t6, $t9)], proj#0..2=[{exprs}], $condition=[$t10])\n"
+literal|"    EnumerableCalc(expr#0..4=[{inputs}], expr#5=[$cor4], expr#6=[$t5.deptno], expr#7=[=($t1, $t6)], expr#8=[100], expr#9=[>($t0, $t8)], expr#10=[AND($t7, $t9)], proj#0..2=[{exprs}], $condition=[$t10])\n"
 operator|+
 literal|"      EnumerableTableScan(table=[[s, emps]])"
 argument_list|)
