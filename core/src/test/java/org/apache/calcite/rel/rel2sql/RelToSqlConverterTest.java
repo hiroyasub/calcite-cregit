@@ -2137,6 +2137,145 @@ name|expectedMySql
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Tests a query with GROUP BY and a sub-query which is also with GROUP BY.    * If we flatten sub-queries, the number of rows going into AVG becomes    * incorrect. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSelectQueryWithGroupBySubQuery1
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|query
+init|=
+literal|"select \"product_class_id\", avg(\"product_id\")\n"
+operator|+
+literal|"from (select \"product_class_id\", \"product_id\", avg(\"product_class_id\")\n"
+operator|+
+literal|"from \"product\"\n"
+operator|+
+literal|"group by \"product_class_id\", \"product_id\") as t\n"
+operator|+
+literal|"group by \"product_class_id\""
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT \"product_class_id\", AVG(\"product_id\")\n"
+operator|+
+literal|"FROM (SELECT \"product_class_id\", \"product_id\"\n"
+operator|+
+literal|"FROM \"foodmart\".\"product\"\n"
+operator|+
+literal|"GROUP BY \"product_class_id\", \"product_id\") AS \"t1\"\n"
+operator|+
+literal|"GROUP BY \"product_class_id\""
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Tests query without GROUP BY but an aggregate function    * and a sub-query which is with GROUP BY. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSelectQueryWithGroupBySubQuery2
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|query
+init|=
+literal|"select sum(\"product_id\")\n"
+operator|+
+literal|"from (select \"product_class_id\", \"product_id\"\n"
+operator|+
+literal|"from \"product\"\n"
+operator|+
+literal|"group by \"product_class_id\", \"product_id\") as t"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT SUM(\"product_id\")\n"
+operator|+
+literal|"FROM (SELECT \"product_id\"\n"
+operator|+
+literal|"FROM \"foodmart\".\"product\"\n"
+operator|+
+literal|"GROUP BY \"product_class_id\", \"product_id\") AS \"t1\""
+decl_stmt|;
+specifier|final
+name|String
+name|expectedMysql
+init|=
+literal|"SELECT SUM(`product_id`)\n"
+operator|+
+literal|"FROM (SELECT `product_id`\n"
+operator|+
+literal|"FROM `foodmart`.`product`\n"
+operator|+
+literal|"GROUP BY `product_class_id`, `product_id`) AS `t1`"
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+operator|.
+name|withMysql
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expectedMysql
+argument_list|)
+expr_stmt|;
+comment|// Equivalent sub-query that uses SELECT DISTINCT
+specifier|final
+name|String
+name|query2
+init|=
+literal|"select sum(\"product_id\")\n"
+operator|+
+literal|"from (select distinct \"product_class_id\", \"product_id\"\n"
+operator|+
+literal|"    from \"product\") as t"
+decl_stmt|;
+name|sql
+argument_list|(
+name|query2
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+operator|.
+name|withMysql
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expectedMysql
+argument_list|)
+expr_stmt|;
+block|}
 comment|/** CUBE of one column is equivalent to ROLLUP, and Calcite recognizes    * this. */
 annotation|@
 name|Test
