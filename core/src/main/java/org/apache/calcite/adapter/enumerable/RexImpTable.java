@@ -17423,6 +17423,8 @@ name|get
 argument_list|(
 literal|0
 argument_list|)
+argument_list|,
+name|nullAs
 argument_list|)
 return|;
 block|}
@@ -17446,7 +17448,7 @@ argument_list|)
 argument_list|,
 name|NullAs
 operator|.
-name|IS_NULL
+name|IS_NOT_NULL
 argument_list|)
 argument_list|,
 name|translator
