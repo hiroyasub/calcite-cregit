@@ -9432,6 +9432,17 @@ name|right
 argument_list|)
 argument_list|)
 expr_stmt|;
+if|if
+condition|(
+name|joinType
+operator|==
+name|JoinType
+operator|.
+name|SEMI
+condition|)
+block|{
+break|break;
+block|}
 block|}
 block|}
 block|}
