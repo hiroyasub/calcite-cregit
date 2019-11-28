@@ -8740,6 +8740,14 @@ argument_list|>
 name|clazz
 parameter_list|)
 block|{
+name|Range
+argument_list|<
+name|C
+argument_list|>
+name|result
+init|=
+name|r0
+decl_stmt|;
 for|for
 control|(
 name|RexNode
@@ -8854,7 +8862,7 @@ argument_list|)
 decl_stmt|;
 if|if
 condition|(
-name|r0
+name|result
 operator|.
 name|encloses
 argument_list|(
@@ -8864,16 +8872,18 @@ condition|)
 block|{
 comment|// Given these predicates, term is always satisfied.
 comment|// e.g. r0 is "$0< 10", r1 is "$0< 5"
-return|return
+name|result
+operator|=
 name|Range
 operator|.
 name|all
 argument_list|()
-return|;
+expr_stmt|;
+continue|continue;
 block|}
 if|if
 condition|(
-name|r0
+name|result
 operator|.
 name|isConnected
 argument_list|(
@@ -8881,14 +8891,16 @@ name|r1
 argument_list|)
 condition|)
 block|{
-return|return
-name|r0
+name|result
+operator|=
+name|result
 operator|.
 name|intersection
 argument_list|(
 name|r1
 argument_list|)
-return|;
+expr_stmt|;
+continue|continue;
 block|}
 comment|// Ranges do not intersect. Return null meaning the empty range.
 return|return
@@ -8898,7 +8910,7 @@ block|}
 block|}
 block|}
 return|return
-name|r0
+name|result
 return|;
 block|}
 comment|/** Simplifies OR(x, x) into x, and similar.    * The simplified expression returns UNKNOWN values as is (not as FALSE). */
