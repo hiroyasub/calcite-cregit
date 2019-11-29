@@ -279,15 +279,13 @@ name|explain
 init|=
 literal|"PLAN="
 operator|+
-literal|"EnumerableCalc(expr#0..2=[{inputs}], day=[$t1], week_day=[$t2], C=[$t0])\n"
+literal|"EnumerableNestedLoopJoin(condition=[true], joinType=[inner])\n"
 operator|+
-literal|"  EnumerableHashJoin(condition=[true], joinType=[inner])\n"
+literal|"  JdbcToEnumerableConverter\n"
 operator|+
-literal|"    EnumerableValues(tuples=[[{ 1 }, { 2 }]])\n"
+literal|"    JdbcTableScan(table=[[foodmart, days]])\n"
 operator|+
-literal|"    JdbcToEnumerableConverter\n"
-operator|+
-literal|"      JdbcTableScan(table=[[foodmart, days]])"
+literal|"  EnumerableValues(tuples=[[{ 1 }, { 2 }]])"
 decl_stmt|;
 specifier|final
 name|String
@@ -1188,7 +1186,7 @@ argument_list|)
 operator|.
 name|explainContains
 argument_list|(
-literal|"PLAN=EnumerableHashJoin(condition=[true], "
+literal|"PLAN=EnumerableNestedLoopJoin(condition=[true], "
 operator|+
 literal|"joinType=[inner])\n"
 operator|+

@@ -131,11 +131,37 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|junit
+operator|.
+name|jupiter
+operator|.
+name|api
+operator|.
+name|Timeout
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
 operator|.
 name|List
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|concurrent
+operator|.
+name|TimeUnit
 import|;
 end_import
 
@@ -2141,6 +2167,19 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|// a bit slow
+annotation|@
+name|Timeout
+argument_list|(
+name|value
+operator|=
+literal|10
+argument_list|,
+name|unit
+operator|=
+name|TimeUnit
+operator|.
+name|MINUTES
+argument_list|)
 annotation|@
 name|Test
 specifier|public

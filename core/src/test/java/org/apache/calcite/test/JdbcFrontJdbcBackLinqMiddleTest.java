@@ -374,7 +374,7 @@ literal|"EnumerableAggregate(group=[{}], EXPR$0=[COUNT()])\n"
 operator|+
 literal|"  EnumerableCalc(expr#0..1=[{inputs}], expr#2=[0], expr#3=[-($t0, $t1)], expr#4=[=($t3, $t2)], DUMMY=[$t2], $condition=[$t4])\n"
 operator|+
-literal|"    EnumerableHashJoin(condition=[true], joinType=[inner])\n"
+literal|"    EnumerableNestedLoopJoin(condition=[true], joinType=[inner])\n"
 operator|+
 literal|"      JdbcToEnumerableConverter\n"
 operator|+

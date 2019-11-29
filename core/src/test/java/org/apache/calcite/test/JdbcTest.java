@@ -11785,17 +11785,15 @@ argument_list|)
 operator|.
 name|explainContains
 argument_list|(
-literal|"EnumerableCalc(expr#0..1=[{inputs}], EMPNO=[$t1], DESC=[$t0])\n"
+literal|"EnumerableAggregate(group=[{0, 3}])\n"
 operator|+
-literal|"  EnumerableAggregate(group=[{1, 2}])\n"
+literal|"  EnumerableNestedLoopJoin(condition=[=(CAST($1):INTEGER NOT NULL, $2)], joinType=[inner])\n"
 operator|+
-literal|"    EnumerableCalc(expr#0..3=[{inputs}], expr#4=[CAST($t3):INTEGER NOT NULL], expr#5=[=($t4, $t0)], expr#6=['SameName'], expr#7=[=($t1, $t6)], expr#8=[AND($t5, $t7)], proj#0..3=[{exprs}], $condition=[$t8])\n"
+literal|"    EnumerableTableScan(table=[[SALES, EMPS]])\n"
 operator|+
-literal|"      EnumerableHashJoin(condition=[true], joinType=[inner])\n"
+literal|"    EnumerableCalc(expr#0..1=[{inputs}], expr#2=['SameName'], expr#3=[=($t1, $t2)], proj#0..1=[{exprs}], $condition=[$t3])\n"
 operator|+
-literal|"        EnumerableValues(tuples=[[{ 10, 'SameName' }]])\n"
-operator|+
-literal|"        EnumerableTableScan(table=[[SALES, EMPS]])\n"
+literal|"      EnumerableValues(tuples=[[{ 10, 'SameName' }]])\n"
 argument_list|)
 operator|.
 name|returns
@@ -16819,6 +16817,12 @@ argument_list|,
 literal|"value=F; value=F"
 argument_list|,
 literal|"value=F; value=null"
+argument_list|,
+literal|"value=null; value=T"
+argument_list|,
+literal|"value=null; value=F"
+argument_list|,
+literal|"value=null; value=null"
 argument_list|)
 expr_stmt|;
 block|}
@@ -17693,7 +17697,7 @@ specifier|final
 name|String
 name|explain
 init|=
-literal|"EnumerableHashJoin(condition=[true], joinType=[left])\n"
+literal|"EnumerableNestedLoopJoin(condition=[true], joinType=[left])\n"
 operator|+
 literal|"  EnumerableAggregate(group=[{7}], EXPR$1=[$SUM0($0)])\n"
 operator|+
