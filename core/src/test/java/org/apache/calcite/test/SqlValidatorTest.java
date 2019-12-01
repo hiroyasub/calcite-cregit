@@ -3013,6 +3013,22 @@ argument_list|(
 literal|"INTERVAL DAY TO SECOND(9)"
 argument_list|)
 expr_stmt|;
+name|sql
+argument_list|(
+literal|"select\n"
+operator|+
+literal|"CASE WHEN job is not null THEN mgr\n"
+operator|+
+literal|"ELSE 5 end as mgr\n"
+operator|+
+literal|"from EMP"
+argument_list|)
+operator|.
+name|columnType
+argument_list|(
+literal|"INTEGER"
+argument_list|)
+expr_stmt|;
 block|}
 annotation|@
 name|Test
@@ -3209,6 +3225,16 @@ operator|.
 name|columnType
 argument_list|(
 literal|"CHAR(1) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select COALESCE(mgr, 12) as m from EMP"
+argument_list|)
+operator|.
+name|columnType
+argument_list|(
+literal|"INTEGER NOT NULL"
 argument_list|)
 expr_stmt|;
 block|}
