@@ -215,6 +215,10 @@ name|org
 operator|.
 name|junit
 operator|.
+name|jupiter
+operator|.
+name|api
+operator|.
 name|Test
 import|;
 end_import
@@ -351,9 +355,9 @@ begin_import
 import|import static
 name|org
 operator|.
-name|junit
+name|hamcrest
 operator|.
-name|Assert
+name|MatcherAssert
 operator|.
 name|assertThat
 import|;
@@ -365,7 +369,11 @@ name|org
 operator|.
 name|junit
 operator|.
-name|Assert
+name|jupiter
+operator|.
+name|api
+operator|.
+name|Assertions
 operator|.
 name|fail
 import|;

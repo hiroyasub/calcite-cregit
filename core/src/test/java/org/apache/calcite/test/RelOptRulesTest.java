@@ -2253,7 +2253,11 @@ name|org
 operator|.
 name|junit
 operator|.
-name|Assert
+name|jupiter
+operator|.
+name|api
+operator|.
+name|Disabled
 import|;
 end_import
 
@@ -2263,15 +2267,9 @@ name|org
 operator|.
 name|junit
 operator|.
-name|Ignore
-import|;
-end_import
-
-begin_import
-import|import
-name|org
+name|jupiter
 operator|.
-name|junit
+name|api
 operator|.
 name|Test
 import|;
@@ -2403,9 +2401,29 @@ name|org
 operator|.
 name|junit
 operator|.
-name|Assert
+name|jupiter
+operator|.
+name|api
+operator|.
+name|Assertions
 operator|.
 name|assertEquals
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|jupiter
+operator|.
+name|api
+operator|.
+name|Assertions
+operator|.
+name|assertNotNull
 import|;
 end_import
 
@@ -2885,8 +2903,6 @@ operator|.
 name|INSTANCE
 argument_list|)
 decl_stmt|;
-name|Assert
-operator|.
 name|assertNotNull
 argument_list|(
 name|collation
@@ -2903,8 +2919,6 @@ operator|.
 name|getFieldCollations
 argument_list|()
 decl_stmt|;
-name|Assert
-operator|.
 name|assertEquals
 argument_list|(
 literal|1
@@ -2925,8 +2939,6 @@ argument_list|(
 literal|0
 argument_list|)
 decl_stmt|;
-name|Assert
-operator|.
 name|assertEquals
 argument_list|(
 literal|3
@@ -2937,8 +2949,6 @@ name|getFieldIndex
 argument_list|()
 argument_list|)
 expr_stmt|;
-name|Assert
-operator|.
 name|assertEquals
 argument_list|(
 name|RelFieldCollation
@@ -26830,7 +26840,7 @@ end_function
 
 begin_function
 annotation|@
-name|Ignore
+name|Disabled
 argument_list|(
 literal|"[CALCITE-1045]"
 argument_list|)
@@ -26866,7 +26876,7 @@ end_function
 
 begin_function
 annotation|@
-name|Ignore
+name|Disabled
 argument_list|(
 literal|"[CALCITE-1045]"
 argument_list|)
@@ -27109,7 +27119,7 @@ end_comment
 
 begin_function
 annotation|@
-name|Ignore
+name|Disabled
 argument_list|(
 literal|"[CALCITE-1045]"
 argument_list|)

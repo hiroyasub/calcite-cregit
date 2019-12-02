@@ -181,7 +181,11 @@ name|org
 operator|.
 name|junit
 operator|.
-name|Ignore
+name|jupiter
+operator|.
+name|api
+operator|.
+name|Disabled
 import|;
 end_import
 
@@ -190,6 +194,10 @@ import|import
 name|org
 operator|.
 name|junit
+operator|.
+name|jupiter
+operator|.
+name|api
 operator|.
 name|Test
 import|;
@@ -315,9 +323,9 @@ begin_import
 import|import static
 name|org
 operator|.
-name|junit
+name|hamcrest
 operator|.
-name|Assert
+name|MatcherAssert
 operator|.
 name|assertThat
 import|;
@@ -329,7 +337,11 @@ name|org
 operator|.
 name|junit
 operator|.
-name|Assert
+name|jupiter
+operator|.
+name|api
+operator|.
+name|Assertions
 operator|.
 name|fail
 import|;
@@ -1393,7 +1405,7 @@ expr_stmt|;
 block|}
 comment|/**    * Tests that non-nullable arguments of a table function must be provided    * as literals.    */
 annotation|@
-name|Ignore
+name|Disabled
 argument_list|(
 literal|"SQLException does not include message from nested exception"
 argument_list|)
@@ -1564,7 +1576,7 @@ return|;
 block|}
 comment|/**    * Tests a table function that takes cursor input.    */
 annotation|@
-name|Ignore
+name|Disabled
 argument_list|(
 literal|"CannotPlanException: Node [rel#18:Subset#4.ENUMERABLE.[]] "
 operator|+
@@ -1733,7 +1745,7 @@ block|}
 block|}
 comment|/**    * Tests a table function that takes multiple cursor inputs.    */
 annotation|@
-name|Ignore
+name|Disabled
 argument_list|(
 literal|"CannotPlanException: Node [rel#24:Subset#6.ENUMERABLE.[]] "
 operator|+

@@ -831,6 +831,10 @@ name|org
 operator|.
 name|junit
 operator|.
+name|jupiter
+operator|.
+name|api
+operator|.
 name|Test
 import|;
 end_import
@@ -891,7 +895,11 @@ name|org
 operator|.
 name|junit
 operator|.
-name|Assert
+name|jupiter
+operator|.
+name|api
+operator|.
+name|Assertions
 operator|.
 name|assertEquals
 import|;
@@ -1055,9 +1063,9 @@ argument_list|()
 decl_stmt|;
 name|assertEquals
 argument_list|(
-literal|"Sortedness was not propagated"
-argument_list|,
 literal|3
+argument_list|,
+literal|0
 argument_list|,
 name|mq
 operator|.
@@ -1069,7 +1077,7 @@ operator|.
 name|getRows
 argument_list|()
 argument_list|,
-literal|0
+literal|"Sortedness was not propagated"
 argument_list|)
 expr_stmt|;
 block|}

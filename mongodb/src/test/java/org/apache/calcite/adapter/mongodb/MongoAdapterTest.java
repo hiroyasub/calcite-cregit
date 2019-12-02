@@ -263,26 +263,6 @@ begin_import
 import|import
 name|org
 operator|.
-name|hamcrest
-operator|.
-name|CoreMatchers
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|junit
-operator|.
-name|Assert
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
 name|junit
 operator|.
 name|BeforeClass
@@ -484,6 +464,74 @@ operator|.
 name|stream
 operator|.
 name|Collectors
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|hamcrest
+operator|.
+name|CoreMatchers
+operator|.
+name|is
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|hamcrest
+operator|.
+name|CoreMatchers
+operator|.
+name|nullValue
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|hamcrest
+operator|.
+name|MatcherAssert
+operator|.
+name|assertThat
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|jupiter
+operator|.
+name|api
+operator|.
+name|Assertions
+operator|.
+name|assertEquals
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|jupiter
+operator|.
+name|api
+operator|.
+name|Assertions
+operator|.
+name|fail
 import|;
 end_import
 
@@ -2634,8 +2682,6 @@ lambda|->
 block|{
 try|try
 block|{
-name|Assert
-operator|.
 name|assertThat
 argument_list|(
 name|input
@@ -2643,16 +2689,12 @@ operator|.
 name|next
 argument_list|()
 argument_list|,
-name|CoreMatchers
-operator|.
 name|is
 argument_list|(
 literal|true
 argument_list|)
 argument_list|)
 expr_stmt|;
-name|Assert
-operator|.
 name|assertThat
 argument_list|(
 name|input
@@ -2662,8 +2704,6 @@ argument_list|(
 literal|1
 argument_list|)
 argument_list|,
-name|CoreMatchers
-operator|.
 name|is
 argument_list|(
 name|ZIPS_SIZE
@@ -2716,16 +2756,12 @@ operator|==
 literal|null
 condition|)
 block|{
-name|Assert
-operator|.
 name|assertThat
 argument_list|(
 literal|"null mongo Query"
 argument_list|,
 name|actual
 argument_list|,
-name|CoreMatchers
-operator|.
 name|nullValue
 argument_list|()
 argument_list|)
@@ -2913,12 +2949,8 @@ argument_list|)
 argument_list|)
 decl_stmt|;
 comment|// used to pretty print Assertion error
-name|Assert
-operator|.
 name|assertEquals
 argument_list|(
-literal|"expected and actual Mongo queries (pipelines) do not match"
-argument_list|,
 name|prettyFn
 operator|.
 name|apply
@@ -2932,10 +2964,10 @@ name|apply
 argument_list|(
 name|actualBsons
 argument_list|)
+argument_list|,
+literal|"expected and actual Mongo queries (pipelines) do not match"
 argument_list|)
 expr_stmt|;
-name|Assert
-operator|.
 name|fail
 argument_list|(
 literal|"Should have failed previously because expected != actual is known to be true"

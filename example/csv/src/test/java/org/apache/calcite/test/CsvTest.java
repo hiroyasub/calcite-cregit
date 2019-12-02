@@ -165,7 +165,11 @@ name|org
 operator|.
 name|junit
 operator|.
-name|Assert
+name|jupiter
+operator|.
+name|api
+operator|.
+name|Disabled
 import|;
 end_import
 
@@ -175,17 +179,25 @@ name|org
 operator|.
 name|junit
 operator|.
-name|Ignore
-import|;
-end_import
-
-begin_import
-import|import
-name|org
+name|jupiter
 operator|.
-name|junit
+name|api
 operator|.
 name|Test
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|junit
+operator|.
+name|jupiter
+operator|.
+name|api
+operator|.
+name|Timeout
 import|;
 end_import
 
@@ -471,9 +483,9 @@ begin_import
 import|import static
 name|org
 operator|.
-name|junit
+name|hamcrest
 operator|.
-name|Assert
+name|MatcherAssert
 operator|.
 name|assertThat
 import|;
@@ -485,9 +497,41 @@ name|org
 operator|.
 name|junit
 operator|.
-name|Assert
+name|jupiter
+operator|.
+name|api
+operator|.
+name|Assertions
+operator|.
+name|assertEquals
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|jupiter
+operator|.
+name|api
+operator|.
+name|Assertions
 operator|.
 name|fail
+import|;
+end_import
+
+begin_import
+import|import static
+name|java
+operator|.
+name|sql
+operator|.
+name|Timestamp
+operator|.
+name|valueOf
 import|;
 end_import
 
@@ -725,7 +769,7 @@ return|;
 block|}
 comment|/**    * Tests the vanity driver.    */
 annotation|@
-name|Ignore
+name|Disabled
 annotation|@
 name|Test
 specifier|public
@@ -762,7 +806,7 @@ expr_stmt|;
 block|}
 comment|/**    * Tests the vanity driver with properties in the URL.    */
 annotation|@
-name|Ignore
+name|Disabled
 annotation|@
 name|Test
 specifier|public
@@ -1667,8 +1711,6 @@ argument_list|,
 name|resultSet
 argument_list|)
 expr_stmt|;
-name|Assert
-operator|.
 name|assertEquals
 argument_list|(
 name|Arrays
@@ -1770,8 +1812,6 @@ argument_list|(
 name|lines
 argument_list|)
 expr_stmt|;
-name|Assert
-operator|.
 name|assertEquals
 argument_list|(
 name|expectedLines
@@ -2694,8 +2734,6 @@ operator|.
 name|next
 argument_list|()
 expr_stmt|;
-name|Assert
-operator|.
 name|assertEquals
 argument_list|(
 name|res
@@ -2737,8 +2775,6 @@ operator|.
 name|next
 argument_list|()
 expr_stmt|;
-name|Assert
-operator|.
 name|assertEquals
 argument_list|(
 name|res
@@ -2780,8 +2816,6 @@ operator|.
 name|next
 argument_list|()
 expr_stmt|;
-name|Assert
-operator|.
 name|assertEquals
 argument_list|(
 name|res
@@ -2824,8 +2858,6 @@ name|next
 argument_list|()
 expr_stmt|;
 comment|// date
-name|Assert
-operator|.
 name|assertEquals
 argument_list|(
 name|java
@@ -2847,8 +2879,6 @@ name|getClass
 argument_list|()
 argument_list|)
 expr_stmt|;
-name|Assert
-operator|.
 name|assertEquals
 argument_list|(
 name|java
@@ -2871,8 +2901,6 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 comment|// time
-name|Assert
-operator|.
 name|assertEquals
 argument_list|(
 name|java
@@ -2894,8 +2922,6 @@ name|getClass
 argument_list|()
 argument_list|)
 expr_stmt|;
-name|Assert
-operator|.
 name|assertEquals
 argument_list|(
 name|java
@@ -2918,8 +2944,6 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 comment|// timestamp
-name|Assert
-operator|.
 name|assertEquals
 argument_list|(
 name|java
@@ -2941,8 +2965,6 @@ name|getClass
 argument_list|()
 argument_list|)
 expr_stmt|;
-name|Assert
-operator|.
 name|assertEquals
 argument_list|(
 name|java
@@ -3286,18 +3308,12 @@ argument_list|(
 literal|2
 argument_list|)
 decl_stmt|;
-name|Assert
-operator|.
 name|assertThat
 argument_list|(
 name|timestamp
 argument_list|,
 name|isA
 argument_list|(
-name|java
-operator|.
-name|sql
-operator|.
 name|Timestamp
 operator|.
 name|class
@@ -3306,20 +3322,12 @@ argument_list|)
 expr_stmt|;
 comment|// Note: This logic is time zone specific, but the same time zone is
 comment|// used in the CSV adapter and this test, so they should cancel out.
-name|Assert
-operator|.
 name|assertThat
 argument_list|(
 name|timestamp
 argument_list|,
 name|is
 argument_list|(
-name|java
-operator|.
-name|sql
-operator|.
-name|Timestamp
-operator|.
 name|valueOf
 argument_list|(
 literal|"1996-08-03 00:01:02.0"
@@ -3423,20 +3431,12 @@ argument_list|(
 literal|2
 argument_list|)
 decl_stmt|;
-name|Assert
-operator|.
 name|assertThat
 argument_list|(
 name|timestamp
 argument_list|,
 name|is
 argument_list|(
-name|java
-operator|.
-name|sql
-operator|.
-name|Timestamp
-operator|.
 name|valueOf
 argument_list|(
 literal|"1996-08-03 00:01:02"
@@ -3540,20 +3540,12 @@ argument_list|(
 literal|2
 argument_list|)
 decl_stmt|;
-name|Assert
-operator|.
 name|assertThat
 argument_list|(
 name|timestamp
 argument_list|,
 name|is
 argument_list|(
-name|java
-operator|.
-name|sql
-operator|.
-name|Timestamp
-operator|.
 name|valueOf
 argument_list|(
 literal|"1996-08-03 00:01:02"
@@ -4849,16 +4841,16 @@ expr_stmt|;
 block|}
 block|}
 annotation|@
-name|Ignore
+name|Disabled
 argument_list|(
 literal|"CALCITE-1894: there's a bug in the test code, so it does not test what it should"
 argument_list|)
 annotation|@
 name|Test
+annotation|@
+name|Timeout
 argument_list|(
-name|timeout
-operator|=
-literal|10000
+literal|10
 argument_list|)
 specifier|public
 name|void

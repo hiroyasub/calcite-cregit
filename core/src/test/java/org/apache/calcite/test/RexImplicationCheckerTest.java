@@ -395,6 +395,10 @@ name|org
 operator|.
 name|junit
 operator|.
+name|jupiter
+operator|.
+name|api
+operator|.
 name|Test
 import|;
 end_import
@@ -445,6 +449,18 @@ name|org
 operator|.
 name|hamcrest
 operator|.
+name|MatcherAssert
+operator|.
+name|assertThat
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|hamcrest
+operator|.
 name|core
 operator|.
 name|Is
@@ -459,7 +475,11 @@ name|org
 operator|.
 name|junit
 operator|.
-name|Assert
+name|jupiter
+operator|.
+name|api
+operator|.
+name|Assertions
 operator|.
 name|assertFalse
 import|;
@@ -471,19 +491,11 @@ name|org
 operator|.
 name|junit
 operator|.
-name|Assert
+name|jupiter
 operator|.
-name|assertThat
-import|;
-end_import
-
-begin_import
-import|import static
-name|org
+name|api
 operator|.
-name|junit
-operator|.
-name|Assert
+name|Assertions
 operator|.
 name|assertTrue
 import|;
@@ -4989,22 +5001,8 @@ name|RexNode
 name|node2
 parameter_list|)
 block|{
-specifier|final
-name|String
-name|message
-init|=
-name|node1
-operator|+
-literal|" does not imply "
-operator|+
-name|node2
-operator|+
-literal|" when it should"
-decl_stmt|;
 name|assertTrue
 argument_list|(
-name|message
-argument_list|,
 name|checker
 operator|.
 name|implies
@@ -5013,6 +5011,16 @@ name|node1
 argument_list|,
 name|node2
 argument_list|)
+argument_list|,
+parameter_list|()
+lambda|->
+name|node1
+operator|+
+literal|" does not imply "
+operator|+
+name|node2
+operator|+
+literal|" when it should"
 argument_list|)
 expr_stmt|;
 block|}
@@ -5026,22 +5034,8 @@ name|RexNode
 name|node2
 parameter_list|)
 block|{
-specifier|final
-name|String
-name|message
-init|=
-name|node1
-operator|+
-literal|" does implies "
-operator|+
-name|node2
-operator|+
-literal|" when it should not"
-decl_stmt|;
 name|assertFalse
 argument_list|(
-name|message
-argument_list|,
 name|checker
 operator|.
 name|implies
@@ -5050,6 +5044,16 @@ name|node1
 argument_list|,
 name|node2
 argument_list|)
+argument_list|,
+parameter_list|()
+lambda|->
+name|node1
+operator|+
+literal|" does implies "
+operator|+
+name|node2
+operator|+
+literal|" when it should not"
 argument_list|)
 expr_stmt|;
 block|}

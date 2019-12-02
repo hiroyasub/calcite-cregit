@@ -35,7 +35,11 @@ name|org
 operator|.
 name|junit
 operator|.
-name|AfterClass
+name|jupiter
+operator|.
+name|api
+operator|.
+name|AfterAll
 import|;
 end_import
 
@@ -45,7 +49,11 @@ name|org
 operator|.
 name|junit
 operator|.
-name|BeforeClass
+name|jupiter
+operator|.
+name|api
+operator|.
+name|BeforeAll
 import|;
 end_import
 
@@ -54,6 +62,10 @@ import|import
 name|org
 operator|.
 name|junit
+operator|.
+name|jupiter
+operator|.
+name|api
 operator|.
 name|Test
 import|;
@@ -195,7 +207,7 @@ name|String
 name|dataFile
 decl_stmt|;
 annotation|@
-name|BeforeClass
+name|BeforeAll
 specifier|public
 specifier|static
 name|void
@@ -262,7 +274,7 @@ argument_list|)
 expr_stmt|;
 block|}
 annotation|@
-name|AfterClass
+name|AfterAll
 specifier|public
 specifier|static
 name|void

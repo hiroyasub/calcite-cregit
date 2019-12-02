@@ -741,7 +741,11 @@ name|org
 operator|.
 name|junit
 operator|.
-name|Before
+name|jupiter
+operator|.
+name|api
+operator|.
+name|BeforeEach
 import|;
 end_import
 
@@ -999,6 +1003,24 @@ begin_import
 import|import static
 name|org
 operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|fun
+operator|.
+name|SqlStdOperatorTable
+operator|.
+name|PI
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
 name|hamcrest
 operator|.
 name|CoreMatchers
@@ -1011,35 +1033,11 @@ begin_import
 import|import static
 name|org
 operator|.
-name|junit
+name|hamcrest
 operator|.
-name|Assert
-operator|.
-name|assertEquals
-import|;
-end_import
-
-begin_import
-import|import static
-name|org
-operator|.
-name|junit
-operator|.
-name|Assert
+name|MatcherAssert
 operator|.
 name|assertThat
-import|;
-end_import
-
-begin_import
-import|import static
-name|org
-operator|.
-name|junit
-operator|.
-name|Assert
-operator|.
-name|fail
 import|;
 end_import
 
@@ -1052,6 +1050,54 @@ operator|.
 name|Assume
 operator|.
 name|assumeTrue
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|jupiter
+operator|.
+name|api
+operator|.
+name|Assertions
+operator|.
+name|assertEquals
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|jupiter
+operator|.
+name|api
+operator|.
+name|Assertions
+operator|.
+name|assertFalse
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|jupiter
+operator|.
+name|api
+operator|.
+name|Assertions
+operator|.
+name|fail
 import|;
 end_import
 
@@ -1709,7 +1755,7 @@ expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
 annotation|@
-name|Before
+name|BeforeEach
 specifier|public
 name|void
 name|setUp
@@ -24880,18 +24926,14 @@ literal|false
 argument_list|)
 expr_stmt|;
 comment|// assert that PI function is not dynamic [CALCITE-2750]
-name|assertEquals
+name|assertFalse
 argument_list|(
-literal|"PI operator should not be identified as dynamic function"
-argument_list|,
-name|SqlStdOperatorTable
-operator|.
 name|PI
 operator|.
 name|isDynamicFunction
 argument_list|()
 argument_list|,
-literal|false
+literal|"PI operator should not be identified as dynamic function"
 argument_list|)
 expr_stmt|;
 block|}

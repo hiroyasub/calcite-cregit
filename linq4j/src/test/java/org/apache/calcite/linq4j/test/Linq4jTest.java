@@ -377,6 +377,10 @@ name|org
 operator|.
 name|junit
 operator|.
+name|jupiter
+operator|.
+name|api
+operator|.
 name|Test
 import|;
 end_import
@@ -567,6 +571,18 @@ name|org
 operator|.
 name|hamcrest
 operator|.
+name|MatcherAssert
+operator|.
+name|assertThat
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|hamcrest
+operator|.
 name|core
 operator|.
 name|IsNot
@@ -581,7 +597,11 @@ name|org
 operator|.
 name|junit
 operator|.
-name|Assert
+name|jupiter
+operator|.
+name|api
+operator|.
+name|Assertions
 operator|.
 name|assertEquals
 import|;
@@ -593,7 +613,11 @@ name|org
 operator|.
 name|junit
 operator|.
-name|Assert
+name|jupiter
+operator|.
+name|api
+operator|.
+name|Assertions
 operator|.
 name|assertFalse
 import|;
@@ -605,7 +629,11 @@ name|org
 operator|.
 name|junit
 operator|.
-name|Assert
+name|jupiter
+operator|.
+name|api
+operator|.
+name|Assertions
 operator|.
 name|assertNotEquals
 import|;
@@ -617,7 +645,11 @@ name|org
 operator|.
 name|junit
 operator|.
-name|Assert
+name|jupiter
+operator|.
+name|api
+operator|.
+name|Assertions
 operator|.
 name|assertNotNull
 import|;
@@ -629,7 +661,11 @@ name|org
 operator|.
 name|junit
 operator|.
-name|Assert
+name|jupiter
+operator|.
+name|api
+operator|.
+name|Assertions
 operator|.
 name|assertNull
 import|;
@@ -641,19 +677,11 @@ name|org
 operator|.
 name|junit
 operator|.
-name|Assert
+name|jupiter
 operator|.
-name|assertThat
-import|;
-end_import
-
-begin_import
-import|import static
-name|org
+name|api
 operator|.
-name|junit
-operator|.
-name|Assert
+name|Assertions
 operator|.
 name|assertTrue
 import|;
@@ -665,7 +693,11 @@ name|org
 operator|.
 name|junit
 operator|.
-name|Assert
+name|jupiter
+operator|.
+name|api
+operator|.
+name|Assertions
 operator|.
 name|fail
 import|;
@@ -8676,8 +8708,6 @@ block|{
 comment|// Make sure we're passed the correct indices
 name|assertEquals
 argument_list|(
-literal|"Invalid index passed to function"
-argument_list|,
 name|index
 operator|++
 argument_list|,
@@ -8685,6 +8715,8 @@ operator|(
 name|int
 operator|)
 name|v2
+argument_list|,
+literal|"Invalid index passed to function"
 argument_list|)
 expr_stmt|;
 return|return
@@ -8925,8 +8957,6 @@ block|{
 comment|// Make sure we're passed the correct indices
 name|assertEquals
 argument_list|(
-literal|"Invalid index passed to function"
-argument_list|,
 name|index
 operator|++
 argument_list|,
@@ -8934,6 +8964,8 @@ operator|(
 name|int
 operator|)
 name|v2
+argument_list|,
+literal|"Invalid index passed to function"
 argument_list|)
 expr_stmt|;
 return|return

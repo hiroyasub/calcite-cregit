@@ -553,7 +553,11 @@ name|org
 operator|.
 name|junit
 operator|.
-name|BeforeClass
+name|jupiter
+operator|.
+name|api
+operator|.
+name|BeforeAll
 import|;
 end_import
 
@@ -563,7 +567,11 @@ name|org
 operator|.
 name|junit
 operator|.
-name|Ignore
+name|jupiter
+operator|.
+name|api
+operator|.
+name|Disabled
 import|;
 end_import
 
@@ -572,6 +580,10 @@ import|import
 name|org
 operator|.
 name|junit
+operator|.
+name|jupiter
+operator|.
+name|api
 operator|.
 name|Test
 import|;
@@ -783,33 +795,9 @@ begin_import
 import|import static
 name|org
 operator|.
-name|junit
+name|hamcrest
 operator|.
-name|Assert
-operator|.
-name|assertEquals
-import|;
-end_import
-
-begin_import
-import|import static
-name|org
-operator|.
-name|junit
-operator|.
-name|Assert
-operator|.
-name|assertNull
-import|;
-end_import
-
-begin_import
-import|import static
-name|org
-operator|.
-name|junit
-operator|.
-name|Assert
+name|MatcherAssert
 operator|.
 name|assertThat
 import|;
@@ -821,7 +809,43 @@ name|org
 operator|.
 name|junit
 operator|.
-name|Assert
+name|jupiter
+operator|.
+name|api
+operator|.
+name|Assertions
+operator|.
+name|assertEquals
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|jupiter
+operator|.
+name|api
+operator|.
+name|Assertions
+operator|.
+name|assertNull
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|jupiter
+operator|.
+name|api
+operator|.
+name|Assertions
 operator|.
 name|assertTrue
 import|;
@@ -833,7 +857,11 @@ name|org
 operator|.
 name|junit
 operator|.
-name|Assert
+name|jupiter
+operator|.
+name|api
+operator|.
+name|Assertions
 operator|.
 name|fail
 import|;
@@ -1002,7 +1030,7 @@ expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
 annotation|@
-name|BeforeClass
+name|BeforeAll
 specifier|public
 specifier|static
 name|void
@@ -22942,7 +22970,7 @@ argument_list|)
 expr_stmt|;
 block|}
 annotation|@
-name|Ignore
+name|Disabled
 argument_list|(
 literal|"bug: should fail if sub-query does not have alias"
 argument_list|)
@@ -31461,7 +31489,7 @@ argument_list|()
 expr_stmt|;
 block|}
 annotation|@
-name|Ignore
+name|Disabled
 argument_list|(
 literal|"not supported"
 argument_list|)
@@ -32346,7 +32374,7 @@ argument_list|)
 expr_stmt|;
 block|}
 annotation|@
-name|Ignore
+name|Disabled
 annotation|@
 name|Test
 specifier|public
@@ -40375,7 +40403,7 @@ argument_list|)
 expr_stmt|;
 block|}
 annotation|@
-name|Ignore
+name|Disabled
 argument_list|(
 literal|"CALCITE-1727"
 argument_list|)
@@ -40420,7 +40448,7 @@ argument_list|)
 expr_stmt|;
 block|}
 annotation|@
-name|Ignore
+name|Disabled
 argument_list|(
 literal|"CALCITE-1727"
 argument_list|)
@@ -40795,7 +40823,7 @@ argument_list|)
 expr_stmt|;
 block|}
 annotation|@
-name|Ignore
+name|Disabled
 argument_list|(
 literal|"CALCITE-1727"
 argument_list|)

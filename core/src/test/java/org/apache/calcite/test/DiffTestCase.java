@@ -87,7 +87,11 @@ name|org
 operator|.
 name|junit
 operator|.
-name|After
+name|jupiter
+operator|.
+name|api
+operator|.
+name|AfterEach
 import|;
 end_import
 
@@ -97,17 +101,11 @@ name|org
 operator|.
 name|junit
 operator|.
-name|Assert
-import|;
-end_import
-
-begin_import
-import|import
-name|org
+name|jupiter
 operator|.
-name|junit
+name|api
 operator|.
-name|Before
+name|BeforeEach
 import|;
 end_import
 
@@ -277,6 +275,38 @@ name|Pattern
 import|;
 end_import
 
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|jupiter
+operator|.
+name|api
+operator|.
+name|Assertions
+operator|.
+name|assertEquals
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|jupiter
+operator|.
+name|api
+operator|.
+name|Assertions
+operator|.
+name|fail
+import|;
+end_import
+
 begin_comment
 comment|/**  * DiffTestCase is an abstract base for JUnit tests which produce multi-line  * output to be verified by diffing against a pre-existing reference file.  */
 end_comment
@@ -395,7 +425,7 @@ block|}
 block|}
 comment|//~ Methods ----------------------------------------------------------------
 annotation|@
-name|Before
+name|BeforeEach
 specifier|protected
 name|void
 name|setUp
@@ -420,7 +450,7 @@ literal|null
 expr_stmt|;
 block|}
 annotation|@
-name|After
+name|AfterEach
 specifier|protected
 name|void
 name|tearDown
@@ -602,8 +632,6 @@ name|exists
 argument_list|()
 condition|)
 block|{
-name|Assert
-operator|.
 name|fail
 argument_list|(
 literal|"Reference file "
@@ -1163,12 +1191,8 @@ comment|// If we're in IntelliJ, it's worth printing the 'expected
 comment|//<...> actual<...>' string, becauase IntelliJ can format
 comment|// this intelligently. Otherwise, use the more concise
 comment|// diff format.
-name|Assert
-operator|.
 name|assertEquals
 argument_list|(
-name|message
-argument_list|,
 name|fileContents
 argument_list|(
 name|refFile
@@ -1178,6 +1202,8 @@ name|fileContents
 argument_list|(
 name|logFile
 argument_list|)
+argument_list|,
+name|message
 argument_list|)
 expr_stmt|;
 block|}
@@ -1193,8 +1219,6 @@ argument_list|,
 name|logFile
 argument_list|)
 decl_stmt|;
-name|Assert
-operator|.
 name|fail
 argument_list|(
 name|message
@@ -1208,8 +1232,6 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-name|Assert
-operator|.
 name|fail
 argument_list|(
 name|message

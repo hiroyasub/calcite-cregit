@@ -395,16 +395,6 @@ name|org
 operator|.
 name|junit
 operator|.
-name|After
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|junit
-operator|.
 name|Assume
 import|;
 end_import
@@ -415,7 +405,11 @@ name|org
 operator|.
 name|junit
 operator|.
-name|Before
+name|jupiter
+operator|.
+name|api
+operator|.
+name|AfterEach
 import|;
 end_import
 
@@ -425,7 +419,11 @@ name|org
 operator|.
 name|junit
 operator|.
-name|Ignore
+name|jupiter
+operator|.
+name|api
+operator|.
+name|BeforeEach
 import|;
 end_import
 
@@ -434,6 +432,24 @@ import|import
 name|org
 operator|.
 name|junit
+operator|.
+name|jupiter
+operator|.
+name|api
+operator|.
+name|Disabled
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|junit
+operator|.
+name|jupiter
+operator|.
+name|api
 operator|.
 name|Test
 import|;
@@ -523,7 +539,11 @@ name|org
 operator|.
 name|junit
 operator|.
-name|Assert
+name|jupiter
+operator|.
+name|api
+operator|.
+name|Assertions
 operator|.
 name|assertEquals
 import|;
@@ -664,7 +684,7 @@ block|}
 annotation|@
 name|Test
 annotation|@
-name|Ignore
+name|Disabled
 argument_list|(
 literal|"CALCITE-1751"
 argument_list|)
@@ -791,7 +811,7 @@ block|}
 annotation|@
 name|Test
 annotation|@
-name|Ignore
+name|Disabled
 argument_list|(
 literal|"CALCITE-1751"
 argument_list|)
@@ -1006,7 +1026,7 @@ block|}
 annotation|@
 name|Test
 annotation|@
-name|Ignore
+name|Disabled
 argument_list|(
 literal|"CALCITE-1751"
 argument_list|)
@@ -1376,7 +1396,7 @@ block|}
 annotation|@
 name|Test
 annotation|@
-name|Ignore
+name|Disabled
 argument_list|(
 literal|"CALCITE-1751"
 argument_list|)
@@ -1913,7 +1933,7 @@ argument_list|()
 return|;
 block|}
 annotation|@
-name|After
+name|AfterEach
 specifier|public
 name|void
 name|shutdownPigServer
@@ -1942,7 +1962,7 @@ expr_stmt|;
 block|}
 block|}
 annotation|@
-name|Before
+name|BeforeEach
 specifier|public
 name|void
 name|setupDataFilesForPigServer

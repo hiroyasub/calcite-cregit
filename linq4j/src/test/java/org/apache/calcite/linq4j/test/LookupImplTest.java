@@ -51,7 +51,11 @@ name|org
 operator|.
 name|junit
 operator|.
-name|Before
+name|jupiter
+operator|.
+name|api
+operator|.
+name|BeforeEach
 import|;
 end_import
 
@@ -60,6 +64,10 @@ import|import
 name|org
 operator|.
 name|junit
+operator|.
+name|jupiter
+operator|.
+name|api
 operator|.
 name|Test
 import|;
@@ -116,7 +124,7 @@ argument_list|>
 name|impl
 decl_stmt|;
 annotation|@
-name|Before
+name|BeforeEach
 specifier|public
 name|void
 name|setUp

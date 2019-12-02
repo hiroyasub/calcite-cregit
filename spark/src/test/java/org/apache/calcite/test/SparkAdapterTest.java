@@ -51,7 +51,11 @@ name|org
 operator|.
 name|junit
 operator|.
-name|Ignore
+name|jupiter
+operator|.
+name|api
+operator|.
+name|Disabled
 import|;
 end_import
 
@@ -60,6 +64,10 @@ import|import
 name|org
 operator|.
 name|junit
+operator|.
+name|jupiter
+operator|.
+name|api
 operator|.
 name|Test
 import|;
@@ -2217,9 +2225,9 @@ expr_stmt|;
 block|}
 comment|// Tests involving sub-queries (both correlated and non correlated)
 annotation|@
-name|Ignore
+name|Disabled
 argument_list|(
-literal|"[CALCITE-2184] java.lang.ClassCastException: RexSubQuery cannot be cast to RexLocalRef"
+literal|"[CALCITE-2184] ClassCastException: RexSubQuery cannot be cast to RexLocalRef"
 argument_list|)
 annotation|@
 name|Test
@@ -2289,9 +2297,9 @@ argument_list|)
 expr_stmt|;
 block|}
 annotation|@
-name|Ignore
+name|Disabled
 argument_list|(
-literal|"[CALCITE-2184] java.lang.ClassCastException: RexSubQuery cannot be cast to RexLocalRef"
+literal|"[CALCITE-2184] ClassCastException: RexSubQuery cannot be cast to RexLocalRef"
 argument_list|)
 annotation|@
 name|Test
@@ -2355,9 +2363,9 @@ argument_list|)
 expr_stmt|;
 block|}
 annotation|@
-name|Ignore
+name|Disabled
 argument_list|(
-literal|"[CALCITE-2184] java.lang.ClassCastException: RexSubQuery cannot be cast to RexLocalRef"
+literal|"[CALCITE-2184] ClassCastException: RexSubQuery cannot be cast to RexLocalRef"
 argument_list|)
 annotation|@
 name|Test
@@ -2421,9 +2429,9 @@ argument_list|)
 expr_stmt|;
 block|}
 annotation|@
-name|Ignore
+name|Disabled
 argument_list|(
-literal|"[CALCITE-2184] java.lang.ClassCastException: RexSubQuery cannot be cast to RexLocalRef"
+literal|"[CALCITE-2184] ClassCastException: RexSubQuery cannot be cast to RexLocalRef"
 argument_list|)
 annotation|@
 name|Test

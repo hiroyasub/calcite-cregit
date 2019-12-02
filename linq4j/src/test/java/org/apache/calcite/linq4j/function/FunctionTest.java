@@ -23,15 +23,9 @@ name|org
 operator|.
 name|junit
 operator|.
-name|Assert
-import|;
-end_import
-
-begin_import
-import|import
-name|org
+name|jupiter
 operator|.
-name|junit
+name|api
 operator|.
 name|Test
 import|;
@@ -64,6 +58,86 @@ operator|.
 name|util
 operator|.
 name|List
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|jupiter
+operator|.
+name|api
+operator|.
+name|Assertions
+operator|.
+name|assertEquals
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|jupiter
+operator|.
+name|api
+operator|.
+name|Assertions
+operator|.
+name|assertFalse
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|jupiter
+operator|.
+name|api
+operator|.
+name|Assertions
+operator|.
+name|assertSame
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|jupiter
+operator|.
+name|api
+operator|.
+name|Assertions
+operator|.
+name|assertTrue
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|jupiter
+operator|.
+name|api
+operator|.
+name|Assertions
+operator|.
+name|fail
 import|;
 end_import
 
@@ -105,8 +179,6 @@ literal|"D"
 argument_list|)
 decl_stmt|;
 comment|// a miss, then a hit
-name|Assert
-operator|.
 name|assertEquals
 argument_list|(
 literal|"[A, C, D]"
@@ -133,8 +205,6 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 comment|// a hit, then all misses
-name|Assert
-operator|.
 name|assertEquals
 argument_list|(
 literal|"[A]"
@@ -160,8 +230,6 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 comment|// two hits, then a miss
-name|Assert
-operator|.
 name|assertEquals
 argument_list|(
 literal|"[A, B, D]"
@@ -187,8 +255,6 @@ name|toString
 argument_list|()
 argument_list|)
 expr_stmt|;
-name|Assert
-operator|.
 name|assertSame
 argument_list|(
 name|Collections
@@ -209,8 +275,6 @@ argument_list|()
 argument_list|)
 argument_list|)
 expr_stmt|;
-name|Assert
-operator|.
 name|assertSame
 argument_list|(
 name|abc
@@ -267,8 +331,6 @@ operator|.
 name|emptyList
 argument_list|()
 decl_stmt|;
-name|Assert
-operator|.
 name|assertFalse
 argument_list|(
 name|Functions
@@ -285,8 +347,6 @@ literal|20
 argument_list|)
 argument_list|)
 expr_stmt|;
-name|Assert
-operator|.
 name|assertFalse
 argument_list|(
 name|Functions
@@ -302,8 +362,6 @@ argument_list|()
 argument_list|)
 argument_list|)
 expr_stmt|;
-name|Assert
-operator|.
 name|assertFalse
 argument_list|(
 name|Functions
@@ -358,8 +416,6 @@ operator|.
 name|emptyList
 argument_list|()
 decl_stmt|;
-name|Assert
-operator|.
 name|assertFalse
 argument_list|(
 name|Functions
@@ -376,8 +432,6 @@ literal|20
 argument_list|)
 argument_list|)
 expr_stmt|;
-name|Assert
-operator|.
 name|assertTrue
 argument_list|(
 name|Functions
@@ -394,8 +448,6 @@ literal|20
 argument_list|)
 argument_list|)
 expr_stmt|;
-name|Assert
-operator|.
 name|assertFalse
 argument_list|(
 name|Functions
@@ -412,8 +464,6 @@ literal|10
 argument_list|)
 argument_list|)
 expr_stmt|;
-name|Assert
-operator|.
 name|assertTrue
 argument_list|(
 name|Functions
@@ -429,8 +479,6 @@ argument_list|()
 argument_list|)
 argument_list|)
 expr_stmt|;
-name|Assert
-operator|.
 name|assertTrue
 argument_list|(
 name|Functions
@@ -500,8 +548,6 @@ return|;
 block|}
 block|}
 decl_stmt|;
-name|Assert
-operator|.
 name|assertEquals
 argument_list|(
 literal|"[]"
@@ -519,8 +565,6 @@ name|toString
 argument_list|()
 argument_list|)
 expr_stmt|;
-name|Assert
-operator|.
 name|assertEquals
 argument_list|(
 literal|"[0]"
@@ -538,8 +582,6 @@ name|toString
 argument_list|()
 argument_list|)
 expr_stmt|;
-name|Assert
-operator|.
 name|assertEquals
 argument_list|(
 literal|"[0, x0, xx0]"
@@ -576,8 +618,6 @@ argument_list|,
 name|xx
 argument_list|)
 decl_stmt|;
-name|Assert
-operator|.
 name|fail
 argument_list|(
 literal|"expected error, got "

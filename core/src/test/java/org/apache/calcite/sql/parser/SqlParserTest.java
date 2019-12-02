@@ -445,7 +445,11 @@ name|org
 operator|.
 name|junit
 operator|.
-name|Assert
+name|jupiter
+operator|.
+name|api
+operator|.
+name|Disabled
 import|;
 end_import
 
@@ -455,15 +459,9 @@ name|org
 operator|.
 name|junit
 operator|.
-name|Ignore
-import|;
-end_import
-
-begin_import
-import|import
-name|org
+name|jupiter
 operator|.
-name|junit
+name|api
 operator|.
 name|Test
 import|;
@@ -667,21 +665,9 @@ begin_import
 import|import static
 name|org
 operator|.
-name|junit
+name|hamcrest
 operator|.
-name|Assert
-operator|.
-name|assertEquals
-import|;
-end_import
-
-begin_import
-import|import static
-name|org
-operator|.
-name|junit
-operator|.
-name|Assert
+name|MatcherAssert
 operator|.
 name|assertThat
 import|;
@@ -708,6 +694,22 @@ operator|.
 name|Assume
 operator|.
 name|assumeTrue
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|jupiter
+operator|.
+name|api
+operator|.
+name|Assertions
+operator|.
+name|assertEquals
 import|;
 end_import
 
@@ -6227,7 +6229,7 @@ argument_list|)
 expr_stmt|;
 block|}
 annotation|@
-name|Ignore
+name|Disabled
 annotation|@
 name|Test
 specifier|public
@@ -6248,7 +6250,7 @@ expr_stmt|;
 block|}
 comment|// jdbc syntax
 annotation|@
-name|Ignore
+name|Disabled
 annotation|@
 name|Test
 specifier|public
@@ -6268,7 +6270,7 @@ argument_list|)
 expr_stmt|;
 block|}
 annotation|@
-name|Ignore
+name|Disabled
 annotation|@
 name|Test
 specifier|public
@@ -12593,7 +12595,7 @@ argument_list|)
 expr_stmt|;
 block|}
 annotation|@
-name|Ignore
+name|Disabled
 annotation|@
 name|Test
 specifier|public
@@ -36555,8 +36557,6 @@ argument_list|>
 name|expected
 parameter_list|)
 block|{
-name|Assert
-operator|.
 name|assertEquals
 argument_list|(
 name|expected

@@ -101,17 +101,27 @@ name|org
 operator|.
 name|junit
 operator|.
-name|Assert
+name|jupiter
+operator|.
+name|api
+operator|.
+name|Test
 import|;
 end_import
 
 begin_import
-import|import
+import|import static
 name|org
 operator|.
 name|junit
 operator|.
-name|Test
+name|jupiter
+operator|.
+name|api
+operator|.
+name|Assertions
+operator|.
+name|assertEquals
 import|;
 end_import
 
@@ -672,8 +682,6 @@ name|operand2
 argument_list|)
 argument_list|)
 decl_stmt|;
-name|Assert
-operator|.
 name|assertEquals
 argument_list|(
 literal|12
@@ -684,8 +692,6 @@ name|getPrecision
 argument_list|()
 argument_list|)
 expr_stmt|;
-name|Assert
-operator|.
 name|assertEquals
 argument_list|(
 literal|2
@@ -757,8 +763,6 @@ name|operand2
 argument_list|)
 argument_list|)
 decl_stmt|;
-name|Assert
-operator|.
 name|assertEquals
 argument_list|(
 literal|11
@@ -769,8 +773,6 @@ name|getPrecision
 argument_list|()
 argument_list|)
 expr_stmt|;
-name|Assert
-operator|.
 name|assertEquals
 argument_list|(
 literal|2
@@ -834,8 +836,6 @@ name|operand2
 argument_list|)
 argument_list|)
 decl_stmt|;
-name|Assert
-operator|.
 name|assertEquals
 argument_list|(
 name|SqlTypeName
@@ -909,8 +909,6 @@ name|operand2
 argument_list|)
 argument_list|)
 decl_stmt|;
-name|Assert
-operator|.
 name|assertEquals
 argument_list|(
 name|SqlTypeName
@@ -923,8 +921,6 @@ name|getSqlTypeName
 argument_list|()
 argument_list|)
 expr_stmt|;
-name|Assert
-operator|.
 name|assertEquals
 argument_list|(
 literal|38
@@ -935,8 +931,6 @@ name|getPrecision
 argument_list|()
 argument_list|)
 expr_stmt|;
-name|Assert
-operator|.
 name|assertEquals
 argument_list|(
 literal|9
@@ -1008,8 +1002,6 @@ name|operand2
 argument_list|)
 argument_list|)
 decl_stmt|;
-name|Assert
-operator|.
 name|assertEquals
 argument_list|(
 name|SqlTypeName
@@ -1022,8 +1014,6 @@ name|getSqlTypeName
 argument_list|()
 argument_list|)
 expr_stmt|;
-name|Assert
-operator|.
 name|assertEquals
 argument_list|(
 literal|6
@@ -1034,8 +1024,6 @@ name|getPrecision
 argument_list|()
 argument_list|)
 expr_stmt|;
-name|Assert
-operator|.
 name|assertEquals
 argument_list|(
 literal|20
@@ -1107,8 +1095,6 @@ name|operand2
 argument_list|)
 argument_list|)
 decl_stmt|;
-name|Assert
-operator|.
 name|assertEquals
 argument_list|(
 name|SqlTypeName
@@ -1121,8 +1107,6 @@ name|getSqlTypeName
 argument_list|()
 argument_list|)
 expr_stmt|;
-name|Assert
-operator|.
 name|assertEquals
 argument_list|(
 literal|10
@@ -1133,8 +1117,6 @@ name|getPrecision
 argument_list|()
 argument_list|)
 expr_stmt|;
-name|Assert
-operator|.
 name|assertEquals
 argument_list|(
 literal|10
@@ -1206,8 +1188,6 @@ name|operand2
 argument_list|)
 argument_list|)
 decl_stmt|;
-name|Assert
-operator|.
 name|assertEquals
 argument_list|(
 name|SqlTypeName
@@ -1220,8 +1200,6 @@ name|getSqlTypeName
 argument_list|()
 argument_list|)
 expr_stmt|;
-name|Assert
-operator|.
 name|assertEquals
 argument_list|(
 literal|28
@@ -1232,8 +1210,6 @@ name|getPrecision
 argument_list|()
 argument_list|)
 expr_stmt|;
-name|Assert
-operator|.
 name|assertEquals
 argument_list|(
 literal|10

@@ -95,6 +95,10 @@ name|org
 operator|.
 name|junit
 operator|.
+name|jupiter
+operator|.
+name|api
+operator|.
 name|Test
 import|;
 end_import
@@ -513,6 +517,18 @@ name|org
 operator|.
 name|hamcrest
 operator|.
+name|MatcherAssert
+operator|.
+name|assertThat
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|hamcrest
+operator|.
 name|core
 operator|.
 name|AnyOf
@@ -527,7 +543,11 @@ name|org
 operator|.
 name|junit
 operator|.
-name|Assert
+name|jupiter
+operator|.
+name|api
+operator|.
+name|Assertions
 operator|.
 name|assertSame
 import|;
@@ -539,19 +559,11 @@ name|org
 operator|.
 name|junit
 operator|.
-name|Assert
+name|jupiter
 operator|.
-name|assertThat
-import|;
-end_import
-
-begin_import
-import|import static
-name|org
+name|api
 operator|.
-name|junit
-operator|.
-name|Assert
+name|Assertions
 operator|.
 name|fail
 import|;
@@ -572,7 +584,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Unit test for the methods in {@link SqlFunctions} that implement SQL  * functions.  *  *<p>Developers, please use {@link org.junit.Assert#assertThat assertThat}  * rather than {@code assertEquals}.  */
+comment|/**  * Unit test for the methods in {@link SqlFunctions} that implement SQL  * functions.  *  *<p>Developers, please use {@link org.hamcrest.MatcherAssert#assertThat assertThat}  * rather than {@code assertEquals}.  */
 end_comment
 
 begin_class

@@ -457,7 +457,11 @@ name|org
 operator|.
 name|junit
 operator|.
-name|Ignore
+name|jupiter
+operator|.
+name|api
+operator|.
+name|Disabled
 import|;
 end_import
 
@@ -466,6 +470,10 @@ import|import
 name|org
 operator|.
 name|junit
+operator|.
+name|jupiter
+operator|.
+name|api
 operator|.
 name|Test
 import|;
@@ -569,6 +577,18 @@ name|org
 operator|.
 name|hamcrest
 operator|.
+name|MatcherAssert
+operator|.
+name|assertThat
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|hamcrest
+operator|.
 name|core
 operator|.
 name|Is
@@ -583,19 +603,11 @@ name|org
 operator|.
 name|junit
 operator|.
-name|Assert
+name|jupiter
 operator|.
-name|assertThat
-import|;
-end_import
-
-begin_import
-import|import static
-name|org
+name|api
 operator|.
-name|junit
-operator|.
-name|Assert
+name|Assertions
 operator|.
 name|assertTrue
 import|;
@@ -8682,7 +8694,7 @@ argument_list|()
 expr_stmt|;
 block|}
 annotation|@
-name|Ignore
+name|Disabled
 argument_list|(
 literal|"CALCITE-1708"
 argument_list|)
@@ -8711,7 +8723,7 @@ argument_list|()
 expr_stmt|;
 block|}
 annotation|@
-name|Ignore
+name|Disabled
 argument_list|(
 literal|"CALCITE-1708"
 argument_list|)
@@ -8740,7 +8752,7 @@ argument_list|()
 expr_stmt|;
 block|}
 annotation|@
-name|Ignore
+name|Disabled
 argument_list|(
 literal|"CALCITE-985"
 argument_list|)

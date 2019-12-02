@@ -315,6 +315,10 @@ name|org
 operator|.
 name|junit
 operator|.
+name|jupiter
+operator|.
+name|api
+operator|.
 name|Test
 import|;
 end_import
@@ -335,11 +339,11 @@ begin_import
 import|import static
 name|org
 operator|.
-name|junit
+name|hamcrest
 operator|.
-name|Assert
+name|MatcherAssert
 operator|.
-name|assertEquals
+name|assertThat
 import|;
 end_import
 
@@ -349,9 +353,13 @@ name|org
 operator|.
 name|junit
 operator|.
-name|Assert
+name|jupiter
 operator|.
-name|assertThat
+name|api
+operator|.
+name|Assertions
+operator|.
+name|assertEquals
 import|;
 end_import
 
@@ -812,19 +820,23 @@ block|}
 block|}
 name|assertEquals
 argument_list|(
+literal|1
+argument_list|,
+name|cnt
+argument_list|,
+parameter_list|()
+lambda|->
 name|message
 operator|+
 literal|" should include<<"
 operator|+
 name|substring
 operator|+
-literal|">> exactly once, actual value is "
+literal|">> exactly once"
+operator|+
+literal|", actual value is "
 operator|+
 name|digest
-argument_list|,
-literal|1
-argument_list|,
-name|cnt
 argument_list|)
 expr_stmt|;
 block|}

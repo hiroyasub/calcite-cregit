@@ -417,11 +417,11 @@ begin_import
 import|import static
 name|org
 operator|.
-name|junit
+name|hamcrest
 operator|.
-name|Assert
+name|MatcherAssert
 operator|.
-name|assertNotNull
+name|assertThat
 import|;
 end_import
 
@@ -431,9 +431,13 @@ name|org
 operator|.
 name|junit
 operator|.
-name|Assert
+name|jupiter
 operator|.
-name|assertThat
+name|api
+operator|.
+name|Assertions
+operator|.
+name|assertNotNull
 import|;
 end_import
 

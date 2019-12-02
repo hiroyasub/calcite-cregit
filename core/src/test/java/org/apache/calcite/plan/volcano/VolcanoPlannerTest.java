@@ -321,7 +321,11 @@ name|org
 operator|.
 name|junit
 operator|.
-name|Ignore
+name|jupiter
+operator|.
+name|api
+operator|.
+name|Disabled
 import|;
 end_import
 
@@ -330,6 +334,10 @@ import|import
 name|org
 operator|.
 name|junit
+operator|.
+name|jupiter
+operator|.
+name|api
 operator|.
 name|Test
 import|;
@@ -623,33 +631,9 @@ begin_import
 import|import static
 name|org
 operator|.
-name|junit
+name|hamcrest
 operator|.
-name|Assert
-operator|.
-name|assertEquals
-import|;
-end_import
-
-begin_import
-import|import static
-name|org
-operator|.
-name|junit
-operator|.
-name|Assert
-operator|.
-name|assertSame
-import|;
-end_import
-
-begin_import
-import|import static
-name|org
-operator|.
-name|junit
-operator|.
-name|Assert
+name|MatcherAssert
 operator|.
 name|assertThat
 import|;
@@ -661,7 +645,43 @@ name|org
 operator|.
 name|junit
 operator|.
-name|Assert
+name|jupiter
+operator|.
+name|api
+operator|.
+name|Assertions
+operator|.
+name|assertEquals
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|jupiter
+operator|.
+name|api
+operator|.
+name|Assertions
+operator|.
+name|assertSame
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|jupiter
+operator|.
+name|api
+operator|.
+name|Assertions
 operator|.
 name|assertTrue
 import|;
@@ -1461,7 +1481,7 @@ return|;
 block|}
 comment|/**    * Tests transformation of a single+leaf from NONE to PHYS. In the past,    * this one didn't work due to the definition of ReformedSingleRule.    */
 annotation|@
-name|Ignore
+name|Disabled
 comment|// broken, because ReformedSingleRule matches child traits strictly
 annotation|@
 name|Test
@@ -1847,7 +1867,7 @@ expr_stmt|;
 block|}
 comment|/**    * Previously, this didn't work because ReformedRemoveSingleRule uses a    * pattern which spans calling conventions.    */
 annotation|@
-name|Ignore
+name|Disabled
 comment|// broken, because ReformedSingleRule matches child traits strictly
 annotation|@
 name|Test
@@ -2134,7 +2154,7 @@ argument_list|)
 expr_stmt|;
 block|}
 annotation|@
-name|Ignore
+name|Disabled
 argument_list|(
 literal|"CALCITE-2592 EnumerableMergeJoin is never taken"
 argument_list|)
@@ -2359,7 +2379,7 @@ expr_stmt|;
 block|}
 comment|/**    * Tests whether planner correctly notifies listeners of events.    */
 annotation|@
-name|Ignore
+name|Disabled
 annotation|@
 name|Test
 specifier|public

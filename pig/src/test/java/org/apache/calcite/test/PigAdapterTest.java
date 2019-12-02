@@ -49,6 +49,10 @@ name|org
 operator|.
 name|junit
 operator|.
+name|jupiter
+operator|.
+name|api
+operator|.
 name|Test
 import|;
 end_import
@@ -81,7 +85,11 @@ name|org
 operator|.
 name|junit
 operator|.
-name|Assert
+name|jupiter
+operator|.
+name|api
+operator|.
+name|Assertions
 operator|.
 name|assertEquals
 import|;
@@ -592,14 +600,14 @@ argument_list|)
 decl_stmt|;
 name|assertEquals
 argument_list|(
-literal|"expected Pig script not found"
-argument_list|,
 name|strings
 index|[
 literal|0
 index|]
 argument_list|,
 name|actualArray
+argument_list|,
+literal|"expected Pig script not found"
 argument_list|)
 expr_stmt|;
 block|}

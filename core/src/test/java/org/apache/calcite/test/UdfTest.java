@@ -325,7 +325,11 @@ name|org
 operator|.
 name|junit
 operator|.
-name|Ignore
+name|jupiter
+operator|.
+name|api
+operator|.
+name|Disabled
 import|;
 end_import
 
@@ -334,6 +338,10 @@ import|import
 name|org
 operator|.
 name|junit
+operator|.
+name|jupiter
+operator|.
+name|api
 operator|.
 name|Test
 import|;
@@ -441,9 +449,9 @@ begin_import
 import|import static
 name|org
 operator|.
-name|junit
+name|hamcrest
 operator|.
-name|Assert
+name|MatcherAssert
 operator|.
 name|assertThat
 import|;
@@ -835,7 +843,7 @@ return|;
 block|}
 comment|/** Tests a user-defined function that is defined in terms of a class with    * non-static methods. */
 annotation|@
-name|Ignore
+name|Disabled
 argument_list|(
 literal|"[CALCITE-1561] Intermittent test failures"
 argument_list|)

@@ -175,6 +175,10 @@ name|org
 operator|.
 name|junit
 operator|.
+name|jupiter
+operator|.
+name|api
+operator|.
 name|Test
 import|;
 end_import
@@ -205,11 +209,9 @@ name|org
 operator|.
 name|hamcrest
 operator|.
-name|core
+name|MatcherAssert
 operator|.
-name|Is
-operator|.
-name|is
+name|assertThat
 import|;
 end_import
 
@@ -217,11 +219,13 @@ begin_import
 import|import static
 name|org
 operator|.
-name|junit
+name|hamcrest
 operator|.
-name|Assert
+name|core
 operator|.
-name|assertThat
+name|Is
+operator|.
+name|is
 import|;
 end_import
 

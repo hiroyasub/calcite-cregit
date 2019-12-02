@@ -335,7 +335,11 @@ name|org
 operator|.
 name|junit
 operator|.
-name|Assert
+name|jupiter
+operator|.
+name|api
+operator|.
+name|Disabled
 import|;
 end_import
 
@@ -345,15 +349,9 @@ name|org
 operator|.
 name|junit
 operator|.
-name|Ignore
-import|;
-end_import
-
-begin_import
-import|import
-name|org
+name|jupiter
 operator|.
-name|junit
+name|api
 operator|.
 name|Test
 import|;
@@ -567,21 +565,9 @@ begin_import
 import|import static
 name|org
 operator|.
-name|junit
+name|hamcrest
 operator|.
-name|Assert
-operator|.
-name|assertEquals
-import|;
-end_import
-
-begin_import
-import|import static
-name|org
-operator|.
-name|junit
-operator|.
-name|Assert
+name|MatcherAssert
 operator|.
 name|assertThat
 import|;
@@ -593,9 +579,45 @@ name|org
 operator|.
 name|junit
 operator|.
-name|Assert
+name|jupiter
+operator|.
+name|api
+operator|.
+name|Assertions
+operator|.
+name|assertEquals
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|jupiter
+operator|.
+name|api
+operator|.
+name|Assertions
 operator|.
 name|assertTrue
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|jupiter
+operator|.
+name|api
+operator|.
+name|Assertions
+operator|.
+name|fail
 import|;
 end_import
 
@@ -1091,7 +1113,7 @@ expr_stmt|;
 block|}
 comment|/**    * Tests a relation that is accessed via method syntax.    * The function returns a {@link org.apache.calcite.linq4j.Queryable}.    */
 annotation|@
-name|Ignore
+name|Disabled
 annotation|@
 name|Test
 specifier|public
@@ -3014,8 +3036,6 @@ expr_stmt|;
 return|return;
 block|}
 block|}
-name|Assert
-operator|.
 name|fail
 argument_list|(
 literal|"column not found: "
@@ -3969,7 +3989,7 @@ expr_stmt|;
 block|}
 comment|/** If a method returns a    * {@link ViewTable}.{@code ViewTableMacro}, then it    * should be expanded. */
 annotation|@
-name|Ignore
+name|Disabled
 annotation|@
 name|Test
 specifier|public
@@ -4014,7 +4034,7 @@ expr_stmt|;
 block|}
 comment|/** Finds a table-macro using reflection. */
 annotation|@
-name|Ignore
+name|Disabled
 annotation|@
 name|Test
 specifier|public
@@ -4059,7 +4079,7 @@ expr_stmt|;
 block|}
 comment|/** Table with single field as Integer[] */
 annotation|@
-name|Ignore
+name|Disabled
 argument_list|(
 literal|"java.lang.AssertionError RelDataTypeImpl.getFieldList(RelDataTypeImpl.java:99)"
 argument_list|)
@@ -4099,7 +4119,7 @@ expr_stmt|;
 block|}
 comment|/** Table with single field as int[] */
 annotation|@
-name|Ignore
+name|Disabled
 argument_list|(
 literal|"java.lang.AssertionError RelDataTypeImpl.getFieldList(RelDataTypeImpl.java:99)"
 argument_list|)

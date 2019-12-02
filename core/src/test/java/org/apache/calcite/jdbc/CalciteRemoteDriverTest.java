@@ -279,7 +279,11 @@ name|org
 operator|.
 name|junit
 operator|.
-name|AfterClass
+name|jupiter
+operator|.
+name|api
+operator|.
+name|AfterAll
 import|;
 end_import
 
@@ -289,7 +293,11 @@ name|org
 operator|.
 name|junit
 operator|.
-name|BeforeClass
+name|jupiter
+operator|.
+name|api
+operator|.
+name|BeforeAll
 import|;
 end_import
 
@@ -298,6 +306,10 @@ import|import
 name|org
 operator|.
 name|junit
+operator|.
+name|jupiter
+operator|.
+name|api
 operator|.
 name|Test
 import|;
@@ -701,11 +713,27 @@ begin_import
 import|import static
 name|org
 operator|.
-name|junit
+name|hamcrest
 operator|.
-name|Assert
+name|MatcherAssert
 operator|.
 name|assertThat
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|jupiter
+operator|.
+name|api
+operator|.
+name|Assertions
+operator|.
+name|assertThrows
 import|;
 end_import
 
@@ -1024,7 +1052,7 @@ name|HttpServer
 name|start
 decl_stmt|;
 annotation|@
-name|BeforeClass
+name|BeforeAll
 specifier|public
 specifier|static
 name|void
@@ -1099,7 +1127,7 @@ argument_list|)
 return|;
 block|}
 annotation|@
-name|AfterClass
+name|AfterAll
 specifier|public
 specifier|static
 name|void

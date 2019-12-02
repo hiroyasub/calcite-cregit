@@ -93,7 +93,7 @@ name|org
 operator|.
 name|junit
 operator|.
-name|Assert
+name|ComparisonFailure
 import|;
 end_import
 
@@ -103,7 +103,11 @@ name|org
 operator|.
 name|junit
 operator|.
-name|ComparisonFailure
+name|jupiter
+operator|.
+name|api
+operator|.
+name|Assertions
 import|;
 end_import
 
@@ -1589,15 +1593,15 @@ argument_list|,
 literal|"\n"
 argument_list|)
 decl_stmt|;
-name|Assert
+name|Assertions
 operator|.
 name|assertEquals
 argument_list|(
-name|tag
-argument_list|,
 name|expected2Canonical
 argument_list|,
 name|actualCanonical
+argument_list|,
+name|tag
 argument_list|)
 expr_stmt|;
 block|}

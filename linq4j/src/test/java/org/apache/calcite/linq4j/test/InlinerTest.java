@@ -161,7 +161,11 @@ name|org
 operator|.
 name|junit
 operator|.
-name|Before
+name|jupiter
+operator|.
+name|api
+operator|.
+name|BeforeEach
 import|;
 end_import
 
@@ -170,6 +174,10 @@ import|import
 name|org
 operator|.
 name|junit
+operator|.
+name|jupiter
+operator|.
+name|api
 operator|.
 name|Test
 import|;
@@ -245,11 +253,11 @@ begin_import
 import|import static
 name|org
 operator|.
-name|junit
+name|hamcrest
 operator|.
-name|Assert
+name|MatcherAssert
 operator|.
-name|assertEquals
+name|assertThat
 import|;
 end_import
 
@@ -259,9 +267,13 @@ name|org
 operator|.
 name|junit
 operator|.
-name|Assert
+name|jupiter
 operator|.
-name|assertThat
+name|api
+operator|.
+name|Assertions
+operator|.
+name|assertEquals
 import|;
 end_import
 
@@ -278,7 +290,7 @@ name|BlockBuilder
 name|b
 decl_stmt|;
 annotation|@
-name|Before
+name|BeforeEach
 specifier|public
 name|void
 name|prepareBuilder

@@ -73,7 +73,11 @@ name|org
 operator|.
 name|junit
 operator|.
-name|Before
+name|jupiter
+operator|.
+name|api
+operator|.
+name|BeforeEach
 import|;
 end_import
 
@@ -91,7 +95,7 @@ name|PigConverter
 name|converter
 decl_stmt|;
 annotation|@
-name|Before
+name|BeforeEach
 specifier|public
 name|void
 name|testSetup

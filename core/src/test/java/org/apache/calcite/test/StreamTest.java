@@ -349,9 +349,11 @@ begin_import
 import|import
 name|org
 operator|.
-name|junit
+name|hamcrest
 operator|.
-name|Ignore
+name|comparator
+operator|.
+name|ComparatorMatcherBuilder
 import|;
 end_import
 
@@ -361,7 +363,39 @@ name|org
 operator|.
 name|junit
 operator|.
+name|jupiter
+operator|.
+name|api
+operator|.
+name|Disabled
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|junit
+operator|.
+name|jupiter
+operator|.
+name|api
+operator|.
 name|Test
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|junit
+operator|.
+name|jupiter
+operator|.
+name|api
+operator|.
+name|Timeout
 import|;
 end_import
 
@@ -455,9 +489,9 @@ begin_import
 import|import static
 name|org
 operator|.
-name|junit
+name|hamcrest
 operator|.
-name|Assert
+name|MatcherAssert
 operator|.
 name|assertThat
 import|;
@@ -469,19 +503,11 @@ name|org
 operator|.
 name|junit
 operator|.
-name|Assert
+name|jupiter
 operator|.
-name|assertTrue
-import|;
-end_import
-
-begin_import
-import|import static
-name|org
+name|api
 operator|.
-name|junit
-operator|.
-name|Assert
+name|Assertions
 operator|.
 name|fail
 import|;
@@ -915,7 +941,7 @@ argument_list|)
 expr_stmt|;
 block|}
 annotation|@
-name|Ignore
+name|Disabled
 annotation|@
 name|Test
 specifier|public
@@ -1271,7 +1297,7 @@ argument_list|)
 expr_stmt|;
 block|}
 annotation|@
-name|Ignore
+name|Disabled
 annotation|@
 name|Test
 specifier|public
