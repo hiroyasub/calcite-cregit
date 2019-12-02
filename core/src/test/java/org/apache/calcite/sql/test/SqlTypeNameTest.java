@@ -77,9 +77,355 @@ begin_import
 import|import static
 name|org
 operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|type
+operator|.
+name|SqlTypeName
+operator|.
+name|ARRAY
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|type
+operator|.
+name|SqlTypeName
+operator|.
+name|BIGINT
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|type
+operator|.
+name|SqlTypeName
+operator|.
+name|BINARY
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|type
+operator|.
+name|SqlTypeName
+operator|.
+name|BOOLEAN
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|type
+operator|.
+name|SqlTypeName
+operator|.
+name|CHAR
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|type
+operator|.
+name|SqlTypeName
+operator|.
+name|DATE
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|type
+operator|.
+name|SqlTypeName
+operator|.
+name|DECIMAL
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|type
+operator|.
+name|SqlTypeName
+operator|.
+name|DISTINCT
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|type
+operator|.
+name|SqlTypeName
+operator|.
+name|DOUBLE
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|type
+operator|.
+name|SqlTypeName
+operator|.
+name|FLOAT
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|type
+operator|.
+name|SqlTypeName
+operator|.
+name|INTEGER
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|type
+operator|.
+name|SqlTypeName
+operator|.
+name|REAL
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|type
+operator|.
+name|SqlTypeName
+operator|.
+name|SMALLINT
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|type
+operator|.
+name|SqlTypeName
+operator|.
+name|STRUCTURED
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|type
+operator|.
+name|SqlTypeName
+operator|.
+name|TIME
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|type
+operator|.
+name|SqlTypeName
+operator|.
+name|TIMESTAMP
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|type
+operator|.
+name|SqlTypeName
+operator|.
+name|TINYINT
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|type
+operator|.
+name|SqlTypeName
+operator|.
+name|VARBINARY
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|type
+operator|.
+name|SqlTypeName
+operator|.
+name|VARCHAR
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
 name|junit
 operator|.
-name|Assert
+name|jupiter
+operator|.
+name|api
+operator|.
+name|Assertions
 operator|.
 name|assertEquals
 import|;
@@ -115,13 +461,11 @@ argument_list|)
 decl_stmt|;
 name|assertEquals
 argument_list|(
-literal|"BIT did not map to BOOLEAN"
-argument_list|,
-name|SqlTypeName
-operator|.
 name|BOOLEAN
 argument_list|,
 name|tn
+argument_list|,
+literal|"BIT did not map to BOOLEAN"
 argument_list|)
 expr_stmt|;
 block|}
@@ -146,13 +490,11 @@ argument_list|)
 decl_stmt|;
 name|assertEquals
 argument_list|(
-literal|"TINYINT did not map to TINYINT"
-argument_list|,
-name|SqlTypeName
-operator|.
 name|TINYINT
 argument_list|,
 name|tn
+argument_list|,
+literal|"TINYINT did not map to TINYINT"
 argument_list|)
 expr_stmt|;
 block|}
@@ -177,13 +519,11 @@ argument_list|)
 decl_stmt|;
 name|assertEquals
 argument_list|(
-literal|"SMALLINT did not map to SMALLINT"
-argument_list|,
-name|SqlTypeName
-operator|.
 name|SMALLINT
 argument_list|,
 name|tn
+argument_list|,
+literal|"SMALLINT did not map to SMALLINT"
 argument_list|)
 expr_stmt|;
 block|}
@@ -208,13 +548,11 @@ argument_list|)
 decl_stmt|;
 name|assertEquals
 argument_list|(
-literal|"INTEGER did not map to INTEGER"
-argument_list|,
-name|SqlTypeName
-operator|.
 name|INTEGER
 argument_list|,
 name|tn
+argument_list|,
+literal|"INTEGER did not map to INTEGER"
 argument_list|)
 expr_stmt|;
 block|}
@@ -239,13 +577,11 @@ argument_list|)
 decl_stmt|;
 name|assertEquals
 argument_list|(
-literal|"BIGINT did not map to BIGINT"
-argument_list|,
-name|SqlTypeName
-operator|.
 name|BIGINT
 argument_list|,
 name|tn
+argument_list|,
+literal|"BIGINT did not map to BIGINT"
 argument_list|)
 expr_stmt|;
 block|}
@@ -270,13 +606,11 @@ argument_list|)
 decl_stmt|;
 name|assertEquals
 argument_list|(
-literal|"FLOAT did not map to FLOAT"
-argument_list|,
-name|SqlTypeName
-operator|.
 name|FLOAT
 argument_list|,
 name|tn
+argument_list|,
+literal|"FLOAT did not map to FLOAT"
 argument_list|)
 expr_stmt|;
 block|}
@@ -301,13 +635,11 @@ argument_list|)
 decl_stmt|;
 name|assertEquals
 argument_list|(
-literal|"REAL did not map to REAL"
-argument_list|,
-name|SqlTypeName
-operator|.
 name|REAL
 argument_list|,
 name|tn
+argument_list|,
+literal|"REAL did not map to REAL"
 argument_list|)
 expr_stmt|;
 block|}
@@ -332,13 +664,11 @@ argument_list|)
 decl_stmt|;
 name|assertEquals
 argument_list|(
-literal|"DOUBLE did not map to DOUBLE"
-argument_list|,
-name|SqlTypeName
-operator|.
 name|DOUBLE
 argument_list|,
 name|tn
+argument_list|,
+literal|"DOUBLE did not map to DOUBLE"
 argument_list|)
 expr_stmt|;
 block|}
@@ -363,13 +693,11 @@ argument_list|)
 decl_stmt|;
 name|assertEquals
 argument_list|(
-literal|"NUMERIC did not map to DECIMAL"
-argument_list|,
-name|SqlTypeName
-operator|.
 name|DECIMAL
 argument_list|,
 name|tn
+argument_list|,
+literal|"NUMERIC did not map to DECIMAL"
 argument_list|)
 expr_stmt|;
 block|}
@@ -394,13 +722,11 @@ argument_list|)
 decl_stmt|;
 name|assertEquals
 argument_list|(
-literal|"DECIMAL did not map to DECIMAL"
-argument_list|,
-name|SqlTypeName
-operator|.
 name|DECIMAL
 argument_list|,
 name|tn
+argument_list|,
+literal|"DECIMAL did not map to DECIMAL"
 argument_list|)
 expr_stmt|;
 block|}
@@ -425,13 +751,11 @@ argument_list|)
 decl_stmt|;
 name|assertEquals
 argument_list|(
-literal|"CHAR did not map to CHAR"
-argument_list|,
-name|SqlTypeName
-operator|.
 name|CHAR
 argument_list|,
 name|tn
+argument_list|,
+literal|"CHAR did not map to CHAR"
 argument_list|)
 expr_stmt|;
 block|}
@@ -456,13 +780,11 @@ argument_list|)
 decl_stmt|;
 name|assertEquals
 argument_list|(
-literal|"VARCHAR did not map to VARCHAR"
-argument_list|,
-name|SqlTypeName
-operator|.
 name|VARCHAR
 argument_list|,
 name|tn
+argument_list|,
+literal|"VARCHAR did not map to VARCHAR"
 argument_list|)
 expr_stmt|;
 block|}
@@ -487,11 +809,11 @@ argument_list|)
 decl_stmt|;
 name|assertEquals
 argument_list|(
-literal|"LONGVARCHAR did not map to null"
-argument_list|,
 literal|null
 argument_list|,
 name|tn
+argument_list|,
+literal|"LONGVARCHAR did not map to null"
 argument_list|)
 expr_stmt|;
 block|}
@@ -516,13 +838,11 @@ argument_list|)
 decl_stmt|;
 name|assertEquals
 argument_list|(
-literal|"DATE did not map to DATE"
-argument_list|,
-name|SqlTypeName
-operator|.
 name|DATE
 argument_list|,
 name|tn
+argument_list|,
+literal|"DATE did not map to DATE"
 argument_list|)
 expr_stmt|;
 block|}
@@ -547,13 +867,11 @@ argument_list|)
 decl_stmt|;
 name|assertEquals
 argument_list|(
-literal|"TIME did not map to TIME"
-argument_list|,
-name|SqlTypeName
-operator|.
 name|TIME
 argument_list|,
 name|tn
+argument_list|,
+literal|"TIME did not map to TIME"
 argument_list|)
 expr_stmt|;
 block|}
@@ -578,13 +896,11 @@ argument_list|)
 decl_stmt|;
 name|assertEquals
 argument_list|(
-literal|"TIMESTAMP did not map to TIMESTAMP"
-argument_list|,
-name|SqlTypeName
-operator|.
 name|TIMESTAMP
 argument_list|,
 name|tn
+argument_list|,
+literal|"TIMESTAMP did not map to TIMESTAMP"
 argument_list|)
 expr_stmt|;
 block|}
@@ -609,13 +925,11 @@ argument_list|)
 decl_stmt|;
 name|assertEquals
 argument_list|(
-literal|"BINARY did not map to BINARY"
-argument_list|,
-name|SqlTypeName
-operator|.
 name|BINARY
 argument_list|,
 name|tn
+argument_list|,
+literal|"BINARY did not map to BINARY"
 argument_list|)
 expr_stmt|;
 block|}
@@ -640,13 +954,11 @@ argument_list|)
 decl_stmt|;
 name|assertEquals
 argument_list|(
-literal|"VARBINARY did not map to VARBINARY"
-argument_list|,
-name|SqlTypeName
-operator|.
 name|VARBINARY
 argument_list|,
 name|tn
+argument_list|,
+literal|"VARBINARY did not map to VARBINARY"
 argument_list|)
 expr_stmt|;
 block|}
@@ -671,11 +983,11 @@ argument_list|)
 decl_stmt|;
 name|assertEquals
 argument_list|(
-literal|"LONGVARBINARY did not map to null"
-argument_list|,
 literal|null
 argument_list|,
 name|tn
+argument_list|,
+literal|"LONGVARBINARY did not map to null"
 argument_list|)
 expr_stmt|;
 block|}
@@ -700,11 +1012,11 @@ argument_list|)
 decl_stmt|;
 name|assertEquals
 argument_list|(
-literal|"NULL did not map to null"
-argument_list|,
 literal|null
 argument_list|,
 name|tn
+argument_list|,
+literal|"NULL did not map to null"
 argument_list|)
 expr_stmt|;
 block|}
@@ -729,11 +1041,11 @@ argument_list|)
 decl_stmt|;
 name|assertEquals
 argument_list|(
-literal|"OTHER did not map to null"
-argument_list|,
 literal|null
 argument_list|,
 name|tn
+argument_list|,
+literal|"OTHER did not map to null"
 argument_list|)
 expr_stmt|;
 block|}
@@ -758,11 +1070,11 @@ argument_list|)
 decl_stmt|;
 name|assertEquals
 argument_list|(
-literal|"JAVA_OBJECT did not map to null"
-argument_list|,
 literal|null
 argument_list|,
 name|tn
+argument_list|,
+literal|"JAVA_OBJECT did not map to null"
 argument_list|)
 expr_stmt|;
 block|}
@@ -787,13 +1099,11 @@ argument_list|)
 decl_stmt|;
 name|assertEquals
 argument_list|(
-literal|"DISTINCT did not map to DISTINCT"
-argument_list|,
-name|SqlTypeName
-operator|.
 name|DISTINCT
 argument_list|,
 name|tn
+argument_list|,
+literal|"DISTINCT did not map to DISTINCT"
 argument_list|)
 expr_stmt|;
 block|}
@@ -818,13 +1128,11 @@ argument_list|)
 decl_stmt|;
 name|assertEquals
 argument_list|(
-literal|"STRUCT did not map to null"
-argument_list|,
-name|SqlTypeName
-operator|.
 name|STRUCTURED
 argument_list|,
 name|tn
+argument_list|,
+literal|"STRUCT did not map to null"
 argument_list|)
 expr_stmt|;
 block|}
@@ -849,13 +1157,11 @@ argument_list|)
 decl_stmt|;
 name|assertEquals
 argument_list|(
-literal|"ARRAY did not map to ARRAY"
-argument_list|,
-name|SqlTypeName
-operator|.
 name|ARRAY
 argument_list|,
 name|tn
+argument_list|,
+literal|"ARRAY did not map to ARRAY"
 argument_list|)
 expr_stmt|;
 block|}
@@ -880,11 +1186,11 @@ argument_list|)
 decl_stmt|;
 name|assertEquals
 argument_list|(
-literal|"BLOB did not map to null"
-argument_list|,
 literal|null
 argument_list|,
 name|tn
+argument_list|,
+literal|"BLOB did not map to null"
 argument_list|)
 expr_stmt|;
 block|}
@@ -909,11 +1215,11 @@ argument_list|)
 decl_stmt|;
 name|assertEquals
 argument_list|(
-literal|"CLOB did not map to null"
-argument_list|,
 literal|null
 argument_list|,
 name|tn
+argument_list|,
+literal|"CLOB did not map to null"
 argument_list|)
 expr_stmt|;
 block|}
@@ -938,11 +1244,11 @@ argument_list|)
 decl_stmt|;
 name|assertEquals
 argument_list|(
-literal|"REF did not map to null"
-argument_list|,
 literal|null
 argument_list|,
 name|tn
+argument_list|,
+literal|"REF did not map to null"
 argument_list|)
 expr_stmt|;
 block|}
@@ -967,11 +1273,11 @@ argument_list|)
 decl_stmt|;
 name|assertEquals
 argument_list|(
-literal|"DATALINK did not map to null"
-argument_list|,
 literal|null
 argument_list|,
 name|tn
+argument_list|,
+literal|"DATALINK did not map to null"
 argument_list|)
 expr_stmt|;
 block|}
@@ -996,13 +1302,11 @@ argument_list|)
 decl_stmt|;
 name|assertEquals
 argument_list|(
-literal|"BOOLEAN did not map to BOOLEAN"
-argument_list|,
-name|SqlTypeName
-operator|.
 name|BOOLEAN
 argument_list|,
 name|tn
+argument_list|,
+literal|"BOOLEAN did not map to BOOLEAN"
 argument_list|)
 expr_stmt|;
 block|}
@@ -1028,11 +1332,11 @@ decl_stmt|;
 comment|// ROWID not supported yet
 name|assertEquals
 argument_list|(
-literal|"ROWID maps to non-null type"
-argument_list|,
 literal|null
 argument_list|,
 name|tn
+argument_list|,
+literal|"ROWID maps to non-null type"
 argument_list|)
 expr_stmt|;
 block|}
@@ -1058,13 +1362,11 @@ decl_stmt|;
 comment|// NCHAR not supported yet, currently maps to CHAR
 name|assertEquals
 argument_list|(
-literal|"NCHAR did not map to CHAR"
-argument_list|,
-name|SqlTypeName
-operator|.
 name|CHAR
 argument_list|,
 name|tn
+argument_list|,
+literal|"NCHAR did not map to CHAR"
 argument_list|)
 expr_stmt|;
 block|}
@@ -1090,13 +1392,11 @@ decl_stmt|;
 comment|// NVARCHAR not supported yet, currently maps to VARCHAR
 name|assertEquals
 argument_list|(
-literal|"NVARCHAR did not map to VARCHAR"
-argument_list|,
-name|SqlTypeName
-operator|.
 name|VARCHAR
 argument_list|,
 name|tn
+argument_list|,
+literal|"NVARCHAR did not map to VARCHAR"
 argument_list|)
 expr_stmt|;
 block|}
@@ -1122,11 +1422,11 @@ decl_stmt|;
 comment|// LONGNVARCHAR not supported yet
 name|assertEquals
 argument_list|(
-literal|"LONGNVARCHAR maps to non-null type"
-argument_list|,
 literal|null
 argument_list|,
 name|tn
+argument_list|,
+literal|"LONGNVARCHAR maps to non-null type"
 argument_list|)
 expr_stmt|;
 block|}
@@ -1152,11 +1452,11 @@ decl_stmt|;
 comment|// NCLOB not supported yet
 name|assertEquals
 argument_list|(
-literal|"NCLOB maps to non-null type"
-argument_list|,
 literal|null
 argument_list|,
 name|tn
+argument_list|,
+literal|"NCLOB maps to non-null type"
 argument_list|)
 expr_stmt|;
 block|}
@@ -1182,11 +1482,11 @@ decl_stmt|;
 comment|// SQLXML not supported yet
 name|assertEquals
 argument_list|(
-literal|"SQLXML maps to non-null type"
-argument_list|,
 literal|null
 argument_list|,
 name|tn
+argument_list|,
+literal|"SQLXML maps to non-null type"
 argument_list|)
 expr_stmt|;
 block|}

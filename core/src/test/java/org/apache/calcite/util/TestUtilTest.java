@@ -88,15 +88,15 @@ argument_list|()
 decl_stmt|;
 name|assertTrue
 argument_list|(
+name|majorVersion
+operator|>
+literal|6
+argument_list|,
 literal|"current JavaMajorVersion == "
 operator|+
 name|majorVersion
 operator|+
 literal|" is expected to exceed 6"
-argument_list|,
-name|majorVersion
-operator|>
-literal|6
 argument_list|)
 expr_stmt|;
 block|}
@@ -443,8 +443,6 @@ parameter_list|)
 block|{
 name|assertEquals
 argument_list|(
-name|versionString
-argument_list|,
 name|expectedMajorVersion
 argument_list|,
 name|TestUtil
@@ -453,6 +451,8 @@ name|majorVersionFromString
 argument_list|(
 name|versionString
 argument_list|)
+argument_list|,
+name|versionString
 argument_list|)
 expr_stmt|;
 block|}

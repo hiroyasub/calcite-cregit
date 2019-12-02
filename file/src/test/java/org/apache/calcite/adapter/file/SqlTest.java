@@ -529,8 +529,6 @@ argument_list|(
 name|lines
 argument_list|)
 expr_stmt|;
-name|Assert
-operator|.
 name|assertEquals
 argument_list|(
 name|expectedLines

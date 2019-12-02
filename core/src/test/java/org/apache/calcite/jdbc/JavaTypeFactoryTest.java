@@ -429,9 +429,14 @@ name|Type
 name|actual
 parameter_list|)
 block|{
-name|String
-name|errorMessage
-init|=
+name|assertTrue
+argument_list|(
+name|actual
+operator|instanceof
+name|RecordType
+argument_list|,
+parameter_list|()
+lambda|->
 literal|"Type {"
 operator|+
 name|actual
@@ -440,16 +445,6 @@ name|getTypeName
 argument_list|()
 operator|+
 literal|"} is not a subtype of Types.RecordType"
-decl_stmt|;
-name|assertTrue
-argument_list|(
-name|errorMessage
-argument_list|,
-name|actual
-operator|instanceof
-name|Types
-operator|.
-name|RecordType
 argument_list|)
 expr_stmt|;
 block|}

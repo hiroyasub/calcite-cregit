@@ -364,8 +364,6 @@ condition|)
 block|{
 name|assertEquals
 argument_list|(
-literal|"expected and actual Elasticsearch queries do not match"
-argument_list|,
 name|MAPPER
 operator|.
 name|writeValueAsString
@@ -379,6 +377,8 @@ name|writeValueAsString
 argument_list|(
 name|actual
 argument_list|)
+argument_list|,
+literal|"expected and actual Elasticsearch queries do not match"
 argument_list|)
 expr_stmt|;
 block|}

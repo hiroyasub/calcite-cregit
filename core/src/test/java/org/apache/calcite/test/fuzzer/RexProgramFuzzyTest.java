@@ -1492,6 +1492,12 @@ condition|)
 block|{
 name|assertEquals
 argument_list|(
+name|trueLiteral
+argument_list|,
+name|opt
+argument_list|,
+parameter_list|()
+lambda|->
 name|nodeToString
 argument_list|(
 name|node
@@ -1500,10 +1506,6 @@ operator|+
 literal|" isAlwaysTrue, so it should simplify to TRUE "
 operator|+
 name|uaf
-argument_list|,
-name|trueLiteral
-argument_list|,
-name|opt
 argument_list|)
 expr_stmt|;
 block|}
@@ -1529,6 +1531,12 @@ condition|)
 block|{
 name|assertEquals
 argument_list|(
+name|falseLiteral
+argument_list|,
+name|opt
+argument_list|,
+parameter_list|()
+lambda|->
 name|nodeToString
 argument_list|(
 name|node
@@ -1537,10 +1545,6 @@ operator|+
 literal|" isAlwaysFalse, so it should simplify to FALSE "
 operator|+
 name|uaf
-argument_list|,
-name|falseLiteral
-argument_list|,
-name|opt
 argument_list|)
 expr_stmt|;
 block|}
@@ -1591,6 +1595,12 @@ condition|)
 block|{
 name|assertEquals
 argument_list|(
+name|falseLiteral
+argument_list|,
+name|opt
+argument_list|,
+parameter_list|()
+lambda|->
 name|nodeToString
 argument_list|(
 name|node
@@ -1599,10 +1609,6 @@ operator|+
 literal|" is always null boolean, so it should simplify to FALSE "
 operator|+
 name|uaf
-argument_list|,
-name|falseLiteral
-argument_list|,
-name|opt
 argument_list|)
 expr_stmt|;
 block|}
@@ -1622,15 +1628,6 @@ condition|)
 block|{
 name|assertEquals
 argument_list|(
-name|nodeToString
-argument_list|(
-name|node
-argument_list|)
-operator|+
-literal|" is always null (non boolean), so it should simplify to NULL "
-operator|+
-name|uaf
-argument_list|,
 name|rexBuilder
 operator|.
 name|makeNullLiteral
@@ -1642,6 +1639,17 @@ argument_list|()
 argument_list|)
 argument_list|,
 name|opt
+argument_list|,
+parameter_list|()
+lambda|->
+name|nodeToString
+argument_list|(
+name|node
+argument_list|)
+operator|+
+literal|" is always null (non boolean), so it should simplify to NULL "
+operator|+
+name|uaf
 argument_list|)
 expr_stmt|;
 block|}
@@ -1678,6 +1686,12 @@ condition|)
 block|{
 name|assertEquals
 argument_list|(
+name|trueLiteral
+argument_list|,
+name|opt
+argument_list|,
+parameter_list|()
+lambda|->
 name|nodeToString
 argument_list|(
 name|node
@@ -1686,10 +1700,6 @@ operator|+
 literal|" is always null boolean, so it should simplify to TRUE "
 operator|+
 name|uaf
-argument_list|,
-name|trueLiteral
-argument_list|,
-name|opt
 argument_list|)
 expr_stmt|;
 block|}
@@ -1709,15 +1719,6 @@ condition|)
 block|{
 name|assertEquals
 argument_list|(
-name|nodeToString
-argument_list|(
-name|node
-argument_list|)
-operator|+
-literal|" is always null (non boolean), so it should simplify to NULL "
-operator|+
-name|uaf
-argument_list|,
 name|rexBuilder
 operator|.
 name|makeNullLiteral
@@ -1729,6 +1730,17 @@ argument_list|()
 argument_list|)
 argument_list|,
 name|opt
+argument_list|,
+parameter_list|()
+lambda|->
+name|nodeToString
+argument_list|(
+name|node
+argument_list|)
+operator|+
+literal|" is always null (non boolean), so it should simplify to NULL "
+operator|+
+name|uaf
 argument_list|)
 expr_stmt|;
 block|}
@@ -1750,6 +1762,12 @@ condition|)
 block|{
 name|assertEquals
 argument_list|(
+name|nullBool
+argument_list|,
+name|opt
+argument_list|,
+parameter_list|()
+lambda|->
 name|nodeToString
 argument_list|(
 name|node
@@ -1758,10 +1776,6 @@ operator|+
 literal|" is always null, so it should simplify to NULL "
 operator|+
 name|uaf
-argument_list|,
-name|nullBool
-argument_list|,
-name|opt
 argument_list|)
 expr_stmt|;
 block|}
@@ -1846,6 +1860,18 @@ condition|)
 block|{
 name|assertEquals
 argument_list|(
+name|node
+operator|.
+name|getType
+argument_list|()
+argument_list|,
+name|opt
+operator|.
+name|getType
+argument_list|()
+argument_list|,
+parameter_list|()
+lambda|->
 name|nodeToString
 argument_list|(
 name|node
@@ -1857,16 +1883,6 @@ name|nodeToString
 argument_list|(
 name|opt
 argument_list|)
-argument_list|,
-name|node
-operator|.
-name|getType
-argument_list|()
-argument_list|,
-name|opt
-operator|.
-name|getType
-argument_list|()
 argument_list|)
 expr_stmt|;
 block|}

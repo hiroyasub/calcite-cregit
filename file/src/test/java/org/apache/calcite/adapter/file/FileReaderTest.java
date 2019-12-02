@@ -634,19 +634,10 @@ block|}
 comment|/** Tests failed {@link FileReader} instantiation - bad URL. */
 annotation|@
 name|Test
-argument_list|(
-name|expected
-operator|=
-name|FileReaderException
-operator|.
-name|class
-argument_list|)
 specifier|public
 name|void
 name|testFileReaderBadUrl
 parameter_list|()
-throws|throws
-name|FileReaderException
 block|{
 specifier|final
 name|String
@@ -654,6 +645,15 @@ name|uri
 init|=
 literal|"http://ex.wikipedia.org/wiki/List_of_United_States_cities_by_population"
 decl_stmt|;
+name|assertThrows
+argument_list|(
+name|FileReaderException
+operator|.
+name|class
+argument_list|,
+parameter_list|()
+lambda|->
+block|{
 name|FileReader
 name|t
 init|=
@@ -676,22 +676,16 @@ name|refresh
 argument_list|()
 expr_stmt|;
 block|}
+argument_list|)
+expr_stmt|;
+block|}
 comment|/** Tests failed {@link FileReader} instantiation - bad selector. */
 annotation|@
 name|Test
-argument_list|(
-name|expected
-operator|=
-name|FileReaderException
-operator|.
-name|class
-argument_list|)
 specifier|public
 name|void
 name|testFileReaderBadSelector
 parameter_list|()
-throws|throws
-name|FileReaderException
 block|{
 specifier|final
 name|Source
@@ -702,6 +696,15 @@ argument_list|(
 literal|"tableOK.html"
 argument_list|)
 decl_stmt|;
+name|assertThrows
+argument_list|(
+name|FileReaderException
+operator|.
+name|class
+argument_list|,
+parameter_list|()
+lambda|->
+block|{
 name|FileReader
 name|t
 init|=
@@ -717,6 +720,9 @@ name|t
 operator|.
 name|refresh
 argument_list|()
+expr_stmt|;
+block|}
+argument_list|)
 expr_stmt|;
 block|}
 comment|/** Test {@link FileReader} with static file - headings. */

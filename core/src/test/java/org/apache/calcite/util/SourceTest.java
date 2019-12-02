@@ -713,10 +713,6 @@ argument_list|)
 decl_stmt|;
 name|assertEquals
 argument_list|(
-name|url
-operator|+
-literal|" .file().getAbsolutePath()"
-argument_list|,
 operator|new
 name|File
 argument_list|(
@@ -735,6 +731,12 @@ argument_list|()
 operator|.
 name|getAbsolutePath
 argument_list|()
+argument_list|,
+parameter_list|()
+lambda|->
+name|url
+operator|+
+literal|" .file().getAbsolutePath()"
 argument_list|)
 expr_stmt|;
 block|}
@@ -761,10 +763,6 @@ argument_list|)
 decl_stmt|;
 name|assertEquals
 argument_list|(
-name|url
-operator|+
-literal|" .file().getAbsolutePath()"
-argument_list|,
 literal|"dir name/test file.json"
 argument_list|,
 name|foo
@@ -781,6 +779,12 @@ literal|'\\'
 argument_list|,
 literal|'/'
 argument_list|)
+argument_list|,
+parameter_list|()
+lambda|->
+name|url
+operator|+
+literal|" .file().getAbsolutePath()"
 argument_list|)
 expr_stmt|;
 block|}

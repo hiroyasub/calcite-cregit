@@ -478,8 +478,6 @@ argument_list|)
 expr_stmt|;
 name|assertNull
 argument_list|(
-literal|"There is no path from A to E"
-argument_list|,
 name|shortestPath
 argument_list|(
 name|g
@@ -488,6 +486,8 @@ literal|"A"
 argument_list|,
 literal|"E"
 argument_list|)
+argument_list|,
+literal|"There is no path from A to E"
 argument_list|)
 expr_stmt|;
 name|assertEquals
@@ -509,8 +509,6 @@ argument_list|)
 expr_stmt|;
 name|assertNull
 argument_list|(
-literal|"Node X is not in the graph"
-argument_list|,
 name|shortestPath
 argument_list|(
 name|g
@@ -519,6 +517,8 @@ literal|"X"
 argument_list|,
 literal|"A"
 argument_list|)
+argument_list|,
+literal|"Node X is not in the graph"
 argument_list|)
 expr_stmt|;
 name|assertEquals
@@ -2235,8 +2235,6 @@ argument_list|)
 expr_stmt|;
 name|assertNull
 argument_list|(
-literal|"There is no path from A to E"
-argument_list|,
 name|shortestPath
 argument_list|(
 name|g
@@ -2245,6 +2243,8 @@ literal|"A"
 argument_list|,
 literal|"E"
 argument_list|)
+argument_list|,
+literal|"There is no path from A to E"
 argument_list|)
 expr_stmt|;
 name|assertEquals
@@ -2266,8 +2266,6 @@ argument_list|)
 expr_stmt|;
 name|assertNull
 argument_list|(
-literal|"Node X is not in the graph"
-argument_list|,
 name|shortestPath
 argument_list|(
 name|g
@@ -2276,6 +2274,8 @@ literal|"X"
 argument_list|,
 literal|"A"
 argument_list|)
+argument_list|,
+literal|"Node X is not in the graph"
 argument_list|)
 expr_stmt|;
 name|assertEquals

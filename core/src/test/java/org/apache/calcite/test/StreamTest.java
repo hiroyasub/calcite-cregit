@@ -1068,10 +1068,10 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
+annotation|@
+name|Timeout
 argument_list|(
-name|timeout
-operator|=
-literal|10000
+literal|10
 argument_list|)
 specifier|public
 name|void
@@ -1206,15 +1206,22 @@ expr_stmt|;
 block|}
 comment|// With a 3 millisecond delay, typically n is between 200 - 400
 comment|// before cancel takes effect.
-name|assertTrue
+name|assertThat
 argument_list|(
-literal|"n is "
-operator|+
 name|n
 argument_list|,
-name|n
+name|ComparatorMatcherBuilder
+operator|.
+expr|<
+name|Integer
 operator|>
+name|usingNaturalOrdering
+argument_list|()
+operator|.
+name|greaterThan
+argument_list|(
 literal|5
+argument_list|)
 argument_list|)
 expr_stmt|;
 block|}

@@ -713,8 +713,6 @@ argument_list|)
 decl_stmt|;
 name|assertEquals
 argument_list|(
-literal|"x in the second block should be renamed to avoid name clash"
-argument_list|,
 literal|"{\n"
 operator|+
 literal|"  int x;\n"
@@ -736,6 +734,8 @@ operator|.
 name|toBlock
 argument_list|()
 argument_list|)
+argument_list|,
+literal|"x in the second block should be renamed to avoid name clash"
 argument_list|)
 expr_stmt|;
 block|}
@@ -768,8 +768,6 @@ argument_list|)
 decl_stmt|;
 name|assertEquals
 argument_list|(
-literal|"x in the second block should be renamed to avoid name clash"
-argument_list|,
 literal|"{\n"
 operator|+
 literal|"  int x = 7;\n"
@@ -791,6 +789,8 @@ operator|.
 name|toBlock
 argument_list|()
 argument_list|)
+argument_list|,
+literal|"x in the second block should be renamed to avoid name clash"
 argument_list|)
 expr_stmt|;
 block|}
@@ -912,8 +912,6 @@ argument_list|)
 expr_stmt|;
 name|assertEquals
 argument_list|(
-literal|"Expected to optimize Boolean.FALSE = null to false"
-argument_list|,
 literal|"{\n"
 operator|+
 literal|"  return false;\n"
@@ -929,6 +927,8 @@ operator|.
 name|toBlock
 argument_list|()
 argument_list|)
+argument_list|,
+literal|"Expected to optimize Boolean.FALSE = null to false"
 argument_list|)
 expr_stmt|;
 block|}

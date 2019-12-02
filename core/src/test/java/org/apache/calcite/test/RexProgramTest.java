@@ -1046,11 +1046,11 @@ expr_stmt|;
 block|}
 name|assertEquals
 argument_list|(
-name|message
-argument_list|,
 name|expected
 argument_list|,
 name|actual
+argument_list|,
+name|message
 argument_list|)
 expr_stmt|;
 block|}
@@ -11261,47 +11261,45 @@ parameter_list|()
 block|{
 name|assertEquals
 argument_list|(
+name|vBool
+argument_list|()
+argument_list|,
+name|vBool
+argument_list|()
+argument_list|,
 literal|"vBool() instances should be equal"
-argument_list|,
-name|vBool
-argument_list|()
-argument_list|,
-name|vBool
-argument_list|()
 argument_list|)
 expr_stmt|;
 name|assertEquals
 argument_list|(
+name|vBool
+argument_list|()
+operator|.
+name|hashCode
+argument_list|()
+argument_list|,
+name|vBool
+argument_list|()
+operator|.
+name|hashCode
+argument_list|()
+argument_list|,
 literal|"vBool().hashCode()"
-argument_list|,
-name|vBool
-argument_list|()
-operator|.
-name|hashCode
-argument_list|()
-argument_list|,
-name|vBool
-argument_list|()
-operator|.
-name|hashCode
-argument_list|()
 argument_list|)
 expr_stmt|;
 name|assertNotSame
 argument_list|(
+name|vBool
+argument_list|()
+argument_list|,
+name|vBool
+argument_list|()
+argument_list|,
 literal|"vBool() is expected to produce new RexFieldAccess"
-argument_list|,
-name|vBool
-argument_list|()
-argument_list|,
-name|vBool
-argument_list|()
 argument_list|)
 expr_stmt|;
 name|assertNotEquals
 argument_list|(
-literal|"vBool(0) != vBool(1)"
-argument_list|,
 name|vBool
 argument_list|(
 literal|0
@@ -11311,6 +11309,8 @@ name|vBool
 argument_list|(
 literal|1
 argument_list|)
+argument_list|,
+literal|"vBool(0) != vBool(1)"
 argument_list|)
 expr_stmt|;
 block|}
@@ -15963,10 +15963,6 @@ argument_list|)
 expr_stmt|;
 name|assertEquals
 argument_list|(
-literal|"type of "
-operator|+
-name|rexNode
-argument_list|,
 name|type
 argument_list|,
 name|rexNode
@@ -15990,6 +15986,10 @@ literal|""
 else|:
 literal|" NOT NULL"
 operator|)
+argument_list|,
+literal|"type of "
+operator|+
+name|rexNode
 argument_list|)
 expr_stmt|;
 block|}

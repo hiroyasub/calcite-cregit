@@ -1879,9 +1879,9 @@ lambda|->
 block|{
 name|assertNotNull
 argument_list|(
-literal|"expected exception but none was thrown"
-argument_list|,
 name|p0
+argument_list|,
+literal|"expected exception but none was thrown"
 argument_list|)
 expr_stmt|;
 name|String
@@ -1894,13 +1894,11 @@ argument_list|(
 name|p0
 argument_list|)
 decl_stmt|;
-name|assertTrue
+name|assertThat
 argument_list|(
 name|stack
 argument_list|,
-name|stack
-operator|.
-name|contains
+name|containsString
 argument_list|(
 name|expected
 argument_list|)
@@ -1943,9 +1941,9 @@ parameter_list|)
 block|{
 name|assertNotNull
 argument_list|(
-literal|"Nothing was thrown"
-argument_list|,
 name|throwable
+argument_list|,
+literal|"Nothing was thrown"
 argument_list|)
 expr_stmt|;
 name|Exception
@@ -1956,13 +1954,11 @@ argument_list|(
 name|throwable
 argument_list|)
 decl_stmt|;
-name|assertTrue
+name|assertNotNull
 argument_list|(
-literal|"Expected to fail at validation, but did not"
-argument_list|,
 name|exception
-operator|!=
-literal|null
+argument_list|,
+literal|"Expected to fail at validation, but did not"
 argument_list|)
 expr_stmt|;
 if|if
@@ -1982,13 +1978,11 @@ argument_list|(
 name|exception
 argument_list|)
 decl_stmt|;
-name|assertTrue
+name|assertThat
 argument_list|(
 name|stack
 argument_list|,
-name|stack
-operator|.
-name|contains
+name|containsString
 argument_list|(
 name|expected
 argument_list|)
@@ -2838,8 +2832,19 @@ name|s
 argument_list|)
 argument_list|)
 decl_stmt|;
-name|assertTrue
+name|assertEquals
 argument_list|(
+name|count
+argument_list|,
+name|countMatches
+argument_list|(
+name|actual
+argument_list|,
+name|expected
+argument_list|)
+argument_list|,
+parameter_list|()
+lambda|->
 name|actual
 operator|+
 literal|" should have "
@@ -2849,17 +2854,6 @@ operator|+
 literal|" occurrence of "
 operator|+
 name|expected
-argument_list|,
-name|StringUtils
-operator|.
-name|countMatches
-argument_list|(
-name|actual
-argument_list|,
-name|expected
-argument_list|)
-operator|==
-name|count
 argument_list|)
 expr_stmt|;
 block|}
@@ -5874,7 +5868,7 @@ name|schemaSpec
 argument_list|)
 return|;
 block|}
-comment|/**    * Asserts that two objects are equal. If they are not, an    * {@link AssertionError} is thrown with the given message. If    *<code>expected</code> and<code>actual</code> are<code>null</code>,    * they are considered equal.    *    *<p>This method produces more user-friendly error messages than    * {@link org.junit.Assert#assertArrayEquals(String, Object[], Object[])}    *    * @param message the identifying message for the {@link AssertionError} (<code>null</code>    * okay)    * @param expected expected value    * @param actual actual value    */
+comment|/**    * Asserts that two objects are equal. If they are not, an    * {@link AssertionError} is thrown with the given message. If    *<code>expected</code> and<code>actual</code> are<code>null</code>,    * they are considered equal.    *    *<p>This method produces more user-friendly error messages than    * {@link org.junit.jupiter.api.Assertions#assertArrayEquals(Object[], Object[], String)}    *    * @param message the identifying message for the {@link AssertionError} (<code>null</code>    * okay)    * @param expected expected value    * @param actual actual value    */
 specifier|public
 specifier|static
 name|void
@@ -5894,8 +5888,6 @@ parameter_list|)
 block|{
 name|assertEquals
 argument_list|(
-name|message
-argument_list|,
 name|str
 argument_list|(
 name|expected
@@ -5905,6 +5897,8 @@ name|str
 argument_list|(
 name|actual
 argument_list|)
+argument_list|,
+name|message
 argument_list|)
 expr_stmt|;
 block|}
@@ -8990,18 +8984,6 @@ argument_list|)
 expr_stmt|;
 name|assertTrue
 argument_list|(
-literal|"Plan ["
-operator|+
-name|plan
-operator|+
-literal|"] contains ["
-operator|+
-name|expected
-operator|+
-literal|"]"
-argument_list|,
-name|Util
-operator|.
 name|toLinux
 argument_list|(
 name|plan
@@ -9018,6 +9000,16 @@ name|contains
 argument_list|(
 name|expected
 argument_list|)
+argument_list|,
+literal|"Plan ["
+operator|+
+name|plan
+operator|+
+literal|"] contains ["
+operator|+
+name|expected
+operator|+
+literal|"]"
 argument_list|)
 expr_stmt|;
 return|return
@@ -9074,18 +9066,6 @@ literal|"\""
 expr_stmt|;
 name|assertTrue
 argument_list|(
-literal|"Plan ["
-operator|+
-name|plan
-operator|+
-literal|"] contains ["
-operator|+
-name|expected
-operator|+
-literal|"]"
-argument_list|,
-name|Util
-operator|.
 name|toLinux
 argument_list|(
 name|plan
@@ -9102,6 +9082,16 @@ name|contains
 argument_list|(
 name|expected
 argument_list|)
+argument_list|,
+literal|"Plan ["
+operator|+
+name|plan
+operator|+
+literal|"] contains ["
+operator|+
+name|expected
+operator|+
+literal|"]"
 argument_list|)
 expr_stmt|;
 return|return

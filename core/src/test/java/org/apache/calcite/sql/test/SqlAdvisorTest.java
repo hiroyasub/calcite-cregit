@@ -1340,7 +1340,7 @@ literal|"\n"
 argument_list|)
 expr_stmt|;
 block|}
-name|Assert
+name|Assertions
 operator|.
 name|assertEquals
 argument_list|(
@@ -1459,7 +1459,7 @@ operator|.
 name|pos
 argument_list|)
 decl_stmt|;
-name|Assert
+name|Assertions
 operator|.
 name|assertEquals
 argument_list|(
@@ -1523,7 +1523,7 @@ operator|.
 name|cursor
 argument_list|)
 decl_stmt|;
-name|Assert
+name|Assertions
 operator|.
 name|assertEquals
 argument_list|(
@@ -1719,20 +1719,22 @@ argument_list|,
 name|replaced
 argument_list|)
 decl_stmt|;
-name|Assert
+name|Assertions
 operator|.
 name|assertEquals
 argument_list|(
-literal|"Completion hints for "
-operator|+
-name|sql
-argument_list|,
 name|expectedResults
 argument_list|,
 name|convertCompletionHints
 argument_list|(
 name|results
 argument_list|)
+argument_list|,
+parameter_list|()
+lambda|->
+literal|"Completion hints for "
+operator|+
+name|sql
 argument_list|)
 expr_stmt|;
 if|if
@@ -1742,20 +1744,20 @@ operator|!=
 literal|null
 condition|)
 block|{
-name|Assert
+name|Assertions
 operator|.
 name|assertEquals
 argument_list|(
-literal|"replaced[0] for "
-operator|+
-name|sql
-argument_list|,
 name|expectedWord
 argument_list|,
 name|replaced
 index|[
 literal|0
 index|]
+argument_list|,
+literal|"replaced[0] for "
+operator|+
+name|sql
 argument_list|)
 expr_stmt|;
 block|}
@@ -1894,10 +1896,16 @@ argument_list|,
 name|word
 argument_list|)
 decl_stmt|;
-name|Assert
+name|Assertions
 operator|.
 name|assertEquals
 argument_list|(
+name|expectedReplacement
+argument_list|,
+name|actualReplacement
+argument_list|,
+parameter_list|()
+lambda|->
 name|sql
 operator|+
 literal|", replacement of "
@@ -1907,10 +1915,6 @@ operator|+
 literal|" with "
 operator|+
 name|id
-argument_list|,
-name|expectedReplacement
-argument_list|,
-name|actualReplacement
 argument_list|)
 expr_stmt|;
 block|}
@@ -1924,8 +1928,6 @@ condition|)
 block|{
 return|return;
 block|}
-name|Assert
-operator|.
 name|fail
 argument_list|(
 literal|"Sql "
