@@ -43,30 +43,6 @@ end_import
 
 begin_import
 import|import
-name|org
-operator|.
-name|junit
-operator|.
-name|runner
-operator|.
-name|RunWith
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|junit
-operator|.
-name|runners
-operator|.
-name|Parameterized
-import|;
-end_import
-
-begin_import
-import|import
 name|java
 operator|.
 name|util
@@ -80,32 +56,12 @@ comment|/**  * Entry point for all end-to-end tests based on Chinook data in HSQ
 end_comment
 
 begin_class
-annotation|@
-name|RunWith
-argument_list|(
-name|Parameterized
-operator|.
-name|class
-argument_list|)
 specifier|public
 class|class
 name|EndToEndTest
 extends|extends
 name|QuidemTest
 block|{
-specifier|public
-name|EndToEndTest
-parameter_list|(
-name|String
-name|path
-parameter_list|)
-block|{
-name|super
-argument_list|(
-name|path
-argument_list|)
-expr_stmt|;
-block|}
 comment|/** Runs a test from the command line.    *    *<p>For example:    *    *<blockquote>    *<code>java EndToEndTest sql/basic.iq</code>    *</blockquote> */
 specifier|public
 specifier|static
@@ -129,25 +85,16 @@ control|)
 block|{
 operator|new
 name|EndToEndTest
+argument_list|()
+operator|.
+name|test
 argument_list|(
 name|arg
 argument_list|)
-operator|.
-name|test
-argument_list|()
 expr_stmt|;
 block|}
 block|}
-comment|/** For {@link Parameterized} runner. */
-annotation|@
-name|Parameterized
-operator|.
-name|Parameters
-argument_list|(
-name|name
-operator|=
-literal|"{index}: quidem({0})"
-argument_list|)
+comment|/** For {@link QuidemTest#test(String)} parameters. */
 specifier|public
 specifier|static
 name|Collection

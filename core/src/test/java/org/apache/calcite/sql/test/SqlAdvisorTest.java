@@ -191,16 +191,6 @@ name|org
 operator|.
 name|junit
 operator|.
-name|Rule
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|junit
-operator|.
 name|jupiter
 operator|.
 name|api
@@ -243,9 +233,13 @@ name|org
 operator|.
 name|junit
 operator|.
-name|rules
+name|jupiter
 operator|.
-name|MethodRule
+name|api
+operator|.
+name|extension
+operator|.
+name|ExtendWith
 import|;
 end_import
 
@@ -386,6 +380,15 @@ comment|/**  * Concrete child class of {@link SqlValidatorTestCase}, containing 
 end_comment
 
 begin_class
+annotation|@
+name|ExtendWith
+argument_list|(
+name|SqlValidatorTestCase
+operator|.
+name|LexConfiguration
+operator|.
+name|class
+argument_list|)
 specifier|public
 class|class
 name|SqlAdvisorTest
@@ -408,16 +411,6 @@ name|SqlAdvisorValidator
 operator|::
 operator|new
 argument_list|)
-decl_stmt|;
-annotation|@
-name|Rule
-specifier|public
-name|MethodRule
-name|configureTester
-init|=
-name|SqlValidatorTestCase
-operator|.
-name|TESTER_CONFIGURATION_RULE
 decl_stmt|;
 comment|//~ Static fields/initializers ---------------------------------------------
 specifier|private
