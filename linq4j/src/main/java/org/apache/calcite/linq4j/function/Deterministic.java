@@ -100,9 +100,5 @@ name|Deterministic
 block|{ }
 end_annotation_defn
 
-begin_comment
-comment|// End Deterministic.java
-end_comment
-
 end_unit
 

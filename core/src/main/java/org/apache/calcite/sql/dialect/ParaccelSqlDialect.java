@@ -97,9 +97,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End ParaccelSqlDialect.java
-end_comment
-
 end_unit
 

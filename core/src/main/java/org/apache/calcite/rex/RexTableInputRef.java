@@ -567,9 +567,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End RexTableInputRef.java
-end_comment
-
 end_unit
 

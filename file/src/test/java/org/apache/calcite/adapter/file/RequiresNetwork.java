@@ -105,9 +105,5 @@ function_decl|;
 block|}
 end_annotation_defn
 
-begin_comment
-comment|// End RequiresNetwork.java
-end_comment
-
 end_unit
 

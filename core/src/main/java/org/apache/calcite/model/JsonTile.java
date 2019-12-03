@@ -81,9 +81,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End JsonTile.java
-end_comment
-
 end_unit
 

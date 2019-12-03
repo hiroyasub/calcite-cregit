@@ -1853,9 +1853,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End AggregateCall.java
-end_comment
-
 end_unit
 

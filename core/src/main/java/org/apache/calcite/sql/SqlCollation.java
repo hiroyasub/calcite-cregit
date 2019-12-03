@@ -845,9 +845,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End SqlCollation.java
-end_comment
-
 end_unit
 

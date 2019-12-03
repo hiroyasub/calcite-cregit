@@ -50,9 +50,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End StringConcatFunction.java
-end_comment
-
 end_unit
 

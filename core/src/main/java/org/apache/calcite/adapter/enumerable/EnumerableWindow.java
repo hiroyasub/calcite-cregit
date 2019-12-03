@@ -5832,10 +5832,6 @@ return|;
 block|}
 end_function
 
-begin_comment
 unit|}
-comment|// End EnumerableWindow.java
-end_comment
-
 end_unit
 

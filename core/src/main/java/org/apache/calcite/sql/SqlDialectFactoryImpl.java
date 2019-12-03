@@ -1835,9 +1835,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End SqlDialectFactoryImpl.java
-end_comment
-
 end_unit
 

@@ -268,9 +268,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End SqlUserDefinedTypeNameSpec.java
-end_comment
-
 end_unit
 

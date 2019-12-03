@@ -407,9 +407,5 @@ block|}
 block|}
 end_interface
 
-begin_comment
-comment|// End RelOptListener.java
-end_comment
-
 end_unit
 

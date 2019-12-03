@@ -114,9 +114,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End DelegatingEnumerator.java
-end_comment
-
 end_unit
 

@@ -499,9 +499,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End SqlColumnDeclaration.java
-end_comment
-
 end_unit
 

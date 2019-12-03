@@ -5857,9 +5857,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End JdbcRules.java
-end_comment
-
 end_unit
 

@@ -818,9 +818,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End EnumerableCorrelate.java
-end_comment
-
 end_unit
 

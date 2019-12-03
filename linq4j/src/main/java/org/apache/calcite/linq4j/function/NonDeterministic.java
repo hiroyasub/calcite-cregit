@@ -100,9 +100,5 @@ name|NonDeterministic
 block|{ }
 end_annotation_defn
 
-begin_comment
-comment|// End NonDeterministic.java
-end_comment
-
 end_unit
 

@@ -192,9 +192,5 @@ decl_stmt|;
 block|}
 end_interface
 
-begin_comment
-comment|// End Glossary.java
-end_comment
-
 end_unit
 

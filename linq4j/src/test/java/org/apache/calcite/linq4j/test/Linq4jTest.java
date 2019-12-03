@@ -14548,10 +14548,6 @@ block|,   }
 decl_stmt|;
 end_decl_stmt
 
-begin_comment
 unit|}
-comment|// End Linq4jTest.java
-end_comment
-
 end_unit
 

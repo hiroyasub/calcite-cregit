@@ -536,9 +536,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End NewArrayExpression.java
-end_comment
-
 end_unit
 

@@ -3786,10 +3786,6 @@ empty_stmt|;
 block|}
 end_class
 
-begin_comment
 unit|}
-comment|// End AbstractSqlTester.java
-end_comment
-
 end_unit
 

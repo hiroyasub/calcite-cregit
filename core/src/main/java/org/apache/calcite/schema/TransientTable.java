@@ -46,9 +46,5 @@ name|Table
 block|{ }
 end_interface
 
-begin_comment
-comment|// End TransientTable.java
-end_comment
-
 end_unit
 

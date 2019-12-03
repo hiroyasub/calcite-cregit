@@ -855,9 +855,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End PigRelToSqlConverter.java
-end_comment
-
 end_unit
 

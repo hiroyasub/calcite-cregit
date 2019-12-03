@@ -8102,10 +8102,6 @@ block|}
 block|}
 end_class
 
-begin_comment
 unit|}
-comment|// End CalcitePrepareImpl.java
-end_comment
-
 end_unit
 

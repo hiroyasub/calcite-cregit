@@ -2770,9 +2770,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End SqlShell.java
-end_comment
-
 end_unit
 

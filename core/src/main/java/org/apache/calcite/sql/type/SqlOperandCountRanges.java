@@ -243,9 +243,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End SqlOperandCountRanges.java
-end_comment
-
 end_unit
 

@@ -183,9 +183,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End AggResetContextImpl.java
-end_comment
-
 end_unit
 

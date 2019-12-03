@@ -278,9 +278,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End CsvTableFactory.java
-end_comment
-
 end_unit
 

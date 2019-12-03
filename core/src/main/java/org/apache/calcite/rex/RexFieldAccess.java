@@ -337,9 +337,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End RexFieldAccess.java
-end_comment
-
 end_unit
 

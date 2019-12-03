@@ -801,9 +801,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End JdbcFrontJdbcBackLinqMiddleTest.java
-end_comment
-
 end_unit
 

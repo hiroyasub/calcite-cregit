@@ -916,9 +916,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End DruidSqlCastConverter.java
-end_comment
-
 end_unit
 

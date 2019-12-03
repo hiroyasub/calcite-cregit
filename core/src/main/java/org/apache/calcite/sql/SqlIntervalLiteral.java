@@ -482,9 +482,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End SqlIntervalLiteral.java
-end_comment
-
 end_unit
 

@@ -326,9 +326,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End JoinPushExpressionsRule.java
-end_comment
-
 end_unit
 

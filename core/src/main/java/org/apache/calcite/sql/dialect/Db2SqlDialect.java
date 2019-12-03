@@ -368,9 +368,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End Db2SqlDialect.java
-end_comment
-
 end_unit
 

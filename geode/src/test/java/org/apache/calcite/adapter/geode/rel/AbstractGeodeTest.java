@@ -58,9 +58,5 @@ decl_stmt|;
 block|}
 end_class
 
-begin_comment
-comment|// End AbstractGeodeTest.java
-end_comment
-
 end_unit
 

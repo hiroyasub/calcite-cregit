@@ -78,9 +78,5 @@ block|}
 block|}
 end_enum
 
-begin_comment
-comment|// End SqlExplainLevel.java
-end_comment
-
 end_unit
 

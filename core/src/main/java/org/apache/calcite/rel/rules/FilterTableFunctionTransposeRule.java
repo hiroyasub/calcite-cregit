@@ -602,9 +602,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End FilterTableFunctionTransposeRule.java
-end_comment
-
 end_unit
 

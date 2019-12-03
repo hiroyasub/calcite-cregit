@@ -168,9 +168,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End Delta.java
-end_comment
-
 end_unit
 

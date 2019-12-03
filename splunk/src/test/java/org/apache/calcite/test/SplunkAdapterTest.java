@@ -1094,9 +1094,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End SplunkAdapterTest.java
-end_comment
-
 end_unit
 

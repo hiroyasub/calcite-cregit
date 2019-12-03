@@ -752,9 +752,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End SqlValidatorMatchTest.java
-end_comment
-
 end_unit
 

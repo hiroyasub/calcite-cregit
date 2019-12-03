@@ -486,9 +486,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End VolcanoRelMetadataProvider.java
-end_comment
-
 end_unit
 

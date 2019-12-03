@@ -1298,9 +1298,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End QueryBuildersTest.java
-end_comment
-
 end_unit
 

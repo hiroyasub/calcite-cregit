@@ -5059,9 +5059,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End LatticeSuggester.java
-end_comment
-
 end_unit
 

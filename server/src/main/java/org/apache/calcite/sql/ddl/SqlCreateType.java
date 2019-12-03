@@ -711,9 +711,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End SqlCreateType.java
-end_comment
-
 end_unit
 

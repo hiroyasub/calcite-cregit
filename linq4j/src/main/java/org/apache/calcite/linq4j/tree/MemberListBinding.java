@@ -30,9 +30,5 @@ name|MemberBinding
 block|{ }
 end_class
 
-begin_comment
-comment|// End MemberListBinding.java
-end_comment
-
 end_unit
 

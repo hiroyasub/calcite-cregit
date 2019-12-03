@@ -32771,10 +32771,6 @@ block|}
 block|}
 end_enum
 
-begin_comment
 unit|}
-comment|// End JdbcTest.java
-end_comment
-
 end_unit
 

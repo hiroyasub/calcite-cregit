@@ -327,9 +327,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End SqlDescribeTable.java
-end_comment
-
 end_unit
 

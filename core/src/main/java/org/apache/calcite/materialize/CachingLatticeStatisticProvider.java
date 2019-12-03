@@ -313,9 +313,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End CachingLatticeStatisticProvider.java
-end_comment
-
 end_unit
 

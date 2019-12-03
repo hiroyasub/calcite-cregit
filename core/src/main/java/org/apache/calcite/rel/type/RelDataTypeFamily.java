@@ -28,9 +28,5 @@ name|RelDataTypeFamily
 block|{ }
 end_interface
 
-begin_comment
-comment|// End RelDataTypeFamily.java
-end_comment
-
 end_unit
 

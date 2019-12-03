@@ -29,9 +29,5 @@ name|OperandsTypeChecking
 block|{ }
 end_class
 
-begin_comment
-comment|// End OperandsTypeChecking.java
-end_comment
-
 end_unit
 

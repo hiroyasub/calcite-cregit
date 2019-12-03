@@ -1047,9 +1047,5 @@ block|}
 block|}
 end_enum
 
-begin_comment
-comment|// End ExpressionType.java
-end_comment
-
 end_unit
 

@@ -2869,9 +2869,5 @@ decl_stmt|;
 block|}
 end_class
 
-begin_comment
-comment|// End ReturnTypes.java
-end_comment
-
 end_unit
 

@@ -253,9 +253,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End DefaultDimensionSpec.java
-end_comment
-
 end_unit
 

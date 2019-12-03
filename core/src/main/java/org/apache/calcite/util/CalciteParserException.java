@@ -26,9 +26,5 @@ name|CalciteParserException
 block|{ }
 end_interface
 
-begin_comment
-comment|// End CalciteParserException.java
-end_comment
-
 end_unit
 

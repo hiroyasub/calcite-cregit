@@ -92,9 +92,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End NeoviewSqlDialect.java
-end_comment
-
 end_unit
 

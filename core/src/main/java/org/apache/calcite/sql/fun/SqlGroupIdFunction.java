@@ -117,9 +117,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End SqlGroupIdFunction.java
-end_comment
-
 end_unit
 

@@ -1091,9 +1091,5 @@ block|}
 block|}
 end_interface
 
-begin_comment
-comment|// End SqlValidatorScope.java
-end_comment
-
 end_unit
 

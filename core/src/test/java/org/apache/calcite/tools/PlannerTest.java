@@ -7298,9 +7298,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End PlannerTest.java
-end_comment
-
 end_unit
 

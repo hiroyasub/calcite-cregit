@@ -110,9 +110,5 @@ name|SemiStrict
 block|{ }
 end_annotation_defn
 
-begin_comment
-comment|// End SemiStrict.java
-end_comment
-
 end_unit
 

@@ -3111,9 +3111,5 @@ block|{   }
 block|}
 end_class
 
-begin_comment
-comment|// End JdbcSchema.java
-end_comment
-
 end_unit
 

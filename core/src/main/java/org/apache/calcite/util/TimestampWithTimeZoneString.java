@@ -949,9 +949,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End TimestampWithTimeZoneString.java
-end_comment
-
 end_unit
 

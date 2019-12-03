@@ -2751,9 +2751,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End Ast.java
-end_comment
-
 end_unit
 

@@ -3914,9 +3914,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End EnumerableQueryable.java
-end_comment
-
 end_unit
 

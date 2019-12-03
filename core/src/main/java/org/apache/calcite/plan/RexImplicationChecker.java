@@ -2424,9 +2424,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End RexImplicationChecker.java
-end_comment
-
 end_unit
 

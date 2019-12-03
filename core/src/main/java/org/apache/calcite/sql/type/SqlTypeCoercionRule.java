@@ -1244,9 +1244,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End SqlTypeCoercionRule.java
-end_comment
-
 end_unit
 

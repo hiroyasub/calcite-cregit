@@ -72,9 +72,5 @@ block|}
 block|}
 end_enum
 
-begin_comment
-comment|// End SqlExplainFormat.java
-end_comment
-
 end_unit
 

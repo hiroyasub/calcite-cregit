@@ -142,9 +142,5 @@ block|}
 block|}
 end_enum
 
-begin_comment
-comment|// End JoinType.java
-end_comment
-
 end_unit
 

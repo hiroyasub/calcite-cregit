@@ -580,9 +580,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End CsvSchema.java
-end_comment
-
 end_unit
 

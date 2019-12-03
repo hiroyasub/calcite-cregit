@@ -57,9 +57,5 @@ function_decl|;
 block|}
 end_interface
 
-begin_comment
-comment|// End RexExecutor.java
-end_comment
-
 end_unit
 

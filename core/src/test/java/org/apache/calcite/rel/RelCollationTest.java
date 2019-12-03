@@ -778,9 +778,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End RelCollationTest.java
-end_comment
-
 end_unit
 

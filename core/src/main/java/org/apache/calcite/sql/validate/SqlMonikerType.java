@@ -44,9 +44,5 @@ name|KEYWORD
 block|}
 end_enum
 
-begin_comment
-comment|// End SqlMonikerType.java
-end_comment
-
 end_unit
 

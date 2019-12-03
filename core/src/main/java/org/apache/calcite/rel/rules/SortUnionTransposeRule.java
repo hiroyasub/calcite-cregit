@@ -574,9 +574,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End SortUnionTransposeRule.java
-end_comment
-
 end_unit
 

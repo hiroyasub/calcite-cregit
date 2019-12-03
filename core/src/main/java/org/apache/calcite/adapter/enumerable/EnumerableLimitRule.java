@@ -229,9 +229,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End EnumerableLimitRule.java
-end_comment
-
 end_unit
 

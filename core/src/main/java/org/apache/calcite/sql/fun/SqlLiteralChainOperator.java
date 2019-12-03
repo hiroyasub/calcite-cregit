@@ -1140,9 +1140,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End SqlLiteralChainOperator.java
-end_comment
-
 end_unit
 

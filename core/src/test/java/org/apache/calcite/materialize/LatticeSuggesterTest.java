@@ -4671,9 +4671,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End LatticeSuggesterTest.java
-end_comment
-
 end_unit
 

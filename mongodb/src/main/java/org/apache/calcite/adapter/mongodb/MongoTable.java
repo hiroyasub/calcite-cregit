@@ -1126,9 +1126,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End MongoTable.java
-end_comment
-
 end_unit
 

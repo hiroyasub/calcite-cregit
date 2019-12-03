@@ -38,9 +38,5 @@ argument_list|>
 block|{ }
 end_interface
 
-begin_comment
-comment|// End NullableLongFunction1.java
-end_comment
-
 end_unit
 

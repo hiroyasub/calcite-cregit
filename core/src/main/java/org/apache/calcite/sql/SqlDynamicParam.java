@@ -342,9 +342,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End SqlDynamicParam.java
-end_comment
-
 end_unit
 

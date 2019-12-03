@@ -6838,9 +6838,5 @@ block|}
 block|}
 end_enum
 
-begin_comment
-comment|// End BuiltInMethod.java
-end_comment
-
 end_unit
 

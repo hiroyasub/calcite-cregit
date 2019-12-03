@@ -503,9 +503,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End LogicalTableScan.java
-end_comment
-
 end_unit
 

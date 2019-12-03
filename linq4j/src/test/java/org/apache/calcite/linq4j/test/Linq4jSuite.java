@@ -146,9 +146,5 @@ name|Linq4jSuite
 block|{ }
 end_class
 
-begin_comment
-comment|// End Linq4jSuite.java
-end_comment
-
 end_unit
 

@@ -2283,10 +2283,6 @@ return|;
 block|}
 end_function
 
-begin_comment
 unit|}
-comment|// End OsAdapterTest.java
-end_comment
-
 end_unit
 

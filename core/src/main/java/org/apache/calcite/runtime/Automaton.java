@@ -583,9 +583,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End Automaton.java
-end_comment
-
 end_unit
 

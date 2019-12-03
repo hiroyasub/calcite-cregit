@@ -192,9 +192,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End SqlJsonKeysFunction.java
-end_comment
-
 end_unit
 

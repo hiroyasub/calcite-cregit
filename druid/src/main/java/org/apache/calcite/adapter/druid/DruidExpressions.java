@@ -1673,9 +1673,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End DruidExpressions.java
-end_comment
-
 end_unit
 

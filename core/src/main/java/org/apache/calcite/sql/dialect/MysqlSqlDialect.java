@@ -1499,9 +1499,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End MysqlSqlDialect.java
-end_comment
-
 end_unit
 

@@ -51,9 +51,5 @@ argument_list|>
 block|{ }
 end_interface
 
-begin_comment
-comment|// End RelProtoDataType.java
-end_comment
-
 end_unit
 

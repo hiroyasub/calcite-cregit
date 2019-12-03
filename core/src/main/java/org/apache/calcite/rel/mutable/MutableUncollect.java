@@ -236,9 +236,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End MutableUncollect.java
-end_comment
-
 end_unit
 

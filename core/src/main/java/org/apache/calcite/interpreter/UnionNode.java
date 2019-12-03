@@ -261,9 +261,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End UnionNode.java
-end_comment
-
 end_unit
 

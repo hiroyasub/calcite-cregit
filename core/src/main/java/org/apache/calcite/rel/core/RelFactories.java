@@ -2477,9 +2477,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End RelFactories.java
-end_comment
-
 end_unit
 

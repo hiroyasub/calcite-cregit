@@ -4768,9 +4768,5 @@ block|}
 block|}
 end_enum
 
-begin_comment
-comment|// End Primitive.java
-end_comment
-
 end_unit
 

@@ -60,9 +60,5 @@ name|InterpretableRel
 block|{ }
 end_interface
 
-begin_comment
-comment|// End BindableRel.java
-end_comment
-
 end_unit
 

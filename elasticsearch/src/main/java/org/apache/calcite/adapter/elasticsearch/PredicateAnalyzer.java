@@ -4852,9 +4852,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End PredicateAnalyzer.java
-end_comment
-
 end_unit
 

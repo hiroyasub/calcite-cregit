@@ -28,9 +28,5 @@ name|ElementInit
 block|{ }
 end_class
 
-begin_comment
-comment|// End ElementInit.java
-end_comment
-
 end_unit
 

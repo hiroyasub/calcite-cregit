@@ -3337,9 +3337,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End VolcanoPlannerTraitTest.java
-end_comment
-
 end_unit
 

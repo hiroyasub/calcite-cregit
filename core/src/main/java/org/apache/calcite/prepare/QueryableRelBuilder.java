@@ -4191,9 +4191,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End QueryableRelBuilder.java
-end_comment
-
 end_unit
 

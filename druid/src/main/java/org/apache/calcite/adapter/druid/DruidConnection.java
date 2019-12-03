@@ -28,9 +28,5 @@ name|DruidConnection
 block|{ }
 end_interface
 
-begin_comment
-comment|// End DruidConnection.java
-end_comment
-
 end_unit
 

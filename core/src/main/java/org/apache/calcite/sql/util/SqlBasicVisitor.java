@@ -418,9 +418,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End SqlBasicVisitor.java
-end_comment
-
 end_unit
 

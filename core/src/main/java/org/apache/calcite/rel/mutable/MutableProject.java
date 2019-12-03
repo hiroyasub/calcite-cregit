@@ -496,9 +496,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End MutableProject.java
-end_comment
-
 end_unit
 

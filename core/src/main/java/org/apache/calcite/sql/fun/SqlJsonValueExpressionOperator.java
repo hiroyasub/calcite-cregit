@@ -163,9 +163,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End SqlJsonValueExpressionOperator.java
-end_comment
-
 end_unit
 

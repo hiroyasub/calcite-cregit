@@ -209,9 +209,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End OracleSqlOperatorTable.java
-end_comment
-
 end_unit
 

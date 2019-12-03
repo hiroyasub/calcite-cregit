@@ -612,9 +612,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End PostgresqlSqlDialect.java
-end_comment
-
 end_unit
 

@@ -40,9 +40,5 @@ name|DEPTH_FIRST
 block|}
 end_enum
 
-begin_comment
-comment|// End HepMatchOrder.java
-end_comment
-
 end_unit
 

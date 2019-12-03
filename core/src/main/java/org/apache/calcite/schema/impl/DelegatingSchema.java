@@ -370,9 +370,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End DelegatingSchema.java
-end_comment
-
 end_unit
 

@@ -284,9 +284,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End DynamicTupleRecordType.java
-end_comment
-
 end_unit
 

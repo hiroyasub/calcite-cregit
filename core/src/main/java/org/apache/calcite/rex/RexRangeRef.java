@@ -242,9 +242,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End RexRangeRef.java
-end_comment
-
 end_unit
 

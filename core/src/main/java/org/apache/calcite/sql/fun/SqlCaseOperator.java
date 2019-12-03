@@ -1699,9 +1699,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End SqlCaseOperator.java
-end_comment
-
 end_unit
 

@@ -237,9 +237,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End ViewExpanders.java
-end_comment
-
 end_unit
 

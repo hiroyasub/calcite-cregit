@@ -218,9 +218,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End ServerQuidemTest.java
-end_comment
-
 end_unit
 

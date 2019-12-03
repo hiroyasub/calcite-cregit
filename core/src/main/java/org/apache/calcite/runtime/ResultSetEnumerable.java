@@ -2515,9 +2515,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End ResultSetEnumerable.java
-end_comment
-
 end_unit
 

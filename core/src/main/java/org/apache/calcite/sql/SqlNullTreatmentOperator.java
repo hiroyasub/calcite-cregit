@@ -317,9 +317,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End SqlNullTreatmentOperator.java
-end_comment
-
 end_unit
 

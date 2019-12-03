@@ -640,10 +640,6 @@ block|}
 block|}
 end_class
 
-begin_comment
 unit|}
-comment|// End CachingRelMetadataProvider.java
-end_comment
-
 end_unit
 

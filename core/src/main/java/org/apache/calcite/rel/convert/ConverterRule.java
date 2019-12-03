@@ -637,9 +637,5 @@ comment|//~ Inner Classes ------------------------------------------------------
 block|}
 end_class
 
-begin_comment
-comment|// End ConverterRule.java
-end_comment
-
 end_unit
 

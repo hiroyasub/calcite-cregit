@@ -325,9 +325,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End CalciteTrace.java
-end_comment
-
 end_unit
 

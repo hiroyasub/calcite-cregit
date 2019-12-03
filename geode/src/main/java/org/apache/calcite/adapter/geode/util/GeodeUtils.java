@@ -1613,9 +1613,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End GeodeUtils.java
-end_comment
-
 end_unit
 

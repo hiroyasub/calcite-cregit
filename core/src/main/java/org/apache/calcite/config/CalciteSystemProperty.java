@@ -1209,9 +1209,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End CalciteSystemProperty.java
-end_comment
-
 end_unit
 

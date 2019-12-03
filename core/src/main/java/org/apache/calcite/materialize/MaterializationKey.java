@@ -121,9 +121,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End MaterializationKey.java
-end_comment
-
 end_unit
 

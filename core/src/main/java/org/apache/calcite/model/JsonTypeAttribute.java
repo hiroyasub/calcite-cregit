@@ -37,9 +37,5 @@ decl_stmt|;
 block|}
 end_class
 
-begin_comment
-comment|// End JsonTypeAttribute.java
-end_comment
-
 end_unit
 

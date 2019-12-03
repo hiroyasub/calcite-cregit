@@ -3018,9 +3018,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End MockCatalogReaderSimple.java
-end_comment
-
 end_unit
 

@@ -1106,9 +1106,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End ExchangeRemoveConstantKeysRule.java
-end_comment
-
 end_unit
 

@@ -613,9 +613,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End ProjectMergeRule.java
-end_comment
-
 end_unit
 

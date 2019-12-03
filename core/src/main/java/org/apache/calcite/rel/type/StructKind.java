@@ -43,9 +43,5 @@ name|PEEK_FIELDS_NO_EXPAND
 block|, }
 end_enum
 
-begin_comment
-comment|// End StructKind.java
-end_comment
-
 end_unit
 

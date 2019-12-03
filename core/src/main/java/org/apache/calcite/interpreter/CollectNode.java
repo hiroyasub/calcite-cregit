@@ -171,9 +171,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End CollectNode.java
-end_comment
-
 end_unit
 

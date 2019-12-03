@@ -4327,9 +4327,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End SqlToRelTestBase.java
-end_comment
-
 end_unit
 

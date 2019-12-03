@@ -1257,9 +1257,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End MongoAggregate.java
-end_comment
-
 end_unit
 

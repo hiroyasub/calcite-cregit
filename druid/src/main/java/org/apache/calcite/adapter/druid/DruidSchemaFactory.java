@@ -223,9 +223,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End DruidSchemaFactory.java
-end_comment
-
 end_unit
 

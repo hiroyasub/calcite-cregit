@@ -439,9 +439,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End EnumerableUnion.java
-end_comment
-
 end_unit
 

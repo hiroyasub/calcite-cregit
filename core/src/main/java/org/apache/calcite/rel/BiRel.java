@@ -278,9 +278,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End BiRel.java
-end_comment
-
 end_unit
 

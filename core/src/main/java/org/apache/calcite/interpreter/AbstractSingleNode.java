@@ -103,9 +103,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End AbstractSingleNode.java
-end_comment
-
 end_unit
 

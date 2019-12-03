@@ -1022,9 +1022,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End AggregateProjectPullUpConstantsRule.java
-end_comment
-
 end_unit
 

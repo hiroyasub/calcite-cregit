@@ -1340,9 +1340,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End Matchers.java
-end_comment
-
 end_unit
 

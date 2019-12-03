@@ -4451,9 +4451,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End DateRangeRules.java
-end_comment
-
 end_unit
 

@@ -464,9 +464,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End DateTimeStringUtils.java
-end_comment
-
 end_unit
 

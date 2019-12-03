@@ -372,9 +372,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End SqlJsonTypeFunction.java
-end_comment
-
 end_unit
 

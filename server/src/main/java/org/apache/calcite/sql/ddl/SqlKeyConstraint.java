@@ -423,9 +423,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End SqlKeyConstraint.java
-end_comment
-
 end_unit
 

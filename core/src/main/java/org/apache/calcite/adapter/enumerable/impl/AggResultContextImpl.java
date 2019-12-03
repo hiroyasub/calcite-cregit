@@ -244,9 +244,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End AggResultContextImpl.java
-end_comment
-
 end_unit
 

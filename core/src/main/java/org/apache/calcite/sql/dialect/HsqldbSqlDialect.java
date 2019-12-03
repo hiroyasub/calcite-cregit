@@ -689,9 +689,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End HsqldbSqlDialect.java
-end_comment
-
 end_unit
 

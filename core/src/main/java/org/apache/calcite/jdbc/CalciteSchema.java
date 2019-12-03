@@ -3835,9 +3835,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End CalciteSchema.java
-end_comment
-
 end_unit
 

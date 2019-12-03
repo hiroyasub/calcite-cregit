@@ -495,9 +495,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End NameMultimap.java
-end_comment
-
 end_unit
 

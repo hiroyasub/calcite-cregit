@@ -365,9 +365,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End KafkaRowConverterImpl.java
-end_comment
-
 end_unit
 

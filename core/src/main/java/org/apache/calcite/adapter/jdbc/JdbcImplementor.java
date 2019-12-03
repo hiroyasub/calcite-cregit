@@ -191,9 +191,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End JdbcImplementor.java
-end_comment
-
 end_unit
 

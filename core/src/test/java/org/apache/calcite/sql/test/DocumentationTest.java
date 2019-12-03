@@ -1410,9 +1410,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End DocumentationTest.java
-end_comment
-
 end_unit
 

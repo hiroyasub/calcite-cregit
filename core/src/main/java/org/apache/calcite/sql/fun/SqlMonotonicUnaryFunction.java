@@ -213,9 +213,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End SqlMonotonicUnaryFunction.java
-end_comment
-
 end_unit
 

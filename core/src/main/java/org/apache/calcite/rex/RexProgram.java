@@ -4091,9 +4091,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End RexProgram.java
-end_comment
-
 end_unit
 

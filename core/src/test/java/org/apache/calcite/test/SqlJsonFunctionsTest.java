@@ -5187,9 +5187,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End SqlJsonFunctionsTest.java
-end_comment
-
 end_unit
 

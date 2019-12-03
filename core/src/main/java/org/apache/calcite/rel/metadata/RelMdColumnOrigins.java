@@ -1347,9 +1347,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End RelMdColumnOrigins.java
-end_comment
-
 end_unit
 

@@ -618,9 +618,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End RelHint.java
-end_comment
-
 end_unit
 

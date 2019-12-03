@@ -321,9 +321,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End Linq4jExample.java
-end_comment
-
 end_unit
 

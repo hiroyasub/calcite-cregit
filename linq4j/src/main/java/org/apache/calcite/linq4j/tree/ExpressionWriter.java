@@ -796,9 +796,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End ExpressionWriter.java
-end_comment
-
 end_unit
 

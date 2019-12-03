@@ -257,9 +257,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End SqlCastOperator.java
-end_comment
-
 end_unit
 

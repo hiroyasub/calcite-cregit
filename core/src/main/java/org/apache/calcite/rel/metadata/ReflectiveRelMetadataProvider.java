@@ -2123,10 +2123,6 @@ block|}
 block|}
 end_class
 
-begin_comment
 unit|}
-comment|// End ReflectiveRelMetadataProvider.java
-end_comment
-
 end_unit
 

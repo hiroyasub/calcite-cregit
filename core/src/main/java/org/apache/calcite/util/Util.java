@@ -9982,9 +9982,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End Util.java
-end_comment
-
 end_unit
 

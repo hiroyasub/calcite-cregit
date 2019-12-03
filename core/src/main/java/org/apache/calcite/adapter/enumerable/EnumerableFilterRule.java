@@ -235,9 +235,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End EnumerableFilterRule.java
-end_comment
-
 end_unit
 

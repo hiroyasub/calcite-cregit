@@ -194,9 +194,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End SybaseSqlDialect.java
-end_comment
-
 end_unit
 

@@ -47,9 +47,5 @@ function_decl|;
 block|}
 end_interface
 
-begin_comment
-comment|// End SqlParserImplFactory.java
-end_comment
-
 end_unit
 

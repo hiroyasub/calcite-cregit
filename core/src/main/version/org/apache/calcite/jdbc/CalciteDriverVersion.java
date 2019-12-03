@@ -78,9 +78,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End CalciteDriverVersion.java
-end_comment
-
 end_unit
 

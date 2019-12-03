@@ -3532,10 +3532,6 @@ block|}
 block|}
 end_class
 
-begin_comment
 unit|}
-comment|// End ElasticsearchJson.java
-end_comment
-
 end_unit
 

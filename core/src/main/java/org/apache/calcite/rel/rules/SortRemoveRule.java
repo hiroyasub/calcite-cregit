@@ -308,9 +308,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End SortRemoveRule.java
-end_comment
-
 end_unit
 

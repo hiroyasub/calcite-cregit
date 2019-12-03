@@ -287,9 +287,5 @@ function_decl|;
 block|}
 end_interface
 
-begin_comment
-comment|// End CalciteConnectionConfig.java
-end_comment
-
 end_unit
 

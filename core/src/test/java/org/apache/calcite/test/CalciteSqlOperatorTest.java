@@ -58,9 +58,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End CalciteSqlOperatorTest.java
-end_comment
-
 end_unit
 

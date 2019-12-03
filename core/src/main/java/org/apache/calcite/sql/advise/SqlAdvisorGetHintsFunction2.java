@@ -710,9 +710,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End SqlAdvisorGetHintsFunction2.java
-end_comment
-
 end_unit
 

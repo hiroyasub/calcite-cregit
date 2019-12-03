@@ -108,9 +108,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End InfobrightSqlDialect.java
-end_comment
-
 end_unit
 

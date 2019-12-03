@@ -1177,9 +1177,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End CalciteJdbc41Factory.java
-end_comment
-
 end_unit
 

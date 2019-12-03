@@ -215,9 +215,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End SqlUnresolvedFunction.java
-end_comment
-
 end_unit
 

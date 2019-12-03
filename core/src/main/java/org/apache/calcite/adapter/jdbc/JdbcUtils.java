@@ -1341,9 +1341,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End JdbcUtils.java
-end_comment
-
 end_unit
 

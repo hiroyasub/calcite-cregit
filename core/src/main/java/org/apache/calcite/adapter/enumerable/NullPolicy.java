@@ -51,9 +51,5 @@ name|NONE
 block|}
 end_enum
 
-begin_comment
-comment|// End NullPolicy.java
-end_comment
-
 end_unit
 

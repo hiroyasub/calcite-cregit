@@ -1481,9 +1481,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End SqlCallBinding.java
-end_comment
-
 end_unit
 

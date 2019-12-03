@@ -1504,9 +1504,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End CollationConversionTest.java
-end_comment
-
 end_unit
 

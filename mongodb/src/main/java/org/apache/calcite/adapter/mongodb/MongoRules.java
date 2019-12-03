@@ -2176,9 +2176,5 @@ comment|/*   /**    * Rule to convert an {@link org.apache.calcite.rel.logical.U
 block|}
 end_class
 
-begin_comment
-comment|// End MongoRules.java
-end_comment
-
 end_unit
 

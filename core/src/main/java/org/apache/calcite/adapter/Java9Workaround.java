@@ -25,9 +25,5 @@ name|Java9Workaround
 block|{ }
 end_class
 
-begin_comment
-comment|// End Java9Workaround.java
-end_comment
-
 end_unit
 

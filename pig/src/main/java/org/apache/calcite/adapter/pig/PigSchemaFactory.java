@@ -124,9 +124,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End PigSchemaFactory.java
-end_comment
-
 end_unit
 

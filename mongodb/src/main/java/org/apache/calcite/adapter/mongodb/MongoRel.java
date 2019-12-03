@@ -213,9 +213,5 @@ block|}
 block|}
 end_interface
 
-begin_comment
-comment|// End MongoRel.java
-end_comment
-
 end_unit
 

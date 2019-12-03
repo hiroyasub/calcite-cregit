@@ -263,9 +263,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End SqlAlienSystemTypeNameSpec.java
-end_comment
-
 end_unit
 

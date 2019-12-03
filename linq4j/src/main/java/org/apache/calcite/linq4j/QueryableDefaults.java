@@ -4670,9 +4670,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End QueryableDefaults.java
-end_comment
-
 end_unit
 

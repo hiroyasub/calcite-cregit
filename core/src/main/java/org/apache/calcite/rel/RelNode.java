@@ -577,9 +577,5 @@ block|}
 block|}
 end_interface
 
-begin_comment
-comment|// End RelNode.java
-end_comment
-
 end_unit
 

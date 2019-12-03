@@ -39,9 +39,5 @@ argument_list|>
 block|{ }
 end_interface
 
-begin_comment
-comment|// End OrderedEnumerable.java
-end_comment
-
 end_unit
 

@@ -2495,9 +2495,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End SparkAdapterTest.java
-end_comment
-
 end_unit
 

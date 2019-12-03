@@ -314,9 +314,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End EmpInitializerExpressionFactory.java
-end_comment
-
 end_unit
 

@@ -26,9 +26,5 @@ name|ReflectiveVisitor
 block|{ }
 end_interface
 
-begin_comment
-comment|// End ReflectiveVisitor.java
-end_comment
-
 end_unit
 

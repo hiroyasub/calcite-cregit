@@ -4031,9 +4031,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End OptimizerTest.java
-end_comment
-
 end_unit
 

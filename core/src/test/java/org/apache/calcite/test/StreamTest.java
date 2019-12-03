@@ -2663,10 +2663,6 @@ block|}
 block|}
 end_class
 
-begin_comment
 unit|}
-comment|// End StreamTest.java
-end_comment
-
 end_unit
 

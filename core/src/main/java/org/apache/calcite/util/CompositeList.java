@@ -441,9 +441,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End CompositeList.java
-end_comment
-
 end_unit
 

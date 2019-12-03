@@ -62,9 +62,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End SqlUnParserTest.java
-end_comment
-
 end_unit
 

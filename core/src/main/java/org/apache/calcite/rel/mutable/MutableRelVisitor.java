@@ -72,9 +72,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End MutableRelVisitor.java
-end_comment
-
 end_unit
 

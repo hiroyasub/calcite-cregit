@@ -229,9 +229,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End Intersect.java
-end_comment
-
 end_unit
 

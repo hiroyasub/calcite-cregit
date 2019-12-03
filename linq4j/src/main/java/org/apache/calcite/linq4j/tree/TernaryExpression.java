@@ -457,9 +457,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End TernaryExpression.java
-end_comment
-
 end_unit
 

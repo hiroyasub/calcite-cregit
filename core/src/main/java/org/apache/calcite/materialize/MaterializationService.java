@@ -2242,10 +2242,6 @@ class|;
 block|}
 end_class
 
-begin_comment
 unit|} }
-comment|// End MaterializationService.java
-end_comment
-
 end_unit
 

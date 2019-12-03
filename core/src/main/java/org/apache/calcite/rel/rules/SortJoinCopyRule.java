@@ -773,9 +773,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End SortJoinCopyRule.java
-end_comment
-
 end_unit
 

@@ -1421,10 +1421,6 @@ block|}
 block|}
 end_class
 
-begin_comment
 unit|}
-comment|// End BitSets.java
-end_comment
-
 end_unit
 

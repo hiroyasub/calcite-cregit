@@ -1630,9 +1630,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End AggregateCaseToFilterRule.java
-end_comment
-
 end_unit
 

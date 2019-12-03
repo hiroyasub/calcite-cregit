@@ -40,9 +40,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End ControlFlowException.java
-end_comment
-
 end_unit
 

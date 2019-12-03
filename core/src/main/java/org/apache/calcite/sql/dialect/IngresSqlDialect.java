@@ -92,9 +92,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End IngresSqlDialect.java
-end_comment
-
 end_unit
 

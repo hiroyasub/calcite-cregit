@@ -11182,9 +11182,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End SubstitutionVisitor.java
-end_comment
-
 end_unit
 

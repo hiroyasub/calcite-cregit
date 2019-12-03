@@ -365,9 +365,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End PigTable.java
-end_comment
-
 end_unit
 

@@ -57,9 +57,5 @@ name|PackageMarker
 block|{ }
 end_annotation_defn
 
-begin_comment
-comment|// End PackageMarker.java
-end_comment
-
 end_unit
 

@@ -1253,9 +1253,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End LookupOperatorOverloadsTest.java
-end_comment
-
 end_unit
 

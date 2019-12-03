@@ -2034,10 +2034,6 @@ return|;
 block|}
 end_function
 
-begin_comment
 unit|} }
-comment|// End ProjectToWindowRule.java
-end_comment
-
 end_unit
 

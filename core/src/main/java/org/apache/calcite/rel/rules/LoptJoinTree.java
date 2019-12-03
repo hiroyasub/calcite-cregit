@@ -633,9 +633,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End LoptJoinTree.java
-end_comment
-
 end_unit
 

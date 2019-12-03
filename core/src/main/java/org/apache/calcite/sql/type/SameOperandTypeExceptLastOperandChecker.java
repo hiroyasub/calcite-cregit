@@ -531,9 +531,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End SameOperandTypeExceptLastOperandChecker.java
-end_comment
-
 end_unit
 

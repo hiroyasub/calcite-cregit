@@ -1480,9 +1480,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End EnumerableInterpretable.java
-end_comment
-
 end_unit
 

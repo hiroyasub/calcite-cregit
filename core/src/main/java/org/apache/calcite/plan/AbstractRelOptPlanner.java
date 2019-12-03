@@ -1507,9 +1507,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End AbstractRelOptPlanner.java
-end_comment
-
 end_unit
 

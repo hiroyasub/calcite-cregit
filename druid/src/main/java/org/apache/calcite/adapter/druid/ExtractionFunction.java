@@ -30,9 +30,5 @@ name|DruidJson
 block|{ }
 end_interface
 
-begin_comment
-comment|// End ExtractionFunction.java
-end_comment
-
 end_unit
 

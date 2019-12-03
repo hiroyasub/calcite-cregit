@@ -404,9 +404,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End WithScope.java
-end_comment
-
 end_unit
 

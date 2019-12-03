@@ -3349,9 +3349,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End DruidJsonFilter.java
-end_comment
-
 end_unit
 

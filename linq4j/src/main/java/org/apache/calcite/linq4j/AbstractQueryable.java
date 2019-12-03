@@ -40,9 +40,5 @@ argument_list|>
 block|{ }
 end_class
 
-begin_comment
-comment|// End AbstractQueryable.java
-end_comment
-
 end_unit
 

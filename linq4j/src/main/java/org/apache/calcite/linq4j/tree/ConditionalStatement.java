@@ -424,9 +424,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End ConditionalStatement.java
-end_comment
-
 end_unit
 

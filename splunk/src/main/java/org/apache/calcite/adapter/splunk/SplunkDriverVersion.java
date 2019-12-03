@@ -70,9 +70,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End SplunkDriverVersion.java
-end_comment
-
 end_unit
 

@@ -158,9 +158,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End HepProgram.java
-end_comment
-
 end_unit
 

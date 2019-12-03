@@ -370,9 +370,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End PigRelExWalker.java
-end_comment
-
 end_unit
 

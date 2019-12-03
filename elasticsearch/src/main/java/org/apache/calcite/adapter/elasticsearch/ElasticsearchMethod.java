@@ -235,9 +235,5 @@ block|}
 block|}
 end_enum
 
-begin_comment
-comment|// End ElasticsearchMethod.java
-end_comment
-
 end_unit
 

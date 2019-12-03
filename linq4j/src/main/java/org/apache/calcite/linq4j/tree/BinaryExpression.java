@@ -1691,9 +1691,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End BinaryExpression.java
-end_comment
-
 end_unit
 

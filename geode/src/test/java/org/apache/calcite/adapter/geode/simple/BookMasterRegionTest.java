@@ -259,9 +259,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End BookMasterRegionTest.java
-end_comment
-
 end_unit
 

@@ -158,9 +158,5 @@ name|Experimental
 block|{ }
 end_annotation_defn
 
-begin_comment
-comment|// End Experimental.java
-end_comment
-
 end_unit
 

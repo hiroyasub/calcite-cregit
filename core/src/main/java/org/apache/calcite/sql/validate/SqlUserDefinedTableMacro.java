@@ -1278,9 +1278,5 @@ block|{   }
 block|}
 end_class
 
-begin_comment
-comment|// End SqlUserDefinedTableMacro.java
-end_comment
-
 end_unit
 

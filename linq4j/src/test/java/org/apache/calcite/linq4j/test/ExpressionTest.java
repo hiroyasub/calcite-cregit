@@ -7913,9 +7913,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End ExpressionTest.java
-end_comment
-
 end_unit
 

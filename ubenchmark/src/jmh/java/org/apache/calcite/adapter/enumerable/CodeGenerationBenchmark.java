@@ -1704,9 +1704,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End CodeGenerationBenchmark.java
-end_comment
-
 end_unit
 

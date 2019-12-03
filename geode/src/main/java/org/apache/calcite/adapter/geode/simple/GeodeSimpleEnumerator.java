@@ -277,9 +277,5 @@ function_decl|;
 block|}
 end_class
 
-begin_comment
-comment|// End GeodeSimpleEnumerator.java
-end_comment
-
 end_unit
 

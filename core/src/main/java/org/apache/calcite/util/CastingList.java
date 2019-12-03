@@ -225,9 +225,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End CastingList.java
-end_comment
-
 end_unit
 

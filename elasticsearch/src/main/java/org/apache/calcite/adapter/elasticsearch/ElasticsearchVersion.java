@@ -231,9 +231,5 @@ block|}
 block|}
 end_enum
 
-begin_comment
-comment|// End ElasticsearchVersion.java
-end_comment
-
 end_unit
 

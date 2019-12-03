@@ -472,9 +472,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End ChinookAvaticaServer.java
-end_comment
-
 end_unit
 

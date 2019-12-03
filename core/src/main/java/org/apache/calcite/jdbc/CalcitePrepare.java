@@ -1896,9 +1896,5 @@ block|}
 block|}
 end_interface
 
-begin_comment
-comment|// End CalcitePrepare.java
-end_comment
-
 end_unit
 

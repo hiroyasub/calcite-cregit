@@ -963,9 +963,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End EnumerableRepeatUnionTest.java
-end_comment
-
 end_unit
 

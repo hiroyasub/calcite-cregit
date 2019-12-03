@@ -575,9 +575,5 @@ function_decl|;
 block|}
 end_class
 
-begin_comment
-comment|// End AggVisitor.java
-end_comment
-
 end_unit
 

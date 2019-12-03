@@ -1017,9 +1017,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End TpchSchema.java
-end_comment
-
 end_unit
 

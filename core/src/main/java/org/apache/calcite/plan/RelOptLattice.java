@@ -323,9 +323,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End RelOptLattice.java
-end_comment
-
 end_unit
 

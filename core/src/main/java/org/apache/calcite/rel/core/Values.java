@@ -894,9 +894,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End Values.java
-end_comment
-
 end_unit
 

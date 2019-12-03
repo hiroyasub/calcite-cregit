@@ -87,9 +87,5 @@ comment|// TODO: confirm
 block|}
 end_interface
 
-begin_comment
-comment|// End ExtraSqlTypes.java
-end_comment
-
 end_unit
 

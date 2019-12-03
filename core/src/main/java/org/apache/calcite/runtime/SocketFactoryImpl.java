@@ -508,9 +508,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End SocketFactoryImpl.java
-end_comment
-
 end_unit
 

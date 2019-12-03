@@ -746,9 +746,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End AggregateJoinRemoveRule.java
-end_comment
-
 end_unit
 

@@ -275,9 +275,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End SourceSorter.java
-end_comment
-
 end_unit
 

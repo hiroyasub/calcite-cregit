@@ -1167,9 +1167,5 @@ block|}
 block|}
 end_enum
 
-begin_comment
-comment|// End SqlTypeFamily.java
-end_comment
-
 end_unit
 

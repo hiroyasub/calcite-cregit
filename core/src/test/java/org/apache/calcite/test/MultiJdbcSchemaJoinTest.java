@@ -1581,9 +1581,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End MultiJdbcSchemaJoinTest.java
-end_comment
-
 end_unit
 

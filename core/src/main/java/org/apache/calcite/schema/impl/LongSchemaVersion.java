@@ -191,9 +191,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End LongSchemaVersion.java
-end_comment
-
 end_unit
 

@@ -30863,10 +30863,6 @@ expr_stmt|;
 block|}
 end_function
 
-begin_comment
 unit|}
-comment|// End RelOptRulesTest.java
-end_comment
-
 end_unit
 

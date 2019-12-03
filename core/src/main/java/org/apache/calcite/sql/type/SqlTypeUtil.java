@@ -5891,9 +5891,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End SqlTypeUtil.java
-end_comment
-
 end_unit
 

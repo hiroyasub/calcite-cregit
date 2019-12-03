@@ -312,9 +312,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End RelDataTypeHolder.java
-end_comment
-
 end_unit
 

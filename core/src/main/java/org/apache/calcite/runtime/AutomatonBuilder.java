@@ -1324,9 +1324,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End AutomatonBuilder.java
-end_comment
-
 end_unit
 

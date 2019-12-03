@@ -249,9 +249,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End SqlBinaryStringLiteral.java
-end_comment
-
 end_unit
 

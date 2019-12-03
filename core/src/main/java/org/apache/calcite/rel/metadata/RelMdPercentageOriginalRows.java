@@ -769,9 +769,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End RelMdPercentageOriginalRows.java
-end_comment
-
 end_unit
 

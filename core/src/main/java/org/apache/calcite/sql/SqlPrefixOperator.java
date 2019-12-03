@@ -440,9 +440,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End SqlPrefixOperator.java
-end_comment
-
 end_unit
 

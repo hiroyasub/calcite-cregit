@@ -85,9 +85,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End ScopeChild.java
-end_comment
-
 end_unit
 

@@ -2102,10 +2102,6 @@ class|;
 block|}
 end_class
 
-begin_comment
 unit|} }
-comment|// End SqlValidatorTestCase.java
-end_comment
-
 end_unit
 

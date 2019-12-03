@@ -270,9 +270,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End JdbcConvention.java
-end_comment
-
 end_unit
 

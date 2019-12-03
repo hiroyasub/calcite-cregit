@@ -949,9 +949,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End Calc.java
-end_comment
-
 end_unit
 

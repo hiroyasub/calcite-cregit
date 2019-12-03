@@ -4936,9 +4936,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End DefaultEnumerable.java
-end_comment
-
 end_unit
 

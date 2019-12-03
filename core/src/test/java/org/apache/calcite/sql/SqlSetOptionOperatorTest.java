@@ -414,9 +414,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End SqlSetOptionOperatorTest.java
-end_comment
-
 end_unit
 

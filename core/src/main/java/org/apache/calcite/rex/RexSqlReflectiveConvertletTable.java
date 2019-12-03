@@ -257,9 +257,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End RexSqlReflectiveConvertletTable.java
-end_comment
-
 end_unit
 

@@ -1444,9 +1444,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End MappingTest.java
-end_comment
-
 end_unit
 

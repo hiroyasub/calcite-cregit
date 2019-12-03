@@ -1018,9 +1018,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End CompoundNameColumnResolver.java
-end_comment
-
 end_unit
 

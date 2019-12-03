@@ -134,9 +134,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End BasicLazyAccumulator.java
-end_comment
-
 end_unit
 

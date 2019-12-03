@@ -209,9 +209,5 @@ block|}
 block|}
 end_enum
 
-begin_comment
-comment|// End Lex.java
-end_comment
-
 end_unit
 

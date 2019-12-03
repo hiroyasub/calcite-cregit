@@ -1049,9 +1049,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End RexExecutorImpl.java
-end_comment
-
 end_unit
 

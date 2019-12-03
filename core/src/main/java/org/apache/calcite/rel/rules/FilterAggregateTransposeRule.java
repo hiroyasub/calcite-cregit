@@ -836,9 +836,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End FilterAggregateTransposeRule.java
-end_comment
-
 end_unit
 

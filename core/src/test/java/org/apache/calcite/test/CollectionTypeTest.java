@@ -2340,9 +2340,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End CollectionTypeTest.java
-end_comment
-
 end_unit
 

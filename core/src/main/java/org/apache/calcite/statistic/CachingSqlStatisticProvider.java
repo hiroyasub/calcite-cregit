@@ -492,9 +492,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End CachingSqlStatisticProvider.java
-end_comment
-
 end_unit
 

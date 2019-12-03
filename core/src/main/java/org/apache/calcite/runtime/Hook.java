@@ -597,9 +597,5 @@ block|}
 block|}
 end_enum
 
-begin_comment
-comment|// End Hook.java
-end_comment
-
 end_unit
 

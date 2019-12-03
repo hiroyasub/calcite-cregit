@@ -187,9 +187,5 @@ function_decl|;
 block|}
 end_interface
 
-begin_comment
-comment|// End ExtendedOrderedQueryable.java
-end_comment
-
 end_unit
 

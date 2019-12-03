@@ -4307,9 +4307,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End DruidConnectionImpl.java
-end_comment
-
 end_unit
 

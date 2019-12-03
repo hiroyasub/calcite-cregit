@@ -3734,10 +3734,6 @@ block|}
 block|}
 end_class
 
-begin_comment
 unit|}
-comment|// End FrameworksTest.java
-end_comment
-
 end_unit
 

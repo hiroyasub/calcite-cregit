@@ -835,9 +835,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End ProjectJoinJoinRemoveRule.java
-end_comment
-
 end_unit
 

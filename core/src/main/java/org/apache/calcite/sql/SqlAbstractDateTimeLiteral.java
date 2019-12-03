@@ -245,9 +245,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End SqlAbstractDateTimeLiteral.java
-end_comment
-
 end_unit
 

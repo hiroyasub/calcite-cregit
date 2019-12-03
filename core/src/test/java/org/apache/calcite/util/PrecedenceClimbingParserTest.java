@@ -1037,9 +1037,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End PrecedenceClimbingParserTest.java
-end_comment
-
 end_unit
 

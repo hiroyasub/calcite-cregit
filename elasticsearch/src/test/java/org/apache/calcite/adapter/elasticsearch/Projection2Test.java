@@ -1383,9 +1383,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End Projection2Test.java
-end_comment
-
 end_unit
 

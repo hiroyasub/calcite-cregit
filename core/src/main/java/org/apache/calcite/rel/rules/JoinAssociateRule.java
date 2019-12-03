@@ -756,9 +756,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End JoinAssociateRule.java
-end_comment
-
 end_unit
 

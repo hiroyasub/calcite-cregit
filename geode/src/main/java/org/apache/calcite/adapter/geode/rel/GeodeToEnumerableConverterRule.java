@@ -164,9 +164,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End GeodeToEnumerableConverterRule.java
-end_comment
-
 end_unit
 

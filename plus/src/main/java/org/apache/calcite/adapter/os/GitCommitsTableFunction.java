@@ -1056,9 +1056,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End GitCommitsTableFunction.java
-end_comment
-
 end_unit
 

@@ -195,9 +195,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End JdbcToSparkConverterRule.java
-end_comment
-
 end_unit
 

@@ -1258,9 +1258,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End ToLogicalConverter.java
-end_comment
-
 end_unit
 

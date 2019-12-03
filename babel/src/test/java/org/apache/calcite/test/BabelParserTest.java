@@ -1394,9 +1394,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End BabelParserTest.java
-end_comment
-
 end_unit
 

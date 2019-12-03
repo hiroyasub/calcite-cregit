@@ -110,9 +110,5 @@ name|Strict
 block|{ }
 end_annotation_defn
 
-begin_comment
-comment|// End Strict.java
-end_comment
-
 end_unit
 

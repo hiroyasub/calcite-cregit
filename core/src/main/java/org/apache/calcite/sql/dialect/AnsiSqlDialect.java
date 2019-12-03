@@ -96,9 +96,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End AnsiSqlDialect.java
-end_comment
-
 end_unit
 

@@ -635,9 +635,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End IntegerIntervalSet.java
-end_comment
-
 end_unit
 

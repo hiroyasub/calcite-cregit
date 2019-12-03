@@ -361,9 +361,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End CalcMergeRule.java
-end_comment
-
 end_unit
 

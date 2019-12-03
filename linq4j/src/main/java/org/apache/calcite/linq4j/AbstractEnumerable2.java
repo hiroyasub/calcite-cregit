@@ -55,9 +55,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End AbstractEnumerable2.java
-end_comment
-
 end_unit
 

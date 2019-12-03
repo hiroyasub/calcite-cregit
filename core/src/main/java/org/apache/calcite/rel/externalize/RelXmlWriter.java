@@ -558,9 +558,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End RelXmlWriter.java
-end_comment
-
 end_unit
 

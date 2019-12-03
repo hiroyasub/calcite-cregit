@@ -63,9 +63,5 @@ function_decl|;
 block|}
 end_interface
 
-begin_comment
-comment|// End RelDataTypePrecedenceList.java
-end_comment
-
 end_unit
 

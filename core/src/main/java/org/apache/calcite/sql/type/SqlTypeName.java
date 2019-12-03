@@ -4267,9 +4267,5 @@ block|}
 block|}
 end_enum
 
-begin_comment
-comment|// End SqlTypeName.java
-end_comment
-
 end_unit
 

@@ -206,9 +206,5 @@ block|}
 block|}
 end_interface
 
-begin_comment
-comment|// End InterpretableRel.java
-end_comment
-
 end_unit
 

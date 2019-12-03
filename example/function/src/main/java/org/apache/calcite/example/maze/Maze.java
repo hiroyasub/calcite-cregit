@@ -1840,9 +1840,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End Maze.java
-end_comment
-
 end_unit
 

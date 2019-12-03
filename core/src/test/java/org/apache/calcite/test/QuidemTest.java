@@ -1751,9 +1751,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End QuidemTest.java
-end_comment
-
 end_unit
 

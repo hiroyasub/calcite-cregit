@@ -371,9 +371,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End MultisetOperandTypeChecker.java
-end_comment
-
 end_unit
 

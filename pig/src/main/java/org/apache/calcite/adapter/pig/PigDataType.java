@@ -228,9 +228,5 @@ block|}
 block|}
 end_enum
 
-begin_comment
-comment|// End PigDataType.java
-end_comment
-
 end_unit
 

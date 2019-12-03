@@ -583,9 +583,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End MutableTableModify.java
-end_comment
-
 end_unit
 

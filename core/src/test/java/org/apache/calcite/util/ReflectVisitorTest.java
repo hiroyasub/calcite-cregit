@@ -716,9 +716,5 @@ block|{   }
 block|}
 end_class
 
-begin_comment
-comment|// End ReflectVisitorTest.java
-end_comment
-
 end_unit
 

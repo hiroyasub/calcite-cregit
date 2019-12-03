@@ -158,9 +158,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End GroupByScope.java
-end_comment
-
 end_unit
 

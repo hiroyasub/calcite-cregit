@@ -586,7 +586,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-comment|// End PigRelExTest.java
 specifier|public
 name|void
 name|testIsNull
@@ -1105,10 +1104,6 @@ expr_stmt|;
 block|}
 block|}
 end_class
-
-begin_comment
-comment|// End PigRelExTest.java
-end_comment
 
 end_unit
 

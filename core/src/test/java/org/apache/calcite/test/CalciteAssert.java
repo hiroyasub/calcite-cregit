@@ -10682,9 +10682,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End CalciteAssert.java
-end_comment
-
 end_unit
 

@@ -497,9 +497,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End AbstractConverter.java
-end_comment
-
 end_unit
 

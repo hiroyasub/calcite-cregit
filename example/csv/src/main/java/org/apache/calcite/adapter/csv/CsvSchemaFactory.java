@@ -297,9 +297,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End CsvSchemaFactory.java
-end_comment
-
 end_unit
 

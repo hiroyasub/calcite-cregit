@@ -81,9 +81,5 @@ block|}
 block|}
 end_enum
 
-begin_comment
-comment|// End SqlJsonEncoding.java
-end_comment
-
 end_unit
 

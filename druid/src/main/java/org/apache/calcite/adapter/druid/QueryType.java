@@ -83,9 +83,5 @@ block|}
 block|}
 end_enum
 
-begin_comment
-comment|// End QueryType.java
-end_comment
-
 end_unit
 

@@ -1952,9 +1952,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End TableScanNode.java
-end_comment
-
 end_unit
 

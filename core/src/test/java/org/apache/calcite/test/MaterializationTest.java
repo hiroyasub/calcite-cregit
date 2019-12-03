@@ -10173,9 +10173,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End MaterializationTest.java
-end_comment
-
 end_unit
 

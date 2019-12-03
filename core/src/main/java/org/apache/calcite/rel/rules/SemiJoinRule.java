@@ -1124,9 +1124,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End SemiJoinRule.java
-end_comment
-
 end_unit
 

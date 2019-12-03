@@ -1452,9 +1452,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End InduceGroupingTypeTest.java
-end_comment
-
 end_unit
 

@@ -513,9 +513,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End SqlDropSchema.java
-end_comment
-
 end_unit
 

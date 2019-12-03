@@ -403,9 +403,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End PigScriptTest.java
-end_comment
-
 end_unit
 

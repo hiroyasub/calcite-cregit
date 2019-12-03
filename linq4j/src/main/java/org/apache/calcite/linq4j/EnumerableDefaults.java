@@ -20504,10 +20504,6 @@ return|;
 block|}
 end_function
 
-begin_comment
 unit|}
-comment|// End EnumerableDefaults.java
-end_comment
-
 end_unit
 

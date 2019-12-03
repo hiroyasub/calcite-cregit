@@ -614,9 +614,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End HepProgramBuilder.java
-end_comment
-
 end_unit
 

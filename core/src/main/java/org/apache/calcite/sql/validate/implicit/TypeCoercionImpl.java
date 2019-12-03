@@ -2972,9 +2972,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End TypeCoercionImpl.java
-end_comment
-
 end_unit
 

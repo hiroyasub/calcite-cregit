@@ -882,9 +882,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End DruidQueryFilterTest.java
-end_comment
-
 end_unit
 

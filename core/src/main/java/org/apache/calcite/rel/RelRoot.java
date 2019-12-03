@@ -873,9 +873,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End RelRoot.java
-end_comment
-
 end_unit
 

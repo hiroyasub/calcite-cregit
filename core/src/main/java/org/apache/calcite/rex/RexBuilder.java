@@ -6900,9 +6900,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End RexBuilder.java
-end_comment
-
 end_unit
 

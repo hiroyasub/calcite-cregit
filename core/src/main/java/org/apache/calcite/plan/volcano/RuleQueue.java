@@ -2596,9 +2596,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End RuleQueue.java
-end_comment
-
 end_unit
 

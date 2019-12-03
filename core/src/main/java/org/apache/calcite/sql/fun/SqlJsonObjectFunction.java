@@ -980,9 +980,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End SqlJsonObjectFunction.java
-end_comment
-
 end_unit
 

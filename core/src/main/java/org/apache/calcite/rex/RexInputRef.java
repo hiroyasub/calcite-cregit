@@ -395,9 +395,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End RexInputRef.java
-end_comment
-
 end_unit
 

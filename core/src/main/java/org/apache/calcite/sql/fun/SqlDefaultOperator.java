@@ -212,9 +212,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End SqlDefaultOperator.java
-end_comment
-
 end_unit
 

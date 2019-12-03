@@ -109,9 +109,5 @@ function_decl|;
 block|}
 end_class
 
-begin_comment
-comment|// End SqlAbstractStringLiteral.java
-end_comment
-
 end_unit
 

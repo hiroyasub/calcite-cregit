@@ -19,9 +19,5 @@ name|materialize
 package|;
 end_package
 
-begin_comment
-comment|// End package-info.java
-end_comment
-
 end_unit
 

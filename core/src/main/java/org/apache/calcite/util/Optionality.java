@@ -38,9 +38,5 @@ name|FORBIDDEN
 block|}
 end_enum
 
-begin_comment
-comment|// End Optionality.java
-end_comment
-
 end_unit
 

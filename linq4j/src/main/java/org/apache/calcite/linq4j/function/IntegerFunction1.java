@@ -44,9 +44,5 @@ function_decl|;
 block|}
 end_interface
 
-begin_comment
-comment|// End IntegerFunction1.java
-end_comment
-
 end_unit
 

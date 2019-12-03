@@ -852,9 +852,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End PigRelBuilder.java
-end_comment
-
 end_unit
 

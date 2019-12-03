@@ -3294,10 +3294,6 @@ block|}
 block|}
 end_class
 
-begin_comment
 unit|} }
-comment|// End ProfilerTest.java
-end_comment
-
 end_unit
 

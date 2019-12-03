@@ -306,9 +306,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End JsonLattice.java
-end_comment
-
 end_unit
 

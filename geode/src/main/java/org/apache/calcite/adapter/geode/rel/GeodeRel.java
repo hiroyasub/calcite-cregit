@@ -414,9 +414,5 @@ block|}
 block|}
 end_interface
 
-begin_comment
-comment|// End GeodeRel.java
-end_comment
-
 end_unit
 

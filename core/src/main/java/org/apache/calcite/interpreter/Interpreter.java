@@ -3464,9 +3464,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End Interpreter.java
-end_comment
-
 end_unit
 

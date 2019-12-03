@@ -621,9 +621,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End PigJoin.java
-end_comment
-
 end_unit
 

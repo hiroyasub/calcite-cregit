@@ -329,9 +329,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End HepRelMetadataProvider.java
-end_comment
-
 end_unit
 

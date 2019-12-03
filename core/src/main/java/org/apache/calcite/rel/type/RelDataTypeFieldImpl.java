@@ -321,9 +321,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End RelDataTypeFieldImpl.java
-end_comment
-
 end_unit
 

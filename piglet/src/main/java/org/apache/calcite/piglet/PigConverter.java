@@ -1447,9 +1447,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End PigConverter.java
-end_comment
-
 end_unit
 

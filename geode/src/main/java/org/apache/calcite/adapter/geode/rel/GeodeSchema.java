@@ -324,9 +324,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End GeodeSchema.java
-end_comment
-
 end_unit
 

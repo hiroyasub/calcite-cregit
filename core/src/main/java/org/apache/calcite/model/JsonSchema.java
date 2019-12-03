@@ -261,9 +261,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End JsonSchema.java
-end_comment
-
 end_unit
 

@@ -379,9 +379,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End DelegatingNamespace.java
-end_comment
-
 end_unit
 

@@ -464,9 +464,5 @@ block|}
 block|}
 end_interface
 
-begin_comment
-comment|// End DataContext.java
-end_comment
-
 end_unit
 

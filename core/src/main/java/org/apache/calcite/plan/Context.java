@@ -42,9 +42,5 @@ name|Wrapper
 block|{ }
 end_interface
 
-begin_comment
-comment|// End Context.java
-end_comment
-
 end_unit
 

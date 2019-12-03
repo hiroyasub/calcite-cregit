@@ -204,9 +204,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End SqlThrowOperator.java
-end_comment
-
 end_unit
 

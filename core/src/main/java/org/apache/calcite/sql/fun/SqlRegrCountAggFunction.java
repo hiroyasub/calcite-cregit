@@ -107,9 +107,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End SqlRegrCountAggFunction.java
-end_comment
-
 end_unit
 

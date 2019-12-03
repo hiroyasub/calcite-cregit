@@ -2642,9 +2642,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End SqlJdbcFunctionCall.java
-end_comment
-
 end_unit
 

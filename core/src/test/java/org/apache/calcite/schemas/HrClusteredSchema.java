@@ -814,9 +814,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End HrClusteredSchema.java
-end_comment
-
 end_unit
 

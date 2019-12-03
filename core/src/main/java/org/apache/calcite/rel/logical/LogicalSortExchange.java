@@ -318,9 +318,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End LogicalSortExchange.java
-end_comment
-
 end_unit
 

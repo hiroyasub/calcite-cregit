@@ -234,9 +234,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End SqlTimeLiteral.java
-end_comment
-
 end_unit
 

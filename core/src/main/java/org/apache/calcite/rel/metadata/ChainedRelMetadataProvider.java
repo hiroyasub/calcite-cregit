@@ -707,10 +707,6 @@ block|}
 block|}
 end_class
 
-begin_comment
 unit|}
-comment|// End ChainedRelMetadataProvider.java
-end_comment
-
 end_unit
 

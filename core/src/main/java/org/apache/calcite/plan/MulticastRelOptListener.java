@@ -220,9 +220,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End MulticastRelOptListener.java
-end_comment
-
 end_unit
 

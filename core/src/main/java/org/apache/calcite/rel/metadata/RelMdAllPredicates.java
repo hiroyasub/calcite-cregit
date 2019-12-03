@@ -1923,9 +1923,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End RelMdAllPredicates.java
-end_comment
-
 end_unit
 

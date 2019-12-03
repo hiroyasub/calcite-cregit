@@ -446,9 +446,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End RexPermuteInputsShuttle.java
-end_comment
-
 end_unit
 

@@ -32,9 +32,5 @@ name|WinAggFrameContext
 block|{ }
 end_interface
 
-begin_comment
-comment|// End WinAggResetContext.java
-end_comment
-
 end_unit
 

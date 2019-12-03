@@ -646,9 +646,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End SqlOverOperator.java
-end_comment
-
 end_unit
 

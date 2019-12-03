@@ -436,9 +436,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End Span.java
-end_comment
-
 end_unit
 

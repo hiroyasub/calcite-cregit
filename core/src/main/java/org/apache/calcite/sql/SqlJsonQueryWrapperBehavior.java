@@ -32,9 +32,5 @@ name|WITH_UNCONDITIONAL_ARRAY
 block|}
 end_enum
 
-begin_comment
-comment|// End SqlJsonQueryWrapperBehavior.java
-end_comment
-
 end_unit
 

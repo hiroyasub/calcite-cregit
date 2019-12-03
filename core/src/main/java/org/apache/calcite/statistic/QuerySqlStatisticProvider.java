@@ -1361,9 +1361,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End QuerySqlStatisticProvider.java
-end_comment
-
 end_unit
 

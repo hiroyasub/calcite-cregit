@@ -345,9 +345,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End SqlParseException.java
-end_comment
-
 end_unit
 

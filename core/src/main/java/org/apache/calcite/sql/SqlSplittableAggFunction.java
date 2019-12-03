@@ -1822,9 +1822,5 @@ block|}
 block|}
 end_interface
 
-begin_comment
-comment|// End SqlSplittableAggFunction.java
-end_comment
-
 end_unit
 

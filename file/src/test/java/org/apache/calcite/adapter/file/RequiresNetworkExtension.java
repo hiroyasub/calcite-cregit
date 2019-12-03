@@ -256,10 +256,6 @@ argument_list|)
 expr_stmt|;
 end_class
 
-begin_comment
 unit|} }
-comment|// End RequiresNetworkExtension.java
-end_comment
-
 end_unit
 

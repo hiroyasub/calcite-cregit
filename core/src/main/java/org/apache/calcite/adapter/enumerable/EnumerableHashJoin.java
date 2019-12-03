@@ -1513,9 +1513,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End EnumerableHashJoin.java
-end_comment
-
 end_unit
 

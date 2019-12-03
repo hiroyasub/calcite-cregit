@@ -139,9 +139,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End ObjectEnumeratorCursor.java
-end_comment
-
 end_unit
 

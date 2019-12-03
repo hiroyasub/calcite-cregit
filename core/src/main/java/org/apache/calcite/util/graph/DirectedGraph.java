@@ -167,9 +167,5 @@ block|}
 block|}
 end_interface
 
-begin_comment
-comment|// End DirectedGraph.java
-end_comment
-
 end_unit
 

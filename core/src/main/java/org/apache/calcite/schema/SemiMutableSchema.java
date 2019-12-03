@@ -28,9 +28,5 @@ name|Schema
 block|{ }
 end_interface
 
-begin_comment
-comment|// End SemiMutableSchema.java
-end_comment
-
 end_unit
 

@@ -3753,9 +3753,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End SubQueryRemoveRule.java
-end_comment
-
 end_unit
 

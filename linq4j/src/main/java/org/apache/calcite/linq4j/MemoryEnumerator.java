@@ -293,9 +293,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End MemoryEnumerator.java
-end_comment
-
 end_unit
 

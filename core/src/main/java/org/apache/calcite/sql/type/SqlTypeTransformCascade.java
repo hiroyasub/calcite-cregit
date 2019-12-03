@@ -188,9 +188,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End SqlTypeTransformCascade.java
-end_comment
-
 end_unit
 

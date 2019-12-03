@@ -798,9 +798,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End ScalarFunctionImpl.java
-end_comment
-
 end_unit
 

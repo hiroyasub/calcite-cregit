@@ -593,9 +593,5 @@ decl_stmt|;
 block|}
 end_class
 
-begin_comment
-comment|// End SqlTypeTransforms.java
-end_comment
-
 end_unit
 

@@ -1280,9 +1280,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End GeodeZipsTest.java
-end_comment
-
 end_unit
 

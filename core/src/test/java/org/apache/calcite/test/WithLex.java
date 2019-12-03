@@ -113,9 +113,5 @@ function_decl|;
 block|}
 end_annotation_defn
 
-begin_comment
-comment|// End WithLex.java
-end_comment
-
 end_unit
 

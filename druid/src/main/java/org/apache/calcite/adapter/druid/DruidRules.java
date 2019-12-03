@@ -4798,9 +4798,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End DruidRules.java
-end_comment
-
 end_unit
 

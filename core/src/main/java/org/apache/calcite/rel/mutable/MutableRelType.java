@@ -69,9 +69,5 @@ name|HOLDER
 block|}
 end_enum
 
-begin_comment
-comment|// End MutableRelType.java
-end_comment
-
 end_unit
 

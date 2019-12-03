@@ -1075,9 +1075,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End FileReader.java
-end_comment
-
 end_unit
 

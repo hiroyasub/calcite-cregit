@@ -177,9 +177,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End LatticeChildNode.java
-end_comment
-
 end_unit
 

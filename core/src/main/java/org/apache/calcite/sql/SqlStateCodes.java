@@ -132,9 +132,5 @@ block|}
 block|}
 end_enum
 
-begin_comment
-comment|// End SqlStateCodes.java
-end_comment
-
 end_unit
 

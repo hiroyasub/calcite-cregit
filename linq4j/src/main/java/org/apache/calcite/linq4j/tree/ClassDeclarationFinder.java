@@ -755,9 +755,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End ClassDeclarationFinder.java
-end_comment
-
 end_unit
 

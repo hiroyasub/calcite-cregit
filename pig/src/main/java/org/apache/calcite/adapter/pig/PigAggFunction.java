@@ -161,9 +161,5 @@ block|}
 block|}
 end_enum
 
-begin_comment
-comment|// End PigAggFunction.java
-end_comment
-
 end_unit
 

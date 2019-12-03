@@ -210,9 +210,5 @@ block|}
 block|}
 end_enum
 
-begin_comment
-comment|// End CassandraMethod.java
-end_comment
-
 end_unit
 

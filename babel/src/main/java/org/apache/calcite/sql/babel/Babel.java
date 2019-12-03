@@ -36,9 +36,5 @@ comment|// if there are no classes in babel/java/main.
 block|}
 end_class
 
-begin_comment
-comment|// End Babel.java
-end_comment
-
 end_unit
 

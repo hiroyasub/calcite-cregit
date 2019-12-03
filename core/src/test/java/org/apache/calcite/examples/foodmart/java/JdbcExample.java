@@ -515,9 +515,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End JdbcExample.java
-end_comment
-
 end_unit
 

@@ -38,9 +38,5 @@ name|UNORDERED
 block|, }
 end_enum
 
-begin_comment
-comment|// End RelOptRuleOperandChildPolicy.java
-end_comment
-
 end_unit
 

@@ -587,9 +587,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End RelOptRuleOperand.java
-end_comment
-
 end_unit
 

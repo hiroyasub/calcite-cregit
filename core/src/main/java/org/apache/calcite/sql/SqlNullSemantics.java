@@ -35,9 +35,5 @@ name|NULL_MATCHES_ANYTHING
 block|}
 end_enum
 
-begin_comment
-comment|// End SqlNullSemantics.java
-end_comment
-
 end_unit
 

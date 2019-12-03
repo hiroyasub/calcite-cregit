@@ -163,9 +163,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End SqlCollectionTableOperator.java
-end_comment
-
 end_unit
 

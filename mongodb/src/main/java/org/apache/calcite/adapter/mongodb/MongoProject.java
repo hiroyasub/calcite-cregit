@@ -594,9 +594,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End MongoProject.java
-end_comment
-
 end_unit
 

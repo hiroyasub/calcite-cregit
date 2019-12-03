@@ -341,9 +341,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End ParameterExpression.java
-end_comment
-
 end_unit
 

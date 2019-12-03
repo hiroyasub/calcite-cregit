@@ -107,9 +107,5 @@ function_decl|;
 block|}
 end_class
 
-begin_comment
-comment|// End Statement.java
-end_comment
-
 end_unit
 

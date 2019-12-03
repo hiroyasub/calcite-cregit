@@ -938,9 +938,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End MockRelOptPlanner.java
-end_comment
-
 end_unit
 

@@ -30,9 +30,5 @@ name|AggContext
 block|{ }
 end_interface
 
-begin_comment
-comment|// End WinAggContext.java
-end_comment
-
 end_unit
 

@@ -1073,9 +1073,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End SqlCreateMaterializedView.java
-end_comment
-
 end_unit
 

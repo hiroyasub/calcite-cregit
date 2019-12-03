@@ -6109,9 +6109,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End RelStructuredTypeFlattener.java
-end_comment
-
 end_unit
 

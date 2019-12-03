@@ -222,9 +222,5 @@ block|}
 block|}
 end_class
 
-begin_comment
-comment|// End TableSpool.java
-end_comment
-
 end_unit
 
