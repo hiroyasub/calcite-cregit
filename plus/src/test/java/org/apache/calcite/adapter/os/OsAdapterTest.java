@@ -149,26 +149,6 @@ begin_import
 import|import
 name|org
 operator|.
-name|hamcrest
-operator|.
-name|CoreMatchers
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|junit
-operator|.
-name|Assume
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
 name|junit
 operator|.
 name|jupiter
@@ -297,6 +277,22 @@ begin_import
 import|import static
 name|org
 operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|util
+operator|.
+name|TestUtil
+operator|.
+name|rethrow
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
 name|hamcrest
 operator|.
 name|CoreMatchers
@@ -314,6 +310,18 @@ operator|.
 name|CoreMatchers
 operator|.
 name|notNullValue
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|hamcrest
+operator|.
+name|CoreMatchers
+operator|.
+name|startsWith
 import|;
 end_import
 
@@ -374,6 +382,38 @@ operator|.
 name|Assertions
 operator|.
 name|fail
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|jupiter
+operator|.
+name|api
+operator|.
+name|Assumptions
+operator|.
+name|assumeFalse
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|jupiter
+operator|.
+name|api
+operator|.
+name|Assumptions
+operator|.
+name|assumeTrue
 import|;
 end_import
 
@@ -533,18 +573,18 @@ name|String
 name|command
 parameter_list|)
 block|{
-name|Assume
-operator|.
 name|assumeTrue
 argument_list|(
-name|command
-operator|+
-literal|" does not exist"
-argument_list|,
 name|checkProcessExists
 argument_list|(
 name|command
 argument_list|)
+argument_list|,
+parameter_list|()
+lambda|->
+name|command
+operator|+
+literal|" does not exist"
 argument_list|)
 expr_stmt|;
 block|}
@@ -620,14 +660,12 @@ name|void
 name|testDu
 parameter_list|()
 block|{
-name|Assume
-operator|.
 name|assumeFalse
 argument_list|(
-literal|"Skip: the 'du' table does not work on Windows"
-argument_list|,
 name|isWindows
 argument_list|()
+argument_list|,
+literal|"Skip: the 'du' table does not work on Windows"
 argument_list|)
 expr_stmt|;
 name|assumeToolExists
@@ -682,8 +720,6 @@ argument_list|(
 literal|2
 argument_list|)
 argument_list|,
-name|CoreMatchers
-operator|.
 name|startsWith
 argument_list|(
 literal|"./"
@@ -711,8 +747,6 @@ name|e
 parameter_list|)
 block|{
 throw|throw
-name|TestUtil
-operator|.
 name|rethrow
 argument_list|(
 name|e
@@ -730,14 +764,12 @@ name|void
 name|testDuFilterSortLimit
 parameter_list|()
 block|{
-name|Assume
-operator|.
 name|assumeFalse
 argument_list|(
-literal|"Skip: the 'du' table does not work on Windows"
-argument_list|,
 name|isWindows
 argument_list|()
+argument_list|,
+literal|"Skip: the 'du' table does not work on Windows"
 argument_list|)
 expr_stmt|;
 name|assumeToolExists
@@ -794,8 +826,6 @@ argument_list|(
 literal|2
 argument_list|)
 argument_list|,
-name|CoreMatchers
-operator|.
 name|startsWith
 argument_list|(
 literal|"./"
@@ -850,8 +880,6 @@ name|e
 parameter_list|)
 block|{
 throw|throw
-name|TestUtil
-operator|.
 name|rethrow
 argument_list|(
 name|e
@@ -869,14 +897,12 @@ name|void
 name|testFiles
 parameter_list|()
 block|{
-name|Assume
-operator|.
 name|assumeFalse
 argument_list|(
-literal|"Skip: the 'files' table does not work on Windows"
-argument_list|,
 name|isWindows
 argument_list|()
+argument_list|,
+literal|"Skip: the 'files' table does not work on Windows"
 argument_list|)
 expr_stmt|;
 name|sql
@@ -899,14 +925,12 @@ name|void
 name|testPs
 parameter_list|()
 block|{
-name|Assume
-operator|.
 name|assumeFalse
 argument_list|(
-literal|"Skip: the 'ps' table does not work on Windows"
-argument_list|,
 name|isWindows
 argument_list|()
+argument_list|,
+literal|"Skip: the 'ps' table does not work on Windows"
 argument_list|)
 expr_stmt|;
 name|assumeToolExists
@@ -1026,8 +1050,6 @@ name|e
 parameter_list|)
 block|{
 throw|throw
-name|TestUtil
-operator|.
 name|rethrow
 argument_list|(
 name|e
@@ -1045,14 +1067,12 @@ name|void
 name|testPsDistinct
 parameter_list|()
 block|{
-name|Assume
-operator|.
 name|assumeFalse
 argument_list|(
-literal|"Skip: the 'ps' table does not work on Windows"
-argument_list|,
 name|isWindows
 argument_list|()
+argument_list|,
+literal|"Skip: the 'ps' table does not work on Windows"
 argument_list|)
 expr_stmt|;
 name|assumeToolExists
@@ -1119,8 +1139,6 @@ name|e
 parameter_list|)
 block|{
 throw|throw
-name|TestUtil
-operator|.
 name|rethrow
 argument_list|(
 name|e
@@ -1138,14 +1156,12 @@ name|void
 name|testGitCommits
 parameter_list|()
 block|{
-name|Assume
-operator|.
 name|assumeTrue
 argument_list|(
-literal|"no git"
-argument_list|,
 name|hasGit
 argument_list|()
+argument_list|,
+literal|"no git"
 argument_list|)
 expr_stmt|;
 name|sql
@@ -1226,14 +1242,12 @@ name|void
 name|testGitCommitsTop
 parameter_list|()
 block|{
-name|Assume
-operator|.
 name|assumeTrue
 argument_list|(
-literal|"no git"
-argument_list|,
 name|hasGit
 argument_list|()
+argument_list|,
+literal|"no git"
 argument_list|)
 expr_stmt|;
 specifier|final
@@ -1361,14 +1375,12 @@ name|void
 name|testVmstat
 parameter_list|()
 block|{
-name|Assume
-operator|.
 name|assumeFalse
 argument_list|(
-literal|"Skip: the 'files' table does not work on Windows"
-argument_list|,
 name|isWindows
 argument_list|()
+argument_list|,
+literal|"Skip: the 'files' table does not work on Windows"
 argument_list|)
 expr_stmt|;
 name|assumeToolExists
@@ -1465,8 +1477,6 @@ name|e
 parameter_list|)
 block|{
 throw|throw
-name|TestUtil
-operator|.
 name|rethrow
 argument_list|(
 name|e

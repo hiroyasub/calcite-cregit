@@ -79,16 +79,6 @@ name|org
 operator|.
 name|junit
 operator|.
-name|Assume
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|junit
-operator|.
 name|jupiter
 operator|.
 name|api
@@ -108,6 +98,22 @@ operator|.
 name|api
 operator|.
 name|Test
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|junit
+operator|.
+name|jupiter
+operator|.
+name|api
+operator|.
+name|extension
+operator|.
+name|ExtendWith
 import|;
 end_import
 
@@ -278,6 +284,13 @@ comment|/**  * System test of the Calcite file adapter, which can also read and 
 end_comment
 
 begin_class
+annotation|@
+name|ExtendWith
+argument_list|(
+name|RequiresNetworkExtension
+operator|.
+name|class
+argument_list|)
 specifier|public
 class|class
 name|SqlTest
@@ -1010,6 +1023,8 @@ block|}
 comment|/** Reads from a local file without table headers&lt;TH&gt; and checks the    * result. */
 annotation|@
 name|Test
+annotation|@
+name|RequiresNetwork
 specifier|public
 name|void
 name|testNoThSelect
@@ -1017,16 +1032,6 @@ parameter_list|()
 throws|throws
 name|SQLException
 block|{
-name|Assume
-operator|.
-name|assumeTrue
-argument_list|(
-name|FileSuite
-operator|.
-name|hazNetwork
-argument_list|()
-argument_list|)
-expr_stmt|;
 specifier|final
 name|String
 name|sql
@@ -1089,6 +1094,8 @@ literal|"[CALCITE-1789] Wikipedia format change breaks file adapter test"
 argument_list|)
 annotation|@
 name|Test
+annotation|@
+name|RequiresNetwork
 specifier|public
 name|void
 name|testUrlSelect
@@ -1096,16 +1103,6 @@ parameter_list|()
 throws|throws
 name|SQLException
 block|{
-name|Assume
-operator|.
-name|assumeTrue
-argument_list|(
-name|FileSuite
-operator|.
-name|hazNetwork
-argument_list|()
-argument_list|)
-expr_stmt|;
 specifier|final
 name|String
 name|sql

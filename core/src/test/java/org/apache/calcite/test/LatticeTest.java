@@ -219,16 +219,6 @@ name|org
 operator|.
 name|junit
 operator|.
-name|Assume
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|junit
-operator|.
 name|jupiter
 operator|.
 name|api
@@ -488,6 +478,22 @@ operator|.
 name|Assertions
 operator|.
 name|assertFalse
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|jupiter
+operator|.
+name|api
+operator|.
+name|Assumptions
+operator|.
+name|assumeTrue
 import|;
 end_import
 
@@ -2036,18 +2042,16 @@ name|void
 name|testTileAlgorithm3
 parameter_list|()
 block|{
-name|Assume
-operator|.
 name|assumeTrue
 argument_list|(
-literal|"Yahoo sketches requires JDK 8 or higher"
-argument_list|,
 name|TestUtil
 operator|.
 name|getJavaMajorVersion
 argument_list|()
 operator|>=
 literal|8
+argument_list|,
+literal|"Yahoo sketches requires JDK 8 or higher"
 argument_list|)
 expr_stmt|;
 specifier|final

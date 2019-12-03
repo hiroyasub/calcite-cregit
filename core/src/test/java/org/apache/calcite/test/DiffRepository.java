@@ -93,7 +93,11 @@ name|org
 operator|.
 name|junit
 operator|.
-name|ComparisonFailure
+name|jupiter
+operator|.
+name|api
+operator|.
+name|Assertions
 import|;
 end_import
 
@@ -101,13 +105,9 @@ begin_import
 import|import
 name|org
 operator|.
-name|junit
+name|opentest4j
 operator|.
-name|jupiter
-operator|.
-name|api
-operator|.
-name|Assertions
+name|AssertionFailedError
 import|;
 end_import
 
@@ -1607,7 +1607,7 @@ expr_stmt|;
 block|}
 catch|catch
 parameter_list|(
-name|ComparisonFailure
+name|AssertionFailedError
 name|e
 parameter_list|)
 block|{

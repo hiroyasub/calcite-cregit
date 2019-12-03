@@ -93,16 +93,6 @@ name|org
 operator|.
 name|junit
 operator|.
-name|Assume
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|junit
-operator|.
 name|jupiter
 operator|.
 name|api
@@ -182,6 +172,22 @@ operator|.
 name|MatcherAssert
 operator|.
 name|assertThat
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|jupiter
+operator|.
+name|api
+operator|.
+name|Assumptions
+operator|.
+name|assumeTrue
 import|;
 end_import
 
@@ -1953,8 +1959,6 @@ name|void
 name|testQuery07
 parameter_list|()
 block|{
-name|Assume
-operator|.
 name|assumeTrue
 argument_list|(
 name|Bug

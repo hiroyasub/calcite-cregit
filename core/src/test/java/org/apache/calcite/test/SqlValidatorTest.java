@@ -543,16 +543,6 @@ name|org
 operator|.
 name|junit
 operator|.
-name|Assume
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|junit
-operator|.
 name|jupiter
 operator|.
 name|api
@@ -864,6 +854,22 @@ operator|.
 name|Assertions
 operator|.
 name|fail
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|jupiter
+operator|.
+name|api
+operator|.
+name|Assumptions
+operator|.
+name|assumeTrue
 import|;
 end_import
 
@@ -7197,13 +7203,11 @@ operator|+
 literal|"Was expecting 2 arguments"
 argument_list|)
 expr_stmt|;
-name|Assume
-operator|.
 name|assumeTrue
 argument_list|(
-literal|"test case for [CALCITE-3326], disabled til it is fixed"
-argument_list|,
 literal|false
+argument_list|,
+literal|"test case for [CALCITE-3326], disabled til it is fixed"
 argument_list|)
 expr_stmt|;
 name|sql

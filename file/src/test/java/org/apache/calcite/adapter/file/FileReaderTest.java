@@ -77,16 +77,6 @@ name|org
 operator|.
 name|junit
 operator|.
-name|Assume
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|junit
-operator|.
 name|jupiter
 operator|.
 name|api
@@ -106,6 +96,22 @@ operator|.
 name|api
 operator|.
 name|Test
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|junit
+operator|.
+name|jupiter
+operator|.
+name|api
+operator|.
+name|extension
+operator|.
+name|ExtendWith
 import|;
 end_import
 
@@ -176,6 +182,22 @@ operator|.
 name|util
 operator|.
 name|Properties
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|util
+operator|.
+name|TestUtil
+operator|.
+name|getJavaMajorVersion
 import|;
 end_import
 
@@ -279,11 +301,46 @@ name|fail
 import|;
 end_import
 
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|jupiter
+operator|.
+name|api
+operator|.
+name|Assumptions
+operator|.
+name|assumeTrue
+import|;
+end_import
+
+begin_import
+import|import static
+name|java
+operator|.
+name|lang
+operator|.
+name|System
+operator|.
+name|getProperty
+import|;
+end_import
+
 begin_comment
 comment|/**  * Unit tests for FileReader.  */
 end_comment
 
 begin_class
+annotation|@
+name|ExtendWith
+argument_list|(
+name|RequiresNetworkExtension
+operator|.
+name|class
+argument_list|)
 specifier|public
 class|class
 name|FileReaderTest
@@ -366,6 +423,8 @@ block|}
 comment|/** Tests {@link FileReader} URL instantiation - no path. */
 annotation|@
 name|Test
+annotation|@
+name|RequiresNetwork
 specifier|public
 name|void
 name|testFileReaderUrlNoPath
@@ -373,16 +432,6 @@ parameter_list|()
 throws|throws
 name|FileReaderException
 block|{
-name|Assume
-operator|.
-name|assumeTrue
-argument_list|(
-name|FileSuite
-operator|.
-name|hazNetwork
-argument_list|()
-argument_list|)
-expr_stmt|;
 comment|// Under OpenJDK, test fails with the following, so skip test:
 comment|//   javax.net.ssl.SSLHandshakeException:
 comment|//   sun.security.validator.ValidatorException: PKIX path building failed:
@@ -392,29 +441,14 @@ specifier|final
 name|String
 name|r
 init|=
-name|System
-operator|.
 name|getProperty
 argument_list|(
 literal|"java.runtime.name"
 argument_list|)
 decl_stmt|;
 comment|// http://openjdk.java.net/jeps/319 => root certificates are bundled with JEP 10
-name|Assume
-operator|.
 name|assumeTrue
 argument_list|(
-literal|"Java 10+ should have root certificates (JEP 319). Runtime is "
-operator|+
-name|r
-operator|+
-literal|", Jave major version is "
-operator|+
-name|TestUtil
-operator|.
-name|getJavaMajorVersion
-argument_list|()
-argument_list|,
 operator|!
 name|r
 operator|.
@@ -423,12 +457,19 @@ argument_list|(
 literal|"OpenJDK Runtime Environment"
 argument_list|)
 operator|||
-name|TestUtil
-operator|.
 name|getJavaMajorVersion
 argument_list|()
 operator|>
 literal|10
+argument_list|,
+literal|"Java 10+ should have root certificates (JEP 319). Runtime is "
+operator|+
+name|r
+operator|+
+literal|", Jave major version is "
+operator|+
+name|getJavaMajorVersion
+argument_list|()
 argument_list|)
 expr_stmt|;
 name|FileReader
@@ -454,6 +495,8 @@ literal|"[CALCITE-1789] Wikipedia format change breaks file adapter test"
 argument_list|)
 annotation|@
 name|Test
+annotation|@
+name|RequiresNetwork
 specifier|public
 name|void
 name|testFileReaderUrlWithPath
@@ -461,16 +504,6 @@ parameter_list|()
 throws|throws
 name|FileReaderException
 block|{
-name|Assume
-operator|.
-name|assumeTrue
-argument_list|(
-name|FileSuite
-operator|.
-name|hazNetwork
-argument_list|()
-argument_list|)
-expr_stmt|;
 name|FileReader
 name|t
 init|=
@@ -498,6 +531,8 @@ literal|"[CALCITE-1789] Wikipedia format change breaks file adapter test"
 argument_list|)
 annotation|@
 name|Test
+annotation|@
+name|RequiresNetwork
 specifier|public
 name|void
 name|testFileReaderUrlFetch
@@ -505,16 +540,6 @@ parameter_list|()
 throws|throws
 name|FileReaderException
 block|{
-name|Assume
-operator|.
-name|assumeTrue
-argument_list|(
-name|FileSuite
-operator|.
-name|hazNetwork
-argument_list|()
-argument_list|)
-expr_stmt|;
 name|FileReader
 name|t
 init|=

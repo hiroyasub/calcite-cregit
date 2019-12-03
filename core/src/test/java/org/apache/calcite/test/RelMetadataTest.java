@@ -1305,16 +1305,6 @@ name|org
 operator|.
 name|junit
 operator|.
-name|Assume
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|junit
-operator|.
 name|jupiter
 operator|.
 name|api
@@ -1712,6 +1702,22 @@ operator|.
 name|Assertions
 operator|.
 name|fail
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|jupiter
+operator|.
+name|api
+operator|.
+name|Assumptions
+operator|.
+name|assumeTrue
 import|;
 end_import
 
@@ -4561,14 +4567,8 @@ name|void
 name|testMetadataHandlerCacheLimit
 parameter_list|()
 block|{
-name|Assume
-operator|.
 name|assumeTrue
 argument_list|(
-literal|"If cache size is too large, this test may fail and the "
-operator|+
-literal|"test won't be to blame"
-argument_list|,
 name|CalciteSystemProperty
 operator|.
 name|METADATA_HANDLER_CACHE_MAXIMUM_SIZE
@@ -4577,6 +4577,8 @@ name|value
 argument_list|()
 operator|<
 literal|10_000
+argument_list|,
+literal|"If cache size is too large, this test may fail and the test won't be to blame"
 argument_list|)
 expr_stmt|;
 specifier|final

@@ -395,16 +395,6 @@ name|org
 operator|.
 name|junit
 operator|.
-name|Assume
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|junit
-operator|.
 name|jupiter
 operator|.
 name|api
@@ -523,13 +513,15 @@ begin_import
 import|import static
 name|org
 operator|.
-name|hamcrest
+name|junit
 operator|.
-name|core
+name|jupiter
 operator|.
-name|Is
+name|api
 operator|.
-name|is
+name|Assertions
+operator|.
+name|assertEquals
 import|;
 end_import
 
@@ -543,9 +535,9 @@ name|jupiter
 operator|.
 name|api
 operator|.
-name|Assertions
+name|Assumptions
 operator|.
-name|assertEquals
+name|assumeTrue
 import|;
 end_import
 
@@ -564,20 +556,21 @@ specifier|public
 name|PigRelBuilderStyleTest
 parameter_list|()
 block|{
-name|Assume
-operator|.
-name|assumeThat
+name|assumeTrue
 argument_list|(
-literal|"Pigs don't like Windows"
-argument_list|,
 name|File
 operator|.
 name|separatorChar
-argument_list|,
-name|is
-argument_list|(
+operator|==
 literal|'/'
-argument_list|)
+argument_list|,
+parameter_list|()
+lambda|->
+literal|"Pig tests expects File.separatorChar to be /, actual one is "
+operator|+
+name|File
+operator|.
+name|separatorChar
 argument_list|)
 expr_stmt|;
 block|}

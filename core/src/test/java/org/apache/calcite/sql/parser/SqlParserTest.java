@@ -679,21 +679,13 @@ name|org
 operator|.
 name|junit
 operator|.
-name|Assume
+name|jupiter
 operator|.
-name|assumeFalse
-import|;
-end_import
-
-begin_import
-import|import static
-name|org
+name|api
 operator|.
-name|junit
+name|Assertions
 operator|.
-name|Assume
-operator|.
-name|assumeTrue
+name|assertEquals
 import|;
 end_import
 
@@ -707,9 +699,25 @@ name|jupiter
 operator|.
 name|api
 operator|.
-name|Assertions
+name|Assumptions
 operator|.
-name|assertEquals
+name|assumeFalse
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|jupiter
+operator|.
+name|api
+operator|.
+name|Assumptions
+operator|.
+name|assumeTrue
 import|;
 end_import
 
@@ -30408,10 +30416,10 @@ parameter_list|()
 block|{
 name|assumeTrue
 argument_list|(
-literal|"don't run this test for sub-classes"
-argument_list|,
 name|isNotSubclass
 argument_list|()
+argument_list|,
+literal|"don't run this test for sub-classes"
 argument_list|)
 expr_stmt|;
 specifier|final

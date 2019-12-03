@@ -63,12 +63,48 @@ name|org
 operator|.
 name|junit
 operator|.
-name|Assume
+name|jupiter
+operator|.
+name|api
+operator|.
+name|BeforeEach
 import|;
 end_import
 
 begin_import
-import|import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|piglet
+operator|.
+name|PigConverter
+operator|.
+name|create
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|test
+operator|.
+name|PigRelBuilderTest
+operator|.
+name|config
+import|;
+end_import
+
+begin_import
+import|import static
 name|org
 operator|.
 name|junit
@@ -77,7 +113,21 @@ name|jupiter
 operator|.
 name|api
 operator|.
-name|BeforeEach
+name|Assumptions
+operator|.
+name|assumeFalse
+import|;
+end_import
+
+begin_import
+import|import static
+name|java
+operator|.
+name|lang
+operator|.
+name|System
+operator|.
+name|getProperty
 import|;
 end_import
 
@@ -103,14 +153,8 @@ parameter_list|()
 throws|throws
 name|Exception
 block|{
-name|Assume
-operator|.
 name|assumeFalse
 argument_list|(
-literal|"Skip: Pig/Hadoop tests do not work on Windows"
-argument_list|,
-name|System
-operator|.
 name|getProperty
 argument_list|(
 literal|"os.name"
@@ -120,14 +164,14 @@ name|startsWith
 argument_list|(
 literal|"Windows"
 argument_list|)
+argument_list|,
+literal|"Skip: Pig/Hadoop tests do not work on Windows"
 argument_list|)
 expr_stmt|;
 specifier|final
 name|FrameworkConfig
 name|config
 init|=
-name|PigRelBuilderTest
-operator|.
 name|config
 argument_list|()
 operator|.
@@ -136,8 +180,6 @@ argument_list|()
 decl_stmt|;
 name|converter
 operator|=
-name|PigConverter
-operator|.
 name|create
 argument_list|(
 name|config
