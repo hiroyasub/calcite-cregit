@@ -1608,9 +1608,6 @@ name|ImmutableList
 operator|.
 name|of
 argument_list|(
-operator|(
-name|RelOptRule
-operator|)
 name|SubQueryRemoveRule
 operator|.
 name|FILTER

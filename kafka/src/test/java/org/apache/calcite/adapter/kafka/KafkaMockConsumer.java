@@ -205,13 +205,7 @@ name|addRecord
 argument_list|(
 operator|new
 name|ConsumerRecord
-argument_list|<
-name|byte
-index|[]
-argument_list|,
-name|byte
-index|[]
-argument_list|>
+argument_list|<>
 argument_list|(
 literal|"testtopic"
 argument_list|,
