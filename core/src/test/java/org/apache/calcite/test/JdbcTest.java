@@ -9785,6 +9785,90 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testUnnestRecordType
+parameter_list|()
+block|{
+comment|// unnest(RecordType(Array))
+name|CalciteAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|query
+argument_list|(
+literal|"select * from unnest\n"
+operator|+
+literal|"(select t.x from (values array[10, 20], array[30, 40]) as t(x))\n"
+operator|+
+literal|" with ordinality as t(a, o)"
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"A=10; O=1"
+argument_list|,
+literal|"A=20; O=2"
+argument_list|,
+literal|"A=30; O=1"
+argument_list|,
+literal|"A=40; O=2"
+argument_list|)
+expr_stmt|;
+comment|// unnest(RecordType(Multiset))
+name|CalciteAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|query
+argument_list|(
+literal|"select * from unnest\n"
+operator|+
+literal|"(select t.x from (values multiset[10, 20], array[30, 40]) as t(x))\n"
+operator|+
+literal|" with ordinality as t(a, o)"
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"A=10; O=1"
+argument_list|,
+literal|"A=20; O=2"
+argument_list|,
+literal|"A=30; O=1"
+argument_list|,
+literal|"A=40; O=2"
+argument_list|)
+expr_stmt|;
+comment|// unnest(RecordType(Map))
+name|CalciteAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|query
+argument_list|(
+literal|"select * from unnest\n"
+operator|+
+literal|"(select t.x from (values map['a', 20], map['b', 30], map['c', 40]) as t(x))\n"
+operator|+
+literal|" with ordinality as t(a, b, o)"
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"A=a; B=20; O=1"
+argument_list|,
+literal|"A=b; B=30; O=1"
+argument_list|,
+literal|"A=c; B=40; O=1"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testUnnestMultiset
 parameter_list|()
 block|{
