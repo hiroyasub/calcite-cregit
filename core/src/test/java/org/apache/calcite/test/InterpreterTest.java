@@ -698,11 +698,9 @@ literal|false
 argument_list|)
 return|;
 block|}
-annotation|@
-name|BeforeEach
-specifier|public
+specifier|private
 name|void
-name|setUp
+name|reset
 parameter_list|()
 block|{
 name|rootSchema
@@ -767,6 +765,17 @@ name|MyDataContext
 argument_list|(
 name|planner
 argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|BeforeEach
+specifier|public
+name|void
+name|setUp
+parameter_list|()
+block|{
+name|reset
+argument_list|()
 expr_stmt|;
 block|}
 annotation|@
@@ -2147,6 +2156,198 @@ argument_list|(
 literal|"[a, -1.2, 15.0, 16.1, 5.366666666666667]"
 argument_list|)
 expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testInterpretUnnest
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+name|sql
+argument_list|(
+literal|"select * from unnest(array[1, 2])"
+argument_list|)
+operator|.
+name|returnsRows
+argument_list|(
+literal|"[1]"
+argument_list|,
+literal|"[2]"
+argument_list|)
+expr_stmt|;
+name|reset
+argument_list|()
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select * from unnest(multiset[1, 2])"
+argument_list|)
+operator|.
+name|returnsRowsUnordered
+argument_list|(
+literal|"[1]"
+argument_list|,
+literal|"[2]"
+argument_list|)
+expr_stmt|;
+name|reset
+argument_list|()
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select * from unnest(map['a', 12])"
+argument_list|)
+operator|.
+name|returnsRows
+argument_list|(
+literal|"[a, 12]"
+argument_list|)
+expr_stmt|;
+name|reset
+argument_list|()
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select * from unnest(\n"
+operator|+
+literal|"select * from (values array[10, 20], array[30, 40]))\n"
+operator|+
+literal|"with ordinality as t(i, o)"
+argument_list|)
+operator|.
+name|returnsRows
+argument_list|(
+literal|"[10, 1]"
+argument_list|,
+literal|"[20, 2]"
+argument_list|,
+literal|"[30, 1]"
+argument_list|,
+literal|"[40, 2]"
+argument_list|)
+expr_stmt|;
+name|reset
+argument_list|()
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select * from unnest(map['a', 12, 'b', 13]) with ordinality as t(a, b, o)"
+argument_list|)
+operator|.
+name|returnsRows
+argument_list|(
+literal|"[a, 12, 1]"
+argument_list|,
+literal|"[b, 13, 2]"
+argument_list|)
+expr_stmt|;
+name|reset
+argument_list|()
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select * from unnest(\n"
+operator|+
+literal|"select * from (values multiset[10, 20], multiset[30, 40]))\n"
+operator|+
+literal|"with ordinality as t(i, o)"
+argument_list|)
+operator|.
+name|returnsRows
+argument_list|(
+literal|"[10, 1]"
+argument_list|,
+literal|"[20, 2]"
+argument_list|,
+literal|"[30, 1]"
+argument_list|,
+literal|"[40, 2]"
+argument_list|)
+expr_stmt|;
+name|reset
+argument_list|()
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select * from unnest(array[cast(null as integer), 10])"
+argument_list|)
+operator|.
+name|returnsRows
+argument_list|(
+literal|"[null]"
+argument_list|,
+literal|"[10]"
+argument_list|)
+expr_stmt|;
+name|reset
+argument_list|()
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select * from unnest(map[cast(null as integer), 10, 10, cast(null as integer)])"
+argument_list|)
+operator|.
+name|returnsRowsUnordered
+argument_list|(
+literal|"[null, 10]"
+argument_list|,
+literal|"[10, null]"
+argument_list|)
+expr_stmt|;
+name|reset
+argument_list|()
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select * from unnest(multiset[cast(null as integer), 10])"
+argument_list|)
+operator|.
+name|returnsRowsUnordered
+argument_list|(
+literal|"[null]"
+argument_list|,
+literal|"[10]"
+argument_list|)
+expr_stmt|;
+try|try
+block|{
+name|reset
+argument_list|()
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select * from unnest(cast(null as int array))"
+argument_list|)
+operator|.
+name|returnsRows
+argument_list|(
+literal|""
+argument_list|)
+expr_stmt|;
+block|}
+catch|catch
+parameter_list|(
+name|NullPointerException
+name|e
+parameter_list|)
+block|{
+name|assertThat
+argument_list|(
+name|e
+operator|.
+name|getMessage
+argument_list|()
+argument_list|,
+name|equalTo
+argument_list|(
+literal|"NULL value for unnest."
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
 block|}
 block|}
 end_class
