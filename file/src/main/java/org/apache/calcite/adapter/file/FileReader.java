@@ -117,6 +117,16 @@ name|java
 operator|.
 name|util
 operator|.
+name|Arrays
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
 name|Iterator
 import|;
 end_import
@@ -205,7 +215,7 @@ throw|throw
 operator|new
 name|FileReaderException
 argument_list|(
-literal|"URL must not be null"
+literal|"source must not be null"
 argument_list|)
 throw|;
 block|}
@@ -292,11 +302,11 @@ argument_list|()
 decl_stmt|;
 if|if
 condition|(
-name|proto
+literal|"file"
 operator|.
 name|equals
 argument_list|(
-literal|"file"
+name|proto
 argument_list|)
 condition|)
 block|{
@@ -320,8 +330,26 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
-else|else
+if|else if
+condition|(
+name|Arrays
+operator|.
+name|asList
+argument_list|(
+literal|"http"
+argument_list|,
+literal|"https"
+argument_list|,
+literal|"ftp"
+argument_list|)
+operator|.
+name|contains
+argument_list|(
+name|proto
+argument_list|)
+condition|)
 block|{
+comment|// known protocols handled by URL
 name|doc
 operator|=
 name|Jsoup
@@ -347,6 +375,29 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+else|else
+block|{
+comment|// generically read this source
+name|doc
+operator|=
+name|Jsoup
+operator|.
+name|parse
+argument_list|(
+name|source
+operator|.
+name|openStream
+argument_list|()
+argument_list|,
+name|charset
+operator|.
+name|name
+argument_list|()
+argument_list|,
+literal|""
+argument_list|)
+expr_stmt|;
+block|}
 block|}
 catch|catch
 parameter_list|(
@@ -361,9 +412,6 @@ argument_list|(
 literal|"Cannot read "
 operator|+
 name|source
-operator|.
-name|path
-argument_list|()
 argument_list|,
 name|e
 argument_list|)
