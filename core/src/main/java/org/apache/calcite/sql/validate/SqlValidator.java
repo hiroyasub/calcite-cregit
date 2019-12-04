@@ -397,6 +397,22 @@ name|calcite
 operator|.
 name|sql
 operator|.
+name|type
+operator|.
+name|SqlTypeCoercionRule
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
 name|validate
 operator|.
 name|implicit
@@ -1131,6 +1147,14 @@ comment|/** Get the type coercion instance. */
 name|TypeCoercion
 name|getTypeCoercion
 parameter_list|()
+function_decl|;
+comment|/**    * Sets the {@link SqlTypeCoercionRule} instance which defines the type conversion matrix    * for the explicit type coercion.    *    *<p>The {@code typeCoercionRules} setting should be thread safe.    * In the default implementation,    * the {@code typeCoercionRules} is set to a ThreadLocal variable.    *    * @param typeCoercionRules The {@link SqlTypeCoercionRule} instance, see its documentation    *                          for how to customize the rules.    */
+name|void
+name|setSqlTypeCoercionRules
+parameter_list|(
+name|SqlTypeCoercionRule
+name|typeCoercionRules
+parameter_list|)
 function_decl|;
 block|}
 end_interface

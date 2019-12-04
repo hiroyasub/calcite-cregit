@@ -1264,7 +1264,7 @@ return|return
 literal|false
 return|;
 block|}
-comment|// Should keep sync with rules in SqlTypeAssignmentRules.
+comment|// Should keep sync with rules in SqlTypeCoercionRule.
 assert|assert
 name|SqlTypeUtil
 operator|.

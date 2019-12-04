@@ -2958,7 +2958,7 @@ return|return
 literal|false
 return|;
 block|}
-comment|/**    * Compares two types and returns true if fromType can be cast to toType.    *    *<p>REVIEW jvs 17-Dec-2004: the coerce param below shouldn't really be    * necessary. We're using it as a hack because    * {@link SqlTypeFactoryImpl#leastRestrictiveSqlType} isn't complete enough    * yet.  Once it is, this param (and the non-coerce rules of    * {@link SqlTypeAssignmentRules}) should go away.    *    * @param toType   target of assignment    * @param fromType source of assignment    * @param coerce   if true, the SQL rules for CAST are used; if false, the    *                 rules are similar to Java; e.g. you can't assign short x =    *                 (int) y, and you can't assign int x = (String) z.    * @return true iff cast is legal    */
+comment|/**    * Compares two types and returns true if fromType can be cast to toType.    *    *<p>REVIEW jvs 17-Dec-2004: the coerce param below shouldn't really be    * necessary. We're using it as a hack because    * {@link SqlTypeFactoryImpl#leastRestrictive} isn't complete enough    * yet.  Once it is, this param (and the non-coerce rules of    * {@link SqlTypeAssignmentRule}) should go away.    *    * @param toType   target of assignment    * @param fromType source of assignment    * @param coerce   if true, the SQL rules for CAST are used; if false, the    *                 rules are similar to Java; e.g. you can't assign short x =    *                 (int) y, and you can't assign int x = (String) z.    * @return true iff cast is legal    */
 specifier|public
 specifier|static
 name|boolean
@@ -3430,10 +3430,10 @@ comment|// here; instead, we do that in SqlCastFunction.  The reason is that
 comment|// this method is called from at least one place (MedJdbcNameDirectory)
 comment|// where internally a cast across character repertoires is OK.  Should
 comment|// probably clean that up.
-name|SqlTypeAssignmentRules
+name|SqlTypeMappingRule
 name|rules
 init|=
-name|SqlTypeAssignmentRules
+name|SqlTypeMappingRules
 operator|.
 name|instance
 argument_list|(
@@ -3443,7 +3443,7 @@ decl_stmt|;
 return|return
 name|rules
 operator|.
-name|canCastFrom
+name|canApplyFrom
 argument_list|(
 name|toTypeName
 argument_list|,

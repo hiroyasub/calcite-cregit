@@ -375,7 +375,7 @@ name|sql
 operator|.
 name|type
 operator|.
-name|SqlTypeAssignmentRules
+name|SqlTypeAssignmentRule
 import|;
 end_import
 
@@ -13767,14 +13767,12 @@ control|)
 block|{
 if|if
 condition|(
-name|SqlTypeAssignmentRules
+name|SqlTypeAssignmentRule
 operator|.
 name|instance
-argument_list|(
-literal|false
-argument_list|)
+argument_list|()
 operator|.
-name|canCastFrom
+name|canApplyFrom
 argument_list|(
 name|toType
 operator|.
