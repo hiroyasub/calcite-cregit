@@ -2781,6 +2781,72 @@ literal|true
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testAggregate7
+parameter_list|()
+block|{
+try|try
+init|(
+name|TryThreadLocal
+operator|.
+name|Memo
+name|ignored
+init|=
+name|Prepare
+operator|.
+name|THREAD_TRIM
+operator|.
+name|push
+argument_list|(
+literal|true
+argument_list|)
+init|)
+block|{
+name|MaterializationService
+operator|.
+name|setThreadLocal
+argument_list|()
+expr_stmt|;
+name|CalciteAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|withMaterializations
+argument_list|(
+name|HR_FKUK_MODEL
+argument_list|,
+literal|"m0"
+argument_list|,
+literal|"select 11 as \"empno\", 22 as \"sal\", count(*) from \"emps\" group by 11, 22"
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select * from\n"
+operator|+
+literal|"(select 11 as \"empno\", 22 as \"sal\", count(*)\n"
+operator|+
+literal|"from \"emps\" group by 11, 22) tmp\n"
+operator|+
+literal|"where \"sal\" = 33"
+argument_list|)
+operator|.
+name|enableMaterializations
+argument_list|(
+literal|true
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+literal|"EnumerableValues(tuples=[[]])"
+argument_list|)
+expr_stmt|;
+block|}
+block|}
 comment|/**    * There will be a compensating Project added after matching of the Aggregate.    * This rule targets to test if the Calc can be handled.    */
 annotation|@
 name|Test

@@ -2786,6 +2786,27 @@ operator|.
 name|build
 argument_list|()
 expr_stmt|;
+comment|// No need to do anything if it's a leaf node.
+if|if
+condition|(
+name|viewWithFilter
+operator|.
+name|getInputs
+argument_list|()
+operator|.
+name|isEmpty
+argument_list|()
+condition|)
+block|{
+name|call
+operator|.
+name|transformTo
+argument_list|(
+name|viewWithFilter
+argument_list|)
+expr_stmt|;
+return|return;
+block|}
 comment|// We add (and push) the filter to the view plan before triggering the rewriting.
 comment|// This is useful in case some of the columns can be folded to same value after
 comment|// filter is added.
