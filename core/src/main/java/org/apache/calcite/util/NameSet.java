@@ -168,9 +168,7 @@ name|asMap
 argument_list|(
 name|names
 argument_list|,
-parameter_list|(
 name|k
-parameter_list|)
 lambda|->
 name|DUMMY
 argument_list|)

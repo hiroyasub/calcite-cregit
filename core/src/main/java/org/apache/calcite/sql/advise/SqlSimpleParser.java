@@ -930,7 +930,7 @@ name|String
 argument_list|,
 name|TokenType
 argument_list|>
-name|map
+name|TOKEN_TYPES
 init|=
 operator|new
 name|HashMap
@@ -950,7 +950,7 @@ name|values
 argument_list|()
 control|)
 block|{
-name|map
+name|TOKEN_TYPES
 operator|.
 name|put
 argument_list|(
@@ -1491,8 +1491,8 @@ name|COMMENT
 argument_list|)
 return|;
 block|}
-comment|// fall through
 block|}
+comment|// fall through
 case|case
 literal|'-'
 case|:
@@ -1666,7 +1666,7 @@ decl_stmt|;
 name|TokenType
 name|tokenType
 init|=
-name|map
+name|TOKEN_TYPES
 operator|.
 name|get
 argument_list|(
@@ -1952,7 +1952,6 @@ name|Token
 argument_list|>
 name|tokenList
 decl_stmt|;
-specifier|public
 name|Query
 parameter_list|(
 name|List

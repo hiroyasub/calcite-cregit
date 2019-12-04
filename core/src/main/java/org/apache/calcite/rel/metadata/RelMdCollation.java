@@ -1599,16 +1599,9 @@ argument_list|()
 operator|.
 name|map
 argument_list|(
-parameter_list|(
-name|p
-parameter_list|)
-lambda|->
 name|program
-operator|.
+operator|::
 name|expandLocalRef
-argument_list|(
-name|p
-argument_list|)
 argument_list|)
 operator|.
 name|collect
