@@ -28510,6 +28510,67 @@ expr_stmt|;
 block|}
 end_function
 
+begin_comment
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3565">[CALCITE-3565]    * Explicitly cast assignable operand types to decimal for udf</a>. */
+end_comment
+
+begin_function
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testAssignableTypeCast
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"SELECT ST_MakePoint(1, 2.1)"
+decl_stmt|;
+name|CalciteAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|CalciteAssert
+operator|.
+name|Config
+operator|.
+name|GEO
+argument_list|)
+operator|.
+name|query
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|planContains
+argument_list|(
+literal|"static final java.math.BigDecimal $L4J$C$new_java_math_BigDecimal_1_ = "
+operator|+
+literal|"new java.math.BigDecimal(\n"
+operator|+
+literal|"              1)"
+argument_list|)
+operator|.
+name|planContains
+argument_list|(
+literal|"org.apache.calcite.runtime.GeoFunctions.ST_MakePoint("
+operator|+
+literal|"$L4J$C$new_java_math_BigDecimal_1_, v)"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"EXPR$0={\"x\":1,\"y\":2.1}\n"
+argument_list|)
+expr_stmt|;
+block|}
+end_function
+
 begin_function
 annotation|@
 name|Test
