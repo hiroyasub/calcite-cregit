@@ -9937,7 +9937,7 @@ literal|"empid=150; deptno=10; name=Sebastian; salary=7000.0; commission=null"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2381">[CALCITE-2391]    * Aggregate query with UNNEST or LATERAL fails with    * ClassCastException</a>. */
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2391">[CALCITE-2391]    * Aggregate query with UNNEST or LATERAL fails with    * ClassCastException</a>. */
 annotation|@
 name|Test
 specifier|public

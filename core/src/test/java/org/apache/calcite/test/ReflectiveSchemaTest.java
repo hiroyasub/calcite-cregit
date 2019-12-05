@@ -4383,7 +4383,7 @@ literal|"V=1970-01-01 00:00:00"
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-281">[CALCITE-1919]    * NPE when target in ReflectiveSchema belongs to the unnamed package</a>. */
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1919">[CALCITE-1919]    * NPE when target in ReflectiveSchema belongs to the unnamed package</a>. */
 annotation|@
 name|Test
 specifier|public

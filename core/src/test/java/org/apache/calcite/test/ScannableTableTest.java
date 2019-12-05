@@ -2019,7 +2019,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1031">[CALCITE-3405]    * Prune columns for ProjectableFilterable when project is not simple mapping</a>. */
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3405">[CALCITE-3405]    * Prune columns for ProjectableFilterable when project is not simple mapping</a>. */
 annotation|@
 name|Test
 specifier|public
@@ -2120,7 +2120,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1031">[CALCITE-3405]    * Prune columns for ProjectableFilterable when project is not simple mapping</a>. */
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3405">[CALCITE-3405]    * Prune columns for ProjectableFilterable when project is not simple mapping</a>. */
 annotation|@
 name|Test
 specifier|public

@@ -6801,7 +6801,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-648">[CALCITE-649]    * Update ProjectMergeRule description for new naming convention</a>. */
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-648">[CALCITE-648]    * Update ProjectMergeRule description for new naming convention</a>. */
 annotation|@
 name|Test
 specifier|public
