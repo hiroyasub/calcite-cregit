@@ -3293,6 +3293,36 @@ name|expectedVertica
 init|=
 name|expectedPostgresql
 decl_stmt|;
+specifier|final
+name|String
+name|expectedBigQuery
+init|=
+literal|"SELECT SUM(net_weight1) AS net_weight_converted\n"
+operator|+
+literal|"FROM (SELECT SUM(net_weight) AS net_weight1\n"
+operator|+
+literal|"FROM foodmart.product\n"
+operator|+
+literal|"GROUP BY product_id) AS t1"
+decl_stmt|;
+specifier|final
+name|String
+name|expectedHive
+init|=
+literal|"SELECT SUM(net_weight1) net_weight_converted\n"
+operator|+
+literal|"FROM (SELECT SUM(net_weight) net_weight1\n"
+operator|+
+literal|"FROM foodmart.product\n"
+operator|+
+literal|"GROUP BY product_id) t1"
+decl_stmt|;
+specifier|final
+name|String
+name|expectedSpark
+init|=
+name|expectedHive
+decl_stmt|;
 name|sql
 argument_list|(
 name|query
@@ -3328,6 +3358,30 @@ operator|.
 name|ok
 argument_list|(
 name|expectedPostgresql
+argument_list|)
+operator|.
+name|withBigQuery
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expectedBigQuery
+argument_list|)
+operator|.
+name|withHive
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expectedHive
+argument_list|)
+operator|.
+name|withSpark
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expectedSpark
 argument_list|)
 expr_stmt|;
 block|}

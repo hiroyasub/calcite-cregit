@@ -380,6 +380,17 @@ annotation|@
 name|Override
 specifier|public
 name|boolean
+name|supportsNestedAggregations
+parameter_list|()
+block|{
+return|return
+literal|false
+return|;
+block|}
+annotation|@
+name|Override
+specifier|public
+name|boolean
 name|supportsGroupByWithCube
 parameter_list|()
 block|{
