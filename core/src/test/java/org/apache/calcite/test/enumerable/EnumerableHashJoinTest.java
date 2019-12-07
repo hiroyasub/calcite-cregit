@@ -207,11 +207,9 @@ argument_list|)
 operator|.
 name|explainContains
 argument_list|(
-literal|"EnumerableCalc(expr#0..4=[{inputs}], expr#5=[>($t0,"
+literal|"EnumerableCalc(expr#0..4=[{inputs}], empid=[$t0], name=[$t2], dept=[$t4])\n"
 operator|+
-literal|" $t3)], empid=[$t0], name=[$t2], dept=[$t4], $condition=[$t5])\n"
-operator|+
-literal|"  EnumerableHashJoin(condition=[=($1, $3)], joinType=[inner])\n"
+literal|"  EnumerableHashJoin(condition=[AND(=($1, $3),>($0, $3))], joinType=[inner])\n"
 operator|+
 literal|"    EnumerableCalc(expr#0..4=[{inputs}], expr#5=[150], "
 operator|+
