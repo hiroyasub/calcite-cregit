@@ -1514,6 +1514,17 @@ operator|.
 name|build
 argument_list|()
 decl_stmt|;
+name|restructured
+operator|=
+name|RelOptUtil
+operator|.
+name|copyRelHints
+argument_list|(
+name|flattened
+argument_list|,
+name|restructured
+argument_list|)
+expr_stmt|;
 comment|// REVIEW jvs 23-Mar-2005:  How do we make sure that this
 comment|// implementation stays in Java?  Fennel can't handle
 comment|// structured types.
@@ -4431,6 +4442,8 @@ name|newRel
 argument_list|)
 expr_stmt|;
 block|}
+else|else
+block|{
 name|newRel
 operator|=
 name|RelOptUtil
@@ -4442,6 +4455,7 @@ argument_list|,
 name|newRel
 argument_list|)
 expr_stmt|;
+block|}
 name|setNewForOldRel
 argument_list|(
 name|rel
@@ -4558,6 +4572,17 @@ argument_list|)
 operator|.
 name|build
 argument_list|()
+expr_stmt|;
+name|newRel
+operator|=
+name|RelOptUtil
+operator|.
+name|copyRelHints
+argument_list|(
+name|rel
+argument_list|,
+name|newRel
+argument_list|)
 expr_stmt|;
 return|return
 name|newRel

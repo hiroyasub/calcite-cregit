@@ -476,7 +476,7 @@ annotation|@
 name|Override
 specifier|public
 name|RelNode
-name|attachHints
+name|withHints
 parameter_list|(
 name|List
 argument_list|<
@@ -494,10 +494,7 @@ argument_list|()
 argument_list|,
 name|traitSet
 argument_list|,
-name|mergeHints
-argument_list|(
 name|hintList
-argument_list|)
 argument_list|,
 name|table
 argument_list|)

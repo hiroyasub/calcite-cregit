@@ -122,40 +122,10 @@ specifier|public
 interface|interface
 name|Hintable
 block|{
-comment|/**    * Attach list of hints to this relational expression, should be overridden by    * every logical node that supports hint. This method is only for    * internal use during sql-to-rel conversion.    *    *<p>The sub-class should return a new copy of the relational expression. We make    * the default implementation return the relational expression directly only    * because not every kind of relational expression supports hints.    *    * @param hintList The hints to attach to this relational expression    * @return Relational expression with the hints {@code hintList} attached    */
+comment|/**    * Attaches list of hints to this relational expression, should be overridden by    * every logical node that supports hint. This method is only for    * internal use during sql-to-rel conversion.    *    *<p>The sub-class should return a new copy of the relational expression.    *    *<p>The default implementation merges the given hints with existing ones,    * put them in one list and eliminate the duplicates; then    * returns a new copy of this relational expression with the merged hints.    *    * @param hintList The hints to attach to this relational expression    * @return Relational expression with the hints {@code hintList} attached    */
 specifier|default
 name|RelNode
 name|attachHints
-parameter_list|(
-name|List
-argument_list|<
-name|RelHint
-argument_list|>
-name|hintList
-parameter_list|)
-block|{
-return|return
-operator|(
-name|RelNode
-operator|)
-name|this
-return|;
-block|}
-comment|/**    * @return The hints list of this relational expressions    */
-name|ImmutableList
-argument_list|<
-name|RelHint
-argument_list|>
-name|getHints
-parameter_list|()
-function_decl|;
-comment|/**    * Merge this relation expression's hints with the given hint list.    *    *<p>The default behavior is to put them in one list and eliminate the duplicates.    *    * @param hintList Hints to be merged    * @return A merged hint list    */
-specifier|default
-name|List
-argument_list|<
-name|RelHint
-argument_list|>
-name|mergeHints
 parameter_list|(
 name|List
 argument_list|<
@@ -194,14 +164,44 @@ name|hintList
 argument_list|)
 expr_stmt|;
 return|return
+name|withHints
+argument_list|(
 operator|new
 name|ArrayList
 argument_list|<>
 argument_list|(
 name|hints
 argument_list|)
+argument_list|)
 return|;
 block|}
+comment|/**    * Returns a new relation expression with the specified hints {@code hintList}.    *    *<p>This method should be overridden by every logical node that supports hint.    * It is only for internal use during decorrelation.    *    *<p>The sub-class should return a new copy of the relational expression.    *    *<p>We make the default implementation return the relational expression directly    * only because not every kind of relational expression supports hints.    *    * @return Relational expression with set up hints    */
+specifier|default
+name|RelNode
+name|withHints
+parameter_list|(
+name|List
+argument_list|<
+name|RelHint
+argument_list|>
+name|hintList
+parameter_list|)
+block|{
+return|return
+operator|(
+name|RelNode
+operator|)
+name|this
+return|;
+block|}
+comment|/**    * Returns the hints of this relational expressions as a list.    */
+name|ImmutableList
+argument_list|<
+name|RelHint
+argument_list|>
+name|getHints
+parameter_list|()
+function_decl|;
 block|}
 end_interface
 

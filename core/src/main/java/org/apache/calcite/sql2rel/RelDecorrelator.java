@@ -1670,6 +1670,18 @@ name|newRootRel
 argument_list|)
 expr_stmt|;
 block|}
+comment|// Re-propagate the hints.
+name|newRootRel
+operator|=
+name|RelOptUtil
+operator|.
+name|propagateRelHints
+argument_list|(
+name|newRootRel
+argument_list|,
+literal|true
+argument_list|)
+expr_stmt|;
 return|return
 name|newRootRel
 return|;
@@ -3255,6 +3267,17 @@ operator|.
 name|build
 argument_list|()
 decl_stmt|;
+name|newProject
+operator|=
+name|RelOptUtil
+operator|.
+name|copyRelHints
+argument_list|(
+name|newInput
+argument_list|,
+name|newProject
+argument_list|)
+expr_stmt|;
 comment|// update mappings:
 comment|// oldInput ----> newInput
 comment|//
@@ -3721,7 +3744,7 @@ name|corDefOutputs
 argument_list|)
 return|;
 block|}
-comment|/**    * Shift the mapping to fixed offset from the {@code startIndex}.    * @param mapping    the original mapping    * @param startIndex any output whose index equals with or bigger than the starting index    *                   would be shift    * @param offset     shift offset    */
+comment|/**    * Shift the mapping to fixed offset from the {@code startIndex}.    *    * @param mapping    The original mapping    * @param startIndex Any output whose index equals with or bigger than the starting index    *                   would be shift    * @param offset     Shift offset    */
 specifier|private
 specifier|static
 name|void
@@ -4242,6 +4265,17 @@ operator|.
 name|build
 argument_list|()
 decl_stmt|;
+name|newProject
+operator|=
+name|RelOptUtil
+operator|.
+name|copyRelHints
+argument_list|(
+name|rel
+argument_list|,
+name|newProject
+argument_list|)
+expr_stmt|;
 return|return
 name|register
 argument_list|(
@@ -6666,7 +6700,6 @@ return|return
 literal|null
 return|;
 block|}
-specifier|final
 name|RelNode
 name|newJoin
 init|=
@@ -6716,6 +6749,17 @@ operator|.
 name|build
 argument_list|()
 decl_stmt|;
+name|newJoin
+operator|=
+name|RelOptUtil
+operator|.
+name|copyRelHints
+argument_list|(
+name|rel
+argument_list|,
+name|newJoin
+argument_list|)
+expr_stmt|;
 comment|// Create the mapping between the output of the old correlation rel
 comment|// and the new join rel
 name|Map
