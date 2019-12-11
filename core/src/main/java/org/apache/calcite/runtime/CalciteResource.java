@@ -4283,6 +4283,29 @@ name|String
 name|value
 parameter_list|)
 function_decl|;
+annotation|@
+name|BaseMessage
+argument_list|(
+literal|"Illegal behavior ''{0}'' EXTRACTVALUE: document: ''{1}'', xpath expression:"
+operator|+
+literal|" ''{2}''"
+argument_list|)
+name|ExInst
+argument_list|<
+name|CalciteException
+argument_list|>
+name|illegalBehaviorInExtractValueFunc
+parameter_list|(
+name|String
+name|errorBehavior
+parameter_list|,
+name|String
+name|value
+parameter_list|,
+name|String
+name|xpath
+parameter_list|)
+function_decl|;
 block|}
 end_interface
 

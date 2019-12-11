@@ -23080,6 +23080,126 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testExtractValue
+parameter_list|()
+block|{
+name|SqlTester
+name|mySqlTester
+init|=
+name|tester
+argument_list|(
+name|SqlLibrary
+operator|.
+name|MYSQL
+argument_list|)
+decl_stmt|;
+name|mySqlTester
+operator|.
+name|checkNull
+argument_list|(
+literal|"ExtractValue(NULL, '//b')"
+argument_list|)
+expr_stmt|;
+name|mySqlTester
+operator|.
+name|checkNull
+argument_list|(
+literal|"ExtractValue('', NULL)"
+argument_list|)
+expr_stmt|;
+name|mySqlTester
+operator|.
+name|checkFails
+argument_list|(
+literal|"ExtractValue('<a><b/></a>', '#/a/b')"
+argument_list|,
+literal|"Illegal behavior '.*"
+argument_list|,
+literal|true
+argument_list|)
+expr_stmt|;
+name|mySqlTester
+operator|.
+name|checkFails
+argument_list|(
+literal|"ExtractValue('<a><b/></a></a>', '/b')"
+argument_list|,
+literal|"Illegal behavior '.*"
+argument_list|,
+literal|true
+argument_list|)
+expr_stmt|;
+name|mySqlTester
+operator|.
+name|checkString
+argument_list|(
+literal|"ExtractValue('<a>c</a>', '//a')"
+argument_list|,
+literal|"c"
+argument_list|,
+literal|"VARCHAR(2000)"
+argument_list|)
+expr_stmt|;
+name|mySqlTester
+operator|.
+name|checkString
+argument_list|(
+literal|"ExtractValue('<a>ccc<b>ddd</b></a>', '/a')"
+argument_list|,
+literal|"ccc"
+argument_list|,
+literal|"VARCHAR(2000)"
+argument_list|)
+expr_stmt|;
+name|mySqlTester
+operator|.
+name|checkString
+argument_list|(
+literal|"ExtractValue('<a>ccc<b>ddd</b></a>', '/a/b')"
+argument_list|,
+literal|"ddd"
+argument_list|,
+literal|"VARCHAR(2000)"
+argument_list|)
+expr_stmt|;
+name|mySqlTester
+operator|.
+name|checkString
+argument_list|(
+literal|"ExtractValue('<a>ccc<b>ddd</b></a>', '/b')"
+argument_list|,
+literal|""
+argument_list|,
+literal|"VARCHAR(2000)"
+argument_list|)
+expr_stmt|;
+name|mySqlTester
+operator|.
+name|checkString
+argument_list|(
+literal|"ExtractValue('<a>ccc<b>ddd</b><b>eee</b></a>', '//b')"
+argument_list|,
+literal|"ddd eee"
+argument_list|,
+literal|"VARCHAR(2000)"
+argument_list|)
+expr_stmt|;
+name|mySqlTester
+operator|.
+name|checkString
+argument_list|(
+literal|"ExtractValue('<a><b/></a>', 'count(/a/b)')"
+argument_list|,
+literal|"1"
+argument_list|,
+literal|"VARCHAR(2000)"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testLowerFunc
 parameter_list|()
 block|{

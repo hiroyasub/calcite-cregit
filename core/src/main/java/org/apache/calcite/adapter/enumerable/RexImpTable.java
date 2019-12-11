@@ -1207,6 +1207,24 @@ name|fun
 operator|.
 name|SqlLibraryOperators
 operator|.
+name|EXTRACT_VALUE
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|fun
+operator|.
+name|SqlLibraryOperators
+operator|.
 name|FROM_BASE64
 import|;
 end_import
@@ -6415,6 +6433,22 @@ argument_list|,
 name|NullPolicy
 operator|.
 name|STRICT
+argument_list|)
+expr_stmt|;
+comment|// Xml Operators
+name|defineMethod
+argument_list|(
+name|EXTRACT_VALUE
+argument_list|,
+name|BuiltInMethod
+operator|.
+name|EXTRACT_VALUE
+operator|.
+name|method
+argument_list|,
+name|NullPolicy
+operator|.
+name|ARG0
 argument_list|)
 expr_stmt|;
 comment|// Json Operators
