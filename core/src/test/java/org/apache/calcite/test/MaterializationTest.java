@@ -7295,16 +7295,12 @@ argument_list|)
 expr_stmt|;
 block|}
 annotation|@
-name|Disabled
-annotation|@
 name|Test
 specifier|public
 name|void
 name|testJoinMaterialization8
 parameter_list|()
 block|{
-comment|// TODO: fails with java.lang.ClassCastException:
-comment|//  java.lang.String$CaseInsensitiveComparator cannot be cast to java.lang.String
 name|checkMaterialize
 argument_list|(
 literal|"select \"depts\".\"name\"\n"
@@ -7339,16 +7335,12 @@ argument_list|)
 expr_stmt|;
 block|}
 annotation|@
-name|Disabled
-annotation|@
 name|Test
 specifier|public
 name|void
 name|testJoinMaterialization9
 parameter_list|()
 block|{
-comment|// TODO: fails with java.lang.ClassCastException:
-comment|//  java.lang.String$CaseInsensitiveComparator cannot be cast to java.lang.String
 name|checkMaterialize
 argument_list|(
 literal|"select \"depts\".\"name\"\n"

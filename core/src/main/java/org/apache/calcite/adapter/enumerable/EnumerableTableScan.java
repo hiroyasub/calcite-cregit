@@ -1465,6 +1465,12 @@ name|isAssignableFrom
 argument_list|(
 name|elementType
 argument_list|)
+operator|||
+name|String
+operator|.
+name|class
+operator|==
+name|elementType
 operator|)
 condition|)
 block|{
