@@ -18901,6 +18901,29 @@ argument_list|(
 literal|"Table 'E' not found"
 argument_list|)
 expr_stmt|;
+comment|// fail: deptno is ambiguous
+name|sql
+argument_list|(
+literal|"select ^deptno^, name from "
+operator|+
+name|depts
+operator|+
+literal|"as d\n"
+operator|+
+literal|"join "
+operator|+
+name|emps
+operator|+
+literal|"as e\n"
+operator|+
+literal|"on d.deptno = e.deptno"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Column 'DEPTNO' is ambiguous"
+argument_list|)
+expr_stmt|;
 block|}
 annotation|@
 name|Test

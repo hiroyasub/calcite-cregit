@@ -1316,6 +1316,149 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3387">[CALCITE-3387]    * Query with GROUP BY and JOIN ... USING wrongly fails with    * "Column 'DEPTNO' is ambiguous"</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testJoinUsingWithUnqualifiedCommonColumn
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"SELECT deptno, name\n"
+operator|+
+literal|"FROM emp JOIN dept using (deptno)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+comment|/** Similar to {@link #testJoinUsingWithUnqualifiedCommonColumn()},    * but with nested common column. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testJoinUsingWithUnqualifiedNestedCommonColumn
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select (coord).x from\n"
+operator|+
+literal|"customer.contact_peek t1\n"
+operator|+
+literal|"join customer.contact_peek t2\n"
+operator|+
+literal|"using (coord)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+comment|/** Similar to {@link #testJoinUsingWithUnqualifiedCommonColumn()},    * but with aggregate. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testJoinUsingWithAggregate
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select deptno, count(*)\n"
+operator|+
+literal|"from emp\n"
+operator|+
+literal|"full join dept using (deptno)\n"
+operator|+
+literal|"group by deptno"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+comment|/** Similar to {@link #testJoinUsingWithUnqualifiedCommonColumn()},    * but with grouping sets. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testJoinUsingWithGroupingSets
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select deptno, grouping(deptno),\n"
+operator|+
+literal|"grouping(deptno, job), count(*)\n"
+operator|+
+literal|"from emp\n"
+operator|+
+literal|"join dept using (deptno)\n"
+operator|+
+literal|"group by grouping sets ((deptno), (deptno, job))"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+comment|/** Similar to {@link #testJoinUsingWithUnqualifiedCommonColumn()},    * but with multiple join. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testJoinUsingWithMultipleJoin
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"SELECT deptno, ename\n"
+operator|+
+literal|"FROM emp "
+operator|+
+literal|"JOIN dept using (deptno)\n"
+operator|+
+literal|"JOIN (values ('Calcite', 200)) as s(ename, salary) using (ename)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
 annotation|@
 name|Test
 specifier|public
