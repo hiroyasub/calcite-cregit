@@ -96,13 +96,6 @@ specifier|public
 class|class
 name|ReflectVisitorTest
 block|{
-comment|//~ Constructors -----------------------------------------------------------
-specifier|public
-name|ReflectVisitorTest
-parameter_list|()
-block|{
-block|}
-comment|//~ Methods ----------------------------------------------------------------
 comment|/**    * Tests CarelessNumberNegater.    */
 annotation|@
 name|Test

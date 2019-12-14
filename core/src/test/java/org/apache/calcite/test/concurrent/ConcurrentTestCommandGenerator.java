@@ -240,7 +240,6 @@ specifier|public
 class|class
 name|ConcurrentTestCommandGenerator
 block|{
-comment|//~ Static fields/initializers ---------------------------------------------
 specifier|private
 specifier|static
 specifier|final
@@ -273,7 +272,6 @@ name|RIGHT_BRACKET
 init|=
 literal|'}'
 decl_stmt|;
-comment|//~ Instance fields --------------------------------------------------------
 specifier|protected
 name|boolean
 name|debug
@@ -383,7 +381,6 @@ name|FailedThread
 argument_list|>
 name|failedThreads
 decl_stmt|;
-comment|//~ Constructors -----------------------------------------------------------
 comment|/**    * Constructs a new ConcurrentTestCommandGenerator.    */
 specifier|public
 name|ConcurrentTestCommandGenerator
@@ -2068,9 +2065,6 @@ specifier|private
 name|AutoSynchronizationCommand
 parameter_list|()
 block|{
-name|super
-argument_list|()
-expr_stmt|;
 block|}
 block|}
 comment|/**    * SleepCommand causes the execution thread to wait for all other threads in    * the test before continuing.    */

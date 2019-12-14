@@ -359,7 +359,6 @@ specifier|private
 name|boolean
 name|verbose
 decl_stmt|;
-comment|//~ Constructors -----------------------------------------------------------
 comment|/**    * Initializes a new DiffTestCase.    *    * @param testCaseName Test case name    */
 specifier|protected
 name|DiffTestCase

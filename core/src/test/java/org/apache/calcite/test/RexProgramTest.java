@@ -804,15 +804,6 @@ name|RexProgramTest
 extends|extends
 name|RexProgramBuilderBase
 block|{
-comment|/**    * Creates a RexProgramTest.    */
-specifier|public
-name|RexProgramTest
-parameter_list|()
-block|{
-name|super
-argument_list|()
-expr_stmt|;
-block|}
 annotation|@
 name|BeforeEach
 specifier|public

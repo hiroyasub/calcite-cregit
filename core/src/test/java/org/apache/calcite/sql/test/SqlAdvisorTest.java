@@ -414,7 +414,6 @@ operator|::
 operator|new
 argument_list|)
 decl_stmt|;
-comment|//~ Static fields/initializers ---------------------------------------------
 specifier|private
 specifier|static
 specifier|final
@@ -1195,16 +1194,6 @@ literal|"COLUMN(EMPNO)\n"
 operator|+
 literal|"TABLE(EMP)\n"
 decl_stmt|;
-comment|//~ Constructors -----------------------------------------------------------
-specifier|public
-name|SqlAdvisorTest
-parameter_list|()
-block|{
-name|super
-argument_list|()
-expr_stmt|;
-block|}
-comment|//~ Methods ----------------------------------------------------------------
 specifier|protected
 name|List
 argument_list|<

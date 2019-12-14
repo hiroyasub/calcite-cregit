@@ -687,13 +687,6 @@ name|RelDataTypeField
 argument_list|>
 name|empDeptJoinRelFields
 decl_stmt|;
-comment|//~ Constructors -----------------------------------------------------------
-specifier|public
-name|RelOptUtilTest
-parameter_list|()
-block|{
-block|}
-comment|//~ Methods ----------------------------------------------------------------
 annotation|@
 name|BeforeEach
 specifier|public

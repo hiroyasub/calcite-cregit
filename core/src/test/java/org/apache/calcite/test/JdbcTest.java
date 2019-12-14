@@ -31637,9 +31637,6 @@ name|String
 name|tableName
 parameter_list|)
 block|{
-name|super
-argument_list|()
-expr_stmt|;
 block|}
 specifier|public
 name|TableModify
@@ -31723,9 +31720,6 @@ specifier|protected
 name|AbstractModifiableView
 parameter_list|()
 block|{
-name|super
-argument_list|()
-expr_stmt|;
 block|}
 block|}
 end_class
@@ -32176,9 +32170,6 @@ argument_list|>
 name|results
 parameter_list|)
 block|{
-name|super
-argument_list|()
-expr_stmt|;
 name|this
 operator|.
 name|results

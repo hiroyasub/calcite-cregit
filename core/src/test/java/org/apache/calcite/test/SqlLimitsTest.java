@@ -296,14 +296,6 @@ specifier|public
 class|class
 name|SqlLimitsTest
 block|{
-comment|//~ Static fields/initializers ---------------------------------------------
-comment|//~ Constructors -----------------------------------------------------------
-specifier|public
-name|SqlLimitsTest
-parameter_list|()
-block|{
-block|}
-comment|//~ Methods ----------------------------------------------------------------
 specifier|protected
 name|DiffRepository
 name|getDiffRepos

@@ -81,9 +81,6 @@ name|int
 name|pPartkey
 parameter_list|)
 block|{
-name|super
-argument_list|()
-expr_stmt|;
 name|this
 operator|.
 name|pPartkey
@@ -131,9 +128,6 @@ name|int
 name|psSupplyCost
 parameter_list|)
 block|{
-name|super
-argument_list|()
-expr_stmt|;
 name|this
 operator|.
 name|psPartkey

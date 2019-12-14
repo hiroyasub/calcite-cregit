@@ -1064,13 +1064,6 @@ specifier|public
 class|class
 name|UtilTest
 block|{
-comment|//~ Constructors -----------------------------------------------------------
-specifier|public
-name|UtilTest
-parameter_list|()
-block|{
-block|}
-comment|//~ Methods ----------------------------------------------------------------
 annotation|@
 name|Test
 specifier|public

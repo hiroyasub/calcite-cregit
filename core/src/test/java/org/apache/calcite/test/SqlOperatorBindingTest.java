@@ -346,16 +346,6 @@ specifier|private
 name|SqlDataTypeSpec
 name|integerType
 decl_stmt|;
-comment|//~ Methods ----------------------------------------------------------------
-comment|/**    * Creates a SqlOperatorBindingTest.    */
-specifier|public
-name|SqlOperatorBindingTest
-parameter_list|()
-block|{
-name|super
-argument_list|()
-expr_stmt|;
-block|}
 annotation|@
 name|BeforeEach
 specifier|public

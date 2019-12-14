@@ -456,7 +456,6 @@ specifier|private
 name|RelDataType
 name|varchar20Type
 decl_stmt|;
-comment|//~ Constructors -----------------------------------------------------------
 specifier|public
 name|TypeCoercionTest
 parameter_list|()

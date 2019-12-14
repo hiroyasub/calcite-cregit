@@ -240,7 +240,6 @@ name|SqlValidatorFeatureTest
 extends|extends
 name|SqlValidatorTestCase
 block|{
-comment|//~ Static fields/initializers ---------------------------------------------
 specifier|private
 specifier|static
 specifier|final
@@ -249,21 +248,10 @@ name|FEATURE_DISABLED
 init|=
 literal|"feature_disabled"
 decl_stmt|;
-comment|//~ Instance fields --------------------------------------------------------
 specifier|private
 name|Feature
 name|disabledFeature
 decl_stmt|;
-comment|//~ Constructors -----------------------------------------------------------
-specifier|public
-name|SqlValidatorFeatureTest
-parameter_list|()
-block|{
-name|super
-argument_list|()
-expr_stmt|;
-block|}
-comment|//~ Methods ----------------------------------------------------------------
 annotation|@
 name|Override
 specifier|public

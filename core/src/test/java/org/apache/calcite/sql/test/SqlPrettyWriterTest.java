@@ -258,15 +258,6 @@ specifier|public
 class|class
 name|SqlPrettyWriterTest
 block|{
-comment|//~ Static fields/initializers ---------------------------------------------
-comment|//~ Constructors -----------------------------------------------------------
-specifier|public
-name|SqlPrettyWriterTest
-parameter_list|()
-block|{
-block|}
-comment|//~ Methods ----------------------------------------------------------------
-comment|// ~ Helper methods -------------------------------------------------------
 specifier|protected
 name|DiffRepository
 name|getDiffRepos

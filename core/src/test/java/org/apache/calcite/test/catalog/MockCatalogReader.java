@@ -1255,7 +1255,6 @@ name|MockCatalogReader
 extends|extends
 name|CalciteCatalogReader
 block|{
-comment|//~ Static fields/initializers ---------------------------------------------
 specifier|static
 specifier|final
 name|String
@@ -1285,8 +1284,6 @@ argument_list|(
 name|DEFAULT_SCHEMA
 argument_list|)
 decl_stmt|;
-comment|//~ Instance fields --------------------------------------------------------
-comment|//~ Constructors -----------------------------------------------------------
 comment|/**    * Creates a MockCatalogReader.    *    *<p>Caller must then call {@link #init} to populate with data.</p>    *    * @param typeFactory Type factory    */
 specifier|public
 name|MockCatalogReader

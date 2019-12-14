@@ -28,13 +28,6 @@ name|SqlUnParserTest
 extends|extends
 name|SqlParserTest
 block|{
-comment|//~ Constructors -----------------------------------------------------------
-specifier|public
-name|SqlUnParserTest
-parameter_list|()
-block|{
-block|}
-comment|//~ Methods ----------------------------------------------------------------
 annotation|@
 name|Override
 specifier|protected

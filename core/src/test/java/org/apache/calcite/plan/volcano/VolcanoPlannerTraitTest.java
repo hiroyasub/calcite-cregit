@@ -494,7 +494,6 @@ specifier|public
 class|class
 name|VolcanoPlannerTraitTest
 block|{
-comment|//~ Static fields/initializers ---------------------------------------------
 comment|/**    * Private calling convention representing a generic "physical" calling    * convention.    */
 specifier|private
 specifier|static
@@ -578,13 +577,6 @@ name|altTraitOrdinal
 init|=
 literal|0
 decl_stmt|;
-comment|//~ Constructors -----------------------------------------------------------
-specifier|public
-name|VolcanoPlannerTraitTest
-parameter_list|()
-block|{
-block|}
-comment|//~ Methods ----------------------------------------------------------------
 annotation|@
 name|Disabled
 annotation|@

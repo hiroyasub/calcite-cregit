@@ -446,7 +446,6 @@ name|ConcurrentTestCommandScript
 extends|extends
 name|ConcurrentTestCommandGenerator
 block|{
-comment|//~ Static fields/initializers ---------------------------------------------
 specifier|private
 specifier|static
 specifier|final
@@ -1580,7 +1579,6 @@ name|HashMap
 argument_list|<>
 argument_list|()
 decl_stmt|;
-comment|//~ Constructors -----------------------------------------------------------
 specifier|public
 name|ConcurrentTestCommandScript
 parameter_list|()

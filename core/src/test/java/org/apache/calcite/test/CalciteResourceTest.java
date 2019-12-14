@@ -86,13 +86,6 @@ specifier|public
 class|class
 name|CalciteResourceTest
 block|{
-comment|//~ Constructors -----------------------------------------------------------
-specifier|public
-name|CalciteResourceTest
-parameter_list|()
-block|{
-block|}
-comment|//~ Methods ----------------------------------------------------------------
 comment|/**    * Verifies that resource properties such as SQLSTATE are available at    * runtime.    */
 annotation|@
 name|Test

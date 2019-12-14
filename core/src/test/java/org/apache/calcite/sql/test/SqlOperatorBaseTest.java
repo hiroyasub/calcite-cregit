@@ -1716,7 +1716,6 @@ specifier|final
 name|SqlTester
 name|strictTester
 decl_stmt|;
-comment|//~ Constructors -----------------------------------------------------------
 comment|/**    * Creates a SqlOperatorBaseTest.    *    * @param enable Whether to run "failing" tests.    * @param tester Means to validate, execute various statements.    */
 specifier|protected
 name|SqlOperatorBaseTest
@@ -1757,7 +1756,6 @@ literal|false
 argument_list|)
 expr_stmt|;
 block|}
-comment|//~ Methods ----------------------------------------------------------------
 annotation|@
 name|BeforeEach
 specifier|public

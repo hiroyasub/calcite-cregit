@@ -323,9 +323,6 @@ specifier|public
 name|HrClusteredSchema
 parameter_list|()
 block|{
-name|super
-argument_list|()
-expr_stmt|;
 name|tables
 operator|=
 name|ImmutableMap

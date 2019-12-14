@@ -1029,16 +1029,6 @@ literal|"RANK or DENSE_RANK "
 operator|+
 literal|"functions require ORDER BY clause in window specification"
 decl_stmt|;
-comment|//~ Constructors -----------------------------------------------------------
-specifier|public
-name|SqlValidatorTest
-parameter_list|()
-block|{
-name|super
-argument_list|()
-expr_stmt|;
-block|}
-comment|//~ Methods ----------------------------------------------------------------
 specifier|private
 specifier|static
 name|String

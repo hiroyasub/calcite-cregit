@@ -434,7 +434,6 @@ specifier|public
 class|class
 name|SqlValidatorTestCase
 block|{
-comment|//~ Static fields/initializers ---------------------------------------------
 specifier|private
 specifier|static
 specifier|final
@@ -499,12 +498,10 @@ operator|.
 name|LENIENT
 argument_list|)
 decl_stmt|;
-comment|//~ Instance fields --------------------------------------------------------
 specifier|protected
 name|SqlTester
 name|tester
 decl_stmt|;
-comment|//~ Constructors -----------------------------------------------------------
 comment|/**    * Creates a test case.    */
 specifier|public
 name|SqlValidatorTestCase
@@ -982,7 +979,6 @@ name|expectedCoercibility
 argument_list|)
 expr_stmt|;
 block|}
-comment|//~ Inner Interfaces -------------------------------------------------------
 comment|/**    * Encapsulates differences between test environments, for example, which    * SQL parser or validator to use.    *    *<p>It contains a mock schema with<code>EMP</code> and<code>DEPT</code>    * tables, which can run without having to start up Farrago.    */
 specifier|public
 interface|interface

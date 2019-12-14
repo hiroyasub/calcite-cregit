@@ -91,7 +91,6 @@ name|ConcurrentTestCommandExecutor
 extends|extends
 name|Thread
 block|{
-comment|//~ Instance fields --------------------------------------------------------
 comment|/**    * The id for this thread.    */
 specifier|private
 name|Integer
@@ -151,7 +150,6 @@ specifier|private
 name|ConcurrentTestCommand
 name|errorCommand
 decl_stmt|;
-comment|//~ Constructors -----------------------------------------------------------
 comment|/**    * Constructs a ConcurrentTestCommandExecutor with the given thread    * ID, JDBC URL, commands and synchronization object.    *    * @param threadId         the thread ID    *                         (see {@link ConcurrentTestCommandGenerator})    * @param threadName       the thread's name    * @param jdbcURL          the JDBC URL to connect to    * @param jdbcProps        JDBC Connection properties (user, password, etc.)    * @param commands         the sequence of commands to execute -- null    *                         elements indicate no-ops    * @param synchronizer     synchronization object (may not be null);    * @param debugPrintStream if non-null a PrintStream to use for debugging    *                         output (may help debugging thread synchronization    */
 name|ConcurrentTestCommandExecutor
 parameter_list|(

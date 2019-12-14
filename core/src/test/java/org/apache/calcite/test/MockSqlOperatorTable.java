@@ -310,13 +310,11 @@ name|MockSqlOperatorTable
 extends|extends
 name|ChainedSqlOperatorTable
 block|{
-comment|//~ Instance fields --------------------------------------------------------
 specifier|private
 specifier|final
 name|ListSqlOperatorTable
 name|listOpTab
 decl_stmt|;
-comment|//~ Constructors -----------------------------------------------------------
 specifier|public
 name|MockSqlOperatorTable
 parameter_list|(
@@ -351,7 +349,6 @@ literal|1
 argument_list|)
 expr_stmt|;
 block|}
-comment|//~ Methods ----------------------------------------------------------------
 comment|/**    * Adds an operator to this table.    */
 specifier|public
 name|void

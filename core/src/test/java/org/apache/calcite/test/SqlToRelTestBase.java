@@ -983,15 +983,6 @@ argument_list|(
 literal|false
 argument_list|)
 decl_stmt|;
-comment|//~ Methods ----------------------------------------------------------------
-specifier|public
-name|SqlToRelTestBase
-parameter_list|()
-block|{
-name|super
-argument_list|()
-expr_stmt|;
-block|}
 specifier|protected
 name|Tester
 name|createTester

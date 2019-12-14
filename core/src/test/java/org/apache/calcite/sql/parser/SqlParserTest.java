@@ -730,7 +730,6 @@ specifier|public
 class|class
 name|SqlParserTest
 block|{
-comment|//~ Static fields/initializers ---------------------------------------------
 comment|/**    * List of reserved keywords.    *    *<p>Each keyword is followed by tokens indicating whether it is reserved in    * the SQL:92, SQL:99, SQL:2003, SQL:2011, SQL:2014 standards and in Calcite.    *    *<p>The standard keywords are derived from    *<a href="https://developer.mimer.com/wp-content/uploads/2018/05/Standard-SQL-Reserved-Words-Summary.pdf">Mimer</a>    * and from the specification.    *    *<p>If a new<b>reserved</b> keyword is added to the parser, include it in    * this list, flagged "c". If the keyword is not intended to be a reserved    * keyword, add it to the non-reserved keyword list in the parser.    */
 specifier|private
 specifier|static
@@ -5384,14 +5383,6 @@ name|SqlConformanceEnum
 operator|.
 name|DEFAULT
 decl_stmt|;
-comment|//~ Constructors -----------------------------------------------------------
-specifier|public
-name|SqlParserTest
-parameter_list|()
-block|{
-block|}
-comment|//~ Methods ----------------------------------------------------------------
-comment|// Helper functions -------------------------------------------------------
 specifier|protected
 name|Tester
 name|getTester

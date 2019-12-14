@@ -246,13 +246,6 @@ specifier|public
 class|class
 name|PermutationTestCase
 block|{
-comment|//~ Constructors -----------------------------------------------------------
-specifier|public
-name|PermutationTestCase
-parameter_list|()
-block|{
-block|}
-comment|//~ Methods ----------------------------------------------------------------
 annotation|@
 name|Test
 specifier|public

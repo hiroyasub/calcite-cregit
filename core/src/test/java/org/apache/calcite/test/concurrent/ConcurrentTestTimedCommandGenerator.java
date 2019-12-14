@@ -92,7 +92,6 @@ name|ConcurrentTestTimedCommandGenerator
 extends|extends
 name|ConcurrentTestCommandGenerator
 block|{
-comment|//~ Instance fields --------------------------------------------------------
 specifier|private
 name|int
 name|runTimeSeconds
@@ -101,7 +100,6 @@ specifier|private
 name|long
 name|endTimeMillis
 decl_stmt|;
-comment|//~ Constructors -----------------------------------------------------------
 comment|/**    * Constructs a new ConcurrentTestTimedCommandGenerator that will run    * for at least the given amount of time. See    * {@link ConcurrentTestTimedCommandGenerator} for more information on the    * semantics of run-time length.    *    * @param runTimeSeconds minimum run-time length, in seconds    */
 specifier|public
 name|ConcurrentTestTimedCommandGenerator
@@ -110,9 +108,6 @@ name|int
 name|runTimeSeconds
 parameter_list|)
 block|{
-name|super
-argument_list|()
-expr_stmt|;
 name|this
 operator|.
 name|runTimeSeconds
@@ -120,7 +115,6 @@ operator|=
 name|runTimeSeconds
 expr_stmt|;
 block|}
-comment|//~ Methods ----------------------------------------------------------------
 comment|/**    * Retrieves an Iterator based on the configured commands. This Iterator,    * when it reaches the end of the command list will compare the current time    * with the test's end time. If there is time left, the Iterator will repeat    * the command sequence.    *    *<p>The test's end time is computed by taking the value of<code>    * System.currentTimeMillis()</code> the first time this method is called    * (across all thread IDs) and adding the configured run time.    *    * @param threadId the thread ID to get an Iterator on    */
 name|Iterable
 argument_list|<

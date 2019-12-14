@@ -461,7 +461,6 @@ specifier|final
 name|Filter
 name|filter
 decl_stmt|;
-comment|//~ Constructors -----------------------------------------------------------
 comment|/**    * Creates a DiffRepository.    *    * @param refFile   Reference file    * @param logFile   Log file    * @param baseRepository Parent repository or null    * @param filter    Filter or null    */
 specifier|private
 name|DiffRepository
