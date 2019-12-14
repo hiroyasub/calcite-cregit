@@ -165,7 +165,9 @@ name|apache
 operator|.
 name|calcite
 operator|.
-name|test
+name|testlib
+operator|.
+name|annotations
 operator|.
 name|WithLex
 import|;

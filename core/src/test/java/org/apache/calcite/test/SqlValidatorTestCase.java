@@ -281,6 +281,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|testlib
+operator|.
+name|annotations
+operator|.
+name|WithLex
+import|;
+end_import
+
+begin_import
+import|import
 name|com
 operator|.
 name|google

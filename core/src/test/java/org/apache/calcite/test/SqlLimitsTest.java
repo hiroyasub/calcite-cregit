@@ -173,6 +173,22 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|testlib
+operator|.
+name|annotations
+operator|.
+name|LocaleEnUs
+import|;
+end_import
+
+begin_import
+import|import
 name|com
 operator|.
 name|google
@@ -182,20 +198,6 @@ operator|.
 name|collect
 operator|.
 name|ImmutableList
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|junit
-operator|.
-name|jupiter
-operator|.
-name|api
-operator|.
-name|BeforeAll
 import|;
 end_import
 
@@ -288,6 +290,8 @@ comment|/**  * Unit test for SQL limits.  */
 end_comment
 
 begin_class
+annotation|@
+name|LocaleEnUs
 specifier|public
 class|class
 name|SqlLimitsTest
@@ -543,26 +547,6 @@ literal|0
 argument_list|)
 argument_list|)
 return|;
-block|}
-annotation|@
-name|BeforeAll
-specifier|public
-specifier|static
-name|void
-name|setUSLocale
-parameter_list|()
-block|{
-comment|// This ensures numbers in exceptions are printed as in asserts.
-comment|// For example, 1,000 vs 1 000
-name|Locale
-operator|.
-name|setDefault
-argument_list|(
-name|Locale
-operator|.
-name|US
-argument_list|)
-expr_stmt|;
 block|}
 annotation|@
 name|Test

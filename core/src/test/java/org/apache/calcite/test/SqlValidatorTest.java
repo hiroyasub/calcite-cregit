@@ -489,6 +489,22 @@ name|apache
 operator|.
 name|calcite
 operator|.
+name|testlib
+operator|.
+name|annotations
+operator|.
+name|LocaleEnUs
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
 name|util
 operator|.
 name|Bug
@@ -534,20 +550,6 @@ operator|.
 name|collect
 operator|.
 name|Ordering
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|junit
-operator|.
-name|jupiter
-operator|.
-name|api
-operator|.
-name|BeforeAll
 import|;
 end_import
 
@@ -878,6 +880,8 @@ comment|/**  * Concrete child class of {@link SqlValidatorTestCase}, containing 
 end_comment
 
 begin_class
+annotation|@
+name|LocaleEnUs
 specifier|public
 class|class
 name|SqlValidatorTest
@@ -1035,26 +1039,6 @@ argument_list|()
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-annotation|@
-name|BeforeAll
-specifier|public
-specifier|static
-name|void
-name|setUSLocale
-parameter_list|()
-block|{
-comment|// This ensures numbers in exceptions are printed as in asserts.
-comment|// For example, 1,000 vs 1 000
-name|Locale
-operator|.
-name|setDefault
-argument_list|(
-name|Locale
-operator|.
-name|US
-argument_list|)
-expr_stmt|;
-block|}
 specifier|private
 specifier|static
 name|String
