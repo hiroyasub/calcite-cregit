@@ -4286,21 +4286,16 @@ function_decl|;
 annotation|@
 name|BaseMessage
 argument_list|(
-literal|"Illegal behavior ''{0}'' EXTRACTVALUE: document: ''{1}'', xpath expression:"
-operator|+
-literal|" ''{2}''"
+literal|"Invalid input for EXTRACTVALUE: xml: ''{0}'', xpath expression: ''{1}''"
 argument_list|)
 name|ExInst
 argument_list|<
 name|CalciteException
 argument_list|>
-name|illegalBehaviorInExtractValueFunc
+name|invalidInputForExtractValue
 parameter_list|(
 name|String
-name|errorBehavior
-parameter_list|,
-name|String
-name|value
+name|xml
 parameter_list|,
 name|String
 name|xpath

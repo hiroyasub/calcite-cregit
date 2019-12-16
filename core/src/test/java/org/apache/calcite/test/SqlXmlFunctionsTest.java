@@ -183,13 +183,7 @@ decl_stmt|;
 name|String
 name|message
 init|=
-literal|"Illegal behavior "
-operator|+
-literal|"'javax.xml.xpath.XPathExpressionException: javax.xml.transform.TransformerException: "
-operator|+
-literal|"A location path was expected, but the following token was encountered:  #' "
-operator|+
-literal|"EXTRACTVALUE: document: '"
+literal|"Invalid input for EXTRACTVALUE: xml: '"
 operator|+
 name|input
 operator|+

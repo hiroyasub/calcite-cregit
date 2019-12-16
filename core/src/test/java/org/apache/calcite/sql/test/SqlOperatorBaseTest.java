@@ -23113,7 +23113,7 @@ name|checkFails
 argument_list|(
 literal|"ExtractValue('<a><b/></a>', '#/a/b')"
 argument_list|,
-literal|"Illegal behavior '.*"
+literal|"Invalid input for EXTRACTVALUE: xml: '.*"
 argument_list|,
 literal|true
 argument_list|)
@@ -23124,7 +23124,7 @@ name|checkFails
 argument_list|(
 literal|"ExtractValue('<a><b/></a></a>', '/b')"
 argument_list|,
-literal|"Illegal behavior '.*"
+literal|"Invalid input for EXTRACTVALUE: xml: '.*"
 argument_list|,
 literal|true
 argument_list|)

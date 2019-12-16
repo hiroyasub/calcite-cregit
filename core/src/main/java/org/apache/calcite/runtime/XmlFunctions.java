@@ -343,13 +343,8 @@ block|{
 throw|throw
 name|RESOURCE
 operator|.
-name|illegalBehaviorInExtractValueFunc
+name|invalidInputForExtractValue
 argument_list|(
-name|ex
-operator|.
-name|toString
-argument_list|()
-argument_list|,
 name|input
 argument_list|,
 name|xpath
