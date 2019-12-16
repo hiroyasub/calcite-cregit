@@ -23200,6 +23200,119 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testXmlTransform
+parameter_list|()
+block|{
+name|SqlTester
+name|sqlTester
+init|=
+name|tester
+argument_list|(
+name|SqlLibrary
+operator|.
+name|ORACLE
+argument_list|)
+decl_stmt|;
+name|sqlTester
+operator|.
+name|checkNull
+argument_list|(
+literal|"XMLTRANSFORM('', NULL)"
+argument_list|)
+expr_stmt|;
+name|sqlTester
+operator|.
+name|checkNull
+argument_list|(
+literal|"XMLTRANSFORM(NULL,'')"
+argument_list|)
+expr_stmt|;
+name|sqlTester
+operator|.
+name|checkFails
+argument_list|(
+literal|"XMLTRANSFORM('', '<')"
+argument_list|,
+literal|"Illegal xslt specified : '.*"
+argument_list|,
+literal|true
+argument_list|)
+expr_stmt|;
+name|sqlTester
+operator|.
+name|checkFails
+argument_list|(
+literal|"XMLTRANSFORM('<', '<?xml version=\"1.0\"?>\n"
+operator|+
+literal|"<xsl:stylesheet version=\"1.0\" xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\">"
+operator|+
+literal|"</xsl:stylesheet>')"
+argument_list|,
+literal|"Invalid input for XMLTRANSFORM xml: '.*"
+argument_list|,
+literal|true
+argument_list|)
+expr_stmt|;
+name|sqlTester
+operator|.
+name|checkString
+argument_list|(
+literal|"XMLTRANSFORM("
+operator|+
+literal|"'<?xml version=\"1.0\"?>\n"
+operator|+
+literal|"<Article>\n"
+operator|+
+literal|"<Title>My Article</Title>\n"
+operator|+
+literal|"<Authors>\n"
+operator|+
+literal|"<Author>Mr. Foo</Author>\n"
+operator|+
+literal|"<Author>Mr. Bar</Author>\n"
+operator|+
+literal|"</Authors>\n"
+operator|+
+literal|"<Body>This is my article text.</Body>\n"
+operator|+
+literal|"</Article>'"
+operator|+
+literal|","
+operator|+
+literal|"'<?xml version=\"1.0\"?>\n"
+operator|+
+literal|"<xsl:stylesheet version=\"1.0\" xmlns:xsl=\"http://www.w3"
+operator|+
+literal|".org/1999/XSL/Transform\">"
+operator|+
+literal|"<xsl:output method=\"text\"/>"
+operator|+
+literal|"<xsl:template match=\"/\">"
+operator|+
+literal|"    Article -<xsl:value-of select=\"/Article/Title\"/>"
+operator|+
+literal|"    Authors:<xsl:apply-templates select=\"/Article/Authors/Author\"/>"
+operator|+
+literal|"</xsl:template>"
+operator|+
+literal|"<xsl:template match=\"Author\">"
+operator|+
+literal|"    -<xsl:value-of select=\".\" />"
+operator|+
+literal|"</xsl:template>"
+operator|+
+literal|"</xsl:stylesheet>')"
+argument_list|,
+literal|"    Article - My Article    Authors:     - Mr. Foo    - Mr. Bar"
+argument_list|,
+literal|"VARCHAR(2000)"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testLowerFunc
 parameter_list|()
 block|{

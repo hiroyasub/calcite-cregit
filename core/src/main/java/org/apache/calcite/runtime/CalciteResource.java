@@ -4286,6 +4286,36 @@ function_decl|;
 annotation|@
 name|BaseMessage
 argument_list|(
+literal|"Illegal xslt specified : ''{0}''"
+argument_list|)
+name|ExInst
+argument_list|<
+name|CalciteException
+argument_list|>
+name|illegalXslt
+parameter_list|(
+name|String
+name|xslt
+parameter_list|)
+function_decl|;
+annotation|@
+name|BaseMessage
+argument_list|(
+literal|"Invalid input for XMLTRANSFORM xml: ''{0}''"
+argument_list|)
+name|ExInst
+argument_list|<
+name|CalciteException
+argument_list|>
+name|invalidInputForXmlTransform
+parameter_list|(
+name|String
+name|xml
+parameter_list|)
+function_decl|;
+annotation|@
+name|BaseMessage
+argument_list|(
 literal|"Invalid input for EXTRACTVALUE: xml: ''{0}'', xpath expression: ''{1}''"
 argument_list|)
 name|ExInst
