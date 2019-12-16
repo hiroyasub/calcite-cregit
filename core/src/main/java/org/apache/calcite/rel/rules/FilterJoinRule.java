@@ -25,22 +25,6 @@ name|apache
 operator|.
 name|calcite
 operator|.
-name|adapter
-operator|.
-name|enumerable
-operator|.
-name|EnumerableConvention
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
 name|plan
 operator|.
 name|RelOptRule
@@ -380,31 +364,6 @@ parameter_list|)
 lambda|->
 literal|true
 decl_stmt|;
-comment|/** Predicate that returns true if the join is not Enumerable convention,    * will be replaced by {@link #TRUE_PREDICATE} once enumerable join supports    * non-equi join. */
-comment|// to be removed before 1.22.0
-specifier|private
-specifier|static
-specifier|final
-name|Predicate
-name|NOT_ENUMERABLE
-init|=
-parameter_list|(
-name|join
-parameter_list|,
-name|joinType
-parameter_list|,
-name|exp
-parameter_list|)
-lambda|->
-name|join
-operator|.
-name|getConvention
-argument_list|()
-operator|!=
-name|EnumerableConvention
-operator|.
-name|INSTANCE
-decl_stmt|;
 comment|/** Rule that pushes predicates from a Filter into the Join below them. */
 specifier|public
 specifier|static
@@ -421,7 +380,7 @@ name|RelFactories
 operator|.
 name|LOGICAL_BUILDER
 argument_list|,
-name|NOT_ENUMERABLE
+name|TRUE_PREDICATE
 argument_list|)
 decl_stmt|;
 comment|/** Dumber version of {@link #FILTER_ON_JOIN}. Not intended for production    * use, but keeps some tests working for which {@code FILTER_ON_JOIN} is too    * smart. */
@@ -440,7 +399,7 @@ name|RelFactories
 operator|.
 name|LOGICAL_BUILDER
 argument_list|,
-name|NOT_ENUMERABLE
+name|TRUE_PREDICATE
 argument_list|)
 decl_stmt|;
 comment|/** Rule that pushes predicates in a Join into the inputs to the join. */
@@ -457,7 +416,7 @@ name|RelFactories
 operator|.
 name|LOGICAL_BUILDER
 argument_list|,
-name|NOT_ENUMERABLE
+name|TRUE_PREDICATE
 argument_list|)
 decl_stmt|;
 comment|/** Whether to try to strengthen join-type. */
@@ -566,7 +525,7 @@ argument_list|,
 name|projectFactory
 argument_list|)
 argument_list|,
-name|NOT_ENUMERABLE
+name|TRUE_PREDICATE
 argument_list|)
 expr_stmt|;
 block|}

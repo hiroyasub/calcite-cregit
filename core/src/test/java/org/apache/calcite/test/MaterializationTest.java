@@ -7843,17 +7843,13 @@ specifier|final
 name|String
 name|expected
 init|=
-literal|"EnumerableAggregate(group=[{4}], S=[$SUM0($6)])\n"
+literal|"EnumerableAggregate(group=[{0}], S=[$SUM0($2)])\n"
 operator|+
-literal|"  EnumerableCalc(expr#0..6=[{inputs}], expr#7=[=($t5, $t0)], "
+literal|"  EnumerableHashJoin(condition=[=($1, $3)], joinType=[inner])\n"
 operator|+
-literal|"proj#0..6=[{exprs}], $condition=[$t7])\n"
+literal|"    EnumerableTableScan(table=[[hr, m0]])\n"
 operator|+
-literal|"    EnumerableNestedLoopJoin(condition=[true], joinType=[inner])\n"
-operator|+
-literal|"      EnumerableTableScan(table=[[hr, depts]])\n"
-operator|+
-literal|"      EnumerableTableScan(table=[[hr, m0]])"
+literal|"    EnumerableTableScan(table=[[hr, depts]])"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -7909,17 +7905,13 @@ specifier|final
 name|String
 name|expected
 init|=
-literal|"EnumerableAggregate(group=[{1}], S=[$SUM0($6)])\n"
+literal|"EnumerableAggregate(group=[{4}], S=[$SUM0($2)])\n"
 operator|+
-literal|"  EnumerableCalc(expr#0..6=[{inputs}], expr#7=[=($t5, $t0)], "
+literal|"  EnumerableHashJoin(condition=[=($1, $3)], joinType=[inner])\n"
 operator|+
-literal|"proj#0..6=[{exprs}], $condition=[$t7])\n"
+literal|"    EnumerableTableScan(table=[[hr, m0]])\n"
 operator|+
-literal|"    EnumerableNestedLoopJoin(condition=[true], joinType=[inner])\n"
-operator|+
-literal|"      EnumerableTableScan(table=[[hr, depts]])\n"
-operator|+
-literal|"      EnumerableTableScan(table=[[hr, m0]])"
+literal|"    EnumerableTableScan(table=[[hr, depts]])"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -8417,13 +8409,17 @@ argument_list|)
 operator|.
 name|withResultContains
 argument_list|(
-literal|"EnumerableCalc(expr#0..2=[{inputs}], empid=[$t0])\n"
+literal|"EnumerableCalc(expr#0..4=[{inputs}], empid=[$t2])\n"
 operator|+
-literal|"  EnumerableNestedLoopJoin(condition=[=(CAST($1):VARCHAR, CAST($2):VARCHAR)], joinType=[inner])\n"
+literal|"  EnumerableHashJoin(condition=[=($1, $4)], joinType=[inner])\n"
 operator|+
-literal|"    EnumerableTableScan(table=[[hr, dependents]])\n"
+literal|"    EnumerableCalc(expr#0=[{inputs}], expr#1=[CAST($t0):VARCHAR], proj#0..1=[{exprs}])\n"
 operator|+
-literal|"    EnumerableTableScan(table=[[hr, m0]])"
+literal|"      EnumerableTableScan(table=[[hr, m0]])\n"
+operator|+
+literal|"    EnumerableCalc(expr#0..1=[{inputs}], expr#2=[CAST($t1):VARCHAR], proj#0..2=[{exprs}])\n"
+operator|+
+literal|"      EnumerableTableScan(table=[[hr, dependents]])"
 argument_list|)
 operator|.
 name|ok
@@ -8891,7 +8887,9 @@ literal|"  EnumerableAggregate(group=[{1}])\n"
 operator|+
 literal|"    EnumerableHashJoin(condition=[=($1, $3)], joinType=[inner])\n"
 operator|+
-literal|"      EnumerableTableScan(table=[[hr, m0]])"
+literal|"      EnumerableTableScan(table=[[hr, m0]])\n"
+operator|+
+literal|"      EnumerableTableScan(table=[[hr, depts]])"
 argument_list|)
 operator|.
 name|ok
@@ -8927,7 +8925,9 @@ literal|"  EnumerableAggregate(group=[{1}], EXPR$0=[$SUM0($3)])\n"
 operator|+
 literal|"    EnumerableHashJoin(condition=[=($1, $4)], joinType=[inner])\n"
 operator|+
-literal|"      EnumerableTableScan(table=[[hr, m0]])"
+literal|"      EnumerableTableScan(table=[[hr, m0]])\n"
+operator|+
+literal|"      EnumerableTableScan(table=[[hr, depts]])"
 argument_list|)
 operator|.
 name|ok

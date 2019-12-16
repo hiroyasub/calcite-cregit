@@ -706,7 +706,9 @@ operator|=
 name|rightRowCount
 expr_stmt|;
 block|}
-return|return
+name|RelOptCost
+name|cost
+init|=
 name|planner
 operator|.
 name|getCostFactory
@@ -720,6 +722,19 @@ literal|0
 argument_list|,
 literal|0
 argument_list|)
+decl_stmt|;
+comment|// Give it some penalty
+name|cost
+operator|=
+name|cost
+operator|.
+name|multiplyBy
+argument_list|(
+literal|10
+argument_list|)
+expr_stmt|;
+return|return
+name|cost
 return|;
 block|}
 specifier|public
