@@ -3276,6 +3276,8 @@ argument_list|(
 name|newInput
 argument_list|,
 name|newProject
+argument_list|,
+literal|false
 argument_list|)
 expr_stmt|;
 comment|// update mappings:
@@ -3726,10 +3728,12 @@ name|postProjects
 argument_list|)
 expr_stmt|;
 block|}
-comment|// Aggregate does not change input ordering so corVars will be
-comment|// located at the same position as the input newProject.
-return|return
-name|register
+name|RelNode
+name|newRel
+init|=
+name|RelOptUtil
+operator|.
+name|copyRelHints
 argument_list|(
 name|rel
 argument_list|,
@@ -3737,6 +3741,18 @@ name|relBuilder
 operator|.
 name|build
 argument_list|()
+argument_list|,
+literal|false
+argument_list|)
+decl_stmt|;
+comment|// Aggregate does not change input ordering so corVars will be
+comment|// located at the same position as the input newProject.
+return|return
+name|register
+argument_list|(
+name|rel
+argument_list|,
+name|newRel
 argument_list|,
 name|outputMap
 argument_list|,
@@ -4274,6 +4290,8 @@ argument_list|(
 name|rel
 argument_list|,
 name|newProject
+argument_list|,
+literal|false
 argument_list|)
 expr_stmt|;
 return|return
@@ -6758,6 +6776,8 @@ argument_list|(
 name|rel
 argument_list|,
 name|newJoin
+argument_list|,
+literal|false
 argument_list|)
 expr_stmt|;
 comment|// Create the mapping between the output of the old correlation rel

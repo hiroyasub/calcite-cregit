@@ -1523,6 +1523,8 @@ argument_list|(
 name|flattened
 argument_list|,
 name|restructured
+argument_list|,
+literal|false
 argument_list|)
 expr_stmt|;
 comment|// REVIEW jvs 23-Mar-2005:  How do we make sure that this
@@ -2571,6 +2573,8 @@ argument_list|(
 name|rel
 argument_list|,
 name|newRel
+argument_list|,
+literal|false
 argument_list|)
 expr_stmt|;
 name|setNewForOldRel
@@ -2960,6 +2964,8 @@ argument_list|(
 name|rel
 argument_list|,
 name|newRel
+argument_list|,
+literal|false
 argument_list|)
 expr_stmt|;
 name|setNewForOldRel
@@ -4453,6 +4459,8 @@ argument_list|(
 name|rel
 argument_list|,
 name|newRel
+argument_list|,
+literal|false
 argument_list|)
 expr_stmt|;
 block|}
@@ -4582,6 +4590,8 @@ argument_list|(
 name|rel
 argument_list|,
 name|newRel
+argument_list|,
+literal|false
 argument_list|)
 expr_stmt|;
 return|return

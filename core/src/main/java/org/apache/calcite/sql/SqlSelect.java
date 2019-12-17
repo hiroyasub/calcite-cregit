@@ -379,6 +379,8 @@ argument_list|,
 name|offset
 argument_list|,
 name|fetch
+argument_list|,
+name|hints
 argument_list|)
 return|;
 block|}

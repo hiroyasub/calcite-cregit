@@ -46,16 +46,26 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Strategy to decide if a hint should apply to a relational expression  * by using a series of {@link HintStrategy} rules in a given order.  * If a rule fails, returns false early, else return true.  */
+comment|/**  * This class allows multiple {@link HintStrategy} rules to be combined into one rule.  * The composition can be {@code AND} or {@code OR} currently.  */
 end_comment
 
 begin_class
 specifier|public
 class|class
-name|HintStrategyCascade
+name|CompositeHintStrategy
 implements|implements
 name|HintStrategy
 block|{
+comment|//~ Enums ------------------------------------------------------------------
+comment|/** How hint strategies are composed. */
+specifier|public
+enum|enum
+name|Composition
+block|{
+name|AND
+block|,
+name|OR
+block|}
 comment|//~ Instance fields --------------------------------------------------------
 specifier|private
 name|ImmutableList
@@ -64,9 +74,16 @@ name|HintStrategy
 argument_list|>
 name|strategies
 decl_stmt|;
-comment|/**    * Creates a HintStrategyCascade from an array of hint strategies.    *    *<p>Make this constructor package-protected intentionally.    * Use {@link HintStrategies#cascade}.</p>    */
-name|HintStrategyCascade
+specifier|private
+name|Composition
+name|composition
+decl_stmt|;
+comment|/**    * Creates a HintStrategyCascade with a {@link Composition} and an array of hint strategies.    *    *<p>Make this constructor package-protected intentionally.    * Use utility methods in {@link HintStrategies}    * to create a {@link CompositeHintStrategy}.</p>    */
+name|CompositeHintStrategy
 parameter_list|(
+name|Composition
+name|composition
+parameter_list|,
 name|HintStrategy
 modifier|...
 name|strategies
@@ -109,6 +126,12 @@ argument_list|(
 name|strategies
 argument_list|)
 expr_stmt|;
+name|this
+operator|.
+name|composition
+operator|=
+name|composition
+expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
 annotation|@
@@ -124,10 +147,43 @@ name|RelNode
 name|rel
 parameter_list|)
 block|{
+return|return
+name|supportsRel
+argument_list|(
+name|composition
+argument_list|,
+name|hint
+argument_list|,
+name|rel
+argument_list|)
+return|;
+block|}
+specifier|private
+name|boolean
+name|supportsRel
+parameter_list|(
+name|Composition
+name|composition
+parameter_list|,
+name|RelHint
+name|hint
+parameter_list|,
+name|RelNode
+name|rel
+parameter_list|)
+block|{
+switch|switch
+condition|(
+name|composition
+condition|)
+block|{
+case|case
+name|AND
+case|:
 for|for
 control|(
 name|HintStrategy
-name|strategy
+name|hintStrategy
 range|:
 name|strategies
 control|)
@@ -135,7 +191,7 @@ block|{
 if|if
 condition|(
 operator|!
-name|strategy
+name|hintStrategy
 operator|.
 name|supportsRel
 argument_list|(
@@ -153,6 +209,39 @@ block|}
 return|return
 literal|true
 return|;
+case|case
+name|OR
+case|:
+default|default:
+for|for
+control|(
+name|HintStrategy
+name|hintStrategy
+range|:
+name|strategies
+control|)
+block|{
+if|if
+condition|(
+name|hintStrategy
+operator|.
+name|supportsRel
+argument_list|(
+name|hint
+argument_list|,
+name|rel
+argument_list|)
+condition|)
+block|{
+return|return
+literal|true
+return|;
+block|}
+block|}
+return|return
+literal|false
+return|;
+block|}
 block|}
 block|}
 end_class

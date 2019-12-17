@@ -43,6 +43,22 @@ name|rel
 operator|.
 name|core
 operator|.
+name|Aggregate
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|core
+operator|.
 name|Join
 import|;
 end_import
@@ -122,6 +138,14 @@ comment|/**      * The hint would be propagated to the Project nodes.      */
 name|PROJECT
 argument_list|(
 name|Project
+operator|.
+name|class
+argument_list|)
+block|,
+comment|/**      * The hint would be propagated to the Aggregate nodes.      */
+name|AGGREGATE
+argument_list|(
+name|Aggregate
 operator|.
 name|class
 argument_list|)

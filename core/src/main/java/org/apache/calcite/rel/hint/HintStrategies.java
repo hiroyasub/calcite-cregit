@@ -95,6 +95,23 @@ operator|.
 name|PROJECT
 argument_list|)
 decl_stmt|;
+comment|/** A hint strategy that indicates a hint can only be used to    * {@link org.apache.calcite.rel.core.Aggregate} nodes. */
+specifier|public
+specifier|static
+specifier|final
+name|HintStrategy
+name|AGGREGATE
+init|=
+operator|new
+name|NodeTypeHintStrategy
+argument_list|(
+name|NodeTypeHintStrategy
+operator|.
+name|NodeType
+operator|.
+name|AGGREGATE
+argument_list|)
+decl_stmt|;
 comment|/**    * Create a hint strategy from a specific matcher whose rules are totally customized.    *    * @param matcher The strategy matcher    * @return A ExplicitHintStrategy instance.    */
 specifier|public
 specifier|static
@@ -113,11 +130,11 @@ name|matcher
 argument_list|)
 return|;
 block|}
-comment|/**    * Creates a HintStrategyCascade instance whose strategy rules are satisfied only if    * all the {@code hintStrategies} are satisfied.    */
+comment|/**    * Creates a {@link CompositeHintStrategy} instance whose strategy rules are satisfied only if    * all the {@code hintStrategies} are satisfied.    */
 specifier|public
 specifier|static
 name|HintStrategy
-name|cascade
+name|and
 parameter_list|(
 name|HintStrategy
 modifier|...
@@ -126,8 +143,39 @@ parameter_list|)
 block|{
 return|return
 operator|new
-name|HintStrategyCascade
+name|CompositeHintStrategy
 argument_list|(
+name|CompositeHintStrategy
+operator|.
+name|Composition
+operator|.
+name|AND
+argument_list|,
+name|hintStrategies
+argument_list|)
+return|;
+block|}
+comment|/**    * Creates a {@link CompositeHintStrategy} instance whose strategy rules are satisfied if    * one of the {@code hintStrategies} is satisfied.    */
+specifier|public
+specifier|static
+name|HintStrategy
+name|or
+parameter_list|(
+name|HintStrategy
+modifier|...
+name|hintStrategies
+parameter_list|)
+block|{
+return|return
+operator|new
+name|CompositeHintStrategy
+argument_list|(
+name|CompositeHintStrategy
+operator|.
+name|Composition
+operator|.
+name|OR
+argument_list|,
 name|hintStrategies
 argument_list|)
 return|;

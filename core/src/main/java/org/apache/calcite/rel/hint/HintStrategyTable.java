@@ -108,7 +108,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * {@code HintStrategy} collection indicating which kind of  * {@link org.apache.calcite.rel.RelNode} a hint can apply to.  *  *<p>Typically, every supported hints should register a {@code HintStrategy}  * in this collection. For example, {@link HintStrategies#JOIN} implies that this hint  * would be propagated and applied to the {@link org.apache.calcite.rel.core.Join}  * relational expressions.  *  *<p>A {@code HintStrategy} can be used independently or cascaded with other strategies  * with method {@link HintStrategies#cascade}.  *  *<p>The matching for hint name is case in-sensitive.  *  * @see HintStrategy  */
+comment|/**  * {@code HintStrategy} collection indicating which kind of  * {@link org.apache.calcite.rel.RelNode} a hint can apply to.  *  *<p>Typically, every supported hints should register a {@code HintStrategy}  * in this collection. For example, {@link HintStrategies#JOIN} implies that this hint  * would be propagated and applied to the {@link org.apache.calcite.rel.core.Join}  * relational expressions.  *  *<p>A {@code HintStrategy} can be used independently or cascaded with other strategies  * with method {@link HintStrategies#and}.  *  *<p>The matching for hint name is case in-sensitive.  *  * @see HintStrategy  */
 end_comment
 
 begin_class
