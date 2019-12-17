@@ -5848,8 +5848,8 @@ name|getRexBuilder
 argument_list|()
 decl_stmt|;
 comment|// Try pulling up MutableCalc only when:
-comment|// 1. it's inner join;
-comment|// 2. it's outer join but no filttering condition from MutableCalc.
+comment|// 1. it's inner join.
+comment|// 2. it's outer join but no filtering condition from MutableCalc.
 specifier|final
 name|JoinRelType
 name|joinRelType
@@ -6416,8 +6416,8 @@ name|getRexBuilder
 argument_list|()
 decl_stmt|;
 comment|// Try pulling up MutableCalc only when:
-comment|// 1. it's inner join;
-comment|// 2. it's outer join but no filttering condition from MutableCalc.
+comment|// 1. it's inner join.
+comment|// 2. it's outer join but no filtering condition from MutableCalc.
 specifier|final
 name|JoinRelType
 name|joinRelType
@@ -7031,8 +7031,8 @@ name|getRexBuilder
 argument_list|()
 decl_stmt|;
 comment|// Try pulling up MutableCalc only when:
-comment|// 1. it's inner join;
-comment|// 2. it's outer join but no filttering condition from MutableCalc.
+comment|// 1. it's inner join.
+comment|// 2. it's outer join but no filtering condition from MutableCalc.
 specifier|final
 name|JoinRelType
 name|joinRelType
