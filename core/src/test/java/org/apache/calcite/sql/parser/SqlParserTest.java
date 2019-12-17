@@ -15991,6 +15991,137 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testTemporalTable
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql0
+init|=
+literal|"select stream * from orders, products\n"
+operator|+
+literal|"for system_time as of TIMESTAMP '2011-01-02 00:00:00'"
+decl_stmt|;
+specifier|final
+name|String
+name|expected0
+init|=
+literal|"SELECT STREAM *\n"
+operator|+
+literal|"FROM `ORDERS`,\n"
+operator|+
+literal|"`PRODUCTS` FOR SYSTEM_TIME AS OF TIMESTAMP '2011-01-02 00:00:00'"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql0
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected0
+argument_list|)
+expr_stmt|;
+comment|// Can not use explicit LATERAL keyword.
+specifier|final
+name|String
+name|sql1
+init|=
+literal|"select stream * from orders, LATERAL ^products_temporal^\n"
+operator|+
+literal|"for system_time as of TIMESTAMP '2011-01-02 00:00:00'"
+decl_stmt|;
+specifier|final
+name|String
+name|expected1
+init|=
+literal|"(?s)Encountered \"products_temporal\" at line .*"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql1
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+name|expected1
+argument_list|)
+expr_stmt|;
+comment|// Inner join with a specific timestamp
+specifier|final
+name|String
+name|sql2
+init|=
+literal|"select stream * from orders join products_temporal\n"
+operator|+
+literal|"for system_time as of timestamp '2011-01-02 00:00:00'\n"
+operator|+
+literal|"on orders.productid = products_temporal.productid"
+decl_stmt|;
+specifier|final
+name|String
+name|expected2
+init|=
+literal|"SELECT STREAM *\n"
+operator|+
+literal|"FROM `ORDERS`\n"
+operator|+
+literal|"INNER JOIN `PRODUCTS_TEMPORAL` "
+operator|+
+literal|"FOR SYSTEM_TIME AS OF TIMESTAMP '2011-01-02 00:00:00' "
+operator|+
+literal|"ON (`ORDERS`.`PRODUCTID` = `PRODUCTS_TEMPORAL`.`PRODUCTID`)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql2
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected2
+argument_list|)
+expr_stmt|;
+comment|// Left join with a timestamp expression
+specifier|final
+name|String
+name|sql3
+init|=
+literal|"select stream * from orders left join products_temporal\n"
+operator|+
+literal|"for system_time as of orders.rowtime "
+operator|+
+literal|"on orders.productid = products_temporal.productid"
+decl_stmt|;
+specifier|final
+name|String
+name|expected3
+init|=
+literal|"SELECT STREAM *\n"
+operator|+
+literal|"FROM `ORDERS`\n"
+operator|+
+literal|"LEFT JOIN `PRODUCTS_TEMPORAL` "
+operator|+
+literal|"FOR SYSTEM_TIME AS OF `ORDERS`.`ROWTIME` "
+operator|+
+literal|"ON (`ORDERS`.`PRODUCTID` = `PRODUCTS_TEMPORAL`.`PRODUCTID`)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql3
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected3
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testCollectionTableWithLateral
 parameter_list|()
 block|{
