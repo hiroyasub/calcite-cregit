@@ -4498,7 +4498,7 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-comment|/**    * Creates a projection which casts a rel's output to a desired row type.    *    * @param rel         producer of rows to be converted    * @param castRowType row type after cast    * @param rename      if true, use field names from castRowType; if false,    *                    preserve field names from rel    * @return conversion rel    */
+comment|/**    * Creates a projection which casts a rel's output to a desired row type.    *    *<p>No need to create new projection if {@code rel} is already a project,    * instead, create a projection with the input of {@code rel} and the new    * cast expressions.    *    * @param rel         producer of rows to be converted    * @param castRowType row type after cast    * @param rename      if true, use field names from castRowType; if false,    *                    preserve field names from rel    * @return conversion rel    */
 specifier|public
 specifier|static
 name|RelNode
@@ -4530,7 +4530,7 @@ name|DEFAULT_PROJECT_FACTORY
 argument_list|)
 return|;
 block|}
-comment|/**    * Creates a projection which casts a rel's output to a desired row type.    *    * @param rel         producer of rows to be converted    * @param castRowType row type after cast    * @param rename      if true, use field names from castRowType; if false,    *                    preserve field names from rel    * @param projectFactory Project Factory    * @return conversion rel    */
+comment|/**    * Creates a projection which casts a rel's output to a desired row type.    *    *<p>No need to create new projection if {@code rel} is already a project,    * instead, create a projection with the input of {@code rel} and the new    * cast expressions.    *    * @param rel         producer of rows to be converted    * @param castRowType row type after cast    * @param rename      if true, use field names from castRowType; if false,    *                    preserve field names from rel    * @param projectFactory Project Factory    * @return conversion rel    */
 specifier|public
 specifier|static
 name|RelNode
@@ -4594,13 +4594,59 @@ operator|.
 name|getRexBuilder
 argument_list|()
 decl_stmt|;
-specifier|final
 name|List
 argument_list|<
 name|RexNode
 argument_list|>
 name|castExps
-init|=
+decl_stmt|;
+name|RelNode
+name|input
+decl_stmt|;
+if|if
+condition|(
+name|rel
+operator|instanceof
+name|Project
+condition|)
+block|{
+comment|// No need to create another project node if the rel
+comment|// is already a project.
+name|castExps
+operator|=
+name|RexUtil
+operator|.
+name|generateCastExpressions
+argument_list|(
+name|rexBuilder
+argument_list|,
+name|castRowType
+argument_list|,
+operator|(
+operator|(
+name|Project
+operator|)
+name|rel
+operator|)
+operator|.
+name|getProjects
+argument_list|()
+argument_list|)
+expr_stmt|;
+name|input
+operator|=
+name|rel
+operator|.
+name|getInput
+argument_list|(
+literal|0
+argument_list|)
+expr_stmt|;
+block|}
+else|else
+block|{
+name|castExps
+operator|=
 name|RexUtil
 operator|.
 name|generateCastExpressions
@@ -4611,7 +4657,12 @@ name|castRowType
 argument_list|,
 name|rowType
 argument_list|)
-decl_stmt|;
+expr_stmt|;
+name|input
+operator|=
+name|rel
+expr_stmt|;
+block|}
 if|if
 condition|(
 name|rename
@@ -4623,7 +4674,7 @@ name|projectFactory
 operator|.
 name|createProject
 argument_list|(
-name|rel
+name|input
 argument_list|,
 name|castExps
 argument_list|,
@@ -4642,7 +4693,7 @@ name|projectFactory
 operator|.
 name|createProject
 argument_list|(
-name|rel
+name|input
 argument_list|,
 name|castExps
 argument_list|,
