@@ -788,6 +788,7 @@ index|]
 argument_list|)
 return|;
 block|}
+specifier|public
 specifier|static
 name|Class
 index|[]
@@ -1348,6 +1349,7 @@ index|]
 argument_list|)
 return|;
 block|}
+specifier|public
 specifier|static
 name|boolean
 name|allAssignable

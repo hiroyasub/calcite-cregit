@@ -16231,6 +16231,44 @@ literal|"empid=110; commission=250; M=2"
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3563">[CALCITE-3563]    * When resolving method call in calcite runtime, add type check and match    * mechanism for input arguments</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testMethodParameterTypeMatch
+parameter_list|()
+block|{
+name|CalciteAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|query
+argument_list|(
+literal|"SELECT mod(12.5, cast(3 as bigint))"
+argument_list|)
+operator|.
+name|planContains
+argument_list|(
+literal|"final java.math.BigDecimal v = "
+operator|+
+literal|"$L4J$C$new_java_math_BigDecimal_12_5_"
+argument_list|)
+operator|.
+name|planContains
+argument_list|(
+literal|"org.apache.calcite.runtime.SqlFunctions.mod(v, "
+operator|+
+literal|"$L4J$C$new_java_math_BigDecimal_3L_)"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"EXPR$0=0.5\n"
+argument_list|)
+expr_stmt|;
+block|}
 comment|/** Tests UNBOUNDED PRECEDING clause. */
 annotation|@
 name|Test
