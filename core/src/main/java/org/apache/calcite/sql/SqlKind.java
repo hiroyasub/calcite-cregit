@@ -658,6 +658,9 @@ block|,
 comment|/** The {@code BIT_OR} aggregate function. */
 name|BIT_OR
 block|,
+comment|/** The {@code BIT_XOR} aggregate function. */
+name|BIT_XOR
+block|,
 comment|/** The {@code ROW_NUMBER} window function. */
 name|ROW_NUMBER
 block|,
@@ -900,6 +903,8 @@ argument_list|,
 name|BIT_AND
 argument_list|,
 name|BIT_OR
+argument_list|,
+name|BIT_XOR
 argument_list|,
 name|LISTAGG
 argument_list|)

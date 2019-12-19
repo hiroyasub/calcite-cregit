@@ -202,6 +202,12 @@ operator|==
 name|SqlKind
 operator|.
 name|BIT_OR
+operator|||
+name|kind
+operator|==
+name|SqlKind
+operator|.
+name|BIT_XOR
 argument_list|)
 expr_stmt|;
 block|}

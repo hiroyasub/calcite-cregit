@@ -3432,6 +3432,21 @@ operator|.
 name|BIT_OR
 argument_list|)
 decl_stmt|;
+comment|/**    *<code>BIT_XOR</code> aggregate function.    */
+specifier|public
+specifier|static
+specifier|final
+name|SqlAggFunction
+name|BIT_XOR
+init|=
+operator|new
+name|SqlBitOpAggFunction
+argument_list|(
+name|SqlKind
+operator|.
+name|BIT_XOR
+argument_list|)
+decl_stmt|;
 comment|//-------------------------------------------------------------
 comment|// WINDOW Aggregate Functions
 comment|//-------------------------------------------------------------

@@ -1335,6 +1335,9 @@ case|:
 case|case
 name|BIT_OR
 case|:
+case|case
+name|BIT_XOR
+case|:
 name|aggFunction
 operator|=
 operator|new
