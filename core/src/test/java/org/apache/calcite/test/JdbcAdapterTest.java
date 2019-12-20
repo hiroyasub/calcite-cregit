@@ -705,6 +705,68 @@ literal|"ON \"t\".\"DEPTNO\" = \"t0\".\"DEPTNO\""
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testPushDownSort
+parameter_list|()
+block|{
+name|CalciteAssert
+operator|.
+name|model
+argument_list|(
+name|JdbcTest
+operator|.
+name|SCOTT_MODEL
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select ename \n"
+operator|+
+literal|"from scott.emp \n"
+operator|+
+literal|"order by empno"
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+literal|"PLAN=JdbcToEnumerableConverter\n"
+operator|+
+literal|"  JdbcSort(sort0=[$1], dir0=[ASC])\n"
+operator|+
+literal|"    JdbcProject(ENAME=[$1], EMPNO=[$0])\n"
+operator|+
+literal|"      JdbcTableScan(table=[[SCOTT, EMP]])"
+argument_list|)
+operator|.
+name|runs
+argument_list|()
+operator|.
+name|enable
+argument_list|(
+name|CalciteAssert
+operator|.
+name|DB
+operator|==
+name|CalciteAssert
+operator|.
+name|DatabaseInstance
+operator|.
+name|HSQLDB
+argument_list|)
+operator|.
+name|planHasSql
+argument_list|(
+literal|"SELECT \"ENAME\", \"EMPNO\"\n"
+operator|+
+literal|"FROM \"SCOTT\".\"EMP\"\n"
+operator|+
+literal|"ORDER BY \"EMPNO\" NULLS LAST"
+argument_list|)
+expr_stmt|;
+block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-631">[CALCITE-631]    * Push theta joins down to JDBC adapter</a>. */
 annotation|@
 name|Test
