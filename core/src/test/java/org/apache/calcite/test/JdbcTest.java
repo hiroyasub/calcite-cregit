@@ -15208,6 +15208,62 @@ literal|"deptno=20; empid=200; hire_date=2014-06-12; R=1"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testNestedWin
+parameter_list|()
+block|{
+name|CalciteAssert
+operator|.
+name|hr
+argument_list|()
+operator|.
+name|query
+argument_list|(
+literal|"select \n"
+operator|+
+literal|" lag(a2, 1, 0) over (partition by \"deptno\" order by a1) as lagx \n"
+operator|+
+literal|"from \n"
+operator|+
+literal|" (\n"
+operator|+
+literal|"  select \n"
+operator|+
+literal|"   \"deptno\", \n"
+operator|+
+literal|"   \"salary\" / \"commission\" as a1, \n"
+operator|+
+literal|"   sum(\"commission\") over ( partition by \"deptno\" order by \"salary\" / "
+operator|+
+literal|"\"commission\") / sum(\"commission\") over (partition by \"deptno\") as a2 \n"
+operator|+
+literal|"  from \n"
+operator|+
+literal|"   \"hr\".\"emps\"\n"
+operator|+
+literal|" )\n"
+argument_list|)
+operator|.
+name|typeIs
+argument_list|(
+literal|"[LAGX INTEGER NOT NULL]"
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"LAGX=0"
+argument_list|,
+literal|"LAGX=0"
+argument_list|,
+literal|"LAGX=0"
+argument_list|,
+literal|"LAGX=1"
+argument_list|)
+expr_stmt|;
+block|}
 specifier|private
 name|void
 name|startOfGroupStep1
