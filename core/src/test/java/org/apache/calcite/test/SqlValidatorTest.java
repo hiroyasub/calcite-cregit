@@ -31426,12 +31426,38 @@ operator|.
 name|ok
 argument_list|()
 expr_stmt|;
-comment|// verify left join with a timestamp expression
+comment|// verify left join with a timestamp field
 name|sql
 argument_list|(
 literal|"select stream * from orders left join products_temporal "
 operator|+
 literal|"for system_time as of orders.rowtime "
+operator|+
+literal|"on orders.productid = products_temporal.productid"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+comment|// verify left join with a timestamp expression
+name|sql
+argument_list|(
+literal|"select stream * from orders left join products_temporal\n"
+operator|+
+literal|"for system_time as of orders.rowtime - INTERVAL '3' DAY\n"
+operator|+
+literal|"on orders.productid = products_temporal.productid"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+comment|// verify left join with a datetime value function
+name|sql
+argument_list|(
+literal|"select stream * from orders left join products_temporal\n"
+operator|+
+literal|"for system_time as of CURRENT_TIMESTAMP\n"
 operator|+
 literal|"on orders.productid = products_temporal.productid"
 argument_list|)

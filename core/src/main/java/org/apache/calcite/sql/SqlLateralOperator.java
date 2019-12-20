@@ -152,10 +152,6 @@ name|COLLECTION_TABLE
 argument_list|,
 name|SqlKind
 operator|.
-name|SNAPSHOT
-argument_list|,
-name|SqlKind
-operator|.
 name|SELECT
 argument_list|,
 name|SqlKind
@@ -188,25 +184,7 @@ argument_list|()
 argument_list|)
 condition|)
 block|{
-if|if
-condition|(
-name|call
-operator|.
-name|operand
-argument_list|(
-literal|0
-argument_list|)
-operator|.
-name|getKind
-argument_list|()
-operator|!=
-name|SqlKind
-operator|.
-name|SNAPSHOT
-condition|)
-block|{
-comment|// 1. Do not create ( ) around the following TABLE clause.
-comment|// 2. Do not print LATERAL keyword for snapshot table.
+comment|// Do not create ( ) around the following TABLE clause.
 name|writer
 operator|.
 name|keyword
@@ -215,7 +193,6 @@ name|getName
 argument_list|()
 argument_list|)
 expr_stmt|;
-block|}
 name|call
 operator|.
 name|operand

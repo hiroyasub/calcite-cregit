@@ -11006,7 +11006,7 @@ return|return;
 case|case
 name|SNAPSHOT
 case|:
-name|snapshotTemporalTable
+name|convertTemporalTable
 argument_list|(
 name|bb
 argument_list|,
@@ -13420,7 +13420,7 @@ block|{
 block|}
 specifier|private
 name|void
-name|snapshotTemporalTable
+name|convertTemporalTable
 parameter_list|(
 name|Blackboard
 name|bb
