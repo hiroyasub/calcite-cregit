@@ -197,7 +197,11 @@ name|org
 operator|.
 name|junit
 operator|.
-name|BeforeClass
+name|jupiter
+operator|.
+name|api
+operator|.
+name|BeforeAll
 import|;
 end_import
 
@@ -207,17 +211,27 @@ name|org
 operator|.
 name|junit
 operator|.
-name|ClassRule
-import|;
-end_import
-
-begin_import
-import|import
-name|org
+name|jupiter
 operator|.
-name|junit
+name|api
 operator|.
 name|Test
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|junit
+operator|.
+name|jupiter
+operator|.
+name|api
+operator|.
+name|extension
+operator|.
+name|RegisterExtension
 import|;
 end_import
 
@@ -375,7 +389,7 @@ class|class
 name|ElasticSearchAdapterTest
 block|{
 annotation|@
-name|ClassRule
+name|RegisterExtension
 comment|//init once for all tests
 specifier|public
 specifier|static
@@ -407,7 +421,7 @@ literal|149
 decl_stmt|;
 comment|/**    * Used to create {@code zips} index and insert zip data in bulk.    * @throws Exception when instance setup failed    */
 annotation|@
-name|BeforeClass
+name|BeforeAll
 specifier|public
 specifier|static
 name|void

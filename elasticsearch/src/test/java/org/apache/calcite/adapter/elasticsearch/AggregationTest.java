@@ -169,7 +169,11 @@ name|org
 operator|.
 name|junit
 operator|.
-name|BeforeClass
+name|jupiter
+operator|.
+name|api
+operator|.
+name|BeforeAll
 import|;
 end_import
 
@@ -179,17 +183,27 @@ name|org
 operator|.
 name|junit
 operator|.
-name|ClassRule
-import|;
-end_import
-
-begin_import
-import|import
-name|org
+name|jupiter
 operator|.
-name|junit
+name|api
 operator|.
 name|Test
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|junit
+operator|.
+name|jupiter
+operator|.
+name|api
+operator|.
+name|extension
+operator|.
+name|RegisterExtension
 import|;
 end_import
 
@@ -293,7 +307,7 @@ class|class
 name|AggregationTest
 block|{
 annotation|@
-name|ClassRule
+name|RegisterExtension
 specifier|public
 specifier|static
 specifier|final
@@ -314,7 +328,7 @@ init|=
 literal|"aggs"
 decl_stmt|;
 annotation|@
-name|BeforeClass
+name|BeforeAll
 specifier|public
 specifier|static
 name|void
