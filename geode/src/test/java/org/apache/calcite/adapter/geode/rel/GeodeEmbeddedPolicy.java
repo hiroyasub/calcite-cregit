@@ -95,9 +95,45 @@ name|org
 operator|.
 name|junit
 operator|.
-name|rules
+name|jupiter
 operator|.
-name|ExternalResource
+name|api
+operator|.
+name|extension
+operator|.
+name|AfterAllCallback
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|junit
+operator|.
+name|jupiter
+operator|.
+name|api
+operator|.
+name|extension
+operator|.
+name|BeforeAllCallback
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|junit
+operator|.
+name|jupiter
+operator|.
+name|api
+operator|.
+name|extension
+operator|.
+name|ExtensionContext
 import|;
 end_import
 
@@ -189,8 +225,10 @@ begin_class
 specifier|public
 class|class
 name|GeodeEmbeddedPolicy
-extends|extends
-name|ExternalResource
+implements|implements
+name|BeforeAllCallback
+implements|,
+name|AfterAllCallback
 block|{
 specifier|private
 specifier|final
@@ -236,10 +274,13 @@ expr_stmt|;
 block|}
 annotation|@
 name|Override
-specifier|protected
+specifier|public
 name|void
-name|before
-parameter_list|()
+name|beforeAll
+parameter_list|(
+name|ExtensionContext
+name|context
+parameter_list|)
 block|{
 name|requireStatus
 argument_list|(
@@ -258,10 +299,13 @@ expr_stmt|;
 block|}
 annotation|@
 name|Override
-specifier|protected
+specifier|public
 name|void
-name|after
-parameter_list|()
+name|afterAll
+parameter_list|(
+name|ExtensionContext
+name|context
+parameter_list|)
 block|{
 if|if
 condition|(
@@ -350,7 +394,7 @@ throw|;
 block|}
 block|}
 block|}
-comment|/**    * Allows this instance to be shared by multiple test classes (in parallel). Guarantees that    * {@code before()} and {@code after()} methods will be called only once. This setup is useful    * for maven (surefire) plugin which executes tests in parallel (including {@code @ClassRule}    * methods) and may initialize (or destroy) same resource multiple times.    */
+comment|/**    * Allows this instance to be shared by multiple test classes (in parallel). Guarantees that    * {@code before()} and {@code after()} methods will be called only once. This setup is useful    * for concurrent test execution which may initialize (or destroy) same resource multiple times.    */
 name|GeodeEmbeddedPolicy
 name|share
 parameter_list|()
@@ -495,7 +539,7 @@ name|launcher
 argument_list|)
 return|;
 block|}
-comment|/**    * Calls {@code before()} and {@code after()} methods only once (for first and last subscriber    * respectively). The implementation counts number of times {@link #before()} was called    * which determines number of "clients". Delegate {@link #after()} is called when that count    * reaches zero again (when last "client" called that method).    */
+comment|/**    * Calls {@code before()} and {@code after()} methods only once (for first and last subscriber    * respectively). The implementation counts number of times {@link #beforeAll(ExtensionContext)} was called    * which determines number of "clients". Delegate {@link #afterAll(ExtensionContext)} is called when that count    * reaches zero again (when last "client" called that method).    */
 specifier|private
 specifier|static
 class|class
@@ -565,8 +609,11 @@ name|Override
 specifier|public
 specifier|synchronized
 name|void
-name|before
-parameter_list|()
+name|beforeAll
+parameter_list|(
+name|ExtensionContext
+name|context
+parameter_list|)
 block|{
 if|if
 condition|(
@@ -581,17 +628,22 @@ block|{
 comment|// initialize only once
 name|policy
 operator|.
-name|before
-argument_list|()
+name|beforeAll
+argument_list|(
+name|context
+argument_list|)
 expr_stmt|;
 block|}
 block|}
 annotation|@
 name|Override
-specifier|protected
+specifier|public
 name|void
-name|after
-parameter_list|()
+name|afterAll
+parameter_list|(
+name|ExtensionContext
+name|context
+parameter_list|)
 block|{
 if|if
 condition|(
@@ -606,8 +658,10 @@ block|{
 comment|// destroy only once
 name|policy
 operator|.
-name|after
-argument_list|()
+name|afterAll
+argument_list|(
+name|context
+argument_list|)
 expr_stmt|;
 block|}
 block|}

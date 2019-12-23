@@ -193,7 +193,11 @@ name|org
 operator|.
 name|junit
 operator|.
-name|BeforeClass
+name|jupiter
+operator|.
+name|api
+operator|.
+name|BeforeAll
 import|;
 end_import
 
@@ -203,7 +207,11 @@ name|org
 operator|.
 name|junit
 operator|.
-name|Ignore
+name|jupiter
+operator|.
+name|api
+operator|.
+name|Disabled
 import|;
 end_import
 
@@ -212,6 +220,10 @@ import|import
 name|org
 operator|.
 name|junit
+operator|.
+name|jupiter
+operator|.
+name|api
 operator|.
 name|Test
 import|;
@@ -321,7 +333,7 @@ extends|extends
 name|AbstractGeodeTest
 block|{
 annotation|@
-name|BeforeClass
+name|BeforeAll
 specifier|public
 specifier|static
 name|void
@@ -559,7 +571,7 @@ block|}
 annotation|@
 name|Test
 annotation|@
-name|Ignore
+name|Disabled
 argument_list|(
 literal|"Currently fails"
 argument_list|)
@@ -705,7 +717,7 @@ block|}
 annotation|@
 name|Test
 annotation|@
-name|Ignore
+name|Disabled
 argument_list|(
 literal|"Currently fails"
 argument_list|)
@@ -1231,7 +1243,7 @@ block|}
 annotation|@
 name|Test
 annotation|@
-name|Ignore
+name|Disabled
 argument_list|(
 literal|"Currently fails"
 argument_list|)
