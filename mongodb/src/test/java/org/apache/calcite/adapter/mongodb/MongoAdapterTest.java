@@ -265,7 +265,11 @@ name|org
 operator|.
 name|junit
 operator|.
-name|BeforeClass
+name|jupiter
+operator|.
+name|api
+operator|.
+name|BeforeAll
 import|;
 end_import
 
@@ -275,7 +279,11 @@ name|org
 operator|.
 name|junit
 operator|.
-name|ClassRule
+name|jupiter
+operator|.
+name|api
+operator|.
+name|Disabled
 import|;
 end_import
 
@@ -285,17 +293,27 @@ name|org
 operator|.
 name|junit
 operator|.
-name|Ignore
-import|;
-end_import
-
-begin_import
-import|import
-name|org
+name|jupiter
 operator|.
-name|junit
+name|api
 operator|.
 name|Test
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|junit
+operator|.
+name|jupiter
+operator|.
+name|api
+operator|.
+name|extension
+operator|.
+name|RegisterExtension
 import|;
 end_import
 
@@ -572,7 +590,7 @@ init|=
 literal|149
 decl_stmt|;
 annotation|@
-name|ClassRule
+name|RegisterExtension
 specifier|public
 specifier|static
 specifier|final
@@ -590,7 +608,7 @@ name|MongoSchema
 name|schema
 decl_stmt|;
 annotation|@
-name|BeforeClass
+name|BeforeAll
 specifier|public
 specifier|static
 name|void
@@ -1184,7 +1202,7 @@ argument_list|)
 expr_stmt|;
 block|}
 annotation|@
-name|Ignore
+name|Disabled
 annotation|@
 name|Test
 specifier|public
@@ -1310,7 +1328,7 @@ argument_list|)
 expr_stmt|;
 block|}
 annotation|@
-name|Ignore
+name|Disabled
 argument_list|(
 literal|"broken; [CALCITE-2115] is logged to fix it"
 argument_list|)
@@ -1371,7 +1389,7 @@ argument_list|)
 expr_stmt|;
 block|}
 annotation|@
-name|Ignore
+name|Disabled
 argument_list|(
 literal|"java.lang.ClassCastException: java.lang.Integer cannot be cast to java.lang.Double"
 argument_list|)
@@ -2005,7 +2023,7 @@ argument_list|)
 expr_stmt|;
 block|}
 annotation|@
-name|Ignore
+name|Disabled
 argument_list|(
 literal|"https://issues.apache.org/jira/browse/CALCITE-270"
 argument_list|)
@@ -2168,7 +2186,7 @@ argument_list|)
 expr_stmt|;
 block|}
 annotation|@
-name|Ignore
+name|Disabled
 argument_list|(
 literal|"broken; [CALCITE-2115] is logged to fix it"
 argument_list|)
@@ -2301,7 +2319,7 @@ argument_list|)
 expr_stmt|;
 block|}
 annotation|@
-name|Ignore
+name|Disabled
 argument_list|(
 literal|"broken; [CALCITE-2115] is logged to fix it"
 argument_list|)

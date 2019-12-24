@@ -159,7 +159,11 @@ name|org
 operator|.
 name|junit
 operator|.
-name|Assume
+name|jupiter
+operator|.
+name|api
+operator|.
+name|Assumptions
 operator|.
 name|assumeTrue
 import|;
@@ -384,10 +388,10 @@ parameter_list|()
 block|{
 name|assumeTrue
 argument_list|(
-literal|"Expect mongo instance"
-argument_list|,
 name|useMongo
 argument_list|()
+argument_list|,
+literal|"Expect mongo instance"
 argument_list|)
 expr_stmt|;
 block|}
