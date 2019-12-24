@@ -28369,6 +28369,174 @@ block|}
 block|}
 end_function
 
+begin_function
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testBindableIntersect
+parameter_list|()
+block|{
+try|try
+init|(
+name|Hook
+operator|.
+name|Closeable
+name|ignored
+init|=
+name|Hook
+operator|.
+name|ENABLE_BINDABLE
+operator|.
+name|addThread
+argument_list|(
+name|Hook
+operator|.
+name|propertyJ
+argument_list|(
+literal|true
+argument_list|)
+argument_list|)
+init|)
+block|{
+specifier|final
+name|String
+name|sql0
+init|=
+literal|"select \"empid\", \"deptno\" from \"hr\".\"emps\""
+decl_stmt|;
+specifier|final
+name|String
+name|sql
+init|=
+name|sql0
+operator|+
+literal|" intersect all "
+operator|+
+name|sql0
+decl_stmt|;
+name|CalciteAssert
+operator|.
+name|hr
+argument_list|()
+operator|.
+name|query
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+literal|""
+operator|+
+literal|"PLAN=BindableIntersect(all=[true])\n"
+operator|+
+literal|"  BindableProject(empid=[$0], deptno=[$1])\n"
+operator|+
+literal|"    BindableTableScan(table=[[hr, emps]])\n"
+operator|+
+literal|"  BindableProject(empid=[$0], deptno=[$1])\n"
+operator|+
+literal|"    BindableTableScan(table=[[hr, emps]])"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|""
+operator|+
+literal|"empid=150; deptno=10\n"
+operator|+
+literal|"empid=100; deptno=10\n"
+operator|+
+literal|"empid=200; deptno=20\n"
+operator|+
+literal|"empid=110; deptno=10\n"
+argument_list|)
+expr_stmt|;
+block|}
+block|}
+end_function
+
+begin_function
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testBindableMinus
+parameter_list|()
+block|{
+try|try
+init|(
+name|Hook
+operator|.
+name|Closeable
+name|ignored
+init|=
+name|Hook
+operator|.
+name|ENABLE_BINDABLE
+operator|.
+name|addThread
+argument_list|(
+name|Hook
+operator|.
+name|propertyJ
+argument_list|(
+literal|true
+argument_list|)
+argument_list|)
+init|)
+block|{
+specifier|final
+name|String
+name|sql0
+init|=
+literal|"select \"empid\", \"deptno\" from \"hr\".\"emps\""
+decl_stmt|;
+specifier|final
+name|String
+name|sql
+init|=
+name|sql0
+operator|+
+literal|" except all "
+operator|+
+name|sql0
+decl_stmt|;
+name|CalciteAssert
+operator|.
+name|hr
+argument_list|()
+operator|.
+name|query
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+literal|""
+operator|+
+literal|"PLAN=BindableMinus(all=[true])\n"
+operator|+
+literal|"  BindableProject(empid=[$0], deptno=[$1])\n"
+operator|+
+literal|"    BindableTableScan(table=[[hr, emps]])\n"
+operator|+
+literal|"  BindableProject(empid=[$0], deptno=[$1])\n"
+operator|+
+literal|"    BindableTableScan(table=[[hr, emps]])"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|""
+argument_list|)
+expr_stmt|;
+block|}
+block|}
+end_function
+
 begin_comment
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2224">[CALCITE-2224]    * WITHIN GROUP clause for aggregate functions</a>. */
 end_comment
