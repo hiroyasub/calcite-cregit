@@ -688,14 +688,19 @@ block|,
 comment|/** The {@code ROW_NUMBER} window function. */
 name|CUME_DIST
 block|,
-comment|// Group functions
+comment|/** The {@code DESCRIPTOR(column_name, ...)}. */
+name|DESCRIPTOR
+block|,
 comment|/** The {@code TUMBLE} group function. */
 name|TUMBLE
 block|,
+comment|// Group functions
 comment|/** The {@code TUMBLE_START} auxiliary function of    * the {@link #TUMBLE} group function. */
+comment|// TODO: deprecate TUMBLE_START.
 name|TUMBLE_START
 block|,
 comment|/** The {@code TUMBLE_END} auxiliary function of    * the {@link #TUMBLE} group function. */
+comment|// TODO: deprecate TUMBLE_END.
 name|TUMBLE_END
 block|,
 comment|/** The {@code HOP} group function. */

@@ -423,24 +423,6 @@ name|unstrict
 argument_list|()
 return|;
 block|}
-annotation|@
-name|Override
-specifier|public
-name|String
-name|getName
-parameter_list|()
-block|{
-comment|// Always rename the name of the SqlKind. The tumble operator is called
-comment|// "$TUMBLE", so that it does not clash with a user-defined table function
-comment|// "TUMBLE", but we want the name to be "TUMBLE".
-return|return
-name|getKind
-argument_list|()
-operator|.
-name|name
-argument_list|()
-return|;
-block|}
 block|}
 end_class
 

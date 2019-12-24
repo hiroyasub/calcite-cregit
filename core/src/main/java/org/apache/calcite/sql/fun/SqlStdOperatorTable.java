@@ -113,6 +113,20 @@ name|calcite
 operator|.
 name|sql
 operator|.
+name|SqlDescriptorOperator
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
 name|SqlFilterOperator
 import|;
 end_import
@@ -492,6 +506,20 @@ operator|.
 name|sql
 operator|.
 name|SqlWindow
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|SqlWindowTableFunction
 import|;
 end_import
 
@@ -6743,6 +6771,35 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+decl_stmt|;
+comment|/** DESCRIPTOR(column_name, ...). */
+specifier|public
+specifier|static
+specifier|final
+name|SqlOperator
+name|DESCRIPTOR
+init|=
+operator|new
+name|SqlDescriptorOperator
+argument_list|()
+decl_stmt|;
+comment|/** TUMBLE as a table-value function. */
+specifier|public
+specifier|static
+specifier|final
+name|SqlFunction
+name|TUMBLE_TVF
+init|=
+operator|new
+name|SqlWindowTableFunction
+argument_list|(
+name|SqlKind
+operator|.
+name|TUMBLE
+operator|.
+name|name
+argument_list|()
+argument_list|)
 decl_stmt|;
 comment|/** The {@code TUMBLE} group function.    *    *<p>This operator is named "$TUMBLE" (not "TUMBLE") because it is created    * directly by the parser, not by looking up an operator by name.    *    *<p>Why did we add TUMBLE to the parser? Because we plan to support TUMBLE    * as a table function (see [CALCITE-3272]); "TUMBLE" as a name will only be    * used by the TUMBLE table function.    *    *<p>After the TUMBLE table function is introduced, we plan to deprecate    * this TUMBLE group function, and in fact all group functions. See    * [CALCITE-3340] for details.    */
 specifier|public

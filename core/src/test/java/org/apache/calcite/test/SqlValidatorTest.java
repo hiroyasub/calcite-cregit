@@ -39846,6 +39846,112 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testDescriptor
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"select * from table(tumble(table orders, descriptor(rowtime), interval '2' hour))"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select * from table(tumble(table orders, descriptor(^column_not_exist^), "
+operator|+
+literal|"interval '2' hour))"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Unknown identifier 'COLUMN_NOT_EXIST'"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testTumbleTableValuedFunction
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"select * from table(\n"
+operator|+
+literal|"^tumble(table orders, descriptor(rowtime), interval '2' hour, 'test')^)"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Invalid number of arguments to function 'TUMBLE'. Was expecting 3 arguments"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select rowtime, productid, orderid, 'window_start', 'window_end' from table(\n"
+operator|+
+literal|"tumble(table orders, descriptor(rowtime), interval '2' hour))"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select * from table(\n"
+operator|+
+literal|"^tumble(table orders, descriptor(rowtime), 'test')^)"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Cannot apply 'TUMBLE' to arguments of type 'TUMBLE\\(<RECORDTYPE\\"
+operator|+
+literal|"(TIMESTAMP\\(0\\) ROWTIME, INTEGER PRODUCTID, INTEGER ORDERID\\)>,<COLUMN_LIST>,"
+operator|+
+literal|"<CHAR\\(4\\)>\\)'\\. Supported form\\(s\\): TUMBLE\\(TABLE "
+operator|+
+literal|"table_name, DESCRIPTOR\\(col1, col2 \\.\\.\\.\\), datetime interval\\)"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select * from table(\n"
+operator|+
+literal|"^tumble(table orders, 'test', interval '2' hour)^)"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Cannot apply 'TUMBLE' to arguments of type 'TUMBLE\\(<RECORDTYPE\\"
+operator|+
+literal|"(TIMESTAMP\\(0\\) ROWTIME, INTEGER PRODUCTID, INTEGER ORDERID\\)>,<CHAR\\"
+operator|+
+literal|"(4\\)>,<INTERVAL HOUR>\\)'\\. Supported form\\(s\\): TUMBLE\\(TABLE "
+operator|+
+literal|"table_name, DESCRIPTOR\\(col1, col2 \\.\\.\\.\\), datetime interval\\)"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select * from table(\n"
+operator|+
+literal|"tumble(TABLE ^tabler_not_exist^, descriptor(rowtime), interval '2' hour))"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Object 'TABLER_NOT_EXIST' not found"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testStreamTumble
 parameter_list|()
 block|{
@@ -39873,7 +39979,7 @@ argument_list|)
 operator|.
 name|fails
 argument_list|(
-literal|"Group function 'TUMBLE' can only appear in GROUP BY clause"
+literal|"Group function '\\$TUMBLE' can only appear in GROUP BY clause"
 argument_list|)
 expr_stmt|;
 comment|// TUMBLE with align argument
@@ -39907,7 +40013,7 @@ name|fails
 argument_list|(
 literal|"Call to auxiliary group function 'TUMBLE_END' must have "
 operator|+
-literal|"matching call to group function 'TUMBLE' in GROUP BY clause"
+literal|"matching call to group function '\\$TUMBLE' in GROUP BY clause"
 argument_list|)
 expr_stmt|;
 comment|// Arguments to TUMBLE_END are slightly different to arguments to TUMBLE
@@ -39926,7 +40032,7 @@ name|fails
 argument_list|(
 literal|"Call to auxiliary group function 'TUMBLE_START' must have "
 operator|+
-literal|"matching call to group function 'TUMBLE' in GROUP BY clause"
+literal|"matching call to group function '\\$TUMBLE' in GROUP BY clause"
 argument_list|)
 expr_stmt|;
 comment|// Even though align defaults to TIME '00:00:00', we need structural
@@ -39946,7 +40052,7 @@ name|fails
 argument_list|(
 literal|"Call to auxiliary group function 'TUMBLE_END' must have "
 operator|+
-literal|"matching call to group function 'TUMBLE' in GROUP BY clause"
+literal|"matching call to group function '\\$TUMBLE' in GROUP BY clause"
 argument_list|)
 expr_stmt|;
 comment|// TUMBLE query produces no monotonic column - OK

@@ -15877,6 +15877,50 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testDescriptor
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"select * from table(ramp(descriptor(column_name)))"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+literal|"SELECT *\n"
+operator|+
+literal|"FROM TABLE(`RAMP`(DESCRIPTOR(`COLUMN_NAME`)))"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select * from table(ramp(descriptor(\"COLUMN_NAME\")))"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+literal|"SELECT *\n"
+operator|+
+literal|"FROM TABLE(`RAMP`(DESCRIPTOR(`COLUMN_NAME`)))"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select * from table(ramp(descriptor(column_name1, column_name2, column_name3)))"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+literal|"SELECT *\n"
+operator|+
+literal|"FROM TABLE(`RAMP`(DESCRIPTOR(`COLUMN_NAME1`, `COLUMN_NAME2`, `COLUMN_NAME3`)))"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testCollectionTableWithCursorParam
 parameter_list|()
 block|{

@@ -7362,6 +7362,21 @@ operator|.
 name|LEFT
 argument_list|)
 expr_stmt|;
+comment|// This is used when converting window table functions:
+comment|//
+comment|// select * from table(table emps, descriptor(deptno), interval '3' DAY)
+comment|//
+name|bb
+operator|.
+name|cursors
+operator|.
+name|add
+argument_list|(
+name|converted
+operator|.
+name|r
+argument_list|)
+expr_stmt|;
 return|return;
 default|default:
 throw|throw

@@ -6845,6 +6845,58 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+comment|// In generated plan, the first parameter of TUMBLE function will always be the last field
+comment|// of it's input. There isn't a way to give the first operand a proper type.
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testTableValuedFunctionTumble
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"from table(tumble(table Shipments, descriptor(rowtime), INTERVAL '1' MINUTE))"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+comment|// In generated plan, the first parameter of TUMBLE function will always be the last field
+comment|// of it's input. There isn't a way to give the first operand a proper type.
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testTableValuedFunctionTumbleWithSubQueryParam
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"from table(tumble((select * from Shipments), descriptor(rowtime), INTERVAL '1' MINUTE))"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
 annotation|@
 name|Test
 specifier|public
