@@ -5863,7 +5863,7 @@ name|checkResultContains
 argument_list|(
 literal|"EnumerableCalc(expr#0..1=[{inputs}], expr#2=[1], expr#3=[+($t1, $t2)],"
 operator|+
-literal|" deptno=[$t0], $f1=[$t3])\n"
+literal|" deptno=[$t0], S=[$t3])\n"
 operator|+
 literal|"  EnumerableAggregate(group=[{1}], agg#0=[$SUM0($3)])\n"
 operator|+
@@ -5922,7 +5922,7 @@ name|checkResultContains
 argument_list|(
 literal|"EnumerableCalc(expr#0..1=[{inputs}], expr#2=[1], expr#3=[+($t0, $t2)], "
 operator|+
-literal|"expr#4=[+($t1, $t2)], $f0=[$t3], $f1=[$t4])\n"
+literal|"expr#4=[+($t1, $t2)], EXPR$0=[$t3], S=[$t4])\n"
 operator|+
 literal|"  EnumerableAggregate(group=[{1}], agg#0=[$SUM0($3)])\n"
 operator|+
