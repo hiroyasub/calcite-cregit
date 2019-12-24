@@ -496,7 +496,7 @@ block|}
 else|else
 block|{
 return|return
-name|defaultTableValuedFunctionImplement
+name|defaultTableFunctionImplement
 argument_list|(
 name|implementor
 argument_list|,
@@ -660,7 +660,7 @@ return|;
 block|}
 specifier|private
 name|Result
-name|defaultTableValuedFunctionImplement
+name|defaultTableFunctionImplement
 parameter_list|(
 name|EnumerableRelImplementor
 name|implementor
@@ -972,7 +972,7 @@ name|add
 argument_list|(
 name|RexToLixTranslator
 operator|.
-name|translateTableValuedFunction
+name|translateTableFunction
 argument_list|(
 name|typeFactory
 argument_list|,

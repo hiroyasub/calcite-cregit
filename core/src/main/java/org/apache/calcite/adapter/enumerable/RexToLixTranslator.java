@@ -1308,7 +1308,7 @@ block|}
 specifier|public
 specifier|static
 name|Expression
-name|translateTableValuedFunction
+name|translateTableFunction
 parameter_list|(
 name|JavaTypeFactory
 name|typeFactory
@@ -1367,7 +1367,7 @@ argument_list|,
 literal|null
 argument_list|)
 operator|.
-name|translateTableValuedFunction
+name|translateTableFunction
 argument_list|(
 name|rexCall
 argument_list|,
@@ -5063,7 +5063,7 @@ return|;
 block|}
 specifier|private
 name|Expression
-name|translateTableValuedFunction
+name|translateTableFunction
 parameter_list|(
 name|RexCall
 name|rexCall
@@ -5086,7 +5086,7 @@ argument_list|()
 operator|instanceof
 name|SqlWindowTableFunction
 assert|;
-name|TableValuedFunctionCallImplementor
+name|TableFunctionCallImplementor
 name|implementor
 init|=
 name|RexImpTable

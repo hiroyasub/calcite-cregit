@@ -72,7 +72,7 @@ annotation|@
 name|Experimental
 specifier|public
 interface|interface
-name|TableValuedFunctionCallImplementor
+name|TableFunctionCallImplementor
 block|{
 comment|/**    * Implements a table-valued function call.    *    * @param translator Translator for the call.    * @param inputEnumerable Table parameter of the call.    * @param call Call that should be implemented.    * @param inputPhysType Physical type of the table parameter.    * @param outputPhysType Physical type of the call.    * @return Expression that implements the call.    */
 name|Expression
