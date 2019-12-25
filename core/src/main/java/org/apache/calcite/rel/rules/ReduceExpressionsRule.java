@@ -1555,6 +1555,19 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+comment|// New plan is absolutely better than old plan.
+name|call
+operator|.
+name|getPlanner
+argument_list|()
+operator|.
+name|setImportance
+argument_list|(
+name|filter
+argument_list|,
+literal|0.0
+argument_list|)
+expr_stmt|;
 block|}
 block|}
 block|}
@@ -2308,7 +2321,7 @@ name|isAlwaysTrue
 argument_list|()
 condition|)
 block|{
-comment|// condition is always TRUE - drop it
+comment|// condition is always TRUE - drop it.
 block|}
 if|else if
 condition|(
@@ -2327,7 +2340,7 @@ argument_list|)
 condition|)
 block|{
 comment|// condition is always NULL or FALSE - replace calc
-comment|// with empty
+comment|// with empty.
 name|call
 operator|.
 name|transformTo
@@ -3333,14 +3346,10 @@ name|RelOptPredicateList
 name|predicates
 parameter_list|)
 block|{
+comment|// Replace predicates on CASE to CASE on predicates.
 name|boolean
 name|changed
 init|=
-literal|false
-decl_stmt|;
-comment|// Replace predicates on CASE to CASE on predicates.
-name|changed
-operator||=
 operator|new
 name|CaseShuttle
 argument_list|()
@@ -3349,7 +3358,7 @@ name|mutate
 argument_list|(
 name|expList
 argument_list|)
-expr_stmt|;
+decl_stmt|;
 comment|// Find reducible expressions.
 specifier|final
 name|List
@@ -4075,17 +4084,18 @@ argument_list|(
 name|i
 argument_list|)
 decl_stmt|;
-switch|switch
+if|if
 condition|(
 name|operand
 operator|.
 name|getKind
 argument_list|()
+operator|==
+name|SqlKind
+operator|.
+name|CASE
 condition|)
 block|{
-case|case
-name|CASE
-case|:
 name|caseOrdinal
 operator|=
 name|i
@@ -5150,6 +5160,7 @@ name|Constancy
 operator|.
 name|NON_CONSTANT
 expr_stmt|;
+break|break;
 block|}
 block|}
 comment|// Even if all operands are constant, the call itself may
