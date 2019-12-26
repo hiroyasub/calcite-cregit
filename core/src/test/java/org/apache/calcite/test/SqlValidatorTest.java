@@ -31543,6 +31543,128 @@ block|}
 annotation|@
 name|Test
 name|void
+name|testBoolAndBoolOrFunction
+parameter_list|()
+block|{
+specifier|final
+name|Sql
+name|s
+init|=
+name|sql
+argument_list|(
+literal|"?"
+argument_list|)
+operator|.
+name|withOperatorTable
+argument_list|(
+name|operatorTableFor
+argument_list|(
+name|SqlLibrary
+operator|.
+name|POSTGRESQL
+argument_list|)
+argument_list|)
+decl_stmt|;
+name|s
+operator|.
+name|sql
+argument_list|(
+literal|"SELECT bool_and(true) from emp"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|s
+operator|.
+name|sql
+argument_list|(
+literal|"SELECT bool_or(true) from emp"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|s
+operator|.
+name|sql
+argument_list|(
+literal|"select bool_and(col)\n"
+operator|+
+literal|"from (values(true), (false), (true)) as tbl(col)"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|s
+operator|.
+name|sql
+argument_list|(
+literal|"select bool_or(col)\n"
+operator|+
+literal|"from (values(true), (false), (true)) as tbl(col)"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|s
+operator|.
+name|sql
+argument_list|(
+literal|"select bool_and(col)\n"
+operator|+
+literal|"from (values(true), (false), (null)) as tbl(col)"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|s
+operator|.
+name|sql
+argument_list|(
+literal|"select bool_or(col)\n"
+operator|+
+literal|"from (values(true), (false), (null)) as tbl(col)"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|s
+operator|.
+name|sql
+argument_list|(
+literal|"SELECT ^bool_and(ename)^ from emp"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"(?s).*Cannot apply 'BOOL_AND' to arguments of type "
+operator|+
+literal|"'BOOL_AND\\(<VARCHAR\\(20\\)>\\)'.*"
+argument_list|)
+expr_stmt|;
+name|s
+operator|.
+name|sql
+argument_list|(
+literal|"SELECT ^bool_or(ename)^ from emp"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"(?s).*Cannot apply 'BOOL_OR' to arguments of type "
+operator|+
+literal|"'BOOL_OR\\(<VARCHAR\\(20\\)>\\)'.*"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
 name|testFunctionalDistinct
 parameter_list|()
 block|{
