@@ -16213,6 +16213,112 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testInsertValuesWithDynamicParams
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"insert into \"DEPT\" values (?,?,?), (?,?,?)"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|""
+operator|+
+literal|"INSERT INTO \"SCOTT\".\"DEPT\" (\"DEPTNO\", \"DNAME\", \"LOC\")\n"
+operator|+
+literal|"SELECT ?, ?, ?\n"
+operator|+
+literal|"FROM (VALUES  (0)) AS \"t\" (\"ZERO\")\n"
+operator|+
+literal|"UNION ALL\n"
+operator|+
+literal|"SELECT ?, ?, ?\n"
+operator|+
+literal|"FROM (VALUES  (0)) AS \"t\" (\"ZERO\")"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|schema
+argument_list|(
+name|CalciteAssert
+operator|.
+name|SchemaSpec
+operator|.
+name|JDBC_SCOTT
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testInsertValuesWithExplicitColumnsAndDynamicParams
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|""
+operator|+
+literal|"insert into \"DEPT\" (\"DEPTNO\", \"DNAME\", \"LOC\")\n"
+operator|+
+literal|"values (?,?,?), (?,?,?)"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|""
+operator|+
+literal|"INSERT INTO \"SCOTT\".\"DEPT\" (\"DEPTNO\", \"DNAME\", \"LOC\")\n"
+operator|+
+literal|"SELECT ?, ?, ?\n"
+operator|+
+literal|"FROM (VALUES  (0)) AS \"t\" (\"ZERO\")\n"
+operator|+
+literal|"UNION ALL\n"
+operator|+
+literal|"SELECT ?, ?, ?\n"
+operator|+
+literal|"FROM (VALUES  (0)) AS \"t\" (\"ZERO\")"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|schema
+argument_list|(
+name|CalciteAssert
+operator|.
+name|SchemaSpec
+operator|.
+name|JDBC_SCOTT
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testTableFunctionScan
 parameter_list|()
 block|{
