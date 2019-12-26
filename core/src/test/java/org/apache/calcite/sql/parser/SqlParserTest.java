@@ -35374,7 +35374,11 @@ name|sql
 init|=
 literal|"select "
 operator|+
-literal|"/*+ properties(k1='v1', k2='v2'), no_hash_join, Index(idx1, idx2) */ "
+literal|"/*+ properties(k1='v1', k2='v2'), "
+operator|+
+literal|"no_hash_join, Index(idx1, idx2), "
+operator|+
+literal|"repartition(3) */ "
 operator|+
 literal|"empno, ename, deptno from emps"
 decl_stmt|;
@@ -35384,7 +35388,13 @@ name|expected
 init|=
 literal|"SELECT\n"
 operator|+
-literal|"/*+ `PROPERTIES`(`K1` ='v1', `K2` ='v2'), `NO_HASH_JOIN`, `INDEX`(`IDX1`, `IDX2`) */\n"
+literal|"/*+ `PROPERTIES`(`K1` ='v1', `K2` ='v2'), "
+operator|+
+literal|"`NO_HASH_JOIN`, "
+operator|+
+literal|"`INDEX`(`IDX1`, `IDX2`), "
+operator|+
+literal|"`REPARTITION`(3) */\n"
 operator|+
 literal|"`EMPNO`, `ENAME`, `DEPTNO`\n"
 operator|+
@@ -35747,7 +35757,7 @@ name|sql1
 init|=
 literal|"select "
 operator|+
-literal|"/*+ properties(k1^=^123, k2='v2'), no_hash_join() */ "
+literal|"/*+ properties(^k1^=123, k2='v2'), no_hash_join() */ "
 operator|+
 literal|"empno, ename, deptno from emps"
 decl_stmt|;
@@ -35758,7 +35768,7 @@ argument_list|)
 operator|.
 name|fails
 argument_list|(
-literal|"(?s).*Encountered \"= 123\" at line 1, column 25.\n.*"
+literal|"(?s).*Encountered \"k1 = 123\" at .*"
 argument_list|)
 expr_stmt|;
 specifier|final
@@ -35791,7 +35801,7 @@ literal|"/*+ no_hash_join() */ "
 operator|+
 literal|"empno, ename, deptno from emps"
 decl_stmt|;
-comment|// allow empty options.
+comment|// Allow empty options.
 specifier|final
 name|String
 name|expected3

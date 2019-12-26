@@ -4429,6 +4429,9 @@ argument_list|)
 expr_stmt|;
 break|break;
 case|case
+name|LITERAL_LIST
+case|:
+case|case
 name|ID_LIST
 case|:
 name|relHint

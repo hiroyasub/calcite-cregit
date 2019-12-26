@@ -912,6 +912,35 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testQueryHintWithLiteralOptions
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+name|HintTools
+operator|.
+name|withHint
+argument_list|(
+literal|"select /*+ time_zone(1, 1.23, 'a bc', -1.0) */ *\n"
+operator|+
+literal|"from emp"
+argument_list|)
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testNestedQueryHint
 parameter_list|()
 block|{
@@ -919,7 +948,7 @@ specifier|final
 name|String
 name|sql
 init|=
-literal|"select /*+ resource(parallelism='3') */ empno\n"
+literal|"select /*+ resource(parallelism='3'), repartition(10) */ empno\n"
 operator|+
 literal|"from (select /*+ resource(mem='20Mb')*/ empno, ename from emp)"
 decl_stmt|;
@@ -3432,6 +3461,15 @@ operator|.
 name|addHintStrategy
 argument_list|(
 literal|"time_zone"
+argument_list|,
+name|HintStrategies
+operator|.
+name|SET_VAR
+argument_list|)
+operator|.
+name|addHintStrategy
+argument_list|(
+literal|"REPARTITION"
 argument_list|,
 name|HintStrategies
 operator|.

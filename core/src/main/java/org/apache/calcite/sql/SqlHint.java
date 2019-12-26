@@ -49,6 +49,20 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|util
+operator|.
+name|NlsString
+import|;
+end_import
+
+begin_import
+import|import
 name|com
 operator|.
 name|google
@@ -118,7 +132,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * A<code>SqlHint</code> is a node of a parse tree which represents  * a sql hint expression.  *  *<p>Basic hint grammar is: hint_name[(option1, option2 ...)].  * The hint_name should be a simple identifier, the options part is optional.  * For every option, it can be a simple identifier or a key value pair whose key  * is a simple identifier and value is a string literal. The identifier option and key  * value pair can not be mixed in, they should be either all simple identifiers  * or all key value pairs.  *  *<p>We support 2 kinds of hints in the parser:  *<ul>  *<li>Query hint, right after the select keyword, i.e.:  *<pre>  *     select&#47;&#42;&#43; hint1, hint2, ...&#42;&#47; ...  *</pre>  *</li>  *<li>Table hint: right after the referenced table name, i.e.:  *<pre>  *     select f0, f1, f2 from t1&#47;&#42;&#43; hint1, hint2, ...&#42;&#47; ...  *</pre>  *</li>  *</ul>  */
+comment|/**  * A<code>SqlHint</code> is a node of a parse tree which represents  * a sql hint expression.  *  *<p>Basic hint grammar is: hint_name[(option1, option2 ...)].  * The hint_name should be a simple identifier, the options part is optional.  * Every option can be of three formats:  *  *<ul>  *<li>a simple identifier</li>  *<li>a literal</li>  *<li>a key value pair whose key is a simple identifier and value is a string literal</li>  *</ul>  *  *<p>The option format can not be mixed in, they should either be all simple identifiers  * or all literals or all key value pairs.  *  *<p>We support 2 kinds of hints in the parser:  *<ul>  *<li>Query hint, right after the select keyword, i.e.:  *<pre>  *     select&#47;&#42;&#43; hint1, hint2, ...&#42;&#47; ...  *</pre>  *</li>  *<li>Table hint: right after the referenced table name, i.e.:  *<pre>  *     select f0, f1, f2 from t1&#47;&#42;&#43; hint1, hint2, ...&#42;&#47; ...  *</pre>  *</li>  *</ul>  */
 end_comment
 
 begin_class
@@ -253,7 +267,7 @@ return|return
 name|optionFormat
 return|;
 block|}
-comment|/**    * Returns a string list if the hint option is a list of    * simple SQL identifier, else an empty list.    */
+comment|/**    * Returns a string list if the hint option is a list of    * simple SQL identifier, or a list of literals,    * else returns an empty list.    */
 specifier|public
 name|List
 argument_list|<
@@ -299,6 +313,96 @@ operator|)
 operator|.
 name|getSimple
 argument_list|()
+argument_list|)
+operator|.
+name|collect
+argument_list|(
+name|Collectors
+operator|.
+name|toList
+argument_list|()
+argument_list|)
+decl_stmt|;
+return|return
+name|ImmutableList
+operator|.
+name|copyOf
+argument_list|(
+name|attrs
+argument_list|)
+return|;
+block|}
+if|else if
+condition|(
+name|optionFormat
+operator|==
+name|HintOptionFormat
+operator|.
+name|LITERAL_LIST
+condition|)
+block|{
+specifier|final
+name|List
+argument_list|<
+name|String
+argument_list|>
+name|attrs
+init|=
+name|options
+operator|.
+name|getList
+argument_list|()
+operator|.
+name|stream
+argument_list|()
+operator|.
+name|map
+argument_list|(
+name|node
+lambda|->
+block|{
+name|SqlLiteral
+name|literal
+init|=
+operator|(
+name|SqlLiteral
+operator|)
+name|node
+decl_stmt|;
+name|Comparable
+argument_list|<
+name|?
+argument_list|>
+name|comparable
+init|=
+name|SqlLiteral
+operator|.
+name|value
+argument_list|(
+name|literal
+argument_list|)
+decl_stmt|;
+return|return
+name|comparable
+operator|instanceof
+name|NlsString
+condition|?
+operator|(
+operator|(
+name|NlsString
+operator|)
+name|comparable
+operator|)
+operator|.
+name|getValue
+argument_list|()
+else|:
+name|comparable
+operator|.
+name|toString
+argument_list|()
+return|;
+block|}
 argument_list|)
 operator|.
 name|collect
@@ -588,9 +692,15 @@ argument_list|)
 expr_stmt|;
 if|if
 condition|(
+name|optionFormat
+operator|==
+name|HintOptionFormat
+operator|.
+name|KV_LIST
+operator|&&
 name|nextOption
-operator|instanceof
-name|SqlLiteral
+operator|!=
+literal|null
 condition|)
 block|{
 name|writer
@@ -632,6 +742,9 @@ name|HintOptionFormat
 block|{
 comment|/**      * The hint has no options.      */
 name|EMPTY
+block|,
+comment|/**      * The hint options are as literal list.      */
+name|LITERAL_LIST
 block|,
 comment|/**      * The hint options are as simple identifier list.      */
 name|ID_LIST
@@ -682,6 +795,32 @@ name|opt
 lambda|->
 name|opt
 operator|instanceof
+name|SqlLiteral
+argument_list|)
+condition|)
+block|{
+return|return
+name|HintOptionFormat
+operator|.
+name|LITERAL_LIST
+return|;
+block|}
+if|if
+condition|(
+name|options
+operator|.
+name|getList
+argument_list|()
+operator|.
+name|stream
+argument_list|()
+operator|.
+name|allMatch
+argument_list|(
+name|opt
+lambda|->
+name|opt
+operator|instanceof
 name|SqlIdentifier
 argument_list|)
 condition|)
@@ -711,6 +850,8 @@ operator|new
 name|AssertionError
 argument_list|(
 literal|"The hint options should either be empty, "
+operator|+
+literal|"or literal list, "
 operator|+
 literal|"or simple identifier list, "
 operator|+
