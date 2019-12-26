@@ -9566,6 +9566,88 @@ name|query
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testIntersectToIntersect0
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|mv
+init|=
+literal|""
+operator|+
+literal|"select \"deptno\" from \"emps\"\n"
+operator|+
+literal|"intersect\n"
+operator|+
+literal|"select \"deptno\" from \"depts\""
+decl_stmt|;
+specifier|final
+name|String
+name|query
+init|=
+literal|""
+operator|+
+literal|"select \"deptno\" from \"depts\"\n"
+operator|+
+literal|"intersect\n"
+operator|+
+literal|"select \"deptno\" from \"emps\""
+decl_stmt|;
+name|checkMaterialize
+argument_list|(
+name|mv
+argument_list|,
+name|query
+argument_list|,
+literal|true
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testIntersectToIntersect1
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|mv
+init|=
+literal|""
+operator|+
+literal|"select \"deptno\" from \"emps\"\n"
+operator|+
+literal|"intersect all\n"
+operator|+
+literal|"select \"deptno\" from \"depts\""
+decl_stmt|;
+specifier|final
+name|String
+name|query
+init|=
+literal|""
+operator|+
+literal|"select \"deptno\" from \"depts\"\n"
+operator|+
+literal|"intersect all\n"
+operator|+
+literal|"select \"deptno\" from \"emps\""
+decl_stmt|;
+name|checkMaterialize
+argument_list|(
+name|mv
+argument_list|,
+name|query
+argument_list|,
+literal|true
+argument_list|)
+expr_stmt|;
+block|}
 specifier|private
 specifier|static
 parameter_list|<
