@@ -94,12 +94,18 @@ import|;
 end_import
 
 begin_import
-import|import
+import|import static
+name|org
+operator|.
 name|junit
 operator|.
-name|framework
+name|jupiter
 operator|.
-name|TestCase
+name|api
+operator|.
+name|Assertions
+operator|.
+name|assertTrue
 import|;
 end_import
 
@@ -111,8 +117,6 @@ begin_class
 specifier|public
 class|class
 name|LookupImplTest
-extends|extends
-name|TestCase
 block|{
 specifier|private
 name|Lookup
