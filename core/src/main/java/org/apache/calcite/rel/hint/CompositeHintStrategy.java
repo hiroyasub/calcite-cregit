@@ -78,7 +78,7 @@ specifier|private
 name|Composition
 name|composition
 decl_stmt|;
-comment|/**    * Creates a HintStrategyCascade with a {@link Composition} and an array of hint strategies.    *    *<p>Make this constructor package-protected intentionally.    * Use utility methods in {@link HintStrategies}    * to create a {@link CompositeHintStrategy}.</p>    */
+comment|/**    * Creates a {@link CompositeHintStrategy} with a {@link Composition}    * and an array of hint strategies.    *    *<p>Make this constructor package-protected intentionally.    * Use utility methods in {@link HintStrategies}    * to create a {@link CompositeHintStrategy}.</p>    */
 name|CompositeHintStrategy
 parameter_list|(
 name|Composition

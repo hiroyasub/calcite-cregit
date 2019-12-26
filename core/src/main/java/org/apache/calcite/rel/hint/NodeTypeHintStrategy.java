@@ -59,6 +59,22 @@ name|rel
 operator|.
 name|core
 operator|.
+name|Calc
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|core
+operator|.
 name|Join
 import|;
 end_import
@@ -146,6 +162,14 @@ comment|/**      * The hint would be propagated to the Aggregate nodes.      */
 name|AGGREGATE
 argument_list|(
 name|Aggregate
+operator|.
+name|class
+argument_list|)
+block|,
+comment|/**      * The hint would be propagated to the Calc nodes.      */
+name|CALC
+argument_list|(
+name|Calc
 operator|.
 name|class
 argument_list|)

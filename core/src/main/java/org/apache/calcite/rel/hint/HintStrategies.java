@@ -112,6 +112,23 @@ operator|.
 name|AGGREGATE
 argument_list|)
 decl_stmt|;
+comment|/** A hint strategy that indicates a hint can only be used to    * {@link org.apache.calcite.rel.core.Calc} nodes. */
+specifier|public
+specifier|static
+specifier|final
+name|HintStrategy
+name|CALC
+init|=
+operator|new
+name|NodeTypeHintStrategy
+argument_list|(
+name|NodeTypeHintStrategy
+operator|.
+name|NodeType
+operator|.
+name|CALC
+argument_list|)
+decl_stmt|;
 comment|/**    * Create a hint strategy from a specific matcher whose rules are totally customized.    *    * @param matcher The strategy matcher    * @return A ExplicitHintStrategy instance.    */
 specifier|public
 specifier|static
