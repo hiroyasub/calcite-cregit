@@ -151,18 +151,6 @@ end_import
 
 begin_import
 import|import
-name|net
-operator|.
-name|jcip
-operator|.
-name|annotations
-operator|.
-name|NotThreadSafe
-import|;
-end_import
-
-begin_import
-import|import
 name|org
 operator|.
 name|junit
@@ -238,8 +226,6 @@ comment|/**  * Unit tests for  * {@link EnumerableRepeatUnion}  *<a href="https:
 end_comment
 
 begin_class
-annotation|@
-name|NotThreadSafe
 specifier|public
 class|class
 name|EnumerableRepeatUnionHierarchyTest

@@ -15994,31 +15994,18 @@ literal|"else null end as qx "
 operator|+
 literal|"from emp"
 decl_stmt|;
-try|try
-init|(
-name|Hook
+name|sql
+argument_list|(
+name|sql
+argument_list|)
 operator|.
-name|Closeable
-name|a
-init|=
+name|withProperty
+argument_list|(
 name|Hook
 operator|.
 name|REL_BUILDER_SIMPLIFY
-operator|.
-name|add
-argument_list|(
-name|Hook
-operator|.
-name|propertyJ
-argument_list|(
+argument_list|,
 literal|false
-argument_list|)
-argument_list|)
-init|)
-block|{
-name|sql
-argument_list|(
-name|sql
 argument_list|)
 operator|.
 name|with
@@ -16029,7 +16016,6 @@ operator|.
 name|check
 argument_list|()
 expr_stmt|;
-block|}
 block|}
 end_function
 

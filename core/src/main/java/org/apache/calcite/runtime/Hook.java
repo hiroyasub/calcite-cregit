@@ -222,7 +222,20 @@ operator|::
 operator|new
 argument_list|)
 decl_stmt|;
-comment|/** Adds a handler for this Hook.    *    *<p>Returns a {@link Hook.Closeable} so that you can use the following    * try-finally pattern to prevent leaks:</p>    *    *<blockquote><pre>    *     final Hook.Closeable closeable = Hook.FOO.add(HANDLER);    *     try {    *         ...    *     } finally {    *         closeable.close();    *     }</pre>    *</blockquote>    */
+comment|/** Adds a handler for this Hook.    *    *<p>Returns a {@link Hook.Closeable} so that you can use the following    * try-finally pattern to prevent leaks:</p>    *    *<blockquote><pre>    *     final Hook.Closeable closeable = Hook.FOO.add(HANDLER);    *     try {    *         ...    *     } finally {    *         closeable.close();    *     }</pre>    *</blockquote>    * @deprecated this installs a global hook (cross-thread), so it might have greater impact    *     than expected. Use with caution. Prefer thread-local hooks.    * @see #addThread(Consumer)    */
+annotation|@
+name|API
+argument_list|(
+name|status
+operator|=
+name|API
+operator|.
+name|Status
+operator|.
+name|MAINTAINED
+argument_list|)
+annotation|@
+name|Deprecated
 specifier|public
 parameter_list|<
 name|T
