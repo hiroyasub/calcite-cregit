@@ -4615,6 +4615,45 @@ name|SqlLibraryOperators
 operator|.
 name|JSON_STORAGE_SIZE
 decl_stmt|;
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
+specifier|public
+specifier|static
+specifier|final
+name|SqlFunction
+name|JSON_INSERT
+init|=
+name|SqlLibraryOperators
+operator|.
+name|JSON_INSERT
+decl_stmt|;
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
+specifier|public
+specifier|static
+specifier|final
+name|SqlFunction
+name|JSON_REPLACE
+init|=
+name|SqlLibraryOperators
+operator|.
+name|JSON_REPLACE
+decl_stmt|;
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
+specifier|public
+specifier|static
+specifier|final
+name|SqlFunction
+name|JSON_SET
+init|=
+name|SqlLibraryOperators
+operator|.
+name|JSON_SET
+decl_stmt|;
 specifier|public
 specifier|static
 specifier|final

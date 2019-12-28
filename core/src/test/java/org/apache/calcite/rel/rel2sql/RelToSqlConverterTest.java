@@ -24447,6 +24447,174 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
+specifier|public
+name|void
+name|testJsonInsert
+parameter_list|()
+block|{
+name|String
+name|query0
+init|=
+literal|"select json_insert(\"product_name\", '$', 10) from \"product\""
+decl_stmt|;
+name|String
+name|query1
+init|=
+literal|"select json_insert(cast(null as varchar), '$', 10, '$', null, '$',"
+operator|+
+literal|" '\n\t\n') from \"product\""
+decl_stmt|;
+specifier|final
+name|String
+name|expected0
+init|=
+literal|"SELECT JSON_INSERT(\"product_name\", '$', 10)\n"
+operator|+
+literal|"FROM \"foodmart\".\"product\""
+decl_stmt|;
+specifier|final
+name|String
+name|expected1
+init|=
+literal|"SELECT JSON_INSERT(NULL, '$', 10, '$', NULL, '$', "
+operator|+
+literal|"u&'\\000a\\0009\\000a')\nFROM \"foodmart\".\"product\""
+decl_stmt|;
+name|sql
+argument_list|(
+name|query0
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected0
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+name|query1
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected1
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testJsonReplace
+parameter_list|()
+block|{
+name|String
+name|query
+init|=
+literal|"select json_replace(\"product_name\", '$', 10) from \"product\""
+decl_stmt|;
+name|String
+name|query1
+init|=
+literal|"select json_replace(cast(null as varchar), '$', 10, '$', null, '$',"
+operator|+
+literal|" '\n\t\n') from \"product\""
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT JSON_REPLACE(\"product_name\", '$', 10)\n"
+operator|+
+literal|"FROM \"foodmart\".\"product\""
+decl_stmt|;
+specifier|final
+name|String
+name|expected1
+init|=
+literal|"SELECT JSON_REPLACE(NULL, '$', 10, '$', NULL, '$', "
+operator|+
+literal|"u&'\\000a\\0009\\000a')\nFROM \"foodmart\".\"product\""
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+name|query1
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected1
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testJsonSet
+parameter_list|()
+block|{
+name|String
+name|query
+init|=
+literal|"select json_set(\"product_name\", '$', 10) from \"product\""
+decl_stmt|;
+name|String
+name|query1
+init|=
+literal|"select json_set(cast(null as varchar), '$', 10, '$', null, '$',"
+operator|+
+literal|" '\n\t\n') from \"product\""
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT JSON_SET(\"product_name\", '$', 10)\n"
+operator|+
+literal|"FROM \"foodmart\".\"product\""
+decl_stmt|;
+specifier|final
+name|String
+name|expected1
+init|=
+literal|"SELECT JSON_SET(NULL, '$', 10, '$', NULL, '$', "
+operator|+
+literal|"u&'\\000a\\0009\\000a')\nFROM \"foodmart\".\"product\""
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+name|query1
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected1
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
 name|void
 name|testUnionAllWithNoOperandsUsingOracleDialect
 parameter_list|()

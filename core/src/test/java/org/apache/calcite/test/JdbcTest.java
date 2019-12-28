@@ -31537,6 +31537,129 @@ expr_stmt|;
 block|}
 end_function
 
+begin_function
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testJsonInsert
+parameter_list|()
+block|{
+name|CalciteAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|CalciteConnectionProperty
+operator|.
+name|FUN
+argument_list|,
+literal|"mysql"
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"SELECT JSON_INSERT(v, '$.a', 10, '$.c', '[1]') AS c1\n"
+operator|+
+literal|",JSON_INSERT(v, '$', 10, '$.c', '[1]') AS c2\n"
+operator|+
+literal|"FROM (VALUES ('{\"a\": 1,\"b\":[2]}')) AS t(v)\n"
+operator|+
+literal|"limit 10"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"C1={\"a\":1,\"b\":[2],\"c\":\"[1]\"}; C2={\"a\":1,\"b\":[2],\"c\":\"[1]\"}\n"
+argument_list|)
+expr_stmt|;
+block|}
+end_function
+
+begin_function
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testJsonReplace
+parameter_list|()
+block|{
+name|CalciteAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|CalciteConnectionProperty
+operator|.
+name|FUN
+argument_list|,
+literal|"mysql"
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"SELECT JSON_REPLACE(v, '$.a', 10, '$.c', '[1]') AS c1\n"
+operator|+
+literal|",JSON_REPLACE(v, '$', 10, '$.c', '[1]') AS c2\n"
+operator|+
+literal|"FROM (VALUES ('{\"a\": 1,\"b\":[2]}')) AS t(v)\n"
+operator|+
+literal|"limit 10"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"C1={\"a\":10,\"b\":[2]}; C2=10\n"
+argument_list|)
+expr_stmt|;
+block|}
+end_function
+
+begin_function
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testJsonSet
+parameter_list|()
+block|{
+name|CalciteAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|CalciteConnectionProperty
+operator|.
+name|FUN
+argument_list|,
+literal|"mysql"
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"SELECT JSON_SET(v, '$.a', 10, '$.c', '[1]') AS c1\n"
+operator|+
+literal|",JSON_SET(v, '$', 10, '$.c', '[1]') AS c2\n"
+operator|+
+literal|"FROM (VALUES ('{\"a\": 1,\"b\":[2]}')) AS t(v)\n"
+operator|+
+literal|"limit 10"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"C1={\"a\":10,\"b\":[2],\"c\":\"[1]\"}; C2=10\n"
+argument_list|)
+expr_stmt|;
+block|}
+end_function
+
 begin_comment
 comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2609">[CALCITE-2609]    * Dynamic parameters ("?") pushed to underlying JDBC schema, causing    * error</a>.    */
 end_comment

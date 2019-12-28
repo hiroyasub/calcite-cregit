@@ -50357,6 +50357,123 @@ end_function
 begin_function
 annotation|@
 name|Test
+specifier|public
+name|void
+name|testJsonInsert
+parameter_list|()
+block|{
+name|expr
+argument_list|(
+literal|"json_insert('{ \"a\": 1, \"b\": [2]}', '$.a', 10, '$.c', '[true]')"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|expr
+argument_list|(
+literal|"json_insert('{ \"a\": 1, \"b\": [2]}', '$.a', 10, '$.c', '[true]')"
+argument_list|)
+operator|.
+name|columnType
+argument_list|(
+literal|"VARCHAR(2000)"
+argument_list|)
+expr_stmt|;
+name|expr
+argument_list|(
+literal|"select ^json_insert('{\"foo\":\"bar\"}')^"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"(?s).*Invalid number of arguments.*"
+argument_list|)
+expr_stmt|;
+block|}
+end_function
+
+begin_function
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testJsonReplace
+parameter_list|()
+block|{
+name|expr
+argument_list|(
+literal|"json_replace('{ \"a\": 1, \"b\": [2]}', '$.a', 10, '$.c', '[true]')"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|expr
+argument_list|(
+literal|"json_replace('{ \"a\": 1, \"b\": [2]}', '$.a', 10, '$.c', '[true]')"
+argument_list|)
+operator|.
+name|columnType
+argument_list|(
+literal|"VARCHAR(2000)"
+argument_list|)
+expr_stmt|;
+name|expr
+argument_list|(
+literal|"select ^json_replace('{\"foo\":\"bar\"}')^"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"(?s).*Invalid number of arguments.*"
+argument_list|)
+expr_stmt|;
+block|}
+end_function
+
+begin_function
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testJsonSet
+parameter_list|()
+block|{
+name|expr
+argument_list|(
+literal|"json_set('{ \"a\": 1, \"b\": [2]}', '$.a', 10, '$.c', '[true]')"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|expr
+argument_list|(
+literal|"json_set('{ \"a\": 1, \"b\": [2]}', '$.a', 10, '$.c', '[true]')"
+argument_list|)
+operator|.
+name|columnType
+argument_list|(
+literal|"VARCHAR(2000)"
+argument_list|)
+expr_stmt|;
+name|expr
+argument_list|(
+literal|"select ^json_set('{\"foo\":\"bar\"}')^"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"(?s).*Invalid number of arguments.*"
+argument_list|)
+expr_stmt|;
+block|}
+end_function
+
+begin_function
+annotation|@
+name|Test
 name|void
 name|testRegexpReplace
 parameter_list|()

@@ -1615,7 +1615,7 @@ argument_list|()
 argument_list|,
 name|is
 argument_list|(
-literal|"Not a valid input for REGEXP_REPLACE: '0'"
+literal|"Invalid input for REGEXP_REPLACE: '0'"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -1658,7 +1658,7 @@ argument_list|()
 argument_list|,
 name|is
 argument_list|(
-literal|"Not a valid input for REGEXP_REPLACE: 'WWW'"
+literal|"Invalid input for REGEXP_REPLACE: 'WWW'"
 argument_list|)
 argument_list|)
 expr_stmt|;

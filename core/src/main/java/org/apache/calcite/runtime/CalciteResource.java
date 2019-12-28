@@ -4525,7 +4525,7 @@ function_decl|;
 annotation|@
 name|BaseMessage
 argument_list|(
-literal|"Not a valid input for JSON_TYPE: ''{0}''"
+literal|"Invalid input for JSON_TYPE: ''{0}''"
 argument_list|)
 name|ExInst
 argument_list|<
@@ -4540,7 +4540,7 @@ function_decl|;
 annotation|@
 name|BaseMessage
 argument_list|(
-literal|"Not a valid input for JSON_DEPTH: ''{0}''"
+literal|"Invalid input for JSON_DEPTH: ''{0}''"
 argument_list|)
 name|ExInst
 argument_list|<
@@ -4570,7 +4570,7 @@ function_decl|;
 annotation|@
 name|BaseMessage
 argument_list|(
-literal|"Not a valid input for JSON_LENGTH: ''{0}''"
+literal|"Invalid input for JSON_LENGTH: ''{0}''"
 argument_list|)
 name|ExInst
 argument_list|<
@@ -4585,7 +4585,7 @@ function_decl|;
 annotation|@
 name|BaseMessage
 argument_list|(
-literal|"Not a valid input for JSON_KEYS: ''{0}''"
+literal|"Invalid input for JSON_KEYS: ''{0}''"
 argument_list|)
 name|ExInst
 argument_list|<
@@ -4618,7 +4618,7 @@ function_decl|;
 annotation|@
 name|BaseMessage
 argument_list|(
-literal|"Not a valid input for JSON_STORAGE_SIZE: ''{0}''"
+literal|"Invalid input for JSON_STORAGE_SIZE: ''{0}''"
 argument_list|)
 name|ExInst
 argument_list|<
@@ -4633,7 +4633,7 @@ function_decl|;
 annotation|@
 name|BaseMessage
 argument_list|(
-literal|"Not a valid input for REGEXP_REPLACE: ''{0}''"
+literal|"Invalid input for REGEXP_REPLACE: ''{0}''"
 argument_list|)
 name|ExInst
 argument_list|<
@@ -4643,6 +4643,60 @@ name|invalidInputForRegexpReplace
 parameter_list|(
 name|String
 name|value
+parameter_list|)
+function_decl|;
+annotation|@
+name|BaseMessage
+argument_list|(
+literal|"Invalid input for JSON_INSERT: jsonDoc: ''{0}'', kvs: ''{1}''"
+argument_list|)
+name|ExInst
+argument_list|<
+name|CalciteException
+argument_list|>
+name|invalidInputForJsonInsert
+parameter_list|(
+name|String
+name|jsonDoc
+parameter_list|,
+name|String
+name|kvs
+parameter_list|)
+function_decl|;
+annotation|@
+name|BaseMessage
+argument_list|(
+literal|"Invalid input for JSON_REPLACE: jsonDoc: ''{0}'', kvs: ''{1}''"
+argument_list|)
+name|ExInst
+argument_list|<
+name|CalciteException
+argument_list|>
+name|invalidInputForJsonReplace
+parameter_list|(
+name|String
+name|jsonDoc
+parameter_list|,
+name|String
+name|kvs
+parameter_list|)
+function_decl|;
+annotation|@
+name|BaseMessage
+argument_list|(
+literal|"Invalid input for JSON_SET: jsonDoc: ''{0}'', kvs: ''{1}''"
+argument_list|)
+name|ExInst
+argument_list|<
+name|CalciteException
+argument_list|>
+name|invalidInputForJsonSet
+parameter_list|(
+name|String
+name|jsonDoc
+parameter_list|,
+name|String
+name|kvs
 parameter_list|)
 function_decl|;
 annotation|@
