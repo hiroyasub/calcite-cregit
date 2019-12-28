@@ -23297,6 +23297,113 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testExtractXml
+parameter_list|()
+block|{
+name|SqlTester
+name|sqlTester
+init|=
+name|tester
+argument_list|(
+name|SqlLibrary
+operator|.
+name|ORACLE
+argument_list|)
+decl_stmt|;
+name|sqlTester
+operator|.
+name|checkFails
+argument_list|(
+literal|"\"EXTRACT\"('', '<','a')"
+argument_list|,
+literal|"Invalid input for EXTRACT xpath: '.*"
+argument_list|,
+literal|true
+argument_list|)
+expr_stmt|;
+name|sqlTester
+operator|.
+name|checkFails
+argument_list|(
+literal|"\"EXTRACT\"('', '<')"
+argument_list|,
+literal|"Invalid input for EXTRACT xpath: '.*"
+argument_list|,
+literal|true
+argument_list|)
+expr_stmt|;
+name|sqlTester
+operator|.
+name|checkNull
+argument_list|(
+literal|"\"EXTRACT\"('', NULL)"
+argument_list|)
+expr_stmt|;
+name|sqlTester
+operator|.
+name|checkNull
+argument_list|(
+literal|"\"EXTRACT\"(NULL,'')"
+argument_list|)
+expr_stmt|;
+name|sqlTester
+operator|.
+name|checkString
+argument_list|(
+literal|"\"EXTRACT\"('<Article><Title>Article1</Title><Authors><Author>Foo</Author><Author>Bar"
+operator|+
+literal|"</Author></Authors><Body>article text"
+operator|+
+literal|".</Body></Article>', '/Article/Title')"
+argument_list|,
+literal|"<Title>Article1</Title>"
+argument_list|,
+literal|"VARCHAR(2000)"
+argument_list|)
+expr_stmt|;
+name|sqlTester
+operator|.
+name|checkString
+argument_list|(
+literal|"\"EXTRACT\"('<Article><Title>Article1</Title><Title>Article2</Title><Authors><Author>Foo"
+operator|+
+literal|"</Author><Author>Bar</Author></Authors><Body>article text"
+operator|+
+literal|".</Body></Article>', '/Article/Title')"
+argument_list|,
+literal|"<Title>Article1</Title><Title>Article2</Title>"
+argument_list|,
+literal|"VARCHAR(2000)"
+argument_list|)
+expr_stmt|;
+name|sqlTester
+operator|.
+name|checkString
+argument_list|(
+literal|"\"EXTRACT\"(\n"
+operator|+
+literal|"'<books xmlns=\"http://www.contoso"
+operator|+
+literal|".com/books\"><book><title>Title</title><author>Author Name</author><price>5"
+operator|+
+literal|".50</price></book></books>'"
+operator|+
+literal|", '/books:books/books:book', 'books=\"http://www.contoso.com/books\"'"
+operator|+
+literal|")"
+argument_list|,
+literal|"<book xmlns=\"http://www.contoso.com/books\"><title>Title</title><author>Author "
+operator|+
+literal|"Name</author><price>5.50</price></book>"
+argument_list|,
+literal|"VARCHAR(2000)"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testLowerFunc
 parameter_list|()
 block|{

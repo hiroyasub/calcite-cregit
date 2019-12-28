@@ -4331,6 +4331,24 @@ function_decl|;
 annotation|@
 name|BaseMessage
 argument_list|(
+literal|"Invalid input for EXTRACT xpath: ''{0}'', namespace: ''{1}''"
+argument_list|)
+name|ExInst
+argument_list|<
+name|CalciteException
+argument_list|>
+name|invalidInputForExtractXml
+parameter_list|(
+name|String
+name|xpath
+parameter_list|,
+name|String
+name|namespace
+parameter_list|)
+function_decl|;
+annotation|@
+name|BaseMessage
+argument_list|(
 literal|"Invalid input for EXTRACTVALUE: xml: ''{0}'', xpath expression: ''{1}''"
 argument_list|)
 name|ExInst
