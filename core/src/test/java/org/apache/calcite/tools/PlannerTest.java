@@ -1195,6 +1195,22 @@ begin_import
 import|import static
 name|org
 operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|test
+operator|.
+name|RelMetadataTest
+operator|.
+name|sortsAs
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
 name|hamcrest
 operator|.
 name|CoreMatchers
@@ -2333,22 +2349,13 @@ argument_list|(
 name|rel
 argument_list|)
 decl_stmt|;
-specifier|final
-name|String
-name|buf
-init|=
+name|assertThat
+argument_list|(
 name|predicates
 operator|.
 name|pulledUpPredicates
-operator|.
-name|toString
-argument_list|()
-decl_stmt|;
-name|assertThat
-argument_list|(
-name|buf
 argument_list|,
-name|equalTo
+name|sortsAs
 argument_list|(
 name|expectedPredicates
 argument_list|)
@@ -7083,7 +7090,7 @@ literal|"    EnumerableTableScan(table=[[scott, EMP]])\n"
 operator|+
 literal|"    EnumerableTableScan(table=[[scott, EMP]])\n"
 operator|+
-literal|"  EnumerableFilter(condition=[=($cor0.DEPTNO, $0)])\n"
+literal|"  EnumerableFilter(condition=[=($0, $cor0.DEPTNO)])\n"
 operator|+
 literal|"    EnumerableUnion(all=[true])\n"
 operator|+

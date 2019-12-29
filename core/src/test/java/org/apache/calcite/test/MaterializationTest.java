@@ -4564,7 +4564,7 @@ name|s
 argument_list|,
 name|simple
 operator|.
-name|toString
+name|toStringRaw
 argument_list|()
 argument_list|)
 expr_stmt|;
@@ -4855,7 +4855,7 @@ name|assertThat
 argument_list|(
 name|newFilter
 operator|.
-name|toString
+name|toStringRaw
 argument_list|()
 argument_list|,
 name|equalTo
@@ -4910,7 +4910,7 @@ name|assertThat
 argument_list|(
 name|newFilter
 operator|.
-name|toString
+name|toStringRaw
 argument_list|()
 argument_list|,
 name|equalTo
@@ -4954,7 +4954,7 @@ name|assertThat
 argument_list|(
 name|newFilter
 operator|.
-name|toString
+name|toStringRaw
 argument_list|()
 argument_list|,
 name|equalTo
@@ -5166,7 +5166,7 @@ name|assertThat
 argument_list|(
 name|newFilter
 operator|.
-name|toString
+name|toStringRaw
 argument_list|()
 argument_list|,
 name|equalTo

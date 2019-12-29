@@ -720,7 +720,7 @@ name|actual
 init|=
 name|result
 operator|.
-name|toString
+name|toStringRaw
 argument_list|()
 decl_stmt|;
 if|if
@@ -2024,7 +2024,7 @@ name|assertThat
 argument_list|(
 name|remaining
 operator|.
-name|toString
+name|toStringRaw
 argument_list|()
 argument_list|,
 name|is

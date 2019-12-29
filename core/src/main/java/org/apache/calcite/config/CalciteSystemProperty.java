@@ -312,6 +312,23 @@ argument_list|,
 literal|true
 argument_list|)
 decl_stmt|;
+comment|/**    * Whether RexNode digest should be normalized (e.g. call operands ordered).    *<p>Normalization helps to treat $0=$1 and $1=$0 expressions equal, thus it saves efforts    * on planning.</p> */
+specifier|public
+specifier|static
+specifier|final
+name|CalciteSystemProperty
+argument_list|<
+name|Boolean
+argument_list|>
+name|ENABLE_REX_DIGEST_NORMALIZE
+init|=
+name|booleanProperty
+argument_list|(
+literal|"calcite.enable.rexnode.digest.normalize"
+argument_list|,
+literal|true
+argument_list|)
+decl_stmt|;
 comment|/**    *  Whether to follow the SQL standard strictly.    */
 specifier|public
 specifier|static

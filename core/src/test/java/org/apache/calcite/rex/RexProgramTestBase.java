@@ -134,6 +134,65 @@ name|RexProgramBuilderBase
 block|{
 specifier|protected
 name|void
+name|checkDigest
+parameter_list|(
+name|RexNode
+name|node
+parameter_list|,
+name|String
+name|expected
+parameter_list|)
+block|{
+name|assertEquals
+argument_list|(
+name|expected
+argument_list|,
+name|node
+operator|.
+name|toString
+argument_list|()
+argument_list|,
+parameter_list|()
+lambda|->
+literal|"Digest of "
+operator|+
+name|node
+operator|.
+name|toStringRaw
+argument_list|()
+argument_list|)
+expr_stmt|;
+block|}
+specifier|protected
+name|void
+name|checkRaw
+parameter_list|(
+name|RexNode
+name|node
+parameter_list|,
+name|String
+name|expected
+parameter_list|)
+block|{
+name|assertEquals
+argument_list|(
+name|expected
+argument_list|,
+name|node
+operator|.
+name|toStringRaw
+argument_list|()
+argument_list|,
+parameter_list|()
+lambda|->
+literal|"Raw representation of node with digest "
+operator|+
+name|node
+argument_list|)
+expr_stmt|;
+block|}
+specifier|protected
+name|void
 name|checkCnf
 parameter_list|(
 name|RexNode
@@ -160,7 +219,7 @@ argument_list|,
 name|node
 argument_list|)
 operator|.
-name|toString
+name|toStringRaw
 argument_list|()
 argument_list|,
 name|equalTo
@@ -207,7 +266,7 @@ argument_list|,
 name|node
 argument_list|)
 operator|.
-name|toString
+name|toStringRaw
 argument_list|()
 argument_list|,
 name|equalTo
@@ -231,7 +290,7 @@ name|node
 argument_list|,
 name|node
 operator|.
-name|toString
+name|toStringRaw
 argument_list|()
 argument_list|)
 expr_stmt|;
@@ -264,7 +323,7 @@ argument_list|,
 name|node
 argument_list|)
 operator|.
-name|toString
+name|toStringRaw
 argument_list|()
 argument_list|,
 name|equalTo
@@ -318,7 +377,7 @@ name|actual
 operator|=
 name|node
 operator|.
-name|toString
+name|toStringRaw
 argument_list|()
 expr_stmt|;
 block|}
@@ -378,7 +437,7 @@ name|nodeString
 init|=
 name|node
 operator|.
-name|toString
+name|toStringRaw
 argument_list|()
 decl_stmt|;
 name|checkSimplify3_
@@ -406,7 +465,7 @@ throw|throw
 operator|new
 name|AssertionError
 argument_list|(
-literal|"expected == node.toString(); "
+literal|"expected == node.toStringRaw(); "
 operator|+
 literal|"use checkSimplifyUnchanged"
 argument_list|)
@@ -428,7 +487,7 @@ name|expected
 init|=
 name|node
 operator|.
-name|toString
+name|toStringRaw
 argument_list|()
 decl_stmt|;
 name|checkSimplify3_
@@ -602,7 +661,7 @@ name|node
 argument_list|,
 name|simplified
 operator|.
-name|toString
+name|toStringRaw
 argument_list|()
 argument_list|,
 name|equalTo
@@ -649,7 +708,7 @@ name|node
 argument_list|,
 name|simplified2
 operator|.
-name|toString
+name|toStringRaw
 argument_list|()
 argument_list|,
 name|equalTo
@@ -681,7 +740,7 @@ name|node
 argument_list|,
 name|simplified3
 operator|.
-name|toString
+name|toStringRaw
 argument_list|()
 argument_list|,
 name|equalTo
@@ -751,7 +810,7 @@ name|assertThat
 argument_list|(
 name|simplified
 operator|.
-name|toString
+name|toStringRaw
 argument_list|()
 argument_list|,
 name|equalTo
@@ -799,7 +858,7 @@ name|assertThat
 argument_list|(
 name|simplified
 operator|.
-name|toString
+name|toStringRaw
 argument_list|()
 argument_list|,
 name|equalTo
@@ -827,7 +886,7 @@ literal|"isAlwaysTrue() of expression: "
 operator|+
 name|e
 operator|.
-name|toString
+name|toStringRaw
 argument_list|()
 argument_list|,
 name|e
@@ -847,7 +906,7 @@ literal|"isAlwaysFalse() of expression: "
 operator|+
 name|e
 operator|.
-name|toString
+name|toStringRaw
 argument_list|()
 argument_list|,
 name|e
@@ -871,7 +930,7 @@ argument_list|(
 name|e
 argument_list|)
 operator|.
-name|toString
+name|toStringRaw
 argument_list|()
 argument_list|,
 name|is

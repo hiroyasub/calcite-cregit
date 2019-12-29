@@ -4544,7 +4544,7 @@ name|assertThat
 argument_list|(
 name|cnf
 operator|.
-name|toString
+name|toStringRaw
 argument_list|()
 argument_list|,
 name|equalTo
@@ -7212,7 +7212,7 @@ argument_list|(
 name|args
 argument_list|)
 operator|.
-name|toString
+name|toStringRaw
 argument_list|()
 argument_list|,
 name|equalTo
@@ -8861,7 +8861,7 @@ name|assertThat
 argument_list|(
 name|simplified
 operator|.
-name|toString
+name|toStringRaw
 argument_list|()
 argument_list|,
 name|equalTo
@@ -14233,7 +14233,7 @@ name|representation
 argument_list|,
 name|rexNode
 operator|.
-name|toString
+name|toStringRaw
 argument_list|()
 argument_list|)
 expr_stmt|;

@@ -1421,16 +1421,6 @@ name|org
 operator|.
 name|hamcrest
 operator|.
-name|CustomTypeSafeMatcher
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|hamcrest
-operator|.
 name|Matcher
 import|;
 end_import
@@ -11477,11 +11467,8 @@ argument_list|(
 name|predicates
 operator|.
 name|pulledUpPredicates
-operator|.
-name|toString
-argument_list|()
 argument_list|,
-name|is
+name|sortsAs
 argument_list|(
 literal|"[=($0, 1)]"
 argument_list|)
@@ -12288,7 +12275,7 @@ argument_list|()
 argument_list|,
 name|is
 argument_list|(
-literal|18
+literal|12
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -12561,7 +12548,7 @@ name|pulledUpPredicates
 argument_list|,
 name|sortsAs
 argument_list|(
-literal|"[=($0, 1), OR(AND(=($1, 2), =($2, 3)), =($1, 4))]"
+literal|"[=($0, 1), OR(AND(=($2, 3), =($1, 2)), =($1, 4))]"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -16914,21 +16901,18 @@ argument_list|(
 name|inputSet
 operator|.
 name|pulledUpPredicates
-operator|.
-name|toString
-argument_list|()
 argument_list|,
-name|equalTo
+name|sortsAs
 argument_list|(
-literal|"[true, "
+literal|"[=([CATALOG, SALES, EMP].#0.$7, [CATALOG, SALES, EMP].#1.$7), "
 operator|+
-literal|"=([CATALOG, SALES, EMP].#0.$7, [CATALOG, SALES, EMP].#1.$7), "
-operator|+
-literal|"true, "
+literal|"=([CATALOG, SALES, EMP].#0.$7, [CATALOG, SALES, EMP].#2.$7), "
 operator|+
 literal|"=([CATALOG, SALES, EMP].#2.$7, [CATALOG, SALES, EMP].#3.$7), "
 operator|+
-literal|"=([CATALOG, SALES, EMP].#0.$7, [CATALOG, SALES, EMP].#2.$7)]"
+literal|"true, "
+operator|+
+literal|"true]"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -17035,19 +17019,16 @@ argument_list|(
 name|inputSet
 operator|.
 name|pulledUpPredicates
-operator|.
-name|toString
-argument_list|()
 argument_list|,
-name|equalTo
+name|sortsAs
 argument_list|(
-literal|"[true, "
+literal|"[=([CATALOG, SALES, EMP].#0.$7, [CATALOG, SALES, EMP].#1.$7),"
 operator|+
-literal|"=([CATALOG, SALES, EMP].#0.$7, [CATALOG, SALES, EMP].#1.$7), "
+literal|" =([CATALOG, SALES, EMP].#2.$7, [CATALOG, SALES, EMP].#3.$7), "
 operator|+
 literal|"true, "
 operator|+
-literal|"=([CATALOG, SALES, EMP].#2.$7, [CATALOG, SALES, EMP].#3.$7)]"
+literal|"true]"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -17347,11 +17328,8 @@ decl_stmt|;
 name|assertThat
 argument_list|(
 name|tableReferences
-operator|.
-name|toString
-argument_list|()
 argument_list|,
-name|equalTo
+name|sortsAs
 argument_list|(
 literal|"[[CATALOG, SALES, DEPT].#0, "
 operator|+
@@ -17378,13 +17356,10 @@ argument_list|(
 name|inputSet
 operator|.
 name|pulledUpPredicates
-operator|.
-name|toString
-argument_list|()
 argument_list|,
-name|equalTo
+name|sortsAs
 argument_list|(
-literal|"[true, =([CATALOG, SALES, EMP].#1.$0, 5), true]"
+literal|"[=([CATALOG, SALES, EMP].#1.$0, 5), true, true]"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -17567,11 +17542,8 @@ decl_stmt|;
 name|assertThat
 argument_list|(
 name|tableReferences
-operator|.
-name|toString
-argument_list|()
 argument_list|,
-name|equalTo
+name|sortsAs
 argument_list|(
 literal|"[[CATALOG, SALES, EMP].#0, "
 operator|+
@@ -17599,11 +17571,8 @@ argument_list|(
 name|inputSet
 operator|.
 name|pulledUpPredicates
-operator|.
-name|toString
-argument_list|()
 argument_list|,
-name|equalTo
+name|sortsAs
 argument_list|(
 literal|"[=([CATALOG, SALES, EMP].#2.$0, 5)]"
 argument_list|)
@@ -20473,6 +20442,7 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/**    * Matcher that succeeds for any collection that, when converted to strings    * and sorted on those strings, matches the given reference string.    *    *<p>Use it as an alternative to {@link CoreMatchers#is} if items in your    * list might occur in any order.    *    *<p>For example:    *    *<blockquote><pre>List&lt;Integer&gt; ints = Arrays.asList(2, 500, 12);    * assertThat(ints, sortsAs("[12, 2, 500]");</pre></blockquote>    */
+specifier|public
 specifier|static
 parameter_list|<
 name|T
@@ -20494,32 +20464,30 @@ name|value
 parameter_list|)
 block|{
 return|return
-operator|new
-name|CustomTypeSafeMatcher
-argument_list|<
-name|Iterable
-argument_list|<
-name|?
-extends|extends
-name|T
-argument_list|>
-argument_list|>
+name|Matchers
+operator|.
+name|compose
+argument_list|(
+name|equalTo
 argument_list|(
 name|value
 argument_list|)
-block|{
-specifier|protected
-name|boolean
-name|matchesSafely
-parameter_list|(
-name|Iterable
-argument_list|<
-name|?
-extends|extends
-name|T
-argument_list|>
+argument_list|,
 name|item
-parameter_list|)
+lambda|->
+block|{
+try|try
+init|(
+name|RexNode
+operator|.
+name|Closeable
+name|ignored
+init|=
+name|RexNode
+operator|.
+name|skipNormalize
+argument_list|()
+init|)
 block|{
 specifier|final
 name|List
@@ -20560,18 +20528,14 @@ name|strings
 argument_list|)
 expr_stmt|;
 return|return
-name|value
-operator|.
-name|equals
-argument_list|(
 name|strings
 operator|.
 name|toString
 argument_list|()
-argument_list|)
 return|;
 block|}
 block|}
+argument_list|)
 return|;
 block|}
 comment|/** Custom metadata interface. */

@@ -1273,7 +1273,7 @@ name|TEXT
 argument_list|,
 name|SqlExplainLevel
 operator|.
-name|DIGEST_ATTRIBUTES
+name|EXPPLAN_ATTRIBUTES
 argument_list|)
 decl_stmt|;
 name|assertThat
