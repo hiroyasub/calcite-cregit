@@ -9693,6 +9693,57 @@ literal|true
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testIntersectToCalcOnIntersect
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|intersect
+init|=
+literal|""
+operator|+
+literal|"select \"deptno\",\"name\" from \"emps\"\n"
+operator|+
+literal|"intersect all\n"
+operator|+
+literal|"select \"deptno\",\"name\" from \"depts\""
+decl_stmt|;
+specifier|final
+name|String
+name|mv
+init|=
+literal|"select \"name\", \"deptno\" from ("
+operator|+
+name|intersect
+operator|+
+literal|")"
+decl_stmt|;
+specifier|final
+name|String
+name|query
+init|=
+literal|""
+operator|+
+literal|"select \"name\",\"deptno\" from \"depts\"\n"
+operator|+
+literal|"intersect all\n"
+operator|+
+literal|"select \"name\",\"deptno\" from \"emps\""
+decl_stmt|;
+name|checkMaterialize
+argument_list|(
+name|mv
+argument_list|,
+name|query
+argument_list|,
+literal|true
+argument_list|)
+expr_stmt|;
+block|}
 specifier|private
 specifier|static
 parameter_list|<
