@@ -3276,8 +3276,6 @@ argument_list|(
 name|newInput
 argument_list|,
 name|newProject
-argument_list|,
-literal|false
 argument_list|)
 expr_stmt|;
 comment|// update mappings:
@@ -3741,8 +3739,6 @@ name|relBuilder
 operator|.
 name|build
 argument_list|()
-argument_list|,
-literal|false
 argument_list|)
 decl_stmt|;
 comment|// Aggregate does not change input ordering so corVars will be
@@ -4290,8 +4286,6 @@ argument_list|(
 name|rel
 argument_list|,
 name|newProject
-argument_list|,
-literal|false
 argument_list|)
 expr_stmt|;
 return|return
@@ -6776,8 +6770,6 @@ argument_list|(
 name|rel
 argument_list|,
 name|newJoin
-argument_list|,
-literal|false
 argument_list|)
 expr_stmt|;
 comment|// Create the mapping between the output of the old correlation rel

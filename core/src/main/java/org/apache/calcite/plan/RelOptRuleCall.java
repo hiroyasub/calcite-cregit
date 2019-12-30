@@ -635,7 +635,7 @@ name|equiv
 argument_list|,
 name|RelOptUtil
 operator|::
-name|copyRelHints
+name|copyEquivalentRelHints
 argument_list|)
 expr_stmt|;
 block|}
