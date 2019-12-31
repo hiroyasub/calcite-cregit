@@ -2095,6 +2095,56 @@ name|expectedLogical
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testTableModify
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"insert into \"employee\" select * from \"employee\""
+decl_stmt|;
+specifier|final
+name|String
+name|expectedPhysial
+init|=
+literal|""
+operator|+
+literal|"JdbcToEnumerableConverter\n"
+operator|+
+literal|"  JdbcTableModify(table=[[foodmart, employee]], operation=[INSERT], flattened=[true])\n"
+operator|+
+literal|"    JdbcTableScan(table=[[foodmart, employee]])\n"
+decl_stmt|;
+specifier|final
+name|String
+name|expectedLogical
+init|=
+literal|""
+operator|+
+literal|"LogicalTableModify(table=[[foodmart, employee]], "
+operator|+
+literal|"operation=[INSERT], flattened=[true])\n"
+operator|+
+literal|"  LogicalTableScan(table=[[foodmart, employee]])\n"
+decl_stmt|;
+name|verify
+argument_list|(
+name|rel
+argument_list|(
+name|sql
+argument_list|)
+argument_list|,
+name|expectedPhysial
+argument_list|,
+name|expectedLogical
+argument_list|)
+expr_stmt|;
+block|}
 block|}
 end_class
 
