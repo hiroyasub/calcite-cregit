@@ -6354,11 +6354,8 @@ operator|.
 name|EMPTY
 argument_list|)
 decl_stmt|;
-name|Result
-name|x
-init|=
-operator|new
-name|Result
+return|return
+name|result
 argument_list|(
 name|select
 argument_list|,
@@ -6371,18 +6368,10 @@ operator|.
 name|SELECT
 argument_list|)
 argument_list|,
-literal|null
-argument_list|,
 name|e
-operator|.
-name|getRowType
-argument_list|()
 argument_list|,
 literal|null
 argument_list|)
-decl_stmt|;
-return|return
-name|x
 return|;
 block|}
 comment|/**    * Creates operands for a full AS operator. Format SqlNode AS alias(col_1, col_2,... ,col_n).    *    * @param rowType Row type of the SqlNode    * @param leftOperand SqlNode    * @param alias alias    */

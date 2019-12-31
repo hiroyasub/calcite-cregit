@@ -13882,6 +13882,45 @@ name|expected
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3651">[CALCITE-3651]    * NullPointerException when convert relational algebra that correlates TableFunctionScan</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testLateralCorrelate
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|query
+init|=
+literal|"select * from \"product\",\n"
+operator|+
+literal|"lateral table(RAMP(\"product\".\"product_id\"))"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM \"foodmart\".\"product\" AS \"$cor0\",\n"
+operator|+
+literal|"LATERAL (SELECT *\n"
+operator|+
+literal|"FROM TABLE(RAMP(\"$cor0\".\"product_id\"))) AS \"t\""
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
 annotation|@
 name|Test
 specifier|public
