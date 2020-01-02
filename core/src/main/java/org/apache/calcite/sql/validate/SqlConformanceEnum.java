@@ -46,6 +46,9 @@ block|,
 comment|/** Conformance value that instructs Calcite to use SQL semantics    * consistent with the SQL:99 standard, but ignoring its more    * inconvenient or controversial dicta. */
 name|PRAGMATIC_99
 block|,
+comment|/** Conformance value that instructs Calcite to use SQL semantics    * consistent with BigQuery. */
+name|BIG_QUERY
+block|,
 comment|/** Conformance value that instructs Calcite to use SQL semantics    * consistent with MySQL version 5.x. */
 name|MYSQL_5
 block|,
@@ -101,6 +104,9 @@ name|BABEL
 case|:
 case|case
 name|LENIENT
+case|:
+case|case
+name|BIG_QUERY
 case|:
 case|case
 name|MYSQL_5
@@ -159,6 +165,9 @@ case|case
 name|LENIENT
 case|:
 case|case
+name|BIG_QUERY
+case|:
+case|case
 name|MYSQL_5
 case|:
 return|return
@@ -188,6 +197,9 @@ name|BABEL
 case|:
 case|case
 name|LENIENT
+case|:
+case|case
+name|BIG_QUERY
 case|:
 case|case
 name|MYSQL_5
@@ -459,6 +471,9 @@ case|:
 case|case
 name|PRAGMATIC_2003
 case|:
+case|case
+name|BIG_QUERY
+case|:
 return|return
 literal|true
 return|;
@@ -620,6 +635,9 @@ name|PRAGMATIC_99
 case|:
 case|case
 name|PRAGMATIC_2003
+case|:
+case|case
+name|BIG_QUERY
 case|:
 case|case
 name|MYSQL_5

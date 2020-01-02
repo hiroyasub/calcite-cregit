@@ -1527,7 +1527,9 @@ argument_list|,
 name|rightPrec
 argument_list|)
 expr_stmt|;
-comment|/**      * If the trimmed character is non space character then add it to the target sql.      * eg: TRIM(BOTH 'A' from 'ABCD'      * Output Query: TRIM('ABC', 'A')      * */
+comment|// If the trimmed character is a non-space character, add it to the target SQL.
+comment|// eg: TRIM(BOTH 'A' from 'ABCD'
+comment|// Output Query: TRIM('ABC', 'A')
 if|if
 condition|(
 operator|!

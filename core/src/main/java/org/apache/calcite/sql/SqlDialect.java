@@ -4295,6 +4295,14 @@ operator|.
 name|DEFAULT
 return|;
 case|case
+name|BIG_QUERY
+case|:
+return|return
+name|SqlConformanceEnum
+operator|.
+name|BIG_QUERY
+return|;
+case|case
 name|MYSQL
 case|:
 return|return

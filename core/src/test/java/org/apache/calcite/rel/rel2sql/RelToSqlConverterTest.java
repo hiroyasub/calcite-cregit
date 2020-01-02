@@ -1050,6 +1050,12 @@ name|CalciteSqlDialect
 operator|.
 name|DEFAULT
 argument_list|,
+name|SqlParser
+operator|.
+name|Config
+operator|.
+name|DEFAULT
+argument_list|,
 name|DEFAULT_REL_CONFIG
 argument_list|,
 name|ImmutableList
@@ -4507,7 +4513,7 @@ argument_list|)
 expr_stmt|;
 block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3220">[CALCITE-3220]    * HiveSqlDialect should transform the SQL-standard TRIM function to TRIM,    * LTRIM or RTRIM</a>. */
-comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3663">[CALCITE-3663]    * Support for TRIM function in Bigquery dialect</a>. */
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3663">[CALCITE-3663]    * Support for TRIM function in BigQuery dialect</a>. */
 annotation|@
 name|Test
 specifier|public
@@ -17811,6 +17817,97 @@ name|expected
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3593">[CALCITE-3593]    * RelToSqlConverter changes target of ambiguous HAVING clause with a Project    * on Filter on Aggregate</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testBigQueryHaving
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|""
+operator|+
+literal|"SELECT \"DEPTNO\" - 10 \"DEPTNO\"\n"
+operator|+
+literal|"FROM \"EMP\"\n"
+operator|+
+literal|"GROUP BY \"DEPTNO\"\n"
+operator|+
+literal|"HAVING \"DEPTNO\"> 0"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|""
+operator|+
+literal|"SELECT DEPTNO - 10 AS DEPTNO\n"
+operator|+
+literal|"FROM (SELECT DEPTNO\n"
+operator|+
+literal|"FROM SCOTT.EMP\n"
+operator|+
+literal|"GROUP BY DEPTNO\n"
+operator|+
+literal|"HAVING DEPTNO> 0) AS t1"
+decl_stmt|;
+comment|// Parse the input SQL with PostgreSQL dialect,
+comment|// in which "isHavingAlias" is false.
+specifier|final
+name|SqlParser
+operator|.
+name|Config
+name|parserConfig
+init|=
+name|PostgresqlSqlDialect
+operator|.
+name|DEFAULT
+operator|.
+name|configureParser
+argument_list|(
+name|SqlParser
+operator|.
+name|configBuilder
+argument_list|()
+argument_list|)
+operator|.
+name|build
+argument_list|()
+decl_stmt|;
+comment|// Convert rel node to SQL with BigQuery dialect,
+comment|// in which "isHavingAlias" is true.
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|parserConfig
+argument_list|(
+name|parserConfig
+argument_list|)
+operator|.
+name|schema
+argument_list|(
+name|CalciteAssert
+operator|.
+name|SchemaSpec
+operator|.
+name|JDBC_SCOTT
+argument_list|)
+operator|.
+name|withBigQuery
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
 comment|/** Fluid interface to run tests. */
 specifier|static
 class|class
@@ -17846,6 +17943,13 @@ name|transforms
 decl_stmt|;
 specifier|private
 specifier|final
+name|SqlParser
+operator|.
+name|Config
+name|parserConfig
+decl_stmt|;
+specifier|private
+specifier|final
 name|SqlToRelConverter
 operator|.
 name|Config
@@ -17863,6 +17967,11 @@ name|sql
 parameter_list|,
 name|SqlDialect
 name|dialect
+parameter_list|,
+name|SqlParser
+operator|.
+name|Config
+name|parserConfig
 parameter_list|,
 name|SqlToRelConverter
 operator|.
@@ -17930,6 +18039,12 @@ argument_list|)
 expr_stmt|;
 name|this
 operator|.
+name|parserConfig
+operator|=
+name|parserConfig
+expr_stmt|;
+name|this
+operator|.
 name|config
 operator|=
 name|config
@@ -17945,6 +18060,11 @@ name|sql
 parameter_list|,
 name|SqlDialect
 name|dialect
+parameter_list|,
+name|SqlParser
+operator|.
+name|Config
+name|parserConfig
 parameter_list|,
 name|SqlToRelConverter
 operator|.
@@ -17994,6 +18114,12 @@ argument_list|)
 expr_stmt|;
 name|this
 operator|.
+name|parserConfig
+operator|=
+name|parserConfig
+expr_stmt|;
+name|this
+operator|.
 name|config
 operator|=
 name|config
@@ -18015,6 +18141,8 @@ argument_list|,
 name|sql
 argument_list|,
 name|dialect
+argument_list|,
+name|parserConfig
 argument_list|,
 name|config
 argument_list|,
@@ -18510,6 +18638,33 @@ argument_list|)
 return|;
 block|}
 name|Sql
+name|parserConfig
+parameter_list|(
+name|SqlParser
+operator|.
+name|Config
+name|parserConfig
+parameter_list|)
+block|{
+return|return
+operator|new
+name|Sql
+argument_list|(
+name|schema
+argument_list|,
+name|sql
+argument_list|,
+name|dialect
+argument_list|,
+name|parserConfig
+argument_list|,
+name|config
+argument_list|,
+name|transforms
+argument_list|)
+return|;
+block|}
+name|Sql
 name|config
 parameter_list|(
 name|SqlToRelConverter
@@ -18527,6 +18682,8 @@ argument_list|,
 name|sql
 argument_list|,
 name|dialect
+argument_list|,
+name|parserConfig
 argument_list|,
 name|config
 argument_list|,
@@ -18555,6 +18712,8 @@ argument_list|,
 name|sql
 argument_list|,
 name|dialect
+argument_list|,
+name|parserConfig
 argument_list|,
 name|config
 argument_list|,
@@ -18724,11 +18883,7 @@ name|getPlanner
 argument_list|(
 literal|null
 argument_list|,
-name|SqlParser
-operator|.
-name|Config
-operator|.
-name|DEFAULT
+name|parserConfig
 argument_list|,
 name|schema
 argument_list|,
@@ -18836,6 +18991,8 @@ argument_list|,
 name|sql
 argument_list|,
 name|dialect
+argument_list|,
+name|parserConfig
 argument_list|,
 name|config
 argument_list|,
