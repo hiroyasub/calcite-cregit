@@ -4259,7 +4259,7 @@ name|sql
 argument_list|(
 literal|"update EMP_MODIFIABLEVIEW3(extra BOOLEAN, comm INTEGER)"
 operator|+
-literal|" set empno = 20, comm = true, extra = true"
+literal|" set empno = 20, comm = 123, extra = true"
 operator|+
 literal|" where ename = 'Bob'"
 argument_list|)

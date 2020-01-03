@@ -15980,9 +15980,15 @@ name|expected0
 init|=
 literal|"INSERT INTO SCOTT.DEPT (DEPTNO, DNAME, LOC)\n"
 operator|+
-literal|"VALUES  (1, 'Fred', 'San Francisco'),\n"
+literal|"SELECT 1, 'Fred', 'San Francisco'\n"
 operator|+
-literal|" (2, 'Eric', 'Washington')"
+literal|"FROM (VALUES  (0)) t (ZERO)\n"
+operator|+
+literal|"UNION ALL\n"
+operator|+
+literal|"SELECT 2, 'Eric', 'Washington'\n"
+operator|+
+literal|"FROM (VALUES  (0)) t (ZERO)"
 decl_stmt|;
 name|String
 name|sql
@@ -16019,9 +16025,11 @@ name|expected1
 init|=
 literal|"INSERT INTO `SCOTT`.`DEPT` (`DEPTNO`, `DNAME`, `LOC`)\n"
 operator|+
-literal|"VALUES  (1, 'Fred', 'San Francisco'),\n"
+literal|"SELECT 1, 'Fred', 'San Francisco'\n"
 operator|+
-literal|" (2, 'Eric', 'Washington')"
+literal|"UNION ALL\n"
+operator|+
+literal|"SELECT 2, 'Eric', 'Washington'"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -16049,11 +16057,19 @@ specifier|final
 name|String
 name|expected2
 init|=
-literal|"INSERT INTO \"SCOTT\".\"DEPT\" (\"DEPTNO\", \"DNAME\", \"LOC\")\n"
+literal|"INSERT INTO \"SCOTT\".\"DEPT\" (\"DEPTNO\", "
 operator|+
-literal|"VALUES  (1, 'Fred', 'San Francisco'),\n"
+literal|"\"DNAME\", \"LOC\")\n"
 operator|+
-literal|" (2, 'Eric', 'Washington')"
+literal|"SELECT 1, 'Fred', 'San Francisco'\n"
+operator|+
+literal|"FROM \"DUAL\"\n"
+operator|+
+literal|"UNION ALL\n"
+operator|+
+literal|"SELECT 2, 'Eric', 'Washington'\n"
+operator|+
+literal|"FROM \"DUAL\""
 decl_stmt|;
 name|sql
 argument_list|(
@@ -16083,9 +16099,15 @@ name|expected3
 init|=
 literal|"INSERT INTO [SCOTT].[DEPT] ([DEPTNO], [DNAME], [LOC])\n"
 operator|+
-literal|"VALUES  (1, 'Fred', 'San Francisco'),\n"
+literal|"SELECT 1, 'Fred', 'San Francisco'\n"
 operator|+
-literal|" (2, 'Eric', 'Washington')"
+literal|"FROM (VALUES  (0)) AS [t] ([ZERO])\n"
+operator|+
+literal|"UNION ALL\n"
+operator|+
+literal|"SELECT 2, 'Eric', 'Washington'\n"
+operator|+
+literal|"FROM (VALUES  (0)) AS [t] ([ZERO])"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -16113,11 +16135,19 @@ specifier|final
 name|String
 name|expected4
 init|=
-literal|"INSERT INTO \"SCOTT\".\"DEPT\" (\"DEPTNO\", \"DNAME\", \"LOC\")\n"
+literal|"INSERT INTO \"SCOTT\".\"DEPT\" (\"DEPTNO\", "
 operator|+
-literal|"VALUES  (1, 'Fred', 'San Francisco'),\n"
+literal|"\"DNAME\", \"LOC\")\n"
 operator|+
-literal|" (2, 'Eric', 'Washington')"
+literal|"SELECT 1, 'Fred', 'San Francisco'\n"
+operator|+
+literal|"FROM (VALUES  (0)) AS \"t\" (\"ZERO\")\n"
+operator|+
+literal|"UNION ALL\n"
+operator|+
+literal|"SELECT 2, 'Eric', 'Washington'\n"
+operator|+
+literal|"FROM (VALUES  (0)) AS \"t\" (\"ZERO\")"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -16142,11 +16172,19 @@ specifier|final
 name|String
 name|expected5
 init|=
-literal|"INSERT INTO \"SCOTT\".\"DEPT\" (\"DEPTNO\", \"DNAME\", \"LOC\")\n"
+literal|"INSERT INTO \"SCOTT\".\"DEPT\" (\"DEPTNO\", "
 operator|+
-literal|"VALUES  (1, 'Fred', 'San Francisco'),\n"
+literal|"\"DNAME\", \"LOC\")\n"
 operator|+
-literal|" (2, 'Eric', 'Washington')"
+literal|"SELECT 1, 'Fred', 'San Francisco'\n"
+operator|+
+literal|"FROM (VALUES  (0)) AS \"t\" (\"ZERO\")\n"
+operator|+
+literal|"UNION ALL\n"
+operator|+
+literal|"SELECT 2, 'Eric', 'Washington'\n"
+operator|+
+literal|"FROM (VALUES  (0)) AS \"t\" (\"ZERO\")"
 decl_stmt|;
 name|sql
 argument_list|(

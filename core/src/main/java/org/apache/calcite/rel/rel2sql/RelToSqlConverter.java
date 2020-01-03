@@ -4998,7 +4998,7 @@ name|identifierList
 argument_list|(
 name|modify
 operator|.
-name|getInput
+name|getTable
 argument_list|()
 operator|.
 name|getRowType

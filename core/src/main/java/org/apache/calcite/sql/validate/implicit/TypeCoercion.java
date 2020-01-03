@@ -286,6 +286,23 @@ name|SqlFunction
 name|function
 parameter_list|)
 function_decl|;
+comment|/**    * Coerces the source row expression to target type in an INSERT or UPDATE query.    *    *<p>If the source and target fields in the same ordinal do not equal sans nullability,    * try to coerce the source field to target field type.    *    * @param scope         Source scope    * @param sourceRowType Source row type    * @param targetRowType Target row type    * @param query         The query, either an INSERT or UPDATE    *    * @return True if any type coercion happens    */
+name|boolean
+name|querySourceCoercion
+parameter_list|(
+name|SqlValidatorScope
+name|scope
+parameter_list|,
+name|RelDataType
+name|sourceRowType
+parameter_list|,
+name|RelDataType
+name|targetRowType
+parameter_list|,
+name|SqlNode
+name|query
+parameter_list|)
+function_decl|;
 block|}
 end_interface
 

@@ -4763,7 +4763,7 @@ name|INTEGER
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Test case for {@link AbstractTypeCoercion#implicitCast}. */
+comment|/** Test case for {@link TypeCoercion#builtinFunctionCoercion}. */
 annotation|@
 name|Test
 specifier|public
@@ -4854,6 +4854,97 @@ operator|.
 name|columnType
 argument_list|(
 literal|"VARCHAR"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Test case for {@link TypeCoercion#querySourceCoercion}. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testQuerySourceCoercion
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|expectRowType
+init|=
+literal|"RecordType("
+operator|+
+literal|"VARCHAR(20) NOT NULL t1_varchar20, "
+operator|+
+literal|"SMALLINT NOT NULL t1_smallint, "
+operator|+
+literal|"INTEGER NOT NULL t1_int, "
+operator|+
+literal|"BIGINT NOT NULL t1_bigint, "
+operator|+
+literal|"FLOAT NOT NULL t1_float, "
+operator|+
+literal|"DOUBLE NOT NULL t1_double, "
+operator|+
+literal|"DECIMAL(19, 0) NOT NULL t1_decimal, "
+operator|+
+literal|"TIMESTAMP(0) NOT NULL t1_timestamp, "
+operator|+
+literal|"DATE NOT NULL t1_date, "
+operator|+
+literal|"BINARY(1) NOT NULL t1_binary, "
+operator|+
+literal|"BOOLEAN NOT NULL t1_boolean) NOT NULL"
+decl_stmt|;
+specifier|final
+name|String
+name|sql
+init|=
+literal|"insert into t1 select t2_smallint, t2_int, t2_bigint, t2_float,\n"
+operator|+
+literal|"t2_double, t2_decimal, t2_int, t2_date, t2_timestamp, t2_varchar20, t2_int from t2"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|type
+argument_list|(
+name|expectRowType
+argument_list|)
+expr_stmt|;
+specifier|final
+name|String
+name|sql1
+init|=
+literal|"insert into ^t1^(t1_varchar20, t1_date, t1_int)\n"
+operator|+
+literal|"select t2_smallint, t2_timestamp, t2_float from t2"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql1
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"(?s).*Column 't1_smallint' has no default value and does not allow NULLs.*"
+argument_list|)
+expr_stmt|;
+specifier|final
+name|String
+name|sql2
+init|=
+literal|"update t1 set t1_varchar20=123, "
+operator|+
+literal|"t1_date=TIMESTAMP '2020-01-03 10:14:34', t1_int=12.3"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql2
+argument_list|)
+operator|.
+name|type
+argument_list|(
+name|expectRowType
 argument_list|)
 expr_stmt|;
 block|}

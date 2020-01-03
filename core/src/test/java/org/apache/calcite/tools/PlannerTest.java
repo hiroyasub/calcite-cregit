@@ -4116,9 +4116,11 @@ argument_list|)
 decl_stmt|;
 name|assertEquals
 argument_list|(
-literal|"RecordType(INTEGER NOT NULL empid, INTEGER NOT NULL deptno, VARCHAR name, "
+literal|"RecordType(INTEGER NOT NULL empid, INTEGER NOT NULL deptno, "
 operator|+
-literal|"REAL NOT NULL salary, INTEGER commission) NOT NULL"
+literal|"JavaType(class java.lang.String) name, REAL NOT NULL salary, "
+operator|+
+literal|"INTEGER NOT NULL commission) NOT NULL"
 argument_list|,
 name|typeString
 argument_list|)

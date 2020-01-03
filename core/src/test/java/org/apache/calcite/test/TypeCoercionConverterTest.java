@@ -257,6 +257,48 @@ name|sql
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testInsertQuerySourceCoercion
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"insert into t1 select t2_smallint, t2_int, t2_bigint, t2_float,\n"
+operator|+
+literal|"t2_double, t2_decimal, t2_int, t2_date, t2_timestamp, t2_varchar20, t2_int from t2"
+decl_stmt|;
+name|checkPlanEquals
+argument_list|(
+name|sql
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testUpdateQuerySourceCoercion
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"update t1 set t1_varchar20=123, "
+operator|+
+literal|"t1_date=TIMESTAMP '2020-01-03 10:14:34', t1_int=12.3"
+decl_stmt|;
+name|checkPlanEquals
+argument_list|(
+name|sql
+argument_list|)
+expr_stmt|;
+block|}
 specifier|private
 name|void
 name|checkPlanEquals

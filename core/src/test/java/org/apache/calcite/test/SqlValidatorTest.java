@@ -36476,10 +36476,25 @@ argument_list|(
 name|sql4
 argument_list|)
 operator|.
+name|withTypeCoercion
+argument_list|(
+literal|false
+argument_list|)
+operator|.
 name|fails
 argument_list|(
 name|error4
 argument_list|)
+expr_stmt|;
+name|s
+operator|.
+name|sql
+argument_list|(
+name|sql4
+argument_list|)
+operator|.
+name|ok
+argument_list|()
 expr_stmt|;
 block|}
 annotation|@
@@ -40407,12 +40422,32 @@ operator|.
 name|PRAGMATIC_2003
 argument_list|)
 operator|.
+name|withTypeCoercion
+argument_list|(
+literal|false
+argument_list|)
+operator|.
 name|fails
 argument_list|(
 literal|"Cannot assign to target field 'EMPNO' of type INTEGER"
 operator|+
 literal|" from source field 'EXPR\\$0' of type CHAR\\(1\\)"
 argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"insert into empnullables values ('5', 'bob')"
+argument_list|)
+operator|.
+name|withConformance
+argument_list|(
+name|SqlConformanceEnum
+operator|.
+name|PRAGMATIC_2003
+argument_list|)
+operator|.
+name|ok
+argument_list|()
 expr_stmt|;
 name|sql
 argument_list|(
@@ -40426,11 +40461,57 @@ operator|.
 name|PRAGMATIC_2003
 argument_list|)
 operator|.
+name|withTypeCoercion
+argument_list|(
+literal|false
+argument_list|)
+operator|.
 name|fails
 argument_list|(
 literal|"Cannot assign to target field 'EMPNO' of type INTEGER"
 operator|+
 literal|" from source field 'EXPR\\$0' of type CHAR\\(1\\)"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"insert into empnullables (empno, ename) values ('5', 'bob')"
+argument_list|)
+operator|.
+name|withConformance
+argument_list|(
+name|SqlConformanceEnum
+operator|.
+name|PRAGMATIC_2003
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"insert into empnullables(extra BOOLEAN)"
+operator|+
+literal|" (empno, ename, ^extra^) values (5, 'bob', 'true')"
+argument_list|)
+operator|.
+name|withConformance
+argument_list|(
+name|SqlConformanceEnum
+operator|.
+name|PRAGMATIC_2003
+argument_list|)
+operator|.
+name|withTypeCoercion
+argument_list|(
+literal|false
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Cannot assign to target field 'EXTRA' of type BOOLEAN"
+operator|+
+literal|" from source field 'EXPR\\$2' of type CHAR\\(4\\)"
 argument_list|)
 expr_stmt|;
 name|sql
@@ -40447,12 +40528,8 @@ operator|.
 name|PRAGMATIC_2003
 argument_list|)
 operator|.
-name|fails
-argument_list|(
-literal|"Cannot assign to target field 'EXTRA' of type BOOLEAN"
-operator|+
-literal|" from source field 'EXPR\\$2' of type CHAR\\(4\\)"
-argument_list|)
+name|ok
+argument_list|()
 expr_stmt|;
 block|}
 annotation|@
@@ -41270,6 +41347,11 @@ operator|+
 literal|"values (1, 'Arthur', 'clown', true)"
 argument_list|)
 operator|.
+name|withTypeCoercion
+argument_list|(
+literal|false
+argument_list|)
+operator|.
 name|fails
 argument_list|(
 literal|"Cannot assign to target field 'COMM' of type INTEGER"
@@ -41281,9 +41363,26 @@ name|sql
 argument_list|(
 literal|"insert into EMPDEFAULTS(\"comm\" BOOLEAN)"
 operator|+
+literal|" (empno, ename, job, comm)\n"
+operator|+
+literal|"values (1, 'Arthur', 'clown', true)"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"insert into EMPDEFAULTS(\"comm\" BOOLEAN)"
+operator|+
 literal|" (empno, ename, job, ^\"comm\"^)\n"
 operator|+
 literal|"values (1, 'Arthur', 'clown', 1)"
+argument_list|)
+operator|.
+name|withTypeCoercion
+argument_list|(
+literal|false
 argument_list|)
 operator|.
 name|fails
@@ -41292,6 +41391,18 @@ literal|"Cannot assign to target field 'comm' of type BOOLEAN"
 operator|+
 literal|" from source field 'EXPR\\$3' of type INTEGER"
 argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"insert into EMPDEFAULTS(\"comm\" BOOLEAN)"
+operator|+
+literal|" (empno, ename, job, \"comm\")\n"
+operator|+
+literal|"values (1, 'Arthur', 'clown', 1)"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
 expr_stmt|;
 block|}
 annotation|@
@@ -41364,10 +41475,25 @@ argument_list|(
 name|sql1
 argument_list|)
 operator|.
+name|withTypeCoercion
+argument_list|(
+literal|false
+argument_list|)
+operator|.
 name|fails
 argument_list|(
 name|error1
 argument_list|)
+expr_stmt|;
+name|s
+operator|.
+name|sql
+argument_list|(
+name|sql1
+argument_list|)
+operator|.
+name|ok
+argument_list|()
 expr_stmt|;
 specifier|final
 name|String
@@ -41394,10 +41520,25 @@ argument_list|(
 name|sql2
 argument_list|)
 operator|.
+name|withTypeCoercion
+argument_list|(
+literal|false
+argument_list|)
+operator|.
 name|fails
 argument_list|(
 name|error2
 argument_list|)
+expr_stmt|;
+name|s
+operator|.
+name|sql
+argument_list|(
+name|sql2
+argument_list|)
+operator|.
+name|ok
+argument_list|()
 expr_stmt|;
 block|}
 annotation|@
@@ -41470,6 +41611,11 @@ argument_list|(
 name|sql1
 argument_list|)
 operator|.
+name|withTypeCoercion
+argument_list|(
+literal|false
+argument_list|)
+operator|.
 name|fails
 argument_list|(
 name|error1
@@ -41481,13 +41627,31 @@ name|sql2
 init|=
 literal|"insert into EMP_MODIFIABLEVIEW2(\"extra\" INTEGER)"
 operator|+
+literal|" (empno, ename, job, extra) values (1, 'Arthur', 'clown', 1)"
+decl_stmt|;
+name|s
+operator|.
+name|sql
+argument_list|(
+name|sql2
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+specifier|final
+name|String
+name|sql3
+init|=
+literal|"insert into EMP_MODIFIABLEVIEW2(\"extra\" INTEGER)"
+operator|+
 literal|" (empno, ename, job, ^\"extra\"^)\n"
 operator|+
 literal|"values (1, 'Arthur', 'clown', true)"
 decl_stmt|;
 specifier|final
 name|String
-name|error2
+name|error3
 init|=
 literal|"Cannot assign to target field 'extra' of type"
 operator|+
@@ -41497,13 +41661,38 @@ name|s
 operator|.
 name|sql
 argument_list|(
-name|sql2
+name|sql3
+argument_list|)
+operator|.
+name|withTypeCoercion
+argument_list|(
+literal|false
 argument_list|)
 operator|.
 name|fails
 argument_list|(
-name|error2
+name|error3
 argument_list|)
+expr_stmt|;
+specifier|final
+name|String
+name|sql4
+init|=
+literal|"insert into EMP_MODIFIABLEVIEW2(\"extra\" INTEGER)"
+operator|+
+literal|" (empno, ename, job, \"extra\")\n"
+operator|+
+literal|"values (1, 'Arthur', 'clown', true)"
+decl_stmt|;
+name|s
+operator|.
+name|sql
+argument_list|(
+name|sql4
+argument_list|)
+operator|.
+name|ok
+argument_list|()
 expr_stmt|;
 block|}
 annotation|@
@@ -41602,10 +41791,25 @@ argument_list|(
 name|sql2
 argument_list|)
 operator|.
+name|withTypeCoercion
+argument_list|(
+literal|false
+argument_list|)
+operator|.
 name|fails
 argument_list|(
 name|error2
 argument_list|)
+expr_stmt|;
+name|s
+operator|.
+name|sql
+argument_list|(
+name|sql2
+argument_list|)
+operator|.
+name|ok
+argument_list|()
 expr_stmt|;
 block|}
 annotation|@
