@@ -682,7 +682,7 @@ block|{
 assert|assert
 name|traitSet
 operator|.
-name|comprises
+name|contains
 argument_list|(
 name|Convention
 operator|.
@@ -1087,7 +1087,7 @@ block|{
 assert|assert
 name|traitSet
 operator|.
-name|comprises
+name|contains
 argument_list|(
 name|PHYS_CALLING_CONVENTION
 argument_list|)

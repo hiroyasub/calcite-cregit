@@ -213,6 +213,18 @@ name|Set
 import|;
 end_import
 
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|stream
+operator|.
+name|Collectors
+import|;
+end_import
+
 begin_comment
 comment|/**  *<code>VolcanoRuleCall</code> implements the {@link RelOptRuleCall} interface  * for VolcanoPlanner.  */
 end_comment
@@ -1470,14 +1482,42 @@ operator|.
 name|class
 condition|)
 block|{
-comment|// If the rule wants the whole subset, we just provide it
+comment|// Find all the sibling subsets that satisfy the traitSet of current subset.
 name|successors
 operator|=
-name|ImmutableList
+name|subset
 operator|.
-name|of
+name|set
+operator|.
+name|subsets
+operator|.
+name|stream
+argument_list|()
+operator|.
+name|filter
+argument_list|(
+name|s
+lambda|->
+name|s
+operator|.
+name|getTraitSet
+argument_list|()
+operator|.
+name|satisfies
 argument_list|(
 name|subset
+operator|.
+name|getTraitSet
+argument_list|()
+argument_list|)
+argument_list|)
+operator|.
+name|collect
+argument_list|(
+name|Collectors
+operator|.
+name|toList
+argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
