@@ -425,9 +425,25 @@ name|jupiter
 operator|.
 name|api
 operator|.
-name|extension
+name|parallel
 operator|.
-name|RegisterExtension
+name|ResourceAccessMode
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|junit
+operator|.
+name|jupiter
+operator|.
+name|api
+operator|.
+name|parallel
+operator|.
+name|ResourceLock
 import|;
 end_import
 
@@ -539,6 +555,16 @@ name|java
 operator|.
 name|util
 operator|.
+name|Locale
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
 name|Map
 import|;
 end_import
@@ -588,13 +614,23 @@ comment|/**  * Testing Elasticsearch match query.  */
 end_comment
 
 begin_class
+annotation|@
+name|ResourceLock
+argument_list|(
+name|value
+operator|=
+literal|"elasticsearch-scrolls"
+argument_list|,
+name|mode
+operator|=
+name|ResourceAccessMode
+operator|.
+name|READ
+argument_list|)
 specifier|public
 class|class
 name|MatchTest
 block|{
-annotation|@
-name|RegisterExtension
-comment|//init once for all tests
 specifier|public
 specifier|static
 specifier|final
@@ -613,7 +649,7 @@ specifier|final
 name|String
 name|ZIPS
 init|=
-literal|"zips"
+literal|"match-zips"
 decl_stmt|;
 specifier|private
 specifier|static
@@ -870,6 +906,14 @@ specifier|final
 name|String
 name|viewSql
 init|=
+name|String
+operator|.
+name|format
+argument_list|(
+name|Locale
+operator|.
+name|ROOT
+argument_list|,
 literal|"select cast(_MAP['city'] AS varchar(20)) AS \"city\", "
 operator|+
 literal|" cast(_MAP['loc'][0] AS float) AS \"longitude\",\n"
@@ -882,7 +926,10 @@ literal|" cast(_MAP['state'] AS varchar(2)) AS \"state\", "
 operator|+
 literal|" cast(_MAP['id'] AS varchar(5)) AS \"id\" "
 operator|+
-literal|"from \"elastic\".\"zips\""
+literal|"from \"elastic\".\"%s\""
+argument_list|,
+name|ZIPS
+argument_list|)
 decl_stmt|;
 name|ViewTableMacro
 name|macro
@@ -918,7 +965,7 @@ name|root
 operator|.
 name|add
 argument_list|(
-literal|"zips"
+name|ZIPS
 argument_list|,
 name|macro
 argument_list|)
@@ -1214,7 +1261,11 @@ literal|"LogicalFilter(condition=[CONTAINS($1, 'waltham')])\n"
 operator|+
 literal|"  LogicalProject(_MAP=[$0], city=[ITEM($0, 'city')])\n"
 operator|+
-literal|"    LogicalTableScan(table=[[elastic, zips]])\n"
+literal|"    LogicalTableScan(table=[[elastic, "
+operator|+
+name|ZIPS
+operator|+
+literal|"]])\n"
 decl_stmt|;
 name|RelNode
 name|root

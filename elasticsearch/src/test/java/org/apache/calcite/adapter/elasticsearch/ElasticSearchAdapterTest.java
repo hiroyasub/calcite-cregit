@@ -229,9 +229,25 @@ name|jupiter
 operator|.
 name|api
 operator|.
-name|extension
+name|parallel
 operator|.
-name|RegisterExtension
+name|ResourceAccessMode
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|junit
+operator|.
+name|jupiter
+operator|.
+name|api
+operator|.
+name|parallel
+operator|.
+name|ResourceLock
 import|;
 end_import
 
@@ -384,13 +400,23 @@ comment|/**  * Set of tests for ES adapter. Uses real instance via {@link Embedd
 end_comment
 
 begin_class
+annotation|@
+name|ResourceLock
+argument_list|(
+name|value
+operator|=
+literal|"elasticsearch-scrolls"
+argument_list|,
+name|mode
+operator|=
+name|ResourceAccessMode
+operator|.
+name|READ
+argument_list|)
 specifier|public
 class|class
 name|ElasticSearchAdapterTest
 block|{
-annotation|@
-name|RegisterExtension
-comment|//init once for all tests
 specifier|public
 specifier|static
 specifier|final
@@ -1178,6 +1204,7 @@ operator|!=
 literal|null
 condition|)
 block|{
+comment|//noinspection rawtypes
 name|states
 operator|.
 name|add
@@ -1210,6 +1237,7 @@ name|i
 operator|++
 control|)
 block|{
+comment|//noinspection rawtypes
 specifier|final
 name|Comparable
 name|current
@@ -1221,6 +1249,7 @@ argument_list|(
 name|i
 argument_list|)
 decl_stmt|;
+comment|//noinspection rawtypes
 specifier|final
 name|Comparable
 name|next
@@ -1234,6 +1263,7 @@ operator|+
 literal|1
 argument_list|)
 decl_stmt|;
+comment|//noinspection unchecked
 specifier|final
 name|int
 name|cmp
@@ -2668,8 +2698,6 @@ specifier|public
 name|void
 name|approximateCount
 parameter_list|()
-throws|throws
-name|Exception
 block|{
 name|calciteAssert
 argument_list|()

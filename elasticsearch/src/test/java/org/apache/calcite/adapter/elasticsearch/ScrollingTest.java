@@ -137,6 +137,20 @@ name|jupiter
 operator|.
 name|api
 operator|.
+name|Disabled
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|junit
+operator|.
+name|jupiter
+operator|.
+name|api
+operator|.
 name|Test
 import|;
 end_import
@@ -151,9 +165,9 @@ name|jupiter
 operator|.
 name|api
 operator|.
-name|extension
+name|parallel
 operator|.
-name|RegisterExtension
+name|ResourceLock
 import|;
 end_import
 
@@ -274,12 +288,15 @@ comment|/**  * Tests usage of scrolling API like correct results and resource cl
 end_comment
 
 begin_class
+annotation|@
+name|ResourceLock
+argument_list|(
+literal|"elasticsearch-scrolls"
+argument_list|)
 specifier|public
 class|class
 name|ScrollingTest
 block|{
-annotation|@
-name|RegisterExtension
 specifier|public
 specifier|static
 specifier|final
@@ -495,6 +512,13 @@ block|}
 block|}
 return|;
 block|}
+annotation|@
+name|Disabled
+argument_list|(
+literal|"It seems like other tests leave scrolls behind, so this test fails if executed after"
+operator|+
+literal|" one of the other elasticsearch test"
+argument_list|)
 annotation|@
 name|Test
 specifier|public

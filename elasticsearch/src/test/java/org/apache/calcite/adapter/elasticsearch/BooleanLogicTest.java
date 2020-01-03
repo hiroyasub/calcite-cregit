@@ -159,9 +159,25 @@ name|jupiter
 operator|.
 name|api
 operator|.
-name|extension
+name|parallel
 operator|.
-name|RegisterExtension
+name|ResourceAccessMode
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|junit
+operator|.
+name|jupiter
+operator|.
+name|api
+operator|.
+name|parallel
+operator|.
+name|ResourceLock
 import|;
 end_import
 
@@ -240,12 +256,23 @@ comment|/**  * Test of different boolean expressions (some more complex than oth
 end_comment
 
 begin_class
+annotation|@
+name|ResourceLock
+argument_list|(
+name|value
+operator|=
+literal|"elasticsearch-scrolls"
+argument_list|,
+name|mode
+operator|=
+name|ResourceAccessMode
+operator|.
+name|READ
+argument_list|)
 specifier|public
 class|class
 name|BooleanLogicTest
 block|{
-annotation|@
-name|RegisterExtension
 specifier|public
 specifier|static
 specifier|final
@@ -263,7 +290,7 @@ specifier|final
 name|String
 name|NAME
 init|=
-literal|"docs"
+literal|"booleanlogic"
 decl_stmt|;
 comment|/**    * Used to create {@code zips} index and insert some data    * @throws Exception when ES node setup failed    */
 annotation|@

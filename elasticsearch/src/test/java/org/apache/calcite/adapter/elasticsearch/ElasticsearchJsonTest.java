@@ -159,7 +159,7 @@ name|hamcrest
 operator|.
 name|core
 operator|.
-name|IsCollectionContaining
+name|IsIterableContaining
 operator|.
 name|hasItem
 import|;
