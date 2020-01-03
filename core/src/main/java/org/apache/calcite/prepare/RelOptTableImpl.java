@@ -1129,6 +1129,35 @@ name|rowCount
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
+specifier|public
+name|String
+name|toString
+parameter_list|()
+block|{
+return|return
+literal|"RelOptTableImpl{"
+operator|+
+literal|"schema="
+operator|+
+name|schema
+operator|+
+literal|", names= "
+operator|+
+name|names
+operator|+
+literal|", table="
+operator|+
+name|table
+operator|+
+literal|", rowType="
+operator|+
+name|rowType
+operator|+
+literal|'}'
+return|;
+block|}
 specifier|private
 specifier|static
 name|Function
@@ -1989,6 +2018,19 @@ operator|&&
 name|table
 operator|instanceof
 name|QueryableTable
+operator|&&
+operator|(
+name|expressionFunction
+operator|!=
+literal|null
+operator|||
+name|EnumerableTableScan
+operator|.
+name|canHandle
+argument_list|(
+name|this
+argument_list|)
+operator|)
 condition|)
 block|{
 return|return
@@ -2028,6 +2070,9 @@ name|this
 argument_list|)
 return|;
 block|}
+comment|// Some tests rely on the old behavior when tables were immediately converted to
+comment|// EnumerableTableScan
+comment|// Note: EnumerableTableScanRule can convert LogicalTableScan to EnumerableTableScan
 if|if
 condition|(
 name|CalciteSystemProperty
@@ -2036,6 +2081,25 @@ name|ENABLE_ENUMERABLE
 operator|.
 name|value
 argument_list|()
+operator|&&
+operator|(
+operator|(
+name|table
+operator|==
+literal|null
+operator|&&
+name|expressionFunction
+operator|!=
+literal|null
+operator|)
+operator|||
+name|EnumerableTableScan
+operator|.
+name|canHandle
+argument_list|(
+name|this
+argument_list|)
+operator|)
 condition|)
 block|{
 return|return
@@ -2049,11 +2113,16 @@ name|this
 argument_list|)
 return|;
 block|}
-throw|throw
-operator|new
-name|AssertionError
-argument_list|()
-throw|;
+return|return
+name|LogicalTableScan
+operator|.
+name|create
+argument_list|(
+name|cluster
+argument_list|,
+name|this
+argument_list|)
+return|;
 block|}
 specifier|public
 name|List

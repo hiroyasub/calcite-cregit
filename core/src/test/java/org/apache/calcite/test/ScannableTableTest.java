@@ -1703,15 +1703,13 @@ name|explain
 init|=
 literal|"PLAN="
 operator|+
-literal|"EnumerableAggregate(group=[{0}], C=[COUNT()])\n"
+literal|"EnumerableAggregate(group=[{1}], C=[COUNT()])\n"
 operator|+
 literal|"  EnumerableAggregate(group=[{0, 1}])\n"
 operator|+
 literal|"    EnumerableInterpreter\n"
 operator|+
-literal|"      BindableTableScan(table=[[s, beatles]], "
-operator|+
-literal|"filters=[[=($2, 1940)]], projects=[[2, 0]])"
+literal|"      BindableTableScan(table=[[s, beatles]], filters=[[=($2, 1940)]], projects=[[0, 2]])"
 decl_stmt|;
 name|CalciteAssert
 operator|.

@@ -244,6 +244,57 @@ argument_list|,
 literal|true
 argument_list|)
 decl_stmt|;
+comment|/** Whether the EnumerableTableScan should support ARRAY fields. */
+specifier|public
+specifier|static
+specifier|final
+name|CalciteSystemProperty
+argument_list|<
+name|Boolean
+argument_list|>
+name|ENUMERABLE_ENABLE_TABLESCAN_ARRAY
+init|=
+name|booleanProperty
+argument_list|(
+literal|"calcite.enable.enumerable.tablescan.array"
+argument_list|,
+literal|false
+argument_list|)
+decl_stmt|;
+comment|/** Whether the EnumerableTableScan should support MAP fields. */
+specifier|public
+specifier|static
+specifier|final
+name|CalciteSystemProperty
+argument_list|<
+name|Boolean
+argument_list|>
+name|ENUMERABLE_ENABLE_TABLESCAN_MAP
+init|=
+name|booleanProperty
+argument_list|(
+literal|"calcite.enable.enumerable.tablescan.map"
+argument_list|,
+literal|false
+argument_list|)
+decl_stmt|;
+comment|/** Whether the EnumerableTableScan should support MULTISET fields. */
+specifier|public
+specifier|static
+specifier|final
+name|CalciteSystemProperty
+argument_list|<
+name|Boolean
+argument_list|>
+name|ENUMERABLE_ENABLE_TABLESCAN_MULTISET
+init|=
+name|booleanProperty
+argument_list|(
+literal|"calcite.enable.enumerable.tablescan.multiset"
+argument_list|,
+literal|false
+argument_list|)
+decl_stmt|;
 comment|/** Whether streaming is enabled in the default planner configuration. */
 specifier|public
 specifier|static
