@@ -7452,6 +7452,17 @@ name|tester
 operator|.
 name|checkScalar
 argument_list|(
+literal|"{fn CBRT(8)}"
+argument_list|,
+literal|2.0
+argument_list|,
+literal|"DOUBLE NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
 literal|"{fn CEILING(-2.6)}"
 argument_list|,
 operator|-
@@ -24896,6 +24907,117 @@ operator|.
 name|checkNull
 argument_list|(
 literal|"atan2(1, cast(null as double))"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testCbrtFunc
+parameter_list|()
+block|{
+name|tester
+operator|.
+name|setFor
+argument_list|(
+name|SqlStdOperatorTable
+operator|.
+name|CBRT
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkType
+argument_list|(
+literal|"cbrt(1)"
+argument_list|,
+literal|"DOUBLE NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkType
+argument_list|(
+literal|"cbrt(cast(1 as float))"
+argument_list|,
+literal|"DOUBLE NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkType
+argument_list|(
+literal|"cbrt(case when false then 1 else null end)"
+argument_list|,
+literal|"DOUBLE"
+argument_list|)
+expr_stmt|;
+name|strictTester
+operator|.
+name|checkFails
+argument_list|(
+literal|"^cbrt('abc')^"
+argument_list|,
+literal|"Cannot apply 'CBRT' to arguments of type 'CBRT\\(<CHAR\\(3\\)>\\)'\\. Supported form\\(s\\): 'CBRT\\(<NUMERIC>\\)'"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkType
+argument_list|(
+literal|"cbrt('abc')"
+argument_list|,
+literal|"DOUBLE NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"cbrt(8)"
+argument_list|,
+literal|"2.0"
+argument_list|,
+literal|"DOUBLE NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"cbrt(-8)"
+argument_list|,
+literal|"-2.0"
+argument_list|,
+literal|"DOUBLE NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"cbrt(cast(1 as decimal(1, 0)))"
+argument_list|,
+literal|"1.0"
+argument_list|,
+literal|"DOUBLE NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkNull
+argument_list|(
+literal|"cbrt(cast(null as integer))"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkNull
+argument_list|(
+literal|"cbrt(cast(null as double))"
 argument_list|)
 expr_stmt|;
 block|}

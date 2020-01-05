@@ -7451,6 +7451,46 @@ name|b1
 argument_list|)
 return|;
 block|}
+comment|// CBRT
+comment|/** SQL<code>CBRT</code> operator applied to BigDecimal values. */
+specifier|public
+specifier|static
+name|double
+name|cbrt
+parameter_list|(
+name|BigDecimal
+name|b
+parameter_list|)
+block|{
+return|return
+name|cbrt
+argument_list|(
+name|b
+operator|.
+name|doubleValue
+argument_list|()
+argument_list|)
+return|;
+block|}
+comment|/** SQL<code>CBRT</code> operator applied to double values. */
+specifier|public
+specifier|static
+name|double
+name|cbrt
+parameter_list|(
+name|double
+name|b
+parameter_list|)
+block|{
+return|return
+name|Math
+operator|.
+name|cbrt
+argument_list|(
+name|b
+argument_list|)
+return|;
+block|}
 comment|// COS
 comment|/** SQL<code>COS</code> operator applied to BigDecimal values. */
 specifier|public

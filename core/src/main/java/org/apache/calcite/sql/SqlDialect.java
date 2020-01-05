@@ -702,6 +702,13 @@ name|add
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
+name|CBRT
+argument_list|)
+operator|.
+name|add
+argument_list|(
+name|SqlStdOperatorTable
+operator|.
 name|COS
 argument_list|)
 operator|.
