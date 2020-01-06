@@ -1588,7 +1588,7 @@ name|TEXT
 argument_list|,
 name|SqlExplainLevel
 operator|.
-name|DIGEST_ATTRIBUTES
+name|EXPPLAN_ATTRIBUTES
 argument_list|)
 argument_list|)
 return|;
@@ -2680,14 +2680,14 @@ name|checkUnionPruning
 argument_list|(
 literal|"values(1) union all select * from (values(2)) where false"
 argument_list|,
-literal|"EnumerableValues(type=[RecordType(INTEGER EXPR$0)], tuples=[[{ 1 }]])\n"
+literal|"EnumerableValues(tuples=[[{ 1 }]])\n"
 argument_list|)
 expr_stmt|;
 name|checkUnionPruning
 argument_list|(
 literal|"select * from (values(2)) where false union all values(1)"
 argument_list|,
-literal|"EnumerableValues(type=[RecordType(INTEGER EXPR$0)], tuples=[[{ 1 }]])\n"
+literal|"EnumerableValues(tuples=[[{ 1 }]])\n"
 argument_list|)
 expr_stmt|;
 block|}
@@ -2739,7 +2739,7 @@ block|{
 name|String
 name|plan
 init|=
-literal|"EnumerableValues(type=[RecordType(INTEGER EXPR$0)], tuples=[[{ 1 }]])\n"
+literal|"EnumerableValues(tuples=[[{ 1 }]])\n"
 decl_stmt|;
 name|checkUnionPruning
 argument_list|(
@@ -2842,9 +2842,9 @@ name|plan
 init|=
 literal|"EnumerableUnion(all=[true])\n"
 operator|+
-literal|"  EnumerableValues(type=[RecordType(INTEGER EXPR$0)], tuples=[[{ 1 }]])\n"
+literal|"  EnumerableValues(tuples=[[{ 1 }]])\n"
 operator|+
-literal|"  EnumerableValues(type=[RecordType(INTEGER EXPR$0)], tuples=[[{ 2 }]])\n"
+literal|"  EnumerableValues(tuples=[[{ 2 }]])\n"
 decl_stmt|;
 name|checkUnionPruning
 argument_list|(
@@ -3295,9 +3295,9 @@ name|equalTo
 argument_list|(
 literal|"EnumerableUnion(all=[true])\n"
 operator|+
-literal|"  EnumerableValues(type=[RecordType(INTEGER EXPR$0)], tuples=[[{ 1 }]])\n"
+literal|"  EnumerableValues(tuples=[[{ 1 }]])\n"
 operator|+
-literal|"  EnumerableValues(type=[RecordType(INTEGER EXPR$0)], tuples=[[{ 2 }]])\n"
+literal|"  EnumerableValues(tuples=[[{ 2 }]])\n"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -7090,7 +7090,7 @@ literal|"    EnumerableTableScan(table=[[scott, EMP]])\n"
 operator|+
 literal|"    EnumerableTableScan(table=[[scott, EMP]])\n"
 operator|+
-literal|"  EnumerableFilter(condition=[=($0, $cor0.DEPTNO)])\n"
+literal|"  EnumerableFilter(condition=[=($cor0.DEPTNO, $0)])\n"
 operator|+
 literal|"    EnumerableUnion(all=[true])\n"
 operator|+
@@ -7122,7 +7122,7 @@ name|expected
 init|=
 literal|"LogicalProject(DEPTNO=[$0], DNAME=[$1])\n"
 operator|+
-literal|"  LogicalValues(type=[RecordType(INTEGER DEPTNO, CHAR(11) DNAME)], "
+literal|"  LogicalValues("
 operator|+
 literal|"tuples=[[{ 10, 'Sales      ' },"
 operator|+
@@ -7168,7 +7168,7 @@ literal|"  LogicalFilter(condition=[=($0, 30)])\n"
 operator|+
 literal|"    LogicalProject(DEPTNO=[$0], DNAME=[$1])\n"
 operator|+
-literal|"      LogicalValues(type=[RecordType(INTEGER DEPTNO, CHAR(11) DNAME)], "
+literal|"      LogicalValues("
 operator|+
 literal|"tuples=[[{ 10, 'Sales      ' },"
 operator|+

@@ -947,7 +947,7 @@ name|ArrayList
 argument_list|<>
 argument_list|()
 decl_stmt|;
-comment|/**    * Canonical map from {@link String digest} to the unique    * {@link RelNode relational expression} with that digest.    *    *<p>Row type is part of the key for the rare occasion that similar    * expressions have different types, e.g. variants of    * {@code Project(child=rel#1, a=null)} where a is a null INTEGER or a    * null VARCHAR(10).    */
+comment|/**    * Canonical map from {@link String digest} to the unique    * {@link RelNode relational expression} with that digest.    *    *<p>Row type is part of the key for the rare occasion that similar    * expressions have different types, e.g. variants of    * {@code Project(child=rel#1, a=null)} where a is a null INTEGER or a    * null VARCHAR(10).</p>    *<p>Row type is represented as fieldTypes only, so {@code RelNode} that differ    * with field names only are treated equal.    * For instance, {@code Project(input=rel#1,empid=$0)} and {@code Project(input=rel#1,deptno=$0)}    * are equal</p>    */
 specifier|private
 specifier|final
 name|Map
@@ -956,7 +956,10 @@ name|Pair
 argument_list|<
 name|String
 argument_list|,
+name|List
+argument_list|<
 name|RelDataType
+argument_list|>
 argument_list|>
 argument_list|,
 name|RelNode
@@ -5064,7 +5067,10 @@ name|Pair
 argument_list|<
 name|String
 argument_list|,
+name|List
+argument_list|<
 name|RelDataType
+argument_list|>
 argument_list|>
 name|key
 parameter_list|(
@@ -5082,10 +5088,18 @@ operator|.
 name|getDigest
 argument_list|()
 argument_list|,
+name|Pair
+operator|.
+name|right
+argument_list|(
 name|rel
 operator|.
 name|getRowType
 argument_list|()
+operator|.
+name|getFieldList
+argument_list|()
+argument_list|)
 argument_list|)
 return|;
 block|}
@@ -6704,7 +6718,10 @@ name|Pair
 argument_list|<
 name|String
 argument_list|,
+name|List
+argument_list|<
 name|RelDataType
+argument_list|>
 argument_list|>
 name|oldKey
 init|=
@@ -6714,10 +6731,18 @@ name|of
 argument_list|(
 name|oldDigest
 argument_list|,
+name|Pair
+operator|.
+name|right
+argument_list|(
 name|rel
 operator|.
 name|getRowType
 argument_list|()
+operator|.
+name|getFieldList
+argument_list|()
+argument_list|)
 argument_list|)
 decl_stmt|;
 specifier|final
@@ -6766,7 +6791,10 @@ name|Pair
 argument_list|<
 name|String
 argument_list|,
+name|List
+argument_list|<
 name|RelDataType
+argument_list|>
 argument_list|>
 name|key
 init|=
@@ -7049,7 +7077,10 @@ name|Pair
 argument_list|<
 name|String
 argument_list|,
+name|List
+argument_list|<
 name|RelDataType
+argument_list|>
 argument_list|>
 name|key
 init|=
@@ -7915,7 +7946,10 @@ name|Pair
 argument_list|<
 name|String
 argument_list|,
+name|List
+argument_list|<
 name|RelDataType
+argument_list|>
 argument_list|>
 name|key
 init|=

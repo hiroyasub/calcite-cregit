@@ -3151,7 +3151,7 @@ name|CalciteAssert
 operator|.
 name|checkResultContains
 argument_list|(
-literal|"EnumerableCalc(expr#0..1=[{inputs}], expr#2=[1], expr#3=[+($t1, $t2)], $f0=[$t3], deptno=[$t0])\n"
+literal|"EnumerableCalc(expr#0..1=[{inputs}], expr#2=[1], expr#3=[+($t1, $t2)], C=[$t3], deptno=[$t0])\n"
 operator|+
 literal|"  EnumerableAggregate(group=[{0}], agg#0=[$SUM0($1)])\n"
 operator|+
@@ -7624,7 +7624,7 @@ name|CalciteAssert
 operator|.
 name|checkResultContains
 argument_list|(
-literal|"EnumerableCalc(expr#0..1=[{inputs}], empid0=[$t0])\n"
+literal|"EnumerableCalc(expr#0..1=[{inputs}], empid=[$t0])\n"
 operator|+
 literal|"  EnumerableTableScan(table=[[hr, m0]])"
 argument_list|)
@@ -7662,7 +7662,7 @@ name|CalciteAssert
 operator|.
 name|checkResultContains
 argument_list|(
-literal|"EnumerableCalc(expr#0..1=[{inputs}], empid0=[$t0])\n"
+literal|"EnumerableCalc(expr#0..1=[{inputs}], empid=[$t0])\n"
 operator|+
 literal|"  EnumerableTableScan(table=[[hr, m0]])"
 argument_list|)

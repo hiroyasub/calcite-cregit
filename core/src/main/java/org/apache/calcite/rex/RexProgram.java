@@ -1293,27 +1293,11 @@ comment|// expression, try to be a bit less verbose.
 name|int
 name|trivialCount
 init|=
-literal|0
-decl_stmt|;
-comment|// Do not use the trivialCount optimization if computing digest for the
-comment|// optimizer (as opposed to doing an explain plan).
-if|if
-condition|(
-name|level
-operator|!=
-name|SqlExplainLevel
-operator|.
-name|DIGEST_ATTRIBUTES
-condition|)
-block|{
-name|trivialCount
-operator|=
 name|countTrivial
 argument_list|(
 name|projects
 argument_list|)
-expr_stmt|;
-block|}
+decl_stmt|;
 switch|switch
 condition|(
 name|trivialCount
@@ -1351,6 +1335,16 @@ argument_list|)
 expr_stmt|;
 break|break;
 block|}
+specifier|final
+name|boolean
+name|withFieldNames
+init|=
+name|level
+operator|!=
+name|SqlExplainLevel
+operator|.
+name|DIGEST_ATTRIBUTES
+decl_stmt|;
 comment|// Print the non-trivial fields with their names as they appear in the
 comment|// output row type.
 for|for
@@ -1371,10 +1365,12 @@ name|i
 operator|++
 control|)
 block|{
-name|pw
-operator|.
-name|item
-argument_list|(
+specifier|final
+name|String
+name|fieldName
+init|=
+name|withFieldNames
+condition|?
 name|prefix
 operator|+
 name|outFields
@@ -1386,6 +1382,16 @@ argument_list|)
 operator|.
 name|getName
 argument_list|()
+else|:
+name|prefix
+operator|+
+name|i
+decl_stmt|;
+name|pw
+operator|.
+name|item
+argument_list|(
+name|fieldName
 argument_list|,
 name|projects
 operator|.

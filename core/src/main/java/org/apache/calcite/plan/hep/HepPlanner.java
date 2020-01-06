@@ -658,6 +658,7 @@ specifier|private
 name|RelTraitSet
 name|requestedRootTraits
 decl_stmt|;
+comment|/**    * {@link RelDataType} is represented with its field types as {@code List<RelDataType>}.    * This enables to treat as equal projects that differ in expression names only.    */
 specifier|private
 specifier|final
 name|Map
@@ -666,7 +667,10 @@ name|Pair
 argument_list|<
 name|String
 argument_list|,
+name|List
+argument_list|<
 name|RelDataType
+argument_list|>
 argument_list|>
 argument_list|,
 name|HepRelVertex
@@ -2278,7 +2282,10 @@ name|Pair
 argument_list|<
 name|String
 argument_list|,
+name|List
+argument_list|<
 name|RelDataType
+argument_list|>
 argument_list|>
 name|key
 init|=
@@ -3636,7 +3643,10 @@ name|Pair
 argument_list|<
 name|String
 argument_list|,
+name|List
+argument_list|<
 name|RelDataType
+argument_list|>
 argument_list|>
 name|key
 init|=
@@ -3928,7 +3938,10 @@ name|Pair
 argument_list|<
 name|String
 argument_list|,
+name|List
+argument_list|<
 name|RelDataType
+argument_list|>
 argument_list|>
 name|oldKey
 init|=
@@ -3971,7 +3984,10 @@ name|Pair
 argument_list|<
 name|String
 argument_list|,
+name|List
+argument_list|<
 name|RelDataType
+argument_list|>
 argument_list|>
 name|newKey
 init|=
@@ -4023,7 +4039,10 @@ name|Pair
 argument_list|<
 name|String
 argument_list|,
+name|List
+argument_list|<
 name|RelDataType
+argument_list|>
 argument_list|>
 name|key
 parameter_list|(
@@ -4041,10 +4060,18 @@ operator|.
 name|getDigest
 argument_list|()
 argument_list|,
+name|Pair
+operator|.
+name|right
+argument_list|(
 name|rel
 operator|.
 name|getRowType
 argument_list|()
+operator|.
+name|getFieldList
+argument_list|()
+argument_list|)
 argument_list|)
 return|;
 block|}
@@ -4334,7 +4361,10 @@ name|Pair
 argument_list|<
 name|String
 argument_list|,
+name|List
+argument_list|<
 name|RelDataType
+argument_list|>
 argument_list|>
 argument_list|,
 name|HepRelVertex
