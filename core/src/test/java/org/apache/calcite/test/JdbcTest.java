@@ -13628,6 +13628,50 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testCaseWhenOnNullableField
+parameter_list|()
+block|{
+name|CalciteAssert
+operator|.
+name|hr
+argument_list|()
+operator|.
+name|query
+argument_list|(
+literal|"select case when \"commission\" is not null "
+operator|+
+literal|"then \"commission\" else 100 end\n"
+operator|+
+literal|"from \"hr\".\"emps\"\n"
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+literal|"PLAN=EnumerableCalc(expr#0..4=[{inputs}],"
+operator|+
+literal|" expr#5=[IS NOT NULL($t4)], expr#6=[CAST($t4):INTEGER NOT NULL],"
+operator|+
+literal|" expr#7=[100], expr#8=[CASE($t5, $t6, $t7)], EXPR$0=[$t8])\n"
+operator|+
+literal|"  EnumerableTableScan(table=[[hr, emps]])"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"EXPR$0=1000\n"
+operator|+
+literal|"EXPR$0=500\n"
+operator|+
+literal|"EXPR$0=100\n"
+operator|+
+literal|"EXPR$0=250\n"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testSelectDistinct
 parameter_list|()
 block|{

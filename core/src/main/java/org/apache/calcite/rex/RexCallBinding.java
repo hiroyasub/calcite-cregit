@@ -695,6 +695,18 @@ name|allowCast
 argument_list|)
 return|;
 block|}
+specifier|public
+name|List
+argument_list|<
+name|RexNode
+argument_list|>
+name|operands
+parameter_list|()
+block|{
+return|return
+name|operands
+return|;
+block|}
 comment|// implement SqlOperatorBinding
 specifier|public
 name|int
