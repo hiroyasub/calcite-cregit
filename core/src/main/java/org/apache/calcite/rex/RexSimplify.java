@@ -9885,6 +9885,179 @@ return|return
 name|operand
 return|;
 block|}
+if|if
+condition|(
+name|RexUtil
+operator|.
+name|isLosslessCast
+argument_list|(
+name|operand
+argument_list|)
+condition|)
+block|{
+comment|// x :: y below means cast(x as y) (which is PostgreSQL-specifiic cast by the way)
+comment|// A) Remove lossless casts:
+comment|// A.1) intExpr :: bigint :: int => intExpr
+comment|// A.2) char2Expr :: char(5) :: char(2) => char2Expr
+comment|// B) There are cases when we can't remove two casts, but we could probably remove inner one
+comment|// B.1) char2expression :: char(4) :: char(5) -> char2expression :: char(5)
+comment|// B.2) char2expression :: char(10) :: char(5) -> char2expression :: char(5)
+comment|// B.3) char2expression :: varchar(10) :: char(5) -> char2expression :: char(5)
+comment|// B.4) char6expression :: varchar(10) :: char(5) -> char6expression :: char(5)
+comment|// C) Simplification is not possible:
+comment|// C.1) char6expression :: char(3) :: char(5) -> must not be changed
+comment|//      the input is truncated to 3 chars, so we can't use char6expression :: char(5)
+comment|// C.2) varchar2Expr :: char(5) :: varchar(2) -> must not be changed
+comment|//      the input have to be padded with spaces (up to 2 chars)
+comment|// C.3) char2expression :: char(4) :: varchar(5) -> must not be changed
+comment|//      would not have the padding
+comment|// The approach seems to be:
+comment|// 1) Ensure inner cast is lossless (see if above)
+comment|// 2) If operand of the inner cast has the same type as the outer cast,
+comment|//    remove two casts except C.2 or C.3-like pattern (== inner cast is CHAR)
+comment|// 3) If outer cast is lossless, remove inner cast (B-like cases)
+comment|// Here we try to remove two casts in one go (A-like cases)
+name|RexNode
+name|intExpr
+init|=
+operator|(
+operator|(
+name|RexCall
+operator|)
+name|operand
+operator|)
+operator|.
+name|operands
+operator|.
+name|get
+argument_list|(
+literal|0
+argument_list|)
+decl_stmt|;
+comment|// intExpr == CHAR detects A.1
+comment|// operand != CHAR detects C.2
+if|if
+condition|(
+operator|(
+name|intExpr
+operator|.
+name|getType
+argument_list|()
+operator|.
+name|getSqlTypeName
+argument_list|()
+operator|==
+name|SqlTypeName
+operator|.
+name|CHAR
+operator|||
+name|operand
+operator|.
+name|getType
+argument_list|()
+operator|.
+name|getSqlTypeName
+argument_list|()
+operator|!=
+name|SqlTypeName
+operator|.
+name|CHAR
+operator|)
+operator|&&
+name|sameTypeOrNarrowsNullability
+argument_list|(
+name|e
+operator|.
+name|getType
+argument_list|()
+argument_list|,
+name|intExpr
+operator|.
+name|getType
+argument_list|()
+argument_list|)
+condition|)
+block|{
+return|return
+name|intExpr
+return|;
+block|}
+comment|// Here we try to remove inner cast (B-like cases)
+if|if
+condition|(
+name|RexUtil
+operator|.
+name|isLosslessCast
+argument_list|(
+name|intExpr
+operator|.
+name|getType
+argument_list|()
+argument_list|,
+name|operand
+operator|.
+name|getType
+argument_list|()
+argument_list|)
+operator|&&
+operator|(
+name|e
+operator|.
+name|getType
+argument_list|()
+operator|.
+name|getSqlTypeName
+argument_list|()
+operator|==
+name|operand
+operator|.
+name|getType
+argument_list|()
+operator|.
+name|getSqlTypeName
+argument_list|()
+operator|||
+name|e
+operator|.
+name|getType
+argument_list|()
+operator|.
+name|getSqlTypeName
+argument_list|()
+operator|==
+name|SqlTypeName
+operator|.
+name|CHAR
+operator|||
+name|operand
+operator|.
+name|getType
+argument_list|()
+operator|.
+name|getSqlTypeName
+argument_list|()
+operator|!=
+name|SqlTypeName
+operator|.
+name|CHAR
+operator|)
+condition|)
+block|{
+return|return
+name|rexBuilder
+operator|.
+name|makeCast
+argument_list|(
+name|e
+operator|.
+name|getType
+argument_list|()
+argument_list|,
+name|intExpr
+argument_list|)
+return|;
+block|}
+block|}
 switch|switch
 condition|(
 name|operand
