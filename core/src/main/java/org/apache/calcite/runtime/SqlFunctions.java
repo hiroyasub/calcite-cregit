@@ -8270,6 +8270,46 @@ name|b0
 argument_list|)
 return|;
 block|}
+comment|// SINH
+comment|/** SQL<code>SINH</code> operator applied to BigDecimal values. */
+specifier|public
+specifier|static
+name|double
+name|sinh
+parameter_list|(
+name|BigDecimal
+name|b
+parameter_list|)
+block|{
+return|return
+name|sinh
+argument_list|(
+name|b
+operator|.
+name|doubleValue
+argument_list|()
+argument_list|)
+return|;
+block|}
+comment|/** SQL<code>SINH</code> operator applied to double values. */
+specifier|public
+specifier|static
+name|double
+name|sinh
+parameter_list|(
+name|double
+name|b
+parameter_list|)
+block|{
+return|return
+name|Math
+operator|.
+name|sinh
+argument_list|(
+name|b
+argument_list|)
+return|;
+block|}
 comment|// TAN
 comment|/** SQL<code>TAN</code> operator applied to BigDecimal values. */
 specifier|public
