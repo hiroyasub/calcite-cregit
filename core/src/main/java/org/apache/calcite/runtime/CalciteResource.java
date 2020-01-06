@@ -1418,6 +1418,21 @@ function_decl|;
 annotation|@
 name|BaseMessage
 argument_list|(
+literal|"Cannot qualify common column ''{0}''"
+argument_list|)
+name|ExInst
+argument_list|<
+name|SqlValidatorException
+argument_list|>
+name|disallowsQualifyingCommonColumn
+parameter_list|(
+name|String
+name|a0
+parameter_list|)
+function_decl|;
+annotation|@
+name|BaseMessage
+argument_list|(
 literal|"Cannot specify condition (NATURAL keyword, or ON or USING clause) following CROSS JOIN"
 argument_list|)
 name|ExInst
