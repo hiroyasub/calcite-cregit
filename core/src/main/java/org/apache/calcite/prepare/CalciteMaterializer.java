@@ -790,7 +790,10 @@ name|toRel
 argument_list|(
 name|table
 argument_list|,
-literal|null
+name|ImmutableList
+operator|.
+name|of
+argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
