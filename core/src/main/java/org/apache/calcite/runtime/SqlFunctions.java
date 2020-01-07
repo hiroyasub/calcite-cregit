@@ -7533,6 +7533,46 @@ name|b0
 argument_list|)
 return|;
 block|}
+comment|// COSH
+comment|/** SQL<code>COSH</code> operator applied to BigDecimal values. */
+specifier|public
+specifier|static
+name|double
+name|cosh
+parameter_list|(
+name|BigDecimal
+name|b
+parameter_list|)
+block|{
+return|return
+name|cosh
+argument_list|(
+name|b
+operator|.
+name|doubleValue
+argument_list|()
+argument_list|)
+return|;
+block|}
+comment|/** SQL<code>COSH</code> operator applied to double values. */
+specifier|public
+specifier|static
+name|double
+name|cosh
+parameter_list|(
+name|double
+name|b
+parameter_list|)
+block|{
+return|return
+name|Math
+operator|.
+name|cosh
+argument_list|(
+name|b
+argument_list|)
+return|;
+block|}
 comment|// COT
 comment|/** SQL<code>COT</code> operator applied to BigDecimal values. */
 specifier|public
