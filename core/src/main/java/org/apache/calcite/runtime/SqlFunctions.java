@@ -8229,6 +8229,46 @@ name|b0
 argument_list|)
 return|;
 block|}
+comment|// TANH
+comment|/** SQL<code>TANH</code> operator applied to BigDecimal values. */
+specifier|public
+specifier|static
+name|double
+name|tanh
+parameter_list|(
+name|BigDecimal
+name|b
+parameter_list|)
+block|{
+return|return
+name|tanh
+argument_list|(
+name|b
+operator|.
+name|doubleValue
+argument_list|()
+argument_list|)
+return|;
+block|}
+comment|/** SQL<code>TANH</code> operator applied to double values. */
+specifier|public
+specifier|static
+name|double
+name|tanh
+parameter_list|(
+name|double
+name|b
+parameter_list|)
+block|{
+return|return
+name|Math
+operator|.
+name|tanh
+argument_list|(
+name|b
+argument_list|)
+return|;
+block|}
 comment|// Helpers
 comment|/** Helper for implementing MIN. Somewhat similar to LEAST operator. */
 specifier|public

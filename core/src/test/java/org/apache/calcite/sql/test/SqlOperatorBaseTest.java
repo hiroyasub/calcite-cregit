@@ -26164,6 +26164,111 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testTanhFunc
+parameter_list|()
+block|{
+name|SqlTester
+name|tester
+init|=
+name|tester
+argument_list|(
+name|SqlLibrary
+operator|.
+name|ORACLE
+argument_list|)
+decl_stmt|;
+name|tester
+operator|.
+name|checkType
+argument_list|(
+literal|"tanh(1)"
+argument_list|,
+literal|"DOUBLE NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkType
+argument_list|(
+literal|"tanh(cast(1 as float))"
+argument_list|,
+literal|"DOUBLE NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkType
+argument_list|(
+literal|"tanh(case when false then 1 else null end)"
+argument_list|,
+literal|"DOUBLE"
+argument_list|)
+expr_stmt|;
+name|strictTester
+operator|.
+name|checkFails
+argument_list|(
+literal|"^tanh('abc')^"
+argument_list|,
+literal|"No match found for function signature TANH\\(<CHARACTER>\\)"
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkType
+argument_list|(
+literal|"tanh('abc')"
+argument_list|,
+literal|"DOUBLE NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalarApprox
+argument_list|(
+literal|"tanh(1)"
+argument_list|,
+literal|"DOUBLE NOT NULL"
+argument_list|,
+literal|0.7615d
+argument_list|,
+literal|0.0001d
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalarApprox
+argument_list|(
+literal|"tanh(cast(1 as decimal(1, 0)))"
+argument_list|,
+literal|"DOUBLE NOT NULL"
+argument_list|,
+literal|0.7615d
+argument_list|,
+literal|0.0001d
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkNull
+argument_list|(
+literal|"tanh(cast(null as integer))"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkNull
+argument_list|(
+literal|"tanh(cast(null as double))"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testTruncateFunc
 parameter_list|()
 block|{
