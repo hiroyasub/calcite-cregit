@@ -25381,7 +25381,7 @@ operator|.
 name|INSTANCE2
 argument_list|)
 operator|.
-name|checkUnchanged
+name|check
 argument_list|()
 expr_stmt|;
 block|}
