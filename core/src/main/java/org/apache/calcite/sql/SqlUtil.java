@@ -4395,13 +4395,6 @@ name|ArrayList
 argument_list|<>
 argument_list|()
 decl_stmt|;
-name|hintStrategies
-operator|.
-name|validateHint
-argument_list|(
-name|hintName
-argument_list|)
-expr_stmt|;
 name|RelHint
 name|relHint
 decl_stmt|;
@@ -4480,6 +4473,17 @@ literal|"Unexpected hint option format"
 argument_list|)
 throw|;
 block|}
+if|if
+condition|(
+name|hintStrategies
+operator|.
+name|validateHint
+argument_list|(
+name|relHint
+argument_list|)
+condition|)
+block|{
+comment|// Skips the hint if the validation fails.
 name|relHints
 operator|.
 name|add
@@ -4487,6 +4491,7 @@ argument_list|(
 name|relHint
 argument_list|)
 expr_stmt|;
+block|}
 block|}
 return|return
 name|ImmutableList

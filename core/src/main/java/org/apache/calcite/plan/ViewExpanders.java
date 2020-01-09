@@ -135,14 +135,14 @@ argument_list|>
 name|hints
 parameter_list|)
 block|{
-comment|// See if the user want to customize the ToRelContext.
+comment|// See if the user wants to customize the ToRelContext.
 if|if
 condition|(
 name|viewExpander
 operator|instanceof
 name|RelOptTable
 operator|.
-name|ToRelContextSupplier
+name|ToRelContextFactory
 condition|)
 block|{
 return|return
@@ -150,12 +150,12 @@ operator|(
 operator|(
 name|RelOptTable
 operator|.
-name|ToRelContextSupplier
+name|ToRelContextFactory
 operator|)
 name|viewExpander
 operator|)
 operator|.
-name|get
+name|createToRelContext
 argument_list|(
 name|viewExpander
 argument_list|,
