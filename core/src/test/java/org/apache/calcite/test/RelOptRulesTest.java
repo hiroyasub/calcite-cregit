@@ -3344,7 +3344,7 @@ specifier|final
 name|String
 name|sql
 init|=
-literal|"select 1 from emp inner join dept \n"
+literal|"select 1 from emp inner join dept\n"
 operator|+
 literal|"on emp.deptno=dept.deptno and emp.ename is not null"
 decl_stmt|;
@@ -12617,7 +12617,7 @@ specifier|final
 name|String
 name|sql
 init|=
-literal|"select p1 is not distinct from p0 \n"
+literal|"select p1 is not distinct from p0\n"
 operator|+
 literal|"from (values (2, cast(null as integer))) as t(p0, p1)"
 decl_stmt|;
@@ -13892,7 +13892,7 @@ specifier|final
 name|String
 name|sql
 init|=
-literal|"select a + b as x, b, a \n"
+literal|"select a + b as x, b, a\n"
 operator|+
 literal|"from (values (10, 1), (30, 7), (20, 3)) as t(a, b)\n"
 operator|+
@@ -27605,7 +27605,7 @@ specifier|final
 name|String
 name|sql
 init|=
-literal|"SELECT * FROM emp A where sal in \n"
+literal|"SELECT * FROM emp A where sal in\n"
 operator|+
 literal|"(SELECT max(sal) FROM emp B where A.mgr = B.empno group by deptno, 'abc')"
 decl_stmt|;

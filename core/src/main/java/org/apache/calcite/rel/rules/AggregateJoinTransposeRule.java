@@ -2536,6 +2536,12 @@ name|getGroupSet
 argument_list|()
 argument_list|)
 argument_list|,
+operator|(
+name|Iterable
+argument_list|<
+name|ImmutableBitSet
+argument_list|>
+operator|)
 name|Mappings
 operator|.
 name|apply2

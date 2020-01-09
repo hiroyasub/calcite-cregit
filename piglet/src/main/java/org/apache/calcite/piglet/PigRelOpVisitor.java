@@ -2115,6 +2115,12 @@ name|groupKey
 argument_list|(
 name|groupSet
 argument_list|,
+operator|(
+name|Iterable
+argument_list|<
+name|ImmutableBitSet
+argument_list|>
+operator|)
 name|groupSets
 argument_list|)
 decl_stmt|;

@@ -4806,6 +4806,12 @@ name|groupKey
 argument_list|(
 name|groupSet
 argument_list|,
+operator|(
+name|Iterable
+argument_list|<
+name|ImmutableBitSet
+argument_list|>
+operator|)
 name|ImmutableList
 operator|.
 name|of
@@ -4848,8 +4854,10 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/** As {@link #groupKey(ImmutableBitSet, Iterable)}. */
-comment|// deprecated, to be removed before 2.0
+comment|/** @deprecated Use {@link #groupKey(ImmutableBitSet, Iterable)}. */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 name|GroupKey
 name|groupKey

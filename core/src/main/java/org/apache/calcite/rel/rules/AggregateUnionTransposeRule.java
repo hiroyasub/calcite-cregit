@@ -373,6 +373,20 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|util
+operator|.
+name|ImmutableBitSet
+import|;
+end_import
+
+begin_import
+import|import
 name|com
 operator|.
 name|google
@@ -886,6 +900,12 @@ operator|.
 name|getGroupSet
 argument_list|()
 argument_list|,
+operator|(
+name|Iterable
+argument_list|<
+name|ImmutableBitSet
+argument_list|>
+operator|)
 name|aggRel
 operator|.
 name|getGroupSets

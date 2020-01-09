@@ -4649,6 +4649,12 @@ name|groupKey
 argument_list|(
 name|newGroupSet
 argument_list|,
+operator|(
+name|Iterable
+argument_list|<
+name|ImmutableBitSet
+argument_list|>
+operator|)
 name|newGroupSets
 argument_list|)
 decl_stmt|;
