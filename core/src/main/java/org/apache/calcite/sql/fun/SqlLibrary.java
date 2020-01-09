@@ -146,6 +146,14 @@ argument_list|,
 literal|"bigquery"
 argument_list|)
 block|,
+comment|/** A collection of operators that are in Apache Hive but not in standard    * SQL. */
+name|HIVE
+argument_list|(
+literal|"h"
+argument_list|,
+literal|"hive"
+argument_list|)
+block|,
 comment|/** A collection of operators that are in MySQL but not in standard SQL. */
 name|MYSQL
 argument_list|(
@@ -168,6 +176,14 @@ argument_list|(
 literal|"p"
 argument_list|,
 literal|"postgresql"
+argument_list|)
+block|,
+comment|/** A collection of operators that are in Apache Spark but not in standard    * SQL. */
+name|SPARK
+argument_list|(
+literal|"s"
+argument_list|,
+literal|"spark"
 argument_list|)
 block|;
 comment|/** Abbreviation for the library used in SQL reference. */

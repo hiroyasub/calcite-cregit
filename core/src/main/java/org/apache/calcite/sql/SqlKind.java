@@ -377,6 +377,9 @@ block|,
 comment|/** {@code GREATEST} function (Oracle). */
 name|GREATEST
 block|,
+comment|/** The "IF" function (BigQuery, Hive, Spark). */
+name|IF
+block|,
 comment|/** {@code LEAST} function (Oracle). */
 name|LEAST
 block|,

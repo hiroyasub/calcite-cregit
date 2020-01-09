@@ -19930,6 +19930,139 @@ block|}
 annotation|@
 name|Test
 name|void
+name|testIfFunc
+parameter_list|()
+block|{
+name|checkIf
+argument_list|(
+name|tester
+argument_list|(
+name|SqlLibrary
+operator|.
+name|BIG_QUERY
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|checkIf
+argument_list|(
+name|tester
+argument_list|(
+name|SqlLibrary
+operator|.
+name|HIVE
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|checkIf
+argument_list|(
+name|tester
+argument_list|(
+name|SqlLibrary
+operator|.
+name|SPARK
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+specifier|private
+name|void
+name|checkIf
+parameter_list|(
+name|SqlTester
+name|tester
+parameter_list|)
+block|{
+name|tester
+operator|.
+name|setFor
+argument_list|(
+name|SqlLibraryOperators
+operator|.
+name|IF
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"if(1 = 2, 1, 2)"
+argument_list|,
+literal|"2"
+argument_list|,
+literal|"INTEGER NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"if('abc'='xyz', 'abc', 'xyz')"
+argument_list|,
+literal|"xyz"
+argument_list|,
+literal|"CHAR(3) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"if(substring('abc',1,2)='ab', 'abc', 'xyz')"
+argument_list|,
+literal|"abc"
+argument_list|,
+literal|"CHAR(3) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"if(substring('abc',1,2)='ab', 'abc', 'wxyz')"
+argument_list|,
+literal|"abc "
+argument_list|,
+literal|"CHAR(4) NOT NULL"
+argument_list|)
+expr_stmt|;
+comment|// TRUE yields first arg, FALSE and UNKNOWN yield second arg
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"if(nullif(true,false), 5, 10)"
+argument_list|,
+literal|5
+argument_list|,
+literal|"INTEGER NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"if(nullif(true,true), 5, 10)"
+argument_list|,
+literal|10
+argument_list|,
+literal|"INTEGER NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"if(nullif(true,true), 5, 10)"
+argument_list|,
+literal|10
+argument_list|,
+literal|"INTEGER NOT NULL"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
 name|testUpperFunc
 parameter_list|()
 block|{

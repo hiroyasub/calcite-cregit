@@ -203,6 +203,22 @@ name|sql
 operator|.
 name|parser
 operator|.
+name|SqlParseException
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|parser
+operator|.
 name|SqlParser
 import|;
 end_import
@@ -246,6 +262,48 @@ operator|.
 name|tools
 operator|.
 name|Planner
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|tools
+operator|.
+name|RelConversionException
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|tools
+operator|.
+name|ValidationException
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|util
+operator|.
+name|Util
 import|;
 end_import
 
@@ -551,8 +609,6 @@ name|String
 modifier|...
 name|rows
 parameter_list|)
-throws|throws
-name|Exception
 block|{
 return|return
 name|returnsRows
@@ -576,8 +632,6 @@ name|String
 modifier|...
 name|rows
 parameter_list|)
-throws|throws
-name|Exception
 block|{
 return|return
 name|returnsRows
@@ -600,8 +654,8 @@ name|String
 index|[]
 name|rows
 parameter_list|)
-throws|throws
-name|Exception
+block|{
+try|try
 block|{
 name|SqlNode
 name|parse
@@ -672,6 +726,26 @@ expr_stmt|;
 return|return
 name|this
 return|;
+block|}
+catch|catch
+parameter_list|(
+name|ValidationException
+decl||
+name|SqlParseException
+decl||
+name|RelConversionException
+name|e
+parameter_list|)
+block|{
+throw|throw
+name|Util
+operator|.
+name|throwAsRuntime
+argument_list|(
+name|e
+argument_list|)
+throw|;
+block|}
 block|}
 block|}
 comment|/** Creates a {@link Sql}. */
@@ -803,8 +877,6 @@ name|Test
 name|void
 name|testInterpretProjectFilterValues
 parameter_list|()
-throws|throws
-name|Exception
 block|{
 specifier|final
 name|String
@@ -829,14 +901,42 @@ literal|"[c, 3]"
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Tests NULLIF operator. (NULLIF is an example of an operator that    * is implemented by expanding to simpler operators - in this case, CASE.) */
+annotation|@
+name|Test
+name|void
+name|testInterpretNullif
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select nullif(x, 2), x\n"
+operator|+
+literal|"from (values (1, 'a'), (2, 'b'), (3, 'c')) as t(x, y)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|returnsRows
+argument_list|(
+literal|"[1, 1]"
+argument_list|,
+literal|"[null, 2]"
+argument_list|,
+literal|"[3, 3]"
+argument_list|)
+expr_stmt|;
+block|}
 comment|/** Tests a plan where the sort field is projected away. */
 annotation|@
 name|Test
 name|void
 name|testInterpretOrder
 parameter_list|()
-throws|throws
-name|Exception
 block|{
 specifier|final
 name|String
@@ -873,8 +973,6 @@ name|Test
 name|void
 name|testInterpretMultiset
 parameter_list|()
-throws|throws
-name|Exception
 block|{
 specifier|final
 name|String
@@ -999,8 +1097,6 @@ name|Test
 name|void
 name|testInterpretTable
 parameter_list|()
-throws|throws
-name|Exception
 block|{
 name|sql
 argument_list|(
@@ -1025,8 +1121,6 @@ name|Test
 name|void
 name|testInterpretScannableTable
 parameter_list|()
-throws|throws
-name|Exception
 block|{
 name|rootSchema
 operator|.
@@ -1063,8 +1157,6 @@ name|Test
 name|void
 name|testAggregateCount
 parameter_list|()
-throws|throws
-name|Exception
 block|{
 name|rootSchema
 operator|.
@@ -1095,8 +1187,6 @@ name|Test
 name|void
 name|testAggregateMax
 parameter_list|()
-throws|throws
-name|Exception
 block|{
 name|rootSchema
 operator|.
@@ -1127,8 +1217,6 @@ name|Test
 name|void
 name|testAggregateMin
 parameter_list|()
-throws|throws
-name|Exception
 block|{
 name|rootSchema
 operator|.
@@ -1159,8 +1247,6 @@ name|Test
 name|void
 name|testAggregateGroup
 parameter_list|()
-throws|throws
-name|Exception
 block|{
 name|rootSchema
 operator|.
@@ -1197,8 +1283,6 @@ name|Test
 name|void
 name|testAggregateGroupFilter
 parameter_list|()
-throws|throws
-name|Exception
 block|{
 name|rootSchema
 operator|.
@@ -1246,8 +1330,6 @@ name|Test
 name|void
 name|testInterpretSimpleScannableTable
 parameter_list|()
-throws|throws
-name|Exception
 block|{
 name|rootSchema
 operator|.
@@ -1281,8 +1363,6 @@ name|Test
 name|void
 name|testInterpretUnionAll
 parameter_list|()
-throws|throws
-name|Exception
 block|{
 name|rootSchema
 operator|.
@@ -1338,8 +1418,6 @@ name|Test
 name|void
 name|testInterpretUnion
 parameter_list|()
-throws|throws
-name|Exception
 block|{
 name|rootSchema
 operator|.
@@ -1386,8 +1464,6 @@ name|Test
 name|void
 name|testInterpretUnionWithNullValue
 parameter_list|()
-throws|throws
-name|Exception
 block|{
 specifier|final
 name|String
@@ -1419,8 +1495,6 @@ name|Test
 name|void
 name|testInterpretUnionAllWithNullValue
 parameter_list|()
-throws|throws
-name|Exception
 block|{
 specifier|final
 name|String
@@ -1456,8 +1530,6 @@ name|Test
 name|void
 name|testInterpretIntersect
 parameter_list|()
-throws|throws
-name|Exception
 block|{
 specifier|final
 name|String
@@ -1487,8 +1559,6 @@ name|Test
 name|void
 name|testInterpretIntersectAll
 parameter_list|()
-throws|throws
-name|Exception
 block|{
 specifier|final
 name|String
@@ -1518,8 +1588,6 @@ name|Test
 name|void
 name|testInterpretIntersectWithNullValue
 parameter_list|()
-throws|throws
-name|Exception
 block|{
 specifier|final
 name|String
@@ -1551,8 +1619,6 @@ name|Test
 name|void
 name|testInterpretIntersectAllWithNullValue
 parameter_list|()
-throws|throws
-name|Exception
 block|{
 specifier|final
 name|String
@@ -1584,8 +1650,6 @@ name|Test
 name|void
 name|testInterpretMinus
 parameter_list|()
-throws|throws
-name|Exception
 block|{
 specifier|final
 name|String
@@ -1617,8 +1681,6 @@ name|Test
 name|void
 name|testDuplicateRowInterpretMinus
 parameter_list|()
-throws|throws
-name|Exception
 block|{
 specifier|final
 name|String
@@ -1646,8 +1708,6 @@ name|Test
 name|void
 name|testInterpretMinusAll
 parameter_list|()
-throws|throws
-name|Exception
 block|{
 specifier|final
 name|String
@@ -1681,8 +1741,6 @@ name|Test
 name|void
 name|testDuplicateRowInterpretMinusAll
 parameter_list|()
-throws|throws
-name|Exception
 block|{
 specifier|final
 name|String
@@ -1712,8 +1770,6 @@ name|Test
 name|void
 name|testInterpretMinusAllWithNullValue
 parameter_list|()
-throws|throws
-name|Exception
 block|{
 specifier|final
 name|String
@@ -1745,8 +1801,6 @@ name|Test
 name|void
 name|testInterpretMinusWithNullValue
 parameter_list|()
-throws|throws
-name|Exception
 block|{
 specifier|final
 name|String
@@ -1776,8 +1830,6 @@ name|Test
 name|void
 name|testInterpretInnerJoin
 parameter_list|()
-throws|throws
-name|Exception
 block|{
 specifier|final
 name|String
@@ -1811,8 +1863,6 @@ name|Test
 name|void
 name|testInterpretLeftOutJoin
 parameter_list|()
-throws|throws
-name|Exception
 block|{
 specifier|final
 name|String
@@ -1848,8 +1898,6 @@ name|Test
 name|void
 name|testInterpretRightOutJoin
 parameter_list|()
-throws|throws
-name|Exception
 block|{
 specifier|final
 name|String
@@ -1885,8 +1933,6 @@ name|Test
 name|void
 name|testInterpretSemanticSemiJoin
 parameter_list|()
-throws|throws
-name|Exception
 block|{
 specifier|final
 name|String
@@ -1916,8 +1962,6 @@ name|Test
 name|void
 name|testInterpretSemiJoin
 parameter_list|()
-throws|throws
-name|Exception
 block|{
 specifier|final
 name|String
@@ -1929,6 +1973,8 @@ literal|"where x in\n"
 operator|+
 literal|"(select x from (values (1, 'd'), (3, 'g')) as t2(x, y))"
 decl_stmt|;
+try|try
+block|{
 name|SqlNode
 name|validate
 init|=
@@ -2024,13 +2070,31 @@ literal|"[3, c]"
 argument_list|)
 expr_stmt|;
 block|}
+catch|catch
+parameter_list|(
+name|ValidationException
+decl||
+name|SqlParseException
+decl||
+name|RelConversionException
+name|e
+parameter_list|)
+block|{
+throw|throw
+name|Util
+operator|.
+name|throwAsRuntime
+argument_list|(
+name|e
+argument_list|)
+throw|;
+block|}
+block|}
 annotation|@
 name|Test
 name|void
 name|testInterpretAntiJoin
 parameter_list|()
-throws|throws
-name|Exception
 block|{
 specifier|final
 name|String
@@ -2060,8 +2124,6 @@ name|Test
 name|void
 name|testInterpretFullJoin
 parameter_list|()
-throws|throws
-name|Exception
 block|{
 specifier|final
 name|String
@@ -2099,8 +2161,6 @@ name|Test
 name|void
 name|testInterpretDecimalAggregate
 parameter_list|()
-throws|throws
-name|Exception
 block|{
 specifier|final
 name|String
@@ -2128,8 +2188,6 @@ name|Test
 name|void
 name|testInterpretUnnest
 parameter_list|()
-throws|throws
-name|Exception
 block|{
 name|sql
 argument_list|(
