@@ -2423,6 +2423,10 @@ name|Values
 operator|||
 name|rel2
 operator|instanceof
+name|Sort
+operator|||
+name|rel2
+operator|instanceof
 name|TableScan
 operator|||
 name|simplyProjects
