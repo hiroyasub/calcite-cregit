@@ -6714,6 +6714,15 @@ name|RelRoot
 name|root
 parameter_list|)
 block|{
+name|Hook
+operator|.
+name|PLAN_BEFORE_IMPLEMENTATION
+operator|.
+name|run
+argument_list|(
+name|root
+argument_list|)
+expr_stmt|;
 name|RelDataType
 name|resultType
 init|=
