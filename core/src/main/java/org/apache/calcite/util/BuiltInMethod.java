@@ -2228,10 +2228,6 @@ name|Function1
 operator|.
 name|class
 argument_list|,
-name|Predicate2
-operator|.
-name|class
-argument_list|,
 name|Function2
 operator|.
 name|class
