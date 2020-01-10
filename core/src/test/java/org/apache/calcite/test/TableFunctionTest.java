@@ -2362,6 +2362,38 @@ literal|"C=7"
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3364">[CALCITE-3364]    * Can't group table function result due to a type cast error if table function    * returns a row with a single value</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testUserDefinedTableFunction9
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|q
+init|=
+literal|"select \"N\" + 1 as c\n"
+operator|+
+literal|"from table(\"s\".\"fibonacci2\"(3))\n"
+operator|+
+literal|"group by \"N\""
+decl_stmt|;
+name|with
+argument_list|()
+operator|.
+name|query
+argument_list|(
+name|q
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"C=2\nC=3\nC=4"
+argument_list|)
+expr_stmt|;
+block|}
 annotation|@
 name|Test
 specifier|public
