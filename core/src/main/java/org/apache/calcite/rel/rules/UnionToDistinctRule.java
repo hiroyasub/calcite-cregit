@@ -169,9 +169,18 @@ parameter_list|)
 block|{
 name|super
 argument_list|(
-name|operand
+name|operandJ
 argument_list|(
 name|unionClazz
+argument_list|,
+literal|null
+argument_list|,
+name|union
+lambda|->
+operator|!
+name|union
+operator|.
+name|all
 argument_list|,
 name|any
 argument_list|()
@@ -236,16 +245,6 @@ argument_list|(
 literal|0
 argument_list|)
 decl_stmt|;
-if|if
-condition|(
-name|union
-operator|.
-name|all
-condition|)
-block|{
-return|return;
-comment|// nothing to do
-block|}
 specifier|final
 name|RelBuilder
 name|relBuilder

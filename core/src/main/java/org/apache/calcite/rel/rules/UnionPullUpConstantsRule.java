@@ -378,11 +378,29 @@ name|RelBuilderFactory
 name|relBuilderFactory
 parameter_list|)
 block|{
+comment|// If field count is 1, then there's no room for
+comment|// optimization since we cannot create an empty Project
+comment|// operator. If we created a Project with one column, this rule would
+comment|// cycle.
 name|super
 argument_list|(
-name|operand
+name|operandJ
 argument_list|(
 name|unionClass
+argument_list|,
+literal|null
+argument_list|,
+name|union
+lambda|->
+name|union
+operator|.
+name|getRowType
+argument_list|()
+operator|.
+name|getFieldCount
+argument_list|()
+operator|>
+literal|1
 argument_list|,
 name|any
 argument_list|()
@@ -415,30 +433,6 @@ argument_list|(
 literal|0
 argument_list|)
 decl_stmt|;
-specifier|final
-name|int
-name|count
-init|=
-name|union
-operator|.
-name|getRowType
-argument_list|()
-operator|.
-name|getFieldCount
-argument_list|()
-decl_stmt|;
-if|if
-condition|(
-name|count
-operator|==
-literal|1
-condition|)
-block|{
-comment|// No room for optimization since we cannot create an empty Project
-comment|// operator. If we created a Project with one column, this rule would
-comment|// cycle.
-return|return;
-block|}
 specifier|final
 name|RexBuilder
 name|rexBuilder
