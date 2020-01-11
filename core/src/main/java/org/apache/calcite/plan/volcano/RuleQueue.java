@@ -99,20 +99,6 @@ name|calcite
 operator|.
 name|util
 operator|.
-name|ChunkList
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|util
-operator|.
 name|Util
 import|;
 end_import
@@ -1680,6 +1666,9 @@ return|return
 literal|null
 return|;
 block|}
+name|int
+name|bestPos
+decl_stmt|;
 if|if
 condition|(
 name|LOGGER
@@ -1699,10 +1688,14 @@ name|match
 operator|=
 name|matchList
 operator|.
-name|remove
+name|get
 argument_list|(
 literal|0
 argument_list|)
+expr_stmt|;
+name|bestPos
+operator|=
+literal|0
 expr_stmt|;
 name|StringBuilder
 name|b
@@ -1783,12 +1776,11 @@ name|match
 operator|=
 literal|null
 expr_stmt|;
-name|int
 name|bestPos
-init|=
+operator|=
 operator|-
 literal|1
-decl_stmt|;
+expr_stmt|;
 name|int
 name|i
 init|=
@@ -1834,13 +1826,44 @@ name|match2
 expr_stmt|;
 block|}
 block|}
-name|match
-operator|=
+block|}
+comment|// Removal from the middle is not efficient, but the removal from the tail is.
+comment|// We remove the very last element, then put it to the bestPos index which
+comment|// effectively removes an element from the list.
+specifier|final
+name|VolcanoRuleMatch
+name|lastElement
+init|=
 name|matchList
 operator|.
 name|remove
 argument_list|(
+name|matchList
+operator|.
+name|size
+argument_list|()
+operator|-
+literal|1
+argument_list|)
+decl_stmt|;
+if|if
+condition|(
 name|bestPos
+operator|<
+name|matchList
+operator|.
+name|size
+argument_list|()
+condition|)
+block|{
+comment|// Replace the middle element with the last one
+name|matchList
+operator|.
+name|set
+argument_list|(
+name|bestPos
+argument_list|,
+name|lastElement
 argument_list|)
 expr_stmt|;
 block|}
@@ -2518,7 +2541,7 @@ specifier|final
 name|VolcanoPlannerPhase
 name|phase
 decl_stmt|;
-comment|/**      * Current list of VolcanoRuleMatches for this phase. New rule-matches      * are appended to the end of this list. When removing a rule-match, the      * list is sorted and the highest importance rule-match removed. It is      * important for performance that this list remain mostly sorted.      *      *<p>Use a hunkList because {@link java.util.ArrayList} does not implement      * remove(0) efficiently.</p>      */
+comment|/**      * Current list of VolcanoRuleMatches for this phase. New rule-matches      * are appended to the end of this list.      * The rules are not sorted in any way.      */
 specifier|final
 name|List
 argument_list|<
@@ -2527,7 +2550,7 @@ argument_list|>
 name|list
 init|=
 operator|new
-name|ChunkList
+name|ArrayList
 argument_list|<>
 argument_list|()
 decl_stmt|;
@@ -2579,6 +2602,19 @@ block|{
 name|list
 operator|.
 name|clear
+argument_list|()
+expr_stmt|;
+operator|(
+operator|(
+name|ArrayList
+argument_list|<
+name|VolcanoRuleMatch
+argument_list|>
+operator|)
+name|list
+operator|)
+operator|.
+name|trimToSize
 argument_list|()
 expr_stmt|;
 name|names
