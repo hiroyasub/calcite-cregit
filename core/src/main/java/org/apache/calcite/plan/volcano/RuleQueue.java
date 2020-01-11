@@ -1253,22 +1253,6 @@ name|values
 argument_list|()
 control|)
 block|{
-if|if
-condition|(
-operator|!
-name|matchList
-operator|.
-name|names
-operator|.
-name|add
-argument_list|(
-name|matchName
-argument_list|)
-condition|)
-block|{
-comment|// Identical match has already been added.
-continue|continue;
-block|}
 name|Set
 argument_list|<
 name|String
@@ -1315,6 +1299,22 @@ condition|)
 block|{
 continue|continue;
 block|}
+block|}
+if|if
+condition|(
+operator|!
+name|matchList
+operator|.
+name|names
+operator|.
+name|add
+argument_list|(
+name|matchName
+argument_list|)
+condition|)
+block|{
+comment|// Identical match has already been added.
+continue|continue;
 block|}
 name|LOGGER
 operator|.
