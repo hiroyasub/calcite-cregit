@@ -220,11 +220,6 @@ comment|/**  * Unit test for {@link PartiallyOrderedSet}.  */
 end_comment
 
 begin_class
-annotation|@
-name|Tag
-argument_list|(
-literal|"slow"
-argument_list|)
 specifier|public
 class|class
 name|PartiallyOrderedSetTest
@@ -1284,6 +1279,11 @@ argument_list|)
 expr_stmt|;
 block|}
 annotation|@
+name|Tag
+argument_list|(
+literal|"slow"
+argument_list|)
+annotation|@
 name|Test
 specifier|public
 name|void
@@ -1319,6 +1319,11 @@ literal|164782
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Tag
+argument_list|(
+literal|"slow"
+argument_list|)
 annotation|@
 name|Test
 specifier|public

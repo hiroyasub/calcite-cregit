@@ -514,11 +514,6 @@ comment|/**  * Unit tests for {@link LatticeSuggester}.  */
 end_comment
 
 begin_class
-annotation|@
-name|Tag
-argument_list|(
-literal|"slow"
-argument_list|)
 specifier|public
 class|class
 name|LatticeSuggesterTest
@@ -1296,6 +1291,11 @@ block|}
 return|;
 block|}
 annotation|@
+name|Tag
+argument_list|(
+literal|"slow"
+argument_list|)
+annotation|@
 name|Test
 specifier|public
 name|void
@@ -1932,6 +1932,11 @@ expr_stmt|;
 block|}
 block|}
 annotation|@
+name|Tag
+argument_list|(
+literal|"slow"
+argument_list|)
+annotation|@
 name|Test
 specifier|public
 name|void
@@ -1946,6 +1951,11 @@ literal|false
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Tag
+argument_list|(
+literal|"slow"
+argument_list|)
 annotation|@
 name|Test
 specifier|public
