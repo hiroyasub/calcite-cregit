@@ -627,6 +627,11 @@ name|cluster
 argument_list|,
 name|traitSet
 argument_list|,
+name|ImmutableList
+operator|.
+name|of
+argument_list|()
+argument_list|,
 name|input
 argument_list|,
 name|program

@@ -369,16 +369,6 @@ name|java
 operator|.
 name|util
 operator|.
-name|Collections
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
 name|List
 import|;
 end_import
@@ -481,7 +471,9 @@ literal|null
 argument_list|)
 assert|;
 block|}
-comment|/**    * Creates a Calc.    *    * @param cluster Cluster    * @param traits Traits    * @param child Input relation    * @param program Calc program    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|protected
 name|Calc
 parameter_list|(
@@ -504,9 +496,9 @@ name|cluster
 argument_list|,
 name|traits
 argument_list|,
-name|Collections
+name|ImmutableList
 operator|.
-name|emptyList
+name|of
 argument_list|()
 argument_list|,
 name|child
@@ -545,6 +537,11 @@ argument_list|(
 name|cluster
 argument_list|,
 name|traits
+argument_list|,
+name|ImmutableList
+operator|.
+name|of
+argument_list|()
 argument_list|,
 name|child
 argument_list|,

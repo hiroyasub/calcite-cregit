@@ -1424,6 +1424,11 @@ operator|.
 name|NONE
 argument_list|)
 argument_list|,
+name|ImmutableList
+operator|.
+name|of
+argument_list|()
+argument_list|,
 name|project
 argument_list|,
 name|ImmutableBitSet
@@ -2157,6 +2162,11 @@ name|cluster
 argument_list|,
 name|traitSet
 argument_list|,
+name|ImmutableList
+operator|.
+name|of
+argument_list|()
+argument_list|,
 name|input
 argument_list|,
 name|groupSet
@@ -2276,6 +2286,11 @@ argument_list|(
 name|cluster
 argument_list|,
 name|traits
+argument_list|,
+name|ImmutableList
+operator|.
+name|of
+argument_list|()
 argument_list|,
 name|child
 argument_list|,

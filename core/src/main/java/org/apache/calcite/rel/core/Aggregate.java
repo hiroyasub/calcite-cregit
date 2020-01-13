@@ -925,7 +925,9 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**    * Create an Aggregate.    *    * @param cluster  Cluster    * @param traitSet Trait set    * @param input    Input relational expression    * @param groupSet Bit set of grouping fields    * @param groupSets List of all grouping sets; null for just {@code groupSet}    * @param aggCalls Collection of calls to aggregate functions    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|protected
 name|Aggregate
 parameter_list|(
@@ -975,7 +977,6 @@ name|aggCalls
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Creates an Aggregate.    */
 annotation|@
 name|Deprecated
 comment|// to be removed before 2.0
@@ -1016,9 +1017,9 @@ name|cluster
 argument_list|,
 name|traits
 argument_list|,
-operator|new
-name|ArrayList
-argument_list|<>
+name|ImmutableList
+operator|.
+name|of
 argument_list|()
 argument_list|,
 name|child

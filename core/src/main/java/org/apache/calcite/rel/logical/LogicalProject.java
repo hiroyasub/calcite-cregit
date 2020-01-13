@@ -269,11 +269,15 @@ end_import
 
 begin_import
 import|import
-name|java
+name|com
 operator|.
-name|util
+name|google
 operator|.
-name|ArrayList
+name|common
+operator|.
+name|collect
+operator|.
+name|ImmutableList
 import|;
 end_import
 
@@ -357,7 +361,9 @@ name|NONE
 argument_list|)
 assert|;
 block|}
-comment|/**    * Creates a LogicalProject.    *    *<p>Use {@link #create} unless you know what you're doing.    *    * @param cluster  Cluster this relational expression belongs to    * @param traitSet Traits of this relational expression    * @param input    Input relational expression    * @param projects List of expressions for the input columns    * @param rowType  Output row type    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 name|LogicalProject
 parameter_list|(
@@ -388,9 +394,9 @@ name|cluster
 argument_list|,
 name|traitSet
 argument_list|,
-operator|new
-name|ArrayList
-argument_list|<>
+name|ImmutableList
+operator|.
+name|of
 argument_list|()
 argument_list|,
 name|input
@@ -436,6 +442,11 @@ argument_list|(
 name|cluster
 argument_list|,
 name|traitSet
+argument_list|,
+name|ImmutableList
+operator|.
+name|of
+argument_list|()
 argument_list|,
 name|input
 argument_list|,
@@ -492,6 +503,11 @@ name|RelCollations
 operator|.
 name|EMPTY
 argument_list|)
+argument_list|,
+name|ImmutableList
+operator|.
+name|of
+argument_list|()
 argument_list|,
 name|input
 argument_list|,
@@ -689,6 +705,11 @@ argument_list|(
 name|cluster
 argument_list|,
 name|traitSet
+argument_list|,
+name|ImmutableList
+operator|.
+name|of
+argument_list|()
 argument_list|,
 name|input
 argument_list|,

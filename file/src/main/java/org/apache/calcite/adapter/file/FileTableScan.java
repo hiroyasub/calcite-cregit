@@ -281,6 +281,20 @@ end_import
 
 begin_import
 import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|collect
+operator|.
+name|ImmutableList
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -341,6 +355,11 @@ name|EnumerableConvention
 operator|.
 name|INSTANCE
 argument_list|)
+argument_list|,
+name|ImmutableList
+operator|.
+name|of
+argument_list|()
 argument_list|,
 name|table
 argument_list|)

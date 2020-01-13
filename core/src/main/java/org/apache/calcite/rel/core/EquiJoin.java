@@ -89,6 +89,20 @@ end_import
 
 begin_import
 import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|collect
+operator|.
+name|ImmutableList
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -166,6 +180,11 @@ argument_list|(
 name|cluster
 argument_list|,
 name|traits
+argument_list|,
+name|ImmutableList
+operator|.
+name|of
+argument_list|()
 argument_list|,
 name|left
 argument_list|,
@@ -256,6 +275,11 @@ argument_list|(
 name|cluster
 argument_list|,
 name|traits
+argument_list|,
+name|ImmutableList
+operator|.
+name|of
+argument_list|()
 argument_list|,
 name|left
 argument_list|,

@@ -429,16 +429,6 @@ name|java
 operator|.
 name|util
 operator|.
-name|ArrayList
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
 name|HashSet
 import|;
 end_import
@@ -579,7 +569,9 @@ literal|null
 argument_list|)
 assert|;
 block|}
-comment|/**    * Creates a Project.    *    * @param cluster  Cluster that this relational expression belongs to    * @param traits   Traits of this relational expression    * @param input    Input relational expression    * @param projects List of expressions for the input columns    * @param rowType  Output row type    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|protected
 name|Project
 parameter_list|(
@@ -610,9 +602,9 @@ name|cluster
 argument_list|,
 name|traits
 argument_list|,
-operator|new
-name|ArrayList
-argument_list|<>
+name|ImmutableList
+operator|.
+name|of
 argument_list|()
 argument_list|,
 name|input
@@ -659,6 +651,11 @@ name|cluster
 argument_list|,
 name|traitSet
 argument_list|,
+name|ImmutableList
+operator|.
+name|of
+argument_list|()
+argument_list|,
 name|input
 argument_list|,
 name|projects
@@ -692,6 +689,11 @@ argument_list|,
 name|input
 operator|.
 name|getTraitSet
+argument_list|()
+argument_list|,
+name|ImmutableList
+operator|.
+name|of
 argument_list|()
 argument_list|,
 name|input

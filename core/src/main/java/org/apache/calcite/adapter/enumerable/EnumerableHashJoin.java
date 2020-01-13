@@ -413,6 +413,11 @@ name|cluster
 argument_list|,
 name|traits
 argument_list|,
+name|ImmutableList
+operator|.
+name|of
+argument_list|()
+argument_list|,
 name|left
 argument_list|,
 name|right

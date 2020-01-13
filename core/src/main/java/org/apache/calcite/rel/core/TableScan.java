@@ -464,6 +464,9 @@ name|hints
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|protected
 name|TableScan
 parameter_list|(
@@ -483,9 +486,9 @@ name|cluster
 argument_list|,
 name|traitSet
 argument_list|,
-operator|new
-name|ArrayList
-argument_list|<>
+name|ImmutableList
+operator|.
+name|of
 argument_list|()
 argument_list|,
 name|table
@@ -510,6 +513,11 @@ argument_list|,
 name|input
 operator|.
 name|getTraitSet
+argument_list|()
+argument_list|,
+name|ImmutableList
+operator|.
+name|of
 argument_list|()
 argument_list|,
 name|input

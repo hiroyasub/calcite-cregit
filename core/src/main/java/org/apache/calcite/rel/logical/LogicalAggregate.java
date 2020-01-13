@@ -165,11 +165,15 @@ end_import
 
 begin_import
 import|import
-name|java
+name|com
 operator|.
-name|util
+name|google
 operator|.
-name|ArrayList
+name|common
+operator|.
+name|collect
+operator|.
+name|ImmutableList
 import|;
 end_import
 
@@ -249,7 +253,9 @@ name|aggCalls
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Creates a LogicalAggregate.    *    *<p>Use {@link #create} unless you know what you're doing.    *    * @param cluster    Cluster that this relational expression belongs to    * @param traitSet   Traits    * @param input      Input relational expression    * @param groupSet Bit set of grouping fields    * @param groupSets Grouping sets, or null to use just {@code groupSet}    * @param aggCalls Array of aggregates to compute, not null    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 name|LogicalAggregate
 parameter_list|(
@@ -284,9 +290,9 @@ name|cluster
 argument_list|,
 name|traitSet
 argument_list|,
-operator|new
-name|ArrayList
-argument_list|<>
+name|ImmutableList
+operator|.
+name|of
 argument_list|()
 argument_list|,
 name|input
@@ -338,6 +344,11 @@ argument_list|(
 name|cluster
 argument_list|,
 name|traitSet
+argument_list|,
+name|ImmutableList
+operator|.
+name|of
+argument_list|()
 argument_list|,
 name|input
 argument_list|,
@@ -397,6 +408,11 @@ name|Convention
 operator|.
 name|NONE
 argument_list|)
+argument_list|,
+name|ImmutableList
+operator|.
+name|of
+argument_list|()
 argument_list|,
 name|input
 argument_list|,
@@ -569,6 +585,11 @@ argument_list|(
 name|cluster
 argument_list|,
 name|traitSet
+argument_list|,
+name|ImmutableList
+operator|.
+name|of
+argument_list|()
 argument_list|,
 name|input
 argument_list|,

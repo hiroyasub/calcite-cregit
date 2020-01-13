@@ -240,7 +240,9 @@ name|table
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Creates a LogicalTableScan.    *    *<p>Use {@link #create} unless you know what you're doing.    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 name|LogicalTableScan
 parameter_list|(
@@ -260,9 +262,9 @@ name|cluster
 argument_list|,
 name|traitSet
 argument_list|,
-operator|new
-name|ArrayList
-argument_list|<>
+name|ImmutableList
+operator|.
+name|of
 argument_list|()
 argument_list|,
 name|table
@@ -294,6 +296,11 @@ name|Convention
 operator|.
 name|NONE
 argument_list|)
+argument_list|,
+name|ImmutableList
+operator|.
+name|of
+argument_list|()
 argument_list|,
 name|table
 argument_list|)

@@ -363,16 +363,6 @@ name|java
 operator|.
 name|util
 operator|.
-name|ArrayList
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
 name|Collections
 import|;
 end_import
@@ -565,7 +555,9 @@ name|hints
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Creates a Join.    *    *<p>Note: We plan to change the {@code variablesStopped} parameter to    * {@code Set&lt;CorrelationId&gt; variablesSet}    * {@link org.apache.calcite.util.Bug#upgrade(String) before version 2.0},    * because {@link #getVariablesSet()}    * is preferred over {@link #getVariablesStopped()}.    * This constructor is not deprecated, for now, because maintaining overloaded    * constructors in multiple sub-classes would be onerous.    *    * @param cluster          Cluster    * @param traitSet         Trait set    * @param left             Left input    * @param right            Right input    * @param condition        Join condition    * @param joinType         Join type    * @param variablesSet     Set variables that are set by the    *                         LHS and used by the RHS and are not available to    *                         nodes above this Join in the tree    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|protected
 name|Join
 parameter_list|(
@@ -600,9 +592,9 @@ name|cluster
 argument_list|,
 name|traitSet
 argument_list|,
-operator|new
-name|ArrayList
-argument_list|<>
+name|ImmutableList
+operator|.
+name|of
 argument_list|()
 argument_list|,
 name|left
@@ -653,6 +645,11 @@ argument_list|(
 name|cluster
 argument_list|,
 name|traitSet
+argument_list|,
+name|ImmutableList
+operator|.
+name|of
+argument_list|()
 argument_list|,
 name|left
 argument_list|,

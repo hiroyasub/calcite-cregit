@@ -333,16 +333,6 @@ name|java
 operator|.
 name|util
 operator|.
-name|Collections
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
 name|List
 import|;
 end_import
@@ -408,7 +398,9 @@ name|program
 argument_list|)
 expr_stmt|;
 block|}
-comment|/** Creates a LogicalCalc. */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 name|LogicalCalc
 parameter_list|(
@@ -431,9 +423,9 @@ name|cluster
 argument_list|,
 name|traitSet
 argument_list|,
-name|Collections
+name|ImmutableList
 operator|.
-name|emptyList
+name|of
 argument_list|()
 argument_list|,
 name|child
@@ -460,6 +452,11 @@ argument_list|,
 name|input
 operator|.
 name|getTraitSet
+argument_list|()
+argument_list|,
+name|ImmutableList
+operator|.
+name|of
 argument_list|()
 argument_list|,
 name|input
@@ -506,6 +503,11 @@ argument_list|(
 name|cluster
 argument_list|,
 name|traitSet
+argument_list|,
+name|ImmutableList
+operator|.
+name|of
+argument_list|()
 argument_list|,
 name|child
 argument_list|,
@@ -615,6 +617,11 @@ argument_list|(
 name|cluster
 argument_list|,
 name|traitSet
+argument_list|,
+name|ImmutableList
+operator|.
+name|of
+argument_list|()
 argument_list|,
 name|input
 argument_list|,

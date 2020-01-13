@@ -1314,6 +1314,11 @@ name|cluster
 argument_list|,
 name|traitSet
 argument_list|,
+name|ImmutableList
+operator|.
+name|of
+argument_list|()
+argument_list|,
 name|table
 argument_list|)
 expr_stmt|;
@@ -2330,6 +2335,11 @@ name|cluster
 argument_list|,
 name|traitSet
 argument_list|,
+name|ImmutableList
+operator|.
+name|of
+argument_list|()
+argument_list|,
 name|input
 argument_list|,
 name|projects
@@ -2928,6 +2938,11 @@ argument_list|(
 name|cluster
 argument_list|,
 name|traitSet
+argument_list|,
+name|ImmutableList
+operator|.
+name|of
+argument_list|()
 argument_list|,
 name|left
 argument_list|,
@@ -3622,6 +3637,11 @@ argument_list|(
 name|cluster
 argument_list|,
 name|traitSet
+argument_list|,
+name|ImmutableList
+operator|.
+name|of
+argument_list|()
 argument_list|,
 name|input
 argument_list|,
