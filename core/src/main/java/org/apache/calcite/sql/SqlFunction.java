@@ -1121,20 +1121,7 @@ break|;
 block|}
 block|}
 block|}
-comment|// if function doesn't exist within operator table and known function
-comment|// handling is turned off then create a more permissive function
-if|if
-condition|(
-name|function
-operator|==
-literal|null
-operator|&&
-name|validator
-operator|.
-name|isLenientOperatorLookup
-argument_list|()
-condition|)
-block|{
+comment|// check if the identifier represents type
 specifier|final
 name|SqlFunction
 name|x
@@ -1174,6 +1161,54 @@ name|ZERO
 argument_list|)
 argument_list|)
 decl_stmt|;
+name|RelDataType
+name|type
+init|=
+name|validator
+operator|.
+name|getCatalogReader
+argument_list|()
+operator|.
+name|getNamedType
+argument_list|(
+name|identifier
+argument_list|)
+decl_stmt|;
+if|if
+condition|(
+name|type
+operator|!=
+literal|null
+condition|)
+block|{
+name|function
+operator|=
+operator|new
+name|SqlTypeConstructorFunction
+argument_list|(
+name|identifier
+argument_list|,
+name|type
+argument_list|)
+expr_stmt|;
+break|break
+name|validCoercionType
+break|;
+block|}
+comment|// if function doesn't exist within operator table and known function
+comment|// handling is turned off then create a more permissive function
+if|if
+condition|(
+name|function
+operator|==
+literal|null
+operator|&&
+name|validator
+operator|.
+name|isLenientOperatorLookup
+argument_list|()
+condition|)
+block|{
 name|function
 operator|=
 operator|new

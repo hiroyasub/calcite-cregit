@@ -7689,7 +7689,7 @@ argument_list|)
 expr_stmt|;
 name|expr
 argument_list|(
-literal|"myCol.mySubschema.^memberFunc()^"
+literal|"customer.mySubschema.^memberFunc()^"
 argument_list|)
 operator|.
 name|fails
