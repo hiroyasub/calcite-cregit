@@ -873,6 +873,16 @@ name|origJoinFilters
 operator|.
 name|size
 argument_list|()
+operator|&&
+name|aboveFilters
+operator|.
+name|size
+argument_list|()
+operator|==
+name|origAboveFilters
+operator|.
+name|size
+argument_list|()
 condition|)
 block|{
 if|if

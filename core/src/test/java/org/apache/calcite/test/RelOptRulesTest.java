@@ -4295,6 +4295,41 @@ name|check
 argument_list|()
 expr_stmt|;
 block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testPushAboveFiltersIntoInnerJoinCondition
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|""
+operator|+
+literal|"select * from sales.dept d inner join sales.emp e\n"
+operator|+
+literal|"on d.deptno = e.deptno and d.deptno> e.mgr\n"
+operator|+
+literal|"where d.deptno> e.mgr"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|withRule
+argument_list|(
+name|FilterJoinRule
+operator|.
+name|FILTER_ON_JOIN
+argument_list|)
+operator|.
+name|check
+argument_list|()
+expr_stmt|;
+block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3225">[CALCITE-3225]    * JoinToMultiJoinRule should not match SEMI/ANTI LogicalJoin</a>. */
 annotation|@
 name|Test
