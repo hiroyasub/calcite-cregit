@@ -205,6 +205,20 @@ name|common
 operator|.
 name|collect
 operator|.
+name|ImmutableList
+import|;
+end_import
+
+begin_import
+import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|collect
+operator|.
 name|ImmutableSet
 import|;
 end_import
@@ -719,6 +733,12 @@ argument_list|,
 name|semiJoin
 operator|.
 name|getRight
+argument_list|()
+argument_list|,
+comment|// No need to copy the hints, the framework would try to do that.
+name|ImmutableList
+operator|.
+name|of
 argument_list|()
 argument_list|,
 name|newSemiJoinFilter

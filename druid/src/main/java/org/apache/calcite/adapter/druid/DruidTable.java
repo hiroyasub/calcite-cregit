@@ -1324,6 +1324,11 @@ argument_list|(
 name|cluster
 argument_list|,
 name|relOptTable
+argument_list|,
+name|ImmutableList
+operator|.
+name|of
+argument_list|()
 argument_list|)
 decl_stmt|;
 return|return

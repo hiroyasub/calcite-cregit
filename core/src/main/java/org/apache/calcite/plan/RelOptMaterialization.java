@@ -1057,6 +1057,11 @@ argument_list|(
 name|cluster
 argument_list|,
 name|leftRelOptTable
+argument_list|,
+name|ImmutableList
+operator|.
+name|of
+argument_list|()
 argument_list|)
 argument_list|,
 name|Mappings
@@ -1237,6 +1242,11 @@ argument_list|(
 name|cluster
 argument_list|,
 name|rightRelOptTable
+argument_list|,
+name|ImmutableList
+operator|.
+name|of
+argument_list|()
 argument_list|)
 argument_list|,
 name|Mappings

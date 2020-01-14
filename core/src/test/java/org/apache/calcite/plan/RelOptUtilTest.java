@@ -4129,6 +4129,11 @@ argument_list|,
 name|ImmutableList
 operator|.
 name|of
+argument_list|()
+argument_list|,
+name|ImmutableList
+operator|.
+name|of
 argument_list|(
 name|RexInputRef
 operator|.
@@ -4289,6 +4294,11 @@ operator|.
 name|createProject
 argument_list|(
 name|agg
+argument_list|,
+name|ImmutableList
+operator|.
+name|of
+argument_list|()
 argument_list|,
 name|ImmutableList
 operator|.

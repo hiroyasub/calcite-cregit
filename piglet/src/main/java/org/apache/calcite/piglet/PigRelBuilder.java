@@ -686,7 +686,7 @@ name|Hook
 operator|.
 name|REL_BUILDER_SIMPLIFY
 operator|.
-name|add
+name|addThread
 argument_list|(
 name|Hook
 operator|.
@@ -1415,6 +1415,11 @@ argument_list|(
 name|cluster
 argument_list|,
 name|tableSchema
+argument_list|,
+name|ImmutableList
+operator|.
+name|of
+argument_list|()
 argument_list|)
 decl_stmt|;
 name|push

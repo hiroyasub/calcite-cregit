@@ -6580,11 +6580,6 @@ name|getJoinType
 argument_list|()
 argument_list|,
 name|condition
-argument_list|,
-name|ImmutableSet
-operator|.
-name|of
-argument_list|()
 argument_list|)
 operator|.
 name|build
@@ -6766,20 +6761,17 @@ name|of
 argument_list|()
 argument_list|)
 operator|.
+name|hints
+argument_list|(
+name|rel
+operator|.
+name|getHints
+argument_list|()
+argument_list|)
+operator|.
 name|build
 argument_list|()
 decl_stmt|;
-name|newJoin
-operator|=
-name|RelOptUtil
-operator|.
-name|copyRelHints
-argument_list|(
-name|rel
-argument_list|,
-name|newJoin
-argument_list|)
-expr_stmt|;
 comment|// Create the mapping between the output of the old correlation rel
 comment|// and the new join rel
 name|Map
@@ -11039,11 +11031,6 @@ argument_list|(
 name|joinType
 argument_list|,
 name|joinCond
-argument_list|,
-name|ImmutableSet
-operator|.
-name|of
-argument_list|()
 argument_list|)
 operator|.
 name|build

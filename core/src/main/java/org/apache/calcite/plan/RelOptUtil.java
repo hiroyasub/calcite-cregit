@@ -3763,6 +3763,11 @@ name|create
 argument_list|(
 name|ret
 argument_list|,
+name|ImmutableList
+operator|.
+name|of
+argument_list|()
+argument_list|,
 name|ImmutableBitSet
 operator|.
 name|range
@@ -4698,6 +4703,17 @@ decl_stmt|;
 name|RelNode
 name|input
 decl_stmt|;
+name|List
+argument_list|<
+name|RelHint
+argument_list|>
+name|hints
+init|=
+name|ImmutableList
+operator|.
+name|of
+argument_list|()
+decl_stmt|;
 if|if
 condition|(
 name|rel
@@ -4707,6 +4723,15 @@ condition|)
 block|{
 comment|// No need to create another project node if the rel
 comment|// is already a project.
+specifier|final
+name|Project
+name|project
+init|=
+operator|(
+name|Project
+operator|)
+name|rel
+decl_stmt|;
 name|castExps
 operator|=
 name|RexUtil
@@ -4736,6 +4761,13 @@ name|getInput
 argument_list|(
 literal|0
 argument_list|)
+expr_stmt|;
+name|hints
+operator|=
+name|project
+operator|.
+name|getHints
+argument_list|()
 expr_stmt|;
 block|}
 else|else
@@ -4771,6 +4803,8 @@ name|createProject
 argument_list|(
 name|input
 argument_list|,
+name|hints
+argument_list|,
 name|castExps
 argument_list|,
 name|castRowType
@@ -4789,6 +4823,8 @@ operator|.
 name|createProject
 argument_list|(
 name|input
+argument_list|,
+name|hints
 argument_list|,
 name|castExps
 argument_list|,
@@ -4999,6 +5035,11 @@ name|create
 argument_list|(
 name|rel
 argument_list|,
+name|ImmutableList
+operator|.
+name|of
+argument_list|()
+argument_list|,
 name|ImmutableBitSet
 operator|.
 name|of
@@ -5029,6 +5070,11 @@ operator|.
 name|create
 argument_list|(
 name|rel
+argument_list|,
+name|ImmutableList
+operator|.
+name|of
+argument_list|()
 argument_list|,
 name|ImmutableBitSet
 operator|.
@@ -15915,6 +15961,11 @@ operator|.
 name|createProject
 argument_list|(
 name|rel
+argument_list|,
+name|ImmutableList
+operator|.
+name|of
+argument_list|()
 argument_list|,
 name|exprList
 argument_list|,

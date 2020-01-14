@@ -1309,6 +1309,11 @@ argument_list|(
 name|cluster
 argument_list|,
 name|t1
+argument_list|,
+name|ImmutableList
+operator|.
+name|of
+argument_list|()
 argument_list|)
 decl_stmt|;
 comment|// project s column
@@ -1320,6 +1325,11 @@ operator|.
 name|create
 argument_list|(
 name|rt1
+argument_list|,
+name|ImmutableList
+operator|.
+name|of
+argument_list|()
 argument_list|,
 name|ImmutableList
 operator|.

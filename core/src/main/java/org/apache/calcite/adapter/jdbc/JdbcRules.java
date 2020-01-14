@@ -976,6 +976,8 @@ init|=
 parameter_list|(
 name|input
 parameter_list|,
+name|hints
+parameter_list|,
 name|projects
 parameter_list|,
 name|fieldNames
@@ -1093,6 +1095,8 @@ parameter_list|(
 name|left
 parameter_list|,
 name|right
+parameter_list|,
+name|hints
 parameter_list|,
 name|condition
 parameter_list|,
@@ -1282,6 +1286,8 @@ name|AGGREGATE_FACTORY
 init|=
 parameter_list|(
 name|input
+parameter_list|,
+name|hints
 parameter_list|,
 name|groupSet
 parameter_list|,
@@ -1547,6 +1553,8 @@ parameter_list|(
 name|cluster
 parameter_list|,
 name|table
+parameter_list|,
+name|hints
 parameter_list|)
 lambda|->
 block|{

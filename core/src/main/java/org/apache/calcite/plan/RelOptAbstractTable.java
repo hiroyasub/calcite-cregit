@@ -463,6 +463,11 @@ name|getCluster
 argument_list|()
 argument_list|,
 name|this
+argument_list|,
+name|context
+operator|.
+name|getTableHints
+argument_list|()
 argument_list|)
 return|;
 block|}

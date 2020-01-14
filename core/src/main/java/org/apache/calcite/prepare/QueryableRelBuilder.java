@@ -491,6 +491,20 @@ end_import
 
 begin_import
 import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|collect
+operator|.
+name|ImmutableList
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|math
@@ -707,6 +721,11 @@ operator|.
 name|cluster
 argument_list|,
 name|relOptTable
+argument_list|,
+name|ImmutableList
+operator|.
+name|of
+argument_list|()
 argument_list|)
 return|;
 block|}
@@ -3035,6 +3054,11 @@ operator|.
 name|create
 argument_list|(
 name|child
+argument_list|,
+name|ImmutableList
+operator|.
+name|of
+argument_list|()
 argument_list|,
 name|nodes
 argument_list|,

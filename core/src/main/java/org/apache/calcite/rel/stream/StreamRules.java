@@ -659,6 +659,11 @@ name|newDelta
 argument_list|,
 name|project
 operator|.
+name|getHints
+argument_list|()
+argument_list|,
+name|project
+operator|.
 name|getProjects
 argument_list|()
 argument_list|,
@@ -908,6 +913,11 @@ operator|.
 name|create
 argument_list|(
 name|newDelta
+argument_list|,
+name|aggregate
+operator|.
+name|getHints
+argument_list|()
 argument_list|,
 name|aggregate
 operator|.
@@ -1381,6 +1391,11 @@ argument_list|(
 name|cluster
 argument_list|,
 name|relOptTable2
+argument_list|,
+name|scan
+operator|.
+name|getHints
+argument_list|()
 argument_list|)
 decl_stmt|;
 name|call

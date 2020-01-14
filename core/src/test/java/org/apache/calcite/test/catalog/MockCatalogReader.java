@@ -3414,6 +3414,11 @@ name|getCluster
 argument_list|()
 argument_list|,
 name|this
+argument_list|,
+name|context
+operator|.
+name|getTableHints
+argument_list|()
 argument_list|)
 return|;
 block|}
@@ -5391,6 +5396,11 @@ name|getCluster
 argument_list|()
 argument_list|,
 name|fromTable
+argument_list|,
+name|context
+operator|.
+name|getTableHints
+argument_list|()
 argument_list|)
 decl_stmt|;
 specifier|final
@@ -5516,6 +5526,11 @@ operator|.
 name|create
 argument_list|(
 name|rel
+argument_list|,
+name|ImmutableList
+operator|.
+name|of
+argument_list|()
 argument_list|,
 name|Pair
 operator|.
@@ -5737,6 +5752,11 @@ name|getCluster
 argument_list|()
 argument_list|,
 name|relOptTable
+argument_list|,
+name|context
+operator|.
+name|getTableHints
+argument_list|()
 argument_list|)
 return|;
 block|}

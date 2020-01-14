@@ -181,16 +181,6 @@ name|java
 operator|.
 name|util
 operator|.
-name|ArrayList
-import|;
-end_import
-
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
 name|List
 import|;
 end_import
@@ -451,7 +441,9 @@ name|relOptTable
 argument_list|)
 return|;
 block|}
-comment|/** Creates a LogicalTableScan.    *    * @param cluster Cluster    * @param relOptTable Table    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 1.23
 specifier|public
 specifier|static
 name|LogicalTableScan
@@ -472,9 +464,9 @@ name|cluster
 argument_list|,
 name|relOptTable
 argument_list|,
-operator|new
-name|ArrayList
-argument_list|<>
+name|ImmutableList
+operator|.
+name|of
 argument_list|()
 argument_list|)
 return|;

@@ -999,6 +999,22 @@ name|assertNotNull
 import|;
 end_import
 
+begin_import
+import|import static
+name|org
+operator|.
+name|junit
+operator|.
+name|jupiter
+operator|.
+name|api
+operator|.
+name|Assertions
+operator|.
+name|fail
+import|;
+end_import
+
 begin_comment
 comment|/**  * Unit test for {@link org.apache.calcite.rel.hint.RelHint}.  */
 end_comment
@@ -2922,6 +2938,11 @@ operator|.
 name|getRight
 argument_list|()
 argument_list|,
+name|ImmutableList
+operator|.
+name|of
+argument_list|()
+argument_list|,
 name|join
 operator|.
 name|getCondition
@@ -3537,6 +3558,11 @@ operator|.
 name|convertSqlToRel
 argument_list|(
 name|sql
+argument_list|)
+expr_stmt|;
+name|fail
+argument_list|(
+literal|"Unexpected exception"
 argument_list|)
 expr_stmt|;
 block|}

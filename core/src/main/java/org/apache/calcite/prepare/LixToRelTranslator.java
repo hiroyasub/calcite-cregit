@@ -575,6 +575,11 @@ name|create
 argument_list|(
 name|input
 argument_list|,
+name|ImmutableList
+operator|.
+name|of
+argument_list|()
+argument_list|,
 name|toRex
 argument_list|(
 name|input
@@ -685,6 +690,11 @@ name|call
 operator|.
 name|targetExpression
 argument_list|)
+argument_list|,
+name|ImmutableList
+operator|.
+name|of
+argument_list|()
 argument_list|)
 return|;
 case|case
@@ -736,6 +746,11 @@ name|call
 operator|.
 name|targetExpression
 argument_list|)
+argument_list|,
+name|ImmutableList
+operator|.
+name|of
+argument_list|()
 argument_list|)
 return|;
 default|default:

@@ -330,11 +330,12 @@ argument_list|>
 name|getTableHints
 parameter_list|()
 block|{
-throw|throw
-operator|new
-name|UnsupportedOperationException
+return|return
+name|ImmutableList
+operator|.
+name|of
 argument_list|()
-throw|;
+return|;
 block|}
 block|}
 return|;

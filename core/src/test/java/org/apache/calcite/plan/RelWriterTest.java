@@ -1407,6 +1407,11 @@ argument_list|,
 literal|"emps"
 argument_list|)
 argument_list|)
+argument_list|,
+name|ImmutableList
+operator|.
+name|of
+argument_list|()
 argument_list|)
 decl_stmt|;
 specifier|final
@@ -1494,6 +1499,11 @@ operator|.
 name|create
 argument_list|(
 name|filter
+argument_list|,
+name|ImmutableList
+operator|.
+name|of
+argument_list|()
 argument_list|,
 name|ImmutableBitSet
 operator|.
@@ -1664,6 +1674,11 @@ argument_list|,
 literal|"emps"
 argument_list|)
 argument_list|)
+argument_list|,
+name|ImmutableList
+operator|.
+name|of
+argument_list|()
 argument_list|)
 decl_stmt|;
 specifier|final
@@ -1699,6 +1714,11 @@ operator|.
 name|create
 argument_list|(
 name|scan
+argument_list|,
+name|ImmutableList
+operator|.
+name|of
+argument_list|()
 argument_list|,
 name|ImmutableList
 operator|.

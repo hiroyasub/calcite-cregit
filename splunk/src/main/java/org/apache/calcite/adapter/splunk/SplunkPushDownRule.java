@@ -1302,15 +1302,10 @@ name|debug
 argument_list|(
 literal|"topProj: {}"
 argument_list|,
-name|String
-operator|.
-name|valueOf
-argument_list|(
 name|topProj
 operator|.
 name|getPermutation
 argument_list|()
-argument_list|)
 argument_list|)
 expr_stmt|;
 name|newFields
@@ -1599,6 +1594,11 @@ operator|.
 name|create
 argument_list|(
 name|rel
+argument_list|,
+name|proj
+operator|.
+name|getHints
+argument_list|()
 argument_list|,
 name|proj
 operator|.
