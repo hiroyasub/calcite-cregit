@@ -10609,6 +10609,7 @@ name|void
 name|testUnionOnCalcsToUnion
 parameter_list|()
 block|{
+specifier|final
 name|String
 name|mv
 init|=
@@ -10628,6 +10629,7 @@ literal|"from \"emps\"\n"
 operator|+
 literal|"where \"empid\"< 100"
 decl_stmt|;
+specifier|final
 name|String
 name|query
 init|=
@@ -10652,6 +10654,69 @@ argument_list|(
 name|mv
 argument_list|,
 name|query
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testIntersectOnCalcsToIntersect
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|mv
+init|=
+literal|""
+operator|+
+literal|"select \"deptno\", \"salary\"\n"
+operator|+
+literal|"from \"emps\"\n"
+operator|+
+literal|"where \"empid\"> 300\n"
+operator|+
+literal|"intersect all\n"
+operator|+
+literal|"select \"deptno\", \"salary\"\n"
+operator|+
+literal|"from \"emps\"\n"
+operator|+
+literal|"where \"empid\"< 100"
+decl_stmt|;
+specifier|final
+name|String
+name|query
+init|=
+literal|""
+operator|+
+literal|"select \"deptno\", \"salary\" * 2\n"
+operator|+
+literal|"from \"emps\"\n"
+operator|+
+literal|"where \"empid\"> 300 and \"salary\"> 100\n"
+operator|+
+literal|"intersect all\n"
+operator|+
+literal|"select \"deptno\", \"salary\" * 2\n"
+operator|+
+literal|"from \"emps\"\n"
+operator|+
+literal|"where \"empid\"< 100 and \"salary\"> 100"
+decl_stmt|;
+name|sql
+argument_list|(
+name|mv
+argument_list|,
+name|query
+argument_list|)
+operator|.
+name|withOnlyBySubstitution
+argument_list|(
+literal|true
 argument_list|)
 operator|.
 name|ok

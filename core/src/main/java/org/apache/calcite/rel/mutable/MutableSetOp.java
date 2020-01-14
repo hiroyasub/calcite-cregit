@@ -72,6 +72,7 @@ comment|/** Mutable equivalent of {@link org.apache.calcite.rel.core.SetOp}. */
 end_comment
 
 begin_class
+specifier|public
 specifier|abstract
 class|class
 name|MutableSetOp
