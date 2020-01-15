@@ -8600,6 +8600,54 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testInsertWithSort
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"insert into empnullables (empno, ename) "
+operator|+
+literal|"select deptno, ename from emp order by ename"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testInsertWithLimit
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"insert into empnullables (empno, ename) "
+operator|+
+literal|"select deptno, ename from emp order by ename limit 10"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testDelete
 parameter_list|()
 block|{
