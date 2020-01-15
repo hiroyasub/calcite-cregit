@@ -5003,6 +5003,8 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
+try|try
+block|{
 if|if
 condition|(
 name|CalciteSystemProperty
@@ -5056,6 +5058,25 @@ expr_stmt|;
 name|dumpGraphviz
 argument_list|(
 name|pw
+argument_list|)
+expr_stmt|;
+block|}
+block|}
+catch|catch
+parameter_list|(
+name|Exception
+decl||
+name|AssertionError
+name|e
+parameter_list|)
+block|{
+name|pw
+operator|.
+name|println
+argument_list|(
+literal|"Error when dumping plan state: \n"
+operator|+
+name|e
 argument_list|)
 expr_stmt|;
 block|}
