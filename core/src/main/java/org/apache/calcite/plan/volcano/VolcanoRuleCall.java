@@ -27,6 +27,20 @@ name|calcite
 operator|.
 name|plan
 operator|.
+name|RelHintsPropagator
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
 name|RelOptListener
 import|;
 end_import
@@ -199,18 +213,6 @@ name|Set
 import|;
 end_import
 
-begin_import
-import|import
-name|java
-operator|.
-name|util
-operator|.
-name|function
-operator|.
-name|BiFunction
-import|;
-end_import
-
 begin_comment
 comment|/**  *<code>VolcanoRuleCall</code> implements the {@link RelOptRuleCall} interface  * for VolcanoPlanner.  */
 end_comment
@@ -335,14 +337,7 @@ name|RelNode
 argument_list|>
 name|equiv
 parameter_list|,
-name|BiFunction
-argument_list|<
-name|RelNode
-argument_list|,
-name|RelNode
-argument_list|,
-name|RelNode
-argument_list|>
+name|RelHintsPropagator
 name|handler
 parameter_list|)
 block|{
@@ -350,7 +345,7 @@ name|rel
 operator|=
 name|handler
 operator|.
-name|apply
+name|propagate
 argument_list|(
 name|rels
 index|[

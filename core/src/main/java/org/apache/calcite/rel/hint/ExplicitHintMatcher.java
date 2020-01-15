@@ -32,7 +32,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * A function to customize whether a relational expression should match a hint.  *  *<p>Usually you may not need to implement this function,  * {@link NodeTypeHintStrategy} is enough for most of the {@link RelHint}s.  *  *<p>Some of the hints can only be matched to the relational  * expression with special match conditions(not only the relational expression type).  * i.e. "hash_join(r, st)", this hint can only be applied to JOIN expression that  * has "r" and "st" as the input table names. To implement this, you may need to customize an  * {@link ExplicitHintStrategy} with the {@link ExplicitHintMatcher}.  *  * @param<R> Relational expression to test if the hint matches  *  * @see ExplicitHintStrategy  * @see HintStrategies  */
+comment|/**  * A function to customize whether a relational expression should match a hint.  *  *<p>Usually you may not need to implement this function,  * {@link NodeTypeHintStrategy} is enough for most of the {@link RelHint}s.  *  *<p>Some of the hints can only be matched to the relational  * expression with special match conditions(not only the relational expression type).  * i.e. "hash_join(r, st)", this hint can only be applied to JOIN expression that  * has "r" and "st" as the input table names. To implement this, you may need to customize an  * {@link ExplicitHintStrategy} with the {@link ExplicitHintMatcher}.  *  * @see ExplicitHintStrategy  * @see HintStrategies  */
 end_comment
 
 begin_interface
@@ -41,19 +41,15 @@ name|FunctionalInterface
 specifier|public
 interface|interface
 name|ExplicitHintMatcher
-parameter_list|<
-name|R
-extends|extends
-name|RelNode
-parameter_list|>
 block|{
+comment|/**    * Returns whether the given hint can attach to the relational expression.    *    * @param hint Hints    * @param node Relational expression to test if the hint matches    * @return true if the {@code hint} can attach to the {@code node}    */
 name|boolean
-name|apply
+name|matches
 parameter_list|(
 name|RelHint
 name|hint
 parameter_list|,
-name|R
+name|RelNode
 name|node
 parameter_list|)
 function_decl|;

@@ -11,9 +11,7 @@ name|apache
 operator|.
 name|calcite
 operator|.
-name|rel
-operator|.
-name|hint
+name|plan
 package|;
 end_package
 
@@ -32,65 +30,29 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * A hint strategy whose rules are totally customized.  *  * @see ExplicitHintMatcher  */
+comment|/**  * Customize the propagation of the {@link org.apache.calcite.rel.hint.RelHint}s  * from the root relational expression of a rule call {@link RelOptRuleCall} to  * the new equivalent expression.  *  * @see RelOptUtil#propagateRelHints(RelNode, RelNode)  */
 end_comment
 
-begin_class
-specifier|public
-class|class
-name|ExplicitHintStrategy
-implements|implements
-name|HintStrategy
-block|{
-comment|//~ Instance fields --------------------------------------------------------
-specifier|private
-specifier|final
-name|ExplicitHintMatcher
-name|matcher
-decl_stmt|;
-comment|/**    * Creates an {@code ExplicitHintStrategy} with specified {@code matcher}.    *    *<p>Make this constructor package-protected intentionally, use    * {@link HintStrategies#explicit(ExplicitHintMatcher)}.    *    * @param matcher ExplicitHintMatcher instance to test    *                if a hint can be applied to a rel    */
-name|ExplicitHintStrategy
-parameter_list|(
-name|ExplicitHintMatcher
-name|matcher
-parameter_list|)
-block|{
-name|this
-operator|.
-name|matcher
-operator|=
-name|matcher
-expr_stmt|;
-block|}
-comment|//~ Methods ----------------------------------------------------------------
+begin_interface
 annotation|@
-name|Override
+name|FunctionalInterface
 specifier|public
-name|boolean
-name|supportsRel
+interface|interface
+name|RelHintsPropagator
+block|{
+comment|/**    * Propagates the hints from a rule call's root relational expression {@code oriNode}    * to the new equivalent relational expression {@code equiv}.    *    * @param oriNode Root relational expression of a rule call    * @param equiv   Equivalent expression    * @return New relational expression that would register into the planner    */
+name|RelNode
+name|propagate
 parameter_list|(
-name|RelHint
-name|hint
+name|RelNode
+name|oriNode
 parameter_list|,
 name|RelNode
-name|rel
+name|equiv
 parameter_list|)
-block|{
-return|return
-name|this
-operator|.
-name|matcher
-operator|.
-name|matches
-argument_list|(
-name|hint
-argument_list|,
-name|rel
-argument_list|)
-return|;
+function_decl|;
 block|}
-block|}
-end_class
+end_interface
 
 end_unit
 
