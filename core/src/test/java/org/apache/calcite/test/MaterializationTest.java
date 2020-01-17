@@ -11363,7 +11363,7 @@ return|;
 block|}
 block|}
 comment|/** Fluent class that contains information necessary to run a test. */
-specifier|private
+specifier|public
 interface|interface
 name|Sql
 block|{

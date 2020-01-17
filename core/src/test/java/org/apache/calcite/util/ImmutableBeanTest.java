@@ -2319,6 +2319,7 @@ block|,
 name|GREEN
 block|}
 comment|/** Bean interface that has a default method and one property. */
+specifier|public
 interface|interface
 name|BeanWithDefault
 block|{
