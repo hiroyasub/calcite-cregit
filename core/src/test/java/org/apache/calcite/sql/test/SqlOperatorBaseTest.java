@@ -19300,6 +19300,81 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testStrcmpFunc
+parameter_list|()
+block|{
+specifier|final
+name|SqlTester
+name|tester1
+init|=
+name|tester
+argument_list|(
+name|SqlLibrary
+operator|.
+name|MYSQL
+argument_list|)
+decl_stmt|;
+name|tester1
+operator|.
+name|setFor
+argument_list|(
+name|SqlLibraryOperators
+operator|.
+name|STRCMP
+argument_list|)
+expr_stmt|;
+name|tester1
+operator|.
+name|checkString
+argument_list|(
+literal|"STRCMP('mytesttext', 'mytesttext')"
+argument_list|,
+literal|"0"
+argument_list|,
+literal|"INTEGER NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester1
+operator|.
+name|checkString
+argument_list|(
+literal|"STRCMP('mytesttext', 'mytest_text')"
+argument_list|,
+literal|"-1"
+argument_list|,
+literal|"INTEGER NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester1
+operator|.
+name|checkString
+argument_list|(
+literal|"STRCMP('mytest_text', 'mytesttext')"
+argument_list|,
+literal|"1"
+argument_list|,
+literal|"INTEGER NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester1
+operator|.
+name|checkNull
+argument_list|(
+literal|"STRCMP('mytesttext', cast(null as varchar(1)))"
+argument_list|)
+expr_stmt|;
+name|tester1
+operator|.
+name|checkNull
+argument_list|(
+literal|"STRCMP(cast(null as varchar(1)), 'mytesttext')"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testSoundexFunc
 parameter_list|()
 block|{

@@ -2333,6 +2333,36 @@ name|n
 argument_list|)
 return|;
 block|}
+comment|/** SQL STRCMP(String,String) function. */
+specifier|public
+specifier|static
+name|int
+name|strcmp
+parameter_list|(
+name|String
+name|s0
+parameter_list|,
+name|String
+name|s1
+parameter_list|)
+block|{
+return|return
+operator|(
+name|int
+operator|)
+name|Math
+operator|.
+name|signum
+argument_list|(
+name|s1
+operator|.
+name|compareTo
+argument_list|(
+name|s0
+argument_list|)
+argument_list|)
+return|;
+block|}
 comment|/** SQL SOUNDEX(string) function. */
 specifier|public
 specifier|static
