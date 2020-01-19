@@ -303,7 +303,7 @@ name|filter
 argument_list|(
 name|relHint
 lambda|->
-name|supportsRel
+name|canApply
 argument_list|(
 name|relHint
 argument_list|,
@@ -423,7 +423,7 @@ return|;
 block|}
 specifier|private
 name|boolean
-name|supportsRel
+name|canApply
 parameter_list|(
 name|RelHint
 name|hint
@@ -465,7 +465,7 @@ argument_list|(
 name|key
 argument_list|)
 operator|.
-name|supportsRel
+name|canApply
 argument_list|(
 name|hint
 argument_list|,

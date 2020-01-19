@@ -138,7 +138,7 @@ annotation|@
 name|Override
 specifier|public
 name|boolean
-name|supportsRel
+name|canApply
 parameter_list|(
 name|RelHint
 name|hint
@@ -193,7 +193,7 @@ condition|(
 operator|!
 name|hintStrategy
 operator|.
-name|supportsRel
+name|canApply
 argument_list|(
 name|hint
 argument_list|,
@@ -225,7 +225,7 @@ if|if
 condition|(
 name|hintStrategy
 operator|.
-name|supportsRel
+name|canApply
 argument_list|(
 name|hint
 argument_list|,

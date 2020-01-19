@@ -221,7 +221,7 @@ annotation|@
 name|Override
 specifier|public
 name|boolean
-name|supportsRel
+name|canApply
 parameter_list|(
 name|RelHint
 name|hint
@@ -237,7 +237,7 @@ operator|.
 name|nodeType
 condition|)
 block|{
-comment|// The SET_VAR type never propagate any hints.
+comment|// Hints of SET_VAR type never propagate.
 case|case
 name|SET_VAR
 case|:

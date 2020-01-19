@@ -42,7 +42,7 @@ name|HintStrategy
 block|{
 comment|/**    * Decides if the given {@code hint} can be applied to    * the relational expression {@code rel}.    *    * @param hint The hint    * @param rel  The relational expression    * @return True if the {@code hint} can be applied to the {@code rel}    */
 name|boolean
-name|supportsRel
+name|canApply
 parameter_list|(
 name|RelHint
 name|hint

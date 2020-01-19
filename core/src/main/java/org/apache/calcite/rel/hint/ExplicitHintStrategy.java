@@ -67,7 +67,7 @@ annotation|@
 name|Override
 specifier|public
 name|boolean
-name|supportsRel
+name|canApply
 parameter_list|(
 name|RelHint
 name|hint
