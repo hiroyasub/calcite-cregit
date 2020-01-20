@@ -1890,14 +1890,10 @@ block|{
 break|break;
 block|}
 block|}
-comment|// A rule match's digest is composed of the operand RelNodes' digests,
-comment|// which may have changed if sets have merged since the rule match was
-comment|// enqueued.
-name|match
-operator|.
-name|recomputeDigest
-argument_list|()
-expr_stmt|;
+comment|// If sets have merged since the rule match was enqueued, the match
+comment|// may not be removed from the matchMap because the subset may have
+comment|// changed, it is OK to leave it since the matchMap will be cleared
+comment|// at the end.
 name|phaseMatchList
 operator|.
 name|matchMap

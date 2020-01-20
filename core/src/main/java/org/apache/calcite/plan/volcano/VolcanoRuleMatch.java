@@ -41,20 +41,6 @@ name|calcite
 operator|.
 name|plan
 operator|.
-name|RelOptUtil
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|plan
-operator|.
 name|RelTrait
 import|;
 end_import
@@ -492,20 +478,7 @@ name|buf
 operator|.
 name|append
 argument_list|(
-literal|", "
-argument_list|)
-expr_stmt|;
-block|}
-name|RelOptUtil
-operator|.
-name|appendRelDescription
-argument_list|(
-name|buf
-argument_list|,
-name|rels
-index|[
-name|i
-index|]
+literal|','
 argument_list|)
 expr_stmt|;
 block|}
@@ -513,7 +486,26 @@ name|buf
 operator|.
 name|append
 argument_list|(
-literal|"]"
+literal|'#'
+argument_list|)
+operator|.
+name|append
+argument_list|(
+name|rels
+index|[
+name|i
+index|]
+operator|.
+name|getId
+argument_list|()
+argument_list|)
+expr_stmt|;
+block|}
+name|buf
+operator|.
+name|append
+argument_list|(
+literal|']'
 argument_list|)
 expr_stmt|;
 return|return
@@ -523,7 +515,10 @@ name|toString
 argument_list|()
 return|;
 block|}
-comment|/**    * Recomputes the digest of this VolcanoRuleMatch. It is necessary when sets    * have merged since the match was created.    */
+comment|/**    * Recomputes the digest of this VolcanoRuleMatch.    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 name|void
 name|recomputeDigest
