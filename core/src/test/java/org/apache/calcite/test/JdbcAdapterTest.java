@@ -723,9 +723,9 @@ argument_list|)
 operator|.
 name|query
 argument_list|(
-literal|"select ename \n"
+literal|"select ename\n"
 operator|+
-literal|"from scott.emp \n"
+literal|"from scott.emp\n"
 operator|+
 literal|"order by empno"
 argument_list|)
@@ -764,6 +764,95 @@ operator|+
 literal|"FROM \"SCOTT\".\"EMP\"\n"
 operator|+
 literal|"ORDER BY \"EMPNO\" NULLS LAST"
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3751">[CALCITE-3751]    * JDBC adapter wrongly pushes ORDER BY into sub-query</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testOrderByPlan
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select deptno, job, sum(sal)\n"
+operator|+
+literal|"from \"EMP\"\n"
+operator|+
+literal|"group by deptno, job\n"
+operator|+
+literal|"order by 1, 2"
+decl_stmt|;
+specifier|final
+name|String
+name|explain
+init|=
+literal|"PLAN=JdbcToEnumerableConverter\n"
+operator|+
+literal|"  JdbcProject(DEPTNO=[$1], JOB=[$0], EXPR$2=[$2])\n"
+operator|+
+literal|"    JdbcSort(sort0=[$1], sort1=[$0], dir0=[ASC], dir1=[ASC])\n"
+operator|+
+literal|"      JdbcAggregate(group=[{2, 7}], EXPR$2=[SUM($5)])\n"
+operator|+
+literal|"        JdbcTableScan(table=[[SCOTT, EMP]])"
+decl_stmt|;
+specifier|final
+name|String
+name|sqlHsqldb
+init|=
+literal|"SELECT \"DEPTNO\", \"JOB\", \"EXPR$2\"\n"
+operator|+
+literal|"FROM (SELECT \"JOB\", \"DEPTNO\", SUM(\"SAL\") AS \"EXPR$2\"\n"
+operator|+
+literal|"FROM \"SCOTT\".\"EMP\"\n"
+operator|+
+literal|"GROUP BY \"JOB\", \"DEPTNO\"\n"
+operator|+
+literal|"ORDER BY \"DEPTNO\" NULLS LAST, \"JOB\" NULLS LAST) AS \"t0\""
+decl_stmt|;
+name|CalciteAssert
+operator|.
+name|model
+argument_list|(
+name|JdbcTest
+operator|.
+name|SCOTT_MODEL
+argument_list|)
+operator|.
+name|query
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+name|explain
+argument_list|)
+operator|.
+name|runs
+argument_list|()
+operator|.
+name|enable
+argument_list|(
+name|CalciteAssert
+operator|.
+name|DB
+operator|==
+name|CalciteAssert
+operator|.
+name|DatabaseInstance
+operator|.
+name|HSQLDB
+argument_list|)
+operator|.
+name|planHasSql
+argument_list|(
+name|sqlHsqldb
 argument_list|)
 expr_stmt|;
 block|}
@@ -2974,9 +3063,15 @@ literal|"INSERT INTO \"foodmart\".\"expense_fact\" (\"store_id\", "
 operator|+
 literal|"\"account_id\", \"exp_date\", \"time_id\", \"category_id\", \"currency_id\","
 operator|+
-literal|" \"amount\")\nSELECT 666, 666, TIMESTAMP '1997-01-01 00:00:00', 666, '666', 666, 666\n"
+literal|" \"amount\")\n"
 operator|+
-literal|"FROM (VALUES  (0)) AS \"t\" (\"ZERO\")\nUNION ALL\nSELECT 666, 777, "
+literal|"SELECT 666, 666, TIMESTAMP '1997-01-01 00:00:00', 666, '666', 666, 666\n"
+operator|+
+literal|"FROM (VALUES  (0)) AS \"t\" (\"ZERO\")\n"
+operator|+
+literal|"UNION ALL\n"
+operator|+
+literal|"SELECT 666, 777, "
 operator|+
 literal|"TIMESTAMP '1997-01-01 00:00:00', 666, '666', 666, 666\n"
 operator|+

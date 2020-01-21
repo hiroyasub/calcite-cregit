@@ -4025,7 +4025,9 @@ name|expected
 init|=
 literal|"SELECT *\n"
 operator|+
-literal|"FROM (SELECT \"product\".\"product_id\", MIN(\"sales_fact_1997\".\"store_id\")\n"
+literal|"FROM (SELECT \"product\".\"product_id\","
+operator|+
+literal|" MIN(\"sales_fact_1997\".\"store_id\") AS \"EXPR$1\"\n"
 operator|+
 literal|"FROM \"foodmart\".\"product\"\n"
 operator|+
@@ -16435,7 +16437,7 @@ literal|"SELECT \"employee\".\"department_id\"\n"
 operator|+
 literal|"FROM \"foodmart\".\"employee\"\n"
 operator|+
-literal|"INNER JOIN (SELECT \"t1\".\"department_id\" \"department_id0\", MIN(\"t1\".\"department_id\")\n"
+literal|"INNER JOIN (SELECT \"t1\".\"department_id\" \"department_id0\", MIN(\"t1\".\"department_id\") \"EXPR$0\"\n"
 operator|+
 literal|"FROM (SELECT NULL \"department_id\", NULL \"department_description\"\nFROM \"DUAL\"\nWHERE 1 = 0) \"t\",\n"
 operator|+
@@ -16443,7 +16445,7 @@ literal|"(SELECT \"department_id\"\nFROM \"foodmart\".\"employee\"\nGROUP BY \"d
 operator|+
 literal|"GROUP BY \"t1\".\"department_id\") \"t3\" ON \"employee\".\"department_id\" = \"t3\".\"department_id0\""
 operator|+
-literal|" AND \"employee\".\"department_id\" = MIN(\"t1\".\"department_id\")"
+literal|" AND \"employee\".\"department_id\" = \"t3\".\"EXPR$0\""
 decl_stmt|;
 name|sql
 argument_list|(
@@ -16485,7 +16487,7 @@ literal|"FROM \"foodmart\".\"employee\"\n"
 operator|+
 literal|"INNER JOIN (SELECT \"t1\".\"department_id\" AS \"department_id0\","
 operator|+
-literal|" MIN(\"t1\".\"department_id\")\n"
+literal|" MIN(\"t1\".\"department_id\") AS \"EXPR$0\"\n"
 operator|+
 literal|"FROM (SELECT *\nFROM (VALUES  (NULL, NULL))"
 operator|+
@@ -16501,7 +16503,7 @@ literal|"\nGROUP BY \"t1\".\"department_id\") AS \"t3\" "
 operator|+
 literal|"ON \"employee\".\"department_id\" = \"t3\".\"department_id0\""
 operator|+
-literal|" AND \"employee\".\"department_id\" = MIN(\"t1\".\"department_id\")"
+literal|" AND \"employee\".\"department_id\" = \"t3\".\"EXPR$0\""
 decl_stmt|;
 name|sql
 argument_list|(
