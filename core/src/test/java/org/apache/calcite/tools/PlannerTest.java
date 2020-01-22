@@ -6637,11 +6637,11 @@ decl_stmt|;
 name|String
 name|query
 init|=
-literal|"select t.psPartkey from \n"
+literal|"select t.psPartkey from\n"
 operator|+
-literal|"(select ps.psPartkey from `tpch`.`partsupp` ps \n"
+literal|"(select ps.psPartkey from `tpch`.`partsupp` ps\n"
 operator|+
-literal|"order by ps.psPartkey, ps.psSupplyCost) t \n"
+literal|"order by ps.psPartkey, ps.psSupplyCost) t\n"
 operator|+
 literal|"order by t.psPartkey"
 decl_stmt|;

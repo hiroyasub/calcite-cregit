@@ -165,13 +165,13 @@ literal|"       factory: 'org.apache.calcite.adapter.geode.rel.GeodeSchemaFactor
 operator|+
 literal|"       operand: {\n"
 operator|+
-literal|"         locatorHost: 'localhost', \n"
+literal|"         locatorHost: 'localhost',\n"
 operator|+
-literal|"         locatorPort: '10334', \n"
+literal|"         locatorPort: '10334',\n"
 operator|+
-literal|"         regions: 'BookMaster,BookCustomer,BookInventory,BookOrder', \n"
+literal|"         regions: 'BookMaster,BookCustomer,BookInventory,BookOrder',\n"
 operator|+
-literal|"         pdxSerializablePackagePath: 'org.apache.calcite.adapter.geode.domain.*' \n"
+literal|"         pdxSerializablePackagePath: 'org.apache.calcite.adapter.geode.domain.*'\n"
 operator|+
 literal|"       }\n"
 operator|+

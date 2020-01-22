@@ -1725,7 +1725,7 @@ name|yamlModel
 init|=
 literal|"version: 1.0\r\n"
 operator|+
-literal|"schemas: \n"
+literal|"schemas:\n"
 operator|+
 literal|"- type: custom\r\n"
 operator|+

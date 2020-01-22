@@ -1023,7 +1023,7 @@ name|build
 argument_list|()
 decl_stmt|;
 name|String
-name|expectedPhysial
+name|expectedPhysical
 init|=
 literal|""
 operator|+
@@ -1044,7 +1044,7 @@ name|verify
 argument_list|(
 name|rel
 argument_list|,
-name|expectedPhysial
+name|expectedPhysical
 argument_list|,
 name|expectedLogical
 argument_list|)
@@ -1105,7 +1105,7 @@ name|build
 argument_list|()
 decl_stmt|;
 name|String
-name|expectedPhysial
+name|expectedPhysical
 init|=
 literal|""
 operator|+
@@ -1126,7 +1126,7 @@ name|verify
 argument_list|(
 name|rel
 argument_list|,
-name|expectedPhysial
+name|expectedPhysical
 argument_list|,
 name|expectedLogical
 argument_list|)
@@ -1175,7 +1175,7 @@ name|build
 argument_list|()
 decl_stmt|;
 name|String
-name|expectedPhysial
+name|expectedPhysical
 init|=
 literal|""
 operator|+
@@ -1196,7 +1196,7 @@ name|verify
 argument_list|(
 name|rel
 argument_list|,
-name|expectedPhysial
+name|expectedPhysical
 argument_list|,
 name|expectedLogical
 argument_list|)
@@ -1242,7 +1242,7 @@ name|build
 argument_list|()
 decl_stmt|;
 name|String
-name|expectedPhysial
+name|expectedPhysical
 init|=
 literal|""
 operator|+
@@ -1263,7 +1263,7 @@ name|verify
 argument_list|(
 name|rel
 argument_list|,
-name|expectedPhysial
+name|expectedPhysical
 argument_list|,
 name|expectedLogical
 argument_list|)
@@ -1322,7 +1322,7 @@ name|build
 argument_list|()
 decl_stmt|;
 name|String
-name|expectedPhysial
+name|expectedPhysical
 init|=
 literal|""
 operator|+
@@ -1345,7 +1345,7 @@ name|verify
 argument_list|(
 name|rel
 argument_list|,
-name|expectedPhysial
+name|expectedPhysical
 argument_list|,
 name|expectedLogical
 argument_list|)
@@ -1415,7 +1415,7 @@ name|build
 argument_list|()
 decl_stmt|;
 name|String
-name|expectedPhysial
+name|expectedPhysical
 init|=
 literal|""
 operator|+
@@ -1436,7 +1436,7 @@ name|verify
 argument_list|(
 name|rel
 argument_list|,
-name|expectedPhysial
+name|expectedPhysical
 argument_list|,
 name|expectedLogical
 argument_list|)
@@ -1518,7 +1518,7 @@ name|build
 argument_list|()
 decl_stmt|;
 name|String
-name|expectedPhysial
+name|expectedPhysical
 init|=
 literal|""
 operator|+
@@ -1543,7 +1543,7 @@ name|verify
 argument_list|(
 name|rel
 argument_list|,
-name|expectedPhysial
+name|expectedPhysical
 argument_list|,
 name|expectedLogical
 argument_list|)
@@ -1644,7 +1644,7 @@ name|build
 argument_list|()
 decl_stmt|;
 name|String
-name|expectedPhysial
+name|expectedPhysical
 init|=
 literal|""
 operator|+
@@ -1673,7 +1673,7 @@ name|verify
 argument_list|(
 name|rel
 argument_list|,
-name|expectedPhysial
+name|expectedPhysical
 argument_list|,
 name|expectedLogical
 argument_list|)
@@ -1741,7 +1741,7 @@ name|build
 argument_list|()
 decl_stmt|;
 name|String
-name|expectedPhysial
+name|expectedPhysical
 init|=
 literal|""
 operator|+
@@ -1774,7 +1774,7 @@ name|verify
 argument_list|(
 name|rel
 argument_list|,
-name|expectedPhysial
+name|expectedPhysical
 argument_list|,
 name|expectedLogical
 argument_list|)
@@ -1842,7 +1842,7 @@ name|build
 argument_list|()
 decl_stmt|;
 name|String
-name|expectedPhysial
+name|expectedPhysical
 init|=
 literal|""
 operator|+
@@ -1875,7 +1875,7 @@ name|verify
 argument_list|(
 name|rel
 argument_list|,
-name|expectedPhysial
+name|expectedPhysical
 argument_list|,
 name|expectedLogical
 argument_list|)
@@ -1943,7 +1943,7 @@ name|build
 argument_list|()
 decl_stmt|;
 name|String
-name|expectedPhysial
+name|expectedPhysical
 init|=
 literal|""
 operator|+
@@ -1976,7 +1976,7 @@ name|verify
 argument_list|(
 name|rel
 argument_list|,
-name|expectedPhysial
+name|expectedPhysical
 argument_list|,
 name|expectedLogical
 argument_list|)
@@ -1995,14 +1995,14 @@ name|sql
 init|=
 literal|""
 operator|+
-literal|"select did \n"
+literal|"select did\n"
 operator|+
 literal|"from unnest(select collect(\"department_id\") as deptid"
 operator|+
 literal|"            from \"department\") as t(did)"
 decl_stmt|;
 name|String
-name|expectedPhysial
+name|expectedPhysical
 init|=
 literal|""
 operator|+
@@ -2036,7 +2036,7 @@ argument_list|(
 name|sql
 argument_list|)
 argument_list|,
-name|expectedPhysial
+name|expectedPhysical
 argument_list|,
 name|expectedLogical
 argument_list|)
@@ -2055,7 +2055,7 @@ init|=
 literal|"SELECT rank() over (order by \"hire_date\") FROM \"employee\""
 decl_stmt|;
 name|String
-name|expectedPhysial
+name|expectedPhysical
 init|=
 literal|""
 operator|+
@@ -2089,7 +2089,7 @@ argument_list|(
 name|sql
 argument_list|)
 argument_list|,
-name|expectedPhysial
+name|expectedPhysical
 argument_list|,
 name|expectedLogical
 argument_list|)

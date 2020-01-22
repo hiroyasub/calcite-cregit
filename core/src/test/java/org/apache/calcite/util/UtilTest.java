@@ -20179,7 +20179,7 @@ literal|true
 argument_list|)
 argument_list|)
 expr_stmt|;
-comment|// \n\r is not a valid windows line ending
+comment|//\n\r is not a valid windows line ending
 name|assertThat
 argument_list|(
 name|isLinux

@@ -4211,7 +4211,7 @@ expr_stmt|;
 comment|// skip comments
 name|sql
 operator|=
-literal|"-- test test \nselect -- here is from \n 'cat' as foobar, 1 as x from t group by t.^ order by 123"
+literal|"-- test test\nselect -- here is from\n'cat' as foobar, 1 as x from t group by t.^ order by 123"
 expr_stmt|;
 name|expected
 operator|=

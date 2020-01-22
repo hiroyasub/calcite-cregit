@@ -5529,15 +5529,15 @@ specifier|final
 name|String
 name|sql
 init|=
-literal|"select e.empno, d.deptno \n"
+literal|"select e.empno, d.deptno\n"
 operator|+
 literal|"from (select cast(null as int) empno from sales.emp "
 operator|+
-literal|" where empno = 10 group by cast(null as int)) as e \n"
+literal|" where empno = 10 group by cast(null as int)) as e\n"
 operator|+
 literal|"full outer join (select cast (null as int) deptno from sales.dept "
 operator|+
-literal|"group by cast(null as int)) as d on e.empno = d.deptno \n"
+literal|"group by cast(null as int)) as d on e.empno = d.deptno\n"
 operator|+
 literal|"group by e.empno, d.deptno"
 decl_stmt|;
@@ -15589,13 +15589,13 @@ name|rel
 init|=
 name|convertSql
 argument_list|(
-literal|"select a.empno + b.sal from \n"
+literal|"select a.empno + b.sal from\n"
 operator|+
 literal|" (select empno, ename from emp,dept) a join "
 operator|+
-literal|" (select * from emp union all select * from emp) b \n"
+literal|" (select * from emp union all select * from emp) b\n"
 operator|+
-literal|" on a.empno = b.empno \n"
+literal|" on a.empno = b.empno\n"
 operator|+
 literal|" where b.deptno = 10"
 argument_list|)
@@ -16724,7 +16724,7 @@ literal|"select * from (select a, max(b) from (\n"
 operator|+
 literal|"  select empno as a, sal as b from emp)subq\n"
 operator|+
-literal|"group by a) \n"
+literal|"group by a)\n"
 operator|+
 literal|"where a = 5"
 decl_stmt|;
@@ -16900,7 +16900,7 @@ literal|"select * from (select a, max(b) as b from (\n"
 operator|+
 literal|"  select empno as a, sal as b from emp)subq\n"
 operator|+
-literal|"group by a) \n"
+literal|"group by a)\n"
 operator|+
 literal|"where b = 5"
 decl_stmt|;

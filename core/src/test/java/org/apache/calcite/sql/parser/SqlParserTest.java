@@ -9928,7 +9928,7 @@ parameter_list|()
 block|{
 name|expr
 argument_list|(
-literal|"substring('a' \n  FROM \t  1)"
+literal|"substring('a'\nFROM \t  1)"
 argument_list|)
 operator|.
 name|ok
@@ -14258,7 +14258,7 @@ name|sql
 argument_list|(
 literal|"select /* 1,\n"
 operator|+
-literal|" 2, \n"
+literal|" 2,\n"
 operator|+
 literal|" */ 3 from t"
 argument_list|)
@@ -14381,7 +14381,7 @@ specifier|final
 name|String
 name|sql
 init|=
-literal|"values /* multiline contains -- singline */ \n"
+literal|"values /* multiline contains -- singline */\n"
 operator|+
 literal|" (1)"
 decl_stmt|;
@@ -14410,7 +14410,7 @@ specifier|final
 name|String
 name|sql
 init|=
-literal|"values ( -- rest of line /* a comment  \n"
+literal|"values ( -- rest of line /* a comment\n"
 operator|+
 literal|" 1, ^*/^ 2)"
 decl_stmt|;
@@ -14440,7 +14440,7 @@ expr_stmt|;
 comment|// multiline comment inside single-line comment
 name|sql
 argument_list|(
-literal|"values -- rest of line /* a comment */ \n"
+literal|"values -- rest of line /* a comment */\n"
 operator|+
 literal|"(1)"
 argument_list|)
@@ -14453,7 +14453,7 @@ expr_stmt|;
 comment|// non-terminated multiline comment inside single-line comment
 name|sql
 argument_list|(
-literal|"values -- rest of line /* a comment  \n"
+literal|"values -- rest of line /* a comment\n"
 operator|+
 literal|"(1)"
 argument_list|)
@@ -17917,9 +17917,9 @@ argument_list|)
 expr_stmt|;
 name|expr
 argument_list|(
-literal|"x'1' \t\t\f\r \n"
+literal|"x'1' \t\t\f\r\n"
 operator|+
-literal|"'2'--hi this is a comment'FF'\r\r\t\f \n"
+literal|"'2'--hi this is a comment'FF'\r\r\t\f\n"
 operator|+
 literal|"'34'"
 argument_list|)
@@ -17931,7 +17931,7 @@ argument_list|)
 expr_stmt|;
 name|expr
 argument_list|(
-literal|"x'1' \t\t\f\r \n"
+literal|"x'1' \t\t\f\r\n"
 operator|+
 literal|"'000'--\n"
 operator|+
@@ -18077,7 +18077,7 @@ argument_list|)
 expr_stmt|;
 name|expr
 argument_list|(
-literal|"'three' \n ' blind'\n' mice'"
+literal|"'three'\n' blind'\n' mice'"
 argument_list|)
 operator|.
 name|ok
@@ -18087,7 +18087,7 @@ argument_list|)
 expr_stmt|;
 name|expr
 argument_list|(
-literal|"'three' -- comment \n ' blind'\n' mice'"
+literal|"'three' -- comment\n' blind'\n' mice'"
 argument_list|)
 operator|.
 name|ok
@@ -18107,7 +18107,7 @@ argument_list|)
 expr_stmt|;
 name|expr
 argument_list|(
-literal|"_iso-8859-1'bye' \n\n--\n-- this is a comment\n' bye'"
+literal|"_iso-8859-1'bye'\n\n--\n-- this is a comment\n' bye'"
 argument_list|)
 operator|.
 name|ok
@@ -18146,7 +18146,7 @@ argument_list|(
 literal|"'foo\nbar'"
 argument_list|)
 expr_stmt|;
-comment|// prevent test infrastructure from converting \r\n to \n
+comment|// prevent test infrastructure from converting '\r\n' to '\n'
 name|boolean
 index|[]
 name|linuxify
@@ -18206,7 +18206,7 @@ argument_list|)
 expr_stmt|;
 name|sql
 argument_list|(
-literal|"select _latin1 \n^'newline'^"
+literal|"select _latin1\n^'newline'^"
 argument_list|)
 operator|.
 name|fails
@@ -18285,7 +18285,7 @@ argument_list|)
 expr_stmt|;
 name|expr
 argument_list|(
-literal|"   'foo'\r\n\r\n'bar'  \n   'baz'"
+literal|"   'foo'\r\n\r\n'bar'\n'baz'"
 argument_list|)
 operator|.
 name|ok
@@ -18358,7 +18358,7 @@ expr_stmt|;
 comment|// multiple WHENs
 name|expr
 argument_list|(
-literal|"case col1 when \n1.2 then 'one' when 2 then 'two' else 'three' end"
+literal|"case col1 when\n1.2 then 'one' when 2 then 'two' else 'three' end"
 argument_list|)
 operator|.
 name|ok
@@ -35744,7 +35744,7 @@ literal|"update emps\n"
 operator|+
 literal|"/*+ properties(k1='v1', k2='v2'), index(idx1, idx2), no_hash_join */\n"
 operator|+
-literal|"set empno = empno + 1, sal = sal - 1 \n"
+literal|"set empno = empno + 1, sal = sal - 1\n"
 operator|+
 literal|"where empno=12"
 decl_stmt|;

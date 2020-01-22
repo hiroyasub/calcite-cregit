@@ -8943,11 +8943,11 @@ block|{
 name|String
 name|query
 init|=
-literal|"select t1.\"customer_id\", t2.\"customer_id\" \n"
+literal|"select t1.\"customer_id\", t2.\"customer_id\"\n"
 operator|+
-literal|"from (select \"customer_id\" from \"sales_fact_1997\") as t1 \n"
+literal|"from (select \"customer_id\" from \"sales_fact_1997\") as t1\n"
 operator|+
-literal|"inner join (select \"customer_id\" from \"sales_fact_1997\") t2 \n"
+literal|"inner join (select \"customer_id\" from \"sales_fact_1997\") t2\n"
 operator|+
 literal|"on t1.\"customer_id\" = t2.\"customer_id\""
 decl_stmt|;
@@ -12038,9 +12038,9 @@ literal|"  from \"product\" match_recognize\n"
 operator|+
 literal|"  (\n"
 operator|+
-literal|"    partition by \"product_class_id\", \"brand_name\" \n"
+literal|"    partition by \"product_class_id\", \"brand_name\"\n"
 operator|+
-literal|"    order by \"product_class_id\" asc, \"brand_name\" desc \n"
+literal|"    order by \"product_class_id\" asc, \"brand_name\" desc\n"
 operator|+
 literal|"    pattern (strt down+ up+)\n"
 operator|+
@@ -14663,9 +14663,9 @@ literal|"  from \"product\" match_recognize\n"
 operator|+
 literal|"  (\n"
 operator|+
-literal|"    partition by \"product_class_id\", \"brand_name\" \n"
+literal|"    partition by \"product_class_id\", \"brand_name\"\n"
 operator|+
-literal|"    order by \"product_class_id\" asc, \"brand_name\" desc \n"
+literal|"    order by \"product_class_id\" asc, \"brand_name\" desc\n"
 operator|+
 literal|"    pattern (strt down+ up+)\n"
 operator|+
@@ -15320,7 +15320,7 @@ specifier|final
 name|String
 name|sql
 init|=
-literal|"select did + 1 \n"
+literal|"select did + 1\n"
 operator|+
 literal|"from unnest(select collect(\"department_id\") as deptid"
 operator|+
@@ -15358,7 +15358,7 @@ specifier|final
 name|String
 name|sql
 init|=
-literal|"select did + 1 \n"
+literal|"select did + 1\n"
 operator|+
 literal|"from unnest(select collect(\"department_id\") "
 operator|+
@@ -17062,13 +17062,13 @@ block|{
 name|String
 name|query
 init|=
-literal|"insert into \n"
+literal|"insert into\n"
 operator|+
 literal|"\"account\"(\"account_id\",\"account_parent\",\n"
 operator|+
 literal|"\"account_type\",\"account_rollup\")\n"
 operator|+
-literal|"select \"product\".\"product_id\", \n"
+literal|"select \"product\".\"product_id\",\n"
 operator|+
 literal|"cast(NULL AS INT),\n"
 operator|+

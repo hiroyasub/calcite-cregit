@@ -1331,7 +1331,7 @@ literal|"m1:map[], m2:map[int], m3:map[(m3:float)]);\n"
 operator|+
 literal|"B = FOREACH A GENERATE a, a as a2, b, c, d, e, f, g, h, i, j, k2, "
 operator|+
-literal|"l2, m2, null as n:chararray; \n"
+literal|"l2, m2, null as n:chararray;\n"
 decl_stmt|;
 specifier|final
 name|String
@@ -2769,7 +2769,7 @@ literal|"A = LOAD 'scott.DEPT' as (DEPTNO:int, DNAME:chararray,\n"
 operator|+
 literal|"    LOC:CHARARRAY);\n"
 operator|+
-literal|"B = FOREACH A GENERATE DEPTNO; \n"
+literal|"B = FOREACH A GENERATE DEPTNO;\n"
 operator|+
 literal|"C = FILTER B BY DEPTNO<= 20;\n"
 operator|+
@@ -2872,7 +2872,7 @@ literal|"A = LOAD 'scott.DEPT' as (DEPTNO:int, DNAME:chararray,"
 operator|+
 literal|"    LOC:CHARARRAY);\n"
 operator|+
-literal|"B = FOREACH A GENERATE DEPTNO; \n"
+literal|"B = FOREACH A GENERATE DEPTNO;\n"
 operator|+
 literal|"C = FILTER B BY DEPTNO<= 20;\n"
 operator|+

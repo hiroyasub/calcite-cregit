@@ -639,7 +639,7 @@ argument_list|()
 operator|+
 literal|"'\n"
 operator|+
-literal|"       }, \n"
+literal|"       },\n"
 operator|+
 literal|"       {\n"
 operator|+

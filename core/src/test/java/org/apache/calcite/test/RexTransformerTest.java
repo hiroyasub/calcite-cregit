@@ -1900,11 +1900,11 @@ specifier|final
 name|String
 name|sql
 init|=
-literal|"select * \n"
+literal|"select *\n"
 operator|+
-literal|"from emp a \n"
+literal|"from emp a\n"
 operator|+
-literal|"INNER JOIN dept b \n"
+literal|"INNER JOIN dept b\n"
 operator|+
 literal|"ON CAST(a.empno AS int)<> b.deptno"
 decl_stmt|;

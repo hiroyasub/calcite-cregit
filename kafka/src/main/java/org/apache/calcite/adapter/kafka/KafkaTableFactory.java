@@ -461,7 +461,7 @@ name|Locale
 operator|.
 name|ROOT
 argument_list|,
-literal|"Fail to create table '%s' with configuration: \n"
+literal|"Fail to create table '%s' with configuration:\n"
 operator|+
 literal|"'%s'\n"
 operator|+

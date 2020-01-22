@@ -1259,7 +1259,7 @@ name|s
 operator|.
 name|execute
 argument_list|(
-literal|"create function if not exists s.t \n"
+literal|"create function if not exists s.t\n"
 operator|+
 literal|"as 'org.apache.calcite.udf.TableFun.demoUdf'\n"
 operator|+

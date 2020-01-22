@@ -8081,7 +8081,7 @@ specifier|final
 name|String
 name|sqlQuery
 init|=
-literal|"select \"store_state\", \"brand_name\", \"A\" from \n"
+literal|"select \"store_state\", \"brand_name\", \"A\" from\n"
 operator|+
 literal|"(select \"store_state\", sum(\"store_sales\")+sum(\"store_cost\") "
 operator|+

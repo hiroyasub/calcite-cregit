@@ -553,7 +553,7 @@ literal|"--  o_orderdate>= date '1996-10-01'\n"
 operator|+
 literal|"--  and o_orderdate< date '1996-10-01' + interval '3' month\n"
 operator|+
-literal|"--  and \n"
+literal|"--  and\n"
 operator|+
 literal|"  exists (\n"
 operator|+
@@ -1072,9 +1072,9 @@ literal|"      count(o.o_orderkey)\n"
 operator|+
 literal|"    from\n"
 operator|+
-literal|"      tpch.customer c \n"
+literal|"      tpch.customer c\n"
 operator|+
-literal|"      left outer join tpch.orders o \n"
+literal|"      left outer join tpch.orders o\n"
 operator|+
 literal|"        on c.c_custkey = o.o_custkey\n"
 operator|+

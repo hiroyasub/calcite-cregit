@@ -6856,7 +6856,7 @@ argument_list|,
 name|endIndex
 argument_list|)
 operator|+
-literal|", \n{ name: 'mat', "
+literal|",\n{ name: 'mat', "
 operator|+
 name|buf
 operator|+

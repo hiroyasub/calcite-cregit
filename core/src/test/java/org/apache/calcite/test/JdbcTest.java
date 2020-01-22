@@ -7449,7 +7449,7 @@ argument_list|)
 operator|.
 name|query
 argument_list|(
-literal|"select extract(month from \"birth_date\") as c \n"
+literal|"select extract(month from \"birth_date\") as c\n"
 operator|+
 literal|"from \"foodmart\".\"employee\" where \"employee_id\"=1"
 argument_list|)
@@ -7483,7 +7483,7 @@ argument_list|)
 operator|.
 name|query
 argument_list|(
-literal|"select extract(year from \"birth_date\") as c \n"
+literal|"select extract(year from \"birth_date\") as c\n"
 operator|+
 literal|"from \"foodmart\".\"employee\" where \"employee_id\"=1"
 argument_list|)
@@ -7517,7 +7517,7 @@ argument_list|)
 operator|.
 name|query
 argument_list|(
-literal|"select extract(month from interval '2-3' year to month) as c \n"
+literal|"select extract(month from interval '2-3' year to month) as c\n"
 operator|+
 literal|"from \"foodmart\".\"employee\" where \"employee_id\"=1"
 argument_list|)
@@ -7676,7 +7676,7 @@ argument_list|)
 operator|.
 name|query
 argument_list|(
-literal|"select floor(timestamp '2011-9-14 19:27:23' to month) as c \n"
+literal|"select floor(timestamp '2011-9-14 19:27:23' to month) as c\n"
 operator|+
 literal|"from \"foodmart\".\"employee\" limit 1"
 argument_list|)
@@ -15266,25 +15266,25 @@ argument_list|()
 operator|.
 name|query
 argument_list|(
-literal|"select \n"
+literal|"select\n"
 operator|+
-literal|" lag(a2, 1, 0) over (partition by \"deptno\" order by a1) as lagx \n"
+literal|" lag(a2, 1, 0) over (partition by \"deptno\" order by a1) as lagx\n"
 operator|+
-literal|"from \n"
+literal|"from\n"
 operator|+
 literal|" (\n"
 operator|+
-literal|"  select \n"
+literal|"  select\n"
 operator|+
-literal|"   \"deptno\", \n"
+literal|"   \"deptno\",\n"
 operator|+
-literal|"   \"salary\" / \"commission\" as a1, \n"
+literal|"   \"salary\" / \"commission\" as a1,\n"
 operator|+
 literal|"   sum(\"commission\") over ( partition by \"deptno\" order by \"salary\" / "
 operator|+
-literal|"\"commission\") / sum(\"commission\") over (partition by \"deptno\") as a2 \n"
+literal|"\"commission\") / sum(\"commission\") over (partition by \"deptno\") as a2\n"
 operator|+
-literal|"  from \n"
+literal|"  from\n"
 operator|+
 literal|"   \"hr\".\"emps\"\n"
 operator|+

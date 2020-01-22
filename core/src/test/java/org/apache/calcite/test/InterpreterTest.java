@@ -2070,7 +2070,7 @@ name|sql
 init|=
 literal|"select x, y from (values (1, 'a'), (2, 'b'), (3, 'c')) as t(x, y)\n"
 operator|+
-literal|"where x not in \n"
+literal|"where x not in\n"
 operator|+
 literal|"(select x from (values (1, 'd')) as t2(x, y))"
 decl_stmt|;

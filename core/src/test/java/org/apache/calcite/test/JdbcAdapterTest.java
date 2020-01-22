@@ -647,9 +647,9 @@ argument_list|)
 operator|.
 name|query
 argument_list|(
-literal|"select empno, ename, e.deptno, dname \n"
+literal|"select empno, ename, e.deptno, dname\n"
 operator|+
-literal|"from scott.emp e inner join scott.dept d \n"
+literal|"from scott.emp e inner join scott.dept d\n"
 operator|+
 literal|"on e.deptno = d.deptno"
 argument_list|)
@@ -786,9 +786,9 @@ argument_list|)
 operator|.
 name|query
 argument_list|(
-literal|"select empno, ename, grade \n"
+literal|"select empno, ename, grade\n"
 operator|+
-literal|"from scott.emp e inner join scott.salgrade s \n"
+literal|"from scott.emp e inner join scott.salgrade s\n"
 operator|+
 literal|"on e.sal> s.losal and e.sal< s.hisal"
 argument_list|)
@@ -858,9 +858,9 @@ argument_list|)
 operator|.
 name|query
 argument_list|(
-literal|"select empno, ename, grade \n"
+literal|"select empno, ename, grade\n"
 operator|+
-literal|"from scott.emp e inner join scott.salgrade s \n"
+literal|"from scott.emp e inner join scott.salgrade s\n"
 operator|+
 literal|"on s.losal<= e.sal and s.hisal>= e.sal"
 argument_list|)
@@ -928,9 +928,9 @@ argument_list|)
 operator|.
 name|query
 argument_list|(
-literal|"select e.empno, e.ename, e.empno, e.ename  \n"
+literal|"select e.empno, e.ename, e.empno, e.ename\n"
 operator|+
-literal|"from scott.emp e inner join scott.emp m on  \n"
+literal|"from scott.emp e inner join scott.emp m on\n"
 operator|+
 literal|"e.mgr = m.empno and e.sal> m.sal"
 argument_list|)
@@ -1004,9 +1004,9 @@ argument_list|)
 operator|.
 name|query
 argument_list|(
-literal|"select e.empno, e.ename, e.empno, e.ename  \n"
+literal|"select e.empno, e.ename, e.empno, e.ename\n"
 operator|+
-literal|"from scott.emp e inner join scott.emp m on  \n"
+literal|"from scott.emp e inner join scott.emp m on\n"
 operator|+
 literal|"e.mgr = m.empno and (e.sal> m.sal or m.hiredate> e.hiredate)"
 argument_list|)
@@ -1082,13 +1082,13 @@ argument_list|)
 operator|.
 name|query
 argument_list|(
-literal|"select  empno, ename, dname, grade \n"
+literal|"select  empno, ename, dname, grade\n"
 operator|+
-literal|"from scott.emp e inner join scott.dept d \n"
+literal|"from scott.emp e inner join scott.dept d\n"
 operator|+
-literal|"on e.deptno = d.deptno \n"
+literal|"on e.deptno = d.deptno\n"
 operator|+
-literal|"inner join scott.salgrade s \n"
+literal|"inner join scott.salgrade s\n"
 operator|+
 literal|"on e.sal> s.losal and e.sal< s.hisal"
 argument_list|)
@@ -1168,9 +1168,9 @@ argument_list|)
 operator|.
 name|query
 argument_list|(
-literal|"select empno, ename, d.deptno, dname \n"
+literal|"select empno, ename, d.deptno, dname\n"
 operator|+
-literal|"from scott.emp e,scott.dept d \n"
+literal|"from scott.emp e,scott.dept d\n"
 operator|+
 literal|"where e.deptno = d.deptno"
 argument_list|)
@@ -1241,7 +1241,7 @@ argument_list|)
 operator|.
 name|query
 argument_list|(
-literal|"select empno, ename, d.deptno, dname \n"
+literal|"select empno, ename, d.deptno, dname\n"
 operator|+
 literal|"from scott.emp e,scott.dept d"
 argument_list|)
@@ -1300,11 +1300,11 @@ argument_list|)
 operator|.
 name|query
 argument_list|(
-literal|"select empno, ename, d.deptno, dname \n"
+literal|"select empno, ename, d.deptno, dname\n"
 operator|+
-literal|"from scott.emp e,scott.dept d \n"
+literal|"from scott.emp e,scott.dept d\n"
 operator|+
-literal|"where e.deptno = d.deptno \n"
+literal|"where e.deptno = d.deptno\n"
 operator|+
 literal|"and e.deptno=20"
 argument_list|)

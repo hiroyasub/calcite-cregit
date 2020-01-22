@@ -8504,7 +8504,7 @@ literal|"join \"depts\" using (\"deptno\")\n"
 operator|+
 literal|"join \"dependents\" using (\"empid\")"
 argument_list|,
-literal|"select \"a\".\"empid\" from \n"
+literal|"select \"a\".\"empid\" from\n"
 operator|+
 literal|"(select * from \"emps\" where \"empid\" = 1) \"a\"\n"
 operator|+
@@ -8537,7 +8537,7 @@ literal|"join \"depts\" using (\"deptno\")\n"
 operator|+
 literal|"join \"dependents\" using (\"empid\")"
 argument_list|,
-literal|"select \"a\".\"empid\" from \n"
+literal|"select \"a\".\"empid\" from\n"
 operator|+
 literal|"(select * from \"emps\" where \"empid\" = 1) \"a\"\n"
 operator|+
@@ -8572,7 +8572,7 @@ literal|"join \"depts\" using (\"deptno\")\n"
 operator|+
 literal|"join \"dependents\" using (\"empid\")"
 argument_list|,
-literal|"select \"a\".\"name\" from \n"
+literal|"select \"a\".\"name\" from\n"
 operator|+
 literal|"(select * from \"emps\" where \"empid\" = 1) \"a\"\n"
 operator|+
