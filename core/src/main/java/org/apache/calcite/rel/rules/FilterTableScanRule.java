@@ -699,6 +699,9 @@ operator|.
 name|apply
 argument_list|(
 name|mapping
+operator|.
+name|inverse
+argument_list|()
 argument_list|,
 name|filter
 operator|.
