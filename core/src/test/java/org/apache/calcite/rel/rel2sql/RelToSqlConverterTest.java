@@ -1547,6 +1547,20 @@ operator|.
 name|POSTGRESQL
 argument_list|)
 operator|.
+name|put
+argument_list|(
+name|DatabaseProduct
+operator|.
+name|PRESTO
+operator|.
+name|getDialect
+argument_list|()
+argument_list|,
+name|DatabaseProduct
+operator|.
+name|PRESTO
+argument_list|)
+operator|.
 name|build
 argument_list|()
 return|;
@@ -1953,6 +1967,14 @@ literal|"SELECT COUNT(*)\n"
 operator|+
 literal|"FROM `foodmart`.`product`"
 decl_stmt|;
+specifier|final
+name|String
+name|expectedPresto
+init|=
+literal|"SELECT COUNT(*)\n"
+operator|+
+literal|"FROM \"foodmart\".\"product\""
+decl_stmt|;
 name|sql
 argument_list|(
 name|sql0
@@ -1969,6 +1991,14 @@ operator|.
 name|ok
 argument_list|(
 name|expectedMySql
+argument_list|)
+operator|.
+name|withPresto
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expectedPresto
 argument_list|)
 expr_stmt|;
 name|sql
@@ -1987,6 +2017,14 @@ operator|.
 name|ok
 argument_list|(
 name|expectedMySql
+argument_list|)
+operator|.
+name|withPresto
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expectedPresto
 argument_list|)
 expr_stmt|;
 block|}
@@ -2022,6 +2060,16 @@ literal|"FROM `foodmart`.`product`\n"
 operator|+
 literal|"GROUP BY ()"
 decl_stmt|;
+specifier|final
+name|String
+name|expectedPresto
+init|=
+literal|"SELECT 42 AS \"C\"\n"
+operator|+
+literal|"FROM \"foodmart\".\"product\"\n"
+operator|+
+literal|"GROUP BY ()"
+decl_stmt|;
 name|sql
 argument_list|(
 name|query
@@ -2038,6 +2086,14 @@ operator|.
 name|ok
 argument_list|(
 name|expectedMySql
+argument_list|)
+operator|.
+name|withPresto
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expectedPresto
 argument_list|)
 expr_stmt|;
 block|}
@@ -2412,6 +2468,20 @@ literal|"ORDER BY `product_class_id` IS NULL, `product_class_id`,"
 operator|+
 literal|" COUNT(*) IS NULL, COUNT(*)"
 decl_stmt|;
+specifier|final
+name|String
+name|expectedPresto
+init|=
+literal|"SELECT \"product_class_id\", COUNT(*) AS \"C\"\n"
+operator|+
+literal|"FROM \"foodmart\".\"product\"\n"
+operator|+
+literal|"GROUP BY ROLLUP(\"product_class_id\")\n"
+operator|+
+literal|"ORDER BY \"product_class_id\" IS NULL, \"product_class_id\", "
+operator|+
+literal|"COUNT(*) IS NULL, COUNT(*)"
+decl_stmt|;
 name|sql
 argument_list|(
 name|query
@@ -2428,6 +2498,14 @@ operator|.
 name|ok
 argument_list|(
 name|expectedMySql
+argument_list|)
+operator|.
+name|withPresto
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expectedPresto
 argument_list|)
 expr_stmt|;
 block|}
@@ -2468,6 +2546,16 @@ literal|"FROM `foodmart`.`product`\n"
 operator|+
 literal|"GROUP BY `product_class_id` WITH ROLLUP"
 decl_stmt|;
+specifier|final
+name|String
+name|expectedPresto
+init|=
+literal|"SELECT \"product_class_id\", COUNT(*) AS \"C\"\n"
+operator|+
+literal|"FROM \"foodmart\".\"product\"\n"
+operator|+
+literal|"GROUP BY ROLLUP(\"product_class_id\")"
+decl_stmt|;
 name|sql
 argument_list|(
 name|query
@@ -2484,6 +2572,14 @@ operator|.
 name|ok
 argument_list|(
 name|expectedMySql
+argument_list|)
+operator|.
+name|withPresto
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expectedPresto
 argument_list|)
 expr_stmt|;
 block|}
@@ -2604,6 +2700,18 @@ literal|"GROUP BY `product_class_id` WITH ROLLUP\n"
 operator|+
 literal|"LIMIT 5"
 decl_stmt|;
+specifier|final
+name|String
+name|expectedPresto
+init|=
+literal|"SELECT \"product_class_id\", COUNT(*) AS \"C\"\n"
+operator|+
+literal|"FROM \"foodmart\".\"product\"\n"
+operator|+
+literal|"GROUP BY ROLLUP(\"product_class_id\")\n"
+operator|+
+literal|"LIMIT 5"
+decl_stmt|;
 name|sql
 argument_list|(
 name|query
@@ -2620,6 +2728,14 @@ operator|.
 name|ok
 argument_list|(
 name|expectedMySql
+argument_list|)
+operator|.
+name|withPresto
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expectedPresto
 argument_list|)
 expr_stmt|;
 block|}
@@ -9629,6 +9745,36 @@ argument_list|(
 name|expectedClickHouse
 argument_list|)
 expr_stmt|;
+specifier|final
+name|String
+name|expectedPresto
+init|=
+literal|"SELECT \"product_id\"\n"
+operator|+
+literal|"FROM \"foodmart\".\"product\"\n"
+operator|+
+literal|"OFFSET 10\n"
+operator|+
+literal|"LIMIT 100"
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+operator|.
+name|withPresto
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expectedPresto
+argument_list|)
+expr_stmt|;
 block|}
 annotation|@
 name|Test
@@ -12239,6 +12385,36 @@ block|}
 annotation|@
 name|Test
 name|void
+name|testFloorPresto
+parameter_list|()
+block|{
+name|String
+name|query
+init|=
+literal|"SELECT floor(\"hire_date\" TO MINUTE) FROM \"employee\""
+decl_stmt|;
+name|String
+name|expected
+init|=
+literal|"SELECT DATE_TRUNC('MINUTE', \"hire_date\")\nFROM \"foodmart\".\"employee\""
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|withPresto
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
 name|testFloorMssqlWeek
 parameter_list|()
 block|{
@@ -12336,7 +12512,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFloorWeek
 parameter_list|()
@@ -12839,7 +13014,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFloorMonth
 parameter_list|()
@@ -13157,6 +13331,14 @@ literal|"FROM \"foodmart\".\"product\""
 decl_stmt|;
 specifier|final
 name|String
+name|expectedPresto
+init|=
+literal|"SELECT SUBSTR(\"brand_name\", 2)\n"
+operator|+
+literal|"FROM \"foodmart\".\"product\""
+decl_stmt|;
+specifier|final
+name|String
 name|expectedSnowflake
 init|=
 name|expectedPostgresql
@@ -13202,6 +13384,14 @@ operator|.
 name|ok
 argument_list|(
 name|expectedPostgresql
+argument_list|)
+operator|.
+name|withPresto
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expectedPresto
 argument_list|)
 operator|.
 name|withSnowflake
@@ -13278,6 +13468,14 @@ literal|"FROM \"foodmart\".\"product\""
 decl_stmt|;
 specifier|final
 name|String
+name|expectedPresto
+init|=
+literal|"SELECT SUBSTR(\"brand_name\", 2, 3)\n"
+operator|+
+literal|"FROM \"foodmart\".\"product\""
+decl_stmt|;
+specifier|final
+name|String
 name|expectedSnowflake
 init|=
 name|expectedPostgresql
@@ -13331,6 +13529,14 @@ operator|.
 name|ok
 argument_list|(
 name|expectedPostgresql
+argument_list|)
+operator|.
+name|withPresto
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expectedPresto
 argument_list|)
 operator|.
 name|withSnowflake
@@ -17810,7 +18016,7 @@ block|}
 annotation|@
 name|Test
 name|void
-name|testCubeInSpark
+name|testCubeWithGroupBy
 parameter_list|()
 block|{
 specifier|final
@@ -17843,6 +18049,16 @@ literal|"FROM foodmart.product\n"
 operator|+
 literal|"GROUP BY product_id, product_class_id WITH CUBE"
 decl_stmt|;
+specifier|final
+name|String
+name|expectedPresto
+init|=
+literal|"SELECT COUNT(*)\n"
+operator|+
+literal|"FROM \"foodmart\".\"product\"\n"
+operator|+
+literal|"GROUP BY CUBE(\"product_id\", \"product_class_id\")"
+decl_stmt|;
 name|sql
 argument_list|(
 name|query
@@ -17860,12 +18076,20 @@ name|ok
 argument_list|(
 name|expectedInSpark
 argument_list|)
+operator|.
+name|withPresto
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expectedPresto
+argument_list|)
 expr_stmt|;
 block|}
 annotation|@
 name|Test
 name|void
-name|testRollupInSpark
+name|testRollupWithGroupBy
 parameter_list|()
 block|{
 specifier|final
@@ -17898,6 +18122,16 @@ literal|"FROM foodmart.product\n"
 operator|+
 literal|"GROUP BY product_id, product_class_id WITH ROLLUP"
 decl_stmt|;
+specifier|final
+name|String
+name|expectedPresto
+init|=
+literal|"SELECT COUNT(*)\n"
+operator|+
+literal|"FROM \"foodmart\".\"product\"\n"
+operator|+
+literal|"GROUP BY ROLLUP(\"product_id\", \"product_class_id\")"
+decl_stmt|;
 name|sql
 argument_list|(
 name|query
@@ -17914,6 +18148,14 @@ operator|.
 name|ok
 argument_list|(
 name|expectedInSpark
+argument_list|)
+operator|.
+name|withPresto
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expectedPresto
 argument_list|)
 expr_stmt|;
 block|}
@@ -20131,6 +20373,22 @@ operator|.
 name|DatabaseProduct
 operator|.
 name|POSTGRESQL
+operator|.
+name|getDialect
+argument_list|()
+argument_list|)
+return|;
+block|}
+name|Sql
+name|withPresto
+parameter_list|()
+block|{
+return|return
+name|dialect
+argument_list|(
+name|DatabaseProduct
+operator|.
+name|PRESTO
 operator|.
 name|getDialect
 argument_list|()
