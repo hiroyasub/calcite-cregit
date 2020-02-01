@@ -1040,7 +1040,7 @@ name|flip
 condition|?
 name|SqlStdOperatorTable
 operator|.
-name|IS_FALSE
+name|IS_NOT_TRUE
 else|:
 name|SqlStdOperatorTable
 operator|.
