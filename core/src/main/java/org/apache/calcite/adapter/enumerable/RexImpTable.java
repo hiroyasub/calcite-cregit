@@ -699,20 +699,6 @@ name|calcite
 operator|.
 name|util
 operator|.
-name|ImmutableIntList
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|util
-operator|.
 name|Util
 import|;
 end_import
@@ -2568,24 +2554,6 @@ operator|.
 name|SqlStdOperatorTable
 operator|.
 name|GROUPING_ID
-import|;
-end_import
-
-begin_import
-import|import static
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|sql
-operator|.
-name|fun
-operator|.
-name|SqlStdOperatorTable
-operator|.
-name|GROUP_ID
 import|;
 end_import
 
@@ -7477,15 +7445,6 @@ operator|.
 name|put
 argument_list|(
 name|GROUPING
-argument_list|,
-name|grouping
-argument_list|)
-expr_stmt|;
-name|aggMap
-operator|.
-name|put
-argument_list|(
-name|GROUP_ID
 argument_list|,
 name|grouping
 argument_list|)
@@ -12518,21 +12477,6 @@ name|call
 argument_list|()
 operator|.
 name|getArgList
-argument_list|()
-expr_stmt|;
-break|break;
-case|case
-name|GROUP_ID
-case|:
-comment|// "GROUP_ID()"
-comment|// We don't implement GROUP_ID properly. In most circumstances, it
-comment|// returns 0, so we always return 0. Logged
-comment|// [CALCITE-1824] GROUP_ID returns wrong result
-name|keys
-operator|=
-name|ImmutableIntList
-operator|.
-name|of
 argument_list|()
 expr_stmt|;
 break|break;

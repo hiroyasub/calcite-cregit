@@ -16802,6 +16802,84 @@ literal|"empid=100; deptno=10; name=Bill; salary=10000.0; commission=1000\n"
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Test case for rewriting queries that contain {@code GROUP_ID()} function.    * For instance, the query    * {@code    *    select deptno, group_id() as gid    *    from scott.emp    *    group by grouping sets(deptno, deptno, deptno, (), ())    * }    * will be converted into:    * {@code    *    select deptno, 0 as gid    *    from scott.emp group by grouping sets(deptno, ())    *    union all    *    select deptno, 1 as gid    *    from scott.emp group by grouping sets(deptno, ())    *    union all    *    select deptno, 2 as gid    *    from scott.emp group by grouping sets(deptno)    * }    */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testGroupId
+parameter_list|()
+block|{
+name|CalciteAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|CalciteAssert
+operator|.
+name|Config
+operator|.
+name|SCOTT
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select deptno, group_id() + 1 as g, count(*) as c\n"
+operator|+
+literal|"from \"scott\".emp\n"
+operator|+
+literal|"group by grouping sets (deptno, deptno, deptno, (), ())\n"
+operator|+
+literal|"having group_id()> 0"
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+literal|"EnumerableCalc(expr#0..2=[{inputs}], expr#3=[1], expr#4=[+($t1, $t3)], "
+operator|+
+literal|"expr#5=[0], expr#6=[>($t1, $t5)], DEPTNO=[$t0], G=[$t4], C=[$t2], $condition=[$t6])\n"
+operator|+
+literal|"  EnumerableUnion(all=[true])\n"
+operator|+
+literal|"    EnumerableCalc(expr#0..1=[{inputs}], expr#2=[0:BIGINT], DEPTNO=[$t0], $f1=[$t2], C=[$t1])\n"
+operator|+
+literal|"      EnumerableAggregate(group=[{7}], groups=[[{7}, {}]], C=[COUNT()])\n"
+operator|+
+literal|"        EnumerableTableScan(table=[[scott, EMP]])\n"
+operator|+
+literal|"    EnumerableCalc(expr#0..1=[{inputs}], expr#2=[1:BIGINT], DEPTNO=[$t0], $f1=[$t2], C=[$t1])\n"
+operator|+
+literal|"      EnumerableAggregate(group=[{7}], groups=[[{7}, {}]], C=[COUNT()])\n"
+operator|+
+literal|"        EnumerableTableScan(table=[[scott, EMP]])\n"
+operator|+
+literal|"    EnumerableCalc(expr#0..1=[{inputs}], expr#2=[2:BIGINT], DEPTNO=[$t0], $f1=[$t2], C=[$t1])\n"
+operator|+
+literal|"      EnumerableAggregate(group=[{7}], C=[COUNT()])\n"
+operator|+
+literal|"        EnumerableTableScan(table=[[scott, EMP]])"
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"DEPTNO=10; G=2; C=3"
+argument_list|,
+literal|"DEPTNO=10; G=3; C=3"
+argument_list|,
+literal|"DEPTNO=20; G=2; C=5"
+argument_list|,
+literal|"DEPTNO=20; G=3; C=5"
+argument_list|,
+literal|"DEPTNO=30; G=2; C=6"
+argument_list|,
+literal|"DEPTNO=30; G=3; C=6"
+argument_list|,
+literal|"DEPTNO=null; G=2; C=14"
+argument_list|)
+expr_stmt|;
+block|}
 comment|/** Tests CALCITE-980: Not (C='a' or C='b') causes NPE */
 annotation|@
 name|Test
