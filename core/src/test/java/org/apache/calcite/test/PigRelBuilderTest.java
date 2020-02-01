@@ -135,6 +135,18 @@ name|util
 operator|.
 name|function
 operator|.
+name|Function
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|function
+operator|.
 name|UnaryOperator
 import|;
 end_import
@@ -529,24 +541,16 @@ comment|//     [PARTITION BY partitioner] [PARALLEL n];
 comment|// Equivalent to Pig Latin:
 comment|//   r = GROUP e BY (deptno, job);
 specifier|final
+name|Function
+argument_list|<
 name|PigRelBuilder
-name|builder
-init|=
-name|PigRelBuilder
-operator|.
-name|create
-argument_list|(
-name|config
-argument_list|()
-operator|.
-name|build
-argument_list|()
-argument_list|)
-decl_stmt|;
-specifier|final
+argument_list|,
 name|RelNode
-name|root
+argument_list|>
+name|f
 init|=
+name|builder
+lambda|->
 name|builder
 operator|.
 name|scan
@@ -587,9 +591,11 @@ name|plan
 init|=
 literal|""
 operator|+
-literal|"LogicalAggregate(group=[{2, 7}], EMP=[COLLECT($8)])\n"
+literal|"LogicalAggregate(group=[{0, 1}], EMP=[COLLECT($2)])\n"
 operator|+
-literal|"  LogicalProject(EMPNO=[$0], ENAME=[$1], JOB=[$2], MGR=[$3], HIREDATE=[$4], SAL=[$5], COMM=[$6], DEPTNO=[$7], $f8=[ROW($0, $1, $2, $3, $4, $5, $6, $7)])\n"
+literal|"  LogicalProject(JOB=[$2], DEPTNO=[$7], "
+operator|+
+literal|"$f8=[ROW($0, $1, $2, $3, $4, $5, $6, $7)])\n"
 operator|+
 literal|"    LogicalTableScan(table=[[scott, EMP]])\n"
 decl_stmt|;
@@ -597,12 +603,65 @@ name|assertThat
 argument_list|(
 name|str
 argument_list|(
-name|root
+name|f
+operator|.
+name|apply
+argument_list|(
+name|createBuilder
+argument_list|(
+name|b
+lambda|->
+name|b
+argument_list|)
+argument_list|)
 argument_list|)
 argument_list|,
 name|is
 argument_list|(
 name|plan
+argument_list|)
+argument_list|)
+expr_stmt|;
+comment|// now without pruning
+specifier|final
+name|String
+name|plan2
+init|=
+literal|""
+operator|+
+literal|"LogicalAggregate(group=[{2, 7}], EMP=[COLLECT($8)])\n"
+operator|+
+literal|"  LogicalProject(EMPNO=[$0], ENAME=[$1], JOB=[$2], MGR=[$3], "
+operator|+
+literal|"HIREDATE=[$4], SAL=[$5], COMM=[$6], DEPTNO=[$7], $f8=[ROW($0, $1, $2, $3, $4, $5, $6, $7)])\n"
+operator|+
+literal|"    LogicalTableScan(table=[[scott, EMP]])\n"
+decl_stmt|;
+name|assertThat
+argument_list|(
+name|str
+argument_list|(
+name|f
+operator|.
+name|apply
+argument_list|(
+name|createBuilder
+argument_list|(
+name|b
+lambda|->
+name|b
+operator|.
+name|withPruneInputOfAggregate
+argument_list|(
+literal|false
+argument_list|)
+argument_list|)
+argument_list|)
+argument_list|)
+argument_list|,
+name|is
+argument_list|(
+name|plan2
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -690,13 +749,15 @@ name|plan
 init|=
 literal|"LogicalJoin(condition=[=($0, $2)], joinType=[inner])\n"
 operator|+
-literal|"  LogicalAggregate(group=[{0}], EMP=[COLLECT($8)])\n"
+literal|"  LogicalAggregate(group=[{0}], EMP=[COLLECT($1)])\n"
 operator|+
-literal|"    LogicalProject(EMPNO=[$0], ENAME=[$1], JOB=[$2], MGR=[$3], HIREDATE=[$4], SAL=[$5], COMM=[$6], DEPTNO=[$7], $f8=[ROW($0, $1, $2, $3, $4, $5, $6, $7)])\n"
+literal|"    LogicalProject(EMPNO=[$0], $f8=[ROW($0, $1, $2, $3, $4, $5, $6, $7)])\n"
 operator|+
-literal|"      LogicalTableScan(table=[[scott, EMP]])\n  LogicalAggregate(group=[{0}], DEPT=[COLLECT($3)])\n"
+literal|"      LogicalTableScan(table=[[scott, EMP]])\n"
 operator|+
-literal|"    LogicalProject(DEPTNO=[$0], DNAME=[$1], LOC=[$2], $f3=[ROW($0, $1, $2)])\n"
+literal|"  LogicalAggregate(group=[{0}], DEPT=[COLLECT($1)])\n"
+operator|+
+literal|"    LogicalProject(DEPTNO=[$0], $f3=[ROW($0, $1, $2)])\n"
 operator|+
 literal|"      LogicalTableScan(table=[[scott, DEPT]])\n"
 decl_stmt|;

@@ -14123,17 +14123,15 @@ name|convertContains
 argument_list|(
 literal|"LogicalAggregate(group=[{}], C=[COUNT()])\n"
 operator|+
-literal|"  LogicalProject(DUMMY=[0])\n"
+literal|"  LogicalJoin(condition=[true], joinType=[inner])\n"
 operator|+
-literal|"    LogicalJoin(condition=[true], joinType=[inner])\n"
+literal|"    LogicalProject(DUMMY=[0])\n"
 operator|+
-literal|"      LogicalProject(DUMMY=[0])\n"
+literal|"      EnumerableTableScan(table=[[hr, emps]])\n"
 operator|+
-literal|"        EnumerableTableScan(table=[[hr, emps]])\n"
+literal|"    LogicalProject(DUMMY=[0])\n"
 operator|+
-literal|"      LogicalProject(DUMMY=[0])\n"
-operator|+
-literal|"        EnumerableTableScan(table=[[hr, depts]])"
+literal|"      EnumerableTableScan(table=[[hr, depts]])"
 argument_list|)
 expr_stmt|;
 block|}

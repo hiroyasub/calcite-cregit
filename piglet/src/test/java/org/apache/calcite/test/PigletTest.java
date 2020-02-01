@@ -469,9 +469,9 @@ name|expected
 init|=
 literal|""
 operator|+
-literal|"LogicalAggregate(group=[{7}], A=[COLLECT($8)])\n"
+literal|"LogicalAggregate(group=[{0}], A=[COLLECT($1)])\n"
 operator|+
-literal|"  LogicalProject(EMPNO=[$0], ENAME=[$1], JOB=[$2], MGR=[$3], HIREDATE=[$4], SAL=[$5], COMM=[$6], DEPTNO=[$7], $f8=[ROW($0, $1, $2, $3, $4, $5, $6, $7)])\n"
+literal|"  LogicalProject(DEPTNO=[$7], $f8=[ROW($0, $1, $2, $3, $4, $5, $6, $7)])\n"
 operator|+
 literal|"    LogicalTableScan(table=[[scott, EMP]])\n"
 decl_stmt|;

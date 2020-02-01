@@ -3596,9 +3596,9 @@ literal|""
 operator|+
 literal|"LogicalProject($f0=[$1])\n"
 operator|+
-literal|"  LogicalAggregate(group=[{0}], agg#0=[COLLECT($2)])\n"
+literal|"  LogicalAggregate(group=[{0}], agg#0=[COLLECT($1)])\n"
 operator|+
-literal|"    LogicalProject(DEPTNO=[$0], DNAME=[$1], $f2=[ROW($0, $1)])\n"
+literal|"    LogicalProject(DEPTNO=[$0], $f2=[ROW($0, $1)])\n"
 operator|+
 literal|"      LogicalTableScan(table=[[scott, DEPT]])\n"
 decl_stmt|;

@@ -3626,7 +3626,7 @@ name|relBuilder
 argument_list|)
 return|;
 block|}
-comment|/**    * Creates a plan suitable for use in<code>EXISTS</code> or<code>IN</code>    * statements.    *    * @see org.apache.calcite.sql2rel.SqlToRelConverter#convertExists    *    * @param seekRel    A query rel, for example the resulting rel from 'select *    *                   from emp' or 'values (1,2,3)' or '('Foo', 34)'.    * @param subQueryType Sub-query type    * @param logic  Whether to use 2- or 3-valued boolean logic    * @param notIn Whether the operator is NOT IN    * @param relBuilder Builder for relational expressions    *    * @return A pair of a relational expression which outer joins a boolean    * condition column, and a numeric offset. The offset is 2 if column 0 is    * the number of rows and column 1 is the number of rows with not-null keys;    * 0 otherwise.    */
+comment|/**    * Creates a plan suitable for use in<code>EXISTS</code> or<code>IN</code>    * statements.    *    * @see org.apache.calcite.sql2rel.SqlToRelConverter    * SqlToRelConverter#convertExists    *    * @param seekRel    A query rel, for example the resulting rel from 'select *    *                   from emp' or 'values (1,2,3)' or '('Foo', 34)'.    * @param subQueryType Sub-query type    * @param logic  Whether to use 2- or 3-valued boolean logic    * @param notIn Whether the operator is NOT IN    * @param relBuilder Builder for relational expressions    *    * @return A pair of a relational expression which outer joins a boolean    * condition column, and a numeric offset. The offset is 2 if column 0 is    * the number of rows and column 1 is the number of rows with not-null keys;    * 0 otherwise.    */
 specifier|public
 specifier|static
 name|Exists
@@ -4849,6 +4849,40 @@ name|Aggregate
 name|aggregate
 parameter_list|)
 block|{
+return|return
+name|getAllFields2
+argument_list|(
+name|aggregate
+operator|.
+name|getGroupSet
+argument_list|()
+argument_list|,
+name|aggregate
+operator|.
+name|getAggCallList
+argument_list|()
+argument_list|)
+return|;
+block|}
+comment|/** Gets all fields in an aggregate. */
+specifier|public
+specifier|static
+name|Set
+argument_list|<
+name|Integer
+argument_list|>
+name|getAllFields2
+parameter_list|(
+name|ImmutableBitSet
+name|groupSet
+parameter_list|,
+name|List
+argument_list|<
+name|AggregateCall
+argument_list|>
+name|aggCallList
+parameter_list|)
+block|{
 specifier|final
 name|Set
 argument_list|<
@@ -4865,10 +4899,7 @@ name|allFields
 operator|.
 name|addAll
 argument_list|(
-name|aggregate
-operator|.
-name|getGroupSet
-argument_list|()
+name|groupSet
 operator|.
 name|asList
 argument_list|()
@@ -4879,10 +4910,7 @@ control|(
 name|AggregateCall
 name|aggregateCall
 range|:
-name|aggregate
-operator|.
-name|getAggCallList
-argument_list|()
+name|aggCallList
 control|)
 block|{
 name|allFields

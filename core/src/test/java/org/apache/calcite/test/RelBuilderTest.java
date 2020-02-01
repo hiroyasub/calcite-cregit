@@ -883,6 +883,18 @@ name|util
 operator|.
 name|function
 operator|.
+name|Function
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|function
+operator|.
 name|UnaryOperator
 import|;
 end_import
@@ -5248,23 +5260,16 @@ comment|//   SELECT COUNT(*) AS c, SUM(mgr + 1) AS s
 comment|//   FROM emp
 comment|//   GROUP BY ename, hiredate + mgr
 specifier|final
+name|Function
+argument_list|<
 name|RelBuilder
-name|builder
-init|=
-name|RelBuilder
-operator|.
-name|create
-argument_list|(
-name|config
-argument_list|()
-operator|.
-name|build
-argument_list|()
-argument_list|)
-decl_stmt|;
+argument_list|,
 name|RelNode
-name|root
+argument_list|>
+name|f
 init|=
+name|builder
+lambda|->
 name|builder
 operator|.
 name|scan
@@ -5366,19 +5371,71 @@ name|expected
 init|=
 literal|""
 operator|+
-literal|"LogicalAggregate(group=[{1, 8}], C=[COUNT()], S=[SUM($9)])\n"
+literal|"LogicalAggregate(group=[{0, 1}], C=[COUNT()], S=[SUM($2)])\n"
 operator|+
-literal|"  LogicalProject(EMPNO=[$0], ENAME=[$1], JOB=[$2], MGR=[$3], HIREDATE=[$4], SAL=[$5], COMM=[$6], DEPTNO=[$7], $f8=[+($4, $3)], $f9=[+($3, 1)])\n"
+literal|"  LogicalProject(ENAME=[$1], $f8=[+($4, $3)], $f9=[+($3, 1)])\n"
 operator|+
 literal|"    LogicalTableScan(table=[[scott, EMP]])\n"
 decl_stmt|;
 name|assertThat
 argument_list|(
-name|root
+name|f
+operator|.
+name|apply
+argument_list|(
+name|createBuilder
+argument_list|(
+name|c
+lambda|->
+name|c
+argument_list|)
+argument_list|)
 argument_list|,
 name|hasTree
 argument_list|(
 name|expected
+argument_list|)
+argument_list|)
+expr_stmt|;
+comment|// now without pruning
+specifier|final
+name|String
+name|expected2
+init|=
+literal|""
+operator|+
+literal|"LogicalAggregate(group=[{1, 8}], C=[COUNT()], S=[SUM($9)])\n"
+operator|+
+literal|"  LogicalProject(EMPNO=[$0], ENAME=[$1], JOB=[$2], MGR=[$3], "
+operator|+
+literal|"HIREDATE=[$4], SAL=[$5], COMM=[$6], DEPTNO=[$7], $f8=[+($4, $3)], "
+operator|+
+literal|"$f9=[+($3, 1)])\n"
+operator|+
+literal|"    LogicalTableScan(table=[[scott, EMP]])\n"
+decl_stmt|;
+name|assertThat
+argument_list|(
+name|f
+operator|.
+name|apply
+argument_list|(
+name|createBuilder
+argument_list|(
+name|c
+lambda|->
+name|c
+operator|.
+name|withPruneInputOfAggregate
+argument_list|(
+literal|false
+argument_list|)
+argument_list|)
+argument_list|)
+argument_list|,
+name|hasTree
+argument_list|(
+name|expected2
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -6225,23 +6282,16 @@ comment|//   SELECT deptno, COUNT(*) FILTER (WHERE empno> 100) AS c
 comment|//   FROM emp
 comment|//   GROUP BY ROLLUP(deptno)
 specifier|final
+name|Function
+argument_list|<
 name|RelBuilder
-name|builder
-init|=
-name|RelBuilder
-operator|.
-name|create
-argument_list|(
-name|config
-argument_list|()
-operator|.
-name|build
-argument_list|()
-argument_list|)
-decl_stmt|;
+argument_list|,
 name|RelNode
-name|root
+argument_list|>
+name|f
 init|=
+name|builder
+lambda|->
 name|builder
 operator|.
 name|scan
@@ -6332,19 +6382,69 @@ name|expected
 init|=
 literal|""
 operator|+
-literal|"LogicalAggregate(group=[{7}], groups=[[{7}, {}]], C=[COUNT() FILTER $8])\n"
+literal|"LogicalAggregate(group=[{0}], groups=[[{0}, {}]], C=[COUNT() FILTER $1])\n"
 operator|+
-literal|"  LogicalProject(EMPNO=[$0], ENAME=[$1], JOB=[$2], MGR=[$3], HIREDATE=[$4], SAL=[$5], COMM=[$6], DEPTNO=[$7], $f8=[>($0, 100)])\n"
+literal|"  LogicalProject(DEPTNO=[$7], $f8=[>($0, 100)])\n"
 operator|+
 literal|"    LogicalTableScan(table=[[scott, EMP]])\n"
 decl_stmt|;
 name|assertThat
 argument_list|(
-name|root
+name|f
+operator|.
+name|apply
+argument_list|(
+name|createBuilder
+argument_list|(
+name|c
+lambda|->
+name|c
+argument_list|)
+argument_list|)
 argument_list|,
 name|hasTree
 argument_list|(
 name|expected
+argument_list|)
+argument_list|)
+expr_stmt|;
+comment|// now without pruning
+specifier|final
+name|String
+name|expected2
+init|=
+literal|""
+operator|+
+literal|"LogicalAggregate(group=[{7}], groups=[[{7}, {}]], C=[COUNT() FILTER $8])\n"
+operator|+
+literal|"  LogicalProject(EMPNO=[$0], ENAME=[$1], JOB=[$2], MGR=[$3], "
+operator|+
+literal|"HIREDATE=[$4], SAL=[$5], COMM=[$6], DEPTNO=[$7], $f8=[>($0, 100)])\n"
+operator|+
+literal|"    LogicalTableScan(table=[[scott, EMP]])\n"
+decl_stmt|;
+name|assertThat
+argument_list|(
+name|f
+operator|.
+name|apply
+argument_list|(
+name|createBuilder
+argument_list|(
+name|c
+lambda|->
+name|c
+operator|.
+name|withPruneInputOfAggregate
+argument_list|(
+literal|false
+argument_list|)
+argument_list|)
+argument_list|)
+argument_list|,
+name|hasTree
+argument_list|(
+name|expected2
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -6473,23 +6573,16 @@ comment|//   SELECT deptno, SUM(sal) FILTER (WHERE comm< 100) AS c
 comment|//   FROM emp
 comment|//   GROUP BY deptno
 specifier|final
+name|Function
+argument_list|<
 name|RelBuilder
-name|builder
-init|=
-name|RelBuilder
-operator|.
-name|create
-argument_list|(
-name|config
-argument_list|()
-operator|.
-name|build
-argument_list|()
-argument_list|)
-decl_stmt|;
+argument_list|,
 name|RelNode
-name|root
+argument_list|>
+name|f
 init|=
+name|builder
+lambda|->
 name|builder
 operator|.
 name|scan
@@ -6564,6 +6657,39 @@ name|expected
 init|=
 literal|""
 operator|+
+literal|"LogicalAggregate(group=[{1}], C=[SUM($0) FILTER $2])\n"
+operator|+
+literal|"  LogicalProject(SAL=[$5], DEPTNO=[$7], $f8=[IS TRUE(<($6, 100))])\n"
+operator|+
+literal|"    LogicalTableScan(table=[[scott, EMP]])\n"
+decl_stmt|;
+name|assertThat
+argument_list|(
+name|f
+operator|.
+name|apply
+argument_list|(
+name|createBuilder
+argument_list|(
+name|c
+lambda|->
+name|c
+argument_list|)
+argument_list|)
+argument_list|,
+name|hasTree
+argument_list|(
+name|expected
+argument_list|)
+argument_list|)
+expr_stmt|;
+comment|// now without pruning
+specifier|final
+name|String
+name|expected2
+init|=
+literal|""
+operator|+
 literal|"LogicalAggregate(group=[{7}], C=[SUM($5) FILTER $8])\n"
 operator|+
 literal|"  LogicalProject(EMPNO=[$0], ENAME=[$1], JOB=[$2], MGR=[$3], HIREDATE=[$4], SAL=[$5], COMM=[$6], DEPTNO=[$7], $f8=[IS TRUE(<($6, 100))])\n"
@@ -6572,11 +6698,26 @@ literal|"    LogicalTableScan(table=[[scott, EMP]])\n"
 decl_stmt|;
 name|assertThat
 argument_list|(
-name|root
+name|f
+operator|.
+name|apply
+argument_list|(
+name|createBuilder
+argument_list|(
+name|c
+lambda|->
+name|c
+operator|.
+name|withPruneInputOfAggregate
+argument_list|(
+literal|false
+argument_list|)
+argument_list|)
+argument_list|)
 argument_list|,
 name|hasTree
 argument_list|(
-name|expected
+name|expected2
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -6680,23 +6821,16 @@ name|testAggregateProjectWithExpression
 parameter_list|()
 block|{
 specifier|final
+name|Function
+argument_list|<
 name|RelBuilder
-name|builder
-init|=
-name|RelBuilder
-operator|.
-name|create
-argument_list|(
-name|config
-argument_list|()
-operator|.
-name|build
-argument_list|()
-argument_list|)
-decl_stmt|;
+argument_list|,
 name|RelNode
-name|root
+argument_list|>
+name|f
 init|=
+name|builder
+lambda|->
 name|builder
 operator|.
 name|scan
@@ -6761,6 +6895,39 @@ name|expected
 init|=
 literal|""
 operator|+
+literal|"LogicalAggregate(group=[{0}])\n"
+operator|+
+literal|"  LogicalProject(d3=[+($7, 3)])\n"
+operator|+
+literal|"    LogicalTableScan(table=[[scott, EMP]])\n"
+decl_stmt|;
+name|assertThat
+argument_list|(
+name|f
+operator|.
+name|apply
+argument_list|(
+name|createBuilder
+argument_list|(
+name|c
+lambda|->
+name|c
+argument_list|)
+argument_list|)
+argument_list|,
+name|hasTree
+argument_list|(
+name|expected
+argument_list|)
+argument_list|)
+expr_stmt|;
+comment|// now without pruning
+specifier|final
+name|String
+name|expected2
+init|=
+literal|""
+operator|+
 literal|"LogicalAggregate(group=[{1}])\n"
 operator|+
 literal|"  LogicalProject(DEPTNO=[$7], d3=[+($7, 3)])\n"
@@ -6769,11 +6936,417 @@ literal|"    LogicalTableScan(table=[[scott, EMP]])\n"
 decl_stmt|;
 name|assertThat
 argument_list|(
-name|root
+name|f
+operator|.
+name|apply
+argument_list|(
+name|createBuilder
+argument_list|(
+name|c
+lambda|->
+name|c
+operator|.
+name|withPruneInputOfAggregate
+argument_list|(
+literal|false
+argument_list|)
+argument_list|)
+argument_list|)
+argument_list|,
+name|hasTree
+argument_list|(
+name|expected2
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Tests that {@link RelBuilder#aggregate} on top of a {@link Project} prunes    * away expressions that are not used.    *    * @see RelBuilder.Config#pruneInputOfAggregate */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testAggregateProjectPrune
+parameter_list|()
+block|{
+comment|// SELECT deptno, SUM(sal) FILTER (WHERE b)
+comment|// FROM (
+comment|//   SELECT deptno, empno + 10, sal, job = 'CLERK' AS b
+comment|//   FROM emp)
+comment|// GROUP BY deptno
+comment|//   -->
+comment|// SELECT deptno, SUM(sal) FILTER (WHERE b)
+comment|// FROM (
+comment|//   SELECT deptno, sal, job = 'CLERK' AS b
+comment|//   FROM emp)
+comment|// GROUP BY deptno
+specifier|final
+name|Function
+argument_list|<
+name|RelBuilder
+argument_list|,
+name|RelNode
+argument_list|>
+name|f
+init|=
+name|builder
+lambda|->
+name|builder
+operator|.
+name|scan
+argument_list|(
+literal|"EMP"
+argument_list|)
+operator|.
+name|project
+argument_list|(
+name|builder
+operator|.
+name|field
+argument_list|(
+literal|"DEPTNO"
+argument_list|)
+argument_list|,
+name|builder
+operator|.
+name|call
+argument_list|(
+name|SqlStdOperatorTable
+operator|.
+name|PLUS
+argument_list|,
+name|builder
+operator|.
+name|field
+argument_list|(
+literal|"EMPNO"
+argument_list|)
+argument_list|,
+name|builder
+operator|.
+name|literal
+argument_list|(
+literal|10
+argument_list|)
+argument_list|)
+argument_list|,
+name|builder
+operator|.
+name|field
+argument_list|(
+literal|"SAL"
+argument_list|)
+argument_list|,
+name|builder
+operator|.
+name|field
+argument_list|(
+literal|"JOB"
+argument_list|)
+argument_list|)
+operator|.
+name|aggregate
+argument_list|(
+name|builder
+operator|.
+name|groupKey
+argument_list|(
+name|builder
+operator|.
+name|field
+argument_list|(
+literal|"DEPTNO"
+argument_list|)
+argument_list|)
+argument_list|,
+name|builder
+operator|.
+name|sum
+argument_list|(
+name|builder
+operator|.
+name|field
+argument_list|(
+literal|"SAL"
+argument_list|)
+argument_list|)
+operator|.
+name|filter
+argument_list|(
+name|builder
+operator|.
+name|call
+argument_list|(
+name|SqlStdOperatorTable
+operator|.
+name|EQUALS
+argument_list|,
+name|builder
+operator|.
+name|field
+argument_list|(
+literal|"JOB"
+argument_list|)
+argument_list|,
+name|builder
+operator|.
+name|literal
+argument_list|(
+literal|"CLERK"
+argument_list|)
+argument_list|)
+argument_list|)
+argument_list|)
+operator|.
+name|build
+argument_list|()
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|""
+operator|+
+literal|"LogicalAggregate(group=[{0}], agg#0=[SUM($1) FILTER $2])\n"
+operator|+
+literal|"  LogicalProject(DEPTNO=[$7], SAL=[$5], $f4=[IS TRUE(=($2, 'CLERK'))])\n"
+operator|+
+literal|"    LogicalTableScan(table=[[scott, EMP]])\n"
+decl_stmt|;
+name|assertThat
+argument_list|(
+name|f
+operator|.
+name|apply
+argument_list|(
+name|createBuilder
+argument_list|(
+name|c
+lambda|->
+name|c
+argument_list|)
+argument_list|)
 argument_list|,
 name|hasTree
 argument_list|(
 name|expected
+argument_list|)
+argument_list|)
+expr_stmt|;
+comment|// now with pruning disabled
+specifier|final
+name|String
+name|expected2
+init|=
+literal|""
+operator|+
+literal|"LogicalAggregate(group=[{0}], agg#0=[SUM($2) FILTER $4])\n"
+operator|+
+literal|"  LogicalProject(DEPTNO=[$7], $f1=[+($0, 10)], SAL=[$5], JOB=[$2], "
+operator|+
+literal|"$f4=[IS TRUE(=($2, 'CLERK'))])\n"
+operator|+
+literal|"    LogicalTableScan(table=[[scott, EMP]])\n"
+decl_stmt|;
+name|assertThat
+argument_list|(
+name|f
+operator|.
+name|apply
+argument_list|(
+name|createBuilder
+argument_list|(
+name|c
+lambda|->
+name|c
+operator|.
+name|withPruneInputOfAggregate
+argument_list|(
+literal|false
+argument_list|)
+argument_list|)
+argument_list|)
+argument_list|,
+name|hasTree
+argument_list|(
+name|expected2
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Tests that (a) if the input is a project and no fields are used    * we remove the project (rather than projecting zero fields, which    * would be wrong), and (b) if the same aggregate function is used    * twice, we add a project on top. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testAggregateProjectPruneEmpty
+parameter_list|()
+block|{
+comment|// SELECT COUNT(*) AS C, COUNT(*) AS C2 FROM (
+comment|//  SELECT deptno, empno + 10, sal, job = 'CLERK' AS b
+comment|//  FROM emp)
+comment|//   -->
+comment|// SELECT C, C AS C2 FROM (
+comment|//   SELECT COUNT(*) AS c
+comment|//   FROM emp)
+specifier|final
+name|Function
+argument_list|<
+name|RelBuilder
+argument_list|,
+name|RelNode
+argument_list|>
+name|f
+init|=
+name|builder
+lambda|->
+name|builder
+operator|.
+name|scan
+argument_list|(
+literal|"EMP"
+argument_list|)
+operator|.
+name|project
+argument_list|(
+name|builder
+operator|.
+name|field
+argument_list|(
+literal|"DEPTNO"
+argument_list|)
+argument_list|,
+name|builder
+operator|.
+name|call
+argument_list|(
+name|SqlStdOperatorTable
+operator|.
+name|PLUS
+argument_list|,
+name|builder
+operator|.
+name|field
+argument_list|(
+literal|"EMPNO"
+argument_list|)
+argument_list|,
+name|builder
+operator|.
+name|literal
+argument_list|(
+literal|10
+argument_list|)
+argument_list|)
+argument_list|,
+name|builder
+operator|.
+name|field
+argument_list|(
+literal|"SAL"
+argument_list|)
+argument_list|,
+name|builder
+operator|.
+name|field
+argument_list|(
+literal|"JOB"
+argument_list|)
+argument_list|)
+operator|.
+name|aggregate
+argument_list|(
+name|builder
+operator|.
+name|groupKey
+argument_list|()
+argument_list|,
+name|builder
+operator|.
+name|countStar
+argument_list|(
+literal|"C"
+argument_list|)
+argument_list|,
+name|builder
+operator|.
+name|countStar
+argument_list|(
+literal|"C2"
+argument_list|)
+argument_list|)
+operator|.
+name|build
+argument_list|()
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|""
+operator|+
+literal|"LogicalProject(C=[$0], C2=[$0])\n"
+operator|+
+literal|"  LogicalAggregate(group=[{}], C=[COUNT()])\n"
+operator|+
+literal|"    LogicalTableScan(table=[[scott, EMP]])\n"
+decl_stmt|;
+name|assertThat
+argument_list|(
+name|f
+operator|.
+name|apply
+argument_list|(
+name|createBuilder
+argument_list|(
+name|c
+lambda|->
+name|c
+argument_list|)
+argument_list|)
+argument_list|,
+name|hasTree
+argument_list|(
+name|expected
+argument_list|)
+argument_list|)
+expr_stmt|;
+comment|// now with pruning disabled
+specifier|final
+name|String
+name|expected2
+init|=
+literal|""
+operator|+
+literal|"LogicalProject(C=[$0], C2=[$0])\n"
+operator|+
+literal|"  LogicalAggregate(group=[{}], C=[COUNT()])\n"
+operator|+
+literal|"    LogicalProject(DEPTNO=[$7], $f1=[+($0, 10)], SAL=[$5], JOB=[$2])\n"
+operator|+
+literal|"      LogicalTableScan(table=[[scott, EMP]])\n"
+decl_stmt|;
+name|assertThat
+argument_list|(
+name|f
+operator|.
+name|apply
+argument_list|(
+name|createBuilder
+argument_list|(
+name|c
+lambda|->
+name|c
+operator|.
+name|withPruneInputOfAggregate
+argument_list|(
+literal|false
+argument_list|)
+argument_list|)
+argument_list|)
+argument_list|,
+name|hasTree
+argument_list|(
+name|expected2
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -7512,23 +8085,16 @@ comment|// but applying "select ... group by ()" to it would change the result.
 comment|// In theory, we could omit the distinct if we know there is precisely one
 comment|// row, but we don't currently.
 specifier|final
+name|Function
+argument_list|<
 name|RelBuilder
-name|builder
-init|=
-name|RelBuilder
-operator|.
-name|create
-argument_list|(
-name|config
-argument_list|()
-operator|.
-name|build
-argument_list|()
-argument_list|)
-decl_stmt|;
+argument_list|,
 name|RelNode
-name|root
+argument_list|>
+name|f
 init|=
+name|builder
+lambda|->
 name|builder
 operator|.
 name|scan
@@ -7570,6 +8136,38 @@ name|expected
 init|=
 literal|"LogicalAggregate(group=[{}])\n"
 operator|+
+literal|"  LogicalFilter(condition=[IS NULL($6)])\n"
+operator|+
+literal|"    LogicalTableScan(table=[[scott, EMP]])\n"
+decl_stmt|;
+name|assertThat
+argument_list|(
+name|f
+operator|.
+name|apply
+argument_list|(
+name|createBuilder
+argument_list|(
+name|c
+lambda|->
+name|c
+argument_list|)
+argument_list|)
+argument_list|,
+name|hasTree
+argument_list|(
+name|expected
+argument_list|)
+argument_list|)
+expr_stmt|;
+comment|// now without pruning
+comment|// (The empty LogicalProject is dubious, but it's what we've always done)
+specifier|final
+name|String
+name|expected2
+init|=
+literal|"LogicalAggregate(group=[{}])\n"
+operator|+
 literal|"  LogicalProject\n"
 operator|+
 literal|"    LogicalFilter(condition=[IS NULL($6)])\n"
@@ -7578,11 +8176,26 @@ literal|"      LogicalTableScan(table=[[scott, EMP]])\n"
 decl_stmt|;
 name|assertThat
 argument_list|(
-name|root
+name|f
+operator|.
+name|apply
+argument_list|(
+name|createBuilder
+argument_list|(
+name|c
+lambda|->
+name|c
+operator|.
+name|withPruneInputOfAggregate
+argument_list|(
+literal|false
+argument_list|)
+argument_list|)
+argument_list|)
 argument_list|,
 name|hasTree
 argument_list|(
-name|expected
+name|expected2
 argument_list|)
 argument_list|)
 expr_stmt|;
