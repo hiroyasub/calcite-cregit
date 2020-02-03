@@ -38,7 +38,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * VolcanoPlannerPhaseRuleMappingInitializer describes an inteface for  * initializing the mapping of {@link VolcanoPlannerPhase}s to sets of rule  * descriptions.  *  *<p><b>Note:</b> Rule descriptions are obtained via  * {@link org.apache.calcite.plan.RelOptRule#toString()}. By default they are  * the class's simple name (e.g. class name sans package), unless the class is  * an inner class, in which case the default is the inner class's simple  * name. Some rules explicitly provide alternate descriptions by calling the  * {@link org.apache.calcite.plan.RelOptRule#RelOptRule(org.apache.calcite.plan.RelOptRuleOperand, String)}  * constructor.  */
+comment|/**  * VolcanoPlannerPhaseRuleMappingInitializer describes an interface for  * initializing the mapping of {@link VolcanoPlannerPhase}s to sets of rule  * descriptions.  *  *<p><b>Note:</b> Rule descriptions are obtained via  * {@link org.apache.calcite.plan.RelOptRule#toString()}. By default they are  * the class's simple name (e.g. class name sans package), unless the class is  * an inner class, in which case the default is the inner class's simple  * name. Some rules explicitly provide alternate descriptions by calling the  * {@link org.apache.calcite.plan.RelOptRule#RelOptRule(org.apache.calcite.plan.RelOptRuleOperand, String)}  * constructor.  */
 end_comment
 
 begin_interface

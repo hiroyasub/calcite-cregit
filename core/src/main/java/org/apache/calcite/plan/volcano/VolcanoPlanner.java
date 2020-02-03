@@ -1198,7 +1198,6 @@ parameter_list|(
 name|RelOptCostFactory
 name|costFactory
 parameter_list|,
-comment|//
 name|Context
 name|externalContext
 parameter_list|)
@@ -1215,7 +1214,6 @@ name|FACTORY
 else|:
 name|costFactory
 argument_list|,
-comment|//
 name|externalContext
 argument_list|)
 expr_stmt|;
@@ -1335,7 +1333,7 @@ name|RelNode
 name|rel
 parameter_list|)
 block|{
-comment|// We're registered all the rules, and therefore RelNode classes,
+comment|// We've registered all the rules, and therefore RelNode classes,
 comment|// we're interested in, and have not yet started calling metadata providers.
 comment|// So now is a good time to tell the metadata layer what to expect.
 name|registerMetadataRels
@@ -3798,19 +3796,13 @@ name|equivRel
 argument_list|)
 expr_stmt|;
 block|}
-specifier|final
-name|RelSubset
-name|subset
-init|=
+return|return
 name|registerImpl
 argument_list|(
 name|rel
 argument_list|,
 name|set
 argument_list|)
-decl_stmt|;
-return|return
-name|subset
 return|;
 block|}
 specifier|public
@@ -7176,16 +7168,13 @@ expr_stmt|;
 return|return;
 block|}
 comment|// Add the relational expression into the correct set and subset.
-name|RelSubset
-name|subset2
-init|=
 name|addRelToSet
 argument_list|(
 name|rel
 argument_list|,
 name|set
 argument_list|)
-decl_stmt|;
+expr_stmt|;
 block|}
 comment|/**    * If a subset has one or more equivalent subsets (owing to a set having    * merged with another), returns the subset which is the leader of the    * equivalence class.    *    * @param subset Subset    * @return Leader of subset's equivalence class    */
 specifier|private
@@ -8890,28 +8879,6 @@ operator|.
 name|locked
 operator|=
 name|locked
-expr_stmt|;
-block|}
-specifier|public
-name|void
-name|ensureRegistered
-parameter_list|(
-name|RelNode
-name|rel
-parameter_list|,
-name|RelNode
-name|equivRel
-parameter_list|,
-name|VolcanoRuleCall
-name|ruleCall
-parameter_list|)
-block|{
-name|ensureRegistered
-argument_list|(
-name|rel
-argument_list|,
-name|equivRel
-argument_list|)
 expr_stmt|;
 block|}
 comment|//~ Inner Classes ----------------------------------------------------------
