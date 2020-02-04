@@ -32,7 +32,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * A {@code HintOptionChecker} that checks if a {@link RelHint}'s options are valid.  *  *<p>Every hint would have a validation when converting to a {@link RelHint}, the  * validation logic is as follows:  *  *<ul>  *<li>Checks the hint name is already registered(case-insensitively)</li>  *<li>If a {@code HintOptionChecker} was registered, use it to check the options</li>  *</ul>  *  *<p>In {@link HintStrategyTable} the option checker is used for  * hints registration as an optional parameter.  *  * @see HintStrategyTable#validateHint  */
+comment|/**  * A {@code HintOptionChecker} checks if a {@link RelHint}'s options are valid.  *  *<p>Every hint would have a validation when converting to a {@link RelHint}, the  * validation logic is as follows:  *  *<ul>  *<li>Checks whether the hint name was already registered</li>  *<li>If a {@code HintOptionChecker} was registered,  *   use it to check the hint options</li>  *</ul>  *  *<p>In {@link HintStrategyTable} the option checker is used for  * hints registration as an optional parameter.  *  * @see HintStrategyTable#validateHint  */
 end_comment
 
 begin_interface

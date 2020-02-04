@@ -158,7 +158,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * {@code HintStrategy} collection indicates which kind of  * {@link org.apache.calcite.rel.RelNode} a hint can apply to.  *  *<p>Typically, every supported hint should register a {@code HintStrategy}  * into this collection. For example, {@link HintStrategies#JOIN} implies that this hint  * would be propagated and attached to the {@link org.apache.calcite.rel.core.Join}  * relational expressions.  *  *<p>A {@code HintStrategy} can be used independently or cascaded with other strategies  * with method {@link HintStrategies#and}.  *  *<p>The matching for hint name is case in-sensitive.  *  * @see HintStrategy  */
+comment|/**  * A {@code HintStrategy} collection indicates which kind of  * {@link org.apache.calcite.rel.RelNode} a hint can apply to.  *  *<p>Every supported hint should register a {@code HintStrategy}  * into this collection. For example, {@link HintStrategies#JOIN} implies that this hint  * would be propagated and attached to the {@link org.apache.calcite.rel.core.Join}  * relational expressions.  *  *<p>A {@code HintStrategy} can be used independently or cascaded with other strategies  * with method {@link HintStrategies#and}.  *  *<p>The matching for hint name is case in-sensitive.  *  * @see HintStrategy  */
 end_comment
 
 begin_class
@@ -275,7 +275,7 @@ name|litmus
 expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**    * Apply this {@link HintStrategyTable} to the given relational    * expression for the {@code hints}.    *    * @param hints Hints that may attach to the {@code rel}    * @param rel   Relational expression    * @return A hints list that can be attached to the {@code rel}    */
+comment|/**    * Applies this {@link HintStrategyTable} hint strategies to the given relational    * expression and the {@code hints}.    *    * @param hints Hints that may attach to the {@code rel}    * @param rel   Relational expression    * @return A hint list that can be attached to the {@code rel}    */
 specifier|public
 name|List
 argument_list|<
@@ -656,7 +656,7 @@ expr_stmt|;
 block|}
 specifier|public
 name|Builder
-name|addHintStrategy
+name|hintStrategy
 parameter_list|(
 name|String
 name|hintName
@@ -692,7 +692,7 @@ return|;
 block|}
 specifier|public
 name|Builder
-name|addHintStrategy
+name|hintStrategy
 parameter_list|(
 name|String
 name|hintName

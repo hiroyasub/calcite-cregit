@@ -46,7 +46,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * This class allows multiple {@link HintStrategy} rules to be combined into one rule.  * The composition can be {@code AND} or {@code OR} currently.  */
+comment|/**  * A {@link HintStrategy} to combine multiple hint strategies into one.  *  *<p>The composition can be {@code AND} or {@code OR}.  */
 end_comment
 
 begin_class
@@ -148,7 +148,7 @@ name|rel
 parameter_list|)
 block|{
 return|return
-name|supportsRel
+name|canApply
 argument_list|(
 name|composition
 argument_list|,
@@ -160,7 +160,7 @@ return|;
 block|}
 specifier|private
 name|boolean
-name|supportsRel
+name|canApply
 parameter_list|(
 name|Composition
 name|composition

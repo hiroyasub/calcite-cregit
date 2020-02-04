@@ -112,7 +112,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * {@link Hintable} is a kind of {@link RelNode} that can attach {@link RelHint}s.  *  *<p>This interface is experimental, currently, {@link RelNode}s that implement it  * have a constructor parameter named "hints" used to construct relational expression  * with given attached hints.  *  *<p>Current design is not that elegant and mature, because we have to  * copy the hints whenever these relational expressions are copied or used to  * derive new relational expressions.  * Even though we have implemented the mechanism to propagate the hints, for large queries,  * there would be many cases where the hints are not copied to the right RelNode,  * and the effort/memory is wasted if we are copying the hint to a RelNode  * but the hint is not used.  */
+comment|/**  * {@link Hintable} is a kind of {@link RelNode} that can attach {@link RelHint}s.  *  *<p>This interface is experimental, {@link RelNode}s that implement it  * have a constructor parameter named "hints" used to construct relational expression  * with given hints.  *  *<p>Current design is not that elegant and mature, because we have to  * copy the hints whenever these relational expressions are copied or used to  * derive new relational expressions.  * Even though we have implemented the mechanism to propagate the hints, for large queries,  * there would be many cases where the hints are not copied to the right RelNode,  * and the effort/memory is wasted if we are copying the hint to a RelNode  * but the hint is not used.  */
 end_comment
 
 begin_interface
@@ -194,7 +194,7 @@ operator|)
 name|this
 return|;
 block|}
-comment|/**    * Returns the hints of this relational expressions as a list.    */
+comment|/**    * Returns the hints of this relational expressions as an immutable list.    */
 name|ImmutableList
 argument_list|<
 name|RelHint
