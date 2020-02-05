@@ -235,6 +235,22 @@ name|ReturnTypes
 import|;
 end_import
 
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|util
+operator|.
+name|RelToSqlConverterUtil
+operator|.
+name|unparseHiveTrim
+import|;
+end_import
+
 begin_comment
 comment|/**  * A<code>SqlDialect</code> implementation for the APACHE SPARK database.  */
 end_comment
@@ -560,6 +576,21 @@ argument_list|,
 literal|"DATE_TRUNC"
 argument_list|,
 literal|false
+argument_list|)
+expr_stmt|;
+break|break;
+case|case
+name|TRIM
+case|:
+name|unparseHiveTrim
+argument_list|(
+name|writer
+argument_list|,
+name|call
+argument_list|,
+name|leftPrec
+argument_list|,
+name|rightPrec
 argument_list|)
 expr_stmt|;
 break|break;

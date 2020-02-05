@@ -4506,11 +4506,12 @@ expr_stmt|;
 block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3220">[CALCITE-3220]    * HiveSqlDialect should transform the SQL-standard TRIM function to TRIM,    * LTRIM or RTRIM</a>. */
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3663">[CALCITE-3663]    * Support for TRIM function in BigQuery dialect</a>. */
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3771">[CALCITE-3771]    * Support of TRIM function for SPARK dialect and improvement in HIVE Dialect</a>. */
 annotation|@
 name|Test
 specifier|public
 name|void
-name|testHiveAndBqTrim
+name|testHiveSparkAndBqTrim
 parameter_list|()
 block|{
 specifier|final
@@ -4542,6 +4543,14 @@ argument_list|(
 name|expected
 argument_list|)
 operator|.
+name|withSpark
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+operator|.
 name|withBigQuery
 argument_list|()
 operator|.
@@ -4555,7 +4564,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testHiveAndBqTrimWithBoth
+name|testHiveSparkAndBqTrimWithBoth
 parameter_list|()
 block|{
 specifier|final
@@ -4587,6 +4596,14 @@ argument_list|(
 name|expected
 argument_list|)
 operator|.
+name|withSpark
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+operator|.
 name|withBigQuery
 argument_list|()
 operator|.
@@ -4600,7 +4617,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testHiveAndBqTrimWithLeading
+name|testHiveSparkAndBqTrimWithLeading
 parameter_list|()
 block|{
 specifier|final
@@ -4632,6 +4649,14 @@ argument_list|(
 name|expected
 argument_list|)
 operator|.
+name|withSpark
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+operator|.
 name|withBigQuery
 argument_list|()
 operator|.
@@ -4645,7 +4670,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testHiveAndBqTrimWithTailing
+name|testHiveSparkAndBqTrimWithTailing
 parameter_list|()
 block|{
 specifier|final
@@ -4670,6 +4695,14 @@ name|query
 argument_list|)
 operator|.
 name|withHive
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+operator|.
+name|withSpark
 argument_list|()
 operator|.
 name|ok
@@ -4710,12 +4743,66 @@ literal|"SELECT LTRIM('abcd', 'a')\n"
 operator|+
 literal|"FROM foodmart.reserve_employee"
 decl_stmt|;
+specifier|final
+name|String
+name|expectedHS
+init|=
+literal|"SELECT REGEXP_REPLACE('abcd', '^(a)*', '')\n"
+operator|+
+literal|"FROM foodmart.reserve_employee"
+decl_stmt|;
 name|sql
 argument_list|(
 name|query
 argument_list|)
 operator|.
 name|withBigQuery
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3771">[CALCITE-3771]    * Support of TRIM function for SPARK dialect and improvement in HIVE Dialect</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testHiveAndSparkTrimWithLeadingChar
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|query
+init|=
+literal|"SELECT TRIM(LEADING 'a' from 'abcd')\n"
+operator|+
+literal|"from \"foodmart\".\"reserve_employee\""
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT REGEXP_REPLACE('abcd', '^(a)*', '')\n"
+operator|+
+literal|"FROM foodmart.reserve_employee"
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|withHive
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+operator|.
+name|withSpark
 argument_list|()
 operator|.
 name|ok
@@ -4765,7 +4852,52 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testBqTrimWithTailingChar
+name|testHiveAndSparkTrimWithBothChar
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|query
+init|=
+literal|"SELECT TRIM(both 'a' from 'abcda')\n"
+operator|+
+literal|"from \"foodmart\".\"reserve_employee\""
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT REGEXP_REPLACE('abcda', '^(a)*|(a)*$', '')\n"
+operator|+
+literal|"FROM foodmart.reserve_employee"
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|withHive
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+operator|.
+name|withSpark
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testHiveBqTrimWithTailingChar
 parameter_list|()
 block|{
 specifier|final
@@ -4790,6 +4922,135 @@ name|query
 argument_list|)
 operator|.
 name|withBigQuery
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testHiveAndSparkTrimWithTailingChar
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|query
+init|=
+literal|"SELECT TRIM(TRAILING 'a' from 'abcd')\n"
+operator|+
+literal|"from \"foodmart\".\"reserve_employee\""
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT REGEXP_REPLACE('abcd', '(a)*$', '')\n"
+operator|+
+literal|"FROM foodmart.reserve_employee"
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|withHive
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+operator|.
+name|withSpark
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testBqTrimWithBothSpecialCharacter
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|query
+init|=
+literal|"SELECT TRIM(BOTH '$@*A' from '$@*AABC$@*AADCAA$@*A')\n"
+operator|+
+literal|"from \"foodmart\".\"reserve_employee\""
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT TRIM('$@*AABC$@*AADCAA$@*A', '$@*A')\n"
+operator|+
+literal|"FROM foodmart.reserve_employee"
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|withBigQuery
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testHiveAndSparkTrimWithBothSpecialCharacter
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|query
+init|=
+literal|"SELECT TRIM(BOTH '$@*A' from '$@*AABC$@*AADCAA$@*A')\n"
+operator|+
+literal|"from \"foodmart\".\"reserve_employee\""
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT REGEXP_REPLACE('$@*AABC$@*AADCAA$@*A',"
+operator|+
+literal|" '^(\\$\\@\\*A)*|(\\$\\@\\*A)*$', '')\n"
+operator|+
+literal|"FROM foodmart.reserve_employee"
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|withHive
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+operator|.
+name|withSpark
 argument_list|()
 operator|.
 name|ok
