@@ -1101,9 +1101,9 @@ argument_list|(
 literal|""
 comment|// It is important that we have MergeJoin in the plan
 operator|+
-literal|"EnumerableCalc(expr#0..4=[{inputs}], expr#5=[10], expr#6=[*($t5, $t3)], expr#7=[>($t0, $t6)], empid=[$t0], name=[$t2], dept_name=[$t4], e_deptno=[$t1], d_deptno=[$t3], $condition=[$t7])\n"
+literal|"EnumerableCalc(expr#0..4=[{inputs}], empid=[$t0], name=[$t2], dept_name=[$t4], e_deptno=[$t1], d_deptno=[$t3])\n"
 operator|+
-literal|"  EnumerableMergeJoin(condition=[=($1, $3)], joinType=[inner])\n"
+literal|"  EnumerableMergeJoin(condition=[AND(=($1, $3),>($0, *(10, $3)))], joinType=[inner])\n"
 operator|+
 literal|"    EnumerableSort(sort0=[$1], dir0=[ASC])\n"
 operator|+
