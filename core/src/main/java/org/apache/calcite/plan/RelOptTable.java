@@ -371,30 +371,6 @@ name|getTableHints
 parameter_list|()
 function_decl|;
 block|}
-comment|/** Interface to customize the {@link ToRelContext}. **/
-interface|interface
-name|ToRelContextFactory
-block|{
-comment|/**      * Returns a {@link ToRelContext} instance.      *      * @param viewExpander The view expander      * @param cluster      The cluster      * @param hints        The hints attached to the table,      *                     empty if the table does not have any hints      *      * @return A new {@link ToRelContext} instance.      */
-name|ToRelContext
-name|createToRelContext
-parameter_list|(
-name|RelOptTable
-operator|.
-name|ViewExpander
-name|viewExpander
-parameter_list|,
-name|RelOptCluster
-name|cluster
-parameter_list|,
-name|List
-argument_list|<
-name|RelHint
-argument_list|>
-name|hints
-parameter_list|)
-function_decl|;
-block|}
 block|}
 end_interface
 

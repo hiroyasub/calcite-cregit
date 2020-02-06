@@ -724,7 +724,7 @@ argument_list|()
 operator|==
 literal|0
 argument_list|,
-literal|"List options and Key-Value options can not be mixed in"
+literal|"List options and key value options can not be mixed in"
 argument_list|)
 expr_stmt|;
 name|this
@@ -772,7 +772,7 @@ argument_list|()
 operator|==
 literal|0
 argument_list|,
-literal|"List options and Key-Value options can not be mixed in"
+literal|"List options and key value options can not be mixed in"
 argument_list|)
 expr_stmt|;
 name|this
@@ -829,7 +829,7 @@ argument_list|()
 operator|==
 literal|0
 argument_list|,
-literal|"List options and key-value options can not be mixed in"
+literal|"List options and key value options can not be mixed in"
 argument_list|)
 expr_stmt|;
 name|this
@@ -881,7 +881,7 @@ argument_list|()
 operator|==
 literal|0
 argument_list|,
-literal|"List options and key-value options can not be mixed in"
+literal|"List options and key value options can not be mixed in"
 argument_list|)
 expr_stmt|;
 name|this

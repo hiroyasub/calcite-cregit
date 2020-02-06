@@ -2136,47 +2136,6 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/**    * Creates a {@link TableScanFactory} that can expand    * {@link TranslatableTable} instances, but explodes on views.    *    * @param tableScanFactory Factory for non-translatable tables    * @return Table scan factory    */
-annotation|@
-name|Nonnull
-specifier|public
-specifier|static
-name|TableScanFactory
-name|expandingScanFactory
-parameter_list|(
-annotation|@
-name|Nonnull
-name|TableScanFactory
-name|tableScanFactory
-parameter_list|)
-block|{
-return|return
-name|expandingScanFactory
-argument_list|(
-parameter_list|(
-name|rowType
-parameter_list|,
-name|queryString
-parameter_list|,
-name|schemaPath
-parameter_list|,
-name|viewPath
-parameter_list|)
-lambda|->
-block|{
-throw|throw
-operator|new
-name|UnsupportedOperationException
-argument_list|(
-literal|"cannot expand view"
-argument_list|)
-throw|;
-block|}
-argument_list|,
-name|tableScanFactory
-argument_list|)
-return|;
-block|}
 comment|/**    * Creates a {@link TableScanFactory} that uses a    * {@link org.apache.calcite.plan.RelOptTable.ViewExpander} to handle    * {@link TranslatableTable} instances, and falls back to a default    * factory for other tables.    *    * @param viewExpander View expander    * @param tableScanFactory Factory for non-translatable tables    * @return Table scan factory    */
 annotation|@
 name|Nonnull
