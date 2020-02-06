@@ -6837,6 +6837,10 @@ name|ProjectMergeRule
 argument_list|(
 literal|true
 argument_list|,
+name|ProjectMergeRule
+operator|.
+name|DEFAULT_BLOAT
+argument_list|,
 name|RelBuilder
 operator|.
 name|proto

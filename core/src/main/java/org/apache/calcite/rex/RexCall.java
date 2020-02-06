@@ -288,6 +288,11 @@ specifier|final
 name|RelDataType
 name|type
 decl_stmt|;
+specifier|public
+specifier|final
+name|int
+name|nodeCount
+decl_stmt|;
 comment|/**    * Simple binary operators are those operators which expects operands from the same Domain.    *    *<p>Example: simple comparisions ({@code =}, {@code<}).    *    *<p>Note: it does not contain {@code IN} because that is defined on D x D^n.    */
 specifier|private
 specifier|static
@@ -408,6 +413,21 @@ name|ImmutableList
 operator|.
 name|copyOf
 argument_list|(
+name|operands
+argument_list|)
+expr_stmt|;
+name|this
+operator|.
+name|nodeCount
+operator|=
+name|RexUtil
+operator|.
+name|nodeCount
+argument_list|(
+literal|1
+argument_list|,
+name|this
+operator|.
 name|operands
 argument_list|)
 expr_stmt|;
@@ -1683,6 +1703,17 @@ parameter_list|()
 block|{
 return|return
 name|op
+return|;
+block|}
+annotation|@
+name|Override
+specifier|public
+name|int
+name|nodeCount
+parameter_list|()
+block|{
+return|return
+name|nodeCount
 return|;
 block|}
 comment|/**    * Creates a new call to the same operator with different operands.    *    * @param type     Return type    * @param operands Operands to call    * @return New call    */

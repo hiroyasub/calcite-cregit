@@ -214,6 +214,15 @@ name|ProjectMergeRule
 extends|extends
 name|RelOptRule
 block|{
+comment|/** Default amount by which complexity is allowed to increase. */
+specifier|public
+specifier|static
+specifier|final
+name|int
+name|DEFAULT_BLOAT
+init|=
+literal|100
+decl_stmt|;
 specifier|public
 specifier|static
 specifier|final
@@ -224,6 +233,8 @@ operator|new
 name|ProjectMergeRule
 argument_list|(
 literal|true
+argument_list|,
+name|DEFAULT_BLOAT
 argument_list|,
 name|RelFactories
 operator|.
@@ -237,6 +248,12 @@ specifier|final
 name|boolean
 name|force
 decl_stmt|;
+comment|/** Limit how much complexity can increase during merging. */
+specifier|private
+specifier|final
+name|int
+name|bloat
+decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
 comment|/**    * Creates a ProjectMergeRule, specifying whether to always merge projects.    *    * @param force Whether to always merge projects    */
 specifier|public
@@ -244,6 +261,9 @@ name|ProjectMergeRule
 parameter_list|(
 name|boolean
 name|force
+parameter_list|,
+name|int
+name|bloat
 parameter_list|,
 name|RelBuilderFactory
 name|relBuilderFactory
@@ -286,6 +306,35 @@ operator|.
 name|force
 operator|=
 name|force
+expr_stmt|;
+name|this
+operator|.
+name|bloat
+operator|=
+name|bloat
+expr_stmt|;
+block|}
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
+specifier|public
+name|ProjectMergeRule
+parameter_list|(
+name|boolean
+name|force
+parameter_list|,
+name|RelBuilderFactory
+name|relBuilderFactory
+parameter_list|)
+block|{
+name|this
+argument_list|(
+name|force
+argument_list|,
+name|DEFAULT_BLOAT
+argument_list|,
+name|relBuilderFactory
+argument_list|)
 expr_stmt|;
 block|}
 annotation|@
@@ -505,7 +554,7 @@ name|newProjects
 init|=
 name|RelOptUtil
 operator|.
-name|pushPastProject
+name|pushPastProjectUnlessBloat
 argument_list|(
 name|topProject
 operator|.
@@ -513,8 +562,20 @@ name|getProjects
 argument_list|()
 argument_list|,
 name|bottomProject
+argument_list|,
+name|bloat
 argument_list|)
 decl_stmt|;
+if|if
+condition|(
+name|newProjects
+operator|==
+literal|null
+condition|)
+block|{
+comment|// Merged projects are significantly more complex. Do not merge.
+return|return;
+block|}
 specifier|final
 name|RelNode
 name|input

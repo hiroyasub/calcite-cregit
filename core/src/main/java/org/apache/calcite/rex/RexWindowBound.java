@@ -223,6 +223,16 @@ return|return
 name|this
 return|;
 block|}
+comment|/**    * Returns the number of nodes in this bound.    *    * @see RexNode#nodeCount()    */
+specifier|public
+name|int
+name|nodeCount
+parameter_list|()
+block|{
+return|return
+literal|1
+return|;
+block|}
 comment|/**    * Implements UNBOUNDED PRECEDING/FOLLOWING bound.    */
 specifier|private
 specifier|static
@@ -625,6 +635,25 @@ parameter_list|()
 block|{
 return|return
 name|offset
+return|;
+block|}
+annotation|@
+name|Override
+specifier|public
+name|int
+name|nodeCount
+parameter_list|()
+block|{
+return|return
+name|super
+operator|.
+name|nodeCount
+argument_list|()
+operator|+
+name|offset
+operator|.
+name|nodeCount
+argument_list|()
 return|;
 block|}
 annotation|@

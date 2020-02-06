@@ -451,6 +451,24 @@ name|arg
 argument_list|)
 return|;
 block|}
+annotation|@
+name|Override
+specifier|public
+name|int
+name|nodeCount
+parameter_list|()
+block|{
+return|return
+name|super
+operator|.
+name|nodeCount
+argument_list|()
+operator|+
+name|window
+operator|.
+name|nodeCount
+return|;
+block|}
 comment|/**    * Returns whether an expression contains an OVER clause.    */
 specifier|public
 specifier|static

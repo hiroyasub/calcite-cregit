@@ -419,6 +419,16 @@ argument_list|()
 return|;
 block|}
 block|}
+comment|/** Returns the number of nodes in this expression.    *    *<p>Leaf nodes, such as {@link RexInputRef} or {@link RexLiteral}, have    * a count of 1. Calls have a count of 1 plus the sum of their operands.    *    *<p>Node count is a measure of expression complexity that is used by some    * planner rules to prevent deeply nested expressions.    */
+specifier|public
+name|int
+name|nodeCount
+parameter_list|()
+block|{
+return|return
+literal|1
+return|;
+block|}
 comment|/**    * Accepts a visitor, dispatching to the right overloaded    * {@link RexVisitor#visitInputRef visitXxx} method.    *    *<p>Also see {@link RexUtil#apply(RexVisitor, java.util.List, RexNode)},    * which applies a visitor to several expressions simultaneously.    */
 specifier|public
 specifier|abstract

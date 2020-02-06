@@ -4500,10 +4500,10 @@ specifier|final
 name|int
 name|nodeCount
 init|=
-name|nodeCount
-argument_list|(
 name|cnf
-argument_list|)
+operator|.
+name|nodeCount
+argument_list|()
 decl_stmt|;
 name|assertThat
 argument_list|(

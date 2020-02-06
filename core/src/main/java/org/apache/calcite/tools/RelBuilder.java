@@ -6953,6 +6953,8 @@ literal|null
 argument_list|)
 expr_stmt|;
 block|}
+name|bloat
+label|:
 if|if
 condition|(
 name|frame
@@ -6961,8 +6963,12 @@ name|rel
 operator|instanceof
 name|Project
 operator|&&
-name|shouldMergeProject
+name|config
+operator|.
+name|bloat
 argument_list|()
+operator|>=
+literal|0
 condition|)
 block|{
 specifier|final
@@ -7070,13 +7076,31 @@ name|newNodes
 init|=
 name|RelOptUtil
 operator|.
-name|pushPastProject
+name|pushPastProjectUnlessBloat
 argument_list|(
 name|nodeList
 argument_list|,
 name|project
+argument_list|,
+name|config
+operator|.
+name|bloat
+argument_list|()
 argument_list|)
 decl_stmt|;
+if|if
+condition|(
+name|newNodes
+operator|==
+literal|null
+condition|)
+block|{
+comment|// The merged expression is more complex than the input expressions.
+comment|// Do not merge.
+break|break
+name|bloat
+break|;
+block|}
 comment|// Carefully build a list of fields, so that table aliases from the input
 comment|// can be seen for fields that are based on a RexInputRef.
 specifier|final
@@ -7781,6 +7805,8 @@ block|}
 comment|/** Whether to attempt to merge consecutive {@link Project} operators.    *    *<p>The default implementation returns {@code true};    * sub-classes may disable merge by overriding to return {@code false}. */
 annotation|@
 name|Experimental
+annotation|@
+name|Deprecated
 specifier|protected
 name|boolean
 name|shouldMergeProject
@@ -15871,6 +15897,30 @@ name|this
 argument_list|)
 return|;
 block|}
+comment|/** Controls whether to merge two {@link Project} operators when inlining      * expressions causes complexity to increase.      *      *<p>Usually merging projects is beneficial, but occasionally the      * result is more complex than the original projects. Consider:      *      *<pre>      * P: Project(a+b+c AS x, d+e+f AS y, g+h+i AS z)  # complexity 15      * Q: Project(x*y*z AS p, x-y-z AS q)              # complexity 10      * R: Project((a+b+c)*(d+e+f)*(g+h+i) AS s,      *            (a+b+c)-(d+e+f)-(g+h+i) AS t)        # complexity 34      *</pre>      *      * The complexity of an expression is the number of nodes (leaves and      * operators). For example, {@code a+b+c} has complexity 5 (3 field      * references and 2 calls):      *      *<pre>      *       +      *      /  \      *     +    c      *    / \      *   a   b      *</pre>      *      *<p>A negative value never allows merges.      *      *<p>A zero or positive value, {@code bloat}, allows a merge if complexity      * of the result is less than or equal to the sum of the complexity of the      * originals plus {@code bloat}.      *      *<p>The default value, 100, allows a moderate increase in complexity but      * prevents cases where complexity would run away into the millions and run      * out of memory. Moderate complexity is OK; the implementation, say via      * {@link org.apache.calcite.adapter.enumerable.EnumerableCalc}, will often      * gather common sub-expressions and compute them only once.      */
+annotation|@
+name|ImmutableBeans
+operator|.
+name|Property
+annotation|@
+name|ImmutableBeans
+operator|.
+name|IntDefault
+argument_list|(
+literal|100
+argument_list|)
+name|int
+name|bloat
+parameter_list|()
+function_decl|;
+comment|/** Sets {@link #bloat}. */
+name|Config
+name|withBloat
+parameter_list|(
+name|int
+name|bloat
+parameter_list|)
+function_decl|;
 comment|/** Whether {@link RelBuilder#aggregate} should eliminate duplicate      * aggregate calls; default true. */
 annotation|@
 name|ImmutableBeans
