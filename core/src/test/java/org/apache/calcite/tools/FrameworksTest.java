@@ -3637,11 +3637,9 @@ name|Class
 name|clazz
 parameter_list|)
 block|{
-throw|throw
-operator|new
-name|UnsupportedOperationException
-argument_list|()
-throw|;
+return|return
+literal|null
+return|;
 block|}
 block|}
 end_class

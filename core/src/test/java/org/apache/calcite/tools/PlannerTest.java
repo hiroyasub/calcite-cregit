@@ -1438,7 +1438,7 @@ literal|"LogicalProject(empid=[$0], deptno=[$1], name=[$2], salary=[$3], commiss
 operator|+
 literal|"  LogicalFilter(condition=[LIKE($2, '%e%')])\n"
 operator|+
-literal|"    EnumerableTableScan(table=[[hr, emps]])\n"
+literal|"    LogicalTableScan(table=[[hr, emps]])\n"
 argument_list|)
 expr_stmt|;
 block|}
@@ -1557,7 +1557,7 @@ literal|"LogicalSort(sort0=[$1], dir0=[ASC], offset=[10])\n"
 operator|+
 literal|"  LogicalProject(empid=[$0], deptno=[$1], name=[$2], salary=[$3], commission=[$4])\n"
 operator|+
-literal|"    EnumerableTableScan(table=[[hr, emps]])\n"
+literal|"    LogicalTableScan(table=[[hr, emps]])\n"
 argument_list|)
 expr_stmt|;
 block|}
@@ -2571,6 +2571,10 @@ name|INSTANCE
 argument_list|,
 name|EnumerableRules
 operator|.
+name|ENUMERABLE_TABLE_SCAN_RULE
+argument_list|,
+name|EnumerableRules
+operator|.
 name|ENUMERABLE_FILTER_RULE
 argument_list|,
 name|EnumerableRules
@@ -3325,6 +3329,10 @@ name|INSTANCE
 argument_list|,
 name|EnumerableRules
 operator|.
+name|ENUMERABLE_TABLE_SCAN_RULE
+argument_list|,
+name|EnumerableRules
+operator|.
 name|ENUMERABLE_PROJECT_RULE
 argument_list|,
 name|EnumerableRules
@@ -3457,6 +3465,10 @@ argument_list|,
 name|SortProjectTransposeRule
 operator|.
 name|INSTANCE
+argument_list|,
+name|EnumerableRules
+operator|.
+name|ENUMERABLE_TABLE_SCAN_RULE
 argument_list|,
 name|EnumerableRules
 operator|.
@@ -3778,6 +3790,10 @@ name|INSTANCE
 argument_list|,
 name|EnumerableRules
 operator|.
+name|ENUMERABLE_TABLE_SCAN_RULE
+argument_list|,
+name|EnumerableRules
+operator|.
 name|ENUMERABLE_PROJECT_RULE
 argument_list|,
 name|EnumerableRules
@@ -3932,6 +3948,10 @@ name|RuleSets
 operator|.
 name|ofList
 argument_list|(
+name|EnumerableRules
+operator|.
+name|ENUMERABLE_TABLE_SCAN_RULE
+argument_list|,
 name|EnumerableRules
 operator|.
 name|ENUMERABLE_PROJECT_RULE
@@ -4156,6 +4176,10 @@ name|INSTANCE
 argument_list|,
 name|EnumerableRules
 operator|.
+name|ENUMERABLE_TABLE_SCAN_RULE
+argument_list|,
+name|EnumerableRules
+operator|.
 name|ENUMERABLE_FILTER_RULE
 argument_list|,
 name|EnumerableRules
@@ -4306,6 +4330,10 @@ argument_list|(
 name|FilterMergeRule
 operator|.
 name|INSTANCE
+argument_list|,
+name|EnumerableRules
+operator|.
+name|ENUMERABLE_TABLE_SCAN_RULE
 argument_list|,
 name|EnumerableRules
 operator|.
@@ -4551,6 +4579,10 @@ name|rule1
 argument_list|,
 name|EnumerableRules
 operator|.
+name|ENUMERABLE_TABLE_SCAN_RULE
+argument_list|,
+name|EnumerableRules
+operator|.
 name|ENUMERABLE_FILTER_RULE
 argument_list|,
 name|EnumerableRules
@@ -4774,6 +4806,10 @@ argument_list|(
 name|FilterMergeRule
 operator|.
 name|INSTANCE
+argument_list|,
+name|EnumerableRules
+operator|.
+name|ENUMERABLE_TABLE_SCAN_RULE
 argument_list|,
 name|EnumerableRules
 operator|.
@@ -6810,7 +6846,7 @@ literal|"LogicalSort(sort0=[$0], dir0=[ASC])\n"
 operator|+
 literal|"  LogicalProject(psPartkey=[$0])\n"
 operator|+
-literal|"    EnumerableTableScan(table=[[tpch, partsupp]])\n"
+literal|"    LogicalTableScan(table=[[tpch, partsupp]])\n"
 argument_list|)
 argument_list|)
 expr_stmt|;

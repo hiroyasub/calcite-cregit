@@ -12248,11 +12248,11 @@ literal|"LogicalProject(deptno=[$1])\n"
 operator|+
 literal|"  LogicalFilter(condition=[<($0, 150)])\n"
 operator|+
-literal|"    EnumerableTableScan(table=[[hr, emps]])\n"
+literal|"    LogicalTableScan(table=[[hr, emps]])\n"
 operator|+
 literal|"})])\n"
 operator|+
-literal|"    EnumerableTableScan(table=[[hr, depts]])"
+literal|"    LogicalTableScan(table=[[hr, depts]])"
 argument_list|)
 operator|.
 name|explainContains
@@ -14127,11 +14127,11 @@ literal|"  LogicalJoin(condition=[true], joinType=[inner])\n"
 operator|+
 literal|"    LogicalProject(DUMMY=[0])\n"
 operator|+
-literal|"      EnumerableTableScan(table=[[hr, emps]])\n"
+literal|"      LogicalTableScan(table=[[hr, emps]])\n"
 operator|+
 literal|"    LogicalProject(DUMMY=[0])\n"
 operator|+
-literal|"      EnumerableTableScan(table=[[hr, depts]])"
+literal|"      LogicalTableScan(table=[[hr, depts]])"
 argument_list|)
 expr_stmt|;
 block|}
@@ -16524,7 +16524,7 @@ literal|"  LogicalAggregate(group=[{0, 1}], agg#0=[COUNT($2)])\n"
 operator|+
 literal|"    LogicalProject(deptno=[$1], name=[$2], commission=[$4])\n"
 operator|+
-literal|"      EnumerableTableScan(table=[[hr, emps]])\n"
+literal|"      LogicalTableScan(table=[[hr, emps]])\n"
 argument_list|)
 expr_stmt|;
 block|}
@@ -16583,7 +16583,7 @@ literal|"  LogicalFilter(condition=[>($0, 10)])\n"
 operator|+
 literal|"    LogicalProject(empid=[$0], deptno=[$1], name=[$2], commission=[$4])\n"
 operator|+
-literal|"      EnumerableTableScan(table=[[hr, emps]])\n"
+literal|"      LogicalTableScan(table=[[hr, emps]])\n"
 argument_list|)
 expr_stmt|;
 block|}
@@ -17536,11 +17536,11 @@ literal|"  LogicalFilter(condition=[EXISTS({\n"
 operator|+
 literal|"LogicalFilter(condition=[=($cor0.deptno, $0)])\n"
 operator|+
-literal|"  EnumerableTableScan(table=[[hr, depts]])\n"
+literal|"  LogicalTableScan(table=[[hr, depts]])\n"
 operator|+
 literal|"})], variablesSet=[[$cor0]])\n"
 operator|+
-literal|"    EnumerableTableScan(table=[[hr, emps]])\n"
+literal|"    LogicalTableScan(table=[[hr, emps]])\n"
 decl_stmt|;
 name|CalciteAssert
 operator|.
@@ -28837,7 +28837,7 @@ literal|"patternDefinitions=[[=(CAST(PREV(UP.$0, 0)):INTEGER NOT NULL, 100)]], "
 operator|+
 literal|"inputFields=[[empid, deptno, name, salary, commission]])\n"
 operator|+
-literal|"    EnumerableTableScan(table=[[hr, emps]])\n"
+literal|"    LogicalTableScan(table=[[hr, emps]])\n"
 decl_stmt|;
 specifier|final
 name|String
@@ -28942,7 +28942,7 @@ literal|"patternDefinitions=[[<(PREV(UP.$4, 0), PREV(UP.$4, 1))]], "
 operator|+
 literal|"inputFields=[[empid, deptno, name, salary, commission]])\n"
 operator|+
-literal|"    EnumerableTableScan(table=[[hr, emps]])\n"
+literal|"    LogicalTableScan(table=[[hr, emps]])\n"
 decl_stmt|;
 specifier|final
 name|String

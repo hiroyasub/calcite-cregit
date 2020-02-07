@@ -539,20 +539,6 @@ name|calcite
 operator|.
 name|tools
 operator|.
-name|FrameworkConfig
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|tools
-operator|.
 name|Frameworks
 import|;
 end_import
@@ -17635,41 +17621,6 @@ parameter_list|()
 throws|throws
 name|SQLException
 block|{
-specifier|final
-name|RelOptTable
-operator|.
-name|ViewExpander
-name|viewExpander
-init|=
-parameter_list|(
-name|rowType
-parameter_list|,
-name|queryString
-parameter_list|,
-name|schemaPath
-parameter_list|,
-name|viewPath
-parameter_list|)
-lambda|->
-literal|null
-decl_stmt|;
-specifier|final
-name|RelFactories
-operator|.
-name|TableScanFactory
-name|tableScanFactory
-init|=
-name|RelFactories
-operator|.
-name|expandingScanFactory
-argument_list|(
-name|viewExpander
-argument_list|,
-name|RelFactories
-operator|.
-name|DEFAULT_TABLE_SCAN_FACTORY
-argument_list|)
-decl_stmt|;
 try|try
 init|(
 name|Connection
@@ -17683,7 +17634,8 @@ literal|"jdbc:calcite:"
 argument_list|)
 init|)
 block|{
-comment|// First, use a non-expanding RelBuilder. Plan contains LogicalTableScan.
+comment|// RelBuilder expands as default. Plan contains JdbcTableScan,
+comment|// because RelBuilder.scan has called RelOptTable.toRel.
 specifier|final
 name|Frameworks
 operator|.
@@ -17715,7 +17667,7 @@ name|expected
 init|=
 literal|"LogicalFilter(condition=[>($2, 10)])\n"
 operator|+
-literal|"  LogicalTableScan(table=[[JDBC_SCOTT, EMP]])\n"
+literal|"  JdbcTableScan(table=[[JDBC_SCOTT, EMP]])\n"
 decl_stmt|;
 name|checkExpandTable
 argument_list|(
@@ -17724,56 +17676,6 @@ argument_list|,
 name|hasTree
 argument_list|(
 name|expected
-argument_list|)
-argument_list|)
-expr_stmt|;
-comment|// Next, use an expanding RelBuilder. Plan contains JdbcTableScan,
-comment|// because RelBuilder.scan has called RelOptTable.toRel.
-specifier|final
-name|FrameworkConfig
-name|config
-init|=
-name|configBuilder
-operator|.
-name|context
-argument_list|(
-name|Contexts
-operator|.
-name|of
-argument_list|(
-name|tableScanFactory
-argument_list|)
-argument_list|)
-operator|.
-name|build
-argument_list|()
-decl_stmt|;
-specifier|final
-name|RelBuilder
-name|builder2
-init|=
-name|RelBuilder
-operator|.
-name|create
-argument_list|(
-name|config
-argument_list|)
-decl_stmt|;
-specifier|final
-name|String
-name|expected2
-init|=
-literal|"LogicalFilter(condition=[>($2, 10)])\n"
-operator|+
-literal|"  JdbcTableScan(table=[[JDBC_SCOTT, EMP]])\n"
-decl_stmt|;
-name|checkExpandTable
-argument_list|(
-name|builder2
-argument_list|,
-name|hasTree
-argument_list|(
-name|expected2
 argument_list|)
 argument_list|)
 expr_stmt|;

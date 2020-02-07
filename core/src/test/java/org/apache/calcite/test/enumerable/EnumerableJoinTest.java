@@ -1081,17 +1081,13 @@ literal|"    EnumerableSort(sort0=[$0], dir0=[ASC])\n"
 operator|+
 literal|"      EnumerableCalc(expr#0..3=[{inputs}], proj#0..1=[{exprs}])\n"
 operator|+
-literal|"        EnumerableInterpreter\n"
-operator|+
-literal|"          BindableTableScan(table=[[s, depts]])\n"
+literal|"        EnumerableTableScan(table=[[s, depts]])\n"
 operator|+
 literal|"    EnumerableSort(sort0=[$1], dir0=[ASC])\n"
 operator|+
 literal|"      EnumerableCalc(expr#0..4=[{inputs}], proj#0..2=[{exprs}])\n"
 operator|+
-literal|"        EnumerableInterpreter\n"
-operator|+
-literal|"          BindableTableScan(table=[[s, emps]])\n"
+literal|"        EnumerableTableScan(table=[[s, emps]])\n"
 argument_list|)
 operator|.
 name|returnsUnordered

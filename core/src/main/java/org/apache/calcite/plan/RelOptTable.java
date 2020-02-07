@@ -297,7 +297,7 @@ argument_list|>
 name|getReferentialConstraints
 parameter_list|()
 function_decl|;
-comment|/**    * Generates code for this table.    *    * @param clazz The desired collection class; for example {@code Queryable}.    */
+comment|/**    * Generates code for this table.    *    * @param clazz The desired collection class; for example {@code Queryable}.    *    * @return the code for the table, or null if code generation is not supported    */
 name|Expression
 name|getExpression
 parameter_list|(

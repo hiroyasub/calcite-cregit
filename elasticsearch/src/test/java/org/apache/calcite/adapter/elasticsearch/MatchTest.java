@@ -1258,7 +1258,7 @@ literal|"LogicalFilter(condition=[CONTAINS($1, 'waltham')])\n"
 operator|+
 literal|"  LogicalProject(_MAP=[$0], city=[ITEM($0, 'city')])\n"
 operator|+
-literal|"    LogicalTableScan(table=[[elastic, "
+literal|"    ElasticsearchTableScan(table=[[elastic, "
 operator|+
 name|ZIPS
 operator|+

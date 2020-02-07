@@ -134,10 +134,13 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Planner rule that converts a  * {@link org.apache.calcite.rel.logical.LogicalTableScan} to the result  * of calling {@link RelOptTable#toRel}.  */
+comment|/**  * Planner rule that converts a  * {@link org.apache.calcite.rel.logical.LogicalTableScan} to the result  * of calling {@link RelOptTable#toRel}.  *  * @deprecated {@code org.apache.calcite.rel.core.RelFactories.TableScanFactoryImpl}  * has called {@link RelOptTable#toRel(RelOptTable.ToRelContext)}.  */
 end_comment
 
 begin_class
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
 specifier|public
 class|class
 name|TableScanRule

@@ -10236,15 +10236,6 @@ name|planner
 operator|.
 name|addRule
 argument_list|(
-name|Bindables
-operator|.
-name|BINDABLE_TABLE_SCAN_RULE
-argument_list|)
-expr_stmt|;
-name|planner
-operator|.
-name|addRule
-argument_list|(
 name|ProjectTableScanRule
 operator|.
 name|INSTANCE
