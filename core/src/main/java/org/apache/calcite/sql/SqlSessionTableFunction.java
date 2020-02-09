@@ -96,25 +96,25 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * SqlHopTableFunction implements an operator for hopping. It allows four parameters:  * 1. a table.  * 2. a descriptor to provide a watermarked column name from the input table.  * 3. an interval parameter to specify the length of window shifting.  * 4. an interval parameter to specify the length of window size.  */
+comment|/**  * SqlSessionTableFunction implements an operator for per-key sessionization. It allows  * four parameters:  * 1. a table.  * 2. a descriptor to provide a watermarked column name from the input table.  * 3. a descriptor to provide a column as key, on which sessionization will be applied.  * 4. an interval parameter to specify a inactive activity gap to break sessions.  */
 end_comment
 
 begin_class
 specifier|public
 class|class
-name|SqlHopTableFunction
+name|SqlSessionTableFunction
 extends|extends
 name|SqlWindowTableFunction
 block|{
 specifier|public
-name|SqlHopTableFunction
+name|SqlSessionTableFunction
 parameter_list|()
 block|{
 name|super
 argument_list|(
 name|SqlKind
 operator|.
-name|HOP
+name|SESSION
 operator|.
 name|name
 argument_list|()
@@ -255,30 +255,26 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 specifier|final
-name|RelDataType
-name|type2
+name|SqlNode
+name|operand2
 init|=
-name|validator
-operator|.
-name|getValidatedNodeType
-argument_list|(
 name|callBinding
 operator|.
 name|operand
 argument_list|(
 literal|2
 argument_list|)
-argument_list|)
 decl_stmt|;
 if|if
 condition|(
-operator|!
-name|SqlTypeUtil
+name|operand2
 operator|.
-name|isInterval
-argument_list|(
-name|type2
-argument_list|)
+name|getKind
+argument_list|()
+operator|!=
+name|SqlKind
+operator|.
+name|DESCRIPTOR
 condition|)
 block|{
 return|return
@@ -290,6 +286,26 @@ name|throwOnFailure
 argument_list|)
 return|;
 block|}
+name|validateColumnNames
+argument_list|(
+name|validator
+argument_list|,
+name|type
+operator|.
+name|getFieldNames
+argument_list|()
+argument_list|,
+operator|(
+operator|(
+name|SqlCall
+operator|)
+name|operand2
+operator|)
+operator|.
+name|getOperandList
+argument_list|()
+argument_list|)
+expr_stmt|;
 specifier|final
 name|RelDataType
 name|type3
@@ -346,7 +362,7 @@ argument_list|()
 operator|+
 literal|"(TABLE table_name, DESCRIPTOR(col), "
 operator|+
-literal|"datetime interval, datetime interval)"
+literal|"DESCRIPTOR(col), datetime interval)"
 return|;
 block|}
 block|}

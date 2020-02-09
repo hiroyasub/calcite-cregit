@@ -435,6 +435,20 @@ name|calcite
 operator|.
 name|sql
 operator|.
+name|SqlSessionTableFunction
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
 name|SqlSetOperator
 import|;
 end_import
@@ -6865,26 +6879,37 @@ operator|new
 name|SqlDescriptorOperator
 argument_list|()
 decl_stmt|;
-comment|/** TUMBLE as a table-value function. */
+comment|/** TUMBLE as a table function. */
 specifier|public
 specifier|static
 specifier|final
 name|SqlFunction
-name|TUMBLE_TVF
+name|TUMBLE
 init|=
 operator|new
 name|SqlTumbleTableFunction
 argument_list|()
 decl_stmt|;
-comment|/** HOP as a table-value function. */
+comment|/** HOP as a table function. */
 specifier|public
 specifier|static
 specifier|final
 name|SqlFunction
-name|HOP_TVF
+name|HOP
 init|=
 operator|new
 name|SqlHopTableFunction
+argument_list|()
+decl_stmt|;
+comment|/** SESSION as a table function. */
+specifier|public
+specifier|static
+specifier|final
+name|SqlFunction
+name|SESSION
+init|=
+operator|new
+name|SqlSessionTableFunction
 argument_list|()
 decl_stmt|;
 comment|/** The {@code TUMBLE} group function.    *    *<p>This operator is named "$TUMBLE" (not "TUMBLE") because it is created    * directly by the parser, not by looking up an operator by name.    *    *<p>Why did we add TUMBLE to the parser? Because we plan to support TUMBLE    * as a table function (see [CALCITE-3272]); "TUMBLE" as a name will only be    * used by the TUMBLE table function.    *    *<p>After the TUMBLE table function is introduced, we plan to deprecate    * this TUMBLE group function, and in fact all group functions. See    * [CALCITE-3340] for details.    */
@@ -6892,7 +6917,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlGroupedWindowFunction
-name|TUMBLE
+name|TUMBLE_OLD
 init|=
 operator|new
 name|SqlGroupedWindowFunction
@@ -6959,7 +6984,7 @@ specifier|final
 name|SqlGroupedWindowFunction
 name|TUMBLE_START
 init|=
-name|TUMBLE
+name|TUMBLE_OLD
 operator|.
 name|auxiliary
 argument_list|(
@@ -6975,7 +7000,7 @@ specifier|final
 name|SqlGroupedWindowFunction
 name|TUMBLE_END
 init|=
-name|TUMBLE
+name|TUMBLE_OLD
 operator|.
 name|auxiliary
 argument_list|(
@@ -6989,7 +7014,7 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlGroupedWindowFunction
-name|HOP
+name|HOP_OLD
 init|=
 operator|new
 name|SqlGroupedWindowFunction
@@ -7056,7 +7081,7 @@ specifier|final
 name|SqlGroupedWindowFunction
 name|HOP_START
 init|=
-name|HOP
+name|HOP_OLD
 operator|.
 name|auxiliary
 argument_list|(
@@ -7072,7 +7097,7 @@ specifier|final
 name|SqlGroupedWindowFunction
 name|HOP_END
 init|=
-name|HOP
+name|HOP_OLD
 operator|.
 name|auxiliary
 argument_list|(
@@ -7086,17 +7111,12 @@ specifier|public
 specifier|static
 specifier|final
 name|SqlGroupedWindowFunction
-name|SESSION
+name|SESSION_OLD
 init|=
 operator|new
 name|SqlGroupedWindowFunction
 argument_list|(
-name|SqlKind
-operator|.
-name|SESSION
-operator|.
-name|name
-argument_list|()
+literal|"$SESSION"
 argument_list|,
 name|SqlKind
 operator|.
@@ -7158,7 +7178,7 @@ specifier|final
 name|SqlGroupedWindowFunction
 name|SESSION_START
 init|=
-name|SESSION
+name|SESSION_OLD
 operator|.
 name|auxiliary
 argument_list|(
@@ -7174,7 +7194,7 @@ specifier|final
 name|SqlGroupedWindowFunction
 name|SESSION_END
 init|=
-name|SESSION
+name|SESSION_OLD
 operator|.
 name|auxiliary
 argument_list|(
@@ -7787,7 +7807,7 @@ case|case
 name|TUMBLE_END
 case|:
 return|return
-name|TUMBLE
+name|TUMBLE_OLD
 return|;
 case|case
 name|HOP_START
@@ -7796,7 +7816,7 @@ case|case
 name|HOP_END
 case|:
 return|return
-name|HOP
+name|HOP_OLD
 return|;
 case|case
 name|SESSION_START
@@ -7805,7 +7825,7 @@ case|case
 name|SESSION_END
 case|:
 return|return
-name|SESSION
+name|SESSION_OLD
 return|;
 default|default:
 return|return

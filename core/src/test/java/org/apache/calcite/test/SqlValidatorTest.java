@@ -39922,7 +39922,7 @@ literal|"ROWTIME, INTEGER PRODUCTID, INTEGER ORDERID\\)>,<COLUMN_LIST>,<INTERVAL
 operator|+
 literal|"<CHAR\\(4\\)>\\)'. Supported form\\(s\\): HOP\\(TABLE table_name, DESCRIPTOR\\("
 operator|+
-literal|"col1, col2 \\.\\.\\.\\), datetime interval, datetime interval\\)"
+literal|"col\\), datetime interval, datetime interval\\)"
 argument_list|)
 expr_stmt|;
 name|sql
@@ -39940,7 +39940,7 @@ literal|"ROWTIME, INTEGER PRODUCTID, INTEGER ORDERID\\)>,<COLUMN_LIST>,<CHAR\\(4
 operator|+
 literal|"<INTERVAL HOUR>\\)'. Supported form\\(s\\): HOP\\(TABLE table_name, DESCRIPTOR\\("
 operator|+
-literal|"col1, col2 \\.\\.\\.\\), datetime interval, datetime interval\\)"
+literal|"col\\), datetime interval, datetime interval\\)"
 argument_list|)
 expr_stmt|;
 name|sql
@@ -39958,7 +39958,7 @@ literal|"ROWTIME, INTEGER PRODUCTID, INTEGER ORDERID\\)>,<CHAR\\(4\\)>,<INTERVAL
 operator|+
 literal|"<INTERVAL HOUR>\\)'. Supported form\\(s\\): HOP\\(TABLE table_name, DESCRIPTOR\\("
 operator|+
-literal|"col1, col2 \\.\\.\\.\\), datetime interval, datetime interval\\)"
+literal|"col\\), datetime interval, datetime interval\\)"
 argument_list|)
 expr_stmt|;
 name|sql
@@ -39966,6 +39966,102 @@ argument_list|(
 literal|"select * from table(\n"
 operator|+
 literal|"hop(TABLE ^tabler_not_exist^, descriptor(rowtime), interval '2' hour, interval '1' hour))"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Object 'TABLER_NOT_EXIST' not found"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSessionTableFunction
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"select * from table(\n"
+operator|+
+literal|"session(table orders, descriptor(rowtime), descriptor(productid), interval '1' hour))"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select * from table(\n"
+operator|+
+literal|"^session(table orders, descriptor(rowtime), interval '2' hour)^)"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Invalid number of arguments to function 'SESSION'. Was expecting 4 arguments"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select * from table(\n"
+operator|+
+literal|"^session(table orders, descriptor(rowtime), descriptor(productid), 'test')^)"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Cannot apply 'SESSION' to arguments of type 'SESSION\\(<RECORDTYPE\\(TIMESTAMP\\("
+operator|+
+literal|"0\\) ROWTIME, INTEGER PRODUCTID, INTEGER ORDERID\\)>,<COLUMN_LIST>,<COLUMN_LIST>, "
+operator|+
+literal|"<CHAR\\(4\\)>\\)'. Supported form\\(s\\): SESSION\\(TABLE table_name, DESCRIPTOR\\("
+operator|+
+literal|"col\\), DESCRIPTOR\\(col\\), datetime interval\\)"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select * from table(\n"
+operator|+
+literal|"^session(table orders, descriptor(rowtime), 'test', interval '2' hour)^)"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Cannot apply 'SESSION' to arguments of type 'SESSION\\(<RECORDTYPE\\(TIMESTAMP\\("
+operator|+
+literal|"0\\) ROWTIME, INTEGER PRODUCTID, INTEGER ORDERID\\)>,<COLUMN_LIST>,<CHAR\\(4\\)>, "
+operator|+
+literal|"<INTERVAL HOUR>\\)'. Supported form\\(s\\): SESSION\\(TABLE table_name, DESCRIPTOR\\("
+operator|+
+literal|"col\\), DESCRIPTOR\\(col\\), datetime interval\\)"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select * from table(\n"
+operator|+
+literal|"^session(table orders, 'test', descriptor(productid), interval '2' hour)^)"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Cannot apply 'SESSION' to arguments of type 'SESSION\\(<RECORDTYPE\\(TIMESTAMP\\("
+operator|+
+literal|"0\\) ROWTIME, INTEGER PRODUCTID, INTEGER ORDERID\\)>,<CHAR\\(4\\)>,<COLUMN_LIST>, "
+operator|+
+literal|"<INTERVAL HOUR>\\)'. Supported form\\(s\\): SESSION\\(TABLE table_name, DESCRIPTOR\\("
+operator|+
+literal|"col\\), DESCRIPTOR\\(col\\), datetime interval\\)"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select * from table(\n"
+operator|+
+literal|"session(TABLE ^tabler_not_exist^, descriptor(rowtime), descriptor(productid), interval '1' hour))"
 argument_list|)
 operator|.
 name|fails

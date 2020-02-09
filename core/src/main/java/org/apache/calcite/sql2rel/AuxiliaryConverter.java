@@ -88,7 +88,7 @@ import|;
 end_import
 
 begin_comment
-comment|/** Converts an expression for a group window function (e.g. TUMBLE)  * into an expression for an auxiliary group function (e.g. TUMBLE_START).  *  * @see SqlStdOperatorTable#TUMBLE  */
+comment|/** Converts an expression for a group window function (e.g. TUMBLE)  * into an expression for an auxiliary group function (e.g. TUMBLE_START).  *  * @see SqlStdOperatorTable#TUMBLE_OLD  */
 end_comment
 
 begin_interface
