@@ -673,6 +673,24 @@ argument_list|)
 expr_stmt|;
 return|return;
 block|}
+if|if
+condition|(
+name|isRuleExcluded
+argument_list|()
+condition|)
+block|{
+name|LOGGER
+operator|.
+name|debug
+argument_list|(
+literal|"Rule [{}] not fired due to exclusion hint"
+argument_list|,
+name|getRule
+argument_list|()
+argument_list|)
+expr_stmt|;
+return|return;
+block|}
 for|for
 control|(
 name|int

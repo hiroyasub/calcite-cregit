@@ -129,7 +129,7 @@ operator|.
 name|CALC
 argument_list|)
 decl_stmt|;
-comment|/**    * Create a hint strategy from a specific matcher whose rules are totally customized.    *    * @param matcher The strategy matcher    * @return A ExplicitHintStrategy instance.    */
+comment|/**    * Creates a hint strategy from a specific matcher whose rules are totally customized.    *    * @param matcher The strategy matcher    * @return A ExplicitHintStrategy instance.    */
 specifier|public
 specifier|static
 name|HintStrategy
