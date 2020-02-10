@@ -8707,7 +8707,8 @@ return|return
 literal|false
 return|;
 block|}
-specifier|private
+comment|/** Returns the highest clause that is in use. */
+specifier|public
 name|Clause
 name|maxClause
 parameter_list|()
