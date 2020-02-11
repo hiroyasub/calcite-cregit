@@ -179,6 +179,22 @@ name|rel
 operator|.
 name|core
 operator|.
+name|JoinRelType
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|core
+operator|.
 name|Project
 import|;
 end_import
@@ -1262,7 +1278,7 @@ argument_list|,
 literal|"PruneEmptyAggregate"
 argument_list|)
 decl_stmt|;
-comment|/**    * Rule that converts a {@link org.apache.calcite.rel.core.Join}    * to empty if its left child is empty.    *    *<p>Examples:    *    *<ul>    *<li>Join(Empty, Scan(Dept), INNER) becomes Empty    *</ul>    */
+comment|/**    * Rule that converts a {@link org.apache.calcite.rel.core.Join}    * to empty if its left child is empty.    *    *<p>Examples:    *    *<ul>    *<li>Join(Empty, Scan(Dept), INNER) becomes Empty    *<li>Join(Empty, Scan(Dept), LEFT) becomes Empty    *<li>Join(Empty, Scan(Dept), SEMI) becomes Empty    *<li>Join(Empty, Scan(Dept), ANTI) becomes Empty    *</ul>    */
 specifier|public
 specifier|static
 specifier|final
@@ -1370,7 +1386,7 @@ expr_stmt|;
 block|}
 block|}
 decl_stmt|;
-comment|/**    * Rule that converts a {@link org.apache.calcite.rel.core.Join}    * to empty if its right child is empty.    *    *<p>Examples:    *    *<ul>    *<li>Join(Scan(Emp), Empty, INNER) becomes Empty    *</ul>    */
+comment|/**    * Rule that converts a {@link org.apache.calcite.rel.core.Join}    * to empty if its right child is empty.    *    *<p>Examples:    *    *<ul>    *<li>Join(Scan(Emp), Empty, INNER) becomes Empty    *<li>Join(Scan(Emp), Empty, RIGHT) becomes Empty    *<li>Join(Scan(Emp), Empty, SEMI) becomes Empty    *<li>Join(Scan(Emp), Empty, ANTI) becomes Scan(Emp)    *</ul>    */
 specifier|public
 specifier|static
 specifier|final
@@ -1452,6 +1468,44 @@ condition|)
 block|{
 comment|// "select * from emp left join dept" is not necessarily empty if
 comment|// dept is empty
+return|return;
+block|}
+if|if
+condition|(
+name|join
+operator|.
+name|getJoinType
+argument_list|()
+operator|==
+name|JoinRelType
+operator|.
+name|ANTI
+condition|)
+block|{
+comment|// "select * from emp anti join dept" is not necessarily empty if dept is empty
+if|if
+condition|(
+name|join
+operator|.
+name|analyzeCondition
+argument_list|()
+operator|.
+name|isEqui
+argument_list|()
+condition|)
+block|{
+comment|// In case of anti (equi) join: Join(X, Empty, ANTI) becomes X
+name|call
+operator|.
+name|transformTo
+argument_list|(
+name|join
+operator|.
+name|getLeft
+argument_list|()
+argument_list|)
+expr_stmt|;
+block|}
 return|return;
 block|}
 name|call
