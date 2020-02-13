@@ -3454,8 +3454,8 @@ decl_stmt|;
 comment|// UnknownAs.FALSE corresponds to x IS TRUE evaluation
 comment|// UnknownAs.TRUE to x IS NOT FALSE
 comment|// Note that both UnknownAs.TRUE and UnknownAs.FALSE only changes the meaning of Unknown
-comment|// (1) if we are already in UnknownAs.FALSE mode; x IS TRUE can be simiplified to x
-comment|// (2) similarily  in UnknownAs.TRUE mode ; x IS NOT FALSE can be simplified to x
+comment|// (1) if we are already in UnknownAs.FALSE mode; x IS TRUE can be simplified to x
+comment|// (2) similarily in UnknownAs.TRUE mode; x IS NOT FALSE can be simplified to x
 comment|// (3) x IS FALSE could be rewritten to (NOT x) IS TRUE and from there the 1. rule applies
 comment|// (4) x IS NOT TRUE can be rewritten to (NOT x) IS NOT FALSE and from there the 2. rule applies
 if|if
@@ -8446,6 +8446,20 @@ argument_list|>
 name|clazz
 parameter_list|)
 block|{
+if|if
+condition|(
+name|predicates
+operator|.
+name|pulledUpPredicates
+operator|.
+name|isEmpty
+argument_list|()
+condition|)
+block|{
+return|return
+name|e
+return|;
+block|}
 specifier|final
 name|Comparison
 name|comparison
@@ -9291,7 +9305,6 @@ operator|.
 name|getValue
 argument_list|()
 decl_stmt|;
-comment|//noinspection ConstantConditions
 specifier|final
 name|Comparable
 name|comparable2
@@ -10584,12 +10597,6 @@ operator|==
 name|TimeUnit
 operator|.
 name|YEAR
-operator|||
-name|outer
-operator|==
-name|TimeUnit
-operator|.
-name|QUARTER
 return|;
 block|}
 return|return
@@ -10768,12 +10775,6 @@ argument_list|,
 name|v0
 argument_list|)
 argument_list|,
-operator|(
-name|List
-argument_list|<
-name|RexNode
-argument_list|>
-operator|)
 name|ImmutableList
 operator|.
 name|of
@@ -10864,12 +10865,6 @@ argument_list|(
 name|v0
 argument_list|)
 argument_list|,
-operator|(
-name|List
-argument_list|<
-name|RexNode
-argument_list|>
-operator|)
 name|ImmutableList
 operator|.
 name|of
@@ -11583,12 +11578,6 @@ name|of
 argument_list|(
 name|r
 argument_list|,
-operator|(
-name|List
-argument_list|<
-name|RexNode
-argument_list|>
-operator|)
 name|newBounds
 operator|.
 name|build
@@ -11673,12 +11662,6 @@ name|of
 argument_list|(
 name|r
 argument_list|,
-operator|(
-name|List
-argument_list|<
-name|RexNode
-argument_list|>
-operator|)
 name|newBounds
 operator|.
 name|build
