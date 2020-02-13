@@ -3984,16 +3984,17 @@ return|return
 literal|true
 return|;
 block|}
-comment|/**    * Removes cached metadata values for specified RelNode.    *    * @param rel RelNode whose cached metadata should be removed    */
+comment|/**    * Removes cached metadata values for specified RelNode.    *    * @param rel RelNode whose cached metadata should be removed    * @return true if cache for the provided RelNode was not empty    */
 specifier|public
 specifier|static
-name|void
+name|boolean
 name|clearCache
 parameter_list|(
 name|RelNode
 name|rel
 parameter_list|)
 block|{
+return|return
 name|rel
 operator|.
 name|getCluster
@@ -4006,7 +4007,7 @@ name|clearCache
 argument_list|(
 name|rel
 argument_list|)
-expr_stmt|;
+return|;
 block|}
 block|}
 end_class
