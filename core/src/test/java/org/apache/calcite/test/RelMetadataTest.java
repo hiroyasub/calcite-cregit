@@ -7559,6 +7559,9 @@ specifier|final
 name|MyRelMetadataQuery
 name|mq
 init|=
+operator|(
+name|MyRelMetadataQuery
+operator|)
 name|rel
 operator|.
 name|getCluster
@@ -8376,6 +8379,9 @@ specifier|final
 name|MyRelMetadataQuery
 name|mq
 init|=
+operator|(
+name|MyRelMetadataQuery
+operator|)
 name|rel
 operator|.
 name|getCluster
@@ -8669,6 +8675,9 @@ specifier|final
 name|MyRelMetadataQuery
 name|mq1
 init|=
+operator|(
+name|MyRelMetadataQuery
+operator|)
 name|rel
 operator|.
 name|getCluster
@@ -8735,6 +8744,19 @@ name|equalTo
 argument_list|(
 literal|5
 argument_list|)
+argument_list|)
+expr_stmt|;
+comment|// Resets the RelMetadataQuery to default.
+name|rel
+operator|.
+name|getCluster
+argument_list|()
+operator|.
+name|setMetadataQuerySupplier
+argument_list|(
+name|RelMetadataQuery
+operator|::
+name|instance
 argument_list|)
 expr_stmt|;
 block|}

@@ -675,7 +675,7 @@ return|return
 name|metadataFactory
 return|;
 block|}
-comment|/**    * Set up the customized {@link RelMetadataQuery} instance supplier that to    * use during rule planning.    *    *<p>Note that the {@code mqSupplier} should return    * a fresh new {@link RelMetadataQuery} instance because the instance would be    * cached in this cluster, and we may invalidate and re-generate it    * for each {@link RelOptRuleCall} cycle.    */
+comment|/**    * Sets up the customized {@link RelMetadataQuery} instance supplier that to    * use during rule planning.    *    *<p>Note that the {@code mqSupplier} should return    * a fresh new {@link RelMetadataQuery} instance because the instance would be    * cached in this cluster, and we may invalidate and re-generate it    * for each {@link RelOptRuleCall} cycle.    */
 specifier|public
 name|void
 name|setMetadataQuerySupplier
@@ -694,14 +694,9 @@ operator|=
 name|mqSupplier
 expr_stmt|;
 block|}
-comment|/** Returns the current RelMetadataQuery.    *    *<p>This method might be changed or moved in future.    * If you have a {@link RelOptRuleCall} available,    * for example if you are in a {@link RelOptRule#onMatch(RelOptRuleCall)}    * method, then use {@link RelOptRuleCall#getMetadataQuery()} instead. */
+comment|/**    * Returns the current RelMetadataQuery.    *    *<p>This method might be changed or moved in future.    * If you have a {@link RelOptRuleCall} available,    * for example if you are in a {@link RelOptRule#onMatch(RelOptRuleCall)}    * method, then use {@link RelOptRuleCall#getMetadataQuery()} instead. */
 specifier|public
-parameter_list|<
-name|M
-extends|extends
 name|RelMetadataQuery
-parameter_list|>
-name|M
 name|getMetadataQuery
 parameter_list|()
 block|{
@@ -722,15 +717,11 @@ name|get
 argument_list|()
 expr_stmt|;
 block|}
-comment|//noinspection unchecked
 return|return
-operator|(
-name|M
-operator|)
 name|mq
 return|;
 block|}
-comment|/**    * @return The supplier of RelMetadataQuery    */
+comment|/**    * Returns the supplier of RelMetadataQuery.    */
 specifier|public
 name|Supplier
 argument_list|<
@@ -756,10 +747,10 @@ operator|=
 literal|null
 expr_stmt|;
 block|}
-comment|/**    * Setup the hint propagation strategies to be used during rule planning.    *    *<p>Use<code>RelOptNode.getCluster().getHintStrategies()</code> to fetch    * the hint strategies.    *    *<p>Note that this method is only for internal use, the cluster {@code hintStrategies}    * would be always set up with the instance configured by    * {@link org.apache.calcite.sql2rel.SqlToRelConverter.ConfigBuilder}.    *    * @param hintStrategies The specified hint strategies to override the default one(empty)    */
+comment|/**    * Sets up the hint propagation strategies to be used during rule planning.    *    *<p>Use<code>RelOptNode.getCluster().getHintStrategies()</code> to fetch    * the hint strategies.    *    *<p>Note that this method is only for internal use, the cluster {@code hintStrategies}    * would be always set up with the instance configured by    * {@link org.apache.calcite.sql2rel.SqlToRelConverter.ConfigBuilder}.    *    * @param hintStrategies The specified hint strategies to override the default one(empty)    */
 specifier|public
-name|RelOptCluster
-name|withHintStrategies
+name|void
+name|setHintStrategies
 parameter_list|(
 name|HintStrategyTable
 name|hintStrategies
@@ -778,9 +769,6 @@ name|hintStrategies
 operator|=
 name|hintStrategies
 expr_stmt|;
-return|return
-name|this
-return|;
 block|}
 comment|/**    * Returns the hint strategies of this cluster. It is immutable during the whole planning phrase.    */
 specifier|public

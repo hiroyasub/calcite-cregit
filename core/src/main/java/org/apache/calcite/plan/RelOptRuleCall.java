@@ -582,14 +582,9 @@ name|rule
 argument_list|)
 return|;
 block|}
-comment|/**    * Returns the current RelMetadataQuery or its sub-class,    * to be used for instance by    * {@link RelOptRule#onMatch(RelOptRuleCall)}.    */
+comment|/**    * Returns the current RelMetadataQuery    * to be used for instance by    * {@link RelOptRule#onMatch(RelOptRuleCall)}.    */
 specifier|public
-parameter_list|<
-name|M
-extends|extends
 name|RelMetadataQuery
-parameter_list|>
-name|M
 name|getMetadataQuery
 parameter_list|()
 block|{
