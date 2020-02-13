@@ -1356,6 +1356,23 @@ decl_stmt|;
 if|if
 condition|(
 name|firstNonTrivial
+operator|==
+literal|1
+condition|)
+block|{
+name|pw
+operator|.
+name|item
+argument_list|(
+literal|"inputs"
+argument_list|,
+literal|"0"
+argument_list|)
+expr_stmt|;
+block|}
+if|else if
+condition|(
+name|firstNonTrivial
 operator|!=
 literal|0
 condition|)
