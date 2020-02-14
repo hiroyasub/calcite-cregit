@@ -1550,11 +1550,9 @@ name|TableScanFactory
 name|TABLE_SCAN_FACTORY
 init|=
 parameter_list|(
-name|cluster
+name|toRelContext
 parameter_list|,
 name|table
-parameter_list|,
-name|hints
 parameter_list|)
 lambda|->
 block|{
