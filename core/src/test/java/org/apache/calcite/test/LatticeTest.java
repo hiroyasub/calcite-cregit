@@ -1558,7 +1558,7 @@ argument_list|)
 argument_list|,
 name|containsString
 argument_list|(
-literal|"CannotPlanException"
+literal|"java.lang.AssertionError"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -1620,7 +1620,7 @@ literal|"LogicalProject(unit_sales=[$7], brand_name=[$10])\n"
 operator|+
 literal|"  LogicalProject(product_id=[$0], time_id=[$1], customer_id=[$2], promotion_id=[$3], store_id=[$4], store_sales=[$5], store_cost=[$6], unit_sales=[$7], product_class_id=[$8], product_id0=[$9], brand_name=[$10], product_name=[$11], SKU=[$12], SRP=[$13], gross_weight=[$14], net_weight=[$15], recyclable_package=[$16], low_fat=[$17], units_per_case=[$18], cases_per_pallet=[$19], shelf_width=[$20], shelf_height=[$21], shelf_depth=[$22])\n"
 operator|+
-literal|"    LogicalTableScan(table=[[adhoc, star]])\n"
+literal|"    StarTableScan(table=[[adhoc, star]])\n"
 argument_list|,
 name|counter
 argument_list|)
@@ -1710,14 +1710,14 @@ literal|"LogicalProject(brand_name=[$1], customer_id=[$0])\n"
 operator|+
 literal|"  LogicalAggregate(group=[{2, 10}])\n"
 operator|+
-literal|"    LogicalTableScan(table=[[adhoc, star]])\n"
+literal|"    StarTableScan(table=[[adhoc, star]])\n"
 argument_list|)
 argument_list|,
 name|containsStringLinux
 argument_list|(
 literal|"LogicalAggregate(group=[{2, 10}])\n"
 operator|+
-literal|"  LogicalTableScan(table=[[adhoc, star]])\n"
+literal|"  StarTableScan(table=[[adhoc, star]])\n"
 argument_list|)
 argument_list|)
 argument_list|)
@@ -3262,7 +3262,7 @@ literal|"LogicalProject(unit_sales=[$7], brand_name=[$10])\n"
 operator|+
 literal|"  LogicalProject(product_id=[$0], time_id=[$1], customer_id=[$2], promotion_id=[$3], store_id=[$4], store_sales=[$5], store_cost=[$6], unit_sales=[$7], product_class_id=[$8], product_id0=[$9], brand_name=[$10], product_name=[$11], SKU=[$12], SRP=[$13], gross_weight=[$14], net_weight=[$15], recyclable_package=[$16], low_fat=[$17], units_per_case=[$18], cases_per_pallet=[$19], shelf_width=[$20], shelf_height=[$21], shelf_depth=[$22])\n"
 operator|+
-literal|"    LogicalTableScan(table=[[adhoc, star]])\n"
+literal|"    StarTableScan(table=[[adhoc, star]])\n"
 argument_list|,
 name|counter
 argument_list|)
@@ -3434,7 +3434,7 @@ name|CalciteAssert
 operator|.
 name|checkRel
 argument_list|(
-literal|"EnumerableTableScan(table=[[mat, m0]])\n"
+literal|"LogicalTableScan(table=[[mat, m0]])\n"
 argument_list|,
 name|counter
 argument_list|)
