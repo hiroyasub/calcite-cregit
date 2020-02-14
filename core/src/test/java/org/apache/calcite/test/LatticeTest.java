@@ -1532,9 +1532,7 @@ literal|""
 operator|+
 literal|"LogicalAggregate(group=[{}], EXPR$0=[COUNT()])\n"
 operator|+
-literal|"  LogicalProject(DUMMY=[0])\n"
-operator|+
-literal|"    StarTableScan(table=[[adhoc, star]])\n"
+literal|"  StarTableScan(table=[[adhoc, star]])\n"
 argument_list|,
 name|counter
 argument_list|)
@@ -1558,7 +1556,7 @@ argument_list|)
 argument_list|,
 name|containsString
 argument_list|(
-literal|"java.lang.AssertionError"
+literal|"CannotPlanException"
 argument_list|)
 argument_list|)
 expr_stmt|;
