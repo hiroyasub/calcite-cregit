@@ -95,6 +95,20 @@ name|calcite
 operator|.
 name|rex
 operator|.
+name|RexExecutor
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rex
+operator|.
 name|RexExecutorImpl
 import|;
 end_import
@@ -358,7 +372,7 @@ name|RexBuilder
 name|builder
 decl_stmt|;
 specifier|final
-name|RexExecutorImpl
+name|RexExecutor
 name|executor
 decl_stmt|;
 specifier|final
@@ -371,7 +385,7 @@ parameter_list|(
 name|RexBuilder
 name|builder
 parameter_list|,
-name|RexExecutorImpl
+name|RexExecutor
 name|executor
 parameter_list|,
 name|RelDataType
@@ -1153,7 +1167,7 @@ specifier|final
 name|RexExecutable
 name|exec
 init|=
-name|executor
+name|RexExecutorImpl
 operator|.
 name|getExecutable
 argument_list|(

@@ -374,7 +374,7 @@ import|;
 end_import
 
 begin_comment
-comment|/** * Evaluates a {@link RexNode} expression. */
+comment|/**  * Evaluates a {@link RexNode} expression.  *  *<p>For this impl, all the public methods should be  * static except that it inherits from {@link RexExecutor}.  * This pretends that other code in the project assumes  * the executor instance is {@link RexExecutorImpl}. */
 end_comment
 
 begin_class
@@ -404,6 +404,7 @@ name|dataContext
 expr_stmt|;
 block|}
 specifier|private
+specifier|static
 name|String
 name|compile
 parameter_list|(
@@ -457,6 +458,7 @@ argument_list|)
 return|;
 block|}
 specifier|private
+specifier|static
 name|String
 name|compile
 parameter_list|(
@@ -736,6 +738,7 @@ return|;
 block|}
 comment|/**    * Creates an {@link RexExecutable} that allows to apply the    * generated code during query processing (filter, projection).    *    * @param rexBuilder Rex builder    * @param exps Expressions    * @param rowType describes the structure of the input row.    */
 specifier|public
+specifier|static
 name|RexExecutable
 name|getExecutable
 parameter_list|(
