@@ -422,6 +422,11 @@ return|;
 block|}
 comment|/** Tests {@link FileReader} URL instantiation - no path. */
 annotation|@
+name|Disabled
+argument_list|(
+literal|"[CALCITE-3800] FileReaderTest#testFileReaderUrlNoPath() timeout for AppVeyor test"
+argument_list|)
+annotation|@
 name|Test
 annotation|@
 name|RequiresNetwork
