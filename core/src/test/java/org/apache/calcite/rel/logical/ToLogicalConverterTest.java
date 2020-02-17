@@ -560,11 +560,6 @@ argument_list|(
 literal|false
 argument_list|)
 operator|.
-name|withConvertTableAccess
-argument_list|(
-literal|false
-argument_list|)
-operator|.
 name|build
 argument_list|()
 decl_stmt|;

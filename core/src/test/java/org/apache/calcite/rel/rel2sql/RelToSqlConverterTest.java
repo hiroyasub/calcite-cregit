@@ -987,11 +987,6 @@ argument_list|(
 literal|false
 argument_list|)
 operator|.
-name|withConvertTableAccess
-argument_list|(
-literal|false
-argument_list|)
-operator|.
 name|build
 argument_list|()
 decl_stmt|;
@@ -1008,11 +1003,6 @@ name|configBuilder
 argument_list|()
 operator|.
 name|withTrimUnusedFields
-argument_list|(
-literal|false
-argument_list|)
-operator|.
-name|withConvertTableAccess
 argument_list|(
 literal|false
 argument_list|)
