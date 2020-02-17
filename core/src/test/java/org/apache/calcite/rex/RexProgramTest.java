@@ -16315,7 +16315,7 @@ name|void
 name|testOrSimplificationNotWeakensCondition
 parameter_list|()
 block|{
-comment|// "1< a or (a< 3 and b = 2)" can't be simplified
+comment|// "1< a or (a< 3 and b = 2)" can't be simplified if a is nullable.
 name|checkSimplifyUnchanged
 argument_list|(
 name|or
@@ -16327,7 +16327,7 @@ argument_list|(
 literal|1
 argument_list|)
 argument_list|,
-name|vIntNotNull
+name|vInt
 argument_list|()
 argument_list|)
 argument_list|,
@@ -16335,7 +16335,7 @@ name|and
 argument_list|(
 name|lt
 argument_list|(
-name|vIntNotNull
+name|vInt
 argument_list|()
 argument_list|,
 name|literal
