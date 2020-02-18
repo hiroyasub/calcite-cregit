@@ -8339,6 +8339,50 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testMatchRecognizeWithDistinctAggregation
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM emp\n"
+operator|+
+literal|"MATCH_RECOGNIZE (\n"
+operator|+
+literal|"  ORDER BY ename\n"
+operator|+
+literal|"  MEASURES\n"
+operator|+
+literal|"    ^COUNT(DISTINCT A.deptno)^ AS deptno\n"
+operator|+
+literal|"  PATTERN (A B)\n"
+operator|+
+literal|"  DEFINE\n"
+operator|+
+literal|"    A AS A.empno = 123\n"
+operator|+
+literal|") AS T"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"DISTINCT/ALL not allowed with "
+operator|+
+literal|"COUNT\\(DISTINCT `A`\\.`DEPTNO`\\) function"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testIntervalTimeUnitEnumeration
 parameter_list|()
 block|{
