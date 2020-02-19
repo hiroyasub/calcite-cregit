@@ -1751,15 +1751,6 @@ expr_stmt|;
 block|}
 block|}
 block|}
-name|planner
-operator|.
-name|checkForSatisfiedConverters
-argument_list|(
-name|set
-argument_list|,
-name|rel
-argument_list|)
-expr_stmt|;
 block|}
 block|}
 finally|finally

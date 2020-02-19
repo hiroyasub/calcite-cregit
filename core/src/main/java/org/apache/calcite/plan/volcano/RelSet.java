@@ -305,19 +305,6 @@ name|ArrayList
 argument_list|<>
 argument_list|()
 decl_stmt|;
-comment|/**    * List of {@link AbstractConverter} objects which have not yet been    * satisfied.    */
-specifier|final
-name|List
-argument_list|<
-name|AbstractConverter
-argument_list|>
-name|abstractConverters
-init|=
-operator|new
-name|ArrayList
-argument_list|<>
-argument_list|()
-decl_stmt|;
 comment|/**    * Set to the superseding set when this is found to be equivalent to another    * set.    */
 name|RelSet
 name|equivalentSet
