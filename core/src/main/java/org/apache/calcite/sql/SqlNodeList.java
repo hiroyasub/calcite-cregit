@@ -233,12 +233,7 @@ name|of
 argument_list|(
 name|SqlIdentifier
 operator|.
-name|star
-argument_list|(
-name|SqlParserPos
-operator|.
-name|ZERO
-argument_list|)
+name|STAR
 argument_list|)
 argument_list|,
 name|SqlParserPos

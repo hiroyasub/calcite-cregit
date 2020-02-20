@@ -214,6 +214,20 @@ name|SqlIdentifier
 extends|extends
 name|SqlNode
 block|{
+comment|/** An identifier for star, "*".    *    * @see SqlNodeList#SINGLETON_STAR */
+specifier|public
+specifier|static
+specifier|final
+name|SqlIdentifier
+name|STAR
+init|=
+name|star
+argument_list|(
+name|SqlParserPos
+operator|.
+name|ZERO
+argument_list|)
+decl_stmt|;
 comment|//~ Instance fields --------------------------------------------------------
 comment|/**    * Array of the components of this compound identifier.    *    *<p>The empty string represents the wildcard "*",    * to distinguish it from a real "*" (presumably specified using quotes).    *    *<p>It's convenient to have this member public, and it's convenient to    * have this member not-final, but it's a shame it's public and not-final.    * If you assign to this member, please use    * {@link #setNames(java.util.List, java.util.List)}.    * And yes, we'd like to make identifiers immutable one day.    */
 specifier|public
