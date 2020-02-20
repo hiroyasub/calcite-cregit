@@ -1533,6 +1533,13 @@ name|equals
 argument_list|(
 name|o1
 argument_list|)
+operator|&&
+name|RexUtil
+operator|.
+name|isDeterministic
+argument_list|(
+name|o0
+argument_list|)
 condition|)
 block|{
 name|RexNode
