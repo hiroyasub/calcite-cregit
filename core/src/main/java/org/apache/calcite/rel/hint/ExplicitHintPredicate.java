@@ -32,17 +32,42 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * A {@code HintStrategy} indicates whether a {@link org.apache.calcite.rel.RelNode}  * can apply the specified hint.  *  *<p>Every supported hint should register a {@code HintStrategy}  * into the {@link HintStrategyTable}. For example, {@link HintStrategies#JOIN} implies  * that this hint would be propagated and applied to the {@link org.apache.calcite.rel.core.Join}  * relational expressions.  *  *<p>In {@link HintStrategyTable} the strategy is used for  * hints registration.  *  * @see HintStrategyTable  */
+comment|/**  * A hint predicate with custom test rules.  *  * @see ExplicitHintMatcher  */
 end_comment
 
-begin_interface
+begin_class
 specifier|public
-interface|interface
-name|HintStrategy
+class|class
+name|ExplicitHintPredicate
+implements|implements
+name|HintPredicate
 block|{
-comment|/**    * Decides if the given {@code hint} can be applied to    * the relational expression {@code rel}.    *    * @param hint The hint    * @param rel  The relational expression    * @return True if the {@code hint} can be applied to the {@code rel}    */
+comment|//~ Instance fields --------------------------------------------------------
+specifier|private
+specifier|final
+name|ExplicitHintMatcher
+name|matcher
+decl_stmt|;
+comment|/**    * Creates an {@link ExplicitHintPredicate} with specified {@code matcher}.    *    *<p>Make this constructor package-protected intentionally, use    * {@link HintPredicates#explicit(ExplicitHintMatcher)}.    *    * @param matcher ExplicitHintMatcher instance to test    *                if a hint can be applied to a rel    */
+name|ExplicitHintPredicate
+parameter_list|(
+name|ExplicitHintMatcher
+name|matcher
+parameter_list|)
+block|{
+name|this
+operator|.
+name|matcher
+operator|=
+name|matcher
+expr_stmt|;
+block|}
+comment|//~ Methods ----------------------------------------------------------------
+annotation|@
+name|Override
+specifier|public
 name|boolean
-name|canApply
+name|apply
 parameter_list|(
 name|RelHint
 name|hint
@@ -50,9 +75,22 @@ parameter_list|,
 name|RelNode
 name|rel
 parameter_list|)
-function_decl|;
+block|{
+return|return
+name|this
+operator|.
+name|matcher
+operator|.
+name|matches
+argument_list|(
+name|hint
+argument_list|,
+name|rel
+argument_list|)
+return|;
 block|}
-end_interface
+block|}
+end_class
 
 end_unit
 

@@ -18,121 +18,121 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * A collection of hint strategies.  */
+comment|/**  * A collection of hint predicates.  */
 end_comment
 
 begin_class
 specifier|public
 specifier|abstract
 class|class
-name|HintStrategies
+name|HintPredicates
 block|{
-comment|/** A hint strategy that indicates a hint can only be used to    * the whole query(no specific nodes). */
+comment|/** A hint predicate that indicates a hint can only be used to    * the whole query(no specific nodes). */
 specifier|public
 specifier|static
 specifier|final
-name|HintStrategy
+name|HintPredicate
 name|SET_VAR
 init|=
 operator|new
-name|NodeTypeHintStrategy
+name|NodeTypeHintPredicate
 argument_list|(
-name|NodeTypeHintStrategy
+name|NodeTypeHintPredicate
 operator|.
 name|NodeType
 operator|.
 name|SET_VAR
 argument_list|)
 decl_stmt|;
-comment|/** A hint strategy that indicates a hint can only be used to    * {@link org.apache.calcite.rel.core.Join} nodes. */
+comment|/** A hint predicate that indicates a hint can only be used to    * {@link org.apache.calcite.rel.core.Join} nodes. */
 specifier|public
 specifier|static
 specifier|final
-name|HintStrategy
+name|HintPredicate
 name|JOIN
 init|=
 operator|new
-name|NodeTypeHintStrategy
+name|NodeTypeHintPredicate
 argument_list|(
-name|NodeTypeHintStrategy
+name|NodeTypeHintPredicate
 operator|.
 name|NodeType
 operator|.
 name|JOIN
 argument_list|)
 decl_stmt|;
-comment|/** A hint strategy that indicates a hint can only be used to    * {@link org.apache.calcite.rel.core.TableScan} nodes. */
+comment|/** A hint predicate that indicates a hint can only be used to    * {@link org.apache.calcite.rel.core.TableScan} nodes. */
 specifier|public
 specifier|static
 specifier|final
-name|HintStrategy
+name|HintPredicate
 name|TABLE_SCAN
 init|=
 operator|new
-name|NodeTypeHintStrategy
+name|NodeTypeHintPredicate
 argument_list|(
-name|NodeTypeHintStrategy
+name|NodeTypeHintPredicate
 operator|.
 name|NodeType
 operator|.
 name|TABLE_SCAN
 argument_list|)
 decl_stmt|;
-comment|/** A hint strategy that indicates a hint can only be used to    * {@link org.apache.calcite.rel.core.Project} nodes. */
+comment|/** A hint predicate that indicates a hint can only be used to    * {@link org.apache.calcite.rel.core.Project} nodes. */
 specifier|public
 specifier|static
 specifier|final
-name|HintStrategy
+name|HintPredicate
 name|PROJECT
 init|=
 operator|new
-name|NodeTypeHintStrategy
+name|NodeTypeHintPredicate
 argument_list|(
-name|NodeTypeHintStrategy
+name|NodeTypeHintPredicate
 operator|.
 name|NodeType
 operator|.
 name|PROJECT
 argument_list|)
 decl_stmt|;
-comment|/** A hint strategy that indicates a hint can only be used to    * {@link org.apache.calcite.rel.core.Aggregate} nodes. */
+comment|/** A hint predicate that indicates a hint can only be used to    * {@link org.apache.calcite.rel.core.Aggregate} nodes. */
 specifier|public
 specifier|static
 specifier|final
-name|HintStrategy
+name|HintPredicate
 name|AGGREGATE
 init|=
 operator|new
-name|NodeTypeHintStrategy
+name|NodeTypeHintPredicate
 argument_list|(
-name|NodeTypeHintStrategy
+name|NodeTypeHintPredicate
 operator|.
 name|NodeType
 operator|.
 name|AGGREGATE
 argument_list|)
 decl_stmt|;
-comment|/** A hint strategy that indicates a hint can only be used to    * {@link org.apache.calcite.rel.core.Calc} nodes. */
+comment|/** A hint predicate that indicates a hint can only be used to    * {@link org.apache.calcite.rel.core.Calc} nodes. */
 specifier|public
 specifier|static
 specifier|final
-name|HintStrategy
+name|HintPredicate
 name|CALC
 init|=
 operator|new
-name|NodeTypeHintStrategy
+name|NodeTypeHintPredicate
 argument_list|(
-name|NodeTypeHintStrategy
+name|NodeTypeHintPredicate
 operator|.
 name|NodeType
 operator|.
 name|CALC
 argument_list|)
 decl_stmt|;
-comment|/**    * Creates a hint strategy from a specific matcher whose rules are totally customized.    *    * @param matcher The strategy matcher    * @return A ExplicitHintStrategy instance.    */
+comment|/**    * Creates a hint predicate from a specific matcher whose rules are totally customized.    *    * @param matcher The hint matcher    * @return A ExplicitHintPredicate instance    */
 specifier|public
 specifier|static
-name|HintStrategy
+name|HintPredicate
 name|explicit
 parameter_list|(
 name|ExplicitHintMatcher
@@ -141,59 +141,59 @@ parameter_list|)
 block|{
 return|return
 operator|new
-name|ExplicitHintStrategy
+name|ExplicitHintPredicate
 argument_list|(
 name|matcher
 argument_list|)
 return|;
 block|}
-comment|/**    * Creates a {@link CompositeHintStrategy} instance whose strategy rules are satisfied only if    * all the {@code hintStrategies} are satisfied.    */
+comment|/**    * Returns a composed hint predicate that represents a short-circuiting logical    * AND of an array of hint predicates {@code hintPredicates}.  When evaluating the composed    * predicate, if a predicate is {@code false}, then all the left    * predicates are not evaluated.    *    *<p>The predicates are evaluated in sequence.    */
 specifier|public
 specifier|static
-name|HintStrategy
+name|HintPredicate
 name|and
 parameter_list|(
-name|HintStrategy
+name|HintPredicate
 modifier|...
-name|hintStrategies
+name|hintPredicates
 parameter_list|)
 block|{
 return|return
 operator|new
-name|CompositeHintStrategy
+name|CompositeHintPredicate
 argument_list|(
-name|CompositeHintStrategy
+name|CompositeHintPredicate
 operator|.
 name|Composition
 operator|.
 name|AND
 argument_list|,
-name|hintStrategies
+name|hintPredicates
 argument_list|)
 return|;
 block|}
-comment|/**    * Creates a {@link CompositeHintStrategy} instance whose strategy rules are satisfied if    * one of the {@code hintStrategies} is satisfied.    */
+comment|/**    * Returns a composed hint predicate that represents a short-circuiting logical    * OR of an array of hint predicates {@code hintPredicates}.  When evaluating the composed    * predicate, if a predicate is {@code true}, then all the left    * predicates are not evaluated.    *    *<p>The predicates are evaluated in sequence.    */
 specifier|public
 specifier|static
-name|HintStrategy
+name|HintPredicate
 name|or
 parameter_list|(
-name|HintStrategy
+name|HintPredicate
 modifier|...
-name|hintStrategies
+name|hintPredicates
 parameter_list|)
 block|{
 return|return
 operator|new
-name|CompositeHintStrategy
+name|CompositeHintPredicate
 argument_list|(
-name|CompositeHintStrategy
+name|CompositeHintPredicate
 operator|.
 name|Composition
 operator|.
 name|OR
 argument_list|,
-name|hintStrategies
+name|hintPredicates
 argument_list|)
 return|;
 block|}

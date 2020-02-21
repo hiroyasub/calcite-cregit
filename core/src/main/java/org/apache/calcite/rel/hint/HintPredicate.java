@@ -32,42 +32,17 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * A hint strategy whose rules are totally customized.  *  * @see ExplicitHintMatcher  */
+comment|/**  * A {@code HintPredicate} indicates whether a {@link org.apache.calcite.rel.RelNode}  * can apply the specified hint.  *  *<p>Every supported hint should register a {@code HintPredicate}  * into the {@link HintStrategyTable}. For example, {@link HintPredicates#JOIN} implies  * that this hint would be propagated and applied to the {@link org.apache.calcite.rel.core.Join}  * relational expressions.  *  *<p>A {@code HintPredicate} can be used independently or cascaded with other strategies  * with method {@link HintPredicates#and}.  *  *<p>In {@link HintStrategyTable} the predicate is used for  * hints registration.  *  * @see HintStrategyTable  */
 end_comment
 
-begin_class
+begin_interface
 specifier|public
-class|class
-name|ExplicitHintStrategy
-implements|implements
-name|HintStrategy
+interface|interface
+name|HintPredicate
 block|{
-comment|//~ Instance fields --------------------------------------------------------
-specifier|private
-specifier|final
-name|ExplicitHintMatcher
-name|matcher
-decl_stmt|;
-comment|/**    * Creates an {@code ExplicitHintStrategy} with specified {@code matcher}.    *    *<p>Make this constructor package-protected intentionally, use    * {@link HintStrategies#explicit(ExplicitHintMatcher)}.    *    * @param matcher ExplicitHintMatcher instance to test    *                if a hint can be applied to a rel    */
-name|ExplicitHintStrategy
-parameter_list|(
-name|ExplicitHintMatcher
-name|matcher
-parameter_list|)
-block|{
-name|this
-operator|.
-name|matcher
-operator|=
-name|matcher
-expr_stmt|;
-block|}
-comment|//~ Methods ----------------------------------------------------------------
-annotation|@
-name|Override
-specifier|public
+comment|/**    * Decides if the given {@code hint} can be applied to    * the relational expression {@code rel}.    *    * @param hint The hint    * @param rel  The relational expression    * @return True if the {@code hint} can be applied to the {@code rel}    */
 name|boolean
-name|canApply
+name|apply
 parameter_list|(
 name|RelHint
 name|hint
@@ -75,22 +50,9 @@ parameter_list|,
 name|RelNode
 name|rel
 parameter_list|)
-block|{
-return|return
-name|this
-operator|.
-name|matcher
-operator|.
-name|matches
-argument_list|(
-name|hint
-argument_list|,
-name|rel
-argument_list|)
-return|;
+function_decl|;
 block|}
-block|}
-end_class
+end_interface
 
 end_unit
 

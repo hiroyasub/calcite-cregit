@@ -46,18 +46,18 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * A {@link HintStrategy} to combine multiple hint strategies into one.  *  *<p>The composition can be {@code AND} or {@code OR}.  */
+comment|/**  * A {@link HintPredicate} to combine multiple hint predicates into one.  *  *<p>The composition can be {@code AND} or {@code OR}.  */
 end_comment
 
 begin_class
 specifier|public
 class|class
-name|CompositeHintStrategy
+name|CompositeHintPredicate
 implements|implements
-name|HintStrategy
+name|HintPredicate
 block|{
 comment|//~ Enums ------------------------------------------------------------------
-comment|/** How hint strategies are composed. */
+comment|/** How hint predicates are composed. */
 specifier|public
 enum|enum
 name|Composition
@@ -70,32 +70,32 @@ comment|//~ Instance fields ----------------------------------------------------
 specifier|private
 name|ImmutableList
 argument_list|<
-name|HintStrategy
+name|HintPredicate
 argument_list|>
-name|strategies
+name|predicates
 decl_stmt|;
 specifier|private
 name|Composition
 name|composition
 decl_stmt|;
-comment|/**    * Creates a {@link CompositeHintStrategy} with a {@link Composition}    * and an array of hint strategies.    *    *<p>Make this constructor package-protected intentionally.    * Use utility methods in {@link HintStrategies}    * to create a {@link CompositeHintStrategy}.</p>    */
-name|CompositeHintStrategy
+comment|/**    * Creates a {@link CompositeHintPredicate} with a {@link Composition}    * and an array of hint predicates.    *    *<p>Make this constructor package-protected intentionally.    * Use utility methods in {@link HintPredicates}    * to create a {@link CompositeHintPredicate}.</p>    */
+name|CompositeHintPredicate
 parameter_list|(
 name|Composition
 name|composition
 parameter_list|,
-name|HintStrategy
+name|HintPredicate
 modifier|...
-name|strategies
+name|predicates
 parameter_list|)
 block|{
 assert|assert
-name|strategies
+name|predicates
 operator|!=
 literal|null
 assert|;
 assert|assert
-name|strategies
+name|predicates
 operator|.
 name|length
 operator|>
@@ -103,27 +103,27 @@ literal|1
 assert|;
 for|for
 control|(
-name|HintStrategy
-name|strategy
+name|HintPredicate
+name|predicate
 range|:
-name|strategies
+name|predicates
 control|)
 block|{
 assert|assert
-name|strategy
+name|predicate
 operator|!=
 literal|null
 assert|;
 block|}
 name|this
 operator|.
-name|strategies
+name|predicates
 operator|=
 name|ImmutableList
 operator|.
 name|copyOf
 argument_list|(
-name|strategies
+name|predicates
 argument_list|)
 expr_stmt|;
 name|this
@@ -138,7 +138,7 @@ annotation|@
 name|Override
 specifier|public
 name|boolean
-name|canApply
+name|apply
 parameter_list|(
 name|RelHint
 name|hint
@@ -148,7 +148,7 @@ name|rel
 parameter_list|)
 block|{
 return|return
-name|canApply
+name|apply
 argument_list|(
 name|composition
 argument_list|,
@@ -160,7 +160,7 @@ return|;
 block|}
 specifier|private
 name|boolean
-name|canApply
+name|apply
 parameter_list|(
 name|Composition
 name|composition
@@ -182,18 +182,18 @@ name|AND
 case|:
 for|for
 control|(
-name|HintStrategy
-name|hintStrategy
+name|HintPredicate
+name|predicate
 range|:
-name|strategies
+name|predicates
 control|)
 block|{
 if|if
 condition|(
 operator|!
-name|hintStrategy
+name|predicate
 operator|.
-name|canApply
+name|apply
 argument_list|(
 name|hint
 argument_list|,
@@ -215,17 +215,17 @@ case|:
 default|default:
 for|for
 control|(
-name|HintStrategy
-name|hintStrategy
+name|HintPredicate
+name|predicate
 range|:
-name|strategies
+name|predicates
 control|)
 block|{
 if|if
 condition|(
-name|hintStrategy
+name|predicate
 operator|.
-name|canApply
+name|apply
 argument_list|(
 name|hint
 argument_list|,

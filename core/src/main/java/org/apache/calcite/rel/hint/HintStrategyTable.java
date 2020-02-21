@@ -208,7 +208,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * A {@code HintStrategy} collection indicates which kind of  * {@link org.apache.calcite.rel.RelNode} a hint can apply to.  *  *<p>Every supported hint should register a {@code HintStrategy}  * into this collection. For example, {@link HintStrategies#JOIN} implies that this hint  * would be propagated and attached to the {@link org.apache.calcite.rel.core.Join}  * relational expressions.  *  *<p>A {@code HintStrategy} can be used independently or cascaded with other strategies  * with method {@link HintStrategies#and}.  *  *<p>The matching for hint name is case in-sensitive.  *  * @see HintStrategy  */
+comment|/**  * A collections of {@link HintStrategy}s.  *  *<p>Every supported hint should register a {@link HintPredicate}  * into this collection. For example, {@link HintPredicates#JOIN} implies that this hint  * would be propagated and attached to the {@link org.apache.calcite.rel.core.Join}  * relational expressions.  *  *<p>The matching for hint name is case in-sensitive.  *  * @see HintPredicate  */
 end_comment
 
 begin_class
@@ -239,16 +239,16 @@ name|INSTANCE
 argument_list|)
 decl_stmt|;
 comment|//~ Instance fields --------------------------------------------------------
-comment|/** Mapping from hint name to {@link Entry}. */
+comment|/** Mapping from hint name to {@link HintStrategy}. */
 specifier|private
 specifier|final
 name|Map
 argument_list|<
 name|Key
 argument_list|,
-name|Entry
+name|HintStrategy
 argument_list|>
-name|entries
+name|strategies
 decl_stmt|;
 comment|/** Handler for the hint error. */
 specifier|private
@@ -263,9 +263,9 @@ name|Map
 argument_list|<
 name|Key
 argument_list|,
-name|Entry
+name|HintStrategy
 argument_list|>
-name|entries
+name|strategies
 parameter_list|,
 name|Litmus
 name|litmus
@@ -273,9 +273,9 @@ parameter_list|)
 block|{
 name|this
 operator|.
-name|entries
+name|strategies
 operator|=
-name|entries
+name|strategies
 expr_stmt|;
 name|this
 operator|.
@@ -357,7 +357,7 @@ decl_stmt|;
 assert|assert
 name|this
 operator|.
-name|entries
+name|strategies
 operator|.
 name|containsKey
 argument_list|(
@@ -367,16 +367,16 @@ assert|;
 return|return
 name|this
 operator|.
-name|entries
+name|strategies
 operator|.
 name|get
 argument_list|(
 name|key
 argument_list|)
 operator|.
-name|hintStrategy
+name|predicate
 operator|.
-name|canApply
+name|apply
 argument_list|(
 name|hint
 argument_list|,
@@ -417,7 +417,7 @@ name|check
 argument_list|(
 name|this
 operator|.
-name|entries
+name|strategies
 operator|.
 name|containsKey
 argument_list|(
@@ -450,10 +450,10 @@ literal|false
 return|;
 block|}
 specifier|final
-name|Entry
-name|entry
+name|HintStrategy
+name|strategy
 init|=
-name|entries
+name|strategies
 operator|.
 name|get
 argument_list|(
@@ -462,7 +462,7 @@ argument_list|)
 decl_stmt|;
 if|if
 condition|(
-name|entry
+name|strategy
 operator|.
 name|hintOptionChecker
 operator|!=
@@ -470,7 +470,7 @@ literal|null
 condition|)
 block|{
 return|return
-name|entry
+name|strategy
 operator|.
 name|hintOptionChecker
 operator|.
@@ -550,7 +550,7 @@ decl_stmt|;
 assert|assert
 name|this
 operator|.
-name|entries
+name|strategies
 operator|.
 name|containsKey
 argument_list|(
@@ -558,10 +558,10 @@ name|key
 argument_list|)
 assert|;
 specifier|final
-name|Entry
-name|entry
+name|HintStrategy
+name|strategy
 init|=
-name|entries
+name|strategies
 operator|.
 name|get
 argument_list|(
@@ -570,7 +570,7 @@ argument_list|)
 decl_stmt|;
 if|if
 condition|(
-name|entry
+name|strategy
 operator|.
 name|excludedRules
 operator|.
@@ -583,7 +583,7 @@ block|{
 return|return
 name|isDesiredConversionPossible
 argument_list|(
-name|entry
+name|strategy
 operator|.
 name|converterRules
 argument_list|,
@@ -644,7 +644,7 @@ literal|null
 argument_list|)
 return|;
 block|}
-comment|/**    * Returns a strategies builder.    */
+comment|/**    * Returns a {@code HintStrategyTable} builder.    */
 specifier|public
 specifier|static
 name|Builder
@@ -657,21 +657,21 @@ name|Builder
 argument_list|()
 return|;
 block|}
-comment|/**    * Returns an entry builder of this {@link HintStrategyTable}    * with given hint strategy.    *    * @param hintStrategy hint strategy    * @return an {@link EntryBuilder} instance    */
+comment|/**    * Returns a {@link HintStrategy} builder with given hint predicate.    *    * @param hintPredicate hint predicate    * @return {@link StrategyBuilder} instance    */
 specifier|public
 specifier|static
-name|EntryBuilder
-name|entryBuilder
+name|StrategyBuilder
+name|strategyBuilder
 parameter_list|(
-name|HintStrategy
-name|hintStrategy
+name|HintPredicate
+name|hintPredicate
 parameter_list|)
 block|{
 return|return
 operator|new
-name|EntryBuilder
+name|StrategyBuilder
 argument_list|(
-name|hintStrategy
+name|hintPredicate
 argument_list|)
 return|;
 block|}
@@ -795,9 +795,9 @@ name|Map
 argument_list|<
 name|Key
 argument_list|,
-name|Entry
+name|HintStrategy
 argument_list|>
-name|entries
+name|strategies
 decl_stmt|;
 specifier|private
 name|Litmus
@@ -809,7 +809,7 @@ parameter_list|()
 block|{
 name|this
 operator|.
-name|entries
+name|strategies
 operator|=
 operator|new
 name|HashMap
@@ -832,13 +832,13 @@ parameter_list|(
 name|String
 name|hintName
 parameter_list|,
-name|HintStrategy
+name|HintPredicate
 name|strategy
 parameter_list|)
 block|{
 name|this
 operator|.
-name|entries
+name|strategies
 operator|.
 name|put
 argument_list|(
@@ -849,7 +849,7 @@ argument_list|(
 name|hintName
 argument_list|)
 argument_list|,
-name|entryBuilder
+name|strategyBuilder
 argument_list|(
 name|Objects
 operator|.
@@ -874,13 +874,13 @@ parameter_list|(
 name|String
 name|hintName
 parameter_list|,
-name|Entry
+name|HintStrategy
 name|entry
 parameter_list|)
 block|{
 name|this
 operator|.
-name|entries
+name|strategies
 operator|.
 name|put
 argument_list|(
@@ -933,7 +933,7 @@ name|HintStrategyTable
 argument_list|(
 name|this
 operator|.
-name|entries
+name|strategies
 argument_list|,
 name|this
 operator|.
@@ -942,16 +942,16 @@ argument_list|)
 return|;
 block|}
 block|}
-comment|/** Represents a hint strategy entry of this {@link HintStrategyTable}. */
+comment|/**    * Represents a hint strategy entry of this {@link HintStrategyTable}.    *    *<p>A {@code HintStrategy} includes:    *    *<ul>    *<li>{@link HintPredicate}: tests whether a hint should apply to    *   a relational expression;</li>    *<li>{@link HintOptionChecker}: validates the hint options;</li>    *<li>{@code excludedRules}: rules to exclude when a relational expression    *   is going to apply a planner rule;</li>    *<li>{@code converterRules}: fallback rules to apply when there are    *   no proper implementations after excluding the {@code excludedRules}.</li>    *</ul>    *    *<p>The {@link HintPredicate} is required, all the other items are optional.    */
 specifier|public
 specifier|static
 class|class
-name|Entry
+name|HintStrategy
 block|{
 specifier|public
 specifier|final
-name|HintStrategy
-name|hintStrategy
+name|HintPredicate
+name|predicate
 decl_stmt|;
 specifier|public
 specifier|final
@@ -975,10 +975,10 @@ argument_list|>
 name|converterRules
 decl_stmt|;
 specifier|public
-name|Entry
-parameter_list|(
 name|HintStrategy
-name|hintStrategy
+parameter_list|(
+name|HintPredicate
+name|predicate
 parameter_list|,
 name|HintOptionChecker
 name|hintOptionChecker
@@ -998,9 +998,9 @@ parameter_list|)
 block|{
 name|this
 operator|.
-name|hintStrategy
+name|predicate
 operator|=
-name|hintStrategy
+name|predicate
 expr_stmt|;
 name|this
 operator|.
@@ -1022,16 +1022,16 @@ name|converterRules
 expr_stmt|;
 block|}
 block|}
-comment|/** Builder for {@link Entry}. */
+comment|/** Builder for {@link HintStrategy}. */
 specifier|public
 specifier|static
 class|class
-name|EntryBuilder
+name|StrategyBuilder
 block|{
 specifier|private
 specifier|final
-name|HintStrategy
-name|hintStrategy
+name|HintPredicate
+name|predicate
 decl_stmt|;
 annotation|@
 name|Nullable
@@ -1054,21 +1054,21 @@ argument_list|>
 name|converterRules
 decl_stmt|;
 specifier|private
-name|EntryBuilder
+name|StrategyBuilder
 parameter_list|(
-name|HintStrategy
-name|hintStrategy
+name|HintPredicate
+name|predicate
 parameter_list|)
 block|{
 name|this
 operator|.
-name|hintStrategy
+name|predicate
 operator|=
 name|Objects
 operator|.
 name|requireNonNull
 argument_list|(
-name|hintStrategy
+name|predicate
 argument_list|)
 expr_stmt|;
 name|this
@@ -1092,7 +1092,7 @@ expr_stmt|;
 block|}
 comment|/** Registers a hint option checker to validate the hint options. */
 specifier|public
-name|EntryBuilder
+name|StrategyBuilder
 name|optionChecker
 parameter_list|(
 name|HintOptionChecker
@@ -1116,7 +1116,7 @@ return|;
 block|}
 comment|/**      * Registers an array of rules to exclude during the      * {@link org.apache.calcite.plan.RelOptPlanner} planning.      *      *<p>The desired converter rules work together with the excluded rules.      * We have no validation here but they expect to have the same      * function(semantic equivalent).      *      *<p>A rule fire cancels if:      *      *<ol>      *<li>The registered {@link #excludedRules} contains the rule</li>      *<li>The desired converter rules conversion is not possible for the rule      *   matched root node</li>      *</ol>      *      * @param rules excluded rules      */
 specifier|public
-name|EntryBuilder
+name|StrategyBuilder
 name|excludedRules
 parameter_list|(
 name|RelOptRule
@@ -1141,7 +1141,7 @@ return|;
 block|}
 comment|/**      * Registers an array of desired converter rules during the      * {@link org.apache.calcite.plan.RelOptPlanner} planning.      *      *<p>The desired converter rules work together with the excluded rules.      * We have no validation here but they expect to have the same      * function(semantic equivalent).      *      *<p>A rule fire cancels if:      *      *<ol>      *<li>The registered {@link #excludedRules} contains the rule</li>      *<li>The desired converter rules conversion is not possible for the rule      *   matched root node</li>      *</ol>      *      *<p>If no converter rules are specified, we assume the conversion is possible.      *      * @param rules desired converter rules      */
 specifier|public
-name|EntryBuilder
+name|StrategyBuilder
 name|converterRules
 parameter_list|(
 name|ConverterRule
@@ -1165,15 +1165,15 @@ name|this
 return|;
 block|}
 specifier|public
-name|Entry
+name|HintStrategy
 name|build
 parameter_list|()
 block|{
 return|return
 operator|new
-name|Entry
+name|HintStrategy
 argument_list|(
-name|hintStrategy
+name|predicate
 argument_list|,
 name|optionChecker
 argument_list|,

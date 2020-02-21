@@ -112,15 +112,15 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * A hint strategy that specifies which kind of relational  * expression the hint can be applied to.  */
+comment|/**  * A hint predicate that specifies which kind of relational  * expression the hint can be applied to.  */
 end_comment
 
 begin_class
 specifier|public
 class|class
-name|NodeTypeHintStrategy
+name|NodeTypeHintPredicate
 implements|implements
-name|HintStrategy
+name|HintPredicate
 block|{
 comment|/**    * Enumeration of the relational expression types that the hints    * may be propagated to.    */
 enum|enum
@@ -204,7 +204,7 @@ name|NodeType
 name|nodeType
 decl_stmt|;
 specifier|public
-name|NodeTypeHintStrategy
+name|NodeTypeHintPredicate
 parameter_list|(
 name|NodeType
 name|nodeType
@@ -221,7 +221,7 @@ annotation|@
 name|Override
 specifier|public
 name|boolean
-name|canApply
+name|apply
 parameter_list|(
 name|RelHint
 name|hint

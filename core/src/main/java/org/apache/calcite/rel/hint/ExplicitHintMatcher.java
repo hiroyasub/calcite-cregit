@@ -32,7 +32,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * A function to customize whether a relational expression should match a hint.  *  *<p>Usually you may not need to implement this function,  * {@link NodeTypeHintStrategy} is enough for most of the {@link RelHint}s.  *  *<p>Some of the hints can only be matched to the relational  * expression with special match conditions(not only the relational expression type).  * i.e. "hash_join(r, st)", this hint can only be applied to JOIN expression that  * has "r" and "st" as the input table names. To implement this, you may need to customize an  * {@link ExplicitHintStrategy} with the {@link ExplicitHintMatcher}.  *  * @see ExplicitHintStrategy  * @see HintStrategies  */
+comment|/**  * A function to customize whether a relational expression should match a hint.  *  *<p>Usually you may not need to implement this function,  * {@link NodeTypeHintPredicate} is enough for most of the {@link RelHint}s.  *  *<p>Some of the hints can only be matched to the relational  * expression with special match conditions(not only the relational expression type).  * i.e. "hash_join(r, st)", this hint can only be applied to JOIN expression that  * has "r" and "st" as the input table names. To implement this, you can customize an  * {@link ExplicitHintPredicate} with the {@link ExplicitHintMatcher}.  *  * @see ExplicitHintPredicate  * @see HintPredicates  */
 end_comment
 
 begin_interface

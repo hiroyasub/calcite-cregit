@@ -389,7 +389,7 @@ name|rel
 operator|.
 name|hint
 operator|.
-name|HintStrategies
+name|HintPredicate
 import|;
 end_import
 
@@ -405,7 +405,7 @@ name|rel
 operator|.
 name|hint
 operator|.
-name|HintStrategy
+name|HintPredicates
 import|;
 end_import
 
@@ -4278,7 +4278,7 @@ name|hintStrategy
 argument_list|(
 literal|"no_hash_join"
 argument_list|,
-name|HintStrategies
+name|HintPredicates
 operator|.
 name|JOIN
 argument_list|)
@@ -4287,7 +4287,7 @@ name|hintStrategy
 argument_list|(
 literal|"time_zone"
 argument_list|,
-name|HintStrategies
+name|HintPredicates
 operator|.
 name|SET_VAR
 argument_list|)
@@ -4296,7 +4296,7 @@ name|hintStrategy
 argument_list|(
 literal|"REPARTITION"
 argument_list|,
-name|HintStrategies
+name|HintPredicates
 operator|.
 name|SET_VAR
 argument_list|)
@@ -4305,7 +4305,7 @@ name|hintStrategy
 argument_list|(
 literal|"index"
 argument_list|,
-name|HintStrategies
+name|HintPredicates
 operator|.
 name|TABLE_SCAN
 argument_list|)
@@ -4314,7 +4314,7 @@ name|hintStrategy
 argument_list|(
 literal|"properties"
 argument_list|,
-name|HintStrategies
+name|HintPredicates
 operator|.
 name|TABLE_SCAN
 argument_list|)
@@ -4323,19 +4323,19 @@ name|hintStrategy
 argument_list|(
 literal|"resource"
 argument_list|,
-name|HintStrategies
+name|HintPredicates
 operator|.
 name|or
 argument_list|(
-name|HintStrategies
+name|HintPredicates
 operator|.
 name|PROJECT
 argument_list|,
-name|HintStrategies
+name|HintPredicates
 operator|.
 name|AGGREGATE
 argument_list|,
-name|HintStrategies
+name|HintPredicates
 operator|.
 name|CALC
 argument_list|)
@@ -4347,9 +4347,9 @@ literal|"AGG_STRATEGY"
 argument_list|,
 name|HintStrategyTable
 operator|.
-name|entryBuilder
+name|strategyBuilder
 argument_list|(
-name|HintStrategies
+name|HintPredicates
 operator|.
 name|AGGREGATE
 argument_list|)
@@ -4423,11 +4423,11 @@ name|hintStrategy
 argument_list|(
 literal|"use_hash_join"
 argument_list|,
-name|HintStrategies
+name|HintPredicates
 operator|.
 name|and
 argument_list|(
-name|HintStrategies
+name|HintPredicates
 operator|.
 name|JOIN
 argument_list|,
@@ -4442,13 +4442,13 @@ literal|"use_merge_join"
 argument_list|,
 name|HintStrategyTable
 operator|.
-name|entryBuilder
+name|strategyBuilder
 argument_list|(
-name|HintStrategies
+name|HintPredicates
 operator|.
 name|and
 argument_list|(
-name|HintStrategies
+name|HintPredicates
 operator|.
 name|JOIN
 argument_list|,
@@ -4472,15 +4472,15 @@ name|build
 argument_list|()
 return|;
 block|}
-comment|/** Returns a {@link HintStrategy} for join with specified table references. */
+comment|/** Returns a {@link HintPredicate} for join with specified table references. */
 specifier|private
 specifier|static
-name|HintStrategy
+name|HintPredicate
 name|joinWithFixedTableName
 parameter_list|()
 block|{
 return|return
-name|HintStrategies
+name|HintPredicates
 operator|.
 name|explicit
 argument_list|(
