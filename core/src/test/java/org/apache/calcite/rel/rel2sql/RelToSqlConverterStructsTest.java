@@ -956,6 +956,8 @@ name|RelToSqlConverterTest
 operator|.
 name|DEFAULT_REL_CONFIG
 argument_list|,
+literal|null
+argument_list|,
 name|ImmutableList
 operator|.
 name|of
