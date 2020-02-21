@@ -35469,7 +35469,7 @@ name|sql
 init|=
 literal|"select "
 operator|+
-literal|"/*+ properties(k1='v1', k2='v2'), "
+literal|"/*+ properties(k1='v1', k2='v2', 'a.b.c'='v3'), "
 operator|+
 literal|"no_hash_join, Index(idx1, idx2), "
 operator|+
@@ -35483,7 +35483,7 @@ name|expected
 init|=
 literal|"SELECT\n"
 operator|+
-literal|"/*+ `PROPERTIES`(`K1` ='v1', `K2` ='v2'), "
+literal|"/*+ `PROPERTIES`(`K1` = 'v1', `K2` = 'v2', 'a.b.c' = 'v3'), "
 operator|+
 literal|"`NO_HASH_JOIN`, "
 operator|+
@@ -35544,7 +35544,7 @@ literal|"SELECT *\n"
 operator|+
 literal|"FROM `T`\n"
 operator|+
-literal|"/*+ `PROPERTIES`(`K1` ='v1', `K2` ='v2'), `INDEX`(`IDX0`, `IDX1`) */"
+literal|"/*+ `PROPERTIES`(`K1` = 'v1', `K2` = 'v2'), `INDEX`(`IDX0`, `IDX1`) */"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -35587,7 +35587,7 @@ literal|"FROM (SELECT *\n"
 operator|+
 literal|"FROM `T`\n"
 operator|+
-literal|"/*+ `PROPERTIES`(`K1` ='v1', `K2` ='v2'), `INDEX`(`IDX0`, `IDX1`) */\n"
+literal|"/*+ `PROPERTIES`(`K1` = 'v1', `K2` = 'v2'), `INDEX`(`IDX0`, `IDX1`) */\n"
 operator|+
 literal|"UNION ALL\n"
 operator|+
@@ -35595,7 +35595,7 @@ literal|"SELECT *\n"
 operator|+
 literal|"FROM `T`\n"
 operator|+
-literal|"/*+ `PROPERTIES`(`K1` ='v1', `K2` ='v2'), `INDEX`(`IDX0`, `IDX1`) */)"
+literal|"/*+ `PROPERTIES`(`K1` = 'v1', `K2` = 'v2'), `INDEX`(`IDX0`, `IDX1`) */)"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -35634,11 +35634,11 @@ literal|"SELECT *\n"
 operator|+
 literal|"FROM `T`\n"
 operator|+
-literal|"/*+ `PROPERTIES`(`K1` ='v1', `K2` ='v2'), `INDEX`(`IDX0`, `IDX1`) */\n"
+literal|"/*+ `PROPERTIES`(`K1` = 'v1', `K2` = 'v2'), `INDEX`(`IDX0`, `IDX1`) */\n"
 operator|+
 literal|"INNER JOIN `T`\n"
 operator|+
-literal|"/*+ `PROPERTIES`(`K1` ='v1', `K2` ='v2'), `INDEX`(`IDX0`, `IDX1`) */"
+literal|"/*+ `PROPERTIES`(`K1` = 'v1', `K2` = 'v2'), `INDEX`(`IDX0`, `IDX1`) */"
 decl_stmt|;
 name|sql
 argument_list|(
@@ -35674,7 +35674,7 @@ name|expected
 init|=
 literal|"INSERT INTO `EMPS`\n"
 operator|+
-literal|"/*+ `PROPERTIES`(`K1` ='v1', `K2` ='v2'), `INDEX`(`IDX0`, `IDX1`) */\n"
+literal|"/*+ `PROPERTIES`(`K1` = 'v1', `K2` = 'v2'), `INDEX`(`IDX0`, `IDX1`) */\n"
 operator|+
 literal|"(SELECT *\n"
 operator|+
@@ -35714,7 +35714,7 @@ name|expected
 init|=
 literal|"DELETE FROM `EMPS`\n"
 operator|+
-literal|"/*+ `PROPERTIES`(`K1` ='v1', `K2` ='v2'), `INDEX`(`IDX1`, `IDX2`), `NO_HASH_JOIN` */\n"
+literal|"/*+ `PROPERTIES`(`K1` = 'v1', `K2` = 'v2'), `INDEX`(`IDX1`, `IDX2`), `NO_HASH_JOIN` */\n"
 operator|+
 literal|"WHERE (`EMPNO` = 12)"
 decl_stmt|;
@@ -35754,7 +35754,7 @@ name|expected
 init|=
 literal|"UPDATE `EMPS`\n"
 operator|+
-literal|"/*+ `PROPERTIES`(`K1` ='v1', `K2` ='v2'), "
+literal|"/*+ `PROPERTIES`(`K1` = 'v1', `K2` = 'v2'), "
 operator|+
 literal|"`INDEX`(`IDX1`, `IDX2`), `NO_HASH_JOIN` */ "
 operator|+
@@ -35808,7 +35808,7 @@ name|expected
 init|=
 literal|"MERGE INTO `EMPS`\n"
 operator|+
-literal|"/*+ `PROPERTIES`(`K1` ='v1', `K2` ='v2'), "
+literal|"/*+ `PROPERTIES`(`K1` = 'v1', `K2` = 'v2'), "
 operator|+
 literal|"`INDEX`(`IDX1`, `IDX2`), `NO_HASH_JOIN` */ "
 operator|+
@@ -35917,6 +35917,26 @@ operator|.
 name|ok
 argument_list|(
 name|expected3
+argument_list|)
+expr_stmt|;
+specifier|final
+name|String
+name|sql4
+init|=
+literal|"select "
+operator|+
+literal|"/*+ properties(^a^.b.c=123, k2='v2') */"
+operator|+
+literal|"empno, ename, deptno from emps"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql4
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"(?s).*Encountered \"a .\" at .*"
 argument_list|)
 expr_stmt|;
 block|}
