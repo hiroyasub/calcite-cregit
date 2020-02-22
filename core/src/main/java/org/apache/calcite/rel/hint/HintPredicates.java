@@ -129,24 +129,6 @@ operator|.
 name|CALC
 argument_list|)
 decl_stmt|;
-comment|/**    * Creates a hint predicate from a specific matcher whose rules are totally customized.    *    * @param matcher The hint matcher    * @return A ExplicitHintPredicate instance    */
-specifier|public
-specifier|static
-name|HintPredicate
-name|explicit
-parameter_list|(
-name|ExplicitHintMatcher
-name|matcher
-parameter_list|)
-block|{
-return|return
-operator|new
-name|ExplicitHintPredicate
-argument_list|(
-name|matcher
-argument_list|)
-return|;
-block|}
 comment|/**    * Returns a composed hint predicate that represents a short-circuiting logical    * AND of an array of hint predicates {@code hintPredicates}.  When evaluating the composed    * predicate, if a predicate is {@code false}, then all the left    * predicates are not evaluated.    *    *<p>The predicates are evaluated in sequence.    */
 specifier|public
 specifier|static

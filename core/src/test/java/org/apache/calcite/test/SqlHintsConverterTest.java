@@ -421,6 +421,22 @@ name|rel
 operator|.
 name|hint
 operator|.
+name|HintStrategy
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|hint
+operator|.
 name|HintStrategyTable
 import|;
 end_import
@@ -4345,9 +4361,9 @@ name|hintStrategy
 argument_list|(
 literal|"AGG_STRATEGY"
 argument_list|,
-name|HintStrategyTable
+name|HintStrategy
 operator|.
-name|strategyBuilder
+name|builder
 argument_list|(
 name|HintPredicates
 operator|.
@@ -4440,9 +4456,9 @@ name|hintStrategy
 argument_list|(
 literal|"use_merge_join"
 argument_list|,
-name|HintStrategyTable
+name|HintStrategy
 operator|.
-name|strategyBuilder
+name|builder
 argument_list|(
 name|HintPredicates
 operator|.
@@ -4480,10 +4496,6 @@ name|joinWithFixedTableName
 parameter_list|()
 block|{
 return|return
-name|HintPredicates
-operator|.
-name|explicit
-argument_list|(
 parameter_list|(
 name|hint
 parameter_list|,
@@ -4583,7 +4595,6 @@ name|inputTables
 argument_list|)
 return|;
 block|}
-argument_list|)
 return|;
 block|}
 comment|/** Format the query with hint {@link #HINT}. */
