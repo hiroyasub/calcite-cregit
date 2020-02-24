@@ -621,20 +621,6 @@ name|common
 operator|.
 name|collect
 operator|.
-name|LinkedHashMultimap
-import|;
-end_import
-
-begin_import
-import|import
-name|com
-operator|.
-name|google
-operator|.
-name|common
-operator|.
-name|collect
-operator|.
 name|LinkedListMultimap
 import|;
 end_import
@@ -664,20 +650,6 @@ operator|.
 name|collect
 operator|.
 name|Ordering
-import|;
-end_import
-
-begin_import
-import|import
-name|com
-operator|.
-name|google
-operator|.
-name|common
-operator|.
-name|collect
-operator|.
-name|SetMultimap
 import|;
 end_import
 
@@ -1148,17 +1120,17 @@ decl_stmt|;
 comment|/** Maps rule classes to their name, to ensure that the names are unique and    * conform to rules. */
 specifier|private
 specifier|final
-name|SetMultimap
+name|Map
 argument_list|<
 name|String
 argument_list|,
-name|Class
+name|RelOptRule
 argument_list|>
 name|ruleNames
 init|=
-name|LinkedHashMultimap
-operator|.
-name|create
+operator|new
+name|HashMap
+argument_list|<>
 argument_list|()
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
@@ -2084,33 +2056,9 @@ argument_list|(
 name|ruleName
 argument_list|,
 name|rule
-operator|.
-name|getClass
-argument_list|()
 argument_list|)
-condition|)
-block|{
-name|Set
-argument_list|<
-name|Class
-argument_list|>
-name|x
-init|=
-name|ruleNames
-operator|.
-name|get
-argument_list|(
-name|ruleName
-argument_list|)
-decl_stmt|;
-if|if
-condition|(
-name|x
-operator|.
-name|size
-argument_list|()
-operator|>
-literal|1
+operator|!=
+literal|null
 condition|)
 block|{
 throw|throw
@@ -2121,12 +2069,9 @@ literal|"Rule description '"
 operator|+
 name|ruleName
 operator|+
-literal|"' is not unique; classes: "
-operator|+
-name|x
+literal|"' is not unique. "
 argument_list|)
 throw|;
-block|}
 block|}
 name|mapRuleDescription
 argument_list|(
@@ -2262,6 +2207,17 @@ return|return
 literal|false
 return|;
 block|}
+comment|// Remove rule name.
+name|ruleNames
+operator|.
+name|remove
+argument_list|(
+name|rule
+operator|.
+name|toString
+argument_list|()
+argument_list|)
+expr_stmt|;
 comment|// Remove description.
 name|unmapRuleDescription
 argument_list|(
@@ -4252,7 +4208,7 @@ throw|;
 block|}
 block|}
 block|}
-comment|/**    * Sets whether this planner should consider rel nodes with Convention.NONE    * to have inifinte cost or not.    * @param infinite Whether to make none convention rel nodes inifite cost    */
+comment|/**    * Sets whether this planner should consider rel nodes with Convention.NONE    * to have infinite cost or not.    * @param infinite Whether to make none convention rel nodes infinite cost    */
 specifier|public
 name|void
 name|setNoneConventionHasInfiniteCost
