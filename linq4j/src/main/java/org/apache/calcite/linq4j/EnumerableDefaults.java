@@ -12324,6 +12324,24 @@ argument_list|>
 name|comparator
 parameter_list|)
 block|{
+return|return
+operator|new
+name|AbstractEnumerable
+argument_list|<
+name|TSource
+argument_list|>
+argument_list|()
+block|{
+annotation|@
+name|Override
+specifier|public
+name|Enumerator
+argument_list|<
+name|TSource
+argument_list|>
+name|enumerator
+parameter_list|()
+block|{
 comment|// NOTE: TreeMap allows null comparator. But the caller of this method
 comment|// must supply a comparator if the key does not extend Comparable.
 comment|// Otherwise there will be a ClassCastException while retrieving.
@@ -12346,6 +12364,7 @@ argument_list|(
 name|comparator
 argument_list|)
 decl_stmt|;
+specifier|final
 name|LookupImpl
 argument_list|<
 name|TKey
@@ -12373,6 +12392,12 @@ name|lookup
 operator|.
 name|valuesEnumerable
 argument_list|()
+operator|.
+name|enumerator
+argument_list|()
+return|;
+block|}
+block|}
 return|;
 block|}
 end_function
