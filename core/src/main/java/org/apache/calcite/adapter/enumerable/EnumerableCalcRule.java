@@ -164,7 +164,7 @@ argument_list|>
 operator|)
 name|RelOptUtil
 operator|::
-name|containsMultisetOrWindowedAgg
+name|notContainsWindowedAgg
 argument_list|,
 name|Convention
 operator|.

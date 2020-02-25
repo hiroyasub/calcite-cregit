@@ -897,20 +897,6 @@ name|calcite
 operator|.
 name|rex
 operator|.
-name|RexMultisetUtil
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|rex
-operator|.
 name|RexNode
 import|;
 end_import
@@ -1678,13 +1664,6 @@ class|class
 name|RelOptUtil
 block|{
 comment|//~ Static fields/initializers ---------------------------------------------
-specifier|static
-specifier|final
-name|boolean
-name|B
-init|=
-literal|false
-decl_stmt|;
 specifier|public
 specifier|static
 specifier|final
@@ -1720,7 +1699,7 @@ name|FILTER_PREDICATE
 init|=
 name|RelOptUtil
 operator|::
-name|containsMultisetOrWindowedAgg
+name|notContainsWindowedAgg
 decl_stmt|;
 annotation|@
 name|SuppressWarnings
@@ -1749,7 +1728,7 @@ name|PROJECT_PREDICATE
 init|=
 name|RelOptUtil
 operator|::
-name|containsMultisetOrWindowedAgg
+name|notContainsWindowedAgg
 decl_stmt|;
 annotation|@
 name|SuppressWarnings
@@ -1778,7 +1757,7 @@ name|CALC_PREDICATE
 init|=
 name|RelOptUtil
 operator|::
-name|containsMultisetOrWindowedAgg
+name|notContainsWindowedAgg
 decl_stmt|;
 comment|//~ Methods ----------------------------------------------------------------
 comment|/**    * Whether this node is a limit without sort specification.    */
@@ -16132,11 +16111,11 @@ name|outputNameList
 argument_list|)
 return|;
 block|}
-comment|/** Predicate for whether a {@link Calc} contains multisets or windowed    * aggregates. */
+comment|/** Predicate for if a {@link Calc} does not contain windowed aggregates. */
 specifier|public
 specifier|static
 name|boolean
-name|containsMultisetOrWindowedAgg
+name|notContainsWindowedAgg
 parameter_list|(
 name|Calc
 name|calc
@@ -16144,19 +16123,6 @@ parameter_list|)
 block|{
 return|return
 operator|!
-operator|(
-name|B
-operator|&&
-name|RexMultisetUtil
-operator|.
-name|containsMultiset
-argument_list|(
-name|calc
-operator|.
-name|getProgram
-argument_list|()
-argument_list|)
-operator|||
 name|calc
 operator|.
 name|getProgram
@@ -16164,14 +16130,13 @@ argument_list|()
 operator|.
 name|containsAggs
 argument_list|()
-operator|)
 return|;
 block|}
-comment|/** Predicate for whether a {@link Filter} contains multisets or windowed    * aggregates. */
+comment|/** Predicate for if a {@link Filter} does not windowed aggregates. */
 specifier|public
 specifier|static
 name|boolean
-name|containsMultisetOrWindowedAgg
+name|notContainsWindowedAgg
 parameter_list|(
 name|Filter
 name|filter
@@ -16179,21 +16144,6 @@ parameter_list|)
 block|{
 return|return
 operator|!
-operator|(
-name|B
-operator|&&
-name|RexMultisetUtil
-operator|.
-name|containsMultiset
-argument_list|(
-name|filter
-operator|.
-name|getCondition
-argument_list|()
-argument_list|,
-literal|true
-argument_list|)
-operator|||
 name|RexOver
 operator|.
 name|containsOver
@@ -16203,14 +16153,13 @@ operator|.
 name|getCondition
 argument_list|()
 argument_list|)
-operator|)
 return|;
 block|}
-comment|/** Predicate for whether a {@link Project} contains multisets or windowed    * aggregates. */
+comment|/** Predicate for if a {@link Project} does not contain windowed aggregates. */
 specifier|public
 specifier|static
 name|boolean
-name|containsMultisetOrWindowedAgg
+name|notContainsWindowedAgg
 parameter_list|(
 name|Project
 name|project
@@ -16218,21 +16167,6 @@ parameter_list|)
 block|{
 return|return
 operator|!
-operator|(
-name|B
-operator|&&
-name|RexMultisetUtil
-operator|.
-name|containsMultiset
-argument_list|(
-name|project
-operator|.
-name|getProjects
-argument_list|()
-argument_list|,
-literal|true
-argument_list|)
-operator|||
 name|RexOver
 operator|.
 name|containsOver
@@ -16244,7 +16178,6 @@ argument_list|()
 argument_list|,
 literal|null
 argument_list|)
-operator|)
 return|;
 block|}
 comment|/** Policies for handling two- and three-valued boolean logic. */
