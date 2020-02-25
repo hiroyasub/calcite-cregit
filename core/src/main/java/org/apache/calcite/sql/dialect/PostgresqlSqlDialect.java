@@ -255,7 +255,7 @@ extends|extends
 name|SqlDialect
 block|{
 comment|/** PostgreSQL type system. */
-specifier|private
+specifier|public
 specifier|static
 specifier|final
 name|RelDataTypeSystem

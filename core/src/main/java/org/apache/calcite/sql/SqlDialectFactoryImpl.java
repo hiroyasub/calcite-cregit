@@ -943,6 +943,13 @@ operator|new
 name|MysqlSqlDialect
 argument_list|(
 name|c
+operator|.
+name|withDataTypeSystem
+argument_list|(
+name|MysqlSqlDialect
+operator|.
+name|MYSQL_TYPE_SYSTEM
+argument_list|)
 argument_list|)
 return|;
 case|case
@@ -1100,6 +1107,13 @@ operator|new
 name|PostgresqlSqlDialect
 argument_list|(
 name|c
+operator|.
+name|withDataTypeSystem
+argument_list|(
+name|PostgresqlSqlDialect
+operator|.
+name|POSTGRESQL_TYPE_SYSTEM
+argument_list|)
 argument_list|)
 return|;
 block|}

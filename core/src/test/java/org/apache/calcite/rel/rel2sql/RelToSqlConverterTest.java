@@ -7720,6 +7720,80 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testMySqlCastToVarcharWithLessThanMaxPrecision
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|query
+init|=
+literal|"select cast(\"product_id\" as varchar(50)), \"product_id\" "
+operator|+
+literal|"from \"product\" "
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT CAST(`product_id` AS CHAR(50)), `product_id`\n"
+operator|+
+literal|"FROM `foodmart`.`product`"
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|withMysql
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testMySqlCastToVarcharWithGreaterThanMaxPrecision
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|query
+init|=
+literal|"select cast(\"product_id\" as varchar(500)), \"product_id\" "
+operator|+
+literal|"from \"product\" "
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT CAST(`product_id` AS CHAR(255)), `product_id`\n"
+operator|+
+literal|"FROM `foodmart`.`product`"
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|withMysql
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testMySqlWithHighNullsSelectWithOrderByAscNullsLastAndNoEmulation
 parameter_list|()
 block|{
