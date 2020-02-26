@@ -5709,6 +5709,41 @@ name|check
 argument_list|()
 expr_stmt|;
 block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testJoinProjectTransposeWindow
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"from dept a\n"
+operator|+
+literal|"join (select rank() over (order by name) as r, 1 + 1 from dept) as b\n"
+operator|+
+literal|"on a.name = b.r"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|withRule
+argument_list|(
+name|JoinProjectTransposeRule
+operator|.
+name|BOTH_PROJECT
+argument_list|)
+operator|.
+name|check
+argument_list|()
+expr_stmt|;
+block|}
 comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3353">[CALCITE-3353]    * ProjectJoinTransposeRule caused AssertionError when creating a new Join</a>.    */
 annotation|@
 name|Test
