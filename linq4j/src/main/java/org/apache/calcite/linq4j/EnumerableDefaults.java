@@ -10016,7 +10016,7 @@ block|}
 end_function
 
 begin_comment
-comment|/** Joins two inputs that are sorted on the key. */
+comment|/**    * Joins two inputs that are sorted on the key.    * Inputs must sorted in ascending order, nulls last.    */
 end_comment
 
 begin_function
@@ -18982,7 +18982,7 @@ block|}
 end_class
 
 begin_comment
-comment|/** Enumerator that performs a merge join on its sorted inputs.    *    * @param<TResult> result type    * @param<TSource> left input record type    * @param<TKey> key type    * @param<TInner> right input record type */
+comment|/** Enumerator that performs a merge join on its sorted inputs.    * Inputs must sorted in ascending order, nulls last.    *    * @param<TResult> result type    * @param<TSource> left input record type    * @param<TKey> key type    * @param<TInner> right input record type */
 end_comment
 
 begin_class
@@ -19254,6 +19254,27 @@ init|;
 condition|;
 control|)
 block|{
+comment|// mergeJoin assumes inputs sorted in ascending order with nulls last,
+comment|// if we reach a null key, we are done.
+if|if
+condition|(
+name|leftKey
+operator|==
+literal|null
+operator|||
+name|rightKey
+operator|==
+literal|null
+condition|)
+block|{
+name|done
+operator|=
+literal|true
+expr_stmt|;
+return|return
+literal|false
+return|;
+block|}
 name|int
 name|c
 init|=
@@ -19401,6 +19422,19 @@ argument_list|(
 name|left
 argument_list|)
 decl_stmt|;
+if|if
+condition|(
+name|leftKey2
+operator|==
+literal|null
+condition|)
+block|{
+name|done
+operator|=
+literal|true
+expr_stmt|;
+break|break;
+block|}
 name|int
 name|c
 init|=
@@ -19501,6 +19535,19 @@ argument_list|(
 name|right
 argument_list|)
 decl_stmt|;
+if|if
+condition|(
+name|rightKey2
+operator|==
+literal|null
+condition|)
+block|{
+name|done
+operator|=
+literal|true
+expr_stmt|;
+break|break;
+block|}
 name|int
 name|c
 init|=
