@@ -14880,7 +14880,7 @@ name|planLine
 operator|=
 name|planLine
 operator|.
-name|replaceAll
+name|replace
 argument_list|(
 literal|"a0s0w0"
 argument_list|,
@@ -14951,7 +14951,7 @@ name|planLine
 operator|=
 name|planLine
 operator|.
-name|replaceAll
+name|replace
 argument_list|(
 literal|"a0s0w0"
 argument_list|,

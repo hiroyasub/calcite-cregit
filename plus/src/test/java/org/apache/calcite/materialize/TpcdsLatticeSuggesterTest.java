@@ -348,6 +348,18 @@ import|;
 end_import
 
 begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|regex
+operator|.
+name|Pattern
+import|;
+end_import
+
+begin_import
 import|import static
 name|org
 operator|.
@@ -471,6 +483,17 @@ argument_list|(
 name|evolve
 argument_list|)
 decl_stmt|;
+specifier|final
+name|Pattern
+name|pattern
+init|=
+name|Pattern
+operator|.
+name|compile
+argument_list|(
+literal|"substr\\(([^,]*),([^,]*),([^)]*)\\)"
+argument_list|)
+decl_stmt|;
 for|for
 control|(
 name|Query
@@ -484,7 +507,7 @@ control|)
 block|{
 specifier|final
 name|String
-name|sql
+name|sql0
 init|=
 name|query
 operator|.
@@ -497,38 +520,47 @@ literal|0
 argument_list|)
 argument_list|)
 operator|.
-name|replaceAll
+name|replace
 argument_list|(
 literal|"as returns"
 argument_list|,
 literal|"as \"returns\""
 argument_list|)
 operator|.
-name|replaceAll
+name|replace
 argument_list|(
-literal|"sum\\(returns\\)"
+literal|"sum(returns)"
 argument_list|,
 literal|"sum(\"returns\")"
 argument_list|)
 operator|.
-name|replaceAll
+name|replace
 argument_list|(
 literal|", returns"
 argument_list|,
 literal|", \"returns\""
 argument_list|)
 operator|.
-name|replaceAll
+name|replace
 argument_list|(
 literal|"14 days"
 argument_list|,
 literal|"interval '14' day"
 argument_list|)
+decl_stmt|;
+specifier|final
+name|String
+name|sql
+init|=
+name|pattern
+operator|.
+name|matcher
+argument_list|(
+name|sql0
+argument_list|)
 operator|.
 name|replaceAll
 argument_list|(
-literal|"substr\\(([^,]*),([^,]*),([^)]*)\\)"
-argument_list|,
 literal|"substring($1 from $2 for $3)"
 argument_list|)
 decl_stmt|;

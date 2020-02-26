@@ -883,32 +883,6 @@ block|}
 block|}
 return|;
 block|}
-comment|/** Helper method to strip non-numerics from a string.    *    *<p>Currently used to determine mongod versioning numbers    * from buildInfo.versionArray for use in aggregate method logic. */
-specifier|private
-specifier|static
-name|Integer
-name|parseIntString
-parameter_list|(
-name|String
-name|valueString
-parameter_list|)
-block|{
-return|return
-name|Integer
-operator|.
-name|parseInt
-argument_list|(
-name|valueString
-operator|.
-name|replaceAll
-argument_list|(
-literal|"[^0-9]"
-argument_list|,
-literal|""
-argument_list|)
-argument_list|)
-return|;
-block|}
 comment|/** Implementation of {@link org.apache.calcite.linq4j.Queryable} based on    * a {@link org.apache.calcite.adapter.mongodb.MongoTable}.    *    * @param<T> element type */
 specifier|public
 specifier|static

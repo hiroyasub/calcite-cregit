@@ -6020,7 +6020,7 @@ name|expectedOracle
 init|=
 name|expectedPostgresql
 operator|.
-name|replaceAll
+name|replace
 argument_list|(
 literal|" AS "
 argument_list|,

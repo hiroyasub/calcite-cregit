@@ -5642,7 +5642,7 @@ name|sig
 operator|=
 name|sig
 operator|.
-name|replaceAll
+name|replace
 argument_list|(
 literal|"'"
 argument_list|,

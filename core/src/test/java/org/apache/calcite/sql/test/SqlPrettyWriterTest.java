@@ -775,7 +775,7 @@ name|actual2
 init|=
 name|formatted
 operator|.
-name|replaceAll
+name|replace
 argument_list|(
 literal|"`"
 argument_list|,

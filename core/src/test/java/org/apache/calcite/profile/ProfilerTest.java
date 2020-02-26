@@ -3269,21 +3269,21 @@ decl_stmt|;
 return|return
 name|json
 operator|.
-name|replaceAll
+name|replace
 argument_list|(
 literal|"\n"
 argument_list|,
 literal|""
 argument_list|)
 operator|.
-name|replaceAll
+name|replace
 argument_list|(
 literal|" "
 argument_list|,
 literal|""
 argument_list|)
 operator|.
-name|replaceAll
+name|replace
 argument_list|(
 literal|"\""
 argument_list|,

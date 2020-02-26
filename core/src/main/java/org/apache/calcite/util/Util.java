@@ -3477,7 +3477,7 @@ block|{
 return|return
 name|s
 operator|.
-name|replaceAll
+name|replace
 argument_list|(
 literal|"\r\n"
 argument_list|,

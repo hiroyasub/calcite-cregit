@@ -1064,14 +1064,14 @@ name|append
 argument_list|(
 name|sql
 operator|.
-name|replaceAll
+name|replace
 argument_list|(
 literal|"\""
 argument_list|,
-literal|"\\\\\""
+literal|"\\\""
 argument_list|)
 operator|.
-name|replaceAll
+name|replace
 argument_list|(
 literal|"\n"
 argument_list|,
@@ -1595,7 +1595,7 @@ name|append
 argument_list|(
 name|s
 operator|.
-name|replaceAll
+name|replace
 argument_list|(
 literal|"\""
 argument_list|,

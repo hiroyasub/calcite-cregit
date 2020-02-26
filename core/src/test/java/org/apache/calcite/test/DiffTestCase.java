@@ -344,12 +344,18 @@ specifier|private
 name|String
 name|diffMasks
 decl_stmt|;
+name|Pattern
+name|compiledDiffPattern
+decl_stmt|;
 name|Matcher
 name|compiledDiffMatcher
 decl_stmt|;
 specifier|private
 name|String
 name|ignorePatterns
+decl_stmt|;
+name|Pattern
+name|compiledIgnorePattern
 decl_stmt|;
 name|Matcher
 name|compiledIgnoreMatcher
@@ -997,16 +1003,15 @@ operator|+
 name|mask
 expr_stmt|;
 block|}
-name|Pattern
 name|compiledDiffPattern
-init|=
+operator|=
 name|Pattern
 operator|.
 name|compile
 argument_list|(
 name|diffMasks
 argument_list|)
-decl_stmt|;
+expr_stmt|;
 name|compiledDiffMatcher
 operator|=
 name|compiledDiffPattern
@@ -1051,16 +1056,15 @@ operator|+
 name|javaPattern
 expr_stmt|;
 block|}
-name|Pattern
 name|compiledIgnorePattern
-init|=
+operator|=
 name|Pattern
 operator|.
 name|compile
 argument_list|(
 name|ignorePatterns
 argument_list|)
-decl_stmt|;
+expr_stmt|;
 name|compiledIgnoreMatcher
 operator|=
 name|compiledIgnorePattern
@@ -1104,12 +1108,15 @@ argument_list|()
 condition|)
 block|{
 return|return
+name|compiledDiffPattern
+operator|.
+name|matcher
+argument_list|(
 name|s
+argument_list|)
 operator|.
 name|replaceAll
 argument_list|(
-name|diffMasks
-argument_list|,
 literal|"XYZZY"
 argument_list|)
 return|;
@@ -1187,7 +1194,7 @@ argument_list|()
 condition|)
 block|{
 comment|// If we're in IntelliJ, it's worth printing the 'expected
-comment|//<...> actual<...>' string, becauase IntelliJ can format
+comment|//<...> actual<...>' string, because IntelliJ can format
 comment|// this intelligently. Otherwise, use the more concise
 comment|// diff format.
 name|assertEquals

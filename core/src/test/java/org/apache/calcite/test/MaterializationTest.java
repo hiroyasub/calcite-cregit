@@ -9125,7 +9125,7 @@ name|sql2
 init|=
 name|sql
 operator|.
-name|replaceAll
+name|replace
 argument_list|(
 literal|"`"
 argument_list|,

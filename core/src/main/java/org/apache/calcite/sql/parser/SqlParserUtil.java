@@ -1827,7 +1827,7 @@ name|s
 operator|=
 name|s
 operator|.
-name|replaceAll
+name|replace
 argument_list|(
 literal|" "
 argument_list|,
@@ -1838,7 +1838,7 @@ name|s
 operator|=
 name|s
 operator|.
-name|replaceAll
+name|replace
 argument_list|(
 literal|"\n"
 argument_list|,
@@ -1849,7 +1849,7 @@ name|s
 operator|=
 name|s
 operator|.
-name|replaceAll
+name|replace
 argument_list|(
 literal|"\t"
 argument_list|,
@@ -1860,7 +1860,7 @@ name|s
 operator|=
 name|s
 operator|.
-name|replaceAll
+name|replace
 argument_list|(
 literal|"\r"
 argument_list|,
@@ -1871,7 +1871,7 @@ name|s
 operator|=
 name|s
 operator|.
-name|replaceAll
+name|replace
 argument_list|(
 literal|"\f"
 argument_list|,
@@ -1882,7 +1882,7 @@ name|s
 operator|=
 name|s
 operator|.
-name|replaceAll
+name|replace
 argument_list|(
 literal|"'"
 argument_list|,

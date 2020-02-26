@@ -2978,13 +2978,11 @@ specifier|final
 name|String
 name|maskedActual
 init|=
-name|actual
+name|Matchers
 operator|.
-name|replaceAll
+name|trimNodeIds
 argument_list|(
-literal|", id = [0-9]+"
-argument_list|,
-literal|""
+name|actual
 argument_list|)
 decl_stmt|;
 name|assertThat
@@ -6744,7 +6742,7 @@ name|sql2
 init|=
 name|sql
 operator|.
-name|replaceAll
+name|replace
 argument_list|(
 literal|"`"
 argument_list|,
@@ -9444,13 +9442,6 @@ name|toLinux
 argument_list|(
 name|plan
 argument_list|)
-operator|.
-name|replaceAll
-argument_list|(
-literal|"\\\\r\\\\n"
-argument_list|,
-literal|"\\\\n"
-argument_list|)
 decl_stmt|;
 name|assertTrue
 argument_list|(
@@ -11160,7 +11151,7 @@ argument_list|,
 literal|"\\\""
 argument_list|)
 operator|.
-name|replaceAll
+name|replace
 argument_list|(
 literal|"\n"
 argument_list|,

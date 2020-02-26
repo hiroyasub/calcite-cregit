@@ -31300,9 +31300,9 @@ name|sql
 argument_list|(
 name|in
 operator|.
-name|replaceAll
+name|replace
 argument_list|(
-literal|"\\\\"
+literal|"\\"
 argument_list|,
 literal|"!"
 argument_list|)

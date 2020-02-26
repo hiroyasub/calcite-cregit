@@ -299,6 +299,18 @@ name|java
 operator|.
 name|util
 operator|.
+name|regex
+operator|.
+name|Pattern
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
 name|stream
 operator|.
 name|StreamSupport
@@ -314,6 +326,19 @@ specifier|public
 class|class
 name|Matchers
 block|{
+specifier|private
+specifier|static
+specifier|final
+name|Pattern
+name|PATTERN
+init|=
+name|Pattern
+operator|.
+name|compile
+argument_list|(
+literal|", id = [0-9]+"
+argument_list|)
+decl_stmt|;
 specifier|private
 name|Matchers
 parameter_list|()
@@ -1156,12 +1181,15 @@ name|s
 parameter_list|)
 block|{
 return|return
+name|PATTERN
+operator|.
+name|matcher
+argument_list|(
 name|s
+argument_list|)
 operator|.
 name|replaceAll
 argument_list|(
-literal|", id = [0-9]+"
-argument_list|,
 literal|""
 argument_list|)
 return|;

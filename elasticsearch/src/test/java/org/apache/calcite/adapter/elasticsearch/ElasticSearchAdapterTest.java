@@ -544,7 +544,7 @@ name|line
 operator|=
 name|line
 operator|.
-name|replaceAll
+name|replace
 argument_list|(
 literal|"_id"
 argument_list|,

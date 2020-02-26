@@ -1363,9 +1363,9 @@ name|query
 argument_list|(
 name|sql
 operator|.
-name|replaceAll
+name|replace
 argument_list|(
-literal|"tpcds\\."
+literal|"tpcds."
 argument_list|,
 literal|"tpcds_01."
 argument_list|)

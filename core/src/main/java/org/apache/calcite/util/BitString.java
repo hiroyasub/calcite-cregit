@@ -79,14 +79,14 @@ block|{
 assert|assert
 name|bits
 operator|.
-name|replaceAll
+name|replace
 argument_list|(
 literal|"1"
 argument_list|,
 literal|""
 argument_list|)
 operator|.
-name|replaceAll
+name|replace
 argument_list|(
 literal|"0"
 argument_list|,
