@@ -107,6 +107,7 @@ argument_list|>
 name|vertexSet
 parameter_list|()
 function_decl|;
+comment|/** Removes from this graph all vertices that are in {@code collection},    * and the edges into and out of those vertices. */
 name|void
 name|removeAllVertices
 parameter_list|(
