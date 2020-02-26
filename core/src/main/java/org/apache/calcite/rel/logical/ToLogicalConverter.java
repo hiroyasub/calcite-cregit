@@ -403,6 +403,16 @@ name|ImmutableBitSet
 import|;
 end_import
 
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Collections
+import|;
+end_import
+
 begin_comment
 comment|/**  * Shuttle to convert any rel plan to a plan with all logical nodes.  */
 end_comment
@@ -1326,14 +1336,10 @@ argument_list|()
 argument_list|)
 decl_stmt|;
 return|return
-operator|new
 name|Uncollect
-argument_list|(
-name|input
 operator|.
-name|getCluster
-argument_list|()
-argument_list|,
+name|create
+argument_list|(
 name|input
 operator|.
 name|getTraitSet
@@ -1344,6 +1350,11 @@ argument_list|,
 name|uncollect
 operator|.
 name|withOrdinality
+argument_list|,
+name|Collections
+operator|.
+name|emptyList
+argument_list|()
 argument_list|)
 return|;
 block|}

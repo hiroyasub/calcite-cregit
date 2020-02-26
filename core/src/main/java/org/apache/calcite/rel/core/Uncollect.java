@@ -211,6 +211,30 @@ end_import
 
 begin_import
 import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|collect
+operator|.
+name|ImmutableList
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Collections
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -234,6 +258,20 @@ specifier|public
 specifier|final
 name|boolean
 name|withOrdinality
+decl_stmt|;
+comment|// To alias the items in Uncollect list,
+comment|// i.e., "UNNEST(a, b, c) as T(d, e, f)"
+comment|// outputs as row type Record(d, e, f) where the field "d" has element type of "a",
+comment|// field "e" has element type of "b"(Presto dialect).
+comment|// Without the aliases, the expression "UNNEST(a)" outputs row type
+comment|// same with element type of "a".
+specifier|private
+specifier|final
+name|List
+argument_list|<
+name|String
+argument_list|>
+name|itemAliases
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
 annotation|@
@@ -261,6 +299,11 @@ argument_list|,
 name|child
 argument_list|,
 literal|false
+argument_list|,
+name|Collections
+operator|.
+name|emptyList
+argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
@@ -279,6 +322,12 @@ name|input
 parameter_list|,
 name|boolean
 name|withOrdinality
+parameter_list|,
+name|List
+argument_list|<
+name|String
+argument_list|>
+name|itemAliases
 parameter_list|)
 block|{
 name|super
@@ -295,6 +344,17 @@ operator|.
 name|withOrdinality
 operator|=
 name|withOrdinality
+expr_stmt|;
+name|this
+operator|.
+name|itemAliases
+operator|=
+name|ImmutableList
+operator|.
+name|copyOf
+argument_list|(
+name|itemAliases
+argument_list|)
 expr_stmt|;
 assert|assert
 name|deriveRowType
@@ -338,10 +398,15 @@ literal|"withOrdinality"
 argument_list|,
 literal|false
 argument_list|)
+argument_list|,
+name|Collections
+operator|.
+name|emptyList
+argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Creates an Uncollect.    *    *<p>Each field of the input relational expression must be an array or    * multiset.    *    * @param traitSet Trait set    * @param input    Input relational expression    * @param withOrdinality Whether output should contain an ORDINALITY column    */
+comment|/**    * Creates an Uncollect.    *    *<p>Each field of the input relational expression must be an array or    * multiset.    *    * @param traitSet       Trait set    * @param input          Input relational expression    * @param withOrdinality Whether output should contain an ORDINALITY column    * @param itemAliases    Aliases for the operand items    */
 specifier|public
 specifier|static
 name|Uncollect
@@ -355,6 +420,12 @@ name|input
 parameter_list|,
 name|boolean
 name|withOrdinality
+parameter_list|,
+name|List
+argument_list|<
+name|String
+argument_list|>
+name|itemAliases
 parameter_list|)
 block|{
 specifier|final
@@ -377,6 +448,8 @@ argument_list|,
 name|input
 argument_list|,
 name|withOrdinality
+argument_list|,
+name|itemAliases
 argument_list|)
 return|;
 block|}
@@ -471,6 +544,8 @@ argument_list|,
 name|input
 argument_list|,
 name|withOrdinality
+argument_list|,
+name|itemAliases
 argument_list|)
 return|;
 block|}
@@ -485,10 +560,12 @@ argument_list|(
 name|input
 argument_list|,
 name|withOrdinality
+argument_list|,
+name|itemAliases
 argument_list|)
 return|;
 block|}
-comment|/**    * Returns the row type returned by applying the 'UNNEST' operation to a    * relational expression.    *    *<p>Each column in the relational expression must be a multiset of structs    * or an array. The return type is the type of that column, plus an ORDINALITY    * column if {@code withOrdinality}.    */
+comment|/**    * Returns the row type returned by applying the 'UNNEST' operation to a    * relational expression.    *    *<p>Each column in the relational expression must be a multiset of    * structs or an array. The return type is the combination of expanding    * element types from each column, plus an ORDINALITY column if {@code    * withOrdinality}. If {@code itemAliases} is not empty, the element types    * would not expand, each column element outputs as a whole (the return    * type has same column types as input type).    */
 specifier|public
 specifier|static
 name|RelDataType
@@ -499,6 +576,12 @@ name|rel
 parameter_list|,
 name|boolean
 name|withOrdinality
+parameter_list|,
+name|List
+argument_list|<
+name|String
+argument_list|>
+name|itemAliases
 parameter_list|)
 block|{
 name|RelDataType
@@ -518,6 +601,29 @@ operator|:
 name|inputType
 operator|+
 literal|" is not a struct"
+assert|;
+name|boolean
+name|requireAlias
+init|=
+operator|!
+name|itemAliases
+operator|.
+name|isEmpty
+argument_list|()
+decl_stmt|;
+assert|assert
+operator|!
+name|requireAlias
+operator|||
+name|itemAliases
+operator|.
+name|size
+argument_list|()
+operator|==
+name|inputType
+operator|.
+name|getFieldCount
+argument_list|()
 assert|;
 specifier|final
 name|List
@@ -588,6 +694,15 @@ name|builder
 operator|.
 name|add
 argument_list|(
+name|requireAlias
+condition|?
+name|itemAliases
+operator|.
+name|get
+argument_list|(
+literal|0
+argument_list|)
+else|:
 name|fields
 operator|.
 name|get
@@ -614,12 +729,32 @@ return|;
 block|}
 for|for
 control|(
-name|RelDataTypeField
-name|field
-range|:
+name|int
+name|i
+init|=
+literal|0
+init|;
+name|i
+operator|<
 name|fields
+operator|.
+name|size
+argument_list|()
+condition|;
+name|i
+operator|++
 control|)
 block|{
+name|RelDataTypeField
+name|field
+init|=
+name|fields
+operator|.
+name|get
+argument_list|(
+name|i
+argument_list|)
+decl_stmt|;
 if|if
 condition|(
 name|field
@@ -684,6 +819,26 @@ operator|!=
 name|ret
 assert|;
 if|if
+condition|(
+name|requireAlias
+condition|)
+block|{
+name|builder
+operator|.
+name|add
+argument_list|(
+name|itemAliases
+operator|.
+name|get
+argument_list|(
+name|i
+argument_list|)
+argument_list|,
+name|ret
+argument_list|)
+expr_stmt|;
+block|}
+if|else if
 condition|(
 name|ret
 operator|.

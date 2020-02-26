@@ -486,6 +486,8 @@ literal|"TABLE(CATALOG.SALES.DEPT)"
 argument_list|,
 literal|"TABLE(CATALOG.SALES.DEPT_NESTED)"
 argument_list|,
+literal|"TABLE(CATALOG.SALES.DEPT_NESTED_EXPANDED)"
+argument_list|,
 literal|"TABLE(CATALOG.SALES.BONUS)"
 argument_list|,
 literal|"TABLE(CATALOG.SALES.ORDERS)"

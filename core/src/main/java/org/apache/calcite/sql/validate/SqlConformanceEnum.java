@@ -64,6 +64,9 @@ block|,
 comment|/** Conformance value that instructs Calcite to use SQL semantics    * consistent with the SQL:2003 standard, but ignoring its more    * inconvenient or controversial dicta. */
 name|PRAGMATIC_2003
 block|,
+comment|/** Conformance value that instructs Calcite to use SQL semantics    * consistent with Presto. */
+name|PRESTO
+block|,
 comment|/** Conformance value that instructs Calcite to use SQL semantics    * consistent with Microsoft SQL Server version 2008. */
 name|SQL_SERVER_2008
 block|;
@@ -138,6 +141,9 @@ name|LENIENT
 case|:
 case|case
 name|MYSQL_5
+case|:
+case|case
+name|PRESTO
 case|:
 return|return
 literal|true
@@ -221,6 +227,9 @@ name|PRAGMATIC_2003
 case|:
 case|case
 name|SQL_SERVER_2008
+case|:
+case|case
+name|PRESTO
 case|:
 return|return
 literal|true
@@ -346,6 +355,9 @@ case|:
 case|case
 name|ORACLE_12
 case|:
+case|case
+name|PRESTO
+case|:
 return|return
 literal|true
 return|;
@@ -408,6 +420,9 @@ name|LENIENT
 case|:
 case|case
 name|MYSQL_5
+case|:
+case|case
+name|PRESTO
 case|:
 return|return
 literal|true
@@ -527,6 +542,9 @@ case|:
 case|case
 name|LENIENT
 case|:
+case|case
+name|PRESTO
+case|:
 return|return
 literal|true
 return|;
@@ -611,6 +629,9 @@ case|:
 case|case
 name|SQL_SERVER_2008
 case|:
+case|case
+name|PRESTO
+case|:
 return|return
 literal|true
 return|;
@@ -650,6 +671,9 @@ name|ORACLE_12
 case|:
 case|case
 name|SQL_SERVER_2008
+case|:
+case|case
+name|PRESTO
 case|:
 return|return
 literal|true
@@ -745,12 +769,39 @@ case|:
 case|case
 name|STRICT_2003
 case|:
+case|case
+name|PRESTO
+case|:
 return|return
 literal|false
 return|;
 default|default:
 return|return
 literal|true
+return|;
+block|}
+block|}
+annotation|@
+name|Override
+specifier|public
+name|boolean
+name|allowAliasUnnestItems
+parameter_list|()
+block|{
+switch|switch
+condition|(
+name|this
+condition|)
+block|{
+case|case
+name|PRESTO
+case|:
+return|return
+literal|true
+return|;
+default|default:
+return|return
+literal|false
 return|;
 block|}
 block|}

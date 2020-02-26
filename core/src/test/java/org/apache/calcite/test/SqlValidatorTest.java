@@ -29446,6 +29446,117 @@ literal|"Column 'C1' not found in any table"
 argument_list|)
 expr_stmt|;
 block|}
+comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3789">[CALCITE-3789]    * Support validation of UNNEST multiple array columns like Presto</a>.    */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testAliasUnnestMultipleArrays
+parameter_list|()
+block|{
+comment|// for accessing a field in STRUCT type unnested from array
+name|sql
+argument_list|(
+literal|"select e.ENAME\n"
+operator|+
+literal|"from dept_nested_expanded as d CROSS JOIN\n"
+operator|+
+literal|" UNNEST(d.employees) as t(e)"
+argument_list|)
+operator|.
+name|withConformance
+argument_list|(
+name|SqlConformanceEnum
+operator|.
+name|PRESTO
+argument_list|)
+operator|.
+name|columnType
+argument_list|(
+literal|"VARCHAR(10) NOT NULL"
+argument_list|)
+expr_stmt|;
+comment|// for unnesting multiple arrays at the same time
+name|sql
+argument_list|(
+literal|"select d.deptno, e, k.empno, l.\"unit\", l.\"X\" * l.\"Y\"\n"
+operator|+
+literal|"from dept_nested_expanded as d CROSS JOIN\n"
+operator|+
+literal|" UNNEST(d.admins, d.employees, d.offices) as t(e, k, l)"
+argument_list|)
+operator|.
+name|withConformance
+argument_list|(
+name|SqlConformanceEnum
+operator|.
+name|PRESTO
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+comment|// Make sure validation fails properly given illegal select items
+name|sql
+argument_list|(
+literal|"select d.deptno, ^e^.some_column, k.empno\n"
+operator|+
+literal|"from dept_nested_expanded as d CROSS JOIN\n"
+operator|+
+literal|" UNNEST(d.admins, d.employees) as t(e, k)"
+argument_list|)
+operator|.
+name|withConformance
+argument_list|(
+name|SqlConformanceEnum
+operator|.
+name|PRESTO
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Table 'E' not found"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select d.deptno, e.detail, ^unknown^.detail\n"
+operator|+
+literal|"from dept_nested_expanded as d CROSS JOIN\n"
+operator|+
+literal|" UNNEST(d.employees) as t(e)"
+argument_list|)
+operator|.
+name|withConformance
+argument_list|(
+name|SqlConformanceEnum
+operator|.
+name|PRESTO
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Incompatible types"
+argument_list|)
+expr_stmt|;
+comment|// Make sure validation fails without PRESTO conformance
+name|sql
+argument_list|(
+literal|"select e.ENAME\n"
+operator|+
+literal|"from dept_nested_expanded as d CROSS JOIN\n"
+operator|+
+literal|" UNNEST(d.employees) as t(^e^)"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"List of column aliases must have same degree as table; table has 3 columns "
+operator|+
+literal|"\\('EMPNO', 'ENAME', 'DETAIL'\\), whereas alias list has 1 columns"
+argument_list|)
+expr_stmt|;
+block|}
 annotation|@
 name|Test
 name|void

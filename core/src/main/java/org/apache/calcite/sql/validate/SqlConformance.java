@@ -143,27 +143,27 @@ name|boolean
 name|isLiberal
 parameter_list|()
 function_decl|;
-comment|/**    * Whether to allow aliases from the {@code SELECT} clause to be used as    * column names in the {@code GROUP BY} clause.    *    *<p>Among the built-in conformance levels, true in    * {@link SqlConformanceEnum#BABEL},    * {@link SqlConformanceEnum#LENIENT},    * {@link SqlConformanceEnum#BIG_QUERY},    * {@link SqlConformanceEnum#MYSQL_5};    * false otherwise.    */
+comment|/**    * Whether to allow aliases from the {@code SELECT} clause to be used as    * column names in the {@code GROUP BY} clause.    *    *<p>Among the built-in conformance levels, true in    * {@link SqlConformanceEnum#BABEL},    * {@link SqlConformanceEnum#BIG_QUERY},    * {@link SqlConformanceEnum#LENIENT},    * {@link SqlConformanceEnum#MYSQL_5};    * false otherwise.    */
 name|boolean
 name|isGroupByAlias
 parameter_list|()
 function_decl|;
-comment|/**    * Whether {@code GROUP BY 2} is interpreted to mean 'group by the 2nd column    * in the select list'.    *    *<p>Among the built-in conformance levels, true in    * {@link SqlConformanceEnum#BABEL},    * {@link SqlConformanceEnum#LENIENT},    * {@link SqlConformanceEnum#MYSQL_5};    * false otherwise.    */
+comment|/**    * Whether {@code GROUP BY 2} is interpreted to mean 'group by the 2nd column    * in the select list'.    *    *<p>Among the built-in conformance levels, true in    * {@link SqlConformanceEnum#BABEL},    * {@link SqlConformanceEnum#LENIENT},    * {@link SqlConformanceEnum#MYSQL_5},    * {@link SqlConformanceEnum#PRESTO};    * false otherwise.    */
 name|boolean
 name|isGroupByOrdinal
 parameter_list|()
 function_decl|;
-comment|/**    * Whether to allow aliases from the {@code SELECT} clause to be used as    * column names in the {@code HAVING} clause.    *    *<p>Among the built-in conformance levels, true in    * {@link SqlConformanceEnum#BABEL},    * {@link SqlConformanceEnum#LENIENT},    * {@link SqlConformanceEnum#BIG_QUERY},    * {@link SqlConformanceEnum#MYSQL_5};    * false otherwise.    */
+comment|/**    * Whether to allow aliases from the {@code SELECT} clause to be used as    * column names in the {@code HAVING} clause.    *    *<p>Among the built-in conformance levels, true in    * {@link SqlConformanceEnum#BABEL},    * {@link SqlConformanceEnum#BIG_QUERY},    * {@link SqlConformanceEnum#LENIENT},    * {@link SqlConformanceEnum#MYSQL_5};    * false otherwise.    */
 name|boolean
 name|isHavingAlias
 parameter_list|()
 function_decl|;
-comment|/**    * Whether '{@code ORDER BY 2}' is interpreted to mean 'sort by the 2nd    * column in the select list'.    *    *<p>Among the built-in conformance levels, true in    * {@link SqlConformanceEnum#DEFAULT},    * {@link SqlConformanceEnum#BABEL},    * {@link SqlConformanceEnum#LENIENT},    * {@link SqlConformanceEnum#MYSQL_5},    * {@link SqlConformanceEnum#ORACLE_10},    * {@link SqlConformanceEnum#ORACLE_12},    * {@link SqlConformanceEnum#STRICT_92},    * {@link SqlConformanceEnum#PRAGMATIC_99},    * {@link SqlConformanceEnum#PRAGMATIC_2003};    * {@link SqlConformanceEnum#SQL_SERVER_2008};    * false otherwise.    */
+comment|/**    * Whether '{@code ORDER BY 2}' is interpreted to mean 'sort by the 2nd    * column in the select list'.    *    *<p>Among the built-in conformance levels, true in    * {@link SqlConformanceEnum#DEFAULT},    * {@link SqlConformanceEnum#BABEL},    * {@link SqlConformanceEnum#LENIENT},    * {@link SqlConformanceEnum#MYSQL_5},    * {@link SqlConformanceEnum#ORACLE_10},    * {@link SqlConformanceEnum#ORACLE_12},    * {@link SqlConformanceEnum#PRAGMATIC_99},    * {@link SqlConformanceEnum#PRAGMATIC_2003},    * {@link SqlConformanceEnum#PRESTO},    * {@link SqlConformanceEnum#SQL_SERVER_2008},    * {@link SqlConformanceEnum#STRICT_92};    * false otherwise.    */
 name|boolean
 name|isSortByOrdinal
 parameter_list|()
 function_decl|;
-comment|/**    * Whether '{@code ORDER BY x}' is interpreted to mean 'sort by the select    * list item whose alias is x' even if there is a column called x.    *    *<p>Among the built-in conformance levels, true in    * {@link SqlConformanceEnum#DEFAULT},    * {@link SqlConformanceEnum#BABEL},    * {@link SqlConformanceEnum#LENIENT},    * {@link SqlConformanceEnum#MYSQL_5},    * {@link SqlConformanceEnum#ORACLE_10},    * {@link SqlConformanceEnum#ORACLE_12},    * {@link SqlConformanceEnum#STRICT_92};    * {@link SqlConformanceEnum#SQL_SERVER_2008};    * false otherwise.    */
+comment|/**    * Whether '{@code ORDER BY x}' is interpreted to mean 'sort by the select    * list item whose alias is x' even if there is a column called x.    *    *<p>Among the built-in conformance levels, true in    * {@link SqlConformanceEnum#DEFAULT},    * {@link SqlConformanceEnum#BABEL},    * {@link SqlConformanceEnum#LENIENT},    * {@link SqlConformanceEnum#MYSQL_5},    * {@link SqlConformanceEnum#ORACLE_10},    * {@link SqlConformanceEnum#ORACLE_12},    * {@link SqlConformanceEnum#SQL_SERVER_2008},    * {@link SqlConformanceEnum#STRICT_92};    * false otherwise.    */
 name|boolean
 name|isSortByAlias
 parameter_list|()
@@ -178,22 +178,22 @@ name|boolean
 name|isFromRequired
 parameter_list|()
 function_decl|;
-comment|/**    * Whether the bang-equal token != is allowed as an alternative to&lt;&gt; in    * the parser.    *    *<p>Among the built-in conformance levels, true in    * {@link SqlConformanceEnum#BABEL},    * {@link SqlConformanceEnum#LENIENT},    * {@link SqlConformanceEnum#MYSQL_5},    * {@link SqlConformanceEnum#ORACLE_10};    * {@link SqlConformanceEnum#ORACLE_12};    * false otherwise.    */
+comment|/**    * Whether the bang-equal token != is allowed as an alternative to&lt;&gt; in    * the parser.    *    *<p>Among the built-in conformance levels, true in    * {@link SqlConformanceEnum#BABEL},    * {@link SqlConformanceEnum#LENIENT},    * {@link SqlConformanceEnum#MYSQL_5},    * {@link SqlConformanceEnum#ORACLE_10},    * {@link SqlConformanceEnum#ORACLE_12},    * {@link SqlConformanceEnum#PRESTO};    * false otherwise.    */
 name|boolean
 name|isBangEqualAllowed
 parameter_list|()
 function_decl|;
-comment|/**    * Whether the "%" operator is allowed by the parser as an alternative to the    * {@code mod} function.    *    *<p>Among the built-in conformance levels, true in    * {@link SqlConformanceEnum#BABEL},    * {@link SqlConformanceEnum#LENIENT},    * {@link SqlConformanceEnum#MYSQL_5};    * false otherwise.    */
+comment|/**    * Whether the "%" operator is allowed by the parser as an alternative to the    * {@code mod} function.    *    *<p>Among the built-in conformance levels, true in    * {@link SqlConformanceEnum#BABEL},    * {@link SqlConformanceEnum#LENIENT},    * {@link SqlConformanceEnum#MYSQL_5},    * {@link SqlConformanceEnum#PRESTO};    * false otherwise.    */
 name|boolean
 name|isPercentRemainderAllowed
 parameter_list|()
 function_decl|;
-comment|/**    * Whether {@code MINUS} is allowed as an alternative to {@code EXCEPT} in    * the parser.    *    *<p>Among the built-in conformance levels, true in    * {@link SqlConformanceEnum#BABEL},    * {@link SqlConformanceEnum#LENIENT},    * {@link SqlConformanceEnum#ORACLE_10};    * {@link SqlConformanceEnum#ORACLE_12};    * false otherwise.    *    *<p>Note: MySQL does not support {@code MINUS} or {@code EXCEPT} (as of    * version 5.5).    */
+comment|/**    * Whether {@code MINUS} is allowed as an alternative to {@code EXCEPT} in    * the parser.    *    *<p>Among the built-in conformance levels, true in    * {@link SqlConformanceEnum#BABEL},    * {@link SqlConformanceEnum#LENIENT},    * {@link SqlConformanceEnum#ORACLE_10},    * {@link SqlConformanceEnum#ORACLE_12};    * false otherwise.    *    *<p>Note: MySQL does not support {@code MINUS} or {@code EXCEPT} (as of    * version 5.5).    */
 name|boolean
 name|isMinusAllowed
 parameter_list|()
 function_decl|;
-comment|/**    * Whether {@code CROSS APPLY} and {@code OUTER APPLY} operators are allowed    * in the parser.    *    *<p>{@code APPLY} invokes a table-valued function for each row returned    * by a table expression. It is syntactic sugar:<ul>    *    *<li>{@code SELECT * FROM emp CROSS APPLY TABLE(promote(empno)}<br>    * is equivalent to<br>    * {@code SELECT * FROM emp CROSS JOIN LATERAL TABLE(promote(empno)}    *    *<li>{@code SELECT * FROM emp OUTER APPLY TABLE(promote(empno)}<br>    * is equivalent to<br>    * {@code SELECT * FROM emp LEFT JOIN LATERAL TABLE(promote(empno)} ON true    *</ul>    *    *<p>Among the built-in conformance levels, true in    * {@link SqlConformanceEnum#BABEL},    * {@link SqlConformanceEnum#LENIENT},    * {@link SqlConformanceEnum#SQL_SERVER_2008};    * {@link SqlConformanceEnum#ORACLE_12};    * false otherwise.    */
+comment|/**    * Whether {@code CROSS APPLY} and {@code OUTER APPLY} operators are allowed    * in the parser.    *    *<p>{@code APPLY} invokes a table-valued function for each row returned    * by a table expression. It is syntactic sugar:<ul>    *    *<li>{@code SELECT * FROM emp CROSS APPLY TABLE(promote(empno)}<br>    * is equivalent to<br>    * {@code SELECT * FROM emp CROSS JOIN LATERAL TABLE(promote(empno)}    *    *<li>{@code SELECT * FROM emp OUTER APPLY TABLE(promote(empno)}<br>    * is equivalent to<br>    * {@code SELECT * FROM emp LEFT JOIN LATERAL TABLE(promote(empno)} ON true    *</ul>    *    *<p>Among the built-in conformance levels, true in    * {@link SqlConformanceEnum#BABEL},    * {@link SqlConformanceEnum#LENIENT},    * {@link SqlConformanceEnum#ORACLE_12},    * {@link SqlConformanceEnum#SQL_SERVER_2008};    * false otherwise.    */
 name|boolean
 name|isApplyAllowed
 parameter_list|()
@@ -203,12 +203,17 @@ name|boolean
 name|isInsertSubsetColumnsAllowed
 parameter_list|()
 function_decl|;
+comment|/**    * Whether directly alias array items in UNNEST.    *    *<p>E.g. in UNNEST(a_array, b_array) AS T(a, b),    * a and b will be aliases of elements in a_array and b_array    * respectively.    *    *<p>Without this flag set, T will be the alias    * of the element in a_array and a, b will be the top level    * fields of T if T is a STRUCT type.    *    *<p>Among the built-in conformance levels, true in    * {@link SqlConformanceEnum#PRESTO};    * false otherwise.    */
+name|boolean
+name|allowAliasUnnestItems
+parameter_list|()
+function_decl|;
 comment|/**    * Whether to allow parentheses to be specified in calls to niladic functions    * and procedures (that is, functions and procedures with no parameters).    *    *<p>For example, {@code CURRENT_DATE} is a niladic system function. In    * standard SQL it must be invoked without parentheses:    *    *<blockquote><code>VALUES CURRENT_DATE</code></blockquote>    *    *<p>If {@code allowNiladicParentheses}, the following syntax is also valid:    *    *<blockquote><code>VALUES CURRENT_DATE()</code></blockquote>    *    *<p>Of the popular databases, MySQL, Apache Phoenix and VoltDB allow this    * behavior;    * Apache Hive, HSQLDB, IBM DB2, Microsoft SQL Server, Oracle, PostgreSQL do    * not.    *    *<p>Among the built-in conformance levels, true in    * {@link SqlConformanceEnum#BABEL},    * {@link SqlConformanceEnum#LENIENT},    * {@link SqlConformanceEnum#MYSQL_5};    * false otherwise.    */
 name|boolean
 name|allowNiladicParentheses
 parameter_list|()
 function_decl|;
-comment|/**    * Whether to allow SQL syntax "{@code ROW(expr1, expr2, expr3)}".    *<p>The equivalent syntax in standard SQL is    * "{@code (expr1, expr2, expr3)}".    *    *<p>Standard SQL does not allow this because the type is not    * well-defined. However, PostgreSQL allows this behavior.    *    *<p>Standard SQL allows row expressions in other contexts, for instance    * inside {@code VALUES} clause.    *    *<p>Among the built-in conformance levels, true in    * {@link SqlConformanceEnum#DEFAULT},    * {@link SqlConformanceEnum#LENIENT};    * false otherwise.    */
+comment|/**    * Whether to allow SQL syntax "{@code ROW(expr1, expr2, expr3)}".    *<p>The equivalent syntax in standard SQL is    * "{@code (expr1, expr2, expr3)}".    *    *<p>Standard SQL does not allow this because the type is not    * well-defined. However, PostgreSQL allows this behavior.    *    *<p>Standard SQL allows row expressions in other contexts, for instance    * inside {@code VALUES} clause.    *    *<p>Among the built-in conformance levels, true in    * {@link SqlConformanceEnum#DEFAULT},    * {@link SqlConformanceEnum#LENIENT},    * {@link SqlConformanceEnum#PRESTO};    * false otherwise.    */
 name|boolean
 name|allowExplicitRowValueConstructor
 parameter_list|()
@@ -223,12 +228,12 @@ name|boolean
 name|isLimitStartCountAllowed
 parameter_list|()
 function_decl|;
-comment|/**    * Whether to allow geo-spatial extensions, including the GEOMETRY type.    *    *<p>Among the built-in conformance levels, true in    * {@link SqlConformanceEnum#BABEL},    * {@link SqlConformanceEnum#LENIENT},    * {@link SqlConformanceEnum#MYSQL_5},    * {@link SqlConformanceEnum#SQL_SERVER_2008};    * false otherwise.    */
+comment|/**    * Whether to allow geo-spatial extensions, including the GEOMETRY type.    *    *<p>Among the built-in conformance levels, true in    * {@link SqlConformanceEnum#BABEL},    * {@link SqlConformanceEnum#LENIENT},    * {@link SqlConformanceEnum#MYSQL_5},    * {@link SqlConformanceEnum#PRESTO},    * {@link SqlConformanceEnum#SQL_SERVER_2008};    * false otherwise.    */
 name|boolean
 name|allowGeometry
 parameter_list|()
 function_decl|;
-comment|/**    * Whether the least restrictive type of a number of CHAR types of different    * lengths should be a VARCHAR type. And similarly BINARY to VARBINARY.    *    *<p>For example, consider the query    *    *<blockquote><pre>SELECT 'abcde' UNION SELECT 'xyz'</pre></blockquote>    *    *<p>The input columns have types {@code CHAR(5)} and {@code CHAR(3)}, and    * we need a result type that is large enough for both:    *<ul>    *<li>Under strict SQL:2003 behavior, its column has type {@code CHAR(5)},    *     and the value in the second row will have trailing spaces.    *<li>With lenient behavior, its column has type {@code VARCHAR(5)}, and the    *     values have no trailing spaces.    *</ul>    *    *<p>Among the built-in conformance levels, true in    * {@link SqlConformanceEnum#PRAGMATIC_99},    * {@link SqlConformanceEnum#PRAGMATIC_2003},    * {@link SqlConformanceEnum#MYSQL_5};    * {@link SqlConformanceEnum#ORACLE_10};    * {@link SqlConformanceEnum#ORACLE_12};    * {@link SqlConformanceEnum#SQL_SERVER_2008};    * false otherwise.    */
+comment|/**    * Whether the least restrictive type of a number of CHAR types of different    * lengths should be a VARCHAR type. And similarly BINARY to VARBINARY.    *    *<p>For example, consider the query    *    *<blockquote><pre>SELECT 'abcde' UNION SELECT 'xyz'</pre></blockquote>    *    *<p>The input columns have types {@code CHAR(5)} and {@code CHAR(3)}, and    * we need a result type that is large enough for both:    *<ul>    *<li>Under strict SQL:2003 behavior, its column has type {@code CHAR(5)},    *     and the value in the second row will have trailing spaces.    *<li>With lenient behavior, its column has type {@code VARCHAR(5)}, and the    *     values have no trailing spaces.    *</ul>    *    *<p>Among the built-in conformance levels, true in    * {@link SqlConformanceEnum#PRAGMATIC_99},    * {@link SqlConformanceEnum#PRAGMATIC_2003},    * {@link SqlConformanceEnum#MYSQL_5},    * {@link SqlConformanceEnum#ORACLE_10},    * {@link SqlConformanceEnum#ORACLE_12},    * {@link SqlConformanceEnum#PRESTO},    * {@link SqlConformanceEnum#SQL_SERVER_2008};    * false otherwise.    */
 name|boolean
 name|shouldConvertRaggedUnionTypesToVarying
 parameter_list|()
@@ -243,7 +248,7 @@ name|boolean
 name|allowPluralTimeUnits
 parameter_list|()
 function_decl|;
-comment|/**    * Whether to allow a qualified common column in a query that has a    * NATURAL join or a join with a USING clause.    *    *<p>For example, in the query    *    *<blockquote><pre>SELECT emp.deptno    * FROM emp    * JOIN dept USING (deptno)</pre></blockquote>    *    *<p>{@code deptno} is the common column. A qualified common column    * such as {@code emp.deptno} is not allowed in Oracle, but is allowed    * in PostgreSQL.    *    *<p>Among the built-in conformance levels, false in    * {@link SqlConformanceEnum#STRICT_92},    * {@link SqlConformanceEnum#STRICT_99},    * {@link SqlConformanceEnum#STRICT_2003},    * {@link SqlConformanceEnum#ORACLE_10},    * {@link SqlConformanceEnum#ORACLE_12};    * true otherwise.    */
+comment|/**    * Whether to allow a qualified common column in a query that has a    * NATURAL join or a join with a USING clause.    *    *<p>For example, in the query    *    *<blockquote><pre>SELECT emp.deptno    * FROM emp    * JOIN dept USING (deptno)</pre></blockquote>    *    *<p>{@code deptno} is the common column. A qualified common column    * such as {@code emp.deptno} is not allowed in Oracle, but is allowed    * in PostgreSQL.    *    *<p>Among the built-in conformance levels, false in    * {@link SqlConformanceEnum#ORACLE_10},    * {@link SqlConformanceEnum#ORACLE_12},    * {@link SqlConformanceEnum#PRESTO},    * {@link SqlConformanceEnum#STRICT_92},    * {@link SqlConformanceEnum#STRICT_99},    * {@link SqlConformanceEnum#STRICT_2003};    * true otherwise.    */
 name|boolean
 name|allowQualifyingCommonColumn
 parameter_list|()

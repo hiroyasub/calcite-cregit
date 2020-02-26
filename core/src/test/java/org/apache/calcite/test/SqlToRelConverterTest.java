@@ -4879,10 +4879,72 @@ argument_list|(
 name|sql
 argument_list|)
 operator|.
-name|with
-argument_list|(
-name|getExtendedTester
+name|ok
 argument_list|()
+expr_stmt|;
+block|}
+comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3789">[CALCITE-3789]    * Support validation of UNNEST multiple array columns like Presto</a>.    */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testAliasUnnestArrayPlanWithSingleColumn
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select d.deptno, employee.empno\n"
+operator|+
+literal|"from dept_nested_expanded as d,\n"
+operator|+
+literal|" UNNEST(d.employees) as t(employee)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|conformance
+argument_list|(
+name|SqlConformanceEnum
+operator|.
+name|PRESTO
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3789">[CALCITE-3789]    * Support validation of UNNEST multiple array columns like Presto</a>.    */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testAliasUnnestArrayPlanWithDoubleColumn
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select d.deptno, e, k.empno\n"
+operator|+
+literal|"from dept_nested_expanded as d CROSS JOIN\n"
+operator|+
+literal|" UNNEST(d.admins, d.employees) as t(e, k)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|conformance
+argument_list|(
+name|SqlConformanceEnum
+operator|.
+name|PRESTO
 argument_list|)
 operator|.
 name|ok

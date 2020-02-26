@@ -337,6 +337,20 @@ name|allowQualifyingCommonColumn
 argument_list|()
 return|;
 block|}
+specifier|public
+name|boolean
+name|allowAliasUnnestItems
+parameter_list|()
+block|{
+return|return
+name|SqlConformanceEnum
+operator|.
+name|DEFAULT
+operator|.
+name|allowAliasUnnestItems
+argument_list|()
+return|;
+block|}
 block|}
 end_class
 
