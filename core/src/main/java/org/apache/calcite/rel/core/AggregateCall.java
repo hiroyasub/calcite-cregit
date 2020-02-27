@@ -1292,6 +1292,19 @@ argument_list|)
 expr_stmt|;
 if|if
 condition|(
+name|approximate
+condition|)
+block|{
+name|buf
+operator|.
+name|append
+argument_list|(
+literal|"APPROXIMATE "
+argument_list|)
+expr_stmt|;
+block|}
+if|if
+condition|(
 name|distinct
 condition|)
 block|{
