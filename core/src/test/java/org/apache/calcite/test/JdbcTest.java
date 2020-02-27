@@ -1611,6 +1611,18 @@ name|util
 operator|.
 name|stream
 operator|.
+name|Collectors
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|stream
+operator|.
 name|Stream
 import|;
 end_import
@@ -3306,6 +3318,12 @@ operator|.
 name|TableMacroFunctionWithNamedParameters
 operator|.
 name|class
+argument_list|,
+name|Smalls
+operator|.
+name|AnotherTableMacroFunctionWithNamedParameters
+operator|.
+name|class
 argument_list|)
 decl_stmt|;
 name|with
@@ -3417,6 +3435,18 @@ argument_list|(
 name|expected3
 argument_list|)
 expr_stmt|;
+name|with
+operator|.
+name|query
+argument_list|(
+literal|"select * from table(\"adhoc\".\"View\"(s=>'6', t=>5))"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+name|expected3
+argument_list|)
+expr_stmt|;
 block|}
 comment|/** Tests a JDBC connection that provides a model that contains a table    *  macro. */
 annotation|@
@@ -3501,9 +3531,55 @@ name|AssertThat
 name|assertWithMacro
 parameter_list|(
 name|Class
+argument_list|<
+name|?
+argument_list|>
+modifier|...
 name|clazz
 parameter_list|)
 block|{
+name|String
+name|delimiter
+init|=
+literal|""
+operator|+
+literal|"'\n"
+operator|+
+literal|"         },\n"
+operator|+
+literal|"         {\n"
+operator|+
+literal|"           name: 'View',\n"
+operator|+
+literal|"           className: '"
+decl_stmt|;
+name|String
+name|functions
+init|=
+name|Arrays
+operator|.
+name|stream
+argument_list|(
+name|clazz
+argument_list|)
+operator|.
+name|map
+argument_list|(
+name|Class
+operator|::
+name|getName
+argument_list|)
+operator|.
+name|collect
+argument_list|(
+name|Collectors
+operator|.
+name|joining
+argument_list|(
+name|delimiter
+argument_list|)
+argument_list|)
+decl_stmt|;
 return|return
 name|CalciteAssert
 operator|.
@@ -3527,10 +3603,7 @@ literal|"           name: 'View',\n"
 operator|+
 literal|"           className: '"
 operator|+
-name|clazz
-operator|.
-name|getName
-argument_list|()
+name|functions
 operator|+
 literal|"'\n"
 operator|+
@@ -3551,6 +3624,9 @@ name|void
 name|checkTableMacroInModel
 parameter_list|(
 name|Class
+argument_list|<
+name|?
+argument_list|>
 name|clazz
 parameter_list|)
 block|{
@@ -3581,6 +3657,9 @@ name|void
 name|checkTableFunctionInModel
 parameter_list|(
 name|Class
+argument_list|<
+name|?
+argument_list|>
 name|clazz
 parameter_list|)
 block|{
