@@ -323,6 +323,11 @@ else|else
 block|{
 return|return
 name|cost
+operator|.
+name|multiplyBy
+argument_list|(
+literal|0.9
+argument_list|)
 return|;
 block|}
 block|}

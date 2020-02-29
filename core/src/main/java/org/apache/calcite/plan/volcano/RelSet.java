@@ -1342,17 +1342,6 @@ operator|.
 name|subsets
 control|)
 block|{
-name|planner
-operator|.
-name|ruleQueue
-operator|.
-name|subsetImportances
-operator|.
-name|remove
-argument_list|(
-name|otherSubset
-argument_list|)
-expr_stmt|;
 name|RelSubset
 name|subset
 init|=

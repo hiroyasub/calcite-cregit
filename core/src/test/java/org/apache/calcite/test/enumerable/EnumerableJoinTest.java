@@ -1101,21 +1101,21 @@ argument_list|(
 literal|""
 comment|// It is important that we have MergeJoin in the plan
 operator|+
-literal|"EnumerableCalc(expr#0..4=[{inputs}], expr#5=[10], expr#6=[*($t5, $t0)], expr#7=[>($t2, $t6)], empid=[$t2], name=[$t4], dept_name=[$t1], e_deptno=[$t3], d_deptno=[$t0], $condition=[$t7])\n"
+literal|"EnumerableCalc(expr#0..4=[{inputs}], expr#5=[10], expr#6=[*($t5, $t3)], expr#7=[>($t0, $t6)], empid=[$t0], name=[$t2], dept_name=[$t4], e_deptno=[$t1], d_deptno=[$t3], $condition=[$t7])\n"
 operator|+
-literal|"  EnumerableMergeJoin(condition=[=($0, $3)], joinType=[inner])\n"
-operator|+
-literal|"    EnumerableSort(sort0=[$0], dir0=[ASC])\n"
-operator|+
-literal|"      EnumerableCalc(expr#0..3=[{inputs}], proj#0..1=[{exprs}])\n"
-operator|+
-literal|"        EnumerableTableScan(table=[[s, depts]])\n"
+literal|"  EnumerableMergeJoin(condition=[=($1, $3)], joinType=[inner])\n"
 operator|+
 literal|"    EnumerableSort(sort0=[$1], dir0=[ASC])\n"
 operator|+
 literal|"      EnumerableCalc(expr#0..4=[{inputs}], proj#0..2=[{exprs}])\n"
 operator|+
 literal|"        EnumerableTableScan(table=[[s, emps]])\n"
+operator|+
+literal|"    EnumerableSort(sort0=[$0], dir0=[ASC])\n"
+operator|+
+literal|"      EnumerableCalc(expr#0..3=[{inputs}], proj#0..1=[{exprs}])\n"
+operator|+
+literal|"        EnumerableTableScan(table=[[s, depts]])\n"
 argument_list|)
 operator|.
 name|returnsUnordered
@@ -1434,13 +1434,9 @@ literal|"      EnumerableTableScan(table=[[s, emps]])\n"
 operator|+
 literal|"  EnumerableTableSpool(readType=[LAZY], writeType=[LAZY], table=[[#DELTA#]])\n"
 operator|+
-literal|"    EnumerableCalc(expr#0..8=[{inputs}], empid=[$t0], name=[$t2])\n"
+literal|"    EnumerableCalc(expr#0..8=[{inputs}], empid=[$t4], name=[$t6])\n"
 operator|+
-literal|"      EnumerableMergeJoin(condition=[=($0, $8)], joinType=[inner])\n"
-operator|+
-literal|"        EnumerableSort(sort0=[$0], dir0=[ASC])\n"
-operator|+
-literal|"          EnumerableTableScan(table=[[s, emps]])\n"
+literal|"      EnumerableMergeJoin(condition=[=($3, $4)], joinType=[inner])\n"
 operator|+
 literal|"        EnumerableSort(sort0=[$3], dir0=[ASC])\n"
 operator|+
@@ -1455,6 +1451,10 @@ operator|+
 literal|"            EnumerableSort(sort0=[$0], dir0=[ASC])\n"
 operator|+
 literal|"              EnumerableTableScan(table=[[s, hierarchies]])\n"
+operator|+
+literal|"        EnumerableSort(sort0=[$0], dir0=[ASC])\n"
+operator|+
+literal|"          EnumerableTableScan(table=[[s, emps]])\n"
 argument_list|)
 operator|.
 name|returnsUnordered

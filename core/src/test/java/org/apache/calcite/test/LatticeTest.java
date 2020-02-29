@@ -3686,15 +3686,15 @@ literal|"PLAN=JdbcToEnumerableConverter\n"
 operator|+
 literal|"  JdbcAggregate(group=[{}], EXPR$0=[COUNT()])\n"
 operator|+
-literal|"    JdbcJoin(condition=[=($1, $0)], joinType=[inner])\n"
-operator|+
-literal|"      JdbcProject(time_id=[$0])\n"
-operator|+
-literal|"        JdbcTableScan(table=[[foodmart, time_by_day]])\n"
+literal|"    JdbcJoin(condition=[=($0, $1)], joinType=[inner])\n"
 operator|+
 literal|"      JdbcProject(time_id=[$1])\n"
 operator|+
 literal|"        JdbcTableScan(table=[[foodmart, sales_fact_1997]])\n"
+operator|+
+literal|"      JdbcProject(time_id=[$0])\n"
+operator|+
+literal|"        JdbcTableScan(table=[[foodmart, time_by_day]])\n"
 decl_stmt|;
 name|CalciteAssert
 operator|.

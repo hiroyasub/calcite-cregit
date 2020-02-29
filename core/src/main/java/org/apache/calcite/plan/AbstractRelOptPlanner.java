@@ -332,7 +332,7 @@ specifier|private
 name|Pattern
 name|ruleDescExclusionFilter
 decl_stmt|;
-specifier|private
+specifier|protected
 specifier|final
 name|AtomicBoolean
 name|cancelFlag

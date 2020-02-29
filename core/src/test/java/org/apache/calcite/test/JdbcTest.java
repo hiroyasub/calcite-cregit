@@ -11839,17 +11839,17 @@ name|explainContains
 argument_list|(
 literal|""
 operator|+
-literal|"EnumerableCalc(expr#0..3=[{inputs}], empid=[$t2], deptno=[$t0], name=[$t1])\n"
+literal|"EnumerableCalc(expr#0..3=[{inputs}], empid=[$t0], deptno=[$t2], name=[$t3])\n"
 operator|+
-literal|"  EnumerableHashJoin(condition=[=($0, $3)], joinType=[inner])\n"
-operator|+
-literal|"    EnumerableCalc(expr#0..3=[{inputs}], proj#0..1=[{exprs}])\n"
-operator|+
-literal|"      EnumerableTableScan(table=[[hr, depts]])\n"
+literal|"  EnumerableHashJoin(condition=[=($1, $2)], joinType=[inner])\n"
 operator|+
 literal|"    EnumerableCalc(expr#0..4=[{inputs}], proj#0..1=[{exprs}])\n"
 operator|+
-literal|"      EnumerableTableScan(table=[[hr, emps]])"
+literal|"      EnumerableTableScan(table=[[hr, emps]])\n"
+operator|+
+literal|"    EnumerableCalc(expr#0..3=[{inputs}], proj#0..1=[{exprs}])\n"
+operator|+
+literal|"      EnumerableTableScan(table=[[hr, depts]])"
 argument_list|)
 operator|.
 name|returns

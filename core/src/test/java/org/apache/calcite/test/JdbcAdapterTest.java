@@ -658,17 +658,17 @@ name|explainContains
 argument_list|(
 literal|"PLAN=JdbcToEnumerableConverter\n"
 operator|+
-literal|"  JdbcProject(EMPNO=[$2], ENAME=[$3], DEPTNO=[$4], DNAME=[$1])\n"
+literal|"  JdbcProject(EMPNO=[$0], ENAME=[$1], DEPTNO=[$2], DNAME=[$4])\n"
 operator|+
-literal|"    JdbcJoin(condition=[=($4, $0)], joinType=[inner])\n"
-operator|+
-literal|"      JdbcProject(DEPTNO=[$0], DNAME=[$1])\n"
-operator|+
-literal|"        JdbcTableScan(table=[[SCOTT, DEPT]])\n"
+literal|"    JdbcJoin(condition=[=($2, $3)], joinType=[inner])\n"
 operator|+
 literal|"      JdbcProject(EMPNO=[$0], ENAME=[$1], DEPTNO=[$7])\n"
 operator|+
-literal|"        JdbcTableScan(table=[[SCOTT, EMP]])"
+literal|"        JdbcTableScan(table=[[SCOTT, EMP]])\n"
+operator|+
+literal|"      JdbcProject(DEPTNO=[$0], DNAME=[$1])\n"
+operator|+
+literal|"        JdbcTableScan(table=[[SCOTT, DEPT]])"
 argument_list|)
 operator|.
 name|runs
@@ -689,17 +689,17 @@ argument_list|)
 operator|.
 name|planHasSql
 argument_list|(
-literal|"SELECT \"t0\".\"EMPNO\", \"t0\".\"ENAME\", "
+literal|"SELECT \"t\".\"EMPNO\", \"t\".\"ENAME\", "
 operator|+
-literal|"\"t0\".\"DEPTNO\", \"t\".\"DNAME\"\n"
+literal|"\"t\".\"DEPTNO\", \"t0\".\"DNAME\"\n"
 operator|+
-literal|"FROM (SELECT \"DEPTNO\", \"DNAME\"\n"
+literal|"FROM (SELECT \"EMPNO\", \"ENAME\", \"DEPTNO\"\n"
 operator|+
-literal|"FROM \"SCOTT\".\"DEPT\") AS \"t\"\n"
+literal|"FROM \"SCOTT\".\"EMP\") AS \"t\"\n"
 operator|+
-literal|"INNER JOIN (SELECT \"EMPNO\", \"ENAME\", \"DEPTNO\"\n"
+literal|"INNER JOIN (SELECT \"DEPTNO\", \"DNAME\"\n"
 operator|+
-literal|"FROM \"SCOTT\".\"EMP\") AS \"t0\" "
+literal|"FROM \"SCOTT\".\"DEPT\") AS \"t0\" "
 operator|+
 literal|"ON \"t\".\"DEPTNO\" = \"t0\".\"DEPTNO\""
 argument_list|)
@@ -793,9 +793,9 @@ name|explain
 init|=
 literal|"PLAN=JdbcToEnumerableConverter\n"
 operator|+
-literal|"  JdbcProject(DEPTNO=[$1], JOB=[$0], EXPR$2=[$2])\n"
+literal|"  JdbcSort(sort0=[$0], sort1=[$1], dir0=[ASC], dir1=[ASC])\n"
 operator|+
-literal|"    JdbcSort(sort0=[$1], sort1=[$0], dir0=[ASC], dir1=[ASC])\n"
+literal|"    JdbcProject(DEPTNO=[$1], JOB=[$0], EXPR$2=[$2])\n"
 operator|+
 literal|"      JdbcAggregate(group=[{2, 7}], EXPR$2=[SUM($5)])\n"
 operator|+
@@ -805,15 +805,13 @@ specifier|final
 name|String
 name|sqlHsqldb
 init|=
-literal|"SELECT \"DEPTNO\", \"JOB\", \"EXPR$2\"\n"
-operator|+
-literal|"FROM (SELECT \"JOB\", \"DEPTNO\", SUM(\"SAL\") AS \"EXPR$2\"\n"
+literal|"SELECT \"DEPTNO\", \"JOB\", SUM(\"SAL\")\n"
 operator|+
 literal|"FROM \"SCOTT\".\"EMP\"\n"
 operator|+
 literal|"GROUP BY \"JOB\", \"DEPTNO\"\n"
 operator|+
-literal|"ORDER BY \"DEPTNO\" NULLS LAST, \"JOB\" NULLS LAST) AS \"t0\""
+literal|"ORDER BY \"DEPTNO\" NULLS LAST, \"JOB\" NULLS LAST"
 decl_stmt|;
 name|CalciteAssert
 operator|.
@@ -886,15 +884,15 @@ name|explainContains
 argument_list|(
 literal|"PLAN=JdbcToEnumerableConverter\n"
 operator|+
-literal|"  JdbcProject(EMPNO=[$3], ENAME=[$4], GRADE=[$0])\n"
+literal|"  JdbcProject(EMPNO=[$0], ENAME=[$1], GRADE=[$3])\n"
 operator|+
-literal|"    JdbcJoin(condition=[AND(>($5, $1),<($5, $2))], joinType=[inner])\n"
-operator|+
-literal|"      JdbcTableScan(table=[[SCOTT, SALGRADE]])\n"
+literal|"    JdbcJoin(condition=[AND(>($2, $4),<($2, $5))], joinType=[inner])\n"
 operator|+
 literal|"      JdbcProject(EMPNO=[$0], ENAME=[$1], SAL=[$5])\n"
 operator|+
-literal|"        JdbcTableScan(table=[[SCOTT, EMP]])"
+literal|"        JdbcTableScan(table=[[SCOTT, EMP]])\n"
+operator|+
+literal|"      JdbcTableScan(table=[[SCOTT, SALGRADE]])"
 argument_list|)
 operator|.
 name|runs
@@ -915,17 +913,17 @@ argument_list|)
 operator|.
 name|planHasSql
 argument_list|(
-literal|"SELECT \"t\".\"EMPNO\", \"t\".\"ENAME\", "
+literal|"SELECT \"t\".\"EMPNO\", \"t\".\"ENAME\", \"SALGRADE\".\"GRADE\"\n"
 operator|+
-literal|"\"SALGRADE\".\"GRADE\"\nFROM \"SCOTT\".\"SALGRADE\"\n"
+literal|"FROM (SELECT \"EMPNO\", \"ENAME\", \"SAL\"\n"
 operator|+
-literal|"INNER JOIN (SELECT \"EMPNO\", \"ENAME\", \"SAL\"\n"
+literal|"FROM \"SCOTT\".\"EMP\") AS \"t\"\n"
 operator|+
-literal|"FROM \"SCOTT\".\"EMP\") AS \"t\" "
+literal|"INNER JOIN \"SCOTT\".\"SALGRADE\" "
 operator|+
-literal|"ON \"SALGRADE\".\"LOSAL\"< \"t\".\"SAL\" "
+literal|"ON \"t\".\"SAL\"> \"SALGRADE\".\"LOSAL\" "
 operator|+
-literal|"AND \"SALGRADE\".\"HISAL\"> \"t\".\"SAL\""
+literal|"AND \"t\".\"SAL\"< \"SALGRADE\".\"HISAL\""
 argument_list|)
 expr_stmt|;
 block|}
@@ -958,15 +956,15 @@ name|explainContains
 argument_list|(
 literal|"PLAN=JdbcToEnumerableConverter\n"
 operator|+
-literal|"  JdbcProject(EMPNO=[$3], ENAME=[$4], GRADE=[$0])\n"
+literal|"  JdbcProject(EMPNO=[$0], ENAME=[$1], GRADE=[$3])\n"
 operator|+
-literal|"    JdbcJoin(condition=[AND(<=($1, $5),>=($2, $5))], joinType=[inner])\n"
-operator|+
-literal|"      JdbcTableScan(table=[[SCOTT, SALGRADE]])\n"
+literal|"    JdbcJoin(condition=[AND(<=($4, $2),>=($5, $2))], joinType=[inner])\n"
 operator|+
 literal|"      JdbcProject(EMPNO=[$0], ENAME=[$1], SAL=[$5])\n"
 operator|+
-literal|"        JdbcTableScan(table=[[SCOTT, EMP]])"
+literal|"        JdbcTableScan(table=[[SCOTT, EMP]])\n"
+operator|+
+literal|"      JdbcTableScan(table=[[SCOTT, SALGRADE]])"
 argument_list|)
 operator|.
 name|runs
@@ -987,15 +985,15 @@ argument_list|)
 operator|.
 name|planHasSql
 argument_list|(
-literal|"SELECT \"t\".\"EMPNO\", \"t\".\"ENAME\", "
+literal|"SELECT \"t\".\"EMPNO\", \"t\".\"ENAME\", \"SALGRADE\".\"GRADE\"\n"
 operator|+
-literal|"\"SALGRADE\".\"GRADE\"\nFROM \"SCOTT\".\"SALGRADE\"\n"
+literal|"FROM (SELECT \"EMPNO\", \"ENAME\", \"SAL\"\n"
 operator|+
-literal|"INNER JOIN (SELECT \"EMPNO\", \"ENAME\", \"SAL\"\n"
+literal|"FROM \"SCOTT\".\"EMP\") AS \"t\"\n"
 operator|+
-literal|"FROM \"SCOTT\".\"EMP\") AS \"t\" "
+literal|"INNER JOIN \"SCOTT\".\"SALGRADE\" ON \"t\".\"SAL\">= \"SALGRADE\".\"LOSAL\" "
 operator|+
-literal|"ON \"SALGRADE\".\"LOSAL\"<= \"t\".\"SAL\" AND \"SALGRADE\".\"HISAL\">= \"t\".\"SAL\""
+literal|"AND \"t\".\"SAL\"<= \"SALGRADE\".\"HISAL\""
 argument_list|)
 expr_stmt|;
 block|}
@@ -1028,15 +1026,15 @@ name|explainContains
 argument_list|(
 literal|"PLAN=JdbcToEnumerableConverter\n"
 operator|+
-literal|"  JdbcProject(EMPNO=[$2], ENAME=[$3], EMPNO0=[$2], ENAME0=[$3])\n"
+literal|"  JdbcProject(EMPNO=[$0], ENAME=[$1], EMPNO0=[$0], ENAME0=[$1])\n"
 operator|+
-literal|"    JdbcJoin(condition=[AND(=($4, $0),>($5, $1))], joinType=[inner])\n"
+literal|"    JdbcJoin(condition=[AND(=($2, $4),>($3, $5))], joinType=[inner])\n"
 operator|+
-literal|"      JdbcProject(EMPNO=[$0], SAL=[$5])\n"
+literal|"      JdbcProject(EMPNO=[$0], ENAME=[$1], MGR=[$3], SAL=[$5])\n"
 operator|+
 literal|"        JdbcTableScan(table=[[SCOTT, EMP]])\n"
 operator|+
-literal|"      JdbcProject(EMPNO=[$0], ENAME=[$1], MGR=[$3], SAL=[$5])\n"
+literal|"      JdbcProject(EMPNO=[$0], SAL=[$5])\n"
 operator|+
 literal|"        JdbcTableScan(table=[[SCOTT, EMP]])"
 argument_list|)
@@ -1059,19 +1057,19 @@ argument_list|)
 operator|.
 name|planHasSql
 argument_list|(
-literal|"SELECT \"t0\".\"EMPNO\", \"t0\".\"ENAME\", "
+literal|"SELECT \"t\".\"EMPNO\", \"t\".\"ENAME\", "
 operator|+
-literal|"\"t0\".\"EMPNO\" AS \"EMPNO0\", \"t0\".\"ENAME\" AS \"ENAME0\"\n"
+literal|"\"t\".\"EMPNO\" AS \"EMPNO0\", \"t\".\"ENAME\" AS \"ENAME0\"\n"
 operator|+
-literal|"FROM (SELECT \"EMPNO\", \"SAL\"\n"
+literal|"FROM (SELECT \"EMPNO\", \"ENAME\", \"MGR\", \"SAL\"\n"
 operator|+
 literal|"FROM \"SCOTT\".\"EMP\") AS \"t\"\n"
 operator|+
-literal|"INNER JOIN (SELECT \"EMPNO\", \"ENAME\", \"MGR\", \"SAL\"\n"
+literal|"INNER JOIN (SELECT \"EMPNO\", \"SAL\"\n"
 operator|+
 literal|"FROM \"SCOTT\".\"EMP\") AS \"t0\" "
 operator|+
-literal|"ON \"t\".\"EMPNO\" = \"t0\".\"MGR\" AND \"t\".\"SAL\"< \"t0\".\"SAL\""
+literal|"ON \"t\".\"MGR\" = \"t0\".\"EMPNO\" AND \"t\".\"SAL\"> \"t0\".\"SAL\""
 argument_list|)
 expr_stmt|;
 block|}
@@ -1104,15 +1102,15 @@ name|explainContains
 argument_list|(
 literal|"PLAN=JdbcToEnumerableConverter\n"
 operator|+
-literal|"  JdbcProject(EMPNO=[$3], ENAME=[$4], EMPNO0=[$3], ENAME0=[$4])\n"
+literal|"  JdbcProject(EMPNO=[$0], ENAME=[$1], EMPNO0=[$0], ENAME0=[$1])\n"
 operator|+
-literal|"    JdbcJoin(condition=[AND(=($5, $0), OR(>($7, $2),>($1, $6)))], joinType=[inner])\n"
+literal|"    JdbcJoin(condition=[AND(=($2, $5), OR(>($4, $7),>($6, $3)))], joinType=[inner])\n"
 operator|+
-literal|"      JdbcProject(EMPNO=[$0], HIREDATE=[$4], SAL=[$5])\n"
+literal|"      JdbcProject(EMPNO=[$0], ENAME=[$1], MGR=[$3], HIREDATE=[$4], SAL=[$5])\n"
 operator|+
 literal|"        JdbcTableScan(table=[[SCOTT, EMP]])\n"
 operator|+
-literal|"      JdbcProject(EMPNO=[$0], ENAME=[$1], MGR=[$3], HIREDATE=[$4], SAL=[$5])\n"
+literal|"      JdbcProject(EMPNO=[$0], HIREDATE=[$4], SAL=[$5])\n"
 operator|+
 literal|"        JdbcTableScan(table=[[SCOTT, EMP]])"
 argument_list|)
@@ -1135,21 +1133,21 @@ argument_list|)
 operator|.
 name|planHasSql
 argument_list|(
-literal|"SELECT \"t0\".\"EMPNO\", \"t0\".\"ENAME\", "
+literal|"SELECT \"t\".\"EMPNO\", \"t\".\"ENAME\", "
 operator|+
-literal|"\"t0\".\"EMPNO\" AS \"EMPNO0\", \"t0\".\"ENAME\" AS \"ENAME0\"\n"
+literal|"\"t\".\"EMPNO\" AS \"EMPNO0\", \"t\".\"ENAME\" AS \"ENAME0\"\n"
 operator|+
-literal|"FROM (SELECT \"EMPNO\", \"HIREDATE\", \"SAL\"\n"
+literal|"FROM (SELECT \"EMPNO\", \"ENAME\", \"MGR\", \"HIREDATE\", \"SAL\"\n"
 operator|+
 literal|"FROM \"SCOTT\".\"EMP\") AS \"t\"\n"
 operator|+
-literal|"INNER JOIN (SELECT \"EMPNO\", \"ENAME\", \"MGR\", \"HIREDATE\", \"SAL\"\n"
+literal|"INNER JOIN (SELECT \"EMPNO\", \"HIREDATE\", \"SAL\"\n"
 operator|+
 literal|"FROM \"SCOTT\".\"EMP\") AS \"t0\" "
 operator|+
-literal|"ON \"t\".\"EMPNO\" = \"t0\".\"MGR\" "
+literal|"ON \"t\".\"MGR\" = \"t0\".\"EMPNO\" "
 operator|+
-literal|"AND (\"t\".\"SAL\"< \"t0\".\"SAL\" OR \"t\".\"HIREDATE\"> \"t0\".\"HIREDATE\")"
+literal|"AND (\"t\".\"SAL\"> \"t0\".\"SAL\" OR \"t\".\"HIREDATE\"< \"t0\".\"HIREDATE\")"
 argument_list|)
 expr_stmt|;
 block|}
@@ -1186,11 +1184,9 @@ name|explainContains
 argument_list|(
 literal|"PLAN=JdbcToEnumerableConverter\n"
 operator|+
-literal|"  JdbcProject(EMPNO=[$3], ENAME=[$4], DNAME=[$8], GRADE=[$0])\n"
+literal|"  JdbcProject(EMPNO=[$0], ENAME=[$1], DNAME=[$5], GRADE=[$6])\n"
 operator|+
-literal|"    JdbcJoin(condition=[AND(>($5, $1),<($5, $2))], joinType=[inner])\n"
-operator|+
-literal|"      JdbcTableScan(table=[[SCOTT, SALGRADE]])\n"
+literal|"    JdbcJoin(condition=[AND(>($2, $7),<($2, $8))], joinType=[inner])\n"
 operator|+
 literal|"      JdbcJoin(condition=[=($3, $4)], joinType=[inner])\n"
 operator|+
@@ -1200,7 +1196,9 @@ literal|"          JdbcTableScan(table=[[SCOTT, EMP]])\n"
 operator|+
 literal|"        JdbcProject(DEPTNO=[$0], DNAME=[$1])\n"
 operator|+
-literal|"          JdbcTableScan(table=[[SCOTT, DEPT]])"
+literal|"          JdbcTableScan(table=[[SCOTT, DEPT]])\n"
+operator|+
+literal|"      JdbcTableScan(table=[[SCOTT, SALGRADE]])\n"
 argument_list|)
 operator|.
 name|runs
@@ -1225,17 +1223,19 @@ literal|"SELECT \"t\".\"EMPNO\", \"t\".\"ENAME\", "
 operator|+
 literal|"\"t0\".\"DNAME\", \"SALGRADE\".\"GRADE\"\n"
 operator|+
-literal|"FROM \"SCOTT\".\"SALGRADE\"\n"
+literal|"FROM (SELECT \"EMPNO\", \"ENAME\", \"SAL\", \"DEPTNO\"\n"
 operator|+
-literal|"INNER JOIN ((SELECT \"EMPNO\", \"ENAME\", \"SAL\", \"DEPTNO\"\n"
-operator|+
-literal|"FROM \"SCOTT\".\"EMP\") AS \"t\" "
+literal|"FROM \"SCOTT\".\"EMP\") AS \"t\"\n"
 operator|+
 literal|"INNER JOIN (SELECT \"DEPTNO\", \"DNAME\"\n"
 operator|+
-literal|"FROM \"SCOTT\".\"DEPT\") AS \"t0\" ON \"t\".\"DEPTNO\" = \"t0\".\"DEPTNO\")"
+literal|"FROM \"SCOTT\".\"DEPT\") AS \"t0\" ON \"t\".\"DEPTNO\" = \"t0\".\"DEPTNO\"\n"
 operator|+
-literal|" ON \"SALGRADE\".\"LOSAL\"< \"t\".\"SAL\" AND \"SALGRADE\".\"HISAL\"> \"t\".\"SAL\""
+literal|"INNER JOIN \"SCOTT\".\"SALGRADE\" "
+operator|+
+literal|"ON \"t\".\"SAL\"> \"SALGRADE\".\"LOSAL\" "
+operator|+
+literal|"AND \"t\".\"SAL\"< \"SALGRADE\".\"HISAL\""
 argument_list|)
 expr_stmt|;
 block|}

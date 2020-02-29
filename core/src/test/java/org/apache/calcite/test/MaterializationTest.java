@@ -873,22 +873,6 @@ decl_stmt|;
 specifier|private
 specifier|static
 specifier|final
-name|Consumer
-argument_list|<
-name|ResultSet
-argument_list|>
-name|CONTAINS_LOCATIONS
-init|=
-name|CalciteAssert
-operator|.
-name|checkResultContains
-argument_list|(
-literal|"EnumerableTableScan(table=[[hr, locations]])"
-argument_list|)
-decl_stmt|;
-specifier|private
-specifier|static
-specifier|final
 name|Ordering
 argument_list|<
 name|Iterable
@@ -6054,7 +6038,7 @@ name|expected
 init|=
 literal|"EnumerableAggregate(group=[{1}])\n"
 operator|+
-literal|"  EnumerableCalc(expr#0..1=[{inputs}], expr#2=[10], expr#3=[<($t2, $t1)], "
+literal|"  EnumerableCalc(expr#0..1=[{inputs}], expr#2=[10], expr#3=[>($t1, $t2)], "
 operator|+
 literal|"proj#0..1=[{exprs}], $condition=[$t3])\n"
 operator|+
@@ -6267,7 +6251,7 @@ name|withResultContains
 argument_list|(
 literal|"EnumerableAggregate(group=[{1}], S=[$SUM0($3)])\n"
 operator|+
-literal|"  EnumerableCalc(expr#0..3=[{inputs}], expr#4=[10], expr#5=[<($t4, $t1)], "
+literal|"  EnumerableCalc(expr#0..3=[{inputs}], expr#4=[10], expr#5=[>($t1, $t4)], "
 operator|+
 literal|"proj#0..3=[{exprs}], $condition=[$t5])\n"
 operator|+
@@ -7069,7 +7053,7 @@ name|expected
 init|=
 literal|"EnumerableAggregate(group=[{0}])\n"
 operator|+
-literal|"  EnumerableCalc(expr#0..1=[{inputs}], expr#2=[15], expr#3=[<($t2, $t1)], "
+literal|"  EnumerableCalc(expr#0..1=[{inputs}], expr#2=[15], expr#3=[>($t1, $t2)], "
 operator|+
 literal|"proj#0..1=[{exprs}], $condition=[$t3])\n"
 operator|+
@@ -8188,7 +8172,7 @@ argument_list|)
 operator|.
 name|withResultContains
 argument_list|(
-literal|"EnumerableCalc(expr#0=[{inputs}], expr#1=[CAST($t0):INTEGER NOT NULL], expr#2=[1], "
+literal|"EnumerableCalc(expr#0=[{inputs}], expr#1=[1], expr#2=[CAST($t0):INTEGER NOT NULL], "
 operator|+
 literal|"expr#3=[=($t1, $t2)], deptno=[$t0], $condition=[$t3])\n"
 operator|+
@@ -8221,7 +8205,7 @@ name|withResultContains
 argument_list|(
 literal|"EnumerableCalc(expr#0=[{inputs}], expr#1=[CAST($t0):JavaType(int) NOT NULL], "
 operator|+
-literal|"expr#2=[1], expr#3=[>($t1, $t2)], EXPR$0=[$t1], $condition=[$t3])\n"
+literal|"expr#2=[1], expr#3=[<($t2, $t1)], EXPR$0=[$t1], $condition=[$t3])\n"
 operator|+
 literal|"  EnumerableTableScan(table=[[hr, m0]])"
 argument_list|)
@@ -8252,7 +8236,7 @@ name|withResultContains
 argument_list|(
 literal|"EnumerableCalc(expr#0=[{inputs}], expr#1=[CAST($t0):JavaType(int) NOT NULL], "
 operator|+
-literal|"expr#2=[CAST($t1):INTEGER NOT NULL], expr#3=[1], expr#4=[=($t2, $t3)], "
+literal|"expr#2=[1], expr#3=[CAST($t1):INTEGER NOT NULL], expr#4=[=($t2, $t3)], "
 operator|+
 literal|"EXPR$0=[$t1], $condition=[$t4])\n"
 operator|+
@@ -9160,13 +9144,6 @@ operator|.
 name|enableMaterializations
 argument_list|(
 literal|true
-argument_list|)
-operator|.
-name|explainMatches
-argument_list|(
-literal|""
-argument_list|,
-name|CONTAINS_LOCATIONS
 argument_list|)
 operator|.
 name|sameResultWithMaterializationsDisabled

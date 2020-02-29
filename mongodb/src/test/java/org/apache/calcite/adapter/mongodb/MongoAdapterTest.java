@@ -1962,9 +1962,9 @@ literal|"{$group: {_id: '$STATE', _1: {$sum: '$POP'}, _2: {$sum: {$cond: [ {$eq:
 argument_list|,
 literal|"{$project: {STATE: '$_id', _1: '$_1', _2: '$_2'}}"
 argument_list|,
-literal|"{$sort: {STATE: 1}}"
-argument_list|,
 literal|"{$project: {STATE: 1, A: {$divide: [{$cond:[{$eq: ['$_2', {$literal: 0}]},null,'$_1']}, '$_2']}, S: {$cond:[{$eq: ['$_2', {$literal: 0}]},null,'$_1']}, C: '$_2'}}"
+argument_list|,
+literal|"{$sort: {STATE: 1}}"
 argument_list|)
 argument_list|)
 expr_stmt|;
