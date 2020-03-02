@@ -169,7 +169,13 @@ return|return
 operator|new
 name|JsonEnumerator
 argument_list|(
-name|list
+name|getDataList
+argument_list|(
+name|root
+operator|.
+name|getTypeFactory
+argument_list|()
+argument_list|)
 argument_list|)
 return|;
 block|}

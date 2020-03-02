@@ -10232,6 +10232,27 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+comment|// Registers this rule for default ENUMERABLE convention
+comment|// because:
+comment|// 1. ScannableTable can bind data directly;
+comment|// 2. Only BindableTable supports project push down now.
+comment|// EnumerableInterpreterRule.INSTANCE would then transform
+comment|// the BindableTableScan to
+comment|// EnumerableInterpreter + BindableTableScan.
+comment|// Note: the cost of EnumerableInterpreter + BindableTableScan
+comment|// is always bigger that EnumerableTableScan because of the additional
+comment|// EnumerableInterpreter node, but if there are pushing projects or filter,
+comment|// we prefer BindableTableScan instead,
+comment|// see BindableTableScan#computeSelfCost.
+name|planner
+operator|.
+name|addRule
+argument_list|(
+name|Bindables
+operator|.
+name|BINDABLE_TABLE_SCAN_RULE
+argument_list|)
+expr_stmt|;
 name|planner
 operator|.
 name|addRule

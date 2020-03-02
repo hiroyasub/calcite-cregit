@@ -1555,6 +1555,23 @@ case|:
 case|case
 name|MULTISET
 case|:
+specifier|final
+name|RelDataType
+name|fieldType
+init|=
+name|relFieldType
+operator|.
+name|getComponentType
+argument_list|()
+decl_stmt|;
+if|if
+condition|(
+name|fieldType
+operator|.
+name|isStruct
+argument_list|()
+condition|)
+block|{
 comment|// We can't represent a multiset or array as a List<Employee>, because
 comment|// the consumer does not know the element type.
 comment|// The standard element type is List.
@@ -1582,10 +1599,7 @@ name|of
 argument_list|(
 name|typeFactory
 argument_list|,
-name|relFieldType
-operator|.
-name|getComponentType
-argument_list|()
+name|fieldType
 argument_list|,
 name|JavaRowFormat
 operator|.
@@ -1638,6 +1652,13 @@ operator|.
 name|method
 argument_list|)
 return|;
+block|}
+else|else
+block|{
+return|return
+name|e
+return|;
+block|}
 default|default:
 return|return
 name|e

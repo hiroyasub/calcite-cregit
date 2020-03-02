@@ -1285,9 +1285,7 @@ literal|"      EnumerableInterpreter\n"
 operator|+
 literal|"        BindableTableScan(table=[[STREAM_JOINS, ORDERS, (STREAM)]])\n"
 operator|+
-literal|"    EnumerableInterpreter\n"
-operator|+
-literal|"      BindableTableScan(table=[[STREAM_JOINS, PRODUCTS]])"
+literal|"    EnumerableTableScan(table=[[STREAM_JOINS, PRODUCTS]])"
 argument_list|)
 operator|.
 name|returns

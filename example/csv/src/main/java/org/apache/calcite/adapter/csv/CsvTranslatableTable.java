@@ -355,7 +355,13 @@ name|source
 argument_list|,
 name|cancelFlag
 argument_list|,
-name|fieldTypes
+name|getFieldTypes
+argument_list|(
+name|root
+operator|.
+name|getTypeFactory
+argument_list|()
+argument_list|)
 argument_list|,
 name|fields
 argument_list|)

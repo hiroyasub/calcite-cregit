@@ -1139,9 +1139,7 @@ specifier|final
 name|String
 name|expected
 init|=
-literal|"PLAN=EnumerableInterpreter\n"
-operator|+
-literal|"  BindableTableScan(table=[[SALES, EMPS]])\n"
+literal|"PLAN=EnumerableTableScan(table=[[SALES, EMPS]])\n"
 decl_stmt|;
 name|sql
 argument_list|(
