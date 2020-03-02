@@ -17133,7 +17133,7 @@ argument_list|,
 name|planBefore
 argument_list|)
 expr_stmt|;
-comment|// Cannot optimize away the join because it is not equi join.
+comment|// Plan should be scan("EMP") (i.e. join's left child)
 name|diffRepos
 operator|.
 name|assertEquals

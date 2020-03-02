@@ -1482,19 +1482,7 @@ operator|.
 name|ANTI
 condition|)
 block|{
-comment|// "select * from emp anti join dept" is not necessarily empty if dept is empty
-if|if
-condition|(
-name|join
-operator|.
-name|analyzeCondition
-argument_list|()
-operator|.
-name|isEqui
-argument_list|()
-condition|)
-block|{
-comment|// In case of anti (equi) join: Join(X, Empty, ANTI) becomes X
+comment|// In case of anti join: Join(X, Empty, ANTI) becomes X
 name|call
 operator|.
 name|transformTo
@@ -1505,7 +1493,6 @@ name|getLeft
 argument_list|()
 argument_list|)
 expr_stmt|;
-block|}
 return|return;
 block|}
 name|call
