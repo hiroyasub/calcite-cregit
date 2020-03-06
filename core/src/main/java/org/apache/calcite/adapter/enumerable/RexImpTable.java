@@ -1199,6 +1199,24 @@ name|fun
 operator|.
 name|SqlLibraryOperators
 operator|.
+name|COMPRESS
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|fun
+operator|.
+name|SqlLibraryOperators
+operator|.
 name|COSH
 import|;
 end_import
@@ -6727,6 +6745,22 @@ argument_list|,
 name|NullPolicy
 operator|.
 name|STRICT
+argument_list|)
+expr_stmt|;
+comment|// Compression Operators
+name|defineMethod
+argument_list|(
+name|COMPRESS
+argument_list|,
+name|BuiltInMethod
+operator|.
+name|COMPRESS
+operator|.
+name|method
+argument_list|,
+name|NullPolicy
+operator|.
+name|ARG0
 argument_list|)
 expr_stmt|;
 comment|// Xml Operators
