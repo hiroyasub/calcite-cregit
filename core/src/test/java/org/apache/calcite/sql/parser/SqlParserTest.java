@@ -11537,6 +11537,26 @@ literal|"FROM `DEPT`))"
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSomeEveryAndIntersectionAggQuery
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"select some(deptno = 10), every(deptno> 0), intersection(multiset[1,2]) from dept"
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+literal|"SELECT SOME((`DEPTNO` = 10)), EVERY((`DEPTNO`> 0)), INTERSECTION((MULTISET[1, 2]))\n"
+operator|+
+literal|"FROM `DEPT`"
+argument_list|)
+expr_stmt|;
+block|}
 comment|/**    * Tricky for the parser - looks like "IN (scalar, scalar)" but isn't.    */
 annotation|@
 name|Test
@@ -11677,7 +11697,7 @@ argument_list|)
 operator|.
 name|fails
 argument_list|(
-literal|"(?s).*Encountered \"some\" at .*"
+literal|"(?s).*Encountered \"some name\" at .*"
 argument_list|)
 expr_stmt|;
 specifier|final
@@ -11686,16 +11706,28 @@ name|sql4
 init|=
 literal|"select * from emp\n"
 operator|+
-literal|"where name ^like^ some (select name from emp)"
+literal|"where name like some (select name from emp)"
+decl_stmt|;
+specifier|final
+name|String
+name|expected4
+init|=
+literal|"SELECT *\n"
+operator|+
+literal|"FROM `EMP`\n"
+operator|+
+literal|"WHERE (`NAME` LIKE SOME((SELECT `NAME`\n"
+operator|+
+literal|"FROM `EMP`)))"
 decl_stmt|;
 name|sql
 argument_list|(
 name|sql4
 argument_list|)
 operator|.
-name|fails
+name|ok
 argument_list|(
-literal|"(?s).*Encountered \"like some\" at .*"
+name|expected4
 argument_list|)
 expr_stmt|;
 specifier|final

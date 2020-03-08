@@ -661,6 +661,9 @@ block|,
 comment|/** The {@code FUSION} aggregate function. */
 name|FUSION
 block|,
+comment|/** The {@code INTERSECTION} aggregate function. */
+name|INTERSECTION
+block|,
 comment|/** The {@code SINGLE_VALUE} aggregate function. */
 name|SINGLE_VALUE
 block|,
@@ -924,6 +927,10 @@ argument_list|,
 name|BIT_XOR
 argument_list|,
 name|LISTAGG
+argument_list|,
+name|INTERSECTION
+argument_list|,
+name|ANY_VALUE
 argument_list|)
 decl_stmt|;
 comment|/**    * Category consisting of all DML operators.    *    *<p>Consists of:    * {@link #INSERT},    * {@link #UPDATE},    * {@link #DELETE},    * {@link #MERGE},    * {@link #PROCEDURE_CALL}.    *    *<p>NOTE jvs 1-June-2006: For now we treat procedure calls as DML;    * this makes it easy for JDBC clients to call execute or    * executeUpdate and not have to process dummy cursor results.  If    * in the future we support procedures which return results sets,    * we'll need to refine this.    */

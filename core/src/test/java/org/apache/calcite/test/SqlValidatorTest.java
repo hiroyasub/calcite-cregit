@@ -30786,6 +30786,52 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testSomeEveryAndIntersectionFunctions
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"select some(sal = 100), every(sal> 0), intersection(multiset[1,2]) from emp"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select some(sal = 100), ^empno^ from emp"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Expression 'EMPNO' is not being grouped"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select every(sal> 0), ^empno^ from emp"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Expression 'EMPNO' is not being grouped"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select intersection(multiset[1]), ^empno^ from emp"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Expression 'EMPNO' is not being grouped"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testAnyValueFunction
 parameter_list|()
 block|{

@@ -11820,6 +11820,34 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testSomeAndEveryAggregateFunctions
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"SELECT some(empno = 130) as someempnoexists,\n"
+operator|+
+literal|" every(empno> 0) as everyempnogtzero\n"
+operator|+
+literal|" FROM emp AS e group by e.sal"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
 specifier|private
 name|Tester
 name|getExtendedTester

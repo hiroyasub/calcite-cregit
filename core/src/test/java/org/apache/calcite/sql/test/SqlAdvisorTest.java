@@ -669,6 +669,8 @@ literal|"KEYWORD(DENSE_RANK)"
 argument_list|,
 literal|"KEYWORD(ELEMENT)"
 argument_list|,
+literal|"KEYWORD(EVERY)"
+argument_list|,
 literal|"KEYWORD(EXISTS)"
 argument_list|,
 literal|"KEYWORD(EXP)"
@@ -686,6 +688,8 @@ argument_list|,
 literal|"KEYWORD(GROUPING)"
 argument_list|,
 literal|"KEYWORD(HOUR)"
+argument_list|,
+literal|"KEYWORD(INTERSECTION)"
 argument_list|,
 literal|"KEYWORD(INTERVAL)"
 argument_list|,
@@ -780,6 +784,8 @@ argument_list|,
 literal|"KEYWORD(SECOND)"
 argument_list|,
 literal|"KEYWORD(SESSION_USER)"
+argument_list|,
+literal|"KEYWORD(SOME)"
 argument_list|,
 literal|"KEYWORD(SPECIFIC)"
 argument_list|,
@@ -4497,6 +4503,8 @@ literal|"COLUMN(ENAME)\n"
 operator|+
 literal|"KEYWORD(ELEMENT)\n"
 operator|+
+literal|"KEYWORD(EVERY)\n"
+operator|+
 literal|"KEYWORD(EXISTS)\n"
 operator|+
 literal|"KEYWORD(EXP)\n"
@@ -4539,6 +4547,8 @@ literal|"COLUMN(ENAME)\n"
 operator|+
 literal|"KEYWORD(ELEMENT)\n"
 operator|+
+literal|"KEYWORD(EVERY)\n"
+operator|+
 literal|"KEYWORD(EXISTS)\n"
 operator|+
 literal|"KEYWORD(EXP)\n"
@@ -4580,6 +4590,8 @@ operator|+
 literal|"COLUMN(ENAME)\n"
 operator|+
 literal|"KEYWORD(ELEMENT)\n"
+operator|+
+literal|"KEYWORD(EVERY)\n"
 operator|+
 literal|"KEYWORD(EXISTS)\n"
 operator|+
