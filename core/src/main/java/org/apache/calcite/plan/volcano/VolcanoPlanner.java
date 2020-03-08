@@ -6534,15 +6534,12 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-comment|/**    * Fires all rules matched by a relational expression.    *    * @param rel      Relational expression which has just been created (or maybe    *                 from the queue)    * @param deferred If true, each time a rule matches, just add an entry to    *                 the queue.    */
+comment|/**    * Fires all rules matched by a relational expression.    *    * @param rel      Relational expression which has just been created (or maybe    *                 from the queue)    */
 name|void
 name|fireRules
 parameter_list|(
 name|RelNode
 name|rel
-parameter_list|,
-name|boolean
-name|deferred
 parameter_list|)
 block|{
 for|for
@@ -6575,11 +6572,6 @@ specifier|final
 name|VolcanoRuleCall
 name|ruleCall
 decl_stmt|;
-if|if
-condition|(
-name|deferred
-condition|)
-block|{
 name|ruleCall
 operator|=
 operator|new
@@ -6590,20 +6582,6 @@ argument_list|,
 name|operand
 argument_list|)
 expr_stmt|;
-block|}
-else|else
-block|{
-name|ruleCall
-operator|=
-operator|new
-name|VolcanoRuleCall
-argument_list|(
-name|this
-argument_list|,
-name|operand
-argument_list|)
-expr_stmt|;
-block|}
 name|ruleCall
 operator|.
 name|match
@@ -7704,8 +7682,6 @@ comment|// Queue up all rules triggered by this relexp's creation.
 name|fireRules
 argument_list|(
 name|rel
-argument_list|,
-literal|true
 argument_list|)
 expr_stmt|;
 comment|// It's a new subset.
@@ -7724,8 +7700,6 @@ block|{
 name|fireRules
 argument_list|(
 name|subset
-argument_list|,
-literal|true
 argument_list|)
 expr_stmt|;
 block|}

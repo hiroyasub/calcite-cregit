@@ -95,6 +95,20 @@ name|apache
 operator|.
 name|calcite
 operator|.
+name|plan
+operator|.
+name|SubstitutionRule
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
 name|rel
 operator|.
 name|RelCollation
@@ -914,6 +928,8 @@ class|class
 name|ReduceExpressionsRule
 extends|extends
 name|RelOptRule
+implements|implements
+name|SubstitutionRule
 block|{
 comment|//~ Static fields/initializers ---------------------------------------------
 comment|/**    * Regular expression that matches the description of all instances of this    * rule and {@link ValuesReduceRule} also. Use    * it to prevent the planner from invoking these rules.    */

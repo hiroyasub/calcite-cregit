@@ -1705,8 +1705,6 @@ operator|.
 name|fireRules
 argument_list|(
 name|rel
-argument_list|,
-literal|true
 argument_list|)
 expr_stmt|;
 block|}

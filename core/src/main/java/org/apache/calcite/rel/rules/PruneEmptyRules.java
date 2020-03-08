@@ -69,6 +69,20 @@ name|calcite
 operator|.
 name|plan
 operator|.
+name|SubstitutionRule
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|plan
+operator|.
 name|hep
 operator|.
 name|HepRelVertex
@@ -494,6 +508,8 @@ specifier|public
 specifier|abstract
 class|class
 name|PruneEmptyRules
+implements|implements
+name|SubstitutionRule
 block|{
 comment|//~ Static fields/initializers ---------------------------------------------
 comment|/**    * Rule that removes empty children of a    * {@link org.apache.calcite.rel.logical.LogicalUnion}.    *    *<p>Examples:    *    *<ul>    *<li>Union(Rel, Empty, Rel2) becomes Union(Rel, Rel2)    *<li>Union(Rel, Empty, Empty) becomes Rel    *<li>Union(Empty, Empty) becomes Empty    *</ul>    */

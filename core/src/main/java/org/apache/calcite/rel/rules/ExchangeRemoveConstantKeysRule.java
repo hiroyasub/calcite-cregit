@@ -67,6 +67,20 @@ name|apache
 operator|.
 name|calcite
 operator|.
+name|plan
+operator|.
+name|SubstitutionRule
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
 name|rel
 operator|.
 name|RelCollation
@@ -315,6 +329,8 @@ class|class
 name|ExchangeRemoveConstantKeysRule
 extends|extends
 name|RelOptRule
+implements|implements
+name|SubstitutionRule
 block|{
 comment|/**    * Singleton rule that removes constants inside a    * {@link LogicalExchange}.    */
 specifier|public

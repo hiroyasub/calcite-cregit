@@ -53,6 +53,20 @@ name|apache
 operator|.
 name|calcite
 operator|.
+name|plan
+operator|.
+name|SubstitutionRule
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
 name|rel
 operator|.
 name|RelNode
@@ -129,6 +143,8 @@ class|class
 name|CalcRemoveRule
 extends|extends
 name|RelOptRule
+implements|implements
+name|SubstitutionRule
 block|{
 comment|//~ Static fields/initializers ---------------------------------------------
 specifier|public
