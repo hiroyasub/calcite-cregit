@@ -4622,6 +4622,33 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3847">[CALCITE-3847]    * Decorrelation for join with lateral table outputs wrong plan if the join    * condition contains correlation variables</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testJoinLateralTableWithConditionCorrelated
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select deptno, r.num from dept join\n"
+operator|+
+literal|" lateral table(ramp(dept.deptno)) as r(num)\n"
+operator|+
+literal|" on deptno=num"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
 annotation|@
 name|Test
 specifier|public
