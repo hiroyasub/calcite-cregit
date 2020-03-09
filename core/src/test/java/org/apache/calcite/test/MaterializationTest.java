@@ -8778,6 +8778,43 @@ annotation|@
 name|Test
 specifier|public
 name|void
+name|testAggregateOnJoinKeys
+parameter_list|()
+block|{
+name|sql
+argument_list|(
+literal|"select \"deptno\", \"empid\", \"salary\" "
+operator|+
+literal|"from \"emps\"\n"
+operator|+
+literal|"group by \"deptno\", \"empid\", \"salary\""
+argument_list|,
+literal|"select \"empid\", \"depts\".\"deptno\" "
+operator|+
+literal|"from \"emps\"\n"
+operator|+
+literal|"join \"depts\" on \"depts\".\"deptno\" = \"empid\" group by \"empid\", \"depts\".\"deptno\""
+argument_list|)
+operator|.
+name|withResultContains
+argument_list|(
+literal|"EnumerableCalc(expr#0=[{inputs}], empid=[$t0], empid0=[$t0])\n"
+operator|+
+literal|"  EnumerableAggregate(group=[{1}])\n"
+operator|+
+literal|"    EnumerableHashJoin(condition=[=($1, $3)], joinType=[inner])\n"
+operator|+
+literal|"      EnumerableTableScan(table=[[hr, m0]])"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
 name|testViewMaterialization
 parameter_list|()
 block|{
