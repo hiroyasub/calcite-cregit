@@ -71,6 +71,34 @@ name|calcite
 operator|.
 name|rel
 operator|.
+name|RelDistribution
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|RelDistributions
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
 name|RelNode
 import|;
 end_import
@@ -678,6 +706,20 @@ operator|.
 name|collect
 operator|.
 name|ImmutableSet
+import|;
+end_import
+
+begin_import
+import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|collect
+operator|.
+name|Lists
 import|;
 end_import
 
@@ -1333,6 +1375,72 @@ operator|+
 literal|"            }\n"
 operator|+
 literal|"          }\n"
+operator|+
+literal|"        }\n"
+operator|+
+literal|"      ]\n"
+operator|+
+literal|"    }\n"
+operator|+
+literal|"  ]\n"
+operator|+
+literal|"}"
+decl_stmt|;
+specifier|public
+specifier|static
+specifier|final
+name|String
+name|XX3
+init|=
+literal|"{\n"
+operator|+
+literal|"  \"rels\": [\n"
+operator|+
+literal|"    {\n"
+operator|+
+literal|"      \"id\": \"0\",\n"
+operator|+
+literal|"      \"relOp\": \"LogicalTableScan\",\n"
+operator|+
+literal|"      \"table\": [\n"
+operator|+
+literal|"        \"scott\",\n"
+operator|+
+literal|"        \"EMP\"\n"
+operator|+
+literal|"      ],\n"
+operator|+
+literal|"      \"inputs\": []\n"
+operator|+
+literal|"    },\n"
+operator|+
+literal|"    {\n"
+operator|+
+literal|"      \"id\": \"1\",\n"
+operator|+
+literal|"      \"relOp\": \"LogicalSortExchange\",\n"
+operator|+
+literal|"      \"distribution\": {\n"
+operator|+
+literal|"        \"type\": \"HASH_DISTRIBUTED\",\n"
+operator|+
+literal|"        \"keys\": [\n"
+operator|+
+literal|"          0\n"
+operator|+
+literal|"        ]\n"
+operator|+
+literal|"      },\n"
+operator|+
+literal|"      \"collation\": [\n"
+operator|+
+literal|"        {\n"
+operator|+
+literal|"          \"field\": 0,\n"
+operator|+
+literal|"          \"direction\": \"ASCENDING\",\n"
+operator|+
+literal|"          \"nulls\": \"LAST\"\n"
 operator|+
 literal|"        }\n"
 operator|+
@@ -4280,6 +4388,229 @@ argument_list|()
 decl_stmt|;
 return|return
 name|rel
+return|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testWriteSortExchangeWithHashDistribution
+parameter_list|()
+block|{
+specifier|final
+name|RelNode
+name|root
+init|=
+name|createSortPlan
+argument_list|(
+name|RelDistributions
+operator|.
+name|hash
+argument_list|(
+name|Lists
+operator|.
+name|newArrayList
+argument_list|(
+literal|0
+argument_list|)
+argument_list|)
+argument_list|)
+decl_stmt|;
+specifier|final
+name|RelJsonWriter
+name|writer
+init|=
+operator|new
+name|RelJsonWriter
+argument_list|()
+decl_stmt|;
+name|root
+operator|.
+name|explain
+argument_list|(
+name|writer
+argument_list|)
+expr_stmt|;
+specifier|final
+name|String
+name|json
+init|=
+name|writer
+operator|.
+name|asString
+argument_list|()
+decl_stmt|;
+name|assertThat
+argument_list|(
+name|json
+argument_list|,
+name|is
+argument_list|(
+name|XX3
+argument_list|)
+argument_list|)
+expr_stmt|;
+specifier|final
+name|String
+name|s
+init|=
+name|deserializeAndDumpToTextFormat
+argument_list|(
+name|getSchema
+argument_list|(
+name|root
+argument_list|)
+argument_list|,
+name|json
+argument_list|)
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"LogicalSortExchange(distribution=[hash[0]], collation=[[0]])\n"
+operator|+
+literal|"  LogicalTableScan(table=[[scott, EMP]])\n"
+decl_stmt|;
+name|assertThat
+argument_list|(
+name|s
+argument_list|,
+name|isLinux
+argument_list|(
+name|expected
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testWriteSortExchangeWithRandomDistribution
+parameter_list|()
+block|{
+specifier|final
+name|RelNode
+name|root
+init|=
+name|createSortPlan
+argument_list|(
+name|RelDistributions
+operator|.
+name|RANDOM_DISTRIBUTED
+argument_list|)
+decl_stmt|;
+specifier|final
+name|RelJsonWriter
+name|writer
+init|=
+operator|new
+name|RelJsonWriter
+argument_list|()
+decl_stmt|;
+name|root
+operator|.
+name|explain
+argument_list|(
+name|writer
+argument_list|)
+expr_stmt|;
+specifier|final
+name|String
+name|json
+init|=
+name|writer
+operator|.
+name|asString
+argument_list|()
+decl_stmt|;
+specifier|final
+name|String
+name|s
+init|=
+name|deserializeAndDumpToTextFormat
+argument_list|(
+name|getSchema
+argument_list|(
+name|root
+argument_list|)
+argument_list|,
+name|json
+argument_list|)
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"LogicalSortExchange(distribution=[random], collation=[[0]])\n"
+operator|+
+literal|"  LogicalTableScan(table=[[scott, EMP]])\n"
+decl_stmt|;
+name|assertThat
+argument_list|(
+name|s
+argument_list|,
+name|isLinux
+argument_list|(
+name|expected
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+specifier|private
+name|RelNode
+name|createSortPlan
+parameter_list|(
+name|RelDistribution
+name|distribution
+parameter_list|)
+block|{
+specifier|final
+name|FrameworkConfig
+name|config
+init|=
+name|RelBuilderTest
+operator|.
+name|config
+argument_list|()
+operator|.
+name|build
+argument_list|()
+decl_stmt|;
+specifier|final
+name|RelBuilder
+name|builder
+init|=
+name|RelBuilder
+operator|.
+name|create
+argument_list|(
+name|config
+argument_list|)
+decl_stmt|;
+return|return
+name|builder
+operator|.
+name|scan
+argument_list|(
+literal|"EMP"
+argument_list|)
+operator|.
+name|sortExchange
+argument_list|(
+name|distribution
+argument_list|,
+name|RelCollations
+operator|.
+name|of
+argument_list|(
+literal|0
+argument_list|)
+argument_list|)
+operator|.
+name|build
+argument_list|()
 return|;
 block|}
 block|}

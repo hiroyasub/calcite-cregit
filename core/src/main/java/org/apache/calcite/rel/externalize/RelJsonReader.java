@@ -1577,6 +1577,14 @@ name|relJson
 operator|.
 name|toDistribution
 argument_list|(
+operator|(
+name|Map
+argument_list|<
+name|String
+argument_list|,
+name|Object
+argument_list|>
+operator|)
 name|get
 argument_list|(
 literal|"distribution"
