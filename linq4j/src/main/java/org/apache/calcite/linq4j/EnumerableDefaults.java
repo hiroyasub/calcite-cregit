@@ -10110,13 +10110,15 @@ argument_list|,
 name|generateNullsOnLeft
 argument_list|,
 name|generateNullsOnRight
+argument_list|,
+literal|null
 argument_list|)
 return|;
 block|}
 end_function
 
 begin_comment
-comment|/**    * Joins two inputs that are sorted on the key, with an extra predicate for non equi-join    * conditions.    * Inputs must sorted in ascending order, nulls last.    *    * @param extraPredicate predicate for non equi-join conditions. In case of equi-join,    *                       it will be null. In case of non-equi join, the non-equi conditions    *                       will be evaluated using this extra predicate within the join process,    *                       and not applying a filter on top of the join results, because the latter    *                       strategy can only work on inner joins, and we aim to support other join    *                       types in the future (e.g. semi or anti joins).    *    * NOTE: The current API is experimental and subject to change without notice.    */
+comment|/**    * Joins two inputs that are sorted on the key, with an extra predicate for non equi-join    * conditions.    * Inputs must sorted in ascending order, nulls last.    *    * @param extraPredicate predicate for non equi-join conditions. In case of equi-join,    *                       it will be null. In case of non-equi join, the non-equi conditions    *                       will be evaluated using this extra predicate within the join process,    *                       and not applying a filter on top of the join results, because the latter    *                       strategy can only work on inner joins, and we aim to support other join    *                       types in the future (e.g. semi or anti joins).    * @param comparator key comparator, possibly null (in which case {@link Comparable#compareTo}    *                   will be used).    *    * NOTE: The current API is experimental and subject to change without notice.    */
 end_comment
 
 begin_function
@@ -10214,6 +10216,12 @@ name|generateNullsOnLeft
 parameter_list|,
 name|boolean
 name|generateNullsOnRight
+parameter_list|,
+name|Comparator
+argument_list|<
+name|TKey
+argument_list|>
+name|comparator
 parameter_list|)
 block|{
 if|if
@@ -10274,6 +10282,8 @@ argument_list|,
 name|extraPredicate
 argument_list|,
 name|resultSelector
+argument_list|,
+name|comparator
 argument_list|)
 return|;
 block|}
@@ -19233,6 +19243,15 @@ name|TResult
 argument_list|>
 name|resultSelector
 decl_stmt|;
+comment|// key comparator, possibly null (Comparable#compareTo to be used in that case)
+specifier|private
+specifier|final
+name|Comparator
+argument_list|<
+name|TKey
+argument_list|>
+name|comparator
+decl_stmt|;
 specifier|private
 name|boolean
 name|done
@@ -19291,6 +19310,12 @@ argument_list|,
 name|TResult
 argument_list|>
 name|resultSelector
+parameter_list|,
+name|Comparator
+argument_list|<
+name|TKey
+argument_list|>
+name|comparator
 parameter_list|)
 block|{
 name|this
@@ -19328,6 +19353,12 @@ operator|.
 name|resultSelector
 operator|=
 name|resultSelector
+expr_stmt|;
+name|this
+operator|.
+name|comparator
+operator|=
+name|comparator
 expr_stmt|;
 name|start
 argument_list|()
@@ -19426,6 +19457,39 @@ argument_list|()
 expr_stmt|;
 block|}
 block|}
+specifier|private
+name|int
+name|compare
+parameter_list|(
+name|TKey
+name|key1
+parameter_list|,
+name|TKey
+name|key2
+parameter_list|)
+block|{
+return|return
+name|comparator
+operator|!=
+literal|null
+condition|?
+name|comparator
+operator|.
+name|compare
+argument_list|(
+name|key1
+argument_list|,
+name|key2
+argument_list|)
+else|:
+name|key1
+operator|.
+name|compareTo
+argument_list|(
+name|key2
+argument_list|)
+return|;
+block|}
 comment|/** Moves to the next key that is present in both sides. Populates      * lefts and rights with the rows. Restarts the cross-join      * enumerator. */
 specifier|private
 name|boolean
@@ -19498,10 +19562,10 @@ block|}
 name|int
 name|c
 init|=
-name|leftKey
-operator|.
-name|compareTo
+name|compare
 argument_list|(
+name|leftKey
+argument_list|,
 name|rightKey
 argument_list|)
 decl_stmt|;
@@ -19658,10 +19722,10 @@ block|}
 name|int
 name|c
 init|=
-name|leftKey
-operator|.
-name|compareTo
+name|compare
 argument_list|(
+name|leftKey
+argument_list|,
 name|leftKey2
 argument_list|)
 decl_stmt|;
@@ -19771,10 +19835,10 @@ block|}
 name|int
 name|c
 init|=
-name|rightKey
-operator|.
-name|compareTo
+name|compare
 argument_list|(
+name|rightKey
+argument_list|,
 name|rightKey2
 argument_list|)
 decl_stmt|;

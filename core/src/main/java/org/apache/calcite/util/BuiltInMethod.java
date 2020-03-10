@@ -2257,6 +2257,10 @@ argument_list|,
 name|boolean
 operator|.
 name|class
+argument_list|,
+name|Comparator
+operator|.
+name|class
 argument_list|)
 block|,
 name|SLICE0
