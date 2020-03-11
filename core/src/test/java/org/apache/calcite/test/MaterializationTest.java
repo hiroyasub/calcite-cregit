@@ -4592,7 +4592,7 @@ name|checkSatisfiable
 argument_list|(
 name|e6
 argument_list|,
-literal|"AND(=($0, 0), OR(<>($0, 0),<>($1, 1)))"
+literal|"AND(=($0, 0),<>($1, 1))"
 argument_list|)
 expr_stmt|;
 comment|// "$0 = 0 AND ($1 = 1 AND NOT ($0 = 0))" is not satisfiable.
