@@ -1676,6 +1676,11 @@ name|rightWithDelta
 argument_list|,
 name|join
 operator|.
+name|getHints
+argument_list|()
+argument_list|,
+name|join
+operator|.
 name|getCondition
 argument_list|()
 argument_list|,
@@ -1727,6 +1732,11 @@ argument_list|(
 name|leftWithDelta
 argument_list|,
 name|right
+argument_list|,
+name|join
+operator|.
+name|getHints
+argument_list|()
 argument_list|,
 name|join
 operator|.

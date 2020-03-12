@@ -28788,14 +28788,6 @@ operator|.
 name|build
 argument_list|()
 decl_stmt|;
-comment|/** Returns the {@code convertTableAccess} option. Controls whether table      * access references are converted to physical rels immediately. The      * optimizer doesn't like leaf rels to have {@link Convention#NONE}.      * However, if we are doing further conversion passes (e.g.      * {@link RelStructuredTypeFlattener}), then we may need to defer      * conversion.      *      * @deprecated Table access references are always converted to      * logical relational expressions during sql-to-rel conversion.      * */
-annotation|@
-name|Deprecated
-comment|// to be removed before 1.23
-name|boolean
-name|isConvertTableAccess
-parameter_list|()
-function_decl|;
 comment|/** Returns the {@code decorrelationEnabled} option. Controls whether to      * disable sub-query decorrelation when needed. e.g. if outer joins are not      * supported. */
 name|boolean
 name|isDecorrelationEnabled
@@ -28979,21 +28971,6 @@ operator|.
 name|getHintStrategyTable
 argument_list|()
 expr_stmt|;
-return|return
-name|this
-return|;
-block|}
-annotation|@
-name|Deprecated
-comment|// to be removed before 1.23
-specifier|public
-name|ConfigBuilder
-name|withConvertTableAccess
-parameter_list|(
-name|boolean
-name|convertTableAccess
-parameter_list|)
-block|{
 return|return
 name|this
 return|;
