@@ -175,6 +175,22 @@ name|rel
 operator|.
 name|logical
 operator|.
+name|LogicalJoin
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|logical
+operator|.
 name|LogicalSort
 import|;
 end_import
@@ -269,7 +285,7 @@ name|LogicalSort
 operator|.
 name|class
 argument_list|,
-name|Join
+name|LogicalJoin
 operator|.
 name|class
 argument_list|,
@@ -280,7 +296,7 @@ argument_list|)
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
 comment|/** Creates a SortJoinCopyRule. */
-specifier|protected
+specifier|public
 name|SortJoinCopyRule
 parameter_list|(
 name|Class
