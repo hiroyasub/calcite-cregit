@@ -4430,7 +4430,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testSnapshotOnTemporalTable
+name|testSnapshotOnTemporalTable1
 parameter_list|()
 block|{
 specifier|final
@@ -4454,7 +4454,38 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testJoinTemporalTableOnSpecificTime
+name|testSnapshotOnTemporalTable2
+parameter_list|()
+block|{
+comment|// Test temporal table with virtual columns.
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select * from VIRTUALCOLUMNS.VC_T1 "
+operator|+
+literal|"for system_time as of TIMESTAMP '2011-01-02 00:00:00'"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|with
+argument_list|(
+name|getExtendedTester
+argument_list|()
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testJoinTemporalTableOnSpecificTime1
 parameter_list|()
 block|{
 specifier|final
@@ -4482,7 +4513,42 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testJoinTemporalTableOnColumnReference
+name|testJoinTemporalTableOnSpecificTime2
+parameter_list|()
+block|{
+comment|// Test temporal table with virtual columns.
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select stream *\n"
+operator|+
+literal|"from orders,\n"
+operator|+
+literal|"  VIRTUALCOLUMNS.VC_T1 for system_time as of\n"
+operator|+
+literal|"    TIMESTAMP '2011-01-02 00:00:00'"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|with
+argument_list|(
+name|getExtendedTester
+argument_list|()
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testJoinTemporalTableOnColumnReference1
 parameter_list|()
 block|{
 specifier|final
@@ -4500,6 +4566,41 @@ decl_stmt|;
 name|sql
 argument_list|(
 name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testJoinTemporalTableOnColumnReference2
+parameter_list|()
+block|{
+comment|// Test temporal table with virtual columns.
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select stream *\n"
+operator|+
+literal|"from orders\n"
+operator|+
+literal|"join VIRTUALCOLUMNS.VC_T1 for system_time as of orders.rowtime\n"
+operator|+
+literal|"on orders.productid = VIRTUALCOLUMNS.VC_T1.a"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|with
+argument_list|(
+name|getExtendedTester
+argument_list|()
 argument_list|)
 operator|.
 name|ok

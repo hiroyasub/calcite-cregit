@@ -747,7 +747,7 @@ operator|new
 name|VirtualColumnsExpressionFactory
 argument_list|()
 argument_list|,
-literal|false
+literal|true
 argument_list|)
 decl_stmt|;
 name|virtualColumnsTable1
@@ -794,6 +794,8 @@ operator|.
 name|intTypeNull
 argument_list|)
 expr_stmt|;
+comment|// Column E has the same type as column A because it's a virtual column
+comment|// with expression that references column A.
 name|virtualColumnsTable1
 operator|.
 name|addColumn
@@ -802,7 +804,7 @@ literal|"E"
 argument_list|,
 name|f
 operator|.
-name|bigintType
+name|intTypeNull
 argument_list|)
 expr_stmt|;
 comment|// Same schema with VC_T1 but with different table name.
