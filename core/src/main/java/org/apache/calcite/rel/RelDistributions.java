@@ -743,7 +743,7 @@ name|copyOf
 argument_list|(
 name|Mappings
 operator|.
-name|apply
+name|apply2
 argument_list|(
 operator|(
 name|Mapping
