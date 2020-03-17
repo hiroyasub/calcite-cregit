@@ -435,11 +435,9 @@ operator|.
 name|getPlanner
 argument_list|()
 operator|.
-name|setImportance
+name|prune
 argument_list|(
 name|sort
-argument_list|,
-literal|0.0
 argument_list|)
 expr_stmt|;
 return|return;
@@ -479,11 +477,9 @@ operator|.
 name|getPlanner
 argument_list|()
 operator|.
-name|setImportance
+name|prune
 argument_list|(
 name|sort
-argument_list|,
-literal|0.0
 argument_list|)
 expr_stmt|;
 block|}

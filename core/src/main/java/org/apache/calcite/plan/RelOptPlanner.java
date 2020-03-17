@@ -404,7 +404,10 @@ name|RelNode
 name|rel
 parameter_list|)
 function_decl|;
-comment|/**    * Sets the importance of a relational expression.    *    *<p>An important use of this method is when a {@link RelOptRule} has    * created a relational expression which is indisputably better than the    * original relational expression. The rule set the original relational    * expression's importance to zero, to reduce the search space. Pending rule    * calls are cancelled, and future rules will not fire.    *    * @param rel        Relational expression    * @param importance Importance    */
+comment|/**    * Sets the importance of a relational expression.    *    *<p>An important use of this method is when a {@link RelOptRule} has    * created a relational expression which is indisputably better than the    * original relational expression. The rule set the original relational    * expression's importance to zero, to reduce the search space. Pending rule    * calls are cancelled, and future rules will not fire.    *    * @param rel        Relational expression    * @param importance Importance    *    * @deprecated This API will be removed in a future release, as we no longer    * support the concept of node importance. Please use    * {@link RelOptPlanner#prune(RelNode)} method instead.    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 1.24
 name|void
 name|setImportance
 parameter_list|(
@@ -413,6 +416,14 @@ name|rel
 parameter_list|,
 name|double
 name|importance
+parameter_list|)
+function_decl|;
+comment|/**    * Prunes a node from the planner.    *    *<p>When a node is pruned, the related pending rule    * calls are cancelled, and future rules will not fire.    * This can be used to reduce the search space.</p>    * @param rel the node to prune.    */
+name|void
+name|prune
+parameter_list|(
+name|RelNode
+name|rel
 parameter_list|)
 function_decl|;
 comment|/**    * Registers a class of RelNode. If this class of RelNode has been seen    * before, does nothing.    *    * @param node Relational expression    */

@@ -342,11 +342,9 @@ operator|.
 name|getPlanner
 argument_list|()
 operator|.
-name|setImportance
+name|prune
 argument_list|(
 name|topCalc
-argument_list|,
-literal|0.0
 argument_list|)
 expr_stmt|;
 block|}

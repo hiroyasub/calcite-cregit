@@ -820,6 +820,9 @@ return|return
 literal|0
 return|;
 block|}
+annotation|@
+name|Deprecated
+comment|// to be removed before 1.24
 specifier|public
 name|void
 name|setImportance
@@ -829,6 +832,17 @@ name|rel
 parameter_list|,
 name|double
 name|importance
+parameter_list|)
+block|{
+block|}
+annotation|@
+name|Override
+specifier|public
+name|void
+name|prune
+parameter_list|(
+name|RelNode
+name|rel
 parameter_list|)
 block|{
 block|}
