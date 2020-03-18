@@ -1270,26 +1270,30 @@ literal|""
 operator|+
 literal|"EnumerableCalc(expr#0..6=[{inputs}], proj#0..1=[{exprs}], SUPPLIERID=[$t6])\n"
 operator|+
-literal|"  EnumerableHashJoin(condition=[=($4, $5)], joinType=[inner])\n"
+literal|"  EnumerableMergeJoin(condition=[=($4, $5)], joinType=[inner])\n"
 operator|+
-literal|"    EnumerableCalc(expr#0..3=[{inputs}], expr#4=[CAST($t2):VARCHAR(32) NOT NULL], proj#0..4=[{exprs}])\n"
+literal|"    EnumerableSort(sort0=[$4], dir0=[ASC])\n"
 operator|+
-literal|"      EnumerableInterpreter\n"
+literal|"      EnumerableCalc(expr#0..3=[{inputs}], expr#4=[CAST($t2):VARCHAR(32) NOT NULL], proj#0..4=[{exprs}])\n"
 operator|+
-literal|"        BindableTableScan(table=[[STREAM_JOINS, ORDERS, (STREAM)]])\n"
+literal|"        EnumerableInterpreter\n"
 operator|+
-literal|"    EnumerableTableScan(table=[[STREAM_JOINS, PRODUCTS]])"
+literal|"          BindableTableScan(table=[[STREAM_JOINS, ORDERS, (STREAM)]])\n"
+operator|+
+literal|"    EnumerableSort(sort0=[$0], dir0=[ASC])\n"
+operator|+
+literal|"      EnumerableTableScan(table=[[STREAM_JOINS, PRODUCTS]])\n"
 argument_list|)
 operator|.
 name|returns
 argument_list|(
 name|startsWith
 argument_list|(
+literal|"ROWTIME=2015-02-15 10:24:45; ORDERID=3; SUPPLIERID=1"
+argument_list|,
 literal|"ROWTIME=2015-02-15 10:15:00; ORDERID=1; SUPPLIERID=1"
 argument_list|,
-literal|"ROWTIME=2015-02-15 10:24:15; ORDERID=2; SUPPLIERID=0"
-argument_list|,
-literal|"ROWTIME=2015-02-15 10:24:45; ORDERID=3; SUPPLIERID=1"
+literal|"ROWTIME=2015-02-15 10:58:00; ORDERID=4; SUPPLIERID=1"
 argument_list|)
 argument_list|)
 expr_stmt|;

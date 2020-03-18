@@ -1157,6 +1157,15 @@ block|{
 comment|// for default case, nothing to do
 block|}
 specifier|public
+name|boolean
+name|isEnforcer
+parameter_list|()
+block|{
+return|return
+literal|false
+return|;
+block|}
+specifier|public
 name|void
 name|collectVariablesSet
 parameter_list|(

@@ -63,14 +63,20 @@ name|getName
 parameter_list|()
 function_decl|;
 comment|/**    * Returns whether we should convert from this convention to    * {@code toConvention}. Used by {@link ConventionTraitDef}.    *    * @param toConvention Desired convention to convert to    * @return Whether we should convert from this convention to toConvention    */
+specifier|default
 name|boolean
 name|canConvertConvention
 parameter_list|(
 name|Convention
 name|toConvention
 parameter_list|)
-function_decl|;
+block|{
+return|return
+literal|false
+return|;
+block|}
 comment|/**    * Returns whether we should convert from this trait set to the other trait    * set.    *    *<p>The convention decides whether it wants to handle other trait    * conversions, e.g. collation, distribution, etc.  For a given convention, we    * will only add abstract converters to handle the trait (convention,    * collation, distribution, etc.) conversions if this function returns true.    *    * @param fromTraits Traits of the RelNode that we are converting from    * @param toTraits Target traits    * @return Whether we should add converters    */
+specifier|default
 name|boolean
 name|useAbstractConvertersForConversion
 parameter_list|(
@@ -80,7 +86,11 @@ parameter_list|,
 name|RelTraitSet
 name|toTraits
 parameter_list|)
-function_decl|;
+block|{
+return|return
+literal|true
+return|;
+block|}
 comment|/**    * Default implementation.    */
 class|class
 name|Impl

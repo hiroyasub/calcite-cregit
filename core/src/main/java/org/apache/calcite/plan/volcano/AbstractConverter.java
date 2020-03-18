@@ -375,6 +375,17 @@ return|return
 name|pw
 return|;
 block|}
+annotation|@
+name|Override
+specifier|public
+name|boolean
+name|isEnforcer
+parameter_list|()
+block|{
+return|return
+literal|true
+return|;
+block|}
 comment|//~ Inner Classes ----------------------------------------------------------
 comment|/**    * Rule which converts an {@link AbstractConverter} into a chain of    * converters from the source relation to the target traits.    *    *<p>The chain produced is minimal: we have previously built the transitive    * closure of the graph of conversions, so we choose the shortest chain.</p>    *    *<p>Unlike the {@link AbstractConverter} they are replacing, these    * converters are guaranteed to be able to convert any relation of their    * calling convention. Furthermore, because they introduce subsets of other    * calling conventions along the way, these subsets may spawn more efficient    * conversions which are not generally applicable.</p>    *    *<p>AbstractConverters can be messy, so they restrain themselves: they    * don't fire if the target subset already has an implementation (with less    * than infinite cost).</p>    */
 specifier|public

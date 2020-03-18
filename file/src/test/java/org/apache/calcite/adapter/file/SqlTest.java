@@ -1968,7 +1968,9 @@ literal|" \"DATE\".JOINEDAT\n"
 operator|+
 literal|" from \"DATE\"\n"
 operator|+
-literal|"join emps on emps.empno = \"DATE\".EMPNO limit 3"
+literal|"join emps on emps.empno = \"DATE\".EMPNO\n"
+operator|+
+literal|"order by empno, name, joinedat limit 3"
 decl_stmt|;
 specifier|final
 name|String

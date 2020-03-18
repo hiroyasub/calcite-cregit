@@ -535,6 +535,16 @@ name|RelOptPlanner
 name|planner
 parameter_list|)
 function_decl|;
+comment|/**    * Indicates whether it is an enforcer operator, e.g. PhysicalSort,    * PhysicalHashDistribute, etc. As an enforcer, the operator must be    * created only when required traitSet is not satisfied by its input.    *    * @return Whether it is an enforcer operator    */
+specifier|default
+name|boolean
+name|isEnforcer
+parameter_list|()
+block|{
+return|return
+literal|false
+return|;
+block|}
 comment|/**    * Returns whether the result of this relational expression is uniquely    * identified by this columns with the given ordinals.    *    *<p>For example, if this relational expression is a LogicalTableScan to    * T(A, B, C, D) whose key is (A, B), then isKey([0, 1]) yields true,    * and isKey([0]) and isKey([0, 2]) yields false.</p>    *    * @param columns Ordinals of key columns    * @return Whether the given columns are a key or a superset of a key    *    * @deprecated Use {@link RelMetadataQuery#areColumnsUnique(RelNode, ImmutableBitSet)}    */
 annotation|@
 name|Deprecated

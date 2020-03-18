@@ -2392,9 +2392,8 @@ name|getCluster
 argument_list|()
 argument_list|,
 name|toTraits
-operator|.
-name|simplify
-argument_list|()
+argument_list|,
+literal|true
 argument_list|)
 return|;
 block|}
