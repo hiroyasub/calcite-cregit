@@ -9603,9 +9603,9 @@ name|project
 operator|.
 name|copy
 argument_list|(
-name|r
+name|cluster
 operator|.
-name|getTraitSet
+name|traitSet
 argument_list|()
 argument_list|,
 name|project

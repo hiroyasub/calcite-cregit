@@ -228,6 +228,9 @@ name|toTrait
 parameter_list|)
 function_decl|;
 comment|/**    * Tests whether the given RelTrait can be converted to another RelTrait.    *    * @param planner   the planner requesting the conversion test    * @param fromTrait the RelTrait to convert from    * @param toTrait   the RelTrait to convert to    * @param fromRel   the RelNode to convert from (with fromTrait)    * @return true if fromTrait can be converted to toTrait    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 1.24
 specifier|public
 name|boolean
 name|canConvert

@@ -852,8 +852,6 @@ argument_list|,
 name|fromTrait
 argument_list|,
 name|toTrait
-argument_list|,
-name|from
 argument_list|)
 condition|)
 block|{
