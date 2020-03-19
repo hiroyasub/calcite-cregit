@@ -721,6 +721,20 @@ end_import
 
 begin_import
 import|import
+name|com
+operator|.
+name|google
+operator|.
+name|common
+operator|.
+name|collect
+operator|.
+name|ImmutableList
+import|;
+end_import
+
+begin_import
+import|import
 name|org
 operator|.
 name|junit
@@ -1220,6 +1234,14 @@ name|String
 name|LITERAL_OUT_OF_RANGE_MESSAGE
 init|=
 literal|"(?s).*Numeric literal.*out of range.*"
+decl_stmt|;
+specifier|public
+specifier|static
+specifier|final
+name|String
+name|INVALID_ARGUMENTS_NUMBER
+init|=
+literal|"Invalid number of arguments to function .* Was expecting .* arguments"
 decl_stmt|;
 specifier|public
 specifier|static
@@ -9052,6 +9074,252 @@ operator|.
 name|checkNull
 argument_list|(
 literal|" cast(null as ANY) || cast(null as ANY) "
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"cast('a' as varchar) || cast('b' as varchar) "
+operator|+
+literal|"|| cast('c' as varchar)"
+argument_list|,
+literal|"abc"
+argument_list|,
+literal|"VARCHAR NOT NULL"
+argument_list|)
+expr_stmt|;
+specifier|final
+name|SqlTester
+name|tester1
+init|=
+name|tester
+argument_list|(
+name|SqlLibrary
+operator|.
+name|MYSQL
+argument_list|)
+decl_stmt|;
+specifier|final
+name|SqlTester
+name|tester2
+init|=
+name|tester
+argument_list|(
+name|SqlLibrary
+operator|.
+name|POSTGRESQL
+argument_list|)
+decl_stmt|;
+specifier|final
+name|SqlTester
+name|tester3
+init|=
+name|tester
+argument_list|(
+name|SqlLibrary
+operator|.
+name|ORACLE
+argument_list|)
+decl_stmt|;
+for|for
+control|(
+name|SqlTester
+name|sqlTester
+range|:
+name|ImmutableList
+operator|.
+name|of
+argument_list|(
+name|tester1
+argument_list|,
+name|tester2
+argument_list|)
+control|)
+block|{
+name|sqlTester
+operator|.
+name|setFor
+argument_list|(
+name|SqlLibraryOperators
+operator|.
+name|CONCAT_FUNCTION
+argument_list|)
+expr_stmt|;
+name|sqlTester
+operator|.
+name|checkString
+argument_list|(
+literal|"concat('a', 'b', 'c')"
+argument_list|,
+literal|"abc"
+argument_list|,
+literal|"VARCHAR(3) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|sqlTester
+operator|.
+name|checkString
+argument_list|(
+literal|"concat(cast('a' as varchar), cast('b' as varchar), "
+operator|+
+literal|"cast('c' as varchar))"
+argument_list|,
+literal|"abc"
+argument_list|,
+literal|"VARCHAR NOT NULL"
+argument_list|)
+expr_stmt|;
+name|sqlTester
+operator|.
+name|checkNull
+argument_list|(
+literal|"concat('a', 'b', cast(null as char(2)))"
+argument_list|)
+expr_stmt|;
+name|sqlTester
+operator|.
+name|checkNull
+argument_list|(
+literal|"concat(cast(null as ANY), 'b', cast(null as char(2)))"
+argument_list|)
+expr_stmt|;
+name|sqlTester
+operator|.
+name|checkString
+argument_list|(
+literal|"concat('', '', 'a')"
+argument_list|,
+literal|"a"
+argument_list|,
+literal|"VARCHAR(1) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|sqlTester
+operator|.
+name|checkString
+argument_list|(
+literal|"concat('', '', '')"
+argument_list|,
+literal|""
+argument_list|,
+literal|"VARCHAR(0) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|sqlTester
+operator|.
+name|checkFails
+argument_list|(
+literal|"^concat()^"
+argument_list|,
+name|INVALID_ARGUMENTS_NUMBER
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+block|}
+name|tester3
+operator|.
+name|setFor
+argument_list|(
+name|SqlLibraryOperators
+operator|.
+name|CONCAT2
+argument_list|)
+expr_stmt|;
+name|tester3
+operator|.
+name|checkString
+argument_list|(
+literal|"concat(cast('fe' as char(2)), cast('df' as varchar(65535)))"
+argument_list|,
+literal|"fedf"
+argument_list|,
+literal|"VARCHAR NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester3
+operator|.
+name|checkString
+argument_list|(
+literal|"concat(cast('fe' as char(2)), cast('df' as varchar))"
+argument_list|,
+literal|"fedf"
+argument_list|,
+literal|"VARCHAR NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester3
+operator|.
+name|checkString
+argument_list|(
+literal|"concat(cast('fe' as char(2)), cast('df' as varchar(33333)))"
+argument_list|,
+literal|"fedf"
+argument_list|,
+literal|"VARCHAR(33335) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester3
+operator|.
+name|checkString
+argument_list|(
+literal|"concat('', '')"
+argument_list|,
+literal|""
+argument_list|,
+literal|"VARCHAR(0) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester3
+operator|.
+name|checkString
+argument_list|(
+literal|"concat('', 'a')"
+argument_list|,
+literal|"a"
+argument_list|,
+literal|"VARCHAR(1) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester3
+operator|.
+name|checkString
+argument_list|(
+literal|"concat('a', 'b')"
+argument_list|,
+literal|"ab"
+argument_list|,
+literal|"VARCHAR(2) NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester3
+operator|.
+name|checkNull
+argument_list|(
+literal|"concat('a', cast(null as varchar))"
+argument_list|)
+expr_stmt|;
+name|tester3
+operator|.
+name|checkFails
+argument_list|(
+literal|"^concat('a', 'b', 'c')^"
+argument_list|,
+name|INVALID_ARGUMENTS_NUMBER
+argument_list|,
+literal|false
+argument_list|)
+expr_stmt|;
+name|tester3
+operator|.
+name|checkFails
+argument_list|(
+literal|"^concat('a')^"
+argument_list|,
+name|INVALID_ARGUMENTS_NUMBER
+argument_list|,
+literal|false
 argument_list|)
 expr_stmt|;
 block|}

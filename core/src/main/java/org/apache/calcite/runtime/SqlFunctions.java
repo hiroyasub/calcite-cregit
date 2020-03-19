@@ -2774,6 +2774,28 @@ name|s1
 argument_list|)
 return|;
 block|}
+comment|/** SQL {@code concat(arg0, arg1, arg2, ...)} function. */
+specifier|public
+specifier|static
+name|String
+name|concat
+parameter_list|(
+name|String
+modifier|...
+name|args
+parameter_list|)
+block|{
+return|return
+name|String
+operator|.
+name|join
+argument_list|(
+literal|""
+argument_list|,
+name|args
+argument_list|)
+return|;
+block|}
 comment|/** SQL {@code RTRIM} function applied to string. */
 specifier|public
 specifier|static
