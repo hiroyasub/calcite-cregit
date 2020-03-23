@@ -35871,7 +35871,7 @@ name|tester
 argument_list|,
 literal|"sum(1.2)"
 argument_list|,
-literal|"DECIMAL(2, 1) NOT NULL"
+literal|"DECIMAL(19, 1) NOT NULL"
 argument_list|)
 expr_stmt|;
 name|checkAggType
@@ -35880,7 +35880,7 @@ name|tester
 argument_list|,
 literal|"sum(DISTINCT 1.5)"
 argument_list|,
-literal|"DECIMAL(2, 1) NOT NULL"
+literal|"DECIMAL(19, 1) NOT NULL"
 argument_list|)
 expr_stmt|;
 name|tester
