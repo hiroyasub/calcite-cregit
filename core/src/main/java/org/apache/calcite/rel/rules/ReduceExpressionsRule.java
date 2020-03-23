@@ -960,7 +960,7 @@ name|LogicalFilter
 operator|.
 name|class
 argument_list|,
-literal|true
+literal|false
 argument_list|,
 name|RelFactories
 operator|.
@@ -1002,7 +1002,7 @@ name|Join
 operator|.
 name|class
 argument_list|,
-literal|true
+literal|false
 argument_list|,
 name|RelFactories
 operator|.
