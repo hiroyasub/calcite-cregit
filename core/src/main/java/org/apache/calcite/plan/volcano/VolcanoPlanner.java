@@ -969,20 +969,6 @@ name|ArrayList
 argument_list|<>
 argument_list|()
 decl_stmt|;
-comment|/**    * Set of all registered rules.    */
-specifier|protected
-specifier|final
-name|Set
-argument_list|<
-name|RelOptRule
-argument_list|>
-name|ruleSet
-init|=
-operator|new
-name|HashSet
-argument_list|<>
-argument_list|()
-decl_stmt|;
 specifier|private
 name|int
 name|nextSetId
@@ -1067,22 +1053,6 @@ specifier|private
 specifier|final
 name|RelOptCost
 name|zeroCost
-decl_stmt|;
-comment|/** Maps rule classes to their name, to ensure that the names are unique and    * conform to rules. */
-specifier|private
-specifier|final
-name|Map
-argument_list|<
-name|String
-argument_list|,
-name|RelOptRule
-argument_list|>
-name|ruleNames
-init|=
-operator|new
-name|HashMap
-argument_list|<>
-argument_list|()
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
 comment|/**    * Creates a uninitialized<code>VolcanoPlanner</code>. To fully initialize    * it, the caller must register the desired set of relations, rules, and    * calling conventions.    */
@@ -1829,12 +1799,8 @@ control|(
 name|RelOptRule
 name|rule
 range|:
-name|ImmutableList
-operator|.
-name|copyOf
-argument_list|(
-name|ruleSet
-argument_list|)
+name|getRules
+argument_list|()
 control|)
 block|{
 name|removeRule
@@ -1887,13 +1853,6 @@ argument_list|()
 expr_stmt|;
 name|this
 operator|.
-name|ruleNames
-operator|.
-name|clear
-argument_list|()
-expr_stmt|;
-name|this
-operator|.
 name|materializations
 operator|.
 name|clear
@@ -1915,23 +1874,6 @@ argument_list|()
 expr_stmt|;
 block|}
 specifier|public
-name|List
-argument_list|<
-name|RelOptRule
-argument_list|>
-name|getRules
-parameter_list|()
-block|{
-return|return
-name|ImmutableList
-operator|.
-name|copyOf
-argument_list|(
-name|ruleSet
-argument_list|)
-return|;
-block|}
-specifier|public
 name|boolean
 name|addRule
 parameter_list|(
@@ -1950,73 +1892,19 @@ return|;
 block|}
 if|if
 condition|(
-name|ruleSet
+operator|!
+name|super
 operator|.
-name|contains
+name|addRule
 argument_list|(
 name|rule
 argument_list|)
 condition|)
 block|{
-comment|// Rule already exists.
 return|return
 literal|false
 return|;
 block|}
-specifier|final
-name|boolean
-name|added
-init|=
-name|ruleSet
-operator|.
-name|add
-argument_list|(
-name|rule
-argument_list|)
-decl_stmt|;
-assert|assert
-name|added
-assert|;
-specifier|final
-name|String
-name|ruleName
-init|=
-name|rule
-operator|.
-name|toString
-argument_list|()
-decl_stmt|;
-if|if
-condition|(
-name|ruleNames
-operator|.
-name|put
-argument_list|(
-name|ruleName
-argument_list|,
-name|rule
-argument_list|)
-operator|!=
-literal|null
-condition|)
-block|{
-throw|throw
-operator|new
-name|RuntimeException
-argument_list|(
-literal|"Rule description '"
-operator|+
-name|ruleName
-operator|+
-literal|"' is not unique. "
-argument_list|)
-throw|;
-block|}
-name|mapRuleDescription
-argument_list|(
-name|rule
-argument_list|)
-expr_stmt|;
 comment|// Each of this rule's operands is an 'entry point' for a rule call.
 comment|// Register each operand against all concrete sub-classes that could match
 comment|// it.
@@ -2130,12 +2018,13 @@ name|RelOptRule
 name|rule
 parameter_list|)
 block|{
+comment|// Remove description.
 if|if
 condition|(
 operator|!
-name|ruleSet
+name|super
 operator|.
-name|remove
+name|removeRule
 argument_list|(
 name|rule
 argument_list|)
@@ -2146,23 +2035,6 @@ return|return
 literal|false
 return|;
 block|}
-comment|// Remove rule name.
-name|ruleNames
-operator|.
-name|remove
-argument_list|(
-name|rule
-operator|.
-name|toString
-argument_list|()
-argument_list|)
-expr_stmt|;
-comment|// Remove description.
-name|unmapRuleDescription
-argument_list|(
-name|rule
-argument_list|)
-expr_stmt|;
 comment|// Remove operands.
 name|classOperands
 operator|.
@@ -2282,7 +2154,10 @@ control|(
 name|RelOptRule
 name|rule
 range|:
-name|ruleSet
+name|mapDescToRule
+operator|.
+name|values
+argument_list|()
 control|)
 block|{
 for|for

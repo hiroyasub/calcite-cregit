@@ -189,7 +189,7 @@ name|java
 operator|.
 name|util
 operator|.
-name|HashMap
+name|HashSet
 import|;
 end_import
 
@@ -199,7 +199,7 @@ name|java
 operator|.
 name|util
 operator|.
-name|HashSet
+name|LinkedHashMap
 import|;
 end_import
 
@@ -287,24 +287,9 @@ name|AbstractRelOptPlanner
 implements|implements
 name|RelOptPlanner
 block|{
-comment|//~ Static fields/initializers ---------------------------------------------
-comment|/** Regular expression for integer. */
-specifier|private
-specifier|static
-specifier|final
-name|Pattern
-name|INTEGER_PATTERN
-init|=
-name|Pattern
-operator|.
-name|compile
-argument_list|(
-literal|"[0-9]+"
-argument_list|)
-decl_stmt|;
 comment|//~ Instance fields --------------------------------------------------------
 comment|/**    * Maps rule description to rule, just to ensure that rules' descriptions    * are unique.    */
-specifier|private
+specifier|protected
 specifier|final
 name|Map
 argument_list|<
@@ -315,7 +300,7 @@ argument_list|>
 name|mapDescToRule
 init|=
 operator|new
-name|HashMap
+name|LinkedHashMap
 argument_list|<>
 argument_list|()
 decl_stmt|;
@@ -359,9 +344,9 @@ specifier|private
 specifier|final
 name|Set
 argument_list|<
-name|RelTrait
+name|Convention
 argument_list|>
-name|traits
+name|conventions
 init|=
 operator|new
 name|HashSet
@@ -537,17 +522,35 @@ argument_list|()
 throw|;
 block|}
 block|}
-comment|/**    * Registers a rule's description.    *    * @param rule Rule    */
-specifier|protected
-name|void
-name|mapRuleDescription
+specifier|public
+name|List
+argument_list|<
+name|RelOptRule
+argument_list|>
+name|getRules
+parameter_list|()
+block|{
+return|return
+name|ImmutableList
+operator|.
+name|copyOf
+argument_list|(
+name|mapDescToRule
+operator|.
+name|values
+argument_list|()
+argument_list|)
+return|;
+block|}
+specifier|public
+name|boolean
+name|addRule
 parameter_list|(
 name|RelOptRule
 name|rule
 parameter_list|)
 block|{
-comment|// Check that there isn't a rule with the same description,
-comment|// also validating description string.
+comment|// Check that there isn't a rule with the same description
 specifier|final
 name|String
 name|description
@@ -561,45 +564,6 @@ assert|assert
 name|description
 operator|!=
 literal|null
-assert|;
-assert|assert
-operator|!
-name|description
-operator|.
-name|contains
-argument_list|(
-literal|"$"
-argument_list|)
-operator|:
-literal|"Rule's description should not contain '$': "
-operator|+
-name|description
-assert|;
-assert|assert
-operator|!
-name|INTEGER_PATTERN
-operator|.
-name|matcher
-argument_list|(
-name|description
-argument_list|)
-operator|.
-name|matches
-argument_list|()
-operator|:
-literal|"Rule's description should not be an integer: "
-operator|+
-name|rule
-operator|.
-name|getClass
-argument_list|()
-operator|.
-name|getName
-argument_list|()
-operator|+
-literal|", "
-operator|+
-name|description
 assert|;
 name|RelOptRule
 name|existingRule
@@ -623,17 +587,16 @@ block|{
 if|if
 condition|(
 name|existingRule
-operator|==
+operator|.
+name|equals
+argument_list|(
 name|rule
+argument_list|)
 condition|)
 block|{
-throw|throw
-operator|new
-name|AssertionError
-argument_list|(
-literal|"Rule should not already be registered"
-argument_list|)
-throw|;
+return|return
+literal|false
+return|;
 block|}
 else|else
 block|{
@@ -657,11 +620,13 @@ argument_list|)
 throw|;
 block|}
 block|}
+return|return
+literal|true
+return|;
 block|}
-comment|/**    * Removes the mapping between a rule and its description.    *    * @param rule Rule    */
-specifier|protected
-name|void
-name|unmapRuleDescription
+specifier|public
+name|boolean
+name|removeRule
 parameter_list|(
 name|RelOptRule
 name|rule
@@ -675,13 +640,21 @@ operator|.
 name|toString
 argument_list|()
 decl_stmt|;
+name|RelOptRule
+name|removed
+init|=
 name|mapDescToRule
 operator|.
 name|remove
 argument_list|(
 name|description
 argument_list|)
-expr_stmt|;
+decl_stmt|;
+return|return
+name|removed
+operator|!=
+literal|null
+return|;
 block|}
 comment|/**    * Returns the rule with a given description    *    * @param description Description    * @return Rule with given description, or null if not found    */
 specifier|protected
@@ -884,35 +857,29 @@ name|node
 argument_list|)
 expr_stmt|;
 block|}
-for|for
-control|(
-name|RelTrait
-name|trait
-range|:
-name|node
-operator|.
-name|getTraitSet
-argument_list|()
-control|)
-block|{
 if|if
 condition|(
-name|traits
+name|conventions
 operator|.
 name|add
 argument_list|(
-name|trait
+name|node
+operator|.
+name|getConvention
+argument_list|()
 argument_list|)
 condition|)
 block|{
-name|trait
+name|node
+operator|.
+name|getConvention
+argument_list|()
 operator|.
 name|register
 argument_list|(
 name|this
 argument_list|)
 expr_stmt|;
-block|}
 block|}
 block|}
 comment|/** Called when a new class of {@link RelNode} is seen. */
