@@ -29,6 +29,22 @@ name|RelNode
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|core
+operator|.
+name|RelFactories
+import|;
+end_import
+
 begin_comment
 comment|/**  * Calling convention trait.  */
 end_comment
@@ -115,6 +131,20 @@ parameter_list|)
 block|{
 return|return
 literal|false
+return|;
+block|}
+comment|/**    * Return RelFactories struct for the convention which can be used to build RelNode    */
+specifier|default
+name|RelFactories
+operator|.
+name|Struct
+name|getRelFactories
+parameter_list|()
+block|{
+return|return
+name|RelFactories
+operator|.
+name|DEFAULT_STRUCT
 return|;
 block|}
 comment|/**    * Default implementation.    */
