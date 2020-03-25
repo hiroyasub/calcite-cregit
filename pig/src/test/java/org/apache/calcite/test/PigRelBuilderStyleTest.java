@@ -575,6 +575,11 @@ argument_list|)
 expr_stmt|;
 block|}
 annotation|@
+name|Disabled
+argument_list|(
+literal|"CALCITE-3660"
+argument_list|)
+annotation|@
 name|Test
 specifier|public
 name|void
