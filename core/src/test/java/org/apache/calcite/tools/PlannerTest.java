@@ -3721,7 +3721,7 @@ literal|"EnumerableSort(sort0=[$2], dir0=[ASC])\n"
 operator|+
 literal|"  EnumerableProject(emp_cnt=[$5], EXPR$1=[+($0, $1)], deptno=[$1])\n"
 operator|+
-literal|"    EnumerableWindow(window#0=[window(partition {1} order by [] range between UNBOUNDED PRECEDING and UNBOUNDED FOLLOWING aggs [COUNT()])])\n"
+literal|"    EnumerableWindow(window#0=[window(partition {1} aggs [COUNT()])])\n"
 operator|+
 literal|"      EnumerableTableScan(table=[[hr, emps]])\n"
 argument_list|)

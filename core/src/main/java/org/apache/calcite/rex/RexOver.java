@@ -378,10 +378,17 @@ name|append
 argument_list|(
 literal|" OVER ("
 argument_list|)
-operator|.
-name|append
-argument_list|(
+expr_stmt|;
 name|window
+operator|.
+name|appendDigest
+argument_list|(
+name|sb
+argument_list|,
+name|op
+operator|.
+name|allowsFraming
+argument_list|()
 argument_list|)
 operator|.
 name|append

@@ -2056,9 +2056,7 @@ literal|""
 operator|+
 literal|"EnumerableProject($0=[$17])\n"
 operator|+
-literal|"  EnumerableWindow(window#0=[window(partition {} order by [9] range between "
-operator|+
-literal|"UNBOUNDED PRECEDING and CURRENT ROW aggs [RANK()])])\n"
+literal|"  EnumerableWindow(window#0=[window(order by [9] aggs [RANK()])])\n"
 operator|+
 literal|"    JdbcToEnumerableConverter\n"
 operator|+
@@ -2071,9 +2069,7 @@ literal|""
 operator|+
 literal|"LogicalProject($0=[$17])\n"
 operator|+
-literal|"  LogicalWindow(window#0=[window(partition {} order by [9] range between UNBOUNDED"
-operator|+
-literal|" PRECEDING and CURRENT ROW aggs [RANK()])])\n"
+literal|"  LogicalWindow(window#0=[window(order by [9] aggs [RANK()])])\n"
 operator|+
 literal|"    LogicalTableScan(table=[[foodmart, employee]])\n"
 decl_stmt|;

@@ -5182,6 +5182,8 @@ name|of
 argument_list|()
 argument_list|)
 argument_list|)
+argument_list|,
+literal|"x"
 argument_list|)
 argument_list|)
 operator|.
@@ -5194,11 +5196,7 @@ name|expected
 init|=
 literal|""
 operator|+
-literal|"LogicalProject(DEPTNO=[$7], "
-operator|+
-literal|"$f1=[ROW_NUMBER() OVER (ORDER BY $0 ROWS BETWEEN UNBOUNDED PRECEDING "
-operator|+
-literal|"AND UNBOUNDED FOLLOWING)])\n"
+literal|"LogicalProject(DEPTNO=[$7], x=[ROW_NUMBER() OVER (ORDER BY $0)])\n"
 operator|+
 literal|"  LogicalTableScan(table=[[scott, EMP]])\n"
 decl_stmt|;
@@ -5278,6 +5276,8 @@ name|of
 argument_list|()
 argument_list|)
 argument_list|)
+argument_list|,
+literal|"x"
 argument_list|)
 argument_list|)
 operator|.
@@ -5314,6 +5314,8 @@ name|of
 argument_list|()
 argument_list|)
 argument_list|)
+argument_list|,
+literal|"y"
 argument_list|)
 argument_list|)
 operator|.
@@ -5324,17 +5326,11 @@ specifier|final
 name|String
 name|expected
 init|=
-literal|"LogicalProject(DEPTNO=[$0], "
+literal|""
 operator|+
-literal|"$f1=[ROW_NUMBER() OVER (ORDER BY $0 ROWS BETWEEN UNBOUNDED "
+literal|"LogicalProject(DEPTNO=[$0], y=[ROW_NUMBER() OVER (ORDER BY $0)])\n"
 operator|+
-literal|"PRECEDING AND UNBOUNDED FOLLOWING)])\n"
-operator|+
-literal|"  LogicalProject(DEPTNO=[$7], "
-operator|+
-literal|"$f1=[ROW_NUMBER() OVER (ORDER BY $0 ROWS BETWEEN UNBOUNDED "
-operator|+
-literal|"PRECEDING AND UNBOUNDED FOLLOWING)])\n"
+literal|"  LogicalProject(DEPTNO=[$7], x=[ROW_NUMBER() OVER (ORDER BY $0)])\n"
 operator|+
 literal|"    LogicalTableScan(table=[[scott, EMP]])\n"
 decl_stmt|;
@@ -5367,6 +5363,9 @@ argument_list|<
 name|RexFieldCollation
 argument_list|>
 name|fieldCollations
+parameter_list|,
+name|String
+name|alias
 parameter_list|)
 block|{
 specifier|final
@@ -5386,6 +5385,10 @@ name|INTEGER
 argument_list|)
 decl_stmt|;
 return|return
+name|b
+operator|.
+name|alias
+argument_list|(
 name|b
 operator|.
 name|getRexBuilder
@@ -5428,6 +5431,9 @@ argument_list|,
 literal|false
 argument_list|,
 literal|false
+argument_list|)
+argument_list|,
+name|alias
 argument_list|)
 return|;
 block|}

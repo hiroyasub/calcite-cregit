@@ -191,7 +191,7 @@ name|calcite
 operator|.
 name|rex
 operator|.
-name|RexWindowBound
+name|RexWindowBounds
 import|;
 end_import
 
@@ -233,39 +233,9 @@ name|calcite
 operator|.
 name|sql
 operator|.
-name|SqlWindow
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|sql
-operator|.
 name|fun
 operator|.
 name|SqlStdOperatorTable
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|sql
-operator|.
-name|parser
-operator|.
-name|SqlParserPos
 import|;
 end_import
 
@@ -4542,40 +4512,14 @@ name|orderNodes
 argument_list|)
 argument_list|,
 comment|// order keys
-name|RexWindowBound
+name|RexWindowBounds
 operator|.
-name|create
-argument_list|(
-name|SqlWindow
-operator|.
-name|createUnboundedPreceding
-argument_list|(
-name|SqlParserPos
-operator|.
-name|ZERO
-argument_list|)
+name|UNBOUNDED_PRECEDING
 argument_list|,
-literal|null
-argument_list|)
-argument_list|,
-comment|// window with unbounded lower
-name|RexWindowBound
+name|RexWindowBounds
 operator|.
-name|create
-argument_list|(
-name|SqlWindow
-operator|.
-name|createCurrentRow
-argument_list|(
-name|SqlParserPos
-operator|.
-name|ZERO
-argument_list|)
+name|CURRENT_ROW
 argument_list|,
-literal|null
-argument_list|)
-argument_list|,
-comment|// till current
 literal|false
 argument_list|,
 comment|// Range-based

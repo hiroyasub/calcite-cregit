@@ -11495,7 +11495,7 @@ annotation|@
 name|Test
 specifier|public
 name|void
-name|testConvertWinodwToSql
+name|testConvertWindowToSql
 parameter_list|()
 block|{
 name|String

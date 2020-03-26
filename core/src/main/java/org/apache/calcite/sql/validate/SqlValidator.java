@@ -731,7 +731,22 @@ name|SqlNode
 name|selectNode
 parameter_list|)
 function_decl|;
-comment|/**    * Converts a window specification or window name into a fully-resolved    * window specification. For example, in<code>SELECT sum(x) OVER (PARTITION    * BY x ORDER BY y), sum(y) OVER w1, sum(z) OVER (w ORDER BY y) FROM t    * WINDOW w AS (PARTITION BY x)</code> all aggregations have the same    * resolved window specification<code>(PARTITION BY x ORDER BY y)</code>.    *    * @param windowOrRef    Either the name of a window (a {@link SqlIdentifier})    *                       or a window specification (a {@link SqlWindow}).    * @param scope          Scope in which to resolve window names    * @param populateBounds Whether to populate bounds. Doing so may alter the    *                       definition of the window. It is recommended that    *                       populate bounds when translating to physical algebra,    *                       but not when validating.    * @return A window    * @throws RuntimeException Validation exception if window does not exist    */
+comment|/**    * Converts a window specification or window name into a fully-resolved    * window specification. For example, in<code>SELECT sum(x) OVER (PARTITION    * BY x ORDER BY y), sum(y) OVER w1, sum(z) OVER (w ORDER BY y) FROM t    * WINDOW w AS (PARTITION BY x)</code> all aggregations have the same    * resolved window specification<code>(PARTITION BY x ORDER BY y)</code>.    *    * @param windowOrRef    Either the name of a window (a {@link SqlIdentifier})    *                       or a window specification (a {@link SqlWindow}).    * @param scope          Scope in which to resolve window names    * @return A window    * @throws RuntimeException Validation exception if window does not exist    */
+name|SqlWindow
+name|resolveWindow
+parameter_list|(
+name|SqlNode
+name|windowOrRef
+parameter_list|,
+name|SqlValidatorScope
+name|scope
+parameter_list|)
+function_decl|;
+comment|/** @deprecated Use {@link #resolveWindow(SqlNode, SqlValidatorScope)}, which    * does not have the deprecated {@code populateBounds} parameter.    *    * @param populateBounds Whether to populate bounds. Doing so may alter the    *                       definition of the window. It is recommended that    *                       populate bounds when translating to physical algebra,    *                       but not when validating.    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 2.0
+specifier|default
 name|SqlWindow
 name|resolveWindow
 parameter_list|(
@@ -744,7 +759,17 @@ parameter_list|,
 name|boolean
 name|populateBounds
 parameter_list|)
-function_decl|;
+block|{
+return|return
+name|resolveWindow
+argument_list|(
+name|windowOrRef
+argument_list|,
+name|scope
+argument_list|)
+return|;
+block|}
+empty_stmt|;
 comment|/**    * Finds the namespace corresponding to a given node.    *    *<p>For example, in the query<code>SELECT * FROM (SELECT * FROM t), t1 AS    * alias</code>, the both items in the FROM clause have a corresponding    * namespace.    *    * @param node Parse tree node    * @return namespace of node    */
 name|SqlValidatorNamespace
 name|getNamespace

@@ -2460,7 +2460,7 @@ name|sql
 init|=
 literal|"select SUM(DISTINCT deptno)\n"
 operator|+
-literal|"over (ROWS BETWEEN 10 PRECEDING AND CURRENT ROW)\n"
+literal|"over (ORDER BY empno ROWS BETWEEN 10 PRECEDING AND CURRENT ROW)\n"
 operator|+
 literal|"from emp\n"
 decl_stmt|;
@@ -7087,6 +7087,58 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+annotation|@
+name|Test
+name|void
+name|testOverDefaultBracket
+parameter_list|()
+block|{
+comment|// c2 and c3 are equivalent to c1;
+comment|// c5 is equivalent to c4;
+comment|// c7 is equivalent to c6.
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select\n"
+operator|+
+literal|"  count(*) over (order by deptno) c1,\n"
+operator|+
+literal|"  count(*) over (order by deptno\n"
+operator|+
+literal|"    range unbounded preceding) c2,\n"
+operator|+
+literal|"  count(*) over (order by deptno\n"
+operator|+
+literal|"    range between unbounded preceding and current row) c3,\n"
+operator|+
+literal|"  count(*) over (order by deptno\n"
+operator|+
+literal|"    rows unbounded preceding) c4,\n"
+operator|+
+literal|"  count(*) over (order by deptno\n"
+operator|+
+literal|"    rows between unbounded preceding and current row) c5,\n"
+operator|+
+literal|"  count(*) over (order by deptno\n"
+operator|+
+literal|"    range between unbounded preceding and unbounded following) c6,\n"
+operator|+
+literal|" count(*) over (order by deptno\n"
+operator|+
+literal|"    rows between unbounded preceding and unbounded following) c7\n"
+operator|+
+literal|"from emp"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-750">[CALCITE-750]    * Allow windowed aggregate on top of regular aggregate</a>. */
 annotation|@
 name|Test
@@ -8623,9 +8675,9 @@ specifier|final
 name|String
 name|sql
 init|=
-literal|"insert into empdefaults(updated TIMESTAMP)"
+literal|"insert into empdefaults(updated TIMESTAMP)\n"
 operator|+
-literal|" (ename, deptno, empno, updated, sal)"
+literal|" (ename, deptno, empno, updated, sal)\n"
 operator|+
 literal|" values ('Fred', 456, 44, timestamp '2017-03-12 13:03:05', 999999)"
 decl_stmt|;
@@ -8649,9 +8701,9 @@ specifier|final
 name|String
 name|sql
 init|=
-literal|"insert into empdefaults(updated TIMESTAMP)"
+literal|"insert into empdefaults(updated TIMESTAMP)\n"
 operator|+
-literal|" (ename, deptno, empno, updated, sal)"
+literal|" (ename, deptno, empno, updated, sal)\n"
 operator|+
 literal|" values ('Fred', 456, 44, ?, 999999)"
 decl_stmt|;
@@ -8675,9 +8727,9 @@ specifier|final
 name|String
 name|sql
 init|=
-literal|"insert into EMP_MODIFIABLEVIEW2(updated TIMESTAMP)"
+literal|"insert into EMP_MODIFIABLEVIEW2(updated TIMESTAMP)\n"
 operator|+
-literal|" (ename, deptno, empno, updated, sal)"
+literal|" (ename, deptno, empno, updated, sal)\n"
 operator|+
 literal|" values ('Fred', 20, 44, timestamp '2017-03-12 13:03:05', 999999)"
 decl_stmt|;
@@ -8707,9 +8759,9 @@ specifier|final
 name|String
 name|sql
 init|=
-literal|"insert into EMP_MODIFIABLEVIEW2(updated TIMESTAMP)"
+literal|"insert into EMP_MODIFIABLEVIEW2(updated TIMESTAMP)\n"
 operator|+
-literal|" (ename, deptno, empno, updated, sal)"
+literal|" (ename, deptno, empno, updated, sal)\n"
 operator|+
 literal|" values ('Fred', 20, 44, ?, 999999)"
 decl_stmt|;
@@ -8739,7 +8791,7 @@ specifier|final
 name|String
 name|sql
 init|=
-literal|"insert into empnullables (empno, ename) "
+literal|"insert into empnullables (empno, ename)\n"
 operator|+
 literal|"select deptno, ename from emp order by ename"
 decl_stmt|;
@@ -8763,7 +8815,7 @@ specifier|final
 name|String
 name|sql
 init|=
-literal|"insert into empnullables (empno, ename) "
+literal|"insert into empnullables (empno, ename)\n"
 operator|+
 literal|"select deptno, ename from emp order by ename limit 10"
 decl_stmt|;

@@ -24372,9 +24372,6 @@ name|windowOrRef
 parameter_list|,
 name|SqlValidatorScope
 name|scope
-parameter_list|,
-name|boolean
-name|populateBounds
 parameter_list|)
 block|{
 name|SqlWindow
@@ -24483,17 +24480,6 @@ name|refWindow
 argument_list|,
 name|this
 argument_list|)
-expr_stmt|;
-block|}
-if|if
-condition|(
-name|populateBounds
-condition|)
-block|{
-name|window
-operator|.
-name|populateBounds
-argument_list|()
 expr_stmt|;
 block|}
 return|return

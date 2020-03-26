@@ -16577,7 +16577,7 @@ name|convertContains
 argument_list|(
 literal|""
 operator|+
-literal|"LogicalProject(name=[$2], EXPR$1=[+(COUNT($3) OVER (PARTITION BY $1 RANGE BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING), 1)])\n"
+literal|"LogicalProject(name=[$2], EXPR$1=[+(COUNT($3) OVER (PARTITION BY $1), 1)])\n"
 operator|+
 literal|"  LogicalFilter(condition=[>($0, 10)])\n"
 operator|+

@@ -417,7 +417,7 @@ name|calcite
 operator|.
 name|rex
 operator|.
-name|RexWindowBound
+name|RexWindowBounds
 import|;
 end_import
 
@@ -474,20 +474,6 @@ operator|.
 name|sql
 operator|.
 name|SqlIntervalQualifier
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|sql
-operator|.
-name|SqlWindow
 import|;
 end_import
 
@@ -1902,37 +1888,13 @@ argument_list|()
 argument_list|)
 argument_list|)
 argument_list|,
-name|RexWindowBound
+name|RexWindowBounds
 operator|.
-name|create
-argument_list|(
-name|SqlWindow
-operator|.
-name|createUnboundedPreceding
-argument_list|(
-name|SqlParserPos
-operator|.
-name|ZERO
-argument_list|)
+name|UNBOUNDED_PRECEDING
 argument_list|,
-literal|null
-argument_list|)
-argument_list|,
-name|RexWindowBound
+name|RexWindowBounds
 operator|.
-name|create
-argument_list|(
-name|SqlWindow
-operator|.
-name|createCurrentRow
-argument_list|(
-name|SqlParserPos
-operator|.
-name|ZERO
-argument_list|)
-argument_list|,
-literal|null
-argument_list|)
+name|CURRENT_ROW
 argument_list|,
 literal|true
 argument_list|,
@@ -2006,36 +1968,14 @@ argument_list|()
 argument_list|)
 argument_list|)
 argument_list|,
-name|RexWindowBound
+name|RexWindowBounds
 operator|.
-name|create
-argument_list|(
-name|SqlWindow
-operator|.
-name|createCurrentRow
-argument_list|(
-name|SqlParserPos
-operator|.
-name|ZERO
-argument_list|)
+name|CURRENT_ROW
 argument_list|,
-literal|null
-argument_list|)
-argument_list|,
-name|RexWindowBound
+name|RexWindowBounds
 operator|.
-name|create
+name|following
 argument_list|(
-literal|null
-argument_list|,
-name|rexBuilder
-operator|.
-name|makeCall
-argument_list|(
-name|SqlWindow
-operator|.
-name|FOLLOWING_OPERATOR
-argument_list|,
 name|rexBuilder
 operator|.
 name|makeExactLiteral
@@ -2043,7 +1983,6 @@ argument_list|(
 name|BigDecimal
 operator|.
 name|ONE
-argument_list|)
 argument_list|)
 argument_list|)
 argument_list|,
@@ -2347,13 +2286,13 @@ name|isLinux
 argument_list|(
 literal|"LogicalProject(field0=[$0],"
 operator|+
-literal|" field1=[COUNT($0) OVER (PARTITION BY $2 ORDER BY $1 NULLS LAST ROWS BETWEEN"
+literal|" field1=[COUNT($0) OVER (PARTITION BY $2 ORDER BY $1 NULLS LAST "
 operator|+
-literal|" UNBOUNDED PRECEDING AND CURRENT ROW)],"
+literal|"ROWS UNBOUNDED PRECEDING)],"
 operator|+
-literal|" field2=[SUM($0) OVER (PARTITION BY $2 ORDER BY $1 NULLS LAST RANGE BETWEEN"
+literal|" field2=[SUM($0) OVER (PARTITION BY $2 ORDER BY $1 NULLS LAST "
 operator|+
-literal|" CURRENT ROW AND 1 FOLLOWING)])\n"
+literal|"RANGE BETWEEN CURRENT ROW AND 1 FOLLOWING)])\n"
 operator|+
 literal|"  LogicalTableScan(table=[[hr, emps]])\n"
 argument_list|)
@@ -3593,9 +3532,9 @@ name|expected
 init|=
 literal|""
 operator|+
-literal|"LogicalProject($f0=[COUNT() OVER (ORDER BY $7 NULLS LAST ROWS"
+literal|"LogicalProject($f0=[COUNT() OVER (ORDER BY $7 NULLS LAST "
 operator|+
-literal|" BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW)])\n"
+literal|"ROWS UNBOUNDED PRECEDING)])\n"
 operator|+
 literal|"  LogicalTableScan(table=[[scott, EMP]])\n"
 decl_stmt|;
@@ -3678,9 +3617,7 @@ name|expected
 init|=
 literal|""
 operator|+
-literal|"LogicalProject($f0=[COUNT() OVER"
-operator|+
-literal|" (PARTITION BY $7 ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW)])\n"
+literal|"LogicalProject($f0=[COUNT() OVER (PARTITION BY $7)])\n"
 operator|+
 literal|"  LogicalTableScan(table=[[scott, EMP]])\n"
 decl_stmt|;
@@ -4339,37 +4276,13 @@ argument_list|(
 name|orderKeys
 argument_list|)
 argument_list|,
-name|RexWindowBound
+name|RexWindowBounds
 operator|.
-name|create
-argument_list|(
-name|SqlWindow
-operator|.
-name|createUnboundedPreceding
-argument_list|(
-name|SqlParserPos
-operator|.
-name|ZERO
-argument_list|)
+name|UNBOUNDED_PRECEDING
 argument_list|,
-literal|null
-argument_list|)
-argument_list|,
-name|RexWindowBound
+name|RexWindowBounds
 operator|.
-name|create
-argument_list|(
-name|SqlWindow
-operator|.
-name|createCurrentRow
-argument_list|(
-name|SqlParserPos
-operator|.
-name|ZERO
-argument_list|)
-argument_list|,
-literal|null
-argument_list|)
+name|CURRENT_ROW
 argument_list|,
 literal|true
 argument_list|,

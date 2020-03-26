@@ -639,6 +639,16 @@ name|Objects
 import|;
 end_import
 
+begin_import
+import|import
+name|javax
+operator|.
+name|annotation
+operator|.
+name|Nonnull
+import|;
+end_import
+
 begin_comment
 comment|/**  * Factory for row expressions.  *  *<p>Some common literal values (NULL, TRUE, FALSE, 0, 1, '') are cached.</p>  */
 end_comment
@@ -1647,7 +1657,7 @@ name|RexWindowBound
 name|upperBound
 parameter_list|,
 name|boolean
-name|physical
+name|rows
 parameter_list|,
 name|boolean
 name|allowPartial
@@ -1676,7 +1686,7 @@ name|lowerBound
 argument_list|,
 name|upperBound
 argument_list|,
-name|physical
+name|rows
 argument_list|,
 name|allowPartial
 argument_list|,
@@ -1693,38 +1703,52 @@ specifier|public
 name|RexNode
 name|makeOver
 parameter_list|(
+annotation|@
+name|Nonnull
 name|RelDataType
 name|type
 parameter_list|,
+annotation|@
+name|Nonnull
 name|SqlAggFunction
 name|operator
 parameter_list|,
+annotation|@
+name|Nonnull
 name|List
 argument_list|<
 name|RexNode
 argument_list|>
 name|exprs
 parameter_list|,
+annotation|@
+name|Nonnull
 name|List
 argument_list|<
 name|RexNode
 argument_list|>
 name|partitionKeys
 parameter_list|,
+annotation|@
+name|Nonnull
 name|ImmutableList
 argument_list|<
 name|RexFieldCollation
 argument_list|>
 name|orderKeys
 parameter_list|,
+annotation|@
+name|Nonnull
 name|RexWindowBound
 name|lowerBound
 parameter_list|,
+annotation|@
+name|Nonnull
 name|RexWindowBound
 name|upperBound
 parameter_list|,
 name|boolean
-name|physical
+name|rows
 parameter_list|,
 name|boolean
 name|allowPartial
@@ -1739,26 +1763,6 @@ name|boolean
 name|ignoreNulls
 parameter_list|)
 block|{
-assert|assert
-name|operator
-operator|!=
-literal|null
-assert|;
-assert|assert
-name|exprs
-operator|!=
-literal|null
-assert|;
-assert|assert
-name|partitionKeys
-operator|!=
-literal|null
-assert|;
-assert|assert
-name|orderKeys
-operator|!=
-literal|null
-assert|;
 specifier|final
 name|RexWindow
 name|window
@@ -1773,7 +1777,7 @@ name|lowerBound
 argument_list|,
 name|upperBound
 argument_list|,
-name|physical
+name|rows
 argument_list|)
 decl_stmt|;
 specifier|final
@@ -1915,7 +1919,7 @@ name|Preconditions
 operator|.
 name|checkArgument
 argument_list|(
-name|physical
+name|rows
 argument_list|,
 literal|"DISALLOW PARTIAL over RANGE"
 argument_list|)
@@ -1996,7 +2000,7 @@ return|return
 name|result
 return|;
 block|}
-comment|/**    * Creates a window specification.    *    * @param partitionKeys Partition keys    * @param orderKeys     Order keys    * @param lowerBound    Lower bound    * @param upperBound    Upper bound    * @param isRows        Whether physical. True if row-based, false if    *                      range-based    * @return window specification    */
+comment|/**    * Creates a window specification.    *    * @param partitionKeys Partition keys    * @param orderKeys     Order keys    * @param lowerBound    Lower bound    * @param upperBound    Upper bound    * @param rows          Whether physical. True if row-based, false if    *                      range-based    * @return window specification    */
 specifier|public
 name|RexWindow
 name|makeWindow
@@ -2020,9 +2024,41 @@ name|RexWindowBound
 name|upperBound
 parameter_list|,
 name|boolean
-name|isRows
+name|rows
 parameter_list|)
 block|{
+if|if
+condition|(
+name|lowerBound
+operator|.
+name|isUnbounded
+argument_list|()
+operator|&&
+name|lowerBound
+operator|.
+name|isPreceding
+argument_list|()
+operator|&&
+name|upperBound
+operator|.
+name|isUnbounded
+argument_list|()
+operator|&&
+name|upperBound
+operator|.
+name|isFollowing
+argument_list|()
+condition|)
+block|{
+comment|// RANGE BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING
+comment|//   is equivalent to
+comment|// ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING
+comment|//   but we prefer "RANGE"
+name|rows
+operator|=
+literal|false
+expr_stmt|;
+block|}
 return|return
 operator|new
 name|RexWindow
@@ -2035,7 +2071,7 @@ name|lowerBound
 argument_list|,
 name|upperBound
 argument_list|,
-name|isRows
+name|rows
 argument_list|)
 return|;
 block|}

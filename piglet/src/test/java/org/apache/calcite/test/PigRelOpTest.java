@@ -3996,9 +3996,9 @@ literal|""
 operator|+
 literal|"LogicalProject(rank_C=[$3], EMPNO=[$0], JOB=[$1], DEPTNO=[$2])\n"
 operator|+
-literal|"  LogicalWindow(window#0=[window(partition {} order by [2, 1 DESC] "
+literal|"  LogicalWindow(window#0=[window(order by [2, 1 DESC] "
 operator|+
-literal|"range between UNBOUNDED PRECEDING and CURRENT ROW aggs [RANK()])])\n"
+literal|"aggs [RANK()])])\n"
 operator|+
 literal|"    LogicalProject(EMPNO=[$0], JOB=[$2], DEPTNO=[$7])\n"
 operator|+
@@ -4018,11 +4018,7 @@ name|plan
 init|=
 literal|""
 operator|+
-literal|"LogicalProject(rank_C=[RANK() OVER (ORDER BY $2, "
-operator|+
-literal|"$1 DESC RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW)"
-operator|+
-literal|"], "
+literal|"LogicalProject(rank_C=[RANK() OVER (ORDER BY $2, $1 DESC)], "
 operator|+
 literal|"EMPNO=[$0], JOB=[$1], DEPTNO=[$2])\n"
 operator|+
@@ -4127,11 +4123,7 @@ literal|""
 operator|+
 literal|"LogicalProject(rank_C=[$3], EMPNO=[$0], JOB=[$1], DEPTNO=[$2])\n"
 operator|+
-literal|"  LogicalWindow(window#0=[window(partition {} "
-operator|+
-literal|"order by [2, 1 DESC] "
-operator|+
-literal|"range between UNBOUNDED PRECEDING and CURRENT ROW "
+literal|"  LogicalWindow(window#0=[window(order by [2, 1 DESC] "
 operator|+
 literal|"aggs [DENSE_RANK()])"
 operator|+
@@ -4147,11 +4139,7 @@ name|plan2
 init|=
 literal|""
 operator|+
-literal|"LogicalProject(rank_C=[DENSE_RANK() OVER (ORDER BY $2, "
-operator|+
-literal|"$1 DESC RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT"
-operator|+
-literal|" ROW)], "
+literal|"LogicalProject(rank_C=[DENSE_RANK() OVER (ORDER BY $2, $1 DESC)], "
 operator|+
 literal|"EMPNO=[$0], JOB=[$1], DEPTNO=[$2])\n"
 operator|+

@@ -1858,11 +1858,7 @@ name|explain
 init|=
 literal|"PLAN="
 operator|+
-literal|"EnumerableWindow(window#0=[window(partition {} "
-operator|+
-literal|"order by [] range between UNBOUNDED PRECEDING and "
-operator|+
-literal|"UNBOUNDED FOLLOWING aggs [LAST_VALUE($3)])])\n"
+literal|"EnumerableWindow(window#0=[window(aggs [LAST_VALUE($3)])])\n"
 operator|+
 literal|"  JdbcToEnumerableConverter\n"
 operator|+
