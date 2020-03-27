@@ -134,7 +134,7 @@ import|;
 end_import
 
 begin_comment
-comment|/**  * Definition of the<code>BIT_AND</code> and<code>BIT_OR</code> aggregate functions,  * returning the bitwise AND/OR of all non-null input values, or null if none.  *  *<p>Only INTEGER types are supported:  * tinyint, smallint, int, bigint  */
+comment|/**  * Definition of the<code>BIT_AND</code> and<code>BIT_OR</code> aggregate functions,  * returning the bitwise AND/OR of all non-null input values, or null if none.  *  *<p>INTEGER and BINARY types are supported:  * tinyint, smallint, int, bigint, binary, varbinary  */
 end_comment
 
 begin_class
@@ -172,7 +172,16 @@ literal|null
 argument_list|,
 name|OperandTypes
 operator|.
+name|or
+argument_list|(
+name|OperandTypes
+operator|.
 name|INTEGER
+argument_list|,
+name|OperandTypes
+operator|.
+name|BINARY
+argument_list|)
 argument_list|,
 name|SqlFunctionCategory
 operator|.
@@ -265,10 +274,39 @@ name|Optionality
 name|getDistinctOptionality
 parameter_list|()
 block|{
-return|return
+specifier|final
+name|Optionality
+name|optionality
+decl_stmt|;
+switch|switch
+condition|(
+name|kind
+condition|)
+block|{
+case|case
+name|BIT_AND
+case|:
+case|case
+name|BIT_OR
+case|:
+name|optionality
+operator|=
 name|Optionality
 operator|.
 name|IGNORED
+expr_stmt|;
+break|break;
+default|default:
+name|optionality
+operator|=
+name|Optionality
+operator|.
+name|OPTIONAL
+expr_stmt|;
+break|break;
+block|}
+return|return
+name|optionality
 return|;
 block|}
 block|}

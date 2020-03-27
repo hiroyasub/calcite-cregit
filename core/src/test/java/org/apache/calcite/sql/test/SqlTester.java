@@ -561,6 +561,24 @@ name|double
 name|delta
 parameter_list|)
 function_decl|;
+comment|/**    * Tests that an aggregate expression fails at run time.    * @param expr An aggregate expression    * @param inputValues Array of input values    * @param expectedError Pattern for expected error    * @param runtime       If true, must fail at runtime; if false, must fail at    *                      validate time    */
+name|void
+name|checkAggFails
+parameter_list|(
+name|String
+name|expr
+parameter_list|,
+name|String
+index|[]
+name|inputValues
+parameter_list|,
+name|String
+name|expectedError
+parameter_list|,
+name|boolean
+name|runtime
+parameter_list|)
+function_decl|;
 comment|/**    * Tests that a scalar SQL expression fails at run time.    *    * @param expression    SQL scalar expression    * @param expectedError Pattern for expected error. If !runtime, must    *                      include an error location.    * @param runtime       If true, must fail at runtime; if false, must fail at    *                      validate time    */
 name|void
 name|checkFails

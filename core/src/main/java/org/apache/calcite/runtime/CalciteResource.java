@@ -4430,6 +4430,24 @@ name|String
 name|xpath
 parameter_list|)
 function_decl|;
+annotation|@
+name|BaseMessage
+argument_list|(
+literal|"Different length for bitwise operands: the first: {0,number,#}, the second: {1,number,#}"
+argument_list|)
+name|ExInst
+argument_list|<
+name|CalciteException
+argument_list|>
+name|differentLengthForBitwiseOperands
+parameter_list|(
+name|int
+name|l0
+parameter_list|,
+name|int
+name|l1
+parameter_list|)
+function_decl|;
 block|}
 end_interface
 

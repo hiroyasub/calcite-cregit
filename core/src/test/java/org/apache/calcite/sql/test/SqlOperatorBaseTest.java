@@ -38781,11 +38781,22 @@ argument_list|)
 expr_stmt|;
 name|tester
 operator|.
+name|checkType
+argument_list|(
+literal|"bit_and(CAST(x'02' AS BINARY(1)))"
+argument_list|,
+literal|"BINARY(1)"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
 name|checkFails
 argument_list|(
 literal|"^bit_and(1.2)^"
 argument_list|,
-literal|"Cannot apply 'BIT_AND' to arguments of type 'BIT_AND\\(<DECIMAL\\(2, 1\\)>\\)'\\. Supported form\\(s\\): 'BIT_AND\\(<INTEGER>\\)'"
+literal|"Cannot apply 'BIT_AND' to arguments of type 'BIT_AND\\(<DECIMAL\\(2, 1\\)>\\)'\\. Supported form\\(s\\): 'BIT_AND\\(<INTEGER>\\)'\n"
+operator|+
+literal|"'BIT_AND\\(<BINARY>\\)'"
 argument_list|,
 literal|false
 argument_list|)
@@ -38833,9 +38844,83 @@ literal|"bit_and(x)"
 argument_list|,
 name|values
 argument_list|,
-literal|2
+literal|"2"
 argument_list|,
 literal|0
+argument_list|)
+expr_stmt|;
+specifier|final
+name|String
+index|[]
+name|binaryValues
+init|=
+block|{
+literal|"CAST(x'03' AS BINARY)"
+block|,
+literal|"cast(x'02' as BINARY)"
+block|,
+literal|"cast(x'02' AS BINARY)"
+block|,
+literal|"cast(null AS BINARY)"
+block|}
+decl_stmt|;
+name|tester
+operator|.
+name|checkAgg
+argument_list|(
+literal|"bit_and(x)"
+argument_list|,
+name|binaryValues
+argument_list|,
+literal|"02"
+argument_list|,
+literal|0
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkAgg
+argument_list|(
+literal|"bit_and(x)"
+argument_list|,
+operator|new
+name|String
+index|[]
+block|{
+literal|"CAST(x'02' AS BINARY)"
+block|}
+argument_list|,
+literal|"02"
+argument_list|,
+literal|0
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkAggFails
+argument_list|(
+literal|"bit_and(x)"
+argument_list|,
+operator|new
+name|String
+index|[]
+block|{
+literal|"CAST(x'0201' AS VARBINARY)"
+block|,
+literal|"CAST(x'02' AS VARBINARY)"
+block|}
+argument_list|,
+literal|"Error while executing SQL"
+operator|+
+literal|" \"SELECT bit_and\\(x\\)"
+operator|+
+literal|" FROM \\(SELECT CAST\\(x'0201' AS VARBINARY\\) AS x FROM \\(VALUES \\(1\\)\\)"
+operator|+
+literal|" UNION ALL SELECT CAST\\(x'02' AS VARBINARY\\) AS x FROM \\(VALUES \\(1\\)\\)\\)\":"
+operator|+
+literal|" Different length for bitwise operands: the first: 2, the second: 1"
+argument_list|,
+literal|true
 argument_list|)
 expr_stmt|;
 block|}
@@ -38907,11 +38992,22 @@ argument_list|)
 expr_stmt|;
 name|tester
 operator|.
+name|checkType
+argument_list|(
+literal|"bit_or(CAST(x'02' AS BINARY(1)))"
+argument_list|,
+literal|"BINARY(1)"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
 name|checkFails
 argument_list|(
 literal|"^bit_or(1.2)^"
 argument_list|,
-literal|"Cannot apply 'BIT_OR' to arguments of type 'BIT_OR\\(<DECIMAL\\(2, 1\\)>\\)'\\. Supported form\\(s\\): 'BIT_OR\\(<INTEGER>\\)'"
+literal|"Cannot apply 'BIT_OR' to arguments of type 'BIT_OR\\(<DECIMAL\\(2, 1\\)>\\)'\\. Supported form\\(s\\): 'BIT_OR\\(<INTEGER>\\)'\n"
+operator|+
+literal|"'BIT_OR\\(<BINARY>\\)'"
 argument_list|,
 literal|false
 argument_list|)
@@ -38960,6 +39056,52 @@ argument_list|,
 name|values
 argument_list|,
 literal|3
+argument_list|,
+literal|0
+argument_list|)
+expr_stmt|;
+specifier|final
+name|String
+index|[]
+name|binaryValues
+init|=
+block|{
+literal|"CAST(x'01' AS BINARY)"
+block|,
+literal|"cast(x'02' as BINARY)"
+block|,
+literal|"cast(x'02' AS BINARY)"
+block|,
+literal|"cast(null AS BINARY)"
+block|}
+decl_stmt|;
+name|tester
+operator|.
+name|checkAgg
+argument_list|(
+literal|"bit_or(x)"
+argument_list|,
+name|binaryValues
+argument_list|,
+literal|"03"
+argument_list|,
+literal|0
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkAgg
+argument_list|(
+literal|"bit_or(x)"
+argument_list|,
+operator|new
+name|String
+index|[]
+block|{
+literal|"CAST(x'02' AS BINARY)"
+block|}
+argument_list|,
+literal|"02"
 argument_list|,
 literal|0
 argument_list|)
@@ -39033,11 +39175,22 @@ argument_list|)
 expr_stmt|;
 name|tester
 operator|.
+name|checkType
+argument_list|(
+literal|"bit_xor(CAST(x'02' AS BINARY(1)))"
+argument_list|,
+literal|"BINARY(1)"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
 name|checkFails
 argument_list|(
 literal|"^bit_xor(1.2)^"
 argument_list|,
-literal|"Cannot apply 'BIT_XOR' to arguments of type 'BIT_XOR\\(<DECIMAL\\(2, 1\\)>\\)'\\. Supported form\\(s\\): 'BIT_XOR\\(<INTEGER>\\)'"
+literal|"Cannot apply 'BIT_XOR' to arguments of type 'BIT_XOR\\(<DECIMAL\\(2, 1\\)>\\)'\\. Supported form\\(s\\): 'BIT_XOR\\(<INTEGER>\\)'\n"
+operator|+
+literal|"'BIT_XOR\\(<BINARY>\\)'"
 argument_list|,
 literal|false
 argument_list|)
@@ -39086,6 +39239,72 @@ argument_list|,
 name|values
 argument_list|,
 literal|2
+argument_list|,
+literal|0
+argument_list|)
+expr_stmt|;
+specifier|final
+name|String
+index|[]
+name|binaryValues
+init|=
+block|{
+literal|"CAST(x'01' AS BINARY)"
+block|,
+literal|"cast(x'02' as BINARY)"
+block|,
+literal|"cast(x'01' AS BINARY)"
+block|,
+literal|"cast(null AS BINARY)"
+block|}
+decl_stmt|;
+name|tester
+operator|.
+name|checkAgg
+argument_list|(
+literal|"bit_xor(x)"
+argument_list|,
+name|binaryValues
+argument_list|,
+literal|"02"
+argument_list|,
+literal|0
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkAgg
+argument_list|(
+literal|"bit_xor(x)"
+argument_list|,
+operator|new
+name|String
+index|[]
+block|{
+literal|"CAST(x'02' AS BINARY)"
+block|}
+argument_list|,
+literal|"02"
+argument_list|,
+literal|0
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkAgg
+argument_list|(
+literal|"bit_xor(distinct(x))"
+argument_list|,
+operator|new
+name|String
+index|[]
+block|{
+literal|"CAST(x'02' AS BINARY)"
+block|,
+literal|"CAST(x'02' AS BINARY)"
+block|}
+argument_list|,
+literal|"02"
 argument_list|,
 literal|0
 argument_list|)
