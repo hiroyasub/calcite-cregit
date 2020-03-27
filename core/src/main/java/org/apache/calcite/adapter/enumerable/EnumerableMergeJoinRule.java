@@ -171,22 +171,6 @@ name|calcite
 operator|.
 name|rel
 operator|.
-name|core
-operator|.
-name|JoinRelType
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|rel
-operator|.
 name|logical
 operator|.
 name|LogicalJoin
@@ -325,17 +309,19 @@ argument_list|()
 decl_stmt|;
 if|if
 condition|(
+operator|!
+name|EnumerableMergeJoin
+operator|.
+name|isMergeJoinSupported
+argument_list|(
 name|join
 operator|.
 name|getJoinType
 argument_list|()
-operator|!=
-name|JoinRelType
-operator|.
-name|INNER
+argument_list|)
 condition|)
 block|{
-comment|// EnumerableMergeJoin only supports inner join.
+comment|// EnumerableMergeJoin only supports certain join types.
 return|return
 literal|null
 return|;

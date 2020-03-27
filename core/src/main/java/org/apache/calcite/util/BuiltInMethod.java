@@ -2250,11 +2250,7 @@ name|Function2
 operator|.
 name|class
 argument_list|,
-name|boolean
-operator|.
-name|class
-argument_list|,
-name|boolean
+name|JoinType
 operator|.
 name|class
 argument_list|,
