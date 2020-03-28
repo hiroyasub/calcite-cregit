@@ -13939,6 +13939,36 @@ return|return
 literal|null
 return|;
 block|}
+if|if
+condition|(
+name|RexOver
+operator|.
+name|containsOver
+argument_list|(
+name|nodes
+argument_list|,
+literal|null
+argument_list|)
+operator|&&
+name|RexOver
+operator|.
+name|containsOver
+argument_list|(
+name|project
+operator|.
+name|getProjects
+argument_list|()
+argument_list|,
+literal|null
+argument_list|)
+condition|)
+block|{
+comment|// Is it valid relational algebra to apply windowed function to a windowed
+comment|// function? Possibly. But it's invalid SQL, so don't go there.
+return|return
+literal|null
+return|;
+block|}
 specifier|final
 name|List
 argument_list|<

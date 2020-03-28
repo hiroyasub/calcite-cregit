@@ -11918,6 +11918,60 @@ name|expected
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3876">[CALCITE-3876]    * RelToSqlConverter should not combine Projects when top Project contains    * window function referencing window function from bottom Project</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testWindowOnWindowDoesNotCombineProjects
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|query
+init|=
+literal|"SELECT ROW_NUMBER() OVER (ORDER BY rn)\n"
+operator|+
+literal|"FROM (SELECT *,\n"
+operator|+
+literal|"  ROW_NUMBER() OVER (ORDER BY \"product_id\") as rn\n"
+operator|+
+literal|"  FROM \"foodmart\".\"product\")"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT ROW_NUMBER() OVER (ORDER BY \"RN\")\n"
+operator|+
+literal|"FROM (SELECT \"product_class_id\", \"product_id\", \"brand_name\","
+operator|+
+literal|" \"product_name\", \"SKU\", \"SRP\", \"gross_weight\","
+operator|+
+literal|" \"net_weight\", \"recyclable_package\", \"low_fat\","
+operator|+
+literal|" \"units_per_case\", \"cases_per_pallet\", \"shelf_width\","
+operator|+
+literal|" \"shelf_height\", \"shelf_depth\","
+operator|+
+literal|" ROW_NUMBER() OVER (ORDER BY \"product_id\") AS \"RN\"\n"
+operator|+
+literal|"FROM \"foodmart\".\"product\") AS \"t\""
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|withPostgresql
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1798">[CALCITE-1798]    * Generate dialect-specific SQL for FLOOR operator</a>. */
 annotation|@
 name|Test

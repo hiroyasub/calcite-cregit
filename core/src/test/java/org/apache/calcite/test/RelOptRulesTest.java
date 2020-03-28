@@ -21434,6 +21434,50 @@ expr_stmt|;
 block|}
 end_function
 
+begin_comment
+comment|/** While it's probably valid relational algebra for a Project to contain    * a RexOver inside a RexOver, ProjectMergeRule should not bring it about. */
+end_comment
+
+begin_function
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testProjectMergeShouldIgnoreOver
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select row_number() over (order by deptno), col1\n"
+operator|+
+literal|"from (\n"
+operator|+
+literal|"  select deptno,\n"
+operator|+
+literal|"    sum(100) over (partition by  deptno order by sal) as col1\n"
+operator|+
+literal|"  from emp)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|withRule
+argument_list|(
+name|ProjectMergeRule
+operator|.
+name|INSTANCE
+argument_list|)
+operator|.
+name|checkUnchanged
+argument_list|()
+expr_stmt|;
+block|}
+end_function
+
 begin_function
 annotation|@
 name|Test
