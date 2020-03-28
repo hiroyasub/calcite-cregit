@@ -625,6 +625,17 @@ name|getRule
 argument_list|()
 operator|instanceof
 name|SubstitutionRule
+operator|&&
+operator|(
+operator|(
+name|SubstitutionRule
+operator|)
+name|getRule
+argument_list|()
+operator|)
+operator|.
+name|autoPruneOld
+argument_list|()
 condition|)
 block|{
 name|volcanoPlanner
