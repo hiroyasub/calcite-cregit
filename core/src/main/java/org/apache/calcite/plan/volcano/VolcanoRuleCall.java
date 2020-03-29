@@ -523,56 +523,6 @@ name|event
 argument_list|)
 expr_stmt|;
 block|}
-for|for
-control|(
-name|int
-name|i
-init|=
-literal|0
-init|;
-name|i
-operator|<
-name|rels
-operator|.
-name|length
-condition|;
-name|i
-operator|++
-control|)
-block|{
-if|if
-condition|(
-name|rel
-operator|==
-name|rels
-index|[
-name|i
-index|]
-condition|)
-block|{
-if|if
-condition|(
-name|i
-operator|==
-literal|0
-condition|)
-block|{
-return|return;
-block|}
-name|volcanoPlanner
-operator|.
-name|setImportance
-argument_list|(
-name|rels
-index|[
-literal|0
-index|]
-argument_list|,
-literal|0d
-argument_list|)
-expr_stmt|;
-break|break;
-block|}
 specifier|final
 name|RelNode
 name|relCopy
@@ -583,7 +533,7 @@ if|if
 condition|(
 name|rels
 index|[
-name|i
+literal|0
 index|]
 operator|.
 name|getInputs
@@ -613,10 +563,7 @@ index|]
 argument_list|,
 literal|0d
 argument_list|)
-block|;
-break|break;
-block|}
-block|}
+block|;       }
 if|if
 condition|(
 name|this
@@ -770,13 +717,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-end_class
-
-begin_comment
 comment|/**    * Called when all operands have matched.    */
-end_comment
-
-begin_function
 specifier|protected
 name|void
 name|onMatch
@@ -1209,13 +1150,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-end_function
-
-begin_comment
 comment|/**    * Applies this rule, with a given relational expression in the first slot.    */
-end_comment
-
-begin_function
 name|void
 name|match
 parameter_list|(
@@ -1268,13 +1203,7 @@ literal|1
 argument_list|)
 expr_stmt|;
 block|}
-end_function
-
-begin_comment
 comment|/**    * Recursively matches operands above a given solve order.    *    * @param solve Solve order of operand (&gt; 0 and&le; the operand count)    */
-end_comment
-
-begin_function
 specifier|private
 name|void
 name|matchRecurse
@@ -1979,8 +1908,8 @@ expr_stmt|;
 block|}
 block|}
 block|}
-end_function
+block|}
+end_class
 
-unit|}
 end_unit
 
