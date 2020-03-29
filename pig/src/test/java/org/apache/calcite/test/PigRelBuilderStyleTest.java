@@ -546,6 +546,8 @@ comment|/**  * Tests for the {@code org.apache.calcite.adapter.pig} package that
 end_comment
 
 begin_class
+annotation|@
+name|Disabled
 specifier|public
 class|class
 name|PigRelBuilderStyleTest
@@ -1136,6 +1138,11 @@ block|}
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Disabled
+argument_list|(
+literal|"CALCITE-3660"
+argument_list|)
 annotation|@
 name|Test
 specifier|public
