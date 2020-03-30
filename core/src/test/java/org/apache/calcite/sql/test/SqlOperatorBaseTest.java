@@ -8312,6 +8312,21 @@ argument_list|,
 literal|"INTEGER NOT NULL"
 argument_list|)
 expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"{fn TIMESTAMPDIFF(MONTH,"
+operator|+
+literal|" TIMESTAMP '2019-09-01 00:00:00',"
+operator|+
+literal|" TIMESTAMP '2020-03-01 00:00:00')}"
+argument_list|,
+literal|"6"
+argument_list|,
+literal|"INTEGER NOT NULL"
+argument_list|)
+expr_stmt|;
 if|if
 condition|(
 name|Bug
@@ -35061,6 +35076,36 @@ name|tester
 operator|.
 name|checkScalar
 argument_list|(
+literal|"timestampdiff(MONTH, "
+operator|+
+literal|"timestamp '2019-09-01 00:00:00', "
+operator|+
+literal|"timestamp '2020-03-01 00:00:00')"
+argument_list|,
+literal|"6"
+argument_list|,
+literal|"INTEGER NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"timestampdiff(MONTH, "
+operator|+
+literal|"timestamp '2019-09-01 00:00:00', "
+operator|+
+literal|"timestamp '2016-08-01 00:00:00')"
+argument_list|,
+literal|"-37"
+argument_list|,
+literal|"INTEGER NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
 literal|"timestampdiff(QUARTER, "
 operator|+
 literal|"timestamp '2014-02-24 12:42:25', "
@@ -35125,6 +35170,28 @@ argument_list|(
 literal|"timestampdiff(MONTH, date '2016-03-15', date '2016-06-14')"
 argument_list|,
 literal|"2"
+argument_list|,
+literal|"INTEGER NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"timestampdiff(MONTH, date '2019-09-01', date '2020-03-01')"
+argument_list|,
+literal|"6"
+argument_list|,
+literal|"INTEGER NOT NULL"
+argument_list|)
+expr_stmt|;
+name|tester
+operator|.
+name|checkScalar
+argument_list|(
+literal|"timestampdiff(MONTH, date '2019-09-01', date '2016-08-01')"
+argument_list|,
+literal|"-37"
 argument_list|,
 literal|"INTEGER NOT NULL"
 argument_list|)
