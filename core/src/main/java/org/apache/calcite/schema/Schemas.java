@@ -1458,9 +1458,9 @@ name|scan
 argument_list|(
 name|root
 argument_list|,
-name|ImmutableList
-operator|.
-name|of
+operator|new
+name|ArrayList
+argument_list|<>
 argument_list|()
 argument_list|)
 return|;
@@ -1491,9 +1491,9 @@ name|scan
 argument_list|(
 name|root
 argument_list|,
-name|ImmutableList
-operator|.
-name|of
+operator|new
+name|ArrayList
+argument_list|<>
 argument_list|()
 argument_list|,
 name|identity
