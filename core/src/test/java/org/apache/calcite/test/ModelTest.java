@@ -320,7 +320,6 @@ comment|/**  * Unit test for data models.  */
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|ModelTest
 block|{
@@ -370,7 +369,6 @@ block|}
 comment|/** Reads a simple schema from a string into objects. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRead
 parameter_list|()
@@ -668,7 +666,6 @@ block|}
 comment|/** Reads a simple schema containing JdbcSchema, a sub-type of Schema. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSubtype
 parameter_list|()
@@ -772,7 +769,6 @@ block|}
 comment|/** Reads a custom schema. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCustomSchema
 parameter_list|()
@@ -1040,7 +1036,6 @@ block|}
 comment|/** Tests that an immutable schema in a model cannot contain a    * materialization. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testModelImmutableSchemaCannotContainMaterialization
 parameter_list|()
@@ -1122,7 +1117,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1899">[CALCITE-1899]    * When reading model, give error if mandatory JSON attributes are    * missing</a>.    *    *<p>Schema without name should give useful error, not    * NullPointerException. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSchemaWithoutName
 parameter_list|()
@@ -1160,7 +1154,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCustomSchemaWithoutFactory
 parameter_list|()
@@ -1203,7 +1196,6 @@ block|}
 comment|/** Tests a model containing a lattice and some views. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testReadLattice
 parameter_list|()
@@ -1558,7 +1550,6 @@ block|}
 comment|/** Tests a model with bad multi-line SQL. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testReadBadMultiLineSql
 parameter_list|()
@@ -1711,7 +1702,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testYamlInlineDetection
 parameter_list|()
@@ -1812,7 +1802,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testYamlFileDetection
 parameter_list|()

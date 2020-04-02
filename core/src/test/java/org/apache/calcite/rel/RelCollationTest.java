@@ -100,7 +100,6 @@ comment|/**  * Tests for {@link RelCollation} and {@link RelFieldCollation}.  */
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|RelCollationTest
 block|{
@@ -112,7 +111,6 @@ literal|"ArraysAsListWithZeroOrOneArgument"
 argument_list|)
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCollationContains
 parameter_list|()
@@ -556,7 +554,6 @@ block|}
 comment|/** Unit test for    *  {@link org.apache.calcite.rel.RelCollationImpl#compareTo}. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCollationCompare
 parameter_list|()

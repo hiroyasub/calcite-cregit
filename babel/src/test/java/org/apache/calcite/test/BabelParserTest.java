@@ -198,7 +198,6 @@ comment|/**  * Tests the "Babel" SQL parser, that understands all dialects of SQ
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|BabelParserTest
 extends|extends
@@ -219,7 +218,6 @@ return|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testReservedWords
 parameter_list|()
@@ -243,7 +241,7 @@ annotation|@
 name|Override
 annotation|@
 name|Test
-specifier|public
+specifier|protected
 name|void
 name|testMetadata
 parameter_list|()
@@ -682,7 +680,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelect
 parameter_list|()
@@ -714,7 +711,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testYearIsNotReserved
 parameter_list|()
@@ -749,7 +745,6 @@ annotation|@
 name|Disabled
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testKeywords
 parameter_list|()
@@ -918,7 +913,6 @@ block|}
 comment|/** In Babel, AS is not reserved. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAs
 parameter_list|()
@@ -945,7 +939,6 @@ block|}
 comment|/** In Babel, DESC is not reserved. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDesc
 parameter_list|()
@@ -984,7 +977,6 @@ block|}
 comment|/**    * This is a failure test making sure the LOOKAHEAD for WHEN clause is 2 in Babel, where    * in core parser this number is 1.    *    * @see SqlParserTest#testCaseExpression()    * @see<a href="https://issues.apache.org/jira/browse/CALCITE-2847">[CALCITE-2847]    * Optimize global LOOKAHEAD for SQL parsers</a>    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCaseExpressionBabel
 parameter_list|()
@@ -1003,7 +995,6 @@ block|}
 comment|/** In Redshift, DATE is a function. It requires special treatment in the    * parser because it is a reserved keyword.    * (Curiously, TIMESTAMP and TIME are not functions.) */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDateFunction
 parameter_list|()
@@ -1030,7 +1021,6 @@ block|}
 comment|/** In Redshift, PostgreSQL the DATEADD, DATEDIFF and DATE_PART functions have    * ordinary function syntax except that its first argument is a time unit    * (e.g. DAY). We must not parse that first argument as an identifier. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRedshiftFunctionsWithDateParts
 parameter_list|()
@@ -1069,7 +1059,6 @@ block|}
 comment|/** PostgreSQL and Redshift allow TIMESTAMP literals that contain only a    * date part. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testShortTimestampLiteral
 parameter_list|()
@@ -1286,7 +1275,6 @@ block|}
 comment|/** Tests parsing PostgreSQL-style "::" cast operator. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testParseInfixCast
 parameter_list|()

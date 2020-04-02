@@ -293,7 +293,6 @@ name|ResourceLock
 argument_list|(
 literal|"elasticsearch-scrolls"
 argument_list|)
-specifier|public
 class|class
 name|ScrollingTest
 block|{
@@ -521,7 +520,6 @@ literal|" one of the other elasticsearch test"
 argument_list|)
 annotation|@
 name|Test
-specifier|public
 name|void
 name|scrolling
 parameter_list|()

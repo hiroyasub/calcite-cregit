@@ -160,13 +160,11 @@ comment|/**  * Unit test for {@link org.apache.calcite.rel.externalize.RelJson}.
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|RelOptPlanReaderTest
 block|{
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTypeToClass
 parameter_list|()
@@ -431,14 +429,12 @@ expr_stmt|;
 block|}
 block|}
 comment|/** Dummy relational expression. */
-specifier|public
 specifier|static
 class|class
 name|MyRel
 extends|extends
 name|AbstractRelNode
 block|{
-specifier|public
 name|MyRel
 parameter_list|(
 name|RelOptCluster

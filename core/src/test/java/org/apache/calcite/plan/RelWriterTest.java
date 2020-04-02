@@ -818,7 +818,6 @@ comment|/**  * Unit test for {@link org.apache.calcite.rel.externalize.RelJson}.
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|RelWriterTest
 block|{
@@ -1441,7 +1440,6 @@ decl_stmt|;
 comment|/**    * Unit test for {@link org.apache.calcite.rel.externalize.RelJsonWriter} on    * a simple tree of relational expressions, consisting of a table and a    * project including window expressions.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWriter
 parameter_list|()
@@ -1708,7 +1706,6 @@ block|}
 comment|/**    * Unit test for {@link org.apache.calcite.rel.externalize.RelJsonWriter} on    * a simple tree of relational expressions, consisting of a table, a filter    * and an aggregate node.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWriter2
 parameter_list|()
@@ -2048,7 +2045,6 @@ block|}
 comment|/**    * Unit test for {@link org.apache.calcite.rel.externalize.RelJsonReader}.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testReader
 parameter_list|()
@@ -2172,7 +2168,6 @@ block|}
 comment|/**    * Unit test for {@link org.apache.calcite.rel.externalize.RelJsonReader}.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testReader2
 parameter_list|()
@@ -2302,7 +2297,6 @@ block|}
 comment|/**    * Unit test for {@link org.apache.calcite.rel.externalize.RelJsonReader}.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testReaderNull
 parameter_list|()
@@ -2425,7 +2419,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTrim
 parameter_list|()
@@ -2576,7 +2569,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPlusOperator
 parameter_list|()
@@ -2702,7 +2694,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregateWithAlias
 parameter_list|()
@@ -2860,7 +2851,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregateWithoutAlias
 parameter_list|()
@@ -3016,7 +3006,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCalc
 parameter_list|()
@@ -3286,7 +3275,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCorrelateQuery
 parameter_list|()
@@ -3466,7 +3454,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOverWithoutPartition
 parameter_list|()
@@ -3551,7 +3538,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOverWithoutOrderKey
 parameter_list|()
@@ -3634,7 +3620,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInterval
 parameter_list|()
@@ -3798,7 +3783,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUdf
 parameter_list|()
@@ -4305,7 +4289,6 @@ return|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWriteSortExchangeWithHashDistribution
 parameter_list|()
@@ -4398,7 +4381,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWriteSortExchangeWithRandomDistribution
 parameter_list|()

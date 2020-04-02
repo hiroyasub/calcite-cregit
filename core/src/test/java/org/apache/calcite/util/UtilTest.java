@@ -1070,13 +1070,11 @@ end_comment
 begin_class
 annotation|@
 name|LocaleEnUs
-specifier|public
 class|class
 name|UtilTest
 block|{
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPrintEquals
 parameter_list|()
@@ -1093,7 +1091,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPrintEquals2
 parameter_list|()
@@ -1110,7 +1107,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPrintEquals3
 parameter_list|()
@@ -1127,7 +1123,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPrintEquals4
 parameter_list|()
@@ -1144,7 +1139,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPrintEquals5
 parameter_list|()
@@ -1161,7 +1155,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testScientificNotation
 parameter_list|()
@@ -1415,7 +1408,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testToJavaId
 parameter_list|()
@@ -1711,7 +1703,6 @@ block|}
 comment|/**    * Unit-test for {@link Util#tokenize(String, String)}.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTokenize
 parameter_list|()
@@ -1781,7 +1772,6 @@ block|}
 comment|/**    * Unit-test for {@link BitString}.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testBitString
 parameter_list|()
@@ -2533,7 +2523,6 @@ block|}
 comment|/**    * Tests {@link org.apache.calcite.util.CastingList} and {@link Util#cast}.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCastingList
 parameter_list|()
@@ -2717,7 +2706,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCons
 parameter_list|()
@@ -3181,7 +3169,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testConsPerformance
 parameter_list|()
@@ -3730,7 +3717,6 @@ return|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testIterableProperties
 parameter_list|()
@@ -3917,7 +3903,6 @@ block|}
 comment|/**    * Tests the difference engine, {@link DiffTestCase#diff}.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDiffLines
 parameter_list|()
@@ -4013,7 +3998,6 @@ block|}
 comment|/**    * Tests the {@link Util#toPosix(TimeZone, boolean)} method.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPosixTimeZone
 parameter_list|()
@@ -4207,7 +4191,6 @@ block|}
 comment|/**    * Tests the methods {@link Util#enumConstants(Class)} and    * {@link Util#enumVal(Class, String)}.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testEnumConstants
 parameter_list|()
@@ -4344,7 +4327,6 @@ block|}
 comment|/**    * Tests SQL builders.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSqlBuilder
 parameter_list|()
@@ -4619,7 +4601,6 @@ block|}
 comment|/**    * Unit test for {@link org.apache.calcite.util.CompositeList}.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCompositeList
 parameter_list|()
@@ -5011,7 +4992,6 @@ block|}
 comment|/**    * Unit test for {@link Template}.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTemplate
 parameter_list|()
@@ -5308,7 +5288,6 @@ block|}
 comment|/**    * Unit test for {@link Util#parseLocale(String)} method.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testParseLocale
 parameter_list|()
@@ -5414,7 +5393,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSpaces
 parameter_list|()
@@ -5497,7 +5475,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSpaceString
 parameter_list|()
@@ -5799,7 +5776,6 @@ block|}
 comment|/**    * Unit test for {@link Pair#zip(java.util.List, java.util.List)}.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPairZip
 parameter_list|()
@@ -5945,7 +5921,6 @@ block|}
 comment|/**    * Unit test for {@link Pair#forEach(Iterable, Iterable, BiConsumer)}.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPairForEach
 parameter_list|()
@@ -6361,7 +6336,6 @@ block|}
 comment|/**    * Unit test for {@link Pair#adjacents(Iterable)}.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPairAdjacents
 parameter_list|()
@@ -6521,7 +6495,6 @@ block|}
 comment|/**    * Unit test for {@link Pair#firstAnd(Iterable)}.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPairFirstAnd
 parameter_list|()
@@ -6681,7 +6654,6 @@ block|}
 comment|/**    * Unit test for {@link Util#quotientList(java.util.List, int, int)}    * and {@link Util#pairs(List)}.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testQuotientList
 parameter_list|()
@@ -7166,7 +7138,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testImmutableIntList
 parameter_list|()
@@ -7474,7 +7445,6 @@ block|}
 comment|/**    * Unit test for {@link IntegerIntervalSet}.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testIntegerIntervalSet
 parameter_list|()
@@ -7619,7 +7589,6 @@ block|}
 comment|/**    * Tests that flat lists behave like regular lists in terms of equals    * and hashCode.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFlatList
 parameter_list|()
@@ -8173,7 +8142,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFlatList2
 parameter_list|()
@@ -9126,7 +9094,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2287">[CALCITE-2287]    * FlatList.equals throws StackOverflowError</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFlat34Equals
 parameter_list|()
@@ -9184,7 +9151,6 @@ literal|"unchecked"
 argument_list|)
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFlatListN
 parameter_list|()
@@ -9875,7 +9841,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFlatListProduct
 parameter_list|()
@@ -10115,7 +10080,6 @@ block|}
 comment|/**    * Unit test for {@link AvaticaUtils#toCamelCase(String)}.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testToCamelCase
 parameter_list|()
@@ -10208,7 +10172,6 @@ block|}
 comment|/** Unit test for {@link AvaticaUtils#camelToUpper(String)}. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCamelToUpper
 parameter_list|()
@@ -10277,7 +10240,6 @@ block|}
 comment|/**    * Unit test for {@link Util#isDistinct(java.util.List)}.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDistinct
 parameter_list|()
@@ -10392,7 +10354,6 @@ block|}
 comment|/** Unit test for    * {@link Util#intersects(java.util.Collection, java.util.Collection)}. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testIntersects
 parameter_list|()
@@ -10592,7 +10553,6 @@ block|}
 comment|/**    * Unit test for {@link org.apache.calcite.util.JsonBuilder}.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJsonBuilder
 parameter_list|()
@@ -10753,7 +10713,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCompositeMap
 parameter_list|()
@@ -11281,7 +11240,6 @@ block|}
 comment|/** Tests {@link Util#commaList(java.util.List)}. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCommaList
 parameter_list|()
@@ -11402,7 +11360,6 @@ block|}
 comment|/** Unit test for {@link Util#firstDuplicate(java.util.List)}. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFirstDuplicate
 parameter_list|()
@@ -11611,7 +11568,6 @@ block|}
 comment|/** Benchmark for {@link Util#isDistinct}. Has determined that map-based    * implementation is better than nested loops implementation if list is larger    * than about 15. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testIsDistinctBenchmark
 parameter_list|()
@@ -11841,7 +11797,6 @@ block|}
 comment|/** Unit test for {@link Util#distinctList(List)}    * and {@link Util#distinctList(Iterable)}. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDistinctList
 parameter_list|()
@@ -12198,7 +12153,6 @@ block|}
 comment|/** Unit test for {@link Utilities#hashCode(double)}. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testHash
 parameter_list|()
@@ -12390,7 +12344,6 @@ block|}
 comment|/** Unit test for {@link Util#startsWith}. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testStartsWithList
 parameter_list|()
@@ -12576,7 +12529,6 @@ return|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testResources
 parameter_list|()
@@ -12661,7 +12613,6 @@ block|}
 comment|/** Tests that sorted sets behave the way we expect. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSortedSet
 parameter_list|()
@@ -12978,7 +12929,6 @@ block|}
 comment|/** Test for {@link org.apache.calcite.util.ImmutableNullableList}. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testImmutableNullableList
 parameter_list|()
@@ -13383,7 +13333,6 @@ block|}
 comment|/** Test for {@link org.apache.calcite.util.UnmodifiableArrayList}. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUnmodifiableArrayList
 parameter_list|()
@@ -13617,7 +13566,6 @@ block|}
 comment|/** Test for {@link org.apache.calcite.util.ImmutableNullableList.Builder}. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testImmutableNullableListBuilder
 parameter_list|()
@@ -13704,7 +13652,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testHuman
 parameter_list|()
@@ -14199,7 +14146,6 @@ block|}
 comment|/** Tests {@link Util#immutableCopy(Iterable)}. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testImmutableCopy
 parameter_list|()
@@ -14555,7 +14501,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAsIndexView
 parameter_list|()
@@ -14744,7 +14689,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRelBuilderExample
 parameter_list|()
@@ -14761,7 +14705,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOrdReverse
 parameter_list|()
@@ -14976,7 +14919,6 @@ block|}
 comment|/** Tests {@link Ord#forEach(Iterable, ObjIntConsumer)}. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOrdForEach
 parameter_list|()
@@ -15129,7 +15071,6 @@ block|}
 comment|/** Tests {@link org.apache.calcite.util.ReflectUtil#getParameterName}. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testParameterName
 parameter_list|()
@@ -15215,7 +15156,6 @@ block|{
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testListToString
 parameter_list|()
@@ -15349,7 +15289,6 @@ block|}
 comment|/** Tests {@link org.apache.calcite.util.TryThreadLocal}.    *    *<p>TryThreadLocal was introduced to fix    *<a href="https://issues.apache.org/jira/browse/CALCITE-915">[CALCITE-915]    * Tests do not unset ThreadLocal values on exit</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTryThreadLocal
 parameter_list|()
@@ -15631,7 +15570,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1264">[CALCITE-1264]    * Litmus argument interpolation</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLitmus
 parameter_list|()
@@ -15788,7 +15726,6 @@ block|}
 comment|/** Unit test for {@link org.apache.calcite.util.NameSet}. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNameSet
 parameter_list|()
@@ -17916,7 +17853,6 @@ block|}
 comment|/** Unit test for {@link org.apache.calcite.util.NameMap}. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNameMap
 parameter_list|()
@@ -18750,7 +18686,6 @@ block|}
 comment|/** Unit test for {@link org.apache.calcite.util.NameMultimap}. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNameMultimap
 parameter_list|()
@@ -19609,7 +19544,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNlsStringClone
 parameter_list|()
@@ -19699,7 +19633,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testXmlOutput
 parameter_list|()
@@ -19840,7 +19773,6 @@ block|}
 comment|/** Unit test for {@link Matchers#compose}. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testComposeMatcher
 parameter_list|()
@@ -20038,7 +19970,6 @@ block|}
 comment|/** Unit test for {@link Matchers#isLinux}. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testIsLinux
 parameter_list|()
@@ -20257,7 +20188,6 @@ block|}
 comment|/** Tests {@link Util#transform(List, java.util.function.Function)}. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTransform
 parameter_list|()
@@ -20450,7 +20380,6 @@ block|}
 comment|/** Tests {@link Util#filter(Iterable, java.util.function.Predicate)}. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFilter
 parameter_list|()
@@ -20732,7 +20661,6 @@ block|}
 comment|/** Tests {@link Util#select(List, List)}. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelect
 parameter_list|()
@@ -21092,7 +21020,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testEquivalenceSet
 parameter_list|()
@@ -21513,7 +21440,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testBlackHoleMap
 parameter_list|()

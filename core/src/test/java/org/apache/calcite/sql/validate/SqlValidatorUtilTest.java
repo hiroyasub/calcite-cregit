@@ -286,7 +286,6 @@ comment|/**  * Tests for {@link SqlValidatorUtil}.  */
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|SqlValidatorUtilTest
 block|{
@@ -482,7 +481,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUniquifyCaseSensitive
 parameter_list|()
@@ -538,7 +536,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUniquifyNotCaseSensitive
 parameter_list|()
@@ -603,7 +600,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUniquifyOrderingCaseSensitive
 parameter_list|()
@@ -663,7 +659,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUniquifyOrderingRepeatedCaseSensitive
 parameter_list|()
@@ -732,7 +727,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUniquifyOrderingNotCaseSensitive
 parameter_list|()
@@ -801,7 +795,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUniquifyOrderingRepeatedNotCaseSensitive
 parameter_list|()
@@ -875,7 +868,6 @@ literal|"resource"
 argument_list|)
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCheckingDuplicatesWithCompoundIdentifiers
 parameter_list|()
@@ -1027,7 +1019,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNameMatcher
 parameter_list|()

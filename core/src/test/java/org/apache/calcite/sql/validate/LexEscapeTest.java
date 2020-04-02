@@ -428,7 +428,6 @@ comment|/**  * Testing {@link SqlValidator} and {@link Lex} quoting.  */
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|LexEscapeTest
 block|{
@@ -793,7 +792,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCalciteEscapeOracle
 parameter_list|()
@@ -823,7 +821,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCalciteEscapeMySql
 parameter_list|()
@@ -851,7 +848,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCalciteEscapeMySqlAnsi
 parameter_list|()
@@ -881,7 +877,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCalciteEscapeSqlServer
 parameter_list|()
@@ -909,7 +904,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCalciteEscapeJava
 parameter_list|()

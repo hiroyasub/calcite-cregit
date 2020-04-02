@@ -548,13 +548,11 @@ end_comment
 begin_class
 annotation|@
 name|Disabled
-specifier|public
 class|class
 name|PigRelBuilderStyleTest
 extends|extends
 name|AbstractPigTest
 block|{
-specifier|public
 name|PigRelBuilderStyleTest
 parameter_list|()
 block|{
@@ -583,7 +581,6 @@ literal|"CALCITE-3660"
 argument_list|)
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testScanAndFilter
 parameter_list|()
@@ -923,7 +920,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testImplWithCountWithoutGroupBy
 parameter_list|()
@@ -1145,7 +1141,6 @@ literal|"CALCITE-3660"
 argument_list|)
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testImplWithGroupByCountDistinct
 parameter_list|()
@@ -1262,7 +1257,6 @@ literal|"CALCITE-3660"
 argument_list|)
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testImplWithJoin
 parameter_list|()

@@ -202,7 +202,6 @@ comment|/**  * Converts {@link RexNode} into a string form usable for inclusion 
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|RexToTestCodeShuttle
 extends|extends

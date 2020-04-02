@@ -391,7 +391,6 @@ name|LexConfiguration
 operator|.
 name|class
 argument_list|)
-specifier|public
 class|class
 name|SqlAdvisorTest
 extends|extends
@@ -2247,7 +2246,6 @@ return|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFrom
 parameter_list|()
@@ -2347,7 +2345,6 @@ comment|// join
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFromComplete
 parameter_list|()
@@ -2368,7 +2365,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGroup
 parameter_list|()
@@ -2395,7 +2391,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoin
 parameter_list|()
@@ -2509,7 +2504,6 @@ comment|// join
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinKeywords
 parameter_list|()
@@ -2546,7 +2540,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSimplifyStarAlias
 parameter_list|()
@@ -2568,7 +2561,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSimlifySubQueryStar
 parameter_list|()
@@ -2652,7 +2644,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSimlifySubQueryMultipleFrom
 parameter_list|()
@@ -2687,7 +2678,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSimlifyMinus
 parameter_list|()
@@ -2720,7 +2710,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOnCondition
 parameter_list|()
@@ -2809,7 +2798,6 @@ comment|// on right
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFromWhere
 parameter_list|()
@@ -2944,7 +2932,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWhereList
 parameter_list|()
@@ -3033,7 +3020,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectList
 parameter_list|()
@@ -3206,7 +3192,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOrderByList
 parameter_list|()
@@ -3311,7 +3296,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSubQuery
 parameter_list|()
@@ -3501,7 +3485,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSubQueryInWhere
 parameter_list|()
@@ -3549,7 +3532,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSimpleParserTokenizer
 parameter_list|()
@@ -3737,7 +3719,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSimpleParser
 parameter_list|()
@@ -4240,7 +4221,6 @@ name|SQL_SERVER
 argument_list|)
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSimpleParserQuotedIdSqlServer
 parameter_list|()
@@ -4258,7 +4238,6 @@ name|MYSQL
 argument_list|)
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSimpleParserQuotedIdMySql
 parameter_list|()
@@ -4276,7 +4255,6 @@ name|JAVA
 argument_list|)
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSimpleParserQuotedIdJava
 parameter_list|()
@@ -4287,7 +4265,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSimpleParserQuotedIdDefault
 parameter_list|()
@@ -4484,7 +4461,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPartialIdentifier
 parameter_list|()
@@ -4987,7 +4963,6 @@ literal|"Inserts are not supported by SimpleParser yet"
 argument_list|)
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInsert
 parameter_list|()
@@ -5049,7 +5024,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNestSchema
 parameter_list|()
@@ -5146,7 +5120,6 @@ literal|"The set of completion results is empty"
 argument_list|)
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNestTable1
 parameter_list|()
@@ -5204,7 +5177,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNestTable2
 parameter_list|()
@@ -5236,7 +5208,6 @@ literal|"The set of completion results is empty"
 argument_list|)
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNestTable3
 parameter_list|()
@@ -5294,7 +5265,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNestTable4
 parameter_list|()
@@ -5321,7 +5291,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNestTableSchemaMustMatch
 parameter_list|()
@@ -5355,7 +5324,6 @@ name|SQL_SERVER
 argument_list|)
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNestSchemaSqlServer
 parameter_list|()
@@ -5447,7 +5415,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUnion
 parameter_list|()
@@ -5522,7 +5489,6 @@ name|SQL_SERVER
 argument_list|)
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMssql
 parameter_list|()

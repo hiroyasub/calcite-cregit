@@ -641,7 +641,6 @@ name|ResourceAccessMode
 operator|.
 name|READ
 argument_list|)
-specifier|public
 class|class
 name|MatchTest
 block|{
@@ -994,7 +993,6 @@ block|}
 comment|/**    * Tests the ElasticSearch match query. The match query is translated from    * CONTAINS query which is build using RelBuilder, RexBuilder because the    * normal SQL query assumes CONTAINS query is for date/period range.    *    *<p>Equivalent SQL query:    *    *<blockquote>    *<code>select * from zips where city contains 'waltham'</code>    *</blockquote>    *    *<p>ElasticSearch query for it:    *    *<blockquote><code>    * {"query":{"constant_score":{"filter":{"match":{"city":"waltham"}}}}}    *</code></blockquote>    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMatchQuery
 parameter_list|()

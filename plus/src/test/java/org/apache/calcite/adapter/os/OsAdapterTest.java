@@ -422,7 +422,6 @@ comment|/**  * Unit tests for the OS (operating system) adapter.  *  *<p>Also pl
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|OsAdapterTest
 block|{
@@ -655,7 +654,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDu
 parameter_list|()
@@ -759,7 +757,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDuFilterSortLimit
 parameter_list|()
@@ -892,7 +889,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFiles
 parameter_list|()
@@ -920,7 +916,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPs
 parameter_list|()
@@ -1062,7 +1057,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPsDistinct
 parameter_list|()
@@ -1151,7 +1145,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGitCommits
 parameter_list|()
@@ -1237,7 +1230,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGitCommitsTop
 parameter_list|()
@@ -1273,7 +1265,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJps
 parameter_list|()
@@ -1370,7 +1361,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testVmstat
 parameter_list|()
@@ -1489,7 +1479,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testStdin
 parameter_list|()
@@ -1631,7 +1620,6 @@ end_class
 begin_function
 unit|}    @
 name|Test
-specifier|public
 name|void
 name|testStdinExplain
 parameter_list|()
@@ -1668,7 +1656,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSqlShellFormat
 parameter_list|()
@@ -2120,7 +2107,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSqlShellHelp
 parameter_list|()

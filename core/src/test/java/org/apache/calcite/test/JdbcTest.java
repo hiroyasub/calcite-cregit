@@ -2285,7 +2285,6 @@ block|}
 comment|/** Tests a modifiable view. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testModelWithModifiableView
 parameter_list|()
@@ -2606,7 +2605,6 @@ block|}
 comment|/** Tests a few cases where modifiable views are invalid. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testModelWithInvalidModifiableView
 parameter_list|()
@@ -2945,7 +2943,6 @@ block|}
 comment|/**    * Tests a relation that is accessed via method syntax.    *    *<p>The function ({@link Smalls#view(String)} has a return type    * {@link Table} and the actual returned value implements    * {@link org.apache.calcite.schema.TranslatableTable}.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTableMacro
 parameter_list|()
@@ -3019,7 +3016,6 @@ block|}
 comment|/** Table macro that takes a MAP as a parameter.    *    *<p>Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-588">[CALCITE-588]    * Allow TableMacro to consume Maps and Collections</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTableMacroMap
 parameter_list|()
@@ -3091,7 +3087,6 @@ block|}
 comment|/**    *<p>Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3423">[CALCITE-3423]    * Support using CAST operation and BOOLEAN type value in table macro</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTableMacroWithCastOrBoolean
 parameter_list|()
@@ -3291,7 +3286,6 @@ block|}
 comment|/** Tests a table macro with named and optional parameters. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTableMacroWithNamedParameters
 parameter_list|()
@@ -3427,7 +3421,6 @@ block|}
 comment|/** Tests a JDBC connection that provides a model that contains a table    *  macro. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTableMacroInModel
 parameter_list|()
@@ -3447,7 +3440,6 @@ block|}
 comment|/** Tests a JDBC connection that provides a model that contains a table    *  macro defined as a static method. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testStaticTableMacroInModel
 parameter_list|()
@@ -3467,7 +3459,6 @@ block|}
 comment|/** Tests a JDBC connection that provides a model that contains a table    *  function. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTableFunctionInModel
 parameter_list|()
@@ -3487,7 +3478,6 @@ block|}
 comment|/** Tests a JDBC connection that provides a model that contains a table    *  function defined as a static method. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testStaticTableFunctionInModel
 parameter_list|()
@@ -3642,7 +3632,6 @@ block|}
 comment|/** Tests {@link org.apache.calcite.avatica.Handler#onConnectionClose}    * and  {@link org.apache.calcite.avatica.Handler#onStatementClose}. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOnConnectionClose
 parameter_list|()
@@ -4006,7 +3995,6 @@ block|}
 comment|/** Tests {@link java.sql.Statement}.{@code closeOnCompletion()}. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testStatementCloseOnCompletion
 parameter_list|()
@@ -4239,7 +4227,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2071">[CALCITE-2071]    * Query with IN and OR in WHERE clause returns wrong result</a>.    * More cases in sub-query.iq. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWhereInOr
 parameter_list|()
@@ -4283,7 +4270,6 @@ block|}
 comment|/** Tests that a driver can be extended with its own parser and can execute    * its own flavor of DDL. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMockDdl
 parameter_list|()
@@ -4359,7 +4345,6 @@ block|}
 comment|/**    * The example in the README.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testReadme
 parameter_list|()
@@ -4498,7 +4483,6 @@ block|}
 comment|/** Test for {@link Driver#getPropertyInfo(String, Properties)}. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testConnectionProperties
 parameter_list|()
@@ -4601,7 +4585,6 @@ block|}
 comment|/**    * Make sure that the properties look sane.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testVersion
 parameter_list|()
@@ -4961,7 +4944,6 @@ block|}
 comment|/** Tests driver's implementation of {@link DatabaseMetaData#getColumns}. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMetaDataColumns
 parameter_list|()
@@ -5114,7 +5096,6 @@ block|}
 comment|/** Tests driver's implementation of {@link DatabaseMetaData#getPrimaryKeys}.    * It is empty but it should still have column definitions. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMetaDataPrimaryKeys
 parameter_list|()
@@ -5245,7 +5226,6 @@ block|}
 comment|/** Unit test for    * {@link org.apache.calcite.jdbc.CalciteMetaImpl#likeToRegex(org.apache.calcite.avatica.Meta.Pat)}. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLikeToRegex
 parameter_list|()
@@ -5454,7 +5434,6 @@ block|}
 comment|/** Tests driver's implementation of {@link DatabaseMetaData#getColumns},    * and also    *<a href="https://issues.apache.org/jira/browse/CALCITE-1222">[CALCITE-1222]    * DatabaseMetaData.getColumnLabel returns null when query has ORDER    * BY</a>, */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testResultSetMetaData
 parameter_list|()
@@ -5682,7 +5661,6 @@ block|}
 comment|/** Tests some queries that have expedited processing because connection pools    * like to use them to check whether the connection is alive.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSimple
 parameter_list|()
@@ -5715,7 +5693,6 @@ block|}
 comment|/** Tests accessing columns by name. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGetByName
 parameter_list|()
@@ -6081,7 +6058,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCloneSchema
 parameter_list|()
@@ -6205,7 +6181,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCloneGroupBy
 parameter_list|()
@@ -6252,7 +6227,6 @@ literal|"The test returns expected results. Not sure why it is disabled"
 argument_list|)
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCloneGroupBy2
 parameter_list|()
@@ -6312,7 +6286,6 @@ literal|"The actual and expected plan differ"
 argument_list|)
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCloneGroupBy2Plan
 parameter_list|()
@@ -6364,7 +6337,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOrderByCase
 parameter_list|()
@@ -6399,7 +6371,6 @@ block|}
 comment|/** Just short of bushy. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAlmostBushy
 parameter_list|()
@@ -6472,7 +6443,6 @@ literal|"extremely slow - a bit better if you disable ProjectMergeRule"
 argument_list|)
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testBushy
 parameter_list|()
@@ -7136,7 +7106,6 @@ decl_stmt|;
 comment|/** Janino bug    *<a href="https://jira.codehaus.org/browse/JANINO-169">[JANINO-169]</a>    * running queries against the JDBC adapter. The bug is not present with    * janino-3.0.9 so the workaround in EnumerableRelImplementor was removed.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJanino169
 parameter_list|()
@@ -7169,7 +7138,6 @@ block|}
 comment|/** Tests 3-way AND.    *    *<p>With    *<a href="https://issues.apache.org/jira/browse/CALCITE-127">[CALCITE-127]    * EnumerableCalcRel can't support 3+ AND conditions</a>, the last condition    * is ignored and rows with deptno=10 are wrongly returned.</p>    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAnd3
 parameter_list|()
@@ -7199,7 +7167,6 @@ block|}
 comment|/** Tests a date literal against a JDBC data source. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJdbcDate
 parameter_list|()
@@ -7253,7 +7220,6 @@ block|}
 comment|/** Tests a timestamp literal against JDBC data source. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJdbcTimestamp
 parameter_list|()
@@ -7292,7 +7258,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-281">[CALCITE-281]    * SQL type of EXTRACT is BIGINT but it is implemented as int</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExtract
 parameter_list|()
@@ -7428,7 +7393,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExtractMonthFromTimestamp
 parameter_list|()
@@ -7462,7 +7426,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExtractYearFromTimestamp
 parameter_list|()
@@ -7496,7 +7459,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExtractFromInterval
 parameter_list|()
@@ -7555,7 +7517,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1188">[CALCITE-1188]    * NullPointerException when EXTRACT is applied to NULL date field</a>.    * The problem occurs when EXTRACT appears in both SELECT and WHERE ... IN    * clauses, the latter with at least two values. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExtractOnNullDateField
 parameter_list|()
@@ -7655,7 +7616,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFloorDate
 parameter_list|()
@@ -7715,7 +7675,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3435">[CALCITE-3435]    * Enable decimal modulus operation to allow numeric with non-zero scale</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testModOperation
 parameter_list|()
@@ -7750,7 +7709,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-387">[CALCITE-387]    * CompileException when cast TRUE to nullable boolean</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTrue
 parameter_list|()
@@ -7818,7 +7776,6 @@ block|}
 comment|/** Unit test for self-join. Left and right children of the join are the same    * relational expression. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelfJoin
 parameter_list|()
@@ -7855,7 +7812,6 @@ block|}
 comment|/** Self-join on different columns, select a different column, and sort and    * limit on yet another column. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelfJoinDifferentColumns
 parameter_list|()
@@ -7912,7 +7868,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2029">[CALCITE-2029]    * Query with "is distinct from" condition in where or join clause fails    * with AssertionError: Cast for just nullability not allowed</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testIsNotDistinctInFilter
 parameter_list|()
@@ -7947,7 +7902,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2029">[CALCITE-2029]    * Query with "is distinct from" condition in where or join clause fails    * with AssertionError: Cast for just nullability not allowed</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMixedEqualAndIsNotDistinctJoin
 parameter_list|()
@@ -7986,7 +7940,6 @@ block|}
 comment|/** A join that has both equi and non-equi conditions.    *    *<p>Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-371">[CALCITE-371]    * Cannot implement JOIN whose ON clause contains mixed equi and theta</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testEquiThetaJoin
 parameter_list|()
@@ -8022,7 +7975,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-451">[CALCITE-451]    * Implement theta join, inner and outer, in enumerable convention</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testThetaJoin
 parameter_list|()
@@ -8068,7 +8020,6 @@ annotation|@
 name|Disabled
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinJoin
 parameter_list|()
@@ -8177,7 +8128,6 @@ annotation|@
 name|Disabled
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinFiveWay
 parameter_list|()
@@ -8293,7 +8243,6 @@ block|}
 comment|/** Tests a simple (primary key to primary key) N-way join, with arbitrary    * N. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinManyWay
 parameter_list|()
@@ -8597,7 +8546,6 @@ annotation|@
 name|Disabled
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCloneQueries
 parameter_list|()
@@ -8766,7 +8714,6 @@ block|}
 comment|/** Tests accessing a column in a JDBC source whose type is ARRAY. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testArray
 parameter_list|()
@@ -9208,7 +9155,6 @@ block|}
 comment|/** Tests the {@code CARDINALITY} function applied to an array column. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testArray2
 parameter_list|()
@@ -9238,7 +9184,6 @@ block|}
 comment|/** Tests JDBC support for nested arrays. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNestedArray
 parameter_list|()
@@ -9633,7 +9578,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testArrayConstructor
 parameter_list|()
@@ -9656,7 +9600,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMultisetConstructor
 parameter_list|()
@@ -9679,7 +9622,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMultisetQuery
 parameter_list|()
@@ -9706,7 +9648,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMultisetQueryWithSingleColumn
 parameter_list|()
@@ -9733,7 +9674,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUnnestArray
 parameter_list|()
@@ -9758,7 +9698,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUnnestArrayWithOrdinality
 parameter_list|()
@@ -9783,7 +9722,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUnnestRecordType
 parameter_list|()
@@ -9867,7 +9805,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUnnestMultiset
 parameter_list|()
@@ -9901,7 +9838,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUnnestMultiset2
 parameter_list|()
@@ -9940,7 +9876,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2391">[CALCITE-2391]    * Aggregate query with UNNEST or LATERAL fails with    * ClassCastException</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggUnnestColumn
 parameter_list|()
@@ -9973,7 +9908,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testArrayElement
 parameter_list|()
@@ -10009,7 +9943,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLateral
 parameter_list|()
@@ -10039,7 +9972,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-531">[CALCITE-531]    * Window function does not work in LATERAL</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLateralWithOver
 parameter_list|()
@@ -10114,7 +10046,6 @@ block|}
 comment|/** Per SQL std, UNNEST is implicitly LATERAL. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUnnestArrayColumn
 parameter_list|()
@@ -10145,7 +10076,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUnnestArrayScalarArray
 parameter_list|()
@@ -10182,7 +10112,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUnnestArrayScalarArrayAliased
 parameter_list|()
@@ -10215,7 +10144,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUnnestArrayScalarArrayWithOrdinal
 parameter_list|()
@@ -10249,7 +10177,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3498">[CALCITE-3498]    * Unnest operation's ordinality should be deterministic</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUnnestArrayWithDeterministicOrdinality
 parameter_list|()
@@ -10304,7 +10231,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1250">[CALCITE-1250]    * UNNEST applied to MAP data type</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUnnestItemsInMap
 parameter_list|()
@@ -10371,7 +10297,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUnnestItemsInMapWithOrdinality
 parameter_list|()
@@ -10440,7 +10365,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUnnestItemsInMapWithNoAliasAndAdditionalArgument
 parameter_list|()
@@ -10658,7 +10582,6 @@ annotation|@
 name|Disabled
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNoCalcBetweenJoins
 parameter_list|()
@@ -10741,7 +10664,6 @@ annotation|@
 name|Disabled
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExplainJoin
 parameter_list|()
@@ -10801,7 +10723,6 @@ annotation|@
 name|Disabled
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExplainJoin2
 parameter_list|()
@@ -10852,7 +10773,6 @@ name|Disabled
 comment|// OOME on Travis; works on most other machines
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExplainJoin3
 parameter_list|()
@@ -10901,7 +10821,6 @@ name|Disabled
 comment|// DO NOT CHECK IN
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFoodmartLattice
 parameter_list|()
@@ -10991,7 +10910,6 @@ annotation|@
 name|Disabled
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExplainJoin4
 parameter_list|()
@@ -11055,7 +10973,6 @@ annotation|@
 name|Disabled
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExplainJoinOrderingWithOr
 parameter_list|()
@@ -11095,7 +11012,6 @@ block|}
 comment|/** There was a bug representing a nullable timestamp using a {@link Long}    * internally. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNullableTimestamp
 parameter_list|()
@@ -11113,7 +11029,6 @@ block|}
 comment|/** Similar to {@link #testNullableTimestamp} but directly off JDBC. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNullableTimestamp2
 parameter_list|()
@@ -11175,7 +11090,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testReuseExpressionWhenNullChecking
 parameter_list|()
@@ -11222,7 +11136,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testReuseExpressionWhenNullChecking2
 parameter_list|()
@@ -11267,7 +11180,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testReuseExpressionWhenNullChecking3
 parameter_list|()
@@ -11319,7 +11231,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testReuseExpressionWhenNullChecking4
 parameter_list|()
@@ -11412,7 +11323,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testReuseExpressionWhenNullChecking5
 parameter_list|()
@@ -11520,7 +11430,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testValues
 parameter_list|()
@@ -11545,7 +11454,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testValuesAlias
 parameter_list|()
@@ -11568,7 +11476,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testValuesMinus
 parameter_list|()
@@ -11592,7 +11499,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1120">[CALCITE-1120]    * Support SELECT without FROM</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectWithoutFrom
 parameter_list|()
@@ -11616,7 +11522,6 @@ block|}
 comment|/** Tests a table constructor that has multiple rows and multiple columns.    *    *<p>Note that the character literals become CHAR(3) and that the first is    * correctly rendered with trailing spaces: 'a  '. If we were inserting    * into a VARCHAR column the behavior would be different; the literals    * would be converted into VARCHAR(3) values and the implied cast from    * CHAR(1) to CHAR(3) that appends trailing spaces does not occur. See    * "contextually typed value specification" in the SQL spec.</p>    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testValuesComposite
 parameter_list|()
@@ -11642,7 +11547,6 @@ block|}
 comment|/**    * Tests that even though trivial "rename columns" projection is removed,    * the query still returns proper column names.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testValuesCompositeRenamed
 parameter_list|()
@@ -11673,7 +11577,6 @@ block|}
 comment|/**    * Tests that even though trivial "rename columns" projection is removed,    * the query still returns proper column names.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testValuesCompositeRenamedSameNames
 parameter_list|()
@@ -11704,7 +11607,6 @@ block|}
 comment|/**    * Tests that even though trivial "rename columns" projection is removed,    * the query still returns proper column names.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUnionWithSameColumnNames
 parameter_list|()
@@ -11755,7 +11657,6 @@ block|}
 comment|/** Tests inner join to an inline table ({@code VALUES} clause). */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInnerJoinValues
 parameter_list|()
@@ -11805,7 +11706,6 @@ block|}
 comment|/** Tests a merge-join. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMergeJoin
 parameter_list|()
@@ -11865,7 +11765,6 @@ block|}
 comment|/** Tests a cartesian product aka cross join. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCartesianJoin
 parameter_list|()
@@ -11894,7 +11793,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDistinctCountSimple
 parameter_list|()
@@ -11943,7 +11841,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDistinctCount2
 parameter_list|()
@@ -12010,7 +11907,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDistinctCount
 parameter_list|()
@@ -12092,7 +11988,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDistinctCountComposite
 parameter_list|()
@@ -12144,7 +12039,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregateFilter
 parameter_list|()
@@ -12217,7 +12111,6 @@ block|}
 comment|/** Tests a simple IN query implemented as a semi-join. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSimpleIn
 parameter_list|()
@@ -12279,7 +12172,6 @@ annotation|@
 name|Disabled
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testIn
 parameter_list|()
@@ -12358,7 +12250,6 @@ block|}
 comment|/** Query that uses parenthesized JOIN. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSql92JoinParenthesized
 parameter_list|()
@@ -12475,7 +12366,6 @@ block|}
 comment|/** Tests ORDER BY with no options. Nulls come last.    *    * @see org.apache.calcite.avatica.AvaticaDatabaseMetaData#nullsAreSortedAtEnd()    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOrderBy
 parameter_list|()
@@ -12514,7 +12404,6 @@ block|}
 comment|/** Tests ORDER BY ... DESC. Nulls come first (they come last for ASC). */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOrderByDesc
 parameter_list|()
@@ -12553,7 +12442,6 @@ block|}
 comment|/** Tests sorting by an expression not in the select clause. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOrderByExpr
 parameter_list|()
@@ -12585,7 +12473,6 @@ block|}
 comment|/** Tests sorting by an expression not in the '*' select clause. Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-176">[CALCITE-176]    * ORDER BY expression doesn't work with SELECT *</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOrderStarByExpr
 parameter_list|()
@@ -12627,7 +12514,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOrderUnionStarByExpr
 parameter_list|()
@@ -12663,7 +12549,6 @@ block|}
 comment|/** Tests sorting by a CAST expression not in the select clause. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOrderByCast
 parameter_list|()
@@ -12707,7 +12592,6 @@ block|}
 comment|/** Tests ORDER BY with all combinations of ASC, DESC, NULLS FIRST,    * NULLS LAST. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOrderByNulls
 parameter_list|()
@@ -12925,7 +12809,6 @@ block|}
 comment|/** Tests ORDER BY ...  with various values of    * {@link CalciteConnectionConfig#defaultNullCollation()}. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOrderByVarious
 parameter_list|()
@@ -13223,7 +13106,6 @@ block|}
 comment|/** Tests ORDER BY ... FETCH. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOrderByFetch
 parameter_list|()
@@ -13281,7 +13163,6 @@ block|}
 comment|/** Tests ORDER BY ... OFFSET ... FETCH. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOrderByOffsetFetch
 parameter_list|()
@@ -13326,7 +13207,6 @@ block|}
 comment|/** Tests FETCH with no ORDER BY. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFetch
 parameter_list|()
@@ -13353,7 +13233,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFetchStar
 parameter_list|()
@@ -13383,7 +13262,6 @@ block|}
 comment|/** "SELECT ... LIMIT 0" is executed differently. A planner rule converts the    * whole query to an empty rel. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLimitZero
 parameter_list|()
@@ -13414,7 +13292,6 @@ block|}
 comment|/** Alternative formulation for {@link #testFetchStar()}. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLimitStar
 parameter_list|()
@@ -13444,7 +13321,6 @@ block|}
 comment|/** Limit implemented using {@link Queryable#take}. Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-96">[CALCITE-96]    * LIMIT against a table in a clone schema causes    * UnsupportedOperationException</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLimitOnQueryableTable
 parameter_list|()
@@ -13481,7 +13357,6 @@ block|}
 comment|/** Limit implemented using {@link Queryable#take}. Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-70">[CALCITE-70]    * Joins seem to be very expensive in memory</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelfJoinCount
 parameter_list|()
@@ -13531,7 +13406,6 @@ block|}
 comment|/** Tests composite GROUP BY where one of the columns has NULL values. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGroupByNull
 parameter_list|()
@@ -13564,7 +13438,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGroupingSets
 parameter_list|()
@@ -13595,7 +13468,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRollup
 parameter_list|()
@@ -13626,7 +13498,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCaseWhenOnNullableField
 parameter_list|()
@@ -13670,7 +13541,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectDistinct
 parameter_list|()
@@ -13698,7 +13568,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-397">[CALCITE-397]    * "SELECT DISTINCT *" on reflective schema gives ClassCastException at    * runtime</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectDistinctStar
 parameter_list|()
@@ -13729,7 +13598,6 @@ block|}
 comment|/** Select distinct on composite key, one column of which is boolean to    * boot. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectDistinctComposite
 parameter_list|()
@@ -13764,7 +13632,6 @@ block|}
 comment|/** Same result (and plan) as {@link #testSelectDistinct}. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGroupByNoAggregates
 parameter_list|()
@@ -13794,7 +13661,6 @@ block|}
 comment|/** Same result (and plan) as {@link #testSelectDistinct}. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGroupByNoAggregatesAllColumns
 parameter_list|()
@@ -13827,7 +13693,6 @@ block|}
 comment|/** Same result (and plan) as {@link #testSelectDistinct}. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGroupByMax1IsNull
 parameter_list|()
@@ -13857,7 +13722,6 @@ block|}
 comment|/** Same result (and plan) as {@link #testSelectDistinct}. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGroupBy1Max1
 parameter_list|()
@@ -13891,7 +13755,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-403">[CALCITE-403]    * Enumerable gives NullPointerException with NOT on nullable    * expression</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testHavingNot
 parameter_list|()
@@ -13910,7 +13773,6 @@ block|}
 comment|/** Minimal case of {@link #testHavingNot()}. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testHavingNot2
 parameter_list|()
@@ -13951,7 +13813,6 @@ block|}
 comment|/** ORDER BY on a sort-key does not require a sort. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOrderOnSortedTable
 parameter_list|()
@@ -14003,7 +13864,6 @@ block|}
 comment|/** ORDER BY on a sort-key does not require a sort. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOrderSorted
 parameter_list|()
@@ -14046,7 +13906,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWhereNot
 parameter_list|()
@@ -14087,7 +13946,6 @@ block|}
 comment|/** Query that reads no columns from either underlying table. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCountStar
 parameter_list|()
@@ -14139,7 +13997,6 @@ block|}
 comment|/** Same result (and plan) as {@link #testSelectDistinct}. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCountUnionAll
 parameter_list|()
@@ -14170,7 +14027,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUnionAll
 parameter_list|()
@@ -14212,7 +14068,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUnion
 parameter_list|()
@@ -14260,7 +14115,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testIntersect
 parameter_list|()
@@ -14326,7 +14180,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExcept
 parameter_list|()
@@ -14371,7 +14224,6 @@ block|}
 comment|/** Tests that SUM and AVG over empty set return null. COUNT returns 0. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregateEmpty
 parameter_list|()
@@ -14420,7 +14272,6 @@ block|}
 comment|/** Tests that count(deptno) is reduced to count(). */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testReduceCountNotNullable
 parameter_list|()
@@ -14465,7 +14316,6 @@ block|}
 comment|/** Tests that {@code count(deptno, commission, commission + 1)} is reduced to    * {@code count(commission, commission + 1)}, because deptno is NOT NULL. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testReduceCompositeCountNotNullable
 parameter_list|()
@@ -14504,7 +14354,6 @@ block|}
 comment|/** Tests sorting by a column that is already sorted. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOrderByOnSortedTable
 parameter_list|()
@@ -14539,7 +14388,6 @@ block|}
 comment|/** Tests sorting by a column that is already sorted. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOrderByOnSortedTable2
 parameter_list|()
@@ -14588,7 +14436,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWithInsideWhereExists
 parameter_list|()
@@ -14621,7 +14468,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWithOrderBy
 parameter_list|()
@@ -14657,7 +14503,6 @@ block|}
 comment|/** Tests windowed aggregation. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWinAgg
 parameter_list|()
@@ -14787,7 +14632,6 @@ block|}
 comment|/** Tests windowed aggregation with multiple windows.    * One window straddles the current row.    * Some windows have no PARTITION BY clause. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWinAgg2
 parameter_list|()
@@ -14856,7 +14700,6 @@ block|}
 comment|/**    * Tests that window aggregates work when computed over non-nullable    * {@link org.apache.calcite.adapter.enumerable.JavaRowFormat#SCALAR} inputs.    * Window aggregates use temporary buffers, thus need to check if    * primitives are properly boxed and un-boxed.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWinAggScalarNonNullPhysType
 parameter_list|()
@@ -14927,7 +14770,6 @@ block|}
 comment|/**    * Tests that {@link org.apache.calcite.rel.logical.LogicalCalc} is    * implemented properly when input is    * {@link org.apache.calcite.rel.logical.LogicalWindow} and literal.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWinAggScalarNonNullPhysTypePlusOne
 parameter_list|()
@@ -14998,7 +14840,6 @@ block|}
 comment|/** Tests for RANK and ORDER BY ... DESCENDING, NULLS FIRST, NULLS LAST. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWinAggRank
 parameter_list|()
@@ -15047,7 +14888,6 @@ block|}
 comment|/** Tests for RANK with same values */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWinAggRankValues
 parameter_list|()
@@ -15087,7 +14927,6 @@ block|}
 comment|/** Tests for RANK with same values */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWinAggRankValuesDesc
 parameter_list|()
@@ -15126,7 +14965,6 @@ block|}
 comment|/** Tests for DENSE_RANK with same values */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWinAggDenseRankValues
 parameter_list|()
@@ -15165,7 +15003,6 @@ block|}
 comment|/** Tests for DENSE_RANK with same values */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWinAggDenseRankValuesDesc
 parameter_list|()
@@ -15204,7 +15041,6 @@ block|}
 comment|/** Tests for DATE +- INTERVAL window frame */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWinIntervalFrame
 parameter_list|()
@@ -15252,7 +15088,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNestedWin
 parameter_list|()
@@ -15492,7 +15327,6 @@ block|}
 comment|/**    * Tests start_of_group approach for grouping of adjacent intervals.    * This is a step1, implemented as last_value.    * http://timurakhmadeev.wordpress.com/2013/07/21/start_of_group/    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testStartOfGroupLastValueStep1
 parameter_list|()
@@ -15506,7 +15340,6 @@ block|}
 comment|/**    * Tests start_of_group approach for grouping of adjacent intervals.    * This is a step2, that gets the final group numbers    * http://timurakhmadeev.wordpress.com/2013/07/21/start_of_group/    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testStartOfGroupLastValueStep2
 parameter_list|()
@@ -15520,7 +15353,6 @@ block|}
 comment|/**    * Tests start_of_group approach for grouping of adjacent intervals.    * This is a step3, that aggregates the computed groups    * http://timurakhmadeev.wordpress.com/2013/07/21/start_of_group/    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testStartOfGroupLastValueStep3
 parameter_list|()
@@ -15534,7 +15366,6 @@ block|}
 comment|/**    * Tests start_of_group approach for grouping of adjacent intervals.    * This is a step1, implemented as last_value.    * http://timurakhmadeev.wordpress.com/2013/07/21/start_of_group/    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testStartOfGroupLagStep1
 parameter_list|()
@@ -15548,7 +15379,6 @@ block|}
 comment|/**    * Tests start_of_group approach for grouping of adjacent intervals.    * This is a step2, that gets the final group numbers    * http://timurakhmadeev.wordpress.com/2013/07/21/start_of_group/    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testStartOfGroupLagValueStep2
 parameter_list|()
@@ -15562,7 +15392,6 @@ block|}
 comment|/**    * Tests start_of_group approach for grouping of adjacent intervals.    * This is a step3, that aggregates the computed groups    * http://timurakhmadeev.wordpress.com/2013/07/21/start_of_group/    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testStartOfGroupLagStep3
 parameter_list|()
@@ -15576,7 +15405,6 @@ block|}
 comment|/**    * Tests start_of_group approach for grouping of adjacent intervals.    * This is a step1, implemented as last_value.    * http://timurakhmadeev.wordpress.com/2013/07/21/start_of_group/    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testStartOfGroupLeadStep1
 parameter_list|()
@@ -15590,7 +15418,6 @@ block|}
 comment|/**    * Tests start_of_group approach for grouping of adjacent intervals.    * This is a step2, that gets the final group numbers    * http://timurakhmadeev.wordpress.com/2013/07/21/start_of_group/    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testStartOfGroupLeadValueStep2
 parameter_list|()
@@ -15604,7 +15431,6 @@ block|}
 comment|/**    * Tests start_of_group approach for grouping of adjacent intervals.    * This is a step3, that aggregates the computed groups    * http://timurakhmadeev.wordpress.com/2013/07/21/start_of_group/    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testStartOfGroupLeadStep3
 parameter_list|()
@@ -15618,7 +15444,6 @@ block|}
 comment|/**    * Tests default value of LAG function.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLagDefaultValue
 parameter_list|()
@@ -15665,7 +15490,6 @@ block|}
 comment|/**    * Tests default value of LEAD function.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLeadDefaultValue
 parameter_list|()
@@ -15712,7 +15536,6 @@ block|}
 comment|/**    * Tests expression in offset value of LAG function.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLagExpressionOffset
 parameter_list|()
@@ -15759,7 +15582,6 @@ block|}
 comment|/**    * Tests DATE as offset argument of LAG function.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLagInvalidOffsetArgument
 parameter_list|()
@@ -15789,7 +15611,6 @@ block|}
 comment|/**    * Tests LAG function with IGNORE NULLS.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLagIgnoreNulls
 parameter_list|()
@@ -15849,7 +15670,6 @@ block|}
 comment|/**    * Tests NTILE(2).    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNtile1
 parameter_list|()
@@ -15896,7 +15716,6 @@ block|}
 comment|/**    * Tests NTILE(2).    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNtile2
 parameter_list|()
@@ -15948,7 +15767,6 @@ literal|"Have no idea how to validate that expression is constant"
 argument_list|)
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNtileConstantArgs
 parameter_list|()
@@ -15995,7 +15813,6 @@ block|}
 comment|/**    * Tests expression in offset value of LAG function.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNtileNegativeArg
 parameter_list|()
@@ -16023,7 +15840,6 @@ block|}
 comment|/**    * Tests expression in offset value of LAG function.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNtileDecimalArg
 parameter_list|()
@@ -16051,7 +15867,6 @@ block|}
 comment|/** Tests for FIRST_VALUE */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWinAggFirstValue
 parameter_list|()
@@ -16094,7 +15909,6 @@ block|}
 comment|/** Tests for FIRST_VALUE desc */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWinAggFirstValueDesc
 parameter_list|()
@@ -16137,7 +15951,6 @@ block|}
 comment|/** Tests for FIRST_VALUE empty window */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWinAggFirstValueEmptyWindow
 parameter_list|()
@@ -16180,7 +15993,6 @@ block|}
 comment|/** Tests for ROW_NUMBER */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWinRowNumber
 parameter_list|()
@@ -16231,7 +16043,6 @@ block|}
 comment|/** Tests UNBOUNDED PRECEDING clause. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOverUnboundedPreceding
 parameter_list|()
@@ -16276,7 +16087,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3563">[CALCITE-3563]    * When resolving method call in calcite runtime, add type check and match    * mechanism for input arguments</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMethodParameterTypeMatch
 parameter_list|()
@@ -16314,7 +16124,6 @@ block|}
 comment|/** Tests UNBOUNDED PRECEDING clause. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSumOverUnboundedPreceding
 parameter_list|()
@@ -16368,7 +16177,6 @@ block|}
 comment|/** Tests that sum over possibly empty window is nullable. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSumOverPossiblyEmptyWindow
 parameter_list|()
@@ -16422,7 +16230,6 @@ block|}
 comment|/** Tests windowed aggregation with no ORDER BY clause.    *    *<p>Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-285">[CALCITE-285]    * Window functions throw exception without ORDER BY</a>.    *    *<p>Note:</p>    *    *<ul>    *<li>With no ORDER BY, the window is over all rows in the partition.    *<li>With an ORDER BY, the implicit frame is 'RANGE BETWEEN    *     UNBOUNDED PRECEDING AND CURRENT ROW'.    *<li>With no ORDER BY or PARTITION BY, the window contains all rows in the    *     table.    *</ul>    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOverNoOrder
 parameter_list|()
@@ -16478,7 +16285,6 @@ block|}
 comment|/** Tests that field-trimming creates a project near the table scan. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTrimFields
 parameter_list|()
@@ -16532,7 +16338,6 @@ block|}
 comment|/** Tests that field-trimming creates a project near the table scan, in a    * query with windowed-aggregation. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTrimFieldsOver
 parameter_list|()
@@ -16591,7 +16396,6 @@ block|}
 comment|/** Tests window aggregate whose argument is a constant. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWinAggConstant
 parameter_list|()
@@ -16625,7 +16429,6 @@ block|}
 comment|/** Tests multiple window aggregates over constants.    * This tests that EnumerableWindowRel is able to reference the right slot    * when accessing constant for aggregation argument. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWinAggConstantMultipleConstants
 parameter_list|()
@@ -16672,7 +16475,6 @@ block|}
 comment|/** Tests window aggregate PARTITION BY constant. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWinAggPartitionByConstant
 parameter_list|()
@@ -16720,7 +16522,6 @@ block|}
 comment|/** Tests window aggregate ORDER BY constant. Unlike in SELECT ... ORDER BY,    * the constant does not mean a column. It means a constant, therefore the    * order of the rows is not changed. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWinAggOrderByConstant
 parameter_list|()
@@ -16768,7 +16569,6 @@ block|}
 comment|/** Tests WHERE comparing a nullable integer with an integer literal. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWhereNullable
 parameter_list|()
@@ -16803,7 +16603,6 @@ block|}
 comment|/** Test case for rewriting queries that contain {@code GROUP_ID()} function.    * For instance, the query    * {@code    *    select deptno, group_id() as gid    *    from scott.emp    *    group by grouping sets(deptno, deptno, deptno, (), ())    * }    * will be converted into:    * {@code    *    select deptno, 0 as gid    *    from scott.emp group by grouping sets(deptno, ())    *    union all    *    select deptno, 1 as gid    *    from scott.emp group by grouping sets(deptno, ())    *    union all    *    select deptno, 2 as gid    *    from scott.emp group by grouping sets(deptno)    * }    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGroupId
 parameter_list|()
@@ -16881,7 +16680,6 @@ block|}
 comment|/** Tests CALCITE-980: Not (C='a' or C='b') causes NPE */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWhereOrAndNullable
 parameter_list|()
@@ -16926,7 +16724,6 @@ literal|" Cannot compare types \"int\" and \"java.lang.String\"\n"
 argument_list|)
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testComparingIntAndString
 parameter_list|()
@@ -16976,7 +16773,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1015">[CALCITE-1015]    * OFFSET 0 causes AssertionError</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTrivialSort
 parameter_list|()
@@ -17043,7 +16839,6 @@ block|}
 comment|/** Tests the LIKE operator. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLike
 parameter_list|()
@@ -17082,7 +16877,6 @@ block|}
 comment|/** Tests array index. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testArrayIndexing
 parameter_list|()
@@ -17118,7 +16912,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testVarcharEquals
 parameter_list|()
@@ -17187,7 +16980,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1153">[CALCITE-1153]    * Invalid CAST when push JOIN down to Oracle</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinMismatchedVarchar
 parameter_list|()
@@ -17222,7 +17014,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testIntersectMismatchedVarchar
 parameter_list|()
@@ -17260,7 +17051,6 @@ block|}
 comment|/** Tests the NOT IN operator. Problems arose in code-generation because    * the column allows nulls. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNotIn
 parameter_list|()
@@ -17317,7 +17107,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNotInEmptyQuery
 parameter_list|()
@@ -17366,7 +17155,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNotInQuery
 parameter_list|()
@@ -17397,7 +17185,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNotInQueryWithNull
 parameter_list|()
@@ -17425,7 +17212,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTrim
 parameter_list|()
@@ -17509,7 +17295,6 @@ return|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExistsCorrelated
 parameter_list|()
@@ -17569,7 +17354,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNotExistsCorrelated
 parameter_list|()
@@ -17635,7 +17419,6 @@ block|}
 comment|/** Manual expansion of EXISTS in {@link #testNotExistsCorrelated()}. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNotExistsCorrelated2
 parameter_list|()
@@ -17700,7 +17483,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-313">[CALCITE-313]    * Query decorrelation fails</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinInCorrelatedSubQuery
 parameter_list|()
@@ -17765,7 +17547,6 @@ block|}
 comment|/** Tests a correlated scalar sub-query in the SELECT clause.    *    *<p>Note that there should be an extra row "empid=200; deptno=20;    * DNAME=null" but left join doesn't work.</p> */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testScalarSubQuery
 parameter_list|()
@@ -17819,7 +17600,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-559">[CALCITE-559]    * Correlated scalar sub-query in WHERE gives error</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinCorrelatedScalarSubQuery
 parameter_list|()
@@ -17882,7 +17662,6 @@ literal|"[CALCITE-685]"
 argument_list|)
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCorrelatedScalarSubQuery
 parameter_list|()
@@ -17962,7 +17741,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLeftJoin
 parameter_list|()
@@ -17995,7 +17773,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFullJoin
 parameter_list|()
@@ -18032,7 +17809,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRightJoin
 parameter_list|()
@@ -18068,7 +17844,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2464">[CALCITE-2464]    * Allow to set nullability for columns of structured types</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLeftJoinWhereStructIsNotNull
 parameter_list|()
@@ -18102,7 +17877,6 @@ block|}
 comment|/** Various queries against EMP and DEPT, in particular involving composite    * join conditions in various flavors of outer join. Results are verified    * against MySQL (except full join, which MySQL does not support). */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testVariousOuter
 parameter_list|()
@@ -18207,7 +17981,6 @@ return|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testScalarSubQueryUncorrelated
 parameter_list|()
@@ -18242,7 +18015,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testScalarSubQueryInCase
 parameter_list|()
@@ -18303,7 +18075,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testScalarSubQueryInCase2
 parameter_list|()
@@ -18345,7 +18116,6 @@ block|}
 comment|/** Tests the TABLES table in the information schema. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMetaTables
 parameter_list|()
@@ -18409,7 +18179,6 @@ block|}
 comment|/** Tests that {@link java.sql.Statement#setMaxRows(int)} is honored. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSetMaxRows
 parameter_list|()
@@ -18555,7 +18324,6 @@ block|}
 comment|/** Tests a {@link PreparedStatement} with parameters. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPreparedStatement
 parameter_list|()
@@ -18845,7 +18613,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2061">[CALCITE-2061]    * Dynamic parameters in offset/fetch</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPreparedOffsetFetch
 parameter_list|()
@@ -19064,7 +18831,6 @@ block|}
 comment|/** Tests a JDBC connection that provides a model (a single schema based on    * a JDBC database). */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testModel
 parameter_list|()
@@ -19090,7 +18856,6 @@ block|}
 comment|/** Tests a JSON model with a comment. Not standard JSON, but harmless to    * allow Jackson's comments extension.    *    *<p>Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-160">[CALCITE-160]    * Allow comments in schema definitions</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testModelWithComment
 parameter_list|()
@@ -19147,7 +18912,6 @@ literal|"until JdbcSchema can define materialized views"
 argument_list|)
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testModelWithMaterializedView
 parameter_list|()
@@ -19215,7 +18979,6 @@ block|}
 comment|/** Tests a JDBC connection that provides a model that contains custom    * tables. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testModelCustomTable
 parameter_list|()
@@ -19286,7 +19049,6 @@ block|}
 comment|/** Tests a JDBC connection that provides a model that contains custom    * tables. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testModelCustomTable2
 parameter_list|()
@@ -19300,7 +19062,6 @@ block|}
 comment|/** Tests a JDBC connection that provides a model that contains custom    * tables. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testModelCustomTableArrayRowSingleColumn
 parameter_list|()
@@ -19314,7 +19075,6 @@ block|}
 comment|/** Tests a JDBC connection that provides a model that contains custom    * tables. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testModelCustomTableIntegerRowSingleColumn
 parameter_list|()
@@ -19407,7 +19167,6 @@ block|}
 comment|/** Tests a JDBC connection that provides a model that contains a custom    * schema. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testModelCustomSchema
 parameter_list|()
@@ -19537,7 +19296,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1360">[CALCITE-1360]    * Custom schema in file in current directory</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCustomSchemaInFileInPwd
 parameter_list|()
@@ -19734,7 +19492,6 @@ block|}
 comment|/** Connects to a custom schema without writing a model.    *    *<p>Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1259">[CALCITE-1259]    * Allow connecting to a single schema without writing a model</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCustomSchemaDirectConnection
 parameter_list|()
@@ -19918,7 +19675,6 @@ block|}
 comment|/** Connects to a JDBC schema without writing a model. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJdbcSchemaDirectConnection
 parameter_list|()
@@ -20158,7 +19914,6 @@ block|}
 comment|/** Connects to a map schema without writing a model. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMapSchemaDirectConnection
 parameter_list|()
@@ -20269,7 +20024,6 @@ block|}
 comment|/** Tests that an immutable schema in a model cannot contain a view. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testModelImmutableSchemaCannotContainView
 parameter_list|()
@@ -20473,7 +20227,6 @@ block|}
 comment|/** Tests a JDBC connection that provides a model that contains a view. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testModelView
 parameter_list|()
@@ -20833,7 +20586,6 @@ end_comment
 begin_function
 unit|@
 name|Test
-specifier|public
 name|void
 name|testOrderByView
 parameter_list|()
@@ -20901,7 +20653,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelfReferentialView
 parameter_list|()
@@ -20941,7 +20692,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelfReferentialView2
 parameter_list|()
@@ -21159,7 +20909,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAutomaticTemporaryTable
 parameter_list|()
@@ -21320,7 +21069,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExplain
 parameter_list|()
@@ -21593,7 +21341,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDifferentTypesSameFields
 parameter_list|()
@@ -21701,7 +21448,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCurrentTimestamp
 parameter_list|()
@@ -21881,7 +21627,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGetTimestamp
 parameter_list|()
@@ -22892,7 +22637,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMonthName
 parameter_list|()
@@ -23332,7 +23076,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGetDate
 parameter_list|()
@@ -23440,7 +23183,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGetDateAsString
 parameter_list|()
@@ -23477,7 +23219,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGetTimestampObject
 parameter_list|()
@@ -23581,7 +23322,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRowComparison
 parameter_list|()
@@ -23620,7 +23360,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTimestampEqualsComparison
 parameter_list|()
@@ -23672,7 +23411,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUnicode
 parameter_list|()
@@ -23801,7 +23539,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLexMySQL
 parameter_list|()
@@ -23981,7 +23718,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLexMySQLANSI
 parameter_list|()
@@ -24161,7 +23897,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLexSqlServer
 parameter_list|()
@@ -24341,7 +24076,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLexOracle
 parameter_list|()
@@ -24524,7 +24258,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLexJava
 parameter_list|()
@@ -24704,7 +24437,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLexOracleAsJava
 parameter_list|()
@@ -24926,7 +24658,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLexCaseInsensitive
 parameter_list|()
@@ -25062,7 +24793,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLexCaseInsensitiveFindsNonexistentTable
 parameter_list|()
@@ -25121,7 +24851,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLexCaseInsensitiveSubQueryField
 parameter_list|()
@@ -25164,7 +24893,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLexCaseInsensitiveTableAlias
 parameter_list|()
@@ -25201,7 +24929,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFunOracle
 parameter_list|()
@@ -25274,7 +25001,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFunSpatial
 parameter_list|()
@@ -25351,7 +25077,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLateralJoin
 parameter_list|()
@@ -25407,7 +25132,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExpandViewWithLateralJoin
 parameter_list|()
@@ -25459,7 +25183,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testHook
 parameter_list|()
@@ -25607,7 +25330,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDialect
 parameter_list|()
@@ -25706,7 +25428,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExplicitImplicitSchemaSameName
 parameter_list|()
@@ -25829,7 +25550,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSimpleCalciteSchema
 parameter_list|()
@@ -25985,7 +25705,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSimpleCalciteSchemaWithView
 parameter_list|()
@@ -26271,7 +25990,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSchemaCaching
 parameter_list|()
@@ -26994,7 +26712,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCaseSensitiveSubQueryOracle
 parameter_list|()
@@ -27055,7 +26772,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUnquotedCaseSensitiveSubQueryMySql
 parameter_list|()
@@ -27164,7 +26880,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testQuotedCaseSensitiveSubQueryMySql
 parameter_list|()
@@ -27273,7 +26988,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUnquotedCaseSensitiveSubQuerySqlServer
 parameter_list|()
@@ -27310,7 +27024,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testQuotedCaseSensitiveSubQuerySqlServer
 parameter_list|()
@@ -27351,7 +27064,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPrimitiveColumnsWithNullValues
 parameter_list|()
@@ -27662,7 +27374,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUpdateBind
 parameter_list|()
@@ -28063,7 +27774,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNullableNumericColumnInCloneSchema
 parameter_list|()
@@ -28235,7 +27945,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggMultipleMeasures
 parameter_list|()
@@ -28517,7 +28226,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMinAggWithDouble
 parameter_list|()
@@ -28581,7 +28289,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWithinGroupClause1
 parameter_list|()
@@ -28625,7 +28332,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWithinGroupClause2
 parameter_list|()
@@ -28669,7 +28375,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWithinGroupClause3
 parameter_list|()
@@ -28709,7 +28414,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWithinGroupClause4
 parameter_list|()
@@ -28753,7 +28457,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWithinGroupClause5
 parameter_list|()
@@ -28787,7 +28490,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWithinGroupClause6
 parameter_list|()
@@ -28843,7 +28545,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAssignableTypeCast
 parameter_list|()
@@ -28900,7 +28601,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMatchSimple
 parameter_list|()
@@ -29007,7 +28707,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMatch
 parameter_list|()
@@ -29112,7 +28811,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJsonType
 parameter_list|()
@@ -29148,7 +28846,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJsonDepth
 parameter_list|()
@@ -29184,7 +28881,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJsonLength
 parameter_list|()
@@ -29220,7 +28916,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJsonPretty
 parameter_list|()
@@ -29256,7 +28951,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJsonKeys
 parameter_list|()
@@ -29294,7 +28988,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJsonRemove
 parameter_list|()
@@ -29324,7 +29017,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJsonStorageSize
 parameter_list|()
@@ -29364,7 +29056,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testQueryWithParameter
 parameter_list|()
@@ -29602,7 +29293,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSemiJoin
 parameter_list|()

@@ -326,7 +326,6 @@ comment|/**  * Tests based on {@code zips-min.json} dataset. Runs automatically 
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|GeodeZipsTest
 extends|extends
@@ -537,7 +536,6 @@ return|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGroupByView
 parameter_list|()
@@ -621,7 +619,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGroupByRaw
 parameter_list|()
@@ -653,7 +650,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGroupByRawWithAliases
 parameter_list|()
@@ -685,7 +681,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMaxRaw
 parameter_list|()
@@ -769,7 +764,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectLocItem
 parameter_list|()
@@ -803,7 +797,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testItemPredicate
 parameter_list|()
@@ -896,7 +889,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWhereWithOrForStringField
 parameter_list|()
@@ -936,7 +928,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWhereWithOrForNumericField
 parameter_list|()
@@ -969,7 +960,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWhereWithOrForNestedNumericField
 parameter_list|()
@@ -1009,7 +999,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWhereWithOrForLargeValueList
 parameter_list|()
@@ -1202,7 +1191,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSqlSingleStringWhereFilter
 parameter_list|()

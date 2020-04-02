@@ -1417,7 +1417,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testParseAndConvert
 parameter_list|()
@@ -1444,7 +1443,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testParseIdentiferMaxLengthWithDefault
 parameter_list|()
@@ -1491,7 +1489,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testParseIdentiferMaxLengthWithIncreased
 parameter_list|()
@@ -1532,7 +1529,6 @@ block|}
 comment|/** Unit test that parses, validates and converts the query using    * order by and offset. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testParseAndConvertWithOrderByAndOffset
 parameter_list|()
@@ -1595,7 +1591,6 @@ return|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testParseFails
 parameter_list|()
@@ -1653,7 +1648,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testValidateFails
 parameter_list|()
@@ -1746,7 +1740,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testValidateUserDefinedAggregate
 parameter_list|()
@@ -1964,7 +1957,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3547">[CALCITE-3547]    * SqlValidatorException because Planner cannot find UDFs added to schema</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testValidateUserDefinedFunctionInSchema
 parameter_list|()
@@ -2205,7 +2197,6 @@ block|}
 comment|/** Tests that planner throws an error if you pass to    * {@link Planner#rel(org.apache.calcite.sql.SqlNode)}    * a {@link org.apache.calcite.sql.SqlNode} that has been parsed but not    * validated. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testConvertWithoutValidateFails
 parameter_list|()
@@ -2365,7 +2356,6 @@ block|}
 comment|/** Tests predicates that can be pulled-up from a UNION. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMetadataUnionPredicates
 parameter_list|()
@@ -2387,7 +2377,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-443">[CALCITE-443]    * getPredicates from a union is not correct</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMetadataUnionPredicates2
 parameter_list|()
@@ -2408,7 +2397,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMetadataUnionPredicates3
 parameter_list|()
@@ -2429,7 +2417,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMetadataUnionPredicates4
 parameter_list|()
@@ -2450,7 +2437,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMetadataUnionPredicates5
 parameter_list|()
@@ -2478,7 +2464,6 @@ block|}
 comment|/** Tests predicates that can be pulled-up from an Aggregate with    * {@code GROUP BY ()}. This form of Aggregate can convert an empty relation    * to a single-row relation, so it is not valid to pull up the predicate    * {@code false}. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMetadataAggregatePredicates
 parameter_list|()
@@ -2496,7 +2481,6 @@ block|}
 comment|/** Tests predicates that can be pulled-up from an Aggregate with a non-empty    * group key. The {@code false} predicate effectively means that the relation    * is empty, because no row can satisfy {@code false}. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMetadataAggregatePredicates2
 parameter_list|()
@@ -2523,7 +2507,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMetadataAggregatePredicates3
 parameter_list|()
@@ -2551,7 +2534,6 @@ block|}
 comment|/** Unit test that parses, validates, converts and plans. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPlan
 parameter_list|()
@@ -2673,7 +2655,6 @@ block|}
 comment|/** Unit test that parses, validates, converts and plans. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|trimEmptyUnion2
 parameter_list|()
@@ -2697,7 +2678,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|trimEmptyUnion31
 parameter_list|()
@@ -2710,7 +2690,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|trimEmptyUnion31withUnionMerge
 parameter_list|()
@@ -2798,7 +2777,6 @@ literal|" of subset [rel#67:Subset#6.ENUMERABLE.[]]"
 argument_list|)
 annotation|@
 name|Test
-specifier|public
 name|void
 name|trimEmptyUnion32
 parameter_list|()
@@ -2811,7 +2789,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|trimEmptyUnion32withUnionMerge
 parameter_list|()
@@ -3077,7 +3054,6 @@ literal|" than best cost {5.0 rows, 5.0 cpu, 0.0 io} of subset [rel#15:Subset#5.
 argument_list|)
 annotation|@
 name|Test
-specifier|public
 name|void
 name|trimEmptyUnion32viaRelBuidler
 parameter_list|()
@@ -3309,7 +3285,6 @@ block|}
 comment|/** Unit test that parses, validates, converts and    * plans for query using order by */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSortPlan
 parameter_list|()
@@ -3440,7 +3415,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2554">[CALCITE-2554]    * Enrich EnumerableHashJoin operator with order preserving information</a>.    *    *<p>Since the left input to the join is sorted, and this join preserves    * order, there shouldn't be any sort operator above the join.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRedundantSortOnJoinPlan
 parameter_list|()
@@ -3605,7 +3579,6 @@ block|}
 comment|/** Unit test that parses, validates, converts and    * plans for query using two duplicate order by.    * The duplicate order by should be removed by SqlToRelConverter. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDuplicateSortPlan
 parameter_list|()
@@ -3635,7 +3608,6 @@ block|}
 comment|/** Unit test that parses, validates, converts and    * plans for query using two duplicate order by.    * The duplicate order by should be removed by SqlToRelConverter. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDuplicateSortPlanWithExpr
 parameter_list|()
@@ -3664,7 +3636,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTwoSortRemoveInnerSort
 parameter_list|()
@@ -3694,7 +3665,6 @@ block|}
 comment|/** Tests that outer order by is not removed since window function    * might reorder the rows in-between */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDuplicateSortPlanWithOver
 parameter_list|()
@@ -3729,7 +3699,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDuplicateSortPlanWithRemovedOver
 parameter_list|()
@@ -3934,7 +3903,6 @@ block|}
 comment|/** Unit test that parses, validates, converts and    * plans for query using two duplicate order by.*/
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDuplicateSortPlanWORemoveSortRule
 parameter_list|()
@@ -4066,7 +4034,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3029">[CALCITE-3029]    * Java-oriented field type is wrongly forced to be NOT NULL after being converted to    * SQL-oriented</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInsertSourceRelTypeWithNullValues
 parameter_list|()
@@ -4156,7 +4123,6 @@ block|}
 comment|/** Unit test that parses, validates, converts and plans. Planner is    * provided with a list of RelTraitDefs to register. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPlanWithExplicitTraitDefs
 parameter_list|()
@@ -4313,7 +4279,6 @@ block|}
 comment|/** Unit test that calls {@link Planner#transform} twice. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPlanTransformTwice
 parameter_list|()
@@ -4454,7 +4419,6 @@ block|}
 comment|/** Unit test that calls {@link Planner#transform} twice with    *  rule name conflicts */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPlanTransformWithRuleNameConflicts
 parameter_list|()
@@ -4716,7 +4680,6 @@ block|}
 comment|/** Tests that Hive dialect does not generate "AS". */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testHiveDialect
 parameter_list|()
@@ -4789,7 +4752,6 @@ block|}
 comment|/** Unit test that calls {@link Planner#transform} twice,    * with different rule sets, with different conventions.    *    *<p>{@link org.apache.calcite.adapter.jdbc.JdbcConvention} is different    * from the typical convention in that it is not a singleton. Switching to    * a different instance causes problems unless planner state is wiped clean    * between calls to {@link Planner#transform}. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPlanTransformWithDiffRuleSetAndConvention
 parameter_list|()
@@ -4972,7 +4934,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPlan5WayJoin
 parameter_list|()
@@ -4988,7 +4949,6 @@ comment|// LoptOptimizeJoinRule disabled; takes about .4s
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPlan9WayJoin
 parameter_list|()
@@ -5004,7 +4964,6 @@ comment|// LoptOptimizeJoinRule enabled; takes about 0.04s
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPlan35WayJoin
 parameter_list|()
@@ -5025,7 +4984,6 @@ literal|"slow"
 argument_list|)
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPlan60WayJoin
 parameter_list|()
@@ -5243,7 +5201,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-435">[CALCITE-435]    * LoptOptimizeJoinRule incorrectly re-orders outer joins</a>.    *    *<p>Checks the    * {@link org.apache.calcite.rel.rules.LoptOptimizeJoinRule} on a query with a    * left outer join.    *    *<p>Specifically, tests that a relation (dependents) in an inner join    * cannot be pushed into an outer join (emps left join depts).    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testHeuristicLeftJoin
 parameter_list|()
@@ -5291,7 +5248,6 @@ block|}
 comment|/** It would probably be OK to transform    * {@code (emps right join depts) join dependents}    * to    * {@code (emps  join dependents) right join depts}    * but we do not currently allow it.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testHeuristicPushInnerJoin
 parameter_list|()
@@ -5341,7 +5297,6 @@ block|}
 comment|/** Tests that a relation (dependents) that is on the null-generating side of    * an outer join cannot be pushed into an inner join (emps join depts). */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testHeuristicRightJoin
 parameter_list|()
@@ -5498,7 +5453,6 @@ block|}
 comment|/** Plans a 3-table join query on the FoodMart schema. The ideal plan is not    * bushy, but nevertheless exercises the bushy-join heuristic optimizer. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAlmostBushy
 parameter_list|()
@@ -5560,7 +5514,6 @@ block|}
 comment|/** Plans a 4-table join query on the FoodMart schema.    *    *<p>The ideal plan is bushy:    *   customer x (product_class x  product x sales)    * which would be written    *   (customer x ((product_class x product) x sales))    * if you don't assume 'x' is left-associative. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testBushy
 parameter_list|()
@@ -5630,7 +5583,6 @@ block|}
 comment|/** Plans a 5-table join query on the FoodMart schema. The ideal plan is    * bushy: store x (customer x (product_class x product x sales)). */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testBushy5
 parameter_list|()
@@ -5704,7 +5656,6 @@ block|}
 comment|/** Tests the bushy join algorithm where one table does not join to    * anything. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testBushyCrossJoin
 parameter_list|()
@@ -5754,7 +5705,6 @@ block|}
 comment|/** Tests the bushy join algorithm against a query where not all tables have a    * join condition to the others. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testBushyCrossJoin2
 parameter_list|()
@@ -6292,7 +6242,6 @@ block|}
 comment|/**    * Test to determine whether de-correlation correctly removes Correlator.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOldJoinStyleDeCorrelation
 parameter_list|()
@@ -6639,7 +6588,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-569">[CALCITE-569]    * ArrayIndexOutOfBoundsException when deducing collation</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOrderByNonSelectColumn
 parameter_list|()
@@ -6854,7 +6802,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-648">[CALCITE-648]    * Update ProjectMergeRule description for new naming convention</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMergeProjectForceMode
 parameter_list|()
@@ -6912,7 +6859,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3376">[CALCITE-3376]    * VolcanoPlanner CannotPlanException: best rel is null even though there is    * an option with non-infinite cost</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCorrelatedJoinWithIdenticalInputs
 parameter_list|()
@@ -7148,7 +7094,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testView
 parameter_list|()
@@ -7190,7 +7135,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testViewOnView
 parameter_list|()

@@ -706,20 +706,13 @@ comment|/**  * Unit test for {@link VolcanoPlanner the optimizer}.  */
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|VolcanoPlannerTest
 block|{
-specifier|public
-name|VolcanoPlannerTest
-parameter_list|()
-block|{
-block|}
 comment|//~ Methods ----------------------------------------------------------------
 comment|/**    * Tests transformation of a leaf from NONE to PHYS.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTransformLeaf
 parameter_list|()
@@ -814,7 +807,6 @@ block|}
 comment|/**    * Tests transformation of a single+leaf from NONE to PHYS.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTransformSingleGood
 parameter_list|()
@@ -929,7 +921,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3118">[CALCITE-3118]    * VolcanoRuleCall should look at RelSubset rather than RelSet    * when checking child ordinal of a parent operand</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMatchedOperandsDifferent
 parameter_list|()
@@ -1132,7 +1123,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMultiInputsParentOpMatching
 parameter_list|()
@@ -1265,7 +1255,6 @@ block|}
 comment|/**    * Tests a rule that is fired once per subset (whereas most rules are fired    * once per rel in a set or rel in a subset)    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSubsetRule
 parameter_list|()
@@ -1534,7 +1523,6 @@ name|Disabled
 comment|// broken, because ReformedSingleRule matches child traits strictly
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTransformSingleReformed
 parameter_list|()
@@ -1882,7 +1870,6 @@ block|}
 comment|// NOTE:  this used to fail but now works
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWithRemoveTrivialProject
 parameter_list|()
@@ -1897,7 +1884,6 @@ comment|// NOTE:  this always worked; it's here as contrast to
 comment|// testWithRemoveTrivialProject()
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWithoutRemoveTrivialProject
 parameter_list|()
@@ -1914,7 +1900,6 @@ name|Disabled
 comment|// broken, because ReformedSingleRule matches child traits strictly
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRemoveSingleReformed
 parameter_list|()
@@ -2046,7 +2031,6 @@ block|}
 comment|/**    * This always worked (in contrast to testRemoveSingleReformed) because it    * uses a completely-physical pattern (requiring GoodSingleRule to fire    * first).    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRemoveSingleGood
 parameter_list|()
@@ -2191,7 +2175,6 @@ literal|"CALCITE-2592 EnumerableMergeJoin is never taken"
 argument_list|)
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMergeJoin
 parameter_list|()
@@ -2413,7 +2396,6 @@ annotation|@
 name|Disabled
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testListener
 parameter_list|()

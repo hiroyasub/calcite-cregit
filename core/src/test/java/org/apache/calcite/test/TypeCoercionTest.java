@@ -324,7 +324,6 @@ comment|/**  * Test cases for implicit type coercion. see {@link TypeCoercion} d
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|TypeCoercionTest
 extends|extends
@@ -456,7 +455,6 @@ specifier|private
 name|RelDataType
 name|varchar20Type
 decl_stmt|;
-specifier|public
 name|TypeCoercionTest
 parameter_list|()
 block|{
@@ -2050,7 +2048,6 @@ comment|//~ Tests --------------------------------------------------------------
 comment|/**    * Test case for {@link TypeCoercion#getTightestCommonType}.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGetTightestCommonType
 parameter_list|()
@@ -2627,7 +2624,6 @@ block|}
 comment|/** Test case for {@link TypeCoercion#getWiderTypeForTwo}    * and {@link TypeCoercion#getWiderTypeFor}. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWiderTypeFor
 parameter_list|()
@@ -2932,7 +2928,6 @@ block|}
 comment|/** Test set operations: UNION, INTERSECT, EXCEPT type coercion. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSetOperations
 parameter_list|()
@@ -3116,7 +3111,6 @@ block|}
 comment|/** Test arithmetic expressions with string type arguments. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testArithmeticExpressionsWithStrings
 parameter_list|()
@@ -3398,7 +3392,6 @@ block|}
 comment|/** Test cases for binary comparison expressions. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testBinaryComparisonCoercion
 parameter_list|()
@@ -3609,7 +3602,6 @@ block|}
 comment|/** Test case for case when expression and COALESCE operator. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCaseWhen
 parameter_list|()
@@ -3764,7 +3756,6 @@ block|}
 comment|/** Test case for {@link AbstractTypeCoercion#implicitCast} */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testImplicitCasts
 parameter_list|()
@@ -4766,7 +4757,6 @@ block|}
 comment|/** Test case for {@link TypeCoercion#builtinFunctionCoercion}. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testBuiltinFunctionCoercion
 parameter_list|()
@@ -4860,7 +4850,6 @@ block|}
 comment|/** Test case for {@link TypeCoercion#querySourceCoercion}. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testQuerySourceCoercion
 parameter_list|()

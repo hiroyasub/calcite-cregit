@@ -78,13 +78,11 @@ comment|/**  * Tests for a JDBC front-end and JDBC back-end where the processing
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|JdbcFrontJdbcBackLinqMiddleTest
 block|{
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTable
 parameter_list|()
@@ -126,7 +124,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWhere
 parameter_list|()
@@ -158,7 +155,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWhere2
 parameter_list|()
@@ -200,7 +196,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCase
 parameter_list|()
@@ -254,7 +249,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGroup
 parameter_list|()
@@ -300,7 +294,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGroupEmpty
 parameter_list|()
@@ -338,7 +331,6 @@ literal|"non-deterministic on JDK 1.7 vs 1.8"
 argument_list|)
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinTheta
 parameter_list|()
@@ -392,7 +384,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinGroupByEmpty
 parameter_list|()
@@ -450,7 +441,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinGroupByOrderBy
 parameter_list|()
@@ -516,7 +506,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCompositeGroupBy
 parameter_list|()
@@ -578,7 +567,6 @@ annotation|@
 name|Disabled
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDistinctCount
 parameter_list|()
@@ -648,7 +636,6 @@ annotation|@
 name|Disabled
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPlan
 parameter_list|()
@@ -700,7 +687,6 @@ annotation|@
 name|Disabled
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPlan2
 parameter_list|()
@@ -765,7 +751,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPlan3
 parameter_list|()

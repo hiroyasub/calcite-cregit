@@ -910,7 +910,6 @@ comment|/**  * Tests that determine whether trait propagation work in Volcano Pl
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|TraitPropagationTest
 block|{
@@ -995,7 +994,6 @@ argument_list|)
 decl_stmt|;
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOne
 parameter_list|()

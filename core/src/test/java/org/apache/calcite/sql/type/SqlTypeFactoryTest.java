@@ -248,13 +248,11 @@ comment|/**  * Test for {@link SqlTypeFactoryImpl}.  */
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|SqlTypeFactoryTest
 block|{
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLeastRestrictiveWithAny
 parameter_list|()
@@ -307,7 +305,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLeastRestrictiveWithNumbers
 parameter_list|()
@@ -360,7 +357,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLeastRestrictiveWithNullability
 parameter_list|()
@@ -427,7 +423,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2994">[CALCITE-2994]    * Least restrictive type among structs does not consider nullability</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLeastRestrictiveWithNullableStruct
 parameter_list|()
@@ -493,7 +488,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLeastRestrictiveWithNull
 parameter_list|()
@@ -560,7 +554,6 @@ block|}
 comment|/** Unit test for {@link SqlTypeUtil#comparePrecision(int, int)}    * and  {@link SqlTypeUtil#maxPrecision(int, int)}. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMaxPrecision
 parameter_list|()
@@ -645,7 +638,6 @@ block|}
 comment|/** Unit test for {@link ArraySqlType#getPrecedenceList()}. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testArrayPrecedenceList
 parameter_list|()
@@ -989,7 +981,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2464">[CALCITE-2464]    * Allow to set nullability for columns of structured types</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|createStructTypeWithNullability
 parameter_list|()
@@ -1117,7 +1108,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3429">[CALCITE-3429]    * AssertionError thrown for user-defined table function with map argument</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCreateTypeWithJavaMapType
 parameter_list|()

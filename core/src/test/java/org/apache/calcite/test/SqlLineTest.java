@@ -212,7 +212,6 @@ comment|/**  * Tests that we can invoke SqlLine on a Calcite connection.  */
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|SqlLineTest
 block|{
@@ -547,7 +546,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSqlLine
 parameter_list|()

@@ -264,13 +264,11 @@ comment|/**  * Test for {@link org.apache.calcite.adapter.enumerable.EnumerableR
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|TypeFinderTest
 block|{
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testConstantExpression
 parameter_list|()
@@ -308,7 +306,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testConvertExpression
 parameter_list|()
@@ -362,7 +359,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFunctionExpression1
 parameter_list|()
@@ -444,7 +440,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFunctionExpression2
 parameter_list|()

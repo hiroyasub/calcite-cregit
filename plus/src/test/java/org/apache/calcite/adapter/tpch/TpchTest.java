@@ -227,7 +227,6 @@ name|Tag
 argument_list|(
 literal|"slow"
 argument_list|)
-specifier|public
 class|class
 name|TpchTest
 block|{
@@ -1652,7 +1651,6 @@ argument_list|)
 decl_stmt|;
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRegion
 parameter_list|()
@@ -1681,7 +1679,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLineItem
 parameter_list|()
@@ -1702,7 +1699,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOrders
 parameter_list|()
@@ -1729,7 +1725,6 @@ literal|"planning succeeds, but gives OutOfMemoryError during execution"
 argument_list|)
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDecorrelateScalarAggregate
 parameter_list|()
@@ -1770,7 +1765,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCustomer
 parameter_list|()
@@ -1814,7 +1808,6 @@ block|}
 comment|/** Tests the customer table with scale factor 5. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCustomer5
 parameter_list|()
@@ -1835,7 +1828,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testQuery01
 parameter_list|()
@@ -1853,7 +1845,6 @@ literal|"Infinite planning"
 argument_list|)
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testQuery02
 parameter_list|()
@@ -1871,7 +1862,6 @@ literal|"Infinite planning"
 argument_list|)
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testQuery02Conversion
 parameter_list|()
@@ -1918,7 +1908,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testQuery03
 parameter_list|()
@@ -1936,7 +1925,6 @@ literal|"NoSuchMethodException: SqlFunctions.lt(Date, Date)"
 argument_list|)
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testQuery04
 parameter_list|()
@@ -1954,7 +1942,6 @@ literal|"OutOfMemoryError"
 argument_list|)
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testQuery05
 parameter_list|()
@@ -1967,7 +1954,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testQuery06
 parameter_list|()
@@ -1980,7 +1966,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testQuery07
 parameter_list|()
@@ -2000,7 +1985,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testQuery08
 parameter_list|()
@@ -2018,7 +2002,6 @@ literal|"no method found"
 argument_list|)
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testQuery09
 parameter_list|()
@@ -2031,7 +2014,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testQuery10
 parameter_list|()
@@ -2049,7 +2031,6 @@ literal|"CannotPlanException"
 argument_list|)
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testQuery11
 parameter_list|()
@@ -2067,7 +2048,6 @@ literal|"NoSuchMethodException: SqlFunctions.lt(Date, Date)"
 argument_list|)
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testQuery12
 parameter_list|()
@@ -2085,7 +2065,6 @@ literal|"CannotPlanException"
 argument_list|)
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testQuery13
 parameter_list|()
@@ -2098,7 +2077,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testQuery14
 parameter_list|()
@@ -2116,7 +2094,6 @@ literal|"AssertionError"
 argument_list|)
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testQuery15
 parameter_list|()
@@ -2129,7 +2106,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testQuery16
 parameter_list|()
@@ -2142,7 +2118,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testQuery17
 parameter_list|()
@@ -2155,7 +2130,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testQuery18
 parameter_list|()
@@ -2182,7 +2156,6 @@ name|MINUTES
 argument_list|)
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testQuery19
 parameter_list|()
@@ -2195,7 +2168,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testQuery20
 parameter_list|()
@@ -2208,7 +2180,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testQuery21
 parameter_list|()
@@ -2226,7 +2197,6 @@ literal|"IllegalArgumentException during decorrelation"
 argument_list|)
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testQuery22
 parameter_list|()

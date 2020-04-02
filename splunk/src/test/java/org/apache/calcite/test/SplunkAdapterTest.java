@@ -228,7 +228,6 @@ comment|/**  * Unit test of the Calcite adapter for Splunk.  */
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|SplunkAdapterTest
 block|{
@@ -366,7 +365,6 @@ block|}
 comment|/**    * Tests the vanity driver.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testVanityDriver
 parameter_list|()
@@ -440,7 +438,6 @@ block|}
 comment|/**    * Tests the vanity driver with properties in the URL.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testVanityDriverArgsInUrl
 parameter_list|()
@@ -605,7 +602,6 @@ comment|// method (GET | POST)
 comment|/**    * Reads from a table.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelect
 parameter_list|()
@@ -683,7 +679,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectDistinct
 parameter_list|()
@@ -796,7 +791,6 @@ block|}
 comment|/** "status" is not a built-in column but we know it has some values in the    * test data. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectNonBuiltInColumn
 parameter_list|()
@@ -892,7 +886,6 @@ literal|"cannot plan due to CAST in ON clause"
 argument_list|)
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinToJdbc
 parameter_list|()
@@ -917,7 +910,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGroupBy
 parameter_list|()

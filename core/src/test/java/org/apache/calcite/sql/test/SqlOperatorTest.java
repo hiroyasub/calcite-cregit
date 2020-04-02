@@ -52,7 +52,6 @@ comment|/**  * Concrete subclass of {@link SqlOperatorBaseTest} which checks aga
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|SqlOperatorTest
 extends|extends
@@ -75,7 +74,6 @@ name|getTester
 argument_list|()
 decl_stmt|;
 comment|/**    * Creates a SqlOperatorTest.    */
-specifier|public
 name|SqlOperatorTest
 parameter_list|()
 block|{

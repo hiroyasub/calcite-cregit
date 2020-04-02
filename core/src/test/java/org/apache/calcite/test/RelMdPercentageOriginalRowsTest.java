@@ -78,14 +78,12 @@ comment|/** Test case for CALCITE-2894 */
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|RelMdPercentageOriginalRowsTest
 block|{
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2894">[CALCITE-2894]    * NullPointerException thrown by RelMdPercentageOriginalRows when explaining    * plan with all attributes</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExplainAllAttributesSemiJoinUnionCorrelate
 parameter_list|()

@@ -124,7 +124,6 @@ comment|/**  * Test of {@link org.apache.calcite.sql.type.SqlTypeUtil}.  */
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|SqlTypeUtilTest
 block|{
@@ -139,7 +138,6 @@ argument_list|()
 decl_stmt|;
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTypesIsSameFamilyWithNumberTypes
 parameter_list|()
@@ -243,7 +241,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTypesIsSameFamilyWithCharTypes
 parameter_list|()
@@ -323,7 +320,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTypesIsSameFamilyWithInconvertibleTypes
 parameter_list|()
@@ -403,7 +399,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTypesIsSameFamilyWithNumberStructTypes
 parameter_list|()
@@ -521,7 +516,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTypesIsSameFamilyWithCharStructTypes
 parameter_list|()
@@ -631,7 +625,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTypesIsSameFamilyWithInconvertibleStructTypes
 parameter_list|()
@@ -781,7 +774,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testModifyTypeCoercionMappings
 parameter_list|()

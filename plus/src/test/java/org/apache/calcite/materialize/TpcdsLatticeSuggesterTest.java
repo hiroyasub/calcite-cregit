@@ -388,7 +388,6 @@ comment|/**  * Unit tests for {@link LatticeSuggester}.  */
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|TpcdsLatticeSuggesterTest
 block|{
@@ -833,7 +832,6 @@ literal|"Throws NPE with both Maven and Gradle"
 argument_list|)
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTpcdsAll
 parameter_list|()
@@ -853,7 +851,6 @@ literal|"Throws NPE with both Maven and Gradle"
 argument_list|)
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTpcdsAllEvolve
 parameter_list|()

@@ -36,13 +36,11 @@ comment|/**  * Embodiment of {@link org.apache.calcite.sql.test.SqlOperatorBaseT
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|CalciteSqlOperatorTest
 extends|extends
 name|SqlOperatorBaseTest
 block|{
-specifier|public
 name|CalciteSqlOperatorTest
 parameter_list|()
 block|{

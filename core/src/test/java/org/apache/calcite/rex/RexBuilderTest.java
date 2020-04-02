@@ -472,7 +472,6 @@ comment|/**  * Test for {@link RexBuilder}.  */
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|RexBuilderTest
 block|{
@@ -563,7 +562,6 @@ block|}
 comment|/**    * Test RexBuilder.ensureType()    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testEnsureTypeWithAny
 parameter_list|()
@@ -645,7 +643,6 @@ block|}
 comment|/**    * Test RexBuilder.ensureType()    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testEnsureTypeWithItself
 parameter_list|()
@@ -727,7 +724,6 @@ block|}
 comment|/**    * Test RexBuilder.ensureType()    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testEnsureTypeWithDifference
 parameter_list|()
@@ -852,7 +848,6 @@ decl_stmt|;
 comment|/** Tests {@link RexBuilder#makeTimestampLiteral(TimestampString, int)}. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTimestampLiteral
 parameter_list|()
@@ -1601,7 +1596,6 @@ block|}
 comment|/** Tests    * {@link RexBuilder#makeTimestampWithLocalTimeZoneLiteral(TimestampString, int)}. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTimestampWithLocalTimeZoneLiteral
 parameter_list|()
@@ -2237,7 +2231,6 @@ block|}
 comment|/** Tests {@link RexBuilder#makeTimeLiteral(TimeString, int)}. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTimeLiteral
 parameter_list|()
@@ -2980,7 +2973,6 @@ block|}
 comment|/** Tests {@link RexBuilder#makeDateLiteral(DateString)}. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDateLiteral
 parameter_list|()
@@ -3237,7 +3229,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2306">[CALCITE-2306]    * AssertionError in {@link RexLiteral#getValue3} with null literal of type    * DECIMAL</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDecimalLiteral
 parameter_list|()
@@ -3305,7 +3296,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3587">[CALCITE-3587]    * RexBuilder may lose decimal fraction for creating literal with DECIMAL type</a>.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDecimal
 parameter_list|()
@@ -3390,7 +3380,6 @@ block|}
 comment|/** Tests {@link DateString} year range. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDateStringYearError
 parameter_list|()
@@ -3483,7 +3472,6 @@ block|}
 comment|/** Tests {@link DateString} month range. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDateStringMonthError
 parameter_list|()
@@ -3576,7 +3564,6 @@ block|}
 comment|/** Tests {@link DateString} day range. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDateStringDayError
 parameter_list|()
@@ -3688,7 +3675,6 @@ block|}
 comment|/** Tests {@link TimeString} hour range. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTimeStringHourError
 parameter_list|()
@@ -3821,7 +3807,6 @@ block|}
 comment|/** Tests {@link TimeString} minute range. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTimeStringMinuteError
 parameter_list|()
@@ -3914,7 +3899,6 @@ block|}
 comment|/** Tests {@link TimeString} second range. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTimeStringSecondError
 parameter_list|()
@@ -4052,7 +4036,6 @@ block|}
 comment|/**    * Test string literal encoding.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testStringLiteral
 parameter_list|()
@@ -4386,7 +4369,6 @@ block|}
 comment|/** Tests {@link RexBuilder#makeExactLiteral(java.math.BigDecimal)}. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testBigDecimalLiteral
 parameter_list|()
@@ -4481,7 +4463,6 @@ block|}
 comment|/** Tests {@link RexCopier#visitOver(RexOver)} */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCopyOver
 parameter_list|()
@@ -4843,7 +4824,6 @@ block|}
 comment|/** Tests {@link RexCopier#visitCorrelVariable(RexCorrelVariable)} */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCopyCorrelVariable
 parameter_list|()
@@ -4995,7 +4975,6 @@ block|}
 comment|/** Tests {@link RexCopier#visitLocalRef(RexLocalRef)} */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCopyLocalRef
 parameter_list|()
@@ -5141,7 +5120,6 @@ block|}
 comment|/** Tests {@link RexCopier#visitDynamicParam(RexDynamicParam)} */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCopyDynamicParam
 parameter_list|()
@@ -5288,7 +5266,6 @@ block|}
 comment|/** Tests {@link RexCopier#visitRangeRef(RexRangeRef)} */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCopyRangeRef
 parameter_list|()

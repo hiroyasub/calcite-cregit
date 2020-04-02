@@ -142,13 +142,11 @@ comment|/**  * Tests for a linq4j front-end and JDBC back-end.  */
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|LinqFrontJdbcBackTest
 block|{
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTableWhere
 parameter_list|()

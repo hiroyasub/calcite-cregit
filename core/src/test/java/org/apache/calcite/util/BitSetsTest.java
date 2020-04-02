@@ -172,14 +172,12 @@ comment|/**  * Unit test for {@link org.apache.calcite.util.BitSets}.  */
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|BitSetsTest
 block|{
 comment|/**    * Tests the method    * {@link org.apache.calcite.util.BitSets#toIter(java.util.BitSet)}.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testToIterBitSet
 parameter_list|()
@@ -324,7 +322,6 @@ block|}
 comment|/**    * Tests the method    * {@link org.apache.calcite.util.BitSets#toList(java.util.BitSet)}.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testToListBitSet
 parameter_list|()
@@ -410,7 +407,6 @@ block|}
 comment|/**    * Tests the method {@link org.apache.calcite.util.BitSets#of(int...)}.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testBitSetOf
 parameter_list|()
@@ -470,7 +466,6 @@ block|}
 comment|/**    * Tests the method {@link org.apache.calcite.util.BitSets#range(int, int)}.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testBitSetsRange
 parameter_list|()
@@ -562,7 +557,6 @@ block|}
 comment|/**    * Tests the method    * {@link org.apache.calcite.util.BitSets#toArray(java.util.BitSet)}.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testBitSetsToArray
 parameter_list|()
@@ -630,7 +624,6 @@ block|}
 comment|/**    * Tests the method    * {@link org.apache.calcite.util.BitSets#union(java.util.BitSet, java.util.BitSet...)}.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testBitSetsUnion
 parameter_list|()
@@ -743,7 +736,6 @@ block|}
 comment|/**    * Tests the method    * {@link org.apache.calcite.util.BitSets#contains(java.util.BitSet, java.util.BitSet)}.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testBitSetsContains
 parameter_list|()
@@ -971,7 +963,6 @@ block|}
 comment|/**    * Tests the method    * {@link org.apache.calcite.util.BitSets#of(ImmutableIntList)}.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testBitSetOfImmutableIntList
 parameter_list|()
@@ -1046,7 +1037,6 @@ block|}
 comment|/**    * Tests the method    * {@link org.apache.calcite.util.BitSets#previousClearBit(java.util.BitSet, int)}.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPreviousClearBit
 parameter_list|()
@@ -1291,7 +1281,6 @@ block|}
 comment|/**    * Tests the method {@link BitSets#closure(java.util.SortedMap)}    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testClosure
 parameter_list|()

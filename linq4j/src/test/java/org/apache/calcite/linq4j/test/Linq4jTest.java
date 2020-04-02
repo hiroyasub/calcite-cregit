@@ -875,7 +875,6 @@ literal|1
 decl_stmt|;
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelect
 parameter_list|()
@@ -914,7 +913,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWhere
 parameter_list|()
@@ -964,7 +962,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWhereIndexed
 parameter_list|()
@@ -1019,7 +1016,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectMany
 parameter_list|()
@@ -1078,7 +1074,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCount
 parameter_list|()
@@ -1107,7 +1102,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCountPredicate
 parameter_list|()
@@ -1147,7 +1141,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLongCount
 parameter_list|()
@@ -1176,7 +1169,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLongCountPredicate
 parameter_list|()
@@ -1216,7 +1208,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAllPredicate
 parameter_list|()
@@ -1282,7 +1273,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAny
 parameter_list|()
@@ -1327,7 +1317,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAnyPredicate
 parameter_list|()
@@ -1411,7 +1400,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAverageSelector
 parameter_list|()
@@ -1436,7 +1424,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMin
 parameter_list|()
@@ -1467,7 +1454,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMinSelector
 parameter_list|()
@@ -1495,7 +1481,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMinSelector2
 parameter_list|()
@@ -1520,7 +1505,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMax
 parameter_list|()
@@ -1551,7 +1535,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMaxSelector
 parameter_list|()
@@ -1579,7 +1562,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMaxSelector2
 parameter_list|()
@@ -1604,7 +1586,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregate
 parameter_list|()
@@ -1665,7 +1646,6 @@ end_class
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testToMap
 parameter_list|()
@@ -1724,7 +1704,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testToMapWithComparer
 parameter_list|()
@@ -1891,7 +1870,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testToMap2
 parameter_list|()
@@ -1947,7 +1925,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testToMap2WithComparer
 parameter_list|()
@@ -2147,7 +2124,6 @@ end_expr_stmt
 begin_function
 unit|}    @
 name|Test
-specifier|public
 name|void
 name|testToLookup
 parameter_list|()
@@ -2253,7 +2229,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testToLookupSelector
 parameter_list|()
@@ -2460,7 +2435,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testContains
 parameter_list|()
@@ -2558,7 +2532,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testContainsWithEqualityComparer
 parameter_list|()
@@ -2727,7 +2700,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFirst
 parameter_list|()
@@ -3029,7 +3001,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFirstPredicate1
 parameter_list|()
@@ -3194,7 +3165,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFirstOrDefault
 parameter_list|()
@@ -3288,7 +3258,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFirstOrDefaultPredicate1
 parameter_list|()
@@ -3435,7 +3404,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSingle
 parameter_list|()
@@ -3586,7 +3554,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSingleOrDefault
 parameter_list|()
@@ -3701,7 +3668,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSinglePredicate1
 parameter_list|()
@@ -4001,7 +3967,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSingleOrDefaultPredicate1
 parameter_list|()
@@ -4234,7 +4199,6 @@ literal|"UnnecessaryBoxing"
 argument_list|)
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testIdentityEqualityComparer
 parameter_list|()
@@ -4332,7 +4296,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectorEqualityComparer
 parameter_list|()
@@ -4572,7 +4535,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testToLookupSelectorComparer
 parameter_list|()
@@ -4768,7 +4730,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGroupBy
 parameter_list|()
@@ -4865,7 +4826,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregate2
 parameter_list|()
@@ -4942,7 +4902,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testEmptyEnumerable
 parameter_list|()
@@ -5016,7 +4975,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSingletonEnumerable
 parameter_list|()
@@ -5118,7 +5076,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSingletonEnumerator
 parameter_list|()
@@ -5182,7 +5139,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSingletonNullEnumerator
 parameter_list|()
@@ -5242,7 +5198,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTransformEnumerator
 parameter_list|()
@@ -5428,7 +5383,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCast
 parameter_list|()
@@ -5491,7 +5445,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testIterableCast
 parameter_list|()
@@ -5698,7 +5651,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOfType
 parameter_list|()
@@ -5761,7 +5713,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testIterableOfType
 parameter_list|()
@@ -5934,7 +5885,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testConcat
 parameter_list|()
@@ -5973,7 +5923,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUnion
 parameter_list|()
@@ -6022,7 +5971,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testIntersect
 parameter_list|()
@@ -6085,7 +6033,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testIntersectAll
 parameter_list|()
@@ -6158,7 +6105,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExcept
 parameter_list|()
@@ -6221,7 +6167,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExceptAll
 parameter_list|()
@@ -6299,7 +6244,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDistinct
 parameter_list|()
@@ -6363,7 +6307,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDistinctWithEqualityComparer
 parameter_list|()
@@ -6468,7 +6411,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGroupJoin
 parameter_list|()
@@ -6609,7 +6551,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGroupJoinWithComparer
 parameter_list|()
@@ -6782,7 +6723,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoin
 parameter_list|()
@@ -6873,7 +6813,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLeftJoin
 parameter_list|()
@@ -6981,7 +6920,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRightJoin
 parameter_list|()
@@ -7097,7 +7035,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFullJoin
 parameter_list|()
@@ -7215,7 +7152,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|cartesianProductWithReset
 parameter_list|()
@@ -7387,7 +7323,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinCartesianProduct
 parameter_list|()
@@ -7456,7 +7391,6 @@ literal|"unchecked"
 argument_list|)
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCartesianProductEnumerator
 parameter_list|()
@@ -7815,7 +7749,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAsQueryable
 parameter_list|()
@@ -8101,7 +8034,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTake
 parameter_list|()
@@ -8210,7 +8142,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTakeEnumerable
 parameter_list|()
@@ -8323,7 +8254,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTakeQueryable
 parameter_list|()
@@ -8410,7 +8340,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTakeEnumerableZeroOrNegativeSize
 parameter_list|()
@@ -8472,7 +8401,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTakeQueryableZeroOrNegativeSize
 parameter_list|()
@@ -8540,7 +8468,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTakeEnumerableGreaterThanLength
 parameter_list|()
@@ -8639,7 +8566,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTakeQueryableGreaterThanLength
 parameter_list|()
@@ -8738,7 +8664,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTakeWhileEnumerablePredicate
 parameter_list|()
@@ -8820,7 +8745,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTakeWhileEnumerableFunction
 parameter_list|()
@@ -8936,7 +8860,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTakeWhileQueryableFunctionExpressionPredicate
 parameter_list|()
@@ -9071,7 +8994,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTakeWhileN
 parameter_list|()
@@ -9218,7 +9140,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTakeWhileNNoMatch
 parameter_list|()
@@ -9293,7 +9214,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSkip
 parameter_list|()
@@ -9588,7 +9508,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOrderBy
 parameter_list|()
@@ -9629,7 +9548,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOrderByComparator
 parameter_list|()
@@ -9679,7 +9597,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOrderByInSeries
 parameter_list|()
@@ -9725,7 +9642,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOrderByDescending
 parameter_list|()
@@ -9765,7 +9681,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testReverse
 parameter_list|()
@@ -9803,7 +9718,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testList0
 parameter_list|()
@@ -9914,7 +9828,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testList
 parameter_list|()
@@ -10091,7 +10004,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testList2
 parameter_list|()
@@ -10278,7 +10190,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDefaultIfEmpty
 parameter_list|()
@@ -10440,7 +10351,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDefaultIfEmpty2
 parameter_list|()
@@ -10608,7 +10518,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testElementAt
 parameter_list|()
@@ -10695,7 +10604,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testElementAtWithoutList
 parameter_list|()
@@ -10787,7 +10695,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testElementAtOrDefault
 parameter_list|()
@@ -10852,7 +10759,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testElementAtOrDefaultWithoutList
 parameter_list|()
@@ -10944,7 +10850,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLast
 parameter_list|()
@@ -11021,7 +10926,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLastWithoutList
 parameter_list|()
@@ -11070,7 +10974,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLastOrDefault
 parameter_list|()
@@ -11136,7 +11039,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLastWithPredicate
 parameter_list|()
@@ -11263,7 +11165,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLastOrDefaultWithPredicate
 parameter_list|()
@@ -11368,7 +11269,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectManyWithIndexableSelector
 parameter_list|()
@@ -11478,7 +11378,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectManyWithResultSelector
 parameter_list|()
@@ -11554,7 +11453,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectManyWithIndexableSelectorAndResultSelector
 parameter_list|()
@@ -11678,7 +11576,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSequenceEqual
 parameter_list|()
@@ -11873,7 +11770,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSequenceEqualWithoutCollection
 parameter_list|()
@@ -12055,7 +11951,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSequenceEqualWithComparer
 parameter_list|()
@@ -12311,7 +12206,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSequenceEqualWithComparerWithoutCollection
 parameter_list|()
@@ -12563,7 +12457,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGroupByWithKeySelector
 parameter_list|()
@@ -12642,7 +12535,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGroupByWithKeySelectorAndComparer
 parameter_list|()
@@ -12757,7 +12649,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGroupByWithKeySelectorAndElementSelector
 parameter_list|()
@@ -12921,7 +12812,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGroupByWithKeySelectorAndElementSelectorAndComparer
 parameter_list|()
@@ -13026,7 +12916,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGroupByWithKeySelectorAndResultSelector
 parameter_list|()
@@ -13100,7 +12989,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGroupByWithKeySelectorAndResultSelectorAndComparer
 parameter_list|()
@@ -13217,7 +13105,6 @@ end_expr_stmt
 begin_function
 unit|}    @
 name|Test
-specifier|public
 name|void
 name|testGroupByWithKeySelectorAndElementSelectorAndResultSelector
 parameter_list|()
@@ -13284,7 +13171,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGroupByWithKeySelectorAndElementSelectorAndResultSelectorAndComparer
 parameter_list|()
@@ -13394,7 +13280,6 @@ end_expr_stmt
 begin_function
 unit|}    @
 name|Test
-specifier|public
 name|void
 name|testZip
 parameter_list|()
@@ -13539,7 +13424,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testZipLengthNotMatch
 parameter_list|()
@@ -13848,7 +13732,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExample
 parameter_list|()
@@ -13874,7 +13757,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testApproxConstant
 parameter_list|()

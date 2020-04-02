@@ -240,7 +240,6 @@ comment|/**  * Test with different types of data like boolean, time, timestamp  
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|GeodeAllDataTypesTest
 extends|extends
@@ -647,7 +646,6 @@ return|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSqlSingleBooleanWhereFilter
 parameter_list|()
@@ -682,7 +680,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSqlBooleanColumnFilter
 parameter_list|()
@@ -717,7 +714,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSqlBooleanColumnNotFilter
 parameter_list|()
@@ -752,7 +748,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSqlMultipleBooleanWhereFilter
 parameter_list|()
@@ -787,7 +782,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSqlWhereWithMultipleOrForLiteralFields
 parameter_list|()
@@ -830,7 +824,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSqlSingleDateWhereFilter
 parameter_list|()
@@ -931,7 +924,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSqlMultipleDateWhereFilter
 parameter_list|()
@@ -974,7 +966,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSqlSingleTimeWhereFilter
 parameter_list|()
@@ -1075,7 +1066,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSqlMultipleTimeWhereFilter
 parameter_list|()
@@ -1116,7 +1106,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSqlSingleTimestampWhereFilter
 parameter_list|()
@@ -1217,7 +1206,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSqlMultipleTimestampWhereFilter
 parameter_list|()
@@ -1262,7 +1250,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSqlWhereWithMultipleOrForAllFields
 parameter_list|()

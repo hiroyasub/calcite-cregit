@@ -341,7 +341,6 @@ name|RequiresNetworkExtension
 operator|.
 name|class
 argument_list|)
-specifier|public
 class|class
 name|FileReaderTest
 block|{
@@ -589,7 +588,6 @@ block|}
 comment|/** Tests failed {@link FileReader} instantiation - malformed URL. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFileReaderMalUrl
 parameter_list|()
@@ -664,7 +662,6 @@ block|}
 comment|/** Tests failed {@link FileReader} instantiation - bad URL. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFileReaderBadUrl
 parameter_list|()
@@ -712,7 +709,6 @@ block|}
 comment|/** Tests failed {@link FileReader} instantiation - bad selector. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFileReaderBadSelector
 parameter_list|()
@@ -758,7 +754,6 @@ block|}
 comment|/** Test {@link FileReader} with static file - headings. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFileReaderHeadings
 parameter_list|()
@@ -813,7 +808,6 @@ block|}
 comment|/** Test {@link FileReader} with static file - data. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFileReaderData
 parameter_list|()
@@ -904,7 +898,6 @@ block|}
 comment|/** Tests {@link FileReader} with bad static file - headings. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFileReaderHeadingsBadFile
 parameter_list|()
@@ -959,7 +952,6 @@ block|}
 comment|/** Tests {@link FileReader} with bad static file - data. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFileReaderDataBadFile
 parameter_list|()
@@ -1050,7 +1042,6 @@ block|}
 comment|/** Tests {@link FileReader} with no headings static file - data. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFileReaderDataNoTh
 parameter_list|()
@@ -1116,7 +1107,6 @@ block|}
 comment|/** Tests {@link FileReader} iterator with static file, */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFileReaderIterator
 parameter_list|()
@@ -1188,7 +1178,6 @@ block|}
 comment|/** Tests reading a CSV file via the file adapter. Based on the test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1952">[CALCITE-1952]    * NPE in planner</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCsvFile
 parameter_list|()
@@ -1419,7 +1408,6 @@ block|}
 comment|/**    * Tests reading a JSON file via the file adapter.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJsonFile
 parameter_list|()
@@ -1650,7 +1638,6 @@ block|}
 comment|/**    * Tests reading two JSON file with join via the file adapter.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJsonFileWithJoin
 parameter_list|()

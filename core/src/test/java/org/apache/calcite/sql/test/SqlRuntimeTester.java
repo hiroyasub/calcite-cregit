@@ -96,13 +96,11 @@ comment|/**  * Tester of {@link SqlValidator} and runtime execution of the input
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|SqlRuntimeTester
 extends|extends
 name|AbstractSqlTester
 block|{
-specifier|public
 name|SqlRuntimeTester
 parameter_list|(
 name|SqlTestFactory

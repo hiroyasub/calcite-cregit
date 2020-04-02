@@ -882,7 +882,6 @@ end_comment
 begin_class
 annotation|@
 name|LocaleEnUs
-specifier|public
 class|class
 name|SqlValidatorTest
 extends|extends
@@ -1082,7 +1081,6 @@ return|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMultipleSameAsPass
 parameter_list|()
@@ -1098,7 +1096,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMultipleDifferentAs
 parameter_list|()
@@ -1114,7 +1111,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTypeOfAs
 parameter_list|()
@@ -1162,7 +1158,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTypesLiterals
 parameter_list|()
@@ -1364,7 +1359,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testBooleans
 parameter_list|()
@@ -1412,7 +1406,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAndOrIllegalTypesFails
 parameter_list|()
@@ -1477,7 +1470,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNotIllegalTypeFails
 parameter_list|()
@@ -1517,7 +1509,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testIs
 parameter_list|()
@@ -1623,7 +1614,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testIsFails
 parameter_list|()
@@ -1673,7 +1663,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testScalars
 parameter_list|()
@@ -1809,7 +1798,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testScalarsFails
 parameter_list|()
@@ -1829,7 +1817,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNumbers
 parameter_list|()
@@ -1845,7 +1832,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPrefix
 parameter_list|()
@@ -1919,7 +1905,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testEqualNotEqual
 parameter_list|()
@@ -2239,7 +2224,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testEqualNotEqualFails
 parameter_list|()
@@ -2360,7 +2344,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testBinaryString
 parameter_list|()
@@ -2384,7 +2367,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testBinaryStringFails
 parameter_list|()
@@ -2455,7 +2437,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testStringLiteral
 parameter_list|()
@@ -2479,7 +2460,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testStringLiteralBroken
 parameter_list|()
@@ -2557,7 +2537,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testArithmeticOperators
 parameter_list|()
@@ -2629,7 +2608,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testArithmeticOperatorsFails
 parameter_list|()
@@ -2760,7 +2738,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCaseExpression
 parameter_list|()
@@ -2852,7 +2829,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCaseExpressionTypes
 parameter_list|()
@@ -3006,7 +2982,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCaseExpressionFails
 parameter_list|()
@@ -3110,7 +3085,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNullIf
 parameter_list|()
@@ -3178,7 +3152,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCoalesce
 parameter_list|()
@@ -3214,7 +3187,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCoalesceFails
 parameter_list|()
@@ -3272,7 +3244,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testStringCompare
 parameter_list|()
@@ -3376,7 +3347,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testStringCompareType
 parameter_list|()
@@ -3454,7 +3424,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testConcat
 parameter_list|()
@@ -3546,7 +3515,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testConcatWithCharset
 parameter_list|()
@@ -3569,7 +3537,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testConcatFails
 parameter_list|()
@@ -3592,7 +3559,6 @@ block|}
 comment|/** Tests the CONCAT function, which unlike the concat operator ('||') is not    * standard but only in the ORACLE and POSTGRESQL libraries. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testConcatFunction
 parameter_list|()
@@ -3739,7 +3705,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testBetween
 parameter_list|()
@@ -3782,7 +3747,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCharsetMismatch
 parameter_list|()
@@ -4059,7 +4023,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCharLength
 parameter_list|()
@@ -4111,7 +4074,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUpperLower
 parameter_list|()
@@ -4170,7 +4132,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPosition
 parameter_list|()
@@ -4240,7 +4201,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTrim
 parameter_list|()
@@ -4336,7 +4296,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTrimFails
 parameter_list|()
@@ -4426,7 +4385,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTranslate3
 parameter_list|()
@@ -4552,7 +4510,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOverlay
 parameter_list|()
@@ -4653,7 +4610,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSubstring
 parameter_list|()
@@ -4821,7 +4777,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSubstringFails
 parameter_list|()
@@ -4884,7 +4839,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLikeAndSimilar
 parameter_list|()
@@ -4966,7 +4920,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNull
 parameter_list|()
@@ -5280,7 +5233,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNullCast
 parameter_list|()
@@ -5456,7 +5408,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCastTypeToType
 parameter_list|()
@@ -5958,7 +5909,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCastRegisteredType
 parameter_list|()
@@ -5996,7 +5946,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCastFails
 parameter_list|()
@@ -6062,7 +6011,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCastBinaryLiteral
 parameter_list|()
@@ -6081,7 +6029,6 @@ block|}
 comment|/**    * Tests whether the GEOMETRY data type is allowed.    *    * @see SqlConformance#allowGeometry()    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGeometry
 parameter_list|()
@@ -6125,7 +6072,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDateTime
 parameter_list|()
@@ -6739,7 +6685,6 @@ block|}
 comment|/**    * Tests casting to/from date/time types.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDateTimeCast
 parameter_list|()
@@ -6805,7 +6750,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testConvertTimezoneFunction
 parameter_list|()
@@ -6920,7 +6864,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testToDateFunction
 parameter_list|()
@@ -7047,7 +6990,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testToTimestampFunction
 parameter_list|()
@@ -7176,7 +7118,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInvalidFunction
 parameter_list|()
@@ -7228,7 +7169,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUnknownFunctionHandling
 parameter_list|()
@@ -7411,7 +7351,6 @@ comment|// too many args
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJdbcFunctionCall
 parameter_list|()
@@ -7575,7 +7514,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testQuotedFunction
 parameter_list|()
@@ -7672,7 +7610,6 @@ block|}
 comment|/**    * Not able to parse member function yet.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInvalidMemberFunction
 parameter_list|()
@@ -7700,7 +7637,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRowtype
 parameter_list|()
@@ -7780,7 +7716,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRow
 parameter_list|()
@@ -7801,7 +7736,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRowWithValidDot
 parameter_list|()
@@ -7839,7 +7773,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRowWithInvalidDotOperation
 parameter_list|()
@@ -7885,7 +7818,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMultiset
 parameter_list|()
@@ -8015,7 +7947,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMultisetSetOperators
 parameter_list|()
@@ -8125,7 +8056,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSubMultisetOf
 parameter_list|()
@@ -8171,7 +8101,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testElement
 parameter_list|()
@@ -8229,7 +8158,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMemberOf
 parameter_list|()
@@ -8257,7 +8185,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testIsASet
 parameter_list|()
@@ -8291,7 +8218,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCardinality
 parameter_list|()
@@ -8337,7 +8263,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMatchRecognizeWithDistinctAggregation
 parameter_list|()
@@ -8381,7 +8306,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testIntervalTimeUnitEnumeration
 parameter_list|()
@@ -8554,7 +8478,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testIntervalMonthsConversion
 parameter_list|()
@@ -8602,7 +8525,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testIntervalMillisConversion
 parameter_list|()
@@ -14492,7 +14414,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDatetimePlusNullInterval
 parameter_list|()
@@ -14580,7 +14501,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testIntervalLiterals
 parameter_list|()
@@ -14824,7 +14744,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testIntervalOperators
 parameter_list|()
@@ -15108,7 +15027,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTimestampAddAndDiff
 parameter_list|()
@@ -15347,7 +15265,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTimestampAddNullInterval
 parameter_list|()
@@ -15379,7 +15296,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNumericOperators
 parameter_list|()
@@ -16173,7 +16089,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFloorCeil
 parameter_list|()
@@ -16322,7 +16237,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-820">[CALCITE-820]    * Validate that window functions have OVER clause</a>, and    *<a href="https://issues.apache.org/jira/browse/CALCITE-1340">[CALCITE-1340]    * Window aggregates give invalid errors</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWindowFunctionsWithoutOver
 parameter_list|()
@@ -16387,7 +16301,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOverInPartitionBy
 parameter_list|()
@@ -16421,7 +16334,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOverInOrderBy
 parameter_list|()
@@ -16455,7 +16367,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregateFunctionInOver
 parameter_list|()
@@ -16501,7 +16412,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregateInsideOverClause
 parameter_list|()
@@ -16549,7 +16459,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregateInsideOverClause2
 parameter_list|()
@@ -16579,7 +16488,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWindowFunctions
 parameter_list|()
@@ -16674,7 +16582,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWindowFunctions2
 parameter_list|()
@@ -17191,7 +17098,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-883">[CALCITE-883]    * Give error if the aggregate function don't support null treatment</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWindowFunctionsIgnoreNulls
 parameter_list|()
@@ -17328,7 +17234,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-883">[CALCITE-883]    * Give error if the aggregate function don't support null treatment</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWindowFunctionsRespectNulls
 parameter_list|()
@@ -17465,7 +17370,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1954">[CALCITE-1954]    * Column from outer join should be null, whether or not it is aliased</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLeftOuterJoinWithAlias
 parameter_list|()
@@ -17554,7 +17458,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInvalidWindowFunctionWithGroupBy
 parameter_list|()
@@ -17598,7 +17501,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInlineWinDef
 parameter_list|()
@@ -17919,7 +17821,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPartitionByExpr
 parameter_list|()
@@ -17959,7 +17860,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWindowClause
 parameter_list|()
@@ -18343,7 +18243,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWindowClause2
 parameter_list|()
@@ -18368,7 +18267,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWindowClauseWithSubQuery
 parameter_list|()
@@ -18415,7 +18313,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-754">[CALCITE-754]    * Validator error when resolving OVER clause of JOIN query</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPartitionByColumnInJoinAlias
 parameter_list|()
@@ -18456,7 +18353,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1535">[CALCITE-1535]    * Give error if column referenced in ORDER BY is ambiguous</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOrderByColumn
 parameter_list|()
@@ -18554,7 +18450,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWindowNegative
 parameter_list|()
@@ -18702,7 +18597,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWindowPartial
 parameter_list|()
@@ -18743,7 +18637,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOneWinFunc
 parameter_list|()
@@ -18759,7 +18652,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNameResolutionInValuesClause
 parameter_list|()
@@ -18971,7 +18863,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNestedFrom
 parameter_list|()
@@ -19041,7 +18932,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAmbiguousColumn
 parameter_list|()
@@ -19169,7 +19059,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExpandStar
 parameter_list|()
@@ -19227,7 +19116,6 @@ block|}
 comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-546">[CALCITE-546]    * Allow table, column and field called '*'</a>.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testStarIdentifier
 parameter_list|()
@@ -19245,7 +19133,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testStarAliasFails
 parameter_list|()
@@ -19263,7 +19150,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNonLocalStar
 parameter_list|()
@@ -19285,7 +19171,6 @@ block|}
 comment|/**    * Parser allows "*" in FROM clause because "*" can occur in any identifier.    * But validator must not.    *    * @see #testStarIdentifier()    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testStarInFromFails
 parameter_list|()
@@ -19333,7 +19218,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testStarDotIdFails
 parameter_list|()
@@ -19373,7 +19257,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAsColumnList
 parameter_list|()
@@ -19433,7 +19316,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAmbiguousColumnInIn
 parameter_list|()
@@ -19467,7 +19349,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInList
 parameter_list|()
@@ -19699,7 +19580,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInSubQuery
 parameter_list|()
@@ -19740,7 +19620,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAnyList
 parameter_list|()
@@ -19981,7 +19860,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDoubleNoAlias
 parameter_list|()
@@ -20013,7 +19891,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDuplicateColumnAliasIsOK
 parameter_list|()
@@ -20030,7 +19907,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDuplicateTableAliasFails
 parameter_list|()
@@ -20155,7 +20031,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSchemaTableStar
 parameter_list|()
@@ -20213,7 +20088,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSchemaTableColumn
 parameter_list|()
@@ -20348,7 +20222,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-881">[CALCITE-881]    * Allow schema.table.column references in GROUP BY</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSchemaTableColumnInGroupBy
 parameter_list|()
@@ -20380,7 +20253,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInvalidGroupBy
 parameter_list|()
@@ -20398,7 +20270,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInvalidGroupBy2
 parameter_list|()
@@ -20429,7 +20300,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInvalidGroupBy3
 parameter_list|()
@@ -20469,7 +20339,6 @@ block|}
 comment|/**    * Test case for<a href="https://issues.apache.org/jira/browse/CALCITE-3003">[CALCITE-3003]    * AssertionError when GROUP BY nested field</a>.    *    *<p>Make sure table name of GROUP BY item with nested field could be    * properly validated.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInvalidGroupByWithInvalidTableName
 parameter_list|()
@@ -20506,7 +20375,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1781">[CALCITE-1781]    * Allow expression in CUBE and ROLLUP</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCubeExpression
 parameter_list|()
@@ -20609,7 +20477,6 @@ block|}
 comment|/** Unit test for    * {@link org.apache.calcite.sql.validate.SqlValidatorUtil#rollup}. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRollupBitSets
 parameter_list|()
@@ -20894,7 +20761,6 @@ block|}
 comment|/** Unit test for    * {@link org.apache.calcite.sql.validate.SqlValidatorUtil#cube}. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCubeBitSets
 parameter_list|()
@@ -21185,7 +21051,6 @@ return|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGrouping
 parameter_list|()
@@ -21431,7 +21296,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGroupingId
 parameter_list|()
@@ -21673,7 +21537,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGroupId
 parameter_list|()
@@ -21876,7 +21739,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCubeGrouping
 parameter_list|()
@@ -21904,7 +21766,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSumInvalidArgs
 parameter_list|()
@@ -21937,7 +21798,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSumTooManyArgs
 parameter_list|()
@@ -21955,7 +21815,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSumTooFewArgs
 parameter_list|()
@@ -21973,7 +21832,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSingleNoAlias
 parameter_list|()
@@ -21989,7 +21847,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testObscuredAliasFails
 parameter_list|()
@@ -22011,7 +21868,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFromReferenceFails
 parameter_list|()
@@ -22035,7 +21891,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWhereReference
 parameter_list|()
@@ -22059,7 +21914,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUnionNameResolution
 parameter_list|()
@@ -22099,7 +21953,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUnionCountMismatchFails
 parameter_list|()
@@ -22121,7 +21974,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUnionCountMismatcWithValuesFails
 parameter_list|()
@@ -22171,7 +22023,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUnionTypeMismatchFails
 parameter_list|()
@@ -22225,7 +22076,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUnionTypeMismatchWithStarFails
 parameter_list|()
@@ -22279,7 +22129,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUnionTypeMismatchWithValuesFails
 parameter_list|()
@@ -22395,7 +22244,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testValuesTypeMismatchFails
 parameter_list|()
@@ -22413,7 +22261,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNaturalCrossJoinFails
 parameter_list|()
@@ -22433,7 +22280,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCrossJoinUsingFails
 parameter_list|()
@@ -22453,7 +22299,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinUsing
 parameter_list|()
@@ -22797,7 +22642,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCrossJoinOnFails
 parameter_list|()
@@ -22819,7 +22663,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInnerJoinWithoutUsingOrOnFails
 parameter_list|()
@@ -22841,7 +22684,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNaturalJoinWithOnFails
 parameter_list|()
@@ -22859,7 +22701,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNaturalJoinWithUsing
 parameter_list|()
@@ -22877,7 +22718,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNaturalJoinCaseSensitive
 parameter_list|()
@@ -22939,7 +22779,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNaturalJoinIncompatibleDatatype
 parameter_list|()
@@ -22990,7 +22829,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinUsingIncompatibleDatatype
 parameter_list|()
@@ -23033,7 +22871,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinUsingInvalidColsFails
 parameter_list|()
@@ -23052,7 +22889,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinUsingDupColsFails
 parameter_list|()
@@ -23070,7 +22906,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinRowType
 parameter_list|()
@@ -23230,7 +23065,6 @@ literal|"bug: should fail if sub-query does not have alias"
 argument_list|)
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinSubQuery
 parameter_list|()
@@ -23251,7 +23085,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinOnIn
 parameter_list|()
@@ -23275,7 +23108,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinOnInCorrelated
 parameter_list|()
@@ -23299,7 +23131,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinOnInCorrelatedFails
 parameter_list|()
@@ -23325,7 +23156,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinOnExistsCorrelated
 parameter_list|()
@@ -23349,7 +23179,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinOnScalarCorrelated
 parameter_list|()
@@ -23373,7 +23202,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinOnScalarFails
 parameter_list|()
@@ -23409,7 +23237,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinUsingThreeWay
 parameter_list|()
@@ -23559,7 +23386,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWhere
 parameter_list|()
@@ -23577,7 +23403,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOn
 parameter_list|()
@@ -23595,7 +23420,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testHaving
 parameter_list|()
@@ -23642,7 +23466,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testHavingBetween
 parameter_list|()
@@ -23671,7 +23494,6 @@ block|}
 comment|/** Tests the {@code WITH} clause, also called common table expressions. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWith
 parameter_list|()
@@ -23822,7 +23644,6 @@ block|}
 comment|/** Tests the {@code WITH} clause with UNION. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWithUnion
 parameter_list|()
@@ -23845,7 +23666,6 @@ block|}
 comment|/** Tests the {@code WITH} clause and column aliases. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWithColumnAlias
 parameter_list|()
@@ -23904,7 +23724,6 @@ block|}
 comment|/** Tests the {@code WITH} clause in sub-queries. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWithSubQuery
 parameter_list|()
@@ -24022,7 +23841,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWithOrderAgg
 parameter_list|()
@@ -24077,7 +23895,6 @@ block|}
 comment|/**    * Tests a large scalar expression, which will expose any O(n^2) algorithms    * lurking in the validation process.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLarge
 parameter_list|()
@@ -24384,7 +24201,6 @@ return|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAbstractConformance
 parameter_list|()
@@ -24471,7 +24287,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUserDefinedConformance
 parameter_list|()
@@ -24609,7 +24424,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOrder
 parameter_list|()
@@ -24871,7 +24685,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOrderJoin
 parameter_list|()
@@ -24888,7 +24701,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-633">[CALCITE-633]    * WITH ... ORDER BY cannot find table</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWithOrder
 parameter_list|()
@@ -24917,7 +24729,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-662">[CALCITE-662]    * Query validation fails when an ORDER BY clause is used with WITH    * CLAUSE</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWithOrderInParentheses
 parameter_list|()
@@ -24966,7 +24777,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOrderUnion
 parameter_list|()
@@ -25114,7 +24924,6 @@ block|}
 comment|/**    * Tests validation of the ORDER BY clause when GROUP BY is present.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOrderGroup
 parameter_list|()
@@ -25249,7 +25058,6 @@ block|}
 comment|/**    * Tests validation of the aliases in GROUP BY.    *    *<p>Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1306">[CALCITE-1306]    * Allow GROUP BY and HAVING to reference SELECT expressions by ordinal and    * alias</a>.    *    * @see SqlConformance#isGroupByAlias()    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAliasInGroupBy
 parameter_list|()
@@ -25742,7 +25550,6 @@ block|}
 comment|/**    * Tests validation of ordinals in GROUP BY.    *    * @see SqlConformance#isGroupByOrdinal()    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOrdinalInGroupBy
 parameter_list|()
@@ -26187,7 +25994,6 @@ block|}
 comment|/**    * Tests validation of the aliases in HAVING.    *    * @see SqlConformance#isHavingAlias()    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAliasInHaving
 parameter_list|()
@@ -26397,7 +26203,6 @@ block|}
 comment|/**    * Tests validation of the ORDER BY clause when DISTINCT is present.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOrderDistinct
 parameter_list|()
@@ -26589,7 +26394,6 @@ block|}
 comment|/**    * Tests validation of the ORDER BY clause when DISTINCT and GROUP BY are    * present.    *    *<p>Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-634">[CALCITE-634]    * Allow ORDER BY aggregate function in SELECT DISTINCT, provided that it    * occurs in SELECT clause</a>.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOrderGroupDistinct
 parameter_list|()
@@ -26705,7 +26509,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGroup
 parameter_list|()
@@ -26827,7 +26630,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-886">[CALCITE-886]    * System functions in GROUP BY clause</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGroupBySystemFunction
 parameter_list|()
@@ -26869,7 +26671,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGroupingSets
 parameter_list|()
@@ -26918,7 +26719,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRollup
 parameter_list|()
@@ -26980,7 +26780,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGroupByCorrelatedColumn
 parameter_list|()
@@ -27008,7 +26807,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGroupExpressionEquivalence
 parameter_list|()
@@ -27056,7 +26854,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGroupExpressionEquivalenceId
 parameter_list|()
@@ -27166,7 +26963,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGroupExpressionEquivalenceLiteral
 parameter_list|()
@@ -27256,7 +27052,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGroupExpressionEquivalenceStringLiteral
 parameter_list|()
@@ -27340,7 +27135,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGroupAgg
 parameter_list|()
@@ -27357,7 +27151,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNestedAggFails
 parameter_list|()
@@ -27423,7 +27216,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNestedAggOver
 parameter_list|()
@@ -27932,7 +27724,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregateInGroupByFails
 parameter_list|()
@@ -27950,7 +27741,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregateInNonGroupBy
 parameter_list|()
@@ -28019,7 +27809,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregateInOrderByFails
 parameter_list|()
@@ -28055,7 +27844,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregateFilter
 parameter_list|()
@@ -28073,7 +27861,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregateFilterNotBoolean
 parameter_list|()
@@ -28091,7 +27878,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregateFilterInHaving
 parameter_list|()
@@ -28111,7 +27897,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregateFilterContainsAggregate
 parameter_list|()
@@ -28129,7 +27914,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWithinGroup
 parameter_list|()
@@ -28253,7 +28037,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCorrelatingVariables
 parameter_list|()
@@ -28283,7 +28066,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testIntervalCompare
 parameter_list|()
@@ -28416,7 +28198,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-613">[CALCITE-613]    * Implicitly convert strings in comparisons</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDateCompare
 parameter_list|()
@@ -28588,7 +28369,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOverlaps
 parameter_list|()
@@ -28836,7 +28616,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testContains
 parameter_list|()
@@ -29127,7 +28906,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExtract
 parameter_list|()
@@ -29183,7 +28961,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCastToInterval
 parameter_list|()
@@ -29285,7 +29062,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMinusDateOperator
 parameter_list|()
@@ -29323,7 +29099,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testBind
 parameter_list|()
@@ -29408,7 +29183,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1310">[CALCITE-1310]    * Infer type of arguments to BETWEEN operator</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testBindBetween
 parameter_list|()
@@ -29458,7 +29232,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUnnest
 parameter_list|()
@@ -29596,7 +29369,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUnnestArray
 parameter_list|()
@@ -29752,7 +29524,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testArrayConstructor
 parameter_list|()
@@ -29802,7 +29573,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCastAsCollectionType
 parameter_list|()
@@ -29976,7 +29746,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCastAsRowType
 parameter_list|()
@@ -30073,7 +29842,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMultisetConstructor
 parameter_list|()
@@ -30091,7 +29859,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUnnestArrayColumn
 parameter_list|()
@@ -30217,7 +29984,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUnnestWithOrdinality
 parameter_list|()
@@ -30345,7 +30111,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|unnestMapMustNameColumnsKeyAndValueWhenNotAliased
 parameter_list|()
@@ -30363,7 +30128,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCorrelationJoin
 parameter_list|()
@@ -30401,7 +30165,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testStructuredTypes
 parameter_list|()
@@ -30449,7 +30212,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLateral
 parameter_list|()
@@ -30497,7 +30259,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCollect
 parameter_list|()
@@ -30531,7 +30292,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFusion
 parameter_list|()
@@ -30560,7 +30320,6 @@ comment|// complete
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCountFunction
 parameter_list|()
@@ -30610,7 +30369,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCountCompositeFunction
 parameter_list|()
@@ -30672,7 +30430,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLastFunction
 parameter_list|()
@@ -30728,7 +30485,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMinMaxFunctions
 parameter_list|()
@@ -30784,7 +30540,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSomeEveryAndIntersectionFunctions
 parameter_list|()
@@ -30830,7 +30585,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAnyValueFunction
 parameter_list|()
@@ -30846,7 +30600,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFunctionalDistinct
 parameter_list|()
@@ -30872,7 +30625,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testColumnNotFound
 parameter_list|()
@@ -30890,7 +30642,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testColumnNotFound2
 parameter_list|()
@@ -30908,7 +30659,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testColumnNotFound3
 parameter_list|()
@@ -30926,7 +30676,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectDistinct
 parameter_list|()
@@ -31140,7 +30889,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectWithoutFrom
 parameter_list|()
@@ -31197,7 +30945,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectAmbiguousField
 parameter_list|()
@@ -31290,7 +31037,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTableExtend
 parameter_list|()
@@ -31324,7 +31070,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExplicitTable
 parameter_list|()
@@ -31404,7 +31149,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCollectionTable
 parameter_list|()
@@ -31462,7 +31206,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1309">[CALCITE-1309]    * Support LATERAL TABLE</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCollectionTableWithLateral
 parameter_list|()
@@ -31589,7 +31332,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCollectionTableWithLateral2
 parameter_list|()
@@ -31627,7 +31369,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCollectionTableWithCursorParam
 parameter_list|()
@@ -31655,7 +31396,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTemporalTable
 parameter_list|()
@@ -31741,7 +31481,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testScalarSubQuery
 parameter_list|()
@@ -31821,7 +31560,6 @@ literal|"not supported"
 argument_list|)
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSubQueryInOnClause
 parameter_list|()
@@ -31843,7 +31581,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRecordType
 parameter_list|()
@@ -31889,7 +31626,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testArrayOfRecordType
 parameter_list|()
@@ -31941,7 +31677,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testItemOperatorException
 parameter_list|()
@@ -31964,7 +31699,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-497">[CALCITE-497]    * Support optional qualifier for column name references</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRecordTypeElided
 parameter_list|()
@@ -32086,7 +31820,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSample
 parameter_list|()
@@ -32264,7 +31997,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRewriteWithoutIdentifierExpansion
 parameter_list|()
@@ -32290,7 +32022,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1238">[CALCITE-1238]    * Unparsing LIMIT without ORDER BY after validation</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRewriteWithLimitWithoutOrderBy
 parameter_list|()
@@ -32329,7 +32060,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRewriteWithLimitWithDynamicParameters
 parameter_list|()
@@ -32370,7 +32100,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRewriteWithOffsetWithoutOrderBy
 parameter_list|()
@@ -32409,7 +32138,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRewriteWithUnionFetchWithoutOrderBy
 parameter_list|()
@@ -32456,7 +32184,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRewriteWithIdentifierExpansion
 parameter_list|()
@@ -32481,7 +32208,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRewriteWithColumnReferenceExpansion
 parameter_list|()
@@ -32524,7 +32250,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRewriteWithColumnReferenceExpansionAndFromAlias
 parameter_list|()
@@ -32587,7 +32312,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCoalesceWithoutRewrite
 parameter_list|()
@@ -32642,7 +32366,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCoalesceWithRewrite
 parameter_list|()
@@ -32703,7 +32426,6 @@ annotation|@
 name|Disabled
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testValuesWithAggFuncs
 parameter_list|()
@@ -32723,7 +32445,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFieldOrigin
 parameter_list|()
@@ -32779,7 +32500,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testBrackets
 parameter_list|()
@@ -32881,7 +32601,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLexJava
 parameter_list|()
@@ -32999,7 +32718,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-145">[CALCITE-145]    * Unexpected upper-casing of keywords when using java lexer</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLexJavaKeyword
 parameter_list|()
@@ -33131,7 +32849,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLexAndQuoting
 parameter_list|()
@@ -33173,7 +32890,6 @@ block|}
 comment|/** Tests using case-insensitive matching of identifiers. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCaseInsensitive
 parameter_list|()
@@ -33308,7 +33024,6 @@ block|}
 comment|/** Tests using case-insensitive matching of user-defined functions. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCaseInsensitiveUdfs
 parameter_list|()
@@ -33505,7 +33220,6 @@ block|}
 comment|/** Tests using case-sensitive matching of builtin functions. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCaseSensitiveBuiltinFunction
 parameter_list|()
@@ -33650,7 +33364,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-319">[CALCITE-319]    * Table aliases should follow case-sensitivity policy</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCaseInsensitiveTableAlias
 parameter_list|()
@@ -33735,7 +33448,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1305">[CALCITE-1305]    * Case-insensitive table aliases and GROUP BY</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCaseInsensitiveTableAliasInGroupBy
 parameter_list|()
@@ -33825,7 +33537,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1549">[CALCITE-1549]    * Improve error message when table or column not found</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTableNotFoundDidYouMean
 parameter_list|()
@@ -33954,7 +33665,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testColumnNotFoundDidYouMean
 parameter_list|()
@@ -34097,7 +33807,6 @@ block|}
 comment|/** Tests matching of built-in operator names. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUnquotedBuiltInFunctionNames
 parameter_list|()
@@ -34345,7 +34054,6 @@ block|}
 comment|/** Sanity check: All built-ins are upper-case. We rely on this. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testStandardOperatorNamesAreUpperCase
 parameter_list|()
@@ -34439,7 +34147,6 @@ block|}
 comment|/** Tests that operators, sorted by precedence, are in a sane order. Each    * operator has a {@link SqlOperator#getLeftPrec() left} and    * {@link SqlOperator#getRightPrec()} right} precedence, but we would like    * the order to remain the same even if we tweak particular operators'    * precedences. If you need to update the expected output, you might also    * need to change    *<a href="http://calcite.apache.org/docs/reference.html#operator-precedence">    * the documentation</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOperatorsSortedByPrecedence
 parameter_list|()
@@ -35045,7 +34752,6 @@ block|}
 comment|/** Tests that it is an error to insert into the same column twice, even using    * case-insensitive matching. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCaseInsensitiveInsert
 parameter_list|()
@@ -35078,7 +34784,6 @@ block|}
 comment|/** Tests referencing columns from a sub-query that has duplicate column    * names. (The standard says it should be an error, but we don't right    * now.) */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCaseInsensitiveSubQuery
 parameter_list|()
@@ -35190,7 +34895,6 @@ block|}
 comment|/** Tests using case-insensitive matching of table names. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCaseInsensitiveTables
 parameter_list|()
@@ -35276,7 +34980,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInsert
 parameter_list|()
@@ -35392,7 +35095,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInsertWithNonEqualSourceSinkFieldsNum
 parameter_list|()
@@ -35418,7 +35120,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInsertSubset
 parameter_list|()
@@ -35479,7 +35180,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1510">[CALCITE-1510]    * INSERT/UPSERT should allow fewer values than columns</a>,    * check for default value only when target field is null. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInsertShouldNotCheckForDefaultValue
 parameter_list|()
@@ -35690,7 +35390,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInsertView
 parameter_list|()
@@ -35708,7 +35407,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInsertSubsetView
 parameter_list|()
@@ -35733,7 +35431,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInsertModifiableView
 parameter_list|()
@@ -35777,7 +35474,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInsertSubsetModifiableView
 parameter_list|()
@@ -35830,7 +35526,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInsertBind
 parameter_list|()
@@ -35968,7 +35663,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInsertWithExtendedColumns
 parameter_list|()
@@ -36117,7 +35811,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInsertBindSubset
 parameter_list|()
@@ -36287,7 +35980,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInsertBindView
 parameter_list|()
@@ -36319,7 +36011,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInsertModifiableViewPassConstraint
 parameter_list|()
@@ -36371,7 +36062,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInsertModifiableViewFailConstraint
 parameter_list|()
@@ -36477,7 +36167,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUpdateModifiableViewPassConstraint
 parameter_list|()
@@ -36525,7 +36214,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUpdateModifiableViewFailConstraint
 parameter_list|()
@@ -36597,7 +36285,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInsertTargetTableWithVirtualColumns
 parameter_list|()
@@ -36772,7 +36459,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInsertFailNullability
 parameter_list|()
@@ -36810,7 +36496,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInsertSubsetFailNullability
 parameter_list|()
@@ -36870,7 +36555,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInsertViewFailNullability
 parameter_list|()
@@ -36908,7 +36592,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInsertSubsetViewFailNullability
 parameter_list|()
@@ -36968,7 +36651,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInsertBindFailNullability
 parameter_list|()
@@ -37006,7 +36688,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInsertBindSubsetFailNullability
 parameter_list|()
@@ -37066,7 +36747,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInsertSubsetDisallowed
 parameter_list|()
@@ -37110,7 +36790,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInsertSubsetViewDisallowed
 parameter_list|()
@@ -37154,7 +36833,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInsertBindSubsetDisallowed
 parameter_list|()
@@ -37186,7 +36864,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectExtendedColumnDuplicate
 parameter_list|()
@@ -37282,7 +36959,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectViewFailExcludedColumn
 parameter_list|()
@@ -37315,7 +36991,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectViewExtendedColumnCollision
 parameter_list|()
@@ -37363,7 +37038,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectViewExtendedColumnExtendedCollision
 parameter_list|()
@@ -37413,7 +37087,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectViewExtendedColumnUnderlyingCollision
 parameter_list|()
@@ -37461,7 +37134,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectExtendedColumnCollision
 parameter_list|()
@@ -37493,7 +37165,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectExtendedColumnFailCollision
 parameter_list|()
@@ -37549,7 +37220,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectViewExtendedColumnFailCollision
 parameter_list|()
@@ -37633,7 +37303,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectViewExtendedColumnFailExtendedCollision
 parameter_list|()
@@ -37709,7 +37378,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectViewExtendedColumnFailUnderlyingCollision
 parameter_list|()
@@ -37785,7 +37453,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectFailCaseSensitivity
 parameter_list|()
@@ -37823,7 +37490,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInsertFailCaseSensitivity
 parameter_list|()
@@ -37909,7 +37575,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInsertFailExcludedColumn
 parameter_list|()
@@ -37951,7 +37616,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInsertBindViewFailExcludedColumn
 parameter_list|()
@@ -37991,7 +37655,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInsertWithCustomInitializerExpressionFactory
 parameter_list|()
@@ -38037,7 +37700,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInsertSubsetWithCustomInitializerExpressionFactory
 parameter_list|()
@@ -38105,7 +37767,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInsertBindWithCustomInitializerExpressionFactory
 parameter_list|()
@@ -38161,7 +37822,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInsertBindSubsetWithCustomInitializerExpressionFactory
 parameter_list|()
@@ -38212,7 +37872,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInsertBindWithCustomColumnResolving
 parameter_list|()
@@ -38395,7 +38054,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUpdateBind
 parameter_list|()
@@ -38426,7 +38084,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDeleteBind
 parameter_list|()
@@ -38457,7 +38114,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testStream
 parameter_list|()
@@ -38499,7 +38155,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testStreamWhere
 parameter_list|()
@@ -38566,7 +38221,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testStreamGroupBy
 parameter_list|()
@@ -38638,7 +38292,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testStreamHaving
 parameter_list|()
@@ -38707,7 +38360,6 @@ block|}
 comment|/** Tests that various expressions are monotonic. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMonotonic
 parameter_list|()
@@ -39059,7 +38711,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testStreamUnionAll
 parameter_list|()
@@ -39158,7 +38809,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testStreamValues
 parameter_list|()
@@ -39207,7 +38857,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testStreamOrderBy
 parameter_list|()
@@ -39303,7 +38952,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testStreamJoin
 parameter_list|()
@@ -39344,7 +38992,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDummy
 parameter_list|()
@@ -39384,7 +39031,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCustomColumnResolving
 parameter_list|()
@@ -39397,7 +39043,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCustomColumnResolvingWithView
 parameter_list|()
@@ -39934,7 +39579,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDescriptor
 parameter_list|()
@@ -39962,7 +39606,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTumbleTableValuedFunction
 parameter_list|()
@@ -40040,7 +39683,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testStreamTumble
 parameter_list|()
@@ -40177,7 +39819,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testStreamHop
 parameter_list|()
@@ -40243,7 +39884,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testStreamSession
 parameter_list|()
@@ -40268,7 +39908,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInsertExtendedColumn
 parameter_list|()
@@ -40298,7 +39937,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInsertBindExtendedColumn
 parameter_list|()
@@ -40328,7 +39966,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInsertExtendedColumnModifiableView
 parameter_list|()
@@ -40390,7 +40027,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInsertBindExtendedColumnModifiableView
 parameter_list|()
@@ -40436,7 +40072,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInsertExtendedColumnModifiableViewFailConstraint
 parameter_list|()
@@ -40532,7 +40167,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInsertExtendedColumnModifiableViewFailColumnCount
 parameter_list|()
@@ -40610,7 +40244,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInsertExtendedColumnFailDuplicate
 parameter_list|()
@@ -40740,7 +40373,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUpdateExtendedColumn
 parameter_list|()
@@ -40784,7 +40416,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInsertFailDataType
 parameter_list|()
@@ -40918,7 +40549,6 @@ literal|"CALCITE-1727"
 argument_list|)
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUpdateFailDataType
 parameter_list|()
@@ -40963,7 +40593,6 @@ literal|"CALCITE-1727"
 argument_list|)
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUpdateFailCaseSensitivity
 parameter_list|()
@@ -40985,7 +40614,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUpdateExtendedColumnFailCaseSensitivity
 parameter_list|()
@@ -41021,7 +40649,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUpdateBindExtendedColumn
 parameter_list|()
@@ -41053,7 +40680,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUpdateExtendedColumnModifiableView
 parameter_list|()
@@ -41101,7 +40727,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUpdateBindExtendedColumnModifiableView
 parameter_list|()
@@ -41149,7 +40774,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUpdateExtendedColumnModifiableViewFailConstraint
 parameter_list|()
@@ -41225,7 +40849,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUpdateExtendedColumnCollision
 parameter_list|()
@@ -41245,7 +40868,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUpdateExtendedColumnModifiableViewCollision
 parameter_list|()
@@ -41297,7 +40919,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUpdateExtendedColumnFailCollision
 parameter_list|()
@@ -41338,7 +40959,6 @@ literal|"CALCITE-1727"
 argument_list|)
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUpdateExtendedColumnFailCollision2
 parameter_list|()
@@ -41374,7 +40994,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUpdateExtendedColumnModifiableViewFailCollision
 parameter_list|()
@@ -41426,7 +41045,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUpdateExtendedColumnModifiableViewFailExtendedCollision
 parameter_list|()
@@ -41467,7 +41085,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUpdateExtendedColumnModifiableViewFailUnderlyingCollision
 parameter_list|()
@@ -41519,7 +41136,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUpdateExtendedColumnFailDuplicate
 parameter_list|()
@@ -41591,7 +41207,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInsertExtendedColumnCollision
 parameter_list|()
@@ -41609,7 +41224,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInsertExtendedColumnModifiableViewCollision
 parameter_list|()
@@ -41638,7 +41252,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInsertExtendedColumnModifiableViewExtendedCollision
 parameter_list|()
@@ -41667,7 +41280,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInsertExtendedColumnModifiableViewUnderlyingCollision
 parameter_list|()
@@ -41696,7 +41308,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInsertExtendedColumnFailCollision
 parameter_list|()
@@ -41786,7 +41397,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInsertExtendedColumnModifiableViewFailCollision
 parameter_list|()
@@ -41922,7 +41532,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInsertExtendedColumnModifiableViewFailExtendedCollision
 parameter_list|()
@@ -42076,7 +41685,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInsertExtendedColumnModifiableViewFailUnderlyingCollision
 parameter_list|()
@@ -42193,7 +41801,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDelete
 parameter_list|()
@@ -42209,7 +41816,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDeleteExtendedColumn
 parameter_list|()
@@ -42233,7 +41839,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDeleteBindExtendedColumn
 parameter_list|()
@@ -42257,7 +41862,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDeleteModifiableView
 parameter_list|()
@@ -42307,7 +41911,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDeleteExtendedColumnModifiableView
 parameter_list|()
@@ -42347,7 +41950,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDeleteExtendedColumnCollision
 parameter_list|()
@@ -42372,7 +41974,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDeleteExtendedColumnModifiableViewCollision
 parameter_list|()
@@ -42500,7 +42101,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDeleteExtendedColumnFailCollision
 parameter_list|()
@@ -42608,7 +42208,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDeleteExtendedColumnModifiableViewFailCollision
 parameter_list|()
@@ -42676,7 +42275,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDeleteExtendedColumnModifiableViewFailExtendedCollision
 parameter_list|()
@@ -42744,7 +42342,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDeleteExtendedColumnFailDuplicate
 parameter_list|()
@@ -42803,7 +42400,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1804">[CALCITE-1804]    * Cannot assign NOT NULL array to nullable array</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testArrayAssignment
 parameter_list|()
@@ -43007,7 +42603,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectRolledUpColumn
 parameter_list|()
@@ -43175,7 +42770,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectAggregateOnRolledUpColumn
 parameter_list|()
@@ -43267,7 +42861,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRolledUpColumnInWhere
 parameter_list|()
@@ -43302,7 +42895,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRolledUpColumnInHaving
 parameter_list|()
@@ -43328,7 +42920,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRollUpInWindow
 parameter_list|()
@@ -43416,7 +43007,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRollUpInGroupBy
 parameter_list|()
@@ -43450,7 +43040,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRollUpInOrderBy
 parameter_list|()
@@ -43494,7 +43083,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRollUpInJoin
 parameter_list|()
@@ -43570,7 +43158,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJsonValueExpressionOperator
 parameter_list|()
@@ -43665,7 +43252,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJsonExists
 parameter_list|()
@@ -43691,7 +43277,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJsonValue
 parameter_list|()
@@ -43798,7 +43383,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJsonQuery
 parameter_list|()
@@ -43876,7 +43460,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJsonArray
 parameter_list|()
@@ -43910,7 +43493,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJsonArrayAgg
 parameter_list|()
@@ -43936,7 +43518,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJsonObject
 parameter_list|()
@@ -43980,7 +43561,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJsonPretty
 parameter_list|()
@@ -44061,7 +43641,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJsonStorageSize
 parameter_list|()
@@ -44095,7 +43674,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJsonType
 parameter_list|()
@@ -44149,7 +43727,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJsonDepth
 parameter_list|()
@@ -44203,7 +43780,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJsonLength
 parameter_list|()
@@ -44257,7 +43833,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJsonKeys
 parameter_list|()
@@ -44293,7 +43868,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJsonRemove
 parameter_list|()
@@ -44349,7 +43923,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJsonObjectAgg
 parameter_list|()
@@ -44398,7 +43971,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJsonPredicate
 parameter_list|()
@@ -44531,7 +44103,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRegexpReplace
 parameter_list|()
@@ -44711,7 +44282,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInvalidFunctionCall
 parameter_list|()
@@ -44907,7 +44477,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testValidatorReportsOriginalQueryUsingReader
 parameter_list|()
@@ -45119,7 +44688,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testValidateParameterizedExpression
 parameter_list|()

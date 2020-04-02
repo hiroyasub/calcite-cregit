@@ -200,13 +200,11 @@ comment|/**  * Unit test for {@link ArrayTable} and {@link ColumnLoader}.  */
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|ArrayTableTest
 block|{
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPrimitiveArray
 parameter_list|()
@@ -397,7 +395,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNextPowerOf2
 parameter_list|()
@@ -502,7 +499,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLog2
 parameter_list|()
@@ -648,7 +644,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testValueSetInt
 parameter_list|()
@@ -1124,7 +1119,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testValueSetBoolean
 parameter_list|()
@@ -1290,7 +1284,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testValueSetZero
 parameter_list|()
@@ -1387,7 +1380,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testStrings
 parameter_list|()
@@ -1744,7 +1736,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAllNull
 parameter_list|()
@@ -1909,7 +1900,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOneValueOneNull
 parameter_list|()
@@ -2118,7 +2108,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLoadSorted
 parameter_list|()
@@ -2344,7 +2333,6 @@ block|}
 comment|/** As {@link #testLoadSorted()} but column #1 is the unique column, not    * column #0. The algorithm needs to go back and permute the values of    * column #0 after it discovers that column #1 is unique and sorts by it. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLoadSorted2
 parameter_list|()

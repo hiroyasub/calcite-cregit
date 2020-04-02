@@ -5977,7 +5977,6 @@ block|}
 comment|/**    * Tests that when there is an error, non-reserved keywords such as "A",    * "ABSOLUTE" (which naturally arise whenever a production uses    * "&lt;IDENTIFIER&gt;") are removed, but reserved words such as "AND"    * remain.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExceptionCleanup
 parameter_list|()
@@ -6005,7 +6004,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInvalidToken
 parameter_list|()
@@ -6027,7 +6025,6 @@ block|}
 comment|// TODO: should fail in parser
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testStarAsFails
 parameter_list|()
@@ -6047,7 +6044,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDerivedColumnList
 parameter_list|()
@@ -6069,7 +6065,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDerivedColumnListInJoin
 parameter_list|()
@@ -6106,7 +6101,6 @@ block|}
 comment|/** Test case that does not reproduce but is related to    *<a href="https://issues.apache.org/jira/browse/CALCITE-2637">[CALCITE-2637]    * Prefix '-' operator failed between BETWEEN and AND</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testBetweenAnd
 parameter_list|()
@@ -6142,7 +6136,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testBetweenAnd2
 parameter_list|()
@@ -6182,7 +6175,6 @@ annotation|@
 name|Disabled
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDerivedColumnListNoAs
 parameter_list|()
@@ -6203,7 +6195,6 @@ annotation|@
 name|Disabled
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testEmbeddedCall
 parameter_list|()
@@ -6223,7 +6214,6 @@ annotation|@
 name|Disabled
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testEmbeddedFunction
 parameter_list|()
@@ -6241,7 +6231,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testColumnAliasWithAs
 parameter_list|()
@@ -6261,7 +6250,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testColumnAliasWithoutAs
 parameter_list|()
@@ -6281,7 +6269,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testEmbeddedDate
 parameter_list|()
@@ -6299,7 +6286,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testEmbeddedTime
 parameter_list|()
@@ -6317,7 +6303,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testEmbeddedTimestamp
 parameter_list|()
@@ -6335,7 +6320,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNot
 parameter_list|()
@@ -6355,7 +6339,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testBooleanPrecedenceAndAssociativity
 parameter_list|()
@@ -6419,7 +6402,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLessThanAssociativity
 parameter_list|()
@@ -6664,7 +6646,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testIsBooleans
 parameter_list|()
@@ -6735,7 +6716,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testIsBooleanPrecedenceAndAssociativity
 parameter_list|()
@@ -6824,7 +6804,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testEqualNotEqual
 parameter_list|()
@@ -6872,7 +6851,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testBangEqualIsBad
 parameter_list|()
@@ -6898,7 +6876,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testBetween
 parameter_list|()
@@ -7153,7 +7130,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOperateOnColumn
 parameter_list|()
@@ -7173,7 +7149,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRow
 parameter_list|()
@@ -7454,7 +7429,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRowValueExpression
 parameter_list|()
@@ -7605,7 +7579,6 @@ return|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRowWithDot
 parameter_list|()
@@ -7643,7 +7616,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPeriod
 parameter_list|()
@@ -7663,7 +7635,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOverlaps
 parameter_list|()
@@ -7799,7 +7770,6 @@ block|}
 comment|/** Parses a list of statements (that contains only one statement). */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testStmtListWithSelect
 parameter_list|()
@@ -7827,7 +7797,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testStmtListWithSelectAndSemicolon
 parameter_list|()
@@ -7855,7 +7824,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testStmtListWithTwoSelect
 parameter_list|()
@@ -7885,7 +7853,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testStmtListWithTwoSelectSemicolon
 parameter_list|()
@@ -7915,7 +7882,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testStmtListWithSelectDelete
 parameter_list|()
@@ -7951,7 +7917,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testStmtListWithSelectDeleteUpdate
 parameter_list|()
@@ -8005,7 +7970,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testStmtListWithSemiColonInComment
 parameter_list|()
@@ -8051,7 +8015,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testStmtListWithSemiColonInWhere
 parameter_list|()
@@ -8087,7 +8050,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testStmtListWithInsertSelectInsert
 parameter_list|()
@@ -8146,7 +8108,6 @@ block|}
 comment|/** Should fail since the first statement lacks semicolon */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testStmtListWithoutSemiColon1
 parameter_list|()
@@ -8167,7 +8128,6 @@ block|}
 comment|/** Should fail since the third statement lacks semicolon */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testStmtListWithoutSemiColon2
 parameter_list|()
@@ -8191,7 +8151,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testIsDistinctFrom
 parameter_list|()
@@ -8281,7 +8240,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testIsNotDistinct
 parameter_list|()
@@ -8315,7 +8273,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFloor
 parameter_list|()
@@ -8643,7 +8600,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCeil
 parameter_list|()
@@ -8971,7 +8927,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCast
 parameter_list|()
@@ -9269,7 +9224,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCastFails
 parameter_list|()
@@ -9337,7 +9291,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLikeAndSimilar
 parameter_list|()
@@ -9617,7 +9570,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFoo
 parameter_list|()
@@ -9625,7 +9577,6 @@ block|{
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testArithmeticOperators
 parameter_list|()
@@ -9693,7 +9644,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExists
 parameter_list|()
@@ -9719,7 +9669,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExistsInWhere
 parameter_list|()
@@ -9743,7 +9692,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFromWithAs
 parameter_list|()
@@ -9765,7 +9713,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testConcat
 parameter_list|()
@@ -9783,7 +9730,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testReverseSolidus
 parameter_list|()
@@ -9801,7 +9747,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSubstring
 parameter_list|()
@@ -9869,7 +9814,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFunction
 parameter_list|()
@@ -9909,7 +9853,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFunctionWithDistinct
 parameter_list|()
@@ -9959,7 +9902,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFunctionCallWithDot
 parameter_list|()
@@ -9977,7 +9919,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFunctionInFunction
 parameter_list|()
@@ -9995,7 +9936,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFunctionNamedArgument
 parameter_list|()
@@ -10043,7 +9983,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFunctionDefaultArgument
 parameter_list|()
@@ -10160,7 +10099,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDefault
 parameter_list|()
@@ -10276,7 +10214,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregateFilter
 parameter_list|()
@@ -10322,7 +10259,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGroup
 parameter_list|()
@@ -10344,7 +10280,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGroupEmpty
 parameter_list|()
@@ -10429,7 +10364,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testHavingAfterGroup
 parameter_list|()
@@ -10469,7 +10403,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testHavingBeforeGroupFails
 parameter_list|()
@@ -10495,7 +10428,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testHavingNoGroup
 parameter_list|()
@@ -10517,7 +10449,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGroupingSets
 parameter_list|()
@@ -10613,7 +10544,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGroupByCube
 parameter_list|()
@@ -10649,7 +10579,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGroupByCube2
 parameter_list|()
@@ -10705,7 +10634,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGroupByRollup
 parameter_list|()
@@ -10760,7 +10688,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGrouping
 parameter_list|()
@@ -10796,7 +10723,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWith
 parameter_list|()
@@ -10834,7 +10760,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWith2
 parameter_list|()
@@ -10878,7 +10803,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWithFails
 parameter_list|()
@@ -10906,7 +10830,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWithValues
 parameter_list|()
@@ -10942,7 +10865,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWithNestedFails
 parameter_list|()
@@ -10971,7 +10893,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWithNestedInSubQuery
 parameter_list|()
@@ -11014,7 +10935,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWithUnion
 parameter_list|()
@@ -11061,7 +10981,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testIdentifier
 parameter_list|()
@@ -11189,7 +11108,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testBackTickIdentifier
 parameter_list|()
@@ -11293,7 +11211,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testBracketIdentifier
 parameter_list|()
@@ -11447,7 +11364,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testBackTickQuery
 parameter_list|()
@@ -11475,7 +11391,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInList
 parameter_list|()
@@ -11497,7 +11412,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInListEmptyFails
 parameter_list|()
@@ -11515,7 +11429,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInQuery
 parameter_list|()
@@ -11539,7 +11452,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSomeEveryAndIntersectionAggQuery
 parameter_list|()
@@ -11560,7 +11472,6 @@ block|}
 comment|/**    * Tricky for the parser - looks like "IN (scalar, scalar)" but isn't.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInQueryWithComma
 parameter_list|()
@@ -11586,7 +11497,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInSetop
 parameter_list|()
@@ -11628,7 +11538,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSome
 parameter_list|()
@@ -11759,7 +11668,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAll
 parameter_list|()
@@ -11797,7 +11705,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAllList
 parameter_list|()
@@ -11833,7 +11740,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUnion
 parameter_list|()
@@ -11895,7 +11801,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUnionOrder
 parameter_list|()
@@ -11929,7 +11834,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOrderUnion
 parameter_list|()
@@ -11952,7 +11856,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLimitUnion
 parameter_list|()
@@ -11975,7 +11878,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUnionOfNonQueryFails
 parameter_list|()
@@ -11994,7 +11896,6 @@ block|}
 comment|/**    * In modern SQL, a query can occur almost everywhere that an expression    * can. This test tests the few exceptions.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testQueryInIllegalContext
 parameter_list|()
@@ -12022,7 +11923,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExcept
 parameter_list|()
@@ -12085,7 +11985,6 @@ block|}
 comment|/** Tests MINUS, which is equivalent to EXCEPT but only supported in some    * conformance levels (e.g. ORACLE). */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSetMinus
 parameter_list|()
@@ -12179,7 +12078,6 @@ block|}
 comment|/** MINUS is a<b>reserved</b> keyword in Calcite in all conformances, even    * in the default conformance, where it is not allowed as an alternative to    * EXCEPT. (It is reserved in Oracle but not in any version of the SQL    * standard.) */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMinusIsReserved
 parameter_list|()
@@ -12217,7 +12115,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testIntersect
 parameter_list|()
@@ -12279,7 +12176,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinCross
 parameter_list|()
@@ -12301,7 +12197,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinOn
 parameter_list|()
@@ -12325,7 +12220,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinOnParentheses
 parameter_list|()
@@ -12364,7 +12258,6 @@ block|}
 comment|/**    * Same as {@link #testJoinOnParentheses()} but fancy aliases.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinOnParenthesesPlus
 parameter_list|()
@@ -12404,7 +12297,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExplicitTableInJoin
 parameter_list|()
@@ -12428,7 +12320,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSubQueryInJoin
 parameter_list|()
@@ -12470,7 +12361,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOuterJoinNoiseWord
 parameter_list|()
@@ -12494,7 +12384,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinQuery
 parameter_list|()
@@ -12518,7 +12407,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFullInnerJoinFails
 parameter_list|()
@@ -12537,7 +12425,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFullOuterJoin
 parameter_list|()
@@ -12560,7 +12447,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInnerOuterJoinFails
 parameter_list|()
@@ -12580,7 +12466,6 @@ annotation|@
 name|Disabled
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinAssociativity
 parameter_list|()
@@ -12631,7 +12516,6 @@ comment|// ("cross" is the only join type which cannot be modified with the
 comment|// "natural") but the parser allows it; we and catch it at validate time
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNaturalCrossJoin
 parameter_list|()
@@ -12653,7 +12537,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinUsing
 parameter_list|()
@@ -12686,7 +12569,6 @@ block|}
 comment|/** Tests CROSS APPLY, which is equivalent to CROSS JOIN and LEFT JOIN but    * only supported in some conformance levels (e.g. SQL Server). */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testApply
 parameter_list|()
@@ -12784,7 +12666,6 @@ block|}
 comment|/** Tests OUTER APPLY. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOuterApply
 parameter_list|()
@@ -12824,7 +12705,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOuterApplySubQuery
 parameter_list|()
@@ -12870,7 +12750,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOuterApplyValues
 parameter_list|()
@@ -12917,7 +12796,6 @@ block|}
 comment|/** Even in SQL Server conformance mode, we do not yet support    * 'function(args)' as an abbreviation for 'table(function(args)'. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOuterApplyFunctionFails
 parameter_list|()
@@ -12947,7 +12825,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCrossOuterApply
 parameter_list|()
@@ -12993,7 +12870,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTableSample
 parameter_list|()
@@ -13161,7 +13037,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLiteral
 parameter_list|()
@@ -13272,7 +13147,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testContinuedLiteral
 parameter_list|()
@@ -13341,7 +13215,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMixedFrom
 parameter_list|()
@@ -13368,7 +13241,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMixedStar
 parameter_list|()
@@ -13390,7 +13262,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSchemaTableStar
 parameter_list|()
@@ -13414,7 +13285,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCatalogSchemaTableStar
 parameter_list|()
@@ -13434,7 +13304,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAliasedStar
 parameter_list|()
@@ -13455,7 +13324,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNotExists
 parameter_list|()
@@ -13479,7 +13347,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOrder
 parameter_list|()
@@ -13501,7 +13368,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOrderNullsFirst
 parameter_list|()
@@ -13543,7 +13409,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOrderInternal
 parameter_list|()
@@ -13589,7 +13454,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOrderIllegalInExpression
 parameter_list|()
@@ -13625,7 +13489,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOrderOffsetFetch
 parameter_list|()
@@ -13814,7 +13677,6 @@ block|}
 comment|/**    * "LIMIT ... OFFSET ..." is the postgres equivalent of SQL:2008    * "OFFSET ... FETCH". It all maps down to a parse tree that looks like    * SQL:2008.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLimit
 parameter_list|()
@@ -13873,7 +13735,6 @@ block|}
 comment|/** Test case that does not reproduce but is related to    *<a href="https://issues.apache.org/jira/browse/CALCITE-1238">[CALCITE-1238]    * Unparsing LIMIT without ORDER BY after validation</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLimitWithoutOrder
 parameter_list|()
@@ -13901,7 +13762,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLimitOffsetWithoutOrder
 parameter_list|()
@@ -13931,7 +13791,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLimitStartCount
 parameter_list|()
@@ -14087,7 +13946,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSqlInlineComment
 parameter_list|()
@@ -14147,7 +14005,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMultilineComment
 parameter_list|()
@@ -14401,7 +14258,6 @@ block|}
 comment|// expressions
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testParseNumber
 parameter_list|()
@@ -14704,7 +14560,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testParseNumberFails
 parameter_list|()
@@ -14722,7 +14577,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMinusPrefixInExpression
 parameter_list|()
@@ -14741,7 +14595,6 @@ block|}
 comment|// operator precedence
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPrecedence0
 parameter_list|()
@@ -14759,7 +14612,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPrecedence1
 parameter_list|()
@@ -14777,7 +14629,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPrecedence2
 parameter_list|()
@@ -14796,7 +14647,6 @@ comment|// special case for unary minus
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPrecedence2b
 parameter_list|()
@@ -14815,7 +14665,6 @@ comment|// two prefixes
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPrecedence3
 parameter_list|()
@@ -14834,7 +14683,6 @@ comment|// prefix vs. postfix
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPrecedence4
 parameter_list|()
@@ -14853,7 +14701,6 @@ comment|// infix, prefix '-'
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPrecedence5
 parameter_list|()
@@ -14883,7 +14730,6 @@ comment|// infix, prefix '+'
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPrecedenceSetOps
 parameter_list|()
@@ -14963,7 +14809,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testQueryInFrom
 parameter_list|()
@@ -14990,7 +14835,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testQuotesInString
 parameter_list|()
@@ -15038,7 +14882,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testScalarQueryInWhere
 parameter_list|()
@@ -15064,7 +14907,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testScalarQueryInSelect
 parameter_list|()
@@ -15088,7 +14930,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectList
 parameter_list|()
@@ -15110,7 +14951,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectWithoutFrom
 parameter_list|()
@@ -15128,7 +14968,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectWithoutFrom2
 parameter_list|()
@@ -15146,7 +14985,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectDistinctWithoutFrom
 parameter_list|()
@@ -15164,7 +15002,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectWithoutFromWhereFails
 parameter_list|()
@@ -15182,7 +15019,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectWithoutFromGroupByFails
 parameter_list|()
@@ -15200,7 +15036,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectWithoutFromHavingFails
 parameter_list|()
@@ -15218,7 +15053,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectList3
 parameter_list|()
@@ -15238,7 +15072,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectList4
 parameter_list|()
@@ -15256,7 +15089,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testStar
 parameter_list|()
@@ -15276,7 +15108,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCompoundStar
 parameter_list|()
@@ -15314,7 +15145,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectDistinct
 parameter_list|()
@@ -15334,7 +15164,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectAll
 parameter_list|()
@@ -15357,7 +15186,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectStream
 parameter_list|()
@@ -15377,7 +15205,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectStreamDistinct
 parameter_list|()
@@ -15397,7 +15224,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWhere
 parameter_list|()
@@ -15419,7 +15245,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNestedSelect
 parameter_list|()
@@ -15441,7 +15266,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testValues
 parameter_list|()
@@ -15459,7 +15283,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testValuesExplicitRow
 parameter_list|()
@@ -15477,7 +15300,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFromValues
 parameter_list|()
@@ -15501,7 +15323,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFromValuesWithoutParens
 parameter_list|()
@@ -15539,7 +15360,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testEmptyValues
 parameter_list|()
@@ -15558,7 +15378,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-493">[CALCITE-493]    * Add EXTEND clause, for defining columns and their types at query/DML    * time</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTableExtend
 parameter_list|()
@@ -15671,7 +15490,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExplicitTable
 parameter_list|()
@@ -15699,7 +15517,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExplicitTableOrdered
 parameter_list|()
@@ -15719,7 +15536,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectFromExplicitTable
 parameter_list|()
@@ -15739,7 +15555,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectFromBareExplicitTableFails
 parameter_list|()
@@ -15767,7 +15582,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCollectionTable
 parameter_list|()
@@ -15787,7 +15601,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDescriptor
 parameter_list|()
@@ -15831,7 +15644,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCollectionTableWithCursorParam
 parameter_list|()
@@ -15853,7 +15665,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCollectionTableWithColumnListParam
 parameter_list|()
@@ -15877,7 +15688,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLateral
 parameter_list|()
@@ -16016,7 +15826,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTemporalTable
 parameter_list|()
@@ -16182,7 +15991,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCollectionTableWithLateral
 parameter_list|()
@@ -16216,7 +16024,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCollectionTableWithLateral2
 parameter_list|()
@@ -16252,7 +16059,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCollectionTableWithLateral3
 parameter_list|()
@@ -16288,7 +16094,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testIllegalCursors
 parameter_list|()
@@ -16326,7 +16131,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExplain
 parameter_list|()
@@ -16362,7 +16166,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExplainAsXml
 parameter_list|()
@@ -16398,7 +16201,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExplainAsJson
 parameter_list|()
@@ -16434,7 +16236,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExplainWithImpl
 parameter_list|()
@@ -16456,7 +16257,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExplainWithoutImpl
 parameter_list|()
@@ -16478,7 +16278,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExplainWithType
 parameter_list|()
@@ -16498,7 +16297,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExplainJsonFormat
 parameter_list|()
@@ -16549,7 +16347,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDescribeSchema
 parameter_list|()
@@ -16589,7 +16386,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDescribeTable
 parameter_list|()
@@ -16680,7 +16476,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDescribeStatement
 parameter_list|()
@@ -16837,7 +16632,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectIsNotDdl
 parameter_list|()
@@ -16859,7 +16653,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInsertSelect
 parameter_list|()
@@ -16896,7 +16689,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInsertUnion
 parameter_list|()
@@ -16930,7 +16722,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInsertValues
 parameter_list|()
@@ -16965,7 +16756,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInsertValuesDefault
 parameter_list|()
@@ -17000,7 +16790,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInsertValuesRawDefault
 parameter_list|()
@@ -17045,7 +16834,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInsertColumnList
 parameter_list|()
@@ -17073,7 +16861,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInsertCaseSensitiveColumnList
 parameter_list|()
@@ -17101,7 +16888,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInsertExtendedColumnList
 parameter_list|()
@@ -17152,7 +16938,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUpdateExtendedColumnList
 parameter_list|()
@@ -17192,7 +16977,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUpdateCaseSensitiveExtendedColumnList
 parameter_list|()
@@ -17232,7 +17016,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInsertCaseSensitiveExtendedColumnList
 parameter_list|()
@@ -17283,7 +17066,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExplainInsert
 parameter_list|()
@@ -17324,7 +17106,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUpsertValues
 parameter_list|()
@@ -17374,7 +17155,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUpsertSelect
 parameter_list|()
@@ -17417,7 +17197,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExplainUpsert
 parameter_list|()
@@ -17462,7 +17241,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDelete
 parameter_list|()
@@ -17489,7 +17267,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDeleteWhere
 parameter_list|()
@@ -17509,7 +17286,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUpdate
 parameter_list|()
@@ -17531,7 +17307,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMergeSelectSource
 parameter_list|()
@@ -17601,7 +17376,6 @@ block|}
 comment|/** Same as testMergeSelectSource but set with compound identifier. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMergeSelectSource2
 parameter_list|()
@@ -17670,7 +17444,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMergeTableRefSource
 parameter_list|()
@@ -17727,7 +17500,6 @@ block|}
 comment|/** Same with testMergeTableRefSource but set with compound identifier. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMergeTableRefSource2
 parameter_list|()
@@ -17783,7 +17555,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testBitStringNotImplemented
 parameter_list|()
@@ -17802,7 +17573,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testHexAndBinaryString
 parameter_list|()
@@ -17879,7 +17649,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testHexAndBinaryStringFails
 parameter_list|()
@@ -17932,7 +17701,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testStringLiteral
 parameter_list|()
@@ -18101,7 +17869,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testStringLiteralFails
 parameter_list|()
@@ -18152,7 +17919,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testStringLiteralChain
 parameter_list|()
@@ -18362,7 +18128,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCaseExpressionFails
 parameter_list|()
@@ -18392,7 +18157,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNullIf
 parameter_list|()
@@ -18429,7 +18193,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCoalesce
 parameter_list|()
@@ -18467,7 +18230,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLiteralCollate
 parameter_list|()
@@ -18555,7 +18317,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCharLength
 parameter_list|()
@@ -18583,7 +18344,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPosition
 parameter_list|()
@@ -18601,7 +18361,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testReplace
 parameter_list|()
@@ -18619,7 +18378,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDateLiteral
 parameter_list|()
@@ -18718,7 +18476,6 @@ block|}
 comment|// check date/time functions.
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTimeDate
 parameter_list|()
@@ -19036,7 +18793,6 @@ block|}
 comment|/**    * Tests for casting to/from date/time types.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDateTimeCast
 parameter_list|()
@@ -19096,7 +18852,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTrim
 parameter_list|()
@@ -19188,7 +18943,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testConvertAndTranslate
 parameter_list|()
@@ -19216,7 +18970,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTranslate3
 parameter_list|()
@@ -19234,7 +18987,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOverlay
 parameter_list|()
@@ -19262,7 +19014,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJdbcFunctionCall
 parameter_list|()
@@ -19462,7 +19213,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWindowReference
 parameter_list|()
@@ -19491,7 +19241,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWindowInSubQuery
 parameter_list|()
@@ -19533,7 +19282,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWindowSpec
 parameter_list|()
@@ -19730,7 +19478,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWindowSpecPartial
 parameter_list|()
@@ -19788,7 +19535,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNullTreatment
 parameter_list|()
@@ -19908,7 +19654,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAs
 parameter_list|()
@@ -20021,7 +19766,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAsAliases
 parameter_list|()
@@ -20100,7 +19844,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOver
 parameter_list|()
@@ -20274,7 +20017,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testElementFunc
 parameter_list|()
@@ -20292,7 +20034,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCardinalityFunc
 parameter_list|()
@@ -20310,7 +20051,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMemberOf
 parameter_list|()
@@ -20338,7 +20078,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSubMultisetrOf
 parameter_list|()
@@ -20356,7 +20095,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testIsASet
 parameter_list|()
@@ -20384,7 +20122,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMultiset
 parameter_list|()
@@ -20454,7 +20191,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMultisetUnion
 parameter_list|()
@@ -20492,7 +20228,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMultisetExcept
 parameter_list|()
@@ -20530,7 +20265,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMultisetIntersect
 parameter_list|()
@@ -20568,7 +20302,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMultisetMixed
 parameter_list|()
@@ -20618,7 +20351,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMapItem
 parameter_list|()
@@ -20666,7 +20398,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMapItemPrecedence
 parameter_list|()
@@ -20714,7 +20445,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testArrayElement
 parameter_list|()
@@ -20752,7 +20482,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testArrayElementWithDot
 parameter_list|()
@@ -20780,7 +20509,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testArrayValueConstructor
 parameter_list|()
@@ -20830,7 +20558,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCastAsCollectionType
 parameter_list|()
@@ -20958,7 +20685,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCastAsRowType
 parameter_list|()
@@ -21026,7 +20752,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMapValueConstructor
 parameter_list|()
@@ -26597,7 +26322,6 @@ block|}
 comment|/**    * Runs tests for each of the thirteen different main types of INTERVAL    * qualifiers (YEAR, YEAR TO MONTH, etc.) Tests in this section fall into    * two categories:    *    *<ul>    *<li>xxxPositive: tests that should pass parser and validator</li>    *<li>xxxFailsValidation: tests that should pass parser but fail validator    *</li>    *</ul>    *    *<p>A substantially identical set of tests exists in SqlValidatorTest, and    * any changes here should be synchronized there.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testIntervalLiterals
 parameter_list|()
@@ -26683,7 +26407,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUnparseableIntervalQualifiers
 parameter_list|()
@@ -27812,7 +27535,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUnparseableIntervalQualifiers2
 parameter_list|()
@@ -28365,7 +28087,6 @@ block|}
 comment|/** Tests that plural time units are allowed when not in strict mode. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testIntervalPluralUnits
 parameter_list|()
@@ -28619,7 +28340,6 @@ return|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMiscIntervalQualifier
 parameter_list|()
@@ -28677,7 +28397,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testIntervalOperators
 parameter_list|()
@@ -28756,7 +28475,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDateMinusDate
 parameter_list|()
@@ -28818,7 +28536,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExtract
 parameter_list|()
@@ -28976,7 +28693,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGeometry
 parameter_list|()
@@ -29010,7 +28726,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testIntervalArithmetics
 parameter_list|()
@@ -29118,7 +28833,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testIntervalCompare
 parameter_list|()
@@ -29186,7 +28900,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCastToInterval
 parameter_list|()
@@ -29334,7 +29047,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCastToVarchar
 parameter_list|()
@@ -29382,7 +29094,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTimestampAddAndDiff
 parameter_list|()
@@ -29695,7 +29406,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTimestampAdd
 parameter_list|()
@@ -29731,7 +29441,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTimestampDiff
 parameter_list|()
@@ -29767,7 +29476,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUnnest
 parameter_list|()
@@ -29850,7 +29558,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUnnestWithOrdinality
 parameter_list|()
@@ -29904,7 +29611,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testParensInFrom
 parameter_list|()
@@ -29985,7 +29691,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testProcedureCall
 parameter_list|()
@@ -30023,7 +29728,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNewSpecification
 parameter_list|()
@@ -30071,7 +29775,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMultisetCast
 parameter_list|()
@@ -30089,7 +29792,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAddCarets
 parameter_list|()
@@ -30157,7 +29859,7 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
+specifier|protected
 name|void
 name|testMetadata
 parameter_list|()
@@ -30593,7 +30295,6 @@ block|}
 comment|/**    * Tests that reserved keywords are not added to the parser unintentionally.    * (Most keywords are non-reserved. The set of reserved words generally    * only changes with a new version of the SQL standard.)    *    *<p>If the new keyword added is intended to be a reserved keyword, update    * the {@link #RESERVED_KEYWORDS} list. If not, add the keyword to the    * non-reserved keyword list in the parser.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNoUnintendedNewReservedKeywords
 parameter_list|()
@@ -30755,7 +30456,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTabStop
 parameter_list|()
@@ -30787,7 +30487,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLongIdentifiers
 parameter_list|()
@@ -30950,7 +30649,6 @@ block|}
 comment|/**    * Tests that you can't quote the names of builtin functions.    *    * @see org.apache.calcite.test.SqlValidatorTest#testQuotedFunction()    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testQuotedFunction
 parameter_list|()
@@ -30999,7 +30697,6 @@ block|}
 comment|/**    * Tests that applying member function of a specific type as a suffix function    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMemberFunction
 parameter_list|()
@@ -31055,7 +30752,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUnicodeLiteral
 parameter_list|()
@@ -31167,7 +30863,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUnicodeEscapedLiteral
 parameter_list|()
@@ -31230,7 +30925,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testIllegalUnicodeEscape
 parameter_list|()
@@ -31348,7 +31042,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSqlOptions
 parameter_list|()
@@ -31718,7 +31411,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSequence
 parameter_list|()
@@ -31832,7 +31524,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMatchRecognize1
 parameter_list|()
@@ -31896,7 +31587,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMatchRecognize2
 parameter_list|()
@@ -31952,7 +31642,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMatchRecognize3
 parameter_list|()
@@ -32008,7 +31697,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMatchRecognize4
 parameter_list|()
@@ -32064,7 +31752,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMatchRecognize5
 parameter_list|()
@@ -32120,7 +31807,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMatchRecognize6
 parameter_list|()
@@ -32176,7 +31862,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMatchRecognize7
 parameter_list|()
@@ -32232,7 +31917,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMatchRecognize8
 parameter_list|()
@@ -32288,7 +31972,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMatchRecognize9
 parameter_list|()
@@ -32344,7 +32027,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMatchRecognize10
 parameter_list|()
@@ -32406,7 +32088,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMatchRecognize11
 parameter_list|()
@@ -32458,7 +32139,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMatchRecognizeDefineClause
 parameter_list|()
@@ -32514,7 +32194,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMatchRecognizeDefineClause2
 parameter_list|()
@@ -32568,7 +32247,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMatchRecognizeDefineClause3
 parameter_list|()
@@ -32624,7 +32302,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMatchRecognizeDefineClause4
 parameter_list|()
@@ -32678,7 +32355,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMatchRecognizeMeasures1
 parameter_list|()
@@ -32754,7 +32430,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMatchRecognizeMeasures2
 parameter_list|()
@@ -32820,7 +32495,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMatchRecognizeMeasures3
 parameter_list|()
@@ -32886,7 +32560,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMatchRecognizeMeasures4
 parameter_list|()
@@ -32956,7 +32629,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMatchRecognizeMeasures5
 parameter_list|()
@@ -33024,7 +32696,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMatchRecognizeMeasures6
 parameter_list|()
@@ -33092,7 +32763,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMatchRecognizePatternSkip1
 parameter_list|()
@@ -33152,7 +32822,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMatchRecognizePatternSkip2
 parameter_list|()
@@ -33212,7 +32881,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMatchRecognizePatternSkip3
 parameter_list|()
@@ -33272,7 +32940,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMatchRecognizePatternSkip4
 parameter_list|()
@@ -33332,7 +32999,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMatchRecognizePatternSkip5
 parameter_list|()
@@ -33393,7 +33059,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2993">[CALCITE-2993]    * ParseException may be thrown for legal SQL queries due to incorrect    * "LOOKAHEAD(1)" hints</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMatchRecognizePatternSkip6
 parameter_list|()
@@ -33453,7 +33118,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMatchRecognizeSubset1
 parameter_list|()
@@ -33513,7 +33177,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMatchRecognizeSubset2
 parameter_list|()
@@ -33583,7 +33246,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMatchRecognizeSubset3
 parameter_list|()
@@ -33653,7 +33315,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMatchRecognizeRowsPerMatch1
 parameter_list|()
@@ -33727,7 +33388,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMatchRecognizeRowsPerMatch2
 parameter_list|()
@@ -33801,7 +33461,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMatchRecognizeWithin
 parameter_list|()
@@ -33875,7 +33534,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWithinGroupClause1
 parameter_list|()
@@ -33919,7 +33577,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWithinGroupClause2
 parameter_list|()
@@ -33961,7 +33618,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWithinGroupClause3
 parameter_list|()
@@ -33987,7 +33643,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWithinGroupClause4
 parameter_list|()
@@ -34031,7 +33686,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWithinGroupClause5
 parameter_list|()
@@ -34077,7 +33731,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJsonValueExpressionOperator
 parameter_list|()
@@ -34162,7 +33815,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJsonExists
 parameter_list|()
@@ -34190,7 +33842,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJsonValue
 parameter_list|()
@@ -34226,7 +33877,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJsonQuery
 parameter_list|()
@@ -34392,7 +34042,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJsonObject
 parameter_list|()
@@ -34500,7 +34149,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJsonType
 parameter_list|()
@@ -34558,7 +34206,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJsonDepth
 parameter_list|()
@@ -34616,7 +34263,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJsonLength
 parameter_list|()
@@ -34664,7 +34310,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJsonKeys
 parameter_list|()
@@ -34702,7 +34347,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJsonRemove
 parameter_list|()
@@ -34730,7 +34374,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJsonObjectAgg
 parameter_list|()
@@ -34802,7 +34445,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJsonArray
 parameter_list|()
@@ -34850,7 +34492,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJsonPretty
 parameter_list|()
@@ -34878,7 +34519,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJsonStorageSize
 parameter_list|()
@@ -34906,7 +34546,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJsonArrayAgg1
 parameter_list|()
@@ -34944,7 +34583,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJsonArrayAgg2
 parameter_list|()
@@ -34984,7 +34622,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJsonPredicate
 parameter_list|()
@@ -35092,7 +34729,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testParseWithReader
 parameter_list|()
@@ -35160,7 +34796,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testConfigureFromDialect
 parameter_list|()
@@ -35320,7 +34955,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testParenthesizedSubQueries
 parameter_list|()
@@ -35370,7 +35004,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testQueryHint
 parameter_list|()
@@ -35420,7 +35053,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTableHintsInQuery
 parameter_list|()
@@ -35565,7 +35197,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTableHintsInInsert
 parameter_list|()
@@ -35605,7 +35236,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTableHintsInDelete
 parameter_list|()
@@ -35643,7 +35273,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTableHintsInUpdate
 parameter_list|()
@@ -35689,7 +35318,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTableHintsInMerge
 parameter_list|()
@@ -35753,7 +35381,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInvalidHintFormat
 parameter_list|()

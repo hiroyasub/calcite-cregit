@@ -514,14 +514,12 @@ comment|/**  * Unit tests for {@link LatticeSuggester}.  */
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|LatticeSuggesterTest
 block|{
 comment|/** Some basic query patterns on the Scott schema with "EMP" and "DEPT"    * tables. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testEmpDept
 parameter_list|()
@@ -798,7 +796,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFoodmart
 parameter_list|()
@@ -930,7 +927,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregateExpression
 parameter_list|()
@@ -1297,7 +1293,6 @@ literal|"slow"
 argument_list|)
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSharedSnowflake
 parameter_list|()
@@ -1390,7 +1385,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExpressionInAggregate
 parameter_list|()
@@ -1938,7 +1932,6 @@ literal|"slow"
 argument_list|)
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFoodMartAll
 parameter_list|()
@@ -1958,7 +1951,6 @@ literal|"slow"
 argument_list|)
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFoodMartAllEvolve
 parameter_list|()
@@ -1973,7 +1965,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testContains
 parameter_list|()
@@ -2174,7 +2165,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testEvolve
 parameter_list|()
@@ -2557,7 +2547,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExpression
 parameter_list|()
@@ -2774,7 +2763,6 @@ block|}
 comment|/** As {@link #testExpression()} but with multiple queries.    * Some expressions are measures in one query and dimensions in another. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExpressionEvolution
 parameter_list|()
@@ -3155,7 +3143,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExpressionInJoin
 parameter_list|()
@@ -3377,7 +3364,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRedshiftDialect
 parameter_list|()
@@ -3473,7 +3459,6 @@ block|}
 comment|/** A tricky case involving a CTE (WITH), a join condition that references an    * expression, a complex WHERE clause, and some other queries. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinUsingExpression
 parameter_list|()
@@ -3616,7 +3601,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDerivedColRef
 parameter_list|()
@@ -3764,7 +3748,6 @@ block|}
 comment|/** Tests that we can run the suggester against non-JDBC schemas.    *    *<p>{@link org.apache.calcite.test.CalciteAssert.SchemaSpec#FAKE_FOODMART}    * is not based on {@link org.apache.calcite.adapter.jdbc.JdbcSchema} or    * {@link org.apache.calcite.adapter.jdbc.JdbcTable} but can provide a    * {@link javax.sql.DataSource}    * and {@link SqlDialect} for executing statistics queries.    *    *<p>The query has a join, and so we have to execute statistics queries    * to deduce the direction of the foreign key.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFoodmartSimpleJoin
 parameter_list|()
@@ -3879,7 +3862,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUnion
 parameter_list|()

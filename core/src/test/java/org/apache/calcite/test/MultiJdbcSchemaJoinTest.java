@@ -360,13 +360,11 @@ comment|/** Test case for joining tables from two different JDBC databases. */
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|MultiJdbcSchemaJoinTest
 block|{
 annotation|@
 name|Test
-specifier|public
 name|void
 name|test
 parameter_list|()
@@ -633,7 +631,6 @@ block|}
 comment|/** Makes sure that {@link #test} is re-entrant.    * Effectively a test for {@code TempDb}. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|test2
 parameter_list|()
@@ -649,7 +646,6 @@ block|}
 comment|/** Tests {@link org.apache.calcite.adapter.jdbc.JdbcCatalogSchema}. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|test3
 parameter_list|()
@@ -985,7 +981,6 @@ return|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJdbcWithEnumerableHashJoin
 parameter_list|()
@@ -1035,7 +1030,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testEnumerableWithJdbcJoin
 parameter_list|()
@@ -1086,7 +1080,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testEnumerableWithJdbcJoinWithWhereClause
 parameter_list|()
@@ -1268,7 +1261,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSchemaConsistency
 parameter_list|()

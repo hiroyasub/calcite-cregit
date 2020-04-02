@@ -269,7 +269,6 @@ name|ResourceAccessMode
 operator|.
 name|READ
 argument_list|)
-specifier|public
 class|class
 name|ProjectionTest
 block|{
@@ -521,7 +520,6 @@ return|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|projection
 parameter_list|()

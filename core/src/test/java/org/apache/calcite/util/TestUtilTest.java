@@ -66,13 +66,11 @@ comment|/**  * Tests for TestUtil  */
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|TestUtilTest
 block|{
 annotation|@
 name|Test
-specifier|public
 name|void
 name|javaMajorVersionExceeds6
 parameter_list|()
@@ -102,7 +100,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|majorVersionFromString
 parameter_list|()

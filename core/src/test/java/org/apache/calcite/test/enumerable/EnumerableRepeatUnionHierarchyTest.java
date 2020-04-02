@@ -226,7 +226,6 @@ comment|/**  * Unit tests for  * {@link EnumerableRepeatUnion}  *<a href="https:
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|EnumerableRepeatUnionHierarchyTest
 block|{

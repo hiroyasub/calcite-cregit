@@ -352,7 +352,6 @@ comment|/**  * Tests for user-defined table functions.  *  * @see UdfTest  * @se
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|TableFunctionTest
 block|{
@@ -492,7 +491,6 @@ block|}
 comment|/**    * Tests a table function with literal arguments.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTableFunction
 parameter_list|()
@@ -610,7 +608,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTableFunctionWithArrayParameter
 parameter_list|()
@@ -728,7 +725,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTableFunctionWithMapParameter
 parameter_list|()
@@ -847,7 +843,6 @@ block|}
 comment|/**    * Tests a table function that implements {@link ScannableTable} and returns    * a single column.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testScannableTableFunction
 parameter_list|()
@@ -972,7 +967,6 @@ block|}
 comment|/** As {@link #testScannableTableFunction()} but with named parameters. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testScannableTableFunctionWithNamedParameters
 parameter_list|()
@@ -1176,7 +1170,6 @@ block|}
 comment|/** As {@link #testScannableTableFunction()} but with named parameters. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMultipleScannableTableFunctionWithNamedParameters
 parameter_list|()
@@ -1456,7 +1449,6 @@ block|}
 comment|/**    * Tests a table function that returns different row type based on    * actual call arguments.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTableFunctionDynamicStructure
 parameter_list|()
@@ -1529,7 +1521,6 @@ literal|"SQLException does not include message from nested exception"
 argument_list|)
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTableFunctionNonNullableMustBeLiterals
 parameter_list|()
@@ -1702,7 +1693,6 @@ literal|"could not be implemented"
 argument_list|)
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTableFunctionCursorInputs
 parameter_list|()
@@ -1871,7 +1861,6 @@ literal|"could not be implemented"
 argument_list|)
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTableFunctionCursorsInputs
 parameter_list|()
@@ -2034,7 +2023,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUserDefinedTableFunction
 parameter_list|()
@@ -2067,7 +2055,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUserDefinedTableFunction2
 parameter_list|()
@@ -2098,7 +2085,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUserDefinedTableFunction3
 parameter_list|()
@@ -2129,7 +2115,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUserDefinedTableFunction4
 parameter_list|()
@@ -2160,7 +2145,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUserDefinedTableFunction5
 parameter_list|()
@@ -2199,7 +2183,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUserDefinedTableFunction6
 parameter_list|()
@@ -2302,7 +2285,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUserDefinedTableFunction7
 parameter_list|()
@@ -2335,7 +2317,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUserDefinedTableFunction8
 parameter_list|()
@@ -2365,7 +2346,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3364">[CALCITE-3364]    * Can't group table function result due to a type cast error if table function    * returns a row with a single value</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUserDefinedTableFunction9
 parameter_list|()
@@ -2396,7 +2376,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCrossApply
 parameter_list|()
@@ -2479,7 +2458,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2004">[CALCITE-2004]    * Wrong plan generated for left outer apply with table function</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLeftOuterApply
 parameter_list|()
@@ -2522,7 +2500,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2382">[CALCITE-2382]    * Sub-query lateral joined to table function</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInlineViewLateralTableFunction
 parameter_list|()

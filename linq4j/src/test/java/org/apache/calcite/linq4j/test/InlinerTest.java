@@ -282,7 +282,6 @@ comment|/**  * Tests expression inlining in BlockBuilder.  */
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|InlinerTest
 block|{
@@ -307,7 +306,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInlineSingleUsage
 parameter_list|()
@@ -372,7 +370,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInlineConstant
 parameter_list|()
@@ -439,7 +436,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInlineParameter
 parameter_list|()
@@ -520,7 +516,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNoInlineMultipleUsage
 parameter_list|()
@@ -628,7 +623,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAssignInConditionMultipleUsage
 parameter_list|()
@@ -780,7 +774,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAssignInConditionOptimizedOut
 parameter_list|()
@@ -801,7 +794,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAssignInConditionNotOptimizedWithoutFinal
 parameter_list|()
@@ -985,7 +977,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAssignInConditionMultipleUsageNonOptimized
 parameter_list|()
@@ -1137,7 +1128,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMultiPassOptimization
 parameter_list|()
@@ -1277,7 +1267,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInlineInTryCatchStatement
 parameter_list|()

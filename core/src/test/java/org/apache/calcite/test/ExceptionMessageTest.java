@@ -408,7 +408,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testValidQuery
 parameter_list|()
@@ -425,7 +424,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNonSqlException
 parameter_list|()
@@ -470,7 +468,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSyntaxError
 parameter_list|()
@@ -513,7 +510,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSemanticError
 parameter_list|()
@@ -550,7 +546,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNonexistentTable
 parameter_list|()

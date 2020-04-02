@@ -210,7 +210,6 @@ comment|/**  * Tests for {@link Source}.  */
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|SourceTest
 block|{
@@ -370,7 +369,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAppendWithSpaces
 parameter_list|()
@@ -710,7 +708,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAppendHttp
 parameter_list|()
@@ -879,7 +876,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSpaceInUrl
 parameter_list|()
@@ -933,7 +929,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSpaceInRelativeUrl
 parameter_list|()
@@ -981,7 +976,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRelative
 parameter_list|()

@@ -402,7 +402,6 @@ comment|/**  * Tests for {@link RelToSqlConverter} on a schema that has nested s
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|RelToSqlConverterStructsTest
 block|{
@@ -967,7 +966,6 @@ return|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNestedSchemaSelectStar
 parameter_list|()
@@ -1003,7 +1001,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNestedSchemaRootColumns
 parameter_list|()
@@ -1035,7 +1032,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNestedSchemaNestedColumns
 parameter_list|()

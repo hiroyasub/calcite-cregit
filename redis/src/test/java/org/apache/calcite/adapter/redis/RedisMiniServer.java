@@ -719,7 +719,6 @@ literal|"true"
 argument_list|)
 annotation|@
 name|Test
-specifier|public
 name|void
 name|redisServerMiniTest
 parameter_list|()

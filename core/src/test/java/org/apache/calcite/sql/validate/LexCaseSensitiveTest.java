@@ -390,7 +390,6 @@ comment|/**  * Testing {@link SqlValidator} and {@link Lex}.  */
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|LexCaseSensitiveTest
 block|{
@@ -707,7 +706,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCalciteCaseOracle
 parameter_list|()
@@ -737,7 +735,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCalciteCaseOracleException
 parameter_list|()
@@ -774,7 +771,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCalciteCaseMySql
 parameter_list|()
@@ -804,7 +800,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCalciteCaseMySqlNoException
 parameter_list|()
@@ -834,7 +829,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCalciteCaseMySqlAnsi
 parameter_list|()
@@ -864,7 +858,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCalciteCaseMySqlAnsiNoException
 parameter_list|()
@@ -894,7 +887,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCalciteCaseSqlServer
 parameter_list|()
@@ -924,7 +916,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCalciteCaseSqlServerNoException
 parameter_list|()
@@ -954,7 +945,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCalciteCaseJava
 parameter_list|()
@@ -984,7 +974,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCalciteCaseJavaException
 parameter_list|()
@@ -1021,7 +1010,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCalciteCaseJoinOracle
 parameter_list|()
@@ -1055,7 +1043,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCalciteCaseJoinMySql
 parameter_list|()
@@ -1087,7 +1074,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCalciteCaseJoinMySqlAnsi
 parameter_list|()
@@ -1119,7 +1105,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCalciteCaseJoinSqlServer
 parameter_list|()
@@ -1151,7 +1136,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCalciteCaseJoinJava
 parameter_list|()

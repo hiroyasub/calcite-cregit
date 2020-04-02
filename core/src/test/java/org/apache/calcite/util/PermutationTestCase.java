@@ -242,13 +242,11 @@ comment|/**  * Unit test for {@link Permutation}.  */
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|PermutationTestCase
 block|{
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOne
 parameter_list|()
@@ -373,7 +371,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTwo
 parameter_list|()
@@ -520,7 +517,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInsert
 parameter_list|()
@@ -674,7 +670,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testEmpty
 parameter_list|()
@@ -784,7 +779,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testProjectPermutation
 parameter_list|()

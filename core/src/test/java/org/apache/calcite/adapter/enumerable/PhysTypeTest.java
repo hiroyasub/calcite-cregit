@@ -192,7 +192,6 @@ decl_stmt|;
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2677">[CALCITE-2677]    * Struct types with one field are not mapped correctly to Java Classes</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFieldClassOnColumnOfOneFieldStructType
 parameter_list|()
@@ -283,7 +282,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2677">[CALCITE-2677]    * Struct types with one field are not mapped correctly to Java Classes</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFieldClassOnColumnOfTwoFieldStructType
 parameter_list|()
@@ -385,7 +383,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3364">[CALCITE-3364]    * Can't group table function result due to a type cast error if table function    * returns a row with a single value</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOneColumnJavaRowFormatConversion
 parameter_list|()

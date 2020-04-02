@@ -490,7 +490,6 @@ comment|/**  * Unit test for handling of traits by {@link VolcanoPlanner}.  */
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|VolcanoPlannerTraitTest
 block|{
@@ -581,7 +580,6 @@ annotation|@
 name|Disabled
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDoubleConversion
 parameter_list|()
@@ -855,7 +853,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRuleMatchAfterConversion
 parameter_list|()
@@ -1017,7 +1014,6 @@ annotation|@
 name|Disabled
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTraitPropagation
 parameter_list|()
@@ -1344,7 +1340,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPlanWithNoneConvention
 parameter_list|()

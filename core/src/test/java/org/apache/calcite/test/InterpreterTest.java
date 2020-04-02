@@ -360,7 +360,6 @@ comment|/**  * Unit tests for {@link org.apache.calcite.interpreter.Interpreter}
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|InterpreterTest
 block|{
@@ -801,7 +800,6 @@ block|}
 comment|/** Tests executing a simple plan using an interpreter. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInterpretProjectFilterValues
 parameter_list|()
@@ -834,7 +832,6 @@ block|}
 comment|/** Tests a plan where the sort field is projected away. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInterpretOrder
 parameter_list|()
@@ -873,7 +870,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInterpretMultiset
 parameter_list|()
@@ -1000,7 +996,6 @@ block|}
 comment|/** Tests executing a simple plan using an interpreter. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInterpretTable
 parameter_list|()
@@ -1027,7 +1022,6 @@ block|}
 comment|/** Tests executing a plan on a    * {@link org.apache.calcite.schema.ScannableTable} using an interpreter. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInterpretScannableTable
 parameter_list|()
@@ -1066,7 +1060,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregateCount
 parameter_list|()
@@ -1099,7 +1092,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregateMax
 parameter_list|()
@@ -1132,7 +1124,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregateMin
 parameter_list|()
@@ -1165,7 +1156,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregateGroup
 parameter_list|()
@@ -1204,7 +1194,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregateGroupFilter
 parameter_list|()
@@ -1254,7 +1243,6 @@ block|}
 comment|/** Tests executing a plan on a single-column    * {@link org.apache.calcite.schema.ScannableTable} using an interpreter. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInterpretSimpleScannableTable
 parameter_list|()
@@ -1290,7 +1278,6 @@ block|}
 comment|/** Tests executing a UNION ALL query using an interpreter. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInterpretUnionAll
 parameter_list|()
@@ -1348,7 +1335,6 @@ block|}
 comment|/** Tests executing a UNION query using an interpreter. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInterpretUnion
 parameter_list|()
@@ -1397,7 +1383,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInterpretUnionWithNullValue
 parameter_list|()
@@ -1431,7 +1416,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInterpretUnionAllWithNullValue
 parameter_list|()
@@ -1469,7 +1453,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInterpretIntersect
 parameter_list|()
@@ -1501,7 +1484,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInterpretIntersectAll
 parameter_list|()
@@ -1533,7 +1515,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInterpretIntersectWithNullValue
 parameter_list|()
@@ -1567,7 +1548,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInterpretIntersectAllWithNullValue
 parameter_list|()
@@ -1601,7 +1581,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInterpretMinus
 parameter_list|()
@@ -1635,7 +1614,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDuplicateRowInterpretMinus
 parameter_list|()
@@ -1665,7 +1643,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInterpretMinusAll
 parameter_list|()
@@ -1701,7 +1678,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDuplicateRowInterpretMinusAll
 parameter_list|()
@@ -1733,7 +1709,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInterpretMinusAllWithNullValue
 parameter_list|()
@@ -1767,7 +1742,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInterpretMinusWithNullValue
 parameter_list|()
@@ -1799,7 +1773,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInterpretInnerJoin
 parameter_list|()
@@ -1835,7 +1808,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInterpretLeftOutJoin
 parameter_list|()
@@ -1873,7 +1845,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInterpretRightOutJoin
 parameter_list|()
@@ -1911,7 +1882,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInterpretSemanticSemiJoin
 parameter_list|()
@@ -1943,7 +1913,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInterpretSemiJoin
 parameter_list|()
@@ -2057,7 +2026,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInterpretAntiJoin
 parameter_list|()
@@ -2089,7 +2057,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInterpretFullJoin
 parameter_list|()
@@ -2129,7 +2096,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInterpretDecimalAggregate
 parameter_list|()
@@ -2159,7 +2125,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInterpretUnnest
 parameter_list|()

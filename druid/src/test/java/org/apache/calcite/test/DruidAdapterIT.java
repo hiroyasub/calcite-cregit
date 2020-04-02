@@ -634,7 +634,6 @@ block|}
 comment|/** Tests a query against the {@link #WIKI} data set.    *    *<p>Most of the others in this suite are against {@link #FOODMART},    * but our examples in "druid-adapter.md" use wikipedia. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectDistinctWiki
 parameter_list|()
@@ -668,7 +667,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectDistinctWikiNoColumns
 parameter_list|()
@@ -702,7 +700,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectDistinctWikiNoTables
 parameter_list|()
@@ -797,7 +794,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectTimestampColumnNoTables1
 parameter_list|()
@@ -864,7 +860,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectTimestampColumnNoTables2
 parameter_list|()
@@ -925,7 +920,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectTimestampColumnNoTables3
 parameter_list|()
@@ -993,7 +987,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectTimestampColumnNoTables4
 parameter_list|()
@@ -1062,7 +1055,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSkipEmptyBuckets
 parameter_list|()
@@ -1196,7 +1188,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1617">[CALCITE-1617]    * Druid adapter: Send timestamp literals to Druid as local time, not    * UTC</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFilterTime
 parameter_list|()
@@ -1271,7 +1262,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFilterTimeDistinct
 parameter_list|()
@@ -1348,7 +1338,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMetadataColumns
 parameter_list|()
@@ -1576,7 +1565,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectDistinct
 parameter_list|()
@@ -1642,7 +1630,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectGroupBySum
 parameter_list|()
@@ -1691,7 +1678,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGroupbyMetric
 parameter_list|()
@@ -1773,7 +1759,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPushSimpleGroupBy
 parameter_list|()
@@ -1826,7 +1811,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testComplexPushGroupBy
 parameter_list|()
@@ -1890,7 +1874,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1281">[CALCITE-1281]    * Druid adapter wrongly returns all numeric values as int or float</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectCount
 parameter_list|()
@@ -2019,7 +2002,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSort
 parameter_list|()
@@ -2095,7 +2077,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSortLimit
 parameter_list|()
@@ -2146,7 +2127,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOffsetLimit
 parameter_list|()
@@ -2195,7 +2175,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLimit
 parameter_list|()
@@ -2241,7 +2220,6 @@ block|}
 comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2804">[CALCITE-2804]</a>    * Cast does not work in Druid when casting to timestamp    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCastToTimestamp
 parameter_list|()
@@ -2312,7 +2290,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDistinctLimit
 parameter_list|()
@@ -2392,7 +2369,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1578">[CALCITE-1578]    * Druid adapter: wrong semantics of topN query limit with granularity</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGroupBySortLimit
 parameter_list|()
@@ -2476,7 +2452,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1587">[CALCITE-1587]    * Druid adapter: topN returns approximate results</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGroupBySingleSortLimit
 parameter_list|()
@@ -2490,7 +2465,6 @@ block|}
 comment|/** As {@link #testGroupBySingleSortLimit}, but allowing approximate results    * due to {@link CalciteConnectionConfig#approximateDistinctCount()}.    * Therefore we send a "topN" query to Druid. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGroupBySingleSortLimitApprox
 parameter_list|()
@@ -2633,7 +2607,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1578">[CALCITE-1578]    * Druid adapter: wrong semantics of groupBy query limit with granularity</a>.    *    *<p>Before CALCITE-1578 was fixed, this would use a "topN" query but return    * the wrong results. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGroupByDaySortDescLimit
 parameter_list|()
@@ -2711,7 +2684,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1579">[CALCITE-1579]    * Druid adapter: wrong semantics of groupBy query limit with    * granularity</a>.    *    *<p>Before CALCITE-1579 was fixed, this would use a "groupBy" query but    * wrongly try to use a {@code limitSpec} to sort and filter. (A "topN" query    * was not possible because the sort was {@code ASC}.) */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGroupByDaySortLimit
 parameter_list|()
@@ -2803,7 +2775,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1580">[CALCITE-1580]    * Druid adapter: Wrong semantics for ordering within groupBy queries</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGroupByDaySortDimension
 parameter_list|()
@@ -2885,7 +2856,6 @@ block|}
 comment|/** Tests a query that contains no GROUP BY and is therefore executed as a    * Druid "select" query. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFilterSortDesc
 parameter_list|()
@@ -3014,7 +2984,6 @@ block|}
 comment|/** As {@link #testFilterSortDesc()} but the bounds are numeric. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFilterSortDescNumeric
 parameter_list|()
@@ -3143,7 +3112,6 @@ block|}
 comment|/** Tests a query whose filter removes all rows. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFilterOutEverything
 parameter_list|()
@@ -3198,7 +3166,6 @@ block|}
 comment|/** As {@link #testFilterSortDescNumeric()} but with a filter that cannot    * be pushed down to Druid. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNonPushableFilterSortDesc
 parameter_list|()
@@ -3336,7 +3303,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUnionPlan
 parameter_list|()
@@ -3389,7 +3355,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFilterUnionPlan
 parameter_list|()
@@ -3444,7 +3409,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCountGroupByEmpty
 parameter_list|()
@@ -3506,7 +3470,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGroupByOneColumnNotProjected
 parameter_list|()
@@ -3537,7 +3500,6 @@ block|}
 comment|/** Unlike {@link #testGroupByTimeAndOneColumnNotProjected()}, we cannot use    * "topN" because we have a global limit, and that requires    * {@code granularity: all}. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGroupByTimeAndOneColumnNotProjectedWithLimit
 parameter_list|()
@@ -3582,7 +3544,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGroupByTimeAndOneMetricNotProjected
 parameter_list|()
@@ -3629,7 +3590,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGroupByTimeAndOneColumnNotProjected
 parameter_list|()
@@ -3674,7 +3634,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOrderByOneColumnNotProjected
 parameter_list|()
@@ -3705,7 +3664,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGroupByOneColumn
 parameter_list|()
@@ -3758,7 +3716,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGroupByOneColumnReversed
 parameter_list|()
@@ -3795,7 +3752,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGroupByAvgSumCount
 parameter_list|()
@@ -3886,7 +3842,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGroupByMonthGranularity
 parameter_list|()
@@ -3953,7 +3908,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1577">[CALCITE-1577]    * Druid adapter: Incorrect result - limit on timestamp disappears</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGroupByMonthGranularitySort
 parameter_list|()
@@ -4028,7 +3982,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGroupByMonthGranularitySortLimit
 parameter_list|()
@@ -4085,7 +4038,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGroupByDayGranularity
 parameter_list|()
@@ -4138,7 +4090,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGroupByMonthGranularityFiltered
 parameter_list|()
@@ -4195,7 +4146,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTopNMonthGranularity
 parameter_list|()
@@ -4299,7 +4249,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTopNDayGranularityFiltered
 parameter_list|()
@@ -4395,7 +4344,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGroupByHaving
 parameter_list|()
@@ -4442,7 +4390,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGroupComposite
 parameter_list|()
@@ -4489,7 +4436,6 @@ block|}
 comment|/** Tests that distinct-count is pushed down to Druid and evaluated using    * "cardinality". The result is approximate, but gives the correct result in    * this example when rounded down using FLOOR. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDistinctCount
 parameter_list|()
@@ -4572,7 +4518,6 @@ block|}
 comment|/** Tests that projections of columns are pushed into the DruidQuery, and    * projections of expressions that Druid cannot handle (in this case, a    * literal 0) stay up. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testProject
 parameter_list|()
@@ -4624,7 +4569,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFilterDistinct
 parameter_list|()
@@ -4734,7 +4678,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFilter
 parameter_list|()
@@ -4853,7 +4796,6 @@ block|}
 comment|/** Tests that conditions applied to time units extracted via the EXTRACT    * function become ranges on the timestamp column    *    *<p>Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1334">[CALCITE-1334]    * Convert predicates on EXTRACT function calls into date ranges</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFilterTimestamp
 parameter_list|()
@@ -4899,7 +4841,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFilterSwapped
 parameter_list|()
@@ -4952,7 +4893,6 @@ block|}
 comment|/** Tests a query that exposed several bugs in the interpreter. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWhereGroupBy
 parameter_list|()
@@ -5007,7 +4947,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGroupByMetricAndExtractTime
 parameter_list|()
@@ -5041,7 +4980,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFilterOnDouble
 parameter_list|()
@@ -5072,7 +5010,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPushAggregateOnTime
 parameter_list|()
@@ -5125,7 +5062,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPushAggregateOnTimeWithExtractYear
 parameter_list|()
@@ -5175,7 +5111,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPushAggregateOnTimeWithExtractMonth
 parameter_list|()
@@ -5233,7 +5168,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPushAggregateOnTimeWithExtractDay
 parameter_list|()
@@ -5291,7 +5225,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPushAggregateOnTimeWithExtractHourOfDay
 parameter_list|()
@@ -5333,7 +5266,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPushAggregateOnTimeWithExtractYearMonthDay
 parameter_list|()
@@ -5422,7 +5354,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPushAggregateOnTimeWithExtractYearMonthDayWithOutRenaming
 parameter_list|()
@@ -5511,7 +5442,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPushAggregateOnTimeWithExtractWithOutRenaming
 parameter_list|()
@@ -5582,7 +5512,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPushComplexFilter
 parameter_list|()
@@ -5654,7 +5583,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPushOfFilterExtractionOnDayAndMonth
 parameter_list|()
@@ -5687,7 +5615,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPushOfFilterExtractionOnDayAndMonthAndYear
 parameter_list|()
@@ -5731,7 +5658,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFilterExtractionOnMonthWithBetween
 parameter_list|()
@@ -5776,7 +5702,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFilterExtractionOnMonthWithIn
 parameter_list|()
@@ -5848,7 +5773,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPushOfOrderByWithMonthExtract
 parameter_list|()
@@ -5926,7 +5850,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGroupByFloorTimeWithoutLimit
 parameter_list|()
@@ -5973,7 +5896,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGroupByFloorTimeWithLimit
 parameter_list|()
@@ -6035,7 +5957,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPushofOrderByYearWithYearMonthExtract
 parameter_list|()
@@ -6146,7 +6067,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPushofOrderByMetricWithYearMonthExtract
 parameter_list|()
@@ -6217,7 +6137,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGroupByTimeSortOverMetrics
 parameter_list|()
@@ -6289,7 +6208,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNumericOrderingOfOrderByOperatorFullTime
 parameter_list|()
@@ -6350,7 +6268,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNumericOrderingOfOrderByOperatorTimeExtract
 parameter_list|()
@@ -6411,7 +6328,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNumericOrderingOfOrderByOperatorStringDims
 parameter_list|()
@@ -6462,7 +6378,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGroupByWeekExtract
 parameter_list|()
@@ -6538,7 +6453,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1765">[CALCITE-1765]    * Druid adapter: Gracefully handle granularity that cannot be pushed to    * extraction function</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTimeExtractThatCannotBePushed
 parameter_list|()
@@ -6595,7 +6509,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1770">[CALCITE-1770]    * Druid adapter: CAST(NULL AS ...) gives NPE</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPushCast
 parameter_list|()
@@ -6631,7 +6544,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFalseFilter
 parameter_list|()
@@ -6667,7 +6579,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTrueFilter
 parameter_list|()
@@ -6690,7 +6601,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFalseFilterCaseConjectionWithTrue
 parameter_list|()
@@ -6725,7 +6635,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1769">[CALCITE-1769]    * Druid adapter: Push down filters involving numeric cast of literals</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPushCastNumeric
 parameter_list|()
@@ -6868,7 +6777,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPushFieldEqualsLiteral
 parameter_list|()
@@ -6962,7 +6870,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPlusArithmeticOperation
 parameter_list|()
@@ -7025,7 +6932,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDivideArithmeticOperation
 parameter_list|()
@@ -7088,7 +6994,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMultiplyArithmeticOperation
 parameter_list|()
@@ -7151,7 +7056,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMinusArithmeticOperation
 parameter_list|()
@@ -7216,7 +7120,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testConstantPostAggregator
 parameter_list|()
@@ -7279,7 +7182,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRecursiveArithmeticOperation
 parameter_list|()
@@ -7351,7 +7253,6 @@ block|}
 comment|/**    * Turn on now count(distinct )    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testHyperUniquePostAggregator
 parameter_list|()
@@ -7409,7 +7310,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExtractFilterWorkWithPostAggregations
 parameter_list|()
@@ -7475,7 +7375,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExtractFilterWorkWithPostAggregationsWithConstant
 parameter_list|()
@@ -7547,7 +7446,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSingleAverageFunction
 parameter_list|()
@@ -7612,7 +7510,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPartiallyPostAggregation
 parameter_list|()
@@ -7682,7 +7579,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDuplicateReferenceOnPostAggregation
 parameter_list|()
@@ -7751,7 +7647,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDivideByZeroDoubleTypeInfinity
 parameter_list|()
@@ -7814,7 +7709,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDivideByZeroDoubleTypeNegInfinity
 parameter_list|()
@@ -7879,7 +7773,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDivideByZeroDoubleTypeNaN
 parameter_list|()
@@ -7945,7 +7838,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDivideByZeroIntegerType
 parameter_list|()
@@ -7995,7 +7887,6 @@ comment|// e.g., throws_("/ by zero");
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInterleaveBetweenAggregateAndGroupOrderByOnMetrics
 parameter_list|()
@@ -8072,7 +7963,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInterleaveBetweenAggregateAndGroupOrderByOnDimension
 parameter_list|()
@@ -8146,7 +8036,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOrderByOnMetricsInSelectDruidQuery
 parameter_list|()
@@ -8220,7 +8109,6 @@ block|}
 comment|/**    * Tests whether an aggregate with a filter clause has it's filter factored out    * when there is no outer filter    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFilterClauseFactoredOut
 parameter_list|()
@@ -8265,7 +8153,6 @@ block|}
 comment|/**    * Tests whether filter clauses with filters that are always true disappear or not    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFilterClauseAlwaysTrueGone
 parameter_list|()
@@ -8306,7 +8193,6 @@ block|}
 comment|/**    * Tests whether filter clauses with filters that are always true disappear in the presence    * of another aggregate without a filter clause    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFilterClauseAlwaysTrueWithAggGone1
 parameter_list|()
@@ -8351,7 +8237,6 @@ block|}
 comment|/**    * Tests whether filter clauses with filters that are always true disappear in the presence    * of another aggregate with a filter clause    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFilterClauseAlwaysTrueWithAggGone2
 parameter_list|()
@@ -8403,7 +8288,6 @@ block|}
 comment|/**    * Tests whether an existing outer filter is untouched when an aggregate has a filter clause    * that is always true    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOuterFilterRemainsWithAlwaysTrueClause
 parameter_list|()
@@ -8452,7 +8336,6 @@ block|}
 comment|/**    * Tests that an aggregate with a filter clause that is always false does not get pushed in    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFilterClauseAlwaysFalseNotPushed
 parameter_list|()
@@ -8509,7 +8392,6 @@ block|}
 comment|/**    * Tests that an aggregate with a filter clause that is always false does not get pushed when    * there is already an outer filter    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFilterClauseAlwaysFalseNotPushedWithFilter
 parameter_list|()
@@ -8561,7 +8443,6 @@ block|}
 comment|/**    * Tests that an aggregate with a filter clause that is the same as the outer filter has no    * references to that filter, and that the original outer filter remains    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFilterClauseSameAsOuterFilterGone
 parameter_list|()
@@ -8611,7 +8492,6 @@ block|}
 comment|/**    * Test to ensure that an aggregate with a filter clause in the presence of another aggregate    * without a filter clause does not have it's filter factored out into the outer filter    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFilterClauseNotFactoredOut1
 parameter_list|()
@@ -8656,7 +8536,6 @@ block|}
 comment|/**    * Test to ensure that an aggregate with a filter clause in the presence of another aggregate    * without a filter clause, and an outer filter does not have it's    * filter factored out into the outer filter    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFilterClauseNotFactoredOut2
 parameter_list|()
@@ -8705,7 +8584,6 @@ block|}
 comment|/**    * Test to ensure that multiple aggregates with filter clauses have their filters extracted to    * the outer filter field for data pruning    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFilterClausesFactoredForPruning1
 parameter_list|()
@@ -8767,7 +8645,6 @@ block|}
 comment|/**    * Test to ensure that multiple aggregates with filter clauses have their filters extracted to    * the outer filter field for data pruning in the presence of an outer filter    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFilterClausesFactoredForPruning2
 parameter_list|()
@@ -8831,7 +8708,6 @@ block|}
 comment|/**    * Test to ensure that multiple aggregates with the same filter clause have them factored    * out in the presence of an outer filter, and that they no longer refer to those filters    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMultipleFiltersFactoredOutWithOuterFilter
 parameter_list|()
@@ -8903,7 +8779,6 @@ block|}
 comment|/**    * Tests that when the resulting filter from factoring filter clauses out is always false,    * that they are still pushed to Druid to handle.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOuterFilterFalseAfterFactorSimplification
 parameter_list|()
@@ -8955,7 +8830,6 @@ block|}
 comment|/**    * Test to ensure that aggregates with filter clauses that Druid cannot handle are not pushed in    * as filtered aggregates.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFilterClauseNotPushable
 parameter_list|()
@@ -9005,7 +8879,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFilterClauseWithMetricRef
 parameter_list|()
@@ -9061,7 +8934,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFilterClauseWithMetricRefAndAggregates
 parameter_list|()
@@ -9123,7 +8995,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFilterClauseWithMetricAndTimeAndAggregates
 parameter_list|()
@@ -9174,7 +9045,6 @@ block|}
 comment|/**    * Test to ensure that an aggregate with a nested filter clause has it's filter factored out    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNestedFilterClauseFactored
 parameter_list|()
@@ -9236,7 +9106,6 @@ block|}
 comment|/**    * Test to ensure that aggregates with nested filters have their filters factored out    * into the outer filter for data pruning while still holding a reference to the filter clause    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNestedFilterClauseInAggregates
 parameter_list|()
@@ -9319,7 +9188,6 @@ block|}
 comment|/**    *<a href="https://issues.apache.org/jira/browse/CALCITE-1805">[CALCITE-1805]    * Druid adapter cannot handle count column without adding support for nested queries</a>.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCountColumn
 parameter_list|()
@@ -9414,7 +9282,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCountColumn2
 parameter_list|()
@@ -9451,7 +9318,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCountWithNonNull
 parameter_list|()
@@ -9491,7 +9357,6 @@ block|}
 comment|/**    * Test to make sure the "not" filter has only 1 field, rather than an array of fields.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNotFilterForm
 parameter_list|()
@@ -9536,7 +9401,6 @@ block|}
 comment|/**    * Test to ensure that count(distinct ...) gets pushed to Druid when approximate results are    * acceptable    * */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDistinctCountWhenApproxResultsAccepted
 parameter_list|()
@@ -9575,7 +9439,6 @@ block|}
 comment|/**    * Test to ensure that count(distinct ...) doesn't get pushed to Druid when approximate results    * are not acceptable    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDistinctCountWhenApproxResultsNotAccepted
 parameter_list|()
@@ -9608,7 +9471,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDistinctCountOnMetric
 parameter_list|()
@@ -9673,7 +9535,6 @@ block|}
 comment|/**    * Test to ensure that a count on a metric does not get pushed into Druid    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCountOnMetric
 parameter_list|()
@@ -9718,7 +9579,6 @@ block|}
 comment|/**    * Test to ensure that count(*) is pushed into Druid    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCountStar
 parameter_list|()
@@ -9750,7 +9610,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCountOnMetricRenamed
 parameter_list|()
@@ -9794,7 +9653,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDistinctCountOnMetricRenamed
 parameter_list|()
@@ -9948,7 +9806,6 @@ block|}
 comment|/**    * Tests the use of count(distinct ...) on a complex metric column in SELECT    * */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCountDistinctOnComplexColumn
 parameter_list|()
@@ -10027,7 +9884,6 @@ block|}
 comment|/**    * Tests the use of other aggregations with complex columns    * */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregationsWithComplexColumns
 parameter_list|()
@@ -10090,7 +9946,6 @@ block|}
 comment|/**    * Test post aggregation support with +, -, /, * operators    * */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPostAggregationWithComplexColumns
 parameter_list|()
@@ -10245,7 +10100,6 @@ block|}
 comment|/**    * Test to make sure that if a complex metric is also a dimension, then    * {@link org.apache.calcite.adapter.druid.DruidTable} should allow it to be used like any other    * column.    * */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testComplexMetricAlsoDimension
 parameter_list|()
@@ -10288,7 +10142,6 @@ block|}
 comment|/**    * Test to make sure that SELECT * doesn't fail, and that the rolled up column is not requested    * in the JSON query.    * */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectStarWithRollUp
 parameter_list|()
@@ -10332,7 +10185,6 @@ block|}
 comment|/**    * Test to make sure that the mapping from a Table name to a Table returned from    * {@link org.apache.calcite.adapter.druid.DruidSchema} is always the same Java object.    * */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTableMapReused
 parameter_list|()
@@ -10370,7 +10222,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPushEqualsCastDimension
 parameter_list|()
@@ -10464,7 +10315,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPushNotEqualsCastDimension
 parameter_list|()
@@ -10556,7 +10406,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testIsNull
 parameter_list|()
@@ -10614,7 +10463,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testIsNotNull
 parameter_list|()
@@ -10667,7 +10515,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFilterWithFloorOnTime
 parameter_list|()
@@ -10719,7 +10566,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectFloorOnTimeWithFilterOnFloorOnTime
 parameter_list|()
@@ -10768,7 +10614,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTimeWithFilterOnFloorOnTimeAndCastToTimestamp
 parameter_list|()
@@ -10819,7 +10664,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTimeWithFilterOnFloorOnTimeWithTimezone
 parameter_list|()
@@ -10908,7 +10752,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTimeWithFilterOnFloorOnTimeWithTimezoneConversion
 parameter_list|()
@@ -11008,7 +10851,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTimeWithFilterOnFloorOnTimeWithTimezoneConversionCast
 parameter_list|()
@@ -11106,7 +10948,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2122">[CALCITE-2122]    * DateRangeRules issues</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCombinationOfValidAndNotValidAndInterval
 parameter_list|()
@@ -11143,7 +10984,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFloorToDateRangeWithTimeZone
 parameter_list|()
@@ -11223,7 +11063,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExpressionsFilter
 parameter_list|()
@@ -11260,7 +11099,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExpressionsFilter2
 parameter_list|()
@@ -11297,7 +11135,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExpressionsLikeFilter
 parameter_list|()
@@ -11332,7 +11169,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExpressionsSTRLENFilter
 parameter_list|()
@@ -11367,7 +11203,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExpressionsUpperLowerFilter
 parameter_list|()
@@ -11408,7 +11243,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExpressionsLowerUpperFilter
 parameter_list|()
@@ -11449,7 +11283,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExpressionsLowerFilterNotMatching
 parameter_list|()
@@ -11488,7 +11321,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExpressionsLowerFilterMatching
 parameter_list|()
@@ -11527,7 +11359,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExpressionsUpperFilterNotMatching
 parameter_list|()
@@ -11566,7 +11397,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExpressionsUpperFilterMatching
 parameter_list|()
@@ -11605,7 +11435,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExpressionsConcatFilter
 parameter_list|()
@@ -11646,7 +11475,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExpressionsNotNull
 parameter_list|()
@@ -11685,7 +11513,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testComplexExpressionsIsNull
 parameter_list|()
@@ -11741,7 +11568,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExpressionsConcatFilterMultipleColumns
 parameter_list|()
@@ -11780,7 +11606,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAndCombinationOfExpAndSimpleFilter
 parameter_list|()
@@ -11823,7 +11648,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOrCombinationOfExpAndSimpleFilter
 parameter_list|()
@@ -11870,7 +11694,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testColumnAEqColumnB
 parameter_list|()
@@ -11907,7 +11730,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testColumnANotEqColumnB
 parameter_list|()
@@ -11944,7 +11766,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAndCombinationOfComplexExpAndSimpleFilter
 parameter_list|()
@@ -12002,7 +11823,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExpressionsFilterWithCast
 parameter_list|()
@@ -12041,7 +11861,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExpressionsFilterWithCastTimeToDateToChar
 parameter_list|()
@@ -12093,7 +11912,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExpressionsFilterWithExtract
 parameter_list|()
@@ -12136,7 +11954,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExtractYearFilterExpression
 parameter_list|()
@@ -12218,7 +12035,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExtractMonthFilterExpression
 parameter_list|()
@@ -12304,7 +12120,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExtractHourFilterExpression
 parameter_list|()
@@ -12467,7 +12282,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExtractHourFilterExpressionWithCast
 parameter_list|()
@@ -12630,7 +12444,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTimeFloorExpressions
 parameter_list|()
@@ -12683,7 +12496,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDruidTimeFloorAndTimeParseExpressions
 parameter_list|()
@@ -12728,7 +12540,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDruidTimeFloorAndTimeParseExpressions2
 parameter_list|()
@@ -12771,7 +12582,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFilterFloorOnMetricColumn
 parameter_list|()
@@ -12823,7 +12633,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExpressionFilterSimpleColumnAEqColumnB
 parameter_list|()
@@ -12871,7 +12680,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCastPlusMathOps
 parameter_list|()
@@ -12931,7 +12739,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testBooleanFilterExpressions
 parameter_list|()
@@ -12981,7 +12788,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCombinationOfValidAndNotValidFilters
 parameter_list|()
@@ -13184,7 +12990,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCeilFilterExpression
 parameter_list|()
@@ -13239,7 +13044,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSubStringExpressionFilter
 parameter_list|()
@@ -13325,7 +13129,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSubStringWithNonConstantIndexes
 parameter_list|()
@@ -13379,7 +13182,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSubStringWithNonConstantIndex
 parameter_list|()
@@ -13430,7 +13232,6 @@ block|}
 comment|/**    * Test case for https://issues.apache.org/jira/browse/CALCITE-2098.    * Need to make sure that when there we have a valid filter with no conjunction we still push    * all the valid filters.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFilterClauseWithNoConjunction
 parameter_list|()
@@ -13473,7 +13274,6 @@ block|}
 comment|/**    * Test case for https://issues.apache.org/jira/browse/CALCITE-2123    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testBetweenFilterWithCastOverNumeric
 parameter_list|()
@@ -13521,7 +13321,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTrigonometryMathFunctions
 parameter_list|()
@@ -13572,7 +13371,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCastLiteralToTimestamp
 parameter_list|()
@@ -13629,7 +13427,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNotTrueSimpleFilter
 parameter_list|()
@@ -13705,7 +13502,6 @@ block|}
 comment|// ADDING COMPLEX PROJECT PUSHDOWN
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPushOfSimpleMathOps
 parameter_list|()
@@ -13755,7 +13551,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPushOfSimpleColumnAPlusColumnB
 parameter_list|()
@@ -13805,7 +13600,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectExtractMonth
 parameter_list|()
@@ -13858,7 +13652,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggOnArithmeticProject
 parameter_list|()
@@ -13908,7 +13701,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggOnArithmeticProject2
 parameter_list|()
@@ -13964,7 +13756,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggOnArithmeticProject3
 parameter_list|()
@@ -14030,7 +13821,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGroupByVirtualColumn
 parameter_list|()
@@ -14092,7 +13882,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCountOverVirtualColumn
 parameter_list|()
@@ -14150,7 +13939,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggOverStringToLong
 parameter_list|()
@@ -14193,7 +13981,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggOnTimeExtractColumn
 parameter_list|()
@@ -14232,7 +14019,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggOnTimeExtractColumn2
 parameter_list|()
@@ -14271,7 +14057,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testStackedAggregateFilters
 parameter_list|()
@@ -14334,7 +14119,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCastOverPostAggregates
 parameter_list|()
@@ -14373,7 +14157,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSubStringOverPostAggregates
 parameter_list|()
@@ -14419,7 +14202,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTableQueryExtractYearQuarter
 parameter_list|()
@@ -14493,7 +14275,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTableauQueryExtractMonthDayYear
 parameter_list|()
@@ -14553,7 +14334,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTableauQuerySubStringHourMinutes
 parameter_list|()
@@ -14619,7 +14399,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTableauQueryMinutesSecondsExtract
 parameter_list|()
@@ -14671,7 +14450,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testQueryWithExtractsTimes
 parameter_list|()
@@ -14737,7 +14515,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCastConcatOverPostAggregates
 parameter_list|()
@@ -14780,7 +14557,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testHavingSpecs
 parameter_list|()
@@ -14832,7 +14608,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTransposableHavingFilter
 parameter_list|()
@@ -14884,7 +14659,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testProjectSameColumnMultipleTimes
 parameter_list|()
@@ -14946,7 +14720,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testProjectSameMetricsColumnMultipleTimes
 parameter_list|()
@@ -15008,7 +14781,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggSameColumnMultipleTimes
 parameter_list|()
@@ -15060,7 +14832,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGroupBy1
 parameter_list|()
@@ -15111,7 +14882,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFloorQuarter
 parameter_list|()
@@ -15150,7 +14920,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFloorQuarterPlusDim
 parameter_list|()
@@ -15193,7 +14962,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExtractQuarterPlusDim
 parameter_list|()
@@ -15247,7 +15015,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExtractQuarter
 parameter_list|()
@@ -15298,7 +15065,6 @@ block|}
 comment|// Case https://issues.apache.org/jira/browse/CALCITE-2262
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectCountStarPlusOtherAggs
 parameter_list|()
@@ -15337,7 +15103,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGroupByWithBooleanExpression
 parameter_list|()

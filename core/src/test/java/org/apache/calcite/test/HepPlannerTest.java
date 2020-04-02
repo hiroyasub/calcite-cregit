@@ -368,7 +368,6 @@ comment|/**  * HepPlannerTest is a unit test for {@link HepPlanner}. See  * {@li
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|HepPlannerTest
 extends|extends
@@ -456,7 +455,6 @@ return|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRuleClass
 parameter_list|()
@@ -555,7 +553,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRuleDescription
 parameter_list|()
@@ -622,7 +619,6 @@ block|}
 comment|/**    * Ensures {@link org.apache.calcite.rel.AbstractRelNode} digest does not include    * full digest tree.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|relDigestLength
 parameter_list|()
@@ -842,7 +838,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMatchLimitOneTopDown
 parameter_list|()
@@ -902,7 +897,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMatchLimitOneBottomUp
 parameter_list|()
@@ -962,7 +956,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMatchUntilFixpoint
 parameter_list|()
@@ -1015,7 +1008,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testReplaceCommonSubexpression
 parameter_list|()
@@ -1055,7 +1047,6 @@ block|}
 comment|/** Tests that if two relational expressions are equivalent, the planner    * notices, and only applies the rule once. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCommonSubExpression
 parameter_list|()
@@ -1185,7 +1176,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSubprogram
 parameter_list|()
@@ -1292,7 +1282,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGroup
 parameter_list|()
@@ -1372,7 +1361,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGC
 parameter_list|()
@@ -1477,7 +1465,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRelNodeCacheWithDigest
 parameter_list|()
@@ -1546,7 +1533,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRuleApplyCount
 parameter_list|()
@@ -1596,7 +1582,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMaterialization
 parameter_list|()

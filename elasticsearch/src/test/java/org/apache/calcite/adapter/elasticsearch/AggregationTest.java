@@ -331,7 +331,6 @@ name|ResourceAccessMode
 operator|.
 name|READ
 argument_list|)
-specifier|public
 class|class
 name|AggregationTest
 block|{
@@ -695,7 +694,6 @@ return|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|countStar
 parameter_list|()
@@ -776,7 +774,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|all
 parameter_list|()
@@ -860,7 +857,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|cat1
 parameter_list|()
@@ -969,7 +965,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|cat2
 parameter_list|()
@@ -1046,7 +1041,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|cat1Cat2
 parameter_list|()
@@ -1104,7 +1098,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|cat1Cat3
 parameter_list|()
@@ -1138,7 +1131,6 @@ block|}
 comment|/**    * Testing {@link org.apache.calcite.sql.SqlKind#ANY_VALUE} aggregate function    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|anyValue
 parameter_list|()
@@ -1219,7 +1211,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|anyValueWithOtherAgg
 parameter_list|()
@@ -1302,7 +1293,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|cat1Cat2Cat3
 parameter_list|()
@@ -1338,7 +1328,6 @@ block|}
 comment|/**    * Group by    *<a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/date.html">    * date</a> data type.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|dateCat
 parameter_list|()
@@ -1372,7 +1361,6 @@ block|}
 comment|/**    * Group by    *<a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/number.html">    * number</a> data type.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|integerCat
 parameter_list|()
@@ -1406,7 +1394,6 @@ block|}
 comment|/**    * Validate {@link org.apache.calcite.sql.fun.SqlStdOperatorTable#APPROX_COUNT_DISTINCT}.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|approximateCountDistinct
 parameter_list|()
@@ -1508,7 +1495,6 @@ block|}
 comment|/**    * {@code select max(cast(_MAP['foo'] as integer)) from tbl}    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|aggregationWithCast
 parameter_list|()

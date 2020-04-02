@@ -90,7 +90,6 @@ comment|/**  * Tests for {@link org.apache.calcite.rex.RexUtil#isLosslessCast(Re
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|RexLosslessCastTest
 extends|extends
@@ -99,7 +98,6 @@ block|{
 comment|/** Unit test for {@link org.apache.calcite.rex.RexUtil#isLosslessCast(RexNode)}. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLosslessCast
 parameter_list|()
@@ -849,7 +847,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|removeRedundantCast
 parameter_list|()
@@ -956,7 +953,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|removeLosslesssCastInt
 parameter_list|()
@@ -1066,7 +1062,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|removeLosslesssCastChar
 parameter_list|()

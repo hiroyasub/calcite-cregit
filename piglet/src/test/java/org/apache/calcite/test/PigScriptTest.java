@@ -190,7 +190,6 @@ comment|/**  * Test for converting a Pig script file.  */
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|PigScriptTest
 extends|extends
@@ -298,7 +297,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testReadScript
 parameter_list|()

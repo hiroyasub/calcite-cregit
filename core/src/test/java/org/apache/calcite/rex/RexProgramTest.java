@@ -616,7 +616,6 @@ comment|/**  * Unit tests for {@link RexProgram} and  * {@link org.apache.calcit
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|RexProgramTest
 extends|extends
@@ -625,7 +624,6 @@ block|{
 comment|/**    * Tests construction of a RexProgram.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testBuildProgram
 parameter_list|()
@@ -714,7 +712,6 @@ block|}
 comment|/**    * Tests construction and normalization of a RexProgram.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNormalize
 parameter_list|()
@@ -759,7 +756,6 @@ block|}
 comment|/**    * Tests construction and normalization of a RexProgram.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testElimDups
 parameter_list|()
@@ -841,7 +837,6 @@ block|}
 comment|/**    * Tests how the condition is simplified.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSimplifyCondition
 parameter_list|()
@@ -913,7 +908,6 @@ block|}
 comment|/**    * Tests how the condition is simplified.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSimplifyCondition2
 parameter_list|()
@@ -987,7 +981,6 @@ block|}
 comment|/**    * Checks translation of AND(x, x).    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDuplicateAnd
 parameter_list|()
@@ -1665,7 +1658,6 @@ block|}
 comment|/** Unit test for {@link org.apache.calcite.plan.Strong}. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testStrong
 parameter_list|()
@@ -2838,7 +2830,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testItemStrong
 parameter_list|()
@@ -2974,7 +2965,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|xAndNotX
 parameter_list|()
@@ -3075,7 +3065,6 @@ literal|"CALCITE-3457: AssertionError in RexSimplify.validateStrongPolicy"
 argument_list|)
 annotation|@
 name|Test
-specifier|public
 name|void
 name|reproducerFor3457
 parameter_list|()
@@ -3124,7 +3113,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNoCommonReturnTypeFails
 parameter_list|()
@@ -3188,7 +3176,6 @@ block|}
 comment|/** Unit test for {@link org.apache.calcite.rex.RexUtil#toCnf}. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCnf
 parameter_list|()
@@ -3731,7 +3718,6 @@ block|}
 comment|/** Unit test for    *<a href="https://issues.apache.org/jira/browse/CALCITE-394">[CALCITE-394]    * Add RexUtil.toCnf, to convert expressions to conjunctive normal form    * (CNF)</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCnf2
 parameter_list|()
@@ -4060,7 +4046,6 @@ block|}
 comment|/** Unit test for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1290">[CALCITE-1290]    * When converting to CNF, fail if the expression exceeds a threshold</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testThresholdCnf
 parameter_list|()
@@ -4297,7 +4282,6 @@ block|}
 comment|/** Tests formulas of various sizes whose size is exponential when converted    * to CNF. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCnfExponential
 parameter_list|()
@@ -4564,7 +4548,6 @@ block|}
 comment|/** Unit test for {@link org.apache.calcite.rex.RexUtil#pullFactors}. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPullFactors
 parameter_list|()
@@ -5114,7 +5097,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSimplify
 parameter_list|()
@@ -6655,7 +6637,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|simplifyStrong
 parameter_list|()
@@ -6855,7 +6836,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSimplifyFilter
 parameter_list|()
@@ -7998,7 +7978,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3198">[CALCITE-3198]    * Enhance RexSimplify to handle (x&lt;&gt;a or x&lt;&gt;b)</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSimplifyOrNotEqualsNotNullable
 parameter_list|()
@@ -8037,7 +8016,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3198">[CALCITE-3198]    * Enhance RexSimplify to handle (x&lt;&gt;a or x&lt;&gt;b)</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSimplifyOrNotEqualsNotNullable2
 parameter_list|()
@@ -8093,7 +8071,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3198">[CALCITE-3198]    * Enhance RexSimplify to handle (x&lt;&gt;a or x&lt;&gt;b)</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSimplifyOrNotEqualsNullable
 parameter_list|()
@@ -8136,7 +8113,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3198">[CALCITE-3198]    * Enhance RexSimplify to handle (x&lt;&gt;a or x&lt;&gt;b)</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSimplifyOrNotEqualsNullable2
 parameter_list|()
@@ -8195,7 +8171,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSimplifyAndPush
 parameter_list|()
@@ -8582,7 +8557,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSimplifyOrTerms
 parameter_list|()
@@ -9056,7 +9030,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSimplifyItemRangeTerms
 parameter_list|()
@@ -9172,7 +9145,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSimplifyNotAnd
 parameter_list|()
@@ -9228,7 +9200,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSimplifyUnknown
 parameter_list|()
@@ -9429,7 +9400,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSimplifyAnd3
 parameter_list|()
@@ -9458,7 +9428,6 @@ block|}
 comment|/** Unit test for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2840">[CALCITE-2840]    * Simplification should use more specific UnknownAs modes during simplification</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNestedAndSimplification
 parameter_list|()
@@ -9532,7 +9501,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|fieldAccessEqualsHashCode
 parameter_list|()
@@ -9594,7 +9562,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSimplifyDynamicParam
 parameter_list|()
@@ -9617,7 +9584,6 @@ block|}
 comment|/** Unit test for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1289">[CALCITE-1289]    * RexUtil.simplifyCase() should account for nullability</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSimplifyCaseNotNullableBoolean
 parameter_list|()
@@ -9762,7 +9728,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSimplifyCaseNullableBoolean
 parameter_list|()
@@ -9862,7 +9827,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSimplifyRecurseIntoArithmetics
 parameter_list|()
@@ -9905,7 +9869,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSimplifyCaseBranchesCollapse
 parameter_list|()
@@ -9950,7 +9913,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSimplifyCaseBranchesCollapse2
 parameter_list|()
@@ -9991,7 +9953,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSimplifyCaseNullableVarChar
 parameter_list|()
@@ -10097,7 +10058,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSimplifyCaseCasting
 parameter_list|()
@@ -10137,7 +10097,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSimplifyCaseAndNotSimplicationIsInAction
 parameter_list|()
@@ -10186,7 +10145,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSimplifyCaseBranchRemovalStrengthensType
 parameter_list|()
@@ -10281,7 +10239,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSimplifyCaseCompaction
 parameter_list|()
@@ -10327,7 +10284,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSimplifyCaseCompaction2
 parameter_list|()
@@ -10373,7 +10329,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSimplifyCaseCompactionDiv
 parameter_list|()
@@ -10443,7 +10398,6 @@ block|}
 comment|/** Tests a CASE value branch that contains division. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSimplifyCaseDiv1
 parameter_list|()
@@ -10505,7 +10459,6 @@ block|}
 comment|/** Tests a CASE condition that contains division, */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSimplifyCaseDiv2
 parameter_list|()
@@ -10570,7 +10523,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSimplifyCaseFirstBranchIsSafe
 parameter_list|()
@@ -10614,7 +10566,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPushNotIntoCase
 parameter_list|()
@@ -10673,7 +10624,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNotRecursion
 parameter_list|()
@@ -10696,7 +10646,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSimplifyAnd
 parameter_list|()
@@ -10823,7 +10772,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSimplifyIsNotNull
 parameter_list|()
@@ -11149,7 +11097,6 @@ block|}
 comment|/** Unit test for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2929">[CALCITE-2929]    * Simplification of IS NULL checks are incorrectly assuming that CAST-s are possible</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSimplifyCastIsNull
 parameter_list|()
@@ -11175,7 +11122,6 @@ block|}
 comment|/** Unit test for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2929">[CALCITE-2929]    * Simplification of IS NULL checks are incorrectly assuming that CAST-s are possible</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSimplifyCastIsNull2
 parameter_list|()
@@ -11200,7 +11146,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|checkSimplifyDynamicParam
 parameter_list|()
@@ -11316,7 +11261,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSimplifyCastLiteral
 parameter_list|()
@@ -12253,7 +12197,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCastLiteral
 parameter_list|()
@@ -12339,7 +12282,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSimplifyCastLiteral2
 parameter_list|()
@@ -12549,7 +12491,6 @@ comment|// different from Hive
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSimplifyCastLiteral3
 parameter_list|()
@@ -13061,7 +13002,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRemovalOfNullabilityWideningCast
 parameter_list|()
@@ -13132,7 +13072,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCompareTimestampWithTimeZone
 parameter_list|()
@@ -13225,7 +13164,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSimplifyLiterals
 parameter_list|()
@@ -13853,7 +13791,6 @@ block|}
 comment|/** Unit test for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2421">[CALCITE-2421]    * to-be-filled</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelfComparisions
 parameter_list|()
@@ -13929,7 +13866,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testBooleanComparisions
 parameter_list|()
@@ -14137,7 +14073,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSimpleDynamicVars
 parameter_list|()
@@ -14271,7 +14206,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testIsDeterministic
 parameter_list|()
@@ -14357,7 +14291,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testConstantMap
 parameter_list|()
@@ -14718,7 +14651,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|notDistinct
 parameter_list|()
@@ -14748,7 +14680,6 @@ block|}
 comment|/** Unit test for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2505">[CALCITE-2505]    * RexSimplify wrongly simplifies "COALESCE(+(NULL), x)" to "NULL"</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSimplifyCoalesce
 parameter_list|()
@@ -14958,7 +14889,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|simplifyNull
 parameter_list|()
@@ -15056,7 +14986,6 @@ return|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSimplifyFalse
 parameter_list|()
@@ -15270,7 +15199,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSimplifyNot
 parameter_list|()
@@ -15427,7 +15355,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSimplifyAndNot
 parameter_list|()
@@ -15564,7 +15491,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSimplifyOrNot
 parameter_list|()
@@ -15701,7 +15627,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInterpreter
 parameter_list|()
@@ -15855,7 +15780,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testIsNullRecursion
 parameter_list|()
@@ -15884,7 +15808,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRedundantIsTrue
 parameter_list|()
@@ -15908,7 +15831,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRedundantIsFalse
 parameter_list|()
@@ -15932,7 +15854,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRedundantIsNotTrue
 parameter_list|()
@@ -15958,7 +15879,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRedundantIsNotFalse
 parameter_list|()
@@ -15985,7 +15905,6 @@ block|}
 comment|/** Unit tests for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2438">[CALCITE-2438]    * RexCall#isAlwaysTrue returns incorrect result</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testIsAlwaysTrueAndFalseXisNullisNotNullisFalse
 parameter_list|()
@@ -16011,7 +15930,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testIsAlwaysTrueAndFalseNotXisNullisNotNullisFalse
 parameter_list|()
@@ -16040,7 +15958,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testIsAlwaysTrueAndFalseXisNullisNotNullisTrue
 parameter_list|()
@@ -16066,7 +15983,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testIsAlwaysTrueAndFalseNotXisNullisNotNullisTrue
 parameter_list|()
@@ -16095,7 +16011,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testIsAlwaysTrueAndFalseNotXisNullisNotNullisNotTrue
 parameter_list|()
@@ -16124,7 +16039,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testIsAlwaysTrueAndFalseXisNullisNotNull
 parameter_list|()
@@ -16147,7 +16061,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testIsAlwaysTrueAndFalseXisNotNullisNotNull
 parameter_list|()
@@ -16170,7 +16083,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testIsAlwaysTrueAndFalseXisNullisNull
 parameter_list|()
@@ -16193,7 +16105,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testIsAlwaysTrueAndFalseXisNotNullisNull
 parameter_list|()
@@ -16216,7 +16127,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testIsAlwaysTrueAndFalseXisNullisNotNullisNotFalse
 parameter_list|()
@@ -16242,7 +16152,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testIsAlwaysTrueAndFalseXisNullisNotNullisNotTrue
 parameter_list|()
@@ -16269,7 +16178,6 @@ block|}
 comment|/** Unit test for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2842">[CALCITE-2842]    * Computing digest of IN expressions leads to Exceptions</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInDigest
 parameter_list|()
@@ -16310,7 +16218,6 @@ block|}
 comment|/** Unit test for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3192">[CALCITE-3192]    * Simplify OR incorrectly weaks condition</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOrSimplificationNotWeakensCondition
 parameter_list|()
@@ -16355,7 +16262,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testIsNullSimplificationWithUnaryPlus
 parameter_list|()
@@ -16422,7 +16328,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testIsNullSimplificationWithIsDistinctFrom
 parameter_list|()
@@ -16494,7 +16399,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSimplifyCastUnaryMinus
 parameter_list|()
@@ -16560,7 +16464,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSimplifyRangeWithMultiPredicates
 parameter_list|()
@@ -16632,7 +16535,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSimplifyNotEqual
 parameter_list|()
@@ -16756,7 +16658,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSimplifyNonDeterministicFunction
 parameter_list|()

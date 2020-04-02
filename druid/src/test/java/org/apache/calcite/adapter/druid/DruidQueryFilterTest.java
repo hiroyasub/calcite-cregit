@@ -314,7 +314,6 @@ comment|/**  * Tests generating Druid filters.  */
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|DruidQueryFilterTest
 block|{
@@ -429,7 +428,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInFilter
 parameter_list|()
@@ -605,7 +603,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testBetweenFilterStringCase
 parameter_list|()

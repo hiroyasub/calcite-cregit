@@ -148,14 +148,12 @@ comment|/** Test case for CALCITE-542. */
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|RelMdColumnOriginsTest
 block|{
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-542">[CALCITE-542]    * Support for Aggregate with grouping sets in RelMdColumnOrigins</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testQueryWithAggregateGroupingSets
 parameter_list|()

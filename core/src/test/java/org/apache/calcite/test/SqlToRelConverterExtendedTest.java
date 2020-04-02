@@ -190,7 +190,6 @@ comment|/**  * Runs {@link org.apache.calcite.test.SqlToRelConverterTest} with e
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|SqlToRelConverterExtendedTest
 extends|extends

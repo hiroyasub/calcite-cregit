@@ -182,7 +182,6 @@ comment|/**  * Check that internal queries are correctly converted to ES search 
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|QueryBuildersTest
 block|{
@@ -198,7 +197,6 @@ decl_stmt|;
 comment|/**    * Test for simple scalar terms (boolean, int etc.)    * @throws Exception not expected    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|term
 parameter_list|()
@@ -492,7 +490,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|terms
 parameter_list|()
@@ -706,7 +703,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|boolQuery
 parameter_list|()
@@ -824,7 +820,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|exists
 parameter_list|()
@@ -849,7 +844,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|range
 parameter_list|()
@@ -1164,7 +1158,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|matchAll
 parameter_list|()
@@ -1187,7 +1180,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|match
 parameter_list|()

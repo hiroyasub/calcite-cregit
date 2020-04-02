@@ -384,7 +384,6 @@ comment|/**  * Validates that {@link org.apache.calcite.rex.RexSimplify} is able
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|RexProgramFuzzyTest
 extends|extends
@@ -709,7 +708,6 @@ block|}
 comment|/**    * Verifies {@code IS TRUE(IS NULL(null))} kind of expressions up to 4 level deep.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNestedCalls
 parameter_list|()
@@ -1982,7 +1980,6 @@ literal|"Ignore for now: CALCITE-3457"
 argument_list|)
 annotation|@
 name|Test
-specifier|public
 name|void
 name|defaultFuzzTest
 parameter_list|()
@@ -2067,7 +2064,6 @@ literal|"Ignore for now: CALCITE-3457"
 argument_list|)
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFuzzy
 parameter_list|()
@@ -2730,7 +2726,6 @@ literal|"This is just a scaffold for quick investigation of a single fuzz test"
 argument_list|)
 annotation|@
 name|Test
-specifier|public
 name|void
 name|singleFuzzyTest
 parameter_list|()

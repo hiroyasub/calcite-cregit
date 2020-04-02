@@ -330,7 +330,6 @@ comment|/**  * Unit tests for {@link RexProgram} and  * {@link RexProgramBuilder
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|SqlOperatorBindingTest
 block|{
@@ -396,7 +395,6 @@ block|}
 comment|/** Tests {@link org.apache.calcite.sql.SqlUtil#isLiteral(SqlNode, boolean)},    * which was added to enhance Calcite's public API    *<a href="https://issues.apache.org/jira/browse/CALCITE-1219">[CALCITE-1219]    * Add a method to SqlOperatorBinding to determine whether operand is a    * literal</a>.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSqlNodeLiteral
 parameter_list|()
@@ -503,7 +501,6 @@ block|}
 comment|/** Tests {@link org.apache.calcite.rex.RexUtil#isLiteral(RexNode, boolean)},    * which was added to enhance Calcite's public API    *<a href="https://issues.apache.org/jira/browse/CALCITE-1219">[CALCITE-1219]    * Add a method to SqlOperatorBinding to determine whether operand is a    * literal</a>.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRexNodeLiteral
 parameter_list|()

@@ -116,7 +116,6 @@ comment|/**  * Unit test cases for Kafka adapter.  */
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|KafkaAdapterTest
 block|{
@@ -233,7 +232,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelect
 parameter_list|()
@@ -285,7 +283,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFilterWithProject
 parameter_list|()
@@ -324,7 +321,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCustRowConverter
 parameter_list|()
@@ -370,7 +366,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAsBatch
 parameter_list|()

@@ -284,14 +284,12 @@ comment|/**  * Unit tests for {@link RexShuttle}  */
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|RexShuttleTest
 block|{
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3165">[CALCITE-3165]    * Project#accept(RexShuttle shuttle) does not update rowType</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testProjectUpdatesRowType
 parameter_list|()
@@ -466,7 +464,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCalcUpdatesRowType
 parameter_list|()

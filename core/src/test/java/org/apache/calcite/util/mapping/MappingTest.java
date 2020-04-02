@@ -168,18 +168,11 @@ comment|/**  * Unit test for mappings.  *  * @see Mapping  * @see Mappings  */
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|MappingTest
 block|{
-specifier|public
-name|MappingTest
-parameter_list|()
-block|{
-block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMappings
 parameter_list|()
@@ -281,7 +274,6 @@ block|}
 comment|/**    * Unit test for {@link Mappings#createShiftMapping}.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMappingsCreateShiftMapping
 parameter_list|()
@@ -361,7 +353,6 @@ block|}
 comment|/**    * Unit test for {@link Mappings#append}.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMappingsAppend
 parameter_list|()
@@ -462,7 +453,6 @@ block|}
 comment|/**    * Unit test for {@link Mappings#offsetSource}.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMappingsOffsetSource
 parameter_list|()
@@ -659,7 +649,6 @@ block|}
 comment|/** Unit test for {@link Mappings#source(List, int)}    * and its converse, {@link Mappings#asList(Mappings.TargetMapping)}. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSource
 parameter_list|()
@@ -819,7 +808,6 @@ block|}
 comment|/** Unit test for {@link Mappings#target(List, int)}. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTarget
 parameter_list|()
@@ -1011,7 +999,6 @@ block|}
 comment|/** Unit test for {@link Mappings#bijection(List)}. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testBijection
 parameter_list|()

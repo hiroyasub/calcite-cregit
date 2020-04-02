@@ -515,7 +515,6 @@ comment|//~ Methods ------------------------------------------------------------
 comment|// Simple Tests for Operators
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSimpleGreaterCond
 parameter_list|()
@@ -742,7 +741,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSimpleLesserCond
 parameter_list|()
@@ -978,7 +976,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSimpleEq
 parameter_list|()
@@ -1100,7 +1097,6 @@ block|}
 comment|// Simple Tests for DataTypes
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSimpleDec
 parameter_list|()
@@ -1174,7 +1170,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSimpleBoolean
 parameter_list|()
@@ -1245,7 +1240,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSimpleLong
 parameter_list|()
@@ -1357,7 +1351,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSimpleShort
 parameter_list|()
@@ -1437,7 +1430,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSimpleChar
 parameter_list|()
@@ -1511,7 +1503,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSimpleString
 parameter_list|()
@@ -1558,7 +1549,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSimpleDate
 parameter_list|()
@@ -1728,7 +1718,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSimpleTimeStamp
 parameter_list|()
@@ -1898,7 +1887,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSimpleTime
 parameter_list|()
@@ -1986,7 +1974,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSimpleBetween
 parameter_list|()
@@ -2180,7 +2167,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSimpleBetweenCornerCases
 parameter_list|()
@@ -2418,7 +2404,6 @@ block|}
 comment|/** Similar to {@link MaterializationTest#testAlias()}:    * {@code x> 1 OR (y> 2 AND z> 4)}    * implies    * {@code (y> 3 AND z> 5)}. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOr
 parameter_list|()
@@ -2583,7 +2568,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNotNull
 parameter_list|()
@@ -2692,7 +2676,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testIsNull
 parameter_list|()
@@ -3067,7 +3050,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2041">[CALCITE-2041]    * When simplifying a nullable expression, allow the result to change type to    * NOT NULL</a> and match nullability.    *    * @see RexSimplify#simplifyPreservingType(RexNode, RexUnknownAs, boolean) */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSimplifyCastMatchNullability
 parameter_list|()
@@ -3255,7 +3237,6 @@ block|}
 comment|/** Test case for simplifier of ceil/floor. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSimplifyCeilFloor
 parameter_list|()

@@ -162,7 +162,6 @@ name|CassandraExtension
 operator|.
 name|class
 argument_list|)
-specifier|public
 class|class
 name|CassandraAdapterTest
 block|{
@@ -213,7 +212,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelect
 parameter_list|()
@@ -241,7 +239,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFilter
 parameter_list|()
@@ -285,7 +282,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFilterUUID
 parameter_list|()
@@ -329,7 +325,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSort
 parameter_list|()
@@ -366,7 +361,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testProject
 parameter_list|()
@@ -407,7 +401,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testProjectAlias
 parameter_list|()
@@ -437,7 +430,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testProjectConstant
 parameter_list|()
@@ -465,7 +457,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLimit
 parameter_list|()
@@ -493,7 +484,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSortLimit
 parameter_list|()
@@ -525,7 +515,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSortOffset
 parameter_list|()
@@ -562,7 +551,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMaterializedView
 parameter_list|()

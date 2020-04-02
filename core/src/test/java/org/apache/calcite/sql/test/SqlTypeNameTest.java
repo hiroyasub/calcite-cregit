@@ -436,13 +436,11 @@ comment|/**  * Tests types supported by {@link SqlTypeName}.  */
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|SqlTypeNameTest
 block|{
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testBit
 parameter_list|()
@@ -471,7 +469,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTinyint
 parameter_list|()
@@ -500,7 +497,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSmallint
 parameter_list|()
@@ -529,7 +525,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInteger
 parameter_list|()
@@ -558,7 +553,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testBigint
 parameter_list|()
@@ -587,7 +581,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFloat
 parameter_list|()
@@ -616,7 +609,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testReal
 parameter_list|()
@@ -645,7 +637,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDouble
 parameter_list|()
@@ -674,7 +665,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNumeric
 parameter_list|()
@@ -703,7 +693,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDecimal
 parameter_list|()
@@ -732,7 +721,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testChar
 parameter_list|()
@@ -761,7 +749,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testVarchar
 parameter_list|()
@@ -790,7 +777,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLongvarchar
 parameter_list|()
@@ -819,7 +805,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDate
 parameter_list|()
@@ -848,7 +833,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTime
 parameter_list|()
@@ -877,7 +861,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTimestamp
 parameter_list|()
@@ -906,7 +889,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testBinary
 parameter_list|()
@@ -935,7 +917,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testVarbinary
 parameter_list|()
@@ -964,7 +945,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLongvarbinary
 parameter_list|()
@@ -993,7 +973,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNull
 parameter_list|()
@@ -1022,7 +1001,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOther
 parameter_list|()
@@ -1051,7 +1029,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJavaobject
 parameter_list|()
@@ -1080,7 +1057,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDistinct
 parameter_list|()
@@ -1109,7 +1085,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testStruct
 parameter_list|()
@@ -1138,7 +1113,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testArray
 parameter_list|()
@@ -1167,7 +1141,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testBlob
 parameter_list|()
@@ -1196,7 +1169,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testClob
 parameter_list|()
@@ -1225,7 +1197,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRef
 parameter_list|()
@@ -1254,7 +1225,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDatalink
 parameter_list|()
@@ -1283,7 +1253,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testBoolean
 parameter_list|()
@@ -1312,7 +1281,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRowid
 parameter_list|()
@@ -1342,7 +1310,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNchar
 parameter_list|()
@@ -1372,7 +1339,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNvarchar
 parameter_list|()
@@ -1402,7 +1368,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLongnvarchar
 parameter_list|()
@@ -1432,7 +1397,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNclob
 parameter_list|()
@@ -1462,7 +1426,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSqlxml
 parameter_list|()

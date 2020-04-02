@@ -176,7 +176,6 @@ name|CassandraExtension
 operator|.
 name|class
 argument_list|)
-specifier|public
 class|class
 name|CassandraAdapterDataTypesTest
 block|{
@@ -227,7 +226,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSimpleTypesRowType
 parameter_list|()
@@ -293,7 +291,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSimpleTypesValues
 parameter_list|()
@@ -359,7 +356,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCounterRowType
 parameter_list|()
@@ -387,7 +383,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCounterValues
 parameter_list|()
@@ -415,7 +410,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCollectionsRowType
 parameter_list|()
@@ -451,7 +445,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCollectionsValues
 parameter_list|()
@@ -489,7 +482,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCollectionsInnerRowType
 parameter_list|()
@@ -538,7 +530,6 @@ annotation|@
 name|Disabled
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCollectionsInnerValues
 parameter_list|()
@@ -585,7 +576,6 @@ block|}
 comment|// frozen collections should not affect the row type
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFrozenCollectionsRowType
 parameter_list|()
@@ -623,7 +613,6 @@ block|}
 comment|// frozen collections should not affect the result set
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFrozenCollectionsValues
 parameter_list|()

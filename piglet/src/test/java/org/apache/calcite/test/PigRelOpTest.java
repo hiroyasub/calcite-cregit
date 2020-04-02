@@ -248,7 +248,6 @@ comment|/**  * Tests for {@code PigRelOpVisitor}.  */
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|PigRelOpTest
 extends|extends
@@ -714,7 +713,6 @@ return|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLoadFromFile
 parameter_list|()
@@ -831,7 +829,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLoadWithoutSchema
 parameter_list|()
@@ -886,7 +883,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLoadWithSchema
 parameter_list|()
@@ -954,7 +950,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFilter
 parameter_list|()
@@ -1027,7 +1022,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSample
 parameter_list|()
@@ -1088,7 +1082,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSplit
 parameter_list|()
@@ -1232,7 +1225,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUdf
 parameter_list|()
@@ -1307,7 +1299,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSimpleForEach1
 parameter_list|()
@@ -1383,7 +1374,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSimpleForEach2
 parameter_list|()
@@ -1488,7 +1478,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSimpleForEach3
 parameter_list|()
@@ -1650,7 +1639,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testForEachNested
 parameter_list|()
@@ -1849,7 +1837,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUnionSameSchema
 parameter_list|()
@@ -1962,7 +1949,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUnionDifferentSchemas1
 parameter_list|()
@@ -2089,7 +2075,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUnionDifferentSchemas2
 parameter_list|()
@@ -2226,7 +2211,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoin2Rels
 parameter_list|()
@@ -2534,7 +2518,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoin3Rels
 parameter_list|()
@@ -2754,7 +2737,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCross
 parameter_list|()
@@ -3000,7 +2982,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGroupby
 parameter_list|()
@@ -3150,7 +3131,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGroupby2
 parameter_list|()
@@ -3249,7 +3229,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCubeCube
 parameter_list|()
@@ -3404,7 +3383,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCubeRollup
 parameter_list|()
@@ -3553,7 +3531,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMultisetProjection
 parameter_list|()
@@ -3668,7 +3645,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOrderBy
 parameter_list|()
@@ -3959,7 +3935,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRank
 parameter_list|()
@@ -4231,7 +4206,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLimit
 parameter_list|()
@@ -4371,7 +4345,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDistinct
 parameter_list|()
@@ -4458,7 +4431,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregate
 parameter_list|()
@@ -4577,7 +4549,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregate2
 parameter_list|()
@@ -4735,7 +4706,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregate2half
 parameter_list|()
@@ -4919,7 +4889,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregate3
 parameter_list|()
@@ -5184,7 +5153,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregate4
 parameter_list|()
@@ -5301,7 +5269,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCoGroup
 parameter_list|()

@@ -580,7 +580,6 @@ name|ScannableTableTest
 block|{
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTens
 parameter_list|()
@@ -733,7 +732,6 @@ block|}
 comment|/** A table with one column. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSimple
 parameter_list|()
@@ -784,7 +782,6 @@ block|}
 comment|/** A table with two columns. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSimple2
 parameter_list|()
@@ -835,7 +832,6 @@ block|}
 comment|/** A filter on a {@link FilterableTable} with two columns (cooperative). */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFilterableTableCooperative
 parameter_list|()
@@ -930,7 +926,6 @@ block|}
 comment|/** A filter on a {@link FilterableTable} with two columns (noncooperative). */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFilterableTableNonCooperative
 parameter_list|()
@@ -1023,7 +1018,6 @@ block|}
 comment|/** A filter on a {@link org.apache.calcite.schema.ProjectableFilterableTable}    * with two columns (cooperative). */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testProjectableFilterableCooperative
 parameter_list|()
@@ -1117,7 +1111,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testProjectableFilterableNonCooperative
 parameter_list|()
@@ -1210,7 +1203,6 @@ block|}
 comment|/** A filter on a {@link org.apache.calcite.schema.ProjectableFilterableTable}    * with two columns, and a project in the query. (Cooperative)*/
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testProjectableFilterableWithProjectAndFilter
 parameter_list|()
@@ -1303,7 +1295,6 @@ block|}
 comment|/** A filter on a {@link org.apache.calcite.schema.ProjectableFilterableTable}    * with two columns, and a project in the query (NonCooperative). */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testProjectableFilterableWithProjectFilterNonCooperative
 parameter_list|()
@@ -1398,7 +1389,6 @@ block|}
 comment|/** A filter and project on a    * {@link org.apache.calcite.schema.ProjectableFilterableTable}. The table    * refuses to execute the filter, so Calcite should add a pull up and    * transform the filter (projecting the column needed by the filter). */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPFTableRefusesFilterCooperative
 parameter_list|()
@@ -1488,7 +1478,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPFPushDownProjectFilterInAggregateNoGroup
 parameter_list|()
@@ -1563,7 +1552,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPFPushDownProjectFilterAggregateGroup
 parameter_list|()
@@ -1658,7 +1646,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPFPushDownProjectFilterAggregateNested
 parameter_list|()
@@ -1927,7 +1914,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-458">[CALCITE-458]    * ArrayIndexOutOfBoundsException when using just a single column in    * interpreter</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPFTableRefusesFilterSingleColumn
 parameter_list|()
@@ -2020,7 +2006,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3405">[CALCITE-3405]    * Prune columns for ProjectableFilterable when project is not simple mapping</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPushNonSimpleMappingProject
 parameter_list|()
@@ -2121,7 +2106,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3405">[CALCITE-3405]    * Prune columns for ProjectableFilterable when project is not simple mapping</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPushSimpleMappingProject
 parameter_list|()
@@ -2219,7 +2203,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3479">[CALCITE-3479]    * Stack overflow error thrown when running join query</a>    * Test two ProjectableFilterableTable can join and produce right plan.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testProjectableFilterableTableJoin
 parameter_list|()
@@ -2311,7 +2294,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1031">[CALCITE-1031]    * In prepared statement, CsvScannableTable.scan is called twice</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPrepared2
 parameter_list|()
@@ -3189,7 +3171,6 @@ specifier|final
 name|boolean
 name|cooperative
 decl_stmt|;
-specifier|public
 name|BeatlesProjectableFilterableTable
 parameter_list|(
 name|StringBuilder

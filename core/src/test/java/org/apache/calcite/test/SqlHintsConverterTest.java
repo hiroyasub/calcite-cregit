@@ -1042,7 +1042,6 @@ comment|/**  * Unit test for {@link org.apache.calcite.rel.hint.RelHint}.  */
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|SqlHintsConverterTest
 extends|extends
@@ -1067,7 +1066,6 @@ block|}
 comment|//~ Tests ------------------------------------------------------------------
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testQueryHint
 parameter_list|()
@@ -1100,7 +1098,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testQueryHintWithLiteralOptions
 parameter_list|()
@@ -1124,7 +1121,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNestedQueryHint
 parameter_list|()
@@ -1148,7 +1144,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTwoLevelNestedQueryHint
 parameter_list|()
@@ -1174,7 +1169,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testThreeLevelNestedQueryHint
 parameter_list|()
@@ -1200,7 +1194,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFourLevelNestedQueryHint
 parameter_list|()
@@ -1226,7 +1219,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregateHints
 parameter_list|()
@@ -1254,7 +1246,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testHintsInSubQueryWithDecorrelation
 parameter_list|()
@@ -1296,7 +1287,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testHintsInSubQueryWithDecorrelation2
 parameter_list|()
@@ -1344,7 +1334,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testHintsInSubQueryWithDecorrelation3
 parameter_list|()
@@ -1392,7 +1381,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testHintsInSubQueryWithoutDecorrelation
 parameter_list|()
@@ -1422,7 +1410,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInvalidQueryHint
 parameter_list|()
@@ -1547,7 +1534,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTableHintsInJoin
 parameter_list|()
@@ -1577,7 +1563,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTableHintsInSelect
 parameter_list|()
@@ -1604,7 +1589,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSameHintsWithDifferentInheritPath
 parameter_list|()
@@ -1634,7 +1618,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTableHintsInInsert
 parameter_list|()
@@ -1741,7 +1724,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTableHintsInUpdate
 parameter_list|()
@@ -1848,7 +1830,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTableHintsInDelete
 parameter_list|()
@@ -1953,7 +1934,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTableHintsInMerge
 parameter_list|()
@@ -2078,7 +2058,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInvalidTableHints
 parameter_list|()
@@ -2134,7 +2113,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinHintRequiresSpecificInputs
 parameter_list|()
@@ -2161,7 +2139,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testHintsForCalc
 parameter_list|()
@@ -2266,7 +2243,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testHintsPropagationInHepPlannerRules
 parameter_list|()
@@ -2383,7 +2359,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testHintsPropagationInVolcanoPlannerRules
 parameter_list|()
@@ -2587,7 +2562,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testHintsPropagateWithDifferentKindOfRels
 parameter_list|()
@@ -2700,7 +2674,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUseMergeJoin
 parameter_list|()

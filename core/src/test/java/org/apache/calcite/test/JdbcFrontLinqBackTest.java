@@ -463,7 +463,6 @@ block|{
 comment|/**    * Runs a simple query that reads from a table in an in-memory schema.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelect
 parameter_list|()
@@ -489,7 +488,6 @@ block|}
 comment|/**    * Runs a simple query that joins between two in-memory schemas.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoin
 parameter_list|()
@@ -519,7 +517,6 @@ block|}
 comment|/**    * Simple GROUP BY.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGroupBy
 parameter_list|()
@@ -547,7 +544,6 @@ block|}
 comment|/**    * Simple ORDER BY.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOrderBy
 parameter_list|()
@@ -590,7 +586,6 @@ block|}
 comment|/**    * Simple UNION, plus ORDER BY.    *    *<p>Also tests a query that returns a single column. We optimize this case    * internally, using non-array representations for rows.</p>    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUnionAllOrderBy
 parameter_list|()
@@ -634,7 +629,6 @@ block|}
 comment|/**    * Tests UNION.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUnion
 parameter_list|()
@@ -674,7 +668,6 @@ block|}
 comment|/**    * Tests INTERSECT.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testIntersect
 parameter_list|()
@@ -706,7 +699,6 @@ annotation|@
 name|Disabled
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExcept
 parameter_list|()
@@ -739,7 +731,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWhereBad
 parameter_list|()
@@ -765,7 +756,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-9">[CALCITE-9]    * RexToLixTranslator not incrementing local variable name counter</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWhereOr
 parameter_list|()
@@ -790,7 +780,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWhereLike
 parameter_list|()
@@ -821,7 +810,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInsert
 parameter_list|()
@@ -925,7 +913,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInsertBind
 parameter_list|()
@@ -1084,7 +1071,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDelete
 parameter_list|()
@@ -1593,7 +1579,6 @@ return|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInsert2
 parameter_list|()
@@ -1688,7 +1673,6 @@ block|}
 comment|/**    * Local Statement insert    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInsert3
 parameter_list|()
@@ -1772,7 +1756,6 @@ block|}
 comment|/**    * Local PreparedStatement insert WITHOUT bind variables    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPreparedStatementInsert
 parameter_list|()
@@ -1872,7 +1855,6 @@ block|}
 comment|/**    * Local PreparedStatement insert WITH bind variables    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPreparedStatementInsert2
 parameter_list|()
@@ -1883,7 +1865,6 @@ block|}
 comment|/** Some of the rows have the wrong number of columns. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInsertMultipleRowMismatch
 parameter_list|()

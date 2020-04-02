@@ -354,14 +354,12 @@ comment|/**  * Tests the application of the {@code EnumerableLimitRule}.  */
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|EnumerableLimitRuleTest
 block|{
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2941">[CALCITE-2941]    * EnumerableLimitRule on Sort with no collation creates EnumerableLimit with    * wrong traitSet and cluster</a>.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|enumerableLimitOnEmptySort
 parameter_list|()

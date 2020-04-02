@@ -86,13 +86,11 @@ comment|/**  * Tests for {@link RelDistribution}.  */
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|RelDistributionTest
 block|{
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRelDistributionSatisfy
 parameter_list|()

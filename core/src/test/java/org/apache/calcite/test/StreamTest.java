@@ -704,7 +704,6 @@ literal|"}"
 decl_stmt|;
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testStream
 parameter_list|()
@@ -755,7 +754,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testStreamFilterProject
 parameter_list|()
@@ -810,7 +808,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testStreamGroupByHaving
 parameter_list|()
@@ -877,7 +874,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testStreamOrderBy
 parameter_list|()
@@ -944,7 +940,6 @@ annotation|@
 name|Disabled
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testStreamUnionAllOrderBy
 parameter_list|()
@@ -1026,7 +1021,6 @@ block|}
 comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-809">[CALCITE-809]    * TableScan does not support large/infinite scans</a>.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInfiniteStreamsDoNotBufferInMemory
 parameter_list|()
@@ -1230,7 +1224,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testStreamToRelationJoin
 parameter_list|()
@@ -1305,7 +1298,6 @@ annotation|@
 name|Disabled
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTumbleViaOver
 parameter_list|()

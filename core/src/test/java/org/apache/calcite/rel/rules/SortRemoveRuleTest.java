@@ -587,7 +587,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2554">[CALCITE-2554]    * Enrich enumerable join operators with order preserving information</a>.    *    *<p>Since join inputs are sorted, and this join preserves the order of the    * left input, there shouldn't be any sort operator above the join.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|removeSortOverEnumerableHashJoin
 parameter_list|()
@@ -693,7 +692,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2554">[CALCITE-2554]    * Enrich enumerable join operators with order preserving information</a>.    *    *<p>Since join inputs are sorted, and this join preserves the order of the    * left input, there shouldn't be any sort operator above the join.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|removeSortOverEnumerableNestedLoopJoin
 parameter_list|()
@@ -799,7 +797,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2554">[CALCITE-2554]    * Enrich enumerable join operators with order preserving information</a>.    *    *<p>Since join inputs are sorted, and this join preserves the order of the    * left input, there shouldn't be any sort operator above the join.    *    *<p>Until CALCITE-2018 is fixed we can add back EnumerableRules.ENUMERABLE_SORT_RULE    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|removeSortOverEnumerableCorrelate
 parameter_list|()
@@ -905,7 +902,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2554">[CALCITE-2554]    * Enrich enumerable join operators with order preserving information</a>.    *    *<p>Since join inputs are sorted, and this join preserves the order of the    * left input, there shouldn't be any sort operator above the join.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|removeSortOverEnumerableSemiJoin
 parameter_list|()

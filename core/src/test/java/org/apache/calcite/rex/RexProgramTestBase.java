@@ -126,7 +126,6 @@ import|;
 end_import
 
 begin_class
-specifier|public
 class|class
 name|RexProgramTestBase
 extends|extends

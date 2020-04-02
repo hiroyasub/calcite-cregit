@@ -130,13 +130,11 @@ comment|/** Unit test for {@link ImmutableBeans}. */
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|ImmutableBeanTest
 block|{
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSimple
 parameter_list|()
@@ -467,7 +465,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDefault
 parameter_list|()
@@ -1558,7 +1555,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testValidate
 parameter_list|()
@@ -1738,7 +1734,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDefaultMethod
 parameter_list|()

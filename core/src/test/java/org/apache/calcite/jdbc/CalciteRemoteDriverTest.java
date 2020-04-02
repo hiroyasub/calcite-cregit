@@ -769,7 +769,6 @@ name|ExecutionMode
 operator|.
 name|SAME_THREAD
 argument_list|)
-specifier|public
 class|class
 name|CalciteRemoteDriverTest
 block|{
@@ -1194,7 +1193,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCatalogsLocal
 parameter_list|()
@@ -1328,7 +1326,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSchemasLocal
 parameter_list|()
@@ -1576,7 +1573,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMetaFunctionsLocal
 parameter_list|()
@@ -1764,7 +1760,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRemoteCatalogs
 parameter_list|()
@@ -1794,7 +1789,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRemoteSchemas
 parameter_list|()
@@ -1830,7 +1824,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRemoteColumns
 parameter_list|()
@@ -1865,7 +1858,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRemoteTypeInfo
 parameter_list|()
@@ -1903,7 +1895,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRemoteTableTypes
 parameter_list|()
@@ -1935,7 +1926,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRemoteExecuteQuery
 parameter_list|()
@@ -1968,7 +1958,6 @@ block|}
 comment|/** Same query as {@link #testRemoteExecuteQuery()}, run without the test    * infrastructure. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRemoteExecuteQuery2
 parameter_list|()
@@ -2042,7 +2031,6 @@ block|}
 comment|/** For each (source, destination) type, make sure that we can convert bind    * variables. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testParameterConvert
 parameter_list|()
@@ -2501,7 +2489,6 @@ block|}
 comment|/** Check that the "set" conversion table looks like Table B-5 in JDBC 4.1    * specification */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTableB5
 parameter_list|()
@@ -2867,7 +2854,6 @@ block|}
 comment|/** Check that the "get" conversion table looks like Table B-5 in JDBC 4.1    * specification */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTableB6
 parameter_list|()
@@ -3102,7 +3088,6 @@ block|}
 comment|/** Checks {@link Statement#execute} on a query over a remote connection.    *    *<p>Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-646">[CALCITE-646]    * AvaticaStatement execute method broken over remote JDBC</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRemoteStatementExecute
 parameter_list|()
@@ -3188,7 +3173,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAvaticaConnectionException
 parameter_list|()
@@ -3226,7 +3210,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAvaticaStatementException
 parameter_list|()
@@ -3275,7 +3258,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAvaticaStatementGetMoreResults
 parameter_list|()
@@ -3320,7 +3302,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRemoteExecute
 parameter_list|()
@@ -3382,7 +3363,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRemoteExecuteMaxRow
 parameter_list|()
@@ -3455,7 +3435,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-661">[CALCITE-661]    * Remote fetch in Calcite JDBC driver</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRemotePrepareExecute
 parameter_list|()
@@ -3599,7 +3578,6 @@ return|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLocalStatementFetch
 parameter_list|()
@@ -3685,7 +3663,6 @@ block|}
 comment|/** Test that returns all result sets in one go. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLocalPreparedStatementFetch
 parameter_list|()
@@ -3817,7 +3794,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRemoteStatementFetch
 parameter_list|()
@@ -3914,7 +3890,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRemotePreparedStatementFetch
 parameter_list|()
@@ -5483,7 +5458,6 @@ block|}
 comment|/** Test remote Statement insert. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInsert
 parameter_list|()
@@ -5610,7 +5584,6 @@ block|}
 comment|/** Test remote Statement batched insert. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInsertBatch
 parameter_list|()
@@ -5816,7 +5789,6 @@ block|}
 comment|/**    * Remote PreparedStatement insert WITHOUT bind variables    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRemotePreparedStatementInsert
 parameter_list|()
@@ -5938,7 +5910,6 @@ block|}
 comment|/**    * Remote PreparedStatement insert WITH bind variables    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRemotePreparedStatementInsert2
 parameter_list|()

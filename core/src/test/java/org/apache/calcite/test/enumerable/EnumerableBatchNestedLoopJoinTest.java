@@ -196,13 +196,11 @@ comment|/**  * Unit test for  * {@link org.apache.calcite.adapter.enumerable.Enu
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|EnumerableBatchNestedLoopJoinTest
 block|{
 annotation|@
 name|Test
-specifier|public
 name|void
 name|simpleInnerBatchJoinTestBuilder
 parameter_list|()
@@ -349,7 +347,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|simpleInnerBatchJoinTestSQL
 parameter_list|()
@@ -418,7 +415,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|simpleLeftBatchJoinTestSQL
 parameter_list|()
@@ -489,7 +485,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|innerBatchJoinTestSQL
 parameter_list|()
@@ -554,7 +549,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|innerBatchJoinTestSQL2
 parameter_list|()
@@ -619,7 +613,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|leftBatchJoinTestSQL
 parameter_list|()
@@ -686,7 +679,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinSubQuery
 parameter_list|()
@@ -776,7 +768,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInnerJoinOnString
 parameter_list|()
@@ -864,7 +855,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSemiJoin
 parameter_list|()
@@ -1027,7 +1017,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAntiJoin
 parameter_list|()
@@ -1229,7 +1218,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|innerBatchJoinAndTestSQL
 parameter_list|()

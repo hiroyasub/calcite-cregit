@@ -1367,7 +1367,6 @@ return|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testScan
 parameter_list|()
@@ -1411,7 +1410,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testScanQualifiedTable
 parameter_list|()
@@ -1457,7 +1455,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testScanInvalidTable
 parameter_list|()
@@ -1522,7 +1519,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testScanInvalidSchema
 parameter_list|()
@@ -1589,7 +1585,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testScanInvalidQualifiedTable
 parameter_list|()
@@ -1656,7 +1651,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testScanValidTableWrongCase
 parameter_list|()
@@ -1721,7 +1715,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testScanFilterTrue
 parameter_list|()
@@ -1781,7 +1774,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testScanFilterTriviallyFalse
 parameter_list|()
@@ -1853,7 +1845,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testScanFilterEquals
 parameter_list|()
@@ -1933,7 +1924,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSnapshotTemporalTable
 parameter_list|()
@@ -2009,7 +1999,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTableFunctionScan
 parameter_list|()
@@ -2148,7 +2137,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTableFunctionScanZeroInputs
 parameter_list|()
@@ -2258,7 +2246,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinTemporalTable
 parameter_list|()
@@ -2384,7 +2371,6 @@ block|}
 comment|/** Tests that {@link RelBuilder#project} simplifies expressions if and only if    * {@link RelBuilder.Config#simplify}. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSimplify
 parameter_list|()
@@ -2509,7 +2495,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testScanFilterOr
 parameter_list|()
@@ -2628,7 +2613,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testScanFilterOr2
 parameter_list|()
@@ -2748,7 +2732,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testScanFilterAndFalse
 parameter_list|()
@@ -2839,7 +2822,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testScanFilterAndTrue
 parameter_list|()
@@ -2931,7 +2913,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2730">[CALCITE-2730]    * RelBuilder incorrectly simplifies a filter with duplicate conjunction to    * empty</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testScanFilterDuplicateAnd
 parameter_list|()
@@ -3104,7 +3085,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testBadFieldName
 parameter_list|()
@@ -3174,7 +3154,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testBadFieldOrdinal
 parameter_list|()
@@ -3244,7 +3223,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testBadType
 parameter_list|()
@@ -3332,7 +3310,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testProject
 parameter_list|()
@@ -3449,7 +3426,6 @@ block|}
 comment|/** Tests each method that creates a scalar expression. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testProject2
 parameter_list|()
@@ -3730,7 +3706,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testProjectIdentity
 parameter_list|()
@@ -3807,7 +3782,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1297">[CALCITE-1297]    * RelBuilder does not translate identity projects even if they rename    * fields</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testProjectIdentityWithFieldsRename
 parameter_list|()
@@ -3931,7 +3905,6 @@ block|}
 comment|/** Variation on {@link #testProjectIdentityWithFieldsRename}: don't use a    * table alias, and make sure the field names propagate through a filter. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testProjectIdentityWithFieldsRenameFilter
 parameter_list|()
@@ -4109,7 +4082,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testProjectLeadingEdge
 parameter_list|()
@@ -4187,7 +4159,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testProjectWithAliasFromScan
 parameter_list|()
@@ -4256,7 +4227,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3228">[CALCITE-3228]    * IllegalArgumentException in getMapping() for project containing same reference</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testProjectMapping
 parameter_list|()
@@ -4440,7 +4410,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testProject1asInt
 parameter_list|()
@@ -4465,7 +4434,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testProject1asBigInt
 parameter_list|()
@@ -4490,7 +4458,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testProjectBloat
 parameter_list|()
@@ -4760,7 +4727,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testProjectBloat2
 parameter_list|()
@@ -5126,7 +5092,6 @@ block|}
 comment|/** Creates a {@link Project} that contains a windowed aggregate function. As    * {@link RelBuilder} not explicitly support for {@link RexOver} the syntax is    * a bit cumbersome. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testProjectOver
 parameter_list|()
@@ -5220,7 +5185,6 @@ block|}
 comment|/** Tests that RelBuilder does not merge a Project that contains a windowed    * aggregate function into a lower Project. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testProjectOverOver
 parameter_list|()
@@ -5439,7 +5403,6 @@ return|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRename
 parameter_list|()
@@ -5742,7 +5705,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRenameValues
 parameter_list|()
@@ -5864,7 +5826,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPermute
 parameter_list|()
@@ -5937,7 +5898,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testConvert
 parameter_list|()
@@ -6045,7 +6005,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testConvertRename
 parameter_list|()
@@ -6153,7 +6112,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregate
 parameter_list|()
@@ -6237,7 +6195,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregate2
 parameter_list|()
@@ -6426,7 +6383,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2192">[CALCITE-2192]    * RelBuilder wrongly skips creation of Aggregate that prunes columns if input    * is unique</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregate3
 parameter_list|()
@@ -6530,7 +6486,6 @@ block|}
 comment|/** As {@link #testAggregate3()} but with Filter. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregate4
 parameter_list|()
@@ -6663,7 +6618,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2946">[CALCITE-2946]    * RelBuilder wrongly skips creation of Aggregate that prunes columns if input    * produces one row at most</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregate5
 parameter_list|()
@@ -6786,7 +6740,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3839">[CALCITE-3839]    * After calling RelBuilder.aggregate, cannot lookup field by name</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregateAndThenProjectNamedField
 parameter_list|()
@@ -6909,7 +6862,6 @@ block|}
 comment|/** Tests that {@link RelBuilder#aggregate} eliminates duplicate aggregate    * calls and creates a {@code Project} to compensate. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregateEliminatesDuplicateCalls
 parameter_list|()
@@ -6981,7 +6933,6 @@ block|}
 comment|/** As {@link #testAggregateEliminatesDuplicateCalls()} but with a    * single-column GROUP BY clause. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregateEliminatesDuplicateCalls2
 parameter_list|()
@@ -7024,7 +6975,6 @@ block|}
 comment|/** As {@link #testAggregateEliminatesDuplicateCalls()} but with a    * multi-column GROUP BY clause. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregateEliminatesDuplicateCalls3
 parameter_list|()
@@ -7182,7 +7132,6 @@ block|}
 comment|/** Tests eliminating duplicate aggregate calls, when some of them are only    * seen to be duplicates when a spurious "DISTINCT" has been eliminated.    *    *<p>Note that "M2" and "MD2" are based on the same field, because    * "MIN(DISTINCT $2)" is identical to "MIN($2)". The same is not true for    * "SUM". */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregateEliminatesDuplicateDistinctCalls
 parameter_list|()
@@ -7378,7 +7327,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregateFilter
 parameter_list|()
@@ -7553,7 +7501,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregateFilterFails
 parameter_list|()
@@ -7665,7 +7612,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregateFilterNullable
 parameter_list|()
@@ -7823,7 +7769,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1980">[CALCITE-1980]    * RelBuilder gives NPE if groupKey contains alias</a>.    *    *<p>Now, the alias does not cause a new expression to be added to the input,    * but causes the referenced fields to be renamed. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregateProjectWithAliases
 parameter_list|()
@@ -7913,7 +7858,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregateProjectWithExpression
 parameter_list|()
@@ -8057,7 +8001,6 @@ block|}
 comment|/** Tests that {@link RelBuilder#aggregate} on top of a {@link Project} prunes    * away expressions that are not used.    *    * @see RelBuilder.Config#pruneInputOfAggregate */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregateProjectPrune
 parameter_list|()
@@ -8266,7 +8209,6 @@ block|}
 comment|/** Tests that (a) if the input is a project and no fields are used    * we remove the project (rather than projecting zero fields, which    * would be wrong), and (b) if the same aggregate function is used    * twice, we add a project on top. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregateProjectPruneEmpty
 parameter_list|()
@@ -8439,7 +8381,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregateGroupingKeyOutOfRangeFails
 parameter_list|()
@@ -8520,7 +8461,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregateGroupingSetNotSubsetFails
 parameter_list|()
@@ -8624,7 +8564,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregateGroupingSetDuplicateIgnored
 parameter_list|()
@@ -8729,7 +8668,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregateGrouping
 parameter_list|()
@@ -8818,7 +8756,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregateGroupingWithDistinctFails
 parameter_list|()
@@ -8922,7 +8859,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregateGroupingWithFilterFails
 parameter_list|()
@@ -9031,7 +8967,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDistinct
 parameter_list|()
@@ -9103,7 +9038,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDistinctAlready
 parameter_list|()
@@ -9159,7 +9093,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDistinctEmpty
 parameter_list|()
@@ -9284,7 +9217,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUnion
 parameter_list|()
@@ -9409,7 +9341,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1522">[CALCITE-1522]    * Fix error message for SetOp with incompatible args</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testBadUnionArgsErrorMessage
 parameter_list|()
@@ -9527,7 +9458,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUnion3
 parameter_list|()
@@ -9646,7 +9576,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUnion1
 parameter_list|()
@@ -9753,7 +9682,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRepeatUnion1
 parameter_list|()
@@ -9895,7 +9823,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRepeatUnion2
 parameter_list|()
@@ -10094,7 +10021,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testIntersect
 parameter_list|()
@@ -10219,7 +10145,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testIntersect3
 parameter_list|()
@@ -10338,7 +10263,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExcept
 parameter_list|()
@@ -10463,7 +10387,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoin
 parameter_list|()
@@ -10590,7 +10513,6 @@ block|}
 comment|/** Same as {@link #testJoin} using USING. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinUsing
 parameter_list|()
@@ -10684,7 +10606,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoin2
 parameter_list|()
@@ -10839,7 +10760,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinCartesian
 parameter_list|()
@@ -10909,7 +10829,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCorrelationFails
 parameter_list|()
@@ -11037,7 +10956,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCorrelationWithCondition
 parameter_list|()
@@ -11194,7 +11112,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAntiJoin
 parameter_list|()
@@ -11290,7 +11207,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAlias
 parameter_list|()
@@ -11464,7 +11380,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAlias2
 parameter_list|()
@@ -11616,7 +11531,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAliasSort
 parameter_list|()
@@ -11696,7 +11610,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAliasLimit
 parameter_list|()
@@ -11785,7 +11698,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1551">[CALCITE-1551]    * RelBuilder's project() doesn't preserve alias</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAliasProject
 parameter_list|()
@@ -11876,7 +11788,6 @@ block|}
 comment|/** Tests that table aliases are propagated even when there is a project on    * top of a project. (Aliases tend to get lost when projects are merged). */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAliasProjectProject
 parameter_list|()
@@ -12005,7 +11916,6 @@ block|}
 comment|/** Tests that table aliases are propagated and are available to a filter,    * even when there is a project on top of a project. (Aliases tend to get lost    * when projects are merged). */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAliasFilter
 parameter_list|()
@@ -12140,7 +12050,6 @@ block|}
 comment|/** Tests that the {@link RelBuilder#alias(RexNode, String)} function is    * idempotent. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testScanAlias
 parameter_list|()
@@ -12363,7 +12272,6 @@ block|}
 comment|/**    * Tests that project field name aliases are suggested incrementally.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAliasSuggester
 parameter_list|()
@@ -12510,7 +12418,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAliasAggregate
 parameter_list|()
@@ -12648,7 +12555,6 @@ block|}
 comment|/** Tests that a projection retains field names after a join. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testProjectJoin
 parameter_list|()
@@ -12784,7 +12690,6 @@ block|}
 comment|/** Tests that a projection after a projection. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testProjectProject
 parameter_list|()
@@ -12917,7 +12822,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3462">[CALCITE-3462]    * Add projectExcept method in RelBuilder for projecting out expressions</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testProjectExceptWithOrdinal
 parameter_list|()
@@ -12991,7 +12895,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3462">[CALCITE-3462]    * Add projectExcept method in RelBuilder for projecting out expressions</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testProjectExceptWithName
 parameter_list|()
@@ -13065,7 +12968,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3462">[CALCITE-3462]    * Add projectExcept method in RelBuilder for projecting out expressions</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testProjectExceptWithExplicitAliasAndName
 parameter_list|()
@@ -13148,7 +13050,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3462">[CALCITE-3462]    * Add projectExcept method in RelBuilder for projecting out expressions</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testProjectExceptWithImplicitAliasAndName
 parameter_list|()
@@ -13226,7 +13127,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3462">[CALCITE-3462]    * Add projectExcept method in RelBuilder for projecting out expressions</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testProjectExceptWithDuplicateField
 parameter_list|()
@@ -13308,7 +13208,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3462">[CALCITE-3462]    * Add projectExcept method in RelBuilder for projecting out expressions</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testProjectExceptWithMissingField
 parameter_list|()
@@ -13410,7 +13309,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMultiLevelAlias
 parameter_list|()
@@ -13603,7 +13501,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUnionAlias
 parameter_list|()
@@ -13772,7 +13669,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1523">[CALCITE-1523]    * Add RelBuilder field() method to reference aliased relations not on top of    * stack</a>, accessing tables aliased that are not accessible in the top    * RelNode. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAliasPastTop
 parameter_list|()
@@ -13907,7 +13803,6 @@ block|}
 comment|/** As {@link #testAliasPastTop()}. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAliasPastTop2
 parameter_list|()
@@ -14104,7 +13999,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testEmpty
 parameter_list|()
@@ -14203,7 +14097,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3172">[CALCITE-3172]    * RelBuilder#empty does not keep aliases</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testEmptyWithAlias
 parameter_list|()
@@ -14449,7 +14342,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testValues
 parameter_list|()
@@ -14542,7 +14434,6 @@ block|}
 comment|/** Tests creating Values with some field names and some values null. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testValuesNullable
 parameter_list|()
@@ -14639,7 +14530,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testValuesBadNullFieldNames
 parameter_list|()
@@ -14710,7 +14600,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testValuesBadNoFields
 parameter_list|()
@@ -14783,7 +14672,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testValuesBadNoValues
 parameter_list|()
@@ -14853,7 +14741,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testValuesBadOddMultiple
 parameter_list|()
@@ -14933,7 +14820,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testValuesBadAllNull
 parameter_list|()
@@ -15011,7 +14897,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testValuesAllNull
 parameter_list|()
@@ -15127,7 +15012,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSort
 parameter_list|()
@@ -15242,7 +15126,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1015">[CALCITE-1015]    * OFFSET 0 causes AssertionError</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTrivialSort
 parameter_list|()
@@ -15312,7 +15195,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSortDuplicate
 parameter_list|()
@@ -15411,7 +15293,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSortByExpression
 parameter_list|()
@@ -15522,7 +15403,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLimit
 parameter_list|()
@@ -15588,7 +15468,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSortLimit
 parameter_list|()
@@ -15667,7 +15546,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSortLimit0
 parameter_list|()
@@ -15745,7 +15623,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1610">[CALCITE-1610]    * RelBuilder sort-combining optimization treats aliases incorrectly</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSortOverProjectSort
 parameter_list|()
@@ -15880,7 +15757,6 @@ block|}
 comment|/** Tests that a sort on a field followed by a limit gives the same    * effect as calling sortLimit.    *    *<p>In general a relational operator cannot rely on the order of its input,    * but it is reasonable to merge sort and limit if they were created by    * consecutive builder operations. And clients such as Piglet rely on it. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSortThenLimit
 parameter_list|()
@@ -16005,7 +15881,6 @@ block|}
 comment|/** Tests that a sort on an expression followed by a limit gives the same    * effect as calling sortLimit. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSortExpThenLimit
 parameter_list|()
@@ -16164,7 +16039,6 @@ block|}
 comment|/** Tests {@link org.apache.calcite.tools.RelRunner} for a VALUES query. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRunValues
 parameter_list|()
@@ -16266,7 +16140,6 @@ block|}
 comment|/** Tests {@link org.apache.calcite.tools.RelRunner} for a table scan + filter    * query. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRun
 parameter_list|()
@@ -16384,7 +16257,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1595">[CALCITE-1595]    * RelBuilder.call throws NullPointerException if argument types are    * invalid</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTypeInferenceValidation
 parameter_list|()
@@ -16518,7 +16390,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMatchRecognize
 parameter_list|()
@@ -17089,7 +16960,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFilterCastAny
 parameter_list|()
@@ -17186,7 +17056,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFilterCastNull
 parameter_list|()
@@ -17299,7 +17168,6 @@ block|}
 comment|/** Tests filter builder with correlation variables */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFilterWithCorrelationVariables
 parameter_list|()
@@ -17530,7 +17398,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFilterEmpty
 parameter_list|()
@@ -17593,7 +17460,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRelBuilderToString
 parameter_list|()
@@ -17736,7 +17602,6 @@ block|}
 comment|/**    * Ensures that relational algebra ({@link RelBuilder}) works with SQL views.    *    *<p>This test currently fails (thus ignored).    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExpandViewInRelBuilder
 parameter_list|()
@@ -17884,7 +17749,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExpandViewShouldKeepAlias
 parameter_list|()
@@ -18023,7 +17887,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExpandTable
 parameter_list|()
@@ -18156,7 +18019,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExchange
 parameter_list|()
@@ -18226,7 +18088,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSortExchange
 parameter_list|()
@@ -18303,7 +18164,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCorrelate
 parameter_list|()
@@ -18439,7 +18299,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCorrelateWithComplexFields
 parameter_list|()
@@ -18607,7 +18466,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testHints
 parameter_list|()
@@ -18849,7 +18707,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testHintsOnEmptyStack
 parameter_list|()
@@ -18926,7 +18783,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testHintsOnNonHintable
 parameter_list|()
@@ -19044,7 +18900,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3747">[CALCITE-3747]    * Constructing BETWEEN with RelBuilder throws class cast exception</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCallBetweenOperator
 parameter_list|()

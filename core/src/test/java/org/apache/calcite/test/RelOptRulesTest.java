@@ -2430,7 +2430,6 @@ comment|/**  * Unit test for rules in {@code org.apache.calcite.rel} and subpack
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|RelOptRulesTest
 extends|extends
@@ -2486,7 +2485,6 @@ return|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testReduceNot
 parameter_list|()
@@ -2569,7 +2567,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testReduceNestedCaseWhen
 parameter_list|()
@@ -2656,7 +2653,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDigestOfApproximateDistinctAggregateCall
 parameter_list|()
@@ -2744,7 +2740,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1479">[CALCITE-1479]    * AssertionError in ReduceExpressionsRule on multi-column IN    * sub-query</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testReduceCompositeInSubQuery
 parameter_list|()
@@ -2804,7 +2799,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2865">[CALCITE-2865]    * FilterProjectTransposeRule generates wrong traitSet when copyFilter/Project is true</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFilterProjectTransposeRule
 parameter_list|()
@@ -3052,7 +3046,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testReduceOrCaseWhen
 parameter_list|()
@@ -3137,7 +3130,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testReduceNullableCase
 parameter_list|()
@@ -3205,7 +3197,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testReduceNullableCase2
 parameter_list|()
@@ -3273,7 +3264,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testProjectToWindowRuleForMultipleWindows
 parameter_list|()
@@ -3362,7 +3352,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUnionToDistinctRule
 parameter_list|()
@@ -3391,7 +3380,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExtractJoinFilterRule
 parameter_list|()
@@ -3420,7 +3408,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNotPushExpression
 parameter_list|()
@@ -3451,7 +3438,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAddRedundantSemiJoinRule
 parameter_list|()
@@ -3480,7 +3466,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testStrengthenJoinType
 parameter_list|()
@@ -3575,7 +3560,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3170">[CALCITE-3170]    * ANTI join on conditions push down generates wrong plan</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCanNotPushAntiJoinConditionsToLeft
 parameter_list|()
@@ -3799,7 +3783,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCanNotPushAntiJoinConditionsToRight
 parameter_list|()
@@ -3993,7 +3976,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3171">[CALCITE-3171]    * SemiJoin on conditions push down throws IndexOutOfBoundsException</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPushSemiJoinConditionsToLeft
 parameter_list|()
@@ -4217,7 +4199,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFullOuterJoinSimplificationToLeftOuter
 parameter_list|()
@@ -4250,7 +4231,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFullOuterJoinSimplificationToRightOuter
 parameter_list|()
@@ -4283,7 +4263,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFullOuterJoinSimplificationToInner
 parameter_list|()
@@ -4316,7 +4295,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLeftOuterJoinSimplificationToInner
 parameter_list|()
@@ -4349,7 +4327,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRightOuterJoinSimplificationToInner
 parameter_list|()
@@ -4382,7 +4359,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPushAboveFiltersIntoInnerJoinCondition
 parameter_list|()
@@ -4418,7 +4394,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3225">[CALCITE-3225]    * JoinToMultiJoinRule should not match SEMI/ANTI LogicalJoin</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinToMultiJoinDoesNotMatchSemiJoin
 parameter_list|()
@@ -4661,7 +4636,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3225">[CALCITE-3225]    * JoinToMultiJoinRule should not match SEMI/ANTI LogicalJoin</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinToMultiJoinDoesNotMatchAntiJoin
 parameter_list|()
@@ -4903,7 +4877,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPushFilterPastAgg
 parameter_list|()
@@ -5029,7 +5002,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPushFilterPastAggWithGroupingSets1
 parameter_list|()
@@ -5044,7 +5016,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPushFilterPastAggWithGroupingSets2
 parameter_list|()
@@ -5060,7 +5031,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-434">[CALCITE-434]    * FilterAggregateTransposeRule loses conditions that cannot be pushed</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPushFilterPastAggTwo
 parameter_list|()
@@ -5096,7 +5066,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-799">[CALCITE-799]    * Incorrect result for {@code HAVING count(*)> 1}</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPushFilterPastAggThree
 parameter_list|()
@@ -5128,7 +5097,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1109">[CALCITE-1109]    * FilterAggregateTransposeRule pushes down incorrect condition</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPushFilterPastAggFour
 parameter_list|()
@@ -5208,7 +5176,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-448">[CALCITE-448]    * FilterIntoJoinRule creates filters containing invalid RexInputRef</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPushFilterPastProject
 parameter_list|()
@@ -5356,7 +5323,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinProjectTranspose1
 parameter_list|()
@@ -5468,7 +5434,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1338">[CALCITE-1338]    * JoinProjectTransposeRule should not pull a literal above the    * null-generating side of a join</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinProjectTranspose2
 parameter_list|()
@@ -5504,7 +5469,6 @@ block|}
 comment|/** As {@link #testJoinProjectTranspose2()};    * should not transpose since the left project of right join has literal. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinProjectTranspose3
 parameter_list|()
@@ -5540,7 +5504,6 @@ block|}
 comment|/** As {@link #testJoinProjectTranspose2()};    * should not transpose since the right project of left join has not-strong    * expression {@code y is not null}. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinProjectTranspose4
 parameter_list|()
@@ -5578,7 +5541,6 @@ block|}
 comment|/** As {@link #testJoinProjectTranspose2()};    * should not transpose since the right project of left join has not-strong    * expression {@code 1 + 1}. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinProjectTranspose5
 parameter_list|()
@@ -5614,7 +5576,6 @@ block|}
 comment|/** As {@link #testJoinProjectTranspose2()};    * should not transpose since both the left project and right project have    * literal. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinProjectTranspose6
 parameter_list|()
@@ -5650,7 +5611,6 @@ block|}
 comment|/** As {@link #testJoinProjectTranspose2()};    * Should transpose since all expressions in the right project of left join    * are strong. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinProjectTranspose7
 parameter_list|()
@@ -5686,7 +5646,6 @@ block|}
 comment|/** As {@link #testJoinProjectTranspose2()};    * should transpose since all expressions including    * {@code deptno> 10 and cast(null as boolean)} in the right project of left    * join are strong. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinProjectTranspose8
 parameter_list|()
@@ -5725,7 +5684,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinProjectTransposeWindow
 parameter_list|()
@@ -5761,7 +5719,6 @@ block|}
 comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3353">[CALCITE-3353]    * ProjectJoinTransposeRule caused AssertionError when creating a new Join</a>.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testProjectJoinTransposeWithMergeJoin
 parameter_list|()
@@ -6104,7 +6061,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-889">[CALCITE-889]    * Implement SortUnionTransposeRule</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSortUnionTranspose
 parameter_list|()
@@ -6164,7 +6120,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-889">[CALCITE-889]    * Implement SortUnionTransposeRule</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSortUnionTranspose2
 parameter_list|()
@@ -6224,7 +6179,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-987">[CALCITE-987]    * Push limit 0 will result in an infinite loop</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSortUnionTranspose3
 parameter_list|()
@@ -6283,7 +6237,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSortRemovalAllKeysConstant
 parameter_list|()
@@ -6336,7 +6289,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSortRemovalOneKeyConstant
 parameter_list|()
@@ -6389,7 +6341,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSemiJoinRuleExists
 parameter_list|()
@@ -6489,7 +6440,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSemiJoinRule
 parameter_list|()
@@ -6588,7 +6538,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1495">[CALCITE-1495]    * SemiJoinRule should not apply to RIGHT and FULL JOIN</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSemiJoinRuleRight
 parameter_list|()
@@ -6687,7 +6636,6 @@ block|}
 comment|/** Similar to {@link #testSemiJoinRuleRight()} but FULL. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSemiJoinRuleFull
 parameter_list|()
@@ -6786,7 +6734,6 @@ block|}
 comment|/** Similar to {@link #testSemiJoinRule()} but LEFT. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSemiJoinRuleLeft
 parameter_list|()
@@ -6885,7 +6832,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-438">[CALCITE-438]    * Push predicates through SemiJoin</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPushFilterThroughSemiJoin
 parameter_list|()
@@ -6986,7 +6932,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-571">[CALCITE-571]    * ReduceExpressionsRule tries to reduce SemiJoin condition to non-equi    * condition</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSemiJoinReduceConstants
 parameter_list|()
@@ -7072,7 +7017,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSemiJoinTrim
 parameter_list|()
@@ -7382,7 +7326,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testReduceAverage
 parameter_list|()
@@ -7414,7 +7357,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1621">[CALCITE-1621]    * Adding a cast around the null literal in aggregate rules</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCastInAggregateReduceFunctions
 parameter_list|()
@@ -7464,7 +7406,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDistinctCountWithoutGroupBy
 parameter_list|()
@@ -7519,7 +7460,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDistinctCount1
 parameter_list|()
@@ -7574,7 +7514,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDistinctCount2
 parameter_list|()
@@ -7630,7 +7569,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1293">[CALCITE-1293]    * Bad code generated when argument to COUNT(DISTINCT) is a # GROUP BY    * column</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDistinctCount3
 parameter_list|()
@@ -7679,7 +7617,6 @@ block|}
 comment|/** Tests implementing multiple distinct count the old way, using a join. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDistinctCountMultipleViaJoin
 parameter_list|()
@@ -7737,7 +7674,6 @@ block|}
 comment|/** Tests implementing multiple distinct count the new way, using GROUPING    *  SETS. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDistinctCountMultiple
 parameter_list|()
@@ -7792,7 +7728,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDistinctCountMultipleNoGroup
 parameter_list|()
@@ -7847,7 +7782,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDistinctCountMixedJoin
 parameter_list|()
@@ -7904,7 +7838,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDistinctCountMixed
 parameter_list|()
@@ -7959,7 +7892,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDistinctCountMixed2
 parameter_list|()
@@ -8027,7 +7959,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDistinctCountGroupingSets1
 parameter_list|()
@@ -8082,7 +8013,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDistinctCountGroupingSets2
 parameter_list|()
@@ -8137,7 +8067,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDistinctNonDistinctAggregates
 parameter_list|()
@@ -8190,7 +8119,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1621">[CALCITE-1621]    * Adding a cast around the null literal in aggregate rules</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCastInAggregateExpandDistinctAggregatesRule
 parameter_list|()
@@ -8245,7 +8173,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1558">[CALCITE-1558]    * AggregateExpandDistinctAggregatesRule gets field mapping wrong if groupKey    * is used in aggregate function</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDistinctNonDistinctAggregatesWithGrouping1
 parameter_list|()
@@ -8295,7 +8222,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDistinctNonDistinctAggregatesWithGrouping2
 parameter_list|()
@@ -8343,7 +8269,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDistinctNonDistinctTwoAggregatesWithGrouping
 parameter_list|()
@@ -8391,7 +8316,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDistinctWithGrouping
 parameter_list|()
@@ -8439,7 +8363,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRemoveDistinctOnAgg
 parameter_list|()
@@ -8497,7 +8420,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMultipleDistinctWithGrouping
 parameter_list|()
@@ -8545,7 +8467,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDistinctWithMultipleInputs
 parameter_list|()
@@ -8593,7 +8514,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDistinctWithMultipleInputsAndGroupby
 parameter_list|()
@@ -8641,7 +8561,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDistinctWithFilterWithoutGroupBy
 parameter_list|()
@@ -8687,7 +8606,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDistinctWithDiffFiltersAndSameGroupSet
 parameter_list|()
@@ -8735,7 +8653,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDistinctWithFilterAndGroupBy
 parameter_list|()
@@ -8783,7 +8700,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPushProjectPastFilter
 parameter_list|()
@@ -8815,7 +8731,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1778">[CALCITE-1778]    * Query with "WHERE CASE" throws AssertionError "Cast for just nullability    * not allowed"</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPushProjectPastFilter2
 parameter_list|()
@@ -8848,7 +8763,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPushProjectPastJoin
 parameter_list|()
@@ -8880,7 +8794,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3004">[CALCITE-3004]    * Should not push over past union but its operands can since setop    * will affect row count</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testProjectSetOpTranspose
 parameter_list|()
@@ -8911,7 +8824,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testProjectCorrelateTransposeDynamic
 parameter_list|()
@@ -8978,7 +8890,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testProjectCorrelateTransposeRuleLeftCorrelate
 parameter_list|()
@@ -9050,7 +8961,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testProjectCorrelateTransposeRuleSemiCorrelate
 parameter_list|()
@@ -9309,7 +9219,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testProjectCorrelateTransposeRuleAntiCorrelate
 parameter_list|()
@@ -9568,7 +9477,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testProjectCorrelateTransposeWithExprCond
 parameter_list|()
@@ -9612,7 +9520,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testProjectCorrelateTranspose
 parameter_list|()
@@ -9659,7 +9566,6 @@ block|}
 comment|/** As {@link #testProjectSetOpTranspose()};    * should not push over past correlate but its operands can since correlate    * will affect row count. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testProjectCorrelateTransposeWithOver
 parameter_list|()
@@ -9695,7 +9601,6 @@ block|}
 comment|/** Tests that the default instance of {@link FilterProjectTransposeRule}    * does not push a Filter that contains a correlating variable.    *    * @see #testFilterProjectTranspose() */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFilterProjectTransposePreventedByCorrelation
 parameter_list|()
@@ -9764,7 +9669,6 @@ block|}
 comment|/** Tests a variant of {@link FilterProjectTransposeRule}    * that pushes a Filter that contains a correlating variable. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFilterProjectTranspose
 parameter_list|()
@@ -9879,7 +9783,6 @@ decl_stmt|;
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1753">[CALCITE-1753]    * PushProjector should only preserve expressions if the expression is strong    * when pushing into the nullable-side of outer join</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPushProjectPastInnerJoin
 parameter_list|()
@@ -9918,7 +9821,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPushProjectPastInnerJoinStrong
 parameter_list|()
@@ -9957,7 +9859,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPushProjectPastLeftJoin
 parameter_list|()
@@ -9994,7 +9895,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPushProjectPastLeftJoinSwap
 parameter_list|()
@@ -10033,7 +9933,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPushProjectPastLeftJoinSwapStrong
 parameter_list|()
@@ -10072,7 +9971,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPushProjectPastRightJoin
 parameter_list|()
@@ -10111,7 +10009,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPushProjectPastRightJoinStrong
 parameter_list|()
@@ -10146,7 +10043,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPushProjectPastRightJoinSwap
 parameter_list|()
@@ -10185,7 +10081,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPushProjectPastRightJoinSwapStrong
 parameter_list|()
@@ -10224,7 +10119,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPushProjectPastFullJoin
 parameter_list|()
@@ -10263,7 +10157,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPushProjectPastFullJoinStrong
 parameter_list|()
@@ -10303,7 +10196,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2343">[CALCITE-2343]    * Should not push over whose columns are all from left child past join since    * join will affect row count.</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPushProjectWithOverPastJoin1
 parameter_list|()
@@ -10339,7 +10231,6 @@ block|}
 comment|/** As {@link #testPushProjectWithOverPastJoin1()};    * should not push over whose columns are all from right child past join since    * join will affect row count. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPushProjectWithOverPastJoin2
 parameter_list|()
@@ -10375,7 +10266,6 @@ block|}
 comment|/** As {@link #testPushProjectWithOverPastJoin2()};    * should not push over past join but should push the operands of over past    * join. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPushProjectWithOverPastJoin3
 parameter_list|()
@@ -10410,7 +10300,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPushProjectPastSetOp
 parameter_list|()
@@ -10441,7 +10330,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPushJoinThroughUnionOnLeft
 parameter_list|()
@@ -10474,7 +10362,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPushJoinThroughUnionOnRight
 parameter_list|()
@@ -10507,7 +10394,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPushJoinThroughUnionOnRightDoesNotMatchSemiJoin
 parameter_list|()
@@ -10787,7 +10673,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPushJoinThroughUnionOnRightDoesNotMatchAntiJoin
 parameter_list|()
@@ -11067,7 +10952,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMergeFilterWithJoinCondition
 parameter_list|()
@@ -11141,7 +11025,6 @@ block|}
 comment|/** Tests that filters are combined if they are identical. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMergeFilter
 parameter_list|()
@@ -11203,7 +11086,6 @@ block|}
 comment|/** Tests to see if the final branch of union is missed */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUnionMergeRule
 parameter_list|()
@@ -11289,7 +11171,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMinusMergeRule
 parameter_list|()
@@ -11386,7 +11267,6 @@ block|}
 comment|/** Tests that a filters is combined are combined if they are identical,    * even if one of them originates in an ON clause of a JOIN. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMergeJoinFilter
 parameter_list|()
@@ -11459,7 +11339,6 @@ block|}
 comment|/** Tests {@link UnionMergeRule}, which merges 2 {@link Union} operators into    * a single {@code Union} with 3 inputs. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMergeUnionAll
 parameter_list|()
@@ -11514,7 +11393,6 @@ block|}
 comment|/** Tests {@link UnionMergeRule}, which merges 2 {@link Union}    * {@code DISTINCT} (not {@code ALL}) operators into a single    * {@code Union} with 3 inputs. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMergeUnionDistinct
 parameter_list|()
@@ -11570,7 +11448,6 @@ block|}
 comment|/** Tests that {@link UnionMergeRule} does nothing if its arguments have    * different {@code ALL} settings. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMergeUnionMixed
 parameter_list|()
@@ -11625,7 +11502,6 @@ block|}
 comment|/** Tests that {@link UnionMergeRule} converts all inputs to DISTINCT    * if the top one is DISTINCT.    * (Since UNION is left-associative, the "top one" is the rightmost.) */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMergeUnionMixed2
 parameter_list|()
@@ -11680,7 +11556,6 @@ block|}
 comment|/** Tests that {@link UnionMergeRule} does nothing if its arguments have    * are different set operators, {@link Union} and {@link Intersect}. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMergeSetOpMixed
 parameter_list|()
@@ -11742,7 +11617,6 @@ block|}
 comment|/** Tests {@link UnionMergeRule#INTERSECT_INSTANCE}, which merges 2    * {@link Intersect} operators into a single {@code Intersect} with 3    * inputs. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMergeIntersect
 parameter_list|()
@@ -11797,7 +11671,6 @@ block|}
 comment|/** Tests {@link org.apache.calcite.rel.rules.IntersectToDistinctRule},    * which rewrites an {@link Intersect} operator with 3 inputs. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testIntersectToDistinct
 parameter_list|()
@@ -11859,7 +11732,6 @@ block|}
 comment|/** Tests that {@link org.apache.calcite.rel.rules.IntersectToDistinctRule}    * correctly ignores an {@code INTERSECT ALL}. It can only handle    * {@code INTERSECT DISTINCT}. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testIntersectToDistinctAll
 parameter_list|()
@@ -11921,7 +11793,6 @@ block|}
 comment|/** Tests {@link UnionMergeRule#MINUS_INSTANCE}, which merges 2    * {@link Minus} operators into a single {@code Minus} with 3    * inputs. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMergeMinus
 parameter_list|()
@@ -11976,7 +11847,6 @@ block|}
 comment|/** Tests {@link UnionMergeRule#MINUS_INSTANCE}    * does not merge {@code Minus(a, Minus(b, c))}    * into {@code Minus(a, b, c)}, which would be incorrect. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMergeMinusRightDeep
 parameter_list|()
@@ -12032,7 +11902,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testHeterogeneousConversion
 parameter_list|()
@@ -12093,7 +11962,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPushSemiJoinPastJoinRuleLeft
 parameter_list|()
@@ -12135,7 +12003,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPushSemiJoinPastJoinRuleRight
 parameter_list|()
@@ -12177,7 +12044,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPushSemiJoinPastFilter
 parameter_list|()
@@ -12218,7 +12084,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testConvertMultiJoinRule
 parameter_list|()
@@ -12280,7 +12145,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testManyFiltersOnTopOfMultiJoinShouldCollapse
 parameter_list|()
@@ -12353,7 +12217,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testReduceConstants
 parameter_list|()
@@ -12438,7 +12301,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-570">[CALCITE-570]    * ReduceExpressionsRule throws "duplicate key" exception</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testReduceConstantsDup
 parameter_list|()
@@ -12474,7 +12336,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-935">[CALCITE-935]    * Improve how ReduceExpressionsRule handles duplicate constraints</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testReduceConstantsDup2
 parameter_list|()
@@ -12516,7 +12377,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3198">[CALCITE-3198]    * Enhance RexSimplify to handle (x&lt;&gt;a or x&lt;&gt;b)</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testReduceConstantsDup3
 parameter_list|()
@@ -12552,7 +12412,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3198">[CALCITE-3198]    * Enhance RexSimplify to handle (x&lt;&gt;a or x&lt;&gt;b)</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testReduceConstantsDup3Null
 parameter_list|()
@@ -12588,7 +12447,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3198">[CALCITE-3198]    * Enhance RexSimplify to handle (x&lt;&gt;a or x&lt;&gt;b)</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testReduceConstantsDupNot
 parameter_list|()
@@ -12624,7 +12482,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3198">[CALCITE-3198]    * Enhance RexSimplify to handle (x&lt;&gt;a or x&lt;&gt;b)</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testReduceConstantsDupNotNull
 parameter_list|()
@@ -12660,7 +12517,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3198">[CALCITE-3198]    * Enhance RexSimplify to handle (x&lt;&gt;a or x&lt;&gt;b)</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testReduceConstantsDupNot2
 parameter_list|()
@@ -12696,7 +12552,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3198">[CALCITE-3198]    * Enhance RexSimplify to handle (x&lt;&gt;a or x&lt;&gt;b)</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testReduceConstantsDupNot2Null
 parameter_list|()
@@ -12731,7 +12586,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPullNull
 parameter_list|()
@@ -12776,7 +12630,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOrAlwaysTrue
 parameter_list|()
@@ -12815,7 +12668,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOrAlwaysTrue2
 parameter_list|()
@@ -12854,7 +12706,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testReduceConstants2
 parameter_list|()
@@ -12895,7 +12746,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testReduceConstants3
 parameter_list|()
@@ -12937,7 +12787,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-902">[CALCITE-902]    * Match nullability when reducing expressions in a Project</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testReduceConstantsProjectNullable
 parameter_list|()
@@ -12977,7 +12826,6 @@ block|}
 comment|// see HIVE-9645
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testReduceConstantsNullEqualsOne
 parameter_list|()
@@ -13017,7 +12865,6 @@ block|}
 comment|// see HIVE-9644
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testReduceConstantsCaseEquals
 parameter_list|()
@@ -13065,7 +12912,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testReduceConstantsCaseEquals2
 parameter_list|()
@@ -13115,7 +12961,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testReduceConstantsCaseEquals3
 parameter_list|()
@@ -13167,7 +13012,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSkipReduceConstantsCaseEquals
 parameter_list|()
@@ -13210,7 +13054,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testReduceConstantsEliminatesFilter
 parameter_list|()
@@ -13243,7 +13086,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1860">[CALCITE-1860]    * Duplicate null predicates cause NullPointerException in RexUtil</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testReduceConstantsNull
 parameter_list|()
@@ -13287,7 +13129,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-566">[CALCITE-566]    * ReduceExpressionsRule requires planner to have an Executor</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testReduceConstantsRequiresExecutor
 parameter_list|()
@@ -13340,7 +13181,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAlreadyFalseEliminatesFilter
 parameter_list|()
@@ -13371,7 +13211,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testReduceConstantsCalc
 parameter_list|()
@@ -13511,7 +13350,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRemoveSemiJoin
 parameter_list|()
@@ -13552,7 +13390,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRemoveSemiJoinWithFilter
 parameter_list|()
@@ -13597,7 +13434,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRemoveSemiJoinRight
 parameter_list|()
@@ -13642,7 +13478,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRemoveSemiJoinRightWithFilter
 parameter_list|()
@@ -13891,7 +13726,6 @@ end_expr_stmt
 begin_function
 unit|}    @
 name|Test
-specifier|public
 name|void
 name|testConvertMultiJoinRuleOuterJoins
 parameter_list|()
@@ -13941,7 +13775,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testConvertMultiJoinRuleOuterJoins2
 parameter_list|()
@@ -13961,7 +13794,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testConvertMultiJoinRuleOuterJoins3
 parameter_list|()
@@ -13981,7 +13813,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testConvertMultiJoinRuleOuterJoins4
 parameter_list|()
@@ -14001,7 +13832,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPushSemiJoinPastProject
 parameter_list|()
@@ -14047,7 +13877,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testReduceValuesUnderFilter
 parameter_list|()
@@ -14087,7 +13916,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testReduceValuesUnderProject
 parameter_list|()
@@ -14127,7 +13955,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testReduceValuesUnderProjectFilter
 parameter_list|()
@@ -14179,7 +14006,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testReduceCase
 parameter_list|()
@@ -14276,7 +14102,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testReduceNullableToNotNull
 parameter_list|()
@@ -14300,7 +14125,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testReduceNullableToNotNull2
 parameter_list|()
@@ -14340,7 +14164,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testReduceConstantsIsNull
 parameter_list|()
@@ -14374,7 +14197,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testReduceConstantsIsNotNull
 parameter_list|()
@@ -14410,7 +14232,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testReduceConstantsNegated
 parameter_list|()
@@ -14446,7 +14267,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testReduceConstantsNegatedInverted
 parameter_list|()
@@ -14484,7 +14304,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testReduceConstantsNonDeterministicFunction
 parameter_list|()
@@ -14763,7 +14582,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testReduceConstantsDynamicFunction
 parameter_list|()
@@ -14821,7 +14639,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCasePushIsAlwaysWorking
 parameter_list|()
@@ -14865,7 +14682,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testReduceValuesNull
 parameter_list|()
@@ -14901,7 +14717,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testReduceValuesToEmpty
 parameter_list|()
@@ -14968,7 +14783,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testReduceConstantsWindow
 parameter_list|()
@@ -15048,7 +14862,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testEmptyFilterProjectUnion
 parameter_list|()
@@ -15148,7 +14961,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testEmptyProject
 parameter_list|()
@@ -15221,7 +15033,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testEmptyProject2
 parameter_list|()
@@ -15283,7 +15094,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testEmptyIntersect
 parameter_list|()
@@ -15354,7 +15164,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testEmptyMinus
 parameter_list|()
@@ -15428,7 +15237,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testEmptyMinus2
 parameter_list|()
@@ -15504,7 +15312,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLeftEmptyInnerJoin
 parameter_list|()
@@ -15577,7 +15384,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLeftEmptyLeftJoin
 parameter_list|()
@@ -15650,7 +15456,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLeftEmptyRightJoin
 parameter_list|()
@@ -15724,7 +15529,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLeftEmptyFullJoin
 parameter_list|()
@@ -15798,7 +15602,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLeftEmptySemiJoin
 parameter_list|()
@@ -16008,7 +15811,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLeftEmptyAntiJoin
 parameter_list|()
@@ -16218,7 +16020,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRightEmptyInnerJoin
 parameter_list|()
@@ -16291,7 +16092,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRightEmptyLeftJoin
 parameter_list|()
@@ -16365,7 +16165,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRightEmptyRightJoin
 parameter_list|()
@@ -16438,7 +16237,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRightEmptyFullJoin
 parameter_list|()
@@ -16512,7 +16310,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRightEmptySemiJoin
 parameter_list|()
@@ -16722,7 +16519,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRightEmptyAntiJoin
 parameter_list|()
@@ -16932,7 +16728,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRightEmptyAntiJoinNonEqui
 parameter_list|()
@@ -17165,7 +16960,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testEmptySort
 parameter_list|()
@@ -17219,7 +17013,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testEmptySortLimitZero
 parameter_list|()
@@ -17251,7 +17044,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testEmptyAggregate
 parameter_list|()
@@ -17349,7 +17141,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testEmptyAggregateEmptyKey
 parameter_list|()
@@ -17426,7 +17217,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testEmptyAggregateEmptyKeyWithAggregateValuesRule
 parameter_list|()
@@ -17503,7 +17293,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testReduceCasts
 parameter_list|()
@@ -17577,7 +17366,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testReduceCastTimeUnchanged
 parameter_list|()
@@ -17634,7 +17422,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testReduceCastAndConsts
 parameter_list|()
@@ -17746,7 +17533,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testReduceCastsNullable
 parameter_list|()
@@ -17831,7 +17617,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testReduceCaseWhenWithCast
 parameter_list|()
@@ -18255,7 +18040,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPushSumConstantThroughUnion
 parameter_list|()
@@ -18271,7 +18055,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPushSumNullConstantThroughUnion
 parameter_list|()
@@ -18287,7 +18070,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPushSumNullableThroughUnion
 parameter_list|()
@@ -18303,7 +18085,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPushSumNullableNOGBYThroughUnion
 parameter_list|()
@@ -18319,7 +18100,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPushCountStarThroughUnion
 parameter_list|()
@@ -18335,7 +18115,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPushCountNullableThroughUnion
 parameter_list|()
@@ -18351,7 +18130,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPushMaxNullableThroughUnion
 parameter_list|()
@@ -18367,7 +18145,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPushMinThroughUnion
 parameter_list|()
@@ -18383,7 +18160,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPushAvgThroughUnion
 parameter_list|()
@@ -18399,7 +18175,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPushSumCountStarThroughUnion
 parameter_list|()
@@ -18415,7 +18190,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPushSumConstantGroupingSetsThroughUnion
 parameter_list|()
@@ -18431,7 +18205,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPushSumNullConstantGroupingSetsThroughUnion
 parameter_list|()
@@ -18447,7 +18220,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPushSumNullableGroupingSetsThroughUnion
 parameter_list|()
@@ -18463,7 +18235,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPushCountStarGroupingSetsThroughUnion
 parameter_list|()
@@ -18479,7 +18250,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPushCountNullableGroupingSetsThroughUnion
 parameter_list|()
@@ -18495,7 +18265,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPushMaxNullableGroupingSetsThroughUnion
 parameter_list|()
@@ -18511,7 +18280,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPushMinGroupingSetsThroughUnion
 parameter_list|()
@@ -18527,7 +18295,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPushAvgGroupingSetsThroughUnion
 parameter_list|()
@@ -18543,7 +18310,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPushSumCountStarGroupingSetsThroughUnion
 parameter_list|()
@@ -18559,7 +18325,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPushCountFilterThroughUnion
 parameter_list|()
@@ -18575,7 +18340,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPullFilterThroughAggregate
 parameter_list|()
@@ -18663,7 +18427,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPullFilterThroughAggregateGroupingSets
 parameter_list|()
@@ -18806,7 +18569,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPullConstantThroughConstLast
 parameter_list|()
@@ -18822,7 +18584,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPullConstantThroughAggregateSimpleNonNullable
 parameter_list|()
@@ -18838,7 +18599,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPullConstantThroughAggregatePermuted
 parameter_list|()
@@ -18854,7 +18614,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPullConstantThroughAggregatePermutedConstFirst
 parameter_list|()
@@ -18870,7 +18629,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPullConstantThroughAggregatePermutedConstGroupBy
 parameter_list|()
@@ -18886,7 +18644,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPullConstantThroughAggregateConstGroupBy
 parameter_list|()
@@ -18902,7 +18659,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPullConstantThroughAggregateAllConst
 parameter_list|()
@@ -18918,7 +18674,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPullConstantThroughAggregateAllLiterals
 parameter_list|()
@@ -18934,7 +18689,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPullConstantThroughUnion
 parameter_list|()
@@ -19000,7 +18754,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPullConstantThroughUnion2
 parameter_list|()
@@ -19062,7 +18815,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPullConstantThroughUnion3
 parameter_list|()
@@ -19129,7 +18881,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregateProjectMerge
 parameter_list|()
@@ -19167,7 +18918,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregateGroupingSetsProjectMerge
 parameter_list|()
@@ -19205,7 +18955,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregateExtractProjectRule
 parameter_list|()
@@ -19279,7 +19028,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregateExtractProjectRuleWithGroupingSets
 parameter_list|()
@@ -19359,7 +19107,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregateExtractProjectRuleWithGroupingSets2
 parameter_list|()
@@ -19435,7 +19182,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregateExtractProjectRuleWithFilter
 parameter_list|()
@@ -19551,7 +19297,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregateCaseToFilter
 parameter_list|()
@@ -19603,7 +19348,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPullAggregateThroughUnion
 parameter_list|()
@@ -19662,7 +19406,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPullAggregateThroughUnion2
 parameter_list|()
@@ -19732,7 +19475,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPullAggregateThroughUnionAndAddProjects
 parameter_list|()
@@ -19802,7 +19544,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPullAggregateThroughUnionWithAlias
 parameter_list|()
@@ -19923,7 +19664,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTransitiveInferenceJoin
 parameter_list|()
@@ -19965,7 +19705,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTransitiveInferenceProject
 parameter_list|()
@@ -20007,7 +19746,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTransitiveInferenceAggregate
 parameter_list|()
@@ -20049,7 +19787,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTransitiveInferenceUnion
 parameter_list|()
@@ -20095,7 +19832,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTransitiveInferenceJoin3way
 parameter_list|()
@@ -20141,7 +19877,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTransitiveInferenceJoin3wayAgg
 parameter_list|()
@@ -20187,7 +19922,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTransitiveInferenceLeftOuterJoin
 parameter_list|()
@@ -20231,7 +19965,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTransitiveInferenceRightOuterJoin
 parameter_list|()
@@ -20275,7 +20008,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTransitiveInferenceFullOuterJoin
 parameter_list|()
@@ -20317,7 +20049,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTransitiveInferencePreventProjectPullUp
 parameter_list|()
@@ -20359,7 +20090,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTransitiveInferencePullUpThruAlias
 parameter_list|()
@@ -20401,7 +20131,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTransitiveInferenceConjunctInPullUp
 parameter_list|()
@@ -20445,7 +20174,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTransitiveInferenceNoPullUpExprs
 parameter_list|()
@@ -20489,7 +20217,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTransitiveInferenceUnion3way
 parameter_list|()
@@ -20541,7 +20268,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTransitiveInferenceUnion3wayOr
 parameter_list|()
@@ -20597,7 +20323,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTransitiveInferenceUnionAlwaysTrue
 parameter_list|()
@@ -20647,7 +20372,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTransitiveInferenceConstantEquiPredicate
 parameter_list|()
@@ -20689,7 +20413,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTransitiveInferenceComplexPredicate
 parameter_list|()
@@ -20735,7 +20458,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPullConstantIntoProject
 parameter_list|()
@@ -20781,7 +20503,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPullConstantIntoFilter
 parameter_list|()
@@ -20831,7 +20552,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSimplifyFilter
 parameter_list|()
@@ -20877,7 +20597,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPullConstantIntoJoin
 parameter_list|()
@@ -20923,7 +20642,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPullConstantIntoJoin2
 parameter_list|()
@@ -21005,7 +20723,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCorrelationScalarAggAndFilter
 parameter_list|()
@@ -21096,7 +20813,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCustomDecorrelate
 parameter_list|()
@@ -21330,7 +21046,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testProjectWindowTransposeRule
 parameter_list|()
@@ -21366,7 +21081,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testProjectWindowTransposeRuleWithConstants
 parameter_list|()
@@ -21441,7 +21155,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testProjectMergeShouldIgnoreOver
 parameter_list|()
@@ -21481,7 +21194,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregateProjectPullUpConstants
 parameter_list|()
@@ -21517,7 +21229,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregateProjectPullUpConstants2
 parameter_list|()
@@ -21576,7 +21287,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPushFilterWithRank
 parameter_list|()
@@ -21620,7 +21330,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPushFilterWithRankExpr
 parameter_list|()
@@ -21668,7 +21377,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExpressionInWindowFunction
 parameter_list|()
@@ -21745,7 +21453,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWindowInParenthesis
 parameter_list|()
@@ -21820,7 +21527,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testIsNullPushDown
 parameter_list|()
@@ -21919,7 +21625,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testIsNullPushDown2
 parameter_list|()
@@ -22020,7 +21725,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNestedAggregates
 parameter_list|()
@@ -22064,7 +21768,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWindowFunctionOnAggregations
 parameter_list|()
@@ -22108,7 +21811,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPushAggregateThroughJoin1
 parameter_list|()
@@ -22173,7 +21875,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPushAggregateThroughOuterJoin1
 parameter_list|()
@@ -22238,7 +21939,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPushAggregateThroughOuterJoin2
 parameter_list|()
@@ -22303,7 +22003,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPushAggregateThroughOuterJoin3
 parameter_list|()
@@ -22368,7 +22067,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPushAggregateThroughOuterJoin4
 parameter_list|()
@@ -22433,7 +22131,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPushAggregateThroughOuterJoin5
 parameter_list|()
@@ -22498,7 +22195,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPushAggregateThroughOuterJoin6
 parameter_list|()
@@ -22563,7 +22259,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPushAggregateThroughOuterJoin7
 parameter_list|()
@@ -22630,7 +22325,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPushAggregateThroughOuterJoin8
 parameter_list|()
@@ -22697,7 +22391,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPushAggregateThroughOuterJoin9
 parameter_list|()
@@ -22764,7 +22457,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPushAggregateThroughOuterJoin10
 parameter_list|()
@@ -22829,7 +22521,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPushAggregateThroughOuterJoin11
 parameter_list|()
@@ -22894,7 +22585,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPushAggregateThroughOuterJoin12
 parameter_list|()
@@ -22959,7 +22649,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPushAggregateThroughOuterJoin13
 parameter_list|()
@@ -23024,7 +22713,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPushAggregateThroughOuterJoin14
 parameter_list|()
@@ -23089,7 +22777,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPushAggregateThroughOuterJoin15
 parameter_list|()
@@ -23154,7 +22841,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPushAggregateThroughOuterJoin16
 parameter_list|()
@@ -23217,7 +22903,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPushAggregateThroughJoin2
 parameter_list|()
@@ -23280,7 +22965,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPushAggregateThroughJoin3
 parameter_list|()
@@ -23345,7 +23029,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPushAggregateThroughJoin4
 parameter_list|()
@@ -23404,7 +23087,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPushAggregateThroughJoin5
 parameter_list|()
@@ -23467,7 +23149,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinPushTransitivePredicatesRule
 parameter_list|()
@@ -23552,7 +23233,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinPushTransitivePredicatesRule2
 parameter_list|()
@@ -23632,7 +23312,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInferringPredicatesWithNotOperatorInJoinCondition
 parameter_list|()
@@ -23704,7 +23383,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPushAggregateThroughJoin6
 parameter_list|()
@@ -23785,7 +23463,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPushAggregateThroughJoinWithUniqueInput
 parameter_list|()
@@ -23856,7 +23533,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPushAggregateSumThroughJoin
 parameter_list|()
@@ -23921,7 +23597,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPushAggregateSumWithoutGroupKeyThroughJoin
 parameter_list|()
@@ -23984,7 +23659,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPushAggregateSumThroughJoinAfterAggregateReduce
 parameter_list|()
@@ -24070,7 +23744,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPushAggregateFunctionsThroughJoin
 parameter_list|()
@@ -24143,7 +23816,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPushAggregateThroughJoinDistinct
 parameter_list|()
@@ -24212,7 +23884,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPushAggregateSumNoGroup
 parameter_list|()
@@ -24271,7 +23942,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPushAggregateThroughJoinOnEmptyLogicalValues
 parameter_list|()
@@ -24345,7 +24015,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPushDistinctAggregateIntoJoin
 parameter_list|()
@@ -24383,7 +24052,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregateMerge1
 parameter_list|()
@@ -24482,7 +24150,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregateMerge2
 parameter_list|()
@@ -24581,7 +24248,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregateMerge3
 parameter_list|()
@@ -24676,7 +24342,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregateMerge4
 parameter_list|()
@@ -24771,7 +24436,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregateMerge5
 parameter_list|()
@@ -24866,7 +24530,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregateMerge6
 parameter_list|()
@@ -24959,7 +24622,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregateMerge7
 parameter_list|()
@@ -25054,7 +24716,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregateMerge8
 parameter_list|()
@@ -25145,7 +24806,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregateRemove1
 parameter_list|()
@@ -25208,7 +24868,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregateRemove2
 parameter_list|()
@@ -25267,7 +24926,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregateRemove3
 parameter_list|()
@@ -25328,7 +24986,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregateRemove4
 parameter_list|()
@@ -25389,7 +25046,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregateRemove5
 parameter_list|()
@@ -25450,7 +25106,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregateRemove6
 parameter_list|()
@@ -25511,7 +25166,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregateRemove7
 parameter_list|()
@@ -25584,7 +25238,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregateJoinRemove1
 parameter_list|()
@@ -25645,7 +25298,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregateJoinRemove2
 parameter_list|()
@@ -25708,7 +25360,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregateJoinRemove3
 parameter_list|()
@@ -25771,7 +25422,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregateJoinRemove4
 parameter_list|()
@@ -25832,7 +25482,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregateJoinRemove5
 parameter_list|()
@@ -25895,7 +25544,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregateJoinRemove6
 parameter_list|()
@@ -25958,7 +25606,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregateJoinRemove7
 parameter_list|()
@@ -26023,7 +25670,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregateJoinRemove8
 parameter_list|()
@@ -26090,7 +25736,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregateJoinRemove9
 parameter_list|()
@@ -26155,7 +25800,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregateJoinRemove10
 parameter_list|()
@@ -26222,7 +25866,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testProjectJoinRemove1
 parameter_list|()
@@ -26264,7 +25907,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testProjectJoinRemove2
 parameter_list|()
@@ -26306,7 +25948,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testProjectJoinRemove3
 parameter_list|()
@@ -26348,7 +25989,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testProjectJoinRemove4
 parameter_list|()
@@ -26388,7 +26028,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testProjectJoinRemove5
 parameter_list|()
@@ -26428,7 +26067,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testProjectJoinRemove6
 parameter_list|()
@@ -26468,7 +26106,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testProjectJoinRemove7
 parameter_list|()
@@ -26508,7 +26145,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testProjectJoinRemove8
 parameter_list|()
@@ -26548,7 +26184,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testProjectJoinRemove9
 parameter_list|()
@@ -26584,7 +26219,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSwapOuterJoin
 parameter_list|()
@@ -26639,7 +26273,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPushJoinCondDownToProject
 parameter_list|()
@@ -26677,7 +26310,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSortJoinTranspose1
 parameter_list|()
@@ -26736,7 +26368,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSortJoinTranspose2
 parameter_list|()
@@ -26795,7 +26426,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSortJoinTranspose3
 parameter_list|()
@@ -26859,7 +26489,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSortJoinTranspose4
 parameter_list|()
@@ -27021,7 +26650,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSortJoinTranspose5
 parameter_list|()
@@ -27115,7 +26743,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSortJoinTranspose6
 parameter_list|()
@@ -27178,7 +26805,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSortJoinTranspose7
 parameter_list|()
@@ -27236,7 +26862,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSortProjectTranspose1
 parameter_list|()
@@ -27271,7 +26896,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSortProjectTranspose2
 parameter_list|()
@@ -27306,7 +26930,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSortProjectTranspose3
 parameter_list|()
@@ -27345,7 +26968,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregateConstantKeyRule
 parameter_list|()
@@ -27387,7 +27009,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregateConstantKeyRule2
 parameter_list|()
@@ -27429,7 +27050,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregateConstantKeyRule3
 parameter_list|()
@@ -27473,7 +27093,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregateDynamicFunction
 parameter_list|()
@@ -27513,7 +27132,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testReduceExpressionsNot
 parameter_list|()
@@ -27587,7 +27205,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExpandProjectScalar
 parameter_list|()
@@ -27618,7 +27235,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectNotInCorrelated
 parameter_list|()
@@ -27660,7 +27276,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWhereNotInCorrelated
 parameter_list|()
@@ -27696,7 +27311,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWhereNotInCorrelated2
 parameter_list|()
@@ -27732,7 +27346,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAll
 parameter_list|()
@@ -27764,7 +27377,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSome
 parameter_list|()
@@ -27800,7 +27412,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAnyInProjectNonNullable
 parameter_list|()
@@ -27838,7 +27449,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAnyInProjectNullable
 parameter_list|()
@@ -27872,7 +27482,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectAnyCorrelated
 parameter_list|()
@@ -27906,7 +27515,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWhereAnyCorrelatedInSelect
 parameter_list|()
@@ -27938,7 +27546,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSomeWithEquality
 parameter_list|()
@@ -27970,7 +27577,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSomeWithEquality2
 parameter_list|()
@@ -28006,7 +27612,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWhereOrSubQuery
 parameter_list|()
@@ -28040,7 +27645,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExpandProjectIn
 parameter_list|()
@@ -28080,7 +27684,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExpandProjectInNullable
 parameter_list|()
@@ -28126,7 +27729,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExpandProjectInComposite
 parameter_list|()
@@ -28166,7 +27768,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExpandProjectExists
 parameter_list|()
@@ -28206,7 +27807,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExpandFilterScalar
 parameter_list|()
@@ -28241,7 +27841,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExpandFilterIn
 parameter_list|()
@@ -28274,7 +27873,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExpandFilterInComposite
 parameter_list|()
@@ -28313,7 +27911,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExpandFilterIn3Value
 parameter_list|()
@@ -28369,7 +27966,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExpandFilterExists
 parameter_list|()
@@ -28406,7 +28002,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExpandFilterExistsSimple
 parameter_list|()
@@ -28441,7 +28036,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExpandFilterExistsSimpleAnd
 parameter_list|()
@@ -28474,7 +28068,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExpandJoinScalar
 parameter_list|()
@@ -28511,7 +28104,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSubQueryWithDynamicStarHang
 parameter_list|()
@@ -28807,7 +28399,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testProjectFilterTransposeRuleOnEmptyRowType
 parameter_list|()
@@ -28969,7 +28560,6 @@ literal|"[CALCITE-1045]"
 argument_list|)
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExpandJoinIn
 parameter_list|()
@@ -29005,7 +28595,6 @@ literal|"[CALCITE-1045]"
 argument_list|)
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExpandJoinInComposite
 parameter_list|()
@@ -29038,7 +28627,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExpandJoinExists
 parameter_list|()
@@ -29069,7 +28657,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDecorrelateExists
 parameter_list|()
@@ -29109,7 +28696,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDecorrelateTwoExists
 parameter_list|()
@@ -29153,7 +28739,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDecorrelateUncorrelatedInAndCorrelatedExists
 parameter_list|()
@@ -29197,7 +28782,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDecorrelateTwoIn
 parameter_list|()
@@ -29248,7 +28832,6 @@ literal|"[CALCITE-1045]"
 argument_list|)
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDecorrelateTwoScalar
 parameter_list|()
@@ -29288,7 +28871,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWhereInJoinCorrelated
 parameter_list|()
@@ -29323,7 +28905,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWhereInCorrelated
 parameter_list|()
@@ -29355,7 +28936,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWhereExpressionInCorrelated
 parameter_list|()
@@ -29391,7 +28971,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWhereExpressionInCorrelated2
 parameter_list|()
@@ -29427,7 +29006,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExpandWhereComparisonCorrelated
 parameter_list|()
@@ -29460,7 +29038,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCustomColumnResolvingInNonCorrelatedSubQuery
 parameter_list|()
@@ -29538,7 +29115,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCustomColumnResolvingInCorrelatedSubQuery
 parameter_list|()
@@ -29616,7 +29192,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCustomColumnResolvingInCorrelatedSubQuery2
 parameter_list|()
@@ -29698,7 +29273,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDecorrelateAggWithConstantGroupKey
 parameter_list|()
@@ -29750,7 +29324,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDecorrelateAggWithMultiParamsAggCall
 parameter_list|()
@@ -29802,7 +29375,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDecorrelateAggWithMultiParamsAggCall2
 parameter_list|()
@@ -29856,7 +29428,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExtractYearToRange
 parameter_list|()
@@ -29914,7 +29485,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExtractYearMonthToRange
 parameter_list|()
@@ -29974,7 +29544,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFilterRemoveIsNotDistinctFromRule
 parameter_list|()
@@ -30173,7 +29742,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOversimplifiedCaseStatement
 parameter_list|()
@@ -30212,7 +29780,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNoOversimplificationBelowIsNull
 parameter_list|()
@@ -30243,7 +29810,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExchangeRemoveConstantKeysRule
 parameter_list|()
@@ -30515,7 +30081,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testReduceAverageWithNoReduceSum
 parameter_list|()
@@ -30581,7 +30146,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNoReduceAverage
 parameter_list|()
@@ -30646,7 +30210,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNoReduceSum
 parameter_list|()
@@ -30711,7 +30274,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testReduceAverageAndVarWithNoReduceStddev
 parameter_list|()
@@ -30785,7 +30347,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testReduceAverageAndSumWithNoReduceStddevAndVar
 parameter_list|()
@@ -30859,7 +30420,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testReduceAllAggregateFunctions
 parameter_list|()
@@ -30952,7 +30512,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPushProjectWithIsNotDistinctFromPastJoin
 parameter_list|()
@@ -30986,7 +30545,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDynamicStarWithUnion
 parameter_list|()
@@ -31190,7 +30748,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFilterAndProjectWithMultiJoin
 parameter_list|()
@@ -31310,7 +30867,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMonotonicityUDF
 parameter_list|()
@@ -31553,7 +31109,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPushFiltertWithIsNotDistinctFromPastJoin
 parameter_list|()
@@ -32022,7 +31577,6 @@ end_class
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSortJoinCopyInnerJoinOrderBy
 parameter_list|()
@@ -32079,7 +31633,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSortJoinCopyInnerJoinOrderByLimit
 parameter_list|()
@@ -32138,7 +31691,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSortJoinCopyInnerJoinOrderByTwoFields
 parameter_list|()
@@ -32213,7 +31765,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSortJoinCopySemiJoinOrderBy
 parameter_list|()
@@ -32270,7 +31821,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSortJoinCopySemiJoinOrderByLimitOffset
 parameter_list|()
@@ -32328,7 +31878,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSortJoinCopySemiJoinOrderByOffset
 parameter_list|()
@@ -32390,7 +31939,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDecorrelationWithSort
 parameter_list|()
@@ -32443,7 +31991,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testReduceDecimal
 parameter_list|()
@@ -32498,7 +32045,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testEnumerableCalcRule
 parameter_list|()
@@ -32718,7 +32264,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMaxReuseDistinctAttrWithMixedOptionality
 parameter_list|()
@@ -32752,7 +32297,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMinReuseDistinctAttrWithMixedOptionality
 parameter_list|()
@@ -32786,7 +32330,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testBitAndReuseDistinctAttrWithMixedOptionality
 parameter_list|()
@@ -32820,7 +32363,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testBitOrReuseDistinctAttrWithMixedOptionality
 parameter_list|()
@@ -32854,7 +32396,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testProjectJoinTransposeItem
 parameter_list|()
@@ -32916,7 +32457,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSimplifyItemIsNotNull
 parameter_list|()
@@ -32955,7 +32495,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSimplifyItemIsNull
 parameter_list|()

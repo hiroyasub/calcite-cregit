@@ -581,7 +581,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRedisBySql
 parameter_list|()
@@ -624,7 +623,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSqlWithJoin
 parameter_list|()

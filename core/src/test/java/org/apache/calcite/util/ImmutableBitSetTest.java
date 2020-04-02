@@ -266,14 +266,12 @@ comment|/**  * Unit test for {@link org.apache.calcite.util.ImmutableBitSet}.  *
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|ImmutableBitSetTest
 block|{
 comment|/** Tests the method {@link ImmutableBitSet#iterator()}. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testIterator
 parameter_list|()
@@ -399,7 +397,6 @@ block|}
 comment|/**    * Tests the method    * {@link org.apache.calcite.util.ImmutableBitSet#toList()}.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testToList
 parameter_list|()
@@ -611,7 +608,6 @@ block|}
 comment|/**    * Tests the method {@link BitSets#range(int, int)}.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRange
 parameter_list|()
@@ -1039,7 +1035,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCompare
 parameter_list|()
@@ -1203,7 +1198,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCompare2
 parameter_list|()
@@ -1316,7 +1310,6 @@ block|}
 comment|/**    * Tests the method    * {@link org.apache.calcite.util.ImmutableBitSet#toArray}.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testToArray
 parameter_list|()
@@ -1382,7 +1375,6 @@ block|}
 comment|/**    * Tests the methods    * {@link org.apache.calcite.util.ImmutableBitSet#toList}, and    * {@link org.apache.calcite.util.ImmutableBitSet#asList} and    * {@link org.apache.calcite.util.ImmutableBitSet#asSet}.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAsList
 parameter_list|()
@@ -1698,7 +1690,6 @@ block|}
 comment|/**    * Tests the method    * {@link org.apache.calcite.util.ImmutableBitSet#union(ImmutableBitSet)}.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUnion
 parameter_list|()
@@ -1821,7 +1812,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testIntersect
 parameter_list|()
@@ -1903,7 +1893,6 @@ block|}
 comment|/**    * Tests the method    * {@link org.apache.calcite.util.ImmutableBitSet#contains(org.apache.calcite.util.ImmutableBitSet)}.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testBitSetsContains
 parameter_list|()
@@ -2141,7 +2130,6 @@ block|}
 comment|/**    * Tests the method    * {@link org.apache.calcite.util.ImmutableBitSet#of(org.apache.calcite.util.ImmutableIntList)}.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testBitSetOfImmutableIntList
 parameter_list|()
@@ -2217,7 +2205,6 @@ block|}
 comment|/**    * Tests the method    * {@link org.apache.calcite.util.ImmutableBitSet#previousClearBit(int)}.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPreviousClearBit
 parameter_list|()
@@ -2443,7 +2430,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testBuilder
 parameter_list|()
@@ -2506,7 +2492,6 @@ block|}
 comment|/** Unit test for    * {@link org.apache.calcite.util.ImmutableBitSet.Builder#build(ImmutableBitSet)}. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testBuilderUseOriginal
 parameter_list|()
@@ -2648,7 +2633,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testIndexOf
 parameter_list|()
@@ -2909,7 +2893,6 @@ block|}
 comment|/** Tests {@link ImmutableBitSet.Builder#buildAndReset()}. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testReset
 parameter_list|()
@@ -3144,7 +3127,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNth
 parameter_list|()
@@ -3468,7 +3450,6 @@ block|}
 comment|/** Tests the method    * {@link org.apache.calcite.util.BitSets#closure(java.util.SortedMap)}. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testClosure
 parameter_list|()
@@ -3846,7 +3827,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPowerSet
 parameter_list|()
@@ -4020,7 +4000,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCreateLongs
 parameter_list|()
@@ -4122,7 +4101,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCreateLongBuffer
 parameter_list|()
@@ -4226,7 +4204,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testToLongArray
 parameter_list|()
@@ -4290,7 +4267,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSet
 parameter_list|()
@@ -4414,7 +4390,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testClear
 parameter_list|()
@@ -4552,7 +4527,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSet2
 parameter_list|()
@@ -4643,7 +4617,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testShift
 parameter_list|()
@@ -4805,7 +4778,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGet2
 parameter_list|()

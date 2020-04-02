@@ -136,7 +136,6 @@ comment|/**  * Tests for {@code PigRelExVisitor}.  */
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|PigRelExTest
 extends|extends
@@ -310,7 +309,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testConstantBoolean
 parameter_list|()
@@ -328,7 +326,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testConstantType
 parameter_list|()
@@ -386,7 +383,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testConstantFloat
 parameter_list|()
@@ -404,7 +400,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testConstantString
 parameter_list|()
@@ -422,7 +417,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testProjection
 parameter_list|()
@@ -440,7 +434,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNegation
 parameter_list|()
@@ -458,7 +451,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testEqual
 parameter_list|()
@@ -476,7 +468,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNotEqual
 parameter_list|()
@@ -494,7 +485,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLessThan
 parameter_list|()
@@ -512,7 +502,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLessThanEqual
 parameter_list|()
@@ -530,7 +519,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGreaterThan
 parameter_list|()
@@ -548,7 +536,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGreaterThanEqual
 parameter_list|()
@@ -586,7 +573,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testIsNull
 parameter_list|()
@@ -604,7 +590,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testIsNotNull
 parameter_list|()
@@ -622,7 +607,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNot
 parameter_list|()
@@ -650,7 +634,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAnd
 parameter_list|()
@@ -668,7 +651,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOr
 parameter_list|()
@@ -686,7 +668,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAdd
 parameter_list|()
@@ -704,7 +685,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSubtract
 parameter_list|()
@@ -722,7 +702,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMultiply
 parameter_list|()
@@ -740,7 +719,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMod
 parameter_list|()
@@ -758,7 +736,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDivide
 parameter_list|()
@@ -786,7 +763,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testBinCond
 parameter_list|()
@@ -804,7 +780,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTupleDereference
 parameter_list|()
@@ -842,7 +817,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testBagDereference
 parameter_list|()
@@ -870,7 +844,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMapLookup
 parameter_list|()
@@ -888,7 +861,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCast
 parameter_list|()
@@ -1066,7 +1038,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPigBuiltinFunctions
 parameter_list|()

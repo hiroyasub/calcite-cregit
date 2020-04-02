@@ -308,18 +308,11 @@ comment|/**  * Unit test for {@link DirectedGraph}.  */
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|DirectedGraphTest
 block|{
-specifier|public
-name|DirectedGraphTest
-parameter_list|()
-block|{
-block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOne
 parameter_list|()
@@ -626,7 +619,6 @@ return|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testVertexMustExist
 parameter_list|()
@@ -909,7 +901,6 @@ block|}
 comment|/** Unit test for {@link DepthFirstIterator}. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDepthFirst
 parameter_list|()
@@ -1009,7 +1000,6 @@ block|}
 comment|/** Unit test for {@link DepthFirstIterator}. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPredecessorList
 parameter_list|()
@@ -1056,7 +1046,6 @@ block|}
 comment|/** Unit test for    * {@link DefaultDirectedGraph#removeAllVertices(java.util.Collection)}. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRemoveAllVertices
 parameter_list|()
@@ -1104,7 +1093,6 @@ block|}
 comment|/** Unit test for {@link TopologicalOrderIterator}. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTopologicalOrderIterator
 parameter_list|()
@@ -1297,7 +1285,6 @@ block|}
 comment|/** Unit test for    * {@link org.apache.calcite.util.graph.Graphs.FrozenGraph}. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPaths
 parameter_list|()
@@ -1556,7 +1543,6 @@ block|}
 comment|/** Unit test for {@link org.apache.calcite.util.graph.CycleDetector}. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCycleDetection
 parameter_list|()
@@ -1872,7 +1858,6 @@ block|}
 comment|/** Unit test for    * {@link org.apache.calcite.util.graph.BreadthFirstIterator}. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testBreadthFirstIterator
 parameter_list|()
@@ -2058,7 +2043,6 @@ return|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAttributed
 parameter_list|()

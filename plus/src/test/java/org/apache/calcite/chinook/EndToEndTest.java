@@ -56,7 +56,6 @@ comment|/**  * Entry point for all end-to-end tests based on Chinook data in HSQ
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|EndToEndTest
 extends|extends

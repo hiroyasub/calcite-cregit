@@ -228,7 +228,6 @@ comment|/**  * Utility to generate a SQL script from validator test.  */
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|SqlTestGen
 block|{

@@ -984,7 +984,6 @@ comment|/**  * Tests for {@link RelToSqlConverter}.  */
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|RelToSqlConverterTest
 block|{
@@ -1590,7 +1589,6 @@ return|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSimpleSelectStarFromProductTable
 parameter_list|()
@@ -1613,7 +1611,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSimpleSelectQueryFromProductTable
 parameter_list|()
@@ -1644,7 +1641,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectQueryWithWhereClauseOfLessThan
 parameter_list|()
@@ -1679,7 +1675,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectQueryWithWhereClauseOfBasicOperators
 parameter_list|()
@@ -1718,7 +1713,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectQueryWithGroupBy
 parameter_list|()
@@ -1751,7 +1745,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectQueryWithHiveCube
 parameter_list|()
@@ -1809,7 +1802,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectQueryWithHiveRollup
 parameter_list|()
@@ -1867,7 +1859,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectQueryWithGroupByEmpty
 parameter_list|()
@@ -1939,7 +1930,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectQueryWithGroupByEmpty2
 parameter_list|()
@@ -1992,7 +1982,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3097">[CALCITE-3097]    * GROUPING SETS breaks on sets of size&gt; 1 due to precedence issues</a>,    * in particular, that we maintain proper precedence around nested lists. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGroupByGroupingSets
 parameter_list|()
@@ -2042,7 +2031,6 @@ block|}
 comment|/** Tests GROUP BY ROLLUP of two columns. The SQL for MySQL has    * "GROUP BY ... ROLLUP" but no "ORDER BY". */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectQueryWithGroupByRollup
 parameter_list|()
@@ -2123,7 +2111,6 @@ block|}
 comment|/** As {@link #testSelectQueryWithGroupByRollup()},    * but ORDER BY columns reversed. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectQueryWithGroupByRollup2
 parameter_list|()
@@ -2184,7 +2171,6 @@ block|}
 comment|/** Tests a query with GROUP BY and a sub-query which is also with GROUP BY.    * If we flatten sub-queries, the number of rows going into AVG becomes    * incorrect. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectQueryWithGroupBySubQuery1
 parameter_list|()
@@ -2231,7 +2217,6 @@ block|}
 comment|/** Tests query without GROUP BY but an aggregate function    * and a sub-query which is with GROUP BY. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectQueryWithGroupBySubQuery2
 parameter_list|()
@@ -2323,7 +2308,6 @@ block|}
 comment|/** CUBE of one column is equivalent to ROLLUP, and Calcite recognizes    * this. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectQueryWithSingletonCube
 parameter_list|()
@@ -2388,7 +2372,6 @@ block|}
 comment|/** As {@link #testSelectQueryWithSingletonCube()}, but no ORDER BY    * clause. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectQueryWithSingletonCubeNoOrderBy
 parameter_list|()
@@ -2445,7 +2428,6 @@ block|}
 comment|/** Cannot rewrite if ORDER BY contains a column not in GROUP BY (in this    * case COUNT(*)). */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectQueryWithRollupOrderByCount
 parameter_list|()
@@ -2518,7 +2500,6 @@ block|}
 comment|/** As {@link #testSelectQueryWithSingletonCube()}, but with LIMIT. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectQueryWithCubeLimit
 parameter_list|()
@@ -2582,7 +2563,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectQueryWithMinAggregateFunction
 parameter_list|()
@@ -2615,7 +2595,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectQueryWithMinAggregateFunction1
 parameter_list|()
@@ -2650,7 +2629,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectQueryWithSumAggregateFunction
 parameter_list|()
@@ -2683,7 +2661,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectQueryWithMultipleAggregateFunction
 parameter_list|()
@@ -2720,7 +2697,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectQueryWithMultipleAggregateFunction1
 parameter_list|()
@@ -2759,7 +2735,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectQueryWithGroupByAndProjectList
 parameter_list|()
@@ -2796,7 +2771,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCastDecimal1
 parameter_list|()
@@ -2831,7 +2805,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2713">[CALCITE-2713]    * JDBC adapter may generate casts on PostgreSQL for VARCHAR type exceeding    * max length</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCastLongVarchar1
 parameter_list|()
@@ -2890,7 +2863,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2713">[CALCITE-2713]    * JDBC adapter may generate casts on PostgreSQL for VARCHAR type exceeding    * max length</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCastLongVarchar2
 parameter_list|()
@@ -2949,7 +2921,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1174">[CALCITE-1174]    * When generating SQL, translate SUM0(x) to COALESCE(SUM(x), 0)</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSum0BecomesCoalesce
 parameter_list|()
@@ -3045,7 +3016,6 @@ block|}
 comment|/** As {@link #testSum0BecomesCoalesce()} but for windowed aggregates. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWindowedSum0BecomesCoalesce
 parameter_list|()
@@ -3095,7 +3065,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2722">[CALCITE-2722]    * SqlImplementor createLeftCall method throws StackOverflowError</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testStack
 parameter_list|()
@@ -3247,7 +3216,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAntiJoin
 parameter_list|()
@@ -3352,7 +3320,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSemiJoin
 parameter_list|()
@@ -3457,7 +3424,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSemiJoinFilter
 parameter_list|()
@@ -3613,7 +3579,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSemiJoinProject
 parameter_list|()
@@ -3773,7 +3738,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSemiNestedJoin
 parameter_list|()
@@ -3934,7 +3898,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2792">[CALCITE-2792]    * Stackoverflow while evaluating filter with large number of OR conditions</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testBalancedBinaryCall
 parameter_list|()
@@ -4086,7 +4049,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1946">[CALCITE-1946]    * JDBC adapter should generate sub-SELECT if dialect does not support nested    * aggregate functions</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNestedAggregates
 parameter_list|()
@@ -4247,7 +4209,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2628">[CALCITE-2628]    * JDBC adapter throws NullPointerException while generating GROUP BY query    * for MySQL</a>.    *    *<p>MySQL does not support nested aggregates, so {@link RelToSqlConverter}    * performs some extra checks, looking for aggregates in the input    * sub-query, and these would fail with {@code NullPointerException}    * and {@code ClassCastException} in some cases. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNestedAggregatesMySqlTable
 parameter_list|()
@@ -4322,7 +4283,6 @@ block|}
 comment|/** As {@link #testNestedAggregatesMySqlTable()}, but input is a sub-query,    * not a table. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNestedAggregatesMySqlStar
 parameter_list|()
@@ -4421,7 +4381,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3207">[CALCITE-3207]    * Fail to convert Join RelNode with like condition to sql statement</a>.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinWithLikeConditionRel2Sql
 parameter_list|()
@@ -4549,7 +4508,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectQueryWithGroupByAndProjectList1
 parameter_list|()
@@ -4584,7 +4542,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectQueryWithGroupByHaving
 parameter_list|()
@@ -4622,7 +4579,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1665">[CALCITE-1665]    * Aggregates and having cannot be combined</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectQueryWithGroupByHaving2
 parameter_list|()
@@ -4675,7 +4631,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1665">[CALCITE-1665]    * Aggregates and having cannot be combined</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectQueryWithGroupByHaving3
 parameter_list|()
@@ -4730,7 +4685,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3811">[CALCITE-3811]    * JDBC adapter generates SQL with invalid field names if Filter's row type    * is different from its input</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testHavingAlias
 parameter_list|()
@@ -5025,7 +4979,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testHaving4
 parameter_list|()
@@ -5085,7 +5038,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectQueryWithOrderByClause
 parameter_list|()
@@ -5120,7 +5072,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectQueryWithOrderByClause1
 parameter_list|()
@@ -5153,7 +5104,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectQueryWithTwoOrderByClause
 parameter_list|()
@@ -5190,7 +5140,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectQueryWithAscDescOrderByClause
 parameter_list|()
@@ -5228,7 +5177,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3440">[CALCITE-3440]    * RelToSqlConverter does not properly alias ambiguous ORDER BY</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOrderByColumnWithSameNameAsAlias
 parameter_list|()
@@ -5269,7 +5217,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOrderByColumnWithSameNameAsAlias2
 parameter_list|()
@@ -5332,7 +5279,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testHiveSelectCharset
 parameter_list|()
@@ -5369,7 +5315,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3282">[CALCITE-3282]    * HiveSqlDialect unparse Interger type as Int in order    * to be compatible with Hive1.x</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testHiveCastAsInt
 parameter_list|()
@@ -5405,7 +5350,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testBigQueryCast
 parameter_list|()
@@ -5494,7 +5438,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3220">[CALCITE-3220]    * HiveSqlDialect should transform the SQL-standard TRIM function to TRIM,    * LTRIM or RTRIM</a>,    *<a href="https://issues.apache.org/jira/browse/CALCITE-3663">[CALCITE-3663]    * Support for TRIM function in BigQuery dialect</a>, and    *<a href="https://issues.apache.org/jira/browse/CALCITE-3771">[CALCITE-3771]    * Support of TRIM function for SPARK dialect and improvement in HIVE    * Dialect</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testHiveSparkAndBqTrim
 parameter_list|()
@@ -5547,7 +5490,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testHiveSparkAndBqTrimWithBoth
 parameter_list|()
@@ -5600,7 +5542,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testHiveSparkAndBqTrimWithLeading
 parameter_list|()
@@ -5653,7 +5594,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testHiveSparkAndBqTrimWithTailing
 parameter_list|()
@@ -5707,7 +5647,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3663">[CALCITE-3663]    * Support for TRIM function in Bigquery dialect</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testBqTrimWithLeadingChar
 parameter_list|()
@@ -5753,7 +5692,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3771">[CALCITE-3771]    * Support of TRIM function for SPARK dialect and improvement in HIVE Dialect</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testHiveAndSparkTrimWithLeadingChar
 parameter_list|()
@@ -5798,7 +5736,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testBqTrimWithBothChar
 parameter_list|()
@@ -5835,7 +5772,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testHiveAndSparkTrimWithBothChar
 parameter_list|()
@@ -5880,7 +5816,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testHiveBqTrimWithTailingChar
 parameter_list|()
@@ -5917,7 +5852,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testHiveAndSparkTrimWithTailingChar
 parameter_list|()
@@ -5962,7 +5896,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testBqTrimWithBothSpecialCharacter
 parameter_list|()
@@ -5999,7 +5932,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testHiveAndSparkTrimWithBothSpecialCharacter
 parameter_list|()
@@ -6047,7 +5979,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2715">[CALCITE-2715]    * MS SQL Server does not support character set as part of data type</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMssqlCharacterSet
 parameter_list|()
@@ -6084,7 +6015,6 @@ block|}
 comment|/**    * Tests that IN can be un-parsed.    *    *<p>This cannot be tested using "sql", because because Calcite's SQL parser    * replaces INs with ORs or sub-queries.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUnparseIn1
 parameter_list|()
@@ -6159,7 +6089,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUnparseIn2
 parameter_list|()
@@ -6241,7 +6170,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUnparseInStruct1
 parameter_list|()
@@ -6348,7 +6276,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUnparseInStruct2
 parameter_list|()
@@ -6478,7 +6405,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectQueryWithLimitClause
 parameter_list|()
@@ -6514,7 +6440,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPositionFunctionForHive
 parameter_list|()
@@ -6549,7 +6474,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPositionFunctionForBigQuery
 parameter_list|()
@@ -6585,7 +6509,6 @@ block|}
 comment|/** Tests that we escape single-quotes in character literals using back-slash    * in BigQuery. The norm is to escape single-quotes with single-quotes. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCharLiteralForBigQuery
 parameter_list|()
@@ -6636,7 +6559,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testIdentifier
 parameter_list|()
@@ -6753,7 +6675,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testModFunctionForHive
 parameter_list|()
@@ -6788,7 +6709,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUnionOperatorForBigQuery
 parameter_list|()
@@ -6831,7 +6751,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUnionAllOperatorForBigQuery
 parameter_list|()
@@ -6874,7 +6793,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testIntersectOperatorForBigQuery
 parameter_list|()
@@ -6917,7 +6835,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExceptOperatorForBigQuery
 parameter_list|()
@@ -6960,7 +6877,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectOrderByDescNullsFirst
 parameter_list|()
@@ -7026,7 +6942,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectOrderByAscNullsLast
 parameter_list|()
@@ -7092,7 +7007,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectOrderByAscNullsFirst
 parameter_list|()
@@ -7159,7 +7073,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectOrderByDescNullsLast
 parameter_list|()
@@ -7226,7 +7139,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testHiveSelectQueryWithOverDescAndNullsFirstShouldBeEmulated
 parameter_list|()
@@ -7269,7 +7181,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testHiveSelectQueryWithOverAscAndNullsLastShouldBeEmulated
 parameter_list|()
@@ -7310,7 +7221,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testHiveSelectQueryWithOverAscNullsFirstShouldNotAddNullEmulation
 parameter_list|()
@@ -7351,7 +7261,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testHiveSubstring
 parameter_list|()
@@ -7387,7 +7296,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testHiveSubstringWithLength
 parameter_list|()
@@ -7423,7 +7331,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testHiveSubstringWithANSI
 parameter_list|()
@@ -7459,7 +7366,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testHiveSubstringWithANSIAndLength
 parameter_list|()
@@ -7495,7 +7401,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testHiveSelectQueryWithOverDescNullsLastShouldNotAddNullEmulation
 parameter_list|()
@@ -7536,7 +7441,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMysqlCastToBigint
 parameter_list|()
@@ -7572,7 +7476,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMysqlCastToInteger
 parameter_list|()
@@ -7614,7 +7517,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testHiveSelectQueryWithOrderByDescAndHighNullsWithVersionGreaterThanOrEq21
 parameter_list|()
@@ -7728,7 +7630,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testHiveSelectQueryWithOverDescAndHighNullsWithVersionGreaterThanOrEq21
 parameter_list|()
@@ -7840,7 +7741,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testHiveSelectQueryWithOrderByDescAndHighNullsWithVersion20
 parameter_list|()
@@ -7910,7 +7810,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testHiveSelectQueryWithOverDescAndHighNullsWithVersion20
 parameter_list|()
@@ -7980,7 +7879,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJethroDataSelectQueryWithOrderByDescAndNullsFirstShouldBeEmulated
 parameter_list|()
@@ -8022,7 +7920,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJethroDataSelectQueryWithOverDescAndNullsFirstShouldBeEmulated
 parameter_list|()
@@ -8064,7 +7961,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMySqlSelectQueryWithOrderByDescAndNullsFirstShouldBeEmulated
 parameter_list|()
@@ -8107,7 +8003,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMySqlSelectQueryWithOverDescAndNullsFirstShouldBeEmulated
 parameter_list|()
@@ -8150,7 +8045,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMySqlSelectQueryWithOrderByAscAndNullsLastShouldBeEmulated
 parameter_list|()
@@ -8193,7 +8087,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMySqlSelectQueryWithOverAscAndNullsLastShouldBeEmulated
 parameter_list|()
@@ -8236,7 +8129,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMySqlSelectQueryWithOrderByAscNullsFirstShouldNotAddNullEmulation
 parameter_list|()
@@ -8279,7 +8171,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMySqlSelectQueryWithOverAscNullsFirstShouldNotAddNullEmulation
 parameter_list|()
@@ -8320,7 +8211,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMySqlSelectQueryWithOrderByDescNullsLastShouldNotAddNullEmulation
 parameter_list|()
@@ -8363,7 +8253,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMySqlSelectQueryWithOverDescNullsLastShouldNotAddNullEmulation
 parameter_list|()
@@ -8404,7 +8293,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMySqlCastToVarcharWithLessThanMaxPrecision
 parameter_list|()
@@ -8441,7 +8329,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMySqlCastToVarcharWithGreaterThanMaxPrecision
 parameter_list|()
@@ -8478,7 +8365,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMySqlWithHighNullsSelectWithOrderByAscNullsLastAndNoEmulation
 parameter_list|()
@@ -8524,7 +8410,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMySqlWithHighNullsSelectWithOverAscNullsLastAndNoEmulation
 parameter_list|()
@@ -8568,7 +8453,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMySqlWithHighNullsSelectWithOrderByAscNullsFirstAndNullEmulation
 parameter_list|()
@@ -8614,7 +8498,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMySqlWithHighNullsSelectWithOverAscNullsFirstAndNullEmulation
 parameter_list|()
@@ -8660,7 +8543,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMySqlWithHighNullsSelectWithOrderByDescNullsFirstAndNoEmulation
 parameter_list|()
@@ -8706,7 +8588,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMySqlWithHighNullsSelectWithOverDescNullsFirstAndNoEmulation
 parameter_list|()
@@ -8750,7 +8631,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMySqlWithHighNullsSelectWithOrderByDescNullsLastAndNullEmulation
 parameter_list|()
@@ -8796,7 +8676,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMySqlWithHighNullsSelectWithOverDescNullsLastAndNullEmulation
 parameter_list|()
@@ -8842,7 +8721,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMySqlWithFirstNullsSelectWithOrderByDescAndNullsFirstShouldNotBeEmulated
 parameter_list|()
@@ -8888,7 +8766,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMySqlWithFirstNullsSelectWithOverDescAndNullsFirstShouldNotBeEmulated
 parameter_list|()
@@ -8932,7 +8809,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMySqlWithFirstNullsSelectWithOrderByAscAndNullsFirstShouldNotBeEmulated
 parameter_list|()
@@ -8978,7 +8854,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMySqlWithFirstNullsSelectWithOverAscAndNullsFirstShouldNotBeEmulated
 parameter_list|()
@@ -9022,7 +8897,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMySqlWithFirstNullsSelectWithOrderByDescAndNullsLastShouldBeEmulated
 parameter_list|()
@@ -9068,7 +8942,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMySqlWithFirstNullsSelectWithOverDescAndNullsLastShouldBeEmulated
 parameter_list|()
@@ -9114,7 +8987,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMySqlWithFirstNullsSelectWithOrderByAscAndNullsLastShouldBeEmulated
 parameter_list|()
@@ -9160,7 +9032,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMySqlWithFirstNullsSelectWithOverAscAndNullsLastShouldBeEmulated
 parameter_list|()
@@ -9206,7 +9077,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMySqlWithLastNullsSelectWithOrderByDescAndNullsFirstShouldBeEmulated
 parameter_list|()
@@ -9252,7 +9122,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMySqlWithLastNullsSelectWithOverDescAndNullsFirstShouldBeEmulated
 parameter_list|()
@@ -9298,7 +9167,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMySqlWithLastNullsSelectWithOrderByAscAndNullsFirstShouldBeEmulated
 parameter_list|()
@@ -9344,7 +9212,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMySqlWithLastNullsSelectWithOverAscAndNullsFirstShouldBeEmulated
 parameter_list|()
@@ -9390,7 +9257,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMySqlWithLastNullsSelectWithOrderByDescAndNullsLastShouldNotBeEmulated
 parameter_list|()
@@ -9436,7 +9302,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMySqlWithLastNullsSelectWithOverDescAndNullsLastShouldNotBeEmulated
 parameter_list|()
@@ -9480,7 +9345,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMySqlWithLastNullsSelectWithOrderByAscAndNullsLastShouldNotBeEmulated
 parameter_list|()
@@ -9526,7 +9390,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMySqlWithLastNullsSelectWithOverAscAndNullsLastShouldNotBeEmulated
 parameter_list|()
@@ -9570,7 +9433,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectQueryWithLimitClauseWithoutOrder
 parameter_list|()
@@ -9605,7 +9467,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectQueryWithLimitOffsetClause
 parameter_list|()
@@ -9667,7 +9528,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectQueryWithParameters
 parameter_list|()
@@ -9706,7 +9566,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectQueryWithFetchOffsetClause
 parameter_list|()
@@ -9745,7 +9604,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectQueryWithFetchClause
 parameter_list|()
@@ -9854,7 +9712,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectQueryComplex
 parameter_list|()
@@ -9893,7 +9750,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectQueryWithGroup
 parameter_list|()
@@ -9938,7 +9794,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSimpleJoin
 parameter_list|()
@@ -10003,7 +9858,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSimpleJoinUsing
 parameter_list|()
@@ -10175,7 +10029,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1636">[CALCITE-1636]    * JDBC adapter generates wrong SQL for self join with sub-query</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSubQueryAlias
 parameter_list|()
@@ -10221,7 +10074,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCartesianProductWithCommaSyntax
 parameter_list|()
@@ -10254,7 +10106,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2652">[CALCITE-2652]    * SqlNode to SQL conversion fails if the join condition references a BOOLEAN    * column</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinOnBoolean
 parameter_list|()
@@ -10302,7 +10153,6 @@ comment|// sufficient that conversion did not throw
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCartesianProductWithInnerJoinSyntax
 parameter_list|()
@@ -10336,7 +10186,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFullJoinOnTrueCondition
 parameter_list|()
@@ -10370,7 +10219,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSimpleIn
 parameter_list|()
@@ -10416,7 +10264,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1332">[CALCITE-1332]    * DB2 should always use aliases for tables: x.y.z AS z</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDb2DialectJoinStar
 parameter_list|()
@@ -10460,7 +10307,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDb2DialectSelfJoinStar
 parameter_list|()
@@ -10502,7 +10348,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDb2DialectJoin
 parameter_list|()
@@ -10546,7 +10391,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDb2DialectSelfJoin
 parameter_list|()
@@ -10590,7 +10434,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDb2DialectWhere
 parameter_list|()
@@ -10628,7 +10471,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDb2DialectJoinWhere
 parameter_list|()
@@ -10676,7 +10518,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDb2DialectSelfJoinWhere
 parameter_list|()
@@ -10724,7 +10565,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDb2DialectCast
 parameter_list|()
@@ -10762,7 +10602,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDb2DialectSelectQueryWithGroupByHaving
 parameter_list|()
@@ -10804,7 +10643,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDb2DialectSelectQueryComplex
 parameter_list|()
@@ -10850,7 +10688,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDb2DialectSelectQueryWithGroup
 parameter_list|()
@@ -10903,7 +10740,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1372">[CALCITE-1372]    * JDBC adapter generates SQL with wrong field names</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinPlan2
 parameter_list|()
@@ -10979,7 +10815,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1422">[CALCITE-1422]    * In JDBC adapter, allow IS NULL and IS NOT NULL operators in generated SQL    * join condition</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSimpleJoinConditionWithIsNullOperators
 parameter_list|()
@@ -11046,7 +10881,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1586">[CALCITE-1586]    * JDBC adapter generates wrong SQL if UNION has more than two inputs</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testThreeQueryUnion
 parameter_list|()
@@ -11117,7 +10951,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1800">[CALCITE-1800]    * JDBC adapter fails to SELECT FROM a UNION query</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUnionWrappedInASelect
 parameter_list|()
@@ -11175,7 +11008,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLiteral
 parameter_list|()
@@ -11462,7 +11294,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2625">[CALCITE-2625]    * Removing Window Boundaries from SqlWindow of Aggregate Function which do not allow Framing</a>    * */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRowNumberFunctionForPrintingOfFrameBoundary
 parameter_list|()
@@ -11493,7 +11324,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3112">[CALCITE-3112]    * Support Window in RelToSqlConverter</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testConvertWindowToSql
 parameter_list|()
@@ -11822,7 +11652,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRankFunctionForPrintingOfFrameBoundary
 parameter_list|()
@@ -11852,7 +11681,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLeadFunctionForPrintingOfFrameBoundary
 parameter_list|()
@@ -11886,7 +11714,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLagFunctionForPrintingOfFrameBoundary
 parameter_list|()
@@ -11921,7 +11748,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3876">[CALCITE-3876]    * RelToSqlConverter should not combine Projects when top Project contains    * window function referencing window function from bottom Project</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWindowOnWindowDoesNotCombineProjects
 parameter_list|()
@@ -11975,7 +11801,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1798">[CALCITE-1798]    * Generate dialect-specific SQL for FLOOR operator</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFloor
 parameter_list|()
@@ -12006,7 +11831,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFloorPostgres
 parameter_list|()
@@ -12037,7 +11861,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFloorOracle
 parameter_list|()
@@ -12068,7 +11891,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFloorMssqlWeek
 parameter_list|()
@@ -12103,7 +11925,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFloorMssqlMonth
 parameter_list|()
@@ -12136,7 +11957,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFloorMysqlMonth
 parameter_list|()
@@ -12169,7 +11989,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUnparseSqlIntervalQualifierDb2
 parameter_list|()
@@ -12239,7 +12058,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUnparseSqlIntervalQualifierMySql
 parameter_list|()
@@ -12381,7 +12199,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUnparseSqlIntervalQualifierMsSql
 parameter_list|()
@@ -12478,7 +12295,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUnparseSqlIntervalQualifierBigQuery
 parameter_list|()
@@ -12573,7 +12389,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFloorMysqlWeek
 parameter_list|()
@@ -12606,7 +12421,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFloorMysqlHour
 parameter_list|()
@@ -12639,7 +12453,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFloorMysqlMinute
 parameter_list|()
@@ -12672,7 +12485,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFloorMysqlSecond
 parameter_list|()
@@ -12706,7 +12518,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1826">[CALCITE-1826]    * JDBC dialect-specific FLOOR fails when in GROUP BY</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFloorWithGroupBy
 parameter_list|()
@@ -12803,7 +12614,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSubstring
 parameter_list|()
@@ -12909,7 +12719,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSubstringWithFor
 parameter_list|()
@@ -13023,7 +12832,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1849">[CALCITE-1849]    * Support sub-queries (RexSubQuery) in RelToSqlConverter</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExistsWithExpand
 parameter_list|()
@@ -13070,7 +12878,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNotExistsWithExpand
 parameter_list|()
@@ -13117,7 +12924,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSubQueryInWithExpand
 parameter_list|()
@@ -13164,7 +12970,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSubQueryInWithExpand2
 parameter_list|()
@@ -13203,7 +13008,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSubQueryNotInWithExpand
 parameter_list|()
@@ -13250,7 +13054,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLike
 parameter_list|()
@@ -13284,7 +13087,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNotLike
 parameter_list|()
@@ -13318,7 +13120,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMatchRecognizePatternExpression
 parameter_list|()
@@ -13388,7 +13189,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMatchRecognizePatternExpression2
 parameter_list|()
@@ -13452,7 +13252,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMatchRecognizePatternExpression3
 parameter_list|()
@@ -13516,7 +13315,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMatchRecognizePatternExpression4
 parameter_list|()
@@ -13580,7 +13378,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMatchRecognizePatternExpression5
 parameter_list|()
@@ -13644,7 +13441,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMatchRecognizePatternExpression6
 parameter_list|()
@@ -13708,7 +13504,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMatchRecognizePatternExpression7
 parameter_list|()
@@ -13772,7 +13567,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMatchRecognizePatternExpression8
 parameter_list|()
@@ -13836,7 +13630,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMatchRecognizePatternExpression9
 parameter_list|()
@@ -13900,7 +13693,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMatchRecognizePatternExpression10
 parameter_list|()
@@ -13968,7 +13760,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMatchRecognizePatternExpression11
 parameter_list|()
@@ -14032,7 +13823,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMatchRecognizePatternExpression12
 parameter_list|()
@@ -14098,7 +13888,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMatchRecognizePatternExpression13
 parameter_list|()
@@ -14204,7 +13993,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMatchRecognizeDefineClause
 parameter_list|()
@@ -14268,7 +14056,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMatchRecognizeDefineClause2
 parameter_list|()
@@ -14332,7 +14119,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMatchRecognizeDefineClause3
 parameter_list|()
@@ -14396,7 +14182,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMatchRecognizeDefineClause4
 parameter_list|()
@@ -14464,7 +14249,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMatchRecognizeMeasures1
 parameter_list|()
@@ -14552,7 +14336,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMatchRecognizeMeasures2
 parameter_list|()
@@ -14632,7 +14415,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMatchRecognizeMeasures3
 parameter_list|()
@@ -14712,7 +14494,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMatchRecognizeMeasures4
 parameter_list|()
@@ -14796,7 +14577,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMatchRecognizeMeasures5
 parameter_list|()
@@ -14880,7 +14660,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMatchRecognizeMeasures6
 parameter_list|()
@@ -14962,7 +14741,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMatchRecognizeMeasures7
 parameter_list|()
@@ -15046,7 +14824,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMatchRecognizePatternSkip1
 parameter_list|()
@@ -15112,7 +14889,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMatchRecognizePatternSkip2
 parameter_list|()
@@ -15178,7 +14954,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMatchRecognizePatternSkip3
 parameter_list|()
@@ -15242,7 +15017,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMatchRecognizePatternSkip4
 parameter_list|()
@@ -15308,7 +15082,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMatchRecognizePatternSkip5
 parameter_list|()
@@ -15374,7 +15147,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMatchRecognizeSubset1
 parameter_list|()
@@ -15444,7 +15216,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMatchRecognizeSubset2
 parameter_list|()
@@ -15530,7 +15301,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMatchRecognizeSubset3
 parameter_list|()
@@ -15614,7 +15384,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMatchRecognizeSubset4
 parameter_list|()
@@ -15698,7 +15467,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMatchRecognizeRowsPerMatch1
 parameter_list|()
@@ -15784,7 +15552,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMatchRecognizeRowsPerMatch2
 parameter_list|()
@@ -15870,7 +15637,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMatchRecognizeWithin
 parameter_list|()
@@ -15942,7 +15708,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMatchRecognizeIn
 parameter_list|()
@@ -16014,7 +15779,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testValues
 parameter_list|()
@@ -16143,7 +15907,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testValuesEmpty
 parameter_list|()
@@ -16241,7 +16004,6 @@ block|}
 comment|/** Test case fo    *<a href="https://issues.apache.org/jira/browse/CALCITE-3840">[CALCITE-3840]    * Re-aliasing of VALUES that has column aliases produces wrong SQL in the JDBC adapter</a>*/
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testValuesReAlias
 parameter_list|()
@@ -16350,7 +16112,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2118">[CALCITE-2118]    * RelToSqlConverter should only generate "*" if field names match</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPreserveAlias
 parameter_list|()
@@ -16414,7 +16175,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPreservePermutation
 parameter_list|()
@@ -16448,7 +16208,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFieldNamesWithAggregateSubQuery
 parameter_list|()
@@ -16510,7 +16269,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUnparseSelectMustUseDialect
 parameter_list|()
@@ -16633,7 +16391,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCorrelate
 parameter_list|()
@@ -16676,7 +16433,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3651">[CALCITE-3651]    * NullPointerException when convert relational algebra that correlates TableFunctionScan</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLateralCorrelate
 parameter_list|()
@@ -16714,7 +16470,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUncollectExplicitAlias
 parameter_list|()
@@ -16752,7 +16507,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUncollectImplicitAlias
 parameter_list|()
@@ -16790,7 +16544,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWithinGroup1
 parameter_list|()
@@ -16830,7 +16583,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWithinGroup2
 parameter_list|()
@@ -16870,7 +16622,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWithinGroup3
 parameter_list|()
@@ -16912,7 +16663,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWithinGroup4
 parameter_list|()
@@ -16953,7 +16703,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJsonValueExpressionOperator
 parameter_list|()
@@ -16996,7 +16745,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJsonExists
 parameter_list|()
@@ -17027,7 +16775,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJsonPretty
 parameter_list|()
@@ -17058,7 +16805,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJsonValue
 parameter_list|()
@@ -17092,7 +16838,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJsonQuery
 parameter_list|()
@@ -17125,7 +16870,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJsonArray
 parameter_list|()
@@ -17156,7 +16900,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJsonArrayAgg
 parameter_list|()
@@ -17187,7 +16930,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJsonObject
 parameter_list|()
@@ -17220,7 +16962,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJsonObjectAgg
 parameter_list|()
@@ -17253,7 +16994,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJsonPredicate
 parameter_list|()
@@ -17326,7 +17066,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCrossJoinEmulationForSpark
 parameter_list|()
@@ -17362,7 +17101,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSubstringInSpark
 parameter_list|()
@@ -17399,7 +17137,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSubstringWithForInSpark
 parameter_list|()
@@ -17436,7 +17173,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFloorInSpark
 parameter_list|()
@@ -17473,7 +17209,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNumericFloorInSpark
 parameter_list|()
@@ -17510,7 +17245,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJsonStorageSize
 parameter_list|()
@@ -17541,7 +17275,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCubeInSpark
 parameter_list|()
@@ -17597,7 +17330,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRollupInSpark
 parameter_list|()
@@ -17653,7 +17385,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJsonType
 parameter_list|()
@@ -17686,7 +17417,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJsonDepth
 parameter_list|()
@@ -17719,7 +17449,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJsonLength
 parameter_list|()
@@ -17754,7 +17483,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJsonKeys
 parameter_list|()
@@ -17785,7 +17513,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJsonRemove
 parameter_list|()
@@ -17816,7 +17543,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUnionAllWithNoOperandsUsingOracleDialect
 parameter_list|()
@@ -17864,7 +17590,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUnionAllWithNoOperands
 parameter_list|()
@@ -17919,7 +17644,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSmallintOracle
 parameter_list|()
@@ -17952,7 +17676,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testBigintOracle
 parameter_list|()
@@ -17985,7 +17708,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDoubleOracle
 parameter_list|()
@@ -18018,7 +17740,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDateLiteralOracle
 parameter_list|()
@@ -18051,7 +17772,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTimestampLiteralOracle
 parameter_list|()
@@ -18086,7 +17806,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTimeLiteralOracle
 parameter_list|()
@@ -18119,7 +17838,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSupportsDataType
 parameter_list|()
@@ -18231,7 +17949,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectNull
 parameter_list|()
@@ -18271,7 +17988,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectNullWithCount
 parameter_list|()
@@ -18311,7 +18027,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectNullWithGroupByNull
 parameter_list|()
@@ -18355,7 +18070,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectNullWithGroupByVar
 parameter_list|()
@@ -18399,7 +18113,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectNullWithInsert
 parameter_list|()
@@ -18457,7 +18170,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectNullWithInsertFromJoin
 parameter_list|()
@@ -18539,7 +18251,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCastInStringIntegerComparison
 parameter_list|()
@@ -18601,7 +18312,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDialectQuoteStringLiteral
 parameter_list|()
@@ -18723,7 +18433,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectCountStar
 parameter_list|()
@@ -18760,7 +18469,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRowValueExpression
 parameter_list|()
@@ -19002,7 +18710,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInsertValuesWithDynamicParams
 parameter_list|()
@@ -19053,7 +18760,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInsertValuesWithExplicitColumnsAndDynamicParams
 parameter_list|()
@@ -19108,7 +18814,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTableFunctionScan
 parameter_list|()
@@ -19168,7 +18873,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTableFunctionScanWithComplexQuery
 parameter_list|()
@@ -19223,7 +18927,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3593">[CALCITE-3593]    * RelToSqlConverter changes target of ambiguous HAVING clause with a Project    * on Filter on Aggregate</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testBigQueryHaving
 parameter_list|()

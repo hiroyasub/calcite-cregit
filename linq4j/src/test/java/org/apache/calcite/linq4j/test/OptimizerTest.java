@@ -376,13 +376,11 @@ comment|/**  * Unit test for {@link org.apache.calcite.linq4j.tree.BlockBuilder}
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|OptimizerTest
 block|{
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOptimizeComparison
 parameter_list|()
@@ -407,7 +405,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOptimizeTernaryAlwaysTrue
 parameter_list|()
@@ -435,7 +432,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOptimizeTernaryAlwaysFalse
 parameter_list|()
@@ -463,7 +459,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOptimizeTernaryAlwaysSame
 parameter_list|()
@@ -500,7 +495,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNonOptimizableTernary
 parameter_list|()
@@ -537,7 +531,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOptimizeTernaryRotateNot
 parameter_list|()
@@ -579,7 +572,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOptimizeTernaryRotateEqualFalse
 parameter_list|()
@@ -623,7 +615,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOptimizeTernaryAtrueB
 parameter_list|()
@@ -669,7 +660,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOptimizeTernaryAtrueNull
 parameter_list|()
@@ -715,7 +705,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOptimizeTernaryAtrueBoxed
 parameter_list|()
@@ -772,7 +761,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOptimizeTernaryABtrue
 parameter_list|()
@@ -818,7 +806,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOptimizeTernaryAfalseB
 parameter_list|()
@@ -864,7 +851,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOptimizeTernaryABfalse
 parameter_list|()
@@ -910,7 +896,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOptimizeTernaryInEqualABCeqB
 parameter_list|()
@@ -963,7 +948,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOptimizeTernaryInEqualABCeqC
 parameter_list|()
@@ -1016,7 +1000,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOptimizeTernaryAeqBBA
 parameter_list|()
@@ -1079,7 +1062,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOptimizeTernaryAeqBAB
 parameter_list|()
@@ -1142,7 +1124,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOptimizeTernaryInEqualABCneqB
 parameter_list|()
@@ -1195,7 +1176,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOptimizeTernaryInEqualABCneqC
 parameter_list|()
@@ -1248,7 +1228,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOptimizeTernaryAneqBBA
 parameter_list|()
@@ -1311,7 +1290,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOptimizeTernaryAneqBAB
 parameter_list|()
@@ -1374,7 +1352,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAndAlsoTrueBool
 parameter_list|()
@@ -1409,7 +1386,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAndAlsoBoolTrue
 parameter_list|()
@@ -1444,7 +1420,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAndAlsoFalseBool
 parameter_list|()
@@ -1479,7 +1454,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAndAlsoNullBool
 parameter_list|()
@@ -1514,7 +1488,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAndAlsoXY
 parameter_list|()
@@ -1558,7 +1531,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAndAlsoXX
 parameter_list|()
@@ -1598,7 +1570,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOrElseTrueBool
 parameter_list|()
@@ -1633,7 +1604,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOrElseFalseBool
 parameter_list|()
@@ -1668,7 +1638,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOrElseNullBool
 parameter_list|()
@@ -1703,7 +1672,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOrElseXY
 parameter_list|()
@@ -1747,7 +1715,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOrElseXX
 parameter_list|()
@@ -1787,7 +1754,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testEqualSameConst
 parameter_list|()
@@ -1818,7 +1784,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testEqualDifferentConst
 parameter_list|()
@@ -1844,7 +1809,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testEqualSameExpr
 parameter_list|()
@@ -1884,7 +1848,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testEqualDifferentExpr
 parameter_list|()
@@ -1938,7 +1901,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testEqualPrimitiveNull
 parameter_list|()
@@ -1978,7 +1940,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testEqualObjectNull
 parameter_list|()
@@ -2018,7 +1979,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testEqualStringNull
 parameter_list|()
@@ -2049,7 +2009,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testEqualTypedNullUntypedNull
 parameter_list|()
@@ -2075,7 +2034,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testEqualUnypedNullTypedNull
 parameter_list|()
@@ -2101,7 +2059,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testEqualBoolTrue
 parameter_list|()
@@ -2141,7 +2098,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testEqualBoolFalse
 parameter_list|()
@@ -2181,7 +2137,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNotEqualSameConst
 parameter_list|()
@@ -2212,7 +2167,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNotEqualDifferentConst
 parameter_list|()
@@ -2238,7 +2192,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNotEqualSameExpr
 parameter_list|()
@@ -2278,7 +2231,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNotEqualDifferentExpr
 parameter_list|()
@@ -2332,7 +2284,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNotEqualPrimitiveNull
 parameter_list|()
@@ -2372,7 +2323,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNotEqualObjectNull
 parameter_list|()
@@ -2412,7 +2362,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNotEqualStringNull
 parameter_list|()
@@ -2443,7 +2392,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNotEqualTypedNullUntypedNull
 parameter_list|()
@@ -2469,7 +2417,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNotEqualUnypedNullTypedNull
 parameter_list|()
@@ -2495,7 +2442,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNotEqualBoolTrue
 parameter_list|()
@@ -2535,7 +2481,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNotEqualBoolFalse
 parameter_list|()
@@ -2575,7 +2520,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMultipleFolding
 parameter_list|()
@@ -2682,7 +2626,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testConditionalIfTrue
 parameter_list|()
@@ -2715,7 +2658,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testConditionalIfTrueElse
 parameter_list|()
@@ -2757,7 +2699,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testConditionalIfFalse
 parameter_list|()
@@ -2790,7 +2731,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testConditionalIfFalseElse
 parameter_list|()
@@ -2832,7 +2772,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testConditionalIfBoolTrue
 parameter_list|()
@@ -2902,7 +2841,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testConditionalIfBoolTrueElse
 parameter_list|()
@@ -2981,7 +2919,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testConditionalIfBoolFalse
 parameter_list|()
@@ -3047,7 +2984,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testConditionalIfBoolFalseElse
 parameter_list|()
@@ -3126,7 +3062,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testConditionalIfBoolFalseTrue
 parameter_list|()
@@ -3221,7 +3156,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCastIntToShort
 parameter_list|()
@@ -3249,7 +3183,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCastIntToInt
 parameter_list|()
@@ -3277,7 +3210,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCastIntToLong
 parameter_list|()
@@ -3305,7 +3237,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNotTrue
 parameter_list|()
@@ -3329,7 +3260,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNotFalse
 parameter_list|()
@@ -3353,7 +3283,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNotNotA
 parameter_list|()
@@ -3385,7 +3314,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNotEq
 parameter_list|()
@@ -3422,7 +3350,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNotNeq
 parameter_list|()
@@ -3459,7 +3386,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNotGt
 parameter_list|()
@@ -3496,7 +3422,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNotGte
 parameter_list|()
@@ -3533,7 +3458,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNotLt
 parameter_list|()
@@ -3570,7 +3494,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNotLte
 parameter_list|()
@@ -3607,7 +3530,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|booleanValueOfTrue
 parameter_list|()
@@ -3637,7 +3559,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testBooleanValueOfFalse
 parameter_list|()
@@ -3667,7 +3588,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAssign
 parameter_list|()
@@ -3873,7 +3793,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAssign2
 parameter_list|()

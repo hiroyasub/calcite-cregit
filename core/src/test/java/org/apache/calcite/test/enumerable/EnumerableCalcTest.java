@@ -96,14 +96,12 @@ comment|/**  * Unit test for  * {@link org.apache.calcite.adapter.enumerable.Enu
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|EnumerableCalcTest
 block|{
 comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3536">[CALCITE-3536]    * NPE when executing plan with Coalesce due to wrong NullAs strategy</a>.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCoalesceImplementation
 parameter_list|()

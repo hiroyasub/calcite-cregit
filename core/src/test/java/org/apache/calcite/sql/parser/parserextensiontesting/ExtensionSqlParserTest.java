@@ -96,7 +96,6 @@ comment|/**  * Testing for extension functionality of the base SQL parser impl. 
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|ExtensionSqlParserTest
 extends|extends
@@ -117,7 +116,6 @@ return|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAlterSystemExtension
 parameter_list|()
@@ -135,7 +133,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAlterSystemExtensionWithoutAlter
 parameter_list|()
@@ -154,7 +151,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCreateTable
 parameter_list|()
@@ -172,7 +168,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExtendedSqlStmt
 parameter_list|()

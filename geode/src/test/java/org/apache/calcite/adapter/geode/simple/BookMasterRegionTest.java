@@ -132,7 +132,6 @@ comment|/**  *  */
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|BookMasterRegionTest
 block|{

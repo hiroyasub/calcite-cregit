@@ -130,7 +130,6 @@ comment|/**  * Tests return type inference using {@code RelDataTypeSystem}  */
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|RelDataTypeSystemTest
 block|{
@@ -624,7 +623,6 @@ argument_list|)
 decl_stmt|;
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDecimalAdditionReturnTypeInference
 parameter_list|()
@@ -705,7 +703,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDecimalModReturnTypeInference
 parameter_list|()
@@ -786,7 +783,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDoubleModReturnTypeInference
 parameter_list|()
@@ -851,7 +847,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCustomDecimalPlusReturnTypeInference
 parameter_list|()
@@ -944,7 +939,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCustomDecimalMultiplyReturnTypeInference
 parameter_list|()
@@ -1037,7 +1031,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCustomDecimalDivideReturnTypeInference
 parameter_list|()
@@ -1130,7 +1123,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCustomDecimalModReturnTypeInference
 parameter_list|()

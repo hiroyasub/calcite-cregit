@@ -234,13 +234,11 @@ comment|/** Unit tests for {@link DateRangeRules} algorithms. */
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|DateRangeRulesTest
 block|{
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExtractYearFromDateColumn
 parameter_list|()
@@ -504,7 +502,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExtractYearFromTimestampColumn
 parameter_list|()
@@ -676,7 +673,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExtractYearAndMonthFromDateColumn
 parameter_list|()
@@ -751,7 +747,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1601">[CALCITE-1601]    * DateRangeRules loses OR filters</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExtractYearAndMonthFromDateColumn2
 parameter_list|()
@@ -894,7 +889,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExtractYearAndDayFromDateColumn
 parameter_list|()
@@ -971,7 +965,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExtractYearMonthDayFromDateColumn
 parameter_list|()
@@ -1096,7 +1089,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExtractYearMonthDayFromTimestampColumn
 parameter_list|()
@@ -1216,7 +1208,6 @@ block|}
 comment|/** Test case #1 for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1658">[CALCITE-1658]    * DateRangeRules issues</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExtractWithOrCondition1
 parameter_list|()
@@ -1373,7 +1364,6 @@ block|}
 comment|/** Test case #2 for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1658">[CALCITE-1658]    * DateRangeRules issues</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExtractWithOrCondition2
 parameter_list|()
@@ -1577,7 +1567,6 @@ block|}
 comment|/** Test case #3 for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1658">[CALCITE-1658]    * DateRangeRules issues</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExtractPartialRewriteForNotEqualsYear
 parameter_list|()
@@ -1758,7 +1747,6 @@ block|}
 comment|/** Test case #4 for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1658">[CALCITE-1658]    * DateRangeRules issues</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExtractPartialRewriteForInMonth
 parameter_list|()
@@ -2015,7 +2003,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExtractRewriteForInvalidMonthComparison
 parameter_list|()
@@ -2283,7 +2270,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExtractRewriteForInvalidDayComparison
 parameter_list|()
@@ -2430,7 +2416,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUnboundYearExtractRewrite
 parameter_list|()
@@ -2648,7 +2633,6 @@ block|}
 comment|// Test reWrite with multiple operands
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExtractRewriteMultipleOperands
 parameter_list|()
@@ -2816,7 +2800,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFloorEqRewrite
 parameter_list|()
@@ -3383,7 +3366,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFloorLtRewrite
 parameter_list|()
@@ -3518,7 +3500,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFloorLeRewrite
 parameter_list|()
@@ -3653,7 +3634,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFloorGtRewrite
 parameter_list|()
@@ -3788,7 +3768,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFloorGeRewrite
 parameter_list|()
@@ -3923,7 +3902,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFloorExtractBothRewrite
 parameter_list|()
@@ -4212,7 +4190,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCeilEqRewrite
 parameter_list|()
@@ -4779,7 +4756,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCeilLtRewrite
 parameter_list|()
@@ -4914,7 +4890,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCeilLeRewrite
 parameter_list|()
@@ -5049,7 +5024,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCeilGtRewrite
 parameter_list|()
@@ -5184,7 +5158,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCeilGeRewrite
 parameter_list|()
@@ -5319,7 +5292,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFloorRewriteWithTimezone
 parameter_list|()

@@ -234,7 +234,6 @@ comment|/**  * SqlValidatorFeatureTest verifies that features can be independent
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|SqlValidatorFeatureTest
 extends|extends
@@ -278,7 +277,6 @@ return|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDistinct
 parameter_list|()
@@ -296,7 +294,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOrderByDesc
 parameter_list|()
@@ -316,7 +313,6 @@ comment|// NOTE jvs 6-Mar-2006:  carets don't come out properly placed
 comment|// for INTERSECT/EXCEPT, so don't bother
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testIntersect
 parameter_list|()
@@ -334,7 +330,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExcept
 parameter_list|()
@@ -352,7 +347,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMultiset
 parameter_list|()
@@ -380,7 +374,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTablesample
 parameter_list|()

@@ -413,7 +413,6 @@ name|ResourceAccessMode
 operator|.
 name|READ
 argument_list|)
-specifier|public
 class|class
 name|ElasticSearchAdapterTest
 block|{
@@ -775,7 +774,6 @@ block|}
 comment|/**    * Tests using calcite view    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|view
 parameter_list|()
@@ -803,7 +801,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|emptyResult
 parameter_list|()
@@ -853,7 +850,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|basic
 parameter_list|()
@@ -993,7 +989,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSort
 parameter_list|()
@@ -1045,7 +1040,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSortLimit
 parameter_list|()
@@ -1359,7 +1353,6 @@ block|}
 comment|/**    * Sorting (and aggregating) directly on items without a view.    *    *<p>Queries of type:    * {@code select _MAP['a'] from elastic order by _MAP['b']}    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSortNoSchema
 parameter_list|()
@@ -1613,7 +1606,6 @@ block|}
 comment|/**    * Sort by multiple fields (in different direction: asc/desc)    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|sortAscDesc
 parameter_list|()
@@ -1660,7 +1652,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOffsetLimit
 parameter_list|()
@@ -1706,7 +1697,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLimit
 parameter_list|()
@@ -1750,7 +1740,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|limit2
 parameter_list|()
@@ -1792,7 +1781,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFilterSort
 parameter_list|()
@@ -1897,7 +1885,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFilterSortDesc
 parameter_list|()
@@ -1935,7 +1922,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInPlan
 parameter_list|()
@@ -2006,7 +1992,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testZips
 parameter_list|()
@@ -2027,7 +2012,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testProject
 parameter_list|()
@@ -2098,7 +2082,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFilter
 parameter_list|()
@@ -2145,7 +2128,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFilterReversed
 parameter_list|()
@@ -2193,7 +2175,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|agg1
 parameter_list|()
@@ -2332,7 +2313,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|groupBy
 parameter_list|()
@@ -2619,7 +2599,6 @@ block|}
 comment|/**    * Testing {@code NOT} operator    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|notOperator
 parameter_list|()
@@ -2694,7 +2673,6 @@ block|}
 comment|/**    * Test of {@link org.apache.calcite.sql.fun.SqlStdOperatorTable#APPROX_COUNT_DISTINCT} which    * will be translated to    *<a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-cardinality-aggregation.html">Cardinality Aggregation</a>    * (approximate counts using HyperLogLog++ algorithm).    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|approximateCount
 parameter_list|()

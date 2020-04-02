@@ -252,13 +252,11 @@ comment|/** Unit tests for {@link DateRangeRules} algorithms. */
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|DruidDateRangeRulesTest
 block|{
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExtractYearAndMonthFromDateColumn
 parameter_list|()
@@ -322,7 +320,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRangeCalc
 parameter_list|()
@@ -397,7 +394,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExtractYearAndDayFromDateColumn
 parameter_list|()
@@ -480,7 +476,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExtractYearMonthDayFromDateColumn
 parameter_list|()
@@ -590,7 +585,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExtractYearMonthDayFromTimestampColumn
 parameter_list|()
@@ -701,7 +695,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1738">[CALCITE-1738]    * Push CAST of literals to Druid</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFilterWithCast
 parameter_list|()

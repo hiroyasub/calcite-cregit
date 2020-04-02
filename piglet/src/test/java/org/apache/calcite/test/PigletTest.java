@@ -64,7 +64,6 @@ comment|/** Unit tests for Piglet. */
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|PigletTest
 block|{
@@ -87,7 +86,6 @@ return|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testParseLoad
 parameter_list|()
@@ -122,7 +120,6 @@ block|}
 comment|/** Tests parsing and un-parsing all kinds of operators. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testParse2
 parameter_list|()
@@ -234,7 +231,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testScan
 parameter_list|()
@@ -266,7 +262,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDump
 parameter_list|()
@@ -318,7 +313,6 @@ block|}
 comment|/** VALUES is an extension to Pig. You can achieve the same effect in standard    * Pig by creating a text file. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDumpValues
 parameter_list|()
@@ -363,7 +357,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testForeach
 parameter_list|()
@@ -402,7 +395,6 @@ name|Disabled
 comment|// foreach nested not implemented yet
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testForeachNested
 parameter_list|()
@@ -448,7 +440,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGroup
 parameter_list|()
@@ -488,7 +479,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGroupExample
 parameter_list|()
@@ -534,7 +524,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDistinctExample
 parameter_list|()
@@ -582,7 +571,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFilter
 parameter_list|()
@@ -618,7 +606,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFilterExample
 parameter_list|()
@@ -706,7 +693,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLimit
 parameter_list|()
@@ -742,7 +728,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLimitExample
 parameter_list|()
@@ -830,7 +815,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOrder
 parameter_list|()
@@ -868,7 +852,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOrderStar
 parameter_list|()
@@ -906,7 +889,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOrderExample
 parameter_list|()
@@ -969,7 +951,6 @@ block|}
 comment|/** VALUES is an extension to Pig. You can achieve the same effect in standard    * Pig by creating a text file. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testValues
 parameter_list|()
@@ -1003,7 +984,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testValuesNested
 parameter_list|()

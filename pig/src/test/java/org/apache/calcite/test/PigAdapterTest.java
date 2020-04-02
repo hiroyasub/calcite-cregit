@@ -100,7 +100,6 @@ comment|/**  * Tests for the {@code org.apache.calcite.adapter.pig} package.  */
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|PigAdapterTest
 extends|extends
@@ -147,7 +146,6 @@ argument_list|)
 decl_stmt|;
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testScanAndFilter
 parameter_list|()
@@ -201,7 +199,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testImplWithMultipleFilters
 parameter_list|()
@@ -253,7 +250,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testImplWithGroupByAndCount
 parameter_list|()
@@ -311,7 +307,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testImplWithCountWithoutGroupBy
 parameter_list|()
@@ -369,7 +364,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testImplWithGroupByMultipleFields
 parameter_list|()
@@ -427,7 +421,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testImplWithGroupByCountDistinct
 parameter_list|()
@@ -487,7 +480,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testImplWithJoin
 parameter_list|()

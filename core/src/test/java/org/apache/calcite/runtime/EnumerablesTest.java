@@ -246,7 +246,6 @@ comment|/**  * Unit tests for {@link org.apache.calcite.runtime.Enumerables}.  *
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|EnumerablesTest
 block|{
@@ -465,7 +464,6 @@ name|deptno
 decl_stmt|;
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSemiJoinEmp
 parameter_list|()
@@ -513,7 +511,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSemiJoinDept
 parameter_list|()
@@ -561,7 +558,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAntiJoinEmp
 parameter_list|()
@@ -609,7 +605,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAntiJoinDept
 parameter_list|()
@@ -657,7 +652,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMergeJoin
 parameter_list|()
@@ -814,7 +808,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMergeJoinWithNullKeys
 parameter_list|()
@@ -971,7 +964,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMergeJoin2
 parameter_list|()
@@ -1111,7 +1103,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMergeJoin3
 parameter_list|()
@@ -1363,7 +1354,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMergeJoinWithPredicate
 parameter_list|()
@@ -1962,7 +1952,6 @@ return|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNestedLoopJoin
 parameter_list|()
@@ -2001,7 +1990,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNestedLoopLeftJoin
 parameter_list|()
@@ -2042,7 +2030,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNestedLoopRightJoin
 parameter_list|()
@@ -2083,7 +2070,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNestedLoopFullJoin
 parameter_list|()
@@ -2126,7 +2112,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNestedLoopFullJoinLeftEmpty
 parameter_list|()
@@ -2178,7 +2163,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNestedLoopFullJoinRightEmpty
 parameter_list|()
@@ -2224,7 +2208,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNestedLoopFullJoinBothEmpty
 parameter_list|()
@@ -2273,7 +2256,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNestedLoopSemiJoinEmp
 parameter_list|()
@@ -2321,7 +2303,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNestedLoopSemiJoinDept
 parameter_list|()
@@ -2369,7 +2350,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNestedLoopAntiJoinEmp
 parameter_list|()
@@ -2417,7 +2397,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNestedLoopAntiJoinDept
 parameter_list|()
@@ -2741,7 +2720,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInnerHashJoin
 parameter_list|()
@@ -2896,7 +2874,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLeftHashJoinWithNonEquiConditions
 parameter_list|()
@@ -3065,7 +3042,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRightHashJoinWithNonEquiConditions
 parameter_list|()
@@ -3226,7 +3202,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFullHashJoinWithNonEquiConditions
 parameter_list|()

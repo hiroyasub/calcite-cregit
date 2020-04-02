@@ -104,7 +104,6 @@ comment|/**  * Tests {@link org.apache.calcite.runtime.BinarySearch}.  */
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|BinarySearchTest
 block|{
@@ -189,7 +188,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSimple
 parameter_list|()
@@ -242,7 +240,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRepeated
 parameter_list|()
@@ -313,7 +310,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMissing
 parameter_list|()
@@ -368,7 +364,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testEmpty
 parameter_list|()
@@ -387,7 +382,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSingle
 parameter_list|()
@@ -430,7 +424,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAllTheSame
 parameter_list|()

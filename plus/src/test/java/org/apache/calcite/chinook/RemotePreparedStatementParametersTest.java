@@ -74,13 +74,11 @@ comment|/**  * Tests against parameters in prepared statement when using underly
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|RemotePreparedStatementParametersTest
 block|{
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSimpleStringParameterShouldWorkWithCalcite
 parameter_list|()
@@ -150,7 +148,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSeveralParametersShouldWorkWithCalcite
 parameter_list|()
@@ -229,7 +226,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testParametersShouldWorkWithRaw
 parameter_list|()

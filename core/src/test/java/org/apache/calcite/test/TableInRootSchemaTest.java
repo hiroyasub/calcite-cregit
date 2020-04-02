@@ -394,14 +394,12 @@ comment|/** Test case for issue 85. */
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|TableInRootSchemaTest
 block|{
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-85">[CALCITE-85]    * Adding a table to the root schema causes breakage in    * CalcitePrepareImpl</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAddingTableInRootSchema
 parameter_list|()

@@ -1058,7 +1058,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSort
 parameter_list|()
@@ -1092,7 +1091,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSortLimit
 parameter_list|()
@@ -1135,7 +1133,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOffsetLimit
 parameter_list|()
@@ -1170,7 +1167,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLimit
 parameter_list|()
@@ -1205,7 +1201,6 @@ annotation|@
 name|Disabled
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFilterSort
 parameter_list|()
@@ -1291,7 +1286,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFilterSortDesc
 parameter_list|()
@@ -1334,7 +1328,6 @@ literal|"broken; [CALCITE-2115] is logged to fix it"
 argument_list|)
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUnionPlan
 parameter_list|()
@@ -1395,7 +1388,6 @@ literal|"java.lang.ClassCastException: java.lang.Integer cannot be cast to java.
 argument_list|)
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFilterUnionPlan
 parameter_list|()
@@ -1425,7 +1417,6 @@ block|}
 comment|/**    * Tests that mongo query is empty when filter simplified to false.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFilterRedundant
 parameter_list|()
@@ -1452,7 +1443,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectWhere
 parameter_list|()
@@ -1517,7 +1507,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInPlan
 parameter_list|()
@@ -1630,7 +1619,6 @@ block|}
 comment|/** Simple query based on the "mongo-zips" model. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testZips
 parameter_list|()
@@ -1653,7 +1641,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCountGroupByEmpty
 parameter_list|()
@@ -1704,7 +1691,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCountGroupByEmptyMultiplyBy2
 parameter_list|()
@@ -1750,7 +1736,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGroupByOneColumnNotProjected
 parameter_list|()
@@ -1796,7 +1781,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGroupByOneColumn
 parameter_list|()
@@ -1838,7 +1822,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGroupByOneColumnReversed
 parameter_list|()
@@ -1883,7 +1866,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGroupByAvg
 parameter_list|()
@@ -1925,7 +1907,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGroupByAvgSumCount
 parameter_list|()
@@ -1971,7 +1952,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGroupByHaving
 parameter_list|()
@@ -2029,7 +2009,6 @@ literal|"https://issues.apache.org/jira/browse/CALCITE-270"
 argument_list|)
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGroupByHaving2
 parameter_list|()
@@ -2088,7 +2067,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGroupByMinMaxSum
 parameter_list|()
@@ -2138,7 +2116,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGroupComposite
 parameter_list|()
@@ -2192,7 +2169,6 @@ literal|"broken; [CALCITE-2115] is logged to fix it"
 argument_list|)
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDistinctCount
 parameter_list|()
@@ -2261,7 +2237,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDistinctCountOrderBy
 parameter_list|()
@@ -2325,7 +2300,6 @@ literal|"broken; [CALCITE-2115] is logged to fix it"
 argument_list|)
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testProject
 parameter_list|()
@@ -2367,7 +2341,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFilter
 parameter_list|()
@@ -2411,7 +2384,6 @@ block|}
 comment|/** MongoDB's predicates are handed (they can only accept literals on the    * right-hand size) so it's worth testing that we handle them right both    * ways around. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFilterReversed
 parameter_list|()
@@ -2468,7 +2440,6 @@ block|}
 comment|/** MongoDB's predicates are handed (they can only accept literals on the    * right-hand size) so it's worth testing that we handle them right both    * ways around.    *    *<p>Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-740">[CALCITE-740]    * Redundant WHERE clause causes wrong result in MongoDB adapter</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFilterPair
 parameter_list|()
@@ -2614,7 +2585,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-286">[CALCITE-286]    * Error casting MongoDB date</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDate
 parameter_list|()
@@ -2666,7 +2636,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-665">[CALCITE-665]    * ClassCastException in MongoDB adapter</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCountViaInt
 parameter_list|()

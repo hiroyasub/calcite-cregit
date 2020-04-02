@@ -184,7 +184,6 @@ comment|/**  * Unit tests for Babel framework.  */
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|BabelTest
 block|{
@@ -375,7 +374,6 @@ return|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInfixCast
 parameter_list|()

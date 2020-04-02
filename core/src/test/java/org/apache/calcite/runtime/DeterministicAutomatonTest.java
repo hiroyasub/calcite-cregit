@@ -60,13 +60,11 @@ comment|/** Tests for the {@link DeterministicAutomaton} */
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|DeterministicAutomatonTest
 block|{
 annotation|@
 name|Test
-specifier|public
 name|void
 name|convertAutomaton
 parameter_list|()
@@ -192,7 +190,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|convertAutomaton2
 parameter_list|()
@@ -288,7 +285,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|convertAutomaton3
 parameter_list|()
@@ -386,7 +382,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|convertAutomaton4
 parameter_list|()

@@ -678,7 +678,6 @@ comment|/**  * Unit test for {@link org.apache.calcite.sql2rel.SqlToRelConverter
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|SqlToRelConverterTest
 extends|extends
@@ -739,7 +738,6 @@ return|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDotLiteralAfterNestedRow
 parameter_list|()
@@ -761,7 +759,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDotLiteralAfterRow
 parameter_list|()
@@ -783,7 +780,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testIntegerLiteral
 parameter_list|()
@@ -805,7 +801,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testIntervalLiteralYearToMonth
 parameter_list|()
@@ -831,7 +826,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testIntervalLiteralHourToMinute
 parameter_list|()
@@ -857,7 +851,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAliasList
 parameter_list|()
@@ -885,7 +878,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAliasList2
 parameter_list|()
@@ -914,7 +906,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2468">[CALCITE-2468]    * struct type alias should not cause IndexOutOfBoundsException</a>.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testStructTypeAlias
 parameter_list|()
@@ -938,7 +929,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinUsingDynamicTable
 parameter_list|()
@@ -971,7 +961,6 @@ block|}
 comment|/**    * Tests that AND(x, AND(y, z)) gets flattened to AND(x, y, z).    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMultiAnd
 parameter_list|()
@@ -999,7 +988,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinOn
 parameter_list|()
@@ -1024,7 +1012,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-245">[CALCITE-245]    * Off-by-one translation of ON clause of JOIN</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testConditionOffByOne
 parameter_list|()
@@ -1050,7 +1037,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testConditionOffByOneReversed
 parameter_list|()
@@ -1074,7 +1060,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinOnExpression
 parameter_list|()
@@ -1098,7 +1083,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinOnIn
 parameter_list|()
@@ -1122,7 +1106,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinOnInSubQuery
 parameter_list|()
@@ -1153,7 +1136,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinOnExists
 parameter_list|()
@@ -1184,7 +1166,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinUsing
 parameter_list|()
@@ -1201,7 +1182,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-74">[CALCITE-74]    * JOIN ... USING fails in 3-way join with    * UnsupportedOperationException</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinUsingThreeWay
 parameter_list|()
@@ -1229,7 +1209,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinUsingCompound
 parameter_list|()
@@ -1256,7 +1235,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-801">[CALCITE-801]    * NullPointerException using USING on table alias with column aliases</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testValuesUsing
 parameter_list|()
@@ -1286,7 +1264,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinNatural
 parameter_list|()
@@ -1302,7 +1279,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinNaturalNoCommonColumn
 parameter_list|()
@@ -1326,7 +1302,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinNaturalMultipleCommonColumn
 parameter_list|()
@@ -1353,7 +1328,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3387">[CALCITE-3387]    * Query with GROUP BY and JOIN ... USING wrongly fails with    * "Column 'DEPTNO' is ambiguous"</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinUsingWithUnqualifiedCommonColumn
 parameter_list|()
@@ -1378,7 +1352,6 @@ block|}
 comment|/** Similar to {@link #testJoinUsingWithUnqualifiedCommonColumn()},    * but with nested common column. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinUsingWithUnqualifiedNestedCommonColumn
 parameter_list|()
@@ -1407,7 +1380,6 @@ block|}
 comment|/** Similar to {@link #testJoinUsingWithUnqualifiedCommonColumn()},    * but with aggregate. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinUsingWithAggregate
 parameter_list|()
@@ -1436,7 +1408,6 @@ block|}
 comment|/** Similar to {@link #testJoinUsingWithUnqualifiedCommonColumn()},    * but with grouping sets. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinUsingWithGroupingSets
 parameter_list|()
@@ -1467,7 +1438,6 @@ block|}
 comment|/** Similar to {@link #testJoinUsingWithUnqualifiedCommonColumn()},    * but with multiple join. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinUsingWithMultipleJoin
 parameter_list|()
@@ -1495,7 +1465,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinWithUnion
 parameter_list|()
@@ -1521,7 +1490,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGroup
 parameter_list|()
@@ -1537,7 +1505,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGroupByAlias
 parameter_list|()
@@ -1560,7 +1527,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGroupByAliasOfSubExpressionsInProject
 parameter_list|()
@@ -1591,7 +1557,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGroupByAliasEqualToColumnName
 parameter_list|()
@@ -1614,7 +1579,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGroupByOrdinal
 parameter_list|()
@@ -1637,7 +1601,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGroupByContainsLiterals
 parameter_list|()
@@ -1668,7 +1631,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAliasInHaving
 parameter_list|()
@@ -1691,7 +1653,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGroupJustOneAgg
 parameter_list|()
@@ -1714,7 +1675,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGroupExpressionsInsideAndOut
 parameter_list|()
@@ -1742,7 +1702,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregateNoGroup
 parameter_list|()
@@ -1758,7 +1717,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGroupEmpty
 parameter_list|()
@@ -1775,7 +1733,6 @@ block|}
 comment|// Same effect as writing "GROUP BY deptno"
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSingletonGroupingSet
 parameter_list|()
@@ -1791,7 +1748,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGroupingSets
 parameter_list|()
@@ -1818,7 +1774,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2147">[CALCITE-2147]    * Incorrect plan in with with ROLLUP inside GROUPING SETS</a>.    *    *<p>Equivalence example:    *<blockquote>GROUP BY GROUPING SETS (ROLLUP(A, B), CUBE(C,D))</blockquote>    *<p>is equal to    *<blockquote>GROUP BY GROUPING SETS ((A,B), (A), (),    * (C,D), (C), (D) )</blockquote>    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGroupingSetsWithRollup
 parameter_list|()
@@ -1844,7 +1799,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGroupingSetsWithCube
 parameter_list|()
@@ -1870,7 +1824,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGroupingSetsWithRollupCube
 parameter_list|()
@@ -1896,7 +1849,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGroupingSetsProduct
 parameter_list|()
@@ -1927,7 +1879,6 @@ block|}
 comment|/** When the GROUPING function occurs with GROUP BY (effectively just one    * grouping set), we can translate it directly to 1. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGroupingFunctionWithGroupBy
 parameter_list|()
@@ -1957,7 +1908,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGroupingFunction
 parameter_list|()
@@ -1987,7 +1937,6 @@ comment|/**    * GROUP BY with duplicates.    *    *<p>From SQL spec:    *<block
 comment|// Same effect as writing "GROUP BY ()"
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGroupByWithDuplicates
 parameter_list|()
@@ -2004,7 +1953,6 @@ block|}
 comment|/** GROUP BY with duplicate (and heavily nested) GROUPING SETS. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDuplicateGroupingSets
 parameter_list|()
@@ -2036,7 +1984,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGroupingSetsCartesianProduct
 parameter_list|()
@@ -2063,7 +2010,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGroupingSetsCartesianProduct2
 parameter_list|()
@@ -2089,7 +2035,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRollupSimple
 parameter_list|()
@@ -2118,7 +2063,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRollup
 parameter_list|()
@@ -2145,7 +2089,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRollupTuples
 parameter_list|()
@@ -2172,7 +2115,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCube
 parameter_list|()
@@ -2199,7 +2141,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGroupingSetsWith
 parameter_list|()
@@ -2225,7 +2166,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testHaving
 parameter_list|()
@@ -2248,7 +2188,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGroupBug281
 parameter_list|()
@@ -2273,7 +2212,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGroupBug281b
 parameter_list|()
@@ -2302,7 +2240,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGroupByExpression
 parameter_list|()
@@ -2332,7 +2269,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggDistinct
 parameter_list|()
@@ -2358,7 +2294,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggFilter
 parameter_list|()
@@ -2386,7 +2321,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggFilterWithIn
 parameter_list|()
@@ -2414,7 +2348,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFakeStar
 parameter_list|()
@@ -2430,7 +2363,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectDistinct
 parameter_list|()
@@ -2447,7 +2379,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-476">[CALCITE-476]    * DISTINCT flag in windowed aggregates</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectOverDistinct
 parameter_list|()
@@ -2476,7 +2407,6 @@ block|}
 comment|/** As {@link #testSelectOverDistinct()} but for streaming queries. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectStreamPartitionDistinct
 parameter_list|()
@@ -2512,7 +2442,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectDistinctGroup
 parameter_list|()
@@ -2529,7 +2458,6 @@ block|}
 comment|/**    * Tests that if the clause of SELECT DISTINCT contains duplicate    * expressions, they are only aggregated once.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectDistinctDup
 parameter_list|()
@@ -2551,7 +2479,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectWithoutFrom
 parameter_list|()
@@ -2574,7 +2501,6 @@ block|}
 comment|/** Tests referencing columns from a sub-query that has duplicate column    * names. I think the standard says that this is illegal. We roll with it,    * and rename the second column to "e0". */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDuplicateColumnsInSubQuery
 parameter_list|()
@@ -2597,7 +2523,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOrder
 parameter_list|()
@@ -2650,7 +2575,6 @@ block|}
 comment|/** Tests that if a column occurs twice in ORDER BY, only the first key is    * kept. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOrderBasedRepeatFields
 parameter_list|()
@@ -2672,7 +2596,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOrderDescNullsLast
 parameter_list|()
@@ -2694,7 +2617,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOrderByOrdinalDesc
 parameter_list|()
@@ -2747,7 +2669,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOrderDistinct
 parameter_list|()
@@ -2773,7 +2694,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOrderByNegativeOrdinal
 parameter_list|()
@@ -2797,7 +2717,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOrderByOrdinalInExpr
 parameter_list|()
@@ -2821,7 +2740,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOrderByIdenticalExpr
 parameter_list|()
@@ -2845,7 +2763,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOrderByAlias
 parameter_list|()
@@ -2867,7 +2784,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOrderByAliasInExpr
 parameter_list|()
@@ -2891,7 +2807,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOrderByAliasOverrides
 parameter_list|()
@@ -2930,7 +2845,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOrderByAliasDoesNotOverride
 parameter_list|()
@@ -2968,7 +2882,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOrderBySameExpr
 parameter_list|()
@@ -2992,7 +2905,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOrderUnion
 parameter_list|()
@@ -3020,7 +2932,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOrderUnionOrdinal
 parameter_list|()
@@ -3062,7 +2973,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOrderUnionExprs
 parameter_list|()
@@ -3090,7 +3000,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOrderOffsetFetch
 parameter_list|()
@@ -3114,7 +3023,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOrderOffsetFetchWithDynamicParameter
 parameter_list|()
@@ -3138,7 +3046,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOffsetFetch
 parameter_list|()
@@ -3162,7 +3069,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOffsetFetchWithDynamicParameter
 parameter_list|()
@@ -3186,7 +3092,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOffset
 parameter_list|()
@@ -3208,7 +3113,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOffsetWithDynamicParameter
 parameter_list|()
@@ -3230,7 +3134,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFetch
 parameter_list|()
@@ -3252,7 +3155,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFetchWithDynamicParameter
 parameter_list|()
@@ -3275,7 +3177,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-439">[CALCITE-439]    * SqlValidatorUtil.uniquify() may not terminate under some conditions</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGroupAlias
 parameter_list|()
@@ -3301,7 +3202,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOrderGroup
 parameter_list|()
@@ -3329,7 +3229,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCountNoGroup
 parameter_list|()
@@ -3355,7 +3254,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWith
 parameter_list|()
@@ -3380,7 +3278,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-309">[CALCITE-309]    * WITH ... ORDER BY query gives AssertionError</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWithOrder
 parameter_list|()
@@ -3404,7 +3301,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWithUnionOrder
 parameter_list|()
@@ -3434,7 +3330,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWithUnion
 parameter_list|()
@@ -3462,7 +3357,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWithAlias
 parameter_list|()
@@ -3488,7 +3382,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWithInsideWhereExists
 parameter_list|()
@@ -3521,7 +3414,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWithInsideWhereExistsRex
 parameter_list|()
@@ -3559,7 +3451,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWithInsideWhereExistsDecorrelate
 parameter_list|()
@@ -3592,7 +3483,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWithInsideWhereExistsDecorrelateRex
 parameter_list|()
@@ -3630,7 +3520,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWithInsideScalarSubQuery
 parameter_list|()
@@ -3658,7 +3547,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWithInsideScalarSubQueryRex
 parameter_list|()
@@ -3692,7 +3580,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-365">[CALCITE-365]    * AssertionError while translating query with WITH and correlated    * sub-query</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWithExists
 parameter_list|()
@@ -3718,7 +3605,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTableSubset
 parameter_list|()
@@ -3740,7 +3626,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTableExpression
 parameter_list|()
@@ -3762,7 +3647,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTableExtend
 parameter_list|()
@@ -3784,7 +3668,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTableExtendSubset
 parameter_list|()
@@ -3806,7 +3689,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTableExtendExpression
 parameter_list|()
@@ -3828,7 +3710,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testModifiableViewExtend
 parameter_list|()
@@ -3858,7 +3739,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testModifiableViewExtendSubset
 parameter_list|()
@@ -3888,7 +3768,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testModifiableViewExtendExpression
 parameter_list|()
@@ -3918,7 +3797,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectViewExtendedColumnCollision
 parameter_list|()
@@ -3962,7 +3840,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectViewExtendedColumnCaseSensitiveCollision
 parameter_list|()
@@ -3988,7 +3865,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectViewExtendedColumnExtendedCollision
 parameter_list|()
@@ -4032,7 +3908,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectViewExtendedColumnCaseSensitiveExtendedCollision
 parameter_list|()
@@ -4058,7 +3933,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectViewExtendedColumnUnderlyingCollision
 parameter_list|()
@@ -4084,7 +3958,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectViewExtendedColumnCaseSensitiveUnderlyingCollision
 parameter_list|()
@@ -4110,7 +3983,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUpdateExtendedColumnCollision
 parameter_list|()
@@ -4130,7 +4002,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUpdateExtendedColumnCaseSensitiveCollision
 parameter_list|()
@@ -4150,7 +4021,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUpdateExtendedColumnModifiableViewCollision
 parameter_list|()
@@ -4176,7 +4046,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUpdateExtendedColumnModifiableViewCaseSensitiveCollision
 parameter_list|()
@@ -4202,7 +4071,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUpdateExtendedColumnModifiableViewExtendedCollision
 parameter_list|()
@@ -4228,7 +4096,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUpdateExtendedColumnModifiableViewExtendedCaseSensitiveCollision
 parameter_list|()
@@ -4254,7 +4121,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUpdateExtendedColumnModifiableViewUnderlyingCollision
 parameter_list|()
@@ -4280,7 +4146,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectModifiableViewConstraint
 parameter_list|()
@@ -4310,7 +4175,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testModifiableViewDdlExtend
 parameter_list|()
@@ -4338,7 +4202,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExplicitTable
 parameter_list|()
@@ -4354,7 +4217,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCollectionTable
 parameter_list|()
@@ -4370,7 +4232,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCollectionTableWithLateral
 parameter_list|()
@@ -4386,7 +4247,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCollectionTableWithLateral2
 parameter_list|()
@@ -4402,7 +4262,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSnapshotOnTemporalTable1
 parameter_list|()
@@ -4426,7 +4285,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSnapshotOnTemporalTable2
 parameter_list|()
@@ -4457,7 +4315,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinTemporalTableOnSpecificTime1
 parameter_list|()
@@ -4485,7 +4342,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinTemporalTableOnSpecificTime2
 parameter_list|()
@@ -4520,7 +4376,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinTemporalTableOnColumnReference1
 parameter_list|()
@@ -4548,7 +4403,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinTemporalTableOnColumnReference2
 parameter_list|()
@@ -4584,7 +4438,6 @@ block|}
 comment|/**    * Lateral join with temporal table, both snapshot's input scan    * and snapshot's period reference outer columns. Should not    * decorrelate join.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCrossJoinTemporalTable1
 parameter_list|()
@@ -4617,7 +4470,6 @@ block|}
 comment|/**    * Lateral join with temporal table, snapshot's input scan    * reference outer columns, but snapshot's period is static.    * Should be able to decorrelate join.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCrossJoinTemporalTable2
 parameter_list|()
@@ -4650,7 +4502,6 @@ block|}
 comment|/**    * Lateral join with temporal table, snapshot's period reference    * outer columns. Should not decorrelate join.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCrossJoinTemporalTable3
 parameter_list|()
@@ -4683,7 +4534,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1732">[CALCITE-1732]    * IndexOutOfBoundsException when using LATERAL TABLE with more than one    * field</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCollectionTableWithLateral3
 parameter_list|()
@@ -4700,7 +4550,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3847">[CALCITE-3847]    * Decorrelation for join with lateral table outputs wrong plan if the join    * condition contains correlation variables</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinLateralTableWithConditionCorrelated
 parameter_list|()
@@ -4726,7 +4575,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSample
 parameter_list|()
@@ -4748,7 +4596,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSampleQuery
 parameter_list|()
@@ -4778,7 +4625,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSampleBernoulli
 parameter_list|()
@@ -4800,7 +4646,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSampleBernoulliQuery
 parameter_list|()
@@ -4830,7 +4675,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSampleSystem
 parameter_list|()
@@ -4852,7 +4696,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSampleSystemQuery
 parameter_list|()
@@ -4882,7 +4725,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCollectionTableWithCursorParam
 parameter_list|()
@@ -4913,7 +4755,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUnnest
 parameter_list|()
@@ -4935,7 +4776,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUnnestSubQuery
 parameter_list|()
@@ -4957,7 +4797,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUnnestArrayAggPlan
 parameter_list|()
@@ -4990,7 +4829,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUnnestArrayPlan
 parameter_list|()
@@ -5022,7 +4860,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUnnestArrayPlanAs
 parameter_list|()
@@ -5054,7 +4891,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testArrayOfRecord
 parameter_list|()
@@ -5070,7 +4906,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFlattenRecords
 parameter_list|()
@@ -5086,7 +4921,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUnnestArray
 parameter_list|()
@@ -5102,7 +4936,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUnnestWithOrdinality
 parameter_list|()
@@ -5124,7 +4957,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMultisetSubQuery
 parameter_list|()
@@ -5146,7 +4978,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMultiset
 parameter_list|()
@@ -5168,7 +4999,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMultisetOfColumns
 parameter_list|()
@@ -5195,7 +5025,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMultisetOfColumnsRex
 parameter_list|()
@@ -5211,7 +5040,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCorrelationJoin
 parameter_list|()
@@ -5237,7 +5065,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCorrelationJoinRex
 parameter_list|()
@@ -5269,7 +5096,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-864">[CALCITE-864]    * Correlation variable has incorrect row type if it is populated by right    * side of a Join</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCorrelatedSubQueryInJoin
 parameter_list|()
@@ -5308,7 +5134,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExists
 parameter_list|()
@@ -5332,7 +5157,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExistsCorrelated
 parameter_list|()
@@ -5361,7 +5185,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNotExistsCorrelated
 parameter_list|()
@@ -5390,7 +5213,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExistsCorrelatedDecorrelate
 parameter_list|()
@@ -5419,7 +5241,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExistsCorrelatedDecorrelateRex
 parameter_list|()
@@ -5453,7 +5274,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExistsCorrelatedLimit
 parameter_list|()
@@ -5482,7 +5302,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExistsCorrelatedLimitDecorrelate
 parameter_list|()
@@ -5516,7 +5335,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExistsCorrelatedLimitDecorrelateRex
 parameter_list|()
@@ -5550,7 +5368,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInValueListShort
 parameter_list|()
@@ -5585,7 +5402,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInValueListLong
 parameter_list|()
@@ -5614,7 +5430,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInUncorrelatedSubQuery
 parameter_list|()
@@ -5638,7 +5453,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInUncorrelatedSubQueryRex
 parameter_list|()
@@ -5667,7 +5481,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCompositeInUncorrelatedSubQueryRex
 parameter_list|()
@@ -5696,7 +5509,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNotInUncorrelatedSubQuery
 parameter_list|()
@@ -5720,7 +5532,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAllValueList
 parameter_list|()
@@ -5747,7 +5558,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSomeValueList
 parameter_list|()
@@ -5774,7 +5584,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSome
 parameter_list|()
@@ -5803,7 +5612,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSomeWithEquality
 parameter_list|()
@@ -5832,7 +5640,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNotInUncorrelatedSubQueryRex
 parameter_list|()
@@ -5861,7 +5668,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNotCaseInThreeClause
 parameter_list|()
@@ -5890,7 +5696,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNotCaseInMoreClause
 parameter_list|()
@@ -5919,7 +5724,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNotCaseInWithoutElse
 parameter_list|()
@@ -5948,7 +5752,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWhereInCorrelated
 parameter_list|()
@@ -5981,7 +5784,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInUncorrelatedSubQueryInSelect
 parameter_list|()
@@ -6010,7 +5812,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInUncorrelatedSubQueryInSelectRex
 parameter_list|()
@@ -6044,7 +5845,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInUncorrelatedSubQueryInHavingRex
 parameter_list|()
@@ -6081,7 +5881,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUncorrelatedScalarSubQueryInOrderRex
 parameter_list|()
@@ -6114,7 +5913,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUncorrelatedScalarSubQueryInGroupOrderRex
 parameter_list|()
@@ -6149,7 +5947,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUncorrelatedScalarSubQueryInAggregateRex
 parameter_list|()
@@ -6181,7 +5978,6 @@ block|}
 comment|/** Plan should be as {@link #testInUncorrelatedSubQueryInSelect}, but with    * an extra NOT. Both queries require 3-valued logic. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNotInUncorrelatedSubQueryInSelect
 parameter_list|()
@@ -6207,7 +6003,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNotInUncorrelatedSubQueryInSelectRex
 parameter_list|()
@@ -6239,7 +6034,6 @@ block|}
 comment|/** Since 'deptno NOT IN (SELECT deptno FROM dept)' can not be null, we    * generate a simpler plan. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNotInUncorrelatedSubQueryInSelectNotNull
 parameter_list|()
@@ -6266,7 +6060,6 @@ block|}
 comment|/** Since 'deptno NOT IN (SELECT mgr FROM emp)' can be null, we need a more    * complex plan, including counts of null and not-null keys. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNotInUncorrelatedSubQueryInSelectMayBeNull
 parameter_list|()
@@ -6293,7 +6086,6 @@ block|}
 comment|/** Even though "mgr" allows nulls, we can deduce from the WHERE clause that    * it will never be null. Therefore we can generate a simpler plan. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNotInUncorrelatedSubQueryInSelectDeduceNotNull
 parameter_list|()
@@ -6320,7 +6112,6 @@ block|}
 comment|/** Similar to {@link #testNotInUncorrelatedSubQueryInSelectDeduceNotNull()},    * using {@code IS NOT NULL}. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNotInUncorrelatedSubQueryInSelectDeduceNotNull2
 parameter_list|()
@@ -6347,7 +6138,6 @@ block|}
 comment|/** Similar to {@link #testNotInUncorrelatedSubQueryInSelectDeduceNotNull()},    * using {@code IN}. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNotInUncorrelatedSubQueryInSelectDeduceNotNull3
 parameter_list|()
@@ -6375,7 +6165,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNotInUncorrelatedSubQueryInSelectNotNullRex
 parameter_list|()
@@ -6406,7 +6195,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUnnestSelect
 parameter_list|()
@@ -6433,7 +6221,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUnnestSelectRex
 parameter_list|()
@@ -6460,7 +6247,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinUnnest
 parameter_list|()
@@ -6482,7 +6268,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinUnnestRex
 parameter_list|()
@@ -6509,7 +6294,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLateral
 parameter_list|()
@@ -6538,7 +6322,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLateralDecorrelate
 parameter_list|()
@@ -6572,7 +6355,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLateralDecorrelateRex
 parameter_list|()
@@ -6601,7 +6383,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLateralDecorrelateThetaRex
 parameter_list|()
@@ -6630,7 +6411,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNestedCorrelations
 parameter_list|()
@@ -6665,7 +6445,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNestedCorrelationsDecorrelated
 parameter_list|()
@@ -6705,7 +6484,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNestedCorrelationsDecorrelatedRex
 parameter_list|()
@@ -6740,7 +6518,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testElement
 parameter_list|()
@@ -6756,7 +6533,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testElementInValues
 parameter_list|()
@@ -6772,7 +6548,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUnionAll
 parameter_list|()
@@ -6794,7 +6569,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUnion
 parameter_list|()
@@ -6816,7 +6590,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUnionValues
 parameter_list|()
@@ -6845,7 +6618,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUnionSubQuery
 parameter_list|()
@@ -6874,7 +6646,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testIsDistinctFrom
 parameter_list|()
@@ -6900,7 +6671,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testIsNotDistinctFrom
 parameter_list|()
@@ -6926,7 +6696,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNotLike
 parameter_list|()
@@ -6949,7 +6718,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTumble
 parameter_list|()
@@ -6981,7 +6749,6 @@ comment|// In generated plan, the first parameter of TUMBLE function will always
 comment|// of it's input. There isn't a way to give the first operand a proper type.
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTableValuedFunctionTumble
 parameter_list|()
@@ -7007,7 +6774,6 @@ comment|// In generated plan, the first parameter of TUMBLE function will always
 comment|// of it's input. There isn't a way to give the first operand a proper type.
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTableValuedFunctionTumbleWithSubQueryParam
 parameter_list|()
@@ -7031,7 +6797,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNotNotIn
 parameter_list|()
@@ -7053,7 +6818,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOverMultiple
 parameter_list|()
@@ -7142,7 +6906,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-750">[CALCITE-750]    * Allow windowed aggregate on top of regular aggregate</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNestedAggregates
 parameter_list|()
@@ -7173,7 +6936,6 @@ block|}
 comment|/**    * Test one of the custom conversions which is recognized by the class of the    * operator (in this case,    * {@link org.apache.calcite.sql.fun.SqlCaseOperator}).    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCase
 parameter_list|()
@@ -7190,7 +6952,6 @@ block|}
 comment|/**    * Tests one of the custom conversions which is recognized by the identity    * of the operator (in this case,    * {@link org.apache.calcite.sql.fun.SqlStdOperatorTable#CHARACTER_LENGTH}).    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCharLength
 parameter_list|()
@@ -7207,7 +6968,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOverAvg
 parameter_list|()
@@ -7238,7 +6998,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOverAvg2
 parameter_list|()
@@ -7269,7 +7028,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOverCountStar
 parameter_list|()
@@ -7298,7 +7056,6 @@ block|}
 comment|/**    * Tests that a window containing only ORDER BY is implicitly CURRENT ROW.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOverOrderWindow
 parameter_list|()
@@ -7342,7 +7099,6 @@ block|}
 comment|/**    * Tests that a window with specifying null treatment.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOverNullTreatmentWindow
 parameter_list|()
@@ -7393,7 +7149,6 @@ block|}
 comment|/**    * Tests that a window with a FOLLOWING bound becomes BETWEEN CURRENT ROW    * AND FOLLOWING.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOverOrderFollowingWindow
 parameter_list|()
@@ -7439,7 +7194,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTumbleTable
 parameter_list|()
@@ -7468,7 +7222,6 @@ block|}
 comment|/** As {@link #testTumbleTable()} but on a table where "rowtime" is at    * position 1 not 0. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTumbleTableRowtimeNotFirstColumn
 parameter_list|()
@@ -7496,7 +7249,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testHopTable
 parameter_list|()
@@ -7526,7 +7278,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSessionTable
 parameter_list|()
@@ -7558,7 +7309,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInterval
 parameter_list|()
@@ -7591,7 +7341,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testStream
 parameter_list|()
@@ -7613,7 +7362,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testStreamGroupBy
 parameter_list|()
@@ -7641,7 +7389,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testStreamWindowedAggregation
 parameter_list|()
@@ -7671,7 +7418,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExplainAsXml
 parameter_list|()
@@ -7786,7 +7532,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-412">[CALCITE-412]    * RelFieldTrimmer: when trimming Sort, the collation and trait set don't    * match</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSortWithTrim
 parameter_list|()
@@ -7814,7 +7559,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3183">[CALCITE-3183]    * Trimming method for Filter rel uses wrong traitSet</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFilterAndSortWithTrim
 parameter_list|()
@@ -8086,7 +7830,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRelShuttleForLogicalTableModify
 parameter_list|()
@@ -8206,7 +7949,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOffset0
 parameter_list|()
@@ -8229,7 +7971,6 @@ block|}
 comment|/**    * Test group-by CASE expression involving a non-query IN    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGroupByCaseSubQuery
 parameter_list|()
@@ -8256,7 +7997,6 @@ block|}
 comment|/**    * Test aggregate function on a CASE expression involving a non-query IN    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggCaseSubQuery
 parameter_list|()
@@ -8279,7 +8019,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-753">[CALCITE-753]    * Test aggregate operators do not derive row types with duplicate column    * names</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggNoDuplicateColumnNames
 parameter_list|()
@@ -8307,7 +8046,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggScalarSubQuery
 parameter_list|()
@@ -8330,7 +8068,6 @@ block|}
 comment|/** Test aggregate function on a CASE expression involving IN with a    * sub-query.    *    *<p>Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-551">[CALCITE-551]    * Sub-query inside aggregate function</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggCaseInSubQuery
 parameter_list|()
@@ -8361,7 +8098,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCorrelatedSubQueryInAggregate
 parameter_list|()
@@ -8395,7 +8131,6 @@ block|}
 comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-614">[CALCITE-614]    * IN within CASE within GROUP BY gives AssertionError</a>.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGroupByCaseIn
 parameter_list|()
@@ -8423,7 +8158,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInsert
 parameter_list|()
@@ -8447,7 +8181,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInsertSubset
 parameter_list|()
@@ -8478,7 +8211,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInsertWithCustomInitializerExpressionFactory
 parameter_list|()
@@ -8500,7 +8232,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInsertSubsetWithCustomInitializerExpressionFactory
 parameter_list|()
@@ -8529,7 +8260,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInsertBind
 parameter_list|()
@@ -8553,7 +8283,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInsertBindSubset
 parameter_list|()
@@ -8584,7 +8313,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInsertBindWithCustomInitializerExpressionFactory
 parameter_list|()
@@ -8606,7 +8334,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInsertBindSubsetWithCustomInitializerExpressionFactory
 parameter_list|()
@@ -8635,7 +8362,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInsertSubsetView
 parameter_list|()
@@ -8666,7 +8392,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInsertExtendedColumn
 parameter_list|()
@@ -8692,7 +8417,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInsertBindExtendedColumn
 parameter_list|()
@@ -8718,7 +8442,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInsertExtendedColumnModifiableView
 parameter_list|()
@@ -8750,7 +8473,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInsertBindExtendedColumnModifiableView
 parameter_list|()
@@ -8782,7 +8504,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInsertWithSort
 parameter_list|()
@@ -8806,7 +8527,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInsertWithLimit
 parameter_list|()
@@ -8830,7 +8550,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDelete
 parameter_list|()
@@ -8852,7 +8571,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDeleteWhere
 parameter_list|()
@@ -8874,7 +8592,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDeleteBind
 parameter_list|()
@@ -8896,7 +8613,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDeleteBindExtendedColumn
 parameter_list|()
@@ -8918,7 +8634,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDeleteBindModifiableView
 parameter_list|()
@@ -8946,7 +8661,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDeleteBindExtendedColumnModifiableView
 parameter_list|()
@@ -8976,7 +8690,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUpdate
 parameter_list|()
@@ -8998,7 +8711,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUpdateSubQuery
 parameter_list|()
@@ -9025,7 +8737,6 @@ block|}
 comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3229">[CALCITE-3229]    * UnsupportedOperationException for UPDATE with IN query</a>.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUpdateSubQueryWithIn
 parameter_list|()
@@ -9052,7 +8763,6 @@ block|}
 comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3292">[CALCITE-3292]    * NPE for UPDATE with IN query</a>.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUpdateSubQueryWithIn1
 parameter_list|()
@@ -9079,7 +8789,6 @@ block|}
 comment|/** Similar to {@link #testUpdateSubQueryWithIn()} but with not in instead of in. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUpdateSubQueryWithNotIn
 parameter_list|()
@@ -9105,7 +8814,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUpdateWhere
 parameter_list|()
@@ -9127,7 +8835,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUpdateModifiableView
 parameter_list|()
@@ -9157,7 +8864,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUpdateExtendedColumn
 parameter_list|()
@@ -9183,7 +8889,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUpdateExtendedColumnModifiableView
 parameter_list|()
@@ -9215,7 +8920,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUpdateBind
 parameter_list|()
@@ -9239,7 +8943,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUpdateBind2
 parameter_list|()
@@ -9268,7 +8971,6 @@ literal|"CALCITE-1708"
 argument_list|)
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUpdateBindExtendedColumn
 parameter_list|()
@@ -9297,7 +8999,6 @@ literal|"CALCITE-1708"
 argument_list|)
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUpdateBindExtendedColumnModifiableView
 parameter_list|()
@@ -9326,7 +9027,6 @@ literal|"CALCITE-985"
 argument_list|)
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMerge
 parameter_list|()
@@ -9362,7 +9062,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectView
 parameter_list|()
@@ -9385,7 +9084,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInsertView
 parameter_list|()
@@ -9409,7 +9107,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInsertModifiableView
 parameter_list|()
@@ -9439,7 +9136,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInsertSubsetModifiableView
 parameter_list|()
@@ -9476,7 +9172,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInsertBindModifiableView
 parameter_list|()
@@ -9506,7 +9201,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInsertBindSubsetModifiableView
 parameter_list|()
@@ -9543,7 +9237,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInsertWithCustomColumnResolving
 parameter_list|()
@@ -9565,7 +9258,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInsertWithCustomColumnResolving2
 parameter_list|()
@@ -9589,7 +9281,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInsertViewWithCustomColumnResolving
 parameter_list|()
@@ -9615,7 +9306,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUpdateWithCustomColumnResolving
 parameter_list|()
@@ -9638,7 +9328,6 @@ block|}
 comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2936">[CALCITE-2936]    * Existential sub-query that has aggregate without grouping key    * should be simplified to constant boolean expression</a>.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSimplifyExistsAggregateSubQuery
 parameter_list|()
@@ -9669,7 +9358,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSimplifyNotExistsAggregateSubQuery
 parameter_list|()
@@ -9701,7 +9389,6 @@ block|}
 comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2936">[CALCITE-2936]    * Existential sub-query that has Values with at least 1 tuple    * should be simplified to constant boolean expression</a>.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSimplifyExistsValuesSubQuery
 parameter_list|()
@@ -9732,7 +9419,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSimplifyNotExistsValuesSubQuery
 parameter_list|()
@@ -9764,7 +9450,6 @@ block|}
 comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-695">[CALCITE-695]    * SqlSingleValueAggFunction is created when it may not be needed</a>.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSubQueryAggregateFunctionFollowedBySimpleOperation
 parameter_list|()
@@ -9791,7 +9476,6 @@ block|}
 comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1799">[CALCITE-1799]    * "OR .. IN" sub-query conversion wrong</a>.    *    *<p>The problem is only fixed if you have {@code expand = false}.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSubQueryOr
 parameter_list|()
@@ -9821,7 +9505,6 @@ block|}
 comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-695">[CALCITE-695]    * SqlSingleValueAggFunction is created when it may not be needed</a>.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSubQueryValues
 parameter_list|()
@@ -9848,7 +9531,6 @@ block|}
 comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-695">[CALCITE-695]    * SqlSingleValueAggFunction is created when it may not be needed</a>.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSubQueryLimitOne
 parameter_list|()
@@ -9877,7 +9559,6 @@ block|}
 comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-710">[CALCITE-710]    * When look up sub-queries, perform the same logic as the way when ones were    * registered</a>.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testIdenticalExpressionInSubQuery
 parameter_list|()
@@ -9904,7 +9585,6 @@ block|}
 comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-694">[CALCITE-694]    * Scan HAVING clause for sub-queries and IN-lists</a> relating to IN.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testHavingAggrFunctionIn
 parameter_list|()
@@ -9935,7 +9615,6 @@ block|}
 comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-694">[CALCITE-694]    * Scan HAVING clause for sub-queries and IN-lists</a>, with a sub-query in    * the HAVING clause.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testHavingInSubQueryWithAggrFunction
 parameter_list|()
@@ -9972,7 +9651,6 @@ block|}
 comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-716">[CALCITE-716]    * Scalar sub-query and aggregate function in SELECT or HAVING clause gives    * AssertionError</a>; variant involving HAVING clause.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregateAndScalarSubQueryInHaving
 parameter_list|()
@@ -10001,7 +9679,6 @@ block|}
 comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-716">[CALCITE-716]    * Scalar sub-query and aggregate function in SELECT or HAVING clause gives    * AssertionError</a>; variant involving SELECT clause.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregateAndScalarSubQueryInSelect
 parameter_list|()
@@ -10030,7 +9707,6 @@ block|}
 comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-770">[CALCITE-770]    * window aggregate and ranking functions with grouped aggregates</a>.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWindowAggWithGroupBy
 parameter_list|()
@@ -10057,7 +9733,6 @@ block|}
 comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-847">[CALCITE-847]    * AVG window function in GROUP BY gives AssertionError</a>.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWindowAverageWithGroupBy
 parameter_list|()
@@ -10084,7 +9759,6 @@ block|}
 comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-770">[CALCITE-770]    * variant involving joins</a>.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWindowAggWithGroupByAndJoin
 parameter_list|()
@@ -10115,7 +9789,6 @@ block|}
 comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-770">[CALCITE-770]    * variant involving HAVING clause</a>.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWindowAggWithGroupByAndHaving
 parameter_list|()
@@ -10144,7 +9817,6 @@ block|}
 comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-770">[CALCITE-770]    * variant involving join with sub-query that contains window function and    * GROUP BY</a>.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWindowAggInSubQueryJoin
 parameter_list|()
@@ -10179,7 +9851,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1313">[CALCITE-1313]    * Validator should derive type of expression in ORDER BY</a>.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOrderByOver
 parameter_list|()
@@ -10203,7 +9874,6 @@ block|}
 comment|/**    * Test case (correlated scalar aggregate sub-query) for    *<a href="https://issues.apache.org/jira/browse/CALCITE-714">[CALCITE-714]    * When de-correlating, push join condition into sub-query</a>.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCorrelationScalarAggAndFilter
 parameter_list|()
@@ -10242,7 +9912,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1543">[CALCITE-1543]    * Correlated scalar sub-query with multiple aggregates gives    * AssertionError</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCorrelationMultiScalarAggregate
 parameter_list|()
@@ -10282,7 +9951,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCorrelationScalarAggAndFilterRex
 parameter_list|()
@@ -10321,7 +9989,6 @@ block|}
 comment|/**    * Test case (correlated EXISTS sub-query) for    *<a href="https://issues.apache.org/jira/browse/CALCITE-714">[CALCITE-714]    * When de-correlating, push join condition into sub-query</a>.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCorrelationExistsAndFilter
 parameter_list|()
@@ -10359,7 +10026,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCorrelationExistsAndFilterRex
 parameter_list|()
@@ -10393,7 +10059,6 @@ block|}
 comment|/** A theta join condition, unlike the equi-join condition in    * {@link #testCorrelationExistsAndFilterRex()}, requires a value    * generator. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCorrelationExistsAndFilterThetaRex
 parameter_list|()
@@ -10427,7 +10092,6 @@ block|}
 comment|/**    * Test case (correlated NOT EXISTS sub-query) for    *<a href="https://issues.apache.org/jira/browse/CALCITE-714">[CALCITE-714]    * When de-correlating, push join condition into sub-query</a>.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCorrelationNotExistsAndFilter
 parameter_list|()
@@ -10461,7 +10125,6 @@ block|}
 comment|/**    * Test case for decorrelating sub-query that has aggregate with    * grouping sets.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCorrelationAggregateGroupSets
 parameter_list|()
@@ -10496,7 +10159,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCustomColumnResolving
 parameter_list|()
@@ -10518,7 +10180,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCustomColumnResolving2
 parameter_list|()
@@ -10540,7 +10201,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCustomColumnResolving3
 parameter_list|()
@@ -10562,7 +10222,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCustomColumnResolving4
 parameter_list|()
@@ -10584,7 +10243,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCustomColumnResolving5
 parameter_list|()
@@ -10606,7 +10264,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCustomColumnResolvingWithSelectStar
 parameter_list|()
@@ -10628,7 +10285,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCustomColumnResolvingWithSelectFieldNameDotStar
 parameter_list|()
@@ -10651,7 +10307,6 @@ block|}
 comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1150">[CALCITE-1150]    * Dynamic Table / Dynamic Star support</a>    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectFromDynamicTable
 parameter_list|()
@@ -10682,7 +10337,6 @@ block|}
 comment|/**    * Test case for Dynamic Table / Dynamic Star support    *<a href="https://issues.apache.org/jira/browse/CALCITE-1150">[CALCITE-1150]</a>    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectStarFromDynamicTable
 parameter_list|()
@@ -10713,7 +10367,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2080">[CALCITE-2080]    * Query with NOT IN operator and literal fails throws AssertionError: 'Cast    * for just nullability not allowed'</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNotInWithLiteral
 parameter_list|()
@@ -10750,7 +10403,6 @@ block|}
 comment|/**    * Test case for Dynamic Table / Dynamic Star support    *<a href="https://issues.apache.org/jira/browse/CALCITE-1150">[CALCITE-1150]</a>    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testReferDynamicStarInSelectOB
 parameter_list|()
@@ -10785,7 +10437,6 @@ block|}
 comment|/**    * Test case for Dynamic Table / Dynamic Star support    *<a href="https://issues.apache.org/jira/browse/CALCITE-1150">[CALCITE-1150]</a>    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDynamicStarInTableJoin
 parameter_list|()
@@ -10821,7 +10472,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDynamicNestedColumn
 parameter_list|()
@@ -10856,7 +10506,6 @@ block|}
 comment|/**    * Test case for<a href="https://issues.apache.org/jira/browse/CALCITE-2900">[CALCITE-2900]    * RelStructuredTypeFlattener generates wrong types on nested columns</a>.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNestedColumnType
 parameter_list|()
@@ -10879,7 +10528,6 @@ block|}
 comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2962">[CALCITE-2962]    * RelStructuredTypeFlattener generates wrong types for nested column when    * flattenProjection</a>.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectNestedColumnType
 parameter_list|()
@@ -10929,7 +10577,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNestedStructFieldAccess
 parameter_list|()
@@ -10953,7 +10600,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNestedStructPrimitiveFieldAccess
 parameter_list|()
@@ -10977,7 +10623,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFunctionWithStructInput
 parameter_list|()
@@ -11001,7 +10646,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregateFunctionForStructInput
 parameter_list|()
@@ -11033,7 +10677,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregateFunctionForStructInputByName
 parameter_list|()
@@ -11065,7 +10708,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNestedPrimitiveFieldAccess
 parameter_list|()
@@ -11089,7 +10731,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testArrayElementNestedPrimitive
 parameter_list|()
@@ -11113,7 +10754,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testArrayElementDoublyNestedPrimitive
 parameter_list|()
@@ -11137,7 +10777,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testArrayElementDoublyNestedStruct
 parameter_list|()
@@ -11161,7 +10800,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testArrayElementThreeTimesNestedStruct
 parameter_list|()
@@ -11188,7 +10826,6 @@ block|}
 comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3003">[CALCITE-3003]    * AssertionError when GROUP BY nested field</a>.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGroupByNestedColumn
 parameter_list|()
@@ -11227,7 +10864,6 @@ block|}
 comment|/**    * Similar to {@link #testGroupByNestedColumn()},    * but with grouping sets.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGroupingSetsWithNestedColumn
 parameter_list|()
@@ -11272,7 +10908,6 @@ block|}
 comment|/**    * Similar to {@link #testGroupByNestedColumn()},    * but with cube.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGroupByCubeWithNestedColumn
 parameter_list|()
@@ -11310,7 +10945,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDynamicSchemaUnnest
 parameter_list|()
@@ -11344,7 +10978,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testStarDynamicSchemaUnnest
 parameter_list|()
@@ -11378,7 +11011,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testStarDynamicSchemaUnnest2
 parameter_list|()
@@ -11410,7 +11042,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testStarDynamicSchemaUnnestNestedSubQuery
 parameter_list|()
@@ -11442,7 +11073,6 @@ block|}
 comment|/**    * Test case for Dynamic Table / Dynamic Star support    *<a href="https://issues.apache.org/jira/browse/CALCITE-1150">[CALCITE-1150]</a>    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testReferDynamicStarInSelectWhereGB
 parameter_list|()
@@ -11477,7 +11107,6 @@ block|}
 comment|/**    * Test case for Dynamic Table / Dynamic Star support    *<a href="https://issues.apache.org/jira/browse/CALCITE-1150">[CALCITE-1150]</a>    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDynamicStarInJoinAndSubQ
 parameter_list|()
@@ -11512,7 +11141,6 @@ block|}
 comment|/**    * Test case for Dynamic Table / Dynamic Star support    *<a href="https://issues.apache.org/jira/browse/CALCITE-1150">[CALCITE-1150]</a>    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testStarJoinStaticDynTable
 parameter_list|()
@@ -11545,7 +11173,6 @@ block|}
 comment|/**    * Test case for Dynamic Table / Dynamic Star support    *<a href="https://issues.apache.org/jira/browse/CALCITE-1150">[CALCITE-1150]</a>    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGrpByColFromStarInSubQuery
 parameter_list|()
@@ -11580,7 +11207,6 @@ block|}
 comment|/**    * Test case for Dynamic Table / Dynamic Star support    *<a href="https://issues.apache.org/jira/browse/CALCITE-1150">[CALCITE-1150]</a>    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDynStarInExistSubQ
 parameter_list|()
@@ -11613,7 +11239,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1150">[CALCITE-1150]    * Create the a new DynamicRecordType, avoiding star expansion when working    * with this type</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectDynamicStarOrderBy
 parameter_list|()
@@ -11644,7 +11269,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1321">[CALCITE-1321]    * Configurable IN list size when converting IN clause to join</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInToSemiJoin
 parameter_list|()
@@ -11731,7 +11355,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1944">[CALCITE-1944]    * Window function applied to sub-query with dynamic star gets wrong    * plan</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWindowOnDynamicStar
 parameter_list|()
@@ -11765,7 +11388,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWindowAndGroupByWithDynamicStar
 parameter_list|()
@@ -11826,7 +11448,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2366">[CALCITE-2366]    * Add support for ANY_VALUE aggregate function</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAnyValueAggregateFunctionNoGroupBy
 parameter_list|()
@@ -11850,7 +11471,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAnyValueAggregateFunctionGroupBy
 parameter_list|()
@@ -11874,7 +11494,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSomeAndEveryAggregateFunctions
 parameter_list|()
@@ -11918,7 +11537,6 @@ return|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLarge
 parameter_list|()
@@ -11978,7 +11596,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUnionInFrom
 parameter_list|()
@@ -12006,7 +11623,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMatchRecognize1
 parameter_list|()
@@ -12044,7 +11660,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMatchRecognizeMeasures1
 parameter_list|()
@@ -12091,7 +11706,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1909">[CALCITE-1909]    * Output rowType of Match should include PARTITION BY and ORDER BY    * columns</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMatchRecognizeMeasures2
 parameter_list|()
@@ -12137,7 +11751,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMatchRecognizeMeasures3
 parameter_list|()
@@ -12185,7 +11798,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMatchRecognizePatternSkip1
 parameter_list|()
@@ -12223,7 +11835,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMatchRecognizeSubset1
 parameter_list|()
@@ -12263,7 +11874,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMatchRecognizePrevLast
 parameter_list|()
@@ -12309,7 +11919,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMatchRecognizePrevDown
 parameter_list|()
@@ -12353,7 +11962,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPrevClassifier
 parameter_list|()
@@ -12407,7 +12015,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMatchRecognizeIn
 parameter_list|()
@@ -12446,7 +12053,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2323">[CALCITE-2323]    * Validator should allow alternative nullCollations for ORDER BY in    * OVER</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUserDefinedOrderByOver
 parameter_list|()
@@ -12554,7 +12160,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJsonValueExpressionOperator
 parameter_list|()
@@ -12584,7 +12189,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJsonExists
 parameter_list|()
@@ -12608,7 +12212,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJsonValue
 parameter_list|()
@@ -12632,7 +12235,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJsonQuery
 parameter_list|()
@@ -12656,7 +12258,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJsonType
 parameter_list|()
@@ -12680,7 +12281,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJsonPretty
 parameter_list|()
@@ -12704,7 +12304,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJsonDepth
 parameter_list|()
@@ -12728,7 +12327,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJsonLength
 parameter_list|()
@@ -12752,7 +12350,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJsonKeys
 parameter_list|()
@@ -12776,7 +12373,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJsonArray
 parameter_list|()
@@ -12800,7 +12396,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJsonArrayAgg1
 parameter_list|()
@@ -12824,7 +12419,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJsonArrayAgg2
 parameter_list|()
@@ -12848,7 +12442,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJsonArrayAgg3
 parameter_list|()
@@ -12872,7 +12465,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJsonArrayAgg4
 parameter_list|()
@@ -12896,7 +12488,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJsonObject
 parameter_list|()
@@ -12920,7 +12511,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJsonObjectAgg
 parameter_list|()
@@ -12944,7 +12534,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJsonPredicate
 parameter_list|()
@@ -12988,7 +12577,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWithinGroup1
 parameter_list|()
@@ -13016,7 +12604,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWithinGroup2
 parameter_list|()
@@ -13052,7 +12639,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWithinGroup3
 parameter_list|()
@@ -13080,7 +12666,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOrderByRemoval1
 parameter_list|()
@@ -13106,7 +12691,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOrderByRemoval2
 parameter_list|()
@@ -13132,7 +12716,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOrderByRemoval3
 parameter_list|()
@@ -13159,7 +12742,6 @@ block|}
 comment|/**    * Tests left join lateral with using    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLeftJoinLateral1
 parameter_list|()
@@ -13188,7 +12770,6 @@ block|}
 comment|/**    * Tests left join lateral with natural join    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLeftJoinLateral2
 parameter_list|()
@@ -13215,7 +12796,6 @@ block|}
 comment|/**    * Tests left join lateral with on condition    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLeftJoinLateral3
 parameter_list|()
@@ -13244,7 +12824,6 @@ block|}
 comment|/**    * Tests left join lateral with multiple columns from outer    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLeftJoinLateral4
 parameter_list|()
@@ -13273,7 +12852,6 @@ block|}
 comment|/**    * Tests left join lateral with correlate variable coming    * from one level up join scope    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLeftJoinLateral5
 parameter_list|()
@@ -13308,7 +12886,6 @@ block|}
 comment|/**    * Tests cross join lateral with multiple columns from outer    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCrossJoinLateral1
 parameter_list|()
@@ -13337,7 +12914,6 @@ block|}
 comment|/**    * Tests cross join lateral with correlate variable coming    * from one level up join scope    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCrossJoinLateral2
 parameter_list|()
@@ -13374,7 +12950,6 @@ block|}
 comment|/** Test case for:    *<a href="https://issues.apache.org/jira/browse/CALCITE-3310">[CALCITE-3310]    * Approximate and exact aggregate calls are recognized as the same    * during sql-to-rel conversion.</a>.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testProjectApproximateAndExactAggregates
 parameter_list|()
@@ -13402,7 +12977,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testProjectAggregatesIgnoreNullsAndNot
 parameter_list|()
@@ -13427,7 +13001,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3456">[CALCITE-3456]    * AssertionError throws when aggregation same digest in sub-query in same    * scope</a>.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregateWithSameDigestInSubQueries
 parameter_list|()
@@ -13463,7 +13036,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPushDownJoinConditionWithProjectMerge
 parameter_list|()
@@ -13491,7 +13063,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCoalesceOnNullableField
 parameter_list|()
@@ -13514,7 +13085,6 @@ block|}
 comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3826">[CALCITE-3826]    * UPDATE assigns wrong type to bind variables</a>.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDynamicParamTypesInUpdate
 parameter_list|()

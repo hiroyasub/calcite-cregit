@@ -599,7 +599,6 @@ name|Tag
 argument_list|(
 literal|"slow"
 argument_list|)
-specifier|public
 class|class
 name|LatticeTest
 block|{
@@ -975,7 +974,6 @@ block|}
 comment|/** Tests that it's OK for a lattice to have the same name as a table in the    * schema. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLatticeSql
 parameter_list|()
@@ -1153,7 +1151,6 @@ block|}
 comment|/** Tests some of the properties of the {@link Lattice} data structure. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLattice
 parameter_list|()
@@ -1354,7 +1351,6 @@ block|}
 comment|/** Tests that it's OK for a lattice to have the same name as a table in the    * schema. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLatticeWithSameNameAsTable
 parameter_list|()
@@ -1380,7 +1376,6 @@ block|}
 comment|/** Tests that it's an error to have two lattices with the same name in a    * schema. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTwoLatticesWithSameNameFails
 parameter_list|()
@@ -1401,7 +1396,6 @@ block|}
 comment|/** Tests a lattice whose SQL is invalid. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLatticeInvalidSqlFails
 parameter_list|()
@@ -1427,7 +1421,6 @@ block|}
 comment|/** Tests a lattice whose SQL is invalid because it contains a GROUP BY. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLatticeSqlWithGroupByFails
 parameter_list|()
@@ -1448,7 +1441,6 @@ block|}
 comment|/** Tests a lattice whose SQL is invalid because it contains a ORDER BY. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLatticeSqlWithOrderByFails
 parameter_list|()
@@ -1469,7 +1461,6 @@ block|}
 comment|/** Tests a lattice whose SQL is invalid because it contains a UNION ALL. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLatticeSqlWithUnionFails
 parameter_list|()
@@ -1494,7 +1485,6 @@ block|}
 comment|/** Tests a lattice with valid join SQL. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLatticeSqlWithJoin
 parameter_list|()
@@ -1516,7 +1506,6 @@ block|}
 comment|/** Tests a lattice with invalid SQL (for a lattice). */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLatticeInvalidSql
 parameter_list|()
@@ -1541,7 +1530,6 @@ block|}
 comment|/** Left join is invalid in a lattice. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLatticeInvalidSql2
 parameter_list|()
@@ -1566,7 +1554,6 @@ block|}
 comment|/** Each lattice table must have a parent. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLatticeInvalidSql3
 parameter_list|()
@@ -1591,7 +1578,6 @@ block|}
 comment|/** When a lattice is registered, there is a table with the same name.    * It can be used for explain, but not for queries. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLatticeStarTable
 parameter_list|()
@@ -1670,7 +1656,6 @@ block|}
 comment|/** Tests that a 2-way join query can be mapped 4-way join lattice. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLatticeRecognizeJoin
 parameter_list|()
@@ -1733,7 +1718,6 @@ block|}
 comment|/** Tests an aggregate on a 2-way join query can use an aggregate table. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLatticeRecognizeGroupJoin
 parameter_list|()
@@ -1894,7 +1878,6 @@ block|}
 comment|/** Tests a model with pre-defined tiles. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLatticeWithPreDefinedTiles
 parameter_list|()
@@ -1946,7 +1929,6 @@ block|}
 comment|/** A query that uses a pre-defined aggregate table, at the same    *  granularity but fewer calls to aggregate functions. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLatticeWithPreDefinedTilesFewerMeasures
 parameter_list|()
@@ -1997,7 +1979,6 @@ block|}
 comment|/** Tests a query that uses a pre-defined aggregate table at a lower    * granularity. Includes a measure computed from a grouping column, a measure    * based on COUNT rolled up using SUM, and an expression on a measure. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLatticeWithPreDefinedTilesRollUp
 parameter_list|()
@@ -2063,7 +2044,6 @@ block|}
 comment|/** Tests a model that uses an algorithm to generate an initial set of    * tiles.    *    *<p>Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-428">[CALCITE-428]    * Use optimization algorithm to suggest which tiles of a lattice to    * materialize</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTileAlgorithm
 parameter_list|()
@@ -2094,7 +2074,6 @@ block|}
 comment|/** As {@link #testTileAlgorithm()}, but uses the    * {@link Lattices#CACHED_SQL} statistics provider. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTileAlgorithm2
 parameter_list|()
@@ -2127,7 +2106,6 @@ block|}
 comment|/** As {@link #testTileAlgorithm()}, but uses the    * {@link Lattices#PROFILER} statistics provider. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTileAlgorithm3
 parameter_list|()
@@ -2376,7 +2354,6 @@ block|}
 comment|/** Tests a query that is created within {@link #testTileAlgorithm()}. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJG
 parameter_list|()
@@ -2457,7 +2434,6 @@ block|}
 comment|/** Tests a query that uses no columns from the fact table. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGroupByEmpty
 parameter_list|()
@@ -2484,7 +2460,6 @@ block|}
 comment|/** Calls {@link #testDistinctCount()} followed by    * {@link #testGroupByEmpty()}. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGroupByEmptyWithPrelude
 parameter_list|()
@@ -2499,7 +2474,6 @@ block|}
 comment|/** Tests a query that uses no dimension columns and one measure column. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGroupByEmpty2
 parameter_list|()
@@ -2541,7 +2515,6 @@ block|}
 comment|/** Tests that two queries of the same dimensionality that use different    * measures can use the same materialization. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGroupByEmpty3
 parameter_list|()
@@ -2714,7 +2687,6 @@ block|}
 comment|/** Rolling up SUM. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSum
 parameter_list|()
@@ -2760,7 +2732,6 @@ block|}
 comment|/** Tests a distinct-count query.    *    *<p>We can't just roll up count(distinct ...) as we do count(...), but we    * can still use the aggregate table if we're smart. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDistinctCount
 parameter_list|()
@@ -2801,7 +2772,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDistinctCount2
 parameter_list|()
@@ -2847,7 +2817,6 @@ annotation|@
 name|Disabled
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAllFoodmartQueries
 parameter_list|()
@@ -3047,7 +3016,6 @@ block|}
 comment|/** A tile with no measures should inherit default measure list from the    * lattice. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTileWithNoMeasures
 parameter_list|()
@@ -3101,7 +3069,6 @@ block|}
 comment|/** A lattice with no default measure list should get "count(*)" is its    * default measure. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLatticeWithNoMeasures
 parameter_list|()
@@ -3148,7 +3115,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDimensionIsInvalidColumn
 parameter_list|()
@@ -3174,7 +3140,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMeasureArgIsInvalidColumn
 parameter_list|()
@@ -3209,7 +3174,6 @@ block|}
 comment|/** It is an error for "time_id" to be a measure arg, because is not a    * unique alias. Both "s" and "t" have "time_id". */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMeasureArgIsNotUniqueAlias
 parameter_list|()
@@ -3243,7 +3207,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMeasureAggIsInvalid
 parameter_list|()
@@ -3277,7 +3240,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTwoLattices
 parameter_list|()
@@ -3381,7 +3343,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-787">[CALCITE-787]    * Star table wrongly assigned to materialized view</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOneLatticeOneMV
 parameter_list|()
@@ -3549,7 +3510,6 @@ annotation|@
 name|Disabled
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLatticeWithBadRowCountEstimate
 parameter_list|()
@@ -3595,7 +3555,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSuggester
 parameter_list|()
@@ -3864,7 +3823,6 @@ block|}
 comment|/** Unit test for {@link Lattice#getRowCount(double, List)}. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testColumnCount
 parameter_list|()

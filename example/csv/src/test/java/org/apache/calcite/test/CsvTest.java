@@ -540,7 +540,6 @@ comment|/**  * Unit test of the Calcite adapter for CSV.  */
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|CsvTest
 block|{
@@ -772,7 +771,6 @@ annotation|@
 name|Disabled
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testVanityDriver
 parameter_list|()
@@ -809,7 +807,6 @@ annotation|@
 name|Disabled
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testVanityDriverArgsInUrl
 parameter_list|()
@@ -837,7 +834,6 @@ block|}
 comment|/** Tests an inline schema with a non-existent directory. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testBadDirectory
 parameter_list|()
@@ -937,7 +933,6 @@ block|}
 comment|/**    * Reads from a table.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelect
 parameter_list|()
@@ -957,7 +952,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectSingleProjectGz
 parameter_list|()
@@ -977,7 +971,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectSingleProject
 parameter_list|()
@@ -998,7 +991,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-898">[CALCITE-898]    * Type inference multiplying Java long by SQL INTEGER</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectLongMultiplyInteger
 parameter_list|()
@@ -1101,7 +1093,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCustomTable
 parameter_list|()
@@ -1121,7 +1112,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPushDownProjectDumb
 parameter_list|()
@@ -1159,7 +1149,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPushDownProject
 parameter_list|()
@@ -1198,7 +1187,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPushDownProject2
 parameter_list|()
@@ -1247,7 +1235,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPushDownProjectAggregate
 parameter_list|()
@@ -1290,7 +1277,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPushDownProjectAggregateWithFilter
 parameter_list|()
@@ -1337,7 +1323,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPushDownProjectAggregateNested
 parameter_list|()
@@ -1392,7 +1377,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFilterableSelect
 parameter_list|()
@@ -1412,7 +1396,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFilterableSelectStar
 parameter_list|()
@@ -1433,7 +1416,6 @@ block|}
 comment|/** Filter that can be fully handled by CsvFilterableTable. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFilterableWhere
 parameter_list|()
@@ -1465,7 +1447,6 @@ block|}
 comment|/** Filter that can be partly handled by CsvFilterableTable. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFilterableWhere2
 parameter_list|()
@@ -1499,7 +1480,6 @@ block|}
 comment|/** Filter that can be slightly handled by CsvFilterableTable. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFilterableWhere3
 parameter_list|()
@@ -1533,7 +1513,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2272">[CALCITE-2272]    * Incorrect result for {@code name like '%E%' and city not like '%W%'}</a>.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFilterableWhereWithNot1
 parameter_list|()
@@ -1561,7 +1540,6 @@ block|}
 comment|/** Similar to {@link #testFilterableWhereWithNot1()};    * But use the same column. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFilterableWhereWithNot2
 parameter_list|()
@@ -1590,7 +1568,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJson
 parameter_list|()
@@ -2203,7 +2180,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinOnString
 parameter_list|()
@@ -2231,7 +2207,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWackyColumns
 parameter_list|()
@@ -2288,7 +2263,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1754">[CALCITE-1754]    * In Csv adapter, convert DATE and TIME values to int, and TIMESTAMP values    * to long</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGroupByTimestampAdd
 parameter_list|()
@@ -2364,7 +2338,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUnionGroupByWithoutGroupKey
 parameter_list|()
@@ -2392,7 +2365,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testBoolean
 parameter_list|()
@@ -2415,7 +2387,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testReadme
 parameter_list|()
@@ -2455,7 +2426,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-824">[CALCITE-824]    * Type inference when converting IN clause to semijoin</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInToSemiJoinWithCast
 parameter_list|()
@@ -2556,7 +2526,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1051">[CALCITE-1051]    * Underflow exception due to scaling IN clause literals</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInToSemiJoinWithoutCast
 parameter_list|()
@@ -2667,7 +2636,6 @@ return|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDateType
 parameter_list|()
@@ -2989,7 +2957,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1072">[CALCITE-1072]    * CSV adapter incorrectly parses TIMESTAMP values after noon</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDateType2
 parameter_list|()
@@ -3212,7 +3179,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1673">[CALCITE-1673]    * Query with ORDER BY or GROUP BY on TIMESTAMP column throws    * CompileException</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTimestampGroupBy
 parameter_list|()
@@ -3338,7 +3304,6 @@ block|}
 comment|/** As {@link #testTimestampGroupBy()} but with ORDER BY. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTimestampOrderBy
 parameter_list|()
@@ -3447,7 +3412,6 @@ block|}
 comment|/** As {@link #testTimestampGroupBy()} but with ORDER BY as well as GROUP    * BY. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTimestampGroupByAndOrderBy
 parameter_list|()
@@ -3556,7 +3520,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1031">[CALCITE-1031]    * In prepared statement, CsvScannableTable.scan is called twice</a>. To see    * the bug, place a breakpoint in CsvScannableTable.scan, and note that it is    * called twice. It should only be called once. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPrepared
 parameter_list|()
@@ -3712,7 +3675,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1054">[CALCITE-1054]    * NPE caused by wrong code generation for Timestamp fields</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFilterOnNullableTimestamp
 parameter_list|()
@@ -4032,7 +3994,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1118">[CALCITE-1118]    * NullPointerException in EXTRACT with WHERE ... IN clause if field has null    * value</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFilterOnNullableTimestamp2
 parameter_list|()
@@ -4245,7 +4206,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1427">[CALCITE-1427]    * Code generation incorrect (does not compile) for DATE, TIME and TIMESTAMP    * fields</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNonNullFilterOnDateType
 parameter_list|()
@@ -4543,7 +4503,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1427">[CALCITE-1427]    * Code generation incorrect (does not compile) for DATE, TIME and TIMESTAMP    * fields</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGreaterThanFilterOnDateType
 parameter_list|()

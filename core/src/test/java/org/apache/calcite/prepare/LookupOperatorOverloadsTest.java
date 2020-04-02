@@ -522,7 +522,6 @@ comment|/**  * Test for lookupOperatorOverloads() in {@link CalciteCatalogReader
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|LookupOperatorOverloadsTest
 block|{
@@ -625,7 +624,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testIsUserDefined
 parameter_list|()
@@ -691,7 +689,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testIsTableFunction
 parameter_list|()
@@ -751,7 +748,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testIsSpecific
 parameter_list|()
@@ -809,7 +805,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testIsUserDefinedNotSpecificFunction
 parameter_list|()
@@ -867,7 +862,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLookupCaseSensitively
 parameter_list|()
@@ -882,7 +876,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLookupCaseInSensitively
 parameter_list|()

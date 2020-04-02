@@ -345,7 +345,6 @@ name|Tag
 argument_list|(
 literal|"slow"
 argument_list|)
-specifier|public
 class|class
 name|TpcdsTest
 block|{
@@ -503,7 +502,6 @@ return|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCallCenter
 parameter_list|()
@@ -679,7 +677,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTableCount
 parameter_list|()
@@ -964,7 +961,6 @@ literal|"add tests like this that count each table"
 argument_list|)
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCustomer5
 parameter_list|()
@@ -990,7 +986,6 @@ literal|"throws 'RuntimeException: Cannot convert null to long'"
 argument_list|)
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testQuery01
 parameter_list|()
@@ -1006,7 +1001,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testQuery17Plan
 parameter_list|()
@@ -1097,7 +1091,6 @@ literal|"throws 'RuntimeException: Cannot convert null to long'"
 argument_list|)
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testQuery27
 parameter_list|()
@@ -1118,7 +1111,6 @@ literal|"throws 'RuntimeException: Cannot convert null to long'"
 argument_list|)
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testQuery58
 parameter_list|()
@@ -1144,7 +1136,6 @@ literal|"takes too long to optimize"
 argument_list|)
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testQuery72
 parameter_list|()
@@ -1165,7 +1156,6 @@ literal|"work in progress"
 argument_list|)
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testQuery72Plan
 parameter_list|()
@@ -1202,7 +1192,6 @@ literal|"throws 'java.lang.AssertionError: type mismatch'"
 argument_list|)
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testQuery95
 parameter_list|()
@@ -1479,7 +1468,6 @@ block|}
 comment|/**    * Builder query 27 using {@link RelBuilder}.    *    *<blockquote><pre>    *   select  i_item_id,    *         s_state, grouping(s_state) g_state,    *         avg(ss_quantity) agg1,    *         avg(ss_list_price) agg2,    *         avg(ss_coupon_amt) agg3,    *         avg(ss_sales_price) agg4    * from store_sales, customer_demographics, date_dim, store, item    * where ss_sold_date_sk = d_date_sk and    *        ss_item_sk = i_item_sk and    *        ss_store_sk = s_store_sk and    *        ss_cdemo_sk = cd_demo_sk and    *        cd_gender = 'dist(gender, 1, 1)' and    *        cd_marital_status = 'dist(marital_status, 1, 1)' and    *        cd_education_status = 'dist(education, 1, 1)' and    *        d_year = 1998 and    *        s_state in ('distmember(fips_county,[STATENUMBER.1], 3)',    *              'distmember(fips_county,[STATENUMBER.2], 3)',    *              'distmember(fips_county,[STATENUMBER.3], 3)',    *              'distmember(fips_county,[STATENUMBER.4], 3)',    *              'distmember(fips_county,[STATENUMBER.5], 3)',    *              'distmember(fips_county,[STATENUMBER.6], 3)')    *  group by rollup (i_item_id, s_state)    *  order by i_item_id    *          ,s_state    *  LIMIT 100    *</pre></blockquote>    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testQuery27Builder
 parameter_list|()

@@ -410,7 +410,6 @@ comment|/**  * Unit test for {@link org.apache.calcite.rel.RelCollationTraitDef}
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|CollationConversionTest
 block|{
@@ -472,7 +471,6 @@ argument_list|()
 decl_stmt|;
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCollationConversion
 parameter_list|()

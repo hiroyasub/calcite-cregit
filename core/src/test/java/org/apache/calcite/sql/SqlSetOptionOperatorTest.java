@@ -102,13 +102,11 @@ comment|/**  * Test for {@link SqlSetOption}.  */
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|SqlSetOptionOperatorTest
 block|{
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSqlSetOptionOperatorScopeSet
 parameter_list|()
@@ -153,7 +151,6 @@ return|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSqlSetOptionOperatorSet
 parameter_list|()
@@ -176,7 +173,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSqlSetOptionOperatorScopeReset
 parameter_list|()
@@ -199,7 +195,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSqlSetOptionOperatorReset
 parameter_list|()

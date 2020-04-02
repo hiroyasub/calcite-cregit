@@ -269,7 +269,6 @@ name|ResourceAccessMode
 operator|.
 name|READ
 argument_list|)
-specifier|public
 class|class
 name|BooleanLogicTest
 block|{
@@ -522,7 +521,6 @@ return|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|expressions
 parameter_list|()
@@ -738,7 +736,6 @@ block|}
 comment|/**    * Tests negations ({@code NOT} operator).    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|notExpression
 parameter_list|()

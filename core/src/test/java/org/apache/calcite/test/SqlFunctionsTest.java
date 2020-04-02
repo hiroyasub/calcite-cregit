@@ -588,13 +588,11 @@ comment|/**  * Unit test for the methods in {@link SqlFunctions} that implement 
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|SqlFunctionsTest
 block|{
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCharLength
 parameter_list|()
@@ -615,7 +613,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testToString
 parameter_list|()
@@ -1021,7 +1018,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testConcat
 parameter_list|()
@@ -1095,7 +1091,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPosixRegex
 parameter_list|()
@@ -1341,7 +1336,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRegexpReplace
 parameter_list|()
@@ -1672,7 +1666,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLower
 parameter_list|()
@@ -1693,7 +1686,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFromBase64
 parameter_list|()
@@ -1792,7 +1784,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testToBase64
 parameter_list|()
@@ -1870,7 +1861,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUpper
 parameter_list|()
@@ -1891,7 +1881,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInitcap
 parameter_list|()
@@ -1990,7 +1979,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLesser
 parameter_list|()
@@ -2087,7 +2075,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGreater
 parameter_list|()
@@ -2185,7 +2172,6 @@ block|}
 comment|/** Test for {@link SqlFunctions#rtrim}. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRtrim
 parameter_list|()
@@ -2285,7 +2271,6 @@ block|}
 comment|/** Test for {@link SqlFunctions#ltrim}. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLtrim
 parameter_list|()
@@ -2385,7 +2370,6 @@ block|}
 comment|/** Test for {@link SqlFunctions#trim}. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTrim
 parameter_list|()
@@ -2505,7 +2489,6 @@ return|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAddMonths
 parameter_list|()
@@ -2957,7 +2940,6 @@ return|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFloor
 parameter_list|()
@@ -3156,7 +3138,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCeil
 parameter_list|()
@@ -3367,7 +3348,6 @@ block|}
 comment|/** Unit test for    * {@link Utilities#compare(java.util.List, java.util.List)}. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCompare
 parameter_list|()
@@ -3578,7 +3558,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTruncateLong
 parameter_list|()
@@ -3730,7 +3709,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTruncateInt
 parameter_list|()
@@ -3954,7 +3932,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSTruncateDouble
 parameter_list|()
@@ -4351,7 +4328,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSTruncateLong
 parameter_list|()
@@ -4588,7 +4564,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSTruncateInt
 parameter_list|()
@@ -4825,7 +4800,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSRoundDouble
 parameter_list|()
@@ -5386,7 +5360,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSRoundLong
 parameter_list|()
@@ -5707,7 +5680,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSRoundInt
 parameter_list|()
@@ -6028,7 +6000,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testByteString
 parameter_list|()
@@ -6751,7 +6722,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testEqWithAny
 parameter_list|()
@@ -6935,7 +6905,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNeWithAny
 parameter_list|()
@@ -7119,7 +7088,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLtWithAny
 parameter_list|()
@@ -7334,7 +7302,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLeWithAny
 parameter_list|()
@@ -7705,7 +7672,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGtWithAny
 parameter_list|()
@@ -7920,7 +7886,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGeWithAny
 parameter_list|()
@@ -8291,7 +8256,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPlusAny
 parameter_list|()
@@ -8574,7 +8538,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMinusAny
 parameter_list|()
@@ -8857,7 +8820,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMultiplyAny
 parameter_list|()
@@ -9140,7 +9102,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDivideAny
 parameter_list|()
@@ -9423,7 +9384,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMultiset
 parameter_list|()
@@ -10110,7 +10070,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMd5
 parameter_list|()
@@ -10215,7 +10174,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSha1
 parameter_list|()

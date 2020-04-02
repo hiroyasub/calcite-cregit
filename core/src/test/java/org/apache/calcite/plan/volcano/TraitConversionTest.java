@@ -322,7 +322,6 @@ comment|/**  * Unit test for {@link org.apache.calcite.rel.RelDistributionTraitD
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|TraitConversionTest
 block|{
@@ -374,7 +373,6 @@ argument_list|)
 decl_stmt|;
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTraitConversion
 parameter_list|()

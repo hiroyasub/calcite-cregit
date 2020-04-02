@@ -542,7 +542,6 @@ return|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPrintLimits
 parameter_list|()

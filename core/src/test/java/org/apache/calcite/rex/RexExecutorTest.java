@@ -544,15 +544,9 @@ comment|/**  * Unit test for {@link org.apache.calcite.rex.RexExecutorImpl}.  */
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|RexExecutorTest
 block|{
-specifier|public
-name|RexExecutorTest
-parameter_list|()
-block|{
-block|}
 specifier|protected
 name|void
 name|check
@@ -632,7 +626,6 @@ block|}
 comment|/** Tests an executor that uses variables stored in a {@link DataContext}.    * Can change the value of the variable and execute again. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testVariableExecution
 parameter_list|()
@@ -892,7 +885,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testConstant
 parameter_list|()
@@ -1012,7 +1004,6 @@ block|}
 comment|/** Reduces several expressions to constants. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testConstant2
 parameter_list|()
@@ -1362,7 +1353,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUserFromContext
 parameter_list|()
@@ -1387,7 +1377,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSystemUserFromContext
 parameter_list|()
@@ -1412,7 +1401,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTimestampFromContext
 parameter_list|()
@@ -1589,7 +1577,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSubstring
 parameter_list|()
@@ -1825,7 +1812,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testBinarySubstring
 parameter_list|()
@@ -2066,7 +2052,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDeterministic1
 parameter_list|()
@@ -2134,7 +2119,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDeterministic2
 parameter_list|()
@@ -2200,7 +2184,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDeterministic3
 parameter_list|()
@@ -2330,7 +2313,6 @@ decl_stmt|;
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1009">[CALCITE-1009]    * SelfPopulatingList is not thread-safe</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelfPopulatingList
 parameter_list|()
@@ -2543,7 +2525,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelfPopulatingList30
 parameter_list|()
@@ -2629,7 +2610,6 @@ expr_stmt|;
 block|}
 block|}
 comment|/**    * Context that holds a value for a particular context name.    */
-specifier|public
 specifier|static
 class|class
 name|SingleValueDataContext
@@ -2646,7 +2626,6 @@ specifier|final
 name|Object
 name|value
 decl_stmt|;
-specifier|public
 name|SingleValueDataContext
 parameter_list|(
 name|String

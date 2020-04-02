@@ -256,7 +256,6 @@ comment|/**  * Unit test for {@link SqlPrettyWriter}.  *  *<p>You must provide t
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|SqlPrettyWriterTest
 block|{
@@ -944,7 +943,6 @@ block|}
 comment|// ~ Tests ----------------------------------------------------------------
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDefault
 parameter_list|()
@@ -958,7 +956,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testIndent8
 parameter_list|()
@@ -989,7 +986,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testClausesNotOnNewLine
 parameter_list|()
@@ -1015,7 +1011,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectListItemsOnSeparateLines
 parameter_list|()
@@ -1041,7 +1036,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectListNoExtraIndentFlag
 parameter_list|()
@@ -1077,7 +1071,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFold
 parameter_list|()
@@ -1112,7 +1105,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testChop
 parameter_list|()
@@ -1147,7 +1139,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testChopLeadingComma
 parameter_list|()
@@ -1187,7 +1178,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLeadingComma
 parameter_list|()
@@ -1223,7 +1213,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testClauseEndsLine
 parameter_list|()
@@ -1263,7 +1252,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testClauseEndsLineTall
 parameter_list|()
@@ -1303,7 +1291,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testClauseEndsLineFold
 parameter_list|()
@@ -1344,7 +1331,6 @@ block|}
 comment|/** Tests formatting a query with Looker's preferences. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLooker
 parameter_list|()
@@ -1420,7 +1406,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testKeywordsLowerCase
 parameter_list|()
@@ -1446,7 +1431,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testParenthesizeAllExprs
 parameter_list|()
@@ -1472,7 +1456,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOnlyQuoteIdentifiersWhichNeedIt
 parameter_list|()
@@ -1498,7 +1481,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testBlackSubQueryStyle
 parameter_list|()
@@ -1530,7 +1512,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testBlackSubQueryStyleIndent0
 parameter_list|()
@@ -1565,7 +1546,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testValuesNewline
 parameter_list|()
@@ -1593,7 +1573,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testValuesLeadingCommas
 parameter_list|()
@@ -1631,7 +1610,6 @@ literal|"default SQL parser cannot parse DDL"
 argument_list|)
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExplain
 parameter_list|()
@@ -1647,7 +1625,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCase
 parameter_list|()
@@ -1724,7 +1701,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCase2
 parameter_list|()
@@ -1767,7 +1743,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testBetween
 parameter_list|()
@@ -1790,7 +1765,6 @@ comment|// space
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCast
 parameter_list|()
@@ -1811,7 +1785,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLiteralChain
 parameter_list|()
@@ -1850,7 +1823,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOverlaps
 parameter_list|()
@@ -1885,7 +1857,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUnion
 parameter_list|()
@@ -1917,7 +1888,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMultiset
 parameter_list|()
@@ -1933,7 +1903,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinComma
 parameter_list|()
@@ -1963,7 +1932,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInnerJoin
 parameter_list|()
@@ -1979,7 +1947,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinTall
 parameter_list|()
@@ -2011,7 +1978,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinTallClauseEndsLine
 parameter_list|()
@@ -2048,7 +2014,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinLateralSubQueryTall
 parameter_list|()
@@ -2096,7 +2061,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWhereListItemsOnSeparateLinesOr
 parameter_list|()
@@ -2148,7 +2112,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWhereListItemsOnSeparateLinesAnd
 parameter_list|()
@@ -2201,7 +2164,6 @@ block|}
 comment|/** As {@link #testWhereListItemsOnSeparateLinesAnd()}, but    * with {@link SqlWriterConfig#clauseEndsLine ClauseEndsLine=true}. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWhereListItemsOnSeparateLinesAndNewline
 parameter_list|()
@@ -2258,7 +2220,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUpdate
 parameter_list|()
@@ -2284,7 +2245,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUpdateNoLine
 parameter_list|()
@@ -2322,7 +2282,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUpdateNoLine2
 parameter_list|()

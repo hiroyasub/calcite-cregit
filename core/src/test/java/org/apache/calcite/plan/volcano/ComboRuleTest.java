@@ -376,13 +376,11 @@ comment|/**  * Unit test for {@link VolcanoPlanner}  */
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|ComboRuleTest
 block|{
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCombo
 parameter_list|()

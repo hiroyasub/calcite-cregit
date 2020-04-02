@@ -118,7 +118,6 @@ comment|/**  * Implementation of {@link KafkaRowConverter} for test, both key an
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|KafkaRowConverterTest
 implements|implements

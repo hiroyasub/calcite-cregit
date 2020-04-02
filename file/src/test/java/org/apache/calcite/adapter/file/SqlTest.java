@@ -291,7 +291,6 @@ name|RequiresNetworkExtension
 operator|.
 name|class
 argument_list|)
-specifier|public
 class|class
 name|SqlTest
 block|{
@@ -991,7 +990,6 @@ comment|// tests
 comment|/** Reads from a local file and checks the result. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFileSelect
 parameter_list|()
@@ -1057,7 +1055,6 @@ block|}
 comment|/** Reads from a local file - finds larger table even without&lt;TH&gt;    * elements. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFindBiggerNoTh
 parameter_list|()
@@ -1130,7 +1127,6 @@ block|}
 comment|/** Reads the EMPS table. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSalesEmps
 parameter_list|()
@@ -1170,7 +1166,6 @@ block|}
 comment|/** Reads the DEPTS table. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSalesDepts
 parameter_list|()
@@ -1206,7 +1201,6 @@ block|}
 comment|/** Reads the DEPTS table from the CSV schema. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCsvSalesDepts
 parameter_list|()
@@ -1242,7 +1236,6 @@ block|}
 comment|/** Reads the EMPS table from the CSV schema. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCsvSalesEmps
 parameter_list|()
@@ -1291,7 +1284,6 @@ block|}
 comment|/** Reads the HEADER_ONLY table from the CSV schema. The CSV file has one    * line - the column headers - but no rows of data. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCsvSalesHeaderOnly
 parameter_list|()
@@ -1321,7 +1313,6 @@ block|}
 comment|/** Reads the EMPTY table from the CSV schema. The CSV file has no lines,    * therefore the table has a system-generated column called    * "EmptyFileHasNoColumns". */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCsvSalesEmpty
 parameter_list|()
@@ -1443,7 +1434,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1754">[CALCITE-1754]    * In Csv adapter, convert DATE and TIME values to int, and TIMESTAMP values    * to long</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCsvGroupByTimestampAdd
 parameter_list|()
@@ -1714,7 +1704,6 @@ block|}
 comment|/** Reads the DEPTS table from the JSON schema. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJsonSalesDepts
 parameter_list|()
@@ -1750,7 +1739,6 @@ block|}
 comment|/** Reads the EMPS table from the JSON schema. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJsonSalesEmps
 parameter_list|()
@@ -1799,7 +1787,6 @@ block|}
 comment|/** Reads the EMPTY table from the JSON schema. The JSON file has no lines,    * therefore the table has a system-generated column called    * "EmptyFileHasNoColumns". */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJsonSalesEmpty
 parameter_list|()
@@ -1921,7 +1908,6 @@ block|}
 comment|/** Test returns the result of two json file joins. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJsonJoinOnString
 parameter_list|()
@@ -1966,7 +1952,6 @@ block|}
 comment|/** The folder contains both JSON files and CSV files joins. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJsonWithCsvJoin
 parameter_list|()

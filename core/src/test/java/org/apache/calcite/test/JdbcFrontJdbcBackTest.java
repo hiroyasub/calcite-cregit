@@ -166,13 +166,11 @@ comment|/**  * Tests for a JDBC front-end and JDBC back-end.  *  *<p>The idea is
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|JdbcFrontJdbcBackTest
 block|{
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWhere2
 parameter_list|()
@@ -206,7 +204,6 @@ annotation|@
 name|Disabled
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTables
 parameter_list|()
@@ -316,7 +313,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTablesByType
 parameter_list|()
@@ -478,7 +474,6 @@ end_empty_stmt
 begin_function
 unit|}    @
 name|Test
-specifier|public
 name|void
 name|testColumns
 parameter_list|()
@@ -595,7 +590,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testEmpty
 parameter_list|()
@@ -671,7 +665,6 @@ end_function
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCase
 parameter_list|()

@@ -58,7 +58,6 @@ comment|/**  * Test that runs every Quidem file in the "core" module as a test. 
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|CoreQuidemTest
 extends|extends

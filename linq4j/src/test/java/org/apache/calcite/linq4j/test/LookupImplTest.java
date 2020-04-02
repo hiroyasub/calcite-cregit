@@ -114,7 +114,6 @@ comment|/**  * Unit tests for LookupImpl.java  *  */
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|LookupImplTest
 block|{
@@ -159,7 +158,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPut
 parameter_list|()
@@ -218,7 +216,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testContainsValue
 parameter_list|()

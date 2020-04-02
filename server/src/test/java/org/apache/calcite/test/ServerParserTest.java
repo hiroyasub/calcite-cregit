@@ -84,7 +84,6 @@ comment|/**  * Tests SQL parser extensions for DDL.  *  *<p>Remaining tasks:  *<
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|ServerParserTest
 extends|extends
@@ -105,7 +104,6 @@ return|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCreateSchema
 parameter_list|()
@@ -123,7 +121,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCreateOrReplaceSchema
 parameter_list|()
@@ -141,7 +138,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCreateForeignSchema
 parameter_list|()
@@ -195,7 +191,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCreateForeignSchema2
 parameter_list|()
@@ -233,7 +228,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCreateTypeWithAttributeList
 parameter_list|()
@@ -251,7 +245,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCreateTypeWithBaseType
 parameter_list|()
@@ -269,7 +262,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCreateOrReplaceTypeWith
 parameter_list|()
@@ -287,7 +279,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCreateTable
 parameter_list|()
@@ -305,7 +296,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCreateTableAsSelect
 parameter_list|()
@@ -333,7 +323,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCreateTableIfNotExistsAsSelect
 parameter_list|()
@@ -361,7 +350,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCreateTableAsValues
 parameter_list|()
@@ -389,7 +377,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCreateTableAsSelectColumnList
 parameter_list|()
@@ -417,7 +404,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCreateTableCheck
 parameter_list|()
@@ -443,7 +429,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCreateTableVirtualColumn
 parameter_list|()
@@ -489,7 +474,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCreateTableWithUDT
 parameter_list|()
@@ -531,7 +515,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCreateView
 parameter_list|()
@@ -569,7 +552,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCreateMaterializedView
 parameter_list|()
@@ -611,7 +593,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCreateMaterializedView2
 parameter_list|()
@@ -655,7 +636,6 @@ comment|// "OR REPLACE" is allowed by the parser, but the validator will give an
 comment|// error later
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCreateOrReplaceMaterializedView
 parameter_list|()
@@ -691,7 +671,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCreateOrReplaceFunction
 parameter_list|()
@@ -739,7 +718,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCreateOrReplaceFunction2
 parameter_list|()
@@ -773,7 +751,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDropSchema
 parameter_list|()
@@ -791,7 +768,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDropSchemaIfExists
 parameter_list|()
@@ -809,7 +785,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDropForeignSchema
 parameter_list|()
@@ -827,7 +802,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDropType
 parameter_list|()
@@ -845,7 +819,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDropTypeIfExists
 parameter_list|()
@@ -863,7 +836,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDropTypeTrailingIfExistsFails
 parameter_list|()
@@ -881,7 +853,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDropTable
 parameter_list|()
@@ -899,7 +870,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDropTableComposite
 parameter_list|()
@@ -917,7 +887,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDropTableIfExists
 parameter_list|()
@@ -935,7 +904,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDropView
 parameter_list|()
@@ -953,7 +921,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDropMaterializedView
 parameter_list|()
@@ -971,7 +938,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDropMaterializedViewIfExists
 parameter_list|()
@@ -989,7 +955,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDropFunction
 parameter_list|()
@@ -1019,7 +984,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDropFunctionIfExists
 parameter_list|()

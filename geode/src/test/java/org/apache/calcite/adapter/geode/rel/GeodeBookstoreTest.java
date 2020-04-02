@@ -162,7 +162,6 @@ comment|/**  * Tests using {@code Bookshop} schema.  */
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|GeodeBookstoreTest
 extends|extends
@@ -359,7 +358,6 @@ return|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelect
 parameter_list|()
@@ -380,7 +378,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWhereEqual
 parameter_list|()
@@ -434,7 +431,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWhereWithAnd
 parameter_list|()
@@ -487,7 +483,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWhereWithOr
 parameter_list|()
@@ -547,7 +542,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWhereWithAndOr
 parameter_list|()
@@ -607,7 +601,6 @@ block|}
 comment|// TODO: Not supported YET
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWhereWithOrAnd
 parameter_list|()
@@ -642,7 +635,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testProjectionsAndWhereGreatThan
 parameter_list|()
@@ -693,7 +685,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLimit
 parameter_list|()
@@ -732,7 +723,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSortWithProjection
 parameter_list|()
@@ -773,7 +763,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSortWithProjectionAndLimit
 parameter_list|()
@@ -814,7 +803,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSortBy2Columns
 parameter_list|()
@@ -864,7 +852,6 @@ comment|//
 comment|/**    * OQL Error: Query contains group by columns not present in projected fields    * Solution: Automatically expand the projections to include all missing GROUP By columns.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAddMissingGroupByColumnToProjectedFields
 parameter_list|()
@@ -908,7 +895,6 @@ block|}
 comment|/**    * When the group by columns match the projected fields, the optimizers removes the projected    * relation.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMissingProjectRelationOnGroupByColumnMatchingProjectedFields
 parameter_list|()
@@ -946,7 +932,6 @@ block|}
 comment|/**    * When the group by columns match the projected fields, the optimizers removes the projected    * relation.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMissingProjectRelationOnGroupByColumnMatchingProjectedFields2
 parameter_list|()
@@ -985,7 +970,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCount
 parameter_list|()
@@ -1025,7 +1009,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCountStar
 parameter_list|()
@@ -1060,7 +1043,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCountInGroupBy
 parameter_list|()
@@ -1099,7 +1081,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMaxMinSumAvg
 parameter_list|()
@@ -1140,7 +1121,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMaxMinSumAvgInGroupBy
 parameter_list|()
@@ -1187,7 +1167,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGroupBy
 parameter_list|()
@@ -1230,7 +1209,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectWithNestedPdx
 parameter_list|()
@@ -1260,7 +1238,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectWithNestedPdx2
 parameter_list|()
@@ -1303,7 +1280,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectWithNestedPdxFieldAccess
 parameter_list|()
@@ -1342,7 +1318,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectWithNullFieldValue
 parameter_list|()
@@ -1383,7 +1358,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFilterWithNestedField
 parameter_list|()
@@ -1440,7 +1414,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSqlSimple
 parameter_list|()
@@ -1471,7 +1444,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSqlSingleNumberWhereFilter
 parameter_list|()
@@ -1504,7 +1476,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSqlDistinctSort
 parameter_list|()
@@ -1525,7 +1496,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSqlDistinctSort2
 parameter_list|()
@@ -1548,7 +1518,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSqlDistinctSort3
 parameter_list|()
@@ -1567,7 +1536,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSqlLimit2
 parameter_list|()
@@ -1586,7 +1554,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSqlDisjunction
 parameter_list|()
@@ -1624,7 +1591,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSqlConjunction
 parameter_list|()
@@ -1657,7 +1623,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSqlBookMasterWhere
 parameter_list|()
@@ -1690,7 +1655,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSqlBookMasterCount
 parameter_list|()
@@ -1709,7 +1673,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInSetFilterWithNestedStringField
 parameter_list|()

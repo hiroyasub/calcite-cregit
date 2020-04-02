@@ -348,7 +348,6 @@ comment|/**  * Unit tests for server and DDL.  */
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|ServerTest
 block|{
@@ -419,7 +418,6 @@ return|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testStatement
 parameter_list|()
@@ -509,7 +507,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCreateSchema
 parameter_list|()
@@ -651,7 +648,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCreateType
 parameter_list|()
@@ -916,7 +912,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDropType
 parameter_list|()
@@ -984,7 +979,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3046">[CALCITE-3046]    * CompileException when inserting casted value of composited user defined type    * into table</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCreateTable
 parameter_list|()
@@ -1280,7 +1274,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCreateFunction
 parameter_list|()
@@ -1365,7 +1358,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDropFunction
 parameter_list|()
@@ -1618,7 +1610,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInsertCastedValueOfCompositeUdt
 parameter_list|()
@@ -1707,7 +1698,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInsertCreateNewCompositeUdt
 parameter_list|()
@@ -1851,7 +1841,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testStoredGeneratedColumn
 parameter_list|()
@@ -2522,7 +2511,6 @@ literal|"not working yet"
 argument_list|)
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testStoredGeneratedColumn2
 parameter_list|()
@@ -2652,7 +2640,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testVirtualColumn
 parameter_list|()
@@ -2878,7 +2865,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testVirtualColumnWithFunctions
 parameter_list|()

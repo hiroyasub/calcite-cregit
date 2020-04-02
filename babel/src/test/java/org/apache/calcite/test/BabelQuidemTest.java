@@ -366,7 +366,6 @@ comment|/**  * Unit tests for the Babel SQL parser.  */
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|BabelQuidemTest
 extends|extends

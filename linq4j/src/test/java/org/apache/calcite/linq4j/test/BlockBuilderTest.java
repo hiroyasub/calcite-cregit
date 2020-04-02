@@ -272,7 +272,6 @@ comment|/**  * Tests BlockBuilder.  */
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|BlockBuilderTest
 block|{
@@ -297,7 +296,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testReuseExpressionsFromUpperLevel
 parameter_list|()
@@ -408,7 +406,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTestCustomOptimizer
 parameter_list|()
@@ -696,7 +693,6 @@ return|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRenameVariablesWithEmptyInitializer
 parameter_list|()
@@ -741,7 +737,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRenameVariablesWithInitializer
 parameter_list|()
@@ -797,7 +792,6 @@ block|}
 comment|/**    * CALCITE-2413: RexToLixTranslator does not generate correct declaration of Methods with    * generic return types    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|genericMethodCall
 parameter_list|()
@@ -877,7 +871,6 @@ block|}
 comment|/** CALCITE-2611: unknown on one side of an or may lead to uncompilable code */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOptimizeBoxedFalseEqNull
 parameter_list|()

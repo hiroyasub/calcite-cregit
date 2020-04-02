@@ -176,7 +176,6 @@ decl_stmt|;
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2677">[CALCITE-2677]    * Struct types with one field are not mapped correctly to Java Classes</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGetJavaClassWithOneFieldStructDataTypeV1
 parameter_list|()
@@ -211,7 +210,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2677">[CALCITE-2677]    * Struct types with one field are not mapped correctly to Java Classes</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGetJavaClassWithOneFieldStructDataTypeV2
 parameter_list|()
@@ -259,7 +257,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2677">[CALCITE-2677]    * Struct types with one field are not mapped correctly to Java Classes</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGetJavaClassWithTwoFieldsStructDataType
 parameter_list|()
@@ -294,7 +291,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2677">[CALCITE-2677]    * Struct types with one field are not mapped correctly to Java Classes</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGetJavaClassWithTwoFieldsStructDataTypeV2
 parameter_list|()
@@ -353,7 +349,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3029">[CALCITE-3029]    * Java-oriented field type is wrongly forced to be NOT NULL after being converted to    * SQL-oriented</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFieldNullabilityAfterConvertingToSqlStructType
 parameter_list|()

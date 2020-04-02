@@ -410,14 +410,12 @@ comment|/** Various automated checks on the documentation. */
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|DocumentationTest
 block|{
 comment|/** Generates a copy of {@code reference.md} with the current set of key    * words. Fails if the copy is different from the original. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGenerateKeyWords
 parameter_list|()
@@ -706,7 +704,6 @@ block|}
 comment|/** Tests that every function in {@link SqlStdOperatorTable} is documented in    * reference.md. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAllFunctionsAreDocumented
 parameter_list|()

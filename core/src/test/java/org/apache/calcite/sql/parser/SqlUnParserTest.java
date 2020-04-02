@@ -22,7 +22,6 @@ comment|/**  * Extension to {@link SqlParserTest} which ensures that every expre
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|SqlUnParserTest
 extends|extends

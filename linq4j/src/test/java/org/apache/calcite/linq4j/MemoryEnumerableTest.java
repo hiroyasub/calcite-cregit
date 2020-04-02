@@ -114,13 +114,11 @@ comment|/** Tests for {@link org.apache.calcite.linq4j.MemoryEnumerable} */
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|MemoryEnumerableTest
 block|{
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testHistoryAndFuture
 parameter_list|()
@@ -383,7 +381,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testModularInteger
 parameter_list|()

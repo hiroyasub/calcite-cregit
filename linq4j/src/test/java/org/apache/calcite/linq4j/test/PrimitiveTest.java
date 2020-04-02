@@ -176,13 +176,11 @@ comment|/**  * Unit test for {@link Primitive}.  */
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|PrimitiveTest
 block|{
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testIsAssignableFrom
 parameter_list|()
@@ -724,7 +722,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testBox
 parameter_list|()
@@ -798,7 +795,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOfBox
 parameter_list|()
@@ -859,7 +855,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOfBoxOr
 parameter_list|()
@@ -921,7 +916,6 @@ block|}
 comment|/** Tests the {@link Primitive#number(Number)} method. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNumber
 parameter_list|()
@@ -1088,7 +1082,6 @@ block|}
 comment|/** Test for    * {@link Primitive#send(org.apache.calcite.linq4j.tree.Primitive.Source, org.apache.calcite.linq4j.tree.Primitive.Sink)}. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSendSource
 parameter_list|()
@@ -1562,7 +1555,6 @@ block|}
 comment|/** Test for {@link Primitive#permute(Object, int[])}. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPermute
 parameter_list|()
@@ -1650,7 +1642,6 @@ block|}
 comment|/** Test for {@link Primitive#arrayToString(Object)}. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testArrayToString
 parameter_list|()
@@ -1693,7 +1684,6 @@ block|}
 comment|/** Test for {@link Primitive#sortArray(Object)}. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testArraySort
 parameter_list|()

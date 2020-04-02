@@ -92,14 +92,12 @@ comment|/**  * ReflectVisitorTest tests {@link ReflectUtil#invokeVisitor} and  *
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|ReflectVisitorTest
 block|{
 comment|/**    * Tests CarelessNumberNegater.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCarelessNegater
 parameter_list|()
@@ -139,7 +137,6 @@ block|}
 comment|/**    * Tests CarefulNumberNegater.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCarefulNegater
 parameter_list|()
@@ -210,7 +207,6 @@ block|}
 comment|/**    * Tests CluelessNumberNegater.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCluelessNegater
 parameter_list|()
@@ -278,7 +274,6 @@ block|}
 comment|/**    * Tests for ambiguity detection in method lookup.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAmbiguity
 parameter_list|()
@@ -338,7 +333,6 @@ block|}
 comment|/**    * Tests that ambiguity detection in method lookup does not kick in when a    * better match is available.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNonAmbiguity
 parameter_list|()

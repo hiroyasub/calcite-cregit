@@ -30,7 +30,6 @@ import|;
 end_import
 
 begin_class
-specifier|public
 class|class
 name|RexCallNormalizationTest
 extends|extends
@@ -38,7 +37,6 @@ name|RexProgramTestBase
 block|{
 annotation|@
 name|Test
-specifier|public
 name|void
 name|digestIsNormalized
 parameter_list|()
@@ -113,7 +111,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|skipNormalizationWorks
 parameter_list|()
@@ -170,7 +167,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|skipNormalizeWorks
 parameter_list|()
@@ -200,7 +196,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|reversibleSameArgOpsNormalizedToLess
 parameter_list|()
@@ -264,7 +259,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|reversibleDifferentArgTypesShouldNotBeShuffled
 parameter_list|()
@@ -328,7 +322,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|reversibleDifferentNullabilityArgsAreNormalized
 parameter_list|()
@@ -392,7 +385,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|symmetricalDifferentArgOps
 parameter_list|()
@@ -459,7 +451,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|reversibleDifferentArgOps
 parameter_list|()

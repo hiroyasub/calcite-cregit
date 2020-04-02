@@ -2158,7 +2158,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPercentageOriginalRowsTableOnly
 parameter_list|()
@@ -2173,7 +2172,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPercentageOriginalRowsAgg
 parameter_list|()
@@ -2190,7 +2188,6 @@ annotation|@
 name|Disabled
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPercentageOriginalRowsOneFilter
 parameter_list|()
@@ -2207,7 +2204,6 @@ annotation|@
 name|Disabled
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPercentageOriginalRowsTwoFilters
 parameter_list|()
@@ -2228,7 +2224,6 @@ annotation|@
 name|Disabled
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPercentageOriginalRowsRedundantFilter
 parameter_list|()
@@ -2247,7 +2242,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPercentageOriginalRowsJoin
 parameter_list|()
@@ -2264,7 +2258,6 @@ annotation|@
 name|Disabled
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPercentageOriginalRowsJoinTwoFilters
 parameter_list|()
@@ -2285,7 +2278,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPercentageOriginalRowsUnionNoFilter
 parameter_list|()
@@ -2302,7 +2294,6 @@ annotation|@
 name|Disabled
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPercentageOriginalRowsUnionLittleFilter
 parameter_list|()
@@ -2335,7 +2326,6 @@ annotation|@
 name|Disabled
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPercentageOriginalRowsUnionBigFilter
 parameter_list|()
@@ -2734,7 +2724,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testColumnOriginsTableOnly
 parameter_list|()
@@ -2753,7 +2742,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testColumnOriginsExpression
 parameter_list|()
@@ -2772,7 +2760,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testColumnOriginsDyadicExpression
 parameter_list|()
@@ -2795,7 +2782,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testColumnOriginsConstant
 parameter_list|()
@@ -2808,7 +2794,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testColumnOriginsFilter
 parameter_list|()
@@ -2827,7 +2812,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testColumnOriginsJoinLeft
 parameter_list|()
@@ -2846,7 +2830,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testColumnOriginsJoinRight
 parameter_list|()
@@ -2865,7 +2848,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testColumnOriginsJoinOuter
 parameter_list|()
@@ -2886,7 +2868,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testColumnOriginsJoinFullOuter
 parameter_list|()
@@ -2907,7 +2888,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testColumnOriginsAggKey
 parameter_list|()
@@ -2926,7 +2906,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testColumnOriginsAggReduced
 parameter_list|()
@@ -2939,7 +2918,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testColumnOriginsAggCountNullable
 parameter_list|()
@@ -2958,7 +2936,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testColumnOriginsAggCountStar
 parameter_list|()
@@ -2971,7 +2948,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testColumnOriginsValues
 parameter_list|()
@@ -2984,7 +2960,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testColumnOriginsUnion
 parameter_list|()
@@ -3007,7 +2982,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testColumnOriginsSelfUnion
 parameter_list|()
@@ -3268,7 +3242,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRowCountEmp
 parameter_list|()
@@ -3295,7 +3268,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRowCountDept
 parameter_list|()
@@ -3322,7 +3294,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRowCountValues
 parameter_list|()
@@ -3347,7 +3318,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRowCountCartesian
 parameter_list|()
@@ -3376,7 +3346,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRowCountJoin
 parameter_list|()
@@ -3409,7 +3378,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRowCountJoinFinite
 parameter_list|()
@@ -3443,7 +3411,6 @@ comment|// 4 * 14
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRowCountJoinEmptyFinite
 parameter_list|()
@@ -3474,7 +3441,6 @@ comment|// 0 * 4
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRowCountLeftJoinEmptyFinite
 parameter_list|()
@@ -3505,7 +3471,6 @@ comment|// 0 * 4
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRowCountRightJoinEmptyFinite
 parameter_list|()
@@ -3536,7 +3501,6 @@ comment|// 1 * 4
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRowCountJoinFiniteEmpty
 parameter_list|()
@@ -3567,7 +3531,6 @@ comment|// 7 * 0
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRowCountJoinEmptyEmpty
 parameter_list|()
@@ -3598,7 +3561,6 @@ comment|// 0 * 0
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRowCountUnion
 parameter_list|()
@@ -3631,7 +3593,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRowCountUnionOnFinite
 parameter_list|()
@@ -3662,7 +3623,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRowCountIntersectOnFinite
 parameter_list|()
@@ -3698,7 +3658,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRowCountMinusOnFinite
 parameter_list|()
@@ -3727,7 +3686,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRowCountFilter
 parameter_list|()
@@ -3756,7 +3714,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRowCountFilterOnFinite
 parameter_list|()
@@ -3785,7 +3742,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRowCountFilterFalse
 parameter_list|()
@@ -3810,7 +3766,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRowCountSort
 parameter_list|()
@@ -3837,7 +3792,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRowCountExchange
 parameter_list|()
@@ -3900,7 +3854,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRowCountTableModify
 parameter_list|()
@@ -3925,7 +3878,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRowCountSortHighLimit
 parameter_list|()
@@ -3950,7 +3902,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRowCountSortHighOffset
 parameter_list|()
@@ -3977,7 +3928,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRowCountSortHighOffsetLimit
 parameter_list|()
@@ -4002,7 +3952,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRowCountSortLimit
 parameter_list|()
@@ -4027,7 +3976,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRowCountSortLimit0
 parameter_list|()
@@ -4052,7 +4000,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRowCountSortLimitOffset
 parameter_list|()
@@ -4078,7 +4025,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRowCountSortLimitOffsetOnFinite
 parameter_list|()
@@ -4105,7 +4051,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRowCountAggregate
 parameter_list|()
@@ -4132,7 +4077,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRowCountAggregateGroupingSets
 parameter_list|()
@@ -4162,7 +4106,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRowCountAggregateGroupingSetsOneEmpty
 parameter_list|()
@@ -4191,7 +4134,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRowCountAggregateEmptyKey
 parameter_list|()
@@ -4216,7 +4158,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRowCountAggregateConstantKey
 parameter_list|()
@@ -4243,7 +4184,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRowCountAggregateConstantKeys
 parameter_list|()
@@ -4268,7 +4208,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRowCountFilterAggregateEmptyKey
 parameter_list|()
@@ -4293,7 +4232,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRowCountAggregateEmptyKeyOnEmptyTable
 parameter_list|()
@@ -4376,7 +4314,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectivityIsNotNullFilter
 parameter_list|()
@@ -4391,7 +4328,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectivityIsNotNullFilterOnNotNullColumn
 parameter_list|()
@@ -4406,7 +4342,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectivityComparisonFilter
 parameter_list|()
@@ -4421,7 +4356,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectivityAndFilter
 parameter_list|()
@@ -4436,7 +4370,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectivityOrFilter
 parameter_list|()
@@ -4451,7 +4384,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectivityJoin
 parameter_list|()
@@ -4516,7 +4448,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectivityRedundantFilter
 parameter_list|()
@@ -4539,7 +4470,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectivitySort
 parameter_list|()
@@ -4564,7 +4494,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectivityUnion
 parameter_list|()
@@ -4591,7 +4520,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectivityAgg
 parameter_list|()
@@ -4619,7 +4547,6 @@ block|}
 comment|/** Checks that we can cache a metadata request that includes a null    * argument. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectivityAggCached
 parameter_list|()
@@ -4709,7 +4636,6 @@ literal|"slow"
 argument_list|)
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMetadataHandlerCacheLimit
 parameter_list|()
@@ -4841,7 +4767,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDistinctRowCountTable
 parameter_list|()
@@ -4913,7 +4838,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDistinctRowCountTableEmptyKey
 parameter_list|()
@@ -5291,7 +5215,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-509">[CALCITE-509]    * "RelMdColumnUniqueness uses ImmutableBitSet.Builder twice, gets    * NullPointerException"</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinUniqueKeys
 parameter_list|()
@@ -5309,7 +5232,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCorrelateUniqueKeys
 parameter_list|()
@@ -5474,7 +5396,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGroupByEmptyUniqueKeys
 parameter_list|()
@@ -5497,7 +5418,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGroupByEmptyHavingUniqueKeys
 parameter_list|()
@@ -5520,7 +5440,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFullOuterJoinUniqueness1
 parameter_list|()
@@ -5610,7 +5529,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testColumnUniquenessForFilterWithConstantColumns
 parameter_list|()
@@ -5757,7 +5675,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testColumnUniquenessForUnionWithConstantColumns
 parameter_list|()
@@ -5839,7 +5756,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testColumnUniquenessForIntersectWithConstantColumns
 parameter_list|()
@@ -5927,7 +5843,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testColumnUniquenessForMinusWithConstantColumns
 parameter_list|()
@@ -6037,7 +5952,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testColumnUniquenessForSortWithConstantColumns
 parameter_list|()
@@ -6123,7 +6037,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testColumnUniquenessForJoinWithConstantColumns
 parameter_list|()
@@ -6285,7 +6198,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testColumnUniquenessForAggregateWithConstantColumns
 parameter_list|()
@@ -6350,7 +6262,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testColumnUniquenessForExchangeWithConstantColumns
 parameter_list|()
@@ -6485,7 +6396,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testColumnUniquenessForCorrelateWithConstantColumns
 parameter_list|()
@@ -6731,7 +6641,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGroupBy
 parameter_list|()
@@ -6756,7 +6665,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUnion
 parameter_list|()
@@ -6785,7 +6693,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSingleKeyTableScanUniqueKeys
 parameter_list|()
@@ -6822,7 +6729,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCompositeKeysTableScanUniqueKeys
 parameter_list|()
@@ -6962,7 +6868,6 @@ return|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|calcColumnsAreUniqueSimpleCalc
 parameter_list|()
@@ -6988,7 +6893,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|calcColumnsAreUniqueCalcWithFirstConstant
 parameter_list|()
@@ -7014,7 +6918,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|calcMultipleColumnsAreUniqueCalc
 parameter_list|()
@@ -7052,7 +6955,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|calcMultipleColumnsAreUniqueCalc2
 parameter_list|()
@@ -7090,7 +6992,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|calcMultipleColumnsAreUniqueCalc3
 parameter_list|()
@@ -7160,7 +7061,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|calcColumnsAreNonUniqueCalc
 parameter_list|()
@@ -7260,7 +7160,6 @@ return|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testBrokenCustomProviderWithMetadataFactory
 parameter_list|()
@@ -7428,7 +7327,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testBrokenCustomProviderWithMetadataQuery
 parameter_list|()
@@ -7687,7 +7585,6 @@ return|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCustomProviderWithRelMetadataFactory
 parameter_list|()
@@ -8232,7 +8129,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCustomProviderWithRelMetadataQuery
 parameter_list|()
@@ -8763,7 +8659,6 @@ block|}
 comment|/** Unit test for    * {@link org.apache.calcite.rel.metadata.RelMdCollation#project}    * and other helper functions for deducing collations. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCollation
 parameter_list|()
@@ -9627,7 +9522,6 @@ block|}
 comment|/** Unit test for    * {@link org.apache.calcite.rel.metadata.RelMdColumnUniqueness#areColumnsUnique}    * applied to {@link Values}. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testColumnUniquenessForValues
 parameter_list|()
@@ -10157,7 +10051,6 @@ block|}
 comment|/** Unit test for    * {@link org.apache.calcite.rel.metadata.RelMetadataQuery#getAverageColumnSizes(org.apache.calcite.rel.RelNode)},    * {@link org.apache.calcite.rel.metadata.RelMetadataQuery#getAverageRowSize(org.apache.calcite.rel.RelNode)}. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAverageRowSize
 parameter_list|()
@@ -11337,7 +11230,6 @@ block|}
 comment|/** Unit test for    * {@link org.apache.calcite.rel.metadata.RelMdPredicates#getPredicates(Join, RelMetadataQuery)}. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPredicates
 parameter_list|()
@@ -12194,7 +12086,6 @@ block|}
 comment|/**    * Unit test for    * {@link org.apache.calcite.rel.metadata.RelMdPredicates#getPredicates(Aggregate, RelMetadataQuery)}.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPullUpPredicatesFromAggregation
 parameter_list|()
@@ -12267,7 +12158,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1960">[CALCITE-1960]    * RelMdPredicates.getPredicates is slow if there are many equivalent    * columns</a>. There are much less duplicates after    *<a href="https://issues.apache.org/jira/browse/CALCITE-2205">[CALCITE-2205]</a>.    * Since this is a performance problem, the test result does not    * change, but takes over 15 minutes before the fix and 6 seconds after. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPullUpPredicatesForExprsItr
 parameter_list|()
@@ -12382,7 +12272,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPullUpPredicatesOnConstant
 parameter_list|()
@@ -12445,7 +12334,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPullUpPredicatesOnNullableConstant
 parameter_list|()
@@ -12507,7 +12395,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPullUpPredicatesFromUnion0
 parameter_list|()
@@ -12559,7 +12446,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPullUpPredicatesFromUnion1
 parameter_list|()
@@ -12611,7 +12497,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPullUpPredicatesFromUnion2
 parameter_list|()
@@ -12663,7 +12548,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPullUpPredicatesFromIntersect0
 parameter_list|()
@@ -12715,7 +12599,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPullUpPredicatesFromIntersect1
 parameter_list|()
@@ -12767,7 +12650,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPullUpPredicatesFromIntersect2
 parameter_list|()
@@ -12819,7 +12701,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPullUpPredicatesFromIntersect3
 parameter_list|()
@@ -12871,7 +12752,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPullUpPredicatesFromMinus
 parameter_list|()
@@ -12923,7 +12803,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDistributionSimple
 parameter_list|()
@@ -12973,7 +12852,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDistributionHash
 parameter_list|()
@@ -13051,7 +12929,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDistributionHashEmpty
 parameter_list|()
@@ -13130,7 +13007,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDistributionSingleton
 parameter_list|()
@@ -13201,7 +13077,6 @@ block|}
 comment|/** Unit test for {@link RelMdUtil#linear(int, int, int, double, double)}. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLinear
 parameter_list|()
@@ -13348,7 +13223,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExpressionLineageStar
 parameter_list|()
@@ -13486,7 +13360,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExpressionLineageTwoColumns
 parameter_list|()
@@ -13711,7 +13584,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExpressionLineageTwoColumnsSwapped
 parameter_list|()
@@ -13936,7 +13808,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExpressionLineageCombineTwoColumns
 parameter_list|()
@@ -14169,7 +14040,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExpressionLineageInnerJoinLeft
 parameter_list|()
@@ -14288,7 +14158,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExpressionLineageInnerJoinRight
 parameter_list|()
@@ -14416,7 +14285,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExpressionLineageLeftJoinLeft
 parameter_list|()
@@ -14535,7 +14403,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExpressionLineageRightJoinRight
 parameter_list|()
@@ -14663,7 +14530,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExpressionLineageSelfJoin
 parameter_list|()
@@ -14961,7 +14827,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExpressionLineageOuterJoin
 parameter_list|()
@@ -15033,7 +14898,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExpressionLineageFilter
 parameter_list|()
@@ -15180,7 +15044,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExpressionLineageAggregateGroupColumn
 parameter_list|()
@@ -15329,7 +15192,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExpressionLineageAggregateAggColumn
 parameter_list|()
@@ -15401,7 +15263,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExpressionLineageUnion
 parameter_list|()
@@ -15598,7 +15459,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExpressionLineageMultiUnion
 parameter_list|()
@@ -15878,7 +15738,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExpressionLineageValues
 parameter_list|()
@@ -15948,7 +15807,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAllPredicates
 parameter_list|()
@@ -16559,7 +16417,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAllPredicatesAggregate1
 parameter_list|()
@@ -16733,7 +16590,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAllPredicatesAggregate2
 parameter_list|()
@@ -16909,7 +16765,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAllPredicatesAggregate3
 parameter_list|()
@@ -16966,7 +16821,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAllPredicatesAndTablesJoin
 parameter_list|()
@@ -17088,7 +16942,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAllPredicatesAndTableUnion
 parameter_list|()
@@ -17204,7 +17057,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTableReferenceForIntersect
 parameter_list|()
@@ -17332,7 +17184,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTableReferenceForMinus
 parameter_list|()
@@ -17401,7 +17252,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAllPredicatesCrossJoinMultiTable
 parameter_list|()
@@ -17499,7 +17349,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTableReferencesJoinUnknownNode
 parameter_list|()
@@ -17620,7 +17469,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAllPredicatesUnionMultiTable
 parameter_list|()
@@ -17719,7 +17567,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTableReferencesUnionUnknownNode
 parameter_list|()
@@ -17961,7 +17808,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNodeTypeCountEmp
 parameter_list|()
@@ -18023,7 +17869,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNodeTypeCountDept
 parameter_list|()
@@ -18085,7 +17930,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNodeTypeCountValues
 parameter_list|()
@@ -18147,7 +17991,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNodeTypeCountCartesian
 parameter_list|()
@@ -18220,7 +18063,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNodeTypeCountJoin
 parameter_list|()
@@ -18295,7 +18137,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNodeTypeCountTableModify
 parameter_list|()
@@ -18368,7 +18209,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNodeTypeCountExchange
 parameter_list|()
@@ -18583,7 +18423,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNodeTypeCountSample
 parameter_list|()
@@ -18667,7 +18506,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNodeTypeCountJoinFinite
 parameter_list|()
@@ -18755,7 +18593,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNodeTypeCountJoinEmptyFinite
 parameter_list|()
@@ -18843,7 +18680,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNodeTypeCountLeftJoinEmptyFinite
 parameter_list|()
@@ -18931,7 +18767,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNodeTypeCountRightJoinEmptyFinite
 parameter_list|()
@@ -19019,7 +18854,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNodeTypeCountJoinFiniteEmpty
 parameter_list|()
@@ -19107,7 +18941,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNodeTypeCountJoinEmptyEmpty
 parameter_list|()
@@ -19195,7 +19028,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNodeTypeCountUnion
 parameter_list|()
@@ -19272,7 +19104,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNodeTypeCountUnionOnFinite
 parameter_list|()
@@ -19360,7 +19191,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNodeTypeCountMinusOnFinite
 parameter_list|()
@@ -19448,7 +19278,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNodeTypeCountFilter
 parameter_list|()
@@ -19521,7 +19350,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNodeTypeCountSort
 parameter_list|()
@@ -19594,7 +19422,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNodeTypeCountSortLimit
 parameter_list|()
@@ -19667,7 +19494,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNodeTypeCountSortLimitOffset
 parameter_list|()
@@ -19740,7 +19566,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNodeTypeCountSortLimitOffsetOnFinite
 parameter_list|()
@@ -19815,7 +19640,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNodeTypeCountAggregate
 parameter_list|()
@@ -19888,7 +19712,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNodeTypeCountAggregateGroupingSets
 parameter_list|()
@@ -19963,7 +19786,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNodeTypeCountAggregateEmptyKeyOnEmptyTable
 parameter_list|()
@@ -20047,7 +19869,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNodeTypeCountFilterAggregateEmptyKey
 parameter_list|()
@@ -20173,7 +19994,6 @@ decl_stmt|;
 comment|/** Tests calling {@link RelMetadataQuery#getTableOrigin} for    * an aggregate with no columns. Previously threw. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testEmptyAggregateTableOrigin
 parameter_list|()
@@ -20255,7 +20075,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGetPredicatesForJoin
 parameter_list|()
@@ -20427,7 +20246,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGetPredicatesForFilter
 parameter_list|()

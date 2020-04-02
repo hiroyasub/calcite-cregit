@@ -52,7 +52,6 @@ comment|/**  * Test cases for implicit type coercion converter. see {@link TypeC
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|TypeCoercionConverterTest
 extends|extends
@@ -103,7 +102,6 @@ block|}
 comment|/** Test case for {@link TypeCoercion#commonTypeForBinaryComparison}. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testBinaryComparison
 parameter_list|()
@@ -138,7 +136,6 @@ block|}
 comment|/** Test cases for {@link TypeCoercion#inOperationCoercion}. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInOperation
 parameter_list|()
@@ -160,7 +157,6 @@ block|}
 comment|/** Test cases for    * {@link org.apache.calcite.sql.validate.implicit.TypeCoercionImpl#booleanEquality}. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testBooleanEquality
 parameter_list|()
@@ -191,7 +187,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCaseWhen
 parameter_list|()
@@ -204,7 +199,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testBuiltinFunctionCoercion
 parameter_list|()
@@ -217,7 +211,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testStarImplicitTypeCoercion
 parameter_list|()
@@ -230,7 +223,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSetOperation
 parameter_list|()
@@ -259,7 +251,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInsertQuerySourceCoercion
 parameter_list|()
@@ -280,7 +271,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUpdateQuerySourceCoercion
 parameter_list|()

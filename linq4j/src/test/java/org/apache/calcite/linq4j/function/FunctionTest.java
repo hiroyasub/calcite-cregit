@@ -146,14 +146,12 @@ comment|/**  * Test for {@link Functions}.  */
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|FunctionTest
 block|{
 comment|/** Unit test for {@link Functions#filter}. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFilter
 parameter_list|()
@@ -296,7 +294,6 @@ block|}
 comment|/** Unit test for {@link Functions#exists}. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExists
 parameter_list|()
@@ -381,7 +378,6 @@ block|}
 comment|/** Unit test for {@link Functions#all}. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAll
 parameter_list|()
@@ -498,7 +494,6 @@ block|}
 comment|/** Unit test for {@link Functions#generate}. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGenerate
 parameter_list|()

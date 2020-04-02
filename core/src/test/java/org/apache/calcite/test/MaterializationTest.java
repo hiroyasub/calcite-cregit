@@ -850,7 +850,6 @@ comment|/**  * Unit test for the materialized view rewrite mechanism. Each test 
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|MaterializationTest
 block|{
@@ -1092,7 +1091,6 @@ return|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testScan
 parameter_list|()
@@ -1192,7 +1190,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFilter
 parameter_list|()
@@ -1232,7 +1229,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFilterToProject0
 parameter_list|()
@@ -1275,7 +1271,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFilterToProject1
 parameter_list|()
@@ -1318,7 +1313,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFilterQueryOnProjectView
 parameter_list|()
@@ -1683,7 +1677,6 @@ block|}
 comment|/** Runs the same test as {@link #testFilterQueryOnProjectView()} but more    * concisely. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFilterQueryOnProjectView0
 parameter_list|()
@@ -1702,7 +1695,6 @@ block|}
 comment|/** As {@link #testFilterQueryOnProjectView()} but with extra column in    * materialized view. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFilterQueryOnProjectView1
 parameter_list|()
@@ -1721,7 +1713,6 @@ block|}
 comment|/** As {@link #testFilterQueryOnProjectView()} but with extra column in both    * materialized view and query. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFilterQueryOnProjectView2
 parameter_list|()
@@ -1739,7 +1730,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFilterQueryOnProjectView3
 parameter_list|()
@@ -1758,7 +1748,6 @@ block|}
 comment|/** As {@link #testFilterQueryOnProjectView3()} but materialized view cannot    * be used because it does not contain required expression. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFilterQueryOnProjectView4
 parameter_list|()
@@ -1777,7 +1766,6 @@ block|}
 comment|/** As {@link #testFilterQueryOnProjectView3()} but also contains an    * expression column. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFilterQueryOnProjectView5
 parameter_list|()
@@ -1809,7 +1797,6 @@ block|}
 comment|/** Cannot materialize because "name" is not projected in the MV. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFilterQueryOnProjectView6
 parameter_list|()
@@ -1828,7 +1815,6 @@ block|}
 comment|/** As {@link #testFilterQueryOnProjectView3()} but also contains an    * expression column. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFilterQueryOnProjectView7
 parameter_list|()
@@ -1847,7 +1833,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-988">[CALCITE-988]    * FilterToProjectUnifyRule.invert(MutableRel, MutableRel, MutableProject)    * works incorrectly</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFilterQueryOnProjectView8
 parameter_list|()
@@ -2017,7 +2002,6 @@ literal|"slow"
 argument_list|)
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFilterQueryOnFilterView
 parameter_list|()
@@ -2036,7 +2020,6 @@ block|}
 comment|/** As {@link #testFilterQueryOnFilterView()} but condition is stronger in    * query. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFilterQueryOnFilterView2
 parameter_list|()
@@ -2071,7 +2054,6 @@ block|}
 comment|/** As {@link #testFilterQueryOnFilterView()} but condition is weaker in    * view. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFilterQueryOnFilterView3
 parameter_list|()
@@ -2121,7 +2103,6 @@ block|}
 comment|/** As {@link #testFilterQueryOnFilterView()} but condition is stronger in    * query. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFilterQueryOnFilterView4
 parameter_list|()
@@ -2140,7 +2121,6 @@ block|}
 comment|/** As {@link #testFilterQueryOnFilterView()} but condition is stronger in    * query and columns selected are subset of columns in materialized view. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFilterQueryOnFilterView5
 parameter_list|()
@@ -2159,7 +2139,6 @@ block|}
 comment|/** As {@link #testFilterQueryOnFilterView()} but condition is stronger in    * query and columns selected are subset of columns in materialized view. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFilterQueryOnFilterView6
 parameter_list|()
@@ -2198,7 +2177,6 @@ block|}
 comment|/** As {@link #testFilterQueryOnFilterView()} but condition is stronger in    * query and columns selected are subset of columns in materialized view.    * Condition here is complex. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFilterQueryOnFilterView7
 parameter_list|()
@@ -2241,7 +2219,6 @@ block|}
 comment|/** As {@link #testFilterQueryOnFilterView()} but condition is stronger in    * query. However, columns selected are not present in columns of materialized    * view, Hence should not use materialized view. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFilterQueryOnFilterView8
 parameter_list|()
@@ -2260,7 +2237,6 @@ block|}
 comment|/** As {@link #testFilterQueryOnFilterView()} but condition is weaker in    * query. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFilterQueryOnFilterView9
 parameter_list|()
@@ -2281,7 +2257,6 @@ block|}
 comment|/** As {@link #testFilterQueryOnFilterView()} but condition currently    * has unsupported type being checked on query. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFilterQueryOnFilterView10
 parameter_list|()
@@ -2304,7 +2279,6 @@ block|}
 comment|/** As {@link #testFilterQueryOnFilterView()} but condition is weaker in    * query and columns selected are subset of columns in materialized view.    * Condition here is complex. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFilterQueryOnFilterView11
 parameter_list|()
@@ -2327,7 +2301,6 @@ block|}
 comment|/** As {@link #testFilterQueryOnFilterView()} but condition of    * query is stronger but is on the column not present in MV (salary).    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFilterQueryOnFilterView12
 parameter_list|()
@@ -2346,7 +2319,6 @@ block|}
 comment|/** As {@link #testFilterQueryOnFilterView()} but condition is weaker in    * query and columns selected are subset of columns in materialized view.    * Condition here is complex. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFilterQueryOnFilterView13
 parameter_list|()
@@ -2371,7 +2343,6 @@ block|}
 comment|/** As {@link #testFilterQueryOnFilterView7()} but columns in materialized    * view are a permutation of columns in the query. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFilterQueryOnFilterView14
 parameter_list|()
@@ -2410,7 +2381,6 @@ block|}
 comment|/** As {@link #testFilterQueryOnFilterView13()} but using alias    * and condition of query is stronger. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAlias
 parameter_list|()
@@ -2435,7 +2405,6 @@ block|}
 comment|/** Aggregation query at same level of aggregation as aggregation    * materialization. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregate0
 parameter_list|()
@@ -2454,7 +2423,6 @@ block|}
 comment|/**    * Aggregation query at same level of aggregation as aggregation    * materialization but with different row types. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregate1
 parameter_list|()
@@ -2472,7 +2440,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregate2
 parameter_list|()
@@ -2490,7 +2457,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregate3
 parameter_list|()
@@ -2551,7 +2517,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregate4
 parameter_list|()
@@ -2598,7 +2563,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregate5
 parameter_list|()
@@ -2646,7 +2610,6 @@ block|}
 comment|/**    * Matching failed because the filtering condition under Aggregate    * references columns for aggregation.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregate6
 parameter_list|()
@@ -2701,7 +2664,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregate7
 parameter_list|()
@@ -2768,7 +2730,6 @@ block|}
 comment|/**    * There will be a compensating Project added after matching of the Aggregate.    * This rule targets to test if the Calc can be handled.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCompensatingCalcWithAggregate0
 parameter_list|()
@@ -2822,7 +2783,6 @@ block|}
 comment|/**    * There will be a compensating Project + Filter added after matching of the Aggregate.    * This rule targets to test if the Calc can be handled.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCompensatingCalcWithAggregate1
 parameter_list|()
@@ -2878,7 +2838,6 @@ block|}
 comment|/**    * There will be a compensating Project + Filter added after matching of the Aggregate.    * This rule targets to test if the Calc can be handled.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCompensatingCalcWithAggregate2
 parameter_list|()
@@ -2936,7 +2895,6 @@ block|}
 comment|/** Aggregation query at same level of aggregation as aggregation    * materialization with grouping sets. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregateGroupSets1
 parameter_list|()
@@ -2977,7 +2935,6 @@ block|}
 comment|/** Aggregation query with different grouping sets, should not    * do materialization. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregateGroupSets2
 parameter_list|()
@@ -3018,7 +2975,6 @@ block|}
 comment|/** Aggregation query at coarser level of aggregation than aggregation    * materialization. Requires an additional aggregate to roll up. Note that    * COUNT is rolled up using SUM0. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregateRollUp
 parameter_list|()
@@ -3070,7 +3026,6 @@ block|}
 comment|/** Aggregation query with groupSets at coarser level of aggregation than    * aggregation materialization. Requires an additional aggregate to roll up.    * Note that COUNT is rolled up using SUM0. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregateGroupSetsRollUp
 parameter_list|()
@@ -3129,7 +3084,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregateGroupSetsRollUp2
 parameter_list|()
@@ -3189,7 +3143,6 @@ block|}
 comment|/** Aggregation materialization with a project. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregateProject
 parameter_list|()
@@ -3249,7 +3202,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3087">[CALCITE-3087]    * AggregateOnProjectToAggregateUnifyRule ignores Project incorrectly when its    * Mapping breaks ordering</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregateOnProject1
 parameter_list|()
@@ -3289,7 +3241,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregateOnProject2
 parameter_list|()
@@ -3348,7 +3299,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregateOnProject3
 parameter_list|()
@@ -3405,7 +3355,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregateOnProject4
 parameter_list|()
@@ -3465,7 +3414,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3448">[CALCITE-3448]    * AggregateOnCalcToAggregateUnifyRule ignores Project incorrectly when    * there's missing grouping or mapping breaks ordering</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregateOnProject5
 parameter_list|()
@@ -3496,7 +3444,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregateOnProjectAndFilter
 parameter_list|()
@@ -3543,7 +3490,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testProjectOnProject
 parameter_list|()
@@ -3588,7 +3534,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPermutationError
 parameter_list|()
@@ -3633,7 +3578,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinOnLeftProjectToJoin
 parameter_list|()
@@ -3702,7 +3646,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinOnRightProjectToJoin
 parameter_list|()
@@ -3771,7 +3714,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinOnProjectsToJoin
 parameter_list|()
@@ -3840,7 +3782,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinOnCalcToJoin0
 parameter_list|()
@@ -3887,7 +3828,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinOnCalcToJoin1
 parameter_list|()
@@ -3934,7 +3874,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinOnCalcToJoin2
 parameter_list|()
@@ -3983,7 +3922,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinOnCalcToJoin3
 parameter_list|()
@@ -4033,7 +3971,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinOnCalcToJoin4
 parameter_list|()
@@ -4088,7 +4025,6 @@ literal|"slow"
 argument_list|)
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSwapJoin
 parameter_list|()
@@ -4140,7 +4076,6 @@ annotation|@
 name|Disabled
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOrderByQueryOnProjectView
 parameter_list|()
@@ -4160,7 +4095,6 @@ annotation|@
 name|Disabled
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOrderByQueryOnOrderByView
 parameter_list|()
@@ -4180,7 +4114,6 @@ annotation|@
 name|Disabled
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDifferentColumnNames
 parameter_list|()
@@ -4190,7 +4123,6 @@ annotation|@
 name|Disabled
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDifferentType
 parameter_list|()
@@ -4200,7 +4132,6 @@ annotation|@
 name|Disabled
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPartialUnion
 parameter_list|()
@@ -4210,7 +4141,6 @@ annotation|@
 name|Disabled
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNonDisjointUnion
 parameter_list|()
@@ -4220,7 +4150,6 @@ annotation|@
 name|Disabled
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMaterializationReferencesTableInOtherSchema
 parameter_list|()
@@ -4229,7 +4158,6 @@ block|}
 comment|/** Unit test for logic functions    * {@link org.apache.calcite.plan.SubstitutionVisitor#mayBeSatisfiable} and    * {@link RexUtil#simplify}. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSatisfiable
 parameter_list|()
@@ -4868,7 +4796,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSplitFilter
 parameter_list|()
@@ -5558,7 +5485,6 @@ annotation|@
 name|Disabled
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFilterGroupQueryOnStar
 parameter_list|()
@@ -5632,7 +5558,6 @@ annotation|@
 name|Disabled
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testQueryOnStar
 parameter_list|()
@@ -5675,7 +5600,6 @@ annotation|@
 name|Disabled
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinOnUnionMaterialization
 parameter_list|()
@@ -5702,7 +5626,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinMaterialization
 parameter_list|()
@@ -5730,7 +5653,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-891">[CALCITE-891]    * TableScan without Project cannot be substituted by any projected    * materialization</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinMaterialization2
 parameter_list|()
@@ -5765,7 +5687,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinMaterialization3
 parameter_list|()
@@ -5798,7 +5719,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUnionAll
 parameter_list|()
@@ -5840,7 +5760,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregateMaterializationNoAggregateFuncs1
 parameter_list|()
@@ -5863,7 +5782,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregateMaterializationNoAggregateFuncs2
 parameter_list|()
@@ -5888,7 +5806,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregateMaterializationNoAggregateFuncs3
 parameter_list|()
@@ -5906,7 +5823,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregateMaterializationNoAggregateFuncs4
 parameter_list|()
@@ -5961,7 +5877,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregateMaterializationNoAggregateFuncs5
 parameter_list|()
@@ -6003,7 +5918,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregateMaterializationNoAggregateFuncs6
 parameter_list|()
@@ -6062,7 +5976,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregateMaterializationNoAggregateFuncs7
 parameter_list|()
@@ -6104,7 +6017,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregateMaterializationNoAggregateFuncs8
 parameter_list|()
@@ -6122,7 +6034,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregateMaterializationNoAggregateFuncs9
 parameter_list|()
@@ -6144,7 +6055,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregateMaterializationAggregateFuncs1
 parameter_list|()
@@ -6171,7 +6081,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregateMaterializationAggregateFuncs2
 parameter_list|()
@@ -6200,7 +6109,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregateMaterializationAggregateFuncs3
 parameter_list|()
@@ -6231,7 +6139,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregateMaterializationAggregateFuncs4
 parameter_list|()
@@ -6264,7 +6171,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregateMaterializationAggregateFuncs5
 parameter_list|()
@@ -6301,7 +6207,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregateMaterializationAggregateFuncs6
 parameter_list|()
@@ -6323,7 +6228,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregateMaterializationAggregateFuncs7
 parameter_list|()
@@ -6362,7 +6266,6 @@ annotation|@
 name|Disabled
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregateMaterializationAggregateFuncs8
 parameter_list|()
@@ -6386,7 +6289,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregateMaterializationAggregateFuncs9
 parameter_list|()
@@ -6434,7 +6336,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregateMaterializationAggregateFuncs10
 parameter_list|()
@@ -6482,7 +6383,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregateMaterializationAggregateFuncs11
 parameter_list|()
@@ -6528,7 +6428,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregateMaterializationAggregateFuncs12
 parameter_list|()
@@ -6576,7 +6475,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregateMaterializationAggregateFuncs13
 parameter_list|()
@@ -6622,7 +6520,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregateMaterializationAggregateFuncs14
 parameter_list|()
@@ -6670,7 +6567,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregateMaterializationAggregateFuncs15
 parameter_list|()
@@ -6714,7 +6610,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregateMaterializationAggregateFuncs16
 parameter_list|()
@@ -6736,7 +6631,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregateMaterializationAggregateFuncs17
 parameter_list|()
@@ -6791,7 +6685,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregateMaterializationAggregateFuncs18
 parameter_list|()
@@ -6813,7 +6706,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregateMaterializationAggregateFuncs19
 parameter_list|()
@@ -6835,7 +6727,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinAggregateMaterializationNoAggregateFuncs1
 parameter_list|()
@@ -6870,7 +6761,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinAggregateMaterializationNoAggregateFuncs2
 parameter_list|()
@@ -6905,7 +6795,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinAggregateMaterializationNoAggregateFuncs3
 parameter_list|()
@@ -6932,7 +6821,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinAggregateMaterializationNoAggregateFuncs4
 parameter_list|()
@@ -6967,7 +6855,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinAggregateMaterializationNoAggregateFuncs5
 parameter_list|()
@@ -7022,7 +6909,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinAggregateMaterializationNoAggregateFuncs6
 parameter_list|()
@@ -7082,7 +6968,6 @@ literal|"slow"
 argument_list|)
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinAggregateMaterializationNoAggregateFuncs7
 parameter_list|()
@@ -7160,7 +7045,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinAggregateMaterializationNoAggregateFuncs8
 parameter_list|()
@@ -7216,7 +7100,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinAggregateMaterializationNoAggregateFuncs9
 parameter_list|()
@@ -7299,7 +7182,6 @@ literal|"slow"
 argument_list|)
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinAggregateMaterializationNoAggregateFuncs10
 parameter_list|()
@@ -7374,7 +7256,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinAggregateMaterializationAggregateFuncs1
 parameter_list|()
@@ -7422,7 +7303,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinAggregateMaterializationAggregateFuncs2
 parameter_list|()
@@ -7473,7 +7353,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinAggregateMaterializationAggregateFuncs3
 parameter_list|()
@@ -7525,7 +7404,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinAggregateMaterializationAggregateFuncs4
 parameter_list|()
@@ -7580,7 +7458,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinAggregateMaterializationAggregateFuncs5
 parameter_list|()
@@ -7641,7 +7518,6 @@ annotation|@
 name|Disabled
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinAggregateMaterializationAggregateFuncs6
 parameter_list|()
@@ -7693,7 +7569,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinAggregateMaterializationAggregateFuncs7
 parameter_list|()
@@ -7760,7 +7635,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinAggregateMaterializationAggregateFuncs8
 parameter_list|()
@@ -7827,7 +7701,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinAggregateMaterializationAggregateFuncs9
 parameter_list|()
@@ -7888,7 +7761,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinAggregateMaterializationAggregateFuncs10
 parameter_list|()
@@ -7939,7 +7811,6 @@ literal|"slow"
 argument_list|)
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinAggregateMaterializationAggregateFuncs11
 parameter_list|()
@@ -8016,7 +7887,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinAggregateMaterializationAggregateFuncs12
 parameter_list|()
@@ -8076,7 +7946,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinAggregateMaterializationAggregateFuncs13
 parameter_list|()
@@ -8120,7 +7989,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinAggregateMaterializationAggregateFuncs14
 parameter_list|()
@@ -8154,7 +8022,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinMaterialization4
 parameter_list|()
@@ -8185,7 +8052,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinMaterialization5
 parameter_list|()
@@ -8216,7 +8082,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinMaterialization6
 parameter_list|()
@@ -8249,7 +8114,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinMaterialization7
 parameter_list|()
@@ -8292,7 +8156,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinMaterialization8
 parameter_list|()
@@ -8331,7 +8194,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinMaterialization9
 parameter_list|()
@@ -8366,7 +8228,6 @@ literal|"slow"
 argument_list|)
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinMaterialization10
 parameter_list|()
@@ -8409,7 +8270,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinMaterialization11
 parameter_list|()
@@ -8441,7 +8301,6 @@ literal|"slow"
 argument_list|)
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinMaterialization12
 parameter_list|()
@@ -8473,7 +8332,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinMaterializationUKFK1
 parameter_list|()
@@ -8506,7 +8364,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinMaterializationUKFK2
 parameter_list|()
@@ -8541,7 +8398,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinMaterializationUKFK3
 parameter_list|()
@@ -8569,7 +8425,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinMaterializationUKFK4
 parameter_list|()
@@ -8601,7 +8456,6 @@ literal|"slow"
 argument_list|)
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinMaterializationUKFK5
 parameter_list|()
@@ -8641,7 +8495,6 @@ literal|"slow"
 argument_list|)
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinMaterializationUKFK6
 parameter_list|()
@@ -8678,7 +8531,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinMaterializationUKFK7
 parameter_list|()
@@ -8708,7 +8560,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinMaterializationUKFK8
 parameter_list|()
@@ -8743,7 +8594,6 @@ literal|"slow"
 argument_list|)
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinMaterializationUKFK9
 parameter_list|()
@@ -8776,7 +8626,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregateOnJoinKeys
 parameter_list|()
@@ -8813,7 +8662,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregateOnJoinKeys2
 parameter_list|()
@@ -8850,7 +8698,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testViewMaterialization
 parameter_list|()
@@ -8896,7 +8743,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSubQuery
 parameter_list|()
@@ -8943,7 +8789,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTableModify
 parameter_list|()
@@ -9103,7 +8948,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-761">[CALCITE-761]    * Pre-populated materializations</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPrePopulated
 parameter_list|()
@@ -9227,7 +9071,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testViewSchemaPath
 parameter_list|()
@@ -9392,7 +9235,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSingleMaterializationMultiUsage
 parameter_list|()
@@ -9436,7 +9278,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMultiMaterializationMultiUsage
 parameter_list|()
@@ -9517,7 +9358,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMaterializationOnJoinQuery
 parameter_list|()
@@ -9595,7 +9435,6 @@ literal|"Creating mv for depts considering all its column throws exception"
 argument_list|)
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMultiMaterializationOnJoinQuery
 parameter_list|()
@@ -9679,7 +9518,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregateMaterializationOnCountDistinctQuery1
 parameter_list|()
@@ -9718,7 +9556,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregateMaterializationOnCountDistinctQuery2
 parameter_list|()
@@ -9757,7 +9594,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregateMaterializationOnCountDistinctQuery3
 parameter_list|()
@@ -9798,7 +9634,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregateMaterializationOnCountDistinctQuery4
 parameter_list|()
@@ -9839,7 +9674,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMaterializationSubstitution
 parameter_list|()
@@ -10098,7 +9932,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMaterializationSubstitution2
 parameter_list|()
@@ -10459,7 +10292,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMaterializationAfterTrimingOfUnusedFields
 parameter_list|()
@@ -10496,7 +10328,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUnionAllToUnionAll
 parameter_list|()
@@ -10532,7 +10363,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUnionDistinctToUnionDistinct
 parameter_list|()
@@ -10568,7 +10398,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUnionDistinctToUnionAll
 parameter_list|()
@@ -10604,7 +10433,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUnionOnCalcsToUnion
 parameter_list|()
@@ -10662,7 +10490,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testIntersectOnCalcsToIntersect
 parameter_list|()
@@ -10725,7 +10552,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testIntersectToIntersect0
 parameter_list|()
@@ -10772,7 +10598,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testIntersectToIntersect1
 parameter_list|()
@@ -10819,7 +10644,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testIntersectToCalcOnIntersect
 parameter_list|()

@@ -244,7 +244,6 @@ comment|/**  * Tests for the {@code org.apache.calcite.adapter.jdbc} package.  *
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|JdbcAdapterTest
 block|{
@@ -262,7 +261,6 @@ decl_stmt|;
 comment|/** VALUES is not pushed down, currently. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testValuesPlan
 parameter_list|()
@@ -346,7 +344,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUnionPlan
 parameter_list|()
@@ -413,7 +410,6 @@ block|}
 comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3115">[CALCITE-3115]    * Cannot add JdbcRules which have different JdbcConvention    * to same VolcanoPlanner's RuleSet.</a>*/
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUnionPlan2
 parameter_list|()
@@ -494,7 +490,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFilterUnionPlan
 parameter_list|()
@@ -557,7 +552,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInPlan
 parameter_list|()
@@ -631,7 +625,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testEquiJoinPlan
 parameter_list|()
@@ -707,7 +700,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPushDownSort
 parameter_list|()
@@ -770,7 +762,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3751">[CALCITE-3751]    * JDBC adapter wrongly pushes ORDER BY into sub-query</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOrderByPlan
 parameter_list|()
@@ -857,7 +848,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-631">[CALCITE-631]    * Push theta joins down to JDBC adapter</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNonEquiJoinPlan
 parameter_list|()
@@ -929,7 +919,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNonEquiJoinReverseConditionPlan
 parameter_list|()
@@ -999,7 +988,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMixedJoinPlan
 parameter_list|()
@@ -1075,7 +1063,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMixedJoinWithOrPlan
 parameter_list|()
@@ -1153,7 +1140,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoin3TablesPlan
 parameter_list|()
@@ -1241,7 +1227,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCrossJoinWithJoinKeyPlan
 parameter_list|()
@@ -1314,7 +1299,6 @@ block|}
 comment|// JdbcJoin not used for this
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCartesianJoinWithoutKeyPlan
 parameter_list|()
@@ -1373,7 +1357,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCrossJoinWithJoinKeyAndFilterPlan
 parameter_list|()
@@ -1454,7 +1437,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-893">[CALCITE-893]    * Theta join in JdbcAdapter</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinPlan
 parameter_list|()
@@ -1503,7 +1485,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1372">[CALCITE-1372]    * JDBC adapter generates SQL with wrong field names</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinPlan2
 parameter_list|()
@@ -1550,7 +1531,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinCartesian
 parameter_list|()
@@ -1585,7 +1565,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinCartesianCount
 parameter_list|()
@@ -1621,7 +1600,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-657">[CALCITE-657]    * NullPointerException when executing JdbcAggregate implement method</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJdbcAggregate
 parameter_list|()
@@ -1835,7 +1813,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2206">[CALCITE-2206]    * JDBC adapter incorrectly pushes windowed aggregates down to HSQLDB</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOverNonSupportedDialect
 parameter_list|()
@@ -1907,7 +1884,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTablesNoCatalogSchema
 parameter_list|()
@@ -2011,7 +1987,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1506">[CALCITE-1506]    * Push OVER Clause to underlying SQL via JDBC adapter</a>.    *    *<p>Test runs only on Postgres; the default database, Hsqldb, does not    * support OVER. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOverDefault
 parameter_list|()
@@ -2084,7 +2059,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2305">[CALCITE-2305]    * JDBC adapter generates invalid casts on PostgreSQL, because PostgreSQL does    * not have TINYINT and DOUBLE types</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCast
 parameter_list|()
@@ -2135,7 +2109,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOverRowsBetweenBoundFollowingAndFollowing
 parameter_list|()
@@ -2211,7 +2184,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOverRowsBetweenBoundPrecedingAndCurrent
 parameter_list|()
@@ -2287,7 +2259,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOverDisallowPartial
 parameter_list|()
@@ -2375,7 +2346,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLastValueOver
 parameter_list|()
@@ -2452,7 +2422,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-259">[CALCITE-259]    * Using sub-queries in CASE statement against JDBC tables generates invalid    * Oracle SQL</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSubQueryWithSingleValue
 parameter_list|()
@@ -2514,7 +2483,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-865">[CALCITE-865]    * Unknown table type causes NullPointerException in JdbcSchema</a>. The issue    * occurred because of the "SYSTEM_INDEX" table type when run against    * PostgreSQL. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMetadataTables
 parameter_list|()
@@ -2607,7 +2575,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-666">[CALCITE-666]    * Anti-semi-joins against JDBC adapter give wrong results</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testScalarSubQuery
 parameter_list|()
@@ -2864,7 +2831,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1527">[CALCITE-1527]    * Support DML in the JDBC adapter</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTableModifyInsert
 parameter_list|()
@@ -3008,7 +2974,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTableModifyInsertMultiValues
 parameter_list|()
@@ -3164,7 +3129,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTableModifyInsertWithSubQuery
 parameter_list|()
@@ -3308,7 +3272,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTableModifyUpdate
 parameter_list|()
@@ -3435,7 +3398,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTableModifyDelete
 parameter_list|()
@@ -3554,7 +3516,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1572">[CALCITE-1572]    * JdbcSchema throws exception when detecting nullable columns</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testColumnNullability
 parameter_list|()
@@ -3599,7 +3560,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|pushBindParameters
 parameter_list|()

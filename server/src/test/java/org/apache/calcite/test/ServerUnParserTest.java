@@ -20,18 +20,11 @@ comment|/**  * Extension to {@link ServerParserTest} that ensures that every exp
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|ServerUnParserTest
 extends|extends
 name|ServerParserTest
 block|{
-comment|//~ Constructors -----------------------------------------------------------
-specifier|public
-name|ServerUnParserTest
-parameter_list|()
-block|{
-block|}
 comment|//~ Methods ----------------------------------------------------------------
 annotation|@
 name|Override

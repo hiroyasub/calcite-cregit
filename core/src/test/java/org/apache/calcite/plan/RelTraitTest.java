@@ -152,7 +152,6 @@ comment|/**  * Test to verify {@link RelCompositeTrait}.  */
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|RelTraitTest
 block|{
@@ -249,7 +248,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|compositeEmpty
 parameter_list|()
@@ -266,7 +264,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|compositeOne
 parameter_list|()
@@ -296,7 +293,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|compositeTwo
 parameter_list|()

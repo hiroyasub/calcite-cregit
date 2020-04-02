@@ -142,13 +142,11 @@ comment|/**  * Unit test for  * {@link org.apache.calcite.rel.core.Aggregate.Gro
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|InduceGroupingTypeTest
 block|{
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInduceGroupingType
 parameter_list|()
@@ -1202,7 +1200,6 @@ block|}
 comment|/** Tests a singleton grouping set {2}, whose power set has only two elements,    * { {2}, {} }. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInduceGroupingType1
 parameter_list|()
@@ -1368,7 +1365,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInduceGroupingType0
 parameter_list|()

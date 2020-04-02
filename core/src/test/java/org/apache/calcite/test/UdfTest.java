@@ -462,7 +462,6 @@ comment|/**  * Tests for user-defined functions;  * includes user-defined aggreg
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|UdfTest
 block|{
@@ -849,7 +848,6 @@ literal|"[CALCITE-1561] Intermittent test failures"
 argument_list|)
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUserDefinedFunction
 parameter_list|()
@@ -930,7 +928,6 @@ block|}
 comment|/** As {@link #testUserDefinedFunction()}, but checks that the class is    * instantiated exactly once, per    *<a href="https://issues.apache.org/jira/browse/CALCITE-1548">[CALCITE-1548]    * Instantiate function objects once per query</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUserDefinedFunctionInstanceCount
 parameter_list|()
@@ -1010,7 +1007,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUserDefinedFunctionB
 parameter_list|()
@@ -1053,7 +1049,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUserDefinedFunctionWithNull
 parameter_list|()
@@ -1134,7 +1129,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3195">[CALCITE-3195]    * Handle a UDF that throws checked exceptions in the Enumerable code generator</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUserDefinedFunctionWithException
 parameter_list|()
@@ -1244,7 +1238,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-937">[CALCITE-937]    * User-defined function within view</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUserDefinedFunctionInView
 parameter_list|()
@@ -1476,7 +1469,6 @@ block|}
 comment|/**    * Tests that IS NULL/IS NOT NULL is properly implemented for non-strict    * functions.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNotNullImplementor
 parameter_list|()
@@ -1602,7 +1594,6 @@ block|}
 comment|/** Tests that we generate the appropriate checks for a "semi-strict"    * function.    *    *<p>The difference between "strict" and "semi-strict" functions is that a    * "semi-strict" function might return null even if none of its arguments    * are null. (Both always return null if one of their arguments is null.)    * Thus, a nasty function is more unpredictable.    *    * @see SemiStrict */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSemiStrict
 parameter_list|()
@@ -1707,7 +1698,6 @@ block|}
 comment|/** Tests derived return type of user-defined function. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUdfDerivedReturnType
 parameter_list|()
@@ -1753,7 +1743,6 @@ block|}
 comment|/** Tests a user-defined function that has multiple overloads. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUdfOverloaded
 parameter_list|()
@@ -1804,7 +1793,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUdfOverloadedNullable
 parameter_list|()
@@ -1838,7 +1826,6 @@ block|}
 comment|/** Tests passing parameters to user-defined function by name. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUdfArgumentName
 parameter_list|()
@@ -1984,7 +1971,6 @@ block|}
 comment|/** Tests calling a user-defined function some of whose parameters are    * optional. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUdfArgumentOptional
 parameter_list|()
@@ -2219,7 +2205,6 @@ block|}
 comment|/** Test for    * {@link org.apache.calcite.runtime.CalciteResource#requireDefaultConstructor(String)}. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUserDefinedFunction2
 parameter_list|()
@@ -2244,7 +2229,6 @@ block|}
 comment|/** Tests user-defined function, with multiple methods per class. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUserDefinedFunctionWithMethodName
 parameter_list|()
@@ -2351,7 +2335,6 @@ block|}
 comment|/** Tests user-defined aggregate function. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUserDefinedAggregateFunction
 parameter_list|()
@@ -2591,7 +2574,6 @@ block|}
 comment|/** Tests user-defined aggregate function. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUserDefinedAggregateFunctionWithMultipleParameters
 parameter_list|()
@@ -2897,7 +2879,6 @@ block|}
 comment|/** Test for    * {@link org.apache.calcite.runtime.CalciteResource#firstParameterOfAdd(String)}. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUserDefinedAggregateFunction3
 parameter_list|()
@@ -2922,7 +2903,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1434">[CALCITE-1434]    * AggregateFunctionImpl doesnt work if the class implements a generic    * interface</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUserDefinedAggregateFunctionImplementsInterface
 parameter_list|()
@@ -3238,7 +3218,6 @@ block|}
 comment|/** Tests user-defined aggregate function with FILTER.    *    *<p>Also tests that we do not try to push ADAF to JDBC source. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUserDefinedAggregateFunctionWithFilter
 parameter_list|()
@@ -3385,7 +3364,6 @@ block|}
 comment|/** Tests resolution of functions using schema paths. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPath
 parameter_list|()
@@ -3675,7 +3653,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-986">[CALCITE-986]    * User-defined function with Date or Timestamp parameters</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDate
 parameter_list|()
@@ -3801,7 +3778,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1041">[CALCITE-1041]    * User-defined function returns DATE or TIMESTAMP value</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testReturnDate
 parameter_list|()
@@ -3927,7 +3903,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1881">[CALCITE-1881]    * Can't distinguish overloaded user-defined functions that have DATE and    * TIMESTAMP arguments</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDateAndTimestamp
 parameter_list|()
@@ -4053,7 +4028,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2053">[CALCITE-2053]    * Overloaded user-defined functions that have Double and BigDecimal arguments    * will goes wrong</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testBigDecimalAndLong
 parameter_list|()
@@ -4143,7 +4117,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1041">[CALCITE-1041]    * User-defined function returns DATE or TIMESTAMP value</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testReturnDate2
 parameter_list|()
@@ -4215,7 +4188,6 @@ block|}
 comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1834">[CALCITE-1834]    * User-defined function for Arrays</a>.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testArrayUserDefinedFunction
 parameter_list|()

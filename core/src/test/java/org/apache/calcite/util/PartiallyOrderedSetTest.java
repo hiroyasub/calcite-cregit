@@ -220,7 +220,6 @@ comment|/**  * Unit test for {@link PartiallyOrderedSet}.  */
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|PartiallyOrderedSetTest
 block|{
@@ -416,7 +415,6 @@ return|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPoset
 parameter_list|()
@@ -1125,7 +1123,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPosetTricky
 parameter_list|()
@@ -1202,7 +1199,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPosetBits
 parameter_list|()
@@ -1285,7 +1281,6 @@ literal|"slow"
 argument_list|)
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPosetBitsLarge
 parameter_list|()
@@ -1326,7 +1321,6 @@ literal|"slow"
 argument_list|)
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPosetBitsLarge2
 parameter_list|()
@@ -1672,7 +1666,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPosetBitsRemoveParent
 parameter_list|()
@@ -1746,7 +1739,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDivisorPoset
 parameter_list|()
@@ -1854,7 +1846,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDivisorSeries
 parameter_list|()
@@ -1882,7 +1873,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDivisorRandom
 parameter_list|()
@@ -1945,7 +1935,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDivisorRandomWithRemoval
 parameter_list|()
@@ -2008,7 +1997,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDivisorInverseSeries
 parameter_list|()
@@ -2036,7 +2024,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDivisorInverseRandom
 parameter_list|()
@@ -2099,7 +2086,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDivisorInverseRandomWithRemoval
 parameter_list|()
@@ -2162,7 +2148,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSubsetSeries
 parameter_list|()
@@ -2190,7 +2175,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSubsetRandom
 parameter_list|()

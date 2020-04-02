@@ -266,7 +266,6 @@ comment|/**  * Unit test for {@link org.apache.calcite.rex.RexSqlStandardConvert
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|RexSqlStandardConvertletTableTest
 extends|extends
@@ -274,7 +273,6 @@ name|SqlToRelTestBase
 block|{
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCoalesce
 parameter_list|()
@@ -338,7 +336,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCaseWithValue
 parameter_list|()
@@ -402,7 +399,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCaseNoValue
 parameter_list|()

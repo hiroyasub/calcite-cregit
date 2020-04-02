@@ -320,7 +320,6 @@ argument_list|>
 name|threadNameMap
 decl_stmt|;
 comment|/**    * Describes a thread that failed    */
-specifier|public
 specifier|static
 class|class
 name|FailedThread
@@ -340,7 +339,6 @@ specifier|final
 name|Throwable
 name|failure
 decl_stmt|;
-specifier|public
 name|FailedThread
 parameter_list|(
 name|String

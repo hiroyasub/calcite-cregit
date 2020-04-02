@@ -223,7 +223,6 @@ name|EnumUtilsTest
 block|{
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDateTypeToInnerTypeConvert
 parameter_list|()
@@ -477,7 +476,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTypeConvertFromPrimitiveToBox
 parameter_list|()
@@ -958,7 +956,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTypeConvertToString
 parameter_list|()
@@ -1054,7 +1051,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMethodCallExpression
 parameter_list|()

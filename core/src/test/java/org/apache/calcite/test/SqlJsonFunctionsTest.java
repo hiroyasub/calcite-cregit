@@ -384,13 +384,11 @@ comment|/**  * Unit test for the methods in {@link SqlFunctions} that implement 
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|SqlJsonFunctionsTest
 block|{
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJsonValueExpression
 parameter_list|()
@@ -418,7 +416,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJsonApiCommonSyntax
 parameter_list|()
@@ -549,7 +546,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJsonExists
 parameter_list|()
@@ -875,7 +871,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJsonValueAny
 parameter_list|()
@@ -1370,7 +1365,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJsonQuery
 parameter_list|()
@@ -2075,7 +2069,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJsonize
 parameter_list|()
@@ -2096,7 +2089,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|assertJsonPretty
 parameter_list|()
@@ -2196,7 +2188,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDejsonize
 parameter_list|()
@@ -2257,7 +2248,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJsonObject
 parameter_list|()
@@ -2325,7 +2315,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJsonType
 parameter_list|()
@@ -2393,7 +2382,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJsonDepth
 parameter_list|()
@@ -2469,7 +2457,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJsonLength
 parameter_list|()
@@ -2577,7 +2564,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJsonKeys
 parameter_list|()
@@ -2687,7 +2673,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJsonRemove
 parameter_list|()
@@ -2741,7 +2726,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJsonStorageSize
 parameter_list|()
@@ -2786,7 +2770,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJsonObjectAggAdd
 parameter_list|()
@@ -2892,7 +2875,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJsonArray
 parameter_list|()
@@ -2958,7 +2940,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJsonArrayAggAdd
 parameter_list|()
@@ -3050,7 +3031,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJsonPredicate
 parameter_list|()

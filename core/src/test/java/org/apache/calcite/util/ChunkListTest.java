@@ -248,14 +248,12 @@ comment|/**  * Unit and performance test for {@link ChunkList}.  */
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|ChunkListTest
 block|{
 comment|/**    * Unit test for {@link ChunkList}.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testChunkList
 parameter_list|()
@@ -1196,7 +1194,6 @@ block|}
 comment|/** Clears lists of various sizes. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testClear
 parameter_list|()
@@ -1447,7 +1444,6 @@ block|}
 comment|/**    * Removing via an iterator.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testIterator
 parameter_list|()
@@ -1589,7 +1585,6 @@ block|}
 comment|/**    * Unit test for {@link ChunkList} that applies random    * operations.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRandom
 parameter_list|()
@@ -2307,7 +2302,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPerformance
 parameter_list|()

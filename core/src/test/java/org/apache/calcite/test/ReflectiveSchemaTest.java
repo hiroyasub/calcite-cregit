@@ -669,7 +669,6 @@ decl_stmt|;
 comment|/**    * Test that uses a JDBC connection as a linq4j    * {@link org.apache.calcite.linq4j.QueryProvider}.    *    * @throws Exception on error    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testQueryProvider
 parameter_list|()
@@ -954,7 +953,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testQueryProviderSingleColumn
 parameter_list|()
@@ -1116,7 +1114,6 @@ annotation|@
 name|Disabled
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOperator
 parameter_list|()
@@ -1251,7 +1248,6 @@ block|}
 comment|/**    * Tests a view.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testView
 parameter_list|()
@@ -1385,7 +1381,6 @@ block|}
 comment|/**    * Tests a view with a path.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testViewPath
 parameter_list|()
@@ -1704,7 +1699,6 @@ block|}
 comment|/** Tests column based on java.sql.Date field. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDateColumn
 parameter_list|()
@@ -1747,7 +1741,6 @@ block|}
 comment|/** Tests querying an object that has no public fields. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNoPublicFields
 parameter_list|()
@@ -1800,7 +1793,6 @@ block|}
 comment|/** Tests columns based on types such as java.sql.Date and java.util.Date.    *    * @see CatchallSchema#everyTypes */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testColumnTypes
 parameter_list|()
@@ -1859,7 +1851,6 @@ block|}
 comment|/**    * Tests NOT for nullable columns    * @see CatchallSchema#everyTypes */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWhereNOT
 parameter_list|()
@@ -1900,7 +1891,6 @@ block|}
 comment|/**    * Tests NOT for nullable columns    * @see CatchallSchema#everyTypes */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectNOT
 parameter_list|()
@@ -1943,7 +1933,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2404">[CALCITE-2404]    * Accessing structured-types is not implemented by the runtime</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectWithFieldAccessOnFirstLevelRecordType
 parameter_list|()
@@ -1980,7 +1969,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2404">[CALCITE-2404]    * Accessing structured-types is not implemented by the runtime</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectWithFieldAccessOnSecondLevelRecordType
 parameter_list|()
@@ -2019,7 +2007,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2404">[CALCITE-2404]    * Accessing structured-types is not implemented by the runtime</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWhereWithFieldAccessOnFirstLevelRecordType
 parameter_list|()
@@ -2054,7 +2041,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2404">[CALCITE-2404]    * Accessing structured-types is not implemented by the runtime</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWhereWithFieldAccessOnSecondLevelRecordType
 parameter_list|()
@@ -2089,7 +2075,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2404">[CALCITE-2404]    * Accessing structured-types is not implemented by the runtime</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectWithFieldAccessOnFirstLevelRecordTypeArray
 parameter_list|()
@@ -2126,7 +2111,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2404">[CALCITE-2404]    * Accessing structured-types is not implemented by the runtime</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectWithFieldAccessOnSecondLevelRecordTypeArray
 parameter_list|()
@@ -2165,7 +2149,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2404">[CALCITE-2404]    * Accessing structured-types is not implemented by the runtime</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWhereWithFieldAccessOnFirstLevelRecordTypeArray
 parameter_list|()
@@ -2200,7 +2183,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2404">[CALCITE-2404]    * Accessing structured-types is not implemented by the runtime</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWhereWithFieldAccessOnSecondLevelRecordTypeArray
 parameter_list|()
@@ -2235,7 +2217,6 @@ block|}
 comment|/** Tests columns based on types such as java.sql.Date and java.util.Date.    *    * @see CatchallSchema#everyTypes */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggregateFunctions
 parameter_list|()
@@ -2671,7 +2652,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testClassNames
 parameter_list|()
@@ -3046,7 +3026,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJavaBoolean
 parameter_list|()
@@ -3201,7 +3180,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-119">[CALCITE-119]    * Comparing a Java type long with a SQL type INTEGER gives wrong    * answer</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCompareJavaAndSqlTypes
 parameter_list|()
@@ -3275,7 +3253,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDivideWraperPrimitive
 parameter_list|()
@@ -3329,7 +3306,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDivideDoubleBigDecimal
 parameter_list|()
@@ -3367,7 +3343,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDivideWraperWrapper
 parameter_list|()
@@ -3421,7 +3396,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDivideWraperWrapperMultipleTimes
 parameter_list|()
@@ -3479,7 +3453,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOp
 parameter_list|()
@@ -3636,7 +3609,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCastFromString
 parameter_list|()
@@ -3669,7 +3641,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-580">[CALCITE-580]    * Average aggregation on an Integer column throws ClassCastException</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAvgInt
 parameter_list|()
@@ -3841,7 +3812,6 @@ block|}
 comment|/** Tests that if a field of a relation has an unrecognized type (in this    * case a {@link BitSet}) then it is treated as an object.    *    * @see CatchallSchema#badTypes */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTableFieldHasBadType
 parameter_list|()
@@ -3874,7 +3844,6 @@ block|}
 comment|/** Tests that a schema with a field whose type cannot be recognized    * throws an informative exception.    *    * @see CatchallSchema#enumerable    * @see CatchallSchema#list */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSchemaFieldHasBadType
 parameter_list|()
@@ -3955,7 +3924,6 @@ block|}
 comment|/** Test case for a bug where a Java string 'Abc' compared to a char 'Ab'    * would be truncated to the char precision and falsely match. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPrefix
 parameter_list|()
@@ -3992,7 +3960,6 @@ annotation|@
 name|Disabled
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTableMacroIsView
 parameter_list|()
@@ -4037,7 +4004,6 @@ annotation|@
 name|Disabled
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTableMacro
 parameter_list|()
@@ -4085,7 +4051,6 @@ literal|"java.lang.AssertionError RelDataTypeImpl.getFieldList(RelDataTypeImpl.j
 argument_list|)
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testArrayOfBoxedPrimitives
 parameter_list|()
@@ -4125,7 +4090,6 @@ literal|"java.lang.AssertionError RelDataTypeImpl.getFieldList(RelDataTypeImpl.j
 argument_list|)
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testArrayOfPrimitives
 parameter_list|()
@@ -4159,7 +4123,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCustomBoxedScalar
 parameter_list|()
@@ -4193,7 +4156,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCustomBoxedSalarCalc
 parameter_list|()
@@ -4228,7 +4190,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1569">[CALCITE-1569]    * Date condition can generates Integer == Integer, which is always    * false</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDateCanCompare
 parameter_list|()
@@ -4281,7 +4242,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3512">[CALCITE-3512]    * Query fails when comparing Time/TimeStamp types</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTimeCanCompare
 parameter_list|()
@@ -4333,7 +4293,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTimestampCanCompare
 parameter_list|()
@@ -4386,7 +4345,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1919">[CALCITE-1919]    * NPE when target in ReflectiveSchema belongs to the unnamed package</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testReflectiveSchemaInUnnamedPackage
 parameter_list|()
@@ -5582,7 +5540,6 @@ block|}
 comment|/** CALCITE-2611 unknown on one side of an or may lead to uncompilable code */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUnknownInOr
 parameter_list|()

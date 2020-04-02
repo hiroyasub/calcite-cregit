@@ -648,7 +648,6 @@ comment|/**  * Unit test for {@link RelOptUtil} and other classes in this packag
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|RelOptUtilTest
 block|{
@@ -814,7 +813,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTypeDump
 parameter_list|()
@@ -966,7 +964,6 @@ block|}
 comment|/**    * Tests the rules for how we name rules.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRuleGuessDescription
 parameter_list|()
@@ -1039,7 +1036,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3136">[CALCITE-3136]    * Fix the default rule description of ConverterRule</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testConvertRuleDefaultRuleDescription
 parameter_list|()
@@ -1430,7 +1426,6 @@ block|}
 comment|/**    * Test {@link RelOptUtil#splitJoinCondition(RelNode, RelNode, RexNode, List, List, List)}    * where the join condition contains just one which is a EQUAL operator.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSplitJoinConditionEquals
 parameter_list|()
@@ -1536,7 +1531,6 @@ block|}
 comment|/**    * Test {@link RelOptUtil#splitJoinCondition(RelNode, RelNode, RexNode, List, List, List)}    * where the join condition contains just one which is a IS NOT DISTINCT operator.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSplitJoinConditionIsNotDistinctFrom
 parameter_list|()
@@ -1642,7 +1636,6 @@ block|}
 comment|/**    * Test {@link RelOptUtil#splitJoinCondition(RelNode, RelNode, RexNode, List, List, List)}    * where the join condition contains an expanded version of IS NOT DISTINCT    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSplitJoinConditionExpandedIsNotDistinctFrom
 parameter_list|()
@@ -1798,7 +1791,6 @@ block|}
 comment|/**    * Test {@link RelOptUtil#splitJoinCondition(RelNode, RelNode, RexNode, List, List, List)}    * where the join condition contains an expanded version of IS NOT DISTINCT using CASE    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSplitJoinConditionExpandedIsNotDistinctFromUsingCase
 parameter_list|()
@@ -1917,7 +1909,6 @@ block|}
 comment|/**    * Test {@link RelOptUtil#splitJoinCondition(RelNode, RelNode, RexNode, List, List, List)}    * where the join condition contains an expanded version of IS NOT DISTINCT using CASE    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSplitJoinConditionExpandedIsNotDistinctFromUsingCase2
 parameter_list|()
@@ -2197,7 +2188,6 @@ block|}
 comment|/**    * Test {@link RelOptUtil#pushDownJoinConditions(org.apache.calcite.rel.core.Join, RelBuilder)}    * where the join condition contains a complex expression    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPushDownJoinConditions
 parameter_list|()
@@ -2544,7 +2534,6 @@ block|}
 comment|/**    * Test {@link RelOptUtil#pushDownJoinConditions(org.apache.calcite.rel.core.Join, RelBuilder)}    * where the join condition contains a complex expression    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPushDownJoinConditionsWithIsNotDistinct
 parameter_list|()
@@ -2891,7 +2880,6 @@ block|}
 comment|/**    * Test {@link RelOptUtil#pushDownJoinConditions(org.apache.calcite.rel.core.Join, RelBuilder)}    * where the join condition contains a complex expression    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPushDownJoinConditionsWithExpandedIsNotDistinct
 parameter_list|()
@@ -3294,7 +3282,6 @@ block|}
 comment|/**    * Test {@link RelOptUtil#pushDownJoinConditions(org.apache.calcite.rel.core.Join, RelBuilder)}    * where the join condition contains a complex expression    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPushDownJoinConditionsWithExpandedIsNotDistinctUsingCase
 parameter_list|()
@@ -3726,7 +3713,6 @@ block|}
 comment|/**    * Test {@link RelOptUtil#createCastRel(RelNode, RelDataType, boolean)}    * with changed field nullability or field name.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCreateCastRel
 parameter_list|()

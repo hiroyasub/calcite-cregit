@@ -92,13 +92,11 @@ comment|/**  * Unit tests for {@link EnumerableRepeatUnion}.  *  *<p>Added in  *
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|EnumerableRepeatUnionTest
 block|{
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGenerateNumbers
 parameter_list|()
@@ -231,7 +229,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGenerateNumbers2
 parameter_list|()
@@ -380,7 +377,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGenerateNumbers3
 parameter_list|()
@@ -540,7 +536,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFactorial
 parameter_list|()
@@ -726,7 +721,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGenerateNumbersNestedRecursion
 parameter_list|()

@@ -356,7 +356,6 @@ comment|/**  * Unit test for {@link org.apache.calcite.materialize.SqlStatisticP
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|SqlStatisticProviderTest
 block|{
@@ -441,7 +440,6 @@ return|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMapProvider
 parameter_list|()
@@ -456,7 +454,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testQueryProvider
 parameter_list|()
@@ -503,7 +500,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testQueryProviderWithCache
 parameter_list|()

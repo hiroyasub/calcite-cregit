@@ -78,7 +78,6 @@ comment|/**  * Tests for using Calcite with Spark as an internal engine, as impl
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|SparkAdapterTest
 block|{
@@ -156,7 +155,6 @@ block|}
 comment|/**    * Tests a VALUES query evaluated using Spark.    * There are no data sources.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testValues
 parameter_list|()
@@ -218,7 +216,6 @@ block|}
 comment|/** Tests values followed by filter, evaluated by Spark. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testValuesFilter
 parameter_list|()
@@ -271,7 +268,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelectDistinct
 parameter_list|()
@@ -327,7 +323,6 @@ block|}
 comment|// Tests about grouping and aggregate functions
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGroupBy
 parameter_list|()
@@ -390,7 +385,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAggFuncNoGroupBy
 parameter_list|()
@@ -447,7 +441,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGroupByOrderByAsc
 parameter_list|()
@@ -500,7 +493,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGroupByMinMaxCountCountDistinctOrderByAsc
 parameter_list|()
@@ -567,7 +559,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGroupByMiMaxCountCountDistinctOrderByDesc
 parameter_list|()
@@ -634,7 +625,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGroupByHaving
 parameter_list|()
@@ -692,7 +682,6 @@ block|}
 comment|// Tests about set operators (UNION, UNION ALL, INTERSECT)
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUnionAll
 parameter_list|()
@@ -765,7 +754,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUnion
 parameter_list|()
@@ -832,7 +820,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testIntersect
 parameter_list|()
@@ -896,7 +883,6 @@ block|}
 comment|// Tests about sorting
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSortXAscProjectY
 parameter_list|()
@@ -959,7 +945,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSortXDescYDescProjectY
 parameter_list|()
@@ -1022,7 +1007,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSortXDescYAscProjectY
 parameter_list|()
@@ -1085,7 +1069,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSortXAscYDescProjectY
 parameter_list|()
@@ -1149,7 +1132,6 @@ block|}
 comment|// Tests involving joins
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinProject
 parameter_list|()
@@ -1218,7 +1200,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinProjectAliasProject
 parameter_list|()
@@ -1292,7 +1273,6 @@ block|}
 comment|// Tests involving LIMIT/OFFSET
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLimit
 parameter_list|()
@@ -1349,7 +1329,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOrderByLimit
 parameter_list|()
@@ -1404,7 +1383,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOrderByOffset
 parameter_list|()
@@ -1464,7 +1442,6 @@ block|}
 comment|// Tests involving "complex" filters in WHERE clause
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFilterBetween
 parameter_list|()
@@ -1519,7 +1496,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFilterIsIn
 parameter_list|()
@@ -1574,7 +1550,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFilterTrue
 parameter_list|()
@@ -1633,7 +1608,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFilterFalse
 parameter_list|()
@@ -1684,7 +1658,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFilterOr
 parameter_list|()
@@ -1745,7 +1718,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFilterIsNotNull
 parameter_list|()
@@ -1804,7 +1776,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFilterIsNull
 parameter_list|()
@@ -1856,7 +1827,6 @@ block|}
 comment|// Tests on more complex queries as UNION operands
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUnionWithFilters
 parameter_list|()
@@ -1933,7 +1903,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUnionWithFiltersProject
 parameter_list|()
@@ -2005,7 +1974,6 @@ block|}
 comment|// Tests involving arithmetic operators
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testArithmeticPlus
 parameter_list|()
@@ -2060,7 +2028,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testArithmeticMinus
 parameter_list|()
@@ -2113,7 +2080,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testArithmeticMul
 parameter_list|()
@@ -2166,7 +2132,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testArithmeticDiv
 parameter_list|()
@@ -2227,7 +2192,6 @@ literal|"[CALCITE-2184] ClassCastException: RexSubQuery cannot be cast to RexLoc
 argument_list|)
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFilterExists
 parameter_list|()
@@ -2299,7 +2263,6 @@ literal|"[CALCITE-2184] ClassCastException: RexSubQuery cannot be cast to RexLoc
 argument_list|)
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFilterNotExists
 parameter_list|()
@@ -2365,7 +2328,6 @@ literal|"[CALCITE-2184] ClassCastException: RexSubQuery cannot be cast to RexLoc
 argument_list|)
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSubQueryAny
 parameter_list|()
@@ -2431,7 +2393,6 @@ literal|"[CALCITE-2184] ClassCastException: RexSubQuery cannot be cast to RexLoc
 argument_list|)
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSubQueryAll
 parameter_list|()

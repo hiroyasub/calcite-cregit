@@ -72,13 +72,11 @@ comment|/**  * Unit test for {@link PrecedenceClimbingParser}.  */
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|PrecedenceClimbingParserTest
 block|{
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testBasic
 parameter_list|()
@@ -172,7 +170,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRepeatedPrefixPostfix
 parameter_list|()
@@ -301,7 +298,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAtom
 parameter_list|()
@@ -353,7 +349,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOnlyPrefix
 parameter_list|()
@@ -419,7 +414,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOnlyPostfix
 parameter_list|()
@@ -485,7 +479,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLeftAssociative
 parameter_list|()
@@ -607,7 +600,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRightAssociative
 parameter_list|()
@@ -729,7 +721,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSpecial
 parameter_list|()
@@ -941,7 +932,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testEqualPrecedence
 parameter_list|()

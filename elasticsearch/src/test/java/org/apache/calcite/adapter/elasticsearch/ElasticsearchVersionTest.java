@@ -78,13 +78,11 @@ comment|/**  * Basic tests for parsing ES version in different formats  */
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|ElasticsearchVersionTest
 block|{
 annotation|@
 name|Test
-specifier|public
 name|void
 name|versions
 parameter_list|()

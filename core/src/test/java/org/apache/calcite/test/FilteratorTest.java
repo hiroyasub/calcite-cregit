@@ -170,14 +170,12 @@ comment|/**  * Unit test for {@link Filterator}.  */
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|FilteratorTest
 block|{
 comment|//~ Methods ----------------------------------------------------------------
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOne
 parameter_list|()
@@ -298,7 +296,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNulls
 parameter_list|()
@@ -377,7 +374,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSubtypes
 parameter_list|()
@@ -491,7 +487,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testBox
 parameter_list|()

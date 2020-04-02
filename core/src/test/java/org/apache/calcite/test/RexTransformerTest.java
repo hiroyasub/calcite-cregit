@@ -434,7 +434,6 @@ comment|/**  * Tests transformations on rex nodes.  */
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|RexTransformerTest
 block|{
@@ -1074,7 +1073,6 @@ return|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPreTests
 parameter_list|()
@@ -1155,7 +1153,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNonBooleans
 parameter_list|()
@@ -1213,7 +1210,6 @@ block|}
 comment|/**    * the or operator should pass through unchanged since e.g. x OR y should    * return true if x=null and y=true if it was transformed into something    * like (x IS NOT NULL) AND (y IS NOT NULL) AND (x OR y) an incorrect result    * could be produced    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOrUnchanged
 parameter_list|()
@@ -1270,7 +1266,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSimpleAnd
 parameter_list|()
@@ -1299,7 +1294,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSimpleEquals
 parameter_list|()
@@ -1328,7 +1322,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSimpleNotEquals
 parameter_list|()
@@ -1357,7 +1350,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSimpleGreaterThan
 parameter_list|()
@@ -1386,7 +1378,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSimpleGreaterEquals
 parameter_list|()
@@ -1415,7 +1406,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSimpleLessThan
 parameter_list|()
@@ -1444,7 +1434,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSimpleLessEqual
 parameter_list|()
@@ -1473,7 +1462,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOptimizeNonNullLiterals
 parameter_list|()
@@ -1522,7 +1510,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSimpleIdentifier
 parameter_list|()
@@ -1553,7 +1540,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMixed1
 parameter_list|()
@@ -1593,7 +1579,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMixed2
 parameter_list|()
@@ -1643,7 +1628,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMixed3
 parameter_list|()
@@ -1694,7 +1678,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-814">[CALCITE-814]    * RexBuilder reverses precision and scale of DECIMAL literal</a>    * and    *<a href="https://issues.apache.org/jira/browse/CALCITE-1344">[CALCITE-1344]    * Incorrect inferred precision when BigDecimal value is less than 1</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExactLiteral
 parameter_list|()
@@ -1891,7 +1874,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-833">[CALCITE-833]    * RelOptUtil.splitJoinCondition attempts to split a Join-Condition which    * has a remaining condition</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSplitJoinCondition
 parameter_list|()
@@ -2063,7 +2045,6 @@ block|}
 comment|/** Test case for {@link org.apache.calcite.rex.LogicVisitor}. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLogic
 parameter_list|()

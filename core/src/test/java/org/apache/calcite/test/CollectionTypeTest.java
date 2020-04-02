@@ -434,13 +434,11 @@ comment|/**  * Test cases for  *<a href="https://issues.apache.org/jira/browse/C
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|CollectionTypeTest
 block|{
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAccessNestedMap
 parameter_list|()
@@ -538,7 +536,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAccessNonExistKeyFromMap
 parameter_list|()
@@ -614,7 +611,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAccessNonExistKeyFromNestedMap
 parameter_list|()
@@ -690,7 +686,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInvalidAccessUseStringForIndexOnArray
 parameter_list|()
@@ -772,7 +767,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNestedArrayOutOfBoundAccess
 parameter_list|()
@@ -851,7 +845,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAccessNestedMapWithAnyType
 parameter_list|()
@@ -951,7 +944,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAccessNestedMapWithAnyTypeWithoutCast
 parameter_list|()
@@ -1050,7 +1042,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testArithmeticToAnyTypeWithoutCast
 parameter_list|()
@@ -1169,7 +1160,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAccessNonExistKeyFromMapWithAnyType
 parameter_list|()
@@ -1245,7 +1235,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAccessNonExistKeyFromNestedMapWithAnyType
 parameter_list|()
@@ -1321,7 +1310,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInvalidAccessUseStringForIndexOnArrayWithAnyType
 parameter_list|()
@@ -1403,7 +1391,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNestedArrayOutOfBoundAccessWithAnyType
 parameter_list|()

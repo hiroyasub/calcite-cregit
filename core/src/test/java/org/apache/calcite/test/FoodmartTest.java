@@ -221,7 +221,6 @@ name|Tag
 argument_list|(
 literal|"slow"
 argument_list|)
-specifier|public
 class|class
 name|FoodmartTest
 block|{

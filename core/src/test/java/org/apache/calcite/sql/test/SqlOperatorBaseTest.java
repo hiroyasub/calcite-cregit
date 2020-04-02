@@ -1987,7 +1987,6 @@ comment|//--- Tests -----------------------------------------------------------
 comment|/**    * For development. Put any old code in here.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDummy
 parameter_list|()
@@ -1995,7 +1994,6 @@ block|{
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSqlOperatorOverloading
 parameter_list|()
@@ -2126,7 +2124,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testBetween
 parameter_list|()
@@ -2408,7 +2405,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNotBetween
 parameter_list|()
@@ -2914,7 +2910,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCastToString
 parameter_list|()
@@ -3476,7 +3471,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCastExactNumericLimits
 parameter_list|()
@@ -3799,7 +3793,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCastToExactNumeric
 parameter_list|()
@@ -3970,7 +3963,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCastStringToDecimal
 parameter_list|()
@@ -4073,7 +4065,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCastIntervalToNumeric
 parameter_list|()
@@ -4418,7 +4409,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCastToInterval
 parameter_list|()
@@ -4567,7 +4557,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCastIntervalToInterval
 parameter_list|()
@@ -4630,7 +4619,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCastWithRoundingToScalar
 parameter_list|()
@@ -4883,7 +4871,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCastDecimalToDoubleToInteger
 parameter_list|()
@@ -4962,7 +4949,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCastApproxNumericLimits
 parameter_list|()
@@ -5403,7 +5389,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCastToApproxNumeric
 parameter_list|()
@@ -5499,7 +5484,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCastNull
 parameter_list|()
@@ -5601,7 +5585,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1439">[CALCITE-1439]    * Handling errors during constant reduction</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCastInvalid
 parameter_list|()
@@ -5719,7 +5702,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCastDateTime
 parameter_list|()
@@ -5939,7 +5921,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCastStringToDateTime
 parameter_list|()
@@ -6683,7 +6664,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCastToBoolean
 parameter_list|()
@@ -6800,7 +6780,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCase
 parameter_list|()
@@ -7290,7 +7269,6 @@ comment|// TODO: Check case with multisets
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCaseNull
 parameter_list|()
@@ -7323,7 +7301,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCaseType
 parameter_list|()
@@ -7386,7 +7363,6 @@ block|}
 comment|/**    * Tests support for JDBC functions.    *    *<p>See FRG-97 "Support for JDBC escape syntax is incomplete".    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJdbcFn
 parameter_list|()
@@ -8437,7 +8413,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testChr
 parameter_list|()
@@ -8514,7 +8489,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSelect
 parameter_list|()
@@ -8635,7 +8609,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLiteralChain
 parameter_list|()
@@ -8720,7 +8693,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testComplexLiteral
 parameter_list|()
@@ -8785,7 +8757,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRow
 parameter_list|()
@@ -8804,7 +8775,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAndOperator
 parameter_list|()
@@ -8883,7 +8853,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAndOperator2
 parameter_list|()
@@ -8924,7 +8893,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAndOperatorLazy
 parameter_list|()
@@ -8971,7 +8939,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testConcatOperator
 parameter_list|()
@@ -9325,7 +9292,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testModOperator
 parameter_list|()
@@ -9453,7 +9419,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testModPrecedence
 parameter_list|()
@@ -9502,7 +9467,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testModOperatorNull
 parameter_list|()
@@ -9553,7 +9517,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testModOperatorDivByZero
 parameter_list|()
@@ -9592,7 +9555,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDivideOperator
 parameter_list|()
@@ -9757,7 +9719,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDivideOperatorIntervals
 parameter_list|()
@@ -9823,7 +9784,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testEqualsOperator
 parameter_list|()
@@ -10081,7 +10041,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testEqualsOperatorInterval
 parameter_list|()
@@ -10129,7 +10088,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGreaterThanOperator
 parameter_list|()
@@ -10371,7 +10329,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGreaterThanOperatorIntervals
 parameter_list|()
@@ -10481,7 +10438,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testIsDistinctFromOperator
 parameter_list|()
@@ -10636,7 +10592,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testIsNotDistinctFromOperator
 parameter_list|()
@@ -10791,7 +10746,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGreaterThanOrEqualOperator
 parameter_list|()
@@ -11013,7 +10967,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGreaterThanOrEqualOperatorIntervals
 parameter_list|()
@@ -11123,7 +11076,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInOperator
 parameter_list|()
@@ -11243,7 +11195,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNotInOperator
 parameter_list|()
@@ -11363,7 +11314,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOverlapsOperator
 parameter_list|()
@@ -11513,7 +11463,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-715">[CALCITE-715]    * Add PERIOD type constructor and period operators (CONTAINS, PRECEDES,    * etc.)</a>.    *    *<p>Tests OVERLAP and similar period operators CONTAINS, EQUALS, PRECEDES,    * SUCCEEDS, IMMEDIATELY PRECEDES, IMMEDIATELY SUCCEEDS for DATE, TIME and    * TIMESTAMP values. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPeriodOperators
 parameter_list|()
@@ -12397,7 +12346,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLessThanOperator
 parameter_list|()
@@ -12622,7 +12570,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLessThanOperatorInterval
 parameter_list|()
@@ -12740,7 +12687,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLessThanOrEqualOperator
 parameter_list|()
@@ -12983,7 +12929,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLessThanOrEqualOperatorInterval
 parameter_list|()
@@ -13093,7 +13038,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMinusOperator
 parameter_list|()
@@ -13298,7 +13242,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMinusIntervalOperator
 parameter_list|()
@@ -13524,7 +13467,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMinusDateOperator
 parameter_list|()
@@ -13684,7 +13626,6 @@ comment|// TODO: Add tests for year month intervals (currently not supported)
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMultiplyOperator
 parameter_list|()
@@ -13894,7 +13835,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMultiplyIntervals
 parameter_list|()
@@ -13966,7 +13906,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDatePlusInterval
 parameter_list|()
@@ -13998,7 +13937,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1864">[CALCITE-1864]    * Allow NULL literal as argument</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNullOperand
 parameter_list|()
@@ -14120,7 +14058,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNotEqualsOperator
 parameter_list|()
@@ -14234,7 +14171,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNotEqualsOperatorIntervals
 parameter_list|()
@@ -14282,7 +14218,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOrOperator
 parameter_list|()
@@ -14339,7 +14274,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOrOperatorLazy
 parameter_list|()
@@ -14455,7 +14389,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPlusOperator
 parameter_list|()
@@ -14660,7 +14593,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPlusOperatorAny
 parameter_list|()
@@ -14688,7 +14620,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPlusIntervalOperator
 parameter_list|()
@@ -14914,7 +14845,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDescendingOperator
 parameter_list|()
@@ -14933,7 +14863,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testIsNotNullOperator
 parameter_list|()
@@ -14972,7 +14901,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testIsNullOperator
 parameter_list|()
@@ -15011,7 +14939,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testIsNotTrueOperator
 parameter_list|()
@@ -15072,7 +14999,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testIsTrueOperator
 parameter_list|()
@@ -15122,7 +15048,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testIsNotFalseOperator
 parameter_list|()
@@ -15172,7 +15097,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testIsFalseOperator
 parameter_list|()
@@ -15222,7 +15146,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testIsNotUnknownOperator
 parameter_list|()
@@ -15296,7 +15219,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testIsUnknownOperator
 parameter_list|()
@@ -15370,7 +15292,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testIsASetOperator
 parameter_list|()
@@ -15466,7 +15387,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testIsNotASetOperator
 parameter_list|()
@@ -15562,7 +15482,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testIntersectOperator
 parameter_list|()
@@ -15686,7 +15605,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExceptOperator
 parameter_list|()
@@ -15826,7 +15744,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testIsEmptyOperator
 parameter_list|()
@@ -15856,7 +15773,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testIsNotEmptyOperator
 parameter_list|()
@@ -15886,7 +15802,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExistsOperator
 parameter_list|()
@@ -15905,7 +15820,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNotOperator
 parameter_list|()
@@ -15960,7 +15874,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPrefixMinusOperator
 parameter_list|()
@@ -16045,7 +15958,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPrefixMinusOperatorIntervals
 parameter_list|()
@@ -16093,7 +16005,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPrefixPlusOperator
 parameter_list|()
@@ -16159,7 +16070,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPrefixPlusOperatorIntervals
 parameter_list|()
@@ -16226,7 +16136,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExplicitTableOperator
 parameter_list|()
@@ -16245,7 +16154,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testValuesOperator
 parameter_list|()
@@ -16283,7 +16191,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNotLikeOperator
 parameter_list|()
@@ -16357,7 +16264,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLikeEscape
 parameter_list|()
@@ -16467,7 +16373,6 @@ literal|"[CALCITE-525] Exception-handling in built-in functions"
 argument_list|)
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLikeEscape2
 parameter_list|()
@@ -16497,7 +16402,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLikeOperator
 parameter_list|()
@@ -16735,7 +16639,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1898">[CALCITE-1898]    * LIKE must match '.' (period) literally</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLikeDot
 parameter_list|()
@@ -16776,7 +16679,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNotSimilarToOperator
 parameter_list|()
@@ -16849,7 +16751,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSimilarToOperator
 parameter_list|()
@@ -18201,7 +18102,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testEscapeOperator
 parameter_list|()
@@ -18220,7 +18120,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testConvertFunc
 parameter_list|()
@@ -18241,7 +18140,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTranslateFunc
 parameter_list|()
@@ -18262,7 +18160,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTranslate3Func
 parameter_list|()
@@ -18362,7 +18259,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOverlayFunc
 parameter_list|()
@@ -18534,7 +18430,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPositionFunc
 parameter_list|()
@@ -18739,7 +18634,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testReplaceFunc
 parameter_list|()
@@ -18799,7 +18693,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCharLengthFunc
 parameter_list|()
@@ -18832,7 +18725,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCharacterLengthFunc
 parameter_list|()
@@ -18865,7 +18757,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAsciiFunc
 parameter_list|()
@@ -18962,7 +18853,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testToBase64
 parameter_list|()
@@ -19135,7 +19025,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFromBase64
 parameter_list|()
@@ -19221,7 +19110,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMd5
 parameter_list|()
@@ -19293,7 +19181,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSha1
 parameter_list|()
@@ -19365,7 +19252,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRepeatFunc
 parameter_list|()
@@ -19476,7 +19362,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSpaceFunc
 parameter_list|()
@@ -19566,7 +19451,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testStrcmpFunc
 parameter_list|()
@@ -19641,7 +19525,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSoundexFunc
 parameter_list|()
@@ -19771,7 +19654,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDifferenceFunc
 parameter_list|()
@@ -19885,7 +19767,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testReverseFunc
 parameter_list|()
@@ -19986,7 +19867,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUpperFunc
 parameter_list|()
@@ -20054,7 +19934,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLeftFunc
 parameter_list|()
@@ -20216,7 +20095,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRightFunc
 parameter_list|()
@@ -20378,7 +20256,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRegexpReplaceFunc
 parameter_list|()
@@ -20604,7 +20481,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJsonExists
 parameter_list|()
@@ -20851,7 +20727,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJsonValue
 parameter_list|()
@@ -21226,7 +21101,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJsonQuery
 parameter_list|()
@@ -21656,7 +21530,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJsonPretty
 parameter_list|()
@@ -21727,7 +21600,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJsonStorageSize
 parameter_list|()
@@ -21842,7 +21714,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJsonType
 parameter_list|()
@@ -21995,7 +21866,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJsonDepth
 parameter_list|()
@@ -22174,7 +22044,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJsonLength
 parameter_list|()
@@ -22436,7 +22305,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJsonKeys
 parameter_list|()
@@ -22698,7 +22566,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJsonRemove
 parameter_list|()
@@ -22802,7 +22669,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJsonObject
 parameter_list|()
@@ -22909,7 +22775,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJsonObjectAgg
 parameter_list|()
@@ -23020,7 +22885,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJsonValueExpressionOperator
 parameter_list|()
@@ -23079,7 +22943,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJsonArray
 parameter_list|()
@@ -23186,7 +23049,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJsonArrayAgg
 parameter_list|()
@@ -23264,7 +23126,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJsonPredicate
 parameter_list|()
@@ -23416,7 +23277,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCompress
 parameter_list|()
@@ -23496,7 +23356,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExtractValue
 parameter_list|()
@@ -23616,7 +23475,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testXmlTransform
 parameter_list|()
@@ -23729,7 +23587,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExtractXml
 parameter_list|()
@@ -23836,7 +23693,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExistsNode
 parameter_list|()
@@ -23977,7 +23833,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLowerFunc
 parameter_list|()
@@ -24046,7 +23901,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInitcapFunc
 parameter_list|()
@@ -24140,7 +23994,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPowerFunc
 parameter_list|()
@@ -24196,7 +24049,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSqrtFunc
 parameter_list|()
@@ -24306,7 +24158,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExpFunc
 parameter_list|()
@@ -24365,7 +24216,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testModFunc
 parameter_list|()
@@ -24479,7 +24329,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testModFuncNull
 parameter_list|()
@@ -24516,7 +24365,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testModFuncDivByZero
 parameter_list|()
@@ -24541,7 +24389,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLnFunc
 parameter_list|()
@@ -24591,7 +24438,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLogFunc
 parameter_list|()
@@ -24681,7 +24527,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRandFunc
 parameter_list|()
@@ -24739,7 +24584,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRandSeedFunc
 parameter_list|()
@@ -24782,7 +24626,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRandIntegerFunc
 parameter_list|()
@@ -24829,7 +24672,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRandIntegerSeedFunc
 parameter_list|()
@@ -24868,7 +24710,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAbsFunc
 parameter_list|()
@@ -25019,7 +24860,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAbsFuncIntervals
 parameter_list|()
@@ -25056,7 +24896,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAcosFunc
 parameter_list|()
@@ -25160,7 +24999,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAsinFunc
 parameter_list|()
@@ -25264,7 +25102,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAtanFunc
 parameter_list|()
@@ -25368,7 +25205,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAtan2Func
 parameter_list|()
@@ -25476,7 +25312,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCbrtFunc
 parameter_list|()
@@ -25587,7 +25422,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCosFunc
 parameter_list|()
@@ -25691,7 +25525,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCoshFunc
 parameter_list|()
@@ -25796,7 +25629,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCotFunc
 parameter_list|()
@@ -25900,7 +25732,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDegreesFunc
 parameter_list|()
@@ -26004,7 +25835,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPiFunc
 parameter_list|()
@@ -26056,7 +25886,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRadiansFunc
 parameter_list|()
@@ -26160,7 +25989,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRoundFunc
 parameter_list|()
@@ -26365,7 +26193,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSignFunc
 parameter_list|()
@@ -26482,7 +26309,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSinFunc
 parameter_list|()
@@ -26586,7 +26412,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSinhFunc
 parameter_list|()
@@ -26691,7 +26516,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTanFunc
 parameter_list|()
@@ -26795,7 +26619,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTanhFunc
 parameter_list|()
@@ -26900,7 +26723,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTruncateFunc
 parameter_list|()
@@ -27105,7 +26927,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNullifFunc
 parameter_list|()
@@ -27307,7 +27128,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNullIfOperatorIntervals
 parameter_list|()
@@ -27344,7 +27164,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCoalesceFunc
 parameter_list|()
@@ -27403,7 +27222,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUserFunc
 parameter_list|()
@@ -27433,7 +27251,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCurrentUserFunc
 parameter_list|()
@@ -27463,7 +27280,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSessionUserFunc
 parameter_list|()
@@ -27493,7 +27309,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSystemUserFunc
 parameter_list|()
@@ -27534,7 +27349,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCurrentPathFunc
 parameter_list|()
@@ -27564,7 +27378,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCurrentRoleFunc
 parameter_list|()
@@ -27596,7 +27409,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCurrentCatalogFunc
 parameter_list|()
@@ -27633,7 +27445,6 @@ literal|"slow"
 argument_list|)
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLocalTimeFuncWithCurrentTime
 parameter_list|()
@@ -27649,7 +27460,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLocalTimeFuncWithFixedTime
 parameter_list|()
@@ -27785,7 +27595,6 @@ literal|"slow"
 argument_list|)
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLocalTimestampFuncWithCurrentTime
 parameter_list|()
@@ -27801,7 +27610,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLocalTimestampFuncWithFixedTime
 parameter_list|()
@@ -27951,7 +27759,6 @@ literal|"slow"
 argument_list|)
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCurrentTimeFuncWithCurrentTime
 parameter_list|()
@@ -27967,7 +27774,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCurrentTimeFuncWithFixedTime
 parameter_list|()
@@ -28103,7 +27909,6 @@ literal|"slow"
 argument_list|)
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCurrentTimestampFuncWithCurrentTime
 parameter_list|()
@@ -28119,7 +27924,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCurrentTimestampFuncWithFixedTime
 parameter_list|()
@@ -28434,7 +28238,6 @@ literal|"slow"
 argument_list|)
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCurrentDateFuncWithCurrentTime
 parameter_list|()
@@ -28450,7 +28253,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCurrentDateFuncWithFixedTime
 parameter_list|()
@@ -28760,7 +28562,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLastDayFunc
 parameter_list|()
@@ -29145,7 +28946,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSubstringFunction
 parameter_list|()
@@ -29409,7 +29209,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTrimFunc
 parameter_list|()
@@ -29560,7 +29359,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRtrimFunc
 parameter_list|()
@@ -29602,7 +29400,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLtrimFunc
 parameter_list|()
@@ -29644,7 +29441,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGreatestFunc
 parameter_list|()
@@ -29745,7 +29541,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLeastFunc
 parameter_list|()
@@ -29846,7 +29641,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNvlFunc
 parameter_list|()
@@ -30027,7 +29821,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDecodeFunc
 parameter_list|()
@@ -30134,7 +29927,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWindow
 parameter_list|()
@@ -30169,7 +29961,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testElementFunc
 parameter_list|()
@@ -30208,7 +29999,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCardinalityFunc
 parameter_list|()
@@ -30266,7 +30056,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMemberOfOperator
 parameter_list|()
@@ -30342,7 +30131,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMultisetUnionOperator
 parameter_list|()
@@ -30508,7 +30296,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMultisetUnionAllOperator
 parameter_list|()
@@ -30637,7 +30424,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSubMultisetOfOperator
 parameter_list|()
@@ -30746,7 +30532,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNotSubMultisetOfOperator
 parameter_list|()
@@ -30855,7 +30640,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCollectFunc
 parameter_list|()
@@ -31061,7 +30845,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testListAggFunc
 parameter_list|()
@@ -31235,7 +31018,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFusionFunc
 parameter_list|()
@@ -31339,7 +31121,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testIntersectionFunc
 parameter_list|()
@@ -31467,7 +31248,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testYear
 parameter_list|()
@@ -31506,7 +31286,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testQuarter
 parameter_list|()
@@ -31666,7 +31445,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMonth
 parameter_list|()
@@ -31705,7 +31483,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWeek
 parameter_list|()
@@ -31757,7 +31534,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDayOfYear
 parameter_list|()
@@ -31809,7 +31585,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDayOfMonth
 parameter_list|()
@@ -31848,7 +31623,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDayOfWeek
 parameter_list|()
@@ -31900,7 +31674,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testHour
 parameter_list|()
@@ -31939,7 +31712,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMinute
 parameter_list|()
@@ -31978,7 +31750,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSecond
 parameter_list|()
@@ -32017,7 +31788,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExtractIntervalYearMonth
 parameter_list|()
@@ -32248,7 +32018,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExtractIntervalDayTime
 parameter_list|()
@@ -32495,7 +32264,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExtractDate
 parameter_list|()
@@ -32870,7 +32638,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExtractTimestamp
 parameter_list|()
@@ -33135,7 +32902,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExtractFunc
 parameter_list|()
@@ -33252,7 +33018,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExtractFuncFromDateTime
 parameter_list|()
@@ -33381,7 +33146,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExtractWithDatesBeforeUnixEpoch
 parameter_list|()
@@ -33576,7 +33340,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testArrayValueConstructor
 parameter_list|()
@@ -33617,7 +33380,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testItemOp
 parameter_list|()
@@ -33765,7 +33527,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMapValueConstructor
 parameter_list|()
@@ -33852,7 +33613,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCeilFunc
 parameter_list|()
@@ -33945,7 +33705,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCeilFuncInterval
 parameter_list|()
@@ -34012,7 +33771,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFloorFunc
 parameter_list|()
@@ -34105,7 +33863,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFloorFuncDateTime
 parameter_list|()
@@ -34287,7 +34044,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCeilFuncDateTime
 parameter_list|()
@@ -34521,7 +34277,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFloorFuncInterval
 parameter_list|()
@@ -34676,7 +34431,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTimestampAdd
 parameter_list|()
@@ -35109,7 +34863,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTimestampAddFractionalSeconds
 parameter_list|()
@@ -35171,7 +34924,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTimestampDiff
 parameter_list|()
@@ -35435,7 +35187,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDenseRankFunc
 parameter_list|()
@@ -35456,7 +35207,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPercentRankFunc
 parameter_list|()
@@ -35477,7 +35227,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRankFunc
 parameter_list|()
@@ -35498,7 +35247,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCumeDistFunc
 parameter_list|()
@@ -35519,7 +35267,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRowNumberFunc
 parameter_list|()
@@ -35540,7 +35287,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCountFunc
 parameter_list|()
@@ -35774,7 +35520,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testApproxCountDistinctFunc
 parameter_list|()
@@ -35998,7 +35743,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSumFunc
 parameter_list|()
@@ -36246,7 +35990,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAvgFunc
 parameter_list|()
@@ -36409,7 +36152,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCovarPopFunc
 parameter_list|()
@@ -36502,7 +36244,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCovarSampFunc
 parameter_list|()
@@ -36595,7 +36336,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRegrSxxFunc
 parameter_list|()
@@ -36688,7 +36428,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRegrSyyFunc
 parameter_list|()
@@ -36781,7 +36520,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testStddevPopFunc
 parameter_list|()
@@ -36947,7 +36685,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testStddevSampFunc
 parameter_list|()
@@ -37113,7 +36850,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testStddevFunc
 parameter_list|()
@@ -37232,7 +36968,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testVarPopFunc
 parameter_list|()
@@ -37400,7 +37135,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testVarSampFunc
 parameter_list|()
@@ -37568,7 +37302,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testVarFunc
 parameter_list|()
@@ -37736,7 +37469,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMinFunc
 parameter_list|()
@@ -37890,7 +37622,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMaxFunc
 parameter_list|()
@@ -38044,7 +37775,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLastValueFunc
 parameter_list|()
@@ -38184,7 +37914,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFirstValueFunc
 parameter_list|()
@@ -38316,7 +38045,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testEveryFunc
 parameter_list|()
@@ -38431,7 +38159,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSomeAggFunc
 parameter_list|()
@@ -38546,7 +38273,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAnyValueFunc
 parameter_list|()
@@ -38700,7 +38426,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testBitAndFunc
 parameter_list|()
@@ -38827,7 +38552,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testBitOrFunc
 parameter_list|()
@@ -38954,7 +38678,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testBitXorFunc
 parameter_list|()
@@ -39082,7 +38805,6 @@ block|}
 comment|/**    * Tests that CAST fails when given a value just outside the valid range for    * that type. For example,    *    *<ul>    *<li>CAST(-200 AS TINYINT) fails because the value is less than -128;    *<li>CAST(1E-999 AS FLOAT) fails because the value underflows;    *<li>CAST(123.4567891234567 AS FLOAT) fails because the value loses    * precision.    *</ul>    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLiteralAtLimit
 parameter_list|()
@@ -39292,7 +39014,6 @@ block|}
 comment|/**    * Tests that CAST fails when given a value just outside the valid range for    * that type. For example,    *    *<ul>    *<li>CAST(-200 AS TINYINT) fails because the value is less than -128;    *<li>CAST(1E-999 AS FLOAT) fails because the value underflows;    *<li>CAST(123.4567891234567 AS FLOAT) fails because the value loses    * precision.    *</ul>    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLiteralBeyondLimit
 parameter_list|()
@@ -39527,7 +39248,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCastTruncates
 parameter_list|()
@@ -39669,7 +39389,6 @@ literal|"slow"
 argument_list|)
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testArgumentBounds
 parameter_list|()

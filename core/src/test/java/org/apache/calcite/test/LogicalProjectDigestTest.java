@@ -162,14 +162,12 @@ comment|/**  * Verifies digest for {@link LogicalProject}.  */
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|LogicalProjectDigestTest
 block|{
 comment|/**    * Planner does not compare    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|fieldNamesDoNotInfluenceDigest
 parameter_list|()
@@ -339,7 +337,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testProjectDigestWithOneTrivialField
 parameter_list|()

@@ -426,13 +426,11 @@ comment|/**  * Tests for {@link MutableRel} sub-classes.  */
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|MutableRelTest
 block|{
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testConvertAggregate
 parameter_list|()
@@ -447,7 +445,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testConvertFilter
 parameter_list|()
@@ -462,7 +459,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testConvertProject
 parameter_list|()
@@ -477,7 +473,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testConvertSort
 parameter_list|()
@@ -492,7 +487,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testConvertCalc
 parameter_list|()
@@ -518,7 +512,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testConvertWindow
 parameter_list|()
@@ -544,7 +537,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testConvertCollect
 parameter_list|()
@@ -559,7 +551,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testConvertUncollect
 parameter_list|()
@@ -574,7 +565,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testConvertTableModify
 parameter_list|()
@@ -589,7 +579,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testConvertSample
 parameter_list|()
@@ -604,7 +593,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testConvertTableFunctionScan
 parameter_list|()
@@ -619,7 +607,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testConvertValues
 parameter_list|()
@@ -634,7 +621,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testConvertJoin
 parameter_list|()
@@ -649,7 +635,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testConvertSemiJoin
 parameter_list|()
@@ -700,7 +685,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testConvertCorrelate
 parameter_list|()
@@ -727,7 +711,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testConvertUnion
 parameter_list|()
@@ -744,7 +727,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testConvertMinus
 parameter_list|()
@@ -761,7 +743,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testConvertIntersect
 parameter_list|()
@@ -778,7 +759,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUpdateInputOfUnion
 parameter_list|()
@@ -861,7 +841,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testParentInfoOfUnion
 parameter_list|()
@@ -901,7 +880,6 @@ block|}
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMutableTableFunctionScanEquals
 parameter_list|()

@@ -240,14 +240,12 @@ comment|/**  * Unit tests for the different Enumerable Join implementations.  */
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|EnumerableJoinTest
 block|{
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2968">[CALCITE-2968]    * New AntiJoin relational expression</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|equiAntiJoin
 parameter_list|()
@@ -363,7 +361,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2968">[CALCITE-2968]    * New AntiJoin relational expression</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|nonEquiAntiJoin
 parameter_list|()
@@ -517,7 +514,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2968">[CALCITE-2968]    * New AntiJoin relational expression</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|equiAntiJoinWithNullValues
 parameter_list|()
@@ -691,7 +687,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3170">[CALCITE-3170]    * ANTI join on conditions push down generates wrong plan</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCanNotPushAntiJoinConditionsToLeft
 parameter_list|()
@@ -819,7 +814,6 @@ block|}
 comment|/**    * The test verifies if {@link EnumerableMergeJoin} can implement a join with non-equi conditions.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSortMergeJoinWithNonEquiCondition
 parameter_list|()
@@ -1131,7 +1125,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3846">[CALCITE-3846]    * EnumerableMergeJoin: wrong comparison of composite key with null values</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMergeJoinWithCompositeKeyAndNullValues
 parameter_list|()
@@ -1353,7 +1346,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3820">[CALCITE-3820]    * EnumerableDefaults#orderBy should be lazily computed + support enumerator    * re-initialization</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRepeatUnionWithMergeJoin
 parameter_list|()

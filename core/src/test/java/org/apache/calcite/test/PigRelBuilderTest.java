@@ -180,7 +180,6 @@ comment|/**  * Unit test for {@link PigRelBuilder}.  */
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|PigRelBuilderTest
 block|{
@@ -280,7 +279,6 @@ return|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testScan
 parameter_list|()
@@ -333,7 +331,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCogroup
 parameter_list|()
@@ -341,7 +338,6 @@ block|{
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCross
 parameter_list|()
@@ -349,7 +345,6 @@ block|{
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCube
 parameter_list|()
@@ -357,7 +352,6 @@ block|{
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDefine
 parameter_list|()
@@ -365,7 +359,6 @@ block|{
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDistinct
 parameter_list|()
@@ -440,7 +433,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFilter
 parameter_list|()
@@ -521,7 +513,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testForeach
 parameter_list|()
@@ -529,7 +520,6 @@ block|{
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGroup
 parameter_list|()
@@ -668,7 +658,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGroup2
 parameter_list|()
@@ -777,7 +766,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testImport
 parameter_list|()
@@ -785,7 +773,6 @@ block|{
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinInner
 parameter_list|()
@@ -793,7 +780,6 @@ block|{
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJoinOuter
 parameter_list|()
@@ -801,7 +787,6 @@ block|{
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLimit
 parameter_list|()
@@ -809,7 +794,6 @@ block|{
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLoad
 parameter_list|()
@@ -867,7 +851,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMapReduce
 parameter_list|()
@@ -875,7 +858,6 @@ block|{
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOrderBy
 parameter_list|()
@@ -883,7 +865,6 @@ block|{
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRank
 parameter_list|()
@@ -891,7 +872,6 @@ block|{
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSample
 parameter_list|()
@@ -899,7 +879,6 @@ block|{
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSplit
 parameter_list|()
@@ -907,7 +886,6 @@ block|{
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testStore
 parameter_list|()
@@ -915,7 +893,6 @@ block|{
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUnion
 parameter_list|()

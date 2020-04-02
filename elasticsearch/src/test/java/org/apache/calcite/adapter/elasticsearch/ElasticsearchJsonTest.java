@@ -202,7 +202,6 @@ comment|/**  * Testing correct parsing of JSON (elasticsearch) response.  */
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|ElasticsearchJsonTest
 block|{
@@ -252,7 +251,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|aggEmpty
 parameter_list|()
@@ -322,7 +320,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|aggSingle1
 parameter_list|()
@@ -508,7 +505,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|aggMultiValues
 parameter_list|()
@@ -632,7 +628,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|aggSingle2
 parameter_list|()
@@ -714,7 +709,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|aggBuckets1
 parameter_list|()
@@ -909,7 +903,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|aggManyAggregations
 parameter_list|()
@@ -1256,7 +1249,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|aggMultiBuckets
 parameter_list|()

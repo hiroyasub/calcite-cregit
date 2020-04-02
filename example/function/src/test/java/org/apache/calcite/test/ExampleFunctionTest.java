@@ -216,7 +216,6 @@ comment|/**  * Unit tests for example user-defined functions.  */
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|ExampleFunctionTest
 block|{
@@ -281,7 +280,6 @@ decl_stmt|;
 comment|/** Unit test for {@link MazeTable}. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMazeTableFunction
 parameter_list|()
@@ -321,7 +319,6 @@ block|}
 comment|/** Unit test for {@link MazeTable}. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testMazeTableFunctionWithSolution
 parameter_list|()

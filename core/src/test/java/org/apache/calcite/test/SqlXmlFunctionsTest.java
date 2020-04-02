@@ -164,13 +164,11 @@ comment|/**  * Unit test for the methods in {@link SqlFunctions} that implement 
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|SqlXmlFunctionsTest
 block|{
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExtractValue
 parameter_list|()
@@ -229,7 +227,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testXmlTransform
 parameter_list|()
@@ -296,7 +293,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExtractXml
 parameter_list|()
@@ -378,7 +374,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testExistsNode
 parameter_list|()

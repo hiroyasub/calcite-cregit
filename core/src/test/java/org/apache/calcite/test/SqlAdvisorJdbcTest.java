@@ -228,7 +228,6 @@ comment|/**  * Tests for {@link org.apache.calcite.sql.advise.SqlAdvisor}.  */
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|SqlAdvisorJdbcTest
 block|{
@@ -500,7 +499,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSqlAdvisorGetHintsFunction
 parameter_list|()
@@ -528,7 +526,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSqlAdvisorGetHintsFunction2
 parameter_list|()
@@ -556,7 +553,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSqlAdvisorNonExistingColumn
 parameter_list|()
@@ -584,7 +580,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSqlAdvisorNonStructColumn
 parameter_list|()
@@ -612,7 +607,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSqlAdvisorSubSchema
 parameter_list|()
@@ -648,7 +642,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSqlAdvisorSubSchema2
 parameter_list|()
@@ -684,7 +677,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSqlAdvisorTableInSchema
 parameter_list|()
@@ -721,7 +713,6 @@ block|}
 comment|/**    * Tests {@link org.apache.calcite.sql.advise.SqlAdvisorGetHintsFunction}.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSqlAdvisorSchemaNames
 parameter_list|()

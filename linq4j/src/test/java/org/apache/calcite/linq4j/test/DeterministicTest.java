@@ -352,7 +352,6 @@ comment|/**  * Tests factoring out deterministic expressions.  */
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|DeterministicTest
 block|{
@@ -580,7 +579,6 @@ return|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testConstantIsConstant
 parameter_list|()
@@ -786,7 +784,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFactorOutBinaryAdd
 parameter_list|()
@@ -867,7 +864,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFactorOutBinaryAddSurvivesMultipleOptimizations
 parameter_list|()
@@ -951,7 +947,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFactorOutBinaryAddNameCollision
 parameter_list|()
@@ -1050,7 +1045,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFactorOutBinaryAddMul
 parameter_list|()
@@ -1140,7 +1134,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFactorOutNestedClasses
 parameter_list|()
@@ -1305,7 +1298,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNewBigInteger
 parameter_list|()
@@ -1397,7 +1389,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInstanceofTest
 parameter_list|()
@@ -1479,7 +1470,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInstanceofComplexTest
 parameter_list|()
@@ -1583,7 +1573,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testIntegerValueOfZeroComplexTest
 parameter_list|()
@@ -1681,7 +1670,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testStaticField
 parameter_list|()
@@ -1813,7 +1801,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testBigIntegerValueOf
 parameter_list|()
@@ -1961,7 +1948,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDeterministicMethodCall
 parameter_list|()
@@ -2057,7 +2043,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNonDeterministicMethodCall
 parameter_list|()
@@ -2151,7 +2136,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDeterministicClassDefaultMethod
 parameter_list|()
@@ -2247,7 +2231,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testDeterministicClassNonDeterministicMethod
 parameter_list|()

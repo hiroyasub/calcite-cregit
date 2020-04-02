@@ -34,7 +34,6 @@ comment|/**  * Tests for user-defined types.  */
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|UdtTest
 block|{
@@ -114,7 +113,6 @@ return|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUdt
 parameter_list|()
@@ -144,7 +142,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3045">[CALCITE-3045]    * NullPointerException when casting null literal to composite user defined type</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCastNullLiteralToCompositeUdt
 parameter_list|()

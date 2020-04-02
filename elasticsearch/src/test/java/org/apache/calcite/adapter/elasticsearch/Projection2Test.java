@@ -363,7 +363,6 @@ name|ResourceAccessMode
 operator|.
 name|READ
 argument_list|)
-specifier|public
 class|class
 name|Projection2Test
 block|{
@@ -618,7 +617,6 @@ return|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|projection
 parameter_list|()
@@ -647,7 +645,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|projection2
 parameter_list|()
@@ -694,7 +691,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|projection3
 parameter_list|()
@@ -767,7 +763,6 @@ block|}
 comment|/**    * Test that {@code _id} field is available when queried explicitly.    * @see<a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping-id-field.html">ID Field</a>    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|projectionWithIdField
 parameter_list|()
@@ -1046,7 +1041,6 @@ block|}
 comment|/**    * Avoid using scripting for simple projections    *    *<p> When projecting simple fields (without expression) no    *<a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/modules-scripting.html">scripting</a>    * should be used just    *<a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-source-filtering.html">_source</a>    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|simpleProjectionNoScripting
 parameter_list|()

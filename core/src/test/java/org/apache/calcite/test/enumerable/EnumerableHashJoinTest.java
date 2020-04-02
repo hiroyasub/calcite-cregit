@@ -124,13 +124,11 @@ comment|/**  * Unit test for  * {@link org.apache.calcite.adapter.enumerable.Enu
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|EnumerableHashJoinTest
 block|{
 annotation|@
 name|Test
-specifier|public
 name|void
 name|innerJoin
 parameter_list|()
@@ -182,7 +180,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|innerJoinWithPredicate
 parameter_list|()
@@ -234,7 +231,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|leftOuterJoin
 parameter_list|()
@@ -288,7 +284,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|rightOuterJoin
 parameter_list|()
@@ -344,7 +339,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|leftOuterJoinWithPredicate
 parameter_list|()
@@ -402,7 +396,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|rightOuterJoinWithPredicate
 parameter_list|()
@@ -458,7 +451,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|semiJoin
 parameter_list|()
@@ -500,7 +492,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|semiJoinWithPredicate
 parameter_list|()

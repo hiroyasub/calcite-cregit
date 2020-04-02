@@ -1002,7 +1002,6 @@ name|FrameworksTest
 block|{
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOptimize
 parameter_list|()
@@ -1297,7 +1296,6 @@ block|}
 comment|/** Unit test to test create root schema which has no "metadata" schema. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCreateRootSchemaWithNoMetadataSchema
 parameter_list|()
@@ -1332,7 +1330,6 @@ block|}
 comment|/** Tests that validation (specifically, inferring the result of adding    * two DECIMAL(19, 0) values together) happens differently with a type system    * that allows a larger maximum precision for decimals.    *    *<p>Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-413">[CALCITE-413]    * Add RelDataTypeSystem plugin, allowing different max precision of a    * DECIMAL</a>.    *    *<p>Also tests the plugin system, by specifying implementations of a    * plugin interface with public and private constructors. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTypeSystem
 parameter_list|()
@@ -1501,7 +1498,6 @@ block|}
 comment|/** Tests that the validator expands identifiers by default.    *    *<p>Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-593">[CALCITE-593]    * Validator in Frameworks should expand identifiers</a>.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFrameworksValidatorWithIdentifierExpansion
 parameter_list|()
@@ -1621,7 +1617,6 @@ block|}
 comment|/** Test for {@link Path}. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSchemaPath
 parameter_list|()
@@ -1866,7 +1861,6 @@ block|}
 comment|/** Unit test for {@link CalciteConnectionConfigImpl#set}    * and {@link CalciteConnectionConfigImpl#isSet}. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testConnectionConfig
 parameter_list|()
@@ -2581,7 +2575,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1996">[CALCITE-1996]    * VALUES syntax</a>.    *    *<p>With that bug, running a VALUES query would succeed before running a    * query that reads from a JDBC table, but fail after it. Before, the plan    * would use {@link org.apache.calcite.adapter.enumerable.EnumerableValues},    * but after, it would use    * {@link org.apache.calcite.adapter.jdbc.JdbcRules.JdbcValues}, and would    * generate invalid SQL syntax.    *    *<p>Even though the SQL generator has been fixed, we are still interested in    * how JDBC convention gets lodged in the planner's state. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testJdbcValues
 parameter_list|()
@@ -2797,7 +2790,6 @@ end_comment
 begin_function
 unit|@
 name|Test
-specifier|public
 name|void
 name|testPushProjectToScan
 parameter_list|()
@@ -2980,7 +2972,6 @@ end_comment
 begin_function
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testUpdate
 parameter_list|()

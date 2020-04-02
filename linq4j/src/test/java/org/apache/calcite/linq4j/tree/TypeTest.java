@@ -52,13 +52,11 @@ comment|/**  * Test for {@link Types#gcd}.  */
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|TypeTest
 block|{
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testGcd
 parameter_list|()

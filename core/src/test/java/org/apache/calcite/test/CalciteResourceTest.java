@@ -82,14 +82,12 @@ comment|/**  * Tests the generated implementation of  * {@link org.apache.calcit
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|CalciteResourceTest
 block|{
 comment|/**    * Verifies that resource properties such as SQLSTATE are available at    * runtime.    */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSqlstateProperty
 parameter_list|()

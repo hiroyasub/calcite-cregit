@@ -457,13 +457,11 @@ name|Tag
 argument_list|(
 literal|"slow"
 argument_list|)
-specifier|public
 class|class
 name|ProfilerTest
 block|{
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testProfileZeroRows
 parameter_list|()
@@ -507,7 +505,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testProfileOneRow
 parameter_list|()
@@ -551,7 +548,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testProfileTwoRows
 parameter_list|()
@@ -599,7 +595,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testProfileScott
 parameter_list|()
@@ -806,7 +801,6 @@ block|}
 comment|/** As {@link #testProfileScott()}, but prints only the most surprising    * distributions. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testProfileScott2
 parameter_list|()
@@ -868,7 +862,6 @@ block|}
 comment|/** As {@link #testProfileScott2()}, but uses the breadth-first profiler.    * Results should be the same, but are slightly different (extra EMPNO    * and ENAME distributions). */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testProfileScott3
 parameter_list|()
@@ -926,7 +919,6 @@ block|}
 comment|/** As {@link #testProfileScott3()}, but uses the breadth-first profiler    * and deems everything uninteresting. Only first-level combinations (those    * consisting of a single column) are computed. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testProfileScott4
 parameter_list|()
@@ -978,7 +970,6 @@ annotation|@
 name|Disabled
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testProfileScott5
 parameter_list|()
@@ -1038,7 +1029,6 @@ annotation|@
 name|Disabled
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testProfileFoodmart
 parameter_list|()
@@ -1124,7 +1114,6 @@ block|}
 comment|/** Tests    * {@link org.apache.calcite.profile.ProfilerImpl.SurpriseQueue}. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSurpriseQueue
 parameter_list|()

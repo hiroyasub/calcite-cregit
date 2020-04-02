@@ -188,7 +188,6 @@ comment|/**  * Tests {@link ExtendedEnumerable#correlateJoin(JoinType, Function1
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|CorrelateJoinTest
 block|{
@@ -222,7 +221,6 @@ block|}
 decl_stmt|;
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testInner
 parameter_list|()
@@ -283,7 +281,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLeft
 parameter_list|()
@@ -356,7 +353,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSemi
 parameter_list|()
@@ -401,7 +397,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testAnti
 parameter_list|()

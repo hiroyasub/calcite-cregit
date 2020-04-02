@@ -596,7 +596,6 @@ name|ExpressionTest
 block|{
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLambdaCallsBinaryOpInt
 parameter_list|()
@@ -723,7 +722,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLambdaCallsBinaryOpShort
 parameter_list|()
@@ -860,7 +858,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLambdaCallsBinaryOpByte
 parameter_list|()
@@ -997,7 +994,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLambdaCallsBinaryOpDouble
 parameter_list|()
@@ -1124,7 +1120,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLambdaCallsBinaryOpLong
 parameter_list|()
@@ -1251,7 +1246,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLambdaCallsBinaryOpFloat
 parameter_list|()
@@ -1378,7 +1372,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLambdaCallsBinaryOpMixType
 parameter_list|()
@@ -1505,7 +1498,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLambdaCallsBinaryOpMixDoubleType
 parameter_list|()
@@ -1632,7 +1624,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLambdaPrimitiveTwoArgs
 parameter_list|()
@@ -1751,7 +1742,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testLambdaCallsTwoArgMethod
 parameter_list|()
@@ -1876,7 +1866,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFoldAnd
 parameter_list|()
@@ -2188,7 +2177,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWrite
 parameter_list|()
@@ -3173,7 +3161,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWriteConstant
 parameter_list|()
@@ -3662,7 +3649,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWriteArray
 parameter_list|()
@@ -3732,7 +3718,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWriteAnonymousClass
 parameter_list|()
@@ -4048,7 +4033,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWriteWhile
 parameter_list|()
@@ -4165,7 +4149,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWriteTryCatchFinally
 parameter_list|()
@@ -4332,7 +4315,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWriteTryFinally
 parameter_list|()
@@ -4429,7 +4411,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testWriteTryCatch
 parameter_list|()
@@ -4575,7 +4556,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testType
 parameter_list|()
@@ -4877,7 +4857,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testCompile
 parameter_list|()
@@ -4968,7 +4947,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testBlockBuilder
 parameter_list|()
@@ -5189,7 +5167,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testBlockBuilder2
 parameter_list|()
@@ -5337,7 +5314,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testBlockBuilder3
 parameter_list|()
@@ -5594,7 +5570,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testConstantExpression
 parameter_list|()
@@ -5787,7 +5762,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testBigDecimalConstantExpression
 parameter_list|()
@@ -5921,7 +5895,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testClassDecl
 parameter_list|()
@@ -6084,7 +6057,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testReturn
 parameter_list|()
@@ -6143,7 +6115,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testIfElseIfElse
 parameter_list|()
@@ -6221,7 +6192,6 @@ block|}
 comment|/** Test for common sub-expression elimination. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSubExpressionElimination
 parameter_list|()
@@ -6543,7 +6513,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFor
 parameter_list|()
@@ -6681,7 +6650,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testFor2
 parameter_list|()
@@ -6843,7 +6811,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testForEach
 parameter_list|()
@@ -6964,7 +6931,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testEmptyListLiteral
 parameter_list|()
@@ -6994,7 +6960,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOneElementListLiteral
 parameter_list|()
@@ -7026,7 +6991,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTwoElementsListLiteral
 parameter_list|()
@@ -7062,7 +7026,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testNestedListsLiteral
 parameter_list|()
@@ -7116,7 +7079,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testEmptyMapLiteral
 parameter_list|()
@@ -7145,7 +7107,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOneElementMapLiteral
 parameter_list|()
@@ -7179,7 +7140,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTwoElementsMapLiteral
 parameter_list|()
@@ -7219,7 +7179,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTenElementsMapLiteral
 parameter_list|()
@@ -7307,7 +7266,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testEvaluate
 parameter_list|()
@@ -7347,7 +7305,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testEmptySetLiteral
 parameter_list|()
@@ -7376,7 +7333,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOneElementSetLiteral
 parameter_list|()
@@ -7408,7 +7364,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTwoElementsSetLiteral
 parameter_list|()
@@ -7442,7 +7397,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTenElementsSetLiteral
 parameter_list|()
@@ -7518,7 +7472,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTenElementsLinkedHashSetLiteral
 parameter_list|()
@@ -7594,7 +7547,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testTenElementsSetStringLiteral
 parameter_list|()

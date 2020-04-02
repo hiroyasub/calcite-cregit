@@ -146,7 +146,6 @@ comment|/** Unit tests for {@link Automaton}. */
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|AutomatonTest
 block|{
@@ -222,7 +221,6 @@ return|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSimple
 parameter_list|()
@@ -337,7 +335,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testSequence
 parameter_list|()
@@ -485,7 +482,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testStar
 parameter_list|()
@@ -642,7 +638,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testPlus
 parameter_list|()
@@ -797,7 +792,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOr
 parameter_list|()
@@ -949,7 +943,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testOptional
 parameter_list|()
@@ -1102,7 +1095,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRepeat
 parameter_list|()
@@ -1342,7 +1334,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testRepeatComposite
 parameter_list|()
@@ -1501,7 +1492,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|testResultWithLabels
 parameter_list|()

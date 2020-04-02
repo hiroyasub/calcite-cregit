@@ -228,14 +228,12 @@ comment|/**  * Unit test for  * {@link EnumerableCorrelate}.  */
 end_comment
 
 begin_class
-specifier|public
 class|class
 name|EnumerableCorrelateTest
 block|{
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2605">[CALCITE-2605]    * NullPointerException when left outer join implemented with EnumerableCorrelate</a> */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|leftOuterJoinCorrelate
 parameter_list|()
@@ -325,7 +323,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|simpleCorrelateDecorrelated
 parameter_list|()
@@ -374,7 +371,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2621">[CALCITE-2621]    * Add rule to execute semi joins with correlation</a> */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|semiJoinCorrelate
 parameter_list|()
@@ -463,7 +459,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2930">[CALCITE-2930]    * FilterCorrelateRule on a Correlate with SemiJoinType SEMI (or ANTI)    * throws IllegalStateException</a> */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|semiJoinCorrelateWithFilterCorrelateRule
 parameter_list|()
@@ -559,7 +554,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|simpleCorrelate
 parameter_list|()
@@ -611,7 +605,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|simpleCorrelateWithConditionIncludingBoxedPrimitive
 parameter_list|()
@@ -655,7 +648,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2920">[CALCITE-2920]    * RelBuilder: new method to create an anti-join</a>. */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|antiJoinCorrelate
 parameter_list|()
@@ -808,7 +800,6 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
-specifier|public
 name|void
 name|nonEquiAntiJoinCorrelate
 parameter_list|()
@@ -1000,7 +991,6 @@ block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2920">[CALCITE-2920]    * RelBuilder: new method to create an antijoin</a> */
 annotation|@
 name|Test
-specifier|public
 name|void
 name|antiJoinCorrelateWithNullValues
 parameter_list|()
