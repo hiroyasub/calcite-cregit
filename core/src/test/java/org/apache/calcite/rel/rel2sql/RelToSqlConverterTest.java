@@ -8330,6 +8330,42 @@ block|}
 annotation|@
 name|Test
 name|void
+name|testMySqlCastToTimestamp
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|query
+init|=
+literal|"select  * from \"employee\" where  \"hire_date\" - "
+operator|+
+literal|"INTERVAL '19800' SECOND(5)> cast(\"hire_date\" as TIMESTAMP) "
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"SELECT *\nFROM `foodmart`.`employee`"
+operator|+
+literal|"\nWHERE (`hire_date` - INTERVAL '19800' SECOND)> CAST(`hire_date` AS DATETIME)"
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|withMysql
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
 name|testMySqlCastToVarcharWithGreaterThanMaxPrecision
 parameter_list|()
 block|{
