@@ -19,11 +19,9 @@ begin_import
 import|import
 name|org
 operator|.
-name|apache
+name|apiguardian
 operator|.
-name|calcite
-operator|.
-name|linq4j
+name|api
 operator|.
 name|API
 import|;
