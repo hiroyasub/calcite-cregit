@@ -813,9 +813,9 @@ name|DEFAULT_CASSANDRA_PORT
 argument_list|,
 name|keyspace
 argument_list|,
-literal|null
+name|username
 argument_list|,
-literal|null
+name|password
 argument_list|,
 name|parentSchema
 argument_list|,
