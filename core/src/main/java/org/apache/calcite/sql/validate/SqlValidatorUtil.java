@@ -1970,8 +1970,10 @@ parameter_list|,
 name|RelDataTypeFactory
 name|typeFactory
 parameter_list|,
-name|SqlConformance
-name|conformance
+name|SqlValidator
+operator|.
+name|Config
+name|config
 parameter_list|)
 block|{
 return|return
@@ -1984,7 +1986,7 @@ name|catalogReader
 argument_list|,
 name|typeFactory
 argument_list|,
-name|conformance
+name|config
 argument_list|)
 return|;
 block|}
@@ -2016,7 +2018,9 @@ name|catalogReader
 argument_list|,
 name|typeFactory
 argument_list|,
-name|SqlConformanceEnum
+name|SqlValidator
+operator|.
+name|Config
 operator|.
 name|DEFAULT
 argument_list|)
@@ -5276,7 +5280,9 @@ name|catalogReader
 argument_list|,
 name|typeFactory
 argument_list|,
-name|SqlConformanceEnum
+name|SqlValidator
+operator|.
+name|Config
 operator|.
 name|DEFAULT
 argument_list|)

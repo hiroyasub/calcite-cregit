@@ -488,7 +488,7 @@ name|catalogReader
 parameter_list|,
 name|typeFactory
 parameter_list|,
-name|conformance
+name|config
 parameter_list|)
 lambda|->
 operator|(

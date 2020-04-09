@@ -2185,16 +2185,8 @@ block|{
 throw|throw
 name|callBinding
 operator|.
-name|getValidator
-argument_list|()
-operator|.
 name|newValidationError
 argument_list|(
-name|callBinding
-operator|.
-name|getCall
-argument_list|()
-argument_list|,
 name|RESOURCE
 operator|.
 name|defaultForOptionalParameter

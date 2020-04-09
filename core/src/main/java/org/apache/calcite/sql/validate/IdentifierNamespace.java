@@ -1052,7 +1052,10 @@ if|if
 condition|(
 name|validator
 operator|.
-name|shouldExpandIdentifiers
+name|config
+argument_list|()
+operator|.
+name|identifierExpansion
 argument_list|()
 condition|)
 block|{

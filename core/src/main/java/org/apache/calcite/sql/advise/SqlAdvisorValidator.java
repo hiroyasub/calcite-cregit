@@ -209,22 +209,6 @@ name|sql
 operator|.
 name|validate
 operator|.
-name|SqlConformance
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|sql
-operator|.
-name|validate
-operator|.
 name|SqlModality
 import|;
 end_import
@@ -365,7 +349,7 @@ name|typeFactory
 argument_list|)
 decl_stmt|;
 comment|//~ Constructors -----------------------------------------------------------
-comment|/**    * Creates a SqlAdvisor validator.    *    * @param opTab         Operator table    * @param catalogReader Catalog reader    * @param typeFactory   Type factory    * @param conformance   Compatibility mode    */
+comment|/**    * Creates a SqlAdvisor validator.    *    * @param opTab         Operator table    * @param catalogReader Catalog reader    * @param typeFactory   Type factory    * @param config        Config    */
 specifier|public
 name|SqlAdvisorValidator
 parameter_list|(
@@ -378,8 +362,8 @@ parameter_list|,
 name|RelDataTypeFactory
 name|typeFactory
 parameter_list|,
-name|SqlConformance
-name|conformance
+name|Config
+name|config
 parameter_list|)
 block|{
 name|super
@@ -390,7 +374,7 @@ name|catalogReader
 argument_list|,
 name|typeFactory
 argument_list|,
-name|conformance
+name|config
 argument_list|)
 expr_stmt|;
 block|}

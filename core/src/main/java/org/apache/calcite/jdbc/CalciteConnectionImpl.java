@@ -641,7 +641,7 @@ name|sql
 operator|.
 name|validate
 operator|.
-name|SqlConformanceEnum
+name|SqlValidator
 import|;
 end_import
 
@@ -3011,7 +3011,9 @@ argument_list|)
 argument_list|,
 name|typeFactory
 argument_list|,
-name|SqlConformanceEnum
+name|SqlValidator
+operator|.
+name|Config
 operator|.
 name|DEFAULT
 argument_list|)

@@ -261,9 +261,6 @@ if|if
 condition|(
 name|callBinding
 operator|.
-name|getValidator
-argument_list|()
-operator|.
 name|isTypeCoercionEnabled
 argument_list|()
 condition|)

@@ -167,6 +167,22 @@ name|apache
 operator|.
 name|calcite
 operator|.
+name|sql
+operator|.
+name|validate
+operator|.
+name|SqlValidator
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
 name|sql2rel
 operator|.
 name|SqlRexConvertletTable
@@ -215,6 +231,13 @@ name|SqlParser
 operator|.
 name|Config
 name|getParserConfig
+parameter_list|()
+function_decl|;
+comment|/**    * The configuration of {@link SqlValidator}.    */
+name|SqlValidator
+operator|.
+name|Config
+name|getSqlValidatorConfig
 parameter_list|()
 function_decl|;
 comment|/**    * The configuration of {@link SqlToRelConverter}.    */

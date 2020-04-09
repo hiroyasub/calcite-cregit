@@ -32355,7 +32355,10 @@ operator|.
 name|getValidator
 argument_list|()
 operator|.
-name|shouldExpandIdentifiers
+name|config
+argument_list|()
+operator|.
+name|identifierExpansion
 argument_list|()
 condition|?
 name|expected1
@@ -32413,7 +32416,10 @@ operator|.
 name|getValidator
 argument_list|()
 operator|.
-name|shouldExpandIdentifiers
+name|config
+argument_list|()
+operator|.
+name|identifierExpansion
 argument_list|()
 condition|?
 name|expected1

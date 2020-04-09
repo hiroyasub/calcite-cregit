@@ -1478,6 +1478,22 @@ name|ex
 argument_list|)
 return|;
 block|}
+comment|/**    * Returns whether to allow implicit type coercion when validation.    * This is a short-cut method.    */
+specifier|public
+name|boolean
+name|isTypeCoercionEnabled
+parameter_list|()
+block|{
+return|return
+name|validator
+operator|.
+name|config
+argument_list|()
+operator|.
+name|typeCoercionEnabled
+argument_list|()
+return|;
+block|}
 block|}
 end_class
 

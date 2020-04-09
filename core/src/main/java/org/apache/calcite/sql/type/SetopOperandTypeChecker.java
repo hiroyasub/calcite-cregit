@@ -553,7 +553,7 @@ literal|false
 decl_stmt|;
 if|if
 condition|(
-name|validator
+name|callBinding
 operator|.
 name|isTypeCoercionEnabled
 argument_list|()

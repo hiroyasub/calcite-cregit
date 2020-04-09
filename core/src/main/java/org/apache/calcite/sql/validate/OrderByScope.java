@@ -242,7 +242,10 @@ argument_list|()
 operator|&&
 name|validator
 operator|.
-name|getConformance
+name|config
+argument_list|()
+operator|.
+name|sqlConformance
 argument_list|()
 operator|.
 name|isSortByAlias

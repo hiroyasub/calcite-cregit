@@ -423,6 +423,32 @@ end_import
 
 begin_import
 import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|util
+operator|.
+name|ImmutableBeans
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apiguardian
+operator|.
+name|api
+operator|.
+name|API
+import|;
+end_import
+
+begin_import
+import|import
 name|java
 operator|.
 name|util
@@ -438,6 +464,18 @@ operator|.
 name|util
 operator|.
 name|Map
+import|;
+end_import
+
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|function
+operator|.
+name|UnaryOperator
 import|;
 end_import
 
@@ -461,7 +499,10 @@ interface|interface
 name|SqlValidator
 block|{
 comment|//~ Methods ----------------------------------------------------------------
-comment|/**    * Returns the dialect of SQL (SQL:2003, etc.) this validator recognizes.    * Default is {@link SqlConformanceEnum#DEFAULT}.    *    * @return dialect of SQL this validator recognizes    */
+comment|/**    * Returns the dialect of SQL (SQL:2003, etc.) this validator recognizes.    * Default is {@link SqlConformanceEnum#DEFAULT}.    *    * @return dialect of SQL this validator recognizes    *    * @deprecated Use {@link Config#sqlConformance}    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 1.24
 name|SqlConformance
 name|getConformance
 parameter_list|()
@@ -933,7 +974,10 @@ name|String
 name|columnListParamName
 parameter_list|)
 function_decl|;
-comment|/**    * Enables or disables expansion of identifiers other than column    * references.    *    * @param expandIdentifiers new setting    */
+comment|/**    * Enables or disables expansion of identifiers other than column    * references.    *    * @param expandIdentifiers new setting    *    * @deprecated Use {@link Config#withIdentifierExpansion}    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 1.24
 name|void
 name|setIdentifierExpansion
 parameter_list|(
@@ -941,7 +985,10 @@ name|boolean
 name|expandIdentifiers
 parameter_list|)
 function_decl|;
-comment|/**    * Enables or disables expansion of column references. (Currently this does    * not apply to the ORDER BY clause; may be fixed in the future.)    *    * @param expandColumnReferences new setting    */
+comment|/**    * Enables or disables expansion of column references. (Currently this does    * not apply to the ORDER BY clause; may be fixed in the future.)    *    * @param expandColumnReferences new setting    *    * @deprecated Use {@link Config#columnReferenceExpansion}    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 1.24
 name|void
 name|setColumnReferenceExpansion
 parameter_list|(
@@ -949,12 +996,18 @@ name|boolean
 name|expandColumnReferences
 parameter_list|)
 function_decl|;
-comment|/**    * @return whether column reference expansion is enabled    */
+comment|/**    * @return whether column reference expansion is enabled    *    * @deprecated  Use {@link Config#columnReferenceExpansion}    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 1.24
 name|boolean
 name|getColumnReferenceExpansion
 parameter_list|()
 function_decl|;
-comment|/** Sets how NULL values should be collated if an ORDER BY item does not    * contain NULLS FIRST or NULLS LAST. */
+comment|/**    * Sets how NULL values should be collated if an ORDER BY item does not    * contain NULLS FIRST or NULLS LAST.    *    * @deprecated Use {@link Config#defaultNullCollation}    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 1.24
 name|void
 name|setDefaultNullCollation
 parameter_list|(
@@ -962,17 +1015,26 @@ name|NullCollation
 name|nullCollation
 parameter_list|)
 function_decl|;
-comment|/** Returns how NULL values should be collated if an ORDER BY item does not    * contain NULLS FIRST or NULLS LAST. */
+comment|/**    * Returns how NULL values should be collated if an ORDER BY item does not    * contain NULLS FIRST or NULLS LAST.    *    * @deprecated Use {@link Config#defaultNullCollation}    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 1.24
 name|NullCollation
 name|getDefaultNullCollation
 parameter_list|()
 function_decl|;
-comment|/**    * Returns expansion of identifiers.    *    * @return whether this validator should expand identifiers    */
+comment|/**    * Returns expansion of identifiers.    *    * @return whether this validator should expand identifiers    *    * @deprecated Use {@link Config#identifierExpansion}    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 1.24
 name|boolean
 name|shouldExpandIdentifiers
 parameter_list|()
 function_decl|;
-comment|/**    * Enables or disables rewrite of "macro-like" calls such as COALESCE.    *    * @param rewriteCalls new setting    */
+comment|/**    * Enables or disables rewrite of "macro-like" calls such as COALESCE.    *    * @param rewriteCalls new setting    *    * @deprecated Use {@link Config#callRewrite}    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 1.24
 name|void
 name|setCallRewrite
 parameter_list|(
@@ -1134,7 +1196,10 @@ name|SqlNode
 name|withItem
 parameter_list|)
 function_decl|;
-comment|/**    * Sets whether this validator should be lenient upon encountering an unknown    * function.    *    * @param lenient Whether to be lenient when encountering an unknown function    */
+comment|/**    * Sets whether this validator should be lenient upon encountering an unknown    * function.    *    * @param lenient Whether to be lenient when encountering an unknown function    *    * @deprecated Use {@link Config#withLenientOperatorLookup}    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 1.24
 name|SqlValidator
 name|setLenientOperatorLookup
 parameter_list|(
@@ -1142,12 +1207,18 @@ name|boolean
 name|lenient
 parameter_list|)
 function_decl|;
-comment|/** Returns whether this validator should be lenient upon encountering an    * unknown function.    *    *<p>If true, if a statement contains a call to a function that is not    * present in the operator table, or if the call does not have the required    * number or types of operands, the validator nevertheless regards the    * statement as valid. The type of the function call will be    * {@link #getUnknownType() UNKNOWN}.    *    *<p>If false (the default behavior), an unknown function call causes a    * validation error to be thrown. */
+comment|/** Returns whether this validator should be lenient upon encountering an    * unknown function.    *    *<p>If true, if a statement contains a call to a function that is not    * present in the operator table, or if the call does not have the required    * number or types of operands, the validator nevertheless regards the    * statement as valid. The type of the function call will be    * {@link #getUnknownType() UNKNOWN}.    *    *<p>If false (the default behavior), an unknown function call causes a    * validation error to be thrown.    *    * @deprecated Use {@link Config#lenientOperatorLookup}    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 1.24
 name|boolean
 name|isLenientOperatorLookup
 parameter_list|()
 function_decl|;
-comment|/**    * Sets enable or disable implicit type coercion when the validator does validation.    *    * @param enabled if enable the type coercion, default is true    *    * @see org.apache.calcite.sql.validate.implicit.TypeCoercionImpl TypeCoercionImpl    */
+comment|/**    * Sets enable or disable implicit type coercion when the validator does validation.    *    * @param enabled if enable the type coercion, default is true    *    * @see org.apache.calcite.sql.validate.implicit.TypeCoercionImpl TypeCoercionImpl    *    * @deprecated Use {@link Config#withTypeCoercionEnabled}    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 1.24
 name|SqlValidator
 name|setEnableTypeCoercion
 parameter_list|(
@@ -1155,7 +1226,10 @@ name|boolean
 name|enabled
 parameter_list|)
 function_decl|;
-comment|/** Returns if this validator supports implicit type coercion. */
+comment|/**    * Returns if this validator supports implicit type coercion.    *    * @deprecated Use {@link Config#typeCoercionEnabled}    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 1.24
 name|boolean
 name|isTypeCoercionEnabled
 parameter_list|()
@@ -1181,6 +1255,229 @@ name|SqlTypeCoercionRule
 name|typeCoercionRules
 parameter_list|)
 function_decl|;
+comment|/** Returns the config of the validator. */
+name|Config
+name|config
+parameter_list|()
+function_decl|;
+comment|/**    * Returns this SqlValidator, with the same state, applying    * a transform to the config.    *    *<p>This is mainly used for tests, otherwise constructs a {@link Config} directly    * through the constructor.    */
+annotation|@
+name|API
+argument_list|(
+name|status
+operator|=
+name|API
+operator|.
+name|Status
+operator|.
+name|INTERNAL
+argument_list|,
+name|since
+operator|=
+literal|"1.23"
+argument_list|)
+name|SqlValidator
+name|transform
+parameter_list|(
+name|UnaryOperator
+argument_list|<
+name|SqlValidator
+operator|.
+name|Config
+argument_list|>
+name|transform
+parameter_list|)
+function_decl|;
+comment|//~ Inner Class ------------------------------------------------------------
+comment|/**    * Interface to define the configuration for a SqlValidator.    * Provides methods to set each configuration option.    */
+specifier|public
+interface|interface
+name|Config
+block|{
+comment|/** Default configuration. */
+name|SqlValidator
+operator|.
+name|Config
+name|DEFAULT
+init|=
+name|ImmutableBeans
+operator|.
+name|create
+argument_list|(
+name|Config
+operator|.
+name|class
+argument_list|)
+decl_stmt|;
+comment|/**      * Returns whether to enable rewrite of "macro-like" calls such as COALESCE.      */
+annotation|@
+name|ImmutableBeans
+operator|.
+name|Property
+annotation|@
+name|ImmutableBeans
+operator|.
+name|BooleanDefault
+argument_list|(
+literal|true
+argument_list|)
+name|boolean
+name|callRewrite
+parameter_list|()
+function_decl|;
+comment|/**      * Sets whether to enable rewrite of "macro-like" calls such as COALESCE.      */
+name|Config
+name|withCallRewrite
+parameter_list|(
+name|boolean
+name|rewrite
+parameter_list|)
+function_decl|;
+comment|/** Returns how NULL values should be collated if an ORDER BY item does not      * contain NULLS FIRST or NULLS LAST. */
+annotation|@
+name|ImmutableBeans
+operator|.
+name|Property
+annotation|@
+name|ImmutableBeans
+operator|.
+name|EnumDefault
+argument_list|(
+literal|"HIGH"
+argument_list|)
+name|NullCollation
+name|defaultNullCollation
+parameter_list|()
+function_decl|;
+comment|/** Sets how NULL values should be collated if an ORDER BY item does not      * contain NULLS FIRST or NULLS LAST. */
+name|Config
+name|withDefaultNullCollation
+parameter_list|(
+name|NullCollation
+name|nullCollation
+parameter_list|)
+function_decl|;
+comment|/**      * Returns whether column reference expansion is enabled      */
+annotation|@
+name|ImmutableBeans
+operator|.
+name|Property
+annotation|@
+name|ImmutableBeans
+operator|.
+name|BooleanDefault
+argument_list|(
+literal|true
+argument_list|)
+name|boolean
+name|columnReferenceExpansion
+parameter_list|()
+function_decl|;
+comment|/**      * Sets whether to enable expansion of column references. (Currently this does      * not apply to the ORDER BY clause; may be fixed in the future.)      */
+name|Config
+name|withColumnReferenceExpansion
+parameter_list|(
+name|boolean
+name|expand
+parameter_list|)
+function_decl|;
+comment|/**      * Returns whether to expand identifiers other than column      * references.      *      *<p>REVIEW jvs 30-June-2006: subclasses may override shouldExpandIdentifiers      * in a way that ignores this; we should probably get rid of the protected      * method and always use this variable (or better, move preferences like      * this to a separate "parameter" class).      */
+annotation|@
+name|ImmutableBeans
+operator|.
+name|Property
+annotation|@
+name|ImmutableBeans
+operator|.
+name|BooleanDefault
+argument_list|(
+literal|false
+argument_list|)
+name|boolean
+name|identifierExpansion
+parameter_list|()
+function_decl|;
+comment|/**      * Sets whether to enable expansion of identifiers other than column      * references.      */
+name|Config
+name|withIdentifierExpansion
+parameter_list|(
+name|boolean
+name|expand
+parameter_list|)
+function_decl|;
+comment|/**      * Returns whether this validator should be lenient upon encountering an      * unknown function, default false.      *      *<p>If true, if a statement contains a call to a function that is not      * present in the operator table, or if the call does not have the required      * number or types of operands, the validator nevertheless regards the      * statement as valid. The type of the function call will be      * {@link #getUnknownType() UNKNOWN}.      *      *<p>If false (the default behavior), an unknown function call causes a      * validation error to be thrown.      */
+annotation|@
+name|ImmutableBeans
+operator|.
+name|Property
+annotation|@
+name|ImmutableBeans
+operator|.
+name|BooleanDefault
+argument_list|(
+literal|false
+argument_list|)
+name|boolean
+name|lenientOperatorLookup
+parameter_list|()
+function_decl|;
+comment|/**      * Sets whether this validator should be lenient upon encountering an unknown      * function.      *      * @param lenient Whether to be lenient when encountering an unknown function      */
+name|Config
+name|withLenientOperatorLookup
+parameter_list|(
+name|boolean
+name|lenient
+parameter_list|)
+function_decl|;
+comment|/** Returns whether the validator supports implicit type coercion. */
+annotation|@
+name|ImmutableBeans
+operator|.
+name|Property
+annotation|@
+name|ImmutableBeans
+operator|.
+name|BooleanDefault
+argument_list|(
+literal|true
+argument_list|)
+name|boolean
+name|typeCoercionEnabled
+parameter_list|()
+function_decl|;
+comment|/**      * Sets whether to enable implicit type coercion for validation, default true.      *      * @see org.apache.calcite.sql.validate.implicit.TypeCoercionImpl TypeCoercionImpl      */
+name|Config
+name|withTypeCoercionEnabled
+parameter_list|(
+name|boolean
+name|enabled
+parameter_list|)
+function_decl|;
+comment|/** Returns the dialect of SQL (SQL:2003, etc.) this validator recognizes.      * Default is {@link SqlConformanceEnum#DEFAULT}. */
+annotation|@
+name|ImmutableBeans
+operator|.
+name|Property
+annotation|@
+name|ImmutableBeans
+operator|.
+name|EnumDefault
+argument_list|(
+literal|"DEFAULT"
+argument_list|)
+name|SqlConformance
+name|sqlConformance
+parameter_list|()
+function_decl|;
+comment|/** Sets up the sql conformance of the validator. */
+name|Config
+name|withSqlConformance
+parameter_list|(
+name|SqlConformance
+name|conformance
+parameter_list|)
+function_decl|;
+block|}
 block|}
 end_interface
 

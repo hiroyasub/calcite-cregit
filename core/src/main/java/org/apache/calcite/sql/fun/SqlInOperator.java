@@ -679,7 +679,10 @@ name|rightType
 operator|&&
 name|validator
 operator|.
-name|isTypeCoercionEnabled
+name|config
+argument_list|()
+operator|.
+name|typeCoercionEnabled
 argument_list|()
 condition|)
 block|{
@@ -768,9 +771,6 @@ comment|// Coerce type first.
 if|if
 condition|(
 name|callBinding
-operator|.
-name|getValidator
-argument_list|()
 operator|.
 name|isTypeCoercionEnabled
 argument_list|()

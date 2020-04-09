@@ -1037,7 +1037,10 @@ if|if
 condition|(
 name|validator
 operator|.
-name|isTypeCoercionEnabled
+name|config
+argument_list|()
+operator|.
+name|typeCoercionEnabled
 argument_list|()
 condition|)
 block|{
@@ -1205,7 +1208,10 @@ literal|null
 operator|&&
 name|validator
 operator|.
-name|isLenientOperatorLookup
+name|config
+argument_list|()
+operator|.
+name|lenientOperatorLookup
 argument_list|()
 condition|)
 block|{
