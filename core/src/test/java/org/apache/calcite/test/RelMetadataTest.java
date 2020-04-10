@@ -3624,6 +3624,52 @@ block|}
 annotation|@
 name|Test
 name|void
+name|testRowCountUnionDistinct
+parameter_list|()
+block|{
+name|String
+name|sql
+init|=
+literal|"select x from (values 'a', 'b') as t(x)\n"
+operator|+
+literal|"union\n"
+operator|+
+literal|"select x from (values 'a', 'b') as t(x)"
+decl_stmt|;
+name|checkRowCount
+argument_list|(
+name|sql
+argument_list|,
+literal|2D
+argument_list|,
+literal|1D
+argument_list|,
+literal|4D
+argument_list|)
+expr_stmt|;
+name|sql
+operator|=
+literal|"select x from (values 'a', 'a') as t(x)\n"
+operator|+
+literal|"union\n"
+operator|+
+literal|"select x from (values 'a', 'a') as t(x)"
+expr_stmt|;
+name|checkRowCount
+argument_list|(
+name|sql
+argument_list|,
+literal|2D
+argument_list|,
+literal|1D
+argument_list|,
+literal|4D
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
 name|testRowCountIntersectOnFinite
 parameter_list|()
 block|{
