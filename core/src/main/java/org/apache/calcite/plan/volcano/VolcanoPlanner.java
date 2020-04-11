@@ -153,20 +153,6 @@ name|calcite
 operator|.
 name|plan
 operator|.
-name|RelOptListener
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|plan
-operator|.
 name|RelOptMaterialization
 import|;
 end_import
@@ -886,10 +872,6 @@ name|int
 name|nextSetId
 init|=
 literal|0
-decl_stmt|;
-comment|/**    * Listener for this planner, or null if none set.    */
-name|RelOptListener
-name|listener
 decl_stmt|;
 specifier|private
 name|RelNode
@@ -2367,6 +2349,9 @@ argument_list|()
 argument_list|)
 expr_stmt|;
 block|}
+name|dumpRuleAttemptsInfo
+argument_list|()
+expr_stmt|;
 name|RelNode
 name|cheapest
 init|=
@@ -5727,38 +5712,6 @@ block|}
 return|return
 name|subset
 return|;
-block|}
-comment|// implement RelOptPlanner
-specifier|public
-name|void
-name|addListener
-parameter_list|(
-name|RelOptListener
-name|newListener
-parameter_list|)
-block|{
-comment|// TODO jvs 6-Apr-2006:  new superclass AbstractRelOptPlanner
-comment|// now defines a multicast listener; just need to hook it in
-if|if
-condition|(
-name|listener
-operator|!=
-literal|null
-condition|)
-block|{
-throw|throw
-name|Util
-operator|.
-name|needToImplement
-argument_list|(
-literal|"multiple VolcanoPlanner listeners"
-argument_list|)
-throw|;
-block|}
-name|listener
-operator|=
-name|newListener
-expr_stmt|;
 block|}
 comment|// implement RelOptPlanner
 specifier|public

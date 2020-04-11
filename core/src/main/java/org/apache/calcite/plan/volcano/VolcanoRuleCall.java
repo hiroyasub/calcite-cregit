@@ -489,7 +489,8 @@ if|if
 condition|(
 name|volcanoPlanner
 operator|.
-name|listener
+name|getListener
+argument_list|()
 operator|!=
 literal|null
 condition|)
@@ -515,7 +516,8 @@ argument_list|)
 decl_stmt|;
 name|volcanoPlanner
 operator|.
-name|listener
+name|getListener
+argument_list|()
 operator|.
 name|ruleProductionSucceeded
 argument_list|(
@@ -658,7 +660,8 @@ if|if
 condition|(
 name|volcanoPlanner
 operator|.
-name|listener
+name|getListener
+argument_list|()
 operator|!=
 literal|null
 condition|)
@@ -684,7 +687,8 @@ argument_list|)
 decl_stmt|;
 name|volcanoPlanner
 operator|.
-name|listener
+name|getListener
+argument_list|()
 operator|.
 name|ruleProductionSucceeded
 argument_list|(
@@ -922,7 +926,8 @@ if|if
 condition|(
 name|volcanoPlanner
 operator|.
-name|listener
+name|getListener
+argument_list|()
 operator|!=
 literal|null
 condition|)
@@ -951,7 +956,8 @@ argument_list|)
 decl_stmt|;
 name|volcanoPlanner
 operator|.
-name|listener
+name|getListener
+argument_list|()
 operator|.
 name|ruleAttempted
 argument_list|(
@@ -1063,7 +1069,8 @@ if|if
 condition|(
 name|volcanoPlanner
 operator|.
-name|listener
+name|getListener
+argument_list|()
 operator|!=
 literal|null
 condition|)
@@ -1092,7 +1099,8 @@ argument_list|)
 decl_stmt|;
 name|volcanoPlanner
 operator|.
-name|listener
+name|getListener
+argument_list|()
 operator|.
 name|ruleAttempted
 argument_list|(

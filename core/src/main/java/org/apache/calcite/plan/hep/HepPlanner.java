@@ -1002,6 +1002,9 @@ comment|// Get rid of everything except what's in the final plan.
 name|collectGarbage
 argument_list|()
 expr_stmt|;
+name|dumpRuleAttemptsInfo
+argument_list|()
+expr_stmt|;
 return|return
 name|buildFinalPlan
 argument_list|(

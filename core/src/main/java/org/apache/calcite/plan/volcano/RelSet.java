@@ -1013,7 +1013,8 @@ if|if
 condition|(
 name|planner
 operator|.
-name|listener
+name|getListener
+argument_list|()
 operator|!=
 literal|null
 condition|)
@@ -1145,7 +1146,8 @@ argument_list|)
 decl_stmt|;
 name|planner
 operator|.
-name|listener
+name|getListener
+argument_list|()
 operator|.
 name|relEquivalenceFound
 argument_list|(
@@ -1222,7 +1224,8 @@ if|if
 condition|(
 name|planner
 operator|.
-name|listener
+name|getListener
+argument_list|()
 operator|!=
 literal|null
 condition|)
