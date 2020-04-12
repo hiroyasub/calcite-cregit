@@ -157,9 +157,12 @@ specifier|final
 name|RelTraitSet
 name|traitSet
 init|=
-name|agg
+name|rel
 operator|.
-name|getTraitSet
+name|getCluster
+argument_list|()
+operator|.
+name|traitSet
 argument_list|()
 operator|.
 name|replace
@@ -189,9 +192,7 @@ operator|.
 name|getInput
 argument_list|()
 argument_list|,
-name|EnumerableConvention
-operator|.
-name|INSTANCE
+name|traitSet
 argument_list|)
 argument_list|,
 name|agg

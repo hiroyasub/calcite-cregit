@@ -28626,6 +28626,91 @@ block|}
 end_function
 
 begin_comment
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2593">[CALCITE-2593]    * Error when transforming multiple collations to single collation</a>. */
+end_comment
+
+begin_function
+annotation|@
+name|Test
+name|void
+name|testWithinGroupClause7
+parameter_list|()
+block|{
+name|CalciteAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|query
+argument_list|(
+literal|"select sum(X + 1) filter (where Y) as S\n"
+operator|+
+literal|"from (values (1, TRUE), (2, TRUE)) AS t(X, Y)"
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+literal|"EnumerableAggregate(group=[{}], S=[SUM($0) FILTER $1])\n"
+operator|+
+literal|"  EnumerableCalc(expr#0..1=[{inputs}], expr#2=[1], expr#3=[+($t0, $t2)], $f0=[$t3], Y=[$t1])\n"
+operator|+
+literal|"    EnumerableValues(tuples=[[{ 1, true }, { 2, true }]])\n"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"S=5\n"
+argument_list|)
+expr_stmt|;
+block|}
+end_function
+
+begin_comment
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2010">[CALCITE-2010]    * Fails to plan query that is UNION ALL applied to VALUES</a>. */
+end_comment
+
+begin_function
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testUnionAllValues
+parameter_list|()
+block|{
+name|CalciteAssert
+operator|.
+name|hr
+argument_list|()
+operator|.
+name|query
+argument_list|(
+literal|"select x, y from (values (1, 2)) as t(x, y)\n"
+operator|+
+literal|"union all\n"
+operator|+
+literal|"select a + b, a - b from (values (3, 4), (5, 6)) as u(a, b)"
+argument_list|)
+operator|.
+name|explainContains
+argument_list|(
+literal|"EnumerableUnion(all=[true])\n"
+operator|+
+literal|"  EnumerableValues(tuples=[[{ 1, 2 }]])\n"
+operator|+
+literal|"  EnumerableCalc(expr#0..1=[{inputs}], expr#2=[+($t0, $t1)], expr#3=[-($t0, $t1)], EXPR$0=[$t2], EXPR$1=[$t3])\n"
+operator|+
+literal|"    EnumerableValues(tuples=[[{ 3, 4 }, { 5, 6 }]])\n"
+argument_list|)
+operator|.
+name|returnsUnordered
+argument_list|(
+literal|"X=11; Y=-1\nX=1; Y=2\nX=7; Y=-1"
+argument_list|)
+expr_stmt|;
+block|}
+end_function
+
+begin_comment
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3565">[CALCITE-3565]    * Explicitly cast assignable operand types to decimal for udf</a>. */
 end_comment
 
