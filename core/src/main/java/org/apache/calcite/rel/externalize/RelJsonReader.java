@@ -1347,6 +1347,17 @@ argument_list|(
 name|tag
 argument_list|)
 decl_stmt|;
+if|if
+condition|(
+name|jsonNodes
+operator|==
+literal|null
+condition|)
+block|{
+return|return
+literal|null
+return|;
+block|}
 specifier|final
 name|List
 argument_list|<
