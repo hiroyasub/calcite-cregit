@@ -520,7 +520,8 @@ name|isEmpty
 argument_list|()
 assert|;
 return|return
-name|create
+operator|new
+name|EnumerableValues
 argument_list|(
 name|getCluster
 argument_list|()
@@ -528,6 +529,8 @@ argument_list|,
 name|rowType
 argument_list|,
 name|tuples
+argument_list|,
+name|traitSet
 argument_list|)
 return|;
 block|}
