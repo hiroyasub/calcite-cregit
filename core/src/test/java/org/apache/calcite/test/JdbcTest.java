@@ -29500,6 +29500,54 @@ expr_stmt|;
 block|}
 end_function
 
+begin_comment
+comment|/**    * Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3894">[CALCITE-3894]    * SET operation between DATE and TIMESTAMP returns a wrong result</a>.    */
+end_comment
+
+begin_function
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testUnionDateTime
+parameter_list|()
+block|{
+name|CalciteAssert
+operator|.
+name|AssertThat
+name|assertThat
+init|=
+name|CalciteAssert
+operator|.
+name|that
+argument_list|()
+decl_stmt|;
+name|String
+name|query
+init|=
+literal|"select * from (\n"
+operator|+
+literal|"select \"id\" from (VALUES(DATE '2018-02-03')) \"foo\"(\"id\")\n"
+operator|+
+literal|"union\n"
+operator|+
+literal|"select \"id\" from (VALUES(TIMESTAMP '2008-03-31 12:23:34')) \"foo\"(\"id\"))"
+decl_stmt|;
+name|assertThat
+operator|.
+name|query
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"id=2008-03-31 12:23:34\nid=2018-02-03 00:00:00\n"
+argument_list|)
+expr_stmt|;
+block|}
+end_function
+
 begin_function
 specifier|private
 specifier|static

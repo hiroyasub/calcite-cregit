@@ -154,6 +154,23 @@ literal|"from (values (true, true, true))"
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Test cases for {@link TypeCoercion#inOperationCoercion}. */
+annotation|@
+name|Test
+name|void
+name|testInDateTimestamp
+parameter_list|()
+block|{
+name|checkPlanEquals
+argument_list|(
+literal|"select (t1_timestamp, t1_date)\n"
+operator|+
+literal|"in ((DATE '2020-04-16', TIMESTAMP '2020-04-16 11:40:53'))\n"
+operator|+
+literal|"from t1"
+argument_list|)
+expr_stmt|;
+block|}
 comment|/** Test cases for    * {@link org.apache.calcite.sql.validate.implicit.TypeCoercionImpl#booleanEquality}. */
 annotation|@
 name|Test

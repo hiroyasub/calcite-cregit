@@ -3069,6 +3069,21 @@ argument_list|(
 literal|"VARCHAR NOT NULL"
 argument_list|)
 expr_stmt|;
+comment|// date union timestamp
+name|sql
+argument_list|(
+literal|"select t1_date, t1_timestamp from t1\n"
+operator|+
+literal|"union select t2_timestamp, t2_date from t2"
+argument_list|)
+operator|.
+name|type
+argument_list|(
+literal|"RecordType(TIMESTAMP(0) NOT NULL T1_DATE,"
+operator|+
+literal|" TIMESTAMP(0) NOT NULL T1_TIMESTAMP) NOT NULL"
+argument_list|)
+expr_stmt|;
 comment|// intersect
 name|sql
 argument_list|(
@@ -3695,6 +3710,39 @@ argument_list|(
 literal|"RecordType(TIMESTAMP(0) NOT NULL EXPR$0) NOT NULL"
 argument_list|)
 expr_stmt|;
+comment|// timestamp date
+name|sql
+argument_list|(
+literal|"select COALESCE(t1_timestamp, t1_date) from t1"
+argument_list|)
+operator|.
+name|type
+argument_list|(
+literal|"RecordType(TIMESTAMP(0) NOT NULL EXPR$0) NOT NULL"
+argument_list|)
+expr_stmt|;
+comment|// date timestamp
+name|sql
+argument_list|(
+literal|"select COALESCE(t1_timestamp, t1_date) from t1"
+argument_list|)
+operator|.
+name|type
+argument_list|(
+literal|"RecordType(TIMESTAMP(0) NOT NULL EXPR$0) NOT NULL"
+argument_list|)
+expr_stmt|;
+comment|// null date timestamp
+name|sql
+argument_list|(
+literal|"select COALESCE(t1_timestamp, t1_date) from t1"
+argument_list|)
+operator|.
+name|type
+argument_list|(
+literal|"RecordType(TIMESTAMP(0) NOT NULL EXPR$0) NOT NULL"
+argument_list|)
+expr_stmt|;
 comment|// case when
 comment|// smallint int char
 name|sql
@@ -3750,6 +3798,17 @@ operator|.
 name|type
 argument_list|(
 literal|"RecordType(DECIMAL(19, 0) NOT NULL EXPR$0) NOT NULL"
+argument_list|)
+expr_stmt|;
+comment|// date timestamp
+name|sql
+argument_list|(
+literal|"select case when 1> 0 then t2_date else t2_timestamp end from t2"
+argument_list|)
+operator|.
+name|type
+argument_list|(
+literal|"RecordType(TIMESTAMP(0) NOT NULL EXPR$0) NOT NULL"
 argument_list|)
 expr_stmt|;
 block|}
