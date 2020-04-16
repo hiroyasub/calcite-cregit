@@ -1778,6 +1778,23 @@ name|rel
 argument_list|)
 expr_stmt|;
 block|}
+comment|// Fire rule match on subsets as well
+for|for
+control|(
+name|RelSubset
+name|subset
+range|:
+name|subsets
+control|)
+block|{
+name|planner
+operator|.
+name|fireRules
+argument_list|(
+name|subset
+argument_list|)
+expr_stmt|;
+block|}
 block|}
 block|}
 end_class
