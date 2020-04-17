@@ -708,6 +708,10 @@ operator|+
 literal|").absoluteFile)"
 argument_list|)
 expr_stmt|;
+comment|// Sources.of(url).file().getPath() does not always work
+comment|// e.g. it might throw java.nio.file.InvalidPathException: Malformed input or input contains
+comment|// unmappable characters: /home/.../ws/core/????????? ?????? ??????? ?????.txt
+comment|//        at java.base/sun.nio.fs.UnixPath.encode(UnixPath.java:145)
 name|assertEquals
 argument_list|(
 name|absoluteFile
@@ -715,17 +719,12 @@ operator|.
 name|getAbsolutePath
 argument_list|()
 argument_list|,
-name|Sources
-operator|.
-name|of
-argument_list|(
 name|url
-argument_list|)
 operator|.
-name|file
+name|toURI
 argument_list|()
 operator|.
-name|getPath
+name|getSchemeSpecificPart
 argument_list|()
 argument_list|,
 parameter_list|()
