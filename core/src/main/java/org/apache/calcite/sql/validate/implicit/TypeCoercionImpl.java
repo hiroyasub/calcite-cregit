@@ -429,7 +429,7 @@ name|validator
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Widen a SqlNode's field type to target type,    * mainly used for set operations like UNION, INTERSECT and EXCEPT.    *    *<p>Rules:    *<pre>    *    *       type1, type2  type3       select a, b, c from t1    *          \      \      \    *         type4  type5  type6              UNION    *          /      /      /    *       type7  type8  type9       select d, e, f from t2    *</pre>    * For struct type (type1, type2, type3) union type (type4, type5, type6),    * infer the first result column type type7 as the wider type of type1 and type4,    * the second column type as the wider type of type2 and type5 and so on.    *    * @param scope       validator scope    * @param query       query node to update the field type for    * @param columnIndex target column index    * @param targetType  target type to cast to    * @return true if any type coercion actually happens    */
+comment|/**    * Widen a SqlNode's field type to common type,    * mainly used for set operations like UNION, INTERSECT and EXCEPT.    *    *<p>Rules:    *<pre>    *    *       type1, type2  type3       select a, b, c from t1    *          \      \      \    *         type4  type5  type6              UNION    *          /      /      /    *       type7  type8  type9       select d, e, f from t2    *</pre>    * For struct type (type1, type2, type3) union type (type4, type5, type6),    * infer the first result column type type7 as the wider type of type1 and type4,    * the second column type as the wider type of type2 and type5 and so on.    *    * @param scope       Validator scope    * @param query       Query node to update the field type for    * @param columnIndex Target column index    * @param targetType  Target type to cast to    */
 specifier|public
 name|boolean
 name|rowTypeCoercion
@@ -701,7 +701,7 @@ literal|false
 return|;
 block|}
 block|}
-comment|/**    * Coerce operands in binary arithmetic expressions to NUMERIC types.    *    *<p>For binary arithmetic operators like [+, -, *, /, %]:    * If the operand is VARCHAR,    * coerce it to data type of the other operand if its data type is NUMERIC;    * If the other operand is DECIMAL,    * coerce the STRING operand to max precision/scale DECIMAL.    */
+comment|/**    * Coerces operands in binary arithmetic expressions to NUMERIC types.    *    *<p>For binary arithmetic operators like [+, -, *, /, %]:    * If the operand is VARCHAR,    * coerce it to data type of the other operand if its data type is NUMERIC;    * If the other operand is DECIMAL,    * coerce the STRING operand to max precision/scale DECIMAL.    */
 specifier|public
 name|boolean
 name|binaryArithmeticCoercion
@@ -710,7 +710,7 @@ name|SqlCallBinding
 name|binding
 parameter_list|)
 block|{
-comment|// Assume that the operator has NUMERIC family operand type checker.
+comment|// Assume the operator has NUMERIC family operand type checker.
 name|SqlOperator
 name|operator
 init|=
@@ -848,12 +848,13 @@ name|RelDataType
 name|right
 parameter_list|)
 block|{
-comment|// PostgreSQL and SQL-SERVER would cast the CHARACTER type operand to type
-comment|// of another numeric operand, i.e. for '9' / 2, '9' would be casted to INTEGER,
-comment|// while for '9' / 3.3, '9' would be casted to DOUBLE.
-comment|// It does not allow two CHARACTER operands for binary arithmetic operators.
+comment|// For expression "NUMERIC<OP> CHARACTER",
+comment|// PostgreSQL and MS-SQL coerce the CHARACTER operand to NUMERIC,
+comment|// i.e. for '9':VARCHAR(1) / 2: INT, '9' would be coerced to INTEGER,
+comment|// while for '9':VARCHAR(1) / 3.3: DOUBLE, '9' would be coerced to DOUBLE.
+comment|// They do not allow both CHARACTER operands for binary arithmetic operators.
 comment|// MySQL and Oracle would coerce all the string operands to DOUBLE.
-comment|// Keep sync with PostgreSQL and SQL-SERVER because their behaviors are more in
+comment|// Keep sync with PostgreSQL and MS-SQL because their behaviors are more in
 comment|// line with the SQL standard.
 if|if
 condition|(
@@ -973,7 +974,7 @@ return|return
 literal|false
 return|;
 block|}
-comment|/**    * Coerce operands in binary comparison expressions.    *    *<p>Rules:</p>    *<ul>    *<li>For EQUALS(=) operator: 1. If operands are BOOLEAN and NUMERIC, evaluate    *   `1=true` and `0=false` all to be true; 2. If operands are datetime and string,    *   do nothing because the SqlToRelConverter already makes the type coercion;</li>    *<li>For binary comparision [=,&gt;,&gt;=,&lt;,&lt;=]: try to find the common type,    *   i.e. "1&gt; '1'" will be converted to "1&gt; 1";</li>    *<li>For BETWEEN operator, find the common comparison data type of all the operands,    *   the common type is deduced from left to right, i.e. for expression "A between B and C",    *   finds common comparison type D between A and B    *   then common comparison type E between D and C as the final common type.</li>    *</ul>    */
+comment|/**    * Coerces operands in binary comparison expressions.    *    *<p>Rules:</p>    *<ul>    *<li>For EQUALS(=) operator: 1. If operands are BOOLEAN and NUMERIC, evaluate    *   `1=true` and `0=false` all to be true; 2. If operands are datetime and string,    *   do nothing because the SqlToRelConverter already makes the type coercion;</li>    *<li>For binary comparision [=,&gt;,&gt;=,&lt;,&lt;=]: try to find the common type,    *   i.e. "1&gt; '1'" will be converted to "1&gt; 1";</li>    *<li>For BETWEEN operator, find the common comparison data type of all the operands,    *   the common type is deduced from left to right, i.e. for expression "A between B and C",    *   finds common comparison type D between A and B    *   then common comparison type E between D and C as the final common type.</li>    *</ul>    */
 specifier|public
 name|boolean
 name|binaryComparisonCoercion
@@ -1041,7 +1042,7 @@ argument_list|(
 literal|1
 argument_list|)
 decl_stmt|;
-comment|// EQUALS(=) NOT_EQUALS(<>) operator
+comment|// EQUALS(=) NOT_EQUALS(<>)
 if|if
 condition|(
 name|kind
@@ -1055,7 +1056,6 @@ argument_list|)
 condition|)
 block|{
 comment|// STRING and datetime
-comment|// BOOLEAN and NUMERIC | BOOLEAN and literal
 name|coerced
 operator|=
 name|dateTimeStringEquality
@@ -1069,6 +1069,8 @@ argument_list|)
 operator|||
 name|coerced
 expr_stmt|;
+comment|// BOOLEAN and NUMERIC
+comment|// BOOLEAN and literal
 name|coerced
 operator|=
 name|booleanEquality
@@ -1450,7 +1452,7 @@ return|return
 name|commonType
 return|;
 block|}
-comment|/**    * Datetime and STRING equality: cast STRING type to datetime type, SqlToRelConverter already    * make the conversion but we still keep this interface overridable    * so user can have their custom implementation.    */
+comment|/**    * Datetime and STRING equality: cast STRING type to datetime type, SqlToRelConverter already    * makes the conversion but we still keep this interface overridable    * so user can have their custom implementation.    */
 specifier|protected
 name|boolean
 name|dateTimeStringEquality
@@ -1545,7 +1547,7 @@ return|return
 literal|false
 return|;
 block|}
-comment|/**    * Cast "BOOLEAN = NUMERIC" to "NUMERIC = NUMERIC". Expressions like 1=`expr` and    * 0=`expr` can be simplified to `expr` and `not expr`, but this better happens    * in {@link org.apache.calcite.rex.RexSimplify}.    *    *<p>There are 2 cases that need type coercion here:    *<ol>    *<li>Case1: `boolean expr1` = 1 or `boolean expr1` = 0, replace the numeric literal with    *   `true` or `false` boolean literal.</li>    *<li>Case2: `boolean expr1` = `numeric expr2`, replace expr1 to `1` or `0` numeric    *   literal.</li>    *</ol>    * For case2, wrap the operand in a cast operator, during sql-to-rel conversion    * we would convert expression `cast(expr1 as right)` to `case when expr1 then 1 else 0.`    */
+comment|/**    * Casts "BOOLEAN = NUMERIC" to "NUMERIC = NUMERIC". Expressions like 1=`expr` and    * 0=`expr` can be simplified to `expr` and `not expr`, but this better happens    * in {@link org.apache.calcite.rex.RexSimplify}.    *    *<p>There are 2 cases that need type coercion here:    *<ol>    *<li>Case1: `boolean expr1` = 1 or `boolean expr1` = 0, replace the numeric literal with    *   `true` or `false` boolean literal.</li>    *<li>Case2: `boolean expr1` = `numeric expr2`, replace expr1 to `1` or `0` numeric    *   literal.</li>    *</ol>    * For case2, wrap the operand in a cast operator, during sql-to-rel conversion    * we would convert expression `cast(expr1 as right)` to `case when expr1 then 1 else 0.`    */
 specifier|protected
 name|boolean
 name|booleanEquality
@@ -1864,7 +1866,7 @@ return|return
 literal|false
 return|;
 block|}
-comment|/**    * Case when and COALESCE type coercion, collect all the branches types including then    * operands and else operands to find a common type, then cast the operands to the common type    * if it is needed.    */
+comment|/**    * CASE and COALESCE type coercion, collect all the branches types including then    * operands and else operands to find a common type, then cast the operands to the common type    * when needed.    */
 specifier|public
 name|boolean
 name|caseWhenCoercion
@@ -3196,7 +3198,7 @@ return|return
 name|coerced
 return|;
 block|}
-comment|/**    * Coerces the field expression at index {@code columnIndex} of source    * in an INSERT or UPDATE query to target type.    *    * @param sourceScope  Query source scope    * @param query        Query    * @param columnIndex  Source column index to coerce type    * @param targetType   Target type    *    * @return True if any type coercion happens    */
+comment|/**    * Coerces the field expression at index {@code columnIndex} of source    * in an INSERT or UPDATE query to target type.    *    * @param sourceScope  Query source scope    * @param query        Query    * @param columnIndex  Source column index to coerce type    * @param targetType   Target type    */
 specifier|private
 name|boolean
 name|coerceSourceRowType

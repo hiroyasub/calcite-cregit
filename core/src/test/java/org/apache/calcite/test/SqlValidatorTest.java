@@ -3657,12 +3657,27 @@ argument_list|(
 literal|true
 argument_list|)
 operator|.
+name|withTypeCoercion
+argument_list|(
+literal|false
+argument_list|)
+operator|.
 name|fails
 argument_list|(
 literal|"(?s)Cannot apply 'CONCAT' to arguments of type "
 operator|+
 literal|"'CONCAT\\(<CHAR\\(6\\)>,<INTEGER>\\)'\\. .*"
 argument_list|)
+expr_stmt|;
+name|s
+operator|.
+name|expr
+argument_list|(
+literal|"concat('aabbcc', 2)"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
 expr_stmt|;
 name|s
 operator|.
@@ -3676,12 +3691,27 @@ argument_list|(
 literal|true
 argument_list|)
 operator|.
+name|withTypeCoercion
+argument_list|(
+literal|false
+argument_list|)
+operator|.
 name|fails
 argument_list|(
 literal|"(?s)Cannot apply 'CONCAT' to arguments of type "
 operator|+
 literal|"'CONCAT\\(<CHAR\\(3\\)>,<CHAR\\(2\\)>,<INTEGER>\\)'\\. .*"
 argument_list|)
+expr_stmt|;
+name|s
+operator|.
+name|expr
+argument_list|(
+literal|"concat('abc', 'ab', 123)"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
 expr_stmt|;
 name|s
 operator|.
@@ -3695,12 +3725,61 @@ argument_list|(
 literal|true
 argument_list|)
 operator|.
+name|withTypeCoercion
+argument_list|(
+literal|false
+argument_list|)
+operator|.
 name|fails
 argument_list|(
 literal|"(?s)Cannot apply 'CONCAT' to arguments of type "
 operator|+
 literal|"'CONCAT\\(<BOOLEAN>,<BOOLEAN>\\)'\\. .*"
 argument_list|)
+expr_stmt|;
+name|s
+operator|.
+name|expr
+argument_list|(
+literal|"concat(true, false)"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|s
+operator|.
+name|expr
+argument_list|(
+literal|"concat(DATE '2020-04-17', TIMESTAMP '2020-04-17 14:17:51')"
+argument_list|)
+operator|.
+name|withWhole
+argument_list|(
+literal|true
+argument_list|)
+operator|.
+name|withTypeCoercion
+argument_list|(
+literal|false
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"(?s)Cannot apply 'CONCAT' to arguments of type "
+operator|+
+literal|"'CONCAT\\(<DATE>,<TIMESTAMP\\(0\\)>\\)'\\. .*"
+argument_list|)
+expr_stmt|;
+name|s
+operator|.
+name|expr
+argument_list|(
+literal|"concat(DATE '2020-04-17', TIMESTAMP '2020-04-17 14:17:51')"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
 expr_stmt|;
 block|}
 annotation|@

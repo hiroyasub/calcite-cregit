@@ -622,7 +622,7 @@ return|return
 literal|true
 return|;
 block|}
-comment|/**    * Coerce all the operands to {@code commonType}.    *    * @param scope      Validator scope    * @param call       the call    * @param commonType common type to coerce to    * @return true if any operand is coerced    */
+comment|/**    * Coerce all the operands to {@code commonType}.    *    * @param scope      Validator scope    * @param call       the call    * @param commonType common type to coerce to    */
 specifier|protected
 name|boolean
 name|coerceOperandsType
@@ -680,7 +680,7 @@ return|return
 name|coerced
 return|;
 block|}
-comment|/**    * Cast column at index {@code index} to target type.    *    * @param scope      validator scope for the node list    * @param nodeList   column node list    * @param index      index of column    * @param targetType target type to cast to    *    * @return true if type coercion actually happens.    */
+comment|/**    * Cast column at index {@code index} to target type.    *    * @param scope      Validator scope for the node list    * @param nodeList   Column node list    * @param index      Index of column    * @param targetType Target type to cast to    */
 specifier|protected
 name|boolean
 name|coerceColumnType
@@ -1281,7 +1281,7 @@ return|return
 literal|true
 return|;
 block|}
-comment|/** It should not be used directly, because some other work should be done    * before cast operation, see {@link #coerceColumnType}, {@link #coerceOperandType}.    *    *<p>Ignore constant reduction which should happen in RexSimplify.    * */
+comment|/** It should not be used directly, because some other work should be done    * before cast operation, see {@link #coerceColumnType}, {@link #coerceOperandType}.    *    *<p>Ignore constant reduction which should happen in RexSimplify.    */
 specifier|private
 name|SqlNode
 name|castTo
@@ -1376,7 +1376,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-comment|/**    * Update inferred row type for a query, i.e. SqlCall that returns struct type    * or SqlSelect.    *    * @param scope       validator scope    * @param query       node to inferred type    * @param columnIndex column index to update    * @param desiredType desired column type    */
+comment|/**    * Update inferred row type for a query, i.e. SqlCall that returns struct type    * or SqlSelect.    *    * @param scope       Validator scope    * @param query       Node to inferred type    * @param columnIndex Column index to update    * @param desiredType Desired column type    */
 specifier|protected
 name|void
 name|updateInferredColumnType
@@ -1533,7 +1533,7 @@ argument_list|)
 argument_list|)
 expr_stmt|;
 block|}
-comment|/**    * Case1: type widening with no precision loss.    * Find the tightest common type of two types that might be used in binary expression.    *    * @return tightest common type i.e. INTEGER + DECIMAL(10, 2) will return DECIMAL(10, 2)    */
+comment|/**    * Case1: type widening with no precision loss.    * Find the tightest common type of two types that might be used in binary expression.    *    * @return tightest common type, i.e. INTEGER + DECIMAL(10, 2) returns DECIMAL(10, 2)    */
 specifier|public
 name|RelDataType
 name|getTightestCommonType
@@ -2908,7 +2908,7 @@ return|return
 name|partitioned
 return|;
 block|}
-comment|/**    * Check if the types and families can have implicit type coercion.    * We will check the type one by one, that means the 1th type and 1th family,    * 2th type and 2th family, and the like.    *    * @param types    data type need to check    * @param families desired type families list    * @return true if we can do type coercion    */
+comment|/**    * Check if the types and families can have implicit type coercion.    * We will check the type one by one, that means the 1th type and 1th family,    * 2th type and 2th family, and the like.    *    * @param types    Data type need to check    * @param families Desired type families list    */
 name|boolean
 name|canImplicitTypeCast
 parameter_list|(
@@ -3007,7 +3007,7 @@ return|return
 name|needed
 return|;
 block|}
-comment|/**    * Type coercion based on the inferred type from passed in operand    * and the {@link SqlTypeFamily} defined in the checkers,    * e.g. the {@link org.apache.calcite.sql.type.FamilyOperandTypeChecker}.    *    *<p>Caution that we do not cast from NUMERIC to NUMERIC.    * See<a href="https://docs.google.com/spreadsheets/d/1GhleX5h5W8-kJKh7NMJ4vtoE78pwfaZRJl88ULX_MgU/edit?usp=sharing">CalciteImplicitCasts</a>    * for the details.    *    * @param in       inferred operand type    * @param expected expected {@link SqlTypeFamily} of registered SqlFunction    * @return common type of implicit cast, null if we do not find any    */
+comment|/**    * Type coercion based on the inferred type from passed in operand    * and the {@link SqlTypeFamily} defined in the checkers,    * e.g. the {@link org.apache.calcite.sql.type.FamilyOperandTypeChecker}.    *    *<p>Caution that we do not cast from NUMERIC to NUMERIC.    * See<a href="https://docs.google.com/spreadsheets/d/1GhleX5h5W8-kJKh7NMJ4vtoE78pwfaZRJl88ULX_MgU/edit?usp=sharing">CalciteImplicitCasts</a>    * for the details.    *    * @param in       Inferred operand type    * @param expected Expected {@link SqlTypeFamily} of registered SqlFunction    * @return common type of implicit cast, null if we do not find any    */
 specifier|public
 name|RelDataType
 name|implicitCast
