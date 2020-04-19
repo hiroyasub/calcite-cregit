@@ -2839,6 +2839,15 @@ operator|.
 name|THROW
 argument_list|)
 assert|;
+name|equivRel
+operator|=
+name|ensureRegistered
+argument_list|(
+name|equivRel
+argument_list|,
+literal|null
+argument_list|)
+expr_stmt|;
 name|set
 operator|=
 name|getSet
@@ -2928,7 +2937,10 @@ block|}
 block|}
 name|result
 operator|=
+name|canonize
+argument_list|(
 name|subset
+argument_list|)
 expr_stmt|;
 block|}
 else|else
@@ -4597,6 +4609,11 @@ name|subset
 operator|.
 name|getTraitSet
 argument_list|()
+argument_list|,
+name|subset
+operator|.
+name|isRequired
+argument_list|()
 argument_list|)
 return|;
 block|}
@@ -5946,7 +5963,10 @@ argument_list|)
 expr_stmt|;
 block|}
 return|return
+name|canonize
+argument_list|(
 name|subset
+argument_list|)
 return|;
 block|}
 comment|// implement RelOptPlanner
