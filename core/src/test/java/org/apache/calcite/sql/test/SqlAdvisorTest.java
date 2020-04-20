@@ -422,9 +422,9 @@ name|String
 argument_list|>
 name|STAR_KEYWORD
 init|=
-name|Arrays
+name|Collections
 operator|.
-name|asList
+name|singletonList
 argument_list|(
 literal|"KEYWORD(*)"
 argument_list|)
@@ -556,9 +556,9 @@ name|String
 argument_list|>
 name|EMP_TABLE
 init|=
-name|Arrays
+name|Collections
 operator|.
-name|asList
+name|singletonList
 argument_list|(
 literal|"TABLE(EMP)"
 argument_list|)
@@ -865,6 +865,8 @@ argument_list|,
 literal|"KEYWORD(STREAM)"
 argument_list|,
 literal|"KEYWORD(*)"
+argument_list|,
+literal|"KEYWORD(/*+)"
 argument_list|)
 decl_stmt|;
 specifier|private
@@ -1084,9 +1086,9 @@ name|String
 argument_list|>
 name|A_TABLE
 init|=
-name|Arrays
+name|Collections
 operator|.
-name|asList
+name|singletonList
 argument_list|(
 literal|"TABLE(A)"
 argument_list|)
@@ -1121,6 +1123,8 @@ argument_list|,
 literal|"KEYWORD(()"
 argument_list|,
 literal|"KEYWORD(EXTEND)"
+argument_list|,
+literal|"KEYWORD(/*+)"
 argument_list|,
 literal|"KEYWORD(AS)"
 argument_list|,
@@ -5516,9 +5520,9 @@ name|sql
 argument_list|,
 name|EXPR_KEYWORDS
 argument_list|,
-name|Arrays
+name|Collections
 operator|.
-name|asList
+name|singletonList
 argument_list|(
 literal|"TABLE(a)"
 argument_list|)

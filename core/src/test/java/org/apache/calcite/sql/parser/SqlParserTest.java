@@ -35010,7 +35010,7 @@ parameter_list|()
 block|{
 specifier|final
 name|String
-name|sql
+name|sql1
 init|=
 literal|"select "
 operator|+
@@ -35024,7 +35024,7 @@ literal|"empno, ename, deptno from emps"
 decl_stmt|;
 specifier|final
 name|String
-name|expected
+name|expected1
 init|=
 literal|"SELECT\n"
 operator|+
@@ -35042,12 +35042,41 @@ literal|"FROM `EMPS`"
 decl_stmt|;
 name|sql
 argument_list|(
-name|sql
+name|sql1
 argument_list|)
 operator|.
 name|ok
 argument_list|(
-name|expected
+name|expected1
+argument_list|)
+expr_stmt|;
+comment|// Hint item right after the token "/*+"
+specifier|final
+name|String
+name|sql2
+init|=
+literal|"select /*+properties(k1='v1', k2='v2')*/ empno from emps"
+decl_stmt|;
+specifier|final
+name|String
+name|expected2
+init|=
+literal|"SELECT\n"
+operator|+
+literal|"/*+ `PROPERTIES`(`K1` = 'v1', `K2` = 'v2') */\n"
+operator|+
+literal|"`EMPNO`\n"
+operator|+
+literal|"FROM `EMPS`"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql2
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected2
 argument_list|)
 expr_stmt|;
 block|}
