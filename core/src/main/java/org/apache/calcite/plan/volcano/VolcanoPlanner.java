@@ -7569,6 +7569,11 @@ name|size
 argument_list|()
 operator|>
 name|subsetBeforeCount
+operator|&&
+name|subset
+operator|.
+name|isDerived
+argument_list|()
 condition|)
 block|{
 name|fireRules

@@ -1787,6 +1787,14 @@ range|:
 name|subsets
 control|)
 block|{
+if|if
+condition|(
+name|subset
+operator|.
+name|isDerived
+argument_list|()
+condition|)
+block|{
 name|planner
 operator|.
 name|fireRules
@@ -1794,6 +1802,7 @@ argument_list|(
 name|subset
 argument_list|)
 expr_stmt|;
+block|}
 block|}
 block|}
 block|}
