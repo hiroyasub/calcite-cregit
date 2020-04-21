@@ -429,6 +429,42 @@ name|apache
 operator|.
 name|calcite
 operator|.
+name|sql
+operator|.
+name|validate
+operator|.
+name|implicit
+operator|.
+name|TypeCoercionFactory
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|validate
+operator|.
+name|implicit
+operator|.
+name|TypeCoercions
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
 name|util
 operator|.
 name|ImmutableBeans
@@ -1234,7 +1270,10 @@ name|boolean
 name|isTypeCoercionEnabled
 parameter_list|()
 function_decl|;
-comment|/**    * Sets an instance of type coercion, you can customize the coercion rules to    * override the default ones defined in    * {@link org.apache.calcite.sql.validate.implicit.TypeCoercionImpl}.    *    * @param typeCoercion {@link TypeCoercion} instance    */
+comment|/**    * Sets an instance of type coercion, you can customize the coercion rules to    * override the default ones defined in    * {@link org.apache.calcite.sql.validate.implicit.TypeCoercionImpl}.    *    * @param typeCoercion {@link TypeCoercion} instance    *    * @deprecated Use {@link Config#withTypeCoercionFactory}    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 1.24
 name|void
 name|setTypeCoercion
 parameter_list|(
@@ -1247,7 +1286,10 @@ name|TypeCoercion
 name|getTypeCoercion
 parameter_list|()
 function_decl|;
-comment|/**    * Sets the {@link SqlTypeCoercionRule} instance which defines the type conversion matrix    * for the explicit type coercion.    *    *<p>The {@code typeCoercionRules} setting should be thread safe.    * In the default implementation,    * the {@code typeCoercionRules} is set to a ThreadLocal variable.    *    * @param typeCoercionRules The {@link SqlTypeCoercionRule} instance, see its documentation    *                          for how to customize the rules.    */
+comment|/**    * Sets the {@link SqlTypeCoercionRule} instance which defines the type conversion matrix    * for the explicit type coercion.    *    *<p>The {@code typeCoercionRules} setting should be thread safe.    * In the default implementation,    * the {@code typeCoercionRules} is set to a ThreadLocal variable.    *    * @param typeCoercionRules The {@link SqlTypeCoercionRule} instance, see its documentation    *                          for how to customize the rules.    *    * @deprecated Use {@link Config#withTypeCoercionRules}    */
+annotation|@
+name|Deprecated
+comment|// to be removed before 1.24
 name|void
 name|setSqlTypeCoercionRules
 parameter_list|(
@@ -1307,6 +1349,13 @@ argument_list|(
 name|Config
 operator|.
 name|class
+argument_list|)
+operator|.
+name|withTypeCoercionFactory
+argument_list|(
+name|TypeCoercions
+operator|::
+name|createTypeCoercion
 argument_list|)
 decl_stmt|;
 comment|/**      * Returns whether to enable rewrite of "macro-like" calls such as COALESCE.      */
@@ -1451,6 +1500,40 @@ name|withTypeCoercionEnabled
 parameter_list|(
 name|boolean
 name|enabled
+parameter_list|)
+function_decl|;
+comment|/** Returns the type coercion factory. */
+annotation|@
+name|ImmutableBeans
+operator|.
+name|Property
+name|TypeCoercionFactory
+name|typeCoercionFactory
+parameter_list|()
+function_decl|;
+comment|/**      * Sets a factory to create type coercion instance that overrides the      * default coercion rules defined in      * {@link org.apache.calcite.sql.validate.implicit.TypeCoercionImpl}.      *      * @param factory Factory to create {@link TypeCoercion} instance      */
+name|Config
+name|withTypeCoercionFactory
+parameter_list|(
+name|TypeCoercionFactory
+name|factory
+parameter_list|)
+function_decl|;
+comment|/** Returns the type coercion rules for explicit type coercion. */
+annotation|@
+name|ImmutableBeans
+operator|.
+name|Property
+name|SqlTypeCoercionRule
+name|typeCoercionRules
+parameter_list|()
+function_decl|;
+comment|/**      * Sets the {@link SqlTypeCoercionRule} instance which defines the type conversion matrix      * for the explicit type coercion.      *      *<p>The {@code rules} setting should be thread safe. In the default implementation,      * it is set to a ThreadLocal variable.      *      * @param rules The {@link SqlTypeCoercionRule} instance,      *              see its documentation for how to customize the rules      */
+name|Config
+name|withTypeCoercionRules
+parameter_list|(
+name|SqlTypeCoercionRule
+name|rules
 parameter_list|)
 function_decl|;
 comment|/** Returns the dialect of SQL (SQL:2003, etc.) this validator recognizes.      * Default is {@link SqlConformanceEnum#DEFAULT}. */

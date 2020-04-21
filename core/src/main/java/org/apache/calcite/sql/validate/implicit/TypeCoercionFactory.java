@@ -51,25 +51,45 @@ name|SqlValidator
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|apiguardian
+operator|.
+name|api
+operator|.
+name|API
+import|;
+end_import
+
 begin_comment
-comment|/**  * Factory class for type coercion instantiation of different sql dialects.  */
+comment|/** Factory for {@link TypeCoercion} objects.  *  *<p>A type coercion factory allows you to include custom rules of  * implicit type coercion. Usually you should inherit the {@link TypeCoercionImpl}  * and override the methods that you want to customize.  *  *<p>This interface is experimental and would change without notice.  *  * @see SqlValidator.Config#withTypeCoercionFactory  */
 end_comment
 
-begin_class
+begin_interface
+annotation|@
+name|API
+argument_list|(
+name|status
+operator|=
+name|API
+operator|.
+name|Status
+operator|.
+name|EXPERIMENTAL
+argument_list|,
+name|since
+operator|=
+literal|"1.23"
+argument_list|)
 specifier|public
-class|class
-name|TypeCoercions
+interface|interface
+name|TypeCoercionFactory
 block|{
-specifier|private
-name|TypeCoercions
-parameter_list|()
-block|{
-block|}
-comment|/** Creates a default type coercion instance. */
-specifier|public
-specifier|static
+comment|/**    * Creates a TypeCoercion.    *    * @param typeFactory Type factory    * @param validator   SQL validator    */
 name|TypeCoercion
-name|createTypeCoercion
+name|create
 parameter_list|(
 name|RelDataTypeFactory
 name|typeFactory
@@ -77,19 +97,9 @@ parameter_list|,
 name|SqlValidator
 name|validator
 parameter_list|)
-block|{
-return|return
-operator|new
-name|TypeCoercionImpl
-argument_list|(
-name|typeFactory
-argument_list|,
-name|validator
-argument_list|)
-return|;
+function_decl|;
 block|}
-block|}
-end_class
+end_interface
 
 end_unit
 
