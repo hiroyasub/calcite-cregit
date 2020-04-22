@@ -1379,6 +1379,126 @@ name|expected
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Test
+name|void
+name|testCreateTableWithNoCollectionTypeSpecified
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"create table foo (bar integer not null, baz varchar(30))"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"CREATE TABLE `FOO` (`BAR` INTEGER NOT NULL, `BAZ` VARCHAR(30))"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testCreateSetTable
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"create set table foo (bar int not null, baz varchar(30))"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"CREATE SET TABLE `FOO` (`BAR` INTEGER NOT NULL, `BAZ` VARCHAR(30))"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testCreateMultisetTable
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"create multiset table foo (bar int not null, baz varchar(30))"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"CREATE MULTISET TABLE `FOO` "
+operator|+
+literal|"(`BAR` INTEGER NOT NULL, `BAZ` VARCHAR(30))"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testCreateVolatileTable
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"create volatile table foo (bar int not null, baz varchar(30))"
+decl_stmt|;
+specifier|final
+name|String
+name|expected
+init|=
+literal|"CREATE VOLATILE TABLE `FOO` "
+operator|+
+literal|"(`BAR` INTEGER NOT NULL, `BAZ` VARCHAR(30))"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected
+argument_list|)
+expr_stmt|;
+block|}
 block|}
 end_class
 

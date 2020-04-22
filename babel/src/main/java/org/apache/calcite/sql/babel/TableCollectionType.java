@@ -18,23 +18,24 @@ package|;
 end_package
 
 begin_comment
-comment|/** SQL parser that accepts a wide variety of dialects. */
+comment|/**  * Enumerates the collection type of a table: {@code MULTISET} allows duplicates  * and {@code SET} does not.  *  *<p>This feature is supported in Teradata, which originally required rows in a  * table to be unique, and later added the {@code MULTISET} keyword to  * its {@code CREATE TABLE} command to allow the duplicate rows.  *  *<p>In other databases and in the SQL standard, {@code MULTISET} is the only  * supported option, so there is no explicit syntax.  */
 end_comment
 
-begin_class
-annotation|@
-name|SuppressWarnings
-argument_list|(
-literal|"unused"
-argument_list|)
+begin_enum
 specifier|public
-class|class
-name|Babel
+enum|enum
+name|TableCollectionType
 block|{
-comment|// This class is currently a place-holder. Javadoc gets upset
-comment|// if there are no classes in babel/java/main.
-block|}
-end_class
+comment|/**    * Table collection type is not specified.    *    *<p>Defaults to {@code MULTISET} in ANSI mode,    * and {@code SET} in Teradata mode.    */
+name|UNSPECIFIED
+block|,
+comment|/**    * Duplicate rows are not permitted.    */
+name|SET
+block|,
+comment|/**    * Duplicate rows are permitted, in compliance with the ANSI SQL:2011 standard.    */
+name|MULTISET
+block|, }
+end_enum
 
 end_unit
 
