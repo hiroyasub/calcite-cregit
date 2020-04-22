@@ -1553,7 +1553,6 @@ operator|.
 name|getCollation
 argument_list|()
 decl_stmt|;
-comment|// TODO:  refine collation combination rules
 specifier|final
 name|int
 name|precision
@@ -1722,6 +1721,29 @@ name|charset
 init|=
 literal|null
 decl_stmt|;
+comment|// TODO:  refine collation combination rules
+name|SqlCollation
+name|collation0
+init|=
+name|collation1
+operator|!=
+literal|null
+operator|&&
+name|collation2
+operator|!=
+literal|null
+condition|?
+name|SqlCollation
+operator|.
+name|getCoercibilityDyadicOperator
+argument_list|(
+name|collation1
+argument_list|,
+name|collation2
+argument_list|)
+else|:
+literal|null
+decl_stmt|;
 name|SqlCollation
 name|collation
 init|=
@@ -1839,6 +1861,12 @@ name|resultType
 argument_list|,
 name|charset
 argument_list|,
+name|collation0
+operator|!=
+literal|null
+condition|?
+name|collation0
+else|:
 name|collation
 argument_list|)
 expr_stmt|;

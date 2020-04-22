@@ -717,9 +717,9 @@ argument_list|,
 literal|"ISO-8859-1$en_US"
 argument_list|)
 decl_stmt|;
-comment|/**    * The strength of the default collation.    *    *<p>It is used in {@link org.apache.calcite.sql.SqlCollation} and    * {@link org.apache.calcite.sql.SqlLiteral#SqlLiteral}.</p>    */
+comment|/**    * The strength of the default collation.    * Allowed values (as defined in {@link java.text.Collator}) are: primary, secondary,    * tertiary, identical.    *    *<p>It is used in {@link org.apache.calcite.sql.SqlCollation} and    * {@link org.apache.calcite.sql.SqlLiteral#SqlLiteral}.</p>    */
 comment|// TODO review zabetak:
-comment|// What are the allowed values? What happens if a wrong value is specified?
+comment|// What happens if a wrong value is specified?
 specifier|public
 specifier|static
 specifier|final

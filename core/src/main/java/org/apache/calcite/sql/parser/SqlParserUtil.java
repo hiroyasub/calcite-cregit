@@ -3055,9 +3055,9 @@ block|}
 name|Charset
 name|charset
 init|=
-name|Charset
+name|SqlUtil
 operator|.
-name|forName
+name|getCharset
 argument_list|(
 name|charsetStr
 argument_list|)
