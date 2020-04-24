@@ -11345,8 +11345,11 @@ decl_stmt|;
 if|if
 condition|(
 name|refType
-operator|==
+operator|.
+name|equals
+argument_list|(
 name|rightType
+argument_list|)
 condition|)
 block|{
 return|return
@@ -11375,8 +11378,11 @@ decl_stmt|;
 if|if
 condition|(
 name|refType2
-operator|==
+operator|.
+name|equals
+argument_list|(
 name|rightType
+argument_list|)
 condition|)
 block|{
 return|return

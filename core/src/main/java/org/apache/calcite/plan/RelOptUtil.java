@@ -10663,7 +10663,7 @@ argument_list|)
 throw|;
 block|}
 block|}
-comment|/**    * Returns whether two types are equal using '='.    *    * @param desc1 Description of first type    * @param type1 First type    * @param desc2 Description of second type    * @param type2 Second type    * @param litmus What to do if an error is detected (types are not equal)    * @return Whether the types are equal    */
+comment|/**    * Returns whether two types are equal using 'equals'.    *    * @param desc1 Description of first type    * @param type1 First type    * @param desc2 Description of second type    * @param type2 Second type    * @param litmus What to do if an error is detected (types are not equal)    * @return Whether the types are equal    */
 specifier|public
 specifier|static
 name|boolean
@@ -10718,9 +10718,13 @@ return|;
 block|}
 if|if
 condition|(
+operator|!
 name|type1
-operator|!=
+operator|.
+name|equals
+argument_list|(
 name|type2
+argument_list|)
 condition|)
 block|{
 return|return

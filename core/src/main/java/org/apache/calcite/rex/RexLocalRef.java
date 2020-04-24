@@ -166,10 +166,14 @@ name|obj
 operator|instanceof
 name|RexLocalRef
 operator|&&
+name|Objects
+operator|.
+name|equals
+argument_list|(
 name|this
 operator|.
 name|type
-operator|==
+argument_list|,
 operator|(
 operator|(
 name|RexLocalRef
@@ -178,6 +182,7 @@ name|obj
 operator|)
 operator|.
 name|type
+argument_list|)
 operator|&&
 name|this
 operator|.

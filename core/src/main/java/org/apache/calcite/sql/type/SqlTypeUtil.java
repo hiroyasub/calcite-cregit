@@ -2977,8 +2977,11 @@ block|{
 if|if
 condition|(
 name|toType
-operator|==
+operator|.
+name|equals
+argument_list|(
 name|fromType
+argument_list|)
 condition|)
 block|{
 return|return
