@@ -20514,6 +20514,8 @@ name|PhysType
 name|outputPhysType
 parameter_list|)
 block|{
+comment|// The table operand is removed from the RexCall because it
+comment|// represents the input, see StandardConvertletTable#convertWindowFunction.
 name|Expression
 name|intervalExpression
 init|=
@@ -20528,7 +20530,7 @@ argument_list|()
 operator|.
 name|get
 argument_list|(
-literal|2
+literal|1
 argument_list|)
 argument_list|)
 decl_stmt|;
@@ -20545,7 +20547,7 @@ argument_list|()
 operator|.
 name|get
 argument_list|(
-literal|1
+literal|0
 argument_list|)
 decl_stmt|;
 name|List

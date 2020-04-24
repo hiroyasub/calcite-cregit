@@ -6745,8 +6745,6 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
-comment|// In generated plan, the first parameter of TUMBLE function will always be the last field
-comment|// of it's input. There isn't a way to give the first operand a proper type.
 annotation|@
 name|Test
 name|void
@@ -6770,8 +6768,6 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
-comment|// In generated plan, the first parameter of TUMBLE function will always be the last field
-comment|// of it's input. There isn't a way to give the first operand a proper type.
 annotation|@
 name|Test
 name|void
