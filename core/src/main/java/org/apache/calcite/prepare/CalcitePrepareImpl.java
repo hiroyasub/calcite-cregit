@@ -5127,7 +5127,15 @@ init|=
 operator|new
 name|ArrayList
 argument_list|<>
+argument_list|(
+name|type
+operator|.
+name|getFieldList
 argument_list|()
+operator|.
+name|size
+argument_list|()
+argument_list|)
 decl_stmt|;
 for|for
 control|(
