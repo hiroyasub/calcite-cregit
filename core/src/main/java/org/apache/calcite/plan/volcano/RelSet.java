@@ -171,6 +171,22 @@ name|calcite
 operator|.
 name|rel
 operator|.
+name|core
+operator|.
+name|Spool
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
 name|metadata
 operator|.
 name|RelMetadataQuery
@@ -1495,25 +1511,19 @@ control|)
 block|{
 if|if
 condition|(
-name|planner
-operator|.
-name|prunedNodes
-operator|.
-name|contains
-argument_list|(
+operator|!
+operator|(
 name|otherRel
-argument_list|)
-condition|)
-block|{
-continue|continue;
-block|}
-name|boolean
-name|pruned
-init|=
-literal|false
-decl_stmt|;
-if|if
-condition|(
+operator|instanceof
+name|Spool
+operator|)
+operator|&&
+operator|!
+name|otherRel
+operator|.
+name|isEnforcer
+argument_list|()
+operator|&&
 name|parentRels
 operator|.
 name|contains
@@ -1522,8 +1532,9 @@ name|otherRel
 argument_list|)
 condition|)
 block|{
-comment|// if otherRel is a enforcing operator e.g.
-comment|// Sort, Exchange, do not prune it.
+comment|// If otherRel is a enforcing operator e.g.
+comment|// Sort, Exchange, do not prune it. Just in
+comment|// case it is not marked as an enforcer.
 if|if
 condition|(
 name|otherRel
@@ -1555,17 +1566,6 @@ argument_list|()
 argument_list|)
 condition|)
 block|{
-name|pruned
-operator|=
-literal|true
-expr_stmt|;
-block|}
-block|}
-if|if
-condition|(
-name|pruned
-condition|)
-block|{
 name|planner
 operator|.
 name|prune
@@ -1574,8 +1574,7 @@ name|otherRel
 argument_list|)
 expr_stmt|;
 block|}
-else|else
-block|{
+block|}
 name|planner
 operator|.
 name|reregister
@@ -1585,7 +1584,6 @@ argument_list|,
 name|otherRel
 argument_list|)
 expr_stmt|;
-block|}
 block|}
 comment|// Has another set merged with this?
 assert|assert
