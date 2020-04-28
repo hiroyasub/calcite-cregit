@@ -268,6 +268,9 @@ argument_list|>
 name|fieldCollations
 parameter_list|)
 block|{
+name|RelCollation
+name|collation
+decl_stmt|;
 if|if
 condition|(
 name|Util
@@ -281,7 +284,8 @@ argument_list|)
 argument_list|)
 condition|)
 block|{
-return|return
+name|collation
+operator|=
 operator|new
 name|RelCollationImpl
 argument_list|(
@@ -292,8 +296,10 @@ argument_list|(
 name|fieldCollations
 argument_list|)
 argument_list|)
-return|;
+expr_stmt|;
 block|}
+else|else
+block|{
 comment|// Remove field collations whose field has already been seen
 specifier|final
 name|ImmutableList
@@ -351,7 +357,8 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-return|return
+name|collation
+operator|=
 operator|new
 name|RelCollationImpl
 argument_list|(
@@ -359,6 +366,17 @@ name|builder
 operator|.
 name|build
 argument_list|()
+argument_list|)
+expr_stmt|;
+block|}
+return|return
+name|RelCollationTraitDef
+operator|.
+name|INSTANCE
+operator|.
+name|canonize
+argument_list|(
+name|collation
 argument_list|)
 return|;
 block|}
