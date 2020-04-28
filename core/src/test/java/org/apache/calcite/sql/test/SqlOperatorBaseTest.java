@@ -39701,15 +39701,6 @@ name|add
 argument_list|(
 name|SqlStdOperatorTable
 operator|.
-name|JSON_VALUE_ANY
-argument_list|)
-expr_stmt|;
-name|operatorsToSkip
-operator|.
-name|add
-argument_list|(
-name|SqlStdOperatorTable
-operator|.
 name|JSON_QUERY
 argument_list|)
 expr_stmt|;

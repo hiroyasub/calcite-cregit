@@ -99,20 +99,6 @@ name|calcite
 operator|.
 name|sql
 operator|.
-name|SqlSyntax
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|sql
-operator|.
 name|SqlUtil
 import|;
 end_import
@@ -256,19 +242,6 @@ argument_list|)
 assert|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
-comment|// implement SqlOperator
-specifier|public
-name|SqlSyntax
-name|getSyntax
-parameter_list|()
-block|{
-comment|// Function syntax would work too.
-return|return
-name|SqlSyntax
-operator|.
-name|SPECIAL
-return|;
-block|}
 specifier|public
 name|RelDataType
 name|inferReturnType

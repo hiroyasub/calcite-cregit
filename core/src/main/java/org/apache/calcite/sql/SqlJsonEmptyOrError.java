@@ -33,6 +33,8 @@ begin_enum
 specifier|public
 enum|enum
 name|SqlJsonEmptyOrError
+implements|implements
+name|Symbolizable
 block|{
 name|EMPTY
 block|,
@@ -54,7 +56,7 @@ name|Locale
 operator|.
 name|ROOT
 argument_list|,
-literal|"SqlJsonEmptyOrError[%s]"
+literal|"ON %s"
 argument_list|,
 name|name
 argument_list|()

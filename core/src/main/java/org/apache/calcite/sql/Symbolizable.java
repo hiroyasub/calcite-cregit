@@ -15,24 +15,59 @@ name|sql
 package|;
 end_package
 
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|sql
+operator|.
+name|parser
+operator|.
+name|SqlParserPos
+import|;
+end_import
+
 begin_comment
-comment|/**  * Categorizing Json value empty or error behaviors.  */
+comment|/** Sub-class should be a Enum and can convert to a {@link SqlLiteral}. */
 end_comment
 
-begin_enum
+begin_interface
 specifier|public
-enum|enum
-name|SqlJsonValueEmptyOrErrorBehavior
-implements|implements
+interface|interface
 name|Symbolizable
 block|{
-name|ERROR
-block|,
-name|NULL
-block|,
-name|DEFAULT
+comment|/**    * Creates a parse-tree node representing an occurrence of this keyword    * at a particular position in the parsed text.    */
+specifier|default
+name|SqlLiteral
+name|symbol
+parameter_list|(
+name|SqlParserPos
+name|pos
+parameter_list|)
+block|{
+return|return
+name|SqlLiteral
+operator|.
+name|createSymbol
+argument_list|(
+operator|(
+name|Enum
+argument_list|<
+name|?
+argument_list|>
+operator|)
+name|this
+argument_list|,
+name|pos
+argument_list|)
+return|;
 block|}
-end_enum
+block|}
+end_interface
 
 end_unit
 

@@ -17137,14 +17137,11 @@ name|query
 init|=
 literal|"select json_value(\"product_name\", 'lax $') from \"product\""
 decl_stmt|;
-comment|// todo translate to JSON_VALUE rather than CAST
 specifier|final
 name|String
 name|expected
 init|=
-literal|"SELECT CAST(JSON_VALUE_ANY(\"product_name\", "
-operator|+
-literal|"'lax $' NULL ON EMPTY NULL ON ERROR) AS VARCHAR(2000) CHARACTER SET \"ISO-8859-1\")\n"
+literal|"SELECT JSON_VALUE(\"product_name\", 'lax $')\n"
 operator|+
 literal|"FROM \"foodmart\".\"product\""
 decl_stmt|;

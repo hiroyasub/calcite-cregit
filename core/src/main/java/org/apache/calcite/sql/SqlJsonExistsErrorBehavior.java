@@ -23,6 +23,8 @@ begin_enum
 specifier|public
 enum|enum
 name|SqlJsonExistsErrorBehavior
+implements|implements
+name|Symbolizable
 block|{
 name|TRUE
 block|,

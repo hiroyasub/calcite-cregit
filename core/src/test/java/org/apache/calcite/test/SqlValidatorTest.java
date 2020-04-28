@@ -43487,6 +43487,14 @@ argument_list|()
 expr_stmt|;
 name|expr
 argument_list|(
+literal|"json_value('{\"foo\":\"bar\"}', 123)"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|expr
+argument_list|(
 literal|"json_value('{\"foo\":\"bar\"}', 'lax $.foo')"
 argument_list|)
 operator|.

@@ -16,21 +16,17 @@ package|;
 end_package
 
 begin_comment
-comment|/**  * Categorizing Json value empty or error behaviors.  */
+comment|/**  * Flag to indicate the explicit return type of JSON_VALUE.  */
 end_comment
 
 begin_enum
 specifier|public
 enum|enum
-name|SqlJsonValueEmptyOrErrorBehavior
+name|SqlJsonValueReturning
 implements|implements
 name|Symbolizable
 block|{
-name|ERROR
-block|,
-name|NULL
-block|,
-name|DEFAULT
+name|RETURNING
 block|}
 end_enum
 

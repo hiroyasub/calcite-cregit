@@ -155,17 +155,6 @@ expr_stmt|;
 block|}
 comment|//~ Methods ----------------------------------------------------------------
 specifier|public
-name|SqlSyntax
-name|getSyntax
-parameter_list|()
-block|{
-return|return
-name|SqlSyntax
-operator|.
-name|SPECIAL
-return|;
-block|}
-specifier|public
 name|void
 name|unparse
 parameter_list|(

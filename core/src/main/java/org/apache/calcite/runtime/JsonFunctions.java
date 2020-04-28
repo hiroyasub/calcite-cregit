@@ -1158,7 +1158,7 @@ block|}
 specifier|public
 specifier|static
 name|Object
-name|jsonValueAny
+name|jsonValue
 parameter_list|(
 name|String
 name|input
@@ -1180,7 +1180,7 @@ name|defaultValueOnError
 parameter_list|)
 block|{
 return|return
-name|jsonValueAny
+name|jsonValue
 argument_list|(
 name|jsonApiCommonSyntax
 argument_list|(
@@ -1202,7 +1202,7 @@ block|}
 specifier|public
 specifier|static
 name|Object
-name|jsonValueAny
+name|jsonValue
 parameter_list|(
 name|JsonValueContext
 name|input
@@ -1224,7 +1224,7 @@ name|defaultValueOnError
 parameter_list|)
 block|{
 return|return
-name|jsonValueAny
+name|jsonValue
 argument_list|(
 name|jsonApiCommonSyntax
 argument_list|(
@@ -1246,7 +1246,7 @@ block|}
 specifier|public
 specifier|static
 name|Object
-name|jsonValueAny
+name|jsonValue
 parameter_list|(
 name|JsonPathContext
 name|context

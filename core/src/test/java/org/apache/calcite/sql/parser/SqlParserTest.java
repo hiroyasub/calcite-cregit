@@ -33857,7 +33857,7 @@ name|ok
 argument_list|(
 literal|"JSON_VALUE('{\"foo\": \"100\"}', 'lax $.foo' "
 operator|+
-literal|"RETURNING INTEGER NULL ON EMPTY NULL ON ERROR)"
+literal|"RETURNING INTEGER)"
 argument_list|)
 expr_stmt|;
 name|expr

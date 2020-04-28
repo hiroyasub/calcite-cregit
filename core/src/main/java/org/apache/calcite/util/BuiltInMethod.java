@@ -4121,13 +4121,13 @@ operator|.
 name|class
 argument_list|)
 block|,
-name|JSON_VALUE_ANY
+name|JSON_VALUE
 argument_list|(
 name|JsonFunctions
 operator|.
 name|class
 argument_list|,
-literal|"jsonValueAny"
+literal|"jsonValue"
 argument_list|,
 name|String
 operator|.

@@ -3477,7 +3477,7 @@ name|invocationDesc
 argument_list|(
 name|BuiltInMethod
 operator|.
-name|JSON_VALUE_ANY
+name|JSON_VALUE
 operator|.
 name|getMethodName
 argument_list|()
@@ -3495,7 +3495,7 @@ argument_list|)
 argument_list|,
 name|JsonFunctions
 operator|.
-name|jsonValueAny
+name|jsonValue
 argument_list|(
 name|context
 argument_list|,
@@ -3548,7 +3548,7 @@ name|invocationDesc
 argument_list|(
 name|BuiltInMethod
 operator|.
-name|JSON_VALUE_ANY
+name|JSON_VALUE
 operator|.
 name|getMethodName
 argument_list|()
@@ -3568,7 +3568,7 @@ parameter_list|()
 lambda|->
 name|JsonFunctions
 operator|.
-name|jsonValueAny
+name|jsonValue
 argument_list|(
 name|input
 argument_list|,
