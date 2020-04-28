@@ -684,6 +684,7 @@ operator||=
 name|REQUIRED
 expr_stmt|;
 block|}
+specifier|public
 name|boolean
 name|isDerived
 parameter_list|()
@@ -698,6 +699,7 @@ operator|==
 name|DERIVED
 return|;
 block|}
+specifier|public
 name|boolean
 name|isRequired
 parameter_list|()
