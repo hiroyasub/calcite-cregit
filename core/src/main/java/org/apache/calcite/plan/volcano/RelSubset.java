@@ -525,6 +525,12 @@ init|=
 literal|2
 decl_stmt|;
 comment|//~ Instance fields --------------------------------------------------------
+comment|/**    * Optimization task state    */
+name|OptimizeTask
+operator|.
+name|State
+name|taskState
+decl_stmt|;
 comment|/**    * cost of best known plan (it may have improved since)    */
 name|RelOptCost
 name|bestCost

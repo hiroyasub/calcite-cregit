@@ -428,6 +428,13 @@ operator|.
 name|INSTANCE
 argument_list|)
 expr_stmt|;
+name|planner
+operator|.
+name|setTopDownOpt
+argument_list|(
+literal|false
+argument_list|)
+expr_stmt|;
 specifier|final
 name|RelOptCluster
 name|cluster

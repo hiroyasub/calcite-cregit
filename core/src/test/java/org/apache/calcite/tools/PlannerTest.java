@@ -5193,7 +5193,7 @@ argument_list|)
 argument_list|,
 name|containsString
 argument_list|(
-literal|"EnumerableHashJoin(condition=[=($0, $5)], joinType=[inner])"
+literal|"EnumerableMergeJoin(condition=[=($0, $5)], joinType=[inner])"
 argument_list|)
 argument_list|)
 expr_stmt|;
@@ -5325,13 +5325,17 @@ literal|"  EnumerableHashJoin(condition=[=($0, $2)], joinType=[left])\n"
 operator|+
 literal|"    EnumerableTableScan(table=[[hr, dependents]])\n"
 operator|+
-literal|"    EnumerableHashJoin(condition=[=($1, $5)], joinType=[inner])\n"
+literal|"    EnumerableMergeJoin(condition=[=($1, $5)], joinType=[inner])\n"
 operator|+
-literal|"      EnumerableTableScan(table=[[hr, emps]])\n"
+literal|"      EnumerableSort(sort0=[$1], dir0=[ASC])\n"
 operator|+
-literal|"      EnumerableProject(deptno=[$0], name=[$1], employees=[$2], x=[$3.x], y=[$3.y])\n"
+literal|"        EnumerableTableScan(table=[[hr, emps]])\n"
 operator|+
-literal|"        EnumerableTableScan(table=[[hr, depts]])"
+literal|"      EnumerableSort(sort0=[$0], dir0=[ASC])\n"
+operator|+
+literal|"        EnumerableProject(deptno=[$0], name=[$1], employees=[$2], x=[$3.x], y=[$3.y])\n"
+operator|+
+literal|"          EnumerableTableScan(table=[[hr, depts]])"
 decl_stmt|;
 name|checkHeuristic
 argument_list|(
@@ -5562,13 +5566,15 @@ literal|"        EnumerableTableScan(table=[[foodmart2, customer]])\n"
 operator|+
 literal|"      EnumerableHashJoin(condition=[=($6, $20)], joinType=[inner])\n"
 operator|+
-literal|"        EnumerableHashJoin(condition=[=($0, $5)], joinType=[inner])\n"
+literal|"        EnumerableMergeJoin(condition=[=($0, $5)], joinType=[inner])\n"
 operator|+
 literal|"          EnumerableTableScan(table=[[foodmart2, product_class]])\n"
 operator|+
-literal|"          EnumerableFilter(condition=[=($2, 'Washington')])\n"
+literal|"          EnumerableSort(sort0=[$0], dir0=[ASC])\n"
 operator|+
-literal|"            EnumerableTableScan(table=[[foodmart2, product]])\n"
+literal|"            EnumerableFilter(condition=[=($2, 'Washington')])\n"
+operator|+
+literal|"              EnumerableTableScan(table=[[foodmart2, product]])\n"
 operator|+
 literal|"        EnumerableTableScan(table=[[foodmart2, sales_fact_1997]])\n"
 decl_stmt|;
@@ -5635,15 +5641,19 @@ literal|"        EnumerableFilter(condition=[=($9, 'San Francisco')])\n"
 operator|+
 literal|"          EnumerableTableScan(table=[[foodmart2, customer]])\n"
 operator|+
-literal|"        EnumerableHashJoin(condition=[=($6, $20)], joinType=[inner])\n"
+literal|"        EnumerableMergeJoin(condition=[=($6, $20)], joinType=[inner])\n"
 operator|+
-literal|"          EnumerableHashJoin(condition=[=($0, $5)], joinType=[inner])\n"
+literal|"          EnumerableSort(sort0=[$6], dir0=[ASC])\n"
 operator|+
-literal|"            EnumerableTableScan(table=[[foodmart2, product_class]])\n"
+literal|"            EnumerableHashJoin(condition=[=($0, $5)], joinType=[inner])\n"
 operator|+
-literal|"            EnumerableTableScan(table=[[foodmart2, product]])\n"
+literal|"              EnumerableTableScan(table=[[foodmart2, product_class]])\n"
 operator|+
-literal|"          EnumerableTableScan(table=[[foodmart2, sales_fact_1997]])\n"
+literal|"              EnumerableTableScan(table=[[foodmart2, product]])\n"
+operator|+
+literal|"          EnumerableSort(sort0=[$0], dir0=[ASC])\n"
+operator|+
+literal|"            EnumerableTableScan(table=[[foodmart2, sales_fact_1997]])\n"
 decl_stmt|;
 name|checkBushy
 argument_list|(

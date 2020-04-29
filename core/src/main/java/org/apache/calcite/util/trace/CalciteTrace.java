@@ -203,6 +203,22 @@ argument_list|()
 argument_list|)
 return|;
 block|}
+comment|/**    * Reports volcano planner optimization task events.    */
+specifier|public
+specifier|static
+name|Logger
+name|getPlannerTaskTracer
+parameter_list|()
+block|{
+return|return
+name|LoggerFactory
+operator|.
+name|getLogger
+argument_list|(
+literal|"org.apache.calcite.plan.volcano.task"
+argument_list|)
+return|;
+block|}
 comment|/**    * The "org.apache.calcite.prepare.Prepare" tracer prints the generated    * program at DEBUG (formerly, FINE)  or higher.    */
 specifier|public
 specifier|static

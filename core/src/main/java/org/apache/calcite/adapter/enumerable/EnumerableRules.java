@@ -415,6 +415,16 @@ decl_stmt|;
 specifier|public
 specifier|static
 specifier|final
+name|EnumerableSortedAggregateRule
+name|ENUMERABLE_SORTED_AGGREGATE_RULE
+init|=
+operator|new
+name|EnumerableSortedAggregateRule
+argument_list|()
+decl_stmt|;
+specifier|public
+specifier|static
+specifier|final
 name|List
 argument_list|<
 name|RelOptRule

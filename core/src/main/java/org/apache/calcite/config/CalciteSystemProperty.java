@@ -380,6 +380,23 @@ argument_list|,
 literal|true
 argument_list|)
 decl_stmt|;
+comment|/**    * Whether to enable top-down optimization.    *    *<p>Note: Enabling top-down optimization will automatically disable    * the use of AbstractConverter and related rules.</p>    */
+specifier|public
+specifier|static
+specifier|final
+name|CalciteSystemProperty
+argument_list|<
+name|Boolean
+argument_list|>
+name|TOPDOWN_OPT
+init|=
+name|booleanProperty
+argument_list|(
+literal|"calcite.planner.topdown.opt"
+argument_list|,
+literal|false
+argument_list|)
+decl_stmt|;
 comment|/**    * Whether to run integration tests.    */
 comment|// TODO review zabetak:
 comment|// The property is used in only one place and it is associated with mongodb. Should we drop this
