@@ -707,6 +707,9 @@ name|URL
 name|findFile
 parameter_list|(
 name|Class
+argument_list|<
+name|?
+argument_list|>
 name|clazz
 parameter_list|,
 specifier|final
@@ -2947,6 +2950,9 @@ name|DiffRepository
 name|lookup
 parameter_list|(
 name|Class
+argument_list|<
+name|?
+argument_list|>
 name|clazz
 parameter_list|)
 block|{
@@ -2966,6 +2972,9 @@ name|DiffRepository
 name|lookup
 parameter_list|(
 name|Class
+argument_list|<
+name|?
+argument_list|>
 name|clazz
 parameter_list|,
 name|DiffRepository
@@ -2990,6 +2999,9 @@ name|DiffRepository
 name|lookup
 parameter_list|(
 name|Class
+argument_list|<
+name|?
+argument_list|>
 name|clazz
 parameter_list|,
 name|DiffRepository
@@ -3057,6 +3069,9 @@ block|{
 specifier|private
 specifier|final
 name|Class
+argument_list|<
+name|?
+argument_list|>
 name|clazz
 decl_stmt|;
 specifier|private
@@ -3072,6 +3087,9 @@ decl_stmt|;
 name|Key
 parameter_list|(
 name|Class
+argument_list|<
+name|?
+argument_list|>
 name|clazz
 parameter_list|,
 name|DiffRepository
