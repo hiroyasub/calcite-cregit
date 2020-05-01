@@ -671,6 +671,22 @@ name|apache
 operator|.
 name|calcite
 operator|.
+name|sql
+operator|.
+name|validate
+operator|.
+name|SqlConformance
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
 name|sql2rel
 operator|.
 name|SqlToRelConverter
@@ -1641,10 +1657,8 @@ name|sqlNode
 init|=
 name|converter
 operator|.
-name|visitChild
+name|visitRoot
 argument_list|(
-literal|0
-argument_list|,
 name|root
 argument_list|)
 operator|.
@@ -3343,19 +3357,23 @@ argument_list|()
 argument_list|)
 decl_stmt|;
 specifier|final
-name|SqlNode
-name|sqlNode
+name|RelToSqlConverter
+name|converter
 init|=
 operator|new
 name|RelToSqlConverter
 argument_list|(
 name|dialect
 argument_list|)
+decl_stmt|;
+specifier|final
+name|SqlNode
+name|sqlNode
+init|=
+name|converter
 operator|.
-name|visitChild
+name|visitRoot
 argument_list|(
-literal|0
-argument_list|,
 name|root
 argument_list|)
 operator|.
@@ -5116,23 +5134,7 @@ argument_list|()
 decl_stmt|;
 specifier|final
 name|String
-name|sql
-init|=
-name|toSql
-argument_list|(
-name|root
-argument_list|,
-name|DatabaseProduct
-operator|.
-name|MYSQL
-operator|.
-name|getDialect
-argument_list|()
-argument_list|)
-decl_stmt|;
-specifier|final
-name|String
-name|expectedSql
+name|expectedMysql
 init|=
 literal|"SELECT `D2` AS `emps.deptno`\n"
 operator|+
@@ -5142,16 +5144,230 @@ literal|"FROM `scott`.`EMP`\n"
 operator|+
 literal|"GROUP BY `DEPTNO`\n"
 operator|+
-literal|"HAVING COUNT(*)< 2) AS `t1`"
+literal|"HAVING `emps.count`< 2) AS `t1`"
 decl_stmt|;
-name|assertThat
+specifier|final
+name|String
+name|expectedPostgresql
+init|=
+literal|"SELECT \"DEPTNO\" AS \"emps.deptno\"\n"
+operator|+
+literal|"FROM \"scott\".\"EMP\"\n"
+operator|+
+literal|"GROUP BY \"DEPTNO\"\n"
+operator|+
+literal|"HAVING COUNT(*)< 2"
+decl_stmt|;
+specifier|final
+name|String
+name|expectedBigQuery
+init|=
+literal|"SELECT D2 AS `emps.deptno`\n"
+operator|+
+literal|"FROM (SELECT DEPTNO AS D2, COUNT(*) AS `emps.count`\n"
+operator|+
+literal|"FROM scott.EMP\n"
+operator|+
+literal|"GROUP BY DEPTNO\n"
+operator|+
+literal|"HAVING `emps.count`< 2) AS t1"
+decl_stmt|;
+name|relFn
 argument_list|(
-name|sql
-argument_list|,
-name|isLinux
-argument_list|(
-name|expectedSql
+name|b
+lambda|->
+name|root
 argument_list|)
+operator|.
+name|withMysql
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expectedMysql
+argument_list|)
+operator|.
+name|withPostgresql
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expectedPostgresql
+argument_list|)
+operator|.
+name|withBigQuery
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expectedBigQuery
+argument_list|)
+expr_stmt|;
+block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3896">[CALCITE-3896]    * JDBC adapter, when generating SQL, changes target of ambiguous HAVING    * clause with a Project on Filter on Aggregate</a>.    *    *<p>The alias is ambiguous in dialects such as MySQL and BigQuery that    * have {@link SqlConformance#isHavingAlias()} = true. When the HAVING clause    * tries to reference a column, it sees the alias instead. */
+annotation|@
+name|Test
+name|void
+name|testHavingAliasSameAsColumnIgnoringCase
+parameter_list|()
+block|{
+name|checkHavingAliasSameAsColumn
+argument_list|(
+literal|true
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testHavingAliasSameAsColumn
+parameter_list|()
+block|{
+name|checkHavingAliasSameAsColumn
+argument_list|(
+literal|false
+argument_list|)
+expr_stmt|;
+block|}
+specifier|private
+name|void
+name|checkHavingAliasSameAsColumn
+parameter_list|(
+name|boolean
+name|upperAlias
+parameter_list|)
+block|{
+specifier|final
+name|String
+name|alias
+init|=
+name|upperAlias
+condition|?
+literal|"GROSS_WEIGHT"
+else|:
+literal|"gross_weight"
+decl_stmt|;
+specifier|final
+name|String
+name|query
+init|=
+literal|"select \"product_id\" + 1,\n"
+operator|+
+literal|"  sum(\"gross_weight\") as \""
+operator|+
+name|alias
+operator|+
+literal|"\"\n"
+operator|+
+literal|"from \"product\"\n"
+operator|+
+literal|"group by \"product_id\"\n"
+operator|+
+literal|"having sum(\"product\".\"gross_weight\")< 200"
+decl_stmt|;
+comment|// PostgreSQL has isHavingAlias=false, case-sensitive=true
+specifier|final
+name|String
+name|expectedPostgresql
+init|=
+literal|"SELECT \"product_id\" + 1,"
+operator|+
+literal|" SUM(\"gross_weight\") AS \""
+operator|+
+name|alias
+operator|+
+literal|"\"\n"
+operator|+
+literal|"FROM \"foodmart\".\"product\"\n"
+operator|+
+literal|"GROUP BY \"product_id\"\n"
+operator|+
+literal|"HAVING SUM(\"gross_weight\")< 200"
+decl_stmt|;
+comment|// MySQL has isHavingAlias=true, case-sensitive=true
+specifier|final
+name|String
+name|expectedMysql
+init|=
+literal|"SELECT `product_id` + 1, `"
+operator|+
+name|alias
+operator|+
+literal|"`\n"
+operator|+
+literal|"FROM (SELECT `product_id`, SUM(`gross_weight`) AS `"
+operator|+
+name|alias
+operator|+
+literal|"`\n"
+operator|+
+literal|"FROM `foodmart`.`product`\n"
+operator|+
+literal|"GROUP BY `product_id`\n"
+operator|+
+literal|"HAVING `"
+operator|+
+name|alias
+operator|+
+literal|"`< 200) AS `t1`"
+decl_stmt|;
+comment|// BigQuery has isHavingAlias=true, case-sensitive=false
+specifier|final
+name|String
+name|expectedBigQuery
+init|=
+name|upperAlias
+condition|?
+literal|"SELECT product_id + 1, GROSS_WEIGHT\n"
+operator|+
+literal|"FROM (SELECT product_id, SUM(gross_weight) AS GROSS_WEIGHT\n"
+operator|+
+literal|"FROM foodmart.product\n"
+operator|+
+literal|"GROUP BY product_id\n"
+operator|+
+literal|"HAVING GROSS_WEIGHT< 200) AS t1"
+comment|// Before [CALCITE-3896] was fixed, we got
+comment|// "HAVING SUM(gross_weight)< 200) AS t1"
+comment|// which on BigQuery gives you an error about aggregating aggregates
+else|:
+literal|"SELECT product_id + 1, gross_weight\n"
+operator|+
+literal|"FROM (SELECT product_id, SUM(gross_weight) AS gross_weight\n"
+operator|+
+literal|"FROM foodmart.product\n"
+operator|+
+literal|"GROUP BY product_id\n"
+operator|+
+literal|"HAVING gross_weight< 200) AS t1"
+decl_stmt|;
+name|sql
+argument_list|(
+name|query
+argument_list|)
+operator|.
+name|withPostgresql
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expectedPostgresql
+argument_list|)
+operator|.
+name|withMysql
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expectedMysql
+argument_list|)
+operator|.
+name|withBigQuery
+argument_list|()
+operator|.
+name|ok
+argument_list|(
+name|expectedBigQuery
 argument_list|)
 expr_stmt|;
 block|}

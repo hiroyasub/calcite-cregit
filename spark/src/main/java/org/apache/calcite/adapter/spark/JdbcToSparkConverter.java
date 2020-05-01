@@ -808,12 +808,11 @@ name|result
 init|=
 name|jdbcImplementor
 operator|.
-name|visitChild
+name|visitInput
 argument_list|(
-literal|0
+name|this
 argument_list|,
-name|getInput
-argument_list|()
+literal|0
 argument_list|)
 decl_stmt|;
 return|return

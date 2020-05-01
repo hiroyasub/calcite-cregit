@@ -1116,10 +1116,8 @@ name|sqlNode
 init|=
 name|sqlConverter
 operator|.
-name|visitChild
+name|visitRoot
 argument_list|(
-literal|0
-argument_list|,
 name|rel
 argument_list|)
 operator|.
