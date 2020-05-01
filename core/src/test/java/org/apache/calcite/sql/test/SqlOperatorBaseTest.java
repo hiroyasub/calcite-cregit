@@ -20531,6 +20531,20 @@ name|void
 name|testJsonExists
 parameter_list|()
 block|{
+comment|// default pathmode the default is: strict mode
+name|tester
+operator|.
+name|checkBoolean
+argument_list|(
+literal|"json_exists('{\"foo\":\"bar\"}', "
+operator|+
+literal|"'$.foo')"
+argument_list|,
+name|Boolean
+operator|.
+name|TRUE
+argument_list|)
+expr_stmt|;
 name|tester
 operator|.
 name|checkBoolean
@@ -20794,6 +20808,18 @@ literal|true
 argument_list|)
 expr_stmt|;
 block|}
+comment|// default pathmode the default is: strict mode
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"json_value('{\"foo\":100}', '$.foo')"
+argument_list|,
+literal|"100"
+argument_list|,
+literal|"VARCHAR(2000)"
+argument_list|)
+expr_stmt|;
 comment|// type casting test
 name|tester
 operator|.
@@ -21168,6 +21194,18 @@ name|void
 name|testJsonQuery
 parameter_list|()
 block|{
+comment|// default pathmode the default is: strict mode
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"json_query('{\"foo\":100}', '$' null on empty)"
+argument_list|,
+literal|"{\"foo\":100}"
+argument_list|,
+literal|"VARCHAR(2000)"
+argument_list|)
+expr_stmt|;
 comment|// lax test
 name|tester
 operator|.
@@ -22163,6 +22201,18 @@ argument_list|(
 literal|"json_length('[1, 2, {\"a\": 3}]')"
 argument_list|,
 literal|"3"
+argument_list|,
+literal|"INTEGER"
+argument_list|)
+expr_stmt|;
+comment|// default pathmode the default is: strict mode
+name|tester
+operator|.
+name|checkString
+argument_list|(
+literal|"json_length('{\"foo\":100}', '$')"
+argument_list|,
+literal|"1"
 argument_list|,
 literal|"INTEGER"
 argument_list|)

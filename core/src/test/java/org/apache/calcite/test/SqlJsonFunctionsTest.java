@@ -424,6 +424,31 @@ name|assertJsonApiCommonSyntax
 argument_list|(
 literal|"{\"foo\": \"bar\"}"
 argument_list|,
+literal|"$.foo"
+argument_list|,
+name|contextMatches
+argument_list|(
+name|JsonFunctions
+operator|.
+name|JsonPathContext
+operator|.
+name|withJavaObj
+argument_list|(
+name|JsonFunctions
+operator|.
+name|PathMode
+operator|.
+name|STRICT
+argument_list|,
+literal|"bar"
+argument_list|)
+argument_list|)
+argument_list|)
+expr_stmt|;
+name|assertJsonApiCommonSyntax
+argument_list|(
+literal|"{\"foo\": \"bar\"}"
+argument_list|,
 literal|"lax $.foo"
 argument_list|,
 name|contextMatches
