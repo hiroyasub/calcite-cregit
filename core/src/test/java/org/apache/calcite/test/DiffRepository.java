@@ -750,7 +750,6 @@ return|;
 block|}
 comment|/**    * Expands a string containing one or more variables. (Currently only works    * if there is one variable.)    */
 specifier|public
-specifier|synchronized
 name|String
 name|expand
 parameter_list|(
