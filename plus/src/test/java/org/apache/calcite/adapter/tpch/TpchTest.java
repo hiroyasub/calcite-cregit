@@ -1678,6 +1678,11 @@ argument_list|)
 expr_stmt|;
 block|}
 annotation|@
+name|Disabled
+argument_list|(
+literal|"it's wasting time"
+argument_list|)
+annotation|@
 name|Test
 name|void
 name|testLineItem
@@ -1697,6 +1702,11 @@ literal|6001215
 argument_list|)
 expr_stmt|;
 block|}
+annotation|@
+name|Disabled
+argument_list|(
+literal|"it's wasting time"
+argument_list|)
 annotation|@
 name|Test
 name|void
@@ -1764,6 +1774,11 @@ argument_list|()
 expr_stmt|;
 block|}
 annotation|@
+name|Disabled
+argument_list|(
+literal|"it's wasting time"
+argument_list|)
+annotation|@
 name|Test
 name|void
 name|testCustomer
@@ -1806,6 +1821,11 @@ argument_list|)
 return|;
 block|}
 comment|/** Tests the customer table with scale factor 5. */
+annotation|@
+name|Disabled
+argument_list|(
+literal|"it's wasting time"
+argument_list|)
 annotation|@
 name|Test
 name|void

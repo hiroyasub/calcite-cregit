@@ -678,7 +678,7 @@ block|}
 annotation|@
 name|Disabled
 argument_list|(
-literal|"it's wasting time to count each time"
+literal|"it's wasting time to count each table"
 argument_list|)
 annotation|@
 name|Test
