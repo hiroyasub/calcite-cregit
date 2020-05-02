@@ -88,7 +88,7 @@ name|toTraits
 parameter_list|)
 block|{
 return|return
-literal|true
+literal|false
 return|;
 block|}
 comment|/**    * Default implementation.    */

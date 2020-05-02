@@ -651,7 +651,7 @@ return|return
 name|subset
 return|;
 block|}
-comment|/**    * If the subset is required, convert derived subsets to this subset.    * Otherwise, convert this subset to required subsets in this RelSet.    * The subset can be both required and derived.    */
+comment|/**    * If the subset is required, convert delivered subsets to this subset.    * Otherwise, convert this subset to required subsets in this RelSet.    * The subset can be both required and delivered.    */
 specifier|private
 name|void
 name|addAbstractConverters
@@ -685,7 +685,7 @@ name|required
 condition|?
 name|n
 operator|.
-name|isDerived
+name|isDelivered
 argument_list|()
 else|:
 name|n
@@ -1047,7 +1047,7 @@ operator|&&
 operator|!
 name|subset
 operator|.
-name|isDerived
+name|isDelivered
 argument_list|()
 operator|)
 condition|)
@@ -1089,7 +1089,7 @@ else|else
 block|{
 name|subset
 operator|.
-name|setDerived
+name|setDelivered
 argument_list|()
 expr_stmt|;
 block|}
@@ -1393,12 +1393,12 @@ operator|.
 name|getTraitSet
 argument_list|()
 decl_stmt|;
-comment|// If it is logical or derived physical traitSet
+comment|// If it is logical or delivered physical traitSet
 if|if
 condition|(
 name|otherSubset
 operator|.
-name|isDerived
+name|isDelivered
 argument_list|()
 operator|||
 operator|!
@@ -1420,7 +1420,7 @@ literal|false
 argument_list|)
 expr_stmt|;
 block|}
-comment|// It may be required only, or both derived and required,
+comment|// It may be required only, or both delivered and required,
 comment|// in which case, register again.
 if|if
 condition|(

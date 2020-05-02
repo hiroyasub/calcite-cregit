@@ -5553,6 +5553,10 @@ name|size
 argument_list|()
 operator|>
 name|subsetBeforeCount
+operator|||
+name|subset
+operator|.
+name|triggerRule
 condition|)
 block|{
 name|fireRules
