@@ -676,6 +676,11 @@ argument_list|)
 expr_stmt|;
 block|}
 annotation|@
+name|Disabled
+argument_list|(
+literal|"it's wasting time to count each time"
+argument_list|)
+annotation|@
 name|Test
 name|void
 name|testTableCount
