@@ -3100,6 +3100,7 @@ name|int
 name|getSourceCount
 parameter_list|()
 function_decl|;
+comment|/**      * Returns the source that a target maps to.      *      * @param target target      * @return source      * @throws NoElementException if target is not mapped      */
 name|int
 name|getSource
 parameter_list|(
@@ -3107,6 +3108,7 @@ name|int
 name|target
 parameter_list|)
 function_decl|;
+comment|/**      * Returns the source that a target maps to, or -1 if it is not mapped.      */
 name|int
 name|getSourceOpt
 parameter_list|(
@@ -3118,6 +3120,7 @@ name|int
 name|getTargetCount
 parameter_list|()
 function_decl|;
+comment|/**      * Returns the target that a source maps to, or -1 if it is not mapped.      */
 name|int
 name|getTargetOpt
 parameter_list|(
@@ -3149,6 +3152,7 @@ name|int
 name|getSourceCount
 parameter_list|()
 function_decl|;
+comment|/**      * Returns the source that a target maps to, or -1 if it is not mapped.      */
 name|int
 name|getSourceOpt
 parameter_list|(
@@ -3160,13 +3164,15 @@ name|int
 name|getTargetCount
 parameter_list|()
 function_decl|;
+comment|/**      * Returns the target that a source maps to.      *      * @param source source      * @return target      * @throws NoElementException if source is not mapped      */
 name|int
 name|getTarget
 parameter_list|(
 name|int
-name|target
+name|source
 parameter_list|)
 function_decl|;
+comment|/**      * Returns the target that a source maps to, or -1 if it is not mapped.      */
 name|int
 name|getTargetOpt
 parameter_list|(
@@ -4344,6 +4350,7 @@ name|isValid
 argument_list|()
 assert|;
 block|}
+comment|/**      * Returns the source that a target maps to, or -1 if it is not mapped.      */
 specifier|public
 name|int
 name|getSourceOpt
@@ -4359,6 +4366,7 @@ name|target
 index|]
 return|;
 block|}
+comment|/**      * Returns the target that a source maps to, or -1 if it is not mapped.      */
 specifier|public
 name|int
 name|getTargetOpt
@@ -4766,6 +4774,7 @@ return|return
 name|size
 return|;
 block|}
+comment|/**      * Returns the target that a source maps to.      *      * @param source source      * @return target      */
 specifier|public
 name|int
 name|getTarget
@@ -4774,10 +4783,43 @@ name|int
 name|source
 parameter_list|)
 block|{
+if|if
+condition|(
+name|source
+operator|<
+literal|0
+operator|||
+operator|(
+name|size
+operator|!=
+operator|-
+literal|1
+operator|&&
+name|source
+operator|>=
+name|size
+operator|)
+condition|)
+block|{
+throw|throw
+operator|new
+name|IndexOutOfBoundsException
+argument_list|(
+literal|"source #"
+operator|+
+name|source
+operator|+
+literal|" has no target in identity mapping of size "
+operator|+
+name|size
+argument_list|)
+throw|;
+block|}
 return|return
 name|source
 return|;
 block|}
+comment|/**      * Returns the target that a source maps to, or -1 if it is not mapped.      *      * @param source source      * @return target      */
 specifier|public
 name|int
 name|getTargetOpt
@@ -4786,10 +4828,43 @@ name|int
 name|source
 parameter_list|)
 block|{
+if|if
+condition|(
+name|source
+operator|<
+literal|0
+operator|||
+operator|(
+name|size
+operator|!=
+operator|-
+literal|1
+operator|&&
+name|source
+operator|>=
+name|size
+operator|)
+condition|)
+block|{
+throw|throw
+operator|new
+name|IndexOutOfBoundsException
+argument_list|(
+literal|"source #"
+operator|+
+name|source
+operator|+
+literal|" has no target in identity mapping of size "
+operator|+
+name|size
+argument_list|)
+throw|;
+block|}
 return|return
 name|source
 return|;
 block|}
+comment|/**      * Returns the source that a target maps to.      *      * @param target target      * @return source      */
 specifier|public
 name|int
 name|getSource
@@ -4798,10 +4873,43 @@ name|int
 name|target
 parameter_list|)
 block|{
+if|if
+condition|(
+name|target
+operator|<
+literal|0
+operator|||
+operator|(
+name|size
+operator|!=
+operator|-
+literal|1
+operator|&&
+name|target
+operator|>=
+name|size
+operator|)
+condition|)
+block|{
+throw|throw
+operator|new
+name|IndexOutOfBoundsException
+argument_list|(
+literal|"target #"
+operator|+
+name|target
+operator|+
+literal|" has no source in identity mapping of size "
+operator|+
+name|size
+argument_list|)
+throw|;
+block|}
 return|return
 name|target
 return|;
 block|}
+comment|/**      * Returns the source that a target maps to, or -1 if it is not mapped.      *      * @param target target      * @return source      */
 specifier|public
 name|int
 name|getSourceOpt
@@ -4810,6 +4918,38 @@ name|int
 name|target
 parameter_list|)
 block|{
+if|if
+condition|(
+name|target
+operator|<
+literal|0
+operator|||
+operator|(
+name|size
+operator|!=
+operator|-
+literal|1
+operator|&&
+name|target
+operator|>=
+name|size
+operator|)
+condition|)
+block|{
+throw|throw
+operator|new
+name|IndexOutOfBoundsException
+argument_list|(
+literal|"target #"
+operator|+
+name|target
+operator|+
+literal|" has no source in identity mapping of size "
+operator|+
+name|size
+argument_list|)
+throw|;
+block|}
 return|return
 name|target
 return|;
@@ -5752,6 +5892,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
+comment|/**      * Returns the target that a source maps to, or -1 if it is not mapped.      *      * @return target      */
 specifier|public
 name|int
 name|getTargetOpt

@@ -1058,33 +1058,12 @@ name|int
 name|source
 parameter_list|)
 block|{
-try|try
-block|{
 return|return
 name|targets
 index|[
 name|source
 index|]
 return|;
-block|}
-catch|catch
-parameter_list|(
-name|ArrayIndexOutOfBoundsException
-name|e
-parameter_list|)
-block|{
-throw|throw
-operator|new
-name|Mappings
-operator|.
-name|NoElementException
-argument_list|(
-literal|"invalid source "
-operator|+
-name|source
-argument_list|)
-throw|;
-block|}
 block|}
 comment|/**    * Returns the position which maps to<code>target</code>.    */
 specifier|public
@@ -1095,33 +1074,12 @@ name|int
 name|target
 parameter_list|)
 block|{
-try|try
-block|{
 return|return
 name|sources
 index|[
 name|target
 index|]
 return|;
-block|}
-catch|catch
-parameter_list|(
-name|ArrayIndexOutOfBoundsException
-name|e
-parameter_list|)
-block|{
-throw|throw
-operator|new
-name|Mappings
-operator|.
-name|NoElementException
-argument_list|(
-literal|"invalid target "
-operator|+
-name|target
-argument_list|)
-throw|;
-block|}
 block|}
 comment|/**    * Checks whether this permutation is valid.    *    *    *    * @param fail Whether to assert if invalid    * @return Whether valid    */
 specifier|private

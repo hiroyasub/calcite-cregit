@@ -389,6 +389,16 @@ name|Map
 import|;
 end_import
 
+begin_import
+import|import
+name|java
+operator|.
+name|util
+operator|.
+name|Objects
+import|;
+end_import
+
 begin_comment
 comment|/**  * Planner rule that pushes  * a {@link org.apache.calcite.rel.core.Sort}  * past a {@link org.apache.calcite.rel.core.Project}.  *  * @see org.apache.calcite.rel.rules.ProjectSortTransposeRule  */
 end_comment
@@ -758,6 +768,23 @@ name|RexCall
 operator|)
 name|node
 decl_stmt|;
+name|RelFieldCollation
+name|newFc
+init|=
+name|Objects
+operator|.
+name|requireNonNull
+argument_list|(
+name|RexUtil
+operator|.
+name|apply
+argument_list|(
+name|map
+argument_list|,
+name|fc
+argument_list|)
+argument_list|)
+decl_stmt|;
 specifier|final
 name|RexCallBinding
 name|binding
@@ -781,14 +808,7 @@ name|RelCollations
 operator|.
 name|of
 argument_list|(
-name|RexUtil
-operator|.
-name|apply
-argument_list|(
-name|map
-argument_list|,
-name|fc
-argument_list|)
+name|newFc
 argument_list|)
 argument_list|)
 argument_list|)
