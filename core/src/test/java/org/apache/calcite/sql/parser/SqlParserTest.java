@@ -35079,6 +35079,37 @@ argument_list|(
 name|expected2
 argument_list|)
 expr_stmt|;
+comment|// Hint item without parentheses
+specifier|final
+name|String
+name|sql3
+init|=
+literal|"select /*+ simple_hint */ empno, ename, deptno from emps limit 2"
+decl_stmt|;
+specifier|final
+name|String
+name|expected3
+init|=
+literal|"SELECT\n"
+operator|+
+literal|"/*+ `SIMPLE_HINT` */\n"
+operator|+
+literal|"`EMPNO`, `ENAME`, `DEPTNO`\n"
+operator|+
+literal|"FROM `EMPS`\n"
+operator|+
+literal|"FETCH NEXT 2 ROWS ONLY"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql3
+argument_list|)
+operator|.
+name|ok
+argument_list|(
+name|expected3
+argument_list|)
+expr_stmt|;
 block|}
 annotation|@
 name|Test

@@ -475,9 +475,9 @@ name|unparse
 argument_list|(
 name|writer
 argument_list|,
-name|leftPrec
+literal|0
 argument_list|,
-name|rightPrec
+literal|0
 argument_list|)
 expr_stmt|;
 name|writer
