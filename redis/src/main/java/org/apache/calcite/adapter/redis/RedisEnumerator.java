@@ -242,7 +242,7 @@ argument_list|)
 expr_stmt|;
 block|}
 block|}
-specifier|public
+specifier|static
 name|Map
 argument_list|<
 name|String
