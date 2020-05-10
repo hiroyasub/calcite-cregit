@@ -1650,6 +1650,11 @@ literal|"  cntrycode"
 argument_list|)
 decl_stmt|;
 annotation|@
+name|Disabled
+argument_list|(
+literal|"it's wasting time"
+argument_list|)
+annotation|@
 name|Test
 name|void
 name|testRegion
@@ -2173,6 +2178,11 @@ operator|=
 name|TimeUnit
 operator|.
 name|MINUTES
+argument_list|)
+annotation|@
+name|Disabled
+argument_list|(
+literal|"Too slow, more than 5 min"
 argument_list|)
 annotation|@
 name|Test
