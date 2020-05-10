@@ -4197,6 +4197,56 @@ name|output
 argument_list|)
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3979">[CALCITE-3979]    * ReduceExpressionsRule might have removed CAST expression(s) incorrectly</a>. */
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testCastRemove
+parameter_list|()
+throws|throws
+name|Exception
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select\n"
+operator|+
+literal|"case when cast(ename as double)< 5 then 0.0\n"
+operator|+
+literal|"     else coalesce(cast(ename as double), 1.0)\n"
+operator|+
+literal|"     end as t\n"
+operator|+
+literal|" from (\n"
+operator|+
+literal|"       select\n"
+operator|+
+literal|"          case when ename> 'abc' then ename\n"
+operator|+
+literal|"               else null\n"
+operator|+
+literal|"               end as ename from emp\n"
+operator|+
+literal|" )"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|withRule
+argument_list|(
+name|ReduceExpressionsRule
+operator|.
+name|PROJECT_INSTANCE
+argument_list|)
+operator|.
+name|checkUnchanged
+argument_list|()
+expr_stmt|;
+block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-3887">[CALCITE-3887]    * Filter and Join conditions may not need to retain nullability during simplifications</a>. */
 annotation|@
 name|Test
