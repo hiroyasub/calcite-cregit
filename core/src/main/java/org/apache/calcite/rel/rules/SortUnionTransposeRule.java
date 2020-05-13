@@ -183,6 +183,8 @@ class|class
 name|SortUnionTransposeRule
 extends|extends
 name|RelOptRule
+implements|implements
+name|TransformationRule
 block|{
 comment|/** Rule instance for Union implementation that does not preserve the    * ordering of its inputs. Thus, it makes no sense to match this rule    * if the Sort does not have a limit, i.e., {@link Sort#fetch} is null. */
 specifier|public

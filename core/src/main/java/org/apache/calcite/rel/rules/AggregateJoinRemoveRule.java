@@ -297,6 +297,8 @@ class|class
 name|AggregateJoinRemoveRule
 extends|extends
 name|RelOptRule
+implements|implements
+name|TransformationRule
 block|{
 specifier|public
 specifier|static

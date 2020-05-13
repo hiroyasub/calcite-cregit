@@ -313,6 +313,8 @@ class|class
 name|JoinPushThroughJoinRule
 extends|extends
 name|RelOptRule
+implements|implements
+name|TransformationRule
 block|{
 comment|/** Instance of the rule that works on logical joins only, and pushes to the    * right. */
 specifier|public

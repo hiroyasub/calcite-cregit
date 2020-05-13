@@ -339,6 +339,8 @@ class|class
 name|ProjectWindowTransposeRule
 extends|extends
 name|RelOptRule
+implements|implements
+name|TransformationRule
 block|{
 comment|/** The default instance of    * {@link org.apache.calcite.rel.rules.ProjectWindowTransposeRule}. */
 specifier|public

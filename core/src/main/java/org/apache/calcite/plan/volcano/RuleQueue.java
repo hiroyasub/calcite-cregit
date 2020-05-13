@@ -39,9 +39,9 @@ name|apache
 operator|.
 name|calcite
 operator|.
-name|plan
+name|rel
 operator|.
-name|SubstitutionRule
+name|RelNode
 import|;
 end_import
 
@@ -55,7 +55,9 @@ name|calcite
 operator|.
 name|rel
 operator|.
-name|RelNode
+name|rules
+operator|.
+name|SubstitutionRule
 import|;
 end_import
 

@@ -144,6 +144,8 @@ class|class
 name|AbstractJoinExtractFilterRule
 extends|extends
 name|RelOptRule
+implements|implements
+name|TransformationRule
 block|{
 comment|/** Creates an AbstractJoinExtractFilterRule. */
 specifier|protected

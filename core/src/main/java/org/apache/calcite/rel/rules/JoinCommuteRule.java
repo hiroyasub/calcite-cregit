@@ -317,6 +317,8 @@ class|class
 name|JoinCommuteRule
 extends|extends
 name|RelOptRule
+implements|implements
+name|TransformationRule
 block|{
 comment|//~ Static fields/initializers ---------------------------------------------
 comment|/** Instance of the rule that only swaps inner joins. */

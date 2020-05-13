@@ -568,6 +568,8 @@ class|class
 name|ProjectToWindowRule
 extends|extends
 name|RelOptRule
+implements|implements
+name|TransformationRule
 block|{
 comment|//~ Static fields/initializers ---------------------------------------------
 specifier|public

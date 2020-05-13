@@ -191,6 +191,8 @@ class|class
 name|AggregateUnionAggregateRule
 extends|extends
 name|RelOptRule
+implements|implements
+name|TransformationRule
 block|{
 comment|/** Instance that matches an {@code Aggregate} as the left input of    * {@code Union}. */
 specifier|public

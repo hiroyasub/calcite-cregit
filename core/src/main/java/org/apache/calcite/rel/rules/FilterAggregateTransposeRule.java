@@ -297,6 +297,8 @@ class|class
 name|FilterAggregateTransposeRule
 extends|extends
 name|RelOptRule
+implements|implements
+name|TransformationRule
 block|{
 comment|/** The default instance of    * {@link FilterAggregateTransposeRule}.    *    *<p>It matches any kind of agg. or filter */
 specifier|public

@@ -489,6 +489,8 @@ class|class
 name|AggregateReduceFunctionsRule
 extends|extends
 name|RelOptRule
+implements|implements
+name|TransformationRule
 block|{
 comment|//~ Static fields/initializers ---------------------------------------------
 comment|/** The singleton. */

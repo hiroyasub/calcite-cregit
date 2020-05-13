@@ -369,6 +369,8 @@ class|class
 name|ProjectJoinTransposeRule
 extends|extends
 name|RelOptRule
+implements|implements
+name|TransformationRule
 block|{
 comment|/**    * A instance for ProjectJoinTransposeRule that pushes a    * {@link org.apache.calcite.rel.logical.LogicalProject}    * past a {@link org.apache.calcite.rel.logical.LogicalJoin}    * by splitting the projection into a projection on top of each child of    * the join.    */
 specifier|public

@@ -187,6 +187,8 @@ class|class
 name|JoinPushTransitivePredicatesRule
 extends|extends
 name|RelOptRule
+implements|implements
+name|TransformationRule
 block|{
 comment|/** The singleton. */
 specifier|public

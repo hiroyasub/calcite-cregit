@@ -283,6 +283,8 @@ class|class
 name|SortJoinTransposeRule
 extends|extends
 name|RelOptRule
+implements|implements
+name|TransformationRule
 block|{
 specifier|public
 specifier|static

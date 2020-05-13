@@ -1161,6 +1161,8 @@ class|class
 name|FilterDateRangeRule
 extends|extends
 name|RelOptRule
+implements|implements
+name|TransformationRule
 block|{
 specifier|public
 name|FilterDateRangeRule

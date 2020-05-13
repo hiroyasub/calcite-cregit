@@ -163,6 +163,8 @@ class|class
 name|CoerceInputsRule
 extends|extends
 name|RelOptRule
+implements|implements
+name|TransformationRule
 block|{
 comment|//~ Instance fields --------------------------------------------------------
 specifier|private

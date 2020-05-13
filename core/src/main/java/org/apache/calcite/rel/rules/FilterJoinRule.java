@@ -346,6 +346,8 @@ class|class
 name|FilterJoinRule
 extends|extends
 name|RelOptRule
+implements|implements
+name|TransformationRule
 block|{
 comment|/** Predicate that always returns true. With this predicate, every filter    * will be pushed into the ON clause. */
 specifier|public

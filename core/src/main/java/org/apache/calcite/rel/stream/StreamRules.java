@@ -365,6 +365,22 @@ name|apache
 operator|.
 name|calcite
 operator|.
+name|rel
+operator|.
+name|rules
+operator|.
+name|TransformationRule
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
 name|schema
 operator|.
 name|StreamableTable
@@ -560,6 +576,8 @@ class|class
 name|DeltaProjectTransposeRule
 extends|extends
 name|RelOptRule
+implements|implements
+name|TransformationRule
 block|{
 comment|/**      * Creates a DeltaProjectTransposeRule.      *      * @param relBuilderFactory Builder for relational expressions      */
 specifier|public
@@ -692,6 +710,8 @@ class|class
 name|DeltaFilterTransposeRule
 extends|extends
 name|RelOptRule
+implements|implements
+name|TransformationRule
 block|{
 comment|/**      * Creates a DeltaFilterTransposeRule.      *      * @param relBuilderFactory Builder for relational expressions      */
 specifier|public
@@ -811,6 +831,8 @@ class|class
 name|DeltaAggregateTransposeRule
 extends|extends
 name|RelOptRule
+implements|implements
+name|TransformationRule
 block|{
 comment|/**      * Creates a DeltaAggregateTransposeRule.      *      * @param relBuilderFactory Builder for relational expressions      */
 specifier|public
@@ -950,6 +972,8 @@ class|class
 name|DeltaSortTransposeRule
 extends|extends
 name|RelOptRule
+implements|implements
+name|TransformationRule
 block|{
 comment|/**      * Creates a DeltaSortTransposeRule.      *      * @param relBuilderFactory Builder for relational expressions      */
 specifier|public
@@ -1076,6 +1100,8 @@ class|class
 name|DeltaUnionTransposeRule
 extends|extends
 name|RelOptRule
+implements|implements
+name|TransformationRule
 block|{
 comment|/**      * Creates a DeltaUnionTransposeRule.      *      * @param relBuilderFactory Builder for relational expressions      */
 specifier|public
@@ -1222,6 +1248,8 @@ class|class
 name|DeltaTableScanRule
 extends|extends
 name|RelOptRule
+implements|implements
+name|TransformationRule
 block|{
 comment|/**      * Creates a DeltaTableScanRule.      *      * @param relBuilderFactory Builder for relational expressions      */
 specifier|public
@@ -1415,6 +1443,8 @@ class|class
 name|DeltaTableScanToEmptyRule
 extends|extends
 name|RelOptRule
+implements|implements
+name|TransformationRule
 block|{
 comment|/**      * Creates a DeltaTableScanToEmptyRule.      *      * @param relBuilderFactory Builder for relational expressions      */
 specifier|public
@@ -1547,6 +1577,8 @@ class|class
 name|DeltaJoinTransposeRule
 extends|extends
 name|RelOptRule
+implements|implements
+name|TransformationRule
 block|{
 annotation|@
 name|Deprecated

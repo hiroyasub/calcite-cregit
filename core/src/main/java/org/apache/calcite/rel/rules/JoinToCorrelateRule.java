@@ -275,6 +275,8 @@ class|class
 name|JoinToCorrelateRule
 extends|extends
 name|RelOptRule
+implements|implements
+name|TransformationRule
 block|{
 comment|//~ Static fields/initializers ---------------------------------------------
 comment|/**    * Rule that converts a {@link org.apache.calcite.rel.logical.LogicalJoin}    * into a {@link org.apache.calcite.rel.logical.LogicalCorrelate}    */

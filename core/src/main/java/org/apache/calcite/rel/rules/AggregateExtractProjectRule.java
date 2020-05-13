@@ -283,6 +283,8 @@ class|class
 name|AggregateExtractProjectRule
 extends|extends
 name|RelOptRule
+implements|implements
+name|TransformationRule
 block|{
 comment|/**    * Creates an AggregateExtractProjectRule.    *    * @param relBuilderFactory Builder for relational expressions    */
 specifier|public

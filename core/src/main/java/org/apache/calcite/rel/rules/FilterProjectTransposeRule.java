@@ -279,6 +279,8 @@ class|class
 name|FilterProjectTransposeRule
 extends|extends
 name|RelOptRule
+implements|implements
+name|TransformationRule
 block|{
 comment|/** The default instance of    * {@link org.apache.calcite.rel.rules.FilterProjectTransposeRule}.    *    *<p>It does not allow a Filter to be pushed past the Project if    * {@link RexUtil#containsCorrelation there is a correlation condition})    * anywhere in the Filter, since in some cases it can prevent a    * {@link org.apache.calcite.rel.core.Correlate} from being de-correlated.    */
 specifier|public

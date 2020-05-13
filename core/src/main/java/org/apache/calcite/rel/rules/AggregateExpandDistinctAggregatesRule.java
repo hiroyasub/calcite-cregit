@@ -588,6 +588,8 @@ class|class
 name|AggregateExpandDistinctAggregatesRule
 extends|extends
 name|RelOptRule
+implements|implements
+name|TransformationRule
 block|{
 comment|//~ Static fields/initializers ---------------------------------------------
 comment|/** The default instance of the rule; operates only on logical expressions. */

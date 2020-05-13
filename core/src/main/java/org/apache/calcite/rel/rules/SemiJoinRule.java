@@ -294,6 +294,8 @@ class|class
 name|SemiJoinRule
 extends|extends
 name|RelOptRule
+implements|implements
+name|TransformationRule
 block|{
 specifier|private
 specifier|static
