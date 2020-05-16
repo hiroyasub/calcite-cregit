@@ -17945,6 +17945,146 @@ block|}
 annotation|@
 name|Test
 name|void
+name|testAllPredicatesAndTablesCalc
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select empno as a, sal as b from emp where empno> 5"
+decl_stmt|;
+specifier|final
+name|RelNode
+name|relNode
+init|=
+name|convertSql
+argument_list|(
+name|sql
+argument_list|)
+decl_stmt|;
+specifier|final
+name|HepProgram
+name|hepProgram
+init|=
+operator|new
+name|HepProgramBuilder
+argument_list|()
+operator|.
+name|addRuleInstance
+argument_list|(
+name|CoreRules
+operator|.
+name|PROJECT_TO_CALC
+argument_list|)
+operator|.
+name|addRuleInstance
+argument_list|(
+name|CoreRules
+operator|.
+name|FILTER_TO_CALC
+argument_list|)
+operator|.
+name|build
+argument_list|()
+decl_stmt|;
+specifier|final
+name|HepPlanner
+name|planner
+init|=
+operator|new
+name|HepPlanner
+argument_list|(
+name|hepProgram
+argument_list|)
+decl_stmt|;
+name|planner
+operator|.
+name|setRoot
+argument_list|(
+name|relNode
+argument_list|)
+expr_stmt|;
+specifier|final
+name|RelNode
+name|rel
+init|=
+name|planner
+operator|.
+name|findBestExp
+argument_list|()
+decl_stmt|;
+specifier|final
+name|RelMetadataQuery
+name|mq
+init|=
+name|rel
+operator|.
+name|getCluster
+argument_list|()
+operator|.
+name|getMetadataQuery
+argument_list|()
+decl_stmt|;
+specifier|final
+name|RelOptPredicateList
+name|inputSet
+init|=
+name|mq
+operator|.
+name|getAllPredicates
+argument_list|(
+name|rel
+argument_list|)
+decl_stmt|;
+name|assertThat
+argument_list|(
+name|inputSet
+operator|.
+name|pulledUpPredicates
+argument_list|,
+name|sortsAs
+argument_list|(
+literal|"[>([CATALOG, SALES, EMP].#0.$0, 5)]"
+argument_list|)
+argument_list|)
+expr_stmt|;
+specifier|final
+name|Set
+argument_list|<
+name|RelTableRef
+argument_list|>
+name|tableReferences
+init|=
+name|Sets
+operator|.
+name|newTreeSet
+argument_list|(
+name|mq
+operator|.
+name|getTableReferences
+argument_list|(
+name|rel
+argument_list|)
+argument_list|)
+decl_stmt|;
+name|assertThat
+argument_list|(
+name|tableReferences
+operator|.
+name|toString
+argument_list|()
+argument_list|,
+name|equalTo
+argument_list|(
+literal|"[[CATALOG, SALES, EMP].#0]"
+argument_list|)
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
 name|testAllPredicatesAndTableUnion
 parameter_list|()
 block|{
@@ -17970,6 +18110,88 @@ literal|"inner join (select * from emp limit 2) as c\n"
 operator|+
 literal|"on a.deptno = c.deptno"
 decl_stmt|;
+name|checkAllPredicatesAndTableSetOp
+argument_list|(
+name|sql
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testAllPredicatesAndTableIntersect
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select a.deptno, c.sal from (select * from emp limit 7) as a\n"
+operator|+
+literal|"cross join (select * from dept limit 1) as b\n"
+operator|+
+literal|"inner join (select * from emp limit 2) as c\n"
+operator|+
+literal|"on a.deptno = c.deptno\n"
+operator|+
+literal|"intersect all\n"
+operator|+
+literal|"select a.deptno, c.sal from (select * from emp limit 7) as a\n"
+operator|+
+literal|"cross join (select * from dept limit 1) as b\n"
+operator|+
+literal|"inner join (select * from emp limit 2) as c\n"
+operator|+
+literal|"on a.deptno = c.deptno"
+decl_stmt|;
+name|checkAllPredicatesAndTableSetOp
+argument_list|(
+name|sql
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
+name|testAllPredicatesAndTableMinus
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select a.deptno, c.sal from (select * from emp limit 7) as a\n"
+operator|+
+literal|"cross join (select * from dept limit 1) as b\n"
+operator|+
+literal|"inner join (select * from emp limit 2) as c\n"
+operator|+
+literal|"on a.deptno = c.deptno\n"
+operator|+
+literal|"except all\n"
+operator|+
+literal|"select a.deptno, c.sal from (select * from emp limit 7) as a\n"
+operator|+
+literal|"cross join (select * from dept limit 1) as b\n"
+operator|+
+literal|"inner join (select * from emp limit 2) as c\n"
+operator|+
+literal|"on a.deptno = c.deptno"
+decl_stmt|;
+name|checkAllPredicatesAndTableSetOp
+argument_list|(
+name|sql
+argument_list|)
+expr_stmt|;
+block|}
+specifier|public
+name|void
+name|checkAllPredicatesAndTableSetOp
+parameter_list|(
+name|String
+name|sql
+parameter_list|)
+block|{
 specifier|final
 name|RelNode
 name|rel

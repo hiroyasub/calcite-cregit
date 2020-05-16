@@ -119,6 +119,22 @@ name|rel
 operator|.
 name|core
 operator|.
+name|Calc
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|core
+operator|.
 name|Exchange
 import|;
 end_import
@@ -183,6 +199,22 @@ name|rel
 operator|.
 name|core
 operator|.
+name|SetOp
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|core
+operator|.
 name|Sort
 import|;
 end_import
@@ -216,22 +248,6 @@ operator|.
 name|core
 operator|.
 name|TableScan
-import|;
-end_import
-
-begin_import
-import|import
-name|org
-operator|.
-name|apache
-operator|.
-name|calcite
-operator|.
-name|rel
-operator|.
-name|core
-operator|.
-name|Union
 import|;
 end_import
 
@@ -306,6 +322,20 @@ operator|.
 name|rex
 operator|.
 name|RexNode
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rex
+operator|.
+name|RexProgram
 import|;
 end_import
 
@@ -652,7 +682,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/**    * Extract predicates for a table scan.    */
+comment|/**    * Extracts predicates for a table scan.    */
 specifier|public
 name|RelOptPredicateList
 name|getAllPredicates
@@ -712,7 +742,7 @@ operator|.
 name|EMPTY
 return|;
 block|}
-comment|/**    * Extract predicates for a project.    */
+comment|/**    * Extracts predicates for a project.    */
 specifier|public
 name|RelOptPredicateList
 name|getAllPredicates
@@ -736,7 +766,7 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-comment|/**    * Add the Filter condition to the list obtained from the input.    */
+comment|/**    * Extracts predicates for a Filter.    */
 specifier|public
 name|RelOptPredicateList
 name|getAllPredicates
@@ -748,34 +778,122 @@ name|RelMetadataQuery
 name|mq
 parameter_list|)
 block|{
-specifier|final
-name|RelNode
-name|input
-init|=
+return|return
+name|getAllFilterPredicates
+argument_list|(
 name|filter
 operator|.
 name|getInput
 argument_list|()
+argument_list|,
+name|mq
+argument_list|,
+name|filter
+operator|.
+name|getCondition
+argument_list|()
+argument_list|)
+return|;
+block|}
+comment|/**    * Extracts predicates for a Calc.    */
+specifier|public
+name|RelOptPredicateList
+name|getAllPredicates
+parameter_list|(
+name|Calc
+name|calc
+parameter_list|,
+name|RelMetadataQuery
+name|mq
+parameter_list|)
+block|{
+specifier|final
+name|RexProgram
+name|rexProgram
+init|=
+name|calc
+operator|.
+name|getProgram
+argument_list|()
 decl_stmt|;
+if|if
+condition|(
+name|rexProgram
+operator|.
+name|getCondition
+argument_list|()
+operator|!=
+literal|null
+condition|)
+block|{
+specifier|final
+name|RexNode
+name|condition
+init|=
+name|rexProgram
+operator|.
+name|expandLocalRef
+argument_list|(
+name|rexProgram
+operator|.
+name|getCondition
+argument_list|()
+argument_list|)
+decl_stmt|;
+return|return
+name|getAllFilterPredicates
+argument_list|(
+name|calc
+operator|.
+name|getInput
+argument_list|()
+argument_list|,
+name|mq
+argument_list|,
+name|condition
+argument_list|)
+return|;
+block|}
+else|else
+block|{
+return|return
+name|mq
+operator|.
+name|getAllPredicates
+argument_list|(
+name|calc
+operator|.
+name|getInput
+argument_list|()
+argument_list|)
+return|;
+block|}
+block|}
+comment|/**    * Add the Filter condition to the list obtained from the input.    * The pred comes from the parent of rel.    */
+specifier|private
+name|RelOptPredicateList
+name|getAllFilterPredicates
+parameter_list|(
+name|RelNode
+name|rel
+parameter_list|,
+name|RelMetadataQuery
+name|mq
+parameter_list|,
+name|RexNode
+name|pred
+parameter_list|)
+block|{
 specifier|final
 name|RexBuilder
 name|rexBuilder
 init|=
-name|filter
+name|rel
 operator|.
 name|getCluster
 argument_list|()
 operator|.
 name|getRexBuilder
-argument_list|()
-decl_stmt|;
-specifier|final
-name|RexNode
-name|pred
-init|=
-name|filter
-operator|.
-name|getCondition
 argument_list|()
 decl_stmt|;
 specifier|final
@@ -786,7 +904,7 @@ name|mq
 operator|.
 name|getAllPredicates
 argument_list|(
-name|input
+name|rel
 argument_list|)
 decl_stmt|;
 if|if
@@ -880,7 +998,7 @@ name|of
 argument_list|(
 name|idx
 argument_list|,
-name|filter
+name|rel
 operator|.
 name|getRowType
 argument_list|()
@@ -900,7 +1018,7 @@ name|mq
 operator|.
 name|getExpressionLineage
 argument_list|(
-name|filter
+name|rel
 argument_list|,
 name|ref
 argument_list|)
@@ -1501,7 +1619,7 @@ argument_list|)
 argument_list|)
 return|;
 block|}
-comment|/**    * Extract predicates for an Aggregate.    */
+comment|/**    * Extracts predicates for an Aggregate.    */
 specifier|public
 name|RelOptPredicateList
 name|getAllPredicates
@@ -1525,7 +1643,7 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-comment|/**    * Extract predicates for an TableModify.    */
+comment|/**    * Extracts predicates for an TableModify.    */
 specifier|public
 name|RelOptPredicateList
 name|getAllPredicates
@@ -1549,13 +1667,13 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-comment|/**    * Extract predicates for a Union.    */
+comment|/**    * Extracts predicates for a SetOp.    */
 specifier|public
 name|RelOptPredicateList
 name|getAllPredicates
 parameter_list|(
-name|Union
-name|union
+name|SetOp
+name|setOp
 parameter_list|,
 name|RelMetadataQuery
 name|mq
@@ -1565,7 +1683,7 @@ specifier|final
 name|RexBuilder
 name|rexBuilder
 init|=
-name|union
+name|setOp
 operator|.
 name|getCluster
 argument_list|()
@@ -1606,7 +1724,7 @@ literal|0
 init|;
 name|i
 operator|<
-name|union
+name|setOp
 operator|.
 name|getInputs
 argument_list|()
@@ -1622,7 +1740,7 @@ specifier|final
 name|RelNode
 name|input
 init|=
-name|union
+name|setOp
 operator|.
 name|getInput
 argument_list|(
@@ -1874,7 +1992,7 @@ return|return
 name|newPreds
 return|;
 block|}
-comment|/**    * Extract predicates for a Sort.    */
+comment|/**    * Extracts predicates for a Sort.    */
 specifier|public
 name|RelOptPredicateList
 name|getAllPredicates
@@ -1898,7 +2016,7 @@ argument_list|()
 argument_list|)
 return|;
 block|}
-comment|/**    * Extract predicates for an Exchange.    */
+comment|/**    * Extracts predicates for an Exchange.    */
 specifier|public
 name|RelOptPredicateList
 name|getAllPredicates
