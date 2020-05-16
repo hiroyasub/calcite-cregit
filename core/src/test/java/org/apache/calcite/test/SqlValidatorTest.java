@@ -39837,7 +39837,7 @@ name|sql
 argument_list|(
 literal|"select * from table(\n"
 operator|+
-literal|"^tumble(table orders, descriptor(rowtime), interval '2' hour, 'test')^)"
+literal|"^tumble(table orders, descriptor(rowtime))^)"
 argument_list|)
 operator|.
 name|fails
@@ -39850,6 +39850,16 @@ argument_list|(
 literal|"select rowtime, productid, orderid, 'window_start', 'window_end' from table(\n"
 operator|+
 literal|"tumble(table orders, descriptor(rowtime), interval '2' hour))"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select rowtime, productid, orderid, 'window_start', 'window_end' from table(\n"
+operator|+
+literal|"tumble(table orders, descriptor(rowtime), interval '2' hour, interval '1' hour))"
 argument_list|)
 operator|.
 name|ok
@@ -39870,7 +39880,9 @@ literal|"(TIMESTAMP\\(0\\) ROWTIME, INTEGER PRODUCTID, INTEGER ORDERID\\)>,<COLU
 operator|+
 literal|"<CHAR\\(4\\)>\\)'\\. Supported form\\(s\\): TUMBLE\\(TABLE "
 operator|+
-literal|"table_name, DESCRIPTOR\\(col1, col2 \\.\\.\\.\\), datetime interval\\)"
+literal|"table_name, DESCRIPTOR\\(col1, col2 \\.\\.\\.\\), datetime interval"
+operator|+
+literal|"\\[, datetime interval\\]\\)"
 argument_list|)
 expr_stmt|;
 name|sql
@@ -39888,7 +39900,29 @@ literal|"(TIMESTAMP\\(0\\) ROWTIME, INTEGER PRODUCTID, INTEGER ORDERID\\)>,<CHAR
 operator|+
 literal|"(4\\)>,<INTERVAL HOUR>\\)'\\. Supported form\\(s\\): TUMBLE\\(TABLE "
 operator|+
-literal|"table_name, DESCRIPTOR\\(col1, col2 \\.\\.\\.\\), datetime interval\\)"
+literal|"table_name, DESCRIPTOR\\(col1, col2 \\.\\.\\.\\), datetime interval"
+operator|+
+literal|"\\[, datetime interval\\]\\)"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select rowtime, productid, orderid, 'window_start', 'window_end' from table(\n"
+operator|+
+literal|"^tumble(table orders, descriptor(rowtime), interval '2' hour, 'test')^)"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Cannot apply 'TUMBLE' to arguments of type 'TUMBLE\\(<RECORDTYPE\\"
+operator|+
+literal|"(TIMESTAMP\\(0\\) ROWTIME, INTEGER PRODUCTID, INTEGER ORDERID\\)>,<COLUMN_LIST>,"
+operator|+
+literal|"<INTERVAL HOUR>,<CHAR\\(4\\)>\\)'\\. Supported form\\(s\\): TUMBLE\\(TABLE "
+operator|+
+literal|"table_name, DESCRIPTOR\\(col1, col2 \\.\\.\\.\\), datetime interval"
+operator|+
+literal|"\\[, datetime interval\\]\\)"
 argument_list|)
 expr_stmt|;
 name|sql
@@ -39925,6 +39959,18 @@ name|sql
 argument_list|(
 literal|"select * from table(\n"
 operator|+
+literal|"hop(table orders, descriptor(rowtime), interval '2' hour, interval '1' hour, "
+operator|+
+literal|"interval '20' minute))"
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select * from table(\n"
+operator|+
 literal|"^hop(table orders, descriptor(rowtime), interval '2' hour)^)"
 argument_list|)
 operator|.
@@ -39948,7 +39994,7 @@ literal|"ROWTIME, INTEGER PRODUCTID, INTEGER ORDERID\\)>,<COLUMN_LIST>,<INTERVAL
 operator|+
 literal|"<CHAR\\(4\\)>\\)'. Supported form\\(s\\): HOP\\(TABLE table_name, DESCRIPTOR\\("
 operator|+
-literal|"col\\), datetime interval, datetime interval\\)"
+literal|"col\\), datetime interval, datetime interval\\[, datetime interval\\]\\)"
 argument_list|)
 expr_stmt|;
 name|sql
@@ -39966,7 +40012,7 @@ literal|"ROWTIME, INTEGER PRODUCTID, INTEGER ORDERID\\)>,<COLUMN_LIST>,<CHAR\\(4
 operator|+
 literal|"<INTERVAL HOUR>\\)'. Supported form\\(s\\): HOP\\(TABLE table_name, DESCRIPTOR\\("
 operator|+
-literal|"col\\), datetime interval, datetime interval\\)"
+literal|"col\\), datetime interval, datetime interval\\[, datetime interval\\]\\)"
 argument_list|)
 expr_stmt|;
 name|sql
@@ -39984,7 +40030,25 @@ literal|"ROWTIME, INTEGER PRODUCTID, INTEGER ORDERID\\)>,<CHAR\\(4\\)>,<INTERVAL
 operator|+
 literal|"<INTERVAL HOUR>\\)'. Supported form\\(s\\): HOP\\(TABLE table_name, DESCRIPTOR\\("
 operator|+
-literal|"col\\), datetime interval, datetime interval\\)"
+literal|"col\\), datetime interval, datetime interval\\[, datetime interval\\]\\)"
+argument_list|)
+expr_stmt|;
+name|sql
+argument_list|(
+literal|"select * from table(\n"
+operator|+
+literal|"^hop(table orders, descriptor(rowtime), interval '2' hour, interval '1' hour, 'test')^)"
+argument_list|)
+operator|.
+name|fails
+argument_list|(
+literal|"Cannot apply 'HOP' to arguments of type 'HOP\\(<RECORDTYPE\\(TIMESTAMP\\(0\\) "
+operator|+
+literal|"ROWTIME, INTEGER PRODUCTID, INTEGER ORDERID\\)>,<COLUMN_LIST>,<INTERVAL HOUR>, "
+operator|+
+literal|"<INTERVAL HOUR>,<CHAR\\(4\\)>\\)'. Supported form\\(s\\): HOP\\(TABLE table_name, "
+operator|+
+literal|"DESCRIPTOR\\(col\\), datetime interval, datetime interval\\[, datetime interval\\]\\)"
 argument_list|)
 expr_stmt|;
 name|sql

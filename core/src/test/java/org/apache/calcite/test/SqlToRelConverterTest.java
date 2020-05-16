@@ -6962,6 +6962,31 @@ expr_stmt|;
 block|}
 annotation|@
 name|Test
+name|void
+name|testTableFunctionTumbleWithOffset
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"from table(tumble(table Shipments, descriptor(rowtime), INTERVAL '10' MINUTE, \n"
+operator|+
+literal|"INTERVAL '1' MINUTE))"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
 specifier|public
 name|void
 name|testTableFunctionHop
@@ -6976,6 +7001,32 @@ operator|+
 literal|"from table(hop(table Shipments, descriptor(rowtime), "
 operator|+
 literal|"INTERVAL '1' MINUTE, INTERVAL '2' MINUTE))"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+specifier|public
+name|void
+name|testTableFunctionHopWithOffset
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"from table(hop(table Shipments, descriptor(rowtime), "
+operator|+
+literal|"INTERVAL '1' MINUTE, INTERVAL '5' MINUTE, INTERVAL '3' MINUTE))"
 decl_stmt|;
 name|sql
 argument_list|(

@@ -4188,7 +4188,10 @@ name|Expression
 name|wmColExpr
 parameter_list|,
 name|Expression
-name|intervalExpr
+name|windowSizeExpr
+parameter_list|,
+name|Expression
+name|offsetExpr
 parameter_list|)
 block|{
 comment|// Generate all fields.
@@ -4315,59 +4318,68 @@ operator|.
 name|class
 argument_list|)
 decl_stmt|;
-comment|// Find the fixed window for a timestamp given a window size and return the window start.
-comment|// Fixed windows counts from timestamp 0.
-comment|// wmMillis / intervalMillis * intervalMillis
+comment|// Find the fixed window for a timestamp given a window size and an offset, and return the
+comment|// window start.
+comment|// wmColExprToLong - (wmColExprToLong + windowSizeMillis - offsetMillis) % windowSizeMillis
+name|Expression
+name|windowStartExpr
+init|=
+name|Expressions
+operator|.
+name|subtract
+argument_list|(
+name|wmColExprToLong
+argument_list|,
+name|Expressions
+operator|.
+name|modulo
+argument_list|(
+name|Expressions
+operator|.
+name|add
+argument_list|(
+name|wmColExprToLong
+argument_list|,
+name|Expressions
+operator|.
+name|subtract
+argument_list|(
+name|windowSizeExpr
+argument_list|,
+name|offsetExpr
+argument_list|)
+argument_list|)
+argument_list|,
+name|windowSizeExpr
+argument_list|)
+argument_list|)
+decl_stmt|;
 name|expressions
 operator|.
 name|add
 argument_list|(
-name|Expressions
-operator|.
-name|multiply
-argument_list|(
-name|Expressions
-operator|.
-name|divide
-argument_list|(
-name|wmColExprToLong
-argument_list|,
-name|intervalExpr
-argument_list|)
-argument_list|,
-name|intervalExpr
-argument_list|)
+name|windowStartExpr
 argument_list|)
 expr_stmt|;
-comment|// Find the fixed window for a timestamp given a window size and return the window end.
-comment|// Fixed windows counts from timestamp 0.
-comment|// (wmMillis / sizeMillis + 1L) * sizeMillis;
+comment|// The window end equals to the window start plus window size.
+comment|// windowStartMillis + sizeMillis
+name|Expression
+name|windowEndExpr
+init|=
+name|Expressions
+operator|.
+name|add
+argument_list|(
+name|windowStartExpr
+argument_list|,
+name|windowSizeExpr
+argument_list|)
+decl_stmt|;
 name|expressions
 operator|.
 name|add
 argument_list|(
-name|Expressions
-operator|.
-name|multiply
-argument_list|(
-name|Expressions
-operator|.
-name|add
-argument_list|(
-name|Expressions
-operator|.
-name|divide
-argument_list|(
-name|wmColExprToLong
-argument_list|,
-name|intervalExpr
-argument_list|)
-argument_list|,
-name|shiftExpr
-argument_list|)
-argument_list|,
-name|intervalExpr
-argument_list|)
+name|windowEndExpr
 argument_list|)
 expr_stmt|;
 return|return
@@ -5272,7 +5284,10 @@ name|long
 name|emitFrequency
 parameter_list|,
 name|long
-name|intervalSize
+name|windowSize
+parameter_list|,
+name|long
+name|offset
 parameter_list|)
 block|{
 return|return
@@ -5305,7 +5320,9 @@ name|indexOfWatermarkedColumn
 argument_list|,
 name|emitFrequency
 argument_list|,
-name|intervalSize
+name|windowSize
+argument_list|,
+name|offset
 argument_list|)
 return|;
 block|}
@@ -5345,7 +5362,12 @@ decl_stmt|;
 specifier|private
 specifier|final
 name|long
-name|intervalSize
+name|windowSize
+decl_stmt|;
+specifier|private
+specifier|final
+name|long
+name|offset
 decl_stmt|;
 specifier|private
 name|LinkedList
@@ -5355,7 +5377,7 @@ index|[]
 argument_list|>
 name|list
 decl_stmt|;
-comment|/**      * Note that it only works for batch scenario. E.g. all data is known and there is no late data.      *      * @param inputEnumerator the enumerator to provide an array of objects as input      * @param indexOfWatermarkedColumn the index of timestamp column upon which a watermark is built      * @param slide sliding size      * @param intervalSize window size      */
+comment|/**      * Note that it only works for batch scenario. E.g. all data is known and there is no late data.      *      * @param inputEnumerator the enumerator to provide an array of objects as input      * @param indexOfWatermarkedColumn the index of timestamp column upon which a watermark is built      * @param slide sliding size      * @param windowSize window size      * @param offset indicates how much windows should off      */
 name|HopEnumerator
 parameter_list|(
 name|Enumerator
@@ -5372,7 +5394,10 @@ name|long
 name|slide
 parameter_list|,
 name|long
-name|intervalSize
+name|windowSize
+parameter_list|,
+name|long
+name|offset
 parameter_list|)
 block|{
 name|this
@@ -5395,9 +5420,15 @@ name|slide
 expr_stmt|;
 name|this
 operator|.
-name|intervalSize
+name|windowSize
 operator|=
-name|intervalSize
+name|windowSize
+expr_stmt|;
+name|this
+operator|.
+name|offset
+operator|=
+name|offset
 expr_stmt|;
 name|list
 operator|=
@@ -5459,7 +5490,9 @@ argument_list|)
 argument_list|,
 name|emitFrequency
 argument_list|,
-name|intervalSize
+name|windowSize
+argument_list|,
+name|offset
 argument_list|)
 decl_stmt|;
 for|for
@@ -5610,6 +5643,9 @@ name|periodMillis
 parameter_list|,
 name|long
 name|sizeMillis
+parameter_list|,
+name|long
+name|offsetMillis
 parameter_list|)
 block|{
 name|ArrayList
@@ -5642,6 +5678,8 @@ operator|(
 name|tsMillis
 operator|+
 name|periodMillis
+operator|-
+name|offsetMillis
 operator|)
 operator|%
 name|periodMillis
