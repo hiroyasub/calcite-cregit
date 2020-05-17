@@ -290,6 +290,14 @@ name|replace
 argument_list|(
 name|collation
 argument_list|)
+operator|.
+name|replace
+argument_list|(
+name|sort
+operator|.
+name|getConvention
+argument_list|()
+argument_list|)
 decl_stmt|;
 name|call
 operator|.
