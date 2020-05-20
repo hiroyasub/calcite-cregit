@@ -622,6 +622,25 @@ literal|false
 argument_list|,
 literal|false
 argument_list|)
+block|,
+comment|/** Whether to enable top-down optimization in Volcano planner. */
+name|TOPDOWN_OPT
+argument_list|(
+literal|"topDownOpt"
+argument_list|,
+name|Type
+operator|.
+name|BOOLEAN
+argument_list|,
+name|CalciteSystemProperty
+operator|.
+name|TOPDOWN_OPT
+operator|.
+name|value
+argument_list|()
+argument_list|,
+literal|false
+argument_list|)
 block|;
 specifier|private
 specifier|final

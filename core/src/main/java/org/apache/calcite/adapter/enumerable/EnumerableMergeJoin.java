@@ -1107,12 +1107,8 @@ name|collation
 init|=
 name|childTraits
 operator|.
-name|getTrait
-argument_list|(
-name|RelCollationTraitDef
-operator|.
-name|INSTANCE
-argument_list|)
+name|getCollation
+argument_list|()
 decl_stmt|;
 specifier|final
 name|int

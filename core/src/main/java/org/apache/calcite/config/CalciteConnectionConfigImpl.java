@@ -1003,6 +1003,25 @@ name|getBoolean
 argument_list|()
 return|;
 block|}
+specifier|public
+name|boolean
+name|topDownOpt
+parameter_list|()
+block|{
+return|return
+name|CalciteConnectionProperty
+operator|.
+name|TOPDOWN_OPT
+operator|.
+name|wrap
+argument_list|(
+name|properties
+argument_list|)
+operator|.
+name|getBoolean
+argument_list|()
+return|;
+block|}
 block|}
 end_class
 

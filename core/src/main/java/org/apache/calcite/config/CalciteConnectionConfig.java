@@ -284,6 +284,11 @@ name|boolean
 name|lenientOperatorLookup
 parameter_list|()
 function_decl|;
+comment|/** @see CalciteConnectionProperty#TOPDOWN_OPT */
+name|boolean
+name|topDownOpt
+parameter_list|()
+function_decl|;
 block|}
 end_interface
 

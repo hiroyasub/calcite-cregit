@@ -776,20 +776,8 @@ argument_list|,
 name|node
 argument_list|)
 decl_stmt|;
-assert|assert
-name|relSubset
-operator|.
-name|set
-operator|==
-name|planner
-operator|.
-name|getSubset
-argument_list|(
-name|node
-argument_list|)
-operator|.
-name|set
-assert|;
+comment|// TODO: CALCITE-4030
+comment|// assert relSubset.set == planner.getSubset(node).set;
 block|}
 block|}
 block|}

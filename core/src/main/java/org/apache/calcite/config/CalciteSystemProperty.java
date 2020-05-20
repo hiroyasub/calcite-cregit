@@ -380,7 +380,7 @@ argument_list|,
 literal|true
 argument_list|)
 decl_stmt|;
-comment|/**    * Whether to enable top-down optimization.    *    *<p>Note: Enabling top-down optimization will automatically disable    * the use of AbstractConverter and related rules.</p>    */
+comment|/**    * Whether to enable top-down optimization. This config can be overridden    * by {@link CalciteConnectionProperty#TOPDOWN_OPT}.    *    *<p>Note: Enabling top-down optimization will automatically disable    * the use of AbstractConverter and related rules.</p>    */
 specifier|public
 specifier|static
 specifier|final
