@@ -13497,6 +13497,70 @@ name|ok
 argument_list|()
 expr_stmt|;
 block|}
+comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-2997">[CALCITE-2997]    * Avoid pushing down join condition in SqlToRelConverter</a>. */
+annotation|@
+name|Test
+name|void
+name|testDoNotPushDownJoinCondition
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"from emp as e\n"
+operator|+
+literal|"join dept as d on e.deptno + 20 = d.deptno / 2"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|withConfig
+argument_list|(
+name|b
+lambda|->
+name|b
+operator|.
+name|withPushJoinCondition
+argument_list|(
+literal|false
+argument_list|)
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
+comment|/** As {@link #testDoNotPushDownJoinCondition()}. */
+annotation|@
+name|Test
+name|void
+name|testPushDownJoinCondition
+parameter_list|()
+block|{
+specifier|final
+name|String
+name|sql
+init|=
+literal|"select *\n"
+operator|+
+literal|"from emp as e\n"
+operator|+
+literal|"join dept as d on e.deptno + 20 = d.deptno / 2"
+decl_stmt|;
+name|sql
+argument_list|(
+name|sql
+argument_list|)
+operator|.
+name|ok
+argument_list|()
+expr_stmt|;
+block|}
 annotation|@
 name|Test
 name|void

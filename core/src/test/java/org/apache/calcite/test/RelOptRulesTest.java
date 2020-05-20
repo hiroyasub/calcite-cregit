@@ -3388,6 +3388,15 @@ operator|.
 name|INSTANCE
 argument_list|)
 operator|.
+name|withProperty
+argument_list|(
+name|Hook
+operator|.
+name|REL_BUILDER_SIMPLIFY
+argument_list|,
+literal|false
+argument_list|)
+operator|.
 name|checkUnchanged
 argument_list|()
 expr_stmt|;
@@ -18151,8 +18160,6 @@ name|Test
 name|void
 name|testReduceCasts
 parameter_list|()
-throws|throws
-name|Exception
 block|{
 name|HepProgram
 name|program
@@ -18185,6 +18192,7 @@ operator|.
 name|build
 argument_list|()
 decl_stmt|;
+comment|// Disable simplify in RelBuilder so that there are casts in 'before';
 comment|// The resulting plan should have no cast expressions
 specifier|final
 name|String
@@ -18208,7 +18216,16 @@ argument_list|(
 name|program
 argument_list|)
 operator|.
-name|checkUnchanged
+name|withProperty
+argument_list|(
+name|Hook
+operator|.
+name|REL_BUILDER_SIMPLIFY
+argument_list|,
+literal|false
+argument_list|)
+operator|.
+name|check
 argument_list|()
 expr_stmt|;
 block|}
@@ -24213,6 +24230,15 @@ decl_stmt|;
 name|sql
 argument_list|(
 name|sql
+argument_list|)
+operator|.
+name|withProperty
+argument_list|(
+name|Hook
+operator|.
+name|REL_BUILDER_SIMPLIFY
+argument_list|,
+literal|false
 argument_list|)
 operator|.
 name|withDecorrelation
@@ -31382,6 +31408,15 @@ decl_stmt|;
 name|sql
 argument_list|(
 name|sql
+argument_list|)
+operator|.
+name|withProperty
+argument_list|(
+name|Hook
+operator|.
+name|REL_BUILDER_SIMPLIFY
+argument_list|,
+literal|false
 argument_list|)
 operator|.
 name|withRule

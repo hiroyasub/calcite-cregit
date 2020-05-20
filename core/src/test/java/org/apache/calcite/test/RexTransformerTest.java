@@ -2011,7 +2011,7 @@ argument_list|()
 argument_list|,
 name|is
 argument_list|(
-literal|"<>(CAST($0):INTEGER NOT NULL, $9)"
+literal|"<>($0, $9)"
 argument_list|)
 argument_list|)
 expr_stmt|;

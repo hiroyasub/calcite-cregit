@@ -349,6 +349,20 @@ name|apache
 operator|.
 name|calcite
 operator|.
+name|runtime
+operator|.
+name|Hook
+import|;
+end_import
+
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
 name|schema
 operator|.
 name|SchemaPlus
@@ -11018,6 +11032,29 @@ literal|" OR TRUE"
 operator|+
 literal|" OR TRUE"
 decl_stmt|;
+comment|// The hook prevents RelBuilder from removing "FALSE AND FALSE" and such
+try|try
+init|(
+name|Hook
+operator|.
+name|Closeable
+name|ignore
+init|=
+name|Hook
+operator|.
+name|REL_BUILDER_SIMPLIFY
+operator|.
+name|addThread
+argument_list|(
+name|Hook
+operator|.
+name|propertyJ
+argument_list|(
+literal|false
+argument_list|)
+argument_list|)
+init|)
+block|{
 name|sql
 argument_list|(
 name|query
@@ -11028,6 +11065,7 @@ argument_list|(
 name|expected
 argument_list|)
 expr_stmt|;
+block|}
 block|}
 comment|/** Test case for    *<a href="https://issues.apache.org/jira/browse/CALCITE-1586">[CALCITE-1586]    * JDBC adapter generates wrong SQL if UNION has more than two inputs</a>. */
 annotation|@
