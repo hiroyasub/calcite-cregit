@@ -1443,13 +1443,6 @@ name|lattices
 parameter_list|)
 lambda|->
 block|{
-name|planner
-operator|.
-name|setRoot
-argument_list|(
-name|rel
-argument_list|)
-expr_stmt|;
 for|for
 control|(
 name|RelOptMaterialization
@@ -1482,6 +1475,13 @@ name|lattice
 argument_list|)
 expr_stmt|;
 block|}
+name|planner
+operator|.
+name|setRoot
+argument_list|(
+name|rel
+argument_list|)
+expr_stmt|;
 specifier|final
 name|RelNode
 name|rootRel2

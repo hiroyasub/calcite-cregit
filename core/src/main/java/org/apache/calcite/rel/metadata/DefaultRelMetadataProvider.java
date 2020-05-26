@@ -120,6 +120,10 @@ name|RelMdDistribution
 operator|.
 name|SOURCE
 argument_list|,
+name|RelMdLowerBoundCost
+operator|.
+name|SOURCE
+argument_list|,
 name|RelMdMemory
 operator|.
 name|SOURCE

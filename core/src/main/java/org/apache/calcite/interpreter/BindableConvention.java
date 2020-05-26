@@ -99,6 +99,20 @@ name|RelTraitSet
 import|;
 end_import
 
+begin_import
+import|import
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|rel
+operator|.
+name|RelNode
+import|;
+end_import
+
 begin_comment
 comment|/**  * Calling convention that returns results as an  * {@link org.apache.calcite.linq4j.Enumerable} of object arrays.  *  *<p>The relational expression needs to implement  * {@link org.apache.calcite.runtime.ArrayBindable}.  * Unlike {@link org.apache.calcite.adapter.enumerable.EnumerableConvention},  * no code generation is required.  */
 end_comment
@@ -151,6 +165,23 @@ parameter_list|()
 block|{
 return|return
 literal|"BINDABLE"
+return|;
+block|}
+annotation|@
+name|Override
+specifier|public
+name|RelNode
+name|enforce
+parameter_list|(
+name|RelNode
+name|input
+parameter_list|,
+name|RelTraitSet
+name|required
+parameter_list|)
+block|{
+return|return
+literal|null
 return|;
 block|}
 specifier|public

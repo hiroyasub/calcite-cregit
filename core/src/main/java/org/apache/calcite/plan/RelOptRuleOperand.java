@@ -116,7 +116,7 @@ specifier|public
 name|int
 name|ordinalInRule
 decl_stmt|;
-specifier|private
+specifier|public
 specifier|final
 name|RelTrait
 name|trait
