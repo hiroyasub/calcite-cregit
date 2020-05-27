@@ -292,6 +292,117 @@ block|}
 annotation|@
 name|Test
 name|void
+name|testFilterWithNonStringLiteral
+parameter_list|()
+block|{
+name|CalciteAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|DTCASSANDRA
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select * from \"test_type\" where \"f_id\" = 1"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|""
+argument_list|)
+expr_stmt|;
+name|CalciteAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|DTCASSANDRA
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select * from \"test_type\" where \"f_id\"> 1"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"f_id=3000000000; f_user=ANNA\n"
+argument_list|)
+expr_stmt|;
+name|CalciteAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|DTCASSANDRA
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select * from \"test_date_type\" where \"f_date\" = '2015-05-03'"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"f_date=2015-05-03; f_user=ANNA\n"
+argument_list|)
+expr_stmt|;
+name|CalciteAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|DTCASSANDRA
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select * from \"test_timestamp_type\" where cast(\"f_timestamp\" as timestamp "
+operator|+
+literal|"with local time zone) = '2011-02-03 04:05:00 UTC'"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"f_timestamp=2011-02-03 04:05:00; f_user=ANNA\n"
+argument_list|)
+expr_stmt|;
+name|CalciteAssert
+operator|.
+name|that
+argument_list|()
+operator|.
+name|with
+argument_list|(
+name|DTCASSANDRA
+argument_list|)
+operator|.
+name|query
+argument_list|(
+literal|"select * from \"test_timestamp_type\" where \"f_timestamp\""
+operator|+
+literal|" = '2011-02-03 04:05:00'"
+argument_list|)
+operator|.
+name|returns
+argument_list|(
+literal|"f_timestamp=2011-02-03 04:05:00; f_user=ANNA\n"
+argument_list|)
+expr_stmt|;
+block|}
+annotation|@
+name|Test
+name|void
 name|testSimpleTypesValues
 parameter_list|()
 block|{

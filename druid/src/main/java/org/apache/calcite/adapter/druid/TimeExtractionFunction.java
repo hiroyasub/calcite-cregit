@@ -221,6 +221,22 @@ name|writeFieldIf
 import|;
 end_import
 
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|util
+operator|.
+name|DateTimeStringUtils
+operator|.
+name|ISO_DATETIME_FRACTIONAL_SECOND_FORMAT
+import|;
+end_import
+
 begin_comment
 comment|/**  * Implementation of Druid time format extraction function.  *  *<p>These functions return the dimension value formatted according to the given format string,  * time zone, and locale.  *  *<p>For __time dimension values, this formats the time value bucketed by the aggregation  * granularity.  */
 end_comment
@@ -319,14 +335,6 @@ name|TimeUnitRange
 operator|.
 name|SECOND
 argument_list|)
-decl_stmt|;
-specifier|public
-specifier|static
-specifier|final
-name|String
-name|ISO_TIME_FORMAT
-init|=
-literal|"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
 decl_stmt|;
 specifier|private
 specifier|final
@@ -489,7 +497,7 @@ return|return
 operator|new
 name|TimeExtractionFunction
 argument_list|(
-name|ISO_TIME_FORMAT
+name|ISO_DATETIME_FRACTIONAL_SECOND_FORMAT
 argument_list|,
 literal|null
 argument_list|,
@@ -674,7 +682,7 @@ return|return
 operator|new
 name|TimeExtractionFunction
 argument_list|(
-name|ISO_TIME_FORMAT
+name|ISO_DATETIME_FRACTIONAL_SECOND_FORMAT
 argument_list|,
 name|granularity
 argument_list|,

@@ -97,6 +97,22 @@ name|writeFieldIf
 import|;
 end_import
 
+begin_import
+import|import static
+name|org
+operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|util
+operator|.
+name|DateTimeStringUtils
+operator|.
+name|ISO_DATETIME_FRACTIONAL_SECOND_FORMAT
+import|;
+end_import
+
 begin_comment
 comment|/**  * Implementation of extraction function DimensionSpec.  *  *<p>The extraction function implementation returns dimension values transformed  * using the given extraction function.  */
 end_comment
@@ -407,9 +423,7 @@ decl_stmt|;
 if|if
 condition|(
 operator|!
-name|TimeExtractionFunction
-operator|.
-name|ISO_TIME_FORMAT
+name|ISO_DATETIME_FRACTIONAL_SECOND_FORMAT
 operator|.
 name|equals
 argument_list|(

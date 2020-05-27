@@ -1019,6 +1019,22 @@ begin_import
 import|import static
 name|org
 operator|.
+name|apache
+operator|.
+name|calcite
+operator|.
+name|util
+operator|.
+name|DateTimeStringUtils
+operator|.
+name|getDateFormatter
+import|;
+end_import
+
+begin_import
+import|import static
+name|org
+operator|.
 name|hamcrest
 operator|.
 name|CoreMatchers
@@ -28433,23 +28449,13 @@ block|{
 name|SimpleDateFormat
 name|sdf
 init|=
-operator|new
-name|SimpleDateFormat
+name|getDateFormatter
 argument_list|(
 literal|"yyyy-MM-dd HH:"
 argument_list|,
-name|Locale
-operator|.
-name|ROOT
-argument_list|)
-decl_stmt|;
-name|sdf
-operator|.
-name|setTimeZone
-argument_list|(
 name|tz
 argument_list|)
-expr_stmt|;
+decl_stmt|;
 return|return
 name|sdf
 operator|.
